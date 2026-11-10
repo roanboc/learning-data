@@ -1,0 +1,219 @@
+1
+00:00:01,200 --> 00:00:03,344
+Lunes, en la oficina de registro.
+
+2
+00:00:04,644 --> 00:00:09,970
+Mei Tanaka es dueña de lo que significa título: los grados que otorga la universidad.
+
+3
+00:00:11,270 --> 00:00:18,655
+Hoy, el significado cambia: las microcredenciales, los certificados de cursos cortos, también cuentan, desde 6 créditos.
+
+4
+00:00:20,355 --> 00:00:25,796
+Cuando Yusuf le preguntó qué la frenaba, Mei dijo: apruebo las palabras, y nunca veo dónde se usan.
+
+5
+00:00:27,696 --> 00:00:34,201
+Hasta ahora, título estaba en cinco glosarios, listas de lo que significan las palabras, con tres significados entre ellos.
+
+6
+00:00:35,701 --> 00:00:47,653
+Así, dos informes contaban títulos de dos maneras: el del censo de Planificación decía 4,812; el borrador de la entrega al gobierno, 4,867.
+
+7
+00:00:49,353 --> 00:00:52,896
+La universidad pudo haber enviado al gobierno una cifra que no sabía explicar.
+
+8
+00:00:54,596 --> 00:00:55,984
+Algo tenía que cambiar.
+
+9
+00:00:57,484 --> 00:01:02,777
+Ahora título tiene una sola página, en la plataforma, y cada copia se compara con ella cada noche.
+
+10
+00:01:04,277 --> 00:01:07,092
+Los 6 créditos se guardan una sola vez, como parámetro.
+
+11
+00:01:08,392 --> 00:01:12,900
+Y los títulos otorgados se cuentan una sola vez, para cada informe y cada agente.
+
+12
+00:01:14,400 --> 00:01:20,212
+Esa noche, el control encuentra el cambio del lunes, y el martes por la mañana, Mei ve todo lo que tocan sus palabras.
+
+13
+00:01:21,712 --> 00:01:26,765
+El día de la entrega, los dos informes dicen 4,867.
+
+14
+00:01:28,265 --> 00:01:31,950
+Sus palabras llegan al trabajo, y la universidad envía una sola cifra.
+
+15
+00:01:39,450 --> 00:01:42,506
+En la plataforma, cada término del glosario es una página.
+
+16
+00:01:44,006 --> 00:01:48,288
+La página de título tiene sus palabras, su dueña, Mei, y su dominio, curso.
+
+17
+00:01:49,788 --> 00:01:53,074
+Muestra las tablas que lo contienen, y de dónde vienen sus palabras.
+
+18
+00:01:54,774 --> 00:02:00,480
+Se publica desde el mapa de Noor, donde se guarda cada término, así que un cambio se hace allí, nunca en la página.
+
+19
+00:02:02,380 --> 00:02:04,080
+La gente la lee junto a los datos.
+
+20
+00:02:05,180 --> 00:02:09,070
+También el asistente de la plataforma, que cita la página cuando responde.
+
+21
+00:02:11,970 --> 00:02:19,958
+El equipo de datos guarda su copia de cada término junto a los modelos, así las tablas con título lo describen con las mismas palabras.
+
+22
+00:02:21,658 --> 00:02:25,807
+La copia nombra su fuente: el término del glosario, y el día en que se sincronizó.
+
+23
+00:02:27,707 --> 00:02:32,368
+Luego cada construcción manda las descripciones al catálogo, en un sentido, nunca de vuelta.
+
+24
+00:02:35,468 --> 00:02:39,514
+Cada noche, un control compara cada copia con su término en el glosario.
+
+25
+00:02:41,814 --> 00:02:43,846
+El lunes por la noche, título había cambiado.
+
+26
+00:02:45,146 --> 00:02:51,314
+Así que el control propuso el cambio, en una solicitud de cambio: las palabras viejas y las nuevas, y lo que tocan las nuevas.
+
+27
+00:02:53,014 --> 00:02:59,381
+Tres tablas, ocho definiciones que nombran título, el código que las construye, y tres informes y aplicaciones por avisar.
+
+28
+00:03:01,281 --> 00:03:06,278
+El martes por la mañana, el equipo de datos revisó el código, y a Mei le avisaron qué toca.
+
+29
+00:03:07,778 --> 00:03:10,152
+Esta vez, vio dónde se usan sus palabras.
+
+30
+00:03:13,052 --> 00:03:15,790
+Las palabras nuevas tienen un número: 6 créditos.
+
+31
+00:03:17,090 --> 00:03:21,435
+Así que se guarda en un solo lugar, como parámetro: min award credit points, 6.
+
+32
+00:03:23,135 --> 00:03:29,071
+La nueva columna de Jun, cuenta como título, lo lee, y cada conteo de títulos lee esa columna.
+
+33
+00:03:30,771 --> 00:03:39,630
+Si Mei y las facultades acuerdan otro número, cambia primero el glosario, luego una línea, en una solicitud que revisa el equipo de datos.
+
+34
+00:03:44,330 --> 00:03:48,210
+Un conteo también es un significado: qué credenciales cuentan, y en qué año.
+
+35
+00:03:49,710 --> 00:03:57,205
+Así, títulos otorgados se cuenta una vez, como vista de métricas: un conteo que la plataforma define una vez, para toda herramienta.
+
+36
+00:03:58,905 --> 00:04:03,107
+Cuenta las credenciales que cuentan como título, por el año en que se emitieron.
+
+37
+00:04:04,607 --> 00:04:08,781
+El proyecto la construye como a sus modelos, así que cada cambio en ella se revisa.
+
+38
+00:04:10,281 --> 00:04:14,032
+El borrador de la entrega la lee, y también el informe del censo de Planificación.
+
+39
+00:04:15,732 --> 00:04:18,232
+Ya ninguno cuenta los títulos a su manera.
+
+40
+00:04:21,132 --> 00:04:23,659
+Y los agentes de la plataforma leen el mismo significado.
+
+41
+00:04:24,759 --> 00:04:30,912
+Clara le pregunta a Genie One, el asistente de la plataforma, cuántos títulos otorgó la universidad este año.
+
+42
+00:04:32,612 --> 00:04:39,864
+Responde 4,867, desde la métrica, y cita la página de título para decir qué es un título.
+
+43
+00:04:41,764 --> 00:04:45,873
+Prefiere la página a su propia suposición, y muestra de dónde salió su respuesta.
+
+44
+00:04:47,373 --> 00:04:51,260
+Un agente que el equipo de datos construye sobre la métrica da la misma respuesta.
+
+45
+00:04:52,760 --> 00:04:56,036
+Personas y agentes leen un solo significado, y les da una sola cifra.
+
+46
+00:04:58,936 --> 00:05:04,583
+El significado viene en tres capas: qué significa una palabra, cómo se cuenta un número, y cómo se relacionan las cosas.
+
+47
+00:05:06,083 --> 00:05:07,292
+Cada una tiene un solo lugar.
+
+48
+00:05:08,592 --> 00:05:12,009
+Las palabras viven en el mapa de Noor, y el glosario las copia.
+
+49
+00:05:13,509 --> 00:05:17,047
+Cómo se relacionan las cosas también vive allí, copiado al proyecto.
+
+50
+00:05:18,547 --> 00:05:22,912
+Y los conteos viven en el proyecto, que la plataforma sirve como vistas de métricas.
+
+51
+00:05:24,412 --> 00:05:27,602
+Cada copia se compara con su lugar, o se construye a partir de él.
+
+52
+00:05:31,302 --> 00:05:36,091
+Ahora Mei ve sus palabras en uso, en cada tabla, conteo y respuesta que las contiene.
+
+53
+00:05:37,591 --> 00:05:42,339
+Ella decide qué significa título, una vez, y la plataforma lo lleva a todo lugar donde se lee.
+
+54
+00:05:44,039 --> 00:05:54,094
+El día de la entrega, el borrador y el informe del censo dicen 4,867, contados con la misma métrica y las mismas palabras.
+
+55
+00:05:55,794 --> 00:05:58,980
+Un solo significado, leído por personas, informes y agentes.

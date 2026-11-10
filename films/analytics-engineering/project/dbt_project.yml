@@ -1,0 +1,137 @@
+name: credentials
+version: "1.0.0"
+profile: credentials
+
+# Sources, models and exposures each have their own folder: what comes in, what's built, and who
+# uses it. dbt reads all three as model paths.
+model-paths: ["sources", "models", "exposures"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+# Doc blocks live with what they describe: sources in sources/, the rest with the domain that owns
+# it in models/. docs/ holds the process, not definitions.
+docs-paths: ["sources", "models"]
+clean-targets: ["target", "logs"]
+
+# Stated once, used everywhere. Override one for a run with --vars.
+vars:
+  census_date: "2026-03-31"          # Planning's census date: the "as at" of the Planning mart
+  as_is_date: null                   # the "now" of the wallet marts; null means the day of the build
+  near_award_credit_points: 15       # "within 15 credit points" of an award
+  microcredentials_per_award: 4      # an award accepts up to four microcredentials towards its credit
+  passing_grades: ["P", "C", "D", "HD"]
+
+models:
+  credentials:
+    # Databricks only: push descriptions to Unity Catalog. DuckDB leaves them in the docs site.
+    +persist_docs:
+      relation: "{{ target.type == 'databricks' }}"
+      columns: "{{ target.type == 'databricks' }}"
+
+    staging:
+      +materialized: view
+      +schema: staging
+      +group: credential_model
+      +access: private
+
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+      +group: credential_model
+      +access: private
+
+    # Core and intermediate are split by domain (core/student/, core/course/), following the
+    # reference model, TCSI. Staging is split by source system; marts by consumer.
+    core:
+      +materialized: table
+      +schema: core
+      +group: credential_model
+      +access: public
+      +contract:
+        enforced: true
+
+    marts:
+      +materialized: table
+      +schema: marts
+      +access: protected
+      +contract:
+        enforced: true
+      planning:
+        +group: planning
+        # Who can read, as opposed to who can ref() (access, above). Databricks only, when the
+        # var planning_readers names Unity Catalog groups: --vars '{planning_readers: [planning_analysts]}'.
+        +grants: "{{ {'select': var('planning_readers')} if target.type == 'databricks' and var('planning_readers', none) else {} }}"
+      wallet:
+        +group: wallet
+      finance:
+        +group: finance
+
+    # What every domain uses. Today: the time spine every metric needs. Planning's semantic model
+    # and metrics live with its marts.
+    _shared:
+      +materialized: table
+      +schema: shared
+      +group: credential_model
+      +access: protected
+
+    # Databricks only: each column's class as a Unity Catalog tag, a mask on direct personal data
+    # when the var personal_data_readers names a group (DEC-PRJ-13), and each table's area (DEC-PRJ-15).
+    +post-hook: ["{{ apply_personal_data() }}", "{{ apply_domain_tag() }}"]
+
+# Seeds are split by purpose first, then by domain. Never mix the two purposes in one folder.
+seeds:
+  credentials:
+    # Reference data the business owns: mappings, decisions, key sets. Models join to it.
+    reference:
+      +schema: reference
+      +group: credential_model
+      +tags: ["reference"]
+      finance:
+        +group: finance
+    # Expected values: numbers published outside this project, that tests and reconciliations
+    # compare against. No model may ref() them.
+    expected:
+      +schema: expected
+      +tags: ["expected"]
+      planning:
+        +group: planning
+      finance:
+        +group: finance
+
+# Who owns each test: the owner of the data it checks, by folder. A test whose data has another
+# owner names its own in its meta, which wins. Each kind of test names its quality dimension where
+# it's defined (tests/generic/). The governance check fails on a test with no owner or dimension.
+data_tests:
+  credentials:
+    # Tests on a source, in sources/<system>/: its owner. Only systems with source tests are listed
+    # (an unused path fails the Databricks parse); the governance check asks for any new one.
+    short_courses: {+meta: {owner: Learning team}}
+    staging:
+      student_system: {+meta: {owner: "Registrar's office"}}
+      learning_platform: {+meta: {owner: Learning team}}
+      short_courses: {+meta: {owner: Learning team}}
+      hr_system: {+meta: {owner: HR}}
+      research_system: {+meta: {owner: Research office}}
+      alumni_system: {+meta: {owner: Alumni office}}
+    intermediate:
+      +meta: {owner: "Mei Tanaka, registrar's office"}
+    core:
+      +meta: {owner: "Mei Tanaka, registrar's office"}
+    marts:
+      planning: {+meta: {owner: Planning}}
+      wallet: {+meta: {owner: Wallet app team}}
+      finance: {+meta: {owner: Finance}}
+      learning: {+meta: {owner: Learning team}}
+    reference:
+      student: {+meta: {owner: "Mei Tanaka, registrar's office"}}
+      finance: {+meta: {owner: Finance}}
+      shared: {+meta: {owner: "Noor, data architect"}}
+    expected:
+      planning: {+meta: {owner: "Census team, registrar's office"}}
+      finance: {+meta: {owner: Finance}}
+
+# Databricks only, when the var personal_data_readers names a group: the mask on direct personal
+# data (macros/governance/personal_data.sql, DEC-PRJ-13).
+on-run-start:
+  - "{{ create_personal_data_mask() }}"

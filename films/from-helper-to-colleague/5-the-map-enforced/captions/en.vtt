@@ -1,0 +1,181 @@
+WEBVTT
+
+00:00:02.000 --> 00:00:09.436
+Today, at the university. When Planning needs a change to its tables, a new column or a filter, it writes a ticket.
+
+00:00:11.136 --> 00:00:19.273
+All year, those tickets went to Jun Park's helper: a coding agent in his editor, on his own sign-in, with his name and his rights.
+
+00:00:21.173 --> 00:00:28.546
+Since Monday, they go to a new agent, the planning agent, owned by Clara Jensen in Planning, who answers for what it does.
+
+00:00:30.246 --> 00:00:36.069
+In October, the university's auditors, who check that its records can be trusted, asked a question.
+
+00:00:37.369 --> 00:00:42.937
+Of this year's 214 changes to Planning's tables, which had an agent drafted?
+
+00:00:44.837 --> 00:00:49.967
+Every one said Jun Park: in the code's history, and in the platform's log of queries.
+
+00:00:51.867 --> 00:00:56.564
+Jun spent two days going through them from memory, and for nine, he couldn't be sure.
+
+00:00:58.664 --> 00:01:05.715
+So the university couldn't fully answer. And if one of the nine was wrong, nobody knew who to ask, or what else to check.
+
+00:01:07.815 --> 00:01:15.079
+The helper could also do whatever Jun could, far more than a ticket needs. And to stop it, they'd have had to stop Jun.
+
+00:01:17.379 --> 00:01:18.767
+Something had to change.
+
+00:01:20.467 --> 00:01:29.098
+So before its first ticket, the planning agent got a place on the university's map: a role, an owner, and only the rights its work needs.
+
+00:01:30.998 --> 00:01:39.912
+And Sam Okafor, who runs the platform, wrote that place into every tool, under the agent's own name: Databricks, GitHub and dbt.
+
+00:01:42.012 --> 00:01:48.701
+Since Monday, every change it makes says planning-agent[bot], and every query it runs names the planning agent.
+
+00:01:50.601 --> 00:01:59.215
+On Wednesday, Sam tried the switch: for ten minutes, the planning agent stopped, and Jun, Lucía and Anil's workload agent worked on.
+
+00:02:01.315 --> 00:02:05.273
+If the auditors ask again, the answer is one search, not two days.
+
+00:02:06.973 --> 00:02:14.305
+And for data: every change says who made it, person or agent, and no tool lets an agent do more than the map says.
+
+00:02:21.605 --> 00:02:24.382
+A person has one name in every tool they use.
+
+00:02:25.682 --> 00:02:27.470
+Now the planning agent does too.
+
+00:02:28.770 --> 00:02:36.707
+In Databricks, it's a service principal: an identity made for software, like the one Anil's workload agent already has.
+
+00:02:38.407 --> 00:02:44.188
+In GitHub, where the project's code lives, it's an App, and its work reads planning-agent[bot].
+
+00:02:45.888 --> 00:02:52.051
+In dbt, which builds Planning's tables, its runs sign in as that same service principal.
+
+00:02:53.951 --> 00:02:59.526
+To sign in, software usually needs a secret, and a secret an agent can read, it can leak.
+
+00:03:01.426 --> 00:03:09.129
+So its runs sign in with short-lived passes: GitHub vouches for each run, and it gets back tokens that end on their own.
+
+00:03:11.229 --> 00:03:13.382
+It holds no secret it can see or leak.
+
+00:03:17.282 --> 00:03:20.792
+Its name says who it is. What it may do is on Noor's map.
+
+00:03:22.492 --> 00:03:30.660
+There, its role, planning contributor, does the drafting steps of Planning's changes, and each step says what it reads, writes and calls.
+
+00:03:32.960 --> 00:03:39.956
+Sam doesn't type those rights into each tool. A script reads the map and writes every tool's settings from it, one way.
+
+00:03:42.256 --> 00:03:50.670
+In Unity Catalog, a group named for the role holds the grants: read production, with names masked, and build only in its own schemas.
+
+00:03:52.970 --> 00:03:58.967
+The planning agent is its only member, so a second agent in the role would get the same rights, and no more.
+
+00:04:01.067 --> 00:04:08.138
+In Unity Gateway, part of the catalog, the group may call the one model its steps use, and the tool servers they name.
+
+00:04:10.438 --> 00:04:17.020
+In GitHub, its App gets one repository and two permissions. In dbt, a target of its own.
+
+00:04:19.120 --> 00:04:26.276
+What it reads first is governed: the glossary's definitions and the data rules, read only, through Unity Catalog.
+
+00:04:28.176 --> 00:04:34.560
+Its memory, kept by the platform in Lakebase, comes second: where the two disagree, the definition wins.
+
+00:04:36.860 --> 00:04:41.842
+Every night, a check reads the rights each tool holds and compares them with the map.
+
+00:04:43.742 --> 00:04:50.247
+On Tuesday, to save a day, its group was given the right to change Planning's production tables, by hand.
+
+00:04:52.147 --> 00:04:57.233
+That night, the check failed: a right the map doesn't hold. In the morning, Sam took it back.
+
+00:04:59.533 --> 00:05:05.730
+If its work needs a new right, the map changes first, through review, and the tools follow, never the other way.
+
+00:05:10.030 --> 00:05:15.939
+The map also says where it may work: a place of its own, where its drafts can't touch anyone else's.
+
+00:05:17.639 --> 00:05:25.600
+In GitHub, its tool writes only to branches named agent/planning, and opens a pull request. It can't push to main.
+
+00:05:27.700 --> 00:05:34.485
+It doesn't merge, and its approval never counts where the rules ask for a person. The next film shows those rules.
+
+00:05:36.585 --> 00:05:44.205
+In Databricks, it works in the development workspace, where production can only be read: even a wrong grant can't write there.
+
+00:05:46.305 --> 00:05:55.082
+In development, it may make schemas of its own. dbt builds one for each layer, so Planning's tables land in planning_agent_marts.
+
+00:05:57.182 --> 00:06:04.471
+It owns what it makes, and nothing else: no one else's work is written over, and no draft of its passes for someone else's.
+
+00:06:08.371 --> 00:06:10.562
+Now every log says whose work it is.
+
+00:06:11.862 --> 00:06:18.927
+In GitHub, its commits and pull requests read planning-agent[bot], and every other agent's work reads its own name.
+
+00:06:20.827 --> 00:06:27.396
+Anyone could type that name into a commit. Its own are made through its App, so GitHub marks them verified.
+
+00:06:29.296 --> 00:06:34.689
+In Databricks, every query it runs is in the query history, under its service principal.
+
+00:06:36.389 --> 00:06:42.278
+And the audit log's table lists everything else it does: each table it reads, each schema it makes.
+
+00:06:44.178 --> 00:06:50.995
+So the auditors' question is one search: every pull request by planning-agent[bot], and what each one changed.
+
+00:06:53.095 --> 00:06:55.595
+And Jun's name is only on what Jun did.
+
+00:06:59.295 --> 00:07:04.593
+Last, the switch. A helper on Jun's sign-in could only be stopped by stopping Jun.
+
+00:07:06.093 --> 00:07:10.710
+The planning agent can be stopped in each tool on its own, and no one stops with it.
+
+00:07:12.210 --> 00:07:19.065
+In Databricks, Sam deactivates its service principal: it can't sign in, and it keeps its rights for when it's back.
+
+00:07:20.965 --> 00:07:28.052
+In GitHub, Sam suspends its App's installation: the App can no longer reach the university's repositories.
+
+00:07:29.952 --> 00:07:35.038
+On Wednesday, Sam tried both, for ten minutes. The planning agent's next call failed.
+
+00:07:36.738 --> 00:07:44.291
+Jun, Lucía and Anil's workload agent worked on. Turned back on, the planning agent had every right it had before.
+
+00:07:46.191 --> 00:07:54.658
+What never changes: Clara owns it and answers for its work. It never approves a change, its own least of all, or grants itself a right.
+
+00:07:56.558 --> 00:08:01.662
+Whose change was that? Now every log says, and the auditors' question takes one search.
+
+00:08:03.362 --> 00:08:06.633
+The map says what it may do; every tool holds it to that.
+
+00:08:08.933 --> 00:08:10.959
+Next: every change through review.

@@ -1,0 +1,56 @@
+student_id,given_name,family_name,email,status_code,award_code,effective_date,_valid_from,_valid_to,_is_current,_loaded_at
+S-20401,Zara,Ahmed,zara.ahmed@mail.example,ENR,MDA,2025-02-24,2025-02-25 02:00:00,,true,2025-02-25 02:00:00
+S-20402,Ethan,Brown,ethan.brown@mail.example,ENR,MDA,2025-02-24,2025-02-25 02:00:00,,true,2025-02-25 02:00:00
+S-20403,Wei,Chen,wei.chen@mail.example,ENR,GCDA,2025-02-24,2025-02-25 02:00:00,2026-05-16 02:00:00,false,2026-05-16 02:00:00
+S-20403,Wei,Chen,wei.chen.au@mail.example,ENR,GCDA,2026-05-15,2026-05-16 02:00:00,2026-07-21 02:00:00,false,2026-07-21 02:00:00
+S-20403,Wei,Chen,wei.chen.au@mail.example,CMP,GCDA,2026-07-20,2026-07-21 02:00:00,,true,2026-07-21 02:00:00
+S-20404,Ana,Costa,ana.costa@mail.example,ENR,GCDA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20405,Hannah,Schmidt,hannah.schmidt@mail.example,ENR,GCDA,2025-02-24,2025-02-25 02:00:00,2026-07-21 02:00:00,false,2026-07-21 02:00:00
+S-20405,Hannah,Schmidt,hannah.schmidt@mail.example,CMP,GCDA,2026-07-20,2026-07-21 02:00:00,,true,2026-07-21 02:00:00
+S-20406,Jack,Taylor,jack.taylor@mail.example,ENR,GCCS,2026-02-23,2026-02-24 02:00:00,,true,2026-02-24 02:00:00
+S-20407,Olivia,Smith,olivia.smith@mail.example,ENR,GCED,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20408,Mateo,Lopez,mateo.lopez@mail.example,ENR,GCBA,2025-02-24,2025-02-25 02:00:00,2025-12-11 02:00:00,false,2025-12-11 02:00:00
+S-20408,Mateo,Lopez,mateo.lopez@mail.example,CMP,GCBA,2025-12-10,2025-12-11 02:00:00,,true,2025-12-11 02:00:00
+S-20409,Sofia,Rossi,sofia.rossi@mail.example,ENR,GCCS,2025-02-24,2025-02-25 02:00:00,2026-02-16 02:00:00,false,2026-02-16 02:00:00
+S-20409,Sofia,Rossi,sofia.rossi@mail.example,LOA,GCCS,2026-02-15,2026-02-16 02:00:00,2026-07-21 02:00:00,false,2026-07-21 02:00:00
+S-20409,Sofia,Rossi,sofia.rossi@mail.example,ENR,GCCS,2026-07-20,2026-07-21 02:00:00,,true,2026-07-21 02:00:00
+S-20410,Yuki,Tanabe,yuki.tanabe@mail.example,ENR,MDA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20411,Arjun,Mehta,arjun.mehta@mail.example,ENR,GCDA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20412,Samuel,Osei,samuel.osei@mail.example,ENR,MPH,2025-02-24,2025-02-25 02:00:00,,true,2025-02-25 02:00:00
+S-20413,Leah,Cohen,leah.cohen@mail.example,ENR,GCHI,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20414,Emily,Walker,emily.walker@mail.example,ENR,GCCS,2025-02-24,2025-02-25 02:00:00,2026-03-21 02:00:00,false,2026-03-21 02:00:00
+S-20414,Emily,Walker,emily.walker@mail.example,CMP,GCCS,2026-03-20,2026-03-21 02:00:00,,true,2026-03-21 02:00:00
+S-20415,Ivan,Petrov,ivan.petrov@mail.example,ENR,GCCS,2025-02-24,2025-02-25 02:00:00,2025-11-02 02:00:00,false,2025-11-02 02:00:00
+S-20415,Ivan,Petrov,ivan.petrov@mail.example,WD,GCCS,2025-11-01,2025-11-02 02:00:00,,true,2025-11-02 02:00:00
+S-20416,Amara,Obi,amara.obi@mail.example,ENR,MBA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20417,Aisha,Karimi,aisha.k@mail.example,ENR,GCDA,2025-07-21,2025-07-22 02:00:00,2026-07-21 02:00:00,false,2026-07-21 02:00:00
+S-20417,Aisha,Karimi,aisha.k@mail.example,CMP,GCDA,2026-07-20,2026-07-21 02:00:00,,true,2026-07-21 02:00:00
+S-20418,Jie,Chen,jie.chen@mail.example,ENR,GCDA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20419,Omar,Haddad,omar.haddad@mail.example,ENR,GCDA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20420,Lucas,Martin,lucas.martin@mail.example,ENR,GCCS,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20421,Sara,Lindqvist,sara.lindqvist@mail.example,ENR,GCED,2026-02-23,2026-02-24 02:00:00,,true,2026-02-24 02:00:00
+S-20422,Jordan,Lee,jordan.lee@mail.example,ENR,GCDA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20423,Kenji,Watanabe,kenji.watanabe@mail.example,ENR,MDA,2026-02-23,2026-02-24 02:00:00,,true,2026-02-24 02:00:00
+S-20424,Isla,Murray,isla.murray@mail.example,ENR,GCBA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20425,Fatima,Zahra,fatima.zahra@mail.example,ENR,GCBA,2025-02-24,2025-02-25 02:00:00,2026-05-11 02:00:00,false,2026-05-11 02:00:00
+S-20425,Fatima,Zahra,fatima.zahra@mail.example,WD,GCBA,2026-05-10,2026-05-11 02:00:00,,true,2026-05-11 02:00:00
+S-20426,Ravi,Patel,ravi.patel@mail.example,ENR,MBA,2025-02-24,2025-02-25 02:00:00,,true,2025-02-25 02:00:00
+S-20427,Daniel,Kim,dkim@mail.example,ENR,GCCS,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20428,Chloe,Dubois,chloe.dubois@mail.example,ENR,GCHI,2025-02-24,2025-02-25 02:00:00,2026-07-21 02:00:00,false,2026-07-21 02:00:00
+S-20428,Chloe,Dubois,chloe.dubois@mail.example,CMP,GCHI,2026-07-20,2026-07-21 02:00:00,,true,2026-07-21 02:00:00
+S-20429,Kofi,Mensah,kofi.mensah@mail.example,ENR,MPH,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20430,Isabel,Garcia,isabel.garcia@mail.example,ENR,GCHI,2026-02-23,2026-02-24 02:00:00,,true,2026-02-24 02:00:00
+S-20431,Priya,Nair,priya.nair@mail.example,ENR,GCBA,2025-02-24,2025-02-25 02:00:00,2026-04-03 02:00:00,false,2026-04-03 02:00:00
+S-20431,Priya,Nair,priya.nair@mail.example,WD,GCBA,2026-03-27,2026-04-03 02:00:00,,true,2026-04-03 02:00:00
+S-20432,Tom,Becker,tom.becker@mail.example,ENR,GCBA,2025-07-21,2025-07-22 02:00:00,2026-07-21 02:00:00,false,2026-07-21 02:00:00
+S-20432,Tom,Becker,tom.becker@mail.example,CMP,GCBA,2026-07-20,2026-07-21 02:00:00,,true,2026-07-21 02:00:00
+S-20433,Grace,Liu,grace.liu@mail.example,ENR,GCBA,2025-02-24,2025-02-25 02:00:00,,true,2025-02-25 02:00:00
+S-20434,Ben,Carter,ben.carter@mail.example,ENR,GCBA,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20435,Minh,Nguyen,nguyen.family@mail.example,ENR,GCHI,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20436,Linh,Nguyen,nguyen.family@mail.example,ENR,GCHI,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20437,Noah,Williams,noah.williams@mail.example,ENR,GCED,2025-02-24,2025-02-25 02:00:00,2026-07-21 02:00:00,false,2026-07-21 02:00:00
+S-20437,Noah,Williams,noah.williams@mail.example,CMP,GCED,2026-07-20,2026-07-21 02:00:00,,true,2026-07-21 02:00:00
+S-20438,Mia,Johnson,mia.johnson@mail.example,ENR,GCED,2025-07-21,2025-07-22 02:00:00,,true,2025-07-22 02:00:00
+S-20439,Liam,O'Brien,liam.obrien@mail.example,ENR,GCED,2025-02-24,2025-02-25 02:00:00,2026-05-02 02:00:00,false,2026-05-02 02:00:00
+S-20439,Liam,O'Brien,liam.obrien@mail.example,ENR,GCDA,2026-05-01,2026-05-02 02:00:00,,true,2026-05-02 02:00:00
+S-20440,Nadia,Hassan,nadia.hassan@mail.example,ENR,MPH,2026-02-23,2026-02-24 02:00:00,,true,2026-02-24 02:00:00

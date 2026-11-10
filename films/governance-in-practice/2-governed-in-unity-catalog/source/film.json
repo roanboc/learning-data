@@ -1,0 +1,30 @@
+{
+  "key": "governed-in-unity-catalog",
+  "title": "Governed in Unity Catalog",
+  "sub": "Film 2 of 6 of Governance you can use: the platform's side. Each build tags the columns from the project's classes, one policy masks by tag, access goes to groups until a date, and a log says who read what.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side. Plum is direct personal data, a paler plum pseudonymous, plain paper none; a tag is the class's chip on a string, and a mask is a plum band of stars. The platform's pages are drawn as forms; files are paper sheets, copied from the example project. A group is a ring of name cards, with its end date on the clasp.",
+  "src": [
+    "../../../shared/src/tools.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "policy",
+    "clara",
+    4.6
+  ],
+  "say": [
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ]
+  ]
+}

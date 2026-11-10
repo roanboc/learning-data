@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Reports on demand",
+    "key": "reports-on-demand-en",
+    "dir": "films/from-tables-to-decisions/1-reports-on-demand/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/reports-on-demand/film.js",
+    "video": "dist/reports-on-demand.mp4",
+    "file": "reports-on-demand.mp4",
+    "captions": [
+      [
+        "films/from-tables-to-decisions/1-reports-on-demand/captions/en.srt",
+        "reports-on-demand.en.srt"
+      ],
+      [
+        "films/from-tables-to-decisions/1-reports-on-demand/captions/es.srt",
+        "reports-on-demand.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/from-tables-to-decisions/1-reports-on-demand/source",
+      ":(exclude)films/from-tables-to-decisions/1-reports-on-demand/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 293,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

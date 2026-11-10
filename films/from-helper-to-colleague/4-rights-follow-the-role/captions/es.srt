@@ -1,0 +1,287 @@
+1
+00:00:01,400 --> 00:00:04,845
+Una sala de hospital estadounidense, a fines de los cincuenta.
+
+2
+00:00:05,545 --> 00:00:10,991
+Sus medicamentos se guardaban en la sala, como existencias: frascos grandes en un estante, para todos los pacientes.
+
+3
+00:00:12,291 --> 00:00:16,371
+Las enfermeras servían a mano las dosis de cada paciente, de los frascos compartidos.
+
+4
+00:00:17,071 --> 00:00:23,463
+A menudo el farmacéutico nunca veía la orden del médico, solo una copia, escrita por una enfermera o un empleado de la sala.
+
+5
+00:00:24,763 --> 00:00:32,575
+Así, un error al copiarla pasaba inadvertido: un paciente recibía el fármaco o la dosis equivocados, o inyectado lo que debía tragarse.
+
+6
+00:00:34,475 --> 00:00:39,004
+Cada medicamento del estante estaba al alcance de todas las manos, para todos los pacientes.
+
+7
+00:00:40,504 --> 00:00:41,892
+Algo tenía que cambiar.
+
+8
+00:00:43,392 --> 00:00:51,077
+A principios de los años sesenta, farmacéuticos del Centro Médico de la Universidad de Arkansas, en Little Rock, probaron otra forma.
+
+9
+00:00:52,177 --> 00:01:00,125
+Un farmacéutico leía cada orden del médico, y la farmacia enviaba dosis únicas, etiquetadas y listas, cada una a su hora.
+
+10
+00:01:01,825 --> 00:01:05,651
+El médico ordenaba, el farmacéutico revisaba y llenaba, y la enfermera daba.
+
+11
+00:01:07,351 --> 00:01:13,060
+En su estudio, los errores, sin contar los de horario, bajaron de casi una dosis de cada cinco a una de cada treinta.
+
+12
+00:01:14,960 --> 00:01:21,861
+Cuando otros hospitales lo adoptaron, cada paciente tuvo un cajón, llenado desde la orden, con no más de un día de dosis.
+
+13
+00:01:23,561 --> 00:01:27,604
+Para 1990, nueve de cada diez hospitales de EE. UU. trabajaban así.
+
+14
+00:01:29,104 --> 00:01:35,685
+En la universidad, en octubre, el nuevo agente de Planificación planteó la misma pregunta: ¿a qué debería poder llegar?
+
+15
+00:01:36,785 --> 00:01:44,520
+Dale los permisos de una persona y llega a todo el estante: todo lo que esa persona puede hacer, incluso aprobar y cambiar producción.
+
+16
+00:01:45,820 --> 00:01:52,197
+Dale los permisos de su trabajo y llega solo a lo que necesita cada uno de sus pasos: un cajón, llenado desde la orden.
+
+17
+00:01:53,497 --> 00:01:56,108
+Así, un error no puede llegar más allá de su trabajo.
+
+18
+00:02:03,908 --> 00:02:08,900
+El jueves 22 de octubre, Clara Jensen pidió la forma sencilla.
+
+19
+00:02:10,000 --> 00:02:12,314
+“Dale lo que tenía el ayudante de Jun. Funcionó.”
+
+20
+00:02:13,814 --> 00:02:20,008
+Todo el año, el ayudante de Jun redactó los encargos de Planificación con el acceso de Jun, con todos sus permisos.
+
+21
+00:02:21,508 --> 00:02:24,099
+Son 46 permisos, reunidos a lo largo de los años.
+
+22
+00:02:25,799 --> 00:02:30,929
+Algunos son para su trabajo de hoy: construye el proyecto, y revisa y aprueba su código.
+
+23
+00:02:32,229 --> 00:02:36,750
+Algunos solo debería usarlos una persona: aprobar, fusionar, cambiar producción.
+
+24
+00:02:38,250 --> 00:02:44,470
+Y otros quedan de trabajos viejos, como los proyectos del sistema de investigación, para un informe de 2024.
+
+25
+00:02:45,970 --> 00:02:47,736
+Copiarlos fallaría dos veces.
+
+26
+00:02:49,036 --> 00:02:54,501
+Son demasiado amplios: el agente tendría lo que solo pueden hacer las personas, y tablas que ningún encargo necesita.
+
+27
+00:02:56,001 --> 00:03:01,737
+Y crecieron con años de trabajo de una persona: el agente no tiene años, así que ninguno se hizo para él.
+
+28
+00:03:03,237 --> 00:03:06,682
+Así que Noor y Sam fueron al revés: del trabajo a los permisos.
+
+29
+00:03:10,082 --> 00:03:16,138
+El lunes 26, el agente de Planificación tomó su lugar en el mapa, en el rol de colaborador de Planificación.
+
+30
+00:03:17,638 --> 00:03:23,199
+Su trabajo es un servicio, cambiar un producto de datos: siete pasos, de un encargo a producción.
+
+31
+00:03:25,099 --> 00:03:31,717
+El colaborador de Planificación hace tres: redactar el cambio, construirlo en desarrollo y abrir un pull request.
+
+32
+00:03:33,617 --> 00:03:37,587
+Cada paso dice qué lee, qué escribe y qué herramientas llama.
+
+33
+00:03:39,287 --> 00:03:44,977
+Para redactar el cambio, lee el encargo y lo que el cambio toca, y escribe en su propia rama.
+
+34
+00:03:46,877 --> 00:03:53,265
+Para construirlo, lee producción con los nombres enmascarados y escribe los resultados de sus pruebas en su esquema de desarrollo.
+
+35
+00:03:55,165 --> 00:04:00,792
+Para abrir el pull request, lee su cambio y sus resultados, y escribe un pull request.
+
+36
+00:04:02,892 --> 00:04:07,225
+Sus permisos son exactamente esos, y cada permiso nombra el paso que lo necesita.
+
+37
+00:04:09,125 --> 00:04:12,225
+Como el cajón: llenado desde la orden, no desde el estante.
+
+38
+00:04:13,725 --> 00:04:18,363
+La lista es corta, y nadie la escribió a mano: el mapa la hace a partir de los pasos.
+
+39
+00:04:20,063 --> 00:04:23,833
+Ese lunes, Sam le dio sus permisos a partir de esa lista, y nada más.
+
+40
+00:04:27,433 --> 00:04:30,854
+Lo que lee un rol es parte de sus permisos, y el orden importa.
+
+41
+00:04:31,954 --> 00:04:39,571
+Primero, el contexto gobernado: su lugar en el mapa, el glosario, las reglas de negocio y de datos, y las descripciones de los datos.
+
+42
+00:04:41,471 --> 00:04:44,381
+Cada uno tiene un dueño y solo cambia con una revisión.
+
+43
+00:04:45,681 --> 00:04:51,127
+Segundo, la memoria del equipo: lo que los agentes aprendieron en sesiones anteriores, guardado por la plataforma.
+
+44
+00:04:52,627 --> 00:04:56,451
+La memoria ayuda, pero puede estar equivocada, y nadie revisa cada una de sus líneas.
+
+45
+00:04:57,751 --> 00:05:01,629
+Así que cuando la memoria y una definición no coinciden, gana la definición.
+
+46
+00:05:03,129 --> 00:05:07,126
+Y el agente lo dice en su informe, para que lo vea el dueño de la definición.
+
+47
+00:05:08,626 --> 00:05:14,095
+Como el farmacéutico con la orden del propio médico: primero el original, una copia solo después.
+
+48
+00:05:17,495 --> 00:05:20,247
+Lo que queda fuera también se escribe, con su motivo.
+
+49
+00:05:21,347 --> 00:05:23,598
+Los otros cuatro pasos son de otros roles.
+
+50
+00:05:24,698 --> 00:05:27,571
+Abrir un encargo es de quien lo solicita: de Clara.
+
+51
+00:05:28,671 --> 00:05:31,908
+Revisar el código es del ingeniero de analítica: de Jun.
+
+52
+00:05:33,008 --> 00:05:36,267
+Aprobar el cambio es de quien aprueba la liberación: de Noor.
+
+53
+00:05:37,367 --> 00:05:39,848
+Y liberarlo a producción también es de Noor.
+
+54
+00:05:41,148 --> 00:05:47,946
+Y lo que significa una palabra lo decide su dueño, como Mei para las palabras de los estudiantes, antes de que entre al glosario.
+
+55
+00:05:49,446 --> 00:05:55,664
+Así que nunca aprueba, nunca libera, nunca cambia lo que significa una palabra y nunca escribe en producción.
+
+56
+00:05:57,364 --> 00:06:01,938
+Nadie tuvo que prohibir cada uno: la separación de funciones sale de los pasos.
+
+57
+00:06:03,438 --> 00:06:06,636
+Como en la sala: uno ordenaba, otro llenaba y otro daba.
+
+58
+00:06:08,136 --> 00:06:13,709
+Y una verificación rechaza el mapa si un paso que solo hacen personas se da a un rol que ocupa un agente.
+
+59
+00:06:17,109 --> 00:06:20,774
+El trabajo cambia, y los permisos lo siguen, nunca al revés.
+
+60
+00:06:22,474 --> 00:06:27,598
+Digamos que Planificación quiere que el agente también responda sus preguntas, no solo redacte sus cambios.
+
+61
+00:06:29,498 --> 00:06:34,679
+Es trabajo nuevo, así que primero es un paso nuevo en el mapa, que dice qué lee, qué escribe y qué llama.
+
+62
+00:06:36,979 --> 00:06:41,174
+Noor lo agrega al rol cuando Clara y los dueños de lo que lee están de acuerdo.
+
+63
+00:06:43,074 --> 00:06:46,498
+Luego sus permisos lo siguen: líneas nuevas, cada una con el paso nuevo.
+
+64
+00:06:48,598 --> 00:06:51,732
+Y las herramientas siguen a los permisos, nunca un permiso dado a mano.
+
+65
+00:06:53,632 --> 00:07:00,643
+Hasta entonces, si un encargo necesita más de lo que dan sus pasos, el agente no toma prestado un acceso: se detiene y pregunta.
+
+66
+00:07:02,743 --> 00:07:05,058
+Cuando un paso se va, sus permisos se van con él.
+
+67
+00:07:06,958 --> 00:07:11,436
+Un permiso dado a mano es una deriva, y la próxima película muestra la verificación que la encuentra.
+
+68
+00:07:15,636 --> 00:07:20,427
+En la sala, el cajón de cada paciente tenía las dosis de un día, llenado desde una orden.
+
+69
+00:07:21,927 --> 00:07:26,121
+Aquí, el agente de Planificación tiene lo que necesitan sus tres pasos, y nada más.
+
+70
+00:07:27,421 --> 00:07:32,423
+Cada permiso suyo tiene un motivo que cualquiera puede leer, y ninguno llega a producción.
+
+71
+00:07:33,723 --> 00:07:35,401
+Y los permisos de Jun siguen siendo suyos.
+
+72
+00:07:36,701 --> 00:07:39,964
+Los permisos de un agente vienen de su trabajo, no del de una persona.

@@ -1,0 +1,99 @@
+models:
+
+  - name: core_claim
+    description: >
+      A claim for hours worked, as it stands now in the claims app, with the pay type and teaching
+      period of the contract it's claimed under. {{ doc("claim") }}
+    latest_version: 1
+    config:
+      meta:
+        grain: One row per claim, as it stands now
+        owner: HR
+        domain: staff
+        glossary_term: claim
+    constraints:
+      - type: primary_key
+        name: pk_core_claim
+        columns: [claim_key]
+        warn_unenforced: false
+    columns:
+      - name: claim_key
+        description: The claim's hash key, the sha-256 of claim_bk.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              config: {meta: {owner: HR}}
+        config:
+          meta: {glossary_term: claim, personal_data: pseudonymous}
+      - name: claim_bk
+        description: The claim's business key, readable and qualified by its key set, CLM|CL-104233.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: pseudonymous}}
+      - name: staff_bk
+        description: The staff member who worked the hours, by the staff ID HR issues, HR|E-4417.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: direct}}
+      - name: contract_bk
+        description: The contract the hours are claimed under, HR|T-26188.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: pseudonymous}}
+      - name: unit_code
+        description: The unit the hours were worked for, like HI101.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('units')
+                field: unit_code
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: duty
+        description: '{{ doc("claim_duty") }}'
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: worked_on
+        description: The day the hours were worked.
+        data_type: date
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: hours
+        description: '{{ doc("claim_hours") }}'
+        data_type: decimal(5,2)
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: amount
+        description: '{{ doc("claim_amount") }}'
+        data_type: decimal(9,2)
+        config: {meta: {personal_data: none}}
+      - name: status
+        description: '{{ doc("claim_status") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: approved_at
+        description: When the unit's coordinator approved the claim. Null until then.
+        data_type: timestamp
+        config: {meta: {personal_data: none}}
+      - name: updated_at
+        description: When the claims app last changed the claim, its own time.
+        data_type: timestamp
+        config: {meta: {personal_data: none}}
+      - name: pay_type
+        description: '{{ doc("pay_type") }} The pay type of the contract the claim is made under.'
+        data_type: string
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: teaching_period
+        description: The teaching period of the contract the claim is made under, like 2026-S2.
+        data_type: string
+        config: {meta: {personal_data: none}}
+    versions:
+      - v: 1
+        defined_in: core_claim

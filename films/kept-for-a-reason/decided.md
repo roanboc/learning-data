@@ -1,0 +1,9 @@
+# Decided: Kept for a reason
+
+The series' own decisions. The module's are in [`../locks-before-the-data/decided.md`](../locks-before-the-data/decided.md), with its plan in [`../locks-before-the-data/proposal.md`](../locks-before-the-data/proposal.md). With each film's rows (`<n-film>/decided.md`), they make the *Decided* table in [proposal.md](proposal.md): run `python site-tools/build_series.py` after adding a row. A decision a film's thread makes goes in that film's file, so threads never edit the same lines.
+
+| Date | Decision |
+|---|---|
+| 5 November 2026 | Decided by the author on the review of missing series: privacy and the data lifecycle (purpose, consent, retention, deletion, archiving) are a series of their own in *Data protection and privacy*. |
+| 5 November 2026 | Assumed: *Kept for a reason* (*Guardado por una razón*), the module's third and last series, is five films: *A reason to keep it*, *How long, and then what* and *Forgetting a person* on the ideas; *Deleted means deleted* and *A person asks* in Databricks, dbt and GitHub; in `films/kept-for-a-reason/`, at `kept-for-a-reason/` on the site; its cards say "Film N of 5". *Only what you may see* comes before it. Its thread: Linh Nguyen's tutoring contract (T-26188) ends on 20 November 2026, and on 24 November she asks what the university holds about her and to be taken off the tutors' mailing list. Ingrid Holm guides it. |
+| 5 November 2026 | Assumed: the films teach the principles most privacy laws share (a lawful purpose, as little as needed, kept no longer than needed, people's rights to see, correct and erase their data), naming Europe's GDPR once as the best known, and never teach one country's law; the university's retention schedule and its answer time are its own, invented and believable. Personal data in logs, traces and prompts, which the plan's agentic security series held, is a chapter of *Deleted means deleted*. |

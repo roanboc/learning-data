@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Deleted means deleted",
+    "key": "deleted-means-deleted-en",
+    "dir": "films/kept-for-a-reason/4-deleted-means-deleted/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/deleted-means-deleted/film.js",
+    "video": "dist/deleted-means-deleted.mp4",
+    "file": "deleted-means-deleted.mp4",
+    "captions": [
+      [
+        "films/kept-for-a-reason/4-deleted-means-deleted/captions/en.srt",
+        "deleted-means-deleted.en.srt"
+      ],
+      [
+        "films/kept-for-a-reason/4-deleted-means-deleted/captions/es.srt",
+        "deleted-means-deleted.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/kept-for-a-reason/4-deleted-means-deleted/source",
+      ":(exclude)films/kept-for-a-reason/4-deleted-means-deleted/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 257,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.5,
+      "status": "Drawn to the rule"
+    }
+  }
+]

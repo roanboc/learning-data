@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de How value reaches people, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (side, teams, first), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la
+   página de labs de la serie (el .player data-labs de la página es "../labs/"); una pregunta sin él no tiene enlace a un lab. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "side":{q:"Dibujado desde el lado del hogar, ¿con qué termina cada etapa del flujo de valor?",
+    opts:[{t:"Con algo que recibe el hogar, como la ayuda en camino.",ok:true},{t:"Con un equipo que pasa el trabajo al siguiente.",near:true},{t:"Con un sistema que se actualiza con la llamada del hogar."}],
+    why:"El hogar no ve equipos ni sistemas, solo unas pocas etapas en orden: alguien sabe que se fue la luz, la ayuda va en camino, vuelve la luz y alguien explica qué pasó. Eso es un flujo de valor: recuperar la luz."},
+  "teams":{q:"La llamada pasa por el centro de contacto, la sala de control y las cuadrillas de campo. ¿Dónde lo siente el hogar?",
+    opts:[{t:"En ningún lado: el hogar no ve nada de eso."},{t:"En cada traspaso, salga bien o no.",near:true},{t:"Solo en los traspasos que salen mal.",ok:true}],
+    why:"Como con las loncheras de los dabbawalas, el detalle va donde el trabajo cambia de manos. ¿Dónde cambia de manos el trabajo camino a tus clientes, y qué traspaso notan cuando sale mal?"},
+  "first":{stop:"first",q:"Tres fallas y dos cuadrillas libres. ¿Qué falla va primero?",
+    opts:[{t:"Primero, los electrodependientes; luego, los cables caídos, por seguridad; luego, lo que devuelva la luz a más hogares.",near:true},{t:"Primero, los cables caídos, por seguridad; luego, los electrodependientes; luego, lo que devuelva la luz a más hogares.",ok:true},{t:"Primero, la falla con más hogares, porque una cuadrilla devuelve así más luz."}],
+    why:"Por costumbre, las dos cuadrillas irían a la falla más grande. Una regla que depende del orden y del estado es donde un proceso merece detalle, paso a paso, con una notación como BPMN. ¿Hay una regla así escrita donde trabajas, y quién es su dueño?"}
+  }}};

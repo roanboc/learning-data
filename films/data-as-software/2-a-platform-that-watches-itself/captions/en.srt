@@ -1,0 +1,223 @@
+1
+00:00:01,400 --> 00:00:04,020
+The twentieth of July, 1969.
+
+2
+00:00:05,320 --> 00:00:11,381
+Neil Armstrong and Buzz Aldrin are flying their lunar module down to the Moon, its computer steering.
+
+3
+00:00:12,881 --> 00:00:16,677
+Five minutes in, a light comes on, with a code: 1202.
+
+4
+00:00:18,377 --> 00:00:20,448
+The computer has more work than time.
+
+5
+00:00:21,148 --> 00:00:23,594
+The crew don't know the code, and ask Houston.
+
+6
+00:00:24,694 --> 00:00:30,980
+If the computer stopped, nothing would steer them; if Houston called an abort, they'd turn back without landing.
+
+7
+00:00:32,480 --> 00:00:34,647
+Someone had to decide, in seconds.
+
+8
+00:00:36,547 --> 00:00:40,609
+The computer's makers, at MIT, had built it to watch itself:
+
+9
+00:00:40,809 --> 00:00:47,080
+with too much to do, it starts again, keeps the steering and its most important work, and drops the rest.
+
+10
+00:00:48,380 --> 00:00:51,224
+And it raises the alarm, so people can decide.
+
+11
+00:00:52,324 --> 00:00:58,169
+In Houston, the guidance officer, Steve Bales, twenty-six, had just helped review its alarms:
+
+12
+00:00:58,369 --> 00:01:03,191
+1202 meant go on, unless it came too often or the descent went off course.
+
+13
+00:01:04,491 --> 00:01:07,709
+Half a minute after the alarm, the word goes up: go.
+
+14
+00:01:09,409 --> 00:01:11,801
+Four more alarms come; each time, go.
+
+15
+00:01:13,101 --> 00:01:14,232
+And Eagle lands.
+
+16
+00:01:16,532 --> 00:01:21,038
+The computer watched itself and said what was wrong, and people who knew decided.
+
+17
+00:01:22,538 --> 00:01:27,586
+This November, a job that pays the university's casual staff fails one night.
+
+18
+00:01:28,286 --> 00:01:33,419
+By morning, the platform has found why and proposed a fix, and a person decides.
+
+19
+00:01:41,219 --> 00:01:46,659
+At the university, casual staff, paid by the hour, claim the hours they teach in an app.
+
+20
+00:01:47,759 --> 00:01:55,555
+On the Monday before each pay day, at ten at night, the claims job builds the hours to pay, and sends them to the payroll system.
+
+21
+00:01:57,055 --> 00:02:03,666
+On Monday the second of November, at 3:02 in the afternoon, a new version of the app goes live.
+
+22
+00:02:04,766 --> 00:02:11,936
+Tutors can now type their hours as they say them: 1:30 for an hour and a half, where it sent 1.50.
+
+23
+00:02:13,436 --> 00:02:15,707
+Its contract still says decimal hours.
+
+24
+00:02:17,407 --> 00:02:22,287
+At 22:03, the job fails: it can't read 1:30 as a number.
+
+25
+00:02:24,187 --> 00:02:28,242
+Nothing wrong reaches payroll: the job stops, and the hours wait.
+
+26
+00:02:29,742 --> 00:02:36,106
+Payroll needs them by noon on Tuesday, to pay 856 casual staff on Thursday.
+
+27
+00:02:39,706 --> 00:02:41,316
+But the platform is watching.
+
+28
+00:02:42,616 --> 00:02:48,783
+Sam, who runs the platform, has Genie ZeroOps watching the pay run's jobs and tables:
+
+29
+00:02:48,983 --> 00:02:52,244
+an agent that works in the background, with nobody asking.
+
+30
+00:02:53,344 --> 00:02:56,091
+It finds the failure, at 22:03.
+
+31
+00:02:57,391 --> 00:03:04,156
+It traces the cause through lineage, to the claims app's table, where the hours changed form at 3:02.
+
+32
+00:03:06,056 --> 00:03:12,917
+It says what the failure touches: the hours for the payroll system, payroll's export, and casual teaching cost.
+
+33
+00:03:14,817 --> 00:03:18,420
+And it proposes a fix: read 1:30 as one and a half.
+
+34
+00:03:19,920 --> 00:03:25,065
+By morning, it's one insight in Sam's inbox, and nothing in production has changed.
+
+35
+00:03:26,965 --> 00:03:31,715
+It can trace only what the platform knows, so keep the lineage, and who owns what.
+
+36
+00:03:35,315 --> 00:03:36,914
+Tuesday, half past eight.
+
+37
+00:03:38,214 --> 00:03:43,457
+Sam checks the cause against the claims, and asks the agent to push its fix to a new branch.
+
+38
+00:03:44,757 --> 00:03:47,734
+It pushes only when a person asks, and confirms.
+
+39
+00:03:48,834 --> 00:03:53,648
+Sam opens a pull request, and its tests run, as they do for every change.
+
+40
+00:03:55,148 --> 00:03:59,065
+Then someone who didn't write it approves: Noor, at 9:05.
+
+41
+00:04:00,565 --> 00:04:02,254
+An agent never approves.
+
+42
+00:04:03,954 --> 00:04:08,747
+At 9:20, the job runs again, and payroll has the hours by ten.
+
+43
+00:04:10,247 --> 00:04:15,538
+On Thursday, 856 casual staff are paid, Linh Nguyen among them.
+
+44
+00:04:17,438 --> 00:04:20,054
+The platform proposes; a person approves.
+
+45
+00:04:24,054 --> 00:04:26,369
+The fix mended the night, not its cause.
+
+46
+00:04:27,669 --> 00:04:31,750
+The app's change was a good one, for tutors; what was missing was a step.
+
+47
+00:04:32,850 --> 00:04:41,365
+So Sam's pull request also asks Ingrid Holm, in HR, who owns the claims' data, to change the contract first, next time.
+
+48
+00:04:43,065 --> 00:04:46,951
+Then everyone who reads the hours knows, before the app changes.
+
+49
+00:04:48,651 --> 00:04:51,495
+On Apollo 11, the cause took a night to find:
+
+50
+00:04:51,695 --> 00:04:59,254
+a document between two systems had said too little, so a radar's electronics took about 13% of the computer's time.
+
+51
+00:05:00,754 --> 00:05:04,860
+For the next missions, the checklist changed, and the software learned to check.
+
+52
+00:05:08,660 --> 00:05:17,169
+Watching systems isn't new: site reliability engineers have done it for years, with alerts, people on call and blameless reviews.
+
+53
+00:05:18,469 --> 00:05:22,597
+What's new is that the platform does the first hours of the work, overnight.
+
+54
+00:05:23,697 --> 00:05:30,034
+Choose what it watches, keep the lineage and the owners it reads, and decide who reviews and who approves.
+
+55
+00:05:31,734 --> 00:05:34,623
+There are already standards, so don't reinvent the wheel:
+
+56
+00:05:34,823 --> 00:05:39,371
+investigate, adapt, implement, iterate, starting from the official docs.

@@ -1,0 +1,70 @@
+sources:
+  - name: claims_app
+    description: '{{ doc("source_claims_app") }}'
+    # On Databricks, the app's own Postgres database on Lakebase, registered in Unity Catalog as
+    # the catalog claims_app, with Postgres's schema public: read in place, nothing copied in
+    # (DEC-CLM-01). On DuckDB a CSV file stands in for it.
+    database: "{{ env_var('DBT_CLAIMS_APP_CATALOG', 'claims_app') if target.type == 'databricks' else target.database }}"
+    schema: "{{ 'public' if target.type == 'databricks' else env_var('DBT_SOURCES_SCHEMA_PREFIX', '') ~ 'claims_app' }}"
+    config:
+      # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the app's own table.
+      external_location: "read_csv('data/claims_app/{name}.csv', header = true, all_varchar = true)"
+      # Nothing is loaded, so freshness reads the app's own time of a claim's last change. With no
+      # copy, nothing can fall behind: a stale updated_at means the app has stopped writing claims.
+      loaded_at_field: "cast(updated_at as timestamp)"
+      freshness:
+        warn_after: {count: 2, period: day}
+        error_after: {count: 7, period: day}
+      meta:
+        owner: HR
+        key_set:
+          code: CLM
+          system: claims app
+          owner: HR
+          # The day the project first read this system's keys: the key sets seed lists them in that order.
+          since: 2026-11-05
+          # Each key the system issues, and the case staging writes it in (docs/conventions.md).
+          # The claims also carry the HR system's keys, staff_id and contract_id, in key set HR.
+          system_keys:
+            - {key: claim_id, case: upper, example: CL-104233}
+          example: CLM|CL-104233
+        domain: hr
+    tables:
+      - name: claims
+        description: >
+          One row per claim, as it stands now: the hours a casual staff member worked on one day,
+          for one unit and one duty, and where the unit coordinator's approval stands. The app
+          writes each claim once, here; payroll and Finance read this same row. The system key is
+          the claim ID.
+        config:
+          meta:
+            system_key: [claim_id]
+            limitations:
+              - id: LIM-CLM-01
+                text: >
+                  The app keeps each claim as it stands now, not its history. A claim returned for
+                  a correction and approved again shows only its last state, and updated_at says
+                  when it last changed: nothing here says how often a claim was returned.
+        columns:
+          - name: claim_id
+            description: The claim ID the app issues, like CL-104233.
+          - name: staff_id
+            description: The staff ID of who worked the hours, as HR issues it, like E-4417.
+          - name: contract_id
+            description: The contract the hours are claimed under, as HR issues it, like T-26188.
+          - name: unit_code
+            description: The unit the hours were worked for, like HI101.
+          - name: duty
+            description: '{{ doc("claim_duty") }}'
+          - name: work_date
+            description: The day the hours were worked.
+          - name: hours
+            description: '{{ doc("claim_hours") }}'
+          - name: amount
+            description: '{{ doc("claim_amount") }}'
+          - name: status
+            description: '{{ doc("claim_status") }}'
+          - name: approved_at
+            description: When the unit's coordinator approved the claim. Empty until then.
+          - name: updated_at
+            description: When the app last changed the claim, its own time, in place of a time it was loaded.

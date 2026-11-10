@@ -1,0 +1,151 @@
+1
+00:00:01,600 --> 00:00:07,177
+In 1494, Luca Pacioli set down how Venetian merchants kept their books.
+
+2
+00:00:07,877 --> 00:00:12,555
+Every transaction was written into the journal, as it happened, one after another.
+
+3
+00:00:13,255 --> 00:00:18,746
+Then each entry was posted to the ledger, grouped by account, where it could be read, and balanced.
+
+4
+00:00:19,946 --> 00:00:27,810
+One set of facts, kept in two shapes: one for writing, and one for reading. And if the two sides didn't balance, something was wrong.
+
+5
+00:00:29,110 --> 00:00:41,992
+Five centuries later, the university has the same two jobs. On graduation day, thousands of awards are issued, each one complete and right. On planning day, someone reads ten years of them at once.
+
+6
+00:00:48,292 --> 00:00:54,830
+A shape built to write keeps each fact in one place. The learner's name is stored once, not on every award.
+
+7
+00:00:56,330 --> 00:01:03,763
+Every row has a key that identifies it, and rules the data must meet: every award belongs to a learner who exists.
+
+8
+00:01:05,163 --> 00:01:15,771
+And issuing an award touches three things at once: the award, the learner's record, and the transcript. All three change, or none of them do. Half an award is never saved.
+
+9
+00:01:17,271 --> 00:01:21,234
+This is normalisation, with keys, constraints and transactions.
+
+10
+00:01:24,234 --> 00:01:28,713
+Store the learner's name on every award instead, and it lives in three places.
+
+11
+00:01:29,913 --> 00:01:33,609
+She changes her name. Two copies are corrected. One is missed.
+
+12
+00:01:35,009 --> 00:01:37,153
+Her next certificate prints the old name.
+
+13
+00:01:38,653 --> 00:01:44,846
+And if the only place a course is described is on its awards, deleting the last award deletes the course.
+
+14
+00:01:46,146 --> 00:01:52,998
+These are called update and delete anomalies. Keeping each fact once is how a shape built to write avoids them.
+
+15
+00:01:55,698 --> 00:02:05,471
+Some systems write a whole thing at once, as one document: a digital credential, with its claim and its evidence inside, signed as a single piece.
+
+16
+00:02:06,871 --> 00:02:09,424
+Keep together what's written, and signed, together.
+
+17
+00:02:10,724 --> 00:02:16,739
+Document databases are built for this. They shine when a whole thing is written, and read, at once.
+
+18
+00:02:17,939 --> 00:02:23,822
+One document is easy to write and easy to check. Counting across a million of them is harder.
+
+19
+00:02:26,522 --> 00:02:31,320
+Planning day. How many awards, by faculty and by year, for the last ten years?
+
+20
+00:02:32,820 --> 00:02:37,426
+A shape built to read starts with the grain: one row per credential awarded.
+
+21
+00:02:38,926 --> 00:02:43,464
+The numbers to add up sit in the middle: the award itself, and its credit points.
+
+22
+00:02:44,764 --> 00:02:51,398
+Around them sits everything you'd filter or group by: the learner, the kind of credential, the faculty, the date.
+
+23
+00:02:52,898 --> 00:02:59,073
+A simple test: the facts are what you add up; the dimensions are the words after by, in the question.
+
+24
+00:03:00,573 --> 00:03:03,962
+It's called a star. Reading it takes two steps, not seven.
+
+25
+00:03:09,062 --> 00:03:15,212
+A learner moved faculty in the middle of the year. Do her awards count for the old faculty, or the new?
+
+26
+00:03:16,612 --> 00:03:23,702
+Keep both, each with the dates it was true. Awards before the move count for the old faculty, and after it, for the new.
+
+27
+00:03:25,202 --> 00:03:31,662
+An award that's revoked and reissued keeps its history too. Nothing is overwritten. Each change has a date.
+
+28
+00:03:33,062 --> 00:03:43,085
+Not every change needs history. Correcting a typo can simply overwrite. A move between faculties can't. Decide for each attribute, and write it down.
+
+29
+00:03:44,585 --> 00:03:47,396
+Engineers call this a slowly changing dimension.
+
+30
+00:03:50,096 --> 00:03:52,278
+Now ask both shapes the same question.
+
+31
+00:03:53,378 --> 00:03:57,380
+The shape built to write needs seven joins, and a puzzle about history.
+
+32
+00:03:58,680 --> 00:04:00,794
+The shape built to read answers in two.
+
+33
+00:04:02,294 --> 00:04:07,933
+Then correct a name. Easy where it's stored once. Awkward in a shape that repeats it on purpose.
+
+34
+00:04:09,233 --> 00:04:11,168
+Each shape is fast at its own job.
+
+35
+00:04:13,868 --> 00:04:17,822
+One sketch. Two shapes, both built from the same logical model.
+
+36
+00:04:18,522 --> 00:04:25,522
+And a common confusion, cleared up: bronze, silver and gold say how refined data is, not what shape it has.
+
+37
+00:04:26,822 --> 00:04:34,659
+Many platforms keep a normalised shape in silver, close to the sources, and stars in gold. That's a choice, not a rule.
+
+38
+00:04:35,859 --> 00:04:41,805
+Any layer can hold either shape. The next question is which shapes to use for reading. There are several.

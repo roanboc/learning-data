@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/keeping-it-true/soundtrack.mp3",
+      "size": 4134809,
+      "sha256": "21b1d6b54f080676cf3a42684b80690d8dc9c75fe863481ce0251e31ad8e5bb6",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/21b1d6b54f080676cf3a42684b80690d8dc9c75fe863481ce0251e31ad8e5bb6.mp3"
+    }
+  ]
+}

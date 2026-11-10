@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Borrowed from the brain",
+    "key": "borrowed-from-the-brain-en",
+    "dir": "films/what-an-agent-is/2-borrowed-from-the-brain/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/borrowed-from-the-brain/film.js",
+    "video": "dist/borrowed-from-the-brain.mp4",
+    "file": "borrowed-from-the-brain.mp4",
+    "captions": [
+      [
+        "films/what-an-agent-is/2-borrowed-from-the-brain/captions/en.srt",
+        "borrowed-from-the-brain.en.srt"
+      ],
+      [
+        "films/what-an-agent-is/2-borrowed-from-the-brain/captions/es.srt",
+        "borrowed-from-the-brain.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/what-an-agent-is/2-borrowed-from-the-brain/source",
+      ":(exclude)films/what-an-agent-is/2-borrowed-from-the-brain/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 203,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

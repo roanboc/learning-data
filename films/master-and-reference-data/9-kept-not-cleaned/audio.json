@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/kept-not-cleaned/soundtrack.mp3",
+      "size": 4598169,
+      "sha256": "711f959e85c00da0c490b40381f725b0ac6429cc8841b72e12c5f9f3c8b058a9",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/711f959e85c00da0c490b40381f725b0ac6429cc8841b72e12c5f9f3c8b058a9.mp3"
+    }
+  ]
+}

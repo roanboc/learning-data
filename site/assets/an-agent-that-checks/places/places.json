@@ -1,0 +1,446 @@
+{
+ "player": "ca08cd0430f48e1b",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:dusk": {
+   "file": "dusk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     6.0
+    ]
+   ]
+  },
+  "place:facDusk": {
+   "file": "facDusk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     5.25,
+     39.0
+    ]
+   ]
+  },
+  "acFacDesk|dusk": {
+   "file": "acFacDesk_dusk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     5.25,
+     39.0
+    ]
+   ]
+  },
+  "place:night": {
+   "file": "night.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     38.25,
+     41.0
+    ],
+    [
+     354.75,
+     358.0
+    ]
+   ]
+  },
+  "place:screenNight": {
+   "file": "screenNight.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     40.25,
+     53.75
+    ],
+    [
+     164.75,
+     169.0
+    ],
+    [
+     307.25,
+     312.5
+    ],
+    [
+     357.25,
+     368.75
+    ]
+   ]
+  },
+  "place:facMorning": {
+   "file": "facMorning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     53.5,
+     56.25
+    ],
+    [
+     60.75,
+     76.0
+    ]
+   ]
+  },
+  "acFacDesk|morning": {
+   "file": "acFacDesk_morning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     53.5,
+     56.25
+    ],
+    [
+     60.75,
+     76.0
+    ]
+   ]
+  },
+  "place:screenMorning": {
+   "file": "screenMorning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     56.0,
+     61.0
+    ],
+    [
+     75.75,
+     81.25
+    ],
+    [
+     376.75,
+     380.25
+    ],
+    [
+     385.75,
+     395.25
+    ]
+   ]
+  },
+  "place:faculty": {
+   "file": "faculty.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     80.25,
+     85.5
+    ],
+    [
+     113.75,
+     117.0
+    ],
+    [
+     168.75,
+     173.25
+    ],
+    [
+     238.0,
+     242.75
+    ],
+    [
+     348.75,
+     355.75
+    ]
+   ]
+  },
+  "acFacDesk|day": {
+   "file": "acFacDesk_day.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     80.25,
+     85.5
+    ],
+    [
+     113.75,
+     117.0
+    ],
+    [
+     168.75,
+     173.25
+    ],
+    [
+     238.0,
+     242.75
+    ],
+    [
+     348.75,
+     355.75
+    ]
+   ]
+  },
+  "place:screenFac": {
+   "file": "screenFac.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     84.75,
+     103.75
+    ]
+   ]
+  },
+  "place:data": {
+   "file": "data.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     103.0,
+     108.25
+    ],
+    [
+     335.25,
+     338.25
+    ],
+    [
+     373.5,
+     377.5
+    ]
+   ]
+  },
+  "place:boardData": {
+   "file": "boardData.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     108.0,
+     111.75
+    ],
+    [
+     337.5,
+     341.5
+    ]
+   ]
+  },
+  "place:advisers": {
+   "file": "advisers.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     111.0,
+     114.5
+    ],
+    [
+     263.75,
+     267.25
+    ]
+   ]
+  },
+  "acAdvDesk": {
+   "file": "acAdvDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     111.0,
+     114.5
+    ],
+    [
+     263.75,
+     267.25
+    ]
+   ]
+  },
+  "acTrayFront": {
+   "file": "acTrayFront.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     111.0,
+     114.5
+    ],
+    [
+     263.75,
+     267.25
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     116.0,
+     119.75
+    ]
+   ]
+  },
+  "place:boardGov": {
+   "file": "boardGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     119.5,
+     125.5
+    ],
+    [
+     129.25,
+     134.0
+    ],
+    [
+     369.5,
+     374.25
+    ]
+   ]
+  },
+  "place:sheet": {
+   "file": "sheet.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     124.75,
+     130.0
+    ],
+    [
+     133.25,
+     165.5
+    ],
+    [
+     345.75,
+     349.5
+    ]
+   ]
+  },
+  "place:screenBig": {
+   "file": "screenBig.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     173.0,
+     238.25
+    ],
+    [
+     242.0,
+     248.5
+    ]
+   ]
+  },
+  "place:paperDesk": {
+   "file": "paperDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     247.75,
+     264.5
+    ],
+    [
+     266.5,
+     275.75
+    ],
+    [
+     301.5,
+     308.0
+    ],
+    [
+     340.75,
+     346.5
+    ],
+    [
+     379.5,
+     386.5
+    ]
+   ]
+  },
+  "place:desk26": {
+   "file": "desk26.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     274.75,
+     286.5
+    ],
+    [
+     311.75,
+     322.75
+    ]
+   ]
+  },
+  "place:platClose": {
+   "file": "platClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     285.75,
+     289.25
+    ]
+   ]
+  },
+  "acPlatDesk": {
+   "file": "acPlatDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     285.75,
+     289.25
+    ]
+   ]
+  },
+  "place:form": {
+   "file": "form.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     288.5,
+     302.25
+    ]
+   ]
+  },
+  "place:desk12": {
+   "file": "desk12.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     321.5,
+     328.0
+    ]
+   ]
+  },
+  "place:page": {
+   "file": "page.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     327.25,
+     336.0
+    ]
+   ]
+  },
+  "place:dawn": {
+   "file": "dawn.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     368.0,
+     370.25
+    ]
+   ]
+  }
+ }
+}

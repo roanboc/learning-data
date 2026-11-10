@@ -1,0 +1,106 @@
+{
+ "player": "e31e0b9475e360df",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:sound": {
+   "file": "sound.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     23.5
+    ]
+   ]
+  },
+  "place:cabin": {
+   "file": "cabin.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     22.25,
+     47.75
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     46.75,
+     74.5
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     73.5,
+     116.5
+    ],
+    [
+     278.25,
+     309.0
+    ]
+   ]
+  },
+  "place:plain": {
+   "file": "plain.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     115.5,
+     153.5
+    ],
+    [
+     219.25,
+     279.25
+    ],
+    [
+     348.25,
+     366.0
+    ]
+   ]
+  },
+  "place:officeB": {
+   "file": "officeB.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     152.5,
+     220.25
+    ]
+   ]
+  },
+  "place:plainB": {
+   "file": "plainB.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     308.0,
+     331.25
+    ]
+   ]
+  },
+  "place:falmouth": {
+   "file": "falmouth.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     330.25,
+     349.25
+    ]
+   ]
+  }
+ }
+}

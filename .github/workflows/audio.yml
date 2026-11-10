@@ -1,0 +1,57 @@
+# Publishes a film's audio release when the film reaches main, so nobody runs it by hand. Every push
+# to main that adds or changes an audio.json pointer or an MP3 publishes every missing audio release
+# whose MP3 is in the repository, then downloads and verifies every pointer's copy. It also runs once
+# a day, to publish anything an earlier run missed. Audio releases are prereleases, so they never
+# replace the video release used by the site's latest-download links, and existing assets are never
+# uploaded again or replaced. Run it by hand only to resume, or for one tag or film; a blank tag
+# publishes every missing release.
+name: Store audio outside Git
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'films/**/audio.json'
+      - 'site/assets/**/*.mp3'
+      - 'site-tools/media.py'
+      - '.github/workflows/audio.yml'
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Audio release tag; blank publishes every missing release (the first migration was audio-v1)"
+        required: false
+        default: ""
+      film:
+        description: "Optional film release key; blank with a tag publishes the whole tag"
+        required: false
+
+permissions:
+  contents: read
+
+# Pushes and scheduled runs have no inputs, so they queue with a blank manual run instead of racing it.
+concurrency:
+  group: audio-release-${{ inputs.tag || 'all' }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Publish or resume the selected immutable audio assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          FILM: ${{ inputs.film }}
+        run: |
+          args=()
+          if [ -n "$TAG" ]; then args+=(--tag "$TAG"); fi
+          if [ -n "$FILM" ]; then args+=(--film "$FILM"); fi
+          python site-tools/media.py publish "${args[@]}"

@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:03.844
+China, hace unos 2300 años.
+
+00:00:05.144 --> 00:00:10.403
+Siete reinos están en guerra, y cada uno tiene ejércitos en sus fronteras, a días de la capital.
+
+00:00:12.103 --> 00:00:16.257
+El rey no puede estar en cada frontera, así que sus órdenes viajan con mensajeros.
+
+00:00:17.757 --> 00:00:20.447
+La más peligrosa es una orden de levantar tropas.
+
+00:00:21.147 --> 00:00:26.885
+Si cualquiera pudiera traer una, una carta falsa o la mentira de un mensajero pondrían un ejército en marcha.
+
+00:00:28.385 --> 00:00:33.173
+Los soldados podrían morir por una orden que nadie dio, o volverse contra el propio rey.
+
+00:00:34.473 --> 00:00:37.877
+Y el comandante, en su puesto, solo ve al hombre que la trae.
+
+00:00:39.577 --> 00:00:41.017
+Algo tiene que cambiar.
+
+00:00:44.917 --> 00:00:49.569
+La respuesta es una tarja: un pequeño tigre de bronce, cortado en dos a lo largo del lomo.
+
+00:00:51.269 --> 00:00:55.269
+El rey se queda con la mitad derecha, y el comandante lleva la izquierda a su puesto.
+
+00:00:56.769 --> 00:01:02.051
+Una orden de levantar tropas llega con la mitad del rey, y solo vale si las dos mitades encajan.
+
+00:01:04.151 --> 00:01:07.335
+Así, el comandante no tiene que confiar en el mensajero, solo en que encajen.
+
+00:01:08.635 --> 00:01:14.075
+Un tigre, hoy en un museo de Xi'an, lleva su regla en cuarenta caracteres de oro.
+
+00:01:15.575 --> 00:01:20.354
+Para cincuenta soldados o más, las mitades deben encajar, y solo entonces pueden marchar.
+
+00:01:22.054 --> 00:01:25.904
+Solo una hoguera de alarma, un ataque en la frontera, le deja actuar sin ella.
+
+00:01:27.404 --> 00:01:31.851
+El poder de enviar soldados se queda con el rey, por lejos que viaje la orden.
+
+00:01:33.551 --> 00:01:38.916
+Una solicitud a una plataforma de datos también es una orden: lee estos registros, cambia esa tabla.
+
+00:01:40.216 --> 00:01:46.502
+Solo debería valer si prueba quién la envió, así que toda solicitud empieza con una pregunta: ¿quién es, en realidad?
+
+00:01:53.802 --> 00:01:57.344
+Sam Okafor dirige la plataforma de datos de la universidad.
+
+00:01:58.244 --> 00:02:02.354
+Cada noche a las dos, un proceso carga en ella los datos del registro.
+
+00:02:03.654 --> 00:02:08.923
+Entra con el token personal de Jun Park, así que, para la plataforma, el proceso es Jun.
+
+00:02:10.423 --> 00:02:13.776
+Y la plataforma tiene un solo espacio de trabajo, abierto a internet.
+
+00:02:15.276 --> 00:02:20.662
+Durante años, la seguridad fue un muro alrededor de la red, y se confiaba en quien estuviera dentro.
+
+00:02:22.162 --> 00:02:25.821
+Pero una contraseña robada funciona igual dentro del muro que fuera.
+
+00:02:27.721 --> 00:02:30.776
+Así que la plataforma no confía en una solicitud por su origen.
+
+00:02:32.076 --> 00:02:38.835
+Cada una dice quién es, lo prueba, y se compara con lo que esa identidad puede hacer y con lo que es habitual para ella.
+
+00:02:40.735 --> 00:02:44.254
+Recibe lo mínimo que necesita, y la siguiente solicitud se vuelve a comprobar.
+
+00:02:45.754 --> 00:02:50.318
+Esto es confianza cero: no es no confiar en nadie, sino no confiar en nada sin prueba.
+
+00:02:54.218 --> 00:02:56.481
+En la plataforma hay tres tipos de quién.
+
+00:02:57.781 --> 00:03:03.545
+Una persona: Mei Tanaka, en la oficina del registro, o Jun, que construye el proyecto de datos.
+
+00:03:05.045 --> 00:03:10.888
+Una carga de trabajo: un proceso o un servicio que corre sin nadie al teclado, como la carga nocturna.
+
+00:03:12.388 --> 00:03:16.296
+Y un agente: un asistente de IA que hace una tarea que alguien le dio.
+
+00:03:17.796 --> 00:03:22.286
+Cada uno recibe un nombre propio, una identidad, y una persona que responde por él.
+
+00:03:24.186 --> 00:03:28.032
+Un proceso nunca toma prestado el nombre de una persona, y un agente tampoco.
+
+00:03:29.332 --> 00:03:33.762
+Las películas de Agentes de IA muestran cómo un agente recibe el suyo.
+
+00:03:35.262 --> 00:03:37.800
+Así, lo que hace cada uno aparece bajo su propio nombre.
+
+00:03:41.700 --> 00:03:43.305
+Después: ¿qué puede hacer cada uno?
+
+00:03:44.405 --> 00:03:50.472
+El equipo de Sam halló una vez a 41 personas que podían leer toda la tabla de estudiantes, cada una a su nombre.
+
+00:03:52.172 --> 00:03:54.758
+Nueve se habían ido a otros puestos, y todavía podían.
+
+00:03:56.658 --> 00:03:59.331
+Así, los permisos van a un rol, nunca a una persona.
+
+00:04:00.831 --> 00:04:06.646
+Los roles están en el mapa de la universidad: un dueño de datos, un ingeniero de analítica, un responsable de datos.
+
+00:04:08.146 --> 00:04:12.047
+Cada rol es un grupo, con lo que necesita el trabajo del rol, y nada más.
+
+00:04:13.547 --> 00:04:16.940
+Entra al grupo, y tienes sus permisos; sal de él, y se van.
+
+00:04:18.840 --> 00:04:22.876
+Y quién puede usar los datos del registro lo decide Mei, como su dueña.
+
+00:04:26.776 --> 00:04:30.307
+La gente entra, cambia de puesto y se va, y sus grupos deben seguirla.
+
+00:04:31.607 --> 00:04:36.919
+El directorio de la universidad lo toma de Recursos Humanos, así que nadie tiene que acordarse.
+
+00:04:38.219 --> 00:04:41.861
+Quien entra recibe una cuenta el primer día, y todavía ningún acceso.
+
+00:04:43.161 --> 00:04:48.160
+Primero, firma un acuerdo de confidencialidad: seis líneas, en primera persona.
+
+00:04:50.460 --> 00:04:57.297
+Todos los que trabajan con los datos lo firman, lo vuelven a firmar cada año, y siguen en un grupo solo mientras el suyo esté vigente.
+
+00:04:58.997 --> 00:05:02.024
+Un agente no firma nada: su dueño firma por él.
+
+00:05:03.524 --> 00:05:08.237
+Quien cambia de puesto sale del grupo anterior al entrar en el nuevo, así que ningún permiso viaja con él.
+
+00:05:10.137 --> 00:05:14.527
+La cuenta de quien se va se apaga su último día, y todos sus permisos con ella.
+
+00:05:16.427 --> 00:05:22.676
+Pero el proceso nocturno corre como Jun: cuando él cambie de puesto, se detendrá, o seguirá con lo que él pueda hacer después.
+
+00:05:26.776 --> 00:05:29.787
+Antes de construir nada, Sam piensa como un atacante.
+
+00:05:31.287 --> 00:05:34.608
+Cuatro preguntas: ¿en qué estamos trabajando? ¿Qué puede salir mal?
+
+00:05:35.508 --> 00:05:38.599
+¿Qué vamos a hacer al respecto? ¿Y hicimos un trabajo lo bastante bueno?
+
+00:05:40.699 --> 00:05:44.262
+Lo que puede salir mal empieza con el truco más viejo: hacerse pasar por otro.
+
+00:05:46.162 --> 00:05:48.040
+Las tarjas también tenían ese punto débil.
+
+00:05:49.540 --> 00:05:55.275
+En el 257 a. C., Qin tenía sitiada a Handan, la capital de Zhao.
+
+00:05:56.975 --> 00:06:01.262
+El rey de Wei envió un ejército a ayudar y luego, por miedo a Qin, le ordenó esperar.
+
+00:06:02.762 --> 00:06:08.569
+El señor de Xinling, un príncipe de Wei, quería que marchara, e hizo sacar la mitad del rey de sus aposentos.
+
+00:06:10.469 --> 00:06:14.693
+En el campamento, Jin Bi, el general, juntó las mitades, y encajaron.
+
+00:06:16.993 --> 00:06:21.914
+Aun así dudó: ¿enviaría el rey a un solo hombre en un solo carro para quitarle su ejército?
+
+00:06:24.014 --> 00:06:29.345
+Lo mataron, y el ejército marchó: Handan se salvó, por una orden que el rey nunca dio.
+
+00:06:31.645 --> 00:06:36.208
+Que encajen prueba que alguien tiene la mitad, no quién es, ni que el rey lo envió.
+
+00:06:38.308 --> 00:06:45.225
+Así que la plataforma conserva la duda de Jin Bi: ¿quién es, desde dónde, en qué dispositivo, pidiendo qué, y es eso habitual?
+
+00:06:47.325 --> 00:06:51.751
+Y como una prueba se puede robar, cada identidad recibe solo lo mínimo que necesita.
+
+00:06:53.651 --> 00:06:58.544
+Para el proceso nocturno, lo que puede salir mal está claro: una copia del token de Jun es Jun.
+
+00:07:02.844 --> 00:07:08.300
+Entonces, ¿qué vamos a hacer al respecto? El proceso nocturno recibe un nombre propio: registrar-loader.
+
+00:07:10.200 --> 00:07:12.173
+Sam es su dueño, y responde por él.
+
+00:07:13.273 --> 00:07:16.445
+Sus permisos vienen de un rol escrito para él: el rol de carga.
+
+00:07:17.545 --> 00:07:24.063
+Puede leer los archivos nocturnos del registro y escribir sus tablas, y nada en ninguna otra área.
+
+00:07:25.763 --> 00:07:30.742
+Mei, dueña de esos datos, da su acuerdo antes de que el proceso entre con su nombre nuevo.
+
+00:07:32.442 --> 00:07:34.534
+Aquí empieza casi todo el trabajo de seguridad.
+
+00:07:35.434 --> 00:07:43.970
+El Marco de Ciberseguridad del NIST lo pone primero en Proteger: todo usuario, servicio y equipo conocido, comprobado y con lo mínimo.
+
+00:07:45.870 --> 00:07:51.853
+En los Reinos Combatientes, un tigre de bronce dejaba a un comandante confiar en una orden sin confiar en quien la traía.
+
+00:07:53.753 --> 00:07:58.249
+En la plataforma, cada solicitud puede decir quién es, y recibir lo mínimo que necesita.
+
+00:07:59.949 --> 00:08:05.394
+¿Hicimos un trabajo lo bastante bueno? Todavía no: esta noche, el proceso sigue entrando con el token de Jun.

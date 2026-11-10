@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/a-hundred-records/soundtrack.mp3",
+      "size": 6857552,
+      "sha256": "781b8a97e31bf0815b22c20d02ed54cb951607f9ba2dc7a35b682ce5f9f51a38",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-a-hundred-records-ddbf7adb87ebd17ab4ef/781b8a97e31bf0815b22c20d02ed54cb951607f9ba2dc7a35b682ce5f9f51a38.mp3"
+    }
+  ]
+}

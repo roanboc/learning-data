@@ -1,0 +1,24 @@
+seeds:
+
+  - name: tuition_report
+    description: >
+      One row per faculty per census date: the tuition forgone that Finance worked out in its own
+      spreadsheet, before the mart existed. The trusted number Finance's mart reconciles against.
+    config:
+      column_types:
+        census_date: date
+        faculty_code: string
+        faculty_name: string
+        tuition_forgone: int
+        published_by: string
+        published_on: date
+      meta: {owner: Finance, domain: finance, purpose: expected}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [census_date, faculty_code]
+    columns:
+      - name: tuition_forgone
+        description: Tuition forgone, in whole dollars, as Finance worked it out.
+      - name: published_on
+        description: When Finance worked the number out.

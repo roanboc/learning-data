@@ -1,0 +1,5 @@
+staff_id,given_name,family_name,birth_date,country_of_birth,email,_valid_from,_valid_to,_is_current,_loaded_at
+E-1093,Ana,Ruiz,1975-09-08,Spain,ana.ruiz@uni.example,2024-11-01 02:00:00,,true,2026-07-20 02:00:00
+E-4417,Linh,Nguyen,2001-05-14,Vietnam,linh.nguyen@uni.example,2024-11-01 02:00:00,,true,2026-07-20 02:00:00
+E-4529,Marcus,Webb,1991-04-27,United Kingdom,marcus.webb@uni.example,2025-02-20 02:00:00,,true,2026-07-20 02:00:00
+E-4602,Ethan,Brown,1999-11-02,Australia,ethan.brown@uni.example,2025-07-11 02:00:00,,true,2026-07-20 02:00:00

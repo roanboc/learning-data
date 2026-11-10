@@ -1,0 +1,26 @@
+data_tests:
+
+  - name: keys_decided_different_stay_apart
+    description: A decision that two keys are different people holds, whatever the matching rules do.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: consistency}
+
+  - name: alumni_graduated_under_a_known_student_id
+    description: Every graduate the alumni office knows has a student ID the student system issued, in its current table or its archive.
+    config:
+      meta: {owner: Alumni office, dimension: consistency}
+
+  - name: approved_claims_have_a_pay_day
+    description: >
+      Every approved claim has a pay day in payroll's calendar, so none waits for a pay day that
+      isn't there. HR adds the next year's pay days before the last close of this one.
+    config:
+      meta: {owner: HR, dimension: completeness}
+
+  - name: names_are_allowed
+    description: >
+      Every name the student system sends for the graduation list is allowed: not empty, nothing
+      but letters, spaces, hyphens and apostrophes, and at most 30 characters. It measures validity:
+      it has no reference but its rule, so it says a name is allowed, never that it's right.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}

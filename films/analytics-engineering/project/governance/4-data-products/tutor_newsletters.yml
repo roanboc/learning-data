@@ -1,0 +1,24 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor from this file and
+# the dbt models; only a canonical table has an enterprise contract, written by data governance.
+
+name: tutor_newsletters
+title: Tutors' newsletters
+owner: HR
+domain: hr
+status: active
+version: 1.0.0
+description:
+  purpose: Who HR sends its news of tutoring work to, the casual tutors who said yes to it, and who
+    each newsletter was sent to.
+  usage: For the mailing tool, which copies the list each night, and for HR's own record of each
+    newsletter. When someone asks to come off, the privacy office's nightly job deletes their rows
+    from both, and their no on HR's record keeps them off every build after
+    (docs/databricks-governance.md, section 12).
+outputs:
+  - {model: mart_hr__tutors_mailing_list}
+  - {model: mart_hr__tutor_news_sent}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: "A request the privacy office approves leaves both by the next morning: the deletion job runs at 01:00."}
+support:
+  - {channel: hr, tool: email, url: "mailto:hr@uni.example", scope: issues}

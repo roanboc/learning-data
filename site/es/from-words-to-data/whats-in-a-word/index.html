@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Qué hay en una palabra? · De las palabras a los datos · Learning Data</title>
+<meta name="description" content="Una película sobre cómo los animales ordenan el mundo en clases, cómo las palabras apuntan a ideas, por qué las definiciones tienen bordes difusos, y por qué una organización necesita acordar sus palabras antes que cualquier sistema.">
+<meta property="og:title" content="¿Qué hay en una palabra? · De las palabras a los datos · Learning Data"><meta property="og:description" content="Cuatro oficinas, cuatro cifras, una palabra. Antes de contar algo, hay que acordar qué es."><meta property="og:image" content="https://data.learn-all.org/assets/whats-in-a-word-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/from-words-to-data/whats-in-a-word/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/from-words-to-data/whats-in-a-word/">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../../from-words-to-data/whats-in-a-word/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/whats-in-a-word-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#data-modelling">Modelado de datos</a> › <a href="../">De las palabras a los datos</a></p>
+<h1>¿Qué hay en una palabra? Cómo las palabras hacen el primer modelo de datos</h1>
+<p class="lead">Cuatro oficinas dan cuatro respuestas a una pregunta: ¿cuántas credenciales otorgamos? Para ver por qué, la película vuelve a antes de la escritura, y antes de las palabras.</p>
+</section>
+<section class="module" id="watch" data-store="ld-whats-in-a-word" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p><b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.</p></div></div>
+<div class="player" data-labs="../labs/">
+<audio id="snd" preload="metadata" src="../../../assets/whats-in-a-word/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/whats-in-a-word-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 6 min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: What's in a word"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/whats-in-a-word.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/from-words-to-data/1-whats-in-a-word/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/from-words-to-data/1-whats-in-a-word/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste por qué cuatro oficinas dieron cuatro cifras. Ahora pruébalo tú.</h3>
+<div class="next-opts"><a class="btn primary" href="../labs/#count">Desarma: Cuenta las credenciales →</a><a class="btn" href="../scenarios/#film-1">Tú decides: 1 situación</a><a class="btn" href="../older-than-the-systems/">Sigue en la serie: Más antiguo que los sistemas</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="take-it-apart" aria-labelledby="take-h">
+<div class="mhead"><div><h2 id="take-h">Desarma, y luego tú decides</h2><p>El lab de esta película, y su situación, entre los 7 labs y las 7 situaciones de la serie. Tu avance queda en este navegador.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="../labs/#count">Desarma: Cuenta las credenciales →</a><a class="btn" href="../scenarios/#film-1">Tú decides: 1 situación</a><a class="btn" href="../labs/">Todos los labs</a></p>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">De las palabras a los datos</a></h2><p>Película 1 de 7.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../../assets/older-than-the-systems-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Siguiente · Película 2 de 7 →</p>
+<h3><a href="../older-than-the-systems/">Más antiguo que los sistemas</a></h3>
+<p>Arcilla, cera, papel, una clave digital: cambiaron los materiales, no la idea. Modélala una vez, y mide cada sistema con ella.</p>
+<p class="meta">5½ min · Pausa para pensar · De las palabras a los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-older-than-the-systems" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Todas las películas de la serie">
+<li><a href="../whats-in-a-word/" aria-current="page"><span class="n">1</span>¿Qué hay en una palabra?</a></li>
+<li><a href="../older-than-the-systems/"><span class="n">2</span>Más antiguo que los sistemas</a></li>
+<li><a href="../built-to-write-built-to-read/"><span class="n">3</span>Hecho para escribir, hecho para leer</a></li>
+<li><a href="../many-ways-to-read/"><span class="n">4</span>Muchas formas de leer</a></li>
+<li><a href="../both-at-once/"><span class="n">5</span>Las dos cosas a la vez</a></li>
+<li><a href="../meaning-machines-can-read/"><span class="n">6</span>Significado que las máquinas pueden leer</a></li>
+<li><a href="../keeping-it-true/"><span class="n">7</span>Que siga siendo verdad</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../../assets/whats-in-a-word/captions.es.js"></script>
+<script src="../../../assets/whats-in-a-word/film.js"></script>
+<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
+{const N={"answers": "Cuatro respuestas", "kinds": "Clases sin palabras", "calls": "Llamadas que señalan", "words": "Lo que suman las palabras", "forms": "Una idea, muchas formas", "gavagai": "¿Qué parte quieres decir?", "edges": "Bordes difusos", "drift": "Las palabras se mueven", "paper": "Acordado en papel", "end": "Vista completa"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../../assets/whats-in-a-word/think.es.js"></script>
+<script src="../../../assets/learn/think.js"></script>
+<script src="../../../assets/learn/path.js"></script>
+<script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/seek.js"></script>
+<script src="../../../assets/ambient.js"></script>
+</body>
+</html>

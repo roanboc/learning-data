@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/too-good-to-be-true/soundtrack.mp3",
+      "size": 5198672,
+      "sha256": "dd780666bf1480fa2e9c14703d7eff66aee41a05d21d1e7c4bdf7af4f9d665a0",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/dd780666bf1480fa2e9c14703d7eff66aee41a05d21d1e7c4bdf7af4f9d665a0.mp3"
+    }
+  ]
+}

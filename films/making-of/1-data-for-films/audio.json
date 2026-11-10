@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/making-of/data-for-films.mp3",
+      "size": 4183449,
+      "sha256": "f01016f760f20c1e6648c9a9c9e493211c81e328fcabf8561b1ed4e9576b274d",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/f01016f760f20c1e6648c9a9c9e493211c81e328fcabf8561b1ed4e9576b274d.mp3"
+    }
+  ]
+}

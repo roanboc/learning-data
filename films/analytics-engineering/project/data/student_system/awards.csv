@@ -1,0 +1,10 @@
+award_code,award_name,award_type,credit_points_required,faculty_code,faculty_name,_valid_from,_valid_to,_is_current,_loaded_at
+GCDA,Graduate Certificate in Data Analytics,graduate certificate,60,EIT,Faculty of Engineering and IT,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+GCCS,Graduate Certificate in Cyber Security,graduate certificate,60,EIT,Faculty of Engineering and IT,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+MDA,Master of Data Analytics,master,120,EIT,Faculty of Engineering and IT,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+GCBA,Graduate Certificate in Business Administration,graduate certificate,60,BUS,Faculty of Business,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+MBA,Master of Business Administration,master,120,BUS,Faculty of Business,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+GCHI,Graduate Certificate in Health Information Management,graduate certificate,60,HLT,Faculty of Health,2024-11-01 02:00:00,2026-07-02 02:00:00,false,2026-07-02 02:00:00
+GCHI,Graduate Certificate in Health Informatics,graduate certificate,60,HLT,Faculty of Health,2026-07-02 02:00:00,,true,2026-07-02 02:00:00
+MPH,Master of Public Health,master,120,HLT,Faculty of Health,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+GCED,Graduate Certificate in Education (Digital Learning),graduate certificate,60,AED,Faculty of Arts and Education,2024-11-01 02:00:00,,true,2024-11-01 02:00:00

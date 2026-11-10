@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/more-than-a-junior/soundtrack.mp3",
+      "size": 6075289,
+      "sha256": "6a1a5609633858838d99693e15dff08d0f0e8520d9b43cc1c5c0180db390354c",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/6a1a5609633858838d99693e15dff08d0f0e8520d9b43cc1c5c0180db390354c.mp3"
+    }
+  ]
+}

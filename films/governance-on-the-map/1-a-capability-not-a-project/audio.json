@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/a-capability-not-a-project/soundtrack.mp3",
+      "size": 5424683,
+      "sha256": "af0452a28f3e42c6c4d79699fcd5ba6888ea4743927c50de336484614da2b47c",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/af0452a28f3e42c6c4d79699fcd5ba6888ea4743927c50de336484614da2b47c.mp3"
+    }
+  ]
+}

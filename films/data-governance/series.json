@@ -1,0 +1,41 @@
+{
+  "title": "Governance principles",
+  "title_es": "Principios de gobernanza",
+  "planned": 10,
+  "lead": "The first series on data governance. Yusuf Demir starts as the university's data governance lead, with a shelf of thirty-four policies, and the same week two reports disagree on one number. Film by film, he finds what's worth keeping, and who decides and acts.",
+  "lead_es": "La primera serie sobre gobernanza de datos. Yusuf Demir empieza como líder de gobernanza de datos de la universidad, con un estante de treinta y cuatro políticas, y esa misma semana dos informes no coinciden en un número. Película a película, encuentra lo que vale la pena mantener, y quién decide y actúa.",
+  "description": "Short films on the principles of data governance that runs where the work happens: who decides, one meaning for each word, who may see what, quality rules as checks with owners, fixes at the source, change without surprises, data products with owners, an agent that checks, and the people side.",
+  "description_es": "Películas cortas sobre los principios de la gobernanza de datos que se ejecuta donde ocurre el trabajo: quién decide, un significado para cada palabra, quién puede ver qué, reglas de calidad como controles con dueño, arreglos en el origen, cambios sin sorpresas, productos de datos con dueño, un agente que revisa, y el lado humano.",
+  "card": "Thirty-four policies on a shelf, and two numbers that disagree. A series on data governance that runs where the work happens.",
+  "card_es": "Treinta y cuatro políticas en un estante, y dos números que no coinciden. Una serie sobre gobernanza de datos que se ejecuta donde ocurre el trabajo.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: the number reported to the government",
+  "thread_h_es": "Un hilo: el número que se informa al gobierno",
+  "thread": "Every year, the university reports its awards to the government. This year, the census report says 4,812 and the draft submission says 4,867, and the same week the meaning of award changes. None of the thirty-four policies would have caught it. Film by film, Yusuf puts one piece of governance in place where the work happens, so the number can be trusted on the day it's sent, and shows what's left on the shelf.",
+  "thread_es": "Cada año, la universidad informa sus títulos al gobierno. Este año, el informe del censo dice 4,812 y el borrador de la entrega dice 4,867, y esa misma semana cambia el significado de título. Ninguna de las treinta y cuatro políticas lo habría detectado. Película a película, Yusuf pone una pieza de gobernanza donde ocurre el trabajo, para que el número sea confiable el día en que se envía, y muestra lo que queda en el estante.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    ["biz", "Leads governance", "Yusuf Demir, the university's new data governance lead, who inherits the shelf and starts by listening"],
+    ["biz", "Owns a meaning", "Mei, who owns what award means, and approves the words"],
+    ["tech", "Builds the model", "Jun, who builds what the model says, and gets the rules after the work is built"],
+    ["tech", "Runs the platform", "Sam, who could protect a column in minutes, if anyone said which"],
+    ["biz", "Reports the number", "Clara, in Planning, who reports what she's given, and needs to know which number to trust"]
+  ],
+  "people_es": [
+    ["biz", "Lidera la gobernanza", "Yusuf Demir, el nuevo líder de gobernanza de datos de la universidad, que hereda el estante y empieza escuchando"],
+    ["biz", "Es dueña de un significado", "Mei, dueña de lo que significa título, que aprueba las palabras"],
+    ["tech", "Construye el modelo", "Jun, que construye lo que dice el modelo, y recibe las reglas cuando el trabajo ya está hecho"],
+    ["tech", "Opera la plataforma", "Sam, que podría proteger una columna en minutos, si alguien le dijera cuál"],
+    ["biz", "Informa el número", "Clara, de Planificación, que informa lo que recibe, y necesita saber en qué número confiar"]
+  ],
+  "learn_p": "{Labs} hands-on labs for the whole series, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos para toda la serie, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs for the whole series. Each puts one idea from a film in your hands: sort a binder's lines, write a rule, follow a change.",
+  "labs_lead_es": "{Labs} labs interactivos para toda la serie. Cada uno pone en tus manos una idea de una película: ordena las líneas de una carpeta, escribe una regla, sigue un cambio.",
+  "quiz_lead": "{quiz} situations that the people who govern data really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes gobiernan los datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
+}

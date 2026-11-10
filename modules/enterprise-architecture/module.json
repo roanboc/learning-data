@@ -1,0 +1,19 @@
+{
+  "order": 5,
+  "id": "enterprise-architecture",
+  "items": [
+    "enterprise-architecture"
+  ],
+  "name": {
+    "en": "Enterprise architecture",
+    "es": "Arquitectura empresarial"
+  },
+  "who": {
+    "en": "For architects, and anyone new to an organisation",
+    "es": "Para arquitectos, y para quien llega nuevo a una organización"
+  },
+  "line": {
+    "en": "How an organisation works, in layers, before you ask what its data should answer.",
+    "es": "Cómo funciona una organización, por capas, antes de preguntar qué deberían responder sus datos."
+  }
+}

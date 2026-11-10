@@ -14,6 +14,10 @@ the loading pipeline's expectations and the monitors, from analyses/quality/plat
 saved as CSV. Each check is given its table's owner and domain from the source the project reads it
 as, and goes in a table of its own, under the tests', with what didn't pass under both.
 
+Under them, the hidden work, counted: the hours each year's rounds of checking the graduation list
+by hand took, from the graduations team's calendar (seeds/reference/graduations/hand_check_rounds.csv),
+so everyone can watch them fall as names are put right where they're born (The hidden factory).
+
     dbt build --profiles-dir .
     python scripts/generate/scorecard.py           # write docs/scorecard.md from the last run
     python scripts/generate/scorecard.py --check   # fail if it's out of date
@@ -32,6 +36,7 @@ MANIFEST = ROOT / "target" / "manifest.json"
 RESULTS = ROOT / "target" / "run_results.json"
 TARGET = ROOT / "docs" / "scorecard.md"
 DIMENSIONS = ["completeness", "uniqueness", "validity", "consistency", "accuracy", "timeliness"]
+ROUNDS = ROOT / "seeds" / "reference" / "graduations" / "hand_check_rounds.csv"
 
 
 def domain_of(test, nodes):
@@ -76,6 +81,21 @@ def platform_results(path, manifest):
                            "name": f"`{row['check_name']}` on `{found[0]['schema']}.{row['table_name']}`",
                            "rows": int(row["rows"]) if row["rows"] else None})
     return checks
+
+
+def hand_check_hours():
+    """Each year's rounds of checking the graduation list by hand: how many, the names checked of the
+    names on the lists, and the hours. A year runs from August, as the ceremonies' rounds do."""
+    years = defaultdict(lambda: defaultdict(int))
+    with open(ROUNDS, newline="") as f:
+        for row in csv.DictReader(f):
+            year, month = int(row["sent_on"][:4]), int(row["sent_on"][5:7])
+            start = year if month >= 8 else year - 1
+            label = f"{start}–{(start + 1) % 100:02d}"
+            years[label]["rounds"] += 1
+            for key in ("names_on_list", "names_checked", "hours"):
+                years[label][key] += int(row[key])
+    return years
 
 
 def main():
@@ -177,6 +197,18 @@ def main():
                   "| Domain | Test | Reference | Owner |", "|---|---|---|---|"]
         for domain, name, reference, owner in sorted(references):
             lines.append(f"| `{domain}` | `{name}` | {reference or '**none named**'} | {owner} |")
+    # The hidden work, counted, beside the tests: the hours spent checking the graduation list by hand.
+    years = hand_check_hours()
+    if years:
+        lines += ["", "## Hand-check hours", "",
+                  "The hidden work, counted: the hours the graduations team spent checking the graduation list's "
+                  "names by hand before each round's list went to the printer, from its calendar "
+                  "(`seeds/reference/graduations/hand_check_rounds.csv`). Beside the tests, so everyone can watch "
+                  "them fall as names are put right where they're born.", "",
+                  "| Year | Rounds | Names checked by hand | Hours |", "|---|---|---|---|"]
+        for label, year in sorted(years.items()):
+            lines.append(f"| {label} | {year['rounds']} | {year['names_checked']:,} of {year['names_on_list']:,} | "
+                         f"{year['hours']:,} |")
     text = "\n".join(lines) + "\n"
 
     if args.check:

@@ -12,6 +12,11 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Who is it, really?](https://data.learn-all.org/locks-before-the-data/who-is-it-really/) | Identity as the boundary | 8 min | 8 | 3 questions | [script](1-who-is-it-really/script.md) · [source](1-who-is-it-really/source/README.md) |
+| [No secret to lose](https://data.learn-all.org/locks-before-the-data/no-secret-to-lose/) | Signing in without secrets | 9 min | 7 | 3 questions | [script](2-no-secret-to-lose/script.md) · [source](2-no-secret-to-lose/source/README.md) |
+| [Walls, doors and keys](https://data.learn-all.org/locks-before-the-data/walls-doors-and-keys/) | Boundaries, paths and keys | 8½ min | 9 | 3 questions | [script](3-walls-doors-and-keys/script.md) · [source](3-walls-doors-and-keys/source/README.md) |
+| [Power you switch on](https://data.learn-all.org/locks-before-the-data/power-you-switch-on/) | Admin accounts | 8½ min | 8 | 3 questions | [script](4-power-you-switch-on/script.md) · [source](4-power-you-switch-on/source/README.md) |
+| [People and groups](https://data.learn-all.org/locks-before-the-data/people-and-groups/) | Sign-in, groups and admin power | 8 min | 8 | 3 questions | [script](5-people-and-groups/script.md) · [source](5-people-and-groups/source/README.md) |
+| [Workloads without secrets](https://data.learn-all.org/locks-before-the-data/workloads-without-secrets/) | Workload identity | 9 min | 9 | 3 questions | [script](6-workloads-without-secrets/script.md) · [source](6-workloads-without-secrets/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

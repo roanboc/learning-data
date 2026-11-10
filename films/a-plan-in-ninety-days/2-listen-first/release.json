@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Listen first",
+    "key": "listen-first-en",
+    "dir": "films/a-plan-in-ninety-days/2-listen-first/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/listen-first/film.js",
+    "video": "dist/listen-first.mp4",
+    "file": "listen-first.mp4",
+    "captions": [
+      [
+        "films/a-plan-in-ninety-days/2-listen-first/captions/en.srt",
+        "listen-first.en.srt"
+      ],
+      [
+        "films/a-plan-in-ninety-days/2-listen-first/captions/es.srt",
+        "listen-first.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/a-plan-in-ninety-days/2-listen-first/source",
+      "films/a-plan-in-ninety-days/shared/src/mark.js",
+      ":(exclude)films/a-plan-in-ninety-days/2-listen-first/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 313,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.5,
+      "status": "Drawn to the rule"
+    }
+  }
+]

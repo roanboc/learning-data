@@ -1000,7 +1000,7 @@ def main():
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":
             lg = "es" if rel.startswith("es/") else "en"
-            for m in re.finditer(r"\d½", src):
+            for m in re.finditer(r"\d+½", src):  # the whole number, so a film of 10½ min reads as 10½, not 0½
                 if m.group(0) not in HALVES[lg] and not (mk and m.group(0) == "4½"):
                     t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\" (this language's films are {' and '.join(sorted(HALVES[lg]))} min)")
     if allowed:
@@ -1010,6 +1010,10 @@ def main():
     docs = 0
     for md in sorted(ROOT.rglob("*.md")):
         if any(part in ("build", "dist", "models", "node_modules", ".git") for part in md.relative_to(ROOT).parts):
+            continue
+        # The films' questions and assumptions are the author's review notes, copied from each film's
+        # thread, and name films by their number in a series; nothing in them reaches the site.
+        if md.relative_to(ROOT).parts[:2] == ("docs", "assumptions"):
             continue
         docs += 1
         for i, line in enumerate(md.read_text(encoding="utf-8", errors="replace").splitlines(), 1):

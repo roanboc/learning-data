@@ -26,6 +26,22 @@ class WorkflowTests(unittest.TestCase):
                 expected = plan == "success" and site in states[:2] and film in states[:2]
                 self.assertEqual(result.returncode == 0, expected)
 
+    @unittest.skipUnless(shutil.which("bash"), "the Actions step runs in Bash")
+    def test_audio_workflow_blank_tag_publishes_every_missing_release(self):
+        workflow = (ROOT / ".github/workflows/audio.yml").read_text(encoding="utf-8")
+        tag = workflow.split("      tag:\n", 1)[1].split("      film:\n", 1)[0]
+        self.assertIn("required: false", tag)
+        script = textwrap.dedent(workflow.split("        run: |\n", 1)[1])
+        script = script.replace("python site-tools/media.py publish", "printf '%s|'")
+        cases = {("", ""): "", ("audio-v1", ""): "--tag|audio-v1|",
+                 ("", "one-en"): "--film|one-en|", ("audio-x", "one-en"): "--tag|audio-x|--film|one-en|"}
+        for (value, film), expected in cases.items():
+            with self.subTest(tag=value, film=film):
+                result = subprocess.run(["bash", "-c", script], capture_output=True, text=True,
+                                        env=dict(os.environ, TAG=value, FILM=film))
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stdout, expected or "|")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -3,6 +3,7 @@
 index --film KEY          record a film's MP3s using a content-based release tag
 index --tag audio-v1      record all MP3s for the initial shared migration
 publish --film KEY        upload/resume and verify only that film's audio
+publish                   upload every missing release, then verify every pointer's copy
 prepare --tag TAG --output DIR   stage the immutable release assets
 fetch [--pages JSON|all]   restore only missing audio (all by default)
 check                     validate manifests and any local copies

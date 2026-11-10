@@ -351,6 +351,7 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 
 - [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
 - [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
+- [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
 ### Working with people
 

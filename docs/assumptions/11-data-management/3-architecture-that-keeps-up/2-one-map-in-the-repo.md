@@ -23,6 +23,6 @@ Data management film 14, film 2 of *Architecture that keeps up*. Made on 10 Nove
 - **Sound:** a singing aluminium rod as the lead, a twanged ruler as partner (one per merged change), reserved in `palettes.md`.
 
 ## Release
-- The MP3 is in Git beside `audio.json` (release tag `audio-one-map-30d938f9b456061a8dbb`). Copying it to that release is left for you, as for the other films.
+- The MP3 is in Git beside `audio.json` (release tag `audio-one-map-30d938f9b456061a8dbb`). The *Store audio outside Git* workflow publishes it to that release when the film reaches main (since PR #243), so nothing is left for you.
 - No render or review page was made in the session.
-- It merges after film 1 of the series (*Services with customers*) and the module kit (PR #148).
+- It merges after film 1 of the series (*Services with customers*, PR #240); the module kit (PR #148) is already on main.

@@ -1,0 +1,184 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:05.424
+Great Britain, in the late 1990s.
+
+00:00:07.324 --> 00:00:12.757
+Ordnance Survey, the national mapping agency, keeps the most detailed maps of the country.
+
+00:00:14.257 --> 00:00:19.418
+Its paper maps have been turned into digital ones, and cut into tiles, square by square.
+
+00:00:21.118 --> 00:00:27.589
+But on a tile, a building is only lines on a picture. It has no name, no number, nothing to point to.
+
+00:00:29.489 --> 00:00:36.434
+Councils, water companies and the emergency services each keep their own records of the same buildings and roads.
+
+00:00:37.934 --> 00:00:40.865
+Each matches its records to the lines in its own way.
+
+00:00:42.365 --> 00:00:47.171
+So one school can be one thing in a council's records, and another in a water company's.
+
+00:00:48.671 --> 00:00:51.716
+Nobody can be sure that two records mean the same place.
+
+00:00:53.616 --> 00:00:58.014
+And when a new road is built, each of them must find it, and change it, on its own.
+
+00:00:59.914 --> 00:01:01.354
+Something has to change.
+
+00:01:03.254 --> 00:01:11.968
+In 2001, Ordnance Survey launches OS MasterMap: one seamless database of the whole country, instead of tiles.
+
+00:01:13.868 --> 00:01:21.783
+Every feature in it, about 440 million at first, gets its own identifier, a TOID, with a version and a date.
+
+00:01:23.683 --> 00:01:29.770
+Surveyors, on the ground and from the air, keep it up to date, and users receive only what has changed.
+
+00:01:31.470 --> 00:01:38.705
+Now a council and a water company can point to the same building by its identifier, with no doubt which one they mean.
+
+00:01:40.605 --> 00:01:45.731
+Each change carries its version and its date, so anyone can see what changed, and when.
+
+00:01:47.231 --> 00:01:51.072
+By 2016, it holds over 500 million features.
+
+00:01:52.772 --> 00:02:00.014
+A data team's architecture has the same problem: one picture of its platform, kept in copies that drift apart.
+
+00:02:01.714 --> 00:02:05.481
+Keep one source, date every change, and make every copy from it.
+
+00:02:13.581 --> 00:02:19.220
+These films are the product owner's side of a data manager's job, borrowed from architecture.
+
+00:02:20.920 --> 00:02:29.110
+A university, in the spring of 2027. Helena Novak, the data manager, has a target picture for the data platform.
+
+00:02:30.810 --> 00:02:38.095
+It exists three times: Noor's map in the architecture tool, a page on the wiki, and the slides for the data council.
+
+00:02:39.995 --> 00:02:45.261
+Each was right the day it was made. Each has been changed by hand, on its own, since.
+
+00:02:46.961 --> 00:02:52.319
+On Tuesday 25 May, Helena asks the council to retire the old warehouse.
+
+00:02:54.019 --> 00:02:57.680
+The council's slide still shows the old warehouse in the target.
+
+00:02:59.580 --> 00:03:03.058
+Which picture is true? Nobody in the room can say for sure.
+
+00:03:04.958 --> 00:03:10.479
+Project managers have the same trouble: who does what, when and how, sits in a deck from March.
+
+00:03:12.179 --> 00:03:18.012
+Noor, the data architect, says what Ordnance Survey found: copies drift. Keep one source.
+
+00:03:20.712 --> 00:03:27.360
+In June, the map's source moves into the data team's repository, as files, beside the platform's code.
+
+00:03:29.060 --> 00:03:35.586
+Noor writes it in ArchiMate's exchange format, a standard language for architecture, from The Open Group.
+
+00:03:37.286 --> 00:03:44.058
+She adds only what is the team's own, such as each product's owner. Standards first; then what's relevant to you.
+
+00:03:45.958 --> 00:03:54.215
+The diagrams are kept as text too, in Mermaid, or as draw.io files, so a change to a picture is a change you can read.
+
+00:03:56.115 --> 00:04:03.353
+Each night, everything else is made from it: the architecture tool's views, the wiki, and the picture on the monthly page.
+
+00:04:05.053 --> 00:04:08.516
+And the project managers' page of who does what, when and how.
+
+00:04:10.216 --> 00:04:17.528
+Of the team's seven places for its work, from Where each piece lives, the map's source now lives in one: the repository.
+
+00:04:19.228 --> 00:04:23.542
+The wiki and the slides can't disagree with the map any more. They're made from it.
+
+00:04:26.242 --> 00:04:32.280
+Every change to the map is a pull request, with its reason, reviewed by someone other than its author.
+
+00:04:33.980 --> 00:04:40.823
+Noor, Helena and the principal engineers, Sam and Jun, review. Data partners in the faculties propose.
+
+00:04:42.523 --> 00:04:46.508
+In July, Sam's team adds the rooms' sensor feed to the platform.
+
+00:04:48.008 --> 00:04:53.880
+The same pull request adds the feed to the map's current state. The code and the map change together.
+
+00:04:55.780 --> 00:04:59.029
+And a check fails if a new source has no place on the map.
+
+00:05:00.729 --> 00:05:05.326
+Nobody waits for a funded project to update the current state and the target.
+
+00:05:06.826 --> 00:05:10.436
+Wait for that, and the team ends up building tomorrow's legacy.
+
+00:05:12.336 --> 00:05:20.499
+A big choice gets a short decision record beside it, as Michael Nygard proposed in 2011: what was decided, and why.
+
+00:05:23.199 --> 00:05:29.764
+In August, Helena asks the team's agent to draft the change that retires the old warehouse, from her notes.
+
+00:05:31.464 --> 00:05:35.898
+In minutes, it writes the new target state, and draws its diagram, as text.
+
+00:05:37.598 --> 00:05:39.611
+Noor reviews it, line by line.
+
+00:05:41.111 --> 00:05:46.990
+One relationship is wrong: payroll's reports still read from the old warehouse, after it's gone.
+
+00:05:48.890 --> 00:05:51.415
+She asks for the fix, checks it, and approves.
+
+00:05:53.115 --> 00:05:58.139
+The agent films have the same rule: an agent proposes, and a person decides.
+
+00:06:00.839 --> 00:06:06.782
+The map isn't one person's job. It starts with Helena: she opened its first pull request herself.
+
+00:06:08.482 --> 00:06:13.261
+The principal engineers keep it with her, and anyone on the team can propose a change.
+
+00:06:14.961 --> 00:06:24.037
+By Friday 17 December, the old warehouse is retired, and 63 changes of the year are in the map's history, each with its reason.
+
+00:06:25.937 --> 00:06:30.810
+At its reviews, the council reads that history, not a slide made the night before.
+
+00:06:33.510 --> 00:06:41.683
+Ordnance Survey stopped keeping its map in pieces: one database, every feature with its identifier, every change with its date.
+
+00:06:43.583 --> 00:06:49.324
+Helena's team did the same with its architecture: one map, and every other picture made from it.
+
+00:06:51.224 --> 00:06:56.558
+On Monday, put your architecture in a repository, as files, in a standard language.
+
+00:06:58.058 --> 00:07:03.850
+Review every change like code, and update the current and target state in the change that moves them.
+
+00:07:05.350 --> 00:07:08.716
+Make the wiki, the slides and the who-does-what pages from it.
+
+00:07:10.216 --> 00:07:14.478
+Let agents draft the structure and the diagrams, and review what they draft.
+
+00:07:15.978 --> 00:07:19.410
+And make architecture everyone's job, starting with yours.
+
+00:07:21.110 --> 00:07:26.116
+One map in the repository; every change updates it; everything else comes from it.

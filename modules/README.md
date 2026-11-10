@@ -277,6 +277,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
 - [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 - [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
+- [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
 
 ### Only what you may see
 

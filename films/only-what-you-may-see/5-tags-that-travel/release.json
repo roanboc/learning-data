@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Tags that travel",
+    "key": "tags-that-travel-en",
+    "dir": "films/only-what-you-may-see/5-tags-that-travel/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/tags-that-travel/film.js",
+    "video": "dist/tags-that-travel.mp4",
+    "file": "tags-that-travel.mp4",
+    "captions": [
+      [
+        "films/only-what-you-may-see/5-tags-that-travel/captions/en.srt",
+        "tags-that-travel.en.srt"
+      ],
+      [
+        "films/only-what-you-may-see/5-tags-that-travel/captions/es.srt",
+        "tags-that-travel.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/only-what-you-may-see/5-tags-that-travel/source",
+      ":(exclude)films/only-what-you-may-see/5-tags-that-travel/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared/src/kit.js",
+      "films/what-an-agent-is/shared/src/people.js",
+      "films/what-an-agent-is/shared/tools/edges.py",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 302,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.2,
+      "status": "Drawn to the rule"
+    }
+  }
+]

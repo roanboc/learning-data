@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.113
+The early 1990s.
+
+00:00:04.613 --> 00:00:08.492
+Tropical forests are being cut much faster than ten years before.
+
+00:00:09.792 --> 00:00:15.420
+In Europe and North America, people campaign against tropical wood, and refuse to buy it.
+
+00:00:16.720 --> 00:00:19.706
+But no buyer can tell where a plank was grown, or how.
+
+00:00:20.806 --> 00:00:24.694
+Wood from a forest cut bare looks just like wood from one cared for.
+
+00:00:25.994 --> 00:00:32.136
+So the cutting goes on: species disappear, and the communities who live from those forests are hit hard.
+
+00:00:33.836 --> 00:00:39.251
+In 1992, at the Earth Summit in Rio, governments fail to agree to stop it.
+
+00:00:40.551 --> 00:00:41.991
+Something has to change.
+
+00:00:44.091 --> 00:00:53.864
+In 1993, 130 people from 26 countries meet in Toronto: forest and human-rights groups, timber traders, foresters.
+
+00:00:55.164 --> 00:00:57.148
+They found the Forest Stewardship Council.
+
+00:00:58.448 --> 00:01:02.201
+An independent auditor certifies a forest against its rules.
+
+00:01:03.501 --> 00:01:09.991
+Then every company that buys, saws, makes or sells the wood is certified, and passes the claim on.
+
+00:01:11.891 --> 00:01:16.626
+A product carries the label only if every company along the chain is certified.
+
+00:01:17.926 --> 00:01:22.946
+Where certified wood is mixed with other wood, a rule set in advance says how it's labelled.
+
+00:01:24.446 --> 00:01:34.144
+By the end of 2025, over 171 million hectares of forest are certified, and over 68,000 certificates cover the chain.
+
+00:01:35.644 --> 00:01:38.795
+And a buyer can tell, from one label, where the wood began.
+
+00:01:40.695 --> 00:01:45.873
+A university's data travels too, from the learner table into every table made from it.
+
+00:01:47.173 --> 00:01:51.518
+If its classes don't go with it, a name hidden at the source shows on a copy.
+
+00:01:53.018 --> 00:01:57.071
+If they do, every copy says what it holds, and is protected for it.
+
+00:02:04.171 --> 00:02:06.172
+Tuesday, the thirteenth of October.
+
+00:02:07.272 --> 00:02:13.201
+In Know what you hold, Mei named a class for every column of the learner table, and a level for the table.
+
+00:02:14.301 --> 00:02:16.194
+Now the platform has to read them.
+
+00:02:17.294 --> 00:02:22.573
+Sam Okafor, who runs the platform, makes each one a governed tag in Databricks.
+
+00:02:23.873 --> 00:02:28.880
+Personal data takes four values: special, direct, pseudonymous and indirect.
+
+00:02:30.180 --> 00:02:31.703
+None is simply no tag.
+
+00:02:33.003 --> 00:02:37.060
+Level takes four more, from public to restricted, on tables only.
+
+00:02:38.360 --> 00:02:43.423
+And faculty, with no values, marks the column that holds each row's faculty.
+
+00:02:44.723 --> 00:02:49.333
+Governed means only those values, set only by those allowed to assign them.
+
+00:02:50.633 --> 00:02:56.609
+Here, that's the registrar's own loader, from the project's files, so nobody sets a class by hand.
+
+00:03:00.109 --> 00:03:03.583
+Before Mei confirms them, the platform takes a look of its own.
+
+00:03:04.683 --> 00:03:10.552
+Data classification scans the registrar's catalog, and proposes what it recognises.
+
+00:03:11.852 --> 00:03:15.881
+In the learner table, it finds a name, an email and a date of birth.
+
+00:03:17.181 --> 00:03:20.336
+Mei confirms them: direct, direct and indirect.
+
+00:03:21.836 --> 00:03:26.540
+It proposes nothing for the student number, a format of the university's own.
+
+00:03:27.840 --> 00:03:33.016
+And nothing for exam support, in the support table: extra time names no illness.
+
+00:03:34.316 --> 00:03:38.807
+Only Mei knows it's given for a disability, so she names it special herself.
+
+00:03:40.307 --> 00:03:41.544
+The scan proposes.
+
+00:03:42.644 --> 00:03:45.664
+The owner decides, and adds what no scan can see.
+
+00:03:49.164 --> 00:03:52.029
+Her word goes into the project, in dbt.
+
+00:03:53.129 --> 00:03:57.553
+Jun Park writes each class beside its column, in the learner table's file.
+
+00:03:58.853 --> 00:04:01.452
+Mei approves the change, as the file's owner.
+
+00:04:02.752 --> 00:04:07.089
+After each build, dbt sets every class as a tag on its column.
+
+00:04:08.389 --> 00:04:12.357
+Then the faculty tag, and last, the table's level: confidential.
+
+00:04:13.657 --> 00:04:17.506
+A column marked none gets no tag, and an old one is taken off.
+
+00:04:18.806 --> 00:04:21.869
+Change the file, and the next build changes the tags.
+
+00:04:23.169 --> 00:04:27.628
+This is where the tags start: on the learner table, the first that people read.
+
+00:04:31.128 --> 00:04:35.813
+Then Sam turns on tag propagation, for the classes and the faculty tag.
+
+00:04:37.313 --> 00:04:44.293
+Now each tag follows its column through lineage: the platform's record of what each query read, and what it made.
+
+00:04:45.593 --> 00:04:52.798
+That afternoon, the registrar's loader makes the study's copy: Health's 2,614 learners.
+
+00:04:54.098 --> 00:05:00.905
+Within minutes, its tags arrive: the learner code pseudonymous, the year of birth indirect, as their sources are.
+
+00:05:02.405 --> 00:05:04.075
+Course and results bring none.
+
+00:05:05.175 --> 00:05:06.719
+Nobody tags the copy.
+
+00:05:08.219 --> 00:05:10.995
+Until its tags are there, a policy can't see them.
+
+00:05:12.095 --> 00:05:16.750
+So Mei checks the classes are there, and gives the copy its level: confidential.
+
+00:05:18.050 --> 00:05:21.923
+The study is given its space only the next day, with the copy in it.
+
+00:05:23.423 --> 00:05:27.207
+And every table Anil makes from it will carry the same classes.
+
+00:05:30.707 --> 00:05:32.967
+Propagation never lowers a class.
+
+00:05:34.267 --> 00:05:37.923
+Suppose the copy had made the code itself, from the student number.
+
+00:05:39.223 --> 00:05:42.278
+Lineage would bring the student number's class: direct.
+
+00:05:43.578 --> 00:05:45.329
+Mei's file says pseudonymous.
+
+00:05:46.429 --> 00:05:49.772
+One column, two values for one tag: a conflict.
+
+00:05:51.272 --> 00:05:57.100
+The platform can't choose, so it applies the value Sam set in advance: special, the strictest.
+
+00:05:58.600 --> 00:06:02.307
+Like the rule for mixed wood, it's set before anything is mixed.
+
+00:06:03.807 --> 00:06:08.762
+Nothing shows that shouldn't, but the column now says the wrong thing, and passes it on.
+
+00:06:10.262 --> 00:06:14.300
+So a value that says less is made once, at the source, by its owner.
+
+00:06:15.600 --> 00:06:21.103
+The learner table holds the code beside the student number, and every table after takes the code.
+
+00:06:22.603 --> 00:06:24.292
+And a level doesn't travel at all.
+
+00:06:25.392 --> 00:06:30.818
+Join a public table to a confidential one, and every table made from them would be a conflict.
+
+00:06:32.118 --> 00:06:34.340
+Each table's level stays its owner's call.
+
+00:06:37.840 --> 00:06:40.415
+A tag travels only inside the platform.
+
+00:06:41.515 --> 00:06:45.772
+A file downloaded, or a copy in another tool, carries no tag at all.
+
+00:06:47.072 --> 00:06:50.221
+That's why the studies' workspace has downloads switched off.
+
+00:06:51.521 --> 00:06:58.680
+Inside, tags travel only where lineage can follow: into tables and views the platform's serverless compute makes.
+
+00:06:59.980 --> 00:07:05.236
+Anil's totals by course are counted from courses and results, which carry no class.
+
+00:07:06.336 --> 00:07:07.934
+So nothing travels into them.
+
+00:07:09.034 --> 00:07:11.967
+Mei checks them, and gives them their level: public.
+
+00:07:15.467 --> 00:07:21.661
+A label on a chair can be trusted because every company passed the claim on, by rules agreed before.
+
+00:07:23.161 --> 00:07:25.381
+Mei named each class once, at the source.
+
+00:07:26.681 --> 00:07:33.119
+The platform carries it into every table made from it, and where two meet, a rule set in advance decides.
+
+00:07:34.619 --> 00:07:38.082
+Next, one policy reads those tags, wherever they land.
+
+00:07:39.382 --> 00:07:40.744
+Tag once at the source.
+
+00:07:41.844 --> 00:07:43.411
+The tag follows the data.

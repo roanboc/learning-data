@@ -10,7 +10,7 @@
 
     Tables only: staging and intermediate are views in private schemas nobody is granted. DuckDB
     has no tags or masks, so there both macros do nothing, as DEC-PRJ-09 leaves keys out there.
-    The class is written once, in the model's YAML; nothing here repeats it.
+    The class is written once, in the model's YAML; nothing here repeats it. none is no tag (DEC-PRJ-17).
 -#}
 
 {#- on-run-start: the mask, a function in the target's schema. -#}
@@ -35,7 +35,7 @@
     {%- for name, column in model['columns'].items() -%}
         {%- set class = (column.get('meta') or {}).get('personal_data')
                         or ((column.get('config') or {}).get('meta') or {}).get('personal_data') -%}
-        {%- if class -%}
+        {%- if class and class != 'none' -%}
             {%- do statements.append("alter table " ~ this ~ " alter column " ~ name
                                      ~ " set tags ('personal_data' = '" ~ class ~ "')") -%}
         {%- endif -%}
@@ -59,7 +59,7 @@
     Or one policy instead of a mask per column: Unity Catalog's attribute-based access control.
     It masks every column tagged personal_data = direct, in every schema of the catalog, for
     everyone but the readers, including tables built after it. It needs the governed tag
-    personal_data (allowed values direct, pseudonymous, none), created once by an account admin
+    personal_data (values special, direct, pseudonymous, indirect), created once by an account admin
     (docs/databricks-governance.md). Build with the var personal_data_policy, so the post-hook
     tags and leaves masking to the policy, then run this once:
 
@@ -78,4 +78,72 @@
         ~ " to `account users` except `" ~ readers ~ "`"
         ~ " for tables match columns has_tag_value('personal_data', 'direct') as personal on column personal") -%}
     {%- do log("mask_direct_personal_data covers " ~ target.catalog ~ " for everyone but " ~ readers, info=True) -%}
+{%- endmacro %}
+
+{#-
+    post-hook, last (DEC-PRJ-17): what the platform needs once the classes are set. A column the
+    YAML marks none carries no tag, so a personal_data tag left on it from an older build is taken
+    off: a none tag would meet a real class in any column made from both, a conflict every time.
+    Then the key-only tag faculty on the column that holds each row's faculty (meta.faculty), for a
+    row filter by faculty. Last, the table's level, its model's meta.level (public, internal,
+    confidential or restricted), set only once its columns' classes are there, and never under its
+    two floors: a table with a column that points to a person (direct, pseudonymous or indirect) is
+    never public, and one with anything special is restricted. Tag propagation never carries a
+    level: two tables of different levels joined would be a conflict every time, so each table's
+    level is its owner's call (docs/databricks-governance.md, section 1).
+
+    It reads which columns carry the tags already, as apply_critical_data does: SET TAG fails on a
+    tag already there. Tables only; DuckDB has no tags, so there it does nothing.
+-#}
+{% macro apply_faculty_and_level() -%}
+    {%- if target.type != 'databricks' or not execute
+          or config.get('materialized') not in ['table', 'incremental'] -%}
+        {{ return('') }}
+    {%- endif -%}
+    {%- set classes = {} -%}
+    {%- set faculty = [] -%}
+    {%- for name, column in model['columns'].items() -%}
+        {%- set meta = (column.get('meta') or {}) -%}
+        {%- set config_meta = ((column.get('config') or {}).get('meta') or {}) -%}
+        {%- do classes.update({name | lower: meta.get('personal_data') or config_meta.get('personal_data')}) -%}
+        {%- if meta.get('faculty') or config_meta.get('faculty') -%}
+            {%- do faculty.append(name | lower) -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {%- set tagged = run_query("select lower(column_name), tag_name from `" ~ this.database ~ "`.information_schema.column_tags"
+        ~ " where schema_name = '" ~ this.schema ~ "' and table_name = '" ~ this.identifier ~ "'"
+        ~ " and tag_name in ('personal_data', 'faculty')") -%}
+    {%- set has_class = [] -%}
+    {%- set has_faculty = [] -%}
+    {%- for row in tagged.rows -%}
+        {%- if row[1] == 'faculty' -%}
+            {%- do has_faculty.append(row[0]) -%}
+        {%- else -%}
+            {%- do has_class.append(row[0]) -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {#- One statement at a time: Databricks runs one per call. -#}
+    {%- for name in has_class if classes.get(name) == 'none' -%}
+        {%- do run_query("unset tag on column " ~ this ~ "." ~ name ~ " personal_data") -%}
+    {%- endfor -%}
+    {%- for name in faculty if name not in has_faculty -%}
+        {%- do run_query("set tag on column " ~ this ~ "." ~ name ~ " faculty") -%}
+    {%- endfor -%}
+    {%- for name in has_faculty if name not in faculty -%}
+        {%- do run_query("unset tag on column " ~ this ~ "." ~ name ~ " faculty") -%}
+    {%- endfor -%}
+    {%- set level = (model.get('meta') or {}).get('level')
+                    or ((model.get('config') or {}).get('meta') or {}).get('level') -%}
+    {%- if level -%}
+        {%- set levels = ['public', 'internal', 'confidential', 'restricted'] -%}
+        {%- set held = classes.values() | list -%}
+        {%- set floor = 'restricted' if 'special' in held
+                        else 'internal' if ('direct' in held or 'pseudonymous' in held or 'indirect' in held)
+                        else 'public' -%}
+        {%- if level not in levels or levels.index(level) < levels.index(floor) -%}
+            {{ exceptions.raise_compiler_error(model['name'] ~ " has the level " ~ level ~ ", but a table "
+               ~ "with these classes is " ~ floor ~ " or above (DEC-PRJ-17)") }}
+        {%- endif -%}
+        {%- do run_query("alter table " ~ this ~ " set tags ('level' = '" ~ level ~ "')") -%}
+    {%- endif -%}
 {%- endmacro %}

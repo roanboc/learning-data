@@ -1,0 +1,90 @@
+{
+  "kicker": "Tag propagation",
+  "kicker_es": "Propagación de etiquetas",
+  "title_es": "Etiquetas que viajan",
+  "h1": "Tags that travel: a class set once, carried everywhere",
+  "h1_es": "Etiquetas que viajan: una clase puesta una vez, en todas partes",
+  "lead": "Mei has named a class for every column of the learner table. The platform has to read them, and every table made from it has to carry them, or a copy shows what its source hides. How do the classes become tags in Databricks and dbt, and follow the data on their own?",
+  "lead_es": "Mei nombró una clase para cada columna de la tabla de estudiantes. La plataforma tiene que leerlas, y cada tabla hecha a partir de ella tiene que llevarlas, o una copia muestra lo que su origen oculta. ¿Cómo se vuelven etiquetas en Databricks y dbt, y siguen a los datos por sí solas?",
+  "description": "A film about classes that go with the data: each class from Know what you hold made a governed tag in Databricks, with only its values, set only by the registrar's loader; a scan that proposes what it recognises, and the owner who decides and adds what no scan can see; each class written once beside its column in the project's dbt files, and set as a tag after every build; tag propagation carrying each class through lineage into every table made from it, with nobody tagging it; a value set in advance where two values meet; a level that never travels; and what no tag can follow, a file downloaded.",
+  "description_es": "Una película sobre clases que van con los datos: cada clase de Conoce lo que guardas hecha una etiqueta gobernada en Databricks, solo con sus valores y puesta solo por el cargador del registro; un escaneo que propone lo que reconoce, y la dueña que decide y agrega lo que ningún escaneo ve; cada clase escrita una vez junto a su columna en los archivos dbt del proyecto, y puesta como etiqueta después de cada build; la propagación de etiquetas, que lleva cada clase por el linaje a cada tabla hecha a partir de ella, sin que nadie la etiquete; un valor fijado antes donde se encuentran dos valores; un nivel que nunca viaja; y lo que ninguna etiqueta puede seguir, un archivo descargado.",
+  "card": "Governed tags set once from the owner's file, carried by lineage into every table, and a rule set in advance where two meet.",
+  "card_es": "Etiquetas gobernadas, puestas una vez desde el archivo de la dueña, llevadas por el linaje a cada tabla, y una regla fijada antes donde dos se encuentran.",
+  "chapters_es": {
+    "forest": "Del bosque a la tienda",
+    "governed": "Etiquetas gobernadas",
+    "found": "Encontrada, luego confirmada",
+    "written": "Una vez, en el proyecto",
+    "follows": "La clase sigue",
+    "conflict": "Dos valores para una etiqueta",
+    "stays": "Lo que no viaja",
+    "chain": "Cada eslabón de la cadena"
+  },
+  "past": [
+    "The Forest Stewardship Council, 1993: a claim passed on along the chain",
+    "A forest certified once, and every company along the chain certified and passing the claim on, so a buyer can trust one label: so a class is set once at the source, and the tag follows the data."
+  ],
+  "past_es": [
+    "El Consejo de Administración Forestal, 1993: una declaración que pasa de eslabón en eslabón",
+    "Un bosque certificado una vez, y cada empresa de la cadena certificada y pasando la declaración, así un comprador puede confiar en una etiqueta: por eso una clase se pone una vez en el origen, y la etiqueta sigue a los datos."
+  ],
+  "next_h": "You've seen each class become a governed tag, set once from the owner's file and carried by lineage into every table made from it. Next: one policy for many tables, which hides each class wherever its tag lands.",
+  "next_h_es": "Viste cómo cada clase se vuelve una etiqueta gobernada, puesta una vez desde el archivo de su dueña y llevada por el linaje a cada tabla hecha a partir de ella. Sigue: una política para muchas tablas, que oculta cada clase dondequiera que llegue su etiqueta.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee la guía por tu cuenta",
+    "p": "The film shows Azure Databricks, dbt and GitHub as their docs showed them in November 2026. These are the pages it follows.",
+    "p_es": "La película muestra Azure Databricks, dbt y GitHub como los mostraba su documentación en noviembre de 2026. Estas son las páginas que sigue.",
+    "links": [
+      {
+        "title": "Governed tags",
+        "title_es": "Etiquetas gobernadas",
+        "line": "Azure Databricks: a tag with its allowed values and a policy for who may assign it, so only those values are set, only by those allowed.",
+        "line_es": "Azure Databricks: una etiqueta con sus valores permitidos y una política de quién puede asignarla, así solo se ponen esos valores, y solo quien puede.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/admin/governed-tags/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/admin/governed-tags/"
+      },
+      {
+        "title": "Tag propagation",
+        "title_es": "Propagación de etiquetas",
+        "line": "Azure Databricks: a governed tag carried through lineage to the tables and views made from a tagged column, and the default value applied where two values meet.",
+        "line_es": "Azure Databricks: una etiqueta gobernada llevada por el linaje a las tablas y vistas hechas de una columna etiquetada, y el valor por defecto donde se encuentran dos.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/admin/governed-tags/tag-propagation",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/admin/governed-tags/tag-propagation"
+      },
+      {
+        "title": "Data Classification",
+        "title_es": "Clasificación de datos",
+        "line": "Azure Databricks: a scan of chosen catalogs that proposes classes for the columns it recognises, such as a name or an email, for their owners to review.",
+        "line_es": "Azure Databricks: un escaneo de los catálogos elegidos que propone clases para las columnas que reconoce, como un nombre o un correo, para que sus dueños las revisen.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-classification",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/data-classification"
+      },
+      {
+        "title": "Lineage in Unity Catalog",
+        "title_es": "Linaje en Unity Catalog",
+        "line": "Azure Databricks: the platform's record of what each query read and what it made, down to the column, which tag propagation follows.",
+        "line_es": "Azure Databricks: el registro de la plataforma de lo que leyó cada consulta y lo que hizo, hasta la columna, que sigue la propagación de etiquetas.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-lineage",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/data-lineage"
+      },
+      {
+        "title": "meta",
+        "title_es": "meta (en inglés)",
+        "line": "dbt: the meta config, where the project writes each column's class beside it, in the model's YAML file.",
+        "line_es": "dbt: la configuración meta, donde el proyecto escribe la clase de cada columna junto a ella, en el archivo YAML del modelo.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/meta",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/meta"
+      },
+      {
+        "title": "pre-hook & post-hook",
+        "title_es": "pre-hook y post-hook (en inglés)",
+        "line": "dbt: SQL run before or after a model builds, as the project's hooks set each class, the faculty tag and the level after every build.",
+        "line_es": "dbt: SQL que corre antes o después de construir un modelo, como los hooks del proyecto que ponen cada clase, la etiqueta de facultad y el nivel.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/pre-hook-post-hook",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/pre-hook-post-hook"
+      }
+    ]
+  },
+  "draft": true
+}

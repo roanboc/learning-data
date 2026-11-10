@@ -1,0 +1,21 @@
+{
+  "order": 11,
+  "id": "data-management",
+  "items": [
+    "a-plan-in-ninety-days",
+    "making-the-case",
+    "small-steps-measured"
+  ],
+  "name": {
+    "en": "Data management",
+    "es": "Gestión de datos"
+  },
+  "who": {
+    "en": "For data managers, and anyone who leads data work across an organisation",
+    "es": "Para gestores de datos, y para quien lidera el trabajo con datos en toda una organización"
+  },
+  "line": {
+    "en": "A data manager's whole job: every area in one picture, a plan in stages, a case and its risks, everyone at the table, and small steps, measured.",
+    "es": "Todo el trabajo de una gestora de datos: todas las áreas en una imagen, un plan por etapas, un caso y sus riesgos, todos en la mesa, y pasos pequeños, medidos."
+  }
+}

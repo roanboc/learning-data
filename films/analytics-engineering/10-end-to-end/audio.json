@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/end-to-end/soundtrack.mp3",
+      "size": 7040774,
+      "sha256": "4a86be4a73635a300d69081c99cc603514a24454ac94b93a54a32eaa01f91828",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/4a86be4a73635a300d69081c99cc603514a24454ac94b93a54a32eaa01f91828.mp3"
+    }
+  ]
+}

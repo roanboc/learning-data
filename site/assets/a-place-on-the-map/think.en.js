@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for A place on the map, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (map, gate, stop), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  map:{q:"The planning contributor does three of the seven steps. Why isn't it also given \"approve the change\", when it drafted the change and knows it best?",
+    opts:[{t:"It hasn't passed its gate for approving yet; once it reaches stage five, that step can be added to its role.",near:true},{t:"Whoever drafts a change never approves or releases it, so approving is another role's step, kept by a person.",ok:true},{t:"Approving takes longer than drafting, so the map gives that step to someone with more time in their week."}],
+    why:"On the map, each step is assigned to a role, whoever fills it. The planning contributor drafts the change, builds it in development and opens a pull request; Jun reviews the code, Clara approves the change, and Noor releases it. So whoever drafts a change never approves or releases it: separation of duties, written where everyone can see it. No stage changes that: agents never approve. Where you work, who drafts a change and approves it too?"},
+  gate:{q:"At its gate, the planning agent matched 37 of 40 tickets, asked on 3, and was confidently wrong on none. Which result mattered most before it worked alone?",
+    opts:[{t:"The three it asked on: asking shows it read each ticket slowly, line by line, before it drafted a change."},{t:"The 37 it matched, one more than the 36 the bar asked for, so it passed with a ticket to spare.",near:true},{t:"None confidently wrong: an agent that says when it isn't sure brings its doubts to a person.",ok:true}],
+    why:"Matching at least 36 was the bar Clara and Jun set first, and it was needed, but not enough on its own. An agent that is wrong without saying so can't be left alone: nobody would know which of its drafts to check. Because it said when it wasn't sure, the three it couldn't settle came to a person as questions. So Clara agreed stage four for Planning's tickets, and Noor wrote it on its assignment. What would your bar be, and who would set it first?"},
+  stop:{q:"Late one night, Sam sees the planning agent changing things it shouldn't. Clara is asleep. What may Sam do?",
+    opts:[{t:"Stop it at once, without asking first: Sam may stop it at any hour, and so may Clara.",ok:true},{t:"Wake Clara and wait, since only its owner may sign for it, and stopping it is signing for it.",near:true},{t:"Ask the governance review agent to stop it, since agents keep watch on each other's work at night."}],
+    why:"Only Clara may sign for the planning agent, but stopping it isn't signing for it. Clara may stop it, and so may Sam, at any hour, without asking first; anyone who sees it go wrong may ask them to, as anyone on a production line may pull the cord. No agent stops another: people do. Who may stop an agent is written down before it works alone, so nobody has to wonder at night. Where you work, who could stop an agent at two in the morning?"}
+  }}};

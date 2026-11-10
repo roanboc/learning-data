@@ -16,6 +16,7 @@ A data manager's first ninety days. Helena Novak starts as the university's data
 ## The look and the sound
 
 - **One look with the leading data people module**, assumed on 5 November 2026 for the author to review (the module's *Decided* table, in [proposal.md](proposal.md)). That module's kit, `films/the-new-skills/shared/`, draws both modules' films; every film here bundles it as it is.
+- **One mark for the module**, on every film's title and end: five layers drawing themselves, and a dot above them for the people they serve. Every film of the module, in each of its four series, draws it from [`shared/src/mark.js`](shared/src/mark.js).
 - **Its own sound in each film.** A lead instrument the site doesn't have, reserved for each film. Music under the opening story, then only now and then; nothing loops, trembles or pulses, except an urgent pulse where a story turns to an error or a rush.
 
 ## How the films are made

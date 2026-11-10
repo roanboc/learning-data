@@ -16,13 +16,15 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
-| `student` | 25/25 | 18/18 | 8/8 | 18/18 |  | 69/69 |
+| `student` | 25/25 | 18/18 | 8/8 | 18/18 | 3/3 (2 warn) | 72/72 (2 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
 | `workload` |  | 1/1 |  |  |  | 1/1 |
-| **All** | 78/78 (1 warn) | 54/54 | 37/37 | 42/42 | 2/2 | 213/213 (1 warn) |
+| **All** | 78/78 (1 warn) | 54/54 | 37/37 | 42/42 | 5/5 (2 warn) | 216/216 (3 warn) |
 
 ## Not passed
 
 | Status | Domain | Dimension | Test | Owner | Rows |
 |---|---|---|---|---|---|
 | warn | `learning` | completeness | `not_null_stg_short_courses__enrolments_customer_bk` | Learning team | 1 |
+| warn | `student` | accuracy | `graduation_list_family_name_at_30` | Mei Tanaka, registrar's office | 2 |
+| warn | `student` | accuracy | `graduation_list_family_name_in_capitals` | Mei Tanaka, registrar's office | 2 |

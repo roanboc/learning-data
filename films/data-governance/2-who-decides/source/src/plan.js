@@ -509,7 +509,8 @@ function wd_req(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s
     o.title.forEach((l,i)=>wc_T(ctx,l,40,262+i*50,{w:800,size:40,col:WC_DARK}));
     wc_T(ctx,"area: "+o.area,40,384,{w:600,size:30,col:WC_INK});gv_lines(ctx,40,428,610,3,28,0.9);
     if(o.slip)wd_slip(ctx,o.slip,o);});ctx.restore();}
-// its routing slip: amber paper, clipped on, who the request goes to in turn, as the register names them. o.names(i) brings a line in
+// its routing slip: amber paper, clipped on, who the request goes to in turn, as the register names them: the owner first, for the
+// meaning, then the data team, who build it and review the code (owners are told, never asked to review); as tall as its lines. o.names(i) brings a line in
 // (0 to 1), o.lit(i) washes it gold; o.edit {i, to, p} changes line i's name as the register's changes (p, 0 to 1), a gold flash
 // with it; o.amber (0 to 1) warms the slip as a lamp lights; o.slipP brings the slip in. Where line i sits on the request: wd_slipAt
 const WD_AMBER=[250,214,138],WD_SLINK=[118,78,16];
@@ -517,7 +518,7 @@ const wd_slipAt=i=>[WD_RQ.slip[0]-170+58,WD_RQ.slip[1]-125+112+50*i-10];
 function wd_slip(ctx,names,o){const sp=o.slipP==null?1:o.slipP;if(sp<=0)return;const e=easeCam(clamp(sp,0,1)),am=o.amber||0,[cx,cy]=WD_RQ.slip;
   ctx.save();ctx.translate(cx,cy-40*(1-e));ctx.rotate(0.04);ctx.translate(-170,-125);withA(ctx,clamp(sp*2,0,1),()=>{
     if(am>0.01){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,170,125,320,[255,206,110],0.65*am);ctx.restore();}
-    gv_sheet(ctx,0,0,340,250,{col:WD_AMBER});if(am>0.01){ctx.save();ctx.globalCompositeOperation="screen";ctx.fillStyle=rgba([255,236,170],0.35*am);ctx.fillRect(0,0,340,250);ctx.restore();}
+    const sh=78+50*names.length;gv_sheet(ctx,0,0,340,sh,{col:WD_AMBER});if(am>0.01){ctx.save();ctx.globalCompositeOperation="screen";ctx.fillStyle=rgba([255,236,170],0.35*am);ctx.fillRect(0,0,340,sh);ctx.restore();}
     wc_T(ctx,"Routing slip",24,46,{w:800,size:28,col:WD_SLINK});ctx.save();ctx.strokeStyle=rgba(WD_SLINK,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(24,62);ctx.lineTo(316,62);ctx.stroke();ctx.restore();
     names.forEach((n,i)=>{const a=o.names?o.names(i):1;if(a<=0.01)return;const ly=112+50*i,l=o.lit?o.lit(i):0,ed=o.edit&&o.edit.i===i?o.edit:null,
         fit=s2=>clamp(30*256/Math.max(1,tw(ctx,s2,30,700)),26,30);
@@ -539,7 +540,7 @@ function wd_heldReq(am){return(cx,P_,hands)=>{const [hx,hy]=hands[1],R=WD_HR;cx.
   cx.save();cx.fillStyle=rgba(WC_DARK,0.6);cx.fillRect(R.x+14,R.y+60,118,9);cx.fillRect(R.x+14,R.y+78,92,9);cx.restore();gv_lines(cx,R.x+14,R.y+116,R.w-30,4,18,0.9);
   cx.save();cx.translate(R.slip[0],R.slip[1]);cx.rotate(0.08);cx.shadowColor="rgba(60,50,40,0.22)";cx.shadowBlur=6;cx.shadowOffsetY=3;
   cx.fillStyle=rgba(mix(WD_AMBER,[255,240,186],0.65*am),1);cx.fillRect(-36,-28,72,56);cx.shadowColor="transparent";cx.fillStyle=rgba(WD_SLINK,0.7);
-  cx.fillRect(-26,-16,40,5);for(let i=0;i<3;i++)cx.fillRect(-26,-2+i*10,48-i*6,3.5);cx.restore();
+  cx.fillRect(-26,-16,40,5);for(let i=0;i<2;i++)cx.fillRect(-26,-2+i*10,48-i*6,3.5);cx.restore();
   cx.restore();fingers(cx,P_,[[hx+2,hy-4]]);};}
 
 /* ---------- 8 · Where the work is: what, who, when and why, in the books where Mei keeps them ---------- */
@@ -603,7 +604,7 @@ function wd_sheetName(ctx,p,lit,grey){wd_drop(ctx,p,()=>{const S_=WD_SS,[c0,c1,c
   wc_T(ctx,"award",gx+c0+14,gy+40+rh+44,{w:600,size:34,col:mix(WC_DARK,WC_MUTED,grey)});
   wc_T(ctx,"Mei Tanaka",gx+c0+c1+14,gy+40+rh+44,{w:600,size:34,col:mix(WC_DARK,[180,178,172],grey)});ctx.restore();});}
 
-/* ---------- 10 · Which award? Every change asks its owner; Mei reads Jun's, and award turns out to be defined in five places ---------- */
+/* ---------- 10 · Which award? Every change of meaning asks its owner; Mei reads Jun's, and award turns out to be defined in five places ---------- */
 // a head in one of award's three meanings' colours (the series' GV_MEAN and GV_MEANINK: violet, rose, olive): "award", the wash coming
 // in as col goes from 0 to 1
 function wd_head(ctx,x,y,w,m,col){if(col>0.01)gv_tint(ctx,x,y,w,58,GV_MEAN[m],0.9*col);wc_T(ctx,"award",x+16,y+43,{w:800,size:40,col:mix(WC_DARK,GV_MEANINK[m],col)});}

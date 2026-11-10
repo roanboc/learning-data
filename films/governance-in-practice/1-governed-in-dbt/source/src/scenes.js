@@ -12,7 +12,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({jun:wAt(sc,"
     census:c.census-0.4,fac:wAt(sc,"census","Faculty of Health"),places:wAt(sc,"census","plan its places"),fromJ:wAt(sc,"census","from Jun"),
     toN:wAt(sc,"census","to Noor"),toP:wAt(sc,"census","to Planning"),back:wAt(sc,"census","back to Jun"),change:c.change,
     live:c.live-0.4,runs:wAt(sc,"live","a check runs"),noOwner:wAt(sc,"answers","no owner"),how:wAt(sc,"answers","how to add one"),
-    adds:c.adds,two:wAt(sc,"adds","two lines"),green:wAt(sc,"adds","turns green"),itself:c.itself,plan:wAt(sc,"itself","Planning"),by:wAt(sc,"itself","by itself"),
+    adds:c.adds,two:wAt(sc,"adds","two lines"),green:wAt(sc,"adds","turns green"),itself:c.itself,plan:wAt(sc,"itself","the data team"),by:wAt(sc,"itself","nothing missing"),
     min:c.minute-0.4,four:wAt(sc,"minute","four months"),check:wAt(sc,"minute","a check that takes"),first:c.first-0.4,arrive:wAt(sc,"first","arrive first"),
     board:c.breath-0.3,title:c.breath+1.2})),
     // the checks on Jun's pull request: each runs, then passes; governance fails first, and passes once the owner is in
@@ -37,7 +37,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({jun:wAt(sc,"
     {at:P.census,place:"boardGov",keys:[[P.census,960,500,1.04]],push:0.02,draw:(x,tt)=>gd_census(x,{card:fin(tt,P.census+0.2,0.6),anil:fin(tt,P.fac-0.1,0.5),
       places:clamp((tt-P.places)/1.0,0,1),path:[P.fromJ,P.toN,P.toP,P.back].map(s=>fin(tt,s-0.1,0.5)),dim:fin(tt,P.change,0.8)})},
     // the pull request: the checks run; governance fails, and says what's missing and how to add it; two lines, and it passes; it's
-    // ready, and its owners are asked to review, Planning first, by themselves
+    // ready, and the data team is asked to review, by itself (owners aren't reviewers)
     {at:P.live,place:"big",keys:[[P.live,960,540,1],[P.runs-0.2,960,640,1.12],[P.adds-0.4,960,540,1],[P.itself,980,480,1.1]],d:1.6,push:0,draw:(x,tt)=>{
       const items=gd_items(tt,T7),fl=fin(tt,P.noOwner-0.2,0.2),ok=fin(tt,P.green,0.3),
         msg=ok>0?[{s:GD_PR.g1,col:GV.greenInk,p:ok},{s:GD_PR.g2,col:GV.greenInk,p:ok}]:fl>0?[{s:GD_PR.m1,col:GV.redInk,p:clamp((tt-P.noOwner)/0.9,0,1)},
@@ -104,7 +104,9 @@ scene("access",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({grp:wAt(sc,
 scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({con:wAt(sc,"contract","a contract"),cols:wAt(sc,"contract","these columns"),
     types:wAt(sc,"contract","these types"),mis:c.mismatch-0.4,checks:wAt(sc,"mismatch","checks it"),mism:wAt(sc,"mismatch","a mismatch"),stops:wAt(sc,"mismatch","stops the table"),
     ver:c.version-0.4,verS:c.version,newv:wAt(sc,"version","a new version"),old:wAt(sc,"version","the old one"),dateTo:wAt(sc,"version","a date to go"),
-    date:wAt(sc,"date","goes on",0.3),exp:c.exposures-0.4,uses:wAt(sc,"exposures","who uses"),answers:wAt(sc,"exposures","who answers")}));
+    date:wAt(sc,"date","goes on",0.3),exp:c.exposures-0.4,uses:wAt(sc,"exposures","who uses"),answers:wAt(sc,"exposures","who answers"),
+    can:c.canonical-0.4,core:wAt(sc,"canonical","the shared core"),ent:wAt(sc,"canonical","an enterprise contract"),arch:wAt(sc,"architect","information architect"),
+    team:wAt(sc,"architect","the data team"),cmp:wAt(sc,"differ","compares the two"),diff:wAt(sc,"differ","data governance")}));
   gv_shots(ctx,S,t,sc.dur,gd_run([
     // the desk: the near-award table's columns and types, and the setting that enforces its contract, with Yusuf's pin
     {at:0,place:"desk",keys:[[0,960,520,1]],push:0.02,draw:(x,tt)=>{gd_contract(x,{mart:clamp((tt-0.3)/0.9,0,1),on:fin(tt,P.con,0.5),cols:fin(tt,P.cols,0.5),types:fin(tt,P.types,0.5)});
@@ -118,25 +120,33 @@ scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({con:wAt(s
       gd_flyPin(x,[960,-60],[1030+gu_mw(x,"core_credential_v1")+40,258],clamp((tt-P.dateTo)/0.9,0,1),"a version");}},
     // the desk: three exposures, who uses each table and who answers for each use
     {at:P.exp,place:"desk",keys:[[P.exp,960,480,1]],push:0.02,draw:(x,tt)=>gd_exposures(x,{at:[0,1,2].map(i=>clamp((tt-P.exp-0.1-0.35*i)/0.7,0,1)),
-      use:fin(tt,P.uses,0.5),own:fin(tt,P.answers,0.5)})}],sc.dur));});
+      use:fin(tt,P.uses,0.5),own:fin(tt,P.answers,0.5)})},
+    // the board: an enterprise contract for the canonical tables only, written first by data governance's information architect; the
+    // data team's dbt contract builds to it; a check compares the two, and a difference goes to data governance
+    {at:P.can,place:"board",keys:[[P.can,960,480,1]],push:0.02,draw:(x,tt)=>gd_enterprise(x,tt,{ent:fin(tt,P.ent-0.1,0.6),core:clamp((tt-P.core)/1.2,0,1),
+      arch:fin(tt,P.arch,0.5),team:fin(tt,P.team-0.1,0.6),cmp:clamp((tt-P.cmp)/0.8,0,1),diff:fin(tt,P.diff,0.4),diffAt:P.diff})}],sc.dur));});
 
-// ---- 5 · What this change touches: the impact report on Jun's pull request; Tuesday's relabel, Mei's "breaks", the column instead,
+// ---- 5 · What this change touches: the impact report on Jun's pull request; Monday's meaning, in the glossary first; Tuesday's
+// relabel, the data team's review: "breaks"; the column instead,
 // and a rename that fails ----
-scene("impact",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({tch:c.touches,tue:c.tuesday-0.3,six:wAt(sc,"tuesday","or more as awards"),
-    rep:c.report-0.4,wrote:wAt(sc,"report","wrote it"),five:wAt(sc,"report","five reports"),four:wAt(sc,"report","four owners"),mei:wAt(sc,"mei","Mei"),
+scene("impact",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({tch:c.touches,mon:c.monday-0.3,first:wAt(sc,"monday","comes first"),
+    award:wAt(sc,"monday","what award means"),glos:wAt(sc,"monday","in the glossary"),tue:c.tuesday-0.3,six:wAt(sc,"tuesday","or more as awards"),
+    rep:c.report-0.4,wrote:wAt(sc,"report","wrote it"),five:wAt(sc,"report","five reports"),four:wAt(sc,"report","four owners"),mei:wAt(sc,"mei","review"),
     breaks:wAt(sc,"mei","breaks"),col:c.column-0.4,counts:wAt(sc,"column","counts as an award"),add:c.additive-0.4,addv:wAt(sc,"additive","additive"),
     three:wAt(sc,"additive","three owners"),ren:c.renamed-0.4,fail:wAt(sc,"renamed","would fail")}));
   gv_shots(ctx,S,t,sc.dur,gd_run([
     // Jun's pull request: its description, written by the impact check
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{gd_prHead(x,{});gd_report(x,tt,GD_R0,GD_R0.map((_,i)=>P.tch+0.3+0.15*i),{h:330});}},
+    // Monday: the glossary's page for award, where the meaning changed first, and every copy comes from
+    {at:P.mon,place:"big",keys:[[P.mon,960,520,1.02]],push:0.02,draw:(x,tt)=>gd_glossary(x,{lit:fin(tt,P.award,0.5),copy:fin(tt,P.glos,0.6)})},
     // Tuesday: the first draft's change, in the files. The same screen: the description leaves before the files come (later)
     {later:true,at:P.tue,place:"big",keys:[[P.tue,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,1);gd_relabel(x,fin(tt,P.six,0.5));}},
-    // its description: the report fills in, five who use it and four owners to ask; Mei's stamp beside it
+    // its description: the report fills in, five who use it and four owners to tell; the data team's review stamps it
     {at:P.rep,place:"big",keys:[[P.rep,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,1);
       // the check writes its report as it's said; then the five who use it light in turn, and the four owners to ask
       gd_report(x,tt,GD_R1,[P.rep+0.5,P.rep+0.65,P.wrote+0.2,P.wrote+0.45,P.wrote+0.7,P.wrote+0.95,P.wrote+1.2,P.wrote+1.45,P.wrote+1.7,P.wrote+1.9],
         {h:484,lit:[0,0,0,...[0,1,2,3,4].map(k=>0.45*fin(tt,P.five+0.18*k,0.35)),0,fin(tt,P.four,0.4)]});
-      gv_stamp(x,1500,520,"breaks",fin(tt,P.breaks-0.1,0.45),{col:GV.goldInk,size:52,rot:-0.08});gu_nameCard(x,1320,640,"Mei Tanaka","registrar's office",fin(tt,P.mei-0.1,0.5));}},
+      gv_stamp(x,1500,520,"breaks",fin(tt,P.breaks-0.1,0.45),{col:GV.goldInk,size:52,rot:-0.08});gu_nameCard(x,1320,640,"Data team","the review",fin(tt,P.mei-0.1,0.5));}},
     // the second draft: a column added to version 2, its SQL and its YAML
     {at:P.col,place:"big",keys:[[P.col,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,5);gd_column(x,{lit:fin(tt,P.counts,0.5),cls:fin(tt,P.counts+0.6,0.5)});}},
     // the report again: additive, and three owners to tell
@@ -148,19 +158,20 @@ scene("impact",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({tch:c.touch
       gu_checks(x,150,640,1620,{h:200,items:[{name:"impact",st:f>0.5?"fail":"run"}],t:tt,summary:false,msgGap:70,
         msg:[{s:"breaking change to core_credential v2 with no new version",col:GV.redInk,p:clamp((tt-P.fail)/1.0,0,1)}],pop:[f*(1-fin(tt,P.fail+1.2,0.6))]});}}],sc.dur));});
 
-// ---- 6 · Reviews go to the owners: the reviewers file, made from the owners; GitHub asking them; a decision kept as a file ----
-scene("owners",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({same:wAt(sc,"made","the same owners"),co:c.script-0.4,writes:wAt(sc,"script","writes"),
-    reg:wAt(sc,"script","the registrar's office"),plan:wAt(sc,"script","Planning"),clara:wAt(sc,"script","Clara"),asks:c.asks-0.4,gh:wAt(sc,"asks","asks them"),
+// ---- 6 · Who reviews what: owners decide in the glossary, not in review; the reviewers file, the data team and data governance's own
+// files; GitHub asking them; a decision kept as a file ----
+scene("owners",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({same:wAt(sc,"made","pull requests"),co:c.script-0.4,writes:wAt(sc,"script","writes"),
+    reg:wAt(sc,"script","the data team"),plan:wAt(sc,"script","data governance"),asks:c.asks-0.4,gh:wAt(sc,"asks","asks them"),
     fails:wAt(sc,"asks","a check fails"),behind:wAt(sc,"asks","falls behind"),dec:c.decisions-0.4,files:wAt(sc,"decisions","files too"),
     who:wAt(sc,"decisions","who decided"),when:wAt(sc,"decisions","when"),why:wAt(sc,"decisions","why")}));
   gv_shots(ctx,S,t,sc.dur,gd_run([
-    // the poster: Yusuf's pins, and the one at review, where an approval enters
+    // the poster: Yusuf's pins, and the one at review: an approval, which is the data team's, not an owner's
     {at:0,place:"poster",keys:[[0,960,470,1.04],[0.2,860,491,1.1]],d:2.6,push:0.01,draw:(x,tt)=>{const [px,py,pw,ph]=GV_PC,[ax,ay]=gu_pinAt(7,px,py,pw,ph);
       gv_halo(x,ax-150,ay-90,300,200,GV.gold,0.9*fin(tt,P.same-0.3,0.6));gu_pins(x,px,py,pw,ph,{});}},
-    // the desk: the reviewers file, generated; each line names who reviews a file, joined to the person
+    // the desk: the reviewers file, generated: the data team for the code, data governance for its own files, each joined to its card
     {at:P.co,place:"desk",keys:[[P.co,960,520,1]],push:0.02,draw:(x,tt)=>gd_codeowners(x,{head:fin(tt,P.writes,0.5)*(1-0.6*fin(tt,P.reg,0.5)),
-      lit:[fin(tt,P.reg,0.5),fin(tt,P.plan,0.5),fin(tt,P.clara,0.5)],card:[clamp((tt-P.reg)/1.0,0,1),clamp((tt-P.plan)/1.0,0,1),clamp((tt-P.clara)/1.0,0,1)]})},
-    // the pull request: its owners asked; the reviewers check fails while the file is behind, then passes
+      lit:[fin(tt,P.reg,0.5),fin(tt,P.plan,0.5)],card:[clamp((tt-P.reg)/1.0,0,1),clamp((tt-P.plan)/1.0,0,1)]})},
+    // the pull request: its reviewers asked; the reviewers check fails while the file is behind, then passes
     {at:P.asks,place:"big",keys:[[P.asks,960,540,1],[P.fails-0.3,960,640,1.12]],d:1.6,push:0,draw:(x,tt)=>{const fl=fin(tt,P.fails,0.2),ok=fin(tt,P.behind+1.0,0.3);
       gd_pr(x,tt,{rev:clamp((tt-P.gh+0.2)/0.9,0,1),items:GD_PR.ck.map(n=>({name:n,st:n==="reviewers"&&fl>0.5&&ok<0.5?"fail":"pass"})),
         msg:fl>0&&ok<0.5?[{s:"CODEOWNERS is out of date: run python scripts/generate/codeowners.py",col:GV.redInk,p:clamp((tt-P.fails)/0.9,0,1)}]:null,
@@ -194,11 +205,11 @@ scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({what:wAt(sc,
       pop:fin(tt,P.classify+1.4,0.3)*(1-fin(tt,P.classify+2.4,0.6))})}],sc.dur));});
 
 // ---- 8 · An agent on every pull request: the skill it follows, its review of Anil's first pull request, the classes it drafted with
-// counts, who decides, and the approvals that are people's ----
+// counts, who decides, and the one approval, the data team's ----
 scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({rev:wAt(sc,"reviews","an agent"),skill:wAt(sc,"skill","a skill"),run:wAt(sc,"skill","run the checks"),
     read:wAt(sc,"skill","read what they"),draft:wAt(sc,"skill","draft what's missing"),pr:c.found-0.4,owner:wAt(sc,"found","no owner"),ten:wAt(sc,"found","ten columns"),
     rule:wAt(sc,"found","a rule with no test"),dr:c.drafted-0.4,drS:c.drafted,who:wAt(sc,"drafted","who decides"),
-    nv:c.never-0.4,ppl:wAt(sc,"never","People decide")}));
+    nv:c.never-0.4,ppl:wAt(sc,"never","People decide"),code:wAt(sc,"never","the data team approves")}));
   gv_shots(ctx,S,t,sc.dur,gd_run([
     // the desk: the skill the team wrote, its steps lit as they're named
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>{gd_skill(x,tt,clamp((tt-0.6)/0.9,0,1),[fin(tt,P.run,0.4),fin(tt,P.read,0.4),fin(tt,P.draft,0.4),0.5*fin(tt,P.rev,0.5)+0.5*fin(tt,P.skill,0.5)]);
@@ -209,18 +220,18 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({rev:wAt(sc,"
     // request: the first leaves before the next comes (later), here and for the approvals
     {later:true,at:P.dr,place:"big",keys:[[P.dr,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:1,rows:[0,1,2].map(k=>fin(tt,P.drS+0.1+0.35*k,0.4)),
       who:[0,1,2].map(k=>fin(tt,P.who+0.25*k,0.4))})},
-    // the approvals: the agent's comment, with no tick; each person's yes
+    // the approvals: the agent's comment, with no tick; the data team's yes for the code
     {later:true,at:P.nv,place:"big",keys:[[P.nv,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:2,ag:fin(tt,P.nv+0.1,0.5),
-      yes:[0,1,2].map(k=>clamp((tt-P.ppl-0.1-0.35*k)/0.8,0,1))})}],sc.dur,1));});
+      yes:[clamp((tt-P.code-0.1)/0.8,0,1)]})}],sc.dur,1));});
 
 // ---- 9 · Carried with the code: Jun's table goes in; the project as a home on Noor's map; his line, changed; the pins and their lines;
 // the next film; the end card ----
-scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({yes:wAt(sc,"goes","Planning's yes"),map:c.home-0.4,
+scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({yes:wAt(sc,"goes","the data team's yes"),map:c.home-0.4,
     home:wAt(sc,"home","the home"),h:[wAt(sc,"home","owners"),wAt(sc,"home","classes"),wAt(sc,"home","contracts"),wAt(sc,"home","tests"),wAt(sc,"home","decisions")],
     plat:wAt(sc,"flow","the platform"),cat:wAt(sc,"flow","the catalogue"),room:c.after-0.4,built:wAt(sc,"after","after he's built it"),
     every:wAt(sc,"every","every change"),poster:c.last-0.4,carries:wAt(sc,"last","carries governance"),board:c.breath-0.3,end:c.breath+1.6}));
   gv_shots(ctx,S,t,sc.dur,gd_run([
-    // Jun's pull request: every check green, Planning's yes, and then it's merged. The same screen the chapter before ends on, Anil's
+    // Jun's pull request: every check green, the data team's yes, and then it's merged. The same screen the chapter before ends on, Anil's
     // pull request: it leaves before Jun's comes (later)
     {later:true,at:0,place:"big",keys:[[0,960,540,1],[P.yes-0.6,980,480,1.1]],d:1.6,draw:(x,tt)=>gd_pr(x,tt,{state:tt<P.yes+0.7?["Open",GV.green]:["Merged",GV.green],stateA:tt<P.yes+0.7?1:fin(tt,P.yes+0.7,0.35),
       items:GD_PR.ck.map(n=>({name:n,st:"pass"})),rev:1,glow:0.4,appr:fin(tt,P.yes,0.5)})},

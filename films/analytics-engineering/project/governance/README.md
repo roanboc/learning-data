@@ -5,7 +5,7 @@ What data governance defines that isn't dbt's: who owns what, the architecture m
 | Folder | What | Written by |
 |---|---|---|
 | `1-glossary/` | The short forms the project can't avoid, and where every other glossary is | Data governance |
-| `2-owners/` | Who each owner is, and where their reviews go | Data governance, with the data architect |
+| `2-owners/` | Who each owner is, and how the impact check reaches them (owners decide meaning in the glossary; they don't review pull requests) | Data governance, with the data architect |
 | `3-architecture-map/` | The governance part of Noor's map: capabilities, services, roles, steps, artifacts and where they live | The data architect |
 | `4-data-products/` | Each data product: owner, purpose, outputs, service levels, support | Each product's owner |
 | `5-data-contracts/` | Each product output's contract, in the Open Data Contract Standard | Generated from the dbt contracts (`scripts/generate/products.py`) |

@@ -37,6 +37,6 @@
 
 39 test(s) on it and downstream. `dbt build --select int_credentials_unioned+ --profiles-dir .` runs them.
 
-## Who to ask
+## Who to tell
 
 Finance; Mei Tanaka, registrar's office; Planning; Wallet app team

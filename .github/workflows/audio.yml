@@ -1,23 +1,25 @@
 # Run explicitly after committing new audio.json pointers. Audio releases are prereleases,
 # so they never replace the video release used by the site's latest-download links.
+# Leave the tag blank to publish every missing audio release whose MP3 is in the repository,
+# and verify every pointer's copy; existing assets are never uploaded again or replaced.
 name: Store audio outside Git
 
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "New immutable audio release tag (first migration: audio-v1)"
-        required: true
-        default: audio-v1
+        description: "Audio release tag; blank publishes every missing release (the first migration was audio-v1)"
+        required: false
+        default: ""
       film:
-        description: "Optional film release key; blank publishes the whole tag for the initial migration"
+        description: "Optional film release key; blank with a tag publishes the whole tag"
         required: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: audio-release-${{ inputs.tag }}
+  group: audio-release-${{ inputs.tag || 'all' }}
   cancel-in-progress: false
 
 jobs:
@@ -36,6 +38,7 @@ jobs:
           TAG: ${{ inputs.tag }}
           FILM: ${{ inputs.film }}
         run: |
-          args=(--tag "$TAG")
+          args=()
+          if [ -n "$TAG" ]; then args+=(--tag "$TAG"); fi
           if [ -n "$FILM" ]; then args+=(--film "$FILM"); fi
           python site-tools/media.py publish "${args[@]}"

@@ -39,6 +39,8 @@ TARGET = ROOT / "CODEOWNERS"
 LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
          ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
           "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/"),
+         "The claims app: its owner, for the claims read where the app writes them":
+         ("/sources/claims_app/",),
          "The workload agent's mart, its product and its mandate: its owner, and the data architect for the mandate":
          ("/models/marts/workload/", "/governance/4-data-products/teaching_workload.yml", "/governance/8-mandates/")}
 

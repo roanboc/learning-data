@@ -14,6 +14,7 @@ Winning support for data work, and keeping it. The old warehouse costs A$310,000
 | [A case worth funding](https://data.learn-all.org/making-the-case/a-case-worth-funding/) | Funding data work | 8 min | 7 | 3 questions | [script](1-a-case-worth-funding/script.md) · [source](1-a-case-worth-funding/source/README.md) |
 | [Risks, said out loud](https://data.learn-all.org/making-the-case/risks-said-out-loud/) | A risk register that lives | 7 min | 6 | 3 questions | [script](2-risks-said-out-loud/script.md) · [source](2-risks-said-out-loud/source/README.md) |
 | [Everyone at the table](https://data.learn-all.org/making-the-case/everyone-at-the-table/) | Every stakeholder, one story | 9½ min | 6 | 3 questions | [script](3-everyone-at-the-table/script.md) · [source](3-everyone-at-the-table/source/README.md) |
+| [One list, not twenty](https://data.learn-all.org/making-the-case/one-list-not-twenty/) | One list for all the work | 7½ min | 7 | 3 questions | [script](4-one-list-not-twenty/script.md) · [source](4-one-list-not-twenty/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -1,0 +1,55 @@
+{
+  "key": "read-often-kept-close",
+  "title": "Read often, kept close",
+  "sub": "The fourth film of Data that moves, in Modern data basics: in 2015, a gene bank driven from Aleppo by war asks the seed vault on Svalbard for the copies it kept frozen there; at the university, how often each kind of data is read decides where it's kept, and the law and the business decide for how long: the cloud's storage tiers, named hot, cool, cold and archive, and old pay records moved to the archive tier after a year and deleted at seven.",
+  "howto": "The film is drawn as the platform map up close: a dark navy night with lanes of light. Light blue is data moving and the platform, gold what people agree, green a check that passes, amber a person's turn, lilac with a lock what is personal. Where data is kept is shown as shelves, one for each storage tier: the hot tier at the top, close and quick to read; the archive tier deep below, frosted and still, cheap to keep and slow to bring back. The tools' pages are drawn for the film.",
+  "src": [
+    "rk_look.js",
+    "rk_places.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "tiers",
+    "cost",
+    1.2
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bLinh's\\b",
+      "Lin's"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bSvalbard\\b",
+      "Svahlbar"
+    ]
+  ],
+  "story": [
+    "vault"
+  ],
+  "urgent": [],
+  "logos": true
+}

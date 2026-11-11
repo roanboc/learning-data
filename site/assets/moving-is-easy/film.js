@@ -2194,7 +2194,7 @@ scene("gauge",(ctx,S,t,sc)=>{
         const ra=ag_in(tt,T.tRohan-0.2,0.6);if(ra>0){c.save();c.globalAlpha*=ra;md_person(c,"rohan",1640,792,0.9,{t:tt,flip:true,gaze:[4,-1]});c.restore();
           md_nameTag(c,1360,700,"rohan",{role:"Finance",col:MD.dom.finance,align:"right",a:ra});}});c.restore();}}
   ],0.6);
-  md_title(ctx,S,t,B,"Moving is easy, agreeing is the work","what still needs people when the tools move the data","FILM 1 OF 3 · DATA THAT MOVES");
+  md_title(ctx,S,t,B,"Moving is easy, agreeing is the work","what still needs people when the tools move the data","FILM 1 OF 4 · DATA THAT MOVES");
 });
 
 /* ---------------------------------------------------------------- 2 · What got easier */
@@ -2372,7 +2372,7 @@ scene("agreed",(ctx,S,t,sc)=>{
   ],0.6);
   mv_kicker(ctx,S,ag_in(t,T.tNow+0.4,0.6)*(1-ag_in(t,T.tLet-0.6,0.6)));  // after the dissolve: the year's pill sat where it comes in
   // the end card comes in as the voice says the film's line, and holds through the last breath
-  md_end(ctx,S,t,T.tLet-0.5,"Moving is easy, agreeing is the work","Let the tools move it; spend your time on the contract.","Film 1 of 3","Data that moves");
+  md_end(ctx,S,t,T.tLet-0.5,"Moving is easy, agreeing is the work","Let the tools move it; spend your time on the contract.","Film 1 of 4","Data that moves");
 });
 
 // the map's chapters run on from each other: the next one's camera starts where the last one's is, and only what changes fades

@@ -429,93 +429,86 @@ function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14
 // Hot, warm, cold, the second film of Data that moves, in Modern data basics. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers in words). The few longer stops are in breath.js.
 const NARR={
-"vault":{"name":"The seed vault","lead":1.6,"tail":1.0,"vo":[
- {"id":"feb","gap":0.8,"text":"February 2008. Deep in a frozen mountain on Svalbard, Norway's Arctic islands, a vault opens.","say":"February, two thousand and eight. Deep in a frozen mountain on Svalbard, Norway's Arctic islands, a vault opens."},
- {"id":"copies","gap":0.8,"text":"At minus eighteen degrees, it keeps copies of seeds from gene banks around the world."},
- {"id":"banks","gap":0.8,"text":"Gene banks keep the seeds of crops and their wild relatives, so breeders can grow crops that stand drought and disease."},
- {"id":"aleppo","gap":0.8,"text":"Near Aleppo, in Syria, a gene bank keeps 141,052 samples of wheat, barley, lentils and chickpeas, from the world's dry lands.","say":"Near Aleppo, in Syria, a gene bank keeps a hundred and forty-one thousand and fifty-two samples of wheat, barley, lentils and chickpeas, from the world's dry lands."},
- {"id":"send","gap":0.8,"text":"From 2008, it sends copies of most of them to the vault.","say":"From two thousand and eight, it sends copies of most of them to the vault."},
- {"id":"lost","gap":0.8,"text":"But a gene bank can be lost, to war, flood or a power cut, and a variety lost is lost for good."},
- {"id":"war","gap":0.8,"text":"In 2012, war came close to Aleppo. Most of the bank's keepers had to leave, and it could no longer send seeds out.","say":"In twenty twelve, war came close to Aleppo. Most of the bank's keepers had to leave, and it could no longer send seeds out."},
- {"id":"risk","gap":0.8,"text":"Breeders could no longer get the seeds they relied on, and every variety in the bank was at risk."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
- {"id":"ask","gap":0.8,"text":"In 2015, the keepers did what no one had done before: they asked the vault for their copies.","say":"In twenty fifteen, the keepers did what no one had done before: they asked the vault for their copies."},
- {"id":"sown","gap":0.8,"text":"38,073 samples came out of the mountain, and that November they were sown in Lebanon and Morocco.","say":"Thirty-eight thousand and seventy-three samples came out of the mountain, and that November they were sown in Lebanon and Morocco."},
- {"id":"gone","gap":0.8,"text":"By 2020, nothing was left of the collection in Aleppo.","say":"By twenty twenty, nothing was left of the collection in Aleppo."},
- {"id":"few","gap":0.8,"text":"Yet no more than 1,657 of its samples were lost, and breeders can order its seeds again.","say":"Yet no more than one thousand, six hundred and fifty-seven of its samples were lost, and breeders can order its seeds again."},
- {"id":"kept","gap":0.8,"text":"Seeds in use, kept close and ready; their copies, frozen far away, until the day they're needed."},
- {"id":"data","gap":0.8,"text":"Data has a temperature too."},
- {"id":"alike","gap":0.8,"text":"Until September, no one at the university had asked how fresh each kind of data must be, or how often it's read."},
- {"id":"slow","gap":0.8,"text":"Some came too slowly, and 23 tutors were paid two weeks late; some cost far more than it needed to.","say":"Some came too slowly, and twenty-three tutors were paid two weeks late; some cost far more than it needed to."},
- {"id":"now","gap":0.8,"text":"Now each kind has its own temperature, and no tutor has waited for a contract since."}]},
-"two":{"name":"Two questions","lead":0.8,"tail":1.0,"vo":[
- {"id":"noor","gap":0.8,"text":"In September, Noor, the data architect, asked each data owner two questions."},
- {"id":"ask","gap":0.8,"text":"How fresh must it be? And how often is it read?"},
- {"id":"split","gap":0.8,"text":"The first decides how it moves: as it changes, or on a schedule. The second decides where it's kept."},
- {"id":"hot","gap":0.8,"text":"Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used."},
- {"id":"warm","gap":0.8,"text":"Fresh to the hour or the day, and read often: warm. Work it out on a schedule."},
- {"id":"cold","gap":0.8,"text":"Rarely read, but kept: cold. Keep it cheap, until the date it may be deleted."},
- {"id":"contract","gap":0.8,"text":"Each answer goes into the data's contract: how fresh, and how long it's kept."}]},
-"hot":{"name":"Hot","lead":0.8,"tail":1.0,"vo":[
- {"id":"claims","gap":0.8,"text":"Casual staff claim their hours in the claims app, and claims approved by noon on Monday are paid on Thursday."},
- {"id":"checks","gap":0.8,"text":"The app checks each claim against the tutor's contract, which comes from the HR system."},
- {"id":"change","gap":0.8,"text":"Contracts change at short notice, and Ingrid's team in HR often records one on a Monday morning."},
- {"id":"night","gap":0.8,"text":"Until September, the platform took in those changes once a night, so the app saw them on Tuesday."},
- {"id":"late","gap":0.8,"text":"Too late for noon: that's how 23 tutors came to wait two more weeks for their pay.","say":"Too late for noon: that's how twenty-three tutors came to wait two more weeks for their pay."},
- {"id":"push","gap":0.8,"text":"Now the HR system pushes each change as it's made, through Zerobus Ingest."},
- {"id":"table","gap":0.8,"text":"A pipeline takes in each change as it arrives, and keeps a streaming table of every contract as it stands."},
- {"id":"minute","gap":0.8,"text":"The app sees each change within a minute."},
- {"id":"monday","gap":0.8,"text":"This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon."},
- {"id":"costs","gap":0.8,"text":"Fresh to the minute costs the most, because the pipeline is always running: keep hot only what's needed within minutes."}]},
-"warm":{"name":"Warm","lead":0.8,"tail":1.0,"vo":[
- {"id":"rohan","gap":0.8,"text":"Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget."},
- {"id":"before","gap":0.8,"text":"Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked."},
- {"id":"mv","gap":0.8,"text":"Yesterday's figures are fresh enough, so now it's a materialized view, worked out each night at two and ready to read."},
- {"id":"dbt","gap":0.8,"text":"It's a dbt model Jun wrote, with its schedule, tested like any other."},
- {"id":"answer","gap":0.8,"text":"It keeps only the answer, never a copy of the ledger."},
- {"id":"most","gap":0.8,"text":"Most of the university's data is warm, and should stay so: few questions need the minute, and hot costs more."}]},
+"pigeons":{"name":"The pigeon post","lead":1.6,"tail":1.0,"vo":[
+ {"id":"april","gap":0.8,"text":"April 1850. In Aachen, on Prussia's western border, Paul Julius Reuter sells the news of Europe's stock exchanges.","say":"April, eighteen fifty. In Aachen, on Prussia's western border, Paul Julius Reuter sells the news of Europe's stock exchanges."},
+ {"id":"lines","gap":0.8,"text":"A telegraph line runs from Berlin to Aachen. Another runs from Paris to Brussels."},
+ {"id":"gap","gap":0.8,"text":"Between Aachen and Brussels, 122 kilometres with no wire.","say":"Between Aachen and Brussels, a hundred and twenty-two kilometres with no wire."},
+ {"id":"traders","gap":0.8,"text":"Bankers and merchants buy and sell on the prices from other cities' exchanges, and they act the same day."},
+ {"id":"train","gap":0.8,"text":"Across the gap, the prices went by train, and arrived hours after the day's trading had begun."},
+ {"id":"useless","gap":0.8,"text":"A price that comes after you've had to decide is no use to you: someone else, with fresher news, has made the deal."},
+ {"id":"need","gap":0.8,"text":"Reuter's clients didn't need the prices at once. They needed them before they acted, so the news had to cross the gap faster."},
+ {"id":"birds","gap":0.8,"text":"So Reuter and Heinrich Geller, an innkeeper in Aachen who bred pigeons, flew the prices across the gap."},
+ {"id":"slip","gap":0.8,"text":"Each bird carried a thin slip of paper, from Brussels to Aachen, and the telegraph sent it on to Berlin."},
+ {"id":"hours","gap":0.8,"text":"The birds crossed in about two hours, six hours ahead of the train, so the prices arrived while there was still time to use them."},
+ {"id":"while","gap":0.8,"text":"And it was only for a while: the pigeons filled the gap until the wire was joined."},
+ {"id":"fresh","gap":0.8,"text":"Fresh enough means there in time for whoever acts on it."},
+ {"id":"night","gap":0.8,"text":"Until September, the university moved almost all its data once a night. And asked, everyone wanted theirs live."},
+ {"id":"slow","gap":0.8,"text":"Some came too late: 23 tutors were paid two weeks late, and two people's pay went to a thief.","say":"Some came too late: twenty-three tutors were paid two weeks late, and two people's pay went to a thief."},
+ {"id":"now","gap":0.8,"text":"Now each kind of data arrives in time for the action it serves, and no sooner than it's needed."}]},
+"act":{"name":"When someone acts","lead":0.8,"tail":1.0,"vo":[
+ {"id":"noor","gap":0.8,"text":"In September, Noor, the data architect, asked one question of each kind of data: when does someone act on it?"},
+ {"id":"prefer","gap":0.8,"text":"Ask people if they'd like their data fresher, and they'll always say yes."},
+ {"id":"watch","gap":0.8,"text":"So Noor didn't take the answer from a question. She looked at real use: when people open the data, and what they do next."},
+ {"id":"cold","gap":0.8,"text":"Acted on days or weeks later: cold. A batch, once a night or once a week."},
+ {"id":"warm","gap":0.8,"text":"Acted on within minutes or hours: warm. Small batches, every few minutes or every hour."},
+ {"id":"hot","gap":0.8,"text":"Acted on within a second or less, usually by a machine: hot. Each event, the moment it happens."},
+ {"id":"offer","gap":0.8,"text":"The platform should offer all three. Which one each kind of data gets is the business's call, not the platform's."},
+ {"id":"contract","gap":0.8,"text":"Each answer goes into the data's contract: how fresh, and the action it's fresh for."}]},
 "cold":{"name":"Cold","lead":0.8,"tail":1.0,"vo":[
- {"id":"records","gap":0.8,"text":"Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked."},
- {"id":"law","gap":0.8,"text":"Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read."},
- {"id":"before","gap":0.8,"text":"Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them."},
- {"id":"tiers","gap":0.8,"text":"The cloud's storage has tiers named by how often data is read: hot for what's read often, archive for what almost never is."},
- {"id":"archive","gap":0.8,"text":"Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest."},
- {"id":"vault","gap":0.8,"text":"Like the copies on Svalbard, they sleep until someone needs them."},
- {"id":"told","gap":0.8,"text":"The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back."},
- {"id":"hours","gap":0.8,"text":"Bringing them back takes hours, which is fine for an audit."},
- {"id":"seven","gap":0.8,"text":"When a year's records turn seven, they're deleted, on a date set in advance, and their files removed for good."},
- {"id":"october","gap":0.8,"text":"In October, the oldest records, more than seven years old, were deleted."},
- {"id":"privacy","gap":0.8,"text":"How to delete well is for the films on data protection."}]},
-"cools":{"name":"One claim cools","lead":0.8,"tail":1.0,"vo":[
- {"id":"cools","gap":0.8,"text":"One piece of data can cool as it ages."},
- {"id":"linh","gap":0.8,"text":"On Monday morning, Linh's claim for last week's tutorials was hot."},
- {"id":"list","gap":0.8,"text":"Payroll's list of claims still waiting read it in place, in the app, until her coordinator approved it."},
- {"id":"paid","gap":0.8,"text":"Paid today, it turns warm: part of what Health has spent, worked out each night."},
- {"id":"year","gap":0.8,"text":"A year from now, it turns cold: her hours, in her pay record in the archive, until the seven years are up."},
- {"id":"follow","gap":0.8,"text":"At each step, where it lives and how it moves follow how it's used."}]},
-"close":{"name":"Kept as it's used","lead":0.8,"tail":1.0,"vo":[
- {"id":"svalbard","gap":0.8,"text":"On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again."},
- {"id":"university","gap":0.8,"text":"At the university, data is kept the same way: contracts within a minute, spending each night, old pay records cheaply until they're deleted."},
+ {"id":"rohan","gap":0.8,"text":"Each morning, Rohan, in Finance, and the faculties' managers look at what each faculty has spent this year against its budget."},
+ {"id":"asked","gap":0.8,"text":"Asked in August, Finance wanted it live, to the minute."},
+ {"id":"meeting","gap":0.8,"text":"Noor looked at what happens next: spending is talked over once a month, and only then does money move between budgets."},
+ {"id":"enough","gap":0.8,"text":"Yesterday's figures are fresh enough. A view works them out each night at two, ready to read by seven."},
+ {"id":"dbt","gap":0.8,"text":"It's a dbt model Jun wrote, with its schedule, tested like any other."},
+ {"id":"most","gap":0.8,"text":"Most analysis is like this, and should stay cold: people decide over days and weeks, and a nightly run costs a small part of a stream."}]},
+"warm":{"name":"Warm","lead":0.8,"tail":1.0,"vo":[
+ {"id":"claims","gap":0.8,"text":"Casual staff claim their hours in the claims app, and claims approved by noon on Monday are paid on Thursday."},
+ {"id":"checks","gap":0.8,"text":"The app checks each claim against the tutor's contract, which lives in another system: HR's."},
+ {"id":"change","gap":0.8,"text":"Ingrid's team in HR often changes a contract on a Monday morning, while coordinators approve claims until noon."},
+ {"id":"night","gap":0.8,"text":"Until September, the platform brought those changes across once a night, so the app saw them on Tuesday."},
+ {"id":"late","gap":0.8,"text":"Too late for noon: that's how 23 tutors came to wait two more weeks for their pay.","say":"Too late for noon: that's how twenty-three tutors came to wait two more weeks for their pay."},
+ {"id":"why","gap":0.8,"text":"Why through the platform at all? Ideally, contracts and claims would live in one system, and the new ERP will bring them together, in 2028.","say":"Why through the platform at all? Ideally, contracts and claims would live in one system, and the new E R P will bring them together, in twenty twenty-eight."},
+ {"id":"gap","gap":0.8,"text":"Until then, the platform fills the gap, as the pigeons did."},
+ {"id":"mix","gap":0.8,"text":"Every organisation runs old systems beside new ones, so the ideal path is rare. Working around the gaps is part of the job."},
+ {"id":"push","gap":0.8,"text":"Now the HR system pushes each change as it's made, through Zerobus Ingest."},
+ {"id":"five","gap":0.8,"text":"Every five minutes, a pipeline brings the changes into a table of every contract as it stands."},
+ {"id":"monday","gap":0.8,"text":"This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon."},
+ {"id":"enough","gap":0.8,"text":"Five minutes is fresh enough for a person who approves claims all morning, and it costs far less than a pipeline that never stops."}]},
+"hot":{"name":"Hot","lead":0.8,"tail":1.0,"vo":[
+ {"id":"machine","gap":0.8,"text":"Hot is for when no person is waiting to decide, and the action must come at once, or it's useless."},
+ {"id":"august","gap":0.8,"text":"In August, someone stole two staff members' passwords, and changed their bank accounts the night before pay day."},
+ {"id":"stranger","gap":0.8,"text":"Their pay went to a stranger's account, and they waited three weeks to be paid again."},
+ {"id":"report","gap":0.8,"text":"No report read the next morning could have stopped it: by then, the money had gone."},
+ {"id":"rule","gap":0.8,"text":"Now each bank account change is checked the moment it's made, against the sign-in behind it."},
+ {"id":"hold","gap":0.8,"text":"If it comes from a new device close to pay day, a rule holds that one pay within a second, and asks the person to confirm."},
+ {"id":"held","gap":0.8,"text":"Since September, four changes were held. Three were the people themselves, confirmed within the hour; one was not."},
+ {"id":"only","gap":0.8,"text":"But an event carries only what changed. The full record, and every correction, still comes in the nightly file."},
+ {"id":"costs","gap":0.8,"text":"So hot never comes alone: it needs the cold path beside it, and it costs the most, because it never stops."},
+ {"id":"few","gap":0.8,"text":"Very few needs are like this. Keep hot for a machine that must act now."}]},
+"close":{"name":"In time to act","lead":0.8,"tail":1.0,"vo":[
+ {"id":"wire","gap":0.8,"text":"In 1851, the wire closed the gap, and the pigeons were no longer needed.","say":"In eighteen fifty-one, the wire closed the gap, and the pigeons were no longer needed."},
+ {"id":"london","gap":0.8,"text":"Reuter took his news service to London, and from there to the world."},
+ {"id":"university","gap":0.8,"text":"At the university, each kind of data now arrives in time for the people, or the machine, that act on it."},
+ {"id":"three","gap":0.8,"text":"Spending, each night; contracts, every five minutes, until the ERP comes; a bank account change, within a second.","say":"Spending, each night; contracts, every five minutes, until the E R P comes; a bank account change, within a second."},
  {"id":"today","gap":0.8,"text":"Today, 2,960 people are paid, 856 of them casual staff, Linh among them.","say":"Today, two thousand, nine hundred and sixty people are paid, eight hundred and fifty-six of them casual staff, Linh among them."},
- {"id":"takeaway","gap":0.8,"text":"Freshness decides how data moves; reading decides where it lives."},
- {"id":"wheel","gap":0.8,"text":"Storage has had tiers for years: there's no wheel to reinvent."},
+ {"id":"takeaway","gap":0.8,"text":"How fresh data must be is set by when someone acts on it, not by what the platform can do."},
+ {"id":"where","gap":0.8,"text":"Where data is kept, and for how long, is another question, for a later film."},
  {"id":"docs","gap":0.8,"text":"Start from the official docs, then investigate, adapt, implement, iterate."},
  {"id":"next","gap":0.8,"text":"Next: one copy of the claims, for the app and for Finance."}]}
 };
 
-const VODUR={"vault/feb": 7.581, "vault/copies": 4.802, "vault/banks": 7.208, "vault/aleppo": 10.652, "vault/send": 3.983, "vault/lost": 6.278, "vault/war": 7.487, "vault/risk": 5.546, "vault/change": 1.288, "vault/ask": 5.647, "vault/sown": 7.283, "vault/gone": 3.528, "vault/few": 7.322, "vault/kept": 5.878, "vault/data": 1.6, "vault/alike": 7.048, "vault/slow": 6.273, "vault/now": 5.054, "two/noor": 4.936, "two/ask": 2.734, "two/split": 6.175, "two/hot": 6.187, "two/warm": 4.746, "two/cold": 4.754, "two/contract": 4.711, "hot/claims": 6.594, "hot/checks": 4.953, "hot/change": 5.874, "hot/night": 5.57, "hot/late": 5.009, "hot/push": 5.164, "hot/table": 6.359, "hot/minute": 1.911, "hot/monday": 6.096, "hot/costs": 6.851, "warm/rohan": 7.561, "warm/before": 7.046, "warm/mv": 6.773, "warm/dbt": 4.613, "warm/answer": 3.037, "warm/most": 6.688, "cold/records": 6.345, "cold/law": 6.577, "cold/before": 8.317, "cold/tiers": 7.87, "cold/archive": 5.33, "cold/vault": 3.581, "cold/told": 7.601, "cold/hours": 3.23, "cold/seven": 6.459, "cold/october": 4.104, "cold/privacy": 3.241, "cools/cools": 2.62, "cools/linh": 3.811, "cools/list": 5.758, "cools/paid": 4.378, "cools/year": 6.382, "cools/follow": 3.464, "close/svalbard": 6.487, "close/university": 8.514, "close/today": 7.891, "close/takeaway": 3.933, "close/wheel": 3.684, "close/docs": 4.507, "close/next": 3.583};
+const VODUR={"pigeons/april": 8.665, "pigeons/lines": 5.26, "pigeons/gap": 4.508, "pigeons/traders": 6.353, "pigeons/train": 5.778, "pigeons/useless": 6.666, "pigeons/need": 7.397, "pigeons/birds": 6.648, "pigeons/slip": 6.184, "pigeons/hours": 7.17, "pigeons/while": 4.478, "pigeons/fresh": 3.159, "pigeons/night": 7.127, "pigeons/slow": 5.858, "pigeons/now": 5.465, "act/noor": 6.688, "act/prefer": 3.941, "act/watch": 7.147, "act/cold": 4.705, "act/warm": 5.612, "act/hot": 5.982, "act/offer": 6.514, "act/contract": 5.028, "cold/rohan": 7.724, "cold/asked": 3.007, "cold/meeting": 6.968, "cold/enough": 5.978, "cold/dbt": 4.613, "cold/most": 8.507, "warm/claims": 6.594, "warm/checks": 5.653, "warm/change": 6.969, "warm/night": 5.995, "warm/late": 5.009, "warm/why": 9.589, "warm/gap": 3.556, "warm/mix": 8.128, "warm/push": 5.164, "warm/five": 5.691, "warm/monday": 6.096, "warm/enough": 7.149, "hot/machine": 5.888, "hot/august": 6.344, "hot/stranger": 4.396, "hot/report": 4.508, "hot/rule": 5.244, "hot/hold": 7.391, "hot/held": 6.503, "hot/only": 6.528, "hot/costs": 6.514, "hot/few": 4.056, "close/wire": 4.944, "close/london": 3.633, "close/university": 6.215, "close/three": 7.578, "close/today": 7.891, "close/takeaway": 5.347, "close/where": 4.313, "close/docs": 4.507, "close/next": 3.583};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: the university's three kinds of data, each found at its own temperature, giving way to the title card; and the end card. */
+   Two wordless moments: the university's three kinds of data, each arriving in time for its action, giving way to the title card; and the end card. */
 const BREATH={
-"vault":{"hold":{"feb":0.6,"copies":0.4,"aleppo":0.6,"send":0.6,"war":0.6,"risk":0.6,"change":1.0,"sown":0.8,"few":0.8,"kept":1.0,"data":0.6,"slow":0.4,"now":0.6},"breathe":4.6},
-"two":{"hold":{"noor":0.4,"ask":1.0,"split":0.8,"hot":0.8,"warm":0.8,"cold":0.8,"contract":1.0}},
-"hot":{"hold":{"claims":0.6,"checks":0.4,"change":0.6,"night":0.6,"late":0.8,"push":0.8,"table":0.8,"minute":0.8,"monday":0.8,"costs":1.0}},
-"warm":{"hold":{"rohan":0.6,"before":0.8,"mv":0.8,"dbt":0.4,"answer":0.6,"most":0.8}},
-"cold":{"hold":{"records":0.4,"law":0.4,"before":0.6,"tiers":0.8,"archive":1.0,"vault":1.0,"told":0.8,"hours":0.4,"seven":0.8,"october":0.6,"privacy":1.0}},
-"cools":{"hold":{"cools":0.8,"linh":0.6,"list":1.0,"paid":1.0,"year":1.0,"follow":1.2}},
-"close":{"hold":{"svalbard":0.8,"university":0.6,"today":0.8,"takeaway":1.0,"wheel":0.4,"docs":0.6,"next":0.6},"breathe":4.6}
+"pigeons":{"hold":{"april":0.8,"lines":0.6,"gap":0.8,"traders":0.6,"train":0.4,"useless":0.8,"need":1.0,"birds":0.8,"slip":0.6,"hours":1.0,"while":1.0,"fresh":0.8,"night":0.6,"slow":0.6,"now":0.8},"breathe":4.6},
+"act":{"hold":{"noor":1.0,"prefer":1.0,"watch":1.2,"cold":1.0,"warm":1.0,"hot":1.0,"offer":1.0,"contract":1.2}},
+"cold":{"hold":{"rohan":0.8,"asked":0.8,"meeting":1.0,"enough":1.0,"dbt":0.6,"most":1.2}},
+"warm":{"hold":{"claims":0.8,"checks":0.6,"change":0.8,"night":0.8,"late":1.0,"why":0.8,"gap":1.0,"mix":1.2,"push":0.8,"five":1.0,"monday":1.0,"enough":1.2}},
+"hot":{"hold":{"machine":1.4,"august":1.0,"stranger":1.4,"report":1.4,"rule":1.2,"hold":1.6,"held":1.6,"only":1.4,"costs":1.6,"few":1.4}},
+"close":{"hold":{"wire":0.6,"london":0.6,"university":0.4,"three":0.8,"today":0.8,"takeaway":1.0,"where":0.6,"docs":0.6,"next":0.6},"breathe":4.6}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -1818,11 +1811,12 @@ function md_tree(ctx,x,y,items,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||52,in
    Drawn with the module's look (films/data-that-moves/shared/src/: MD's colours, glass cards, lanes of light, the map's parts and
    its people), over the module's places and this film's own (hw_places.js). Every top-level name starts with hw_ or HW_.
 
-   Temperature isn't one of the module's colours, so it never takes one: where data is hot, warm or cold is shown by where it
-   lives and how it moves, and always said in words. Hot data sits at the top, close to the app that reads it, bright, its changes
-   running all the time; warm data in the middle, worked out on a schedule (a clock); cold data deep below, still, under frost.
-   The light on each band is only a tint of white: warm white for hot, cool white for cold, never the red of an error, the amber
-   of a person's turn or the blue of data moving.
+   Temperature here is how soon data must arrive for the action it serves: hot, within a second or less, usually for a machine that
+   acts on its own; warm, within minutes or hours; cold, days or weeks later. It isn't one of the module's colours, so it never takes
+   one: it's shown by how data moves, and always said in words. Hot data sits at the top, its events running one by one; warm data in
+   the middle, in small batches on a clock; cold data at the foot, one batch a night, still between its runs, under frost. The light
+   on each band is only a tint of white: warm white for hot, cool white for cold, never the red of an error, the amber of a person's
+   turn or the blue of data moving.
      hw_scr(ctx, S, fn)                  draw in the frame, whatever the camera does
      hw_thermo(ctx, x, y, h, level, o)   a thermometer: its glass, and its column of light up to level (0 cold, 1 hot)
      hw_bands(ctx, x, y, w, o)           the three temperatures, one band each, hot at the top: o.on [hot, warm, cold] (0 to 1, each
@@ -1830,17 +1824,17 @@ function md_tree(ctx,x,y,items,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||52,in
                                          returns each band's box
      hw_frost(ctx, x, y, w, h, a, r)     frost on glass, over a box
      hw_tempTag(ctx, x, y, key, o)       a small tag: a thermometer and the word (HOT, WARM, COLD)
-     hw_vaultLive(ctx, t, o)             the vault's tunnel, halls and boxes, over the place hwVault
-     hw_pin(ctx, x, y, o)                a place on the opening's map, and its label
+     hw_pin(ctx, x, y, o)                a town on the opening's map, and its label
      hw_arc(a, b, lift)                  a lane's points from a to b, bowed up by lift
+     hw_pigeon(ctx, x, y, s, o)          a homing pigeon seen from above; hw_flock(ctx, pts, t, o) birds flying a lane
+     hw_wire(ctx, pts, t, o)             a telegraph wire on its poles, its pulses running along it
      hw_timeline(ctx, x, y, w, o)        the moments of a pay week, in order: a change in HR, claims close, the night's load, pay day
      hw_app(ctx, x, y, w, h, o)          the claims app's page: claims, by unit and duty, and where each stands (never an amount)
      hw_bars(ctx, x, y, w, o)            each faculty's spending this year against its budget, as bars without figures
      hw_code(ctx, x, y, lines, o)        lines of code, in IBM Plex Mono
-     hw_years(ctx, x, y, o)              the pay records, a block of files for each year, on hot storage or the archive tier
-     hw_claim(ctx, x, y, o)              Linh's claim, as a card that cools as it goes
-     hw_rows(ctx, t, o)                  three kinds of data on their way across the map: the contracts, each faculty's spending, the pay
-                                         records, each from where it's born, through the platform, to who reads it */
+     hw_rows(ctx, t, o)                  three kinds of data on their way across the map, hot at the top: a bank account change, the
+                                         contracts, each faculty's spending, each from where it's born, through the platform, to who
+                                         acts on it */
 
 const HW={heat:[255,224,196],frost:[206,226,252],snow:[236,243,255],seed:[226,206,160]};
 const HW_BAND=[{key:"hot",n:"Hot",tint:[255,224,196],lvl:0.92},{key:"warm",n:"Warm",tint:[238,232,222],lvl:0.55},{key:"cold",n:"Cold",tint:[206,226,252],lvl:0.12}];
@@ -1876,9 +1870,9 @@ function hw_frostTex(){return ag_kept("hwFrost",1024,512,(c,w,h)=>{const rnd=ag_
 function hw_frost(ctx,x,y,w,h,a,r){if(!(a>0.004))return;ctx.save();ctx.globalAlpha*=clamp(a,0,1);rr(ctx,x,y,w,h,r==null?16:r);ctx.clip();ctx.drawImage(hw_frostTex(),x,y,w,h);ctx.restore();}
 
 /* ---------------------------------------------------------------- the three temperatures */
-const HW_LINES=[["within seconds or minutes · read all the time","small, and close to where it's used"],
-  ["fresh to the hour or the day · read often","worked out on a schedule"],
-  ["rarely read, but kept","cheap, until it may be deleted"]];
+const HW_LINES=[["acted on within a second or less","each event, the moment it happens"],
+  ["acted on within minutes or hours","small batches, every few minutes or hours"],
+  ["acted on days or weeks later","a batch, each night or each week"]];
 function hw_bands(ctx,x,y,w,o){o=o||{};const on=o.on||[1,1,1],h=o.h||150,gap=o.gap||20,boxes=[];
   HW_BAND.forEach((b,i)=>{const yy=y+i*(h+gap),box={x,y:yy,w,h};boxes.push(box);const k=on[i]||0;if(k<=0.004)return;const dim=o.hl==null?1:o.hl===i?1:0.42;
     ctx.save();ctx.globalAlpha*=ag_in(k,0,0.35)*dim;ag_about(ctx,x+w/2,yy+h/2,lerp(0.94,1,Math.min(1,ag_spr(k,0,0.5))));
@@ -1900,44 +1894,58 @@ function hw_tempTag(ctx,x,y,key,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)r
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,bx+w/2,y,lerp(0.6,1,ag_spr(o.k,0,0.5)));md_card(ctx,bx,y-h/2,w,h,{edge:b.tint,r:h/2,glow:0.6,fill:"rgba(7,12,26,0.94)"});
   if(key==="cold")hw_frost(ctx,bx,y-h/2,w,h,0.45,h/2);hw_thermo(ctx,bx+30,y-18,30,b.lvl,{w:10,marks:false});md_T(ctx,txt,bx+52,y+10,{w:800,size:28,ls:4,col:b.tint});ctx.restore();return{x:bx,y:y-h/2,w,h};}
 
-/* ---------------------------------------------------------------- the vault, live: its tunnel, its halls, the boxes in them
-   o.tunnel (0 to 1) the tunnel's light runs in from the door; o.halls (0 to 1) the halls light; o.boxes (0 to 1) the shelves fill;
-   o.cold (0 to 1) frost on the halls; o.out (0 to 1) boxes carried out along the tunnel to the door (2015); o.a */
-function hw_vaultLive(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const V=HW_VAULT;ctx.save();ctx.globalAlpha*=a;
-  const tu=clamp(o.tunnel==null?1:o.tunnel,0,1),[p0,p1]=V.tunnel;
-  if(tu>0){const pts=[[p0[0],p0[1]],[lerp(p0[0],p1[0],tu),lerp(p0[1],p1[1],tu)]];ctx.save();ctx.lineCap="round";ctx.strokeStyle="rgba(6,10,20,0.95)";ctx.lineWidth=30;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);ctx.lineTo(pts[1][0],pts[1][1]);ctx.stroke();ctx.restore();
-    md_lane(ctx,pts,HW.frost,0.9);}
-  const hl=clamp(o.halls||0,0,1);
-  V.halls.forEach(([x,y,w,h],i)=>{const k=clamp(hl*1.5-i*0.25,0,1);if(k<=0)return;ctx.save();ctx.globalAlpha*=ag_in(k,0,0.6);
-    md_card(ctx,x,y,w,h,{edge:HW.frost,glow:0.7,r:12,fill:"rgba(8,14,28,0.96)"});
-    // the shelves, and the sealed boxes on them, filling from the bottom
-    const bx=clamp((o.boxes||0)*1.3-i*0.15,0,1);for(let s=0;s<4;s++){const sy=y+h-28-s*42;ctx.strokeStyle=rgba(HW.frost,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+14,sy);ctx.lineTo(x+w-14,sy);ctx.stroke();
-      for(let b=0;b<5;b++){const f=clamp(bx*20-(s*5+b),0,1);if(f<=0)continue;const out=clamp((o.out||0)*24-(i*20+s*5+b)*0.6,0,1);if(i!==1&&out>0)continue;
-        ctx.save();ctx.globalAlpha*=f*(1-(i===1?out:0));rr(ctx,x+22+b*33,sy-34,28,32,3);ctx.fillStyle="rgba(46,58,84,1)";ctx.fill();ctx.strokeStyle=rgba(HW.frost,0.7);ctx.lineWidth=1.4;ctx.stroke();
-        ctx.fillStyle=rgba(HW.snow,0.75);ctx.fillRect(x+28+b*33,sy-26,16,4);ctx.restore();}}
-    hw_frost(ctx,x,y,w,h,(o.cold==null?1:o.cold)*0.6,12);ctx.restore();});
-  // boxes going out, along the tunnel to the door
-  if(o.out>0&&o.out<1){const p=mk([P(p1[0],p1[1]),P(p0[0],p0[1])]);spawn(t,0.6,2.2,0,(u)=>{if(u<0||u>1)return;const q=at(p,ease(u)),f=sstep(0,0.1,u)*(1-sstep(0.85,1,u))*sstep(0,0.08,o.out)*(1-sstep(0.85,1,o.out));
-      ctx.save();ctx.globalAlpha*=f;glow(ctx,q.x,q.y,26,HW.seed,0.6);rr(ctx,q.x-14,q.y-24,28,32,3);ctx.fillStyle="rgba(60,72,98,1)";ctx.fill();ctx.strokeStyle=rgba(HW.seed,0.9);ctx.lineWidth=1.6;ctx.stroke();ctx.restore();});}
-  ctx.restore();}
-
 /* ---------------------------------------------------------------- the opening's map: places and the lanes between them */
 // a place: a point of light (o.col: warm for seeds in use, frost for the vault), o.lit (0 to 1), o.out (0 to 1: its light gone, a ring
 // left), o.label {title, sub} on o.side ("right", "left", "above" or "below"), o.k springs it in
 function hw_pin(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const col=o.col||HW.heat,lit=o.lit==null?1:o.lit,out=o.out||0;ctx.save();ctx.globalAlpha*=a;
-  if(o.k!=null)ag_about(ctx,x,y,lerp(0.4,1,Math.min(1.2,ag_spr(o.k,0,0.5))));
+  // the point springs in; its label only fades, so its words never shrink below their size
+  ctx.save();if(o.k!=null)ag_about(ctx,x,y,lerp(0.4,1,Math.min(1.2,ag_spr(o.k,0,0.5))));
   glow(ctx,x,y,46,col,0.55*lit*(1-out));ctx.beginPath();ctx.arc(x,y,13,0,TAU);ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.4;ctx.stroke();
-  ctx.fillStyle=rgba(col,(1-out)*(0.4+0.6*lit));ctx.beginPath();ctx.arc(x,y,7,0,TAU);ctx.fill();
+  ctx.fillStyle=rgba(col,(1-out)*(0.4+0.6*lit));ctx.beginPath();ctx.arc(x,y,7,0,TAU);ctx.fill();ctx.restore();
   if(o.label){const L=o.label,side=o.side||"right",la=o.labelA==null?1:o.labelA,tw=Math.max(md_tw(ctx,L.title,{w:800,size:30}),L.sub?md_tw(ctx,L.sub,{w:600,size:28}):0);
     let lx=side==="left"?x-28-tw:side==="right"?x+28:x-tw/2,ly=side==="above"?y-(L.sub?78:40):side==="below"?y+52:y+(L.sub?-6:10);
     ctx.save();ctx.globalAlpha*=la;md_T(ctx,L.title,lx,ly,{w:800,size:30,col:MD.ink});if(L.sub)md_T(ctx,L.sub,lx,ly+36,{w:600,size:28,col:MD.soft});ctx.restore();}
   ctx.restore();}
 // a lane's points from a to b, bowed up by lift (px)
 function hw_arc(a,b,lift){const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2-(lift||0);return bez(P(a[0],a[1]),P(lerp(a[0],mx,0.7),lerp(a[1],my,0.7)),P(lerp(b[0],mx,0.7),lerp(b[1],my,0.7)),P(b[0],b[1]),40).map(p=>[p.x,p.y]);}
-// seed boxes carried along a lane: o.col, o.every, o.dur, o.a, o.back
-function hw_seeds(ctx,pts,t,o){o=o||{};md_flow(ctx,pts,t,{kind:"batch",col:o.col||HW.seed,every:o.every||1.6,dur:o.dur||2.4,a:o.a,back:o.back,size:o.size||0.62,off:o.off});}
+/* ---------------------------------------------------------------- the opening's pigeons
+   A homing pigeon seen from above, as the map sees it, flying along +x: a body that tapers from the breast to the tail's fan, a small
+   round head and its beak, and two long wings from the shoulders, each tapering to its tip, their span opening and closing with
+   o.flap (a phase, in turns). Grey-blue with darker tips and a pale edge where the map's light catches it; o.slip a thin slip of paper
+   at its leg. hw_pigeon(ctx, x, y, s, o): o.dir its heading (radians), o.a. hw_flock(ctx, pts, t, o): birds along a lane, one every
+   o.every s, each crossing in o.dur s, flapping as they go; o.a, o.off, o.s (size). */
+const HW_DOVE={body:[150,164,192],dark:[96,108,136],edge:[226,234,252],slip:[244,236,214]};
+function hw_pigeon(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const D=HW_DOVE,fl=Math.cos((o.flap||0)*TAU),span=lerp(0.42,1,0.5+0.5*fl),sweep=lerp(0.5,0.1,0.5+0.5*fl);
+  ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.dir||0);ctx.scale(s,s);
+  glow(ctx,0,0,58,D.edge,0.22);
+  // the wings: each from the shoulder, its leading edge a long curve to the tip, its trailing edge back to the body, tapering
+  for(const side of[-1,1]){const tipX=-14-26*sweep,tipY=side*58*span,midY=side*30*span;
+    ctx.beginPath();ctx.moveTo(8,side*5);ctx.bezierCurveTo(12,midY,tipX+18,tipY*0.92,tipX,tipY);ctx.bezierCurveTo(tipX-2,tipY*0.7,-10,midY*0.6,-12,side*6);ctx.closePath();
+    const g=ctx.createLinearGradient(0,0,0,tipY);g.addColorStop(0,rgba(D.body,1));g.addColorStop(0.7,rgba(mix(D.body,D.dark,0.4),1));g.addColorStop(1,rgba(D.dark,1));ctx.fillStyle=g;ctx.fill();
+    ctx.strokeStyle=rgba(D.edge,0.75);ctx.lineWidth=1.6/s;ctx.stroke();
+    // two dark bars across the wing, as a pigeon's wing has
+    ctx.strokeStyle=rgba(D.dark,0.8);ctx.lineWidth=2.2/s;for(const k of[0.38,0.52]){ctx.beginPath();ctx.moveTo(lerp(4,tipX,k*0.6),side*lerp(8,Math.abs(tipY),k));ctx.lineTo(lerp(-6,tipX,k*0.6),side*lerp(7,Math.abs(tipY),k)*0.96);ctx.stroke();}}
+  // the tail's fan, and the body tapering to it
+  ctx.beginPath();ctx.moveTo(-14,-5);ctx.quadraticCurveTo(-30,-11,-38,-10);ctx.quadraticCurveTo(-41,0,-38,10);ctx.quadraticCurveTo(-30,11,-14,5);ctx.closePath();ctx.fillStyle=rgba(D.dark,1);ctx.fill();ctx.strokeStyle=rgba(D.edge,0.6);ctx.lineWidth=1.2/s;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(20,0);ctx.bezierCurveTo(18,-9,0,-10,-16,-5);ctx.quadraticCurveTo(-20,0,-16,5);ctx.bezierCurveTo(0,10,18,9,20,0);ctx.closePath();
+  let g=ctx.createLinearGradient(0,-10,0,10);g.addColorStop(0,rgba(mix(D.body,D.edge,0.35),1));g.addColorStop(1,rgba(D.body,1));ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=rgba(D.edge,0.8);ctx.lineWidth=1.4/s;ctx.stroke();
+  // the head, a little darker, and its beak
+  ctx.beginPath();ctx.arc(24,0,6.5,0,TAU);ctx.fillStyle=rgba(mix(D.body,D.dark,0.35),1);ctx.fill();ctx.strokeStyle=rgba(D.edge,0.8);ctx.lineWidth=1.2/s;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(29.5,-1.6);ctx.lineTo(35,0);ctx.lineTo(29.5,1.6);ctx.closePath();ctx.fillStyle=rgba([214,196,170],1);ctx.fill();
+  // the slip of paper it carries, rolled at its leg
+  if(o.slip){ctx.save();ctx.globalAlpha*=o.slip;rr(ctx,-10,6,13,5,2);ctx.fillStyle=rgba(D.slip,1);ctx.fill();ctx.restore();}
+  ctx.restore();}
+function hw_flock(ctx,pts,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const p=mk(pts.map(q=>P(q[0],q[1])));
+  spawn(t,o.every||1.2,o.dur||3.2,o.off||0,(u,i)=>{if(u<0||u>1)return;const e=lerp(u,ease(u),0.4),q=at(p,e),q2=at(p,Math.min(1,e+0.01)),f=sstep(0,0.1,u)*(1-sstep(0.9,1,u))*a;if(f<=0.004)return;
+    const wob=Math.sin(t*2.1+i*1.7)*6;hw_pigeon(ctx,q.x,q.y+wob,o.s||0.62,{dir:Math.atan2(q2.y-q.y,q2.x-q.x),flap:t*3.1+i*0.37,a:f,slip:1});});}
+// a telegraph wire between towns: a lane of light on its poles, with words running along it as pulses (o.u how far it's strung)
+function hw_wire(ctx,pts,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u;md_lane(ctx,pts,MD.flow,0.85*a,{u});
+  // its poles, about every 70 px along it, as far as it's strung
+  let run=0,next=0;for(let i=0;i<pts.length;i++){if(i>0)run+=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);if(i/(pts.length-1)>u)break;
+    if(run>=next){const [x,y]=pts[i];ctx.fillStyle=rgba(MD.flow,0.8*a);ctx.beginPath();ctx.arc(x,y,3.4,0,TAU);ctx.fill();next=run+70;}}
+  if(u>=1&&o.flow!==false)md_flow(ctx,pts,t,{kind:"events",col:MD.flow,a,every:o.every||0.7,dur:o.dur||1.4,size:0.7,back:o.back});}
 
-/* ---------------------------------------------------------------- the hot chapter's week
+/* ---------------------------------------------------------------- the warm chapter's week
    The moments that decide when a tutor is paid, in order and equally spaced (not to scale): o.stops [{t: "Monday 09:00", s: "a change
    in HR", col, a}], each a point on the line with its time and what happens under it; o.span [{from, to, col, a, dash}] a lane
    along the line between two stops (fractions allowed: the change, on its way to the app); o.t for a dashed lane's motion; o.a. */
@@ -1978,45 +1986,19 @@ function hw_code(ctx,x,y,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=o.lh||44,hl
     if(hls.includes(i)){ctx.fillStyle=rgba(o.hlCol||MD.flow,0.13);rr(ctx,x-12,yy-32,(o.w||900),lh,8);ctx.fill();}
     md_T(ctx,L.s,x,yy,{w:500,size:28,f:"mono",col:L.col||MD.ink});ctx.restore();});ctx.restore();return lines.length*lh;}
 
-/* ---------------------------------------------------------------- the pay records, year by year
-   Each year a block of files, on the shelf of hot storage (the costliest) or sunk to the archive tier (the cheapest), under frost.
-   o.years ["2016", ...]; o.sink [0 to 1 per year] how far each has sunk; o.gone [0 to 1 per year] deleted, its files gone; o.read
-   [0 to 1 per year] read often (it glows); o.cols (spacing, 136); o.top (hot storage's shelf, y), o.low (the archive's shelf, y);
-   o.a. Returns each block's centre. */
-function hw_years(ctx,x,o){o=o||{};const a=o.a==null?1:o.a,ys=o.years||[],sp=o.cols||136,top=o.top||470,low=o.low||742,at=[];
-  ys.forEach((yr,i)=>{const cx=x+i*sp,s=ag_sine(o.sink?o.sink[i]||0:0),cy=lerp(top,low,s),g=o.gone?o.gone[i]||0:0,rd=o.read?o.read[i]||0:0;at.push([cx,cy]);if(a<=0.004||g>=1)return;
-    ctx.save();ctx.globalAlpha*=a*(1-ag_sine(g));
-    // the files: a small stack, personal data (lilac), cooled to frost as they sink
-    const col=mix(MD.personal,HW.frost,s*0.6);if(rd>0)glow(ctx,cx,cy-40,80,col,0.35*rd);
-    for(let k=2;k>=0;k--){rr(ctx,cx-42+k*7,cy-92-k*8,84,96,8);ctx.fillStyle=rgba(mix(col,MD.navy,0.78),1);ctx.fill();ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=1.8;ctx.stroke();}
-    ctx.fillStyle=rgba(col,0.55);for(let r=0;r<3;r++)ctx.fillRect(cx-28,cy-70+r*18,46,4);
-    if(s>0.02)hw_frost(ctx,cx-44,cy-108,104,112,s*0.8,8);
-    md_T(ctx,yr,cx,cy+80,{w:700,size:28,align:"center",col:rd>0.5?MD.ink:MD.soft});ctx.restore();});
-  return at;}
-// a storage shelf: a long glass ledge with its name; o.cold for the archive tier (frost), o.a
-function hw_shelf(ctx,x,y,w,title,sub,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
-  md_card(ctx,x,y,w,26,{edge:o.cold?HW.frost:[170,190,225],r:13,glow:0.5,fill:"rgba(12,20,40,0.95)"});if(o.cold)hw_frost(ctx,x,y,w,26,0.8,13);
-  md_T(ctx,title,x+w+30,y+4,{w:800,size:30,col:o.cold?HW.frost:MD.ink});if(sub)md_T(ctx,sub,x+w+30,y+42,{w:600,size:28,col:MD.soft});ctx.restore();}
-
-/* ---------------------------------------------------------------- Linh's claim, as a card that cools
-   o.temp 0 (cold) to 1 (hot): its edge and light follow; o.state its last line; o.a, o.k */
-function hw_claim(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||420,h=150;if(a<=0.004)return{x,y,w,h};const tp=clamp(o.temp==null?1:o.temp,0,1),col=mix(HW.frost,HW.heat,tp);
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));glow(ctx,x+w/2,y+h/2,w*0.6,col,0.32*tp);
-  md_card(ctx,x,y,w,h,{edge:col,glow:0.4+0.8*tp});if(tp<0.5)hw_frost(ctx,x,y,w,h,(0.5-tp)*1.6,18);
-  md_T(ctx,"LINH'S CLAIM",x+28,y+50,{w:800,size:28,ls:4,col});md_T(ctx,"Tutorials, last week",x+28,y+96,{w:700,size:32});
-  if(o.state)md_T(ctx,o.state,x+28,y+132,{w:600,size:28,col:MD.soft});md_icon(ctx,"doc",x+w-48,y+44,36,col);ctx.restore();return{x,y,w,h};}
-
 /* ---------------------------------------------------------------- three kinds of data, each on its way across the map
    The film's own close-up of the platform map: three rows, each a kind of data from where it's born (left), through the platform
-   (the middle, on Databricks' pane), to who reads it (right): the contracts, from the HR system to the claims app; each faculty's
-   spending, from the finance system's ledger to Finance's and the faculties' morning look; the pay records (personal: lilac, with a
-   lock), from the payroll system to an audit now and then. o.on [0 to 1, ...] each row comes in; o.hl a row's index (the others dim);
-   o.therm (0 to 1) a thermometer on each table, its level unknown; o.temp [0 to 1, ...] each row's temperature found: the column
-   settles at its level, and its tag comes in; o.say [words, ...] a line under each row's table, o.sayA [0 to 1, ...]; o.t; o.a. */
+   (the middle, on Databricks' pane), to who acts on it (right), hot at the top: a change to a bank account (personal: lilac, with a
+   lock), from the HR system to payroll, which holds a pay at once; the contracts, from the HR system to the claims app, every five
+   minutes; each faculty's spending, from the finance system's ledger to Finance's and the faculties' morning look, each night. Each
+   row moves as its temperature has it: events one by one, small batches, one batch a night. o.on [0 to 1, ...] each row comes in;
+   o.hl a row's index (the others dim); o.therm (0 to 1) a thermometer on each table, its level unknown; o.temp [0 to 1, ...] each
+   row's temperature found: the column settles at its level, and its tag comes in; o.say [words, ...] a line under each row's table,
+   o.sayA [0 to 1, ...]; o.night (over 0.5: every row moves once a night, as until September); o.t; o.a. */
 const HW_PAYROLL=[176,190,222];
-const HW_ROWS=[{sys:"hr",name:"contracts",reader:"Claims app",rsub:"checks each claim",icon:"doc"},
-  {sys:"fin",name:"spending_by_faculty",reader:"Each morning",rsub:"Finance, the faculties",icon:"person"},
-  {sys:{n:"Payroll system",s:"Each pay, each pay day",c:HW_PAYROLL},name:"pay_records",reader:"An audit",rsub:"now and then",icon:"eye",personal:true}];
+const HW_ROWS=[{sys:"hr",name:"bank_account_changes",reader:"Payroll",rsub:"holds a pay at once",icon:"lock",personal:true,flow:{kind:"events",every:0.45}},
+  {sys:"hr",name:"contracts",reader:"Claims app",rsub:"checks each claim",icon:"doc",flow:{kind:"batch",every:1.8,size:0.55}},
+  {sys:"fin",name:"spending_by_faculty",reader:"Each morning",rsub:"Finance, the faculties",icon:"person",flow:{kind:"batch",every:4.6}}];
 const HW_ROW={y:[222,442,662],sx:96,sw:404,px:600,pw:700,tx:650,tw:600,rx:1420,rw:420};
 function hw_rows(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,R=HW_ROW,on=o.on||[1,1,1],tp=o.temp||[0,0,0];if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
   const pa=Math.max(on[0],on[1],on[2]);md_platform(ctx,R.px,150,R.pw,670,{a:ag_in(pa,0,0.4),logos:true});
@@ -2027,7 +2009,7 @@ function hw_rows(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,R=HW_ROW,on=o.on||[1,1
     const rb=md_reader(ctx,R.rx,y,R.rw,{title:r.reader,sub:r.rsub,icon:r.icon,col:MD.ink});
     const l1=md_curve(sb.port,[tb.x,tb.y+36],{bend:0.5}),l2=md_curve([tb.x+tb.w,tb.y+36],rb.port,{bend:0.5}),u=ag_sine(clamp(k*1.6-0.3,0,1));
     md_lane(ctx,l1,r.personal?MD.personal:MD.flow,0.8,{u});md_lane(ctx,l2,r.personal?MD.personal:MD.flow,0.8,{u});
-    if(o.t!=null&&u>=1){md_flow(ctx,l1,o.t,{col:r.personal?MD.personal:MD.flow,off:i*0.7,every:1.4});md_flow(ctx,l2,o.t,{col:r.personal?MD.personal:MD.flow,off:i*0.5+0.3,every:1.6});}
+    if(o.t!=null&&u>=1){const F=(o.night||0)>0.5?{kind:"batch",every:4.6}:r.flow,fc=r.personal?MD.personal:MD.flow;md_flow(ctx,l1,o.t,{kind:F.kind,col:fc,off:i*0.7,every:F.every,size:F.size});md_flow(ctx,l2,o.t,{kind:F.kind,col:fc,off:i*0.5+0.3,every:F.every,size:F.size});}
     // the thermometer on the table: its level unknown (a slow drift) until its temperature is found
     const th=o.therm||0,f=ag_sine(tp[i]||0);
     if(th>0.004){const drift=0.5+0.18*Math.sin((o.t||0)*1.3+i*2.1),lv=lerp(drift,b.lvl,f);ctx.save();ctx.globalAlpha*=ag_in(th,0,0.5)*(1-ag_in(tp[i]||0,0.2,0.4));
@@ -2037,133 +2019,64 @@ function hw_rows(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,R=HW_ROW,on=o.on||[1,1
     ctx.restore();});
   ctx.restore();}
 
-/* ===== Hot, warm, cold: the film's own places =====
-   Painted once each (AG_PLACES; check.py times them), in the module's night:
-     hwWorld   the opening's map: the world as a globe of dots, from Svalbard down to the Mediterranean, centred on 57° N, 14° E. Its
-               land is the GLOBE land mask (NOAA, public domain, through the global-land-mask package), read on a 9 px grid of the
-               frame and kept here as bits (HW_LAND: one bit a dot, row by row). hw_geo(lat, lon) is where a place is on it.
-     hwVault   the seed vault on Svalbard, cut open: the night over the mountain, its snow, its rock, and the permafrost the store sits
-               in; the tunnel, the halls and the boxes in them are drawn live over it (hw_vaultLive, in hw_look.js), so they can light
-     hwFields  a field at first light, its rows running away to the hills, for the seeds sown in Lebanon and Morocco; what grows in it
-               is drawn live (hw_shoots), so it can grow
+/* ===== Hot, warm, cold: the film's own place =====
+   Painted once (AG_PLACES; check.py times it), in the module's night:
+     hwRoute   the opening's map: the Low Countries and the Rhineland in 1850, from London and Paris to Berlin, as a field of dots,
+               centred on 50.4° N, 7.9° E. Its land is the GLOBE land mask (NOAA, public domain, through the global-land-mask package),
+               read on a 9 px grid of the frame and kept here as bits (HW_LAND: one bit a dot, row by row). hw_geo(lat, lon) is where a
+               place is on it. The telegraph's wires, the railway and the pigeons are drawn live over it (hw_look.js), so they can move.
    Every top-level name starts with hw_ or HW_. */
 
-const HW_GLOBE={lon0:14,lat0:57,R:980,cx:760,cy:475,G:9,cols:213,rows:120,rowBytes:27};
-const HW_LAND="///Bn8f/gB/+4AAAAAH//////////wAAAAAA//+UH8f/AB//8AAAAAH//////////wAAAAAA//9ef8/4AD//8AAAAAH//////////6AAAAAA/////5/wAH//0AAAQAB//////////8AAAAAA/////x9wAf//8AABQAB///////////AAAAAA"+
-  "/////z5gAf//+AACAAB//////////+gAAAAA/////CzgD///+AACAAB///////////AAAAAA////+ClgA///wAAAAIBb//////////AAAAAA////8AAAT///gAAAAIA///////////kAAAAA////8AAAb///AAAAAIB///////////gAAAAA"+
-  "/////gAAP///AAcAAII///////////yAAAAA/////AAF///+ABwAAYH///////////wAAAAA/////AAG///6AA4AAYDuf/////////5AAAAA////+AAf///4AAUAAID5//////////4AAAAA////8AAf///4AAQAAMD8//////////4AAAAA"+
-  "/+f/wAB////wAAAAAIA/f/////////8AAAAA//v/wAD///6gAAAAAMAHf/////////8AAAAAH/z/gAD///7AAAAAAGAff/////////8AAAAAG/z/gAH///+AAAAAAHD/f/////////+AAAAAEf7/gAH///0AAAAAADD///////////+AAAAA"+
-  "APl+gAP///sAAAAAAAB///////////+AAAAAAGF/gAP9//wAAAAAAAD///////////+AAAAAAGF/AAP8MDAAAAAAAAH////////////AAAAAAcA/AAHwAAAAAAAAACf///////////+gAAAAAFAMAAOAAAAAAAAAAC////////////+gAAAA"+
-  "AGAAAAMAAAAAAAAAAA/////////////AAAAAADLwAAAAAAAAAAA2AM/////////////AAAAAABHgAAAAAAAAAABvIE/////////////AAAAAAAHAAAAAAOAAAAH//H/////////////gAAAAAAHgAAAAABgAAAP//z/////////////gAAAA"+
-  "AAHgAAAAAH4AAAf//1/////////////kAAAAAAHAAAAAAH4AAAv//3/////////////8AAAAAABAAAAAAH4AAAf/wP/////////////+AAAAAAGAAAAAAH4AAAP/8H/////////////+AAAAAAAAAAAAAAAAAA//83/////////////+AAAA"+
-  "AAAAAAAAAAAAAA//+P/////////////+AAAAAAAAAAAAAAAAAB/H/v/////////////+AAAAAAAAAAAAAAAAAD/H///////////////+AAAAAAAAAAAAAAAAAD/v////////////////AAAAAAAAAAAAAAAAAH/P////////////////AAAA"+
-  "AAAAAAAAAAAAAb+f////////////////AAAAAAAAAAAAAAAAA/8f////////////////AAAAAAAAAAAAAAAAB/8f////////////////AAAAAAAAAAAAAAAAB/4f///////////////+AAAAAAAAAAAAAAACB/4f///////////////+AAAA"+
-  "AAAAAAAAAAAAD/8fD//////////////8AAAAAAAAAAAAAAAAD/+MP//////////////2AAAAAAAAAAAAAACwD/+D///////////////yAAAAAAAAAAAAAAAgB/+D//////////////2yAAAAAAAAAAAAAADwDz8L//////////////4QAAAA"+
-  "AAAAAAAAAADwBD4J//////////////4RgAAAAAAAAAAAAADgAD4N//////////////wBgAAAAAAAAAAAAARgAZ8P//////////////wBAAAAAAAAAAAAAAbwA54P//////////////wAAAAAAAAAAAAAAD4wA7gP//////////////wAAAAA"+
-  "AAAAAAAAABxwAfgP//////////////gAAAAAAAAAAAAAADw4AQQf//////////////gIAAAAAAAAAAAAAHz4AwH///////////////wAAAAAAAAAAAAAAGD4A7f///////////////wAgAAAAAAAAAAAAAP8H/////////////////wAgAAA"+
-  "AAAAAAAAAAD8H/////////////////wAAAAAAAAAAAAAAAH4f/////////////////wAAAAAAAAAAAAAAAUc//////////////////wAAAAAAAAAAAAAAAAD//////////////////wAAAAAAAAAAAAAAAAH//////////////////wAAAAA"+
-  "AAAAAAAAAAB///////////////////gAAAAAAAAAAAAAAAf////////f//////////gAAAAAAAAAAAAAAAP///////+f//////////gAAAAAAAAAAAAAAAH///////8f//////////gAAAAAAAAAAAAAAAD//////+4f//////////gAAAAA"+
-  "AAAAAAAAAAD//////8ff//////////gAAAAAAAAAAAAAAAD//////4MB//////////gAAAAAAAAAAAAAAAD//////4IAP/////////AAAAAAAAAAAAAABQD//////4AAP/////////gAAAAAAAAAAAAAB8D//+///wAAP/////////gAAAAA"+
-  "AAAAAAAAB/3//8v//wAAf/////////wAAAAAAAAAAAAAB///+8f//wBB////////7/wAAAAAAAAAAAAAB//84eP//wH////////ez/wAAAAAAAAAAAAAD//4APB//wP////////Bx/wAAAAAAAAAAAAAD//4BPD//wf///////+AA/2AAAAA"+
-  "AAAAAAAAH//wBHgP//////////8AA/2AAAAAAAAAAAAAH//ABD4P/j////////4AAf0AAAAAAAAAAAAAH/8ABA+Pwf////////wAAHkAAAAAAAAAAAAAH/8IDAPPi/////////gAADgAAAAAAAAAAAAAD/8IDAMng////////+AAABgAAAAA"+
-  "AAAAAAAAA/4ADAGDwf///////cAAAAAAAAAAAAAAAAAAA/4AAACB8P/n/////QAAAAAAAAAAAAAAAAAAAAAAAAED0HiD///H8AAAAAAAAAAAAAAAAAAAAgAAADwAwBgj//+D4gAAAAAAAAAAAAAAAAAAB4H+JgwAQEBD//+AB3gAAAAAAAAA"+
-  "AAAAAAAAD////wQAAAAD///AB/gAAAAAAAAAAAAAAAAA/////gAAEgAH///gB/AAAAAAAAAAAAAAAAAA/////wAAAAAH///9D/AAAAAAAAAAAAAAAAAB/////wAAAAAH///9n+AAAAAAAAAAAAAAAAAB/////gAAAAAH////v+AAAAAAAAAA"+
-  "AAAAAAEB/////QAAAAAP//////AAAAAAAAAAAAAAAAAH/////wAAQAH//////+AAAAAAAAAAAAAAAAD///////AB9AP//////8AAAAAAAAAAAAAAAAH///////4D///f/////8AAAAAAAAAAAAAAAAf///////4D///v/////4AAAAAAAAAA"+
-  "AAAAAAf////////j///0/////4AAAAAAAAAAAAAAAB/////////////8f////4AAAAAAAAAAAAAAAD/////////////8P////gAAAAAAAAAAAAAAAP/////////////8H////AAAAAAAAAAAAAAAAP/////////////+D///+AAAAAAAAAAA"+
-  "AAAAAH//////////////A///+AAAAAAAAAAAAAAAAH//////////////gf//+AAAAAAAAAAAAAAAAP//////////////gf//8AAAAAAAAAAAAAAAAH//////////////8P//4IAAAAAAAAAAAAAAAH//////////////8B//wAAAAAAAAAAA"+
-  "AAAAAP//////////////+A//gAAAAAAAAAAAAAAAAP//////////////+Af/AAAAAAAAAAAAAAAAAf//////////////+AH+CAAAAAAAAAAAAAAAA////////////////wH8GAAAAAAAAAAAAAAAA////////////////yHwOAAAAAAAAAAA"+
-  "AAAAA////////////////6Dg+AAAAAAAAAAAgAAAA/////////////////jB8AAAAAAAAAAAwAAAAf////////////////4D8AAAAAAAAAAA4AAAAP////////////////8P4AAAAAAAAAAA4AAAAP////////////////7f4AAAAAAAAAAA";
+const HW_MAP={lon0:7.9,lat0:50.4,R:10000,cx:960,cy:540,G:9,cols:213,rows:120,rowBytes:27};
+const HW_LAND="///gAAAAAAAAAfAEf/m////////////////4///gAAAAAAAAGAd+//3////////////////4///gAAAAAAAAAD/+///////////////////4///AAAAAAAAAAP//H//////////////////4//+AAAAAAAABAf//n//////////////////4//8AAAAAAAAB"+
+  "A//////////////////////4//4P4AAAAAADA//////////////////////4//+P/AAAAAADB//////////////////////4//+f/gAAAAAGA//////////////////////4/////wAAAAAAA//////////////////////4/////4AAAAAGg///////////"+
+  "///////////4/////8AAAAAHx//////////////////////4/////8AAAAAHwH/////////////////////4/////8AAAAAHwP/////////////////////4/////8AAAAAP8P/////////////////////4/////8AAAAAP4P/////////////////////4"+
+  "/////8AAAAAPgP/////////////////////4/////8AAAAAPgf/////////////////////4/////8AAAAAPx//////////////////////4/////4AAAAAfj//////////////////////4/////wAAAAAfv//////////////////////4/////wAAAAA/"+
+  "P//////////////////////4/////wAAAAA////////////////////////4/////wAAAAB////////////////////////4/////AAAAAB////////////////////////4////6AAAAAD////////////////////////4////4AAAAAH/////////////"+
+  "///////////4////4AAAAAP////////////////////////4////4AAAAA/////////////////////////4///+wAAAAAf////////////////////////4///+AAAAAAf////////////////////////4///+AAAAADv////////////////////////4"+
+  "///+AAAAAA3////////////////////////4///8AAAAAPd////////////////////////4///AAAAAADn////////////////////////4///wAAAAA8/////////////////////////4///sAAAAB8/////////////////////////4///8+AAAA/H/"+
+  "///////////////////////4////8AAAAOn////////////////////////4////8AAADhP////////////////////////4////8AAAf//////////////////////////4////8AAB///////////////////////////4////4AAH////////////////"+
+  "///////////4///+AAAf///////////////////////////4///8AAB////////////////////////////4///8AA/////////////////////////////4gH/AAf/////////////////////////////4ABwAA//////////////////////////////4"+
+  "AAAAA//////////////////////////////4AAAAA//////////////////////////////4AAAAB//////////////////////////////4AAAAB//////////////////////////////4AAAAB//////////////////////////////4AAAAB///////"+
+  "///////////////////////4AAAAB//////////////////////////////4AAAAB//////////////////////////////4AAAAD//////////////////////////////4AAAAD//////////////////////////////4AAAAD///////////////////"+
+  "///////////4AAAAB//////////////////////////////4AAAAH//////////////////////////////4AAAAH//////////////////////////////4AAAAP//////////////////////////////4AAAAf//////////////////////////////4"+
+  "AAAB///////////////////////////////4AAAf///////////////////////////////4AAH////////////////////////////////4AAf////////////////////////////////4AD/////////////////////////////////4AD//////////"+
+  "///////////////////////4AH/////////////////////////////////4AH/////////////////////////////////4AH/////////////////////////////////4AB/////////////////////////////////4gH//////////////////////"+
+  "///////////44f/////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4"+
+  "///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4////////////"+
+  "///////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4////////////////////////"+
+  "///////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4"+
+  "///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4////////////"+
+  "///////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4////////////////////////"+
+  "///////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4"+
+  "///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4///////////////////////////////////4////////////"+
+  "///////////////////////4///////////////////////////////////4///////////////////////////////////4";
 
-// where a place is on the globe, in the frame: orthographic, as the land mask was read
-function hw_geo(lat,lon){const r=Math.PI/180,G=HW_GLOBE,la=lat*r,lo=(lon-G.lon0)*r,l0=G.lat0*r;
+// where a place is on the map, in the frame: orthographic, as the land mask was read
+function hw_geo(lat,lon){const r=Math.PI/180,G=HW_MAP,la=lat*r,lo=(lon-G.lon0)*r,l0=G.lat0*r;
   return[G.cx+G.R*Math.cos(la)*Math.sin(lo),G.cy-G.R*(Math.cos(l0)*Math.sin(la)-Math.sin(l0)*Math.cos(la)*Math.cos(lo))];}
-// the places the opening names: the vault, the gene bank at Tel Hadya near Aleppo, its new homes at Terbol (Lebanon) and Rabat (Morocco)
-const HW_AT={svalbard:hw_geo(78.236,15.491),aleppo:hw_geo(36.017,36.94),terbol:hw_geo(33.81,35.98),rabat:hw_geo(33.97,-6.85)};
+// the places the opening names, and the towns its wires and railway pass through
+const HW_AT={berlin:hw_geo(52.52,13.40),aachen:hw_geo(50.776,6.084),brussels:hw_geo(50.85,4.35),paris:hw_geo(48.857,2.352),
+  london:hw_geo(51.507,-0.128),liege:hw_geo(50.633,5.567),cologne:hw_geo(50.94,6.96)};
 let HW_BITS=null;
 function hw_bits(){if(HW_BITS)return HW_BITS;const s=atob(HW_LAND),b=new Uint8Array(s.length);for(let i=0;i<s.length;i++)b[i]=s.charCodeAt(i);return HW_BITS=b;}
-const hw_land=(r,c)=>{const b=hw_bits(),G=HW_GLOBE;return r>=0&&r<G.rows&&c>=0&&c<G.cols&&((b[r*G.rowBytes+(c>>3)]>>(7-(c&7)))&1)===1;};
+const hw_land=(r,c)=>{const b=hw_bits(),G=HW_MAP;return r>=0&&r<G.rows&&c>=0&&c<G.cols&&((b[r*G.rowBytes+(c>>3)]>>(7-(c&7)))&1)===1;};
 
-AG_PLACES.hwWorld=c=>{md_paintNight(c,{grid:false});const G=HW_GLOBE;
-  // the sea: a faint glow where the route runs, so the land reads from the night
-  let g=c.createRadialGradient(780,520,0,780,520,760);g.addColorStop(0,"rgba(60,96,150,0.10)");g.addColorStop(1,"rgba(60,96,150,0)");c.fillStyle=g;c.fillRect(0,0,W,H);
-  // the land: a dot every 9 px, brighter near the route and fading towards the frame's far corners
-  for(let r=0;r<G.rows;r++)for(let q=0;q<G.cols;q++){if(!hw_land(r,q))continue;const x=q*G.G+G.G/2,y=r*G.G+G.G/2,d=Math.hypot((x-800)/1150,(y-500)/700),
-    coast=!(hw_land(r-1,q)&&hw_land(r+1,q)&&hw_land(r,q-1)&&hw_land(r,q+1)),a=clamp(0.62-0.42*d,0.1,0.62)*(coast?1.25:1);
-    c.fillStyle=rgba(coast?[150,172,212]:[112,132,170],clamp(a,0,0.8));c.beginPath();c.arc(x,y,coast?2.5:2.2,0,TAU);c.fill();}
-  // the Arctic Circle, faint: the vault is far north of it
-  c.save();c.strokeStyle="rgba(150,180,230,0.16)";c.lineWidth=1.4;c.setLineDash([3,7]);c.beginPath();for(let lon=-40;lon<=70;lon+=1){const [x,y]=hw_geo(66.56,lon);lon===-40?c.moveTo(x,y):c.lineTo(x,y);}c.stroke();c.restore();
+AG_PLACES.hwRoute=c=>{md_paintNight(c,{grid:false});const G=HW_MAP;
+  // the sea: a faint glow over the Channel and the North Sea, so the coast reads from the night
+  let g=c.createRadialGradient(240,200,0,240,200,700);g.addColorStop(0,"rgba(60,96,150,0.14)");g.addColorStop(1,"rgba(60,96,150,0)");c.fillStyle=g;c.fillRect(0,0,W,H);
+  // the land: a dot every 9 px, brighter along the route from Paris to Berlin, fading towards the frame's far corners; the coast lit
+  for(let r=0;r<G.rows;r++)for(let q=0;q<G.cols;q++){if(!hw_land(r,q))continue;const x=q*G.G+G.G/2,y=r*G.G+G.G/2,d=Math.hypot((x-900)/1250,(y-480)/640),
+    coast=!(hw_land(r-1,q)&&hw_land(r+1,q)&&hw_land(r,q-1)&&hw_land(r,q+1)),a=clamp(0.42-0.3*d,0.07,0.42)*(coast?1.8:1);
+    c.fillStyle=rgba(coast?[150,172,212]:[104,122,160],clamp(a,0,0.8));c.beginPath();c.arc(x,y,coast?2.5:2.0,0,TAU);c.fill();}
   const v=c.createRadialGradient(W/2,H/2,H*0.4,W/2,H/2,W*0.75);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.5)");c.fillStyle=v;c.fillRect(0,0,W,H);};
-
-/* ---------------------------------------------------------------- the vault, cut open
-   The mountain in section: its snowy slope rises steeply from the fjord's shore on the left to a plateau on the right; the entrance
-   stands out of the slope at HW_VAULT.door, and the tunnel runs from it deep into the rock (HW_VAULT.tunnel) to the store's three
-   halls (HW_VAULT.halls), in the permafrost. Not to scale. The painted night holds only what never changes. */
-const HW_VAULT={door:[548,668],tunnel:[[566,700],[1196,730]],halls:[[1232,630,196,190],[1446,630,196,190],[1660,630,196,190]],
-  surface:[[0,782],[200,776],[360,752],[470,712],[560,660],[660,560],[760,440],[860,346],[980,286],[1140,256],[1400,242],[1920,236]]};
-function hw_surface(c,S){c.moveTo(S[0][0],S[0][1]);for(let i=1;i<S.length;i++){const a=S[i-1],b=S[i];c.quadraticCurveTo(a[0],a[1],(a[0]+b[0])/2,(a[1]+b[1])/2);}c.lineTo(S[S.length-1][0],S[S.length-1][1]);}
-AG_PLACES.hwVault=c=>{md_paintNight(c,{grid:false});const rnd=ag_rnd(2008),S=HW_VAULT.surface;
-  // a twilight band low in the sky: February, the sun only just back
-  let g=c.createLinearGradient(0,0,0,800);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(0.75,"rgba(70,100,150,0.12)");g.addColorStop(1,"rgba(130,160,210,0.26)");c.fillStyle=g;c.fillRect(0,0,W,800);
-  for(let i=0;i<190;i++){const x=rnd()*W,y=rnd()*620,s=0.6+rnd()*1.3;c.fillStyle="rgba(220,232,255,"+((0.15+rnd()*0.5)*(1-y/800)).toFixed(3)+")";c.beginPath();c.arc(x,y,s,0,TAU);c.fill();}
-  // the far shore of the fjord, low and dark, and the water before it
-  c.beginPath();c.moveTo(0,790);[[0,700],[90,690],[200,708],[300,694],[400,716],[470,730]].forEach(p=>c.lineTo(p[0],p[1]));c.lineTo(470,790);c.closePath();c.fillStyle="#141d34";c.fill();
-  // the mountain: rock in section, under its snow
-  c.beginPath();hw_surface(c,S);c.lineTo(W,H);c.lineTo(0,H);c.closePath();
-  g=c.createLinearGradient(0,240,0,H);g.addColorStop(0,"#202940");g.addColorStop(0.45,"#161d2f");g.addColorStop(1,"#0b0f1b");c.fillStyle=g;c.fill();
-  c.save();c.clip();
-  // the rock's layers: strata that dip gently, broken here and there
-  for(let k=0;k<14;k++){const y0=300+k*58;c.strokeStyle="rgba(160,172,205,"+(0.04+0.025*(k%3===0))+")";c.lineWidth=2+((k*7)%5);c.beginPath();
-    for(let x=0;x<=W;x+=30){const y=y0+0.07*x+9*Math.sin(x/140+k*1.7)+5*Math.sin(x/47+k);x===0?c.moveTo(x,y):c.lineTo(x,y);}c.stroke();}
-  for(let i=0;i<60;i++){const x=rnd()*W,y=300+rnd()*760,l=20+rnd()*60,an=0.3+rnd()*0.9;c.strokeStyle="rgba(150,165,200,0.06)";c.lineWidth=1.5;c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.cos(an)*l,y+Math.sin(an)*l);c.stroke();}
-  // the permafrost: rock frozen all year round, the store's own cold; a faint frost in it
-  g=c.createLinearGradient(0,300,0,H);g.addColorStop(0,"rgba(190,215,250,0.02)");g.addColorStop(0.4,"rgba(190,215,250,0.07)");g.addColorStop(1,"rgba(190,215,250,0.03)");c.fillStyle=g;c.fillRect(0,240,W,H);
-  for(let i=0;i<1400;i++){const x=rnd()*W,y=280+rnd()*800,z=1+rnd()*2.2;c.fillStyle="rgba(214,230,255,"+(0.03+rnd()*0.08).toFixed(3)+")";c.fillRect(x,y,z,z);}
-  c.restore();
-  // the snow: a layer along the surface, thick on the plateau, lit along its top
-  c.save();c.beginPath();hw_surface(c,S);c.lineTo(W,S[S.length-1][1]+40);for(let i=S.length-1;i>=0;i--){const [x,y]=S[i];c.lineTo(x,y+(x>900?34:x>500?22:16));}c.closePath();
-  g=c.createLinearGradient(0,230,0,800);g.addColorStop(0,"rgba(196,210,236,0.55)");g.addColorStop(1,"rgba(150,168,204,0.35)");c.fillStyle=g;c.fill();c.restore();
-  c.save();c.lineJoin="round";c.lineCap="round";c.beginPath();hw_surface(c,S);c.strokeStyle="rgba(214,226,248,0.4)";c.lineWidth=8;c.stroke();c.strokeStyle="rgba(244,248,255,0.9)";c.lineWidth=2.2;c.stroke();c.restore();
-  // the entrance: a narrow wedge of concrete standing out of the slope, its door facing the fjord, its edge catching the light
-  const [dx,dy]=HW_VAULT.door;c.beginPath();c.moveTo(dx-50,dy+40);c.lineTo(dx-50,dy-46);c.lineTo(dx+56,dy-160);c.lineTo(dx+128,dy-160);c.lineTo(dx+128,dy-70);c.lineTo(dx+12,dy+40);c.closePath();
-  g=c.createLinearGradient(dx-50,0,dx+128,0);g.addColorStop(0,"#6b7893");g.addColorStop(0.35,"#46526d");g.addColorStop(1,"#262f45");c.fillStyle=g;c.fill();
-  c.strokeStyle="rgba(230,240,255,0.65)";c.lineWidth=1.8;c.beginPath();c.moveTo(dx-50,dy+40);c.lineTo(dx-50,dy-46);c.lineTo(dx+56,dy-160);c.stroke();
-  c.fillStyle="#090d1a";c.fillRect(dx-38,dy-16,30,56);c.strokeStyle="rgba(210,235,255,0.75)";c.lineWidth=1.6;c.strokeRect(dx-38,dy-16,30,56);
-  const v=c.createRadialGradient(W/2,H/2,H*0.4,W/2,H/2,W*0.75);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.5)");c.fillStyle=v;c.fillRect(0,0,W,H);};
-
-/* ---------------------------------------------------------------- a field at first light
-   The sky pales over low hills; rows of tilled earth run away to them from the foot of the frame (their vanishing point HW_FIELD.vp).
-   The shoots in the rows are drawn live by hw_shoots, at any height, so the field can be sown and grow. */
-const HW_FIELD={vp:[960,560],horizon:560,rows:15};
-AG_PLACES.hwFields=c=>{const hz=HW_FIELD.horizon;let g=c.createLinearGradient(0,0,0,hz);g.addColorStop(0,"#070c1c");g.addColorStop(0.55,"#1a2140");g.addColorStop(0.85,"#4a4458");g.addColorStop(1,"#8a7568");c.fillStyle=g;c.fillRect(0,0,W,hz+2);
-  // the first light, low and soft on the horizon
-  g=c.createRadialGradient(1240,hz,0,1240,hz,820);g.addColorStop(0,"rgba(255,214,170,0.35)");g.addColorStop(1,"rgba(255,214,170,0)");c.fillStyle=g;c.fillRect(0,0,W,hz+2);
-  // low hills
-  for(const [base,amp,col,seed] of [[hz-34,26,"#2a2b42",3],[hz-12,18,"#1d2034",7]]){c.beginPath();c.moveTo(0,hz+2);for(let x=0;x<=W;x+=24){c.lineTo(x,base-amp*(0.5+0.5*Math.sin(x/260+seed))-8*Math.sin(x/90+seed*2));}c.lineTo(W,hz+2);c.closePath();c.fillStyle=col;c.fill();}
-  // the earth, darker towards us
-  g=c.createLinearGradient(0,hz,0,H);g.addColorStop(0,"#2c2630");g.addColorStop(0.4,"#1d1820");g.addColorStop(1,"#0f0c12");c.fillStyle=g;c.fillRect(0,hz,W,H-hz);
-  // the rows: low ridges of tilled earth running to the vanishing point, each lit a little on its far side, the furrows between darker
-  const [vx,vy]=HW_FIELD.vp,n=HW_FIELD.rows;for(let i=0;i<n;i++){const x0=-900+i*(3720/n),x1=-900+(i+1)*(3720/n),xm=(x0+x1)/2,top=[vx,vy+2];
-    c.beginPath();c.moveTo(top[0]+(x0-vx)*0.004,top[1]);c.lineTo(x0,H);c.lineTo(xm,H);c.lineTo(top[0]+(xm-vx)*0.004,top[1]);c.closePath();
-    g=c.createLinearGradient(0,vy,0,H);g.addColorStop(0,"rgba(60,48,58,0.0)");g.addColorStop(1,"rgba(70,56,62,0.55)");c.fillStyle=g;c.fill();
-    c.beginPath();c.moveTo(top[0]+(xm-vx)*0.004,top[1]);c.lineTo(xm,H);c.lineTo(x1,H);c.lineTo(top[0]+(x1-vx)*0.004,top[1]);c.closePath();
-    g=c.createLinearGradient(0,vy,0,H);g.addColorStop(0,"rgba(10,8,12,0.0)");g.addColorStop(1,"rgba(10,8,12,0.5)");c.fillStyle=g;c.fill();}
-  const rnd=ag_rnd(77);for(let i=0;i<2600;i++){const y=HW_FIELD.horizon+Math.pow(rnd(),1.4)*(H-HW_FIELD.horizon),x=rnd()*W,z=0.6+((y-HW_FIELD.horizon)/(H-HW_FIELD.horizon))*2.4;c.fillStyle="rgba(150,126,120,"+(0.05+rnd()*0.08).toFixed(3)+")";c.fillRect(x,y,z,z*0.7);}
-  g=c.createLinearGradient(0,hz,0,hz+120);g.addColorStop(0,"rgba(120,100,110,0.5)");g.addColorStop(1,"rgba(120,100,110,0)");c.fillStyle=g;c.fillRect(0,hz,W,120);
-  const v=c.createRadialGradient(W/2,H/2,H*0.4,W/2,H/2,W*0.75);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.5)");c.fillStyle=v;c.fillRect(0,0,W,H);};
-// where row i (0 to HW_FIELD.rows) is at depth u (0 at the horizon, 1 at the foot of the frame)
-function hw_rowAt(i,u){const [vx,vy]=HW_FIELD.vp,xb=-900+i*(3720/HW_FIELD.rows),k=Math.pow(u,1.6);return[vx+(xb-vx)*Math.max(0.004,k),vy+2+(H-vy-2)*k];}
-// the shoots in the rows: g (0 to 1) how far they've grown; nearer shoots larger; ripe (0 to 1) turns them from green to the gold of grain
-function hw_shoots(ctx,g,o){o=o||{};if(g<=0)return;const ripe=o.ripe||0,col=mix([120,184,118],[214,190,120],ripe),rnd=ag_rnd(1115);
-  for(let i=0;i<=HW_FIELD.rows;i++)for(let j=0;j<26;j++){const u=0.06+0.94*Math.pow(j/25,1.05),[x,y]=hw_rowAt(i,u),s=(2+u*30)*g,sway=(rnd()-0.5)*0.5;if(x<-40||x>W+40)continue;
-    ctx.strokeStyle=rgba(col,0.55+0.35*u);ctx.lineWidth=Math.max(1,u*3.4);ctx.lineCap="round";
-    for(const dx of[-0.5,0,0.5]){ctx.beginPath();ctx.moveTo(x+dx*u*10,y);ctx.quadraticCurveTo(x+dx*u*12+sway*s*0.3,y-s*0.6,x+dx*u*20+sway*s*0.5,y-s);ctx.stroke();}}}
 
 /* ===== Hot, warm, cold: the scenes =====
-   Seven chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The places are painted once
+   Six chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The place is painted once
    (hw_places.js, and the module's map and night); what moves is drawn live in the shots of ag_shots. In one place the camera never
-   jumps: most chapters are one shot on one place, its camera still, and what changes there fades or slides while the rest stays put.
-   A new place dissolves in, since no two places here show the same people or words. Words drawn in the frame (dates, cards, pills)
-   go through hw_scr, so they keep their size whatever the camera does, and come in once the camera has arrived. */
+   jumps: it glides on from where it is, and what changes there fades or slides while the rest stays put. A new place dissolves in,
+   since no two places here show the same people or words. Words drawn in the frame (dates, cards, pills) go through hw_scr, so they
+   keep their size whatever the camera does, and come in once the camera has arrived. */
 
 // a moment's date or time, at the top left of the frame
 const HW_WHEN=[214,222,240];
@@ -2178,292 +2091,266 @@ function hw_personAt(ctx,who,x,y,s,tt,t0,t1,o){const a=hw_io(tt,t0,t1==null?1e9:
 function hw_dim(ctx,S,a){if(!(a>0.004))return;hw_scr(ctx,S,()=>{ctx.fillStyle="rgba(4,8,18,"+clamp(a,0,1).toFixed(3)+")";ctx.fillRect(0,0,W,H);});}
 // two words, a label and its value, on one line of a card
 function hw_pair(ctx,x,y,k,v,o){o=o||{};md_T(ctx,k,x,y,{w:600,size:28,col:MD.soft});md_T(ctx,v,x+(o.dx||200),y,{w:700,size:28,col:o.col||MD.ink});}
+// a dashed card: something asked, or not yet here
+function hw_ghost(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=md_tw(ctx,s,{w:700,size:28})+56;md_card(ctx,x-(o.align==="center"?w/2:0),y-28,w,56,{dash:true,edge:o.col||MD.soft,r:28,a});
+  md_T(ctx,s,x+(o.align==="center"?0:28),y+10,{w:700,size:28,align:o.align==="center"?"center":"left",col:o.col||MD.soft,a});}
 
-/* ---------------------------------------------------------------- 1 · The seed vault */
-// the opening's lanes on the map: Aleppo's copies up to Svalbard, the copies sent back down to Lebanon and to Morocco, and the seeds a
-// gene bank sends out to breeders
+/* ---------------------------------------------------------------- 1 · The pigeon post */
+// the opening's lanes on the map: the wire from Berlin through Cologne to Aachen, the wire from Paris to Brussels, the gap between
+// Brussels and Aachen, the railway across it by Liège, and the pigeons' way over it
 const hw_bz=(a,b,c,d)=>bez(P(a[0],a[1]),P(b[0],b[1]),P(c[0],c[1]),P(d[0],d[1]),40).map(p=>[p.x,p.y]);
-const HW_LANES={up:hw_bz([1069,773],[1190,560],[1010,190],[765,120]),toLeb:hw_bz([765,120],[1010,190],[1180,560],[1065,811]),
-  toMor:hw_bz([765,120],[560,250],[400,560],[471,814]),out:[[1300,690],[880,700],[1215,860]].map(p=>hw_arc([1069,773],p,50))};
-// a few of the world's gene banks, unnamed: points of warm light
-const HW_BANKS=[[612,606],[700,560],[842,520],[560,690],[930,640],[1180,612],[1340,520],[760,470]];
+const HW_LANES={berlin:hw_bz(HW_AT.berlin,[1260,240],[980,400],HW_AT.cologne).concat(hw_bz(HW_AT.cologne,[820,452],[790,462],HW_AT.aachen).slice(1)),
+  paris:hw_bz(HW_AT.paris,[420,690],[520,560],HW_AT.brussels),gap:hw_arc(HW_AT.brussels,HW_AT.aachen,0),
+  rail:hw_bz(HW_AT.brussels,[610,500],[650,512],HW_AT.liege).concat(hw_bz(HW_AT.liege,[722,500],[742,488],HW_AT.aachen).slice(1)),
+  birds:hw_arc(HW_AT.brussels,HW_AT.aachen,34),london:hw_bz(HW_AT.aachen,[640,330],[300,250],HW_AT.london)};
 
-scene("vault",(ctx,S,t,sc)=>{
-  const T={deep:wAt(sc,"feb","Deep"),open:wAt(sc,"feb","a vault opens"),copies:sc.cues.copies,minus:wAt(sc,"copies","minus eighteen"),from:wAt(sc,"copies","from gene banks"),
-    banks:sc.cues.banks,breed:wAt(sc,"banks","so breeders"),aleppo:sc.cues.aleppo,samples:wAt(sc,"aleppo","samples"),send:sc.cues.send,toV:wAt(sc,"send","to the vault"),
-    lost:sc.cues.lost,war:sc.cues.war,leave:wAt(sc,"war","had to leave"),noSend:wAt(sc,"war","no longer send"),risk:sc.cues.risk,every:wAt(sc,"risk","every variety"),
-    change:sc.cues.change,ask:sc.cues.ask,asked:wAt(sc,"ask","they asked"),sown:sc.cues.sown,out:wAt(sc,"sown","came out"),nov:wAt(sc,"sown","that November"),
-    gone:sc.cues.gone,few:sc.cues.few,again:wAt(sc,"few","breeders can order"),kept:sc.cues.kept,far:wAt(sc,"kept","their copies"),
-    data:sc.cues.data,temp:wAt(sc,"data","temperature"),alike:sc.cues.alike,fresh:wAt(sc,"alike","how fresh"),often:wAt(sc,"alike","how often"),
-    slow:sc.cues.slow,tutors:wAt(sc,"slow","twenty-three"),cost:wAt(sc,"slow","some cost"),now:sc.cues.now,own:wAt(sc,"now","its own temperature"),since:wAt(sc,"now","no tutor"),br:sc.cues.breath};
-  const A=HW_AT,CARD=[1290,150,560];
+scene("pigeons",(ctx,S,t,sc)=>{
+  const T={aachen:wAt(sc,"april","In Aachen"),reuter:wAt(sc,"april","Paul Julius Reuter"),news:wAt(sc,"april","the news"),lines:sc.cues.lines,berlin:wAt(sc,"lines","from Berlin"),
+    paris:wAt(sc,"lines","from Paris"),gap:sc.cues.gap,nowire:wAt(sc,"gap","no wire"),traders:sc.cues.traders,act:wAt(sc,"traders","they act"),train:sc.cues.train,byTrain:wAt(sc,"train","by train"),
+    hoursOld:wAt(sc,"train","hours after"),useless:sc.cues.useless,deal:wAt(sc,"useless","someone else"),need:sc.cues.need,before:wAt(sc,"need","before they acted"),faster:wAt(sc,"need","cross the gap faster"),
+    birds:sc.cues.birds,geller:wAt(sc,"birds","Heinrich Geller"),flew:wAt(sc,"birds","flew the prices"),slip:sc.cues.slip,sent:wAt(sc,"slip","the telegraph"),hours:sc.cues.hours,two:wAt(sc,"hours","two hours"),six:wAt(sc,"hours","ahead of the train"),
+    time:wAt(sc,"hours","still time"),while:sc.cues.while,joined:wAt(sc,"while","until the wire"),fresh:sc.cues.fresh,whoever:wAt(sc,"fresh","whoever acts"),night:sc.cues.night,once:wAt(sc,"night","once a night"),
+    live:wAt(sc,"night","wanted theirs live"),slow:sc.cues.slow,tutors:wAt(sc,"slow","twenty-three"),thief:wAt(sc,"slow","two people's pay"),now:sc.cues.now,serves:wAt(sc,"now","the action it serves"),br:sc.cues.breath};
+  const A=HW_AT,CARD=[1220,640,600];
   ag_shots(ctx,S,t,sc.dur,[
-    // February 2008: Svalbard in the polar night, the mountain cut open; the vault's door, its tunnel and its halls light, and the copies come in
-    {at:0,place:"hwVault",keys:[[0,700,610,1.5],[T.deep-0.5,960,540,1]],d:4.2,push:0.015,draw:(c,tt)=>{
-      const op=ag_in(tt,T.open-0.1,0.7);
-      if(op>0){glow(c,525,680,110,HW.frost,0.5*op);c.save();c.globalAlpha*=op;rr(c,511,653,28,54,1);c.fillStyle=rgba(HW.frost,0.6);c.fill();c.restore();}
-      hw_vaultLive(c,tt,{tunnel:ag_sine((tt-T.open)/1.6),halls:ag_sine((tt-T.open-0.8)/1.4),boxes:clamp((tt-T.copies)/3.4,0,1),cold:ag_in(tt,T.minus,1.8)});
-      if(tt>T.from-0.3)md_flow(c,HW_VAULT.tunnel,tt,{kind:"batch",col:HW.seed,every:0.9,dur:1.6,size:0.5,a:hw_io(tt,T.from-0.2,T.banks,0.5,0.4)});
-      hw_tempTag(c,1544,566,"cold",{text:"minus 18 °C",align:"center",a:ag_in(tt,T.minus,0.5),k:(tt-T.minus)/0.9});
-      hw_when(c,S,"Svalbard · February 2008",ag_in(tt,0.9,0.6));}},
-    // the world's gene banks, the vault far north, and the bank near Aleppo: its copies sent up to the vault, its seeds out to breeders
-    {at:T.banks-0.35,place:"hwWorld",keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
-      const war=ag_in(tt,T.leave,1.2),stop=ag_in(tt,T.noSend,0.8),ask=ag_in(tt,T.asked,0.6),sown=ag_in(tt,T.out,0.5);
-      HW_BANKS.forEach(([x,y],i)=>{const a=ag_in(tt,T.banks+0.5+i*0.18,0.5)*(1-0.6*ag_in(tt,T.aleppo,0.6));if(a>0.004){glow(c,x,y,22,HW.seed,0.5*a);c.fillStyle=rgba(HW.seed,0.85*a);c.beginPath();c.arc(x,y,4.5,0,TAU);c.fill();}});
-      // the seeds the bank sends out to breeders, until the war
-      HW_LANES.out.forEach((pts,i)=>{const a=ag_in(tt,T.samples+0.4+i*0.25,0.6)*(1-stop);if(a<=0.004)return;md_lane(c,pts,HW.seed,0.55*a,{u:ag_sine((tt-T.samples-0.4-i*0.25)/1.2)});
-        if(tt>T.samples+1.6)hw_seeds(c,pts,tt,{every:1.4,dur:1.8,a,size:0.45,off:i*0.5});});
-      withA(c,ag_in(tt,T.samples+1.2,0.5)*(1-stop),()=>md_T(c,"to breeders",1318,676,{w:600,size:28,col:MD.soft}));
-      // its copies, up to the vault, from 2008, until it can't send them
-      const upA=ag_in(tt,T.send+0.2,0.5)*(1-0.85*stop);
-      if(upA>0.004){md_lane(c,HW_LANES.up,HW.seed,0.75*upA,{u:ag_sine((tt-T.send-0.2)/1.6)});if(tt>T.send+1.4)hw_seeds(c,HW_LANES.up,tt,{every:1.5,dur:2.6,a:upA*(1-stop)});}
-      hw_tagAt(c,1124,452,"copies, from 2008",tt,T.send+0.9,T.lost,{col:HW.seed});
-      // 2015: the keepers, now in Lebanon, ask the vault for their copies; the copies come down to Lebanon and to Morocco
-      if(ask>0.004&&sown<1)md_way(c,"api",[1065,811],[765,120],tt,{pts:HW_LANES.toLeb.slice().reverse(),col:HW.seed,a:ask*(1-sown)});
-      if(sown>0.004){for(const [pts,o] of [[HW_LANES.toLeb,0],[HW_LANES.toMor,0.7]]){md_lane(c,pts,HW.seed,0.8*sown,{u:ag_sine((tt-T.out-o*0.4)/1.4)});if(tt>T.out+1.2)hw_seeds(c,pts,tt,{every:0.9,dur:2.2,off:o});}}
-      hw_pin(c,A.svalbard[0],A.svalbard[1],{col:HW.frost,lit:1,label:{title:"Svalbard",sub:"the seed vault"},side:"above",a:ag_in(tt,T.banks+0.2,0.5),k:(tt-T.banks-0.2)/0.9});
-      hw_pin(c,A.aleppo[0],A.aleppo[1],{col:HW.seed,lit:1-0.85*war,label:{title:"Aleppo"},side:"left",labelA:1-ag_in(tt,T.ask,0.5),a:ag_in(tt,T.aleppo+0.2,0.5),k:(tt-T.aleppo-0.2)/0.9});
-      hw_pin(c,A.terbol[0],A.terbol[1],{col:HW.seed,lit:1,label:{title:"Lebanon"},side:"right",a:ag_in(tt,T.ask+0.4,0.5),k:(tt-T.ask-0.4)/0.9});
-      hw_pin(c,A.rabat[0],A.rabat[1],{col:HW.seed,lit:1,label:{title:"Morocco"},side:"above",a:ag_in(tt,T.out+0.6,0.5),k:(tt-T.out-0.6)/0.9});
-      hw_dim(c,S,0.45*hw_io(tt,T.change-0.1,T.ask-0.5,0.6,0.8));
+    // April 1850: the map of 1850, the two wires and the gap between them; the train across it, and the pigeons over it
+    {at:0,place:"hwRoute",keys:[[0,1000,480,1.2],[T.lines-0.4,960,520,1],[T.birds-0.4,700,470,1.6],[T.while-0.3,960,520,1]],d:2.0,push:0.01,draw:(c,tt)=>{
+      const bw=ag_in(tt,T.berlin-0.2,0.5),pw=ag_in(tt,T.paris-0.2,0.5),gap=ag_in(tt,T.gap-0.1,0.6),rail=ag_in(tt,T.byTrain-0.3,0.6)*(1-ag_in(tt,T.birds,0.8)),fly=ag_in(tt,T.flew-0.2,0.5);
+      hw_wire(c,HW_LANES.berlin,tt,{a:bw,u:ag_sine((tt-T.berlin)/1.6),back:true,every:0.9});
+      hw_wire(c,HW_LANES.paris,tt,{a:pw,u:ag_sine((tt-T.paris)/1.4),every:0.9});
+      // the gap: no wire, only a dashed line, until the wire is joined
+      if(gap>0.004)md_lane(c,HW_LANES.gap,MD.soft,0.7*gap,{dash:true,t:tt});
+      // the railway across it, by Liège: the prices go in the mail train's bags, slowly
+      if(rail>0.004){md_lane(c,HW_LANES.rail,HW_WHEN,0.7*rail);md_flow(c,HW_LANES.rail,tt,{kind:"batch",col:HW_WHEN,a:rail,every:5.2,dur:5.0,size:0.55});}
+      // the pigeons, from Brussels to Aachen, each with its slip of paper
+      if(fly>0.004)hw_flock(c,HW_LANES.birds,tt,{a:fly*(1-ag_in(tt,T.fresh-0.6,0.6)),every:1.7,dur:3.4,s:0.82});
+      hw_pin(c,A.aachen[0],A.aachen[1],{col:HW.seed,label:{title:"Aachen"},side:"below",a:ag_in(tt,T.aachen-0.1,0.5),k:(tt-T.aachen+0.1)/0.9});
+      hw_pin(c,A.berlin[0],A.berlin[1],{col:MD.flow,label:{title:"Berlin"},side:"left",labelA:1-hw_io(tt,T.birds-0.6,T.while+1.5,0.5,0.5),a:bw,k:(tt-T.berlin+0.2)/0.9});
+      hw_pin(c,A.paris[0],A.paris[1],{col:MD.flow,label:{title:"Paris"},side:"right",labelA:1-hw_io(tt,T.birds-0.6,T.while+1.5,0.5,0.5),a:pw,k:(tt-T.paris+0.2)/0.9});
+      hw_pin(c,A.brussels[0],A.brussels[1],{col:MD.flow,label:{title:"Brussels"},side:"above",a:pw,k:(tt-T.paris)/0.9});
+      hw_dim(c,S,0.4*hw_io(tt,T.useless+0.2,T.birds-0.4,0.6,0.8));
       hw_scr(c,S,()=>{const [x,y,w]=CARD;
-        hw_when(c,S,"2008",hw_io(tt,T.send,T.war,0.4,0.4));hw_when(c,S,"2012",hw_io(tt,T.war,T.ask,0.4,0.4));hw_when(c,S,"2015",ag_in(tt,T.ask,0.4));
-        hw_cardAt(c,x,y,w,{kick:"Gene banks",title:"Seeds of crops and their wild relatives",sub:"so breeders can grow crops that stand drought and disease"},tt,T.banks+0.5,T.aleppo,{edge:HW.seed});
-        hw_cardAt(c,x,y,w,{kick:"A gene bank near Aleppo",title:"141,052 samples",sub:"wheat, barley, lentils and chickpeas, from the world's dry lands"},tt,T.aleppo+0.5,T.lost-0.1,{edge:HW.seed});
-        hw_cardAt(c,x,y,w,{title:"A gene bank can be lost",sub:"to war, flood or a power cut, and a variety lost is lost for good"},tt,T.lost+0.3,T.war-0.1,{icon:"warn"});
-        hw_cardAt(c,x,y,w,{kick:"2012",title:"Most of the keepers leave",sub:"and no seeds go out"},tt,T.leave,T.risk-0.1,{});
-        hw_cardAt(c,x,y,w,{title:"Every variety at risk",sub:"breeders can't get the seeds they relied on"},tt,T.risk+0.3,T.change+0.6,{icon:"warn"});
-        hw_cardAt(c,x,y,w,{kick:"2015",title:"They ask for their copies",sub:"no one had done it before"},tt,T.asked+0.2,T.sown-0.1,{edge:HW.seed});
-        hw_cardAt(c,x,y,w,{kick:"Out of the mountain",title:"38,073 samples"},tt,T.out,1e9,{edge:HW.seed});});}},
-    // November 2015: the copies sown in Lebanon and Morocco; by 2020 nothing is left in Aleppo, yet few samples are lost
-    {at:T.nov-0.25,place:"hwFields",keys:[[0,960,560,1]],push:0.03,draw:(c,tt)=>{
-      hw_shoots(c,ag_sine((tt-T.nov)/3.2),{ripe:ag_sine((tt-T.again+0.6)/4)});
-      hw_scr(c,S,()=>{hw_when(c,S,"Lebanon and Morocco · November 2015",hw_io(tt,T.nov+0.3,T.gone,0.5,0.4));hw_when(c,S,"2020",ag_in(tt,T.gone,0.4));
-        hw_cardAt(c,610,170,700,{title:"Nothing left in Aleppo",sub:"of the collection that was kept there"},tt,T.gone+0.2,T.few,{});
-        hw_cardAt(c,610,170,700,{title:"1,657 of 141,052 samples lost",sub:"and breeders can order its seeds again"},tt,T.few+0.2,T.kept-0.1,{edge:HW.seed});
-        hw_tempTag(c,960,236,"warm",{text:"in use · close and ready",align:"center",a:ag_in(tt,T.kept+0.1,0.5),k:(tt-T.kept-0.1)/0.9});});}},
-    // their copies, frozen far away
-    {at:T.far-0.25,place:"hwVault",keys:[[0,1280,610,1.2]],push:0.02,draw:(c,tt)=>{
-      c.save();c.globalAlpha*=1;glow(c,525,680,90,HW.frost,0.3);c.restore();
-      hw_vaultLive(c,tt,{tunnel:1,halls:1,boxes:1,cold:1});
-      hw_scr(c,S,()=>hw_tempTag(c,1180,250,"cold",{text:"copies · frozen far away",align:"center",a:ag_in(tt,T.far+0.3,0.5),k:(tt-T.far-0.3)/0.9}));}},
-    // the university: three kinds of data, from where each is born to who reads it, and the two questions no one had asked
-    {at:T.data-0.3,place:"map",keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
-      const on=[0,1,2].map(i=>clamp((tt-T.data-0.2-i*0.35)/1.0,0,1)),found=[0,1,2].map(i=>clamp((tt-T.own+0.2-i*0.3)/0.8,0,1));
-      hw_rows(c,tt,{on,therm:ag_in(tt,T.temp,0.6),temp:found,t:tt,a:1-ag_in(tt,T.br+0.1,0.8)});
-      hw_scr(c,S,()=>{hw_when(c,S,"Until September",hw_io(tt,T.alike,T.now,0.4,0.4));hw_when(c,S,"Now",ag_in(tt,T.now+0.1,0.4)*(1-ag_in(tt,T.br,0.6)));
-        // the two questions, asked of no one: dashed, and faint
-        for(const [x,s,t0] of [[700,"How fresh must it be?",T.fresh],[1150,"How often is it read?",T.often]]){const a=hw_io(tt,t0,T.now,0.4,0.5)*0.85;if(a<=0.004)continue;
-          const w=md_tw(c,s,{w:700,size:28})+48;md_card(c,x-w/2,72,w,52,{dash:true,edge:MD.soft,r:26,a});md_T(c,s,x,108,{w:700,size:28,align:"center",col:MD.soft,a});}
-        hw_pillAt(c,1630,387,"23 tutors paid late",tt,T.tutors,T.now,{col:MD.fail,icon:"cross"});
-        hw_tagAt(c,950,852,"the costliest storage, never deleted",tt,T.cost+0.2,T.now,{col:HW_WHEN,icon:"warn",align:"center"});
-        hw_pillAt(c,1630,387,"no tutor waiting for a contract",tt,T.since+0.2,T.br,{col:MD.pass,icon:"tick"});});}}
+        hw_when(c,S,"Aachen · April 1850",ag_in(tt,0.9,0.6)*(1-ag_in(tt,T.fresh-0.4,0.5)));
+        hw_cardAt(c,x,y,w,{kick:"In Aachen",title:"Paul Julius Reuter",sub:"sells the news of Europe's stock exchanges"},tt,T.reuter,T.lines+0.4,{edge:HW.seed});
+        hw_tagAt(c,600,330,"122 km · no wire",tt,T.nowire,T.traders+0.4,{col:HW_WHEN,icon:"warn"});
+        hw_cardAt(c,x,y,w,{kick:"Bankers and merchants",title:"They act the same day",sub:"on the prices from other cities' exchanges"},tt,T.traders+0.3,T.train,{edge:MD.agreed});
+        hw_cardAt(c,x,y,w,{kick:"By train",title:"Hours old on arrival",sub:"after the day's trading had begun"},tt,T.byTrain+0.2,T.useless,{icon:"clock"});
+        hw_cardAt(c,x,y,w,{title:"Too late to act",sub:"someone with fresher news has made the deal"},tt,T.useless+0.3,T.need,{icon:"warn"});
+        hw_cardAt(c,x,y,w,{kick:"What they needed",title:"The prices before they acted",sub:"so the news had to cross the gap faster"},tt,T.before,T.birds,{edge:MD.agreed});
+        hw_cardAt(c,x,y,w,{kick:"An innkeeper in Aachen",title:"Heinrich Geller's pigeons",sub:"fly the prices across the gap"},tt,T.geller,T.slip,{edge:HW.seed});
+        hw_cardAt(c,x,y,w,{kick:"Brussels to Aachen",title:"A thin slip of paper",sub:"then the telegraph, on to Berlin"},tt,T.slip+0.2,T.hours,{edge:HW.seed});
+        // the two ways across the gap, side by side: the pigeons and the train
+        const ha=hw_io(tt,T.two-0.2,T.while,0.4,0.4);
+        if(ha>0.004){c.save();c.globalAlpha*=ha;ag_about(c,x+w/2,y+130,lerp(0.7,1,Math.min(1,ag_spr((tt-T.two+0.2)/0.9,0,0.5))));md_card(c,x,y,w,250,{edge:HW.seed,glow:0.6});
+          md_T(c,"ACROSS THE GAP",x+30,y+52,{w:800,size:28,ls:4,col:HW.seed});
+          const bx=x+190,bw=w-240;for(const [k,lbl,v,col,t0] of [[0,"pigeons",2,HW.seed,T.two],[1,"train",8,HW_WHEN,T.six]]){const yy=y+112+k*68,u=ag_sine((tt-t0)/1.0);
+            md_T(c,lbl,x+30,yy+10,{w:600,size:28,col:MD.soft});rr(c,bx,yy-14,bw*v/8*u,28,14);c.fillStyle=rgba(col,0.85);c.fill();
+            md_T(c,(k?"about 8 hours":"about 2 hours"),bx+bw*v/8*u+(k?-16:16),yy+10,{w:700,size:28,align:k?"right":"left",col:k?MD.navy:MD.ink,a:ag_in(tt,t0+0.6,0.4)});}c.restore();}
+        hw_tagAt(c,560,330,"until the wire was joined",tt,T.joined,T.fresh,{col:HW.seed,icon:"clock"});});}},
+    // the university: three kinds of data, from where each is born to who acts on it; once a night, until September; now, each in time
+    {at:T.fresh-0.3,place:"map",keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
+      const on=[0,1,2].map(i=>clamp((tt-T.night-0.2-i*0.35)/1.0,0,1)),found=[0,1,2].map(i=>clamp((tt-T.serves+0.2-i*0.3)/0.8,0,1)),own=ag_in(tt,T.now,0.4);
+      hw_rows(c,tt,{on,therm:ag_in(tt,T.night,0.6),temp:found,t:tt,night:1-own,a:1-ag_in(tt,T.br+0.1,0.8)});
+      hw_scr(c,S,()=>{hw_when(c,S,"Until September",hw_io(tt,T.night,T.now,0.4,0.4));hw_when(c,S,"Now",ag_in(tt,T.now+0.1,0.4)*(1-ag_in(tt,T.br,0.6)));
+        hw_cardAt(c,560,420,800,{kick:"Fresh enough",title:"There in time for whoever acts on it"},tt,T.whoever-0.2,T.night,{edge:MD.agreed});
+        hw_tagAt(c,700,96,"once a night",tt,T.once,T.now,{col:MD.flow,icon:"clock"});
+        hw_ghost(c,1100,96,"asked: “we want it live”",{a:hw_io(tt,T.live,T.now,0.4,0.5)});
+        hw_pillAt(c,1630,607,"23 tutors paid late",tt,T.tutors,T.now,{col:MD.fail,icon:"cross"});
+        hw_pillAt(c,1630,387,"two people's pay to a thief",tt,T.thief,T.now,{col:MD.fail,icon:"cross"});});}}
   ],0.6);
-  md_title(ctx,S,t,T.br,"Hot, warm, cold","how fresh it must be, and how often it's read","FILM 2 OF 3 · DATA THAT MOVES");
+  md_title(ctx,S,t,T.br,"Hot, warm, cold","in time for whoever acts on it","FILM 2 OF 4 · DATA THAT MOVES");
 });
 
-/* ---------------------------------------------------------------- 2 · Two questions */
-scene("two",(ctx,S,t,sc)=>{
-  const T={noor:wAt(sc,"noor","Noor"),q:wAt(sc,"noor","two questions"),fresh:sc.cues.ask,often:wAt(sc,"ask","And how often"),hot:wAt(sc,"hot","hot"),
-    warm:wAt(sc,"warm","warm"),cold:wAt(sc,"cold","cold"),contract:sc.cues.contract,fr:wAt(sc,"contract","how fresh"),long:wAt(sc,"contract","how long")};
+/* ---------------------------------------------------------------- 2 · When someone acts */
+scene("act",(ctx,S,t,sc)=>{
+  const T={noor:wAt(sc,"noor","Noor"),q:wAt(sc,"noor","when does someone act"),prefer:sc.cues.prefer,yes:wAt(sc,"prefer","always say yes"),watch:sc.cues.watch,real:wAt(sc,"watch","real use"),
+    open:wAt(sc,"watch","when people open"),next:wAt(sc,"watch","what they do next"),cold:wAt(sc,"cold","cold"),warm:wAt(sc,"warm","warm"),hot:wAt(sc,"hot","hot"),offer:sc.cues.offer,
+    call:wAt(sc,"offer","the business's call"),contract:sc.cues.contract,fr:wAt(sc,"contract","how fresh"),act:wAt(sc,"contract","the action")};
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"night",keys:[[0,960,540,1]],push:0.015,draw:(c,tt)=>{
     md_person(c,"noor",360,800,0.95,{t:tt,gaze:[4,0]});
     hw_scr(c,S,()=>{hw_when(c,S,"September",ag_in(tt,0.6,0.5));md_nameTag(c,150,330,"noor",{col:MD.flow,a:ag_in(tt,T.noor-0.1,0.5)});
-      // her two questions, then the three answers they lead to, one band each
-      const qOut=ag_in(tt,T.hot-0.7,0.5);
+      // her one question, the answer asking gives, and what she looked at instead; then the three answers it leads to, one band each
+      const qOut=ag_in(tt,T.cold-0.7,0.5);
       if(qOut<1){c.save();c.globalAlpha*=1-qOut;
-        hw_cardAt(c,760,250,1080,{kick:"Question one",title:"How fresh must it be?"},tt,T.fresh-0.1,null,{edge:MD.flow});
-        hw_cardAt(c,760,430,1080,{kick:"Question two",title:"How often is it read?"},tt,T.often-0.1,null,{edge:MD.flow});c.restore();}
+        hw_cardAt(c,760,190,1080,{kick:"One question",title:"When does someone act on it?"},tt,T.q-0.1,null,{edge:MD.flow});
+        hw_ghost(c,760,420,"asked “would you like it fresher?”: always yes",{a:ag_in(tt,T.yes-0.2,0.4)*(1-0.5*ag_in(tt,T.real,0.5))});
+        hw_cardAt(c,760,500,1080,{kick:"Real use",title:"When it's opened, and what's done next",sub:"not the answer to a question"},tt,T.real,null,{edge:MD.agreed,icon:"eye"});c.restore();}
       const on=[(tt-T.hot+0.4)/1.0,(tt-T.warm+0.4)/1.0,(tt-T.cold+0.4)/1.0].map(v=>clamp(v,0,1));
-      hw_bands(c,760,150,1080,{on,t:tt});
-      // the answer for one kind of data, written into its contract: how fresh, and how long it's kept
+      const cOut=ag_in(tt,T.contract-0.2,0.5);
+      c.save();c.globalAlpha*=1-0.55*cOut;hw_bands(c,760,150,1080,{on,t:tt});c.restore();
+      hw_tagAt(c,1290,104,"the platform offers all three",tt,T.offer,T.contract,{col:MD.flow,icon:"tick"});
+      hw_tagAt(c,1240,676,"which one: the business's call",tt,T.call,T.contract,{col:MD.agreed,icon:"person"});
+      // the answer for one kind of data, written into its contract: how fresh, and the action it's fresh for
       const k=(tt-T.contract-0.2)/0.9,a=ag_in(tt,T.contract+0.2,0.5);
       if(a>0.004){c.save();c.globalAlpha*=a;ag_about(c,1300,770,lerp(0.6,1,Math.min(1,ag_spr(k,0,0.5))));
         md_card(c,760,676,1080,190,{edge:MD.agreed,glow:0.8});md_icon(c,"contract",808,716,38,MD.agreed);
-        md_T(c,"DATA CONTRACT · PAY RECORDS",850,726,{w:800,size:28,ls:4,col:MD.agreed});
-        withA(c,ag_in(tt,T.fr,0.4),()=>hw_pair(c,808,786,"fresh","each pay day",{dx:130}));
-        withA(c,ag_in(tt,T.long,0.4),()=>hw_pair(c,808,834,"kept","7 years after each contract ends, then deleted",{dx:130}));c.restore();
-        md_icon(c,"contract",1784,600,34,MD.agreed,{a});}});}}],0.6);
+        md_T(c,"DATA CONTRACT · CONTRACTS",850,726,{w:800,size:28,ls:4,col:MD.agreed});
+        withA(c,ag_in(tt,T.fr,0.4),()=>hw_pair(c,808,786,"fresh","within 5 minutes",{dx:130}));
+        withA(c,ag_in(tt,T.act,0.4),()=>hw_pair(c,808,834,"for","claims approved by noon each Monday",{dx:130}));c.restore();}});}}],0.6);
 });
 
-/* ---------------------------------------------------------------- 3 · Hot */
-// the claims app's page: the claims of one Monday morning, each with its unit and duty, and where it stands
-const HW_CLAIMS=[["HI101","tutorial"],["HI101","marking"],["BU210","tutorial"],["EN110","tutorial"]];
-function hw_claims(ctx,tt,o){o=o||{};const st=o.state||(()=>"waiting");return hw_app(ctx,1240,130,600,400,{rows:HW_CLAIMS.map((r,i)=>[r[0],r[1],st(i)]),a:o.a,k:o.k,lit:o.lit,litCol:o.litCol});}
-scene("hot",(ctx,S,t,sc)=>{
-  const T={app:wAt(sc,"claims","the claims app"),noon:wAt(sc,"claims","approved by noon"),checks:sc.cues.checks,contract:wAt(sc,"checks","contract"),hr:wAt(sc,"checks","the HR system"),
-    change:sc.cues.change,ingrid:wAt(sc,"change","Ingrid's"),monday:wAt(sc,"change","on a Monday"),night:sc.cues.night,once:wAt(sc,"night","once a night"),tues:wAt(sc,"night","on Tuesday"),
-    late:sc.cues.late,tutors:wAt(sc,"late","twenty-three"),push:sc.cues.push,made:wAt(sc,"push","as it's made"),zb:wAt(sc,"push","Zerobus"),table:sc.cues.table,arrives:wAt(sc,"table","as it arrives"),
-    st:wAt(sc,"table","a streaming table"),stands:wAt(sc,"table","as it stands"),minute:sc.cues.minute,mon:sc.cues.monday,noon2:wAt(sc,"monday","every claim"),
-    costs:sc.cues.costs,running:wAt(sc,"costs","always running"),keep:wAt(sc,"costs","keep hot only")};
-  const HR=[96,170,420],TB=[720,174,400],tbR=[1120,226],appL=[1240,330],hrP=[516,225],tbL=[720,226];
-  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"map",keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
-    const before=1-ag_in(tt,T.push-0.2,0.6),now=ag_in(tt,T.push,0.6),pipe=ag_in(tt,T.arrives-0.2,0.6);
-    // the HR system, the platform's table of contracts, and the lanes between them and the claims app
-    md_system(c,HR[0],HR[1],HR[2],"hr",{a:ag_in(tt,T.hr-0.2,0.5),lit:0.8*hw_io(tt,T.monday,T.night+0.6,0.4,0.6)+0.6*hw_io(tt,T.made,T.table,0.4,0.6)});
-    if(pipe>0.004){c.save();c.globalAlpha*=pipe;md_card(c,690,118,460,196,{dash:true,edge:MD.flow,r:20});md_label(c,712,150,"Pipeline",{col:MD.flow});c.restore();}
-    md_table(c,TB[0],TB[1],TB[2],{name:"contracts",kind:"table",a:ag_in(tt,T.contract-0.3,0.5)*(1-ag_in(tt,T.st-0.3,0.4))});
-    md_table(c,TB[0],TB[1],TB[2],{name:"contracts",kind:"streaming table",lit:0.6*ag_in(tt,T.stands,0.6),a:ag_in(tt,T.st-0.3,0.4)});
-    const lanesA=ag_in(tt,T.hr,0.6);
-    // until September, a whole file once a night; now each change as it's made, through Zerobus Ingest
-    if(before>0.004)md_way(c,"batch",hrP,tbL,tt,{a:lanesA*before,every:3.2,flow:tt>T.once-0.4});
-    if(now>0.004)md_way(c,"events",hrP,tbL,tt,{a:now,icon:ag_in(tt,T.zb-0.3,0.4)>0,iconA:ag_in(tt,T.zb-0.3,0.4),label:"Zerobus Ingest",labelBelow:128,every:0.8});
-    // the app asks the platform for each claim's contract, and has its answer
-    md_way(c,"api",tbR,appL,tt,{a:ag_in(tt,T.contract,0.5)});
-    const ok=i=>i===3||tt>T.noon2+0.3+i*0.25;
-    hw_claims(c,tt,{a:ag_in(tt,0.4,0.5),k:(tt-0.4)/0.9,state:i=>ok(i)?"approved":"waiting",lit:tt<T.costs?[0,1,2].filter(i=>ok(i)):null,litCol:MD.pass});
-    hw_scr(c,S,()=>{
-      hw_when(c,S,"Monday morning",hw_io(tt,T.monday,T.night,0.4,0.4));hw_when(c,S,"Until September",hw_io(tt,T.night,T.push,0.4,0.4));hw_when(c,S,"Now",hw_io(tt,T.push+0.1,T.mon,0.4,0.4));hw_when(c,S,"This Monday",hw_io(tt,T.mon,T.costs,0.4,0.4));
-      hw_cardAt(c,1240,552,600,{kick:"Each pay day",title:"Approved by noon Monday",sub:"paid on Thursday"},tt,T.noon,T.night,{});
-      md_nameTag(c,470,560,"ingrid",{col:MD.sys.hr,a:hw_io(tt,T.ingrid-0.1,T.night-0.3,0.5,0.5)});
-      // the pay week: a change on Monday morning, claims close at noon, the night's load, pay day
-      const tlA=hw_io(tt,T.night+0.3,T.push-0.2,0.5,0.6);
-      if(tlA>0.004){const late=ag_in(tt,T.late,0.5);
-        hw_timeline(c,330,700,1260,{a:tlA,t:tt,stops:[{t:"Monday 09:00",s:"a change in HR",col:MD.sys.hr},{t:"Monday 12:00",s:"claims close",col:mix(MD.wait,MD.fail,late),a:ag_in(tt,T.night+0.6,0.4)},
-          {t:"Tuesday 02:00",s:"the night's load",col:MD.flow,a:ag_in(tt,T.once,0.4)},{t:"Thursday",s:"pay day",col:MD.ink,a:ag_in(tt,T.night+1.2,0.4)}],
-          span:[{from:0,to:2*ag_sine((tt-T.tues)/1.4),col:MD.flow,dash:true,a:ag_in(tt,T.tues,0.3)}]});
-        hw_pillAt(c,960,594,"23 tutors waited two more weeks for their pay",tt,T.tutors,T.push-0.2,{col:MD.fail,icon:"cross"});}
-      hw_tagAt(c,930,380,"within a minute",tt,T.minute+0.2,T.costs,{col:MD.flow,icon:"clock"});
-      hw_pillAt(c,960,640,"11 contracts changed · every claim approved by noon",tt,T.noon2,T.costs-0.1,{col:MD.pass,icon:"tick"});
-      hw_tagAt(c,808,360,"always running",tt,T.running-0.2,1e9,{col:MD.flow,icon:"refresh"});
-      hw_cardAt(c,480,600,960,{kick:"Hot",title:"The pipeline costs the most: it's always running",sub:"keep hot only what's needed within minutes"},tt,T.costs+0.2,1e9,{edge:HW.heat,kickCol:HW.heat});});
-    hw_personAt(c,"ingrid",270,660,0.85,tt,T.ingrid-0.3,T.night-0.4,{gaze:[4,-1]});}}],0.6);
-});
-
-/* ---------------------------------------------------------------- 4 · Warm */
-scene("warm",(ctx,S,t,sc)=>{
-  const T={rohan:wAt(sc,"rohan","Rohan"),mgr:wAt(sc,"rohan","the faculties' managers"),spent:wAt(sc,"rohan","what each faculty"),before:sc.cues.before,every:wAt(sc,"before","every look"),
-    slow:wAt(sc,"before","slow"),load:wAt(sc,"before","a load"),mv:sc.cues.mv,fresh:wAt(sc,"mv","fresh enough"),sonow:wAt(sc,"mv","so now"),view:wAt(sc,"mv","materialized view"),two:wAt(sc,"mv","each night at two"),
-    ready:wAt(sc,"mv","ready to read"),dbt:sc.cues.dbt,jun:wAt(sc,"dbt","Jun"),sched:wAt(sc,"dbt","its schedule"),tested:wAt(sc,"dbt","tested"),answer:sc.cues.answer,only:wAt(sc,"answer","only the answer"),never:wAt(sc,"answer","never a copy"),
-    most:sc.cues.most,few:wAt(sc,"most","few questions"),hotm:wAt(sc,"most","hot costs more")};
+/* ---------------------------------------------------------------- 3 · Cold */
+scene("cold",(ctx,S,t,sc)=>{
+  const T={rohan:wAt(sc,"rohan","Rohan"),mgr:wAt(sc,"rohan","the faculties' managers"),spent:wAt(sc,"rohan","what each faculty"),asked:sc.cues.asked,live:wAt(sc,"asked","wanted it live"),
+    meeting:sc.cues.meeting,month:wAt(sc,"meeting","once a month"),move:wAt(sc,"meeting","money move"),enough:sc.cues.enough,view:wAt(sc,"enough","A view"),two:wAt(sc,"enough","each night at two"),
+    seven:wAt(sc,"enough","by seven"),dbt:sc.cues.dbt,jun:wAt(sc,"dbt","Jun"),sched:wAt(sc,"dbt","its schedule"),tested:wAt(sc,"dbt","tested"),most:sc.cues.most,days:wAt(sc,"most","days and weeks"),
+    small:wAt(sc,"most","a small part")};
   const FIN=[96,170,420],finP=[516,225],MV=[690,174,440],BARS=[1180,150,660];
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"map",later:true,keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
-    const now=ag_in(tt,T.view-0.2,0.6),before=1-now;
-    md_system(c,FIN[0],FIN[1],FIN[2],"fin",{a:ag_in(tt,T.before-0.3,0.5),lit:0.8*hw_io(tt,T.load,T.mv,0.4,0.6)});
-    // until September, every look a query on the ledger, in place; now a materialized view, worked out at two each night
+    const now=ag_in(tt,T.view-0.2,0.6);
+    md_system(c,FIN[0],FIN[1],FIN[2],"fin",{a:ag_in(tt,T.spent-0.3,0.5)});
+    // each night at two, one batch from the ledger to the view; the view ready to read by seven
     const bp=[BARS[0],BARS[1]+190];
-    if(before>0.004)md_way(c,"query",finP,bp,tt,{a:ag_in(tt,T.every-0.2,0.5)*before,pts:md_curve(finP,bp,{bend:0.5})});
-    if(now>0.004){md_table(c,MV[0],MV[1],MV[2],{name:"spending_by_faculty",kind:"materialized view",lit:0.8*hw_io(tt,T.never-0.2,T.most,0.4,0.6),a:now,k:(tt-T.view+0.2)/0.9});
-      md_way(c,"query",finP,[MV[0],MV[1]+52],tt,{a:now*ag_in(tt,T.two-0.2,0.5),flow:false});
-      md_lane(c,md_curve([MV[0]+MV[2],MV[1]+52],bp,{bend:0.5}),MD.flow,0.85*ag_in(tt,T.ready,0.5));}
+    if(now>0.004){md_table(c,MV[0],MV[1],MV[2],{name:"spending_by_faculty",kind:"materialized view",lit:0.8*hw_io(tt,T.seven,T.dbt,0.4,0.6),a:now,k:(tt-T.view+0.2)/0.9});
+      md_way(c,"batch",finP,[MV[0],MV[1]+52],tt,{a:now*ag_in(tt,T.two-0.2,0.5),every:4.6});
+      md_lane(c,md_curve([MV[0]+MV[2],MV[1]+52],bp,{bend:0.5}),MD.flow,0.85*ag_in(tt,T.seven,0.5));}
     hw_bars(c,BARS[0],BARS[1],BARS[2],{a:ag_in(tt,T.spent-0.2,0.5),k:(tt-T.spent+0.2)/0.9,spent:HW_SPENT.map((v,i)=>ag_sine((tt-T.spent-0.2-i*0.15)/1.2)),edge:MD.dom.finance,col:MD.dom.finance});
     hw_scr(c,S,()=>{
-      hw_when(c,S,"Each morning",hw_io(tt,0.6,T.before,0.4,0.4));hw_when(c,S,"Until September",hw_io(tt,T.before,T.sonow,0.4,0.4));hw_when(c,S,"Now",ag_in(tt,T.sonow+0.1,0.4));
+      hw_when(c,S,"Each morning",hw_io(tt,0.6,T.asked,0.4,0.4));hw_when(c,S,"August",hw_io(tt,T.asked,T.meeting,0.4,0.4));hw_when(c,S,"Now",ag_in(tt,T.enough+0.1,0.4));
       md_nameTag(c,470,540,"rohan",{col:MD.sys.fin,a:ag_in(tt,T.rohan-0.1,0.5)});
-      hw_tagAt(c,470,640,"and the faculties' managers",tt,T.mgr,T.before+0.4,{col:HW_WHEN,icon:"person"});
-      hw_tagAt(c,700,408,"every look",tt,T.every,T.mv,{col:MD.flow,icon:"query"});
-      hw_tagAt(c,700,476,"slow",tt,T.slow,T.mv,{col:HW_WHEN,icon:"clock"});
-      hw_tagAt(c,96,330,"a load on the ledger while Finance works",tt,T.load,T.mv,{col:HW_WHEN,icon:"warn"});
+      hw_tagAt(c,470,640,"and the faculties' managers",tt,T.mgr,T.asked,{col:HW_WHEN,icon:"person"});
+      hw_ghost(c,700,330,"asked: “live, to the minute”",{a:hw_io(tt,T.live-0.2,T.enough,0.4,0.5)});
+      hw_tagAt(c,700,420,"talked over once a month",tt,T.month,T.enough+0.2,{col:MD.agreed,icon:"person"});
+      hw_tagAt(c,700,500,"budgets move only then",tt,T.move,T.enough+0.2,{col:MD.agreed,icon:"refresh"});
       hw_tagAt(c,540,330,"each night · 02:00",tt,T.two,T.most,{col:MD.flow,icon:"clock"});
-      hw_tagAt(c,640,410,"ready to read",tt,T.ready,T.dbt,{col:MD.flow,icon:"tick"});
+      hw_tagAt(c,640,410,"ready by 07:00",tt,T.seven,T.dbt,{col:MD.flow,icon:"tick"});
       // Jun's dbt model: the view, and its schedule, in its own config
       const dA=hw_io(tt,T.dbt-0.1,T.most-0.1,0.5,0.5);
       if(dA>0.004){md_window(c,680,500,700,330,{logo:"dbt",product:"dbt",title:"spending_by_faculty.sql",a:dA,k:(tt-T.dbt+0.1)/0.9,draw:(cc,b)=>{
         hw_code(cc,b.x+16,b.y+44,[{s:"{{ config("},{s:"  materialized='materialized_view',"},{s:"  schedule={'cron': '0 0 2 * * ?'}"},{s:") }}"}],{hl:tt>T.sched?2:null,hlCol:MD.flow,w:640});
         md_T(cc,"Jun Park's model · tested like any other",b.x+16,b.y+b.h-20,{w:600,size:28,col:MD.soft,a:ag_in(tt,T.jun,0.4)});}});
         hw_pillAt(c,1530,780,"tests pass",tt,T.tested+0.2,T.most-0.1,{col:MD.pass,icon:"tick"});}
-      hw_tagAt(c,640,410,"only the answer, not the ledger",tt,T.only,T.most,{col:MD.flow,icon:"table"});
-      hw_cardAt(c,680,520,1000,{kick:"Warm",title:"Most of the university's data",sub:"few questions need the minute, and hot costs more"},tt,T.most+0.2,1e9,{edge:hw_band("warm").tint,kickCol:hw_band("warm").tint});});
+      hw_cardAt(c,680,520,1000,{kick:"Cold",title:"Most analysis: decided over days and weeks",sub:"a nightly run costs a small part of a stream"},tt,T.most+0.2,1e9,{edge:hw_band("cold").tint,kickCol:hw_band("cold").tint});});
     hw_personAt(c,"rohan",300,660,0.85,tt,0.3,1e9,{gaze:[4,-1]});}}],0.6);
 });
 
-/* ---------------------------------------------------------------- 5 · Cold */
-const HW_YEARS=["2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"];
-scene("cold",(ctx,S,t,sc)=>{
-  const T={records:sc.cues.records,payday:wAt(sc,"records","Every pay day"),hours:wAt(sc,"records","with the hours"),law:sc.cues.law,seven:wAt(sc,"law","seven years"),rarely:wAt(sc,"law","rarely read"),
-    before:sc.cues.before,costliest:wAt(sc,"before","the costliest"),none:wAt(sc,"before","none was ever"),cost:wAt(sc,"before","a cost"),risk:wAt(sc,"before","a risk"),
-    archive:sc.cues.archive,written:wAt(sc,"archive","a year after"),tier:wAt(sc,"archive","archive tier"),cheapest:wAt(sc,"archive","its cheapest"),vault:sc.cues.vault,sleep:wAt(sc,"vault","they sleep"),
-    told:sc.cues.told,recent:wAt(sc,"told","queries for recent pay"),archived:wAt(sc,"told","one that needs"),which:wAt(sc,"told","which files"),back:sc.cues.hours,audit:wAt(sc,"hours","an audit"),
-    turn:sc.cues.seven,date:wAt(sc,"seven","on a date"),removed:wAt(sc,"seven","removed for good"),oct:sc.cues.october,oldest:wAt(sc,"october","the oldest"),gone:wAt(sc,"october","were deleted"),
-    privacy:sc.cues.privacy};
-  const PAY=[96,150,420],payP=[516,205],REC=[700,154,460],TOP=520,LOW=740;
-  // the shelves, the years on them, and what sank, was read or went: the same picture before and after the vault
-  const shelves=(c,tt)=>{
-    hw_shelf(c,60,TOP+6,1500,"Hot tier","read often, costliest",{a:ag_in(tt,T.costliest-0.4,0.5)});hw_shelf(c,60,LOW+6,1500,"Archive tier","rarely read, cheapest",{cold:true,a:ag_in(tt,T.tier-0.4,0.5)});
-    const sink=HW_YEARS.map((y,i)=>i<10?ag_sine((tt-T.written-0.2-i*0.22)/1.0):0),gone=HW_YEARS.map((y,i)=>i<3?ag_in(tt,T.gone+i*0.3,0.8):0),
-      read=HW_YEARS.map((y,i)=>i===10?ag_in(tt,T.rarely-0.2,0.5)*(1-ag_in(tt,T.before,0.5))+hw_io(tt,T.recent,T.archived,0.3,0.4):i===5?hw_io(tt,T.which,T.turn,0.3,0.5):0);
-    const lift=ag_sine((tt-T.back-0.2)/1.4)*(1-ag_in(tt,T.turn,0.8));sink[5]=sink[5]*(1-0.35*lift);
-    return hw_years(c,130,{years:HW_YEARS,top:TOP,low:LOW,sink,gone,read,a:ag_in(tt,T.payday,0.6)});};
-  const ui=(c,tt)=>{
-    md_system(c,PAY[0],PAY[1],PAY[2],{n:"Payroll system",s:"Each pay, each pay day",c:HW_PAYROLL},{a:ag_in(tt,0.5,0.5)});
-    md_table(c,REC[0],REC[1],REC[2],{name:"pay_records",kind:"table",col:MD.personal,icon:"lock",a:ag_in(tt,T.payday,0.5),lit:0.7*hw_io(tt,T.told,T.back,0.4,0.6)});
-    md_way(c,"batch",payP,[REC[0],REC[1]+52],tt,{col:MD.personal,a:ag_in(tt,T.payday+0.2,0.5),every:2.6});};
-  ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"map",later:true,keys:[[0,960,540,1]],push:0.01,draw:(c,tt)=>{ui(c,tt);shelves(c,tt);
-      hw_scr(c,S,()=>{hw_when(c,S,"Every pay day",hw_io(tt,T.payday,T.before,0.4,0.4));hw_when(c,S,"Until September",hw_io(tt,T.before,T.archive,0.4,0.4));hw_when(c,S,"Now",ag_in(tt,T.archive+0.1,0.4));
-        hw_tagAt(c,1200,206,"with each casual tutor's hours",tt,T.hours,T.law,{col:MD.personal,icon:"lock"});
-        hw_tagAt(c,1200,206,"the law: kept 7 years",tt,T.seven,T.before,{col:HW_WHEN,icon:"doc"});
-        hw_tagAt(c,1200,300,"after the first year, rarely read",tt,T.rarely,T.before,{col:HW_WHEN,icon:"eye"});
-        hw_tagAt(c,96,350,"none ever deleted",tt,T.none,T.archive,{col:HW_WHEN,icon:"warn"});
-        hw_tagAt(c,440,350,"a cost",tt,T.cost,T.archive,{col:HW_WHEN,icon:"warn"});
-        hw_tagAt(c,640,350,"a risk to everyone in them",tt,T.risk,T.archive,{col:MD.personal,icon:"lock"});
-        hw_tagAt(c,96,350,"a year after it's written",tt,T.written,T.vault-0.3,{col:HW.frost,icon:"clock"});});}},
-    // like the copies on Svalbard, they sleep until someone needs them
-    {at:T.vault-0.3,place:"hwVault",keys:[[0,1280,610,1.2]],push:0.02,draw:(c,tt)=>{hw_vaultLive(c,tt,{tunnel:1,halls:1,boxes:1,cold:1});
-      hw_scr(c,S,()=>hw_tempTag(c,1180,250,"cold",{text:"asleep until they're needed",align:"center",a:ag_in(tt,T.sleep,0.5),k:(tt-T.sleep)/0.9}));}},
-    // the table is told: recent pay still runs; an archived year says which files to bring back; hours, fine for an audit; deleted at seven
-    {at:T.told-0.35,place:"map",keys:[[0,960,540,1]],push:0.01,draw:(c,tt)=>{ui(c,tt);const yc=shelves(c,tt);
-      hw_scr(c,S,()=>{hw_when(c,S,"Now",hw_io(tt,0,T.oct,0.4,0.4));hw_when(c,S,"October 2026",ag_in(tt,T.oct,0.4));
-        const pa=hw_io(tt,T.told+0.2,T.oct,0.5,0.5);
-        if(pa>0.004){const s="delta.timeUntilArchived = '365 days'",w=md_tw(c,s,{w:500,size:28,f:"mono"})+56;md_card(c,1180,178,w,56,{edge:MD.personal,r:14,a:pa});md_T(c,s,1208,216,{w:500,size:28,f:"mono",a:pa});
-          md_lane(c,[[REC[0]+REC[2],206],[1180,206]],MD.personal,0.7*pa,{dash:true});}
-        hw_pillAt(c,yc[10][0],yc[10][1]-150,"recent pay: runs",tt,T.recent+0.2,T.archived,{col:MD.pass,icon:"tick"});
-        const fa=hw_io(tt,T.which,T.turn,0.4,0.5);
-        if(fa>0.004){c.save();c.globalAlpha*=fa;ag_about(c,620,380,lerp(0.6,1,Math.min(1,ag_spr((tt-T.which)/0.9,0,0.5))));md_card(c,300,300,640,160,{edge:MD.wait,glow:0.6});
-          md_T(c,"2021 · FILES TO BRING BACK",328,344,{w:800,size:28,ls:3,col:MD.wait});
-          ["part-00003.parquet","part-00017.parquet"].forEach((f,i)=>md_T(c,f,328,394+i*44,{w:500,size:28,f:"mono"}));c.restore();}
-        hw_tagAt(c,980,440,"hours · fine for an audit",tt,T.back+0.2,T.turn,{col:MD.wait,icon:"clock"});
-        hw_tagAt(c,490,400,"7 years after each contract ends, then deleted",tt,T.turn+0.4,T.privacy-0.2,{col:MD.agreed,icon:"contract"});
-        hw_cardAt(c,1240,130,600,{kick:"Data protection",title:"Deleting well",sub:"is for the films on data protection"},tt,T.privacy+0.2,1e9,{edge:MD.personal,icon:"lock"});});}}
-  ],0.6);
+/* ---------------------------------------------------------------- 4 · Warm */
+// the claims app's page: the claims of one Monday morning, each with its unit and duty, and where it stands
+const HW_CLAIMS=[["HI101","tutorial"],["HI101","marking"],["BU210","tutorial"],["EN110","tutorial"]];
+function hw_claims(ctx,tt,o){o=o||{};const st=o.state||(()=>"waiting");return hw_app(ctx,1240,130,600,400,{rows:HW_CLAIMS.map((r,i)=>[r[0],r[1],st(i)]),a:o.a,k:o.k,lit:o.lit,litCol:o.litCol});}
+scene("warm",(ctx,S,t,sc)=>{
+  const T={app:wAt(sc,"claims","the claims app"),noon:wAt(sc,"claims","approved by noon"),checks:sc.cues.checks,contract:wAt(sc,"checks","contract"),hr:wAt(sc,"checks","another system"),
+    change:sc.cues.change,ingrid:wAt(sc,"change","Ingrid's"),monday:wAt(sc,"change","on a Monday"),coord:wAt(sc,"change","coordinators approve"),night:sc.cues.night,once:wAt(sc,"night","once a night"),
+    tues:wAt(sc,"night","on Tuesday"),late:sc.cues.late,tutors:wAt(sc,"late","twenty-three"),why:sc.cues.why,ideal:wAt(sc,"why","Ideally"),erp:wAt(sc,"why","the new E R P"),gap:sc.cues.gap,
+    fills:wAt(sc,"gap","fills the gap"),pigeons:wAt(sc,"gap","as the pigeons did"),mix:sc.cues.mix,old:wAt(sc,"mix","old systems"),rare:wAt(sc,"mix","the ideal path is rare"),job:wAt(sc,"mix","part of the job"),
+    push:sc.cues.push,made:wAt(sc,"push","as it's made"),zb:wAt(sc,"push","Zerobus"),five:sc.cues.five,stands:wAt(sc,"five","as it stands"),mon:sc.cues.monday,every:wAt(sc,"monday","every claim"),
+    enough:sc.cues.enough,never:wAt(sc,"enough","never stops")};
+  const HR=[96,170,420],TB=[720,174,400],tbR=[1120,226],appL=[1240,330],hrP=[516,225],tbL=[720,226];
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"map",later:true,keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
+    const before=1-ag_in(tt,T.push-0.2,0.6),now=ag_in(tt,T.push,0.6),pipe=ag_in(tt,T.five-0.2,0.6);
+    // the HR system, the platform's table of contracts, and the lanes between them and the claims app
+    md_system(c,HR[0],HR[1],HR[2],"hr",{a:ag_in(tt,T.hr-0.2,0.5),lit:0.8*hw_io(tt,T.monday,T.night+0.6,0.4,0.6)+0.6*hw_io(tt,T.made,T.five,0.4,0.6)});
+    if(pipe>0.004){c.save();c.globalAlpha*=pipe;md_card(c,690,118,460,196,{dash:true,edge:MD.flow,r:20});md_label(c,712,150,"Pipeline · every 5 minutes",{col:MD.flow});c.restore();}
+    md_table(c,TB[0],TB[1],TB[2],{name:"contracts",kind:"table",lit:0.6*ag_in(tt,T.stands,0.6),a:ag_in(tt,T.contract-0.3,0.5)});
+    const lanesA=ag_in(tt,T.hr,0.6),gapLit=hw_io(tt,T.fills,T.mix+0.6,0.4,0.6);
+    // until September, a whole file once a night; now each change pushed as it's made, through Zerobus Ingest, and taken in every five minutes
+    if(before>0.004)md_way(c,"batch",hrP,tbL,tt,{a:lanesA*before,every:3.2,flow:tt>T.once-0.4});
+    if(now>0.004)md_way(c,"events",hrP,tbL,tt,{a:now,icon:ag_in(tt,T.zb-0.3,0.4)>0,iconA:ag_in(tt,T.zb-0.3,0.4),label:"Zerobus Ingest",labelBelow:128,every:0.8});
+    // the app asks the platform for each claim's contract, and has its answer
+    md_way(c,"api",tbR,appL,tt,{a:ag_in(tt,T.contract,0.5)});
+    // the gap the platform fills, lit, with a pigeon over it, as in 1850
+    if(gapLit>0.004){glow(c,900,300,420,MD.flow,0.18*gapLit);hw_flock(c,md_curve(hrP,appL,{bend:0.5}).map(p=>[p[0],p[1]-70]),tt,{a:ag_in(tt,T.pigeons-0.1,0.4)*(1-ag_in(tt,T.mix+0.4,0.5)),every:2.6,dur:2.6,s:0.9});}
+    const ok=i=>i===3||tt>T.every+0.3+i*0.25;
+    hw_claims(c,tt,{a:ag_in(tt,0.4,0.5),k:(tt-0.4)/0.9,state:i=>ok(i)?"approved":"waiting",lit:tt<T.enough?[0,1,2].filter(i=>ok(i)):null,litCol:MD.pass});
+    hw_scr(c,S,()=>{
+      hw_when(c,S,"Monday morning",hw_io(tt,T.monday,T.night,0.4,0.4));hw_when(c,S,"Until September",hw_io(tt,T.night,T.why,0.4,0.4));hw_when(c,S,"Now",hw_io(tt,T.push+0.1,T.mon,0.4,0.4));hw_when(c,S,"This Monday",hw_io(tt,T.mon,T.enough,0.4,0.4));
+      hw_cardAt(c,1240,552,600,{kick:"Each pay day",title:"Approved by noon Monday",sub:"paid on Thursday"},tt,T.noon,T.night,{});
+      md_nameTag(c,470,560,"ingrid",{col:MD.sys.hr,a:hw_io(tt,T.ingrid-0.1,T.night-0.3,0.5,0.5)});
+      hw_tagAt(c,1240,720,"coordinators approve until noon",tt,T.coord,T.night,{col:MD.wait,icon:"person"});
+      // the pay week: a change on Monday morning, claims close at noon, the night's load, pay day
+      const tlA=hw_io(tt,T.night+0.3,T.why-0.2,0.5,0.6);
+      if(tlA>0.004){const late=ag_in(tt,T.late,0.5);
+        hw_timeline(c,330,700,1260,{a:tlA,t:tt,stops:[{t:"Monday 09:00",s:"a change in HR",col:MD.sys.hr},{t:"Monday 12:00",s:"claims close",col:mix(MD.wait,MD.fail,late),a:ag_in(tt,T.night+0.6,0.4)},
+          {t:"Tuesday 02:00",s:"the night's load",col:MD.flow,a:ag_in(tt,T.once,0.4)},{t:"Thursday",s:"pay day",col:MD.ink,a:ag_in(tt,T.night+1.2,0.4)}],
+          span:[{from:0,to:2*ag_sine((tt-T.tues)/1.4),col:MD.flow,dash:true,a:ag_in(tt,T.tues,0.3)}]});
+        hw_pillAt(c,960,594,"23 tutors waited two more weeks for their pay",tt,T.tutors,T.why-0.2,{col:MD.fail,icon:"cross"});}
+      // the ideal: one system, two years away; until then, the platform fills the gap; old beside new is the job
+      const ea=hw_io(tt,T.ideal,T.push-0.2,0.5,0.5);
+      if(ea>0.004){c.save();c.globalAlpha*=ea;md_card(c,330,600,1260,120,{dash:true,edge:MD.agreed,r:20});md_icon(c,"store",384,660,40,MD.agreed);
+        md_T(c,"Contracts and claims in one system",430,650,{w:700,size:32});md_T(c,"the new ERP, in 2028",430,690,{w:600,size:28,col:MD.soft,a:ag_in(tt,T.erp,0.4)});c.restore();}
+      hw_tagAt(c,620,350,"until then, the platform fills the gap",tt,T.fills,T.push-0.2,{col:MD.flow,icon:"connector"});
+      hw_tagAt(c,330,790,"old systems beside new ones",tt,T.old,T.push-0.2,{col:HW_WHEN,icon:"store"});
+      hw_tagAt(c,960,790,"working around the gaps: part of the job",tt,T.job,T.push-0.2,{col:HW_WHEN,icon:"tick"});
+      hw_tagAt(c,930,380,"within 5 minutes",tt,T.stands+0.2,T.enough,{col:MD.flow,icon:"clock"});
+      hw_pillAt(c,960,640,"11 contracts changed · every claim approved by noon",tt,T.every,T.enough-0.1,{col:MD.pass,icon:"tick"});
+      hw_cardAt(c,480,600,960,{kick:"Warm",title:"Every 5 minutes: in time for a person",sub:"far less than a pipeline that never stops"},tt,T.enough+0.2,1e9,{edge:hw_band("warm").tint,kickCol:hw_band("warm").tint});});
+    hw_personAt(c,"ingrid",270,660,0.85,tt,T.ingrid-0.3,T.night-0.4,{gaze:[4,-1]});}}],0.6);
 });
 
-/* ---------------------------------------------------------------- 6 · One claim cools */
-scene("cools",(ctx,S,t,sc)=>{
-  const T={cools:sc.cues.cools,linh:wAt(sc,"linh","Linh's"),hot:wAt(sc,"linh","was hot"),list:sc.cues.list,app:wAt(sc,"list","in the app"),approved:wAt(sc,"list","approved it"),
-    paid:sc.cues.paid,warm:wAt(sc,"paid","turns warm"),health:wAt(sc,"paid","part of what"),year:sc.cues.year,cold:wAt(sc,"year","turns cold"),record:wAt(sc,"year","in her pay record"),
-    seven:wAt(sc,"year","until the seven"),follow:sc.cues.follow};
-  const BX=760,BY=150,BH=150,GAP=20,CX=1380,TXT=[["in the app","read in place"],["on the platform","worked out each night"],["in the archive","kept until it's deleted"]];
-  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"night",keys:[[0,960,540,1]],push:0.015,draw:(c,tt)=>{
-    md_person(c,"linh",360,800,0.95,{t:tt,gaze:[4,0]});
-    hw_scr(c,S,()=>{md_nameTag(c,150,330,"linh",{a:ag_in(tt,T.linh-0.1,0.5)});
-      hw_when(c,S,"Monday morning",hw_io(tt,T.linh,T.paid,0.4,0.4));hw_when(c,S,"Thursday · pay day",hw_io(tt,T.paid,T.year,0.4,0.4));hw_when(c,S,"A year from now",ag_in(tt,T.year,0.4));
-      const step=ag_sine((tt-T.warm+0.2)/1.4)+ag_sine((tt-T.cold+0.2)/1.4),hl=tt<T.follow?Math.round(step):null;
-      hw_bands(c,BX,BY,1080,{on:[0,1,2].map(i=>clamp((tt-T.cools-0.2-i*0.3)/0.9,0,1)),h:BH,gap:GAP,text:TXT,hl,t:tt,flow:true});
-      // Linh's claim, moving down the bands as it cools
-      const y=BY+step*(BH+GAP),temp=lerp(1,0.1,step/2),state=tt<T.approved+0.2?"waiting for her coordinator":tt<T.warm+0.5?"approved":tt<T.cold+0.5?"part of what Health has spent":"in her pay record, archived";
-      const ca=ag_in(tt,T.hot-0.3,0.5);
-      if(ca>0.004){hw_claim(c,CX,y+8,{temp,state,w:440,a:ca,k:(tt-T.hot+0.3)/0.9});if(tt>T.approved&&tt<T.paid+0.4)md_icon(c,"tick",CX+400,y+130,30,MD.pass,{a:ag_in(tt,T.approved,0.3)*(1-ag_in(tt,T.paid,0.4))});}
-      // payroll's list of claims still waiting reads it in place, in the app: a dashed lane, nothing copied
-      const la=hw_io(tt,T.list,T.paid,0.5,0.4);
-      if(la>0.004){md_tag(c,1100,96,"payroll's list of claims still waiting",{col:MD.flow,icon:"eye",a:la});md_lane(c,md_curve([1560,122],[1600,y+8],{bend:0.5}),MD.flow,0.8*la,{dash:true,t:tt});}});}}],0.6);
+/* ---------------------------------------------------------------- 5 · Hot */
+const HW_SIGNIN=[150,210,200];
+scene("hot",(ctx,S,t,sc)=>{
+  const T={machine:sc.cues.machine,noone:wAt(sc,"machine","no person"),once:wAt(sc,"machine","at once"),aug:sc.cues.august,stole:wAt(sc,"august","stole"),bank:wAt(sc,"august","bank accounts"),
+    eve:wAt(sc,"august","the night before"),stranger:sc.cues.stranger,weeks:wAt(sc,"stranger","three weeks"),report:sc.cues.report,gone:wAt(sc,"report","the money had gone"),rule:sc.cues.rule,
+    moment:wAt(sc,"rule","the moment"),signin:wAt(sc,"rule","the sign-in"),hold:sc.cues.hold,device:wAt(sc,"hold","a new device"),second:wAt(sc,"hold","within a second"),confirm:wAt(sc,"hold","to confirm"),
+    held:sc.cues.held,three:wAt(sc,"held","Three were"),notone:wAt(sc,"held","one was not"),only:sc.cues.only,what:wAt(sc,"only","only what changed"),full:wAt(sc,"only","The full record"),file:wAt(sc,"only","the nightly file"),
+    costs:sc.cues.costs,beside:wAt(sc,"costs","the cold path"),most:wAt(sc,"costs","costs the most"),stops:wAt(sc,"costs","never stops"),few:sc.cues.few,now:wAt(sc,"few","act now")};
+  const HR=[96,150,420],SG=[96,330,420],RULE=[690,190,520],PAY=[1360,190,460],hrP=[516,205],sgP=[516,385],ruleL=[690,262],ruleR=[1210,262],payL=[1360,245],COLD=[690,560,460];
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"map",later:true,keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
+    const now=ag_in(tt,T.rule-0.2,0.6),ruleA=ag_in(tt,T.moment-0.2,0.6),coldA=ag_in(tt,T.full-0.2,0.6);
+    md_system(c,HR[0],HR[1],HR[2],"hr",{a:ag_in(tt,T.bank-0.3,0.5),lit:0.8*hw_io(tt,T.bank,T.stranger,0.4,0.6)});
+    md_system(c,SG[0],SG[1],SG[2],{n:"Sign-in service",s:"Who signed in, where",c:HW_SIGNIN},{a:ag_in(tt,T.signin-0.3,0.5)});
+    md_system(c,PAY[0],PAY[1],PAY[2],{n:"Payroll system",s:"Each pay, each pay day",c:HW_PAYROLL},{a:ag_in(tt,T.eve-0.3,0.5),lit:0.8*hw_io(tt,T.second,T.held+0.4,0.3,0.6)});
+    // August: the change goes through, and the pay goes with it; the morning's report finds it too late
+    const augA=hw_io(tt,T.bank,T.rule-0.2,0.5,0.6);
+    if(augA>0.004)md_way(c,"batch",hrP,payL,tt,{a:augA,col:MD.personal,every:3.6,pts:md_curve(hrP,payL,{bend:0.4}).map(p=>[p[0],p[1]-40])});
+    // now: each change, and the sign-in behind it, the moment they happen, into a rule that acts within a second
+    if(ruleA>0.004){c.save();c.globalAlpha*=ruleA;md_card(c,RULE[0],RULE[1],RULE[2],144,{edge:MD.flow,glow:0.7});md_icon(c,"event",RULE[0]+46,RULE[1]+56,40,MD.flow);
+      md_T(c,"A rule, on each event",RULE[0]+92,RULE[1]+62,{w:700,size:30});md_T(c,"new device · close to pay day",RULE[0]+92,RULE[1]+104,{w:600,size:28,col:MD.soft,a:ag_in(tt,T.device,0.4)});c.restore();
+      md_way(c,"events",hrP,ruleL,tt,{a:ruleA*now,col:MD.personal,every:0.45});md_way(c,"events",sgP,[ruleL[0],ruleL[1]+40],tt,{a:ruleA*ag_in(tt,T.signin,0.5),col:HW_SIGNIN,every:0.5});
+      md_way(c,"api",ruleR,payL,tt,{a:ruleA*ag_in(tt,T.second-0.2,0.5)});}
+    // the cold path beside it: the HR system's whole file, each night, with every correction
+    if(coldA>0.004){md_table(c,COLD[0],COLD[1],COLD[2],{name:"bank_details",kind:"each night",col:MD.personal,icon:"lock",a:coldA,k:(tt-T.full+0.2)/0.9});
+      md_way(c,"batch",[HR[0]+HR[2]/2,HR[1]+110],[COLD[0],COLD[1]+52],tt,{a:coldA,col:MD.personal,every:4.6,pts:md_curve([HR[0]+HR[2]-40,HR[1]+110],[COLD[0],COLD[1]+52],{bend:0.2})});}
+    hw_scr(c,S,()=>{
+      hw_when(c,S,"August",hw_io(tt,T.aug,T.rule,0.4,0.4));hw_when(c,S,"Now",hw_io(tt,T.rule+0.1,T.costs,0.4,0.4));
+      hw_cardAt(c,690,560,1150,{kick:"Hot",title:"No person waiting to decide",sub:"the action comes at once, or it's useless"},tt,T.noone,T.aug,{edge:hw_band("hot").tint,kickCol:hw_band("hot").tint});
+      hw_tagAt(c,96,520,"two passwords stolen",tt,T.stole,T.rule-0.2,{col:MD.fail,icon:"lock"});
+      hw_tagAt(c,1360,350,"the night before pay day",tt,T.eve,T.rule-0.2,{col:HW_WHEN,icon:"clock"});
+      hw_pillAt(c,1590,440,"pay to a stranger's account",tt,T.stranger,T.rule-0.2,{col:MD.fail,icon:"cross"});
+      hw_tagAt(c,1360,520,"three weeks to be paid again",tt,T.weeks,T.rule-0.2,{col:HW_WHEN,icon:"clock"});
+      const ra=hw_io(tt,T.report,T.rule-0.2,0.5,0.5);
+      if(ra>0.004){md_reader(c,690,620,560,{title:"The next morning's report",sub:"the money had gone",icon:"doc",col:MD.ink,a:ra});md_icon(c,"cross",1210,672,34,MD.fail,{a:ra*ag_in(tt,T.gone,0.4)});}
+      hw_tagAt(c,690,420,"within a second",tt,T.second,T.only,{col:MD.flow,icon:"clock"});
+      hw_tagAt(c,1240,350,"holds that one pay · asks the person",tt,T.confirm-0.3,T.only,{col:MD.wait,icon:"person"});
+      hw_pillAt(c,1480,450,"4 held · 3 confirmed within the hour · 1 stopped",tt,T.held+0.2,T.only,{col:MD.pass,icon:"tick"});
+      hw_tagAt(c,690,420,"an event: only what changed",tt,T.what,T.costs,{col:MD.flow,icon:"event"});
+      hw_tagAt(c,1180,612,"the full record, every correction",tt,T.file,T.costs,{col:MD.personal,icon:"lock"});
+      hw_cardAt(c,480,700,960,{kick:"Hot",title:"Never alone: the cold path beside it",sub:"and the costliest, because it never stops"},tt,T.beside,T.few,{edge:hw_band("hot").tint,kickCol:hw_band("hot").tint});
+      hw_cardAt(c,480,700,960,{kick:"Very few needs",title:"Keep hot for a machine that must act now"},tt,T.few+0.2,1e9,{edge:hw_band("hot").tint,kickCol:hw_band("hot").tint});});}}],0.6);
 });
 
-/* ---------------------------------------------------------------- 7 · Kept as it's used */
+/* ---------------------------------------------------------------- 6 · In time to act */
 scene("close",(ctx,S,t,sc)=>{
-  const T={still:wAt(sc,"svalbard","cold and still"),leb:wAt(sc,"svalbard","In Lebanon"),again:wAt(sc,"svalbard","sends out"),univ:sc.cues.university,c1:wAt(sc,"university","contracts"),
-    c2:wAt(sc,"university","spending"),c3:wAt(sc,"university","old pay records"),today:sc.cues.today,casual:wAt(sc,"today","eight hundred"),linh:wAt(sc,"today","Linh among"),
-    take:sc.cues.takeaway,wheel:sc.cues.wheel,docs:sc.cues.docs,verbs:wAt(sc,"docs","then investigate"),next:sc.cues.next,br:sc.cues.breath};
+  const T={wire:sc.cues.wire,closed:wAt(sc,"wire","closed the gap"),no:wAt(sc,"wire","no longer needed"),london:sc.cues.london,lon:wAt(sc,"london","to London"),world:wAt(sc,"london","the world"),
+    univ:sc.cues.university,three:sc.cues.three,c1:wAt(sc,"three","Spending"),c2:wAt(sc,"three","contracts"),c3:wAt(sc,"three","a bank account change"),today:sc.cues.today,
+    take:sc.cues.takeaway,where:sc.cues.where,docs:sc.cues.docs,verbs:wAt(sc,"docs","then investigate"),next:sc.cues.next,br:sc.cues.breath};
+  const A=HW_AT;
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"hwVault",keys:[[0,1280,610,1.2]],push:0.02,draw:(c,tt)=>{hw_vaultLive(c,tt,{tunnel:1,halls:1,boxes:1,cold:1});hw_when(c,S,"Svalbard",ag_in(tt,0.6,0.5));}},
-    {at:T.leb-0.3,place:"hwFields",keys:[[0,960,560,1]],push:0.025,draw:(c,tt)=>{hw_shoots(c,1,{ripe:1});
-      const pts=[[[960,600],[200,420]],[[960,600],[1720,420]]].map(([a,b])=>hw_arc(a,b,120));
-      pts.forEach((p,i)=>{const a=ag_in(tt,T.again+i*0.3,0.6);if(a>0.004){md_lane(c,p,HW.seed,0.6*a,{u:ag_sine((tt-T.again-i*0.3)/1.2)});if(tt>T.again+1)hw_seeds(c,p,tt,{every:1.1,dur:2,off:i*0.5,a});}});
-      hw_when(c,S,"Lebanon and Morocco",ag_in(tt,T.leb,0.5));}},
+    // 1851: the wire joined across the gap; the last pigeons fly home; Reuter's news goes on to London
+    {at:0,place:"hwRoute",keys:[[0,860,480,1.15],[T.london-0.3,760,440,1.05]],d:2.0,push:0.01,draw:(c,tt)=>{
+      hw_wire(c,HW_LANES.berlin,tt,{back:true,every:0.9});hw_wire(c,HW_LANES.paris,tt,{every:0.9});
+      hw_wire(c,HW_LANES.gap,tt,{u:ag_sine((tt-T.closed+0.3)/1.4),every:0.7});
+      hw_flock(c,HW_LANES.birds.slice().reverse(),tt,{a:1-ag_in(tt,T.no,0.8),every:1.8,dur:3.4,s:0.7});
+      const la=ag_in(tt,T.lon-0.2,0.5);if(la>0.004){hw_wire(c,HW_LANES.london,tt,{a:la,u:ag_sine((tt-T.lon)/1.6),back:true,every:0.9});
+        hw_pin(c,A.london[0],A.london[1],{col:MD.flow,label:{title:"London"},side:"below",a:la,k:(tt-T.lon)/0.9});}
+      for(const [k,side] of [["aachen","below"],["berlin","left"],["paris","right"],["brussels","above"]])hw_pin(c,A[k][0],A[k][1],{col:k==="aachen"?HW.seed:MD.flow,label:{title:k[0].toUpperCase()+k.slice(1)},side});
+      hw_when(c,S,"1851",ag_in(tt,0.6,0.5));
+      hw_scr(c,S,()=>hw_tagAt(c,1150,600,"the gap closed: no pigeons needed",tt,T.no,T.london+0.2,{col:HW.seed,icon:"tick"}));}},
+    // the university: each kind of data in time for whoever acts on it
     {at:T.univ-0.3,place:"map",keys:[[0,960,540,1]],push:0.012,draw:(c,tt)=>{
-      hw_rows(c,tt,{on:[1,1,1],temp:[1,1,1],t:tt,hl:tt<T.c1?null:tt<T.c2?0:tt<T.c3?1:2,say:["within a minute","each night","cheaply, until they're deleted"],
-        sayA:[ag_in(tt,T.c1,0.4),ag_in(tt,T.c2,0.4),ag_in(tt,T.c3,0.4)]});
+      hw_rows(c,tt,{on:[1,1,1],temp:[1,1,1],t:tt,hl:tt<T.c1?null:tt<T.c2?2:tt<T.c3?1:0,say:["within a second","every 5 minutes, until the ERP","each night"],
+        sayA:[ag_in(tt,T.c3,0.4),ag_in(tt,T.c2,0.4),ag_in(tt,T.c1,0.4)]});
       hw_when(c,S,"The university",ag_in(tt,T.univ,0.5));}},
     {at:T.today-0.3,place:"night",keys:[[0,960,540,1]],push:0.015,draw:(c,tt)=>{
       hw_personAt(c,"linh",360,800,0.95,tt,-1,T.br,{gaze:[4,0]});
       hw_scr(c,S,()=>{hw_when(c,S,"Today · pay day",hw_io(tt,T.today,T.br,0.4,0.6));
         hw_cardAt(c,820,250,900,{kick:"Paid today",title:"2,960 people",sub:"856 of them casual staff, Linh among them"},tt,T.today+0.3,T.take-0.2,{edge:MD.pass});
-        // what the film found: freshness decides how data moves; reading decides where it lives
-        const k=(tt-T.take)/0.9,a=hw_io(tt,T.take,T.wheel,0.5,0.5);
+        // what the film found: how fresh data must be is set by when someone acts on it
+        const k=(tt-T.take)/0.9,a=hw_io(tt,T.take,T.where,0.5,0.5);
         if(a>0.004){c.save();c.globalAlpha*=a;ag_about(c,1270,420,lerp(0.85,1,Math.min(1,ag_spr(k,0,0.5))));md_card(c,820,300,900,220,{edge:MD.flow,glow:0.6});
-          md_T(c,"Freshness decides how data moves;",1270,388,{w:700,size:40,align:"center"});md_T(c,"reading decides where it lives",1270,446,{w:700,size:40,align:"center",col:MD.flow});c.restore();}
-        // storage has had tiers for years: no wheel to reinvent
-        const wa=hw_io(tt,T.wheel,T.docs,0.5,0.5);if(wa>0.004){md_mark(c,1270,380,80,(tt-T.wheel)/1.6,wa);md_T(c,"storage has had tiers for years",1270,540,{w:700,size:32,align:"center",col:MD.soft,a:wa});}
+          md_T(c,"How fresh data must be is set",1270,388,{w:700,size:40,align:"center"});md_T(c,"by when someone acts on it",1270,446,{w:700,size:40,align:"center",col:MD.flow});c.restore();}
+        hw_cardAt(c,820,300,900,{kick:"Another question, for a later film",title:"Where data is kept, and for how long",sub:"Read often, kept close"},tt,T.where+0.2,T.docs,{edge:MD.soft});
         // the official docs, then investigate, adapt, implement, iterate
         const da=hw_io(tt,T.docs,T.next,0.5,0.5);
         if(da>0.004){c.save();c.globalAlpha*=da;md_card(c,820,240,900,320,{edge:MD.flow,glow:0.5});md_T(c,"Start from the official docs",880,310,{w:700,size:36});
@@ -2471,11 +2358,11 @@ scene("close",(ctx,S,t,sc)=>{
           let vx=880;["investigate","adapt","implement","iterate"].forEach((v,i)=>{md_T(c,v,vx,480,{w:700,size:32,col:MD.flow,a:ag_in(tt,T.verbs+i*0.35,0.4)});vx+=md_tw(c,v,{w:700,size:32})+56;});c.restore();}
         hw_cardAt(c,820,330,900,{kick:"Next",title:"One copy, one platform",sub:"one copy of the claims, for the app and for Finance"},tt,T.next+0.2,T.br,{edge:MD.flow});});}}
   ],0.6);
-  md_end(ctx,S,t,T.br,"Hot, warm, cold","Freshness decides how data moves; reading decides where it lives.","Film 2 of 3","Data that moves");
+  md_end(ctx,S,t,T.br,"Hot, warm, cold","How fresh data must be is set by when someone acts on it.","Film 2 of 4","Data that moves");
 });
 
 // chapters that open in the room the one before ends in: the camera glides on, and what the last one shows leaves first
-ag_cutInto(["warm","cold"]);
+ag_cutInto(["warm","hot"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

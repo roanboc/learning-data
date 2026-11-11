@@ -1,16 +1,16 @@
 # Business architecture for data
 
-*Proposal for the first of four new series in the topic Enterprise architecture, after* The map before the data: *Business architecture for data*, *Data architecture*, *Platform and solution architecture* and *Architecture for AI and agents*. *Drafted on 11 November 2026 from the author's review in the project thread that day. This file holds what the four series share (the brief, the world, the rules, the stories, the data practice on the map) and this series' own plan; each of the other three keeps its own in its folder. Status: proposed; no script is written until the author confirms it (AGENTS.md, stage 1).*
+*Proposal for the first of four new series in the topic Enterprise architecture, after* The map before the data: *Business architecture for data*, *Data architecture*, *Platform and solution architecture* and *AI and continuous architecture*. *Drafted on 11 November 2026 from the author's review in the project thread that day. This file holds what the four series share (the brief, the world, the rules, the stories, the data practice on the map) and this series' own plan; each of the other three keeps its own in its folder. Status: proposed; no script is written until the author confirms it (AGENTS.md, stage 1).*
 
 ## Decided
 
 <!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->
 | Date | Decision |
 |---|---|
-| 11 November 2026 | Four new series join the topic *Enterprise architecture* after *The map before the data*, in this order: *Business architecture for data* (5 films), *Data architecture* (6), *Platform and solution architecture* (8) and *Architecture for AI and agents* (5), in `films/business-architecture-for-data/`, `films/data-architecture/`, `films/platform-and-solution-architecture/` and `films/architecture-for-ai-and-agents/`. Titles approved by the author; no other architecture series. |
+| 11 November 2026 | Four new series join the topic *Enterprise architecture* after *The map before the data*, in this order: *Business architecture for data* (5 films), *Data architecture* (6), *Platform and solution architecture* (8) and *AI and continuous architecture* (6), in `films/business-architecture-for-data/`, `films/data-architecture/`, `films/platform-and-solution-architecture/` and `films/ai-and-continuous-architecture/`. Titles approved by the author; no other architecture series. |
 | 11 November 2026 | Every series starts from the enterprise architecture map: its opening film opens on Tomás's map from *The map before the data* and shows where its architecture sits; each series page states its prerequisites. |
 | 11 November 2026 | The world is *The map before the data*'s energy utility, with Tomás and its owners; two new people, assumptions for the author: Inés Duarte, data architect, and Ravi Menon, platform lead. The look is that series', from `films/enterprise-architecture/shared/`. |
-| 11 November 2026 | One true story per series, told across its films, not one per film; each film opens on its part of it, in the four beats, and comes back to it. From outside the West: the qanats of Iran (business), Project Cybersyn in Chile (data), Japan's Gokaidō (platform); the AI series' story to choose. Each series' last film says what its story didn't achieve and why a practice has to keep maturing. |
+| 11 November 2026 | One true story per series, told across its films, not one per film; each film opens on its part of it, in the four beats, and comes back to it. From outside the West: the qanats of Iran (business), Project Cybersyn in Chile (data), Japan's Gokaidō (platform); the ziggurat of Babylon, with the Tower of Babel told as the story it inspired (AI and continuous architecture). Each series' last film says what its story didn't achieve and why a practice has to keep maturing. |
 | 11 November 2026 | "Data architecture", DAMA's term, not "information architecture", in titles and narration; the three meanings of "information architecture" are told once as an example of the confusion, and web navigation is out of scope. The six layers keep "information" for their fourth layer. |
 | 11 November 2026 | The data practice on the map is embedded: every film of the first three series ends with a short piece adding its layer's data components (a data product as a product with its contract, owners as roles, glossary terms as business objects; data objects; interfaces, services, components and artifacts), building to one consolidated view in the platform series' last film, with a lab, *Model the data practice*. *The map before the data* is not re-cut. |
 | 11 November 2026 | No draft label on these films: the author discussed them in detail before any was made. |
@@ -42,7 +42,7 @@ The author, on 11 November 2026, in his words:
 | 2 | **Business architecture for data** | 5 | What the business owns about its data: concepts, owners, processes as context, rules and expectations |
 | 3 | **Data architecture** (`../data-architecture/proposal.md`) | 6 | Where data lives, how it travels, who owns which, and one language for it |
 | 4 | **Platform and solution architecture** (`../platform-and-solution-architecture/proposal.md`) | 8 | The data platform as a platform, its parts, how it meets the applications, security, and one solution on it |
-| 5 | **Architecture for AI and agents** (`../architecture-for-ai-and-agents/proposal.md`) | 5 | Agents and AI services on the map, and AI in the architecture practice itself |
+| 5 | **AI and continuous architecture** (`../ai-and-continuous-architecture/proposal.md`) | 6 | Agents and AI services on the map, AI in the architecture practice, and architecture kept alive as a continuous capability: the topic's closing remarks |
 
 No other architecture series (the author, 11 November 2026).
 
@@ -65,7 +65,7 @@ Each series follows one true story from outside the West. The opening film sets 
 | Business architecture for data | **The qanats**: underground channels that carry water to desert villages; the shareholders own the water, in shares of time; a water master, the *mirab*, keeps the turns; the diggers, the *muqannis*, build and repair the channel and own none of the water | Iran; over two thousand years, still running; eleven listed by UNESCO as *The Persian Qanat* in 2016 |
 | Data architecture | **Project Cybersyn**: factories linked to Santiago by telex, a few agreed numbers sent each day, software that flagged only what was out of line, and each factory left to solve its own problems | Chile, 1971 to 1973 |
 | Platform and solution architecture | **The Gokaidō**: five roads organised from Edo, with post stations, horses and porters, and checkpoints, shared by every domain, merchant and pilgrim | Japan, 1601 to the railway of the 1870s and 1880s |
-| Architecture for AI and agents | To choose when its films are drafted, from a region the other three don't use | — |
+| AI and continuous architecture | **The ziggurat of Babylon**, Etemenanki: rebuilt by kings over centuries with workers from many peoples, damaged when it stopped being kept, its rubble cleared by Alexander for a rebuild he didn't live to start; the Tower of Babel told plainly as the story it likely inspired, of builders who stop understanding each other (to check against sources from the region) | Iraq; restored under Nabopolassar and Nebuchadnezzar II (about 600 BCE), cleared about 323 BCE |
 
 Checked on 11 November 2026, with the corrections already made:
 

@@ -10,7 +10,7 @@ const NARR={
  {"id":"banks","gap":0.8,"text":"Few Black South Africans had a bank account then, or for decades after, under apartheid."},
  {"id":"lend","gap":0.8,"text":"Banks wouldn't lend to them: their pay was low and irregular, and the law kept them from owning property a bank would take as security."},
  {"id":"harm","gap":0.8,"text":"With no safe place to save and no one to borrow from, one funeral, a term's school fees or a lost wage could ruin a family."},
- {"id":"change","gap":0.8,"text":"Something had to change. They didn't wait for a bank: they built their own way, out of trust."},
+ {"id":"change","gap":0.8,"text":"Families needed a way to save and borrow. They didn't wait for a bank: they built their own, out of trust."},
  {"id":"rules","gap":0.8,"text":"Each group agrees its rules together: how much to pay, how often to meet, whose turn comes next, and what happens if someone can't pay."},
  {"id":"answer","gap":0.8,"text":"Every member answers to the others, and almost nobody fails to pay: being trusted is worth more than any one pot."},
  {"id":"burial","gap":0.8,"text":"The most common kind, the burial society, carries a member's family through a funeral."},

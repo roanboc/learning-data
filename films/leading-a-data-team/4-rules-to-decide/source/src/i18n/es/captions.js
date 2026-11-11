@@ -34,8 +34,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la estación seca, las fincas de río abajo esperaban un agua que no llegaba.",
 "For a farming family, a lost harvest meant a season's food and income gone.":
 "Para una familia campesina, una cosecha perdida era la comida y los ingresos de una temporada.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Someone had to show the planners what the temples already knew.":
+"Alguien tenía que mostrarles a los planificadores lo que los templos ya sabían.",
 "In the 1980s, the anthropologist Stephen Lansing and the ecologist James Kremer built a computer model of two rivers and their 172 subaks.":
 "En la década de 1980, el antropólogo Stephen Lansing y el ecólogo James Kremer hicieron un modelo informático de dos ríos y sus 172 subaks.",
 "It showed that the temples' calendar gave the biggest harvests, balancing hungry pests against shared water.":

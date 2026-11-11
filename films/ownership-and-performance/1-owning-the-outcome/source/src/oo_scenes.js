@@ -58,7 +58,7 @@ scene("trees",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       oo_sheet(x,tt,w("harm","women",-0.2),1140,110,640,{kick:"The women",lines:["Fetched the water","Gathered the firewood","Grew the food"]},
         {light:null,pin:false,out:c.change-0.5,u:oo_u(tt,[w("harm","fetched",-0.1),w("harm","gathered",-0.1),w("harm","grew",-0.1)])});
       oo_pill(x,tt,w("harm","harm",-0.2),c.change-0.5,1400,500,"The harm fell first on them, and their children",{col:LP.amber,size:28});
-      oo_tag(x,tt,w("change","change",-0.3),c.start-0.6,1460,190,"Something had to change",{align:"center",col:LP.ink});}},
+      oo_tag(x,tt,w("change","bring the trees",-0.3),c.start-0.6,1460,190,"Bring the trees back",{align:"center",col:LP.ink});}},
     // 1977: the Green Belt Movement
     {at:c.start-0.3,place:"ooNursery",keys:[[c.start-0.3,960,520,1.0]],dis:1.2,draw:(x,tt)=>{const nA=ag_in(tt,w("nursery","Groups",-0.4),0.8);
       if(nA>0.004){lp_person(x,OO_PEOPLE.wan,280,700,0.62,{t:tt,cut:796,light:OO_OUT,a:nA});lp_person(x,OO_PEOPLE.nya,560,690,0.62,{t:tt,cut:796,light:OO_OUT,a:nA});

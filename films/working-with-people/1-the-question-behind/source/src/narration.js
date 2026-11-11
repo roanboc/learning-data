@@ -8,7 +8,7 @@ const NARR={
  {"id":"closed","gap":0.8,"text":"In January 1990, Pisa's tower was closed to visitors, for fear it could fall too.","say":"In January nineteen ninety, Pisa's tower was closed to visitors, for fear it could fall too."},
  {"id":"harm","gap":0.8,"text":"Its stone was fragile: a fall could kill anyone near it, and take from the city the tower people cross the world to see."},
  {"id":"risk","gap":0.8,"text":"And any work was a risk: the slightest disturbance to the ground on its leaning side could bring it down."},
- {"id":"change","gap":0.8,"text":"Something had to change, without the work itself toppling it."},
+ {"id":"change","gap":0.8,"text":"The tower had to be made safe, without the work itself toppling it."},
  {"id":"committee","gap":0.8,"text":"That spring, Italy's government appointed an international committee: engineers, architects and experts in old monuments."},
  {"id":"meant","gap":0.8,"text":"Before choosing how, they agreed what saving it would mean: a small change, about half a degree, too little for anyone to see."},
  {"id":"enough","gap":0.8,"text":"But enough to ease the strain on its stone, and steady the ground beneath it."},

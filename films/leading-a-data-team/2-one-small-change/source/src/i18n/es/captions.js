@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una infección son gérmenes en una herida o en el cuerpo de un bebé: fiebre y dolor, más días en el hospital y peligro real para los dos.",
 "And there's no money for a fix: at first, the ministry gives nothing for it.":
 "Y no hay dinero para arreglarlo: al principio, el ministerio no da nada para eso.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The hospital has to get cleaner with what it already has.":
+"El hospital tiene que volverse más limpio con lo que ya tiene.",
 "The director brings in a way of working from Japanese factories, already used by companies in Sri Lanka: five steps, called 5S.":
 "El director trae una forma de trabajar de las fábricas japonesas, que ya usan empresas de Sri Lanka: cinco pasos, llamados 5S.",
 "Sort out what isn't needed. Set the rest in order. Shine: clean it. Standardise: agree one way, and write it down. And sustain it.":

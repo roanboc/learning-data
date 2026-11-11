@@ -18,8 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un maestro solo con su grupo no ve lo que cada niño ha entendido, y nadie ve la clase para ayudar.",
 "When a lesson loses the children, they fall behind, and the teacher may never learn why.":
 "Cuando una clase pierde a los niños, se quedan atrás, y quizá el maestro nunca sepa por qué.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Teachers needed other eyes on their lessons.":
+"Los maestros necesitaban otros ojos sobre sus clases.",
 "Teachers opened their classrooms to each other.":
 "Los maestros se abrieron sus salones unos a otros.",
 "From the first year, new teachers learned by watching lessons, and teachers formed groups to learn together.":

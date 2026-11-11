@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Muchos decían que el problema eran los trabajadores.",
 "For the people who bought those cars, it meant faults to fix. For the workers, it meant no job, and a name that followed them.":
 "Para quien compraba esos autos, eran fallas que arreglar. Para los trabajadores, no tener empleo, y una fama que los seguía.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Blaming the workers hadn't fixed a single car.":
+"Culpar a los trabajadores no había arreglado ni un solo auto.",
 "In 1984, General Motors and Toyota reopen the plant together, as NUMMI.":
 "En 1984, General Motors y Toyota reabren juntas la planta, como NUMMI.",
 "More than eight in ten of its new workers are the same people, hired back.":

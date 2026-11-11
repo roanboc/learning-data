@@ -9,7 +9,7 @@ const NARR={
  {"id":"forget","gap":0.8,"text":"Guests forget to hand them in when they leave, or lose them on the way."},
  {"id":"opens","gap":0.8,"text":"And a key still opens its door, whoever holds it, long after the stay has ended."},
  {"id":"anyone","gap":0.8,"text":"Anyone who found one, or kept one, could let themselves into the next guest's room, while that guest slept."},
- {"id":"change","gap":0.8,"text":"Something has to change."}
+ {"id":"change","gap":0.8,"text":"A key has to stop working when the stay ends."}
 ]},
 "card":{"name":"A card for each stay","lead":1.0,"tail":0.6,"vo":[
  {"id":"lock","gap":0.8,"text":"Sørnes makes a lock that a punched plastic card opens."},

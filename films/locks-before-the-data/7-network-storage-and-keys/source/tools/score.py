@@ -14,7 +14,7 @@
 #  - Music only from time to time: under the opening story, and after it only at a chapter's turn, under a moment on screen or in a
 #    pause without words; never a bed under the voice. tools/quiet.py checks that after the opening no chapter has music for more than
 #    half its length, or for 12 seconds without a break. Rome's problem ends in silence: the flute stops as the basins run dry, and
-#    "Nobody can say who draws what. Something has to change." has no music.
+#    "Nobody can say who draws what. The water has to go where it's owed, and someone has to know where it goes." has no music.
 #  - Nothing trembles, pulses or beats: each note is one voice held steady, the partials are harmonic, and every note is tuned pure (just
 #    intonation from D, see hz()), so F major and D minor are pure. No urgent pulse.
 #  - Every sound is an event on screen, at the moment it appears. Each one below uses the same timing as the picture in src/scenes.js
@@ -157,7 +157,7 @@ def stone(s, g=0.016, pan=0.0):
 #    Frontinus: C, as he takes the office. He measures: the card of ten thousand more, two pipes falling, and the flute turns to D minor.
 #    The holes along the channel, each struck as it opens; the water-man's jar fills; the garden's pipe. The street: the secret pipes
 #    bored up into the shops, three pipes struck, falling. "Only a little": the flute low on D; as the basins stop, it stops too, and
-#    "Nobody can say who draws what. Something has to change." has no music
+#    "Nobody can say who draws what. The water has to go where it's owed, and someone has to know where it goes." has no music
 hw = lambda lid, word, off=0: W('holes', lid, word, off)
 hc = lambda lid, off=0: G('holes', lid, off)
 h0 = S0('holes')

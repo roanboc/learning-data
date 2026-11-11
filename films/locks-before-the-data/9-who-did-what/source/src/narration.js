@@ -9,7 +9,7 @@ const NARR={
  {"id":"left","gap":0.8,"text":"No one is left to say what the crew saw or heard."},
  {"id":"guess","gap":0.8,"text":"So the experts can only guess."},
  {"id":"again","gap":0.8,"text":"And while they guess, the planes fly again, full of passengers, and the next one may fail the same way."},
- {"id":"change","gap":0.8,"text":"Something has to change."}]},
+ {"id":"change","gap":0.8,"text":"The next crash can't leave everyone guessing."}]},
 "tail":{"name":"Kept where no crash can reach","lead":0.8,"tail":1.0,"vo":[
  {"id":"note","gap":0.8,"text":"In April 1954, Warren writes a short note.","say":"In April, nineteen fifty-four, Warren writes a short note."},
  {"id":"box","gap":0.8,"text":"A small box could record the voices in the cockpit, over and over, so the last hours are always kept."},

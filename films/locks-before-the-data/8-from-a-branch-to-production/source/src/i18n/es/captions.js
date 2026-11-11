@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los partidos pequeños temen lo que escribiría una mayoría: derechos que otra votación podría quitar, tribunales al servicio de un partido.",
 "And the party expected to win won't accept a constitution written by negotiators nobody elected.":
 "Y el partido que se espera que gane no aceptará una constitución escrita por negociadores que nadie eligió.",
-"Something has to change in how a constitution is made.":
-"Algo tiene que cambiar en cómo se hace una constitución.",
+"The way a constitution is made has to win everyone's trust first.":
+"La forma de hacer una constitución tiene que ganarse primero la confianza de todos.",
 "So they agree the principles first: 34 of them, from rights for everyone to judges no party controls.":
 "Así que acuerdan primero los principios: 34, desde derechos para todos hasta jueces que ningún partido controla.",
 "They write them into a temporary constitution, in force from 27 April 1994, and nobody may change them.":

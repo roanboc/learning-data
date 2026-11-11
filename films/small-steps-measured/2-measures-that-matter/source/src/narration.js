@@ -9,7 +9,7 @@ const NARR={
  {"id":"mother","gap":0.8,"text":"But in the room, everyone looks after the mother, and the newborn is left to the most junior doctor."},
  {"id":"words","gap":0.8,"text":"Is the baby well? Each doctor judges by eye, in words like mild or severe, and each means something different."},
  {"id":"harm","gap":0.8,"text":"So a baby in trouble can be missed until it's too late, and no hospital can tell whether what it does helps."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Doctors need words for a newborn that mean the same to everyone."},
  {"id":"score","gap":0.8,"text":"In 1952, Apgar proposes a score that anyone in the room can take, the same way every time.","say":"In nineteen fifty-two, Apgar proposes a score that anyone in the room can take, the same way every time."},
  {"id":"signs","gap":0.8,"text":"One minute after birth, five signs: the heartbeat, breathing, how firmly the baby moves, how it reacts when touched, and its colour."},
  {"id":"points","gap":0.8,"text":"Each gets zero, one or two. Ten is a baby doing well."},

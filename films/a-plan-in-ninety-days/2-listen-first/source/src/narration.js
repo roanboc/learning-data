@@ -8,7 +8,7 @@ const NARR={
  {"id":"died","gap":0.8,"text":"Unless it was treated early, it nearly always killed them."},
  {"id":"pellagra","gap":0.8,"text":"Many doctors took it for pellagra, a disease of a missing vitamin; treated that way, children kept dying."},
  {"id":"nobook","gap":0.8,"text":"Williams couldn't find it in any medical book."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The answer would have to come from outside the books."},
  {"id":"listened","gap":0.8,"text":"So she listened: to mothers and grandmothers, to nurses and healers."},
  {"id":"feared","gap":0.8,"text":"For three years, nobody said its name in front of her: the word was feared."},
  {"id":"told","gap":0.8,"text":"Then the mothers told her: kwashiorkor."},

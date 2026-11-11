@@ -27,217 +27,217 @@ A short operation can give their sight back.
 But most of them are too poor to pay for it, and live far from any surgeon.
 
 8
-00:00:50,312 --> 00:00:53,854
-Something has to change, at a scale no hospital has tried.
+00:00:50,312 --> 00:00:53,890
+Surgery as hospitals did it then would never reach them all.
 
 9
-00:00:55,754 --> 00:01:01,309
+00:00:55,790 --> 00:01:01,345
 He starts by saying what his hospital is for: sight given back, to everyone who needs it.
 
 10
-00:01:03,209 --> 00:01:09,149
+00:01:03,245 --> 00:01:09,185
 Then who it's for, in groups: those who can pay, those who can pay a little, and those who can pay nothing.
 
 11
-00:01:10,849 --> 00:01:14,060
+00:01:10,885 --> 00:01:14,096
 Six of the eleven beds are for those who pay nothing.
 
 12
-00:01:15,760 --> 00:01:20,764
+00:01:15,796 --> 00:01:20,800
 Those who can't come are reached in their villages, at eye camps, and brought in by bus.
 
 13
-00:01:22,464 --> 00:01:29,450
+00:01:22,500 --> 00:01:29,486
 Then he designs everything below for them: how each operating room flows, who does each step, and what it costs.
 
 14
-00:01:31,350 --> 00:01:37,763
+00:01:31,386 --> 00:01:37,799
 When bought lenses cost too much, the hospital makes its own, from 1992, for a few dollars each.
 
 15
-00:01:39,463 --> 00:01:47,407
+00:01:39,499 --> 00:01:47,443
 Today Aravind's hospitals do over four hundred thousand operations a year, more than half of them free or for very little.
 
 16
-00:01:49,307 --> 00:01:57,891
+00:01:49,343 --> 00:01:57,927
 Those who pay cover those who can't, and the outcomes hold: in 2007, complications in under two operations in a hundred.
 
 17
-00:01:59,791 --> 00:02:03,259
+00:01:59,827 --> 00:02:03,295
 A data team serves people too, and it can lose sight of who.
 
 18
-00:02:04,759 --> 00:02:10,369
+00:02:04,795 --> 00:02:10,405
 Say what each service is, and who it's for, and every system below can be designed for someone.
 
 19
-00:02:18,469 --> 00:02:24,875
+00:02:18,505 --> 00:02:24,911
 These films take the product owner's side of a data manager's job, and borrow from architecture to do it.
 
 20
-00:02:26,775 --> 00:02:33,860
+00:02:26,811 --> 00:02:33,896
 May 2027, at the university. The data council approved Helena Novak's strategy in April.
 
 21
-00:02:35,560 --> 00:02:40,566
+00:02:35,596 --> 00:02:40,602
 Now she runs her team's work as a business of its own, with suppliers and customers.
 
 22
-00:02:42,266 --> 00:02:46,382
+00:02:42,302 --> 00:02:46,418
 First, the services, on one page, in words a customer would use.
 
 23
-00:02:47,882 --> 00:02:51,568
+00:02:47,918 --> 00:02:51,604
 One: governed data products, each with an owner and a promise.
 
 24
-00:02:53,068 --> 00:02:57,370
+00:02:53,104 --> 00:02:57,406
 Two: the platform, where data partners in the faculties build their own.
 
 25
-00:02:58,870 --> 00:03:01,244
+00:02:58,906 --> 00:03:01,280
 Three: analysis that answers a decision.
 
 26
-00:03:02,744 --> 00:03:04,424
+00:03:02,780 --> 00:03:04,460
 Four: advice and training.
 
 27
-00:03:06,124 --> 00:03:12,911
+00:03:06,160 --> 00:03:12,947
 A list like this is a service catalogue; governance's own services have one, in A capability, not a project.
 
 28
-00:03:14,611 --> 00:03:22,801
+00:03:14,647 --> 00:03:22,837
 Then the suppliers: the owners of payroll, the timetable, the rooms' sensors and HR, and digital services, who run the machines.
 
 29
-00:03:25,501 --> 00:03:29,569
+00:03:25,537 --> 00:03:29,605
 Then the customers, in four groups, each with what hurts and what drives them.
 
 30
-00:03:31,069 --> 00:03:37,029
+00:03:31,105 --> 00:03:37,065
 Their words come from the 31 conversations Helena held in her first weeks, in Listen first.
 
 31
-00:03:38,729 --> 00:03:46,472
+00:03:38,765 --> 00:03:46,508
 People who decide, like Graham Ellis in Facilities: two numbers for the same thing; they want answers they can defend, in time.
 
 32
-00:03:48,372 --> 00:03:54,309
+00:03:48,408 --> 00:03:54,345
 The data partners: weeks of waiting for access; they want to build their faculty's products themselves.
 
 33
-00:03:56,209 --> 00:04:02,834
+00:03:56,245 --> 00:04:02,870
 Analysts and report readers: they can't tell which table to trust; they want to find it, trust it and use it.
 
 34
-00:04:04,734 --> 00:04:10,347
+00:04:04,770 --> 00:04:10,383
 And staff and students, whose data it is: who can see it? They want it used fairly, and kept safe.
 
 35
-00:04:12,247 --> 00:04:18,297
+00:04:12,283 --> 00:04:18,333
 Pains and drivers in a customer's own words: the value proposition canvas asks for the same.
 
 36
-00:04:19,997 --> 00:04:26,475
+00:04:20,033 --> 00:04:26,511
 Noor Rahman, the data architect, puts the services and their customers on her map, beside everything else.
 
 37
-00:04:29,175 --> 00:04:35,529
+00:04:29,211 --> 00:04:35,565
 Then Helena and Noor walk one service, governed data products, down every layer, with a picture for each.
 
 38
-00:04:37,029 --> 00:04:41,977
+00:04:37,065 --> 00:04:42,013
 Five layers: strategy, business, information, application and technology.
 
 39
-00:04:43,477 --> 00:04:50,113
+00:04:43,513 --> 00:04:50,149
 They're ArchiMate's layers, with TOGAF's data called information; The map before the data draws them in full.
 
 40
-00:04:51,613 --> 00:04:55,819
+00:04:51,649 --> 00:04:55,855
 Strategy: the capability it serves, deciding from trusted data.
 
 41
-00:04:57,119 --> 00:05:04,116
+00:04:57,155 --> 00:05:04,152
 Business: the service and its promise, checked by seven each morning, and who builds, reviews and owns each product.
 
 42
-00:05:05,616 --> 00:05:10,567
+00:05:05,652 --> 00:05:10,603
 Information: what it's about, such as rooms, bookings and the people counted in them.
 
 43
-00:05:11,867 --> 00:05:16,796
+00:05:11,903 --> 00:05:16,832
 Application: the platform, the catalog, and the project where the products are built.
 
 44
-00:05:18,096 --> 00:05:20,012
+00:05:18,132 --> 00:05:20,048
 Technology: where it all runs.
 
 45
-00:05:21,312 --> 00:05:24,318
+00:05:21,348 --> 00:05:24,354
 Each picture names the customer it serves, at the top.
 
 46
-00:05:25,818 --> 00:05:32,544
+00:05:25,854 --> 00:05:32,580
 In the old warehouse, the same walk finds 17 of 38 reports that no one has opened in a year.
 
 47
-00:05:34,444 --> 00:05:39,268
+00:05:34,480 --> 00:05:39,304
 A system that serves no customer's need raises one question: why is it there?
 
 48
-00:05:41,968 --> 00:05:45,732
+00:05:42,004 --> 00:05:45,768
 On Monday 7 June, the team's one front door opens.
 
 49
-00:05:47,432 --> 00:05:52,332
+00:05:47,468 --> 00:05:52,368
 Of the 45 requests put in order, 42 land on one of the four services.
 
 50
-00:05:54,232 --> 00:05:58,907
+00:05:54,268 --> 00:05:58,943
 Graham's question about his rooms lands on analysis that answers a decision.
 
 51
-00:06:00,607 --> 00:06:03,415
+00:06:00,643 --> 00:06:03,451
 Three land on none, and Helena says so openly.
 
 52
-00:06:05,115 --> 00:06:09,567
+00:06:05,151 --> 00:06:09,603
 Two are for a new booking system, and go to digital services, with a note.
 
 53
-00:06:11,267 --> 00:06:16,866
+00:06:11,303 --> 00:06:16,902
 One, help with a staff survey, shows a gap the team can fill, and joins advice and training.
 
 54
-00:06:18,566 --> 00:06:24,046
+00:06:18,602 --> 00:06:24,082
 A request that lands on no service isn't a failure. It shows where the page needs to change.
 
 55
-00:06:26,746 --> 00:06:32,465
+00:06:26,782 --> 00:06:32,501
 In Madurai, the eleven beds came after one sentence: sight, for everyone who needs it.
 
 56
-00:06:34,165 --> 00:06:40,825
+00:06:34,201 --> 00:06:40,861
 Helena's team did the same with data: every request now finds its service, and every system its customer.
 
 57
-00:06:42,525 --> 00:06:46,608
+00:06:42,561 --> 00:06:46,644
 On Monday, write your services on one page, in a customer's words.
 
 58
-00:06:47,708 --> 00:06:52,692
+00:06:47,744 --> 00:06:52,728
 Name your suppliers and your customers, in groups, with what hurts and what drives each.
 
 59
-00:06:53,792 --> 00:06:57,108
+00:06:53,828 --> 00:06:57,144
 Walk each service down every layer, with a picture for each.
 
 60
-00:06:58,208 --> 00:07:01,083
+00:06:58,244 --> 00:07:01,119
 And if a system serves no one, ask why it's there.
 
 61
-00:07:02,583 --> 00:07:06,681
+00:07:02,619 --> 00:07:06,717
 Know your services and who they're for; then design every layer for them.

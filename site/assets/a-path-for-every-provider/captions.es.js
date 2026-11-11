@@ -16,8 +16,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pocos puertos tienen una, y construirla lleva años y dinero que la mayoría no tiene.",
 "For those ports, the box changes nothing: ships still sit at the quay for days, unloaded by hand, and their goods cost more.":
 "Para esos puertos, la caja no cambia nada: los barcos pasan días en el muelle, se descargan a mano, y sus mercancías cuestan más.",
-"Something has to change, or the box will stop wherever the cranes do.":
-"Algo tiene que cambiar, o la caja se detendrá donde se detengan las grúas.",
+"Unless it can reach ports without cranes, the box will stop wherever the cranes do.":
+"Si no llega a los puertos sin grúas, la caja se detendrá donde se detengan las grúas.",
 "In October 1957, McLean's company sends out a rebuilt ship, the Gateway City, with two cranes of its own.":
 "En octubre de 1957, la empresa de McLean hace zarpar un barco reformado, el Gateway City, con dos grúas propias.",
 "They run on rails along its deck, and reach out over the quay.":

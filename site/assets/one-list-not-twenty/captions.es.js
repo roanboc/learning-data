@@ -12,7 +12,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The army's rules keep its field hospital, called the ambulance, a league behind the fighting: about four kilometres.":"Las reglas del ejército dejan su hospital de campaña, llamado la ambulancia, a una legua del combate: unos cuatro kilómetros.",
 "The wounded lie where they fall until the battle ends. Then the ambulance sets out to reach them, stuck behind the army's wagons.":"Los heridos quedan donde caen hasta que acaba la batalla. Luego la ambulancia sale por ellos, atascada tras los carros del ejército.",
 "It never takes less than a day, or a day and a half. Most of the wounded die waiting for help.":"Nunca tarda menos de un día, o un día y medio. La mayoría de los heridos muere esperando ayuda.",
-"At Speyer, that autumn, many die this way. Something has to change.":"En Speyer, ese otoño, muchos mueren así. Algo tiene que cambiar.",
+"At Speyer, that autumn, many die this way. Help has to reach them while the battle is still on.":"En Speyer, ese otoño, muchos mueren así. La ayuda tiene que llegarles mientras la batalla sigue.",
 "Larrey builds what he calls a flying ambulance: a light carriage on springs that follows the front line.":"Larrey construye lo que llama una ambulancia volante: un carruaje ligero con muelles que sigue la línea del frente.",
 "From 1793, his surgeons bandage the wounded where they fall, and carry them back while the battle goes on.":"Desde 1793, sus cirujanos vendan a los heridos donde caen, y los llevan atrás mientras sigue la batalla.",
 "It works. At Aboukir, in Egypt, in 1799, the army has eight hundred wounded.":"Funciona. En Aboukir, en Egipto, en 1799, el ejército tiene ochocientos heridos.",

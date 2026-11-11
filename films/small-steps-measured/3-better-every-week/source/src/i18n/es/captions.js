@@ -11,7 +11,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
  "For every twelve parts, the worker walks back and forth to the boxes, stamps each part, and carries each full box to a scale.":"Por cada doce piezas, el obrero va y vuelve de las cajas, sella cada pieza y lleva cada caja llena a una báscula.",
  "Every extra step costs time the factory doesn't have, and the carrying is heavy work that wears people out.":"Cada paso de más cuesta un tiempo que la fábrica no tiene, y cargar es un trabajo pesado que agota a la gente.",
  "And nobody has time to stop and rethink the job.":"Y nadie tiene tiempo de parar a repensar el trabajo.",
- "Something had to change.":"Algo tenía que cambiar.",
+ "Someone had to help them find the time, and the better way.":"Alguien tenía que ayudarles a encontrar el tiempo, y la mejor manera.",
  "A government service, Training Within Industry, trains the supervisors themselves, ten at a table.":"Un servicio del gobierno, Training Within Industry, forma a los propios supervisores, de diez en diez, en una mesa.",
  "From 1942, its course Job Methods teaches them to make small improvements in the jobs they know best.":"Desde 1942, su curso Job Methods les enseña a hacer pequeñas mejoras en los trabajos que mejor conocen.",
  "Break the job down into its details; question every one: why, what for, where, when, who, how.":"Divide el trabajo en sus detalles; cuestiona cada uno: por qué, para qué, dónde, cuándo, quién, cómo.",

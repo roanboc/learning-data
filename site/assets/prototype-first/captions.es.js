@@ -13,7 +13,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "One plan was to widen the streets, knocking down buildings from the turn of the century.":"Un plan era ensanchar las calles, derribando edificios de principios de siglo.",
 "The young mayor, Jaime Lerner, an architect, wanted the street given back to people on foot.":"El joven alcalde, Jaime Lerner, un arquitecto, quería devolverle la calle a la gente a pie.",
 "The shopkeepers feared the opposite: without cars, their customers would stay away, and their sales would fall.":"Los comerciantes temían lo contrario: sin autos, sus clientes dejarían de venir y sus ventas caerían.",
-"Something had to change, but no plan on paper could show them what the street would be like.":"Algo tenía que cambiar, pero ningún plan en papel podía mostrarles cómo sería la calle.",
+"Arguing over plans on paper couldn't show anyone what the street would be like.":"Discutir planes en papel no podía mostrarle a nadie cómo sería la calle.",
 "So the mayor's team built the real thing, fast.":"Así que el equipo del alcalde construyó la calle de verdad, y rápido.",
 "On Saturday morning, grey and damp, the street was handed to the people, without ceremony.":"El sábado por la mañana, gris y húmedo, la calle se entregó a la gente, sin ceremonia.",
 "Over the weekend, crews took up the road, laid stones, and put in streetlights and kiosks.":"Durante el fin de semana, las cuadrillas levantaron la calzada y pusieron adoquines, faroles y quioscos.",

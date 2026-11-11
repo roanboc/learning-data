@@ -35,289 +35,289 @@ And millions of bricks would be hard to take away again, though the building was
 With less than a year to go, the exhibition itself was in doubt.
 
 10
-00:01:02,349 --> 00:01:03,737
-Something had to change.
+00:01:02,349 --> 00:01:05,918
+They needed a building that could go up in months, and come down again.
 
 11
-00:01:05,237 --> 00:01:10,605
+00:01:07,418 --> 00:01:12,786
 Joseph Paxton, a gardener who built glasshouses, saw a way to answer every worry.
 
 12
-00:01:12,105 --> 00:01:20,658
+00:01:14,286 --> 00:01:22,839
 On 11 June 1850, at a railway meeting in Derby, he sketched a hall of iron and glass on a sheet of blotting paper.
 
 13
-00:01:22,358 --> 00:01:27,717
+00:01:24,539 --> 00:01:29,898
 Made of the same few parts again and again, it could go up fast, and come down again after.
 
 14
-00:01:29,217 --> 00:01:36,277
+00:01:31,398 --> 00:01:38,458
 And he showed it to everyone at once: on 6 July, the Illustrated London News printed it for the whole country.
 
 15
-00:01:37,977 --> 00:01:44,681
+00:01:40,158 --> 00:01:46,862
 On 15 July it was accepted, on one condition: three old elms must stay, inside the building.
 
 16
-00:01:46,381 --> 00:01:50,944
+00:01:48,562 --> 00:01:53,125
 So the middle of the hall rose into an arched roof, high enough to stand over them.
 
 17
-00:01:52,844 --> 00:01:57,496
+00:01:55,025 --> 00:01:59,677
 It went up in months, and opened on 1 May 1851, as planned.
 
 18
-00:01:59,196 --> 00:02:04,674
+00:02:01,377 --> 00:02:06,855
 The elms stood inside, under the glass, and by October there were about six million visits.
 
 19
-00:02:06,374 --> 00:02:13,735
+00:02:08,555 --> 00:02:15,916
 Its surplus, over £186,000, bought land in South Kensington, where museums stand today.
 
 20
-00:02:15,235 --> 00:02:18,810
+00:02:17,416 --> 00:02:20,991
 Each worry had an answer, and everyone had seen the same picture.
 
 21
-00:02:20,510 --> 00:02:25,547
+00:02:22,691 --> 00:02:27,728
 Data work has stakeholders too: everyone a plan touches, or who can shape it.
 
 22
-00:02:27,047 --> 00:02:35,926
+00:02:29,228 --> 00:02:38,107
 A year from now, a university's data council says yes to retiring an old system; fourteen stakeholders want different things from the move.
 
 23
-00:02:37,426 --> 00:02:43,334
+00:02:39,607 --> 00:02:45,515
 Listen only to the loudest, and the move could land HR's reports in payroll's busiest weeks.
 
 24
-00:02:44,634 --> 00:02:51,634
+00:02:46,815 --> 00:02:53,815
 So its data manager asks each one what they need, in their own words, and tells everyone the same story, every month.
 
 25
-00:02:52,934 --> 00:02:58,083
+00:02:55,115 --> 00:03:00,264
 When HR shows her that constraint, the plan moves round it, and everyone hears why.
 
 26
-00:03:05,483 --> 00:03:14,159
+00:03:07,664 --> 00:03:16,340
 Tuesday 25 May 2027. The data council says yes to the case: the old warehouse will be retired by December.
 
 27
-00:03:15,659 --> 00:03:21,927
+00:03:17,840 --> 00:03:24,108
 The 21 reports people use move to the platform; the 17 nobody opens are retired.
 
 28
-00:03:23,427 --> 00:03:29,061
+00:03:25,608 --> 00:03:31,242
 The next morning, Helena Novak, the data manager, starts a list: everyone the plan touches.
 
 29
-00:03:30,361 --> 00:03:34,983
+00:03:32,542 --> 00:03:37,164
 The first names come at once: the people who ask most often, and most loudly.
 
 30
-00:03:36,283 --> 00:03:42,702
+00:03:38,464 --> 00:03:44,883
 She keeps going: who uses the data, who makes it, who pays for it, who decides, and whose data it is.
 
 31
-00:03:44,202 --> 00:03:45,834
+00:03:46,383 --> 00:03:48,015
 Fourteen people and groups.
 
 32
-00:03:47,134 --> 00:03:53,227
+00:03:49,315 --> 00:03:55,408
 She places each one by two questions: how much can they shape the plan, and how much does it touch them?
 
 33
-00:03:54,827 --> 00:03:59,024
+00:03:57,008 --> 00:04:01,205
 Planners call it a power and interest grid, after Aubrey Mendelow's work.
 
 34
-00:04:01,024 --> 00:04:09,509
+00:04:03,205 --> 00:04:11,690
 High on both: the deputy vice-chancellor, who sponsors the plan, and the director of digital services, whose budget gets the saving.
 
 35
-00:04:11,009 --> 00:04:14,122
+00:04:13,190 --> 00:04:16,303
 Finance and HR too: their reports are moving.
 
 36
-00:04:15,222 --> 00:04:18,901
+00:04:17,403 --> 00:04:21,082
 The four deans and IT can shape it a lot, but feel it less.
 
 37
-00:04:20,001 --> 00:04:29,327
+00:04:22,182 --> 00:04:31,508
 Close to it every day: the registrar's office, Planning, Facilities, the data partners, and about 260 people who use the reports.
 
 38
-00:04:31,027 --> 00:04:36,602
+00:04:33,208 --> 00:04:38,783
 And the team that makes the data is on the map too: the move is their work, on top of everything else.
 
 39
-00:04:38,202 --> 00:04:43,077
+00:04:40,383 --> 00:04:45,258
 Two groups sit low, because they rarely ask: staff and students, whose data it is.
 
 40
-00:04:44,577 --> 00:04:50,093
+00:04:46,758 --> 00:04:52,274
 Low on the grid isn't off the list: the quiet ones are asked too, through their representatives.
 
 41
-00:04:53,293 --> 00:04:57,380
+00:04:55,474 --> 00:04:59,561
 Then she asks each one the same question: what do you want from data?
 
 42
-00:04:58,680 --> 00:05:01,543
+00:05:00,861 --> 00:05:03,724
 She writes each answer down in their words, not hers.
 
 43
-00:05:02,843 --> 00:05:08,295
+00:05:05,024 --> 00:05:10,476
 The deputy vice-chancellor: “One set of numbers I can take to the University Council.”
 
 44
-00:05:09,595 --> 00:05:14,166
+00:05:11,776 --> 00:05:16,347
 Rohan, in Finance: “Month-end reports right on the first working day.”
 
 45
-00:05:15,466 --> 00:05:20,253
+00:05:17,647 --> 00:05:22,434
 Ingrid, in HR: “Every report built from our staff list, not from a copy.”
 
 46
-00:05:21,553 --> 00:05:25,335
+00:05:23,734 --> 00:05:27,516
 Staff, through their representatives: “Who sees our records, and why?”
 
 47
-00:05:26,635 --> 00:05:31,232
+00:05:28,816 --> 00:05:33,413
 And her own team: “Time to do the move well, not squeezed in between requests.”
 
 48
-00:05:32,532 --> 00:05:37,939
+00:05:34,713 --> 00:05:40,120
 Each answer is what that person will judge the plan by, so it goes on the map beside their name.
 
 49
-00:05:39,239 --> 00:05:43,536
+00:05:41,420 --> 00:05:45,717
 Then she decides how often each one hears from the team, and who speaks to them.
 
 50
-00:05:44,636 --> 00:05:53,431
+00:05:46,817 --> 00:05:55,612
 She speaks to the deputy vice-chancellor herself; each data partner speaks to their dean; Noor, the data architect, speaks to IT.
 
 51
-00:05:54,931 --> 00:06:00,628
+00:05:57,112 --> 00:06:02,809
 Yusuf, who leads data governance, meets the staff and student representatives every semester.
 
 52
-00:06:01,928 --> 00:06:06,722
+00:06:04,109 --> 00:06:08,903
 One person speaks for the team to each stakeholder, so nobody hears two versions.
 
 53
-00:06:07,822 --> 00:06:13,153
+00:06:10,003 --> 00:06:15,334
 Getting people to take part comes first in governance too, as Teachers of data showed.
 
 54
-00:06:16,353 --> 00:06:20,153
+00:06:18,534 --> 00:06:22,334
 Everyone gets the same page, on the first Monday of every month.
 
 55
-00:06:21,653 --> 00:06:25,950
+00:06:23,834 --> 00:06:28,131
 Where the plan is, the measures, the top three risks, and the decisions needed.
 
 56
-00:06:27,450 --> 00:06:31,865
+00:06:29,631 --> 00:06:34,046
 Below, a short line for each of the fourteen: what this month means for them.
 
 57
-00:06:33,565 --> 00:06:37,786
+00:06:35,746 --> 00:06:39,967
 Everyone reads the same story, so nobody hears their news second-hand.
 
 58
-00:06:39,286 --> 00:06:44,891
+00:06:41,467 --> 00:06:47,072
 The first goes out on Monday 7 June, the day the one front door for requests opens.
 
 59
-00:06:46,391 --> 00:06:51,640
+00:06:48,572 --> 00:06:53,821
 From July, it links to the measures page on the platform, so anyone can check a number.
 
 60
-00:06:53,340 --> 00:06:56,217
+00:06:55,521 --> 00:06:58,398
 And bad news goes on it too, as soon as it's known.
 
 61
-00:07:00,017 --> 00:07:06,641
+00:07:02,198 --> 00:07:08,822
 Wednesday 2 June. Ingrid goes through the move's dates with Jun, who speaks to HR for the team.
 
 62
-00:07:07,741 --> 00:07:10,373
+00:07:09,922 --> 00:07:12,554
 HR's reports are due to move in July.
 
 63
-00:07:11,473 --> 00:07:19,445
+00:07:13,654 --> 00:07:21,626
 She shows him payroll's year: the financial year ends on 30 June, and payroll's last returns go out by mid-July.
 
 64
-00:07:20,745 --> 00:07:24,075
+00:07:22,926 --> 00:07:26,256
 July is the month payroll can least afford a surprise.
 
 65
-00:07:25,175 --> 00:07:28,832
+00:07:27,356 --> 00:07:31,013
 That's a real constraint: a fact about the work, not a preference.
 
 66
-00:07:30,132 --> 00:07:35,543
+00:07:32,313 --> 00:07:37,724
 So the plan changes: HR's reports move in August, once payroll's year is done.
 
 67
-00:07:37,043 --> 00:07:41,397
+00:07:39,224 --> 00:07:43,578
 Helena puts it on the June page, under the decisions needed, with the reason.
 
 68
-00:07:42,497 --> 00:07:48,511
+00:07:44,678 --> 00:07:50,692
 On Tuesday 29 June, the data council agrees, and the July page tells everyone.
 
 69
-00:07:49,811 --> 00:07:58,136
+00:07:51,992 --> 00:08:00,317
 In Hyde Park, three elms had to stay, and the roof rose over them; here, payroll's weeks had to stay clear, and the plan moved round them.
 
 70
-00:08:01,536 --> 00:08:03,787
+00:08:03,717 --> 00:08:05,968
 Not everyone at the table hears yes.
 
 71
-00:08:04,887 --> 00:08:10,054
+00:08:07,068 --> 00:08:12,235
 In July, Clara's forecast will wait its turn on the one list, with a reason and a date.
 
 72
-00:08:11,154 --> 00:08:19,081
+00:08:13,335 --> 00:08:21,262
 On the July page, the staff representatives read that an old extract, with personal fields nobody needed, was left behind.
 
 73
-00:08:20,381 --> 00:08:25,300
+00:08:22,562 --> 00:08:27,481
 People stay at the table because they're heard, and because every month they see the plan move.
 
 74
-00:08:26,600 --> 00:08:33,780
+00:08:28,781 --> 00:08:35,961
 How to explain so people can decide, and how to say no, and what instead, the leading data people module tells.
 
 75
-00:08:34,880 --> 00:08:41,063
+00:08:37,061 --> 00:08:43,244
 In 1850, Paxton answered each one's worry, and showed everyone the same picture, in the open.
 
 76
-00:08:42,563 --> 00:08:49,187
+00:08:44,744 --> 00:08:51,368
 At the university, fourteen stakeholders say what they need from data, and every month they read the same page.
 
 77
-00:08:50,487 --> 00:08:56,549
+00:08:52,668 --> 00:08:58,730
 On Monday: list everyone your plan touches, and ask each what they want from data, in their words.
 
 78
-00:08:57,649 --> 00:09:02,787
+00:08:59,830 --> 00:09:04,968
 Decide who speaks to each, and how often; send everyone the same page every month.
 
 79
-00:09:03,887 --> 00:09:08,048
+00:09:06,068 --> 00:09:10,229
 And when someone shows a real constraint, change the plan, and say why.
 
 80
-00:09:09,348 --> 00:09:12,860
+00:09:11,529 --> 00:09:15,041
 Next: one front door, and one list for all the data work.
 
 81
-00:09:13,960 --> 00:09:17,979
+00:09:16,141 --> 00:09:20,160
 Know what each person needs from data; tell everyone the same story.

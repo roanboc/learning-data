@@ -6,7 +6,7 @@ const NARR={
  {"id":"league","gap":0.8,"text":"The army's rules keep its field hospital, called the ambulance, a league behind the fighting: about four kilometres."},
  {"id":"lie","gap":0.8,"text":"The wounded lie where they fall until the battle ends. Then the ambulance sets out to reach them, stuck behind the army's wagons."},
  {"id":"die","gap":0.8,"text":"It never takes less than a day, or a day and a half. Most of the wounded die waiting for help."},
- {"id":"speyer","gap":0.8,"text":"At Speyer, that autumn, many die this way. Something has to change."},
+ {"id":"speyer","gap":0.8,"text":"At Speyer, that autumn, many die this way. Help has to reach them while the battle is still on."},
  {"id":"fly","gap":0.8,"text":"Larrey builds what he calls a flying ambulance: a light carriage on springs that follows the front line."},
  {"id":"bandage","gap":0.8,"text":"From 1793, his surgeons bandage the wounded where they fall, and carry them back while the battle goes on.","say":"From seventeen ninety-three, his surgeons bandage the wounded where they fall, and carry them back while the battle goes on."},
  {"id":"aboukir","gap":0.8,"text":"It works. At Aboukir, in Egypt, in 1799, the army has eight hundred wounded.","say":"It works. At Aboukir, in Egypt, in seventeen ninety-nine, the army has eight hundred wounded."},

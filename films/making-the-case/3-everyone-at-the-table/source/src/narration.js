@@ -11,7 +11,7 @@ const NARR={
  {"id":"times","gap":0.8,"text":"The Times and some members of parliament wanted no building in Hyde Park at all."},
  {"id":"bricks","gap":0.8,"text":"And millions of bricks would be hard to take away again, though the building was only for the exhibition."},
  {"id":"doubt","gap":0.8,"text":"With less than a year to go, the exhibition itself was in doubt."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"They needed a building that could go up in months, and come down again."},
  {"id":"paxton","gap":0.8,"text":"Joseph Paxton, a gardener who built glasshouses, saw a way to answer every worry."},
  {"id":"sketch","gap":0.8,"text":"On 11 June 1850, at a railway meeting in Derby, he sketched a hall of iron and glass on a sheet of blotting paper.","say":"On the eleventh of June, eighteen fifty, at a railway meeting in Derby, he sketched a hall of iron and glass on a sheet of blotting paper."},
  {"id":"parts","gap":0.8,"text":"Made of the same few parts again and again, it could go up fast, and come down again after."},

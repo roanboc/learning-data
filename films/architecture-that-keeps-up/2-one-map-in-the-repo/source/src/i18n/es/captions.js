@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nadie puede estar seguro de que dos registros hablen del mismo lugar.",
 "And when a new road is built, each of them must find it, and change it, on its own.":
 "Y cuando se construye una calle nueva, cada uno tiene que encontrarla, y cambiarla, por su cuenta.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Each keeping its own copy of the same streets can't go on.":
+"Que cada uno guarde su propia copia de las mismas calles no puede seguir así.",
 "In 2001, Ordnance Survey launches OS MasterMap: one seamless database of the whole country, instead of tiles.":
 "En 2001, Ordnance Survey lanza OS MasterMap: una sola base de datos continua de todo el país, en lugar de cuadros.",
 "Every feature in it, about 440 million at first, gets its own identifier, a TOID, with a version and a date.":

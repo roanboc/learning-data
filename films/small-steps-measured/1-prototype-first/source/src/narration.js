@@ -8,7 +8,7 @@ const NARR={
  {"id":"plan","gap":0.8,"text":"One plan was to widen the streets, knocking down buildings from the turn of the century."},
  {"id":"mayor","gap":0.8,"text":"The young mayor, Jaime Lerner, an architect, wanted the street given back to people on foot."},
  {"id":"fear","gap":0.8,"text":"The shopkeepers feared the opposite: without cars, their customers would stay away, and their sales would fall."},
- {"id":"change","gap":0.8,"text":"Something had to change, but no plan on paper could show them what the street would be like."},
+ {"id":"change","gap":0.8,"text":"Arguing over plans on paper couldn't show anyone what the street would be like."},
  {"id":"real","gap":0.8,"text":"So the mayor's team built the real thing, fast."},
  {"id":"saturday","gap":0.8,"text":"On Saturday morning, grey and damp, the street was handed to the people, without ceremony."},
  {"id":"weekend","gap":0.8,"text":"Over the weekend, crews took up the road, laid stones, and put in streetlights and kiosks."},

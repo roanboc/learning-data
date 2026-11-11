@@ -20,7 +20,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The Times and some members of parliament wanted no building in Hyde Park at all.":"The Times y algunos miembros del parlamento no querían ningún edificio en Hyde Park.",
 "And millions of bricks would be hard to take away again, though the building was only for the exhibition.":"Y millones de ladrillos serían difíciles de retirar, aunque el edificio era solo para la exposición.",
 "With less than a year to go, the exhibition itself was in doubt.":"A menos de un año, la exposición misma estaba en duda.",
-"Something had to change.":"Algo tenía que cambiar.",
+"They needed a building that could go up in months, and come down again.":"Necesitaban un edificio que pudiera levantarse en meses, y desmontarse de nuevo.",
 "Joseph Paxton, a gardener who built glasshouses, saw a way to answer every worry.":"Joseph Paxton, un jardinero que construía invernaderos, vio cómo responder a cada preocupación.",
 "On 11 June 1850, at a railway meeting in Derby, he sketched a hall of iron and glass on a sheet of blotting paper.":"El 11 de junio de 1850, en una reunión ferroviaria en Derby, esbozó una nave de hierro y vidrio en una hoja de papel secante.",
 "Made of the same few parts again and again, it could go up fast, and come down again after.":"Hecha de las mismas pocas piezas, una y otra vez, podía levantarse rápido, y desmontarse después.",

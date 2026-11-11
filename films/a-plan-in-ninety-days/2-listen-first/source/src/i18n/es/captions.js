@@ -24,8 +24,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Muchos médicos la tomaban por pelagra, una enfermedad por falta de una vitamina; tratados así, los niños seguían muriendo.",
 "Williams couldn't find it in any medical book.":
 "Williams no la encontraba en ningún libro de medicina.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The answer would have to come from outside the books.":
+"La respuesta tendría que venir de fuera de los libros.",
 "So she listened: to mothers and grandmothers, to nurses and healers.":
 "Así que escuchó: a madres y abuelas, a enfermeras y curanderos.",
 "For three years, nobody said its name in front of her: the word was feared.":

@@ -14,7 +14,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "But in the room, everyone looks after the mother, and the newborn is left to the most junior doctor.":"Pero en la sala todos atienden a la madre, y el recién nacido queda a cargo del médico con menos experiencia.",
 "Is the baby well? Each doctor judges by eye, in words like mild or severe, and each means something different.":"¿Está bien el bebé? Cada médico juzga a ojo, con palabras como leve o grave, y cada uno quiere decir algo distinto.",
 "So a baby in trouble can be missed until it's too late, and no hospital can tell whether what it does helps.":"Así, un bebé en apuros puede pasar inadvertido hasta que es demasiado tarde, y ningún hospital puede saber si lo que hace sirve.",
-"Something has to change.":"Algo tiene que cambiar.",
+"Doctors need words for a newborn that mean the same to everyone.":"Los médicos necesitan palabras para un recién nacido que signifiquen lo mismo para todos.",
 "In 1952, Apgar proposes a score that anyone in the room can take, the same way every time.":"En 1952, Apgar propone una puntuación que cualquiera en la sala puede dar, siempre de la misma manera.",
 "One minute after birth, five signs: the heartbeat, breathing, how firmly the baby moves, how it reacts when touched, and its colour.":"Un minuto después de nacer, cinco signos: el latido, la respiración, la fuerza con que se mueve, cómo reacciona al tocarlo y su color.",
 "Each gets zero, one or two. Ten is a baby doing well.":"Cada uno recibe cero, uno o dos. Diez es un bebé que está bien.",

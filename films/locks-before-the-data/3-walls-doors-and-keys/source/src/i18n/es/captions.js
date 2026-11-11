@@ -30,8 +30,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si cierra el puerto, la ciudad pierde su sustento.",
 "Leave it open, and the sickness walks in, to every family behind the walls.":
 "Si lo deja abierto, la enfermedad entra, hasta cada familia tras las murallas.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The city needs a way to stay open without letting the sickness in.":
+"La ciudad necesita una forma de seguir abierta sin dejar entrar la enfermedad.",
 "On 27 July 1377, the Great Council, the nobles who made the city's laws, passed a new one.":
 "El 27 de julio de 1377, el Consejo Mayor, los nobles que hacían las leyes de la ciudad, aprobó una nueva.",
 "Anyone coming from a place with plague must first spend a month apart: on the islet of Mrkan, or in the town of Cavtat, down the coast.":

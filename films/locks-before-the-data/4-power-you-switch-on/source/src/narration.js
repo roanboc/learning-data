@@ -11,7 +11,7 @@ const NARR={
  {"id":"hold","gap":0.8,"text":"They hold his family, take him to the bank, and make him open the vault."},
  {"id":"stop","gap":0.8,"text":"No lock can stop that: the right numbers, from the right man, open the door."},
  {"id":"danger","gap":0.8,"text":"So every banker who knows them, and his family, is in danger."},
- {"id":"change","gap":0.8,"text":"Something has to change."}]},
+ {"id":"change","gap":0.8,"text":"The vault has to stay shut, even to the man who knows the numbers."}]},
 "clock":{"name":"A lock with a clock","lead":0.8,"tail":1.0,"vo":[
  {"id":"sargent","gap":0.8,"text":"In Rochester, New York, a lock maker, James Sargent, builds clocks into a vault's lock."},
  {"id":"evening","gap":0.8,"text":"Each evening, the bank sets the hour it may open."},

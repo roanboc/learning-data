@@ -5,7 +5,7 @@
    badges, the forty-one names greying, the agreement's six lines, the groups a mover leaves and joins, the halves matching at Jin Bi's
    camp, and the job's own badge. */
 const BREATH={
-"halves":{"hold":{"china":0.6,"war":1.0,"travel":0.8,"forged":0.8,"die":0.6,"sees":1.0,"change":1.2}},
+"halves":{"hold":{"china":0.6,"war":1.0,"travel":0.8,"forged":0.8,"die":0.6,"sees":1.0,"change":1.431}},
 "match":{"hold":{"tally":1.0,"keeps":0.8,"counts":1.4,"needn":0.6,"museum":0.8,"fifty":1.0,"beacon":0.8,"power":1.0,"order":0.6},"breathe":4.6},
 "trust":{"hold":{"sam":0.2,"two":0.6,"token":0.8,"open":0.8,"wall":0.8,"stolen":1.2,"where":0.6,"proves":1.2,"least":0.8,"zero":1.2}},
 "who":{"hold":{"three":0.6,"person":0.8,"workload":0.8,"agent":0.8,"own":1.2,"borrow":0.6,"module":0.8,"shows":1.2}},

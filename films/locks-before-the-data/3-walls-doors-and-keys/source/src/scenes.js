@@ -48,7 +48,7 @@ scene("gates",(ctx,S,t,sc)=>{
   const T={today:wAt(sc,"today","Today"),walls:wAt(sc,"republic","behind high"),trade:wAt(sc,"trade","It lives"),ships:wAt(sc,"trade","its ships"),
     gates:wAt(sc,"gates","Sailors"),few:wAt(sc,"gates","through only"),more:wAt(sc,"more","more than"),plague:wAt(sc,"plague","thirteen forty-eight"),fast:wAt(sc,"plague","spread fast"),
     thousands:wAt(sc,"thousands","It killed"),back:wAt(sc,"thousands","kept coming"),tell:wAt(sc,"tell","At the gate"),nobody:wAt(sc,"tell","nobody could"),
-    shut:wAt(sc,"shut","Shut"),loses:wAt(sc,"shut","loses"),open:wAt(sc,"open","Leave it"),walks:wAt(sc,"open","walks in"),change:wAt(sc,"change","Something")};
+    shut:wAt(sc,"shut","Shut"),loses:wAt(sc,"shut","loses"),open:wAt(sc,"open","Leave it"),walks:wAt(sc,"open","walks in"),change:wAt(sc,"change","The city")};
   ag_shots(ctx,S,t,sc.dur,[
     // the city from the sea at dusk; along its walls, three gates light in turn; two ships come into the harbour
     {at:0,place:"wdRagusa",keys:[[0,960,560,1.1],[T.walls-0.4,760,600,1.28],[T.walls+2.0,1260,620,1.28],[T.ships-0.2,1380,640,1.22]],d:2.6,push:0,draw:(c,tt)=>{

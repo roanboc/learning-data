@@ -484,7 +484,7 @@ const NARR={
 "contract":{"name":"The contract first","lead":0.9,"tail":1.0,"vo":[
  {"id":"mended","gap":0.8,"text":"The fix mended the night, not its cause."},
  {"id":"good","gap":0.8,"text":"The app's change was a good one, for tutors; what was missing was a step."},
- {"id":"first","gap":0.8,"text":"So Sam's pull request also asks Ingrid Holm, in HR, who owns the claims' data, to change the contract first, next time."},
+ {"id":"first","gap":0.8,"text":"So Sam also opens a ticket for Ingrid Holm, in HR, who owns the claims' data: change the contract first, next time."},
  {"id":"knows","gap":0.8,"text":"Then everyone who reads the hours knows, before the app changes."},
  {"id":"apollo","gap":0.3,"text":"On Apollo 11, the cause took a night to find:","say":"On Apollo eleven, the cause took a night to find:"},
  {"id":"document","gap":0.8,"text":"a document between two systems had said too little, so a radar's electronics took about 13% of the computer's time.","say":"a document between two systems had said too little, so a radar's electronics took about thirteen percent of the computer's time."},
@@ -499,7 +499,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"alarm/date": 2.52, "alarm/descent": 5.961, "alarm/light": 3.696, "alarm/more": 1.971, "alarm/ask": 2.346, "alarm/stakes": 6.186, "alarm/seconds": 2.067, "alarm/built": 3.962, "alarm/restart": 6.171, "alarm/raised": 2.744, "alarm/bales": 5.745, "alarm/meant": 4.722, "alarm/go": 3.118, "alarm/four": 2.292, "alarm/landed": 1.031, "alarm/kept": 4.406, "alarm/uni": 4.948, "alarm/decide": 5.033, "night/casual": 5.34, "night/job": 7.696, "night/version": 6.511, "night/type": 7.07, "night/contract": 2.171, "night/fails": 4.78, "night/waits": 3.955, "night/noon": 6.264, "watch/watching": 1.51, "watch/sam": 6.067, "watch/agent": 3.161, "watch/detect": 2.647, "watch/cause": 6.665, "watch/touches": 6.761, "watch/fix": 3.503, "watch/inbox": 5.045, "watch/knows": 4.65, "approve/tuesday": 1.499, "approve/checks": 5.143, "approve/asks": 2.877, "approve/pr": 4.714, "approve/noor": 3.817, "approve/never": 1.589, "approve/runs": 4.693, "approve/paid": 5.191, "approve/proposes": 2.516, "contract/mended": 2.215, "contract/good": 3.981, "contract/first": 8.415, "contract/knows": 3.786, "contract/apollo": 2.744, "contract/document": 7.459, "contract/checklist": 4.006, "close/old": 8.409, "close/now": 4.028, "close/choose": 6.237, "close/wheel": 2.789, "close/iterate": 4.448};
+const VODUR={"alarm/date": 2.52, "alarm/descent": 5.961, "alarm/light": 3.696, "alarm/more": 1.971, "alarm/ask": 2.346, "alarm/stakes": 6.186, "alarm/seconds": 2.067, "alarm/built": 3.962, "alarm/restart": 6.171, "alarm/raised": 2.744, "alarm/bales": 5.745, "alarm/meant": 4.722, "alarm/go": 3.118, "alarm/four": 2.292, "alarm/landed": 1.031, "alarm/kept": 4.406, "alarm/uni": 4.948, "alarm/decide": 5.033, "night/casual": 5.34, "night/job": 7.696, "night/version": 6.511, "night/type": 7.07, "night/contract": 2.171, "night/fails": 4.78, "night/waits": 3.955, "night/noon": 6.264, "watch/watching": 1.51, "watch/sam": 6.067, "watch/agent": 3.161, "watch/detect": 2.647, "watch/cause": 6.665, "watch/touches": 6.761, "watch/fix": 3.503, "watch/inbox": 5.045, "watch/knows": 4.65, "approve/tuesday": 1.499, "approve/checks": 5.143, "approve/asks": 2.877, "approve/pr": 4.714, "approve/noor": 3.817, "approve/never": 1.589, "approve/runs": 4.693, "approve/paid": 5.191, "approve/proposes": 2.516, "contract/mended": 2.215, "contract/good": 3.981, "contract/first": 8.147, "contract/knows": 3.786, "contract/apollo": 2.744, "contract/document": 7.459, "contract/checklist": 4.006, "close/old": 8.409, "close/now": 4.028, "close/choose": 6.237, "close/wheel": 2.789, "close/iterate": 4.448};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2075,7 +2075,7 @@ function pw_work(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c
    The film's own pieces of the data story (prefix pw_), drawn with the module's kit on its platform map. Colours mean what they
    mean in every film of the module: light blue the platform and data moving (the job, its lanes, the lineage traced), gold what
    people agree on (the claims app's contract), red an error (the failed task and what it touches), amber a person's turn (the
-   insight waiting for Sam, the push he confirms, the review, the decision waiting for Ingrid), green what passes (the tests, the
+   insight waiting for Sam, the push he confirms, the review, the ticket and decision waiting for Ingrid), green what passes (the tests, the
    approval, the job running again, pay day).
      PW_M          where each part of the map is, in the map's own coordinates (z 1 shows it all)
      pw_map        the map at night: the claims app, its hours, its contract, the platform with the claims job, the payroll system,
@@ -2226,16 +2226,16 @@ function pw_branch(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,u=clamp(o.u||0,0
   if(u>0){const pts=md_curve([x+w*0.45,y],[x+w*0.95,y-90],{bend:0.5});md_lane(ctx,pts,MD.wait,0.95,{u});if(u>=1){ctx.fillStyle=rgba(MD.wait,1);ctx.beginPath();ctx.arc(x+w*0.95,y-90,10,0,TAU);ctx.fill();}
     withA(ctx,ag_in(u,0.7,0.3),()=>md_T(ctx,"read-hours-as-said",x+w*0.5,y-118,{w:500,size:28,f:"mono",col:mix(MD.wait,MD.ink,0.3)}));}
   ctx.restore();}
-// the pull request, with GitHub's mark: o.checks [0 to 1 each, run to passed], o.approve (0 to 1), o.ask (0 to 1: its second part, the
-// ask to Ingrid), o.a, o.k
+// the pull request, with GitHub's mark: o.checks [0 to 1 each, run to passed], o.approve (0 to 1), o.ask (0 to 1: the ticket linked to it,
+// for Ingrid: owners ask and decide in tickets, never in a pull request's review), o.a, o.k
 function pw_pr(ctx,x,y,w,h,o){o=o||{};const ap=clamp(o.approve||0,0,1);return md_window(ctx,x,y,w,h,{logo:"github",product:"GitHub",title:"Pull request",edge:ap>0?mix(MD.wait,MD.pass,ap):MD.wait,a:o.a,k:o.k,draw:(c,B)=>{
   md_T(c,"Read hours as said: 1:30 is 1.5",B.x+24,B.y+50,{w:800,size:32});md_T(c,"Author: Sam Okafor · from the agent's fix",B.x+24,B.y+96,{w:600,size:28,col:MD.soft});
   const ck=o.checks||[0,0];[["unit test: both forms"],["build and test the claims"]].forEach(([s],i)=>{const v=clamp(ck[i]||0,0,1),yy=B.y+150+i*58,col=mix(MD.flow,MD.pass,v);
     md_icon(c,v>0.5?"tick":"refresh",B.x+44,yy,32,col);md_T(c,s,B.x+80,yy+10,{w:600,size:28,col:v>0.5?MD.ink:MD.soft});});
   const ry=B.y+280;c.strokeStyle="rgba(170,200,245,0.18)";c.lineWidth=1.2;c.beginPath();c.moveTo(B.x+20,ry-34);c.lineTo(B.x+B.w-20,ry-34);c.stroke();
   md_icon(c,ap>0.5?"tick":"person",B.x+44,ry,34,mix(MD.wait,MD.pass,ap));md_T(c,ap>0.5?"Approved: Noor Rahman · 09:05":"Review: Noor Rahman",B.x+80,ry+10,{w:700,size:28,col:ap>0.5?mix(MD.pass,MD.ink,0.3):MD.ink});
-  if(o.ask>0)withA(c,o.ask,()=>{const ay=B.y+344;md_card(c,B.x+12,ay,B.w-24,110,{edge:MD.wait,glow:0.7,r:14});md_icon(c,"contract",B.x+52,ay+55,38,MD.agreed);
-    md_T(c,"Also asks Ingrid Holm, HR:",B.x+92,ay+44,{w:700,size:28});md_T(c,"change the contract first, next time",B.x+92,ay+84,{w:600,size:28,col:MD.soft});});}});}
+  if(o.ask>0)withA(c,o.ask,()=>{const ay=B.y+344;md_card(c,B.x+12,ay,B.w-24,110,{edge:MD.wait,glow:0.7,r:14});md_icon(c,"doc",B.x+52,ay+55,38,MD.agreed);
+    md_T(c,"Linked ticket · Ingrid Holm, HR:",B.x+92,ay+44,{w:700,size:28});md_T(c,"change the contract first, next time",B.x+92,ay+84,{w:600,size:28,col:MD.soft});});}});}
 // the agent's part: what it did, and the one thing it never does
 function pw_agentCard(ctx,x,y,w,o){o=o||{};return md_window(ctx,x,y,w,270,{logo:"databricks",product:"Genie ZeroOps",edge:MD.flow,a:o.a,k:o.k,draw:(c,B)=>{
   [["proposed the fix","tick",MD.flow],["pushed it, when asked","tick",MD.flow],["approves: never","cross",MD.soft]].forEach(([s,ic,col],i)=>{const yy=B.y+30+i*50;md_icon(c,ic,B.x+32,yy,28,col);md_T(c,s,B.x+64,yy+10,{w:i===2?800:600,size:28,col:i===2?MD.ink:MD.soft});});}});}
@@ -2444,7 +2444,7 @@ scene("approve",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({cause:wAt(
 
 /* ---------------------------------------------------------------- 5 · The contract first */
 scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({cause:wAt(sc,"mended","not its cause"),good:wAt(sc,"good","a good one"),miss:wAt(sc,"good","missing"),
-    asks:wAt(sc,"first","also asks"),ingrid:wAt(sc,"first","Ingrid Holm"),first:wAt(sc,"first","change the contract first"),every:wAt(sc,"knows","everyone who reads"),
+    asks:wAt(sc,"first","opens a ticket"),ingrid:wAt(sc,"first","Ingrid Holm"),first:wAt(sc,"first","change the contract first"),every:wAt(sc,"knows","everyone who reads"),
     before:wAt(sc,"knows","before the app changes"),doc:wAt(sc,"document","a document"),little:wAt(sc,"document","said too little"),radar:wAt(sc,"document","so a radar's"),
     pct:wAt(sc,"document","thirteen percent"),ch:wAt(sc,"checklist","the checklist changed"),sw:wAt(sc,"checklist","the software")}));
   ag_shots(ctx,S,t,sc.dur,[
@@ -2454,7 +2454,7 @@ scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({cause:wAt
       md_tag(x,560,630,"still: decimal hours",{icon:"contract",col:MD.agreed,a:pw_io(tt,P.cause,c.first)});
       md_tag(x,560,550,"good for tutors",{icon:"tick",col:MD.pass,a:ag_in(tt,P.good,0.4)});
       if(ms>0){md_card(x,560,690,520,84,{dash:[10,9],edge:MD.wait,a:ms});md_T(x,"a step: the contract first",590,744,{w:700,size:30,col:mix(MD.wait,MD.ink,0.3),a:ms});}}},
-    // so Sam's pull request also asks Ingrid Holm, in HR, who owns the claims' data, to change the contract first: proposed, for her
+    // so Sam also opens a ticket for Ingrid Holm, in HR, who owns the claims' data, linked to his pull request: change the contract first; proposed, for her
     {cut:true,at:c.first-0.3,place:"pwMorning",keys:[[c.first-0.3,960,540,1.0]],push:0.02,draw:(x,tt)=>{pw_who(x,"ingrid",330,660,ag_in(tt,c.first-0.2,0.6),tt,{col:MD.sys.hr,role:"HR · owns the claims' data"});
       pw_pr(x,600,110,760,560,{checks:[1,1],approve:1,ask:ag_in(tt,P.asks,0.5),a:ag_in(tt,c.first-0.2,0.4)});
       pw_decision(x,1400,250,460,{state:"Proposed",a:ag_in(tt,P.first,0.4),k:pw_k(tt,P.first)});}},

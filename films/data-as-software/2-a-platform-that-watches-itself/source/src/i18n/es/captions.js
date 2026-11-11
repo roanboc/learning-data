@@ -98,8 +98,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El arreglo resolvió la noche, no su causa.",
 "The app's change was a good one, for tutors; what was missing was a step.":
 "El cambio de la app era bueno para los tutores; lo que faltó fue un paso.",
-"So Sam's pull request also asks Ingrid Holm, in HR, who owns the claims' data, to change the contract first, next time.":
-"Así que la solicitud de Sam también le pide a Ingrid Holm, de RR. HH., dueña de esos datos, cambiar primero el contrato.",
+"So Sam also opens a ticket for Ingrid Holm, in HR, who owns the claims' data: change the contract first, next time.":
+"Así que Sam también abre un ticket para Ingrid Holm, de RR. HH., dueña de esos datos: cambiar primero el contrato.",
 "Then everyone who reads the hours knows, before the app changes.":
 "Así, quienes leen las horas lo saben antes de que cambie la app.",
 "On Apollo 11, the cause took a night to find:":

@@ -56,7 +56,7 @@ const NARR={
 "contract":{"name":"The contract first","lead":0.9,"tail":1.0,"vo":[
  {"id":"mended","gap":0.8,"text":"The fix mended the night, not its cause."},
  {"id":"good","gap":0.8,"text":"The app's change was a good one, for tutors; what was missing was a step."},
- {"id":"first","gap":0.8,"text":"So Sam's pull request also asks Ingrid Holm, in HR, who owns the claims' data, to change the contract first, next time."},
+ {"id":"first","gap":0.8,"text":"So Sam also opens a ticket for Ingrid Holm, in HR, who owns the claims' data: change the contract first, next time."},
  {"id":"knows","gap":0.8,"text":"Then everyone who reads the hours knows, before the app changes."},
  {"id":"apollo","gap":0.3,"text":"On Apollo 11, the cause took a night to find:","say":"On Apollo eleven, the cause took a night to find:"},
  {"id":"document","gap":0.8,"text":"a document between two systems had said too little, so a radar's electronics took about 13% of the computer's time.","say":"a document between two systems had said too little, so a radar's electronics took about thirteen percent of the computer's time."},

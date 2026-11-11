@@ -168,7 +168,7 @@ scene("approve",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({cause:wAt(
 
 /* ---------------------------------------------------------------- 5 · The contract first */
 scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({cause:wAt(sc,"mended","not its cause"),good:wAt(sc,"good","a good one"),miss:wAt(sc,"good","missing"),
-    asks:wAt(sc,"first","also asks"),ingrid:wAt(sc,"first","Ingrid Holm"),first:wAt(sc,"first","change the contract first"),every:wAt(sc,"knows","everyone who reads"),
+    asks:wAt(sc,"first","opens a ticket"),ingrid:wAt(sc,"first","Ingrid Holm"),first:wAt(sc,"first","change the contract first"),every:wAt(sc,"knows","everyone who reads"),
     before:wAt(sc,"knows","before the app changes"),doc:wAt(sc,"document","a document"),little:wAt(sc,"document","said too little"),radar:wAt(sc,"document","so a radar's"),
     pct:wAt(sc,"document","thirteen percent"),ch:wAt(sc,"checklist","the checklist changed"),sw:wAt(sc,"checklist","the software")}));
   ag_shots(ctx,S,t,sc.dur,[
@@ -178,7 +178,7 @@ scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({cause:wAt
       md_tag(x,560,630,"still: decimal hours",{icon:"contract",col:MD.agreed,a:pw_io(tt,P.cause,c.first)});
       md_tag(x,560,550,"good for tutors",{icon:"tick",col:MD.pass,a:ag_in(tt,P.good,0.4)});
       if(ms>0){md_card(x,560,690,520,84,{dash:[10,9],edge:MD.wait,a:ms});md_T(x,"a step: the contract first",590,744,{w:700,size:30,col:mix(MD.wait,MD.ink,0.3),a:ms});}}},
-    // so Sam's pull request also asks Ingrid Holm, in HR, who owns the claims' data, to change the contract first: proposed, for her
+    // so Sam also opens a ticket for Ingrid Holm, in HR, who owns the claims' data, linked to his pull request: change the contract first; proposed, for her
     {cut:true,at:c.first-0.3,place:"pwMorning",keys:[[c.first-0.3,960,540,1.0]],push:0.02,draw:(x,tt)=>{pw_who(x,"ingrid",330,660,ag_in(tt,c.first-0.2,0.6),tt,{col:MD.sys.hr,role:"HR · owns the claims' data"});
       pw_pr(x,600,110,760,560,{checks:[1,1],approve:1,ask:ag_in(tt,P.asks,0.5),a:ag_in(tt,c.first-0.2,0.4)});
       pw_decision(x,1400,250,460,{state:"Proposed",a:ag_in(tt,P.first,0.4),k:pw_k(tt,P.first)});}},

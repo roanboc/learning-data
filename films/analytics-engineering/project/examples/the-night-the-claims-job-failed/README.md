@@ -23,8 +23,9 @@ approved it. At 09:20 the job ran again, and payroll had the hours by 10:00. On 
 staff were paid, Linh among them. The agent never approves: the platform proposes, and a person
 approves.
 
-The fix mended the night, not its cause. So Sam's pull request also asks Ingrid Holm, in HR, who owns
-the claims' data, to change the contract first next time: DEC-CLM-03, proposed, for her to decide.
+The fix mended the night, not its cause. So Sam also opens a ticket for Ingrid Holm, in HR, who owns
+the claims' data, linked to his pull request: change the contract first next time, DEC-CLM-03,
+proposed, for her to decide in the ticket. She doesn't review the pull request: the data team does.
 The film *A platform that watches itself*, in the series *Data as software*, follows it.
 
 | File | What it is |
@@ -32,7 +33,7 @@ The film *A platform that watches itself*, in the series *Data as software*, fol
 | `build_that_night.txt` | The job's first task that night, as dbt runs it: the two tests of the hours stop on `1:30`, and everything after them is skipped. Run here on DuckDB, with the old line put back |
 | `insight.md` | What the insight held, in its four steps: detected, root cause, impact, proposed fix |
 | `fix.patch` | The fix, as Genie ZeroOps proposed it and pushed it when asked: the macro `decimal_hours()`, the one line of staging it replaces, and the unit test of both forms |
-| `pull_request.md` | Sam's pull request: what it changes and why, its checks, what it touches and who to tell, and the ask to Ingrid |
+| `pull_request.md` | Sam's pull request: what it changes and why, its checks, what it touches and who to tell, and the ticket it links for Ingrid |
 
 What it is in the project: [`macros/hr/decimal_hours.sql`](../../macros/hr/decimal_hours.sql), in
 [`stg_claims_app__claims.sql`](../../models/staging/claims_app/stg_claims_app__claims.sql), with the

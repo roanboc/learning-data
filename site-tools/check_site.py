@@ -21,7 +21,8 @@ What it checks, page by page (every .html under site/):
 - Spanish captions: a Spanish page that plays an English film loads the film's captions first, each a copy of its source.
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
 - a series' own labs and scenarios (build_series.series_learn): the same in both languages, each lab on one of its film's
-  chapters, each scenario numbered by its film and pointing to a lab; its films' "Pause and think" questions stop at its labs.
+  chapters, the labs listed in film order (the labs page numbers them 1 to N in that order), each scenario numbered by its film,
+  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
@@ -1374,6 +1375,14 @@ def main():
         for k, c in Counter(ns).items():
             if c > 1:
                 s["fails"].append(f"{words}.en.js: {c} scenarios have the number {k}, which keeps their answers apart")
+        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, under their films'
+        # buttons, so they're listed in film order; the scenarios likewise, by their numbers
+        fl = [x["film"] for x in en["labs"]]
+        if fl != sorted(fl):
+            s["fails"].append(f"{words}.en.js: its labs aren't listed in film order (" + ", ".join(f"{x['id']} (film {x['film']})" for x in en["labs"]) + "): "
+                              "the labs page numbers them in that order, so a lab listed after a later film's shows under its film with the wrong number")
+        if ns != sorted(ns):
+            s["fails"].append(f"{words}.en.js: its scenarios aren't listed in order of their numbers ({', '.join(map(str, ns))})")
         on = {x["index"] + 1: x for x in build_series.films(S)[1]}
         for x in en["labs"]:
             f = on.get(x["film"])

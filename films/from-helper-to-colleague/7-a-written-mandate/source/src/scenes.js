@@ -94,7 +94,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=wm_once(sc,"T",()=>({
         wm_pillAt(c,410,540,"nobody would know why",tt,T.known,out,{size:28,col:AG.amber});
         wm_arrow(c,[1376,716,1410,690,1440,676,1478,664],ag_in(tt,T.reached-0.2,0.6)*(1-ag_in(tt,out,0.4)),{col:AG.amber,lw:3.5,head:12,dash:[9,8]});}});
       wm_scr(cx,S,()=>wm_tag(cx,"One night in October",wm_win(tt,S3+0.6,out)));}},
-    // what it might do alone was written nowhere: no one place to sign it, read it or stop it. Something had to change
+    // what it might do alone was written nowhere: no one place to sign it, read it or stop it. An agent working alone needed its limits written down
     {at:S4,place:"wmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
       wm_thePage(cx,{blank:1,a:ag_in(tt,T.nowhere-0.4,0.5)});
       [["no place to sign it",T.signIt],["no place to read it",T.readIt],["no place to stop it",T.stopIt]].forEach((p,i)=>

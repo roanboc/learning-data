@@ -18,7 +18,7 @@
 # The rules the module keeps (the author's, 20 October and 4 November 2026; tools/quiet.py checks them):
 #  - Music only from time to time: under the opening story, and after it only at a chapter's turn, under a moment on screen or in a
 #    pause without words; never a bed under the voice. After the opening, one drawn note or one person's note at a time.
-#  - Nothing pulses (no chapter is urgent). Silence where the story turns: from "written nowhere" through "Something had to change".
+#  - Nothing pulses (no chapter is urgent). Silence where the story turns: from "written nowhere" through "needed its limits written down".
 #  - Every sound is an event on screen, at the moment it appears, timed by the same word and offset as the picture in src/scenes.js, so
 #    sound and picture stay together when the voice is re-timed: paper as a card is laid down, a pen as the mandate is signed, a soft
 #    knock as a stamp lands, a lock closes or a gear turns, a soft tap as a row, a pill or a tick comes.
@@ -145,8 +145,8 @@ def air(s, sec=1.4, g=0.007, pan=0.0, lo=140, hi=800):
 # =============================================================================================================================
 # 1. Last night, in test: the opening, under the drawn lines. The lab by day, E flat major; the card for Health's heads of school, the
 #    night build, and the way to production. The night, C minor: the build fails, nobody at work, finding out why its job; harm alone;
-#    October's night, the stamp on HR's model, the teams' numbers; then silence from "written nowhere" through "Something had to
-#    change". E flat again: the mark as Anil writes the page, a soft tap for each row, the mandate's line joining the map, a pen and the
+#    October's night, the stamp on HR's model, the teams' numbers; then silence from "written nowhere" through "needed its limits
+#    written down". E flat again: the mark as Anil writes the page, a soft tap for each row, the mandate's line joining the map, a pen and the
 #    bass trumpet as he signs, and again as Noor approves; the three tools that hold it. The night in test: the plain check, the agent
 #    starts, three rounds, the cause, the fix, its report; a person's yes; written down, held in every tool, taken back; the mark into
 #    the title
@@ -170,7 +170,7 @@ paper(fw('oct', "changed HR's model", -0.6), 0.012, px(410))
 knock(fw('oct', "changed HR's model", 0.3), 0.012, px(600))
 paper(fw('oct', "other teams'"), 0.011, px(500))
 drawn(Ab3, fw('overnight', 'changed overnight'), 1.5, 0.6, px(500), strip=3)
-# written nowhere, through "Something had to change": silence, but for a tap as each of the three places it wasn't comes
+# written nowhere, through "needed its limits written down": silence, but for a tap as each of the three places it wasn't comes
 for w_ in ('sign it', 'read it', 'stop it'):
     tap(fw('where', w_, -0.1), 0.009, px(1250))
 # the mandate: the mark as Anil writes it, a tap for each row as it comes, its line on the map

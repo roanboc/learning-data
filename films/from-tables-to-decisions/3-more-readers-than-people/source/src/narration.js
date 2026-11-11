@@ -8,7 +8,7 @@ const NARR={
  {"id":"differ","gap":0.8,"text":"But their signs still differ. Many give their message in words, in the country's own language."},
  {"id":"miss","gap":0.8,"text":"A driver from abroad can pass a warning of a sharp bend, and never know what it said."},
  {"id":"crash","gap":0.8,"text":"And on the road, a missed warning can end in a crash."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Signs have to speak to every driver, whatever their language."},
  {"id":"sign","gap":0.8,"text":"So, on the 8th of November, 31 countries sign a treaty: the Convention on Road Signs and Signals.","say":"So, on the eighth of November, thirty-one countries sign a treaty: the Convention on Road Signs and Signals."},
  {"id":"once","gap":0.8,"text":"It defines each sign once: by its shape, its colour and its symbol."},
  {"id":"shapes","gap":0.8,"text":"A triangle edged in red warns. A circle edged in red forbids, or sets a limit. A blue circle says what you must do."},

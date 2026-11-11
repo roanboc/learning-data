@@ -18,245 +18,245 @@ The smaller parties fear what a winning majority could write: rights a later vot
 00:00:35.642 --> 00:00:41.939
 And the party expected to win won't accept a constitution written by negotiators nobody elected.
 
-00:00:43.439 --> 00:00:46.684
-Something has to change in how a constitution is made.
+00:00:43.439 --> 00:00:47.434
+The way a constitution is made has to win everyone's trust first.
 
-00:00:48.784 --> 00:00:55.533
+00:00:49.534 --> 00:00:56.283
 So they agree the principles first: 34 of them, from rights for everyone to judges no party controls.
 
-00:00:57.433 --> 00:01:05.713
+00:00:58.183 --> 00:01:06.463
 They write them into a temporary constitution, in force from 27 April 1994, and nobody may change them.
 
-00:01:07.413 --> 00:01:12.299
+00:01:08.163 --> 00:01:13.049
 The new parliament, sitting as the Constitutional Assembly, will write the final text.
 
-00:01:13.799 --> 00:01:21.245
+00:01:14.549 --> 00:01:21.995
 It will count only once the new Constitutional Court, which didn't write it, certifies that every part keeps every principle.
 
-00:01:23.145 --> 00:01:29.891
+00:01:23.895 --> 00:01:30.641
 On 8 May 1996, the Assembly adopts its text, with 86 percent of its members.
 
-00:01:31.391 --> 00:01:36.309
+00:01:32.141 --> 00:01:37.059
 On 6 September, the Court's judges, all agreeing, decline to certify it.
 
-00:01:38.209 --> 00:01:40.184
+00:01:38.959 --> 00:01:40.934
 In nine respects, it falls short.
 
-00:01:41.884 --> 00:01:44.975
+00:01:42.634 --> 00:01:45.725
 Among them, the rights in it could be changed too easily.
 
-00:01:45.675 --> 00:01:50.289
+00:01:46.425 --> 00:01:51.039
 And the officials who check on the government and its money aren't protected enough from it.
 
-00:01:51.789 --> 00:01:58.108
+00:01:52.539 --> 00:01:58.858
 In five weeks, the Assembly fixes all nine, and on 11 October it adopts the amended text.
 
-00:01:59.808 --> 00:02:02.469
+00:02:00.558 --> 00:02:03.219
 On 4 December, the Court certifies it.
 
-00:02:04.569 --> 00:02:13.384
+00:02:05.319 --> 00:02:14.134
 President Mandela signs it on 10 December 1996, and it comes into force on 4 February 1997.
 
-00:02:15.084 --> 00:02:18.568
+00:02:15.834 --> 00:02:19.318
 Nearly thirty years on, it's still the country's constitution.
 
-00:02:19.868 --> 00:02:23.932
+00:02:20.618 --> 00:02:24.682
 Every side could trust it, because no side could put it into force alone.
 
-00:02:25.432 --> 00:02:33.323
+00:02:26.182 --> 00:02:34.073
 Elected people wrote it; judges who hadn't written it checked it against promises fixed before; and it counted only once both were done.
 
-00:02:35.223 --> 00:02:37.891
+00:02:35.973 --> 00:02:38.641
 A change to production can work the same way.
 
-00:02:44.191 --> 00:02:48.948
+00:02:44.941 --> 00:02:49.698
 At the university, a job loads the registrar's records every night at two.
 
-00:02:50.248 --> 00:02:56.189
+00:02:50.998 --> 00:02:56.939
 In Walls, doors and keys, its one workspace became three: development, test and production.
 
-00:02:57.689 --> 00:03:05.458
+00:02:58.439 --> 00:03:06.208
 In Workloads without secrets, its deploy got a key with no secret in it: the job's own identity, registrar-loader.
 
-00:03:07.158 --> 00:03:08.787
+00:03:07.908 --> 00:03:09.537
 But nothing guards the way in.
 
-00:03:10.287 --> 00:03:16.051
+00:03:11.037 --> 00:03:16.801
 Whatever reaches main, the branch in GitHub that production is built from, goes straight to production.
 
-00:03:17.551 --> 00:03:22.570
+00:03:18.301 --> 00:03:23.320
 Anyone on the team can push to it, at any hour, and nobody else has to read the change.
 
-00:03:24.270 --> 00:03:29.833
+00:03:25.020 --> 00:03:30.583
 One unread change could stop every student's record from loading, or send it where it shouldn't go.
 
-00:03:31.533 --> 00:03:35.138
+00:03:32.283 --> 00:03:35.888
 And anyone who stole one of the team's sign-ins could do the same.
 
-00:03:36.838 --> 00:03:39.244
+00:03:37.588 --> 00:03:39.994
 Production needs one way in, with a gate.
 
-00:03:41.144 --> 00:03:47.306
+00:03:41.894 --> 00:03:48.056
 So before the next change is written, Sam sets the rules, as South Africa fixed its principles first.
 
-00:03:48.806 --> 00:03:56.123
+00:03:49.556 --> 00:03:56.873
 A ruleset on main: every change comes as a pull request, and nobody pushes to main, rewrites it or deletes it.
 
-00:03:58.023 --> 00:04:03.280
+00:03:58.773 --> 00:04:04.030
 A code owner approves each change, and the last push is approved by someone who didn't push it.
 
-00:04:04.980 --> 00:04:06.258
+00:04:05.730 --> 00:04:07.008
 The checks must pass.
 
-00:04:07.558 --> 00:04:11.572
+00:04:08.308 --> 00:04:12.322
 And nobody may bypass it, not even an owner of the organisation.
 
-00:04:13.272 --> 00:04:15.727
+00:04:14.022 --> 00:04:16.477
 Who owns what was decided in Who decides.
 
-00:04:17.027 --> 00:04:20.382
+00:04:17.777 --> 00:04:21.132
 The code owners file names the platform team for the job.
 
-00:04:21.082 --> 00:04:25.868
+00:04:21.832 --> 00:04:26.618
 The platform team and the release approvers own the workflows, and the file itself.
 
-00:04:27.568 --> 00:04:33.869
+00:04:28.318 --> 00:04:34.619
 GitHub reads that file from main, not from the pull request, so no change picks its own reviewers.
 
-00:04:35.969 --> 00:04:40.246
+00:04:36.719 --> 00:04:40.996
 And the ruleset isn't in the code at all: no pull request can loosen it.
 
-00:04:43.346 --> 00:04:44.881
+00:04:44.096 --> 00:04:45.631
 Jun has the next change.
 
-00:04:45.581 --> 00:04:49.687
+00:04:46.331 --> 00:04:50.437
 One morning in Power you switch on, the load stopped on a row it couldn't read.
 
-00:04:50.387 --> 00:04:53.963
+00:04:51.137 --> 00:04:54.713
 Jun switched on his admin account to open last night's file.
 
-00:04:55.463 --> 00:04:59.058
+00:04:56.213 --> 00:04:59.808
 Now the job should set such a row aside, and load the rest.
 
-00:05:00.758 --> 00:05:06.777
+00:05:01.508 --> 00:05:07.527
 Jun writes it on a branch, and tries it in development, in a copy under his own name, on made-up records.
 
-00:05:08.677 --> 00:05:10.393
+00:05:09.427 --> 00:05:11.143
 Then he opens a pull request.
 
-00:05:11.693 --> 00:05:14.807
+00:05:12.443 --> 00:05:15.557
 The checks run: the job's tests, and code scanning.
 
-00:05:16.307 --> 00:05:17.388
+00:05:17.057 --> 00:05:18.138
 Sam reviews it.
 
-00:05:18.088 --> 00:05:22.370
+00:05:18.838 --> 00:05:23.120
 One line writes each set-aside row to the job's log, names and all.
 
-00:05:24.070 --> 00:05:28.817
+00:05:24.820 --> 00:05:29.567
 A log keeps whatever it's given, outside the table's masks, for 30 days.
 
-00:05:30.717 --> 00:05:32.532
+00:05:31.467 --> 00:05:33.282
 Sam asks for that line to go.
 
-00:05:33.832 --> 00:05:37.940
+00:05:34.582 --> 00:05:38.690
 Jun takes it out and pushes again, and Sam approves this last push.
 
-00:05:39.840 --> 00:05:41.816
+00:05:40.590 --> 00:05:42.566
 Sent back, fixed, checked again.
 
-00:05:43.516 --> 00:05:44.643
+00:05:44.266 --> 00:05:45.393
 Jun merges it.
 
-00:05:46.543 --> 00:05:48.449
+00:05:47.293 --> 00:05:49.199
 Merging doesn't put it in production.
 
-00:05:49.749 --> 00:05:54.612
+00:05:50.499 --> 00:05:55.362
 The deploy runs on GitHub's machines placed inside the university's network.
 
-00:05:55.312 --> 00:06:00.052
+00:05:56.062 --> 00:06:00.802
 So it reaches the workspaces by the private path from Network, storage and keys.
 
-00:06:01.752 --> 00:06:03.203
+00:06:02.502 --> 00:06:03.953
 It goes to test first.
 
-00:06:03.903 --> 00:06:13.083
+00:06:04.653 --> 00:06:13.833
 It signs in as registrar-loader-test, deploys the bundle, the job and its settings as files, and runs the job once on test's records.
 
-00:06:14.783 --> 00:06:15.684
+00:06:15.533 --> 00:06:16.434
 It passes.
 
-00:06:16.984 --> 00:06:20.323
+00:06:17.734 --> 00:06:21.073
 Then production waits for a release approver: Noor Rahman.
 
-00:06:22.023 --> 00:06:26.048
+00:06:22.773 --> 00:06:26.798
 Whoever started the run can't approve it, and only main may deploy here.
 
-00:06:27.948 --> 00:06:32.262
+00:06:28.698 --> 00:06:33.012
 Noor sees what changed, who reviewed it, and the test run, and approves.
 
-00:06:34.362 --> 00:06:38.619
+00:06:35.112 --> 00:06:39.369
 Now the workflow asks Databricks to sign it in as registrar-loader.
 
-00:06:39.919 --> 00:06:46.794
+00:06:40.669 --> 00:06:47.544
 Databricks lets in only this repository's job in the environment production: the one that waited for Noor.
 
-00:06:49.094 --> 00:06:54.800
+00:06:49.844 --> 00:06:55.550
 The bundle deploys from main, in production mode, and the job runs as registrar-loader.
 
-00:06:56.500 --> 00:06:58.939
+00:06:57.250 --> 00:06:59.689
 There, people may look at it, never change it.
 
-00:07:00.439 --> 00:07:03.297
+00:07:01.189 --> 00:07:04.047
 Two people said yes, and a machine did the rest.
 
-00:07:05.197 --> 00:07:09.420
+00:07:05.947 --> 00:07:10.170
 One way in is easy to miss: code nobody at the university wrote.
 
-00:07:10.920 --> 00:07:18.470
+00:07:11.670 --> 00:07:19.220
 The deploy runs two actions, small programs from other people: one fetches the code, one installs Databricks' tool.
 
-00:07:20.170 --> 00:07:22.372
+00:07:20.920 --> 00:07:23.122
 They run right beside the production key.
 
-00:07:24.072 --> 00:07:30.478
+00:07:24.822 --> 00:07:31.228
 An action named by a tag or a branch runs whatever the name points to that day, and the name can be moved.
 
-00:07:32.578 --> 00:07:37.238
+00:07:33.328 --> 00:07:37.988
 Code scanning reads the workflows too, and flags the one that isn't GitHub's own.
 
-00:07:38.938 --> 00:07:44.378
+00:07:39.688 --> 00:07:45.128
 Sam pins both, GitHub's own too, to the commit he checked, its version written beside it.
 
-00:07:46.278 --> 00:07:47.610
+00:07:47.028 --> 00:07:48.360
 A commit can't change.
 
-00:07:49.310 --> 00:07:57.932
+00:07:50.060 --> 00:07:58.682
 Dependabot proposes each new version, and any fix for a known flaw in the job's libraries, as a pull request, reviewed like any other.
 
-00:07:59.832 --> 00:08:05.834
+00:08:00.582 --> 00:08:06.584
 And the workflow's own token can only read: only the two deploying jobs may ask to sign in.
 
-00:08:09.734 --> 00:08:13.207
+00:08:10.484 --> 00:08:13.957
 At two on Wednesday morning, the job runs the reviewed code.
 
-00:08:14.907 --> 00:08:17.406
+00:08:15.657 --> 00:08:18.156
 A week later, a row is unreadable again.
 
-00:08:18.706 --> 00:08:23.202
+00:08:19.456 --> 00:08:23.952
 The job sets it aside, and every other record is in by a quarter past two.
 
-00:08:24.902 --> 00:08:30.770
+00:08:25.652 --> 00:08:31.520
 The registrar's office fixes the row by half past nine, and nobody switched on any power to see it.
 
-00:08:32.870 --> 00:08:40.405
+00:08:33.620 --> 00:08:41.155
 As in South Africa, the rules came first, someone who hadn't written the change checked it, and it counted only once both were done.
 
-00:08:42.505 --> 00:08:48.593
+00:08:43.255 --> 00:08:49.343
 In an emergency, the same path, faster, or an admin account switched on, approved and recorded.
 
-00:08:50.293 --> 00:08:54.928
+00:08:51.043 --> 00:08:55.678
 An agent's change takes the same path, as Every change through review shows.
 
-00:08:56.428 --> 00:08:59.211
+00:08:57.178 --> 00:08:59.961
 Production changes only through a reviewed path.

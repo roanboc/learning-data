@@ -7,7 +7,7 @@ const NARR={
  {"id":"years","gap":0.8,"text":"Learning them took years, so most people couldn't write down what they wanted to say."},
  {"id":"court","gap":0.8,"text":"In a court, a person's words were written down in characters they couldn't read."},
  {"id":"wrong","gap":0.8,"text":"One wrong character could punish someone innocent, and they had no way to check."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Writing couldn't stay a skill for the few."},
  {"id":"start","gap":0.8,"text":"King Sejong started from what people needed: to write the way they speak."},
  {"id":"made","gap":0.8,"text":"In 1443 he made 28 letters, the consonants drawn from the mouth and throat as they make each sound.","say":"In fourteen forty-three he made twenty-eight letters, the consonants drawn from the mouth and throat as they make each sound."},
  {"id":"shapes","gap":0.8,"text":"Five basic shapes, and a stroke added for a stronger sound."},

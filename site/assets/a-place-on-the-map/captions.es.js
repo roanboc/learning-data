@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que era difícil, a veces imposible, enviar los pocos camiones y cuadrillas adonde más se necesitaban.",
 "Every agency cooperated as well as it could. What was missing was one way of working they all shared.":
 "Cada agencia cooperó lo mejor que pudo. Lo que faltaba era una forma de trabajar que todas compartieran.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Before the next big fire, they had to find it.":
+"Antes del próximo gran incendio, tenían que encontrarla.",
 "In 1972, seven of those agencies began to build that way of working, together. Their programme was called FIRESCOPE.":
 "En 1972, siete de esas agencias empezaron a construir juntas esa forma de trabajar. Su programa se llamó FIRESCOPE.",
 "Its Incident Command System starts where help arrives: everyone who comes checks in.":

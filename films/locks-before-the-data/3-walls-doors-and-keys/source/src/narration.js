@@ -13,7 +13,7 @@ const NARR={
  {"id":"tell","gap":0.8,"text":"At the gate, nobody could tell a sick traveller from a well one."},
  {"id":"shut","gap":0.8,"text":"Shut the port, and the city loses its living."},
  {"id":"open","gap":0.8,"text":"Leave it open, and the sickness walks in, to every family behind the walls."},
- {"id":"change","gap":0.8,"text":"Something has to change."}
+ {"id":"change","gap":1.048,"text":"The city needs a way to stay open without letting the sickness in."}
 ]},
 "apart":{"name":"A month apart","lead":1.2,"tail":0.6,"vo":[
  {"id":"council","gap":0.8,"text":"On 27 July 1377, the Great Council, the nobles who made the city's laws, passed a new one.","say":"On the twenty-seventh of July, thirteen seventy-seven, the Great Council, the nobles who made the city's laws, passed a new one."},

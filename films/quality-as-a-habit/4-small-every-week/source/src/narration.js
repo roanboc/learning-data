@@ -9,7 +9,7 @@ const NARR={
  {"id":"years","gap":0.8,"text":"It had ruined harvest after harvest. Farmers lost their crops, and Mexico had to buy much of its wheat abroad."},
  {"id":"slow","gap":0.8,"text":"A wheat that resists the rust can be bred, but slowly."},
  {"id":"gens","gap":0.8,"text":"One harvest a year is one generation a year, and finding the right wheat takes many."},
- {"id":"change","gap":0.8,"text":"Every year of waiting was another year of ruined fields. Something had to change."},
+ {"id":"change","gap":0.8,"text":"Every year of waiting was another year of ruined fields. The breeding had to go faster."},
  {"id":"two","gap":0.8,"text":"So the team grew two generations a year."},
  {"id":"winter","gap":0.8,"text":"In winter, in the Yaqui Valley in the north-west, near the sea.","say":"In winter, in the Yah-kee Valley in the north-west, near the sea."},
  {"id":"summer","gap":0.8,"text":"In summer, in the highlands near Mexico City, more than two thousand metres up, and over a thousand kilometres away."},

@@ -24,8 +24,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pero sin árboles, la lluvia se llevó la tierra de las colinas, y los manantiales se secaron.",
 "The women fetched the water, gathered the firewood and grew the food. So the harm fell first on them, and on their children.":
 "Las mujeres acarreaban el agua, juntaban la leña y cultivaban la comida. Así que el daño cayó primero sobre ellas y sus hijos.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Someone had to bring the trees back, and it would be the women.":
+"Alguien tenía que traer de vuelta los árboles, y serían las mujeres.",
 "In 1977, Maathai started the Green Belt Movement, with the National Council of Women of Kenya.":
 "En 1977, Maathai fundó el Movimiento Cinturón Verde, con el Consejo Nacional de Mujeres de Kenia.",
 "Groups of women grew seedlings in their own nurseries, from the seeds of local trees, and planted them out.":

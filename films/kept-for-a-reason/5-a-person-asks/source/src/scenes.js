@@ -24,7 +24,7 @@ scene("summer",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
     bail:wAt(sc,"bail","bail"),pledge:wAt(sc,"bail","pledge"),refused:wAt(sc,"refused","Refused"),
     habeas:wAt(sc,"writ","habeas corpus"),body:wAt(sc,"latin","have the body"),bring:wAt(sc,"latin","bring"),why:wAt(sc,"latin","say why"),
     refuses:wAt(sc,"holiday","refuses"),hol:wAt(sc,"holiday","summer holiday"),
-    aug:wAt(sc,"august","August"),loss:wAt(sc,"august","great loss"),months:wAt(sc,"months","months"),change:wAt(sc,"change","Something")}));
+    aug:wAt(sc,"august","August"),loss:wAt(sc,"august","great loss"),months:wAt(sc,"months","months"),change:wAt(sc,"change","A prisoner")}));
   ag_shots(ctx,S,t,sc.dur,[
     // Guildhall Yard at evening: the camera glides in towards the hall's lit windows
     {at:0,place:"apYard",keys:[[0,960,560,1.0],[1.2,960,500,1.12]],d:5.6,push:0},

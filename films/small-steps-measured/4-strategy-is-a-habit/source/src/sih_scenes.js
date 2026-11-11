@@ -41,8 +41,8 @@ scene("ozone",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       sih_sheet(x,tt,w("hole","Antarctica",-0.3),140,150,760,{kick:"1985 · British Antarctic Survey",title:"Joe Farman, Brian Gardiner and Jonathan Shanklin",lines:["Measuring the ozone layer since 1957"]},
         {light:null,pin:false,out:c.thin-0.5,u:ag_in(tt,w("hole","measured",-0.1),0.5)});
       const k0=c.thin-0.1;if(tt>=k0)sih_chart(x,140,150,760,{a:ag_in(tt,k0,0.35),k:tt-k0,u:ag_in(tt,k0+0.3,2.6),lab:ag_in(tt,w("thin","thirds",-0.1),0.5)});
-      sih_sheet(x,tt,w("late","unsure",-0.3),1000,170,780,{kick:"1985",title:"Much is still unsure",lines:["Waiting could be too late","Something has to change"]},
-        {col:LP.amber,light:null,pin:false,u:sih_u(tt,[w("late","waiting",-0.1),w("late","Something",-0.1)])});}},
+      sih_sheet(x,tt,w("late","unsure",-0.3),1000,170,780,{kick:"1985",title:"Much is still unsure",lines:["Waiting could be too late","Act before knowing it all"]},
+        {col:LP.amber,light:null,pin:false,u:sih_u(tt,[w("late","waiting",-0.1),w("late","The world",-0.1)])});}},
     // 16 September 1987, Montreal: a modest first step, and a habit written in
     {at:c.sign-0.3,place:"sihHall",keys:[[c.sign-0.3,960,540,1.0]],dis:1.4,draw:(x,tt)=>{
       sih_delegates(x,tt);

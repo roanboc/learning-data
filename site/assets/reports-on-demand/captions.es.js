@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así, un reloj ajustado con esa respuesta podía quedar desfasado.",
 "And the time is a question everyone asks, again and again.":
 "Y la hora es una pregunta que todos hacen, una y otra vez.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The answer had to be there whenever anyone asked.":
+"La respuesta tenía que estar ahí cada vez que alguien preguntara.",
 "So the Post Office's own engineers built a machine to answer it: the speaking clock.":
 "Así que los propios ingenieros de Correos construyeron una máquina para responderla: el reloj parlante.",
 "Jane Cain, one of the operators, recorded its words on glass discs.":

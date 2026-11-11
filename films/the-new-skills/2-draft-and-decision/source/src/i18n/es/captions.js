@@ -14,7 +14,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Many fear what that means for people.": "Muchos temen lo que eso significa para las personas.",
 "Players spend years learning the game, and many earn their living by it.": "Los jugadores pasan años aprendiendo el juego, y muchos se ganan la vida con él.",
 "If a machine plays better than the best of them, what is their skill worth?": "Si una máquina juega mejor que los mejores, ¿cuánto vale su habilidad?",
-"Something has to change.": "Algo tiene que cambiar.",
+"Players have to find what their skill is for, beside the machine.": "Los jugadores tienen que descubrir para qué sirve su habilidad, junto a la máquina.",
 "A year later, in León, in Spain, Kasparov tries another way: play with the machine, not against it.": "Un año después, en León, España, Kasparov prueba otro camino: jugar con la máquina, no contra ella.",
 "He and his opponent, Veselin Topalov, each have a computer at hand, running the chess program of their choice.": "Él y su rival, Veselin Topalov, tienen cada uno una computadora a mano, con el programa de ajedrez que eligieron.",
 "With the machine checking every tactic, Kasparov finds he can give his thinking to the plan.": "Con la máquina revisando cada táctica, Kasparov descubre que puede dedicar su pensamiento al plan.",

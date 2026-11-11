@@ -11,7 +11,7 @@ const NARR={
  {"id":"collins","gap":0.8,"text":"The best known, Patti Lyle Collins, works out about a thousand a day."},
  {"id":"unseen","gap":0.8,"text":"It's skilled work, unseen by the senders, and it never fixes the next letter."},
  {"id":"lost","gap":0.8,"text":"Nearly three million a year are destroyed: news someone never gets."},
- {"id":"change","gap":0.8,"text":"Something has to change where the address is written, not where it ends up."},
+ {"id":"change","gap":0.8,"text":"The fix has to start where the address is written, not where it ends up."},
  {"id":"zones","gap":0.8,"text":"In 1943, with experienced clerks gone to the war, big cities get zones: a number the sender writes, so new clerks can sort by it.","say":"In nineteen forty-three, with experienced clerks gone to the war, big cities get zones: a number the sender writes, so new clerks can sort by it."},
  {"id":"zip","gap":0.8,"text":"In 1963, the post brings in the ZIP Code: five digits on every letter, written by the sender.","say":"In nineteen sixty-three, the post brings in the zip code: five digits on every letter, written by the sender."},
  {"id":"sort","gap":0.8,"text":"Now anyone, and soon machines, can sort a letter by its number."},

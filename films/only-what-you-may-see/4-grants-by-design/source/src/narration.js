@@ -9,7 +9,7 @@ const NARR={
  {"id":"anywhere","gap":0.8,"text":"Visitors could walk anywhere, a step from nesting birds, iguanas and sea lions."},
  {"id":"harm","gap":0.8,"text":"Nests could be trampled and the lava worn down, and coral is already being carried off."},
  {"id":"lost","gap":0.8,"text":"Birds could leave for good, and many of the islands' animals live nowhere else."},
- {"id":"change","gap":0.8,"text":"Something has to change, before visitors come in thousands."},
+ {"id":"change","gap":0.8,"text":"The islands need rules for every visit, before visitors come in thousands."},
  {"id":"plan","gap":0.8,"text":"So the national park, on the Darwin Research Station's advice, plans the visits once, for the whole park."},
  {"id":"most","gap":0.8,"text":"Most of the park gets no visitors at all."},
  {"id":"sites","gap":0.8,"text":"A few sites near the coast are open, each along its own marked trail."},

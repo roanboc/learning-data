@@ -12,7 +12,7 @@ scene("gauge",(ctx,S,t,sc)=>{
     tOwn:wAt(sc,"gauge","its own gauge"),tDist:wAt(sc,"gauge","the distance"),tVicR:wAt(sc,"wider","Victoria's rails"),tHand:wAt(sc,"wider","a hand's length"),tNo:wAt(sc,"wider","no train"),
     tPass:wAt(sc,"change","every passenger"),tCrate:wAt(sc,"change","every crate"),tTime:wAt(sc,"cost","travellers time"),tMoney:wAt(sc,"cost","traders money"),
     tReasons:wAt(sc,"reasons","its reasons"),tChanged:wAt(sc,"reasons","changed its gauge"),tKept:wAt(sc,"reasons","Victoria kept"),
-    tYears:wAt(sc,"years","seventy-nine years"),tSomething:wAt(sc,"years","Something had to change"),
+    tYears:wAt(sc,"years","seventy-nine years"),tSomething:wAt(sc,"years","go on stopping"),
     t1962:wAt(sc,"agreed","nineteen sixty-two"),tGov:wAt(sc,"agreed","Australia's government"),tOpened:wAt(sc,"agreed","opened a new line"),tOne:wAt(sc,"agreed","one agreed gauge"),
     tFreight:wAt(sc,"through","Freight ran"),tApril:wAt(sc,"through","from April"),tNobody:wAt(sc,"through","nobody changing"),tThird:wAt(sc,"third","by a third"),
     tUni:wAt(sc,"files","At the university"),tHRc:wAt(sc,"files","HR's contracts"),tFile:wAt(sc,"files","as a file"),

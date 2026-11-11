@@ -7,7 +7,7 @@ const NARR={
  {"id":"alone","gap":0.8,"text":"By 1877, four schools in ten have a single teacher, and nearly one in three has a single classroom.","say":"By eighteen seventy-seven, four schools in ten have a single teacher, and nearly one in three has a single classroom."},
  {"id":"see","gap":0.8,"text":"A teacher alone with a class can't see what each child has understood, and nobody sees the lesson to help."},
  {"id":"lost","gap":0.8,"text":"When a lesson loses the children, they fall behind, and the teacher may never learn why."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Teachers needed other eyes on their lessons."},
  {"id":"open","gap":0.8,"text":"Teachers opened their classrooms to each other."},
  {"id":"groups","gap":0.8,"text":"From the first year, new teachers learned by watching lessons, and teachers formed groups to learn together."},
  {"id":"watch","gap":0.8,"text":"A visitor watched the children, not the teacher: how they answered, whether they were interested, and whether the questions suited them."},

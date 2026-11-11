@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En un tribunal, las palabras de una persona se escribían en caracteres que no sabía leer.",
 "One wrong character could punish someone innocent, and they had no way to check.":
 "Un carácter equivocado podía castigar a un inocente, y no tenía forma de comprobarlo.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Writing couldn't stay a skill for the few.":
+"La escritura no podía seguir siendo cosa de unos pocos.",
 "King Sejong started from what people needed: to write the way they speak.":
 "El rey Sejong partió de lo que la gente necesitaba: escribir como habla.",
 "In 1443 he made 28 letters, the consonants drawn from the mouth and throat as they make each sound.":

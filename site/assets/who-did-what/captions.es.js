@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los expertos solo pueden suponer.",
 "And while they guess, the planes fly again, full of passengers, and the next one may fail the same way.":
 "Y mientras suponen, los aviones vuelven a volar, llenos de pasajeros, y el próximo puede fallar igual.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The next crash can't leave everyone guessing.":
+"El próximo accidente no puede dejar a todos adivinando.",
 "In April 1954, Warren writes a short note.":
 "En abril de 1954, Warren escribe una nota breve.",
 "A small box could record the voices in the cockpit, over and over, so the last hours are always kept.":

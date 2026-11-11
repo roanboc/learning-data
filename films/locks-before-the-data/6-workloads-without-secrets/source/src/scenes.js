@@ -20,7 +20,7 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,T=ws_once(sc,"T",()=>({
     trouble:wAt(sc,"switch","trouble"),turns:wAt(sc,"switch","turns"),sw:wAt(sc,"switch","switch"),
     wire:wAt(sc,"wire","A wire"),close:wAt(sc,"wire","close"),copy:wAt(sc,"wire","copy of"),
     owner:wAt(sc,"owner","For the owner"),work:wAt(sc,"owner","no way to work"),claim:wAt(sc,"owner","a claim"),back:wAt(sc,"owner","a car that may"),
-    change:wAt(sc,"change","Something")}));
+    change:wAt(sc,"change","A car")}));
   ag_shots(ctx,S,t,sc.dur,[
     // the street at night: the houses, the lamps, the cars along the road
     {at:0,place:"wsStreet",keys:[[0,960,540,1.0],[T.cars,990,560,1.05]],d:7,draw:(x,tt)=>{

@@ -43,281 +43,281 @@ Shut the port, and the city loses its living.
 Leave it open, and the sickness walks in, to every family behind the walls.
 
 12
-00:00:56,738 --> 00:00:58,178
-Something has to change.
+00:00:56,738 --> 00:01:00,430
+The city needs a way to stay open without letting the sickness in.
 
 13
-00:01:00,678 --> 00:01:08,183
+00:01:03,178 --> 00:01:10,683
 On 27 July 1377, the Great Council, the nobles who made the city's laws, passed a new one.
 
 14
-00:01:09,683 --> 00:01:17,837
+00:01:12,183 --> 00:01:20,337
 Anyone coming from a place with plague must first spend a month apart: on the islet of Mrkan, or in the town of Cavtat, down the coast.
 
 15
-00:01:19,537 --> 00:01:21,383
+00:01:22,037 --> 00:01:23,883
 Only then may they enter the city.
 
 16
-00:01:23,283 --> 00:01:27,497
+00:01:25,783 --> 00:01:29,997
 No one from the city may go to them: whoever does, stays the month too.
 
 17
-00:01:29,197 --> 00:01:32,562
+00:01:31,697 --> 00:01:35,062
 Later, health officers watch every ship and every gate.
 
 18
-00:01:34,062 --> 00:01:36,927
+00:01:36,562 --> 00:01:39,427
 The port stays open, and the city keeps its living.
 
 19
-00:01:38,427 --> 00:01:42,971
+00:01:40,927 --> 00:01:45,471
 When the sickness comes now, it's held on an island, not let loose in the streets.
 
 20
-00:01:44,671 --> 00:01:47,559
+00:01:47,171 --> 00:01:50,059
 Ragusa is the first city known to have made it a law.
 
 21
-00:01:48,859 --> 00:01:55,508
+00:01:51,359 --> 00:01:58,008
 Other ports followed, and the wait grew to forty days: the word quarantine comes from the Italian for forty.
 
 22
-00:01:57,408 --> 00:02:05,225
+00:01:59,908 --> 00:02:07,725
 The university's data has the same problem: people and jobs must reach it every day, and whoever breaks in shouldn't reach it all.
 
 23
-00:02:06,725 --> 00:02:12,952
+00:02:09,225 --> 00:02:15,452
 It needs what Ragusa had: a few doors, each with a rule, and a place apart for what isn't trusted yet.
 
 24
-00:02:19,652 --> 00:02:23,766
+00:02:22,152 --> 00:02:26,266
 At the university, the nightly job no longer carries Jun's token.
 
 25
-00:02:24,866 --> 00:02:32,524
+00:02:27,366 --> 00:02:35,024
 But Sam Okafor, who runs the data platform, asks what an attacker would: if someone did get in, how far could they go?
 
 26
-00:02:34,424 --> 00:02:39,603
+00:02:36,924 --> 00:02:42,103
 Today, the platform's door is on the open internet: anyone, anywhere, can reach it.
 
 27
-00:02:41,103 --> 00:02:46,799
+00:02:43,603 --> 00:02:49,299
 Inside, one workspace holds people's experiments and the nightly job's real records.
 
 28
-00:02:48,299 --> 00:02:55,271
+00:02:50,799 --> 00:02:57,771
 From there, every area's data is in reach: the registrar's records, learning, planning, HR and finance.
 
 29
-00:02:56,971 --> 00:03:02,478
+00:02:59,471 --> 00:03:04,978
 A way runs straight to the files in storage, past the catalog that checks who may read what.
 
 30
-00:03:03,978 --> 00:03:05,532
+00:03:06,478 --> 00:03:08,032
 Data can be sent anywhere.
 
 31
-00:03:06,832 --> 00:03:10,355
+00:03:09,332 --> 00:03:12,855
 The backups sit beside the data, where any admin can delete them.
 
 32
-00:03:11,855 --> 00:03:16,656
+00:03:14,355 --> 00:03:19,156
 And the cloud provider keeps the data's key, which the university can't take back.
 
 33
-00:03:18,956 --> 00:03:22,415
+00:03:21,456 --> 00:03:24,915
 Nobody chose this: the platform started small, and grew.
 
 34
-00:03:24,715 --> 00:03:27,123
+00:03:27,215 --> 00:03:29,623
 First, Sam writes down who secures what.
 
 35
-00:03:28,223 --> 00:03:33,302
+00:03:30,723 --> 00:03:35,802
 The cloud provider secures its buildings, its machines, and the network between them.
 
 36
-00:03:34,602 --> 00:03:38,891
+00:03:37,102 --> 00:03:41,391
 The platform's makers secure its software, and how it checks every request.
 
 37
-00:03:40,191 --> 00:03:46,759
+00:03:42,691 --> 00:03:49,259
 The university secures the rest: who gets in, what each may do, its settings, its keys and its copies.
 
 38
-00:03:48,259 --> 00:03:54,939
+00:03:50,759 --> 00:03:57,439
 Whatever the contract says, the data is the university's to protect, and the walls are the university's to draw.
 
 39
-00:03:56,439 --> 00:04:01,937
+00:03:58,939 --> 00:04:04,437
 They follow the areas on the university's map, each with the owner Who decides wrote down.
 
 40
-00:04:03,637 --> 00:04:09,993
+00:04:06,137 --> 00:04:12,493
 A wall doesn't make anyone inside it trusted: every request is still checked, as Who is it, really? showed.
 
 41
-00:04:11,493 --> 00:04:17,568
+00:04:13,993 --> 00:04:20,068
 But walls keep the ways in few and the rooms small, so a mistake, or an intruder, stays where it started.
 
 42
-00:04:19,868 --> 00:04:20,905
+00:04:22,368 --> 00:04:23,405
 Then, the doors.
 
 43
-00:04:22,005 --> 00:04:30,370
+00:04:24,505 --> 00:04:32,870
 The platform's door comes off the open internet: people and jobs reach it only by a private path, from the university's own network.
 
 44
-00:04:32,070 --> 00:04:35,185
+00:04:34,570 --> 00:04:37,685
 The platform reaches the storage by a private path too.
 
 45
-00:04:36,485 --> 00:04:41,160
+00:04:38,985 --> 00:04:43,660
 And the way out is watched: data may leave only for places on a short list.
 
 46
-00:04:42,860 --> 00:04:48,380
+00:04:45,360 --> 00:04:50,880
 Storage keeps files, and knows nothing of who may see which column: no masks, no rules.
 
 47
-00:04:49,880 --> 00:04:56,511
+00:04:52,380 --> 00:04:59,011
 So the catalog becomes the files' only door: it checks every request, and applies every rule on the way.
 
 48
-00:04:58,211 --> 00:05:00,672
+00:05:00,711 --> 00:05:03,172
 The back door, straight to the files, stays shut.
 
 49
-00:05:01,772 --> 00:05:07,809
+00:05:04,272 --> 00:05:10,309
 Only an admin account, switched on to read the storage, opens it, as Power you switch on shows.
 
 50
-00:05:09,509 --> 00:05:13,049
+00:05:12,009 --> 00:05:15,549
 Like Ragusa's walls: a few gates, and at each one, a rule.
 
 51
-00:05:15,349 --> 00:05:19,682
+00:05:17,849 --> 00:05:22,182
 Next, one workspace becomes three: development, test and production.
 
 52
-00:05:21,182 --> 00:05:26,488
+00:05:23,682 --> 00:05:28,988
 In development, people try new things; in test, a change is tried as it will run.
 
 53
-00:05:27,588 --> 00:05:31,121
+00:05:30,088 --> 00:05:33,621
 Production holds the real records, and runs the nightly load.
 
 54
-00:05:32,421 --> 00:05:34,245
+00:05:34,921 --> 00:05:36,745
 Each reaches only its own data.
 
 55
-00:05:35,545 --> 00:05:40,342
+00:05:38,045 --> 00:05:42,842
 Development and test get made-up or masked data, never a copy of production's.
 
 56
-00:05:41,842 --> 00:05:46,707
+00:05:44,342 --> 00:05:49,207
 So a mistake in development stays there, and an intruder there finds no real records.
 
 57
-00:05:48,407 --> 00:05:53,937
+00:05:50,907 --> 00:05:56,437
 A change moves one way, along one reviewed path, which From a branch to production builds.
 
 58
-00:05:55,637 --> 00:06:02,598
+00:05:58,137 --> 00:06:05,098
 Like the islet off Ragusa: what isn't trusted yet waits apart, and comes in only through the gate, after the wait.
 
 59
-00:06:04,898 --> 00:06:06,428
+00:06:07,398 --> 00:06:08,928
 Now, the locks themselves.
 
 60
-00:06:07,728 --> 00:06:12,800
+00:06:10,228 --> 00:06:15,300
 The data is kept encrypted, on disk and on the move: unreadable without its key.
 
 61
-00:06:14,300 --> 00:06:16,311
+00:06:16,800 --> 00:06:18,811
 So what matters is who holds the key.
 
 62
-00:06:17,811 --> 00:06:20,049
+00:06:20,311 --> 00:06:22,549
 Until now, the cloud provider did.
 
 63
-00:06:21,749 --> 00:06:26,564
+00:06:24,249 --> 00:06:29,064
 Now it's the university's own, kept by its security team in a vault of its own.
 
 64
-00:06:28,464 --> 00:06:33,741
+00:06:30,964 --> 00:06:36,241
 The platform may use it, but never take it out, and those who run the platform can't delete it.
 
 65
-00:06:35,641 --> 00:06:41,303
+00:06:38,141 --> 00:06:43,803
 The security team can take it back: then nobody can read the data, not even the cloud provider.
 
 66
-00:06:43,403 --> 00:06:52,410
+00:06:45,903 --> 00:06:54,910
 Lose that key, and the data is lost with it: so every use is recorded, and a deleted key is kept ninety days, which nobody can cut short.
 
 67
-00:06:54,310 --> 00:07:02,220
+00:06:56,810 --> 00:07:04,720
 In Ragusa, for centuries, the gates were shut each evening, and their keys taken to the rector, the head of the republic, until morning.
 
 68
-00:07:03,920 --> 00:07:05,429
+00:07:06,420 --> 00:07:07,929
 Everyone knew who held them.
 
 69
-00:07:07,729 --> 00:07:08,967
+00:07:10,229 --> 00:07:11,467
 Last, the copies.
 
 70
-00:07:10,467 --> 00:07:17,202
+00:07:12,967 --> 00:07:19,702
 An attacker who gets in often deletes the backups first, then locks the data, and asks for money to unlock it.
 
 71
-00:07:19,302 --> 00:07:25,146
+00:07:21,802 --> 00:07:27,646
 So every night, a copy of production's data goes to a place apart, with admins of its own.
 
 72
-00:07:27,046 --> 00:07:33,174
+00:07:29,546 --> 00:07:35,674
 Each copy is locked for thirty days: nobody can change or delete it before then, not even an admin.
 
 73
-00:07:35,274 --> 00:07:42,534
+00:07:37,774 --> 00:07:45,034
 And once a month, Sam's team restores one, to prove it works: a copy nobody has restored is a hope, not a backup.
 
 74
-00:07:44,834 --> 00:07:53,686
+00:07:47,334 --> 00:07:56,186
 A lock that strong cuts both ways: a copy can't be deleted early, even when it should be, and Deleted means deleted comes back to that.
 
 75
-00:07:55,986 --> 00:07:58,143
+00:07:58,486 --> 00:08:00,643
 Sam walks the attacker's path once more.
 
 76
-00:07:59,443 --> 00:08:02,202
+00:08:01,943 --> 00:08:04,702
 From the open internet, there's no door to find.
 
 77
-00:08:03,702 --> 00:08:10,240
+00:08:06,202 --> 00:08:12,740
 With a stolen way in, there's only what that one person may reach, in one workspace, through the catalog's checks.
 
 78
-00:08:11,740 --> 00:08:17,207
+00:08:14,240 --> 00:08:19,707
 No back door to the files, nowhere to send them, no key to take, and no copy to delete.
 
 79
-00:08:19,307 --> 00:08:25,380
+00:08:21,807 --> 00:08:27,880
 In 1377, Ragusa stayed open to the world, through a few gates, each with its rule.
 
 80
-00:08:27,080 --> 00:08:31,323
+00:08:29,580 --> 00:08:33,823
 The university's data stays open to the people and jobs that need it.
 
 81
-00:08:32,623 --> 00:08:34,977
+00:08:35,123 --> 00:08:37,477
 Few doors, each with a lock you can see.

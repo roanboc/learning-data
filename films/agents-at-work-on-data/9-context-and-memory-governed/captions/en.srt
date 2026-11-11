@@ -43,269 +43,269 @@ Since last week, it had lost the three words that made it right, and nobody had 
 Yet the glossary already said what a unit offering is: a unit taught in a semester, on campus, online or both.
 
 12
-00:01:16,504 --> 00:01:20,342
-Nothing told the agent which comes first. Something had to change.
+00:01:16,504 --> 00:01:21,073
+Nothing told the agent which comes first: the glossary, or what it remembered.
 
 13
-00:01:22,242 --> 00:01:23,607
+00:01:22,973 --> 00:01:24,338
 So the team set an order.
 
 14
-00:01:24,507 --> 00:01:32,056
+00:01:25,238 --> 00:01:32,787
 First, what's governed: the glossary's definitions, decided by their owners, and the data rules, reviewed by the data team.
 
 15
-00:01:33,156 --> 00:01:37,378
+00:01:33,887 --> 00:01:38,109
 Second, memory: the platform keeps it, and nobody approves each line.
 
 16
-00:01:38,478 --> 00:01:42,804
+00:01:39,209 --> 00:01:43,535
 When the two disagree, the definition wins, and the agent flags the line.
 
 17
-00:01:44,304 --> 00:01:51,394
+00:01:45,035 --> 00:01:52,125
 Now Lucía's agent lists all 1,236 units, and says which definition it followed.
 
 18
-00:01:52,494 --> 00:01:56,632
+00:01:53,225 --> 00:01:57,363
 The library buys e-books for every one, online or on campus.
 
 19
-00:01:58,132 --> 00:02:04,008
+00:01:58,863 --> 00:02:04,739
 And for data: memory helps, but what's governed decides, so a wrong line can't change an answer.
 
 20
-00:02:11,308 --> 00:02:18,152
+00:02:12,039 --> 00:02:18,883
 This series began with what an agent reads: four kinds of context, code, metadata, skills and tools.
 
 21
-00:02:20,452 --> 00:02:25,483
+00:02:21,183 --> 00:02:26,214
 To those, it adds memory: the session it's in, and what the team keeps from sessions.
 
 22
-00:02:27,383 --> 00:02:32,740
+00:02:28,114 --> 00:02:33,471
 All of it shapes what the agent does, so all of it is data, and gets what any data gets.
 
 23
-00:02:34,640 --> 00:02:35,535
+00:02:35,371 --> 00:02:36,266
 Who owns it?
 
 24
-00:02:36,435 --> 00:02:38,421
+00:02:37,166 --> 00:02:39,152
 Who may read it, and who may change it?
 
 25
-00:02:39,321 --> 00:02:41,688
+00:02:40,052 --> 00:02:42,419
 Who reviews a change before agents use it?
 
 26
-00:02:42,588 --> 00:02:43,892
+00:02:43,319 --> 00:02:44,623
 How long is it kept?
 
 27
-00:02:44,792 --> 00:02:47,923
+00:02:45,523 --> 00:02:48,654
 And when it's deleted, is it gone from everywhere it's kept?
 
 28
-00:02:50,023 --> 00:02:53,182
+00:02:50,754 --> 00:02:53,913
 A note in one person's chat answers none of them well.
 
 29
-00:02:54,682 --> 00:02:57,033
+00:02:55,413 --> 00:02:57,764
 The team's context answers all five.
 
 30
-00:02:58,533 --> 00:03:04,249
+00:02:59,264 --> 00:03:04,980
 Memory answers four: no one reviews each line before agents use it. So it comes second.
 
 31
-00:03:08,549 --> 00:03:17,563
+00:03:09,280 --> 00:03:18,294
 The team's context lives in its repository, on GitHub: the page for agents, the skills, dbt's descriptions and the contracts.
 
 32
-00:03:19,063 --> 00:03:24,093
+00:03:19,794 --> 00:03:24,824
 Every file has its reviewers, in a list the project writes from its own metadata.
 
 33
-00:03:25,593 --> 00:03:32,794
+00:03:26,324 --> 00:03:33,525
 A change is a pull request: the data team reviews it, and a change to production needs a second person's approval.
 
 34
-00:03:34,294 --> 00:03:37,371
+00:03:35,025 --> 00:03:38,102
 Agents may propose a change. They never approve one.
 
 35
-00:03:38,671 --> 00:03:41,466
+00:03:39,402 --> 00:03:42,197
 And the history keeps who changed what, when, and why.
 
 36
-00:03:42,766 --> 00:03:47,733
+00:03:43,497 --> 00:03:48,464
 Its definitions come from the business glossary, kept by their owners on Databricks.
 
 37
-00:03:49,033 --> 00:03:52,813
+00:03:49,764 --> 00:03:53,544
 A skill copies each one into the project, with where it came from.
 
 38
-00:03:54,313 --> 00:03:57,960
+00:03:55,044 --> 00:03:58,691
 From there, it goes one way to where agents read it on Databricks.
 
 39
-00:03:59,460 --> 00:04:05,646
+00:04:00,191 --> 00:04:06,377
 dbt writes the descriptions into Unity Catalog, as comments on each table and column.
 
 40
-00:04:06,946 --> 00:04:08,711
+00:04:07,677 --> 00:04:09,442
 Skills go to Unity Gateway.
 
 41
-00:04:10,211 --> 00:04:16,765
+00:04:10,942 --> 00:04:17,496
 Each is a Unity Catalog object, with an owner, permissions, and a record of who read or changed it.
 
 42
-00:04:17,465 --> 00:04:22,447
+00:04:18,196 --> 00:04:23,178
 Nobody edits context on the platform. A change starts in the repository.
 
 43
-00:04:25,747 --> 00:04:28,624
+00:04:26,478 --> 00:04:29,355
 Memory is different: agents write it themselves.
 
 44
-00:04:30,124 --> 00:04:36,377
+00:04:30,855 --> 00:04:37,108
 On Databricks, sessions and lasting memory are kept in stores in Lakebase, the platform's database.
 
 45
-00:04:38,277 --> 00:04:44,694
+00:04:39,008 --> 00:04:45,425
 A step that runs once a day reads the sessions, and keeps what seems worth keeping, without asking anyone.
 
 46
-00:04:46,594 --> 00:04:53,445
+00:04:47,325 --> 00:04:54,176
 That's how the campus line lost its words: the step merged it with other lines about counting units, as it's built to.
 
 47
-00:04:55,745 --> 00:05:02,603
+00:04:56,476 --> 00:05:03,334
 And a store is one room: whoever may write to it may change any entry, and nothing records what an entry said before.
 
 48
-00:05:04,903 --> 00:05:08,063
+00:05:05,634 --> 00:05:08,794
 Approving every line by hand works for a few lessons.
 
 49
-00:05:09,363 --> 00:05:14,061
+00:05:10,094 --> 00:05:14,792
 But the step keeps hundreds a week: more than anyone can read, or keep up to date.
 
 50
-00:05:15,961 --> 00:05:20,801
+00:05:16,692 --> 00:05:21,532
 So the platform keeps the memory, and the team governs what answers must rest on.
 
 51
-00:05:22,301 --> 00:05:26,920
+00:05:23,032 --> 00:05:27,651
 Agents read the definitions and the data rules first, and memory second.
 
 52
-00:05:28,420 --> 00:05:34,200
+00:05:29,151 --> 00:05:34,931
 When a line disagrees with a definition, the agent follows the definition, and flags the line.
 
 53
-00:05:36,100 --> 00:05:43,064
+00:05:36,831 --> 00:05:43,795
 Yusuf, in data governance, owns the memory as a whole: who may read and write each store, and how long it's kept.
 
 54
-00:05:44,764 --> 00:05:48,312
+00:05:45,495 --> 00:05:49,043
 Each flagged line goes to him, and he deletes it if it's wrong.
 
 55
-00:05:49,812 --> 00:05:54,896
+00:05:50,543 --> 00:05:55,627
 Every agent may read the team's store, and none may change it: only the step writes there.
 
 56
-00:05:58,996 --> 00:06:01,320
+00:05:59,727 --> 00:06:02,051
 Keeping and deleting are decisions too.
 
 57
-00:06:03,220 --> 00:06:07,498
+00:06:03,951 --> 00:06:08,229
 The team keeps sessions for thirty days; then a scheduled job deletes them.
 
 58
-00:06:09,598 --> 00:06:15,616
+00:06:10,329 --> 00:06:16,347
 Deleting has traps. When the campus line was found, the first thought was to delete the chat it came from.
 
 59
-00:06:17,716 --> 00:06:23,535
+00:06:18,447 --> 00:06:24,266
 That deletes nothing of it: deleting a session, the docs say, doesn't delete the memory kept from it.
 
 60
-00:06:25,835 --> 00:06:29,547
+00:06:26,566 --> 00:06:30,278
 And the sync that copies skills to the platform never deletes one.
 
 61
-00:06:31,847 --> 00:06:39,603
+00:06:32,578 --> 00:06:40,334
 So the team deletes where a thing is kept: the line, in the team's store, and a skill on the platform as well as in the repository.
 
 62
-00:06:41,903 --> 00:06:48,402
+00:06:42,634 --> 00:06:49,133
 Yusuf records what he deleted, and why, in the repository. No agent will read the line again.
 
 63
-00:06:52,702 --> 00:06:54,913
+00:06:53,433 --> 00:06:55,644
 Back in Planning, Lucía asks again.
 
 64
-00:06:56,213 --> 00:07:05,132
+00:06:56,944 --> 00:07:05,863
 Her agent lists all 1,236 units, with its evidence: the unit offerings it read, and the definition it followed.
 
 65
-00:07:06,632 --> 00:07:10,820
+00:07:07,363 --> 00:07:11,551
 The library buys e-books for every unit, online or on campus.
 
 66
-00:07:12,120 --> 00:07:17,900
+00:07:12,851 --> 00:07:18,631
 Every agent, and every newcomer, now starts from the same definitions, with memory to help.
 
 67
-00:07:19,200 --> 00:07:24,080
+00:07:19,931 --> 00:07:24,811
 That's where this series began: what an agent reads. Nine films, nine lessons.
 
 68
-00:07:25,780 --> 00:07:28,965
+00:07:26,511 --> 00:07:29,696
 Write it down once, and people and agents both use it.
 
 69
-00:07:29,665 --> 00:07:31,958
+00:07:30,396 --> 00:07:32,689
 Solve it once, write it down, reuse it.
 
 70
-00:07:32,658 --> 00:07:36,116
+00:07:33,389 --> 00:07:36,847
 Read-only by default. Write only drafts, somewhere safe.
 
 71
-00:07:36,816 --> 00:07:39,971
+00:07:37,547 --> 00:07:40,702
 Let the agent learn from the team, not from one person.
 
 72
-00:07:40,671 --> 00:07:43,232
+00:07:41,402 --> 00:07:43,963
 Decide how you'll check before the agent starts.
 
 73
-00:07:43,932 --> 00:07:47,095
+00:07:44,663 --> 00:07:47,826
 How it goes wrong: expect these, and design for them.
 
 74
-00:07:47,795 --> 00:07:52,638
+00:07:48,526 --> 00:07:53,369
 The platform gives agents the same data and tools people use, in one place.
 
 75
-00:07:53,338 --> 00:07:58,482
+00:07:54,069 --> 00:07:59,213
 One set of rules for people and agents, enforced where the data and the models live.
 
 76
-00:07:59,182 --> 00:08:02,559
+00:07:59,913 --> 00:08:03,290
 Govern what agents must get right. Memory comes second.
 
 77
-00:08:04,059 --> 00:08:11,108
+00:08:04,790 --> 00:08:11,839
 This series is one part of a longer road: from an agent that helps one person, to one that works beside the team.
 
 78
-00:08:12,608 --> 00:08:14,547
+00:08:13,339 --> 00:08:15,278
 Next: from helper to colleague.

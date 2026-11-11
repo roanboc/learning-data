@@ -32,7 +32,7 @@ scene("harvests",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
     prog:wAt(sc,"place","programme"),team:c.team,agr:wAt(sc,"team","agronomists"),bor:wAt(sc,"team","Norman"),
     stems:c.rust-0.4,fungus:wAt(sc,"rust","fungus"),spots:wAt(sc,"rust","spots"),weaken:wAt(sc,"shrivels","weaken"),shriv:wAt(sc,"shrivels","shrivels"),
     whole:wAt(sc,"shrivels","whole")-0.3,lost:wAt(sc,"years","Farmers"),buy:wAt(sc,"years","Mexico had")-0.3,abroad:wAt(sc,"years","abroad"),
-    sheet:c.slow-0.4,bred:wAt(sc,"slow","bred"),gens:c.gens,waiting:c.change,something:wAt(sc,"change","Something"),
+    sheet:c.slow-0.4,bred:wAt(sc,"slow","bred"),gens:c.gens,waiting:c.change,something:wAt(sc,"change","The breeding"),
     map2:c.two-0.4,twoGen:wAt(sc,"two","two generations"),yaqui:wAt(sc,"winter","Yah-kee"),high:wAt(sc,"summer","highlands"),away:wAt(sc,"summer","over a thousand"),
     other:wAt(sc,"carried","other field"),sowed:wAt(sc,"carried","sowed"),
     best0:c.best-0.4,looked:wAt(sc,"best","looked"),kept:wAt(sc,"best","kept"),

@@ -27,8 +27,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que la universidad no pudo responder del todo. Y si uno de los nueve estaba mal, nadie sabía a quién preguntar ni qué más revisar.",
 "The helper could also do whatever Jun could, far more than a ticket needs. And to stop it, they'd have had to stop Jun.":
 "Además, el ayudante podía hacer todo lo que Jun podía, mucho más de lo que pide un encargo. Y para detenerlo, había que detener a Jun.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The next agent couldn't work as Jun's shadow.":
+"El siguiente agente no podía trabajar como la sombra de Jun.",
 "So before its first ticket, the planning agent got a place on the university's map: a role, an owner, and only the rights its work needs.":
 "Antes de su primer encargo, el agente tuvo un lugar en el mapa de la universidad: un rol, una dueña y solo los permisos que su trabajo pide.",
 "And Sam Okafor, who runs the platform, wrote that place into every tool, under the agent's own name: Databricks, GitHub and dbt.":

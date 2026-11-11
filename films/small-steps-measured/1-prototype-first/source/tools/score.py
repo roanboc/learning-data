@@ -226,7 +226,7 @@ chord((Eb3, Bb3, Eb4, G4), ow('mayor', 'given', -0.1), 0.55, step=0.16, ring=1.8
 card(ow('fear', 'feared', -0.2), 0.004, px(1410))
 chord((C3, Eb4, G4), ow('fear', 'customers', -0.1), 0.5, step=0.18, ring=1.4)
 figure((G4, Eb4, C4), ow('fear', 'fall', -0.1), 0.45, 0.3, 0.6, 1.2, until=oc('change', -0.3))
-card(ow('change', 'plan', -0.2), 0.004, px(1410))
+card(ow('change', 'plans', -0.2), 0.004, px(1410))
 tap(ow('change', 'show', -0.2), 0.0035, px(1410))
 mark(1, ow('real', 'real', 0.0), 0.6, low=Eb2)
 stones(oc('real', 0.6), 4, 0.7, 0.003, px(1500), 0.12)

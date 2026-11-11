@@ -416,7 +416,7 @@ const NARR={
  {"id":"plan","gap":0.8,"text":"One plan was to widen the streets, knocking down buildings from the turn of the century."},
  {"id":"mayor","gap":0.8,"text":"The young mayor, Jaime Lerner, an architect, wanted the street given back to people on foot."},
  {"id":"fear","gap":0.8,"text":"The shopkeepers feared the opposite: without cars, their customers would stay away, and their sales would fall."},
- {"id":"change","gap":0.8,"text":"Something had to change, but no plan on paper could show them what the street would be like."},
+ {"id":"change","gap":0.8,"text":"Arguing over plans on paper couldn't show anyone what the street would be like."},
  {"id":"real","gap":0.8,"text":"So the mayor's team built the real thing, fast."},
  {"id":"saturday","gap":0.8,"text":"On Saturday morning, grey and damp, the street was handed to the people, without ceremony."},
  {"id":"weekend","gap":0.8,"text":"Over the weekend, crews took up the road, laid stones, and put in streetlights and kiosks."},
@@ -490,7 +490,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"street/when": 6.705, "street/crews": 7.118, "street/cars": 4.886, "street/plan": 4.883, "street/mayor": 5.372, "street/fear": 6.395, "street/change": 4.808, "street/real": 2.463, "street/saturday": 5.106, "street/weekend": 5.279, "street/flowers": 2.181, "street/drivers": 2.952, "street/painting": 3.984, "street/sales": 4.172, "street/more": 1.955, "street/today": 4.58, "street/paper": 5.865, "street/data": 2.032, "street/way": 5.573, "question/ask": 6.483, "question/email": 3.928, "question/behind": 5.739, "question/cost": 2.876, "question/waited": 6.568, "question/newway": 6.241, "question/page": 4.901, "question/rooms": 4.7, "question/data": 6.244, "question/governed": 4.062, "real/manifesto": 7.418, "real/first": 5.312, "real/draft": 4.992, "real/wrong": 1.988, "real/caught": 6.22, "real/glossary": 5.923, "real/review": 2.72, "real/fast": 5.75, "real/friday": 5.014, "real/heat": 3.042, "real/mind": 4.958, "real/answer": 5.226, "rounds/rounds": 6.34, "rounds/scrum": 4.79, "rounds/used": 6.867, "rounds/waited": 4.32, "rounds/took": 3.311, "rounds/back": 4.576, "rounds/showed": 1.882, "rounds/booked": 6.375, "rounds/empty": 5.7, "rounds/right": 5.657, "rounds/next": 7.013, "enough/third": 6.489, "enough/move": 5.205, "enough/met": 3.247, "enough/stop": 4.176, "enough/keep": 4.797, "enough/owns": 4.236, "enough/council": 3.543, "enough/decided": 4.205, "monday/back": 4.986, "monday/helena": 6.325, "monday/define": 4.677, "monday/data": 2.515, "monday/ask": 2.503, "monday/stop": 5.933, "monday/take": 3.471};
+const VODUR={"street/when": 6.705, "street/crews": 7.118, "street/cars": 4.886, "street/plan": 4.883, "street/mayor": 5.372, "street/fear": 6.395, "street/change": 4.254, "street/real": 2.463, "street/saturday": 5.106, "street/weekend": 5.279, "street/flowers": 2.181, "street/drivers": 2.952, "street/painting": 3.984, "street/sales": 4.172, "street/more": 1.955, "street/today": 4.58, "street/paper": 5.865, "street/data": 2.032, "street/way": 5.573, "question/ask": 6.483, "question/email": 3.928, "question/behind": 5.739, "question/cost": 2.876, "question/waited": 6.568, "question/newway": 6.241, "question/page": 4.901, "question/rooms": 4.7, "question/data": 6.244, "question/governed": 4.062, "real/manifesto": 7.418, "real/first": 5.312, "real/draft": 4.992, "real/wrong": 1.988, "real/caught": 6.22, "real/glossary": 5.923, "real/review": 2.72, "real/fast": 5.75, "real/friday": 5.014, "real/heat": 3.042, "real/mind": 4.958, "real/answer": 5.226, "rounds/rounds": 6.34, "rounds/scrum": 4.79, "rounds/used": 6.867, "rounds/waited": 4.32, "rounds/took": 3.311, "rounds/back": 4.576, "rounds/showed": 1.882, "rounds/booked": 6.375, "rounds/empty": 5.7, "rounds/right": 5.657, "rounds/next": 7.013, "enough/third": 6.489, "enough/move": 5.205, "enough/met": 3.247, "enough/stop": 4.176, "enough/keep": 4.797, "enough/owns": 4.236, "enough/council": 3.543, "enough/decided": 4.205, "monday/back": 4.986, "monday/helena": 6.325, "monday/define": 4.677, "monday/data": 2.515, "monday/ask": 2.503, "monday/stop": 5.933, "monday/take": 3.471};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2392,8 +2392,8 @@ scene("street",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       lp_person(x,PF_PEOPLE.shopkeeper,700,640,1.0,{t:tt,light:{light:"day"}});
       pf_sheet(x,tt,w("fear","feared",-0.2),1060,170,700,{kick:"The shopkeepers' fear",title:"No cars, no customers",lines:["Their sales would fall"]},
         {col:LP.amber,light:null,pin:false,out:c.change-0.5,u:ag_in(tt,w("fear","sales",-0.1),0.5)});
-      pf_tag(x,tt,w("change","Something",-0.1),null,1410,140,"Something had to change",{align:"center",col:LP.amber});
-      const p0=w("change","plan",-0.2);if(tt>=p0)pf_sketch(x,1060,210,700,{a:ag_in(tt,p0,0.35),k:tt-p0});
+      pf_tag(x,tt,w("change","Arguing",-0.1),null,1410,140,"Plans on paper",{align:"center",col:LP.amber});
+      const p0=w("change","plans",-0.2);if(tt>=p0)pf_sketch(x,1060,210,700,{a:ag_in(tt,p0,0.35),k:tt-p0});
       pf_tag(x,tt,w("change","show",-0.2),null,1410,700,"It can't show what the street would be like",{align:"center",col:LP.amber});}},
     // Friday night: the real thing, built fast; the crews at work, the first stones laid from the end of the street
     {at:c.real-0.3,place:"pfDusk",dis:1.4,keys:[[c.real-0.3,960,540,1.0]],draw:(x,tt)=>{

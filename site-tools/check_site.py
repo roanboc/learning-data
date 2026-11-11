@@ -210,9 +210,6 @@ STOCK_TURN = re.compile(r"\bsomething\s+(?:had|has|have|must|needs?|needed)\s+to
                         r"|\balgo\s+(?:tiene|ten[ií]a|tendr[ií]a|deb[ei]a?|necesitaba)\s+(?:que\s+)?cambiar\b", re.I)
 STOCK_BEFORE = {"agents-at-work-on-data": (1, 2, 3, 4, 6), "data-governance": (1, 6, 7), "governance-in-practice": (2, 3, 4, 5, 6),
                 "governance-on-the-map": (2, 3), "what-an-agent-is": (1, 2, 3, 4, 5, 8, 9, 10)}
-# films whose own rework threads take their new line (11 November 2026); each comes off this list when its rework merges
-STOCK_PENDING = {"data-that-moves": (2,), "data-as-software": (1,), "from-tables-to-decisions": (2,), "documents-as-data": (1,),
-                 "the-new-skills": (1,)}
 
 # a feature's release status changes, so no film says it (AGENTS.md, Sources and names on the day; the author, 5 November 2026):
 # "preview", "beta", "generally available" (or GA), in English or in Spanish. The script's sources keep it, with its date.
@@ -1059,7 +1056,7 @@ def main():
     for narr in sorted(ROOT.glob("films/*/*/source/src/narration.js")):
         film = narr.parents[2]
         m = re.match(r"(\d+)-", film.name)
-        if m and (int(m.group(1)) in STOCK_BEFORE.get(film.parent.name, ()) or int(m.group(1)) in STOCK_PENDING.get(film.parent.name, ())):
+        if m and (int(m.group(1)) in STOCK_BEFORE.get(film.parent.name, ())):
             continue
         films += 1
         for f in [narr] + sorted((film / "source/src/i18n").glob("*/captions.js")):

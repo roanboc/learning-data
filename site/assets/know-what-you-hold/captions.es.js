@@ -15,8 +15,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "¿Treinta y tres gramos es mucho?",
 "And about one child in four starting school is obese, at risk of diabetes and heart disease later.":
 "Y cerca de uno de cada cuatro niños que empiezan la escuela es obeso, en riesgo de diabetes y de enfermedades del corazón.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Parents need a label they can read at a glance.":
+"Los padres necesitan una etiqueta que puedan leer de un vistazo.",
 "That year, Congress passes a law proposed by five senators, from left, centre and right.":
 "Ese año, el Congreso aprueba una ley que propusieron cinco senadores, de izquierda, centro y derecha.",
 "The Ministry of Health sets limits for sugars, sodium, saturated fats and calories.":

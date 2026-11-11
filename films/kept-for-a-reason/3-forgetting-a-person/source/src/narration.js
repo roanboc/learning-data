@@ -9,7 +9,7 @@ const NARR={
  {"id":"true","text":"Every word is true. But he settled the matter years ago."},
  {"id":"anyone","text":"Anyone who looks him up, a client or a neighbour, reads of his debts as if they were news."},
  {"id":"asks","text":"He asks the newspaper to remove it. It says no: it printed the notice lawfully, as it was ordered to."},
- {"id":"change","text":"Something has to change."},
+ {"id":"change","text":"He wants the old notice to stop following him, and nobody will let it."},
  {"id":"agency","text":"In 2010, he complains to Spain's data protection agency, the public body that upholds its privacy law.","say":"In twenty ten, he complains to Spain's data protection agency, the public body that upholds its privacy law."},
  {"id":"links","text":"The agency lets the newspaper keep its page, but tells the search engine to remove the links."},
  {"id":"court","text":"The search engine goes to court, and Spain's court asks the European Union's Court of Justice."},

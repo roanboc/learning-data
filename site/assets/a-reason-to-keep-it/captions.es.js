@@ -25,8 +25,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Podría costarles el trabajo, la casa o el seguro médico.",
 "So people with the virus don't know it, and can't protect the people they love.":
 "Así, personas con el virus no lo saben, y no pueden proteger a quienes aman.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"People have to be able to get tested without fearing for their name.":
+"La gente tiene que poder hacerse la prueba sin temer por su nombre.",
 "In December 1986, Oregon's health officials let people choose: their name, or a number.":
 "En diciembre de 1986, las autoridades de salud de Oregón dejan elegir: su nombre, o un número.",
 "A number does all the test needs: it matches the sample to the person, so each can come back for their result.":

@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que la tala sigue: desaparecen especies, y las comunidades que viven de esos bosques reciben un duro golpe.",
 "In 1992, at the Earth Summit in Rio, governments fail to agree to stop it.":
 "En 1992, en la Cumbre de la Tierra en Río, los gobiernos no logran acordar detenerla.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Buyers need a way to tell the two woods apart.":
+"Los compradores necesitan una forma de distinguir las dos maderas.",
 "In 1993, 130 people from 26 countries meet in Toronto: forest and human-rights groups, timber traders, foresters.":
 "En 1993, 130 personas de 26 países se reúnen en Toronto: grupos forestales y de derechos humanos, madereros, silvicultores.",
 "They found the Forest Stewardship Council.":

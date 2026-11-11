@@ -185,7 +185,7 @@ mark(B3, Q('sun', 'just like', 0.0), 0.7, px(1300))
 for i in range(3):
     binned(Q('threw', 'threw away', 0.2 + i * 0.55 + 0.75), 0.013, px(1060))
 strum((G3, B3, E4), Q('child', 'family', -0.1), 0.62, px(1060), step=0.045)
-lyre(D4, Q('change', 'see whether', 0.0), 0.55, px(560))
+lyre(D4, Q('change', 'whether the cold', 0.0), 0.55, px(560))
 card(Q('asked', 'World Health', -0.6), 0.009, px(1300))
 card(Q('path', 'PATH', -0.2), 0.009, px(1300))
 for k_, m_ in enumerate((G3, B3, D4)):

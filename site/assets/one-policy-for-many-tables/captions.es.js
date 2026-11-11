@@ -24,8 +24,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si adivinaba mal, podía echar agua sobre una sustancia que, mojada, suelta un gas venenoso,",
 "with families still in the houses nearby.":
 "con familias aún en las casas cercanas.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Crews needed one book that covered every chemical, before they had to guess.":
+"Los equipos necesitaban un libro que cubriera cada sustancia, antes de tener que adivinar.",
 "In 1980, the US Department of Transportation changed the book.":
 "En 1980, el Departamento de Transporte de EE. UU. cambió la guía.",
 "Chemicals that behave alike in a fire or a spill share one guide, written once.":

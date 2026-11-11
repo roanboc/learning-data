@@ -16,7 +16,7 @@ const NARR={
  {"id":"holiday","gap":0.8,"text":"The judge refuses, for one reason only: the courts are on their summer holiday."},
  {"id":"august","gap":0.8,"text":"In August, Jenkes is still inside, writing of his great loss, and the harm to his health."},
  {"id":"months","gap":0.8,"text":"Without that order, a person could be held for months, with no judge to hear why."},
- {"id":"change","gap":0.8,"text":"Something had to change."}]},
+ {"id":"change","gap":0.8,"text":"A prisoner needed a right to a judge that no holiday could close."}]},
 "days":{"name":"Three days","lead":1.4,"tail":0.8,"vo":[
  {"id":"act","gap":0.8,"text":"In 1679, Parliament passes the Habeas Corpus Act.","say":"In sixteen seventy-nine, Parliament passes the Habeas Corpus Act."},
  {"id":"three","gap":0.8,"text":"Once the order is served, the keeper has three days to bring the prisoner before a judge, and certify the true causes of holding him."},

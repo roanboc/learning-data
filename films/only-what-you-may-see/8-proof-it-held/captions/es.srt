@@ -31,305 +31,305 @@ Así que los trabajadores tiraban los viales de los que no podían responder.
 O un niño recibía una vacuna que ya no servía, y la familia creía que estaba protegido.
 
 9
-00:00:45,294 --> 00:00:48,967
-Algo tenía que cambiar: necesitaban ver si el frío se había mantenido.
+00:00:45,294 --> 00:00:49,658
+Los trabajadores de salud necesitaban ver, en el propio vial, si el frío se había mantenido.
 
 10
-00:00:51,067 --> 00:00:55,852
+00:00:51,758 --> 00:00:56,543
 En 1979, la Organización Mundial de la Salud pidió una forma de mostrarlo.
 
 11
-00:00:57,152 --> 00:01:02,840
+00:00:57,843 --> 00:01:03,531
 PATH, una organización de salud sin fines de lucro, trabajó años con una empresa en una: el monitor de vial de vacuna.
 
 12
-00:01:04,140 --> 00:01:07,626
+00:01:04,831 --> 00:01:08,317
 Es un cuadrado dentro de un círculo, impreso en la etiqueta de cada vial.
 
 13
-00:01:08,926 --> 00:01:13,141
+00:01:09,617 --> 00:01:13,832
 El calor oscurece el cuadrado, poco a poco, y nunca vuelve a aclararse.
 
 14
-00:01:15,241 --> 00:01:17,984
+00:01:15,932 --> 00:01:18,675
 Más claro que el círculo, la vacuna se puede usar.
 
 15
-00:01:19,284 --> 00:01:22,747
+00:01:19,975 --> 00:01:23,438
 Tan oscuro como el círculo, o más, el vial se tira.
 
 16
-00:01:24,847 --> 00:01:30,774
+00:01:25,538 --> 00:01:31,465
 En 1996, los primeros monitores llegaron a la vacuna contra la polio, por unos centavos por vial.
 
 17
-00:01:32,074 --> 00:01:36,366
+00:01:32,765 --> 00:01:37,057
 Ahora, en el momento de usarla, un trabajador de salud podía ver qué viales seguían buenos.
 
 18
-00:01:37,666 --> 00:01:46,439
+00:01:38,357 --> 00:01:47,130
 UNICEF y la Organización Mundial de la Salud estiman que ahorra más de 14 millones de dólares al año, en vacuna buena que ya no se tira.
 
 19
-00:01:48,539 --> 00:01:51,148
+00:01:49,230 --> 00:01:51,839
 Y un niño recibía una vacuna que aún lo protege.
 
 20
-00:01:53,248 --> 00:01:55,594
+00:01:53,939 --> 00:01:56,285
 Proteger los datos tiene el mismo problema.
 
 21
-00:01:56,894 --> 00:02:03,457
+00:01:57,585 --> 00:02:04,148
 Una protección que falló se ve igual que una que se cumplió, y un nombre visto por quien no debía no deja marca.
 
 22
-00:02:05,557 --> 00:02:11,729
+00:02:06,248 --> 00:02:12,420
 Esta película le pone el monitor al estudio de Anil: la prueba, cuando alguien la pida, de que cada protección se cumplió.
 
 23
-00:02:13,029 --> 00:02:17,796
+00:02:13,720 --> 00:02:18,487
 Así la universidad puede mostrarle a cualquier estudiante quién podía ver sus datos, y quién los vio.
 
 24
-00:02:24,896 --> 00:02:34,134
+00:02:25,587 --> 00:02:34,825
 Hace tres meses, en Primero, un acuerdo, Mei Tanaka firmó un acuerdo para el estudio de Anil Kurian sobre 2,614 estudiantes.
 
 25
-00:02:34,834 --> 00:02:38,617
+00:02:35,525 --> 00:02:39,308
 Desde entonces se construyó cada protección, de las clases a las copias.
 
 26
-00:02:39,317 --> 00:02:44,857
+00:02:40,008 --> 00:02:45,548
 Hoy, martes 12 de enero de 2027, es la primera revisión del estudio.
 
 27
-00:02:45,957 --> 00:02:51,788
+00:02:46,648 --> 00:02:52,479
 Yusuf Demir, que guarda los acuerdos, le hace una pregunta a cada línea: ¿podemos demostrar que se cumplió?
 
 28
-00:02:53,088 --> 00:02:55,389
+00:02:53,779 --> 00:02:56,080
 Quién: solo el grupo del estudio puede leerlo.
 
 29
-00:02:56,089 --> 00:02:59,547
+00:02:56,780 --> 00:03:00,238
 Nunca: nada que nombre a un estudiante, nada sobre su salud.
 
 30
-00:03:00,247 --> 00:03:02,449
+00:03:00,938 --> 00:03:03,140
 Dónde: solo en el espacio propio del estudio.
 
 31
-00:03:03,149 --> 00:03:06,073
+00:03:03,840 --> 00:03:06,764
 Termina: 30 de junio de 2027.
 
 32
-00:03:07,373 --> 00:03:12,137
+00:03:08,064 --> 00:03:12,828
 Cuatro promesas, cuatro pruebas, cada una leída de un registro, no de la memoria de nadie.
 
 33
-00:03:14,637 --> 00:03:16,895
+00:03:15,328 --> 00:03:17,586
 Primero: ¿quién podía leer las tablas del estudio?
 
 34
-00:03:18,195 --> 00:03:23,172
+00:03:18,886 --> 00:03:23,863
 En la plataforma lo responden los permisos: cada uno hecho del contrato, para el grupo del estudio.
 
 35
-00:03:24,472 --> 00:03:27,663
+00:03:25,163 --> 00:03:28,354
 Ningún permiso nombra a una persona, y ninguno se hizo a mano.
 
 36
-00:03:29,963 --> 00:03:35,724
+00:03:30,654 --> 00:03:36,415
 Así que la pregunta es quién está en el grupo, y eso vive en el directorio, Microsoft Entra ID.
 
 37
-00:03:37,024 --> 00:03:43,342
+00:03:37,715 --> 00:03:44,033
 Cada tres meses, su revisión de acceso le pregunta a Mei, que firmó el acuerdo, si cada miembro aún lo necesita.
 
 38
-00:03:44,642 --> 00:03:48,001
+00:03:45,333 --> 00:03:48,692
 Una revisión sin respuesta durante una semana quita el acceso.
 
 39
-00:03:50,301 --> 00:03:56,727
+00:03:50,992 --> 00:03:57,418
 Hay dos personas en el grupo: Anil, y Elena Lindgren, asistente de investigación que entró en noviembre.
 
 40
-00:03:58,027 --> 00:04:00,821
+00:03:58,718 --> 00:04:01,512
 En diciembre, Elena pasó a otro proyecto.
 
 41
-00:04:02,121 --> 00:04:06,561
+00:04:02,812 --> 00:04:07,252
 Sigue trabajando en la universidad, así que su cuenta funciona, y nada la sacó.
 
 42
-00:04:08,861 --> 00:04:15,075
+00:04:09,552 --> 00:04:15,766
 Mei deja a Anil y quita a Elena; cuando la revisión se cierra, el directorio la saca por sí solo.
 
 43
-00:04:17,375 --> 00:04:23,139
+00:04:18,066 --> 00:04:23,830
 Ahora Anil le avisa a Yusuf el día que alguien deja el estudio: la revisión es la red, no el plan.
 
 44
-00:04:25,439 --> 00:04:32,833
+00:04:26,130 --> 00:04:33,524
 Un agente del estudio también estaría en la lista, y su dueño respondería por él, como muestra Agentes de IA en el trabajo con datos.
 
 45
-00:04:37,133 --> 00:04:41,715
+00:04:37,824 --> 00:04:42,406
 Segundo: ¿cada columna personal tiene una clase, y cada clase una política?
 
 46
-00:04:42,815 --> 00:04:46,502
+00:04:43,506 --> 00:04:47,193
 Como un monitor en cada vial, cada columna necesita su clase.
 
 47
-00:04:47,602 --> 00:04:51,589
+00:04:48,293 --> 00:04:52,280
 Cada mañana a las siete, una consulta en la plataforma busca dos huecos.
 
 48
-00:04:53,489 --> 00:04:58,602
+00:04:54,180 --> 00:04:59,293
 Una columna que la clasificación de la plataforma halla personal, sin clase de su dueña.
 
 49
-00:04:59,702 --> 00:05:03,262
+00:05:00,393 --> 00:05:03,953
 Y una clase que hay que ocultar, sin una política que la oculte.
 
 50
-00:05:04,362 --> 00:05:07,373
+00:05:05,053 --> 00:05:08,064
 Si encuentra uno, le llega una alerta a Yusuf y a Sam.
 
 51
-00:05:09,273 --> 00:05:12,110
+00:05:09,964 --> 00:05:12,801
 El viernes 8 de enero, encontró uno.
 
 52
-00:05:14,010 --> 00:05:20,416
+00:05:14,701 --> 00:05:21,107
 El equipo de apoyo en exámenes había empezado a guardar el celular de cada estudiante, para enviarle por mensaje sus adaptaciones.
 
 53
-00:05:21,916 --> 00:05:25,236
+00:05:22,607 --> 00:05:25,927
 La carga de la noche lo trajo a la tabla de apoyos como una columna nueva.
 
 54
-00:05:26,336 --> 00:05:31,137
+00:05:27,027 --> 00:05:31,828
 El proyecto de datos frena una columna nueva sin clase, pero esta tabla no la construye él.
 
 55
-00:05:33,037 --> 00:05:37,009
+00:05:33,728 --> 00:05:37,700
 Un día después, la clasificación de la plataforma vio que era un número de teléfono.
 
 56
-00:05:38,309 --> 00:05:42,713
+00:05:39,000 --> 00:05:43,404
 A las nueve y media, Mei le dio la clase directo: nombra a una persona por sí sola.
 
 57
-00:05:44,013 --> 00:05:47,909
+00:05:44,704 --> 00:05:48,600
 La política para directo la enmascara desde entonces, sin escribir ninguna regla nueva.
 
 58
-00:05:49,809 --> 00:05:52,965
+00:05:50,500 --> 00:05:53,656
 Pero durante treinta y una horas, la columna no tuvo clase.
 
 59
-00:05:54,865 --> 00:05:56,623
+00:05:55,556 --> 00:05:57,314
 ¿A dónde fue, y quién la leyó?
 
 60
-00:05:59,123 --> 00:06:04,780
+00:05:59,814 --> 00:06:05,471
 El linaje es el registro de la plataforma de lo que cada consulta leyó y lo que hizo, columna por columna.
 
 61
-00:06:06,080 --> 00:06:09,804
+00:06:06,771 --> 00:06:10,495
 La columna del celular no fue a ninguna parte: ninguna consulta hizo nada con ella.
 
 62
-00:06:11,904 --> 00:06:19,554
+00:06:12,595 --> 00:06:20,245
 Y las columnas protegidas del estudio: el número de estudiante le llega solo como el código, la fecha de nacimiento solo como el año.
 
 63
-00:06:20,854 --> 00:06:23,897
+00:06:21,545 --> 00:06:24,588
 Nombres, correos y apoyo en exámenes nunca le llegan.
 
 64
-00:06:25,997 --> 00:06:29,830
+00:06:26,688 --> 00:06:30,521
 Luego, ¿quién leyó? El registro de auditoría guarda quién leyó cada tabla, y cuándo.
 
 65
-00:06:31,130 --> 00:06:35,134
+00:06:31,821 --> 00:06:35,825
 En esas treinta y una horas, solo la carga de la noche leyó la tabla de apoyos.
 
 66
-00:06:37,234 --> 00:06:44,982
+00:06:37,925 --> 00:06:45,673
 Y en los tres meses, las tablas del estudio las leyeron Anil, y Elena hasta el 11 de diciembre. Nadie más.
 
 67
-00:06:47,082 --> 00:06:51,964
+00:06:47,773 --> 00:06:52,655
 Tras un terremoto en Yogyakarta, en Indonesia, no hubo luz durante días.
 
 68
-00:06:53,264 --> 00:06:59,383
+00:06:53,955 --> 00:07:00,074
 Los monitores mostraron que casi toda la vacuna seguía buena: 50,000 dosis que se habrían tirado.
 
 69
-00:07:01,483 --> 00:07:04,390
+00:07:02,174 --> 00:07:05,081
 La prueba encuentra el daño, y muestra dónde no lo hubo.
 
 70
-00:07:06,490 --> 00:07:10,115
+00:07:07,181 --> 00:07:10,806
 El hueco era real; los registros muestran que nadie vio un número que no debía.
 
 71
-00:07:12,615 --> 00:07:18,898
+00:07:13,306 --> 00:07:19,589
 Por último: el acuerdo termina el 30 de junio de 2027, y el acceso debe terminar con él.
 
 72
-00:07:19,998 --> 00:07:23,272
+00:07:20,689 --> 00:07:23,963
 El lugar de cada miembro en el grupo se dio hasta esa fecha.
 
 73
-00:07:24,372 --> 00:07:28,991
+00:07:25,063 --> 00:07:29,682
 Ese día, el directorio los saca, y los permisos hechos del contrato terminan.
 
 74
-00:07:30,691 --> 00:07:33,450
+00:07:31,382 --> 00:07:34,141
 Pero un final también es una promesa, hasta que se comprueba.
 
 75
-00:07:35,150 --> 00:07:42,387
+00:07:35,841 --> 00:07:43,078
 El 1 de julio, Yusuf comprueba: el grupo está vacío, ningún permiso nombra el acuerdo, y el espacio del estudio ya no está.
 
 76
-00:07:44,087 --> 00:07:45,356
+00:07:44,778 --> 00:07:46,047
 Solo quedan los totales.
 
 77
-00:07:47,056 --> 00:07:50,545
+00:07:47,747 --> 00:07:51,236
 Cada prueba se guarda con el acuerdo, en el registro de Yusuf.
 
 78
-00:07:54,845 --> 00:07:57,952
+00:07:55,536 --> 00:07:58,643
 El monitor del vial no mantiene fría la vacuna.
 
 79
-00:07:58,852 --> 00:08:01,686
+00:07:59,543 --> 00:08:02,377
 Muestra si el frío se mantuvo, en el momento de usarla.
 
 80
-00:08:03,186 --> 00:08:06,131
+00:08:03,877 --> 00:08:06,822
 Los registros del estudio tampoco protegen sus datos.
 
 81
-00:08:07,631 --> 00:08:10,843
+00:08:08,322 --> 00:08:11,534
 Muestran, cuando alguien lo pida, que la protección se cumplió:
 
 82
-00:08:11,243 --> 00:08:15,862
+00:08:11,934 --> 00:08:16,553
 quién podía leer, quién leyó, a dónde fue cada columna, y que todo terminó en su fecha.
 
 83
-00:08:17,362 --> 00:08:20,204
+00:08:18,053 --> 00:08:20,895
 Protección que no puedes demostrar es protección que solo esperas.
 
 84
-00:08:21,704 --> 00:08:27,217
+00:08:22,395 --> 00:08:27,908
 Después, Guardado por una razón: por qué se guardan los datos, por cuánto tiempo, y cómo se olvida a una persona.

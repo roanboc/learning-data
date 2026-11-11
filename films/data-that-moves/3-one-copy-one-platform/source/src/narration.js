@@ -7,7 +7,7 @@ const NARR={
  {"id":"kinds","gap":0.8,"text":"Between 800 and 1,000 kinds of coin change hands, many clipped, shaved at the edge for their silver, or worn thin.","say":"Between eight hundred and a thousand kinds of coin change hands, many clipped, shaved at the edge for their silver, or worn thin."},
  {"id":"weigh","gap":0.8,"text":"Every payment means weighing coins, and nobody knows what a bag of them is really worth."},
  {"id":"owed","gap":0.8,"text":"On average, coin there is worth about 9% less than good coin: a merchant owed a thousand guilders may get coin worth about nine hundred.","say":"On average, coin there is worth about nine per cent less than good coin: a merchant owed a thousand guilders may get coin worth about nine hundred."},
- {"id":"change","gap":0.8,"text":"Payments are slow, disputed and risky. Something had to change."},
+ {"id":"change","gap":0.8,"text":"Payments are slow, disputed and risky. Amsterdam's trade needs money everyone can trust."},
  {"id":"bank","gap":0.8,"text":"On the 31st of January 1609, the city opens an exchange bank, the Wisselbank, in its town hall.","say":"On the thirty-first of January, sixteen oh nine, the city opens an exchange bank, the Wisselbank, in its town hall."},
  {"id":"deposit","gap":0.8,"text":"Merchants bring their coin once. The bank weighs it, and writes its value in its ledger, on the merchant's own page."},
  {"id":"line","gap":0.8,"text":"From then on, a payment is a line moved from page to page, with no coin carried, and the ledger shows what each merchant holds."},

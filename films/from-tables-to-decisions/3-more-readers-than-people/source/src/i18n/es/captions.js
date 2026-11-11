@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un conductor extranjero puede pasar un aviso de curva peligrosa sin saber nunca qué decía.",
 "And on the road, a missed warning can end in a crash.":
 "Y en la ruta, un aviso que no se entiende puede terminar en un choque.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Signs have to speak to every driver, whatever their language.":
+"Las señales tienen que hablarle a cada conductor, sea cual sea su idioma.",
 "So, on the 8th of November, 31 countries sign a treaty: the Convention on Road Signs and Signals.":
 "Así, el 8 de noviembre, 31 países firman un tratado: la Convención sobre la Señalización Vial.",
 "It defines each sign once: by its shape, its colour and its symbol.":

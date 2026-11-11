@@ -13,7 +13,7 @@ const NARR={
  {"id":"may","gap":0.8,"text":"In July, it was kept as: For room bookings, count only units taught on campus. Right, for rooms."},
  {"id":"lost","gap":0.8,"text":"Since last week, it had lost the three words that made it right, and nobody had seen it change."},
  {"id":"glossary","gap":0.8,"text":"Yet the glossary already said what a unit offering is: a unit taught in a semester, on campus, online or both."},
- {"id":"still","gap":0.8,"text":"Nothing told the agent which comes first. Something had to change."},
+ {"id":"still","gap":0.8,"text":"Nothing told the agent which comes first: the glossary, or what it remembered."},
  {"id":"govern","gap":0.8,"text":"So the team set an order."},
  {"id":"governed","gap":0.8,"text":"First, what's governed: the glossary's definitions, decided by their owners, and the data rules, reviewed by the data team."},
  {"id":"second","gap":0.8,"text":"Second, memory: the platform keeps it, and nobody approves each line."},

@@ -47,221 +47,221 @@ Si planifica con la más baja, 27 proyectos se quedarían sin espacio de laborat
 Y una copia de la tabla de proyectos, con el nombre de cada investigador, está en una laptop.
 
 13
-00:01:15,414 --> 00:01:16,802
-Algo tenía que cambiar.
+00:01:15,414 --> 00:01:19,626
+Los agentes no podían seguir trabajando lejos de los datos, cada uno con su propia copia.
 
 14
-00:01:18,502 --> 00:01:26,162
+00:01:21,326 --> 00:01:28,986
 Entonces Sam, que administra la plataforma, y Jun, que construye el proyecto de datos, llevan los agentes a los datos, en Databricks.
 
 15
-00:01:27,262 --> 00:01:35,396
+00:01:30,086 --> 00:01:38,220
 Ahora cada agente lee las mismas tablas gobernadas, definiciones y herramientas que todos, y solo lo que su persona puede leer.
 
 16
-00:01:36,896 --> 00:01:43,680
+00:01:39,720 --> 00:01:46,504
 Una semana después, los tres responden 168, cada uno con su consulta, su tabla y su definición.
 
 17
-00:01:45,180 --> 00:01:50,368
+00:01:48,004 --> 00:01:53,192
 Anil lo comprueba en un minuto y planifica espacio para cada proyecto. Las copias se borran.
 
 18
-00:01:51,868 --> 00:01:57,845
+00:01:54,692 --> 00:02:00,669
 Cuando cada agente lee los mismos datos con las mismas herramientas, las respuestas coinciden, con su evidencia.
 
 19
-00:02:05,345 --> 00:02:13,264
+00:02:08,169 --> 00:02:16,088
 Databricks guarda los datos de la universidad, gobernados en Unity Catalog: sus tablas, sus definiciones y quién puede leer qué.
 
 20
-00:02:14,564 --> 00:02:18,498
+00:02:17,388 --> 00:02:21,322
 Las personas ya trabajan ahí, en sus editores, cuadernos y tableros.
 
 21
-00:02:19,598 --> 00:02:22,077
+00:02:22,422 --> 00:02:24,901
 Ahora también trabajan ahí agentes, de cuatro maneras.
 
 22
-00:02:23,177 --> 00:02:26,101
+00:02:26,001 --> 00:02:28,925
 Agentes que responden preguntas, sobre datos gobernados.
 
 23
-00:02:26,601 --> 00:02:29,101
+00:02:29,425 --> 00:02:31,925
 Servidores de herramientas, que cualquier agente puede usar.
 
 24
-00:02:29,601 --> 00:02:32,319
+00:02:32,425 --> 00:02:35,143
 Agentes que el equipo construye y prueba en la plataforma.
 
 25
-00:02:32,819 --> 00:02:37,242
+00:02:35,643 --> 00:02:40,066
 Y agentes que escriben código, para el proyecto dbt y los pipelines.
 
 26
-00:02:38,542 --> 00:02:43,466
+00:02:41,366 --> 00:02:46,290
 Cada uno lee los mismos datos, y usa las mismas herramientas, que las personas para las que trabaja.
 
 27
-00:02:46,966 --> 00:02:48,719
+00:02:49,790 --> 00:02:51,543
 Primero, los agentes que responden.
 
 28
-00:02:49,419 --> 00:02:55,185
+00:02:52,243 --> 00:02:58,009
 Genie One es el asistente de la plataforma para preguntas de negocio, y dice de dónde vienen sus palabras.
 
 29
-00:02:56,485 --> 00:03:01,870
+00:02:59,309 --> 00:03:04,694
 Para las preguntas que piden cuidado, el equipo de datos construye Genie Agents, cada uno para un tema.
 
 30
-00:03:02,970 --> 00:03:08,237
+00:03:05,794 --> 00:03:11,061
 Su agente Research projects lee la tabla gobernada de proyectos, y quién dirige cada uno.
 
 31
-00:03:08,937 --> 00:03:17,542
+00:03:11,761 --> 00:03:20,366
 Sus instrucciones son las del equipo: un proyecto está activo de su inicio a su fin, y cuenta una vez, en la facultad que lo dirige.
 
 32
-00:03:18,842 --> 00:03:26,487
+00:03:21,666 --> 00:03:29,311
 Sus pruebas, que Genie llama benchmarks, son las preguntas tras las tres respuestas de Salud, cada una con su respuesta correcta en SQL.
 
 33
-00:03:27,987 --> 00:03:33,648
+00:03:30,811 --> 00:03:36,472
 El equipo las corre después de cada cambio, así una respuesta incorrecta aparece antes de que alguien dependa de ella.
 
 34
-00:03:35,148 --> 00:03:38,897
+00:03:37,972 --> 00:03:41,721
 Y cada respuesta muestra su SQL, para que cualquiera pueda comprobar lo que leyó.
 
 35
-00:03:42,397 --> 00:03:45,669
+00:03:45,221 --> 00:03:48,493
 Segundo, los servidores de herramientas: las manos que cualquier agente puede usar.
 
 36
-00:03:46,369 --> 00:03:49,558
+00:03:49,193 --> 00:03:52,382
 La plataforma los ejecuta, así nadie tiene que mantener los suyos.
 
 37
-00:03:50,658 --> 00:03:57,146
+00:03:53,482 --> 00:03:59,970
 Uno ejecuta consultas. Otro convierte una función gobernada en herramienta. Otro busca en los documentos del equipo.
 
 38
-00:03:58,446 --> 00:04:03,108
+00:04:01,270 --> 00:04:05,932
 Y Genie One y cada Genie Agent tienen el suyo, así cualquier agente puede preguntarles.
 
 39
-00:04:04,208 --> 00:04:09,240
+00:04:07,032 --> 00:04:12,064
 Ahora el agente de Anil se conecta a ellos con la sesión de Anil, y lee solo lo que Anil puede leer.
 
 40
-00:04:10,740 --> 00:04:16,263
+00:04:13,564 --> 00:04:19,087
 El equipo de datos escribió el conteo de proyectos activos una sola vez, como una función, para cualquier facultad.
 
 41
-00:04:17,563 --> 00:04:20,761
+00:04:20,387 --> 00:04:23,585
 Todos los agentes la llaman, y ninguno escribe un conteo propio.
 
 42
-00:04:22,261 --> 00:04:26,723
+00:04:25,085 --> 00:04:29,547
 Siguen el estándar abierto MCP, así cualquier agente puede conectarse.
 
 43
-00:04:30,223 --> 00:04:32,107
+00:04:33,047 --> 00:04:34,931
 Tercero, los agentes que construye el equipo.
 
 44
-00:04:32,807 --> 00:04:40,702
+00:04:35,631 --> 00:04:43,526
 Si el conteo nocturno no cuadra con la lista de la Oficina de Investigación, alguien debe ver por qué, y esos pasos no se escriben antes.
 
 45
-00:04:42,002 --> 00:04:48,332
+00:04:44,826 --> 00:04:51,156
 Así que el equipo construye un agente que revisa proyectos, en código, con Agent Bricks, la forma de la plataforma de construir agentes.
 
 46
-00:04:49,432 --> 00:04:54,128
+00:04:52,256 --> 00:04:56,952
 Agent Runtime lo ejecuta, el trabajo nocturno lo llama, y cada paso que da queda registrado.
 
 47
-00:04:55,428 --> 00:04:58,314
+00:04:58,252 --> 00:05:01,138
 Usa los mismos servidores de herramientas que todos.
 
 48
-00:04:59,014 --> 00:05:03,555
+00:05:01,838 --> 00:05:06,379
 Antes de que alguien dependa de él, el equipo lo prueba con casos que ya conoce.
 
 49
-00:05:04,655 --> 00:05:12,389
+00:05:07,479 --> 00:05:15,213
 Los 12 proyectos con prórroga, cuya primera fecha de fin ya pasó. Dos proyectos ingresados dos veces. Y las tres respuestas de Salud.
 
 50
-00:05:13,889 --> 00:05:21,249
+00:05:16,713 --> 00:05:24,073
 Jueces integrados en la plataforma califican cada respuesta, una prueba simple revisa las sumas, y Mei y Jun marcan lo que está mal.
 
 51
-00:05:22,749 --> 00:05:26,868
+00:05:25,573 --> 00:05:29,692
 Su nota es evidencia, no una decisión: Jun la lee, y decide.
 
 52
-00:05:30,368 --> 00:05:32,284
+00:05:33,192 --> 00:05:35,108
 Cuarto, los agentes que escriben código.
 
 53
-00:05:32,984 --> 00:05:37,241
+00:05:35,808 --> 00:05:40,065
 Sam construye los pipelines que cargan los sistemas de la universidad cada noche.
 
 54
-00:05:37,941 --> 00:05:43,851
+00:05:40,765 --> 00:05:46,675
 Genie Code, el agente de programación de la plataforma, trabaja a su lado en el editor de pipelines, con los permisos de Sam.
 
 55
-00:05:44,951 --> 00:05:50,846
+00:05:47,775 --> 00:05:53,670
 Lee las habilidades del equipo: los mismos archivos que lee el agente de Jun, en el mismo formato abierto.
 
 56
-00:05:52,146 --> 00:05:58,291
+00:05:54,970 --> 00:06:01,115
 Si se le pide perfilar una tabla, sigue la habilidad del equipo, con la consulta y el resultado detrás de cada afirmación.
 
 57
-00:05:59,791 --> 00:06:04,300
+00:06:02,615 --> 00:06:07,124
 El propio agente de programación de Jun trabaja en el proyecto dbt, en su editor.
 
 58
-00:06:05,000 --> 00:06:10,664
+00:06:07,824 --> 00:06:13,488
 Llega a la plataforma por los mismos servidores de herramientas, y las habilidades propias de Databricks le enseñan la plataforma.
 
 59
-00:06:11,964 --> 00:06:15,897
+00:06:14,788 --> 00:06:18,721
 Las habilidades le enseñan a un agente cómo trabajar; los servidores de herramientas le permiten hacer el trabajo.
 
 60
-00:06:17,397 --> 00:06:24,612
+00:06:20,221 --> 00:06:27,436
 Lo que escribe cada uno es un borrador, en una rama: su persona lo revisa, y una segunda persona aprueba lo que llega a producción.
 
 61
-00:06:28,112 --> 00:06:31,954
+00:06:30,936 --> 00:06:34,778
 De vuelta en la Facultad de Salud, los tres agentes siguen siendo de sus dueños.
 
 62
-00:06:32,654 --> 00:06:37,209
+00:06:35,478 --> 00:06:40,033
 Pero leen los mismos datos gobernados, con las mismas herramientas, que todos.
 
 63
-00:06:38,509 --> 00:06:46,642
+00:06:41,333 --> 00:06:49,466
 Ante la pregunta por los proyectos de investigación activos de Salud, cada uno responde 168, con su consulta, su tabla y su definición.
 
 64
-00:06:48,142 --> 00:06:50,374
+00:06:50,966 --> 00:06:53,198
 Anil planifica espacio para cada proyecto.
 
 65
-00:06:51,674 --> 00:06:56,517
+00:06:54,498 --> 00:06:59,341
 La plataforma les da a los agentes los mismos datos y herramientas que usan las personas, en un solo lugar.
 
 66
-00:06:58,217 --> 00:07:04,436
+00:07:01,041 --> 00:07:07,260
 Queda una pregunta: cuando un agente lee por su cuenta, ¿de quién son esas lecturas, y quién paga su modelo?
 
 67
-00:07:05,936 --> 00:07:07,072
+00:07:08,760 --> 00:07:09,896
 De eso trata la próxima película.

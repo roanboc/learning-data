@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sin un dueño, nadie responde por una cifra.",
 "On census day, the Faculty of Health couldn't plan its places: Anil was sent from Jun, to Noor, to Planning, and back to Jun.":
 "El día del censo, la Facultad de Salud no pudo planificar sus cupos: mandaron a Anil de Jun a Noor, a Planificación, y de vuelta a Jun.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The rules couldn't stay in minutes nobody acted on.":
+"Las reglas no podían quedarse en actas que nadie cumplía.",
 "Now the rules live in the project, beside the code, and a check runs them on every pull request.":
 "Ahora las reglas viven en el proyecto, junto al código, y un control las ejecuta en cada solicitud de cambio.",
 "In a minute, it answers Jun: no owner, and how to add one.":

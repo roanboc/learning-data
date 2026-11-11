@@ -414,7 +414,7 @@ const NARR={
  {"id":"picture","gap":0.8,"text":"And nobody had one up-to-date picture of all the fires."},
  {"id":"send","gap":0.8,"text":"So it was hard, sometimes impossible, to send scarce engines and crews where they were needed most."},
  {"id":"best","gap":0.8,"text":"Every agency cooperated as well as it could. What was missing was one way of working they all shared."},
- {"id":"change","gap":0.8,"text":"Something had to change."}]},
+ {"id":"change","gap":0.8,"text":"Before the next big fire, they had to find it."}]},
 "scope":{"name":"One way of working","lead":1.0,"tail":1.0,"vo":[
  {"id":"began","gap":0.8,"text":"In 1972, seven of those agencies began to build that way of working, together. Their programme was called FIRESCOPE.","say":"In nineteen seventy-two, seven of those agencies began to build that way of working, together. Their programme was called Firescope."},
  {"id":"door","gap":0.8,"text":"Its Incident Command System starts where help arrives: everyone who comes checks in."},
@@ -484,7 +484,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: rights that come from the work, and not from a person's."}]}
 };
 
-const VODUR={"first/place": 6.744, "first/lost": 4.655, "first/came": 7.325, "first/own": 5.89, "first/reach": 5.212, "first/picture": 3.325, "first/send": 5.894, "first/best": 6.456, "first/change": 1.288, "scope/began": 7.734, "scope/door": 4.739, "scope/card": 5.129, "scope/role": 2.982, "scope/seven": 1.98, "scope/plain": 3.417, "scope/wide": 8.888, "scope/national": 7.185, "scope/team": 6.423, "scope/uni": 7.981, "scope/alone": 6.978, "scope/checks": 8.166, "monday/two": 4.617, "monday/tickets": 8.056, "monday/same": 2.715, "monday/badge": 6.31, "monday/role": 4.91, "monday/owner": 6.202, "monday/rights": 6.892, "monday/admin": 5.86, "monday/signed": 8.802, "monday/differ": 5.245, "monday/alone": 3.439, "map/noor": 5.561, "map/work": 5.06, "map/process": 6.263, "map/roles": 4.34, "map/contrib": 6.549, "map/people": 7.267, "map/sod": 5.987, "map/agent": 7.483, "map/may": 6.733, "map/build": 4.425, "map/maynot": 7.663, "map/asks": 6.81, "map/guess": 3.837, "map/ahead": 3.277, "map/workload": 7.743, "map/stages": 2.954, "map/three": 3.537, "map/third": 8.034, "gate/before": 2.749, "gate/redo": 6.585, "gate/bar": 7.416, "gate/result": 5.399, "gate/matters": 5.908, "gate/audit": 4.715, "gate/stage": 5.096, "gate/word": 6.128, "gate/check": 6.485, "stop/written": 2.523, "stop/own": 8.176, "stop/set": 5.828, "stop/stop": 4.18, "stop/anyone": 5.892, "close/back": 4.921, "close/since": 4.782, "close/now": 7.288, "close/so": 4.153, "close/lesson": 3.546, "close/next": 3.497};
+const VODUR={"first/place": 6.744, "first/lost": 4.655, "first/came": 7.325, "first/own": 5.89, "first/reach": 5.212, "first/picture": 3.325, "first/send": 5.894, "first/best": 6.456, "first/change": 2.352, "scope/began": 7.734, "scope/door": 4.739, "scope/card": 5.129, "scope/role": 2.982, "scope/seven": 1.98, "scope/plain": 3.417, "scope/wide": 8.888, "scope/national": 7.185, "scope/team": 6.423, "scope/uni": 7.981, "scope/alone": 6.978, "scope/checks": 8.166, "monday/two": 4.617, "monday/tickets": 8.056, "monday/same": 2.715, "monday/badge": 6.31, "monday/role": 4.91, "monday/owner": 6.202, "monday/rights": 6.892, "monday/admin": 5.86, "monday/signed": 8.802, "monday/differ": 5.245, "monday/alone": 3.439, "map/noor": 5.561, "map/work": 5.06, "map/process": 6.263, "map/roles": 4.34, "map/contrib": 6.549, "map/people": 7.267, "map/sod": 5.987, "map/agent": 7.483, "map/may": 6.733, "map/build": 4.425, "map/maynot": 7.663, "map/asks": 6.81, "map/guess": 3.837, "map/ahead": 3.277, "map/workload": 7.743, "map/stages": 2.954, "map/three": 3.537, "map/third": 8.034, "gate/before": 2.749, "gate/redo": 6.585, "gate/bar": 7.416, "gate/result": 5.399, "gate/matters": 5.908, "gate/audit": 4.715, "gate/stage": 5.096, "gate/word": 6.128, "gate/check": 6.485, "stop/written": 2.523, "stop/own": 8.176, "stop/set": 5.828, "stop/stop": 4.18, "stop/anyone": 5.892, "close/back": 4.921, "close/since": 4.782, "close/now": 7.288, "close/so": 4.153, "close/lesson": 3.546, "close/next": 3.497};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land, or a picture needs a moment to build.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2334,7 +2334,7 @@ scene("first",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     reach:wAt(sc,"reach","struggled"),voices:wAt(sc,"reach","too many voices"),
     picture:wAt(sc,"picture","nobody"),all:wAt(sc,"picture","all the fires"),
     send:wAt(sc,"send","hard"),where:wAt(sc,"send","where"),
-    best:wAt(sc,"best","Every agency"),missing:wAt(sc,"best","missing"),change:wAt(sc,"change","Something")}));
+    best:wAt(sc,"best","Every agency"),missing:wAt(sc,"best","missing"),change:wAt(sc,"change","Before the next")}));
   ag_shots(ctx,S,t,sc.dur,[
     // the hills in the autumn of 1970: the fires along the far ridge, the smoke leaning away from the wind; then help on the road
     {at:0,place:"cjHills",keys:[[0,960,540,1.0]],push:0.03,draw:(cx,tt)=>{const gt=cj_gt(sc,tt);

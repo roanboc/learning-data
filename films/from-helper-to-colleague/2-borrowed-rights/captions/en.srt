@@ -55,285 +55,285 @@ From 1784, the town and the date as well, the day in words, and the letter poste
 Still, the gap stays open: in the 1830s, about seven million letters a year travel free.
 
 15
-00:01:15,530 --> 00:01:16,918
-Something had to change.
+00:01:15,530 --> 00:01:19,414
+Tightening the rules hadn't worked. The free post itself had to go.
 
 16
-00:01:18,618 --> 00:01:23,224
+00:01:21,114 --> 00:01:25,720
 A schoolmaster, Rowland Hill, argues for a cheap post that the sender pays.
 
 17
-00:01:23,924 --> 00:01:25,117
+00:01:26,420 --> 00:01:27,613
 Parliament agrees.
 
 18
-00:01:25,517 --> 00:01:33,156
+00:01:28,013 --> 00:01:35,652
 On the tenth of January 1840, the penny post begins: one penny a letter, anywhere in Britain, paid by its sender.
 
 19
-00:01:34,656 --> 00:01:35,815
+00:01:37,152 --> 00:01:38,311
 And franking ends.
 
 20
-00:01:36,515 --> 00:01:42,644
+00:01:39,011 --> 00:01:45,140
 In a year, letters more than double, from about 76 million to nearly 170 million.
 
 21
-00:01:44,344 --> 00:01:48,061
+00:01:46,840 --> 00:01:50,557
 A letter is cheap for everyone, and every letter pays its own way.
 
 22
-00:01:49,361 --> 00:01:55,753
+00:01:51,857 --> 00:01:58,249
 Today, at the university, Jun Park's AI helper works on his sign-in, with everything Jun may do.
 
 23
-00:01:57,053 --> 00:02:01,136
+00:01:59,549 --> 00:02:03,632
 Narrowed, those borrowed rights let it learn, safely, in a sandbox.
 
 24
-00:02:02,236 --> 00:02:05,262
+00:02:04,732 --> 00:02:07,758
 And once it works for the team, it needs a name of its own.
 
 25
-00:02:12,962 --> 00:02:18,040
+00:02:15,458 --> 00:02:20,536
 An AI helper in an editor or a chat starts on the sign-in of the person using it.
 
 26
-00:02:19,540 --> 00:02:23,562
+00:02:22,036 --> 00:02:26,058
 It's quick: nothing to set up, and it can do whatever that person can.
 
 27
-00:02:24,862 --> 00:02:31,961
+00:02:27,358 --> 00:02:34,457
 Through 2026, Jun's helper drafted Planning's tickets for him: a new column, a filter, a new mart.
 
 28
-00:02:33,661 --> 00:02:37,456
+00:02:36,157 --> 00:02:39,952
 The first three of the five stages all work on the person's sign-in.
 
 29
-00:02:39,356 --> 00:02:45,114
+00:02:41,852 --> 00:02:47,610
 At the first, it suggests: it drafts, runs nothing, and Jun accepts or rejects every line.
 
 30
-00:02:46,614 --> 00:02:52,937
+00:02:49,110 --> 00:02:55,433
 At the second, it acts for him, step by step: it runs a query or a command, and Jun allows each one.
 
 31
-00:02:54,637 --> 00:02:59,829
+00:02:57,133 --> 00:03:02,325
 At the third, it acts for him within limits: it works alone, and Jun checks the result.
 
 32
-00:03:01,529 --> 00:03:06,651
+00:03:04,025 --> 00:03:09,147
 Each stage changes how much it may do, and what Jun does. The sign-in stays his.
 
 33
-00:03:10,451 --> 00:03:15,601
+00:03:12,947 --> 00:03:18,097
 Jun's rights are wide: he builds the project, and he reviews and approves its code.
 
 34
-00:03:16,901 --> 00:03:20,599
+00:03:19,397 --> 00:03:23,095
 On his sign-in, his helper can do all of that, at every stage.
 
 35
-00:03:21,299 --> 00:03:23,331
+00:03:23,795 --> 00:03:25,827
 Friday, the sixteenth of October.
 
 36
-00:03:24,631 --> 00:03:30,054
+00:03:27,127 --> 00:03:32,550
 The helper is drafting Planning's ticket for Monday's board: a new mart of teaching staff by school.
 
 37
-00:03:31,354 --> 00:03:35,252
+00:03:33,850 --> 00:03:37,748
 Its change waits on a fix to the count of who teaches in each school.
 
 38
-00:03:36,352 --> 00:03:41,205
+00:03:38,848 --> 00:03:43,701
 Anil Kurian's workload agent, which has a name of its own, proposed that fix.
 
 39
-00:03:42,705 --> 00:03:45,443
+00:03:45,201 --> 00:03:47,939
 It's in review for Jun, and its checks have passed.
 
 40
-00:03:46,543 --> 00:03:49,654
+00:03:49,039 --> 00:03:52,150
 The helper's next step: approve it, as Jun Park.
 
 41
-00:03:51,354 --> 00:03:54,773
+00:03:53,850 --> 00:03:57,269
 It's the thirty-eighth step Jun has been asked to allow that day.
 
 42
-00:03:56,273 --> 00:03:57,804
+00:03:58,769 --> 00:04:00,300
 He reads it, and says no.
 
 43
-00:03:59,704 --> 00:04:04,293
+00:04:02,200 --> 00:04:06,789
 On Monday he reviews the fix himself, and Noor approves it for production.
 
 44
-00:04:05,593 --> 00:04:10,436
+00:04:08,089 --> 00:04:12,932
 Nobody did anything wrong: the helper was finishing its ticket, with the rights it had.
 
 45
-00:04:11,136 --> 00:04:15,201
+00:04:13,632 --> 00:04:17,697
 Had Jun said yes, the record would read: approved by Jun Park.
 
 46
-00:04:19,001 --> 00:04:22,483
+00:04:21,497 --> 00:04:24,979
 On a person's sign-in, every step reads as that person's.
 
 47
-00:04:23,983 --> 00:04:27,873
+00:04:26,479 --> 00:04:30,369
 Jun's log says Jun, for what he did and for what his helper did.
 
 48
-00:04:29,573 --> 00:04:32,876
+00:04:32,069 --> 00:04:35,372
 Like a franked cover, it can't say who really did each step.
 
 49
-00:04:34,576 --> 00:04:40,945
+00:04:37,072 --> 00:04:43,441
 The workload agent once ran on Anil's personal key, and the log couldn't tell his reads from his agent's.
 
 50
-00:04:42,845 --> 00:04:48,849
+00:04:45,341 --> 00:04:51,345
 Had the helper approved, an agent's change would have been approved by an agent, with a person's name on it.
 
 51
-00:04:50,549 --> 00:04:55,288
+00:04:53,045 --> 00:04:57,784
 And the helper can't be narrowed or stopped on its own: to every tool, it is Jun.
 
 52
-00:04:56,988 --> 00:05:02,382
+00:04:59,484 --> 00:05:04,878
 In 1988, a computer scientist, Norm Hardy, called this a confused deputy:
 
 53
-00:05:02,582 --> 00:05:06,907
+00:05:05,078 --> 00:05:09,403
 a program that acts for someone, with their rights, for a purpose that isn't theirs.
 
 54
-00:05:08,607 --> 00:05:11,280
+00:05:11,103 --> 00:05:13,776
 And in the wrong hands, it's more dangerous still.
 
 55
-00:05:12,980 --> 00:05:20,427
+00:05:15,476 --> 00:05:22,923
 Words hidden in a ticket it reads, or a stolen sign-in, could steer it to do anything Jun can, faster than any person.
 
 56
-00:05:22,327 --> 00:05:29,221
+00:05:24,823 --> 00:05:31,717
 Security experts call it excessive agency: more tools, more rights, or more freedom than a job needs.
 
 57
-00:05:32,821 --> 00:05:39,575
+00:05:35,317 --> 00:05:42,071
 In 1975, two computer scientists, Jerome Saltzer and Michael Schroeder, wrote down the answer:
 
 58
-00:05:39,775 --> 00:05:44,541
+00:05:42,271 --> 00:05:47,037
 every program, and every person, should work with the fewest rights the job needs.
 
 59
-00:05:46,241 --> 00:05:51,060
+00:05:48,737 --> 00:05:53,556
 From Monday, the nineteenth of October, Jun and Sam narrow what the helper borrows.
 
 60
-00:05:52,360 --> 00:05:55,891
+00:05:54,856 --> 00:05:58,387
 It works in a development workspace, with tools that only read.
 
 61
-00:05:57,191 --> 00:06:01,985
+00:05:59,687 --> 00:06:04,481
 None of them writes outside its sandbox, approves, merges, or grants a right.
 
 62
-00:06:03,485 --> 00:06:09,484
+00:06:05,981 --> 00:06:11,980
 Its drafts go only into a sandbox of its own: a schema of Jun's in development, and a branch.
 
 63
-00:06:10,984 --> 00:06:14,444
+00:06:13,480 --> 00:06:16,940
 It sees samples of at most twenty rows, with names masked.
 
 64
-00:06:15,944 --> 00:06:22,776
+00:06:18,440 --> 00:06:25,272
 And what only Jun should do stays his: approve, merge, change production, change an approved test, grant a right.
 
 65
-00:06:24,476 --> 00:06:29,449
+00:06:26,972 --> 00:06:31,945
 The project's page for agents now says so, for every helper on a person's sign-in.
 
 66
-00:06:32,849 --> 00:06:35,758
+00:06:35,345 --> 00:06:38,254
 At the second stage, Jun still allows each step.
 
 67
-00:06:36,858 --> 00:06:41,720
+00:06:39,354 --> 00:06:44,216
 A helper's own setting can make it ask before each step, or go on without asking.
 
 68
-00:06:43,020 --> 00:06:47,832
+00:06:45,516 --> 00:06:50,328
 One maker calls such a setting a productivity feature, not a security boundary.
 
 69
-00:06:49,532 --> 00:06:55,137
+00:06:52,028 --> 00:06:57,633
 So the boundary is in its tools: each step is now a read, or a draft in its sandbox.
 
 70
-00:06:56,837 --> 00:07:01,334
+00:06:59,333 --> 00:07:03,830
 At the third, it works alone, within a plan whose checks are set before it starts.
 
 71
-00:07:02,634 --> 00:07:08,066
+00:07:05,130 --> 00:07:10,562
 Its allowed and blocked actions are written on the plan, and its evidence comes with its result.
 
 72
-00:07:09,566 --> 00:07:14,962
+00:07:12,062 --> 00:07:17,458
 Jun checks the result against the plan's checks, and Noor approves whatever reaches production.
 
 73
-00:07:16,662 --> 00:07:20,468
+00:07:19,158 --> 00:07:22,964
 At every stage, Jun owns his helper's work, and answers for it.
 
 74
-00:07:21,168 --> 00:07:25,734
+00:07:23,664 --> 00:07:28,230
 And an agent never approves: not its own change, and not another agent's.
 
 75
-00:07:29,134 --> 00:07:33,109
+00:07:31,630 --> 00:07:35,605
 On Monday, the second of November, Lucía Ortega joins Planning.
 
 76
-00:07:34,409 --> 00:07:39,187
+00:07:36,905 --> 00:07:41,683
 Her helper starts where everyone starts: on her sign-in, with her rights, which are few.
 
 77
-00:07:39,887 --> 00:07:45,037
+00:07:42,383 --> 00:07:47,533
 Names masked, nothing written to production, and narrowed the same way from her first day.
 
 78
-00:07:46,537 --> 00:07:51,043
+00:07:49,033 --> 00:07:53,539
 In its sandbox, it helps her learn the project, and every draft waits for her.
 
 79
-00:07:52,343 --> 00:07:55,040
+00:07:54,839 --> 00:07:57,536
 Borrowed rights are for learning, in a sandbox.
 
 80
-00:07:57,140 --> 00:08:05,499
+00:07:59,636 --> 00:08:07,995
 The rules of 1764 and 1784 narrowed the frank, but a member's name still couldn't say who really sent a letter.
 
 81
-00:08:06,799 --> 00:08:08,870
+00:08:09,295 --> 00:08:11,366
 That took every letter paying its own way.
 
 82
-00:08:10,570 --> 00:08:16,102
+00:08:13,066 --> 00:08:18,598
 A helper that works for the team, not beside one person, needs the same: a name of its own.
 
 83
-00:08:17,402 --> 00:08:24,531
+00:08:19,898 --> 00:08:27,027
 That same Monday, Planning's tickets passed to the planning agent, a contributor with its own name, owned by Clara Jensen.
 
 84
-00:08:26,031 --> 00:08:31,717
+00:08:28,527 --> 00:08:34,213
 Before it took a single ticket, it was given a place on the university's map, like every colleague.
 
 85
-00:08:33,217 --> 00:08:36,341
+00:08:35,713 --> 00:08:38,837
 How that place is made is where this series goes next.

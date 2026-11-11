@@ -24,170 +24,170 @@ Without an owner, nobody answers for a number.
 00:00:48.100 --> 00:00:56.073
 On census day, the Faculty of Health couldn't plan its places: Anil was sent from Jun, to Noor, to Planning, and back to Jun.
 
-00:00:57.973 --> 00:00:59.361
-Something had to change.
+00:00:57.973 --> 00:01:00.930
+The rules couldn't stay in minutes nobody acted on.
 
-00:01:00.861 --> 00:01:06.633
+00:01:02.430 --> 00:01:08.202
 Now the rules live in the project, beside the code, and a check runs them on every pull request.
 
-00:01:08.133 --> 00:01:11.771
+00:01:09.702 --> 00:01:13.340
 In a minute, it answers Jun: no owner, and how to add one.
 
-00:01:13.671 --> 00:01:16.317
+00:01:15.240 --> 00:01:17.886
 He adds two lines, and the check turns green.
 
-00:01:18.017 --> 00:01:21.273
+00:01:19.586 --> 00:01:22.842
 It goes to the data team for review, with nothing missing.
 
-00:01:22.773 --> 00:01:27.208
+00:01:24.342 --> 00:01:28.777
 An action the council carried for four months is now a check that takes a minute.
 
-00:01:28.708 --> 00:01:32.395
+00:01:30.277 --> 00:01:33.964
 And for Jun, the rules arrive first, while he can still fix them.
 
-00:01:40.095 --> 00:01:43.359
+00:01:41.664 --> 00:01:44.928
 Governance puts a pin where each decision enters the loop:
 
-00:01:43.959 --> 00:01:50.057
+00:01:45.528 --> 00:01:51.626
 a term at the question, a class of personal data at the sources, an owner and a contract at the gaps,
 
-00:01:51.257 --> 00:01:55.455
+00:01:52.826 --> 00:01:57.024
 a rule at the tests, an approval at review, a version when it changes.
 
-00:01:57.555 --> 00:02:01.293
+00:01:59.124 --> 00:02:02.862
 In dbt, each pin is a line beside the model's code.
 
-00:02:02.993 --> 00:02:06.416
+00:02:04.562 --> 00:02:07.985
 The learner table names its owner, Mei, and the term it holds.
 
-00:02:08.316 --> 00:02:12.907
+00:02:09.885 --> 00:02:14.476
 Each column says whether it identifies a person, and each test has an owner.
 
-00:02:15.007 --> 00:02:16.901
+00:02:16.576 --> 00:02:18.470
 All of it is reviewed with the code.
 
-00:02:20.601 --> 00:02:23.439
+00:02:22.170 --> 00:02:25.008
 Groups and access decide who may build on what.
 
-00:02:24.739 --> 00:02:27.703
+00:02:26.308 --> 00:02:29.272
 The data team's first layers are private to its group.
 
-00:02:28.803 --> 00:02:34.243
+00:02:30.372 --> 00:02:35.812
 Its core tables are public, for any team, and the marts protected, for this project only.
 
-00:02:35.743 --> 00:02:39.779
+00:02:37.312 --> 00:02:41.348
 Build on a private one, and dbt stops before anything runs.
 
-00:02:41.479 --> 00:02:44.977
+00:02:43.048 --> 00:02:46.546
 Jun's new table reads only public tables, so it builds.
 
-00:02:46.277 --> 00:02:49.988
+00:02:47.846 --> 00:02:51.557
 But who may read it is the platform's to decide, in the next film.
 
-00:02:53.088 --> 00:02:57.551
+00:02:54.657 --> 00:02:59.120
 Every table other teams use has a contract: these columns, these types.
 
-00:02:58.851 --> 00:03:02.703
+00:03:00.420 --> 00:03:04.272
 Each build checks it, and a mismatch stops the table being replaced.
 
-00:03:04.603 --> 00:03:10.168
+00:03:06.172 --> 00:03:11.737
 A change that would break a reader becomes a new version, beside the old one, with a date to go:
 
-00:03:10.368 --> 00:03:15.022
+00:03:11.937 --> 00:03:16.591
 credentials' first version goes on 31 March 2027.
 
-00:03:16.322 --> 00:03:20.673
+00:03:17.891 --> 00:03:22.242
 And exposures name who uses each table, and who answers for each use.
 
-00:03:21.973 --> 00:03:28.091
+00:03:23.542 --> 00:03:29.660
 Only the canonical tables, the shared core, also have an enterprise contract, in an open standard.
 
-00:03:28.791 --> 00:03:33.889
+00:03:30.360 --> 00:03:35.458
 Data governance's information architect writes it first, and the data team builds to it.
 
-00:03:34.589 --> 00:03:39.937
+00:03:36.158 --> 00:03:41.506
 A check compares the two, and if they differ, data governance looks at how the change got there.
 
-00:03:42.637 --> 00:03:45.424
+00:03:44.206 --> 00:03:46.993
 Each pull request also says what it touches.
 
-00:03:46.324 --> 00:03:51.147
+00:03:47.893 --> 00:03:52.716
 The meaning comes first: on Monday, Mei changed what award means, in the glossary.
 
-00:03:51.847 --> 00:03:58.442
+00:03:53.416 --> 00:04:00.011
 On Tuesday, Jun's first draft relabelled microcredentials of 6 credit points or more as awards.
 
-00:03:59.742 --> 00:04:06.206
+00:04:01.311 --> 00:04:07.775
 The impact check wrote it into the pull request: five reports and apps depend on it, four owners to tell.
 
-00:04:07.906 --> 00:04:12.552
+00:04:09.475 --> 00:04:14.121
 The data team's review said a change of meaning breaks, even when the columns don't.
 
-00:04:13.852 --> 00:04:17.271
+00:04:15.421 --> 00:04:18.840
 So Jun added a column instead: counts as an award.
 
-00:04:18.371 --> 00:04:21.253
+00:04:19.940 --> 00:04:22.822
 The check called it additive, with three owners to tell.
 
-00:04:22.553 --> 00:04:26.561
+00:04:24.122 --> 00:04:28.130
 A renamed column would fail: a breaking change needs a new version.
 
-00:04:29.861 --> 00:04:35.734
+00:04:31.430 --> 00:04:37.303
 Owners don't review pull requests: they decide what words mean, in the glossary, before any code.
 
-00:04:36.634 --> 00:04:42.712
+00:04:38.203 --> 00:04:44.281
 So a script writes the reviewers file: the data team for the code, and data governance for its own files.
 
-00:04:44.212 --> 00:04:49.512
+00:04:45.781 --> 00:04:51.081
 GitHub asks them on every pull request, and a check fails if the file falls behind.
 
-00:04:50.812 --> 00:04:54.186
+00:04:52.381 --> 00:04:55.755
 Decisions are files too, with who decided, when and why.
 
-00:04:57.286 --> 00:05:02.113
+00:04:58.855 --> 00:05:03.682
 Every message says what to add, and where, and links a page on how, with who to ask.
 
-00:05:03.613 --> 00:05:05.120
+00:05:05.182 --> 00:05:06.689
 A new rule warns first.
 
-00:05:06.420 --> 00:05:13.860
+00:05:07.989 --> 00:05:15.429
 Every column other teams read must say what it holds: until the first of December, that's a warning with its date, then an error.
 
-00:05:15.760 --> 00:05:18.826
+00:05:17.329 --> 00:05:20.395
 Week by week, the warnings fell from forty-one to none.
 
-00:05:20.926 --> 00:05:24.698
+00:05:22.495 --> 00:05:26.267
 When Anil added a column, the check showed him how to classify it.
 
-00:05:28.598 --> 00:05:32.457
+00:05:30.167 --> 00:05:34.026
 And an agent reviews every pull request, against the same rules.
 
-00:05:33.357 --> 00:05:38.742
+00:05:34.926 --> 00:05:40.311
 It follows a skill the team wrote: run the checks, read what they can't, and draft what's missing.
 
-00:05:40.242 --> 00:05:48.666
+00:05:41.811 --> 00:05:50.235
 On Anil's first pull request, his faculty's call list, it found no owner, ten columns with no class, and a rule with no test.
 
-00:05:50.166 --> 00:05:54.847
+00:05:51.735 --> 00:05:56.416
 It drafted each, with counts as evidence, never values, and said who decides.
 
-00:05:56.347 --> 00:06:01.298
+00:05:57.916 --> 00:06:02.867
 The agent never approves. People decide, and the data team approves the code.
 
-00:06:04.398 --> 00:06:10.055
+00:06:05.967 --> 00:06:11.624
 Jun's table goes in, with its owner, its classes, its contract and the data team's yes.
 
-00:06:11.355 --> 00:06:17.086
+00:06:12.924 --> 00:06:18.655
 On Noor's map, the project is the home of owners, classes, contracts, tests and decisions,
 
-00:06:17.286 --> 00:06:20.813
+00:06:18.855 --> 00:06:22.382
 and their copies flow one way, to the platform and the catalogue.
 
-00:06:22.313 --> 00:06:25.161
+00:06:23.882 --> 00:06:26.730
 The rules don't arrive after he's built it any more.
 
-00:06:26.261 --> 00:06:27.959
+00:06:27.830 --> 00:06:29.528
 They arrive with every change.
 
-00:06:29.059 --> 00:06:31.281
+00:06:30.628 --> 00:06:32.850
 The project carries governance with the code.

@@ -67,7 +67,7 @@ scene("three",(ctx,S,t,sc)=>{
     tWhich:wAt(sc,"which","One is right"),tNobody:wAt(sc,"which","nobody can tell"),
     tShort:wAt(sc,"short","Plan for"),tLowest:wAt(sc,"short","lowest"),tGap:wAt(sc,"short","twenty-seven"),
     tNames:wAt(sc,"names","And a copy"),tEvery:wAt(sc,"names","every researcher's"),
-    tChange:wAt(sc,"change","Something"),
+    tChange:wAt(sc,"change","The agents"),
     tBring:wAt(sc,"bring","So Sam"),tJun:wAt(sc,"bring","Jun"),tAgents:wAt(sc,"bring","bring the agents"),
     tSame:wAt(sc,"same","the same governed"),tOnly:wAt(sc,"same","only what"),
     tWeek:wAt(sc,"week","A week later"),tAll:wAt(sc,"week","all three"),tN4:wAt(sc,"week","one hundred"),tQuery:wAt(sc,"week","its query"),tDef:wAt(sc,"week","its definition"),

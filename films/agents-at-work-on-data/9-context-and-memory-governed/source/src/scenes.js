@@ -61,7 +61,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     inJuly:wAt(sc,"may","In July"),keptAs:wAt(sc,"may","kept as"),rooms:wAt(sc,"may","For room bookings"),right:wAt(sc,"may","Right, for rooms"),
     lastWeek:wAt(sc,"lost","last week"),threeWords:wAt(sc,"lost","three words"),nobody:wAt(sc,"lost","nobody"),
     glossaryW:wAt(sc,"glossary","glossary"),offering:wAt(sc,"glossary","unit offering"),both:wAt(sc,"glossary","online or both"),
-    nothing:wAt(sc,"still","Nothing told"),first:wAt(sc,"still","which comes first"),change:wAt(sc,"still","Something"),
+    nothing:wAt(sc,"still","Nothing told"),first:wAt(sc,"still","which comes first"),change:wAt(sc,"still","the glossary"),
     order:wAt(sc,"govern","set an order"),
     first1:wAt(sc,"governed","First"),defs:wAt(sc,"governed","definitions"),rules:wAt(sc,"governed","data rules"),owner:wAt(sc,"governed","reviewed by"),
     second:wAt(sc,"second","Second"),platform:wAt(sc,"second","the platform keeps"),noApprove:wAt(sc,"second","nobody approves"),

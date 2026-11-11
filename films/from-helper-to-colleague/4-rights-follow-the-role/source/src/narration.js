@@ -8,7 +8,7 @@ const NARR={
  {"id":"order","gap":0.8,"text":"Often the pharmacist never saw the doctor's order, only a copy, written out by a nurse or a ward clerk."},
  {"id":"wrong","gap":0.8,"text":"So a slip in copying it went unnoticed, and a patient got the wrong drug, the wrong amount, or an injection meant to be swallowed."},
  {"id":"reach","gap":0.8,"text":"Every medicine on the shelf was within reach of every hand, for every patient."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Medicines had to reach each patient by their own order, not sit open to every hand."},
  {"id":"arkansas","gap":0.8,"text":"In the early 1960s, pharmacists at the University of Arkansas Medical Center, in Little Rock, tried another way.","say":"In the early nineteen sixties, pharmacists at the University of Arkansaw Medical Center, in Little Rock, tried another way."},
  {"id":"drawer","gap":0.8,"text":"A pharmacist read each doctor's order, and the pharmacy sent single doses, labelled and ready to give, each as it fell due.","say":"A pharmacist red each doctor's order, and the pharmacy sent single doses, labelled and ready to give, each as it fell due."},
  {"id":"each","gap":0.8,"text":"The doctor ordered, the pharmacist checked and filled, and the nurse gave."},

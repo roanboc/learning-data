@@ -14,7 +14,7 @@ const NARR={
  {"id":"which","gap":0.8,"text":"One is right, and nobody can tell which: none of them shows what it read."},
  {"id":"short","gap":0.8,"text":"Plan for the lowest, and 27 projects would have no lab space.","say":"Plan for the lowest, and twenty-seven projects would have no lab space."},
  {"id":"names","gap":0.8,"text":"And a copy of the projects table, with every researcher's name in it, sits on a laptop."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The agents couldn't keep working away from the data, each on its own copy."},
  {"id":"bring","gap":0.8,"text":"So Sam, who runs the platform, and Jun, who builds the data project, bring the agents to the data, on Databricks."},
  {"id":"same","gap":0.8,"text":"Every agent now reads the same governed tables, definitions and tools as everyone else, and only what its own person may read."},
  {"id":"week","gap":0.8,"text":"A week later, all three answer 168, each with its query, its table and its definition.","say":"A week later, all three answer one hundred and sixty-eight, each with its query, its table and its definition."},

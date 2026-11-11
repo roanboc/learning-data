@@ -16,7 +16,7 @@ const NARR={
  {"id":"y1764","gap":0.8,"text":"From 1764, the member must write the whole address in his own hand.","say":"From seventeen sixty-four, the member must write the whole address in his own hand."},
  {"id":"y1784","gap":0.8,"text":"From 1784, the town and the date as well, the day in words, and the letter posted that same day.","say":"From seventeen eighty-four, the town and the date as well, the day in words, and the letter posted that same day."},
  {"id":"gap","gap":0.8,"text":"Still, the gap stays open: in the 1830s, about seven million letters a year travel free.","say":"Still, the gap stays open: in the eighteen-thirties, about seven million letters a year travel free."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Tightening the rules hadn't worked. The free post itself had to go."},
  {"id":"hill","gap":0.8,"text":"A schoolmaster, Rowland Hill, argues for a cheap post that the sender pays."},
  {"id":"parl","gap":0.5,"text":"Parliament agrees."},
  {"id":"penny","gap":0.8,"text":"On the tenth of January 1840, the penny post begins: one penny a letter, anywhere in Britain, paid by its sender.","say":"On the tenth of January eighteen forty, the penny post begins: one penny a letter, anywhere in Britain, paid by its sender."},

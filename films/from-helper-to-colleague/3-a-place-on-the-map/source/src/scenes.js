@@ -61,7 +61,7 @@ scene("first",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     reach:wAt(sc,"reach","struggled"),voices:wAt(sc,"reach","too many voices"),
     picture:wAt(sc,"picture","nobody"),all:wAt(sc,"picture","all the fires"),
     send:wAt(sc,"send","hard"),where:wAt(sc,"send","where"),
-    best:wAt(sc,"best","Every agency"),missing:wAt(sc,"best","missing"),change:wAt(sc,"change","Something")}));
+    best:wAt(sc,"best","Every agency"),missing:wAt(sc,"best","missing"),change:wAt(sc,"change","Before the next")}));
   ag_shots(ctx,S,t,sc.dur,[
     // the hills in the autumn of 1970: the fires along the far ridge, the smoke leaning away from the wind; then help on the road
     {at:0,place:"cjHills",keys:[[0,960,540,1.0]],push:0.03,draw:(cx,tt)=>{const gt=cj_gt(sc,tt);

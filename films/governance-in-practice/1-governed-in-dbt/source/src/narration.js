@@ -10,7 +10,7 @@ const NARR={
  {"id":"months","gap":0.8,"text":"For four months, the council's minutes carried the same action: name the data owners."},
  {"id":"nobody","gap":0.8,"text":"Without an owner, nobody answers for a number."},
  {"id":"census","gap":0.8,"text":"On census day, the Faculty of Health couldn't plan its places: Anil was sent from Jun, to Noor, to Planning, and back to Jun."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The rules couldn't stay in minutes nobody acted on."},
  {"id":"live","gap":0.8,"text":"Now the rules live in the project, beside the code, and a check runs them on every pull request."},
  {"id":"answers","gap":0.8,"text":"In a minute, it answers Jun: no owner, and how to add one."},
  {"id":"adds","gap":0.8,"text":"He adds two lines, and the check turns green."},

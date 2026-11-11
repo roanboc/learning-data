@@ -30,8 +30,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Desde la semana pasada, había perdido las tres palabras que la hacían correcta, y nadie la había visto cambiar.",
 "Yet the glossary already said what a unit offering is: a unit taught in a semester, on campus, online or both.":
 "Pero el glosario ya decía qué es una oferta de unidad: una unidad que se dicta en un semestre, en el campus, en línea o ambos.",
-"Nothing told the agent which comes first. Something had to change.":
-"Nada le decía al agente qué va primero. Algo tenía que cambiar.",
+"Nothing told the agent which comes first: the glossary, or what it remembered.":
+"Nada le decía al agente qué va primero: el glosario o lo que recordaba.",
 "So the team set an order.":
 "Así que el equipo fijó un orden.",
 "First, what's governed: the glossary's definitions, decided by their owners, and the data rules, reviewed by the data team.":

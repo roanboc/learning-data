@@ -1,6 +1,6 @@
 # Files as data and as context: questions and assumptions
 
-*Modern data basics* · *Documents as data*, film 1 · merged, PR #181 · [pull request](https://github.com/roanboc/learning-data/pull/181)
+*Modern data basics* · *Documents and closing remarks* (called *Documents as data* until 11 November 2026), film 1 · merged, PR #181 · [pull request](https://github.com/roanboc/learning-data/pull/181)
 
 [Watch it on the site](https://data.learn-all.org/documents-as-data/files-as-data-and-context/)
 
@@ -56,3 +56,11 @@ Kept by the film's thread ("Make data basics film 9 Files as data and context"),
 | 22 | What do the Spanish captions and pages call things? | Latin American Spanish: Finanzas, RR. HH., facturas de proveedores, el proyecto de datos, la arquitecta de datos, metadatos, volumen, bitácora, cartas de vientos y corrientes, solicitudes de pago de horas, la app de solicitudes, "ingresar a mano"; the platform's names as on screen, and numbers with the picture's comma (3,860). | Captions, page | Captions and the page's Spanish |
 | 23 | What does the page's next panel ask, with no film after it? | "You've seen documents read, kept and written as data, and that closes Modern data basics. Which answer does each of your own documents need?", with links to the official docs (ai_parse_document, ai_extract, volumes, intelligent document processing, ODCS). | The film's page | The page's text |
 | 24 | How is it released, and when? | Merged as part of the draft series (`series.json` has `"draft": true`; the film's own `site.json` sets none), so its pages carry the draft label; the merge is its release; not rendered here, no review page. It merged once its checks passed on 10 November, before *From tables to decisions*'s three films rather than after them as first planned: you asked that day for every ready film to be merged, and a series' first film doesn't wait for the series before it. Its close names that series' work, which reaches the site with those films. | The site | A label on the page, or the close's one line on serving data |
+
+## The split (11 November 2026)
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 25 | What is the series called, now that you asked for "something like documents and remarks"? | *Documents and closing remarks* (*Documentos y comentarios finales*). The folder, the address `documents-as-data/` and this film's key stay as they were, so links and progress keep working. | The series' page, both films' title and end cards, the module's pages | One name in `series.json`, `build_series.py` and the two films' cards |
+| 26 | What leaves this film for the new one? | The module's close (the four series, what each once took, and what's left for people). This film keeps its own three answers, the standards and the loop's four words, and ends on one line: "In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data." | Chapter 5 | The close's last lines |
+| 27 | What does this film's next panel say, now that it no longer closes the module? | "You've seen documents read, kept and written as data. Which answer does each of your own documents need? The next film closes the module." | The film's page | The page's text |

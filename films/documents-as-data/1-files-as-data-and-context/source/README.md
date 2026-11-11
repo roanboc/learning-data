@@ -1,6 +1,6 @@
 # Rebuilding Files as data and as context
 
-*Files as data and as context*, the single film of *Documents as data*, the last series of *Modern data basics*, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, the agent films' people and shots, and the module's look and tools in [`../../../data-that-moves/shared/`](../../../data-that-moves/shared/), whose [README](../../../data-that-moves/shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `fd_` or `FD_`:
+*Files as data and as context*, film 1 of 2 in *Documents and closing remarks*, the last series of *Modern data basics*, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, the agent films' people and shots, and the module's look and tools in [`../../../data-that-moves/shared/`](../../../data-that-moves/shared/), whose [README](../../../data-that-moves/shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `fd_` or `FD_`:
 
 | File | What it holds |
 |---|---|

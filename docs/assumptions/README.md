@@ -22,7 +22,7 @@ A film's thread writes its questions and assumptions to that film's own file, in
   - [Data that moves](02-modern-data-basics/1-data-that-moves/)
   - [Data as software](02-modern-data-basics/2-data-as-software/)
   - [From tables to decisions](02-modern-data-basics/3-from-tables-to-decisions/)
-  - [Documents as data](02-modern-data-basics/4-documents-as-data/)
+  - [Documents and closing remarks](02-modern-data-basics/4-documents-as-data/)
 - [Data quality](04-data-quality/)
   - [Fit for use](04-data-quality/2-fit-for-use/)
   - [Quality as a habit](04-data-quality/3-quality-as-a-habit/)

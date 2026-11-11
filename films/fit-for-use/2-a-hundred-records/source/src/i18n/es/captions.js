@@ -18,8 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y un puñado puede engañar. La cervecería podía elegir la cebada equivocada y cargar con ella un año, o rechazar una buena.",
 "The mathematics of the day worked for large numbers of measurements. Nobody could say how far a few could be trusted.":
 "Las matemáticas de la época servían para grandes cantidades de mediciones. Nadie sabía cuánto fiarse de unas pocas.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The brewery couldn't wait for large numbers it would never have.":
+"La cervecera no podía esperar grandes cantidades que nunca tendría.",
 "So Gosset worked out how much a few results can tell you, and how sure of it you can be.":
 "Así que Gosset calculó cuánto dicen unos pocos resultados, y qué tan seguro puedes estar de ello.",
 "Before he could prove it on paper, he tried it by hand: 3,000 measurements on 3,000 cards, shuffled, and drawn four at a time.":

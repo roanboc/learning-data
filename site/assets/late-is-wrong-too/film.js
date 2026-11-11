@@ -419,7 +419,7 @@ const NARR={
  {"id":"stay","gap":0.8,"text":"Most people know a storm is coming, yet almost nobody takes shelter."},
  {"id":"surge","gap":0.8,"text":"That night a storm surge, the sea driven inland by the wind, sweeps over the islands."},
  {"id":"toll","gap":0.8,"text":"At least three hundred thousand people die, perhaps half a million."},
- {"id":"after","gap":0.8,"text":"A warning people can't read, or don't act on, is no warning. Something has to change."},
+ {"id":"after","gap":0.8,"text":"A warning people can't read, or don't act on, is no warning. The next one has to reach every village in time."},
  {"id":"cpp","gap":0.8,"text":"In 1972, the Bangladesh Red Cross Society starts the Cyclone Preparedness Programme, run with the government from 1973.","say":"In nineteen seventy-two, the Bangladesh Red Cross Society starts the Cyclone Preparedness Programme, run with the government from nineteen seventy-three."},
  {"id":"mile","gap":0.8,"text":"Volunteers from the coast's own villages carry each warning the last mile."},
  {"id":"house","gap":0.8,"text":"They go house to house with megaphones, and lead people to shelters."},
@@ -496,7 +496,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"story/coast": 4.694, "story/islands": 4.716, "story/ashore": 4.04, "story/radio": 5.949, "story/little": 5.653, "story/stay": 4.011, "story/surge": 5.021, "story/toll": 3.615, "story/after": 5.171, "story/cpp": 9.265, "story/mile": 4.236, "story/house": 3.84, "story/flags": 5.823, "story/sidr": 8.744, "story/ahead": 4.643, "story/shelter": 5.264, "story/died": 6.177, "story/data": 1.494, "story/june": 6.032, "story/passed": 4.339, "story/heard": 4.128, "green/night": 8.226, "green/build": 2.969, "green/wed": 6.615, "green/anyway": 4.023, "green/green": 3.467, "green/boards": 5.987, "green/missing": 3.449, "green/looks": 1.473, "green/see": 3.485, "hours/eight": 3.894, "hours/sam": 6.653, "hours/thirty": 5.468, "hours/level": 6.116, "hours/signal": 4.137, "hours/calls": 6.665, "hours/arrives": 7.097, "hours/goes": 4.742, "hours/december": 7.688, "fresh/monday": 3.852, "fresh/knows": 5.388, "fresh/certs": 4.648, "fresh/seats": 4.727, "fresh/planning": 4.18, "fresh/clocks": 5.083, "fresh/moves": 5.313, "fresh/contract": 5.26, "fresh/pencil": 5.016, "age/says": 2.307, "age/row": 4.327, "age/own": 6.938, "age/shown": 3.437, "age/flags": 3.574, "age/labelled": 6.423, "age/trust": 2.914, "age/cant": 1.318, "stop/source": 3.212, "stop/arrived": 6.889, "stop/level": 3.764, "stop/first": 2.227, "stop/tells": 5.047, "stop/warn": 3.679, "stop/send": 3.405, "stop/waits": 5.404, "stop/data": 2.17, "time/storm": 6.444, "time/list": 6.113, "time/since": 3.724, "time/take": 3.414, "time/series": 5.82};
+const VODUR={"story/coast": 4.694, "story/islands": 4.716, "story/ashore": 4.04, "story/radio": 5.949, "story/little": 5.653, "story/stay": 4.011, "story/surge": 5.021, "story/toll": 3.615, "story/after": 6.813, "story/cpp": 9.265, "story/mile": 4.236, "story/house": 3.84, "story/flags": 5.823, "story/sidr": 8.744, "story/ahead": 4.643, "story/shelter": 5.264, "story/died": 6.177, "story/data": 1.494, "story/june": 6.032, "story/passed": 4.339, "story/heard": 4.128, "green/night": 8.226, "green/build": 2.969, "green/wed": 6.615, "green/anyway": 4.023, "green/green": 3.467, "green/boards": 5.987, "green/missing": 3.449, "green/looks": 1.473, "green/see": 3.485, "hours/eight": 3.894, "hours/sam": 6.653, "hours/thirty": 5.468, "hours/level": 6.116, "hours/signal": 4.137, "hours/calls": 6.665, "hours/arrives": 7.097, "hours/goes": 4.742, "hours/december": 7.688, "fresh/monday": 3.852, "fresh/knows": 5.388, "fresh/certs": 4.648, "fresh/seats": 4.727, "fresh/planning": 4.18, "fresh/clocks": 5.083, "fresh/moves": 5.313, "fresh/contract": 5.26, "fresh/pencil": 5.016, "age/says": 2.307, "age/row": 4.327, "age/own": 6.938, "age/shown": 3.437, "age/flags": 3.574, "age/labelled": 6.423, "age/trust": 2.914, "age/cant": 1.318, "stop/source": 3.212, "stop/arrived": 6.889, "stop/level": 3.764, "stop/first": 2.227, "stop/tells": 5.047, "stop/warn": 3.679, "stop/send": 3.405, "stop/waits": 5.404, "stop/data": 2.17, "time/storm": 6.444, "time/list": 6.113, "time/since": 3.724, "time/take": 3.414, "time/series": 5.82};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2454,7 +2454,7 @@ function lw_dusk(x,tt,c,P){
 function lw_surge(x,tt,c,P){lw_water(x,tt,ag_in(tt,c.surge-0.2,2.0));lw_rain(x,tt,0.32*ag_in(tt,c.surge-0.4,1.6));
   let q=lw_pop(tt,c.toll,c.after-0.3);dq_textCard(x,120,150,720,{kick:"That night",title:"At least 300,000 people died",sub:"perhaps half a million"},{k:q.k,a:q.a});
   q=lw_pop(tt,c.after,null);dq_textCard(x,120,150,760,{title:"A warning people can't read, or don't act on, is no warning"},{edge:"brass",k:q.k,a:q.a});
-  dq_chip(x,120,370,"Something has to change",{a:ag_in(tt,P.change,0.5)});}
+  dq_chip(x,120,370,"Reach every village",{a:ag_in(tt,P.change,0.5)});}
 function lw_dayCpp(x,tt,c,P){const W0=c.mile-0.2,W1=c.house+0.2;
   lw_flags(x,ag_in(tt,P.one,0.9)+ag_in(tt,P.two,0.9)+ag_in(tt,P.three,0.9),tt,{wind:0.8});
   // the last mile: the volunteer's way in, a brass line behind him
@@ -2498,7 +2498,7 @@ function lw_chain(x,tt,c,P,day){let q=lw_pop(tt,c.data-0.1,null);dq_textCard(x,1
   else{q=lw_pop(tt,P.all,null);dq_tag(x,1000,652,"pass",{text:"ALL 23 ON THE LIST",to:[1030,610],flip:true,k:q.k,a:q.a});
     dq_clock(x,1760,150,62,0,480,{a:ag_in(tt,P.notices-0.2,0.5)});dq_chip(x,1760,262,"in time",{align:"center",icon:"clock",col:"pass",a:ag_in(tt,P.notices+0.3,0.5)});}}
 scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),radio:wAt(sc,"radio","the radio"),knew:wAt(sc,"stay","know a storm"),nobody:wAt(sc,"stay","almost nobody"),
-    change:wAt(sc,"after","Something"),lastMile:wAt(sc,"mile","the last mile"),lead:wAt(sc,"house","lead people"),one:wAt(sc,"flags","one"),two:wAt(sc,"flags","two"),
+    change:wAt(sc,"after","The next one"),lastMile:wAt(sc,"mile","the last mile"),lead:wAt(sc,"house","lead people"),one:wAt(sc,"flags","one"),two:wAt(sc,"flags","two"),
     three:wAt(sc,"flags","three"),whole:wAt(sc,"flags","a signal"),million:wAt(sc,"shelter","a million"),still:wAt(sc,"died","still too many"),
     every:wAt(sc,"died","one for every hundred"),lastMileD:wAt(sc,"data","last mile"),doesnt:wAt(sc,"june","doesn't come"),without:wAt(sc,"june","built without it"),
     n23:wAt(sc,"passed","Twenty-three"),nothing:wAt(sc,"passed","nothing says so"),notices:wAt(sc,"heard","notices"),all:wAt(sc,"heard","all twenty-three")}));

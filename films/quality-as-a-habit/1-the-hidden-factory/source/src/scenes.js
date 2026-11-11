@@ -72,7 +72,7 @@ scene("dead",(ctx,S,t,sc)=>{const c=sc.cues,P=hf_once(sc,"P",()=>({six:wAt(sc,"m
     // where the change has to be: the room steps back under a pale veil, and a card
     {at:P.change,place:"hfRoom",keys:[[P.change,960,540,1.0]],d:2.0,push:0,draw:(x,tt)=>{hf_roomLife(x,tt,P,{clerks:1,basket:1,sacks:1,plain:1});
       hf_scr(x,S,()=>{x.fillStyle="rgba(244,238,226,"+(0.72*ag_in(tt,P.change+0.2,0.9))+")";x.fillRect(0,0,W,H);
-        const p=hf_pop(tt,P.where-0.3);dq_textCard(x,610,400,700,{kick:"Something has to change",title:"where the address is written"},{edge:"brass",k:p.k,a:p.a});});}},
+        const p=hf_pop(tt,P.where-0.3);dq_textCard(x,610,400,700,{kick:"The fix has to start",title:"where the address is written"},{edge:"brass",k:p.k,a:p.a});});}},
     // 1943: the zones; a young clerk sorts by the number the sender wrote
     {at:P.zones,dis:1.0,place:"hfCase",keys:[[P.zones,960,540,1.04],[P.zones+0.1,960,540,1.0]],d:2.4,push:0.02,draw:(x,tt)=>hf_caseLife(x,tt,P)},
     // 1963: the ZIP Code, in the sender's hand

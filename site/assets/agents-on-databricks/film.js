@@ -422,7 +422,7 @@ const NARR={
  {"id":"which","gap":0.8,"text":"One is right, and nobody can tell which: none of them shows what it read."},
  {"id":"short","gap":0.8,"text":"Plan for the lowest, and 27 projects would have no lab space.","say":"Plan for the lowest, and twenty-seven projects would have no lab space."},
  {"id":"names","gap":0.8,"text":"And a copy of the projects table, with every researcher's name in it, sits on a laptop."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The agents couldn't keep working away from the data, each on its own copy."},
  {"id":"bring","gap":0.8,"text":"So Sam, who runs the platform, and Jun, who builds the data project, bring the agents to the data, on Databricks."},
  {"id":"same","gap":0.8,"text":"Every agent now reads the same governed tables, definitions and tools as everyone else, and only what its own person may read."},
  {"id":"week","gap":0.8,"text":"A week later, all three answer 168, each with its query, its table and its definition.","say":"A week later, all three answer one hundred and sixty-eight, each with its query, its table and its definition."},
@@ -485,7 +485,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"That's the next film."}]}
 };
 
-const VODUR={"three/monday": 1.812, "three/anil": 4.544, "three/active": 5.156, "three/asks": 6.256, "three/report": 3.643, "three/half": 7.443, "three/table": 5.627, "three/bridge": 8.393, "three/folder": 4.143, "three/which": 3.851, "three/short": 3.918, "three/names": 4.828, "three/change": 1.288, "three/bring": 7.56, "three/same": 8.034, "three/week": 6.684, "three/minute": 5.088, "three/data": 5.877, "place/holds": 7.819, "place/people": 3.834, "place/four": 2.379, "place/answer": 2.824, "place/servers": 2.4, "place/builds": 2.618, "place/writes": 4.323, "place/each": 4.824, "ask/first": 1.653, "ask/genie": 5.666, "ask/care": 5.285, "ask/projects": 5.167, "ask/instr": 8.505, "ask/bench": 7.545, "ask/runs": 5.561, "ask/sql": 3.649, "tools/second": 3.172, "tools/runs": 3.089, "tools/query": 6.388, "tools/genie": 4.562, "tools/anil": 4.932, "tools/once": 5.423, "tools/calls": 3.098, "tools/mcp": 4.362, "build/third": 1.784, "build/fails": 7.795, "build/bricks": 6.23, "build/runtime": 4.596, "build/same": 2.786, "build/before": 4.441, "build/cases": 7.634, "build/judges": 7.26, "build/note": 4.019, "code/fourth": 1.816, "code/sam": 4.157, "code/genie": 5.81, "code/skills": 5.795, "code/profile": 6.045, "code/jun": 4.409, "code/reach": 5.564, "code/teach": 3.833, "code/draft": 7.115, "same/back": 3.742, "same/read": 4.455, "same/asked": 8.033, "same/plans": 2.132, "same/takeaway": 4.743, "same/left": 6.119, "same/next": 1.036};
+const VODUR={"three/monday": 1.812, "three/anil": 4.544, "three/active": 5.156, "three/asks": 6.256, "three/report": 3.643, "three/half": 7.443, "three/table": 5.627, "three/bridge": 8.393, "three/folder": 4.143, "three/which": 3.851, "three/short": 3.918, "three/names": 4.828, "three/change": 4.112, "three/bring": 7.56, "three/same": 8.034, "three/week": 6.684, "three/minute": 5.088, "three/data": 5.877, "place/holds": 7.819, "place/people": 3.834, "place/four": 2.379, "place/answer": 2.824, "place/servers": 2.4, "place/builds": 2.618, "place/writes": 4.323, "place/each": 4.824, "ask/first": 1.653, "ask/genie": 5.666, "ask/care": 5.285, "ask/projects": 5.167, "ask/instr": 8.505, "ask/bench": 7.545, "ask/runs": 5.561, "ask/sql": 3.649, "tools/second": 3.172, "tools/runs": 3.089, "tools/query": 6.388, "tools/genie": 4.562, "tools/anil": 4.932, "tools/once": 5.423, "tools/calls": 3.098, "tools/mcp": 4.362, "build/third": 1.784, "build/fails": 7.795, "build/bricks": 6.23, "build/runtime": 4.596, "build/same": 2.786, "build/before": 4.441, "build/cases": 7.634, "build/judges": 7.26, "build/note": 4.019, "code/fourth": 1.816, "code/sam": 4.157, "code/genie": 5.81, "code/skills": 5.795, "code/profile": 6.045, "code/jun": 4.409, "code/reach": 5.564, "code/teach": 3.833, "code/draft": 7.115, "same/back": 3.742, "same/read": 4.455, "same/asked": 8.033, "same/plans": 2.132, "same/takeaway": 4.743, "same/left": 6.119, "same/next": 1.036};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2288,7 +2288,7 @@ scene("three",(ctx,S,t,sc)=>{
     tWhich:wAt(sc,"which","One is right"),tNobody:wAt(sc,"which","nobody can tell"),
     tShort:wAt(sc,"short","Plan for"),tLowest:wAt(sc,"short","lowest"),tGap:wAt(sc,"short","twenty-seven"),
     tNames:wAt(sc,"names","And a copy"),tEvery:wAt(sc,"names","every researcher's"),
-    tChange:wAt(sc,"change","Something"),
+    tChange:wAt(sc,"change","The agents"),
     tBring:wAt(sc,"bring","So Sam"),tJun:wAt(sc,"bring","Jun"),tAgents:wAt(sc,"bring","bring the agents"),
     tSame:wAt(sc,"same","the same governed"),tOnly:wAt(sc,"same","only what"),
     tWeek:wAt(sc,"week","A week later"),tAll:wAt(sc,"week","all three"),tN4:wAt(sc,"week","one hundred"),tQuery:wAt(sc,"week","its query"),tDef:wAt(sc,"week","its definition"),

@@ -8,7 +8,7 @@ const NARR={
  {"id":"crashed","gap":0.8,"text":"New drivers that young crashed far more often than older ones, most of all at night, and with friends in the car."},
  {"id":"hurt","gap":0.8,"text":"Many were badly hurt, and some were killed."},
  {"id":"switch","gap":0.8,"text":"The licence was a switch: off one day, fully on the next, and experience came only after it."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Experience had to come before the full licence, not after it."},
  {"id":"stages87","gap":0.8,"text":"On the first of August, 1987, the country made the licence come in three stages.","say":"On the first of August, nineteen eighty-seven, the country made the licence come in three stages."},
  {"id":"learner","gap":0.8,"text":"First, six months as a learner, driving only with a fully licensed driver beside you."},
  {"id":"restricted","gap":0.3,"text":"Then a test, and a restricted licence: you could drive alone, but not between ten at night and five in the morning,"},

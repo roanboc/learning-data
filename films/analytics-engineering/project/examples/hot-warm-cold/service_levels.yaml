@@ -1,8 +1,14 @@
-# How fresh, and how long it's kept: the answers to Noor's two questions, as each went into the data's
-# contract in September 2026. Three documents, one per contract, each with only what the answer sets: the
-# Open Data Contract Standard's service levels (slaProperties, v3.1.0), its owner, and its temperature.
-# Written by hand for the film: the project's own contracts are generated (governance/5-data-contracts/),
-# and every one of them is warm.
+# How fresh, and how long it's kept: Noor's answers, as each went into the data's contract in September
+# 2026. Four documents, one per contract, each with only what the answer sets: the Open Data Contract
+# Standard's service levels (slaProperties, v3.1.0), its owner, and its temperature, set by when someone
+# acts on the data, not by what the platform can do:
+#   hot   milliseconds to a few seconds: a machine acts, and the action must come at once
+#   warm  minutes to hours: a person acts within the day
+#   cold  days and longer: people decide over days and weeks
+# The platform offers all three; which one each kind of data gets is the business's call. Where a file is
+# kept (its storage tier) follows how often it's read, a separate question (storageTier, below).
+# Written by hand for the films: the project's own contracts are generated (governance/5-data-contracts/),
+# and every one of them is cold, built each night.
 apiVersion: v3.1.0
 kind: DataContract
 id: 2a3e5c1d-7b40-4e6f-9a21-0c8d5f3b6e17
@@ -18,11 +24,21 @@ description:
 slaProperties:
 - id: contracts_latency
   property: latency
-  value: 60
-  unit: s
+  value: 5
+  unit: m
   element: contracts.changed_at
   driver: operational
-  description: Each change HR records is in the table within a minute. Until September 2026, once a night.
+  description: Each change HR records is in the table within five minutes, as coordinators approve claims
+    all morning. Until September 2026, once a night. Until the new ERP brings contracts and claims into
+    one system (2028), the platform fills the gap.
+- id: contracts_frequency
+  property: frequency
+  value: 5
+  unit: m
+  driver: operational
+  scheduler: cron
+  schedule: '*/5 * * * *'
+  description: The pipeline runs every five minutes, triggered, never continuously.
 team:
   name: Ingrid Holm, HR
   members:
@@ -31,8 +47,8 @@ team:
     role: owner
 customProperties:
 - property: temperature
-  value: hot
-  description: Needed within seconds or minutes, and read all the time.
+  value: warm
+  description: Acted on within minutes or hours, by a person approving claims.
 ---
 apiVersion: v3.1.0
 kind: DataContract
@@ -58,7 +74,7 @@ slaProperties:
   value: 1
   unit: d
   driver: analytics
-  description: Yesterday's figures. Fresh enough for the morning's look.
+  description: Yesterday's figures. Fresh enough, since no one acts on them sooner.
 - id: spending_ready
   property: timeOfAvailability
   value: '07:00'
@@ -72,8 +88,9 @@ team:
     role: owner
 customProperties:
 - property: temperature
-  value: warm
-  description: Fresh to the hour or the day, and read often.
+  value: cold
+  description: Acted on days or weeks later, as spending is talked over once a month, and only then does
+    money move between budgets. A nightly batch.
 ---
 apiVersion: v3.1.0
 kind: DataContract
@@ -110,8 +127,46 @@ team:
 customProperties:
 - property: temperature
   value: cold
-  description: Rarely read, but kept. Cheap, until the date it may be deleted.
+  description: A batch each pay day, acted on days or weeks later, if at all.
+- property: storageTier
+  value: hot, then archive
+  description: Read often for a year, then rarely, so kept where reading is cheap, then where keeping is
+    cheap. How often it's read decides where it's kept; the law and the business, for how long.
 - property: archivedAfter
   value: 365 days
   description: Each data file moves to the storage's archive tier a year after it's written (the storage
     account's lifecycle rule, and delta.timeUntilArchived on the table).
+---
+apiVersion: v3.1.0
+kind: DataContract
+id: 5d9e0b37-6a2c-4f81-a4e3-17c8b2f60d94
+name: bank_account_changes
+version: 1.0.0
+status: active
+domain: hr
+description:
+  purpose: Each change to a staff member's bank account, as payroll records it, checked against the
+    sign-in behind it. A change from a new device close to pay day holds that one pay, and asks the
+    person to confirm. In August 2026, two staff members' pay went to a stranger's account.
+  limitations: An event carries only what changed. The full pay record, and every correction, still come
+    in payroll's nightly file (the cold path), so this never stands alone.
+slaProperties:
+- id: bank_change_latency
+  property: latency
+  value: 1
+  unit: s
+  element: bank_account_changes.changed_at
+  driver: operational
+  description: Each change is checked, and a pay held if the rule says so, within a second. A report read
+    the next morning would come after the money had gone.
+team:
+  name: Ingrid Holm, HR
+  members:
+  - username: ingrid.holm@uni.example
+    name: Ingrid Holm, HR
+    role: owner
+customProperties:
+- property: temperature
+  value: hot
+  description: Acted on within a second, by a machine, with no person waiting to decide. It costs the
+    most, because it never stops, so very few needs are kept hot.

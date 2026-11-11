@@ -1,4 +1,4 @@
--- Warm: what each faculty has spent this year against its budget, which Rohan Desai, in Finance, and the
+-- Cold: what each faculty has spent this year against its budget, which Rohan Desai, in Finance, and the
 -- four faculties' managers check every morning. Databricks only (dbt-databricks); CI doesn't run it.
 --
 -- Until September 2026 every look read the finance system's ledger in place: slow, and a load on the

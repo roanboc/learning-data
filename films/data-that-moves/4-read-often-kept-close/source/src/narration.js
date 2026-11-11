@@ -1,0 +1,56 @@
+// Read often, kept close, the fourth film of Data that moves, in Modern data basics. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers in words). The few longer stops are in breath.js.
+const NARR={
+"vault":{"name":"The seed vault","lead":1.6,"tail":1.0,"vo":[
+ {"id":"feb","gap":0.8,"text":"February 2008. Deep in a frozen mountain on Svalbard, Norway's Arctic islands, a vault opens.","say":"February, two thousand and eight. Deep in a frozen mountain on Svalbard, Norway's Arctic islands, a vault opens."},
+ {"id":"copies","gap":0.8,"text":"At minus eighteen degrees, it keeps copies of seeds from gene banks around the world."},
+ {"id":"banks","gap":0.8,"text":"Gene banks keep the seeds of crops and their wild relatives, so breeders can grow crops that stand drought and disease."},
+ {"id":"aleppo","gap":0.8,"text":"Near Aleppo, in Syria, a gene bank keeps 141,052 samples of wheat, barley, lentils and chickpeas, from the world's dry lands.","say":"Near Aleppo, in Syria, a gene bank keeps a hundred and forty-one thousand and fifty-two samples of wheat, barley, lentils and chickpeas, from the world's dry lands."},
+ {"id":"send","gap":0.8,"text":"From 2008, it sends copies of most of them to the vault.","say":"From two thousand and eight, it sends copies of most of them to the vault."},
+ {"id":"lost","gap":0.8,"text":"But a gene bank can be lost, to war, flood or a power cut, and a variety lost is lost for good."},
+ {"id":"war","gap":0.8,"text":"In 2012, war came close to Aleppo. Most of the bank's keepers had to leave, and it could no longer send seeds out.","say":"In twenty twelve, war came close to Aleppo. Most of the bank's keepers had to leave, and it could no longer send seeds out."},
+ {"id":"risk","gap":0.8,"text":"Breeders could no longer get the seeds they relied on, and every variety in the bank was at risk."},
+ {"id":"unless","gap":0.8,"text":"Unless the copies could come back, the collection would be lost for good."},
+ {"id":"ask","gap":0.8,"text":"In 2015, the keepers did what no one had done before: they asked the vault for their copies.","say":"In twenty fifteen, the keepers did what no one had done before: they asked the vault for their copies."},
+ {"id":"sown","gap":0.8,"text":"38,073 samples came out of the mountain, and that November they were sown in Lebanon and Morocco.","say":"Thirty-eight thousand and seventy-three samples came out of the mountain, and that November they were sown in Lebanon and Morocco."},
+ {"id":"gone","gap":0.8,"text":"By 2020, nothing was left of the collection in Aleppo.","say":"By twenty twenty, nothing was left of the collection in Aleppo."},
+ {"id":"few","gap":0.8,"text":"Yet no more than 1,657 of its samples were lost, and breeders can order its seeds again.","say":"Yet no more than one thousand, six hundred and fifty-seven of its samples were lost, and breeders can order its seeds again."},
+ {"id":"kept","gap":0.8,"text":"Seeds in use, kept close and ready; their copies, frozen far away, until the day they're needed."},
+ {"id":"data","gap":0.8,"text":"Data can be kept the same way."},
+ {"id":"alike","gap":0.8,"text":"Until September, the university kept all its data in the same storage, whether it was read every day or once in seven years."},
+ {"id":"costly","gap":0.8,"text":"Years of old pay records filled the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them."},
+ {"id":"now","gap":0.8,"text":"Now where data is kept follows how often it's read."}]},
+"tiers":{"name":"Read often, or rarely","lead":0.8,"tail":1.0,"vo":[
+ {"id":"noor","gap":0.8,"text":"In September, Noor asked each data owner a second question, after how fresh it must be: how often is it read?"},
+ {"id":"names","gap":0.8,"text":"Cloud storage comes in tiers, named hot, cool, cold and archive, after how often data is read."},
+ {"id":"not","gap":0.8,"text":"The names sound like data's temperature, but they answer another question: not when someone acts on it, but how often anyone reads it."},
+ {"id":"cost","gap":0.8,"text":"Each tier down costs less to keep, and more to read. The archive tier takes hours to bring a file back."},
+ {"id":"rule","gap":0.8,"text":"So keep what's read often where reading is cheap, and what's rarely read where keeping is cheap."},
+ {"id":"long","gap":0.8,"text":"How long it's kept at all is set by the law and the business, and it goes into the data's contract."}]},
+"records":{"name":"Pay records","lead":0.8,"tail":1.0,"vo":[
+ {"id":"records","gap":0.8,"text":"Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked."},
+ {"id":"law","gap":0.8,"text":"Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read."},
+ {"id":"before","gap":0.8,"text":"Until September, every year's records sat in the hot tier, and none was ever deleted."},
+ {"id":"archive","gap":0.8,"text":"Now, a year after it's written, each file moves to the archive tier, the cheapest to keep."},
+ {"id":"vault","gap":0.8,"text":"Like the copies on Svalbard, they sleep until someone needs them."},
+ {"id":"told","gap":0.8,"text":"The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back."},
+ {"id":"hours","gap":0.8,"text":"Bringing them back takes hours, which is fine for an audit."},
+ {"id":"seven","gap":0.8,"text":"When a year's records turn seven, they're deleted, on a date set in advance, and their files removed for good."},
+ {"id":"october","gap":0.8,"text":"In October, the oldest records, more than seven years old, were deleted."},
+ {"id":"privacy","gap":0.8,"text":"How to delete well is for the films on data protection."}]},
+"years":{"name":"One record's years","lead":0.8,"tail":1.0,"vo":[
+ {"id":"ages","gap":0.8,"text":"One record moves down as it ages."},
+ {"id":"linh","gap":0.8,"text":"Today, Linh's pay record is written. This year it's read often: for her payslip, a question, the year's end."},
+ {"id":"year","gap":0.8,"text":"A year from now, its file moves to the archive tier, where keeping it costs a small part of what it did."},
+ {"id":"audit","gap":0.8,"text":"If an audit asks for it, it comes back in hours."},
+ {"id":"seven","gap":0.8,"text":"Seven years after her contract ends, it's deleted, and its files are removed for good."},
+ {"id":"follow","gap":0.8,"text":"At each step, where it lives follows how often it's read."}]},
+"close":{"name":"Kept as it's read","lead":0.8,"tail":1.0,"vo":[
+ {"id":"svalbard","gap":0.8,"text":"On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again."},
+ {"id":"university","gap":0.8,"text":"At the university, data is kept the same way: what's read often, where it's quick to read; old pay records, cheaply, until they're deleted."},
+ {"id":"today","gap":0.8,"text":"Today, a pay day, 2,960 new pay records are written, Linh's among them.","say":"Today, a pay day, two thousand, nine hundred and sixty new pay records are written, Linh's among them."},
+ {"id":"takeaway","gap":0.8,"text":"How often data is read decides where it's kept; the law and the business decide for how long."},
+ {"id":"wheel","gap":0.8,"text":"Storage has had tiers for years: there's no wheel to reinvent."},
+ {"id":"docs","gap":0.8,"text":"Start from the official docs, then investigate, adapt, implement, iterate."},
+ {"id":"next","gap":0.8,"text":"Next: data as software, where scripts became software."}]}
+};

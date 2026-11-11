@@ -2998,11 +2998,12 @@ Object.assign(POSE,{
   // hands open at the sides, showing: "here, see"
   po_offer:{L:[0.4,-0.9],R:[0.4,-0.9],hand:"open",feet:26,shift:0,tilt:0.03,turn:0.05,gaze:[0.3,0.4],look:0}
 });
-// bolts of silk and velvet, carried in both arms, their ends to us
+// bolts of silk and velvet, carried in both arms, their ends to us. What is held in both hands has its thumbs at its edges, where the
+// hands hold it: the hold pose's hands sit close together in the middle, and thumbs drawn there float (10 November 2026)
 function po_heldBolts(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-14);
   [[-44,10,0],[44,10,1],[0,-34,2]].forEach(([bx,by,i])=>{const c=PO.silk[(i*2+1)%PO.silk.length];cx.beginPath();cx.ellipse(bx,by,46,42,0,0,TAU);litFill(cx,c,bx-46,by-42,bx+46,by+42);seam(cx,c,0.55);
     cx.strokeStyle=rgba(lighten(c,0.3),0.6);cx.lineWidth=2;for(const rr of [32,20,9]){cx.beginPath();cx.ellipse(bx,by,rr,rr*0.92,0,0,TAU);cx.stroke();}
-    cx.fillStyle=rgba(darken(c,0.4),1);cx.beginPath();cx.arc(bx,by,5,0,TAU);cx.fill();});cx.restore();fingers(cx,P_,[[l[0]+4,l[1]],[r[0]-4,r[1]]]);}
+    cx.fillStyle=rgba(darken(c,0.4),1);cx.beginPath();cx.arc(bx,by,5,0,TAU);cx.fill();});cx.restore();fingers(cx,P_,[[mx-84,my-4],[mx+84,my-4]]);}
 // a small wooden chest with iron bands and a lock, held in both hands
 function po_heldChest(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-6);const w=150,h=96,c=PO.wood;
   cx.beginPath();cx.rect(-w/2,-h/2+20,w,h-20);litFill(cx,c,-w/2,-h/2,w/2,h/2);seam(cx,c,0.6);cx.beginPath();cx.moveTo(-w/2,-h/2+20);cx.quadraticCurveTo(0,-h/2-14,w/2,-h/2+20);cx.closePath();litFill(cx,lighten(c,0.08),-w/2,-h/2-14,w/2,-h/2+20);seam(cx,c,0.6);
@@ -3027,7 +3028,7 @@ function po_capPaint(cx,c,o){o=o||{};const sq=Math.cos(o.turn||0),w=58,h=72;cx.s
   cx.beginPath();cx.ellipse(0,-2,w+6,15*Math.max(0.5,sq),0,0,TAU);litFill(cx,darken(c,0.08),-w-6,-16,w+6,12);seam(cx,c,0.55);
   cx.strokeStyle=rgba(lighten(c,0.25),0.5);cx.lineWidth=2;cx.beginPath();cx.ellipse(0,-6,w,9,0,Math.PI*1.1,Math.PI*1.9);cx.stroke();cx.restore();}
 function po_heldCap(c,o){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+4);cx.rotate(o&&o.tilt||0);po_capPaint(cx,c,o);cx.restore();
-  fingers(cx,P_,[[l[0]+6,l[1]-2],[r[0]-6,r[1]-2]]);};}
+  fingers(cx,P_,[[mx-60,my+2],[mx+60,my+2]]);};}
 // a balance: a beam, two pans on cords, held up by its loop
 function po_heldBalance(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0],r[1]);const br=[176,140,70];cx.strokeStyle=rgba(darken(br,0.35),1);cx.lineWidth=3;
   cx.beginPath();cx.moveTo(0,-8);cx.lineTo(0,26);cx.stroke();cx.lineWidth=6;cx.beginPath();cx.moveTo(-84,28);cx.lineTo(84,28);cx.stroke();
@@ -3042,7 +3043,7 @@ function po_heldRod(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0],r[
 function po_heldFelt(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my);const c=PO.felt[2];
   cx.beginPath();cx.moveTo(-70,10);cx.quadraticCurveTo(-40,-30,10,-24);cx.quadraticCurveTo(60,-20,70,14);cx.quadraticCurveTo(0,34,-70,10);cx.closePath();litFill(cx,c,-70,-30,70,30);seam(cx,c,0.5);
   cx.strokeStyle=rgba([236,226,200],0.9);cx.lineWidth=1.6;cx.beginPath();cx.moveTo(30,-6);cx.quadraticCurveTo(52,-44,40,-80);cx.stroke();cx.strokeStyle=rgba([180,184,192],1);cx.lineWidth=2.4;cx.beginPath();cx.moveTo(40,-80);cx.lineTo(46,-104);cx.stroke();
-  cx.restore();fingers(cx,P_,[[l[0]+8,l[1]],[r[0]-8,r[1]]]);}
+  cx.restore();fingers(cx,P_,[[mx-64,my+10],[mx+64,my+10]]);}
 
 // ---- a person of the past seen from behind, walking away (or standing, o.ph fixed): their robe, sash and turban, or cloak and veil ----
 function po_back(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,ph=o.ph||0,sw=P_.build.sh,hw=P_.build.hip,T_=P_.top,c=T_.c,fer=T_.kind==="po_ferace",
@@ -3677,10 +3678,13 @@ function po_rodFlat(ctx,x,y,L,lift){const c=[222,184,126];
   ctx.fillStyle=rgba([176,50,40],0.95);for(let i=0;i<=8;i++){const mx=x+3+i*(L-3)/8;ctx.fillRect(mx-2.2,y-16,4.4,i%4===0?22:12);}
   ctx.fillStyle=rgba([120,92,60],1);ctx.fillRect(x,y-16,8,22);ctx.fillRect(x+L-4,y-16,8,22);po_line(ctx,[[x,y-16],[x+L,y-16],[x+L+4,y+6],[x+4,y+6]],1,0.5);}
 // the inspector's man's hand on the rod, his sleeve coming up from the street below the frame: a tapering sleeve, its cuff, the hand
-// round the rod, its thumb along it
-function po_rodHand(ctx,hx,hy){const P_=PEOPLE.po_rodman,sl=P_.top.c,cuff=P_.top.inner,sk=P_.skin,b0=[hx+230,H+60],b1=[hx+46,hy+40];
+// round the rod, its thumb along it. He stands just before the camera, so his hand is drawn larger (PO_RODK) than the merchant's behind
+// the counter: at the merchant's size his sleeve ran four and a half hand lengths to the frame's edge, an arm too long (10 November 2026)
+const PO_RODK=1.4;
+function po_rodHand(ctx,hx,hy){ctx.save();ctx.translate(hx,hy);ctx.scale(PO_RODK,PO_RODK);ctx.translate(-hx,-hy);po_rodHand0(ctx,hx,hy);ctx.restore();}
+function po_rodHand0(ctx,hx,hy){const P_=PEOPLE.po_rodman,sl=P_.top.c,cuff=P_.top.inner,sk=P_.skin,b0=[hx+230,H+60],b1=[hx+46,hy+40];
   const dx=b1[0]-b0[0],dy=b1[1]-b0[1],l=Math.hypot(dx,dy),nx=-dy/l,ny=dx/l,sh=(p,q,r)=>[[p[0]+nx*r,p[1]+ny*r],[q[0]+nx*r*0.62,q[1]+ny*r*0.62],[q[0]-nx*r*0.62,q[1]-ny*r*0.62],[p[0]-nx*r,p[1]-ny*r]];
-  wc_wash(ctx,sh(b0,b1,64),sl,{kind:"thing",seed:1431,lw:1.3});const cf=[b1[0]-dx/l*16,b1[1]-dy/l*16];wc_wash(ctx,sh(cf,b1,44),cuff,{kind:"thing",seed:1432,lw:1.1});
+  if(window.__ARM__)__ARM__(ctx,b1[0],b1[1],b0[0],b0[1],90);wc_wash(ctx,sh(b0,b1,64),sl,{kind:"thing",seed:1431,lw:1.3});const cf=[b1[0]-dx/l*16,b1[1]-dy/l*16];wc_wash(ctx,sh(cf,b1,44),cuff,{kind:"thing",seed:1432,lw:1.1});
   // the hand: the back of it over the rod, the fingers round its far side, the thumb along it
   const hp=[[hx-30,hy-4],[hx-24,hy-30],[hx+2,hy-40],[hx+34,hy-34],[hx+56,hy-12],[hx+60,hy+24],[hx+40,hy+42],[hx+8,hy+30]];wc_wash(ctx,hp,sk,{kind:"thing",seed:1433,lw:1.2});
   ctx.save();ctx.strokeStyle=rgba(wc_dim(sk,0.3),0.6);ctx.lineWidth=2;ctx.lineCap="round";for(const k of [0,1,2]){const fx=hx-20+k*18;ctx.beginPath();ctx.moveTo(fx,hy-30+k*3);ctx.quadraticCurveTo(fx-4,hy-12,fx-2,hy+2);ctx.stroke();}

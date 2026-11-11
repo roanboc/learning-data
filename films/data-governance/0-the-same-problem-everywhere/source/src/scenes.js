@@ -129,7 +129,7 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
       const L3=[["customer:",1040,470,52,P.dict+0.3,0.6],["has bought from us",1070,546,46,P.dict+1.0,1.0],["in the last 3 years",1070,614,46,P.dict+2.1,1.0]];let pen=null;
       L3.forEach(([s,lx,ly,sz,t0,d])=>{const p=clamp((tt-t0)/d,0,1);if(p<=0)return;wc_hand(x,s,lx,ly,{size:sz,col:ink,w:600,p});
         pen=[lx+tw(x,s.slice(0,Math.ceil(s.length*p)),sz,600),ly-sz*0.25];});
-      sp_penHand(x,...(pen||[1040,470]),1.25);}},
+      sp_penHand(x,...(pen||[1040,470]),1.4);}},
     // Los Angeles at dusk, 1980: an office building, its upstairs room lit, palms against the sky
     {at:c.la-0.3,place:"laOut",keys:[[c.la-0.3,960,540,1.0],[c.la+0.3,700,560,1.25]],d:2.6},
     // inside, the meeting: what they've learned goes up on the flip chart, line by line; then the card on the table, close
@@ -156,7 +156,7 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
     // from above: she copies a page from the binder she borrowed into her own
     {at:P.them+0.95,place:"copy80",keys:[[P.them+0.95,960,540,1.04],[P.them+1.15,1200,520,1.22]],d:2.6,draw:(x,tt)=>{let pen=null;
       SP_CP.lines.forEach(([lx,ly,w,head],i)=>{const p=clamp((tt-P.them-1.25-i*0.6)/0.52,0,1);if(p>0)pen=sp_scribble(x,lx,ly,w,p,331+i,head);});
-      sp_penHand(x,...(pen||SP_CP.lines[0].slice(0,2)),1.25);}}]);
+      sp_penHand(x,...(pen||SP_CP.lines[0].slice(0,2)),1.4);}}]);
   sp_pill(ctx,t,mk,fin(t,0.4,0.6)*(1-gv_io(t,c.questions+0.3,c.job+0.25,0.4))*(1-gv_io(t,P.dama-0.4,P.city-0.6,0.4))*(1-fin(t,c.alone-0.4,0.4)));});
 
 // ---- 3 · Someone signs: in 2002, a law makes the chief executive and the chief financial officer sign for the figures ----

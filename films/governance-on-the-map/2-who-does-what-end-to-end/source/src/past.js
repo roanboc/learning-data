@@ -134,7 +134,11 @@ function ee_bundle(cx,x,y,s,o){o=o||{};const op=clamp(o.open||0,0,1);cx.save();c
   for(let i=0;i<(o.left==null?7:o.left);i++){const a=(i-3)*0.05*op+((i*37)%7-3)*0.006,dx=(i-3)*14*op,dy=-i*4;ee_slipAt(cx,dx,dy,120,a);}
   if(op<0.98)withA(cx,1-op,()=>{cx.strokeStyle=rgba(EE_RIBBON,1);cx.lineWidth=6;cx.beginPath();cx.moveTo(-60,-12);cx.lineTo(60,-12);cx.stroke();cx.beginPath();cx.moveTo(4,-44);cx.lineTo(4,22);cx.stroke();
     cx.beginPath();cx.ellipse(-8,-16,12,6,0.5,0,TAU);cx.ellipse(16,-16,12,6,-0.5,0,TAU);cx.stroke();});cx.restore();}
-function ee_heldBundle(o){return(cx,P_,hands)=>{const [l,r]=hands;ee_bundle(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-6,1.1,o);fingers(cx,P_,[l,r]);};}
+// thumbs on a thing held in both hands go at its edges, hw either side of the hands' middle (dy below it), where the hands hold it: the
+// hold pose crosses the forearms behind the thing, so the hands themselves sit together in its middle, and thumbs drawn there float on
+// it (10 November 2026; the series' hands.py lists any)
+function ee_grip(cx,P_,hands,hw,dy){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2+(dy||0);fingers(cx,P_,[[mx-hw,my],[mx+hw,my]]);}
+function ee_heldBundle(o){return(cx,P_,hands)=>{const [l,r]=hands;ee_bundle(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-6,1.1,o);ee_grip(cx,P_,hands,62+48*clamp(o.open||0,0,1),0);};}
 // one slip between finger and thumb, held up
 function ee_heldSlip(cx,P_,hands){const h=hands[1];ee_slipAt(cx,h[0]+8,h[1]-36,130,-0.12);fingers(cx,P_,[h]);}
 // a letter, folded, in both hands at the chest, held by its lower corners; o.seal (0 to 1) the wax seal pressed on
@@ -147,7 +151,7 @@ function ee_heldLetter(o){o=o||{};return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[
 function ee_heldWriting(p){return(cx,P_,hands)=>{const [l,r]=hands;cx.save();cx.translate(l[0]+70,l[1]-30);cx.rotate(-0.06);cx.fillStyle="rgba(50,36,24,0.22)";cx.fillRect(-86,-56,176,120);
   cx.fillStyle=rgba([244,238,220],1);cx.fillRect(-90,-62,176,120);cx.strokeStyle=rgba(WC_PENCIL,0.5);cx.lineWidth=2;cx.strokeRect(-90,-62,176,120);
   cx.strokeStyle=rgba([40,40,70],0.75);cx.lineWidth=3;cx.lineCap="round";const n=5,q=clamp(p,0,1)*n;for(let i=0;i<n;i++){const f=clamp(q-i,0,1);if(f<=0)break;cx.beginPath();cx.moveTo(-70,-38+i*20);cx.lineTo(-70+(i===n-1?80:136)*f,-38+i*20);cx.stroke();}
-  cx.restore();cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();fingers(cx,P_,[l,r]);};}
+  cx.restore();cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();fingers(cx,P_,[[l[0]-18,l[1]],r]);};}
 // the letter written (p, as ee_heldWriting draws it) folded into the letter ready to seal (as ee_heldLetter draws it, without its seal)
 // as m goes from 0 to 1: the sheet goes from the left hand to both, its lines giving way to the fold's, and the pen is put down; so the
 // one becomes the other over a few frames rather than in one
@@ -158,15 +162,15 @@ function ee_heldFolding(p,m){const W_=ee_heldWriting(p);return(cx,P_,hands)=>{if
     cx.beginPath();cx.moveTo(-70,-38+i*20);cx.lineTo(-70+(i===n-1?80:136)*f,-38+i*20);cx.stroke();}});
   withA(cx,m,()=>{cx.beginPath();cx.moveTo(-90,-56);cx.lineTo(0,6);cx.lineTo(90,-56);cx.stroke();});cx.restore();
   withA(cx,1-sstep(0,0.5,m),()=>{cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();});
-  fingers(cx,P_,[[L(l[0],mx-80),L(l[1],my+18)],[L(r[0],mx+80),L(r[1],my+18)]]);};}
+  fingers(cx,P_,[[L(l[0]-18,mx-80),L(l[1],my+18)],[L(r[0],mx+80),L(r[1],my+18)]]);};}
 // a pen in the right hand, its nib down (o.red: dipped in red ink)
 function ee_heldPen(o){o=o||{};return(cx,P_,hands)=>{const h=hands[1];cx.save();cx.translate(h[0]+2,h[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();
   cx.fillStyle=rgba(o.red?[176,40,40]:[150,140,120],1);cx.beginPath();cx.moveTo(-4,4);cx.lineTo(4,4);cx.lineTo(0,22);cx.closePath();cx.fill();cx.restore();fingers(cx,P_,[h]);};}
 // a phone in the right hand, its screen lit (the series' "phone" pose holds it to read)
 function ee_heldCard(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-40);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-60,-40,128,90);
   cx.fillStyle="#fffdf6";cx.fillRect(-64,-46,128,90);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-64,-46,128,90);cx.fillStyle=rgba(WC_MUTED,0.5);cx.fillRect(-46,-20,70,6);cx.fillRect(-46,-4,86,5);cx.fillRect(-46,10,60,5);
-  cx.restore();fingers(cx,P_,[l,r]);}
+  cx.restore();ee_grip(cx,P_,hands,60,-30);}
 // the same card held lower, on the chest, so the face above it shows
 function ee_heldCardLow(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-14);cx.rotate(-0.05);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-54,-34,116,80);
   cx.fillStyle="#fffdf6";cx.fillRect(-58,-40,116,80);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-58,-40,116,80);cx.fillStyle=rgba(WC_MUTED,0.5);cx.fillRect(-42,-18,64,6);cx.fillRect(-42,-4,78,5);cx.fillRect(-42,9,54,5);
-  cx.restore();fingers(cx,P_,[l,r]);}
+  cx.restore();ee_grip(cx,P_,hands,55,-6);}

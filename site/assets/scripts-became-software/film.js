@@ -436,7 +436,7 @@ const NARR={
  {"id":"gertie","gap":0.8,"text":"From the first day, the deck rises and falls in the wind, and people call it Galloping Gertie."},
  {"id":"nobody","gap":0.8,"text":"Nobody had tested how wind would move a deck like it."},
  {"id":"twist","gap":0.8,"text":"On the 7th of November, a wind of about 40 miles an hour sets it twisting, until its middle tears away and falls into the water.","say":"On the seventh of November, a wind of about forty miles an hour sets it twisting, until its middle tears away and falls into the water."},
- {"id":"gone","gap":0.8,"text":"No one is killed, but the only road across the Narrows is gone for ten years. Something had to change."},
+ {"id":"gone","gap":0.8,"text":"No one is killed, but the only road across the Narrows is gone for ten years. The next bridge had to be proven before it was built."},
  {"id":"board","gap":0.8,"text":"The engineers who looked into it said such bridges must first be tested as models in a wind tunnel, where a fan blows a steady wind."},
  {"id":"tunnel","gap":0.8,"text":"At the University of Washington, Frederick Farquharson tests models for years."},
  {"id":"finds","gap":0.8,"text":"The tests find a deck the wind can't twist: deeper, stiffer, and open to let the wind through."},
@@ -458,20 +458,22 @@ const NARR={
  {"id":"move","gap":0.8,"text":"Sam Okafor, who runs the platform, and Jun Park moved it into the data project."},
  {"id":"git","gap":0.8,"text":"First into Git, beside the models, where every change is kept, with who made it and why."},
  {"id":"model","gap":0.8,"text":"Its sums became a model in dbt, and the rule is written once, on HR's calendar of pay days."},
- {"id":"ingrid","gap":0.8,"text":"Ingrid Holm in HR confirmed the rule, and a change to the pay days now asks HR to review it."},
+ {"id":"ingrid","gap":0.8,"text":"Ingrid Holm in HR confirmed the rule; a change to the pay days now starts with a ticket from HR."},
  {"id":"tests","gap":0.8,"text":"Jun wrote the tests first, at the rule's edge: approved at 11:59 on the Monday, a claim is paid that Thursday; at 12:01, two weeks later.","say":"Jun wrote the tests first, at the rule's edge: approved at eleven fifty-nine on the Monday, a claim is paid that Thursday; at twelve oh one, two weeks later."},
  {"id":"weeds","gap":0.8,"text":"In the weeds of data crafting shows how, in Declare it, then build it, Promises and proofs, and Built in layers."},
  {"id":"branch","gap":0.8,"text":"Each change goes on a branch, and comes back as a pull request, with checks that build it and run every test."}]},
 "review":{"name":"Someone else reads it","lead":1.2,"tail":1.0,"vo":[
- {"id":"other","gap":0.8,"text":"Then someone other than its author reviews it."},
+ {"id":"other","gap":0.8,"text":"Then someone else on the data team, not its author, reviews it."},
  {"id":"swap","gap":0.8,"text":"Jun wrote the model, so Sam reviewed it; Sam wrote the job, so Jun reviewed that."},
  {"id":"merge","gap":0.8,"text":"Nothing merges without that review, and every check green."},
+ {"id":"ticket","gap":0.8,"text":"Finance and HR don't review the code: Rohan asked for the move in a ticket, linked to its branch and pull requests."},
  {"id":"surprises","gap":0.8,"text":"Change without surprises shows how a change reaches the people it touches."},
  {"id":"agents","gap":0.8,"text":"And it holds when an agent writes the change: the agent proposes, and a person approves."}]},
 "release":{"name":"The same way, every time","lead":1.2,"tail":1.0,"vo":[
  {"id":"bundle","gap":0.8,"text":"How it runs is a file too: a Declarative Automation Bundle lists the project's jobs, and where each one runs."},
  {"id":"job","gap":0.8,"text":"Payroll's export runs at six every Thursday, and builds and tests everything it reads."},
  {"id":"test","gap":0.8,"text":"Once a change is merged, the same files are deployed to test, and the job runs there first."},
+ {"id":"checks","gap":0.8,"text":"Rohan checks its figures in test against his own, and his ticket stays open until he says they're right."},
  {"id":"noor","gap":0.8,"text":"Then the release waits for Noor, the data architect. When she approves, the same files go to production."},
  {"id":"account","gap":0.8,"text":"It runs as the platform's own account, never a person's: nobody deploys from a laptop."},
  {"id":"drift","gap":0.8,"text":"The same files, the same steps, every time, so test and production can't drift apart."},
@@ -488,7 +490,7 @@ const NARR={
  {"id":"takeaway","gap":0.8,"text":"Data work is software."}]}
 };
 
-const VODUR={"gertie/opens": 3.302, "gertie/narrows": 6.798, "gertie/slender": 4.863, "gertie/gertie": 5.533, "gertie/nobody": 3.058, "gertie/twist": 7.954, "gertie/gone": 6.302, "gertie/board": 8.28, "gertie/tunnel": 4.689, "gertie/finds": 5.398, "gertie/opens50": 6.928, "gertie/next": 7.079, "gertie/data": 3.218, "gertie/export": 6.624, "gertie/now": 6.693, "laptop/payday": 4.776, "laptop/rohan": 7.77, "laptop/script": 3.188, "laptop/byhand": 5.403, "laptop/rule": 8.609, "laptop/worked": 5.037, "laptop/feb": 5.315, "laptop/unsafe": 6.545, "project/move": 5.191, "project/git": 5.017, "project/model": 6.708, "project/ingrid": 6.372, "project/tests": 9.897, "project/weeds": 6.402, "project/branch": 6.528, "review/other": 2.465, "review/swap": 4.872, "review/merge": 3.21, "review/surprises": 4.359, "review/agents": 5.336, "release/bundle": 6.791, "release/job": 5.259, "release/test": 5.752, "release/noor": 6.076, "release/account": 5.555, "release/drift": 5.298, "release/today": 6.904, "choose/decades": 7.621, "choose/keep": 7.039, "choose/night": 4.659, "choose/wheel": 3.185, "choose/docs": 4.598, "stands/bridge": 4.412, "stands/export": 5.267, "stands/takeaway": 1.293};
+const VODUR={"gertie/opens": 3.302, "gertie/narrows": 6.798, "gertie/slender": 4.863, "gertie/gertie": 5.533, "gertie/nobody": 3.058, "gertie/twist": 7.954, "gertie/gone": 7.892, "gertie/board": 8.28, "gertie/tunnel": 4.689, "gertie/finds": 5.398, "gertie/opens50": 6.928, "gertie/next": 7.079, "gertie/data": 3.218, "gertie/export": 6.624, "gertie/now": 6.693, "laptop/payday": 4.776, "laptop/rohan": 7.77, "laptop/script": 3.188, "laptop/byhand": 5.403, "laptop/rule": 8.609, "laptop/worked": 5.037, "laptop/feb": 5.315, "laptop/unsafe": 6.545, "project/move": 5.191, "project/git": 5.017, "project/model": 6.708, "project/ingrid": 6.59, "project/tests": 9.897, "project/weeds": 6.402, "project/branch": 6.528, "review/other": 3.55, "review/swap": 4.872, "review/merge": 3.21, "review/ticket": 7.441, "review/surprises": 4.359, "review/agents": 5.336, "release/bundle": 6.791, "release/job": 5.259, "release/test": 5.752, "release/checks": 6.128, "release/noor": 6.076, "release/account": 5.555, "release/drift": 5.298, "release/today": 6.904, "choose/decades": 7.621, "choose/keep": 7.039, "choose/night": 4.659, "choose/wheel": 3.185, "choose/docs": 4.598, "stands/bridge": 4.412, "stands/export": 5.267, "stands/takeaway": 1.293};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2110,6 +2112,15 @@ function sb_pr(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=o.h||236,box={x,y,
     const label=rv>0.5?(o.reviewer?"Approved by "+o.reviewer:"Approved"):"Review needed",col=rv>0.5?MD.pass:MD.wait;
     md_tag(ctx,px-md_tw(ctx,label,{w:700,size:28})-88,y+h-44,label,{col,icon:rv>0.5?"tick":"person"});ctx.restore();}
   ctx.restore();return box;}
+// a ticket: what someone outside the data team asked for, linked to the branch and the pull requests that do it. o.status (its
+// state, in a tag at the foot), o.statusCol, o.statusIcon, o.edge (the asker's colour), o.a, o.k
+const SB_TICKET={id:"FIN-212",title:"Move payroll's export into the data project",by:"Asked by Rohan Desai · Finance"};
+function sb_ticket(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,tl=md_wrap(ctx,SB_TICKET.title,w-56,{w:700,size:36}),sy=y+108+tl.length*46,h=sy-y+104,box={x,y,w,h};
+  if(a<=0.004)return box;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));const edge=o.edge||MD.dom.finance;
+  md_card(ctx,x,y,w,h,{edge,glow:0.6});md_T(ctx,"TICKET · "+SB_TICKET.id,x+28,y+52,{w:800,size:28,ls:3,col:edge});md_icon(ctx,"doc",x+w-48,y+44,40,edge);
+  tl.forEach((l,i)=>md_T(ctx,l,x+28,y+108+i*46,{w:700,size:36}));md_T(ctx,SB_TICKET.by,x+28,sy,{w:600,size:28,col:MD.soft});
+  if(o.status)md_tag(ctx,x+28,sy+52,o.status,{col:o.statusCol||MD.wait,icon:o.statusIcon||"clock"});
+  ctx.restore();return box;}
 // the branch a change goes on, and back: main along the top, the branch below it from bx0 to bx1; u (0 to 1) draws it
 function sb_branch(ctx,x0,x1,y,bx0,bx1,o){o=o||{};const a=o.a==null?1:o.a,u=o.u==null?1:o.u;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
   md_lane(ctx,md_path([[x0,y],[x1,y]]),MD.flow,0.9,{});md_T(ctx,"main",x0,y-24,{w:700,size:28,f:"mono",col:MD.flow});
@@ -2169,7 +2180,7 @@ scene("gertie",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
     deck:wAt(sc,"slender","Its deck"),light:wAt(sc,"slender","light and slender"),theory:wAt(sc,"slender","best theory"),
     rises:wAt(sc,"gertie","rises and falls"),wind:wAt(sc,"gertie","in the wind"),gg:wAt(sc,"gertie","Galloping Gertie"),nobody:wAt(sc,"nobody","Nobody"),
     nov:wAt(sc,"twist","seventh of November"),forty:wAt(sc,"twist","forty miles"),twisting:wAt(sc,"twist","twisting"),tears:wAt(sc,"twist","tears away"),
-    noone:wAt(sc,"gone","No one"),only:wAt(sc,"gone","only road"),change:wAt(sc,"gone","Something had to change"),
+    noone:wAt(sc,"gone","No one"),only:wAt(sc,"gone","only road"),change:wAt(sc,"gone","The next bridge"),
     eng:wAt(sc,"board","engineers"),wt:wAt(sc,"board","wind tunnel"),fan:wAt(sc,"board","a fan blows"),
     uw:wAt(sc,"tunnel","University of Washington"),farq:wAt(sc,"tunnel","Frederick"),years:wAt(sc,"tunnel","for years"),
     find:wAt(sc,"finds","find a deck"),cant:wAt(sc,"finds","can't twist"),deeper:wAt(sc,"finds","deeper"),stiffer:wAt(sc,"finds","stiffer"),open:wAt(sc,"finds","open to let"),
@@ -2293,7 +2304,7 @@ scene("project",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
     sam:wAt(sc,"move","Sam"),jun:wAt(sc,"move","Jun Park"),moved:wAt(sc,"move","moved it"),project:wAt(sc,"move","data project"),
     gitW:wAt(sc,"git","Git"),beside:wAt(sc,"git","beside the models"),kept:wAt(sc,"git","every change is kept"),who:wAt(sc,"git","who made it"),why:wAt(sc,"git","and why"),
     sums:wAt(sc,"model","sums"),dbt:wAt(sc,"model","dbt"),once:wAt(sc,"model","written once"),cal:wAt(sc,"model","calendar"),
-    ingridN:wAt(sc,"ingrid","Ingrid"),confirmed:wAt(sc,"ingrid","confirmed"),asks:wAt(sc,"ingrid","asks HR to review"),
+    ingridN:wAt(sc,"ingrid","Ingrid"),confirmed:wAt(sc,"ingrid","confirmed"),asks:wAt(sc,"ingrid","starts with a ticket"),
     first:wAt(sc,"tests","tests first"),edge:wAt(sc,"tests","rule's edge"),e59:wAt(sc,"tests","eleven fifty-nine"),paid:wAt(sc,"tests","paid that Thursday"),t01:wAt(sc,"tests","twelve oh one"),twoW:wAt(sc,"tests","two weeks later"),
     declare:wAt(sc,"weeds","Declare it"),promises:wAt(sc,"weeds","Promises and proofs"),layers:wAt(sc,"weeds","Built in layers"),
     br:wAt(sc,"branch","a branch"),pr:wAt(sc,"branch","pull request"),build:wAt(sc,"branch","build it"),every:wAt(sc,"branch","every test")}));
@@ -2312,7 +2323,7 @@ scene("project",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
           md_T(w,s,b.x+8,b.y+38+i*44,{w:500,size:28,f:"mono",col:lit>0.5?MD.agreed:MD.ink,a:clamp((tt-T.sums+0.3-i*0.25)/0.4,0,1)});});}});
       sb_test(cx,M.x,130,M.w,{a:ag_in(tt,T.first-0.4,0.5),k:sb_k(tt,T.first-0.4),r1:ag_in(tt,T.e59-0.3,0.4),r2:ag_in(tt,T.t01-0.3,0.4),p1:ag_in(tt,T.paid-0.1,0.4),p2:ag_in(tt,T.twoW-0.1,0.4),pass:ag_in(tt,T.twoW+0.4,0.5)});
       sb_calendar(cx,M.x,500,M.w,{a:ag_in(tt,T.cal-0.4,0.6),lit:tt>T.first-0.2?1:null});
-      md_tag(cx,M.x+M.w/2,466,"A change here asks HR to review it",{col:MD.wait,icon:"person",a:ag_io(tt,T.asks-0.2,T.first-0.9,0.4),align:"center"});
+      md_tag(cx,M.x+M.w/2,466,"A change here starts with HR's ticket",{col:MD.sys.hr,icon:"doc",a:ag_io(tt,T.asks-0.2,T.first-0.9,0.4),align:"center"});
       md_pill(cx,M.x+M.w/2,466,"Confirmed by HR",{col:MD.pass,icon:"tick",size:28,a:ag_io(tt,T.confirmed-0.1,T.asks-0.5,0.4)});}},
     // In the weeds of data crafting shows how: three films
     {later:true,at:weedsAt,place:"map",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
@@ -2332,11 +2343,12 @@ scene("project",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
 
 /* ---------------------------------------------------------------- 4 · Someone else reads it */
 scene("review",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
-    someone:wAt(sc,"other","someone other"),reviews:wAt(sc,"other","reviews it"),
+    someone:wAt(sc,"other","someone else"),reviews:wAt(sc,"other","reviews it"),
     junW:wAt(sc,"swap","Jun wrote"),samR:wAt(sc,"swap","so Sam reviewed"),samW:wAt(sc,"swap","Sam wrote the job"),junR:wAt(sc,"swap","so Jun reviewed"),
-    nothing:wAt(sc,"merge","Nothing merges"),green:wAt(sc,"merge","every check green"),cws:wAt(sc,"surprises","Change without surprises"),reaches:wAt(sc,"surprises","reaches the people"),
+    nothing:wAt(sc,"merge","Nothing merges"),green:wAt(sc,"merge","every check green"),
+    dont:wAt(sc,"ticket","don't review"),tk:wAt(sc,"ticket","in a ticket"),tbr:wAt(sc,"ticket","its branch"),tprs:wAt(sc,"ticket","pull requests"),cws:wAt(sc,"surprises","Change without surprises"),reaches:wAt(sc,"surprises","reaches the people"),
     agentW:wAt(sc,"agents","an agent writes"),proposes:wAt(sc,"agents","proposes"),approves:wAt(sc,"agents","a person approves")}));
-  const M=SB_MID,surAt=c.surprises-0.5,agAt=c.agents-0.5,end=sc.dur-1.6;
+  const M=SB_MID,tkAt=c.ticket-0.5,surAt=c.surprises-0.5,agAt=c.agents-0.5,end=sc.dur-1.6;
   ag_shots(ctx,S,t,sc.dur,[
     // Jun's change, reviewed by Sam; Sam's, reviewed by Jun; merged once reviewed and green
     {at:0,place:"map",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
@@ -2350,6 +2362,14 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
       if(l1>0)md_lane(cx,md_curve([1520,500],[p1.x+p1.w+8,p1.y+p1.h-44],{bend:0.4}),MD.wait,l1*0.9,{u:clamp((tt-T.samR+0.4)/0.7,0,1)});
       if(l2>0)md_lane(cx,md_curve([400,560],[p2.x-8,p2.y+p2.h-44],{bend:0.4}),MD.wait,l2*0.9,{u:clamp((tt-T.junR+0.4)/0.7,0,1)});
       md_tag(cx,M.x+M.w/2,96,"Reviewed by someone other than its author",{align:"center",col:MD.wait,icon:"person",a:ag_io(tt,T.someone-0.2,T.green+1.5,0.5)});}},
+    // Finance and HR don't review the code: Rohan asked for the move in a ticket, linked to its branch and pull requests
+    {later:true,at:tkAt,place:"map",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
+      md_tag(cx,M.x+M.w/2,96,"Finance and HR ask · the data team reviews",{align:"center",col:MD.wait,icon:"person",a:ag_in(tt,T.dont-0.2,0.5)});
+      const b=sb_ticket(cx,M.x,160,M.w,{a:ag_in(tt,T.tk-0.3,0.5),k:sb_k(tt,T.tk-0.3),status:"Open"}),ly=b.y+b.h,la=ag_in(tt,T.tbr-0.3,0.5),pa=ag_in(tt,T.tprs-0.3,0.5);
+      if(la>0)md_lane(cx,md_curve([M.x+60,ly+4],[M.x+136,ly+96],{bend:0.3}),MD.flow,0.8*la,{u:clamp((tt-T.tbr+0.3)/0.6,0,1)});
+      if(pa>0)md_lane(cx,md_curve([M.x+60,ly+4],[M.x+136,ly+186],{bend:0.3}),MD.flow,0.8*pa,{u:clamp((tt-T.tprs+0.3)/0.6,0,1)});
+      md_tag(cx,M.x+140,ly+96,"branch · payroll-export-model",{col:MD.flow,a:la});
+      md_tag(cx,M.x+140,ly+186,"2 pull requests · reviewed by the data team",{col:MD.pass,icon:"tick",a:pa});}},
     // Change without surprises: how a change reaches the people it touches
     {later:true,at:surAt,place:"map",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
       md_textCard(cx,M.x,330,M.w,{kick:"A series of its own",title:"Change without surprises",sub:"how a change reaches the people it touches"},{edge:MD.flow,icon:"doc",a:ag_in(tt,T.cws-0.3,0.5),k:sb_k(tt,T.cws-0.3)});}},
@@ -2368,6 +2388,7 @@ scene("release",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
     file:wAt(sc,"bundle","a file too"),dab:wAt(sc,"bundle","Declarative"),jobs:wAt(sc,"bundle","project's jobs"),where:wAt(sc,"bundle","where each one runs"),
     six:wAt(sc,"job","at six"),builds:wAt(sc,"job","builds and tests"),reads:wAt(sc,"job","everything it reads"),
     merged:wAt(sc,"test","merged"),deployed:wAt(sc,"test","deployed to test"),first:wAt(sc,"test","runs there first"),
+    rohan:wAt(sc,"checks","Rohan"),figures:wAt(sc,"checks","its figures"),open:wAt(sc,"checks","stays open"),right:wAt(sc,"checks","they're right"),
     waits:wAt(sc,"noor","waits for Noor"),approves:wAt(sc,"noor","When she approves"),prod:wAt(sc,"noor","go to production"),
     acct:wAt(sc,"account","platform's own account"),laptop:wAt(sc,"account","nobody deploys"),
     sameF:wAt(sc,"drift","same files"),sameS:wAt(sc,"drift","same steps"),driftW:wAt(sc,"drift","drift apart"),
@@ -2399,6 +2420,9 @@ scene("release",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
       md_tag(cx,1166,440,"same files",{align:"center",col:MD.flow,a:ag_in(tt,T.sameF-0.2,0.4)});md_tag(cx,1620,440,"same files",{align:"center",col:MD.flow,a:ag_in(tt,T.sameF,0.4)});
       md_tag(cx,1166,520,"same steps",{align:"center",col:MD.flow,a:ag_in(tt,T.sameS-0.2,0.4)});
       md_pill(cx,1166,610,"No drift",{col:MD.pass,icon:"tick",size:28,a:ag_in(tt,T.driftW-0.2,0.4),k:sb_k(tt,T.driftW-0.2)});
+      // Rohan checks the figures from test against his own; his ticket stays open until he says they're right
+      const ta=ag_in(tt,T.rohan-0.2,0.5)*(1-ag_in(tt,T.acct-1.0,0.5)),ok=tt>T.right+0.1;
+      sb_ticket(cx,96,360,760,{a:ta,k:sb_k(tt,T.rohan-0.2),status:ok?"Checked by Rohan · figures right":tt>T.open-0.2?"Open until Rohan checks":"Open",statusCol:ok?MD.pass:MD.wait,statusIcon:ok?"tick":"clock"});
       // as the platform's own account, never a person's; nobody deploys from a laptop
       md_tag(cx,96,400,"Runs as the platform's own account",{col:MD.flow,icon:"key",a:ag_in(tt,T.acct-0.2,0.5)});
       md_tag(cx,96,490,"Nobody deploys from a laptop",{col:MD.fail,icon:"cross",a:ag_in(tt,T.laptop-0.2,0.5)});}},
@@ -2408,7 +2432,8 @@ scene("release",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
         sb_runs(w,b.x+10,b.y+6,b.w-20,[["18","Thursday 5 November 2026, 06:00","Succeeded"],["17","Thursday 22 October 2026, 06:00","Succeeded"],["16","Thursday 8 October 2026, 06:00","Succeeded"]],{lit:tt>T.e18-0.2?0:null,litCol:MD.pass,rowA:(r,i)=>ag_in(tt,T.morning+0.2+i*0.15,0.4)});}});
       md_pill(cx,960,640,"856 casual staff paid today",{col:MD.pass,icon:"tick",size:34,a:ag_in(tt,T.n856-0.1,0.5),k:sb_k(tt,T.n856-0.1)});cx.restore();}}
   ],0.6);
-  // Noor Rahman, the data architect, who approves the release
+  // Rohan, in Finance, who checks the figures in test; then Noor Rahman, the data architect, who approves the release
+  const rha=sb_there(t,T.rohan-0.7,T.waits-1.5);sb_who(ctx,S,t,"rohan",rha);sb_tagOf(ctx,S,"rohan",rha,{role:"Finance",at:[1440,780]});
   const na=sb_there(t,T.waits-0.8,todayAt-0.2);sb_who(ctx,S,t,"noor",na);sb_tagOf(ctx,S,"noor",na,{role:"Data architect",at:[1450,780]});
 });
 

@@ -8,7 +8,7 @@ const NARR={
  {"id":"easy","gap":0.8,"text":"He seemed the easiest flyer to fit, and the commonest."},
  {"id":"door","gap":0.8,"text":"But a doorway built to his height would make about half the men stoop."},
  {"id":"cockpit","gap":0.8,"text":"In a cockpit it's worse: a control just out of reach, or a pedal too far away, and a pilot can't fly safely."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Cockpits built for him were failing the men who actually flew."},
  {"id":"daniels","gap":0.8,"text":"In 1952, Lieutenant Gilbert Daniels was a scientist in the Air Force's anthropology section.","say":"In nineteen fifty-two, Lieutenant Gilbert Daniels was a scientist in the Air Force's anthropology section."},
  {"id":"asked","gap":0.8,"text":"He asked a plain question: how many flyers are average?"},
  {"id":"ten","gap":0.8,"text":"He took ten measurements used to size clothing."},

@@ -22,8 +22,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pero una puerta hecha a su altura haría agacharse a cerca de la mitad de los hombres.",
 "In a cockpit it's worse: a control just out of reach, or a pedal too far away, and a pilot can't fly safely.":
 "En una cabina es peor: un mando fuera de alcance, o un pedal demasiado lejos, y un piloto no puede volar seguro.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Cockpits built for him were failing the men who actually flew.":
+"Las cabinas hechas para él les fallaban a los hombres que de verdad volaban.",
 "In 1952, Lieutenant Gilbert Daniels was a scientist in the Air Force's anthropology section.":
 "En 1952, el teniente Gilbert Daniels era científico en la sección de antropología de la Fuerza Aérea.",
 "He asked a plain question: how many flyers are average?":

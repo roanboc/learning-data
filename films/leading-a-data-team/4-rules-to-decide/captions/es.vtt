@@ -39,218 +39,218 @@ En la estación seca, las fincas de río abajo esperaban un agua que no llegaba.
 00:01:21.922 --> 00:01:26.777
 Para una familia campesina, una cosecha perdida era la comida y los ingresos de una temporada.
 
-00:01:28.677 --> 00:01:30.065
-Algo tenía que cambiar.
+00:01:28.677 --> 00:01:31.941
+Alguien tenía que mostrarles a los planificadores lo que los templos ya sabían.
 
-00:01:31.965 --> 00:01:42.752
+00:01:33.841 --> 00:01:44.628
 En la década de 1980, el antropólogo Stephen Lansing y el ecólogo James Kremer hicieron un modelo informático de dos ríos y sus 172 subaks.
 
-00:01:44.252 --> 00:01:50.565
+00:01:46.128 --> 00:01:52.441
 Mostró que el calendario de los templos daba las mayores cosechas, equilibrando plagas hambrientas y agua compartida.
 
-00:01:52.265 --> 00:01:58.186
+00:01:54.141 --> 00:02:00.062
 En 1988 lo llevaron al banco que había pagado nuevas obras de riego, y el banco les dio la razón.
 
-00:01:59.686 --> 00:02:06.183
+00:02:01.562 --> 00:02:08.059
 Las autoridades dejaron que los templos fijaran de nuevo la siembra, y ya no se pidió a los agricultores sembrar lo más rápido posible.
 
-00:02:07.883 --> 00:02:10.912
+00:02:09.759 --> 00:02:12.788
 Las plagas quedaron bajo control, y los agricultores fumigaron menos.
 
-00:02:12.412 --> 00:02:17.741
+00:02:14.288 --> 00:02:19.617
 El informe final del banco dijo que ningún proyecto revisado funcionaba solo tan bien como el de Bali.
 
-00:02:19.441 --> 00:02:24.269
+00:02:21.317 --> 00:02:26.145
 Y en 2012, la UNESCO inscribió el paisaje de los subaks como Patrimonio Mundial.
 
-00:02:26.169 --> 00:02:32.260
+00:02:28.045 --> 00:02:34.136
 Un equipo de datos puede cometer el error de los planificadores: cada decisión tomada en un solo lugar, lejos del trabajo.
 
-00:02:33.760 --> 00:02:39.814
+00:02:35.636 --> 00:02:41.690
 Esta película sigue a un equipo que devuelve las decisiones, y encuentra lo que ningún plan central había buscado.
 
-00:02:48.114 --> 00:02:52.197
+00:02:49.990 --> 00:02:54.073
 Una universidad, dentro de un año, en septiembre de 2027.
 
-00:02:53.897 --> 00:03:02.293
+00:02:55.773 --> 00:03:04.169
 En junio, el Consejo Universitario pidió un nuevo horario desde febrero, con menos clases en las horas pico, y aplazó un edificio nuevo.
 
-00:03:04.193 --> 00:03:08.807
+00:03:06.069 --> 00:03:10.683
 Cada una de las cuatro facultades tiene su responsable de horarios, que planifica sus clases.
 
-00:03:10.507 --> 00:03:17.009
+00:03:12.383 --> 00:03:18.885
 Para planificar, necesitan saber qué aulas se usan, y cuándo. Eso está en un producto de datos: Teaching space use.
 
-00:03:18.709 --> 00:03:22.866
+00:03:20.585 --> 00:03:24.742
 Pero solo el equipo de datos trabajaba con él, así que cada pregunta sobre aulas llegaba a ellos.
 
-00:03:24.366 --> 00:03:28.928
+00:03:26.242 --> 00:03:30.804
 De julio a septiembre, las facultades pidieron 27 reportes de aulas.
 
-00:03:30.628 --> 00:03:34.779
+00:03:32.504 --> 00:03:36.655
 Cada uno tomaba un día y medio de trabajo, y esperaba unas dos semanas en la lista.
 
-00:03:36.679 --> 00:03:43.769
+00:03:38.555 --> 00:03:45.645
 Helena Novak, la gestora de datos, vio algo más: cuando dos facultades pedían a la vez, ella elegía qué aulas iban primero.
 
-00:03:45.469 --> 00:03:50.682
+00:03:47.345 --> 00:03:52.558
 Cada decisión sobre aulas en la universidad pasaba ahora por un equipo pequeño, y por ella.
 
-00:03:52.582 --> 00:03:56.170
+00:03:54.458 --> 00:03:58.046
 Quienes conocían los cursos esperaban a quienes conocían los datos.
 
-00:03:58.270 --> 00:04:03.066
+00:04:00.146 --> 00:04:04.942
 Así que decidió dejar de decidir: las facultades leerían los datos por sí mismas.
 
-00:04:05.766 --> 00:04:11.052
+00:04:07.642 --> 00:04:12.928
 Yusuf Demir, que dirige el gobierno de datos, redactó las reglas para dejar entrar a las facultades.
 
-00:04:12.552 --> 00:04:17.281
+00:04:14.428 --> 00:04:19.157
 Su primera lista tenía once, cada una contra algo que había salido mal en algún lugar.
 
-00:04:18.981 --> 00:04:22.125
+00:04:20.857 --> 00:04:24.001
 De cada una se preguntaron: ¿qué sale mal aquí, ahora, sin ella?
 
-00:04:24.025 --> 00:04:25.234
+00:04:25.901 --> 00:04:27.110
 Tres hacían falta ahora.
 
-00:04:26.734 --> 00:04:34.209
+00:04:28.610 --> 00:04:36.085
 Una: el uso de un aula es lo mismo para todos, la proporción de horas con alguien contado, para que las cifras de las facultades cuadren.
 
-00:04:36.109 --> 00:04:42.046
+00:04:37.985 --> 00:04:43.922
 Dos: la promesa del producto se cumple: conteos por aula y por hora, nunca una persona, para que nadie sea vigilado.
 
-00:04:43.946 --> 00:04:51.151
+00:04:45.822 --> 00:04:53.027
 Tres: antes de publicar una medida nueva con él, pregunta a su dueña, Ivy, para que cada número nuevo signifique una cosa, escrita primero.
 
-00:04:53.051 --> 00:04:57.477
+00:04:54.927 --> 00:04:59.353
 Las otras ocho fueron a un cajón, para salir solo cuando apareciera un problema real.
 
-00:04:59.377 --> 00:05:07.173
+00:05:01.253 --> 00:05:09.049
 La economista política Elinor Ostrom estudió pesquerías, bosques y riegos que la gente había compartido durante siglos.
 
-00:05:08.673 --> 00:05:15.190
+00:05:10.549 --> 00:05:17.066
 Los que duraron tenían unas pocas reglas claras, ajustadas al lugar, hechas y cambiadas por la gente que vive de ellas.
 
-00:05:17.090 --> 00:05:23.034
+00:05:18.966 --> 00:05:24.910
 Helena acordó las tres con los cuatro responsables de horarios, no en su lugar, y cualquiera puede pedir cambiar una.
 
-00:05:25.734 --> 00:05:28.389
+00:05:27.610 --> 00:05:30.265
 Las reglas dicen lo correcto. Las herramientas lo facilitan.
 
-00:05:30.089 --> 00:05:38.481
+00:05:31.965 --> 00:05:40.357
 Ivy y Jun hicieron una plantilla en la plataforma: las horas reservadas junto a las contadas, y el uso calculado como se acordó.
 
-00:05:40.381 --> 00:05:47.376
+00:05:42.257 --> 00:05:49.252
 Quien planifica la copia, elige las aulas de su facultad y hace sus propias preguntas: una tarde, no dos semanas.
 
-00:05:49.076 --> 00:05:53.082
+00:05:50.952 --> 00:05:54.958
 Anil, referente de datos de Salud, acompañó a su responsable en su primera hora.
 
-00:05:54.782 --> 00:05:57.866
+00:05:56.658 --> 00:05:59.742
 Junto a los números, un recuadro dice quién decide qué.
 
-00:05:59.166 --> 00:06:03.530
+00:06:01.042 --> 00:06:05.406
 Las facultades deciden sus clases, e Ivy decide qué significan los números.
 
-00:06:04.830 --> 00:06:09.176
+00:06:06.706 --> 00:06:11.052
 El equipo cuida la plataforma, y la oficina de registro cuida el horario.
 
-00:06:11.076 --> 00:06:19.297
+00:06:12.952 --> 00:06:21.173
 Data mesh y el libro Team Topologies coinciden: las decisiones, con quienes conocen el trabajo, en una plataforma que facilita lo difícil.
 
-00:06:21.197 --> 00:06:27.331
+00:06:23.073 --> 00:06:29.207
 El lunes 4 de octubre, los responsables de horarios empezaron, y el equipo dejó de hacer reportes de aulas a mano.
 
-00:06:30.031 --> 00:06:35.133
+00:06:31.907 --> 00:06:37.009
 Lucy Tran, responsable de horarios de Ingeniería, abrió la plantilla ese lunes.
 
-00:06:36.633 --> 00:06:42.232
+00:06:38.509 --> 00:06:44.108
 Ingeniería reserva sus propios laboratorios docentes, así que nunca habían estado en los reportes de aulas de la universidad.
 
-00:06:43.732 --> 00:06:48.819
+00:06:45.608 --> 00:06:50.695
 Los laboratorios también tienen sensores, así que Lucy puso sus reservas junto a sus conteos.
 
-00:06:50.519 --> 00:06:56.845
+00:06:52.395 --> 00:06:58.721
 Cada lunes por la mañana, nueve de los doce laboratorios de Ingeniería estaban reservados, y los sensores no contaban a nadie.
 
-00:06:58.945 --> 00:07:02.919
+00:07:00.821 --> 00:07:04.795
 Nadie lo había preguntado: ningún reporte había juntado las dos cosas.
 
-00:07:04.619 --> 00:07:13.168
+00:07:06.495 --> 00:07:15.044
 Lucy sabía a quién preguntar: dos cursos de primero habían pasado sus laboratorios al jueves, y sus reservas del lunes se repetían cada año.
 
-00:07:15.068 --> 00:07:19.091
+00:07:16.944 --> 00:07:20.967
 El uso de laboratorios era una medida nueva: antes de compartirla, Lucy consultó a Ivy.
 
-00:07:20.591 --> 00:07:27.434
+00:07:22.467 --> 00:07:29.310
 Ivy la escribió en el glosario igual que el uso de las aulas, y el equipo la incorporó al producto, para todas las facultades.
 
-00:07:29.134 --> 00:07:34.478
+00:07:31.010 --> 00:07:36.354
 Ingeniería liberó las nueve mañanas de lunes, y dejó en pausa su pedido de dos laboratorios nuevos.
 
-00:07:36.378 --> 00:07:38.353
+00:07:38.254 --> 00:07:40.229
 Entonces pasó algo que nadie había planeado.
 
-00:07:39.853 --> 00:07:46.156
+00:07:41.729 --> 00:07:48.032
 En tres semanas, Salud había copiado la página de Lucy para sus salas de habilidades clínicas, y Artes para sus talleres.
 
-00:07:47.856 --> 00:07:52.341
+00:07:49.732 --> 00:07:54.217
 La pregunta de una facultad se había vuelto tres, y nadie había enviado una instrucción.
 
-00:07:54.241 --> 00:08:02.364
+00:07:56.117 --> 00:08:04.240
 Lansing y Kremer vieron lo mismo en su modelo. Cada año, cada subak miraba a sus cuatro vecinos más cercanos, y copiaba la mejor cosecha.
 
-00:08:04.064 --> 00:08:10.768
+00:08:05.940 --> 00:08:12.644
 En unos ocho años, aparecieron grupos que sembraban juntos, muy parecidos a las redes de templos reales, y las cosechas subieron.
 
-00:08:12.668 --> 00:08:13.942
+00:08:14.544 --> 00:08:15.818
 Nadie los había dibujado.
 
-00:08:16.642 --> 00:08:23.713
+00:08:18.518 --> 00:08:25.589
 Para el viernes 26 de noviembre, las cuatro facultades habían enviado a la oficina de registro sus planes para febrero.
 
-00:08:25.413 --> 00:08:30.315
+00:08:27.289 --> 00:08:32.191
 Juntas, movieron una de cada seis clases de hora pico, como había pedido el Consejo Universitario.
 
-00:08:32.215 --> 00:08:38.267
+00:08:34.091 --> 00:08:40.143
 En octubre y noviembre el equipo no hizo ningún reporte de aulas a mano, y ese tiempo volvió a la hoja de ruta.
 
-00:08:40.167 --> 00:08:46.152
+00:08:42.043 --> 00:08:48.028
 El trabajo de Helena también cambió: menos decidir, más observar lo que surgía, y preguntarse qué enseñaba.
 
-00:08:48.052 --> 00:08:56.339
+00:08:49.928 --> 00:08:58.215
 Sí apareció un problema real: Salud mandó a sus jefes de escuela una copia de hacía tres semanas, y dos planificaron con cifras viejas.
 
-00:08:58.039 --> 00:09:04.718
+00:08:59.915 --> 00:09:06.594
 Así que una regla salió del cajón, con su razón: comparte la página viva, no una copia, porque las copias envejecen.
 
-00:09:06.618 --> 00:09:09.809
+00:09:08.494 --> 00:09:11.685
 Y la plantilla ahora muestra en la esquina la fecha de sus datos.
 
-00:09:11.509 --> 00:09:14.966
+00:09:13.385 --> 00:09:16.842
 Cuatro reglas, cada una con su razón, y todavía espacio para decidir.
 
-00:09:17.666 --> 00:09:26.197
+00:09:19.542 --> 00:09:28.073
 En Bali, nadie planificó cada campo. Cada subak decidió su propio trabajo, un calendario común lo coordinó, y las cosechas se sostuvieron.
 
-00:09:28.097 --> 00:09:36.342
+00:09:29.973 --> 00:09:38.218
 En la universidad, cuatro responsables planificaron sus aulas, pocas reglas mantuvieron fieles las cifras, y apareció lo que nadie buscaba.
 
-00:09:38.442 --> 00:09:41.295
+00:09:40.318 --> 00:09:43.171
 El lunes, escribe pocas reglas, cada una con su razón.
 
-00:09:42.795 --> 00:09:44.493
+00:09:44.671 --> 00:09:46.369
 Haz que el camino correcto sea el fácil.
 
-00:09:45.993 --> 00:09:47.351
+00:09:47.869 --> 00:09:49.227
 Di quién decide qué.
 
-00:09:48.851 --> 00:09:50.962
+00:09:50.727 --> 00:09:52.838
 Observa lo que surge, y aprende de ello.
 
-00:09:52.462 --> 00:09:55.338
+00:09:54.338 --> 00:09:57.214
 Y agrega una regla solo cuando aparezca un problema real.
 
-00:09:57.038 --> 00:09:59.621
+00:09:58.914 --> 00:10:01.497
 Unas pocas reglas claras, buenas herramientas y confianza.

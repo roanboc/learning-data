@@ -19,261 +19,261 @@ Pero la gente siempre comete errores. Un conductor cansado se desvía sobre la l
 En una carretera rápida, ese error podía matar. Para cientos de familias al año, era alguien que nunca volvió a casa.
 
 6
-00:00:34,206 --> 00:00:35,594
-Algo tenía que cambiar.
+00:00:34,206 --> 00:00:38,950
+Culpar a los conductores no salvaba vidas. Las carreteras tenían que perdonar sus errores.
 
 7
-00:00:37,494 --> 00:00:46,096
+00:00:40,850 --> 00:00:49,452
 En octubre de 1997, el parlamento sueco adoptó Visión Cero: nadie debería morir ni quedar gravemente herido en las carreteras.
 
 8
-00:00:47,796 --> 00:00:52,173
+00:00:51,152 --> 00:00:55,529
 Quienes diseñan y gestionan las carreteras responderían por ello, no solo los conductores.
 
 9
-00:00:53,873 --> 00:00:58,285
+00:00:57,229 --> 00:01:01,641
 Cada choque mortal se estudió a fondo, para preguntar cómo se podría haber evitado.
 
 10
-00:00:59,985 --> 00:01:04,290
+00:01:03,341 --> 00:01:07,646
 Muchos morían en choques frontales, en carreteras rápidas de dos carriles.
 
 11
-00:01:05,990 --> 00:01:10,861
+00:01:09,346 --> 00:01:14,217
 Desde 1998, esas carreteras tuvieron en el centro una barrera de cables de acero.
 
 12
-00:01:12,561 --> 00:01:16,761
+00:01:15,917 --> 00:01:20,117
 Las rotondas reemplazaron a los cruces, y la velocidad bajó donde la gente camina.
 
 13
-00:01:18,261 --> 00:01:22,096
+00:01:21,617 --> 00:01:25,452
 Con barrera central, las muertes en esas carreteras bajaron cerca de tres cuartos.
 
 14
-00:01:23,596 --> 00:01:27,944
+00:01:26,952 --> 00:01:31,300
 En todo el país, con más tráfico, las muertes en carretera bajaron más de la mitad.
 
 15
-00:01:29,644 --> 00:01:34,268
+00:01:33,000 --> 00:01:37,624
 Aún había que conducir con cuidado. Pero un error ya no tenía por qué costar una vida.
 
 16
-00:01:36,168 --> 00:01:41,241
+00:01:39,524 --> 00:01:44,597
 Suecia dejó de preguntar a quién culpar, y midió las carreteras, para encontrar qué arreglar en ellas.
 
 17
-00:01:42,941 --> 00:01:49,264
+00:01:46,297 --> 00:01:52,620
 El trabajo con datos es igual: cuando el trabajo es lento, la causa suele estar en cómo fluye, no en quién lo hizo.
 
 18
-00:01:50,764 --> 00:01:54,032
+00:01:54,120 --> 00:01:57,388
 Mide el trabajo, léelo en equipo, y encontrarás qué arreglar.
 
 19
-00:02:01,732 --> 00:02:06,310
+00:02:05,088 --> 00:02:09,666
 En la universidad, dentro de un año, Helena Novak es la gestora de datos.
 
 20
-00:02:07,810 --> 00:02:14,603
+00:02:11,166 --> 00:02:17,959
 Gestionar y liderar son dos caras de su único rol. Hizo daño llamar bueno a uno, y anticuado al otro.
 
 21
-00:02:16,503 --> 00:02:23,259
+00:02:19,859 --> 00:02:26,615
 Lo que cuesta ver cuesta mejorarlo por mucho tiempo. Por eso quien lidera mide, y siempre hay fechas y planes que cumplir.
 
 22
-00:02:25,159 --> 00:02:31,643
+00:02:28,515 --> 00:02:34,999
 Eso es gestión, pero debe ajustarse al trabajo: las horas o los tickets por persona dicen poco del trabajo de pensar.
 
 23
-00:02:33,343 --> 00:02:39,421
+00:02:36,699 --> 00:02:42,777
 Desde julio, la página de medidas del equipo, del módulo de gestión de datos, muestra cómo fluye el trabajo.
 
 24
-00:02:41,121 --> 00:02:46,486
+00:02:44,477 --> 00:02:49,842
 Días desde una solicitud hasta su primer uso: 41 en febrero, 24 en junio.
 
 25
-00:02:48,186 --> 00:02:51,268
+00:02:51,542 --> 00:02:54,624
 Devuelto: cuántas veces el trabajo vuelve para cambios.
 
 26
-00:02:52,768 --> 00:02:56,861
+00:02:56,124 --> 00:03:00,217
 Promesas cumplidas: cuánto cumplen su promesa los productos de datos del equipo.
 
 27
-00:02:58,361 --> 00:03:02,876
+00:03:01,717 --> 00:03:06,232
 Y la carga: trabajos abiertos a la vez, frente al límite de seis del equipo.
 
 28
-00:03:04,576 --> 00:03:10,438
+00:03:07,932 --> 00:03:13,794
 Cada medida tiene una pareja que la equilibra: velocidad junto a lo devuelto, promesas junto a la carga.
 
 29
-00:03:13,138 --> 00:03:18,935
+00:03:16,494 --> 00:03:22,291
 Cada dos jueves desde el 15 de julio, el equipo lee la página en conjunto, durante veinte minutos.
 
 30
-00:03:20,635 --> 00:03:24,986
+00:03:23,991 --> 00:03:28,342
 Helena hace una sola pregunta: ¿qué frenó el trabajo? Nunca: ¿quién fue lento?
 
 31
-00:03:26,886 --> 00:03:32,394
+00:03:30,242 --> 00:03:35,750
 En Suecia preguntaron qué en una carretera dejaba que un error matara. Helena pregunta lo mismo del trabajo.
 
 32
-00:03:34,294 --> 00:03:37,832
+00:03:37,650 --> 00:03:41,188
 En la primera lectura, desarman los 24 días de junio.
 
 33
-00:03:39,532 --> 00:03:42,645
+00:03:42,888 --> 00:03:46,001
 Siete de ellos se fueron en esperar acceso a los datos.
 
 34
-00:03:44,545 --> 00:03:50,568
+00:03:47,901 --> 00:03:53,924
 El acceso se pedía solo al empezar el trabajo, un conjunto de datos a la vez, hasta cinco días cada uno.
 
 35
-00:03:52,268 --> 00:03:55,963
+00:03:55,624 --> 00:03:59,319
 Nadie fue lento. La espera estaba en cómo se organizaba el trabajo.
 
 36
-00:03:57,863 --> 00:04:04,905
+00:04:01,219 --> 00:04:08,261
 Desde el lunes 19 de julio, el acceso se pide el día en que se acepta una solicitud, y está listo al empezar el trabajo.
 
 37
-00:04:06,605 --> 00:04:09,860
+00:04:09,961 --> 00:04:13,216
 Para septiembre, esa espera baja de siete días a uno.
 
 38
-00:04:11,560 --> 00:04:16,531
+00:04:14,916 --> 00:04:19,887
 Una segunda causa: uno de cada ocho trabajos volvía, leído de una manera y pensado de otra.
 
 39
-00:04:18,231 --> 00:04:23,709
+00:04:21,587 --> 00:04:27,065
 Ahora, antes de empezar, quince minutos con quien lo pidió acuerdan cómo se ve el trabajo terminado.
 
 40
-00:04:25,409 --> 00:04:30,699
+00:04:28,765 --> 00:04:34,055
 Para diciembre, los días bajan a 14, y lo devuelto baja a la mitad, a 6 de cada 100.
 
 41
-00:04:32,599 --> 00:04:37,235
+00:04:35,955 --> 00:04:40,591
 La mayor parte de la mejora vino de esperas como estas, encontradas y quitadas una a una.
 
 42
-00:04:39,935 --> 00:04:46,470
+00:04:43,291 --> 00:04:49,826
 El jueves 12 de agosto, las promesas cumplidas llegan al 82%, desde 58 en marzo.
 
 43
-00:04:48,170 --> 00:04:50,316
+00:04:51,526 --> 00:04:53,672
 Por sí solo, un número para celebrar.
 
 44
-00:04:52,016 --> 00:04:56,830
+00:04:55,372 --> 00:05:00,186
 Pero la carga está en nueve trabajos abiertos a la vez, frente a un límite de seis.
 
 45
-00:04:58,730 --> 00:05:04,535
+00:05:02,086 --> 00:05:07,891
 El trabajo nuevo empezaba antes de terminar el anterior: el equipo cumplía sus promesas cargando demasiado.
 
 46
-00:05:06,235 --> 00:05:09,059
+00:05:09,591 --> 00:05:12,415
 Eso no puede durar: la gente cansada comete errores.
 
 47
-00:05:10,759 --> 00:05:15,960
+00:05:14,115 --> 00:05:19,316
 Así que el equipo termina antes de empezar: nada nuevo comienza hasta cerrar algo abierto.
 
 48
-00:05:17,460 --> 00:05:20,587
+00:05:20,816 --> 00:05:23,943
 Dos solicitudes reciben un ahora no, con una razón y una fecha.
 
 49
-00:05:22,287 --> 00:05:29,166
+00:05:25,643 --> 00:05:32,522
 A mitad de septiembre, la carga vuelve a seis, y las promesas cumplidas suben hasta 86% en diciembre.
 
 50
-00:05:31,066 --> 00:05:38,120
+00:05:34,422 --> 00:05:41,476
 La investigación de Accelerate, en 2018, halló los mejores equipos rápidos y estables a la vez, medidos lado a lado.
 
 51
-00:05:39,820 --> 00:05:47,745
+00:05:43,176 --> 00:05:51,101
 Cada pareja mantiene honesta a la otra. La velocidad sin lo devuelto oculta prisas. Las promesas sin la carga, gente cansada.
 
 52
-00:05:50,445 --> 00:05:57,416
+00:05:53,801 --> 00:06:00,772
 El lunes 13 de septiembre, quien dirige los servicios digitales, a quien Helena reporta, pide algo nuevo.
 
 53
-00:05:58,716 --> 00:06:01,868
+00:06:02,072 --> 00:06:05,224
 Un conteo de tickets cerrados por cada persona, cada mes.
 
 54
-00:06:03,768 --> 00:06:09,590
+00:06:07,124 --> 00:06:12,946
 Quiere saber si el equipo es cada vez más rápido, y si alguien necesita ayuda: preguntas justas.
 
 55
-00:06:11,490 --> 00:06:18,182
+00:06:14,846 --> 00:06:21,538
 En 1975, el economista Charles Goodhart vio que un número forzado a moverse deja de significar lo que significaba.
 
 56
-00:06:19,882 --> 00:06:25,611
+00:06:23,238 --> 00:06:28,967
 Marilyn Strathern lo dijo con claridad: cuando una medida se convierte en meta, deja de ser una buena medida.
 
 57
-00:06:27,711 --> 00:06:35,275
+00:06:31,067 --> 00:06:38,631
 Cuenta tickets por persona, y la gente divide el trabajo en partes, elige tickets fáciles y deja de ayudarse. Y se ocultan errores.
 
 58
-00:06:37,175 --> 00:06:43,377
+00:06:40,531 --> 00:06:46,733
 El marco SPACE advierte lo mismo: contar actividad nunca muestra, por sí solo, qué tan bien trabaja la gente.
 
 59
-00:06:45,077 --> 00:06:52,816
+00:06:48,433 --> 00:06:56,172
 Y W. Edwards Deming estimó que unos 94 de cada 100 problemas son del sistema, no de las personas que están en él.
 
 60
-00:06:54,716 --> 00:07:00,858
+00:06:58,072 --> 00:07:04,214
 Así que Helena dice que no al conteo, y muestra qué en su lugar: la página del equipo, y lo que cambiaron sus lecturas.
 
 61
-00:07:02,558 --> 00:07:06,118
+00:07:05,914 --> 00:07:09,474
 Cómo crece cada persona queda en sus propios objetivos, acordados con ella.
 
 62
-00:07:07,618 --> 00:07:11,590
+00:07:10,974 --> 00:07:14,946
 Quien dirige lleva la página a la revisión trimestral. No se clasifica a nadie.
 
 63
-00:07:14,290 --> 00:07:20,792
+00:07:17,646 --> 00:07:24,148
 Suecia dejó de culpar a los conductores uno por uno, midió sus carreteras y arregló lo que volvía un error una muerte.
 
 64
-00:07:22,692 --> 00:07:27,777
+00:07:26,048 --> 00:07:31,133
 El equipo de Helena midió cómo fluía su trabajo, lo leyó en conjunto y arregló lo que lo frenaba.
 
 65
-00:07:29,677 --> 00:07:35,637
+00:07:33,033 --> 00:07:38,993
 El lunes, mide el flujo del trabajo: días hasta el primer uso, trabajo devuelto, promesas cumplidas y carga.
 
 66
-00:07:37,137 --> 00:07:39,633
+00:07:40,493 --> 00:07:42,989
 Empareja cada medida con otra que la equilibre.
 
 67
-00:07:41,133 --> 00:07:44,670
+00:07:44,489 --> 00:07:48,026
 Léelas en equipo, a menudo, y pregunta qué frenó el trabajo, nunca quién.
 
 68
-00:07:46,170 --> 00:07:51,468
+00:07:49,526 --> 00:07:54,824
 Cuando alguien pida un número para clasificar a las personas, di que no, y muestra el flujo del equipo.
 
 69
-00:07:52,968 --> 00:07:59,203
+00:07:56,324 --> 00:08:02,559
 Cuando alguien se queda atrás, la próxima película, mira el caso más difícil: el trabajo de una persona, y lo que lo rodea.
 
 70
-00:08:00,903 --> 00:08:04,263
+00:08:04,259 --> 00:08:07,619
 Mide el trabajo en equipo. Arregla el sistema, no a las personas.

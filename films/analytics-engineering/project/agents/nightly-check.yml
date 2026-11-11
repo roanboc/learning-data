@@ -40,7 +40,7 @@ jobs:
             jq '[.result.data_array[] | {grantee: .[0], privilege: .[1], securable_type: .[2], securable: .[3]}]' > held/unity-catalog.json
       - name: Unity Catalog, each group's members, by their application IDs
         run: |
-          for group in planning_contributors; do
+          for group in planning_contributors workload_contributors; do
             ids=$(databricks groups list --filter "displayName eq \"$group\"" -o json | jq -r '.[0].members[]?.value')
             for id in $ids; do databricks service-principals get "$id" -o json | jq -r '.applicationId // empty'; done |
               jq -R . | jq -s --arg g "$group" '{($g): .}'
@@ -71,7 +71,7 @@ jobs:
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://tokens.uni.example/github" | jq -r .value)
           export GH_TOKEN=$(curl -sSf -X POST -H "Authorization: Bearer $pass" https://tokens.uni.example/github/rights-reader | jq -r .token)
           echo "::add-mask::$GH_TOKEN"
-          for app in planning-agent; do
+          for app in planning-agent workload-agent; do
             install=$(gh api "/orgs/uni-example/installations" --paginate --jq ".installations[] | select(.app_slug == \"$app\")")
             [ -z "$install" ] && continue
             if [ "$(jq -r .repository_selection <<< "$install")" = all ]; then repos='["all"]'

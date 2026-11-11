@@ -1,0 +1,57 @@
+The night of Wednesday 4 November 2026, run again on the project's sample (README.md, *Run it again*): HR's sample
+with one tutor who moved this term (moved.patch), and the workload mart as the day's change left it, then with the
+agent's fix (fix.patch). At the university the same test failed on 3 contracts, and Nursing showed 67 teachers, 41
+of them casual, against HR's own 64 and 38 (report.md). The sample has no list of units and their schools, so here
+it fails on its one tutor who moved. dbt's log is shortened to its results; the rows are the mart's, as DuckDB holds
+them after each build.
+
+== The day's change: the clause dropped ==
+
+$ dbt build --profiles-dir . --select +mart_workload__teaching_staff --indirect-selection cautious \
+    --vars '{as_is_date: 2026-11-04}'
+
+  OK      stg_hr_system__contracts                 view, in dev_staging
+  PASS    not_null_stg_hr_system__contracts_contract_bk
+  PASS    not_null_stg_hr_system__contracts_staff_bk
+  PASS    accepted_values_stg_hr_system__contracts_pay_type__CAS__FT__CON
+  PASS    accepted_values_stg_hr_system__contracts_position_type__Casual_Academic__Academic
+  PASS    not_null_stg_hr_system__contracts_starts_on
+  PASS    unique_combination_stg_hr_system__contracts_contract_bk__recorded_from
+  OK      mart_workload__teaching_staff            table, in dev_marts
+  FAIL 1  each_contract_counts_once
+
+  Done. PASS=9 WARN=0 ERROR=1 SKIP=0 NO-OP=0 REUSED=0 TOTAL=10
+
+The mart's rows: one contract on two rows, one for each version HR keeps.
+
+  contract_bk   pay_type   is_casual   unit_code   teaching_period
+  HR|T-18002    CON        false
+  HR|T-26188    CAS        true        HI101       2026-S2
+  HR|T-26188    CAS        true        PH101       2026-S2
+
+== The agent's fix: the clause put back ==
+
+$ git apply films/analytics-engineering/project/examples/night-in-test/fix.patch   # from the repository's root
+$ dbt build --profiles-dir . --select +mart_workload__teaching_staff --indirect-selection cautious \
+    --vars '{as_is_date: 2026-11-04}'
+
+  OK      stg_hr_system__contracts                 view, in dev_staging
+  PASS    accepted_values_stg_hr_system__contracts_pay_type__CAS__FT__CON
+  PASS    not_null_stg_hr_system__contracts_contract_bk
+  PASS    accepted_values_stg_hr_system__contracts_position_type__Casual_Academic__Academic
+  PASS    not_null_stg_hr_system__contracts_staff_bk
+  PASS    not_null_stg_hr_system__contracts_starts_on
+  PASS    unique_combination_stg_hr_system__contracts_contract_bk__recorded_from
+  OK      mart_workload__teaching_staff            table, in dev_marts
+  PASS    each_contract_counts_once
+
+  Done. PASS=10 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=10
+
+The mart's rows: each contract once, in the version that holds on 4 November.
+
+  contract_bk   pay_type   is_casual   unit_code   teaching_period
+  HR|T-18002    CON        false
+  HR|T-26188    CAS        true        PH101       2026-S2
+
+T-26188 counts once, where its contract stands that day: PH101. Whether a tutor who moves counts in both units that
+term is HR's to say (question.md).

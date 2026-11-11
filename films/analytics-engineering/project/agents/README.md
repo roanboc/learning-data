@@ -35,6 +35,12 @@ by hand, and no right is given by hand.
    The agent's owner answers for what it does, and doesn't review pull requests. Once it's merged, the
    platform team applies each file, as the table says.
 
+An agent with a mandate (`governance/8-mandates/`, named on its assignment on the map) gets the page's
+limits on top of its rights, in the same files: its hour as its run's timeout, its rounds as the runner's
+limit, its budget as a rate limit in Unity Gateway on its own service principal, and its plain check as
+its run's first step, reading what `tools.yml` says tonight's copy is (`extra_settings()` in the script).
+`scripts/check/mandates.py` fails when any of them allows more than the page.
+
 To give an agent a new right, change its role's step on the map, through review. The script writes the
 files again, and the platform team applies them. Never the other way: a right given by hand in a tool is
 drift.

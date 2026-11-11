@@ -1,0 +1,79 @@
+models:
+
+  - name: mart_workload__teaching_staff
+    description: >
+      Each contract that holds today, in the version HR holds as true today: a tutor's casual
+      contract to teach a unit this teaching period, or an academic appointment. Each week the
+      workload agent tells the Faculty of Health's heads of school from it how many teach in each
+      school or unit this term, and how many are casual. Who counts as teaching where is HR's to
+      say, as the owner of the staff words (the person domain's tutor role is HR's). HR keeps every
+      version it records of a contract, so a tutor who moved to another unit this term has two: only
+      the one that holds today counts (examples/night-in-test/).
+    config:
+      group: workload
+      meta:
+        grain: One row per contract that holds today, in its version that holds today
+        owner: "Anil Kurian, Faculty of Health"
+        domain: workload
+        consumer: The Faculty of Health's heads of school, through the workload agent
+    constraints:
+      - type: primary_key
+        name: pk_mart_workload__teaching_staff
+        columns: [contract_key]
+        warn_unenforced: false
+    columns:
+      - name: contract_key
+        description: The hash of contract_bk, the same for every version of a contract, so each contract has one row.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              name: each_contract_counts_once
+              description: >
+                Each contract counts once, in the version HR holds as true today. A contract on two
+                rows means two of its versions were read, so its tutor counts twice.
+              config:
+                meta: {owner: "Anil Kurian, Faculty of Health"}
+        config:
+          meta: {personal_data: pseudonymous}
+      - name: contract_bk
+        description: '{{ doc("qualified_key") }} The contract in the HR system, like HR|T-26188.'
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: pseudonymous}
+      - name: position_type
+        description: '{{ doc("position_type") }}'
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: pay_type
+        description: '{{ doc("pay_type") }}'
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: is_casual
+        description: True when payroll pays the contract as casual (pay type CAS), as the heads of school count casual staff.
+        data_type: boolean
+        config:
+          meta: {personal_data: none}
+      - name: unit_code
+        description: The unit a tutor's casual contract is to teach, like HI101. Null for an appointment.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: teaching_period
+        description: The teaching period a casual contract is for, like 2026-S2. Null for an appointment.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: starts_on
+        description: The contract's first day.
+        data_type: date
+        config:
+          meta: {personal_data: none}
+      - name: ends_on
+        description: The contract's last day, inclusive. Null for a continuing appointment.
+        data_type: date
+        config:
+          meta: {personal_data: none}

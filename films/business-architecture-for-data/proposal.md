@@ -17,6 +17,7 @@
 | 11 November 2026 | Processes: ArchiMate keeps the high-level processes; BPMN describes the detail from level 3 down. Levels follow APQC in four bands (strategic, operational, support, evaluation), breadth first and depth on pain, a SIPOC for each level-2 process, as the author's own method does. |
 | 11 November 2026 | Industry reference models are taught in *What the business needs to know*: for energy, the IEC Common Information Model, IEC 61968-1's interface reference model, the Smart Grid Architecture Model and the Harmonised Electricity Market Role Model; others named once (HERM, BIAN, TM Forum, ACORD, HL7 FHIR, APQC). Seed from one, name it, and confirm each element with the business. |
 | 11 November 2026 | The author's past work, a 2023 talk on enterprise data and an architecture repository for a university's data platform, is input to the four series, not his view today; *From the author's past engagements* in this proposal says which film takes what. The films never name the organisations. |
+| 11 November 2026 | The business glossary is grouped by business domain, and by data domain for the definitions several business domains share, so owners are easy to find and allocate within their scope (the author). |
 <!-- /decided -->
 
 ## The brief
@@ -98,7 +99,7 @@ The author shared two pieces of his own past work on 11 November 2026, "addition
 | What they say | Where it goes |
 |---|---|
 | Ask of each capability: who the experts are, what its key data elements are, who could own them and which could be master data. Data management is itself a business capability, with governance under it | *What the business owns*; *Who creates it, who owns it* |
-| A glossary is hierarchical so each owner defines their own terms; the owner matters before the tool, and a table is enough to start. Data assets are linked to glossary terms, joining the business's model to the physical one | *What the business needs to know*; *One language, kept* |
+| A glossary is grouped by business domain, and by data domain for the definitions several business domains share, so each term's owner is easy to find and its scope is clear; the owner matters before the tool, and a table is enough to start. Data assets are linked to glossary terms, joining the business's model to the physical one | *What the business needs to know*; *One language, kept* |
 | A policy is carried out by processes, processes by procedures, and procedures make and keep the artifacts, as ISO 9000 does | *Rules and expectations the business owns* |
 | A source system is accountable for its own data quality; the platform reads sources and never writes to them, and builds a quality rule only when the source can't | *Rules and expectations the business owns*; *Where each fact is born* |
 | DIKW's levels, defined with an example, then "not as simple as that" | *The pyramid, taken apart* |

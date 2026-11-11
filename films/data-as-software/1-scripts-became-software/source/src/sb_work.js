@@ -80,6 +80,15 @@ function sb_pr(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=o.h||236,box={x,y,
     const label=rv>0.5?(o.reviewer?"Approved by "+o.reviewer:"Approved"):"Review needed",col=rv>0.5?MD.pass:MD.wait;
     md_tag(ctx,px-md_tw(ctx,label,{w:700,size:28})-88,y+h-44,label,{col,icon:rv>0.5?"tick":"person"});ctx.restore();}
   ctx.restore();return box;}
+// a ticket: what someone outside the data team asked for, linked to the branch and the pull requests that do it. o.status (its
+// state, in a tag at the foot), o.statusCol, o.statusIcon, o.edge (the asker's colour), o.a, o.k
+const SB_TICKET={id:"FIN-212",title:"Move payroll's export into the data project",by:"Asked by Rohan Desai · Finance"};
+function sb_ticket(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,tl=md_wrap(ctx,SB_TICKET.title,w-56,{w:700,size:36}),sy=y+108+tl.length*46,h=sy-y+104,box={x,y,w,h};
+  if(a<=0.004)return box;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));const edge=o.edge||MD.dom.finance;
+  md_card(ctx,x,y,w,h,{edge,glow:0.6});md_T(ctx,"TICKET · "+SB_TICKET.id,x+28,y+52,{w:800,size:28,ls:3,col:edge});md_icon(ctx,"doc",x+w-48,y+44,40,edge);
+  tl.forEach((l,i)=>md_T(ctx,l,x+28,y+108+i*46,{w:700,size:36}));md_T(ctx,SB_TICKET.by,x+28,sy,{w:600,size:28,col:MD.soft});
+  if(o.status)md_tag(ctx,x+28,sy+52,o.status,{col:o.statusCol||MD.wait,icon:o.statusIcon||"clock"});
+  ctx.restore();return box;}
 // the branch a change goes on, and back: main along the top, the branch below it from bx0 to bx1; u (0 to 1) draws it
 function sb_branch(ctx,x0,x1,y,bx0,bx1,o){o=o||{};const a=o.a==null?1:o.a,u=o.u==null?1:o.u;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
   md_lane(ctx,md_path([[x0,y],[x1,y]]),MD.flow,0.9,{});md_T(ctx,"main",x0,y-24,{w:700,size:28,f:"mono",col:MD.flow});

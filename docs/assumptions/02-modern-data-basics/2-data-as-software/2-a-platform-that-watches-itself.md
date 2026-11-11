@@ -36,3 +36,10 @@ Kept by the film's thread, "Make data basics film 5 A platform that watches itse
 
 - Merged into main on 10 November 2026 as a draft: [#229](https://github.com/roanboc/learning-data/pull/229). Not rendered, and no review page, as you asked.
 - The soundtrack's audio release is done: your run of *Store audio outside Git* published it on 10 November 2026 at 03:11 UTC, and its copy matches its checksum. From now on, audio releases publish themselves when a film merges.
+
+## Who asks whom (11 November 2026)
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| A1 | How does Sam ask Ingrid to change the contract first, now that a pull request never asks an owner? | In a ticket he opens for her, linked to his pull request, where she decides DEC-CLM-03. Noor, the data architect, still reviews and approves the code. | Chapter 5; the worked example | The ask goes through another channel, such as the contract catalogue's own change request |
+

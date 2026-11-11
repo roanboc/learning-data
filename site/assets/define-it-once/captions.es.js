@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nadie puede saber cuál cambió, porque, por definición, el cilindro siempre es exactamente un kilogramo.",
 "Every exact weighing in the world rests on one object, in one place, which could be scratched, or lost.":
 "Toda pesada exacta del mundo depende de un objeto, en un lugar, que podría rayarse o perderse.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The kilogram had to rest on something no accident could touch.":
+"El kilogramo tenía que apoyarse en algo que ningún accidente pudiera tocar.",
 "In 2018, the world's conference on weights and measures voted to define the kilogram anew.":
 "En 2018, la conferencia mundial de pesas y medidas votó definir el kilogramo de nuevo.",
 "From May 2019, it's set by a constant of nature, the Planck constant: the same everywhere, and fixed exactly.":
@@ -37,8 +37,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la universidad, una medida tenía el mismo problema.",
 "In August, three tools gave the Faculty of Health three numbers for casual teaching cost, and nobody could tell which one was the answer.":
 "En agosto, tres herramientas dieron a la Facultad de Salud tres cifras del costo de la docencia ocasional: nadie supo cuál era la respuesta.",
-"Now it's defined once, in a format any tool can read, and every tool gives the same number.":
-"Ahora se define una vez, en un formato que cualquier herramienta puede leer, y todas dan la misma cifra.",
+"Now each is defined once, under its own name, in a format any tool can read, and every tool gives the same numbers.":
+"Ahora cada una se define una vez, con nombre propio, en un formato que toda herramienta lee, y todas dan las mismas cifras.",
 
 "Casual teaching is the teaching done by tutors hired a semester at a time, who claim the hours they teach.":
 "La docencia ocasional es la que dan tutores contratados de semestre en semestre, que declaran las horas que enseñan.",
@@ -54,28 +54,28 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cada una era correcta para su propia pregunta, pero las tres se llamaban costo de la docencia ocasional.",
 "Budget on payroll's number, and Health would be 330 thousand dollars short next year: about one tutorial in seven with no money for a tutor.":
 "Con la cifra de nómina, a Salud le faltarían 330 mil dólares el año siguiente: una de cada siete tutorías sin dinero para un tutor.",
-"Rohan Desai, in Finance, owns this measure, but his definition lived only inside his report.":
-"Rohan Desai, de Finanzas, es dueño de esta medida, pero su definición vivía solo dentro de su reporte.",
+"Each definition lived only inside its own tool, where no other tool could read it.":
+"Cada definición vivía solo dentro de su propia herramienta, donde ninguna otra podía leerla.",
 
-"Like the kilogram, it needed one definition that no single tool held.":
-"Como el kilogramo, necesitaba una sola definición que no guardara ninguna herramienta.",
-"In September, Rohan defined it once, with Jun Park, who builds the data project.":
-"En septiembre, Rohan la definió una vez, con Jun Park, que construye el proyecto de datos.",
-"Its owner is Rohan: he decides what it means, in the glossary, before any code.":
-"Su dueño es Rohan: él decide qué significa, en el glosario, antes de cualquier código.",
-"Its words: what the casual teaching in a teaching period costs. Also called sessional teaching cost.":
-"Sus palabras: lo que cuesta la docencia ocasional de un período lectivo. También se le dice costo de la docencia por sesión.",
-"Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on-costs.":
-"Sus reglas: declaraciones aprobadas, de personal ocasional, por docencia: tutorías, corrección y consultas, más cargas sociales.",
-"Counted by the teaching period the teaching was done in, not the day it was paid.":
-"Se cuenta por el período lectivo en que se dio la docencia, no por el día en que se pagó.",
-"The claims are HR's data: Ingrid Holm answers for what each of their fields means.":
-"Las declaraciones son datos de RR. HH.: Ingrid Holm responde por lo que significa cada uno de sus campos.",
-"And the other two numbers get names of their own: casual hours contracted, for planning, and casual pay paid, for each pay day.":
-"Y las otras dos cifras reciben nombre propio: horas ocasionales contratadas, para planificar, y pago ocasional pagado, por día de pago.",
+"Like the kilogram, each number needed one definition that no single tool held.":
+"Como el kilogramo, cada cifra necesitaba una sola definición que no guardara ninguna herramienta.",
+"In September, Finance, HR and Planning met with Jun Park, who builds the data project, and found not one measure, but three.":
+"En septiembre, Finanzas, RR. HH. y Planificación se reunieron con Jun Park, del proyecto de datos, y no hallaron una medida, sino tres.",
+"Each answers its own question, at its own moment: what the contracts allow, what is paid, and what the teaching costs.":
+"Cada una responde a su pregunta, en su momento: lo que permiten los contratos, lo que se paga y lo que cuesta la docencia.",
+"Casual hours contracted is Planning's: Clara Jensen owns it, to plan next year's teaching.":
+"Las horas ocasionales contratadas son de Planificación: su dueña es Clara Jensen, para planificar la docencia del año siguiente.",
+"Casual pay paid is HR's: Ingrid Holm owns it, counted by pay day, to check each pay run.":
+"El pago ocasional pagado es de RR. HH.: su dueña es Ingrid Holm, contado por día de pago, para revisar cada nómina.",
+"And casual teaching cost is Finance's: Rohan owns it, to set the budget, counted by the teaching period the teaching was done in.":
+"Y el costo de la docencia ocasional es de Finanzas: su dueño es Rohan, para el presupuesto, contado por el período lectivo de la docencia.",
+"Each owner decides what theirs means, in the glossary, before any code.":
+"Cada dueño decide qué significa la suya, en el glosario, antes de cualquier código.",
+"Now everyone can see why the three numbers differ, and which one answers their question.":
+"Ahora todos ven por qué difieren las tres cifras, y cuál responde a su pregunta.",
 
-"Its home is a metric view in Unity Catalog, beside the tables it's counted from.":
-"Su hogar es una vista de métricas en Unity Catalog, junto a las tablas de las que se calcula.",
+"Each measure's home is a metric view in Unity Catalog, beside the tables it's counted from.":
+"El hogar de cada medida es una vista de métricas en Unity Catalog, junto a las tablas de las que se calcula.",
 "A metric view holds a measure's definition once, and works out the right number however it's grouped: by faculty, unit or teaching period.":
 "Una vista de métricas define una medida una vez, y da la cifra correcta como se agrupe: por facultad, asignatura o período lectivo.",
 "Unity Catalog governs it like a table: who may read it, and what reads it.":
@@ -125,12 +125,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Rohan le pregunta a Genie One cuánto le ha costado la docencia ocasional a Salud en este semestre: 1.84 millones de dólares.",
 "The fortnightly dashboard's Ask Genie gives the same, from the same definition.":
 "El botón Ask Genie del tablero quincenal da lo mismo, desde la misma definición.",
-"Last semester's is 2.21 million, with the other two numbers beside it, each under its own name.":
-"La del semestre pasado es 2.21 millones, con las otras dos cifras al lado, cada una con su propio nombre.",
+"Last semester's is 2.21 million, and beside it, the other two measures, each under its own name and owner.":
+"La del semestre pasado es 2.21 millones, y a su lado, las otras dos medidas, cada una con su nombre y su dueño.",
 "Rohan sets Health's budget for next year on the cost, with every tutorial's tutor in it.":
 "Rohan fija con el costo el presupuesto de Salud del año siguiente, con el tutor de cada tutoría incluido.",
-"Like the kilogram, casual teaching cost is one definition, written where anyone can read it, and held by no single tool.":
-"Como el kilogramo, el costo de la docencia ocasional es una definición, escrita donde cualquiera la lee, y no la guarda ninguna herramienta.",
+"Like the kilogram, each measure is one definition, written where anyone can read it, and held by no single tool.":
+"Como el kilogramo, cada medida es una definición, escrita donde cualquiera la lee, y no la guarda ninguna herramienta.",
 "The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs.":
 "Los estándares ya existen, así que no los reinventes: investiga, adapta, implementa, itera, empezando por la documentación oficial."
 });

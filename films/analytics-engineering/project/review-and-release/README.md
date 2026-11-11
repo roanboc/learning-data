@@ -14,6 +14,7 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 | File | What it is |
 |---|---|
 | `rulesets/main.json` | The ruleset on `main`, as GitHub exports one |
+| `rulesets/workload-agent-folders.json` | A second ruleset, on pushes: the workload agent's App may push only its folders' SQL, as its mandate says (`../governance/8-mandates/`). People and the planning agent are on its bypass list, so it holds that one App |
 | `test.json`, `production.json` | The environments `test` and `production`, each as the body of GitHub's REST call that sets it |
 | `release.yml` | The release, every night at 23:00 or when a person starts it: it builds `main` in test; only if test passes does it go on to production, where it waits for a release approver, then signs in to Databricks with no secret, deploys the bundle (`../databricks.yml`) and runs the build (`../resources/build.job.yml`) |
 | `dependabot.yml` | Dependabot's settings: each week it proposes the new versions of the actions the workflows use, and of the project's Python libraries, each as a pull request, reviewed like any other change |
@@ -27,7 +28,7 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 | Rule | What it stops | Where it's set |
 |---|---|---|
 | Every change comes as a pull request: nobody pushes to `main`, deletes it or rewrites its history | A change nobody read | The ruleset (`pull_request`, `deletion`, `non_fast_forward`) |
-| Nobody may bypass the rules, not even an administrator | A rule skipped in a hurry | The ruleset: its bypass list is empty |
+| Nobody may bypass the rules, not even an administrator | A rule skipped in a hurry | The ruleset on `main`: its bypass list is empty |
 | One approval, and a code owner's for each file the change touches | A change only its author read | The ruleset (`require_code_owner_review`), with `../CODEOWNERS` |
 | Nobody approves their own pull request | A change approved by whoever wrote it | GitHub itself: a pull request's author can't approve it |
 | The most recent push is approved by someone who didn't push it | A change slipped in after the approval, or approved by whoever pushed it | The ruleset (`require_last_push_approval`) |
@@ -35,6 +36,7 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 | Every conversation is resolved | A question left unanswered | The ruleset (`required_review_thread_resolution`) |
 | A data governance lead and a data custodian both approve a change to these rules, the release, the bundle and its jobs, `CODEOWNERS`, `AGENTS.md`, `agents/`, the owners, or who holds a role on the map | A rule loosened, or an approver changed, in the same change that relies on it | The ruleset's required reviewer rule: `data-governance-leads` and `data-custodians`, on those files |
 | CI's checks pass, on a branch that's up to date with `main` | A change that breaks the build, or only worked on an older `main` | The ruleset (`required_status_checks`, strict), from GitHub Actions only |
+| The workload agent pushes only its folders' SQL | A change outside its mandate: HR's model of contracts, say, or its own tests, contract or mandate | The push ruleset (`rulesets/workload-agent-folders.json`); `../scripts/check/mandates.py` fails if it lets the App push more |
 | Merging doesn't release: each night the release builds `main` in test first, and goes on only if test passes | A change in production that fails on the night's data | `release.yml`: its job `production` needs its job `test` |
 | Production waits for a release approver | A change in production that no second person saw | The environment (`production.json`, `reviewers`) |
 | Whoever started the release can't approve it, even a release approver | One person releasing their own change | The environment (`prevent_self_review`) |
@@ -119,7 +121,9 @@ approver all the same, and they can't approve it themselves.
 1. **The teams.** Make each team in `teams.yml` in the organisation, each member with their own GitHub account, and
    give each team write access to the repository. Put their ids where *The teams* says.
 2. **The ruleset.** In the repository's settings, under *Rules* and *Rulesets*, import `rulesets/main.json`. Or:
-   `gh api -X POST repos/<owner>/<repo>/rulesets --input rulesets/main.json`.
+   `gh api -X POST repos/<owner>/<repo>/rulesets --input rulesets/main.json`. Import
+   `rulesets/workload-agent-folders.json` the same way, with your planning agent's App's ID (`../agents/tools.yml`) in
+   its bypass list.
 3. **The environments.** For each of `test` and `production`:
    `gh api -X PUT repos/<owner>/<repo>/environments/<name> --input <name>.json`, then its one deployment branch:
    `gh api -X POST repos/<owner>/<repo>/environments/<name>/deployment-branch-policies -f name=main -f type=branch`.

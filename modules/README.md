@@ -74,6 +74,7 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
 - [Hot, warm, cold](../films/data-that-moves/2-hot-warm-cold/) — `hot-warm-cold`
 - [One copy, one platform](../films/data-that-moves/3-one-copy-one-platform/) — `one-copy-one-platform`
+- [Read often, kept close](../films/data-that-moves/4-read-often-kept-close/) — `read-often-kept-close`
 
 ### Data as software
 
@@ -90,11 +91,12 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 - [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
 - [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
-### Documents as data
+### Documents and closing remarks
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
 - [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
+- [Ideas that last, features you test](../films/documents-as-data/2-ideas-that-last/) — `ideas-that-last`
 
 ## Analytics engineering
 
@@ -352,6 +354,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
 - [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
 - [Every change through review](../films/from-helper-to-colleague/6-every-change-through-review/) — `every-change-through-review`
+- [A mandate, written and enforced](../films/from-helper-to-colleague/7-a-written-mandate/) — `a-written-mandate`
 
 ## Leading data people
 

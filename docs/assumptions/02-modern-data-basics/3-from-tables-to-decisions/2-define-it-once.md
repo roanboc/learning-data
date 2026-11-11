@@ -1,6 +1,6 @@
 # Defined in the open: questions and assumptions
 
-*Modern data basics* · *From tables to decisions*, film 2 of 3 · merged, PR #167 · [pull request](https://github.com/roanboc/learning-data/pull/167)
+*Modern data basics* · *From tables to decisions*, film 2 of 3 · merged, PR #167 · [pull request](https://github.com/roanboc/learning-data/pull/167); reworked into three measures on 11 November 2026
 
 [Watch it on the site](https://data.learn-all.org/from-tables-to-decisions/define-it-once/)
 
@@ -32,3 +32,16 @@ Kept by the film's thread ("Make data basics film 7 Define it once"), as Rodrigo
 | 20 | Which official docs does the page link? | Seven: Databricks' metric views, their YAML syntax and agent metadata (in Spanish on Microsoft Learn), dbt's metric view configuration, MetricFlow and Ossie documents, and Apache Ossie's site ("(en inglés)" where no Spanish page exists). Checked on 5 November 2026. | The film's page | The links in `site.json` |
 | 21 | Five Spanish captions ran over the player's 140 characters. How to shorten them? | Shorter wording, same meaning: "hace un kilogramo" for "puede hacer"; "nadie supo cuál era la respuesta"; "más las cargas sociales sobre el sueldo"; "por día de pago"; "define una medida una vez". | Spanish captions | Five captions |
 | 22 | Main now keeps audio outside Git (9 November). Should the film's soundtrack go to a GitHub release now? | Not from here: the MP3 is committed beside its pointer, `audio.json`, which names the release `audio-define-it-once-e102d21980f151021a45`. Since main's change of 10 November (#243), *Store audio outside Git* publishes and verifies it on its own when the film reaches main. | `films/from-tables-to-decisions/2-define-it-once/audio.json` | Nothing to run: if the workflow's run fails, run it again with its tag left blank |
+
+## Rework of 11 November 2026: three measures under one name
+
+From Rodrigo's review of 11 November 2026 ("This one should show there were actually more metrics that required their own more specific context ... multiple shared metrics with a new organisational understanding of their difference between business domains"). Made on assumptions, in the film's thread "Show several domain metrics in Define it once".
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 23 | Which metrics are the "multiple shared metrics"? | The three the one name already hid, each made a full measure of its own domain: casual hours contracted (what the contracts allow), casual pay paid (what is paid) and casual teaching cost (what the teaching costs), with no new numbers, so films 6 and 8 still agree. | Chapters 1, 3, 4 and 7 | A fourth measure, or other domains, would add a card and lines to chapter 3 |
+| 24 | Who owns each? | Planning owns casual hours contracted, as Clara Jensen (the agent films' Planning lead), since it plans the teaching; HR owns casual pay paid, as Ingrid Holm, since payroll's figures are HR's (film 4); Finance keeps casual teaching cost, as Rohan Desai. | Chapter 3's cards and people; chapter 7's cards | An owner changes on a card and in one line |
+| 25 | What is the "organisational understanding of their difference"? | One activity seen at three moments, each by the domain that needs it: when the contracts are made (for planning), when the pay is paid (for each pay run) and when the teaching is done (for the budget). Chapter 3 says it, and ends on "Now everyone can see why the three numbers differ, and which one answers their question." | Chapter 3 | The framing changes chapter 3's lines |
+| 26 | Does each get a metric view? | Yes in the film (chapter 4 shows all three, then follows casual teaching cost). In the example project, casual pay paid gets one over payroll's export; casual hours contracted doesn't, because the sample HR system's contracts carry no hours to count. | Chapter 4; `models/marts/finance/casual_pay_paid.sql` | The project would need contract hours in the HR system's sample data |
+| 27 | Does the film still follow casual teaching cost after chapter 3? | Yes: the metric view's YAML, the review, dbt, Ossie and pay day still use Finance's measure, so the film stays one thread and keeps its length (7:48, 129 words a minute). | Chapters 4 to 7 | Following all three would need a longer film |
+| 28 | The thread "Vary the 'something has to change' line" asked to drop the stock line. What replaces it? | Its wording: "The kilogram had to rest on something no accident could touch." (*El kilogramo tenía que apoyarse en algo que ningún accidente pudiera tocar.*) | The opening | One line, voiced again |

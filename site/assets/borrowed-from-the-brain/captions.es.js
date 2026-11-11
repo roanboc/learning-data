@@ -4,7 +4,7 @@
    Words: la célula nerviosa and la neurona; el espacio for the gap between cells (the picture says "The gap"); la maraña for the thicket; una tinción for
    Golgi's stain; las rapaces for Wright's buzzards; el perceptrón; los pesos for weights; la temperatura and las porciones of la ruleta for the wheel's
    slices; the model's words in the bee's sentence are translated (bailando, zumbando), as the governance films translate the faculties' names; verificar
-   for a check, as in the series; billones for English trillions and mil millones for billions; and tú, as the film speaks to the viewer. */
+   for a check, as in the series; la ascidia for the sea squirt; el error de predicción; el bucle for the loop, as in A model, reasoning, hands and a loop; billones for English trillions and mil millones for billions; and tú, as the film speaks to the viewer. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In 1958, the psychologist Frank Rosenblatt showed a program that learned from examples: the perceptron.":
 "En 1958, el psicólogo Frank Rosenblatt mostró un programa que aprendía de ejemplos: el perceptrón.",
@@ -20,8 +20,6 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Wilbur Wright notó que las rapaces torcían la punta de las alas para mantener el equilibrio.",
 "So the brothers built that twist into their wings.":
 "Así que los hermanos pusieron esa torsión en sus alas.",
-"Engineers still study the maple seed, which spins down like a tiny helicopter.":
-"Los ingenieros aún estudian la semilla del arce, que cae girando como un helicóptero diminuto.",
 "And for a machine that learns, nature had the only working example: a brain.":
 "Y para una máquina que aprende, la naturaleza tenía el único ejemplo que funcionaba: un cerebro.",
 "But in 1888, nobody could see how a brain was wired.":
@@ -179,5 +177,65 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Knowing that, you know when to check them: against the evidence, as Cajal's drawings were checked.":
 "Sabiéndolo, sabes cuándo verificarlos: contra la evidencia, como se verificaron los dibujos de Cajal.",
 "Next, what an agent is: a model that reasons, with hands, in a loop.":
-"A continuación, qué es un agente: un modelo que razona, con manos, en un ciclo."
+"A continuación, qué es un agente: un modelo que razona, con manos, en un bucle.",
+"Off a rocky shore, a tadpole about a millimetre long swims through the sea.":
+"Frente a una costa rocosa, un renacuajo de un milímetro nada por el mar.",
+"It's a young sea squirt, with an eye spot, a tail, and a tiny brain and nerve cord of about 180 nerve cells.":
+"Es una ascidia joven, con una mancha ocular, una cola y un cerebro y cordón nervioso diminutos de unas 180 células nerviosas.",
+"For a few hours, it swims, looking for a rock to live on.":
+"Durante unas horas, nada, buscando una roca donde vivir.",
+"Then it glues its head to the rock, and never moves again.":
+"Luego pega la cabeza a la roca, y nunca vuelve a moverse.",
+"People say it eats its own brain. Not quite: its body takes the tail, and most of the brain, apart, and uses them again.":
+"Se dice que se come su propio cerebro. No del todo: su cuerpo desarma la cola, y casi todo el cerebro, y los reutiliza.",
+"On a rock, there's nothing left to steer.":
+"En una roca, ya no hay nada que dirigir.",
+"Brains are for animals that move: to find food, and not to become food.":
+"Los cerebros son para animales que se mueven: para encontrar comida, y no volverse comida.",
+"And moving well means guessing what comes next.":
+"Y moverse bien es adivinar lo que viene.",
+"Many scientists now think a brain fills in all the time, not just in one spot.":
+"Hoy, muchos científicos creen que un cerebro rellena todo el tiempo, no solo en un punto.",
+"It guesses what comes next, a moment ahead, and checks the guess against what the senses bring.":
+"Adivina lo que viene, un momento por delante, y compara la predicción con lo que traen los sentidos.",
+"A dragonfly doesn't chase a midge: it flies to where the midge will be, and catches about nine in ten.":
+"Una libélula no persigue a un mosquito: vuela adonde estará el mosquito, y atrapa unos nueve de cada diez.",
+"Step onto an escalator that has stopped, and you stumble: your legs were ready for it to move.":
+"Pisa una escalera mecánica detenida, y tropiezas: tus piernas estaban listas para que se moviera.",
+"What a brain expected, it barely notices. What it didn't, it notices at once: a prediction error.":
+"Lo que un cerebro esperaba, apenas lo nota. Lo que no, lo nota al instante: un error de predicción.",
+"In the 1990s, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice.":
+"En los años noventa, Wolfram Schultz escuchó células en lo hondo del cerebro de monos: se encendía una luz, y luego, una gota de jugo.",
+"At first, the cells fired at the juice. Once the monkeys learned that the light came first, they fired at the light instead.":
+"Al principio, las células se disparaban con el jugo. Cuando los monos aprendieron que la luz venía antes, se disparaban con la luz.",
+"And when the light came but the juice didn't, their firing dipped, just when the juice was due.":
+"Y cuando llegaba la luz pero no el jugo, sus disparos bajaban, justo cuando tocaba el jugo.",
+"Guess, check, learn from the miss: that's how an animal on the move finds food, and stays out of reach.":
+"Predecir, verificar, aprender del error: así un animal en movimiento encuentra comida, y se mantiene fuera de alcance.",
+"So what does a brain that guesses ahead mean for work with data?":
+"¿Y qué significa un cerebro que adivina por delante para el trabajo con datos?",
+"A lot of data work runs like a reflex: a trigger comes, a script runs the same steps, and stops.":
+"Mucho trabajo con datos funciona como un reflejo: llega un disparador, un script hace los mismos pasos, y se detiene.",
+"Every night, a script loads the day's course registrations, and checks one rule: the table isn't empty.":
+"Cada noche, un script carga las inscripciones a cursos del día, y revisa una regla: la tabla no está vacía.",
+"One Monday, only half the rows arrive. The rule passes, and the reports go out wrong.":
+"Un lunes, solo llega la mitad de las filas. La regla pasa, y los informes salen mal.",
+"An agent can work more like a brain: before it looks, it says what it expects.":
+"Un agente puede trabajar más como un cerebro: antes de mirar, dice qué espera.",
+"About 4,100 rows, as on most Mondays, from three campuses.":
+"Unas 4,100 filas, como casi todos los lunes, de tres campus.",
+"Then it looks, and measures the gap: 2,030 rows. A prediction error.":
+"Luego mira, y mide la diferencia: 2,030 filas. Un error de predicción.",
+"So it goes looking, as a forager would: it counts each campus, and finds that one sent nothing.":
+"Así que va a buscar, como un animal en busca de alimento: cuenta cada campus, y ve que uno no envió nada.",
+"When an assumption fails, a column renamed or a field left empty, it doesn't crash: it changes its plan, and writes down what changed.":
+"Cuando falla una suposición, una columna renombrada o un campo vacío, no se cae: cambia su plan, y anota lo que cambió.",
+"And it doesn't fix the reports on its own: it shows a person the gap, with its evidence.":
+"Y no corrige los informes por su cuenta: le muestra la diferencia a una persona, con su evidencia.",
+"Where nothing surprises, a plain script is still the right tool: cheaper, and the same every time.":
+"Donde nada sorprende, un script sencillo sigue siendo la herramienta adecuada: más barato, e igual cada vez.",
+"Expect, act, check, and adapt: the loop that kept moving animals alive.":
+"Esperar, actuar, verificar y adaptarse: el bucle que mantuvo vivos a los animales que se mueven.",
+"Agents borrowed the loop, not the brain.":
+"Los agentes tomaron el bucle, no el cerebro."
 });

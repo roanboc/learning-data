@@ -34,6 +34,7 @@ import argparse
 import json
 import re
 import sys
+import textwrap
 from pathlib import Path
 
 import yaml
@@ -71,11 +72,51 @@ def load_map():
     return elements
 
 
-def extra_settings(agent):
+def extra_settings(agent, p, identity):
     """What a film sets for one agent on top of its rights, such as a mandate's limits, read from where they're
-    decided. Return {"workflow": {...}} to add keys to its run's job (timeout-minutes, say), or
-    {"unity gateway": {...}} to add a section to its unity-gateway.yml (a rate limit, say). Nothing, by default."""
-    return {}
+    decided. Return {"workflow": {...}} to add keys to its run's job (timeout-minutes, say), {"unity gateway":
+    {...}} to add a section to its unity-gateway.yml (a rate limit, say), {"before": [...]} for steps its run
+    takes before the agent starts (a plain check, say), or {"runner": [...]} for more of the runner's flags (a
+    limit on rounds, say). Nothing, by default.
+
+    An agent with a mandate in force (a page in governance/8-mandates/, named on its assignment beside its stage)
+    gets each line of the page that its run holds: its hour as the run's timeout, its rounds as the runner's
+    limit, its budget as a rate limit in tokens a minute on its own service principal, on each model it calls, and
+    its plain check as the run's first step, reading what agents/tools.yml says tonight's copy is. With two
+    mandates, each limit is the tighter. scripts/check/mandates.py fails when what this writes allows more than a
+    page (A mandate, written and enforced)."""
+    pages = []
+    for rel in agent.get("relationships") or []:
+        if isinstance(rel, dict) and "assignment" in rel:
+            named = rel.get("mandate")
+            for name in [] if named is None else named if isinstance(named, list) else [named]:
+                page = yaml.safe_load((ROOT / "governance" / str(name)).read_text()) or {}
+                if page.get("status") == "in force":
+                    pages.append(dict(page, _path=f"governance/{name}"))
+    if not pages:
+        return {}
+    limit = {key: min((page.get("limits") or {})[key] for page in pages) for key in ("minutes", "rounds", "tokens a minute")}
+    models = sorted(full_name for securable, full_name in p["gateway"] if securable == "model_service")
+    extra = {"mandates": [(page["_path"], page.get("task")) for page in pages], "limits": limit,
+             "workflow": {"timeout-minutes": limit["minutes"]},
+             "runner": [f"--max-rounds {limit['rounds']}"],
+             "unity gateway": {"rate limits": [
+                 {"securable type": "model_service", "full name": model,
+                  "for": f"its budget, from its mandate: at most {limit['tokens a minute']} tokens a minute",
+                  "body": {"key": "service_principal", "principal": p["sp"], "renewal_period": "minute",
+                           "tokens": limit["tokens a minute"]}} for model in models]}}
+    copy = identity.get("tonight's copy") or {}
+    if copy and any((page.get("checks") or {}).get("first") for page in pages):
+        source = copy["source"]
+        extra["before"] = [{
+            "name": "The plain check, before it starts - has tonight's copy arrived? If not, nothing starts",
+            "why": [f"Plain code, not the agent: dbt reads when {source} last landed, and a copy from before",
+                    f"{copy['since']} UTC today stops the run here, before the agent has started"],
+            "run": f"dbt source freshness --select source:{source} --target agent || true   # its own limits are in days\n"
+                   "last=$(jq -r '.results[0].max_loaded_at // empty' target/sources.json)\n"
+                   'echo "The copy last landed at ${last:-no time}"\n'
+                   f'[[ "$last" > "$(date -u +%Y-%m-%dT{copy["since"]})" ]]'}]
+    return extra
 
 
 def dbt_needs():
@@ -130,7 +171,7 @@ def plan(agent, elements, tools, problems):
          "path": agent["_path"], "group": "_".join(role.split()) + "s", "sp": identity["service principal"],
          "app": slug(name), "branches": f"agent/{slug(short)}/*", "schema": "_".join(slug(name).split("-")),
          "repository": f"{gh['organization']}/{gh['repository']}", "steps": [], "uc": {}, "gateway": {}, "memory": {},
-         "github": {}, "dbt": [], "app_steps": [], "extra": extra_settings(agent) or {}}
+         "github": {}, "dbt": [], "app_steps": [], "extra": {}}
     p["environment"] = p["app"]
 
     def add(table, key, step, what):
@@ -192,7 +233,10 @@ def plan(agent, elements, tools, problems):
                 p["app_steps"].append(sname)
             if tool.get("dbt") and sname not in p["dbt"]:
                 p["dbt"].append(sname)
-    return p if p["steps"] else None
+    if not p["steps"]:
+        return None
+    p["extra"] = extra_settings(agent, p, identity) or {}
+    return p
 
 
 def when(steps):
@@ -311,6 +355,10 @@ def federation_json(p, tools):
 def workflow_yml(p, tools):
     dbx, gh = tools["databricks"], tools["github"]
     job_extra = "".join(f"    {k}: {v}\n" for k, v in (p["extra"].get("workflow") or {}).items())
+    before = "".join(f"      - name: {s['name']}\n" + "".join(f"        # {line}\n" for line in s.get("why") or [])
+                     + "        run: |\n" + "".join(f"          {line}\n" for line in s["run"].splitlines())
+                     for s in p["extra"].get("before") or [])
+    runner = "".join(f" {flag}" for flag in p["extra"].get("runner") or [])
     return f"""# {HEADER[0]}
 # {HEADER[1]}
 #
@@ -361,7 +409,7 @@ jobs:
           curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \\
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience={dbx['account']}" | jq -r .value > "$RUNNER_TEMP/pass"
           echo "DATABRICKS_OIDC_TOKEN_FILEPATH=$RUNNER_TEMP/pass" >> "$GITHUB_ENV"
-      - name: Its App's token, for one repository and its permissions, for an hour
+{before}      - name: Its App's token, for one repository and its permissions, for an hour
         id: app
         run: |
           pass=$(curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \\
@@ -373,7 +421,7 @@ jobs:
         env:
           GH_TOKEN: ${{{{ steps.app.outputs.token }}}}
           TICKET: ${{{{ inputs.ticket }}}}
-        run: agent-runner --agent "{p['name']}" --ticket "$TICKET" --branches "{p['branches']}" --dbt-target agent
+        run: agent-runner --agent "{p['name']}" --ticket "$TICKET" --branches "{p['branches']}" --dbt-target agent{runner}
 """
 
 
@@ -435,7 +483,21 @@ what only people do.
 To change a right, change its step on the map, through review; the script writes these files again, and the
 platform team applies them. A right given by hand in a tool is drift: the nightly check fails on it
 (`agents/README.md`).
-"""
+{mandate_section(p)}"""
+
+
+def mandate_section(p):
+    """What its mandate adds on top of its rights, if it has one in force."""
+    mandates, limit = p["extra"].get("mandates"), p["extra"].get("limits")
+    if not mandates:
+        return ""
+    pages = " and ".join(f"`{path}` ({task})" for path, task in mandates)
+    check = ", and a plain check as its run's first step (`workflow.yml`)" if p["extra"].get("before") else ""
+    text = (f"Its mandate, {pages}, says what it may do alone. Its limits are written on top of its rights, in the "
+            f"same files: {limit['minutes']} minutes as its run's timeout and {limit['rounds']} rounds as the runner's limit "
+            f"(`workflow.yml`), {limit['tokens a minute']} tokens a minute as a rate limit on its service principal "
+            f"(`unity-gateway.yml`){check}. `scripts/check/mandates.py` fails when any of them allows more than the page.")
+    return "\n## Its mandate\n\n" + textwrap.fill(text, width=110, break_long_words=False, break_on_hyphens=False) + "\n"
 
 
 def rights_held_sql(plans):

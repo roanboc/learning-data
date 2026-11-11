@@ -95,7 +95,9 @@ function os_clipC(){return wc_kept("osClip",170,226,q=>{q.translate(10,16);wc_wa
 // the clipboard, at about three quarters of its kept size, in front of the body, its foot in the left hand: the right holds it too
 // (os_heldClip), is raised (os_heldClipL), or holds a pen (os_heldClipPen)
 function os_clipAt(cx,y){cx.save();cx.translate(0,y);cx.rotate(-0.04);cx.scale(0.72,0.72);cx.drawImage(os_clipC(),-85,-113);cx.restore();}
-function os_heldClip(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4],[r[0],r[1]-4]]);}
+// two thumbs at its edges, where the hands hold it: the hold pose's hands sit close together in the middle, and thumbs drawn there
+// float in the middle of the board (10 November 2026)
+function os_heldClip(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[-52,l[1]-4],[52,r[1]-4]]);}
 function os_heldClipL(cx,P_,hands){const l=hands[0];os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4]]);}
 function os_heldClipPen(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4]]);
   cx.save();cx.translate(r[0],r[1]);cx.rotate(0.45);wc_flat(cx,wc_rect(-4,-44,8,52),[40,90,170],1,"pen");cx.fillStyle=rgba([236,238,240],1);cx.fillRect(-4,4,8,6);cx.restore();fingers(cx,P_,[r]);}
@@ -110,7 +112,7 @@ function os_heldScalpel(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0
   cx.fill();cx.stroke();cx.restore();fingers(cx,os_hand(P_),[r]);}
 function os_heldTray(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);
   wc_wash(cx,[[-90,-10],[90,-10],[80,10],[-80,10]],OS_STEEL,{kind:"thing",lw:1.2,seed:8});for(const [x,c] of [[-50,[250,250,250]],[-10,[236,240,246]],[34,[214,226,236]]])wc_flat(cx,wc_rect(x,-26,30,18),c,1,"pack");cx.restore();
-  fingers(cx,os_hand(P_),[[l[0],l[1]-4],[r[0],r[1]-4]]);}
+  fingers(cx,os_hand(P_),[[mx-86,my-12],[mx+86,my-12]]);}
 
 function os_paintTheatre(ctx){const O=OS_OR,F=O.fy;gv_wallFloor(ctx,O.wall,F,{floor:O.floor,seed:23,vx:1000});
   // washable panels low on the wall, under a rail

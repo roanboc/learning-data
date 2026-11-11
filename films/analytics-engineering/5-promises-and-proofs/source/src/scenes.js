@@ -46,10 +46,10 @@ scene("assay",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   withA(ctx,fin(t,tM+0.7,0.5)*(1-fin(t,Ha+1.2,0.6)),()=>tag(ctx,960,410,"then marked",PARCH,{align:"center",size:22}));
   withA(ctx,fin(t,tM+0.8,0.5)*(1-fin(t,Bu-0.4,0.5)),()=>{const lw_=tw(ctx,"leopard's head",20,700)+26;ctx.strokeStyle=rgba(PARCH,0.7);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx+10,cy-172);ctx.lineTo(870,560);ctx.stroke();tag(ctx,870-lw_,560,"leopard's head",PARCH,{size:20});});
   arrive(ctx,1250,440,t,w("buyer","without testing")-0.2,()=>withA(ctx,1-fin(t,Br-0.3,0.5),()=>tag(ctx,1250,440,"trusted without testing again",PARCH,{align:"center",size:22})),{dy:16});
-  // the buyer's hand, from the left along its own forearm, round the stem; the forearm runs low, under "hallmark", and leaves
-  // the frame on the left above the captions. The basket only comes once the cup is lifted, so the hand never reaches past it
+  // the buyer's hand, from the left along its own forearm, round the stem; the forearm runs low, under "hallmark", and fades
+  // into the dark at an arm's length (it once ran the whole width of the frame, 10 November 2026). The basket only comes once the cup is lifted, so the hand never reaches past it
   const hA=fin(t,g0,0.4)*(1-fin(t,g0+4.2,0.6)),hR=0.1,hD=(1-reach)*1100;
-  if(hA>0)pp_hand(ctx,cx-6-hD*Math.cos(hR),cy-70+hD*Math.sin(hR),0.5,t,{flip:true,a:hA,sleeve:[58,66,92],skin:[234,198,166],seed:2,rot:hR,len:1900});
+  if(hA>0)pp_hand(ctx,cx-6-hD*Math.cos(hR),cy-70+hD*Math.sin(hR),0.5,t,{flip:true,a:hA,sleeve:[58,66,92],skin:[234,198,166],seed:2,rot:hR,len:700});
   // the bridge: the present opens on the right; the mark lifts off and waits there as a hollow seal beside the core
   const pr=fin(t,Br-0.2,0.9);
   withA(ctx,pr,()=>{glass(ctx,1240,150,560,620,22,TRUST,{glow:14,ea:0.5,fill:"rgba(5,8,16,0.96)"});pp_layers(ctx,1290,190,460,260,{core:fin(t,w("bridge","core model"),0.6),dim:0.6});});

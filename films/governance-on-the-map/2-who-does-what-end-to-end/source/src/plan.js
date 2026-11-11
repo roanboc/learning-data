@@ -108,11 +108,20 @@ function ee_dictStand(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);wc
   wc_part(ctx,[[-74,0],[0,-8],[74,0],[70,12],[0,6],[-70,12]],[110,44,40],1,{seed:333});
   wc_flat(ctx,[[-68,-4],[-2,-12],[-2,4],[-64,8]],[244,236,214],1,"page");wc_flat(ctx,[[2,-12],[68,-4],[64,8],[2,4]],[246,240,220],1,"page");
   ctx.strokeStyle=rgba([90,80,70],0.5);ctx.lineWidth=1.2;for(let i=0;i<4;i++){for(const s2 of [-1,1]){ctx.beginPath();ctx.moveTo(s2*10,-8+i*3.6);ctx.lineTo(s2*58,-2+i*3.4);ctx.stroke();}}ctx.restore();}
-// a hand, laid flat on something on the table, from a dark cuff: drawn over the table, where the arm reaching it goes under its top
-function ee_handOn(ctx,x,y,s,skin,cuff,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);ctx.fillStyle=rgba(cuff,1);ctx.beginPath();ctx.moveTo(-30,-30);ctx.lineTo(-6,-36);ctx.lineTo(4,-12);ctx.lineTo(-20,-4);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba([246,244,238],1);ctx.beginPath();ctx.moveTo(-8,-34);ctx.lineTo(0,-36);ctx.lineTo(8,-14);ctx.lineTo(2,-12);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.moveTo(4,-26);ctx.bezierCurveTo(24,-30,40,-22,44,-12);ctx.bezierCurveTo(46,-6,40,-2,30,-4);ctx.lineTo(10,-4);ctx.quadraticCurveTo(2,-8,4,-26);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(darken(skin,0.35),0.6);ctx.lineWidth=1.4;ctx.stroke();for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(22+i*6,-26+i*2);ctx.lineTo(36+i*3,-10+i);ctx.stroke();}ctx.restore();}
+// A person behind a table reaches a thing on it with their own arm, never with a hand drawn on its own (a hand laid on the book with no
+// arm to it read as floating, 10 November 2026). ee_reachPose: the angles of the right arm (side 1, the figure's own units, as arm()
+// takes them) that put its hand at (X, Y) on screen, for the person drawn at (x, y), scale s, o.flip and o.t as person() takes them; the
+// elbow hangs low, as an arm does (a little in front of the body, as an arm reaching forward does), out to the side only when it must. ee_armOver: that arm alone,
+// in pencil and wash, from the shoulder: the person is cut at the table's back edge, so an arm reaching over its top is drawn after the
+// table, whole, in front of the body (o.above: only what is above that height, while the hand is still coming up behind the edge);
+// o.hand "open" lays the hand flat. The person's own arm, in the same pose, lies under it.
+function ee_reachPose(id,x,y,s,X,Y,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,f=o.flip?-1:1,br=Math.sin((o.t||0)*1.7+P_.seed)*1.4,L1=108,L2=113,
+    tx=f*(X-x)/k-(P_.build.sh-12),ty=(Y-y)/k-(-416+br),d=Math.max(1,Math.min(Math.hypot(tx,ty),L1+L2-0.5)),
+    al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),th=Math.atan2(tx,ty),a0=th-al>=-0.75?th-al:th+al;
+  return[a0,Math.atan2(tx-Math.sin(a0)*L1,ty-Math.cos(a0)*L1)];}
+function ee_armOver(ctx,id,x,y,s,a,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,br=Math.sin((o.t||0)*1.7+P_.seed)*1.4;
+  ctx.save();if(o.above!=null){ctx.beginPath();ctx.rect(-W,-H,3*W,o.above+H);ctx.clip();}
+  outlined(ctx,cx=>{if(o.flip)cx.scale(-1,1);arm(cx,P_,1,a,br,{hand:o.hand});},x,y,k,P_.edge,[-250,-650,250,10]);ctx.restore();}
 // the people at the table: each at their seat, sitting behind it (o.pose(id), o.stand(id) 0 to 1, how far they've stood up, o.x(id));
 // o.T: another table (EE_MX), with its own seats and scale
 function ee_seated(x,tt,cast,o){o=o||{};const A=o.T||EE_AC;cast.forEach(([id,seat],i)=>{const X=(o.x&&o.x(id))!=null?o.x(id):A.seats[seat],st=o.stand?clamp(o.stand(id),0,1):0,s=o.s||A.s;
@@ -155,14 +164,10 @@ function ee_bigDict(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.
   wc_part(ctx,[[-104,-6],[0,-14],[104,-6],[100,14],[0,8],[-100,14]],[104,42,38],1,{seed:373});
   for(let k=0;k<5;k++){const d=k*2.2;wc_flat(ctx,[[-98+d*0.2,-14+d],[-2,-24+d],[-2,6],[-94,8]],k<4?[232,222,198]:[246,240,222],1,"page");wc_flat(ctx,[[2,-24+d],[98-d*0.2,-14+d],[94,8],[2,6]],k<4?[232,222,198]:[248,242,226],1,"page");}
   ctx.strokeStyle=rgba([90,80,70],0.55);ctx.lineWidth=1.3;for(let i=0;i<6;i++)for(const s2 of [-1,1]){ctx.beginPath();ctx.moveTo(s2*12,-12+i*3.4);ctx.lineTo(s2*86,-4+i*3);ctx.stroke();}ctx.restore();}
-// a hand holding a pen, from the right, its nib at (x, y), its sleeve running out of the frame: the teacher's, over the notebook
-function ee_penHand(ctx,x,y,s,skin,cuff){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const g=ctx.createLinearGradient(170,-110,210,-40);g.addColorStop(0,rgba(wc_lit(cuff,0.18),1));g.addColorStop(1,rgba(wc_dim(cuff,0.25),1));
-  ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(120,-70);ctx.lineTo(196,-104);ctx.quadraticCurveTo(420,-250,700,-372);ctx.lineTo(728,-306);ctx.quadraticCurveTo(450,-190,226,-62);ctx.lineTo(150,-20);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(darken(cuff,0.4),0.6);ctx.lineWidth=2.4;ctx.stroke();ctx.strokeStyle=rgba(wc_lit(cuff,0.3),0.4);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(240,-112);ctx.quadraticCurveTo(420,-224,660,-336);ctx.stroke();
-  ctx.fillStyle=rgba([246,244,238],1);ctx.beginPath();ctx.moveTo(110,-62);ctx.lineTo(126,-72);ctx.lineTo(152,-22);ctx.lineTo(136,-14);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.moveTo(116,-60);ctx.bezierCurveTo(90,-62,60,-50,48,-34);ctx.bezierCurveTo(40,-24,50,-14,66,-18);ctx.lineTo(108,-24);ctx.quadraticCurveTo(132,-26,136,-40);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(darken(skin,0.35),0.6);ctx.lineWidth=1.6;ctx.stroke();ctx.strokeStyle=rgba([36,30,30],1);ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(4,-4);ctx.lineTo(96,-64);ctx.stroke();
-  ctx.fillStyle=rgba([176,40,40],1);ctx.beginPath();ctx.moveTo(-2,0);ctx.lineTo(10,-12);ctx.lineTo(14,-4);ctx.closePath();ctx.fill();ctx.restore();}
+// the teacher's red pen, its nib at (x, y), its end up toward his hand (q: his scale against the pupil's desk's): drawn before his arm,
+// so his fingers close over it
+function ee_redPen(ctx,x,y,q){ctx.save();ctx.translate(x,y);ctx.scale(q,q);ctx.rotate(0.53);ctx.fillStyle=rgba([40,34,32],1);rr(ctx,-4,-66,8,62,4);ctx.fill();
+  ctx.fillStyle=rgba([176,40,40],1);ctx.beginPath();ctx.moveTo(-3,-6);ctx.lineTo(3,-6);ctx.lineTo(0,2);ctx.closePath();ctx.fill();ctx.restore();}
 
 /* ---------- small pictures: who uses the words, and who proposes them today ---------- */
 // Each painted on a sheet 600 x 400, its person drawn into it every frame (ee_vign): a shopkeeper doing his accounts by his door; a clerk at

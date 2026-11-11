@@ -87,11 +87,16 @@ function wo_chain(ctx,x0,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
 // Drawn with tapering curves, a lit upper side and a shadowed underside; it breathes a little.
 function wo_hand(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate((o.rot||-0.08)+0.015*Math.sin(t*1.4));
   const press=o.press||0;ctx.translate(0,press*4);
-  // the sleeve, off to the right: wool, with soft folds
+  // the sleeve, off to the right: wool, with soft folds. o.len ends it there, fading into the dark over its last stretch, so an arm
+  // drawn far from the frame's edge never runs on longer than an arm (the hands check: wrist to gone within three and a half hand
+  // lengths, about 830 here; the hand along the chain once trailed 900 px of sleeve, 10 November 2026)
+  const L=o.len||1400,fd=o.len?Math.min(240,L*0.4):0;if(window.__ARM__)__ARM__(ctx,236,0,1400,0,236,o.len?L-236-fd/2:0);
   const sl=()=>{ctx.beginPath();ctx.moveTo(236,-58);ctx.bezierCurveTo(400,-74,700,-90,1400,-96);ctx.lineTo(1400,110);ctx.bezierCurveTo(700,104,400,92,236,70);ctx.bezierCurveTo(226,30,226,-20,236,-58);ctx.closePath();};
-  let g=ctx.createLinearGradient(0,-90,0,110);g.addColorStop(0,"#5a4636");g.addColorStop(0.45,"#3a2c22");g.addColorStop(1,"#1a120c");ctx.fillStyle=g;sl();ctx.fill();
-  ctx.strokeStyle="rgba(120,96,74,0.45)";ctx.lineWidth=2.4;[[300,-62,330,60],[390,-70,420,78],[520,-80,560,90]].forEach(([x0,y0,x1,y1])=>{ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(x0+30,y0+40,x1-30,y1-40,x1,y1);ctx.stroke();});
-  ctx.strokeStyle="rgba(180,150,120,0.35)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(250,-54);ctx.bezierCurveTo(420,-70,700,-84,1000,-90);ctx.stroke();
+  let g=ctx.createLinearGradient(0,-90,0,110);g.addColorStop(0,"#5a4636");g.addColorStop(0.45,"#3a2c22");g.addColorStop(1,"#1a120c");
+  const N=fd?10:1;for(let i=0;i<N;i++){const x0=fd?(i===0?150:L-fd+fd*i/N):150,x1=fd?L-fd+fd*(i+1)/N:1500;ctx.save();ctx.beginPath();ctx.rect(x0,-200,x1-x0,400);ctx.clip();ctx.globalAlpha*=fd?1-i/N:1;
+    ctx.fillStyle=g;sl();ctx.fill();
+    ctx.strokeStyle="rgba(120,96,74,0.45)";ctx.lineWidth=2.4;[[300,-62,330,60],[390,-70,420,78],[520,-80,560,90]].forEach(([x0,y0,x1,y1])=>{ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(x0+30,y0+40,x1-30,y1-40,x1,y1);ctx.stroke();});
+    ctx.strokeStyle="rgba(180,150,120,0.35)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(250,-54);ctx.bezierCurveTo(420,-70,700,-84,1000,-90);ctx.stroke();ctx.restore();}
   // the cuff
   g=ctx.createLinearGradient(0,-56,0,66);g.addColorStop(0,"#fbf6ea");g.addColorStop(0.6,"#dcd3c1");g.addColorStop(1,"#a99d88");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(196,-50);ctx.bezierCurveTo(214,-56,232,-58,244,-56);ctx.bezierCurveTo(236,-16,236,30,244,66);ctx.bezierCurveTo(230,68,212,66,196,60);ctx.bezierCurveTo(188,24,188,-14,196,-50);ctx.closePath();ctx.fill();
   ctx.strokeStyle="rgba(120,110,96,0.6)";ctx.lineWidth=1.4;ctx.stroke();

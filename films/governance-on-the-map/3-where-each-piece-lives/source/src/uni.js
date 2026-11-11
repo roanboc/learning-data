@@ -140,7 +140,7 @@ function oh_tablePage(ctx,t,o){o=o||{};const [x,y,w,h]=GV_SC,G=OH_PG;
     const se=clamp(o.sent||0,0,1);if(se>0.01){const [sx,sy,sw_,sh]=G.sent;oh_land(q,se,sx+sw_/2,sy+sh/2,()=>{wc_panel(q,sx,sy,sw_,sh,{kind:"pill",wash:o.sentCol||GV.grey,washA:0.4,seed:781});
       wc_T(q,o.sentText||"request · waiting",sx+28,sy+sh/2+11,{w:700,size:30,col:o.sentInk||GV.greyInk});});}});}
 // the planner's request held: a gold card, as it flies (Who does what, end to end's ee_heldReq)
-function oh_heldReq(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-26);cx.rotate(-0.05);oh_flyCard(cx,0,0,0.92,0,1,{held:true});cx.restore();fingers(cx,P_,[l,r]);}
+function oh_heldReq(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-26);cx.rotate(-0.05);oh_flyCard(cx,0,0,0.92,0,1,{held:true});cx.restore();fingers(cx,P_,[[mx-53,my-22],[mx+53,my-26]]);}   // thumbs at its edges (10 November 2026)
 // the requests on Jun's desk, a pile of small cards seen edge on, the planner's gold one near the bottom (o.out: it's been taken out)
 function oh_pile(ctx,x,y,o){o=o||{};const R=wc_rng(801),n=13,gi=2;
   for(let i=0;i<n;i++){const dx=(R()-0.5)*18,rot=(R()-0.5)*0.1,yy=y-i*8;if(i===gi&&o.out)continue;ctx.save();ctx.translate(x+dx,yy);ctx.rotate(rot);ctx.fillStyle="rgba(60,44,30,0.16)";ctx.fillRect(-62,-4,128,8);
@@ -168,8 +168,9 @@ function oh_calendar(x,tt,o){o=o||{};const C=OH_CAL,cx=d=>C.gx+((d-1)%7+0.55)*C.
   for(let k=0;k<9;k++){const u=clamp((o.cross||0)-k,0,1);if(u<=0.01)continue;const d=2+k,X=cx(d),Y=cy(d),s=32,a=clamp(u*2,0,1),b=clamp(u*2-1,0,1);
     x.save();x.strokeStyle=rgba([196,58,48],0.85);x.lineWidth=6;x.lineCap="round";x.beginPath();x.moveTo(X-s,Y-s);x.lineTo(X-s+2*s*a,Y-s+2*s*a);if(b>0){x.moveTo(X+s,Y-s);x.lineTo(X+s-2*s*b,Y-s+2*s*b);}x.stroke();x.restore();}
   const r=clamp(o.ring||0,0,1);if(r>0.01){x.save();x.strokeStyle=rgba(GV.gold,0.95);x.lineWidth=6;x.lineCap="round";x.beginPath();x.ellipse(cx(11)-6,cy(11)-6,54,48,-0.1,-Math.PI*0.6,-Math.PI*0.6+TAU*r*1.03);x.stroke();x.restore();}}
-// a hand coming up from below the frame, its finger pointing at (x, y): Jun's, in his sleeve, or another's (id)
-function oh_pointHand(ctx,x,y,id){const P_=PEOPLE[id||"jun"],sl=P_.top.c,sk=P_.skin;ctx.save();ctx.translate(x,y);ctx.rotate(-0.12);
+// a hand coming up from below the frame, its finger pointing at (x, y): Jun's, in his sleeve, or another's (id). Drawn a fifth larger
+// than first, as a hand near the camera: at the old size its sleeve ran four hand lengths to the frame's edge (10 November 2026)
+function oh_pointHand(ctx,x,y,id){const P_=PEOPLE[id||"jun"],sl=P_.top.c,sk=P_.skin;ctx.save();ctx.translate(x,y);ctx.rotate(-0.12);ctx.scale(1.2,1.2);if(window.__ARM__)__ARM__(ctx,30,100,28,700,110);
   ctx.beginPath();ctx.moveTo(-6,96);ctx.lineTo(70,96);ctx.lineTo(96,700);ctx.lineTo(-40,700);ctx.closePath();litFill(ctx,sl,-40,96,96,700);
   ctx.beginPath();ctx.ellipse(30,74,46,40,0,0,TAU);litFill(ctx,sk,-16,34,76,114);seam(ctx,sk,0.3,1.4);
   rr(ctx,-10,-6,24,74,12);litFill(ctx,sk,-10,-6,14,68);seam(ctx,sk,0.3,1.4);ctx.restore();}

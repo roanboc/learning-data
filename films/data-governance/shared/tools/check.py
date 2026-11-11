@@ -7,10 +7,11 @@ paints the places one by one while the film plays, so a place that keeps the bro
 soundtrack and the whole page. A blur set before many strokes of a full-size picture (the browser blurs every stroke) once held
 the page for seven seconds; paint such a picture sharp on a layer and blur the layer once. Then nothing shows twice where the film
 changes shot or chapter (twice.py), nobody's arm jumps in one frame (steady.py), nothing jumps where the film changes
-shot or chapter (jump.py): in one room the camera glides, and what changes fades. And last, the site's player keeps up
+shot or chapter (jump.py): in one room the camera glides, and what changes fades. Every hand is where an arm of a person's size puts it
+(hands.py): no sleeve from the frame's edge longer than an arm, no thumbs floating in the middle of a held card. And last, the site's player keeps up
 (master data's smooth.py): drawn as the player draws it, with the places as pictures, no moment takes long, nothing big is painted
 while the film plays, and what it keeps stays within its budget, also with the processor slowed four times, as on a phone."""
-import jump, runpy, steady, sys, twice
+import hands, jump, runpy, steady, sys, twice
 from lang import *
 from run import FW
 from playwright.sync_api import sync_playwright
@@ -40,6 +41,7 @@ with sync_playwright() as p:
     tw = twice.check(pg)
     st = steady.check(pg)
     jp = jump.check(pg)
+    hd = hands.check(pg)
     b.close()
     sm = smooth.check(p, DIST / 'render.html', REPO / 'site' / 'assets' / META['key'] / 'places')
 slow = [(k, s) for k, s in r if s > LIMIT]
@@ -71,6 +73,13 @@ if jp[1]:
     failed.append('%d moments jump where the film changes shot or chapter' % len(jp[1]))
 else:
     print('nothing jumps where the film changes shot or chapter')
+print(hd[0])
+for l in hd[1]:
+    print('  ' + l)
+if hd[1]:
+    failed.append('%d hands are not where an arm of a person\'s size would put them' % len(hd[1]))
+else:
+    print('every hand is where an arm of a person\'s size puts it')
 print(sm[0])
 for l in sm[1]:
     print('  ' + l)

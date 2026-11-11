@@ -3,15 +3,15 @@
   "files": [
     {
       "path": "site/assets/borrowed-from-the-brain/soundtrack.es.mp3",
-      "size": 10417414,
-      "sha256": "405ee467c0f2b2773ae1aee6303286b7c94ead7cceeae53aed48f50b18a40ab5",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-borrowed-from-the-brain-7415ea2a3fa92f5afdb5/405ee467c0f2b2773ae1aee6303286b7c94ead7cceeae53aed48f50b18a40ab5.mp3"
+      "size": 10430946,
+      "sha256": "ad0fca64a777942d975103a8d7de7189e57f7cb184e3140f240ba8a7e086e537",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-borrowed-from-the-brain-817033b4811fc7190c79/ad0fca64a777942d975103a8d7de7189e57f7cb184e3140f240ba8a7e086e537.mp3"
     },
     {
       "path": "site/assets/borrowed-from-the-brain/soundtrack.mp3",
-      "size": 10417414,
-      "sha256": "f7911c653e71d6da2d28cedcf6a5487ca925cb23780ff75854a361e6c710a692",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-borrowed-from-the-brain-7415ea2a3fa92f5afdb5/f7911c653e71d6da2d28cedcf6a5487ca925cb23780ff75854a361e6c710a692.mp3"
+      "size": 10430946,
+      "sha256": "7aaf4664b6470e61b5637dde7547483f3bb14dfc72afca84202ab56d3d217124",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-borrowed-from-the-brain-817033b4811fc7190c79/7aaf4664b6470e61b5637dde7547483f3bb14dfc72afca84202ab56d3d217124.mp3"
     }
   ]
 }

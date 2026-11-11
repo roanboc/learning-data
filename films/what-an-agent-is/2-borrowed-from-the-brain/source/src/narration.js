@@ -3,7 +3,7 @@
 const NARR={
 "nature":{"name":"Why look to nature","lead":1.6,"tail":0.6,"vo":[
  {"id":"squirt","gap":0.8,"text":"Off a rocky shore, a tadpole about a millimetre long swims through the sea."},
- {"id":"young","gap":0.8,"text":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain of about 180 nerve cells.","say":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain of about a hundred and eighty nerve cells."},
+ {"id":"young","gap":0.8,"text":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain and nerve cord of about 180 nerve cells.","say":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain and nerve cord of about a hundred and eighty nerve cells."},
  {"id":"rock","gap":0.8,"text":"For a few hours, it swims, looking for a rock to live on."},
  {"id":"glue","gap":0.8,"text":"Then it glues its head to the rock, and never moves again."},
  {"id":"eats","gap":0.8,"text":"People say it eats its own brain. Not quite: its body takes the tail, and most of the brain, apart, and uses them again."},
@@ -75,7 +75,7 @@ const NARR={
  {"id":"error","gap":0.8,"text":"What a brain expected, it barely notices. What it didn't, it notices at once: a prediction error."},
  {"id":"schultz","gap":0.8,"text":"In the 1990s, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice.","say":"In the nineteen nineties, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice."},
  {"id":"first","gap":0.8,"text":"At first, the cells fired at the juice. Once the monkeys learned that the light came first, they fired at the light instead."},
- {"id":"quiet","gap":0.8,"text":"And when the light came but the juice didn't, they fell silent, just when the juice was due."},
+ {"id":"quiet","gap":0.8,"text":"And when the light came but the juice didn't, their firing dipped, just when the juice was due."},
  {"id":"miss","gap":0.8,"text":"Guess, check, learn from the miss: that's how an animal on the move finds food, and stays out of reach."}]},
 "borrowed":{"name":"Borrowed, not copied","lead":0.8,"tail":1.0,"vo":[
  {"id":"unit","gap":0.8,"text":"In 1943, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit.","say":"In nineteen forty-three, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit."},

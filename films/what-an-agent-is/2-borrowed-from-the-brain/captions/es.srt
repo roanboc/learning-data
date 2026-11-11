@@ -3,461 +3,461 @@
 Frente a una costa rocosa, un renacuajo de un milímetro nada por el mar.
 
 2
-00:00:07,428 --> 00:00:13,874
-Es una ascidia joven, con una mancha ocular, una cola y un cerebro diminuto de unas 180 células nerviosas.
+00:00:07,428 --> 00:00:14,725
+Es una ascidia joven, con una mancha ocular, una cola y un cerebro y cordón nervioso diminutos de unas 180 células nerviosas.
 
 3
-00:00:15,774 --> 00:00:19,162
+00:00:16,625 --> 00:00:20,013
 Durante unas horas, nada, buscando una roca donde vivir.
 
 4
-00:00:20,662 --> 00:00:23,579
+00:00:21,513 --> 00:00:24,430
 Luego pega la cabeza a la roca, y nunca vuelve a moverse.
 
 5
-00:00:25,279 --> 00:00:33,168
+00:00:26,130 --> 00:00:34,019
 Se dice que se come su propio cerebro. No del todo: su cuerpo desarma la cola, y casi todo el cerebro, y los reutiliza.
 
 6
-00:00:35,268 --> 00:00:37,366
+00:00:36,119 --> 00:00:38,217
 En una roca, ya no hay nada que dirigir.
 
 7
-00:00:38,866 --> 00:00:43,322
+00:00:39,717 --> 00:00:44,173
 Los cerebros son para animales que se mueven: para encontrar comida, y no volverse comida.
 
 8
-00:00:45,022 --> 00:00:47,487
+00:00:45,873 --> 00:00:48,338
 Y moverse bien es adivinar lo que viene.
 
 9
-00:00:49,387 --> 00:00:56,428
+00:00:50,238 --> 00:00:57,279
 En 1958, el psicólogo Frank Rosenblatt mostró un programa que aprendía de ejemplos: el perceptrón.
 
 10
-00:00:57,728 --> 00:00:59,325
+00:00:58,579 --> 00:01:00,176
 Lo basó en una célula nerviosa.
 
 11
-00:01:00,825 --> 00:01:03,012
+00:01:01,676 --> 00:01:03,863
 ¿Por qué mirar a la naturaleza para crear máquinas?
 
 12
-00:01:04,312 --> 00:01:09,822
+00:01:05,163 --> 00:01:10,673
 Porque la naturaleza lleva miles de millones de años probando diseños, y conservando los que funcionan.
 
 13
-00:01:10,922 --> 00:01:14,108
+00:01:11,773 --> 00:01:14,959
 La gente observó a las aves durante siglos antes de poder volar.
 
 14
-00:01:14,808 --> 00:01:18,769
+00:01:15,659 --> 00:01:19,620
 Wilbur Wright notó que las rapaces torcían la punta de las alas para mantener el equilibrio.
 
 15
-00:01:19,669 --> 00:01:22,134
+00:01:20,520 --> 00:01:22,985
 Así que los hermanos pusieron esa torsión en sus alas.
 
 16
-00:01:23,634 --> 00:01:28,291
+00:01:24,485 --> 00:01:29,142
 Y para una máquina que aprende, la naturaleza tenía el único ejemplo que funcionaba: un cerebro.
 
 17
-00:01:29,591 --> 00:01:33,242
+00:01:30,442 --> 00:01:34,093
 Pero en 1888, nadie podía ver cómo estaba conectado un cerebro.
 
 18
-00:01:35,342 --> 00:01:41,537
+00:01:36,193 --> 00:01:42,388
 Barcelona, 1888. Santiago Ramón y Cajal, médico, enseña anatomía.
 
 19
-00:01:42,437 --> 00:01:45,479
+00:01:43,288 --> 00:01:46,330
 Observa al microscopio finas láminas de cerebro.
 
 20
-00:01:46,779 --> 00:01:50,970
+00:01:47,630 --> 00:01:51,821
 Bajo la lente, el cerebro es una maraña de fibras, demasiado densa para seguirla.
 
 21
-00:01:52,270 --> 00:01:59,704
+00:01:53,121 --> 00:02:00,555
 Muchos científicos, entre ellos el italiano Camillo Golgi, creen que las fibras se funden en una sola red continua.
 
 22
-00:02:00,804 --> 00:02:05,192
+00:02:01,655 --> 00:02:06,043
 Si es así, nadie puede decir dónde empieza un mensaje, ni cómo aprende un cerebro.
 
 23
-00:02:06,292 --> 00:02:11,115
+00:02:07,143 --> 00:02:11,966
 Cuando un derrame corta la sangre a una parte del cerebro de alguien, puede quitarle el habla.
 
 24
-00:02:11,815 --> 00:02:15,161
+00:02:12,666 --> 00:02:16,012
 Los médicos no pueden saber qué ha dañado, ni si sanará.
 
 25
-00:02:16,461 --> 00:02:17,901
+00:02:17,312 --> 00:02:18,752
 Algo tiene que cambiar.
 
 26
-00:02:19,401 --> 00:02:24,464
+00:02:20,252 --> 00:02:25,315
 El propio Golgi había hallado una tinción que vuelve negras unas pocas células y deja claras las demás.
 
 27
-00:02:25,164 --> 00:02:29,655
+00:02:26,015 --> 00:02:30,506
 Cuáles, parece elegirlas al azar. Nadie sabe por qué, ni siquiera hoy.
 
 28
-00:02:30,955 --> 00:02:36,564
+00:02:31,806 --> 00:02:37,415
 Cajal logra que funcione siempre, y usa cerebros de aves jóvenes, donde la maraña es menos densa.
 
 29
-00:02:37,664 --> 00:02:40,777
+00:02:38,515 --> 00:02:41,628
 Cada célula negra se ve entera, como un árbol en invierno.
 
 30
-00:02:42,677 --> 00:02:48,697
+00:02:43,528 --> 00:02:49,548
 Dibuja lo que ve: células separadas, con ramas que llegan cerca de otras células, pero nunca unidas.
 
 31
-00:02:49,997 --> 00:02:56,126
+00:02:50,848 --> 00:02:56,977
 Y sostiene que un mensaje va en un solo sentido: entra por las ramas y sale por una fibra larga.
 
 32
-00:02:57,626 --> 00:03:03,355
+00:02:58,477 --> 00:03:04,206
 En Berlín, en 1889, los principales anatomistas miran por sus microscopios, y le dan la razón.
 
 33
-00:03:04,455 --> 00:03:10,243
+00:03:05,306 --> 00:03:11,094
 En 1906, él y Golgi comparten el Premio Nobel, aunque Golgi aún defiende su red.
 
 34
-00:03:11,543 --> 00:03:16,125
+00:03:12,394 --> 00:03:16,976
 La célula nerviosa separada, la neurona, se volvió el punto de partida de la ciencia del cerebro.
 
 35
-00:03:17,025 --> 00:03:20,312
+00:03:17,876 --> 00:03:21,163
 Hoy, muchos medicamentos para el cerebro actúan en los espacios que él dibujó.
 
 36
-00:03:21,812 --> 00:03:27,679
+00:03:22,663 --> 00:03:28,530
 Las máquinas tenían el mismo problema: sin una imagen de cómo está conectado un cerebro, no había nada que copiar.
 
 37
-00:03:28,379 --> 00:03:34,922
+00:03:29,230 --> 00:03:35,773
 Su imagen les dio un diseño: muchas células simples, cada una atenta a muchas otras, que pasan un mensaje.
 
 38
-00:03:36,222 --> 00:03:38,227
+00:03:37,073 --> 00:03:39,078
 Los modelos de hoy aún parten de ella.
 
 39
-00:03:45,127 --> 00:03:47,780
+00:03:45,978 --> 00:03:48,631
 Una neurona es una célula que lleva mensajes.
 
 40
-00:03:48,480 --> 00:03:51,895
+00:03:49,331 --> 00:03:52,746
 Sus ramas reciben señales de miles de otras células.
 
 41
-00:03:52,995 --> 00:03:58,399
+00:03:53,846 --> 00:03:59,250
 Cuando llegan suficientes a la vez, se dispara: un pulso eléctrico recorre su fibra larga.
 
 42
-00:03:59,699 --> 00:04:02,749
+00:04:00,550 --> 00:04:03,600
 El pulso tiene siempre el mismo tamaño: todo o nada.
 
 43
-00:04:04,249 --> 00:04:10,212
+00:04:05,100 --> 00:04:11,063
 Al final, casi toca la célula siguiente, y unos mensajeros químicos llevan la señal a través del espacio.
 
 44
-00:04:11,512 --> 00:04:14,898
+00:04:12,363 --> 00:04:15,749
 Algunas conexiones excitan a la célula siguiente; otras la frenan.
 
 45
-00:04:16,198 --> 00:04:17,517
+00:04:17,049 --> 00:04:18,368
 Y las conexiones cambian.
 
 46
-00:04:18,217 --> 00:04:26,338
+00:04:19,068 --> 00:04:27,189
 En 1949, el psicólogo Donald Hebb propuso que, cuando dos células se disparan juntas, el vínculo entre ellas se fortalece.
 
 47
-00:04:27,438 --> 00:04:32,539
+00:04:28,289 --> 00:04:33,390
 En 1973, experimentos con conejos mostraron vínculos que se fortalecían con el uso.
 
 48
-00:04:33,639 --> 00:04:36,999
+00:04:34,490 --> 00:04:37,850
 Eso es aprender, dentro de un cerebro: conexiones que cambian.
 
 49
-00:04:39,499 --> 00:04:43,644
+00:04:40,350 --> 00:04:44,495
 La naturaleza ha probado células nerviosas durante más de seiscientos millones de años.
 
 50
-00:04:45,344 --> 00:04:50,668
+00:04:46,195 --> 00:04:51,519
 Una medusa no tiene cerebro: solo una red de células nerviosas, suficiente para nadar y atrapar comida.
 
 51
-00:04:52,568 --> 00:04:56,799
+00:04:53,419 --> 00:04:57,650
 Una babosa de mar tiene unas veinte mil células nerviosas, algunas tan grandes que se ven.
 
 52
-00:04:58,499 --> 00:05:02,055
+00:04:59,350 --> 00:05:02,906
 Eric Kandel mostró que, cuando aprende, sus conexiones cambian.
 
 53
-00:05:03,955 --> 00:05:08,122
+00:05:04,806 --> 00:05:08,973
 Una abeja tiene cerca de un millón, en un cerebro menor que un grano de sésamo.
 
 54
-00:05:10,022 --> 00:05:15,075
+00:05:10,873 --> 00:05:15,926
 Las abejas aprenden colores, aromas y el camino a casa, y bailan para indicarse dónde hay comida.
 
 55
-00:05:16,975 --> 00:05:23,083
+00:05:17,826 --> 00:05:23,934
 Un pulpo tiene unos quinientos millones, dos tercios en sus brazos: cada brazo puede saborear por sí solo.
 
 56
-00:05:25,183 --> 00:05:29,390
+00:05:26,034 --> 00:05:30,241
 Un pinzón cebra joven aprende su canto de su padre, practicando durante semanas.
 
 57
-00:05:31,290 --> 00:05:37,239
+00:05:32,141 --> 00:05:38,090
 Y un cerebro humano tiene unos 86 mil millones, unidos por más de cien billones de conexiones.
 
 58
-00:05:38,939 --> 00:05:42,499
+00:05:39,790 --> 00:05:43,350
 Funciona con unos 20 vatios, la potencia de una bombilla tenue.
 
 59
-00:05:45,399 --> 00:05:49,304
+00:05:46,250 --> 00:05:50,155
 Un cerebro no lo capta todo: rellena los huecos con lo probable.
 
 60
-00:05:50,804 --> 00:05:55,276
+00:05:51,655 --> 00:05:56,127
 Donde el nervio sale de cada ojo, no hay células que capten la luz: un punto ciego.
 
 61
-00:05:57,376 --> 00:06:01,172
+00:05:58,227 --> 00:06:02,023
 Nunca ves ahí un agujero. Tu cerebro lo rellena con lo que hay alrededor.
 
 62
-00:06:04,672 --> 00:06:09,623
+00:06:05,523 --> 00:06:10,474
 Hoy, muchos científicos creen que un cerebro rellena todo el tiempo, no solo en un punto.
 
 63
-00:06:11,323 --> 00:06:16,642
+00:06:12,174 --> 00:06:17,493
 Adivina lo que viene, un momento por delante, y compara la predicción con lo que traen los sentidos.
 
 64
-00:06:18,542 --> 00:06:24,875
+00:06:19,393 --> 00:06:25,726
 Una libélula no persigue a un mosquito: vuela adonde estará el mosquito, y atrapa unos nueve de cada diez.
 
 65
-00:06:27,175 --> 00:06:32,382
+00:06:28,026 --> 00:06:33,233
 Pisa una escalera mecánica detenida, y tropiezas: tus piernas estaban listas para que se moviera.
 
 66
-00:06:34,582 --> 00:06:40,683
+00:06:35,433 --> 00:06:41,534
 Lo que un cerebro esperaba, apenas lo nota. Lo que no, lo nota al instante: un error de predicción.
 
 67
-00:06:42,883 --> 00:06:50,435
+00:06:43,734 --> 00:06:51,286
 En los años noventa, Wolfram Schultz escuchó células en lo hondo del cerebro de monos: se encendía una luz, y luego, una gota de jugo.
 
 68
-00:06:52,635 --> 00:06:59,587
+00:06:53,486 --> 00:07:00,438
 Al principio, las células se disparaban con el jugo. Cuando los monos aprendieron que la luz venía antes, se disparaban con la luz.
 
 69
-00:07:01,887 --> 00:07:06,796
-Y cuando llegaba la luz pero no el jugo, callaban, justo cuando tocaba el jugo.
+00:07:02,738 --> 00:07:07,772
+Y cuando llegaba la luz pero no el jugo, sus disparos bajaban, justo cuando tocaba el jugo.
 
 70
-00:07:09,096 --> 00:07:14,781
+00:07:10,072 --> 00:07:15,757
 Predecir, verificar, aprender del error: así un animal en movimiento encuentra comida, y se mantiene fuera de alcance.
 
 71
-00:07:18,081 --> 00:07:24,365
+00:07:19,057 --> 00:07:25,341
 En 1943, Warren McCulloch y Walter Pitts dibujaron la célula nerviosa de Cajal como una unidad simple.
 
 72
-00:07:25,465 --> 00:07:29,601
+00:07:26,441 --> 00:07:30,577
 Suma sus entradas y se dispara si el total pasa de un nivel fijado.
 
 73
-00:07:31,101 --> 00:07:38,142
+00:07:32,077 --> 00:07:39,118
 El perceptrón de Rosenblatt dio a cada conexión un peso, un número que sube o baja un poco al aprender, como los vínculos de Hebb.
 
 74
-00:07:39,642 --> 00:07:47,307
+00:07:40,618 --> 00:07:48,283
 En 1959, David Hubel y Torsten Wiesel hallaron células en el cerebro de un gato que se disparan ante bordes en un ángulo.
 
 75
-00:07:48,407 --> 00:07:50,660
+00:07:49,383 --> 00:07:51,636
 Estas alimentan a células que responden a formas.
 
 76
-00:07:51,960 --> 00:07:54,877
+00:07:52,936 --> 00:07:55,853
 Las redes que leen imágenes tomaron prestadas esas capas.
 
 77
-00:07:56,377 --> 00:08:01,533
+00:07:57,353 --> 00:08:02,509
 Los modelos de hoy aún suman entradas con pesos, con miles de millones de pesos fijados por el entrenamiento.
 
 78
-00:08:02,633 --> 00:08:04,882
+00:08:03,609 --> 00:08:05,858
 Pero tomaron prestada una idea, no un cerebro.
 
 79
-00:08:06,182 --> 00:08:13,913
+00:08:07,158 --> 00:08:14,889
 Una célula nerviosa real es mucho más compleja: en 2021, hizo falta una red de cinco a ocho capas para imitar solo una.
 
 80
-00:08:15,413 --> 00:08:20,130
+00:08:16,389 --> 00:08:21,106
 Un niño puede aprender una palabra nueva con pocos ejemplos; un modelo necesita muchísimos.
 
 81
-00:08:21,430 --> 00:08:24,554
+00:08:22,406 --> 00:08:25,530
 Como un avión, que tomó prestada el ala, pero no el aleteo.
 
 82
-00:08:27,054 --> 00:08:29,077
+00:08:28,030 --> 00:08:30,053
 Un modelo escribe una palabra a la vez.
 
 83
-00:08:30,577 --> 00:08:33,640
+00:08:31,553 --> 00:08:34,616
 Para la siguiente, le da una posibilidad a cada palabra que conoce.
 
 84
-00:08:35,340 --> 00:08:42,601
+00:08:36,316 --> 00:08:43,577
 Tras «Una abeja le indica a la colmena dónde hay comida», «bailando» podría tener 70 posibilidades de cien, y «zumbando», 12.
 
 85
-00:08:44,501 --> 00:08:49,757
+00:08:45,477 --> 00:08:50,733
 Luego elige una, como al girar una ruleta: las porciones grandes ganan más a menudo, pero no siempre.
 
 86
-00:08:51,857 --> 00:08:57,883
+00:08:52,833 --> 00:08:58,859
 Así, la misma pregunta puede dar otra respuesta: una palabra cambia al principio, y el resto la sigue.
 
 87
-00:08:59,583 --> 00:09:02,215
+00:09:00,559 --> 00:09:03,191
 Un ajuste llamado temperatura cambia las porciones.
 
 88
-00:09:03,915 --> 00:09:09,968
+00:09:04,891 --> 00:09:10,944
 Si se baja, la porción mayor casi siempre gana, y las respuestas se apegan a los patrones que el modelo vio más.
 
 89
-00:09:11,868 --> 00:09:17,727
+00:09:12,844 --> 00:09:18,703
 Si se sube, las porciones pequeñas crecen: las respuestas varían más, a veces de formas nuevas, y fallan más a menudo.
 
 90
-00:09:19,627 --> 00:09:22,245
+00:09:20,603 --> 00:09:23,221
 Aun al mínimo, queda un poco de azar.
 
 91
-00:09:23,545 --> 00:09:29,576
+00:09:24,521 --> 00:09:30,552
 Cuando un modelo responde a mucha gente a la vez, sus cuentas pueden salir apenas distintas, e inclinar una elección reñida.
 
 92
-00:09:32,076 --> 00:09:35,577
+00:09:33,052 --> 00:09:36,553
 Y cuando el dato no está, el modelo igual escribe palabras probables.
 
 93
-00:09:37,277 --> 00:09:44,675
+00:09:38,253 --> 00:09:45,651
 En un estudio de 2025, a un modelo se le pidió tres veces el cumpleaños de un investigador: dio tres fechas distintas, todas mal.
 
 94
-00:09:46,775 --> 00:09:51,691
+00:09:47,751 --> 00:09:52,667
 Un cumpleaños es un dato que un modelo quizá vio una vez, o nunca: no hay patrón que aprender.
 
 95
-00:09:53,591 --> 00:10:00,209
+00:09:54,567 --> 00:10:01,185
 Y las pruebas que los modelos se entrenan para aprobar premian adivinar sobre «no lo sé»: adivinar puede sumar; en blanco, nunca.
 
 96
-00:10:02,409 --> 00:10:05,712
+00:10:03,385 --> 00:10:06,688
 Los cerebros también rellenan huecos con lo probable, y con la misma seguridad.
 
 97
-00:10:07,812 --> 00:10:09,985
+00:10:08,788 --> 00:10:10,961
 Así que una respuesta fluida no está verificada.
 
 98
-00:10:12,885 --> 00:10:15,517
+00:10:13,861 --> 00:10:16,493
 La imagen de Cajal se sostuvo porque otros pudieron verificarla.
 
 99
-00:10:16,617 --> 00:10:23,536
+00:10:17,593 --> 00:10:24,512
 En los años cincuenta, los microscopios electrónicos mostraron el espacio que dibujó, de unas veinte millonésimas de milímetro.
 
 100
-00:10:25,036 --> 00:10:29,448
+00:10:26,012 --> 00:10:30,424
 Los modelos se basan en esa imagen: unidades simples y conexiones que cambian.
 
 101
-00:10:30,748 --> 00:10:34,933
+00:10:31,724 --> 00:10:35,909
 Como los cerebros, rellenan huecos con lo probable, cada vez de forma un poco distinta.
 
 102
-00:10:36,233 --> 00:10:41,719
+00:10:37,209 --> 00:10:42,695
 Sabiéndolo, sabes cuándo verificarlos: contra la evidencia, como se verificaron los dibujos de Cajal.
 
 103
-00:10:44,219 --> 00:10:47,825
+00:10:45,195 --> 00:10:48,801
 ¿Y qué significa un cerebro que adivina por delante para el trabajo con datos?
 
 104
-00:10:49,125 --> 00:10:55,459
+00:10:50,101 --> 00:10:56,435
 Mucho trabajo con datos funciona como un reflejo: llega un disparador, un script hace los mismos pasos, y se detiene.
 
 105
-00:10:56,759 --> 00:11:03,147
+00:10:57,735 --> 00:11:04,123
 Cada noche, un script carga las inscripciones a cursos del día, y revisa una regla: la tabla no está vacía.
 
 106
-00:11:04,847 --> 00:11:10,134
+00:11:05,823 --> 00:11:11,110
 Un lunes, solo llega la mitad de las filas. La regla pasa, y los informes salen mal.
 
 107
-00:11:12,034 --> 00:11:16,499
+00:11:13,010 --> 00:11:17,475
 Un agente puede trabajar más como un cerebro: antes de mirar, dice qué espera.
 
 108
-00:11:17,799 --> 00:11:22,575
+00:11:18,775 --> 00:11:23,551
 Unas 4,100 filas, como casi todos los lunes, de tres campus.
 
 109
-00:11:24,075 --> 00:11:28,813
+00:11:25,051 --> 00:11:29,789
 Luego mira, y mide la diferencia: 2,030 filas. Un error de predicción.
 
 110
-00:11:30,713 --> 00:11:36,325
+00:11:31,689 --> 00:11:37,301
 Así que va a buscar, como un animal en busca de alimento: cuenta cada campus, y ve que uno no envió nada.
 
 111
-00:11:38,225 --> 00:11:46,859
+00:11:39,201 --> 00:11:47,835
 Cuando falla una suposición, una columna renombrada o un campo vacío, no se cae: cambia su plan, y anota lo que cambió.
 
 112
-00:11:48,759 --> 00:11:53,745
+00:11:49,735 --> 00:11:54,721
 Y no corrige los informes por su cuenta: le muestra la diferencia a una persona, con su evidencia.
 
 113
-00:11:55,445 --> 00:12:01,055
+00:11:56,421 --> 00:12:02,031
 Donde nada sorprende, un script sencillo sigue siendo la herramienta adecuada: más barato, e igual cada vez.
 
 114
-00:12:02,555 --> 00:12:07,268
+00:12:03,531 --> 00:12:08,244
 Esperar, actuar, verificar y adaptarse: el bucle que mantuvo vivos a los animales que se mueven.
 
 115
-00:12:08,568 --> 00:12:10,794
+00:12:09,544 --> 00:12:11,770
 Los agentes tomaron el bucle, no el cerebro.
 
 116
-00:12:12,494 --> 00:12:16,720
+00:12:13,470 --> 00:12:17,696
 A continuación, qué es un agente: un modelo que razona, con manos, en un bucle.

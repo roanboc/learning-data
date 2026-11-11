@@ -180,8 +180,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A continuación, qué es un agente: un modelo que razona, con manos, en un bucle.",
 "Off a rocky shore, a tadpole about a millimetre long swims through the sea.":
 "Frente a una costa rocosa, un renacuajo de un milímetro nada por el mar.",
-"It's a young sea squirt, with an eye spot, a tail, and a tiny brain of about 180 nerve cells.":
-"Es una ascidia joven, con una mancha ocular, una cola y un cerebro diminuto de unas 180 células nerviosas.",
+"It's a young sea squirt, with an eye spot, a tail, and a tiny brain and nerve cord of about 180 nerve cells.":
+"Es una ascidia joven, con una mancha ocular, una cola y un cerebro y cordón nervioso diminutos de unas 180 células nerviosas.",
 "For a few hours, it swims, looking for a rock to live on.":
 "Durante unas horas, nada, buscando una roca donde vivir.",
 "Then it glues its head to the rock, and never moves again.":
@@ -208,8 +208,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En los años noventa, Wolfram Schultz escuchó células en lo hondo del cerebro de monos: se encendía una luz, y luego, una gota de jugo.",
 "At first, the cells fired at the juice. Once the monkeys learned that the light came first, they fired at the light instead.":
 "Al principio, las células se disparaban con el jugo. Cuando los monos aprendieron que la luz venía antes, se disparaban con la luz.",
-"And when the light came but the juice didn't, they fell silent, just when the juice was due.":
-"Y cuando llegaba la luz pero no el jugo, callaban, justo cuando tocaba el jugo.",
+"And when the light came but the juice didn't, their firing dipped, just when the juice was due.":
+"Y cuando llegaba la luz pero no el jugo, sus disparos bajaban, justo cuando tocaba el jugo.",
 "Guess, check, learn from the miss: that's how an animal on the move finds food, and stays out of reach.":
 "Predecir, verificar, aprender del error: así un animal en movimiento encuentra comida, y se mantiene fuera de alcance.",
 "So what does a brain that guesses ahead mean for work with data?":

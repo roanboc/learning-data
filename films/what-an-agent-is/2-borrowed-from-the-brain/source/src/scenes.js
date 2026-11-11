@@ -409,7 +409,7 @@ scene("ahead",(ctx,S,t,sc)=>{const C=sc.cues,end=sc.dur;
   const tStairs=C.stairs,tStop=wAt(sc,"stairs","has stopped"),tStum=wAt(sc,"stairs","you stumble"),tReady=wAt(sc,"stairs","ready for it to move");
   const tError=C.error,tExpW=wAt(sc,"error","it barely notices"),tDidnt=wAt(sc,"error","What it didn't"),tPE=wAt(sc,"error","a prediction error");
   const tSch=C.schultz,tLight=wAt(sc,"schultz","a light came on"),tJuice=wAt(sc,"schultz","a drop of juice"),tFirst=C.first,tAtJ=wAt(sc,"first","fired at the juice"),tOnce=wAt(sc,"first","Once the monkeys"),tAtL=wAt(sc,"first","at the light instead");
-  const tQuiet=C.quiet,tSilent=wAt(sc,"quiet","fell silent"),tMiss=C.miss,tG=wAt(sc,"miss","Guess"),tC=wAt(sc,"miss","check"),tL=wAt(sc,"miss","learn from the miss");
+  const tQuiet=C.quiet,tSilent=wAt(sc,"quiet","firing dipped"),tMiss=C.miss,tG=wAt(sc,"miss","Guess"),tC=wAt(sc,"miss","check"),tL=wAt(sc,"miss","learn from the miss");
   const m0=tTrick-0.6,tCatch=tGoing+1.0,P=bb_midgeAt(tCatch,m0);
   const shots=[
     // a meadow: a dragonfly hovers; its guess, where the midge is going to be; it flies there, and catches it

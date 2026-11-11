@@ -32,3 +32,18 @@ Film 1 of *The new skills*, the module *Leading data people*. Made from 5 to 10 
 | 20 | How to publish the soundtrack, now that audio lives in releases? | As the two films merged on 10 November did: the MP3 committed beside the player and `audio.json` recording its checksum and release tag. The *Store audio outside Git* workflow copies it to its release (the tag in `audio.json`) when the film reaches main, and its daily run catches anything missed, so there is nothing for you to run. | `films/the-new-skills/1-many-hats/audio.json` |
 | 21 | Who brings the topic onto the site? | The briefs said this film writes the README's topics row by hand; main now lists modules from `modules/<id>/module.json` (`catalog.py --write`), and the module setup's pull request (#148) adds *Leading data people*'s, so this film adds only its own folder, page and the series' release note. | The site's topics, once both are merged |
 | 22 | Is "Reyes" said right? | The voice said it wrong without help, so `film.json` says it "Rayess" (the module's numbers say: a say rule only if the voice gets it wrong). | The voice, chapters 2 and 7 |
+
+## Turned toward the leader (11 November 2026)
+
+Rodrigo found the film followed one new analyst, though the module is for people who lead data teams. It now follows Helena, the data manager, and speaks to the leader. These are the assumptions behind that change.
+
+| # | Question | Assumption | Where it shows |
+|---|---|---|---|
+| 23 | Who is the film's viewer, and whose story is it? | The leader. Helena stands where Ding Wei stood, the one in charge who sees the parts as one; Ivy's month is Helena's choice, and Ivy stays the one who finds the 14 rooms. | Chapters 1, 2, 5, 6 and 7 |
+| 24 | What are the "many hats"? | Everyone in a team wears more than one, and a job title names one: Helena (product owner and people leader), Mei (the timetable and the rooms' names), Sam (the platform and the sensors' feed), Jun (the models, and teaching). What falls between two people's hats is nobody's job unless the leader sees it. | "Everyone in her team wears more than one hat"; the sheets in *A few days with each* |
+| 25 | Why did nobody see the 14 rooms? | The join fell between Mei's hats and Sam's, so checking it was nobody's job; nobody was wrong. | *The whole route, on one page* |
+| 26 | What does the leader do about it? | Gives the join an owner (Mei and Sam check the room names together, each term), and on Monday: write down the hats each person wears, give someone new time with every part, have them draw one real question's whole route, and give what falls between the hats an owner. | *From her page*, *On Monday* |
+| 27 | Does the T stay? | Yes, as the shape a leader grows in people: "Grow people who go deep in one thing, and learn enough of the rest to see the whole." The end card says it shorter, to fit: "Grow people who go deep in one thing and see the whole." | *Deep in one, enough of the rest*, the close |
+| 28 | Does the series' lead change too? | No. *The new skills* still asks "What does a data person need to be good at now?"; only this film changed. A later change could ask it from the leader's side. | The series page |
+| 29 | Spanish for "hats"? | *Roles*, as the film already said for Helena's two hats; *sombreros* doesn't carry the idiom. | Spanish captions and page |
+| 30 | The opening's turn line? | "The rebuilding needs a plan that doesn't fill the streets with carts", replacing the stock "Something has to change", as the thread that varies that line asked. | Chapter 1 |

@@ -9,7 +9,7 @@ const NARR={
  {"id":"vote","gap":0.8,"text":"In Brazil then, people who can't read can't vote."},
  {"id":"letters","gap":0.8,"text":"They sign papers they can't read, and others read their letters to them."},
  {"id":"primers","gap":0.8,"text":"Adult classes often use children's primers, with lines like Eva saw the grape: nothing about their own lives, and many give up."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Learning to read has to start from people's own lives."},
  {"id":"own","gap":0.8,"text":"Freire's team starts from the town's own words."},
  {"id":"listen","gap":0.8,"text":"They listen to how people talk about their lives, write down about four hundred, and choose a handful."},
  {"id":"circle","gap":0.8,"text":"Each evening, a culture circle meets: learners, and a coordinator instead of a teacher."},

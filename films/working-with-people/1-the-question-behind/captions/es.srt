@@ -23,229 +23,229 @@ Su piedra era frágil: una caída podía matar a quien estuviera cerca, y quitar
 Y cualquier obra era un riesgo: la menor alteración del suelo del lado inclinado podía derribarla.
 
 7
-00:00:56,643 --> 00:00:59,839
-Algo tenía que cambiar, sin que la propia obra la derribara.
+00:00:56,643 --> 00:01:00,194
+La torre tenía que quedar segura, sin que la propia obra la derribara.
 
 8
-00:01:01,739 --> 00:01:09,433
+00:01:02,094 --> 00:01:09,788
 Esa primavera, el gobierno de Italia nombró un comité internacional: ingenieros, arquitectos y expertos en monumentos antiguos.
 
 9
-00:01:10,933 --> 00:01:18,429
+00:01:11,288 --> 00:01:18,784
 Antes de elegir cómo, acordaron qué sería salvarla: un cambio pequeño, de cerca de medio grado, demasiado poco para que alguien lo viera.
 
 10
-00:01:20,129 --> 00:01:24,109
+00:01:20,484 --> 00:01:24,464
 Pero suficiente para aliviar la tensión de su piedra y asentar el suelo bajo ella.
 
 11
-00:01:26,009 --> 00:01:31,996
+00:01:26,364 --> 00:01:32,351
 Su método: sacar un poco de tierra de debajo del lado alto, el norte, para que la torre se asentara de vuelta hacia él.
 
 12
-00:01:33,696 --> 00:01:38,730
+00:01:34,051 --> 00:01:39,085
 Primero lo probaron en una cimentación de prueba, mientras pesos de plomo en el lado norte mantenían quieta la torre.
 
 13
-00:01:40,430 --> 00:01:47,412
+00:01:40,785 --> 00:01:47,767
 Desde febrero de 1999 lo hicieron bajo la propia torre, de a poco, y empezó a enderezarse.
 
 14
-00:01:49,312 --> 00:01:55,989
+00:01:49,667 --> 00:01:56,344
 Cada día, el ingeniero a cargo firmaba una nota: cómo se había movido la torre, y exactamente qué sacar después.
 
 15
-00:01:57,889 --> 00:02:06,383
+00:01:58,244 --> 00:02:06,738
 Para el verano de 2001, su cima había vuelto unos 45 centímetros, a la inclinación que tenía a principios del siglo XIX.
 
 16
-00:02:08,083 --> 00:02:13,929
+00:02:08,438 --> 00:02:14,284
 En diciembre de 2001 reabrió a los visitantes, todavía inclinada, como siempre.
 
 17
-00:02:15,629 --> 00:02:20,140
+00:02:15,984 --> 00:02:20,495
 Sus ingenieros calculan al menos doscientos años antes de que vuelva a inclinarse tanto.
 
 18
-00:02:22,040 --> 00:02:29,339
+00:02:22,395 --> 00:02:29,694
 En una universidad, el pedido de un tablero escondía una decisión de unos A$140 millones.
 
 19
-00:02:30,839 --> 00:02:37,611
+00:02:31,194 --> 00:02:37,966
 Media hora de escuchar la encontró, y una página, acordada por escrito, la volvió una pregunta que el equipo podía responder.
 
 20
-00:02:45,911 --> 00:02:49,698
+00:02:46,266 --> 00:02:50,053
 Estas tres películas tratan de trabajar con las personas que piden datos.
 
 21
-00:02:51,398 --> 00:02:59,706
+00:02:51,753 --> 00:03:00,061
 Jueves 11 de febrero de 2027: Graham Ellis, nuevo este año como director de Instalaciones, escribe al equipo de datos.
 
 22
-00:03:01,206 --> 00:03:03,705
+00:03:01,561 --> 00:03:04,060
 “¿Podría tener un tablero del uso de las aulas para Semana Santa?”
 
 23
-00:03:05,605 --> 00:03:07,831
+00:03:05,960 --> 00:03:08,186
 Suena claro: una cosa, y una fecha.
 
 24
-00:03:09,331 --> 00:03:14,483
+00:03:09,686 --> 00:03:14,838
 Pero un pedido suele nombrar lo que alguien supone que es la solución. Para qué es, no lo dice.
 
 25
-00:03:16,383 --> 00:03:21,380
+00:03:16,738 --> 00:03:21,735
 Si hace exactamente lo pedido, un equipo puede entregar a tiempo y aun así no ayudar a nadie.
 
 26
-00:03:23,280 --> 00:03:29,985
+00:03:23,635 --> 00:03:30,340
 Así que Helena Novak, la gestora de datos, le pide a Graham media hora, con Noor, la arquitecta de datos del equipo.
 
 27
-00:03:32,685 --> 00:03:39,449
+00:03:33,040 --> 00:03:39,804
 Martes 16 de febrero, en la oficina de Graham. Hacen unas pocas preguntas abiertas, y sobre todo escuchan.
 
 28
-00:03:41,149 --> 00:03:49,947
+00:03:41,504 --> 00:03:50,302
 ¿Qué decidirá con esto? Si pedir al Consejo Universitario un nuevo edificio de aulas: cuarenta aulas, unos A$140 millones.
 
 29
-00:03:51,847 --> 00:04:01,243
+00:03:52,202 --> 00:04:01,598
 ¿Para cuándo? Su informe vence el 1 de junio, y el Consejo Universitario decide el 24 de junio. Semana Santa fue una fecha segura, a ojo.
 
 30
-00:04:03,143 --> 00:04:11,699
+00:04:03,498 --> 00:04:12,054
 ¿Quién más decide? El Consejo Universitario, aconsejado por él. Los académicos lo leerán con lupa: dicen que las aulas siempre están llenas.
 
 31
-00:04:13,599 --> 00:04:20,340
+00:04:13,954 --> 00:04:20,695
 ¿En qué confía ya? En lo que ha visto en sus recorridos: pasillos vacíos los lunes por la mañana y los viernes por la tarde.
 
 32
-00:04:22,240 --> 00:04:29,078
+00:04:22,595 --> 00:04:29,433
 ¿Qué le haría cambiar de opinión? Si faltan aulas a todas horas, pedirá construir. Si solo a algunas horas, quizá no.
 
 33
-00:04:31,178 --> 00:04:38,259
+00:04:31,533 --> 00:04:38,614
 Edgar Schein lo llamó indagación humilde: preguntar lo que aún no sabes, por interés real en la otra persona.
 
 34
-00:04:39,959 --> 00:04:46,888
+00:04:40,314 --> 00:04:47,243
 Carl Rogers y Richard Farson llamaron a la otra mitad escucha activa: oír todo el significado, y luego repetirlo.
 
 35
-00:04:48,588 --> 00:04:56,796
+00:04:48,943 --> 00:04:57,151
 Algunos equipos preguntan “¿por qué?” cinco veces. Dicho sin tacto, suena a duda; “¿qué decidirá con esto?” llega ahí con amabilidad.
 
 36
-00:04:59,496 --> 00:05:06,475
+00:04:59,851 --> 00:05:06,830
 Cerca del final, Helena repite lo que oyó: una decisión sobre un edificio, y una pregunta sobre cómo se usan las aulas.
 
 37
-00:05:08,175 --> 00:05:13,946
+00:05:08,530 --> 00:05:14,301
 Graham la detiene en una palabra: con “uso”, él quiere decir personas en el aula. Una reserva no es uso.
 
 38
-00:05:16,046 --> 00:05:22,455
+00:05:16,401 --> 00:05:22,810
 Esa sola palabra decide los datos: las reservas del horario, junto a los conteos de personas del sensor de cada aula.
 
 39
-00:05:24,355 --> 00:05:30,982
+00:05:24,710 --> 00:05:31,337
 En Pisa, salvarla era medio grado, no una torre recta. Aquí, uso significa personas en el aula, no reservas.
 
 40
-00:05:32,682 --> 00:05:36,035
+00:05:33,037 --> 00:05:36,390
 Luego Noor escribe la pregunta con él, en una página.
 
 41
-00:05:37,535 --> 00:05:40,297
+00:05:37,890 --> 00:05:40,652
 “¿Tenemos muy pocas aulas, o muy pocas a algunas horas?”
 
 42
-00:05:42,397 --> 00:05:48,057
+00:05:42,752 --> 00:05:48,412
 Debajo van la decisión, las fechas, quién decide, qué le haría cambiar de opinión, y qué significa “uso”.
 
 43
-00:05:49,757 --> 00:05:55,508
+00:05:50,112 --> 00:05:55,863
 Sus propias palabras quedan arriba, junto a la pregunta, para que cualquiera vea cómo una se volvió la otra.
 
 44
-00:05:57,408 --> 00:06:01,172
+00:05:57,763 --> 00:06:01,527
 Esa tarde, Graham responde a la página: “Sí, es eso.”
 
 45
-00:06:03,872 --> 00:06:10,254
+00:06:04,227 --> 00:06:10,609
 Luego el pedido espera su turno, como todos, hasta que el equipo lo retoma el martes 30 de marzo.
 
 46
-00:06:11,954 --> 00:06:19,329
+00:06:12,309 --> 00:06:19,684
 En marzo, Ivy Reyes, una analista recién graduada, sigue esa pregunta por el trabajo del equipo, a partir de la página.
 
 47
-00:06:21,029 --> 00:06:27,342
+00:06:21,384 --> 00:06:27,697
 El 30 de marzo, el equipo empieza desde la misma página, y para el 23 de abril tiene una respuesta.
 
 48
-00:06:29,042 --> 00:06:33,306
+00:06:29,397 --> 00:06:33,661
 En toda la semana, las aulas están reservadas solo el 38% del tiempo.
 
 49
-00:06:35,006 --> 00:06:39,888
+00:06:35,361 --> 00:06:40,243
 Pero entre las 10:00 y las 14:00, de martes a jueves, el 93% están reservadas.
 
 50
-00:06:41,788 --> 00:06:45,367
+00:06:42,143 --> 00:06:45,722
 Y en una de cada cinco horas reservadas, los sensores no contaron a nadie.
 
 51
-00:06:47,267 --> 00:06:51,947
+00:06:47,622 --> 00:06:52,302
 Así que la respuesta a su pregunta: no muy pocas aulas, sino muy pocas a algunas horas.
 
 52
-00:06:54,047 --> 00:07:00,248
+00:06:54,402 --> 00:07:00,603
 Los académicos tenían razón sobre la hora pico, y Graham sobre los lunes por la mañana: el promedio de la semana escondía ambas cosas.
 
 53
-00:07:02,148 --> 00:07:06,107
+00:07:02,503 --> 00:07:06,462
 Un tablero para Semana Santa quizá habría mostrado ese promedio, y no habría resuelto nada.
 
 54
-00:07:07,807 --> 00:07:13,352
+00:07:08,162 --> 00:07:13,707
 En cambio, tuvo una respuesta a la pregunta de la que dependía su decisión, semanas antes de entregar su informe.
 
 55
-00:07:16,052 --> 00:07:21,690
+00:07:16,407 --> 00:07:22,045
 En Pisa, el comité no empezó cavando. Primero acordó qué sería salvar la torre.
 
 56
-00:07:23,390 --> 00:07:27,599
+00:07:23,745 --> 00:07:27,954
 Luego, cada día, una nota firmada decía cómo se había movido, y qué hacer después.
 
 57
-00:07:29,299 --> 00:07:36,143
+00:07:29,654 --> 00:07:36,498
 El pedido de Graham tuvo el mismo cuidado: la decisión encontrada, la pregunta acordada por escrito, y una respuesta a tiempo.
 
 58
-00:07:38,043 --> 00:07:46,131
+00:07:38,398 --> 00:07:46,486
 Desde junio, la puerta de entrada del equipo, un formulario, hace cinco preguntas así. Un formulario pregunta; escuchar oye qué significan.
 
 59
-00:07:48,031 --> 00:07:54,093
+00:07:48,386 --> 00:07:54,448
 El lunes, cuando alguien te pida un informe o un tablero, pregunta qué va a decidir con eso, y para cuándo.
 
 60
-00:07:55,593 --> 00:07:59,876
+00:07:55,948 --> 00:08:00,231
 Pregunta quién más decide, en qué confía ya, y qué le haría cambiar de opinión.
 
 61
-00:08:01,376 --> 00:08:04,109
+00:08:01,731 --> 00:08:04,464
 Escucha más de lo que hablas, y repite lo que oíste.
 
 62
-00:08:05,609 --> 00:08:09,212
+00:08:05,964 --> 00:08:09,567
 Luego escribe la pregunta junto a sus palabras, y acuérdala con esa persona.
 
 63
-00:08:10,912 --> 00:08:13,259
+00:08:11,267 --> 00:08:13,614
 Pregunta para qué es, y acuérdalo por escrito.

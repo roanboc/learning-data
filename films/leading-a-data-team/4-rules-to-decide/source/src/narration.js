@@ -15,7 +15,7 @@ const NARR={
  {"id":"hopper","gap":0.8,"text":"A tiny insect, the brown planthopper, destroyed about two million tons of rice across Indonesia in 1977.","say":"A tiny insect, the brown planthopper, destroyed about two million tons of rice across Indonesia in nineteen seventy-seven."},
  {"id":"dry","gap":0.8,"text":"In the dry season, farms downstream waited for water that didn't come."},
  {"id":"harm","gap":0.8,"text":"For a farming family, a lost harvest meant a season's food and income gone."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Someone had to show the planners what the temples already knew."},
  {"id":"model","gap":0.8,"text":"In the 1980s, the anthropologist Stephen Lansing and the ecologist James Kremer built a computer model of two rivers and their 172 subaks.","say":"In the nineteen eighties, the anthropologist Stephen Lansing and the ecologist James Kremer built a computer model of two rivers and their one hundred and seventy-two subaks."},
  {"id":"showed","gap":0.8,"text":"It showed that the temples' calendar gave the biggest harvests, balancing hungry pests against shared water."},
  {"id":"bank","gap":0.8,"text":"In 1988 they took it to the bank that had paid for new irrigation works, and the bank agreed.","say":"In nineteen eighty-eight they took it to the bank that had paid for new irrigation works, and the bank agreed."},

@@ -11,7 +11,7 @@ const NARR={
  {"id":"harm","gap":0.8,"text":"So one school can be one thing in a council's records, and another in a water company's."},
  {"id":"sure","gap":0.8,"text":"Nobody can be sure that two records mean the same place."},
  {"id":"road","gap":0.8,"text":"And when a new road is built, each of them must find it, and change it, on its own."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Each keeping its own copy of the same streets can't go on."},
  {"id":"launch","gap":0.8,"text":"In 2001, Ordnance Survey launches OS MasterMap: one seamless database of the whole country, instead of tiles.","say":"In two thousand and one, Ordnance Survey launches OS MasterMap: one seamless database of the whole country, instead of tiles."},
  {"id":"toid","gap":0.8,"text":"Every feature in it, about 440 million at first, gets its own identifier, a TOID, with a version and a date.","say":"Every feature in it, about four hundred and forty million at first, gets its own identifier, a TOID, with a version and a date."},
  {"id":"survey","gap":0.8,"text":"Surveyors, on the ground and from the air, keep it up to date, and users receive only what has changed."},

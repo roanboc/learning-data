@@ -9,7 +9,7 @@ const NARR={
  {"id":"needs","gap":0.8,"text":"But a box needs a crane strong enough to lift it, at both ends of the trip."},
  {"id":"few","gap":0.8,"text":"Few ports have one, and building one takes years, and money most of them don't have."},
  {"id":"harm","gap":0.8,"text":"For those ports, the box changes nothing: ships still sit at the quay for days, unloaded by hand, and their goods cost more."},
- {"id":"change","gap":0.8,"text":"Something has to change, or the box will stop wherever the cranes do."},
+ {"id":"change","gap":0.8,"text":"Unless it can reach ports without cranes, the box will stop wherever the cranes do."},
  {"id":"gateway","gap":0.8,"text":"In October 1957, McLean's company sends out a rebuilt ship, the Gateway City, with two cranes of its own.","say":"In October nineteen fifty-seven, McLean's company sends out a rebuilt ship, the Gateway City, with two cranes of its own."},
  {"id":"rails","gap":0.8,"text":"They run on rails along its deck, and reach out over the quay."},
  {"id":"any","gap":0.8,"text":"Now a port with a quay can take boxes, crane or not."},

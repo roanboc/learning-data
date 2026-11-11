@@ -9,7 +9,7 @@ const NARR={
  {"id":"harm","gap":0.8,"text":"A blind farmer can't work his field. A blind grandmother needs a child to lead her, and the child stops going to school."},
  {"id":"fix","gap":0.8,"text":"A short operation can give their sight back."},
  {"id":"cost","gap":0.8,"text":"But most of them are too poor to pay for it, and live far from any surgeon."},
- {"id":"change","gap":0.8,"text":"Something has to change, at a scale no hospital has tried."},
+ {"id":"change","gap":0.8,"text":"Surgery as hospitals did it then would never reach them all."},
  {"id":"service","gap":0.8,"text":"He starts by saying what his hospital is for: sight given back, to everyone who needs it."},
  {"id":"groups","gap":0.8,"text":"Then who it's for, in groups: those who can pay, those who can pay a little, and those who can pay nothing."},
  {"id":"free","gap":0.8,"text":"Six of the eleven beds are for those who pay nothing."},

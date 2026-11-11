@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un canal podría llevarlo, pero tendría 363 millas, entre bosques y pantanos.",
 "The federal government wouldn't pay; President Jefferson had called the idea little short of madness. Critics called it Clinton's Ditch.":
 "El gobierno federal no pagaría; el presidente Jefferson llamó a la idea poco menos que una locura. Los críticos, la Zanja de Clinton.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"If Washington wouldn't pay, the canal needed someone who would.":
+"Si Washington no pagaba, el canal necesitaba a alguien que sí lo hiciera.",
 "DeWitt Clinton and the state's canal commissioners made the case to New York's legislature.":
 "DeWitt Clinton y los comisionados del canal del estado presentaron el caso a la legislatura de Nueva York.",
 "Where it would run, from the Hudson to Lake Erie; what it would cost, about seven million dollars; and how taxes and tolls would repay it.":

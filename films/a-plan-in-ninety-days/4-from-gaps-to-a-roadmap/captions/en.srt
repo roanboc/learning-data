@@ -27,313 +27,313 @@ In 1972, three young railway engineers wrote that the trains no longer fit what 
 The railways' own plan, new fast lines across the country, would cost billions, and in the early 1980s it was dropped.
 
 8
-00:00:58,447 --> 00:00:59,835
-Something had to change.
+00:00:58,447 --> 00:01:02,627
+With no money for new lines, the trains had to win people back another way.
 
 9
-00:01:01,735 --> 00:01:09,348
+00:01:04,527 --> 00:01:12,140
 From 23 May 1982, the trains ran by the clock: every line, every hour, at the same minutes past.
 
 10
-00:01:11,248 --> 00:01:17,489
+00:01:14,040 --> 00:01:20,281
 Then the railways turned planning around: Rail 2000 started from the timetable people wanted.
 
 11
-00:01:18,789 --> 00:01:27,169
+00:01:21,581 --> 00:01:29,961
 In the big stations, the hubs, trains from every direction would arrive just before the hour and leave just after, so everyone could change.
 
 12
-00:01:29,069 --> 00:01:34,046
+00:01:31,861 --> 00:01:36,838
 Where the trains between two hubs were too slow to arrive in time, that stretch was a gap.
 
 13
-00:01:35,746 --> 00:01:37,246
+00:01:38,538 --> 00:01:40,038
 Only the gaps would be built.
 
 14
-00:01:38,746 --> 00:01:42,683
+00:01:41,538 --> 00:01:45,475
 Its slogan: as fast as necessary, not as fast as possible.
 
 15
-00:01:44,383 --> 00:01:48,270
+00:01:47,175 --> 00:01:51,062
 Voters approved it on 6 December 1987.
 
 16
-00:01:49,570 --> 00:01:57,122
+00:01:52,362 --> 00:01:59,914
 When the costs rose, it was built in stages, and the first kept one new line of four: the one the timetable needed most.
 
 17
-00:01:58,822 --> 00:02:09,028
+00:02:01,614 --> 00:02:11,820
 On 12 December 2004, the first stage opened: about 130 projects, with the new line between Bern and Olten at its heart.
 
 18
-00:02:10,728 --> 00:02:14,407
+00:02:13,520 --> 00:02:17,199
 Bern to Zürich now took under an hour, so the two hubs connected.
 
 19
-00:02:16,107 --> 00:02:22,427
+00:02:18,899 --> 00:02:25,219
 In Bern, every half hour, trains from every direction fill the platforms, and people change in minutes.
 
 20
-00:02:24,327 --> 00:02:32,715
+00:02:27,119 --> 00:02:35,507
 By 2019, the Swiss travelled further by train than anyone else in Europe: about 2,500 kilometres each, in a year.
 
 21
-00:02:34,415 --> 00:02:41,062
+00:02:37,207 --> 00:02:43,854
 Data is the same: start from what people need, find the gaps, and build in stages that each work on their own.
 
 22
-00:02:42,562 --> 00:02:48,448
+00:02:45,354 --> 00:02:51,240
 A year from now, at a university, the target is drawn, and nine gaps lie between it and today.
 
 23
-00:02:49,948 --> 00:02:56,033
+00:02:52,740 --> 00:02:58,825
 Built all at once, it would take years, and if the money stopped half way, nobody would have anything to use.
 
 24
-00:02:57,533 --> 00:03:04,291
+00:03:00,325 --> 00:03:07,083
 Its data manager and team turn the gaps into three stages, each useful on its own, and get the plan approved.
 
 25
-00:03:12,191 --> 00:03:21,102
+00:03:14,983 --> 00:03:23,894
 Monday 5 April 2027. Helena Novak, the university's data manager, has the target drawn, and three weeks to plan.
 
 26
-00:03:22,202 --> 00:03:28,185
+00:03:24,994 --> 00:03:30,977
 By Monday 26 April: a roadmap and a data strategy, ready for the data council.
 
 27
-00:03:29,285 --> 00:03:34,964
+00:03:32,077 --> 00:03:37,756
 Noor, the data architect, sets the current state beside the target on her map, layer by layer.
 
 28
-00:03:36,664 --> 00:03:38,736
+00:03:39,456 --> 00:03:41,528
 Wherever the two differ, there's a gap.
 
 29
-00:03:40,236 --> 00:03:47,450
+00:03:43,028 --> 00:03:50,242
 TOGAF's method and ArchiMate name the steps: gaps, work packages, and plateaus, the steady states along the way.
 
 30
-00:03:48,550 --> 00:03:52,257
+00:03:51,342 --> 00:03:55,049
 The map before the data draws them, in Today, and where it's going.
 
 31
-00:03:53,357 --> 00:03:58,728
+00:03:56,149 --> 00:04:01,520
 Strategy: delivering data is slow, 41 working days, and nobody measures it.
 
 32
-00:04:00,228 --> 00:04:09,124
+00:04:03,020 --> 00:04:11,916
 Business: eleven ways to ask; requests in eleven places, in no order; and about 40 people doing data work alone, in spreadsheets.
 
 33
-00:04:10,824 --> 00:04:15,915
+00:04:13,616 --> 00:04:18,707
 Information: three copies of the staff list, and reports and products with no owner.
 
 34
-00:04:17,415 --> 00:04:26,004
+00:04:20,207 --> 00:04:28,796
 Application: reports in two places, the old warehouse's 38 beside the platform's; and agents at work without a written mandate.
 
 35
-00:04:27,704 --> 00:04:31,051
+00:04:30,496 --> 00:04:33,843
 Technology: the old warehouse's servers, still running.
 
 36
-00:04:32,551 --> 00:04:37,593
+00:04:35,343 --> 00:04:40,385
 Nine gaps: too many to close at once, and some can't start until others are closed.
 
 37
-00:04:40,893 --> 00:04:47,559
+00:04:43,685 --> 00:04:50,351
 Helena and the team group them into work packages: pieces a team can finish, each with an owner and a date.
 
 38
-00:04:48,859 --> 00:04:54,163
+00:04:51,651 --> 00:04:56,955
 Gaps that close together share one: the old warehouse's reports and its servers go together.
 
 39
-00:04:55,463 --> 00:04:59,443
+00:04:58,255 --> 00:05:02,235
 One front door and one list, by 30 June: Helena's.
 
 40
-00:05:00,643 --> 00:05:04,536
+00:05:03,435 --> 00:05:07,328
 Retire the old warehouse, by 17 December: Sam's.
 
 41
-00:05:05,736 --> 00:05:11,169
+00:05:08,528 --> 00:05:13,961
 Data partners: three by September, all seven by March 2028: Jun's.
 
 42
-00:05:12,369 --> 00:05:17,426
+00:05:15,161 --> 00:05:20,218
 An owner and a promise for every product, by March 2028: Yusuf's.
 
 43
-00:05:18,626 --> 00:05:21,550
+00:05:21,418 --> 00:05:24,342
 The measures, on one page, from July: Noor's.
 
 44
-00:05:22,750 --> 00:05:26,613
+00:05:25,542 --> 00:05:29,405
 And agents, each with a written mandate, by December: Yusuf's too.
 
 45
-00:05:27,813 --> 00:05:32,761
+00:05:30,605 --> 00:05:35,553
 Each ends in something people can see: a door that opens, a server switched off.
 
 46
-00:05:35,861 --> 00:05:40,955
+00:05:38,653 --> 00:05:43,747
 Then the order: not by who asks loudest, but by what each unlocks, and what it's worth.
 
 47
-00:05:42,255 --> 00:05:49,101
+00:05:45,047 --> 00:05:51,893
 The front door comes first: once every request comes in one way, there can be one list, and the days can be counted.
 
 48
-00:05:50,601 --> 00:06:00,767
+00:05:53,393 --> 00:06:03,559
 The old warehouse is worth the most to retire: it costs 310,000 Australian dollars a year, and its licence ends on 31 December.
 
 49
-00:06:02,467 --> 00:06:05,868
+00:06:05,259 --> 00:06:08,660
 Helena's first draft starts moving the reports in June.
 
 50
-00:06:07,168 --> 00:06:15,035
+00:06:09,960 --> 00:06:17,827
 Sam, who runs the platform, sees the catch: a report nobody owns can't be moved, because nobody can say it's still right.
 
 51
-00:06:16,735 --> 00:06:20,852
+00:06:19,527 --> 00:06:23,644
 So the 21 reports people use get their owners first, then move.
 
 52
-00:06:22,352 --> 00:06:26,776
+00:06:25,144 --> 00:06:29,568
 The packages wait on each other: the list on the door, the move on its owners.
 
 53
-00:06:28,476 --> 00:06:33,787
+00:06:31,268 --> 00:06:36,579
 As the timetable decided what Switzerland would build, the target decides what comes first.
 
 54
-00:06:36,887 --> 00:06:41,403
+00:06:39,679 --> 00:06:44,195
 Then Helena sets the packages in plateaus: here, simply, stages.
 
 55
-00:06:42,703 --> 00:06:48,475
+00:06:45,495 --> 00:06:51,267
 Each must pass one test: if the money stopped after it, would people still have something they use?
 
 56
-00:06:50,375 --> 00:06:54,006
+00:06:53,167 --> 00:06:56,798
 Her first draft has half the old reports moved by September.
 
 57
-00:06:55,306 --> 00:07:00,603
+00:06:58,098 --> 00:07:03,395
 Half a move is no use on its own: reports in two places, and the licence still paid.
 
 58
-00:07:02,303 --> 00:07:07,642
+00:07:05,095 --> 00:07:10,434
 So the whole move goes into stage two, and stage one keeps what people can use at once.
 
 59
-00:07:09,142 --> 00:07:17,119
+00:07:11,934 --> 00:07:19,911
 Stage one, by Thursday 30 September: one front door, one list, the measures page, and the first three data partners.
 
 60
-00:07:18,819 --> 00:07:27,451
+00:07:21,611 --> 00:07:30,243
 Stage two, by the end of March 2028: one platform, with the old warehouse gone; every product owned; agents with mandates.
 
 61
-00:07:29,151 --> 00:07:34,449
+00:07:31,943 --> 00:07:37,241
 Stage three, by the end of 2028: all seven partners building their own products.
 
 62
-00:07:36,149 --> 00:07:42,378
+00:07:38,941 --> 00:07:45,170
 The near stage is dated to the day; the far ones only to a month or a year, because they will change.
 
 63
-00:07:44,078 --> 00:07:50,265
+00:07:46,870 --> 00:07:53,057
 As fast as necessary, not as fast as possible: the old warehouse goes before its licence ends.
 
 64
-00:07:51,565 --> 00:07:55,360
+00:07:54,357 --> 00:07:58,152
 The partners grow as fast as the faculties can spare a day a week.
 
 65
-00:07:56,860 --> 00:08:00,466
+00:07:59,652 --> 00:08:03,258
 Like Rail 2000's first stage, each works on its own.
 
 66
-00:08:03,566 --> 00:08:05,862
+00:08:06,358 --> 00:08:08,654
 Then the data strategy, on one page.
 
 67
-00:08:07,162 --> 00:08:13,032
+00:08:09,954 --> 00:08:15,824
 Where the university is going: its four goals, from students who succeed to finances that last.
 
 68
-00:08:14,532 --> 00:08:20,223
+00:08:17,324 --> 00:08:23,015
 What data must do for them: reach the people who decide, quickly, from one trusted copy.
 
 69
-00:08:21,723 --> 00:08:23,870
+00:08:24,515 --> 00:08:26,662
 The five principles it's designed by.
 
 70
-00:08:25,370 --> 00:08:27,051
+00:08:28,162 --> 00:08:29,843
 The target, in one picture.
 
 71
-00:08:28,551 --> 00:08:33,037
+00:08:31,343 --> 00:08:35,829
 The roadmap: three stages, six packages, each with an owner and a date.
 
 72
-00:08:34,537 --> 00:08:40,039
+00:08:37,329 --> 00:08:42,831
 And the measures: days from ask to first use, products with an owner, and the people using them.
 
 73
-00:08:41,539 --> 00:08:46,260
+00:08:44,331 --> 00:08:49,052
 One page, so the people who fund it and the people who use it read the same plan.
 
 74
-00:08:49,560 --> 00:08:55,440
+00:08:52,352 --> 00:08:58,232
 Monday 26 April: the plan milestone. The strategy and its roadmap are ready.
 
 75
-00:08:56,540 --> 00:09:04,284
+00:08:59,332 --> 00:09:07,076
 Tuesday 27 April: the data council meets, with Professor David Mensah, the deputy vice-chancellor, there.
 
 76
-00:09:05,584 --> 00:09:11,904
+00:09:08,376 --> 00:09:14,696
 Around the table are the people who'll fund it and use it: the faculties, the offices and the data owners.
 
 77
-00:09:13,204 --> 00:09:17,689
+00:09:15,996 --> 00:09:20,481
 The dean of Arts asks why Arts waits until 2028 for a partner.
 
 78
-00:09:18,989 --> 00:09:23,999
+00:09:21,781 --> 00:09:26,791
 Because the far dates are loose: when Arts can spare a day a week, its partner starts.
 
 79
-00:09:25,699 --> 00:09:28,550
+00:09:28,491 --> 00:09:31,342
 The council approves the strategy and the roadmap.
 
 80
-00:09:30,450 --> 00:09:37,404
+00:09:33,242 --> 00:09:40,196
 One package needs money first: moving the old warehouse's reports. Its case comes to the council next month.
 
 81
-00:09:38,704 --> 00:09:43,440
+00:09:41,496 --> 00:09:46,232
 Helena's ninety days end with a plan anyone at the university can read.
 
 82
-00:09:45,140 --> 00:09:50,909
+00:09:47,932 --> 00:09:53,701
 In Switzerland, the first stage built only the gaps the timetable needed, and the hubs connected.
 
 83
-00:09:52,609 --> 00:09:59,982
+00:09:55,401 --> 00:10:02,774
 At the university, stage one gives people one door, one list and a measure they can see, even if the money stopped there.
 
 84
-00:10:01,682 --> 00:10:06,982
+00:10:04,474 --> 00:10:09,774
 A roadmap ends; keeping data well doesn't, as A capability, not a project shows.
 
 85
-00:10:08,682 --> 00:10:11,651
+00:10:11,474 --> 00:10:14,443
 Turn the gaps into stages that each work on their own.

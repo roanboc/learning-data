@@ -8,7 +8,7 @@ const NARR={
  {"id":"fog","gap":0.8,"text":"But the ice is flat and white for hundreds of kilometres. In fog, you could pass a depot a kilometre away, and never see it."},
  {"id":"harm","gap":0.8,"text":"Miss one on the way home, and they run out of food, far from any help."},
  {"id":"along","gap":0.8,"text":"Marks set along the route are easily missed, and once you drift off the line, you may not find it again."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"They needed depots they couldn't miss, even in fog."},
  {"id":"across","gap":0.8,"text":"So they talked it through, and marked each depot across the route instead, nine kilometres out on each side."},
  {"id":"flags","gap":0.8,"text":"At the first, twenty black flags, each numbered to tell which side the depot lay, and how far."},
  {"id":"cross","gap":0.8,"text":"Even off course, they would cross the line, and a flag would point them in."},

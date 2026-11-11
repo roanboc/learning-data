@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un caso sin aviso la pasaba a la familia vecina, y a la siguiente: una cadena.",
 "Vaccinating everyone couldn't reach everyone, and it found the ones missed.":
 "Vacunar a todos no llegaba a todos, y la viruela encontraba a los que quedaban fuera.",
-"Something had to change: every chain had to be found, and stopped where it was.":
-"Algo tenía que cambiar: había que encontrar cada cadena y detenerla donde estaba.",
+"Every chain had to be found, and stopped where it was.":
+"Había que encontrar cada cadena y detenerla donde estaba.",
 "So India's health workers, with the World Health Organization, changed what they did: search, and contain.":
 "Así que el personal de salud de la India, con la Organización Mundial de la Salud, cambió lo que hacía: buscar y contener.",
 "More than a hundred thousand of them went house to house.":

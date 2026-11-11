@@ -11,7 +11,7 @@ const NARR={
  {"id":"error","gap":0.8,"text":"But every stretch adds a small error."},
  {"id":"pile","gap":0.8,"text":"The errors pile up, unseen, because each measure looks right on its own."},
  {"id":"agree","gap":0.8,"text":"A map made only from its own measures can agree with itself, line after line, and still put a cape miles out."},
- {"id":"change","gap":0.8,"text":"Something had to change: the survey needed a reference its errors couldn't reach."},
+ {"id":"change","gap":0.8,"text":"The survey needed a reference its errors couldn't reach."},
  {"id":"night","gap":0.8,"text":"So, by day, they measured the coast; and on clear nights, they measured the stars."},
  {"id":"height","gap":0.8,"text":"A star's height, as it crosses the south, says how far north you stand, and no error in the walk can change it."},
  {"id":"corrected","gap":0.8,"text":"Where the walk and the stars disagreed, they corrected the walk."},

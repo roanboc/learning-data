@@ -15,7 +15,7 @@ scene("report",(ctx,S,t,sc)=>{const c=sc.cues,T=rf_once(sc,"T",()=>({
     india:wAt(sc,"place","India"),person:wAt(sc,"disease","person to person"),killed:wAt(sc,"disease","killed"),
     cases:wAt(sc,"hard","more than"),hid:wAt(sc,"hid","It hid"),
     chain0:wAt(sc,"chain","passed"),aChain:wAt(sc,"chain","a chain"),vacc:wAt(sc,"missed","Vaccinating"),found:wAt(sc,"missed","found the ones"),
-    every:wAt(sc,"change","every chain"),stopped:wAt(sc,"change","stopped"),
+    every:wAt(sc,"change","Every chain"),stopped:wAt(sc,"change","stopped"),
     search:wAt(sc,"search","So India's"),contain:wAt(sc,"search","search, and contain"),house:wAt(sc,"house","More than"),
     reported:wAt(sc,"reward","Anyone who reported"),reward:wAt(sc,"reward","a reward"),answered:wAt(sc,"reward","every report"),atonce:wAt(sc,"reward","at once"),
     guards:wAt(sc,"guards","Guards"),night:wAt(sc,"guards","night"),around:wAt(sc,"guards","everyone around"),vaccinated:wAt(sc,"guards","vaccinated"),stop:wAt(sc,"guards","the chain stopped"),

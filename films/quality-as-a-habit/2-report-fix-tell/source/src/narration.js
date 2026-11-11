@@ -8,7 +8,7 @@ const NARR={
  {"id":"hid","gap":0.8,"text":"It hid in villages and city streets, far from any clinic."},
  {"id":"chain","gap":0.8,"text":"A case nobody reported passed it to the next family, and the next: a chain."},
  {"id":"missed","gap":0.8,"text":"Vaccinating everyone couldn't reach everyone, and it found the ones missed."},
- {"id":"change","gap":0.8,"text":"Something had to change: every chain had to be found, and stopped where it was."},
+ {"id":"change","gap":0.8,"text":"Every chain had to be found, and stopped where it was."},
  {"id":"search","gap":0.8,"text":"So India's health workers, with the World Health Organization, changed what they did: search, and contain."},
  {"id":"house","gap":0.8,"text":"More than a hundred thousand of them went house to house."},
  {"id":"reward","gap":0.8,"text":"Anyone who reported a case was promised a reward, and every report was answered at once."},

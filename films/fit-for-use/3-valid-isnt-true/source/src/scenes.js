@@ -61,7 +61,7 @@ scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>{const q={g0:vt_g0
       vt_whole(x,ag_io(tt,P.russian-0.3,c.foot+0.4,0.8),cx=>vt_ship(cx,lerp(1580,1440,ag_sine((tt-P.russian+0.3)/10)),VT_SH.hz+3,58,1));
       const sv=vt_survey(tt,P.stretch-0.2,P.per);vt_whole(x,ag_in(tt,c.foot-0.4,0.8),cx=>vt_team(cx,tt,{set:1,taut:sv.taut,sight:sv.sight}));
       let q=vt_pop(tt,P.shog,c.foot-0.6);dq_textCard(x,120,150,720,{kick:"The shogunate wanted",title:"A true map of the coast"},{edge:"brass",k:q.k,a:q.a});
-      q=vt_pop(tt,P.ref,null);dq_textCard(x,120,150,760,{kick:"Something had to change",title:"A reference its errors can't reach"},{edge:"brass",k:q.k,a:q.a});}},
+      q=vt_pop(tt,P.ref,null);dq_textCard(x,120,150,760,{kick:"What the survey needed",title:"A reference its errors can't reach"},{edge:"brass",k:q.k,a:q.a});}},
     {at:P.night,place:"vt_shoreNight",later:true,keys:[[0,960,540,1]],draw:(x,tt)=>{
       const out=ag_in(tt,P.starsW-0.8,3.4),cr=lerp(0.22,0.5,ag_sine((tt-P.hgt+0.4)/(P.south-P.hgt+0.4))),[sx,sy]=vt_starAt(cr),ang=lerp(0.62,vt_starAng(cr),ag_sine((tt-P.hgt+0.2)/1.6));
       vt_stars(x,tt,{out});vt_bigStar(x,sx,sy,ag_in(tt,P.starsW-0.2,1.0),1.2);vt_quadrant(x,ang,1);vt_figure(x,935,VT_Q.y,236,{dir:-1,jacket:VT_CLOTH.leader,lean:0.12});

@@ -18,182 +18,182 @@ Un caso sin aviso la pasaba a la familia vecina, y a la siguiente: una cadena.
 00:00:32.424 --> 00:00:36.479
 Vacunar a todos no llegaba a todos, y la viruela encontraba a los que quedaban fuera.
 
-00:00:37.579 --> 00:00:41.920
-Algo tenía que cambiar: había que encontrar cada cadena y detenerla donde estaba.
+00:00:37.579 --> 00:00:40.568
+Había que encontrar cada cadena y detenerla donde estaba.
 
-00:00:43.420 --> 00:00:49.764
+00:00:42.068 --> 00:00:48.412
 Así que el personal de salud de la India, con la Organización Mundial de la Salud, cambió lo que hacía: buscar y contener.
 
-00:00:50.864 --> 00:00:53.826
+00:00:49.512 --> 00:00:52.474
 Más de cien mil de ellos fueron casa por casa.
 
-00:00:55.126 --> 00:01:00.739
+00:00:53.774 --> 00:00:59.387
 A quien avisara de un caso se le prometía una recompensa, y cada aviso se respondía de inmediato.
 
-00:01:01.839 --> 00:01:08.618
+00:01:00.487 --> 00:01:07.266
 Unos guardias se quedaban en la puerta del enfermo, día y noche, y se vacunaba a todos alrededor: la cadena se detenía ahí.
 
-00:01:10.118 --> 00:01:13.545
+00:01:08.766 --> 00:01:12.193
 Y a quien avisaba se le pagaba, así que la gente seguía avisando.
 
-00:01:15.045 --> 00:01:19.427
+00:01:13.693 --> 00:01:18.075
 En mayo de 1975, un año después, la India halló su último caso.
 
-00:01:20.727 --> 00:01:26.961
+00:01:19.375 --> 00:01:25.609
 En 1977, la India fue declarada libre de viruela, y en 1980, el mundo.
 
-00:01:28.461 --> 00:01:33.282
+00:01:27.109 --> 00:01:31.930
 En la universidad, un nombre mal impreso en un diploma también es un caso.
 
-00:01:34.182 --> 00:01:39.521
+00:01:32.830 --> 00:01:38.169
 El diploma se imprime de nuevo, y un graduado cruza el escenario con una carpeta vacía.
 
-00:01:40.621 --> 00:01:48.663
+00:01:39.269 --> 00:01:47.311
 Un aviso vale solo por lo que pasa después: respóndelo, arréglalo donde empezó y cuéntaselo, y el próximo aparece antes de imprimirse.
 
-00:01:55.763 --> 00:02:03.784
+00:01:54.411 --> 00:02:02.432
 Lunes 12 de octubre de 2026: el portal abre para que los graduados de diciembre revisen su nombre tal como se imprimirá.
 
-00:02:05.284 --> 00:02:09.852
+00:02:03.932 --> 00:02:08.500
 Esa noche, Andrés Peñaloza lee el suyo: Andres Penaloza.
 
-00:02:11.152 --> 00:02:13.961
+00:02:09.800 --> 00:02:12.609
 Sin tilde en la e. Sin la eñe: solo una n.
 
-00:02:15.661 --> 00:02:19.273
+00:02:14.309 --> 00:02:17.921
 Pulsa «Este no es mi nombre» y lo teclea como él lo escribe.
 
-00:02:20.773 --> 00:02:24.623
+00:02:19.421 --> 00:02:23.271
 Ningún control lo había retenido: es corto, y todas sus letras son válidas.
 
-00:02:25.923 --> 00:02:32.564
+00:02:24.571 --> 00:02:31.212
 Su registro es de 2018, de un antiguo formulario en línea que solo aceptaba de la A a la Z, en mayúsculas.
 
-00:02:33.864 --> 00:02:40.386
+00:02:32.512 --> 00:02:39.034
 Cuando volvió para su maestría, las mayúsculas se escribieron de nuevo a mano, como letras normales, y parecía correcto.
 
-00:02:42.086 --> 00:02:44.280
+00:02:40.734 --> 00:02:42.928
 Las personas hallan errores que ningún control ve.
 
-00:02:45.580 --> 00:02:48.577
+00:02:44.228 --> 00:02:47.225
 Así que hazles fácil decirlo, donde ven los datos.
 
-00:02:50.077 --> 00:02:54.779
+00:02:48.725 --> 00:02:53.427
 Su aviso es una fila de datos: quién, el nombre que se mostró, el nombre que dio y cuándo.
 
-00:02:56.279 --> 00:03:02.848
+00:02:54.927 --> 00:03:01.496
 Y el portal dice qué pasa después: «La oficina de registro responderá a más tardar el miércoles 14 de octubre».
 
-00:03:05.948 --> 00:03:11.049
+00:03:04.596 --> 00:03:09.697
 El aviso va directo a quienes son dueños de los nombres: la oficina de registro, el equipo de Mei.
 
-00:03:12.549 --> 00:03:15.421
+00:03:11.197 --> 00:03:14.069
 Su promesa: una respuesta en dos días hábiles.
 
-00:03:17.321 --> 00:03:23.675
+00:03:15.969 --> 00:03:22.323
 Cada aviso se guarda en un modelo propio, con su dueño, cuándo vence, y cuándo se respondió y se comunicó.
 
-00:03:25.575 --> 00:03:29.899
+00:03:24.223 --> 00:03:28.547
 Responder a tiempo depende de lo que hacen las personas, no de si los datos están bien.
 
-00:03:31.199 --> 00:03:34.723
+00:03:29.847 --> 00:03:33.371
 Así que se sigue y se revisa cada semana, y nunca falla como un control.
 
-00:03:36.623 --> 00:03:42.253
+00:03:35.271 --> 00:03:40.901
 Cada mañana, una alerta en Databricks le dice a la oficina de registro qué avisos vencen ese día.
 
-00:03:44.153 --> 00:03:50.179
+00:03:42.801 --> 00:03:48.827
 En la India, cada aviso se respondía de inmediato: una promesa cumplida hace que la gente vuelva a avisar.
 
-00:03:53.679 --> 00:03:59.852
+00:03:52.327 --> 00:03:58.500
 Miércoles 14 de octubre: el equipo de Mei revisa su nombre contra el pasaporte que se vio en su matrícula.
 
-00:04:01.952 --> 00:04:07.720
+00:04:00.600 --> 00:04:06.368
 Coincide, y lo corrigen en el propio sistema de estudiantes: no en la lista, ni en una copia.
 
-00:04:09.820 --> 00:04:15.309
+00:04:08.468 --> 00:04:13.957
 Esa noche, la actualización lo lleva a la lista, al portal y al archivo de la imprenta: a todas las copias a la vez.
 
-00:04:17.609 --> 00:04:21.127
+00:04:16.257 --> 00:04:19.775
 Arreglado en la lista, la actualización de la noche siguiente lo desharía.
 
-00:04:22.827 --> 00:04:27.565
+00:04:21.475 --> 00:04:26.213
 Arreglado en una hoja de cálculo, volvería a estar mal el año siguiente, como mostró La fábrica oculta.
 
-00:04:29.665 --> 00:04:33.471
+00:04:28.313 --> 00:04:32.119
 Como los guardias en la puerta, un arreglo donde empezó el error lo detiene ahí.
 
-00:04:37.171 --> 00:04:43.344
+00:04:35.819 --> 00:04:41.992
 Luego el portal le dice: «Tu nombre se imprimirá como Andrés Peñaloza. Gracias por avisarnos».
 
-00:04:45.444 --> 00:04:48.781
+00:04:44.092 --> 00:04:47.429
 Un aviso que desaparece enseña a la gente a no molestarse.
 
-00:04:50.281 --> 00:04:54.282
+00:04:48.929 --> 00:04:52.930
 En la India, a quien avisaba se le pagaba, así que el siguiente también avisaba.
 
-00:04:55.982 --> 00:04:59.198
+00:04:54.630 --> 00:04:57.846
 En octubre, 64 graduados avisaron de su nombre.
 
-00:05:00.498 --> 00:05:06.761
+00:04:59.146 --> 00:05:05.409
 61 se corrigieron en dos días hábiles, y tres esperaron un documento. A todos se les avisó.
 
-00:05:08.661 --> 00:05:14.087
+00:05:07.309 --> 00:05:12.735
 Y quienes hacen los datos se enteran de lo que costó: un graduado que tuvo que encontrar mal su propio nombre.
 
-00:05:15.587 --> 00:05:19.743
+00:05:14.235 --> 00:05:18.391
 Admisiones, que hizo los formularios antiguos, ahora recibe una nota cada mes.
 
-00:05:21.043 --> 00:05:26.758
+00:05:19.691 --> 00:05:25.406
 La nota de octubre: 38 nombres del antiguo formulario en línea, y 11 de los de papel.
 
-00:05:28.658 --> 00:05:34.759
+00:05:27.306 --> 00:05:33.407
 Así que desde noviembre, admisiones pide a cada estudiante que vuelve que revise su nombre contra su pasaporte.
 
-00:05:36.459 --> 00:05:44.246
+00:05:35.107 --> 00:05:42.894
 Thomas Redman los llama clientes y creadores de los datos: cuéntales a los creadores lo que costó un error, y el siguiente no se comete.
 
-00:05:47.746 --> 00:05:55.416
+00:05:46.394 --> 00:05:54.064
 Leídos juntos, los avisos muestran dónde nacen los errores: de los primeros 19, 12 venían del formulario antiguo, como el de Andrés.
 
-00:05:57.316 --> 00:06:02.194
+00:05:55.964 --> 00:06:00.842
 Cada tipo de error que alguien encuentra se vuelve un control, y nadie tiene que volver a encontrarlo.
 
-00:06:04.094 --> 00:06:11.320
+00:06:02.742 --> 00:06:09.968
 Jun agrega uno: un nombre del formulario antiguo, aún en letras simples, de la A a la Z, sin confirmar por su graduado.
 
-00:06:13.620 --> 00:06:17.376
+00:06:12.268 --> 00:06:16.024
 No puede ver una tilde que falta. Pero sí puede ver dónde nació un nombre.
 
-00:06:19.476 --> 00:06:24.629
+00:06:18.124 --> 00:06:23.277
 Retiene cada uno para el equipo de Mei, y dbt los guarda en una tabla que lee su equipo.
 
-00:06:26.529 --> 00:06:28.777
+00:06:25.177 --> 00:06:27.425
 En su primera noche, retiene 83.
 
-00:06:31.077 --> 00:06:37.594
+00:06:29.725 --> 00:06:36.242
 La oficina de registro escribe a cada uno: nuestro formulario antiguo quitaba las tildes, así que mira bien tu nombre.
 
-00:06:39.694 --> 00:06:43.477
+00:06:38.342 --> 00:06:42.125
 En una semana, siete recuperaron las tildes que el formulario antiguo les quitó.
 
-00:06:45.777 --> 00:06:49.079
+00:06:44.425 --> 00:06:47.727
 Mei lo anota en el registro de incidencias, como mostró Reglas que se ejecutan.
 
-00:06:50.979 --> 00:06:56.149
+00:06:49.627 --> 00:06:54.797
 Como en la India, donde se vacunaba a todos alrededor de un caso, antes de que la cadena se extendiera.
 
-00:06:59.849 --> 00:07:07.375
+00:06:58.497 --> 00:07:06.023
 En la India, después del último caso, la recompensa subió a mil rupias, cuatro meses de paga, y cada aviso se respondió.
 
-00:07:08.875 --> 00:07:11.813
+00:07:07.523 --> 00:07:10.461
 Ninguno era viruela: así supieron que se había ido.
 
-00:07:13.713 --> 00:07:20.678
+00:07:12.361 --> 00:07:19.326
 En la universidad, cada aviso se responde, se arregla donde empezó y se comunica, y cada tipo de error se convierte en un control.
 
-00:07:22.178 --> 00:07:25.622
+00:07:20.826 --> 00:07:24.270
 El diploma de Andrés dirá Andrés Peñaloza.
 
-00:07:27.122 --> 00:07:30.400
+00:07:25.770 --> 00:07:29.048
 Responde cada aviso, arréglalo donde empezó y cuéntaselo.

@@ -1,0 +1,65 @@
+{
+  "title": "Data architecture",
+  "title_es": "Arquitectura de datos",
+  "planned": 6,
+  "lead": "The third series on enterprise architecture. Inés Duarte, the utility's data architect, works between the business and the systems: what the pyramid of data gets wrong, where each fact is born, how it travels, who owns which data, and one language kept for it.",
+  "lead_es": "La tercera serie sobre arquitectura empresarial. Inés Duarte, la arquitecta de datos de la empresa, trabaja entre el negocio y los sistemas: en qué se equivoca la pirámide de los datos, dónde nace cada dato, cómo viaja, quién es dueño de qué datos, y un solo lenguaje que se mantiene para ellos.",
+  "description": "Short films on data architecture, as DAMA defines it: why it's an architecture of its own; the data, information, knowledge and wisdom pyramid, taken apart; where each fact is born and who owns it; how data travels between domains; who owns which data; and one language, kept with every change.",
+  "description_es": "Películas cortas sobre arquitectura de datos, como la define DAMA: por qué es una arquitectura propia; la pirámide de datos, información, conocimiento y sabiduría, desarmada; dónde nace cada dato y quién es su dueño; cómo viajan los datos entre dominios; quién es dueño de qué datos; y un solo lenguaje, mantenido con cada cambio.",
+  "card": "Between the business and the systems: where each fact is born, how it travels, who owns it, and one language for it.",
+  "card_es": "Entre el negocio y los sistemas: dónde nace cada dato, cómo viaja, quién es su dueño y un solo lenguaje para él.",
+  "order": "Watch them in order, after The map before the data and Business architecture for data: each film builds on the one before.",
+  "order_es": "Míralas en orden, después de El mapa antes de los datos y Arquitectura de negocio para datos: cada película se apoya en la anterior.",
+  "thread_h": "One thread: between the business and the systems",
+  "thread_h_es": "Un hilo: entre el negocio y los sistemas",
+  "thread": "Three people say information architecture and mean three things. Film by film, Inés Duarte takes the utility from what the business owns to where each fact is born, how it travels, who owns which data, and one language kept with every change.",
+  "thread_es": "Tres personas dicen arquitectura de la información y quieren decir tres cosas distintas. Película a película, Inés Duarte lleva a la empresa desde lo que el negocio posee hasta dónde nace cada dato, cómo viaja, quién es dueño de qué datos, y un solo lenguaje mantenido con cada cambio.",
+  "past_h": "One story, film by film: Project Cybersyn",
+  "past_h_es": "Una historia, película a película: el Proyecto Cybersyn",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "tech",
+      "Designs the data",
+      "Inés Duarte, the data architect, the series' guide"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Tomás Herrera, the enterprise architect"
+    ],
+    [
+      "biz",
+      "Runs the network",
+      "Grace Achieng, who owns network operations"
+    ],
+    [
+      "biz",
+      "Speaks for customers",
+      "Farah Siddiqui, the customer advocate"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Diseña los datos",
+      "Inés Duarte, la arquitecta de datos, la guía de la serie"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Tomás Herrera, el arquitecto empresarial"
+    ],
+    [
+      "biz",
+      "Hace funcionar la red",
+      "Grace Achieng, dueña de las operaciones de la red"
+    ],
+    [
+      "biz",
+      "Habla por los clientes",
+      "Farah Siddiqui, la defensora de los clientes"
+    ]
+  ]
+}

@@ -25,6 +25,8 @@ What it checks, page by page (every .html under site/):
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
+- opening turns: no film's narration or captions say the stock "Something had to change" (or "has to", "Algo tenía que cambiar"):
+  each says why it couldn't go on in its own story's words; the reviewed films that still say it are left as they are.
 - page intros: every film's site.json keeps its topic label (kicker) to 32 characters, its title (h1) to 75 and its intro (lead)
   to 300, in English and Spanish: on a laptop, one line, three lines and four lines at most, as on Day one.
 - release status: no film's voice, captions, page text, Pause and think, labs or scenarios says a feature is in preview, in beta
@@ -201,6 +203,16 @@ BEATS = ["Scenario", "Problem", "Solution", "Benefits", "Back to the story"]
 # the films made before the rule (28 October 2026), by series folder and number; a film that changes its opening adds its table
 BEATS_BEFORE = {"analytics-engineering": range(1, 11), "enterprise-architecture": range(1, 12), "from-words-to-data": range(1, 8),
                 "master-and-reference-data": range(1, 10), "data-governance": (0, 2, 3)}
+
+# the turn from problem to solution said in the story's own words (AGENTS.md, Story and world; the author, 11 November 2026): no film
+# says the stock "Something had to change" (or "has to", "Algo tenía que cambiar"); the reviewed films that still do are left as they are
+STOCK_TURN = re.compile(r"\bsomething\s+(?:had|has|have|must|needs?|needed)\s+to\s+change\b|\bsomething\s+must\s+change\b"
+                        r"|\balgo\s+(?:tiene|ten[ií]a|tendr[ií]a|deb[ei]a?|necesitaba)\s+(?:que\s+)?cambiar\b", re.I)
+STOCK_BEFORE = {"agents-at-work-on-data": (1, 2, 3, 4, 6), "data-governance": (1, 6, 7), "governance-in-practice": (2, 3, 4, 5, 6),
+                "governance-on-the-map": (2, 3), "what-an-agent-is": (1, 2, 3, 4, 5, 8, 9, 10)}
+# films whose own rework threads take their new line (11 November 2026); each comes off this list when its rework merges
+STOCK_PENDING = {"data-that-moves": (2,), "data-as-software": (1,), "from-tables-to-decisions": (2,), "documents-as-data": (1,),
+                 "the-new-skills": (1,)}
 
 # a feature's release status changes, so no film says it (AGENTS.md, Sources and names on the day; the author, 5 November 2026):
 # "preview", "beta", "generally available" (or GA), in English or in Spanish. The script's sources keep it, with its date.
@@ -1041,6 +1053,20 @@ def main():
         films += 1
         s["fails"] += opening_beats(film)
     s["notes"].append(f"{films} films; the {sum(len(v) for v in BEATS_BEFORE.values())} made before the rule (28 October 2026) are left as they are")
+
+    s = rep.check("Opening turns: no film says the stock \"Something had to change\"; each says why it couldn't go on in its own story's words")
+    films = 0
+    for narr in sorted(ROOT.glob("films/*/*/source/src/narration.js")):
+        film = narr.parents[2]
+        m = re.match(r"(\d+)-", film.name)
+        if m and (int(m.group(1)) in STOCK_BEFORE.get(film.parent.name, ()) or int(m.group(1)) in STOCK_PENDING.get(film.parent.name, ())):
+            continue
+        films += 1
+        for f in [narr] + sorted((film / "source/src/i18n").glob("*/captions.js")):
+            for i, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+                for hit in STOCK_TURN.finditer(plain_words(line)):
+                    s["fails"].append(f"{f.relative_to(ROOT)}:{i}: \"{hit.group(0)}\": say why it couldn't go on, in this story's own words")
+    s["notes"].append(f"{films} films; the {sum(len(v) for v in STOCK_BEFORE.values())} reviewed films that still say it are left as they are")
 
     s = rep.check("Page intros: each film's topic label, title and intro short, as on Day one (an intro of four lines at most)")
     intros = sorted(ROOT.glob("films/**/site.json"))

@@ -2,7 +2,7 @@
    The film's own pieces of the data story (prefix pw_), drawn with the module's kit on its platform map. Colours mean what they
    mean in every film of the module: light blue the platform and data moving (the job, its lanes, the lineage traced), gold what
    people agree on (the claims app's contract), red an error (the failed task and what it touches), amber a person's turn (the
-   insight waiting for Sam, the push he confirms, the review, the decision waiting for Ingrid), green what passes (the tests, the
+   insight waiting for Sam, the push he confirms, the review, the ticket and decision waiting for Ingrid), green what passes (the tests, the
    approval, the job running again, pay day).
      PW_M          where each part of the map is, in the map's own coordinates (z 1 shows it all)
      pw_map        the map at night: the claims app, its hours, its contract, the platform with the claims job, the payroll system,
@@ -153,16 +153,16 @@ function pw_branch(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,u=clamp(o.u||0,0
   if(u>0){const pts=md_curve([x+w*0.45,y],[x+w*0.95,y-90],{bend:0.5});md_lane(ctx,pts,MD.wait,0.95,{u});if(u>=1){ctx.fillStyle=rgba(MD.wait,1);ctx.beginPath();ctx.arc(x+w*0.95,y-90,10,0,TAU);ctx.fill();}
     withA(ctx,ag_in(u,0.7,0.3),()=>md_T(ctx,"read-hours-as-said",x+w*0.5,y-118,{w:500,size:28,f:"mono",col:mix(MD.wait,MD.ink,0.3)}));}
   ctx.restore();}
-// the pull request, with GitHub's mark: o.checks [0 to 1 each, run to passed], o.approve (0 to 1), o.ask (0 to 1: its second part, the
-// ask to Ingrid), o.a, o.k
+// the pull request, with GitHub's mark: o.checks [0 to 1 each, run to passed], o.approve (0 to 1), o.ask (0 to 1: the ticket linked to it,
+// for Ingrid: owners ask and decide in tickets, never in a pull request's review), o.a, o.k
 function pw_pr(ctx,x,y,w,h,o){o=o||{};const ap=clamp(o.approve||0,0,1);return md_window(ctx,x,y,w,h,{logo:"github",product:"GitHub",title:"Pull request",edge:ap>0?mix(MD.wait,MD.pass,ap):MD.wait,a:o.a,k:o.k,draw:(c,B)=>{
   md_T(c,"Read hours as said: 1:30 is 1.5",B.x+24,B.y+50,{w:800,size:32});md_T(c,"Author: Sam Okafor · from the agent's fix",B.x+24,B.y+96,{w:600,size:28,col:MD.soft});
   const ck=o.checks||[0,0];[["unit test: both forms"],["build and test the claims"]].forEach(([s],i)=>{const v=clamp(ck[i]||0,0,1),yy=B.y+150+i*58,col=mix(MD.flow,MD.pass,v);
     md_icon(c,v>0.5?"tick":"refresh",B.x+44,yy,32,col);md_T(c,s,B.x+80,yy+10,{w:600,size:28,col:v>0.5?MD.ink:MD.soft});});
   const ry=B.y+280;c.strokeStyle="rgba(170,200,245,0.18)";c.lineWidth=1.2;c.beginPath();c.moveTo(B.x+20,ry-34);c.lineTo(B.x+B.w-20,ry-34);c.stroke();
   md_icon(c,ap>0.5?"tick":"person",B.x+44,ry,34,mix(MD.wait,MD.pass,ap));md_T(c,ap>0.5?"Approved: Noor Rahman · 09:05":"Review: Noor Rahman",B.x+80,ry+10,{w:700,size:28,col:ap>0.5?mix(MD.pass,MD.ink,0.3):MD.ink});
-  if(o.ask>0)withA(c,o.ask,()=>{const ay=B.y+344;md_card(c,B.x+12,ay,B.w-24,110,{edge:MD.wait,glow:0.7,r:14});md_icon(c,"contract",B.x+52,ay+55,38,MD.agreed);
-    md_T(c,"Also asks Ingrid Holm, HR:",B.x+92,ay+44,{w:700,size:28});md_T(c,"change the contract first, next time",B.x+92,ay+84,{w:600,size:28,col:MD.soft});});}});}
+  if(o.ask>0)withA(c,o.ask,()=>{const ay=B.y+344;md_card(c,B.x+12,ay,B.w-24,110,{edge:MD.wait,glow:0.7,r:14});md_icon(c,"doc",B.x+52,ay+55,38,MD.agreed);
+    md_T(c,"Linked ticket · Ingrid Holm, HR:",B.x+92,ay+44,{w:700,size:28});md_T(c,"change the contract first, next time",B.x+92,ay+84,{w:600,size:28,col:MD.soft});});}});}
 // the agent's part: what it did, and the one thing it never does
 function pw_agentCard(ctx,x,y,w,o){o=o||{};return md_window(ctx,x,y,w,270,{logo:"databricks",product:"Genie ZeroOps",edge:MD.flow,a:o.a,k:o.k,draw:(c,B)=>{
   [["proposed the fix","tick",MD.flow],["pushed it, when asked","tick",MD.flow],["approves: never","cross",MD.soft]].forEach(([s,ic,col],i)=>{const yy=B.y+30+i*50;md_icon(c,ic,B.x+32,yy,28,col);md_T(c,s,B.x+64,yy+10,{w:i===2?800:600,size:28,col:i===2?MD.ink:MD.soft});});}});}

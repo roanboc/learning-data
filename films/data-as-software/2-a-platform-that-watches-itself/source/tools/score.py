@@ -255,7 +255,7 @@ knock(G('approve', 'proposes', -0.15), 0.011, px(960), 250)
 mark(P_('proposes', 'proposes', -0.2), 0.6, px(800), still=0.8, up=0.7, back=1.2)
 decide(P_('proposes', 'a person approves', 0.1), 0.85, hold=1.8)
 
-# 5. The contract first: the fix mended the night, not its cause: G minor. A good change for tutors: a tap. Ingrid's pull request asks
+# 5. The contract first: the fix mended the night, not its cause: G minor. A good change for tutors: a tap. Sam's ticket for Ingrid asks
 #    to change the contract first: A, open, the decision proposed, and its card. Everyone who reads the hours knows: the gold lanes,
 #    a breath of air, B flat major. Apollo 11 again: the lead's F, alone. The document between two systems laid down; 13% of the
 #    computer's time: a low knock. The checklist changed and the software learned to check: a page turned, D stepping up to F
@@ -263,7 +263,7 @@ C = lambda lid, word, off=0: W('contract', lid, word, off)
 tMd = C('mended', 'not its cause', -0.1)
 low(G2, tMd, tMd + 2.0, 0.65, att=0.4, rel=1.0); terp(D4, tMd + 0.12, tMd + 1.8, 0.45, px(520), att=0.3, rel=1.0)
 tap(C('good', 'a good one', 0.0), 0.007, px(560))
-paper(C('first', 'also asks', -0.2), 0.009, px(980), 0.35)
+paper(C('first', 'opens a ticket', -0.2), 0.009, px(980), 0.35)
 terp(A4, C('first', 'change the contract first', 0.0), C('first', 'change the contract first', 1.3), 0.45, px(1630), att=0.3, rel=0.9)
 knock(C('first', 'change the contract first', 0.0), 0.011, px(1630), 250)
 tKn = C('knows', 'everyone who reads', 0.0)

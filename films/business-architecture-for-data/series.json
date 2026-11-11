@@ -1,0 +1,65 @@
+{
+  "title": "Business architecture for data",
+  "title_es": "Arquitectura de negocio para datos",
+  "planned": 5,
+  "lead": "The second series on enterprise architecture. Tomás and the utility's owners draw what the business owns about its data: what each concept means, who creates and owns it, the processes it's born in, and the rules and quality the business expects of it.",
+  "lead_es": "La segunda serie sobre arquitectura empresarial. Tomás y los responsables de la empresa dibujan lo que pertenece al negocio en sus datos: qué significa cada concepto, quién lo crea y quién es su dueño, los procesos donde nace, y las reglas y la calidad que el negocio espera de él.",
+  "description": "Short films on business architecture for data: what the business owns and what the data team owns; industry reference models as a first draft; concepts drawn from capabilities, in the business's words; who creates each concept and who owns it; processes as deep as data needs; and the rules and quality expectations the business sets.",
+  "description_es": "Películas cortas sobre arquitectura de negocio para datos: de qué es dueño el negocio y de qué el equipo de datos; los modelos de referencia de la industria como primer borrador; conceptos que salen de las capacidades, en palabras del negocio; quién crea cada concepto y quién es su dueño; procesos tan profundos como lo necesitan los datos; y las reglas y expectativas de calidad que fija el negocio.",
+  "card": "What the business owns about its data: its concepts, their owners, the processes they're born in, and the rules on them.",
+  "card_es": "Lo que pertenece al negocio en sus datos: sus conceptos, sus dueños, los procesos donde nacen y las reglas sobre ellos.",
+  "order": "Watch them in order, after The map before the data: each film builds on the one before.",
+  "order_es": "Míralas en orden, después de El mapa antes de los datos: cada película se apoya en la anterior.",
+  "thread_h": "One thread: what the business owns",
+  "thread_h_es": "Un hilo: de qué es dueño el negocio",
+  "thread": "A request for all customers gets three answers, each right about its own meaning. Film by film, Tomás and the utility's owners draw what the business needs to know, who creates and owns each concept, the processes it's born in, and the rules and expectations the business sets for it.",
+  "thread_es": "Un pedido de todos los clientes recibe tres respuestas, cada una correcta según su propio significado. Película a película, Tomás y los responsables de la empresa dibujan lo que el negocio necesita saber, quién crea cada concepto y quién es su dueño, los procesos donde nace, y las reglas y expectativas que el negocio fija para él.",
+  "past_h": "One story, film by film: the qanats of Iran",
+  "past_h_es": "Una historia, película a película: los qanats de Irán",
+  "people_h": "Who knows the place",
+  "people_h_es": "Quién conoce el lugar",
+  "people": [
+    [
+      "tech",
+      "Draws the map",
+      "Tomás Herrera, the enterprise architect, the series' guide"
+    ],
+    [
+      "biz",
+      "Runs the network",
+      "Grace Achieng, who owns network operations"
+    ],
+    [
+      "biz",
+      "Speaks for customers",
+      "Farah Siddiqui, the customer advocate"
+    ],
+    [
+      "biz",
+      "Knows the rules",
+      "Ama Owusu, the regulatory lead"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Tomás Herrera, el arquitecto empresarial, el guía de la serie"
+    ],
+    [
+      "biz",
+      "Hace funcionar la red",
+      "Grace Achieng, dueña de las operaciones de la red"
+    ],
+    [
+      "biz",
+      "Habla por los clientes",
+      "Farah Siddiqui, la defensora de los clientes"
+    ],
+    [
+      "biz",
+      "Conoce las reglas",
+      "Ama Owusu, la responsable regulatoria"
+    ]
+  ]
+}

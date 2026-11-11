@@ -203,6 +203,30 @@ Source: [films/enterprise-architecture](../films/enterprise-architecture/) · Po
 
 Labs and assessments: [site/assets/enterprise-architecture/learn.en.js](../site/assets/enterprise-architecture/learn.en.js), [site/assets/enterprise-architecture/learn.es.js](../site/assets/enterprise-architecture/learn.es.js)
 
+### Business architecture for data
+
+Source: [films/business-architecture-for-data](../films/business-architecture-for-data/) · Portal: `/business-architecture-for-data/`
+
+No film source yet.
+
+### Data architecture
+
+Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data-architecture/`
+
+No film source yet.
+
+### Platform and solution architecture
+
+Source: [films/platform-and-solution-architecture](../films/platform-and-solution-architecture/) · Portal: `/platform-and-solution-architecture/`
+
+No film source yet.
+
+### AI and continuous architecture
+
+Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-architecture/) · Portal: `/ai-and-continuous-architecture/`
+
+No film source yet.
+
 ## Master and reference data
 
 Module: `master-data` · [metadata](master-data/module.json)

@@ -2,7 +2,11 @@
   "order": 5,
   "id": "enterprise-architecture",
   "items": [
-    "enterprise-architecture"
+    "enterprise-architecture",
+    "business-architecture-for-data",
+    "data-architecture",
+    "platform-and-solution-architecture",
+    "ai-and-continuous-architecture"
   ],
   "name": {
     "en": "Enterprise architecture",

@@ -4,4 +4,5 @@ definition: Runs read-only queries as its caller, so the caller's masks and row 
 owner: Sam, platform team
 relationships:
 - serving: build it in development
+- serving: find why the night build failed
 status: confirmed

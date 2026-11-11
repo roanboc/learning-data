@@ -1,0 +1,11 @@
+# Decided: Platform and solution architecture
+
+The series' own decisions; those the four new architecture series share are in [`../business-architecture-for-data/decided.md`](../business-architecture-for-data/decided.md). With each film's rows (`<n-film>/decided.md`), they make the *Decided* table in [proposal.md](proposal.md): run `python site-tools/build_series.py` after adding a row.
+
+| Date | Decision |
+|---|---|
+| 11 November 2026 | *Platform and solution architecture* is eight films: *An application or a platform?*, *Inside the platform*, *One platform, or many*, *Where it meets the applications*, *Security all the way through*, *One solution, end to end*, *A road people choose* and *Built to change*. Platform architecture designs the shared platform once; solution architecture designs one need on it. Ravi Menon, platform lead, leads it. |
+| 11 November 2026 | Application or platform: an application has one purpose with its logic built in; a data platform gives shared capabilities on which many owners build their logic, the enterprise domain (cross-domain measures for performance and analysis) among them. The logic runs on the platform, never in its own components, and its owner is always the business. The platform has a business owner who answers to every domain that uses it. |
+| 11 November 2026 | *An application or a platform?* separates a platform product (Databricks, or another vendor's) from your data platform, the service built from it and the components, team and rules around it. |
+| 11 November 2026 | *One platform, or many* states the author's position: keep the architecture as simple as possible; few components, centralised, wins for most organisations; federation of platforms fits only a few; every platform brings its own governance layer. Data mesh is introduced as often the simplest architecture: it federates ownership on one self-serve platform. |
+| 11 November 2026 | *Where it meets the applications*: the integration platform and the data platform work better integrated, for operations and governance; each flow takes the route that's simplest, cheapest and easiest to govern, through the integration platform or native; every flow is on one map both teams govern. |

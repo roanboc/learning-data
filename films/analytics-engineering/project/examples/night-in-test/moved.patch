@@ -1,0 +1,31 @@
+From 304bf8332eb3044ce3fac42d3517f91eee0055fc Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Thu, 5 Nov 2026 10:00:00 +0000
+Subject: [PATCH] Sample: a tutor who moved to another unit this term
+
+To run the night of 4 November 2026 again on the sample: HR's contract
+T-26188, E-4417's casual contract to tutor HI101 in 2026 Semester 2,
+moves to the unit PH101 on 28 September. HR keeps both versions, as it
+keeps every version it records: the first, to HI101, until 28 September,
+and the second, to PH101, from then on.
+
+Only for the example (examples/night-in-test/): the project's sample
+keeps one version of each contract.
+---
+ .../analytics-engineering/project/data/hr_system/contracts.csv | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/films/analytics-engineering/project/data/hr_system/contracts.csv b/films/analytics-engineering/project/data/hr_system/contracts.csv
+index a02070c..7456be4 100644
+--- a/films/analytics-engineering/project/data/hr_system/contracts.csv
++++ b/films/analytics-engineering/project/data/hr_system/contracts.csv
+@@ -10,4 +10,5 @@ T-25172,E-4417,Casual Academic,Tutor,CAS,HI101,2025-S2,2025-07-21,2025-11-21,202
+ T-25190,E-4602,Casual Academic,Tutor,CAS,DA101,2025-S2,2025-07-21,2025-11-21,2025-07-11 02:00:00,,true,2026-07-20 02:00:00
+ T-26041,E-4417,Casual Academic,Tutor,CAS,HI101,2026-S1,2026-02-23,2026-06-27,2026-04-06 02:00:00,,true,2026-07-20 02:00:00
+ T-26058,E-4602,Casual Academic,Tutor,CAS,DA101,2026-S1,2026-02-23,2026-06-27,2026-02-13 02:00:00,,true,2026-07-20 02:00:00
+-T-26188,E-4417,Casual Academic,Tutor,CAS,HI101,2026-S2,2026-07-20,2026-11-20,2026-07-14 02:00:00,,true,2026-07-20 02:00:00
++T-26188,E-4417,Casual Academic,Tutor,CAS,HI101,2026-S2,2026-07-20,2026-11-20,2026-07-14 02:00:00,2026-09-28 02:00:00,false,2026-07-20 02:00:00
++T-26188,E-4417,Casual Academic,Tutor,CAS,PH101,2026-S2,2026-07-20,2026-11-20,2026-09-28 02:00:00,,true,2026-11-04 22:41:00
+-- 
+2.43.0
+

@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En 1972, tres jóvenes ingenieros ferroviarios escribieron que los trenes ya no daban lo que la gente quería, y que el horario era la clave.",
 "The railways' own plan, new fast lines across the country, would cost billions, and in the early 1980s it was dropped.":
 "El plan de los ferrocarriles, nuevas líneas rápidas por todo el país, costaría miles de millones, y a inicios de los ochenta se abandonó.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"With no money for new lines, the trains had to win people back another way.":
+"Sin dinero para líneas nuevas, los trenes tenían que recuperar a la gente de otro modo.",
 "From 23 May 1982, the trains ran by the clock: every line, every hour, at the same minutes past.":
 "Desde el 23 de mayo de 1982, los trenes siguieron el reloj: cada línea, cada hora, a los mismos minutos.",
 "Then the railways turned planning around: Rail 2000 started from the timetable people wanted.":

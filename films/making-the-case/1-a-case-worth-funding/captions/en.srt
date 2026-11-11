@@ -27,233 +27,233 @@ A canal could carry it, but it would run 363 miles, through forest and swamp.
 The federal government wouldn't pay; President Jefferson had called the idea little short of madness. Critics called it Clinton's Ditch.
 
 8
-00:00:51,262 --> 00:00:52,650
-Something had to change.
+00:00:51,262 --> 00:00:54,710
+If Washington wouldn't pay, the canal needed someone who would.
 
 9
-00:00:54,750 --> 00:00:59,962
+00:00:56,810 --> 00:01:02,022
 DeWitt Clinton and the state's canal commissioners made the case to New York's legislature.
 
 10
-00:01:01,662 --> 00:01:09,862
+00:01:03,722 --> 00:01:11,922
 Where it would run, from the Hudson to Lake Erie; what it would cost, about seven million dollars; and how taxes and tolls would repay it.
 
 11
-00:01:11,962 --> 00:01:16,462
+00:01:14,022 --> 00:01:18,522
 On 15 April 1817, the legislature said yes.
 
 12
-00:01:18,362 --> 00:01:26,188
+00:01:20,422 --> 00:01:28,248
 Thousands dug it with picks and shovels, many just arrived from Ireland and Wales, led by engineers who learned on the job.
 
 13
-00:01:27,888 --> 00:01:33,982
+00:01:29,948 --> 00:01:36,042
 It crossed the homelands of the Haudenosaunee nations, much of it taken from them in the years before.
 
 14
-00:01:36,082 --> 00:01:41,235
+00:01:38,142 --> 00:01:43,295
 It opened on 26 October 1825, two years ahead of plan.
 
 15
-00:01:43,135 --> 00:01:48,374
+00:01:45,195 --> 00:01:50,434
 Moving a ton now cost under nine dollars, not a hundred, and took days, not weeks.
 
 16
-00:01:50,274 --> 00:01:53,639
+00:01:52,334 --> 00:01:55,699
 Within ten years, the tolls had paid back the seven million.
 
 17
-00:01:55,539 --> 00:01:59,454
+00:01:57,599 --> 00:02:01,514
 Within fifteen years, New York was the busiest port in the country.
 
 18
-00:02:01,354 --> 00:02:06,987
+00:02:03,414 --> 00:02:09,047
 A data team asks for money too: to build something new, or to stop paying for something old.
 
 19
-00:02:08,487 --> 00:02:16,343
+00:02:10,547 --> 00:02:18,403
 Its case needs the same parts: the choices, what each costs once and every year, what it saves, and who will see the benefit.
 
 20
-00:02:24,443 --> 00:02:27,094
+00:02:26,503 --> 00:02:29,154
 May 2027, at the university.
 
 21
-00:02:28,794 --> 00:02:33,352
+00:02:30,854 --> 00:02:35,412
 The old warehouse has run on the university's own servers since 2012.
 
 22
-00:02:34,852 --> 00:02:40,587
+00:02:36,912 --> 00:02:42,647
 Its licence, servers and support cost A$310,000 a year.
 
 23
-00:02:42,287 --> 00:02:48,749
+00:02:44,347 --> 00:02:50,809
 The licence ends on 31 December; if nobody decides, it renews for three more years.
 
 24
-00:02:50,649 --> 00:02:57,776
+00:02:52,709 --> 00:02:59,836
 Helena Novak, the data manager, will ask the data council to retire it, on Tuesday 25 May.
 
 25
-00:02:59,476 --> 00:03:06,129
+00:03:01,536 --> 00:03:08,189
 She starts from the decision she needs, in one line: retire the old warehouse this year, or pay for three more.
 
 26
-00:03:08,229 --> 00:03:16,602
+00:03:10,289 --> 00:03:18,662
 Governance gets a budget line every year, as A capability, not a project showed. This ask is money once, to stop paying every year.
 
 27
-00:03:18,502 --> 00:03:23,807
+00:03:20,562 --> 00:03:25,867
 A good case answers five questions; the UK Treasury's Five Case Model names them.
 
 28
-00:03:25,107 --> 00:03:30,324
+00:03:27,167 --> 00:03:32,384
 Is it needed? Is it the best value? Can it be bought? Can it be afforded? Can it be delivered?
 
 29
-00:03:32,224 --> 00:03:35,035
+00:03:34,284 --> 00:03:37,095
 Helena uses them as a checklist, not a form.
 
 30
-00:03:37,735 --> 00:03:42,601
+00:03:39,795 --> 00:03:44,661
 Then the options, and one always carries on as now: doing nothing has a price too.
 
 31
-00:03:43,801 --> 00:03:51,344
+00:03:45,861 --> 00:03:53,404
 Option A: renew the licence for three years. A$930,000, for an old version on old servers.
 
 32
-00:03:52,544 --> 00:03:58,439
+00:03:54,604 --> 00:04:00,499
 Option B: move all 38 reports as they are. A$520,000, once.
 
 33
-00:03:59,639 --> 00:04:02,673
+00:04:01,699 --> 00:04:04,733
 But the warehouse's own logs show who opens what.
 
 34
-00:04:03,673 --> 00:04:12,177
+00:04:05,733 --> 00:04:14,237
 17 of the 38 reports haven't been opened in a year. The other 21 are used by about 260 people.
 
 35
-00:04:13,377 --> 00:04:23,817
+00:04:15,437 --> 00:04:25,877
 Option C: move those 21, rebuilt on the platform from governed products, and retire the 17 nobody opens. A$380,000, once.
 
 36
-00:04:25,217 --> 00:04:30,760
+00:04:27,277 --> 00:04:32,820
 C is the one Helena recommends. A and B stay on the page, so the council can see why.
 
 37
-00:04:33,360 --> 00:04:38,887
+00:04:35,420 --> 00:04:40,947
 Then the costs, once and every year: the canal's case counted its tolls, not only the digging.
 
 38
-00:04:39,887 --> 00:04:47,250
+00:04:41,947 --> 00:04:49,310
 Running the 21 rebuilt reports will cost about A$40,000 a year, from the platform's own cost records.
 
 39
-00:04:48,250 --> 00:04:58,025
+00:04:50,310 --> 00:05:00,085
 So A$310,000 a year stops, and A$40,000 starts: a saving of A$270,000 a year, from January 2028.
 
 40
-00:04:59,425 --> 00:05:07,784
+00:05:01,485 --> 00:05:09,844
 The A$380,000 is paid back in about 17 months: the case's payback, the time until the saving covers the cost.
 
 41
-00:05:09,184 --> 00:05:12,834
+00:05:11,244 --> 00:05:14,894
 Over five years, it saves A$970,000.
 
 42
-00:05:13,834 --> 00:05:20,144
+00:05:15,894 --> 00:05:22,204
 Rohan Desai, Finance's management accountant, checks every figure before it goes to the council.
 
 43
-00:05:20,944 --> 00:05:24,210
+00:05:23,004 --> 00:05:26,270
 Then the council can argue about the choice, not the numbers.
 
 44
-00:05:26,810 --> 00:05:29,483
+00:05:28,870 --> 00:05:31,543
 Then the benefits, each with an owner and a date.
 
 45
-00:05:30,983 --> 00:05:39,145
+00:05:33,043 --> 00:05:41,205
 The saving, from January 2028, belongs to the director of digital services, whose budget pays for the licence today.
 
 46
-00:05:41,045 --> 00:05:42,599
+00:05:43,105 --> 00:05:44,659
 Some benefits aren't money.
 
 47
-00:05:43,899 --> 00:05:51,311
+00:05:45,959 --> 00:05:53,371
 Every report reads one staff list, not the warehouse's old copy: Ingrid Holm in HR owns that, from December.
 
 48
-00:05:53,211 --> 00:05:59,775
+00:05:55,271 --> 00:06:01,835
 And every report has an owner, named in the catalog by March 2028: that benefit is Helena's.
 
 49
-00:06:01,675 --> 00:06:10,032
+00:06:03,735 --> 00:06:12,092
 Benefits management, as John Ward and Elizabeth Daniel describe it, adds one more step: track the benefits after the decision.
 
 50
-00:06:11,732 --> 00:06:18,257
+00:06:13,792 --> 00:06:20,317
 Each quarter, the council will see each benefit against its date. Without that, the case was only a pitch.
 
 51
-00:06:20,957 --> 00:06:24,270
+00:06:23,017 --> 00:06:26,330
 Tuesday 25 May. The data council meets.
 
 52
-00:06:25,470 --> 00:06:29,064
+00:06:27,530 --> 00:06:31,124
 Helena has ten minutes and one page, with Rohan beside her.
 
 53
-00:06:30,064 --> 00:06:35,481
+00:06:32,124 --> 00:06:37,541
 The page leads with the decision; the leading data people module shows how to write one.
 
 54
-00:06:36,481 --> 00:06:43,898
+00:06:38,541 --> 00:06:45,958
 Then the ask, said plainly: A$380,000 and two of the team for six months, and a decision today.
 
 55
-00:06:45,498 --> 00:06:49,550
+00:06:47,558 --> 00:06:51,610
 Mei, from the registrar's office, asks what waiting a year would cost.
 
 56
-00:06:50,550 --> 00:06:58,520
+00:06:52,610 --> 00:07:00,580
 The answer is on the page: waiting is option A, three more years of the old licence, A$930,000.
 
 57
-00:06:59,920 --> 00:07:01,602
+00:07:01,980 --> 00:07:03,662
 The council says yes, that day.
 
 58
-00:07:04,202 --> 00:07:10,189
+00:07:06,262 --> 00:07:12,249
 The Erie Canal's case put one decision plainly: the route, the cost, and how it would be paid back.
 
 59
-00:07:11,889 --> 00:07:19,984
+00:07:13,949 --> 00:07:22,044
 Its tolls repaid it within ten years. Helena's case should repay itself in 17 months, and the council will see it every quarter.
 
 60
-00:07:21,884 --> 00:07:24,314
+00:07:23,944 --> 00:07:26,374
 On Monday, start from the decision you need.
 
 61
-00:07:25,414 --> 00:07:27,862
+00:07:27,474 --> 00:07:29,922
 Always show the option of carrying on as now.
 
 62
-00:07:28,962 --> 00:07:31,174
+00:07:31,022 --> 00:07:33,234
 Count running costs, not only building.
 
 63
-00:07:32,274 --> 00:07:35,476
+00:07:34,334 --> 00:07:37,536
 Give each benefit an owner and a date, and track it after.
 
 64
-00:07:36,576 --> 00:07:41,950
+00:07:38,636 --> 00:07:44,010
 Have Finance check the money. One page, ten minutes, and ask for a decision, with a date.
 
 65
-00:07:43,450 --> 00:07:46,959
+00:07:45,510 --> 00:07:49,019
 Options, costs, benefits with owners, and one clear ask.

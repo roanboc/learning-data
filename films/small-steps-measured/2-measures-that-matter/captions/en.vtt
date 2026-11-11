@@ -21,179 +21,179 @@ Is the baby well? Each doctor judges by eye, in words like mild or severe, and e
 00:00:52.760 --> 00:00:58.713
 So a baby in trouble can be missed until it's too late, and no hospital can tell whether what it does helps.
 
-00:01:00.813 --> 00:01:02.253
-Something has to change.
+00:01:00.813 --> 00:01:04.593
+Doctors need words for a newborn that mean the same to everyone.
 
-00:01:04.153 --> 00:01:10.917
+00:01:06.493 --> 00:01:13.257
 In 1952, Apgar proposes a score that anyone in the room can take, the same way every time.
 
-00:01:12.617 --> 00:01:20.384
+00:01:14.957 --> 00:01:22.724
 One minute after birth, five signs: the heartbeat, breathing, how firmly the baby moves, how it reacts when touched, and its colour.
 
-00:01:22.284 --> 00:01:26.015
+00:01:24.624 --> 00:01:28.355
 Each gets zero, one or two. Ten is a baby doing well.
 
-00:01:27.715 --> 00:01:32.432
+00:01:30.055 --> 00:01:34.772
 She tries it on over a thousand babies, and publishes it in 1953.
 
-00:01:34.132 --> 00:01:38.889
+00:01:36.472 --> 00:01:41.229
 Now a baby in trouble shows at once, as a low score, to everyone in the room.
 
-00:01:40.589 --> 00:01:42.674
+00:01:42.929 --> 00:01:45.014
 And doctors can compare what they do.
 
-00:01:43.574 --> 00:01:50.582
+00:01:45.914 --> 00:01:52.922
 After a caesarean, babies whose mothers were put to sleep scored five on average; with a spinal anaesthetic, eight.
 
-00:01:52.482 --> 00:01:59.612
+00:01:54.822 --> 00:02:01.952
 By the early 1960s many hospitals used it; today most score every baby at one minute, and again at five.
 
-00:02:01.312 --> 00:02:08.941
+00:02:03.652 --> 00:02:11.281
 Newborn deaths fell, for many reasons, from about twenty in a thousand in 1950 to under four by 2016.
 
-00:02:10.841 --> 00:02:15.787
+00:02:13.181 --> 00:02:18.127
 A data team can be busy every day, and still not know whether people get what they need.
 
-00:02:17.287 --> 00:02:20.618
+00:02:19.627 --> 00:02:22.958
 A few measures, taken the same way every month, can show it.
 
-00:02:28.718 --> 00:02:36.710
+00:02:31.058 --> 00:02:39.050
 July 2027, at the university. Helena Novak's data strategy promised the team's measures on one page.
 
-00:02:38.610 --> 00:02:44.762
+00:02:40.950 --> 00:02:47.102
 The easy things to count are what keeps a team busy: requests closed, hours worked, reports built.
 
-00:02:46.462 --> 00:02:50.116
+00:02:48.802 --> 00:02:52.456
 Each of them can rise while the people who asked are still waiting.
 
-00:02:52.016 --> 00:02:56.774
+00:02:54.356 --> 00:02:59.114
 So Helena starts from what people get, and from the decisions the measures will serve.
 
-00:02:58.474 --> 00:03:03.697
+00:03:00.814 --> 00:03:06.037
 For every measure, one question: when it moves, what will we do differently, and who decides?
 
-00:03:05.597 --> 00:03:11.085
+00:03:07.937 --> 00:03:13.425
 Data governance already measures itself this way, from the work, as Teachers of data showed.
 
-00:03:13.785 --> 00:03:18.933
+00:03:16.125 --> 00:03:21.273
 In 1992, Robert Kaplan and David Norton called it a balanced scorecard:
 
-00:03:19.133 --> 00:03:23.605
+00:03:21.473 --> 00:03:25.945
 a few measures, in groups, so a gain in one place can't hide a loss in another.
 
-00:03:25.505 --> 00:03:27.383
+00:03:27.845 --> 00:03:29.723
 Helena's page has three groups.
 
-00:03:28.683 --> 00:03:35.334
+00:03:31.023 --> 00:03:37.674
 Delivery: days from ask to first use, what's sent back for changes, and how much work is open at once.
 
-00:03:37.034 --> 00:03:40.719
+00:03:39.374 --> 00:03:43.059
 Data management: products with an owner, and their promise met.
 
-00:03:42.419 --> 00:03:48.652
+00:03:44.759 --> 00:03:50.992
 And value: benefits against each case, decisions informed, people using the products each month,
 
-00:03:48.852 --> 00:03:52.449
+00:03:51.192 --> 00:03:54.789
 and two questions, twice a year, to the people the team serves.
 
-00:03:54.349 --> 00:03:57.849
+00:03:56.689 --> 00:04:00.189
 Eight measures on one page. Apgar needed five signs.
 
-00:03:59.749 --> 00:04:03.161
+00:04:02.089 --> 00:04:05.501
 Anything else can still be counted; it just stays off the page.
 
-00:04:05.861 --> 00:04:11.907
+00:04:08.201 --> 00:04:14.247
 Each measure gets four things: a baseline, one definition, a reader, and the decision it serves.
 
-00:04:13.607 --> 00:04:21.574
+00:04:15.947 --> 00:04:23.914
 Take days from ask to first use. Its baseline came first, from February, before anything changed: 41 working days.
 
-00:04:23.474 --> 00:04:26.787
+00:04:25.814 --> 00:04:29.127
 Its one definition lives in the catalog's glossary:
 
-00:04:26.987 --> 00:04:32.423
+00:04:29.327 --> 00:04:34.763
 working days from a request reaching the one list to its first use by the person who asked.
 
-00:04:34.323 --> 00:04:39.161
+00:04:36.663 --> 00:04:41.501
 Its readers: the team, every second Thursday, and the data council, every month.
 
-00:04:40.661 --> 00:04:43.715
+00:04:43.001 --> 00:04:46.055
 And its decision: where to take the waiting out of the work.
 
-00:04:45.415 --> 00:04:53.799
+00:04:47.755 --> 00:04:56.139
 Beside it sits a quality measure, sent back: the share of finished work that people send back for changes. In July, one piece in eight.
 
-00:04:55.699 --> 00:04:59.973
+00:04:58.039 --> 00:05:02.313
 Without it, speed could hide rework: half-done work sent out, and back again.
 
-00:05:01.673 --> 00:05:05.640
+00:05:04.013 --> 00:05:07.980
 The page itself is a small governed product, and Helena owns it.
 
-00:05:08.340 --> 00:05:12.094
+00:05:10.680 --> 00:05:14.434
 By June, days from ask to first use had fallen to 24.
 
-00:05:13.794 --> 00:05:21.429
+00:05:16.134 --> 00:05:23.769
 On the page, each measure is a line across the months, its baseline drawn beneath it, never one number lit red or green.
 
-00:05:23.329 --> 00:05:30.164
+00:05:25.669 --> 00:05:32.504
 On Thursday 12 August, products' promises met stood at 82 percent, up from 58 in March.
 
-00:05:31.864 --> 00:05:40.756
+00:05:34.204 --> 00:05:43.096
 Alone, that looked fine. Beside it, nine pieces of work were open against a limit of six: new work was starting before old work finished.
 
-00:05:42.856 --> 00:05:47.690
+00:05:45.196 --> 00:05:50.030
 So the team finished before it started, and by mid-September the load was six again.
 
-00:05:49.590 --> 00:05:59.052
+00:05:51.930 --> 00:06:01.392
 Value has its lines too. A decision informed: on 24 June, the University Council deferred a new building, using the rooms' data.
 
-00:06:00.952 --> 00:06:09.922
+00:06:03.292 --> 00:06:12.262
 And a benefit against its case: retiring the old warehouse should save 270,000 Australian dollars a year from January,
 
-00:06:10.122 --> 00:06:12.664
+00:06:12.462 --> 00:06:15.004
 owned by the director of digital services.
 
-00:06:15.364 --> 00:06:24.729
+00:06:17.704 --> 00:06:27.069
 Every measure carries a risk. Goodhart's law, from 1975, as it's often put: when a measure becomes a target, it stops being a good measure.
 
-00:06:26.829 --> 00:06:34.682
+00:06:29.169 --> 00:06:37.022
 Apgar saw it in the delivery room: doctors scored their own babies several points higher than others did, so someone else took the score.
 
-00:06:36.782 --> 00:06:41.969
+00:06:39.122 --> 00:06:44.309
 Helena's measures are counted the same way: from the tracker and the platform's own logs.
 
-00:06:43.469 --> 00:06:48.371
+00:06:45.809 --> 00:06:50.711
 And first use is confirmed by the person who asked, never by the person who built it.
 
-00:06:50.071 --> 00:06:55.475
+00:06:52.411 --> 00:06:57.815
 And every measure is the team's: never one person's number, and never a target for anyone.
 
-00:06:57.375 --> 00:07:02.070
+00:06:59.715 --> 00:07:04.410
 How the team reads its measures together is told in the leading data people module.
 
-00:07:04.770 --> 00:07:11.187
+00:07:07.110 --> 00:07:13.527
 In New York, five signs, taken the same way, by someone else, made every baby seen in its first minute.
 
-00:07:13.087 --> 00:07:21.580
+00:07:15.427 --> 00:07:23.920
 By December, Helena's page showed what people got: 14 days from ask to first use, not 41, and half as much sent back.
 
-00:07:23.280 --> 00:07:29.219
+00:07:25.620 --> 00:07:31.559
 Promises met: 86 percent. People using the products each month: 910.
 
-00:07:30.919 --> 00:07:36.544
+00:07:33.259 --> 00:07:38.884
 And the old warehouse was retired on 17 December, its saving starting in January.
 
-00:07:38.444 --> 00:07:41.430
+00:07:40.784 --> 00:07:43.770
 On Monday, list the decisions your measures will serve.
 
-00:07:42.530 --> 00:07:44.019
+00:07:44.870 --> 00:07:46.359
 Keep them few, in groups.
 
-00:07:45.119 --> 00:07:49.630
+00:07:47.459 --> 00:07:51.970
 Take a baseline before you change anything, and write one definition for each.
 
-00:07:50.730 --> 00:07:54.372
+00:07:53.070 --> 00:07:56.712
 Put a quality measure beside every speed measure, and show the trend.
 
-00:07:55.872 --> 00:07:59.630
+00:07:58.212 --> 00:08:01.970
 And keep every measure for the team, never a target for one person.

@@ -55,8 +55,8 @@ scene("street",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       lp_person(x,PF_PEOPLE.shopkeeper,700,640,1.0,{t:tt,light:{light:"day"}});
       pf_sheet(x,tt,w("fear","feared",-0.2),1060,170,700,{kick:"The shopkeepers' fear",title:"No cars, no customers",lines:["Their sales would fall"]},
         {col:LP.amber,light:null,pin:false,out:c.change-0.5,u:ag_in(tt,w("fear","sales",-0.1),0.5)});
-      pf_tag(x,tt,w("change","Something",-0.1),null,1410,140,"Something had to change",{align:"center",col:LP.amber});
-      const p0=w("change","plan",-0.2);if(tt>=p0)pf_sketch(x,1060,210,700,{a:ag_in(tt,p0,0.35),k:tt-p0});
+      pf_tag(x,tt,w("change","Arguing",-0.1),null,1410,140,"Plans on paper",{align:"center",col:LP.amber});
+      const p0=w("change","plans",-0.2);if(tt>=p0)pf_sketch(x,1060,210,700,{a:ag_in(tt,p0,0.35),k:tt-p0});
       pf_tag(x,tt,w("change","show",-0.2),null,1410,700,"It can't show what the street would be like",{align:"center",col:LP.amber});}},
     // Friday night: the real thing, built fast; the crews at work, the first stones laid from the end of the street
     {at:c.real-0.3,place:"pfDusk",dis:1.4,keys:[[c.real-0.3,960,540,1.0]],draw:(x,tt)=>{

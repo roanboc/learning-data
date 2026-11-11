@@ -9,7 +9,7 @@ const NARR={
  {"id":"harm","gap":0.8,"text":"Without it, more people get skin cancer, more eyes are damaged, and crops grow less."},
  {"id":"hole","gap":0.8,"text":"In 1985, British scientists in Antarctica, Joe Farman, Brian Gardiner and Jonathan Shanklin, publish what they've measured there since 1957.","say":"In nineteen eighty-five, British scientists in Antarctica, Joe Farman, Brian Gardiner and Jonathan Shanklin, publish what they've measured there since nineteen fifty-seven."},
  {"id":"thin","gap":0.8,"text":"Each spring, the layer above them is now only about two thirds as thick as it once was."},
- {"id":"late","gap":0.8,"text":"Much is still unsure, but waiting until everyone is sure could be too late. Something has to change."},
+ {"id":"late","gap":0.8,"text":"Much is still unsure, but waiting until everyone is sure could be too late. The world has to act before it knows everything."},
  {"id":"sign","gap":0.8,"text":"On 16 September 1987, in Montreal, countries sign a treaty: the Montreal Protocol.","say":"On the sixteenth of September, nineteen eighty-seven, in Montreal, countries sign a treaty: the Montreal Protocol."},
  {"id":"first","gap":0.8,"text":"Its first step is modest: cut the main CFCs by half, by 1998.","say":"Its first step is modest: cut the main C F Cs by half, by nineteen ninety-eight."},
  {"id":"habit","gap":0.8,"text":"But it builds in a habit: from 1990, and at least every four years, look at the science again, and decide whether to go further.","say":"But it builds in a habit: from nineteen ninety, and at least every four years, look at the science again, and decide whether to go further."},

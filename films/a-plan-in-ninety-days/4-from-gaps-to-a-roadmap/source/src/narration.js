@@ -9,7 +9,7 @@ const NARR={
  {"id":"debt","gap":0.8,"text":"Fewer people rode, and the railways ran at a loss."},
  {"id":"engineers","gap":0.8,"text":"In 1972, three young railway engineers wrote that the trains no longer fit what people wanted, and the timetable was the heart of it.","say":"In nineteen seventy-two, three young railway engineers wrote that the trains no longer fit what people wanted, and the timetable was the heart of it."},
  {"id":"fast","gap":0.8,"text":"The railways' own plan, new fast lines across the country, would cost billions, and in the early 1980s it was dropped.","say":"The railways' own plan, new fast lines across the country, would cost billions, and in the early nineteen eighties it was dropped."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"With no money for new lines, the trains had to win people back another way."},
  {"id":"clock","gap":0.8,"text":"From 23 May 1982, the trains ran by the clock: every line, every hour, at the same minutes past.","say":"From the twenty-third of May, nineteen eighty-two, the trains ran by the clock: every line, every hour, at the same minutes past."},
  {"id":"around","gap":0.8,"text":"Then the railways turned planning around: Rail 2000 started from the timetable people wanted.","say":"Then the railways turned planning around: Rail two thousand started from the timetable people wanted."},
  {"id":"hubs","gap":0.8,"text":"In the big stations, the hubs, trains from every direction would arrive just before the hour and leave just after, so everyone could change."},

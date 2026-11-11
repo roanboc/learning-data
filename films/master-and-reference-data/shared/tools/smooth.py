@@ -12,7 +12,9 @@ film. Then it draws the film through:
   (publish.py draws as a picture anything kept that takes SLOW_PAINT or longer, so one this slow is one it missed), the film never
   reads the size of a picture the player decodes smaller, nine moments in ten take at most TYPICAL_LIMIT and none longer than
   FRAME_LIMIT, what the player keeps stays within its budget (WC_KEEP, with room for what one moment uses), and it makes at most
-  CANVAS_LIMIT new canvases a moment on average;
+  CANVAS_LIMIT new canvases a moment on average, and, once a second, the moment drawn again with every spare canvas emptied
+  is the same picture (the player reuses its canvases, and what an earlier, bigger person left in one showed as a thin line
+  along the right and bottom of the next one's picture, 10 November 2026);
 - then with the processor slowed four times, as on a phone, 559 px wide (the size the player falls back to on a slow device),
   a moment every two seconds: none takes longer than SLOW_LIMIT, so nothing holds the page for long.
 The limits leave room, about twice, for a slower machine than the one that drew the films (a browser with no graphics card, as
@@ -28,11 +30,14 @@ SLOW_LIMIT = 1.5      # seconds for one moment at 559 px with the processor slow
 CANVAS_LIMIT = 0.5    # new canvases a moment, on average: a film that makes one each moment fills the memory again
 SLOW_PAINT = 0.05     # seconds: a kept picture this slow to paint is drawn as a picture by tools/publish.py (its SLOW_PAINT)
 STEP, WIDTH, SLOW_STEP, SLOW_WIDTH = 0.25, 1118, 2.0, 559
+EDGE_EVERY = 4        # every this many moments (once a second), the moment is drawn again with the spare canvases emptied
+EDGE_LIMIT = 40       # pixels that may differ between the two: a line along a person is hundreds (about 2,000 in Where each piece
+                      # lives); a few pixels a shade apart, from rounding (3 in Who does what, end to end), are never seen
 
 # window.__RENDER__ stays false whatever the render page sets, so the film draws as the site's player draws it
 INIT = "Object.defineProperty(window,'__RENDER__',{get:()=>false,set:()=>{},configurable:false});"
 
-PASS = """async ({ step, width, pub, slow }) => {
+PASS = """async ({ step, width, pub, slow, edgeEvery, edgeLimit }) => {
   await FILM.ready; if (!WC.ready) await wc_prepSoft();
   const fn = typeof gv_place === 'function' ? 'gv_place' : 'wc_place', ks = typeof WC_PLACES !== 'undefined' ? Object.keys(WC_PLACES) : [];
   // what tools/publish.py draws as pictures, which the player shows and never paints: the film's places, and the kept pictures its
@@ -57,12 +62,25 @@ PASS = """async ({ step, width, pub, slow }) => {
   window.wc_kept = function (key, w, h) { if (WC.bg[key] || WC_PICS.pic[key]) return kept.apply(this, arguments); const a = performance.now(), c = kept.apply(this, arguments);
     c.getContext('2d').getImageData(0, 0, 1, 1); const s = (performance.now() - a) / 1000;
     if (published(key, w || W, h || H, s)) { pic(key, c); spare += s * 1000; made--; } else painted.push([key, false, +s.toFixed(3), +now.toFixed(2)]); return c; };
-  const cv = ce('canvas'); cv.width = width; cv.height = Math.round(width * 9 / 16); const x = cv.getContext('2d'), times = [];
+  const cv = ce('canvas'); cv.width = width; cv.height = Math.round(width * 9 / 16); const x = cv.getContext('2d'), times = [], left = [];
   try { for (now = 0.05; now < TL.total; now += step) { spare = 0; const a = performance.now(); x.setTransform(1, 0, 0, 1, 0, 0); renderFrame(x, width / W, now); x.getImageData(0, 0, 1, 1);
-      times.push([+((performance.now() - a - spare) / 1000).toFixed(3), +now.toFixed(2), SCENES[sceneIndex(now)].id]); if (fresh.length) await decoded(); } }
+      times.push([+((performance.now() - a - spare) / 1000).toFixed(3), +now.toFixed(2), SCENES[sceneIndex(now)].id]);
+      // every EDGE_EVERY moments, the same moment drawn again with every spare canvas emptied must be the same picture: nothing an
+      // earlier moment left in one may show (a line along the right and bottom of a person, 10 November 2026). It runs before what
+      // was painted this moment is decoded, so both draws show the same pictures
+      // (the moment is drawn once more first, and that is compared: a few things drawn depend on the moment before, such as a
+      // dashed line in Lists everyone uses, and those are not left in a canvas)
+      if (times.length % edgeEvery === 0) { x.setTransform(1, 0, 0, 1, 0, 0); renderFrame(x, width / W, now); const A = x.getImageData(0, 0, cv.width, cv.height).data;
+        for (const k in WC.buf) { const c = WC.buf[k], g = c.getContext('2d'); g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height); g.restore(); }
+        x.setTransform(1, 0, 0, 1, 0, 0); renderFrame(x, width / W, now); const B = x.getImageData(0, 0, cv.width, cv.height).data;
+        let n = 0, x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
+        for (let i = 0; i < A.length; i += 4) if (Math.abs(A[i] - B[i]) + Math.abs(A[i + 1] - B[i + 1]) + Math.abs(A[i + 2] - B[i + 2]) > 6) {
+          n++; const px = (i / 4) % cv.width, py = Math.floor(i / 4 / cv.width); x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); }
+        if (n > edgeLimit) left.push([+now.toFixed(2), SCENES[sceneIndex(now)].id, n, [x0, y0, x1, y1].map(v => Math.round(v * W / width))]); }
+      if (fresh.length) await decoded(); } }
   finally { window.wc_kept = kept; document.createElement = ce; }
   const over = Object.keys(WC_KEEP).filter(k => WC_PX[k] > WC_KEEP[k] * 1.5).map(k => [k, Math.round(WC_PX[k] / 1e6), Math.round(WC_KEEP[k] / 1e6)]);
-  return { times, painted, made, over, sized: [...sized], places: ks.length, pictures: Object.keys(WC_PICS.pic).length, tooth: !!WC.tooth }; }"""
+  return { left, times, painted, made, over, sized: [...sized], places: ks.length, pictures: Object.keys(WC_PICS.pic).length, tooth: !!WC.tooth }; }"""
 
 SLOW = """async ({ step, width }) => { const cv = document.createElement('canvas'); cv.width = width; cv.height = Math.round(width * 9 / 16); const x = cv.getContext('2d'), times = [];
   for (let t = 0.05; t < TL.total; t += step) { const a = performance.now(); x.setTransform(1, 0, 0, 1, 0, 0); renderFrame(x, width / W, t); x.getImageData(0, 0, 1, 1);
@@ -94,7 +112,7 @@ def check(p, render_html, places=None):
     pg.add_init_script(INIT)
     pg.goto(render_html.as_uri())
     pg.wait_for_function("window.FILM&&typeof TL!=='undefined'", timeout=120000)
-    r = pg.evaluate(PASS, {"step": STEP, "width": WIDTH, "pub": pub, "slow": SLOW_PAINT})
+    r = pg.evaluate(PASS, {"step": STEP, "width": WIDTH, "pub": pub, "slow": SLOW_PAINT, "edgeEvery": EDGE_EVERY, "edgeLimit": EDGE_LIMIT})
     cdp = pg.context.new_cdp_session(pg)
     cdp.send('Emulation.setCPUThrottlingRate', {'rate': 4})
     slow = pg.evaluate(SLOW, {"step": SLOW_STEP, "width": SLOW_WIDTH})
@@ -119,6 +137,12 @@ def check(p, render_html, places=None):
         if s <= SLOW_LIMIT:
             break
         faults.append('%.2f s (%s): with the processor slowed four times, the moment took %.2f s at %d px (at most %.2f)' % (at, sc, s, SLOW_WIDTH, SLOW_LIMIT))
+    for at, sc, px, box in r['left'][:5]:
+        faults.append('%.2f s (%s): %d pixels differ when the moment is drawn again with the spare canvases emptied, around x %d to %d, '
+                      'y %d to %d: an earlier moment left something in a reused canvas and it shows (as a line along the right and bottom '
+                      'of a person did): clear past what is copied out of it (wc_bufAt)' % (at, sc, px, box[0], box[2], box[1], box[3]))
+    if len(r['left']) > 5:
+        faults.append('... and %d more moments like that' % (len(r['left']) - 5))
     for key in r['sized']:
         faults.append('%s: the film reads the width or height of this picture, which the player decodes smaller on a small screen '
                       '(WC_SMALL): draw it at its size in the film, and leave its size alone' % key)

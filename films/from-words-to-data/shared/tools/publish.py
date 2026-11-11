@@ -29,7 +29,7 @@ SLOW_PAINT = 0.05  # seconds: a kept picture that takes this long to paint here 
 # shows. Then paints again, with the people in, each kept picture the size of the frame or larger (such as a place at twice the size
 # for close-ups) and each that takes SLOW_PAINT or longer (an open binder, a sketch). Returns {what wc_kept calls it: [the picture as
 # a WebP data URL, [the moments], [width, height]]}: the places, and those other pictures.
-PLACES_JS = """async ({ step, slow }) => {
+PLACES_JS = """async ({ step, slow, before }) => {
   const fn = typeof gv_place === 'function' ? 'gv_place' : 'wc_place', out = {}, seen = {}, size = {}, paint = {}, big = W * H;
   for (const k of Object.keys(WC_PLACES)) { const key = 'place:' + k, c = window[fn](k); out[key] = c.toDataURL('image/webp', 0.8); size[key] = [c.width, c.height];
     await new Promise(r => setTimeout(r, 0)); }
@@ -42,9 +42,19 @@ PLACES_JS = """async ({ step, slow }) => {
       renderFrame(x, 0.1, t); for (const k of now) (seen[k] = seen[k] || []).push(+t.toFixed(2)); } }
   finally { Object.assign(window, keep); now = null; }
   for (const key in paint) { const [w, h] = size[key], c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d'), a = performance.now();
-    paint[key](x); x.getImageData(0, 0, 1, 1); if (w * h >= big || performance.now() - a >= slow * 1000) out[key] = c.toDataURL('image/webp', 0.8);
+    paint[key](x); x.getImageData(0, 0, 1, 1); if (w * h >= big || performance.now() - a >= slow * 1000 || before.includes(key)) out[key] = c.toDataURL('image/webp', 0.8);
     await new Promise(r => setTimeout(r, 0)); }
   const r = {}; for (const k in out) r[k] = [out[k], seen[k] || [], size[k]]; return r; }"""
+
+
+# what the film's places.json already lists stays a picture: how long a picture takes to paint depends on the machine, and one
+# drawn as a picture on a slower machine was dropped again on a faster one (10 November 2026), to be painted while the film plays
+def before():
+    f = REPO / 'site' / 'assets' / META['key'] / 'places' / 'places.json'
+    try:
+        return list(json.loads(f.read_text()).get('places', {})) if f.exists() else []
+    except ValueError:
+        return []
 
 
 def spans(ts):
@@ -93,7 +103,7 @@ with sync_playwright() as p:
     t = s['start'] + s['cues'][cid] + off
     pg.evaluate("CAPS_ON=false")
     d = pg.evaluate("""(t)=>{const c=document.createElement('canvas');c.width=1280;c.height=720;renderFrame(c.getContext('2d'),1280/1920,t);return c.toDataURL('image/jpeg',0.88);}""", t)
-    places = pg.evaluate(PLACES_JS, {'step': STEP, 'slow': SLOW_PAINT}) if pg.evaluate("typeof WC_PLACES!=='undefined'&&typeof wc_pic==='function'") else None
+    places = pg.evaluate(PLACES_JS, {'step': STEP, 'slow': SLOW_PAINT, 'before': before()}) if pg.evaluate("typeof WC_PLACES!=='undefined'&&typeof wc_pic==='function'") else None
     b.close()
 player = hashlib.sha256((dst / 'film.js').read_bytes()).hexdigest()[:16]
 pics = dst / 'places'

@@ -1,0 +1,20 @@
+# Borrowed from the brain: questions and assumptions
+
+*AI agents in data work* · *What an agent is*, film 2 · the brain as a prediction machine, 11 November 2026 · pull request to follow
+
+[Watch it on the site](https://data.learn-all.org/what-an-agent-is/borrowed-from-the-brain/)
+
+One row for each question this update would have asked Rodrigo, and the assumption taken so the work could go on.
+
+| # | Topic | The question I'd have asked Rodrigo | The assumption I took | Where it shows | Easy to change? |
+|---|---|---|---|---|---|
+| 1 | The reference | Which framework should the new part follow? | Predictive processing (Helmholtz; Rao and Ballard, 1999; Friston; Clark, 2016), with reward prediction error (Schultz, Dayan and Montague, 1997), cybernetics (the good regulator) and data observability named as alternatives; the narration says "many scientists now think", since the strong forms are argued | `script.md`, *The reference, and practice*; chapter *A step ahead* | Easy: a line and the script |
+| 2 | The new hook | Should the sea squirt replace Cajal's opening story, or come before it? | It comes before the perceptron, as a short hook (about 40 s): Cajal's story stays the film's opening story, with its four beats unchanged | Chapter *Why look to nature* | Medium: a shot and eight lines |
+| 3 | "Eats its own brain" | Keep the popular line? | Said, then corrected: "Not quite: its body takes the tail, and most of the brain, apart, and uses them again" | Line "eats" | Easy: one line |
+| 4 | Length | The film grows from 8:59 to 12:24. Too long? | Kept, with the maple seed cut to make room; *A step ahead* runs at 139 words a minute (limit 140) | The whole film | Medium: cutting a chapter would mean re-timing the score |
+| 5 | The data story | Which data example for the bridge? | An invented university's nightly course registrations: about 4,100 rows on most Mondays, 2,030 the night City campus sent nothing; a column renamed course_id to course_code. The same numbers in the labs | Chapter *A loop that expects*; `labs/make_data.py` | Easy: numbers in lines, cards and the data maker |
+| 6 | Who decides | Does the agent fix the reports? | No: it adapts only where no number changes (the renamed column) and shows a person the rest, with its evidence, as the module's rule says (agents never approve) | Lines "adapt", "person" | Easy |
+| 7 | The labs | Python notebooks, Databricks, or plain scripts? | Plain Python scripts, standard library only, so they run anywhere: three labs (reflex and predictor; the foraging loop; learning from the miss), each with starter code, a solution and `check.py`; a repository test keeps them in step | `films/what-an-agent-is/2-borrowed-from-the-brain/labs/` | Easy to port to notebooks later |
+| 8 | Labs on the site | Where do they go, and how are they numbered? | Two short site labs (*A reflex, or a guess?*, *The foraging loop*) and scenarios 22 and 23, placed after *Spin the wheel* so the series' list numbers them in order; the page links the Python labs on GitHub | `site/assets/what-an-agent-is/learn.en.js`, `learn.es.js`; `site.json` | Easy |
+| 9 | Sources | Are the new facts right? | Checked online on 11 November 2026 and two lines corrected: the larva's 177 cells are its brain and nerve cord, not its brain alone ("a tiny brain and nerve cord of about 180 nerve cells"), and Schultz's cells dip below their usual rate when the juice is missing, rather than fall silent ("their firing dipped"). Confirmed: about a millimetre long; about six hours of swimming on average; glued by the papillae at the front of its head; most of the larval nervous system broken down; dragonflies' median success 83 to 95%, "about nine in ten"; the stopped-escalator stumble | `script.md`, rigour sheet; lines "young" and "quiet" | Easy |
+| 10 | Spanish | Which words? | La ascidia, el error de predicción, el bucle (as in *A model, reasoning, hands and a loop*), forrajear for the lab's foraging; thousands with a comma, as the series writes them. The Spanish soundtrack is rebuilt from the captions | Spanish captions, page, labs | Easy |

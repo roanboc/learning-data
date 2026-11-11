@@ -2,7 +2,7 @@
 
 *The third series of the module Modern data basics.*
 
-Serving data to people, agents and systems. Rohan Desai, in Finance, asks what casual teaching cost the Faculty of Health this semester, and the answer used to wait for a report. Three films: reports on demand (answers asked for when they're needed, with dashboards kept for the questions asked again and again), define it once (good models and their context in a semantic layer, each measure defined once in an open format), and more readers than people (the same definitions read by dashboards, agents, BI tools, apps and other systems). *Data as software* comes before it; *Documents as data* follows. The plan for the module is in [`../data-that-moves/proposal.md`](../data-that-moves/proposal.md); this series' own part is in its [proposal](proposal.md).
+Serving data to people, agents and systems. Rohan Desai, in Finance, asks what casual teaching cost the Faculty of Health this semester, and the answer used to wait for a report. Three films: reports on demand (answers asked for when they're needed, with dashboards kept for the questions asked again and again), define it once (good models and their context in a semantic layer, each measure defined once in an open format), and more readers than people (the same definitions read by dashboards, agents, BI tools, apps and other systems). *Data as software* comes before it; *Documents and closing remarks* follows. The plan for the module is in [`../data-that-moves/proposal.md`](../data-that-moves/proposal.md); this series' own part is in its [proposal](proposal.md).
 
 **Status:** agreed on 5 November 2026; the films are being made, one at a time, in order, and appear in the table below as each one is out. On the site, the series will sit under the topic *Modern data basics*, at `from-tables-to-decisions/`, once its opening film is out.
 
@@ -12,7 +12,7 @@ Serving data to people, agents and systems. Rohan Desai, in Finance, asks what c
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Reports on demand](https://data.learn-all.org/from-tables-to-decisions/reports-on-demand/) | Answers on demand | 6½ min | 5 | 3 questions | [script](1-reports-on-demand/script.md) · [source](1-reports-on-demand/source/README.md) |
-| [Defined in the open](https://data.learn-all.org/from-tables-to-decisions/define-it-once/) | Each measure defined once | 7½ min | 7 | 3 questions | [script](2-define-it-once/script.md) · [source](2-define-it-once/source/README.md) |
+| [Defined in the open](https://data.learn-all.org/from-tables-to-decisions/define-it-once/) | Each measure defined once | 8 min | 7 | 3 questions | [script](2-define-it-once/script.md) · [source](2-define-it-once/source/README.md) |
 | [More readers than people](https://data.learn-all.org/from-tables-to-decisions/more-readers-than-people/) | Serving every reader | 8 min | 6 | 3 questions | [script](3-more-readers-than-people/script.md) · [source](3-more-readers-than-people/source/README.md) |
 <!-- /films -->
 

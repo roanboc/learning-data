@@ -22,7 +22,7 @@
 #    bed under the voice. After the opening: the three answers at the invoices' turn; F sharp minor for the invoice paid twice; a tube
 #    for each file landing in the volume; the mark's letters as the function reads and its chord as the fields become a row; A major
 #    as the checks pass and as a person approves; the contract signed, filed and cited; the claims written as data, the 1853 log again;
-#    the logs kept and read again, Noor's three answers, the wheel, the four steps, the module's people, the takeaways, the end card.
+#    the logs kept and read again, Noor's three answers, the wheel, the four steps, the end card.
 #  - Nothing pulses, loops or trembles; no figure is played again soon. Each reading is its own line of letters, so the same tones in
 #    the same order come back only with the mark and the three answers.
 #  - Every sound is an event on screen, at the moment it appears: each uses the same word and offset as src/scenes.js. Where the
@@ -171,7 +171,7 @@ def pen(s, sec=1.2, g=0.006, pan=0.0):
 # 1. Logbooks into charts: the opening, with music. Washington, 1842: the row's A major swells in, and a tube as the shelves of logbooks
 #    glow. A logbook opens: a tube for each thing it records. Thousands of days, each ship its own way: the other logs come in, and as
 #    nobody reads them the row turns to F sharp minor, and stays there as captains sail the road they know and the passages run weeks
-#    long; then nothing, for "Something had to change". The office reads its logs into tables: the first line read letter by letter,
+#    long; then nothing, for "The answers were already in the logs. Someone had to read them.". The office reads its logs into tables: the first line read letter by letter,
 #    and A major as the table holds them, month by month; the charts, free, A major again; the log in one set form, sent back, a tube
 #    as it leaves and one as it arrives. Brussels: the ten nations, and a pair of tubes as the one log lands. The count: F sharp minor
 #    for 183, A major for 135; the nations share their data. Today's documents land, a tube each; what's written for people read into
@@ -387,8 +387,7 @@ tuck(ww('log', 'nobody has to read it back', -0.3), 0.007, px(436))
 
 # 5. Keep the file. The logs, kept: a tube for each volume on the shelf, A major; climate scientists read them again, a new line of
 #    letters, held as the million reports land; keep the file, a tube. Noor's three answers, a tube each. The wheel draws itself: A
-#    major. The four steps round the ring, a tube each. The module's four series and the people each once took; agreeing what the data
-#    means, A major. For documents: the three answers' tubes again. The end card: the mark
+#    major. The four steps round the ring, a tube each. In short: the three answers set down, with no music. The end card: the mark
 kw = lambda lid, word, off=0: W('close', lid, word, off)
 kc = lambda lid, off=0: G('close', lid, off)
 for i, m in enumerate((A2, CS3, E3, FS3, A3)):
@@ -413,15 +412,8 @@ held(AMAJ_HI, kw('docs', 'reinvent the wheel', -0.5), END('close', 'docs') + 1.0
 paper(kw('iterate', 'the official docs', -0.3), 0.010, px(990))
 for i, (w_, m, x_) in enumerate((('Investigate', A2, 1560), ('adapt', CS3, 1750), ('implement', E3, 1560), ('iterate', A3, 1370))):
     tube(m, kw('iterate', w_, -0.2), 0.75 - 0.05 * i, px(x_))
-for i, w_ in enumerate(('moving data', 'running the platform', 'serving it', 'reading documents')):
-    paper(kw('module', w_, -0.3), 0.009 - 0.0012 * i, px(940 + 600 * (i % 2)), 0.35)
-air(kw('team', 'a whole team', -0.3), 0.8, 0.005, px(1240), 200, 900)       # the people each once took
-knock(kw('team', 'Databricks and dbt', -0.3), 0.009, px(940), 260)
-knock(kw('team', 'Databricks and dbt', 0.1), 0.008, px(1540), 260)
-stamp(kw('team', 'agreeing what the data means', -0.3), 0.009, px(1240))
-held(AMAJ, kw('team', 'agreeing what the data means', -0.3), END('close', 'team') + 1.0, 0.65, att=0.8, rel=1.1)
 flick(kc('data', -0.1), 0.006, px(300))
-for i, (w_, m) in enumerate((('read them', A3), ('keep the file', CS4), ("write what's yours", E3))):
-    tube(m, kw('data', w_, -0.3), 0.7, px(1290))
+for i, w_ in enumerate(('read documents', 'keep the file', "write what's yours")):
+    tuck(kw('data', w_, -0.3), 0.008 - 0.001 * i, px(1290))           # in short: the three answers set down, with no music
 tE = kc('breath', 0.3)
 mark(tE, E('close') - 0.6)

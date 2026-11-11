@@ -1769,8 +1769,14 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){if(!window.__RENDER__&&!WC_RAW&
    2026): the paper's grain and the uneven dry are laid on the paint in one pass (WC.tooth, made with the other textures in a worker,
    wash.js) where the video lays them in two and cuts the paint out again, and the spare canvases are kept and reused at the largest size
    asked for (wc_bufAt), where the video's are made for each size. The wash behind, the bleed and the pencil line are as in the video. */
+/* Such a canvas is bigger than what is drawn in it, and what is drawn is then copied out of its corner, (0,0,w,h), scaled. A scaled copy
+   blends each pixel at the corner's edge with its neighbours just past it, so whatever an earlier, bigger person left there showed as
+   a thin line along the right and bottom of the next person's picture (Rodrigo, 10 November 2026: "a light frame border (right, bottom)
+   of the characters", Where each piece lives at 2:41). So a margin past the corner is cleared too, wider than any blend reaches. */
+const WC_BUF_EDGE=16;
 function wc_bufAt(k,w,h){let c=WC.buf[k];if(!c||c.width<w||c.height<h)c=wc_keep("buf",k,mkCanvas(Math.max(Math.ceil(w/64)*64,c?c.width:0),Math.max(Math.ceil(h/64)*64,c?c.height:0)));else wc_seen(c);
-  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;x.clearRect(0,0,w,h);return[c,x];}
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;
+  x.clearRect(0,0,Math.min(c.width,w+WC_BUF_EDGE),Math.min(c.height,h+WC_BUF_EDGE));return[c,x];}
 function wc_outlinedLive(ctx,draw,x,y,s,edge,box){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const m=ctx.getTransform(),K=Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))),wd=Math.ceil(w*K),hd=Math.ceil(h*K),k=wd/w;
   const [c,cx]=wc_bufAt("lvF",wd,hd);cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
@@ -3374,13 +3380,15 @@ function cp_sack(cx,x,y,w,h,rot){cx.save();cx.translate(x,y);cx.rotate(rot||0);c
   cx.quadraticCurveTo(-w*0.46,h/2,0,h/2);cx.quadraticCurveTo(w*0.46,h/2,w/2,h*0.18);cx.quadraticCurveTo(w*0.62,-h*0.3,w*0.18,-h/2);cx.closePath();litFill(cx,CP_SACK,-w/2,-h/2,w/2,h/2);seam(cx,CP_SACK,0.45);
   cx.strokeStyle=rgba(wc_dim(CP_SACK,0.4),0.5);cx.lineWidth=2;for(const k of [-0.2,0.15]){cx.beginPath();cx.moveTo(k*w,-h*0.3);cx.quadraticCurveTo(k*w*1.4,0,k*w,h*0.4);cx.stroke();}
   cx.fillStyle=rgba(wc_dim(CP_SACK,0.3),1);cx.beginPath();cx.ellipse(0,-h/2+2,w*0.2,8,0,0,TAU);cx.fill();cx.restore();}
-function cp_heldSackUp(cx,P_,hands){const [l,r]=hands;cp_sack(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-30,170,120,0.04);fingers(cx,P_,[l,r]);}
+// What is held in both hands has its thumbs at its edges, where the hands hold it: the hold pose's hands sit close together in the
+// middle of it, and thumbs drawn there float (10 November 2026)
+function cp_heldSackUp(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cp_sack(cx,mx,my-30,170,120,0.04);fingers(cx,P_,[[mx-82,my-12],[mx+82,my-6]]);}
 function cp_heldShoulder(cx,P_,hands){const l=hands[0];cp_sack(cx,l[0]-42,l[1]-58,140,96,-0.42);fingers(cx,P_,[l]);}
 // a shallow basket of round cheeses, held at the waist
 function cp_heldBasket(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);
   for(const [dx,dy,rr_] of [[-46,-26,30],[0,-34,32],[44,-24,30],[-22,-46,26],[24,-48,26]]){cx.beginPath();cx.ellipse(dx,dy,rr_,rr_*0.62,0,0,TAU);litFill(cx,[226,186,96],dx-rr_,dy-rr_,dx+rr_,dy+rr_);seam(cx,[226,186,96],0.4);}
   cx.beginPath();cx.moveTo(-96,-20);cx.lineTo(96,-20);cx.quadraticCurveTo(90,30,60,36);cx.lineTo(-60,36);cx.quadraticCurveTo(-90,30,-96,-20);cx.closePath();litFill(cx,[176,140,90],-96,-20,96,36);seam(cx,[176,140,90],0.5);
-  cx.strokeStyle=rgba([120,92,58],0.6);cx.lineWidth=2;for(let i=0;i<4;i++){cx.beginPath();cx.moveTo(-92,-12+i*12);cx.quadraticCurveTo(0,-6+i*12,92,-12+i*12);cx.stroke();}cx.restore();fingers(cx,P_,[l,r]);}
+  cx.strokeStyle=rgba([120,92,58],0.6);cx.lineWidth=2;for(let i=0;i<4;i++){cx.beginPath();cx.moveTo(-92,-12+i*12);cx.quadraticCurveTo(0,-6+i*12,92,-12+i*12);cx.stroke();}cx.restore();fingers(cx,P_,[[mx-92,my-24],[mx+92,my-24]]);}
 // a coin between finger and thumb, catching the light
 function cp_heldCoin(cx,P_,hands){const r=hands[1];fingers(cx,P_,[r]);cx.save();cx.translate(r[0]+12,r[1]-14);cx.fillStyle=rgba([226,196,112],1);cx.beginPath();cx.ellipse(0,0,13,11,0.3,0,TAU);cx.fill();
   cx.strokeStyle=rgba([150,118,50],0.9);cx.lineWidth=2;cx.stroke();cx.fillStyle="rgba(255,250,220,0.8)";cx.beginPath();cx.arc(-4,-3,3,0,TAU);cx.fill();cx.restore();}
@@ -3815,7 +3823,7 @@ function cp_mendPolder(ctx,t,u,dry,up){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.brea
 function cp_heldTurf(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-14);
   cx.fillStyle=rgba(CP.peat,1);rr(cx,-84,-6,168,34,6);cx.fill();cx.fillStyle=rgba(mix(CP.grass2,CP.grass3,0.4),1);rr(cx,-86,-20,172,22,8);cx.fill();
   cx.strokeStyle=rgba(wc_dim(CP.grass3,0.3),0.9);cx.lineWidth=2.4;cx.lineCap="round";for(let i=0;i<16;i++){const x=-80+i*10.5;cx.beginPath();cx.moveTo(x,-16);cx.lineTo(x+(hash(i,3)-0.5)*6,-30-hash(i,5)*10);cx.stroke();}
-  cx.restore();fingers(cx,P_,[l,r]);}
+  cx.restore();fingers(cx,P_,[[mx-80,my],[mx+80,my]]);}   // thumbs at its ends, where the hands hold it (10 November 2026)
 
 /* ---------- the dike from the field: each landowner's stretch, and the board's walk (the places bank and bankWalk) ---------- */
 // The breach's view (cp_paintBreach) of other stretches, kept. For the stakes (bank): the ditches across the field are where each

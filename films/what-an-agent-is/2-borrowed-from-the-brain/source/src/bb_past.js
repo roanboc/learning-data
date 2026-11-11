@@ -4,7 +4,6 @@
      bbSheet     a sheet of drawing paper on a walnut table, seen from above, with an ink pot and a pen
      bbSky       an open sky over low hills, where buzzards soar
      bbDunes     the dunes at Kitty Hawk, 1902, under a wide sky
-     bbMaple     a maple's branch in autumn, against a soft park
      bbBrain     a brain, drawn as an anatomy book would, on a warm dark ground
      bbLens      looking down a microscope: a round field on the dark
      bbRoom      Barcelona, 1888: Cajal's room, his table, microscope, slides, ink and paper, light from the window on the right
@@ -157,28 +156,11 @@ function bb_glider(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate
   ctx.fillStyle=rgba(cl,1);ctx.strokeStyle=rgba(fr,0.9);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(-230,8);ctx.quadraticCurveTo(0,0,230,8);ctx.lineTo(230,20);ctx.quadraticCurveTo(0,14,-230,20);ctx.closePath();ctx.fill();ctx.stroke();
   ctx.strokeStyle=rgba(fr,0.35);ctx.lineWidth=1.4;for(let k=-5;k<=5;k++){ctx.beginPath();ctx.moveTo(k*40,4+Math.abs(k)*0.3);ctx.lineTo(k*40,17+Math.abs(k)*0.3);ctx.stroke();}ctx.restore();}
 
-/* ---------------------------------------------------------------- the maple and its seeds */
-AG_PLACES.bbMaple=c=>{bb_skyGrad(c,[178,196,206],[236,226,206],H);
-  // a soft park far behind: blurred trees and a lawn
-  for(const [x,y,r,col] of [[200,700,260,[150,140,96]],[620,760,220,[176,150,96]],[1500,720,300,[160,120,80]],[1850,760,240,[140,132,96]]]){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(col,0.6));g.addColorStop(1,rgba(col,0));c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2);}
-  const lawn=c.createLinearGradient(0,800,0,H);lawn.addColorStop(0,"rgba(150,160,110,0.6)");lawn.addColorStop(1,"rgba(120,130,90,0.8)");c.fillStyle=lawn;c.fillRect(0,800,W,H-800);
-  // the branch, from the top left, with its leaves
-  c.lineCap="round";const br=[[-40,120],[200,150],[420,130],[640,190],[820,170]];const S=bb_smooth(br,6);bb_strand(c,S,30,10,rgba([86,64,50],1),1);
-  bb_strand(c,bb_smooth([[420,132],[470,80],[540,50]],6),12,5,rgba([86,64,50],1),1);bb_strand(c,bb_smooth([[640,188],[700,250],[760,300]],6),10,4,rgba([86,64,50],1),1);
-  const leaf=(x,y,s,ang,col)=>{c.save();c.translate(x,y);c.rotate(ang);c.scale(s,s);c.fillStyle=rgba(col,1);c.beginPath();c.moveTo(0,0);
-    const pts=[[0,-8],[-30,-20],[-26,-46],[-52,-56],[-34,-74],[-14,-70],[0,-100],[14,-70],[34,-74],[52,-56],[26,-46],[30,-20],[0,-8]];for(const p of pts)c.lineTo(p[0],p[1]);c.closePath();c.fill();
-    c.strokeStyle=rgba(mix(col,[90,40,20],0.4),0.6);c.lineWidth=1.5;c.beginPath();c.moveTo(0,0);c.lineTo(0,-90);c.moveTo(0,-30);c.lineTo(-36,-60);c.moveTo(0,-30);c.lineTo(36,-60);c.stroke();c.restore();};
-  const R=ag_rnd(12);for(let i=0;i<22;i++){const q=bb_along(S,0.1+R()*0.85),col=[[206,120,60],[220,160,70],[190,90,50],[226,184,96]][i%4];leaf(q[0]+(R()-0.5)*40,q[1]+20+R()*40,1+R()*0.6,Math.PI+(R()-0.5)*1.4,col);}
-  // two pairs of seeds still hanging
-  for(const [x,y] of [[540,190],[700,240]]){c.save();c.translate(x,y);bb_seedShape(c,0.9,0.4);c.restore();}ag_grain(c,0,0,W,H,1.2,21);};
+/* ---------------------------------------------------------------- a maple seed, one of the designs nature kept */
 // a maple seed: the seed itself, and its wing, a thin veined blade; drawn at the origin, s its size, ang its turn
 function bb_seedShape(c,s,ang){c.save();c.rotate(ang);c.scale(s,s);c.fillStyle="rgba(196,150,96,0.88)";c.beginPath();c.moveTo(0,0);c.bezierCurveTo(30,-14,90,-30,128,-18);c.bezierCurveTo(110,4,50,14,0,8);c.closePath();c.fill();
   c.strokeStyle="rgba(140,96,56,0.5)";c.lineWidth=1.4;for(let k=0;k<5;k++){c.beginPath();c.moveTo(8,4);c.quadraticCurveTo(50,-6-k*3,100+k*6,-16+k*3);c.stroke();}
   c.fillStyle="rgba(150,104,62,1)";c.beginPath();c.ellipse(4,4,14,10,0.3,0,TAU);c.fill();c.restore();}
-// a seed spinning down: seen from the side, its wing turns round the seed; the blur of its turning is drawn as a soft disc
-function bb_seedSpin(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);
-  const sp=t*(o.rate||7.5);ctx.fillStyle="rgba(200,160,110,0.16)";ctx.beginPath();ctx.ellipse(0,-10*s,130*s,26*s,0,0,TAU);ctx.fill();
-  ctx.save();ctx.scale(1,0.32);ctx.rotate(sp);bb_seedShape(ctx,s,0);ctx.restore();ctx.restore();}
 
 /* ---------------------------------------------------------------- a brain, as an anatomy book draws it */
 const BB_BRAIN={cx:960,cy:500,s:1.0};

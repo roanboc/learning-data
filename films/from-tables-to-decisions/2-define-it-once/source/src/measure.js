@@ -16,9 +16,18 @@
    Every name starts with dn_ or DN_. */
 
 /* ---------------------------------------------------------------- the three numbers, in August */
-const DN_WIN=[{x:100,prod:"Faculty of Health",title:"spreadsheet",num:"A$2.46M",what:"hours in the contracts",q:"for planning?"},
-  {x:700,prod:"Payroll",title:"report",num:"A$1.88M",what:"pay paid on the semester's pay days",q:"for each pay day?"},
-  {x:1300,prod:"Finance",title:"report",num:"A$2.21M",what:"claims approved for the semester's teaching + on-costs",q:"for the semester's teaching?"}];
+const DN_WIN=[{x:100,prod:"Faculty of Health",title:"spreadsheet",num:"A$2.46M",what:"hours in the contracts",q:"for planning?",
+    inner:["contracts · hours allowed","at each duty's rate","by the contract's period"]},
+  {x:700,prod:"Payroll",title:"report",num:"A$1.88M",what:"pay paid on the semester's pay days",q:"for each pay day?",
+    inner:["claims approved by Monday","paid that Thursday","by pay day"]},
+  {x:1300,prod:"Finance",title:"report",num:"A$2.21M",what:"claims approved for the semester's teaching + on-costs",q:"for the semester's teaching?",
+    inner:["claims approved · casual staff","teaching duties + on-costs","by teaching period"]}];
+/* the three measures the one name hid, each its own domain's, with its owner, the question it answers and Semester 1's number
+   (the module's numbers.md): Planning's, HR's and Finance's, in the order the windows came in */
+const DN_MEASURES=[
+  {dom:"Planning",col:MD.dom.students,owner:"clara",who:"Clara Jensen",name:"casual hours contracted",what:"what the contracts allow, at each duty's rate",when:"by the contract's teaching period · to plan teaching",s1:"A$2.46M"},
+  {dom:"HR",col:MD.sys.hr,owner:"ingrid",who:"Ingrid Holm",name:"casual pay paid",what:"what is paid for the claims approved",when:"by pay day · to check each pay run",s1:"A$1.88M"},
+  {dom:"Finance",col:MD.dom.finance,owner:"rohan",who:"Rohan Desai",name:"casual teaching cost",what:"claims approved for teaching + on-costs",when:"by the teaching period it was done in · to budget",s1:"A$2.21M"}];
 const DN_WY=300,DN_WW=520,DN_WH=300;
 // window i (0 to 2): o.what (0 to 1) what it counts comes in under its number; o.num (another number in its place, o.swap 0 to 1);
 // o.inner (0 to 1) the definition's words, inside the report and nowhere else; o.a, o.k, o.lit; returns its box
@@ -27,7 +36,7 @@ function dn_win(ctx,i,o){o=o||{};const D=DN_WIN[i],x=D.x,y=o.y==null?DN_WY:o.y,b
     const sw=clamp(o.swap||0,0,1),wa=ag_sine(clamp(o.what||0,0,1))*(1-ag_in(clamp(o.inner||0,0,1),0,0.5));
     if(sw<1)md_T(c,D.num,b.x+16,b.y+76,{w:800,size:68,a:1-sw});if(sw>0)md_T(c,o.num||D.num,b.x+16,b.y+76,{w:800,size:68,a:sw,col:o.numCol||MD.ink});
     if(wa>0.01)md_wrap(c,D.what,b.w-32,{w:600,size:28}).forEach((l,k)=>md_T(c,l,b.x+16,b.y+128+k*36,{w:600,size:28,col:MD.soft,a:wa}));
-    const ia=ag_in(clamp(o.inner||0,0,1),0.4,0.6);if(ia>0.01)["claims approved · casual staff","teaching duties + on-costs","by teaching period"].forEach((l,k)=>
+    const ia=ag_in(clamp(o.inner||0,0,1),0.4,0.6);if(ia>0.01)D.inner.forEach((l,k)=>
       md_T(c,l,b.x+16,b.y+128+k*36,{w:600,size:28,col:MD.ink,a:ia}));}});
   return bb;}
 

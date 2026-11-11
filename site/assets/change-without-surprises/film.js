@@ -1767,8 +1767,14 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){if(!window.__RENDER__&&!WC_RAW&
    2026): the paper's grain and the uneven dry are laid on the paint in one pass (WC.tooth, made with the other textures in a worker,
    wash.js) where the video lays them in two and cuts the paint out again, and the spare canvases are kept and reused at the largest size
    asked for (wc_bufAt), where the video's are made for each size. The wash behind, the bleed and the pencil line are as in the video. */
+/* Such a canvas is bigger than what is drawn in it, and what is drawn is then copied out of its corner, (0,0,w,h), scaled. A scaled copy
+   blends each pixel at the corner's edge with its neighbours just past it, so whatever an earlier, bigger person left there showed as
+   a thin line along the right and bottom of the next person's picture (Rodrigo, 10 November 2026: "a light frame border (right, bottom)
+   of the characters", Where each piece lives at 2:41). So a margin past the corner is cleared too, wider than any blend reaches. */
+const WC_BUF_EDGE=16;
 function wc_bufAt(k,w,h){let c=WC.buf[k];if(!c||c.width<w||c.height<h)c=wc_keep("buf",k,mkCanvas(Math.max(Math.ceil(w/64)*64,c?c.width:0),Math.max(Math.ceil(h/64)*64,c?c.height:0)));else wc_seen(c);
-  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;x.clearRect(0,0,w,h);return[c,x];}
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;
+  x.clearRect(0,0,Math.min(c.width,w+WC_BUF_EDGE),Math.min(c.height,h+WC_BUF_EDGE));return[c,x];}
 function wc_outlinedLive(ctx,draw,x,y,s,edge,box){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const m=ctx.getTransform(),K=Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))),wd=Math.ceil(w*K),hd=Math.ceil(h*K),k=wd/w;
   const [c,cx]=wc_bufAt("lvF",wd,hd);cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
@@ -3561,7 +3567,7 @@ function cw_reports(ctx,x,y,n,label,a,la){if(a<=0.01)return;const w=380,t=22;ctx
     wc_T(ctx,label,x,y-ly+11,{w:600,size:30,align:"center",col:WC_DARK});});}}
 // an arm in from the right edge of a close shot, sliding something along with the tips of its fingers: the sleeve, the shirt's cuff,
 // the hand side on, its fingers together, the thumb along its side towards us. (x, y) is where the fingertips touch; k its size
-function cw_push(ctx,x,y,sleeve,skin,a,k){if(a<=0.01)return;k=k||1;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.lineCap="round";ctx.lineJoin="round";
+function cw_push(ctx,x,y,sleeve,skin,a,k){if(a<=0.01)return;k=k||1;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.lineCap="round";ctx.lineJoin="round";if(window.__ARM__)__ARM__(ctx,150,-4,620,-190,125);
   const dk=rgba(wc_dim(skin,0.34),0.85);
   ctx.strokeStyle=rgba(sleeve,1);ctx.lineWidth=74;ctx.beginPath();ctx.moveTo(620,-190);ctx.quadraticCurveTo(330,-60,150,-4);ctx.stroke();
   ctx.strokeStyle=rgba(wc_lit(sleeve,0.2),0.8);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(620,-224);ctx.quadraticCurveTo(330,-94,146,-40);ctx.stroke();
@@ -3976,12 +3982,16 @@ function cw_table(ctx,o){o=o||{};const [x,y,w]=o.at||CW_TB,k=w/1000,rel=clamp(o.
         cw_T(ctx,r[4],sx+30*k,yy+44*k,{w:yes?800:600,size:30*k,col:yes&&o.yes>0.5?GV_MEANINK.violet:WC_DARK});});});}
   return R;}
 // Mei's stamp, held from the right of the frame: its knob in her hand, its base over the paper; p 0 to 1 brings it down, presses at
-// 0.5 and lifts it away. Seen from above, it's larger and its shadow further off while it's raised
+// 0.5 and lifts it away. Seen from above, it's larger and its shadow further off while it's raised. Her hand, above the stamp and so
+// nearer the camera, is drawn larger than it (CW_STAMPK), and her arm comes in from the lower right: from the right edge her sleeve ran
+// five or six hand lengths across the frame, an arm too long (10 November 2026)
+const CW_STAMPK=1.45;
 function cw_stamper(ctx,x,y,p,sleeve,skin){if(p<=0||p>=1)return;const down=p<0.5?easeCam(p/0.5):1-easeCam((p-0.5)/0.5),k=lerp(1.35,1,down),off=lerp(70,8,down),ex=(1-down)*520;
-  ctx.save();ctx.translate(x+ex,y-ex*0.3);ctx.save();ctx.filter="blur("+(6+16*(1-down)).toFixed(0)+"px)";ctx.fillStyle="rgba(40,30,20,"+(0.22+0.2*down).toFixed(2)+")";rr(ctx,-150+off,-46+off,300,92,12);ctx.fill();ctx.restore();
+  ctx.save();ctx.translate(x+ex*0.55,y+ex*0.85);ctx.save();ctx.filter="blur("+(6+16*(1-down)).toFixed(0)+"px)";ctx.fillStyle="rgba(40,30,20,"+(0.22+0.2*down).toFixed(2)+")";rr(ctx,-150+off,-46+off,300,92,12);ctx.fill();ctx.restore();
   ctx.scale(k,k);wc_part(ctx,wc_rrPts(-150,-46,300,92,12),[120,82,56],1,{seed:97});wc_flat(ctx,wc_rrPts(-130,-30,260,60,8),[150,108,76],1,"wood");
+  ctx.fillStyle=rgba([196,150,110],1);ctx.beginPath();ctx.arc(0,0,44,0,TAU);ctx.fill();ctx.rotate(0.95);ctx.scale(CW_STAMPK,CW_STAMPK);if(window.__ARM__)__ARM__(ctx,100,-15,700,-120,130);
   ctx.lineCap="round";ctx.strokeStyle=rgba(sleeve,1);ctx.lineWidth=80;ctx.beginPath();ctx.moveTo(700,-120);ctx.quadraticCurveTo(320,-60,90,-10);ctx.stroke();
-  ctx.fillStyle=rgba([196,150,110],1);ctx.beginPath();ctx.arc(0,0,44,0,TAU);ctx.fill();ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.ellipse(40,-6,70,48,-0.15,0,TAU);ctx.fill();
+  ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.ellipse(40,-6,70,48,-0.15,0,TAU);ctx.fill();
   ctx.fillStyle=rgba(wc_dim(skin,0.25),0.6);for(let i=0;i<3;i++){ctx.beginPath();ctx.ellipse(-8+i*4,-34+i*30,18,12,0.2,0,TAU);ctx.fill();}ctx.restore();}
 
 /* ---------- 6 · Add, don't break ---------- */

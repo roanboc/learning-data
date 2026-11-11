@@ -1,0 +1,40 @@
+# Written by scripts/generate/agents.py from Noor's map and agents/tools.yml.
+# Don't edit it: change the map, then run the script.
+#
+# The workload agent's calls through Unity Gateway: EXECUTE for its role's group, workload_contributors, on each model
+# and tool server its steps call, and no other. The platform team applies each entry as the body of
+# PATCH /api/2.1/unity-catalog/permissions/<securable type>/<full name> (grants.sql gives the group USE
+# CATALOG and USE SCHEMA on their catalog and schemas).
+
+group: workload_contributors
+services:
+  - securable type: model_service
+    full name: ai.models.drafting
+    for: the language model
+    called by: [find why the night build failed, build it in development, open a pull request]
+    body: {changes: [{principal: workload_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.build
+    for: the build tool
+    called by: [find why the night build failed, build it in development]
+    body: {changes: [{principal: workload_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.query
+    for: the query tool
+    called by: [find why the night build failed, build it in development]
+    body: {changes: [{principal: workload_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.repository
+    for: the repository tool
+    called by: [find why the night build failed, open a pull request]
+    body: {changes: [{principal: workload_contributors, add: [EXECUTE]}]}
+
+rate limits:
+- securable type: model_service
+  full name: ai.models.drafting
+  for: 'its budget, from its mandate: at most 50000 tokens a minute'
+  body:
+    key: service_principal
+    principal: 7d2b5e90-1c4a-4f83-b6e7-3a9c0d1f2e58
+    renewal_period: minute
+    tokens: 50000

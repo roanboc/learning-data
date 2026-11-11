@@ -1747,8 +1747,14 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){if(!window.__RENDER__&&!WC_RAW&
    2026): the paper's grain and the uneven dry are laid on the paint in one pass (WC.tooth, made with the other textures in a worker,
    wash.js) where the video lays them in two and cuts the paint out again, and the spare canvases are kept and reused at the largest size
    asked for (wc_bufAt), where the video's are made for each size. The wash behind, the bleed and the pencil line are as in the video. */
+/* Such a canvas is bigger than what is drawn in it, and what is drawn is then copied out of its corner, (0,0,w,h), scaled. A scaled copy
+   blends each pixel at the corner's edge with its neighbours just past it, so whatever an earlier, bigger person left there showed as
+   a thin line along the right and bottom of the next person's picture (Rodrigo, 10 November 2026: "a light frame border (right, bottom)
+   of the characters", Where each piece lives at 2:41). So a margin past the corner is cleared too, wider than any blend reaches. */
+const WC_BUF_EDGE=16;
 function wc_bufAt(k,w,h){let c=WC.buf[k];if(!c||c.width<w||c.height<h)c=wc_keep("buf",k,mkCanvas(Math.max(Math.ceil(w/64)*64,c?c.width:0),Math.max(Math.ceil(h/64)*64,c?c.height:0)));else wc_seen(c);
-  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;x.clearRect(0,0,w,h);return[c,x];}
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;
+  x.clearRect(0,0,Math.min(c.width,w+WC_BUF_EDGE),Math.min(c.height,h+WC_BUF_EDGE));return[c,x];}
 function wc_outlinedLive(ctx,draw,x,y,s,edge,box){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const m=ctx.getTransform(),K=Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))),wd=Math.ceil(w*K),hd=Math.ceil(h*K),k=wd/w;
   const [c,cx]=wc_bufAt("lvF",wd,hd);cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
@@ -2907,7 +2913,9 @@ function os_clipC(){return wc_kept("osClip",170,226,q=>{q.translate(10,16);wc_wa
 // the clipboard, at about three quarters of its kept size, in front of the body, its foot in the left hand: the right holds it too
 // (os_heldClip), is raised (os_heldClipL), or holds a pen (os_heldClipPen)
 function os_clipAt(cx,y){cx.save();cx.translate(0,y);cx.rotate(-0.04);cx.scale(0.72,0.72);cx.drawImage(os_clipC(),-85,-113);cx.restore();}
-function os_heldClip(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4],[r[0],r[1]-4]]);}
+// two thumbs at its edges, where the hands hold it: the hold pose's hands sit close together in the middle, and thumbs drawn there
+// float in the middle of the board (10 November 2026)
+function os_heldClip(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[-52,l[1]-4],[52,r[1]-4]]);}
 function os_heldClipL(cx,P_,hands){const l=hands[0];os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4]]);}
 function os_heldClipPen(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4]]);
   cx.save();cx.translate(r[0],r[1]);cx.rotate(0.45);wc_flat(cx,wc_rect(-4,-44,8,52),[40,90,170],1,"pen");cx.fillStyle=rgba([236,238,240],1);cx.fillRect(-4,4,8,6);cx.restore();fingers(cx,P_,[r]);}
@@ -2922,7 +2930,7 @@ function os_heldScalpel(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0
   cx.fill();cx.stroke();cx.restore();fingers(cx,os_hand(P_),[r]);}
 function os_heldTray(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);
   wc_wash(cx,[[-90,-10],[90,-10],[80,10],[-80,10]],OS_STEEL,{kind:"thing",lw:1.2,seed:8});for(const [x,c] of [[-50,[250,250,250]],[-10,[236,240,246]],[34,[214,226,236]]])wc_flat(cx,wc_rect(x,-26,30,18),c,1,"pack");cx.restore();
-  fingers(cx,os_hand(P_),[[l[0],l[1]-4],[r[0],r[1]-4]]);}
+  fingers(cx,os_hand(P_),[[mx-86,my-12],[mx+86,my-12]]);}
 
 function os_paintTheatre(ctx){const O=OS_OR,F=O.fy;gv_wallFloor(ctx,O.wall,F,{floor:O.floor,seed:23,vx:1000});
   // washable panels low on the wall, under a rail

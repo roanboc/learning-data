@@ -107,13 +107,15 @@ function cp_sack(cx,x,y,w,h,rot){cx.save();cx.translate(x,y);cx.rotate(rot||0);c
   cx.quadraticCurveTo(-w*0.46,h/2,0,h/2);cx.quadraticCurveTo(w*0.46,h/2,w/2,h*0.18);cx.quadraticCurveTo(w*0.62,-h*0.3,w*0.18,-h/2);cx.closePath();litFill(cx,CP_SACK,-w/2,-h/2,w/2,h/2);seam(cx,CP_SACK,0.45);
   cx.strokeStyle=rgba(wc_dim(CP_SACK,0.4),0.5);cx.lineWidth=2;for(const k of [-0.2,0.15]){cx.beginPath();cx.moveTo(k*w,-h*0.3);cx.quadraticCurveTo(k*w*1.4,0,k*w,h*0.4);cx.stroke();}
   cx.fillStyle=rgba(wc_dim(CP_SACK,0.3),1);cx.beginPath();cx.ellipse(0,-h/2+2,w*0.2,8,0,0,TAU);cx.fill();cx.restore();}
-function cp_heldSackUp(cx,P_,hands){const [l,r]=hands;cp_sack(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-30,170,120,0.04);fingers(cx,P_,[l,r]);}
+// What is held in both hands has its thumbs at its edges, where the hands hold it: the hold pose's hands sit close together in the
+// middle of it, and thumbs drawn there float (10 November 2026)
+function cp_heldSackUp(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cp_sack(cx,mx,my-30,170,120,0.04);fingers(cx,P_,[[mx-82,my-12],[mx+82,my-6]]);}
 function cp_heldShoulder(cx,P_,hands){const l=hands[0];cp_sack(cx,l[0]-42,l[1]-58,140,96,-0.42);fingers(cx,P_,[l]);}
 // a shallow basket of round cheeses, held at the waist
 function cp_heldBasket(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);
   for(const [dx,dy,rr_] of [[-46,-26,30],[0,-34,32],[44,-24,30],[-22,-46,26],[24,-48,26]]){cx.beginPath();cx.ellipse(dx,dy,rr_,rr_*0.62,0,0,TAU);litFill(cx,[226,186,96],dx-rr_,dy-rr_,dx+rr_,dy+rr_);seam(cx,[226,186,96],0.4);}
   cx.beginPath();cx.moveTo(-96,-20);cx.lineTo(96,-20);cx.quadraticCurveTo(90,30,60,36);cx.lineTo(-60,36);cx.quadraticCurveTo(-90,30,-96,-20);cx.closePath();litFill(cx,[176,140,90],-96,-20,96,36);seam(cx,[176,140,90],0.5);
-  cx.strokeStyle=rgba([120,92,58],0.6);cx.lineWidth=2;for(let i=0;i<4;i++){cx.beginPath();cx.moveTo(-92,-12+i*12);cx.quadraticCurveTo(0,-6+i*12,92,-12+i*12);cx.stroke();}cx.restore();fingers(cx,P_,[l,r]);}
+  cx.strokeStyle=rgba([120,92,58],0.6);cx.lineWidth=2;for(let i=0;i<4;i++){cx.beginPath();cx.moveTo(-92,-12+i*12);cx.quadraticCurveTo(0,-6+i*12,92,-12+i*12);cx.stroke();}cx.restore();fingers(cx,P_,[[mx-92,my-24],[mx+92,my-24]]);}
 // a coin between finger and thumb, catching the light
 function cp_heldCoin(cx,P_,hands){const r=hands[1];fingers(cx,P_,[r]);cx.save();cx.translate(r[0]+12,r[1]-14);cx.fillStyle=rgba([226,196,112],1);cx.beginPath();cx.ellipse(0,0,13,11,0.3,0,TAU);cx.fill();
   cx.strokeStyle=rgba([150,118,50],0.9);cx.lineWidth=2;cx.stroke();cx.fillStyle="rgba(255,250,220,0.8)";cx.beginPath();cx.arc(-4,-3,3,0,TAU);cx.fill();cx.restore();}

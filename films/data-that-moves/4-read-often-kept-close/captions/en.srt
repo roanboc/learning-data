@@ -1,0 +1,187 @@
+1
+00:00:01,600 --> 00:00:09,281
+February 2008. Deep in a frozen mountain on Svalbard, Norway's Arctic islands, a vault opens.
+
+2
+00:00:10,581 --> 00:00:15,483
+At minus eighteen degrees, it keeps copies of seeds from gene banks around the world.
+
+3
+00:00:16,583 --> 00:00:23,891
+Gene banks keep the seeds of crops and their wild relatives, so breeders can grow crops that stand drought and disease.
+
+4
+00:00:24,991 --> 00:00:35,743
+Near Aleppo, in Syria, a gene bank keeps 141,052 samples of wheat, barley, lentils and chickpeas, from the world's dry lands.
+
+5
+00:00:37,043 --> 00:00:41,126
+From 2008, it sends copies of most of them to the vault.
+
+6
+00:00:42,426 --> 00:00:48,804
+But a gene bank can be lost, to war, flood or a power cut, and a variety lost is lost for good.
+
+7
+00:00:50,104 --> 00:00:57,691
+In 2012, war came close to Aleppo. Most of the bank's keepers had to leave, and it could no longer send seeds out.
+
+8
+00:00:58,991 --> 00:01:04,637
+Breeders could no longer get the seeds they relied on, and every variety in the bank was at risk.
+
+9
+00:01:05,937 --> 00:01:09,648
+Unless the copies could come back, the collection would be lost for good.
+
+10
+00:01:11,348 --> 00:01:17,095
+In 2015, the keepers did what no one had done before: they asked the vault for their copies.
+
+11
+00:01:18,395 --> 00:01:25,778
+38,073 samples came out of the mountain, and that November they were sown in Lebanon and Morocco.
+
+12
+00:01:27,278 --> 00:01:30,906
+By 2020, nothing was left of the collection in Aleppo.
+
+13
+00:01:32,206 --> 00:01:39,628
+Yet no more than 1,657 of its samples were lost, and breeders can order its seeds again.
+
+14
+00:01:41,128 --> 00:01:47,106
+Seeds in use, kept close and ready; their copies, frozen far away, until the day they're needed.
+
+15
+00:01:48,806 --> 00:01:50,614
+Data can be kept the same way.
+
+16
+00:01:51,914 --> 00:01:59,800
+Until September, the university kept all its data in the same storage, whether it was read every day or once in seven years.
+
+17
+00:02:00,900 --> 00:02:08,758
+Years of old pay records filled the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them.
+
+18
+00:02:10,058 --> 00:02:12,916
+Now where data is kept follows how often it's read.
+
+19
+00:02:20,616 --> 00:02:27,647
+In September, Noor asked each data owner a second question, after how fresh it must be: how often is it read?
+
+20
+00:02:29,347 --> 00:02:36,135
+Cloud storage comes in tiers, named hot, cool, cold and archive, after how often data is read.
+
+21
+00:02:37,835 --> 00:02:45,922
+The names sound like data's temperature, but they answer another question: not when someone acts on it, but how often anyone reads it.
+
+22
+00:02:47,822 --> 00:02:54,184
+Each tier down costs less to keep, and more to read. The archive tier takes hours to bring a file back.
+
+23
+00:02:56,084 --> 00:03:01,198
+So keep what's read often where reading is cheap, and what's rarely read where keeping is cheap.
+
+24
+00:03:03,098 --> 00:03:08,638
+How long it's kept at all is set by the law and the business, and it goes into the data's contract.
+
+25
+00:03:12,338 --> 00:03:18,783
+Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked.
+
+26
+00:03:19,883 --> 00:03:26,560
+Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read.
+
+27
+00:03:27,860 --> 00:03:33,117
+Until September, every year's records sat in the hot tier, and none was ever deleted.
+
+28
+00:03:34,417 --> 00:03:39,678
+Now, a year after it's written, each file moves to the archive tier, the cheapest to keep.
+
+29
+00:03:41,378 --> 00:03:45,059
+Like the copies on Svalbard, they sleep until someone needs them.
+
+30
+00:03:46,759 --> 00:03:54,460
+The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back.
+
+31
+00:03:55,960 --> 00:03:59,290
+Bringing them back takes hours, which is fine for an audit.
+
+32
+00:04:00,590 --> 00:04:07,149
+When a year's records turn seven, they're deleted, on a date set in advance, and their files removed for good.
+
+33
+00:04:08,649 --> 00:04:12,853
+In October, the oldest records, more than seven years old, were deleted.
+
+34
+00:04:14,153 --> 00:04:17,494
+How to delete well is for the films on data protection.
+
+35
+00:04:20,994 --> 00:04:23,210
+One record moves down as it ages.
+
+36
+00:04:24,710 --> 00:04:31,054
+Today, Linh's pay record is written. This year it's read often: for her payslip, a question, the year's end.
+
+37
+00:04:32,554 --> 00:04:38,745
+A year from now, its file moves to the archive tier, where keeping it costs a small part of what it did.
+
+38
+00:04:40,445 --> 00:04:43,286
+If an audit asks for it, it comes back in hours.
+
+39
+00:04:44,986 --> 00:04:50,411
+Seven years after her contract ends, it's deleted, and its files are removed for good.
+
+40
+00:04:52,111 --> 00:04:55,162
+At each step, where it lives follows how often it's read.
+
+41
+00:04:58,862 --> 00:05:05,449
+On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again.
+
+42
+00:05:06,949 --> 00:05:15,513
+At the university, data is kept the same way: what's read often, where it's quick to read; old pay records, cheaply, until they're deleted.
+
+43
+00:05:16,813 --> 00:05:23,325
+Today, a pay day, 2,960 new pay records are written, Linh's among them.
+
+44
+00:05:24,825 --> 00:05:30,509
+How often data is read decides where it's kept; the law and the business decide for how long.
+
+45
+00:05:32,209 --> 00:05:35,993
+Storage has had tiers for years: there's no wheel to reinvent.
+
+46
+00:05:37,093 --> 00:05:41,700
+Start from the official docs, then investigate, adapt, implement, iterate.
+
+47
+00:05:43,000 --> 00:05:46,465
+Next: data as software, where scripts became software.

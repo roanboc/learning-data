@@ -1,0 +1,191 @@
+1
+00:00:01,600 --> 00:00:08,728
+Mexico, 1944. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more.
+
+2
+00:00:10,278 --> 00:00:15,342
+Stem rust, a fungus that chokes the plant, could ruin a whole field of wheat at once.
+
+3
+00:00:16,892 --> 00:00:23,726
+One field there that year was expected to give only ten bushels an acre: a poor harvest for a season's work.
+
+4
+00:00:25,476 --> 00:00:32,317
+For a farmer, a ruined field meant a year's work and seed lost, and Mexico bought wheat from abroad for its bread.
+
+5
+00:00:34,067 --> 00:00:41,249
+And breeding a wheat that resisted the rust was slow: one generation a year, and many years before it reached a farm.
+
+6
+00:00:42,999 --> 00:00:45,584
+Farmers couldn't wait a decade for every new wheat.
+
+7
+00:00:47,134 --> 00:00:55,857
+From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way.
+
+8
+00:00:57,607 --> 00:01:06,103
+They grew two generations a year: one in summer, in the highlands near Mexico City, and one in winter, in Sonora, far to the north.
+
+9
+00:01:08,053 --> 00:01:15,148
+Each season, they crossed plants, tested them in the field, kept the few that did best, and sowed those in the other place.
+
+10
+00:01:17,098 --> 00:01:22,873
+Many breeders said a wheat should be bred only where it would grow. The team tried it anyway, and measured.
+
+11
+00:01:24,623 --> 00:01:30,836
+It cut the time to breed a new wheat in half, and the new wheats grew well in both places, and far beyond.
+
+12
+00:01:32,786 --> 00:01:40,194
+By 1956, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled.
+
+13
+00:01:42,144 --> 00:01:47,125
+And the testing never stopped: the rust kept changing, so the wheat had to change too.
+
+14
+00:01:48,675 --> 00:01:55,852
+Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new.
+
+15
+00:02:03,602 --> 00:02:08,813
+This module walked the university's platform, from where data is born to who reads it.
+
+16
+00:02:10,563 --> 00:02:16,119
+In Data that moves, moving data was easy, and agreeing what each field means was the work.
+
+17
+00:02:17,669 --> 00:02:23,371
+How fresh data must be came from when someone acts on it, and most analysis was fine a day old.
+
+18
+00:02:24,921 --> 00:02:29,014
+And each claim was written once, on one platform, for everyone to read.
+
+19
+00:02:30,764 --> 00:02:38,662
+In Data as software, scripts became software: tested, reviewed by the data team, and released the same way every time.
+
+20
+00:02:40,212 --> 00:02:44,266
+And the platform watched itself, while a person decided what to change.
+
+21
+00:02:46,016 --> 00:02:54,412
+In From tables to decisions, answers came on demand, and each measure was defined in the open, as each part of the business means it.
+
+22
+00:02:55,962 --> 00:03:00,910
+And every reader, a person or an agent, read those definitions as itself.
+
+23
+00:03:02,660 --> 00:03:08,671
+And here, in Documents and closing remarks, each document was read, kept, or written as data.
+
+24
+00:03:10,421 --> 00:03:13,193
+Each idea is older than the tools that showed it.
+
+25
+00:03:17,143 --> 00:03:21,320
+The tools change fast: new features every month, new names, new limits.
+
+26
+00:03:23,420 --> 00:03:26,770
+A film that taught every button would be out of date within months.
+
+27
+00:03:28,970 --> 00:03:36,357
+So these films stay with what changes slowly: agree what data means, test it, govern it, and serve it when the business acts.
+
+28
+00:03:38,657 --> 00:03:46,040
+For the how, go to the source: each tool's official documentation and training, kept up to date by the people who build it.
+
+29
+00:03:48,240 --> 00:03:56,426
+Not on Databricks? The ideas still hold. Check what your own platform offers for each one: most have an answer, under another name.
+
+30
+00:03:58,726 --> 00:04:05,127
+Don't choose a feature because it's new, or a platform because a film showed it. Choose what answers a real need.
+
+31
+00:04:09,427 --> 00:04:15,149
+So how do you keep up? With a loop, small and quick: investigate, adapt, implement, iterate.
+
+32
+00:04:17,399 --> 00:04:22,490
+It's the breeders' two seasons again: the shorter the loop, the more you learn in the same time.
+
+33
+00:04:24,540 --> 00:04:33,575
+Investigate starts from a real need, not from the feature. Rohan's team typed every invoice by hand, and asked for a better way in a ticket.
+
+34
+00:04:35,625 --> 00:04:42,680
+Jun read the official docs on the functions that read documents: what they do, what they cost, and where they stop.
+
+35
+00:04:44,730 --> 00:04:53,036
+Adapt means trying it small, on your own data, in a sandbox, for a set time: two days, on 200 of September's invoices.
+
+36
+00:04:55,086 --> 00:05:04,558
+Jun compared what the functions read with what Finance had typed: 188 of the 200 matched, and most of the 12 that didn't were poor scans.
+
+37
+00:05:06,808 --> 00:05:11,582
+Two days told the team what months of guessing couldn't: where it works, and where it doesn't.
+
+38
+00:05:13,782 --> 00:05:19,588
+Implement means one use case, done properly: in the data project, with its tests, and a way back.
+
+39
+00:05:21,638 --> 00:05:28,963
+The data team reviewed the change. Then Rohan's team checked October's results, and only then was the ticket closed.
+
+40
+00:05:31,213 --> 00:05:38,030
+Iterate means watching what happens, and trying again: each month, the team looks at what went to a person, and why.
+
+41
+00:05:40,280 --> 00:05:45,776
+Not every trial ends in yes. They tried letting the model pick each invoice's cost centre.
+
+42
+00:05:47,426 --> 00:05:50,978
+But Finance's supplier list already gave it, so they dropped it.
+
+43
+00:05:53,228 --> 00:05:56,384
+A trial that ends in no costs two days, not a year.
+
+44
+00:06:00,434 --> 00:06:09,420
+The wheats of the 1950s are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today.
+
+45
+00:06:11,120 --> 00:06:15,855
+So keep the ideas, and test the features: small, soon, and on a real need.
+
+46
+00:06:17,355 --> 00:06:24,434
+That closes this module: moving data, running the platform, serving it to people and agents, and reading documents.
+
+47
+00:06:25,734 --> 00:06:33,630
+Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means.
+
+48
+00:06:35,130 --> 00:06:40,627
+Start from the official docs. Investigate, adapt, implement, iterate, and keep going.

@@ -1,4 +1,5 @@
 {
+  "draft": false,
   "kicker": "Two engines, one copy",
   "kicker_es": "Dos motores, una copia",
   "title_es": "Una copia, una plataforma",
@@ -26,8 +27,8 @@
     "Ámsterdam, 1609: el libro único del Wisselbank",
     "Los mercaderes dejaron de cargar monedas: un pago pasó a ser una línea movida en un solo libro, que mostraba lo que tenía cada uno. Una sola copia de los datos puede servir a todos igual."
   ],
-  "next_h": "You've seen one copy serve a whole platform, governed once. Next: data as software, where scripts became software.",
-  "next_h_es": "Viste una sola copia servir a toda una plataforma, gobernada una vez. Después: datos como software, donde los scripts se volvieron software.",
+  "next_h": "You've seen one copy serve a whole platform, governed once. Next: read often, kept close, where data is kept and for how long.",
+  "next_h_es": "Viste una sola copia servir a toda una plataforma, gobernada una vez. Después: leído seguido, guardado cerca, dónde se guardan los datos y por cuánto tiempo.",
   "elsewhere": {
     "h": "Go further in the official docs",
     "h_es": "Más en la documentación oficial",

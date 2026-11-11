@@ -52,10 +52,11 @@ From `python scripts/check/impact.py`, against `main` before the fix:
 Casual teaching cost, Finance's measure, reads the same claims on the platform, so Rohan Desai in
 Finance is told too.
 
-## Also: the contract first, next time
+## Linked ticket: the contract first, next time
 
-The fix mends last night, not its cause. The app's change was a good one for tutors; what was
+A ticket for Ingrid Holm in HR, linked to this pull request; she decides it there, and doesn't
+review this code. The fix mends last night, not its cause. The app's change was a good one for tutors; what was
 missing was a step. Ingrid Holm, as the claims' owner in HR: could a change to what the claims app
 sends, a field's form, type or meaning, be agreed in its contract first, so that everyone who reads
-the claims knows before the app changes? I've written it as DEC-CLM-03, proposed, for you to decide.
+the claims knows before the app changes? I've written it as DEC-CLM-03, proposed, for you to decide in the ticket.
 The contract would then say whether hours may come as `1:30`, and DEC-CLM-02 would follow it.

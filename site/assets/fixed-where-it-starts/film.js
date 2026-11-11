@@ -1748,8 +1748,14 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){if(!window.__RENDER__&&!WC_RAW&
    2026): the paper's grain and the uneven dry are laid on the paint in one pass (WC.tooth, made with the other textures in a worker,
    wash.js) where the video lays them in two and cuts the paint out again, and the spare canvases are kept and reused at the largest size
    asked for (wc_bufAt), where the video's are made for each size. The wash behind, the bleed and the pencil line are as in the video. */
+/* Such a canvas is bigger than what is drawn in it, and what is drawn is then copied out of its corner, (0,0,w,h), scaled. A scaled copy
+   blends each pixel at the corner's edge with its neighbours just past it, so whatever an earlier, bigger person left there showed as
+   a thin line along the right and bottom of the next person's picture (Rodrigo, 10 November 2026: "a light frame border (right, bottom)
+   of the characters", Where each piece lives at 2:41). So a margin past the corner is cleared too, wider than any blend reaches. */
+const WC_BUF_EDGE=16;
 function wc_bufAt(k,w,h){let c=WC.buf[k];if(!c||c.width<w||c.height<h)c=wc_keep("buf",k,mkCanvas(Math.max(Math.ceil(w/64)*64,c?c.width:0),Math.max(Math.ceil(h/64)*64,c?c.height:0)));else wc_seen(c);
-  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;x.clearRect(0,0,w,h);return[c,x];}
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;
+  x.clearRect(0,0,Math.min(c.width,w+WC_BUF_EDGE),Math.min(c.height,h+WC_BUF_EDGE));return[c,x];}
 function wc_outlinedLive(ctx,draw,x,y,s,edge,box){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const m=ctx.getTransform(),K=Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))),wd=Math.ceil(w*K),hd=Math.ceil(h*K),k=wd/w;
   const [c,cx]=wc_bufAt("lvF",wd,hd);cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
@@ -2980,7 +2986,7 @@ function fw_forearm(ctx,wx,wy,bx,col,seed){const d=Math.atan2(H+120-wy,bx-wx),nx
 // rings spread from each. skin: the hands' colour; sleeve: the coat's
 function fw_hands(ctx,t,inn,dip,o){o=o||{};const D=FW_HD,e=easeCam(clamp(inn,0,1)),dp=clamp(dip,0,1),skin=o.skin||FW_SKIN,sleeve=o.sleeve||[44,46,58],
     rub=(o.rub||0)*Math.sin(t*5.2),y0=lerp(1240,640,e)+40*dp,hands=[[-1,820+rub*14,y0+rub*6,0.22],[1,1100-rub*14,y0-rub*6,-0.2]];
-  for(const [s,x,y,a] of hands){fw_forearm(ctx,x-Math.sin(a)*20,y+40,x+s*260,sleeve,70+s*5);fw_hand(ctx,x,y,a,s,1.25,skin,80+s*7);}
+  for(const [s,x,y,a] of hands){if(window.__ARM__)__ARM__(ctx,x-Math.sin(a)*20,y+40,x+s*260,H+120,230);fw_forearm(ctx,x-Math.sin(a)*20,y+40,x+s*260,sleeve,70+s*5);fw_hand(ctx,x,y,a,s,1.25,skin,80+s*7);}
   // the water over the hands: milky, paler where it's deep; then rings
   if(dp>0.01){ctx.save();wc_tr(ctx,wc_ell(D.cx,D.cy+12,D.wx,D.wy,90));ctx.clip();ctx.beginPath();ctx.rect(0,0,W,y0+10);ctx.clip();
     ctx.fillStyle=rgba(FW.lime,0.62*dp);ctx.fillRect(0,0,W,H);ctx.restore();

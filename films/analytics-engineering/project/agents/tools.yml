@@ -64,8 +64,16 @@ objects:
     github: {pull requests: its own}
 
 # Each agent that works under its own name, and its name in each tool. Sam makes these once the agent
-# has its place on the map, for its owner (AGENTS.md, Under your own name). Its App is named after it,
-# planning-agent; its branches start agent/planning/; its dbt schema is planning_agent.
+# has its place on the map, for its owner (AGENTS.md, Under your own name). Its App is named after it
+# (planning-agent); its branches start with its first word (agent/planning/); its dbt schema is its name
+# (planning_agent). Its App's ID is what a ruleset's bypass list names (review-and-release/rulesets/).
 agents:
   planning agent:
     service principal: 4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73   # its application ID; made Monday 26 October 2026
+    github app: 1203301                                        # its App's ID
+  workload agent:
+    service principal: 7d2b5e90-1c4a-4f83-b6e7-3a9c0d1f2e58   # its application ID; made Monday 7 September 2026
+    github app: 1203302                                        # its App's ID: no ruleset lets it past its own
+    # What its mandate's plain check reads (governance/8-mandates/workload-agent.yml): HR's copy of the
+    # contracts, which lands each evening, and the hour after which a copy counts as tonight's (UTC)
+    tonight's copy: {source: hr_system.contracts, since: "18:00"}

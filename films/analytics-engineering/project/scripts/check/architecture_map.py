@@ -19,7 +19,10 @@ folder of its layer and kind (README.md there). Elements name each other by name
   assigned to a role an agent fills; a step of a role an agent fills doesn't say what it reads or
   writes, or no tool (an application service) serves it; a role with steps has a `may:` written by
   hand; an application service no component realizes, or that serves no step; `people only` sits
-  anywhere but on a step, or `priority` anywhere but on a business object.
+  anywhere but on a step, or `priority` anywhere but on a business object;
+- a kind of task at stage 5 has no mandate beside it on the agent's assignment (`mandate:`, a page in
+  governance/8-mandates/), or a mandate there isn't a page for one of its kinds of task at stage 5,
+  in force, signed by the agent's owner and approved by someone else.
 
 It writes three views into 6-views/, so nobody draws them by hand:
 
@@ -43,6 +46,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 MAP = ROOT / "governance" / "3-architecture-map"
 REGISTER = ROOT / "governance" / "2-owners" / "owners.yml"
+MANDATES = ROOT / "governance" / "8-mandates"
 VIEWS = MAP / "6-views"
 # Each kind's folder, in the map's reading order.
 FOLDERS = {"principle": "1-motivation/principles", "capability": "2-strategy/capabilities",
@@ -64,8 +68,9 @@ JOINS = {"composition": {("capability", "capability")},
 STATUSES = {"confirmed", "draft", "proposed"}
 # What a relationship may say besides the element it names: on an agent's assignment, its stage for
 # each kind of task, "<kind of task>: <1 to 5>", from 1 (it suggests) to 5 (a contributor with a
-# mandate). ArchiMate has no element for how far an agent may act alone, so it's written there.
-DETAILS = {"assignment": {"stage"}}
+# mandate). ArchiMate has no element for how far an agent may act alone, so it's written there; and
+# beside a kind of task at stage 5, the page in governance/8-mandates/ that gives it (`mandate:`).
+DETAILS = {"assignment": {"stage", "mandate"}}
 STAGES = range(1, 6)
 # What a step reads comes in order: the governed context first, each part with an owner and changed
 # only through review; then a business object marked `priority: second`, such as the team's memory,
@@ -109,6 +114,44 @@ def load():
 
 def is_agent(element):
     return element.get("kind") == "application component" and element.get("agent") == "yes"
+
+
+def mandate_problems(element, where, assignment):
+    """Beside each kind of task at stage 5 on an agent's assignment, its mandate: a page in
+    governance/8-mandates/ for that kind of task and that agent, in force, signed by the agent's owner
+    and approved by someone else. A kind of task at stage 5 with none is a problem, and so is a mandate
+    beside any other stage."""
+    problems = []
+    stage = assignment.get("stage") or {}
+    named = assignment.get("mandate")
+    named = [] if named is None else named if isinstance(named, list) else [named]
+    covered = set()
+    for name in named:
+        page_path = MANDATES.parent / str(name)
+        if page_path.parent != MANDATES or page_path.suffix != ".yml" or not page_path.is_file():
+            problems.append(f"{where}: its mandate {name!r} isn't a page in governance/8-mandates/")
+            continue
+        page = yaml.safe_load(page_path.read_text()) or {}
+        task, signed, approved = page.get("task"), page.get("signed") or {}, page.get("approved") or {}
+        covered.add(task)
+        if page.get("agent") != element.get("name"):
+            problems.append(f"{where}: its mandate {name} is the {page.get('agent')}'s, not the {element.get('name')}'s")
+        if stage.get(task) != 5:
+            problems.append(f"{where}: its mandate {name} is for {task!r}, at stage {stage.get(task)!r} on its "
+                            "assignment: a mandate sits beside a kind of task at stage 5")
+        if page.get("status") != "in force":
+            problems.append(f"{where}: its mandate {name} is {page.get('status')!r}, not in force: its task "
+                            "moves down a stage, and the mandate leaves the assignment")
+        if signed.get("by") != element.get("owner"):
+            problems.append(f"{where}: its mandate {name} is signed by {signed.get('by')!r}, not by its owner, "
+                            f"{element.get('owner')!r}")
+        if not approved.get("by") or approved.get("by") == signed.get("by"):
+            problems.append(f"{where}: its mandate {name} isn't approved by a second person")
+    for task, level in stage.items():
+        if level == 5 and task not in covered:
+            problems.append(f"{where}: {task!r} is at stage 5 with no mandate beside it: stage 5's gate is a "
+                            "mandate, a page in governance/8-mandates/, signed by its owner and approved by someone else")
+    return problems
 
 
 def rels(element, kind):
@@ -165,6 +208,7 @@ def check(elements, owners):
                 for task, level in stage.items():
                     if isinstance(level, bool) or level not in STAGES:
                         problems.append(f"{where}: its stage for {task!r} is {level!r}, not one from 1 to 5")
+                problems += mandate_problems(element, where, rel)
         if kind == "capability" and element.get("heat") and not element.get("evidence"):
             problems.append(f"{where}: coloured {element['heat']} with no evidence")
         if kind == "business service":
@@ -249,16 +293,22 @@ def of_kind(elements, kind):
 
 
 def ordered(steps):
-    """The steps in the order they trigger each other, from the one nothing triggers."""
+    """The steps in the order they trigger each other, from the ones nothing triggers: each step after every step
+    that triggers it, so a step two others start (from a ticket, or from a failed night build) comes after both."""
     by_name = {s["name"]: s for s in steps}
-    triggered = {t for s in steps for t in rels(s, "triggering")}
-    out, todo = [], [s for s in steps if s["name"] not in triggered]
-    while todo:
-        step = todo.pop(0)
-        if step in out:
-            continue
-        out.append(step)
-        todo += [by_name[t] for t in rels(step, "triggering") if t in by_name]
+    nexts = {name: [t for t in rels(step, "triggering") if t in by_name] for name, step in by_name.items()}
+    waiting = {name: 0 for name in by_name}
+    for after in nexts.values():
+        for name in after:
+            waiting[name] += 1
+    out, ready = [], [name for name in by_name if not waiting[name]]
+    while ready:
+        name = ready.pop(0)
+        out.append(by_name[name])
+        for t in nexts[name]:
+            waiting[t] -= 1
+            if not waiting[t]:
+                ready.append(t)
     return out + [s for s in steps if s not in out]
 
 

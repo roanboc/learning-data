@@ -1,0 +1,27 @@
+{
+  "name": "workload agent: only its folders",
+  "target": "push",
+  "enforcement": "active",
+  "bypass_actors": [
+    {"actor_id": 2, "actor_type": "RepositoryRole", "bypass_mode": "exempt"},
+    {"actor_id": 4, "actor_type": "RepositoryRole", "bypass_mode": "exempt"},
+    {"actor_id": 5, "actor_type": "RepositoryRole", "bypass_mode": "exempt"},
+    {"actor_id": 1203301, "actor_type": "Integration", "bypass_mode": "exempt"}
+  ],
+  "rules": [
+    {
+      "type": "file_path_restriction",
+      "parameters": {
+        "restricted_file_paths": ["*", "**/*", ".*", ".*/**/*", "**/.*", "**/.*/**/*"],
+        "ignored_file_paths": [
+          "models/marts/workload/*.sql",
+          "models/marts/workload/**/*.sql",
+          "models/intermediate/workload/*.sql",
+          "models/intermediate/workload/**/*.sql",
+          "analyses/workload/*.sql",
+          "analyses/workload/**/*.sql"
+        ]
+      }
+    }
+  ]
+}

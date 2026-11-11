@@ -36,3 +36,9 @@ groups:
     owner:
       name: HR
       email: hr@uni.example
+
+  - name: workload
+    description: Who teaches under a contract that holds today, for the Faculty of Health's heads of school; the workload agent's folders.
+    owner:
+      name: "Anil Kurian, Faculty of Health"
+      email: anil.kurian@uni.example

@@ -12,7 +12,7 @@ scene("gauge",(ctx,S,t,sc)=>{
     tOwn:wAt(sc,"gauge","its own gauge"),tDist:wAt(sc,"gauge","the distance"),tVicR:wAt(sc,"wider","Victoria's rails"),tHand:wAt(sc,"wider","a hand's length"),tNo:wAt(sc,"wider","no train"),
     tPass:wAt(sc,"change","every passenger"),tCrate:wAt(sc,"change","every crate"),tTime:wAt(sc,"cost","travellers time"),tMoney:wAt(sc,"cost","traders money"),
     tReasons:wAt(sc,"reasons","its reasons"),tChanged:wAt(sc,"reasons","changed its gauge"),tKept:wAt(sc,"reasons","Victoria kept"),
-    tYears:wAt(sc,"years","seventy-nine years"),tSomething:wAt(sc,"years","Something had to change"),
+    tYears:wAt(sc,"years","seventy-nine years"),tSomething:wAt(sc,"years","go on stopping"),
     t1962:wAt(sc,"agreed","nineteen sixty-two"),tGov:wAt(sc,"agreed","Australia's government"),tOpened:wAt(sc,"agreed","opened a new line"),tOne:wAt(sc,"agreed","one agreed gauge"),
     tFreight:wAt(sc,"through","Freight ran"),tApril:wAt(sc,"through","from April"),tNobody:wAt(sc,"through","nobody changing"),tThird:wAt(sc,"third","by a third"),
     tUni:wAt(sc,"files","At the university"),tHRc:wAt(sc,"files","HR's contracts"),tFile:wAt(sc,"files","as a file"),
@@ -56,7 +56,7 @@ scene("gauge",(ctx,S,t,sc)=>{
         const ra=ag_in(tt,T.tRohan-0.2,0.6);if(ra>0){c.save();c.globalAlpha*=ra;md_person(c,"rohan",1640,792,0.9,{t:tt,flip:true,gaze:[4,-1]});c.restore();
           md_nameTag(c,1360,700,"rohan",{role:"Finance",col:MD.dom.finance,align:"right",a:ra});}});c.restore();}}
   ],0.6);
-  md_title(ctx,S,t,B,"Moving is easy, agreeing is the work","what still needs people when the tools move the data","FILM 1 OF 4 · DATA THAT MOVES");
+  md_title(ctx,S,t,B,"Moving is easy, agreeing is the work","what still needs people when the tools move the data","FILM 1 OF 3 · DATA THAT MOVES");
 });
 
 /* ---------------------------------------------------------------- 2 · What got easier */
@@ -234,7 +234,7 @@ scene("agreed",(ctx,S,t,sc)=>{
   ],0.6);
   mv_kicker(ctx,S,ag_in(t,T.tNow+0.4,0.6)*(1-ag_in(t,T.tLet-0.6,0.6)));  // after the dissolve: the year's pill sat where it comes in
   // the end card comes in as the voice says the film's line, and holds through the last breath
-  md_end(ctx,S,t,T.tLet-0.5,"Moving is easy, agreeing is the work","Let the tools move it; spend your time on the contract.","Film 1 of 4","Data that moves");
+  md_end(ctx,S,t,T.tLet-0.5,"Moving is easy, agreeing is the work","Let the tools move it; spend your time on the contract.","Film 1 of 3","Data that moves");
 });
 
 // the map's chapters run on from each other: the next one's camera starts where the last one's is, and only what changes fades

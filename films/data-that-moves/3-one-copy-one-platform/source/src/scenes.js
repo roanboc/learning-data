@@ -105,7 +105,7 @@ scene("ledger",(ctx,S,t,sc)=>{
     tKinds:sc.cues.kinds,tKindsW:wAt(sc,"kinds","kinds"),tClipped:wAt(sc,"kinds","clipped"),tShaved:wAt(sc,"kinds","shaved"),tWorn:wAt(sc,"kinds","worn thin"),
     tWeigh:sc.cues.weigh,tWeighW:wAt(sc,"weigh","weighing"),tWorth:wAt(sc,"weigh","nobody knows"),
     tOwed:sc.cues.owed,tLess:wAt(sc,"owed","nine per cent"),tOwedM:wAt(sc,"owed","a merchant owed"),tNine:wAt(sc,"owed","nine hundred"),
-    tChange:sc.cues.change,tSlow:wAt(sc,"change","slow"),tDisp:wAt(sc,"change","disputed"),tRisky:wAt(sc,"change","risky"),tHad:wAt(sc,"change","Something"),
+    tChange:sc.cues.change,tSlow:wAt(sc,"change","slow"),tDisp:wAt(sc,"change","disputed"),tRisky:wAt(sc,"change","risky"),tHad:wAt(sc,"change","Amsterdam's"),
     tBank:sc.cues.bank,tJan:wAt(sc,"bank","January"),tWissel:wAt(sc,"bank","Wisselbank"),tHall:wAt(sc,"bank","town hall"),
     tDep:sc.cues.deposit,tOnce:wAt(sc,"deposit","once"),tWeighs:wAt(sc,"deposit","weighs it"),tWrites:wAt(sc,"deposit","writes its value"),tOwn:wAt(sc,"deposit","own page"),
     tLine:sc.cues.line,tMoved:wAt(sc,"line","a line moved"),tNoCoin:wAt(sc,"line","no coin"),tHolds:wAt(sc,"line","what each merchant holds"),
@@ -164,7 +164,7 @@ scene("ledger",(ctx,S,t,sc)=>{
       oc_scr(c,S,()=>{const b=tt-T.tBreath;if(b<-0.2)return;const pa=ag_in(b,-0.2,0.5)*(1-ag_in(b,1.0,0.5)),ra=ag_in(b,0.9,0.5)*(1-ag_in(tt,tTitle+0.2,0.4));
         md_veil(c,S,0.55*ag_in(b,-0.2,0.6));oc_pageCard(c,560,440,800,{a:pa,s:"To page 87",n:"300 guilders"});oc_rowCard(c,460,440,{a:ra,k:(b-0.9)/0.5});});}}
   ],0.6);
-  md_title(ctx,S,t,tTitle,"One copy, one platform","Written once, read where it's written","FILM 3 OF 4 · DATA THAT MOVES");
+  md_title(ctx,S,t,tTitle,"One copy, one platform","Written once, read where it's written","FILM 3 OF 3 · DATA THAT MOVES");
 });
 
 /* ---------------------------------------------------------------- 2 · The usual design */
@@ -301,7 +301,7 @@ scene("row",(ctx,S,t,sc)=>{
         const na=ag_in(tt,T.t856-0.2,0.5);if(na>0){md_T(c,"856",900,720,{w:800,size:84,align:"right",col:MD.agreed,a:na});md_T(c,"casual staff paid from rows like hers",930,700,{w:700,size:32,a:na});}
         oc_pillAt(c,1240,800,"no copy for a team to keep",tt,T.tNot,null,{col:MD.pass,icon:"tick"});}));}}
   ],0.6);
-  md_end(ctx,S,t,T.tTake-0.8,"One copy, one platform","Keep one copy, governed once.","Film 3 of 4","Data that moves");
+  md_end(ctx,S,t,T.tTake-0.8,"One copy, one platform","Keep one copy, governed once.","Film 3 of 3","Data that moves");
 });
 
 // chapters that open in the room the one before ends in: the end leaves, and the new chapter's first moment comes in (later: true)

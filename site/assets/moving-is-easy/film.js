@@ -437,7 +437,7 @@ const NARR={
  {"id":"change","gap":0.8,"text":"At Albury, every passenger had to change trains, and every crate and bale of wool was lifted into another wagon."},
  {"id":"cost","gap":0.8,"text":"It cost travellers time, and traders money, on every journey."},
  {"id":"reasons","gap":0.8,"text":"Each colony had its reasons: New South Wales changed its gauge with a new engineer, and Victoria kept the one both had first chosen."},
- {"id":"years","gap":0.8,"text":"For 79 years, everything stopped at Albury. Something had to change.","say":"For seventy-nine years, everything stopped at Albury. Something had to change."},
+ {"id":"years","gap":0.8,"text":"For 79 years, everything stopped at Albury, and it would go on stopping until the rails agreed.","say":"For seventy-nine years, everything stopped at Albury, and it would go on stopping until the rails agreed."},
  {"id":"agreed","gap":0.8,"text":"In 1962, Australia's government, with New South Wales and Victoria, opened a new line from Albury to Melbourne, built to one agreed gauge.","say":"In nineteen sixty-two, Australia's government, with New South Wales and Victoria, opened a new line from Albury to Melbourne, built to one agreed gauge."},
  {"id":"through","gap":0.8,"text":"Freight ran straight through that January, and from April, passengers did too, with nobody changing trains."},
  {"id":"third","gap":0.8,"text":"Within a year, the freight it carried had grown by a third."},
@@ -495,7 +495,7 @@ const NARR={
  {"id":"takeaway","gap":0.8,"text":"Let the tools move it; spend your time on the contract."}]}
 };
 
-const VODUR={"gauge/june": 7.318, "gauge/bridge": 5.035, "gauge/gauge": 5.263, "gauge/wider": 5.12, "gauge/change": 6.915, "gauge/cost": 3.539, "gauge/reasons": 8.557, "gauge/years": 4.573, "gauge/agreed": 9.772, "gauge/through": 6.736, "gauge/third": 2.894, "gauge/files": 5.846, "gauge/days": 4.206, "gauge/hard": 5.407, "promise/module": 3.56, "promise/teams": 7.448, "promise/now": 2.732, "promise/each": 6.4, "promise/light": 5.267, "promise/advice": 4.916, "promise/linh": 8.409, "promise/born": 6.211, "promise/events": 8.401, "promise/batch": 7.46, "promise/eip": 7.316, "promise/takes": 2.648, "ways/connector": 2.688, "ways/sam": 5.195, "ways/keeps": 5.136, "ways/bronze": 4.118, "ways/query": 3.554, "ways/ledger": 6.364, "ways/large": 4.646, "ways/mirror": 6.613, "ways/rohan": 5.604, "ways/share": 5.965, "ways/api": 5.122, "ways/easy": 4.209, "contract/left": 5.942, "contract/ingrid": 3.665, "contract/noor": 3.578, "contract/fields": 6.089, "contract/con": 6.725, "contract/owner": 2.701, "contract/delete": 4.686, "contract/arrive": 7.517, "contract/history": 3.449, "contract/personal": 5.18, "contract/never": 3.116, "contract/standard": 5.869, "contract/silent": 5.893, "contract/ahead": 5.382, "agreed/ran": 5.377, "agreed/ours": 8.331, "agreed/standards": 1.626, "agreed/two": 6.527, "agreed/wheel": 6.417, "agreed/struggle": 7.137, "agreed/takeaway": 2.863};
+const VODUR={"gauge/june": 7.318, "gauge/bridge": 5.035, "gauge/gauge": 5.263, "gauge/wider": 5.12, "gauge/change": 6.915, "gauge/cost": 3.539, "gauge/reasons": 8.557, "gauge/years": 6.004, "gauge/agreed": 9.772, "gauge/through": 6.736, "gauge/third": 2.894, "gauge/files": 5.846, "gauge/days": 4.206, "gauge/hard": 5.407, "promise/module": 3.56, "promise/teams": 7.448, "promise/now": 2.732, "promise/each": 6.4, "promise/light": 5.267, "promise/advice": 4.916, "promise/linh": 8.409, "promise/born": 6.211, "promise/events": 8.401, "promise/batch": 7.46, "promise/eip": 7.316, "promise/takes": 2.648, "ways/connector": 2.688, "ways/sam": 5.195, "ways/keeps": 5.136, "ways/bronze": 4.118, "ways/query": 3.554, "ways/ledger": 6.364, "ways/large": 4.646, "ways/mirror": 6.613, "ways/rohan": 5.604, "ways/share": 5.965, "ways/api": 5.122, "ways/easy": 4.209, "contract/left": 5.942, "contract/ingrid": 3.665, "contract/noor": 3.578, "contract/fields": 6.089, "contract/con": 6.725, "contract/owner": 2.701, "contract/delete": 4.686, "contract/arrive": 7.517, "contract/history": 3.449, "contract/personal": 5.18, "contract/never": 3.116, "contract/standard": 5.869, "contract/silent": 5.893, "contract/ahead": 5.382, "agreed/ran": 5.377, "agreed/ours": 8.331, "agreed/standards": 1.626, "agreed/two": 6.527, "agreed/wheel": 6.417, "agreed/struggle": 7.137, "agreed/takeaway": 2.863};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2150,7 +2150,7 @@ scene("gauge",(ctx,S,t,sc)=>{
     tOwn:wAt(sc,"gauge","its own gauge"),tDist:wAt(sc,"gauge","the distance"),tVicR:wAt(sc,"wider","Victoria's rails"),tHand:wAt(sc,"wider","a hand's length"),tNo:wAt(sc,"wider","no train"),
     tPass:wAt(sc,"change","every passenger"),tCrate:wAt(sc,"change","every crate"),tTime:wAt(sc,"cost","travellers time"),tMoney:wAt(sc,"cost","traders money"),
     tReasons:wAt(sc,"reasons","its reasons"),tChanged:wAt(sc,"reasons","changed its gauge"),tKept:wAt(sc,"reasons","Victoria kept"),
-    tYears:wAt(sc,"years","seventy-nine years"),tSomething:wAt(sc,"years","Something had to change"),
+    tYears:wAt(sc,"years","seventy-nine years"),tSomething:wAt(sc,"years","go on stopping"),
     t1962:wAt(sc,"agreed","nineteen sixty-two"),tGov:wAt(sc,"agreed","Australia's government"),tOpened:wAt(sc,"agreed","opened a new line"),tOne:wAt(sc,"agreed","one agreed gauge"),
     tFreight:wAt(sc,"through","Freight ran"),tApril:wAt(sc,"through","from April"),tNobody:wAt(sc,"through","nobody changing"),tThird:wAt(sc,"third","by a third"),
     tUni:wAt(sc,"files","At the university"),tHRc:wAt(sc,"files","HR's contracts"),tFile:wAt(sc,"files","as a file"),
@@ -2194,7 +2194,7 @@ scene("gauge",(ctx,S,t,sc)=>{
         const ra=ag_in(tt,T.tRohan-0.2,0.6);if(ra>0){c.save();c.globalAlpha*=ra;md_person(c,"rohan",1640,792,0.9,{t:tt,flip:true,gaze:[4,-1]});c.restore();
           md_nameTag(c,1360,700,"rohan",{role:"Finance",col:MD.dom.finance,align:"right",a:ra});}});c.restore();}}
   ],0.6);
-  md_title(ctx,S,t,B,"Moving is easy, agreeing is the work","what still needs people when the tools move the data","FILM 1 OF 4 · DATA THAT MOVES");
+  md_title(ctx,S,t,B,"Moving is easy, agreeing is the work","what still needs people when the tools move the data","FILM 1 OF 3 · DATA THAT MOVES");
 });
 
 /* ---------------------------------------------------------------- 2 · What got easier */
@@ -2372,7 +2372,7 @@ scene("agreed",(ctx,S,t,sc)=>{
   ],0.6);
   mv_kicker(ctx,S,ag_in(t,T.tNow+0.4,0.6)*(1-ag_in(t,T.tLet-0.6,0.6)));  // after the dissolve: the year's pill sat where it comes in
   // the end card comes in as the voice says the film's line, and holds through the last breath
-  md_end(ctx,S,t,T.tLet-0.5,"Moving is easy, agreeing is the work","Let the tools move it; spend your time on the contract.","Film 1 of 4","Data that moves");
+  md_end(ctx,S,t,T.tLet-0.5,"Moving is easy, agreeing is the work","Let the tools move it; spend your time on the contract.","Film 1 of 3","Data that moves");
 });
 
 // the map's chapters run on from each other: the next one's camera starts where the last one's is, and only what changes fades

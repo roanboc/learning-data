@@ -16,7 +16,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In Brazil then, people who can't read can't vote.":"En el Brasil de entonces, quien no sabe leer no puede votar.",
 "They sign papers they can't read, and others read their letters to them.":"Firman papeles que no pueden leer, y otros les leen sus cartas.",
 "Adult classes often use children's primers, with lines like Eva saw the grape: nothing about their own lives, and many give up.":"Las clases para adultos suelen usar cartillas infantiles, con frases como Eva vio la uva: nada de su vida, y muchos abandonan.",
-"Something has to change.":"Algo tiene que cambiar.",
+"Learning to read has to start from people's own lives.":"Aprender a leer tiene que partir de la propia vida de la gente.",
 "Freire's team starts from the town's own words.":"El equipo de Freire parte de las palabras del pueblo.",
 "They listen to how people talk about their lives, write down about four hundred, and choose a handful.":"Escuchan cómo habla la gente de su vida, anotan unas cuatrocientas y eligen un puñado.",
 "Each evening, a culture circle meets: learners, and a coordinator instead of a teacher.":"Cada noche se reúne un círculo de cultura: quienes aprenden, y un coordinador en lugar de un maestro.",

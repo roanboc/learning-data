@@ -2,6 +2,14 @@
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (years and numbers in words). The few longer stops are in breath.js.
 const NARR={
 "nature":{"name":"Why look to nature","lead":1.6,"tail":0.6,"vo":[
+ {"id":"squirt","gap":0.8,"text":"Off a rocky shore, a tadpole about a millimetre long swims through the sea."},
+ {"id":"young","gap":0.8,"text":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain of about 180 nerve cells.","say":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain of about a hundred and eighty nerve cells."},
+ {"id":"rock","gap":0.8,"text":"For a few hours, it swims, looking for a rock to live on."},
+ {"id":"glue","gap":0.8,"text":"Then it glues its head to the rock, and never moves again."},
+ {"id":"eats","gap":0.8,"text":"People say it eats its own brain. Not quite: its body takes the tail, and most of the brain, apart, and uses them again."},
+ {"id":"steer","gap":0.8,"text":"On a rock, there's nothing left to steer."},
+ {"id":"move","gap":0.8,"text":"Brains are for animals that move: to find food, and not to become food."},
+ {"id":"next","gap":0.8,"text":"And moving well means guessing what comes next."},
  {"id":"start","gap":0.8,"text":"In 1958, the psychologist Frank Rosenblatt showed a program that learned from examples: the perceptron.","say":"In nineteen fifty-eight, the psychologist Frank Rosenblatt showed a program that learned from examples: the perceptron."},
  {"id":"cell","gap":0.8,"text":"He modelled it on a nerve cell."},
  {"id":"why","gap":0.8,"text":"Why look to nature to build a machine?"},
@@ -9,7 +17,6 @@ const NARR={
  {"id":"birds","gap":0.8,"text":"People watched birds for centuries before they could fly."},
  {"id":"wright","gap":0.8,"text":"Wilbur Wright noticed buzzards twisting their wingtips to keep their balance."},
  {"id":"twist","gap":0.8,"text":"So the brothers built that twist into their wings."},
- {"id":"seed","gap":0.8,"text":"Engineers still study the maple seed, which spins down like a tiny helicopter."},
  {"id":"example","gap":0.8,"text":"And for a machine that learns, nature had the only working example: a brain."},
  {"id":"wired","gap":0.8,"text":"But in 1888, nobody could see how a brain was wired.","say":"But in eighteen eighty-eight, nobody could see how a brain was wired."}]},
 "cajal":{"name":"A thicket","lead":0.8,"tail":1.0,"vo":[
@@ -60,6 +67,16 @@ const NARR={
  {"id":"guess","gap":0.8,"text":"A brain doesn't take in everything: it fills gaps with what's likely."},
  {"id":"blind","gap":0.8,"text":"Where the nerve leaves each eye, there are no cells to catch light: a blind spot."},
  {"id":"never","gap":0.8,"text":"You never see a hole there. Your brain fills it in, from what's around it."}]},
+"ahead":{"name":"A step ahead","lead":0.8,"tail":1.0,"vo":[
+ {"id":"trick","gap":0.8,"text":"Many scientists now think a brain fills in all the time, not just in one spot."},
+ {"id":"guess","gap":0.8,"text":"It guesses what comes next, a moment ahead, and checks the guess against what the senses bring."},
+ {"id":"dragon","gap":0.8,"text":"A dragonfly doesn't chase a midge: it flies to where the midge will be, and catches about nine in ten."},
+ {"id":"stairs","gap":0.8,"text":"Step onto an escalator that has stopped, and you stumble: your legs were ready for it to move."},
+ {"id":"error","gap":0.8,"text":"What a brain expected, it barely notices. What it didn't, it notices at once: a prediction error."},
+ {"id":"schultz","gap":0.8,"text":"In the 1990s, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice.","say":"In the nineteen nineties, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice."},
+ {"id":"first","gap":0.8,"text":"At first, the cells fired at the juice. Once the monkeys learned that the light came first, they fired at the light instead."},
+ {"id":"quiet","gap":0.8,"text":"And when the light came but the juice didn't, they fell silent, just when the juice was due."},
+ {"id":"miss","gap":0.8,"text":"Guess, check, learn from the miss: that's how an animal on the move finds food, and stays out of reach."}]},
 "borrowed":{"name":"Borrowed, not copied","lead":0.8,"tail":1.0,"vo":[
  {"id":"unit","gap":0.8,"text":"In 1943, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit.","say":"In nineteen forty-three, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit."},
  {"id":"adds","gap":0.8,"text":"It adds up its inputs, and fires if the total passes a set level."},
@@ -95,6 +112,20 @@ const NARR={
  {"id":"gap","gap":0.8,"text":"In the 1950s, electron microscopes showed the gap he had drawn, about twenty millionths of a millimetre wide.","say":"In the nineteen fifties, electron microscopes showed the gap he had drawn, about twenty millionths of a millimetre wide."},
  {"id":"built","gap":0.8,"text":"Models are built on that picture: simple units, and connections that change."},
  {"id":"fill","gap":0.8,"text":"Like brains, they fill gaps with what's likely, a little differently each time."},
- {"id":"check","gap":0.8,"text":"Knowing that, you know when to check them: against the evidence, as Cajal's drawings were checked."},
+ {"id":"check","gap":0.8,"text":"Knowing that, you know when to check them: against the evidence, as Cajal's drawings were checked."}]},
+"expects":{"name":"A loop that expects","lead":0.8,"tail":1.0,"vo":[
+ {"id":"data","gap":0.8,"text":"So what does a brain that guesses ahead mean for work with data?"},
+ {"id":"reflex","gap":0.8,"text":"A lot of data work runs like a reflex: a trigger comes, a script runs the same steps, and stops."},
+ {"id":"night","gap":0.8,"text":"Every night, a script loads the day's course registrations, and checks one rule: the table isn't empty."},
+ {"id":"monday","gap":0.8,"text":"One Monday, only half the rows arrive. The rule passes, and the reports go out wrong."},
+ {"id":"agent","gap":0.8,"text":"An agent can work more like a brain: before it looks, it says what it expects."},
+ {"id":"expect","gap":0.8,"text":"About 4,100 rows, as on most Mondays, from three campuses.","say":"About four thousand one hundred rows, as on most Mondays, from three campuses."},
+ {"id":"gap","gap":0.8,"text":"Then it looks, and measures the gap: 2,030 rows. A prediction error.","say":"Then it looks, and measures the gap: two thousand and thirty rows. A prediction error."},
+ {"id":"forage","gap":0.8,"text":"So it goes looking, as a forager would: it counts each campus, and finds that one sent nothing."},
+ {"id":"adapt","gap":0.8,"text":"When an assumption fails, a column renamed or a field left empty, it doesn't crash: it changes its plan, and writes down what changed."},
+ {"id":"person","gap":0.8,"text":"And it doesn't fix the reports on its own: it shows a person the gap, with its evidence."},
+ {"id":"plain","gap":0.8,"text":"Where nothing surprises, a plain script is still the right tool: cheaper, and the same every time."},
+ {"id":"loop","gap":0.8,"text":"Expect, act, check, and adapt: the loop that kept moving animals alive."},
+ {"id":"borrow","gap":0.8,"text":"Agents borrowed the loop, not the brain."},
  {"id":"next","gap":0.8,"text":"Next, what an agent is: a model that reasons, with hands, in a loop."}]}
 };

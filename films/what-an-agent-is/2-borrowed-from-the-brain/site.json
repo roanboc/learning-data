@@ -4,33 +4,35 @@
   "title_es": "Tomado del cerebro",
   "h1": "Borrowed from the brain: what models took, and didn't",
   "h1_es": "Tomado del cerebro: lo que los modelos tomaron, y no",
-  "lead": "In 1888, nobody could see how a brain was wired: under the microscope it was a thicket. Santiago Ramón y Cajal made a stain work and drew separate cells passing messages one way. Machines borrowed that picture. Why do they, like brains, fill a gap with what's likely?",
-  "lead_es": "En 1888, nadie podía ver cómo estaba conectado un cerebro: al microscopio era una maraña. Santiago Ramón y Cajal hizo funcionar una tinción y dibujó células separadas que pasan mensajes en un sentido. Las máquinas tomaron esa imagen. ¿Por qué rellenan, como los cerebros, un hueco con lo probable?",
-  "description": "A film about where models came from, the second of What an agent is: why Rosenblatt modelled the perceptron on a nerve cell, as the Wright brothers took a buzzard's twist for their wings; Santiago Ramón y Cajal in 1888, who made Golgi's stain work on young birds' brains and drew separate cells where others saw one net, so a message has a direction and a brain can learn; how a nerve cell fires, all or nothing, and how its connections change, in a jellyfish, a sea slug, a bee, an octopus, a finch and us; a brain that fills its blind spot with what's likely; what models borrowed, units that add up weighted inputs in layers, and what they didn't; why the same question can bring a different answer, a wheel of chances and its temperature; and why a model fills a missing fact with a likely one, so a fluent answer isn't a checked one.",
-  "description_es": "Una película sobre de dónde vienen los modelos, la segunda de Qué es un agente: por qué Rosenblatt basó el perceptrón en una célula nerviosa, como los hermanos Wright tomaron de las rapaces la torsión de sus alas; Santiago Ramón y Cajal en 1888, que logró que la tinción de Golgi funcionara en cerebros de aves jóvenes y dibujó células separadas donde otros veían una sola red, de modo que un mensaje tiene un sentido y un cerebro puede aprender; cómo se dispara una célula nerviosa, todo o nada, y cómo cambian sus conexiones, en una medusa, una babosa de mar, una abeja, un pulpo, un pinzón y nosotros; un cerebro que rellena su punto ciego con lo probable; lo que los modelos tomaron prestado, unidades que suman entradas con pesos en capas, y lo que no; por qué la misma pregunta puede dar otra respuesta, una ruleta de posibilidades y su temperatura; y por qué un modelo rellena un dato que falta con uno probable, así que una respuesta fluida no está verificada.",
-  "card": "Why the first learning machine copied a nerve cell, what models took from brains, and why they fill gaps with likely words.",
-  "card_es": "Por qué la primera máquina que aprendía copió una neurona, qué tomaron los modelos del cerebro y por qué rellenan con lo probable.",
+  "lead": "Why did the first learning machine copy a nerve cell? A brain is built to guess what comes next, and to notice the miss. Models borrowed some of that. Agents borrowed the loop: expect, act, check the gap and adapt, where a plain script only reacts.",
+  "lead_es": "¿Por qué la primera máquina que aprendía copió una neurona? Un cerebro está hecho para adivinar lo que viene, y para notar el error. Los modelos tomaron algo de eso. Los agentes tomaron el bucle: esperar, actuar, revisar la diferencia y adaptarse, donde un script sencillo solo reacciona.",
+  "description": "A film about where models came from, the second of What an agent is: a sea squirt larva that swims, then settles on a rock and takes its own brain apart, because brains are for moving; why Rosenblatt modelled the perceptron on a nerve cell, as the Wright brothers took a buzzard's twist for their wings; Santiago Ramón y Cajal in 1888, who made Golgi's stain work on young birds' brains and drew separate cells where others saw one net, so a message has a direction and a brain can learn; how a nerve cell fires, all or nothing, and how its connections change, in a jellyfish, a sea slug, a bee, an octopus, a finch and us; a brain that fills its blind spot with what's likely, and guesses a moment ahead, as a dragonfly does, and as a stopped escalator shows, with cells that fire on the miss; what models borrowed, units that add up weighted inputs in layers, and what they didn't; why the same question can bring a different answer; why a model fills a missing fact with a likely one; and why an agent that expects, measures the gap and adapts, where a script only reacts, borrowed the loop, not the brain.",
+  "description_es": "Una película sobre de dónde vienen los modelos, la segunda de Qué es un agente: una larva de ascidia que nada, luego se fija a una roca y desarma su propio cerebro, porque los cerebros son para moverse; por qué Rosenblatt basó el perceptrón en una célula nerviosa, como los hermanos Wright tomaron de las rapaces la torsión de sus alas; Santiago Ramón y Cajal en 1888, que logró que la tinción de Golgi funcionara en cerebros de aves jóvenes y dibujó células separadas donde otros veían una sola red, de modo que un mensaje tiene un sentido y un cerebro puede aprender; cómo se dispara una célula nerviosa, todo o nada, y cómo cambian sus conexiones, en una medusa, una babosa de mar, una abeja, un pulpo, un pinzón y nosotros; un cerebro que rellena su punto ciego con lo probable, y adivina un momento por delante, como una libélula, y como muestra una escalera mecánica detenida, con células que se disparan ante el error; lo que los modelos tomaron prestado, unidades que suman entradas con pesos en capas, y lo que no; por qué la misma pregunta puede dar otra respuesta; por qué un modelo rellena un dato que falta con uno probable; y por qué un agente que espera, mide la diferencia y se adapta, donde un script solo reacciona, tomó prestado el bucle, no el cerebro.",
+  "card": "Why brains guess ahead, what models took from them, and why an agent that expects and checks the gap borrowed the loop.",
+  "card_es": "Por qué los cerebros adivinan por delante, qué tomaron los modelos y por qué un agente que espera y revisa tomó el bucle.",
   "chapters_es": {
     "nature": "Por qué mirar a la naturaleza",
     "cajal": "Una maraña",
     "cell": "Dentro de una célula nerviosa",
     "animals": "Las pruebas de la naturaleza",
     "gaps": "Rellenar los huecos",
+    "ahead": "Un paso por delante",
     "borrowed": "Prestado, no copiado",
     "likely": "Palabras probables",
     "sure": "Seguro, y equivocado",
-    "held": "Una imagen que se sostuvo"
+    "held": "Una imagen que se sostuvo",
+    "expects": "Un bucle que espera"
   },
   "past": [
     "Barcelona, 1888: Santiago Ramón y Cajal draws separate nerve cells",
-    "Models borrowed an idea, not a brain: a likely answer isn't a checked one."
+    "Agents borrowed the loop, not the brain: expect, check the gap, adapt."
   ],
   "past_es": [
     "Barcelona, 1888: Santiago Ramón y Cajal dibuja células nerviosas separadas",
-    "Los modelos tomaron una idea, no un cerebro: una respuesta probable no está verificada."
+    "Los agentes tomaron el bucle, no el cerebro: esperar, revisar la diferencia, adaptarse."
   ],
-  "next_h": "You've seen why the first learning machine was modelled on a nerve cell, what models took from brains and what they didn't, and why their answers vary and fill gaps. Next: what an agent is: a model that reasons, with hands, in a loop.",
-  "next_h_es": "Viste por qué la primera máquina que aprendía se basó en una célula nerviosa, qué tomaron los modelos del cerebro y qué no, y por qué sus respuestas varían y rellenan huecos. Después: qué es un agente: un modelo que razona, con manos, en un ciclo.",
+  "next_h": "You've seen why brains guess ahead, what models took from them and what they didn't, and why an agent that expects and checks the gap borrowed the loop. Next: what an agent is: a model that reasons, with hands, in a loop.",
+  "next_h_es": "Viste por qué los cerebros adivinan por delante, qué tomaron los modelos y qué no, y por qué un agente que espera y revisa la diferencia tomó el bucle. Después: qué es un agente: un modelo que razona, con manos, en un bucle.",
   "elsewhere": {
     "h": "Watch nerve cells learn for yourself",
     "h_es": "Mira aprender a las neuronas por tu cuenta",
@@ -61,6 +63,15 @@
         "href": "https://systems.learn-all.org/environments/forager-worlds/#lab=learning-colour",
         "href_es": "https://systems.learn-all.org/environments/forager-worlds/?lang=es#lab=learning-colour"
       }
+    ],
+    "more": [
+      {
+        "text": "Hands-on in Python: a reflex and a predictor, a foraging loop, and learning from the miss",
+        "text_es": "Práctica en Python: un reflejo y una predicción, un bucle de forrajeo y aprender del error",
+        "href": "https://github.com/roanboc/learning-data/tree/main/films/what-an-agent-is/2-borrowed-from-the-brain/labs",
+        "href_es": "https://github.com/roanboc/learning-data/tree/main/films/what-an-agent-is/2-borrowed-from-the-brain/labs"
+      }
     ]
-  }
+  },
+  "draft": true
 }

@@ -406,6 +406,14 @@ function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (years and numbers in words). The few longer stops are in breath.js.
 const NARR={
 "nature":{"name":"Why look to nature","lead":1.6,"tail":0.6,"vo":[
+ {"id":"squirt","gap":0.8,"text":"Off a rocky shore, a tadpole about a millimetre long swims through the sea."},
+ {"id":"young","gap":0.8,"text":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain of about 180 nerve cells.","say":"It's a young sea squirt, with an eye spot, a tail, and a tiny brain of about a hundred and eighty nerve cells."},
+ {"id":"rock","gap":0.8,"text":"For a few hours, it swims, looking for a rock to live on."},
+ {"id":"glue","gap":0.8,"text":"Then it glues its head to the rock, and never moves again."},
+ {"id":"eats","gap":0.8,"text":"People say it eats its own brain. Not quite: its body takes the tail, and most of the brain, apart, and uses them again."},
+ {"id":"steer","gap":0.8,"text":"On a rock, there's nothing left to steer."},
+ {"id":"move","gap":0.8,"text":"Brains are for animals that move: to find food, and not to become food."},
+ {"id":"next","gap":0.8,"text":"And moving well means guessing what comes next."},
  {"id":"start","gap":0.8,"text":"In 1958, the psychologist Frank Rosenblatt showed a program that learned from examples: the perceptron.","say":"In nineteen fifty-eight, the psychologist Frank Rosenblatt showed a program that learned from examples: the perceptron."},
  {"id":"cell","gap":0.8,"text":"He modelled it on a nerve cell."},
  {"id":"why","gap":0.8,"text":"Why look to nature to build a machine?"},
@@ -413,7 +421,6 @@ const NARR={
  {"id":"birds","gap":0.8,"text":"People watched birds for centuries before they could fly."},
  {"id":"wright","gap":0.8,"text":"Wilbur Wright noticed buzzards twisting their wingtips to keep their balance."},
  {"id":"twist","gap":0.8,"text":"So the brothers built that twist into their wings."},
- {"id":"seed","gap":0.8,"text":"Engineers still study the maple seed, which spins down like a tiny helicopter."},
  {"id":"example","gap":0.8,"text":"And for a machine that learns, nature had the only working example: a brain."},
  {"id":"wired","gap":0.8,"text":"But in 1888, nobody could see how a brain was wired.","say":"But in eighteen eighty-eight, nobody could see how a brain was wired."}]},
 "cajal":{"name":"A thicket","lead":0.8,"tail":1.0,"vo":[
@@ -464,6 +471,16 @@ const NARR={
  {"id":"guess","gap":0.8,"text":"A brain doesn't take in everything: it fills gaps with what's likely."},
  {"id":"blind","gap":0.8,"text":"Where the nerve leaves each eye, there are no cells to catch light: a blind spot."},
  {"id":"never","gap":0.8,"text":"You never see a hole there. Your brain fills it in, from what's around it."}]},
+"ahead":{"name":"A step ahead","lead":0.8,"tail":1.0,"vo":[
+ {"id":"trick","gap":0.8,"text":"Many scientists now think a brain fills in all the time, not just in one spot."},
+ {"id":"guess","gap":0.8,"text":"It guesses what comes next, a moment ahead, and checks the guess against what the senses bring."},
+ {"id":"dragon","gap":0.8,"text":"A dragonfly doesn't chase a midge: it flies to where the midge will be, and catches about nine in ten."},
+ {"id":"stairs","gap":0.8,"text":"Step onto an escalator that has stopped, and you stumble: your legs were ready for it to move."},
+ {"id":"error","gap":0.8,"text":"What a brain expected, it barely notices. What it didn't, it notices at once: a prediction error."},
+ {"id":"schultz","gap":0.8,"text":"In the 1990s, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice.","say":"In the nineteen nineties, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice."},
+ {"id":"first","gap":0.8,"text":"At first, the cells fired at the juice. Once the monkeys learned that the light came first, they fired at the light instead."},
+ {"id":"quiet","gap":0.8,"text":"And when the light came but the juice didn't, they fell silent, just when the juice was due."},
+ {"id":"miss","gap":0.8,"text":"Guess, check, learn from the miss: that's how an animal on the move finds food, and stays out of reach."}]},
 "borrowed":{"name":"Borrowed, not copied","lead":0.8,"tail":1.0,"vo":[
  {"id":"unit","gap":0.8,"text":"In 1943, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit.","say":"In nineteen forty-three, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit."},
  {"id":"adds","gap":0.8,"text":"It adds up its inputs, and fires if the total passes a set level."},
@@ -499,25 +516,41 @@ const NARR={
  {"id":"gap","gap":0.8,"text":"In the 1950s, electron microscopes showed the gap he had drawn, about twenty millionths of a millimetre wide.","say":"In the nineteen fifties, electron microscopes showed the gap he had drawn, about twenty millionths of a millimetre wide."},
  {"id":"built","gap":0.8,"text":"Models are built on that picture: simple units, and connections that change."},
  {"id":"fill","gap":0.8,"text":"Like brains, they fill gaps with what's likely, a little differently each time."},
- {"id":"check","gap":0.8,"text":"Knowing that, you know when to check them: against the evidence, as Cajal's drawings were checked."},
+ {"id":"check","gap":0.8,"text":"Knowing that, you know when to check them: against the evidence, as Cajal's drawings were checked."}]},
+"expects":{"name":"A loop that expects","lead":0.8,"tail":1.0,"vo":[
+ {"id":"data","gap":0.8,"text":"So what does a brain that guesses ahead mean for work with data?"},
+ {"id":"reflex","gap":0.8,"text":"A lot of data work runs like a reflex: a trigger comes, a script runs the same steps, and stops."},
+ {"id":"night","gap":0.8,"text":"Every night, a script loads the day's course registrations, and checks one rule: the table isn't empty."},
+ {"id":"monday","gap":0.8,"text":"One Monday, only half the rows arrive. The rule passes, and the reports go out wrong."},
+ {"id":"agent","gap":0.8,"text":"An agent can work more like a brain: before it looks, it says what it expects."},
+ {"id":"expect","gap":0.8,"text":"About 4,100 rows, as on most Mondays, from three campuses.","say":"About four thousand one hundred rows, as on most Mondays, from three campuses."},
+ {"id":"gap","gap":0.8,"text":"Then it looks, and measures the gap: 2,030 rows. A prediction error.","say":"Then it looks, and measures the gap: two thousand and thirty rows. A prediction error."},
+ {"id":"forage","gap":0.8,"text":"So it goes looking, as a forager would: it counts each campus, and finds that one sent nothing."},
+ {"id":"adapt","gap":0.8,"text":"When an assumption fails, a column renamed or a field left empty, it doesn't crash: it changes its plan, and writes down what changed."},
+ {"id":"person","gap":0.8,"text":"And it doesn't fix the reports on its own: it shows a person the gap, with its evidence."},
+ {"id":"plain","gap":0.8,"text":"Where nothing surprises, a plain script is still the right tool: cheaper, and the same every time."},
+ {"id":"loop","gap":0.8,"text":"Expect, act, check, and adapt: the loop that kept moving animals alive."},
+ {"id":"borrow","gap":0.8,"text":"Agents borrowed the loop, not the brain."},
  {"id":"next","gap":0.8,"text":"Next, what an agent is: a model that reasons, with hands, in a loop."}]}
 };
 
-const VODUR={"nature/start": 6.941, "nature/cell": 1.497, "nature/why": 2.087, "nature/trying": 5.41, "nature/birds": 3.086, "nature/wright": 3.861, "nature/twist": 2.365, "nature/seed": 4.909, "nature/example": 4.557, "nature/wired": 3.551, "cajal/barcelona": 6.095, "cajal/slices": 2.942, "cajal/thicket": 4.091, "cajal/net": 7.334, "cajal/nobody": 4.288, "cajal/stroke": 4.723, "cajal/doctors": 3.246, "cajal/change": 1.34, "cajal/stain": 4.963, "cajal/random": 4.391, "cajal/young": 5.509, "cajal/whole": 3.013, "cajal/drew": 5.92, "cajal/oneway": 6.029, "cajal/berlin": 5.629, "cajal/nobel": 5.688, "cajal/neuron": 4.482, "cajal/medicine": 3.187, "cajal/machines": 5.767, "cajal/design": 6.443, "cajal/today": 1.905, "cell/neuron": 2.553, "cell/branches": 3.315, "cell/fires": 5.304, "cell/same": 2.95, "cell/gap": 5.863, "cell/some": 3.286, "cell/change": 1.219, "cell/hebb": 8.021, "cell/rabbit": 5.001, "cell/learning": 3.26, "animals/long": 4.045, "animals/jelly": 5.224, "animals/slug": 4.131, "animals/kandel": 3.456, "animals/bee": 4.067, "animals/dance": 4.953, "animals/octopus": 6.008, "animals/finch": 4.107, "animals/human": 5.849, "animals/watts": 3.46, "gaps/guess": 3.805, "gaps/blind": 4.372, "gaps/never": 3.696, "borrowed/unit": 6.184, "borrowed/adds": 4.036, "borrowed/weights": 6.941, "borrowed/edges": 7.565, "borrowed/feed": 2.153, "borrowed/layers": 2.817, "borrowed/today": 5.056, "borrowed/copy": 2.149, "borrowed/complex": 7.631, "borrowed/child": 4.617, "borrowed/wing": 3.024, "likely/one": 1.923, "likely/chance": 2.963, "likely/bee": 7.161, "likely/wheel": 5.156, "likely/again": 5.926, "likely/dial": 2.532, "likely/low": 5.953, "likely/high": 5.759, "likely/zero": 2.518, "likely/busy": 5.931, "sure/missing": 3.401, "sure/birthday": 7.298, "sure/once": 4.816, "sure/tests": 6.518, "sure/brains": 3.203, "sure/fluent": 2.073, "held/held": 2.532, "held/gap": 6.819, "held/built": 4.312, "held/fill": 4.085, "held/check": 5.386, "held/next": 4.126};
+const VODUR={"nature/squirt": 4.228, "nature/young": 6.346, "nature/rock": 3.288, "nature/glue": 2.817, "nature/eats": 7.789, "nature/steer": 1.998, "nature/move": 4.356, "nature/next": 2.365, "nature/start": 6.941, "nature/cell": 1.497, "nature/why": 2.087, "nature/trying": 5.41, "nature/birds": 3.086, "nature/wright": 3.861, "nature/twist": 2.365, "nature/example": 4.557, "nature/wired": 3.551, "cajal/barcelona": 6.095, "cajal/slices": 2.942, "cajal/thicket": 4.091, "cajal/net": 7.334, "cajal/nobody": 4.288, "cajal/stroke": 4.723, "cajal/doctors": 3.246, "cajal/change": 1.34, "cajal/stain": 4.963, "cajal/random": 4.391, "cajal/young": 5.509, "cajal/whole": 3.013, "cajal/drew": 5.92, "cajal/oneway": 6.029, "cajal/berlin": 5.629, "cajal/nobel": 5.688, "cajal/neuron": 4.482, "cajal/medicine": 3.187, "cajal/machines": 5.767, "cajal/design": 6.443, "cajal/today": 1.905, "cell/neuron": 2.553, "cell/branches": 3.315, "cell/fires": 5.304, "cell/same": 2.95, "cell/gap": 5.863, "cell/some": 3.286, "cell/change": 1.219, "cell/hebb": 8.021, "cell/rabbit": 5.001, "cell/learning": 3.26, "animals/long": 4.045, "animals/jelly": 5.224, "animals/slug": 4.131, "animals/kandel": 3.456, "animals/bee": 4.067, "animals/dance": 4.953, "animals/octopus": 6.008, "animals/finch": 4.107, "animals/human": 5.849, "animals/watts": 3.46, "gaps/guess": 3.805, "gaps/blind": 4.372, "gaps/never": 3.696, "ahead/trick": 4.851, "ahead/guess": 5.219, "ahead/dragon": 6.233, "ahead/stairs": 5.107, "ahead/error": 6.001, "ahead/schultz": 7.452, "ahead/first": 6.852, "ahead/quiet": 4.809, "ahead/miss": 5.585, "borrowed/unit": 6.184, "borrowed/adds": 4.036, "borrowed/weights": 6.941, "borrowed/edges": 7.565, "borrowed/feed": 2.153, "borrowed/layers": 2.817, "borrowed/today": 5.056, "borrowed/copy": 2.149, "borrowed/complex": 7.631, "borrowed/child": 4.617, "borrowed/wing": 3.024, "likely/one": 1.923, "likely/chance": 2.963, "likely/bee": 7.161, "likely/wheel": 5.156, "likely/again": 5.926, "likely/dial": 2.532, "likely/low": 5.953, "likely/high": 5.759, "likely/zero": 2.518, "likely/busy": 5.931, "sure/missing": 3.401, "sure/birthday": 7.298, "sure/once": 4.816, "sure/tests": 6.518, "sure/brains": 3.203, "sure/fluent": 2.073, "held/held": 2.532, "held/gap": 6.819, "held/built": 4.312, "held/fill": 4.085, "held/check": 5.386, "expects/data": 3.506, "expects/reflex": 6.234, "expects/night": 6.288, "expects/monday": 5.187, "expects/agent": 4.365, "expects/expect": 4.676, "expects/gap": 4.638, "expects/forage": 5.512, "expects/adapt": 8.534, "expects/person": 4.886, "expects/plain": 5.51, "expects/loop": 4.613, "expects/borrow": 2.126, "expects/next": 4.126};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: the title card after the opening story; and the end card. */
+   Two wordless moments: the title card after the opening story; and the end card, after A loop that expects. */
 const BREATH={
-"nature":{"hold":{"start":0.6,"cell":0.8,"why":0.6,"trying":0.4,"wright":0.2,"twist":0.6,"seed":0.8,"example":0.6}},
+"nature":{"hold":{"squirt":0.8,"young":1.2,"rock":0.8,"glue":1.0,"eats":1.4,"steer":0.8,"move":1.0,"next":1.2,"start":0.6,"cell":0.8,"why":0.6,"trying":0.4,"wright":0.2,"twist":0.8,"example":0.6}},
 "cajal":{"hold":{"barcelona":0.2,"slices":0.6,"thicket":0.6,"net":0.4,"nobody":0.4,"doctors":0.6,"change":0.8,"random":0.6,"young":0.4,"whole":1.2,"drew":0.6,"oneway":0.8,"berlin":0.4,"nobel":0.6,"neuron":0.2,"medicine":0.8,"design":0.6},"breathe":4.4},
 "cell":{"hold":{"branches":0.4,"fires":0.6,"same":0.8,"gap":0.6,"some":0.6,"hebb":0.4,"rabbit":0.4}},
 "animals":{"hold":{"long":1.0,"jelly":1.2,"slug":1.0,"kandel":1.2,"bee":1.2,"dance":1.2,"octopus":1.4,"finch":1.2,"human":1.0,"watts":0.4}},
 "gaps":{"hold":{"guess":0.8,"blind":1.4,"never":1.0}},
+"ahead":{"hold":{"trick":1.0,"guess":1.2,"dragon":1.6,"stairs":1.5,"error":1.5,"schultz":1.5,"first":1.6,"quiet":1.6,"miss":0.8}},
 "borrowed":{"hold":{"unit":0.4,"adds":0.8,"weights":0.8,"edges":0.4,"feed":0.6,"layers":0.8,"today":0.4,"copy":0.6,"complex":0.8,"child":0.6}},
 "likely":{"hold":{"one":0.8,"chance":1.0,"bee":1.2,"wheel":1.4,"again":1.0,"dial":1.0,"low":1.2,"high":1.2,"zero":0.6}},
 "sure":{"hold":{"missing":1.0,"birthday":1.4,"once":1.2,"tests":1.5,"brains":1.4}},
-"held":{"hold":{"held":0.4,"gap":0.8,"built":0.6,"fill":0.6,"check":1.0},"breathe":4.6}
+"held":{"hold":{"held":0.4,"gap":0.8,"built":0.6,"fill":0.6}},
+"expects":{"hold":{"data":0.6,"reflex":0.6,"night":1.0,"monday":1.2,"agent":0.6,"expect":0.8,"gap":1.2,"forage":1.2,"adapt":1.2,"person":1.0,"plain":0.8,"loop":0.6,"borrow":1.0},"breathe":4.6}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -1924,7 +1957,6 @@ function bb_perceptron(ctx,x,y,o){const a=o.a==null?1:o.a;if(a<=0)return;ctx.sav
      bbSheet     a sheet of drawing paper on a walnut table, seen from above, with an ink pot and a pen
      bbSky       an open sky over low hills, where buzzards soar
      bbDunes     the dunes at Kitty Hawk, 1902, under a wide sky
-     bbMaple     a maple's branch in autumn, against a soft park
      bbBrain     a brain, drawn as an anatomy book would, on a warm dark ground
      bbLens      looking down a microscope: a round field on the dark
      bbRoom      Barcelona, 1888: Cajal's room, his table, microscope, slides, ink and paper, light from the window on the right
@@ -2077,28 +2109,11 @@ function bb_glider(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate
   ctx.fillStyle=rgba(cl,1);ctx.strokeStyle=rgba(fr,0.9);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(-230,8);ctx.quadraticCurveTo(0,0,230,8);ctx.lineTo(230,20);ctx.quadraticCurveTo(0,14,-230,20);ctx.closePath();ctx.fill();ctx.stroke();
   ctx.strokeStyle=rgba(fr,0.35);ctx.lineWidth=1.4;for(let k=-5;k<=5;k++){ctx.beginPath();ctx.moveTo(k*40,4+Math.abs(k)*0.3);ctx.lineTo(k*40,17+Math.abs(k)*0.3);ctx.stroke();}ctx.restore();}
 
-/* ---------------------------------------------------------------- the maple and its seeds */
-AG_PLACES.bbMaple=c=>{bb_skyGrad(c,[178,196,206],[236,226,206],H);
-  // a soft park far behind: blurred trees and a lawn
-  for(const [x,y,r,col] of [[200,700,260,[150,140,96]],[620,760,220,[176,150,96]],[1500,720,300,[160,120,80]],[1850,760,240,[140,132,96]]]){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(col,0.6));g.addColorStop(1,rgba(col,0));c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2);}
-  const lawn=c.createLinearGradient(0,800,0,H);lawn.addColorStop(0,"rgba(150,160,110,0.6)");lawn.addColorStop(1,"rgba(120,130,90,0.8)");c.fillStyle=lawn;c.fillRect(0,800,W,H-800);
-  // the branch, from the top left, with its leaves
-  c.lineCap="round";const br=[[-40,120],[200,150],[420,130],[640,190],[820,170]];const S=bb_smooth(br,6);bb_strand(c,S,30,10,rgba([86,64,50],1),1);
-  bb_strand(c,bb_smooth([[420,132],[470,80],[540,50]],6),12,5,rgba([86,64,50],1),1);bb_strand(c,bb_smooth([[640,188],[700,250],[760,300]],6),10,4,rgba([86,64,50],1),1);
-  const leaf=(x,y,s,ang,col)=>{c.save();c.translate(x,y);c.rotate(ang);c.scale(s,s);c.fillStyle=rgba(col,1);c.beginPath();c.moveTo(0,0);
-    const pts=[[0,-8],[-30,-20],[-26,-46],[-52,-56],[-34,-74],[-14,-70],[0,-100],[14,-70],[34,-74],[52,-56],[26,-46],[30,-20],[0,-8]];for(const p of pts)c.lineTo(p[0],p[1]);c.closePath();c.fill();
-    c.strokeStyle=rgba(mix(col,[90,40,20],0.4),0.6);c.lineWidth=1.5;c.beginPath();c.moveTo(0,0);c.lineTo(0,-90);c.moveTo(0,-30);c.lineTo(-36,-60);c.moveTo(0,-30);c.lineTo(36,-60);c.stroke();c.restore();};
-  const R=ag_rnd(12);for(let i=0;i<22;i++){const q=bb_along(S,0.1+R()*0.85),col=[[206,120,60],[220,160,70],[190,90,50],[226,184,96]][i%4];leaf(q[0]+(R()-0.5)*40,q[1]+20+R()*40,1+R()*0.6,Math.PI+(R()-0.5)*1.4,col);}
-  // two pairs of seeds still hanging
-  for(const [x,y] of [[540,190],[700,240]]){c.save();c.translate(x,y);bb_seedShape(c,0.9,0.4);c.restore();}ag_grain(c,0,0,W,H,1.2,21);};
+/* ---------------------------------------------------------------- a maple seed, one of the designs nature kept */
 // a maple seed: the seed itself, and its wing, a thin veined blade; drawn at the origin, s its size, ang its turn
 function bb_seedShape(c,s,ang){c.save();c.rotate(ang);c.scale(s,s);c.fillStyle="rgba(196,150,96,0.88)";c.beginPath();c.moveTo(0,0);c.bezierCurveTo(30,-14,90,-30,128,-18);c.bezierCurveTo(110,4,50,14,0,8);c.closePath();c.fill();
   c.strokeStyle="rgba(140,96,56,0.5)";c.lineWidth=1.4;for(let k=0;k<5;k++){c.beginPath();c.moveTo(8,4);c.quadraticCurveTo(50,-6-k*3,100+k*6,-16+k*3);c.stroke();}
   c.fillStyle="rgba(150,104,62,1)";c.beginPath();c.ellipse(4,4,14,10,0.3,0,TAU);c.fill();c.restore();}
-// a seed spinning down: seen from the side, its wing turns round the seed; the blur of its turning is drawn as a soft disc
-function bb_seedSpin(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);
-  const sp=t*(o.rate||7.5);ctx.fillStyle="rgba(200,160,110,0.16)";ctx.beginPath();ctx.ellipse(0,-10*s,130*s,26*s,0,0,TAU);ctx.fill();
-  ctx.save();ctx.scale(1,0.32);ctx.rotate(sp);bb_seedShape(ctx,s,0);ctx.restore();ctx.restore();}
 
 /* ---------------------------------------------------------------- a brain, as an anatomy book draws it */
 const BB_BRAIN={cx:960,cy:500,s:1.0};
@@ -2614,6 +2629,192 @@ function bb_cloth(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
   const f=o.fill||0,hx=x+w/2+sw/2,hy=y+h/2,hr=o.r||90;if(f<1){ctx.fillStyle="rgba(30,28,28,0.95)";ctx.beginPath();ctx.arc(hx,hy,hr*(1-ag_sine(f)),0,TAU);ctx.fill();}
   ctx.restore();ctx.restore();}
 
+/* ===== Borrowed from the brain: brains that guess ahead, and a loop that expects =====
+   What the opening's sea squirt, A step ahead and A loop that expects draw, in the module's look (added 11 November 2026):
+     bbShore     a rocky shore under the sea: light from the surface at the top right, a big rock on the right where adult sea
+                 squirts already live, and the place on it where the young one settles (BB_LAND)
+     bb_squirt   a sea squirt: the young one, a tadpole with an eye spot, a tail and a tiny brain, swimming; then, settled head first,
+                 its tail and most of its brain taken apart as it grows into the adult, a soft vase with two openings (o.m, 0 to 1)
+     bb_fish     a small fish, a forager, and the bigger one that hunts it (o.big), drawn with tapering curves
+     bb_dragonfly, bb_midge   a dragonfly in flight over the meadow, and the midge it catches
+     bb_escalator   an escalator in ink, from the side, its steps moving or stopped, and a shoe that steps onto it and stumbles
+     bb_raster   Schultz's cell, one row of its record in ink: a tick for each time it fires, a light and a drop of juice above
+     bb_script, bb_rows, bb_campus   the nightly script's card, Monday's rows against what was expected, and the three campuses
+   Every name starts with bb_ or BB_. */
+
+/* ---------------------------------------------------------------- a rocky shore under the sea */
+const BB_ROCK=bb_smooth([[720,1090],[790,860],[900,720],[1040,628],[1190,590],[1360,596],[1540,640],[1720,720],[1860,790],[1960,820]],6);
+// where the young sea squirt settles, head first, and the way its body grows from there (away from the rock, up and a little left)
+const BB_LAND=[1092,612],BB_AWAY=-1.9;
+AG_PLACES.bbShore=c=>{bb_water(c,[150,194,196],[74,132,146],[40,84,98],61);
+  // the sea floor, far, under a haze
+  const g=c.createLinearGradient(0,800,0,H);g.addColorStop(0,rgba([150,146,122],1));g.addColorStop(1,rgba([110,104,84],1));c.fillStyle=g;c.beginPath();c.moveTo(0,H);c.lineTo(0,850);
+  for(let x=0;x<=W;x+=24)c.lineTo(x,846-30*AG_NZ.fbm(x*0.002,1.7,3));c.lineTo(W,H);c.closePath();c.fill();
+  const hz=c.createLinearGradient(0,760,0,900);hz.addColorStop(0,"rgba(74,132,146,0.55)");hz.addColorStop(1,"rgba(74,132,146,0)");c.fillStyle=hz;c.fillRect(0,760,W,140);
+  // weed on the floor, on the left
+  const R=ag_rnd(71);for(let i=0;i<9;i++){const x=40+R()*620,y=900+R()*120,h=140+R()*220;for(let k=0;k<3;k++){const P=[];for(let j=0;j<=8;j++){const q=j/8;P.push([x+k*13+Math.sin(q*3+i+k)*24*q,y-h*q]);}
+    bb_strand(c,bb_smooth(P,3),14,4,rgba(mix([84,110,72],[138,132,80],R()),0.7),1);}}
+  // the rock, lit from the top right, with a soft lighter top where the light falls
+  ag_soft(c,cc=>{bb_path(cc,BB_ROCK.concat([[1960,1090]]));},[96,98,96],[188,190,180],1420,560,620,"rgba(10,20,30,0.5)",18,0.55);
+  c.save();c.beginPath();bb_path(c,BB_ROCK.concat([[1960,1090]]));c.clip();for(let i=0;i<70;i++){const x=760+R()*1200,y=600+R()*480;c.fillStyle=rgba(mix([70,74,76],[150,150,140],R()),0.35);c.beginPath();c.ellipse(x,y,8+R()*26,5+R()*12,R()*3,0,TAU);c.fill();}
+    for(let i=0;i<30;i++){const x=800+R()*1100,y=650+R()*400;c.fillStyle=rgba(mix([176,120,104],[206,176,120],R()),0.55);for(let k=0;k<4;k++){c.beginPath();c.arc(x+(R()-0.5)*30,y+(R()-0.5)*14,3+R()*6,0,TAU);c.fill();}}c.restore();
+  // adult sea squirts that live on the rock already
+  for(const [u,s] of [[0.53,0.9],[0.61,1.05],[0.68,0.8],[0.76,0.95]]){const q=bb_along(BB_ROCK,u);bb_squirtAdult(c,q[0],q[1]+6,s,q[2]-Math.PI/2,0);}
+  ag_grain(c,0,0,W,H,1.3,63);};
+
+/* ---------------------------------------------------------------- sea squirts */
+const BB_TUNIC=[236,214,176],BB_TUNICDK=[182,146,112],BB_TUNICHI=[255,246,226];
+// the adult: a soft vase from its base on the rock, with two openings at the top, one to take water in and one to let it out;
+// ang: the way it grows (from its base), s its size, sw a gentle sway
+function bb_squirtAdult(ctx,x,y,s,ang,sw){ctx.save();ctx.translate(x,y);ctx.rotate(ang+Math.PI/2+(sw||0));ctx.scale(s,s);
+  ag_soft(ctx,c=>{c.moveTo(-20,0);c.bezierCurveTo(-58,-30,-56,-112,-30,-146);c.lineTo(-14,-146);c.bezierCurveTo(-8,-128,8,-126,16,-136);c.lineTo(30,-132);c.bezierCurveTo(58,-100,54,-30,20,0);c.closePath();},
+    BB_TUNIC,BB_TUNICHI,22,-110,120,"rgba(80,50,30,0.4)",12,0.6);
+  for(const [px,py,a] of [[-22,-150,-0.25],[23,-138,0.3]]){ctx.save();ctx.translate(px,py);ctx.rotate(a);ag_soft(ctx,c=>c.ellipse(0,0,14,7,0,0,TAU),mix(BB_TUNIC,[214,140,96],0.4),BB_TUNICHI,4,-3,14,null);
+    ctx.fillStyle="rgba(70,40,30,0.75)";ctx.beginPath();ctx.ellipse(0,1,8,3.5,0,0,TAU);ctx.fill();ctx.restore();}
+  ctx.restore();}
+// the young one and what it becomes, in its own frame: its head at (x, y) and pointing at ang (the way it swims, or the rock it has
+// settled on); the body lies behind the head. o.swim (0..1) how hard its tail beats; o.m (0..1) its change: the tail goes first, the
+// eye spot and the brain's lights go out, and the body grows into the adult, its two openings opening; o.brain (0..1) lights the brain
+function bb_squirt(ctx,x,y,s,ang,t,o){o=o||{};const m=clamp(o.m||0,0,1),sw=o.swim==null?1:o.swim;ctx.save();ctx.translate(x,y);ctx.rotate(ang);ctx.scale(s,s);
+  // the tail: a tapering strand that beats side to side, shorter as it's taken apart
+  const tl=180*(1-ag_sine(clamp(m*1.7,0,1)));if(tl>2){const P=[];for(let i=0;i<=14;i++){const q=i/14,d=60+tl*q,w=Math.sin(t*11-q*5.2)*q*(10+18*q)*sw;P.push([-d,w]);}
+    bb_strand(ctx,P,26,3,rgba(mix(BB_TUNIC,BB_TUNICDK,0.25),0.92),1);ctx.save();ctx.translate(1,-2);ctx.globalAlpha*=0.5;bb_strand(ctx,P,10,1,rgba(BB_TUNICHI,0.8),1);ctx.restore();
+    // its fin, a thin pale edge round the tail
+    ctx.save();ctx.globalAlpha*=0.35;bb_strand(ctx,P,40,6,rgba(BB_TUNICHI,0.7),1);ctx.restore();}
+  // the body: the larva's trunk, an egg, growing into the adult's vase along the same axis
+  const rx=lerp(36,82,ag_sine(clamp((m-0.35)/0.65,0,1))),ry=lerp(26,46,ag_sine(clamp((m-0.35)/0.65,0,1))),cx=-rx;
+  ag_soft(ctx,c=>c.ellipse(cx,0,rx,ry,0,0,TAU),BB_TUNIC,BB_TUNICHI,cx+rx*0.2,-ry*0.6,rx*1.3,"rgba(80,50,30,0.42)",10,0.65);
+  // the two openings, at the far end, as it becomes the adult
+  const op=ag_in(m,0.7,0.3);if(op>0)for(const sd of [-1,1]){ctx.save();ctx.translate(cx-rx*0.86,sd*ry*0.5);ctx.rotate(Math.PI+sd*0.45);ctx.scale(op,op);
+    ag_soft(ctx,c=>c.ellipse(0,0,8,14,0,0,TAU),mix(BB_TUNIC,[214,140,96],0.4),BB_TUNICHI,2,-6,14,null);ctx.fillStyle="rgba(70,40,30,0.75)";ctx.beginPath();ctx.ellipse(0,0,3.5,8,0,0,TAU);ctx.fill();ctx.restore();}
+  // the head's three small sticky points, at the front
+  const pa=1-ag_in(m,0.4,0.4);if(pa>0){ctx.fillStyle=rgba(mix(BB_TUNIC,BB_TUNICDK,0.5),pa);for(const [px,py] of [[2,-10],[4,0],[2,10]]){ctx.beginPath();ctx.arc(px,py,4,0,TAU);ctx.fill();}}
+  // inside: the brain, a few lights, and the eye spot, a dark dot
+  const ea=1-ag_in(m,0.15,0.4);if(ea>0){ctx.fillStyle=rgba([40,28,24],0.85*ea);ctx.beginPath();ctx.arc(-30,-7,5.5,0,TAU);ctx.fill();ctx.fillStyle=rgba([60,44,36],0.6*ea);ctx.beginPath();ctx.arc(-40,4,3.5,0,TAU);ctx.fill();}
+  const ba=(o.brain||0)*(1-ag_in(m,0.1,0.5));if(ba>0){const R=ag_rnd(180);for(let i=0;i<9;i++){const px=-22-R()*28,py=(R()-0.5)*22,fl=0.6+0.4*Math.sin(t*3+i*1.7);bb_spark(ctx,px,py,7,ba*fl);}}
+  ctx.restore();}
+
+/* ---------------------------------------------------------------- fish */
+// a fish, facing ang, s its size (1: about 130 px long); o.big the darker one that hunts; t beats its tail
+function bb_fish(ctx,x,y,s,ang,t,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(ang);if(Math.cos(ang)<0){ctx.scale(1,-1);}ctx.scale(s,s);
+  const col=o.big?[70,84,92]:[214,170,96],hi=o.big?[140,156,160]:[250,226,160],dk=mix(col,[20,20,30],0.45),wag=Math.sin(t*(o.big?4:9))*0.28;
+  // the tail fin
+  ctx.save();ctx.translate(-56,0);ctx.rotate(wag);ag_soft(ctx,c=>{c.moveTo(4,0);c.bezierCurveTo(-14,-10,-28,-28,-40,-30);c.bezierCurveTo(-30,-10,-30,10,-40,30);c.bezierCurveTo(-28,28,-14,10,4,0);c.closePath();},mix(col,dk,0.25),hi,-20,-16,30,null);ctx.restore();
+  // the body: a long teardrop, lighter on top
+  ag_soft(ctx,c=>{c.moveTo(70,0);c.bezierCurveTo(60,-30,0,-34,-36,-16);c.bezierCurveTo(-56,-8,-60,8,-36,16);c.bezierCurveTo(0,34,60,30,70,0);c.closePath();},col,hi,30,-24,70,"rgba(20,20,30,0.4)",8,0.6);
+  // a fin on its back, one on its side, and its eye
+  ctx.fillStyle=rgba(mix(col,dk,0.3),0.85);ctx.beginPath();ctx.moveTo(20,-28);ctx.quadraticCurveTo(0,-50,-16,-26);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.moveTo(18,8);ctx.quadraticCurveTo(4,26,-6,12);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(250,248,240,0.9)";ctx.beginPath();ctx.arc(46,-6,7,0,TAU);ctx.fill();ctx.fillStyle="rgba(20,18,20,0.95)";ctx.beginPath();ctx.arc(48,-6,4,0,TAU);ctx.fill();
+  ctx.restore();}
+// drifting food: a few pale specks that bob in the water
+const BB_SPECKS=[[640,330],[700,300],[760,360],[1460,280],[540,520]];
+function bb_specks(ctx,t,eaten,a){if(a<=0)return;BB_SPECKS.forEach(([x,y],i)=>{const e=eaten?eaten(i):0;if(e>=1)return;const px=x+Math.sin(t*0.5+i)*14,py=y+Math.sin(t*0.7+i*2)*10;
+  ctx.fillStyle=rgba([244,236,206],(0.8-0.8*e)*a);ctx.beginPath();ctx.arc(px,py,5,0,TAU);ctx.fill();ctx.fillStyle=rgba([244,236,206],(0.3-0.3*e)*a);ctx.beginPath();ctx.arc(px,py,10,0,TAU);ctx.fill();});}
+const bb_speckAt=(i,t)=>{const [x,y]=BB_SPECKS[i];return[x+Math.sin(t*0.5+i)*14,y+Math.sin(t*0.7+i*2)*10];};
+
+/* ---------------------------------------------------------------- the dragonfly and the midge */
+// a dragonfly from above and a little to the side, facing ang: big eyes, a thorax, a long thin abdomen in segments, four long wings,
+// a blur while it flies (o.fly); s its size (1: about 300 px from head to tail)
+function bb_dragonfly(ctx,x,y,s,ang,t,o){o=o||{};const fly=o.fly==null?1:o.fly;ctx.save();ctx.translate(x,y);ctx.rotate(ang);ctx.scale(s,s);
+  const body=[54,96,120],hi=[150,196,210],dk=[20,40,54];
+  // wings: two pairs, pale and veined; flying, they beat and blur
+  for(const [ox,len,wd,base] of [[18,150,30,1.32],[-4,140,34,1.72]])for(const sd of [-1,1]){const beat=Math.sin(t*60+(ox>0?0:1.2))*0.32*fly;ctx.save();ctx.translate(ox,0);ctx.rotate(sd*(base+beat));
+    ctx.globalAlpha*=lerp(0.62,0.4,fly);ctx.fillStyle="rgba(232,240,244,0.85)";ctx.beginPath();ctx.ellipse(len/2,0,len/2,wd/2,0,0,TAU);ctx.fill();
+    ctx.strokeStyle="rgba(70,80,86,0.55)";ctx.lineWidth=1.4;ctx.stroke();ctx.beginPath();ctx.moveTo(6,0);ctx.lineTo(len*0.95,-2);ctx.moveTo(len*0.2,wd*0.25);ctx.lineTo(len*0.8,wd*0.15);ctx.stroke();
+    ctx.fillStyle="rgba(60,50,40,0.7)";ctx.beginPath();ctx.ellipse(len*0.86,-wd*0.18,7,3,0,0,TAU);ctx.fill();ctx.restore();}
+  // the abdomen: a long tapering strand, banded
+  const P=bb_smooth([[-14,0],[-80,2],[-150,-3+Math.sin(t*2)*2],[-210,0]],5);bb_strand(ctx,P,20,8,rgba(body,1),1);
+  ctx.save();ctx.translate(1,-3);ctx.globalAlpha*=0.5;bb_strand(ctx,P,8,3,rgba(hi,0.8),1);ctx.restore();
+  for(let k=1;k<9;k++){const q=bb_along(P,k/9),w=lerp(10,4,k/9);ctx.strokeStyle=rgba(dk,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(q[0]-Math.sin(q[2])*w,q[1]+Math.cos(q[2])*w);ctx.lineTo(q[0]+Math.sin(q[2])*w,q[1]-Math.cos(q[2])*w);ctx.stroke();}
+  // the thorax and the head, with its two big eyes
+  ag_soft(ctx,c=>c.ellipse(4,0,26,18,0,0,TAU),body,hi,14,-10,30,"rgba(10,20,30,0.45)",6,0.6);
+  for(const sd of [-1,1])ag_soft(ctx,c=>c.ellipse(36,sd*10,13,12,0,0,TAU),[70,120,90],[180,220,190],40,sd*10-6,14,"rgba(10,20,20,0.4)",4,0.7);
+  ctx.restore();}
+function bb_midge(ctx,x,y,s,t,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.scale(s,s);
+  ctx.fillStyle="rgba(232,236,240,0.6)";for(const sd of [-1,1]){ctx.save();ctx.rotate(sd*(0.9+Math.sin(t*70)*0.4));ctx.beginPath();ctx.ellipse(10,0,10,4,0,0,TAU);ctx.fill();ctx.restore();}
+  ctx.fillStyle="rgba(40,36,34,0.95)";ctx.beginPath();ctx.ellipse(0,0,7,4,0.2,0,TAU);ctx.fill();ctx.beginPath();ctx.arc(7,-1,3.2,0,TAU);ctx.fill();ctx.restore();}
+
+/* ---------------------------------------------------------------- an escalator, in ink */
+// from the side, rising left to right, on Cajal's paper: its steps, the handrail, and a shoe stepping on at the bottom; o.run (0..1)
+// how much the steps are moving (their ink arrows run), o.step (0..1) the shoe coming down, o.trip (0..1) its stumble, o.u draws it on
+const BB_ESC={x0:560,y0:760,x1:1260,y1:330};
+function bb_escalator(ctx,t,o){o=o||{};const u=o.u==null?1:o.u,a=o.a==null?1:o.a;if(a<=0||u<=0)return;ctx.save();ctx.globalAlpha*=a;const E=BB_ESC,dx=E.x1-E.x0,dy=E.y1-E.y0;
+  // the truss and the handrail
+  bb_ink(ctx,[[E.x0-120,E.y0+50],[E.x0,E.y0+50],[E.x1,E.y1+50],[E.x1+140,E.y1+50]],u,5,0.9);
+  bb_ink(ctx,bb_smooth([[E.x0-110,E.y0-90],[E.x0+20,E.y0-120],[E.x1+20,E.y1-120],[E.x1+130,E.y1-150]],5),u,4,0.75);
+  bb_ink(ctx,[[E.x0-120,E.y0+50],[E.x0-120,E.y0+110],[E.x1+140,E.y1+110],[E.x1+140,E.y1+50]],u,3,0.4);
+  // the steps: a zigzag along the slope, which slides when the escalator moves
+  const n=10,ph=((o.ph||0)%1+1)%1;ctx.strokeStyle=rgba(BB.ink,0.9);ctx.lineWidth=3.4;ctx.lineJoin="round";ctx.beginPath();
+  for(let i=-1;i<=n;i++){const k=(i+ph)/n;if(k<0||k>1||k>u)continue;const x=E.x0+dx*k,y=E.y0+dy*k,sx=dx/n,sy=dy/n;ctx.moveTo(x,y);ctx.lineTo(x,y+sy);ctx.lineTo(x+sx,y+sy);}ctx.stroke();
+  // ink arrows up the slope while it moves
+  const ra=o.run||0;if(ra>0)for(let i=0;i<3;i++){const k=((t*0.35+i/3)%1),x=E.x0+dx*(0.15+0.7*k),y=E.y0+dy*(0.15+0.7*k)-70,ang=Math.atan2(dy,dx);ctx.save();ctx.globalAlpha*=ra*Math.sin(Math.PI*k);
+    bb_ink(ctx,[[x-34*Math.cos(ang),y-34*Math.sin(ang)],[x+34*Math.cos(ang),y+34*Math.sin(ang)]],1,4,0.8);ag_arrowHead(ctx,x+40*Math.cos(ang),y+40*Math.sin(ang),ang,12,rgba(BB.ink,0.8));ctx.restore();}
+  // the shoe: in from the left, down onto the first step, then pitched forward as the step doesn't move
+  const st=o.step||0;if(st>0){const tr=o.trip||0,sx=lerp(E.x0-260,E.x0+40,ag_sine(st))+tr*26,sy=lerp(E.y0-150,E.y0-8,ag_sine(st))-Math.sin(Math.PI*st)*30-tr*10;
+    ctx.save();ctx.translate(sx,sy);ctx.rotate(-0.1+0.42*Math.sin(Math.PI*Math.min(1,tr*1.4))*(tr<1?1:0.5));ctx.fillStyle=rgba(BB.ink,0.9);ctx.beginPath();ctx.moveTo(-60,0);ctx.bezierCurveTo(-64,-34,-40,-44,-20,-40);
+    ctx.lineTo(-16,-84);ctx.lineTo(10,-84);ctx.lineTo(14,-34);ctx.bezierCurveTo(40,-30,74,-20,78,0);ctx.closePath();ctx.fill();ctx.restore();}
+  ctx.restore();}
+
+/* ---------------------------------------------------------------- Schultz's cell, in ink */
+// one row of the record, drawn on to u: a baseline of ticks, the times it fires, at width w from x; kind 0 juice with no light, 1 the
+// light then juice, 2 the light and no juice. The light is drawn above at BB_RAS.l, the juice at BB_RAS.j; returns the row's height
+const BB_RAS={x:560,w:940,l:0.34,j:0.7};
+function bb_rasterTicks(kind){const R=ag_rnd(1997+kind),out=[];for(let i=0;i<46;i++){const x=R();out.push(x);}
+  const burst=c=>{for(let i=0;i<12;i++)out.push(c+0.004+R()*0.05);};
+  if(kind===0)burst(BB_RAS.j);if(kind>0)burst(BB_RAS.l);
+  // silence just when the juice was due: no ticks there
+  return out.filter(x=>!(kind===2&&x>BB_RAS.j-0.01&&x<BB_RAS.j+0.09)).sort((a,b)=>a-b);}
+const BB_TICKS=[0,1,2].map(bb_rasterTicks);
+function bb_lamp(ctx,x,y,on,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(on>0){const g=ctx.createRadialGradient(x,y,0,x,y,34);g.addColorStop(0,rgba(BB.gold,0.7*on));g.addColorStop(1,rgba(BB.gold,0));ctx.fillStyle=g;ctx.fillRect(x-34,y-34,68,68);}
+  ctx.strokeStyle=rgba(BB.ink,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,13,0,TAU);ctx.stroke();for(let k=0;k<8;k++){const an=k*Math.PI/4;ctx.beginPath();ctx.moveTo(x+Math.cos(an)*19,y+Math.sin(an)*19);ctx.lineTo(x+Math.cos(an)*26,y+Math.sin(an)*26);ctx.stroke();}ctx.restore();}
+function bb_drop(ctx,x,y,a,dash){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.beginPath();ctx.moveTo(x,y-22);ctx.bezierCurveTo(x+6,y-10,x+15,y-2,x+15,y+7);ctx.arc(x,y+7,15,0,Math.PI);ctx.bezierCurveTo(x-15,y-2,x-6,y-10,x,y-22);ctx.closePath();
+  if(dash){ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(BB.inkSoft,0.8);ctx.lineWidth=2.6;ctx.stroke();}else{ctx.fillStyle=rgba(BB.goldDk,0.95);ctx.fill();}ctx.restore();}
+function bb_raster(ctx,y,kind,u,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const R=BB_RAS,x=R.x,w=R.w;
+  ag_T(ctx,label,x-32,y+12,{w:700,size:30,align:"right",col:BB.ink});
+  ctx.strokeStyle=rgba(BB.inkSoft,0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y+30);ctx.lineTo(x+w*u,y+30);ctx.stroke();
+  for(const k of BB_TICKS[kind]){if(k>u)break;ctx.strokeStyle=rgba(BB.ink,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+k*w,y-18);ctx.lineTo(x+k*w,y+22);ctx.stroke();}
+  // the light, the juice: drawn above the row as the record passes them; juice that doesn't come is a dashed drop
+  if(kind>0)bb_lamp(ctx,x+R.l*w,y-56,clamp((u-R.l)/0.05,0,1)*(1-clamp((u-R.l-0.12)/0.1,0,1)),clamp((u-R.l+0.02)/0.04,0,1));
+  bb_drop(ctx,x+R.j*w,y-56,clamp((u-R.j+0.02)/0.04,0,1),kind===2);
+  // the silence, marked
+  if(kind===2){const sa=clamp((u-R.j-0.1)/0.06,0,1)*(o.mark==null?1:o.mark);if(sa>0){ctx.save();ctx.globalAlpha*=sa;ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=3;ctx.beginPath();
+    ctx.moveTo(x+(R.j-0.01)*w,y+40);ctx.lineTo(x+(R.j-0.01)*w,y+50);ctx.lineTo(x+(R.j+0.09)*w,y+50);ctx.lineTo(x+(R.j+0.09)*w,y+40);ctx.stroke();ctx.restore();}}
+  ctx.restore();}
+
+/* ---------------------------------------------------------------- a nightly script, Monday's rows, the campuses */
+// the plain script: a card, its three steps, each lit in turn; lit[i] (0..1) how lit step i is, ok (0..1) the check's tick
+const BB_STEPS=["Load the rows","Check: not empty","Stop"];
+function bb_script(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+260,y+240,lerp(0.6,1,clamp(o.k,0,1.2)));
+  ag_box(ctx,x,y,520,480,22,{});ag_T(ctx,"A PLAIN SCRIPT",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"Every night at 2:00",x+28,y+100,{w:700,size:36});
+  BB_STEPS.forEach((s,i)=>{const sy=y+194+i*104,l=(o.lit||[])[i]||0;if(i>0){ctx.strokeStyle=rgba(AG.mut,0.5);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+260,sy-78);ctx.lineTo(x+260,sy-30);ctx.stroke();ag_arrowHead(ctx,x+260,sy-28,Math.PI/2,9,rgba(AG.mut,0.6));}
+    ag_step(ctx,x+260,sy,s,{on:l>0.5?AG.blue:null});
+    if(i===1&&(o.ok||0)>0){ctx.save();ctx.globalAlpha*=o.ok;ag_tick(ctx,x+470,sy,28,rgba(AG.green,1),5);ctx.restore();}});
+  ctx.restore();}
+// the rows that came: a bar against what was expected (a dashed outline), the number that came, and the gap between them
+function bb_rows(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+310,y+150,lerp(0.6,1,clamp(o.k,0,1.2)));
+  const w=620,h=o.h||300,bx=x+28,bw=w-56,by=y+150;ag_box(ctx,x,y,w,h,22,{});ag_T(ctx,"MONDAY'S ROWS",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
+  const fill=bw*0.495*(o.fill==null?1:o.fill),ex=o.exp||0;
+  if(ex>0){ctx.save();ctx.globalAlpha*=ex;ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(AG.violet,0.85);ctx.lineWidth=3;rr(ctx,bx,by,bw,46,10);ctx.stroke();ctx.restore();
+    ag_T(ctx,"Expected: about 4,100",bx+bw,by-18,{w:700,size:28,align:"right",col:AG.violet,a:ex});}
+  ctx.fillStyle=rgba(AG.orange,0.9);rr(ctx,bx,by,Math.max(10,fill),46,10);ctx.fill();
+  ag_T(ctx,"2,030 came",bx,by+90,{w:700,size:32,col:AG.orange,a:o.num==null?1:o.num});
+  // the gap: an amber bracket from the end of what came to the end of what was expected
+  const g=o.gap||0;if(g>0){ctx.save();ctx.globalAlpha*=g;ctx.strokeStyle=rgba(AG.amber,0.95);ctx.lineWidth=4;ctx.lineCap="round";const x0=bx+fill+8,x1=lerp(x0,bx+bw-4,ag_sine(g));
+    ctx.beginPath();ctx.moveTo(x0,by+60);ctx.lineTo(x0,by+70);ctx.lineTo(x1,by+70);ctx.lineTo(x1,by+60);ctx.stroke();ctx.restore();}
+  ctx.restore();}
+// one campus and its count: a chip, green when it sent its rows, amber when it sent none
+function bb_campus(ctx,x,y,name,n,ok,a,k){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x+100,y+50,lerp(0.6,1,clamp(k==null?1:k,0,1.2)));
+  ag_box(ctx,x,y,200,104,18,{edge:ok?AG.green:AG.amber,edgeA:0.7});ag_T(ctx,name.toUpperCase(),x+22,y+40,{w:700,size:28,ls:3,col:AG.kick});
+  ag_T(ctx,n,x+22,y+84,{w:700,size:32,col:ok?AG.ink:AG.amber});if(ok)ag_tick(ctx,x+168,y+70,22,rgba(AG.green,1),4);else ag_warn(ctx,x+168,y+70,28,rgba(AG.amber,1));ctx.restore();}
+// a card of two lines, a kicker and two rows of words in mono: what it assumed, and what it found
+function bb_assumed(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+340,y+130,lerp(0.6,1,clamp(o.k,0,1.2)));
+  ag_box(ctx,x,y,680,260,22,{edge:o.f>0.5?AG.amber:null,edgeA:0.7});ag_T(ctx,"AN ASSUMPTION FAILS",x+28,y+50,{w:700,size:28,ls:4,col:o.f>0.5?AG.amber:AG.kick});
+  ag_T(ctx,"Expected",x+28,y+118,{w:700,size:32,col:AG.mut});ag_T(ctx,"course_id",x+250,y+118,{w:500,size:32,f:"mono",col:AG.ink,a:lerp(1,0.45,o.f||0)});
+  if((o.f||0)>0){const k=ag_sine(clamp(o.f*1.5,0,1));ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x+246,y+108);ctx.lineTo(x+246+lerp(0,196,k),y+108);ctx.stroke();}
+  ag_T(ctx,"Found",x+28,y+196,{w:700,size:32,col:AG.mut,a:o.f||0});ag_T(ctx,"course_code",x+250,y+196,{w:500,size:32,f:"mono",col:AG.orange,a:o.f||0});
+  ctx.restore();}
+
 /* ===== Borrowed from the brain: what people built on the nerve cell =====
    In the module's colours: units and their connections are violet (the model), a choice that's right is plain, one that's wrong
    amber, a check that passes green. What is drawn here:
@@ -2845,13 +3046,15 @@ function bb_em(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx
     ag_arrowHead(ctx,gx,gy-6,Math.PI/2,14,"rgba(255,248,214,0.95)");ag_arrowHead(ctx,gx,gy+30,-Math.PI/2,14,"rgba(255,248,214,0.95)");ctx.restore();}
   ctx.restore();}
 
-/* ===== Borrowed from the brain: the nine chapters =====
+/* ===== Borrowed from the brain: the eleven chapters =====
    Each chapter is cut into shots (ag_shots), each a place under a slow camera; every moment waits for a word of the narration
    (wAt(sc, line, word)), so the pictures stay with the voice if it's recorded again. tools/score.py times its sounds to the same words.
-   The opening asks why the perceptron was modelled on a nerve cell (Why look to nature); its story is Cajal's, Barcelona 1888, to the
-   title (A thicket). Then inside a nerve cell, nature's trials, the gaps a brain fills, what models borrowed and what they didn't,
-   likely words, sure and wrong, and the picture that held. The film's places are in bb_past.js and bb_life.js; what people built on
-   the nerve cell in bb_model.js. */
+   The opening starts with a young sea squirt, which has a brain while it swims and takes most of it apart once it settles: brains are
+   for animals that move. Then it asks why the perceptron was modelled on a nerve cell (Why look to nature); its story is Cajal's,
+   Barcelona 1888, to the title (A thicket). Then inside a nerve cell, nature's trials, the gaps a brain fills, a brain that guesses a
+   step ahead and learns from its prediction errors, what models borrowed and what they didn't, likely words, sure and wrong, the
+   picture that held, and a loop that expects: an agent that says what it expects of the data, measures the gap, and adapts. The
+   film's places are in bb_past.js and bb_life.js, the new chapters' in bb_ahead.js; what people built on the nerve cell in bb_model.js. */
 
 const BB_NUM="1.2",BB_TITLE="Borrowed from the brain";
 function bb_kick(ctx,a,o){o=o||{};a=a==null?1:a;if(a<=0)return;
@@ -2935,22 +3138,51 @@ function bb_trials(ctx,t,t0,tKeep){const g=ag_in(t,t0,3.6),fade=ag_in(t,tKeep,1.
   if(ic(1)>0){ctx.save();ctx.globalAlpha*=ic(1);ag_about(ctx,1530,520,kk(1));ctx.translate(1494,532);bb_seedShape(ctx,0.56,-0.35);ctx.restore();}
   if(ic(2)>0){ctx.save();ctx.globalAlpha*=ic(2);ag_about(ctx,1530,745,kk(2));ctx.strokeStyle=rgba(BB.ink,0.9);ctx.lineWidth=3.2;ctx.lineJoin="round";ctx.beginPath();bb_brainPath(ctx,1530,750,0.16);ctx.stroke();
     ctx.lineWidth=2.2;for(const [p0,p1,p2] of [[[1502,744],[1518,730],[1532,744]],[[1526,756],[1544,742],[1556,754]],[[1508,722],[1526,712],[1546,722]]]){ctx.beginPath();ctx.moveTo(p0[0],p0[1]);ctx.quadraticCurveTo(p1[0],p1[1],p2[0],p2[1]);ctx.stroke();}ctx.restore();}}
-// seeds falling from the maple: [x, y, start (s after "seed"), speed down, drift]
-const BB_FALL=[[430,170,-0.4,118,24],[1230,-60,0.3,134,18],[830,190,1.4,112,30]];
 // a magnifying glass over the brain: the tangle a lens shows, too dense to follow
 function bb_magnifier(ctx,x,y,r,a,k){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.7,1,clamp(k,0,1.2)));
   ctx.save();ctx.translate(x,y);ctx.rotate(0.75);ag_soft(ctx,c=>ag_rect(c,r+10,-17,210,34,15),[96,70,50],[176,136,100],r+130,-17,130,"rgba(0,0,0,0.4)",6,0.6);ctx.restore();
   bb_lens(ctx,x,y,r,c=>c.drawImage(bb_thicketTex(),x-r*1.1,y-r*1.1,r*2.2,r*2.2),{rim:12});
   ctx.strokeStyle=rgba(BB.brass,0.95);ctx.lineWidth=7;ctx.beginPath();ctx.arc(x,y,r+15,0,TAU);ctx.stroke();ctx.restore();}
 
+// the young sea squirt's way through the water to the rock, and where the camera finds it
+const BB_SWIM=bb_smooth([[-220,420],[160,350],[520,430],[800,380],[960,440],[1040,520],BB_LAND],10);
+const BB_SWQ=bb_along(BB_SWIM,0.53),BB_INTO=bb_along(BB_ROCK,0.27)[2]+Math.PI/2;
+// the small fish: foraging (two specks eaten), fleeing the big one, then guessing where the next speck will be
+function bb_fishAt(t,tF,tN,tG){const P=ag_keys(t,[[tF-1.6,-140],[tF+0.8,620],[tF+1.8,744],[tN+0.4,760],[tN+1.4,430],[tG-0.2,420],[tG+1.6,536]],u=>u),
+  Q=ag_keys(t,[[tF-1.6,250],[tF+0.8,330],[tF+1.8,356],[tN+0.4,360],[tN+1.4,640],[tG-0.2,640],[tG+1.6,524]],u=>u);return[P,Q];}
 scene("nature",(ctx,S,t,sc)=>{const C=sc.cues;
+  const tSq=C.squirt,tYoung=C.young,tEye=wAt(sc,"young","an eye spot"),tTailW=wAt(sc,"young","a tail"),t180=wAt(sc,"young","a hundred and eighty"),tRock=C.rock,tLook=wAt(sc,"rock","looking for a rock");
+  const tGlue=C.glue,tGlues=wAt(sc,"glue","glues its head"),tNever0=wAt(sc,"glue","never moves again"),tEats=C.eats,tNotQ=wAt(sc,"eats","Not quite"),tTail=wAt(sc,"eats","takes the tail"),tAgainU=wAt(sc,"eats","uses them again");
+  const tSteer=C.steer,tMove=C.move,tFood=wAt(sc,"move","to find food"),tNotFood=wAt(sc,"move","not to become food"),tNext=C.next,tGuessing=wAt(sc,"next","guessing what comes next");
   const t58=wAt(sc,"start","nineteen fifty-eight"),tShowed=wAt(sc,"start","showed a program"),tPer=wAt(sc,"start","the perceptron");
   const tCell=C.cell,tModel=wAt(sc,"cell","modelled it"),tWhy=C.why,tTry=C.trying,tKeep=wAt(sc,"trying","keeping the ones");
-  const tBirds=C.birds,tWright=C.wright,tTw=wAt(sc,"wright","twisting their wingtips"),tTwist=C.twist,tSeed=C.seed,tSpins=wAt(sc,"seed","spins down");
+  const tBirds=C.birds,tWright=C.wright,tTw=wAt(sc,"wright","twisting their wingtips"),tTwist=C.twist;
   const tEx=C.example,tBrain=wAt(sc,"example","a brain"),tWired=C.wired,tSee=wAt(sc,"wired","nobody could see");
+  // the young sea squirt: how far along its way, how hard it swims, and its change once it has settled
+  const su=ag_keys(t,[[tSq-1.4,0],[tYoung+1.0,0.5],[tRock,0.56],[tGlues,1]],u=>u),swim=1-ag_in(t,tGlues-0.1,0.7),meta=ag_sine(ag_in(t,tTail-0.3,tAgainU-tTail+1.6));
+  const fsh=bb_fishAt(t,tFood,tNotFood,tGuessing),fsh2=bb_fishAt(t+0.06,tFood,tNotFood,tGuessing),fang=Math.atan2(fsh2[1]-fsh[1],fsh2[0]-fsh[0]+1e-6);
   const shots=[
+    // off a rocky shore: a young sea squirt swims, looking for a rock; it settles head first, and its tail and most of its brain go;
+    // brains are for animals that move: a small fish finds food, and gets out of the way of a bigger one
+    {at:0,place:"bbShore",keys:[[0,640,440,1.0],[tYoung-0.6,BB_SWQ[0],BB_SWQ[1]+30,1.5],[tRock-0.2,940,520,1.12],[tGlue-0.4,1060,580,1.42],[tSteer-0.6,1040,560,1.18],[tMove-0.5,960,540,1.0]],d:2.0,push:0.015,draw(ctx,t){
+      const q=bb_along(BB_SWIM,su),q2=bb_along(BB_SWIM,Math.min(1,su+0.004)),head=su<1?Math.atan2(q2[1]-q[1],q2[0]-q[0]+1e-6):q[2],ang=lerp(head,BB_INTO,ag_sine(ag_in(t,tGlues-0.5,1.0)));
+      const wob=Math.sin(t*1.3)*0.04*swim;
+      bb_squirt(ctx,q[0],q[1],lerp(1.3,0.85,meta),ang+wob,t,{swim,m:meta,brain:ag_in(t,t180-0.4,0.6)});
+      // food drifts; the small fish eats two specks, then the big one comes, and it darts away; then it guesses where the next one is going
+      const sa=ag_in(t,tMove-0.6,0.6),eat=i=>i===0?ag_in(t,tFood+0.7,0.15):i===2?ag_in(t,tFood+1.7,0.15):i===4?ag_in(t,tGuessing+1.5,0.15):0;bb_specks(ctx,t,eat,sa);
+      const ga=ag_in(t,tGuessing-0.3,0.4)*(1-ag_in(t,tGuessing+1.4,0.3));if(ga>0){const e=bb_speckAt(4,tGuessing+1.6),P=bb_smooth([[fsh[0],fsh[1]],[(fsh[0]+e[0])/2,Math.min(fsh[1],e[1])-40],e],8);
+        ctx.save();ctx.globalAlpha*=ga;ctx.setLineDash([10,10]);ctx.strokeStyle=rgba(BB.spark,0.9);ctx.lineWidth=4;ctx.beginPath();bb_path(ctx,P,false);ctx.stroke();ctx.setLineDash([]);
+        ctx.strokeStyle=rgba(BB.spark,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.arc(e[0],e[1],18,0,TAU);ctx.stroke();ctx.restore();}
+      if(t>tFood-1.7)bb_fish(ctx,fsh[0],fsh[1],0.9,fang,t,{});
+      // the big one passes over, left, and on out of the frame
+      const bx=ag_keys(t,[[tNotFood-0.5,2160],[tGuessing+3.0,-420]],u=>u),by=lerp(300,250,clamp((bx-(-420))/2580,0,1)*-1+1);
+      if(bx<2200&&bx>-440)bb_fish(ctx,bx,by,2.2,Math.PI+0.05,t,{big:true});
+      bb_scr(ctx,S,()=>{bb_pillAt(ctx,560,800,"An eye spot",t,tEye-0.1,tRock-0.3);bb_pillAt(ctx,900,800,"A tail",t,tTailW-0.1,tRock-0.3);bb_pillAt(ctx,1300,800,"About 180 nerve cells",t,t180-0.1,tRock-0.3);
+        bb_pillAt(ctx,960,800,"Taken apart, and used again",t,tAgainU-0.3,tSteer+1.0);bb_pillAt(ctx,960,800,"Nothing left to steer",t,tSteer+1.2,tMove-0.4);
+        bb_pillAt(ctx,700,800,"To find food",t,tFood-0.1,tNext-0.4);bb_pillAt(ctx,1180,800,"Not to become food",t,tNotFood-0.1,tNext-0.4);
+        bb_pillAt(ctx,960,800,"Guessing what comes next",t,tGuessing-0.1,null);});}},
     // Washington, 1958: Frank Rosenblatt and the perceptron, as the first film drew it; it learns from three cards
-    {at:0,place:"bbNavy",keys:[[0,960,540,1.0],[1.6,900,530,1.07]],d:3.2,push:0.02,draw(ctx,t){const tr=bb_trial(t,tShowed+0.2);
+    {at:C.start-0.5,place:"bbNavy",keys:[[0,960,540,1.0],[C.start+0.1,900,530,1.07]],d:3.2,push:0.02,draw(ctx,t){const tr=bb_trial(t,tShowed+0.2);
       bb_perceptron(ctx,560,250,{on:1,card:tr.card,show:tr.show,guess:tr.guess,right:tr.right,dial:tr.dial,nudge:tr.nudge});
       ag_person(ctx,BB_CAST.rosenblatt,250,640,0.92,{t,gaze:[3,1],nod:0.04+0.03*ag_io(t,tPer-0.4,tPer+1.0,0.4)});
       bb_tagS(ctx,S,"Washington, D.C. · 1958",ag_in(t,t58,0.6));}},
@@ -2975,12 +3207,9 @@ scene("nature",(ctx,S,t,sc)=>{const C=sc.cues;
         for(const [side,v] of [[1,up],[-1,dn]]){const x=bx+side*206,k=Math.abs(v);if(k<0.05)continue;const s=v>0?-1:1,P=bb_smooth([[x,by-8+s*-6],[x+side*10,by-8+s*28],[x+side*4,by-8+s*58]],6);
           ctx.save();ctx.shadowColor="rgba(250,248,240,0.9)";ctx.shadowBlur=10;bb_inkArrow(ctx,P,1,4,aa*k);ctx.restore();}}}},
     // Kitty Hawk, 1902: the brothers' glider, its wings warping
-    {at:tTwist-0.4,place:"bbDunes",keys:[[0,960,500,1.0],[tSeed-1.4,1000,480,1.06]],d:2.6,push:0.02,draw(ctx,t){const u=t-tTwist,tw=Math.sin(u*1.7)*0.75,x=880+u*22,y=420+Math.sin(u*0.9)*10;
+    {at:tTwist-0.4,place:"bbDunes",keys:[[0,960,500,1.0],[tEx-1.6,1000,480,1.06]],d:2.6,push:0.02,draw(ctx,t){const u=t-tTwist,tw=Math.sin(u*1.7)*0.75,x=880+u*22,y=420+Math.sin(u*0.9)*10;
       ag_floorShadow(ctx,x+40,930,380,26,0.18);bb_glider(ctx,x,y,0.82,{twist:tw,roll:-0.07*tw});
       bb_tagS(ctx,S,"Kitty Hawk, North Carolina · 1902",ag_in(t,tTwist+0.3,0.6));}},
-    // the maple's seeds, spinning down like tiny helicopters
-    {at:tSeed-0.4,place:"bbMaple",keys:[[0,960,520,1.04],[tSpins,920,580,1.1]],d:2.6,push:0.02,draw(ctx,t){
-      for(const [x0,y0,ts,vy,dr] of BB_FALL){const u=t-(tSeed+ts);if(u<0)continue;const y=y0+u*vy,x=x0+u*dr+Math.sin(u*2.2)*26;if(y>1180)continue;bb_seedSpin(ctx,x,y,1.05,t+ts,{rate:7.5});}}},
     // the only working example of a machine that learns: a brain; but in 1888 nobody could see how it was wired
     {at:tEx-0.4,place:"bbBrain",keys:[[0,960,520,1.0],[tWired,1010,470,1.08]],d:2.6,push:0.015,draw(ctx,t){
       bb_brainLights(ctx,t,0.45*ag_in(t,tBrain-0.3,1.2)*(1-ag_in(t,tSee-0.4,0.8)));
@@ -3219,7 +3448,55 @@ scene("gaps",(ctx,S,t,sc)=>{const C=sc.cues;
   const ca=ag_in(t,tHole-0.6,0.5);if(ca>0){ctx.save();ctx.globalAlpha*=ca;ag_about(ctx,1480,370,lerp(0.6,1,clamp(ag_spr(t,tHole-0.6,0.5),0,1.2)));
     ag_box(ctx,1180,170,600,400,22,{});bb_cloth(ctx,1206,196,548,348,{fill:ag_in(t,tIn-0.1,1.4),r:66});ctx.restore();}});
 
-/* ================================================================ 6 · Borrowed, not copied */
+/* ================================================================ 6 · A step ahead */
+// the midge's way across the meadow (it drifts left, rising and falling), and where it is at tt
+const bb_midgeAt=(tt,t0)=>[1580-34*(tt-t0),330+46*Math.sin((tt-t0)*1.2)];
+scene("ahead",(ctx,S,t,sc)=>{const C=sc.cues,end=sc.dur;
+  const tTrick=C.trick,tAll=wAt(sc,"trick","all the time"),tGuess=C.guess,tAheadW=wAt(sc,"guess","a moment ahead"),tChecks=wAt(sc,"guess","checks the guess");
+  const tDragon=C.dragon,tFlies=wAt(sc,"dragon","flies to where"),tGoing=wAt(sc,"dragon","will be"),tNine=wAt(sc,"dragon","nine in ten");
+  const tStairs=C.stairs,tStop=wAt(sc,"stairs","has stopped"),tStum=wAt(sc,"stairs","you stumble"),tReady=wAt(sc,"stairs","ready for it to move");
+  const tError=C.error,tExpW=wAt(sc,"error","it barely notices"),tDidnt=wAt(sc,"error","What it didn't"),tPE=wAt(sc,"error","a prediction error");
+  const tSch=C.schultz,tLight=wAt(sc,"schultz","a light came on"),tJuice=wAt(sc,"schultz","a drop of juice"),tFirst=C.first,tAtJ=wAt(sc,"first","fired at the juice"),tOnce=wAt(sc,"first","Once the monkeys"),tAtL=wAt(sc,"first","at the light instead");
+  const tQuiet=C.quiet,tSilent=wAt(sc,"quiet","fell silent"),tMiss=C.miss,tG=wAt(sc,"miss","Guess"),tC=wAt(sc,"miss","check"),tL=wAt(sc,"miss","learn from the miss");
+  const m0=tTrick-0.6,tCatch=tGoing+1.0,P=bb_midgeAt(tCatch,m0);
+  const shots=[
+    // a meadow: a dragonfly hovers; its guess, where the midge is going to be; it flies there, and catches it
+    {at:0,place:"bbMeadow",keys:[[0,960,500,1.0],[tGuess-0.2,1000,440,1.12],[tCatch+0.6,960,460,1.06]],d:2.2,push:0.015,draw(ctx,t){
+      const fu=ag_in(t,tFlies-0.3,tCatch-tFlies+0.3),f=u=>{const c=bb_smooth([[420,380],[640,250],[P[0]-200,P[1]-90],[P[0]-70,P[1]]],8);return bb_along(c,u);};
+      const k=ag_sine(fu),q=f(k),qn=f(Math.min(1,k+0.01)),after=clamp((t-tCatch)/2.6,0,1);
+      let dx=q[0],dy=q[1]+Math.sin(t*1.6)*6*(1-fu+after),da=fu>0&&fu<1?Math.atan2(qn[1]-q[1],qn[0]-q[0]):0;
+      if(t>tCatch){dx+=after*120;dy-=after*40;da=lerp(Math.atan2(qn[1]-q[1],qn[0]-q[0])*(1-ag_in(t,tCatch,0.6)),-0.18,ag_in(t,tCatch,1.2));}
+      // the guess: a dashed way to where the midge will be, and a ring there
+      const ga=ag_in(t,tChecks-0.2,0.5)*(1-ag_in(t,tCatch-0.3,0.4));if(ga>0){const c=bb_smooth([[420,380],[640,250],[P[0]-200,P[1]-90],[P[0]-70,P[1]]],8);
+        ctx.save();ctx.globalAlpha*=ga;ctx.setLineDash([10,10]);ctx.strokeStyle=rgba(BB.spark,0.95);ctx.lineWidth=4;ctx.shadowColor="rgba(60,50,30,0.35)";ctx.shadowBlur=6;ctx.beginPath();bb_path(ctx,c,false);ctx.stroke();ctx.setLineDash([]);
+        ctx.lineWidth=3.5;ctx.beginPath();ctx.arc(P[0],P[1],26,0,TAU);ctx.stroke();ctx.restore();}
+      const ma=t<tCatch?1:0;if(ma)bb_midge(ctx,...bb_midgeAt(t,m0),1.8,t,ag_in(t,m0,0.6));
+      bb_dragonfly(ctx,dx,dy,0.85,da,t,{fly:1});
+      bb_scr(ctx,S,()=>{bb_pillAt(ctx,960,800,"A moment ahead",t,tAheadW-0.1,tDragon-0.4);bb_pillAt(ctx,960,800,"About 9 in 10 caught",t,tNine-0.1,tStairs-0.6);});}},
+    // on paper: an escalator that has stopped; the shoe steps on, and stumbles; what the legs expected, and what they got
+    {at:tStairs-0.4,place:"bbSheet",keys:[[0,960,500,1.0]],push:0.02,draw(ctx,t){
+      const turn=ag_eo(ag_in(t,tSch-0.6,0.9));if(turn<1){
+        bb_escalator(ctx,t,{u:ag_in(t,tStairs-0.3,1.2),run:ag_in(t,tReady-0.2,0.5)*(1-ag_in(t,tDidnt,0.5))*0.6,step:ag_in(t,wAt(sc,"stairs","Step onto")-0.1,1.3),trip:ag_in(t,tStum-0.2,0.6)});
+        bb_pillAt(ctx,1330,620,"Expected: moving",t,tReady-0.1,null);bb_pillAt(ctx,1330,710,"Got: still",t,tExpW-0.3,null);
+        bb_pillAt(ctx,1330,810,"A prediction error",t,tPE-0.1,null,{icon:"warn",col:AG.amber});}
+      if(turn>0){const B=BB_SHEET;bb_paper(ctx,B.x+(1-turn)*1520,B.y,B.w,B.h);}
+      // Schultz's record, a row at a time; then the loop that comes of it
+      if(turn>=1){const fa=1-ag_in(t,end-1.2,0.6);
+        bb_heading(ctx,t,[[tSch,end-1.2,"Wolfram Schultz · the 1990s"]]);
+        // what each trial was: a light, then a drop of juice, along time; it gives way to the rows as they're drawn
+        const ha=ag_in(t,tLight-0.4,0.5)*(1-ag_in(t,tAtJ-2.0,0.5)),X=BB_RAS.x,Wd=BB_RAS.w;if(ha>0){withA(ctx,ha,()=>{
+          bb_inkArrow(ctx,[[X,470],[X+Wd,470]],ag_in(t,tLight-0.4,1.2),3.5,0.8,BB.inkSoft);ag_T(ctx,"Time",X+Wd,520,{w:700,size:30,align:"right",col:BB.inkSoft});
+          bb_lamp(ctx,X+BB_RAS.l*Wd,400,ag_in(t,tLight,0.3),ag_in(t,tLight-0.2,0.3));ag_T(ctx,"A light",X+BB_RAS.l*Wd,340,{w:700,size:30,align:"center",col:BB.ink,a:ag_in(t,tLight-0.2,0.3)});
+          bb_drop(ctx,X+BB_RAS.j*Wd,400,ag_in(t,tJuice-0.2,0.3));ag_T(ctx,"Juice",X+BB_RAS.j*Wd,340,{w:700,size:30,align:"center",col:BB.ink,a:ag_in(t,tJuice-0.2,0.3)});});}
+        bb_raster(ctx,400,0,ag_in(t,tAtJ-1.0,1.6),"At first",{a:ag_in(t,tAtJ-1.2,0.4)*fa});
+        bb_raster(ctx,540,1,ag_in(t,tOnce,tAtL-tOnce+0.6),"Learned",{a:ag_in(t,tOnce-0.2,0.4)*fa});
+        bb_raster(ctx,680,2,ag_in(t,tQuiet-0.2,wAt(sc,"quiet","just when")-tQuiet+0.6),"No juice",{a:ag_in(t,tQuiet-0.4,0.4)*fa,mark:ag_in(t,tSilent,0.4)});
+        withA(ctx,fa,()=>{bb_pillAt(ctx,640,800,"Guess",t,tG-0.1,null);bb_pillAt(ctx,940,800,"Check",t,tC-0.1,null);bb_pillAt(ctx,1300,800,"Learn from the miss",t,tL-0.1,null);
+          for(const [x0,x1,t0] of [[712,862,tC-0.3],[1012,1122,tL-0.3]]){const u=ag_in(t,t0,0.4);if(u>0)bb_inkArrow(ctx,[[x0,800],[lerp(x0,x1,u),800]],1,3.5,0.85,BB.inkSoft);}});}
+      bb_tagS(ctx,S,"Fribourg, Switzerland · the 1990s",ag_in(t,tSch+0.4,0.5)*(1-ag_in(t,tFirst+1.6,0.5)),BB_UNDER);}}];
+  const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kickShots(ctx,t,shots,si,[[0,0.45],[1,0.3]]);});
+
+/* ================================================================ 7 · Borrowed, not copied */
 const BB_C43=bb_cell(1943,{x:520,y:470,r:22,reach:170,dirs:6,depth:3,wig:0.4,spines:true,axon:{ang:0.05,len:190,bend:0.2,ends:3,endLen:40},axW:7});
 const BB_ARC43=bb_smooth([[560,330],[720,240],[930,236],[1110,320]],8);
 // a sheet's heading in ink, that changes: the old one fades before the new one comes
@@ -3264,7 +3541,7 @@ scene("borrowed",(ctx,S,t,sc)=>{const C=sc.cues;
       bb_pillAt(ctx,560,640,"A bird",t,tWing+0.1,null);bb_pillAt(ctx,1360,680,"A plane",t,tWing+0.4,null);}}];
   const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kickShots(ctx,t,shots,si,[[1,0.3],[1,0.2],[0,0],[0,0.35]]);});
 
-/* ================================================================ 7 · Likely words */
+/* ================================================================ 8 · Likely words */
 const BB_PROMPT="A bee tells the hive where food is by".split(" ");
 // the sentence the model is writing: its words so far (n of them, the last fading in), and a slot for the next, with a word in it
 function bb_prompt(ctx,x,y,n,wd,wa,a){if(a<=0)return;const f={w:700,size:36},sp=ag_tw(ctx," ",f);ctx.save();ctx.globalAlpha*=a;
@@ -3314,7 +3591,7 @@ scene("likely",(ctx,S,t,sc)=>{const C=sc.cues;
     bb_asks(ctx,t,tBusy-0.1,300,640,1-ag_in(t,br-0.9,0.5));}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kick(ctx);});
 
-/* ================================================================ 8 · Sure, and wrong */
+/* ================================================================ 9 · Sure, and wrong */
 scene("sure",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
   const tMiss=C.missing,tLikely=wAt(sc,"missing","still writes likely words"),tBirth=C.birthday,tThree=wAt(sc,"birthday","asked three times"),tDates=wAt(sc,"birthday","three different dates"),tWrong=wAt(sc,"birthday","all wrong");
   const tOnce=C.once,tSeen=wAt(sc,"once","seen once"),tNever=wAt(sc,"once","or never"),tNoPat=wAt(sc,"once","no pattern to learn"),tTests=C.tests,tGuess=wAt(sc,"tests","reward a guess"),tIdk=wAt(sc,"tests","I don't know"),tBlank=wAt(sc,"tests","a blank never will");
@@ -3343,14 +3620,14 @@ scene("sure",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
     bb_tagS(ctx,S,"A study · 2025",ag_in(t,tBirth+0.3,0.5)*(1-ag_in(t,tOnce-0.4,0.5)),BB_UNDER);}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kick(ctx);});
 
-/* ================================================================ 9 · A picture that held */
+/* ================================================================ 10 · A picture that held */
 const BB_HELD=[{x:620,n:3,y:470,dy:140},{x:960,n:4,y:470,dy:115},{x:1300,n:2,y:470,dy:140}];
-scene("held",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
+scene("held",(ctx,S,t,sc)=>{const C=sc.cues,end=sc.dur;
   const tCheck=wAt(sc,"held","others could check it"),tGap=C.gap,tEM=wAt(sc,"gap","electron microscopes"),tShowed=wAt(sc,"gap","showed the gap"),tWide=wAt(sc,"gap","twenty millionths");
-  const tBuilt=C.built,tUnits=wAt(sc,"built","simple units"),tConn=wAt(sc,"built","connections that change"),tFill=C.fill,tDiff=wAt(sc,"fill","a little differently"),tChk=C.check,tEv=wAt(sc,"check","against the evidence"),tCajal=wAt(sc,"check","as Cajal's drawings"),tNext=C.next,tLoop=wAt(sc,"next","in a loop");
+  const tBuilt=C.built,tUnits=wAt(sc,"built","simple units"),tConn=wAt(sc,"built","connections that change"),tFill=C.fill,tDiff=wAt(sc,"fill","a little differently"),tChk=C.check,tEv=wAt(sc,"check","against the evidence"),tCajal=wAt(sc,"check","as Cajal's drawings");
   const R1=bb_temper(BB_NEXT,1);R1.extra=2;
   const sp=bb_spin(t,[{t0:tFill+0.2,d:1.6,i:0,rows:R1},{t0:tDiff-0.6,d:1.5,i:1,rows:R1},{t0:tDiff+1.1,d:1.4,i:2,rows:R1}]);
-  const WORDS=["dancing","buzzing","waggling"];
+  const WORDS=["dancing","buzzing","waggling"],out=end-1.1;
   const shots=[
     // the drawing, checked: in Berlin, 1889, and in the 1950s by electron microscopes, which showed the gap
     {at:0,place:"bbSheet",keys:[[0,960,500,1.0]],push:0.02,draw(ctx,t){bb_drawing(ctx,1,1,1,1);
@@ -3360,28 +3637,68 @@ scene("held",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       bb_pillAt(ctx,1130,190,"Electron microscope · 1950s",t,tShowed-0.2,null,{icon:"tick",col:AG.green});
       bb_pillAt(ctx,1310,680,"About 20 millionths of a millimetre",t,tWide-0.1,null);}},
     // models are built on that picture; they fill gaps with what's likely, a little differently each time; check them against the
-    // evidence, as his drawings were checked; next: a model that reasons, with hands, in a loop
+    // evidence, as his drawings were checked. Everything but the model goes before the chapter ends: the next one goes on from it
     {at:tBuilt-0.4,place:"lab",keys:[[0,960,540,1.0]],push:0.015,draw(ctx,t){
       const na=ag_in(t,tBuilt-0.2,0.6)*(1-ag_in(t,tFill-0.4,0.5));
       bb_net(ctx,BB_HELD,{r:30,u:ag_in(t,tBuilt-0.2,1.9),sig:t<tUnits?null:((t-tUnits)*0.9)%2.8,a:na,alpha:0.5,w:(i,j,k)=>1.6+3.4*(0.5+0.5*Math.sin(t*0.9*ag_in(t,tConn-0.3,1)+i*1.7+j*1.3+k*0.7))});
-      // the model moves to the middle for its loop
-      const mv=ag_sine(ag_in(t,tNext-0.6,1.6)),mx=lerp(300,960,mv),my=lerp(640,470,mv),la=ag_in(t,tNext+0.9,0.2);
-      const ma=ag_in(t,tFill-0.4,0.6);if(la<1)bb_model(ctx,mx,my,lerp(100,88,mv),t,{a:ma*(1-la),core:0.6,think:0.4*ag_io(t,tFill,tChk,0.5),floor:lerp(770,700,mv)});
-      // the loop goes before the end card comes up over it
-      if(la>0)ag_loop(ctx,960,470,{t,R:180,r:88,p:ag_in(t,tNext+0.9,1.8),core:0.7,think:0.3,a:la*(1-ag_in(t,br-0.4,0.9)),label:null});
+      bb_model(ctx,300,640,100,t,{a:ag_in(t,tFill-0.4,0.6),core:0.6,think:0.4*ag_io(t,tFill,tChk,0.5),floor:770});
       // a little differently each time
       const wa=ag_in(t,tFill-0.2,0.5)*(1-ag_in(t,tChk-0.5,0.5));bb_wheel(ctx,1000,500,170,R1,sp.rot,{pick:sp.pick,a:wa,k:Math.min(1,ag_spr(t,tFill-0.2,0.5))});
       const w=sp.pick==null?null:WORDS[sp.pick];bb_line(ctx,1240,440,[["…by ",null],[w||"______",w?BB_VI:AG.mut,w?1:0.7],[".",null]],{kick:"The model",w:420,a:wa});
       // checked against the evidence, as his drawings were
-      const ca=ag_in(t,tEv-0.6,0.5)*(1-ag_in(t,tNext-0.6,0.5));
+      const ca=ag_in(t,tEv-0.6,0.5)*(1-ag_in(t,out,0.5));
       ag_evidence(ctx,500,220,560,{kick:"The model",title:"A likely answer"},[{kick:"Source",title:"The records",col:AG.orange},{kick:"Check",title:"It matches",col:AG.green}],{open:ag_in(t,tEv-0.2,1.2),a:ca,k:Math.min(1,ag_spr(t,tEv-0.6,0.5))});
-      const pa=ag_in(t,tCajal-0.4,0.5)*(1-ag_in(t,tNext-0.6,0.5));bb_framed(ctx,1220,240,500,298,pa,ag_spr(t,tCajal-0.4,0.5),{img:bb_drawingPic()});
-      bb_pillAt(ctx,1470,640,"Checked",t,tCajal+0.4,tNext-0.6,{icon:"tick",col:AG.green});}}];
-  const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kickShots(ctx,t,shots,si,[[1,0.3],[0,0]],1-ag_in(t,br-0.4,0.5));
+      const pa=ag_in(t,tCajal-0.4,0.5)*(1-ag_in(t,out,0.5));bb_framed(ctx,1220,240,500,298,pa,ag_spr(t,tCajal-0.4,0.5),{img:bb_drawingPic()});
+      bb_pillAt(ctx,1470,640,"Checked",t,tCajal+0.4,out);}}];
+  const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kickShots(ctx,t,shots,si,[[1,0.3],[0,0]]);});
+
+/* ================================================================ 11 · A loop that expects */
+// the room as A picture that held leaves it: the model at the left; the plain script, Monday's rows, the agent's guess and its check
+scene("expects",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
+  const tData=C.data,tReflex=C.reflex,tTrig=wAt(sc,"reflex","a trigger comes"),tSame=wAt(sc,"reflex","runs the same steps"),tStops=wAt(sc,"reflex","and stops");
+  const tNight=C.night,tLoads=wAt(sc,"night","loads the day's"),tRule=wAt(sc,"night","checks one rule"),tEmpty=wAt(sc,"night","the table isn't empty");
+  const tMon=C.monday,tHalf=wAt(sc,"monday","only half the rows"),tPass=wAt(sc,"monday","The rule passes"),tWrong=wAt(sc,"monday","go out wrong");
+  const tAgent=C.agent,tSays=wAt(sc,"agent","says what it expects"),tExp=C.expect,tGapL=C.gap,tLooks=wAt(sc,"gap","it looks"),tMeas=wAt(sc,"gap","measures the gap"),tPE=wAt(sc,"gap","A prediction error");
+  const tFor=C.forage,tCounts=wAt(sc,"forage","counts each campus"),tNone=wAt(sc,"forage","one sent nothing"),tAd=C.adapt,tRen=wAt(sc,"adapt","a column renamed"),tCrash=wAt(sc,"adapt","it doesn't crash"),tPlan=wAt(sc,"adapt","changes its plan");
+  const tPer=C.person,tShows=wAt(sc,"person","shows a person"),tEvid=wAt(sc,"person","with its evidence"),tPlain=C.plain,tTool=wAt(sc,"plain","the right tool"),tSameT=wAt(sc,"plain","the same every time");
+  const tLoop=C.loop,tAdapt=wAt(sc,"loop","and adapt"),tAnim=wAt(sc,"loop","kept moving animals alive"),tBor=C.borrow,tNext=C.next;
+  // the script's three steps, lit in turn: once for "the same steps", then each night
+  const lit=[0,1,2].map(i=>Math.max(ag_io(t,tSame+i*0.45,tSame+i*0.45+0.6,0.15),ag_io(t,tLoads-0.1+i*0.9,tLoads+0.5+i*0.9,0.15)));
+  const shots=[{at:0,place:"lab",keys:[[0,960,540,1.015]],push:0.015,draw(ctx,t){
+    // the model moves to the middle for its loop at the end
+    const mv=ag_sine(ag_in(t,tLoop-0.6,1.6)),mx=lerp(300,960,mv),my=lerp(640,470,mv),la=ag_in(t,tLoop+0.9,0.2);
+    const think=0.35*ag_io(t,tData,tReflex,0.5)+0.55*ag_io(t,tAgent,tExp+0.6,0.4)+0.4*ag_io(t,tFor,tPlan+0.8,0.4);
+    if(la<1)bb_model(ctx,mx,my,lerp(100,88,mv),t,{a:1-la,core:0.6+0.2*think,think,floor:lerp(770,700,mv)});
+    if(la>0)ag_loop(ctx,960,470,{t,R:180,r:88,p:ag_in(t,tLoop+0.9,1.8),core:0.7,think:0.3,a:la*(1-ag_in(t,br-0.4,0.9)),label:null,steps:[["Expect",-120],["Act",0],["Check",120]],stepA:[ag_in(t,tLoop+0.9,0.4),ag_in(t,tLoop+1.5,0.4),ag_in(t,tLoop+2.1,0.4)]});
+    // a reflex: the plain script, its steps, its one rule; the Monday it passes, and the reports go out wrong
+    const sa=ag_in(t,tReflex-0.2,0.5)*(1-ag_in(t,tAgent-0.4,0.5));
+    bb_script(ctx,560,170,{a:sa,k:Math.min(1,ag_spr(t,tReflex-0.2,0.5)),lit,ok:ag_in(t,tEmpty,0.3)*(1-ag_in(t,tMon-0.2,0.3))+ag_in(t,tPass-0.1,0.3)});
+    bb_rows(ctx,1180,190,{a:ag_in(t,tHalf-0.4,0.5)*(1-ag_in(t,tAgent-0.4,0.5)),k:Math.min(1,ag_spr(t,tHalf-0.4,0.5)),fill:ag_sine(ag_in(t,tHalf-0.2,0.9)),num:ag_in(t,tHalf+0.4,0.4),h:260});
+    const va=ag_in(t,tWrong-0.3,0.4)*(1-ag_in(t,tAgent-0.4,0.5));if(va>0){ctx.save();ctx.globalAlpha*=va;ag_about(ctx,1490,560,lerp(0.6,1,clamp(ag_spr(t,tWrong-0.3,0.5),0,1.2)));ag_verdict(ctx,1490,560,"Reports go out wrong","fail",1);ctx.restore();}
+    // an agent says first what it expects; then it looks, and measures the gap; then it counts each campus
+    const ea=ag_in(t,tSays-0.3,0.5)*(1-ag_in(t,tAd-0.5,0.5));
+    if(ea>0)ag_textCard(ctx,480,170,620,{kick:"It expects",title:"About 4,100 rows",sub:"As on most Mondays, from three campuses"},{a:ea,k:Math.min(1,ag_spr(t,tSays-0.3,0.5)),kickCol:AG.violet,tail:{side:"bottom",at:0.12,px:340,py:540}});
+    bb_rows(ctx,1180,190,{a:ag_in(t,tLooks-0.4,0.5)*(1-ag_in(t,tAd-0.5,0.5)),k:Math.min(1,ag_spr(t,tLooks-0.4,0.5)),fill:ag_sine(ag_in(t,tLooks-0.1,0.8)),num:ag_in(t,tLooks+0.5,0.4),exp:ag_in(t,tLooks-0.2,0.5),gap:ag_in(t,tMeas,0.8),h:260});
+    bb_pillAt(ctx,1490,500,"A prediction error",t,tPE-0.1,tAd-0.5,{icon:"warn",col:AG.amber});
+    const cy=640;[["North","1,010",true],["South","1,020",true],["City","0",false]].forEach(([n,v,ok],i)=>{const t0=tCounts-0.3+i*0.55;
+      bb_campus(ctx,1180+i*214,cy,n,v,ok,ag_in(t,t0,0.4)*(1-ag_in(t,tAd-0.5,0.5)),ag_spr(t,t0,0.5));});
+    // an assumption fails: a column renamed; it changes its plan, and notes it
+    bb_assumed(ctx,560,190,{a:ag_in(t,tAd-0.2,0.5)*(1-ag_in(t,tPer-0.5,0.5)),k:Math.min(1,ag_spr(t,tAd-0.2,0.5)),f:ag_in(t,tRen,0.6)});
+    const pa=ag_in(t,tPlan-0.2,0.4)*(1-ag_in(t,tPer-0.5,0.5));if(pa>0){ctx.save();ctx.globalAlpha*=pa;ag_about(ctx,900,560,lerp(0.6,1,clamp(ag_spr(t,tPlan-0.2,0.5),0,1.2)));ag_verdict(ctx,900,560,"Plan changed, and noted","loop",1);ctx.restore();}
+    // it shows a person the gap, with its evidence
+    ag_evidence(ctx,560,190,640,{kick:"For a person to decide",title:"City campus sent no rows"},[{kick:"Expected",title:"About 4,100 rows",col:AG.violet},{kick:"Source",title:"Counts by campus",col:AG.orange}],
+      {open:ag_in(t,tEvid-0.3,1.2),a:ag_in(t,tPer+0.1,0.5)*(1-ag_in(t,tPlain-0.4,0.5)),k:Math.min(1,ag_spr(t,tPer+0.1,0.5)),kickCol:AG.kick});
+    // where nothing surprises: the plain script, the same every time
+    bb_script(ctx,560,170,{a:ag_in(t,tPlain-0.2,0.5)*(1-ag_in(t,tLoop-0.8,0.5)),k:Math.min(1,ag_spr(t,tPlain-0.2,0.5)),lit:[0,1,2].map(i=>ag_io(t,tTool+i*0.4,tTool+i*0.4+0.5,0.15)),ok:ag_in(t,tTool+0.6,0.3)});
+    bb_pillAt(ctx,1440,420,"Cheaper, the same every time",t,tSameT-0.3,tLoop-0.8,{icon:"tick",col:AG.green});
+    // the loop the animals ran, borrowed: not the brain
+    bb_pillAt(ctx,960,800,"Borrowed: the loop, not the brain",t,tBor-0.1,br-0.6);}}];
+  ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kick(ctx,1-ag_in(t,br-0.4,0.5));
   ag_end(ctx,S,t,br,BB_TITLE,"A likely answer isn't a checked one.","Film 2 of 10");});
 
-// chapters that open on a cut: Borrowed, not copied opens on paper, as Filling the gaps ends on it
-ag_cutInto(["borrowed"]);
+// chapters that open on what the one before ends on: Borrowed, not copied opens on paper, as A step ahead ends on it; A loop that
+// expects goes on in the room from the model where A picture that held leaves it
+ag_cutInto(["borrowed","expects"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

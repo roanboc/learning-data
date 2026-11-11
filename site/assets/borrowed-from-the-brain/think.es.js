@@ -1,7 +1,6 @@
 /* Learning Data: "Pausa para pensar" de Borrowed from the brain, en español. Mantén las claves iguales a think.en.js.
-   La película se detiene al final de tres capítulos (cell, borrowed, sure), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
-   y el .player data-labs de la página está vacío. */
+   La película se detiene al final de cuatro capítulos (cell, borrowed, sure, expects), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). Ninguna pregunta tiene "stop"; los labs de la serie están en su página de labs. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
@@ -13,5 +12,8 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
     why:"McCulloch y Pitts dibujaron la célula de Cajal como una unidad que suma sus entradas y se dispara al pasar de un nivel fijado, Rosenblatt dio un peso a cada conexión, y las capas vinieron de las células de Hubel y Wiesel que se disparan ante bordes. Pero una célula real es mucho más compleja: en 2021 hizo falta una red de cinco a ocho capas para imitar una, y un niño aprende una palabra con pocos ejemplos, mientras que un modelo necesita muchísimos. ¿Dónde más funcionó una idea prestada sin copiar todo?"},
   "sure":{q:"Cuando se le pidió tres veces el cumpleaños de un investigador, un modelo dio tres fechas distintas, todas mal. ¿Por qué?",
     opts:[{t:"El dato estaba, pero cada respuesta lo sacó de una fuente distinta, y esas tres fuentes no coincidían entre sí.",near:true},{t:"El dato no estaba, así que escribió palabras probables: un cumpleaños no tiene patrón que aprender, y las pruebas premian adivinar.",ok:true},{t:"Tenía la temperatura alta, así que inventó a propósito en lugar de dar la fecha que sí conocía."}],
-    why:"Un modelo elige cada palabra al azar entre lo probable, y aun al mínimo queda un poco de azar, así que un dato que falta sale distinto cada vez, cada respuesta tan fluida como la anterior. Los cerebros también rellenan huecos, con la misma seguridad. Una respuesta fluida no está verificada: verifícala contra la evidencia, como se verificaron los dibujos de Cajal. ¿Qué respuestas llegan fluidas a tu trabajo, pero sin verificar?"}
+    why:"Un modelo elige cada palabra al azar entre lo probable, y aun al mínimo queda un poco de azar, así que un dato que falta sale distinto cada vez, cada respuesta tan fluida como la anterior. Los cerebros también rellenan huecos, con la misma seguridad. Una respuesta fluida no está verificada: verifícala contra la evidencia, como se verificaron los dibujos de Cajal. ¿Qué respuestas llegan fluidas a tu trabajo, pero sin verificar?"},
+  "expects":{q:"Una revisión nocturna lleva años pasando: la tabla no está vacía. ¿Qué haría primero un agente hecho como un cerebro?",
+    opts:[{t:"Correr la misma regla cada hora en lugar de cada noche, para atrapar antes una mala carga."},{t:"Rellenar por sí mismo una noche corta, con las filas que esperaba, para que los informes salgan bien.",near:true},{t:"Decir primero qué espera, unas 4,100 filas un lunes, y luego mirar y medir la diferencia.",ok:true}],
+    why:"Una regla revisa una cosa; una expectativa hace que se vea la diferencia. El lunes en que City no envió nada, la regla pasó, y llegaron 2,030 filas donde se esperaban unas 4,100. El agente va a buscar, se adapta donde ningún número cambia, y le muestra el resto a una persona, con su evidencia. ¿Qué revisiones de tu trabajo pasan sin esperar nada?"}
   }}};

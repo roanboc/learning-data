@@ -178,8 +178,8 @@ def main():
         browser, page = render_page(p)
         info = page.evaluate("filmInfo()")
         browser.close()
-    if len(rows) != len(info["caps"]) or len(rows) != 87:
-        raise RuntimeError(f"Expected 87 Spanish captions matching the film, found {len(rows)}")
+    if len(rows) != len(info["caps"]):
+        raise RuntimeError(f"Expected {len(info['caps'])} Spanish captions matching the film, found {len(rows)}")
     items = []
     for row, cue in zip(rows, info["caps"]):
         # The voice uses the full Spanish caption window, including its extra 0.1 s hold.

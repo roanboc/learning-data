@@ -314,6 +314,19 @@ models:
         domain: finance
         glossary_term: casual_teaching_cost
 
+  - name: casual_pay_paid
+    description: >
+      Casual pay paid, defined once: what casual staff are paid on each pay day, from the claims
+      approved for it, before tax and on-costs; by faculty, unit and pay day. HR's measure, owned by
+      Ingrid Holm, so payroll can check each pay run. A Unity Catalog metric view over
+      mart_finance__casual_pay_paid, on Databricks only. One of the three measures that once shared
+      the name casual teaching cost (DEC-FIN-05): casual hours contracted is Planning's, and casual
+      teaching cost is Finance's.
+    config:
+      meta:
+        owner: "Ingrid Holm, HR"
+        domain: finance
+
   - name: mart_finance__faculty_totals
     description: >
       Casual teaching cost by faculty, for the teaching periods Finance has reported (the seed

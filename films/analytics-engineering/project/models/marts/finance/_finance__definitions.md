@@ -22,7 +22,7 @@
 - Rule: Teaching duties only, tutorial, marking and consultation (the seed teaching_duties); training isn't teaching.
 - Rule: Plus on-costs, at Finance's rate for the year of the teaching period (the seed on_cost_rates).
 - Rule: Counted by the teaching period the teaching was done in, not the day it was paid.
-- Rule: Two other counts have names of their own, casual hours contracted (the hours the contracts allow, for planning) and casual pay paid (the pay paid on each pay day).
+- Rule: One of three measures that shared a name, each its own domain's, with its owner in the glossary - casual hours contracted (Planning's, Clara Jensen, the hours the contracts allow, for planning) and casual pay paid (HR's, Ingrid Holm, the pay paid on each pay day).
 - History: As the claims stand now. A claim approved late changes its teaching period's cost (LIM-FIN-04).
 - Source of the definition: the term Casual teaching cost in the university's Unity Catalog Glossary, on Databricks, named by data governance; synced on 2026-09-15.
 {% enddocs %}

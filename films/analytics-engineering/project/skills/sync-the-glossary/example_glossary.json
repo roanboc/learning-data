@@ -9,6 +9,18 @@
       "updated_on": "2026-10-01"
     },
     {
+      "term": "Casual hours contracted",
+      "definition": "What the casual teaching the contracts allow in a teaching period comes to: each casual contract's hours, at the rate for each duty, counted by the contract's teaching period. Planning's measure, to plan the teaching.",
+      "owner": "Clara Jensen, Planning",
+      "updated_on": "2026-09-15"
+    },
+    {
+      "term": "Casual pay paid",
+      "definition": "What casual staff are paid on each pay day, from the claims approved for it, before tax and on-costs, counted by the pay day that paid it. HR's measure, to check each pay run.",
+      "owner": "Ingrid Holm, HR",
+      "updated_on": "2026-09-15"
+    },
+    {
       "term": "Casual teaching cost",
       "definition": "What the casual teaching in a teaching period costs: the claims approved for casual staff for teaching, plus on-costs, what the university pays on top of their pay. Also called sessional teaching cost, or casual teaching spend.",
       "owner": "Rohan Desai, Finance",

@@ -7,13 +7,13 @@
 -- principal holds nothing itself: a row for one is drift.
 select grantee, privilege_type as privilege, 'catalog' as securable_type, catalog_name as securable
 from system.information_schema.catalog_privileges
-where grantee in ('planning_contributors', '4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73') and coalesce(inherited_from, 'NONE') = 'NONE'
+where grantee in ('planning_contributors', 'workload_contributors', '4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73', '7d2b5e90-1c4a-4f83-b6e7-3a9c0d1f2e58') and coalesce(inherited_from, 'NONE') = 'NONE'
 union all
 select grantee, privilege_type, 'schema', catalog_name || '.' || schema_name
 from system.information_schema.schema_privileges
-where grantee in ('planning_contributors', '4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73') and coalesce(inherited_from, 'NONE') = 'NONE'
+where grantee in ('planning_contributors', 'workload_contributors', '4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73', '7d2b5e90-1c4a-4f83-b6e7-3a9c0d1f2e58') and coalesce(inherited_from, 'NONE') = 'NONE'
 union all
 select grantee, privilege_type, 'table', table_catalog || '.' || table_schema || '.' || table_name
 from system.information_schema.table_privileges
-where grantee in ('planning_contributors', '4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73') and coalesce(inherited_from, 'NONE') = 'NONE'
+where grantee in ('planning_contributors', 'workload_contributors', '4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73', '7d2b5e90-1c4a-4f83-b6e7-3a9c0d1f2e58') and coalesce(inherited_from, 'NONE') = 'NONE'
 order by grantee, securable_type, securable, privilege

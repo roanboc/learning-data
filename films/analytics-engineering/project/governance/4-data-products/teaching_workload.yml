@@ -1,0 +1,22 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor from this file and
+# the dbt models; only a canonical table has an enterprise contract, written by data governance.
+
+name: teaching_workload
+title: Teaching workload
+owner: "Anil Kurian, Faculty of Health"
+domain: workload
+status: active
+version: 1.0.0
+description:
+  purpose: Each contract that holds today, in the version HR holds as true today, and whether it's
+    casual, so the Faculty of Health's heads of school know how many teach in each school or unit
+    this term, and how many are casual.
+  usage: For the workload agent, which answers the heads of school from it every week, under its own
+    name. It names no one; HR holds who each key is. Who counts as teaching where is HR's to say.
+outputs:
+  - {model: mart_workload__teaching_staff}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: "Built every night, in test first."}
+support:
+  - {channel: workload, tool: email, url: "mailto:anil.kurian@uni.example", scope: issues}

@@ -1,5 +1,5 @@
 {
- "player": "56973c18969cd3d4",
+ "player": "d0d4b2ce483b5fbb",
  "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
  "places": {
   "place:polderWet": {
@@ -76,6 +76,17 @@
     [
      25.25,
      31.25
+    ]
+   ]
+  },
+  "cpVigBack0": {
+   "file": "cpVigBack0.webp",
+   "w": 600,
+   "h": 360,
+   "shows": [
+    [
+     30.5,
+     35.5
     ]
    ]
   },

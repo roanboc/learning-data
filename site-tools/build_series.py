@@ -14,8 +14,8 @@ governance-in-practice/); and the series of the module on AI agents in data work
 agents-at-work-on-data/) and From helper to colleague (films/from-helper-to-colleague/, at from-helper-to-colleague/); and the
 four series of the module Modern data basics: Data that moves (films/data-that-moves/, at data-that-moves/, which holds the
 module's plan), Data as software (films/data-as-software/, at data-as-software/), From tables to decisions
-(films/from-tables-to-decisions/, at from-tables-to-decisions/) and Documents as data (films/documents-as-data/, at
-documents-as-data/, a series of one film); and the three series of the module Data protection and privacy: Locks before the
+(films/from-tables-to-decisions/, at from-tables-to-decisions/) and Documents and closing remarks (films/documents-as-data/, at
+documents-as-data/, two films); and the three series of the module Data protection and privacy: Locks before the
 data (films/locks-before-the-data/, at locks-before-the-data/, which holds the module's plan), Only what you may see
 (films/only-what-you-may-see/, at only-what-you-may-see/) and Kept for a reason (films/kept-for-a-reason/, at
 kept-for-a-reason/); and the two series of the module Data quality: Fit for use (films/fit-for-use/, at fit-for-use/, which
@@ -90,7 +90,7 @@ def series_link(lg, RE, sid):
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
-# each the next of the one before; the last, Documents as data, is a series of one film. Locks before the data opens the module
+# each the next of the one before; the last, Documents and closing remarks, has two films. Locks before the data opens the module
 # Data protection and privacy, whose three series are each the next of the one before. Fit for use opens the module Data quality,
 # and Quality as a habit follows it; the topic Data quality holds them after When things go wrong. The new skills opens the module
 # Leading data people, whose four series are each the next of the one before; its topic sits just before Data management's. A plan
@@ -159,7 +159,7 @@ SERIES = [
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds", next="documents-as-data"),
     dict(id="documents-as-data", dir="documents-as-data", slug="documents-as-data",
-         name={"en": "Documents as data", "es": "Documentos como datos"},
+         name={"en": "Documents and closing remarks", "es": "Documentos y comentarios finales"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
     dict(id="locks-before-the-data", dir="locks-before-the-data", slug="locks-before-the-data",
@@ -1153,11 +1153,26 @@ def legibility():
     return fill((ROOT / "films" / "legibility-report.md").read_text(), LEGIBLE, rows)
 
 
+TOPIC_ROWS = ("<!-- topics: made by site-tools/build_series.py from the topics and each module's module.json -->", "<!-- /topics -->")
+
+
+def readme_topics():
+    """README.md, with its table of topics made from the topics, their series and each module's "who", so a film never edits
+    it: a row names a topic's films and series, not what each film covers (that is on the series' pages)."""
+    who = {m["id"]: m["who"]["en"] for m in load_modules()}
+    rows = [f"The site has {say_n('en', len(live()))} big topics. Start with the first, the overview; then pick the topic you need, "
+            "in any order. Each topic holds films and series.", "", "| Topic | What it covers | Films and series | For |", "|---|---|---|---|"]
+    for t in live():
+        items = ", ".join(f"[{entry('en', i)['title']}]({BASE}{entry('en', i)['href']})" for i in shown(t))
+        rows.append(f"| {t['name']['en']} | {t['line']['en']} | {items} | {who.get(t['id'], '')} |")
+    return fill((ROOT / "README.md").read_text(), TOPIC_ROWS, rows)
+
+
 def lists():
     """Every shared list made from the films' own rows: (path from the repository's root, text)."""
     out = [(p.parent / "proposal.md", decided(p.parent)) for p in sorted((ROOT / "films").glob("*/proposal.md"))
            if DECIDED[0] in p.read_text()]
-    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out]
+    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out] + [("README.md", readme_topics())]
 
 
 def pages():

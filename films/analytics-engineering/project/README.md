@@ -225,7 +225,7 @@ project/
 │   ├── check/                check_metric.py: the metric against the census report; requirements.py:
 │   │                         only open requirements, with what shows they're done; governance.py:
 │   │                         data governance's rules, and their measures; impact.py: what a pull
-│   │                         request touches, and who to tell; all in CI
+│   │                         request touches, and who to tell; mandates.py: no tool allows an agent more than its mandate; all in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks; or
 │                             loading_pipeline.sql, each night, with a check on each row; and
@@ -238,8 +238,9 @@ project/
 │                             agents-on-databricks/: the count of active research projects as a
 │                             function, a Genie Agent and an agent's evaluation cases (Databricks only);
 │                             hr-system-interface/: the HR system's data contract, agreed with its owner;
-│                             hot-warm-cold/: a streaming table, a materialized view and an archive,
-│                             data kept hot, warm and cold, with their service levels (Databricks only);
+│                             hot-warm-cold/: a nightly view, a pipeline every five minutes, a rule in
+│                             real time and an archive, with their service levels (Databricks only);
+│                             night-in-test/: the workload agent's night in test, under its mandate
 │                             the-night-the-claims-job-failed/: a job that failed, the platform's
 │                             insight by morning, the fix and the pull request a person approved;
 │                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and

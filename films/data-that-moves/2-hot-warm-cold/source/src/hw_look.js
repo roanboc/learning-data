@@ -2,11 +2,12 @@
    Drawn with the module's look (films/data-that-moves/shared/src/: MD's colours, glass cards, lanes of light, the map's parts and
    its people), over the module's places and this film's own (hw_places.js). Every top-level name starts with hw_ or HW_.
 
-   Temperature isn't one of the module's colours, so it never takes one: where data is hot, warm or cold is shown by where it
-   lives and how it moves, and always said in words. Hot data sits at the top, close to the app that reads it, bright, its changes
-   running all the time; warm data in the middle, worked out on a schedule (a clock); cold data deep below, still, under frost.
-   The light on each band is only a tint of white: warm white for hot, cool white for cold, never the red of an error, the amber
-   of a person's turn or the blue of data moving.
+   Temperature here is how soon data must arrive for the action it serves: hot, within a second or less, usually for a machine that
+   acts on its own; warm, within minutes or hours; cold, days or weeks later. It isn't one of the module's colours, so it never takes
+   one: it's shown by how data moves, and always said in words. Hot data sits at the top, its events running one by one; warm data in
+   the middle, in small batches on a clock; cold data at the foot, one batch a night, still between its runs, under frost. The light
+   on each band is only a tint of white: warm white for hot, cool white for cold, never the red of an error, the amber of a person's
+   turn or the blue of data moving.
      hw_scr(ctx, S, fn)                  draw in the frame, whatever the camera does
      hw_thermo(ctx, x, y, h, level, o)   a thermometer: its glass, and its column of light up to level (0 cold, 1 hot)
      hw_bands(ctx, x, y, w, o)           the three temperatures, one band each, hot at the top: o.on [hot, warm, cold] (0 to 1, each
@@ -14,17 +15,17 @@
                                          returns each band's box
      hw_frost(ctx, x, y, w, h, a, r)     frost on glass, over a box
      hw_tempTag(ctx, x, y, key, o)       a small tag: a thermometer and the word (HOT, WARM, COLD)
-     hw_vaultLive(ctx, t, o)             the vault's tunnel, halls and boxes, over the place hwVault
-     hw_pin(ctx, x, y, o)                a place on the opening's map, and its label
+     hw_pin(ctx, x, y, o)                a town on the opening's map, and its label
      hw_arc(a, b, lift)                  a lane's points from a to b, bowed up by lift
+     hw_pigeon(ctx, x, y, s, o)          a homing pigeon seen from above; hw_flock(ctx, pts, t, o) birds flying a lane
+     hw_wire(ctx, pts, t, o)             a telegraph wire on its poles, its pulses running along it
      hw_timeline(ctx, x, y, w, o)        the moments of a pay week, in order: a change in HR, claims close, the night's load, pay day
      hw_app(ctx, x, y, w, h, o)          the claims app's page: claims, by unit and duty, and where each stands (never an amount)
      hw_bars(ctx, x, y, w, o)            each faculty's spending this year against its budget, as bars without figures
      hw_code(ctx, x, y, lines, o)        lines of code, in IBM Plex Mono
-     hw_years(ctx, x, y, o)              the pay records, a block of files for each year, on hot storage or the archive tier
-     hw_claim(ctx, x, y, o)              Linh's claim, as a card that cools as it goes
-     hw_rows(ctx, t, o)                  three kinds of data on their way across the map: the contracts, each faculty's spending, the pay
-                                         records, each from where it's born, through the platform, to who reads it */
+     hw_rows(ctx, t, o)                  three kinds of data on their way across the map, hot at the top: a bank account change, the
+                                         contracts, each faculty's spending, each from where it's born, through the platform, to who
+                                         acts on it */
 
 const HW={heat:[255,224,196],frost:[206,226,252],snow:[236,243,255],seed:[226,206,160]};
 const HW_BAND=[{key:"hot",n:"Hot",tint:[255,224,196],lvl:0.92},{key:"warm",n:"Warm",tint:[238,232,222],lvl:0.55},{key:"cold",n:"Cold",tint:[206,226,252],lvl:0.12}];
@@ -60,9 +61,9 @@ function hw_frostTex(){return ag_kept("hwFrost",1024,512,(c,w,h)=>{const rnd=ag_
 function hw_frost(ctx,x,y,w,h,a,r){if(!(a>0.004))return;ctx.save();ctx.globalAlpha*=clamp(a,0,1);rr(ctx,x,y,w,h,r==null?16:r);ctx.clip();ctx.drawImage(hw_frostTex(),x,y,w,h);ctx.restore();}
 
 /* ---------------------------------------------------------------- the three temperatures */
-const HW_LINES=[["within seconds or minutes · read all the time","small, and close to where it's used"],
-  ["fresh to the hour or the day · read often","worked out on a schedule"],
-  ["rarely read, but kept","cheap, until it may be deleted"]];
+const HW_LINES=[["acted on within a second or less","each event, the moment it happens"],
+  ["acted on within minutes or hours","small batches, every few minutes or hours"],
+  ["acted on days or weeks later","a batch, each night or each week"]];
 function hw_bands(ctx,x,y,w,o){o=o||{};const on=o.on||[1,1,1],h=o.h||150,gap=o.gap||20,boxes=[];
   HW_BAND.forEach((b,i)=>{const yy=y+i*(h+gap),box={x,y:yy,w,h};boxes.push(box);const k=on[i]||0;if(k<=0.004)return;const dim=o.hl==null?1:o.hl===i?1:0.42;
     ctx.save();ctx.globalAlpha*=ag_in(k,0,0.35)*dim;ag_about(ctx,x+w/2,yy+h/2,lerp(0.94,1,Math.min(1,ag_spr(k,0,0.5))));
@@ -84,44 +85,58 @@ function hw_tempTag(ctx,x,y,key,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)r
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,bx+w/2,y,lerp(0.6,1,ag_spr(o.k,0,0.5)));md_card(ctx,bx,y-h/2,w,h,{edge:b.tint,r:h/2,glow:0.6,fill:"rgba(7,12,26,0.94)"});
   if(key==="cold")hw_frost(ctx,bx,y-h/2,w,h,0.45,h/2);hw_thermo(ctx,bx+30,y-18,30,b.lvl,{w:10,marks:false});md_T(ctx,txt,bx+52,y+10,{w:800,size:28,ls:4,col:b.tint});ctx.restore();return{x:bx,y:y-h/2,w,h};}
 
-/* ---------------------------------------------------------------- the vault, live: its tunnel, its halls, the boxes in them
-   o.tunnel (0 to 1) the tunnel's light runs in from the door; o.halls (0 to 1) the halls light; o.boxes (0 to 1) the shelves fill;
-   o.cold (0 to 1) frost on the halls; o.out (0 to 1) boxes carried out along the tunnel to the door (2015); o.a */
-function hw_vaultLive(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const V=HW_VAULT;ctx.save();ctx.globalAlpha*=a;
-  const tu=clamp(o.tunnel==null?1:o.tunnel,0,1),[p0,p1]=V.tunnel;
-  if(tu>0){const pts=[[p0[0],p0[1]],[lerp(p0[0],p1[0],tu),lerp(p0[1],p1[1],tu)]];ctx.save();ctx.lineCap="round";ctx.strokeStyle="rgba(6,10,20,0.95)";ctx.lineWidth=30;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);ctx.lineTo(pts[1][0],pts[1][1]);ctx.stroke();ctx.restore();
-    md_lane(ctx,pts,HW.frost,0.9);}
-  const hl=clamp(o.halls||0,0,1);
-  V.halls.forEach(([x,y,w,h],i)=>{const k=clamp(hl*1.5-i*0.25,0,1);if(k<=0)return;ctx.save();ctx.globalAlpha*=ag_in(k,0,0.6);
-    md_card(ctx,x,y,w,h,{edge:HW.frost,glow:0.7,r:12,fill:"rgba(8,14,28,0.96)"});
-    // the shelves, and the sealed boxes on them, filling from the bottom
-    const bx=clamp((o.boxes||0)*1.3-i*0.15,0,1);for(let s=0;s<4;s++){const sy=y+h-28-s*42;ctx.strokeStyle=rgba(HW.frost,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+14,sy);ctx.lineTo(x+w-14,sy);ctx.stroke();
-      for(let b=0;b<5;b++){const f=clamp(bx*20-(s*5+b),0,1);if(f<=0)continue;const out=clamp((o.out||0)*24-(i*20+s*5+b)*0.6,0,1);if(i!==1&&out>0)continue;
-        ctx.save();ctx.globalAlpha*=f*(1-(i===1?out:0));rr(ctx,x+22+b*33,sy-34,28,32,3);ctx.fillStyle="rgba(46,58,84,1)";ctx.fill();ctx.strokeStyle=rgba(HW.frost,0.7);ctx.lineWidth=1.4;ctx.stroke();
-        ctx.fillStyle=rgba(HW.snow,0.75);ctx.fillRect(x+28+b*33,sy-26,16,4);ctx.restore();}}
-    hw_frost(ctx,x,y,w,h,(o.cold==null?1:o.cold)*0.6,12);ctx.restore();});
-  // boxes going out, along the tunnel to the door
-  if(o.out>0&&o.out<1){const p=mk([P(p1[0],p1[1]),P(p0[0],p0[1])]);spawn(t,0.6,2.2,0,(u)=>{if(u<0||u>1)return;const q=at(p,ease(u)),f=sstep(0,0.1,u)*(1-sstep(0.85,1,u))*sstep(0,0.08,o.out)*(1-sstep(0.85,1,o.out));
-      ctx.save();ctx.globalAlpha*=f;glow(ctx,q.x,q.y,26,HW.seed,0.6);rr(ctx,q.x-14,q.y-24,28,32,3);ctx.fillStyle="rgba(60,72,98,1)";ctx.fill();ctx.strokeStyle=rgba(HW.seed,0.9);ctx.lineWidth=1.6;ctx.stroke();ctx.restore();});}
-  ctx.restore();}
-
 /* ---------------------------------------------------------------- the opening's map: places and the lanes between them */
 // a place: a point of light (o.col: warm for seeds in use, frost for the vault), o.lit (0 to 1), o.out (0 to 1: its light gone, a ring
 // left), o.label {title, sub} on o.side ("right", "left", "above" or "below"), o.k springs it in
 function hw_pin(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const col=o.col||HW.heat,lit=o.lit==null?1:o.lit,out=o.out||0;ctx.save();ctx.globalAlpha*=a;
-  if(o.k!=null)ag_about(ctx,x,y,lerp(0.4,1,Math.min(1.2,ag_spr(o.k,0,0.5))));
+  // the point springs in; its label only fades, so its words never shrink below their size
+  ctx.save();if(o.k!=null)ag_about(ctx,x,y,lerp(0.4,1,Math.min(1.2,ag_spr(o.k,0,0.5))));
   glow(ctx,x,y,46,col,0.55*lit*(1-out));ctx.beginPath();ctx.arc(x,y,13,0,TAU);ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.4;ctx.stroke();
-  ctx.fillStyle=rgba(col,(1-out)*(0.4+0.6*lit));ctx.beginPath();ctx.arc(x,y,7,0,TAU);ctx.fill();
+  ctx.fillStyle=rgba(col,(1-out)*(0.4+0.6*lit));ctx.beginPath();ctx.arc(x,y,7,0,TAU);ctx.fill();ctx.restore();
   if(o.label){const L=o.label,side=o.side||"right",la=o.labelA==null?1:o.labelA,tw=Math.max(md_tw(ctx,L.title,{w:800,size:30}),L.sub?md_tw(ctx,L.sub,{w:600,size:28}):0);
     let lx=side==="left"?x-28-tw:side==="right"?x+28:x-tw/2,ly=side==="above"?y-(L.sub?78:40):side==="below"?y+52:y+(L.sub?-6:10);
     ctx.save();ctx.globalAlpha*=la;md_T(ctx,L.title,lx,ly,{w:800,size:30,col:MD.ink});if(L.sub)md_T(ctx,L.sub,lx,ly+36,{w:600,size:28,col:MD.soft});ctx.restore();}
   ctx.restore();}
 // a lane's points from a to b, bowed up by lift (px)
 function hw_arc(a,b,lift){const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2-(lift||0);return bez(P(a[0],a[1]),P(lerp(a[0],mx,0.7),lerp(a[1],my,0.7)),P(lerp(b[0],mx,0.7),lerp(b[1],my,0.7)),P(b[0],b[1]),40).map(p=>[p.x,p.y]);}
-// seed boxes carried along a lane: o.col, o.every, o.dur, o.a, o.back
-function hw_seeds(ctx,pts,t,o){o=o||{};md_flow(ctx,pts,t,{kind:"batch",col:o.col||HW.seed,every:o.every||1.6,dur:o.dur||2.4,a:o.a,back:o.back,size:o.size||0.62,off:o.off});}
+/* ---------------------------------------------------------------- the opening's pigeons
+   A homing pigeon seen from above, as the map sees it, flying along +x: a body that tapers from the breast to the tail's fan, a small
+   round head and its beak, and two long wings from the shoulders, each tapering to its tip, their span opening and closing with
+   o.flap (a phase, in turns). Grey-blue with darker tips and a pale edge where the map's light catches it; o.slip a thin slip of paper
+   at its leg. hw_pigeon(ctx, x, y, s, o): o.dir its heading (radians), o.a. hw_flock(ctx, pts, t, o): birds along a lane, one every
+   o.every s, each crossing in o.dur s, flapping as they go; o.a, o.off, o.s (size). */
+const HW_DOVE={body:[150,164,192],dark:[96,108,136],edge:[226,234,252],slip:[244,236,214]};
+function hw_pigeon(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const D=HW_DOVE,fl=Math.cos((o.flap||0)*TAU),span=lerp(0.42,1,0.5+0.5*fl),sweep=lerp(0.5,0.1,0.5+0.5*fl);
+  ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.dir||0);ctx.scale(s,s);
+  glow(ctx,0,0,58,D.edge,0.22);
+  // the wings: each from the shoulder, its leading edge a long curve to the tip, its trailing edge back to the body, tapering
+  for(const side of[-1,1]){const tipX=-14-26*sweep,tipY=side*58*span,midY=side*30*span;
+    ctx.beginPath();ctx.moveTo(8,side*5);ctx.bezierCurveTo(12,midY,tipX+18,tipY*0.92,tipX,tipY);ctx.bezierCurveTo(tipX-2,tipY*0.7,-10,midY*0.6,-12,side*6);ctx.closePath();
+    const g=ctx.createLinearGradient(0,0,0,tipY);g.addColorStop(0,rgba(D.body,1));g.addColorStop(0.7,rgba(mix(D.body,D.dark,0.4),1));g.addColorStop(1,rgba(D.dark,1));ctx.fillStyle=g;ctx.fill();
+    ctx.strokeStyle=rgba(D.edge,0.75);ctx.lineWidth=1.6/s;ctx.stroke();
+    // two dark bars across the wing, as a pigeon's wing has
+    ctx.strokeStyle=rgba(D.dark,0.8);ctx.lineWidth=2.2/s;for(const k of[0.38,0.52]){ctx.beginPath();ctx.moveTo(lerp(4,tipX,k*0.6),side*lerp(8,Math.abs(tipY),k));ctx.lineTo(lerp(-6,tipX,k*0.6),side*lerp(7,Math.abs(tipY),k)*0.96);ctx.stroke();}}
+  // the tail's fan, and the body tapering to it
+  ctx.beginPath();ctx.moveTo(-14,-5);ctx.quadraticCurveTo(-30,-11,-38,-10);ctx.quadraticCurveTo(-41,0,-38,10);ctx.quadraticCurveTo(-30,11,-14,5);ctx.closePath();ctx.fillStyle=rgba(D.dark,1);ctx.fill();ctx.strokeStyle=rgba(D.edge,0.6);ctx.lineWidth=1.2/s;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(20,0);ctx.bezierCurveTo(18,-9,0,-10,-16,-5);ctx.quadraticCurveTo(-20,0,-16,5);ctx.bezierCurveTo(0,10,18,9,20,0);ctx.closePath();
+  let g=ctx.createLinearGradient(0,-10,0,10);g.addColorStop(0,rgba(mix(D.body,D.edge,0.35),1));g.addColorStop(1,rgba(D.body,1));ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=rgba(D.edge,0.8);ctx.lineWidth=1.4/s;ctx.stroke();
+  // the head, a little darker, and its beak
+  ctx.beginPath();ctx.arc(24,0,6.5,0,TAU);ctx.fillStyle=rgba(mix(D.body,D.dark,0.35),1);ctx.fill();ctx.strokeStyle=rgba(D.edge,0.8);ctx.lineWidth=1.2/s;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(29.5,-1.6);ctx.lineTo(35,0);ctx.lineTo(29.5,1.6);ctx.closePath();ctx.fillStyle=rgba([214,196,170],1);ctx.fill();
+  // the slip of paper it carries, rolled at its leg
+  if(o.slip){ctx.save();ctx.globalAlpha*=o.slip;rr(ctx,-10,6,13,5,2);ctx.fillStyle=rgba(D.slip,1);ctx.fill();ctx.restore();}
+  ctx.restore();}
+function hw_flock(ctx,pts,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const p=mk(pts.map(q=>P(q[0],q[1])));
+  spawn(t,o.every||1.2,o.dur||3.2,o.off||0,(u,i)=>{if(u<0||u>1)return;const e=lerp(u,ease(u),0.4),q=at(p,e),q2=at(p,Math.min(1,e+0.01)),f=sstep(0,0.1,u)*(1-sstep(0.9,1,u))*a;if(f<=0.004)return;
+    const wob=Math.sin(t*2.1+i*1.7)*6;hw_pigeon(ctx,q.x,q.y+wob,o.s||0.62,{dir:Math.atan2(q2.y-q.y,q2.x-q.x),flap:t*3.1+i*0.37,a:f,slip:1});});}
+// a telegraph wire between towns: a lane of light on its poles, with words running along it as pulses (o.u how far it's strung)
+function hw_wire(ctx,pts,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u;md_lane(ctx,pts,MD.flow,0.85*a,{u});
+  // its poles, about every 70 px along it, as far as it's strung
+  let run=0,next=0;for(let i=0;i<pts.length;i++){if(i>0)run+=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);if(i/(pts.length-1)>u)break;
+    if(run>=next){const [x,y]=pts[i];ctx.fillStyle=rgba(MD.flow,0.8*a);ctx.beginPath();ctx.arc(x,y,3.4,0,TAU);ctx.fill();next=run+70;}}
+  if(u>=1&&o.flow!==false)md_flow(ctx,pts,t,{kind:"events",col:MD.flow,a,every:o.every||0.7,dur:o.dur||1.4,size:0.7,back:o.back});}
 
-/* ---------------------------------------------------------------- the hot chapter's week
+/* ---------------------------------------------------------------- the warm chapter's week
    The moments that decide when a tutor is paid, in order and equally spaced (not to scale): o.stops [{t: "Monday 09:00", s: "a change
    in HR", col, a}], each a point on the line with its time and what happens under it; o.span [{from, to, col, a, dash}] a lane
    along the line between two stops (fractions allowed: the change, on its way to the app); o.t for a dashed lane's motion; o.a. */
@@ -162,45 +177,19 @@ function hw_code(ctx,x,y,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=o.lh||44,hl
     if(hls.includes(i)){ctx.fillStyle=rgba(o.hlCol||MD.flow,0.13);rr(ctx,x-12,yy-32,(o.w||900),lh,8);ctx.fill();}
     md_T(ctx,L.s,x,yy,{w:500,size:28,f:"mono",col:L.col||MD.ink});ctx.restore();});ctx.restore();return lines.length*lh;}
 
-/* ---------------------------------------------------------------- the pay records, year by year
-   Each year a block of files, on the shelf of hot storage (the costliest) or sunk to the archive tier (the cheapest), under frost.
-   o.years ["2016", ...]; o.sink [0 to 1 per year] how far each has sunk; o.gone [0 to 1 per year] deleted, its files gone; o.read
-   [0 to 1 per year] read often (it glows); o.cols (spacing, 136); o.top (hot storage's shelf, y), o.low (the archive's shelf, y);
-   o.a. Returns each block's centre. */
-function hw_years(ctx,x,o){o=o||{};const a=o.a==null?1:o.a,ys=o.years||[],sp=o.cols||136,top=o.top||470,low=o.low||742,at=[];
-  ys.forEach((yr,i)=>{const cx=x+i*sp,s=ag_sine(o.sink?o.sink[i]||0:0),cy=lerp(top,low,s),g=o.gone?o.gone[i]||0:0,rd=o.read?o.read[i]||0:0;at.push([cx,cy]);if(a<=0.004||g>=1)return;
-    ctx.save();ctx.globalAlpha*=a*(1-ag_sine(g));
-    // the files: a small stack, personal data (lilac), cooled to frost as they sink
-    const col=mix(MD.personal,HW.frost,s*0.6);if(rd>0)glow(ctx,cx,cy-40,80,col,0.35*rd);
-    for(let k=2;k>=0;k--){rr(ctx,cx-42+k*7,cy-92-k*8,84,96,8);ctx.fillStyle=rgba(mix(col,MD.navy,0.78),1);ctx.fill();ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=1.8;ctx.stroke();}
-    ctx.fillStyle=rgba(col,0.55);for(let r=0;r<3;r++)ctx.fillRect(cx-28,cy-70+r*18,46,4);
-    if(s>0.02)hw_frost(ctx,cx-44,cy-108,104,112,s*0.8,8);
-    md_T(ctx,yr,cx,cy+80,{w:700,size:28,align:"center",col:rd>0.5?MD.ink:MD.soft});ctx.restore();});
-  return at;}
-// a storage shelf: a long glass ledge with its name; o.cold for the archive tier (frost), o.a
-function hw_shelf(ctx,x,y,w,title,sub,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
-  md_card(ctx,x,y,w,26,{edge:o.cold?HW.frost:[170,190,225],r:13,glow:0.5,fill:"rgba(12,20,40,0.95)"});if(o.cold)hw_frost(ctx,x,y,w,26,0.8,13);
-  md_T(ctx,title,x+w+30,y+4,{w:800,size:30,col:o.cold?HW.frost:MD.ink});if(sub)md_T(ctx,sub,x+w+30,y+42,{w:600,size:28,col:MD.soft});ctx.restore();}
-
-/* ---------------------------------------------------------------- Linh's claim, as a card that cools
-   o.temp 0 (cold) to 1 (hot): its edge and light follow; o.state its last line; o.a, o.k */
-function hw_claim(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||420,h=150;if(a<=0.004)return{x,y,w,h};const tp=clamp(o.temp==null?1:o.temp,0,1),col=mix(HW.frost,HW.heat,tp);
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));glow(ctx,x+w/2,y+h/2,w*0.6,col,0.32*tp);
-  md_card(ctx,x,y,w,h,{edge:col,glow:0.4+0.8*tp});if(tp<0.5)hw_frost(ctx,x,y,w,h,(0.5-tp)*1.6,18);
-  md_T(ctx,"LINH'S CLAIM",x+28,y+50,{w:800,size:28,ls:4,col});md_T(ctx,"Tutorials, last week",x+28,y+96,{w:700,size:32});
-  if(o.state)md_T(ctx,o.state,x+28,y+132,{w:600,size:28,col:MD.soft});md_icon(ctx,"doc",x+w-48,y+44,36,col);ctx.restore();return{x,y,w,h};}
-
 /* ---------------------------------------------------------------- three kinds of data, each on its way across the map
    The film's own close-up of the platform map: three rows, each a kind of data from where it's born (left), through the platform
-   (the middle, on Databricks' pane), to who reads it (right): the contracts, from the HR system to the claims app; each faculty's
-   spending, from the finance system's ledger to Finance's and the faculties' morning look; the pay records (personal: lilac, with a
-   lock), from the payroll system to an audit now and then. o.on [0 to 1, ...] each row comes in; o.hl a row's index (the others dim);
-   o.therm (0 to 1) a thermometer on each table, its level unknown; o.temp [0 to 1, ...] each row's temperature found: the column
-   settles at its level, and its tag comes in; o.say [words, ...] a line under each row's table, o.sayA [0 to 1, ...]; o.t; o.a. */
+   (the middle, on Databricks' pane), to who acts on it (right), hot at the top: a change to a bank account (personal: lilac, with a
+   lock), from the HR system to payroll, which holds a pay at once; the contracts, from the HR system to the claims app, every five
+   minutes; each faculty's spending, from the finance system's ledger to Finance's and the faculties' morning look, each night. Each
+   row moves as its temperature has it: events one by one, small batches, one batch a night. o.on [0 to 1, ...] each row comes in;
+   o.hl a row's index (the others dim); o.therm (0 to 1) a thermometer on each table, its level unknown; o.temp [0 to 1, ...] each
+   row's temperature found: the column settles at its level, and its tag comes in; o.say [words, ...] a line under each row's table,
+   o.sayA [0 to 1, ...]; o.night (over 0.5: every row moves once a night, as until September); o.t; o.a. */
 const HW_PAYROLL=[176,190,222];
-const HW_ROWS=[{sys:"hr",name:"contracts",reader:"Claims app",rsub:"checks each claim",icon:"doc"},
-  {sys:"fin",name:"spending_by_faculty",reader:"Each morning",rsub:"Finance, the faculties",icon:"person"},
-  {sys:{n:"Payroll system",s:"Each pay, each pay day",c:HW_PAYROLL},name:"pay_records",reader:"An audit",rsub:"now and then",icon:"eye",personal:true}];
+const HW_ROWS=[{sys:"hr",name:"bank_account_changes",reader:"Payroll",rsub:"holds a pay at once",icon:"lock",personal:true,flow:{kind:"events",every:0.45}},
+  {sys:"hr",name:"contracts",reader:"Claims app",rsub:"checks each claim",icon:"doc",flow:{kind:"batch",every:1.8,size:0.55}},
+  {sys:"fin",name:"spending_by_faculty",reader:"Each morning",rsub:"Finance, the faculties",icon:"person",flow:{kind:"batch",every:4.6}}];
 const HW_ROW={y:[222,442,662],sx:96,sw:404,px:600,pw:700,tx:650,tw:600,rx:1420,rw:420};
 function hw_rows(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,R=HW_ROW,on=o.on||[1,1,1],tp=o.temp||[0,0,0];if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
   const pa=Math.max(on[0],on[1],on[2]);md_platform(ctx,R.px,150,R.pw,670,{a:ag_in(pa,0,0.4),logos:true});
@@ -211,7 +200,7 @@ function hw_rows(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,R=HW_ROW,on=o.on||[1,1
     const rb=md_reader(ctx,R.rx,y,R.rw,{title:r.reader,sub:r.rsub,icon:r.icon,col:MD.ink});
     const l1=md_curve(sb.port,[tb.x,tb.y+36],{bend:0.5}),l2=md_curve([tb.x+tb.w,tb.y+36],rb.port,{bend:0.5}),u=ag_sine(clamp(k*1.6-0.3,0,1));
     md_lane(ctx,l1,r.personal?MD.personal:MD.flow,0.8,{u});md_lane(ctx,l2,r.personal?MD.personal:MD.flow,0.8,{u});
-    if(o.t!=null&&u>=1){md_flow(ctx,l1,o.t,{col:r.personal?MD.personal:MD.flow,off:i*0.7,every:1.4});md_flow(ctx,l2,o.t,{col:r.personal?MD.personal:MD.flow,off:i*0.5+0.3,every:1.6});}
+    if(o.t!=null&&u>=1){const F=(o.night||0)>0.5?{kind:"batch",every:4.6}:r.flow,fc=r.personal?MD.personal:MD.flow;md_flow(ctx,l1,o.t,{kind:F.kind,col:fc,off:i*0.7,every:F.every,size:F.size});md_flow(ctx,l2,o.t,{kind:F.kind,col:fc,off:i*0.5+0.3,every:F.every,size:F.size});}
     // the thermometer on the table: its level unknown (a slow drift) until its temperature is found
     const th=o.therm||0,f=ag_sine(tp[i]||0);
     if(th>0.004){const drift=0.5+0.18*Math.sin((o.t||0)*1.3+i*2.1),lv=lerp(drift,b.lvl,f);ctx.save();ctx.globalAlpha*=ag_in(th,0,0.5)*(1-ag_in(tp[i]||0,0.2,0.4));

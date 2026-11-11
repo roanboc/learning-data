@@ -62,10 +62,11 @@ scene("kilo",(ctx,S,t,sc)=>{
       if(ba>0){c.save();c.globalAlpha*=ba;c.strokeStyle=rgba(MD.soft,0.8);c.lineWidth=2;c.beginPath();c.moveTo(360,268);c.lineTo(360,246);c.lineTo(1560,246);c.lineTo(1560,268);c.moveTo(960,246);c.lineTo(960,268);c.stroke();c.restore();}
       md_tag(c,960,lerp(470,206,nu),"casual teaching cost",{align:"center",col:MD.ink,size:lerp(40,30,nu),a:na});
       md_pill(c,960,700,"which one is the answer?",{col:MD.wait,size:30,a:dn_io(tt,T.nob2,T.once-0.2,0.4,0.4),k:dn_k(tt,T.nob2)});
-      // defined once, in gold, and every tool reads it
-      const ga=ag_in(tt,T.once+0.2,0.5);if(ga>0){const b=md_textCard(c,610,200,700,{kick:"measure",title:"casual teaching cost",sub:"defined once, in a format any tool can read"},{edge:MD.agreed,kickCol:MD.agreed,a:ga,k:dn_k(tt,T.once+0.2)});
-        [["SQL editor","query"],["a dashboard","table"],["Genie","eye"]].forEach(([nm,ic],i)=>{const k=ag_in(tt,T.every2+i*0.35,0.4);if(k<=0)return;const x=170+i*560,y=560,r=md_reader(c,x,y,460,{title:nm,sub:"A$2.21M · Semester 1",icon:ic,a:k});
-          md_lane(c,md_curve([960,b.y+b.h],[x+230,y],{bend:0}),MD.agreed,0.6*k,{u:ag_sine(clamp((tt-T.every2-i*0.35)/0.8,0,1))});});}
+      // each defined once, in gold, under its own name; and every tool gives the same three numbers
+      const ga=ag_in(tt,T.once+0.2,0.5);if(ga>0){const bs=DN_MEASURES.map((M,i)=>dn_card(c,100+i*600,200,520,[{s:M.name,size:32,w:700},{s:M.s1+" · Semester 1",col:MD.soft}],
+          {edge:MD.agreed,kick:M.dom,kickCol:M.col,a:ga*ag_in(tt,T.once+0.2+0.3*i,0.4),k:dn_k(tt,T.once+0.2+0.3*i)}));
+        [["SQL editor","query"],["a dashboard","table"],["Genie","eye"]].forEach(([nm,ic],i)=>{const k=ag_in(tt,T.every2+i*0.35,0.4);if(k<=0)return;const x=130+i*600,y=600,r=md_reader(c,x,y,500,{title:nm,sub:"the same three numbers",icon:ic,a:k});
+          md_lane(c,md_curve([bs[i].x+bs[i].w/2,bs[i].y+bs[i].h],[x+250,y],{bend:0}),MD.agreed,0.6*k,{u:ag_sine(clamp((tt-T.every2-i*0.35)/0.8,0,1))});});}
       c.restore();setScreen(c,S);md_label(c,96,100,"2026 · the university",{col:MD.flow,a:ag_in(tt,T.uni,0.6)*ea});}}
   ],0.5);
   md_title(ctx,S,t,sc.cues.breath,"Defined in the open","Each measure defined once, in a format any tool can read","FILM 2 OF 3 · FROM TABLES TO DECISIONS");
@@ -76,9 +77,9 @@ scene("three",(ctx,S,t,sc)=>{
   const T={casual:wAt(sc,"what","Casual"),hired:wAt(sc,"what","tutors hired"),claim:wAt(sc,"what","claim"),plan:wAt(sc,"asked","Planning"),fac:wAt(sc,"asked","Faculty of Health"),
     sem:wAt(sc,"asked","Semester"),sheet:wAt(sc,"sheet","spreadsheet"),hours:wAt(sc,"sheet","the hours"),pay:wAt(sc,"payroll","Payroll's"),paid:wAt(sc,"payroll","the pay paid"),
     fin:wAt(sc,"finance","Finance's"),claims:wAt(sc,"finance","the claims"),uni:wAt(sc,"finance","what the university"),each:wAt(sc,"right","Each"),all3:wAt(sc,"right","all three"),
-    budget:wAt(sc,"short","Budget"),gap:wAt(sc,"short","three hundred"),tut:wAt(sc,"short","one tutorial"),rohan:wAt(sc,"inside","Rohan"),owns:wAt(sc,"inside","owns"),only:wAt(sc,"inside","only inside")};
+    budget:wAt(sc,"short","Budget"),gap:wAt(sc,"short","three hundred"),tut:wAt(sc,"short","one tutorial"),eachdef:wAt(sc,"inside","Each definition"),only:wAt(sc,"inside","only inside"),noother:wAt(sc,"inside","no other tool")};
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"map",keys:[[0,960,540,1],[T.rohan-0.9,1360,540,1.3]],d:1.9,push:0.015,draw:(c,tt)=>{
+    {at:0,place:"map",keys:[[0,960,540,1]],push:0.015,draw:(c,tt)=>{
       // casual contracts and the claims against them: the HR system and the claims app
       const ha=dn_io(tt,T.casual-0.2,T.plan-0.6,0.5,0.4);if(ha>0){const h1=md_system(c,260,270,460,"hr",{sub:"Casual contracts",a:ha});
         const h2=md_system(c,260,480,460,{n:"Claims app",s:"Hours claimed, approved",c:MD.sys.hr},{a:ha*ag_in(tt,T.claim-0.3,0.4)});
@@ -88,48 +89,48 @@ scene("three",(ctx,S,t,sc)=>{
       // Health's question
       const qa=dn_io(tt,T.plan,T.all3-0.4,0.5,0.4);if(qa>0)dn_card(c,410,100,1100,[{s:"FACULTY OF HEALTH · SEMESTER 1 · 2026",size:28,w:800,col:MD.wait},{s:"What did casual teaching cost in Semester 1?",size:38,w:700}],{edge:MD.wait,a:qa,k:dn_k(tt,T.plan)});
       // three tools, three numbers
-      const back=1-ag_in(tt,T.rohan-1.1,0.6);
-      [[T.sheet,T.hours],[T.pay,T.paid],[T.fin,T.claims]].forEach(([a0,w0],i)=>dn_win(c,i,{a:ag_in(tt,a0-0.2,0.4)*(i<2?back:1),k:dn_k(tt,a0-0.2),what:clamp((tt-w0)/0.6,0,1),inner:clamp((tt-T.only+0.2)/0.8,0,1)}));
+      [[T.sheet,T.hours],[T.pay,T.paid],[T.fin,T.claims]].forEach(([a0,w0],i)=>dn_win(c,i,{a:ag_in(tt,a0-0.2,0.4),k:dn_k(tt,a0-0.2),what:clamp((tt-w0)/0.6,0,1),inner:clamp((tt-T.only+0.2-0.3*i)/0.8,0,1)}));
       const oc="on-costs: what the university pays on top of pay";md_tag(c,1820-md_tw(c,oc,{w:700,size:28})-44,652,oc,{col:MD.soft,a:dn_io(tt,T.uni,T.each-0.2,0.4,0.4)});
       // each right for its own question; all three called the same
       DN_WIN.forEach((D,i)=>md_tag(c,D.x+DN_WW/2,652,D.q,{col:MD.wait,align:"center",a:dn_io(tt,T.each+0.3+i*0.35,T.budget-0.3,0.4,0.4)}));
       const na=dn_io(tt,T.all3,T.budget-0.3,0.5,0.4);if(na>0){c.save();c.globalAlpha*=na;c.strokeStyle=rgba(MD.soft,0.8);c.lineWidth=2;c.beginPath();c.moveTo(360,290);c.lineTo(360,262);c.lineTo(1560,262);c.lineTo(1560,290);c.moveTo(960,262);c.lineTo(960,290);c.stroke();c.restore();
         md_tag(c,960,214,"casual teaching cost",{align:"center",col:MD.ink,a:na});}
       // the budget, on payroll's number: A$330,000 short, a tutorial in seven with no tutor
-      dn_budget(c,200,700,1000,{a:dn_io(tt,T.budget-0.1,T.rohan-1.2,0.5,0.5),v:1.88,gap:ag_in(tt,T.gap,0.6),tut:clamp((tt-T.tut+0.4)/1.0,0,1),empty:ag_in(tt,T.tut+1.1,0.6)});
-      // Rohan, who owns the measure; his definition, only inside his report
-      dn_person(c,"rohan",1030,762,0.7,ag_in(tt,T.rohan-0.4,0.6),{t:tt,gaze:[4,-1]});
-      md_nameTag(c,700,600,"rohan",{role:"Finance",col:MD.dom.finance,a:ag_in(tt,T.rohan,0.5)});
-      md_tag(c,1560,652,"read only here",{icon:"lock",col:MD.soft,align:"center",a:ag_in(tt,T.only+0.6,0.5)});}}
+      dn_budget(c,200,700,1000,{a:dn_io(tt,T.budget-0.1,T.eachdef-0.5,0.5,0.5),v:1.88,gap:ag_in(tt,T.gap,0.6),tut:clamp((tt-T.tut+0.4)/1.0,0,1),empty:ag_in(tt,T.tut+1.1,0.6)});
+      // each definition, only inside its own tool, where no other tool could read it
+      DN_WIN.forEach((D,i)=>md_tag(c,D.x+DN_WW/2,672,"read only here",{icon:"lock",col:MD.soft,align:"center",a:ag_in(tt,T.only+0.6+0.3*i,0.5)}));
+      const xa=ag_in(tt,T.noother,0.5);if(xa>0)for(let i=0;i<2;i++){const x0=DN_WIN[i].x+DN_WW,x1=DN_WIN[i+1].x;md_lane(c,[[x0+8,450],[x1-8,450]],MD.soft,0.8*xa,{dash:[6,6]});md_icon(c,"cross",(x0+x1)/2,450,30,MD.fail,{a:xa});}}}
   ],0.5);
 });
 
-/* ---------------------------------------------------------------- 3 · Its owner, its words, its rules */
+/* ---------------------------------------------------------------- 3 · Three measures, three owners */
+// the three measures' cards, one under another in the glossary, each its domain's (DN_MEASURES), 860 wide
+const DN_SLOT=[60,296,532];
 scene("once",(ctx,S,t,sc)=>{
-  const T={like:wAt(sc,"like","Like"),onedef:wAt(sc,"like","one definition"),sept:wAt(sc,"sept","September"),rohan:wAt(sc,"sept","Rohan"),jun:wAt(sc,"sept","Jun"),
-    owner:wAt(sc,"owner","owner"),words:wAt(sc,"words","words"),also:wAt(sc,"words","Also called"),rules:wAt(sc,"rules","claims approved"),
-    casual:wAt(sc,"rules","by casual staff"),teach:wAt(sc,"rules","for teaching"),oncost:wAt(sc,"rules","plus on costs"),counted:wAt(sc,"period","Counted"),
-    claims:wAt(sc,"ingrid","The claims"),ingrid:wAt(sc,"ingrid","Ingrid"),names:wAt(sc,"names","names"),hours:wAt(sc,"names","casual hours contracted"),paid:wAt(sc,"names","casual pay paid")};
+  const T={like:wAt(sc,"like","Like"),onedef:wAt(sc,"like","one definition"),sept:wAt(sc,"sept","September"),jun:wAt(sc,"sept","Jun"),three:wAt(sc,"sept","but three"),
+    q:[wAt(sc,"moments","what the contracts allow"),wAt(sc,"moments","what is paid"),wAt(sc,"moments","what the teaching costs")],
+    name:[wAt(sc,"clara","Casual hours contracted"),wAt(sc,"ingrid","Casual pay paid"),wAt(sc,"rohan","casual teaching cost")],
+    who:[wAt(sc,"clara","Clara"),wAt(sc,"ingrid","Ingrid"),wAt(sc,"rohan","Rohan")],
+    when:[wAt(sc,"clara","to plan"),wAt(sc,"ingrid","counted"),wAt(sc,"rohan","counted")],
+    owner:wAt(sc,"owner","Each owner"),gloss:wAt(sc,"owner","glossary"),differ:wAt(sc,"differ","differ")};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"night",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
-      // like the kilogram: the constant's card, and an empty card for the measure's one definition
+      // like the kilogram: the constant's card
       const pa=dn_io(tt,T.like-0.2,T.sept-0.2,0.5,0.5);if(pa>0)dn_planckCard(c,960,340,{sub:1,a:pa,k:dn_k(tt,T.like-0.2)});
-      const n=clamp((tt-T.owner+0.2)/0.5,0,1)+clamp((tt-T.words+0.2)/0.5,0,1)+clamp((tt-T.also+0.1)/0.5,0,1)+clamp((tt-T.rules)/0.5,0,1)+clamp((tt-T.casual)/0.5,0,1)+
-        clamp((tt-T.teach)/0.5,0,1)+clamp((tt-T.oncost)/0.5,0,1)+clamp((tt-T.counted)/0.6,0,1);
-      const ea=ag_in(tt,T.onedef,0.5)*(1-ag_in(tt,T.sept,0.5));if(ea>0){c.save();c.globalAlpha*=ea;md_card(c,530,60,860,150,{edge:MD.agreed,dash:[12,10]});c.restore();}
-      const da=ag_in(tt,T.sept+0.1,0.5);if(da>0)dn_def(c,530,60,{n,a:da,k:dn_k(tt,T.sept+0.1)});
-      // Rohan and Jun; then Ingrid, for the claims' fields
-      dn_person(c,"rohan",300,700,0.95,ag_in(tt,T.rohan-0.3,0.6),{t:tt,gaze:[4,-2]});
-      md_nameTag(c,120,330,"rohan",{role:"Finance · owner",col:MD.dom.finance,a:ag_in(tt,T.rohan,0.5)});
-      dn_person(c,"jun",1640,700,0.95,dn_io(tt,T.jun-0.3,T.claims-0.6,0.6,0.5),{t:tt+0.7,flip:true,gaze:[4,-2]});
-      md_nameTag(c,1640,330,"jun",{role:"Data project",col:MD.flow,align:"center",a:dn_io(tt,T.jun,T.claims-0.6,0.5,0.5)});
-      dn_person(c,"ingrid",1640,700,0.95,ag_in(tt,T.ingrid-0.2,0.6),{t:tt+1.3,flip:true,gaze:[4,-2]});
-      md_nameTag(c,1640,330,"ingrid",{role:"HR",col:MD.sys.hr,align:"center",a:ag_in(tt,T.ingrid+0.1,0.5)});
-      md_tag(c,1640,236,"claims · HR's data",{col:MD.sys.hr,align:"center",a:ag_in(tt,T.claims,0.5)});
-      // the other two numbers, under names of their own
-      const n1=ag_in(tt,T.hours,0.5),n2=ag_in(tt,T.paid,0.5);
-      if(n1>0)dn_card(c,530,712,440,[{s:"casual hours contracted",size:30,w:700},{s:"for planning",col:MD.soft}],{edge:MD.agreed,a:n1,k:dn_k(tt,T.hours)});
-      if(n2>0)dn_card(c,990,712,440,[{s:"casual pay paid",size:30,w:700},{s:"for each pay day",col:MD.soft}],{edge:MD.agreed,a:n2,k:dn_k(tt,T.paid)});}}
+      // not one measure, but three: three empty cards, each with its question, each filled by its domain's measure
+      const lit=ag_in(tt,T.gloss,0.4)*(1-ag_in(tt,T.gloss+1.2,0.6));
+      DN_MEASURES.forEach((M,i)=>{const y=DN_SLOT[i],ea=ag_in(tt,T.three+0.25*i,0.4)*(1-ag_in(tt,T.name[i]-0.1,0.4));
+        if(ea>0){c.save();c.globalAlpha*=ea;md_card(c,530,y,860,218,{edge:MD.agreed,dash:[12,10]});c.restore();
+          md_T(c,["what the contracts allow","what is paid","what the teaching costs"][i],960,y+122,{w:600,size:30,align:"center",col:MD.soft,a:ea*ag_in(tt,T.q[i],0.4)});}
+        const ca=ag_in(tt,T.name[i]-0.1,0.5);if(ca>0)dn_card(c,530,y,860,[{s:M.name,size:34,w:700},{s:"owner · "+M.who,k:clamp((tt-T.who[i]+0.1)/0.6,0,1)},{s:M.when,col:MD.soft,k:clamp((tt-T.when[i])/0.6,0,1)}],
+          {edge:MD.agreed,kick:"glossary · "+M.dom,kickCol:M.col,glow:0.5+0.9*lit,a:ca,k:dn_k(tt,T.name[i]-0.1),minH:218});});
+      // each owner, in turn, at the left; Jun, who builds the data project, at the right
+      DN_MEASURES.forEach((M,i)=>{const t1=i<2?T.who[i+1]-0.9:1e9,pa=dn_io(tt,T.who[i]-0.3,t1,0.6,0.4);
+        dn_person(c,M.owner,300,700,0.95,pa,{t:tt+0.6*i,gaze:[4,-2]});md_nameTag(c,120,330,M.owner,{role:M.dom+" · owner",col:M.col,a:dn_io(tt,T.who[i],t1,0.5,0.4)});});
+      dn_person(c,"jun",1640,700,0.95,ag_in(tt,T.jun-0.3,0.6),{t:tt+0.7,flip:true,gaze:[4,-2]});
+      md_nameTag(c,1640,330,"jun",{role:"Data project",col:MD.flow,align:"center",a:ag_in(tt,T.jun,0.5)});
+      // one activity, three measures: why the numbers differ
+      md_pill(c,960,822,"three measures · three owners · one glossary",{col:MD.agreed,size:30,a:ag_in(tt,T.differ,0.5),k:dn_k(tt,T.differ)});}}
   ],0.5);
 });
 
@@ -152,7 +153,9 @@ scene("near",(ctx,S,t,sc)=>{
       const pa=ag_in(tt,0.2,0.6);md_platform(c,70,110,1160,770,{uc:true,a:pa});
       md_T(c,"university › prod_marts",130,272,{w:500,size:30,f:"mono",col:MD.soft,a:ag_in(tt,T.mv-0.3,0.5)});
       const f=md_table(c,130,300,600,{name:"mart_finance__casual_claims",kind:"table",a:ag_in(tt,T.beside,0.5),k:dn_k(tt,T.beside)});
-      const m=md_table(c,130,450,600,{name:"casual_teaching_cost",kind:"metric view",col:MD.agreed,lit:ag_in(tt,T.holds,0.5)*0.6,a:ag_in(tt,T.mv,0.5),k:dn_k(tt,T.mv)});
+      const m=md_table(c,130,430,600,{name:"casual_teaching_cost",kind:"metric view",col:MD.agreed,lit:ag_in(tt,T.holds,0.5)*0.6,a:ag_in(tt,T.mv,0.5),k:dn_k(tt,T.mv)});
+      // each measure's home: the other two metric views, beside it, until casual teaching cost is the one the chapter follows
+      [["casual_pay_paid",0.35],["casual_hours_contracted",0.7]].forEach(([nm,d],i)=>md_table(c,130,546+i*116,600,{name:nm,kind:"metric view",col:MD.agreed,a:dn_io(tt,T.mv+d,T.holds-0.3,0.5,0.4),k:dn_k(tt,T.mv+d)}));
       if(ag_in(tt,T.beside,0.5)>0.3)md_lane(c,[[300,f.y+f.h],[300,m.y]],MD.flow,0.7*ag_in(tt,T.beside+0.3,0.5));
       [["by faculty",T.fac],["by unit",T.unit],["by teaching period",T.per]].forEach(([s,t0],i)=>{const k=ag_in(tt,t0-0.1,0.4)*(1-ag_in(tt,T.what-0.8,0.4));if(k<=0)return;const y=280+i*150;
         md_lane(c,md_curve(m.r,[790,y+60],{bend:0.5}),MD.agreed,0.55*k);dn_card(c,790,y,400,[{s:s.toUpperCase(),size:28,w:800,col:MD.agreed},{s:"casual teaching cost",size:30,w:600}],{a:k,k:dn_k(tt,t0-0.1)});});
@@ -246,14 +249,15 @@ scene("same",(ctx,S,t,sc)=>{
       dn_genie(c,560,110,740,520,{a:ag_in(tt,T.asks-0.2,0.5)*out,k:dn_k(tt,T.asks-0.2),q:clamp((tt-T.asks-0.2)/2.4,0,1),ans:clamp((tt-T.num+0.1)/0.6,0,1)});
       dn_dash(c,1340,110,540,520,{a:ag_in(tt,T.payday-0.2,0.5)*out,k:dn_k(tt,T.payday-0.2),dim:ag_in(tt,T.ask,0.5),ask:ag_in(tt,T.ask,0.4),ans:clamp((tt-T.gives)/0.6,0,1)});
       // last semester's, with the other two beside it, each under its own name
-      const la=dn_io(tt,T.last-0.2,T.budget-1.0,0.5,0.4);if(la>0)[["casual teaching cost","A$2.21M"],["casual hours contracted","A$2.46M"],["casual pay paid","A$1.88M"]].forEach(([nm,v],i)=>{
-        const k=i===0?la:la*ag_in(tt,(i===1?T.other:T.each)+0.1*i,0.4);if(k>0)dn_card(c,560+i*450,664,430,[{s:nm,size:30,w:700},{s:v+" · Semester 1",size:30,w:600,col:MD.soft}],{edge:MD.agreed,a:k,k:dn_k(tt,i===0?T.last-0.2:(i===1?T.other:T.each)),glow:i===0?1:0.4});});
+      const la=dn_io(tt,T.last-0.2,T.budget-1.0,0.5,0.4);if(la>0)[2,0,1].forEach((j,i)=>{const M=DN_MEASURES[j];
+        const k=i===0?la:la*ag_in(tt,(i===1?T.other:T.each)+0.1*i,0.4);if(k>0)dn_card(c,560+i*450,640,430,[{s:M.name,size:30,w:700},{s:M.s1+" · Semester 1",size:28,w:600,col:MD.soft}],
+          {edge:MD.agreed,kick:M.dom+" · "+M.who.split(" ")[0],kickCol:M.col,a:k,k:dn_k(tt,i===0?T.last-0.2:(i===1?T.other:T.each)),glow:i===0?1:0.4});});
       // Health's budget, on the cost: every tutorial's tutor in it
       dn_budget(c,560,730,880,{a:dn_io(tt,T.budget-0.4,T.kilo-0.7,0.5,0.5),v:2.21,col:MD.agreed,label:"Health's budget for next year, on the cost",gap:0,tut:clamp((tt-T.every+0.3)/0.8,0,1),empty:0});
       // like the kilogram: one definition, held by no single tool
       const ka=dn_io(tt,T.kilo-0.1,T.std-0.4,0.6,0.5);if(ka>0){dn_planckCard(c,560,300,{size:40,sub:1,a:ka,k:dn_k(tt,T.kilo-0.1)});
-        md_textCard(c,1010,300,640,{kick:"measure",title:"casual teaching cost",sub:"owner · words · rules"},{edge:MD.agreed,kickCol:MD.agreed,a:ka*ag_in(tt,T.onedef-0.2,0.5),k:dn_k(tt,T.onedef-0.2)});
-        md_pill(c,960,620,"one definition · held by no single tool",{col:MD.agreed,size:30,a:ka*ag_in(tt,T.held,0.5),k:dn_k(tt,T.held)});}
+        md_textCard(c,1010,300,640,{kick:"measures",title:"three, each defined once",sub:"owner · words · rules"},{edge:MD.agreed,kickCol:MD.agreed,a:ka*ag_in(tt,T.onedef-0.2,0.5),k:dn_k(tt,T.onedef-0.2)});
+        md_pill(c,960,620,"one definition each · held by no single tool",{col:MD.agreed,size:30,a:ka*ag_in(tt,T.held,0.5),k:dn_k(tt,T.held)});}
       // don't reinvent the standards: investigate, adapt, implement, iterate, starting from the official docs
       const sa=ag_in(tt,T.std-0.1,0.5)*(1-ag_in(tt,sc.cues.breath-0.3,0.6));if(sa>0){c.save();c.globalAlpha*=sa;
         md_reader(c,170,190,440,{title:"a metric view",logo:"databricks",h:100});md_pill(c,960,240,"Apache Ossie",{col:MD.agreed,size:40});md_reader(c,1310,190,440,{title:"MetricFlow",logo:"dbt",h:100});

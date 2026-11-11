@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Read often, kept close",
+    "key": "read-often-kept-close-en",
+    "dir": "films/data-that-moves/4-read-often-kept-close/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/read-often-kept-close/film.js",
+    "video": "dist/read-often-kept-close.mp4",
+    "file": "read-often-kept-close.mp4",
+    "captions": [
+      [
+        "films/data-that-moves/4-read-often-kept-close/captions/en.srt",
+        "read-often-kept-close.en.srt"
+      ],
+      [
+        "films/data-that-moves/4-read-often-kept-close/captions/es.srt",
+        "read-often-kept-close.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-that-moves/4-read-often-kept-close/source",
+      ":(exclude)films/data-that-moves/4-read-often-kept-close/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 271,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

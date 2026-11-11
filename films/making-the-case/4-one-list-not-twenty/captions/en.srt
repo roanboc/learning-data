@@ -1,0 +1,227 @@
+1
+00:00:03,000 --> 00:00:10,161
+The Rhine, in 1792. France is at war, and Dominique-Jean Larrey is a young surgeon in its army.
+
+2
+00:00:12,061 --> 00:00:18,967
+The army's rules keep its field hospital, called the ambulance, a league behind the fighting: about four kilometres.
+
+3
+00:00:20,667 --> 00:00:28,283
+The wounded lie where they fall until the battle ends. Then the ambulance sets out to reach them, stuck behind the army's wagons.
+
+4
+00:00:29,983 --> 00:00:35,448
+It never takes less than a day, or a day and a half. Most of the wounded die waiting for help.
+
+5
+00:00:37,548 --> 00:00:41,489
+At Speyer, that autumn, many die this way. Something has to change.
+
+6
+00:00:43,389 --> 00:00:49,463
+Larrey builds what he calls a flying ambulance: a light carriage on springs that follows the front line.
+
+7
+00:00:51,163 --> 00:00:58,082
+From 1793, his surgeons bandage the wounded where they fall, and carry them back while the battle goes on.
+
+8
+00:00:59,982 --> 00:01:05,964
+It works. At Aboukir, in Egypt, in 1799, the army has eight hundred wounded.
+
+9
+00:01:07,464 --> 00:01:12,646
+By his own account, none waits more than a quarter of an hour to have his wounds bandaged.
+
+10
+00:01:14,746 --> 00:01:21,235
+A data team has its own field: requests lie in many places, and wait weeks before anyone picks them up.
+
+11
+00:01:22,735 --> 00:01:28,886
+Bring them in through one door, onto one list, ordered in the open, and the most needed work comes first.
+
+12
+00:01:36,986 --> 00:01:44,142
+The university, in 2027. Requests for data reach Helena Novak's team in eleven places.
+
+13
+00:01:45,642 --> 00:01:49,406
+Two inboxes, the tracker, three spreadsheets, two chat channels,
+
+14
+00:01:49,606 --> 00:01:54,482
+the old warehouse's own form, the agents' queue, and the data council's actions.
+
+15
+00:01:56,582 --> 00:02:01,545
+Nobody can see them all, so people ask twice, in two places, to be sure they're heard.
+
+16
+00:02:03,045 --> 00:02:07,680
+And the team answers whoever reaches it first, while bigger needs wait, unseen.
+
+17
+00:02:09,180 --> 00:02:12,292
+Larrey heard of the same at Jena, in 1806.
+
+18
+00:02:13,392 --> 00:02:19,826
+Soldiers who could walk reached the surgeons first, and took up their whole first day, while the worst wounds waited.
+
+19
+00:02:21,926 --> 00:02:27,193
+So the roadmap's first work package is one front door, and one list, by the end of June.
+
+20
+00:02:29,893 --> 00:02:35,170
+On Monday 7 June, the front door opens: one form, with five questions.
+
+21
+00:02:36,670 --> 00:02:42,362
+What decision is it for? By when? Who decides? What data do you use now? And who else needs it?
+
+22
+00:02:44,462 --> 00:02:47,097
+They ask what the work is for, not what to build.
+
+23
+00:02:48,797 --> 00:02:52,779
+Each old door is closed, kindly, with a note pointing to the new one.
+
+24
+00:02:54,479 --> 00:03:02,628
+A request for access, or for what a word means, goes on to data governance's own services, from A capability, not a project.
+
+25
+00:03:04,328 --> 00:03:08,860
+That day, sixty-one requests come onto one list, from all eleven places.
+
+26
+00:03:10,760 --> 00:03:15,311
+Nine are duplicates: each joins its twin, and whoever asked is told.
+
+27
+00:03:16,811 --> 00:03:20,110
+Seven are no longer needed, and are closed, with thanks.
+
+28
+00:03:21,610 --> 00:03:25,886
+Forty-five are left, on one list, in the tracker the team already uses.
+
+29
+00:03:28,586 --> 00:03:35,874
+After Jena, Larrey wrote down one order: the most dangerously wounded first, without regard to rank or distinction.
+
+30
+00:03:37,574 --> 00:03:40,749
+Those hurt less could wait. Their lives weren't in danger.
+
+31
+00:03:42,649 --> 00:03:51,496
+Helena's team orders its list the same way, in the open: each request is weighed for its value, its urgency, and the risk while it waits.
+
+32
+00:03:52,996 --> 00:03:58,243
+Together, they say what waiting costs: what Donald Reinertsen calls the cost of delay.
+
+33
+00:03:59,743 --> 00:04:04,035
+Divided by the effort, it puts small, urgent, valuable work first.
+
+34
+00:04:05,935 --> 00:04:13,147
+Anil's request is small, and while it waits, his own spreadsheet keeps a copy of staff records. It goes near the top.
+
+35
+00:04:14,847 --> 00:04:22,457
+A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again.
+
+36
+00:04:24,157 --> 00:04:26,516
+Never by who asks, or how loudly.
+
+37
+00:04:28,416 --> 00:04:35,393
+The list is a board in the tracker that anyone at the university can see, and the data council reads it every month.
+
+38
+00:04:38,093 --> 00:04:46,315
+Next, the team's time, split on purpose: half for the roadmap, a third for requests, and the rest for running and improving what it has.
+
+39
+00:04:48,215 --> 00:04:52,798
+Without the split, requests would take it all, and nothing on the roadmap would move.
+
+40
+00:04:54,698 --> 00:05:02,373
+And at most six pieces of work are in progress at once: three for the roadmap, two for requests, one for running and improving.
+
+41
+00:05:04,473 --> 00:05:10,070
+Kanban, as David J. Anderson set it out, calls this a limit on work in progress.
+
+42
+00:05:12,170 --> 00:05:16,894
+With fewer things started, each finishes sooner, and people get their answers sooner.
+
+43
+00:05:19,194 --> 00:05:23,103
+When one is done, the top of the list moves in. Finish, then start.
+
+44
+00:05:25,803 --> 00:05:32,894
+On Thursday 24 June, the University Council asks for the timetable to change from 2028.
+
+45
+00:05:34,794 --> 00:05:42,084
+The registrar's office needs the rooms' data for it by the end of August. That date can't move, so it goes near the top.
+
+46
+00:05:44,184 --> 00:05:51,194
+On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.
+
+47
+00:05:53,094 --> 00:05:58,751
+It goes on the same list, weighed the same way, and it hears not now, with a reason and a date.
+
+48
+00:06:00,651 --> 00:06:08,813
+The reason: the timetable's date can't move. The date: the current model refreshed by the end of August, and the new one in October.
+
+49
+00:06:11,113 --> 00:06:16,936
+Saying it well, face to face, is a skill of its own, shown in the leading data people module.
+
+50
+00:06:19,036 --> 00:06:28,015
+Emergency departments still do this, and call it triage: in Australia, five categories, each with a longest wait, from at once to two hours.
+
+51
+00:06:30,315 --> 00:06:32,089
+Not now always comes with a when.
+
+52
+00:06:34,789 --> 00:06:39,004
+Larrey brought the wounded in from wherever they fell, and treated the worst first.
+
+53
+00:06:40,704 --> 00:06:47,334
+Helena's team does the same with data: every request through one door, on one list, the most needed first.
+
+54
+00:06:49,034 --> 00:06:53,834
+On Monday, close every side door, kindly, and ask what each request is for.
+
+55
+00:06:54,934 --> 00:06:58,858
+Order the list in the open, by value, urgency, risk and effort.
+
+56
+00:06:59,958 --> 00:07:04,779
+Protect time for the roadmap and for running what you have, and limit what's in progress.
+
+57
+00:07:05,879 --> 00:07:10,385
+Give every request that waits a reason and a date, and show the list to everyone.

@@ -18,134 +18,140 @@ Nadie había probado cómo movería el viento un tablero así.
 00:00:31.954 --> 00:00:40.008
 El 7 de noviembre, un viento de unos 64 km/h (40 mph) lo hace torcerse, hasta que el tramo central se desprende y cae al agua.
 
-00:00:42.108 --> 00:00:48.510
-No muere nadie, pero la única vía para cruzar el estrecho desaparece por diez años. Algo tenía que cambiar.
+00:00:42.108 --> 00:00:50.100
+No muere nadie, pero la única vía sobre el estrecho desaparece diez años. El próximo puente tenía que probarse antes de construirse.
 
-00:00:50.210 --> 00:00:58.590
+00:00:51.800 --> 00:01:00.180
 Los ingenieros que lo estudiaron dijeron que esos puentes debían probarse antes como maquetas en un túnel de viento, con viento constante.
 
-00:00:59.890 --> 00:01:04.679
+00:01:01.480 --> 00:01:06.269
 En la Universidad de Washington, Frederick Farquharson prueba maquetas durante años.
 
-00:01:05.779 --> 00:01:11.277
+00:01:07.369 --> 00:01:12.867
 Las pruebas dan con un tablero que el viento no tuerce: más alto, más rígido y abierto para que el viento pase.
 
-00:01:12.777 --> 00:01:19.805
+00:01:14.367 --> 00:01:21.395
 El puente nuevo se inaugura en 1950, probado antes de construirse, y lleva 76 años con tránsito.
 
-00:01:21.505 --> 00:01:28.684
+00:01:23.095 --> 00:01:30.274
 Los túneles de viento no eran nuevos: se probaban alas en ellos desde los hermanos Wright. Los puentes adoptaron una práctica vecina.
 
-00:01:29.984 --> 00:01:33.302
+00:01:31.574 --> 00:01:34.892
 El trabajo con datos hizo lo mismo: adoptó cómo se hace el software.
 
-00:01:34.402 --> 00:01:41.126
+00:01:35.992 --> 00:01:42.716
 En la universidad, la exportación de nómina a Finanzas corrió por años como un script en el portátil de una persona.
 
-00:01:42.226 --> 00:01:49.019
+00:01:43.816 --> 00:01:50.609
 Ahora es software: probado antes de cada cambio, revisado por otra persona y publicado siempre de la misma forma.
 
-00:01:57.119 --> 00:02:01.995
+00:01:58.709 --> 00:02:03.585
 Jueves 5 de noviembre de 2026: día de pago en la universidad.
 
-00:02:03.095 --> 00:02:10.965
+00:02:04.685 --> 00:02:12.555
 Cada dos jueves, Rohan Desai, de Finanzas, necesita saber cuánto cobra ese día el personal eventual, por facultad y unidad.
 
-00:02:12.265 --> 00:02:15.553
+00:02:13.855 --> 00:02:17.143
 Durante años, se lo dijo un script en el portátil de una persona.
 
-00:02:16.253 --> 00:02:21.756
+00:02:17.843 --> 00:02:23.346
 Antes de las seis de cada día de pago, alguien lo corría a mano y enviaba el archivo a Finanzas por correo.
 
-00:02:23.056 --> 00:02:31.765
+00:02:24.646 --> 00:02:33.355
 Adentro estaba la regla de nómina: una solicitud aprobada antes del mediodía del lunes previo se paga ese jueves; si no, espera dos semanas.
 
-00:02:33.465 --> 00:02:38.602
+00:02:35.055 --> 00:02:40.192
 Funcionaba, y nadie tiene la culpa. Su autor se pasó a otro equipo, y el script siguió corriendo.
 
-00:02:39.902 --> 00:02:45.317
+00:02:41.492 --> 00:02:46.907
 Luego, en febrero, las solicitudes pasaron a la app de solicitudes, y las planillas que leía dejaron de llegar.
 
-00:02:46.617 --> 00:02:53.262
+00:02:48.207 --> 00:02:54.852
 Una sola copia, sin historial de por qué y sin pruebas que dijeran si un cambio lo rompía: nadie podía tocarlo sin riesgo.
 
-00:02:57.162 --> 00:03:02.453
+00:02:58.752 --> 00:03:04.043
 Sam Okafor, que administra la plataforma, y Jun Park lo pasaron al proyecto de datos.
 
-00:03:03.753 --> 00:03:08.870
+00:03:05.343 --> 00:03:10.460
 Primero a Git, junto a los modelos, donde se guarda cada cambio, con quién lo hizo y por qué.
 
-00:03:10.570 --> 00:03:17.378
+00:03:12.160 --> 00:03:18.968
 Sus sumas pasaron a un modelo en dbt, y la regla se escribe una vez, en el calendario de días de pago de RR. HH.
 
-00:03:19.078 --> 00:03:25.550
-Ingrid Holm, de RR. HH., confirmó la regla, y ahora un cambio en los días de pago pide que RR. HH. lo revise.
+00:03:20.668 --> 00:03:27.358
+Ingrid Holm, de RR. HH., confirmó la regla; ahora un cambio en los días de pago empieza con un ticket de RR. HH.
 
-00:03:27.150 --> 00:03:37.147
+00:03:28.958 --> 00:03:38.955
 Jun escribió primero las pruebas, al límite de la regla: aprobada el lunes a las 11:59, se paga ese jueves; a las 12:01, en dos semanas.
 
-00:03:39.047 --> 00:03:45.549
+00:03:40.855 --> 00:03:47.357
 «In the weeds of data crafting» muestra cómo, en «Declare it, then build it», «Promises and proofs» y «Built in layers».
 
-00:03:47.149 --> 00:03:53.777
+00:03:48.957 --> 00:03:55.585
 Cada cambio va en una rama y vuelve como pull request, con verificaciones que lo construyen y corren todas las pruebas.
 
-00:03:57.677 --> 00:04:00.242
-Luego lo revisa alguien que no es su autor.
+00:03:59.485 --> 00:04:03.135
+Luego lo revisa otra persona del equipo de datos, no su autor.
 
-00:04:01.342 --> 00:04:06.314
+00:04:04.235 --> 00:04:09.207
 Jun escribió el modelo, así que lo revisó Sam; Sam escribió el trabajo, así que lo revisó Jun.
 
-00:04:07.814 --> 00:04:11.124
+00:04:10.707 --> 00:04:14.017
 Nada se fusiona sin esa revisión y todas las verificaciones en verde.
 
-00:04:12.424 --> 00:04:16.883
+00:04:15.317 --> 00:04:22.858
+Finanzas y RR. HH. no revisan el código: Rohan pidió el traslado en un ticket, enlazado a su rama y sus pull requests.
+
+00:04:23.558 --> 00:04:28.017
 «Change without surprises» muestra cómo un cambio llega a las personas a las que afecta.
 
-00:04:18.183 --> 00:04:23.619
+00:04:29.317 --> 00:04:34.753
 Y vale también cuando un agente escribe el cambio: el agente propone y una persona aprueba.
 
-00:04:27.519 --> 00:04:34.410
+00:04:38.653 --> 00:04:45.544
 Cómo corre también es un archivo: un Declarative Automation Bundle lista los trabajos del proyecto y dónde corre cada uno.
 
-00:04:35.710 --> 00:04:41.069
+00:04:46.844 --> 00:04:52.203
 La exportación de nómina corre a las seis cada jueves, y construye y prueba todo lo que lee.
 
-00:04:42.369 --> 00:04:48.221
+00:04:53.503 --> 00:04:59.355
 Cuando se fusiona un cambio, los mismos archivos se despliegan en test, y el trabajo corre ahí primero.
 
-00:04:49.721 --> 00:04:55.897
+00:05:00.855 --> 00:05:07.083
+Rohan compara sus cifras en test con las suyas, y su ticket sigue abierto hasta que dice que están bien.
+
+00:05:07.783 --> 00:05:13.959
 Luego la versión espera a Noor, la arquitecta de datos. Cuando aprueba, los mismos archivos pasan a producción.
 
-00:04:57.597 --> 00:05:03.252
+00:05:15.659 --> 00:05:21.314
 Corre con la cuenta propia de la plataforma, nunca con la de una persona: nadie despliega desde un portátil.
 
-00:05:04.552 --> 00:05:09.950
+00:05:22.614 --> 00:05:28.012
 Los mismos archivos, los mismos pasos, cada vez, para que test y producción no se desvíen.
 
-00:05:11.450 --> 00:05:18.454
+00:05:29.512 --> 00:05:36.516
 Esta mañana a las seis corrió por decimoctava vez, y hoy cobran 856 personas del personal eventual.
 
-00:05:22.354 --> 00:05:30.075
+00:05:40.416 --> 00:05:48.137
 Nada de esto es nuevo: el software se hace así hace décadas, y el trabajo con datos lo adoptó, como los puentes el túnel de viento.
 
-00:05:31.375 --> 00:05:38.514
+00:05:49.437 --> 00:05:56.576
 Así que trata el trabajo con datos como software: en Git, probado, revisado por otra persona y desplegado siempre igual.
 
-00:05:40.014 --> 00:05:44.773
+00:05:58.076 --> 00:06:02.835
 La próxima película, «A platform that watches itself», sigue una noche en la que falla un trabajo.
 
-00:05:46.073 --> 00:05:49.358
+00:06:04.135 --> 00:06:07.420
 Ya hay estándares para esto, así que no reinventes la rueda.
 
-00:05:50.658 --> 00:05:55.356
+00:06:08.720 --> 00:06:13.418
 Investiga, adapta, implementa e itera, a partir de la documentación oficial.
 
-00:05:59.256 --> 00:06:03.768
+00:06:17.318 --> 00:06:21.830
 El puente de 1950 se probó antes de construirse, y sigue en pie.
 
-00:06:05.268 --> 00:06:10.635
+00:06:23.330 --> 00:06:28.697
 La exportación de nómina se prueba antes de cada cambio, y el día de pago es un jueves más.
 
-00:06:12.135 --> 00:06:13.528
+00:06:30.197 --> 00:06:31.590
 El trabajo con datos es software.

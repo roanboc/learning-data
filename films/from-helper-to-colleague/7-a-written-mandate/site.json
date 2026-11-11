@@ -1,0 +1,60 @@
+{
+  "kicker": "Autonomy in writing",
+  "kicker_es": "Autonomía por escrito",
+  "title_es": "Un mandato, escrito y aplicado",
+  "h1": "A mandate, written and enforced: what an agent may do alone",
+  "h1_es": "Un mandato, escrito y aplicado: lo que un agente hace solo",
+  "lead": "Anil's workload agent may find why the night build failed, alone, in test. One page on the map says so: its task, folders and checks, its limits, a switch and an undo, signed by Anil and approved by Noor. Each line is held in the tools. Last night it fixed one line, and asked HR the rest.",
+  "lead_es": "El agente de carga docente de Anil puede averiguar solo, en pruebas, por qué falló la compilación. Una página en el mapa lo dice: su tarea, carpetas y verificaciones, sus límites, un interruptor y un deshacer, firmada por Anil y aprobada por Noor. Anoche corrigió una línea y preguntó el resto.",
+  "description": "A film about what an AI agent may do alone, the seventh and last of From helper to colleague: Anil Kurian's workload agent, which tells Health's heads of school how many teach in each school and how many are casual, works alone at night in test under a mandate, one page on the university's map beside the task it covers, a requirement kept with the project's governance: its task and where, its folders and its checks, ten rounds, one hour and a set budget, a switch that stops it and a way to undo each change, signed by Anil on 30 October and approved by Noor as a second person; one night in October, to make a failed build pass, it had also changed HR's model of contracts, which other teams' numbers come from, and what it might do alone was written nowhere; each line is written into the tools from the map: where it may write in Unity Catalog's grants, its folders in GitHub's push rules, the hour in the workflow's own timeout, its budget in a Unity Gateway limit on its own name, its rounds counted by plain code, and a check that fails before anything merges if a tool allows more than the page; last night the build failed in test, and in three rounds it found why, fixed one line of its own dbt model in test, touched nothing else and reported twenty minutes after the failure, and left HR the question that was HR's to decide; in production it only drafts, the switch and the undo are there, and the mandate can be narrowed or taken back. The series closes on its five stages, each with its gate, and its seven lessons. Autonomy is a written, narrow, revocable mandate.",
+  "description_es": "Una película sobre lo que un agente de IA puede hacer solo, la séptima y última de De ayudante a colega: el agente de carga docente de Anil Kurian, que dice a los directores de Salud cuántos enseñan en cada escuela y cuántos son temporales, trabaja solo de noche en pruebas bajo un mandato, una página en el mapa de la universidad junto a la tarea que cubre, un requisito guardado con la gobernanza del proyecto: su tarea y dónde, sus carpetas y sus verificaciones, diez rondas, una hora y un presupuesto fijo, un interruptor que lo detiene y una forma de deshacer cada cambio, firmado por Anil el 30 de octubre y aprobado por Noor como segunda persona; una noche de octubre, para salvar una compilación, también había cambiado el modelo de contratos de Recursos Humanos, del que dependen otros equipos, y lo que podía hacer solo no estaba escrito en ninguna parte; cada línea se escribe en las herramientas desde el mapa: dónde puede escribir, en los permisos de Unity Catalog; sus carpetas, en las reglas de push de GitHub; la hora, en el tiempo límite del flujo de trabajo; su presupuesto, en un límite de Unity Gateway a su propio nombre; sus rondas, contadas por código simple; y una verificación que falla antes de fusionar nada si una herramienta permite más que la página; anoche la compilación falló en pruebas, y en tres rondas halló por qué, corrigió una línea de su propio modelo de dbt en pruebas, no tocó nada más e informó veinte minutos después de la falla, y dejó a Recursos Humanos la pregunta que le tocaba decidir; en producción solo redacta, el interruptor y el deshacer están ahí, y el mandato se puede acotar o revocar. La serie cierra con sus cinco etapas, cada una con su puerta, y sus siete lecciones. La autonomía es un mandato escrito, acotado y revocable.",
+  "card": "Anil's workload agent works alone at night in test, under one signed page on the map, and every tool holds it to that page.",
+  "card_es": "El agente de carga docente de Anil trabaja solo de noche en pruebas, bajo una página firmada del mapa que aplica cada herramienta.",
+  "chapters_es": {
+    "first": "Anoche, en pruebas",
+    "page": "Una página, en el mapa",
+    "held": "Aplicado en cada herramienta",
+    "alone": "Solo en pruebas, un borrador en producción",
+    "stop": "Un interruptor, y un deshacer",
+    "close": "Cinco etapas, cada una con su puerta"
+  },
+  "past": [
+    "Today, at the university: a night in test, under a mandate",
+    "A build fails at night in test. The agent finds why, alone, within one signed page that every tool holds it to, and production never sees the bug."
+  ],
+  "past_es": [
+    "Hoy, en la universidad: una noche en pruebas, bajo un mandato",
+    "Una compilación falla de noche en pruebas. El agente halla por qué, solo, dentro de una página firmada que cada herramienta aplica, y producción nunca ve el error."
+  ],
+  "repo": {
+    "first": [
+      "examples/night-in-test/README.md",
+      "examples/night-in-test/report.md"
+    ],
+    "page": [
+      "governance/8-mandates/README.md",
+      "governance/8-mandates/workload-agent.yml",
+      "governance/3-architecture-map/5-application/application-components/workload-agent.yml"
+    ],
+    "held": [
+      "review-and-release/rulesets/workload-agent-folders.json",
+      "agents/workload-agent/workflow.yml",
+      "agents/workload-agent/unity-gateway.yml",
+      "scripts/check/mandates.py"
+    ],
+    "alone": [
+      "models/marts/workload/mart_workload__teaching_staff.sql",
+      "examples/night-in-test/fix.patch",
+      "examples/night-in-test/question.md"
+    ],
+    "stop": [
+      "governance/8-mandates/workload-agent.yml"
+    ],
+    "close": [
+      "docs/stages.md"
+    ]
+  },
+  "next_h": "You've seen what an agent may do alone, written in a mandate and held in every tool, and the series' seven lessons. Next: a colleague that isn't a person.",
+  "next_h_es": "Viste lo que un agente puede hacer solo, escrito en un mandato y aplicado en cada herramienta, y las siete lecciones de la serie. Después: un colega que no es una persona.",
+  "draft": true
+}

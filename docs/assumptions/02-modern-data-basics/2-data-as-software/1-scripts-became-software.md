@@ -33,3 +33,14 @@ Merged into main as a draft on 10 November 2026, as [PR #179](https://github.com
 | 19 | Which chapters stop for Pause and think? | Three: after *A script on a laptop*, *Into the project* and *The same way, every time*, one question each with a near miss. | The film's page | Questions move or are added |
 | 20 | Where do Spanish readers go for the docs? | Databricks' own pages have no Spanish, so the Spanish page links Azure Databricks' pages on Microsoft Learn in Spanish, which say the same; dbt's are marked "(en inglés)"; GitHub's are in Spanish. | The film's page, *Go further in the official docs* | The Spanish page links the English pages |
 | 21 | Does the score sound right? | It passes every sound check (quiet.py and held notes) and is mixed to -16 LUFS, but nobody has listened to it: the ophicleides are made from code, as the module's other scores are. | The whole soundtrack | The score is made again |
+
+## Who approves what (11 November 2026)
+
+After Rodrigo's feedback that Finance and other users request and approve tickets, linked to the branch and pull request, while technical people review pull requests and users validate before the ticket closes. Made on these assumptions:
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 22 | Which ticket system? | None named: "a ticket", with a Jira-like key, FIN-212, since Rodrigo named Jira or GitHub issues and the film names no tool it doesn't need. | Chapters 4 and 5 | The key becomes an issue number, such as #212 |
+| 23 | Where does the user check the result? | In test, after the merge and before Noor's release approval: Rohan compares the figures with his own, and the ticket stays open until he says they're right. | Chapter 5 | He checks after production instead, before the ticket closes |
+| 24 | Does Noor still approve the release? | Yes: she is the data architect, a technical approver of production, not a user. | Chapter 5 | Production goes on after Rohan's check alone |
+| 25 | Does *A platform that watches itself* need the same fix? | Not in this change: its line "Sam's pull request also asks Ingrid Holm, in HR, ... to change the contract first" is left for a change of its own. | Film 2 of the series | The same fix there: Ingrid gets a ticket, not a pull request |

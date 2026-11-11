@@ -4,4 +4,5 @@ definition: Builds and tests the models with dbt, in the caller's development sc
 owner: Sam, platform team
 relationships:
 - serving: build it in development
+- serving: find why the night build failed
 status: confirmed

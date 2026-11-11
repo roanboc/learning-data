@@ -189,7 +189,7 @@ air(tSh + 0.4, 2.2, 0.008, px(1800), 140, 650)
 tO = GA('open', 'Leave it')
 air(tO + 0.1, 1.2, 0.007, px(945), 120, 600)
 phrase(((Bb3, 2.4), (A3, 1.8)), GA('open', 'walks in', -0.3), 0.7, px(1100))
-tC = GA('change', 'Something')
+tC = GA('change', 'The city')
 phrase(((D4, 0.45), (E4, 0.45), (F4, 0.55), (G4, 1.9)), tC, 0.8, 0.0)
 timp(A2, tC + 1.45, 0.6, 0.1, ring=2.6)
 

@@ -15,218 +15,218 @@ Un cable detrás del volante también puede cerrarlo, y lo mismo una copia de la
 00:00:24.603 --> 00:00:31.547
 Para el dueño, es una mañana sin auto: sin cómo ir a trabajar, un reclamo que hacer y un auto que quizá nunca vuelva.
 
-00:00:33.447 --> 00:00:34.887
-Algo tiene que cambiar.
+00:00:33.447 --> 00:00:36.856
+Un auto tiene que reconocer su propia llave, no solo un interruptor que gira.
 
-00:00:38.387 --> 00:00:47.548
+00:00:40.356 --> 00:00:49.517
 En 1995, la Unión Europea decide: desde octubre de 1998, todo auto nuevo vendido debe tener un inmovilizador electrónico.
 
-00:00:49.448 --> 00:00:51.028
+00:00:51.417 --> 00:00:52.997
 Es un pequeño chip en la llave.
 
-00:00:52.328 --> 00:00:56.315
+00:00:54.297 --> 00:00:58.284
 Al girar la llave, el auto le pide al chip su código, por radio.
 
-00:00:58.015 --> 00:01:00.524
+00:00:59.984 --> 00:01:02.493
 Sin la respuesta correcta, el motor no arranca.
 
-00:01:02.424 --> 00:01:06.334
+00:01:04.393 --> 00:01:08.303
 Ahora un cable no arranca nada, ni una llave cortada con la misma forma.
 
-00:01:08.234 --> 00:01:15.723
+00:01:10.203 --> 00:01:17.692
 En Países Bajos, los autos nuevos que lo tienen pasan de uno de cada cinco en 1994 a todos en 1998.
 
-00:01:17.423 --> 00:01:22.182
+00:01:19.392 --> 00:01:24.151
 Y el robo de autos baja cerca de un cuarenta por ciento, por no más de cincuenta euros por auto.
 
-00:01:23.882 --> 00:01:26.697
+00:01:25.851 --> 00:01:28.666
 Muchos menos dueños despiertan y ya no encuentran su auto.
 
-00:01:28.597 --> 00:01:34.672
+00:01:30.566 --> 00:01:36.641
 Y para los datos: un proceso que prueba quién es cada vez que corre, sin nada que alguien pueda copiar.
 
-00:01:36.572 --> 00:01:41.070
+00:01:38.541 --> 00:01:43.039
 En la universidad, el proceso nocturno todavía arranca con la copia de la llave de una persona.
 
-00:01:42.570 --> 00:01:48.628
+00:01:44.539 --> 00:01:50.597
 Esta película le da su propia forma de entrar, en Microsoft Entra ID, Azure Databricks y GitHub.
 
-00:01:54.928 --> 00:02:01.008
+00:01:56.897 --> 00:02:02.977
 Cada noche a las dos, un proceso carga los datos del registro en la plataforma de datos de la universidad.
 
-00:02:02.508 --> 00:02:05.627
+00:02:04.477 --> 00:02:07.596
 Ya tiene un nombre propio: registrar-loader.
 
-00:02:07.127 --> 00:02:14.421
+00:02:09.096 --> 00:02:16.390
 Pero todavía corre con el token personal de Jun Park, creado el 14 de marzo de 2024, sin fecha de fin.
 
-00:02:16.121 --> 00:02:20.650
+00:02:18.090 --> 00:02:22.619
 Para la plataforma, quien tenga una copia es Jun, con todo lo que Jun puede hacer.
 
-00:02:22.150 --> 00:02:27.679
+00:02:24.119 --> 00:02:29.648
 Y hay copias: en la configuración del proceso, en un notebook en GitHub y en la laptop de Jun.
 
-00:02:29.579 --> 00:02:34.652
+00:02:31.548 --> 00:02:36.621
 Si Jun cambiara de equipo, el proceso se detendría. Si alguien hallara una copia, sería Jun.
 
-00:02:36.352 --> 00:02:40.504
+00:02:38.321 --> 00:02:42.473
 Como un auto sin inmovilizador, arranca para cualquiera que tenga una copia.
 
-00:02:42.204 --> 00:02:47.157
+00:02:44.173 --> 00:02:49.126
 Ningún secreto que perder mostró cómo subir: arriba, nadie guarda ningún secreto.
 
-00:02:49.057 --> 00:02:58.304
+00:02:51.026 --> 00:03:00.273
 En Microsoft Entra ID, el directorio de la universidad, registrar-loader es una entidad de servicio: una identidad de carga, no de persona.
 
-00:03:00.004 --> 00:03:01.510
+00:03:01.973 --> 00:03:03.479
 Su dueño es Sam Okafor.
 
-00:03:02.810 --> 00:03:08.643
+00:03:04.779 --> 00:03:10.612
 Es el único miembro de un grupo, los dueños del registro, que es dueño del catálogo del registro.
 
-00:03:10.143 --> 00:03:14.060
+00:03:12.112 --> 00:03:16.029
 Azure Databricks lee ambos del directorio, igual que lee a las personas.
 
-00:03:15.560 --> 00:03:20.533
+00:03:17.529 --> 00:03:22.502
 Así, sus permisos vienen de un grupo, nunca de una persona, como decidió ¿Quién es, de verdad?
 
-00:03:22.233 --> 00:03:27.886
+00:03:24.202 --> 00:03:29.855
 Sam hace que el proceso corra como registrar-loader, y quita el token de Jun de su configuración.
 
-00:03:29.786 --> 00:03:35.913
+00:03:31.755 --> 00:03:37.882
 Ahora la plataforma sabe qué proceso es, y le da a cada ejecución su entrada, sin nada que alguien guarde.
 
-00:03:37.613 --> 00:03:43.395
+00:03:39.582 --> 00:03:45.364
 El martes 20 de octubre, a las dos, la carga corre con su propio nombre por primera vez.
 
-00:03:45.095 --> 00:03:48.036
+00:03:47.064 --> 00:03:50.005
 El registro ahora dice registrar-loader, no Jun.
 
-00:03:49.536 --> 00:03:51.936
+00:03:51.505 --> 00:03:53.905
 Y si Jun cambia de equipo, nada se rompe.
 
-00:03:53.836 --> 00:04:00.471
+00:03:55.805 --> 00:04:02.440
 El código del proceso está en GitHub, y hasta ahora Jun desplegaba cada cambio desde su laptop, con su token.
 
-00:04:01.971 --> 00:04:05.684
+00:04:03.940 --> 00:04:07.653
 Ahora lo despliega GitHub Actions, que tampoco guarda ningún token.
 
-00:04:07.184 --> 00:04:12.701
+00:04:09.153 --> 00:04:14.670
 Para cada ejecución, GitHub firma una nota breve: este repositorio, este entorno, ahora.
 
-00:04:14.601 --> 00:04:22.537
+00:04:16.570 --> 00:04:24.506
 Azure Databricks revisa la firma de GitHub, y algo más: ¿la nota dice justo lo que nombra la política de registrar-loader?
 
-00:04:24.237 --> 00:04:30.666
+00:04:26.206 --> 00:04:32.635
 Sam fijó esa política una vez: el repositorio de la plataforma, en su entorno de producción, y nada más.
 
-00:04:32.366 --> 00:04:37.477
+00:04:34.335 --> 00:04:39.446
 Si coinciden, la plataforma le da a la ejecución un pase como registrar-loader, válido por una hora.
 
-00:04:39.377 --> 00:04:43.960
+00:04:41.346 --> 00:04:45.929
 Ejecutado desde cualquier otro lugar, el mismo código recibe una nota que dice dónde, y ningún pase.
 
-00:04:45.860 --> 00:04:50.932
+00:04:47.829 --> 00:04:52.901
 La nota vale unos minutos, para esa sola ejecución, y nada queda guardado en GitHub para robar.
 
-00:04:52.632 --> 00:04:58.796
+00:04:54.601 --> 00:05:00.765
 Cuando un flujo de trabajo cambia Azure mismo, Microsoft Entra ID confía en la misma nota, del mismo modo.
 
-00:05:00.496 --> 00:05:06.633
+00:05:02.465 --> 00:05:08.602
 Como el auto que le pregunta a su llave, la plataforma le pregunta a cada ejecución de dónde viene, y una copia no puede responder.
 
-00:05:08.533 --> 00:05:12.731
+00:05:10.502 --> 00:05:14.700
 Quién puede cambiar producción, y quién lo aprueba, es tema de De una rama a producción.
 
-00:05:14.631 --> 00:05:19.543
+00:05:16.600 --> 00:05:21.512
 En Azure, un recurso también puede tener su propia identidad: una identidad administrada.
 
-00:05:21.043 --> 00:05:24.602
+00:05:23.012 --> 00:05:26.571
 Azure se ocupa de sus credenciales, y nadie las ve nunca.
 
-00:05:26.302 --> 00:05:33.149
+00:05:28.271 --> 00:05:35.118
 Red, almacenamiento y claves le da una al catálogo: la única identidad que puede leer los archivos del registro.
 
-00:05:34.849 --> 00:05:40.134
+00:05:36.818 --> 00:05:42.103
 Y en la plataforma, las personas vinculaban sus carpetas Git con GitHub usando sus propios tokens personales.
 
-00:05:41.634 --> 00:05:45.877
+00:05:43.603 --> 00:05:47.846
 El de Jun llegaba a todos sus repositorios, y no tenía fecha de fin.
 
-00:05:47.577 --> 00:05:53.663
+00:05:49.546 --> 00:05:55.632
 Ahora cada vínculo pasa por la aplicación de GitHub de Databricks, instalada solo en el repositorio de la plataforma.
 
-00:05:55.163 --> 00:06:00.131
+00:05:57.132 --> 00:06:02.100
 Actúa por cada persona con pases que terminan a las ocho horas, y se renuevan solos.
 
-00:06:01.831 --> 00:06:07.424
+00:06:03.800 --> 00:06:09.393
 Si una herramienta trabaja en GitHub, recibe una app con solo lo que necesita, nunca el token de alguien.
 
-00:06:09.324 --> 00:06:14.830
+00:06:11.293 --> 00:06:16.799
 Una puerta todavía pide una contraseña: el sistema de estudiantes, de donde vienen los datos del registro.
 
-00:06:16.530 --> 00:06:18.262
+00:06:18.499 --> 00:06:20.231
 Todavía no ofrece otra forma de entrar.
 
-00:06:19.962 --> 00:06:25.104
+00:06:21.931 --> 00:06:27.073
 Así que la contraseña vive en un solo lugar: un almacén de claves en Azure, solo para este proceso.
 
-00:06:26.804 --> 00:06:31.629
+00:06:28.773 --> 00:06:33.598
 La plataforma la lee a través de un ámbito de secretos, y solo registrar-loader puede leerla.
 
-00:06:33.529 --> 00:06:38.194
+00:06:35.498 --> 00:06:40.163
 Si un notebook la imprime por error, la plataforma muestra solo la palabra REDACTED.
 
-00:06:40.094 --> 00:06:47.701
+00:06:42.063 --> 00:06:49.670
 Una vez al mes, una pequeña función la cambia en el sistema de estudiantes y en el almacén, con su propia identidad administrada.
 
-00:06:49.801 --> 00:06:54.360
+00:06:51.770 --> 00:06:56.329
 Y la excepción queda por escrito: por qué, quién es su dueño y cuándo se vuelve a revisar.
 
-00:06:56.260 --> 00:07:02.203
+00:06:58.229 --> 00:07:04.172
 En la escalera de Ningún secreto que perder, es un peldaño bajo, solo hasta que el sistema de estudiantes pueda subir.
 
-00:07:04.103 --> 00:07:05.956
+00:07:06.072 --> 00:07:07.925
 ¿Y qué pasa con las copias que ya existen?
 
-00:07:07.456 --> 00:07:13.393
+00:07:09.425 --> 00:07:15.362
 El martes 3 de noviembre, Sam activa GitHub Secret Protection en el repositorio.
 
-00:07:14.893 --> 00:07:19.567
+00:07:16.862 --> 00:07:21.536
 El escaneo de secretos lee toda la historia, cada rama, hasta el primer commit.
 
-00:07:21.267 --> 00:07:27.180
+00:07:23.236 --> 00:07:29.149
 Encuentra el token de Jun en un notebook subido en marzo de 2024, y revisa si todavía funciona.
 
-00:07:28.480 --> 00:07:29.206
+00:07:30.449 --> 00:07:31.175
 Funciona.
 
-00:07:30.906 --> 00:07:34.816
+00:07:32.875 --> 00:07:36.785
 El proceso no lo usa desde hace dos semanas, así que esa mañana Jun lo da de baja.
 
-00:07:36.316 --> 00:07:42.492
+00:07:38.285 --> 00:07:44.461
 Las copias del notebook y de su laptop ya no abren nada, y Sam cierra la alerta: revocado.
 
-00:07:44.392 --> 00:07:47.454
+00:07:46.361 --> 00:07:49.423
 El token sigue en la historia, pero no abre nada.
 
-00:07:49.354 --> 00:07:53.847
+00:07:51.323 --> 00:07:55.816
 Desde ahora, la protección de push detiene un push que trae un secreto, antes de que llegue.
 
-00:07:55.347 --> 00:07:59.951
+00:07:57.316 --> 00:08:01.920
 Quien la pase por alto debe dar un motivo, y el equipo de la plataforma recibe una alerta.
 
-00:08:01.651 --> 00:08:06.986
+00:08:03.620 --> 00:08:08.955
 Esa tarde, como mostró Personas y grupos, los tokens personales se apagan en la plataforma.
 
-00:08:12.086 --> 00:08:19.969
+00:08:14.055 --> 00:08:21.938
 En los Países Bajos de los noventa, un auto que preguntaba a su llave no arrancaba con un cable, y se robaron muchos menos autos.
 
-00:08:21.869 --> 00:08:28.639
+00:08:23.838 --> 00:08:30.608
 En la universidad, el proceso de las dos prueba quién es cada vez que corre, sin nada que alguien pueda copiar.
 
-00:08:30.539 --> 00:08:37.556
+00:08:32.508 --> 00:08:39.525
 Queda una contraseña, en un almacén, cambiada por una máquina, y un secreto subido al código se detiene en la puerta.
 
-00:08:39.656 --> 00:08:42.311
+00:08:41.625 --> 00:08:44.280
 Una carga prueba quién es sin una contraseña.

@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los soldados podrían morir por una orden que nadie dio, o volverse contra el propio rey.",
 "And the commander at his post sees only the man who brings it.":
 "Y el comandante, en su puesto, solo ve al hombre que la trae.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The commander needs a way to know an order truly comes from the king.":
+"El comandante necesita una forma de saber que una orden de verdad viene del rey.",
 "The answer is a tally: a small bronze tiger, cut in two along its back.":
 "La respuesta es una tarja: un pequeño tigre de bronce, cortado en dos a lo largo del lomo.",
 "The king keeps the right half, and the commander takes the left to his post.":

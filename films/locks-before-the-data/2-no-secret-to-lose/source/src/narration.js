@@ -12,7 +12,7 @@ const NARR={
  {"id":"cash","gap":0.8,"text":"To whoever holds them now, they're as good as cash."},
  {"id":"gone","gap":0.8,"text":"If they're cashed before word of the theft gets round, the money is gone."},
  {"id":"every","gap":0.8,"text":"And every messenger in the City carries that risk, every day."},
- {"id":"change","gap":0.8,"text":"Something has to change."}]},
+ {"id":"change","gap":0.8,"text":"The paper itself has to stop being worth stealing."}]},
 "bank":{"name":"Kept in the Bank's records","lead":0.8,"tail":1.0,"vo":[
  {"id":"since","gap":0.8,"text":"The Bank of England has been building an answer since 1988.","say":"The Bank of England has been building an answer since nineteen eighty-eight."},
  {"id":"opens","gap":0.8,"text":"On 1 October 1990, it opens the Central Moneymarkets Office.","say":"On the first of October, nineteen ninety, it opens the Central Money Markets Office."},

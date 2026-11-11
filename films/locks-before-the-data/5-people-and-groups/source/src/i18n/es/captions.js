@@ -14,7 +14,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Guests forget to hand them in when they leave, or lose them on the way.":"Los huéspedes olvidan devolverlas al irse, o las pierden en el camino.",
 "And a key still opens its door, whoever holds it, long after the stay has ended.":"Y una llave sigue abriendo su puerta, la tenga quien la tenga, mucho después de terminada la estancia.",
 "Anyone who found one, or kept one, could let themselves into the next guest's room, while that guest slept.":"Quien encontrara una, o se la quedara, podía entrar en la habitación del siguiente huésped mientras dormía.",
-"Something has to change.":"Algo tiene que cambiar.",
+"A key has to stop working when the stay ends.":"Una llave tiene que dejar de funcionar cuando termina la estadía.",
 "Sørnes makes a lock that a punched plastic card opens.":"Sørnes hace una cerradura que se abre con una tarjeta de plástico perforada.",
 "Inside each lock is a pattern card, put in from inside the room.":"Dentro de cada cerradura hay una tarjeta patrón, puesta desde dentro de la habitación.",
 "For each new guest, the hotel puts in a new pattern, and gives the guest a card punched to match.":"Para cada huésped nuevo, el hotel pone un patrón nuevo, y le da al huésped una tarjeta perforada que coincide.",

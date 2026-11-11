@@ -167,7 +167,7 @@ function fw_forearm(ctx,wx,wy,bx,col,seed){const d=Math.atan2(H+120-wy,bx-wx),nx
 // rings spread from each. skin: the hands' colour; sleeve: the coat's
 function fw_hands(ctx,t,inn,dip,o){o=o||{};const D=FW_HD,e=easeCam(clamp(inn,0,1)),dp=clamp(dip,0,1),skin=o.skin||FW_SKIN,sleeve=o.sleeve||[44,46,58],
     rub=(o.rub||0)*Math.sin(t*5.2),y0=lerp(1240,640,e)+40*dp,hands=[[-1,820+rub*14,y0+rub*6,0.22],[1,1100-rub*14,y0-rub*6,-0.2]];
-  for(const [s,x,y,a] of hands){fw_forearm(ctx,x-Math.sin(a)*20,y+40,x+s*260,sleeve,70+s*5);fw_hand(ctx,x,y,a,s,1.25,skin,80+s*7);}
+  for(const [s,x,y,a] of hands){if(window.__ARM__)__ARM__(ctx,x-Math.sin(a)*20,y+40,x+s*260,H+120,230);fw_forearm(ctx,x-Math.sin(a)*20,y+40,x+s*260,sleeve,70+s*5);fw_hand(ctx,x,y,a,s,1.25,skin,80+s*7);}
   // the water over the hands: milky, paler where it's deep; then rings
   if(dp>0.01){ctx.save();wc_tr(ctx,wc_ell(D.cx,D.cy+12,D.wx,D.wy,90));ctx.clip();ctx.beginPath();ctx.rect(0,0,W,y0+10);ctx.clip();
     ctx.fillStyle=rgba(FW.lime,0.62*dp);ctx.fillRect(0,0,W,H);ctx.restore();

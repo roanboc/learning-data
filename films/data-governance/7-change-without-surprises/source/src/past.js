@@ -729,7 +729,7 @@ function cw_reports(ctx,x,y,n,label,a,la){if(a<=0.01)return;const w=380,t=22;ctx
     wc_T(ctx,label,x,y-ly+11,{w:600,size:30,align:"center",col:WC_DARK});});}}
 // an arm in from the right edge of a close shot, sliding something along with the tips of its fingers: the sleeve, the shirt's cuff,
 // the hand side on, its fingers together, the thumb along its side towards us. (x, y) is where the fingertips touch; k its size
-function cw_push(ctx,x,y,sleeve,skin,a,k){if(a<=0.01)return;k=k||1;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.lineCap="round";ctx.lineJoin="round";
+function cw_push(ctx,x,y,sleeve,skin,a,k){if(a<=0.01)return;k=k||1;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.lineCap="round";ctx.lineJoin="round";if(window.__ARM__)__ARM__(ctx,150,-4,620,-190,125);
   const dk=rgba(wc_dim(skin,0.34),0.85);
   ctx.strokeStyle=rgba(sleeve,1);ctx.lineWidth=74;ctx.beginPath();ctx.moveTo(620,-190);ctx.quadraticCurveTo(330,-60,150,-4);ctx.stroke();
   ctx.strokeStyle=rgba(wc_lit(sleeve,0.2),0.8);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(620,-224);ctx.quadraticCurveTo(330,-94,146,-40);ctx.stroke();

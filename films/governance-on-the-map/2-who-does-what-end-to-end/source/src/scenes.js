@@ -31,10 +31,11 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
       pose:id=>id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:id==="eeHead"?{pose:"listen",flip:false}:null,
       stand:id=>id==="eePalma"?1-clamp((tt-P.joins)/1.2,0,1):0,
       after:q=>ee_nameCard(q,1660,380,"Ricardo Palma","writer, from Lima",gv_io(tt,P.ricardo+0.1,s1b-0.1,0.4))})},
-    // the head of the table: the director lays a hand on the thick dictionary. The shots in the academy at night cut, as one moment
-    {at:s1b,cut:true,keys:[[s1b,440,590,1.85],[s1b+0.1,430,592,1.88]],d:3,push:0,draw:(x,tt)=>ee_acadNight(x,tt,{
-      pose:id=>id==="eeHead"?{pose:"listen",pose2:"ee_hand",mix:clamp((tt-P.dict+0.2)/0.7,0,1),flip:false}:id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:null,
-      on:q=>{if(tt>P.dict+0.35)ee_handOn(q,368,692,0.9,PEOPLE.eeHead.skin,EE_FROCK[0],0.1);}})},
+    // the head of the table: the director lays a hand on the thick dictionary, his own arm reaching it: up from behind the table's edge,
+    // then forward and down on to the page (ee_dirReach). The shots in the academy at night cut, as one moment
+    {at:s1b,cut:true,keys:[[s1b,440,590,1.85],[s1b+0.1,430,592,1.88]],d:3,push:0,draw:(x,tt)=>{const r=ee_dirReach(tt,P.dict);ee_acadNight(x,tt,{
+      pose:id=>id==="eeHead"?{pose:"ee_dirReach",flip:false}:id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:null,
+      on:q=>ee_armOver(q,"eeHead",EE_AC.seats[0],EE_AC.tb.bk+GV_SIT*EE_AC.s,EE_AC.s,POSE.ee_dirReach.R,{t:tt,hand:POSE.ee_dirReach.hand,above:r.over?null:EE_AC.tb.bk})});}},
     // Palma unties the bundle and passes the slips up the table, one at a time from the top of it; with the last gone, his hands come down
     // (over half a second, not in a frame). They go back down, most to a pile at his elbow; he lifts one from behind the table's edge to
     // the lamp, so it rises with his hand rather than appearing in it
@@ -45,11 +46,12 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
           if(id==="eeHead")return{pose:"listen",flip:false};return null;},
         on:q=>ee_slips(q,slipUp,slipBack,false),
         after:q=>{ee_tagAt(q,tt,P.more+0.6,c.down-0.6,760,446,"more than 300 words",{size:32});ee_tagAt(q,tt,P.budget,s4+0.3,1513,424,"to budget",Object.assign({size:32},EE_GOLDTAG));}});}},
-    // Lima: a schoolroom, the pupil at his desk, the thick dictionary open beside his notebook, the teacher standing by
+    // Lima: a schoolroom, the pupil at his desk, the thick dictionary open beside his notebook, the teacher sitting by
+    // him, his hand on it
     {at:s4,keys:[[s4,960,560,1.06]],push:0.02,draw:(x,tt)=>ee_school(x,tt,{teacher:true})},
     // close: the teacher's pen strikes a word in red, and the pupil looks up
     {cut:true,at:s4b,keys:[[s4b,800,640,1.6],[s4b+0.1,780,630,1.66]],d:4,push:0,draw:(x,tt)=>{const st=clamp((tt-P.wrongW-0.1)/0.7,0,1);
-      ee_school(x,tt,{strike:st,look:tt>P.wrongW+0.6,pen:gv_io(tt,P.wrongW-0.7,s5-0.2,0.5)});}},
+      ee_school(x,tt,{teacher:true,strike:st,look:tt>P.wrongW+0.6,pen:gv_io(tt,P.wrongW-0.7,s5-0.2,0.5)});}},
     // the millions who use the words, one after another: a shopkeeper doing his accounts, a clerk at a high desk, a market seller
     {at:s5,keys:[[s5,960,540,1.0]],push:0.02,draw:(x,tt)=>{ee_paper(x);[["shop",500,400,-0.03],["clerk",1000,520,0.025],["market",1430,390,-0.02]].forEach(([k,cx,cy,r],i)=>{const t0=s5+0.15+i*0.5;
       ee_vign(x,k,cx,cy,1.0,tt,clamp((tt-t0)/0.6,0,1),fin(tt,t0,0.35),{say:clamp((tt-t0-0.5)/0.5,0,1),sayDx:k==="market"?-60:40,rot:r});});}},
@@ -107,14 +109,23 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     fin(t,0.4,0.5)*(1-fin(t,c.breath,0.4)));
   gv_title(ctx,S,t,c.breath+0.3,"Who does what, end to end","one request, followed","Film 2 of 3 · data governance");
   wc_paperOver(ctx,S);});
-// the schoolroom in Lima: the pupil behind his desk (o.look: he looks up), the desk, the notebook (o.strike), the dictionary; the teacher
-// standing at the desk's end with a hand on the dictionary (o.teacher), or only his hand and pen, in close (o.pen, 0 to 1)
-function ee_school(x,tt,o){o=o||{};const S_=EE_SC,k=S_.pupil[1];x.drawImage(ee_placeHi("school"),0,0,W,H);
-  x.save();x.beginPath();x.rect(-W,-H,3*W,S_.dk.bk+H);x.clip();person(x,"eePupil",S_.pupil[0],S_.dk.bk+GV_SIT*k*PEOPLE.eePupil.build.h,k,{pose:o.look?"ee_lookUp":"ee_down",t:tt,expr:o.look?"worried":"calm"});x.restore();
-  x.drawImage(ee_schoolDesk(),0,0,W,H);ee_notebook(x,{strike:o.strike||0});ee_bigDict(x,1000,712,1.25);
-  if(o.teacher)person(x,"eeTeacher",1280,S_.dk.ft-6,0.96,{pose:"ee_onBook",t:tt,flip:true});
-  if((o.pen||0)>0.01){const st=clamp(o.strike||0,0,1),[nx,ny,nw,nh]=S_.note,sx=nx+nw/2+22-4+64*st,sy=ny+3*nh/6-3,k2=1-o.pen;
-    ee_penHand(x,sx+k2*300,sy-k2*160,0.9,PEOPLE.eeTeacher.skin,PEOPLE.eeTeacher.top.c);}}
+// the director's hand going to the dictionary at his place, from about t0: up from his lap to above the table's edge in its first half,
+// then forward and down on to the page; POSE.ee_dirReach is his pose now, a the arm's angles, over: whether the arm lies on the table
+function ee_dirReach(tt,t0){const A=EE_AC,X=A.seats[0],Y=A.tb.bk+GV_SIT*A.s,m=clamp((tt-t0+0.2)/1.0,0,1),up=[377,640],on=[392,688],
+    at=(p)=>ee_reachPose("eeHead",X,Y,A.s,p[0],p[1],{t:tt});
+  if(m<0.5){POSE.ee_dirReach=gv_blendNear(POSE.listen,Object.assign({},POSE.ee_hand,{R:at(up)}),easeCam(m/0.5));return{over:false};}  // drawn above the edge only
+  const u=easeCam((m-0.5)/0.5),a=at([lerp(up[0],on[0],u),lerp(up[1],on[1],u)]);POSE.ee_dirReach=Object.assign({},POSE.ee_hand,{R:a});return{over:true,a};}
+// Lima: the pupil at his desk, and the teacher sitting beside him, his hand with its red pen resting at the notebook's edge; o.pen (0 to 1) takes the
+// pen to the word in the notebook, o.strike strikes it through (both his own arm: the part on the desk drawn over it, ee_armOver)
+const EE_TCH={x:1000,s:1.16,rest:[840,730]};
+function ee_school(x,tt,o){o=o||{};const S_=EE_SC,k=S_.pupil[1],T=EE_TCH,ty=S_.dk.bk+GV_SIT*T.s*PEOPLE.eeTeacher.build.h,[nx,ny,nw,nh]=S_.note,
+    st=clamp(o.strike||0,0,1),pe=easeCam(clamp(o.pen||0,0,1)),nib=[lerp(T.rest[0],nx+nw/2+18+64*st,pe),lerp(T.rest[1],ny+3*nh/6-3,pe)],
+    a=o.teacher?ee_reachPose("eeTeacher",T.x,ty,T.s,nib[0]+14,nib[1]-24,{flip:true,t:tt}):null;
+  x.drawImage(ee_placeHi("school"),0,0,W,H);
+  x.save();x.beginPath();x.rect(-W,-H,3*W,S_.dk.bk+H);x.clip();person(x,"eePupil",S_.pupil[0],S_.dk.bk+GV_SIT*k*PEOPLE.eePupil.build.h,k,{pose:o.look?"ee_lookUp":"ee_down",t:tt,expr:o.look?"worried":"calm"});
+  if(a){POSE.ee_teach=Object.assign({},POSE.ee_down,{R:a});person(x,"eeTeacher",T.x,ty,T.s,{pose:"ee_teach",t:tt,flip:true});}x.restore();
+  x.drawImage(ee_schoolDesk(),0,0,W,H);ee_notebook(x,{strike:st});ee_bigDict(x,1000,712,1.25);
+  if(a){ee_redPen(x,nib[0],nib[1],1);ee_armOver(x,"eeTeacher",T.x,ty,T.s,a,{flip:true,t:tt});}}
 // ---- 2 · Three ways to count: Clara's report in January; each faculty counts a completion its own way; before, emails; now, a service ----
 scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{clara:w("compares","Clara"),fac:w("compares","faculty by"),nineW:w("nine","nine points"),less:w("nine","less likely"),nobody:w("email","nobody"),

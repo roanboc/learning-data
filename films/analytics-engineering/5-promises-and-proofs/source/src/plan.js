@@ -79,8 +79,9 @@ function pp_hand(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
   if(o.tool==="scraper"){let g=ctx.createLinearGradient(-10,0,10,0);g.addColorStop(0,"#5a3a20");g.addColorStop(0.45,"#a2744a");g.addColorStop(1,"#4a2e16");ctx.fillStyle=g;rr(ctx,-9,-96,18,120,8);ctx.fill();
     g=ctx.createLinearGradient(-6,0,6,0);g.addColorStop(0,"#6c6e74");g.addColorStop(0.4,"#eceae4");g.addColorStop(1,"#55575c");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(-5,22);ctx.lineTo(5,22);ctx.lineTo(4,92);ctx.lineTo(-2,104);ctx.lineTo(-5,92);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(40,40,46,0.6)";ctx.lineWidth=1;ctx.stroke();}
   // the sleeve, wool: it widens from the cuff to the elbow, shaded across its round, with soft folds; o.len ends it
-  // short (it fades into the shadow there) so a forearm never runs into the caption area
-  const sl=o.sleeve||[86,64,48],L=o.len||1200,fd=o.len?Math.min(220,L*0.4):0,wy=x_=>{const q=clamp((x_-150)/Math.max(1,L-150),0,1);return [-52-18*Math.sqrt(q),62+20*Math.sqrt(q)];};
+  // short (it fades into the shadow there) so a forearm never runs into the caption area, nor runs on longer than an arm (the
+  // hands check: wrist to gone within three and a half hand lengths, about 600 here)
+  const sl=o.sleeve||[86,64,48],L=o.len||1200,fd=o.len?Math.min(220,L*0.4):0,arm_=window.__ARM__&&__ARM__(ctx,150,0,L,0,170,o.len?L-150-fd/2:0),wy=x_=>{const q=clamp((x_-150)/Math.max(1,L-150),0,1);return [-52-18*Math.sqrt(q),62+20*Math.sqrt(q)];};
   const slv=()=>{ctx.beginPath();ctx.moveTo(150,-52);for(let i=1;i<=16;i++){const x_=150+(L-150)*i/16;ctx.lineTo(x_,wy(x_)[0]);}for(let i=16;i>=1;i--){const x_=150+(L-150)*i/16;ctx.lineTo(x_,wy(x_)[1]);}ctx.lineTo(150,62);ctx.bezierCurveTo(140,22,140,-18,150,-52);ctx.closePath();};
   let g=ctx.createLinearGradient(0,-90,0,100);g.addColorStop(0,rgba(mix(sl,[255,240,220],0.22),1));g.addColorStop(0.3,rgba(mix(sl,[255,240,220],0.06),1));g.addColorStop(0.62,rgba(sl,1));g.addColorStop(1,rgba(mix(sl,[0,0,0],0.6),1));
   const N=fd?10:1;for(let i=0;i<N;i++){const x0=fd?L-fd+fd*i/N:140,x1=fd?L-fd+fd*(i+1)/N:L+2;ctx.save();ctx.beginPath();ctx.rect(fd&&i===0?140:x0,-200,x1-(fd&&i===0?140:x0),400);ctx.clip();ctx.globalAlpha*=fd?1-i/N:1;slv();ctx.fillStyle=g;ctx.fill();
@@ -134,7 +135,7 @@ function pp_punch(ctx,x,y,s,down,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
   g=ctx.createLinearGradient(-224,0,-168,0);g.addColorStop(0,"#1e1f22");g.addColorStop(0.4,"#5c5e62");g.addColorStop(1,"#26272a");ctx.fillStyle=g;rr(ctx,-224,-36,56,74,7);ctx.fill();ctx.strokeStyle="rgba(10,10,12,0.8)";ctx.lineWidth=1.4;ctx.stroke();
   ctx.fillStyle="rgba(255,255,250,0.22)";ctx.fillRect(-218,-32,5,66);ctx.fillStyle="#b8b8b2";ctx.fillRect(-222,32,52,6);
   // the hand round the handle's end, its forearm up and out of the frame
-  pp_hand(ctx,6,0,0.62/s,t,{rot:-Math.PI/2,sleeve:o.sleeve||[92,70,52],skin:o.skin||[214,170,132],seed:3,len:o.len});
+  pp_hand(ctx,6,0,0.62/s,t,{rot:-Math.PI/2,sleeve:o.sleeve||[92,70,52],skin:o.skin||[214,170,132],seed:3,len:o.len||700});
   ctx.restore();ctx.restore();});}
 
 // Goldsmiths' Hall: a stone front with columns, windows, a cornice and steps, lit from the left

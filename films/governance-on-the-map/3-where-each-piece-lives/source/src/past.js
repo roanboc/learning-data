@@ -138,6 +138,8 @@ Object.assign(PEOPLE,{
 });
 
 // ---- things they hold, in the figure's own units ----
+// What is held in both hands has its thumbs at its edges, where the hands hold it: the hold pose's hands sit close together in the
+// middle of it, and thumbs drawn there float (10 November 2026)
 // an official's tablet, held upright at the chest
 function oh_heldTablet(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+6);
   cx.fillStyle=rgba([238,226,196],1);rr(cx,-9,-66,18,96,7);cx.fill();cx.strokeStyle="rgba(120,100,70,0.6)";cx.lineWidth=1.4;cx.stroke();cx.restore();fingers(cx,P_,[l,r]);}
@@ -146,13 +148,13 @@ function oh_heldBrush(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0],
   cx.fillStyle=rgba([40,36,36],1);cx.beginPath();cx.moveTo(-5,6);cx.lineTo(5,6);cx.lineTo(0,26);cx.closePath();cx.fill();cx.restore();fingers(cx,P_,[r]);}
 // a sheet, held up in both hands, its columns of marks
 function oh_heldSheet(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+50);cx.fillStyle=rgba(OH.paper,1);cx.fillRect(-80,-56,160,120);
-  cx.strokeStyle="rgba(120,110,90,0.5)";cx.lineWidth=1.2;cx.strokeRect(-80,-56,160,120);oh_marks(cx,-66,-44,132,96,9,0.75,271);cx.restore();fingers(cx,P_,[l,r]);}
+  cx.strokeStyle="rgba(120,110,90,0.5)";cx.lineWidth=1.2;cx.strokeRect(-80,-56,160,120);oh_marks(cx,-66,-44,132,96,9,0.75,271);cx.restore();fingers(cx,P_,[[mx-76,my+40],[mx+76,my+40]]);}
 // a stack of books, carried in both hands
-function oh_heldStack(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;oh_bookStack(cx,mx,my+30,150,6);fingers(cx,P_,[l,r]);}
+function oh_heldStack(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;oh_bookStack(cx,mx,my+30,150,6);fingers(cx,P_,[[mx-72,my+10],[mx+72,my+10]]);}
 // a book, held open in both hands
 function oh_heldBook(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-20);
   for(const s of [-1,1]){cx.fillStyle=rgba(OH.paper,1);cx.beginPath();cx.moveTo(0,-50);cx.lineTo(s*96,-56);cx.lineTo(s*96,30);cx.lineTo(0,36);cx.closePath();cx.fill();cx.strokeStyle="rgba(120,110,90,0.5)";cx.lineWidth=1.2;cx.stroke();
-    oh_marks(cx,s>0?10:-86,-44,76,68,6,0.7,281+s);}cx.restore();fingers(cx,P_,[l,r]);}
+    oh_marks(cx,s>0?10:-86,-44,76,68,6,0.7,281+s);}cx.restore();fingers(cx,P_,[[mx-92,my-14],[mx+92,my-14]]);}
 
 // ---- sitting on the floor ----
 // someone sitting on the floor, their robe spread round them: the figure cut at the hips, which sit fy above the floor's line at the

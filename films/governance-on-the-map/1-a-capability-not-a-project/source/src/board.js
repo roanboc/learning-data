@@ -146,7 +146,7 @@ function cp_mendPolder(ctx,t,u,dry,up){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.brea
 function cp_heldTurf(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-14);
   cx.fillStyle=rgba(CP.peat,1);rr(cx,-84,-6,168,34,6);cx.fill();cx.fillStyle=rgba(mix(CP.grass2,CP.grass3,0.4),1);rr(cx,-86,-20,172,22,8);cx.fill();
   cx.strokeStyle=rgba(wc_dim(CP.grass3,0.3),0.9);cx.lineWidth=2.4;cx.lineCap="round";for(let i=0;i<16;i++){const x=-80+i*10.5;cx.beginPath();cx.moveTo(x,-16);cx.lineTo(x+(hash(i,3)-0.5)*6,-30-hash(i,5)*10);cx.stroke();}
-  cx.restore();fingers(cx,P_,[l,r]);}
+  cx.restore();fingers(cx,P_,[[mx-80,my],[mx+80,my]]);}   // thumbs at its ends, where the hands hold it (10 November 2026)
 
 /* ---------- the dike from the field: each landowner's stretch, and the board's walk (the places bank and bankWalk) ---------- */
 // The breach's view (cp_paintBreach) of other stretches, kept. For the stakes (bank): the ditches across the field are where each

@@ -170,7 +170,7 @@ function rr_heldSheet(t){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/
   cx.fillStyle=rgba(RR.wood,1);rr(cx,-82,-62,164,124,6);cx.fill();cx.fillStyle=rgba(RR.papyrus,1);cx.fillRect(-72,-54,144,108);cx.strokeStyle=rgba(RR.ink,0.6);cx.lineWidth=2.4;cx.lineCap="round";
   for(let i=0;i<4;i++){cx.beginPath();cx.moveTo(60,-36+i*22);cx.lineTo(60-(i===3?50:100),-36+i*22);cx.stroke();}cx.restore();
   const px=r[0]+Math.sin((t||0)*7)*6;cx.save();cx.translate(px,r[1]-6);cx.rotate(-0.7);cx.fillStyle=rgba([196,170,110],1);cx.fillRect(-3,-70,6,74);cx.fillStyle=rgba(RR.ink,1);cx.fillRect(-3,2,6,6);cx.restore();
-  fingers(cx,P_,[l,[px,r[1]]]);};}
+  fingers(cx,P_,[[mx-84,l[1]-16],[px,r[1]]]);};}   // the left thumb at the board's edge, where it holds it (10 November 2026)
 // a folded sheet in one hand, held out
 function rr_heldFolded(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0]+6,r[1]-30);cx.rotate(-0.2);cx.fillStyle="rgba(70,50,30,0.18)";cx.fillRect(-26,-22,60,50);
   cx.fillStyle=rgba(RR.papyrus,1);cx.fillRect(-30,-26,60,50);cx.strokeStyle=rgba(wc_dim(RR.papyrus,0.3),0.7);cx.lineWidth=1.6;cx.strokeRect(-30,-26,60,50);cx.beginPath();cx.moveTo(-30,-2);cx.lineTo(30,-2);cx.stroke();

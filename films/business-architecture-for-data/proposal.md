@@ -16,6 +16,7 @@
 | 11 November 2026 | No draft label on these films: the author discussed them in detail before any was made. |
 | 11 November 2026 | Processes: ArchiMate keeps the high-level processes; BPMN describes the detail from level 3 down. Levels follow APQC in four bands (strategic, operational, support, evaluation), breadth first and depth on pain, a SIPOC for each level-2 process, as the author's own method does. |
 | 11 November 2026 | Industry reference models are taught in *What the business needs to know*: for energy, the IEC Common Information Model, IEC 61968-1's interface reference model, the Smart Grid Architecture Model and the Harmonised Electricity Market Role Model; others named once (HERM, BIAN, TM Forum, ACORD, HL7 FHIR, APQC). Seed from one, name it, and confirm each element with the business. |
+| 11 November 2026 | The author's past work, a 2023 talk on enterprise data and an architecture repository for a university's data platform, is input to the four series, not his view today; *From the author's past engagements* in this proposal says which film takes what. The films never name the organisations. |
 <!-- /decided -->
 
 ## The brief
@@ -86,6 +87,37 @@ The author's idea: run the data practice as a business, and model it like one. D
 The business view stays on top and the elements that realise it stay in their own layers, joined by realisation: drawing a product's ports, pipelines and tables as business objects would cut the line an architect follows to answer "what breaks if this table changes?". *Services with customers* (Data management) already runs a data team's services as a business; this gives the element-by-element model it stops short of, and links to it. *The map before the data* stays as it is.
 
 **The lab, *Model the data practice*:** cards for a data product, its contract, an output port, a glossary term, a domain owner, a pipeline, a table and a dashboard, each placed as an ArchiMate element in its layer, then joined. The lab says why each choice is right or wrong ("an output port is an application interface; the product aggregates the service it exposes"). It uses *The map before the data*'s lab engine (`site/assets/enterprise-architecture/learn.js`), checked against the author's own ArchiMate-based method.
+
+## From the author's past engagements
+
+The author shared two pieces of his own past work on 11 November 2026, "additional insights and not necessarily my view today, as that is changing constantly". The films use them as inputs, in the utility's world, and never name the organisations they came from.
+
+- **A talk on enterprise data (2023):** the enterprise architecture domains, DIKW, why managing data is hard, the data lifecycle, the artifacts of a data practice and the teams that run a platform.
+- **An architecture repository for a university's central data platform:** the platform modelled in six layers (business design, strategy, business, information, application, technology) as markdown in git, with viewpoints, decisions, business rules and agent roles, kept true by checks and by reading the running estate.
+
+| What they say | Where it goes |
+|---|---|
+| Ask of each capability: who the experts are, what its key data elements are, who could own them and which could be master data. Data management is itself a business capability, with governance under it | *What the business owns*; *Who creates it, who owns it* |
+| A glossary is hierarchical so each owner defines their own terms; the owner matters before the tool, and a table is enough to start. Data assets are linked to glossary terms, joining the business's model to the physical one | *What the business needs to know*; *One language, kept* |
+| A policy is carried out by processes, processes by procedures, and procedures make and keep the artifacts, as ISO 9000 does | *Rules and expectations the business owns* |
+| A source system is accountable for its own data quality; the platform reads sources and never writes to them, and builds a quality rule only when the source can't | *Rules and expectations the business owns*; *Where each fact is born* |
+| DIKW's levels, defined with an example, then "not as simple as that" | *The pyramid, taken apart* |
+| Data made at different times, by different people, with different processes and tools; extract, transform and load is a technical answer, not a business-driven one | *Between the business and the systems* |
+| Source data enters only under an agreement its owner approved, which classifies every object and names the roles that may see the sensitive fields; sensitive data with no named role isn't taken in | *How it travels*; *Security all the way through* |
+| A published data product has an owner, documentation, lineage, a contract and an approved way to get access | *Who owns which data*; the data practice map |
+| Data is taken on centrally only when it has value across domains; anything else goes to a local solution. The platform stays one model until a part of it has its own consumers, its own economics and its own approver | *An application or a platform?*; *One platform, or many* |
+| The platform as a service line: who it serves, what hurts them, what it offers and how it's paid for (a value proposition and business model canvas) | *An application or a platform?*; *A road people choose* |
+| Domain teams, a central data platform team and an infrastructure team, after *Team Topologies* | *Inside the platform*; *A road people choose* |
+| Security is a viewpoint, not a technology slice: the chain runs from the source owner's agreement through classification, grants and masking to the person who sees the data, and most of the security team's questions are answered outside the technology layer | *Security all the way through* |
+| A test for where a statement belongs: if it changes, how many repositories change with it? One, and it belongs in that repository; several, and it belongs in the architecture | *One solution, end to end* |
+| A paved path is faster: a source on an approved pattern takes weeks less than one needing a new pattern | *A road people choose* |
+| Start small: a pilot in under two months, then a project, then a programme | *Built to change* |
+| Business and data facts are agreed before anything is built; the person who asked confirms a preview, and the merge records it | *Every change, checked* |
+| An agent works in roles of its own, never a person's; each task of a written-down process states how far it may go (inform, draft, verify, run), set by the process owner; it acts under its own identity, one per access profile, and never approves | *Agents on the map* |
+| A language model sees only official, non-sensitive data products, kept in a place of their own: the boundary is architectural, not a mask | *What an agent may read* |
+| The model is read again from the estate (sources, pipelines, the cloud), by skills that repeat the reading: "the code shows intent; only the environment shows fact" | *Every change, checked* |
+
+**Where the films differ.** The repository calls a reference-data table synchronised into the lakehouse "read in place"; the films say the platform keeps a copy there (AGENTS.md, *Known faults*). Data shared by another organisation and queried where it lives is read in place, and the films say so.
 
 ## Checked claims
 

@@ -122,7 +122,7 @@ function ee_pen(ctx,x,y,a,rot){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx
 // a sheet held in both hands at the chest, its face towards us: three bars on it, too small to read
 function ee_heldReport(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);cx.rotate(-0.04);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-84,-62,176,130);
   cx.fillStyle="#fffdf6";cx.fillRect(-90,-68,180,130);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-90,-68,180,130);cx.fillStyle=rgba(WC_MUTED,0.55);cx.fillRect(-70,-50,110,7);
-  [0.84,0.83,0.75].forEach((v,i)=>{cx.fillStyle=rgba([150,170,204],1);cx.fillRect(-70,-24+i*28,130*v,14);});cx.restore();fingers(cx,P_,[l,r]);}
+  [0.84,0.83,0.75].forEach((v,i)=>{cx.fillStyle=rgba([150,170,204],1);cx.fillRect(-70,-24+i*28,130*v,14);});cx.restore();ee_grip(cx,P_,hands,87,0);}
 // Planning's wall screen: the three faculties' rates as bars, without their words (the report on her desk has them)
 function ee_planScreen(ctx){const [sx,sy,sw,sh]=GV_PL.screen;ctx.fillStyle=rgba([248,248,246],1);ctx.fillRect(sx+20,sy+20,sw-40,sh-40);
   [0.84,0.83,0.75].forEach((v,i)=>{const by=sy+90+i*96;ctx.fillStyle=rgba([226,230,236],1);ctx.fillRect(sx+80,by,sw-160,44);ctx.fillStyle=rgba([150,170,204],1);ctx.fillRect(sx+80,by,(sw-160)*v,44);});}
@@ -156,12 +156,12 @@ function ee_flyCard(ctx,x,y,s,rot,a,o){if(a<=0.01)return;ctx.save();ctx.translat
   wc_panel(ctx,-60,-42,120,84,{kind:"card",seed:753,wash:GV.gold,washA:0.5});gv_lines(ctx,-42,-16,84,3,18,1);});ctx.restore();}
 // the request held in both hands, its face to us: the gold card, three lines on it, without its glow (drawn with the person, a glow
 // would take the person's outline with it)
-function ee_heldReq(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-26);cx.rotate(-0.05);ee_flyCard(cx,0,0,0.92,0,1,{held:true});cx.restore();fingers(cx,P_,[l,r]);}
+function ee_heldReq(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-26);cx.rotate(-0.05);ee_flyCard(cx,0,0,0.92,0,1,{held:true});cx.restore();ee_grip(cx,P_,hands,52,-20);}
 // the draft and the agent's note, held to read: a sheet, a gold band at its head, lines; the note clipped on, dashed cyan
 function ee_heldDraft(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+4);cx.rotate(-0.06);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-64,-76,136,160);
   cx.fillStyle="#fffdf6";cx.fillRect(-70,-82,136,160);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-70,-82,136,160);cx.fillStyle=rgba(wc_lit(GV.gold,0.2),1);cx.fillRect(-70,-82,136,20);
   gv_lines(cx,-56,-46,104,5,18,1);cx.translate(28,18);cx.rotate(0.12);cx.fillStyle="#f6fbff";cx.fillRect(-10,-10,74,90);cx.save();cx.setLineDash([6,5]);cx.strokeStyle=rgba(EE_CYAN,0.9);cx.lineWidth=2.4;
-  cx.strokeRect(-10,-10,74,90);cx.restore();ee_star(cx,8,8,0.42,0,1);gv_lines(cx,0,30,50,3,14,1);cx.restore();fingers(cx,P_,[l,r]);}
+  cx.strokeRect(-10,-10,74,90);cx.restore();ee_star(cx,8,8,0.42,0,1);gv_lines(cx,0,30,50,3,14,1);cx.restore();ee_grip(cx,P_,hands,66,10);}
 
 // Mei's draft on a screen close (GV_SC): the term; then each row, its label at the left and its words at the right, typed in (o.line(i),
 // 0 to 1, for i the title, then the rows); the agent's reading: its cyan line running across row o.read (0 to 4; its fraction, how far
@@ -356,7 +356,7 @@ function ee_box(ctx,o){o=o||{};const B=EE_BOX,X=B.x-B.w/2,Y=B.base-B.h,[sx,sy,fw
   ctx.drawImage(wc_kept("eeBox",B.w+40,B.h+40,q=>{q.translate(20,20);wc_contact(q,-10,B.w+10,B.h+2,0.9,0.3);wc_part(q,wc_rect(0,0,B.w,B.h),[198,164,120],1);wc_part(q,wc_rect(-4,-6,B.w+8,14),[210,178,134],1);
     wc_flat(q,wc_rect(B.w/2-74,36,148,56),WC_CARD,1,"label");}),X-20,Y-20);wc_hand(ctx,"retired",B.x,Y+76,{size:30,w:700,col:WC_DARK,align:"center"});}
 // the old chart, folded, held in both hands
-function ee_heldFolded(cx,P_,hands){const [l,r]=hands;ee_folded(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-14,-0.08);fingers(cx,P_,[l,r]);}
+function ee_heldFolded(cx,P_,hands){const [l,r]=hands;ee_folded(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-14,-0.08);ee_grip(cx,P_,hands,56,-10);}
 // Mei's calendar, close, as Who decides drew it (its wd_paintCal): March 2027 now, Monday first; her owner's two hours on Tuesdays, and
 // the steward's two hours on Thursdays, painted in from the left (p(k), 0 to 1, for week k)
 const EE_MC={x:250,y:96,w:1420,band:104,head:52,dh:124,first:0,days:31};
@@ -436,7 +436,7 @@ function ee_retireCards(ctx,o){o=o||{};EE_NINE.forEach(([n,own],i)=>{const u=cla
 // the nine cards in a stack, held in both hands
 function ee_heldStack(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;for(let i=0;i<5;i++){cx.save();cx.translate(mx+i*2,my-14-i*3);cx.rotate(-0.06+i*0.02);
   cx.fillStyle=rgba(mix(GV.grey,[255,255,255],0.55),1);cx.fillRect(-46,-20,92,44);cx.strokeStyle=rgba(WC_PENCIL,0.35);cx.lineWidth=1;cx.strokeRect(-46,-20,92,44);cx.restore();}
-  fingers(cx,P_,[l,r]);}
+  ee_grip(cx,P_,hands,46,-14);}
 // the phone at the bus stop, today: the dictionary's list of what's new, its title, its entries as lines (too small to read), one lit gold
 function ee_phoneNew(ctx,cx,cy,u){if(u<=0.01)return;const k=0.85+0.15*spring(clamp(u,0,1)),w=300,h=520;ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);withA(ctx,clamp(u*2,0,1),()=>{
   ctx.fillStyle="rgba(30,30,40,0.25)";rr(ctx,-w/2+10,-h/2+12,w,h,36);ctx.fill();ctx.fillStyle=rgba([40,42,50],1);rr(ctx,-w/2,-h/2,w,h,36);ctx.fill();

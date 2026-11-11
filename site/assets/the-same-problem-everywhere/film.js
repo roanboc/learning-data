@@ -3233,7 +3233,7 @@ function sp_paintDict70(ctx){const D=SP_DC;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fi
 // a hand writing, seen from above, the nib at x, y: the pen's tail to the top right, the index finger along it, the thumb's tip beyond
 // it, the back of the hand, the curled fingers' knuckles, the wrist and the sleeve going off to the bottom right. who: whose skin and
 // sleeve; s: its size. Drawn along the pen (x) and across it (y, toward the hand), then turned.
-function sp_penHand(ctx,x,y,s,who){const P_=PEOPLE[who||"spAdmin"],skin=P_.skin,cuff=P_.top.c,ink=[34,40,70];ctx.save();ctx.translate(x,y);ctx.scale(s||1,s||1);ctx.rotate(-Math.PI/4);
+function sp_penHand(ctx,x,y,s,who){const P_=PEOPLE[who||"spAdmin"],skin=P_.skin,cuff=P_.top.c,ink=[34,40,70];ctx.save();ctx.translate(x,y);ctx.scale(s||1,s||1);ctx.rotate(-Math.PI/4);if(window.__ARM__)__ARM__(ctx,82,150,65,600,175);
   ctx.save();ctx.filter="blur(14px)";ctx.fillStyle="rgba(60,40,30,0.16)";ctx.beginPath();ctx.ellipse(40,100,70,90,0.1,0,TAU);ctx.fill();ctx.restore();
   ctx.beginPath();ctx.moveTo(48,104);ctx.lineTo(126,98);ctx.lineTo(128,170);ctx.lineTo(36,178);ctx.closePath();litFill(ctx,skin,126,98,36,178);seam(ctx,skin,0.35,1.6);
   if(P_.top.kind==="suit"&&P_.top.inner){const sh=P_.top.inner;ctx.beginPath();ctx.moveTo(32,148);ctx.quadraticCurveTo(84,134,134,132);ctx.lineTo(136,170);ctx.lineTo(30,186);ctx.closePath();
@@ -3563,7 +3563,7 @@ function sp_book(ctx,x,y,ed,o){o=o||{};const K=SP_SH,w=K.w,h=K.h,E=SP_ED[ed],k=o
 // behind it, the base of the thumb, the wrist), a ribbed cuff, the arm going down out of the frame; side -1 holds the left edge, 1 the
 // right; s scales it
 const SP_HOLD={skin:[214,170,136],sleeve:[92,108,138]};
-function sp_holdHand(ctx,x,y,side,s){const {skin,sleeve}=SP_HOLD,crease=rgba(darken(skin,0.35),0.45);ctx.save();ctx.translate(x,y);ctx.scale(side*s,s);
+function sp_holdHand(ctx,x,y,side,s){const {skin,sleeve}=SP_HOLD,crease=rgba(darken(skin,0.35),0.45);ctx.save();ctx.translate(x,y);ctx.scale(side*s,s);if(window.__ARM__)__ARM__(ctx,45,150,114,1000,260);
   ctx.beginPath();ctx.moveTo(-10,150);ctx.lineTo(98,156);ctx.lineTo(214,1000);ctx.lineTo(14,1010);ctx.closePath();litFill(ctx,sleeve,214,150,-10,1010);seam(ctx,sleeve,0.3,1.2);
   ctx.beginPath();ctx.moveTo(0,-98);ctx.bezierCurveTo(16,-114,44,-112,56,-90);ctx.bezierCurveTo(64,-76,66,-58,62,-42);ctx.bezierCurveTo(72,-6,72,38,64,78);
   ctx.bezierCurveTo(60,104,56,126,54,150);ctx.lineTo(0,150);ctx.closePath();litFill(ctx,skin,70,-110,0,150);seam(ctx,skin,0.35,1.4);
@@ -4301,8 +4301,10 @@ function sp_actWords(ctx,lit){const [x,y,w,h,rot]=SP_AC.page,ty=SP_AC.ty;ctx.sav
 function sp_actTip(ctx,lit){const [x,y,w,h,rot]=SP_AC.page,ty=SP_AC.ty,tw_=tw(ctx,SP_AC.title,44,800),px=w/2-tw_/2-18+(tw_+36)*clamp(lit,0,1),py=ty-14,cx=x+w/2,cy=y+h/2,
     dx=px-w/2,dy=py-h/2;return[cx+dx*Math.cos(rot)-dy*Math.sin(rot),cy+dx*Math.sin(rot)+dy*Math.cos(rot)];}
 // a hand holding a highlighter as one writes, its tip at (x, y), coming in from the bottom right: the pen, gold; the index finger along
-// it, the thumb under it, the back of the hand; the sleeve
-function sp_highlighter(ctx,x,y,a){if(a<=0.01)return;const sk=[214,170,136],sl=[70,84,110];ctx.save();ctx.globalAlpha*=clamp(a,0,1);ctx.translate(x,y);ctx.rotate(0.62);
+// it, the thumb under it, the back of the hand; the sleeve. Drawn at SP_HIK, as a hand nearer us than the page: at the page's size its
+// sleeve ran five and a half hand lengths to the frame's edge, an arm too long (10 November 2026)
+const SP_HIK=1.55;
+function sp_highlighter(ctx,x,y,a){if(a<=0.01)return;const sk=[214,170,136],sl=[70,84,110];ctx.save();ctx.globalAlpha*=clamp(a,0,1);ctx.translate(x,y);ctx.rotate(0.62);ctx.scale(SP_HIK,SP_HIK);if(window.__ARM__)__ARM__(ctx,214,0,1700,0,175);
   ctx.save();ctx.filter="blur(12px)";ctx.fillStyle="rgba(30,30,40,0.22)";ctx.fillRect(60,30,1640,100);ctx.restore();
   wc_part(ctx,[[0,-6],[24,-15],[24,15],[0,6]],[236,190,60],1,{kind:"thing",lw:1,seed:984});wc_part(ctx,wc_rrPts(24,-16,230,32,8),[244,206,80],1,{kind:"thing",lw:1.1,seed:985});
   ctx.beginPath();ctx.moveTo(214,-50);ctx.lineTo(1700,-84);ctx.lineTo(1700,92);ctx.lineTo(214,46);ctx.closePath();litFill(ctx,sl,214,-84,1700,92);seam(ctx,sl,0.3,1.2);
@@ -4547,7 +4549,7 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
       const L3=[["customer:",1040,470,52,P.dict+0.3,0.6],["has bought from us",1070,546,46,P.dict+1.0,1.0],["in the last 3 years",1070,614,46,P.dict+2.1,1.0]];let pen=null;
       L3.forEach(([s,lx,ly,sz,t0,d])=>{const p=clamp((tt-t0)/d,0,1);if(p<=0)return;wc_hand(x,s,lx,ly,{size:sz,col:ink,w:600,p});
         pen=[lx+tw(x,s.slice(0,Math.ceil(s.length*p)),sz,600),ly-sz*0.25];});
-      sp_penHand(x,...(pen||[1040,470]),1.25);}},
+      sp_penHand(x,...(pen||[1040,470]),1.4);}},
     // Los Angeles at dusk, 1980: an office building, its upstairs room lit, palms against the sky
     {at:c.la-0.3,place:"laOut",keys:[[c.la-0.3,960,540,1.0],[c.la+0.3,700,560,1.25]],d:2.6},
     // inside, the meeting: what they've learned goes up on the flip chart, line by line; then the card on the table, close
@@ -4574,7 +4576,7 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
     // from above: she copies a page from the binder she borrowed into her own
     {at:P.them+0.95,place:"copy80",keys:[[P.them+0.95,960,540,1.04],[P.them+1.15,1200,520,1.22]],d:2.6,draw:(x,tt)=>{let pen=null;
       SP_CP.lines.forEach(([lx,ly,w,head],i)=>{const p=clamp((tt-P.them-1.25-i*0.6)/0.52,0,1);if(p>0)pen=sp_scribble(x,lx,ly,w,p,331+i,head);});
-      sp_penHand(x,...(pen||SP_CP.lines[0].slice(0,2)),1.25);}}]);
+      sp_penHand(x,...(pen||SP_CP.lines[0].slice(0,2)),1.4);}}]);
   sp_pill(ctx,t,mk,fin(t,0.4,0.6)*(1-gv_io(t,c.questions+0.3,c.job+0.25,0.4))*(1-gv_io(t,P.dama-0.4,P.city-0.6,0.4))*(1-fin(t,c.alone-0.4,0.4)));});
 
 // ---- 3 · Someone signs: in 2002, a law makes the chief executive and the chief financial officer sign for the figures ----

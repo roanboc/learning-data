@@ -26,7 +26,7 @@ scene("register",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the buyer's hand: back along the chain, deed by deed, to the gap; later it rests on the register's page
   const h0=w("act","old deeds")-0.4,h1=w("act","hoping")+0.2,u=clamp((t-h0)/(h1-h0),0,1),st=Math.floor(u*3),fu=u*3-st,hx=u>=1?786:lerp(1590-st*268,1590-(st+1)*268,ease(clamp(fu*1.6,0,1)));
   const inA=fin(t,h0-0.5,0.6)*(1-fin(t,cC-0.4,0.6)),hxIn=lerp(2100,hx,ease(fin(t,h0-0.5,0.8)));
-  wo_hand(ctx,hxIn,486+Math.sin(u*Math.PI*3)*6,1,t,{a:inA,press:u>=1?0.6:0});
+  wo_hand(ctx,hxIn,486+Math.sin(u*Math.PI*3)*6,1,t,{a:inA,press:u>=1?0.6:0,len:900});
   const rA=fin(t,cT-0.4,0.6)*(1-fin(t,cR-0.6,0.6));wo_hand(ctx,lerp(2000,1232,ease(fin(t,cT-0.4,1.0))),262,1,t,{a:rA,rot:-0.02});
   // the register, open on one certificate of title; a transfer changes one line; it closes
   const bA=fin(t,cC+0.1,0.9)*(1-m),ch=fin(t,w("transfer","change")-0.1,1.2),cl=fin(t,eR+0.25,1.0);

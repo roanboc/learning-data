@@ -2936,11 +2936,20 @@ function ee_dictStand(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);wc
   wc_part(ctx,[[-74,0],[0,-8],[74,0],[70,12],[0,6],[-70,12]],[110,44,40],1,{seed:333});
   wc_flat(ctx,[[-68,-4],[-2,-12],[-2,4],[-64,8]],[244,236,214],1,"page");wc_flat(ctx,[[2,-12],[68,-4],[64,8],[2,4]],[246,240,220],1,"page");
   ctx.strokeStyle=rgba([90,80,70],0.5);ctx.lineWidth=1.2;for(let i=0;i<4;i++){for(const s2 of [-1,1]){ctx.beginPath();ctx.moveTo(s2*10,-8+i*3.6);ctx.lineTo(s2*58,-2+i*3.4);ctx.stroke();}}ctx.restore();}
-// a hand, laid flat on something on the table, from a dark cuff: drawn over the table, where the arm reaching it goes under its top
-function ee_handOn(ctx,x,y,s,skin,cuff,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);ctx.fillStyle=rgba(cuff,1);ctx.beginPath();ctx.moveTo(-30,-30);ctx.lineTo(-6,-36);ctx.lineTo(4,-12);ctx.lineTo(-20,-4);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba([246,244,238],1);ctx.beginPath();ctx.moveTo(-8,-34);ctx.lineTo(0,-36);ctx.lineTo(8,-14);ctx.lineTo(2,-12);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.moveTo(4,-26);ctx.bezierCurveTo(24,-30,40,-22,44,-12);ctx.bezierCurveTo(46,-6,40,-2,30,-4);ctx.lineTo(10,-4);ctx.quadraticCurveTo(2,-8,4,-26);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(darken(skin,0.35),0.6);ctx.lineWidth=1.4;ctx.stroke();for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(22+i*6,-26+i*2);ctx.lineTo(36+i*3,-10+i);ctx.stroke();}ctx.restore();}
+// A person behind a table reaches a thing on it with their own arm, never with a hand drawn on its own (a hand laid on the book with no
+// arm to it read as floating, 10 November 2026). ee_reachPose: the angles of the right arm (side 1, the figure's own units, as arm()
+// takes them) that put its hand at (X, Y) on screen, for the person drawn at (x, y), scale s, o.flip and o.t as person() takes them; the
+// elbow hangs low, as an arm does (a little in front of the body, as an arm reaching forward does), out to the side only when it must. ee_armOver: that arm alone,
+// in pencil and wash, from the shoulder: the person is cut at the table's back edge, so an arm reaching over its top is drawn after the
+// table, whole, in front of the body (o.above: only what is above that height, while the hand is still coming up behind the edge);
+// o.hand "open" lays the hand flat. The person's own arm, in the same pose, lies under it.
+function ee_reachPose(id,x,y,s,X,Y,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,f=o.flip?-1:1,br=Math.sin((o.t||0)*1.7+P_.seed)*1.4,L1=108,L2=113,
+    tx=f*(X-x)/k-(P_.build.sh-12),ty=(Y-y)/k-(-416+br),d=Math.max(1,Math.min(Math.hypot(tx,ty),L1+L2-0.5)),
+    al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),th=Math.atan2(tx,ty),a0=th-al>=-0.75?th-al:th+al;
+  return[a0,Math.atan2(tx-Math.sin(a0)*L1,ty-Math.cos(a0)*L1)];}
+function ee_armOver(ctx,id,x,y,s,a,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,br=Math.sin((o.t||0)*1.7+P_.seed)*1.4;
+  ctx.save();if(o.above!=null){ctx.beginPath();ctx.rect(-W,-H,3*W,o.above+H);ctx.clip();}
+  outlined(ctx,cx=>{if(o.flip)cx.scale(-1,1);arm(cx,P_,1,a,br,{hand:o.hand});},x,y,k,P_.edge,[-250,-650,250,10]);ctx.restore();}
 // the people at the table: each at their seat, sitting behind it (o.pose(id), o.stand(id) 0 to 1, how far they've stood up, o.x(id));
 // o.T: another table (EE_MX), with its own seats and scale
 function ee_seated(x,tt,cast,o){o=o||{};const A=o.T||EE_AC;cast.forEach(([id,seat],i)=>{const X=(o.x&&o.x(id))!=null?o.x(id):A.seats[seat],st=o.stand?clamp(o.stand(id),0,1):0,s=o.s||A.s;
@@ -2983,14 +2992,10 @@ function ee_bigDict(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.
   wc_part(ctx,[[-104,-6],[0,-14],[104,-6],[100,14],[0,8],[-100,14]],[104,42,38],1,{seed:373});
   for(let k=0;k<5;k++){const d=k*2.2;wc_flat(ctx,[[-98+d*0.2,-14+d],[-2,-24+d],[-2,6],[-94,8]],k<4?[232,222,198]:[246,240,222],1,"page");wc_flat(ctx,[[2,-24+d],[98-d*0.2,-14+d],[94,8],[2,6]],k<4?[232,222,198]:[248,242,226],1,"page");}
   ctx.strokeStyle=rgba([90,80,70],0.55);ctx.lineWidth=1.3;for(let i=0;i<6;i++)for(const s2 of [-1,1]){ctx.beginPath();ctx.moveTo(s2*12,-12+i*3.4);ctx.lineTo(s2*86,-4+i*3);ctx.stroke();}ctx.restore();}
-// a hand holding a pen, from the right, its nib at (x, y), its sleeve running out of the frame: the teacher's, over the notebook
-function ee_penHand(ctx,x,y,s,skin,cuff){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const g=ctx.createLinearGradient(170,-110,210,-40);g.addColorStop(0,rgba(wc_lit(cuff,0.18),1));g.addColorStop(1,rgba(wc_dim(cuff,0.25),1));
-  ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(120,-70);ctx.lineTo(196,-104);ctx.quadraticCurveTo(420,-250,700,-372);ctx.lineTo(728,-306);ctx.quadraticCurveTo(450,-190,226,-62);ctx.lineTo(150,-20);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(darken(cuff,0.4),0.6);ctx.lineWidth=2.4;ctx.stroke();ctx.strokeStyle=rgba(wc_lit(cuff,0.3),0.4);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(240,-112);ctx.quadraticCurveTo(420,-224,660,-336);ctx.stroke();
-  ctx.fillStyle=rgba([246,244,238],1);ctx.beginPath();ctx.moveTo(110,-62);ctx.lineTo(126,-72);ctx.lineTo(152,-22);ctx.lineTo(136,-14);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.moveTo(116,-60);ctx.bezierCurveTo(90,-62,60,-50,48,-34);ctx.bezierCurveTo(40,-24,50,-14,66,-18);ctx.lineTo(108,-24);ctx.quadraticCurveTo(132,-26,136,-40);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(darken(skin,0.35),0.6);ctx.lineWidth=1.6;ctx.stroke();ctx.strokeStyle=rgba([36,30,30],1);ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(4,-4);ctx.lineTo(96,-64);ctx.stroke();
-  ctx.fillStyle=rgba([176,40,40],1);ctx.beginPath();ctx.moveTo(-2,0);ctx.lineTo(10,-12);ctx.lineTo(14,-4);ctx.closePath();ctx.fill();ctx.restore();}
+// the teacher's red pen, its nib at (x, y), its end up toward his hand (q: his scale against the pupil's desk's): drawn before his arm,
+// so his fingers close over it
+function ee_redPen(ctx,x,y,q){ctx.save();ctx.translate(x,y);ctx.scale(q,q);ctx.rotate(0.53);ctx.fillStyle=rgba([40,34,32],1);rr(ctx,-4,-66,8,62,4);ctx.fill();
+  ctx.fillStyle=rgba([176,40,40],1);ctx.beginPath();ctx.moveTo(-3,-6);ctx.lineTo(3,-6);ctx.lineTo(0,2);ctx.closePath();ctx.fill();ctx.restore();}
 
 /* ---------- small pictures: who uses the words, and who proposes them today ---------- */
 // Each painted on a sheet 600 x 400, its person drawn into it every frame (ee_vign): a shopkeeper doing his accounts by his door; a clerk at
@@ -3285,7 +3290,11 @@ function ee_bundle(cx,x,y,s,o){o=o||{};const op=clamp(o.open||0,0,1);cx.save();c
   for(let i=0;i<(o.left==null?7:o.left);i++){const a=(i-3)*0.05*op+((i*37)%7-3)*0.006,dx=(i-3)*14*op,dy=-i*4;ee_slipAt(cx,dx,dy,120,a);}
   if(op<0.98)withA(cx,1-op,()=>{cx.strokeStyle=rgba(EE_RIBBON,1);cx.lineWidth=6;cx.beginPath();cx.moveTo(-60,-12);cx.lineTo(60,-12);cx.stroke();cx.beginPath();cx.moveTo(4,-44);cx.lineTo(4,22);cx.stroke();
     cx.beginPath();cx.ellipse(-8,-16,12,6,0.5,0,TAU);cx.ellipse(16,-16,12,6,-0.5,0,TAU);cx.stroke();});cx.restore();}
-function ee_heldBundle(o){return(cx,P_,hands)=>{const [l,r]=hands;ee_bundle(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-6,1.1,o);fingers(cx,P_,[l,r]);};}
+// thumbs on a thing held in both hands go at its edges, hw either side of the hands' middle (dy below it), where the hands hold it: the
+// hold pose crosses the forearms behind the thing, so the hands themselves sit together in its middle, and thumbs drawn there float on
+// it (10 November 2026; the series' hands.py lists any)
+function ee_grip(cx,P_,hands,hw,dy){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2+(dy||0);fingers(cx,P_,[[mx-hw,my],[mx+hw,my]]);}
+function ee_heldBundle(o){return(cx,P_,hands)=>{const [l,r]=hands;ee_bundle(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-6,1.1,o);ee_grip(cx,P_,hands,62+48*clamp(o.open||0,0,1),0);};}
 // one slip between finger and thumb, held up
 function ee_heldSlip(cx,P_,hands){const h=hands[1];ee_slipAt(cx,h[0]+8,h[1]-36,130,-0.12);fingers(cx,P_,[h]);}
 // a letter, folded, in both hands at the chest, held by its lower corners; o.seal (0 to 1) the wax seal pressed on
@@ -3298,7 +3307,7 @@ function ee_heldLetter(o){o=o||{};return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[
 function ee_heldWriting(p){return(cx,P_,hands)=>{const [l,r]=hands;cx.save();cx.translate(l[0]+70,l[1]-30);cx.rotate(-0.06);cx.fillStyle="rgba(50,36,24,0.22)";cx.fillRect(-86,-56,176,120);
   cx.fillStyle=rgba([244,238,220],1);cx.fillRect(-90,-62,176,120);cx.strokeStyle=rgba(WC_PENCIL,0.5);cx.lineWidth=2;cx.strokeRect(-90,-62,176,120);
   cx.strokeStyle=rgba([40,40,70],0.75);cx.lineWidth=3;cx.lineCap="round";const n=5,q=clamp(p,0,1)*n;for(let i=0;i<n;i++){const f=clamp(q-i,0,1);if(f<=0)break;cx.beginPath();cx.moveTo(-70,-38+i*20);cx.lineTo(-70+(i===n-1?80:136)*f,-38+i*20);cx.stroke();}
-  cx.restore();cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();fingers(cx,P_,[l,r]);};}
+  cx.restore();cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();fingers(cx,P_,[[l[0]-18,l[1]],r]);};}
 // the letter written (p, as ee_heldWriting draws it) folded into the letter ready to seal (as ee_heldLetter draws it, without its seal)
 // as m goes from 0 to 1: the sheet goes from the left hand to both, its lines giving way to the fold's, and the pen is put down; so the
 // one becomes the other over a few frames rather than in one
@@ -3309,18 +3318,18 @@ function ee_heldFolding(p,m){const W_=ee_heldWriting(p);return(cx,P_,hands)=>{if
     cx.beginPath();cx.moveTo(-70,-38+i*20);cx.lineTo(-70+(i===n-1?80:136)*f,-38+i*20);cx.stroke();}});
   withA(cx,m,()=>{cx.beginPath();cx.moveTo(-90,-56);cx.lineTo(0,6);cx.lineTo(90,-56);cx.stroke();});cx.restore();
   withA(cx,1-sstep(0,0.5,m),()=>{cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();});
-  fingers(cx,P_,[[L(l[0],mx-80),L(l[1],my+18)],[L(r[0],mx+80),L(r[1],my+18)]]);};}
+  fingers(cx,P_,[[L(l[0]-18,mx-80),L(l[1],my+18)],[L(r[0],mx+80),L(r[1],my+18)]]);};}
 // a pen in the right hand, its nib down (o.red: dipped in red ink)
 function ee_heldPen(o){o=o||{};return(cx,P_,hands)=>{const h=hands[1];cx.save();cx.translate(h[0]+2,h[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();
   cx.fillStyle=rgba(o.red?[176,40,40]:[150,140,120],1);cx.beginPath();cx.moveTo(-4,4);cx.lineTo(4,4);cx.lineTo(0,22);cx.closePath();cx.fill();cx.restore();fingers(cx,P_,[h]);};}
 // a phone in the right hand, its screen lit (the series' "phone" pose holds it to read)
 function ee_heldCard(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-40);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-60,-40,128,90);
   cx.fillStyle="#fffdf6";cx.fillRect(-64,-46,128,90);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-64,-46,128,90);cx.fillStyle=rgba(WC_MUTED,0.5);cx.fillRect(-46,-20,70,6);cx.fillRect(-46,-4,86,5);cx.fillRect(-46,10,60,5);
-  cx.restore();fingers(cx,P_,[l,r]);}
+  cx.restore();ee_grip(cx,P_,hands,60,-30);}
 // the same card held lower, on the chest, so the face above it shows
 function ee_heldCardLow(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-14);cx.rotate(-0.05);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-54,-34,116,80);
   cx.fillStyle="#fffdf6";cx.fillRect(-58,-40,116,80);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-58,-40,116,80);cx.fillStyle=rgba(WC_MUTED,0.5);cx.fillRect(-42,-18,64,6);cx.fillRect(-42,-4,78,5);cx.fillRect(-42,9,54,5);
-  cx.restore();fingers(cx,P_,[l,r]);}
+  cx.restore();ee_grip(cx,P_,hands,55,-6);}
 
 /* ===== Who does what, end to end: the dictionary's pieces =====
    What moves in the opening, drawn every frame: Palma's slips passed up the academy's table and coming back to a pile at his elbow;
@@ -3512,7 +3521,7 @@ function ee_pen(ctx,x,y,a,rot){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx
 // a sheet held in both hands at the chest, its face towards us: three bars on it, too small to read
 function ee_heldReport(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);cx.rotate(-0.04);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-84,-62,176,130);
   cx.fillStyle="#fffdf6";cx.fillRect(-90,-68,180,130);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-90,-68,180,130);cx.fillStyle=rgba(WC_MUTED,0.55);cx.fillRect(-70,-50,110,7);
-  [0.84,0.83,0.75].forEach((v,i)=>{cx.fillStyle=rgba([150,170,204],1);cx.fillRect(-70,-24+i*28,130*v,14);});cx.restore();fingers(cx,P_,[l,r]);}
+  [0.84,0.83,0.75].forEach((v,i)=>{cx.fillStyle=rgba([150,170,204],1);cx.fillRect(-70,-24+i*28,130*v,14);});cx.restore();ee_grip(cx,P_,hands,87,0);}
 // Planning's wall screen: the three faculties' rates as bars, without their words (the report on her desk has them)
 function ee_planScreen(ctx){const [sx,sy,sw,sh]=GV_PL.screen;ctx.fillStyle=rgba([248,248,246],1);ctx.fillRect(sx+20,sy+20,sw-40,sh-40);
   [0.84,0.83,0.75].forEach((v,i)=>{const by=sy+90+i*96;ctx.fillStyle=rgba([226,230,236],1);ctx.fillRect(sx+80,by,sw-160,44);ctx.fillStyle=rgba([150,170,204],1);ctx.fillRect(sx+80,by,(sw-160)*v,44);});}
@@ -3546,12 +3555,12 @@ function ee_flyCard(ctx,x,y,s,rot,a,o){if(a<=0.01)return;ctx.save();ctx.translat
   wc_panel(ctx,-60,-42,120,84,{kind:"card",seed:753,wash:GV.gold,washA:0.5});gv_lines(ctx,-42,-16,84,3,18,1);});ctx.restore();}
 // the request held in both hands, its face to us: the gold card, three lines on it, without its glow (drawn with the person, a glow
 // would take the person's outline with it)
-function ee_heldReq(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-26);cx.rotate(-0.05);ee_flyCard(cx,0,0,0.92,0,1,{held:true});cx.restore();fingers(cx,P_,[l,r]);}
+function ee_heldReq(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-26);cx.rotate(-0.05);ee_flyCard(cx,0,0,0.92,0,1,{held:true});cx.restore();ee_grip(cx,P_,hands,52,-20);}
 // the draft and the agent's note, held to read: a sheet, a gold band at its head, lines; the note clipped on, dashed cyan
 function ee_heldDraft(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+4);cx.rotate(-0.06);cx.fillStyle="rgba(40,30,20,0.2)";cx.fillRect(-64,-76,136,160);
   cx.fillStyle="#fffdf6";cx.fillRect(-70,-82,136,160);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=2;cx.strokeRect(-70,-82,136,160);cx.fillStyle=rgba(wc_lit(GV.gold,0.2),1);cx.fillRect(-70,-82,136,20);
   gv_lines(cx,-56,-46,104,5,18,1);cx.translate(28,18);cx.rotate(0.12);cx.fillStyle="#f6fbff";cx.fillRect(-10,-10,74,90);cx.save();cx.setLineDash([6,5]);cx.strokeStyle=rgba(EE_CYAN,0.9);cx.lineWidth=2.4;
-  cx.strokeRect(-10,-10,74,90);cx.restore();ee_star(cx,8,8,0.42,0,1);gv_lines(cx,0,30,50,3,14,1);cx.restore();fingers(cx,P_,[l,r]);}
+  cx.strokeRect(-10,-10,74,90);cx.restore();ee_star(cx,8,8,0.42,0,1);gv_lines(cx,0,30,50,3,14,1);cx.restore();ee_grip(cx,P_,hands,66,10);}
 
 // Mei's draft on a screen close (GV_SC): the term; then each row, its label at the left and its words at the right, typed in (o.line(i),
 // 0 to 1, for i the title, then the rows); the agent's reading: its cyan line running across row o.read (0 to 4; its fraction, how far
@@ -3746,7 +3755,7 @@ function ee_box(ctx,o){o=o||{};const B=EE_BOX,X=B.x-B.w/2,Y=B.base-B.h,[sx,sy,fw
   ctx.drawImage(wc_kept("eeBox",B.w+40,B.h+40,q=>{q.translate(20,20);wc_contact(q,-10,B.w+10,B.h+2,0.9,0.3);wc_part(q,wc_rect(0,0,B.w,B.h),[198,164,120],1);wc_part(q,wc_rect(-4,-6,B.w+8,14),[210,178,134],1);
     wc_flat(q,wc_rect(B.w/2-74,36,148,56),WC_CARD,1,"label");}),X-20,Y-20);wc_hand(ctx,"retired",B.x,Y+76,{size:30,w:700,col:WC_DARK,align:"center"});}
 // the old chart, folded, held in both hands
-function ee_heldFolded(cx,P_,hands){const [l,r]=hands;ee_folded(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-14,-0.08);fingers(cx,P_,[l,r]);}
+function ee_heldFolded(cx,P_,hands){const [l,r]=hands;ee_folded(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-14,-0.08);ee_grip(cx,P_,hands,56,-10);}
 // Mei's calendar, close, as Who decides drew it (its wd_paintCal): March 2027 now, Monday first; her owner's two hours on Tuesdays, and
 // the steward's two hours on Thursdays, painted in from the left (p(k), 0 to 1, for week k)
 const EE_MC={x:250,y:96,w:1420,band:104,head:52,dh:124,first:0,days:31};
@@ -3826,7 +3835,7 @@ function ee_retireCards(ctx,o){o=o||{};EE_NINE.forEach(([n,own],i)=>{const u=cla
 // the nine cards in a stack, held in both hands
 function ee_heldStack(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;for(let i=0;i<5;i++){cx.save();cx.translate(mx+i*2,my-14-i*3);cx.rotate(-0.06+i*0.02);
   cx.fillStyle=rgba(mix(GV.grey,[255,255,255],0.55),1);cx.fillRect(-46,-20,92,44);cx.strokeStyle=rgba(WC_PENCIL,0.35);cx.lineWidth=1;cx.strokeRect(-46,-20,92,44);cx.restore();}
-  fingers(cx,P_,[l,r]);}
+  ee_grip(cx,P_,hands,46,-14);}
 // the phone at the bus stop, today: the dictionary's list of what's new, its title, its entries as lines (too small to read), one lit gold
 function ee_phoneNew(ctx,cx,cy,u){if(u<=0.01)return;const k=0.85+0.15*spring(clamp(u,0,1)),w=300,h=520;ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);withA(ctx,clamp(u*2,0,1),()=>{
   ctx.fillStyle="rgba(30,30,40,0.25)";rr(ctx,-w/2+10,-h/2+12,w,h,36);ctx.fill();ctx.fillStyle=rgba([40,42,50],1);rr(ctx,-w/2,-h/2,w,h,36);ctx.fill();
@@ -4040,10 +4049,11 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
       pose:id=>id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:id==="eeHead"?{pose:"listen",flip:false}:null,
       stand:id=>id==="eePalma"?1-clamp((tt-P.joins)/1.2,0,1):0,
       after:q=>ee_nameCard(q,1660,380,"Ricardo Palma","writer, from Lima",gv_io(tt,P.ricardo+0.1,s1b-0.1,0.4))})},
-    // the head of the table: the director lays a hand on the thick dictionary. The shots in the academy at night cut, as one moment
-    {at:s1b,cut:true,keys:[[s1b,440,590,1.85],[s1b+0.1,430,592,1.88]],d:3,push:0,draw:(x,tt)=>ee_acadNight(x,tt,{
-      pose:id=>id==="eeHead"?{pose:"listen",pose2:"ee_hand",mix:clamp((tt-P.dict+0.2)/0.7,0,1),flip:false}:id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:null,
-      on:q=>{if(tt>P.dict+0.35)ee_handOn(q,368,692,0.9,PEOPLE.eeHead.skin,EE_FROCK[0],0.1);}})},
+    // the head of the table: the director lays a hand on the thick dictionary, his own arm reaching it: up from behind the table's edge,
+    // then forward and down on to the page (ee_dirReach). The shots in the academy at night cut, as one moment
+    {at:s1b,cut:true,keys:[[s1b,440,590,1.85],[s1b+0.1,430,592,1.88]],d:3,push:0,draw:(x,tt)=>{const r=ee_dirReach(tt,P.dict);ee_acadNight(x,tt,{
+      pose:id=>id==="eeHead"?{pose:"ee_dirReach",flip:false}:id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:null,
+      on:q=>ee_armOver(q,"eeHead",EE_AC.seats[0],EE_AC.tb.bk+GV_SIT*EE_AC.s,EE_AC.s,POSE.ee_dirReach.R,{t:tt,hand:POSE.ee_dirReach.hand,above:r.over?null:EE_AC.tb.bk})});}},
     // Palma unties the bundle and passes the slips up the table, one at a time from the top of it; with the last gone, his hands come down
     // (over half a second, not in a frame). They go back down, most to a pile at his elbow; he lifts one from behind the table's edge to
     // the lamp, so it rises with his hand rather than appearing in it
@@ -4054,11 +4064,12 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
           if(id==="eeHead")return{pose:"listen",flip:false};return null;},
         on:q=>ee_slips(q,slipUp,slipBack,false),
         after:q=>{ee_tagAt(q,tt,P.more+0.6,c.down-0.6,760,446,"more than 300 words",{size:32});ee_tagAt(q,tt,P.budget,s4+0.3,1513,424,"to budget",Object.assign({size:32},EE_GOLDTAG));}});}},
-    // Lima: a schoolroom, the pupil at his desk, the thick dictionary open beside his notebook, the teacher standing by
+    // Lima: a schoolroom, the pupil at his desk, the thick dictionary open beside his notebook, the teacher sitting by
+    // him, his hand on it
     {at:s4,keys:[[s4,960,560,1.06]],push:0.02,draw:(x,tt)=>ee_school(x,tt,{teacher:true})},
     // close: the teacher's pen strikes a word in red, and the pupil looks up
     {cut:true,at:s4b,keys:[[s4b,800,640,1.6],[s4b+0.1,780,630,1.66]],d:4,push:0,draw:(x,tt)=>{const st=clamp((tt-P.wrongW-0.1)/0.7,0,1);
-      ee_school(x,tt,{strike:st,look:tt>P.wrongW+0.6,pen:gv_io(tt,P.wrongW-0.7,s5-0.2,0.5)});}},
+      ee_school(x,tt,{teacher:true,strike:st,look:tt>P.wrongW+0.6,pen:gv_io(tt,P.wrongW-0.7,s5-0.2,0.5)});}},
     // the millions who use the words, one after another: a shopkeeper doing his accounts, a clerk at a high desk, a market seller
     {at:s5,keys:[[s5,960,540,1.0]],push:0.02,draw:(x,tt)=>{ee_paper(x);[["shop",500,400,-0.03],["clerk",1000,520,0.025],["market",1430,390,-0.02]].forEach(([k,cx,cy,r],i)=>{const t0=s5+0.15+i*0.5;
       ee_vign(x,k,cx,cy,1.0,tt,clamp((tt-t0)/0.6,0,1),fin(tt,t0,0.35),{say:clamp((tt-t0-0.5)/0.5,0,1),sayDx:k==="market"?-60:40,rot:r});});}},
@@ -4116,14 +4127,23 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     fin(t,0.4,0.5)*(1-fin(t,c.breath,0.4)));
   gv_title(ctx,S,t,c.breath+0.3,"Who does what, end to end","one request, followed","Film 2 of 3 · data governance");
   wc_paperOver(ctx,S);});
-// the schoolroom in Lima: the pupil behind his desk (o.look: he looks up), the desk, the notebook (o.strike), the dictionary; the teacher
-// standing at the desk's end with a hand on the dictionary (o.teacher), or only his hand and pen, in close (o.pen, 0 to 1)
-function ee_school(x,tt,o){o=o||{};const S_=EE_SC,k=S_.pupil[1];x.drawImage(ee_placeHi("school"),0,0,W,H);
-  x.save();x.beginPath();x.rect(-W,-H,3*W,S_.dk.bk+H);x.clip();person(x,"eePupil",S_.pupil[0],S_.dk.bk+GV_SIT*k*PEOPLE.eePupil.build.h,k,{pose:o.look?"ee_lookUp":"ee_down",t:tt,expr:o.look?"worried":"calm"});x.restore();
-  x.drawImage(ee_schoolDesk(),0,0,W,H);ee_notebook(x,{strike:o.strike||0});ee_bigDict(x,1000,712,1.25);
-  if(o.teacher)person(x,"eeTeacher",1280,S_.dk.ft-6,0.96,{pose:"ee_onBook",t:tt,flip:true});
-  if((o.pen||0)>0.01){const st=clamp(o.strike||0,0,1),[nx,ny,nw,nh]=S_.note,sx=nx+nw/2+22-4+64*st,sy=ny+3*nh/6-3,k2=1-o.pen;
-    ee_penHand(x,sx+k2*300,sy-k2*160,0.9,PEOPLE.eeTeacher.skin,PEOPLE.eeTeacher.top.c);}}
+// the director's hand going to the dictionary at his place, from about t0: up from his lap to above the table's edge in its first half,
+// then forward and down on to the page; POSE.ee_dirReach is his pose now, a the arm's angles, over: whether the arm lies on the table
+function ee_dirReach(tt,t0){const A=EE_AC,X=A.seats[0],Y=A.tb.bk+GV_SIT*A.s,m=clamp((tt-t0+0.2)/1.0,0,1),up=[377,640],on=[392,688],
+    at=(p)=>ee_reachPose("eeHead",X,Y,A.s,p[0],p[1],{t:tt});
+  if(m<0.5){POSE.ee_dirReach=gv_blendNear(POSE.listen,Object.assign({},POSE.ee_hand,{R:at(up)}),easeCam(m/0.5));return{over:false};}  // drawn above the edge only
+  const u=easeCam((m-0.5)/0.5),a=at([lerp(up[0],on[0],u),lerp(up[1],on[1],u)]);POSE.ee_dirReach=Object.assign({},POSE.ee_hand,{R:a});return{over:true,a};}
+// Lima: the pupil at his desk, and the teacher sitting beside him, his hand with its red pen resting at the notebook's edge; o.pen (0 to 1) takes the
+// pen to the word in the notebook, o.strike strikes it through (both his own arm: the part on the desk drawn over it, ee_armOver)
+const EE_TCH={x:1000,s:1.16,rest:[840,730]};
+function ee_school(x,tt,o){o=o||{};const S_=EE_SC,k=S_.pupil[1],T=EE_TCH,ty=S_.dk.bk+GV_SIT*T.s*PEOPLE.eeTeacher.build.h,[nx,ny,nw,nh]=S_.note,
+    st=clamp(o.strike||0,0,1),pe=easeCam(clamp(o.pen||0,0,1)),nib=[lerp(T.rest[0],nx+nw/2+18+64*st,pe),lerp(T.rest[1],ny+3*nh/6-3,pe)],
+    a=o.teacher?ee_reachPose("eeTeacher",T.x,ty,T.s,nib[0]+14,nib[1]-24,{flip:true,t:tt}):null;
+  x.drawImage(ee_placeHi("school"),0,0,W,H);
+  x.save();x.beginPath();x.rect(-W,-H,3*W,S_.dk.bk+H);x.clip();person(x,"eePupil",S_.pupil[0],S_.dk.bk+GV_SIT*k*PEOPLE.eePupil.build.h,k,{pose:o.look?"ee_lookUp":"ee_down",t:tt,expr:o.look?"worried":"calm"});
+  if(a){POSE.ee_teach=Object.assign({},POSE.ee_down,{R:a});person(x,"eeTeacher",T.x,ty,T.s,{pose:"ee_teach",t:tt,flip:true});}x.restore();
+  x.drawImage(ee_schoolDesk(),0,0,W,H);ee_notebook(x,{strike:st});ee_bigDict(x,1000,712,1.25);
+  if(a){ee_redPen(x,nib[0],nib[1],1);ee_armOver(x,"eeTeacher",T.x,ty,T.s,a,{flip:true,t:tt});}}
 // ---- 2 · Three ways to count: Clara's report in January; each faculty counts a completion its own way; before, emails; now, a service ----
 scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{clara:w("compares","Clara"),fac:w("compares","faculty by"),nineW:w("nine","nine points"),less:w("nine","less likely"),nobody:w("email","nobody"),

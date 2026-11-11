@@ -35,8 +35,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y si alguna vez se filtraban nombres, la bitácora señalaría a Anil.",
 "He did nothing wrong: a personal key can't hand over less than everything he has.":
 "Él no hizo nada mal: una clave personal no puede dar menos que todo lo que él tiene.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The agent couldn't keep borrowing Anil's keys.":
+"El agente no podía seguir usando las llaves prestadas de Anil.",
 "So Sam gives the agent a name of its own, under the same rules as people.":
 "Así que Sam le da al agente un nombre propio, bajo las mismas reglas que las personas.",
 "Unity Catalog, where the platform keeps its rules,":

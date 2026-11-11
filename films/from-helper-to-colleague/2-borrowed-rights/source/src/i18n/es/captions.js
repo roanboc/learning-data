@@ -36,8 +36,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Desde 1784, también la ciudad y la fecha, el día en letras, y la carta enviada ese mismo día.",
 "Still, the gap stays open: in the 1830s, about seven million letters a year travel free.":
 "Aun así, el hueco sigue abierto: en la década de 1830, unos siete millones de cartas al año viajan gratis.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Tightening the rules hadn't worked. The free post itself had to go.":
+"Endurecer las reglas no había funcionado. El correo gratuito tenía que desaparecer.",
 "A schoolmaster, Rowland Hill, argues for a cheap post that the sender pays.":
 "Un maestro de escuela, Rowland Hill, propone un correo barato que pague quien envía.",
 "Parliament agrees.":

@@ -30,8 +30,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si eso hubiera llegado a producción, sus cifras habrían cambiado de un día para otro, y nadie habría sabido por qué.",
 "And what it might do alone was written nowhere: no one place to sign it, read it or stop it.":
 "Y lo que podía hacer solo no estaba escrito en ninguna parte: ningún lugar donde firmarlo, leerlo o detenerlo.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"An agent working alone needed its limits written down, in one place anyone could read.":
+"Un agente que trabaja solo necesitaba sus límites por escrito, en un lugar que cualquiera pudiera leer.",
 "So Anil wrote its mandate: one page, saying the one task it may do alone.":
 "Así que Anil escribió su mandato: una página, que dice la única tarea que puede hacer solo.",
 "Its task, and where. Its folders, and its checks.":

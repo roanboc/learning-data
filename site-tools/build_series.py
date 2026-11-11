@@ -14,8 +14,8 @@ governance-in-practice/); and the series of the module on AI agents in data work
 agents-at-work-on-data/) and From helper to colleague (films/from-helper-to-colleague/, at from-helper-to-colleague/); and the
 four series of the module Modern data basics: Data that moves (films/data-that-moves/, at data-that-moves/, which holds the
 module's plan), Data as software (films/data-as-software/, at data-as-software/), From tables to decisions
-(films/from-tables-to-decisions/, at from-tables-to-decisions/) and Documents as data (films/documents-as-data/, at
-documents-as-data/, a series of one film); and the three series of the module Data protection and privacy: Locks before the
+(films/from-tables-to-decisions/, at from-tables-to-decisions/) and Documents and closing remarks (films/documents-as-data/, at
+documents-as-data/, two films); and the three series of the module Data protection and privacy: Locks before the
 data (films/locks-before-the-data/, at locks-before-the-data/, which holds the module's plan), Only what you may see
 (films/only-what-you-may-see/, at only-what-you-may-see/) and Kept for a reason (films/kept-for-a-reason/, at
 kept-for-a-reason/); and the two series of the module Data quality: Fit for use (films/fit-for-use/, at fit-for-use/, which
@@ -90,7 +90,7 @@ def series_link(lg, RE, sid):
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
-# each the next of the one before; the last, Documents as data, is a series of one film. Locks before the data opens the module
+# each the next of the one before; the last, Documents and closing remarks, has two films. Locks before the data opens the module
 # Data protection and privacy, whose three series are each the next of the one before. Fit for use opens the module Data quality,
 # and Quality as a habit follows it; the topic Data quality holds them after When things go wrong. The new skills opens the module
 # Leading data people, whose four series are each the next of the one before; its topic sits just before Data management's. A plan
@@ -159,7 +159,7 @@ SERIES = [
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds", next="documents-as-data"),
     dict(id="documents-as-data", dir="documents-as-data", slug="documents-as-data",
-         name={"en": "Documents as data", "es": "Documentos como datos"},
+         name={"en": "Documents and closing remarks", "es": "Documentos y comentarios finales"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
     dict(id="locks-before-the-data", dir="locks-before-the-data", slug="locks-before-the-data",

@@ -1,8 +1,8 @@
 # A mandate, written and enforced: questions and assumptions
 
-*AI agents in data work* · *From helper to colleague*, film 7 · open, PR #204 · [pull request](https://github.com/roanboc/learning-data/pull/204)
+*AI agents in data work* · *From helper to colleague*, film 7 of 7 · merged, PR #296 · [pull request](https://github.com/roanboc/learning-data/pull/296)
 
-On the site once PR #204 merges: https://data.learn-all.org/from-helper-to-colleague/a-written-mandate/
+[Watch it on the site](https://data.learn-all.org/from-helper-to-colleague/a-written-mandate/)
 
 One row for each question this film would have asked Rodrigo while he was away, and the assumption taken instead: where it shows in the film or the example project, and how easy it is to change.
 

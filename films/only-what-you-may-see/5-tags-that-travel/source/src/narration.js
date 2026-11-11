@@ -9,7 +9,7 @@ const NARR={
  {"id":"same","gap":0.8,"text":"Wood from a forest cut bare looks just like wood from one cared for."},
  {"id":"harm","gap":0.8,"text":"So the cutting goes on: species disappear, and the communities who live from those forests are hit hard."},
  {"id":"rio","gap":0.8,"text":"In 1992, at the Earth Summit in Rio, governments fail to agree to stop it.","say":"In nineteen ninety-two, at the Earth Summit in Rio, governments fail to agree to stop it."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Buyers need a way to tell the two woods apart."},
  {"id":"toronto","gap":0.8,"text":"In 1993, 130 people from 26 countries meet in Toronto: forest and human-rights groups, timber traders, foresters.","say":"In nineteen ninety-three, a hundred and thirty people from twenty-six countries meet in Toronto: forest and human-rights groups, timber traders, foresters."},
  {"id":"council","gap":0.8,"text":"They found the Forest Stewardship Council."},
  {"id":"auditor","gap":0.8,"text":"An independent auditor certifies a forest against its rules."},

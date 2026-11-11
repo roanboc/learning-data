@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Quien lo busca, un cliente o un vecino, lee sobre sus deudas como si fueran noticia.",
 "He asks the newspaper to remove it. It says no: it printed the notice lawfully, as it was ordered to.":
 "Pide al periódico que lo quite. Dice que no: publicó el aviso legalmente, como se le ordenó.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"He wants the old notice to stop following him, and nobody will let it.":
+"Quiere que el viejo aviso deje de perseguirlo, y nadie lo permite.",
 "In 2010, he complains to Spain's data protection agency, the public body that upholds its privacy law.":
 "En 2010, reclama ante la agencia de protección de datos de España, el organismo público que vela por su ley de privacidad.",
 "The agency lets the newspaper keep its page, but tells the search engine to remove the links.":

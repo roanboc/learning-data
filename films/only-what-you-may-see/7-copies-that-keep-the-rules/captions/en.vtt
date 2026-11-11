@@ -18,191 +18,191 @@ In 1960, with the heat and the lights, green algae spread over the walls, and wh
 00:00:35.993 --> 00:00:42.063
 The visits that let people see the paintings are destroying them, and once they're gone, they're gone for everyone.
 
-00:00:43.563 --> 00:00:45.003
-Something has to change.
+00:00:43.563 --> 00:00:47.414
+The paintings have to be saved, even from the people who love them.
 
-00:00:46.903 --> 00:00:52.754
+00:00:49.314 --> 00:00:55.165
 In 1963, the minister for culture, André Malraux, closes the cave to the public.
 
-00:00:54.654 --> 00:01:00.938
+00:00:57.065 --> 00:01:03.349
 On the same hill, its two best-known galleries are rebuilt in concrete, down to every bump in the rock.
 
-00:01:02.238 --> 00:01:08.291
+00:01:04.649 --> 00:01:10.702
 And painters copy each painting onto them, with natural pigments, the way the first artists worked.
 
-00:01:09.991 --> 00:01:15.390
+00:01:12.402 --> 00:01:17.801
 Lascaux II opens in 1983: true to the cave, and none of it is the cave.
 
-00:01:17.490 --> 00:01:20.841
+00:01:19.901 --> 00:01:23.252
 About ten million people have seen the paintings there since.
 
-00:01:22.141 --> 00:01:27.380
+00:01:24.552 --> 00:01:29.791
 And the cave rests: only a few scientists go in, for about 200 hours a year.
 
-00:01:29.480 --> 00:01:32.745
+00:01:31.891 --> 00:01:35.156
 A university's records of its learners are like that cave.
 
-00:01:33.845 --> 00:01:40.327
+00:01:36.256 --> 00:01:42.738
 Every copy made of them, to build with, to share or to take home, is one more place they can come to harm.
 
-00:01:41.627 --> 00:01:47.518
+00:01:44.038 --> 00:01:49.929
 So, as at Lascaux, each copy keeps the protection, or isn't made, and the work still gets done.
 
-00:01:54.418 --> 00:01:58.306
+00:01:56.829 --> 00:02:00.717
 At the university, the learners' records are protected where they're kept.
 
-00:01:59.806 --> 00:02:05.893
+00:02:02.217 --> 00:02:08.304
 Know what you hold gave each column a class, and Tags that travel made each class a tag on the platform.
 
-00:02:07.593 --> 00:02:13.105
+00:02:10.004 --> 00:02:15.516
 One policy for many tables hides each class, by its tag, wherever the records are read.
 
-00:02:15.005 --> 00:02:22.491
+00:02:17.416 --> 00:02:24.902
 So a copy made inside, read through those rules, keeps them: the study's own copy holds only what Anil may see.
 
-00:02:24.591 --> 00:02:29.061
+00:02:27.002 --> 00:02:31.472
 But the rules live in the catalog, where the records are read, not in the records.
 
-00:02:30.761 --> 00:02:34.856
+00:02:33.172 --> 00:02:37.267
 A copy that leaves the catalog takes the records, and none of the rules.
 
-00:02:36.956 --> 00:02:41.085
+00:02:39.367 --> 00:02:43.496
 That's why An agreement first said where the study may work, and what may leave it.
 
-00:02:42.985 --> 00:02:45.157
+00:02:45.396 --> 00:02:47.568
 This autumn, four copies are asked for.
 
-00:02:48.257 --> 00:02:50.186
+00:02:50.668 --> 00:02:52.597
 Monday, 19 October.
 
-00:02:51.286 --> 00:02:57.595
+00:02:53.697 --> 00:03:00.006
 Jun Park, who builds the registrar's models, is changing how the faculty's published totals are counted.
 
-00:02:58.895 --> 00:03:03.978
+00:03:01.306 --> 00:03:06.389
 He'd like to try it on the real records: a copy of the learner table, in development.
 
-00:03:05.478 --> 00:03:10.769
+00:03:07.889 --> 00:03:13.180
 Azure Databricks refuses to clone a table its policies cover, for anyone they cover.
 
-00:03:12.269 --> 00:03:19.042
+00:03:14.680 --> 00:03:21.453
 Cloned by someone they leave out, it would hold every real name, and no column's class, so no policy would match it.
 
-00:03:20.942 --> 00:03:28.472
+00:03:23.353 --> 00:03:30.883
 A masked copy is possible, but it's still about real people, and a column nobody has classed yet goes through as it is.
 
-00:03:30.172 --> 00:03:34.307
+00:03:32.583 --> 00:03:36.718
 So development and test get made-up learners, and none of them is anyone.
 
-00:03:35.807 --> 00:03:42.760
+00:03:38.218 --> 00:03:45.171
 For size, a script writes 2,614 of them, with production's columns and their classes.
 
-00:03:44.060 --> 00:03:53.297
+00:03:46.471 --> 00:03:55.708
 dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.
 
-00:03:54.997 --> 00:04:01.043
+00:03:57.408 --> 00:04:03.454
 dbt's clone and sample bring production's rows in, so they're never used on tables about people.
 
-00:04:02.543 --> 00:04:06.100
+00:04:04.954 --> 00:04:08.511
 Like Lascaux II, they're true to the learners, and not one is real.
 
-00:04:07.800 --> 00:04:13.984
+00:04:10.211 --> 00:04:16.395
 Jun's change runs on 2,614 of them, and no record leaves production.
 
-00:04:16.484 --> 00:04:18.326
+00:04:18.895 --> 00:04:20.737
 Monday, 2 November.
 
-00:04:19.426 --> 00:04:27.032
+00:04:21.837 --> 00:04:29.443
 The teaching hospital where the faculty's learners train asks how many leave after first year, by course, to plan its places.
 
-00:04:28.332 --> 00:04:37.640
+00:04:30.743 --> 00:04:40.051
 A new purpose needs a new agreement, as An agreement first says: 2026-21, signed by Mei and the hospital's head of education.
 
-00:04:39.340 --> 00:04:45.462
+00:04:41.751 --> 00:04:47.873
 The hospital is on Databricks too, so OpenSharing can share a table with it, as in The marketplace.
 
-00:04:46.762 --> 00:04:49.823
+00:04:49.173 --> 00:04:52.234
 But the university's policies don't travel with a share.
 
-00:04:51.123 --> 00:04:58.147
+00:04:53.534 --> 00:05:00.558
 Whoever shares a table must be left out of its policies, and the hospital reads it on its own platform, where they never run.
 
-00:04:59.647 --> 00:05:03.015
+00:05:02.058 --> 00:05:05.426
 Share the learner table, and the hospital would see every name.
 
-00:05:04.915 --> 00:05:11.573
+00:05:07.326 --> 00:05:13.984
 So the share holds one table that already shows no more than may leave: Show the least's totals, small counts hidden.
 
-00:05:13.273 --> 00:05:21.612
+00:05:15.684 --> 00:05:24.023
 A share has no end date, so a job made from the agreement removes the hospital's access on 30 June 2027.
 
-00:05:24.112 --> 00:05:30.295
+00:05:26.523 --> 00:05:32.706
 Then the hospital asks a harder question: do learners who spend more weeks on its wards do better that year?
 
-00:05:31.995 --> 00:05:39.784
+00:05:34.406 --> 00:05:42.195
 The answer needs both sides' rows, the hospital's weeks and the university's results, and neither may hand its rows to the other.
 
-00:05:41.484 --> 00:05:48.273
+00:05:43.895 --> 00:05:50.684
 So they meet in a clean room, on Azure Databricks, where neither can see the other's rows, only their columns' names.
 
-00:05:49.973 --> 00:05:57.011
+00:05:52.384 --> 00:05:59.422
 The university adds one view, from a shelf no one reads: each Health learner's student number, course and result.
 
-00:05:58.711 --> 00:06:05.049
+00:06:01.122 --> 00:06:07.460
 The hospital writes the code that matches the two, and counts, by weeks on the wards, how many learners passed.
 
-00:06:06.549 --> 00:06:15.527
+00:06:08.960 --> 00:06:17.938
 Nothing runs until the university approves it: Mei said yes in the agreement, and Jun reviews the code and approves it on 1 December.
 
-00:06:17.227 --> 00:06:25.021
+00:06:19.638 --> 00:06:27.432
 The clean room hides nothing by itself: what comes out is what the approved code writes, so the code hides any count under 10.
 
-00:06:26.921 --> 00:06:32.800
+00:06:29.332 --> 00:06:35.211
 On 3 December, the hospital runs it, and gets one table of totals, kept for 30 days.
 
-00:06:34.500 --> 00:06:39.665
+00:06:36.911 --> 00:06:42.076
 Twelve weeks or more, 91 in 100 passed; four to seven weeks, 84.
 
-00:06:41.365 --> 00:06:46.510
+00:06:43.776 --> 00:06:48.921
 Like the scientists at Lascaux: what goes in is approved, and the walls never leave.
 
-00:06:49.010 --> 00:06:50.771
+00:06:51.421 --> 00:06:53.182
 Tuesday, 10 November.
 
-00:06:51.871 --> 00:06:59.141
+00:06:54.282 --> 00:07:01.552
 Elena Lindgren, Anil's new research assistant, would like to download the study's table, to clean it in a spreadsheet.
 
-00:07:00.441 --> 00:07:05.602
+00:07:02.852 --> 00:07:08.013
 But a file on a laptop keeps no rules at all, and the agreement says nothing is downloaded.
 
-00:07:07.302 --> 00:07:12.228
+00:07:09.713 --> 00:07:14.639
 So in the studies' workspace, from Grants by design, every way out is switched off.
 
-00:07:13.328 --> 00:07:19.221
+00:07:15.739 --> 00:07:21.632
 Downloading results, exporting notebooks, copying a table, downloading a file: each one is off.
 
-00:07:20.721 --> 00:07:26.819
+00:07:23.132 --> 00:07:29.230
 The switches are kept as code: turning one back on takes a reviewed change, and the audit log shows it.
 
-00:07:28.319 --> 00:07:36.055
+00:07:30.730 --> 00:07:38.466
 And what runs there can reach only the catalog's storage and a short list, as Network, storage and keys set up for production.
 
-00:07:37.355 --> 00:07:42.262
+00:07:39.766 --> 00:07:44.673
 No switch stops a photo of a screen; her confidentiality agreement covers that.
 
-00:07:43.962 --> 00:07:48.192
+00:07:46.373 --> 00:07:50.603
 So Elena cleans the data where it is, in a notebook in the study's space.
 
-00:07:49.692 --> 00:07:52.868
+00:07:52.103 --> 00:07:55.279
 As at Lascaux, nobody takes a piece of the wall home.
 
-00:07:55.368 --> 00:07:59.450
+00:07:57.779 --> 00:08:01.861
 Lascaux's paintings have been seen by millions, and the cave still rests.
 
-00:08:01.150 --> 00:08:03.372
+00:08:03.561 --> 00:08:05.783
 This autumn, four copies were asked for.
 
-00:08:04.672 --> 00:08:12.102
+00:08:07.083 --> 00:08:14.513
 Jun got made-up learners, the hospital its totals and one answer from a clean room, and Elena's download was never made.
 
-00:08:14.002 --> 00:08:16.790
+00:08:16.413 --> 00:08:19.201
 Every copy keeps the protection, or isn't made.

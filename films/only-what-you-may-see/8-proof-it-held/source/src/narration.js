@@ -10,7 +10,7 @@ const NARR={
  {"id":"sun","gap":0.8,"text":"A vial left too long in the sun looks just like a good one."},
  {"id":"threw","gap":0.8,"text":"So health workers threw away vials they couldn't vouch for."},
  {"id":"child","gap":0.8,"text":"Or a child was given vaccine that no longer worked, and the family thought the child was safe."},
- {"id":"change","gap":0.8,"text":"Something had to change: they needed to see whether the cold had held."},
+ {"id":"change","gap":0.8,"text":"Health workers needed to see, on the vial itself, whether the cold had held."},
  {"id":"asked","gap":0.8,"text":"In 1979, the World Health Organization asked for a way to show it.","say":"In nineteen seventy-nine, the World Health Organization asked for a way to show it."},
  {"id":"path","gap":0.8,"text":"PATH, a health non-profit, worked for years with a company on one: the vaccine vial monitor."},
  {"id":"square","gap":0.8,"text":"It's a square inside a circle, printed on each vial's label."},

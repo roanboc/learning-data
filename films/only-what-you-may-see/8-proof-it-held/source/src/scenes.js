@@ -23,7 +23,7 @@ scene("square",(ctx,S,t,sc)=>{const c=sc.cues,T=ph_once(sc,"T",()=>({
     two:wAt(sc,"drops","two drops"),vial:wAt(sc,"drops","vial"),cold:wAt(sc,"cold","cold"),factory:wAt(sc,"cold","factory"),child0:wAt(sc,"cold","child"),
     heat:wAt(sc,"heat","heat"),noSign:wAt(sc,"heat","no sign"),sun:wAt(sc,"sun","sun"),good:wAt(sc,"sun","good one"),
     threw:wAt(sc,"threw","threw away"),vouch:wAt(sc,"threw","vouch"),given:wAt(sc,"child","given"),safe:wAt(sc,"child","safe"),
-    see:wAt(sc,"change","see whether"),y1979:wAt(sc,"asked","World Health"),show:wAt(sc,"asked","show it"),path:wAt(sc,"path","PATH"),company:wAt(sc,"path","company"),monitor:wAt(sc,"path","vaccine vial monitor"),
+    see:wAt(sc,"change","whether the cold"),y1979:wAt(sc,"asked","World Health"),show:wAt(sc,"asked","show it"),path:wAt(sc,"path","PATH"),company:wAt(sc,"path","company"),monitor:wAt(sc,"path","vaccine vial monitor"),
     sq:wAt(sc,"square","square"),circle:wAt(sc,"square","circle"),darkens:wAt(sc,"darkens","darkens"),never:wAt(sc,"darkens","never"),
     lighter:wAt(sc,"lighter","Lighter"),used:wAt(sc,"lighter","used"),asDark:wAt(sc,"darker","As dark"),away:wAt(sc,"darker","thrown away"),
     y1996:wAt(sc,"cents","ninety-six"),cents:wAt(sc,"cents","few cents"),use:wAt(sc,"moment","moment of use"),good2:wAt(sc,"moment","still good"),

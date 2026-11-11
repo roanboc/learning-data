@@ -5,7 +5,7 @@ const NARR={
  {"id":"v1856","gap":0.8,"text":"Victoria, 1856: the colony is about to elect its first parliament.","say":"Victoria, eighteen fifty-six: the colony is about to elect its first parliament."},
  {"id":"aloud","gap":0.8,"text":"Until then, a man said his vote out loud, so anyone could learn it: his employer, his landlord, a candidate."},
  {"id":"cost","gap":0.8,"text":"A vote against them could cost a worker his job, or a tenant his home."},
- {"id":"dare","gap":0.8,"text":"So a man might not dare vote as he wished. Something had to change."},
+ {"id":"dare","gap":0.8,"text":"So a man might not dare vote as he wished. His vote had to become his own secret."},
  {"id":"passed","gap":0.8,"text":"That March, the colony passed a secret ballot, worked out by Henry Chapman, one of its lawmakers."},
  {"id":"roll","gap":0.8,"text":"An official marked the voter off the roll, and handed him a printed paper with every candidate's name."},
  {"id":"alone","gap":0.8,"text":"Alone, he crossed out the names he didn't want, folded it, and put it in the box."},

@@ -22,8 +22,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Costaba tiempo a los viajeros, y dinero a los comerciantes, en cada viaje.",
 "Each colony had its reasons: New South Wales changed its gauge with a new engineer, and Victoria kept the one both had first chosen.":
 "Cada colonia tuvo sus razones: Nueva Gales del Sur cambió de ancho con un ingeniero nuevo; Victoria mantuvo el que ambas eligieron antes.",
-"For 79 years, everything stopped at Albury. Something had to change.":
-"Durante 79 años, todo se detuvo en Albury. Algo tenía que cambiar.",
+"For 79 years, everything stopped at Albury, and it would go on stopping until the rails agreed.":
+"Durante 79 años, todo se detuvo en Albury, y seguiría deteniéndose hasta que los rieles coincidieran.",
 "In 1962, Australia's government, with New South Wales and Victoria, opened a new line from Albury to Melbourne, built to one agreed gauge.":
 "En 1962, el gobierno de Australia, con Nueva Gales del Sur y Victoria, abrió una línea de Albury a Melbourne, con un solo ancho acordado.",
 "Freight ran straight through that January, and from April, passengers did too, with nobody changing trains.":

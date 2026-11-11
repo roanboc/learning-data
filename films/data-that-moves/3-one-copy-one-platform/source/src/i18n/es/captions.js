@@ -18,8 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cada pago obliga a pesar monedas, y nadie sabe cuánto vale de verdad una bolsa de ellas.",
 "On average, coin there is worth about 9% less than good coin: a merchant owed a thousand guilders may get coin worth about nine hundred.":
 "En promedio, allí la moneda vale un 9% menos que la buena: a quien le deben mil florines le pagan en moneda que vale unos novecientos.",
-"Payments are slow, disputed and risky. Something had to change.":
-"Los pagos son lentos, discutidos y riesgosos. Algo tenía que cambiar.",
+"Payments are slow, disputed and risky. Amsterdam's trade needs money everyone can trust.":
+"Los pagos son lentos, discutidos y riesgosos. El comercio de Ámsterdam necesita un dinero en el que todos confíen.",
 "On the 31st of January 1609, the city opens an exchange bank, the Wisselbank, in its town hall.":
 "El 31 de enero de 1609, la ciudad abre un banco de cambio, el Wisselbank, en su ayuntamiento.",
 "Merchants bring their coin once. The bank weighs it, and writes its value in its ledger, on the merchant's own page.":

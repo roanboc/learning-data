@@ -23,7 +23,7 @@ const rd_mix2=(a,b,u)=>[lerp(a[0],b[0],u),lerp(a[1],b[1],u)];
 scene("clock",(ctx,S,t,sc)=>{
   const T={tLondon:wAt(sc,"london","London"),tRang:wAt(sc,"rang","To know"),tAsked:wAt(sc,"rang","asked the operator"),tWall:wAt(sc,"wall","She read"),tClock:wAt(sc,"wall","clock"),
     tExact:wAt(sc,"exact","never quite"),tLate:wAt(sc,"late","And the exchange"),tCaller:wAt(sc,"late","just when"),tOut:wAt(sc,"out","So a clock"),tBeOut:wAt(sc,"out","could be out"),
-    tAgain:wAt(sc,"again","And the time"),tAg2:wAt(sc,"again","again and again"),tChange:wAt(sc,"change","Something"),
+    tAgain:wAt(sc,"again","And the time"),tAg2:wAt(sc,"again","again and again"),tChange:wAt(sc,"change","The answer"),
     tBuilt:wAt(sc,"built","So the Post Office's"),tMachine:wAt(sc,"built","a machine"),tSpeak:wAt(sc,"built","the speaking clock"),
     tCain:wAt(sc,"cain","Jane Cain"),tRec:wAt(sc,"cain","recorded"),tGlass:wAt(sc,"cain","glass discs"),tPlayed:wAt(sc,"played","A clock"),tMoment:wAt(sc,"played","right moment"),
     tGreen:wAt(sc,"greenwich","every hour"),tGw:wAt(sc,"greenwich","Greenwich"),

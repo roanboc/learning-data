@@ -9,7 +9,7 @@ const NARR={
  {"id":"change","gap":0.8,"text":"At Albury, every passenger had to change trains, and every crate and bale of wool was lifted into another wagon."},
  {"id":"cost","gap":0.8,"text":"It cost travellers time, and traders money, on every journey."},
  {"id":"reasons","gap":0.8,"text":"Each colony had its reasons: New South Wales changed its gauge with a new engineer, and Victoria kept the one both had first chosen."},
- {"id":"years","gap":0.8,"text":"For 79 years, everything stopped at Albury. Something had to change.","say":"For seventy-nine years, everything stopped at Albury. Something had to change."},
+ {"id":"years","gap":0.8,"text":"For 79 years, everything stopped at Albury, and it would go on stopping until the rails agreed.","say":"For seventy-nine years, everything stopped at Albury, and it would go on stopping until the rails agreed."},
  {"id":"agreed","gap":0.8,"text":"In 1962, Australia's government, with New South Wales and Victoria, opened a new line from Albury to Melbourne, built to one agreed gauge.","say":"In nineteen sixty-two, Australia's government, with New South Wales and Victoria, opened a new line from Albury to Melbourne, built to one agreed gauge."},
  {"id":"through","gap":0.8,"text":"Freight ran straight through that January, and from April, passengers did too, with nobody changing trains."},
  {"id":"third","gap":0.8,"text":"Within a year, the freight it carried had grown by a third."},

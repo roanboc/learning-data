@@ -435,7 +435,7 @@ const NARR={
  {"id":"kinds","gap":0.8,"text":"Between 800 and 1,000 kinds of coin change hands, many clipped, shaved at the edge for their silver, or worn thin.","say":"Between eight hundred and a thousand kinds of coin change hands, many clipped, shaved at the edge for their silver, or worn thin."},
  {"id":"weigh","gap":0.8,"text":"Every payment means weighing coins, and nobody knows what a bag of them is really worth."},
  {"id":"owed","gap":0.8,"text":"On average, coin there is worth about 9% less than good coin: a merchant owed a thousand guilders may get coin worth about nine hundred.","say":"On average, coin there is worth about nine per cent less than good coin: a merchant owed a thousand guilders may get coin worth about nine hundred."},
- {"id":"change","gap":0.8,"text":"Payments are slow, disputed and risky. Something had to change."},
+ {"id":"change","gap":0.8,"text":"Payments are slow, disputed and risky. Amsterdam's trade needs money everyone can trust."},
  {"id":"bank","gap":0.8,"text":"On the 31st of January 1609, the city opens an exchange bank, the Wisselbank, in its town hall.","say":"On the thirty-first of January, sixteen oh nine, the city opens an exchange bank, the Wisselbank, in its town hall."},
  {"id":"deposit","gap":0.8,"text":"Merchants bring their coin once. The bank weighs it, and writes its value in its ledger, on the merchant's own page."},
  {"id":"line","gap":0.8,"text":"From then on, a payment is a line moved from page to page, with no coin carried, and the ledger shows what each merchant holds."},
@@ -485,7 +485,7 @@ const NARR={
  {"id":"takeaway","gap":0.8,"text":"Keep one copy, governed once."}]}
 };
 
-const VODUR={"ledger/amst": 2.044, "ledger/quays": 4.141, "ledger/kinds": 7.355, "ledger/weigh": 4.794, "ledger/owed": 8.777, "ledger/change": 3.841, "ledger/bank": 6.85, "ledger/deposit": 6.825, "ledger/line": 7.764, "ledger/trust": 5.025, "ledger/century": 3.329, "ledger/data": 7.1, "ledger/claims": 7.46, "ledger/now": 4.558, "usual/payday": 4.776, "usual/linh": 5.889, "usual/sheets": 4.064, "usual/tally": 4.793, "usual/ready": 4.345, "usual/design": 6.961, "usual/cost": 6.137, "copy/noor": 4.256, "copy/lakebase": 4.401, "copy/once": 5.225, "copy/engines": 8.134, "copy/readers": 5.932, "copy/finance": 5.071, "copy/writer": 3.127, "copy/contracts": 7.598, "copy/written": 4.45, "fewer/gone": 5.247, "fewer/together": 5.033, "fewer/catalog": 7.792, "fewer/moves": 6.131, "fewer/tuesday": 6.281, "fewer/purpose": 3.57, "fewer/night": 3.662, "choose/so": 1.237, "choose/keep": 5.322, "choose/decide": 3.494, "choose/bought": 7.836, "choose/both": 6.082, "choose/wheel": 3.185, "choose/docs": 4.598, "row/amsterdam": 6.529, "row/onerow": 7.846, "row/paid": 7.687, "row/takeaway": 1.941};
+const VODUR={"ledger/amst": 2.044, "ledger/quays": 4.141, "ledger/kinds": 7.355, "ledger/weigh": 4.794, "ledger/owed": 8.777, "ledger/change": 5.839, "ledger/bank": 6.85, "ledger/deposit": 6.825, "ledger/line": 7.764, "ledger/trust": 5.025, "ledger/century": 3.329, "ledger/data": 7.1, "ledger/claims": 7.46, "ledger/now": 4.558, "usual/payday": 4.776, "usual/linh": 5.889, "usual/sheets": 4.064, "usual/tally": 4.793, "usual/ready": 4.345, "usual/design": 6.961, "usual/cost": 6.137, "copy/noor": 4.256, "copy/lakebase": 4.401, "copy/once": 5.225, "copy/engines": 8.134, "copy/readers": 5.932, "copy/finance": 5.071, "copy/writer": 3.127, "copy/contracts": 7.598, "copy/written": 4.45, "fewer/gone": 5.247, "fewer/together": 5.033, "fewer/catalog": 7.792, "fewer/moves": 6.131, "fewer/tuesday": 6.281, "fewer/purpose": 3.57, "fewer/night": 3.662, "choose/so": 1.237, "choose/keep": 5.322, "choose/decide": 3.494, "choose/bought": 7.836, "choose/both": 6.082, "choose/wheel": 3.185, "choose/docs": 4.598, "row/amsterdam": 6.529, "row/onerow": 7.846, "row/paid": 7.687, "row/takeaway": 1.941};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2355,7 +2355,7 @@ scene("ledger",(ctx,S,t,sc)=>{
     tKinds:sc.cues.kinds,tKindsW:wAt(sc,"kinds","kinds"),tClipped:wAt(sc,"kinds","clipped"),tShaved:wAt(sc,"kinds","shaved"),tWorn:wAt(sc,"kinds","worn thin"),
     tWeigh:sc.cues.weigh,tWeighW:wAt(sc,"weigh","weighing"),tWorth:wAt(sc,"weigh","nobody knows"),
     tOwed:sc.cues.owed,tLess:wAt(sc,"owed","nine per cent"),tOwedM:wAt(sc,"owed","a merchant owed"),tNine:wAt(sc,"owed","nine hundred"),
-    tChange:sc.cues.change,tSlow:wAt(sc,"change","slow"),tDisp:wAt(sc,"change","disputed"),tRisky:wAt(sc,"change","risky"),tHad:wAt(sc,"change","Something"),
+    tChange:sc.cues.change,tSlow:wAt(sc,"change","slow"),tDisp:wAt(sc,"change","disputed"),tRisky:wAt(sc,"change","risky"),tHad:wAt(sc,"change","Amsterdam's"),
     tBank:sc.cues.bank,tJan:wAt(sc,"bank","January"),tWissel:wAt(sc,"bank","Wisselbank"),tHall:wAt(sc,"bank","town hall"),
     tDep:sc.cues.deposit,tOnce:wAt(sc,"deposit","once"),tWeighs:wAt(sc,"deposit","weighs it"),tWrites:wAt(sc,"deposit","writes its value"),tOwn:wAt(sc,"deposit","own page"),
     tLine:sc.cues.line,tMoved:wAt(sc,"line","a line moved"),tNoCoin:wAt(sc,"line","no coin"),tHolds:wAt(sc,"line","what each merchant holds"),

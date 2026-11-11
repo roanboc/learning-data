@@ -146,7 +146,7 @@ bowl(D4, F('drift', 'Steer', 0.0), 0.55, px(700))
 bowl(B3, F('drift', 'left the line', 0.0), 0.6, px(500))
 big(Fs2, F('landfall', 'miss the coast', 0.0), 0.7, 0.0)
 # "Something had to change": A major
-tS = F('change', 'Something', -0.1)
+tS = F('change', 'Sailors', -0.1)
 big(A2, tS, 0.8, 0.0); bowl(Cs5, tS + 0.4, 0.5, 0.15); bowl(E4, tS + 0.9, 0.5, -0.15)
 # the stretch: the chart drawn out towards the poles, the bowls rising with it; every course straight: D major
 tSt = F('stretch', 'stretched', 0.0)

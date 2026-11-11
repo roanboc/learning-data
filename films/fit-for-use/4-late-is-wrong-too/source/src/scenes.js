@@ -46,7 +46,7 @@ function lw_dusk(x,tt,c,P){
 function lw_surge(x,tt,c,P){lw_water(x,tt,ag_in(tt,c.surge-0.2,2.0));lw_rain(x,tt,0.32*ag_in(tt,c.surge-0.4,1.6));
   let q=lw_pop(tt,c.toll,c.after-0.3);dq_textCard(x,120,150,720,{kick:"That night",title:"At least 300,000 people died",sub:"perhaps half a million"},{k:q.k,a:q.a});
   q=lw_pop(tt,c.after,null);dq_textCard(x,120,150,760,{title:"A warning people can't read, or don't act on, is no warning"},{edge:"brass",k:q.k,a:q.a});
-  dq_chip(x,120,370,"Something has to change",{a:ag_in(tt,P.change,0.5)});}
+  dq_chip(x,120,370,"Reach every village",{a:ag_in(tt,P.change,0.5)});}
 function lw_dayCpp(x,tt,c,P){const W0=c.mile-0.2,W1=c.house+0.2;
   lw_flags(x,ag_in(tt,P.one,0.9)+ag_in(tt,P.two,0.9)+ag_in(tt,P.three,0.9),tt,{wind:0.8});
   // the last mile: the volunteer's way in, a brass line behind him
@@ -90,7 +90,7 @@ function lw_chain(x,tt,c,P,day){let q=lw_pop(tt,c.data-0.1,null);dq_textCard(x,1
   else{q=lw_pop(tt,P.all,null);dq_tag(x,1000,652,"pass",{text:"ALL 23 ON THE LIST",to:[1030,610],flip:true,k:q.k,a:q.a});
     dq_clock(x,1760,150,62,0,480,{a:ag_in(tt,P.notices-0.2,0.5)});dq_chip(x,1760,262,"in time",{align:"center",icon:"clock",col:"pass",a:ag_in(tt,P.notices+0.3,0.5)});}}
 scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),radio:wAt(sc,"radio","the radio"),knew:wAt(sc,"stay","know a storm"),nobody:wAt(sc,"stay","almost nobody"),
-    change:wAt(sc,"after","Something"),lastMile:wAt(sc,"mile","the last mile"),lead:wAt(sc,"house","lead people"),one:wAt(sc,"flags","one"),two:wAt(sc,"flags","two"),
+    change:wAt(sc,"after","The next one"),lastMile:wAt(sc,"mile","the last mile"),lead:wAt(sc,"house","lead people"),one:wAt(sc,"flags","one"),two:wAt(sc,"flags","two"),
     three:wAt(sc,"flags","three"),whole:wAt(sc,"flags","a signal"),million:wAt(sc,"shelter","a million"),still:wAt(sc,"died","still too many"),
     every:wAt(sc,"died","one for every hundred"),lastMileD:wAt(sc,"data","last mile"),doesnt:wAt(sc,"june","doesn't come"),without:wAt(sc,"june","built without it"),
     n23:wAt(sc,"passed","Twenty-three"),nothing:wAt(sc,"passed","nothing says so"),notices:wAt(sc,"heard","notices"),all:wAt(sc,"heard","all twenty-three")}));

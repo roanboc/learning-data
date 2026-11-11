@@ -9,7 +9,7 @@ const NARR={
  {"id":"cars","gap":0.8,"text":"Cars left the line with parts missing, or fitted wrong."},
  {"id":"blame","gap":0.8,"text":"Many said the problem was the workers."},
  {"id":"harm","gap":0.8,"text":"For the people who bought those cars, it meant faults to fix. For the workers, it meant no job, and a name that followed them."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Blaming the workers hadn't fixed a single car."},
  {"id":"reopen","gap":0.8,"text":"In 1984, General Motors and Toyota reopen the plant together, as NUMMI.","say":"In nineteen eighty-four, General Motors and Toyota reopen the plant together, as NUMMI."},
  {"id":"hire","gap":0.8,"text":"More than eight in ten of its new workers are the same people, hired back."},
  {"id":"japan","gap":0.8,"text":"Groups of thirty fly to a Toyota plant in Japan, and work beside the people there for two weeks."},

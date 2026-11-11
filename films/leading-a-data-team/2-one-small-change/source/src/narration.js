@@ -7,7 +7,7 @@ const NARR={
  {"id":"infect","gap":0.8,"text":"Too many mothers there catch an infection after a Caesarean, a birth by operation, and too many newborn babies catch one too."},
  {"id":"means","gap":0.8,"text":"An infection is germs in a wound, or in a baby's body: fever and pain, days more in hospital, and real danger to mother and child."},
  {"id":"money","gap":0.8,"text":"And there's no money for a fix: at first, the ministry gives nothing for it."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"The hospital has to get cleaner with what it already has."},
  {"id":"fives","gap":0.8,"text":"The director brings in a way of working from Japanese factories, already used by companies in Sri Lanka: five steps, called 5S.","say":"The director brings in a way of working from Japanese factories, already used by companies in Sri Lanka: five steps, called five S."},
  {"id":"steps","gap":0.8,"text":"Sort out what isn't needed. Set the rest in order. Shine: clean it. Standardise: agree one way, and write it down. And sustain it."},
  {"id":"cheap","gap":0.8,"text":"It costs little, and everyone can see the change with their own eyes."},

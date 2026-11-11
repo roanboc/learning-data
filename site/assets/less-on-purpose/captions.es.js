@@ -18,8 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El mismo consejo está en varios sitios, con otras palabras. La gente pierde tiempo y no sabe qué página es la correcta.",
 "And taxpayers pay around 560 million pounds a year for all those websites.":
 "Y los contribuyentes pagan unos 560 millones de libras al año por todos esos sitios.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Government online has to become one place, and simpler.":
+"El gobierno en línea tiene que volverse un solo lugar, y más sencillo.",
 "In October 2010, Martha Lane Fox, the government's digital champion, reports on its main public website, Directgov.":
 "En octubre de 2010, Martha Lane Fox, la promotora digital del gobierno, informa sobre su principal sitio público, Directgov.",
 "Her advice: one website for the whole of government, and one team that answers for what people find there.":

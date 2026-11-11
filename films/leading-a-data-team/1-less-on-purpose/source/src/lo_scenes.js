@@ -46,7 +46,7 @@ scene("doless",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
     {at:c.cost-0.3,place:"loOffice",keys:[[c.cost-0.3,960,520,1.0]],dis:1.2,draw:(x,tt)=>{
       lo_pages(x,tt,{dim:0.35+0.3*ag_in(tt,c.change,0.8),same:ag_io(tt,c.cost+0.2,c.change,0.5)});
       lo_fig(x,tt,w("cost","560",-0.3),580,250,760,{kick:"What the websites cost",num:"£560 million",label:"A year, paid by taxpayers"},{col:LP.amber,light:null,pin:false,out:c.change+0.2});
-      lo_tag(x,tt,c.change+0.3,c.review-0.4,960,470,"Something has to change",{align:"center",col:LP.ink});}},
+      lo_tag(x,tt,c.change+0.3,c.review-0.4,960,470,"One place, and simpler",{align:"center",col:LP.ink});}},
     // October 2010: the review, and its advice; the old pages archived, not moved
     {at:c.review-0.3,place:"loOffice",keys:[[c.review-0.3,960,520,1.0],[boxT,1000,540,1.0]],draw:(x,tt)=>{
       lo_pages(x,tt,{dim:0.65,box:ag_in(tt,boxT,3.0)});

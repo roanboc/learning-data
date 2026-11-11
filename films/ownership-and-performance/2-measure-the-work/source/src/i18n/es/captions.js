@@ -19,8 +19,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pero la gente siempre comete errores. Un conductor cansado se desvía sobre la línea central.",
 "On a fast road, that mistake could kill. For hundreds of families a year, it meant someone who never came home.":
 "En una carretera rápida, ese error podía matar. Para cientos de familias al año, era alguien que nunca volvió a casa.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Blaming drivers wasn't saving lives. The roads had to forgive their mistakes.":
+"Culpar a los conductores no salvaba vidas. Las carreteras tenían que perdonar sus errores.",
 "In October 1997, Sweden's parliament adopted Vision Zero: no one should be killed or seriously injured on the roads.":
 "En octubre de 1997, el parlamento sueco adoptó Visión Cero: nadie debería morir ni quedar gravemente herido en las carreteras.",
 "Those who design and run the roads would answer for that, not only drivers.":

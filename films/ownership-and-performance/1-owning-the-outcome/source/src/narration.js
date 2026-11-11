@@ -9,7 +9,7 @@ const NARR={
  {"id":"sense","gap":0.8,"text":"Each choice made sense to the people who made it."},
  {"id":"soil","gap":0.8,"text":"But without trees, the soil washed off the hills, and the springs ran dry."},
  {"id":"harm","gap":0.8,"text":"The women fetched the water, gathered the firewood and grew the food. So the harm fell first on them, and on their children."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Someone had to bring the trees back, and it would be the women."},
  {"id":"start","gap":0.8,"text":"In 1977, Maathai started the Green Belt Movement, with the National Council of Women of Kenya.","say":"In nineteen seventy-seven, Maathai started the Green Belt Movement, with the National Council of Women of Kenya."},
  {"id":"nursery","gap":0.8,"text":"Groups of women grew seedlings in their own nurseries, from the seeds of local trees, and planted them out."},
  {"id":"paid","gap":0.8,"text":"They were paid a small sum for each tree still alive months later, not for each seedling put in the ground."},

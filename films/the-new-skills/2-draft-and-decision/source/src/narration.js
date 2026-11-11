@@ -7,7 +7,7 @@ const NARR={
  {"id":"fear","gap":0.8,"text":"Many fear what that means for people."},
  {"id":"players","gap":0.8,"text":"Players spend years learning the game, and many earn their living by it."},
  {"id":"worth","gap":0.8,"text":"If a machine plays better than the best of them, what is their skill worth?"},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Players have to find what their skill is for, beside the machine."},
  {"id":"leon","gap":0.8,"text":"A year later, in León, in Spain, Kasparov tries another way: play with the machine, not against it."},
  {"id":"each","gap":0.8,"text":"He and his opponent, Veselin Topalov, each have a computer at hand, running the chess program of their choice."},
  {"id":"plan","gap":0.8,"text":"With the machine checking every tactic, Kasparov finds he can give his thinking to the plan."},

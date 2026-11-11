@@ -9,7 +9,7 @@ const NARR={
  {"id":"towns","gap":0.8,"text":"Fishing towns like Aralsk were left far from the water. The sea grew salty, the fish died, and tens of thousands of jobs were lost."},
  {"id":"dust","gap":0.8,"text":"Storms blew salt and dust off the dry seabed. The drinking water was polluted, and people fell ill."},
  {"id":"whole","gap":0.8,"text":"Bringing the whole sea back would have meant taking the rivers back from the farms."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The whole sea was out of reach, and waiting for it would save nothing."},
  {"id":"chose","gap":0.8,"text":"Kazakhstan chose to save the part that could be saved: the northern sea."},
  {"id":"dam","gap":0.8,"text":"With a World Bank loan, it built the Kok-Aral dam, 13 kilometres long, to keep the Syr Darya's water in the north.","say":"With a World Bank loan, it built the Kok-Aral dam, thirteen kilometres long, to keep the Syr Darya's water in the north."},
  {"id":"done","gap":0.8,"text":"It was finished in August 2005, and works upstream let more of the river arrive.","say":"It was finished in August two thousand and five, and works upstream let more of the river arrive."},

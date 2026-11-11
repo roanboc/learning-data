@@ -22,7 +22,7 @@ production. *Scripts became software*, which opens the series *Data as software*
 | The export | A file on the desktop, emailed to Finance | `mart_finance__casual_pay_paid`, with a contract; Finance reads the table |
 | Tests | None | A unit test of the rule at its edge (approved at 11:59 and at 12:01 on the Monday), a test that every approved claim has a pay day, and the model's tests |
 | History | One copy | Git: every change, who made it and why |
-| Review | Nobody else read it | A pull request, reviewed by someone other than its author; `CODEOWNERS` asks HR to review a change to the pay days |
+| Review | Nobody else read it | A pull request, reviewed by someone on the data team other than its author (`CODEOWNERS`). Finance and HR don't review code: they ask for a change in a ticket, linked to its branch and pull request, and check the result before the ticket closes |
 | Running | By hand, on each pay day | A job written as a file ([`resources/payroll_export.job.yml`](../../resources/payroll_export.job.yml)), deployed by the bundle ([`databricks.yml`](../../databricks.yml)) |
 | Production | The laptop | Deployed to test, then to production once Noor approves, as the platform's service principal ([`release.yml`](release.yml)) |
 
@@ -35,13 +35,16 @@ and people approve (*AI agents in data work*).
 
 ## The road to production
 
-1. **A branch.** Every change starts on a branch, never on `main`.
+1. **A ticket, then a branch.** A change starts as a ticket from the people who need it (Rohan in
+   Finance asked for this move; a change to the pay days comes from HR), and goes on a branch linked
+   to it, never on `main`.
 2. **A pull request, with its checks.** The whole build and every test run on it, the unit test
    included, and the bundle is validated (`release.yml`, job `check`).
-3. **A review by someone else.** One approval from someone other than the person who pushed last;
-   `main` accepts nothing else.
+3. **A review by someone else.** One approval from someone on the data team other than the person
+   who pushed last; `main` accepts nothing else. Those who asked don't review the code.
 4. **Test.** Once merged, the same files are deployed to test and the job runs there, on test's
-   data (job `test`).
+   data (job `test`). Whoever asked checks the result there; the ticket stays open until they say
+   it's right.
 5. **Production, after a person approves.** The workflow waits for Noor, production's required
    reviewer, then deploys the same files to production (job `production`), as the platform's
    service principal. Nobody deploys from a laptop.

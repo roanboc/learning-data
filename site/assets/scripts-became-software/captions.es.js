@@ -19,8 +19,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nadie había probado cómo movería el viento un tablero así.",
 "On the 7th of November, a wind of about 40 miles an hour sets it twisting, until its middle tears away and falls into the water.":
 "El 7 de noviembre, un viento de unos 64 km/h (40 mph) lo hace torcerse, hasta que el tramo central se desprende y cae al agua.",
-"No one is killed, but the only road across the Narrows is gone for ten years. Something had to change.":
-"No muere nadie, pero la única vía para cruzar el estrecho desaparece por diez años. Algo tenía que cambiar.",
+"No one is killed, but the only road across the Narrows is gone for ten years. The next bridge had to be proven before it was built.":
+"No muere nadie, pero la única vía sobre el estrecho desaparece diez años. El próximo puente tenía que probarse antes de construirse.",
 "The engineers who looked into it said such bridges must first be tested as models in a wind tunnel, where a fan blows a steady wind.":
 "Los ingenieros que lo estudiaron dijeron que esos puentes debían probarse antes como maquetas en un túnel de viento, con viento constante.",
 "At the University of Washington, Frederick Farquharson tests models for years.":
@@ -59,20 +59,22 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Primero a Git, junto a los modelos, donde se guarda cada cambio, con quién lo hizo y por qué.",
 "Its sums became a model in dbt, and the rule is written once, on HR's calendar of pay days.":
 "Sus sumas pasaron a un modelo en dbt, y la regla se escribe una vez, en el calendario de días de pago de RR. HH.",
-"Ingrid Holm in HR confirmed the rule, and a change to the pay days now asks HR to review it.":
-"Ingrid Holm, de RR. HH., confirmó la regla, y ahora un cambio en los días de pago pide que RR. HH. lo revise.",
+"Ingrid Holm in HR confirmed the rule; a change to the pay days now starts with a ticket from HR.":
+"Ingrid Holm, de RR. HH., confirmó la regla; ahora un cambio en los días de pago empieza con un ticket de RR. HH.",
 "Jun wrote the tests first, at the rule's edge: approved at 11:59 on the Monday, a claim is paid that Thursday; at 12:01, two weeks later.":
 "Jun escribió primero las pruebas, al límite de la regla: aprobada el lunes a las 11:59, se paga ese jueves; a las 12:01, en dos semanas.",
 "In the weeds of data crafting shows how, in Declare it, then build it, Promises and proofs, and Built in layers.":
 "«In the weeds of data crafting» muestra cómo, en «Declare it, then build it», «Promises and proofs» y «Built in layers».",
 "Each change goes on a branch, and comes back as a pull request, with checks that build it and run every test.":
 "Cada cambio va en una rama y vuelve como pull request, con verificaciones que lo construyen y corren todas las pruebas.",
-"Then someone other than its author reviews it.":
-"Luego lo revisa alguien que no es su autor.",
+"Then someone else on the data team, not its author, reviews it.":
+"Luego lo revisa otra persona del equipo de datos, no su autor.",
 "Jun wrote the model, so Sam reviewed it; Sam wrote the job, so Jun reviewed that.":
 "Jun escribió el modelo, así que lo revisó Sam; Sam escribió el trabajo, así que lo revisó Jun.",
 "Nothing merges without that review, and every check green.":
 "Nada se fusiona sin esa revisión y todas las verificaciones en verde.",
+"Finance and HR don't review the code: Rohan asked for the move in a ticket, linked to its branch and pull requests.":
+"Finanzas y RR. HH. no revisan el código: Rohan pidió el traslado en un ticket, enlazado a su rama y sus pull requests.",
 "Change without surprises shows how a change reaches the people it touches.":
 "«Change without surprises» muestra cómo un cambio llega a las personas a las que afecta.",
 "And it holds when an agent writes the change: the agent proposes, and a person approves.":
@@ -83,6 +85,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La exportación de nómina corre a las seis cada jueves, y construye y prueba todo lo que lee.",
 "Once a change is merged, the same files are deployed to test, and the job runs there first.":
 "Cuando se fusiona un cambio, los mismos archivos se despliegan en test, y el trabajo corre ahí primero.",
+"Rohan checks its figures in test against his own, and his ticket stays open until he says they're right.":
+"Rohan compara sus cifras en test con las suyas, y su ticket sigue abierto hasta que dice que están bien.",
 "Then the release waits for Noor, the data architect. When she approves, the same files go to production.":
 "Luego la versión espera a Noor, la arquitecta de datos. Cuando aprueba, los mismos archivos pasan a producción.",
 "It runs as the platform's own account, never a person's: nobody deploys from a laptop.":

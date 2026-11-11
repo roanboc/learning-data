@@ -1,5 +1,5 @@
 {
- "player": "8a6c772c8fc5fdb7",
+ "player": "6a5b2fe190024d3e",
  "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
  "places": {
   "place:gate": {

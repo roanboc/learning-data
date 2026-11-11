@@ -10,7 +10,7 @@ const NARR={
  {"id":"none","gap":0.8,"text":"And thousands of chemicals had no page at all."},
  {"id":"wrong","gap":0.3,"text":"Guess wrong, and a crew might spray water on a chemical that gives off a poison gas when wet,"},
  {"id":"homes","gap":0.8,"text":"with families still in the houses nearby."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Crews needed one book that covered every chemical, before they had to guess."},
  {"id":"book","gap":0.8,"text":"In 1980, the US Department of Transportation changed the book.","say":"In nineteen-eighty, the U S Department of Transportation changed the book."},
  {"id":"share","gap":0.8,"text":"Chemicals that behave alike in a fire or a spill share one guide, written once."},
  {"id":"number","gap":0.3,"text":"Each chemical's four-digit number leads to its guide,"},

@@ -27,325 +27,325 @@ Quien lo busca, un cliente o un vecino, lee sobre sus deudas como si fueran noti
 Pide al periódico que lo quite. Dice que no: publicó el aviso legalmente, como se le ordenó.
 
 8
-00:00:51,330 --> 00:00:52,770
-Algo tiene que cambiar.
+00:00:51,330 --> 00:00:55,251
+Quiere que el viejo aviso deje de perseguirlo, y nadie lo permite.
 
 9
-00:00:54,970 --> 00:01:02,073
+00:00:57,451 --> 00:01:04,554
 En 2010, reclama ante la agencia de protección de datos de España, el organismo público que vela por su ley de privacidad.
 
 10
-00:01:03,473 --> 00:01:08,984
+00:01:05,954 --> 00:01:11,465
 La agencia deja que el periódico conserve su página, pero ordena al buscador quitar los enlaces.
 
 11
-00:01:10,984 --> 00:01:16,490
+00:01:13,465 --> 00:01:18,971
 El buscador acude a los tribunales, y el tribunal español consulta al Tribunal de Justicia de la Unión Europea.
 
 12
-00:01:18,090 --> 00:01:21,058
+00:01:20,571 --> 00:01:23,539
 El 13 de mayo de 2014, dicta sentencia.
 
 13
-00:01:22,858 --> 00:01:28,792
+00:01:25,339 --> 00:01:31,273
 Incluso información cierta, publicada legalmente, puede con el tiempo no deber mostrarse bajo el nombre de una persona.
 
 14
-00:01:30,192 --> 00:01:35,995
+00:01:32,673 --> 00:01:38,476
 Si, con los años, ya no es pertinente, o es excesiva, la persona puede pedir que el enlace se vaya,
 
 15
-00:01:36,595 --> 00:01:41,382
+00:01:39,076 --> 00:01:43,863
 salvo que el público tenga una razón de peso para encontrarla, como un cargo en la vida pública.
 
 16
-00:01:42,782 --> 00:01:45,747
+00:01:45,263 --> 00:01:48,228
 Para él, dieciséis años después, no hay tal razón.
 
 17
-00:01:47,347 --> 00:01:50,064
+00:01:49,828 --> 00:01:52,545
 La página se queda. El enlace desde su nombre se va.
 
 18
-00:01:52,364 --> 00:02:00,099
+00:01:54,845 --> 00:02:02,580
 Ahora cualquiera en Europa puede pedírselo directamente a un buscador. El primer día del formulario, más de doce mil lo hacen.
 
 19
-00:02:01,899 --> 00:02:06,048
+00:02:04,380 --> 00:02:08,529
 Desde entonces, más de dos millones de solicitudes, por ocho millones y medio de enlaces.
 
 20
-00:02:07,848 --> 00:02:13,394
+00:02:10,329 --> 00:02:15,875
 Una persona revisa cada una. Algo más de la mitad se retiran, y cada rechazo da una razón.
 
 21
-00:02:15,694 --> 00:02:20,752
+00:02:18,175 --> 00:02:23,233
 En la universidad, el contrato de tutora de Linh Nguyen termina el 20 de noviembre.
 
 22
-00:02:22,352 --> 00:02:27,911
+00:02:24,833 --> 00:02:30,392
 Cuatro días después, escribe: díganme qué guardan sobre mí, y sáquenme de la lista de correo de tutores.
 
 23
-00:02:29,711 --> 00:02:33,695
+00:02:32,192 --> 00:02:36,176
 Sus datos están en más lugares de los que nadie podría listar de memoria.
 
 24
-00:02:35,095 --> 00:02:38,785
+00:02:37,576 --> 00:02:41,266
 Si la universidad no puede encontrarlo todo, sus derechos son solo palabras.
 
 25
-00:02:39,985 --> 00:02:45,570
+00:02:42,466 --> 00:02:48,051
 Si puede, ella obtiene aquello por lo que él tuvo que ir a juicio: una respuesta, con una razón para cada parte.
 
 26
-00:02:52,970 --> 00:02:57,490
+00:02:55,451 --> 00:02:59,971
 Casi todas las leyes de privacidad dan a cada persona derechos sobre sus datos en manos de otros.
 
 27
-00:02:58,690 --> 00:03:00,965
+00:03:01,171 --> 00:03:03,446
 Cada uno cabe en una frase de todos los días.
 
 28
-00:03:02,365 --> 00:03:03,828
+00:03:04,846 --> 00:03:06,309
 Muéstrenme lo que guardan sobre mí.
 
 29
-00:03:05,428 --> 00:03:06,844
+00:03:07,909 --> 00:03:09,325
 Eso está mal. Corríjanlo.
 
 30
-00:03:08,444 --> 00:03:10,604
+00:03:10,925 --> 00:03:13,085
 Eso ya no lo necesitan. Bórrenlo.
 
 31
-00:03:12,204 --> 00:03:13,669
+00:03:14,685 --> 00:03:16,150
 Dejen de usarlo para eso.
 
 32
-00:03:15,469 --> 00:03:22,336
+00:03:17,950 --> 00:03:24,817
 Desde 2018, el GDPR de Europa, la ley de privacidad más conocida, da los cuatro, cada uno con sus límites,
 
 33
-00:03:22,736 --> 00:03:25,047
+00:03:25,217 --> 00:03:27,528
 y llama al tercero el derecho al olvido.
 
 34
-00:03:26,447 --> 00:03:29,467
+00:03:28,928 --> 00:03:31,948
 No todas las leyes dan los cuatro, ni con las mismas palabras.
 
 35
-00:03:30,667 --> 00:03:37,351
+00:03:33,148 --> 00:03:39,832
 Las propias normas de la universidad dan los cuatro a todos aquellos de quienes guarda datos, con respuesta en treinta días.
 
 36
-00:03:38,951 --> 00:03:40,982
+00:03:41,432 --> 00:03:43,463
 Nadie tiene que decir por qué lo pide.
 
 37
-00:03:42,382 --> 00:03:45,923
+00:03:44,863 --> 00:03:48,404
 Una persona puede pedir. La universidad debe poder responder.
 
 38
-00:03:48,123 --> 00:03:52,163
+00:03:50,604 --> 00:03:54,644
 Antes de responder, la universidad debe estar segura de que la petición es suya.
 
 39
-00:03:53,963 --> 00:03:58,961
+00:03:56,444 --> 00:04:01,442
 Una petición también es una puerta: a alguien que se haga pasar por ella podrían enviarle todo.
 
 40
-00:04:01,161 --> 00:04:04,319
+00:04:03,642 --> 00:04:06,800
 Linh escribió desde su cuenta de estudiante, con su sesión abierta: es ella.
 
 41
-00:04:06,519 --> 00:04:12,583
+00:04:09,000 --> 00:04:15,064
 La universidad no pide nada más. Una copia de su pasaporte solo sería una cosa más que proteger.
 
 42
-00:04:14,883 --> 00:04:19,181
+00:04:17,364 --> 00:04:21,662
 Comprueba quién pide con aquello en lo que ya confías, y no pidas nada más.
 
 43
-00:04:21,381 --> 00:04:28,769
+00:04:23,862 --> 00:04:31,250
 La oficina de privacidad registra su petición el 24 de noviembre. La respuesta vence el 24 de diciembre.
 
 44
-00:04:31,969 --> 00:04:33,414
+00:04:34,450 --> 00:04:35,895
 Ahora, ¿dónde están sus datos?
 
 45
-00:04:35,014 --> 00:04:42,428
+00:04:37,495 --> 00:04:44,909
 Seis números: en RR. HH., el sistema de estudiantes y su archivo, exalumnos, investigación y la plataforma de aprendizaje.
 
 46
-00:04:44,628 --> 00:04:51,800
+00:04:47,109 --> 00:04:54,281
 Alrededor, más: las horas que declaró, la nómina, la lista de correo de tutores y sus contratos firmados, guardados como documentos.
 
 47
-00:04:54,000 --> 00:04:59,490
+00:04:56,481 --> 00:05:01,971
 Luego cada tabla hecha a partir de ellos, y copias fuera, como una hoja de cálculo que alguien exportó.
 
 48
-00:05:01,490 --> 00:05:08,433
+00:05:03,971 --> 00:05:10,914
 Si se busca solo por su nombre, algo se perdería: se escribe de tres formas, con acentos, sin ellos, y una vez como inicial.
 
 49
-00:05:10,433 --> 00:05:16,801
+00:05:12,914 --> 00:05:19,282
 Así que la búsqueda usa cada número y cada forma de su nombre, en documentos y herramientas además de tablas.
 
 50
-00:05:18,801 --> 00:05:21,372
+00:05:21,282 --> 00:05:23,853
 Su registro de persona une los seis números.
 
 51
-00:05:22,972 --> 00:05:26,542
+00:05:25,453 --> 00:05:29,023
 El linaje sigue cada sistema hasta cada tabla hecha a partir de él.
 
 52
-00:05:28,142 --> 00:05:31,593
+00:05:30,623 --> 00:05:34,074
 Y las clases que marcan los datos personales muestran dónde más buscar.
 
 53
-00:05:33,193 --> 00:05:37,162
+00:05:35,674 --> 00:05:39,643
 Este mapa se mantenía antes de que nadie preguntara, con un dueño para cada lugar.
 
 54
-00:05:38,762 --> 00:05:42,345
+00:05:41,243 --> 00:05:44,826
 Treinta días son para responder. No para empezar a buscar.
 
 55
-00:05:44,545 --> 00:05:48,789
+00:05:47,026 --> 00:05:51,270
 Preguntó qué guarda la universidad. Una copia sola no responde eso.
 
 56
-00:05:50,389 --> 00:05:56,902
+00:05:52,870 --> 00:05:59,383
 Para cada parte, la respuesta dice, en palabras sencillas, por qué se guarda, de dónde vino, quién más la recibe y hasta cuándo.
 
 57
-00:05:59,102 --> 00:06:06,094
+00:06:01,583 --> 00:06:08,575
 Sus contratos y las horas que declaró: para emplearla y pagarle. De RR. HH. y la app de horas. Compartidos con nómina.
 
 58
-00:06:08,294 --> 00:06:15,328
+00:06:10,775 --> 00:06:17,809
 Sus registros de pago: la ley los exige. Se envían a la oficina de impuestos. Se guardan siete años tras cada contrato.
 
 59
-00:06:17,528 --> 00:06:22,522
+00:06:20,009 --> 00:06:25,003
 Su título y sus notas: otorgarlos es tarea de la universidad. Se guardan para siempre.
 
 60
-00:06:24,522 --> 00:06:29,440
+00:06:27,003 --> 00:06:31,921
 Los datos de otras personas quedan fuera: los nombres y notas de sus estudiantes son de ellos, no de ella.
 
 61
-00:06:31,440 --> 00:06:34,025
+00:06:33,921 --> 00:06:36,506
 Y está escrita para ella, no con nombres de tablas.
 
 62
-00:06:36,625 --> 00:06:39,602
+00:06:39,106 --> 00:06:42,083
 Su segundo pedido: sáquenme de la lista de correo de tutores.
 
 63
-00:06:41,202 --> 00:06:45,467
+00:06:43,683 --> 00:06:47,948
 En 2023 marcó una casilla: envíenme noticias de trabajos de tutoría.
 
 64
-00:06:47,467 --> 00:06:51,367
+00:06:49,948 --> 00:06:53,848
 Ese sí era suyo para darlo, y es suyo para retirarlo, igual de fácil.
 
 65
-00:06:53,167 --> 00:06:55,067
+00:06:55,648 --> 00:06:57,548
 Pero borrar su fila no basta.
 
 66
-00:06:57,067 --> 00:07:04,798
+00:06:59,548 --> 00:07:07,279
 Cada semestre, la lista se rehace con los contratos de RR. HH. de los últimos dos años, con todos los que tienen un sí en la persona.
 
 67
-00:07:06,998 --> 00:07:08,510
+00:07:09,479 --> 00:07:10,991
 Su sí la traería de vuelta.
 
 68
-00:07:10,510 --> 00:07:13,980
+00:07:12,991 --> 00:07:16,461
 Así que su no reemplaza su sí, en la persona, con su fecha.
 
 69
-00:07:16,180 --> 00:07:18,270
+00:07:18,661 --> 00:07:20,751
 Al día siguiente, su fila sale de la lista.
 
 70
-00:07:20,270 --> 00:07:26,418
+00:07:22,751 --> 00:07:28,899
 Y su no se guarda. Es el registro de que lo pidió, así que nada que lea el sí antiguo puede volver a añadirla.
 
 71
-00:07:28,418 --> 00:07:33,015
+00:07:30,899 --> 00:07:35,496
 Para olvidarla aquí, la universidad tiene que recordar una cosa: que dijo que no.
 
 72
-00:07:35,815 --> 00:07:38,281
+00:07:38,296 --> 00:07:40,762
 Supongamos que hubiera pedido que la olvidaran del todo.
 
 73
-00:07:39,481 --> 00:07:40,977
+00:07:41,962 --> 00:07:43,458
 No todo podría irse.
 
 74
-00:07:42,377 --> 00:07:47,915
+00:07:44,858 --> 00:07:50,396
 Los registros de pago se guardan porque la ley lo exige, siete años tras el fin de cada contrato.
 
 75
-00:07:49,315 --> 00:07:53,885
+00:07:51,796 --> 00:07:56,366
 Para su último contrato, eso es hasta el 20 de noviembre de 2033.
 
 76
-00:07:55,685 --> 00:08:00,691
+00:07:58,166 --> 00:08:03,172
 Su título y sus notas se guardan para siempre, para que la universidad siempre pueda confirmarlos.
 
 77
-00:08:02,091 --> 00:08:06,290
+00:08:04,572 --> 00:08:08,771
 Los datos de su proyecto de investigación se guardan según sus normas.
 
 78
-00:08:08,290 --> 00:08:14,323
+00:08:10,771 --> 00:08:16,804
 Todo se decidió antes de que preguntara, por los dueños de los registros, en el calendario de conservación.
 
 79
-00:08:15,923 --> 00:08:20,465
+00:08:18,404 --> 00:08:22,946
 Lo que se queda se guarda solo por su razón, y solo lo leen quienes lo necesitan.
 
 80
-00:08:21,865 --> 00:08:24,726
+00:08:24,346 --> 00:08:27,207
 La respuesta dice qué se queda, por qué y hasta cuándo.
 
 81
-00:08:25,926 --> 00:08:29,480
+00:08:28,407 --> 00:08:31,961
 Y donde la respuesta es no, dice por qué, y cómo impugnarlo.
 
 82
-00:08:30,680 --> 00:08:37,182
+00:08:33,161 --> 00:08:39,663
 Como la página del periódico en Barcelona, se queda, por su razón. Solo que no está ahí para nada más.
 
 83
-00:08:39,782 --> 00:08:43,246
+00:08:42,263 --> 00:08:45,727
 En Barcelona, la página era cierta y legal, y se quedó.
 
 84
-00:08:44,446 --> 00:08:49,092
+00:08:46,927 --> 00:08:51,573
 Lo que se fue fue el enlace desde su nombre: dieciséis años después, ya no tenía razón.
 
 85
-00:08:50,492 --> 00:08:54,175
+00:08:52,973 --> 00:08:56,656
 En la universidad, se encontró cada lugar donde están los datos de Linh.
 
 86
-00:08:55,175 --> 00:08:58,109
+00:08:57,656 --> 00:09:00,590
 Tiene su copia, con una razón para cada parte.
 
 87
-00:08:59,109 --> 00:09:02,216
+00:09:01,590 --> 00:09:04,697
 Su no se guarda, y lo que se queda se dice, con su fecha.
 
 88
-00:09:03,216 --> 00:09:05,970
+00:09:05,697 --> 00:09:08,451
 Una persona puede pedir. Hay que poder responder.

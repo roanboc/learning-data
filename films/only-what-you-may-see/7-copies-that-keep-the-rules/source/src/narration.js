@@ -8,7 +8,7 @@ const NARR={
  {"id":"air","gap":0.8,"text":"Every one of them breathes out warmth, water and carbon dioxide into the cave's air."},
  {"id":"algae","gap":0.8,"text":"In 1960, with the heat and the lights, green algae spread over the walls, and white crystals form on them.","say":"In nineteen sixty, with the heat and the lights, green algae spread over the walls, and white crystals form on them."},
  {"id":"lost","gap":0.8,"text":"The visits that let people see the paintings are destroying them, and once they're gone, they're gone for everyone."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"The paintings have to be saved, even from the people who love them."},
  {"id":"closed","gap":0.8,"text":"In 1963, the minister for culture, André Malraux, closes the cave to the public.","say":"In nineteen sixty-three, the minister for culture, André Malraux, closes the cave to the public."},
  {"id":"copy","gap":0.8,"text":"On the same hill, its two best-known galleries are rebuilt in concrete, down to every bump in the rock."},
  {"id":"paint","gap":0.8,"text":"And painters copy each painting onto them, with natural pigments, the way the first artists worked."},

@@ -11,7 +11,7 @@ const NARR={
  {"id":"fear","gap":0.8,"text":"They fear a positive result, one that finds the virus, could get out with their name."},
  {"id":"cost","gap":0.8,"text":"It could cost them their job, their home or their health insurance."},
  {"id":"know","gap":0.8,"text":"So people with the virus don't know it, and can't protect the people they love."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"People have to be able to get tested without fearing for their name."},
  {"id":"choose","gap":0.8,"text":"In December 1986, Oregon's health officials let people choose: their name, or a number.","say":"In December, nineteen eighty-six, Oregon's health officials let people choose: their name, or a number."},
  {"id":"does","gap":0.8,"text":"A number does all the test needs: it matches the sample to the person, so each can come back for their result."},
  {"id":"rose","gap":0.8,"text":"In the four months after, the number of gay and bisexual men tested rose from 42 a month to 108.","say":"In the four months after, the number of gay and bisexual men tested rose from forty-two a month to a hundred and eight."},

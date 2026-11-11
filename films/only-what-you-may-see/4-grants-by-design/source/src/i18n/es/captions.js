@@ -26,8 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los nidos podrían quedar pisoteados y la lava, desgastada, y ya se están llevando el coral.",
 "Birds could leave for good, and many of the islands' animals live nowhere else.":
 "Las aves podrían irse para siempre, y muchos animales de las islas no viven en otro lugar.",
-"Something has to change, before visitors come in thousands.":
-"Algo tiene que cambiar, antes de que los visitantes lleguen por miles.",
+"The islands need rules for every visit, before visitors come in thousands.":
+"Las islas necesitan reglas para cada visita, antes de que los visitantes lleguen por miles.",
 "So the national park, on the Darwin Research Station's advice, plans the visits once, for the whole park.":
 "Así que el parque nacional, aconsejado por la Estación Charles Darwin, planifica las visitas una vez, para todo el parque.",
 "Most of the park gets no visitors at all.":

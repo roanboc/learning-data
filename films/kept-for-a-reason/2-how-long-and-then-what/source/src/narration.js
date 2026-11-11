@@ -13,7 +13,7 @@ const NARR={
  {"id":"cost","gap":0.8,"text":"Keeping them all costs millions in rent, staff and steel cabinets."},
  {"id":"close","gap":0.3,"text":"And when the war's offices close, their papers will be shipped away or lost, the valuable with the useless:"},
  {"id":"proof","gap":0.8,"text":"papers someone will need one day, to prove a claim or their service."},
- {"id":"change","gap":0.8,"text":"Something has to change."}
+ {"id":"change","gap":0.8,"text":"Someone has to decide what's worth keeping, before it's too late."}
 ]},
 "before":{"name":"Decided once, before","lead":0.9,"tail":1.0,"vo":[
  {"id":"law","gap":0.8,"text":"On 7 July 1943, the President signs a law the National Archives drafted with a committee of Congress.","say":"On the seventh of July, nineteen forty-three, the President signs a law the National Archives drafted with a committee of Congress."},

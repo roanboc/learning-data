@@ -18,161 +18,161 @@ Nadie puede saber cuál cambió, porque, por definición, el cilindro siempre es
 00:00:40.257 --> 00:00:46.509
 Toda pesada exacta del mundo depende de un objeto, en un lugar, que podría rayarse o perderse.
 
-00:00:47.809 --> 00:00:49.197
-Algo tenía que cambiar.
+00:00:47.809 --> 00:00:51.266
+El kilogramo tenía que apoyarse en algo que ningún accidente pudiera tocar.
 
-00:00:51.097 --> 00:00:57.063
+00:00:53.166 --> 00:00:59.132
 En 2018, la conferencia mundial de pesas y medidas votó definir el kilogramo de nuevo.
 
-00:00:57.963 --> 00:01:05.190
+00:01:00.032 --> 00:01:07.259
 Desde mayo de 2019, lo fija una constante de la naturaleza, la de Planck: la misma en todas partes, y fijada con exactitud.
 
-00:01:06.490 --> 00:01:14.714
+00:01:08.559 --> 00:01:16.783
 Un laboratorio bien equipado hace un kilogramo con ella, como con una balanza de Kibble, que pesa una masa con una fuerza electromagnética.
 
-00:01:16.014 --> 00:01:21.040
+00:01:18.083 --> 00:01:23.109
 Una definición, la misma para todos, y no la guarda ningún objeto ni lugar.
 
-00:01:22.540 --> 00:01:28.428
+00:01:24.609 --> 00:01:30.497
 En Estados Unidos, el patrón de masa es ahora una balanza así, en lugar de la copia número 20.
 
-00:01:29.928 --> 00:01:32.895
+00:01:31.997 --> 00:01:34.964
 En la universidad, una medida tenía el mismo problema.
 
-00:01:33.795 --> 00:01:41.740
+00:01:35.864 --> 00:01:43.809
 En agosto, tres herramientas dieron a la Facultad de Salud tres cifras del costo de la docencia ocasional: nadie supo cuál era la respuesta.
 
-00:01:43.040 --> 00:01:48.802
-Ahora se define una vez, en un formato que cualquier herramienta puede leer, y todas dan la misma cifra.
+00:01:45.109 --> 00:01:52.483
+Ahora cada una se define una vez, con nombre propio, en un formato que toda herramienta lee, y todas dan las mismas cifras.
 
-00:01:56.302 --> 00:02:02.856
+00:01:59.983 --> 00:02:06.537
 La docencia ocasional es la que dan tutores contratados de semestre en semestre, que declaran las horas que enseñan.
 
-00:02:03.956 --> 00:02:08.629
+00:02:07.637 --> 00:02:12.310
 Al planificar el año siguiente, la Facultad de Salud preguntó cuánto había costado en el Semestre 1.
 
-00:02:09.929 --> 00:02:15.981
+00:02:13.610 --> 00:02:19.662
 La hoja de cálculo de la facultad decía 2.46 millones de dólares: las horas de los contratos de los tutores.
 
-00:02:17.281 --> 00:02:22.865
+00:02:20.962 --> 00:02:26.546
 El reporte de nómina decía 1.88 millones: lo pagado en los días de pago del semestre.
 
-00:02:24.165 --> 00:02:34.196
+00:02:27.846 --> 00:02:37.877
 El de Finanzas decía 2.21 millones: las declaraciones aprobadas por la docencia del semestre, más las cargas sociales sobre el sueldo.
 
-00:02:35.696 --> 00:02:40.371
+00:02:39.377 --> 00:02:44.052
 Cada una era correcta para su propia pregunta, pero las tres se llamaban costo de la docencia ocasional.
 
-00:02:42.071 --> 00:02:51.701
+00:02:45.752 --> 00:02:55.382
 Con la cifra de nómina, a Salud le faltarían 330 mil dólares el año siguiente: una de cada siete tutorías sin dinero para un tutor.
 
-00:02:53.601 --> 00:03:00.087
-Rohan Desai, de Finanzas, es dueño de esta medida, pero su definición vivía solo dentro de su reporte.
+00:02:57.282 --> 00:03:02.014
+Cada definición vivía solo dentro de su propia herramienta, donde ninguna otra podía leerla.
 
-00:03:03.187 --> 00:03:07.450
-Como el kilogramo, necesitaba una sola definición que no guardara ninguna herramienta.
+00:03:05.114 --> 00:03:09.814
+Como el kilogramo, cada cifra necesitaba una sola definición que no guardara ninguna herramienta.
 
-00:03:08.950 --> 00:03:14.252
-En septiembre, Rohan la definió una vez, con Jun Park, que construye el proyecto de datos.
+00:03:11.314 --> 00:03:19.401
+En septiembre, Finanzas, RR. HH. y Planificación se reunieron con Jun Park, del proyecto de datos, y no hallaron una medida, sino tres.
 
-00:03:15.352 --> 00:03:20.328
-Su dueño es Rohan: él decide qué significa, en el glosario, antes de cualquier código.
+00:03:20.501 --> 00:03:27.717
+Cada una responde a su pregunta, en su momento: lo que permiten los contratos, lo que se paga y lo que cuesta la docencia.
 
-00:03:21.628 --> 00:03:27.688
-Sus palabras: lo que cuesta la docencia ocasional de un período lectivo. También se le dice costo de la docencia por sesión.
+00:03:29.217 --> 00:03:35.035
+Las horas ocasionales contratadas son de Planificación: su dueña es Clara Jensen, para planificar la docencia del año siguiente.
 
-00:03:28.988 --> 00:03:36.789
-Sus reglas: declaraciones aprobadas, de personal ocasional, por docencia: tutorías, corrección y consultas, más cargas sociales.
+00:03:36.335 --> 00:03:42.859
+El pago ocasional pagado es de RR. HH.: su dueña es Ingrid Holm, contado por día de pago, para revisar cada nómina.
 
-00:03:38.089 --> 00:03:42.497
-Se cuenta por el período lectivo en que se dio la docencia, no por el día en que se pagó.
+00:03:44.159 --> 00:03:52.610
+Y el costo de la docencia ocasional es de Finanzas: su dueño es Rohan, para el presupuesto, contado por el período lectivo de la docencia.
 
-00:03:43.997 --> 00:03:49.174
-Las declaraciones son datos de RR. HH.: Ingrid Holm responde por lo que significa cada uno de sus campos.
+00:03:53.910 --> 00:03:58.169
+Cada dueño decide qué significa la suya, en el glosario, antes de cualquier código.
 
-00:03:50.474 --> 00:03:58.338
-Y las otras dos cifras reciben nombre propio: horas ocasionales contratadas, para planificar, y pago ocasional pagado, por día de pago.
+00:03:59.469 --> 00:04:04.525
+Ahora todos ven por qué difieren las tres cifras, y cuál responde a su pregunta.
 
-00:04:01.638 --> 00:04:06.723
-Su hogar es una vista de métricas en Unity Catalog, junto a las tablas de las que se calcula.
+00:04:08.025 --> 00:04:13.682
+El hogar de cada medida es una vista de métricas en Unity Catalog, junto a las tablas de las que se calcula.
 
-00:04:08.223 --> 00:04:16.703
+00:04:15.182 --> 00:04:23.662
 Una vista de métricas define una medida una vez, y da la cifra correcta como se agrupe: por facultad, asignatura o período lectivo.
 
-00:04:18.403 --> 00:04:22.888
+00:04:25.362 --> 00:04:29.847
 Unity Catalog la gobierna como a una tabla: quién puede leerla y qué la lee.
 
-00:04:24.188 --> 00:04:26.733
+00:04:31.147 --> 00:04:33.692
 Así, todas las herramientas de la plataforma leen esta.
 
-00:04:28.433 --> 00:04:36.173
+00:04:35.392 --> 00:04:43.132
 Jun la escribe en unas líneas de YAML en el proyecto de datos, que la construye, como títulos otorgados en El significado en la plataforma.
 
-00:04:37.673 --> 00:04:44.740
+00:04:44.632 --> 00:04:51.699
 El equipo de datos revisa el código en un pull request, y Noor Rahman, la arquitecta de datos, lo aprueba para producción.
 
-00:04:46.440 --> 00:04:49.916
+00:04:53.399 --> 00:04:56.875
 A Rohan, dueño de la medida, se le avisa a qué afecta el cambio.
 
-00:04:50.616 --> 00:04:57.633
+00:04:57.575 --> 00:05:04.592
 Sus palabras van con ella: un nombre para mostrar, una descripción, sinónimos para Genie y su formato, en dólares australianos.
 
-00:05:01.133 --> 00:05:07.725
+00:05:08.092 --> 00:05:14.683
 Nada de esto es nuevo: hace décadas que las herramientas de BI guardan una capa de definiciones de negocio sobre las tablas.
 
-00:05:09.225 --> 00:05:15.665
+00:05:16.183 --> 00:05:22.623
 Pero cada una las guardaba en su propio formato, ninguna otra podía leerlas, y una herramienta nueva obligaba a escribirlas todas de nuevo.
 
-00:05:17.365 --> 00:05:23.973
+00:05:24.323 --> 00:05:30.931
 dbt también tiene una capa semántica, MetricFlow, que lee las medidas definidas en el YAML del proyecto.
 
-00:05:25.473 --> 00:05:30.150
+00:05:32.431 --> 00:05:37.108
 Planificación cuenta con ella a los estudiantes cerca de un certificado de posgrado, en el mismo proyecto.
 
-00:05:31.650 --> 00:05:35.313
+00:05:38.608 --> 00:05:42.271
 MetricFlow es de código abierto, así que otras herramientas pueden construir sobre él.
 
-00:05:36.813 --> 00:05:42.906
+00:05:43.771 --> 00:05:49.864
 Cualquiera puede ser el hogar de una medida. Elige uno para cada una, cerca de la mayoría de sus lectores, y nunca la definas dos veces.
 
-00:05:46.606 --> 00:05:51.859
+00:05:53.564 --> 00:05:58.817
 Para que las herramientas lean las definiciones de las demás, necesitan un formato común: Apache Ossie.
 
-00:05:53.159 --> 00:06:02.264
+00:06:00.117 --> 00:06:09.222
 Empezó como el Open Semantic Interchange, y hoy lo respaldan más de cincuenta organizaciones, entre ellas Databricks y dbt Labs.
 
-00:06:03.764 --> 00:06:11.563
+00:06:10.722 --> 00:06:18.521
 Los conversores traducen una definición entre Ossie y el formato de cada herramienta: una vista de métricas, MetricFlow y muchos más.
 
-00:06:13.063 --> 00:06:20.812
+00:06:20.021 --> 00:06:27.771
 dbt escribe las medidas del proyecto en Ossie cada vez que lee el proyecto, y también lee definiciones en Ossie.
 
-00:06:22.312 --> 00:06:29.756
+00:06:29.271 --> 00:06:36.715
 Así, el costo de la docencia ocasional llega a cualquier herramienta que lea Ossie, con sus palabras y sus reglas, y nadie lo reescribe.
 
-00:06:31.256 --> 00:06:34.284
+00:06:38.215 --> 00:06:41.243
 Deja cada regla dentro de la medida, para que viaje con ella.
 
-00:06:35.784 --> 00:06:39.074
+00:06:42.743 --> 00:06:46.033
 Y revisa lo que llega: un conversor avisa lo que no puede llevar.
 
-00:06:42.374 --> 00:06:45.412
+00:06:49.333 --> 00:06:52.371
 Hoy, jueves 5 de noviembre, es día de pago.
 
-00:06:46.712 --> 00:06:54.698
+00:06:53.671 --> 00:07:01.657
 Rohan le pregunta a Genie One cuánto le ha costado la docencia ocasional a Salud en este semestre: 1.84 millones de dólares.
 
-00:06:56.198 --> 00:07:00.716
+00:07:03.157 --> 00:07:07.675
 El botón Ask Genie del tablero quincenal da lo mismo, desde la misma definición.
 
-00:07:02.016 --> 00:07:08.463
-La del semestre pasado es 2.21 millones, con las otras dos cifras al lado, cada una con su propio nombre.
+00:07:08.975 --> 00:07:16.294
+La del semestre pasado es 2.21 millones, y a su lado, las otras dos medidas, cada una con su nombre y su dueño.
 
-00:07:09.963 --> 00:07:14.884
+00:07:17.794 --> 00:07:22.715
 Rohan fija con el costo el presupuesto de Salud del año siguiente, con el tutor de cada tutoría incluido.
 
-00:07:16.384 --> 00:07:23.950
-Como el kilogramo, el costo de la docencia ocasional es una definición, escrita donde cualquiera la lee, y no la guarda ninguna herramienta.
+00:07:24.215 --> 00:07:31.144
+Como el kilogramo, cada medida es una definición, escrita donde cualquiera la lee, y no la guarda ninguna herramienta.
 
-00:07:25.850 --> 00:07:33.913
+00:07:33.044 --> 00:07:41.107
 Los estándares ya existen, así que no los reinventes: investiga, adapta, implementa, itera, empezando por la documentación oficial.

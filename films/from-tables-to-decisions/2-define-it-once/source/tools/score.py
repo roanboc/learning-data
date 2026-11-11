@@ -214,7 +214,7 @@ mark(G('kilo', 'breath', 0.4), 0.85)
 
 # 2. Three numbers, one name: A minor. The large organette at the turn; the HR system and the claims app, their cards set down; Health's
 #    question, a line that rises and stops; the three windows, each set down with its number; all three under one name, their three
-#    notes together; the budget short, one low A; Rohan, whose definition lived only in his report: a short line, then a small lock
+#    notes together; the budget short, one low A; each definition, only inside its own tool: a short line, then a small lock under each
 ew = lambda lid, word, off=0: W('three', lid, word, off)
 e0 = S0('three')
 low(A2, e0 + 0.4, 0.7, 0.7)
@@ -234,30 +234,30 @@ knock(ew('short', 'Budget', -0.1), 0.012, px(700), 230)
 low(A2, ew('short', 'three hundred', 0.0), 0.8, 0.75)
 for i in range(3):
     tap(ew('short', 'one tutorial', -0.3 + 0.35 * i), 0.006, px(600 + 180 * i))
-line(((G4, 0.0, 0.3), (E4, 0.36, 0.45)), ew('inside', 'Rohan', -0.3), 0.6, px(1030))
-tap(ew('inside', 'Rohan', 0.0), 0.007, px(700))
-lock(ew('inside', 'only inside', 0.6), 0.009, px(1560))
+line(((G4, 0.0, 0.3), (E4, 0.36, 0.45)), ew('inside', 'Each definition', -0.3), 0.6, px(960))
+for i in range(3):
+    lock(ew('inside', 'only inside', 0.6 + 0.3 * i), 0.008, px((360, 960, 1560)[i]))
 
-# 3. Its owner, its words, its rules: C major. Like the kilogram, the Planck card, low C and G at the turn; the empty card for one
-#    definition; defined once in September, a short rise as the definition is set down; each line of it a tap as it comes in;
-#    Ingrid, for the claims' fields, one note; the other two numbers, each a card and a note of its own
+# 3. Three measures, three owners: C major. Like the kilogram, the Planck card, low C and G at the turn; in September, not one measure
+#    but three: a short rise, and three empty cards, each a tap; each filled by its domain's measure, a card set down and a note of its
+#    own, the same three notes as the three numbers in the opening (E, A, C), and a tap as each owner's name and moment come in; the
+#    glossary: one soft note; why the numbers differ: the three notes together, settled in C
 ow = lambda lid, word, off=0: W('once', lid, word, off)
 knock(ow('like', 'Like', -0.2), 0.012, px(960), 230)
 low(C3, ow('like', 'Like', -0.1), 0.6, 0.7); reed(G4, ow('like', 'Like', -0.1), 0.45, 0.6, px(960))
-tap(ow('like', 'one definition', 0.0), 0.007, px(960))
-knock(ow('sept', 'September', 0.1), 0.012, px(960), 240)
-line(((C5, 0.0, 0.25), (E5, 0.3, 0.45)), ow('sept', 'September', 0.2), 0.6, px(960))
-tap(ow('sept', 'Rohan', 0.0), 0.007, px(300))
 tap(ow('sept', 'Jun', 0.0), 0.007, px(1640))
-for lid, word, off in (('owner', 'owner', -0.2), ('words', 'words', -0.2), ('words', 'Also called', -0.1), ('rules', 'claims approved', 0.0),
-                       ('rules', 'by casual staff', 0.0), ('rules', 'for teaching', 0.0), ('rules', 'plus on costs', 0.0), ('period', 'Counted', 0.0)):
-    tap(ow(lid, word, off), 0.007, px(960))
-tap(ow('ingrid', 'The claims', 0.0), 0.007, px(1640))
-reed(F4, ow('ingrid', 'Ingrid', -0.1), 0.45, 0.55, px(1640))
-knock(ow('names', 'casual hours contracted', 0.0), 0.011, px(750), 240)
-reed(E4, ow('names', 'casual hours contracted', 0.05), 0.35, 0.55, px(750))
-knock(ow('names', 'casual pay paid', 0.0), 0.011, px(1210), 250)
-reed(G4, ow('names', 'casual pay paid', 0.05), 0.4, 0.55, px(1210))
+line(((C5, 0.0, 0.25), (E5, 0.3, 0.45)), ow('sept', 'but three', 0.0), 0.6, px(960))
+for i in range(3):
+    tap(ow('sept', 'but three', 0.25 * i), 0.006, px(960))
+for i, (lid, name, who_, when, m, play) in enumerate((('clara', 'Casual hours contracted', 'Clara', 'to plan', E4, reed),
+                                                      ('ingrid', 'Casual pay paid', 'Ingrid', 'counted', A3, low),
+                                                      ('rohan', 'casual teaching cost', 'Rohan', 'counted', C5, reed))):
+    knock(ow(lid, name, -0.1), 0.011, px(960), 240 + 10 * i)
+    play(m, ow(lid, name, 0.0), 0.35, 0.55, px(960))
+    tap(ow(lid, who_, -0.1), 0.007, px(300))
+    tap(ow(lid, when, 0.0), 0.006, px(960))
+reed(G4, ow('owner', 'glossary', 0.0), 0.4, 0.5, px(960))
+low(C3, ow('differ', 'differ', 0.0), 0.6, 0.65); reed(E4, ow('differ', 'differ', 0.1), 0.4, 0.5, px(760)); reed(G4, ow('differ', 'differ', 0.2), 0.4, 0.5, px(1160))
 
 # 4. Near the data, built as code: the platform comes up, low C and E at the turn; the metric view and the fact beside it, each set
 #    down; grouped by faculty, unit and teaching period; Finance's lock; every tool reads it, a short line; the data project's window,
@@ -268,6 +268,8 @@ n0 = S0('near')
 air(n0 + 0.2, 0.9, 0.007, px(650), 150, 800)
 low(C3, n0 + 0.4, 0.5, 0.7); reed(E4, n0 + 0.4, 0.35, 0.55, px(650))
 knock(nw('home', 'metric view', 0.0), 0.012, px(430), 240)
+for i in range(2):
+    knock(nw('home', 'metric view', 0.35 + 0.35 * i), 0.009, px(430), 250 + 10 * i)
 knock(nw('home', 'beside', 0.0), 0.011, px(430), 260)
 for word in ('by faculty', 'unit', 'teaching period'):
     tap(nw('view', word, -0.1), 0.007, px(990))

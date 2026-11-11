@@ -1,0 +1,191 @@
+1
+00:00:01,600 --> 00:00:08,728
+México, 1944. En el valle del Yaqui, en Sonora, en el norte, los agricultores casi ya no sembraban trigo.
+
+2
+00:00:10,278 --> 00:00:15,342
+La roya del tallo, un hongo que asfixia la planta, podía arruinar todo un campo de trigo de una vez.
+
+3
+00:00:16,892 --> 00:00:23,726
+Ese año, de un campo de allí se esperaban solo diez bushels por acre: una cosecha pobre para una temporada de trabajo.
+
+4
+00:00:25,476 --> 00:00:32,317
+Para un agricultor, un campo arruinado era un año de trabajo y de semilla perdido, y México compraba trigo afuera para su pan.
+
+5
+00:00:34,067 --> 00:00:41,249
+Y criar un trigo que resistiera la roya era lento: una generación al año, y muchos años antes de llegar a una granja.
+
+6
+00:00:42,999 --> 00:00:45,584
+Los agricultores no podían esperar una década por cada trigo nuevo.
+
+7
+00:00:47,134 --> 00:00:55,857
+Desde 1945, un programa de trigo de la Secretaría de Agricultura de México, con el fitomejorador Norman Borlaug, probó otro camino.
+
+8
+00:00:57,607 --> 00:01:06,103
+Sembraron dos generaciones al año: una en verano, en las tierras altas cerca de Ciudad de México, y otra en invierno, en Sonora, al norte.
+
+9
+00:01:08,053 --> 00:01:15,148
+Cada temporada cruzaban plantas, las probaban en el campo, guardaban las pocas mejores y las sembraban en el otro lugar.
+
+10
+00:01:17,098 --> 00:01:22,873
+Muchos fitomejoradores decían que un trigo solo debía criarse donde iba a crecer. El equipo lo probó igual, y midió.
+
+11
+00:01:24,623 --> 00:01:30,836
+Redujo a la mitad el tiempo para criar un trigo nuevo, y los trigos nuevos crecieron bien en ambos lugares, y mucho más allá.
+
+12
+00:01:32,786 --> 00:01:40,194
+Para 1956, México cultivaba todo el trigo que necesitaba. En los primeros veinte años del programa, su cosecha se triplicó.
+
+13
+00:01:42,144 --> 00:01:47,125
+Y las pruebas nunca pararon: la roya seguía cambiando, así que el trigo también tenía que cambiar.
+
+14
+00:01:48,675 --> 00:01:55,852
+Las plataformas de datos también cambian, cada mes. Lo que perdura son las ideas, y una forma rápida y honesta de probar lo nuevo.
+
+15
+00:02:03,602 --> 00:02:08,813
+Este módulo recorrió la plataforma de la universidad, desde donde nacen los datos hasta quién los lee.
+
+16
+00:02:10,563 --> 00:02:16,119
+En Datos que se mueven, mover datos era fácil, y acordar qué significa cada campo era el trabajo.
+
+17
+00:02:17,669 --> 00:02:23,371
+Qué tan frescos deben ser los datos dependía de cuándo alguien actúa con ellos, y casi todo análisis aguantaba un día.
+
+18
+00:02:24,921 --> 00:02:29,014
+Y cada solicitud se escribía una vez, en una plataforma, para que todos la leyeran.
+
+19
+00:02:30,764 --> 00:02:38,662
+En Datos como software, los scripts se volvieron software: probados, revisados por el equipo de datos y publicados siempre igual.
+
+20
+00:02:40,212 --> 00:02:44,266
+Y la plataforma se vigilaba sola, mientras una persona decidía qué cambiar.
+
+21
+00:02:46,016 --> 00:02:54,412
+En De las tablas a las decisiones, las respuestas llegaban a pedido, y cada medida se definía a la vista, como la entiende cada área.
+
+22
+00:02:55,962 --> 00:03:00,910
+Y cada lector, persona o agente, leía esas definiciones como sí mismo.
+
+23
+00:03:02,660 --> 00:03:08,671
+Y aquí, en Documentos y comentarios finales, cada documento se leyó, se guardó o se escribió como datos.
+
+24
+00:03:10,421 --> 00:03:13,193
+Cada idea es más vieja que las herramientas que la mostraron.
+
+25
+00:03:17,143 --> 00:03:21,320
+Las herramientas cambian rápido: funciones nuevas cada mes, nombres nuevos, límites nuevos.
+
+26
+00:03:23,420 --> 00:03:26,770
+Una película que enseñara cada botón quedaría vieja en pocos meses.
+
+27
+00:03:28,970 --> 00:03:36,357
+Así, estas películas tratan lo que cambia despacio: acordar qué significan los datos, probarlos, gobernarlos y servirlos cuando se actúa.
+
+28
+00:03:38,657 --> 00:03:46,040
+Para el cómo, ve a la fuente: la documentación y la formación oficiales de cada herramienta, al día gracias a quienes la construyen.
+
+29
+00:03:48,240 --> 00:03:56,426
+¿No usas Databricks? Las ideas siguen valiendo. Revisa qué ofrece tu plataforma para cada una: casi todas tienen respuesta, con otro nombre.
+
+30
+00:03:58,726 --> 00:04:05,127
+No elijas una función porque es nueva, ni una plataforma porque la mostró una película. Elige lo que responde a una necesidad real.
+
+31
+00:04:09,427 --> 00:04:15,149
+¿Y cómo mantenerse al día? Con un ciclo, pequeño y rápido: investigar, adaptar, implementar, iterar.
+
+32
+00:04:17,399 --> 00:04:22,490
+Son otra vez las dos temporadas de los fitomejoradores: cuanto más corto el ciclo, más aprendes en el mismo tiempo.
+
+33
+00:04:24,540 --> 00:04:33,575
+Investigar parte de una necesidad real, no de la función. El equipo de Rohan ingresaba cada factura a mano, y pidió algo mejor en un ticket.
+
+34
+00:04:35,625 --> 00:04:42,680
+Jun leyó la documentación oficial de las funciones que leen documentos: qué hacen, cuánto cuestan y dónde se detienen.
+
+35
+00:04:44,730 --> 00:04:53,036
+Adaptar es probarlo en pequeño, con tus datos, en un sandbox, por un tiempo fijo: dos días, con 200 facturas de septiembre.
+
+36
+00:04:55,086 --> 00:05:04,558
+Jun comparó lo leído por las funciones con lo que Finanzas ingresó: 188 de 200 coincidían, y casi todas las otras 12 eran malos escaneos.
+
+37
+00:05:06,808 --> 00:05:11,582
+Dos días le dijeron al equipo lo que meses de suposiciones no podían: dónde funciona y dónde no.
+
+38
+00:05:13,782 --> 00:05:19,588
+Implementar es un caso de uso, bien hecho: en el proyecto de datos, con sus pruebas y una forma de volver atrás.
+
+39
+00:05:21,638 --> 00:05:28,963
+El equipo de datos revisó el cambio. Luego el equipo de Rohan revisó los resultados de octubre, y solo entonces se cerró el ticket.
+
+40
+00:05:31,213 --> 00:05:38,030
+Iterar es observar qué pasa, y volver a probar: cada mes, el equipo mira qué fue a una persona, y por qué.
+
+41
+00:05:40,280 --> 00:05:45,776
+No toda prueba termina en sí. Probaron que el modelo eligiera el centro de costos de cada factura.
+
+42
+00:05:47,426 --> 00:05:50,978
+Pero la lista de proveedores de Finanzas ya lo daba, así que lo dejaron.
+
+43
+00:05:53,228 --> 00:05:56,384
+Una prueba que termina en no cuesta dos días, no un año.
+
+44
+00:06:00,434 --> 00:06:09,420
+Los trigos de los años cincuenta ya no están en los campos. El método, dos lugares y dos temporadas, lo siguen usando hoy.
+
+45
+00:06:11,120 --> 00:06:15,855
+Así que guarda las ideas, y prueba las funciones: en pequeño, pronto y sobre una necesidad real.
+
+46
+00:06:17,355 --> 00:06:24,434
+Con esto cierra el módulo: mover datos, operar la plataforma, servirlos a personas y agentes, y leer documentos.
+
+47
+00:06:25,734 --> 00:06:33,630
+Cada cosa requería antes todo un equipo. Databricks y dbt hacen hoy gran parte; a las personas les queda acordar qué significan los datos.
+
+48
+00:06:35,130 --> 00:06:40,627
+Empieza por la documentación oficial. Investiga, adapta, implementa, itera, y sigue adelante.

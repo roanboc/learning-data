@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Ideas that last, features you test",
+    "key": "ideas-that-last-en",
+    "dir": "films/documents-as-data/2-ideas-that-last/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/ideas-that-last/film.js",
+    "video": "dist/ideas-that-last.mp4",
+    "file": "ideas-that-last.mp4",
+    "captions": [
+      [
+        "films/documents-as-data/2-ideas-that-last/captions/en.srt",
+        "ideas-that-last.en.srt"
+      ],
+      [
+        "films/documents-as-data/2-ideas-that-last/captions/es.srt",
+        "ideas-that-last.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/documents-as-data/2-ideas-that-last/source",
+      ":(exclude)films/documents-as-data/2-ideas-that-last/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+/* Learning Data: "Pause and think" for Ideas that last, features you test, in Spanish. The keys and the right answers' places match think.en.js. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un laboratorio",off:"Quitar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Reproducir con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  recap:{q:"Cada serie mostró su idea en Databricks y dbt. ¿Por qué la película dice que cada idea es más vieja que sus herramientas?",
+    opts:[{t:"Porque las herramientas llegaron primero, y las ideas se escribieron después para explicarlas."},{t:"Porque las ideas vienen de marcos antiguos, así que no hace falta una herramienta para aplicarlas.",near:true},{t:"Porque se acordaban, probaban y gobernaban los datos mucho antes de que estas herramientas lo hicieran.",ok:true}],
+    why:"Acordar qué significa un campo, probar y publicar siempre igual, definir cada medida a la vista: los equipos lo hacían a mano mucho antes de que las herramientas de hoy tomaran gran parte del trabajo. Las herramientas muestran las ideas; no las crean. Igual ayudan, por eso las películas las muestran. ¿Cuál de estas ideas hace tu equipo todavía a mano?"},
+  light:{q:"Tu equipo no usa Databricks. ¿Qué es lo mejor que puedes llevarte de estas películas?",
+    opts:[{t:"Las ideas, y revisar qué ofrece tu propia plataforma para cada una.",ok:true},{t:"Las ideas, y un cambio a Databricks, ya que las películas las mostraron ahí.",near:true},{t:"Cada botón que mostraron las películas, ya que casi todas las plataformas los llaman igual."}],
+    why:"Las ideas valen en cualquier plataforma: acordar qué significan los datos, probarlos, gobernarlos y servirlos cuando el negocio actúa. Casi todas las plataformas tienen respuesta para cada una, con otro nombre, y su propia documentación dice cómo. Elegir una plataforma porque la mostró una película no es una necesidad real. ¿Cómo llama tu plataforma a cada una de las cuatro?"},
+  loop:{q:"El equipo de Rohan pide algo mejor que ingresar facturas a mano. ¿Cómo es la primera prueba de una función nueva?",
+    opts:[{t:"Leer la documentación, y luego construirla en el proyecto de datos para todas las facturas.",near:true},{t:"Dos días en un sandbox, con 200 de tus facturas, comparadas con lo que se ingresó.",ok:true},{t:"Un piloto de un año con los documentos de todos los equipos, para cubrir toda la universidad."}],
+    why:"Adaptar es en pequeño, con tus datos, en un sandbox, por un tiempo fijo. Dos días con 200 facturas mostraron dónde funcionan las funciones y dónde no (188 coincidieron; casi todas las 12 restantes eran malos escaneos), antes de que algo llegara al proyecto de datos. Ir directo a todas las facturas se salta lo que la prueba habría enseñado. ¿Qué función probarías así primero?"}
+  }}};

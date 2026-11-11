@@ -6,7 +6,7 @@ path of its file, and checked like any other data before anyone pays. HR's signe
 so they're kept as they were signed, with the metadata the HR system writes beside each file, and a person
 or an agent finds the signed version by it and cites its file. Claims for hours, which the university's
 own claims app makes, are written as data from the start, with what each field means in a data contract.
-*Files as data and as context*, the film of *Documents as data*, the last series of *Modern data basics*,
+*Files as data and as context*, film 1 of 2 in *Documents and closing remarks*, the last series of *Modern data basics*,
 shows it.
 
 Databricks only: nothing here runs on DuckDB or in CI. The suppliers, the invoices and the counts are

@@ -6,5 +6,5 @@ const BREATH={
 "invoices":{"hold":{"three":1.2,"october":0.6,"check":0.4,"typed":0.8,"volume":0.8,"parse":1.0,"extract":1.0,"path":0.8,"model":0.6,"checks":0.6,"rules":1.0,"passed":0.4,"person":0.8,"decides":0.6}},
 "contracts":{"hold":{"official":0.6,"beside":1.2,"writes":0.8,"linh":1.0,"week":1.0,"alike":1.2,"ends":1.2,"context":0.8,"who":0.6}},
 "written":{"hold":{"best":0.6,"before":0.8,"json":1.2,"meta":1.0,"yaml":1.2,"log":0.8}},
-"close":{"hold":{"kept":0.8,"again":0.8,"rule":0.4,"write":0.4,"official":0.4,"read":0.8,"docs":0.4,"iterate":1.0,"module":0.6,"team":0.8,"data":0.4},"breathe":4.6}
+"close":{"hold":{"kept":0.8,"again":0.8,"rule":0.4,"write":0.4,"official":0.4,"read":0.8,"docs":0.4,"iterate":1.0,"data":0.4},"breathe":4.6}
 };

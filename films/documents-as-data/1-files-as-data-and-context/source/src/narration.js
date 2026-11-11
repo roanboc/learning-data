@@ -1,4 +1,4 @@
-// Files as data and as context, the single film of Documents as data, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
+// Files as data and as context, film 1 of 2 in Documents and closing remarks, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers and function names in words). The few longer stops are in breath.js.
 const NARR={
 "logs":{"name":"Logbooks into charts","lead":1.6,"tail":1.0,"vo":[
@@ -7,7 +7,7 @@ const NARR={
  {"id":"unread","gap":0.8,"text":"Thousands of days at sea were written there, each ship in its own way, and nobody read them again."},
  {"id":"habit","gap":0.8,"text":"So captains sailed the routes they knew, not the winds and currents that were really there."},
  {"id":"weeks","gap":0.8,"text":"Passages took weeks longer than they had to: more weeks at sea for the crews, with food and water running low, and cargo and letters late."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The answers were already in the logs. Someone had to read them."},
  {"id":"read","gap":0.8,"text":"So the office read its old logs into tables: the winds and currents of each patch of ocean, month by month."},
  {"id":"charts","gap":0.8,"text":"From them, it drew wind and current charts, free to any captain who would keep a log in one set form, and send it back."},
  {"id":"brussels","gap":0.8,"text":"In 1853, at Brussels, ten nations, with the statistician Adolphe Quetelet in the chair, agreed one log for ships of every flag.","say":"In eighteen fifty-three, at Brussels, ten nations, with the statistician Adolphe Quetelet in the chair, agreed one log for ships of every flag."},
@@ -56,7 +56,5 @@ const NARR={
  {"id":"read","gap":0.8,"text":"If it's written for people, we read it, with the platform's functions or a scraper, only where a use case needs it, and keep the file."},
  {"id":"docs","gap":0.8,"text":"Every organisation's documents differ, and the standards are there already: don't reinvent the wheel."},
  {"id":"iterate","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate."},
- {"id":"module","gap":0.8,"text":"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents."},
- {"id":"team","gap":0.8,"text":"Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means."},
- {"id":"data","gap":0.8,"text":"And for documents: read them where a use case needs it, keep the file and its metadata, and write what's yours as data."}]}
+ {"id":"data","gap":0.8,"text":"In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data."}]}
 };

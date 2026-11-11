@@ -90,11 +90,12 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 - [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
 - [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
-### Documents as data
+### Documents and closing remarks
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
 - [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
+- [Ideas that last, features you test](../films/documents-as-data/2-ideas-that-last/) — `ideas-that-last`
 
 ## Analytics engineering
 

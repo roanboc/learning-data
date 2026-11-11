@@ -1,0 +1,54 @@
+{
+  "key": "ideas-that-last",
+  "title": "Ideas that last, features you test",
+  "sub": "The closing film of Documents and closing remarks, and of Modern data basics: what the module showed, why its films stay with ideas that change slowly and leave the how to each tool's official documentation and training, why the same ideas hold on any platform, and how to test what's new in a short loop: investigate, adapt, implement, iterate, from a real need, small, soon, with a way back.",
+  "howto": "The film is drawn in the module's look: the university's night map, its parts as dark glass. Light blue is data moving and the platform's structure, gold what people agree on and the ideas that last, green a check that passes, red a harm or a failure, and amber a person's turn. The opening, in Mexico from 1944 to 1956, is lit by a low sun over a wheat field, with the country drawn as a map.",
+  "src": [
+    "il_world.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "loop",
+    "adapt",
+    3.0
+  ],
+  "logos": true,
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bRohan's\\b",
+      "Roe-han's"
+    ],
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bYaqui\\b",
+      "Yah-kee"
+    ],
+    [
+      "\\bBorlaug\\b",
+      "Bore-log"
+    ],
+    [
+      "\\bSonora\\b",
+      "So-nora"
+    ]
+  ],
+  "story": [
+    "seasons"
+  ],
+  "urgent": []
+}

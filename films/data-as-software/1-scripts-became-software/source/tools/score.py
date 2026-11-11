@@ -148,8 +148,8 @@ def keys(s, n, g=0.006, pan=0.0, step=0.16):
 #    1 July 1940: G major, the lead's low G and the partner rising. The bridge built across: the lead's D falling to G. Light and
 #    slender, built to the best theory of its day: the mark, the lead alone, a little uneven. Galloping Gertie: the wind swells in;
 #    the partner's B. Nobody had tested it: E minor, the lead's low E. The twist: the wind rises; the lead's B; the deck tears (a low
-#    crack, the music stops), the pieces meet the water, and the partner falls B, G, E. Gone for ten years: E held; "Something had to
-#    change": C major. The engineers' report: G and D, open; the tunnel's steady wind. Farquharson tests for years: the partner, B to
+#    crack, the music stops), the pieces meet the water, and the partner falls B, G, E. Gone for ten years: E held; "The next bridge
+#    had to be proven": C major. The engineers' report: G and D, open; the tunnel's steady wind. Farquharson tests for years: the partner, B to
 #    C to D, slowly. The tests find the deck: D major, a tick for each word. 1950, tested before it was built: the mark, both players,
 #    note for note; 76 years: G held. A practice from next door: C to G as each row lights. Data work did the same: D to G. Payroll's
 #    export, on one laptop: E minor, the lead alone. Now it's software: a note for each of the three, and the title card in G major
@@ -188,9 +188,9 @@ for k, (dl, x) in enumerate(((0.0, 771), (0.22, 960), (0.42, 1149))):
 # then the partner falls, B to G to E, as the water closes
 tF = _hit(2, 0.42) + 0.9
 part(B3, tF, tF + 0.7, 0.42, att=0.2, rel=0.4); part(G3, tF + 0.75, tF + 1.45, 0.42, att=0.2, rel=0.4); part(E3, tF + 1.5, tF + 2.8, 0.42, att=0.25, rel=0.9)
-# no one is killed, but the only road is gone for ten years: E held; "Something had to change": C major
-lead(E2, Gt('gone', 'No one', -0.2), Gt('gone', 'Something had to change', -0.1), 0.7, att=0.8, rel=0.6)
-tC = Gt('gone', 'Something had to change', -0.05)
+# no one is killed, but the only road is gone for ten years: E held; "The next bridge had to be proven": C major
+lead(E2, Gt('gone', 'No one', -0.2), Gt('gone', 'The next bridge', -0.1), 0.7, att=0.8, rel=0.6)
+tC = Gt('gone', 'The next bridge', -0.05)
 lead(C3, tC, END('gertie', 'gone') + 1.0, 0.75, att=0.35, rel=1.0)
 part(E3, tC + 0.15, END('gertie', 'gone') + 1.0, 0.45, att=0.4, rel=1.0); part(G3, tC + 0.6, END('gertie', 'gone') + 1.0, 0.4, att=0.4, rel=1.0)
 # the engineers' report, set down; test bridges like it first, as models in a wind tunnel: G and D, open
@@ -270,7 +270,7 @@ lead(B2, tU, tU + 1.0, 0.55, att=0.3, rel=0.4); lead(E2, tU + 1.05, tU + 2.6, 0.
 
 # 3. Into the project: the laptop's script goes into Git: G major, the lead's G and the partner's D, as the window opens; the files and
 #    the history, a tap a row. Its sums, a model in dbt: the window set down; the rule written once, on HR's calendar: the partner's
-#    B. Ingrid confirms it: a person's approval, D to G; a change asks HR to review it: a tap. The tests, first: a tap for each edge;
+#    B. Ingrid confirms it: a person's approval, D to G; a change starts with HR's ticket: a tap. The tests, first: a tap for each edge;
 #    they pass: G, both players, note for note. The three films: a card each. A branch: a breath of air as it draws; the pull
 #    request laid down; its checks, a tap each
 P3 = lambda lid, word, off=0: W('project', lid, word, off)
@@ -286,7 +286,7 @@ paper(G('project', 'model', -0.4), 0.010, px(960), 0.4)
 part(B3, P3('model', 'written once', -0.2), P3('model', 'written once', 1.4), 0.36, att=0.3, rel=0.8)
 knock(P3('model', 'calendar', -0.3), 0.011, px(960), 240)
 approve(P3('ingrid', 'confirmed', -0.05), 0.62, hold=1.2)
-tap(P3('ingrid', 'asks HR to review', -0.2), 0.008, px(1310))
+tap(P3('ingrid', 'starts with a ticket', -0.2), 0.008, px(1310))
 paper(P3('tests', 'tests first', -0.4), 0.010, px(960), 0.35)
 tap(P3('tests', 'eleven fifty-nine', -0.3), 0.007, px(760)); tap(P3('tests', 'twelve oh one', -0.3), 0.007, px(760))
 tPs = P3('tests', 'two weeks later', 0.4)
@@ -299,7 +299,8 @@ paper(P3('branch', 'pull request', -0.2), 0.010, px(960), 0.35)
 tap(P3('branch', 'build it', 0.0), 0.007, px(1300)); tap(P3('branch', 'every test', 0.0), 0.007, px(1360))
 
 # 4. Someone else reads it: Jun's pull request rises (air); Sam's laid down. Sam reviews Jun's, Jun reviews Sam's: the second player
-#    joins the first, the lead's D and the partner's G, then the partner's B. Merged once reviewed and green: the stamp, G major. Change
+#    joins the first, the lead's D and the partner's G, then the partner's B. Merged once reviewed and green: the stamp, G major. Rohan's
+#    ticket: laid down, a tap for its branch and its pull requests. Change
 #    without surprises: its card. An agent proposes: its pull request laid down; a person approves: the approval, D to G
 V4 = lambda lid, word, off=0: W('review', lid, word, off)
 v0 = S0('review')
@@ -311,12 +312,14 @@ part(G3, V4('swap', 'so Jun reviewed', 0.3), V4('swap', 'so Jun reviewed', 1.7),
 tGr = V4('merge', 'every check green', -0.1)
 stamp(tGr, 0.014, px(960))
 lead(G2, tGr + 0.05, tGr + 2.0, 0.6, att=0.25, rel=1.0); part(B3, tGr + 0.2, tGr + 2.0, 0.36, att=0.25, rel=1.0)
+paper(V4('ticket', 'in a ticket', -0.3), 0.010, px(960), 0.35)
+tap(V4('ticket', 'its branch', -0.2), 0.007, px(760)); tap(V4('ticket', 'pull requests', -0.2), 0.007, px(860))
 knock(V4('surprises', 'Change without surprises', -0.3), 0.011, px(960), 240)
 paper(V4('agents', 'an agent writes', -0.3), 0.010, px(960), 0.35)
 approve(V4('agents', 'a person approves', 0.2), 0.6, hold=1.3)
 
 # 5. The same way, every time: the bundle's file laid down, its lines a tap where they light; the Jobs window. The road: each stage
-#    set down; the same files carried to test, a breath of air. Waiting for Noor: the lead's low D; she approves: the approval, D to G,
+#    set down; the same files carried to test, a breath of air. Rohan's ticket: laid down; his figures right: a tap. Waiting for Noor: the lead's low D; she approves: the approval, D to G,
 #    and the files carried on to production. The platform's own account: a key; nobody deploys from a laptop: a low knock. The same
 #    files, the same steps, every time: the mark, both players, note for note. This morning's run: a tap a row; 856 paid today: G major
 R5 = lambda lid, word, off=0: W('release', lid, word, off)
@@ -329,6 +332,8 @@ tap(R5('job', 'at six', -0.2), 0.007, px(1382)); tap(R5('job', 'builds and tests
 tap(R5('job', 'everything it reads', -0.2), 0.007, px(1382))
 knock(G('release', 'test', 0.0), 0.011, px(960), 240)
 air(R5('test', 'deployed to test', -0.5), 1.3, 0.005, px(970), 160, 900)
+paper(R5('checks', 'Rohan', -0.2), 0.010, px(476), 0.35)
+tap(R5('checks', "they're right", 0.1), 0.008, px(476))
 lead(D3, R5('noor', 'waits for Noor', -0.2), R5('noor', 'When she approves', 0.2), 0.45, att=0.5, rel=0.4)
 tAp = R5('noor', 'When she approves', 0.1)
 stamp(tAp + 0.05, 0.014, px(1620))

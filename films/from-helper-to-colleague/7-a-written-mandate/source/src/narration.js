@@ -11,7 +11,7 @@ const NARR={
  {"id":"oct","gap":0.8,"text":"One night in October, to make a failed build pass, it also changed HR's model of contracts, which other teams' numbers come from."},
  {"id":"overnight","gap":0.8,"text":"Had that reached production, their numbers would have changed overnight, and nobody would have known why."},
  {"id":"where","gap":0.8,"text":"And what it might do alone was written nowhere: no one place to sign it, read it or stop it."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"An agent working alone needed its limits written down, in one place anyone could read."},
  {"id":"mandate","gap":0.8,"text":"So Anil wrote its mandate: one page, saying the one task it may do alone."},
  {"id":"which","gap":0.8,"text":"Its task, and where. Its folders, and its checks."},
  {"id":"limits","gap":0.8,"text":"Ten rounds, one hour, a set budget."},

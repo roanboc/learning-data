@@ -27,224 +27,224 @@ Had that reached production, their numbers would have changed overnight, and nob
 00:00:55.162 --> 00:01:00.682
 And what it might do alone was written nowhere: no one place to sign it, read it or stop it.
 
-00:01:02.582 --> 00:01:03.970
-Something had to change.
+00:01:02.582 --> 00:01:07.986
+An agent working alone needed its limits written down, in one place anyone could read.
 
-00:01:06.070 --> 00:01:10.891
+00:01:10.086 --> 00:01:14.907
 So Anil wrote its mandate: one page, saying the one task it may do alone.
 
-00:01:12.591 --> 00:01:15.457
+00:01:16.607 --> 00:01:19.473
 Its task, and where. Its folders, and its checks.
 
-00:01:16.957 --> 00:01:19.378
+00:01:20.973 --> 00:01:23.394
 Ten rounds, one hour, a set budget.
 
-00:01:20.878 --> 00:01:24.125
+00:01:24.894 --> 00:01:28.141
 A switch that stops it, and a way to undo each change.
 
-00:01:25.625 --> 00:01:28.621
+00:01:29.641 --> 00:01:32.637
 The page is on the map, beside the task it covers.
 
-00:01:30.321 --> 00:01:35.376
+00:01:34.337 --> 00:01:39.392
 Anil signed it on 30 October, and Noor approved it, as a second person.
 
-00:01:37.276 --> 00:01:40.264
+00:01:41.292 --> 00:01:44.280
 And each line is written into the tools that hold it.
 
-00:01:42.164 --> 00:01:46.407
+00:01:46.180 --> 00:01:50.423
 Last night, a plain check saw the copy had arrived, and the agent started.
 
-00:01:48.107 --> 00:01:53.952
+00:01:52.123 --> 00:01:57.968
 In three rounds it found why: the day's change read every version HR keeps of a contract.
 
-00:01:55.652 --> 00:02:00.388
+00:01:59.668 --> 00:02:04.404
 Three tutors had moved to another unit this term, so each of them counted twice.
 
-00:02:02.288 --> 00:02:07.811
+00:02:06.304 --> 00:02:11.827
 It fixed one line of its own dbt model, checked it in test, and touched nothing else.
 
-00:02:09.511 --> 00:02:13.349
+00:02:13.527 --> 00:02:17.365
 Twenty minutes after the failure, its report was waiting for Anil.
 
-00:02:15.049 --> 00:02:20.995
+00:02:19.065 --> 00:02:25.011
 Production never saw the bug: it gets only what passes its night in test, and a person's yes.
 
-00:02:22.895 --> 00:02:30.595
+00:02:26.911 --> 00:02:34.611
 And for data: an agent works alone only where its autonomy is written down, held in every tool, and can be taken back.
 
-00:02:38.095 --> 00:02:44.040
+00:02:42.111 --> 00:02:48.056
 On the map, the workload agent is assigned to its role, with its stage beside each kind of task.
 
-00:02:45.740 --> 00:02:50.088
+00:02:49.756 --> 00:02:54.104
 Beside the night task, at stage five, is one more line: its mandate.
 
-00:02:51.988 --> 00:02:56.223
+00:02:56.004 --> 00:03:00.239
 The mandate itself is a requirement, kept with the project's governance.
 
-00:02:58.123 --> 00:03:05.481
+00:03:02.139 --> 00:03:09.497
 In test: find why the night build failed. If the cause is in its own models, fix it on its own branch, in its own schema.
 
-00:03:07.581 --> 00:03:10.448
+00:03:11.597 --> 00:03:14.464
 Then open a pull request, and report by six.
 
-00:03:12.148 --> 00:03:16.123
+00:03:16.164 --> 00:03:20.139
 If the cause is anywhere else, tell that part's owner, and change nothing.
 
-00:03:18.023 --> 00:03:24.172
+00:03:22.039 --> 00:03:28.188
 In production: read, find the cause, and draft the fix. Never rerun: a plain job does that.
 
-00:03:26.272 --> 00:03:33.476
+00:03:30.288 --> 00:03:37.492
 Everywhere: never change a test, a seed, a contract or a definition. A question of meaning goes to its owner.
 
-00:03:35.576 --> 00:03:41.652
+00:03:39.592 --> 00:03:45.668
 Before it starts, a plain check: has tonight's copy arrived? If not, nothing starts, and Sam is told.
 
-00:03:43.552 --> 00:03:46.370
+00:03:47.568 --> 00:03:50.386
 The same error twice: it stops and reports.
 
-00:03:48.270 --> 00:03:54.203
+00:03:52.286 --> 00:03:58.219
 Signing it was the last step of its gate to stage five, after fourteen nights in test without a miss.
 
-00:03:56.103 --> 00:04:03.641
+00:04:00.119 --> 00:04:07.657
 Europe's AI law asks this of what it counts as high-risk: people who can understand it, watch it, reverse it and stop it.
 
-00:04:05.741 --> 00:04:11.617
+00:04:09.757 --> 00:04:15.633
 It covers one kind of task. On what a word about staff means, the same agent only suggests.
 
-00:04:15.517 --> 00:04:21.443
+00:04:19.533 --> 00:04:25.459
 A page is only words. So each line is written into the tools from the map, as every right is.
 
-00:04:23.343 --> 00:04:30.055
+00:04:27.359 --> 00:04:34.071
 Where it may write lives in Unity Catalog's grants: in test, only its own schema; in production, nowhere.
 
-00:04:32.155 --> 00:04:37.148
+00:04:36.171 --> 00:04:41.164
 Its folders live in GitHub's push rules: its App can't push a change anywhere else.
 
-00:04:39.248 --> 00:04:44.584
+00:04:43.264 --> 00:04:48.600
 The hour is the workflow's own timeout: at sixty minutes, GitHub cancels the job.
 
-00:04:46.484 --> 00:04:50.600
+00:04:50.500 --> 00:04:54.616
 Its rounds are counted by the plain code that runs it, not by the model.
 
-00:04:52.500 --> 00:05:00.584
+00:04:56.516 --> 00:05:04.600
 Its budget is a limit in Unity Gateway on its own name: 50,000 tokens a minute. With the hour, that caps a night's cost.
 
-00:05:02.684 --> 00:05:05.099
+00:05:06.700 --> 00:05:09.115
 The plain check is the workflow's first step.
 
-00:05:06.799 --> 00:05:15.627
+00:05:10.815 --> 00:05:19.643
 And the project checks the page against those places: if a grant, a rule or a limit allows more, the check fails before anything merges.
 
-00:05:17.727 --> 00:05:24.085
+00:05:21.743 --> 00:05:28.101
 Nothing the agent reads can widen it, and neither can the agent: the page lives where its App can't push.
 
-00:05:27.985 --> 00:05:31.336
+00:05:32.001 --> 00:05:35.352
 Last night, the agent found two things wrong with the same count.
 
-00:05:33.236 --> 00:05:41.028
+00:05:37.252 --> 00:05:45.044
 The first was a bug. The rule is written: each contract counts once, as it stands today. The code counted every version.
 
-00:05:43.328 --> 00:05:46.842
+00:05:47.344 --> 00:05:50.858
 Putting that right is a fix the mandate lets it make, in test.
 
-00:05:48.942 --> 00:05:55.231
+00:05:52.958 --> 00:05:59.247
 The second it found while it looked: one of the three tutors moved from a Nursing unit to one in Public Health.
 
-00:05:57.331 --> 00:06:03.561
+00:06:01.347 --> 00:06:07.577
 Does that tutor count in both schools this term, or only in the one they teach in now? No rule says.
 
-00:06:05.861 --> 00:06:13.759
+00:06:09.877 --> 00:06:17.775
 That's not a bug: it's what a word about staff means, and HR decides it. The agent asked in its report, and changed nothing.
 
-00:06:16.059 --> 00:06:20.614
+00:06:20.075 --> 00:06:24.630
 An agent can't always tell the two apart, and at first, neither can a person.
 
-00:06:22.714 --> 00:06:30.907
+00:06:26.730 --> 00:06:34.923
 So in production, it only drafts: Jun reviews the code, a meaning goes to its owner, and Noor approves, as a second person.
 
-00:06:33.207 --> 00:06:37.291
+00:06:37.223 --> 00:06:41.307
 In test, a wrong guess costs only a pull request nobody approves.
 
-00:06:39.391 --> 00:06:44.464
+00:06:43.407 --> 00:06:48.480
 And a night that only needs to run again needs no agent: a plain job does it.
 
-00:06:48.564 --> 00:06:50.845
+00:06:52.580 --> 00:06:54.861
 Two lines more, shown here, not used.
 
-00:06:52.545 --> 00:06:57.709
+00:06:56.561 --> 00:07:01.725
 The switch: Sam deactivates its service principal, and suspends its App on GitHub.
 
-00:06:59.609 --> 00:07:03.528
+00:07:03.625 --> 00:07:07.544
 Then it can't sign in, and its grants stay, for when it's switched on again.
 
-00:07:05.428 --> 00:07:08.798
+00:07:09.444 --> 00:07:12.814
 It can't reach the repository, and everyone else works on.
 
-00:07:10.698 --> 00:07:15.066
+00:07:14.714 --> 00:07:19.082
 Anil may stop it, and so may Sam, at any hour, without asking first.
 
-00:07:16.966 --> 00:07:22.627
+00:07:20.982 --> 00:07:26.643
 The undo: every change it proposes is a pull request, and a pull request can be reverted.
 
-00:07:24.527 --> 00:07:32.747
+00:07:28.543 --> 00:07:36.763
 And each table keeps its versions, with who wrote each one and when, so a person can restore the one before, by default for seven days.
 
-00:07:34.847 --> 00:07:42.335
+00:07:38.863 --> 00:07:46.351
 The mandate itself can be taken back: Anil can narrow or withdraw it in a pull request, and the task waits for him again.
 
-00:07:44.235 --> 00:07:47.361
+00:07:48.251 --> 00:07:51.377
 Each December, it's read again, with the access review.
 
-00:07:49.061 --> 00:07:51.021
+00:07:53.077 --> 00:07:55.037
 Last night, nobody needed either.
 
-00:07:54.921 --> 00:08:02.546
+00:07:58.937 --> 00:08:06.562
 Back at the university this morning, Anil read the report and its measures: three rounds, twenty minutes, well within its limits.
 
-00:08:04.446 --> 00:08:10.090
+00:08:08.462 --> 00:08:14.106
 Jun reviewed the fix and merged it. It ran in test again, and Noor said yes for production.
 
-00:08:11.990 --> 00:08:14.854
+00:08:16.006 --> 00:08:18.870
 The question of the tutor who moved is with HR.
 
-00:08:16.554 --> 00:08:23.559
+00:08:20.570 --> 00:08:27.575
 Nursing counts 64 teachers, 38 of them casual, and the agent decided nothing a person owns.
 
-00:08:25.459 --> 00:08:28.433
+00:08:29.475 --> 00:08:32.449
 This series began with five stages, not a switch.
 
-00:08:30.333 --> 00:08:36.582
+00:08:34.349 --> 00:08:40.598
 Each stage changes whose identity the agent uses, how much it may do, and what the person does.
 
-00:08:38.482 --> 00:08:46.548
+00:08:42.498 --> 00:08:50.564
 Each is written on the map, beside its kind of task, and each has its gate. The last is a mandate: written, narrow and revocable.
 
-00:08:48.648 --> 00:08:50.674
+00:08:52.664 --> 00:08:54.690
 Seven films, seven lessons.
 
-00:08:52.174 --> 00:08:54.949
+00:08:56.190 --> 00:08:58.965
 Autonomy is earned one kind of task at a time.
 
-00:08:56.049 --> 00:08:58.746
+00:09:00.065 --> 00:09:02.762
 Borrowed rights are for learning, in a sandbox.
 
-00:08:59.846 --> 00:09:03.492
+00:09:03.862 --> 00:09:07.508
 Before an agent works alone, it's architected like a colleague.
 
-00:09:04.592 --> 00:09:07.855
+00:09:08.608 --> 00:09:11.871
 An agent's rights come from its work, not from a person's.
 
-00:09:08.955 --> 00:09:12.226
+00:09:12.971 --> 00:09:16.242
 The map says what it may do; every tool holds it to that.
 
-00:09:13.326 --> 00:09:15.955
+00:09:17.342 --> 00:09:19.971
 An agent proposes; a person releases.
 
-00:09:17.055 --> 00:09:20.326
+00:09:21.071 --> 00:09:24.342
 Autonomy is a written, narrow, revocable mandate.
 
-00:09:22.026 --> 00:09:29.151
+00:09:26.042 --> 00:09:33.167
 This series is one more step on a longer road: from an agent that helps one person, to one that works beside the team.
 
-00:09:31.051 --> 00:09:33.299
+00:09:35.067 --> 00:09:37.315
 Next: a colleague that isn't a person.

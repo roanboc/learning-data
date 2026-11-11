@@ -1461,6 +1461,48 @@ async def check_series_learn(run):
                             + ("" if play else f"; no play script (site-tools/smoke/{S['id']}.js), so no lab was played"))
 
 
+# ---------------------------------------------------------------- 11b. labs draw before anyone touches a player
+BLANK_JS = """async () => { const out = [];
+  for (const c of document.querySelectorAll('canvas')) {
+    if (c.id === 'film' || c.closest('dialog')) continue;
+    const r = c.getBoundingClientRect(); if (!r.width || !r.height || !c.width || !c.height) continue;
+    let x; try { x = c.getContext('2d'); } catch (e) { continue; } if (!x) continue;
+    const d = x.getImageData(0, 0, c.width, c.height).data; let blank = true;
+    for (let i = 4; i < d.length; i += 4 * 97) if (d[i] !== d[0] || d[i + 1] !== d[1] || d[i + 2] !== d[2] || d[i + 3] !== d[3]) { blank = false; break; }
+    out.push({blank, label: c.getAttribute('aria-label') || c.parentElement.id || c.parentElement.className || 'a canvas'}); }
+  return out; }"""
+
+
+async def check_labs_drawn(run):
+    """The Inner Life of Data's labs page holds a player (the "Watch this part" dialog), and its FILM.ready resolves only once a
+    visitor reaches for it (4 November 2026). learn.js waited for it, so on 5 November every lab stage there stayed blank (PR #170).
+    The other checks call FILM.prepare() first, as a visitor's pointer would, so they never saw it: this one never touches a player."""
+    sec = run.rep.sec("labs-drawn", "Labs: every lab's pictures are drawn on a phone and a laptop before anyone reaches for a player")
+    keys = run.pick(sorted(k for k in run.static if k.endswith("labs/")))
+    for width in (390, 1280):
+        ctx = await run.context(width)
+        try:
+            for key in keys:
+                pg, log = await run.page(ctx, key)
+                await pg.wait_for_timeout(1200)
+                tabs = await pg.evaluate("() => [...document.querySelectorAll('main [role=tab]')].map(t => t.dataset.id || t.id || t.textContent.trim())")
+                seen = 0
+                for i, tab in [(None, None)] + list(enumerate(tabs)):
+                    if i is not None:
+                        await pg.evaluate("i => document.querySelectorAll('main [role=tab]')[i].click()", i)
+                        await pg.wait_for_timeout(500)
+                    for c in await pg.evaluate(BLANK_JS):
+                        seen += 1
+                        expect(sec, not c["blank"], f"/{key}{' (' + tab + ')' if tab else ''} at {width} px: {c['label']!r} is blank")
+                for p in log_problems(log):
+                    expect(sec, False, f"/{key} at {width} px: {p}")
+                if width == 390:
+                    sec["notes"].append(f"/{key}: {seen} pictures looked at")
+                await pg.close()
+        finally:
+            await ctx.close()
+
+
 # ---------------------------------------------------------------- 12. the words drawn in the films
 NUM = check_site.NUMBERING
 DRAWN_JS = """async (step) => {
@@ -1520,7 +1562,8 @@ async def take_shots(run):
 CHECKS = {"pages": check_pages, "header": check_header, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
           "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
-          "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn, "drawn": check_drawn}
+          "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn,
+          "labs-drawn": check_labs_drawn, "drawn": check_drawn}
 
 
 async def amain(args):

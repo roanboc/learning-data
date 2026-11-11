@@ -178,7 +178,7 @@ water(G('story', 'surge', -0.2), 4.8, 0.012, 0.0)
 big(G2, G('story', 'surge', 0.1), 0.7, ring=1.6)
 # a warning people can't read is no warning: its card; "Something has to change": F major, the turn to the programme
 knock(G('story', 'after', 0.0), 0.012, px(500))
-tS = O('after', 'Something', 0.0)
+tS = O('after', 'The next one', 0.0)
 tap(tS, 0.008, px(330)); big(F2, tS - 0.1, 0.75); ice(A4, tS + 0.35, 0.5, -0.2); ice(C5, tS + 0.85, 0.5, 0.2)
 # 1972, the programme: B-flat major, by day
 tP = G('story', 'cpp', -0.3)

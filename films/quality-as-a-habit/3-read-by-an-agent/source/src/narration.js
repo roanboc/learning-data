@@ -10,7 +10,7 @@ const NARR={
  {"id":"nato","gap":0.8,"text":"A NATO report of 1999 named the Organization for Security and Cupertino in Europe, and readers had to guess what was meant.","say":"A NATO report of nineteen ninety-nine named the Organization for Security and Cupertino in Europe, and readers had to guess what was meant."},
  {"id":"hundreds","gap":0.8,"text":"By 2006, hundreds could be found on these organisations' websites.","say":"By two thousand and six, hundreds could be found on these organisations' websites."},
  {"id":"gap","gap":0.8,"text":"A confident machine, a gap in what it read, and nobody reading after it."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Translators had to start checking what the machine was sure of."},
  {"id":"wrote","gap":0.8,"text":"In 2000, the European Commission's English translators wrote about it in their magazine.","say":"In two thousand, the European Commission's English translators wrote about it in their magazine."},
  {"id":"named","gap":0.8,"text":"Among the European Union's writers and translators, the fault got a name: the Cupertino effect."},
  {"id":"warning","gap":0.8,"text":"The name was a warning: read what the checker offers before you take it."},

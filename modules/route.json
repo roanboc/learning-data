@@ -1,0 +1,111 @@
+{
+  "groups": [
+    {
+      "id": "start",
+      "line": "main",
+      "name": {"en": "Start", "es": "Inicio"},
+      "topics": ["data-platforms"]
+    },
+    {
+      "id": "foundations",
+      "line": "main",
+      "name": {"en": "Foundations", "es": "Fundamentos"},
+      "topics": ["enterprise-architecture", "data-governance"]
+    },
+    {
+      "id": "build",
+      "line": "main",
+      "name": {"en": "Build and monitor", "es": "Construir y monitorear"},
+      "topics": ["data-modelling", "modern-data-basics", "analytics-engineering", "data-quality"]
+    },
+    {
+      "id": "share",
+      "line": "share",
+      "name": {"en": "Share and protect", "es": "Compartir y proteger"},
+      "topics": ["master-data", "data-protection"]
+    },
+    {
+      "id": "agents",
+      "line": "agents",
+      "name": {"en": "Agents", "es": "Agentes"},
+      "topics": ["ai-agents"]
+    },
+    {
+      "id": "lead",
+      "line": "main",
+      "name": {"en": "Lead", "es": "Liderar"},
+      "topics": ["data-management", "leading-data-people"]
+    }
+  ],
+  "goals": [
+    {
+      "id": "start-with-data",
+      "name": {"en": "start with data", "es": "empezar con datos"},
+      "line": {
+        "en": "New to data work. The short way through how it fits together.",
+        "es": "Para quien empieza. El camino corto para ver cómo encaja todo."
+      },
+      "stops": ["intro", "sketch", "data-that-moves", "when-things-go-wrong"]
+    },
+    {
+      "id": "trusted-report",
+      "name": {"en": "build a report people trust", "es": "hacer un reporte confiable"},
+      "line": {
+        "en": "From what a number means to a tested table, and the checks that keep it right.",
+        "es": "De lo que significa una cifra a una tabla probada, y los controles que la mantienen bien."
+      },
+      "stops": ["intro", "from-words-to-data", "in-the-weeds", "when-things-go-wrong", "fit-for-use"]
+    },
+    {
+      "id": "governance-that-works",
+      "name": {"en": "make governance work", "es": "hacer que la gobernanza funcione"},
+      "line": {
+        "en": "Who decides what, how it reaches the work, and the data everyone shares.",
+        "es": "Quién decide qué, cómo llega al trabajo, y los datos que todos comparten."
+      },
+      "stops": ["data-governance", "governance-on-the-map", "governance-in-practice", "master-and-reference-data", "only-what-you-may-see"]
+    },
+    {
+      "id": "beside-agents",
+      "name": {"en": "work beside AI agents", "es": "trabajar junto a agentes de IA"},
+      "line": {
+        "en": "What an agent is, what it is like to work with, and the skills that go with it.",
+        "es": "Qué es un agente, cómo es trabajar con él, y las habilidades que pide."
+      },
+      "stops": ["intro", "what-an-agent-is", "agents-at-work-on-data", "from-helper-to-colleague", "the-new-skills"]
+    },
+    {
+      "id": "lead-a-team",
+      "name": {"en": "lead a data team", "es": "liderar un equipo de datos"},
+      "line": {
+        "en": "The organisation first, then the team, the plan and the case for it.",
+        "es": "Primero la organización, luego el equipo, el plan y su justificación."
+      },
+      "stops": ["enterprise-architecture", "data-governance", "leading-a-data-team", "a-plan-in-ninety-days", "making-the-case"]
+    }
+  ],
+  "upcoming": {
+    "enterprise-architecture": [
+      {
+        "id": "business-architecture-for-data",
+        "films": 5,
+        "name": {"en": "Business architecture for data", "es": "Arquitectura de negocio para los datos"}
+      },
+      {
+        "id": "data-architecture",
+        "films": 6,
+        "name": {"en": "Data architecture", "es": "Arquitectura de datos"}
+      },
+      {
+        "id": "platform-and-solution-architecture",
+        "films": 8,
+        "name": {"en": "Platform and solution architecture", "es": "Arquitectura de plataformas y soluciones"}
+      },
+      {
+        "id": "ai-and-continuous-architecture",
+        "films": 6,
+        "name": {"en": "AI and continuous architecture", "es": "IA y arquitectura continua"}
+      }
+    ]
+  }
+}

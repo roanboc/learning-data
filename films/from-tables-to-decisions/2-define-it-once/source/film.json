@@ -1,8 +1,8 @@
 {
   "key": "define-it-once",
   "title": "Defined in the open",
-  "sub": "The second film of From tables to decisions, the third series of Modern data basics: casual teaching cost, counted three ways in three tools, is defined once, near the data, with its owner, its words and its rules, as a Unity Catalog metric view the data project builds; dbt's MetricFlow does the same in the project; and Apache Ossie, an open format, lets a definition travel from one tool to another.",
-  "howto": "The film is drawn on the intro's platform map, up close: dark navy, with its faint grid. Gold is what people agree on, here the definition of casual teaching cost; light blue is the platform and its structure; amber is a person's turn, a review or an approval; green a check that passes. The kilogram's story, from 1889 to 2019, is drawn in the warm light of its vault.",
+  "sub": "The second film of From tables to decisions, the third series of Modern data basics: casual teaching, counted three ways in three tools under one name, turns out to be three measures, each its own domain's, with its owner, its words and its rules; each is defined once, near the data, as a Unity Catalog metric view the data project builds; dbt's MetricFlow does the same in the project; and Apache Ossie, an open format, lets a definition travel from one tool to another.",
+  "howto": "The film is drawn on the intro's platform map, up close: dark navy, with its faint grid. Gold is what people agree on, here the three measures and their definitions; light blue is the platform and its structure; amber is a person's turn, a review or an approval; green a check that passes. The kilogram's story, from 1889 to 2019, is drawn in the warm light of its vault.",
   "src": [
     "kilo.js",
     "measure.js",
@@ -10,8 +10,8 @@
   ],
   "poster": [
     "once",
-    "period",
-    1.2
+    "differ",
+    1.0
   ],
   "say": [
     [

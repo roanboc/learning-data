@@ -232,7 +232,7 @@ knock(F('glossary', 'glossary', -0.3), 0.012, px(500), 240)
 roll((G3, B3, D4), F('glossary', 'online or both', -0.1), 0.12, 0.5, ring=1.6)
 # which comes first: the sarrusophone swells on A; something had to change: A major
 sarr(A2, F('still', 'which comes first', -0.2), F('govern', 'set an order', -0.6), 0.65, att=1.2, rel=0.8)
-roll((Cs4, E4), F('still', 'Something', 0.0), 0.14, 0.5, ring=1.6)
+roll((Cs4, E4), F('still', 'the glossary', 0.0), 0.14, 0.5, ring=1.6)
 # the order: D major and the low D; first what's governed, a bar for each, its meaning decided by owners and its code reviewed by the data team
 tG = F('govern', 'set an order', -0.5)
 roll((D3, A3, D4, Fs4), tG, 0.12, 0.75, ring=2.0)

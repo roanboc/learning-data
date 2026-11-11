@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Muchos quedaban gravemente heridos, y algunos morían.",
 "The licence was a switch: off one day, fully on the next, and experience came only after it.":
 "La licencia era un interruptor: apagado un día, del todo encendido al siguiente, y la experiencia llegaba solo después.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Experience had to come before the full licence, not after it.":
+"La experiencia tenía que llegar antes de la licencia completa, no después.",
 "On the first of August, 1987, the country made the licence come in three stages.":
 "El primero de agosto de 1987, el país hizo que la licencia llegara en tres etapas.",
 "First, six months as a learner, driving only with a fully licensed driver beside you.":

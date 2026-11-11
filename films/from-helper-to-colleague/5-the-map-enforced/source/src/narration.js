@@ -11,7 +11,7 @@ const NARR={
  {"id":"days","gap":0.8,"text":"Jun spent two days going through them from memory, and for nine, he couldn't be sure."},
  {"id":"wrong","gap":0.8,"text":"So the university couldn't fully answer. And if one of the nine was wrong, nobody knew who to ask, or what else to check."},
  {"id":"all","gap":0.8,"text":"The helper could also do whatever Jun could, far more than a ticket needs. And to stop it, they'd have had to stop Jun."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The next agent couldn't work as Jun's shadow."},
  {"id":"badge","gap":0.8,"text":"So before its first ticket, the planning agent got a place on the university's map: a role, an owner, and only the rights its work needs."},
  {"id":"three","gap":0.8,"text":"And Sam Okafor, who runs the platform, wrote that place into every tool, under the agent's own name: Databricks, GitHub and dbt."},
  {"id":"since","gap":0.8,"text":"Since Monday, every change it makes says planning-agent[bot], and every query it runs names the planning agent.","say":"Since Monday, every change it makes says planning agent bot, and every query it runs names the planning agent."},

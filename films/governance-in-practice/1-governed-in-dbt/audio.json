@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/governed-in-dbt/soundtrack.mp3",
-      "size": 5583769,
-      "sha256": "df5621edcb23115aac285253d8c893e7c8fc74db1cc3427d2f61d95faf4a55b9",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-governed-in-dbt-8bc29660b35e69799e0e/df5621edcb23115aac285253d8c893e7c8fc74db1cc3427d2f61d95faf4a55b9.mp3"
+      "size": 5605712,
+      "sha256": "b5bd22cf9bc91ed2377149750a63bd30fcc5c6b07c5a298cf2e967d614600a89",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-governed-in-dbt-18b00476390807788423/b5bd22cf9bc91ed2377149750a63bd30fcc5c6b07c5a298cf2e967d614600a89.mp3"
     }
   ]
 }

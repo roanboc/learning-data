@@ -1,135 +1,125 @@
 /* Hot, warm, cold: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    Words as in the module's pages: el personal ocasional for casual staff, la app de horas for the claims app, declarar for to claim, nómina, Finanzas, RR. HH., el día de pago,
-   calientes, tibios y fríos for hot, warm and cold, la tabla de streaming, la vista materializada, el nivel de archivo for the archive tier, bancos de germoplasma for gene banks.
+   calientes, tibios y fríos for hot, warm and cold, la vista for the view, el pipeline, el camino frío for the cold path; Aquisgrán and Bruselas for Aachen and Brussels.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
-"February 2008. Deep in a frozen mountain on Svalbard, Norway's Arctic islands, a vault opens.":
-"Febrero de 2008. Dentro de una montaña helada en Svalbard, islas árticas de Noruega, se abre una bóveda.",
-"At minus eighteen degrees, it keeps copies of seeds from gene banks around the world.":
-"A dieciocho grados bajo cero, guarda copias de semillas de bancos de germoplasma de todo el mundo.",
-"Gene banks keep the seeds of crops and their wild relatives, so breeders can grow crops that stand drought and disease.":
-"Guardan semillas de cultivos y sus parientes silvestres, para que los fitomejoradores logren cultivos que resistan sequía y enfermedad.",
-"Near Aleppo, in Syria, a gene bank keeps 141,052 samples of wheat, barley, lentils and chickpeas, from the world's dry lands.":
-"Cerca de Alepo, en Siria, un banco guarda 141,052 muestras de trigo, cebada, lentejas y garbanzos de las tierras secas del mundo.",
-"From 2008, it sends copies of most of them to the vault.":
-"Desde 2008, envía copias de la mayoría a la bóveda.",
-"But a gene bank can be lost, to war, flood or a power cut, and a variety lost is lost for good.":
-"Pero un banco puede perderse por guerra, inundación o un apagón, y una variedad perdida se pierde para siempre.",
-"In 2012, war came close to Aleppo. Most of the bank's keepers had to leave, and it could no longer send seeds out.":
-"En 2012, la guerra llegó cerca de Alepo. Casi todos los custodios del banco tuvieron que irse, y ya no pudo enviar semillas.",
-"Breeders could no longer get the seeds they relied on, and every variety in the bank was at risk.":
-"Los fitomejoradores ya no recibían las semillas de las que dependían, y cada variedad del banco corría peligro.",
-"Something had to change.":
-"Algo tenía que cambiar.",
-"In 2015, the keepers did what no one had done before: they asked the vault for their copies.":
-"En 2015, los custodios hicieron lo que nadie antes: le pidieron a la bóveda sus copias.",
-"38,073 samples came out of the mountain, and that November they were sown in Lebanon and Morocco.":
-"Salieron de la montaña 38,073 muestras, y ese noviembre se sembraron en el Líbano y en Marruecos.",
-"By 2020, nothing was left of the collection in Aleppo.":
-"Para 2020, no quedaba nada de la colección en Alepo.",
-"Yet no more than 1,657 of its samples were lost, and breeders can order its seeds again.":
-"Aun así, se perdieron a lo sumo 1,657 muestras, y los fitomejoradores vuelven a pedir sus semillas.",
-"Seeds in use, kept close and ready; their copies, frozen far away, until the day they're needed.":
-"Las semillas en uso, cerca y listas; sus copias, congeladas lejos, hasta el día en que se necesiten.",
-"Data has a temperature too.":
-"Los datos también tienen temperatura.",
-"Until September, no one at the university had asked how fresh each kind of data must be, or how often it's read.":
-"Hasta septiembre, nadie en la universidad había preguntado qué tan fresco debe estar cada tipo de dato, ni cada cuánto se lee.",
-"Some came too slowly, and 23 tutors were paid two weeks late; some cost far more than it needed to.":
-"Algunos llegaban muy lento, y 23 tutores cobraron dos semanas tarde; otros costaban mucho más de lo necesario.",
-"Now each kind has its own temperature, and no tutor has waited for a contract since.":
-"Ahora cada tipo tiene su propia temperatura, y desde entonces ningún tutor ha esperado un contrato.",
-"In September, Noor, the data architect, asked each data owner two questions.":
-"En septiembre, Noor, la arquitecta de datos, le hizo dos preguntas a cada dueño de datos.",
-"How fresh must it be? And how often is it read?":
-"¿Qué tan frescos deben estar? ¿Y cada cuánto se leen?",
-"The first decides how it moves: as it changes, or on a schedule. The second decides where it's kept.":
-"La primera decide cómo se mueven: al cambiar, o con un horario. La segunda decide dónde se guardan.",
-"Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used.":
-"Se necesitan en segundos o minutos y se leen todo el tiempo: calientes. Que sean pocos y estén cerca de donde se usan.",
-"Fresh to the hour or the day, and read often: warm. Work it out on a schedule.":
-"Frescos a la hora o al día, y se leen a menudo: tibios. Se calculan en un horario fijo.",
-"Rarely read, but kept: cold. Keep it cheap, until the date it may be deleted.":
-"Se leen poco, pero se guardan: fríos. Guardarlos barato, hasta la fecha en que pueden borrarse.",
-"Each answer goes into the data's contract: how fresh, and how long it's kept.":
-"Cada respuesta va al contrato de los datos: qué tan frescos, y cuánto tiempo se guardan.",
-"Casual staff claim their hours in the claims app, and claims approved by noon on Monday are paid on Thursday.":
-"El personal ocasional declara sus horas en la app de horas, y lo aprobado antes del lunes a mediodía se paga el jueves.",
-"The app checks each claim against the tutor's contract, which comes from the HR system.":
-"La app revisa cada declaración contra el contrato del tutor, que viene del sistema de RR. HH.",
-"Contracts change at short notice, and Ingrid's team in HR often records one on a Monday morning.":
-"Los contratos cambian con poco aviso, y el equipo de Ingrid en RR. HH. suele registrar uno un lunes por la mañana.",
-"Until September, the platform took in those changes once a night, so the app saw them on Tuesday.":
-"Hasta septiembre, la plataforma recibía esos cambios una vez por noche, así que la app los veía el martes.",
-"Too late for noon: that's how 23 tutors came to wait two more weeks for their pay.":
-"Demasiado tarde para el mediodía: así fue como 23 tutores esperaron dos semanas más para cobrar.",
-"Now the HR system pushes each change as it's made, through Zerobus Ingest.":
-"Ahora el sistema de RR. HH. envía cada cambio en cuanto ocurre, con Zerobus Ingest.",
-"A pipeline takes in each change as it arrives, and keeps a streaming table of every contract as it stands.":
-"Un pipeline recibe cada cambio en cuanto llega, y mantiene una tabla de streaming con cada contrato tal como está.",
-"The app sees each change within a minute.":
-"La app ve cada cambio en menos de un minuto.",
-"This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon.":
-"Este lunes, once contratos cambiaron en la mañana, y todo lo declarado contra ellos se aprobó antes del mediodía.",
-"Fresh to the minute costs the most, because the pipeline is always running: keep hot only what's needed within minutes.":
-"Lo fresco al minuto es lo más caro, porque el pipeline siempre está en ejecución: deja caliente solo lo que se necesita en minutos.",
-"Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget.":
-"Cada mañana, Rohan, de Finanzas, y los gerentes de las facultades revisan lo que cada facultad gastó este año contra su presupuesto.",
-"Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked.":
-"Hasta septiembre, cada consulta leía en el sitio el libro mayor del sistema financiero: lento, y una carga mientras Finanzas trabajaba.",
-"Yesterday's figures are fresh enough, so now it's a materialized view, worked out each night at two and ready to read.":
-"Las cifras de ayer bastan, así que ahora es una vista materializada, calculada cada noche a las dos y lista para leer.",
+"April 1850. In Aachen, on Prussia's western border, Paul Julius Reuter sells the news of Europe's stock exchanges.":
+"Abril de 1850. En Aquisgrán, en la frontera oeste de Prusia, Paul Julius Reuter vende las noticias de las bolsas de Europa.",
+"A telegraph line runs from Berlin to Aachen. Another runs from Paris to Brussels.":
+"Una línea de telégrafo va de Berlín a Aquisgrán. Otra va de París a Bruselas.",
+"Between Aachen and Brussels, 122 kilometres with no wire.":
+"Entre Aquisgrán y Bruselas, 122 kilómetros sin cable.",
+"Bankers and merchants buy and sell on the prices from other cities' exchanges, and they act the same day.":
+"Banqueros y comerciantes compran y venden según los precios de las bolsas de otras ciudades, y actúan el mismo día.",
+"Across the gap, the prices went by train, and arrived hours after the day's trading had begun.":
+"En ese tramo, los precios iban en tren, y llegaban horas después de empezar las operaciones del día.",
+"A price that comes after you've had to decide is no use to you: someone else, with fresher news, has made the deal.":
+"Un precio que llega después de que tuviste que decidir no te sirve: otro, con noticias más frescas, ya cerró el trato.",
+"Reuter's clients didn't need the prices at once. They needed them before they acted, so the news had to cross the gap faster.":
+"Los clientes de Reuter no necesitaban los precios al instante, sino antes de actuar, así que las noticias debían cruzar más rápido.",
+"So Reuter and Heinrich Geller, an innkeeper in Aachen who bred pigeons, flew the prices across the gap.":
+"Así que Reuter y Heinrich Geller, un posadero de Aquisgrán que criaba palomas, mandaron los precios volando.",
+"Each bird carried a thin slip of paper, from Brussels to Aachen, and the telegraph sent it on to Berlin.":
+"Cada ave llevaba una tira fina de papel, de Bruselas a Aquisgrán, y el telégrafo la enviaba a Berlín.",
+"The birds crossed in about two hours, six hours ahead of the train, so the prices arrived while there was still time to use them.":
+"Las aves cruzaban en unas dos horas, seis horas antes que el tren, así que los precios llegaban cuando aún servían.",
+"And it was only for a while: the pigeons filled the gap until the wire was joined.":
+"Y fue solo por un tiempo: las palomas cubrieron el tramo hasta que se unió el cable.",
+"Fresh enough means there in time for whoever acts on it.":
+"Bastante fresco quiere decir a tiempo para quien actúa con ello.",
+"Until September, the university moved almost all its data once a night. And asked, everyone wanted theirs live.":
+"Hasta septiembre, la universidad movía casi todos sus datos una vez por noche. Y, al preguntarles, todos los querían en vivo.",
+"Some came too late: 23 tutors were paid two weeks late, and two people's pay went to a thief.":
+"Algunos llegaban tarde: 23 tutores cobraron dos semanas tarde, y el pago de dos personas fue a un ladrón.",
+"Now each kind of data arrives in time for the action it serves, and no sooner than it's needed.":
+"Ahora cada tipo de dato llega a tiempo para la acción que sirve, y no antes de lo necesario.",
+"In September, Noor, the data architect, asked one question of each kind of data: when does someone act on it?":
+"En septiembre, Noor, la arquitecta de datos, hizo una pregunta sobre cada tipo de dato: ¿cuándo actúa alguien con él?",
+"Ask people if they'd like their data fresher, and they'll always say yes.":
+"Pregunta a la gente si quiere sus datos más frescos, y siempre dirá que sí.",
+"So Noor didn't take the answer from a question. She looked at real use: when people open the data, and what they do next.":
+"Así que Noor no tomó la respuesta de una pregunta. Miró el uso real: cuándo abren los datos, y qué hacen después.",
+"Acted on days or weeks later: cold. A batch, once a night or once a week.":
+"Si se actúa días o semanas después: frío. Un lote, una vez por noche o por semana.",
+"Acted on within minutes or hours: warm. Small batches, every few minutes or every hour.":
+"Si se actúa en minutos u horas: tibio. Lotes pequeños, cada pocos minutos o cada hora.",
+"Acted on within a second or less, usually by a machine: hot. Each event, the moment it happens.":
+"Si se actúa en un segundo o menos, casi siempre una máquina: caliente. Cada evento, en cuanto ocurre.",
+"The platform should offer all three. Which one each kind of data gets is the business's call, not the platform's.":
+"La plataforma debe ofrecer las tres. Cuál recibe cada tipo de dato lo decide el negocio, no la plataforma.",
+"Each answer goes into the data's contract: how fresh, and the action it's fresh for.":
+"Cada respuesta queda en el contrato de los datos: cuán frescos, y para qué acción.",
+"Each morning, Rohan, in Finance, and the faculties' managers look at what each faculty has spent this year against its budget.":
+"Cada mañana, Rohan, de Finanzas, y los gerentes de las facultades miran lo que cada facultad gastó este año frente a su presupuesto.",
+"Asked in August, Finance wanted it live, to the minute.":
+"Al preguntarle en agosto, Finanzas lo quería en vivo, al minuto.",
+"Noor looked at what happens next: spending is talked over once a month, and only then does money move between budgets.":
+"Noor miró qué pasa después: el gasto se revisa una vez al mes, y solo entonces se mueve dinero entre presupuestos.",
+"Yesterday's figures are fresh enough. A view works them out each night at two, ready to read by seven.":
+"Las cifras de ayer bastan. Una vista las calcula cada noche a las dos, listas para leer a las siete.",
 "It's a dbt model Jun wrote, with its schedule, tested like any other.":
 "Es un modelo de dbt que escribió Jun, con su horario, probado como cualquier otro.",
-"It keeps only the answer, never a copy of the ledger.":
-"Guarda solo la respuesta, nunca una copia del libro mayor.",
-"Most of the university's data is warm, and should stay so: few questions need the minute, and hot costs more.":
-"La mayoría de los datos de la universidad son tibios, y así deben seguir: pocas preguntas necesitan el minuto, y lo caliente cuesta más.",
-"Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked.":
-"Cada día de pago, nómina envía a la plataforma un registro de cada pago, con las horas que trabajó cada tutor ocasional.",
-"Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read.":
-"La ley australiana pide a los empleadores guardar los registros de pago siete años, y después del primero casi no se leen.",
-"Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them.":
-"Hasta septiembre, cada registro iba al almacenamiento más caro y nunca se borraba: un costo, y un riesgo para todas las personas en él.",
-"The cloud's storage has tiers named by how often data is read: hot for what's read often, archive for what almost never is.":
-"La nube guarda en niveles según cuánto se leen los datos: frecuente para lo que se lee a menudo, archivo para lo que casi nunca.",
-"Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest.":
-"Ahora, un año después de escrito, cada archivo pasa al nivel de archivo de la nube, el más barato.",
-"Like the copies on Svalbard, they sleep until someone needs them.":
-"Como las copias de Svalbard, duermen hasta que alguien las necesita.",
-"The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back.":
-"La tabla lo sabe: las consultas de pagos recientes siguen corriendo, y la que necesita un año archivado dice qué archivos recuperar.",
-"Bringing them back takes hours, which is fine for an audit.":
-"Recuperarlos toma horas, lo que está bien para una auditoría.",
-"When a year's records turn seven, they're deleted, on a date set in advance, and their files removed for good.":
-"Cuando los registros de un año cumplen siete, se borran en una fecha fijada de antemano, y sus archivos se eliminan para siempre.",
-"In October, the oldest records, more than seven years old, were deleted.":
-"En octubre se borraron los registros más antiguos, de más de siete años.",
-"How to delete well is for the films on data protection.":
-"Cómo borrar bien es tema de las películas sobre protección de datos.",
-"One piece of data can cool as it ages.":
-"Un mismo dato puede enfriarse con el tiempo.",
-"On Monday morning, Linh's claim for last week's tutorials was hot.":
-"El lunes temprano, la declaración de Linh de la semana pasada estaba caliente.",
-"Payroll's list of claims still waiting read it in place, in the app, until her coordinator approved it.":
-"La lista de declaraciones pendientes de nómina la leía en el sitio, en la app, hasta que se aprobó.",
-"Paid today, it turns warm: part of what Health has spent, worked out each night.":
-"Pagada hoy, se vuelve tibia: parte de lo que gastó Salud, calculado cada noche.",
-"A year from now, it turns cold: her hours, in her pay record in the archive, until the seven years are up.":
-"Dentro de un año, se volverá fría: sus horas, en su registro de pago en el archivo, hasta que se cumplan los siete años.",
-"At each step, where it lives and how it moves follow how it's used.":
-"En cada paso, dónde vive y cómo se mueve siguen a cómo se usa.",
-"On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again.":
-"En Svalbard, la bóveda sigue fría y quieta. En el Líbano y Marruecos, el banco vuelve a enviar sus semillas.",
-"At the university, data is kept the same way: contracts within a minute, spending each night, old pay records cheaply until they're deleted.":
-"En la universidad, los datos se guardan igual: contratos en un minuto, gastos cada noche, pagos antiguos baratos hasta que se borran.",
+"Most analysis is like this, and should stay cold: people decide over days and weeks, and a nightly run costs a small part of a stream.":
+"Casi todo el análisis es así, y debe seguir frío: se decide en días y semanas, y una corrida nocturna cuesta una parte pequeña de un stream.",
+"Casual staff claim their hours in the claims app, and claims approved by noon on Monday are paid on Thursday.":
+"El personal ocasional declara sus horas en la app de horas, y lo aprobado antes del lunes a mediodía se paga el jueves.",
+"The app checks each claim against the tutor's contract, which lives in another system: HR's.":
+"La app revisa cada declaración contra el contrato del tutor, que está en otro sistema: el de RR. HH.",
+"Ingrid's team in HR often changes a contract on a Monday morning, while coordinators approve claims until noon.":
+"El equipo de Ingrid en RR. HH. suele cambiar un contrato el lunes en la mañana, mientras los coordinadores aprueban hasta el mediodía.",
+"Until September, the platform brought those changes across once a night, so the app saw them on Tuesday.":
+"Hasta septiembre, la plataforma traía esos cambios una vez por noche, así que la app los veía el martes.",
+"Too late for noon: that's how 23 tutors came to wait two more weeks for their pay.":
+"Demasiado tarde para el mediodía: así fue como 23 tutores esperaron dos semanas más para cobrar.",
+"Why through the platform at all? Ideally, contracts and claims would live in one system, and the new ERP will bring them together, in 2028.":
+"¿Por qué pasar por la plataforma? Lo ideal sería un solo sistema para contratos y declaraciones, y el nuevo ERP los unirá en 2028.",
+"Until then, the platform fills the gap, as the pigeons did.":
+"Hasta entonces, la plataforma cubre el tramo, como las palomas.",
+"Every organisation runs old systems beside new ones, so the ideal path is rare. Working around the gaps is part of the job.":
+"Toda organización tiene sistemas viejos junto a nuevos, así que el camino ideal es raro. Sortear los huecos es parte del trabajo.",
+"Now the HR system pushes each change as it's made, through Zerobus Ingest.":
+"Ahora el sistema de RR. HH. envía cada cambio en cuanto ocurre, con Zerobus Ingest.",
+"Every five minutes, a pipeline brings the changes into a table of every contract as it stands.":
+"Cada cinco minutos, un pipeline lleva los cambios a una tabla de cada contrato tal como está.",
+"This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon.":
+"Este lunes, once contratos cambiaron en la mañana, y todo lo declarado contra ellos se aprobó antes del mediodía.",
+"Five minutes is fresh enough for a person who approves claims all morning, and it costs far less than a pipeline that never stops.":
+"Cinco minutos bastan para quien aprueba declaraciones toda la mañana, y cuesta mucho menos que un pipeline que nunca se detiene.",
+"Hot is for when no person is waiting to decide, and the action must come at once, or it's useless.":
+"Lo caliente es para cuando ninguna persona espera para decidir, y la acción debe ser inmediata, o no sirve.",
+"In August, someone stole two staff members' passwords, and changed their bank accounts the night before pay day.":
+"En agosto, alguien robó las contraseñas de dos empleados, y cambió sus cuentas bancarias la noche antes del día de pago.",
+"Their pay went to a stranger's account, and they waited three weeks to be paid again.":
+"Su pago fue a la cuenta de un extraño, y esperaron tres semanas a que les pagaran de nuevo.",
+"No report read the next morning could have stopped it: by then, the money had gone.":
+"Ningún reporte leído a la mañana siguiente lo habría impedido: para entonces, el dinero ya no estaba.",
+"Now each bank account change is checked the moment it's made, against the sign-in behind it.":
+"Ahora cada cambio de cuenta bancaria se revisa en cuanto se hace, contra el inicio de sesión detrás de él.",
+"If it comes from a new device close to pay day, a rule holds that one pay within a second, and asks the person to confirm.":
+"Si viene de un dispositivo nuevo cerca del día de pago, una regla retiene ese pago en un segundo, y pide a la persona confirmar.",
+"Since September, four changes were held. Three were the people themselves, confirmed within the hour; one was not.":
+"Desde septiembre, se retuvieron cuatro cambios. Tres eran de las propias personas, confirmados en una hora; uno no.",
+"But an event carries only what changed. The full record, and every correction, still comes in the nightly file.":
+"Pero un evento lleva solo lo que cambió. El registro completo, y cada corrección, sigue llegando en el archivo nocturno.",
+"So hot never comes alone: it needs the cold path beside it, and it costs the most, because it never stops.":
+"Así que lo caliente nunca va solo: necesita el camino frío al lado, y es lo más caro, porque nunca se detiene.",
+"Very few needs are like this. Keep hot for a machine that must act now.":
+"Muy pocas necesidades son así. Deja lo caliente para una máquina que debe actuar ya.",
+"In 1851, the wire closed the gap, and the pigeons were no longer needed.":
+"En 1851, el cable cerró el tramo, y las palomas ya no hicieron falta.",
+"Reuter took his news service to London, and from there to the world.":
+"Reuter llevó su servicio de noticias a Londres, y de ahí al mundo.",
+"At the university, each kind of data now arrives in time for the people, or the machine, that act on it.":
+"En la universidad, cada tipo de dato llega ahora a tiempo para las personas, o la máquina, que actúan con él.",
+"Spending, each night; contracts, every five minutes, until the ERP comes; a bank account change, within a second.":
+"El gasto, cada noche; los contratos, cada cinco minutos, hasta que llegue el ERP; un cambio de cuenta bancaria, en un segundo.",
 "Today, 2,960 people are paid, 856 of them casual staff, Linh among them.":
 "Hoy cobran 2,960 personas, 856 de ellas del personal ocasional, entre ellas Linh.",
-"Freshness decides how data moves; reading decides where it lives.":
-"La frescura decide cómo se mueven los datos; la lectura, dónde viven.",
-"Storage has had tiers for years: there's no wheel to reinvent.":
-"El almacenamiento ya tiene niveles hace años: no hay rueda que reinventar.",
+"How fresh data must be is set by when someone acts on it, not by what the platform can do.":
+"Cuán frescos deben estar los datos lo fija cuándo alguien actúa con ellos, no lo que puede hacer la plataforma.",
+"Where data is kept, and for how long, is another question, for a later film.":
+"Dónde se guardan los datos, y por cuánto tiempo, es otra pregunta, para una película posterior.",
 "Start from the official docs, then investigate, adapt, implement, iterate.":
 "Empieza por la documentación oficial; luego investiga, adapta, implementa, itera.",
 "Next: one copy of the claims, for the app and for Finance.":

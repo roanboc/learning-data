@@ -1,4 +1,4 @@
-# The warm view's description and tests, as any model in the project has them. Databricks only; CI doesn't run it.
+# The cold view's description and tests, as any model in the project has them. Databricks only; CI doesn't run it.
 version: 2
 
 models:
@@ -10,7 +10,7 @@ models:
     config:
       meta:
         owner: Finance
-        temperature: warm
+        temperature: cold
     columns:
       - name: faculty
         description: The faculty, as the finance system names it, such as Faculty of Health.

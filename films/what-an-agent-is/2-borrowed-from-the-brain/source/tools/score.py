@@ -178,11 +178,20 @@ def hum(s, sec, g=0.006, pan=0.0, f=225):
 #    the harp's first notes, E and B, as the cell is drawn in ink, and the toy strikes the B as the unit is drawn from it (the mark).
 #    "Why look to nature?": F sharp, open. Nature trying out designs: the wind tries harmonics, high and brief, one after another, as the
 #    lines that don't last are drawn; "keeping the ones that work": E, G sharp and B settle, one for each design kept. Birds: the
-#    strings on A, and a gust (A, high) as the wingtips twist; the brothers' glider: the toy strikes the C sharp the wind holds. The
-#    maple seeds: the strings on B, a breath of air for each seed spinning down. "The only working example: a brain": E major, full,
+#    strings on A, and a gust (A, high) as the wingtips twist; the brothers' glider: the toy strikes the C sharp the wind holds. "The only working example: a brain": E major, full,
 #    as it lights; "nobody could see how a brain was wired": the chord thins to its fifth
 nw = lambda lid, word, off=0: W('nature', lid, word, off)
 nc = lambda lid, off=0: G('nature', lid, off)
+# the sea squirt: the strings on E, open, under the water; its brain's lights, E high and brief; it settles, a soft knock on the rock;
+# its tail and brain taken apart: the chord thins to one string; the fish finds food, two taps as it eats; the big one passes, the
+# strings on A, low; "guessing what comes next": the harp's B, rising, once
+harp(E1, (4, 6), nc('squirt', -1.0), nc('glue', 0.4), 0.6, lag=0.6, att=1.8, rel=2.0)
+gust(hz(E1) * 12, nw('young', 'a hundred and eighty', -0.3), nw('young', 'a hundred and eighty', 1.4), 0.42, att=0.6, rel=1.2, pan=px(700))
+knock(nw('glue', 'glues its head', 0.1), 0.012, px(1092), 180)
+harp(E1, (4, 5), nw('eats', 'takes the tail', -0.2), nc('move', -0.3), 0.5, lag=0.8, att=1.4, rel=2.2)
+tap(nw('move', 'to find food', 0.7), 0.009, px(640)); tap(nw('move', 'to find food', 1.7), 0.009, px(760))
+harp(A0, (4, 6), nw('move', 'not to become food', -0.3), nc('next', 0.4), 0.5, lag=0.4, att=1.0, rel=1.6)
+gust(hz(B1) * 4, nw('next', 'guessing what comes next', -0.2), nw('next', 'guessing what comes next', 1.8), 0.5, att=0.8, rel=1.4)
 # bb_trial: from "showed a program" + 0.2, 1.75 s a trial; the guess shows at 0.36 of a trial, its numbers move at 1.62 trials
 t0 = nw('start', 'showed a program', 0.2)
 toy(E4, t0 + 0.63, 0.6, px(820)); toy(F4, t0 + 1.75 + 0.63, 0.55, px(820)); whirr(t0 + 1.75 * 1.62, 0.55, 0.009, px(820))
@@ -199,13 +208,9 @@ for k, off in ((10, 0.3), (12, 0.85), (9, 1.4), (15, 1.95), (8, 2.5)):
 for i, k in enumerate((4, 5, 6)):
     gust(hz(E1) * k, nw('trying', 'keeping the ones', 0.2 + 0.25 * i), nc('birds', 0.3), 0.75 - 0.08 * i, att=0.8, rel=2.2, pan=0.2 * (i - 1))
 # birds: the strings on A; a gust, high, as the wingtips twist; the glider: the toy strikes the C sharp the wind holds
-harp(A1, (4, 6, 5), nc('birds', -0.3), nc('seed', -0.6), 0.72, lag=0.35, att=1.4, rel=2.0)
+harp(A1, (4, 6, 5), nc('birds', -0.3), nc('example', -0.6), 0.72, lag=0.35, att=1.4, rel=2.0)
 gust(hz(A1) * 8, nw('wright', 'twisting their wingtips', -0.2), nc('twist', -0.3), 0.45, att=0.8, rel=1.4)
 toy(note_of(hz(A1) * 5), nw('twist', 'built that twist', 0.1), 0.5, px(880))
-# the maple's seeds: the strings on B, and a breath of air for each seed as it spins down (BB_FALL: -0.4, 0.3 and 1.4 s after "seed")
-harp(B1, (4, 6, 5), nc('seed', -0.4), nc('example', -0.2), 0.62, lag=0.4, att=1.2, rel=2.0)
-for ts, x in ((-0.4, 430), (0.3, 1230), (1.4, 830)):
-    air(nc('seed', ts + 0.3), 1.6, 0.008, px(x), 160, 800)
 # a brain, the only working example: E major as it lights; the chord thins as nobody can see how it's wired
 harp(E1, (8, 10), nw('example', 'a brain', -0.4), nw('wired', 'nobody could see', 0.2), 0.62, lag=0.3, att=1.0, rel=1.8)
 harp(E1, (4, 6, 5), nw('example', 'a brain', -0.6), E('nature') - 0.4, 0.7, lag=0.25, att=1.2, rel=2.2)
@@ -308,7 +313,27 @@ gw = lambda lid, word, off=0: W('gaps', lid, word, off)
 harp(E1, (4, 5, 8, 10), gw('never', 'a hole there', -0.5), E('gaps') - 1.4, 0.5, lag=0.2, att=0.8, rel=1.2, fall=0.06)
 gust(hz(E1) * 6, gw('never', 'fills it in', -0.1), E('gaps') - 1.4, 0.62, att=1.2, rel=1.2)
 
-# 6. Borrowed, not copied: the mark as McCulloch and Pitts draw Cajal's cell as a unit, the wind's B and the toy's B. Three inputs
+# 6. A step ahead: the strings on A at the turn, as the dragonfly hovers; its wings as it flies to the midge, and a tap as it catches it.
+#    The escalator: a knock as the shoe comes down, a lower one as it stumbles; "a prediction error": the toy's F, alone, the film's
+#    wrong note. Schultz's monkeys: the light, the harp's E high and short; the juice, a tap. Each row's cell fires: one soft tock where
+#    its burst is drawn, none where it falls silent. "Learn from the miss": E, G sharp and B, briefly
+dw = lambda lid, word, off=0: W('ahead', lid, word, off)
+dc = lambda lid, off=0: G('ahead', lid, off)
+harp(A1, (4, 6), S0('ahead') + 2.0, dw('trick', 'not just in one spot', 0.4), 0.55, lag=0.6, att=1.2, rel=1.8)
+hum(dw('dragon', 'flies to where', -0.3), dw('dragon', 'will be', 1.0) - dw('dragon', 'flies to where', -0.3), 0.005, px(700), 180)
+tap(dw('dragon', 'will be', 1.0), 0.010, px(1000))
+knock(dw('stairs', 'Step onto', 1.0), 0.012, px(600)); knock(dw('stairs', 'you stumble', 0.1), 0.014, px(640), 160)
+toy(F4, dw('error', 'a prediction error', 0.0), 0.5, px(1330))
+gust(hz(E1) * 16, dw('schultz', 'a light came on', 0.0), dw('schultz', 'a light came on', 0.9), 0.4, att=0.2, rel=0.9, pan=px(900))
+tap(dw('schultz', 'a drop of juice', -0.1), 0.010, px(1250))
+# the rows' bursts: bb_raster draws row 0 from "fired at the juice" - 1.0 over 1.6 s (its burst at 0.7 of it), row 1 from "Once the
+# monkeys" (its burst at 0.34), row 2 from "quiet" - 0.2 (its burst at 0.34)
+tj = dw('first', 'fired at the juice', -1.0); impulse(tj + 1.6 * 0.7, px(1220))
+to = dw('first', 'Once the monkeys'); ta = dw('first', 'at the light instead', 0.6); impulse(to + (ta - to) * 0.34, px(920))
+tq = dc('quiet', -0.2); tqe = dw('quiet', 'just when', 0.6); impulse(tq + (tqe - tq) * 0.34, px(920))
+harp(E1, (4, 5, 6), dw('miss', 'learn from the miss', -0.3), E('ahead') - 0.6, 0.48, lag=0.3, att=0.9, rel=1.6)
+
+# 7. Borrowed, not copied: the mark as McCulloch and Pitts draw Cajal's cell as a unit, the wind's B and the toy's B. Three inputs
 #    arrive, a tap each; it fires: a toy note. The weights nudged: the small motors again. The cat's cell fires for the edge at its
 #    angle: a few soft tocks where the spikes are drawn. The layers: the toy's B, E and G sharp as edges, shapes and the answer light.
 #    "An idea, not a brain": the mark again, on E. One real cell takes seven layers: the wind holds a B, and the toy climbs seven notes
@@ -345,7 +370,7 @@ air(bw('child', 'a great many', -0.4), 1.6, 0.007, px(1400), 220, 1000)
 # the bird flaps; the plane borrowed only its wing
 harp(A1, (5, 8), bc('wing', 0.1), bw('wing', 'not the flapping', 0.9), 0.48, lag=0.5, att=0.9, rel=1.6)
 
-# 7. Likely words: the toy plays the sentence as the model writes it, a note a word, ending open. The bars for every word: a breath.
+# 8. Likely words: the toy plays the sentence as the model writes it, a note a word, ending open. The bars for every word: a breath.
 #    Each spin of the wheel: a wooden whirr and a knock, and the word it lands on, on the toy: dancing E, buzzing C sharp; turned
 #    down, E again; turned up, waggling G sharp, then singing, an F, wrong. Many people at once: a breath; the close choice tips to
 #    waggling. The two answers: a soft knock as each card comes in
@@ -363,7 +388,7 @@ knock(yw('again', 'a different answer', -0.4), 0.014, px(960)); knock(yw('again'
 tap(yc('dial', -0.2), 0.010, px(300))
 air(yc('busy', -0.1), 3.6, 0.007, px(200), 200, 900)
 
-# 8. Sure, and wrong: the question, a knock; each date the model gives, a toy note of its own, none of them home; "all wrong": a low
+# 9. Sure, and wrong: the question, a knock; each date the model gives, a toy note of its own, none of them home; "all wrong": a low
 #    knock. The pages, the test: paper. "Brains fill gaps too": the gap chord again, and its missing B swells in. "A checked one": a
 #    knock as the evidence opens
 sw = lambda lid, word, off=0: W('sure', lid, word, off)
@@ -377,11 +402,10 @@ harp(E1, (4, 5, 8, 10), sw('brains', 'fill gaps too', -0.4), sw('brains', 'fill 
 gust(hz(E1) * 6, sw('brains', 'fill gaps too', 0.4), sw('brains', 'fill gaps too', 3.0), 0.5, att=1.0, rel=1.6)
 knock(sw('fluent', 'a checked one', -0.4), 0.014, px(1400))
 
-# 9. A picture that held: E major at the turn, as the drawing shows checked. The electron microscope's picture slides in: a breath;
+# 10. A picture that held: E major at the turn, as the drawing shows checked. The electron microscope's picture slides in: a breath;
 #    "showed the gap": a tap. Models built on that picture: the toy's E, G sharp and B as the signal crosses each layer. They fill gaps,
 #    a little differently each time: each spin of the wheel lands on its word's note, dancing, buzzing, waggling. Checked against the
-#    evidence: E major blooms as "Checked" shows. The loop: a breath. The end card: the mark, E struck by the toy as the wind sounds it,
-#    and the chord, fading
+#    evidence: E major blooms as "Checked" shows
 hw = lambda lid, word, off=0: W('held', lid, word, off)
 hc = lambda lid, off=0: G('held', lid, off)
 harp(E1, (4, 6, 8), hw('held', 'others could check it', -0.4), hc('gap', 0.4), 0.5, lag=0.3, att=0.9, rel=1.6)
@@ -394,7 +418,25 @@ HSP = ((hc('fill', 0.2), 1.6, DANCING), (hw('fill', 'a little differently', -0.6
 for s_, d, m in HSP:
     spin(s_, d, 0.008, px(1000)); toy(m, s_ + d, 0.45, px(1000))
 harp(E1, (4, 5, 6), hw('check', "as Cajal's drawings", 0.3), END('held', 'check') + 0.8, 0.5, lag=0.25, att=0.9, rel=1.6)
-air(hw('next', 'in a loop', 0.2), 1.6, 0.007, px(960), 200, 900)
-hb = hc('breath')
+
+# 11. A loop that expects: no music under the script; a tap as each of its steps lights, and a knock as its one rule passes; the
+#     reports go out wrong: a low knock. The agent says what it expects: the toy's B; it measures the gap: the toy's F, the wrong note.
+#     Each campus counted: a tap. The plan changed: the strings on B, briefly. The evidence opens: a knock. The loop forms: E major.
+#     The end card: the mark, E struck by the toy as the wind sounds it, and the chord, fading
+xw = lambda lid, word, off=0: W('expects', lid, word, off)
+xc = lambda lid, off=0: G('expects', lid, off)
+for i in range(3):
+    tap(xw('reflex', 'runs the same steps', i * 0.45), 0.009, px(820))
+knock(xw('night', 'the table isn', 0.0), 0.012, px(1030))
+knock(xw('monday', 'go out wrong', -0.3), 0.016, px(1490), 150)
+toy(B3, xw('agent', 'says what it expects', -0.1), 0.5, px(790))
+toy(F4, xw('gap', 'measures the gap', 0.2), 0.5, px(1490))
+for i in range(3):
+    tap(xw('forage', 'counts each campus', -0.3 + i * 0.55), 0.009, px(1280 + i * 214))
+harp(B1, (4, 6), xw('adapt', 'changes its plan', -0.2), xw('adapt', 'changes its plan', 2.6), 0.48, lag=0.3, att=0.8, rel=1.4)
+knock(xw('person', 'with its evidence', -0.3), 0.014, px(880))
+harp(E1, (4, 6, 5), xw('loop', 'kept moving animals alive', -0.6), xc('next', 0.6), 0.5, lag=0.3, att=1.2, rel=1.8)
+air(xw('next', 'in a loop', 0.2), 1.6, 0.007, px(960), 200, 900)
+hb = xc('breath')
 borrow(E1, 8, hb - 0.2, hold=2.4, g=0.66, gt=0.58, at=0.9)
-harp(E1, (4, 6, 5), hb + 1.0, E('held') - 0.5, 0.48, lag=0.4, att=1.2, rel=2.4)
+harp(E1, (4, 6, 5), hb + 1.0, E('expects') - 0.5, 0.48, lag=0.4, att=1.2, rel=2.4)

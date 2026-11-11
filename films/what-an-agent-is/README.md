@@ -12,7 +12,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Decades in the making](https://data.learn-all.org/what-an-agent-is/decades-in-the-making/) | How we got here | 6½ min | 8 | 3 questions | [script](1-decades-in-the-making/script.md) · [source](1-decades-in-the-making/source/README.md) |
-| [Borrowed from the brain](https://data.learn-all.org/what-an-agent-is/borrowed-from-the-brain/) | Nerve cells and models | 9 min | 9 | 3 questions | [script](2-borrowed-from-the-brain/script.md) · [source](2-borrowed-from-the-brain/source/README.md) |
+| [Borrowed from the brain](https://data.learn-all.org/what-an-agent-is/borrowed-from-the-brain/) | Nerve cells and models | 12½ min | 11 | 4 questions | [script](2-borrowed-from-the-brain/script.md) · [source](2-borrowed-from-the-brain/source/README.md) |
 | [A model, reasoning, hands and a loop](https://data.learn-all.org/what-an-agent-is/a-model-reasoning-hands-and-a-loop/) | An agent, part by part | 7 min | 9 | 3 questions | [script](3-a-model-reasoning-hands-and-a-loop/script.md) · [source](3-a-model-reasoning-hands-and-a-loop/source/README.md) |
 | [It feels like understanding](https://data.learn-all.org/what-an-agent-is/it-feels-like-understanding/) | Trusting an agent | 7 min | 7 | 3 questions | [script](4-it-feels-like-understanding/script.md) · [source](4-it-feels-like-understanding/source/README.md) |
 | [More than a junior](https://data.learn-all.org/what-an-agent-is/more-than-a-junior/) | Supervising agents | 7 min | 7 | 3 questions | [script](5-more-than-a-junior/script.md) · [source](5-more-than-a-junior/source/README.md) |
@@ -22,7 +22,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 | [What they tell us about ourselves](https://data.learn-all.org/what-an-agent-is/what-they-tell-us-about-ourselves/) | Agents and the mind | 9½ min | 8 | 3 questions | [script](9-what-they-tell-us-about-ourselves/script.md) · [source](9-what-they-tell-us-about-ourselves/source/README.md) |
 | [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 8 min | 7 | 4 questions | [script](10-many-agents/script.md) · [source](10-many-agents/source/README.md) |
 
-For the whole series, on the site: [9 labs](https://data.learn-all.org/what-an-agent-is/labs/) and [9 scenarios](https://data.learn-all.org/what-an-agent-is/scenarios/), in English and Spanish, from the words in [site/assets/what-an-agent-is/](../../site/assets/what-an-agent-is/).
+For the whole series, on the site: [11 labs](https://data.learn-all.org/what-an-agent-is/labs/) and [11 scenarios](https://data.learn-all.org/what-an-agent-is/scenarios/), in English and Spanish, from the words in [site/assets/what-an-agent-is/](../../site/assets/what-an-agent-is/).
 <!-- /films -->
 
 ## The look and the sound

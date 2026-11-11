@@ -8,7 +8,7 @@ const NARR={
  {"id":"walk","gap":0.8,"text":"For every twelve parts, the worker walks back and forth to the boxes, stamps each part, and carries each full box to a scale."},
  {"id":"harm","gap":0.8,"text":"Every extra step costs time the factory doesn't have, and the carrying is heavy work that wears people out."},
  {"id":"stop","gap":0.8,"text":"And nobody has time to stop and rethink the job."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Someone had to help them find the time, and the better way."},
  {"id":"twi","gap":0.8,"text":"A government service, Training Within Industry, trains the supervisors themselves, ten at a table."},
  {"id":"jm","gap":0.8,"text":"From 1942, its course Job Methods teaches them to make small improvements in the jobs they know best.","say":"From nineteen forty-two, its course Job Methods teaches them to make small improvements in the jobs they know best."},
  {"id":"steps","gap":0.8,"text":"Break the job down into its details; question every one: why, what for, where, when, who, how."},

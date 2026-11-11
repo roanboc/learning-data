@@ -9,7 +9,7 @@ const NARR={
  {"id":"harm","gap":0.8,"text":"A family out west could grow plenty, and still not sell it at a price that paid."},
  {"id":"canal","gap":0.8,"text":"A canal could carry it, but it would run 363 miles, through forest and swamp.","say":"A canal could carry it, but it would run three hundred and sixty-three miles, through forest and swamp."},
  {"id":"refuse","gap":0.8,"text":"The federal government wouldn't pay; President Jefferson had called the idea little short of madness. Critics called it Clinton's Ditch."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"If Washington wouldn't pay, the canal needed someone who would."},
  {"id":"case","gap":0.8,"text":"DeWitt Clinton and the state's canal commissioners made the case to New York's legislature."},
  {"id":"what","gap":0.8,"text":"Where it would run, from the Hudson to Lake Erie; what it would cost, about seven million dollars; and how taxes and tolls would repay it."},
  {"id":"yes","gap":0.8,"text":"On 15 April 1817, the legislature said yes.","say":"On the fifteenth of April, eighteen seventeen, the legislature said yes."},

@@ -27,8 +27,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si alguien los cobra antes de que se sepa del robo, el dinero se pierde.",
 "And every messenger in the City carries that risk, every day.":
 "Y cada mensajero de la City carga con ese riesgo, cada día.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The paper itself has to stop being worth stealing.":
+"El papel mismo tiene que dejar de valer la pena robarlo.",
 "The Bank of England has been building an answer since 1988.":
 "El Banco de Inglaterra prepara una respuesta desde 1988.",
 "On 1 October 1990, it opens the Central Moneymarkets Office.":

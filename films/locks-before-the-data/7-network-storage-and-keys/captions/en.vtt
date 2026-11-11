@@ -42,245 +42,245 @@ and some stop altogether.
 00:01:15.211 --> 00:01:17.113
 Nobody can say who draws what.
 
-00:01:18.613 --> 00:01:20.053
-Something has to change.
+00:01:18.613 --> 00:01:22.695
+The water has to go where it's owed, and someone has to know where it goes.
 
-00:01:24.153 --> 00:01:26.380
+00:01:26.795 --> 00:01:29.022
 Frontinus holds the city to its rules.
 
-00:01:27.480 --> 00:01:29.627
+00:01:30.122 --> 00:01:32.269
 No one may draw water from the channels.
 
-00:01:31.327 --> 00:01:38.177
+00:01:33.969 --> 00:01:40.819
 Whoever holds a grant draws it only at a distribution tank, through a bronze nozzle stamped with the size granted,
 
-00:01:38.377 --> 00:01:40.232
+00:01:41.019 --> 00:01:42.874
 and every grant is in the records.
 
-00:01:41.932 --> 00:01:47.399
+00:01:44.574 --> 00:01:50.041
 The secret branch pipes come out, and so much lead comes back that he estimates the theft by it.
 
-00:01:49.499 --> 00:01:53.227
+00:01:52.141 --> 00:01:55.869
 And the gangs who keep the channels, often sent off to private work,
 
-00:01:53.427 --> 00:01:57.920
+00:01:56.069 --> 00:02:00.562
 now write down the day before what each will do, and the records keep what each did.
 
-00:01:59.620 --> 00:02:04.360
+00:02:02.262 --> 00:02:07.002
 Frontinus wrote that the supply almost doubled, as though new springs had been found.
 
-00:02:05.860 --> 00:02:09.701
+00:02:08.502 --> 00:02:12.343
 More basins and fountains ran for the people, the city was cleaner,
 
-00:02:09.901 --> 00:02:14.230
+00:02:12.543 --> 00:02:16.872
 and those who had drawn water in fear now drew it by grant, free from care.
 
-00:02:16.130 --> 00:02:20.253
+00:02:18.772 --> 00:02:22.895
 A data platform's files are its water, and its catalog is the tank:
 
-00:02:21.053 --> 00:02:25.195
+00:02:23.695 --> 00:02:27.837
 the one place to draw, where each grant is checked and every rule applied.
 
-00:02:26.695 --> 00:02:29.833
+00:02:29.337 --> 00:02:32.475
 Every way to the files around it is a hole in the channel.
 
-00:02:38.333 --> 00:02:46.372
+00:02:40.975 --> 00:02:49.014
 At the university, the data platform runs on Azure Databricks, in three workspaces now: development, test and production.
 
-00:02:48.072 --> 00:02:54.480
+00:02:50.714 --> 00:02:57.122
 Production's files, every table's data, sit in an Azure storage account, a container for each area.
 
-00:02:56.180 --> 00:02:59.326
+00:02:58.822 --> 00:03:01.968
 Unity Catalog is meant to be the only way to them.
 
-00:03:00.626 --> 00:03:05.525
+00:03:03.268 --> 00:03:08.167
 Sam Okafor, who runs the platform, counts the ways to the files that skip it.
 
-00:03:06.825 --> 00:03:09.827
+00:03:09.467 --> 00:03:12.469
 Two account keys, each of which opens every file.
 
-00:03:11.327 --> 00:03:19.317
+00:03:13.969 --> 00:03:21.959
 A link signed with one of them, made in 2024 for a supplier's one-off file, and good until the end of 2027.
 
-00:03:21.017 --> 00:03:26.237
+00:03:23.659 --> 00:03:28.879
 Six people with a role on the storage, each given for one task, and never taken back.
 
-00:03:27.937 --> 00:03:30.766
+00:03:30.579 --> 00:03:33.408
 Nine ways in, and not one asks the catalog.
 
-00:03:32.866 --> 00:03:38.327
+00:03:35.508 --> 00:03:40.969
 In the files, no grant, mask or filter applies: whoever reads them sees every row.
 
-00:03:40.027 --> 00:03:44.961
+00:03:42.669 --> 00:03:47.603
 And the workspaces and the storage all have a door on the internet, open to any address.
 
-00:03:46.661 --> 00:03:50.818
+00:03:49.303 --> 00:03:53.460
 Nobody did anything wrong: each was the quickest way to finish a task.
 
-00:03:54.518 --> 00:03:55.848
+00:03:57.160 --> 00:03:58.490
 First, the doors in.
 
-00:03:56.948 --> 00:04:02.739
+00:03:59.590 --> 00:04:05.381
 Sam gives each workspace a private endpoint: a door inside the university's own network,
 
-00:04:02.939 --> 00:04:05.530
+00:04:05.581 --> 00:04:08.172
 so people and jobs come in by a private path.
 
-00:04:07.230 --> 00:04:13.031
+00:04:09.872 --> 00:04:15.673
 The machines that run the jobs reach Databricks by a private path too, and so does the build service.
 
-00:04:14.731 --> 00:04:21.777
+00:04:17.373 --> 00:04:24.419
 While every team moves to it, for two weeks, an IP access list lets in only the university's own addresses.
 
-00:04:23.477 --> 00:04:27.213
+00:04:26.119 --> 00:04:29.855
 Then Sam switches public access off in all three workspaces:
 
-00:04:27.413 --> 00:04:30.141
+00:04:30.055 --> 00:04:32.783
 the platform has no door on the open internet.
 
-00:04:32.241 --> 00:04:33.351
+00:04:34.883 --> 00:04:35.993
 Then the ways out.
 
-00:04:34.451 --> 00:04:40.188
+00:04:37.093 --> 00:04:42.830
 Serverless compute, which Databricks runs for the university, could reach anywhere on the internet:
 
-00:04:40.388 --> 00:04:42.460
+00:04:43.030 --> 00:04:45.102
 a notebook could send a table anywhere.
 
-00:04:43.960 --> 00:04:50.731
+00:04:46.602 --> 00:04:53.373
 Production gets a network policy with restricted access: only the catalog's own storage, and a short list.
 
-00:04:52.431 --> 00:04:58.008
+00:04:55.073 --> 00:05:00.650
 For a week it runs in dry run: it blocks nothing yet, and Sam sees what it would have blocked.
 
-00:04:59.708 --> 00:05:03.295
+00:05:02.350 --> 00:05:05.937
 Then it's on: data may leave only for places on the list.
 
-00:05:07.195 --> 00:05:08.656
+00:05:09.837 --> 00:05:11.298
 Now the files themselves.
 
-00:05:09.756 --> 00:05:15.517
+00:05:12.398 --> 00:05:18.159
 Sam switches the storage's public access off: it's reached only by its own private endpoints.
 
-00:05:17.217 --> 00:05:21.859
+00:05:19.859 --> 00:05:24.501
 He switches off its account keys, and the storage refuses anything signed with them:
 
-00:05:22.059 --> 00:05:25.269
+00:05:24.701 --> 00:05:27.911
 the two keys and the supplier's link open nothing now.
 
-00:05:27.369 --> 00:05:33.355
+00:05:30.011 --> 00:05:35.997
 The six people's roles go; each now gets what they need through the catalog, under their group's grants.
 
-00:05:35.255 --> 00:05:40.458
+00:05:37.897 --> 00:05:43.100
 One identity keeps a role on the files: the catalog's own, its access connector,
 
-00:05:40.658 --> 00:05:44.253
+00:05:43.300 --> 00:05:46.895
 an identity Azure gives it, with no secret anyone holds.
 
-00:05:46.153 --> 00:05:53.362
+00:05:48.795 --> 00:05:56.004
 In Unity Catalog, a storage credential holds it, and an external location for each area points to its container.
 
-00:05:55.062 --> 00:06:01.523
+00:05:57.704 --> 00:06:04.165
 So every read of the files goes through the catalog, which checks the grant, and applies the masks and filters.
 
-00:06:03.423 --> 00:06:06.923
+00:06:06.065 --> 00:06:09.565
 Like Rome's tanks, the catalog is the one place to draw.
 
-00:06:10.823 --> 00:06:11.808
+00:06:13.465 --> 00:06:14.450
 One more wall.
 
-00:06:12.908 --> 00:06:16.054
+00:06:15.550 --> 00:06:18.696
 By default, every workspace reaches every catalog:
 
-00:06:16.254 --> 00:06:20.778
+00:06:18.896 --> 00:06:23.420
 a notebook in development, with a grant, could read production's real records.
 
-00:06:22.478 --> 00:06:25.349
+00:06:25.120 --> 00:06:27.991
 Sam binds each catalog to its own workspace:
 
-00:06:25.549 --> 00:06:31.258
+00:06:28.191 --> 00:06:33.900
 production's five, registrar, learning, planning, HR and finance, to production alone;
 
-00:06:31.458 --> 00:06:34.231
+00:06:34.100 --> 00:06:36.873
 test's to test; development's to development.
 
-00:06:36.131 --> 00:06:40.574
+00:06:38.773 --> 00:06:43.216
 The storage credential and the external locations are bound the same way.
 
-00:06:42.074 --> 00:06:47.202
+00:06:44.716 --> 00:06:49.844
 Now a grant isn't enough: from a workspace it isn't bound to, a catalog isn't there.
 
-00:06:51.302 --> 00:06:53.913
+00:06:53.944 --> 00:06:56.555
 The files keep one more door, and it stays shut.
 
-00:06:55.413 --> 00:06:57.494
+00:06:58.055 --> 00:07:00.136
 Some work needs the files themselves.
 
-00:06:58.594 --> 00:07:04.765
+00:07:01.236 --> 00:07:07.407
 One morning, the nightly load stops on a row it can't read, and Jun Park must open last night's file.
 
-00:07:06.465 --> 00:07:10.870
+00:07:09.107 --> 00:07:13.512
 On the storage, one group holds one role: read and list, nothing more.
 
-00:07:12.370 --> 00:07:15.355
+00:07:15.012 --> 00:07:17.997
 It's for admin accounts only, and no one is in it.
 
-00:07:17.055 --> 00:07:23.685
+00:07:19.697 --> 00:07:26.327
 Jun switches on his admin account's power to read the storage, for one hour, with a reason, and Sam approves.
 
-00:07:25.785 --> 00:07:30.218
+00:07:28.427 --> 00:07:32.860
 Jun comes in by the private path, reads that one file, and switches off.
 
-00:07:31.918 --> 00:07:38.204
+00:07:34.560 --> 00:07:40.846
 The storage's own log keeps every read, under the account that made it, and the platform team gets an alert.
 
-00:07:40.104 --> 00:07:43.436
+00:07:42.746 --> 00:07:46.078
 Had he forgotten, it would have shut by itself when the hour was up.
 
-00:07:44.936 --> 00:07:49.627
+00:07:47.578 --> 00:07:52.269
 Like the gangs in Rome, the work is written down before, and recorded as it's done.
 
-00:07:53.527 --> 00:07:54.627
+00:07:56.169 --> 00:07:57.269
 Last, the keys.
 
-00:07:55.727 --> 00:08:00.973
+00:07:58.369 --> 00:08:03.615
 The files were always encrypted, with a key the cloud provider kept for the university.
 
-00:08:02.473 --> 00:08:07.715
+00:08:05.115 --> 00:08:10.357
 Now the key is the university's own, kept by its security team in a vault of its own.
 
-00:08:09.415 --> 00:08:12.064
+00:08:12.057 --> 00:08:14.706
 The storage may use the key, never take it out.
 
-00:08:13.564 --> 00:08:18.651
+00:08:16.206 --> 00:08:21.293
 The people who run the platform can't delete it or turn it off, and every use is recorded.
 
-00:08:20.351 --> 00:08:24.634
+00:08:22.993 --> 00:08:27.276
 The vault makes a new version every year, and the storage picks it up within a day.
 
-00:08:26.534 --> 00:08:30.606
+00:08:29.176 --> 00:08:33.248
 A deleted key is kept ninety days, and nobody can cut that short.
 
-00:08:32.306 --> 00:08:36.791
+00:08:34.948 --> 00:08:39.433
 The workspace's notebooks, queries and disks use a key from the same vault.
 
-00:08:38.491 --> 00:08:40.647
+00:08:41.133 --> 00:08:43.289
 And the security team can take the key back:
 
-00:08:40.847 --> 00:08:44.360
+00:08:43.489 --> 00:08:47.002
 then nobody can read the files, the cloud provider included.
 
-00:08:48.660 --> 00:08:55.083
+00:08:51.302 --> 00:08:57.725
 In Rome, water was drawn only at the tank, through a stamped nozzle, and the gangs' work was written down.
 
-00:08:56.783 --> 00:09:00.445
+00:08:59.425 --> 00:09:03.087
 At the university, the files are reached only through the catalog,
 
-00:09:00.645 --> 00:09:05.319
+00:09:03.287 --> 00:09:07.961
 behind private doors, with a short list out and a key of the university's own.
 
-00:09:07.019 --> 00:09:10.482
+00:09:09.661 --> 00:09:13.124
 And the one way around it is switched on for a task, and watched.
 
-00:09:12.382 --> 00:09:16.918
+00:09:15.024 --> 00:09:19.560
 No path to the data skips the catalog, except the one you switch on and watch.

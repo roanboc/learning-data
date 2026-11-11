@@ -7,7 +7,7 @@ const NARR={
  {"id":"answer","gap":0.8,"text":"So the answer was to teach drivers, fine them, and blame them."},
  {"id":"drift","gap":0.8,"text":"But people always make mistakes. A tired driver drifts over the middle line."},
  {"id":"harm","gap":0.8,"text":"On a fast road, that mistake could kill. For hundreds of families a year, it meant someone who never came home."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Blaming drivers wasn't saving lives. The roads had to forgive their mistakes."},
  {"id":"adopt","gap":0.8,"text":"In October 1997, Sweden's parliament adopted Vision Zero: no one should be killed or seriously injured on the roads.","say":"In October nineteen ninety-seven, Sweden's parliament adopted Vision Zero: no one should be killed or seriously injured on the roads."},
  {"id":"who","gap":0.8,"text":"Those who design and run the roads would answer for that, not only drivers."},
  {"id":"study","gap":0.8,"text":"Every fatal crash was studied in depth, to ask how it could have been prevented."},

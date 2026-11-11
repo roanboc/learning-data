@@ -14,7 +14,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A blind farmer can't work his field. A blind grandmother needs a child to lead her, and the child stops going to school.":"Un campesino ciego no puede trabajar su campo. Una abuela ciega necesita que un niño la guíe, y el niño deja la escuela.",
 "A short operation can give their sight back.":"Una operación corta puede devolverles la vista.",
 "But most of them are too poor to pay for it, and live far from any surgeon.":"Pero la mayoría es demasiado pobre para pagarla, y vive lejos de cualquier cirujano.",
-"Something has to change, at a scale no hospital has tried.":"Algo tiene que cambiar, a una escala que ningún hospital ha intentado.",
+"Surgery as hospitals did it then would never reach them all.":"La cirugía, tal como la hacían entonces los hospitales, nunca llegaría a todos.",
 "He starts by saying what his hospital is for: sight given back, to everyone who needs it.":"Empieza por decir para qué es su hospital: devolver la vista a todo el que la necesite.",
 "Then who it's for, in groups: those who can pay, those who can pay a little, and those who can pay nothing.":"Luego para quién es, por grupos: quienes pueden pagar, quienes pueden pagar un poco y quienes no pueden pagar nada.",
 "Six of the eleven beds are for those who pay nothing.":"Seis de las once camas son para quienes no pagan nada.",

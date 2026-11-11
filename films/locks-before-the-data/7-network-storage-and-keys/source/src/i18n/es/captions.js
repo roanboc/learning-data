@@ -38,8 +38,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "y algunos se quedan secos.",
 "Nobody can say who draws what.":
 "Nadie puede decir quién saca qué.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The water has to go where it's owed, and someone has to know where it goes.":
+"El agua tiene que ir a donde se debe, y alguien tiene que saber a dónde va.",
 "Frontinus holds the city to its rules.":
 "Frontino hace cumplir las reglas de la ciudad.",
 "No one may draw water from the channels.":

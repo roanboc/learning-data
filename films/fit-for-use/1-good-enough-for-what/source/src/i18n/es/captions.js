@@ -18,8 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Siguiendo el ángulo de la carta, el barco se apartaba poco a poco de la línea.",
 "On a long crossing, it could miss the coast it was making for, and its crew spend days more at sea, short of water.":
 "En una travesía larga, podía errar la costa a la que iba, y su tripulación pasar días de más en el mar, con poca agua.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Sailors needed a chart they could steer by, not just look at.":
+"Los marinos necesitaban una carta con la que pudieran navegar, no solo mirarla.",
 "Mercator stretched his chart towards the poles, a little more at every degree, so every course on one bearing is a straight line.":
 "Mercator estiró su carta hacia los polos, un poco más en cada grado, para que todo rumbo fijo sea una línea recta.",
 "On his chart, a pilot could rule a line between two ports, read its angle, and steer it.":

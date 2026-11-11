@@ -10,7 +10,7 @@ const NARR={
  {"id":"picture","gap":0.8,"text":"And nobody had one up-to-date picture of all the fires."},
  {"id":"send","gap":0.8,"text":"So it was hard, sometimes impossible, to send scarce engines and crews where they were needed most."},
  {"id":"best","gap":0.8,"text":"Every agency cooperated as well as it could. What was missing was one way of working they all shared."},
- {"id":"change","gap":0.8,"text":"Something had to change."}]},
+ {"id":"change","gap":0.8,"text":"Before the next big fire, they had to find it."}]},
 "scope":{"name":"One way of working","lead":1.0,"tail":1.0,"vo":[
  {"id":"began","gap":0.8,"text":"In 1972, seven of those agencies began to build that way of working, together. Their programme was called FIRESCOPE.","say":"In nineteen seventy-two, seven of those agencies began to build that way of working, together. Their programme was called Firescope."},
  {"id":"door","gap":0.8,"text":"Its Incident Command System starts where help arrives: everyone who comes checks in."},

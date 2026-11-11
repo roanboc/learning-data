@@ -11,7 +11,7 @@ const NARR={
  {"id":"stay","gap":0.8,"text":"Most people know a storm is coming, yet almost nobody takes shelter."},
  {"id":"surge","gap":0.8,"text":"That night a storm surge, the sea driven inland by the wind, sweeps over the islands."},
  {"id":"toll","gap":0.8,"text":"At least three hundred thousand people die, perhaps half a million."},
- {"id":"after","gap":0.8,"text":"A warning people can't read, or don't act on, is no warning. Something has to change."},
+ {"id":"after","gap":0.8,"text":"A warning people can't read, or don't act on, is no warning. The next one has to reach every village in time."},
  {"id":"cpp","gap":0.8,"text":"In 1972, the Bangladesh Red Cross Society starts the Cyclone Preparedness Programme, run with the government from 1973.","say":"In nineteen seventy-two, the Bangladesh Red Cross Society starts the Cyclone Preparedness Programme, run with the government from nineteen seventy-three."},
  {"id":"mile","gap":0.8,"text":"Volunteers from the coast's own villages carry each warning the last mile."},
  {"id":"house","gap":0.8,"text":"They go house to house with megaphones, and lead people to shelters."},

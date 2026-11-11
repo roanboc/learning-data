@@ -10,7 +10,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The trouble is in the ignition: the key only turns a switch.":"El problema está en el encendido: la llave solo gira un interruptor.",
 "A wire behind the steering wheel can close it too, and so can a copy of the key.":"Un cable detrás del volante también puede cerrarlo, y lo mismo una copia de la llave.",
 "For the owner, that means a morning with no car: no way to work, a claim to make, and a car that may never come back.":"Para el dueño, es una mañana sin auto: sin cómo ir a trabajar, un reclamo que hacer y un auto que quizá nunca vuelva.",
-"Something has to change.":"Algo tiene que cambiar.",
+"A car has to know its own key, not just a turned switch.":"Un auto tiene que reconocer su propia llave, no solo un interruptor que gira.",
 "In 1995, the European Union decides: from October 1998, every new car sold must have an electronic immobiliser.":"En 1995, la Unión Europea decide: desde octubre de 1998, todo auto nuevo vendido debe tener un inmovilizador electrónico.",
 "It's a small chip in the key.":"Es un pequeño chip en la llave.",
 "When the key turns, the car asks the chip, by radio, for its code.":"Al girar la llave, el auto le pide al chip su código, por radio.",

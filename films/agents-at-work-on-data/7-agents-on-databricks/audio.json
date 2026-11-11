@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/agents-on-databricks/soundtrack.mp3",
-      "size": 6082237,
-      "sha256": "467c7103e5772e85543c437dc3c591469c9c4e0056e5eab726b3ff1ec04835c0",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/467c7103e5772e85543c437dc3c591469c9c4e0056e5eab726b3ff1ec04835c0.mp3"
+      "size": 6121734,
+      "sha256": "68022a1702ff86cc05e8eaf7d8c9b32fa608214907400f2c79fb9c598994c735",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-agents-on-databricks-5f0bf8bfc89215296c0c/68022a1702ff86cc05e8eaf7d8c9b32fa608214907400f2c79fb9c598994c735.mp3"
     }
   ]
 }

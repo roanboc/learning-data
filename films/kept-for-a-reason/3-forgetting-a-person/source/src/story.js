@@ -77,7 +77,7 @@ scene("story",(ctx,S,t,sc)=>{const c=sc.cues,G0=fp_once(sc,"g0",()=>fp_g0(sc)),T
       fp_up(cx,tt,T.remove-0.6,out,a=>dp_card(cx,1130,214,560,{kick:"His request",title:"Please remove the notice"},{a}));
       fp_up(cx,tt,T.saysNo-0.2,out,a=>dp_pill(cx,1130,440,"won't remove","coral",{a}));
       fp_up(cx,tt,T.lawfully-0.4,out,a=>dp_card(cx,1130,488,560,{kick:"Its answer",title:"printed lawfully, as ordered"},{a}));
-      fp_up(cx,tt,T.change-0.2,null,a=>dp_slip(cx,890,394,"Something has to change","cyan",{a,align:"center",size:40,ink:true}));}},
+      fp_up(cx,tt,T.change-0.2,null,a=>dp_slip(cx,890,394,"The notice follows him","cyan",{a,align:"center",size:40,ink:true}));}},
     // Madrid, 2010: the data protection agency, and its decision: the page stays, the links go
     {at:T.agency-0.5,place:"fpAgency",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const out=T.keep-0.5;

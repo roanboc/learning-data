@@ -22,8 +22,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Las tormentas levantaban sal y polvo del fondo seco. El agua potable se contaminó, y la gente se enfermó.",
 "Bringing the whole sea back would have meant taking the rivers back from the farms.":
 "Recuperar todo el mar habría significado quitarles los ríos a los campos.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The whole sea was out of reach, and waiting for it would save nothing.":
+"El mar entero estaba fuera de alcance, y esperarlo no salvaría nada.",
 "Kazakhstan chose to save the part that could be saved: the northern sea.":
 "Kazajistán decidió salvar la parte que se podía salvar: el mar del norte.",
 "With a World Bank loan, it built the Kok-Aral dam, 13 kilometres long, to keep the Syr Darya's water in the north.":

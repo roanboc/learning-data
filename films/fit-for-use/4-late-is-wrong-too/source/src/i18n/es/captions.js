@@ -26,8 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Esa noche, una marejada ciclónica, el mar empujado tierra adentro por el viento, barre las islas.",
 "At least three hundred thousand people die, perhaps half a million.":
 "Mueren al menos trescientas mil personas, quizá medio millón.",
-"A warning people can't read, or don't act on, is no warning. Something has to change.":
-"Un aviso que la gente no sabe leer, o no sigue, no es un aviso. Algo tiene que cambiar.",
+"A warning people can't read, or don't act on, is no warning. The next one has to reach every village in time.":
+"Un aviso que la gente no sabe leer, o no sigue, no es un aviso. El próximo tiene que llegar a tiempo a cada aldea.",
 "In 1972, the Bangladesh Red Cross Society starts the Cyclone Preparedness Programme, run with the government from 1973.":
 "En 1972, la Sociedad de la Cruz Roja de Bangladés inicia el Programa de Preparación ante Ciclones, junto con el gobierno desde 1973.",
 "Volunteers from the coast's own villages carry each warning the last mile.":

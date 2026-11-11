@@ -7,7 +7,7 @@ const NARR={
  {"id":"need","gap":0.8,"text":"To renew a passport or pay a tax, people first have to work out which part of government does it, and which of its sites to trust."},
  {"id":"same","gap":0.8,"text":"The same advice sits on several sites, in different words. People lose time, and can't be sure which page is right."},
  {"id":"cost","gap":0.8,"text":"And taxpayers pay around 560 million pounds a year for all those websites."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Government online has to become one place, and simpler."},
  {"id":"review","gap":0.8,"text":"In October 2010, Martha Lane Fox, the government's digital champion, reports on its main public website, Directgov.","say":"In October twenty ten, Martha Lane Fox, the government's digital champion, reports on its main public website, Directgov."},
  {"id":"advice","gap":0.8,"text":"Her advice: one website for the whole of government, and one team that answers for what people find there."},
  {"id":"archive","gap":0.8,"text":"Don't move the old pages across. Write only what people need, and archive the rest."},

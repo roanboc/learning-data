@@ -23,241 +23,241 @@ A case nobody reported passed it to the next family, and the next: a chain.
 Vaccinating everyone couldn't reach everyone, and it found the ones missed.
 
 7
-00:00:37,579 --> 00:00:41,920
-Something had to change: every chain had to be found, and stopped where it was.
+00:00:37,579 --> 00:00:40,568
+Every chain had to be found, and stopped where it was.
 
 8
-00:00:43,420 --> 00:00:49,764
+00:00:42,068 --> 00:00:48,412
 So India's health workers, with the World Health Organization, changed what they did: search, and contain.
 
 9
-00:00:50,864 --> 00:00:53,826
+00:00:49,512 --> 00:00:52,474
 More than a hundred thousand of them went house to house.
 
 10
-00:00:55,126 --> 00:01:00,739
+00:00:53,774 --> 00:00:59,387
 Anyone who reported a case was promised a reward, and every report was answered at once.
 
 11
-00:01:01,839 --> 00:01:08,618
+00:01:00,487 --> 00:01:07,266
 Guards stayed at the sick person's door, day and night, and everyone around was vaccinated: the chain stopped there.
 
 12
-00:01:10,118 --> 00:01:13,545
+00:01:08,766 --> 00:01:12,193
 And whoever reported it was paid, so people kept reporting.
 
 13
-00:01:15,045 --> 00:01:19,427
+00:01:13,693 --> 00:01:18,075
 In May 1975, a year on, India found its last case.
 
 14
-00:01:20,727 --> 00:01:26,961
+00:01:19,375 --> 00:01:25,609
 In 1977, India was declared free of smallpox, and in 1980, the world.
 
 15
-00:01:28,461 --> 00:01:33,282
+00:01:27,109 --> 00:01:31,930
 At the university, a name printed wrong on a degree certificate is a case too.
 
 16
-00:01:34,182 --> 00:01:39,521
+00:01:32,830 --> 00:01:38,169
 The certificate is printed again, and a graduate crosses the stage holding an empty folder.
 
 17
-00:01:40,621 --> 00:01:48,663
+00:01:39,269 --> 00:01:47,311
 A report is worth only what happens next: answer it, fix it where it started, and tell them, and the next is found before it's printed.
 
 18
-00:01:55,763 --> 00:02:03,784
+00:01:54,411 --> 00:02:02,432
 Monday 12 October 2026: the portal opens for December's graduates, to check their name as it will be printed.
 
 19
-00:02:05,284 --> 00:02:09,852
+00:02:03,932 --> 00:02:08,500
 That evening, Andrés Peñaloza reads his: Andres Penaloza.
 
 20
-00:02:11,152 --> 00:02:13,961
+00:02:09,800 --> 00:02:12,609
 No accent on the e. No tilde on the n.
 
 21
-00:02:15,661 --> 00:02:19,273
+00:02:14,309 --> 00:02:17,921
 He presses "This isn't my name", and types it as he writes it.
 
 22
-00:02:20,773 --> 00:02:24,623
+00:02:19,421 --> 00:02:23,271
 No check had ever held it: it's short, and every letter is allowed.
 
 23
-00:02:25,923 --> 00:02:32,564
+00:02:24,571 --> 00:02:31,212
 His record dates from 2018, made by an old online form that took only A to Z, in capitals.
 
 24
-00:02:33,864 --> 00:02:40,386
+00:02:32,512 --> 00:02:39,034
 When he came back for his Master's, the capitals were typed again by hand, as ordinary letters, and it looked right.
 
 25
-00:02:42,086 --> 00:02:44,280
+00:02:40,734 --> 00:02:42,928
 People find errors no check can see.
 
 26
-00:02:45,580 --> 00:02:48,577
+00:02:44,228 --> 00:02:47,225
 So make it easy to say so, where they see the data.
 
 27
-00:02:50,077 --> 00:02:54,779
+00:02:48,725 --> 00:02:53,427
 His report is a row of data: who, the name shown, the name given, and when.
 
 28
-00:02:56,279 --> 00:03:02,848
+00:02:54,927 --> 00:03:01,496
 And the portal says what happens next: "The registrar's office will answer by Wednesday 14 October."
 
 29
-00:03:05,948 --> 00:03:11,049
+00:03:04,596 --> 00:03:09,697
 The report goes straight to the people who own names: the registrar's office, Mei's team.
 
 30
-00:03:12,549 --> 00:03:15,421
+00:03:11,197 --> 00:03:14,069
 Their promise: an answer within two working days.
 
 31
-00:03:17,321 --> 00:03:23,675
+00:03:15,969 --> 00:03:22,323
 Every report is kept in a model of its own, with its owner, when it's due, and when it was answered and told.
 
 32
-00:03:25,575 --> 00:03:29,899
+00:03:24,223 --> 00:03:28,547
 Answering in time is about what people do, not whether the data is right.
 
 33
-00:03:31,199 --> 00:03:34,723
+00:03:29,847 --> 00:03:33,371
 So it's tracked and reviewed every week, never failed as a check.
 
 34
-00:03:36,623 --> 00:03:42,253
+00:03:35,271 --> 00:03:40,901
 Each morning, an alert on Databricks tells the registrar's office which reports are due that day.
 
 35
-00:03:44,153 --> 00:03:50,179
+00:03:42,801 --> 00:03:48,827
 In India, every report was answered at once: a promise kept is what makes people report again.
 
 36
-00:03:53,679 --> 00:03:59,852
+00:03:52,327 --> 00:03:58,500
 Wednesday 14 October: Mei's team checks his name against the passport seen at his enrolment.
 
 37
-00:04:01,952 --> 00:04:07,720
+00:04:00,600 --> 00:04:06,368
 It matches, and they correct it in the student system itself: not in the list, and not in a copy.
 
 38
-00:04:09,820 --> 00:04:15,309
+00:04:08,468 --> 00:04:13,957
 That night, the update carries it to the list, the portal and the printer's file: every copy at once.
 
 39
-00:04:17,609 --> 00:04:21,127
+00:04:16,257 --> 00:04:19,775
 Fixed in the list, it would be undone by the next night's update.
 
 40
-00:04:22,827 --> 00:04:27,565
+00:04:21,475 --> 00:04:26,213
 Fixed in a spreadsheet, it would be wrong again next year, as The hidden factory showed.
 
 41
-00:04:29,665 --> 00:04:33,471
+00:04:28,313 --> 00:04:32,119
 Like guards at the door, a fix where the error started stops it there.
 
 42
-00:04:37,171 --> 00:04:43,344
+00:04:35,819 --> 00:04:41,992
 Then the portal tells him: "Your name will be printed as Andrés Peñaloza. Thank you for telling us."
 
 43
-00:04:45,444 --> 00:04:48,781
+00:04:44,092 --> 00:04:47,429
 A report that disappears teaches people not to bother.
 
 44
-00:04:50,281 --> 00:04:54,282
+00:04:48,929 --> 00:04:52,930
 In India, every reporter was paid, so the next one reported too.
 
 45
-00:04:55,982 --> 00:04:59,198
+00:04:54,630 --> 00:04:57,846
 In October, 64 graduates reported their name.
 
 46
-00:05:00,498 --> 00:05:06,761
+00:04:59,146 --> 00:05:05,409
 61 were put right within two working days, and three waited for a document. Every one was told.
 
 47
-00:05:08,661 --> 00:05:14,087
+00:05:07,309 --> 00:05:12,735
 And the people who make the data hear what it cost: a graduate who had to find their own name wrong.
 
 48
-00:05:15,587 --> 00:05:19,743
+00:05:14,235 --> 00:05:18,391
 The admissions team, who made the old forms, now get a note each month.
 
 49
-00:05:21,043 --> 00:05:26,758
+00:05:19,691 --> 00:05:25,406
 October's note: 38 names from the old online form, and 11 from the paper forms.
 
 50
-00:05:28,658 --> 00:05:34,759
+00:05:27,306 --> 00:05:33,407
 So from November, admissions asks every student who comes back to check their name against their passport.
 
 51
-00:05:36,459 --> 00:05:44,246
+00:05:35,107 --> 00:05:42,894
 Thomas Redman calls them data's customers and its creators: tell the creators what an error cost, and the next one isn't made.
 
 52
-00:05:47,746 --> 00:05:55,416
+00:05:46,394 --> 00:05:54,064
 Read together, the reports show where errors are born: of the first 19, 12 came from the old form, like Andrés's.
 
 53
-00:05:57,316 --> 00:06:02,194
+00:05:55,964 --> 00:06:00,842
 Each kind of error a person finds becomes a check, so nobody has to find it again.
 
 54
-00:06:04,094 --> 00:06:11,320
+00:06:02,742 --> 00:06:09,968
 Jun adds one: a name the old form made, still in plain letters, A to Z, not yet confirmed by its graduate.
 
 55
-00:06:13,620 --> 00:06:17,376
+00:06:12,268 --> 00:06:16,024
 It can't see a missing accent. But it can see where a name was born.
 
 56
-00:06:19,476 --> 00:06:24,629
+00:06:18,124 --> 00:06:23,277
 It holds each one for Mei's team, and dbt keeps them in a table her team reads.
 
 57
-00:06:26,529 --> 00:06:28,777
+00:06:25,177 --> 00:06:27,425
 On its first night, it holds 83.
 
 58
-00:06:31,077 --> 00:06:37,594
+00:06:29,725 --> 00:06:36,242
 The registrar's office writes to each: our old form dropped accents, so please look closely at your name.
 
 59
-00:06:39,694 --> 00:06:43,477
+00:06:38,342 --> 00:06:42,125
 Within a week, seven had given back the accents the old form took.
 
 60
-00:06:45,777 --> 00:06:49,079
+00:06:44,425 --> 00:06:47,727
 Mei logs it in the issue log, as Rules that run showed.
 
 61
-00:06:50,979 --> 00:06:56,149
+00:06:49,627 --> 00:06:54,797
 As in India, where everyone around a case was vaccinated, before the chain could spread.
 
 62
-00:06:59,849 --> 00:07:07,375
+00:06:58,497 --> 00:07:06,023
 In India, after the last case, the reward rose to a thousand rupees, four months' pay, and every report was answered.
 
 63
-00:07:08,875 --> 00:07:11,813
+00:07:07,523 --> 00:07:10,461
 None was smallpox: that's how they knew it was gone.
 
 64
-00:07:13,713 --> 00:07:20,678
+00:07:12,361 --> 00:07:19,326
 At the university, every report is answered, fixed where it started, and told, and each kind of error becomes a check.
 
 65
-00:07:22,178 --> 00:07:25,622
+00:07:20,826 --> 00:07:24,270
 Andrés's certificate will read Andrés Peñaloza.
 
 66
-00:07:27,122 --> 00:07:30,400
+00:07:25,770 --> 00:07:29,048
 Answer every report, fix it where it started, and tell them.

@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En 1960, con el calor y las luces, unas algas verdes cubren las paredes, y se forman cristales blancos sobre ellas.",
 "The visits that let people see the paintings are destroying them, and once they're gone, they're gone for everyone.":
 "Las visitas que dejan ver las pinturas las están destruyendo, y si se pierden, se pierden para todos.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The paintings have to be saved, even from the people who love them.":
+"Las pinturas tienen que salvarse, incluso de la gente que las ama.",
 "In 1963, the minister for culture, André Malraux, closes the cave to the public.":
 "En 1963, el ministro de cultura, André Malraux, cierra la cueva al público.",
 "On the same hill, its two best-known galleries are rebuilt in concrete, down to every bump in the rock.":

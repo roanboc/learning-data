@@ -27,217 +27,217 @@ Many said the problem was the workers.
 For the people who bought those cars, it meant faults to fix. For the workers, it meant no job, and a name that followed them.
 
 8
-00:00:42,925 --> 00:00:44,313
-Something had to change.
+00:00:42,925 --> 00:00:45,498
+Blaming the workers hadn't fixed a single car.
 
 9
-00:00:46,413 --> 00:00:51,757
+00:00:47,598 --> 00:00:52,942
 In 1984, General Motors and Toyota reopen the plant together, as NUMMI.
 
 10
-00:00:53,457 --> 00:00:57,805
+00:00:54,642 --> 00:00:58,990
 More than eight in ten of its new workers are the same people, hired back.
 
 11
-00:00:59,505 --> 00:01:05,373
+00:01:00,690 --> 00:01:06,558
 Groups of thirty fly to a Toyota plant in Japan, and work beside the people there for two weeks.
 
 12
-00:01:06,873 --> 00:01:12,760
+00:01:08,058 --> 00:01:13,945
 Back in Fremont, they work in small teams, and a team leader steps in whenever something goes wrong.
 
 13
-00:01:14,260 --> 00:01:20,311
+00:01:15,445 --> 00:01:21,496
 Anyone can pull a cord above the line to call for help. If the problem isn't fixed, the line stops.
 
 14
-00:01:22,211 --> 00:01:27,473
+00:01:23,396 --> 00:01:28,658
 Within two years, its cars have about as few faults as those Toyota builds in Japan.
 
 15
-00:01:29,173 --> 00:01:36,954
+00:01:30,358 --> 00:01:38,139
 Absence and complaints fall steeply. One study found the old way would need half as many workers again to build the same car.
 
 16
-00:01:38,854 --> 00:01:47,235
+00:01:40,039 --> 00:01:48,420
 Managers had seen the absences. Workers had seen a line that never stopped, and nobody to help. Both were right about what they saw.
 
 17
-00:01:49,135 --> 00:01:53,460
+00:01:50,320 --> 00:01:54,645
 The same people, in a different system, did some of the best work in the country.
 
 18
-00:01:55,160 --> 00:01:58,994
+00:01:56,345 --> 00:02:00,179
 When someone's work falls behind, look first at what surrounds them.
 
 19
-00:02:00,294 --> 00:02:03,461
+00:02:01,479 --> 00:02:04,646
 What they were taught, what's in their way, and what they're asked to do.
 
 20
-00:02:11,561 --> 00:02:17,240
+00:02:12,746 --> 00:02:18,425
 At the university, a year from now, the data team moves its reports off the old warehouse.
 
 21
-00:02:18,740 --> 00:02:23,974
+00:02:19,925 --> 00:02:25,159
 Each report is now written as code on the platform, and reviewed before anyone reads it.
 
 22
-00:02:25,674 --> 00:02:31,994
+00:02:26,859 --> 00:02:33,179
 The team's days from a request to first use fall from 41 in February to 24 by June.
 
 23
-00:02:33,894 --> 00:02:40,577
+00:02:35,079 --> 00:02:41,762
 Tomás Ortega, the report developer, built most of the old reports. He knows every one, and who reads it.
 
 24
-00:02:42,277 --> 00:02:49,392
+00:02:43,462 --> 00:02:50,577
 His work speeds up too, but less, and unevenly: some weeks keep pace with the team, others go back for changes.
 
 25
-00:02:51,292 --> 00:02:57,283
+00:02:52,477 --> 00:02:58,468
 Helena Novak, the data manager, first read the team as a whole, as The team comes first showed.
 
 26
-00:02:58,783 --> 00:03:02,496
+00:02:59,968 --> 00:03:03,681
 Its shared work is going well. One person's is falling behind it.
 
 27
-00:03:04,196 --> 00:03:05,950
+00:03:05,381 --> 00:03:07,135
 Before she judges, she asks.
 
 28
-00:03:08,650 --> 00:03:10,568
+00:03:09,835 --> 00:03:11,753
 Two old books give her the questions.
 
 29
-00:03:12,068 --> 00:03:19,896
+00:03:13,253 --> 00:03:21,081
 Robert Mager and Peter Pipe asked: could they do it if they had to? If not, it's a skill. If they could, something is in the way.
 
 30
-00:03:21,996 --> 00:03:29,528
+00:03:23,181 --> 00:03:30,713
 Thomas Gilbert said: look at what surrounds the work, its information, its tools and its rewards, before you look at the person.
 
 31
-00:03:31,628 --> 00:03:37,310
+00:03:32,813 --> 00:03:38,495
 In his one-to-one on Wednesday 26 May, Helena asks Tomás what's getting in his way.
 
 32
-00:03:39,010 --> 00:03:43,164
+00:03:40,195 --> 00:03:44,349
 The first cause is training. The tools changed, and nobody taught them.
 
 33
-00:03:44,864 --> 00:03:48,814
+00:03:46,049 --> 00:03:49,999
 The others learned by doing, while Tomás kept the old reports running.
 
 34
-00:03:50,514 --> 00:03:57,501
+00:03:51,699 --> 00:03:58,686
 So he pairs with Jun twice a week, and his Thursday learning time is protected. He'd been giving it up to clear his list.
 
 35
-00:03:59,401 --> 00:04:05,865
+00:04:00,586 --> 00:04:07,050
 The second is fit for the role. His strength is the people who read the reports, more than the code behind them.
 
 36
-00:04:07,565 --> 00:04:11,946
+00:04:08,750 --> 00:04:13,131
 So the readers' release notes and their training become his, while he keeps building.
 
 37
-00:04:14,046 --> 00:04:19,455
+00:04:15,231 --> 00:04:20,640
 In June, he tells Helena he's having a hard time at home. Nobody needs to know more.
 
 38
-00:04:21,555 --> 00:04:28,271
+00:04:22,740 --> 00:04:29,456
 That's a good reason too, and it asks for patience. For two months his load is lighter, and nobody asks for more.
 
 39
-00:04:30,171 --> 00:04:36,276
+00:04:31,356 --> 00:04:37,461
 At NUMMI, pulling the cord brought help, not blame. Helena's part is the same: clear what's in the way.
 
 40
-00:04:38,176 --> 00:04:43,583
+00:04:39,361 --> 00:04:44,768
 Amy Edmondson calls it psychological safety: people say what's wrong when it's safe to.
 
 41
-00:04:46,683 --> 00:04:51,476
+00:04:47,868 --> 00:04:52,661
 How far behind is he? Not behind Helena's expectations: behind the team.
 
 42
-00:04:53,176 --> 00:04:59,945
+00:04:54,361 --> 00:05:01,130
 In February, before the move, Tomás took 40 days from a request to first use. The team took 41.
 
 43
-00:05:01,845 --> 00:05:07,105
+00:05:03,030 --> 00:05:08,290
 By June, the new tools had brought the team to 24. Tomás was at 35.
 
 44
-00:05:09,205 --> 00:05:14,134
+00:05:10,390 --> 00:05:15,319
 He had improved. The team had improved faster, because the tools lifted everyone.
 
 45
-00:05:16,034 --> 00:05:22,730
+00:05:17,219 --> 00:05:23,915
 So his gap is read against the team's own change, never against a colleague, and it stays between him and Helena.
 
 46
-00:05:24,430 --> 00:05:29,877
+00:05:25,615 --> 00:05:31,062
 Tomás writes his own plan: what he'll learn, by when, and what he needs. Helena agrees it.
 
 47
-00:05:31,577 --> 00:05:34,552
+00:05:32,762 --> 00:05:35,737
 They read it together on the first Wednesday of each month.
 
 48
-00:05:37,252 --> 00:05:42,915
+00:05:38,437 --> 00:05:44,100
 The gains come unevenly. September goes well. In October, a report goes back twice.
 
 49
-00:05:44,615 --> 00:05:50,924
+00:05:45,800 --> 00:05:52,109
 By December, the team is at 14 days, and Tomás at 20. The gap has closed by about half.
 
 50
-00:05:53,024 --> 00:05:59,379
+00:05:54,209 --> 00:06:00,564
 On Wednesday 15 December, Helena says it plainly: the plan goes on into 2028.
 
 51
-00:06:01,079 --> 00:06:08,767
+00:06:02,264 --> 00:06:09,952
 And if building reports stops being where he's strongest, they'll talk about a role that fits him better. He hears it now, not later.
 
 52
-00:06:10,667 --> 00:06:15,850
+00:06:11,852 --> 00:06:17,035
 Lifting someone's work can take months, or even years. Patience is part of the plan.
 
 53
-00:06:17,550 --> 00:06:21,658
+00:06:18,735 --> 00:06:22,843
 Through all of it, his measures are his own, and his reasons stay private.
 
 54
-00:06:24,358 --> 00:06:29,640
+00:06:25,543 --> 00:06:30,825
 At NUMMI, the people didn't change first. What surrounded them did, and then their work did.
 
 55
-00:06:31,540 --> 00:06:36,265
+00:06:32,725 --> 00:06:37,450
 Helena did the same: she found the causes, cleared what she could, and gave it time.
 
 56
-00:06:38,165 --> 00:06:41,525
+00:06:39,350 --> 00:06:42,710
 On Monday, read the team's shared work before anyone's own.
 
 57
-00:06:43,025 --> 00:06:47,539
+00:06:44,210 --> 00:06:48,724
 Ask before you judge, and look for the cause: training, fit, or a hard time.
 
 58
-00:06:49,039 --> 00:06:54,005
+00:06:50,224 --> 00:06:55,190
 Clear the blockers first, and measure against the team's change, not your expectations.
 
 59
-00:06:55,505 --> 00:06:59,665
+00:06:56,690 --> 00:07:00,850
 Let them write the plan, read it each month, and say honestly where it's going.
 
 60
-00:07:01,165 --> 00:07:06,697
+00:07:02,350 --> 00:07:07,882
 Growing people, the next film, follows the everyday case: goals, feedback, and a next step.
 
 61
-00:07:08,397 --> 00:07:10,891
+00:07:09,582 --> 00:07:12,076
 Find the cause, clear the way, and give it time.

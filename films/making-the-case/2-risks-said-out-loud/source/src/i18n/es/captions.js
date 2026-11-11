@@ -13,7 +13,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "But the ice is flat and white for hundreds of kilometres. In fog, you could pass a depot a kilometre away, and never see it.":"Pero el hielo es plano y blanco por cientos de kilómetros. Con niebla, podrías pasar a un kilómetro de un depósito sin llegar a verlo.",
 "Miss one on the way home, and they run out of food, far from any help.":"Si pasan uno de largo al volver, se quedan sin comida, lejos de toda ayuda.",
 "Marks set along the route are easily missed, and once you drift off the line, you may not find it again.":"Las marcas a lo largo de la ruta se pasan por alto fácilmente, y si te desvías de la línea, quizá no vuelvas a encontrarla.",
-"Something had to change.":"Algo tenía que cambiar.",
+"They needed depots they couldn't miss, even in fog.":"Necesitaban depósitos que no pudieran pasar de largo, ni siquiera con niebla.",
 "So they talked it through, and marked each depot across the route instead, nine kilometres out on each side.":"Así que lo hablaron, y marcaron cada depósito a lo ancho de la ruta, hasta nueve kilómetros a cada lado.",
 "At the first, twenty black flags, each numbered to tell which side the depot lay, and how far.":"En el primero, veinte banderas negras, numeradas para decir de qué lado estaba el depósito, y a qué distancia.",
 "Even off course, they would cross the line, and a flag would point them in.":"Aun desviados, cruzarían la línea, y una bandera les señalaría el camino.",

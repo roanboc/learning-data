@@ -22,8 +22,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Su piedra era frágil: una caída podía matar a quien estuviera cerca, y quitarle a la ciudad la torre que la gente cruza el mundo para ver.",
 "And any work was a risk: the slightest disturbance to the ground on its leaning side could bring it down.":
 "Y cualquier obra era un riesgo: la menor alteración del suelo del lado inclinado podía derribarla.",
-"Something had to change, without the work itself toppling it.":
-"Algo tenía que cambiar, sin que la propia obra la derribara.",
+"The tower had to be made safe, without the work itself toppling it.":
+"La torre tenía que quedar segura, sin que la propia obra la derribara.",
 "That spring, Italy's government appointed an international committee: engineers, architects and experts in old monuments.":
 "Esa primavera, el gobierno de Italia nombró un comité internacional: ingenieros, arquitectos y expertos en monumentos antiguos.",
 "Before choosing how, they agreed what saving it would mean: a small change, about half a degree, too little for anyone to see.":

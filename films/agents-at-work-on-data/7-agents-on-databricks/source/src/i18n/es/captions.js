@@ -33,8 +33,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si planifica con la más baja, 27 proyectos se quedarían sin espacio de laboratorio.",
 "And a copy of the projects table, with every researcher's name in it, sits on a laptop.":
 "Y una copia de la tabla de proyectos, con el nombre de cada investigador, está en una laptop.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The agents couldn't keep working away from the data, each on its own copy.":
+"Los agentes no podían seguir trabajando lejos de los datos, cada uno con su propia copia.",
 "So Sam, who runs the platform, and Jun, who builds the data project, bring the agents to the data, on Databricks.":
 "Entonces Sam, que administra la plataforma, y Jun, que construye el proyecto de datos, llevan los agentes a los datos, en Databricks.",
 "Every agent now reads the same governed tables, definitions and tools as everyone else, and only what its own person may read.":

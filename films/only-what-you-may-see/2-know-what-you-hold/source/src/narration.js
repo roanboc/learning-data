@@ -7,7 +7,7 @@ const NARR={
  {"id":"print","gap":0.8,"text":"In small print, in a busy shop, a parent can't tell which foods are loaded with sugar."},
  {"id":"lot","gap":0.8,"text":"Is thirty-three grams a lot?"},
  {"id":"obese","gap":0.8,"text":"And about one child in four starting school is obese, at risk of diabetes and heart disease later."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Parents need a label they can read at a glance."},
  {"id":"law","gap":0.8,"text":"That year, Congress passes a law proposed by five senators, from left, centre and right."},
  {"id":"limits","gap":0.8,"text":"The Ministry of Health sets limits for sugars, sodium, saturated fats and calories."},
  {"id":"octagon","gap":0.8,"text":"From June 2016, a food over a limit carries a black octagon on the front of its pack, the shape of a stop sign: high in sugars.","say":"From June twenty sixteen, a food over a limit carries a black octagon on the front of its pack, the shape of a stop sign: high in sugars."},

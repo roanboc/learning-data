@@ -15,7 +15,7 @@ const NARR={
  {"id":"calls","gap":0.8,"text":"It called its model with another key of his, paid from no one's budget, and no one saw what the calls carried."},
  {"id":"blame","gap":0.8,"text":"And if names ever leaked, the log would point at Anil."},
  {"id":"nothing","gap":0.8,"text":"He did nothing wrong: a personal key can't hand over less than everything he has."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The agent couldn't keep borrowing Anil's keys."},
  {"id":"own","gap":0.8,"text":"So Sam gives the agent a name of its own, under the same rules as people."},
  {"id":"catalog","gap":0.3,"text":"Unity Catalog, where the platform keeps its rules,"},
  {"id":"grants","gap":0.8,"text":"gives it only the grants its job needs, and stars where the names are."},

@@ -30,8 +30,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y cuando cierren las oficinas de la guerra, sus papeles se enviarán lejos o se perderán, lo valioso con lo inútil:",
 "papers someone will need one day, to prove a claim or their service.":
 "papeles que alguien necesitará un día para probar una reclamación o su servicio.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Someone has to decide what's worth keeping, before it's too late.":
+"Alguien tiene que decidir qué vale la pena guardar, antes de que sea tarde.",
 "On 7 July 1943, the President signs a law the National Archives drafted with a committee of Congress.":
 "El 7 de julio de 1943, el presidente firma una ley que los Archivos Nacionales redactaron con una comisión del Congreso.",
 "Each office now writes a schedule, once:":

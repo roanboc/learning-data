@@ -204,9 +204,9 @@ reed(VIC, F('reasons', 'Victoria kept', 0.1), 0.7, -0.55, hold=0.45, ring=0.7)
 # 79 years: B minor, still; "Something had to change": A major
 tY = F('years', 'seventy-nine years')
 tap(tY, 0.009, px(250))
-recv(B2, tY - 0.3, F('years', 'Something', -0.5), 0.75, att=1.2, rel=0.9)
+recv(B2, tY - 0.3, F('years', 'and it would', -0.5), 0.75, att=1.2, rel=0.9)
 roll((B3, D4, Fs4), F('years', 'everything stopped', 0.1), 0.2, 0.5, ring=0.8)
-tS = F('years', 'Something had to change')
+tS = F('years', 'go on stopping')
 recv(A2, tS - 0.2, END('gauge', 'years') + 1.2, 0.75, att=1.0, rel=1.1)
 roll((Cs4, E4), tS + 0.2, 0.18, 0.5, ring=0.8)
 # 1962: the year, the gold line laid towards Melbourne, and one agreed gauge: the mark, the phrase passing from one side to the other

@@ -9,7 +9,7 @@ const NARR={
  {"id":"forged","gap":0.8,"text":"If anyone could bring one, a forged letter or a messenger's lie could put an army on the march."},
  {"id":"die","gap":0.8,"text":"Soldiers could die for an order nobody gave, or be turned against the king himself."},
  {"id":"sees","gap":0.8,"text":"And the commander at his post sees only the man who brings it."},
- {"id":"change","gap":0.8,"text":"Something has to change."}]},
+ {"id":"change","gap":0.8,"text":"The commander needs a way to know an order truly comes from the king."}]},
 "match":{"name":"When the halves match","lead":1.0,"tail":1.0,"vo":[
  {"id":"tally","gap":0.8,"text":"The answer is a tally: a small bronze tiger, cut in two along its back."},
  {"id":"keeps","gap":0.8,"text":"The king keeps the right half, and the commander takes the left to his post."},

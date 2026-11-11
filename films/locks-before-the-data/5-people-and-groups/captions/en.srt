@@ -27,265 +27,265 @@ And a key still opens its door, whoever holds it, long after the stay has ended.
 Anyone who found one, or kept one, could let themselves into the next guest's room, while that guest slept.
 
 8
-00:00:36,733 --> 00:00:38,173
-Something has to change.
+00:00:36,733 --> 00:00:39,199
+A key has to stop working when the stay ends.
 
 9
-00:00:42,273 --> 00:00:45,324
+00:00:43,299 --> 00:00:46,350
 Sørnes makes a lock that a punched plastic card opens.
 
 10
-00:00:46,624 --> 00:00:50,429
+00:00:47,650 --> 00:00:51,455
 Inside each lock is a pattern card, put in from inside the room.
 
 11
-00:00:51,929 --> 00:00:57,560
+00:00:52,955 --> 00:00:58,586
 For each new guest, the hotel puts in a new pattern, and gives the guest a card punched to match.
 
 12
-00:00:59,260 --> 00:01:01,344
+00:01:00,286 --> 00:01:02,370
 The last guest's card opens nothing.
 
 13
-00:01:03,244 --> 00:01:09,955
+00:01:04,270 --> 00:01:10,981
 In 1978, the first go into a big new hotel in Atlanta, which had been troubled by burglaries.
 
 14
-00:01:11,655 --> 00:01:18,061
+00:01:12,681 --> 00:01:19,087
 Now a lost card opens nothing once the next guest arrives, and changing the lock takes only a new card.
 
 15
-00:01:19,561 --> 00:01:27,984
+00:01:20,587 --> 00:01:29,010
 By 2011, the company says, its card locks are on six and a half million hotel rooms, in 166 countries.
 
 16
-00:01:29,684 --> 00:01:31,215
+00:01:30,710 --> 00:01:32,241
 A key that ends with the stay.
 
 17
-00:01:33,315 --> 00:01:40,897
+00:01:34,341 --> 00:01:41,923
 At the university, a place on the data platform could outlive a person's job, and an admin's power outlived the task.
 
 18
-00:01:41,997 --> 00:01:44,684
+00:01:43,023 --> 00:01:45,710
 And a personal token had no end date at all.
 
 19
-00:01:46,384 --> 00:01:53,124
+00:01:47,410 --> 00:01:54,150
 This film builds the answer from three earlier films, in Microsoft Entra ID and Azure Databricks.
 
 20
-00:02:00,624 --> 00:02:04,019
+00:02:01,650 --> 00:02:05,045
 Sam Okafor keeps the university's data platform.
 
 21
-00:02:05,119 --> 00:02:11,855
+00:02:06,145 --> 00:02:12,881
 Its tables already give their rights to groups from the university's directory, as Governed in Unity Catalog showed.
 
 22
-00:02:13,355 --> 00:02:16,027
+00:02:14,381 --> 00:02:17,053
 But who could come in at all was a list kept by hand.
 
 23
-00:02:17,327 --> 00:02:22,175
+00:02:18,353 --> 00:02:23,201
 The workspace had been given people, one by one: 214 of them.
 
 24
-00:02:23,675 --> 00:02:27,423
+00:02:24,701 --> 00:02:28,449
 Nineteen had moved to jobs that didn't need it, and still got in.
 
 25
-00:02:28,923 --> 00:02:33,644
+00:02:29,949 --> 00:02:34,670
 Four groups had been made inside the workspace, and the directory knew nothing of them.
 
 26
-00:02:35,144 --> 00:02:39,702
+00:02:36,170 --> 00:02:40,728
 Eleven people were its admins, on the same accounts they read their email with.
 
 27
-00:02:41,002 --> 00:02:44,513
+00:02:42,028 --> 00:02:45,539
 A fake page that caught one of their sign-ins would catch an admin.
 
 28
-00:02:46,213 --> 00:02:50,148
+00:02:47,239 --> 00:02:51,174
 Everyone signed in with a password and a code by text message.
 
 29
-00:02:51,448 --> 00:02:57,177
+00:02:52,474 --> 00:02:58,203
 And Jun's personal token, made in 2024 with no end date, ran the nightly job.
 
 30
-00:02:58,877 --> 00:03:03,997
+00:02:59,903 --> 00:03:05,023
 Like the hotel keys before the card, each still opened its door, long after the stay.
 
 31
-00:03:07,897 --> 00:03:13,292
+00:03:08,923 --> 00:03:14,318
 The university's directory is Microsoft Entra ID, and HR's records feed it.
 
 32
-00:03:14,592 --> 00:03:18,719
+00:03:15,618 --> 00:03:19,745
 When someone joins, their account is made, already in their team's groups.
 
 33
-00:03:20,019 --> 00:03:24,197
+00:03:21,045 --> 00:03:25,223
 When they move, their groups change; when they leave, their account is turned off.
 
 34
-00:03:25,697 --> 00:03:32,691
+00:03:26,723 --> 00:03:33,717
 Now Azure Databricks reads the directory for itself: its people, and its groups, groups inside groups too.
 
 35
-00:03:34,191 --> 00:03:39,162
+00:03:35,217 --> 00:03:40,188
 Sam switches on its automatic identity management, once, for the whole account.
 
 36
-00:03:40,862 --> 00:03:44,024
+00:03:41,888 --> 00:03:45,050
 Each workspace is then given groups, never people.
 
 37
-00:03:45,324 --> 00:03:51,577
+00:03:46,350 --> 00:03:52,603
 Production is given the data team, the registrar's office, and the readers each area's owner allows.
 
 38
-00:03:53,077 --> 00:03:57,818
+00:03:54,103 --> 00:03:58,844
 The four groups made by hand are gone: their people are in the directory's groups now.
 
 39
-00:03:59,318 --> 00:04:02,464
+00:04:00,344 --> 00:04:03,490
 Groups are changed in one place only: the directory.
 
 40
-00:04:03,964 --> 00:04:07,746
+00:04:04,990 --> 00:04:08,772
 Each time someone signs in, Databricks reads their groups again.
 
 41
-00:04:09,046 --> 00:04:13,538
+00:04:10,072 --> 00:04:14,564
 So when someone moves to another team, the platform follows at their next sign-in.
 
 42
-00:04:15,038 --> 00:04:21,021
+00:04:16,064 --> 00:04:22,047
 And when someone leaves, Databricks turns their user off at its next sync, and nothing can sign in as them.
 
 43
-00:04:24,721 --> 00:04:28,193
+00:04:25,747 --> 00:04:29,219
 Everyone signs in the same way, once, through the directory.
 
 44
-00:04:29,293 --> 00:04:37,776
+00:04:30,319 --> 00:04:38,802
 A rule there, a Conditional Access policy, lets no one reach Azure Databricks without a passkey: a sign-in no fake page can catch.
 
 45
-00:04:39,476 --> 00:04:43,970
+00:04:40,502 --> 00:04:44,996
 It lives on their own phone, in the Authenticator app, or on a security key.
 
 46
-00:04:45,270 --> 00:04:52,472
+00:04:46,296 --> 00:04:53,498
 Mei Tanaka, who owns the registrar's data, signs in with her phone: her face unlocks the passkey, and she's in.
 
 47
-00:04:54,172 --> 00:04:57,671
+00:04:55,198 --> 00:04:58,697
 There's no password to type, and none a fake page could use.
 
 48
-00:04:59,371 --> 00:05:04,919
+00:05:00,397 --> 00:05:05,945
 The same rule asks for each person's confidentiality agreement, as Who is it, really? showed.
 
 49
-00:05:06,019 --> 00:05:11,163
+00:05:07,045 --> 00:05:12,189
 No one reaches the platform before accepting it, and everyone accepts it again each year.
 
 50
-00:05:12,463 --> 00:05:14,904
+00:05:13,489 --> 00:05:15,930
 The directory keeps who accepted it, and when.
 
 51
-00:05:18,604 --> 00:05:21,624
+00:05:19,630 --> 00:05:22,650
 Great power goes to groups too, and no one is in them.
 
 52
-00:05:23,324 --> 00:05:30,757
+00:05:24,350 --> 00:05:31,783
 Every admin role, in the Databricks account, in each workspace and in Azure, belongs to a group whose name starts with admin.
 
 53
-00:05:32,457 --> 00:05:40,546
+00:05:33,483 --> 00:05:41,572
 Only two people can switch one on, Sam and Jun, each from a second account kept for it, signed in only with a security key.
 
 54
-00:05:42,446 --> 00:05:49,969
+00:05:43,472 --> 00:05:50,995
 The switch is Microsoft Entra privileged identity management: those accounts are eligible for the groups, never in them.
 
 55
-00:05:52,069 --> 00:06:01,074
+00:05:53,095 --> 00:06:02,100
 On 19 October, Sam needs to know who still has personal tokens: the account's token report, which only an account admin can read.
 
 56
-00:06:02,774 --> 00:06:06,853
+00:06:03,800 --> 00:06:07,879
 So he switches on the account's settings group for one hour, and types why.
 
 57
-00:06:08,553 --> 00:06:09,562
+00:06:09,579 --> 00:06:10,588
 Jun approves.
 
 58
-00:06:11,262 --> 00:06:14,150
+00:06:12,288 --> 00:06:15,176
 Within seconds his admin account is in the group.
 
 59
-00:06:15,850 --> 00:06:21,335
+00:06:16,876 --> 00:06:22,361
 And an alert reaches the platform team: who, which group, why, who approved, until when.
 
 60
-00:06:23,235 --> 00:06:28,467
+00:06:24,261 --> 00:06:29,493
 Databricks reads his groups as he signs in, and for this hour, he can read the report.
 
 61
-00:06:30,167 --> 00:06:35,465
+00:06:31,193 --> 00:06:36,491
 Then he signs out, and when the hour is up, the directory takes his admin account out of the group.
 
 62
-00:06:37,165 --> 00:06:42,195
+00:06:38,191 --> 00:06:43,221
 Like a new pattern in the hotel's lock, each switch-on opens one stay, and ends with it.
 
 63
-00:06:46,095 --> 00:06:51,783
+00:06:47,121 --> 00:06:52,809
 The report shows seven personal tokens: six people's, for their command lines, and Jun's.
 
 64
-00:06:53,083 --> 00:06:57,306
+00:06:54,109 --> 00:06:58,332
 But the command line can sign in through the browser now, with the same passkey.
 
 65
-00:06:58,606 --> 00:07:07,486
+00:06:59,632 --> 00:07:08,512
 The Databricks CLI keeps its own short passes, each an hour long, in the computer's secure store: nothing to copy, nothing to paste.
 
 66
-00:07:08,986 --> 00:07:12,149
+00:07:10,012 --> 00:07:13,175
 So the six sign in that way, and end their own tokens.
 
 67
-00:07:13,649 --> 00:07:21,856
+00:07:14,675 --> 00:07:22,882
 Jun's runs the nightly job, until Workloads without secrets gives the job its own way in, and ends it on 3 November.
 
 68
-00:07:23,356 --> 00:07:31,111
+00:07:24,382 --> 00:07:32,137
 That afternoon, Sam switches on the workspaces' settings for thirty minutes, Jun approves, and Sam turns personal tokens off.
 
 69
-00:07:32,811 --> 00:07:36,041
+00:07:33,837 --> 00:07:37,067
 Now no one can make a personal token, or use one.
 
 70
-00:07:39,741 --> 00:07:45,870
+00:07:40,767 --> 00:07:46,896
 In the hotels of the 1970s, a new pattern for each guest meant a lost card opened nothing.
 
 71
-00:07:47,370 --> 00:07:53,755
+00:07:48,396 --> 00:07:54,781
 At the university, a place on the platform now ends with the job, and admin power ends with the task.
 
 72
-00:07:54,855 --> 00:07:57,891
+00:07:55,881 --> 00:07:58,917
 And no personal token is left to outlive anyone.
 
 73
-00:07:59,591 --> 00:08:04,340
+00:08:00,617 --> 00:08:05,366
 People sign in once, with no password to steal; power is borrowed, not kept.

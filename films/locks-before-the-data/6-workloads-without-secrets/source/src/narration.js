@@ -7,7 +7,7 @@ const NARR={
  {"id":"switch","gap":0.8,"text":"The trouble is in the ignition: the key only turns a switch."},
  {"id":"wire","gap":0.8,"text":"A wire behind the steering wheel can close it too, and so can a copy of the key."},
  {"id":"owner","gap":0.8,"text":"For the owner, that means a morning with no car: no way to work, a claim to make, and a car that may never come back."},
- {"id":"change","gap":0.8,"text":"Something has to change."}]},
+ {"id":"change","gap":0.8,"text":"A car has to know its own key, not just a turned switch."}]},
 "asks":{"name":"The car asks the key","lead":0.6,"tail":0.6,"vo":[
  {"id":"eu","gap":0.8,"text":"In 1995, the European Union decides: from October 1998, every new car sold must have an electronic immobiliser.","say":"In nineteen ninety-five, the European Union decides: from October nineteen ninety-eight, every new car sold must have an electronic immobiliser."},
  {"id":"chip","gap":0.8,"text":"It's a small chip in the key."},

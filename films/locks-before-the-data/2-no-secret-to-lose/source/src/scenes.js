@@ -45,7 +45,7 @@ scene("city",(ctx,S,t,sc)=>{const C=sc.cues,
   tPaper=wAt(sc,"paper","money markets"),tPromise=wAt(sc,"promise","promises"),tMsg=wAt(sc,"walks","a messenger"),tBack=wAt(sc,"walks","comes back"),
   tBearer=wAt(sc,"bearer","bearer"),tHolds=wAt(sc,"bearer","whoever"),tMan=wAt(sc,"morning","a man"),tTakes=wAt(sc,"morning","takes"),
   t301=wAt(sc,"inside","three hundred"),tWorth=wAt(sc,"inside","worth"),tCash=wAt(sc,"cash","as good as cash"),tGone=wAt(sc,"gone","the money is gone"),
-  tEvery=wAt(sc,"every","every messenger"),tChange=wAt(sc,"change","change");
+  tEvery=wAt(sc,"every","every messenger"),tChange=wAt(sc,"change","stop being");
   const tQ=C.morning-0.3,tW0=tQ,tStop=tTakes-0.25,tMap=C.every-0.3;
   // the messenger of the quiet street walks left at the pulse's pace (a step every 0.6 s), out of the frame before the camera reaches
   // the wall, and stops there; the case is gone when the camera comes back

@@ -16,7 +16,7 @@ const NARR={
  {"id":"little","gap":0.3,"text":"So only a little reaches the public basins and fountains, which should run day and night for the people,"},
  {"id":"stop","gap":0.8,"text":"and some stop altogether."},
  {"id":"nobody","gap":0.8,"text":"Nobody can say who draws what."},
- {"id":"change","gap":0.8,"text":"Something has to change."}
+ {"id":"change","gap":0.8,"text":"The water has to go where it's owed, and someone has to know where it goes."}
 ]},
 "tank":{"name":"Only at the tank","lead":1.0,"tail":1.0,"vo":[
  {"id":"rules","gap":0.8,"text":"Frontinus holds the city to its rules."},

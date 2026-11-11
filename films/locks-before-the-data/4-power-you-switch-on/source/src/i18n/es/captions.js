@@ -25,8 +25,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Ninguna cerradura detiene eso: los números correctos, del hombre correcto, abren la puerta.",
 "So every banker who knows them, and his family, is in danger.":
 "Así que cada banquero que los conoce, y su familia, está en peligro.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The vault has to stay shut, even to the man who knows the numbers.":
+"La bóveda tiene que seguir cerrada, incluso para el hombre que sabe los números.",
 "In Rochester, New York, a lock maker, James Sargent, builds clocks into a vault's lock.":
 "En Rochester, Nueva York, un cerrajero, James Sargent, pone relojes dentro de la cerradura de una bóveda.",
 "Each evening, the bank sets the hour it may open.":

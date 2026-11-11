@@ -8,7 +8,7 @@ const NARR={
  {"id":"seats","gap":0.8,"text":"The winners will hold most of the seats in the parliament that writes it."},
  {"id":"fear","gap":0.8,"text":"The smaller parties fear what a winning majority could write: rights a later vote could take away, courts that answer to a party."},
  {"id":"elected","gap":0.8,"text":"And the party expected to win won't accept a constitution written by negotiators nobody elected."},
- {"id":"change","gap":0.8,"text":"Something has to change in how a constitution is made."},
+ {"id":"change","gap":0.8,"text":"The way a constitution is made has to win everyone's trust first."},
  {"id":"first","gap":0.8,"text":"So they agree the principles first: 34 of them, from rights for everyone to judges no party controls.","say":"So they agree the principles first: thirty-four of them, from rights for everyone to judges no party controls."},
  {"id":"fixed","gap":0.8,"text":"They write them into a temporary constitution, in force from 27 April 1994, and nobody may change them.","say":"They write them into a temporary constitution, in force from the twenty-seventh of April, nineteen ninety-four, and nobody may change them."},
  {"id":"assembly","gap":0.8,"text":"The new parliament, sitting as the Constitutional Assembly, will write the final text."},

@@ -177,7 +177,7 @@ jaw(D4, P_own + 0.2, 0.7, -0.1)
 for word, m in (('no way to work', Bb3), ('a claim', A3), ('a car that may', G3)):
     knock(W('copy', 'owner', word), 0.01, px(925), 260)
     jaw(m, W('copy', 'owner', word, 0.25), 0.7, -0.05)
-P_chg = W('copy', 'change', 'Something')
+P_chg = W('copy', 'change', 'A car')
 tune([(F4, 'open'), (A3, 'mid'), (C4, 'round')], P_chg + 0.5, 1.0, 0.7, 0.0)
 
 # 2. The car asks the key. The same morning: the European Union's rule, a card laid down, the trombone holding for the owners, and the

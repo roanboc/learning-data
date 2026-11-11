@@ -71,9 +71,10 @@ decisions:
       teaching period of the contract each claim is made under, not the day it was paid; by faculty,
       unit and teaching period. It is defined once, as the Unity Catalog metric view casual_teaching_cost,
       over the fact mart_finance__casual_claims, with its rules inside its measure, its display name,
-      synonyms and format. The other two counts that shared its name keep names of their own, casual
-      hours contracted, for planning, and casual pay paid, for each pay day. Accepted as LIM-FIN-04, on
-      the fact.
+      synonyms and format. The other two counts that shared its name are measures of their own, each its
+      domain's, with its owner in the glossary - casual hours contracted, Planning's (Clara Jensen), for
+      planning, and casual pay paid, HR's (Ingrid Holm), for each pay day, a metric view of its own over
+      payroll's export. Accepted as LIM-FIN-04, on the fact.
     why: In August 2026 three tools gave the Faculty of Health three numbers for casual teaching cost
       in Semester 1, A$2.46 million, A$1.88 million and A$2.21 million, and nobody could tell which one
       answered the question. Each was right for its own question. Rohan Desai's definition lived only

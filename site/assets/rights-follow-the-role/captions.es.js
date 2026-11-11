@@ -19,8 +19,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así, un error al copiarla pasaba inadvertido: un paciente recibía el fármaco o la dosis equivocados, o inyectado lo que debía tragarse.",
 "Every medicine on the shelf was within reach of every hand, for every patient.":
 "Cada medicamento del estante estaba al alcance de todas las manos, para todos los pacientes.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Medicines had to reach each patient by their own order, not sit open to every hand.":
+"Los medicamentos tenían que llegar a cada paciente según su propia orden, no quedar al alcance de cualquier mano.",
 "In the early 1960s, pharmacists at the University of Arkansas Medical Center, in Little Rock, tried another way.":
 "A principios de los años sesenta, farmacéuticos del Centro Médico de la Universidad de Arkansas, en Little Rock, probaron otra forma.",
 "A pharmacist read each doctor's order, and the pharmacy sent single doses, labelled and ready to give, each as it fell due.":

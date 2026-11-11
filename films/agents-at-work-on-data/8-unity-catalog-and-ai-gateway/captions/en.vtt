@@ -39,206 +39,206 @@ And if names ever leaked, the log would point at Anil.
 00:01:14.788 --> 00:01:19.631
 He did nothing wrong: a personal key can't hand over less than everything he has.
 
-00:01:21.531 --> 00:01:22.919
-Something had to change.
+00:01:21.531 --> 00:01:24.023
+The agent couldn't keep borrowing Anil's keys.
 
-00:01:24.819 --> 00:01:29.200
+00:01:25.923 --> 00:01:30.304
 So Sam gives the agent a name of its own, under the same rules as people.
 
-00:01:31.100 --> 00:01:34.158
+00:01:32.204 --> 00:01:35.262
 Unity Catalog, where the platform keeps its rules,
 
-00:01:34.358 --> 00:01:38.360
+00:01:35.462 --> 00:01:39.464
 gives it only the grants its job needs, and stars where the names are.
 
-00:01:40.060 --> 00:01:46.295
+00:01:41.164 --> 00:01:47.399
 Unity Gateway, its gate to models, lets it call only the ones it's allowed, and counts what it spends.
 
-00:01:48.195 --> 00:01:51.900
+00:01:49.299 --> 00:01:53.004
 It worked. The heads of school get the same answers every morning.
 
-00:01:53.200 --> 00:02:00.547
+00:01:54.304 --> 00:02:01.651
 Since then, it hasn't seen a single name, and its calls cost about 300 dollars a month, from the faculty's own budget.
 
-00:02:02.247 --> 00:02:04.209
+00:02:03.351 --> 00:02:05.313
 And the log says whose reads they were.
 
-00:02:05.909 --> 00:02:11.880
+00:02:07.013 --> 00:02:12.984
 Jun's project check agent, which checks each night's count of research projects, works the same way:
 
-00:02:12.080 --> 00:02:14.382
+00:02:13.184 --> 00:02:15.486
 one set of rules for people and agents.
 
-00:02:21.682 --> 00:02:28.877
+00:02:22.786 --> 00:02:29.981
 The project's page for agents already says: never copy names, emails or student IDs into a prompt.
 
-00:02:30.577 --> 00:02:33.159
+00:02:31.681 --> 00:02:34.263
 But a rule an agent is told is a request.
 
-00:02:34.259 --> 00:02:39.933
+00:02:35.363 --> 00:02:41.037
 It can misread it, lose it in a long task, or be talked out of it by words hidden in what it reads.
 
-00:02:42.033 --> 00:02:49.562
+00:02:43.137 --> 00:02:50.666
 A rule the platform enforces holds, whatever the agent is told: it can't copy a name it only ever sees as stars.
 
-00:02:51.662 --> 00:02:58.209
+00:02:52.766 --> 00:02:59.313
 So the team does both. It tells its agents the rules, and enforces them where the data and the models live.
 
-00:02:59.909 --> 00:03:01.238
+00:03:01.013 --> 00:03:02.342
 Two places keep them.
 
-00:03:02.738 --> 00:03:05.457
+00:03:03.842 --> 00:03:06.561
 Unity Catalog governs what agents touch:
 
-00:03:05.857 --> 00:03:10.227
+00:03:06.961 --> 00:03:11.331
 the tables, the functions they run as tools, and the log of who read what.
 
-00:03:11.327 --> 00:03:16.358
+00:03:12.431 --> 00:03:17.462
 Unity Gateway, part of the catalog, governs the models and tool servers they call.
 
-00:03:20.458 --> 00:03:21.398
+00:03:21.562 --> 00:03:22.502
 First, a name.
 
-00:03:22.698 --> 00:03:27.325
+00:03:23.802 --> 00:03:28.429
 An agent that helps one person, while they're there, can use that person's sign-in.
 
-00:03:29.025 --> 00:03:33.406
+00:03:30.129 --> 00:03:34.510
 One that works on its own, like Anil's at night, needs a name of its own.
 
-00:03:34.906 --> 00:03:40.478
+00:03:36.010 --> 00:03:41.582
 On Databricks, that's a service principal: an identity made for software, not for a person.
 
-00:03:41.978 --> 00:03:48.031
+00:03:43.082 --> 00:03:49.135
 Sam makes one for Anil's agent, the workload agent, and grants it only what its job needs:
 
-00:03:48.531 --> 00:03:52.515
+00:03:49.635 --> 00:03:53.619
 it may read the HR tables its answers come from, and write nowhere.
 
-00:03:54.215 --> 00:04:02.004
+00:03:55.319 --> 00:04:03.108
 Jun's project check agent already has its own: it reads the research tables, and writes only to its own development schema.
 
-00:04:03.704 --> 00:04:08.841
+00:04:04.808 --> 00:04:09.945
 To stop an agent, Sam switches off its service principal, and everyone else works on.
 
-00:04:10.941 --> 00:04:14.082
+00:04:12.045 --> 00:04:15.186
 And Anil stays its owner: he answers for what it does.
 
-00:04:17.782 --> 00:04:26.280
+00:04:18.886 --> 00:04:27.384
 Then the masks. One policy shows stars in every column tagged direct, to everyone outside HR and the faculty offices.
 
-00:04:27.780 --> 00:04:33.367
+00:04:28.884 --> 00:04:34.471
 It's written for all the account's users, and on Databricks, they include every service principal.
 
-00:04:34.867 --> 00:04:38.607
+00:04:35.971 --> 00:04:39.711
 The workload agent isn't in their group: all it needs is counts.
 
-00:04:39.707 --> 00:04:42.169
+00:04:40.811 --> 00:04:43.273
 So it reads the staff table as Clara does:
 
-00:04:42.369 --> 00:04:47.231
+00:04:43.473 --> 00:04:48.335
 each person's staff code, and stars where the names, birth dates and emails are.
 
-00:04:49.131 --> 00:04:53.606
+00:04:50.235 --> 00:04:54.710
 Nobody wrote a rule for agents. The rule for people already covered them.
 
-00:04:55.306 --> 00:04:59.170
+00:04:56.410 --> 00:05:00.274
 A row filter works the same way, for an agent as for a person.
 
-00:05:00.870 --> 00:05:03.298
+00:05:01.974 --> 00:05:04.402
 And the staff code stays readable for counting,
 
-00:05:03.498 --> 00:05:07.821
+00:05:04.602 --> 00:05:08.925
 so the workload agent counts each school's teachers without a single name.
 
-00:05:11.521 --> 00:05:13.923
+00:05:12.625 --> 00:05:15.027
 Agents' tools live in the catalog too.
 
-00:05:14.623 --> 00:05:19.402
+00:05:15.727 --> 00:05:20.506
 The count of active projects, which the data team wrote once, is a function there.
 
-00:05:20.902 --> 00:05:23.983
+00:05:22.006 --> 00:05:25.087
 Running it takes a grant, the same one a person needs.
 
-00:05:24.683 --> 00:05:28.396
+00:05:25.787 --> 00:05:29.500
 Jun's agent has it: it may run the count, and can't change it.
 
-00:05:30.096 --> 00:05:34.454
+00:05:31.200 --> 00:05:35.558
 And the tool servers agents call are registered there, through Unity Gateway,
 
-00:05:34.654 --> 00:05:38.605
+00:05:35.758 --> 00:05:39.709
 each with its own grant: an agent can reach these, and only these.
 
-00:05:40.305 --> 00:05:44.391
+00:05:41.409 --> 00:05:45.495
 Each gets the fewest rights: the workload agent's tools only read.
 
-00:05:48.091 --> 00:05:54.313
+00:05:49.195 --> 00:05:55.417
 Then the models. In Unity Gateway, each model the university allows is a service in the catalog,
 
-00:05:54.713 --> 00:05:56.717
+00:05:55.817 --> 00:05:57.821
 and only those granted it can call it.
 
-00:05:58.417 --> 00:06:02.748
+00:05:59.521 --> 00:06:03.852
 The workload agent is granted one, and Anil's keys are taken back.
 
-00:06:04.648 --> 00:06:08.004
+00:06:05.752 --> 00:06:09.108
 Checks on each service look at what goes in and what comes out.
 
-00:06:09.704 --> 00:06:13.951
+00:06:10.808 --> 00:06:15.055
 One finds an email address in a prompt, and hides it or stops the call.
 
-00:06:15.851 --> 00:06:18.518
+00:06:16.955 --> 00:06:19.622
 Another looks for words written to trick the agent.
 
-00:06:20.418 --> 00:06:22.945
+00:06:21.522 --> 00:06:24.049
 A limit sets how many calls a minute it may make.
 
-00:06:24.645 --> 00:06:30.888
+00:06:25.749 --> 00:06:31.992
 And every call is counted under its name, so the faculty sees what its agent costs, in its own budget.
 
-00:06:35.188 --> 00:06:37.410
+00:06:36.292 --> 00:06:38.514
 A month later, Sam checks the log again.
 
-00:06:38.110 --> 00:06:45.305
+00:06:39.214 --> 00:06:46.409
 The same question, who read the staff table this month, lists Anil on weekday mornings, and the workload agent at night.
 
-00:06:47.205 --> 00:06:49.591
+00:06:48.309 --> 00:06:50.695
 Whose reads were those? Now the log says.
 
-00:06:51.291 --> 00:06:53.719
+00:06:52.395 --> 00:06:54.823
 Lineage shows the tables its queries read.
 
-00:06:55.219 --> 00:06:59.503
+00:06:56.323 --> 00:07:00.607
 The gateway's own table lists every call it made, and the tokens it used.
 
-00:07:01.003 --> 00:07:06.059
+00:07:02.107 --> 00:07:07.163
 If something looks wrong, Sam can stop the agent alone, and nobody else stops with it.
 
-00:07:07.959 --> 00:07:11.291
+00:07:09.063 --> 00:07:12.395
 And no read of the agent's is taken for Anil's again.
 
-00:07:14.991 --> 00:07:20.182
+00:07:16.095 --> 00:07:21.286
 Why keep the rules where the data and the models live, and not only in what agents are told?
 
-00:07:21.682 --> 00:07:27.452
+00:07:22.786 --> 00:07:28.556
 Because there, they hold for every agent, every tool and every person, whatever anyone types.
 
-00:07:29.152 --> 00:07:35.614
+00:07:30.256 --> 00:07:36.718
 And because they're the rules people already work under, there's one set to keep, one log to read, and one review.
 
-00:07:37.314 --> 00:07:39.987
+00:07:38.418 --> 00:07:41.091
 Jun's project check agent works under them too.
 
-00:07:40.687 --> 00:07:45.416
+00:07:41.791 --> 00:07:46.520
 The count Anil plans lab space from, 168 projects,
 
-00:07:45.616 --> 00:07:49.347
+00:07:46.720 --> 00:07:50.451
 is checked by an agent the team can see, limit and account for.
 
-00:07:51.247 --> 00:07:56.173
+00:07:52.351 --> 00:07:57.277
 And every morning, the answers for the heads of school wait under the workload agent's own name.
 
-00:07:57.873 --> 00:08:03.017
+00:07:58.977 --> 00:08:04.121
 One set of rules for people and agents, enforced where the data and the models live.
 
-00:08:05.317 --> 00:08:09.127
+00:08:06.421 --> 00:08:10.231
 Next: the team's context and memory, governed like any data.

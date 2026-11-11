@@ -55,285 +55,285 @@ Desde 1784, también la ciudad y la fecha, el día en letras, y la carta enviada
 Aun así, el hueco sigue abierto: en la década de 1830, unos siete millones de cartas al año viajan gratis.
 
 15
-00:01:15,530 --> 00:01:16,918
-Algo tenía que cambiar.
+00:01:15,530 --> 00:01:19,414
+Endurecer las reglas no había funcionado. El correo gratuito tenía que desaparecer.
 
 16
-00:01:18,618 --> 00:01:23,224
+00:01:21,114 --> 00:01:25,720
 Un maestro de escuela, Rowland Hill, propone un correo barato que pague quien envía.
 
 17
-00:01:23,924 --> 00:01:25,117
+00:01:26,420 --> 00:01:27,613
 El Parlamento acepta.
 
 18
-00:01:25,517 --> 00:01:33,156
+00:01:28,013 --> 00:01:35,652
 El 10 de enero de 1840 empieza el correo del penique: un penique por carta, a cualquier lugar del país, pagado por quien la envía.
 
 19
-00:01:34,656 --> 00:01:35,815
+00:01:37,152 --> 00:01:38,311
 Y se acaba la franquicia.
 
 20
-00:01:36,515 --> 00:01:42,644
+00:01:39,011 --> 00:01:45,140
 En un año, las cartas se duplican con creces: de unos 76 millones a casi 170 millones.
 
 21
-00:01:44,344 --> 00:01:48,061
+00:01:46,840 --> 00:01:50,557
 Una carta es barata para todos, y cada carta paga su propio porte.
 
 22
-00:01:49,361 --> 00:01:55,753
+00:01:51,857 --> 00:01:58,249
 Hoy, en la universidad, el ayudante de IA de Jun Park trabaja con su acceso, con todo lo que Jun puede hacer.
 
 23
-00:01:57,053 --> 00:02:01,136
+00:01:59,549 --> 00:02:03,632
 Acotados, esos permisos prestados le dejan aprender, sin riesgo, en un sandbox.
 
 24
-00:02:02,236 --> 00:02:05,262
+00:02:04,732 --> 00:02:07,758
 Y cuando trabaja para el equipo, necesita un nombre propio.
 
 25
-00:02:12,962 --> 00:02:18,040
+00:02:15,458 --> 00:02:20,536
 Un ayudante de IA en un editor o un chat empieza con el acceso de la persona que lo usa.
 
 26
-00:02:19,540 --> 00:02:23,562
+00:02:22,036 --> 00:02:26,058
 Es rápido: no hay nada que configurar, y puede hacer todo lo que esa persona puede.
 
 27
-00:02:24,862 --> 00:02:31,961
+00:02:27,358 --> 00:02:34,457
 Durante 2026, el ayudante de Jun le redactó los encargos de Planificación: una columna nueva, un filtro, un mart nuevo.
 
 28
-00:02:33,661 --> 00:02:37,456
+00:02:36,157 --> 00:02:39,952
 Las tres primeras de las cinco etapas trabajan con el acceso de la persona.
 
 29
-00:02:39,356 --> 00:02:45,114
+00:02:41,852 --> 00:02:47,610
 En la primera, sugiere: redacta, no ejecuta nada, y Jun acepta o rechaza cada línea.
 
 30
-00:02:46,614 --> 00:02:52,937
+00:02:49,110 --> 00:02:55,433
 En la segunda, actúa por él, paso a paso: ejecuta una consulta o un comando, y Jun permite cada uno.
 
 31
-00:02:54,637 --> 00:02:59,829
+00:02:57,133 --> 00:03:02,325
 En la tercera, actúa por él dentro de límites: trabaja solo, y Jun verifica el resultado.
 
 32
-00:03:01,529 --> 00:03:06,651
+00:03:04,025 --> 00:03:09,147
 Cada etapa cambia cuánto puede hacer, y qué hace Jun. El acceso sigue siendo suyo.
 
 33
-00:03:10,451 --> 00:03:15,601
+00:03:12,947 --> 00:03:18,097
 Los permisos de Jun son amplios: construye el proyecto, y revisa y aprueba su código.
 
 34
-00:03:16,901 --> 00:03:20,599
+00:03:19,397 --> 00:03:23,095
 Con su acceso, su ayudante puede hacer todo eso, en cada etapa.
 
 35
-00:03:21,299 --> 00:03:23,331
+00:03:23,795 --> 00:03:25,827
 Viernes, 16 de octubre.
 
 36
-00:03:24,631 --> 00:03:30,054
+00:03:27,127 --> 00:03:32,550
 El ayudante redacta el encargo de Planificación para la junta del lunes: un mart nuevo de docentes por escuela.
 
 37
-00:03:31,354 --> 00:03:35,252
+00:03:33,850 --> 00:03:37,748
 Su cambio espera una corrección al conteo de quién enseña en cada escuela.
 
 38
-00:03:36,352 --> 00:03:41,205
+00:03:38,848 --> 00:03:43,701
 El agente de carga docente de Anil Kurian, que tiene un nombre propio, propuso esa corrección.
 
 39
-00:03:42,705 --> 00:03:45,443
+00:03:45,201 --> 00:03:47,939
 Está en revisión para Jun, y sus verificaciones pasaron.
 
 40
-00:03:46,543 --> 00:03:49,654
+00:03:49,039 --> 00:03:52,150
 El siguiente paso del ayudante: aprobarla, como Jun Park.
 
 41
-00:03:51,354 --> 00:03:54,773
+00:03:53,850 --> 00:03:57,269
 Es el paso 38 que le piden a Jun permitir ese día.
 
 42
-00:03:56,273 --> 00:03:57,804
+00:03:58,769 --> 00:04:00,300
 Lo lee, y dice que no.
 
 43
-00:03:59,704 --> 00:04:04,293
+00:04:02,200 --> 00:04:06,789
 El lunes revisa él mismo la corrección, y Noor la aprueba para producción.
 
 44
-00:04:05,593 --> 00:04:10,436
+00:04:08,089 --> 00:04:12,932
 Nadie hizo nada mal: el ayudante estaba terminando su encargo, con los permisos que tenía.
 
 45
-00:04:11,136 --> 00:04:15,201
+00:04:13,632 --> 00:04:17,697
 Si Jun hubiera dicho que sí, el registro diría: aprobado por Jun Park.
 
 46
-00:04:19,001 --> 00:04:22,483
+00:04:21,497 --> 00:04:24,979
 Con el acceso de una persona, cada paso queda como de esa persona.
 
 47
-00:04:23,983 --> 00:04:27,873
+00:04:26,479 --> 00:04:30,369
 El registro de Jun dice Jun, por lo que hizo él y por lo que hizo su ayudante.
 
 48
-00:04:29,573 --> 00:04:32,876
+00:04:32,069 --> 00:04:35,372
 Como una cubierta con franquicia, no dice quién dio de verdad cada paso.
 
 49
-00:04:34,576 --> 00:04:40,945
+00:04:37,072 --> 00:04:43,441
 El agente de carga docente usó la clave personal de Anil, y el registro no distinguía sus lecturas de las del agente.
 
 50
-00:04:42,845 --> 00:04:48,849
+00:04:45,341 --> 00:04:51,345
 Si el ayudante hubiera aprobado, el cambio de un agente lo habría aprobado un agente, con el nombre de una persona.
 
 51
-00:04:50,549 --> 00:04:55,288
+00:04:53,045 --> 00:04:57,784
 Y al ayudante no se le puede acotar ni detener por separado: para cada herramienta, es Jun.
 
 52
-00:04:56,988 --> 00:05:02,382
+00:04:59,484 --> 00:05:04,878
 En 1988, un informático, Norm Hardy, llamó a esto un delegado confundido:
 
 53
-00:05:02,582 --> 00:05:06,907
+00:05:05,078 --> 00:05:09,403
 un programa que actúa por alguien, con sus permisos, para un fin que no es suyo.
 
 54
-00:05:08,607 --> 00:05:11,280
+00:05:11,103 --> 00:05:13,776
 Y en malas manos, es todavía más peligroso.
 
 55
-00:05:12,980 --> 00:05:20,427
+00:05:15,476 --> 00:05:22,923
 Palabras ocultas en un encargo que lee, o un acceso robado, podrían llevarlo a hacer lo que Jun puede, más rápido que nadie.
 
 56
-00:05:22,327 --> 00:05:29,221
+00:05:24,823 --> 00:05:31,717
 Los expertos en seguridad lo llaman agencia excesiva: más herramientas, permisos o libertad de los que un trabajo necesita.
 
 57
-00:05:32,821 --> 00:05:39,575
+00:05:35,317 --> 00:05:42,071
 En 1975, dos informáticos, Jerome Saltzer y Michael Schroeder, escribieron la respuesta:
 
 58
-00:05:39,775 --> 00:05:44,541
+00:05:42,271 --> 00:05:47,037
 cada programa, y cada persona, debe trabajar con los menos permisos que su trabajo necesite.
 
 59
-00:05:46,241 --> 00:05:51,060
+00:05:48,737 --> 00:05:53,556
 Desde el lunes 19 de octubre, Jun y Sam acotan lo que el ayudante toma prestado.
 
 60
-00:05:52,360 --> 00:05:55,891
+00:05:54,856 --> 00:05:58,387
 Trabaja en un espacio de desarrollo, con herramientas que solo leen.
 
 61
-00:05:57,191 --> 00:06:01,985
+00:05:59,687 --> 00:06:04,481
 Ninguna escribe fuera de su sandbox, aprueba, fusiona ni da un permiso.
 
 62
-00:06:03,485 --> 00:06:09,484
+00:06:05,981 --> 00:06:11,980
 Sus borradores van solo a un sandbox propio: un esquema de Jun en desarrollo, y una rama.
 
 63
-00:06:10,984 --> 00:06:14,444
+00:06:13,480 --> 00:06:16,940
 Ve muestras de 20 filas como máximo, con los nombres enmascarados.
 
 64
-00:06:15,944 --> 00:06:22,776
+00:06:18,440 --> 00:06:25,272
 Y lo que solo Jun debe hacer sigue siendo suyo: aprobar, fusionar, cambiar producción, cambiar una prueba aprobada, dar un permiso.
 
 65
-00:06:24,476 --> 00:06:29,449
+00:06:26,972 --> 00:06:31,945
 La página del proyecto para agentes ahora lo dice, para todo ayudante con el acceso de una persona.
 
 66
-00:06:32,849 --> 00:06:35,758
+00:06:35,345 --> 00:06:38,254
 En la segunda etapa, Jun sigue permitiendo cada paso.
 
 67
-00:06:36,858 --> 00:06:41,720
+00:06:39,354 --> 00:06:44,216
 Un ajuste del propio ayudante puede hacer que pregunte antes de cada paso, o que siga sin preguntar.
 
 68
-00:06:43,020 --> 00:06:47,832
+00:06:45,516 --> 00:06:50,328
 Un fabricante llama a ese ajuste una función de productividad, no un límite de seguridad.
 
 69
-00:06:49,532 --> 00:06:55,137
+00:06:52,028 --> 00:06:57,633
 Así que el límite está en sus herramientas: cada paso ahora es una lectura, o un borrador en su sandbox.
 
 70
-00:06:56,837 --> 00:07:01,334
+00:06:59,333 --> 00:07:03,830
 En la tercera, trabaja solo, dentro de un plan cuyas verificaciones se fijan antes de empezar.
 
 71
-00:07:02,634 --> 00:07:08,066
+00:07:05,130 --> 00:07:10,562
 Sus acciones permitidas y bloqueadas están escritas en el plan, y su evidencia llega con su resultado.
 
 72
-00:07:09,566 --> 00:07:14,962
+00:07:12,062 --> 00:07:17,458
 Jun verifica el resultado con las verificaciones del plan, y Noor aprueba todo lo que llega a producción.
 
 73
-00:07:16,662 --> 00:07:20,468
+00:07:19,158 --> 00:07:22,964
 En cada etapa, Jun es dueño del trabajo de su ayudante, y responde por él.
 
 74
-00:07:21,168 --> 00:07:25,734
+00:07:23,664 --> 00:07:28,230
 Y un agente nunca aprueba: ni su propio cambio, ni el de otro agente.
 
 75
-00:07:29,134 --> 00:07:33,109
+00:07:31,630 --> 00:07:35,605
 El lunes 2 de noviembre, Lucía Ortega entra a Planificación.
 
 76
-00:07:34,409 --> 00:07:39,187
+00:07:36,905 --> 00:07:41,683
 Su ayudante empieza donde todos empiezan: con su acceso, con sus permisos, que son pocos.
 
 77
-00:07:39,887 --> 00:07:45,037
+00:07:42,383 --> 00:07:47,533
 Nombres enmascarados, nada escrito en producción, y acotado igual desde su primer día.
 
 78
-00:07:46,537 --> 00:07:51,043
+00:07:49,033 --> 00:07:53,539
 En su sandbox, la ayuda a aprender el proyecto, y cada borrador la espera.
 
 79
-00:07:52,343 --> 00:07:55,040
+00:07:54,839 --> 00:07:57,536
 Los permisos prestados son para aprender, en un sandbox.
 
 80
-00:07:57,140 --> 00:08:05,499
+00:07:59,636 --> 00:08:07,995
 Las reglas de 1764 y 1784 acotaron la franquicia, pero el nombre de un miembro aún no decía quién envió de verdad una carta.
 
 81
-00:08:06,799 --> 00:08:08,870
+00:08:09,295 --> 00:08:11,366
 Eso lo logró que cada carta pagara su propio porte.
 
 82
-00:08:10,570 --> 00:08:16,102
+00:08:13,066 --> 00:08:18,598
 Un ayudante que trabaja para el equipo, no junto a una persona, necesita lo mismo: un nombre propio.
 
 83
-00:08:17,402 --> 00:08:24,531
+00:08:19,898 --> 00:08:27,027
 Ese mismo lunes, los encargos de Planificación pasaron al agente de Planificación, un colaborador con nombre propio, de Clara Jensen.
 
 84
-00:08:26,031 --> 00:08:31,717
+00:08:28,527 --> 00:08:34,213
 Antes de tomar un solo encargo, recibió un lugar en el mapa de la universidad, como todo colega.
 
 85
-00:08:33,217 --> 00:08:36,341
+00:08:35,713 --> 00:08:38,837
 Cómo se hace ese lugar es adonde va ahora esta serie.

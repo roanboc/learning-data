@@ -52,6 +52,6 @@ decisions:
     why: 'Expected: The claims app''s contract says what each field holds, and everyone who reads the claims
       works from it. Found: The app''s change of 2 November 2026 was a good one for tutors, but its contract
       still said decimal hours, so the claims job learned of the change by failing (DEC-CLM-02). The fix
-      mended the night, not its cause. Asked of Ingrid Holm in Sam''s pull request of 3 November 2026.'
+      mended the night, not its cause. Asked of Ingrid Holm in Sam''s ticket, linked to his pull request, 3 November 2026.'
     status: proposed
     relates_to: [DEC-CLM-02]

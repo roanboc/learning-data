@@ -138,32 +138,32 @@ The fix mended the night, not its cause.
 00:04:27.669 --> 00:04:31.750
 The app's change was a good one, for tutors; what was missing was a step.
 
-00:04:32.850 --> 00:04:41.365
-So Sam's pull request also asks Ingrid Holm, in HR, who owns the claims' data, to change the contract first, next time.
+00:04:32.850 --> 00:04:41.097
+So Sam also opens a ticket for Ingrid Holm, in HR, who owns the claims' data: change the contract first, next time.
 
-00:04:43.065 --> 00:04:46.951
+00:04:42.797 --> 00:04:46.683
 Then everyone who reads the hours knows, before the app changes.
 
-00:04:48.651 --> 00:04:51.495
+00:04:48.383 --> 00:04:51.227
 On Apollo 11, the cause took a night to find:
 
-00:04:51.695 --> 00:04:59.254
+00:04:51.427 --> 00:04:58.986
 a document between two systems had said too little, so a radar's electronics took about 13% of the computer's time.
 
-00:05:00.754 --> 00:05:04.860
+00:05:00.486 --> 00:05:04.592
 For the next missions, the checklist changed, and the software learned to check.
 
-00:05:08.660 --> 00:05:17.169
+00:05:08.392 --> 00:05:16.901
 Watching systems isn't new: site reliability engineers have done it for years, with alerts, people on call and blameless reviews.
 
-00:05:18.469 --> 00:05:22.597
+00:05:18.201 --> 00:05:22.329
 What's new is that the platform does the first hours of the work, overnight.
 
-00:05:23.697 --> 00:05:30.034
+00:05:23.429 --> 00:05:29.766
 Choose what it watches, keep the lineage and the owners it reads, and decide who reviews and who approves.
 
-00:05:31.734 --> 00:05:34.623
+00:05:31.466 --> 00:05:34.355
 There are already standards, so don't reinvent the wheel:
 
-00:05:34.823 --> 00:05:39.371
+00:05:34.555 --> 00:05:39.103
 investigate, adapt, implement, iterate, starting from the official docs.

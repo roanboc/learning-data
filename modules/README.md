@@ -352,6 +352,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
 - [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
 - [Every change through review](../films/from-helper-to-colleague/6-every-change-through-review/) — `every-change-through-review`
+- [A mandate, written and enforced](../films/from-helper-to-colleague/7-a-written-mandate/) — `a-written-mandate`
 
 ## Leading data people
 

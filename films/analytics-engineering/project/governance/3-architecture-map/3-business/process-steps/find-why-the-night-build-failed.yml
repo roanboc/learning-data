@@ -1,0 +1,13 @@
+name: find why the night build failed
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: workload contributor
+- access (reads): test and its result
+- access (reads): data product
+- access (reads): pull request
+- access (reads): business rule
+- access (writes): change draft
+- realization: fix a failed night build
+- triggering: build it in development
+status: confirmed

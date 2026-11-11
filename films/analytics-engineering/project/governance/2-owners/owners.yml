@@ -30,6 +30,7 @@ owners:
   - {name: "Anil Kurian, Faculty of Health", email: anil.kurian@uni.example}
   - {name: "Jun Park, analytics engineer", email: jun.park@uni.example}
   - {name: "Rohan Desai, Finance", email: rohan.desai@uni.example}
+  - {name: "Ingrid Holm, HR", email: ingrid.holm@uni.example}
 reviewers:  # Who reviews pull requests (AGENTS.md, Who approves what): the data team, and data governance for its own files.
   code: {name: "Data team", email: data.team@uni.example}
   model: {name: "Noor, data architect", email: noor@uni.example}

@@ -6,7 +6,7 @@
    escombros, los cavadores, los barqueros y los carreteros. At the university: la oficina de registro, el horario, las reservas, un aula,
    el sensor y su flujo, los conteos, el gobierno de datos, el catálogo y su linaje. "Depth" is what someone knows a fondo, and
    "T-shaped" is en forma de T. The films named keep their Spanish titles on the site: La vida interior de los datos, El mapa antes de los
-   datos; the book keeps its title, Range. Tú, as the film speaks to the viewer (Profundiza, Aprende, Toma, Pregunta). Dates in words as
+   datos; the book keeps its title, Range. Tú, as the film speaks to the viewer (Anota, Dale, Haz crecer). Dates in words as
    Spanish says them (lunes 1 de marzo de 2027), and Easter is Semana Santa. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Kaifeng, China's capital under the Song dynasty, in the year 1015.":
@@ -27,8 +27,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y los escombros quemados hay que sacarlos en carros.",
 "Each job means carts crossing a crowded city, load after load: slow for the palace, costly for the state, and in everyone's way.":
 "Cada trabajo son carros cruzando una ciudad llena, carga tras carga: lento para el palacio, caro para el Estado y un estorbo para todos.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"The rebuilding needs a plan that doesn't fill the streets with carts.":
+"La reconstrucción necesita un plan que no llene las calles de carros.",
 "Ding Wei's plan makes the three jobs one.":
 "El plan de Ding Wei hace de los tres trabajos uno solo.",
 "He has the main streets dug up for earth, and within days they're deep trenches.":
@@ -43,12 +43,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una sola acción, y tres trabajos hechos, escribió Shen Kuo, un erudito que contó la historia unos setenta años después.",
 "The state's saving, in his words, ran to hundreds of millions, and the city got its streets back.":
 "El ahorro del Estado, en sus palabras, llegó a cientos de millones, y la ciudad recuperó sus calles.",
-"The diggers, the boatmen and the carters each knew their job well. Ding Wei saw the three as one.":
-"Los cavadores, los barqueros y los carreteros conocían bien su trabajo. Ding Wei vio los tres como uno solo.",
-"Data work has its parts too, each kept by someone who knows it deeply.":
-"Los datos también tienen sus partes, cada una en manos de quien la conoce a fondo.",
-"Someone who learns enough of each to see them as one picture finds what falls between them.":
-"Quien aprende lo suficiente de cada una para verlas como un todo encuentra lo que queda entre ellas.",
+"The diggers, the boatmen and the carters each knew their job well. Ding Wei, the man in charge, saw the three as one.":
+"Los cavadores, los barqueros y los carreteros conocían bien su trabajo. Ding Wei, el responsable, vio los tres como uno solo.",
+"A data team has its parts too, each known deeply by someone who wears more than one hat.":
+"Un equipo de datos también tiene sus partes, cada una en manos de alguien que la conoce a fondo y cumple más de un rol.",
+"Whoever leads them has to see the parts as one picture, or miss what falls between them.":
+"Quien dirige el equipo tiene que ver las partes como un todo, o se le escapa lo que queda entre ellas.",
 "Data work now asks for new skills, and leading the people who do it is a skill too.":
 "El trabajo con datos pide hoy nuevas habilidades, y liderar a quienes lo hacen también es una habilidad.",
 "These films take one practice at a time, in a data team at a university, a year from now.":
@@ -61,8 +61,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Helena Novak, la gestora de datos, tiene dos roles: responsable de producto de los servicios, con mirada de arquitecta, y líder de personas.",
 "For her, managing and leading are two sides of one role, not rivals: the plans, the dates and the measures serve the people.":
 "Para ella, gestionar y liderar son dos caras del mismo trabajo, no rivales: los planes, las fechas y las métricas sirven a las personas.",
-"She gives Ivy a month to learn the team's work, and one real question to follow through all of it.":
-"Le da a Ivy un mes para conocer el trabajo del equipo, y una pregunta real para seguir a través de todo él.",
+"Everyone in her team wears more than one hat, and a job title names only one.":
+"En su equipo, cada persona cumple más de un rol, y un puesto nombra solo uno.",
+"So she gives Ivy a month to learn every part of the team's work, and one real question to follow through all of it.":
+"Así que le da a Ivy un mes para conocer cada parte del trabajo del equipo, y una pregunta real para seguir a través de todo él.",
 "It comes from Graham Ellis, the new Director of Facilities: should he ask the University Council for a new teaching building?":
 "Viene de Graham Ellis, el nuevo director de Instalaciones: ¿debe pedir al Consejo Universitario un nuevo edificio de aulas?",
 "His question, agreed with him in writing: do we have too few rooms, or too few at some hours?":
@@ -75,20 +77,22 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Empieza donde nacen los datos.",
 "In the registrar's office, Mei Tanaka keeps the timetable: every class, booked into one of 186 rooms, hour by hour.":
 "En la oficina de registro, Mei Tanaka lleva el horario: cada clase, reservada en una de 186 aulas, hora por hora.",
-"Sam Okafor runs the data platform, and the feed from each room's sensor, which counts the people in it every hour.":
-"Sam Okafor gestiona la plataforma de datos y el flujo del sensor de cada aula, que cuenta a las personas presentes cada hora.",
+"She names the rooms, too.":
+"También pone nombre a las aulas.",
+"Sam Okafor runs the data platform, and also the feed from each room's sensor, which counts the people in it every hour.":
+"Sam Okafor gestiona la plataforma de datos, y también el flujo del sensor de cada aula, que cuenta a las personas presentes cada hora.",
 "Yusuf Demir, who leads data governance, set the rule for that feed: counts, never people.":
 "Yusuf Demir, que lidera el gobierno de datos, fijó la regla de ese flujo: conteos, nunca personas.",
 "Noor Rahman, the data architect, keeps the map of where data is born and where it goes.":
 "Noor Rahman, la arquitecta de datos, mantiene el mapa de dónde nacen los datos y adónde van.",
-"Jun Park builds the models that turn raw data into tables people can trust.":
-"Jun Park construye los modelos que convierten los datos en bruto en tablas confiables.",
+"Jun Park builds the models that turn raw data into tables people can trust, and he teaches.":
+"Jun Park construye los modelos que convierten los datos en bruto en tablas confiables, y además enseña.",
 "Every day, Ivy spends an hour beside him, changing real ones.":
 "Cada día, Ivy pasa una hora a su lado, cambiando modelos reales.",
 "How data moves, and how the map is drawn, have films of their own: The Inner Life of Data, and The map before the data.":
 "Cómo se mueven los datos y cómo se dibuja el mapa tienen sus propias películas: La vida interior de los datos, y El mapa antes de los datos.",
-"Each of them is deep in one part, and right about it.":
-"Cada uno conoce a fondo una parte, y tiene razón en ella.",
+"Each of them is deep in one part, and right about it, and each wears more hats than their title says.":
+"Cada uno conoce a fondo una parte, y tiene razón en ella, y cumple más roles de los que dice su puesto.",
 "Ivy learns enough of each to follow: their words, their tools, and what worries them.":
 "Ivy aprende lo suficiente de cada parte para seguirla: sus palabras, sus herramientas y lo que les preocupa.",
 "And she asks each the same question: who uses this, and for which decision?":
@@ -115,28 +119,32 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Unidos tal cual, esas 14 quedarían fuera sin aviso, y la respuesta de Graham cubriría 172 aulas, no 186.",
 "Nobody was wrong: the timetable was right, and so were the sensors. They had never been put side by side.":
 "Nadie se equivocó: el horario estaba bien, y los sensores también. Nunca se habían puesto lado a lado.",
-"Ivy didn't need to know the timetable as Mei does, or the sensors as Sam does.":
-"Ivy no necesitaba conocer el horario como Mei, ni los sensores como Sam.",
-"She needed depth of her own, in statistics, and enough of the business, the systems and the data to join them.":
-"Necesitaba conocer a fondo lo suyo, la estadística, y lo suficiente del negocio, los sistemas y los datos para unirlos.",
+"The join fell between Mei's hats and Sam's, so checking it was nobody's job.":
+"La unión quedaba entre los roles de Mei y los de Sam, así que revisarla no era tarea de nadie.",
+"Helena didn't need Ivy to know the timetable as Mei does, or the sensors as Sam does.":
+"Helena no necesitaba que Ivy conociera el horario como Mei, ni los sensores como Sam.",
+"She needed Ivy to keep her depth, in statistics, and learn enough of the business, the systems and the data to join them.":
+"Necesitaba que siguiera a fondo en estadística y aprendiera lo suficiente del negocio, los sistemas y los datos para unirlos.",
 "That shape has a name: T-shaped. One deep stroke, and a wide bar across the top.":
 "Esa forma tiene nombre: en forma de T. Un trazo profundo, y una barra ancha arriba.",
 "Frameworks map the work: SFIA lists well over a hundred skills, and DAMA's body of knowledge names the roles of data work.":
 "Los marcos describen el trabajo: SFIA reúne mucho más de cien habilidades, y el cuerpo de conocimiento de DAMA nombra los roles de datos.",
-"Nobody holds them all deeply, and nobody needs to.":
-"Nadie las domina todas a fondo, y nadie lo necesita.",
+"Nobody holds them all deeply, and no leader should expect it.":
+"Nadie las domina todas a fondo, y ningún líder debería esperarlo.",
 "In his book Range, David Epstein argues that specialists win where the rules stay fixed, as in chess.":
 "En su libro Range, David Epstein sostiene que los especialistas ganan donde las reglas no cambian, como en el ajedrez.",
 "Where problems are messy, people with range do better.":
 "Donde los problemas son enredados, a quien tiene amplitud le va mejor.",
 "Like the diggers and the boatmen, the specialists stay essential: Mei and Sam matched the 14 rooms in a day.":
 "Como los cavadores y los barqueros, los especialistas siguen siendo esenciales: Mei y Sam emparejaron las 14 aulas en un día.",
-"But someone has to see across them.":
-"Pero alguien tiene que ver el conjunto.",
+"But someone has to see across them, and a leader makes sure someone does.":
+"Pero alguien tiene que ver el conjunto, y quien lidera se asegura de que alguien lo vea.",
 "On Thursday 25 March, just before Easter, Ivy's first goal is met: she knows the whole route.":
 "El jueves 25 de marzo, justo antes de Semana Santa, Ivy cumple su primer objetivo: conoce todo el recorrido.",
 "When the team takes up Graham's question the next week, it starts from her page, with all 186 rooms.":
 "Cuando el equipo retoma la pregunta de Graham la semana siguiente, parte de su página, con las 186 aulas.",
+"And Helena gives the join an owner: each term, Mei and Sam check the room names together.":
+"Y Helena le da un responsable a la unión: cada semestre, Mei y Sam revisan juntos los nombres de las aulas.",
 "From April, the catalog draws much of that route by itself.":
 "Desde abril, el catálogo dibuja buena parte de ese recorrido por sí solo.",
 "Its lineage runs from the raw bookings and counts, through Jun's models, to the page Graham reads.":
@@ -145,16 +153,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Lo que no puede dibujar es la decisión, ni la pregunta que hay detrás. Eso queda en la página de Ivy.",
 "In Kaifeng, Ding Wei didn't dig, float timber or cart rubble better than the people who did. He saw the three jobs as one.":
 "En Kaifeng, Ding Wei no cavaba, ni traía madera, ni acarreaba escombros mejor que quienes lo hacían. Vio los tres trabajos como uno.",
-"Ivy did the same with data: she saw the parts as one, and kept 14 rooms in Graham's answer.":
-"Ivy hizo lo mismo con los datos: vio las partes como un todo, y mantuvo 14 aulas en la respuesta de Graham.",
-"On Monday, keep your depth in one thing.":
-"El lunes, sigue profundizando en una cosa.",
-"Learn the words of the others, and spend time with each of them.":
-"Aprende las palabras de los demás, y pasa tiempo con cada uno.",
-"Take one real question, and draw its whole route on one page.":
-"Toma una pregunta real, y dibuja todo su recorrido en una página.",
-"Ask, of every part: who uses this, and for which decision?":
-"Pregunta, en cada parte: ¿quién usa esto, y para qué decisión?",
-"Go deep in one thing; learn enough of the others to see the whole.":
-"Profundiza en una cosa; aprende lo suficiente de las demás para ver el todo."
+"Helena did the same with her team: she gave Ivy the time to see the parts as one, and 14 rooms stayed in Graham's answer.":
+"Helena hizo lo mismo con su equipo: le dio a Ivy el tiempo para ver las partes como un todo, y 14 aulas siguieron en la respuesta de Graham.",
+"On Monday, write down the hats each of your people wears, not only their titles.":
+"El lunes, anota los roles que cumple cada persona de tu equipo, no solo su puesto.",
+"Give someone new the time to learn every part of the work, and its words.":
+"Dale a alguien nuevo el tiempo para conocer cada parte del trabajo, y sus palabras.",
+"Hand them one real question, and have them draw its whole route on one page.":
+"Dale una pregunta real, y que dibuje todo su recorrido en una página.",
+"And give whatever falls between the hats an owner.":
+"Y dale un responsable a lo que queda entre los roles.",
+"Grow people who go deep in one thing, and learn enough of the rest to see the whole.":
+"Haz crecer a personas que profundicen en una cosa, y aprendan lo suficiente del resto para ver el todo."
 });

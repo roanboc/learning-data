@@ -3,7 +3,7 @@
    again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
    a room (later:true) lets what was there leave first; between rooms a shot dissolves. Sizes in the 1920 x 1080 frame. */
 
-const MH_LAST="Go deep in one thing; learn enough of the others to see the whole.";
+const MH_LAST="Grow people who go deep in one thing and see the whole.";
 // the film's number and title at the top left, from the second chapter on
 function mh_kick(ctx,S,a){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"1","Many hats, one picture",{a});}
 // a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
@@ -81,12 +81,12 @@ scene("trench",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       mh_tag(x,tt,w("one","diggers",0.05),null,420,330,"The diggers",{align:"center"});
       mh_tag(x,tt,w("one","boatmen",0.05),null,960,330,"The boatmen",{align:"center"});
       mh_tag(x,tt,w("one","carters",0.05),null,1500,330,"The carters",{align:"center"});}},
-    // data work's parts, each kept deeply, and someone who learns enough of each to see them as one
+    // a data team's parts, each known deeply, and whoever leads them seeing them as one picture
     {at:c.data-0.3,place:"lpRoom",keys:[[c.data-0.3,960,540,1.0]],push:0,draw:(x,tt)=>{const p0=w("data","parts",-0.2),d0=w("data","deeply",-0.2);
       mh_parts(x,{light:"day",a:1-ag_in(tt,c.breath+0.2,0.8),ks:MH_PARTS.map((_,i)=>tt-p0-i*0.3),stems:MH_PARTS.map((_,i)=>ag_in(tt,d0+i*0.12,1.0)),
-        bar:ag_in(tt,w("see","learns",-0.1),2.2),gap:clamp(tt-w("see","between",0.1),0,1)});}}
+        bar:ag_in(tt,w("see","parts",-0.1),2.2),gap:clamp(tt-w("see","between",0.1),0,1)});}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,"Many hats, one picture","Deep in one thing, and enough of the rest to join them","Leading data people · The new skills");
+  lp_title(ctx,S,t,c.breath+0.2,"Many hats, one picture","See the hats your team wears, and what falls between them","Leading data people · The new skills");
 });
 
 /* ---------------------------------------------------------------- 2. One question to follow */
@@ -103,13 +103,15 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,
       mh_sheet(x,tt,w("ivy","Ivy",-0.1),1000,170,640,{kick:"Monday 1 March 2027",title:"Ivy Reyes",sub:"Graduate data analyst",lines:["Her depth: statistics"]},
         {light:"morning",u:ag_in(tt,w("depth","statistics",-0.1),0.5)});
       ivy(x,tt);}},
-    // Helena's two hats, two sides of one role (the author's advice, 10 November 2026), and Ivy's first month
+    // Helena's two hats, two sides of one role (the author's advice, 10 November 2026), her team's many hats, and the month she gives Ivy
     {at:c.helena-0.3,place:"mhMorning",keys:[[c.helena-0.3,960,540,1.0]],draw:(x,tt)=>{
       mh_sheet(x,tt,c.helena+0.4,780,170,420,{kick:"The data manager",title:"Helena Novak",sub:"Two hats",lines:["Product owner, who thinks like an architect","People leader"]},
         {light:"morning",out:c.role-0.5,u:mh_u(tt,[w("helena","product",-0.1),w("helena","people",-0.1)])});
-      const r0=w("role","managing",-0.2);if(tt>=r0)mh_sides(x,720,170,540,{t:tt,a:ag_in(tt,r0,0.35)*(1-ag_in(tt,c.month-0.5,0.4)),k:tt-r0,light:"morning",
+      const r0=w("role","managing",-0.2);if(tt>=r0)mh_sides(x,720,170,540,{t:tt,a:ag_in(tt,r0,0.35)*(1-ag_in(tt,c.hats-0.5,0.4)),k:tt-r0,light:"morning",
         left:[w("role","plans",-0.1),w("role","dates",-0.1),w("role","measures",-0.1)],right:w("role","people",-0.1),arrow:w("role","serve",-0.1)});
-      mh_sheet(x,tt,w("month","month",-0.1),780,170,420,{kick:"Ivy's first month",lines:["Learn the team's work","Follow one real question through all of it"]},
+      mh_sheet(x,tt,c.hats+0.2,780,170,420,{kick:"Her team",title:"More than one hat each",lines:["A job title names only one"]},
+        {light:"morning",out:c.month-0.5,u:ag_in(tt,w("hats","title",-0.1),0.5)});
+      mh_sheet(x,tt,w("month","month",-0.1),780,170,420,{kick:"Ivy's first month",lines:["Learn every part of the team's work","Follow one real question through all of it"]},
         {col:LP.blue,light:"morning",u:mh_u(tt,[w("month","learn",-0.1),w("month","question",-0.1)])});
       ivy(x,tt);lp_person(x,"helena",1420,640,1.0,{t:tt,flip:true,light:mo});}},
     // Graham's question, agreed in writing
@@ -131,15 +133,16 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,
 /* ---------------------------------------------------------------- 3. A few days with each */
 scene("parts",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"};
   const PX=[330,770,1210,1650],PS=[
-    {who:"sam",line:"sam",word:"Sam",uw:"sensor",col:LP.orange,words:{kick:"Sam Okafor",title:"The platform",lines:["Each room's sensor counts the people in it, every hour"]}},
+    {who:"sam",line:"sam",word:"Sam",uw:"sensor",col:LP.orange,words:{kick:"Sam Okafor",title:"The platform",lines:["And the sensors' feed: people counted in each room, every hour"]}},
     {who:"yusuf",line:"yusuf",word:"Yusuf",uw:"rule",col:null,words:{kick:"Yusuf Demir",title:"Governance",lines:["His rule for that feed: counts, never people"]}},
     {who:"noor",line:"noor",word:"Noor",uw:"map",col:LP.blue,words:{kick:"Noor Rahman",title:"The map",lines:["Where data is born, and where it goes"]}},
-    {who:"jun",line:"jun",word:"Jun",uw:"raw",col:LP.orange,words:{kick:"Jun Park",title:"The models",lines:["From raw data to tables people can trust"]}}];
+    {who:"jun",line:"jun",word:"Jun",uw:"raw",col:LP.orange,words:{kick:"Jun Park",title:"The models",lines:["From raw data to tables people can trust","And he teaches"]}}];
   ag_shots(ctx,S,t,sc.dur,[
     // where the data is born: Mei's timetable
     {at:0,place:"mhRegistrar",keys:[[0,960,540,1.0]],draw:(x,tt)=>{
       lp_screen(x,600,160,720,480,{draw:(cx,X,Y,Wd,Hd)=>mh_timetable(cx,X,Y,Wd,Hd,{u:ag_in(tt,w("mei","timetable",0.1),2.2),more:ag_in(tt,w("mei","186",-0.1),0.6)})});
       lp_nameTag(x,96,250,"mei",{role:"The registrar's office",a:ag_in(tt,w("mei","Mei",-0.1),0.5)});
+      mh_tag(x,tt,c.names+0.2,null,960,712,"She names the rooms, too",{align:"center",col:LP.ink});
       lp_person(x,"mei",330,640,0.95,{t:tt,light:dy});
       lp_person(x,"ivy",1600,640,0.95,{t:tt,flip:true,a:ag_in(tt,c.born,0.6),light:dy});}},
     // the others, one after another, the camera moving along their sheets
@@ -161,6 +164,7 @@ scene("parts",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
     // each deep in one part, and right about it; Ivy enough of each; and one question for all of them
     {at:c.deep-0.3,place:"lpRoom",later:true,keys:[[c.deep-0.3,960,540,1.0]],draw:(x,tt)=>{const s0=w("deep","deep",-0.1),r0=w("deep","right",-0.1),e0=w("learn","enough",-0.2);
       mh_parts(x,{light:"day",names:1,stemTop:MH_PY+MH_PH+72,stemBot:610,stems:MH_PARTS.map((_,i)=>ag_in(tt,s0+i*0.12,1.0)),ticks:MH_PARTS.map((_,i)=>clamp(tt-r0-i*0.1,0,1)),bar:ag_in(tt,e0,2.0)});
+      mh_tag(x,tt,w("deep","hats",-0.1),c.learn-0.3,960,790,"More hats than their titles say",{align:"center",col:LP.ink});
       mh_tag(x,tt,e0+0.8,null,1850,108,"Ivy: enough of each",{align:"right",col:LP.ink});
       mh_tag(x,tt,w("learn","words",-0.1),c.ask-0.3,600,790,"Their words",{align:"center"});
       mh_tag(x,tt,w("learn","tools",-0.1),c.ask-0.3,960,790,"Their tools",{align:"center"});
@@ -185,7 +189,9 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
         ticks:[clamp(tt-w("nobody","right",-0.1),0,1),clamp(tt-w("nobody","sensors",-0.1),0,1)],light:"late"});
       lp_pill(x,960,730,"172 rooms match",{col:LP.green,icon:"tick",a:ag_io(tt,m0+0.6,c.fourteen-0.3,0.4)});
       lp_pill(x,960,730,"14 renumbered",{col:LP.amber,a:ag_io(tt,w("fourteen","renumbered",-0.1),c.drop-0.3,0.4)});
-      mh_sheet(x,tt,w("drop","172",-0.2),600,694,720,{kick:"Graham's answer",title:"172 rooms, not 186"},{col:LP.amber,light:"late",out:c.nobody-0.3});}}
+      mh_sheet(x,tt,w("drop","172",-0.2),600,694,720,{kick:"Graham's answer",title:"172 rooms, not 186"},{col:LP.amber,light:"late",out:c.nobody-0.3});
+      // the join, between two people's hats: nobody's job to check
+      mh_tag(x,tt,w("hats","between",-0.1),null,960,760,"Between two people's hats: nobody's job",{align:"center",col:LP.amber});}}
   ]);
   mh_kick(ctx,S,1);
 });
@@ -237,8 +243,11 @@ scene("kept",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       lp_person(x,"ivy",1500,650,1.0,{t:tt,flip:true,a:ag_in(tt,0.9,0.6),light:lt});}},
     // the team starts from her page
     {at:c.team-0.3,place:"mhLate",later:true,keys:[[c.team-0.3,960,540,1.0]],draw:(x,tt)=>{const r0=w("team","186",0.1);
-      mh_sheet(x,tt,c.team+0.3,640,150,640,{kick:"Ivy's page",title:"The route of Graham's question"},{col:LP.blue,light:"late"});
-      lp_pill(x,960,452,"All 186 rooms",{col:LP.green,icon:"tick",a:ag_in(tt,r0,0.4),k:tt-r0});
+      mh_sheet(x,tt,c.team+0.3,640,150,640,{kick:"Ivy's page",title:"The route of Graham's question"},{col:LP.blue,light:"late",out:c.owner-0.6});
+      lp_pill(x,960,452,"All 186 rooms",{col:LP.green,icon:"tick",a:ag_io(tt,r0,c.owner-0.6,0.4),k:tt-r0});
+      // Helena gives the join an owner: the sheet comes in once Ivy's page has gone, so no words show twice
+      mh_sheet(x,tt,w("owner","owner",-0.1),640,150,640,{kick:"The join, with an owner",title:"Mei and Sam",lines:["Check the room names together, each term"]},
+        {col:LP.green,light:"late",u:ag_in(tt,w("owner","check",-0.1),0.5)});
       for(const [who,px,fl] of [["helena",330,false],["noor",700,false],["jun",1220,true],["ivy",1590,true]])lp_person(x,who,px,720,0.72,{t:tt,flip:fl,light:lt});}},
     // what the catalog draws by itself, and what stays on her page
     {at:c.catalog-0.3,place:"mhLate",later:true,keys:[[c.catalog-0.3,960,540,1.0]],draw:(x,tt)=>{const d0=w("catalog","draws",-0.1);
@@ -260,17 +269,17 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
         if(a>0.004)lp_tag(x,lerp(px,990,mu),806,s,{align:"center",a});}
       lp_pill(x,990,806,"One move",{col:LP.blue,a:ag_in(tt,o0+0.3,0.4),k:tt-o0-0.3});
       lp_person(x,"ivy",300,650,1.0,{t:tt,a:ag_in(tt,0.9,0.6),light:mo});}},
-    // Ivy did the same with data
-    {at:c.ivy-0.3,place:"mhMorning",later:true,keys:[[c.ivy-0.3,960,540,1.0]],draw:(x,tt)=>{const k0=w("ivy","kept",-0.1);
+    // Helena did the same with her team: she gave Ivy the time to see the parts as one
+    {at:c.ivy-0.3,place:"mhMorning",later:true,keys:[[c.ivy-0.3,960,540,1.0]],draw:(x,tt)=>{const k0=w("ivy","stayed",-0.1);
       mh_parts(x,{light:"morning",names:1,stemTop:MH_PY+MH_PH+72,stemBot:640,stems:1,bar:ag_in(tt,w("ivy","one",-0.2),1.6)});
-      lp_pill(x,960,770,"14 rooms kept in Graham's answer",{col:LP.green,icon:"tick",a:ag_in(tt,k0,0.4),k:tt-k0});}},
+      lp_pill(x,960,770,"14 rooms stayed in Graham's answer",{col:LP.green,icon:"tick",a:ag_in(tt,k0,0.4),k:tt-k0});}},
     // what to do on Monday; then the T, the whole film in one shape
     {at:c.depth-0.3,place:"mhMorning",later:true,keys:[[c.depth-0.3,960,540,1.0]],draw:(x,tt)=>{const g=1-ag_in(tt,c.take-0.4,0.6);
       if(g>0.004){x.save();x.globalAlpha*=g;
-        mh_sheet(x,tt,c.depth+0.3,140,170,520,{kick:"One",title:"Keep your depth in one thing"},{light:"morning"});
-        mh_sheet(x,tt,w("words","words",-0.1),700,170,520,{kick:"Two",title:"Learn the others' words; spend time with each"},{light:"morning"});
-        mh_sheet(x,tt,w("route","route",-0.1),1260,170,520,{kick:"Three",title:"Draw one question's whole route on one page"},{col:LP.blue,light:"morning"});
-        mh_sheet(x,tt,w("ask","Ask",-0.1),560,520,800,{kick:"Four",title:"Ask: who uses this, and for which decision?"},{col:LP.blue,light:"morning"});
+        mh_sheet(x,tt,c.depth+0.3,140,170,520,{kick:"One",title:"Write down the hats each person wears"},{light:"morning"});
+        mh_sheet(x,tt,w("words","learn",-0.1),700,170,520,{kick:"Two",title:"Give someone new time with every part"},{light:"morning"});
+        mh_sheet(x,tt,w("route","route",-0.1),1260,170,520,{kick:"Three",title:"Have them draw one question's whole route"},{col:LP.blue,light:"morning"});
+        mh_sheet(x,tt,w("ask","give",-0.1),560,520,800,{kick:"Four",title:"Give what falls between the hats an owner"},{col:LP.green,light:"morning"});
         x.restore();}
       mh_T(x,960,420,{bw:960,sl:340,a:1-ag_in(tt,e0,0.8),stem:ag_in(tt,w("take","deep",-0.1),1.0),bar:ag_in(tt,w("take","enough",-0.1),1.2)});}}
   ]);

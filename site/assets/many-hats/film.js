@@ -415,7 +415,7 @@ const NARR={
  {"id":"timber","gap":0.8,"text":"Timber, arriving by water, must be hauled through the streets."},
  {"id":"rubble","gap":0.8,"text":"And the burned rubble must be carted away."},
  {"id":"cost","gap":0.8,"text":"Each job means carts crossing a crowded city, load after load: slow for the palace, costly for the state, and in everyone's way."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"The rebuilding needs a plan that doesn't fill the streets with carts."},
  {"id":"plan","gap":0.8,"text":"Ding Wei's plan makes the three jobs one."},
  {"id":"dig","gap":0.8,"text":"He has the main streets dug up for earth, and within days they're deep trenches."},
  {"id":"canal","gap":0.8,"text":"Then he breaks the bank of the Bian canal, the waterway that supplies the city, and lets its water in."},
@@ -423,9 +423,9 @@ const NARR={
  {"id":"fill","gap":0.8,"text":"When the work is done, the rubble fills the trenches, and the streets are streets again."},
  {"id":"shen","gap":0.8,"text":"One move, and three jobs done, wrote Shen Kuo, a scholar who told the story some seventy years later."},
  {"id":"saving","gap":0.8,"text":"The state's saving, in his words, ran to hundreds of millions, and the city got its streets back."},
- {"id":"one","gap":0.8,"text":"The diggers, the boatmen and the carters each knew their job well. Ding Wei saw the three as one."},
- {"id":"data","gap":0.8,"text":"Data work has its parts too, each kept by someone who knows it deeply."},
- {"id":"see","gap":0.8,"text":"Someone who learns enough of each to see them as one picture finds what falls between them."}
+ {"id":"one","gap":0.8,"text":"The diggers, the boatmen and the carters each knew their job well. Ding Wei, the man in charge, saw the three as one."},
+ {"id":"data","gap":0.8,"text":"A data team has its parts too, each known deeply by someone who wears more than one hat."},
+ {"id":"see","gap":0.8,"text":"Whoever leads them has to see the parts as one picture, or miss what falls between them."}
 ]},
 "question":{"name":"One question to follow","lead":1.0,"tail":1.0,"vo":[
  {"id":"promise","gap":0.8,"text":"Data work now asks for new skills, and leading the people who do it is a skill too."},
@@ -434,7 +434,8 @@ const NARR={
  {"id":"depth","gap":0.8,"text":"Her degree is in statistics: that's her depth."},
  {"id":"helena","gap":0.8,"text":"Helena Novak, the data manager, wears two hats: product owner of the team's services, who thinks like an architect, and people leader."},
  {"id":"role","gap":0.8,"text":"For her, managing and leading are two sides of one role, not rivals: the plans, the dates and the measures serve the people."},
- {"id":"month","gap":0.8,"text":"She gives Ivy a month to learn the team's work, and one real question to follow through all of it."},
+ {"id":"hats","gap":0.8,"text":"Everyone in her team wears more than one hat, and a job title names only one."},
+ {"id":"month","gap":0.8,"text":"So she gives Ivy a month to learn every part of the team's work, and one real question to follow through all of it."},
  {"id":"graham","gap":0.8,"text":"It comes from Graham Ellis, the new Director of Facilities: should he ask the University Council for a new teaching building?"},
  {"id":"q","gap":0.8,"text":"His question, agreed with him in writing: do we have too few rooms, or too few at some hours?"},
  {"id":"goals","gap":0.8,"text":"In her first week, Ivy writes her first goals, and Helena agrees them."},
@@ -443,13 +444,14 @@ const NARR={
 "parts":{"name":"A few days with each","lead":1.0,"tail":1.0,"vo":[
  {"id":"born","gap":0.8,"text":"She starts where the data is born."},
  {"id":"mei","gap":0.8,"text":"In the registrar's office, Mei Tanaka keeps the timetable: every class, booked into one of 186 rooms, hour by hour."},
- {"id":"sam","gap":0.8,"text":"Sam Okafor runs the data platform, and the feed from each room's sensor, which counts the people in it every hour."},
+ {"id":"names","gap":0.8,"text":"She names the rooms, too."},
+ {"id":"sam","gap":0.8,"text":"Sam Okafor runs the data platform, and also the feed from each room's sensor, which counts the people in it every hour."},
  {"id":"yusuf","gap":0.8,"text":"Yusuf Demir, who leads data governance, set the rule for that feed: counts, never people."},
  {"id":"noor","gap":0.8,"text":"Noor Rahman, the data architect, keeps the map of where data is born and where it goes."},
- {"id":"jun","gap":0.8,"text":"Jun Park builds the models that turn raw data into tables people can trust."},
+ {"id":"jun","gap":0.8,"text":"Jun Park builds the models that turn raw data into tables people can trust, and he teaches."},
  {"id":"pair","gap":0.8,"text":"Every day, Ivy spends an hour beside him, changing real ones."},
  {"id":"films","gap":0.8,"text":"How data moves, and how the map is drawn, have films of their own: The Inner Life of Data, and The map before the data."},
- {"id":"deep","gap":0.8,"text":"Each of them is deep in one part, and right about it."},
+ {"id":"deep","gap":0.8,"text":"Each of them is deep in one part, and right about it, and each wears more hats than their title says."},
  {"id":"learn","gap":0.8,"text":"Ivy learns enough of each to follow: their words, their tools, and what worries them."},
  {"id":"ask","gap":0.8,"text":"And she asks each the same question: who uses this, and for which decision?"}
 ]},
@@ -464,38 +466,40 @@ const NARR={
  {"id":"names","gap":0.8,"text":"The two must name each room the same way, and for 172 rooms, they do."},
  {"id":"fourteen","gap":0.8,"text":"For 14, they don't: those rooms were renumbered in the timetable after their sensors went in."},
  {"id":"drop","gap":0.8,"text":"Joined as they were, those 14 would drop out without a word, and Graham's answer would cover 172 rooms, not 186."},
- {"id":"nobody","gap":0.8,"text":"Nobody was wrong: the timetable was right, and so were the sensors. They had never been put side by side."}
+ {"id":"nobody","gap":0.8,"text":"Nobody was wrong: the timetable was right, and so were the sensors. They had never been put side by side."},
+ {"id":"hats","gap":0.8,"text":"The join fell between Mei's hats and Sam's, so checking it was nobody's job."}
 ]},
 "shape":{"name":"Deep in one, enough of the rest","lead":1.0,"tail":1.0,"vo":[
- {"id":"needed","gap":0.8,"text":"Ivy didn't need to know the timetable as Mei does, or the sensors as Sam does."},
- {"id":"own","gap":0.8,"text":"She needed depth of her own, in statistics, and enough of the business, the systems and the data to join them."},
+ {"id":"needed","gap":0.8,"text":"Helena didn't need Ivy to know the timetable as Mei does, or the sensors as Sam does."},
+ {"id":"own","gap":0.8,"text":"She needed Ivy to keep her depth, in statistics, and learn enough of the business, the systems and the data to join them."},
  {"id":"t","gap":0.8,"text":"That shape has a name: T-shaped. One deep stroke, and a wide bar across the top."},
  {"id":"lists","gap":0.8,"text":"Frameworks map the work: SFIA lists well over a hundred skills, and DAMA's body of knowledge names the roles of data work."},
- {"id":"nobody","gap":0.8,"text":"Nobody holds them all deeply, and nobody needs to."},
+ {"id":"nobody","gap":0.8,"text":"Nobody holds them all deeply, and no leader should expect it."},
  {"id":"range","gap":0.8,"text":"In his book Range, David Epstein argues that specialists win where the rules stay fixed, as in chess."},
  {"id":"messy","gap":0.8,"text":"Where problems are messy, people with range do better."},
  {"id":"essential","gap":0.8,"text":"Like the diggers and the boatmen, the specialists stay essential: Mei and Sam matched the 14 rooms in a day."},
- {"id":"across","gap":0.8,"text":"But someone has to see across them."}
+ {"id":"across","gap":0.8,"text":"But someone has to see across them, and a leader makes sure someone does."}
 ]},
 "kept":{"name":"From her page","lead":1.0,"tail":1.0,"vo":[
  {"id":"goal","gap":0.8,"text":"On Thursday 25 March, just before Easter, Ivy's first goal is met: she knows the whole route.","say":"On Thursday the twenty-fifth of March, just before Easter, Ivy's first goal is met: she knows the whole route."},
  {"id":"team","gap":0.8,"text":"When the team takes up Graham's question the next week, it starts from her page, with all 186 rooms."},
+ {"id":"owner","gap":0.8,"text":"And Helena gives the join an owner: each term, Mei and Sam check the room names together."},
  {"id":"catalog","gap":0.8,"text":"From April, the catalog draws much of that route by itself."},
  {"id":"lineage","gap":0.8,"text":"Its lineage runs from the raw bookings and counts, through Jun's models, to the page Graham reads."},
  {"id":"cant","gap":0.8,"text":"What it can't draw is the decision, and the question behind it. Those stay on Ivy's page."}
 ]},
 "monday":{"name":"On Monday","lead":1.0,"tail":1.0,"vo":[
  {"id":"back","gap":0.8,"text":"In Kaifeng, Ding Wei didn't dig, float timber or cart rubble better than the people who did. He saw the three jobs as one."},
- {"id":"ivy","gap":0.8,"text":"Ivy did the same with data: she saw the parts as one, and kept 14 rooms in Graham's answer."},
- {"id":"depth","gap":0.8,"text":"On Monday, keep your depth in one thing."},
- {"id":"words","gap":0.8,"text":"Learn the words of the others, and spend time with each of them."},
- {"id":"route","gap":0.8,"text":"Take one real question, and draw its whole route on one page."},
- {"id":"ask","gap":0.8,"text":"Ask, of every part: who uses this, and for which decision?"},
- {"id":"take","gap":0.8,"text":"Go deep in one thing; learn enough of the others to see the whole."}
+ {"id":"ivy","gap":0.8,"text":"Helena did the same with her team: she gave Ivy the time to see the parts as one, and 14 rooms stayed in Graham's answer."},
+ {"id":"depth","gap":0.8,"text":"On Monday, write down the hats each of your people wears, not only their titles."},
+ {"id":"words","gap":0.8,"text":"Give someone new the time to learn every part of the work, and its words."},
+ {"id":"route","gap":0.8,"text":"Hand them one real question, and have them draw its whole route on one page."},
+ {"id":"ask","gap":0.8,"text":"And give whatever falls between the hats an owner."},
+ {"id":"take","gap":0.8,"text":"Grow people who go deep in one thing, and learn enough of the rest to see the whole."}
 ]}
 };
 
-const VODUR={"trench/when": 4.552, "trench/fire": 3.493, "trench/burns": 5.708, "trench/ding": 7.198, "trench/jobs": 3.471, "trench/earth": 3.108, "trench/timber": 3.326, "trench/rubble": 2.18, "trench/cost": 7.947, "trench/change": 1.34, "trench/plan": 2.536, "trench/dig": 4.284, "trench/canal": 5.621, "trench/boats": 4.13, "trench/fill": 4.482, "trench/shen": 6.143, "trench/saving": 5.338, "trench/one": 5.443, "trench/data": 4.209, "trench/see": 5.039, "question/promise": 4.794, "question/films": 5.757, "question/ivy": 6.883, "question/depth": 2.542, "question/helena": 8.209, "question/role": 7.706, "question/month": 5.552, "question/graham": 7.175, "question/q": 5.467, "question/goals": 4.185, "question/first": 3.855, "parts/born": 1.68, "parts/mei": 8.475, "parts/sam": 7.11, "parts/yusuf": 5.334, "parts/noor": 5.186, "parts/jun": 4.894, "parts/pair": 3.993, "parts/films": 6.866, "parts/deep": 2.805, "parts/learn": 4.739, "parts/ask": 4.383, "page/draw": 6.046, "page/decision": 5.862, "page/question": 4.354, "page/data": 4.799, "page/born": 3.173, "page/keeps": 4.53, "page/join": 3.411, "page/names": 4.923, "page/fourteen": 5.845, "page/drop": 9.256, "page/nobody": 6.316, "shape/needed": 4.77, "shape/own": 6.402, "shape/t": 5.052, "shape/lists": 7.658, "shape/nobody": 3.035, "shape/range": 6.544, "shape/messy": 2.861, "shape/essential": 6.516, "shape/across": 1.857, "kept/goal": 6.485, "kept/team": 6.338, "kept/catalog": 3.592, "kept/lineage": 6.002, "kept/cant": 5.39, "monday/back": 7.584, "monday/ivy": 5.869, "monday/depth": 2.106, "monday/words": 3.213, "monday/route": 3.611, "monday/ask": 3.538, "monday/take": 3.396};
+const VODUR={"trench/when": 4.552, "trench/fire": 3.493, "trench/burns": 5.708, "trench/ding": 7.198, "trench/jobs": 3.471, "trench/earth": 3.108, "trench/timber": 3.326, "trench/rubble": 2.18, "trench/cost": 7.947, "trench/change": 3.437, "trench/plan": 2.536, "trench/dig": 4.284, "trench/canal": 5.621, "trench/boats": 4.13, "trench/fill": 4.482, "trench/shen": 6.143, "trench/saving": 5.338, "trench/one": 6.773, "trench/data": 5.257, "trench/see": 4.798, "question/promise": 4.794, "question/films": 5.757, "question/ivy": 6.883, "question/depth": 2.542, "question/helena": 8.209, "question/role": 7.706, "question/hats": 4.903, "question/month": 6.588, "question/graham": 7.175, "question/q": 5.467, "question/goals": 4.185, "question/first": 3.855, "parts/born": 1.68, "parts/mei": 8.475, "parts/names": 1.278, "parts/sam": 7.51, "parts/yusuf": 5.334, "parts/noor": 5.186, "parts/jun": 5.577, "parts/pair": 3.993, "parts/films": 6.866, "parts/deep": 5.76, "parts/learn": 4.739, "parts/ask": 4.383, "page/draw": 6.046, "page/decision": 5.862, "page/question": 4.354, "page/data": 4.799, "page/born": 3.173, "page/keeps": 4.53, "page/join": 3.411, "page/names": 4.923, "page/fourteen": 5.845, "page/drop": 9.256, "page/nobody": 6.316, "page/hats": 4.514, "shape/needed": 5.396, "shape/own": 7.11, "shape/t": 5.052, "shape/lists": 7.658, "shape/nobody": 3.416, "shape/range": 6.544, "shape/messy": 2.861, "shape/essential": 6.516, "shape/across": 3.847, "kept/goal": 6.485, "kept/team": 6.338, "kept/owner": 5.317, "kept/catalog": 3.592, "kept/lineage": 6.002, "kept/cant": 5.39, "monday/back": 7.584, "monday/ivy": 7.316, "monday/depth": 4.534, "monday/words": 3.823, "monday/route": 4.393, "monday/ask": 2.416, "monday/take": 4.262};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2573,7 +2577,7 @@ function mh_building(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
    again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
    a room (later:true) lets what was there leave first; between rooms a shot dissolves. Sizes in the 1920 x 1080 frame. */
 
-const MH_LAST="Go deep in one thing; learn enough of the others to see the whole.";
+const MH_LAST="Grow people who go deep in one thing and see the whole.";
 // the film's number and title at the top left, from the second chapter on
 function mh_kick(ctx,S,a){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"1","Many hats, one picture",{a});}
 // a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
@@ -2651,12 +2655,12 @@ scene("trench",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       mh_tag(x,tt,w("one","diggers",0.05),null,420,330,"The diggers",{align:"center"});
       mh_tag(x,tt,w("one","boatmen",0.05),null,960,330,"The boatmen",{align:"center"});
       mh_tag(x,tt,w("one","carters",0.05),null,1500,330,"The carters",{align:"center"});}},
-    // data work's parts, each kept deeply, and someone who learns enough of each to see them as one
+    // a data team's parts, each known deeply, and whoever leads them seeing them as one picture
     {at:c.data-0.3,place:"lpRoom",keys:[[c.data-0.3,960,540,1.0]],push:0,draw:(x,tt)=>{const p0=w("data","parts",-0.2),d0=w("data","deeply",-0.2);
       mh_parts(x,{light:"day",a:1-ag_in(tt,c.breath+0.2,0.8),ks:MH_PARTS.map((_,i)=>tt-p0-i*0.3),stems:MH_PARTS.map((_,i)=>ag_in(tt,d0+i*0.12,1.0)),
-        bar:ag_in(tt,w("see","learns",-0.1),2.2),gap:clamp(tt-w("see","between",0.1),0,1)});}}
+        bar:ag_in(tt,w("see","parts",-0.1),2.2),gap:clamp(tt-w("see","between",0.1),0,1)});}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,"Many hats, one picture","Deep in one thing, and enough of the rest to join them","Leading data people · The new skills");
+  lp_title(ctx,S,t,c.breath+0.2,"Many hats, one picture","See the hats your team wears, and what falls between them","Leading data people · The new skills");
 });
 
 /* ---------------------------------------------------------------- 2. One question to follow */
@@ -2673,13 +2677,15 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,
       mh_sheet(x,tt,w("ivy","Ivy",-0.1),1000,170,640,{kick:"Monday 1 March 2027",title:"Ivy Reyes",sub:"Graduate data analyst",lines:["Her depth: statistics"]},
         {light:"morning",u:ag_in(tt,w("depth","statistics",-0.1),0.5)});
       ivy(x,tt);}},
-    // Helena's two hats, two sides of one role (the author's advice, 10 November 2026), and Ivy's first month
+    // Helena's two hats, two sides of one role (the author's advice, 10 November 2026), her team's many hats, and the month she gives Ivy
     {at:c.helena-0.3,place:"mhMorning",keys:[[c.helena-0.3,960,540,1.0]],draw:(x,tt)=>{
       mh_sheet(x,tt,c.helena+0.4,780,170,420,{kick:"The data manager",title:"Helena Novak",sub:"Two hats",lines:["Product owner, who thinks like an architect","People leader"]},
         {light:"morning",out:c.role-0.5,u:mh_u(tt,[w("helena","product",-0.1),w("helena","people",-0.1)])});
-      const r0=w("role","managing",-0.2);if(tt>=r0)mh_sides(x,720,170,540,{t:tt,a:ag_in(tt,r0,0.35)*(1-ag_in(tt,c.month-0.5,0.4)),k:tt-r0,light:"morning",
+      const r0=w("role","managing",-0.2);if(tt>=r0)mh_sides(x,720,170,540,{t:tt,a:ag_in(tt,r0,0.35)*(1-ag_in(tt,c.hats-0.5,0.4)),k:tt-r0,light:"morning",
         left:[w("role","plans",-0.1),w("role","dates",-0.1),w("role","measures",-0.1)],right:w("role","people",-0.1),arrow:w("role","serve",-0.1)});
-      mh_sheet(x,tt,w("month","month",-0.1),780,170,420,{kick:"Ivy's first month",lines:["Learn the team's work","Follow one real question through all of it"]},
+      mh_sheet(x,tt,c.hats+0.2,780,170,420,{kick:"Her team",title:"More than one hat each",lines:["A job title names only one"]},
+        {light:"morning",out:c.month-0.5,u:ag_in(tt,w("hats","title",-0.1),0.5)});
+      mh_sheet(x,tt,w("month","month",-0.1),780,170,420,{kick:"Ivy's first month",lines:["Learn every part of the team's work","Follow one real question through all of it"]},
         {col:LP.blue,light:"morning",u:mh_u(tt,[w("month","learn",-0.1),w("month","question",-0.1)])});
       ivy(x,tt);lp_person(x,"helena",1420,640,1.0,{t:tt,flip:true,light:mo});}},
     // Graham's question, agreed in writing
@@ -2701,15 +2707,16 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,
 /* ---------------------------------------------------------------- 3. A few days with each */
 scene("parts",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"};
   const PX=[330,770,1210,1650],PS=[
-    {who:"sam",line:"sam",word:"Sam",uw:"sensor",col:LP.orange,words:{kick:"Sam Okafor",title:"The platform",lines:["Each room's sensor counts the people in it, every hour"]}},
+    {who:"sam",line:"sam",word:"Sam",uw:"sensor",col:LP.orange,words:{kick:"Sam Okafor",title:"The platform",lines:["And the sensors' feed: people counted in each room, every hour"]}},
     {who:"yusuf",line:"yusuf",word:"Yusuf",uw:"rule",col:null,words:{kick:"Yusuf Demir",title:"Governance",lines:["His rule for that feed: counts, never people"]}},
     {who:"noor",line:"noor",word:"Noor",uw:"map",col:LP.blue,words:{kick:"Noor Rahman",title:"The map",lines:["Where data is born, and where it goes"]}},
-    {who:"jun",line:"jun",word:"Jun",uw:"raw",col:LP.orange,words:{kick:"Jun Park",title:"The models",lines:["From raw data to tables people can trust"]}}];
+    {who:"jun",line:"jun",word:"Jun",uw:"raw",col:LP.orange,words:{kick:"Jun Park",title:"The models",lines:["From raw data to tables people can trust","And he teaches"]}}];
   ag_shots(ctx,S,t,sc.dur,[
     // where the data is born: Mei's timetable
     {at:0,place:"mhRegistrar",keys:[[0,960,540,1.0]],draw:(x,tt)=>{
       lp_screen(x,600,160,720,480,{draw:(cx,X,Y,Wd,Hd)=>mh_timetable(cx,X,Y,Wd,Hd,{u:ag_in(tt,w("mei","timetable",0.1),2.2),more:ag_in(tt,w("mei","186",-0.1),0.6)})});
       lp_nameTag(x,96,250,"mei",{role:"The registrar's office",a:ag_in(tt,w("mei","Mei",-0.1),0.5)});
+      mh_tag(x,tt,c.names+0.2,null,960,712,"She names the rooms, too",{align:"center",col:LP.ink});
       lp_person(x,"mei",330,640,0.95,{t:tt,light:dy});
       lp_person(x,"ivy",1600,640,0.95,{t:tt,flip:true,a:ag_in(tt,c.born,0.6),light:dy});}},
     // the others, one after another, the camera moving along their sheets
@@ -2731,6 +2738,7 @@ scene("parts",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
     // each deep in one part, and right about it; Ivy enough of each; and one question for all of them
     {at:c.deep-0.3,place:"lpRoom",later:true,keys:[[c.deep-0.3,960,540,1.0]],draw:(x,tt)=>{const s0=w("deep","deep",-0.1),r0=w("deep","right",-0.1),e0=w("learn","enough",-0.2);
       mh_parts(x,{light:"day",names:1,stemTop:MH_PY+MH_PH+72,stemBot:610,stems:MH_PARTS.map((_,i)=>ag_in(tt,s0+i*0.12,1.0)),ticks:MH_PARTS.map((_,i)=>clamp(tt-r0-i*0.1,0,1)),bar:ag_in(tt,e0,2.0)});
+      mh_tag(x,tt,w("deep","hats",-0.1),c.learn-0.3,960,790,"More hats than their titles say",{align:"center",col:LP.ink});
       mh_tag(x,tt,e0+0.8,null,1850,108,"Ivy: enough of each",{align:"right",col:LP.ink});
       mh_tag(x,tt,w("learn","words",-0.1),c.ask-0.3,600,790,"Their words",{align:"center"});
       mh_tag(x,tt,w("learn","tools",-0.1),c.ask-0.3,960,790,"Their tools",{align:"center"});
@@ -2755,7 +2763,9 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
         ticks:[clamp(tt-w("nobody","right",-0.1),0,1),clamp(tt-w("nobody","sensors",-0.1),0,1)],light:"late"});
       lp_pill(x,960,730,"172 rooms match",{col:LP.green,icon:"tick",a:ag_io(tt,m0+0.6,c.fourteen-0.3,0.4)});
       lp_pill(x,960,730,"14 renumbered",{col:LP.amber,a:ag_io(tt,w("fourteen","renumbered",-0.1),c.drop-0.3,0.4)});
-      mh_sheet(x,tt,w("drop","172",-0.2),600,694,720,{kick:"Graham's answer",title:"172 rooms, not 186"},{col:LP.amber,light:"late",out:c.nobody-0.3});}}
+      mh_sheet(x,tt,w("drop","172",-0.2),600,694,720,{kick:"Graham's answer",title:"172 rooms, not 186"},{col:LP.amber,light:"late",out:c.nobody-0.3});
+      // the join, between two people's hats: nobody's job to check
+      mh_tag(x,tt,w("hats","between",-0.1),null,960,760,"Between two people's hats: nobody's job",{align:"center",col:LP.amber});}}
   ]);
   mh_kick(ctx,S,1);
 });
@@ -2807,8 +2817,11 @@ scene("kept",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       lp_person(x,"ivy",1500,650,1.0,{t:tt,flip:true,a:ag_in(tt,0.9,0.6),light:lt});}},
     // the team starts from her page
     {at:c.team-0.3,place:"mhLate",later:true,keys:[[c.team-0.3,960,540,1.0]],draw:(x,tt)=>{const r0=w("team","186",0.1);
-      mh_sheet(x,tt,c.team+0.3,640,150,640,{kick:"Ivy's page",title:"The route of Graham's question"},{col:LP.blue,light:"late"});
-      lp_pill(x,960,452,"All 186 rooms",{col:LP.green,icon:"tick",a:ag_in(tt,r0,0.4),k:tt-r0});
+      mh_sheet(x,tt,c.team+0.3,640,150,640,{kick:"Ivy's page",title:"The route of Graham's question"},{col:LP.blue,light:"late",out:c.owner-0.6});
+      lp_pill(x,960,452,"All 186 rooms",{col:LP.green,icon:"tick",a:ag_io(tt,r0,c.owner-0.6,0.4),k:tt-r0});
+      // Helena gives the join an owner: the sheet comes in once Ivy's page has gone, so no words show twice
+      mh_sheet(x,tt,w("owner","owner",-0.1),640,150,640,{kick:"The join, with an owner",title:"Mei and Sam",lines:["Check the room names together, each term"]},
+        {col:LP.green,light:"late",u:ag_in(tt,w("owner","check",-0.1),0.5)});
       for(const [who,px,fl] of [["helena",330,false],["noor",700,false],["jun",1220,true],["ivy",1590,true]])lp_person(x,who,px,720,0.72,{t:tt,flip:fl,light:lt});}},
     // what the catalog draws by itself, and what stays on her page
     {at:c.catalog-0.3,place:"mhLate",later:true,keys:[[c.catalog-0.3,960,540,1.0]],draw:(x,tt)=>{const d0=w("catalog","draws",-0.1);
@@ -2830,17 +2843,17 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
         if(a>0.004)lp_tag(x,lerp(px,990,mu),806,s,{align:"center",a});}
       lp_pill(x,990,806,"One move",{col:LP.blue,a:ag_in(tt,o0+0.3,0.4),k:tt-o0-0.3});
       lp_person(x,"ivy",300,650,1.0,{t:tt,a:ag_in(tt,0.9,0.6),light:mo});}},
-    // Ivy did the same with data
-    {at:c.ivy-0.3,place:"mhMorning",later:true,keys:[[c.ivy-0.3,960,540,1.0]],draw:(x,tt)=>{const k0=w("ivy","kept",-0.1);
+    // Helena did the same with her team: she gave Ivy the time to see the parts as one
+    {at:c.ivy-0.3,place:"mhMorning",later:true,keys:[[c.ivy-0.3,960,540,1.0]],draw:(x,tt)=>{const k0=w("ivy","stayed",-0.1);
       mh_parts(x,{light:"morning",names:1,stemTop:MH_PY+MH_PH+72,stemBot:640,stems:1,bar:ag_in(tt,w("ivy","one",-0.2),1.6)});
-      lp_pill(x,960,770,"14 rooms kept in Graham's answer",{col:LP.green,icon:"tick",a:ag_in(tt,k0,0.4),k:tt-k0});}},
+      lp_pill(x,960,770,"14 rooms stayed in Graham's answer",{col:LP.green,icon:"tick",a:ag_in(tt,k0,0.4),k:tt-k0});}},
     // what to do on Monday; then the T, the whole film in one shape
     {at:c.depth-0.3,place:"mhMorning",later:true,keys:[[c.depth-0.3,960,540,1.0]],draw:(x,tt)=>{const g=1-ag_in(tt,c.take-0.4,0.6);
       if(g>0.004){x.save();x.globalAlpha*=g;
-        mh_sheet(x,tt,c.depth+0.3,140,170,520,{kick:"One",title:"Keep your depth in one thing"},{light:"morning"});
-        mh_sheet(x,tt,w("words","words",-0.1),700,170,520,{kick:"Two",title:"Learn the others' words; spend time with each"},{light:"morning"});
-        mh_sheet(x,tt,w("route","route",-0.1),1260,170,520,{kick:"Three",title:"Draw one question's whole route on one page"},{col:LP.blue,light:"morning"});
-        mh_sheet(x,tt,w("ask","Ask",-0.1),560,520,800,{kick:"Four",title:"Ask: who uses this, and for which decision?"},{col:LP.blue,light:"morning"});
+        mh_sheet(x,tt,c.depth+0.3,140,170,520,{kick:"One",title:"Write down the hats each person wears"},{light:"morning"});
+        mh_sheet(x,tt,w("words","learn",-0.1),700,170,520,{kick:"Two",title:"Give someone new time with every part"},{light:"morning"});
+        mh_sheet(x,tt,w("route","route",-0.1),1260,170,520,{kick:"Three",title:"Have them draw one question's whole route"},{col:LP.blue,light:"morning"});
+        mh_sheet(x,tt,w("ask","give",-0.1),560,520,800,{kick:"Four",title:"Give what falls between the hats an owner"},{col:LP.green,light:"morning"});
         x.restore();}
       mh_T(x,960,420,{bw:960,sl:340,a:1-ag_in(tt,e0,0.8),stem:ag_in(tt,w("take","deep",-0.1),1.0),bar:ag_in(tt,w("take","enough",-0.1),1.2)});}}
   ]);

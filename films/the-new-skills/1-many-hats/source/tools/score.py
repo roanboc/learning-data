@@ -283,7 +283,7 @@ low(D2, qw('depth', 'statistics', -0.1), 0.7, None, ring=2.0)
 card(qc('helena', 0.4), 0.004, px(990))
 card(qw('role', 'managing', -0.2), 0.0035, px(990))
 low(D2, qw('role', 'one', -0.05), 0.6, None, ring=1.8); tapn(D4, qw('role', 'one', -0.05), 0.45, None, ring=1.8)
-card(qw('month', 'month', -0.1), 0.0035, px(990))
+card(G('question', 'hats', 0.2), 0.0035, px(990)); card(qw('month', 'month', -0.1), 0.0035, px(990))
 card(qw('graham', 'Graham', -0.1), 0.004, px(1320)); card(qw('graham', 'Council', -0.2), 0.0035, px(1320))
 card(qw('q', 'question', -0.1), 0.004, px(1320))
 chord((B3, D4), qw('q', 'hours', 0.4), 0.55, step=0.2, ring=1.8)
@@ -347,7 +347,7 @@ LV[0] = 0.9
 kw = lambda lid, word, off=0: W('kept', lid, word, off)
 ticked(kw('goal', 'met', 0.0), 0.0045, px(340))
 figure((D4, Fs4, A4), kw('goal', 'route', 0.1), 0.5, step=0.16, ring=0.7, last=1.6, hand=tapn)
-card(G('kept', 'team', 0.3), 0.0035, px(960))
+card(G('kept', 'team', 0.3), 0.0035, px(960)); card(kw('owner', 'owner', -0.1), 0.0035, px(960))
 chord((G3, D4, G4, B4), kw('team', '186', 0.1), 0.5, step=0.14, ring=1.8, lowest=False)
 slide(kw('catalog', 'draws', -0.1), 1.6, 0.004, px(670))
 card(kw('cant', 'decision', -0.2), 0.0035, px(1540))
@@ -365,7 +365,7 @@ figure((Cs5, A4, D5), mw('back', 'cart', 0.0), 0.45, step=0.18, ring=0.4, last=1
 mark(PHRASE, mw('ivy', 'one', -0.2), 0.55, step=0.17, ring=0.4, last=1.8,
      bass=((D2, 0, 1.0), (Fs2, 2, 0.8), (G2, 4, 0.8), (A2, 6, 0.8), (D3, 8, 1.8)))
 card(mc('depth', 0.3), 0.0035, px(400))
-for lid, word, x in (('words', 'words', 960), ('route', 'route', 1520), ('ask', 'Ask', 960)):
+for lid, word, x in (('words', 'learn', 960), ('route', 'route', 1520), ('ask', 'give', 960)):
     card(mw(lid, word, -0.1), 0.0035, px(x))
 mark(tuple(m + 12 for m in PHRASE), mw('take', 'whole', 0.1), 0.5, step=0.24, ring=0.5, last=5.0,
      bass=((D2, 0, 2.0), (A2, 3, 1.2), (D3, 8, 5.0)), until=TOT)

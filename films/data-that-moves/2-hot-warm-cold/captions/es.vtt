@@ -1,196 +1,181 @@
 WEBVTT
 
-00:00:01.600 --> 00:00:09.281
-Febrero de 2008. Dentro de una montaña helada en Svalbard, islas árticas de Noruega, se abre una bóveda.
+00:00:01.600 --> 00:00:10.365
+Abril de 1850. En Aquisgrán, en la frontera oeste de Prusia, Paul Julius Reuter vende las noticias de las bolsas de Europa.
 
-00:00:10.581 --> 00:00:15.483
-A dieciocho grados bajo cero, guarda copias de semillas de bancos de germoplasma de todo el mundo.
+00:00:11.865 --> 00:00:17.225
+Una línea de telégrafo va de Berlín a Aquisgrán. Otra va de París a Bruselas.
 
-00:00:16.583 --> 00:00:23.891
-Guardan semillas de cultivos y sus parientes silvestres, para que los fitomejoradores logren cultivos que resistan sequía y enfermedad.
+00:00:18.525 --> 00:00:23.133
+Entre Aquisgrán y Bruselas, 122 kilómetros sin cable.
 
-00:00:24.591 --> 00:00:35.343
-Cerca de Alepo, en Siria, un banco guarda 141,052 muestras de trigo, cebada, lentejas y garbanzos de las tierras secas del mundo.
+00:00:24.633 --> 00:00:31.086
+Banqueros y comerciantes compran y venden según los precios de las bolsas de otras ciudades, y actúan el mismo día.
 
-00:00:36.643 --> 00:00:40.726
-Desde 2008, envía copias de la mayoría a la bóveda.
+00:00:32.386 --> 00:00:38.264
+En ese tramo, los precios iban en tren, y llegaban horas después de empezar las operaciones del día.
 
-00:00:42.026 --> 00:00:48.404
-Pero un banco puede perderse por guerra, inundación o un apagón, y una variedad perdida se pierde para siempre.
+00:00:39.364 --> 00:00:46.130
+Un precio que llega después de que tuviste que decidir no te sirve: otro, con noticias más frescas, ya cerró el trato.
 
-00:00:49.104 --> 00:00:56.691
-En 2012, la guerra llegó cerca de Alepo. Casi todos los custodios del banco tuvieron que irse, y ya no pudo enviar semillas.
+00:00:47.630 --> 00:00:55.127
+Los clientes de Reuter no necesitaban los precios al instante, sino antes de actuar, así que las noticias debían cruzar más rápido.
 
-00:00:57.991 --> 00:01:03.637
-Los fitomejoradores ya no recibían las semillas de las que dependían, y cada variedad del banco corría peligro.
+00:00:56.827 --> 00:01:03.575
+Así que Reuter y Heinrich Geller, un posadero de Aquisgrán que criaba palomas, mandaron los precios volando.
 
-00:01:04.937 --> 00:01:06.325
-Algo tenía que cambiar.
+00:01:05.075 --> 00:01:11.359
+Cada ave llevaba una tira fina de papel, de Bruselas a Aquisgrán, y el telégrafo la enviaba a Berlín.
 
-00:01:08.025 --> 00:01:13.772
-En 2015, los custodios hicieron lo que nadie antes: le pidieron a la bóveda sus copias.
+00:01:12.659 --> 00:01:19.929
+Las aves cruzaban en unas dos horas, seis horas antes que el tren, así que los precios llegaban cuando aún servían.
 
-00:01:14.472 --> 00:01:21.855
-Salieron de la montaña 38,073 muestras, y ese noviembre se sembraron en el Líbano y en Marruecos.
+00:01:21.629 --> 00:01:26.207
+Y fue solo por un tiempo: las palomas cubrieron el tramo hasta que se unió el cable.
 
-00:01:23.355 --> 00:01:26.983
-Para 2020, no quedaba nada de la colección en Alepo.
+00:01:27.907 --> 00:01:31.166
+Bastante fresco quiere decir a tiempo para quien actúa con ello.
 
-00:01:27.683 --> 00:01:35.105
-Aun así, se perdieron a lo sumo 1,657 muestras, y los fitomejoradores vuelven a pedir sus semillas.
+00:01:32.666 --> 00:01:39.893
+Hasta septiembre, la universidad movía casi todos sus datos una vez por noche. Y, al preguntarles, todos los querían en vivo.
 
-00:01:36.605 --> 00:01:42.583
-Las semillas en uso, cerca y listas; sus copias, congeladas lejos, hasta el día en que se necesiten.
+00:01:41.193 --> 00:01:47.151
+Algunos llegaban tarde: 23 tutores cobraron dos semanas tarde, y el pago de dos personas fue a un ladrón.
 
-00:01:44.283 --> 00:01:45.983
-Los datos también tienen temperatura.
+00:01:48.451 --> 00:01:54.016
+Ahora cada tipo de dato llega a tiempo para la acción que sirve, y no antes de lo necesario.
 
-00:01:47.283 --> 00:01:54.431
-Hasta septiembre, nadie en la universidad había preguntado qué tan fresco debe estar cada tipo de dato, ni cada cuánto se lee.
+00:02:01.916 --> 00:02:08.704
+En septiembre, Noor, la arquitecta de datos, hizo una pregunta sobre cada tipo de dato: ¿cuándo actúa alguien con él?
 
-00:01:55.131 --> 00:02:01.504
-Algunos llegaban muy lento, y 23 tutores cobraron dos semanas tarde; otros costaban mucho más de lo necesario.
+00:02:10.404 --> 00:02:14.445
+Pregunta a la gente si quiere sus datos más frescos, y siempre dirá que sí.
 
-00:02:02.604 --> 00:02:07.758
-Ahora cada tipo tiene su propia temperatura, y desde entonces ningún tutor ha esperado un contrato.
+00:02:16.145 --> 00:02:23.392
+Así que Noor no tomó la respuesta de una pregunta. Miró el uso real: cuándo abren los datos, y qué hacen después.
 
-00:02:15.458 --> 00:02:20.494
-En septiembre, Noor, la arquitecta de datos, le hizo dos preguntas a cada dueño de datos.
+00:02:25.292 --> 00:02:30.097
+Si se actúa días o semanas después: frío. Un lote, una vez por noche o por semana.
 
-00:02:21.594 --> 00:02:24.428
-¿Qué tan frescos deben estar? ¿Y cada cuánto se leen?
+00:02:31.797 --> 00:02:37.509
+Si se actúa en minutos u horas: tibio. Lotes pequeños, cada pocos minutos o cada hora.
 
-00:02:26.128 --> 00:02:32.403
-La primera decide cómo se mueven: al cambiar, o con un horario. La segunda decide dónde se guardan.
+00:02:39.209 --> 00:02:45.291
+Si se actúa en un segundo o menos, casi siempre una máquina: caliente. Cada evento, en cuanto ocurre.
 
-00:02:33.903 --> 00:02:40.190
-Se necesitan en segundos o minutos y se leen todo el tiempo: calientes. Que sean pocos y estén cerca de donde se usan.
+00:02:46.991 --> 00:02:53.605
+La plataforma debe ofrecer las tres. Cuál recibe cada tipo de dato lo decide el negocio, no la plataforma.
 
-00:02:41.690 --> 00:02:46.536
-Frescos a la hora o al día, y se leen a menudo: tibios. Se calculan en un horario fijo.
+00:02:55.305 --> 00:03:00.433
+Cada respuesta queda en el contrato de los datos: cuán frescos, y para qué acción.
 
-00:02:48.036 --> 00:02:52.890
-Se leen poco, pero se guardan: fríos. Guardarlos barato, hasta la fecha en que pueden borrarse.
+00:03:04.133 --> 00:03:11.957
+Cada mañana, Rohan, de Finanzas, y los gerentes de las facultades miran lo que cada facultad gastó este año frente a su presupuesto.
 
-00:02:54.390 --> 00:02:59.201
-Cada respuesta va al contrato de los datos: qué tan frescos, y cuánto tiempo se guardan.
+00:03:13.457 --> 00:03:16.564
+Al preguntarle en agosto, Finanzas lo quería en vivo, al minuto.
 
-00:03:02.701 --> 00:03:09.395
-El personal ocasional declara sus horas en la app de horas, y lo aprobado antes del lunes a mediodía se paga el jueves.
+00:03:18.064 --> 00:03:25.132
+Noor miró qué pasa después: el gasto se revisa una vez al mes, y solo entonces se mueve dinero entre presupuestos.
 
-00:03:10.695 --> 00:03:15.748
-La app revisa cada declaración contra el contrato del tutor, que viene del sistema de RR. HH.
+00:03:26.832 --> 00:03:32.910
+Las cifras de ayer bastan. Una vista las calcula cada noche a las dos, listas para leer a las siete.
 
-00:03:16.848 --> 00:03:22.822
-Los contratos cambian con poco aviso, y el equipo de Ingrid en RR. HH. suele registrar uno un lunes por la mañana.
-
-00:03:24.122 --> 00:03:29.792
-Hasta septiembre, la plataforma recibía esos cambios una vez por noche, así que la app los veía el martes.
-
-00:03:31.092 --> 00:03:36.201
-Demasiado tarde para el mediodía: así fue como 23 tutores esperaron dos semanas más para cobrar.
-
-00:03:37.701 --> 00:03:42.965
-Ahora el sistema de RR. HH. envía cada cambio en cuanto ocurre, con Zerobus Ingest.
-
-00:03:44.465 --> 00:03:50.924
-Un pipeline recibe cada cambio en cuanto llega, y mantiene una tabla de streaming con cada contrato tal como está.
-
-00:03:52.424 --> 00:03:54.435
-La app ve cada cambio en menos de un minuto.
-
-00:03:55.935 --> 00:04:02.131
-Este lunes, once contratos cambiaron en la mañana, y todo lo declarado contra ellos se aprobó antes del mediodía.
-
-00:04:03.631 --> 00:04:10.582
-Lo fresco al minuto es lo más caro, porque el pipeline siempre está en ejecución: deja caliente solo lo que se necesita en minutos.
-
-00:04:14.082 --> 00:04:21.743
-Cada mañana, Rohan, de Finanzas, y los gerentes de las facultades revisan lo que cada facultad gastó este año contra su presupuesto.
-
-00:04:23.043 --> 00:04:30.189
-Hasta septiembre, cada consulta leía en el sitio el libro mayor del sistema financiero: lento, y una carga mientras Finanzas trabajaba.
-
-00:04:31.689 --> 00:04:38.562
-Las cifras de ayer bastan, así que ahora es una vista materializada, calculada cada noche a las dos y lista para leer.
-
-00:04:40.062 --> 00:04:44.775
+00:03:34.610 --> 00:03:39.323
 Es un modelo de dbt que escribió Jun, con su horario, probado como cualquier otro.
 
-00:04:45.875 --> 00:04:49.012
-Guarda solo la respuesta, nunca una copia del libro mayor.
+00:03:40.623 --> 00:03:49.230
+Casi todo el análisis es así, y debe seguir frío: se decide en días y semanas, y una corrida nocturna cuesta una parte pequeña de un stream.
 
-00:04:50.312 --> 00:04:57.100
-La mayoría de los datos de la universidad son tibios, y así deben seguir: pocas preguntas necesitan el minuto, y lo caliente cuesta más.
+00:03:52.930 --> 00:03:59.624
+El personal ocasional declara sus horas en la app de horas, y lo aprobado antes del lunes a mediodía se paga el jueves.
 
-00:05:00.400 --> 00:05:06.845
-Cada día de pago, nómina envía a la plataforma un registro de cada pago, con las horas que trabajó cada tutor ocasional.
+00:04:01.124 --> 00:04:06.877
+La app revisa cada declaración contra el contrato del tutor, que está en otro sistema: el de RR. HH.
 
-00:05:07.945 --> 00:05:14.622
-La ley australiana pide a los empleadores guardar los registros de pago siete años, y después del primero casi no se leen.
+00:04:08.177 --> 00:04:15.246
+El equipo de Ingrid en RR. HH. suele cambiar un contrato el lunes en la mañana, mientras los coordinadores aprueban hasta el mediodía.
 
-00:05:15.722 --> 00:05:24.139
-Hasta septiembre, cada registro iba al almacenamiento más caro y nunca se borraba: un costo, y un riesgo para todas las personas en él.
+00:04:16.746 --> 00:04:22.841
+Hasta septiembre, la plataforma traía esos cambios una vez por noche, así que la app los veía el martes.
 
-00:05:25.439 --> 00:05:33.409
-La nube guarda en niveles según cuánto se leen los datos: frecuente para lo que se lee a menudo, archivo para lo que casi nunca.
+00:04:24.341 --> 00:04:29.450
+Demasiado tarde para el mediodía: así fue como 23 tutores esperaron dos semanas más para cobrar.
 
-00:05:34.909 --> 00:05:40.339
-Ahora, un año después de escrito, cada archivo pasa al nivel de archivo de la nube, el más barato.
+00:04:31.150 --> 00:04:40.839
+¿Por qué pasar por la plataforma? Lo ideal sería un solo sistema para contratos y declaraciones, y el nuevo ERP los unirá en 2028.
 
-00:05:42.039 --> 00:05:45.720
-Como las copias de Svalbard, duermen hasta que alguien las necesita.
+00:04:42.339 --> 00:04:45.995
+Hasta entonces, la plataforma cubre el tramo, como las palomas.
 
-00:05:47.420 --> 00:05:55.121
-La tabla lo sabe: las consultas de pagos recientes siguen corriendo, y la que necesita un año archivado dice qué archivos recuperar.
+00:04:47.695 --> 00:04:55.923
+Toda organización tiene sistemas viejos junto a nuevos, así que el camino ideal es raro. Sortear los huecos es parte del trabajo.
 
-00:05:56.621 --> 00:05:59.951
-Recuperarlos toma horas, lo que está bien para una auditoría.
+00:04:57.823 --> 00:05:03.087
+Ahora el sistema de RR. HH. envía cada cambio en cuanto ocurre, con Zerobus Ingest.
 
-00:06:01.051 --> 00:06:07.610
-Cuando los registros de un año cumplen siete, se borran en una fecha fijada de antemano, y sus archivos se eliminan para siempre.
+00:05:04.587 --> 00:05:10.378
+Cada cinco minutos, un pipeline lleva los cambios a una tabla de cada contrato tal como está.
 
-00:06:09.110 --> 00:06:13.314
-En octubre se borraron los registros más antiguos, de más de siete años.
+00:05:12.078 --> 00:05:18.274
+Este lunes, once contratos cambiaron en la mañana, y todo lo declarado contra ellos se aprobó antes del mediodía.
 
-00:06:14.614 --> 00:06:17.955
-Cómo borrar bien es tema de las películas sobre protección de datos.
+00:05:19.974 --> 00:05:27.223
+Cinco minutos bastan para quien aprueba declaraciones toda la mañana, y cuesta mucho menos que un pipeline que nunca se detiene.
 
-00:06:21.455 --> 00:06:24.175
-Un mismo dato puede enfriarse con el tiempo.
+00:05:30.923 --> 00:05:36.911
+Lo caliente es para cuando ninguna persona espera para decidir, y la acción debe ser inmediata, o no sirve.
 
-00:06:25.675 --> 00:06:29.586
-El lunes temprano, la declaración de Linh de la semana pasada estaba caliente.
+00:05:39.011 --> 00:05:45.455
+En agosto, alguien robó las contraseñas de dos empleados, y cambió sus cuentas bancarias la noche antes del día de pago.
 
-00:06:30.886 --> 00:06:36.744
-La lista de declaraciones pendientes de nómina la leía en el sitio, en la app, hasta que se aprobó.
+00:05:47.155 --> 00:05:51.651
+Su pago fue a la cuenta de un extraño, y esperaron tres semanas a que les pagaran de nuevo.
 
-00:06:38.444 --> 00:06:42.922
-Pagada hoy, se vuelve tibia: parte de lo que gastó Salud, calculado cada noche.
+00:05:53.751 --> 00:05:58.359
+Ningún reporte leído a la mañana siguiente lo habría impedido: para entonces, el dinero ya no estaba.
 
-00:06:44.622 --> 00:06:51.104
-Dentro de un año, se volverá fría: sus horas, en su registro de pago en el archivo, hasta que se cumplan los siete años.
+00:06:00.459 --> 00:06:05.803
+Ahora cada cambio de cuenta bancaria se revisa en cuanto se hace, contra el inicio de sesión detrás de él.
 
-00:06:52.804 --> 00:06:56.368
-En cada paso, dónde vive y cómo se mueve siguen a cómo se usa.
+00:06:07.703 --> 00:06:15.194
+Si viene de un dispositivo nuevo cerca del día de pago, una regla retiene ese pago en un segundo, y pide a la persona confirmar.
 
-00:07:00.068 --> 00:07:06.655
-En Svalbard, la bóveda sigue fría y quieta. En el Líbano y Marruecos, el banco vuelve a enviar sus semillas.
+00:06:17.494 --> 00:06:24.097
+Desde septiembre, se retuvieron cuatro cambios. Tres eran de las propias personas, confirmados en una hora; uno no.
 
-00:07:08.155 --> 00:07:16.769
-En la universidad, los datos se guardan igual: contratos en un minuto, gastos cada noche, pagos antiguos baratos hasta que se borran.
+00:06:26.397 --> 00:06:33.025
+Pero un evento lleva solo lo que cambió. El registro completo, y cada corrección, sigue llegando en el archivo nocturno.
 
-00:07:18.069 --> 00:07:26.060
+00:06:35.125 --> 00:06:41.739
+Así que lo caliente nunca va solo: necesita el camino frío al lado, y es lo más caro, porque nunca se detiene.
+
+00:06:44.039 --> 00:06:48.195
+Muy pocas necesidades son así. Deja lo caliente para una máquina que debe actuar ya.
+
+00:06:52.095 --> 00:06:57.139
+En 1851, el cable cerró el tramo, y las palomas ya no hicieron falta.
+
+00:06:58.439 --> 00:07:02.172
+Reuter llevó su servicio de noticias a Londres, y de ahí al mundo.
+
+00:07:03.472 --> 00:07:09.787
+En la universidad, cada tipo de dato llega ahora a tiempo para las personas, o la máquina, que actúan con él.
+
+00:07:10.887 --> 00:07:18.565
+El gasto, cada noche; los contratos, cada cinco minutos, hasta que llegue el ERP; un cambio de cuenta bancaria, en un segundo.
+
+00:07:20.065 --> 00:07:28.056
 Hoy cobran 2,960 personas, 856 de ellas del personal ocasional, entre ellas Linh.
 
-00:07:27.560 --> 00:07:31.593
-La frescura decide cómo se mueven los datos; la lectura, dónde viven.
+00:07:29.556 --> 00:07:35.003
+Cuán frescos deben estar los datos lo fija cuándo alguien actúa con ellos, no lo que puede hacer la plataforma.
 
-00:07:33.293 --> 00:07:37.077
-El almacenamiento ya tiene niveles hace años: no hay rueda que reinventar.
+00:07:36.703 --> 00:07:41.116
+Dónde se guardan los datos, y por cuánto tiempo, es otra pregunta, para una película posterior.
 
-00:07:38.177 --> 00:07:42.784
+00:07:42.416 --> 00:07:47.023
 Empieza por la documentación oficial; luego investiga, adapta, implementa, itera.
 
-00:07:44.084 --> 00:07:47.767
+00:07:48.323 --> 00:07:52.006
 Lo próximo: una copia de las declaraciones, para la app y para Finanzas.

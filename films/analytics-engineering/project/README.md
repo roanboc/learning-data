@@ -238,8 +238,8 @@ project/
 │                             agents-on-databricks/: the count of active research projects as a
 │                             function, a Genie Agent and an agent's evaluation cases (Databricks only);
 │                             hr-system-interface/: the HR system's data contract, agreed with its owner;
-│                             hot-warm-cold/: a streaming table, a materialized view and an archive,
-│                             data kept hot, warm and cold, with their service levels (Databricks only);
+│                             hot-warm-cold/: a nightly view, a pipeline every five minutes, a rule in
+│                             real time and an archive, with their service levels (Databricks only);
 │                             night-in-test/: the workload agent's night in test, under its mandate
 │                             the-night-the-claims-job-failed/: a job that failed, the platform's
 │                             insight by morning, the fix and the pull request a person approved;

@@ -1,31 +1,70 @@
 {
   "key": "hot-warm-cold",
   "title": "Hot, warm, cold",
-  "sub": "The second film of Data that moves, in Modern data basics: in 2015, a gene bank driven from Aleppo by war asks the seed vault on Svalbard for the copies it kept frozen there; at the university, how fresh each kind of data must be and how often it's read decide how it moves and where it's kept: contract changes pushed as they're made, each faculty's spending worked out every night, and old pay records kept cheaply until the day they're deleted.",
-  "howto": "The film is drawn as the platform map up close: a dark navy night with lanes of light. Light blue is data moving and the platform, gold what people agree, green a check that passes, amber a person's turn, lilac with a lock what is personal. Temperature is shown by where data lives: hot data near the top, bright and close to the app that uses it; warm data in the middle, worked out on a schedule; cold data deep below, frosted and still. The tools' pages are drawn for the film.",
+  "sub": "The second film of Data that moves, in Modern data basics: in 1850, Paul Julius Reuter flies stock prices by pigeon across the gap between two telegraph lines, so they arrive before his clients must act; at the university, how fresh each kind of data must be is set by when someone acts on it: each faculty's spending worked out every night, contract changes every five minutes until the new ERP joins two systems, and a bank account change checked within a second.",
+  "howto": "The film is drawn as the platform map up close: a dark navy night with lanes of light. Light blue is data moving and the platform, gold what people agree, green a check that passes, amber a person's turn, lilac with a lock what is personal. Temperature is how soon data must arrive for the action it serves, shown by how it moves: hot data at the top, each event the moment it happens; warm data in the middle, in small batches every few minutes; cold data at the foot, once a night, still between its runs. The tools' pages are drawn for the film.",
   "src": [
     "hw_look.js",
     "hw_places.js",
     "scenes.js"
   ],
   "poster": [
-    "two",
-    "cold",
+    "act",
+    "hot",
     1.2
   ],
   "say": [
-    ["\\bJun\\b", "Joon"],
-    ["\\bA I\\b", "AI"],
-    ["\\bHR\\b", "H R"],
-    ["\\bLinh's\\b", "Lin's"],
-    ["\\bLinh\\b", "Lin"],
-    ["\\bNoor\\b", "Nuur"],
-    ["\\bRohan\\b", "Roe-han"],
-    ["\\bSvalbard\\b", "Svahlbar"],
-    ["\\bZerobus\\b", "Zero bus"]
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bHR's\\b",
+      "H R's"
+    ],
+    [
+      "\\bLinh's\\b",
+      "Lin's"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bAachen\\b",
+      "Ah-ken"
+    ],
+    [
+      "\\bReuter's\\b",
+      "Roy-ter's"
+    ],
+    [
+      "\\bReuter\\b",
+      "Roy-ter"
+    ],
+    [
+      "\\bZerobus\\b",
+      "Zero bus"
+    ]
   ],
   "story": [
-    "vault"
+    "pigeons"
   ],
   "urgent": [],
   "logos": true

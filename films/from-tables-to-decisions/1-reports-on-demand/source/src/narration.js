@@ -9,7 +9,7 @@ const NARR={
  {"id":"late","gap":0.8,"text":"And the exchange couldn't always answer just when a caller asked."},
  {"id":"out","gap":0.8,"text":"So a clock or a watch set by that answer could be out."},
  {"id":"again","gap":0.8,"text":"And the time is a question everyone asks, again and again."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The answer had to be there whenever anyone asked."},
  {"id":"built","gap":0.8,"text":"So the Post Office's own engineers built a machine to answer it: the speaking clock."},
  {"id":"cain","gap":0.8,"text":"Jane Cain, one of the operators, recorded its words on glass discs."},
  {"id":"played","gap":0.8,"text":"A clock played them at the right moment."},

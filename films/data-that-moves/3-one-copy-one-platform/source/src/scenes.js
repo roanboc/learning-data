@@ -105,7 +105,7 @@ scene("ledger",(ctx,S,t,sc)=>{
     tKinds:sc.cues.kinds,tKindsW:wAt(sc,"kinds","kinds"),tClipped:wAt(sc,"kinds","clipped"),tShaved:wAt(sc,"kinds","shaved"),tWorn:wAt(sc,"kinds","worn thin"),
     tWeigh:sc.cues.weigh,tWeighW:wAt(sc,"weigh","weighing"),tWorth:wAt(sc,"weigh","nobody knows"),
     tOwed:sc.cues.owed,tLess:wAt(sc,"owed","nine per cent"),tOwedM:wAt(sc,"owed","a merchant owed"),tNine:wAt(sc,"owed","nine hundred"),
-    tChange:sc.cues.change,tSlow:wAt(sc,"change","slow"),tDisp:wAt(sc,"change","disputed"),tRisky:wAt(sc,"change","risky"),tHad:wAt(sc,"change","Something"),
+    tChange:sc.cues.change,tSlow:wAt(sc,"change","slow"),tDisp:wAt(sc,"change","disputed"),tRisky:wAt(sc,"change","risky"),tHad:wAt(sc,"change","Amsterdam's"),
     tBank:sc.cues.bank,tJan:wAt(sc,"bank","January"),tWissel:wAt(sc,"bank","Wisselbank"),tHall:wAt(sc,"bank","town hall"),
     tDep:sc.cues.deposit,tOnce:wAt(sc,"deposit","once"),tWeighs:wAt(sc,"deposit","weighs it"),tWrites:wAt(sc,"deposit","writes its value"),tOwn:wAt(sc,"deposit","own page"),
     tLine:sc.cues.line,tMoved:wAt(sc,"line","a line moved"),tNoCoin:wAt(sc,"line","no coin"),tHolds:wAt(sc,"line","what each merchant holds"),

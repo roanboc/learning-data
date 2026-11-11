@@ -19,173 +19,173 @@ Every payment means weighing coins, and nobody knows what a bag of them is reall
 On average, coin there is worth about 9% less than good coin: a merchant owed a thousand guilders may get coin worth about nine hundred.
 
 6
-00:00:35,311 --> 00:00:39,252
-Payments are slow, disputed and risky. Something had to change.
+00:00:35,311 --> 00:00:41,250
+Payments are slow, disputed and risky. Amsterdam's trade needs money everyone can trust.
 
 7
-00:00:40,952 --> 00:00:47,902
+00:00:42,950 --> 00:00:49,900
 On the 31st of January 1609, the city opens an exchange bank, the Wisselbank, in its town hall.
 
 8
-00:00:49,202 --> 00:00:56,127
+00:00:51,200 --> 00:00:58,125
 Merchants bring their coin once. The bank weighs it, and writes its value in its ledger, on the merchant's own page.
 
 9
-00:00:57,627 --> 00:01:05,491
+00:00:59,625 --> 00:01:07,489
 From then on, a payment is a line moved from page to page, with no coin carried, and the ledger shows what each merchant holds.
 
 10
-00:01:06,991 --> 00:01:12,116
+00:01:08,989 --> 00:01:14,114
 Merchants pay about 5% more for a guilder in the ledger than for one in coin.
 
 11
-00:01:12,816 --> 00:01:16,245
+00:01:14,814 --> 00:01:18,243
 For over a century, bills from all over Europe are paid there.
 
 12
-00:01:17,745 --> 00:01:24,945
+00:01:19,743 --> 00:01:26,943
 Data has its bags of coin too: the same data copied into every system that needs it, each copy a little different.
 
 13
-00:01:26,245 --> 00:01:33,805
+00:01:28,243 --> 00:01:35,803
 At the university, tutors' claims went round by email, and payroll and Finance each kept a copy that never quite agreed.
 
 14
-00:01:34,905 --> 00:01:39,563
+00:01:36,903 --> 00:01:41,561
 Now each claim is written once, and payroll and Finance read that one copy.
 
 15
-00:01:47,663 --> 00:01:52,539
+00:01:49,661 --> 00:01:54,537
 Thursday, the 5th of November 2026: pay day at the university.
 
 16
-00:01:53,639 --> 00:01:59,628
+00:01:55,637 --> 00:02:01,626
 Linh Nguyen tutors HI101 on a casual contract, paid for the hours she claims.
 
 17
-00:02:00,328 --> 00:02:04,492
+00:02:02,326 --> 00:02:06,490
 Claims used to be spreadsheets sent by email and typed again by payroll.
 
 18
-00:02:05,192 --> 00:02:10,085
+00:02:07,190 --> 00:02:12,083
 The faculty kept its own tally, and Finance saw the hours only after pay day.
 
 19
-00:02:11,585 --> 00:02:16,030
+00:02:13,583 --> 00:02:18,028
 So when the university built an app for claims, the usual design was ready:
 
 20
-00:02:16,730 --> 00:02:23,791
+00:02:18,728 --> 00:02:25,789
 the app on its own database, a pipeline copying each change to an analytics platform, and reports on the copy.
 
 21
-00:02:25,091 --> 00:02:31,328
+00:02:27,089 --> 00:02:33,326
 Two platforms, a pipeline between them, two sets of permissions, and a copy always a little behind.
 
 22
-00:02:35,228 --> 00:02:39,584
+00:02:37,226 --> 00:02:41,582
 Noor, the data architect, chose one copy on one platform instead.
 
 23
-00:02:40,284 --> 00:02:44,785
+00:02:42,282 --> 00:02:46,783
 The claims app is built on Lakebase, the Postgres database in Databricks.
 
 24
-00:02:45,885 --> 00:02:51,210
+00:02:47,883 --> 00:02:53,208
 Linh writes each claim once, as a row, and her coordinator approves it in that same row.
 
 25
-00:02:52,510 --> 00:03:00,744
+00:02:54,508 --> 00:03:02,742
 Postgres serves the app. The platform keeps the same rows in a second form for analysis, so the lakehouse reads them without slowing it.
 
 26
-00:03:02,244 --> 00:03:08,276
+00:03:04,242 --> 00:03:10,274
 Payroll's list of claims still waiting and the job that builds the hours to pay both read that copy.
 
 27
-00:03:08,976 --> 00:03:14,147
+00:03:10,974 --> 00:03:16,145
 So does Finance's casual teaching cost, and all three read through Unity Catalog.
 
 28
-00:03:15,647 --> 00:03:18,874
+00:03:17,645 --> 00:03:20,872
 Each table has one writer. The app writes the claims.
 
 29
-00:03:19,574 --> 00:03:27,272
+00:03:21,572 --> 00:03:29,270
 The lakehouse writes the contracts from the HR system, and a copy goes to the app, which checks each claim against its contract.
 
 30
-00:03:28,772 --> 00:03:33,322
+00:03:30,770 --> 00:03:35,320
 As in Amsterdam's ledger, a claim is written once, and read where it's written.
 
 31
-00:03:37,222 --> 00:03:42,569
+00:03:39,220 --> 00:03:44,567
 What's gone: the pipeline, the second database, and the work of keeping two copies in step.
 
 32
-00:03:43,869 --> 00:03:49,002
+00:03:45,867 --> 00:03:51,000
 The integration services that ran between separate platforms come together on one.
 
 33
-00:03:50,502 --> 00:03:58,394
+00:03:52,500 --> 00:04:00,392
 One catalog governs who may read the claims for analysis, with the same permissions, lineage and audit as every other table.
 
 34
-00:03:59,694 --> 00:04:05,925
+00:04:01,692 --> 00:04:07,923
 What still moves? Payroll pays from a payroll system the university buys, which isn't on the platform.
 
 35
-00:04:06,625 --> 00:04:13,006
+00:04:08,623 --> 00:04:15,004
 So each pay run, the hours to pay leave the platform by noon on Tuesday, under a contract with payroll.
 
 36
-00:04:14,306 --> 00:04:17,976
+00:04:16,304 --> 00:04:19,974
 One thing moves, on purpose, instead of a copy of everything.
 
 37
-00:04:19,476 --> 00:04:23,238
+00:04:21,474 --> 00:04:25,236
 The night it fails comes later, in A platform that watches itself.
 
 38
-00:04:26,738 --> 00:04:28,075
+00:04:28,736 --> 00:04:30,073
 So, what should you choose?
 
 39
-00:04:28,775 --> 00:04:34,197
+00:04:30,773 --> 00:04:36,195
 Keep one copy where you can, and move data only when a reader truly needs it somewhere else.
 
 40
-00:04:35,497 --> 00:04:39,091
+00:04:37,495 --> 00:04:41,089
 Decide which system writes each table, and let the others read it.
 
 41
-00:04:40,391 --> 00:04:48,327
+00:04:42,389 --> 00:04:50,325
 Where a system you buy keeps its own copy, agree the contract at that interface, as Moving is easy, agreeing is the work showed.
 
 42
-00:04:49,627 --> 00:04:55,809
+00:04:51,625 --> 00:04:57,807
 Both at once showed one database that writes and reads. Here, one copy serves a whole platform.
 
 43
-00:04:57,309 --> 00:05:00,594
+00:04:59,307 --> 00:05:02,592
 There are already standards for this, so don't reinvent the wheel.
 
 44
-00:05:01,294 --> 00:05:05,992
+00:05:03,292 --> 00:05:07,990
 Investigate, adapt, implement and iterate, starting from the official docs.
 
 45
-00:05:09,892 --> 00:05:16,521
+00:05:11,890 --> 00:05:18,519
 In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held.
 
 46
-00:05:18,021 --> 00:05:25,967
+00:05:20,019 --> 00:05:27,965
 At the university, Linh's claim is one row: she writes it, her coordinator approves it, payroll pays it and Finance counts it.
 
 47
-00:05:27,467 --> 00:05:35,254
+00:05:29,465 --> 00:05:37,252
 Today, 856 casual staff are paid from rows like hers, and no team had to copy a claim to get there.
 
 48
-00:05:36,954 --> 00:05:38,995
+00:05:38,952 --> 00:05:40,993
 Keep one copy, governed once.

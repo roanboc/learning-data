@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que los trabajadores tiraban los viales de los que no podían responder.",
 "Or a child was given vaccine that no longer worked, and the family thought the child was safe.":
 "O un niño recibía una vacuna que ya no servía, y la familia creía que estaba protegido.",
-"Something had to change: they needed to see whether the cold had held.":
-"Algo tenía que cambiar: necesitaban ver si el frío se había mantenido.",
+"Health workers needed to see, on the vial itself, whether the cold had held.":
+"Los trabajadores de salud necesitaban ver, en el propio vial, si el frío se había mantenido.",
 "In 1979, the World Health Organization asked for a way to show it.":
 "En 1979, la Organización Mundial de la Salud pidió una forma de mostrarlo.",
 "PATH, a health non-profit, worked for years with a company on one: the vaccine vial monitor.":

@@ -13,8 +13,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Hasta entonces, un hombre decía su voto en voz alta, y cualquiera podía saberlo: su patrón, su casero, un candidato.",
 "A vote against them could cost a worker his job, or a tenant his home.":
 "Un voto en su contra podía costarle a un trabajador su empleo, o a un inquilino su casa.",
-"So a man might not dare vote as he wished. Something had to change.":
-"Así que un hombre podía no atreverse a votar como quería. Algo tenía que cambiar.",
+"So a man might not dare vote as he wished. His vote had to become his own secret.":
+"Así que un hombre podía no atreverse a votar como quería. Su voto tenía que volverse su propio secreto.",
 "That March, the colony passed a secret ballot, worked out by Henry Chapman, one of its lawmakers.":
 "Ese marzo, la colonia aprobó el voto secreto, ideado por Henry Chapman, uno de sus legisladores.",
 "An official marked the voter off the roll, and handed him a printed paper with every candidate's name.":

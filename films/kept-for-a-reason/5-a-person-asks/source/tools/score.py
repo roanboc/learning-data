@@ -190,7 +190,7 @@ virginal(Bb3, S('august', 'great loss', 0.0), 0.42, px(1000), ring=1.4)
 tM = S('months', 'months')
 for i, m in enumerate((F4, D4, Bb3)):
     virginal(m, tM + 0.75 + 1.5 * i, 0.32, px(1180 - 230 * i), ring=1.0)
-basset(D3, S('change', 'Something', -0.1), E('summer') + 0.3, 0.7, att=0.6, rel=1.2)
+basset(D3, S('change', 'A prisoner', -0.1), E('summer') + 0.3, 0.7, att=0.6, rel=1.2)
 
 # 2. Three days (the opening goes on). The Act unrolled: B-flat major, its seal, the basset horn's B-flat (Parliament decides). Three
 #    days, ten, twenty: a note each, rising; the true causes certified: the basset horn's fourth. The door opens: E-flat major. The

@@ -36,8 +36,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En agosto, Jenkes sigue preso, y escribe sobre su gran pérdida, y el daño a su salud.",
 "Without that order, a person could be held for months, with no judge to hear why.":
 "Sin esa orden, alguien podía pasar meses preso, sin un juez que oyera por qué.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"A prisoner needed a right to a judge that no holiday could close.":
+"Un preso necesitaba un derecho a un juez que ninguna vacación pudiera cerrar.",
 "In 1679, Parliament passes the Habeas Corpus Act.":
 "En 1679, el Parlamento aprueba la Ley de Habeas Corpus.",
 "Once the order is served, the keeper has three days to bring the prisoner before a judge, and certify the true causes of holding him.":

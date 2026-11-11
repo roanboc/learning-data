@@ -238,8 +238,8 @@ bas(Eb4, I('lost', 'for good', 0.0), 1.2, 0.4, 0.2)
 bas(C4, I('lost', 'nowhere else', 0.0), 1.6, 0.5, 0.0)
 # something has to change, before the thousands come: the faint boats far off, one breath; B-flat, the horn holding
 air(G('islands', 'change', 0.2), 2.2, 0.006, 0.0, 120, 700)
-steel(Bb2, I('change', 'Something', -0.2), G('islands', 'plan', -0.4), 0.75, att=1.2, rel=1.0)
-horn(Bb2, I('change', 'change', 0.0), 2.2, 0.75, -0.3)
+steel(Bb2, I('change', 'The islands', -0.2), G('islands', 'plan', -0.4), 0.75, att=1.2, rel=1.0)
+horn(Bb2, I('change', 'rules', 0.0), 2.2, 0.75, -0.3)
 bas(D4, I('change', 'thousands', 0.0), 1.4, 0.45, 0.2); bas(F4, I('change', 'thousands', 0.4), 1.4, 0.4, 0.3)
 # the plan, made once for the whole park: its card, and the mark
 paper(G('islands', 'plan', 0.4), 0.010, px(520), 0.45)

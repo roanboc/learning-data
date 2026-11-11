@@ -1,7 +1,6 @@
 /* Learning Data: "Pause and think" for Borrowed from the brain, in English. Keep the keys in step with think.es.js.
-   The film stops at the end of three chapters (cell, borrowed, sure), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
-   and the page's .player data-labs is empty. */
+   The film stops at the end of four chapters (cell, borrowed, sure, expects), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). No question has a "stop"; the series' labs are on its labs page. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
@@ -13,5 +12,8 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
     why:"McCulloch and Pitts drew Cajal's cell as a unit that adds up its inputs and fires past a set level, Rosenblatt gave each connection a weight, and the layers came from Hubel and Wiesel's cells that fire for edges. But a real cell is far more complex: in 2021 it took a network of five to eight layers to mimic one, and a child learns a word from a few examples where a model needs a great many. Where else has a borrowed idea worked without copying the whole thing?"},
   "sure":{q:"Asked three times for a researcher's birthday, a model gave three different dates, all wrong. Why?",
     opts:[{t:"The fact was there, but each answer drew it from a different source, and those three sources disagreed.",near:true},{t:"The fact wasn't there, so it wrote likely words: a birthday has no pattern to learn, and tests reward a guess over a blank.",ok:true},{t:"Its temperature was turned up, so it made things up on purpose instead of giving the date it knew."}],
-    why:"A model draws each word by chance from what's likely, and even turned right down a little chance stays, so a missing fact comes out a different way each time, each as fluent as the last. Brains fill gaps too, just as surely. A fluent answer isn't a checked one: check it against the evidence, as Cajal's drawings were checked. Which answers in your work arrive fluent, but unchecked?"}
+    why:"A model draws each word by chance from what's likely, and even turned right down a little chance stays, so a missing fact comes out a different way each time, each as fluent as the last. Brains fill gaps too, just as surely. A fluent answer isn't a checked one: check it against the evidence, as Cajal's drawings were checked. Which answers in your work arrive fluent, but unchecked?"},
+  "expects":{q:"A nightly check has passed for years: the table isn't empty. What would an agent built like a brain do first?",
+    opts:[{t:"Run the same rule every hour instead of every night, so a bad load is caught sooner."},{t:"Fill in a short night by itself, adding the rows it expected, so the reports stay right.",near:true},{t:"Say what it expects first, about 4,100 rows on a Monday, then look and measure the gap.",ok:true}],
+    why:"A rule checks one thing; an expectation makes the gap show. On the Monday City sent nothing, the rule passed, and 2,030 rows came where about 4,100 were expected. The agent goes looking, adapts where no number changes, and shows a person the rest, with its evidence. Which checks in your work pass without expecting anything?"}
   }}};

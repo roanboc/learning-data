@@ -33,6 +33,7 @@ A film's thread writes its questions and assumptions to that film's own file, in
   - [Only what you may see](08-data-protection/2-only-what-you-may-see/)
   - [Kept for a reason](08-data-protection/3-kept-for-a-reason/)
 - [AI agents in data work](09-ai-agents/)
+  - [What an agent is](09-ai-agents/1-what-an-agent-is/)
   - [From helper to colleague](09-ai-agents/3-from-helper-to-colleague/)
 - [Leading data people](10-leading-data-people/)
   - [The new skills](10-leading-data-people/1-the-new-skills/)

@@ -26,8 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los errores se acumulan, sin verse, porque cada medida parece bien por sí sola.",
 "A map made only from its own measures can agree with itself, line after line, and still put a cape miles out.":
 "Un mapa hecho solo con sus propias medidas puede coincidir consigo mismo, línea tras línea, y aun así desviar un cabo millas.",
-"Something had to change: the survey needed a reference its errors couldn't reach.":
-"Algo tenía que cambiar: el levantamiento necesitaba una referencia que sus errores no pudieran alcanzar.",
+"The survey needed a reference its errors couldn't reach.":
+"El levantamiento necesitaba una referencia que sus errores no pudieran alcanzar.",
 "So, by day, they measured the coast; and on clear nights, they measured the stars.":
 "Así que, de día, midieron la costa; y en las noches despejadas, midieron las estrellas.",
 "A star's height, as it crosses the south, says how far north you stand, and no error in the walk can change it.":

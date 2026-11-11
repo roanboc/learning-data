@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Se puede crear un trigo que resista la roya, pero despacio.",
 "One harvest a year is one generation a year, and finding the right wheat takes many.":
 "Una cosecha al año es una generación al año, y encontrar el trigo adecuado lleva muchas.",
-"Every year of waiting was another year of ruined fields. Something had to change.":
-"Cada año de espera era otro año de campos arruinados. Algo tenía que cambiar.",
+"Every year of waiting was another year of ruined fields. The breeding had to go faster.":
+"Cada año de espera era otro año de campos arruinados. La cría tenía que ir más rápido.",
 "So the team grew two generations a year.":
 "Así que el equipo cultivó dos generaciones al año.",
 "In winter, in the Yaqui Valley in the north-west, near the sea.":

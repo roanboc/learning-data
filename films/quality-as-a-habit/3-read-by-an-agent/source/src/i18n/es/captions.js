@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En 2006 se encontraban cientos en los sitios web de esas organizaciones.",
 "A confident machine, a gap in what it read, and nobody reading after it.":
 "Una máquina segura de sí, un hueco en lo que leía y nadie que leyera después.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Translators had to start checking what the machine was sure of.":
+"Los traductores tenían que empezar a revisar aquello de lo que la máquina estaba segura.",
 "In 2000, the European Commission's English translators wrote about it in their magazine.":
 "En 2000, los traductores al inglés de la Comisión Europea escribieron sobre ello en su revista.",
 "Among the European Union's writers and translators, the fault got a name: the Cupertino effect.":

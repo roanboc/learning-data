@@ -8,7 +8,7 @@ const NARR={
  {"id":"field","gap":0.8,"text":"But a trial means sowing a few plots and waiting a whole season, so it gives only a handful of results."},
  {"id":"mislead","gap":0.8,"text":"And a handful can mislead. The brewery could choose the wrong barley and live with it for a year, or turn good barley away."},
  {"id":"maths","gap":0.8,"text":"The mathematics of the day worked for large numbers of measurements. Nobody could say how far a few could be trusted."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The brewery couldn't wait for large numbers it would never have."},
  {"id":"worked","gap":0.8,"text":"So Gosset worked out how much a few results can tell you, and how sure of it you can be."},
  {"id":"cards","gap":0.8,"text":"Before he could prove it on paper, he tried it by hand: 3,000 measurements on 3,000 cards, shuffled, and drawn four at a time.","say":"Before he could prove it on paper, he tried it by hand: three thousand measurements on three thousand cards, shuffled, and drawn four at a time."},
  {"id":"student","gap":0.8,"text":"In 1908 he published it, with tables anyone could use, as Student: the brewery let its staff publish, but not under their own names.","say":"In nineteen oh eight he published it, with tables anyone could use, as Student: the brewery let its staff publish, but not under their own names."},

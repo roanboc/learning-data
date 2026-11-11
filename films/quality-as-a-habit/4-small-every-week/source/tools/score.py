@@ -197,9 +197,9 @@ tap(H('slow', 'bred', -0.3), 0.008, px(500))
 for i, m in enumerate((G4, F4, D4, Bb3)):
     jet(m, G('harvests', 'gens', 0.0) + 1.1 * i, hold=0.5, g=0.4, pan=-0.3 + 0.2 * i, rel=0.45)
 # the years of waiting, the fields ruined: C minor; "Something had to change": B-flat
-low(C3, G('harvests', 'change', -0.1), H('change', 'Something', -0.2), 0.6, att=0.8, rel=0.8)
+low(C3, G('harvests', 'change', -0.1), H('change', 'The breeding', -0.2), 0.6, att=0.8, rel=0.8)
 jet(Eb4, G('harvests', 'change', 0.6), hold=0.9, g=0.4, pan=0.0, rel=0.6)
-tS = H('change', 'Something', 0.0)
+tS = H('change', 'The breeding', 0.0)
 low(Bb2, tS - 0.2, END('harvests', 'change') + 1.0, 0.68, att=0.9, rel=1.0)
 jet(D4, tS + 0.3, hold=0.6, g=0.48, pan=-0.15, rel=0.5); jet(F4, tS + 0.65, hold=1.2, g=0.48, pan=0.15, rel=0.7)
 # two generations a year: the mark, two notes; winter in the Yaqui Valley (left), summer in the highlands (right), over a thousand

@@ -7,7 +7,7 @@ const NARR={
  {"id":"plane","gap":0.8,"text":"But on the charts of the time, a straight line between two ports wasn't a bearing a ship could hold."},
  {"id":"drift","gap":0.8,"text":"Steer the angle the chart showed, and the ship slowly left the line."},
  {"id":"landfall","gap":0.8,"text":"On a long crossing, it could miss the coast it was making for, and its crew spend days more at sea, short of water."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Sailors needed a chart they could steer by, not just look at."},
  {"id":"stretch","gap":0.8,"text":"Mercator stretched his chart towards the poles, a little more at every degree, so every course on one bearing is a straight line."},
  {"id":"ruler","gap":0.8,"text":"On his chart, a pilot could rule a line between two ports, read its angle, and steer it."},
  {"id":"wright","gap":0.8,"text":"Thirty years later, Edward Wright worked out the stretch exactly, and most charts for sailors are still drawn this way."},

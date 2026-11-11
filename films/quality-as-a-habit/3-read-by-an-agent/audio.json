@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/read-by-an-agent/soundtrack.mp3",
-      "size": 6849506,
-      "sha256": "a283cf0d016fa1b76819449a49e8e11ec1d6587a4cdf1f3d4b2296de1c87297a",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-read-by-an-agent-ad59698a4c391e011a0b/a283cf0d016fa1b76819449a49e8e11ec1d6587a4cdf1f3d4b2296de1c87297a.mp3"
+      "size": 6876569,
+      "sha256": "220ded456c876009d6a8aa3e33ee006ad61ce97afba03a6a7a4115d2dbef9f93",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-read-by-an-agent-ea2ea04338a1161bfbc2/220ded456c876009d6a8aa3e33ee006ad61ce97afba03a6a7a4115d2dbef9f93.mp3"
     }
   ]
 }

@@ -416,7 +416,7 @@ const NARR={
  {"id":"hid","gap":0.8,"text":"It hid in villages and city streets, far from any clinic."},
  {"id":"chain","gap":0.8,"text":"A case nobody reported passed it to the next family, and the next: a chain."},
  {"id":"missed","gap":0.8,"text":"Vaccinating everyone couldn't reach everyone, and it found the ones missed."},
- {"id":"change","gap":0.8,"text":"Something had to change: every chain had to be found, and stopped where it was."},
+ {"id":"change","gap":0.8,"text":"Every chain had to be found, and stopped where it was."},
  {"id":"search","gap":0.8,"text":"So India's health workers, with the World Health Organization, changed what they did: search, and contain."},
  {"id":"house","gap":0.8,"text":"More than a hundred thousand of them went house to house."},
  {"id":"reward","gap":0.8,"text":"Anyone who reported a case was promised a reward, and every report was answered at once."},
@@ -484,7 +484,7 @@ const NARR={
  {"id":"take","gap":0.8,"text":"Answer every report, fix it where it started, and tell them."}]}
 };
 
-const VODUR={"report/place": 4.88, "report/disease": 5.73, "report/hard": 5.389, "report/hid": 3.191, "report/chain": 4.634, "report/missed": 3.955, "report/change": 4.241, "report/search": 6.244, "report/house": 2.862, "report/reward": 5.513, "report/guards": 6.679, "report/paid": 3.327, "report/last": 4.282, "report/free": 6.134, "report/uni": 4.721, "report/folder": 5.239, "report/worth": 7.942, "mine/portal": 7.921, "mine/reads": 4.468, "mine/marks": 2.709, "mine/presses": 3.512, "mine/held": 3.75, "mine/form": 6.541, "mine/typed": 6.422, "mine/people": 2.094, "mine/easy": 2.897, "mine/row": 4.602, "mine/next": 6.469, "owner/owners": 5.001, "owner/promise": 2.772, "owner/model": 6.254, "owner/do": 4.224, "owner/weekly": 3.424, "owner/alert": 5.53, "owner/again": 5.926, "source/passport": 6.073, "source/system": 5.668, "source/night": 5.389, "source/undone": 3.418, "source/copy": 4.638, "source/door": 3.706, "tell/told": 6.073, "tell/bother": 3.237, "tell/paid": 3.901, "tell/month": 3.116, "tell/right": 6.163, "tell/cost": 5.326, "tell/note": 4.056, "tell/october": 5.615, "tell/asks": 6.001, "tell/redman": 7.687, "check/born": 7.57, "check/becomes": 4.778, "check/adds": 7.126, "check/accent": 3.656, "check/holds": 5.053, "check/first": 2.148, "check/letter": 6.417, "check/seven": 3.683, "check/log": 3.202, "check/ring": 5.07, "close/after": 7.426, "close/gone": 2.838, "close/uni": 6.865, "close/cert": 3.344, "close/take": 3.178};
+const VODUR={"report/place": 4.88, "report/disease": 5.73, "report/hard": 5.389, "report/hid": 3.191, "report/chain": 4.634, "report/missed": 3.955, "report/change": 2.889, "report/search": 6.244, "report/house": 2.862, "report/reward": 5.513, "report/guards": 6.679, "report/paid": 3.327, "report/last": 4.282, "report/free": 6.134, "report/uni": 4.721, "report/folder": 5.239, "report/worth": 7.942, "mine/portal": 7.921, "mine/reads": 4.468, "mine/marks": 2.709, "mine/presses": 3.512, "mine/held": 3.75, "mine/form": 6.541, "mine/typed": 6.422, "mine/people": 2.094, "mine/easy": 2.897, "mine/row": 4.602, "mine/next": 6.469, "owner/owners": 5.001, "owner/promise": 2.772, "owner/model": 6.254, "owner/do": 4.224, "owner/weekly": 3.424, "owner/alert": 5.53, "owner/again": 5.926, "source/passport": 6.073, "source/system": 5.668, "source/night": 5.389, "source/undone": 3.418, "source/copy": 4.638, "source/door": 3.706, "tell/told": 6.073, "tell/bother": 3.237, "tell/paid": 3.901, "tell/month": 3.116, "tell/right": 6.163, "tell/cost": 5.326, "tell/note": 4.056, "tell/october": 5.615, "tell/asks": 6.001, "tell/redman": 7.687, "check/born": 7.57, "check/becomes": 4.778, "check/adds": 7.126, "check/accent": 3.656, "check/holds": 5.053, "check/first": 2.148, "check/letter": 6.417, "check/seven": 3.683, "check/log": 3.202, "check/ring": 5.07, "close/after": 7.426, "close/gone": 2.838, "close/uni": 6.865, "close/cert": 3.344, "close/take": 3.178};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2632,7 +2632,7 @@ scene("report",(ctx,S,t,sc)=>{const c=sc.cues,T=rf_once(sc,"T",()=>({
     india:wAt(sc,"place","India"),person:wAt(sc,"disease","person to person"),killed:wAt(sc,"disease","killed"),
     cases:wAt(sc,"hard","more than"),hid:wAt(sc,"hid","It hid"),
     chain0:wAt(sc,"chain","passed"),aChain:wAt(sc,"chain","a chain"),vacc:wAt(sc,"missed","Vaccinating"),found:wAt(sc,"missed","found the ones"),
-    every:wAt(sc,"change","every chain"),stopped:wAt(sc,"change","stopped"),
+    every:wAt(sc,"change","Every chain"),stopped:wAt(sc,"change","stopped"),
     search:wAt(sc,"search","So India's"),contain:wAt(sc,"search","search, and contain"),house:wAt(sc,"house","More than"),
     reported:wAt(sc,"reward","Anyone who reported"),reward:wAt(sc,"reward","a reward"),answered:wAt(sc,"reward","every report"),atonce:wAt(sc,"reward","at once"),
     guards:wAt(sc,"guards","Guards"),night:wAt(sc,"guards","night"),around:wAt(sc,"guards","everyone around"),vaccinated:wAt(sc,"guards","vaccinated"),stop:wAt(sc,"guards","the chain stopped"),

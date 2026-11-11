@@ -27,8 +27,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Es un trabajo experto, que los remitentes no ven, y nunca arregla la carta siguiente.",
 "Nearly three million a year are destroyed: news someone never gets.":
 "Casi tres millones al año se destruyen: noticias que alguien nunca recibe.",
-"Something has to change where the address is written, not where it ends up.":
-"Algo tiene que cambiar donde se escribe la dirección, no donde termina la carta.",
+"The fix has to start where the address is written, not where it ends up.":
+"El arreglo tiene que empezar donde se escribe la dirección, no donde termina la carta.",
 "In 1943, with experienced clerks gone to the war, big cities get zones: a number the sender writes, so new clerks can sort by it.":
 "En 1943, con los expertos en la guerra, las ciudades grandes tienen zonas: un número que pone el remitente, y los nuevos clasifican por él.",
 "In 1963, the post brings in the ZIP Code: five digits on every letter, written by the sender.":

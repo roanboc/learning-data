@@ -1,0 +1,57 @@
+// Ideas that last, features you test: the closing film of Documents and closing remarks, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers in words). The few longer stops are in breath.js.
+const NARR={
+"seasons":{"name":"Two harvests a year","lead":1.6,"tail":1.0,"vo":[
+ {"id":"place","gap":0.8,"text":"Mexico, 1944. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more.","say":"Mexico, nineteen forty-four. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more."},
+ {"id":"rust","gap":0.8,"text":"Stem rust, a fungus that chokes the plant, could ruin a whole field of wheat at once."},
+ {"id":"field","gap":0.8,"text":"One field there that year was expected to give only ten bushels an acre: a poor harvest for a season's work."},
+ {"id":"lost","gap":0.8,"text":"For a farmer, a ruined field meant a year's work and seed lost, and Mexico bought wheat from abroad for its bread."},
+ {"id":"slow","gap":0.8,"text":"And breeding a wheat that resisted the rust was slow: one generation a year, and many years before it reached a farm."},
+ {"id":"change","gap":0.8,"text":"Farmers couldn't wait a decade for every new wheat."},
+ {"id":"team","gap":0.8,"text":"From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way.","say":"From nineteen forty-five, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way."},
+ {"id":"two","gap":0.8,"text":"They grew two generations a year: one in summer, in the highlands near Mexico City, and one in winter, in Sonora, far to the north."},
+ {"id":"each","gap":0.8,"text":"Each season, they crossed plants, tested them in the field, kept the few that did best, and sowed those in the other place."},
+ {"id":"dogma","gap":0.8,"text":"Many breeders said a wheat should be bred only where it would grow. The team tried it anyway, and measured."},
+ {"id":"half","gap":0.8,"text":"It cut the time to breed a new wheat in half, and the new wheats grew well in both places, and far beyond."},
+ {"id":"enough","gap":0.8,"text":"By 1956, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled.","say":"By nineteen fifty-six, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled."},
+ {"id":"kept","gap":0.8,"text":"And the testing never stopped: the rust kept changing, so the wheat had to change too."},
+ {"id":"same","gap":0.8,"text":"Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new."}]},
+"recap":{"name":"What the module showed","lead":1.0,"tail":1.0,"vo":[
+ {"id":"walk","gap":0.8,"text":"This module walked the university's platform, from where data is born to who reads it."},
+ {"id":"moves","gap":0.8,"text":"In Data that moves, moving data was easy, and agreeing what each field means was the work."},
+ {"id":"fresh","gap":0.8,"text":"How fresh data must be came from when someone acts on it, and most analysis was fine a day old."},
+ {"id":"once","gap":0.8,"text":"And each claim was written once, on one platform, for everyone to read."},
+ {"id":"software","gap":0.8,"text":"In Data as software, scripts became software: tested, reviewed by the data team, and released the same way every time."},
+ {"id":"watches","gap":0.8,"text":"And the platform watched itself, while a person decided what to change."},
+ {"id":"tables","gap":0.8,"text":"In From tables to decisions, answers came on demand, and each measure was defined in the open, as each part of the business means it."},
+ {"id":"readers","gap":0.8,"text":"And every reader, a person or an agent, read those definitions as itself."},
+ {"id":"docs","gap":0.8,"text":"And here, in Documents and closing remarks, each document was read, kept, or written as data."},
+ {"id":"older","gap":0.8,"text":"Each idea is older than the tools that showed it."}]},
+"light":{"name":"Why the films stay light","lead":1.0,"tail":1.0,"vo":[
+ {"id":"fast","gap":0.8,"text":"The tools change fast: new features every month, new names, new limits."},
+ {"id":"date","gap":0.8,"text":"A film that taught every button would be out of date within months."},
+ {"id":"slow","gap":0.8,"text":"So these films stay with what changes slowly: agree what data means, test it, govern it, and serve it when the business acts."},
+ {"id":"source","gap":0.8,"text":"For the how, go to the source: each tool's official documentation and training, kept up to date by the people who build it."},
+ {"id":"other","gap":0.8,"text":"Not on Databricks? The ideas still hold. Check what your own platform offers for each one: most have an answer, under another name."},
+ {"id":"need","gap":0.8,"text":"Don't choose a feature because it's new, or a platform because a film showed it. Choose what answers a real need."}]},
+"loop":{"name":"Test what's new","lead":1.0,"tail":1.0,"vo":[
+ {"id":"loop","gap":0.8,"text":"So how do you keep up? With a loop, small and quick: investigate, adapt, implement, iterate."},
+ {"id":"shorter","gap":0.8,"text":"It's the breeders' two seasons again: the shorter the loop, the more you learn in the same time."},
+ {"id":"need","gap":0.8,"text":"Investigate starts from a real need, not from the feature. Rohan's team typed every invoice by hand, and asked for a better way in a ticket."},
+ {"id":"read","gap":0.8,"text":"Jun read the official docs on the functions that read documents: what they do, what they cost, and where they stop."},
+ {"id":"adapt","gap":0.8,"text":"Adapt means trying it small, on your own data, in a sandbox, for a set time: two days, on 200 of September's invoices.","say":"Adapt means trying it small, on your own data, in a sandbox, for a set time: two days, on two hundred of September's invoices."},
+ {"id":"compare","gap":0.8,"text":"Jun compared what the functions read with what Finance had typed: 188 of the 200 matched, and most of the 12 that didn't were poor scans.","say":"Jun compared what the functions read with what Finance had typed: a hundred and eighty-eight of the two hundred matched, and most of the twelve that didn't were poor scans."},
+ {"id":"learned","gap":0.8,"text":"Two days told the team what months of guessing couldn't: where it works, and where it doesn't."},
+ {"id":"implement","gap":0.8,"text":"Implement means one use case, done properly: in the data project, with its tests, and a way back."},
+ {"id":"review","gap":0.8,"text":"The data team reviewed the change. Then Rohan's team checked October's results, and only then was the ticket closed."},
+ {"id":"iterate","gap":0.8,"text":"Iterate means watching what happens, and trying again: each month, the team looks at what went to a person, and why."},
+ {"id":"drop","gap":0.8,"text":"Not every trial ends in yes. They tried letting the model pick each invoice's cost centre."},
+ {"id":"list","gap":0.8,"text":"But Finance's supplier list already gave it, so they dropped it."},
+ {"id":"cost","gap":0.8,"text":"A trial that ends in no costs two days, not a year."}]},
+"close":{"name":"Keep the method","lead":1.0,"tail":1.0,"vo":[
+ {"id":"wheats","gap":0.8,"text":"The wheats of the 1950s are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today.","say":"The wheats of the nineteen fifties are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today."},
+ {"id":"keep","gap":0.8,"text":"So keep the ideas, and test the features: small, soon, and on a real need."},
+ {"id":"module","gap":0.8,"text":"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents."},
+ {"id":"team","gap":0.8,"text":"Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means."},
+ {"id":"end","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate, and keep going."}]}
+};

@@ -1,17 +1,18 @@
-# Documents as data
+# Documents and closing remarks
 
-*The last series of the module Modern data basics, in one film.*
+*The last series of the module Modern data basics, in two films. Called* Documents as data *until 11 November 2026; its folder and its address, `documents-as-data/`, stay as they were.*
 
-Documents as data and as context. Finance receives about 3,860 supplier invoices a month, most of them as PDF files, and HR keeps every contract its staff sign. One film, files as data and as context: invoices read into a tested table with the platform's functions, each file and its metadata kept beside it, and standard structures, such as JSON and YAML, where an application writes documents of its own. Business documents differ in every use case, so the film shows the idea once and points to the docs. *From tables to decisions* comes before it. The plan for the module is in [`../data-that-moves/proposal.md`](../data-that-moves/proposal.md); this series' own part is in its [proposal](proposal.md).
+Documents as data and as context. Finance receives about 3,860 supplier invoices a month, most of them as PDF files, and HR keeps every contract its staff sign. *Files as data and as context*: invoices read into a tested table with the platform's functions, each file and its metadata kept beside it, and standard structures, such as JSON and YAML, where an application writes documents of its own. Business documents differ in every use case, so the film shows the idea once and points to the docs. *Ideas that last, features you test* closes the module: what its four series showed, why its films stay with the ideas that change slowly and leave the how to each tool's official documentation and training, a word for those on another platform, and a short loop to test what's new (investigate, adapt, implement, iterate), opening on the wheat breeders of Mexico who grew two generations a year. *From tables to decisions* comes before it. The plan for the module is in [`../data-that-moves/proposal.md`](../data-that-moves/proposal.md); this series' own part is in its [proposal](proposal.md).
 
-**Status:** agreed on 5 November 2026; the film is made after the module's other films, and appears in the table below once it's out. On the site, the series will sit under the topic *Modern data basics*, at `documents-as-data/`, once its film is out.
+**Status:** agreed on 5 November 2026, and split into two films on 11 November 2026, as the author asked. On the site, the series sits under the topic *Modern data basics*, at `documents-as-data/`, with the module's Draft label.
 
 ## The films
 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
-| [Files as data and as context](https://data.learn-all.org/documents-as-data/files-as-data-and-context/) | Invoices, contracts and claims | 7½ min | 5 | 3 questions | [script](1-files-as-data-and-context/script.md) · [source](1-files-as-data-and-context/source/README.md) |
+| [Files as data and as context](https://data.learn-all.org/documents-as-data/files-as-data-and-context/) | Invoices, contracts and claims | 7 min | 5 | 3 questions | [script](1-files-as-data-and-context/script.md) · [source](1-files-as-data-and-context/source/README.md) |
+| [Ideas that last, features you test](https://data.learn-all.org/documents-as-data/ideas-that-last/) | Module recap, and keeping up | 7 min | 5 | 3 questions | [script](2-ideas-that-last/script.md) · [source](2-ideas-that-last/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

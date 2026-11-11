@@ -119,7 +119,7 @@ scene("logs",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
       md_table(cx,1280,700,460,{name:"claims",kind:"written as data",col:MD.agreed,a:ag_in(tt,T.write,0.5),k:fd_k(tt,T.write)});
       md_tag(cx,1000,840,"From the start",{col:MD.agreed,a:ag_in(tt,T.start-0.2,0.5)});}}
   ],0.9);
-  md_title(ctx,S,t,c.breath,"Files as data and as context","Read them, keep them, or write them as data","Documents as data · Modern data basics");});
+  md_title(ctx,S,t,c.breath,"Files as data and as context","Read them, keep them, or write them as data","Documents and closing remarks · Modern data basics");});
 
 /* ---------------------------------------------------------------- 2 · Invoices, read into data */
 const FD_PATH="/Volumes/finance/supplier_invoices/incoming/LC-20931.pdf";
@@ -356,7 +356,6 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
 const FD_THREEWAYS=[["If we write it","Write it as data","In a standard structure, such as JSON or YAML, with its metadata","table",MD.agreed],
   ["If it's official","Keep it as it is","Its metadata beside it","contract",null],
   ["If it's written for people","Read it, where a use case needs it","With the platform's functions or a scraper, and keep the file","doc",MD.flow]];
-const FD_SERIES=[["Data that moves","Moving data"],["Data as software","Running the platform"],["From tables to decisions","Serving it to people and agents"],["Documents as data","Reading documents"]];
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
     kept:wAt(sc,"kept","were kept"),century:wAt(sc,"kept","More than a century later"),sci:wAt(sc,"kept","climate scientists"),again:wAt(sc,"kept","read them again"),million:wAt(sc,"kept","a million weather reports"),
     keep:wAt(sc,"again","Keep the file"),better:wAt(sc,"again","better readers"),
@@ -364,9 +363,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
     ifw:wAt(sc,"write","If we write it"),ifo:wAt(sc,"official","If it's official"),ifr:wAt(sc,"read","If it's written for people"),
     differ:wAt(sc,"docs","documents differ"),standards:wAt(sc,"docs","the standards"),wheel:wAt(sc,"docs","reinvent the wheel"),
     offDocs:wAt(sc,"iterate","the official docs"),inv:wAt(sc,"iterate","Investigate"),adapt:wAt(sc,"iterate","adapt"),impl:wAt(sc,"iterate","implement"),iter:wAt(sc,"iterate","iterate"),
-    moving:wAt(sc,"module","moving data"),running:wAt(sc,"module","running the platform"),serving:wAt(sc,"module","serving it"),reading:wAt(sc,"module","reading documents"),
-    whole:wAt(sc,"team","a whole team"),dbx:wAt(sc,"team","Databricks and dbt"),left:wAt(sc,"team","what's left for people"),agree:wAt(sc,"team","agreeing what the data means"),
-    readThem:wAt(sc,"data","read them"),keepIt:wAt(sc,"data","keep the file"),writeYours:wAt(sc,"data","write what's yours")}));
+    readThem:wAt(sc,"data","read documents"),keepIt:wAt(sc,"data","keep the file"),writeYours:wAt(sc,"data","write what's yours")}));
   const map0=T.noor-1.4;
   ag_shots(ctx,S,t,sc.dur,[
     // the logs were kept, and read again over a century later, into over a million weather reports
@@ -392,29 +389,21 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
         fd_sheet(cx,1000,340,300,2,{a:dA*ag_in(tt,T.differ-0.1,0.5),rot:0.07});
         let x=800;[["PDF","doc"],["JSON","table"],["YAML","contract"],["Open Data Contract Standard","contract"]].forEach(([s,ic],i)=>{const r=i<3?660:740;if(i===3)x=800;
           const b=md_tag(cx,x,r,s,{col:MD.agreed,icon:ic,a:dA*ag_in(tt,T.standards-0.2+i*0.15,0.4)});x+=b.w+20;});}
-      const wh=ag_in(tt,T.wheel-0.6,0.5)*(1-ag_in(tt,c.module-0.7,0.5)),cy_=lerp(450,470,ag_sine((tt-c.iterate+0.6)/1.0));
+      const wh=ag_in(tt,T.wheel-0.6,0.5)*(1-ag_in(tt,c.iterate-0.7,0.5)),cy_=lerp(450,470,ag_sine((tt-c.iterate+0.6)/1.0));
       if(wh>0){md_mark(cx,1560,cy_,100,(tt-T.wheel+0.6)/1.4,wh);md_T(cx,"Don't reinvent the wheel",1560,cy_+160,{w:700,size:30,align:"center",a:wh*(1-ag_in(tt,c.iterate-0.6,0.5))});}
       // start from the official docs: investigate, adapt, implement, iterate
-      const iA=ag_in(tt,c.iterate-0.4,0.5)*(1-ag_in(tt,c.module-0.7,0.5));
+      const iA=ag_in(tt,c.iterate-0.4,0.5)*(1-ag_in(tt,c.data-0.7,0.5));
       if(iA>0){md_textCard(cx,760,400,460,{kick:"Start from",title:"The official docs"},{icon:"doc",edge:MD.flow,a:iA*ag_in(tt,T.offDocs-0.3,0.5),k:fd_k(tt,T.offDocs-0.3)});
         const R=190,ring=[];for(let i=0;i<=64;i++){const an=-Math.PI/2+i/64*TAU;ring.push([1560+Math.cos(an)*R,470+Math.sin(an)*R]);}
         const ru=ag_sine((tt-T.inv+0.2)/2.4);md_lane(cx,ring,MD.flow,0.8*iA,{u:ru,t:tt});if(ru>=1)md_flow(cx,ring,tt,{kind:"events",col:MD.flow,a:iA,every:0.9});
         fd_link(cx,[1220,470],[1296,470],ag_sine((tt-T.offDocs)/0.7),tt,{pts:[[1220,470],[1296,470]],col:MD.flow,a:0.85*iA,flow:false});
         [["Investigate",1560,280,T.inv],["Adapt",1750,470,T.adapt],["Implement",1560,660,T.impl],["Iterate",1370,470,T.iter]].forEach(([s,x,y,at_])=>
           md_tag(cx,x,y,s,{align:"center",col:MD.flow,a:iA*ag_in(tt,at_-0.2,0.4)}));}
-      // the module: four series, each once a whole team's work; the tools do much of it, and people agree what the data means
-      const mA=ag_in(tt,c.module-0.4,0.5)*(1-ag_in(tt,c.data-0.7,0.5));
-      fd_case(cx,"Modern data basics",mA*ag_in(tt,c.module-0.2,0.5),MD.ink);
-      FD_SERIES.forEach(([ti,sub],i)=>{const x=660+(i%2)*600,y=220+Math.floor(i/2)*200,at_=[T.moving,T.running,T.serving,T.reading][i],q=mA*ag_in(tt,at_-0.3,0.5);
-        md_textCard(cx,x,y,560,{title:ti,sub},{edge:i===3?MD.agreed:MD.flow,a:q,k:fd_k(tt,at_-0.3)});
-        const many=1-ag_in(tt,T.dbx,0.6);for(let j=0;j<5;j++){const pa=q*ag_in(tt,T.whole-0.3+j*0.08,0.4)*(j===2?1:many);if(pa>0)md_icon(cx,"person",x+280+(j-2)*56,y+176,36,j===2?mix(MD.ink,MD.agreed,ag_in(tt,T.agree-0.3,0.6)):MD.soft,{a:pa});}});
-      md_reader(cx,660,650,560,{title:"Databricks",logo:"databricks",a:mA*ag_in(tt,T.dbx-0.3,0.5)});md_reader(cx,1260,650,560,{title:"dbt",logo:"dbt",a:mA*ag_in(tt,T.dbx+0.1,0.5)});
-      md_pill(cx,1240,800,"Agreeing what the data means",{col:MD.agreed,icon:"person",a:mA*ag_in(tt,T.agree-0.3,0.5),k:fd_k(tt,T.agree-0.3)});
-      // and for documents: read them, keep the file, write what's yours
-      const eA=ag_in(tt,c.data-0.4,0.5)*(1-ag_in(tt,c.breath-0.2,0.8));fd_case(cx,"For documents",ag_in(tt,c.data-0.1,0.5),MD.ink);
-      [["Read them","Where a use case needs it","doc",MD.flow,T.readThem],["Keep the file","And its metadata","contract",null,T.keepIt],["Write what's yours","As data","table",MD.agreed,T.writeYours]].forEach(([ti,sub,ic,ed,at_],i)=>
+      // in short: read documents, keep the file, write what's yours
+      const eA=ag_in(tt,c.data-0.4,0.5)*(1-ag_in(tt,c.breath-0.2,0.8));fd_case(cx,"In short",ag_in(tt,c.data-0.1,0.5),MD.ink);
+      [["Read documents","Where a use case needs it","doc",MD.flow,T.readThem],["Keep the file","And its metadata","contract",null,T.keepIt],["Write what's yours","As data","table",MD.agreed,T.writeYours]].forEach(([ti,sub,ic,ed,at_],i)=>
         md_textCard(cx,760,260+i*180,1060,{title:ti,sub},{icon:ic,edge:ed,a:eA*ag_in(tt,at_-0.3,0.5),k:fd_k(tt,at_-0.3)}));}}
   ],0.9);
-  md_end(ctx,S,t,c.breath,"Files as data and as context","Read it, keep it, or write it as data","Documents as data","Modern data basics");});
+  md_end(ctx,S,t,c.breath,"Files as data and as context","Read it, keep it, or write it as data","Film 1 of 2 · Documents and closing remarks","Modern data basics");});
 
 ag_cutInto(["invoices","contracts","written"]);

@@ -18,8 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que los capitanes seguían las rutas que conocían, no los vientos y corrientes que de verdad había.",
 "Passages took weeks longer than they had to: more weeks at sea for the crews, with food and water running low, and cargo and letters late.":
 "Las travesías duraban semanas de más: más semanas en el mar para las tripulaciones, con poca comida y agua, y la carga y las cartas tarde.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The answers were already in the logs. Someone had to read them.":
+"Las respuestas ya estaban en las bitácoras. Alguien tenía que leerlas.",
 "So the office read its old logs into tables: the winds and currents of each patch of ocean, month by month.":
 "Así que la oficina pasó sus viejas bitácoras a tablas: los vientos y corrientes de cada parcela de océano, mes a mes.",
 "From them, it drew wind and current charts, free to any captain who would keep a log in one set form, and send it back.":
@@ -108,10 +108,6 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los documentos de cada organización son distintos, y los estándares ya existen: no reinventes la rueda.",
 "Start from the official docs. Investigate, adapt, implement, iterate.":
 "Empieza por la documentación oficial. Investiga, adapta, implementa, itera.",
-"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents.":
-"Así cierra este módulo: mover datos, operar la plataforma, servirlos a personas y agentes, y leer documentos.",
-"Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means.":
-"Cada cosa requería antes un equipo entero. Databricks y dbt ahora hacen mucho; a las personas les queda acordar qué significan los datos.",
-"And for documents: read them where a use case needs it, keep the file and its metadata, and write what's yours as data.":
-"Y con los documentos: léelos donde un caso de uso lo pida, guarda el archivo y sus metadatos, y escribe lo tuyo como datos."
+"In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data.":
+"En resumen: lee los documentos donde un caso de uso lo pida, guarda el archivo y sus metadatos, y escribe lo tuyo como datos."
 });

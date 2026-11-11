@@ -426,7 +426,7 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// Files as data and as context, the single film of Documents as data, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
+// Files as data and as context, film 1 of 2 in Documents and closing remarks, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers and function names in words). The few longer stops are in breath.js.
 const NARR={
 "logs":{"name":"Logbooks into charts","lead":1.6,"tail":1.0,"vo":[
@@ -435,7 +435,7 @@ const NARR={
  {"id":"unread","gap":0.8,"text":"Thousands of days at sea were written there, each ship in its own way, and nobody read them again."},
  {"id":"habit","gap":0.8,"text":"So captains sailed the routes they knew, not the winds and currents that were really there."},
  {"id":"weeks","gap":0.8,"text":"Passages took weeks longer than they had to: more weeks at sea for the crews, with food and water running low, and cargo and letters late."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The answers were already in the logs. Someone had to read them."},
  {"id":"read","gap":0.8,"text":"So the office read its old logs into tables: the winds and currents of each patch of ocean, month by month."},
  {"id":"charts","gap":0.8,"text":"From them, it drew wind and current charts, free to any captain who would keep a log in one set form, and send it back."},
  {"id":"brussels","gap":0.8,"text":"In 1853, at Brussels, ten nations, with the statistician Adolphe Quetelet in the chair, agreed one log for ships of every flag.","say":"In eighteen fifty-three, at Brussels, ten nations, with the statistician Adolphe Quetelet in the chair, agreed one log for ships of every flag."},
@@ -484,12 +484,10 @@ const NARR={
  {"id":"read","gap":0.8,"text":"If it's written for people, we read it, with the platform's functions or a scraper, only where a use case needs it, and keep the file."},
  {"id":"docs","gap":0.8,"text":"Every organisation's documents differ, and the standards are there already: don't reinvent the wheel."},
  {"id":"iterate","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate."},
- {"id":"module","gap":0.8,"text":"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents."},
- {"id":"team","gap":0.8,"text":"Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means."},
- {"id":"data","gap":0.8,"text":"And for documents: read them where a use case needs it, keep the file and its metadata, and write what's yours as data."}]}
+ {"id":"data","gap":0.8,"text":"In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data."}]}
 };
 
-const VODUR={"logs/place": 7.821, "logs/logbook": 6.164, "logs/unread": 5.276, "logs/habit": 4.557, "logs/weeks": 8.237, "logs/change": 1.288, "logs/read": 6.892, "logs/charts": 7.168, "logs/brussels": 9.203, "logs/saved": 10.917, "logs/shared": 3.862, "logs/same": 4.459, "logs/answer": 6.386, "invoices/three": 7.344, "invoices/october": 10.005, "invoices/check": 7.509, "invoices/typed": 5.992, "invoices/volume": 6.29, "invoices/parse": 6.66, "invoices/extract": 5.465, "invoices/path": 4.757, "invoices/model": 6.87, "invoices/checks": 6.159, "invoices/rules": 6.134, "invoices/passed": 7.351, "invoices/person": 5.481, "invoices/decides": 5.867, "contracts/official": 4.954, "contracts/beside": 9.144, "contracts/writes": 6.037, "contracts/linh": 10.868, "contracts/week": 5.95, "contracts/alike": 3.428, "contracts/ends": 8.485, "contracts/context": 7.475, "contracts/who": 7.934, "written/best": 3.046, "written/before": 5.764, "written/json": 5.73, "written/meta": 5.116, "written/yaml": 6.596, "written/log": 6.519, "close/kept": 7.598, "close/again": 3.958, "close/rule": 4.737, "close/write": 6.139, "close/official": 3.506, "close/read": 7.55, "close/docs": 5.914, "close/iterate": 4.546, "close/module": 6.979, "close/team": 7.796, "close/data": 7.406};
+const VODUR={"logs/place": 7.821, "logs/logbook": 6.164, "logs/unread": 5.276, "logs/habit": 4.557, "logs/weeks": 8.237, "logs/change": 3.486, "logs/read": 6.892, "logs/charts": 7.168, "logs/brussels": 9.203, "logs/saved": 10.917, "logs/shared": 3.862, "logs/same": 4.459, "logs/answer": 6.386, "invoices/three": 7.344, "invoices/october": 10.005, "invoices/check": 7.509, "invoices/typed": 5.992, "invoices/volume": 6.29, "invoices/parse": 6.66, "invoices/extract": 5.465, "invoices/path": 4.757, "invoices/model": 6.87, "invoices/checks": 6.159, "invoices/rules": 6.134, "invoices/passed": 7.351, "invoices/person": 5.481, "invoices/decides": 5.867, "contracts/official": 4.954, "contracts/beside": 9.144, "contracts/writes": 6.037, "contracts/linh": 10.868, "contracts/week": 5.95, "contracts/alike": 3.428, "contracts/ends": 8.485, "contracts/context": 7.475, "contracts/who": 7.934, "written/best": 3.046, "written/before": 5.764, "written/json": 5.73, "written/meta": 5.116, "written/yaml": 6.596, "written/log": 6.519, "close/kept": 7.598, "close/again": 3.958, "close/rule": 4.737, "close/write": 6.139, "close/official": 3.506, "close/read": 7.55, "close/docs": 5.914, "close/iterate": 4.546, "close/data": 7.254};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -499,7 +497,7 @@ const BREATH={
 "invoices":{"hold":{"three":1.2,"october":0.6,"check":0.4,"typed":0.8,"volume":0.8,"parse":1.0,"extract":1.0,"path":0.8,"model":0.6,"checks":0.6,"rules":1.0,"passed":0.4,"person":0.8,"decides":0.6}},
 "contracts":{"hold":{"official":0.6,"beside":1.2,"writes":0.8,"linh":1.0,"week":1.0,"alike":1.2,"ends":1.2,"context":0.8,"who":0.6}},
 "written":{"hold":{"best":0.6,"before":0.8,"json":1.2,"meta":1.0,"yaml":1.2,"log":0.8}},
-"close":{"hold":{"kept":0.8,"again":0.8,"rule":0.4,"write":0.4,"official":0.4,"read":0.8,"docs":0.4,"iterate":1.0,"module":0.6,"team":0.8,"data":0.4},"breathe":4.6}
+"close":{"hold":{"kept":0.8,"again":0.8,"rule":0.4,"write":0.4,"official":0.4,"read":0.8,"docs":0.4,"iterate":1.0,"data":0.4},"breathe":4.6}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -2297,7 +2295,7 @@ scene("logs",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
       md_table(cx,1280,700,460,{name:"claims",kind:"written as data",col:MD.agreed,a:ag_in(tt,T.write,0.5),k:fd_k(tt,T.write)});
       md_tag(cx,1000,840,"From the start",{col:MD.agreed,a:ag_in(tt,T.start-0.2,0.5)});}}
   ],0.9);
-  md_title(ctx,S,t,c.breath,"Files as data and as context","Read them, keep them, or write them as data","Documents as data · Modern data basics");});
+  md_title(ctx,S,t,c.breath,"Files as data and as context","Read them, keep them, or write them as data","Documents and closing remarks · Modern data basics");});
 
 /* ---------------------------------------------------------------- 2 · Invoices, read into data */
 const FD_PATH="/Volumes/finance/supplier_invoices/incoming/LC-20931.pdf";
@@ -2534,7 +2532,6 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
 const FD_THREEWAYS=[["If we write it","Write it as data","In a standard structure, such as JSON or YAML, with its metadata","table",MD.agreed],
   ["If it's official","Keep it as it is","Its metadata beside it","contract",null],
   ["If it's written for people","Read it, where a use case needs it","With the platform's functions or a scraper, and keep the file","doc",MD.flow]];
-const FD_SERIES=[["Data that moves","Moving data"],["Data as software","Running the platform"],["From tables to decisions","Serving it to people and agents"],["Documents as data","Reading documents"]];
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
     kept:wAt(sc,"kept","were kept"),century:wAt(sc,"kept","More than a century later"),sci:wAt(sc,"kept","climate scientists"),again:wAt(sc,"kept","read them again"),million:wAt(sc,"kept","a million weather reports"),
     keep:wAt(sc,"again","Keep the file"),better:wAt(sc,"again","better readers"),
@@ -2542,9 +2539,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
     ifw:wAt(sc,"write","If we write it"),ifo:wAt(sc,"official","If it's official"),ifr:wAt(sc,"read","If it's written for people"),
     differ:wAt(sc,"docs","documents differ"),standards:wAt(sc,"docs","the standards"),wheel:wAt(sc,"docs","reinvent the wheel"),
     offDocs:wAt(sc,"iterate","the official docs"),inv:wAt(sc,"iterate","Investigate"),adapt:wAt(sc,"iterate","adapt"),impl:wAt(sc,"iterate","implement"),iter:wAt(sc,"iterate","iterate"),
-    moving:wAt(sc,"module","moving data"),running:wAt(sc,"module","running the platform"),serving:wAt(sc,"module","serving it"),reading:wAt(sc,"module","reading documents"),
-    whole:wAt(sc,"team","a whole team"),dbx:wAt(sc,"team","Databricks and dbt"),left:wAt(sc,"team","what's left for people"),agree:wAt(sc,"team","agreeing what the data means"),
-    readThem:wAt(sc,"data","read them"),keepIt:wAt(sc,"data","keep the file"),writeYours:wAt(sc,"data","write what's yours")}));
+    readThem:wAt(sc,"data","read documents"),keepIt:wAt(sc,"data","keep the file"),writeYours:wAt(sc,"data","write what's yours")}));
   const map0=T.noor-1.4;
   ag_shots(ctx,S,t,sc.dur,[
     // the logs were kept, and read again over a century later, into over a million weather reports
@@ -2570,30 +2565,22 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
         fd_sheet(cx,1000,340,300,2,{a:dA*ag_in(tt,T.differ-0.1,0.5),rot:0.07});
         let x=800;[["PDF","doc"],["JSON","table"],["YAML","contract"],["Open Data Contract Standard","contract"]].forEach(([s,ic],i)=>{const r=i<3?660:740;if(i===3)x=800;
           const b=md_tag(cx,x,r,s,{col:MD.agreed,icon:ic,a:dA*ag_in(tt,T.standards-0.2+i*0.15,0.4)});x+=b.w+20;});}
-      const wh=ag_in(tt,T.wheel-0.6,0.5)*(1-ag_in(tt,c.module-0.7,0.5)),cy_=lerp(450,470,ag_sine((tt-c.iterate+0.6)/1.0));
+      const wh=ag_in(tt,T.wheel-0.6,0.5)*(1-ag_in(tt,c.iterate-0.7,0.5)),cy_=lerp(450,470,ag_sine((tt-c.iterate+0.6)/1.0));
       if(wh>0){md_mark(cx,1560,cy_,100,(tt-T.wheel+0.6)/1.4,wh);md_T(cx,"Don't reinvent the wheel",1560,cy_+160,{w:700,size:30,align:"center",a:wh*(1-ag_in(tt,c.iterate-0.6,0.5))});}
       // start from the official docs: investigate, adapt, implement, iterate
-      const iA=ag_in(tt,c.iterate-0.4,0.5)*(1-ag_in(tt,c.module-0.7,0.5));
+      const iA=ag_in(tt,c.iterate-0.4,0.5)*(1-ag_in(tt,c.data-0.7,0.5));
       if(iA>0){md_textCard(cx,760,400,460,{kick:"Start from",title:"The official docs"},{icon:"doc",edge:MD.flow,a:iA*ag_in(tt,T.offDocs-0.3,0.5),k:fd_k(tt,T.offDocs-0.3)});
         const R=190,ring=[];for(let i=0;i<=64;i++){const an=-Math.PI/2+i/64*TAU;ring.push([1560+Math.cos(an)*R,470+Math.sin(an)*R]);}
         const ru=ag_sine((tt-T.inv+0.2)/2.4);md_lane(cx,ring,MD.flow,0.8*iA,{u:ru,t:tt});if(ru>=1)md_flow(cx,ring,tt,{kind:"events",col:MD.flow,a:iA,every:0.9});
         fd_link(cx,[1220,470],[1296,470],ag_sine((tt-T.offDocs)/0.7),tt,{pts:[[1220,470],[1296,470]],col:MD.flow,a:0.85*iA,flow:false});
         [["Investigate",1560,280,T.inv],["Adapt",1750,470,T.adapt],["Implement",1560,660,T.impl],["Iterate",1370,470,T.iter]].forEach(([s,x,y,at_])=>
           md_tag(cx,x,y,s,{align:"center",col:MD.flow,a:iA*ag_in(tt,at_-0.2,0.4)}));}
-      // the module: four series, each once a whole team's work; the tools do much of it, and people agree what the data means
-      const mA=ag_in(tt,c.module-0.4,0.5)*(1-ag_in(tt,c.data-0.7,0.5));
-      fd_case(cx,"Modern data basics",mA*ag_in(tt,c.module-0.2,0.5),MD.ink);
-      FD_SERIES.forEach(([ti,sub],i)=>{const x=660+(i%2)*600,y=220+Math.floor(i/2)*200,at_=[T.moving,T.running,T.serving,T.reading][i],q=mA*ag_in(tt,at_-0.3,0.5);
-        md_textCard(cx,x,y,560,{title:ti,sub},{edge:i===3?MD.agreed:MD.flow,a:q,k:fd_k(tt,at_-0.3)});
-        const many=1-ag_in(tt,T.dbx,0.6);for(let j=0;j<5;j++){const pa=q*ag_in(tt,T.whole-0.3+j*0.08,0.4)*(j===2?1:many);if(pa>0)md_icon(cx,"person",x+280+(j-2)*56,y+176,36,j===2?mix(MD.ink,MD.agreed,ag_in(tt,T.agree-0.3,0.6)):MD.soft,{a:pa});}});
-      md_reader(cx,660,650,560,{title:"Databricks",logo:"databricks",a:mA*ag_in(tt,T.dbx-0.3,0.5)});md_reader(cx,1260,650,560,{title:"dbt",logo:"dbt",a:mA*ag_in(tt,T.dbx+0.1,0.5)});
-      md_pill(cx,1240,800,"Agreeing what the data means",{col:MD.agreed,icon:"person",a:mA*ag_in(tt,T.agree-0.3,0.5),k:fd_k(tt,T.agree-0.3)});
-      // and for documents: read them, keep the file, write what's yours
-      const eA=ag_in(tt,c.data-0.4,0.5)*(1-ag_in(tt,c.breath-0.2,0.8));fd_case(cx,"For documents",ag_in(tt,c.data-0.1,0.5),MD.ink);
-      [["Read them","Where a use case needs it","doc",MD.flow,T.readThem],["Keep the file","And its metadata","contract",null,T.keepIt],["Write what's yours","As data","table",MD.agreed,T.writeYours]].forEach(([ti,sub,ic,ed,at_],i)=>
+      // in short: read documents, keep the file, write what's yours
+      const eA=ag_in(tt,c.data-0.4,0.5)*(1-ag_in(tt,c.breath-0.2,0.8));fd_case(cx,"In short",ag_in(tt,c.data-0.1,0.5),MD.ink);
+      [["Read documents","Where a use case needs it","doc",MD.flow,T.readThem],["Keep the file","And its metadata","contract",null,T.keepIt],["Write what's yours","As data","table",MD.agreed,T.writeYours]].forEach(([ti,sub,ic,ed,at_],i)=>
         md_textCard(cx,760,260+i*180,1060,{title:ti,sub},{icon:ic,edge:ed,a:eA*ag_in(tt,at_-0.3,0.5),k:fd_k(tt,at_-0.3)}));}}
   ],0.9);
-  md_end(ctx,S,t,c.breath,"Files as data and as context","Read it, keep it, or write it as data","Documents as data","Modern data basics");});
+  md_end(ctx,S,t,c.breath,"Files as data and as context","Read it, keep it, or write it as data","Film 1 of 2 · Documents and closing remarks","Modern data basics");});
 
 ag_cutInto(["invoices","contracts","written"]);
 

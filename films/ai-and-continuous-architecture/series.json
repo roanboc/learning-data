@@ -1,0 +1,65 @@
+{
+  "title": "AI and continuous architecture",
+  "title_es": "IA y arquitectura continua",
+  "planned": 6,
+  "lead": "The last series on enterprise architecture. Agents and AI services are drawn on the map, AI helps the architects draft and check it, and the architecture is kept alive as a capability with an owner, a rhythm and checks on every change.",
+  "lead_es": "La última serie sobre arquitectura empresarial. Los agentes y los servicios de IA se dibujan en el mapa, la IA ayuda a los arquitectos a redactarlo y revisarlo, y la arquitectura se mantiene viva como una capacidad con un responsable, un ritmo y controles en cada cambio.",
+  "description": "Short films on AI and continuous architecture: agents on the map, in roles of their own; the AI platform; what an agent may read; a first draft from industry reference models, not a blank page; every change checked against the model; and architecture kept alive as a continuous capability.",
+  "description_es": "Películas cortas sobre IA y arquitectura continua: los agentes en el mapa, en roles propios; la plataforma de IA; qué puede leer un agente; un primer borrador desde modelos de referencia de la industria, no una página en blanco; cada cambio revisado contra el modelo; y la arquitectura mantenida viva como una capacidad continua.",
+  "card": "Agents and AI on the map, a first draft instead of a blank page, every change checked, and the map kept alive.",
+  "card_es": "Agentes e IA en el mapa, un primer borrador en vez de una página en blanco, cada cambio revisado y el mapa mantenido vivo.",
+  "order": "Watch them in order, after The map before the data and Platform and solution architecture: each film builds on the one before.",
+  "order_es": "Míralas en orden, después de El mapa antes de los datos y Arquitectura de plataforma y de soluciones: cada película se apoya en la anterior.",
+  "thread_h": "One thread: a map that stays alive",
+  "thread_h_es": "Un hilo: un mapa que sigue vivo",
+  "thread": "Agents now work in the utility's processes, and the map has to show them. Film by film, Tomás draws agents in roles of their own, puts the AI platform on the map, decides what an agent may read, drafts from reference models instead of a blank page, checks every change, and keeps the architecture alive.",
+  "thread_es": "Ahora hay agentes trabajando en los procesos de la empresa, y el mapa tiene que mostrarlos. Película a película, Tomás dibuja agentes en roles propios, pone la plataforma de IA en el mapa, decide qué puede leer un agente, redacta desde modelos de referencia en vez de una página en blanco, revisa cada cambio y mantiene viva la arquitectura.",
+  "past_h": "One story, film by film: the ziggurat of Babylon",
+  "past_h_es": "Una historia, película a película: el zigurat de Babilonia",
+  "people_h": "Who keeps the map",
+  "people_h_es": "Quién mantiene el mapa",
+  "people": [
+    [
+      "tech",
+      "Draws the map",
+      "Tomás Herrera, the enterprise architect, the series' guide"
+    ],
+    [
+      "tech",
+      "Leads the platform",
+      "Ravi Menon, the platform lead"
+    ],
+    [
+      "biz",
+      "Runs the network",
+      "Grace Achieng, who owns network operations"
+    ],
+    [
+      "biz",
+      "Knows the rules",
+      "Ama Owusu, the regulatory lead"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Tomás Herrera, el arquitecto empresarial, el guía de la serie"
+    ],
+    [
+      "tech",
+      "Lidera la plataforma",
+      "Ravi Menon, el líder de la plataforma"
+    ],
+    [
+      "biz",
+      "Hace funcionar la red",
+      "Grace Achieng, dueña de las operaciones de la red"
+    ],
+    [
+      "biz",
+      "Conoce las reglas",
+      "Ama Owusu, la responsable regulatoria"
+    ]
+  ]
+}

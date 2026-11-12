@@ -102,4 +102,4 @@ Rodrigo answered the questions put to him from this report on 12 November 2026. 
 
 ## Found on 12 November: Deming's name in the voice
 
-Not one of Rodrigo's answers: the thread that applied them found that the voice said W. Edwards Deming's name as "deeming" in *Small, every week*. It now says DEM-ing, with the short e (PR #NNN). It is an assumption for him to confirm, in [the film's rows 52 to 54](3-quality-as-a-habit/4-small-every-week.md).
+Not one of Rodrigo's answers: the thread that applied them found that the voice said W. Edwards Deming's name as "deeming" in *Small, every week*. It now says DEM-ing, with the short e (PR #357). It is an assumption for him to confirm, in [the film's rows 52 to 54](3-quality-as-a-habit/4-small-every-week.md).

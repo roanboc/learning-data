@@ -1,6 +1,6 @@
 # Small, every week: questions and assumptions
 
-*Data quality* · *Quality as a habit*, film 4 · merged, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218); changed on 12 November 2026 from Rodrigo's answer on the loop's name, plan, do, study, act (PR #336), and that day again so the voice says Deming's name with its short e (PR #NNN)
+*Data quality* · *Quality as a habit*, film 4 · merged, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218); changed on 12 November 2026 from Rodrigo's answer on the loop's name, plan, do, study, act (PR #336), and that day again so the voice says Deming's name with its short e (PR #357)
 
 [Watch it on the site](https://data.learn-all.org/quality-as-a-habit/small-every-week/)
 
@@ -93,7 +93,7 @@ Questions this change raised, and the assumption made for each:
 
 ## 12 November 2026: Deming's name, said with its short e
 
-Rodrigo didn't ask for this change. This film's thread found it on 12 November 2026, while the leading data people film *One small change at a time* was changed (PR #351): the voice said W. Edwards Deming's name as "deeming". Here the two lines' `say` spelled it "Deeming" on purpose, since PR #218. It now says DEM-ing (PR #NNN). The questions it raised, and the assumption made for each:
+Rodrigo didn't ask for this change. This film's thread found it on 12 November 2026, while the leading data people film *One small change at a time* was changed (PR #351): the voice said W. Edwards Deming's name as "deeming". Here the two lines' `say` spelled it "Deeming" on purpose, since PR #218. It now says DEM-ing (PR #357). The questions it raised, and the assumption made for each:
 
 | # | Question | Assumption made | Where it shows | If it's wrong |
 |---|---|---|---|---|

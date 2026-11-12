@@ -25,6 +25,7 @@
      wm_yaml(ctx, x, y, w, o)   the mandate file's first lines, in mono
      wm_checks(ctx, x, y, w, o) the project's check, scripts/check/mandates.py: each place against the page
      wm_law(ctx, x, y, w, o)    Europe's AI law on human oversight: four things a person must be able to do
+     wm_lag(ctx, x, y, w, o)    the law and the technology, two arrows from one start: the law's is overtaken, and the gap is care of one's own
      wm_nights(ctx, x, y, o)    the nights in test before the mandate, one mark each
      wm_tile(ctx, x, y, w, o)   a tool where lines are held, as a small tile: its mark, its name, what it holds
      wm_moved(ctx, x, y, o)     one tutor who moved: HR's two versions of their contract, before and today */
@@ -312,16 +313,39 @@ function wm_checks(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=84,top=y+124,
   ctx.restore();return bb;}
 
 /* Europe's AI law, the EU AI Act, on human oversight of what it counts as high-risk (Article 14): people able to understand it, watch
-   it, reverse what it does and stop it; o.show(i) 0..1 each, o.a, o.k */
-const WM_LAW=[["understand it","what it can do, and its limits"],["watch it","while it works"],["reverse it","undo what it did"],["stop it","at any time"]];
-function wm_law(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=212+2*120,bb={x,y,w,h};if(a<=0)return bb;
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.8,1,o.k));ag_box(ctx,x,y,w,h,22,{});
+   it, reverse what it does and stop it; o.show(i) 0..1 each, o.a, o.k; o.put 0..1 puts the four away, and o.fold 0..1 folds the card
+   to its name, its top edge and its words where they were */
+const WM_LAW=[["understand it","what it can do, and its limits"],["watch it","while it works"],["reverse it","undo what it did"],["stop it","at any time"]];const WM_LAW_H=132;
+function wm_law(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,full=212+2*120,h=lerp(full,WM_LAW_H,ag_sine(o.fold||0)),bb={x,y,w,h};if(a<=0)return bb;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+full/2,lerp(0.8,1,o.k));ag_box(ctx,x,y,w,h,22,{});
   ag_T(ctx,"THE EU AI ACT · ARTICLE 14",x+28,y+52,{w:700,size:28,ls:3.5,col:AG.kick});ag_T(ctx,"Human oversight, where it counts as high-risk",x+28,y+104,{w:700,size:34});
+  const rest=1-clamp(o.put||0,0,1);if(rest<=0.01){ctx.restore();return bb;}ctx.globalAlpha*=rest;
   ag_T(ctx,"people who can",x+28,y+154,{w:600,size:28,col:AG.mut});
   const cw=(w-56-24)/2;WM_LAW.forEach((r,i)=>{const s=o.show?clamp(o.show(i),0,1):1;if(s<=0.01)return;const cx=x+28+(i%2)*(cw+24),cy=y+178+Math.floor(i/2)*120;ctx.save();ctx.globalAlpha*=s;
     ag_about(ctx,cx+cw/2,cy+50,lerp(0.85,1,Math.min(1,ag_spr(s,0,0.5))));ag_box(ctx,cx,cy,cw,100,16,{edge:AG.green,edgeA:0.5});
     ag_T(ctx,r[0],cx+24,cy+44,{w:700,size:32,col:AG.ink});ag_T(ctx,r[1],cx+24,cy+82,{w:500,size:28,col:AG.mut});ctx.restore();});
   ctx.restore();return bb;}
+
+/* Regulation moves more slowly than technology: two arrows from one start, the law's the shorter, overtaken by the technology's. What
+   lies past the law's head, as far as the technology's, the law doesn't reach yet: care of one's own fills it, and most of all where a
+   system is critical. o.law, o.tech 0..1 how far each arrow has come, o.lawIn, o.techIn 0..1 their names; o.care 0..1 draws the span
+   from the law's head; o.t, with o.careAt and o.critAt, when its two pills spring in, one under the other, over the technology's arrow;
+   o.a */
+const WM_LAG={law:0.4,rows:[40,190],crit:72};
+function wm_lag(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const x0=x+262,x1=x+w-24,yl=y+WM_LAG.rows[0],yt=y+WM_LAG.rows[1],xe=lerp(x0,x1,WM_LAG.law);
+  ctx.save();ctx.globalAlpha*=a;ctx.lineCap="round";
+  // one start for both
+  const sa=Math.max(o.lawIn||0,o.techIn||0);if(sa>0.01){ctx.strokeStyle=rgba(AG.mut,0.35*sa);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(x0-14,yl-30);ctx.lineTo(x0-14,yt+30);ctx.stroke();}
+  const row=(name,col,yy,ia,xh)=>{if(ia<=0.01)return;ag_T(ctx,name,x+6,yy+12,{w:700,size:34,col,a:ia});if(xh-x0<4)return;ctx.save();ctx.globalAlpha*=ia;
+    ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=9;ctx.beginPath();ctx.moveTo(x0,yy);ctx.lineTo(Math.max(x0,xh-20),yy);ctx.stroke();ag_arrowHead(ctx,xh-10,yy,0,21,rgba(col,0.95));ctx.restore();};
+  row("the law",AG.blue,yl,clamp(o.lawIn||0,0,1),lerp(x0,xe,clamp(o.law||0,0,1)));
+  row("technology",AG.violet,yt,clamp(o.techIn||0,0,1),lerp(x0,x1,clamp(o.tech||0,0,1)));
+  // past the law's head, as far as the technology's: care of one's own
+  const cr=clamp(o.care||0,0,1),g0=xe+30;if(cr>0.01){ctx.save();ctx.strokeStyle=rgba(AG.green,0.9);ctx.lineWidth=6;ctx.setLineDash([16,14]);ctx.beginPath();ctx.moveTo(g0,yl);ctx.lineTo(lerp(g0,x1-4,ag_sine(cr)),yl);ctx.stroke();ctx.setLineDash([]);
+    if(cr>0.9){ctx.globalAlpha*=clamp((cr-0.9)*10,0,1);ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(x1-4,yl-20);ctx.lineTo(x1-4,yl+20);ctx.stroke();}ctx.restore();}
+  if(o.t!=null&&o.careAt!=null)wm_pillAt(ctx,(g0+x1)/2,yl,"your own care",o.t,o.careAt,null,{icon:"tick",col:AG.green});
+  if(o.t!=null&&o.critAt!=null)wm_pillAt(ctx,(g0+x1)/2,yl+WM_LAG.crit,"most of all in critical systems",o.t,o.critAt,null,{icon:"warn",col:AG.amber});
+  ctx.restore();}
 
 /* the nights in test before the mandate: n marks in a row, each a small moon with a green tick under it (o.n, o.u 0..1 how many shown) */
 function wm_nights(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,n=o.n||14,u=clamp(o.u==null?1:o.u,0,1);if(a<=0)return;ctx.save();ctx.globalAlpha*=a;

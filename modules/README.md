@@ -225,6 +225,7 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 
 - [An application or a platform?](../films/platform-and-solution-architecture/1-an-application-or-a-platform/) — `an-application-or-a-platform`
 - [Inside the platform](../films/platform-and-solution-architecture/2-inside-the-platform/) — `inside-the-platform`
+- [One platform, or many](../films/platform-and-solution-architecture/3-one-platform-or-many/) — `one-platform-or-many`
 
 ### AI and continuous architecture
 

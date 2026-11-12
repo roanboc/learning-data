@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:09.126
+Japón, 1462. Las barcas llevan arroz, mercancías y gente por el río Yodo, entre Kioto y el mar.
+
+00:00:10.426 --> 00:00:16.723
+Cada tramo de río y de camino tiene dueños: la corte, el shogunato, templos, santuarios y señores.
+
+00:00:17.823 --> 00:00:22.430
+Cualquiera de ellos puede poner una barrera, donde todo el que pasa paga un peaje.
+
+00:00:23.730 --> 00:00:33.303
+Ese año, se dice, solo el Yodo tenía 380 barreras. En el camino a los santuarios de Ise hubo una vez sesenta en dieciocho kilómetros.
+
+00:00:34.803 --> 00:00:40.788
+Una carga se detenía y pagaba en cada una, así que las mercancías llegaban tarde, y más caras por cada barrera.
+
+00:00:42.288 --> 00:00:47.396
+Comerciantes y viajeros necesitaban un camino que pudieran usar sin pagarle a cada dueño.
+
+00:00:48.896 --> 00:00:53.864
+Algunos señores empezaron a quitar las barreras de sus propias tierras, entre ellos Oda Nobunaga.
+
+00:00:54.964 --> 00:01:02.242
+Desde cerca de 1585, Toyotomi Hideyoshi prohibió los peajes, y las barreras cayeron en todo el país.
+
+00:01:03.742 --> 00:01:14.200
+Con los Tokugawa, los cinco caminos seguían unas mismas reglas, fuera de quien fuera la tierra. En 1635, se prohibieron las barreras de los señores.
+
+00:01:15.700 --> 00:01:21.529
+Cada dominio conservó su señor, sus leyes y sus impuestos. El camino era lo que compartían.
+
+00:01:23.229 --> 00:01:34.443
+Los viajeros pagaban lo que usaban, un caballo, un cargador, una posada, no a cada dueño. En 1771, más de dos millones de peregrinos fueron a Ise.
+
+00:01:36.143 --> 00:01:44.663
+En la empresa de energía, Ravi también halla barreras: dos plataformas de datos, de dos áreas, y un tercer producto propuesto para unirlas.
+
+00:01:45.763 --> 00:01:51.431
+Cada una trae sus propios permisos, políticas y registros, así que cada regla se mantendría tres veces.
+
+00:01:52.531 --> 00:01:59.188
+Así que Ravi propone una sola plataforma: cada dominio es dueño de sus datos en ella, y cada regla se mantiene una vez.
+
+00:02:05.888 --> 00:02:10.833
+Hace años, dos áreas de la empresa compraron cada una una plataforma de datos, a dos proveedores.
+
+00:02:12.133 --> 00:02:20.726
+Una pasó a ser la plataforma de todos los demás dominios. La otra es de generación, con las lecturas de sus centrales hidráulicas y eólicas.
+
+00:02:22.426 --> 00:02:31.749
+El dominio empresarial necesita ahora ambas para una medida: cuánto del consumo con tarifa verde cubren, hora por hora, sus propias centrales.
+
+00:02:33.849 --> 00:02:40.909
+Sus analistas proponen un tercer producto para unir las dos. Consultaría ambas donde están, así que nada tendría que moverse.
+
+00:02:43.009 --> 00:02:47.470
+Ama pide la medida en un ticket, y a Ravi le preguntan cómo debería construirse.
+
+00:02:51.370 --> 00:02:54.827
+Ravi dibuja lo que trae cada una, lado a lado.
+
+00:02:56.327 --> 00:03:06.107
+Cada plataforma tiene su forma de decir quién es quién y quién puede ver qué, sus máscaras sobre datos privados, su linaje y su registro de quién hizo qué.
+
+00:03:08.407 --> 00:03:10.727
+El tercer producto traería un conjunto propio.
+
+00:03:12.427 --> 00:03:20.641
+Así, las lecturas de medidores, enmascaradas en la plataforma de datos, se enmascararían otra vez en el tercero, a su modo, y se revisarían en ambos.
+
+00:03:22.741 --> 00:03:29.591
+Los permisos de un analista se darían en tres lugares, de tres maneras, y el linaje de la medida se cortaría en cada frontera.
+
+00:03:31.691 --> 00:03:38.821
+Cada plataforma es una barrera con su propio peaje, y quien la cruza paga: en reglas mantenidas otra vez, y a la par.
+
+00:03:43.521 --> 00:03:51.892
+Ravi sigue una regla: la arquitectura más simple que hace el trabajo. La complejidad que nadie gestiona es lo que hace fallar los servicios.
+
+00:03:53.592 --> 00:03:57.784
+Para la mayoría de las organizaciones, eso significa pocos componentes, en una sola plataforma.
+
+00:03:59.084 --> 00:04:06.442
+Muchas plataformas unidas solo convienen a unos pocos: un grupo repartido en muchos países, por ejemplo, con una plataforma y un equipo en cada uno.
+
+00:04:07.942 --> 00:04:16.341
+Y pasar a una es más fácil que antes: con formatos abiertos y herramientas que convierten casi todo el código, puede llevar meses, no años.
+
+00:04:20.041 --> 00:04:23.037
+Una sola plataforma no significa que un equipo sea dueño de todo.
+
+00:04:24.137 --> 00:04:34.447
+En el data mesh de Zhamak Dehghani, cada dominio es dueño de sus datos, como productos, en una plataforma de autoservicio, con reglas acordadas.
+
+00:04:36.347 --> 00:04:42.340
+Esa plataforma de autoservicio es una sola, compartida. La responsabilidad se reparte; la plataforma no.
+
+00:04:43.840 --> 00:04:49.473
+Hecho así, el data mesh suele ser la arquitectura más simple: una plataforma, muchos responsables.
+
+00:04:50.973 --> 00:04:56.354
+Mal hecho, son los mismos equipos con nombres nuevos, y nadie en el negocio es responsable de nada.
+
+00:05:00.054 --> 00:05:04.050
+A veces una segunda plataforma es inevitable, por un tiempo o para siempre.
+
+00:05:04.750 --> 00:05:13.166
+Una empresa recién comprada, hasta que se mude. Una entidad legal aparte que debe separar sus datos. Datos que deben quedarse en su país.
+
+00:05:14.866 --> 00:05:20.596
+Dos cosas reducen el daño. Formatos de tabla abiertos, para que ambas plataformas lean los mismos archivos.
+
+00:05:21.696 --> 00:05:26.516
+Y un catálogo que federa el de la otra, para que la gente encuentre todos los datos en un solo lugar.
+
+00:05:27.816 --> 00:05:33.777
+Pero cada plataforma conserva sus propios permisos, políticas y registros. El segundo conjunto de reglas se queda.
+
+00:05:35.477 --> 00:05:41.518
+El shogunato también mantuvo algunas barreras: unos cincuenta puestos de control, para mantener el orden y revisar quién pasaba.
+
+00:05:43.018 --> 00:05:46.940
+Mantén una segunda plataforma igual: solo por una razón que puedas nombrar.
+
+00:05:50.640 --> 00:05:55.417
+La plataforma de generación no tiene esa razón, así que se muda a la plataforma de datos.
+
+00:05:56.517 --> 00:06:02.083
+Generación conserva sus productos de datos: la misma gente, la misma lógica, el mismo responsable.
+
+00:06:03.383 --> 00:06:10.656
+Sus tablas ya son archivos en un formato abierto, en el almacenamiento en la nube de la empresa, así que no hace falta copiar sus datos.
+
+00:06:12.156 --> 00:06:19.113
+Hasta que termine la mudanza, el catálogo de la plataforma de datos federa el de generación, y la medida de Ama puede empezar de inmediato.
+
+00:06:20.613 --> 00:06:29.381
+Una herramienta convierte casi todo el código. El equipo de datos revisa cada pull request y, por un mes, compara cada número con la vieja plataforma.
+
+00:06:31.081 --> 00:06:37.156
+Generación revisa sus propios reportes en pruebas, y a los cuatro meses se apaga la plataforma vieja.
+
+00:06:41.056 --> 00:06:48.853
+Ahora cada regla se mantiene una vez. La máscara sobre las lecturas de medidores vale en todas partes, y los permisos se dan en un solo lugar.
+
+00:06:50.553 --> 00:06:56.834
+La medida de Ama se construye una vez, en una sola plataforma, con su linaje desde las lecturas de cada central hasta el número.
+
+00:06:58.534 --> 00:07:07.171
+Una plataforma que pagar, no dos, y ningún tercero. Los dos que mantenían la plataforma de generación ahora construyen sus productos de datos.
+
+00:07:11.071 --> 00:07:13.719
+Esta es la práctica de datos, en el mapa de Tomás.
+
+00:07:15.019 --> 00:07:24.647
+En la capa de tecnología, la plataforma de generación era otro nodo, con sus servicios para gobernar y proteger: otro conjunto de reglas, a la vista.
+
+00:07:26.347 --> 00:07:32.809
+En la capa de aplicaciones, los productos de datos de generación siguieron siendo de generación. Solo cambió lo que los servía.
+
+00:07:34.309 --> 00:07:40.879
+La regla de Ravi es un principio en el mapa: una plataforma, y una segunda solo por una razón que cualquiera pueda nombrar.
+
+00:07:42.579 --> 00:07:46.996
+Y la mudanza fue un paquete de trabajo, que terminó el día en que se apagó la plataforma vieja.
+
+00:07:50.496 --> 00:07:57.990
+Entre Kuwana y Hinaga, donde habían estado sesenta barreras, el Tōkaidō seguía las mismas reglas que todo el camino.
+
+00:07:58.690 --> 00:08:04.028
+En la empresa de energía hay ahora una sola plataforma, y cada dominio sigue siendo dueño de lo que construye en ella.
+
+00:08:05.528 --> 00:08:07.716
+Sigue: donde se encuentra con las aplicaciones.

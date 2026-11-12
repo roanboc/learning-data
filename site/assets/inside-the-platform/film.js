@@ -2388,7 +2388,7 @@ const P2_OBS=[["system tables","databricks"],["dashboard","databricks"],["budget
 const P2_SRC=["billing","meters","network map"],P2_OUT=["reports","dashboards","apps","other systems"];
 // where the drawing's parts sit: four boxes along the top, the products under them, and four bands across
 const P2_BX=i=>120+i*425,P2_BY=226,P2_BW=405,P2_BH=130,P2_CY=[389,445],P2_RY=j=>488+j*86,P2_RX=120,P2_RW=1680,P2_RH=74;
-// the utility's domains, as in the series' first film, and their owners in the business
+// the utility's domains, as An application or a platform? drew them, and their owners in the business
 const P2_DOM=[["network",APPC,"Grace"],["retail",APPC,"head of retail"],["finance",APPC,"head of finance"],["enterprise",[176,196,255],"Ama"]];
 const P2_CAPS=["bring in","store","process","serve","govern","secure","orchestrate","observe"];
 // the utility's room: dark, quiet, a few motes; and the plain dark a room leaves into, under a title or the end card
@@ -2462,7 +2462,7 @@ function p2_swap(ctx,x,y,s,seed){const w1=190+40*hash(seed,1),w2=170+50*hash(see
     pill=(w,a,dy)=>{if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-w/2,y-23+dy,w,46,23,TECC,{glow:8,ea:0.6,fill:"rgba(8,16,14,0.94)"});
       ctx.fillStyle=rgba(TECC,0.6);rr(ctx,x-w/2+14,y-11+dy,22,22,6);ctx.fill();ctx.fillStyle=rgba(SOFT,0.42);rr(ctx,x-w/2+46,y-5+dy,w-68,10,5);ctx.fill();});};
   pill(w1,aA,(1-aA)*16*(s>0.4?1:-1));pill(w2,aB,-(1-aB)*16);}
-// the platform as the first film drew it: a slab in technology green, its eight parts along its front, each domain's logic set down
+// the platform as An application or a platform? drew it: a slab in technology green, its eight parts along its front, each domain's logic set down
 // on it as a block, with its owner. o.eyes: each domain watching its own; o.whole: the dashed outline nobody watches; o.own: owners
 function p2_slab(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const X=210,Y=o.y||590;
   psaPlatform(ctx,X,Y,1500,90,{label:"the data platform",caps:P2_CAPS,csize:28,hi:o.hi||0});

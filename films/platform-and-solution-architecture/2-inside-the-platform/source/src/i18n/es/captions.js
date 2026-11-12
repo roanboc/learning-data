@@ -1,7 +1,7 @@
 /* Inside the platform: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
-   The words of film 1 stay: posta for a station, cargadores for porters, responsable for a data owner, dueño for the road's owner, and "En la empresa de energía". */
+   The words of An application or a platform? stay: posta for a station, cargadores for porters, responsable for a data owner, dueño for the road's owner, and "En la empresa de energía". */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Japan, the early 1600s. The Tōkaidō runs from Edo to Kyoto, with a station about every ten kilometres.":"Japón, a principios del siglo XVII. El Tōkaidō va de Edo a Kioto, con una posta más o menos cada diez kilómetros.",
 "Each station has the same parts: an office that finds horses and porters, and a clerk who writes each one down.":"Cada posta tiene las mismas partes: una oficina que consigue caballos y cargadores, y un escribano que anota cada uno.",

@@ -18,6 +18,11 @@
 | 12 November 2026 | The closing line doesn't call the platform easy, because it isn't. It says that platforms have matured, and that the hard part is now everything else, in as few words as it can (the author). |
 | 12 November 2026 | The author confirmed the proposal by merging it, with the closing line "Platforms have matured. The hard part is everything else." and the three assumptions under *In practice*. |
 | 12 November 2026 | The script corrects the proposal in two places, for the author to confirm: three systems count *enrolled*, not four, since HR and payroll doesn't count enrolments; and the class's 312% stays with *The Inner Life of Data*, where a wrong sketch causes it. The meeting's two numbers are 176 and 149, for a class of 180 seats. |
+| 12 November 2026 | The film was made from the first draft of the script, as the author asked that day ("Continue and tell me when done"); what it assumed is in `docs/assumptions/00-data-platforms/1-more-than-a-platform/`. It is 3 minutes 22 seconds, in six chapters, with a title card after the opening's question and an end card. |
+| 12 November 2026 | The film has no people: it is shapes and words on the introduction's map, and two sheets of paper on a table stand for the two offices. The route is drawn as the Topics page draws it. |
+| 12 November 2026 | On the site the film stands alone, on a page where a series' page would be (`/more-than-a-platform/`), with no series page, no Pause and think, no labs and no scenarios. `site-tools/build_series.py` learned both: a film that stands alone (`single` in `SERIES`), and a film with no questions. |
+| 12 November 2026 | Its sound is chime bars, made for this film, as a station's announcement plays them. A station arriving is one soft tap, not a note. |
+| 12 November 2026 | Its Spanish narration starts each line on its English cue and may run up to 0.35 s into the pause after it, never closer than 0.45 s to the next line, so short lines needn't be rushed. |
 <!-- /decided -->
 
 ## The brief

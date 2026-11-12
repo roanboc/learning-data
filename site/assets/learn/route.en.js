@@ -78,6 +78,19 @@ window.LD_ROUTE = {
      "films": [
       "ld"
      ]
+    },
+    {
+     "id": "more-than-a-platform",
+     "kind": "film",
+     "title": "More than a platform",
+     "href": "more-than-a-platform/",
+     "poster": "more-than-a-platform-poster.jpg",
+     "kicker": "One film",
+     "len": "3½ min",
+     "min": 3.5,
+     "films": [
+      "ld-more-than-a-platform"
+     ]
     }
    ]
   },
@@ -759,6 +772,7 @@ window.LD_ROUTE = {
    "line": "New to data work. The short way through how it fits together.",
    "stops": [
     "intro",
+    "more-than-a-platform",
     "sketch",
     "data-that-moves",
     "when-things-go-wrong"

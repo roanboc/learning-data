@@ -78,6 +78,19 @@ window.LD_ROUTE = {
      "films": [
       "ld"
      ]
+    },
+    {
+     "id": "more-than-a-platform",
+     "kind": "film",
+     "title": "Más que una plataforma",
+     "href": "more-than-a-platform/",
+     "poster": "more-than-a-platform-poster.jpg",
+     "kicker": "Una película",
+     "len": "3½ min",
+     "min": 3.5,
+     "films": [
+      "ld-more-than-a-platform"
+     ]
     }
    ]
   },
@@ -760,6 +773,7 @@ window.LD_ROUTE = {
    "line": "Para quien empieza. El camino corto para ver cómo encaja todo.",
    "stops": [
     "intro",
+    "more-than-a-platform",
     "sketch",
     "data-that-moves",
     "when-things-go-wrong"

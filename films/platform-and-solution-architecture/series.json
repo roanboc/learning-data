@@ -16,6 +16,12 @@
   "thread_es": "Facturación, cortes y medición tienen cada uno sus aplicaciones; la plataforma de datos es el camino que comparten. Película a película, Ravi Menon dibuja sus partes, la mantiene en una sola, la une a la plataforma de integración, la protege de punta a punta, diseña una solución sobre ella, la convierte en el camino que los equipos eligen y se asegura de que pueda cambiar.",
   "past_h": "One story, film by film: Japan's Gokaidō",
   "past_h_es": "Una historia, película a película: el Gokaidō de Japón",
+  "learn_p": "{Labs} hands-on labs, one for each film and one for the whole series, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película y uno para toda la serie, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs, one for each film and a last one for the whole series. Each puts one idea from a film in your hands: tell an application from a platform, give each flow its route, give each job a pass of its own, test a way out. The last puts the whole data practice on the map.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película y un último para toda la serie. Cada uno pone en tus manos una idea de una película: distingue una aplicación de una plataforma, da a cada flujo su ruta, da a cada trabajo su propio salvoconducto, prueba una salida. El último pone toda la práctica de datos en el mapa.",
+  "quiz_lead": "{quiz} situations that the people who run a data platform, and build on it, really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes operan una plataforma de datos y construyen sobre ella, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata.",
   "people_h": "Who's on the platform",
   "people_h_es": "Quién está en la plataforma",
   "people": [

@@ -1,7 +1,7 @@
 /* Learning Data: "Pausa para pensar" de Built to change, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (buy, seams, exit), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
-   (el lab que abre) y ninguna tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
@@ -11,7 +11,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   seams:{q:"Las programaciones, las alertas y los tableros de la plataforma de datos son del producto, sin costura. ¿Qué hace Ravi con ellos?",
     opts:[{t:"Los pasa al repositorio propio de la empresa, para que ninguna parte de la plataforma quede sin costura.",near:true},{t:"Planea cambiar el producto de la plataforma por uno sin dependencia, antes de construir nada más encima."},{t:"Acepta la dependencia como el precio de lo que el producto hace bien, y escribe cuánto costaría irse.",ok:true}],
     why:"No todo tiene costura, y eso es dependencia del proveedor. No está mal: es el precio de lo que un producto hace bien. Rehacer las programaciones, las alertas y los tableros en el repositorio sería renunciar a eso para evitar un costo que nadie tiene que pagar todavía, y un producto sin ninguna dependencia no haría nada de lo que un producto hace bien. Así que Ravi escribe cuánto costaría irse, qué habría que configurar de nuevo y qué rehacer, para que la dependencia sea elegida, no descubierta. ¿Dónde depende tu plataforma de su proveedor, y está escrito?"},
-  exit:{q:"Cada año el equipo de plataforma corre un producto de datos por una semana, en prueba, en otro motor que lee los mismos archivos. ¿Por qué?",
+  exit:{stop:"exit",q:"Cada año el equipo de plataforma corre un producto de datos por una semana, en prueba, en otro motor que lee los mismos archivos. ¿Por qué?",
     opts:[{t:"Un plan que nadie probó es una suposición, y una semana en prueba muestra cuánto costaría irse de verdad.",ok:true},{t:"Para pasar un producto de datos al año al otro motor, hasta que el producto de la plataforma sobre.",near:true},{t:"Porque el fabricante del producto pide una prueba anual antes de renovar el acuerdo con la empresa."}],
     why:"Un plan de salida que nadie probó es una suposición. Una semana en prueba mostró lo que de verdad cambiaría: once líneas de mil cuatrocientas, la programación, las alertas y quién puede leerlo configurados de nuevo, y cada número igual. Con eso, Ravi calcula toda la plataforma: unos ocho meses para irse, una migración, no una reescritura. Todo ocurre en prueba, y nadie planea irse; pero ahora la empresa sabe lo que costaría. ¿Cuál de tus planes de salida probó alguien?"}
   }}};

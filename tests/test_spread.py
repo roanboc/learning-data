@@ -182,6 +182,26 @@ class Spread(unittest.TestCase):
         self.assertEqual(C.length_read(P["qs"][0]), (len(right), 49, [47, len(right), 49]))  # the quotes' escapes aren't counted
         self.assertEqual(C.length_faults(rel, [(rel, q) for q in P["qs"]]), [])  # the order has no options; the third names things
 
+    def test_a_labs_rows_are_held_to_the_same_lengths_where_a_page_shows_it(self):
+        bare, full, level = "the newest sent,", "the student system's, checked against her passport,", "the one that most of the systems hold today,"
+        row = '{t:"%s",why:"No."},{t:"%s",ok:true,why:"Yes."}'
+        P, rel = self.read(PACK.replace(row % ("wrong", "right"), row % (bare, full)))
+        rows = C.lab_rows(P, set(P["labs"]))
+        self.assertEqual([r["title"] for r in rows], ["lab write, row 1", "lab write, row 2"])  # the other labs ask for no choice
+        self.assertIsNone(C.length_read(rows[0]))  # its two options are under 25 characters: they only name something
+        out = C.length_faults(rel, [(rel, r) for r in rows], "lab rows")
+        self.assertEqual(len(out), 2, out)
+        self.assertIn(f'"lab write, row 2": the right option is {len(full)} characters, the longest wrong one {len(bare)}', out[0])
+        self.assertIn(f'"lab write, row 2": options of {len(bare)}/{len(full)} characters', out[1])
+        self.assertEqual(C.lab_rows(P, {"boxes"}), [])  # a lab no page shows isn't read
+        P, rel = self.read(PACK.replace(row % ("wrong", "right"), row % (level, full)))
+        self.assertEqual(C.length_faults(rel, [(rel, r) for r in C.lab_rows(P, set(P["labs"]))], "lab rows"), [])
+        # the right phrase clearly the longest in at most half of a pack's rows, and the fault names them as rows
+        r = lambda right: ("learn.en.js", {"title": "lab write, row 1", "opts": [("x" * 70, False), ("x" * right, True)]})
+        self.assertEqual(C.length_faults("the pack", [r(80), r(80), r(72), r(72)], "lab rows"), [])
+        self.assertEqual(C.length_faults("the pack", [r(80), r(80), r(80), r(72)], "lab rows"),
+                         ["the pack: the right option is clearly the longest in 3 of the 4 lab rows its page shows: make the wrong ones as full"])
+
     def test_the_first_films_questions_are_read_from_its_pack(self):
         text = ('window.LEARN={lang:"en",\nstops:{a:{lab:{qs:[{q:"Not a Pause and think question",eng:"x"}]}}},\n'
                 'think:{ui:{toggle:"Pause"},\n  qs:{\n  "in":{stop:"a",q:"One?",opts:[{t:"aaa"},{t:"bbb",near:true},{t:"ccc",ok:true}],why:"."},\n'

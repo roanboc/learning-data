@@ -430,7 +430,7 @@ const NARR={
  {"id":"sept","gap":0.8,"text":"September 2027, at the university. Since July, the team has read its measures together every second Thursday.","say":"September twenty twenty-seven, at the university. Since July, the team has read its measures together every second Thursday."},
  {"id":"fixes","gap":0.8,"text":"Those readings have fixed two waits already: the leading data people module tells how."},
  {"id":"half","gap":0.8,"text":"From Friday 3 September, Helena protects half an hour a week for how the team works: Fridays, half past three to four.","say":"From Friday the third of September, Helena protects half an hour a week for how the team works: Fridays, half past three to four."},
- {"id":"rules","gap":0.8,"text":"One measure. One small change, tried for a week, then kept or dropped, out loud: plan, do, check, act."},
+ {"id":"rules","gap":0.8,"text":"One measure. One small change, tried for a week, then kept or dropped, out loud: plan, do, study, act."},
  {"id":"dq","gap":0.8,"text":"The data quality module keeps the same rhythm for one list, fifteen minutes on Thursdays; here, it's for how the team works."}
 ]},
 "six":{"name":"Six days to one","lead":1.0,"tail":1.0,"vo":[
@@ -471,7 +471,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"card/when": 8.768, "card/few": 6.414, "card/job": 6.25, "card/walk": 7.508, "card/harm": 6.089, "card/stop": 2.818, "card/change": 2.998, "card/twi": 5.888, "card/jm": 6.801, "card/steps": 5.861, "card/better": 4.385, "card/pocket": 5.646, "card/shield": 7.213, "card/lighter": 5.714, "card/plants": 7.832, "card/japan": 5.96, "card/data": 3.758, "card/friday": 6.243, "card/one": 3.773, "friday/sept": 7.882, "friday/fixes": 4.973, "friday/half": 7.855, "friday/rules": 6.754, "friday/dq": 7.437, "six/first": 4.085, "six/start": 6.01, "six/card": 4.795, "six/steps": 5.965, "six/why": 7.268, "six/ivy": 7.441, "six/order": 4.625, "six/week": 1.251, "kept/tenth": 6.381, "kept/kept": 3.001, "kept/second": 5.273, "kept/dropped": 5.742, "kept/result": 3.516, "kept/count": 7.343, "written/same": 5.056, "written/ask": 4.524, "written/lasts": 5.766, "written/days": 8.665, "written/quality": 5.054, "written/wins": 5.707, "monday/back": 5.444, "monday/pages": 6.008, "monday/protect": 3.536, "monday/measure": 2.499, "monday/change": 3.672, "monday/write": 3.428, "monday/ldp": 4.484, "monday/take": 2.438};
+const VODUR={"card/when": 8.768, "card/few": 6.414, "card/job": 6.25, "card/walk": 7.508, "card/harm": 6.089, "card/stop": 2.818, "card/change": 2.998, "card/twi": 5.888, "card/jm": 6.801, "card/steps": 5.861, "card/better": 4.385, "card/pocket": 5.646, "card/shield": 7.213, "card/lighter": 5.714, "card/plants": 7.832, "card/japan": 5.96, "card/data": 3.758, "card/friday": 6.243, "card/one": 3.773, "friday/sept": 7.882, "friday/fixes": 4.973, "friday/half": 7.855, "friday/rules": 6.621, "friday/dq": 7.437, "six/first": 4.085, "six/start": 6.01, "six/card": 4.795, "six/steps": 5.965, "six/why": 7.268, "six/ivy": 7.441, "six/order": 4.625, "six/week": 1.251, "kept/tenth": 6.381, "kept/kept": 3.001, "kept/second": 5.273, "kept/dropped": 5.742, "kept/result": 3.516, "kept/count": 7.343, "written/same": 5.056, "written/ask": 4.524, "written/lasts": 5.766, "written/days": 8.665, "written/quality": 5.054, "written/wins": 5.707, "monday/back": 5.444, "monday/pages": 6.008, "monday/protect": 3.536, "monday/measure": 2.499, "monday/change": 3.672, "monday/write": 3.428, "monday/ldp": 4.484, "monday/take": 2.438};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2048,7 +2048,7 @@ const BW_PEOPLE={
      bwFriday, bwMon  the team's room on a Friday afternoon (the late, low sun) and on a Monday morning
      bw_tracker      the tracker on a screen: a few requests, each with the days it waited for its first question
      bw_week         the week's calendar: the Friday half-hour, 15:30 to 16:00, kept for how the team works
-     bw_pdca         plan, do, check, act: a ring of four arcs
+     bw_pdca         plan, do, study, act: a ring of four arcs
      bw_steps        a request's first steps, a box each: it lands on the one list; it waits for Monday's planning; it goes to
                      someone; who reads it, and asks
      bw_fridays      fifteen Fridays, a chip each: kept (a green tick) or dropped (a grey cross)
@@ -2092,10 +2092,10 @@ function bw_week(ctx,x,y,w,words,o){o=o||{};const a=o.a==null?1:o.a,h=640,bb={x,
     lp_T(ctx,"15:30",bx+bw2/2,by+bh+38,{w:700,size:28,align:"center",col:LP.blue});ctx.restore();}
   ctx.restore();return bb;}
 
-/* ---------------------------------------------------------------- plan, do, check, act */
+/* ---------------------------------------------------------------- plan, do, study, act */
 // a ring of four arcs round (cx, cy), radius r, drawn clockwise from the top as u goes from 0 to 1, each named outside it; o.mid (0 to 1:
 // the words in the middle), o.midText (a line, or a list of lines), o.a
-const BW_PDCA=["Plan","Do","Check","Act"];
+const BW_PDCA=["Plan","Do","Study","Act"];
 function bw_pdca(ctx,cx,cy,r,o){o=o||{};const a=o.a==null?1:o.a,u=clamp(o.u||0,0,1);if(a<=0.004||u<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.lineCap="round";
   for(let i=0;i<4;i++){const k=clamp(u*4-i,0,1);if(k<=0)continue;const a0=-Math.PI/2+i*Math.PI/2+0.1,a1=a0+(Math.PI/2-0.2)*ag_sine(k);
     ctx.strokeStyle=rgba(LP.blue,1);ctx.lineWidth=14;ctx.beginPath();ctx.arc(cx,cy,r,a0,a1);ctx.stroke();
@@ -2274,7 +2274,7 @@ scene("friday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       if(tt>=k0)bw_week(x,250,150,1180,{kick:"From Friday 3 September",title:"Half an hour, every week"},
         {a:ag_in(tt,k0,0.35),k:tt-k0,u:ag_in(tt,w("half","protects",-0.1),0.6),lit:ag_in(tt,w("half","Fridays",0.0),0.6),light:"late"});
       lp_nameTag(x,1470,220,"helena",{role:"Data manager",a:ag_in(tt,w("half","Helena",-0.2),0.5)});}},
-    // the rules: one measure; one small change, tried for a week, then kept or dropped, out loud; plan, do, check, act; data quality's
+    // the rules: one measure; one small change, tried for a week, then kept or dropped, out loud; plan, do, study, act; data quality's
     // Thursdays keep the same rhythm for one list
     {at:c.rules-0.3,place:"bwFriday",later:true,keys:[[c.rules-0.3,960,540,1.0]],draw:(x,tt)=>{
       bw_sheet(x,tt,w("rules","One",-0.2),140,250,760,{kick:"Every Friday, half an hour",lines:["One measure","One small change, tried for a week","Then kept or dropped, out loud"]},

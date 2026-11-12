@@ -6,8 +6,8 @@
   "h1_es": "Un cambio pequeño cada vez: mejora tu propio trabajo y verifica cada paso",
   "lead": "In July 2027 Ivy Reyes spends two hours every Monday checking her room data by hand, and until she's done, readers may see a wrong number. Helena Novak asks what's in the way and gives her the time. Ivy measures, drops what nobody needs, writes the rest down and automates one step at a time.",
   "lead_es": "En julio de 2027 Ivy Reyes pasa dos horas cada lunes revisando a mano sus datos de aulas, y hasta que termina, los lectores pueden ver una cifra equivocada. Helena Novak pregunta qué obstáculos hay y le da el tiempo. Ivy mide, deja lo que nadie necesita, escribe el resto y automatiza paso a paso.",
-  "description": "A film about kaizen in leading a team, the second of Leading a data team in the module Leading data people: improvement is everyone's job, on their own work, in small steps, each run through one cycle: plan a change, do it, check it, then keep it or drop it. Its roots are named once: Walter Shewhart's cycle of 1939, which W. Edwards Deming taught in Japan in 1950 and Japanese managers made plan, do, check, act, and Masaaki Imai's book of 1986, which took the word kaizen around the world. In July 2027 Ivy Reyes spends two hours every Monday checking Teaching space use by hand. Helena Novak asks what's in the way, and gives it Ivy's Thursday learning time. Ivy measures first (six steps, a hundred and twenty minutes), drops the two steps nobody needs, writes the four left as one checklist that Jun follows to the same result, and only then turns one step a week into a check inside the job, each reviewed by Sam: by October the refresh takes ten minutes, checked, and nobody opens the page to a wrong number. Helena's part is three things: she asks what's in the way, gives the time, and shows the small wins. It opens in Colombo in 2000, where the staff of a public maternity hospital improved their own wards with 5S, then kaizen, and infections after a Caesarean fell by half in two years.",
-  "description_es": "Una película sobre el kaizen al dirigir un equipo, la segunda de Liderar un equipo de datos en el módulo Liderar equipos de datos: mejorar es tarea de todos, cada uno en su propio trabajo, a pasos pequeños, y cada paso sigue un ciclo: planear un cambio, hacerlo, verificarlo, y luego conservarlo o descartarlo. Nombra una vez sus raíces: el ciclo de Walter Shewhart de 1939, que W. Edwards Deming enseñó en Japón en 1950 y que los directivos japoneses convirtieron en planear, hacer, verificar, actuar, y el libro de Masaaki Imai de 1986, que llevó la palabra kaizen por el mundo. En julio de 2027 Ivy Reyes pasa dos horas cada lunes revisando a mano Uso de los espacios docentes. Helena Novak pregunta qué obstáculos hay, y le da para eso su tiempo de aprendizaje de los jueves. Ivy mide primero (seis pasos, ciento veinte minutos), deja los dos pasos que nadie necesita, escribe los cuatro que quedan en una lista de verificación que Jun sigue con el mismo resultado, y solo entonces convierte un paso por semana en un control dentro del proceso, cada uno revisado por Sam: en octubre la actualización es cosa de minutos, verificada, y nadie abre la página para encontrarse un número equivocado. La parte de Helena son tres cosas: pregunta qué obstáculos hay, da el tiempo y muestra los pequeños logros. Empieza en Colombo en 2000, donde el personal de una maternidad pública mejoró sus propias salas con las 5S, y luego con el kaizen, y las infecciones tras una cesárea se redujeron a la mitad en dos años.",
+  "description": "A film about kaizen in leading a team, the second of Leading a data team in the module Leading data people: improvement is everyone's job, on their own work, in small steps, each run through one cycle: plan a change, do it, study the result, then keep it or drop it. Its roots are named once: Walter Shewhart's cycle of 1939, which W. Edwards Deming taught in Japan in 1950 and later called plan, do, study, act, and Masaaki Imai's book of 1986, which took the word kaizen around the world. In July 2027 Ivy Reyes spends two hours every Monday checking Teaching space use by hand. Helena Novak asks what's in the way, and gives it Ivy's Thursday learning time. Ivy measures first (six steps, a hundred and twenty minutes), drops the two steps nobody needs, writes the four left as one checklist that Jun follows to the same result, and only then turns one step a week into a check inside the job, each reviewed by Sam: by October the refresh takes ten minutes, checked, and nobody opens the page to a wrong number. Helena's part is three things: she asks what's in the way, gives the time, and shows the small wins. It opens in Colombo in 2000, where the staff of a public maternity hospital improved their own wards with 5S, then kaizen, and infections after a Caesarean fell by half in two years.",
+  "description_es": "Una película sobre el kaizen al dirigir un equipo, la segunda de Liderar un equipo de datos en el módulo Liderar equipos de datos: mejorar es tarea de todos, cada uno en su propio trabajo, a pasos pequeños, y cada paso sigue un ciclo: planificar un cambio, hacerlo, estudiar el resultado, y luego conservarlo o descartarlo. Nombra una vez sus raíces: el ciclo de Walter Shewhart de 1939, que W. Edwards Deming enseñó en Japón en 1950 y más tarde llamó planificar, hacer, estudiar, actuar, y el libro de Masaaki Imai de 1986, que llevó la palabra kaizen por el mundo. En julio de 2027 Ivy Reyes pasa dos horas cada lunes revisando a mano Uso de los espacios docentes. Helena Novak pregunta qué obstáculos hay, y le da para eso su tiempo de aprendizaje de los jueves. Ivy mide primero (seis pasos, ciento veinte minutos), deja los dos pasos que nadie necesita, escribe los cuatro que quedan en una lista de verificación que Jun sigue con el mismo resultado, y solo entonces convierte un paso por semana en un control dentro del proceso, cada uno revisado por Sam: en octubre la actualización es cosa de minutos, verificada, y nadie abre la página para encontrarse un número equivocado. La parte de Helena son tres cosas: pregunta qué obstáculos hay, da el tiempo y muestra los pequeños logros. Empieza en Colombo en 2000, donde el personal de una maternidad pública mejoró sus propias salas con las 5S, y luego con el kaizen, y las infecciones tras una cesárea se redujeron a la mitad en dos años.",
   "card": "Ivy turns two hours of Monday checks into ten minutes, one small change at a time, with the time Helena gives her.",
   "card_es": "Ivy convierte dos horas de revisiones de los lunes en unos minutos, un cambio pequeño cada vez, con el tiempo que le da Helena.",
   "chapters_es": {
@@ -59,12 +59,12 @@
         "href_es": "https://es.wikipedia.org/wiki/Kaizen"
       },
       {
-        "title": "PDCA, plan, do, check, act",
-        "title_es": "El círculo de Deming: planear, hacer, verificar, actuar",
-        "line": "The cycle every small step runs through, from Walter Shewhart's circle to W. Edwards Deming's teaching in Japan.",
-        "line_es": "El ciclo que sigue cada paso pequeño, desde el círculo de Walter Shewhart hasta lo que W. Edwards Deming enseñó en Japón.",
-        "href": "https://en.wikipedia.org/wiki/PDCA",
-        "href_es": "https://es.wikipedia.org/wiki/C%C3%ADrculo_de_Deming"
+        "title": "The PDSA cycle, from the Deming Institute",
+        "title_es": "El ciclo PDSA, del Deming Institute (en inglés)",
+        "line": "Plan, do, study, act: the cycle every small step runs through, under the name W. Edwards Deming gave it later.",
+        "line_es": "Planificar, hacer, estudiar, actuar: el ciclo que sigue cada paso pequeño, con el nombre que W. Edwards Deming le dio después.",
+        "href": "https://deming.org/explore/pdsa/",
+        "href_es": "https://deming.org/explore/pdsa/"
       },
       {
         "title": "5S",
@@ -77,10 +77,10 @@
     ],
     "more": [
       {
-        "text": "The PDSA cycle, as The W. Edwards Deming Institute tells it: Deming's later name for the cycle, with study in place of check",
-        "text_es": "El ciclo PDSA, como lo cuenta The W. Edwards Deming Institute: el nombre que Deming le dio después, con estudiar en lugar de verificar (en inglés)",
-        "href": "https://deming.org/explore/pdsa/",
-        "href_es": "https://deming.org/explore/pdsa/"
+        "text": "The cycle's history on Wikipedia, where it goes by the name many use, PDCA: from Walter Shewhart's circle to W. Edwards Deming's teaching in Japan",
+        "text_es": "La historia del ciclo en Wikipedia, con el nombre que muchos le dan, círculo de Deming: del círculo de Walter Shewhart a lo que W. Edwards Deming enseñó en Japón",
+        "href": "https://en.wikipedia.org/wiki/PDCA",
+        "href_es": "https://es.wikipedia.org/wiki/C%C3%ADrculo_de_Deming"
       },
       {
         "text": "Kaizen, a resource guide from the Lean Enterprise Institute",

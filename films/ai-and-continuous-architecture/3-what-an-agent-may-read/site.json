@@ -1,0 +1,66 @@
+{
+  "kicker": "The context an agent reads",
+  "kicker_es": "El contexto que lee un agente",
+  "title_es": "Qué puede leer un agente",
+  "h1": "What an agent may read: the official products, and nothing more",
+  "h1_es": "Qué puede leer un agente: los productos oficiales, y nada más",
+  "lead": "The website's chat read whatever it could reach: an old copy of the tariffs and the contact centre's notes. It quoted last year's price, and told a stranger about a household's medical needs. Inés draws its context from the map: official products, in a place of its own.",
+  "lead_es": "El chat del sitio web leía todo lo que alcanzaba: una copia vieja de las tarifas y las notas del centro de atención. Dio el precio del año pasado, y le contó a un extraño las necesidades médicas de un hogar. Inés toma su contexto del mapa: productos oficiales, en un lugar propio.",
+  "description": "A film about what an AI agent may read: the website's chat, which first read whatever it could reach, a year-old export of the tariffs and the contact centre's notes, medical needs included; its context drawn instead from the data practice on the map, the data products it needs, each kept by its own team with a contract (what it holds, how fresh it is, who owns it), and the glossary's terms; each product's level, public, internal, confidential or restricted, and a place of its own that holds only what the chat may read, reached by its own identity, rather than a mask over what it mustn't; a household's account read only on its holder's own sign-in; a small tool that answers only \"hand this to a person now\", never why; the owners agreeing in a ticket, the data team reviewing the pull request, and the regulatory lead checking in test; and, on Databricks, the chat as an app with its own service principal, one schema in Unity Catalog, a search index and a function it may run.",
+  "description_es": "Una película sobre qué puede leer un agente de IA: el chat del sitio web, que primero leía todo lo que alcanzaba, una exportación vieja de las tarifas y las notas del centro de atención, con necesidades médicas; su contexto tomado en cambio de la práctica de datos en el mapa, los productos de datos que necesita, cada uno a cargo de su propio equipo con un contrato (qué contiene, qué tan al día está, quién responde por él), y los términos del glosario; el nivel de cada producto, público, interno, confidencial o restringido, y un lugar propio que solo tiene lo que el chat puede leer, al que llega con su propia identidad, en vez de una máscara sobre lo que no debe leer; la cuenta de un hogar, leída solo cuando su titular inicia sesión; una pequeña herramienta que solo responde «pásalo a una persona ya», nunca el porqué; los responsables que dan su acuerdo en un ticket, el equipo de datos que revisa el pull request y la responsable regulatoria que comprueba en pruebas; y, en Databricks, el chat como una app con su propia entidad de servicio, un esquema en Unity Catalog, un índice de búsqueda y una función que puede ejecutar.",
+  "card": "The chat read whatever it could reach, and told a stranger too much. Now it reads the official products, in a place of its own.",
+  "card_es": "El chat leía todo lo que alcanzaba, y le contó demasiado a un extraño. Ahora lee los productos oficiales, en un lugar propio.",
+  "chapters_es": {
+    "tablet": "Una copia, cotejada",
+    "reach": "Todo lo que alcanzaba",
+    "ines": "El contexto, desde el mapa",
+    "level": "Solo lo que le toca leer",
+    "tool": "Pasarlo a una persona",
+    "who": "Quién da su acuerdo",
+    "dbx": "En Databricks",
+    "back": "Leer del original",
+    "end": "Qué puede leer un agente"
+  },
+  "past": [
+    "Uruk, December 229 BCE",
+    "A scribe copied the tablet of Etemenanki's measures from its original, checked it, and wrote at its end where it came from and who may read it."
+  ],
+  "past_es": [
+    "Uruk, diciembre de 229 a. C.",
+    "Un escriba copió la tablilla con las medidas de Etemenanki de su original, la cotejó, y escribió al final de dónde venía y quién podía leerla."
+  ],
+  "next_h": "Every agent reads from the map. Next, a first draft, not a blank page.",
+  "next_h_es": "Cada agente lee desde el mapa. Luego, un primer borrador, no una página en blanco.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The tablet of Esagil, at the Louvre",
+        "title_es": "La tablilla del Esagil, en el Louvre (en francés)",
+        "line": "The Louvre's record of the tablet the scribe copied: written at Uruk, in the 83rd year of the Seleucid era, from an original from Borsippa.",
+        "line_es": "La ficha del Louvre de la tablilla que copió el escriba: escrita en Uruk, en el año 83 de la era seléucida, de un original de Borsippa.",
+        "href": "https://collections.louvre.fr/en/ark:/53355/cl010167181",
+        "href_es": "https://collections.louvre.fr/ark:/53355/cl010167181"
+      },
+      {
+        "title": "Authentication for agents",
+        "title_es": "Autenticación para agentes (en inglés)",
+        "line": "Databricks' guide: an app's own service principal as an agent's identity, and the least each one needs, from tables and functions to search indexes.",
+        "line_es": "La guía de Databricks: la entidad de servicio propia de una app como identidad del agente, y lo mínimo que cada uno necesita, de tablas y funciones a índices de búsqueda.",
+        "href": "https://docs.databricks.com/aws/en/agents/custom-agents/agent-authentication",
+        "href_es": "https://docs.databricks.com/aws/en/agents/custom-agents/agent-authentication"
+      },
+      {
+        "title": "Functions in Unity Catalog",
+        "title_es": "Funciones en Unity Catalog (en inglés)",
+        "line": "Databricks' guide to functions kept in Unity Catalog: who may run one, and how agents use them as tools.",
+        "line_es": "La guía de Databricks sobre las funciones en Unity Catalog: quién puede ejecutar una, y cómo las usan los agentes como herramientas.",
+        "href": "https://docs.databricks.com/aws/en/udf/unity-catalog",
+        "href_es": "https://docs.databricks.com/aws/en/udf/unity-catalog"
+      }
+    ]
+  }
+}

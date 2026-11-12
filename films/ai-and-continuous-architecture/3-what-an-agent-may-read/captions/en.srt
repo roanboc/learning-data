@@ -1,0 +1,231 @@
+1
+00:00:01,400 --> 00:00:06,885
+Uruk, in the south of Babylonia, December 229 BCE.
+
+2
+00:00:08,485 --> 00:00:15,811
+A scribe is copying a tablet that gives the measures of Babylon's temple-tower, Etemenanki, stage by stage.
+
+3
+00:00:17,411 --> 00:00:21,257
+His original is a tablet from Borsippa, a city near Babylon.
+
+4
+00:00:22,657 --> 00:00:26,037
+Every copy was made by hand, and every hand could slip.
+
+5
+00:00:27,437 --> 00:00:35,440
+A copy of a copy carried every slip before it: one wrong number, and the tower's measures were wrong for everyone who read them after.
+
+6
+00:00:37,240 --> 00:00:42,811
+And this was learning kept for the initiated, the scholars trained to read it, not for every eye.
+
+7
+00:00:44,411 --> 00:00:49,536
+A reader had to know where a copy came from, that it had been checked, and who it was meant for.
+
+8
+00:00:51,136 --> 00:00:55,461
+So the scribe copies the tablet from Borsippa, and checks his copy against it.
+
+9
+00:00:57,061 --> 00:01:01,112
+At its end, he writes where it came from, and that it was copied and checked.
+
+10
+00:01:02,512 --> 00:01:08,671
+And he writes who may read it: "May the initiate instruct the initiate. The uninitiate must not see."
+
+11
+00:01:10,671 --> 00:01:14,996
+His tablet came down to us, and it still tells its reader how far to trust it.
+
+12
+00:01:16,596 --> 00:01:26,252
+The base it gives, 180 cubits, about 90 metres a side, is close to what archaeologists measured in the ground: 91.5 metres.
+
+13
+00:01:28,052 --> 00:01:35,690
+At the energy utility today, the website's chat answers households: their bills, their prices, and planned work in their street.
+
+14
+00:01:37,090 --> 00:01:38,969
+What it says depends on what it reads.
+
+15
+00:01:40,369 --> 00:01:45,981
+Like the scribe's tablet, what it reads should come from the original, checked, and say who may read it.
+
+16
+00:01:53,781 --> 00:01:58,247
+Farah, the customer advocate, brings Tomás two complaints about the chat.
+
+17
+00:01:59,547 --> 00:02:03,566
+A household was quoted last year's price, and planned its winter by it.
+
+18
+00:02:05,166 --> 00:02:11,410
+And a caller who wasn't the account holder was told that someone in the home needs power for medical equipment.
+
+19
+00:02:13,210 --> 00:02:15,994
+The chat's first version read whatever it could reach.
+
+20
+00:02:17,394 --> 00:02:23,758
+Its prices came from an export on a shared drive: a copy of a copy, which nobody kept up to date.
+
+21
+00:02:25,358 --> 00:02:29,886
+And it read the contact centre's notes, where people's medical needs are written down.
+
+22
+00:02:31,486 --> 00:02:40,693
+One family planned on a price that had changed; another's medical needs reached a stranger, and Ama, the regulatory lead, reported a breach.
+
+23
+00:02:42,693 --> 00:02:48,419
+An agent that answers the public has to read the official figures, and only what it's meant to read.
+
+24
+00:02:51,719 --> 00:02:56,241
+Inés Duarte, the utility's new data architect, takes it on with Tomás.
+
+25
+00:02:57,541 --> 00:03:03,485
+She draws the chat's context, what it reads to answer, from the data practice on Tomás's map.
+
+26
+00:03:05,085 --> 00:03:12,027
+The map shows the data products it needs: tariffs, planned work by street, help pages, and a household's account.
+
+27
+00:03:13,827 --> 00:03:19,555
+Each is kept by its own team, with a contract: what it holds, how fresh it is, and who owns it.
+
+28
+00:03:21,155 --> 00:03:27,240
+And the glossary's terms come with them, so "account holder" means to the chat what it means to the utility.
+
+29
+00:03:28,840 --> 00:03:33,967
+The chat reads those products, and nothing else: no exports, no copies of copies.
+
+30
+00:03:35,567 --> 00:03:40,841
+When prices change, the tariffs product changes that day, and so does the chat's answer.
+
+31
+00:03:44,141 --> 00:03:50,027
+Each product on the map also has a level: public, internal, confidential or restricted.
+
+32
+00:03:51,827 --> 00:03:54,223
+The chat may read public and internal ones.
+
+33
+00:03:55,623 --> 00:03:59,469
+Restricted ones, like people's medical needs, it never reads.
+
+34
+00:04:01,069 --> 00:04:06,150
+Inés doesn't leave them in reach behind a mask, where one wrong rule would let them through.
+
+35
+00:04:07,750 --> 00:04:13,941
+She gives the chat a place of its own, holding only what it may read: what it may not read isn't there at all.
+
+36
+00:04:15,741 --> 00:04:19,469
+And the chat's own identity can reach that place, and nothing else.
+
+37
+00:04:21,069 --> 00:04:24,620
+A household's account is confidential, so it isn't there either.
+
+38
+00:04:26,020 --> 00:04:32,406
+The chat reads one only on its holder's own sign-in, as the website does: theirs, and no one else's.
+
+39
+00:04:35,706 --> 00:04:40,652
+When planned work will cut a street's power, some homes must hear it from a person first.
+
+40
+00:04:42,452 --> 00:04:45,920
+The chat can't tell which: that would mean reading medical needs.
+
+41
+00:04:47,720 --> 00:04:56,051
+So the team that keeps the list offers it a small tool: given a signed-in household, it answers only "hand this to a person now", or not.
+
+42
+00:04:58,051 --> 00:05:03,319
+Never why: the person who calls them back sees why, and first checks who they're speaking to.
+
+43
+00:05:05,319 --> 00:05:09,243
+The chat hands over, and tells the household a person will call that day.
+
+44
+00:05:12,743 --> 00:05:17,106
+The head of retail, who answers for the chat, asks for the change in a ticket.
+
+45
+00:05:18,606 --> 00:05:26,316
+In the ticket, each product's owner agrees, as for any new reader: Grace for planned work, retail for tariffs and accounts.
+
+46
+00:05:28,116 --> 00:05:32,639
+The data team builds the chat's place, and reviews the change in a pull request.
+
+47
+00:05:34,239 --> 00:05:39,789
+Before the ticket closes, Ama checks, in test, that nothing restricted is in the chat's place.
+
+48
+00:05:43,089 --> 00:05:48,202
+On Databricks, the chat runs as an app with its own identity, a service principal.
+
+49
+00:05:50,002 --> 00:05:56,027
+Its place is one schema in Unity Catalog: it may select from the products there, and nothing else.
+
+50
+00:05:57,927 --> 00:06:00,782
+Its help pages are in a search index it may read.
+
+51
+00:06:02,482 --> 00:06:11,500
+The small tool is a Unity Catalog function the chat may run. It reads only the list of homes to hand to a person, and answers yes or no.
+
+52
+00:06:13,400 --> 00:06:19,323
+Databricks advises the same: one identity for each agent, granted only what it needs.
+
+53
+00:06:22,823 --> 00:06:28,151
+In Uruk, the scribe copied from the original, checked his copy, and wrote who may read it.
+
+54
+00:06:29,551 --> 00:06:36,925
+At the utility, the chat reads the official products, kept up to date by their contracts, and only what it's meant to read.
+
+55
+00:06:38,525 --> 00:06:45,505
+In the three months since, it has answered 41,000 questions about prices, every one from this year's tariffs.
+
+56
+00:06:47,105 --> 00:06:50,096
+And no caller has heard about any household but their own.
+
+57
+00:06:55,796 --> 00:07:04,554
+An agent's context belongs on the map: the products it may read, with contracts and terms, in a place of its own, under its own identity.
+
+58
+00:07:06,454 --> 00:07:09,050
+Next: a first draft, not a blank page.

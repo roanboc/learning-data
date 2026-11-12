@@ -1,0 +1,227 @@
+1
+00:00:01,400 --> 00:00:08,899
+En la década de 1860, en Mahan, cerca de Kermán, se cavó un qanat nuevo: un túnel que traía agua de las montañas.
+
+2
+00:00:10,499 --> 00:00:15,862
+Su agua se poseía en seis partes de tiempo, cada una un turno de agua, y tres hombres las tenían.
+
+3
+00:00:17,362 --> 00:00:20,176
+Una de las seis fue para el guardián del santuario del pueblo.
+
+4
+00:00:21,476 --> 00:00:26,124
+Con los años, sus partes se vendieron, se dejaron a los hijos y se dividieron una y otra vez.
+
+5
+00:00:27,624 --> 00:00:32,642
+Muchos qanats llegaron a tener doscientos o trescientos dueños, y algunos, diez mil partes.
+
+6
+00:00:34,342 --> 00:00:39,867
+El agua de cada dueño tenía que llegar al campo correcto a la hora correcta, o una familia podía perder su cosecha.
+
+7
+00:00:41,367 --> 00:00:46,326
+Y cada año el túnel necesitaba reparaciones, que alguien tenía que decidir y pagar.
+
+8
+00:00:47,826 --> 00:00:53,573
+Con tantos dueños, un qanat necesitaba que decidieran juntos, y alguien que cuidara el agua.
+
+9
+00:00:55,073 --> 00:01:00,428
+Así que cada año los dueños se reunían a decidir las reparaciones, con votos según sus partes.
+
+10
+00:01:01,928 --> 00:01:06,689
+Le pagaban a un maestro del agua, el mirab, para llevar el agua a cada campo en su turno.
+
+11
+00:01:07,989 --> 00:01:12,678
+Con sus ayudantes, mantenía limpios los canales y abría a tiempo la compuerta de cada campo.
+
+12
+00:01:13,978 --> 00:01:17,287
+El mirab cuidaba el agua. Sus dueños decidían.
+
+13
+00:01:19,187 --> 00:01:25,354
+De ese qanat, el Vakilabad, consta cada cambio de dueño, desde los tres primeros hombres.
+
+14
+00:01:26,854 --> 00:01:32,862
+Generaciones después, la parte del guardián del santuario era ya un tercio, en manos de veinte de sus descendientes.
+
+15
+00:01:34,362 --> 00:01:38,487
+Unas setenta familias tenían el resto, y cada parte tenía un dueño con nombre.
+
+16
+00:01:39,987 --> 00:01:46,771
+En la empresa, cada concepto necesita lo mismo: un dueño que decida, y alguien que lo cuide cada día.
+
+17
+00:01:54,671 --> 00:01:58,922
+La siguiente nota de Tomás pregunta quién crea cada concepto, y de quién es.
+
+18
+00:02:00,222 --> 00:02:04,639
+En su mapa, cada concepto ya está debajo de las capacidades que lo usan.
+
+19
+00:02:06,139 --> 00:02:10,294
+Ahora necesita saber qué hace exactamente cada capacidad con cada uno.
+
+20
+00:02:13,594 --> 00:02:18,819
+Dibuja una matriz: las capacidades a un costado, y los conceptos arriba.
+
+21
+00:02:20,319 --> 00:02:26,929
+En cada casilla va lo que la capacidad hace con el concepto: lo crea, lo lee, lo actualiza o lo borra.
+
+22
+00:02:28,629 --> 00:02:31,994
+Los arquitectos la llaman matriz CRUD, por sus iniciales en inglés.
+
+23
+00:02:33,294 --> 00:02:38,175
+La llena con la gente que dirige cada capacidad, no con lo que dicen los sistemas.
+
+24
+00:02:39,675 --> 00:02:44,883
+Luego lee cada columna hacia abajo: cada concepto debería crearlo una sola capacidad.
+
+25
+00:02:46,583 --> 00:02:49,303
+Y su dueño es el dueño de esa capacidad.
+
+26
+00:02:50,803 --> 00:02:55,602
+Conectar clientes crea el punto de conexión, así que el punto de conexión es de Grace.
+
+27
+00:02:58,902 --> 00:03:00,638
+Pero la columna de la cuenta tiene dos.
+
+28
+00:03:02,138 --> 00:03:05,636
+Atender clientes abre una cuenta cuando alguien se registra.
+
+29
+00:03:06,936 --> 00:03:12,488
+Y conectar clientes abre una cuando se conecta una casa nueva, para que salga su primera factura.
+
+30
+00:03:13,988 --> 00:03:17,262
+Así, una familia que se muda a una casa nueva podía quedar con dos.
+
+31
+00:03:18,762 --> 00:03:25,144
+El año pasado, mil doscientas casas nuevas tuvieron dos cuentas, y trescientas cuarenta familias recibieron dos primeras facturas.
+
+32
+00:03:26,844 --> 00:03:32,358
+Farah, que habla por los clientes de la empresa, venía preguntando por qué. La matriz lo muestra.
+
+33
+00:03:33,858 --> 00:03:39,277
+Qué capacidad debe crear la cuenta no lo deciden Tomás ni el equipo de datos.
+
+34
+00:03:42,577 --> 00:03:48,969
+Grace está a cargo de conectar clientes, y quien dirige comercialización, de atender clientes. Lo deciden en conjunto.
+
+35
+00:03:50,469 --> 00:03:57,662
+Atender clientes crea la cuenta. Conectar clientes crea el punto de conexión, y solo lee la cuenta.
+
+36
+00:03:59,362 --> 00:04:03,979
+Cuando se conecta una casa nueva, avisa a comercialización, que abre la cuenta.
+
+37
+00:04:05,479 --> 00:04:10,365
+Así que la cuenta es de quien dirige comercialización, la persona a cargo de la capacidad que la crea.
+
+38
+00:04:12,065 --> 00:04:16,331
+La decisión va al mapa con su fecha, para que nadie tenga que resolverla otra vez.
+
+39
+00:04:17,831 --> 00:04:21,582
+Desde entonces, cada casa nueva recibe una cuenta, y una primera factura.
+
+40
+00:04:27,282 --> 00:04:33,107
+Un dueño decide qué significa un concepto, quién lo crea, sus reglas y qué tan bueno debe ser.
+
+41
+00:04:34,807 --> 00:04:40,093
+Pero quien dirige comercialización no puede cuidar trescientas diez mil cuentas, día a día.
+
+42
+00:04:41,793 --> 00:04:46,108
+Así, cada dueño nombra a un responsable de datos: alguien que usa el concepto cada día.
+
+43
+00:04:48,008 --> 00:04:55,750
+Para las cuentas, es quien lidera facturación en comercialización: cuida la definición, responde preguntas y da seguimiento si algo falla.
+
+44
+00:04:57,850 --> 00:05:01,943
+Como el mirab, un responsable de datos lo cuida para su dueño, y no es su dueño.
+
+45
+00:05:03,943 --> 00:05:10,144
+Y el equipo de datos construye y opera lo que lo guarda, como los excavadores el túnel de un qanat, sin ser dueño de nada.
+
+46
+00:05:13,844 --> 00:05:16,613
+Algunos conceptos no tienen dueño anotado en ningún lado.
+
+47
+00:05:17,713 --> 00:05:25,425
+Una tabla de cortes, hecha en 2019, guarda cada corte, y el informe anual de Ama al regulador los cuenta desde ahí.
+
+48
+00:05:26,925 --> 00:05:30,405
+Quien la hizo ya se fue, y nadie sabe de quién es lo que contiene.
+
+49
+00:05:31,905 --> 00:05:37,964
+Tomás no pregunta de qué sistema vino la tabla. Pregunta qué capacidad crea los cortes.
+
+50
+00:05:39,664 --> 00:05:45,807
+Operar la red, así que los cortes son de Grace, y quien lidera su mesa de cortes pasa a ser su responsable de datos.
+
+51
+00:05:47,507 --> 00:05:52,816
+Los dueños se encuentran por capacidad, no por sistema, aun donde nada se anotó.
+
+52
+00:05:56,316 --> 00:06:01,392
+Al mapa de la práctica de datos se suman dos roles: dueño de los datos y responsable de datos.
+
+53
+00:06:03,092 --> 00:06:09,884
+El dueño de cada dominio tiene el rol de dueño: Grace para los conceptos de la red, y quien dirige comercialización para los suyos.
+
+54
+00:06:11,584 --> 00:06:15,919
+Y cada dueño nombra a los responsables de datos que cuidan sus conceptos, día a día.
+
+55
+00:06:19,419 --> 00:06:25,613
+En un qanat, cada parte tiene un dueño con nombre: los dueños deciden, y el mirab cuida el agua.
+
+56
+00:06:27,313 --> 00:06:35,285
+En la empresa, cada concepto tiene ahora una capacidad que lo crea, un dueño que decide y un responsable de datos que lo cuida.
+
+57
+00:06:36,985 --> 00:06:42,330
+La siguiente nota de Tomás pregunta dónde nace cada uno: en qué proceso, y en qué paso.

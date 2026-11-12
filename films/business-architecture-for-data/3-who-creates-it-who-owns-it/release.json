@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Who creates it, who owns it",
+    "key": "who-creates-it-who-owns-it-en",
+    "dir": "films/business-architecture-for-data/3-who-creates-it-who-owns-it/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/who-creates-it-who-owns-it/film.js",
+    "video": "dist/who-creates-it-who-owns-it.mp4",
+    "file": "who-creates-it-who-owns-it.mp4",
+    "captions": [["films/business-architecture-for-data/3-who-creates-it-who-owns-it/captions/en.srt", "who-creates-it-who-owns-it.en.srt"], ["films/business-architecture-for-data/3-who-creates-it-who-owns-it/captions/es.srt", "who-creates-it-who-owns-it.es.srt"]],
+    "paths": ["films/business-architecture-for-data/3-who-creates-it-who-owns-it/source", ":(exclude)films/business-architecture-for-data/3-who-creates-it-who-owns-it/source/src/i18n/es/captions.js", "films/business-architecture-for-data/shared", "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts", "films/data-governance/shared/tools/twice.py", "films/data-governance/shared/tools/quiet.py", "films/data-governance/shared/tools/held.py"],
+    "legibility": {"texts": 326, "under_28": "0%", "under_20": 0, "median": 28.1, "status": "Drawn to the rule"}
+  }
+]

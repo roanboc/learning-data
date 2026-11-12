@@ -209,6 +209,7 @@ Source: [films/business-architecture-for-data](../films/business-architecture-fo
 
 - [What the business owns](../films/business-architecture-for-data/1-what-the-business-owns/) — `what-the-business-owns`
 - [What the business needs to know](../films/business-architecture-for-data/2-what-the-business-needs-to-know/) — `what-the-business-needs-to-know`
+- [Who creates it, who owns it](../films/business-architecture-for-data/3-who-creates-it-who-owns-it/) — `who-creates-it-who-owns-it`
 
 ### Data architecture
 
@@ -225,6 +226,7 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 
 - [An application or a platform?](../films/platform-and-solution-architecture/1-an-application-or-a-platform/) — `an-application-or-a-platform`
 - [Inside the platform](../films/platform-and-solution-architecture/2-inside-the-platform/) — `inside-the-platform`
+- [One platform, or many](../films/platform-and-solution-architecture/3-one-platform-or-many/) — `one-platform-or-many`
 
 ### AI and continuous architecture
 
@@ -232,6 +234,7 @@ Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-archit
 
 - [Agents on the map](../films/ai-and-continuous-architecture/1-agents-on-the-map/) — `agents-on-the-map`
 - [The AI platform](../films/ai-and-continuous-architecture/2-the-ai-platform/) — `the-ai-platform`
+- [What an agent may read](../films/ai-and-continuous-architecture/3-what-an-agent-may-read/) — `what-an-agent-may-read`
 
 ## Master and reference data
 

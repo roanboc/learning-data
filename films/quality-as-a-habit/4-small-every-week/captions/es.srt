@@ -123,217 +123,217 @@ Los resultados vienen de los controles que se ejecutan cada noche.
 Y de lo que cuentan las personas: avisos, horas de trabajo a mano y los cien registros.
 
 32
-00:03:11,032 --> 00:03:18,835
+00:03:11,032 --> 00:03:18,750
 Los ingenieros de calidad lo llaman planificar, hacer, estudiar, actuar: un ciclo que dibujó Walter Shewhart y enseñó W. Edwards Deming.
 
 33
-00:03:20,135 --> 00:03:27,489
+00:03:20,050 --> 00:03:27,427
 Muchos dicen verificar en su tercer paso. Deming prefería estudiar: comparar lo que pasó con lo que el plan esperaba, y aprender.
 
 34
-00:03:28,989 --> 00:03:33,448
+00:03:28,927 --> 00:03:33,386
 El equipo de Borlaug hacía el ciclo dos veces al año: sembrar, mirar, guardar lo mejor, resembrar.
 
 35
-00:03:34,948 --> 00:03:41,939
+00:03:34,886 --> 00:03:41,877
 Esta es una vuelta, desde el jueves 1 de octubre de 2026, antes de la ronda de revisión a mano de diciembre.
 
 36
-00:03:42,639 --> 00:03:47,716
+00:03:42,577 --> 00:03:47,654
 El diciembre pasado, dos personas revisaron a mano todos los nombres: 240 horas.
 
 37
-00:03:48,416 --> 00:03:53,850
+00:03:48,354 --> 00:03:53,788
 Desde septiembre, los nombres se arreglan donde nacen, y cada noche los controles retienen los dudosos.
 
 38
-00:03:54,950 --> 00:03:58,904
+00:03:54,888 --> 00:03:58,842
 Así que Malia pregunta: ¿todavía hay que revisar a mano todos los nombres?
 
 39
-00:04:00,404 --> 00:04:07,975
+00:04:00,342 --> 00:04:07,913
 Planificar: revisar a mano solo los nombres que retiene un control o que avisa un graduado, y que los cien registros miren el resto.
 
 40
-00:04:08,675 --> 00:04:14,647
+00:04:08,613 --> 00:04:14,585
 Lo sabrán por dos medidas que ya llevan: las horas de la ronda y los registros perfectos de los cien.
 
 41
-00:04:15,547 --> 00:04:20,868
+00:04:15,485 --> 00:04:20,806
 Y dicen qué esperan: muchas menos horas y al menos 95 registros perfectos.
 
 42
-00:04:22,168 --> 00:04:29,912
+00:04:22,106 --> 00:04:29,850
 Hacer: desde el lunes 19 de octubre, el equipo revisa a mano 78 nombres, no 2,140.
 
 43
-00:04:30,612 --> 00:04:40,032
+00:04:30,550 --> 00:04:39,970
 Estudiar: la ronda lleva 26 horas, no 240. Y el viernes 6 de noviembre, 97 de los cien registros son perfectos.
 
 44
-00:04:41,132 --> 00:04:42,896
+00:04:41,070 --> 00:04:42,834
 Las dos, como esperaba el plan.
 
 45
-00:04:44,396 --> 00:04:47,395
+00:04:44,334 --> 00:04:47,333
 Actuar: lo mantienen, y lo escriben en los pasos de la ronda.
 
 46
-00:04:49,495 --> 00:04:55,270
+00:04:49,433 --> 00:04:55,208
 Con agentes, estudiar importa más. Un agente puede redactar todo el cambio, para que lo apruebe una persona.
 
 47
-00:04:56,570 --> 00:05:01,760
+00:04:56,508 --> 00:05:01,698
 Las personas aprenden haciendo el trabajo. En manos de un agente, esa comprensión puede quedar oculta.
 
 48
-00:05:03,360 --> 00:05:07,902
+00:05:03,298 --> 00:05:07,840
 Así que una persona aún debe entender el plan, y saber lo suficiente para ayudar a hacerlo.
 
 49
-00:05:09,102 --> 00:05:12,781
+00:05:09,040 --> 00:05:12,719
 Luego, estudiar los resultados frente al plan, y actuar según lo que muestran.
 
 50
-00:05:16,681 --> 00:05:21,399
+00:05:16,619 --> 00:05:21,337
 El orden importaba: medir, simplificar, estandarizar, y solo entonces automatizar.
 
 51
-00:05:22,699 --> 00:05:27,736
+00:05:22,637 --> 00:05:27,674
 Primero midieron el trabajo a mano, en agosto: unas 320 horas al año.
 
 52
-00:05:28,436 --> 00:05:31,311
+00:05:28,374 --> 00:05:31,249
 Lo simplificaron: solo los nombres que retiene un control.
 
 53
-00:05:32,011 --> 00:05:39,375
+00:05:31,949 --> 00:05:39,313
 Lo estandarizaron: una sola forma de resolver un nombre retenido, en el sistema de estudiantes, con el documento visto en la matrícula.
 
 54
-00:05:40,075 --> 00:05:46,742
+00:05:40,013 --> 00:05:46,680
 Luego automatizaron: cada noche los controles retienen nombres, en una lista que la oficina de registro académico lee cada mañana.
 
 55
-00:05:48,042 --> 00:05:51,215
+00:05:47,980 --> 00:05:51,153
 Automatiza primero, y solo harás más rápido el trabajo equivocado.
 
 56
-00:05:54,715 --> 00:05:57,749
+00:05:54,653 --> 00:05:57,687
 El último paso de cada cambio es un control que lo mantiene.
 
 57
-00:05:58,449 --> 00:06:02,133
+00:05:58,387 --> 00:06:02,071
 Sin él, un cambio dura solo hasta que alguien lo olvida.
 
 58
-00:06:03,633 --> 00:06:09,271
+00:06:03,571 --> 00:06:09,209
 La revisión a mano la mantienen los cien registros, ahora cada mes, con un nivel acordado con Malia.
 
 59
-00:06:09,971 --> 00:06:13,596
+00:06:09,909 --> 00:06:13,534
 Por debajo de 95 perfectos, la siguiente ronda revisa más a mano.
 
 60
-00:06:15,096 --> 00:06:17,186
+00:06:15,034 --> 00:06:17,124
 Cada cambio del año tiene su guardián.
 
 61
-00:06:20,486 --> 00:06:22,877
+00:06:20,424 --> 00:06:22,815
 El cuadro de mando muestra solo los controles de anoche.
 
 62
-00:06:23,577 --> 00:06:28,842
+00:06:23,515 --> 00:06:28,780
 Así que un último paso de cada ejecución nocturna en dbt guarda ahora cada resultado en una tabla.
 
 63
-00:06:29,542 --> 00:06:34,814
+00:06:29,480 --> 00:06:34,752
 Los jueves, un panel en Databricks lee esa tabla, junto a lo que cuentan las personas.
 
 64
-00:06:35,514 --> 00:06:40,576
+00:06:35,452 --> 00:06:40,514
 Muestra la semana entera: un control que retiene más nombres cada noche es algo que mirar.
 
 65
-00:06:41,876 --> 00:06:54,247
+00:06:41,814 --> 00:06:54,185
 Diplomas impresos de nuevo: 41, 14, 6. Registros perfectos: 79, 88, 97. Horas a mano: unas 320 al año, ahora unas 40.
 
 66
-00:06:57,747 --> 00:07:03,970
+00:06:57,685 --> 00:07:03,908
 Quince minutos bastan porque quienes usan la lista y quienes la hacen están de pie en la misma mesa.
 
 67
-00:07:05,670 --> 00:07:11,658
+00:07:05,608 --> 00:07:11,596
 Malia trae lo que necesitan las ceremonias. La oficina de Mei trae los nombres, bien hechos en el origen.
 
 68
-00:07:13,158 --> 00:07:15,807
+00:07:13,096 --> 00:07:15,745
 Jun y Sam traen los controles, y la ejecución de la noche.
 
 69
-00:07:17,107 --> 00:07:23,777
+00:07:17,045 --> 00:07:23,715
 Cuando un cambio necesita a alguien más, como admisiones, que crea el primer registro de cada estudiante, lo invitan a ese jueves.
 
 70
-00:07:25,477 --> 00:07:28,330
+00:07:25,415 --> 00:07:28,268
 En México, los agricultores también vinieron a la mesa.
 
 71
-00:07:29,630 --> 00:07:36,198
+00:07:29,568 --> 00:07:36,136
 En 1955 ayudaron a comprar tierra para una nueva estación de investigación, y gravaron su propio trigo para sumar más.
 
 72
-00:07:40,098 --> 00:07:45,137
+00:07:40,036 --> 00:07:45,075
 Miércoles 9 de diciembre de 2026, diez de la mañana, en el Gran Salón.
 
 73
-00:07:46,437 --> 00:07:48,906
+00:07:46,375 --> 00:07:48,844
 Andrés Peñaloza cruza el escenario.
 
 74
-00:07:51,006 --> 00:07:55,469
+00:07:50,944 --> 00:07:55,407
 Mei lee su nombre de la lista: Andrés Peñaloza, como él lo dice.
 
 75
-00:07:56,969 --> 00:08:00,327
+00:07:56,907 --> 00:08:00,265
 Su diploma dice Andrés Peñaloza, letra por letra.
 
 76
-00:08:02,227 --> 00:08:06,107
+00:08:02,165 --> 00:08:06,045
 Este diciembre se imprimieron de nuevo 3 diplomas, no 41.
 
 77
-00:08:07,207 --> 00:08:12,385
+00:08:07,145 --> 00:08:12,323
 Dos graduados habían cambiado su nombre después de enviarse la lista, y una no había confirmado el suyo.
 
 78
-00:08:13,085 --> 00:08:18,478
+00:08:13,023 --> 00:08:18,416
 El jueves 17 de diciembre, los cuatro miran los tres y eligen el siguiente cambio pequeño.
 
 79
-00:08:19,978 --> 00:08:23,342
+00:08:19,916 --> 00:08:23,280
 El equipo de Borlaug tampoco se detuvo en 1956.
 
 80
-00:08:24,042 --> 00:08:30,332
+00:08:23,980 --> 00:08:30,270
 Vuelta tras vuelta, sus trigos mejoraron, y en 1963 México vendía trigo al extranjero.
 
 81
-00:08:32,032 --> 00:08:36,157
+00:08:31,970 --> 00:08:36,095
 La calidad no es una propiedad de los datos. Es si los datos son aptos para un uso.
 
 82
-00:08:37,457 --> 00:08:42,428
+00:08:37,395 --> 00:08:42,366
 Di qué es bueno para cada uso. Mídelo. Verifícalo contra la verdad y el reloj.
 
 83
-00:08:43,128 --> 00:08:48,701
+00:08:43,066 --> 00:08:48,639
 Arréglalo donde nace. Responde a quienes avisan. Escríbelo para los lectores que no pueden preguntar.
 
 84
-00:08:50,001 --> 00:08:51,899
+00:08:49,939 --> 00:08:51,837
 Y mejora, un poco, cada semana.
 
 85
-00:08:53,199 --> 00:08:55,861
+00:08:53,137 --> 00:08:55,799
 Un cambio pequeño cada semana, medido y luego mantenido.

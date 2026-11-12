@@ -29,10 +29,10 @@ Measure, simplify, standardise, and only then automate. Automate first, and you 
 
 ## One turn, from Thursday 1 October 2026
 
-- **Plan.** Malia asks: do we still need to check every name by hand? Since September, names are fixed where they're born, and each night the checks hold the doubtful ones. So check by hand only the names a check holds or a graduate reports, and let the hundred records look at the rest. Two measures, kept already: the round's hours, and the perfect records in the hundred.
+- **Plan.** Malia asks: do we still need to check every name by hand? Since September, names are fixed where they're born, and each night the checks hold the doubtful ones. So check by hand only the names a check holds or a graduate reports, and let the hundred records look at the rest. Two measures, kept already, and what the team expects of each: the round's hours, far fewer; and the perfect records in the hundred, at least 95.
 - **Do.** From Monday 19 October, the graduations team checks 78 names by hand, not all 2,140.
-- **Check.** The round takes 26 hours, not 240 as in December 2025. On Friday 6 November, 97 of the hundred records are perfect.
-- **Act.** Kept, and written into the round's steps.
+- **Study.** The round takes 26 hours, not 240 as in December 2025. On Friday 6 November, 97 of the hundred records are perfect. Both as the plan expected. Many call this step check; study is W. Edwards Deming's word for it: compare what happened with what the plan expected, and learn from it.
+- **Act.** Kept, and written into the round's steps. When an agent drafts a change, for a person to approve, the steps stay a person's: understand the plan, know enough to help with the doing, study the results against the plan, and act on what they show.
 
 ## Each change, with its keeper
 

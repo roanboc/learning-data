@@ -442,18 +442,25 @@ const NARR={
  {"id":"q3","gap":0.8,"text":"And how will we know it worked?"},
  {"id":"results","gap":0.8,"text":"The results come from the checks that run every night."},
  {"id":"count","gap":0.8,"text":"And from what people count: reports, hours of hand work, and the hundred records."}]},
-"cycle":{"name":"Plan, do, check, act","lead":0.8,"tail":0.8,"vo":[
- {"id":"loop","gap":0.8,"text":"Quality engineers call it plan, do, check, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deming.","say":"Quality engineers call it plan, do, check, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deeming."},
- {"id":"wheat","gap":0.8,"text":"Borlaug's team ran it twice a year: sow, look, keep the best, sow again."},
+"cycle":{"name":"Plan, do, study, act","lead":0.8,"tail":0.8,"vo":[
+ {"id":"loop","gap":0.8,"text":"Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deming.","say":"Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deeming."},
+ {"id":"name","gap":0.8,"text":"Many say check for its third step. Deming preferred study: compare what happened with what the plan expected, and learn from it.","say":"Many say check for its third step. Deeming preferred study: compare what happened with what the plan expected, and learn from it."},
+ {"id":"wheat","gap":0.8,"text":"Borlaug's team ran the loop twice a year: sow, look, keep the best, sow again."},
  {"id":"oct","gap":0.8,"text":"Here is one turn of it, from Thursday 1 October 2026, before December's round of hand checks.","say":"Here is one turn of it, from Thursday the first of October, twenty twenty-six, before December's round of hand checks."},
  {"id":"last","gap":0.8,"text":"Last December, two people checked every name by hand: 240 hours.","say":"Last December, two people checked every name by hand: two hundred and forty hours."},
  {"id":"since","gap":0.8,"text":"Since September, names are fixed where they're born, and each night the checks hold the doubtful ones."},
  {"id":"ask","gap":0.8,"text":"So Malia asks: do we still need to check every name by hand?"},
  {"id":"plan","gap":0.8,"text":"Plan: check by hand only the names a check holds or a graduate reports, and let the hundred records look at the rest."},
  {"id":"know","gap":0.8,"text":"They'll know by two measures they keep already: the round's hours, and the perfect records in the hundred."},
+ {"id":"expect","gap":0.8,"text":"And they say what they expect: far fewer hours, and at least 95 perfect records.","say":"And they say what they expect: far fewer hours, and at least ninety-five perfect records."},
  {"id":"do","gap":0.8,"text":"Do: from Monday 19 October, the team checks 78 names by hand, not 2,140.","say":"Do: from Monday the nineteenth of October, the team checks seventy-eight names by hand, not two thousand, one hundred and forty."},
- {"id":"check","gap":0.8,"text":"Check: the round takes 26 hours, not 240. And on Friday 6 November, 97 of the hundred records are perfect.","say":"Check: the round takes twenty-six hours, not two hundred and forty. And on Friday the sixth of November, ninety-seven of the hundred records are perfect."},
- {"id":"act","gap":0.8,"text":"Act: they keep it, and write it into the round's steps."}]},
+ {"id":"study","gap":0.8,"text":"Study: the round takes 26 hours, not 240. And on Friday 6 November, 97 of the hundred records are perfect.","say":"Study: the round takes twenty-six hours, not two hundred and forty. And on Friday the sixth of November, ninety-seven of the hundred records are perfect."},
+ {"id":"asplan","gap":0.8,"text":"Both as the plan expected."},
+ {"id":"act","gap":0.8,"text":"Act: they keep it, and write it into the round's steps."},
+ {"id":"agent","gap":0.8,"text":"With agents, study matters more. An agent can draft the whole change, for a person to approve."},
+ {"id":"hidden","gap":0.8,"text":"People learn by doing the work. Handed to an agent, that understanding can stay hidden."},
+ {"id":"person","gap":0.8,"text":"So a person still has to understand the plan, and know enough to help with the doing."},
+ {"id":"acts","gap":0.8,"text":"Then study the results against the plan, and act on what they show."}]},
 "order":{"name":"Measure, simplify, standardise, automate","lead":0.8,"tail":0.8,"vo":[
  {"id":"order","gap":0.8,"text":"The order mattered: measure, simplify, standardise, and only then automate."},
  {"id":"measured","gap":0.8,"text":"They measured the hand work first, in August: about 320 hours a year.","say":"They measured the hand work first, in August: about three hundred and twenty hours a year."},
@@ -496,7 +503,7 @@ const NARR={
  {"id":"takeaway","gap":0.8,"text":"One small change a week, measured, then kept."}]}
 };
 
-const VODUR={"harvests/place": 8.712, "harvests/team": 7.245, "harvests/rust": 4.956, "harvests/shrivels": 3.824, "harvests/years": 6.908, "harvests/slow": 3.097, "harvests/gens": 5.016, "harvests/change": 4.986, "harvests/two": 2.106, "harvests/winter": 3.467, "harvests/summer": 6.969, "harvests/carried": 4.184, "harvests/best": 5.353, "harvests/small": 2.194, "harvests/half": 6.103, "harvests/farmers": 6.507, "harvests/enough": 3.492, "harvests/univ": 8.391, "harvests/folder": 3.992, "harvests/three": 4.189, "thursdays/idea": 8.033, "thursdays/once": 4.648, "thursdays/smaller": 3.321, "thursdays/every": 3.425, "thursdays/who": 4.558, "thursdays/makers": 3.573, "thursdays/q1": 2.618, "thursdays/q2": 1.648, "thursdays/q3": 1.383, "thursdays/results": 2.495, "thursdays/count": 4.639, "cycle/loop": 7.653, "cycle/wheat": 4.182, "cycle/oct": 6.891, "cycle/last": 4.977, "cycle/since": 5.334, "cycle/ask": 3.854, "cycle/plan": 7.471, "cycle/know": 5.872, "cycle/do": 7.644, "cycle/check": 9.238, "cycle/act": 2.899, "order/order": 4.618, "order/measured": 4.937, "order/simple": 2.775, "order/standard": 7.264, "order/auto": 6.567, "order/mess": 3.073, "kept/last": 2.934, "kept/forget": 3.584, "kept/level": 5.538, "kept/below": 3.525, "kept/year": 1.99, "kept/card": 2.291, "kept/night": 5.165, "kept/dash": 5.172, "kept/week": 4.962, "kept/so": 12.271, "table/enough": 6.123, "table/bring": 5.888, "table/checks": 2.549, "table/asked": 6.57, "table/farmers": 2.753, "table/land": 6.468, "stage/hall": 4.939, "stage/crosses": 2.369, "stage/reads": 4.363, "stage/cert": 3.258, "stage/three": 3.78, "stage/why": 5.078, "stage/next": 5.293, "stage/mexico": 3.264, "stage/round": 6.19, "stage/promise": 4.025, "stage/recap": 4.871, "stage/recap2": 5.473, "stage/better": 1.798, "stage/takeaway": 2.562};
+const VODUR={"harvests/place": 8.712, "harvests/team": 7.245, "harvests/rust": 4.956, "harvests/shrivels": 3.824, "harvests/years": 6.908, "harvests/slow": 3.097, "harvests/gens": 5.016, "harvests/change": 4.986, "harvests/two": 2.106, "harvests/winter": 3.467, "harvests/summer": 6.969, "harvests/carried": 4.184, "harvests/best": 5.353, "harvests/small": 2.194, "harvests/half": 6.103, "harvests/farmers": 6.507, "harvests/enough": 3.492, "harvests/univ": 8.391, "harvests/folder": 3.992, "harvests/three": 4.189, "thursdays/idea": 8.033, "thursdays/once": 4.648, "thursdays/smaller": 3.321, "thursdays/every": 3.425, "thursdays/who": 4.558, "thursdays/makers": 3.573, "thursdays/q1": 2.618, "thursdays/q2": 1.648, "thursdays/q3": 1.383, "thursdays/results": 2.495, "thursdays/count": 4.639, "cycle/loop": 7.703, "cycle/name": 7.254, "cycle/wheat": 4.359, "cycle/oct": 6.891, "cycle/last": 4.977, "cycle/since": 5.334, "cycle/ask": 3.854, "cycle/plan": 7.471, "cycle/know": 5.872, "cycle/expect": 5.221, "cycle/do": 7.644, "cycle/study": 9.32, "cycle/asplan": 1.664, "cycle/act": 2.899, "cycle/agent": 5.675, "cycle/hidden": 5.09, "cycle/person": 4.442, "cycle/acts": 3.579, "order/order": 4.618, "order/measured": 4.937, "order/simple": 2.775, "order/standard": 7.264, "order/auto": 6.567, "order/mess": 3.073, "kept/last": 2.934, "kept/forget": 3.584, "kept/level": 5.538, "kept/below": 3.525, "kept/year": 1.99, "kept/card": 2.291, "kept/night": 5.165, "kept/dash": 5.172, "kept/week": 4.962, "kept/so": 12.271, "table/enough": 6.123, "table/bring": 5.888, "table/checks": 2.549, "table/asked": 6.57, "table/farmers": 2.753, "table/land": 6.468, "stage/hall": 4.939, "stage/crosses": 2.369, "stage/reads": 4.363, "stage/cert": 3.258, "stage/three": 3.78, "stage/why": 5.078, "stage/next": 5.293, "stage/mexico": 3.264, "stage/round": 6.19, "stage/promise": 4.025, "stage/recap": 4.871, "stage/recap2": 5.473, "stage/better": 1.798, "stage/takeaway": 2.562};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -504,7 +511,7 @@ const VODUR={"harvests/place": 8.712, "harvests/team": 7.245, "harvests/rust": 4
 const BREATH={
 "harvests":{"hold":{"place":0.6,"team":0.4,"rust":0.4,"shrivels":0.4,"years":0.6,"change":1.0,"summer":0.6,"carried":0.6,"small":0.8,"half":0.6,"farmers":0.4,"enough":1.2,"folder":0.8},"breathe":4.4},
 "thursdays":{"hold":{"idea":0.6,"once":1.0,"smaller":0.6,"every":0.8,"who":0.4,"makers":0.6,"q1":0.4,"q2":0.4,"q3":0.8,"results":0.4,"count":0.8}},
-"cycle":{"hold":{"loop":0.6,"wheat":0.8,"since":0.4,"ask":0.8,"know":0.4,"check":0.8,"act":1.0}},
+"cycle":{"hold":{"loop":0.6,"name":0.8,"wheat":0.8,"since":0.4,"ask":0.8,"know":0.2,"expect":0.6,"study":0.4,"asplan":0.8,"act":1.4,"agent":0.6,"hidden":0.9,"person":0.5,"acts":1.6}},
 "order":{"hold":{"order":0.6,"auto":0.6,"mess":1.2}},
 "kept":{"hold":{"forget":0.8,"below":0.8,"year":2.6,"week":0.6,"so":1.2}},
 "table":{"hold":{"enough":1.0,"bring":0.8,"checks":0.6,"asked":1.0,"farmers":0.6,"land":1.6}},
@@ -2281,8 +2288,8 @@ const SW_P={
 /* ===== Small, every week: the film's own helpers =====
    Timing, the corner that names the place and the year, the opening's live pictures (the team in the wheat, the field book's calendar
    of generations, the map's dots, lines, sacks and wheat, a certificate, a folder held open), and the bench's cards (the four steps of
-   plan, do, check, act; the order of measure, simplify, standardise, automate; the year's ledger; the week on the dashboard; the films'
-   cards). All prefixed sw_; the module's colours keep their meanings (look.js): steel for a measure taken, brass for what good means,
+   plan, do, study, act, an agent and what's handed to it; the order of measure, simplify, standardise, automate; the year's ledger; the
+   week on the dashboard; the films' cards). All prefixed sw_; the module's colours keep their meanings (look.js): steel for a measure taken, brass for what good means,
    amber for a check that holds names. */
 
 // made once per chapter, the first time it draws: its cues are known by then
@@ -2362,15 +2369,19 @@ function sw_folder(c,hands){if(!hands||!hands.near)return;const h=hands.near;c.s
   c.fillStyle=rgba(lin,1);rr(c,12,12,114,156,5);c.fill();rr(c,144,12,114,156,5);c.fill();
   c.fillStyle="rgba(120,96,64,0.12)";c.fillRect(126,12,6,156);c.restore();}
 
-/* ---------------------------------------------------------------- plan, do, check, act
+/* ---------------------------------------------------------------- plan, do, study, act
    A ring of four cards with arrows round it (u 0), or the same four as a row along the top of the wall (u 1), moving between the two
-   (each card glides, so its word never shows twice); o.lits ([4], how lit each step is, 0 to 1: its card in ink, its word in chalk), o.wheat
-   (0 to 1: the team's words beside each step: sow again, sow, look, keep the best), o.a. */
-const SW_STEPS=["Plan","Do","Check","Act"],SW_WHEAT=["sow again","sow","look","keep the best"];
-// Plan stands at the ring's left, then Do, Check and Act clockwise, so the ring opens into the row without two pills crossing: Plan, Do
-// and Check rise to the row together, Act after them, moving right before it rises
+   (each card glides, so its word never shows twice); o.spread (0 to 1) moves the row's steps apart, each to the head of one of four
+   columns (SW_COLX); o.lits ([4], how lit each step is, 0 to 1: its card in ink, its word in chalk), o.wheat (0 to 1: the team's words
+   beside each step: sow again, sow, look, keep the best), o.a. */
+const SW_STEPS=["Plan","Do","Study","Act"],SW_WHEAT=["sow again","sow","look","keep the best"];
+// four columns across the wall, the slots the next chapter's four steps stand in too: a column's left edge, and its width
+const SW_COLX=i=>120+i*440,SW_COLW=380;
+// Plan stands at the ring's left, then Do, Study and Act clockwise, so the ring opens into the row without two pills crossing: Plan, Do
+// and Study rise to the row together, Act after them, moving right before it rises
 function sw_cycle(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const u0=clamp(o.u||0,0,1),u=ag_sine(u0),R=220,cx=960,cy=430;ctx.save();ctx.globalAlpha*=a;
-  const ring=i=>{const an=Math.PI+i*Math.PI/2;return[cx+Math.cos(an)*R,cy+Math.sin(an)*R];},row=i=>[960+(i-1.5)*236,104],
+  const sp=ag_sine(clamp(o.spread||0,0,1)),gap=lerp(236,SW_COLX(1)-SW_COLX(0),sp),mid=lerp(960,(SW_COLX(0)+SW_COLX(3)+SW_COLW)/2,sp),
+    ring=i=>{const an=Math.PI+i*Math.PI/2;return[cx+Math.cos(an)*R,cy+Math.sin(an)*R];},row=i=>[mid+(i-1.5)*gap,104],
     own=i=>i<3?ag_sine(clamp(u0/0.6,0,1)):ag_sine(clamp((u0-0.5)/0.5,0,1));
   // the ring's arrows, clockwise, fading as it becomes the row
   if(u<1){ctx.save();ctx.globalAlpha*=1-sstep(0,0.5,u);ctx.strokeStyle=rgba(DQ.graphite,0.9);ctx.lineWidth=4;ctx.lineCap="round";ctx.fillStyle=rgba(DQ.graphite,0.9);
@@ -2378,7 +2389,7 @@ function sw_cycle(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const u0=c
       const ex=cx+Math.cos(a1)*R,ey=cy+Math.sin(a1)*R,d=a1+Math.PI/2;ctx.beginPath();ctx.moveTo(ex+Math.cos(d)*14,ey+Math.sin(d)*14);ctx.lineTo(ex+Math.cos(d+2.5)*12,ey+Math.sin(d+2.5)*12);ctx.lineTo(ex+Math.cos(d-2.5)*12,ey+Math.sin(d-2.5)*12);ctx.closePath();ctx.fill();}
     ctx.restore();}
   // the row's small arrows between the pills
-  if(u>0){ctx.save();ctx.globalAlpha*=sstep(0.5,1,u);ctx.strokeStyle=rgba(DQ.dim,1);ctx.lineWidth=3;ctx.lineCap="round";for(let i=0;i<3;i++){const x=row(i)[0]+118;ctx.beginPath();ctx.moveTo(x-6,96);ctx.lineTo(x+4,104);ctx.lineTo(x-6,112);ctx.stroke();}ctx.restore();}
+  if(u>0){ctx.save();ctx.globalAlpha*=sstep(0.5,1,u);ctx.strokeStyle=rgba(DQ.dim,1);ctx.lineWidth=3;ctx.lineCap="round";for(let i=0;i<3;i++){const x=row(i)[0]+gap/2;ctx.beginPath();ctx.moveTo(x-6,96);ctx.lineTo(x+4,104);ctx.lineTo(x-6,112);ctx.stroke();}ctx.restore();}
   for(let i=0;i<4;i++){const p0=ring(i),p1=row(i),ui=own(i),ux=i<3?ui:ag_sine(clamp(ui*1.6,0,1)),x=lerp(p0[0],p1[0],ux),y=lerp(p0[1],p1[1],ui),w=lerp(250,196,ui),h=lerp(96,62,ui),size=Math.round(lerp(40,30,ui)),
       lit=o.lits?clamp(o.lits[i]||0,0,1):0;
     ctx.save();dq_shadow(ctx,"wall",0.8);rr(ctx,x-w/2,y-h/2,w,h,h/2);ctx.fillStyle=rgba(mix(DQ.paper,DQ.ink,lit),1);ctx.fill();ctx.restore();
@@ -2388,6 +2399,19 @@ function sw_cycle(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const u0=c
     dq_T(ctx,SW_WHEAT[0],cx-R-150,cy+11,Object.assign({align:"right"},f));dq_T(ctx,SW_WHEAT[1],cx,cy-R-70,Object.assign({align:"center"},f));
     dq_T(ctx,SW_WHEAT[2],cx+R+150,cy+11,Object.assign({},f));dq_T(ctx,SW_WHEAT[3],cx,cy+R+90,Object.assign({align:"center"},f));}
   ctx.restore();}
+
+/* ---------------------------------------------------------------- an agent, and what's handed to it
+   sw_agent: the agent as Read by an agent draws it, the agent films' sphere (ag_model), its violet light on the wall and its soft
+   shadow on the bench below; o.k springs it in, o.think (0 to 1) runs its light faster while it works, o.a.
+   sw_handed: what's handed over, a dashed arrow down from (x, y0) to (x, y1), drawn on by u, o.text beside it once it's half drawn. */
+function sw_agent(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null){const k=lerp(0.5,1,ag_spr(o.k,0,0.6));ctx.translate(x,y);ctx.scale(k,k);ctx.translate(-x,-y);}
+  ag_modelLight(ctx,x,y,r,1);ctx.save();ctx.filter="blur(14px)";ctx.fillStyle="rgba(0,0,0,0.32)";ctx.beginPath();ctx.ellipse(x-12,DQ_BENCH.back+34,r*0.95,r*0.2,0,0,TAU);ctx.fill();ctx.restore();
+  ag_model(ctx,x,y,r,{t:o.t||0,core:o.core==null?0.7:o.core,think:o.think||0});ctx.restore();}
+function sw_handed(ctx,x,y0,y1,u,o){o=o||{};const a=o.a==null?1:o.a;u=clamp(u,0,1);if(a<=0.004||u<=0)return;const y=lerp(y0+24,y1,ag_sine(u));ctx.save();ctx.globalAlpha*=a;
+  ctx.strokeStyle=rgba(DQ.graphite,0.9);ctx.fillStyle=rgba(DQ.graphite,0.9);ctx.lineWidth=4;ctx.lineCap="round";ctx.setLineDash([10,12]);ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y-16);ctx.stroke();ctx.setLineDash([]);
+  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-11,y-18);ctx.lineTo(x+11,y-18);ctx.closePath();ctx.fill();
+  if(o.text)dq_T(ctx,o.text,x-30,(y0+y1)/2+10,{w:600,size:28,col:DQ.soft,align:"right",a:clamp((u-0.5)*2,0,1)});ctx.restore();}
 
 /* ---------------------------------------------------------------- measure, simplify, standardise, automate
    Four step cards in a row (slots 440 apart from x 120), arrows between them; o.order (which step stands in each slot, eased between
@@ -2614,39 +2638,67 @@ scene("thursdays",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       dq_textCard(x,1000,64,720,{kick:"What people count",title:"Reports, hours of hand work, the hundred records"},{k:r2.k,a:r2.a,edge:"steel"});}},
   ],0.5);});
 
-/* ---------------------------------------------------------------- 3. Plan, do, check, act */
+/* ---------------------------------------------------------------- 3. Plan, do, study, act */
+// a person's part in each step, when an agent does much of the doing: a card under each step's head
+const SW_PART=["Understand the plan","Know enough to help","The results, against the plan","On what they show"];
 scene("cycle",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
-    shewhart:wAt(sc,"loop","Walter"),sow:wAt(sc,"wheat","sow"),oct:c.oct,last:c.last,hours:wAt(sc,"last","two hundred"),since:c.since,hold:wAt(sc,"since","hold"),
+    said:["plan","do,","study","act"].map(k=>wAt(sc,"loop",k)),shewhart:wAt(sc,"loop","Walter"),name:c.name,deming:wAt(sc,"name","Deeming"),wheat:c.wheat,sow:wAt(sc,"wheat","sow"),
+    oct:c.oct,last:c.last,hours:wAt(sc,"last","two hundred"),since:c.since,hold:wAt(sc,"since","hold"),
     ask:c.ask,plan:c.plan,rest:wAt(sc,"plan","hundred records"),know:c.know,roundH:wAt(sc,"know","round's hours"),perfect:wAt(sc,"know","perfect"),
-    do:c.do,n78:wAt(sc,"do","seventy-eight"),check:c.check,h26:wAt(sc,"check","twenty-six"),r97:wAt(sc,"check","ninety-seven"),act:c.act,steps:wAt(sc,"act","steps")}));
-  const lits=[ag_io(t,P.plan-0.2,P.do-0.2,0.4),ag_io(t,P.do-0.2,P.check-0.2,0.4),ag_io(t,P.check-0.2,P.act-0.2,0.4),ag_in(t,P.act-0.2,0.4)];
+    fewer:wAt(sc,"expect","far fewer"),n95:wAt(sc,"expect","at least"),
+    do:c.do,n78:wAt(sc,"do","seventy-eight"),study:c.study,h26:wAt(sc,"study","twenty-six"),r97:wAt(sc,"study","ninety-seven"),asplan:c.asplan,act:c.act,steps:wAt(sc,"act","steps"),
+    agent:c.agent,anAgent:wAt(sc,"agent","An agent"),draft:wAt(sc,"agent","draft"),hidden:c.hidden,handed:wAt(sc,"hidden","Handed"),hid:wAt(sc,"hidden","that understanding"),
+    person:c.person,under:wAt(sc,"person","understand"),enough:wAt(sc,"person","know enough"),acts:c.acts,studyR:wAt(sc,"acts","study"),actOn:wAt(sc,"acts","act on")}));
+  // each step lit as the loop is named; then as the turn reaches it; then, with an agent doing much of the doing, as a person's part in
+  // it is said (the third step also while its two names are told, and where the film says it matters more with agents)
+  const turn=[ag_io(t,P.plan-0.2,P.do-0.2,0.4),ag_io(t,P.do-0.2,P.study-0.2,0.4),ag_io(t,P.study-0.2,P.act-0.2,0.4),ag_io(t,P.act-0.2,P.agent-0.8,0.4)],
+    part=[ag_in(t,P.under-0.3,0.4),ag_in(t,P.anAgent-0.2,0.4),ag_in(t,P.studyR-0.3,0.4),ag_in(t,P.actOn-0.3,0.4)],
+    lits=turn.map((v,i)=>Math.max(v,part[i],ag_io(t,P.said[i]-0.1,P.said[i]+0.55,0.2),i===2?Math.max(ag_io(t,P.deming-0.2,P.wheat-0.3,0.4),ag_io(t,P.agent+0.2,P.anAgent-0.4,0.4)):0));
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,later:true,place:"bench",keys:[[0,960,540,1.0]],push:0,draw:(x,tt)=>{
-      sw_cycle(x,tt,{u:(tt-P.oct+0.2)/1.6,lits,wheat:ag_in(tt,P.sow-0.3,0.6)});
+      sw_cycle(x,tt,{u:(tt-P.oct+0.2)/1.6,spread:(tt-P.agent+0.5)/1.4,lits,wheat:ag_in(tt,P.sow-0.3,0.6)});
       dq_chip(x,1500,187,"Walter Shewhart · W. Edwards Deming",{align:"center",a:ag_io(tt,P.shewhart-0.3,P.oct-0.4,0.5)});
+      // the third step's two names: many say check; Deming's word, and what it asks for
+      dq_chip(x,1350,292,"Many say: check",{a:ag_io(tt,P.name+0.25,P.wheat-0.3,0.35)});
+      let p=sw_pop(tt,P.deming-0.3,P.wheat-0.3);dq_textCard(x,1350,336,470,{kick:"Deming's word: study",title:"What happened, against what the plan expected"},{k:p.k,a:p.a});
       // one turn, from Thursday 1 October; last December's round; what changed since September
-      let p=sw_pop(tt,P.oct+1.5,P.since-0.2);dq_textCard(x,160,190,900,{kick:"Thursday 1 October 2026",title:"One turn, before December's round of hand checks"},{k:p.k,a:p.a});
+      p=sw_pop(tt,P.oct+1.5,P.since-0.2);dq_textCard(x,160,190,900,{kick:"Thursday 1 October 2026",title:"One turn, before December's round of hand checks"},{k:p.k,a:p.a});
       p=sw_pop(tt,P.last+0.1,P.since-0.2);dq_textCard(x,160,420,900,{kick:"December 2025",title:"Every name checked by hand, by two people"},{k:p.k,a:p.a});
       dq_figure(x,1150,520,"240 hours","last December's round",{col:"steel",size:120,a:ag_io(tt,P.hours-0.3,P.since-0.2,0.4)});
       p=sw_pop(tt,P.since+0.2,P.ask-0.2);dq_textCard(x,160,190,800,{kick:"Since September",title:"Names fixed where they're born"},{k:p.k,a:p.a});
       const q=sw_pop(tt,P.hold-0.6,P.ask-0.2);const qb=dq_textCard(x,160,420,800,{kick:"Each night",title:"The checks hold the doubtful ones"},{k:q.k,a:q.a});
       dq_tag(x,1010,qb.y+30,"hold",{to:[962,qb.y+40],k:clamp(tt-P.hold,0,3),a:ag_io(tt,P.hold-0.1,P.ask-0.2,0.35)});
-      // Malia's question, and the plan that answers it
+      // Malia's question, and the plan that answers it: the change, how its result will be known, and what they expect
       sw_four(x,tt,[["malia",1560,true]],()=>ag_io(tt,P.ask-0.5,P.do-0.4,0.6));
       p=sw_pop(tt,P.ask+0.1,P.plan-0.2);dq_textCard(x,160,300,1100,{kick:"Malia asks",title:"Do we still need to check every name by hand?"},{k:p.k,a:p.a});
       p=sw_pop(tt,P.plan+0.2,P.do-0.3);dq_textCard(x,160,190,1100,{kick:"Plan",title:"Check by hand only the names a check holds or a graduate reports"},{k:p.k,a:p.a});
       p=sw_pop(tt,P.rest-0.3,P.do-0.3);dq_textCard(x,160,410,1100,{title:"The hundred records look at the rest"},{k:p.k,a:p.a});
-      p=sw_pop(tt,P.roundH-0.3,P.do-0.3);dq_textCard(x,160,560,520,{kick:"Measure",title:"The round's hours"},{k:p.k,a:p.a,edge:"steel"});
-      p=sw_pop(tt,P.perfect-0.3,P.do-0.3);dq_textCard(x,720,560,540,{kick:"Measure",title:"Perfect records in the hundred"},{k:p.k,a:p.a,edge:"steel"});
-      // do: 78 names, not 2,140; check: 26 hours, not 240, and 97 of 100; act: written into the round's steps
-      p=sw_pop(tt,P.do+0.2,P.check-0.2);dq_textCard(x,160,200,760,{kick:"From Monday 19 October",title:"Checked by hand"},{k:p.k,a:p.a});
-      dq_figure(x,160,520,"78 names","not 2,140",{size:140,a:ag_io(tt,P.n78-0.3,P.check-0.2,0.4)});
+      p=sw_pop(tt,P.roundH-0.3,P.do-0.3);dq_textCard(x,160,560,420,{kick:"Measure",title:"The round's hours"},{k:p.k,a:p.a,edge:"steel"});
+      p=sw_pop(tt,P.perfect-0.3,P.do-0.3);dq_textCard(x,620,560,640,{kick:"Measure",title:"Perfect records in the hundred"},{k:p.k,a:p.a,edge:"steel"});
+      dq_chip(x,160,746,"Expected: far fewer",{col:"brass",a:ag_io(tt,P.fewer-0.3,P.do-0.3,0.35)});
+      dq_chip(x,620,746,"Expected: at least 95",{col:"brass",a:ag_io(tt,P.n95-0.3,P.do-0.3,0.35)});
+      // do: 78 names, not 2,140; study: 26 hours, not 240, and 97 of 100, each held against what the plan expected; act: written into
+      // the round's steps
+      p=sw_pop(tt,P.do+0.2,P.study-0.2);dq_textCard(x,160,200,760,{kick:"From Monday 19 October",title:"Checked by hand"},{k:p.k,a:p.a});
+      dq_figure(x,160,520,"78 names","not 2,140",{size:140,a:ag_io(tt,P.n78-0.3,P.study-0.2,0.4)});
       dq_figure(x,160,420,"26 hours","not 240",{size:140,col:"steel",a:ag_io(tt,P.h26-0.3,P.act-0.2,0.4)});
       dq_figure(x,1000,420,"97 of 100","perfect, Friday 6 November",{size:140,col:"steel",a:ag_io(tt,P.r97-0.3,P.act-0.2,0.4)});
-      const pa=sw_pop(tt,P.act+0.2,null);x.save();x.globalAlpha*=pa.a;dq_card(x,280,220,1360,330,{ruled:64,ruleTop:96});dq_label(x,308,276,"The round's steps",{});
+      const ex=[dq_chip(x,160,584,"Expected: far fewer",{col:"brass",a:ag_io(tt,P.h26+0.6,P.act-0.2,0.35)}),dq_chip(x,1000,584,"Expected: at least 95",{col:"brass",a:ag_io(tt,P.r97+0.6,P.act-0.2,0.35)})];
+      ex.forEach((b,i)=>{const t0=P.asplan+0.1+i*0.45,a=ag_io(tt,t0,P.act-0.2,0.3);if(a<=0.004)return;const mx=b.x+b.w+36;
+        x.save();x.globalAlpha*=a;ag_about(x,mx,584,lerp(0.5,1,ag_spr(tt,t0,0.5)));dq_stampMark(x,mx,584,"pass",22);x.restore();});
+      const pa=sw_pop(tt,P.act+0.2,P.agent-0.9);x.save();x.globalAlpha*=pa.a;dq_card(x,280,220,1360,330,{ruled:64,ruleTop:96});dq_label(x,308,276,"The round's steps",{});
       dq_T(x,"1  Download the list from the platform",308,354,{w:500,size:28,f:"mono"});dq_T(x,"2  Send each correction to the registrar's office",308,418,{w:500,size:28,f:"mono"});
       const line3="3  Check by hand only the names a check holds or a graduate reports",nC=Math.round(clamp((tt-P.steps+0.6)/1.8,0,1)*line3.length);
-      if(nC>0)dq_T(x,line3.slice(0,nC),308,482,{w:500,size:28,f:"mono"});x.restore();}},
+      if(nC>0)dq_T(x,line3.slice(0,nC),308,482,{w:500,size:28,f:"mono"});x.restore();
+      // with an agent: the steps move apart, each to the head of a column. Under Do, the agent drafts the whole change, for a person
+      // to approve. What a person learns by doing fades as the doing is handed over. Then a person's part in each step, a card a column
+      const ax=SW_COLX(1)+SW_COLW/2,ay=572;
+      sw_agent(x,ax,ay,70,{t:tt,a:ag_in(tt,P.anAgent-0.3,0.4),k:tt-P.anAgent+0.3,core:0.75,think:ag_io(tt,P.draft-0.2,P.person-0.2,0.4)});
+      p=sw_pop(tt,P.draft-0.3,null);dq_textCard(x,ax+116,ay-90,520,{kick:"An agent",title:"Drafts the whole change",sub:"for a person to approve"},{k:p.k,a:p.a});
+      p=sw_pop(tt,P.hidden+0.1,P.enough-0.6);dq_textCard(x,SW_COLX(1),170,SW_COLW,{kick:"A person",title:"Learns by doing"},{k:p.k,a:p.a*lerp(1,0.3,ag_in(tt,P.hid-0.2,1.0))});
+      sw_handed(x,ax,326,ay-84,(tt-P.handed+0.2)/0.8,{text:"handed over"});
+      [P.under-0.2,P.enough-0.1,P.studyR-0.2,P.actOn-0.2].forEach((t0,i)=>{const r=sw_pop(tt,t0,null);dq_textCard(x,SW_COLX(i),170,SW_COLW,{title:SW_PART[i]},{k:r.k,a:r.a});});
+      dq_chip(x,SW_COLX(3)-30,372,"A person, in every step",{align:"center",a:ag_in(tt,P.actOn+1.1,0.4)});}},
   ],0.5);});
 
 /* ---------------------------------------------------------------- 4. Measure, simplify, standardise, automate */

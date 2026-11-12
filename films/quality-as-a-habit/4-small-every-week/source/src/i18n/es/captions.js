@@ -4,7 +4,7 @@
    Words as in the module (series.json and its films): la lista de graduación, el diploma (a degree certificate), impreso de nuevo, el graduado, la oficina de registro
    académico, el sistema de estudiantes, el documento visto en la matrícula, un control (a check), el cuadro de mando (the scorecard), los cien registros (the hundred
    records), un aviso (a report); a check that holds a name, un control que retiene un nombre, and a held name, un nombre retenido; la revisión a mano (the hand checks)
-   and la ronda (a round of them); plan, do, check, act as planificar, hacer, verificar, actuar, as Spanish quality texts give the cycle (PHVA); a change's keeper,
+   and la ronda (a round of them); plan, do, study, act as planificar, hacer, estudiar, actuar (PHEA), and the name many use, with check, as verificar (PHVA); a change's keeper,
    su guardián; the module's promise as Good enough for what? gives it, aptos para un uso. In Mexico: la roya del tallo (stem rust), el valle del Yaqui, las tierras altas,
    la vuelta (a round of breeding), la estación de investigación; gravar, to tax. Tú, as the film's last lines speak to the viewer. Numbers keep the picture's comma
    (2,140), as the module's other Spanish captions do, so a viewer reads the same number in the caption and on screen. */
@@ -71,10 +71,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los resultados vienen de los controles que se ejecutan cada noche.",
 "And from what people count: reports, hours of hand work, and the hundred records.":
 "Y de lo que cuentan las personas: avisos, horas de trabajo a mano y los cien registros.",
-"Quality engineers call it plan, do, check, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deming.":
-"Los ingenieros de calidad lo llaman planificar, hacer, verificar, actuar: un ciclo que dibujó Walter Shewhart y enseñó W. Edwards Deming.",
-"Borlaug's team ran it twice a year: sow, look, keep the best, sow again.":
-"El equipo de Borlaug lo hacía dos veces al año: sembrar, mirar, guardar lo mejor, resembrar.",
+"Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deming.":
+"Los ingenieros de calidad lo llaman planificar, hacer, estudiar, actuar: un ciclo que dibujó Walter Shewhart y enseñó W. Edwards Deming.",
+"Many say check for its third step. Deming preferred study: compare what happened with what the plan expected, and learn from it.":
+"Muchos dicen verificar en su tercer paso. Deming prefería estudiar: comparar lo que pasó con lo que el plan esperaba, y aprender.",
+"Borlaug's team ran the loop twice a year: sow, look, keep the best, sow again.":
+"El equipo de Borlaug hacía el ciclo dos veces al año: sembrar, mirar, guardar lo mejor, resembrar.",
 "Here is one turn of it, from Thursday 1 October 2026, before December's round of hand checks.":
 "Esta es una vuelta, desde el jueves 1 de octubre de 2026, antes de la ronda de revisión a mano de diciembre.",
 "Last December, two people checked every name by hand: 240 hours.":
@@ -87,12 +89,24 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Planificar: revisar a mano solo los nombres que retiene un control o que avisa un graduado, y que los cien registros miren el resto.",
 "They'll know by two measures they keep already: the round's hours, and the perfect records in the hundred.":
 "Lo sabrán por dos medidas que ya llevan: las horas de la ronda y los registros perfectos de los cien.",
+"And they say what they expect: far fewer hours, and at least 95 perfect records.":
+"Y dicen qué esperan: muchas menos horas y al menos 95 registros perfectos.",
 "Do: from Monday 19 October, the team checks 78 names by hand, not 2,140.":
 "Hacer: desde el lunes 19 de octubre, el equipo revisa a mano 78 nombres, no 2,140.",
-"Check: the round takes 26 hours, not 240. And on Friday 6 November, 97 of the hundred records are perfect.":
-"Verificar: la ronda lleva 26 horas, no 240. Y el viernes 6 de noviembre, 97 de los cien registros son perfectos.",
+"Study: the round takes 26 hours, not 240. And on Friday 6 November, 97 of the hundred records are perfect.":
+"Estudiar: la ronda lleva 26 horas, no 240. Y el viernes 6 de noviembre, 97 de los cien registros son perfectos.",
+"Both as the plan expected.":
+"Las dos, como esperaba el plan.",
 "Act: they keep it, and write it into the round's steps.":
 "Actuar: lo mantienen, y lo escriben en los pasos de la ronda.",
+"With agents, study matters more. An agent can draft the whole change, for a person to approve.":
+"Con agentes, estudiar importa más. Un agente puede redactar todo el cambio, para que lo apruebe una persona.",
+"People learn by doing the work. Handed to an agent, that understanding can stay hidden.":
+"Las personas aprenden haciendo el trabajo. En manos de un agente, esa comprensión puede quedar oculta.",
+"So a person still has to understand the plan, and know enough to help with the doing.":
+"Así que una persona aún debe entender el plan, y saber lo suficiente para ayudar a hacerlo.",
+"Then study the results against the plan, and act on what they show.":
+"Luego, estudiar los resultados frente al plan, y actuar según lo que muestran.",
 "The order mattered: measure, simplify, standardise, and only then automate.":
 "El orden importaba: medir, simplificar, estandarizar, y solo entonces automatizar.",
 "They measured the hand work first, in August: about 320 hours a year.":

@@ -1,0 +1,12 @@
+/* Learning Data: the guided tour's card and the ring round the part it is about (tour.js). Loaded only when someone opens the
+   tour. Colours are site.css's tokens, so it follows the visitor's theme. */
+.tour{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:1000;width:min(440px,calc(100vw - 24px));
+  padding:16px 18px;border:1px solid var(--accent);border-radius:16px;background:var(--card);color:var(--fg);box-shadow:var(--shadow-hi)}
+.tour h2{margin:2px 0 6px;font-size:19px;line-height:1.2}
+.tour p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+.tour .tour-n{font:500 12.5px/1.4 var(--mono);color:var(--accent);letter-spacing:.04em}
+.tour-b{display:grid;grid-template-columns:auto auto 1fr auto;gap:8px;align-items:center;margin-top:14px}
+.tour-x{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:none;color:var(--fg);font-size:22px;line-height:1;cursor:pointer}
+.tour-x:hover,.tour-x:focus-visible{border-color:var(--accent)}
+.tour-on{outline:3px solid var(--accent)!important;outline-offset:4px;border-radius:10px;box-shadow:0 0 0 9px var(--glow)}
+header.top .tour-on{outline-color:#6aa8ff!important;box-shadow:0 0 0 9px rgba(77,163,255,.3)}

@@ -12,7 +12,8 @@ What it checks, page by page (every .html under site/):
   https://data.learn-all.org/... map to site/), every #id exists on its target page (except #t=,
   and the lab and old home hashes that scripts read), GitHub blob/tree links name a file in this repo, and
   download links name a file the release workflow publishes. Links inside the "Pause and think" packs count too.
-- header: Start here, Topics, Making of, then EN and ES (in the "More" menu), with the right targets and the right current page.
+- header: Start here, Topics, Making of, then EN and ES (in the "More" menu), with the right targets and the right current page;
+  and "?", the guided tour, with the same steps in both languages.
 - no leftover labels in the nav (Watch, Take it apart, Sharpen it, All films, Mira, Desarma).
 - hreflang: exactly the pairs of real twins, each pointing back.
 - the footer's one link (the source on GitHub), breadcrumbs, and the course bar (the sticky Watch · Labs · Scenarios steps).
@@ -1216,7 +1217,19 @@ def main():
                 s["fails"].append(f"header({lg}): {label} needs one decorative, non-focusable icon")
             if "tabindex" in a.attrs or "aria-current" in a.attrs:
                 s["fails"].append(f"header({lg}): {label} must keep the browser's own keyboard behaviour, and not claim the current page")
-    s["notes"].append(f"{len(normal)} pages with a header, each made by a generator")
+        # the guided tour: one "?" in the tools, named in the page's language, that says where the tour's files are
+        helps = tools[0].all("button", cls="help") if len(tools) == 1 else []
+        if len(helps) != 1 or helps[0].attrs.get("aria-label") != {"en": "How this site works", "es": "Cómo funciona este sitio"}[lg] \
+                or helps[0].attrs.get("data-tour") != "../assets/learn/" or helps[0].attrs.get("type") != "button":
+            s["fails"].append(f"header({lg}): one button.help in .nav-tools, named in the page's language, with data-tour, the way to assets/learn/")
+    # the tour's words: the same steps, on the same parts, in both languages, and every file its loader asks for
+    tour = {lg: re.findall(r'\{(?:sel:"([^"]*)",)?title:"[^"]+",text:"[^"]+"\}', (WEB / "assets/learn" / f"tour.{lg}.js").read_text(encoding="utf-8")) for lg in ("en", "es")}
+    if not tour["en"] or tour["en"] != tour["es"] or tour["en"][-1] != "":
+        s["fails"].append("assets/learn/tour.en.js and tour.es.js: the same steps on the same parts (sel), in the same order, the last one with no part")
+    for f in ("tour.js", "tour.css"):
+        if not (WEB / "assets/learn" / f).is_file():
+            s["fails"].append(f"assets/learn/{f}: missing; the header's \"?\" loads it")
+    s["notes"].append(f"{len(normal)} pages with a header, each made by a generator; the guided tour has {len(tour['en'])} steps")
 
     # -- leftover labels
     s = rep.check("Nav: no leftover labels (Watch, Take it apart, Sharpen it, All films, Mira, Desarma…)")

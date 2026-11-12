@@ -91,4 +91,4 @@ its numeric IDs in the pass (`repo:<organization>@<ID>/<repository>@<ID>:...`), 
 
 dbt's `agent` target signs in as the agent's service principal and builds in schemas of its own in the
 development catalog: dbt makes one for each layer, such as `planning_agent_marts`. Its build reads what a
-change doesn't touch from production, names masked, as its group's grants allow. It never writes there.
+change doesn't touch from production, with personal and sensitive data masked, as its group's grants allow. It never writes there.

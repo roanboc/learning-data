@@ -1,6 +1,6 @@
 # Architecture that keeps up · Services with customers: script
 
-*The script of *Services with customers*, film 1 of 3 of *Architecture that keeps up*, the third series of the module *Data management*, in six chapters, in English, drawn in the module's sunlit plaster. Written on 10 November 2026 from the author's advice for technical managers of that day ("Product owners benefit from architectural background": "Treat the services you manage as an independent business with suppliers and customers. Start with refining the definition of those services and then identifying your customers (segments), their pains and business drivers; from there refine and traverse all the architectural layers (strategy, business, information, application and technology)"), the series' plan (`../proposal.md`) and its brief in the module's working folder. Made on assumptions while the author was away; this film's questions and assumptions are in the module's working folder (`data-management/13-services-with-customers/assumptions.md`). It merges as a draft. The narration is in `source/src/narration.js`; this file gives its reasons.*
+*The script of *Services with customers*, film 1 of 3 of *Architecture that keeps up*, the third series of the module *Data management*, in six chapters, in English, drawn in the module's sunlit plaster. Written on 10 November 2026 from the author's advice for technical managers of that day ("Product owners benefit from architectural background": "Treat the services you manage as an independent business with suppliers and customers. Start with refining the definition of those services and then identifying your customers (segments), their pains and business drivers; from there refine and traverse all the architectural layers (strategy, business, information, application and technology)"), the series' plan (`../proposal.md`) and its brief in the module's working folder. Made on assumptions while the author was away; this film's questions and assumptions are in the module's working folder (`data-management/13-services-with-customers/assumptions.md`). It merges as a draft. Its line on the layers' names was reworded on 12 November 2026, from the author's review (see *The reference, and practice*). The narration is in `source/src/narration.js`; this file gives its reasons.*
 
 ## The promise
 
@@ -32,12 +32,13 @@ The module's spine holds (TOGAF's method, ArchiMate's words; `../../a-plan-in-ni
 
 | Body of knowledge | What the film takes | Where |
 |---|---|---|
-| ArchiMate (The Open Group) | Its layers, with strategy above business, application and technology | *Down every layer*: "They're ArchiMate's layers, with TOGAF's data called information" |
+| ArchiMate (The Open Group) | Four of the five layers: strategy, business, application and technology. It has no information layer | *Down every layer*: "Four are ArchiMate's layers; information is what TOGAF calls data." |
 | TOGAF's four architectures | Business, data, application, technology; the author's "information" is TOGAF's data | The same line |
+| DAMA-DMBOK2 | Data and information used as one word; the discipline is data architecture | *Down every layer*, on screen: "TOGAF and DAMA call it data" |
 | The service catalogue (ITIL) | Services listed in a customer's words | *Four services, one page*, with governance's own catalogue in *A capability, not a project* |
 | The value proposition canvas (Osterwalder and others, 2014) | A customer's pains and gains, in their words | *Who each is for* |
 
-Where the film differs: the frameworks treat these as separate practices (service management, product strategy, enterprise architecture), often owned by different teams; here they are one habit of the data manager's, as the author asked: services first, then customers, then every layer for them. Five layers are the author's (strategy, business, information, application, technology): ArchiMate folds information into its business and application layers, which the film says in one line and *The map before the data* draws in full.
+Where the film differs: the frameworks treat these as separate practices (service management, product strategy, enterprise architecture), often owned by different teams; here they are one habit of the data manager's, as the author asked: services first, then customers, then every layer for them. Five layers are the author's (strategy, business, information, application, technology). Four of them are ArchiMate's layers; ArchiMate has no information layer (it keeps a business object in its business layer and a data object in its application layer, as *Listen first* shows), and TOGAF and DAMA call that layer data. The author's answer of 12 November 2026: the five layers stay, and "data" or "information" are both fine at the enterprise level. So the film says "At the level of the whole university, either word is fine", and names *Between the business and the systems*, the film that explains the two words. Until that day the line read "They're ArchiMate's layers, with TOGAF's data called information", which gave ArchiMate a layer it doesn't have.
 
 Practice, from the author's advice: define your services first, in a customer's words; name your suppliers and customers in groups; write each group's pains and drivers; walk each service down every layer, one picture each; if a system serves no customer's need, ask why it's there. Every one of these is said in *On Monday*.
 
@@ -72,13 +73,13 @@ The series said once. May 2027: the strategy approved in April; Helena runs her 
 ### 3 · Who each is for · 3:24–4:28
 The customers, in four groups, on the right of the chain; from the 31 conversations of *Listen first*. Each group's sheet, what hurts and what drives it; the value proposition canvas, in a line. Noor puts the services and their customers on her map.
 
-### 4 · Down every layer · 4:28–5:41
-Helena and Noor walk governed data products down five layers, each picked out as it's described; ArchiMate's and TOGAF's names in one line. Each picture names its customer at the top. The old warehouse: 17 of 38 reports that no one has opened in a year, and one question.
+### 4 · Down every layer · 4:28–5:46
+Helena and Noor walk governed data products down five layers, each picked out as it's described; ArchiMate's and TOGAF's names in one line, then a note: the information layer lights up under "TOGAF and DAMA call it data", either word is fine at this level, and *Between the business and the systems* tells why. Each picture names its customer at the top. The old warehouse: 17 of 38 reports that no one has opened in a year, and one question.
 
-### 5 · Every request lands somewhere · 5:41–6:26
+### 5 · Every request lands somewhere · 5:46–6:31
 Monday 7 June: the front door opens; 42 of 45 requests fly into the four services' trays; Graham's lands on analysis; three land on none, two handed to digital services with a note, one filling a gap in advice and training.
 
-### 6 · On Monday · 6:26–7:13
+### 6 · On Monday · 6:31–7:18
 Madurai, framed on the team's wall, its one sentence; every request its service, every system its customer. Four things to do on Monday; the five layers under their customers become the end card.
 
 ## Sound
@@ -106,7 +107,8 @@ Checked on 10 November 2026:
 - Paying patients' fees cover the free ones: every source above.
 - The harm (a farmer who can't work, a child kept from school to lead a blind grandmother) is a general picture of cataract blindness in poor rural places, not a quote from a source about Aravind.
 - ArchiMate's layers and TOGAF's four architectures: The Open Group's pages, as linked on the film's page. No product's release status is said or shown.
+- Checked again on 12 November 2026, for the reworded line: ArchiMate 4 (The Open Group, C260, 27 April 2026) has strategy, business, application and technology among its domains, which the films call layers as *The map before the data* does, and no information layer or domain (a business object sits in its business domain, a data object in its application domain, as *Listen first*'s rigour sheet has it); its list of domains was read that day from the contents of The Open Group's pocket guide to version 4 and from Marc Lankhorst's notes on it, found by search, not from the specification itself. The TOGAF Standard, 10th Edition, names four architecture domains (business, data, application, technology); DAMA-DMBOK2 (revised edition, 2024), chapter 1, uses data and information as one word and calls the discipline data architecture: both as *Between the business and the systems* cites them in its script.
 
 ## Pacing report
 
-`tools/pace.py`, 10 November 2026: 7:13.4, 906 words, 125 words a minute, the voice 71% of the time; every chapter from 120 to 134 words a minute; no sentence with under 0.5 s after it.
+`tools/pace.py`, 12 November 2026: 7:18.2, 918 words, 126 words a minute, the voice 71% of the time; every chapter from 120 to 134 words a minute; no sentence with under 0.5 s after it.

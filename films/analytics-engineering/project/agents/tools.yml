@@ -49,7 +49,7 @@ objects:
   owner and column class: {through: [catalog]}                 # tags and owners on the tables, in Unity Catalog
   data product:
     through: [catalog, query, build]
-    unity catalog: {read: [prod_core, prod_marts]}             # in the production catalog; names masked for every group but the readers
+    unity catalog: {read: [prod_core, prod_marts]}             # in the production catalog; personal and sensitive data masked for every group but the readers
   team memory:
     through: [memory]
     memory store: team-memory                                  # in Lakebase; kept by the platform, second to the governed definitions

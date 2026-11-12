@@ -516,9 +516,10 @@ async def check_deeplinks(run):
             pg, _ = await run.page(ctx, lang + "#film-three")
             await run.settle(pg)
             r = await pg.evaluate("""() => { const g = document.getElementById('go-deeper'), s = document.getElementById('film-three'), h = g && g.querySelector('h2');
-              return {inside: !!(g && s && g.contains(s)), top: h ? h.getBoundingClientRect().top : null,
-                      head: document.querySelector('header.top').getBoundingClientRect().bottom}; }""")
-            expect(sec, r["inside"] and r["top"] is not None and r["head"] - 1 <= r["top"] <= 300,
+              return {inside: !!(g && s && g.contains(s)), top: h ? h.getBoundingClientRect().top : null, ih: innerHeight,
+                      head: document.querySelector('header.top').getBoundingClientRect().bottom, end: scrollY + innerHeight >= document.documentElement.scrollHeight - 2}; }""")
+            # "Go deeper" is now the short last section: the page may reach its end before the heading reaches the top
+            expect(sec, r["inside"] and r["top"] is not None and r["head"] - 1 <= r["top"] <= (r["ih"] - 40 if r["end"] else 300),
                    f"/{lang}#film-three: doesn't land on #go-deeper ({r})")
             await pg.close()
         # chapter links: the page scrolls to the film and seeks; the chapter is highlighted
@@ -1236,6 +1237,8 @@ async def check_mobile(run):
     try:
         for key in grids:
             pg, _ = await run.page(ctx, key)
+            # the Topics page keeps its cards in the list, a row per topic: show it, with every row open
+            await pg.evaluate("() => { const l = document.getElementById('list'); if (l) { l.hidden = false; l.querySelectorAll('details').forEach(d => { d.open = true; }); } }")
             xs = await pg.evaluate("() => [...document.querySelectorAll('.topic-grid')].map(g => [...g.querySelectorAll(':scope > .topic-card')].map(c => Math.round(c.getBoundingClientRect().left)))")
             expect(sec, all(len(set(g)) <= 1 for g in xs), f"/{key} @390: topic cards don't stack in one column ({xs})")
             ts = await pg.evaluate("() => [...document.querySelectorAll('.topic-tiles > .topic-tile')].map(c => Math.round(c.getBoundingClientRect().left))")
@@ -1253,13 +1256,13 @@ async def check_mobile(run):
                     await pg.wait_for_load_state("load")
                     await pg.wait_for_timeout(200)
 
-                pg, _ = await run.page(c2, "topics/")
+                pg, _ = await run.page(c2, "topics/#data-modelling")  # a topic's link opens its row in the list
                 await tap("#data-modelling .topic-card:not(.series-card) img")
                 expect(sec, run.key(pg.url) == "sketch/", f"/topics/ @{width}: tapping the Sketch card's picture went to /{run.key(pg.url)}")
-                await pg.goto(run.url("topics/"), wait_until="load")
+                await pg.goto(run.url("topics/#data-platforms"), wait_until="load")
                 await tap("#data-platforms .topic-card .tc-body > p:not(.kicker)")
                 expect(sec, run.key(pg.url) == "", f"/topics/ @{width}: tapping the intro card's text went to /{run.key(pg.url)}")
-                await pg.goto(run.url("topics/"), wait_until="load")
+                await pg.goto(run.url("topics/#enterprise-architecture"), wait_until="load")
                 await tap("#enterprise-architecture .series-card .sc-media")
                 expect(sec, run.key(pg.url) == "enterprise-architecture/", f"/topics/ @{width}: tapping The map before the data's picture went to /{run.key(pg.url)}")
                 await pg.close()
@@ -1385,6 +1388,8 @@ SMOKE_DIR = pathlib.Path(__file__).resolve().parent / "smoke"
 LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = app && app.querySelector('[role=tab][aria-selected=true]');
   return {on: on && on.dataset.id, tabs: app ? app.querySelectorAll('[role=tab][data-id]').length : 0,
     watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
+    badges: app ? [...app.querySelectorAll('[role=tab][data-id]')].map(b => b.dataset.id + ' ' + ((b.querySelector('i') || {}).textContent || '')) : [],
+    kicker: ((app && app.querySelector('.stop-text .kicker')) || {}).textContent || '',
     sw: document.documentElement.scrollWidth - innerWidth}; }"""
 
 
@@ -1405,10 +1410,22 @@ async def check_series_learn(run):
                     where = f"/{key}#{x['id']}"
                     pg, log = await run.page(ctx, key + "#" + x["id"])
                     await run.ready(pg)
+                    try:  # a series whose engine loads each film's words as a lab opens draws its kicker a moment later
+                        await pg.wait_for_selector("#series-labs .stop-text .kicker", timeout=10000)
+                    except Exception:  # noqa: BLE001
+                        pass
                     await pg.wait_for_timeout(300)
                     r = await pg.evaluate(LEARN_JS)
                     expect(sec, r["tabs"] == SL["labs"], f"{where}: {r['tabs']} lab tabs, expected {SL['labs']}")
                     expect(sec, r["on"] == x["id"], f"{where}: the lab open is {r['on']!r}")
+                    # one numbering for the whole pack: each lab's tab shows its place among all the series' labs, whichever film it's
+                    # under, and the open lab's kicker says the same, "Lab 3 of 9"
+                    ids = [y["id"] for y in SL[lg]["labs"]]
+                    want_b = [f"{k} {i + 1}" for i, k in enumerate(ids)]
+                    expect(sec, r["badges"] == want_b, f"{where}: the lab tabs are numbered {r['badges']}, expected {want_b}")
+                    k = re.match(r"\D*(\d+)\D+(\d+)", r["kicker"])
+                    pos = ids.index(x["id"]) + 1 if x["id"] in ids else 0
+                    expect(sec, bool(k) and (int(k[1]), int(k[2])) == (pos, len(ids)), f"{where}: the kicker says {r['kicker']!r}, expected lab {pos} of {len(ids)}")
                     f = on_site.get(x["film"])
                     if f:  # a film still being made has no "Watch this part"
                         want = f"../{f['key']}/#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
@@ -1559,11 +1576,173 @@ async def take_shots(run):
     sec["notes"].append(f"{n} screenshots in {out}")
 
 
+# ---------------------------------------------------------------- the learning route
+async def check_route(run):
+    sec = run.rep.sec("route", "The learning route: drawn on the Topics page, as a map and as a rail on a phone, with goals; the list, its rows and the search; the home page's ways on; readable in dark mode")
+    tkeys, hkeys = run.pick(("topics/", "es/topics/")), run.pick(("", "es/"))
+    if not (tkeys or hkeys):
+        return
+    import build_series
+    D = {lg: build_series.route_data(lg) for lg in ("en", "es")}
+    lang = lambda key: "es" if key.startswith("es/") else "en"
+    FACTS = """() => { const q = s => [...document.querySelectorAll(s)], box = e => { const r = e.getBoundingClientRect(); return [r.left, r.top, r.right, r.bottom]; };
+        const hit = (a, b) => a[0] < b[2] - 1 && b[0] < a[2] - 1 && a[1] < b[3] - 1 && b[1] < a[3] - 1, names = q('.r-st .r-sl, .r-gl').map(box), over = [];
+        names.forEach((a, i) => names.forEach((b, j) => { if (j > i && hit(a, b)) over.push([i, j]); }));
+        const lum = c => { const v = c.match(/[0-9.]+/g).slice(0, 3).map(x => { x /= 255; return x <= .03928 ? x / 12.92 : ((x + .055) / 1.055) ** 2.4; }); return .2126 * v[0] + .7152 * v[1] + .0722 * v[2]; };
+        const bg = lum(getComputedStyle(document.body).backgroundColor), ratio = e => { const f = lum(getComputedStyle(e).color); return (Math.max(f, bg) + .05) / (Math.min(f, bg) + .05); };
+        const faint = q('.route .r-sl, .route .r-rt b, .route .r-rt small, .route .r-gl, .route .r-rh, .route .r-legend, .route .r-who, .route .r-line, .route .r-lab, #list:not([hidden]) .ix-who, #list:not([hidden]) .ix-cnt, #list:not([hidden]) summary h2')
+          .filter(e => e.offsetParent && !e.closest('.dim') && ratio(e) < 4.5).map(e => e.className + ' ' + ratio(e).toFixed(1));
+        const r = document.getElementById('route'), l = document.getElementById('list');
+        return {route: r ? !r.hidden : null, list: l ? !l.hidden : null, pressed: q('.view-switch [aria-pressed=true]').map(b => b.dataset.view),
+                map: q('.r-map .r-st').length, rail: q('.r-rail .r-rb').length, intro: q('.route .r-intro').length, goals: q('.route [data-goal]').length,
+                over, faint, small: q('.route .r-sl, .route .r-rt b, .route .r-gl').filter(e => parseFloat(getComputedStyle(e).fontSize) < 12).length,
+                wide: document.documentElement.scrollWidth <= innerWidth, dim: q('.route .dim').length, stops: q('.route .r-stops li').length,
+                sel: q('.r-st[aria-pressed=true]').map(b => b.dataset.st), head: (document.querySelector('.r-panel h3') || {}).textContent || ''}; }"""
+
+    async def seeded(width, theme, seed):
+        ctx = await run.context(width, theme)
+        pg, _ = await run.page(ctx, "404.html", main_status_ok=True)
+        await pg.evaluate("s => { localStorage.clear(); for (const k in s) localStorage.setItem(k, JSON.stringify(s[k])); }", seed)
+        await pg.close()
+        return ctx
+
+    for width, theme in ((1280, "dark"), (1280, "light"), (1024, "dark"), (390, "dark"), (390, "light")):
+        ctx = await seeded(width, theme, {})
+        try:
+            for key in tkeys:
+                d = D[lang(key)]; n = len(d["topics"]) - 1; at = f"/{key} @{width} {theme}"
+                pg, log = await run.page(ctx, key)
+                await pg.wait_for_selector(".route.drawn", timeout=5000)
+                f = await pg.evaluate(FACTS)
+                expect(sec, f["route"] and not f["list"] and f["pressed"] == ["route"], f"{at}: a first visit shows the route, not the list ({f['route']}, {f['list']}, {f['pressed']})")
+                expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start")
+                expect(sec, f["intro"] == 1, f"{at}: {f['intro']} introduction cards, the route's first station")
+                expect(sec, f["goals"] == len(d["goals"]) + 1, f"{at}: {f['goals']} goal buttons, for {len(d['goals'])} goals and the whole route")
+                expect(sec, f["wide"], f"{at}: the page scrolls sideways")
+                expect(sec, not f["over"], f"{at}: names on the map sit on each other ({f['over']})")
+                expect(sec, not f["faint"], f"{at}: words too faint to read on the page's background, under 4.5 to 1 ({f['faint'][:4]})")
+                expect(sec, not f["small"], f"{at}: {f['small']} names under 12 px")
+                expect(sec, not log["console"] and not log["errors"], f"{at}: {(log['console'] + log['errors'])[:2]}")
+                if (width, theme) in ((1280, "dark"), (390, "dark")):
+                    # a station shows its topic; a goal dims the stops it leaves out, lists its own, and is still there after a reload
+                    t = d["topics"][3]
+                    await pg.click(f'[data-st="{t["id"]}"]' if width >= 900 else f'[data-rs="{t["id"]}"]')
+                    if width >= 900:
+                        g = await pg.evaluate(FACTS)
+                        expect(sec, g["sel"] == [t["id"]] and g["head"] == t["name"], f"{at}: selecting {t['id']} shows {g['head']!r} ({g['sel']})")
+                    else:
+                        expect(sec, await pg.locator(f'[data-rs="{t["id"]}"][aria-expanded=true] + .r-rd .r-items li').count() == len(t["items"]),
+                               f"{at}: opening {t['id']} on the rail doesn't list its {len(t['items'])} films and series")
+                    goal = d["goals"][1]
+                    await pg.focus(f'[data-goal="{goal["id"]}"]')
+                    await pg.keyboard.press("Enter")
+                    g = await pg.evaluate(FACTS)
+                    expect(sec, g["dim"] > 0 and g["stops"] == len(goal["stops"]), f"{at}: the goal {goal['id']} dims {g['dim']} stops and lists {g['stops']} of its {len(goal['stops'])}")
+                    expect(sec, await pg.evaluate("() => (document.activeElement.dataset || {}).goal") == goal["id"], f"{at}: choosing a goal by keyboard loses the focus")
+                    await pg.reload(wait_until="load")
+                    await pg.wait_for_selector(".route.drawn", timeout=5000)
+                    expect(sec, await pg.locator(f'[data-goal="{goal["id"]}"][aria-pressed=true]').count() == 1, f"{at}: the goal isn't kept after a reload")
+                    await pg.click('[data-goal=""]')
+                await pg.close()
+        finally:
+            await ctx.close()
+
+    # the home page stays a first view: after the film's two other steps, the route and the Making of, and no map or list of
+    # topics; on a phone nothing scrolls sideways, and the first button lands on the Topics page's route
+    for width in (1280, 390):
+        ctx = await seeded(width, "dark", {})
+        try:
+            for key in hkeys:
+                d = D[lang(key)]; pre = "es/" if lang(key) == "es" else ""
+                pg, log = await run.page(ctx, key)
+                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.more-steps a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
+                    map: document.querySelectorAll('[data-route], .r-map, .r-rail, .topic-links, .topic-tiles').length, wide: document.documentElement.scrollWidth <= innerWidth,
+                    small: [...document.querySelectorAll('.more-steps a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
+                expect(sec, r["steps"] == ["labs/", "scenarios/"], f"/{key} @{width}: after the film, its two other steps are {r['steps']}")
+                expect(sec, r["ways"] == ["topics/", "journey/"] and not r["map"], f"/{key} @{width}: then the route and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
+                expect(sec, r["wide"] and not r["small"], f"/{key} @{width}: scrolls sideways ({not r['wide']}) or has {r['small']} links under 32 px tall")
+                if width == 390:
+                    await pg.click('.home-next a.primary')
+                    await pg.wait_for_load_state("load")
+                    await pg.wait_for_selector(".route.drawn", timeout=5000)
+                    expect(sec, run.key(pg.url) == pre + "topics/" and await pg.locator("#route").is_visible(), f"/{key}: its first button doesn't land on the Topics page's route ({pg.url})")
+                expect(sec, not log["console"] and not log["errors"], f"/{key} @{width}: {(log['console'] + log['errors'])[:2]}")
+                await pg.close()
+        finally:
+            await ctx.close()
+
+    # the Topics page's views, its rows and its search
+    have = (WEB / "assets/learn/search.en.json").exists() and (WEB / "assets/learn/search.es.json").exists()
+    for key in tkeys:
+        d = D[lang(key)]; t = d["topics"][2]
+        ctx = await seeded(1280, "dark", {"ld-whats-in-a-word:watched": True, "ld-keeping-it-true:watched": True})
+        try:
+            pg, log = await run.page(ctx, key)
+            await pg.wait_for_selector(".route.drawn", timeout=5000)
+            arcs = await pg.locator('[data-st="data-modelling"] .d-arc').count()
+            expect(sec, arcs == 1, f"/{key}: two films of Data modelling watched, but its station's ring shows no progress")
+            await pg.click('.view-switch [data-view="list"]')
+            f = await pg.evaluate(FACTS)
+            expect(sec, f["list"] and not f["route"] and f["pressed"] == ["list"], f"/{key}: the switch doesn't show the list ({f['list']}, {f['route']}, {f['pressed']})")
+            expect(sec, not f["faint"], f"/{key}: the list's words are too faint in dark mode ({f['faint'][:4]})")
+            ring = await pg.evaluate("() => +getComputedStyle(document.querySelector('#data-modelling .ix-ring')).getPropertyValue('--f')")
+            expect(sec, 0 < ring < 1, f"/{key}: the Data modelling row's ring is {ring}, with two of its films watched")
+            await pg.reload(wait_until="load")
+            f = await pg.evaluate(FACTS)
+            expect(sec, f["list"] and not f["route"], f"/{key}: the list isn't kept after a reload")
+            # a row opens by keyboard, and shows its cards
+            await pg.focus(f'#{t["id"]} summary')
+            await pg.keyboard.press("Enter")
+            n = await pg.locator(f'#{t["id"]} details[open] .topic-card').count()
+            expect(sec, n == len(t["items"]), f"/{key}: opening the row {t['id']} by keyboard shows {n} cards, for {len(t['items'])} films and series")
+            # a topic's link shows the list with its row open, whatever view was kept
+            await pg.click('.view-switch [data-view="route"]')
+            await pg.goto(run.url(f"{key}#{d['topics'][-1]['id']}"), wait_until="load")
+            await pg.reload(wait_until="load")
+            f = await pg.evaluate(FACTS)
+            opened = await pg.locator(f'#{d["topics"][-1]["id"]} details[open]').count()
+            expect(sec, f["list"] and not f["route"] and opened == 1, f"/{key}#{d['topics'][-1]['id']}: a topic's link doesn't show the list with its row open ({f['list']}, {opened})")
+            if have:
+                await pg.fill("#ix-q", "agentic")
+                await pg.wait_for_selector(".ix-hit", timeout=8000)
+                r = await pg.evaluate("""() => ({hits: document.querySelectorAll('.ix-hit').length, said: [...document.querySelectorAll('.ix-said a')].map(a => a.getAttribute('href')),
+                    count: document.getElementById('ix-count').textContent, rows: [...document.querySelectorAll('.ix-group')].filter(g => !g.hidden).length,
+                    marks: document.querySelectorAll('.ix-results mark').length})""")
+                expect(sec, r["hits"] >= 5 and "agent" in r["count"] and r["marks"] and not r["rows"], f"/{key}: searching \"agentic\" finds {r['hits']} films ({r['count']!r}); it should fall back to \"agent\"")
+                expect(sec, r["said"] and all(re.search(r"#t=\d+$", h) for h in r["said"]), f"/{key}: a line a film says doesn't link to its second ({r['said'][:2]})")
+                target = r["said"][0].split("#")[0]
+                status = (await pg.request.get(urllib.parse.urljoin(pg.url, target))).status
+                expect(sec, status == 200, f"/{key}: the search's first film, {target}, answers HTTP {status}")
+                await pg.fill("#ix-q", "zzqx")
+                await pg.wait_for_function("() => !document.querySelector('.ix-hit')", timeout=5000)
+                expect(sec, (await pg.inner_text("#ix-count")).strip() != "", f"/{key}: a search that finds nothing says nothing")
+                await pg.fill("#ix-q", "")
+                await pg.wait_for_function("() => [...document.querySelectorAll('.ix-group')].every(g => !g.hidden)", timeout=5000)
+            else:
+                sec["notes"].append(f"/{key}: no search words on this copy of the site (python site-tools/build_series.py --search writes them): the search wasn't tried")
+            expect(sec, not log["console"] and not log["errors"], f"/{key}: {(log['console'] + log['errors'])[:2]}")
+            await pg.close()
+        finally:
+            await ctx.close()
+    # without scripts, the Topics page is the list
+    ctx = await run.browser.new_context(java_script_enabled=False, viewport={"width": 1280, "height": 800})
+    try:
+        for key in tkeys:
+            pg = await ctx.new_page()
+            await pg.goto(run.url(key), wait_until="load")
+            vis = await pg.locator("#list summary").first.is_visible()
+            hid = await pg.locator("#route").is_hidden() and await pg.locator(".view-switch").is_hidden() and await pg.locator(".ix-tools").is_hidden()
+            expect(sec, vis and hid, f"/{key} without scripts: the list shows ({vis}) and the route, the switch and the search stay hidden ({hid})")
+            await pg.close()
+    finally:
+        await ctx.close()
+
+
 CHECKS = {"pages": check_pages, "header": check_header, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
           "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
           "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn,
-          "labs-drawn": check_labs_drawn, "drawn": check_drawn}
+          "labs-drawn": check_labs_drawn, "drawn": check_drawn, "route": check_route}
 
 
 async def amain(args):
@@ -1579,6 +1758,9 @@ async def amain(args):
     if args.base:
         base = args.base if args.base.endswith("/") else args.base + "/"
     else:
+        if scope is None or scope & {"topics/", "es/topics/"}:  # the Topics list searches them, and they aren't committed
+            import build_series
+            build_series.write_search()
         proc, root, base = start_server(args.port)
     try:
         async with async_playwright() as p:

@@ -12,6 +12,9 @@ The data platform as a platform, not an application: its parts, one platform or 
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [An application or a platform?](https://data.learn-all.org/platform-and-solution-architecture/an-application-or-a-platform/) | Where the platform sits | 8½ min | 11 | 3 questions | [script](1-an-application-or-a-platform/script.md) · [source](1-an-application-or-a-platform/source/README.md) |
+| [Inside the platform](https://data.learn-all.org/platform-and-solution-architecture/inside-the-platform/) | The platform's parts | 7 min | 10 | 3 questions | [script](2-inside-the-platform/script.md) · [source](2-inside-the-platform/source/README.md) |
+| [One platform, or many](https://data.learn-all.org/platform-and-solution-architecture/one-platform-or-many/) | How many platforms | 8 min | 10 | 3 questions | [script](3-one-platform-or-many/script.md) · [source](3-one-platform-or-many/source/README.md) |
+| [Where it meets the applications](https://data.learn-all.org/platform-and-solution-architecture/where-it-meets-the-applications/) | Two platforms, one map | 8½ min | 9 | 3 questions | [script](4-where-it-meets-the-applications/script.md) · [source](4-where-it-meets-the-applications/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -266,8 +266,9 @@ quill(F4, rw('thanks', 'thanks', 0.0), 0.4, 1.0, px(1615) * 0.4)
 chord((Bb2, D3, F3, Bb3), rw('left', 'tracker', -0.2), 0.5, step=0.18, ring=2.0, until=E('door'))
 
 # 4. Ordered in the open: Jena again, Larrey's order: the thumb's low G as the worst are carried in, then B-flat major as they're reached;
-#    those hurt less can wait: nothing. Anil's card: a tap for each measure as it comes in; what waiting costs: the bracket drawn; divided
-#    by the effort: the order written, and F major; near the top: one high B-flat. The dashboard's card; not now: the thumb's low G, and
+#    those hurt less can wait: nothing. Anil's card: a tap for each measure as it comes in; its value: the bracket drawn; divided
+#    by the effort: the order written, and F major; time, part of that value: a tap as its words come in; near the top: one high
+#    B-flat. The dashboard's card; not now: the thumb's low G, and
 #    its why and when written. Never by who asks, or how loudly: nothing. The board, open to all: the screen comes on, and E-flat major
 LV[0] = 0.9
 qw = lambda lid, word, off=0: W('order', lid, word, off)
@@ -276,12 +277,13 @@ sheet(S0('order') + 0.8, 0.004, px(430))
 thumb(G2, qw('rule', 'most', -0.1), 0.5, 1.6)
 chord((Bb2, D3, F3, D4), qw('rule', 'first', 0.3), 0.45, step=0.18, ring=1.8)
 sheet(qc('weigh', 0.3), 0.004, px(520))
-for word in ('value', 'urgency', 'risk'):
+for word in ('opportunity', 'risk'):
     tap(qw('weigh', word, -0.2), 0.003, px(520))
-pen(qw('cost', 'waiting', -0.2), 0.5, 0.0035, px(880), 2)
+pen(qc('value', 0.0), 0.5, 0.0035, px(880), 2)
 tap(qw('effort', 'effort', -0.2), 0.003, px(520))
 pen(qw('effort', 'puts', -0.2), 0.5, 0.0035, px(300), 2)
 chord((F2, C3, F3, A3), qw('effort', 'puts', 0.2), 0.45, step=0.16, ring=1.4)
+tap(qw('time', 'time', -0.3), 0.003, px(490))
 quill(Bb4, qw('anil', 'top', -0.2), 0.45, 1.2, px(700) * 0.4)
 sheet(qc('dash', -0.1), 0.004, px(1400))
 thumb(G2, qw('dash', 'waits', -0.2), 0.5, 1.6)
@@ -315,13 +317,13 @@ wc = lambda lid, off=0: G('when', lid, off)
 sheet(S0('when') + 0.9, 0.004, px(500))
 chord((D3, A3, D4, F4), ww('council', 'timetable', 0.0), 0.45, step=0.18, ring=1.8)
 sheet(ww('rooms', "registrar's", -0.3), 0.004, px(1380))
-quill(Bb4, ww('rooms', 'top', -0.2), 0.45, 1.2, px(1380) * 0.4)
+quill(Bb4, ww('late', 'top', -0.2), 0.45, 1.2, px(1380) * 0.4)
 sheet(ww('clara', 'asks', -0.2), 0.004, px(1380))
 for i in range(3):
-    tap(ww('clara', 'model', 0.0) + 0.6 * i, 0.003, px(1380))
+    tap(ww('clara', 'model', 0.0) + 0.67 * i, 0.003, px(1380))
 thumb(G2, ww('same', 'not now', -0.2), 0.5, 1.6)
-for word in ("timetable's", 'current', 'new one'):
-    pen(ww('reason', word, -0.2), 0.4, 0.0035, px(1300), 2)
+for lid, word in (('reason', "timetable's"), ('reason', 'new model'), ('date', 'current'), ('date', 'new one')):
+    pen(ww(lid, word, -0.2), 0.4, 0.0035, px(1300), 2)
 sheet(wc('ats', 0.2), 0.004, px(960))
 chord((G2, G3, Bb3, D4), wc('ats', 0.5), 0.45, step=0.2, ring=1.6)
 chord((F2, A3, C4, F4), ww('ats', 'five', -0.1), 0.4, step=0.16, ring=1.4)

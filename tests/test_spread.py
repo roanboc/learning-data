@@ -1,6 +1,9 @@
-"""Where the right answer sits: check_site.py reads a pack of labs and scenarios as written, and tells a spread pack from one
-whose answers can be found by their place."""
+"""Where the right answer sits, and how long it is: check_site.py reads a pack of labs and scenarios as written, and tells a
+spread pack from one whose answers can be found by their place or by their length."""
+import json
 import pathlib
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -87,6 +90,12 @@ class Spread(unittest.TestCase):
         P, rel = self.read(PACK.replace('{t:"one",b:"b",why:"."},{t:"two",b:"a",why:"."}', '{t:"two",b:"a",why:"."},{t:"one",b:"b",why:"."}'))
         self.assertTrue(any("box by box (1, 2, 2)" in x for x in C.spread_faults(rel, P, set(P["labs"]))))
 
+    def test_cards_turn_and_turn_about(self):
+        for boxes, want in (([0, 1, 0, 1], True), ([1, 0, 1, 0, 1], True), ([0, 1, 0], False), ([0, 1, 1, 0], False), ([0, 1, 2, 0], False), ([0, 1, 0, 1, 1], False)):
+            self.assertEqual(C.turn_about(boxes), want, boxes)
+        P, rel = self.read(PACK.replace('{t:"three",b:"b",why:"."}', '{t:"three",b:"b",why:"."},{t:"four",b:"a",why:"."}'))
+        self.assertTrue(any("turn and turn about (2, 1, 2, 1)" in x for x in C.spread_faults(rel, P, set(P["labs"]))))
+
     def test_how_many_in_one_place(self):
         self.assertEqual([C.spread_most(n, k) for n, k in ((2, 4), (3, 3), (3, 2), (5, 2), (6, 4), (7, 3), (7, 4), (12, 2))], [1, 1, 2, 3, 3, 3, 3, 6])
 
@@ -104,6 +113,94 @@ class Spread(unittest.TestCase):
         self.assertTrue(any("not in order" in x for x in C.spread_faults(rel, P, set())))
         P, rel = self.read(PACK.replace('items:["a","b","c"],', 'items:["a","b","c"],start:[2,0,1],'))
         self.assertEqual(C.spread_faults(rel, P, set()), [])
+
+    def test_an_orders_first_showing_is_mixed(self):
+        for start, want in (([0, 1, 2], False), ([0, 2, 1], True), ([1, 0], True), ([3, 2, 1, 0], False), ([1, 2, 3, 0], False),
+                            ([3, 4, 5, 0, 1, 2], False), ([3, 2, 1, 0, 7, 6, 5, 4], False), ([0, 1, 2, 4, 3], False), ([1, 3, 0, 2], True),
+                            ([2, 0, 4, 1, 3], True), ([1, 3, 5, 0, 2, 4], True)):
+            self.assertEqual(C.order_mixed(start), want, start)
+        P, rel = self.read(PACK.replace('items:["a","b","c"],', 'items:["a","b","c","d"],start:[3,2,1,0],'))
+        self.assertTrue(any("in reverse" in x for x in C.spread_faults(rel, P, set())))
+        P, rel = self.read(PACK.replace('items:["a","b","c"],', 'items:["a","b","c","d"],start:[1,3,0,2],'))
+        self.assertEqual(C.spread_faults(rel, P, set()), [])
+
+    def test_the_line_the_engines_mix_with(self):
+        node = shutil.which("node")
+        if not node:
+            self.skipTest("no node here to run the engines' line")
+        js = C.MIXED + "console.log(JSON.stringify(Array.from({length:12},(_,i)=>Array.from({length:60},(_,s)=>mixed(i+1,s)))));"
+        run = lambda: json.loads(subprocess.run([node, "-e", js], capture_output=True, text=True, check=True).stdout)
+        table = run()
+        self.assertEqual(run(), table)  # one scenario is mixed the same way each time
+        for n, row in enumerate(table, 1):
+            for s, o in enumerate(row):
+                self.assertEqual(sorted(o), list(range(n)), (n, s, o))
+                if n > 1:
+                    self.assertTrue(C.order_mixed(o), (n, s, o))
+            if n > 3:
+                self.assertGreater(len({tuple(o) for o in row}), 3, n)  # and not every scenario the same way
+
+    def test_a_right_option_that_explains_everything_fails(self):
+        q = lambda title, *opts: ("learn.en.js", {"title": title, "opts": list(opts)})
+        full, like, short = "x" * 100, "x" * 70, "x" * 30
+        fair = q("Fair", (like, False), (like, True), (like, False))
+        self.assertEqual(C.length_faults("learn.en.js", [fair]), [])
+        out = C.length_faults("learn.en.js", [q("Longest", (like, False), (full, True), (like, False)), fair])
+        self.assertEqual(len(out), 1, out)
+        self.assertIn('"Longest": the right option is 100 characters, the longest wrong one 70', out[0])
+        out = C.length_faults("learn.en.js", [q("Short", (like, True), (like, False), (short, False)), fair])
+        self.assertEqual(len(out), 1, out)
+        self.assertIn('"Short": options of 70/70/30 characters', out[0])
+        # a wrong option may be the longest: only the right one's length gives an answer away
+        self.assertEqual(C.length_faults("learn.en.js", [q("Wrong is longest", (full, False), (like, True), (like, False))]), [])
+
+    def test_the_right_option_clearly_the_longest_in_at_most_half(self):
+        q = lambda right: ("learn.en.js", {"title": "T", "opts": [("x" * 70, False), ("x" * right, True), ("x" * 70, False)]})
+        clearly, level = q(80), q(72)  # 80 is more than a tenth longer than 70, and less than a quarter
+        self.assertEqual(C.length_faults("the pack", [clearly, level]), [])
+        self.assertEqual(C.length_faults("the pack", [clearly, clearly, level]), [])
+        self.assertEqual(C.length_faults("the pack", [clearly, clearly, clearly, level]),
+                         ["the pack: the right option is clearly the longest in 3 of the 4 scenarios its page shows: make the wrong ones as full"])
+
+    def test_names_and_scenarios_without_options_arent_compared(self):
+        names = {"title": "Names", "opts": [("TCSI", True), ("HESA Data Futures", False), ("CEDS", False)]}
+        self.assertIsNone(C.length_read(names))  # every option under 25 characters: a name's length says nothing
+        self.assertIsNone(C.length_read({"title": "An order", "opts": None}))
+        self.assertIsNone(C.length_read({"title": "Two right", "opts": [("x" * 40, True), ("x" * 40, True)]}))
+        self.assertEqual(C.length_read({"title": "T", "opts": [("x" * 40, False), ("x" * 30, True), ("x" * 26, False)]}), (30, 40, [40, 30, 26]))
+        # none of them counts among a page's scenarios either: one clearly longest of one compared is still at most half, rounded up
+        clearly = ("learn.en.js", {"title": "T", "opts": [("x" * 70, False), ("x" * 80, True)]})
+        self.assertEqual(C.length_faults("the pack", [("learn.en.js", names), clearly]), [])
+
+    def test_lengths_are_those_of_the_words_a_page_shows(self):
+        right = 'Ask what "student" means here, and write it down.'
+        P, rel = self.read(PACK.replace('{t:"no",why:"."},{t:"yes",ok:true},{t:"no again",why:"."}',
+                                        '{t:"Rerun both reports until the two of them agree.",why:"."},'
+                                        '{t:"Ask what \\"student\\" means here, and write it down.",ok:true},'
+                                        '{t:"Publish the average of the two as the one number.",why:"."}'))
+        self.assertEqual(P["qs"][0]["opts"][1], (right, True))
+        self.assertEqual(C.length_read(P["qs"][0]), (len(right), 49, [47, len(right), 49]))  # the quotes' escapes aren't counted
+        self.assertEqual(C.length_faults(rel, [(rel, q) for q in P["qs"]]), [])  # the order has no options; the third names things
+
+    def test_a_labs_rows_are_held_to_the_same_lengths_where_a_page_shows_it(self):
+        bare, full, level = "the newest sent,", "the student system's, checked against her passport,", "the one that most of the systems hold today,"
+        row = '{t:"%s",why:"No."},{t:"%s",ok:true,why:"Yes."}'
+        P, rel = self.read(PACK.replace(row % ("wrong", "right"), row % (bare, full)))
+        rows = C.lab_rows(P, set(P["labs"]))
+        self.assertEqual([r["title"] for r in rows], ["lab write, row 1", "lab write, row 2"])  # the other labs ask for no choice
+        self.assertIsNone(C.length_read(rows[0]))  # its two options are under 25 characters: they only name something
+        out = C.length_faults(rel, [(rel, r) for r in rows], "lab rows")
+        self.assertEqual(len(out), 2, out)
+        self.assertIn(f'"lab write, row 2": the right option is {len(full)} characters, the longest wrong one {len(bare)}', out[0])
+        self.assertIn(f'"lab write, row 2": options of {len(bare)}/{len(full)} characters', out[1])
+        self.assertEqual(C.lab_rows(P, {"boxes"}), [])  # a lab no page shows isn't read
+        P, rel = self.read(PACK.replace(row % ("wrong", "right"), row % (level, full)))
+        self.assertEqual(C.length_faults(rel, [(rel, r) for r in C.lab_rows(P, set(P["labs"]))], "lab rows"), [])
+        # the right phrase clearly the longest in at most half of a pack's rows, and the fault names them as rows
+        r = lambda right: ("learn.en.js", {"title": "lab write, row 1", "opts": [("x" * 70, False), ("x" * right, True)]})
+        self.assertEqual(C.length_faults("the pack", [r(80), r(80), r(72), r(72)], "lab rows"), [])
+        self.assertEqual(C.length_faults("the pack", [r(80), r(80), r(80), r(72)], "lab rows"),
+                         ["the pack: the right option is clearly the longest in 3 of the 4 lab rows its page shows: make the wrong ones as full"])
 
     def test_the_first_films_questions_are_read_from_its_pack(self):
         text = ('window.LEARN={lang:"en",\nstops:{a:{lab:{qs:[{q:"Not a Pause and think question",eng:"x"}]}}},\n'

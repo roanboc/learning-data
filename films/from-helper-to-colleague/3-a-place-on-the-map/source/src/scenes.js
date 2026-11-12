@@ -228,7 +228,7 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     rest:wAt(sc,"people","People keep the rest"),clara:wAt(sc,"people","Clara raises"),jun:wAt(sc,"people","Jun reviews"),noor:wAt(sc,"people","Noor approves"),rel:wAt(sc,"people","releases it"),
     so:wAt(sc,"sod","So whoever drafts"),never:wAt(sc,"sod","never approves"),sep:wAt(sc,"sod","separation of duties"),
     then:wAt(sc,"agent","Then Noor"),assigned:wAt(sc,"agent","assigned the planning agent"),that:wAt(sc,"agent","to that role"),owner:wAt(sc,"agent","Clara as its owner"),had:wAt(sc,"agent","it had its place"),
-    may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],
+    may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],masked:wAt(sc,"may","personal and sensitive"),
     n:[wAt(sc,"maynot","approve"),wAt(sc,"maynot","merge"),wAt(sc,"maynot","change production"),wAt(sc,"maynot","change an approved"),wAt(sc,"maynot","change what"),wAt(sc,"maynot","grant")],
     a:[wAt(sc,"asks","Clara"),wAt(sc,"asks","Mei"),wAt(sc,"asks","Noor"),wAt(sc,"asks","Jun")],
     guess:wAt(sc,"guess","When"),decides:wAt(sc,"guess","a person decides"),
@@ -272,8 +272,8 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
       // like a crew's card on the board, it has its place: the words the opening left under it
       cj_pillAt(cx,CJ_PAG.x+CJ_PAG.w/2,834,"its place on the map",tt,T.had-0.1,T.may-0.6,{col:AG.blue});
       // the role's rights: may, may not, whom it asks; when it isn't sure, it asks, and a person decides
-      cj_rights(cx,1090,90,790,{a:ag_in(tt,T.may-0.4,0.5),k:Math.min(1,ag_spr(tt,T.may-0.4,0.5)),
-        may:i=>ag_in(tt,T.m[i]-0.15,0.35),maynot:i=>ag_in(tt,T.n[i]-0.15,0.35),asks:i=>ag_in(tt,T.a[i]-0.15,0.35),glow:ag_io(tt,T.guess-0.2,T.where-0.4,0.4),rule:ag_in(tt,T.decides-0.3,0.4)});}},
+      cj_rights(cx,1090,84,790,{a:ag_in(tt,T.may-0.4,0.5),k:Math.min(1,ag_spr(tt,T.may-0.4,0.5)),
+        may:i=>ag_in(tt,T.m[i]-0.15,0.35),may2:ag_in(tt,T.masked-0.15,0.35),maynot:i=>ag_in(tt,T.n[i]-0.15,0.35),asks:i=>ag_in(tt,T.a[i]-0.15,0.35),glow:ag_io(tt,T.guess-0.2,T.where-0.4,0.4),rule:ag_in(tt,T.decides-0.3,0.4)});}},
     // the same day, Noor places Anil Kurian's workload agent, with its stage for each kind of task on its assignment; the map now holds
     // three agents, each with a role and an owner; the third, the governance review agent, was there before (a later moment)
     {later:true,at:T.same-0.7,place:"cjWall",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{

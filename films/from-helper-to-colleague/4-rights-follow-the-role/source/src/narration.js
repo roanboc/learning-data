@@ -37,7 +37,7 @@ const NARR={
  {"id":"three","gap":0.8,"text":"The planning contributor does three of them: draft the change, build it in development, and open a pull request."},
  {"id":"each","gap":0.8,"text":"Each step says what it reads, what it writes, and which tools it calls."},
  {"id":"draft","gap":0.8,"text":"To draft the change, it reads the ticket and what the change touches, and writes on its own branch."},
- {"id":"build","gap":0.8,"text":"To build it, it reads production, names masked, and writes its tests' results in its own development schema."},
+ {"id":"build","gap":0.8,"text":"To build it, it reads production, with personal and sensitive data masked, and writes its tests' results in its own development schema."},
  {"id":"open","gap":0.8,"text":"To open the pull request, it reads its change and its results, and writes one pull request."},
  {"id":"exactly","gap":0.8,"text":"Its rights are exactly those, and every right names the step that needs it."},
  {"id":"like","gap":0.8,"text":"Like the drawer: filled from the order, not from the shelf."},
@@ -77,7 +77,7 @@ const NARR={
 "close":{"name":"A drawer of its own","lead":0.9,"tail":1.2,"vo":[
  {"id":"drawer","gap":0.8,"text":"On the ward, each patient's drawer held one day's doses, filled from one order."},
  {"id":"here","gap":0.8,"text":"Here, the planning agent holds what its three steps need, and nothing more."},
- {"id":"reason","gap":0.8,"text":"Every right it holds has a reason anyone can read, and none of them reaches production."},
+ {"id":"reason","gap":0.8,"text":"Every right it holds has a reason anyone can read, and none of them lets it change production."},
  {"id":"jun","gap":0.8,"text":"And Jun's rights stay his own."},
  {"id":"lesson","gap":0.8,"text":"An agent's rights come from its work, not from a person's."}]}
 };

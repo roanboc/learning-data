@@ -1,0 +1,207 @@
+1
+00:00:01,400 --> 00:00:10,442
+Japón, el siglo XVII. En Shinano, una provincia de altas montañas, los ríos no sirven para barcas, así que las mercancías cruzan los pasos a caballo.
+
+2
+00:00:11,942 --> 00:00:22,847
+En los caminos principales, la mercancía va por el relevo de las postas: los caballos de una posta llevan la carga solo hasta la siguiente. Allí pasa a otro caballo, y quien la envía paga otra vez.
+
+3
+00:00:24,547 --> 00:00:32,565
+Cada cambio cuesta tiempo y dinero, y puede dañar la mercancía. Cuando viajan funcionarios, los caballos son primero para ellos, y las cargas esperan.
+
+4
+00:00:33,865 --> 00:00:39,294
+Para las aldeas de montaña, todo lo que venden o compran cuesta más de llevar, y tarda más.
+
+5
+00:00:40,594 --> 00:00:50,604
+Así que los campesinos empezaron a llevar cargas en sus propios caballos, de un tirón: sin cambio de caballo ni pago a la posta, más barato y con menos daño. Eran los chūma.
+
+6
+00:00:52,504 --> 00:01:02,661
+Pero las postas perdían cargas y pagos, y aún debían mantener caballos para el shogunato. Desde 1673, llevaron a los campesinos a juicio, una y otra vez.
+
+7
+00:01:04,161 --> 00:01:08,069
+Las montañas necesitaban el modo más barato, y el camino necesitaba sus postas.
+
+8
+00:01:09,769 --> 00:01:18,754
+En 1764, el shogunato resolvió. Para cada camino, fijó qué mercancías podían llevar los caballos de los campesinos, y cuáles iban por el relevo.
+
+9
+00:01:20,054 --> 00:01:29,682
+Anotó cada aldea que podía tenerlos, 679, y más de dieciocho mil caballos. Y los campesinos ayudarían a sostener el relevo.
+
+10
+00:01:31,382 --> 00:01:44,657
+Cada tipo de carga tenía su camino, por escrito. Ese año, 9,600 cargas fueron de Iida a Matsumoto, y los caballos de los campesinos se extendieron por Shinano, uniendo sus montañas a ambas costas.
+
+11
+00:01:46,357 --> 00:01:55,201
+En la empresa de energía, el equipo de integración halla cargas que no ve: 34 flujos que entran y salen de la plataforma de datos, ninguno en su mapa.
+
+12
+00:01:56,501 --> 00:02:05,296
+Así que Ravi y la nueva líder del equipo ordenan los flujos por tipo: cada uno toma la ruta que le conviene, y todos van a un mapa que ambos equipos mantienen.
+
+13
+00:02:12,396 --> 00:02:20,590
+La plataforma de integración une las aplicaciones de la empresa: facturación, el sistema de clientes, cortes, medición y órdenes de trabajo.
+
+14
+00:02:22,090 --> 00:02:30,569
+Por su puerta de enlace, una aplicación le pide algo a otra. Por sus eventos, la noticia de un cambio llega a cada aplicación que la quiere.
+
+15
+00:02:32,469 --> 00:02:38,341
+Cada mensaje se revisa y se registra, así que el equipo de integración ve cada flujo entre aplicaciones.
+
+16
+00:02:39,641 --> 00:02:49,383
+Este año, Yasmin Saleh llega como líder de integración. Su primera revisión halla 34 flujos que entran y salen de la plataforma de datos y no están en su mapa.
+
+17
+00:02:51,083 --> 00:03:02,499
+Uno era una lectura nocturna del sistema de clientes. Al actualizarlo, la lectura se rompió, y los reportes de comercialización salieron mal dos días: nadie que lo actualizaba sabía que esa lectura existía.
+
+18
+00:03:04,399 --> 00:03:10,668
+Así que Yasmin pide una regla: que todo flujo pase por la plataforma de integración, para que nada quede oculto.
+
+19
+00:03:14,368 --> 00:03:19,529
+Ravi está de acuerdo con la mitad. Un flujo que nadie ve es un flujo que nadie puede gobernar.
+
+20
+00:03:20,829 --> 00:03:27,384
+Pero los datos entran a una plataforma de datos, y salen de ella, de más maneras que los mensajes entre aplicaciones.
+
+21
+00:03:28,484 --> 00:03:36,631
+Entre aplicaciones, el tráfico son mensajes pequeños, de uno en uno: un cliente se mudó, se reportó una falla, se terminó un trabajo.
+
+22
+00:03:38,331 --> 00:03:48,506
+A la plataforma de datos llegan cargas masivas: cada noche, cuarenta millones de lecturas de medidores, cargadas por los conectores de la propia plataforma. En Databricks, eso es Lakeflow Connect.
+
+23
+00:03:50,406 --> 00:03:59,621
+Enviada por la plataforma de integración, cada lectura sería un mensaje propio: una carga que cambia de caballo en cada posta, más lenta y más cara.
+
+24
+00:04:01,521 --> 00:04:06,344
+Ambos tipos son flujos, y ambos necesitan gobierno. Solo que no van por el mismo camino.
+
+25
+00:04:10,044 --> 00:04:15,450
+Así que Ravi y Yasmin ordenan los 34 flujos por tipo, y le dan a cada tipo una regla.
+
+26
+00:04:16,750 --> 00:04:21,588
+Las cargas masivas y el historial entran de forma nativa, por los conectores de la propia plataforma de datos.
+
+27
+00:04:23,288 --> 00:04:35,629
+Un cambio en una aplicación, como un cliente que se muda, ya es un evento en la plataforma de integración. La plataforma de datos se suscribe a él, en vez de leer el sistema de clientes por otra vía.
+
+28
+00:04:37,529 --> 00:04:45,949
+Y los datos que vuelven a una aplicación pasan por la puerta de enlace de la plataforma de integración, como cada aplicación ya pide lo que necesita.
+
+29
+00:04:47,849 --> 00:04:52,029
+Cada flujo toma la ruta más simple, más barata y más fácil de gobernar.
+
+30
+00:04:53,529 --> 00:05:00,876
+Datos que se mueven muestra cómo se construye cada tipo de flujo, y Un camino para cada proveedor, cómo un equipo elige uno para cada fuente.
+
+31
+00:05:04,376 --> 00:05:10,299
+Y cada flujo va a un solo mapa: dónde empieza y termina, su ruta, quién es su responsable, y su contrato.
+
+32
+00:05:11,999 --> 00:05:20,225
+Ambos equipos lo mantienen. Un flujo nuevo entra al mapa en el mismo pull request que lo construye, revisado por el equipo cuya plataforma lo lleva.
+
+33
+00:05:22,225 --> 00:05:29,858
+Como la resolución de 1764 anotó cada aldea y sus caballos, el mapa anota cada flujo y su ruta.
+
+34
+00:05:31,858 --> 00:05:37,037
+Yasmin ve ahora los 34 flujos, y Ravi conserva las rutas que convienen a los datos.
+
+35
+00:05:40,737 --> 00:05:45,890
+Luego Grace pide, en un ticket, el riesgo de falla de cada alimentador, en la aplicación de cortes.
+
+36
+00:05:47,190 --> 00:05:50,292
+Un alimentador es una línea que lleva energía a unas pocas calles.
+
+37
+00:05:52,192 --> 00:06:00,152
+El producto de datos de la red calcula el puntaje en la plataforma de datos, cada hora, con el clima, la carga de cada alimentador y sus fallas pasadas.
+
+38
+00:06:02,252 --> 00:06:11,705
+Son datos que vuelven a una aplicación, así que, por la regla, pasan por la puerta de enlace de la plataforma de integración, como una API que la aplicación de cortes ya usa.
+
+39
+00:06:14,005 --> 00:06:21,723
+El equipo de datos revisa el pull request del puntaje, el equipo de integración agrega su ruta a la puerta de enlace, y el flujo entra al mapa.
+
+40
+00:06:24,023 --> 00:06:28,478
+Grace revisa los puntajes en la aplicación de cortes, en pruebas, antes de que se cierre el ticket.
+
+41
+00:06:32,578 --> 00:06:43,993
+De los 34 flujos que hallaron, 25 siguen nativos, y ahora están en el mapa. Nueve pasan a la plataforma de integración: seis se vuelven sus eventos, y tres pasan por su puerta de enlace.
+
+42
+00:06:46,093 --> 00:06:54,119
+Ya nada lee el sistema de clientes sin ser visto. Cuando se actualice otra vez, ambos equipos sabrán por el mapa qué flujos toca.
+
+43
+00:06:55,819 --> 00:07:05,706
+Y las dos plataformas se ayudan: la plataforma de datos toma los eventos de la de integración, y la de integración sirve los productos de la de datos.
+
+44
+00:07:07,406 --> 00:07:11,056
+Para la operación y para el gobierno, las dos funcionan mejor juntas.
+
+45
+00:07:14,556 --> 00:07:17,204
+Esta es la práctica de datos, en el mapa de Tomás.
+
+46
+00:07:18,504 --> 00:07:27,152
+En la capa de tecnología, la plataforma de integración es un nodo junto a la plataforma de datos, con servicios propios: una puerta de enlace y eventos.
+
+47
+00:07:28,852 --> 00:07:36,136
+Cada uno de los 34 flujos se dibuja como un flujo entre aplicaciones y productos de datos, rotulado con la ruta que toma.
+
+48
+00:07:38,036 --> 00:07:46,093
+Y la regla es un principio: cada flujo toma la ruta más simple, más barata y más fácil de gobernar, y todo flujo está en el mapa.
+
+49
+00:07:49,793 --> 00:07:56,118
+Por todo Shinano, los caballos de los campesinos y los de las postas recorrían los mismos caminos, bajo una sola resolución.
+
+50
+00:07:57,618 --> 00:08:01,568
+Las disputas no terminaron, pero ahora había una resolución con la cual zanjarlas.
+
+51
+00:08:03,068 --> 00:08:08,707
+En la empresa de energía, dos plataformas llevan cada una lo que mejor lleva, y todo flujo está en un solo mapa.
+
+52
+00:08:10,207 --> 00:08:12,287
+Sigue: la seguridad de punta a punta.

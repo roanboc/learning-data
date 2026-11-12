@@ -328,7 +328,7 @@ newest record the list was built from, its system date, never when its file arri
 its level in its own `meta.quality`, and the product's latency names them as its `element`. The
 freshness check on each source's receipts (`nightly_files`) measures it each night: `error_after`
 only, with `warn_after: null`, because its failure is the warning; the send's own check reads the
-list's two columns (`examples/a-late-file/`).
+list's two columns (`examples/a-late-file/`). A second alarm beside the freshness check reads when each file arrived, and says whether a source has gone silent (`tests/quality/nightly_file_from_each_source_tonight.sql`).
 
 ### Which reference
 

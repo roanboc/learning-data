@@ -143,10 +143,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "dbt lee allí la misma fecha: el registro más nuevo que guardó cada fuente, no cuándo llegó su archivo.",
 "One level on each: older than twenty-four hours, the check fails.":
 "Un nivel en cada una: con más de veinticuatro horas, el control falla.",
-"Each night, the update runs that check first.":
-"Cada noche, la actualización ejecuta ese control primero.",
-"If it fails, Sam and Malia hear at once, and the list is still built, saying its age.":
-"Si falla, Sam y Malia se enteran de inmediato, y la lista se construye igual, diciendo su antigüedad.",
+"But old records can't say why: did no file come, or did the file bring nothing new?":
+"Pero los registros viejos no dicen por qué: ¿no llegó el archivo, o llegó sin nada nuevo?",
+"So the file's arrival is still checked, as a second alarm: no file tonight means the source has gone silent.":
+"Así que la llegada del archivo se sigue revisando, como segunda alarma: sin archivo esta noche, la fuente quedó en silencio.",
+"Each night, the update runs both checks first.":
+"Cada noche, la actualización ejecuta primero ambos controles.",
+"If either fails, Sam and Malia hear at once, and the list is still built, saying its age.":
+"Si alguno falla, Sam y Malia se enteran de inmediato, y la lista se construye igual, diciendo su antigüedad.",
 "That's the warning: nothing stops, and the people who need to know, know.":
 "Ese es el aviso: nada se detiene, y quienes necesitan saberlo, lo saben.",
 "The send to the printer is a job too. It checks the list's own age.":

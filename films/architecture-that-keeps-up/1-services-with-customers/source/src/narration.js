@@ -46,7 +46,8 @@ const NARR={
 "layers":{"name":"Down every layer","lead":1.0,"tail":1.0,"vo":[
  {"id":"walk","gap":0.8,"text":"Then Helena and Noor walk one service, governed data products, down every layer, with a picture for each."},
  {"id":"five","gap":0.8,"text":"Five layers: strategy, business, information, application and technology."},
- {"id":"names","gap":0.8,"text":"They're ArchiMate's layers, with TOGAF's data called information; The map before the data draws them in full."},
+ {"id":"names","gap":0.8,"text":"Four are ArchiMate's layers; information is what TOGAF calls data."},
+ {"id":"either","gap":0.8,"text":"At the level of the whole university, either word is fine; Between the business and the systems tells why."},
  {"id":"strategy","gap":0.8,"text":"Strategy: the capability it serves, deciding from trusted data."},
  {"id":"business","gap":0.8,"text":"Business: the service and its promise, checked by seven each morning, and who builds, reviews and owns each product."},
  {"id":"info","gap":0.8,"text":"Information: what it's about, such as rooms, bookings and the people counted in them."},

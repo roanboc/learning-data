@@ -1,0 +1,34 @@
+{
+  "kicker": "Processes and their levels",
+  "kicker_es": "Los procesos y sus niveles",
+  "title_es": "Procesos, hasta donde lo necesitan los datos",
+  "h1": "Processes, as deep as data needs: drawn to level two, deeper where it hurts",
+  "h1_es": "Procesos, hasta donde lo necesitan los datos: más hondo solo donde duele",
+  "lead": "Tomás needs to know where each concept is born. Grace's process map sorts the utility's work into four bands, and every process is drawn to level two, with what it reads and writes. Only one branch goes deeper, where estimated bills hurt, and there a second kind of reading is born.",
+  "lead_es": "Tomás necesita saber dónde nace cada concepto. El mapa de procesos de Grace ordena el trabajo de la empresa en cuatro franjas, y cada proceso se dibuja hasta el nivel dos, con lo que lee y escribe. Solo una rama baja más, donde duelen las facturas estimadas, y ahí nace otro tipo de lectura.",
+  "description": "A film from Business architecture for data about where each of the business's concepts is born: Grace's process map in four bands, strategic, operational, support and evaluation, which only sort the processes; levels drawn from APQC's framework, level one the macro processes and level two each process with its trigger, its output and one person accountable, drawn everywhere, and level three only where someone can name what hurts; meter to cash at level two, a SIPOC for each of its processes and what each one reads and writes, so each concept is born in the process that first writes it, and the payment found missing from the map; and check readings drawn in BPMN at level three, where estimated bills hurt, showing a second kind of reading born in the check, which the data team's tables, taken from the meters, never held. Told with the qanats of Iran, where Mahan's cycle of turns was kept in days, shares and sixteen-minute parts, and went down to single minutes only where a share was split.",
+  "description_es": "Una película de Arquitectura de negocio para datos sobre dónde nace cada concepto del negocio: el mapa de procesos de Grace en cuatro franjas, estratégicos, operativos, de apoyo y de evaluación, que solo ordenan los procesos; niveles tomados del marco de APQC, el nivel uno con los macroprocesos y el nivel dos con cada proceso, su disparador, su resultado y una sola persona que rinde cuentas, dibujados en todas partes, y el nivel tres solo donde alguien puede decir qué duele; del medidor al cobro en el nivel dos, un SIPOC para cada uno de sus procesos y lo que cada uno lee y escribe, así que cada concepto nace en el proceso que lo escribe primero, y el pago, que faltaba en el mapa; y revisar lecturas dibujado en BPMN en el nivel tres, donde duelen las facturas estimadas, que muestra un segundo tipo de lectura que nace en la revisión, y que las tablas del equipo de datos, tomadas de los medidores, nunca tenían. Contada con los qanats de Irán, donde el ciclo de turnos de Mahan se llevaba en días, partes y porciones de dieciséis minutos, y bajaba al minuto solo donde una parte se había dividido.",
+  "card": "Every process drawn to level two, with what it reads and writes. A branch goes deeper only where it hurts.",
+  "card_es": "Cada proceso dibujado hasta el nivel dos, con lo que lee y escribe. Una rama baja más solo donde duele.",
+  "chapters_es": {
+    "turns": "Un ciclo de turnos",
+    "note": "Dónde nace",
+    "bands": "Cuatro franjas",
+    "levels": "Niveles, y qué tan a fondo",
+    "cash": "Del medidor al cobro",
+    "pain": "Donde duele",
+    "flow": "El nivel tres",
+    "practice": "La práctica de datos",
+    "end": "Tan a fondo como lo necesita"
+  },
+  "next_h": "Next: what the business expects of each concept, the rules on it and how good it must be.",
+  "next_h_es": "Lo que sigue: qué espera el negocio de cada concepto, sus reglas y qué tan bueno debe ser.",
+  "past": [
+    "The qanats of Iran: a cycle of turns",
+    "Mahan's turns were kept in days, shares and sixteen-minute parts, down to the minute only where a share was split."
+  ],
+  "past_es": [
+    "Los qanats de Irán: un ciclo de turnos",
+    "Los turnos de Mahan se llevaban en días, partes y porciones de dieciséis minutos, y al minuto solo donde una parte se dividió."
+  ]
+}

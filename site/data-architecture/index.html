@@ -15,7 +15,7 @@
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a><a href="../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/data-architecture/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
 <main>
-<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/between-the-business-and-the-systems-poster.jpg" alt=""><img src="../assets/the-pyramid-taken-apart-poster.jpg" alt=""><img src="../assets/between-the-business-and-the-systems-poster.jpg" alt=""><img src="../assets/the-pyramid-taken-apart-poster.jpg" alt=""><img src="../assets/between-the-business-and-the-systems-poster.jpg" alt=""><img src="../assets/the-pyramid-taken-apart-poster.jpg" alt=""><img src="../assets/between-the-business-and-the-systems-poster.jpg" alt=""><img src="../assets/the-pyramid-taken-apart-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/between-the-business-and-the-systems-poster.jpg" alt=""><img src="../assets/the-pyramid-taken-apart-poster.jpg" alt=""><img src="../assets/where-each-fact-is-born-poster.jpg" alt=""><img src="../assets/how-it-travels-poster.jpg" alt=""><img src="../assets/between-the-business-and-the-systems-poster.jpg" alt=""><img src="../assets/the-pyramid-taken-apart-poster.jpg" alt=""><img src="../assets/where-each-fact-is-born-poster.jpg" alt=""><img src="../assets/how-it-travels-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../topics/">Topics</a> › <a href="../topics/#enterprise-architecture">Enterprise architecture</a> › Data architecture</p>
 <h1>Data architecture</h1>
 <p class="lead">The third series on enterprise architecture. Inés Duarte, the utility's data architect, works between the business and the systems: what the pyramid of data gets wrong, where each fact is born, how it travels, who owns which data, and one language kept for it.</p>
@@ -44,6 +44,26 @@
 <p class="tc-progress" data-progress="ld-the-pyramid-taken-apart" hidden></p>
 </div>
 </article>
+<article class="topic-card">
+<img src="../assets/where-each-fact-is-born-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 3 of 6 · Systems of record and lineage</p>
+<h3><a href="where-each-fact-is-born/">Where each fact is born</a></h3>
+<p>Where each fact is born, one home and one owner for it, and a line back from every copy, so a correction is made once.</p>
+<p class="meta">6½ min · Pause and think · Data architecture</p>
+<p class="tc-progress" data-progress="ld-where-each-fact-is-born" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/how-it-travels-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 4 of 6 · Data flows and their contracts</p>
+<h3><a href="how-it-travels/">How it travels</a></h3>
+<p>What crosses between domains, in which shape and under which contract, with every flow drawn on the map and an owner at each end.</p>
+<p class="meta">7 min · Pause and think · Data architecture</p>
+<p class="tc-progress" data-progress="ld-how-it-travels" hidden></p>
+</div>
+</article>
 </div>
 </section>
 
@@ -56,6 +76,8 @@
 <div class="prose"><table><thead><tr><th>Film</th><th>Opens with</th><th>Still true today</th></tr></thead><tbody>
 <tr><td>Between the business and the systems</td><td>Project Cybersyn begins, Chile, 1971</td><td>Before any computer, engineers drew how each factory worked, and only then chose what to measure.</td></tr>
 <tr><td>The pyramid, taken apart</td><td>Cyberstride's first results, Chile, 1972</td><td>Cybersyn's software worked out each factory's normal from its own history, and passed on only what had changed.</td></tr>
+<tr><td>Where each fact is born</td><td>Numbers from the factory itself, Chile, 1972</td><td>Each factory sent its own numbers by telex, once a day, and Santiago read a copy the same day, where statistics had taken six months.</td></tr>
+<tr><td>How it travels</td><td>The same lines, Chile, 1972</td><td>In the October strike, the telex lines that had carried each factory's numbers to Santiago once a day carried new messages many times a day, both ways, and about 200 trucks still running were sent where goods were short.</td></tr>
 </tbody></table></div>
 </section>
 

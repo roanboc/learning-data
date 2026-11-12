@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:09.126
+Japan, 1462. Boats carry rice, goods and people along the Yodo River, between Kyoto and the sea.
+
+00:00:10.426 --> 00:00:16.723
+Every stretch of river and road has owners: the court, the shogunate, temples, shrines and lords.
+
+00:00:17.823 --> 00:00:22.430
+Any of them may set a barrier across it, where everyone who passes pays a toll.
+
+00:00:23.730 --> 00:00:33.303
+That year, it's said, the Yodo alone had 380 barriers. On the road to the shrines at Ise, there were once sixty in eighteen kilometres.
+
+00:00:34.803 --> 00:00:40.788
+A load stopped and paid at every one, so goods arrived late, and dearer for every barrier they passed.
+
+00:00:42.288 --> 00:00:47.396
+Merchants and travellers needed a road they could use without paying every owner on it.
+
+00:00:48.896 --> 00:00:53.864
+Lords began clearing the barriers from their own lands, Oda Nobunaga among them.
+
+00:00:54.964 --> 00:01:02.242
+From about 1585, Toyotomi Hideyoshi forbade the tolls, and barriers across the country came down.
+
+00:01:03.742 --> 00:01:14.200
+Under the Tokugawa, the five roads ran under one set of rules, whoever's lands they crossed. In 1635, the lords were forbidden barriers of their own.
+
+00:01:15.700 --> 00:01:21.529
+Each domain kept its own lord, its own laws and its own taxes. The road was what they shared.
+
+00:01:23.229 --> 00:01:34.443
+Travellers paid for what they used, a horse, a porter, a night at an inn, not every owner they passed. In 1771, more than two million pilgrims went to Ise.
+
+00:01:36.143 --> 00:01:44.663
+At the utility, Ravi finds barriers too: two data platforms, from two parts of the business, and a third product proposed to join them.
+
+00:01:45.763 --> 00:01:51.431
+Each brings its own permissions, policies and logs, so every rule would be kept three times.
+
+00:01:52.531 --> 00:01:59.188
+So Ravi proposes one platform: every domain owns its data on it, and every rule is kept once.
+
+00:02:05.888 --> 00:02:10.833
+Years ago, two parts of the utility each bought a data platform, from two vendors.
+
+00:02:12.133 --> 00:02:20.726
+One became the platform every other domain uses. The other is generation's, and holds the readings from its hydro and wind farms.
+
+00:02:22.426 --> 00:02:31.749
+Now the enterprise domain needs both, for one measure: the share of green-tariff customers' use, hour by hour, met by the utility's own farms.
+
+00:02:33.849 --> 00:02:40.909
+Its analysts propose a third product to join the two. It would query both where they are, so nothing would have to move.
+
+00:02:43.009 --> 00:02:47.470
+Ama asks for the measure in a ticket, and Ravi is asked how it should be built.
+
+00:02:51.370 --> 00:02:54.827
+Ravi draws what each one brings with it, side by side.
+
+00:02:56.327 --> 00:03:06.107
+Each platform has its own way to say who's who and who may see what, its own masks on private data, its own lineage, and its own log of who did what.
+
+00:03:08.407 --> 00:03:10.727
+The third product would bring a set of its own.
+
+00:03:12.427 --> 00:03:20.641
+So customers' meter readings, masked on the data platform, would be masked again in the third product, its own way, and checked in both.
+
+00:03:22.741 --> 00:03:29.591
+An analyst's rights would be granted in three places, three ways, and the measure's lineage would stop at every border.
+
+00:03:31.691 --> 00:03:38.821
+Every platform is a barrier with its own toll, and whoever crosses it pays: in rules kept again, and kept in step.
+
+00:03:43.521 --> 00:03:51.892
+Ravi keeps to one rule: the simplest architecture that does the job. Complexity nobody manages is what makes services fail.
+
+00:03:53.592 --> 00:03:57.784
+For most organisations, that means few components, on one platform.
+
+00:03:59.084 --> 00:04:06.442
+Many platforms, joined, fit only a few: a group spread over many countries, say, with a platform and a team in each.
+
+00:04:07.942 --> 00:04:16.341
+And moving to one is easier than it was: with open formats, and tools that convert most of the code, it can take months, not years.
+
+00:04:20.041 --> 00:04:23.037
+One platform doesn't mean one team owns everything.
+
+00:04:24.137 --> 00:04:34.447
+In a data mesh, as Zhamak Dehghani set it out, each domain owns its data, as products, on a self-serve platform, under rules the domains agree together.
+
+00:04:36.347 --> 00:04:42.340
+That self-serve platform is one platform, shared. Ownership is spread out; the platform isn't.
+
+00:04:43.840 --> 00:04:49.473
+Done that way, a data mesh is often the simplest architecture: one platform, many owners.
+
+00:04:50.973 --> 00:04:56.354
+Done badly, it's the old teams with new names, and nobody in the business owning anything.
+
+00:05:00.054 --> 00:05:04.050
+Sometimes a second platform can't be helped, for a while or for good.
+
+00:05:04.750 --> 00:05:13.166
+A company just bought, until it moves. A separate legal entity that must keep its data apart. Data that must stay in its own country.
+
+00:05:14.866 --> 00:05:20.596
+Two things lessen the harm. Open table formats, so both platforms read the same files.
+
+00:05:21.696 --> 00:05:26.516
+And a catalogue that federates the other's, so people find all the data in one place.
+
+00:05:27.816 --> 00:05:33.777
+But each platform keeps its own permissions, policies and logs. The second set of rules stays.
+
+00:05:35.477 --> 00:05:41.518
+The shogunate kept some barriers too: about fifty checkpoints, there to keep order and check who passed.
+
+00:05:43.018 --> 00:05:46.940
+Keep a second platform the same way: only for a reason you can name.
+
+00:05:50.640 --> 00:05:55.417
+Generation's platform has no such reason, so it moves onto the data platform.
+
+00:05:56.517 --> 00:06:02.083
+Generation keeps its data products: the same people, the same logic, the same owner.
+
+00:06:03.383 --> 00:06:10.656
+Its tables are already files in an open format, in the utility's own cloud storage, so their data needn't be copied.
+
+00:06:12.156 --> 00:06:19.113
+Until the move is done, the data platform's catalogue federates generation's, so Ama's measure can start at once.
+
+00:06:20.613 --> 00:06:29.381
+A tool converts most of the jobs' code. The data team reviews each pull request, and compares every number with the old platform's for a month.
+
+00:06:31.081 --> 00:06:37.156
+Generation checks its own reports in test, and after four months the old platform is switched off.
+
+00:06:41.056 --> 00:06:48.853
+Now every rule is kept once. The mask on meter readings holds everywhere, and an analyst's rights are granted in one place.
+
+00:06:50.553 --> 00:06:56.834
+Ama's measure is built once, on one platform, with its lineage from each farm's readings to the number.
+
+00:06:58.534 --> 00:07:07.171
+One platform to pay for, not two, and no third. The two people who kept generation's platform running now build its data products.
+
+00:07:11.071 --> 00:07:13.719
+Here's the data practice, on Tomás's map.
+
+00:07:15.019 --> 00:07:24.647
+In the technology layer, generation's platform was a second node, with its own services to govern and secure: a second set of rules, in plain sight.
+
+00:07:26.347 --> 00:07:32.809
+In the application layer, generation's data products stayed generation's. Only what served them changed.
+
+00:07:34.309 --> 00:07:40.879
+Ravi's rule is a principle on the map: one platform, and a second only for a reason anyone can name.
+
+00:07:42.579 --> 00:07:46.996
+And the move was a work package, ending the day the old platform was switched off.
+
+00:07:50.496 --> 00:07:57.990
+Between Kuwana and Hinaga, where sixty barriers had stood, the Tōkaidō ran under the same rules as the whole road.
+
+00:07:58.690 --> 00:08:04.028
+At the utility, there's one platform now, and every domain still owns what it builds on it.
+
+00:08:05.528 --> 00:08:07.716
+Next: where it meets the applications.

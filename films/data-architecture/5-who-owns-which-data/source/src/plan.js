@@ -242,8 +242,9 @@ function d5_map(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA
   P.forEach(([gi,nm,q])=>{if(q<=0.01)return;const gx=D5_GR[gi][2],gw=D5_GW[gi];const k=spring(q*1.2);ctx.save();ctx.translate(0,(1-k)*-12);
     d5_prod(ctx,gx+20,D5_MPY,gw-40,D5_MPH,nm,{a:clamp(q*2,0,1),hi:gi===0?(o.prodHi||0):0});ctx.restore();});
   // hosting capacity's product brings together its contract, under it, and its data, in the information layer: ArchiMate's
-  // aggregation, a line with a hollow diamond where it meets the product
-  const ag=o.agg||0;if(ag>0.01){const px=60+20,pw=D5_GW[0]-40,pb=D5_MPY+D5_MPH;withA(ctx,ag,()=>{archEl(ctx,px,pb+20,Math.round(pw*0.62),70,"its contract",BUSC,"contract",{size:28});
+  // aggregation, a line with a hollow diamond where it meets the product. The contract is a business object, as ArchiMate 4, which
+  // has no contract element of its own, draws one
+  const ag=o.agg||0;if(ag>0.01){const px=60+20,pw=D5_GW[0]-40,pb=D5_MPY+D5_MPH;withA(ctx,ag,()=>{archEl(ctx,px,pb+20,Math.round(pw*0.62),70,"its contract",BUSC,"object",{size:28});
     daDO(ctx,px,720,pw,110,"hosting capacity","lakehouse",{size:30,hi:o.doHi||0});
     const dia=(x0,y0,y1)=>{ctx.save();ctx.strokeStyle=rgba(BUSC,0.9);ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(x0,y0+12);ctx.lineTo(x0,y1);ctx.stroke();ctx.fillStyle="rgba(12,10,6,1)";ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x0+8,y0+6);ctx.lineTo(x0,y0+12);ctx.lineTo(x0-8,y0+6);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();};
     dia(px+Math.round(pw*0.31),pb,pb+20);dia(px+Math.round(pw*0.82),pb,720);});}

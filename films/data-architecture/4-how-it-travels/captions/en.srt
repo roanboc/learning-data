@@ -1,0 +1,227 @@
+1
+00:00:01,400 --> 00:00:07,451
+In October 1972, Cybersyn's telex lines ran from the north of Chile to the south.
+
+2
+00:00:09,151 --> 00:00:14,384
+Every afternoon, each factory sent its numbers along them, one way, to Santiago.
+
+3
+00:00:15,884 --> 00:00:23,623
+That month, truck owners went on strike against a plan for a state trucking company, and shopkeepers, bank clerks and others joined them.
+
+4
+00:00:25,123 --> 00:00:31,229
+With most trucks standing still, shops and factories across the country could run out of essential goods.
+
+5
+00:00:32,929 --> 00:00:36,182
+A report once a day, one way, couldn't keep goods moving.
+
+6
+00:00:37,282 --> 00:00:42,452
+The government needed to hear, as it happened, where goods were short and which trucks could still run.
+
+7
+00:00:44,152 --> 00:00:51,425
+So Fernando Flores, who had started Cybersyn at CORFO, set up an emergency operations centre in Santiago.
+
+8
+00:00:52,925 --> 00:01:00,201
+There, the Cybersyn team and officials read about two thousand telexes a day, from all over the country, and answered them.
+
+9
+00:01:01,701 --> 00:01:06,688
+The same lines now carried new messages, many times a day, in both directions.
+
+10
+00:01:08,388 --> 00:01:15,686
+With them, about two hundred trucks still running were sent where they were needed most, against the effects of forty thousand on strike.
+
+11
+00:01:17,386 --> 00:01:22,800
+At the utility, Inés lists every path that crosses the wall between the network and retail.
+
+12
+00:01:24,100 --> 00:01:26,782
+She finds eleven. Only four are on the map.
+
+13
+00:01:34,282 --> 00:01:41,290
+One is a link into the meter system's database, made years ago so the complaints team could check a reading during a call.
+
+14
+00:01:43,190 --> 00:01:52,298
+It shows every connection point's readings: all 540,000, the 230,000 served by other retailers among them.
+
+15
+00:01:54,198 --> 00:01:59,722
+That's what the wall is there to stop: customer information stays with the business that collected it.
+
+16
+00:02:01,622 --> 00:02:08,338
+A path that isn't on the map has no owner at either end. When one end changes, the other finds out when it breaks.
+
+17
+00:02:10,038 --> 00:02:18,137
+In March, one such path, a nightly script, wrote for months to a queue nothing read. About nineteen hundred bills went uncorrected.
+
+18
+00:02:21,637 --> 00:02:29,587
+In November, the Mendozas' meter, at 14 Quarry Lane, stopped sending readings for nine days, while a radio mast was mended.
+
+19
+00:02:31,287 --> 00:02:34,999
+The network estimated those days, and billing used the estimate.
+
+20
+00:02:36,299 --> 00:02:41,168
+When the meter came back, it sent what it had stored, and the network replaced the estimate.
+
+21
+00:02:42,868 --> 00:02:47,485
+Now the replacement has to cross the wall, and the agreed list says what may cross.
+
+22
+00:02:48,985 --> 00:02:51,579
+For a replaced reading, it lists five things.
+
+23
+00:02:52,479 --> 00:02:59,745
+The connection point, by its network ID; the days; the estimate it replaces; the readings; and when it was replaced.
+
+24
+00:03:01,845 --> 00:03:08,505
+Each retailer gets them only for the connection points it serves, the group's own retailer no differently from the rest.
+
+25
+00:03:10,205 --> 00:03:12,066
+Nothing else from the meter crosses.
+
+26
+00:03:15,566 --> 00:03:19,046
+How it travels is a choice too, and DAMA names three shapes.
+
+27
+00:03:20,546 --> 00:03:25,524
+Point to point: one system wired straight to another, like the complaints team's link.
+
+28
+00:03:26,824 --> 00:03:33,077
+It's quick to build. But each new reader adds a wire, and a change at one end can break the other, unseen.
+
+29
+00:03:34,977 --> 00:03:42,001
+Hub and spoke: every system sends to one hub, and reads from it, as Cybersyn's factories sent to Santiago.
+
+30
+00:03:43,901 --> 00:03:51,117
+Publish and subscribe: the home sends each change once, as it happens, and each reader allowed to read it subscribes.
+
+31
+00:03:53,017 --> 00:03:58,643
+Which one fits depends on three questions: who reads it, when they act on it, and what each may see.
+
+32
+00:04:02,343 --> 00:04:08,373
+The replaced reading has many readers: every retailer, and in each, billing and customer service.
+
+33
+00:04:09,873 --> 00:04:15,630
+Billing acts on it at the next bill. Customer service acts on it while a customer is on the phone.
+
+34
+00:04:17,130 --> 00:04:20,322
+And each retailer may see only its own customers'.
+
+35
+00:04:21,622 --> 00:04:28,599
+So the network publishes each replaced reading once, when it's replaced, and each retailer receives only its own.
+
+36
+00:04:30,699 --> 00:04:33,964
+Within the hour is soon enough: nobody acts on it sooner.
+
+37
+00:04:35,264 --> 00:04:40,985
+The complaints team's link is closed: they read the same messages as the rest of customer service.
+
+38
+00:04:44,685 --> 00:04:51,596
+The flow gets a contract, agreed by the two teams at its ends: Grace's, which sends it, and billing's, which reads it.
+
+39
+00:04:53,296 --> 00:04:57,027
+It keeps to the agreed list, so they need nobody else's sign-off.
+
+40
+00:04:58,527 --> 00:05:01,359
+It says what crosses, and what each part means.
+
+41
+00:05:02,659 --> 00:05:05,270
+How soon: within an hour of the replacement.
+
+42
+00:05:06,570 --> 00:05:13,550
+What happens when one is late or wrong: the network's team is told that day, and corrects it at home, never in the copy.
+
+43
+00:05:15,450 --> 00:05:22,898
+And how it changes: parts may be added, but none removed or renamed without a new version, and readers are told first.
+
+44
+00:05:26,998 --> 00:05:34,703
+On the data practice on the map, the flow is drawn across the wall: from the meter reading in meter data, to its copy in billing.
+
+45
+00:05:36,603 --> 00:05:42,001
+It names its shape and its contract, and an owner at each end: Grace, and the head of retail.
+
+46
+00:05:43,701 --> 00:05:46,704
+Every path across the wall goes on the map, or goes.
+
+47
+00:05:48,004 --> 00:05:53,606
+Five become flows, each with its contract. The other six, the link among them, are closed.
+
+48
+00:05:55,306 --> 00:06:00,958
+How each flow is built, with connectors, events and pipelines, is the series Data that moves.
+
+49
+00:06:06,858 --> 00:06:10,992
+In October 1972, Chile's telex lines didn't change.
+
+50
+00:06:12,092 --> 00:06:17,986
+What crossed them did: new messages, many times a day, both ways, in time for whoever could act.
+
+51
+00:06:19,686 --> 00:06:26,653
+At the utility, every fact that crosses the wall now crosses on purpose: drawn, with its shape and its contract.
+
+52
+00:06:28,153 --> 00:06:32,746
+On the twenty-ninth of November, the Mendozas' meter sent its nine stored days.
+
+53
+00:06:34,046 --> 00:06:38,246
+The estimate was replaced at 10:14, and billing had it a minute later.
+
+54
+00:06:39,746 --> 00:06:44,079
+Their December bill charged for what they really used, and nobody had to call.
+
+55
+00:06:45,779 --> 00:06:49,468
+That month, 2,140 estimates were replaced.
+
+56
+00:06:50,568 --> 00:06:56,275
+All but nine reached their retailer within the hour, and those nine were found and sent the same day.
+
+57
+00:06:57,775 --> 00:07:04,350
+Each domain now sends the others what they need. But who owns which data, and who answers for what's made from it?

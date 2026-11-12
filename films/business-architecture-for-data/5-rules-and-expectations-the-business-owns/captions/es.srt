@@ -1,0 +1,243 @@
+1
+00:00:01,400 --> 00:00:09,539
+En los años sesenta, en Sehdeh, en Irán, tres aldeas tomaban su agua de un mismo qanat: Dastgerd, Parvar y Karton.
+
+2
+00:00:11,639 --> 00:00:16,582
+Su agua llegaba a un estanque y salía por tres bocas, una para cada aldea.
+
+3
+00:00:18,282 --> 00:00:24,297
+Pero el caudal de un qanat sube y baja con el agua subterránea, y la sequía llegaba un año de cada cuatro, más o menos.
+
+4
+00:00:26,197 --> 00:00:31,107
+En un año seco, una aldea que tomara más de su parte dejaría secos los campos de las otras.
+
+5
+00:00:33,207 --> 00:00:38,967
+Y cada año el limo entraba al túnel: un qanat que nadie limpiara se taparía, y se secaría.
+
+6
+00:00:41,067 --> 00:00:46,574
+Cada aldea necesitaba su parte justa, en un año seco como en uno húmedo, y el túnel abierto.
+
+7
+00:00:48,474 --> 00:00:54,531
+En el siglo XVII, bajo el sah Abbás el Grande, un ingeniero fijó sus partes: ocho, ocho y nueve.
+
+8
+00:00:56,231 --> 00:01:00,735
+Y las partes se construyeron en las bocas: de ocho palmos de ancho, ocho, y nueve.
+
+9
+00:01:02,835 --> 00:01:08,240
+Así, lo que entrara al estanque, en un año húmedo o en uno seco, salía en las mismas partes.
+
+10
+00:01:10,540 --> 00:01:14,509
+Cada año, los excavadores, los muqannis, sacaban el limo del túnel.
+
+11
+00:01:16,409 --> 00:01:22,793
+Y el mirab, el maestro del agua, pagado con una parte libre, cuidaba que cada agricultor recibiera su agua a su hora.
+
+12
+00:01:24,693 --> 00:01:29,104
+Más de trescientos años después, las tres aldeas aún tomaban las partes fijadas para ellas.
+
+13
+00:01:30,804 --> 00:01:34,186
+En un año seco, cada una recibía menos, pero cada una recibía su parte.
+
+14
+00:01:36,286 --> 00:01:42,800
+En la empresa, los datos necesitan lo mismo: lo que cada paso espera de ellos, escrito por sus dueños, y revisado.
+
+15
+00:01:51,900 --> 00:01:58,699
+La siguiente nota de Tomás pregunta qué espera el negocio de cada concepto: sus reglas, y qué tan bueno debe ser.
+
+16
+00:02:00,799 --> 00:02:04,651
+Reglas con un hogar dio a cada regla un hogar, un dueño y una razón.
+
+17
+00:02:06,951 --> 00:02:10,932
+Ahora pregunta de dónde vienen las reglas, y quién dice qué tan bueno es suficiente.
+
+18
+00:02:13,432 --> 00:02:17,359
+Una regla suele empezar en una política: lo que el negocio se propone hacer.
+
+19
+00:02:18,659 --> 00:02:23,117
+La política de quien dirige comercialización: las facturas usan lecturas reales siempre que se pueda.
+
+20
+00:02:24,617 --> 00:02:30,215
+Las reglas la hacen verificable. Una regla de datos: toda lectura se marca como real o estimada.
+
+21
+00:02:31,515 --> 00:02:35,818
+Una regla de negocio: una estimación se reemplaza cuando llega la lectura real.
+
+22
+00:02:37,318 --> 00:02:41,177
+Los procesos llevan a cabo la política: revisar lecturas, y hacer facturas.
+
+23
+00:02:42,477 --> 00:02:46,372
+Un procedimiento dice cómo se hace un paso, como la forma de hacer una estimación.
+
+24
+00:02:47,672 --> 00:02:52,703
+Y los registros muestran que se hizo: la marca de cada lectura, y la nota de estimación de cada factura.
+
+25
+00:02:54,203 --> 00:03:00,282
+Política, proceso, procedimiento, registro: es la cadena que trazan las normas ISO 9000.
+
+26
+00:03:02,582 --> 00:03:07,242
+Algunos pasos deciden. Revisar lecturas decide si facturación puede usar cada lectura.
+
+27
+00:03:08,542 --> 00:03:11,597
+BPMN lo dibuja como un paso y su elección.
+
+28
+00:03:13,097 --> 00:03:19,691
+Las reglas que aplica van a su lado, en una tabla de decisión: DMN, una notación hecha para decisiones.
+
+29
+00:03:21,391 --> 00:03:28,128
+Cada fila es una regla: en rango y no menor que la anterior, se usa; fallida o faltante, se estima.
+
+30
+00:03:30,028 --> 00:03:35,803
+El equipo de Grace es dueño de la tabla, así que una regla cambia en la tabla, y el flujo queda igual.
+
+31
+00:03:38,103 --> 00:03:43,300
+En enero, una falla retuvo las lecturas de la noche de dos mil seiscientos medidores.
+
+32
+00:03:44,800 --> 00:03:50,498
+Llegaron para las nueve. Facturación había corrido a las seis: esos hogares recibieron facturas estimadas.
+
+33
+00:03:52,398 --> 00:03:57,706
+La revisión del equipo de datos dijo que todo estaba bien: solo pedía que cada lectura llegara en un día.
+
+34
+00:03:59,406 --> 00:04:03,639
+Planificación de la red, que lee las lecturas una semana después, tampoco vio nada mal.
+
+35
+00:04:05,139 --> 00:04:09,592
+¿Llegó tarde la lectura, entonces? Para facturación, tres horas. Para planificación, para nada.
+
+36
+00:04:11,492 --> 00:04:16,134
+Una lectura llega tarde solo frente al paso que la necesita, y al nivel de servicio de ese paso.
+
+37
+00:04:18,234 --> 00:04:22,326
+El de facturación nunca se había escrito, así que el equipo de datos había adivinado el suyo.
+
+38
+00:04:27,026 --> 00:04:32,382
+Qué tan bueno es suficiente lo dice el negocio: el dueño del paso que usa los datos.
+
+39
+00:04:33,882 --> 00:04:38,193
+Quien dirige comercialización pasa facturación a las diez, y escribe lo que facturación necesita.
+
+40
+00:04:40,093 --> 00:04:47,445
+A las diez del día de facturación, una lectura o una estimación para cada medidor activo, y no más de una de cada cien estimadas.
+
+41
+00:04:49,745 --> 00:04:52,226
+Grace, dueña de las lecturas, acepta cumplirlo.
+
+42
+00:04:53,926 --> 00:04:59,334
+Va al mapa junto a revisar lecturas, con su dueño y su razón: el nivel de servicio de facturación.
+
+43
+00:05:01,434 --> 00:05:05,181
+En Sehdeh, primero se fijaron las partes, y las bocas se construyeron según ellas.
+
+44
+00:05:06,881 --> 00:05:10,597
+Aquí también, primero va la expectativa, y la revisión se construye a partir de ella.
+
+45
+00:05:13,497 --> 00:05:18,511
+La primera revisión es de la propia fuente: el sistema de medidores rinde cuentas de sus lecturas.
+
+46
+00:05:20,211 --> 00:05:25,197
+Revisa cada una al llegar, hace las estimaciones, e informa lo que falta para las diez.
+
+47
+00:05:27,097 --> 00:05:33,574
+La plataforma de datos solo lo lee y nunca escribe de vuelta: los problemas se corrigen en la fuente, por su propio equipo.
+
+48
+00:05:35,274 --> 00:05:38,285
+El equipo de datos construye una revisión solo donde la fuente no puede.
+
+49
+00:05:39,985 --> 00:05:47,089
+Una lectura por cada cuenta activa necesita también las cuentas de facturación: esa revisión corre en la plataforma, que lee las dos.
+
+50
+00:05:49,189 --> 00:05:52,537
+Cada mañana de facturación, su resultado va a quien lidera la medición.
+
+51
+00:05:54,837 --> 00:06:01,383
+En el mapa de la práctica de datos, las lecturas que publica el equipo de datos se vuelven un producto de datos: Meter readings.
+
+52
+00:06:03,083 --> 00:06:08,543
+Dibujado como un producto de ArchiMate, agrupa el servicio que lo provee y su contrato.
+
+53
+00:06:10,043 --> 00:06:16,590
+Su contrato guarda lo que espera cada lector, fijado por el dueño de ese lector, y de él se construyen sus revisiones.
+
+54
+00:06:18,890 --> 00:06:24,889
+En Sehdeh, las partes duraron más de trescientos años, mientras se cuidaron las bocas y se limpió el túnel.
+
+55
+00:06:26,589 --> 00:06:32,847
+Pero tras la Segunda Guerra Mundial llegaron pozos hondos con motobombas, que sacaban agua más rápido de lo que la lluvia la reponía.
+
+56
+00:06:34,547 --> 00:06:42,637
+En cincuenta años, cerca de la mitad de los qanats de Irán se han secado, por falta de cuidado o porque los pozos bajaron el agua.
+
+57
+00:06:44,737 --> 00:06:49,289
+Las reglas duran solo mientras la gente las cuida, y las cambia cuando el mundo cambia.
+
+58
+00:06:51,189 --> 00:06:56,231
+En la empresa, cada expectativa tiene un dueño, que la cambia cuando cambia el negocio.
+
+59
+00:06:57,731 --> 00:07:03,420
+Cuando los precios cambien por hora, facturación necesitará una lectura por cada hora, y su revisión la seguirá.
+
+60
+00:07:05,120 --> 00:07:08,773
+Por eso la práctica nunca se construye una sola vez: sigue madurando.
+
+61
+00:07:10,273 --> 00:07:16,108
+Ya está dibujado de qué es dueño el negocio en sus datos. Arquitectura de datos, la siguiente serie, parte de ahí.

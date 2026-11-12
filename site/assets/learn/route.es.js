@@ -117,14 +117,15 @@ window.LD_ROUTE = {
      "title": "Arquitectura de negocio para datos",
      "href": "business-architecture-for-data/",
      "poster": "what-the-business-owns-poster.jpg",
-     "kicker": "Serie · 4 de 5 películas",
-     "len": "28 min",
-     "min": 28.0,
+     "kicker": "Serie · 5 películas",
+     "len": "35 min",
+     "min": 35.0,
      "films": [
       "ld-what-the-business-owns",
       "ld-what-the-business-needs-to-know",
       "ld-who-creates-it-who-owns-it",
-      "ld-processes-as-deep-as-data-needs"
+      "ld-processes-as-deep-as-data-needs",
+      "ld-rules-and-expectations-the-business-owns"
      ]
     },
     {

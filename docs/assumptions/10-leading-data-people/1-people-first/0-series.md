@@ -1,6 +1,6 @@
 # People first: the series' own questions and assumptions
 
-> Written on 12 November 2026, when the series was registered on the site from its proposal (pull request [#381](https://github.com/roanboc/learning-data/pull/381)). Each film's own questions and assumptions are in its own file beside this one, named as its film folder is, written in the film's own pull request.
+> Written on 12 November 2026, when the series was registered on the site from the proposal the author confirmed that day (pull request [#381](https://github.com/roanboc/learning-data/pull/381)). Each film's own questions and assumptions are in its own file beside this one, named as its film folder is, written in the film's own pull request.
 
 *People first* opens the module *Leading data people*, before *The new skills*. Its plan is in [`films/people-first/proposal.md`](../../../../films/people-first/proposal.md), with its *Decided* table; what the author decided there (the five broad traits as the reference, and never for assessment) isn't repeated here. Below is what the series takes as an assumption, for the author to confirm or correct.
 

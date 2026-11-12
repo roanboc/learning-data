@@ -4,7 +4,7 @@
 
 Before the hats and the skills, the people. In February 2027, Helena Novak takes over the university's data team: seven people, a chart of seven boxes and a list of 46 open requests. Four films: *People before roles* (know the people before you plan the work); *Wellbeing is in the work* (fix the work before you ask people to cope); *No two alike* (ask each person how they work, and never sort them); and *How, more than who* (agree how you work together, and keep to it). *The new skills* follows. The series' plan is in its [proposal](proposal.md); the plan for the module is in [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md).
 
-**Status:** set up on 12 November 2026 from the proposal, which the author asked for in his review of the module that day; the films are being made, each marked draft on the site, and appear in the table below as each one is out. On the site, the series opens the topic *Leading data people*, at `people-first/`, once its opening film is out; until then the topic names it as coming soon.
+**Status:** set up on 12 November 2026 from the proposal the author confirmed that day, after asking for the series in his review of the module; the films are being made, each marked draft on the site, and appear in the table below as each one is out. On the site, the series opens the topic *Leading data people*, at `people-first/`, once its opening film is out; until then the topic names it as coming soon.
 
 ## The films
 

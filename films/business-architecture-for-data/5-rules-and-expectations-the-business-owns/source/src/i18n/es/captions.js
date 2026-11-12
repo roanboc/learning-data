@@ -1,0 +1,75 @@
+/* Rules and expectations the business owns: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in
+   src/narration.js) maps to its caption. Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and
+   the video, which has no captions on its picture, takes es.srt. The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes
+   captions/es.srt and es.vtt from it, and fails if a line has no caption.
+   The words follow the films before it: la empresa (the utility), comercialización and quien dirige comercialización (retail and its head, never drawn, so
+   never given a gender), equipo de datos, dueño (owner), revisar lecturas and hacer facturas, día de facturación, la práctica de datos and producto de datos;
+   a qanat's share is una parte, its water master el mirab, el maestro del agua, as in What the business owns; its basin is un estanque and its outlets bocas,
+   their spans palmos; Rules with a home keeps its Spanish title, Reglas con un hogar, and its rules their words (toda lectura se marca como real o estimada).
+   A data rule and a business rule are una regla de datos and una regla de negocio; a policy, a process, a procedure and a record are una política, un
+   proceso, un procedimiento and un registro; a decision table is una tabla de decisión; a service level, un nivel de servicio; an expectation, una
+   expectativa; and a check, una revisión, as check readings is revisar lecturas. The metering lead, never drawn, is quien lidera la medición, never
+   responsable, which is the steward's word in Who creates it, who owns it. The data product keeps its name, Meter readings, as the picture shows it. */
+window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
+"In the 1960s, at Sehdeh, in Iran, three hamlets took their water from one qanat: Dastgerd, Parvar and Karton.":"En los años sesenta, en Sehdeh, en Irán, tres aldeas tomaban su agua de un mismo qanat: Dastgerd, Parvar y Karton.",
+"Its water ran into a basin, and out through three outlets, one to each hamlet.":"Su agua llegaba a un estanque y salía por tres bocas, una para cada aldea.",
+"But a qanat's flow rises and falls with the water underground, and drought came about one year in four.":"Pero el caudal de un qanat sube y baja con el agua subterránea, y la sequía llegaba un año de cada cuatro, más o menos.",
+"In a dry year, a hamlet that took more than its share would leave the others' fields dry.":"En un año seco, una aldea que tomara más de su parte dejaría secos los campos de las otras.",
+"And every year, silt washed into the tunnel: a qanat nobody cleaned would choke, and dry up.":"Y cada año el limo entraba al túnel: un qanat que nadie limpiara se taparía, y se secaría.",
+"Each hamlet needed its fair share, in a dry year as in a wet one, and the tunnel kept open.":"Cada aldea necesitaba su parte justa, en un año seco como en uno húmedo, y el túnel abierto.",
+"In the 1600s, under Shah Abbas the Great, an engineer set their shares: eight, eight and nine.":"En el siglo XVII, bajo el sah Abbás el Grande, un ingeniero fijó sus partes: ocho, ocho y nueve.",
+"And the shares were built into the outlets: eight spans wide, eight, and nine.":"Y las partes se construyeron en las bocas: de ocho palmos de ancho, ocho, y nueve.",
+"So whatever came into the basin, in a wet year or a dry one, left it in the same shares.":"Así, lo que entrara al estanque, en un año húmedo o en uno seco, salía en las mismas partes.",
+"Every year, the diggers, the muqannis, cleared the silt from the tunnel.":"Cada año, los excavadores, los muqannis, sacaban el limo del túnel.",
+"And the mirab, the water master, paid with a free share, saw that each farmer got their water at the proper time.":"Y el mirab, el maestro del agua, pagado con una parte libre, cuidaba que cada agricultor recibiera su agua a su hora.",
+"More than three hundred years on, the three hamlets still took the shares set for them.":"Más de trescientos años después, las tres aldeas aún tomaban las partes fijadas para ellas.",
+"In a dry year, each got less, but each still got its share.":"En un año seco, cada una recibía menos, pero cada una recibía su parte.",
+"At the utility, the data needs the same: what each step expects of it, written down by its owners, and checked.":"En la empresa, los datos necesitan lo mismo: lo que cada paso espera de ellos, escrito por sus dueños, y revisado.",
+"Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be.":"La siguiente nota de Tomás pregunta qué espera el negocio de cada concepto: sus reglas, y qué tan bueno debe ser.",
+"Rules with a home gave every rule a home, an owner and a reason.":"Reglas con un hogar dio a cada regla un hogar, un dueño y una razón.",
+"Now he asks where rules come from, and who says how good is good enough.":"Ahora pregunta de dónde vienen las reglas, y quién dice qué tan bueno es suficiente.",
+"A rule usually starts in a policy: what the business means to do.":"Una regla suele empezar en una política: lo que el negocio se propone hacer.",
+"The head of retail's policy: bills use actual readings wherever they can.":"La política de quien dirige comercialización: las facturas usan lecturas reales siempre que se pueda.",
+"Rules make it checkable. A data rule: every reading is marked actual or estimated.":"Las reglas la hacen verificable. Una regla de datos: toda lectura se marca como real o estimada.",
+"A business rule: an estimate is replaced when the actual reading arrives.":"Una regla de negocio: una estimación se reemplaza cuando llega la lectura real.",
+"Processes carry the policy out: check readings, and make bills.":"Los procesos llevan a cabo la política: revisar lecturas, y hacer facturas.",
+"A procedure says how a step is done, such as how to make an estimate.":"Un procedimiento dice cómo se hace un paso, como la forma de hacer una estimación.",
+"And records show it was done: each reading's mark, and each bill's note of an estimate.":"Y los registros muestran que se hizo: la marca de cada lectura, y la nota de estimación de cada factura.",
+"Policy, process, procedure, record: it's the chain the ISO 9000 standards draw.":"Política, proceso, procedimiento, registro: es la cadena que trazan las normas ISO 9000.",
+"Some steps decide. Check readings decides whether billing can use each reading.":"Algunos pasos deciden. Revisar lecturas decide si facturación puede usar cada lectura.",
+"BPMN draws that as a step and its choice.":"BPMN lo dibuja como un paso y su elección.",
+"The rules it applies go beside it, in a decision table: DMN, a notation made for decisions.":"Las reglas que aplica van a su lado, en una tabla de decisión: DMN, una notación hecha para decisiones.",
+"Each row is one rule: in range and no lower than the last, it's used; failed or missing, it's estimated.":"Cada fila es una regla: en rango y no menor que la anterior, se usa; fallida o faltante, se estima.",
+"Grace's team owns the table, so a rule changes in the table, and the flow stays as it is.":"El equipo de Grace es dueño de la tabla, así que una regla cambia en la tabla, y el flujo queda igual.",
+"In January, a fault held back the night's readings from two thousand six hundred meters.":"En enero, una falla retuvo las lecturas de la noche de dos mil seiscientos medidores.",
+"They arrived by nine. Billing had run at six, so those households got estimated bills.":"Llegaron para las nueve. Facturación había corrido a las seis: esos hogares recibieron facturas estimadas.",
+"The data team's check said all was well: it asked only that each reading arrive within a day.":"La revisión del equipo de datos dijo que todo estaba bien: solo pedía que cada lectura llegara en un día.",
+"Network planning, which reads readings a week later, saw nothing wrong either.":"Planificación de la red, que lee las lecturas una semana después, tampoco vio nada mal.",
+"So was the reading late? For billing, by three hours. For planning, not at all.":"¿Llegó tarde la lectura, entonces? Para facturación, tres horas. Para planificación, para nada.",
+"A reading is late only against the step that needs it, and that step's service level.":"Una lectura llega tarde solo frente al paso que la necesita, y al nivel de servicio de ese paso.",
+"Billing's had never been written down, so the data team had guessed its own.":"El de facturación nunca se había escrito, así que el equipo de datos había adivinado el suyo.",
+"How good is good enough is the business's to say: the owner of the step that uses the data.":"Qué tan bueno es suficiente lo dice el negocio: el dueño del paso que usa los datos.",
+"The head of retail moves billing to ten, and writes down what billing needs.":"Quien dirige comercialización pasa facturación a las diez, y escribe lo que facturación necesita.",
+"By ten on billing day, a reading or an estimate for every active meter, and no more than one in a hundred estimated.":"A las diez del día de facturación, una lectura o una estimación para cada medidor activo, y no más de una de cada cien estimadas.",
+"Grace, who owns readings, agrees to meet it.":"Grace, dueña de las lecturas, acepta cumplirlo.",
+"It goes on the map beside check readings, with its owner and reason: billing's service level.":"Va al mapa junto a revisar lecturas, con su dueño y su razón: el nivel de servicio de facturación.",
+"At Sehdeh, the shares were set first, and the outlets built to them.":"En Sehdeh, primero se fijaron las partes, y las bocas se construyeron según ellas.",
+"Here too, the expectation comes first, and the check is built from it.":"Aquí también, primero va la expectativa, y la revisión se construye a partir de ella.",
+"The first check is the source's own: the meter system is accountable for its readings.":"La primera revisión es de la propia fuente: el sistema de medidores rinde cuentas de sus lecturas.",
+"It checks each one as it comes, makes the estimates, and reports what's missing by ten.":"Revisa cada una al llegar, hace las estimaciones, e informa lo que falta para las diez.",
+"The data platform only reads it and never writes back, so problems are fixed at the source, by its own team.":"La plataforma de datos solo lo lee y nunca escribe de vuelta: los problemas se corrigen en la fuente, por su propio equipo.",
+"The data team builds a check only where the source can't.":"El equipo de datos construye una revisión solo donde la fuente no puede.",
+"A reading for every active account needs billing's accounts too, so that check runs on the platform, which reads both.":"Una lectura por cada cuenta activa necesita también las cuentas de facturación: esa revisión corre en la plataforma, que lee las dos.",
+"Each billing morning, its result goes to the metering lead.":"Cada mañana de facturación, su resultado va a quien lidera la medición.",
+"On the data practice's map, the readings the data team publishes become a data product: Meter readings.":"En el mapa de la práctica de datos, las lecturas que publica el equipo de datos se vuelven un producto de datos: Meter readings.",
+"Drawn as an ArchiMate product, it bundles the service that provides it and its contract.":"Dibujado como un producto de ArchiMate, agrupa el servicio que lo provee y su contrato.",
+"Its contract holds what each of its readers expects, set by that reader's owner, and its checks are built from it.":"Su contrato guarda lo que espera cada lector, fijado por el dueño de ese lector, y de él se construyen sus revisiones.",
+"At Sehdeh, the shares held for more than three hundred years, while the outlets were kept and the tunnel cleaned.":"En Sehdeh, las partes duraron más de trescientos años, mientras se cuidaron las bocas y se limpió el túnel.",
+"But after the Second World War came deep wells with motor pumps, drawing water faster than rain put it back.":"Pero tras la Segunda Guerra Mundial llegaron pozos hondos con motobombas, que sacaban agua más rápido de lo que la lluvia la reponía.",
+"In the last fifty years, about half of Iran's qanats have run dry, from poor upkeep, or as wells lowered the water underground.":"En cincuenta años, cerca de la mitad de los qanats de Irán se han secado, por falta de cuidado o porque los pozos bajaron el agua.",
+"Rules last only while people keep them, and change them when the world changes.":"Las reglas duran solo mientras la gente las cuida, y las cambia cuando el mundo cambia.",
+"At the utility, each expectation has an owner, who changes it when the business does.":"En la empresa, cada expectativa tiene un dueño, que la cambia cuando cambia el negocio.",
+"When prices change by the hour, billing will need a reading for every hour, and its check will follow.":"Cuando los precios cambien por hora, facturación necesitará una lectura por cada hora, y su revisión la seguirá.",
+"That's why the practice is never built once: it keeps maturing.":"Por eso la práctica nunca se construye una sola vez: sigue madurando.",
+"What the business owns about its data is drawn. Data architecture, the next series, starts from it.":"Ya está dibujado de qué es dueño el negocio en sus datos. Arquitectura de datos, la siguiente serie, parte de ahí."
+});

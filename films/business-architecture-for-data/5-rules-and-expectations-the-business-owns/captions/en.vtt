@@ -1,0 +1,184 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:09.539
+In the 1960s, at Sehdeh, in Iran, three hamlets took their water from one qanat: Dastgerd, Parvar and Karton.
+
+00:00:11.639 --> 00:00:16.582
+Its water ran into a basin, and out through three outlets, one to each hamlet.
+
+00:00:18.282 --> 00:00:24.297
+But a qanat's flow rises and falls with the water underground, and drought came about one year in four.
+
+00:00:26.197 --> 00:00:31.107
+In a dry year, a hamlet that took more than its share would leave the others' fields dry.
+
+00:00:33.207 --> 00:00:38.967
+And every year, silt washed into the tunnel: a qanat nobody cleaned would choke, and dry up.
+
+00:00:41.067 --> 00:00:46.574
+Each hamlet needed its fair share, in a dry year as in a wet one, and the tunnel kept open.
+
+00:00:48.474 --> 00:00:54.531
+In the 1600s, under Shah Abbas the Great, an engineer set their shares: eight, eight and nine.
+
+00:00:56.231 --> 00:01:00.735
+And the shares were built into the outlets: eight spans wide, eight, and nine.
+
+00:01:02.835 --> 00:01:08.240
+So whatever came into the basin, in a wet year or a dry one, left it in the same shares.
+
+00:01:10.540 --> 00:01:14.509
+Every year, the diggers, the muqannis, cleared the silt from the tunnel.
+
+00:01:16.409 --> 00:01:22.793
+And the mirab, the water master, paid with a free share, saw that each farmer got their water at the proper time.
+
+00:01:24.693 --> 00:01:29.104
+More than three hundred years on, the three hamlets still took the shares set for them.
+
+00:01:30.804 --> 00:01:34.186
+In a dry year, each got less, but each still got its share.
+
+00:01:36.286 --> 00:01:42.800
+At the utility, the data needs the same: what each step expects of it, written down by its owners, and checked.
+
+00:01:51.900 --> 00:01:58.699
+Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be.
+
+00:02:00.799 --> 00:02:04.651
+Rules with a home gave every rule a home, an owner and a reason.
+
+00:02:06.951 --> 00:02:10.932
+Now he asks where rules come from, and who says how good is good enough.
+
+00:02:13.432 --> 00:02:17.359
+A rule usually starts in a policy: what the business means to do.
+
+00:02:18.659 --> 00:02:23.117
+The head of retail's policy: bills use actual readings wherever they can.
+
+00:02:24.617 --> 00:02:30.215
+Rules make it checkable. A data rule: every reading is marked actual or estimated.
+
+00:02:31.515 --> 00:02:35.818
+A business rule: an estimate is replaced when the actual reading arrives.
+
+00:02:37.318 --> 00:02:41.177
+Processes carry the policy out: check readings, and make bills.
+
+00:02:42.477 --> 00:02:46.372
+A procedure says how a step is done, such as how to make an estimate.
+
+00:02:47.672 --> 00:02:52.703
+And records show it was done: each reading's mark, and each bill's note of an estimate.
+
+00:02:54.203 --> 00:03:00.282
+Policy, process, procedure, record: it's the chain the ISO 9000 standards draw.
+
+00:03:02.582 --> 00:03:07.242
+Some steps decide. Check readings decides whether billing can use each reading.
+
+00:03:08.542 --> 00:03:11.597
+BPMN draws that as a step and its choice.
+
+00:03:13.097 --> 00:03:19.691
+The rules it applies go beside it, in a decision table: DMN, a notation made for decisions.
+
+00:03:21.391 --> 00:03:28.128
+Each row is one rule: in range and no lower than the last, it's used; failed or missing, it's estimated.
+
+00:03:30.028 --> 00:03:35.803
+Grace's team owns the table, so a rule changes in the table, and the flow stays as it is.
+
+00:03:38.103 --> 00:03:43.300
+In January, a fault held back the night's readings from two thousand six hundred meters.
+
+00:03:44.800 --> 00:03:50.498
+They arrived by nine. Billing had run at six, so those households got estimated bills.
+
+00:03:52.398 --> 00:03:57.706
+The data team's check said all was well: it asked only that each reading arrive within a day.
+
+00:03:59.406 --> 00:04:03.639
+Network planning, which reads readings a week later, saw nothing wrong either.
+
+00:04:05.139 --> 00:04:09.592
+So was the reading late? For billing, by three hours. For planning, not at all.
+
+00:04:11.492 --> 00:04:16.134
+A reading is late only against the step that needs it, and that step's service level.
+
+00:04:18.234 --> 00:04:22.326
+Billing's had never been written down, so the data team had guessed its own.
+
+00:04:27.026 --> 00:04:32.382
+How good is good enough is the business's to say: the owner of the step that uses the data.
+
+00:04:33.882 --> 00:04:38.193
+The head of retail moves billing to ten, and writes down what billing needs.
+
+00:04:40.093 --> 00:04:47.445
+By ten on billing day, a reading or an estimate for every active meter, and no more than one in a hundred estimated.
+
+00:04:49.745 --> 00:04:52.226
+Grace, who owns readings, agrees to meet it.
+
+00:04:53.926 --> 00:04:59.334
+It goes on the map beside check readings, with its owner and reason: billing's service level.
+
+00:05:01.434 --> 00:05:05.181
+At Sehdeh, the shares were set first, and the outlets built to them.
+
+00:05:06.881 --> 00:05:10.597
+Here too, the expectation comes first, and the check is built from it.
+
+00:05:13.497 --> 00:05:18.511
+The first check is the source's own: the meter system is accountable for its readings.
+
+00:05:20.211 --> 00:05:25.197
+It checks each one as it comes, makes the estimates, and reports what's missing by ten.
+
+00:05:27.097 --> 00:05:33.574
+The data platform only reads it and never writes back, so problems are fixed at the source, by its own team.
+
+00:05:35.274 --> 00:05:38.285
+The data team builds a check only where the source can't.
+
+00:05:39.985 --> 00:05:47.089
+A reading for every active account needs billing's accounts too, so that check runs on the platform, which reads both.
+
+00:05:49.189 --> 00:05:52.537
+Each billing morning, its result goes to the metering lead.
+
+00:05:54.837 --> 00:06:01.383
+On the data practice's map, the readings the data team publishes become a data product: Meter readings.
+
+00:06:03.083 --> 00:06:08.543
+Drawn as an ArchiMate product, it bundles the service that provides it and its contract.
+
+00:06:10.043 --> 00:06:16.590
+Its contract holds what each of its readers expects, set by that reader's owner, and its checks are built from it.
+
+00:06:18.890 --> 00:06:24.889
+At Sehdeh, the shares held for more than three hundred years, while the outlets were kept and the tunnel cleaned.
+
+00:06:26.589 --> 00:06:32.847
+But after the Second World War came deep wells with motor pumps, drawing water faster than rain put it back.
+
+00:06:34.547 --> 00:06:42.637
+In the last fifty years, about half of Iran's qanats have run dry, from poor upkeep, or as wells lowered the water underground.
+
+00:06:44.737 --> 00:06:49.289
+Rules last only while people keep them, and change them when the world changes.
+
+00:06:51.189 --> 00:06:56.231
+At the utility, each expectation has an owner, who changes it when the business does.
+
+00:06:57.731 --> 00:07:03.420
+When prices change by the hour, billing will need a reading for every hour, and its check will follow.
+
+00:07:05.120 --> 00:07:08.773
+That's why the practice is never built once: it keeps maturing.
+
+00:07:10.273 --> 00:07:16.108
+What the business owns about its data is drawn. Data architecture, the next series, starts from it.

@@ -229,9 +229,9 @@ const BW_DIMS={learner:["Learner","name · faculty · dates"],kind:["Credential 
 function bw_dimWord(ctx,x,y,s,k,word,col,a){if(a<=0.01)return;const sub=BW_DIMS[k][1],i=sub.indexOf(word);if(i<0)return;const b=entBox(ctx,{x,y,name:BW_DIMS[k][0],sub,s}),m=phMin(ctx),sz=Math.max(16*s,m);
   const x0=b.x-tw(ctx,sub,sz,600)/2+tw(ctx,sub.slice(0,i),sz,600),ww=tw(ctx,word,sz,600),by=m?b.y-b.h/2+34*s*Math.max(24*s,m)/(24*s)+sz*1.15:b.y-b.h/2+62*s;
   withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.22);rr(ctx,x0-6,by-sz*0.95,ww+12,sz*1.3,6);ctx.fill();T(ctx,word,x0,by,{w:600,size:sz,color:rgba(col,1)});});}
-// a whole star, at (cx,cy): P maps each dimension to its place; o.dimA, o.join (0..1 per dimension: a join lit), o.hi
+// a whole star, at (cx,cy): P maps each dimension to its place; o.dimA, o.join (0..1 per dimension: a join lit), o.hi. In the film, the small fact is at least as wide as its second line at the size it's drawn
 function bw_star(ctx,cx,cy,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P=o.P||{course:[-340,-230],kind:[340,-230],learner:[-340,240],date:[340,240]},da=o.dimA||{},jn=o.join||{},ds=o.ds||s;
-  withA(ctx,a,()=>{const F={x:cx,y:cy,w:(o.fw||440)*s,h:(o.fh||280)*s};
+  withA(ctx,a,()=>{const F={x:cx,y:cy,w:(o.fw||440)*s,h:(o.fh||280)*s};if(o.small&&phMin(ctx))F.w=Math.max(F.w,Math.ceil(tw(ctx,o.factSub||"Σ count · credit points",phSz(ctx,24*s),500,"mono"))+40);
     Object.keys(P).forEach(k=>{const q=da[k]==null?1:da[k];if(q<=0.01)return;const D=entBox(ctx,{x:cx+P[k][0]*s,y:cy+P[k][1]*s,name:(o.names||{})[k]||BW_DIMS[k][0],sub:o.nosub?null:BW_DIMS[k][1],s:ds});
       relLine(ctx,F,D,"*","1",{col:jn[k]>0.01?mix(BW_R,[255,255,255],0.4*jn[k]):BW_R,a:q*(o.relA==null?1:o.relA),s:ds,lw:2.2+2.4*(jn[k]||0)});
       if(jn[k]>0.01)glow(ctx,(F.x+D.x)/2,(F.y+D.y)/2,90*s,BW_R,0.35*jn[k]);});

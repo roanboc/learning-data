@@ -4,7 +4,7 @@ Films made while the author was away were built on stated assumptions instead of
 
 ## How it is laid out
 
-One file per film, in the films' natural order: a folder per module (numbered in the site's order), a folder per series (numbered in the module's order), and a file per film (numbered as its film folder is). A module's or series' own questions sit beside its films, in `0-module.md` or `0-series.md`. Each film's file starts with its pull request and a link to watch it on the site.
+One file per film, in the films' natural order: a folder per module (numbered in the site's order), a folder per series (numbered in the module's order), and a file per film (numbered as its film folder is). A module's or series' own questions sit beside its films, in `0-module.md` or `0-series.md`. A film that stands alone in its module, as *The Inner Life of Data* does, has its file in the module's folder, numbered in the module's order. Each film's file starts with its pull request and a link to watch it on the site.
 
 To read everything as one file:
 
@@ -14,10 +14,15 @@ python site-tools/assumptions.py --out all-assumptions.md
 
 ## Adding or changing a film's assumptions
 
-A film's thread writes its questions and assumptions to that film's own file, in the film's own pull request: `docs/assumptions/<NN-module>/<n-series>/<film folder>.md`, named exactly as the film folder is (for example `04-data-quality/2-fit-for-use/1-good-enough-for-what.md`). One file per film keeps parallel film pull requests from editing the same lines. Keep the first lines as the other files have them: the title, then the module, series, film number, pull request and site link. This index lists modules and series only, so a new film doesn't change it.
+A film's thread writes its questions and assumptions to that film's own file, in the film's own pull request: `docs/assumptions/<NN-module>/<n-series>/<film folder>.md`, named exactly as the film folder is (for example `04-data-quality/2-fit-for-use/1-good-enough-for-what.md`). One file per film keeps parallel film pull requests from editing the same lines. Keep the first lines as the other files have them: the title, then the module, series, film number, pull request and site link. This index lists modules, series and the films that stand alone, so a new film of a series doesn't change it.
 
 ## Modules and series
 
+- [Data platforms](00-data-platforms/)
+  - [The Inner Life of Data](00-data-platforms/1-inner-life-of-data.md)
+- [Data modelling](01-data-modelling/)
+  - [A Sharper Sketch](01-data-modelling/1-a-sharper-sketch.md)
+  - [From words to data](01-data-modelling/2-from-words-to-data/)
 - [Modern data basics](02-modern-data-basics/)
   - [Data that moves](02-modern-data-basics/1-data-that-moves/)
   - [Data as software](02-modern-data-basics/2-data-as-software/)
@@ -26,6 +31,7 @@ A film's thread writes its questions and assumptions to that film's own file, in
 - [Analytics engineering](03-analytics-engineering/)
   - [In the weeds of data crafting](03-analytics-engineering/1-analytics-engineering/)
 - [Data quality](04-data-quality/)
+  - [When things go wrong](04-data-quality/1-when-things-go-wrong/)
   - [Fit for use](04-data-quality/2-fit-for-use/)
   - [Quality as a habit](04-data-quality/3-quality-as-a-habit/)
 - [Enterprise architecture](05-enterprise-architecture/)

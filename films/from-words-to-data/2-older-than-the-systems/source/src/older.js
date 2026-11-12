@@ -242,7 +242,7 @@ const OT_CRED_ATTRS=[["credential id","id"],["issuer id",""],["learner id",""],[
 // the ruler: our logical model's parts, marked along a gold bar
 function ot_ruler(ctx,x0,x1,y,marks,a,p,sz){if(a<=0.01)return;withA(ctx,a,()=>{const w=x1-x0,q=p==null?1:p;ctx.save();ctx.shadowColor=rgba(OT_GOLD,0.8);ctx.shadowBlur=18;const g=ctx.createLinearGradient(0,y-30,0,y+30);g.addColorStop(0,"#f6d98a");g.addColorStop(1,"#b8862e");ctx.fillStyle=g;rr(ctx,x0,y-30,w*q,60,8);ctx.fill();ctx.restore();
   ctx.strokeStyle="rgba(60,40,10,0.8)";ctx.lineWidth=2;for(let i=0;i<=80;i++){const xx=x0+i*w/80;if(xx>x0+w*q)break;ctx.beginPath();ctx.moveTo(xx,y-30);ctx.lineTo(xx,y-30+(i%10===0?26:i%5===0?18:10));ctx.stroke();}
-  marks.forEach((m,i)=>{const xx=x0+(i+0.5)*w/marks.length;if(xx>x0+w*q)return;T(ctx,m,xx,y+(sz||19)*0.4+12,{w:800,size:sz||19,align:"center",color:"rgba(50,32,8,0.95)"});});});}
+  marks.forEach((m,i)=>{const xx=x0+(i+0.5)*w/marks.length,hw=tw(ctx,m,phSz(ctx,sz||19),800)/2+8;if(xx>x0+w*q)return;T(ctx,m,2*hw>w?xx:clamp(xx,x0+hw,x1-hw),y+(sz||19)*0.4+12,{w:800,size:sz||19,align:"center",color:"rgba(50,32,8,0.95)"});});});}   // a mark at an end stays on the ruler at the size it's drawn
 
 /* ---------- pictures for the labs and the scenarios (site/assets/older-than-the-systems/learn.*.js name them in "vis") ----------
    Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW); every word it draws comes from FW.vis. */

@@ -678,6 +678,11 @@ const nextCue=(sc,id)=>{const ks=sc.vo.map(v=>v.id),i=ks.indexOf(id);return i<ks
    after the camera's zoom. These place a card's lines by the size they're really drawn at (phSz), so the larger words don't run
    into each other; where the layer isn't loaded (a lab), they draw as the film always did. */
 const il_A_sz=(ctx,s)=>typeof phSz==="function"?phSz(ctx,s):s;
+// the phone as the student enrols: its body is phone3's (ui3.js); its screen is drawn here, as phone3 draws it, but with the unit's
+// name small enough to stay on the screen (at 12.5 it is wider than the screen, by two or three pixels in the frame on each side)
+function il_A_enrol(ctx,x,y,s,press){phone3(ctx,x,y,s,{screen:"none"});ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  T(ctx,"Data Science 101",0,-62,{w:800,size:11,align:"center"});T(ctx,"Tue 9:00 · B204",0,-44,{w:500,size:10.5,align:"center",color:rgba(SOFT,0.95)});ctx.fillStyle="rgba(160,190,240,0.22)";for(let i=0;i<3;i++){rr(ctx,-36,-24+i*14,72-i*14,6,3);ctx.fill();}
+  rr(ctx,-34,40,68,28,14);ctx.fillStyle=press?"rgba(140,210,255,1)":"rgba(77,163,255,0.92)";ctx.fill();T(ctx,"Enrol",0,59,{w:800,size:12.5,align:"center",color:"#fff"});ctx.restore();}
 // a source system's card (appCard in style2.js), its name and its line under it set apart by the size they're drawn at; the card
 // grows downwards to hold them, and returns its height
 function il_A_card(ctx,x,y,w,h,a,o){o=o||{};const c=APP[a].c,ts=il_A_sz(ctx,o.ts||24),ss=il_A_sz(ctx,17),tb=y+18+ts,sb=tb+9+ss,dy=Math.max(y+h-30,sb+22),ch=dy-y+30;
@@ -694,7 +699,7 @@ scene("tap",(ctx,S,t,sc)=>{
   const LX=1400,LY=595;
   clearTo(ctx,S);const bgA=sstep(3.0,3.9,t);
   if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);
-    phone3(ctx,640,560,2.1,{screen:"enrol",press:t>tapT&&t<tapT+0.3});
+    il_A_enrol(ctx,640,560,2.1,t>tapT&&t<tapT+0.3);
     const pre=fin(t,3.8)*(1-sstep(tapT-0.15,tapT,t));if(pre>0){const k=(Math.sin(t*4)+1)/2;ctx.strokeStyle="rgba(255,255,255,"+(0.45*pre*(1-k*0.5))+")";ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(640,560+54*2.1,84+k*14,40+k*8,0,0,TAU);ctx.stroke();}
     if(t>tapT&&t<tapT+0.8){const u=(t-tapT)/0.8;ctx.fillStyle="rgba(255,255,255,"+(0.5*(1-u))+")";ctx.beginPath();ctx.arc(640,560+54*2.1,20+u*130,0,TAU);ctx.fill();}
     withA(ctx,fin(t,cS-0.3),()=>{il_A_card(ctx,1080,470,540,190,"sis",{ts:32,n:10});tag(ctx,1350,712,"written first, in the system of record",APP.sis.c,{align:"center",size:18});});

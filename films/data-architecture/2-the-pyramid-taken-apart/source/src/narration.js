@@ -1,0 +1,72 @@
+// Data architecture · The pyramid, taken apart. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
+const NARR={
+"changed":{"name":"Only what changed","lead":1.4,"tail":1.0,"vo":[
+ {"id":"year","gap":0.8,"text":"In 1972, Chile's government was linking the factories it ran to Santiago, in a project called Cybersyn.","say":"In nineteen seventy-two, Chile's government was linking the factories it ran to Santiago, in a project called Cybersyn."},
+ {"id":"telex","gap":0.8,"text":"Every afternoon, their numbers came in by telex."},
+ {"id":"alone","gap":0.8,"text":"But a number alone didn't say whether anything was wrong."},
+ {"id":"cloth","gap":0.8,"text":"Was today's cloth a good day or a bad one? That depended on the factory."},
+ {"id":"lost","gap":0.8,"text":"And with every factory reporting every day, one in trouble would be lost among the ones that were fine."},
+ {"id":"needed","gap":0.8,"text":"The people in charge needed to see the factories that needed them, and only those."},
+ {"id":"normal","gap":0.8,"text":"So the project's software, Cyberstride, worked out from each factory's own history what was normal for it."},
+ {"id":"passed","gap":0.8,"text":"It compared each day's numbers with that, and passed on only what had changed."},
+ {"id":"first","gap":0.8,"text":"A warning was to go first to the factory's own manager, with time to put it right."},
+ {"id":"up","gap":0.8,"text":"Only if it stayed wrong would it go on to Santiago."},
+ {"id":"works","gap":0.8,"text":"On 21 March 1972, the software printed its first results.","say":"On the twenty-first of March, nineteen seventy-two, the software printed its first results."},
+ {"id":"beer","gap":0.8,"text":"Stafford Beer, who designed Cybersyn, telexed that it really worked."},
+ {"id":"handful","gap":0.8,"text":"Instead of a wall of figures, the people in charge would see a few warnings, each beside its factory's normal."},
+ {"id":"grace","gap":0.8,"text":"At the utility, Grace reads one measure every month: interruptions per customer, per year."},
+ {"id":"exists","gap":0.8,"text":"It looks like a number the systems produce. But it exists only because someone first decided what an interruption is."}]},
+"pyramid":{"name":"A famous pyramid","lead":1.0,"tail":1.0,"vo":[
+ {"id":"picture","gap":0.8,"text":"There's a famous picture of how records become decisions: a pyramid."},
+ {"id":"four","gap":0.8,"text":"Data at the bottom, then information, then knowledge, and wisdom at the top."},
+ {"id":"poet","gap":0.8,"text":"No one person invented it. In 1934, a poet asked where the knowledge we have lost in information had gone.","say":"No one person invented it. In nineteen thirty-four, a poet asked where the knowledge we have lost in information had gone."},
+ {"id":"ackoff","gap":0.8,"text":"Writers on management drew the levels in the 1980s, and a systems thinker, Russell Ackoff, made them famous in 1989.","say":"Writers on management drew the levels in the nineteen-eighties, and a systems thinker, Russell Ackoff, made them famous in nineteen eighty-nine."},
+ {"id":"read","gap":0.8,"text":"Read from the bottom up, data becomes information, information becomes knowledge, and knowledge becomes wisdom."},
+ {"id":"half","gap":0.8,"text":"Half of that is right."}]},
+"right":{"name":"What it gets right","lead":1.0,"tail":1.0,"vo":[
+ {"id":"context","gap":0.8,"text":"First, a number needs context."},
+ {"id":"forty","gap":0.8,"text":"Forty-one interruptions means nothing until you know: on which line, over what time, and among how many customers."},
+ {"id":"measure","gap":0.8,"text":"Line by line, over a year, per customer: now it says which lines fail most often."},
+ {"id":"people","gap":0.8,"text":"Second, people decide."},
+ {"id":"grace","gap":0.8,"text":"The measure doesn't renew a line. Grace decides which ones to renew first, and answers for it."},
+ {"id":"keeps","gap":0.8,"text":"Inés keeps both."}]},
+"first":{"name":"The question comes first","lead":1.0,"tail":1.0,"vo":[
+ {"id":"drawn","gap":0.8,"text":"What's wrong starts with how it's drawn."},
+ {"id":"factory","gap":0.8,"text":"It looks like a factory: data goes in at the bottom, and wisdom comes out at the top."},
+ {"id":"nothing","gap":0.8,"text":"But nothing is recorded until someone decides what to record."},
+ {"id":"before","gap":0.8,"text":"Before the outage system logged a single interruption, someone wrote down what one is."},
+ {"id":"five","gap":0.8,"text":"Power lost to a connection point for more than five minutes."},
+ {"id":"short","gap":0.8,"text":"A shorter cut counts as a momentary one, in a measure of its own."},
+ {"id":"records","gap":0.8,"text":"So the outage system records when each cut starts and ends, at every connection point."},
+ {"id":"came","gap":0.8,"text":"The question came first, and decided the data."},
+ {"id":"chile","gap":0.8,"text":"In Chile, too, the drawing came first, and chose the numbers."}]},
+"raw":{"name":"No raw data","lead":1.0,"tail":1.0,"vo":[
+ {"id":"either","gap":0.8,"text":"There's no such thing as raw data, either."},
+ {"id":"reading","gap":0.8,"text":"A meter reading looks raw: a number, every half hour."},
+ {"id":"chose","gap":0.8,"text":"But someone chose the half hour, chose kilowatt hours, and chose to keep one decimal place."},
+ {"id":"book","gap":0.8,"text":"A book of essays on data puts it in its title: raw data is an oxymoron."},
+ {"id":"every","gap":0.8,"text":"Every record was designed by someone, for some question."}]},
+"levels":{"name":"No separate levels, no clear top","lead":1.0,"tail":1.0,"vo":[
+ {"id":"apart","gap":0.8,"text":"The levels aren't separate things, either."},
+ {"id":"dama","gap":0.8,"text":"As DAMA says, data is a form of information, and information is a form of data."},
+ {"id":"same","gap":0.8,"text":"The same record of a cut is data to the outage system, and information to Grace."},
+ {"id":"top","gap":0.8,"text":"And the top is vague."},
+ {"id":"wisdom","gap":0.8,"text":"People who've studied the pyramid find little agreement on what wisdom is, or how a system could hold it."},
+ {"id":"person","gap":0.8,"text":"In practice, the top is a person, deciding."}]},
+"both":{"name":"Arrows both ways","lead":1.0,"tail":1.0,"vo":[
+ {"id":"redraw","gap":0.8,"text":"So Inés redraws it, with arrows both ways."},
+ {"id":"down","gap":0.8,"text":"Down: a decision asks a question, the question needs a measure, and the measure needs a definition."},
+ {"id":"decides","gap":0.8,"text":"The definition decides what's recorded."},
+ {"id":"up","gap":0.8,"text":"Up: the records answer the measure, the measure answers the question, and a person decides."},
+ {"id":"map","gap":0.8,"text":"On the data practice on the map, interruption becomes a business object, defined once and owned by Grace."},
+ {"id":"realise","gap":0.8,"text":"The outage system's record of each cut is a data object that realises it."},
+ {"id":"traces","gap":0.8,"text":"And the measure traces to both: what it counts, and where the counts come from."}]},
+"back":{"name":"Defined first","lead":1.0,"tail":1.2,"vo":[
+ {"id":"chile","gap":0.8,"text":"In Chile, the numbers never came raw from the factories."},
+ {"id":"drew","gap":0.8,"text":"Someone drew each factory, chose what mattered, and worked out what was normal for it."},
+ {"id":"person","gap":0.8,"text":"Then the software sent on only what changed, and a person decided."},
+ {"id":"grace","gap":0.8,"text":"Grace's measure works the same way: defined first, recorded to fit, and read by someone who acts."},
+ {"id":"year","gap":0.8,"text":"So it counts the same way every year, and the lines that fail most are renewed first."},
+ {"id":"next","gap":0.8,"text":"But each cut is recorded by more than one system. Which record is the fact? That depends on where it's born."}]}
+};

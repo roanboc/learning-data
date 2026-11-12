@@ -1,0 +1,181 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:09.060
+In 1972, Chile's government was linking the factories it ran to Santiago, in a project called Cybersyn.
+
+00:00:10.360 --> 00:00:13.284
+Every afternoon, their numbers came in by telex.
+
+00:00:14.784 --> 00:00:17.889
+But a number alone didn't say whether anything was wrong.
+
+00:00:18.989 --> 00:00:23.331
+Was today's cloth a good day or a bad one? That depended on the factory.
+
+00:00:24.631 --> 00:00:30.100
+And with every factory reporting every day, one in trouble would be lost among the ones that were fine.
+
+00:00:31.400 --> 00:00:36.114
+The people in charge needed to see the factories that needed them, and only those.
+
+00:00:37.614 --> 00:00:43.974
+So the project's software, Cyberstride, worked out from each factory's own history what was normal for it.
+
+00:00:45.274 --> 00:00:49.644
+It compared each day's numbers with that, and passed on only what had changed.
+
+00:00:50.944 --> 00:00:55.550
+A warning was to go first to the factory's own manager, with time to put it right.
+
+00:00:56.850 --> 00:00:59.774
+Only if it stayed wrong would it go on to Santiago.
+
+00:01:01.274 --> 00:01:06.696
+On 21 March 1972, the software printed its first results.
+
+00:01:07.796 --> 00:01:11.715
+Stafford Beer, who designed Cybersyn, telexed that it really worked.
+
+00:01:13.215 --> 00:01:19.810
+Instead of a wall of figures, the people in charge would see a few warnings, each beside its factory's normal.
+
+00:01:21.510 --> 00:01:26.969
+At the utility, Grace reads one measure every month: interruptions per customer, per year.
+
+00:01:28.269 --> 00:01:34.918
+It looks like a number the systems produce. But it exists only because someone first decided what an interruption is.
+
+00:01:42.618 --> 00:01:46.735
+There's a famous picture of how records become decisions: a pyramid.
+
+00:01:48.035 --> 00:01:52.534
+Data at the bottom, then information, then knowledge, and wisdom at the top.
+
+00:01:54.234 --> 00:02:01.615
+No one person invented it. In 1934, a poet asked where the knowledge we have lost in information had gone.
+
+00:02:03.115 --> 00:02:11.623
+Writers on management drew the levels in the 1980s, and a systems thinker, Russell Ackoff, made them famous in 1989.
+
+00:02:12.923 --> 00:02:19.882
+Read from the bottom up, data becomes information, information becomes knowledge, and knowledge becomes wisdom.
+
+00:02:21.582 --> 00:02:22.865
+Half of that is right.
+
+00:02:25.565 --> 00:02:27.571
+First, a number needs context.
+
+00:02:28.671 --> 00:02:35.633
+Forty-one interruptions means nothing until you know: on which line, over what time, and among how many customers.
+
+00:02:37.333 --> 00:02:42.391
+Line by line, over a year, per customer: now it says which lines fail most often.
+
+00:02:44.091 --> 00:02:45.650
+Second, people decide.
+
+00:02:46.750 --> 00:02:52.356
+The measure doesn't renew a line. Grace decides which ones to renew first, and answers for it.
+
+00:02:54.056 --> 00:02:55.247
+Inés keeps both.
+
+00:02:57.947 --> 00:02:59.906
+What's wrong starts with how it's drawn.
+
+00:03:00.606 --> 00:03:05.373
+It looks like a factory: data goes in at the bottom, and wisdom comes out at the top.
+
+00:03:07.073 --> 00:03:10.954
+But nothing is recorded until someone decides what to record.
+
+00:03:12.254 --> 00:03:17.245
+Before the outage system logged a single interruption, someone wrote down what one is.
+
+00:03:18.545 --> 00:03:21.884
+Power lost to a connection point for more than five minutes.
+
+00:03:23.384 --> 00:03:27.121
+A shorter cut counts as a momentary one, in a measure of its own.
+
+00:03:28.621 --> 00:03:33.622
+So the outage system records when each cut starts and ends, at every connection point.
+
+00:03:35.322 --> 00:03:38.082
+The question came first, and decided the data.
+
+00:03:39.582 --> 00:03:43.202
+In Chile, too, the drawing came first, and chose the numbers.
+
+00:03:45.902 --> 00:03:48.195
+There's no such thing as raw data, either.
+
+00:03:49.295 --> 00:03:52.336
+A meter reading looks raw: a number, every half hour.
+
+00:03:53.636 --> 00:03:59.231
+But someone chose the half hour, chose kilowatt hours, and chose to keep one decimal place.
+
+00:04:00.931 --> 00:04:05.784
+A book of essays on data puts it in its title: raw data is an oxymoron.
+
+00:04:07.284 --> 00:04:10.563
+Every record was designed by someone, for some question.
+
+00:04:13.263 --> 00:04:15.288
+The levels aren't separate things, either.
+
+00:04:16.588 --> 00:04:22.139
+As DAMA says, data is a form of information, and information is a form of data.
+
+00:04:23.639 --> 00:04:28.480
+The same record of a cut is data to the outage system, and information to Grace.
+
+00:04:30.180 --> 00:04:31.453
+And the top is vague.
+
+00:04:32.553 --> 00:04:38.903
+People who've studied the pyramid find little agreement on what wisdom is, or how a system could hold it.
+
+00:04:40.403 --> 00:04:43.195
+In practice, the top is a person, deciding.
+
+00:04:45.895 --> 00:04:48.855
+So Inés redraws it, with arrows both ways.
+
+00:04:50.155 --> 00:04:56.029
+Down: a decision asks a question, the question needs a measure, and the measure needs a definition.
+
+00:04:57.729 --> 00:05:00.054
+The definition decides what's recorded.
+
+00:05:01.554 --> 00:05:06.919
+Up: the records answer the measure, the measure answers the question, and a person decides.
+
+00:05:08.819 --> 00:05:15.292
+On the data practice on the map, interruption becomes a business object, defined once and owned by Grace.
+
+00:05:16.792 --> 00:05:21.318
+The outage system's record of each cut is a data object that realises it.
+
+00:05:23.018 --> 00:05:27.125
+And the measure traces to both: what it counts, and where the counts come from.
+
+00:05:32.425 --> 00:05:35.756
+In Chile, the numbers never came raw from the factories.
+
+00:05:37.056 --> 00:05:41.758
+Someone drew each factory, chose what mattered, and worked out what was normal for it.
+
+00:05:43.258 --> 00:05:47.187
+Then the software sent on only what changed, and a person decided.
+
+00:05:48.687 --> 00:05:54.854
+Grace's measure works the same way: defined first, recorded to fit, and read by someone who acts.
+
+00:05:56.354 --> 00:06:01.450
+So it counts the same way every year, and the lines that fail most are renewed first.
+
+00:06:03.150 --> 00:06:09.876
+But each cut is recorded by more than one system. Which record is the fact? That depends on where it's born.

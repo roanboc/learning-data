@@ -1,0 +1,26 @@
+{
+  "key": "processes-as-deep-as-data-needs",
+  "title": "Processes, as deep as data needs",
+  "sub": "Business architecture for data, the second series on enterprise architecture: the utility's processes in four bands and in levels, from the macro processes on the map to each process with its trigger, output and owner, and its activities as a flow only where something hurts; a SIPOC for each process, naming the concepts it reads and writes, and so where each one is born; and the step, drawn in BPMN, where an estimated reading is born.",
+  "howto": "Glass in the layers' colours is the confirmed model: yellow is the business layer, where the processes sit, and salmon the information layer, where the business's concepts sit. Levels go down the screen: level one, the macro processes; level two, the processes under each; level three, a flow of activities, drawn only where it hurts. A dashed outline marks a branch that wasn't drawn deeper, or a concept not yet on the map. Gold marks an owner; blue the data team. In the desert, blue is the water, and the people of the story are silhouettes.",
+  "src": [
+    "../../../shared/src/ba.js",
+    "scenes.js"
+  ],
+  "story": ["turns"],
+  "poster": ["flow", "sees", 4.6],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bqanat's\\b", "kah-naht's"],
+    ["\\bqanats\\b", "kah-nahts"],
+    ["\\bqanat\\b", "kah-naht"],
+    ["\\bMahan\\b", "Mah-hahn"],
+    ["\\bKerman\\b", "Ker-mahn"],
+    ["\\bmirab\\b", "mee-rahb"],
+    ["\\bFarah\\b", "Fah-rah"],
+    ["\\bSIPOC\\b", "sigh-pock"],
+    ["\\bAPQC's\\b", "A P Q C's"],
+    ["\\bBPMN\\b", "B P M N"]
+  ]
+}

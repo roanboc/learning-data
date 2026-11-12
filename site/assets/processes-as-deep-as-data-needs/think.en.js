@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Processes, as deep as data needs, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (levels, cash, flow), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop"
+   (the lab it would open) and none links to one. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  levels:{q:"Grace has drawn all thirteen macro processes and the processes under each. Which branches does Tomás draw down to level three?",
+    opts:[{t:"The operational band's, since that's the work customers feel; the other bands stay at level two.",near:true},{t:"Only those where someone can name what hurts, and the map says which weren't drawn deeper.",ok:true},{t:"Every one of them, so the map is complete before anyone uses it, and nothing is missed."}],
+    why:"Breadth first, depth on pain: levels one and two everywhere, and level three only where someone can name what hurts, as Mahan went down to single minutes only where a share was split. The map says which branches weren't drawn deeper, so nobody thinks they were. The operational band holds the work customers feel, but a band doesn't earn depth; a named pain does, and drawing everything deep costs time nobody will spend reading it. Where in your work could someone name what hurts?"},
+  cash:{q:"Reading meters writes each reading; checking readings and making bills read it. In which process is the reading born?",
+    opts:[{t:"In making bills, since that's where a reading turns into what a household owes."},{t:"In checking readings, since a reading counts for billing only once it passes the check.",near:true},{t:"In reading meters, the first process that writes it; the two after it only read it.",ok:true}],
+    why:"A concept is born in the process that first writes it: readings in reading meters, bills in making bills. Checking readings and making bills read the reading, as level two draws them; a SIPOC for each process names what comes in and what goes out, so where each concept is born shows, and so does what's missing, like the payment. Which of your concepts is born in a process nobody has drawn?"},
+  flow:{q:"What did drawing check readings at level three show that level two couldn't?",
+    opts:[{t:"That a second kind of reading is born in the check: the estimate, made in a reading's place.",ok:true},{t:"Which households had estimates, and for how long, so that Farah could count them this winter.",near:true},{t:"That checking readings reads what reading meters writes, and sends it on to billing."}],
+    why:"Level three drew the check's steps, their order and the choice between them: if a reading fails, or never came, an estimate is made in its place. So a second kind of reading is born there, not at the meter, which level two couldn't show. Farah's count came later, once a ticket from Grace and the head of retail asked the data team to take readings from the check, not from the meters. Level two had already shown what each process reads and writes. Where might a second kind of something be born in your processes?"}
+  }}};

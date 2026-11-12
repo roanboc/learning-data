@@ -1,0 +1,19 @@
+/* Learning Data: "Pausa para pensar" de Processes, as deep as data needs, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (levels, cash, flow), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop"
+   (el lab que abriría) ni enlaza a uno. Las respuestas correctas están en los mismos lugares que en inglés. Las palabras son las
+   de los subtítulos: franjas, macroprocesos, nivel uno, dos y tres, leer medidores, revisar lecturas, hacer facturas, estimación,
+   quien dirige comercialización y equipo de datos. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  levels:{q:"Grace dibujó los trece macroprocesos y los procesos bajo cada uno. ¿Qué ramas lleva Tomás hasta el nivel tres?",
+    opts:[{t:"Las de la franja operativa, porque es el trabajo que sienten los clientes; las demás quedan en el nivel dos.",near:true},{t:"Solo aquellas donde alguien puede decir qué duele, y el mapa dice cuáles no se dibujaron más a fondo.",ok:true},{t:"Todas, para que el mapa esté completo antes de que alguien lo use, y no se pierda nada."}],
+    why:"Primero a lo ancho, a lo hondo solo donde duele: los niveles uno y dos en todas partes, y el nivel tres solo donde alguien puede decir qué duele, como en Mahan se bajaba al minuto solo donde una parte se había dividido. El mapa dice qué ramas no se dibujaron más a fondo, para que nadie crea que sí. La franja operativa tiene el trabajo que sienten los clientes, pero una franja no gana profundidad; la gana un dolor con nombre, y dibujarlo todo a fondo cuesta un tiempo que nadie va a gastar leyéndolo. ¿Dónde, en tu trabajo, alguien podría decir qué duele?"},
+  cash:{q:"Leer medidores escribe cada lectura; revisar lecturas y hacer facturas la leen. ¿En qué proceso nace la lectura?",
+    opts:[{t:"Al hacer facturas, porque ahí una lectura se vuelve lo que debe pagar un hogar."},{t:"Al revisar lecturas, porque una lectura cuenta para facturar solo cuando pasa la revisión.",near:true},{t:"Al leer medidores, el primer proceso que la escribe; los dos que siguen solo la leen.",ok:true}],
+    why:"Un concepto nace en el proceso que lo escribe primero: las lecturas al leer medidores, las facturas al hacer facturas. Revisar lecturas y hacer facturas leen la lectura, tal como las dibuja el nivel dos; un SIPOC para cada proceso nombra qué entra y qué sale, así que se ve dónde nace cada concepto, y también lo que falta, como el pago. ¿Cuál de tus conceptos nace en un proceso que nadie ha dibujado?"},
+  flow:{q:"¿Qué mostró revisar lecturas, dibujado en el nivel tres, que el nivel dos no podía mostrar?",
+    opts:[{t:"Que en la revisión nace un segundo tipo de lectura: la estimación, hecha en lugar de una lectura.",ok:true},{t:"Qué hogares tuvieron estimaciones, y por cuánto tiempo, para que Farah pudiera contarlos este invierno.",near:true},{t:"Que revisar lecturas lee lo que escribe leer medidores, y lo manda a facturación."}],
+    why:"El nivel tres dibujó los pasos de la revisión, su orden y la decisión entre ellos: si una lectura falla, o nunca llegó, se hace una estimación en su lugar. Así que ahí nace un segundo tipo de lectura, no en el medidor, y eso el nivel dos no podía mostrarlo. La cuenta de Farah vino después, cuando un ticket de Grace y de quien dirige comercialización le pidió al equipo de datos tomar las lecturas de la revisión, no de los medidores. El nivel dos ya mostraba lo que cada proceso lee y escribe. ¿Dónde podría nacer un segundo tipo de algo en tus procesos?"}
+  }}};

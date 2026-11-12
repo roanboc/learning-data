@@ -2282,28 +2282,32 @@ const BA_PRACTICE=[
   ["steward","role","data steward",3,1470,170,330,84,BA_BUS],
   ["net","group","network",2,1080,300,330,470,BA_NET],
   ["ret","group","retail",2,1470,300,330,330,BA_RET],
-  ["shared","group","shared",2,1470,650,330,120,BAC],
+  ["shared","group","shared",2,1470,650,330,190,BAC],
   ["cp","object","connection point",1,1100,352,290,84,BA_INF],
   ["reading","object","meter reading",2,1100,466,290,84,BA_INF],
-  ["solar","object","solar and battery",2,1100,580,290,84,BA_INF],
+  ["solar","object","hosting capacity",2,1100,580,290,84,BA_INF],
   ["account","object","account",1,1490,352,290,84,BA_INF],
   ["bill","object","bill",2,1490,466,290,84,BA_INF],
   ["location","object","location",2,1490,690,290,70,BA_INF]];
 // o.film: the film showing it; o.at[id]: when a new element arrives (default: at once); o.hi[id] (0..1): one lit;
-// o.owners: the owners' tags under the business objects (o.ownersA, 0..1); o.a: the whole panel; o.deco: names as texture (seen from afar);
+// o.owners: the owners' tags (o.ownersA, 0..1): in film 1 under each business object, from film 2 one for each domain, at the foot of its
+// group, below its last object; o.a: the whole panel; o.deco: names as texture (seen from afar);
 // o.ghost (0..1): the later films' elements, as empty dashed outlines still to fill (o.ghostAt[film]: when each film's arrive);
 // o.pre (0..1): this film's new elements, as the same outlines, until each arrives
 function ba_ghostBox(ctx,kind,x,y,w,h,col){ctx.save();ctx.setLineDash([10,9]);ctx.strokeStyle=rgba(col,0.6);ctx.lineWidth=2.4;rr(ctx,x,y,w,h,kind==="service"?h/2:kind==="process"?16:kind==="group"?14:6);ctx.stroke();ctx.restore();}
-function baPractice(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const F=o.film||1,at=o.at||{},hi=o.hi||{},OWN={cp:"Grace",account:"head of retail",reading:"Grace",solar:"Grace",bill:"head of retail"};
+function baPractice(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const F=o.film||1,at=o.at||{},hi=o.hi||{},OWN={cp:"Grace",account:"head of retail",reading:"Grace",solar:"Grace",bill:"head of retail",location:"Grace"},GOWN={net:"Grace",ret:"head of retail",shared:"Grace"};
   withA(ctx,a,()=>{const gh=o.ghost||0,pre=o.pre||0;if(gh>0.01)BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f<=F)return;const ga=gh*(o.ghostAt&&o.ghostAt[f]!=null?fin(t,o.ghostAt[f],0.6):1);if(ga<=0.01)return;
       withA(ctx,ga,()=>ba_ghostBox(ctx,kind,x,y,w,h,col));});
     // this film's own elements, as outlines where each will be drawn, before each arrives
     if(pre>0.01)BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f!==F||at[id]==null)return;const pa=pre*(1-fin(t,at[id],0.6));if(pa>0.01)withA(ctx,pa,()=>ba_ghostBox(ctx,kind,x,y,w,h,col));});
     BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f>F)return;const t0=at[id],v=t0==null?1:fin(t,t0,0.6);if(v<=0.01)return;
       if(kind==="group"){withA(ctx,v,()=>{ctx.save();ctx.setLineDash([12,9]);ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2.5;rr(ctx,x,y,w,h,14);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=rgba(col,0.05);rr(ctx,x,y,w,h,14);ctx.fill();ctx.restore();
-        T(ctx,name,x+18,y+38,{w:800,size:28,color:rgba(col,1),deco:o.deco});});return;}
+        T(ctx,name,x+18,y+38,{w:800,size:28,color:rgba(col,1),deco:o.deco});});
+        if(F>=2&&o.owners&&GOWN[id]){const foot=BA_PRACTICE.reduce((m,e)=>e[1]==="object"&&e[3]<=F&&e[4]>=x&&e[4]<x+w&&e[5]>=y&&e[5]<y+h?Math.max(m,e[5]+e[7]):m,y+52);
+          withA(ctx,v*(o.ownersA==null?1:o.ownersA),()=>tag(ctx,x+w/2,(foot+y+h)/2,GOWN[id],TRUST,{align:"center",size:28}));}
+        return;}
       const k=t0==null?1:spring((t-t0)/0.75),dy=(1-k)*-14;
-      ctx.save();ctx.translate(0,dy);baEl(ctx,x,y,w,h,name,col,kind,{a:v,hi:hi[id]||0,deco:o.deco,owner:o.owners&&OWN[id]?OWN[id]:null,ownerA:o.ownersA==null?1:o.ownersA});ctx.restore();});});}
+      ctx.save();ctx.translate(0,dy);baEl(ctx,x,y,w,h,name,col,kind,{a:v,hi:hi[id]||0,deco:o.deco,owner:F<2&&o.owners&&OWN[id]?OWN[id]:null,ownerA:o.ownersA==null?1:o.ownersA});ctx.restore();});});}
 // a line between two of the panel's elements, by id: from the right edge of the first to the left edge of the second, or straight
 // down; p draws it
 function baPracticeLine(ctx,ida,idb,p,col,o){o=o||{};if(p<=0.01)return;const A=BA_PRACTICE.find(e=>e[0]===ida),B=BA_PRACTICE.find(e=>e[0]===idb);if(!A||!B)return;
@@ -2329,6 +2333,63 @@ function baCount(ctx,x,y,w,h,num,what,src,col,o){o=o||{};const a=o.a==null?1:o.a
   T(ctx,src,x+26,y+46,{f:"mono",w:500,size:28,color:rgba(col,1)});T(ctx,num,x+26,y+124,{w:800,size:64});T(ctx,what,x+26,y+172,{w:700,size:30,color:rgba(INK,0.9)});
   if(o.dash){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BA_RED,0.95);ctx.lineWidth=3;rr(ctx,x-6,y-6,w+12,h+12,22);ctx.stroke();ctx.restore();}
   if(o.mark>0.01){if(o.ok)kt_gtick(ctx,x+w-34,y+34,18,o.mark);else kt_rcross(ctx,x+w-34,y+34,18,o.mark);}});}
+
+/* ---------- the utility's capabilities ---------- */
+// the eight capabilities of the utility at level 1, as *What it must be able to do* confirmed them on Tomás's map, with their owners
+// (generating power has none yet)
+const BA_CAPS=[["plan the network","Grace"],["operate the network","Grace"],["maintain assets","Grace"],["connect customers","Grace"],
+  ["generate power",null],["sell energy","head of retail"],["serve customers","head of retail"],["meet obligations","Ama"]];
+// a capability, as the map draws one: glass in the strategy layer's colour, ArchiMate's glyph in its corner, its name in the middle;
+// o.hi (0..1) lights it; o.heat, a colour, tints it by how well it works today (o.heatA, 0..1); o.dim (0..1) sets it back
+function baCap(ctx,x,y,w,h,name,o){o=o||{};const a=(o.a==null?1:o.a)*(1-0.6*(o.dim||0));if(a<=0.01)return;const hA=o.heatA==null?(o.heat?1:0):o.heatA,col=o.heat?mix(BA_STR,o.heat,hA):BA_STR;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,col,{glow:12+18*(o.hi||0)+10*hA,ea:0.85,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.13+0.14*(o.hi||0)+0.1*hA);rr(ctx,x,y,w,h,16);ctx.fill();
+    archGlyph(ctx,"capability",x+w-20,y+20,9,col);const sz=o.size||28,ls=wrapT(ctx,name,0,0,w-44,{size:sz,w:700,measure:true});
+    wrapT(ctx,name,x+w/2,y+h/2+sz*0.36-(ls.length-1)*sz*0.58+4,w-44,{size:sz,w:700,align:"center",color:rgba(INK,0.96),lh:sz*1.15,deco:o.deco});});}
+
+/* ---------- the day of water ---------- */
+// One day of a qanat's water as a dial: the day's ring, cut into shares of time from the top, clockwise (o.n shares, each 24/n
+// hours). o.p draws the ring of shares round; o.cols[i] colours share i, an owner's (o.col for all); o.hi (index) lights one, by
+// o.hiA (0..1); o.full (0..1) lights the whole ring, as the shares add up to the day; o.split (0..1) cuts every share into o.k
+// slivers, each its own owner's; o.sliver [share, sliver] and o.slA (0..1) light one sliver; o.mid, o.sub: the words in the middle
+function ba_day(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=o.n||15,p=clamp(o.p==null?1:o.p,0,1),r0=r*0.64,k=o.k||5,sp=clamp(o.split||0,0,1);
+  const ang=u=>-Math.PI/2+u*TAU,seg=(u0,u1,c,al)=>{ctx.fillStyle=rgba(c,al);ctx.beginPath();ctx.arc(x,y,r,ang(u0),ang(u1));ctx.arc(x,y,r0,ang(u1),ang(u0),true);ctx.closePath();ctx.fill();};
+  const OWN=[[222,178,120],[196,150,108],[176,170,118],[214,156,132],[168,150,128],[226,196,150],[190,132,100]];
+  withA(ctx,a,()=>{ctx.save();ctx.shadowColor=rgba(BAC,0.35);ctx.shadowBlur=30;ctx.fillStyle="rgba(10,14,22,0.92)";ctx.beginPath();ctx.arc(x,y,r+16,0,TAU);ctx.fill();ctx.restore();
+    ctx.strokeStyle=rgba(BAC,0.35);ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r+16,0,TAU);ctx.stroke();
+    const gp=0.006;for(let i=0;i<n;i++){const u0=i/n,u1=(i+1)/n,q=clamp(p*n-i,0,1);if(q<=0)break;const c=o.cols?o.cols[i]:(o.col||BA_SAND);
+      if(sp>0.01){for(let j=0;j<k;j++){const v0=u0+(u1-u0)*j/k,v1=u0+(u1-u0)*(j+1)/k;if(v0>u0+(u1-u0)*q)break;const cj=OWN[Math.floor(hash(i*k+j,977)*OWN.length)];
+          seg(v0+gp*0.5,Math.min(v1,u0+(u1-u0)*q)-gp*0.5,mix(c,cj,sp),0.62);}}
+      else seg(u0+gp,u0+(u1-u0)*q-gp,c,0.6);
+      const hi=o.hi===i?(o.hiA==null?1:o.hiA):0;if(hi>0.01){seg(u0+gp,u1-gp,BA_WATER,0.85*hi);const am=ang((u0+u1)/2);glow(ctx,x+Math.cos(am)*(r+r0)/2,y+Math.sin(am)*(r+r0)/2,r*0.36,BA_WATER,0.4*hi);}}
+    if(o.sliver&&(o.slA||0)>0.01){const[i,j]=o.sliver,v0=(i+j/k)/n,v1=(i+(j+1)/k)/n;seg(v0,v1,BA_WATER,o.slA);ctx.save();ctx.strokeStyle=rgba([235,250,255],o.slA);ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.arc(x,y,r+3,ang(v0),ang(v1));ctx.arc(x,y,r0-3,ang(v1),ang(v0),true);ctx.closePath();ctx.stroke();ctx.restore();}
+    // the ring closes: the shares make the whole day
+    const fl=o.full||0;if(fl>0.01){ctx.save();ctx.strokeStyle=rgba(BA_OK,0.9*fl);ctx.lineWidth=5;ctx.shadowColor=rgba(BA_OK,0.7*fl);ctx.shadowBlur=18;ctx.beginPath();ctx.arc(x,y,r+8,0,TAU);ctx.stroke();ctx.restore();}
+    // the hours of the day round the outside, as ticks, and the top of the day marked
+    ctx.strokeStyle=rgba(INK,0.4);ctx.lineWidth=2;for(let h=0;h<24;h++){const an=ang(h/24),l=h%6?6:12;ctx.beginPath();ctx.moveTo(x+Math.cos(an)*(r+16),y+Math.sin(an)*(r+16));ctx.lineTo(x+Math.cos(an)*(r+16+l),y+Math.sin(an)*(r+16+l));ctx.stroke();}
+    if(o.mid)T(ctx,o.mid,x,y+(o.sub?-2:14),{w:800,size:o.midSize||40,align:"center",color:rgba(INK,0.96)});if(o.sub)T(ctx,o.sub,x,y+42,{w:600,size:28,align:"center",color:rgba(SOFT,1)});});}
+// where a share's middle sits on the dial, to point a tag at it
+function ba_dayAt(x,y,r,n,i,f){const an=-Math.PI/2+(i+0.5)/n*TAU,rr_=r*(f==null?0.82:f);return[x+Math.cos(an)*rr_,y+Math.sin(an)*rr_];}
+
+/* ---------- the glossary ---------- */
+// The business glossary as a plain table, drawn from the business objects on the map: a row for each term, with its definition, its
+// domain and its owner, grouped by domain (each row's domain colour runs down its left edge). rows: [term, definition, domain, owner,
+// colour]; o.rowA[i] (0..1): row i, as it arrives; o.col (index) and o.colA (0..1): a column lit; o.hiRow[i] (0..1): a row lit;
+// o.w: the columns' widths. Returns the table's height and each row's top, so a scene can point at one
+const BA_GLOSS_COLS=["term","definition","domain","owner"];
+function baGlossary(ctx,x,y,rows,o){o=o||{};const a=o.a==null?1:o.a,Wc=o.w||[300,700,200,260],rh=o.rh||66,hh=70,wd=Wc.reduce((s,v)=>s+v,0)+40,ht=hh+rows.length*rh+16,top=rows.map((_,i)=>y+hh+i*rh);
+  if(a<=0.01)return{h:ht,top,w:wd};
+  withA(ctx,a,()=>{glass(ctx,x,y,wd,ht,18,BA_INF,{glow:12,ea:0.8,fill:"rgba(12,9,12,0.95)"});
+    let cx=x+24;const cl=o.colA||0;BA_GLOSS_COLS.forEach((c,j)=>{const lit=o.col===j?cl:0,cc=j===3?TRUST:BA_INF;if(lit>0.01){ctx.fillStyle=rgba(cc,0.13*lit);rr(ctx,cx-12,y+12,Wc[j],ht-24,10);ctx.fill();}
+      T(ctx,c,cx,y+46,{f:"mono",w:500,size:28,color:rgba(cc,0.8+0.2*lit)});cx+=Wc[j];});
+    ctx.strokeStyle=rgba(BA_INF,0.35);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+16,y+hh-6);ctx.lineTo(x+wd-16,y+hh-6);ctx.stroke();
+    rows.forEach(([term,def,dom,own,col],i)=>{const ra=o.rowA?o.rowA[i]==null?1:o.rowA[i]:1;if(ra<=0.01)return;const ry=top[i],hr=o.hiRow?o.hiRow[i]||0:0;
+      withA(ctx,ra,()=>{if(hr>0.01){ctx.fillStyle=rgba(col,0.14*hr);rr(ctx,x+12,ry+4,wd-24,rh-8,10);ctx.fill();}
+        ctx.fillStyle=rgba(col,0.95);rr(ctx,x+12,ry+10,6,rh-20,3);ctx.fill();
+        let xx=x+24;const yb=ry+rh/2+10;T(ctx,term,xx,yb,{w:700,size:30});xx+=Wc[0];T(ctx,def,xx,yb,{w:600,size:28,color:rgba(INK,0.88)});xx+=Wc[1];
+        T(ctx,dom,xx,yb,{w:700,size:28,color:rgba(col,1)});xx+=Wc[2];T(ctx,own,xx,yb,{w:700,size:28,color:rgba(TRUST,1)});
+        if(i<rows.length-1){ctx.strokeStyle="rgba(255,255,255,0.07)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+24,ry+rh);ctx.lineTo(x+wd-24,ry+rh);ctx.stroke();}});});});
+  return{h:ht,top,w:wd};}
 
 /* ===== What the business owns: scenes =====
    Nine chapters, as in ../script.md. The qanats of Iran: villages that live on water nobody sees, brought from the mountains by a

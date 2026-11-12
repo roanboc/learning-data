@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:08.349
+In the desert villages of Iran, the water of a qanat, a tunnel from the mountains, is owned in shares of time.
+
+00:00:09.949 --> 00:00:12.965
+A share can be sold, split, or left to your children.
+
+00:00:14.365 --> 00:00:16.369
+But a share didn't mean the same everywhere.
+
+00:00:17.669 --> 00:00:23.001
+On one qanat, the water came round every six days. On another, every twenty-two.
+
+00:00:24.701 --> 00:00:31.516
+In the 1960s, as land passed to the farmers who worked it, the government asked for written deeds to the water.
+
+00:00:32.816 --> 00:00:37.623
+In some villages, the deeds added up to more than twenty-four hours of water a day.
+
+00:00:39.323 --> 00:00:43.427
+Owners fought, sometimes violently, and some villages broke apart.
+
+00:00:45.127 --> 00:00:50.260
+Before anyone could count the water, a share had to mean the same to everyone who held one.
+
+00:00:51.760 --> 00:00:57.381
+In Mahan, near Kerman, one qanat's owners measured every share against the day itself.
+
+00:00:58.681 --> 00:01:03.449
+A day of its water was fifteen shares, and each share came round every twelve days.
+
+00:01:04.949 --> 00:01:11.068
+Each share was ninety-six minutes, so fifteen make exactly one day: the shares add up to the water.
+
+00:01:12.968 --> 00:01:19.565
+Another qanat there, shared by three men in the 1860s, passed bit by bit to some seventy families.
+
+00:01:21.065 --> 00:01:27.516
+Because a share meant one thing, it could be sold, inherited, split as fine as thirty seconds, and still add up.
+
+00:01:29.016 --> 00:01:36.176
+At the utility, the business needs the same: each thing it counts, defined once, in its own words, before anyone builds it.
+
+00:01:44.076 --> 00:01:47.400
+Tomás's next note asks what the business needs to know.
+
+00:01:48.700 --> 00:01:53.815
+He starts from the capabilities on his map: the eight things the utility must be able to do.
+
+00:01:55.515 --> 00:01:59.269
+Each one needs some information, creates some, or changes it.
+
+00:02:00.769 --> 00:02:07.148
+Those are the business's concepts. They go in the information layer, beneath the capabilities that use them.
+
+00:02:10.448 --> 00:02:12.265
+He doesn't start from a blank page.
+
+00:02:13.365 --> 00:02:17.819
+Utilities share reference models, written by their industry's standards bodies.
+
+00:02:18.919 --> 00:02:25.201
+The IEC, which sets the world's electrical standards, keeps the Common Information Model, CIM.
+
+00:02:26.501 --> 00:02:32.483
+It names what a utility works with, from its cables and meters to its customers, and how they relate.
+
+00:02:33.983 --> 00:02:39.891
+One of its standards lists what a distribution utility does, and the business objects each part uses.
+
+00:02:41.391 --> 00:02:46.421
+Its 2020 edition draws them in ArchiMate, the language of Tomás's map.
+
+00:02:47.721 --> 00:02:53.449
+The Smart Grid Architecture Model shows where each part sits, from the power station to the home.
+
+00:02:54.949 --> 00:02:59.157
+And Europe's market role model names who does what in the electricity market.
+
+00:03:00.457 --> 00:03:05.184
+Other industries have their own, from BIAN for banks to HERM for universities.
+
+00:03:06.884 --> 00:03:14.017
+Tomás takes CIM and the IEC's list as his first draft, and the map says where each element came from.
+
+00:03:15.317 --> 00:03:21.864
+A reference model isn't the utility's own until its people confirm it, so every element starts as a draft.
+
+00:03:25.164 --> 00:03:29.618
+He goes through the capabilities one at a time, with the people who run each one.
+
+00:03:30.918 --> 00:03:37.037
+Connecting customers needs a connection request, the network's capacity, a connection point and a meter.
+
+00:03:38.537 --> 00:03:41.805
+Serving customers needs accounts, bills and complaints.
+
+00:03:43.105 --> 00:03:46.427
+Operating the network needs meter readings and outages.
+
+00:03:47.727 --> 00:03:51.108
+Some of these a capability creates; others it only reads.
+
+00:03:52.608 --> 00:03:56.837
+Most of them, CIM already names, so the first draft comes quickly.
+
+00:04:00.137 --> 00:04:03.106
+But CIM's words aren't always the utility's.
+
+00:04:04.206 --> 00:04:10.439
+CIM calls a connection point a usage point. Europe's market role model calls it a metering point.
+
+00:04:12.139 --> 00:04:17.916
+Grace's people call it a connection point, and so do their forms, their reports and their customers.
+
+00:04:19.216 --> 00:04:25.456
+So the map uses the business's word, and keeps the reference model's beside it, for when data is exchanged.
+
+00:04:26.956 --> 00:04:31.063
+As in Mahan, the measure is shared, and the words are the people's own.
+
+00:04:32.763 --> 00:04:37.324
+Each word gets one definition in its domain, written with the people who use it.
+
+00:04:38.624 --> 00:04:42.249
+The network's words sit with the network, and retail's with retail.
+
+00:04:43.349 --> 00:04:49.678
+A word both use, like location, sits in a shared domain, so each word's owner is easy to find.
+
+00:04:52.978 --> 00:04:59.615
+Then the capability that hurts: connecting customers. New solar takes thirty-four working days to connect.
+
+00:05:01.115 --> 00:05:07.820
+The wait is in assessing the network's capacity, and that needs one number: how much solar each street can take.
+
+00:05:09.320 --> 00:05:13.155
+No system holds it, no report shows it, and nobody owns it.
+
+00:05:14.855 --> 00:05:23.152
+Grace's engineers name it hosting capacity: the solar a street can take before its voltage or its cables pass their limits.
+
+00:05:24.852 --> 00:05:29.279
+It goes on the map in their words, with Grace as its owner, and no data yet.
+
+00:05:30.779 --> 00:05:35.163
+The data team will build it later. First, the business says what it means.
+
+00:05:40.663 --> 00:05:46.769
+Each concept on the map is a business object, with a name, a definition, a domain and an owner.
+
+00:05:48.469 --> 00:05:52.843
+The glossary is drawn from them: one term for each, grouped by domain.
+
+00:05:54.543 --> 00:05:59.796
+It doesn't need a tool to start. A table is enough, as long as every term has an owner.
+
+00:06:01.496 --> 00:06:06.383
+Later, each table and report the data team builds will point to the terms it holds.
+
+00:06:09.983 --> 00:06:15.896
+On the data practice's map, the glossary's domains appear: the network, retail, and what they share.
+
+00:06:17.396 --> 00:06:24.596
+Meter readings and hosting capacity join the network, and bills join retail. Location sits in the shared domain.
+
+00:06:26.296 --> 00:06:31.924
+The connection point and the account were already there. Now each sits in its domain, with its owner.
+
+00:06:35.224 --> 00:06:41.270
+In Mahan, a share means the same to everyone who holds one, so the water can be counted, and shared.
+
+00:06:42.970 --> 00:06:49.174
+At the utility, each concept now means one thing in its domain, in the words of the people who use it.
+
+00:06:50.874 --> 00:06:54.665
+Tomás's next note asks who creates each one, and who owns it.

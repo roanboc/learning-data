@@ -2308,10 +2308,10 @@ scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       qb_sheet(x,tt,0.9,560,140,620,{kick:"Tuesday 16 February",title:"Thirty minutes",sub:"A few open questions, then mostly listening"},{light:"grey",out:c.decide-0.5});
       Q.forEach(([id,q,lines,col,ws],i)=>{const nx=i+1<Q.length?c[Q[i+1][0]]-0.5:c.schein-0.5;
         qb_sheet(x,tt,c[id]-0.05,560,140,620,{kick:"Ask",title:q,lines},{col,light:"grey",out:nx,u:qb_u(tt,ws.map(wd=>w(id,wd,-0.2)))});});
-      // the practice, named once each
-      qb_sheet(x,tt,w("schein","Schein",-0.3),560,140,620,{kick:"Edgar Schein, 2013",title:"Humble Inquiry",lines:["Ask what you don't already know","Out of real interest in the other person"]},
+      // the practice, named once each, on sheets wide enough for the longer line of names
+      qb_sheet(x,tt,w("schein","Schein",-0.3),480,140,780,{kick:"Edgar Schein, 2013",title:"Humble Inquiry",lines:["Ask what you don't already know","Out of real interest in the other person"]},
         {light:"grey",out:c.rogers-0.5,u:qb_u(tt,[w("schein","asking",-0.1),w("schein","interest",-0.2)])});
-      qb_sheet(x,tt,w("rogers","Rogers",-0.3),560,140,620,{kick:"Carl Rogers and Richard Farson, 1957",title:"Active Listening",lines:["Hear the whole meaning","Then say it back"]},
+      qb_sheet(x,tt,w("rogers","Rogers",-0.3),480,140,780,{kick:"Carl Rogers and Richard Farson, 1957",title:"Active Listening",lines:["Hear the whole meaning","Then say it back"]},
         {light:"grey",out:c.whys-0.5,u:qb_u(tt,[w("rogers","hearing",-0.1),w("rogers","saying",-0.1)])});
       // why, five times; then the kinder question
       const wy=w("whys","five",-0.4);qb_whys(x,tt,wy,540,250,{a:1-ag_in(tt,w("whys","what",-0.3),0.5)});
@@ -2333,8 +2333,8 @@ scene("agree",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
         x.save();x.strokeStyle=rgba(LP.amber,1);x.lineWidth=5;x.lineCap="round";x.globalAlpha*=ua;x.beginPath();x.moveTo(ux,uy);x.lineTo(ux+uw*ag_sine(ag_in(tt,w("used","stops",0),0.5)),uy);x.stroke();x.restore();}
       qb_sheet(x,tt,w("used","means",-0.3),1140,140,640,{kick:"Graham",title:"“Used” means people in the room",sub:"A booking isn't use"},{light:"grey",out:bo});
       // the two kinds of data the word decides, side by side
-      qb_sheet(x,tt,w("data","bookings",-0.2),520,140,420,{kick:"From the timetable",title:"Bookings"},{col:LP.orange,light:"grey",out:c.pisa-0.5});
-      qb_sheet(x,tt,w("data","head",-0.2),980,140,420,{kick:"From each room's sensor",title:"Head counts"},{col:LP.orange,light:"grey",out:c.pisa-0.5});
+      qb_sheet(x,tt,w("data","bookings",-0.2),400,140,540,{kick:"From the timetable",title:"Bookings"},{col:LP.orange,light:"grey",out:c.pisa-0.5});
+      qb_sheet(x,tt,w("data","head",-0.2),980,140,540,{kick:"From each room's sensor",title:"Head counts"},{col:LP.orange,light:"grey",out:c.pisa-0.5});
       // back to Pisa along the way: one word of each request, made exact before anyone chose how
       qb_sheet(x,tt,w("pisa","Pisa",-0.1),350,140,600,{kick:"In Pisa",title:"Saving",lines:["Half a degree, not a straight tower"]},{col:LP.blue,light:"grey",out:c.write-0.6});
       qb_sheet(x,tt,w("pisa","Here",-0.2),970,140,600,{kick:"Here",title:"Use",lines:["People in the room, not bookings"]},{col:LP.blue,light:"grey",out:c.write-0.6});}},

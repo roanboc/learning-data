@@ -12,6 +12,7 @@ Agents and AI services on the map, AI in the architecture practice, and architec
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Agents on the map](https://data.learn-all.org/ai-and-continuous-architecture/agents-on-the-map/) | Agents in the architecture | 8½ min | 11 | 3 questions | [script](1-agents-on-the-map/script.md) · [source](1-agents-on-the-map/source/README.md) |
+| [The AI platform](https://data.learn-all.org/ai-and-continuous-architecture/the-ai-platform/) | The platform under the agents | 8 min | 11 | 3 questions | [script](2-the-ai-platform/script.md) · [source](2-the-ai-platform/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

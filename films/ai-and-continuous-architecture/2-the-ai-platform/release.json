@@ -1,0 +1,15 @@
+[
+  {
+    "name": "The AI platform",
+    "key": "the-ai-platform-en",
+    "dir": "films/ai-and-continuous-architecture/2-the-ai-platform/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/the-ai-platform/film.js",
+    "video": "dist/the-ai-platform.mp4",
+    "file": "the-ai-platform.mp4",
+    "captions": [["films/ai-and-continuous-architecture/2-the-ai-platform/captions/en.srt", "the-ai-platform.en.srt"], ["films/ai-and-continuous-architecture/2-the-ai-platform/captions/es.srt", "the-ai-platform.es.srt"]],
+    "paths": ["films/ai-and-continuous-architecture/2-the-ai-platform/source", ":(exclude)films/ai-and-continuous-architecture/2-the-ai-platform/source/src/i18n/es/captions.js", "films/ai-and-continuous-architecture/shared", "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts", "films/data-governance/shared/tools/twice.py", "films/data-governance/shared/tools/quiet.py", "films/data-governance/shared/tools/held.py"],
+    "legibility": {"texts": 264, "under_28": "0%", "under_20": 0, "median": 30, "status": "Drawn to the rule"}
+  }
+]

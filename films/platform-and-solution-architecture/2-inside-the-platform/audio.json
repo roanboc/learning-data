@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/inside-the-platform/soundtrack.mp3",
+      "size": 5816729,
+      "sha256": "c66a03196b0388719573cc084ba3cbae68cd3766cc9388a4356e6fa3bbc12c5c",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-inside-the-platform-0d6c449466c69e07fb01/c66a03196b0388719573cc084ba3cbae68cd3766cc9388a4356e6fa3bbc12c5c.mp3"
+    }
+  ]
+}

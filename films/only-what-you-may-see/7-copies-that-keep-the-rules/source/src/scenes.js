@@ -132,7 +132,8 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
 scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   const tRefuses=A("clone","refuses"),tReal=A("exempt","every real name"),tNoCls=A("exempt","no column's class"),tPeople=A("masked","real people"),tAsIs=A("masked","as it is"),
     tNone=A("madeup","none of them"),tSize=A("script","For size"),tCols=A("script","columns"),tFewer=A("unit","fewer than ten"),tGiven=A("unit","if nine"),
-    tClone=A("never","clone"),tSample=A("never","sample"),tNever=A("never","never used"),tReal2=A("lascaux","not one is real"),tNoRec=A("runs","no record");
+    tClone=A("never","clone"),tSample=A("never","sample"),tNever=A("never","never used"),tReal2=A("lascaux","not one is real"),tNoRec=A("runs","no record"),
+    tSynth=A("easy","synthetic data"),tClose=A("harder","How closely"),tGaps=A("harder","gaps"),tOdd=A("harder","odd cases"),tOpen=A("harder","open");
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"cpHall",keys:[[0,960,540,1.0]],push:0.015,draw:(x,tt)=>{
     cp_figure(x,"jun",1640,612,0.95,tt,cp_io(tt,c.jun-0.3,sc.dur-1.6,0.7),{flip:true});
     cp_who(x,1500,240,"Jun Park","Analytics engineer",{align:"right",a:cp_io(tt,c.jun+0.4,c.clone-0.45)});
@@ -152,14 +153,20 @@ scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
       rows:[{c:"student_number",v:"***",vc:"violet",cls:"direct"},{c:"name",v:"***",vc:"violet",cls:"direct"},{c:"date_of_birth",v:"1987",cls:"indirect"},{c:"notes",v:"Extra time: anxiety",vc:"coral"}]});
     cp_tag(x,1010,300,"Still about real people","grey",{a:ma*ag_in(tt,tPeople,0.4)});
     cp_tag(x,420,640,"Not classed yet: shown as it is","coral",{a:ma*ag_in(tt,tAsIs,0.4),to:[640,560],p:cp_lin(tt,tAsIs+0.2,0.5)});
-    // made-up learners: true to the real ones, and none of them is anyone
+    // made-up learners, wherever development and test can use them: none of them is anyone
     const da=cp_io(tt,c.madeup,c.script-0.3,0.5);
     cp_record(x,90,250,{name:"dev.core_learner_v1",rows:CP_MADE.map(r=>({c:r[0],v:r[1],cls:r[2]})),w:900,cw:262,col:"green",a:da,k:ag_spr(tt,c.madeup,0.7)});
     cp_tag(x,90,680,"Made up: none of them is anyone","green",{a:da*ag_in(tt,tNone,0.4)});
     // the script that writes them, in the registrar's bundle
     const ga=cp_io(tt,c.script+0.2,c.unit-0.5,0.5);if(ga>0){const bx=dp_page(x,90,230,1260,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar/tests/made_up_learners.py",a:ga});
       cp_code(x,bx.x,bx.y+44,["learners = make_learners(2614)","columns  = like(\"core_learner_v1\")","classes  = like(\"core_learner_v1\")"],
-        {a:ga,w:1180,hi:tt<tCols?[0,ag_in(tt,tSize,0.4)]:[1,ag_in(tt,tCols,0.4)]});}
+        {a:ga,w:1180,hi:tt<tCols?[0,ag_in(tt,tSize,0.4)]:[1,ag_in(tt,tCols,0.4)]});
+      // synthetic data is easy to write now; how closely it should follow the real records is the harder question, and an open one
+      // (the author, 12 November 2026)
+      cp_tag(x,90,676,"Synthetic data: easy to write now","green",{a:ga*ag_in(tt,tSynth,0.4)});
+      let gx=90+cp_tag(x,90,764,"How close to the real records?","grey",{a:ga*ag_in(tt,tClose,0.4)})+24;
+      gx+=dp_pill(x,gx,805,"gaps","grey",{a:ga*ag_in(tt,tGaps,0.4)})+14;gx+=dp_pill(x,gx,805,"odd cases","grey",{a:ga*ag_in(tt,tOdd,0.4)})+24;
+      cp_tag(x,gx,764,"Still an open question","grey",{a:ga*ag_in(tt,tOpen,0.4)});}
     // dbt's unit test, on rows written for it
     const ua=cp_io(tt,c.unit,c.lascaux-0.5,0.5);if(ua>0){const bx=dp_page(x,90,230,1260,420,{tool:"dbt",name:"dbt",where:"unit test",title:"small_counts_hidden",a:ua*(1-0.55*ag_in(tt,c.never,0.6))});
       cp_code(x,bx.x,bx.y+44,["model:  left_after_first_year","given:  9 learners leave Midwifery","expect: Midwifery, fewer than 10"],{a:ua*(1-0.55*ag_in(tt,c.never,0.6)),w:1180,hi:[1,ag_in(tt,tGiven,0.4)]});

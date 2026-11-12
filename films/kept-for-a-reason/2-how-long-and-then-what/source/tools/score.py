@@ -273,8 +273,8 @@ tT = G('before', 'breath', 0.2)
 roll((Bb3, D4, F4, Bb4), tT, 0.18, 0.7, ring=2.2)
 euph(Bb2, tT + 0.2, E('before') + 0.4, 0.6, att=1.0, rel=1.8)
 
-# 3. Three lives of a record: the university, B-flat major, music only at its turns. October 2026: a glass tap as the place's name
-#    comes in. The tags: two glass taps. "But a record has three lives": three drawers rising, F, B-flat, D, as the three panes stand.
+# 3. Three stages of a record: the university, B-flat major, music only at its turns. October 2026: a glass tap as the place's name
+#    comes in. The tags: two glass taps. "But a record goes through three stages": three drawers rising, F, B-flat, D, as the three panes stand.
 #    Archived, kept cold: a low drawer, damped soon. Deleted at its end date: a drawer damped as the old record goes. Kept for good: a
 #    drawer left to ring, B-flat, as the degrees rise. A year a person's details could leak: G minor, softly. A record the law needs,
 #    gone too soon: a low G, damped
@@ -283,7 +283,7 @@ glasstap(S0('lives') + 0.5, 0.007, px(240))
 glasstap(L_('pay', 'Pay records', 0.2), 0.007, px(1300)); glasstap(L_('pay', 'applications', 0.2), 0.007, px(1300))
 knock(L_('never', 'Nothing', 0.05), 0.011, px(960), 180)
 for i, m in enumerate((F3, Bb3, D4)):
-    drawer(m, L_('three', 'three lives', 0.1) + 0.24 * i, 0.5, px(605 + 360 * i), ring=1.0)
+    drawer(m, L_('three', 'three stages', 0.1) + 0.24 * i, 0.5, px(605 + 360 * i), ring=1.0)
 drawer(D3, L_('archived', 'archived', 0.1), 0.45, px(965), damp=0.5)
 drawer(F3, L_('deleted', 'deleted', 0.35), 0.45, px(1325), damp=0.35)
 drawer(Bb3, L_('good', 'kept for good', 0.05), 0.5, px(965), ring=1.7)

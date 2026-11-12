@@ -30,251 +30,260 @@ Así que cada banquero que los conoce, y su familia, está en peligro.
 00:00:46.873 --> 00:00:50.729
 La bóveda tiene que seguir cerrada, incluso para el hombre que sabe los números.
 
-00:00:53.029 --> 00:00:58.719
+00:00:53.629 --> 00:00:59.319
 En Rochester, Nueva York, un cerrajero, James Sargent, pone relojes dentro de la cerradura de una bóveda.
 
-00:01:00.219 --> 00:01:02.972
+00:01:00.819 --> 00:01:03.572
 Cada tarde, el banco fija la hora en que podrá abrirse.
 
-00:01:04.272 --> 00:01:08.207
+00:01:04.872 --> 00:01:08.807
 Hasta esa hora, nadie puede abrirla, ni con los números correctos.
 
-00:01:09.907 --> 00:01:15.428
+00:01:10.507 --> 00:01:16.028
 En mayo de 1874, se instala la primera en la bóveda de un banco, en Morrison, Illinois.
 
-00:01:16.928 --> 00:01:25.316
+00:01:17.528 --> 00:01:25.916
 Una noche de viernes de mayo de 1875, en Great Barrington, Massachusetts, ocho ladrones retienen a la familia Deland en su casa,
 
-00:01:25.516 --> 00:01:28.724
+00:01:26.116 --> 00:01:29.324
 y llevan a Fred Deland, que conoce los números, a su banco.
 
-00:01:30.224 --> 00:01:33.734
+00:01:30.824 --> 00:01:34.334
 Él gira el disco, pero los cerrojos que sujetan la puerta no se mueven:
 
-00:01:33.934 --> 00:01:37.084
+00:01:34.534 --> 00:01:37.684
 la nueva cerradura de tiempo, instalada tres días antes, los detiene.
 
-00:01:38.984 --> 00:01:42.954
+00:01:39.584 --> 00:01:43.554
 Los ladrones toman unos bonos de un escritorio y huyen; la bóveda sigue cerrada.
 
-00:01:44.654 --> 00:01:47.860
+00:01:45.254 --> 00:01:48.460
 Ahora, sacar a un banquero de su casa de noche no abre nada.
 
-00:01:49.560 --> 00:01:53.292
+00:01:50.160 --> 00:01:53.892
 La cerradura de Sargent se vende por miles, y pronto los bancos esperan tener una.
 
-00:01:54.792 --> 00:01:57.692
+00:01:55.392 --> 00:01:58.292
 La plataforma de la universidad tiene el mismo problema.
 
-00:01:58.992 --> 00:02:04.141
+00:01:59.592 --> 00:02:04.741
 Las cuentas diarias de Sam y de Jun tienen su mayor poder, a toda hora, todos los días.
 
-00:02:05.841 --> 00:02:08.401
+00:02:06.441 --> 00:02:09.001
 Quien se apodera de una de esas cuentas se lleva todo.
 
-00:02:09.901 --> 00:02:13.622
+00:02:10.501 --> 00:02:14.222
 Necesita lo que tenía el banco: un gran poder, cerrado hasta que haga falta.
 
-00:02:20.722 --> 00:02:23.496
+00:02:21.322 --> 00:02:24.096
 Casi todo el trabajo en la plataforma pasa por el catálogo.
 
-00:02:24.796 --> 00:02:30.311
+00:02:25.396 --> 00:02:30.911
 Revisa cada solicitud, y muestra a cada persona lo que su rol permite, enmascarado donde debe estarlo.
 
-00:02:32.011 --> 00:02:33.606
+00:02:32.611 --> 00:02:34.206
 Algunos trabajos no pueden pasar por él.
 
-00:02:34.706 --> 00:02:37.265
+00:02:35.306 --> 00:02:37.865
 El almacenamiento: los archivos bajo cada tabla.
 
-00:02:38.765 --> 00:02:44.110
+00:02:39.365 --> 00:02:44.710
 Ahí no aplica ninguna máscara ni ningún filtro: cada nombre y cada fecha de nacimiento, a la vista.
 
-00:02:45.810 --> 00:02:48.503
+00:02:46.410 --> 00:02:49.103
 Muros, puertas y llaves cierran esa puerta trasera.
 
-00:02:50.003 --> 00:02:54.891
+00:02:50.603 --> 00:02:55.491
 La configuración de administración: lo que permite toda la plataforma, como quién puede entrar, y cómo.
 
-00:02:56.591 --> 00:03:01.108
+00:02:57.191 --> 00:03:01.708
 Y restaurar una tabla: dejarla como estaba, sobre el trabajo de todos desde entonces.
 
-00:03:02.808 --> 00:03:04.424
+00:03:03.408 --> 00:03:05.024
 Eso es un gran poder sobre los datos.
 
-00:03:05.924 --> 00:03:13.315
+00:03:06.524 --> 00:03:13.915
 En el gobierno de datos, el equipo de plataforma es su custodio: mantiene la plataforma en marcha, y no decide qué significan los datos.
 
-00:03:14.815 --> 00:03:18.803
+00:03:15.415 --> 00:03:19.403
 Hasta ahora, ese poder estaba en las cuentas diarias de Sam y de Jun:
 
-00:03:19.003 --> 00:03:22.542
+00:03:19.603 --> 00:03:23.142
 las mismas cuentas que abren su correo, y cada enlace que trae.
 
-00:03:24.242 --> 00:03:28.354
+00:03:24.842 --> 00:03:28.954
 Una parte también había ido a otros, cada vez para una tarea, y nunca había vuelto.
 
-00:03:31.254 --> 00:03:36.255
+00:03:31.854 --> 00:03:36.855
 Así que cada especialista de datos recibe una segunda cuenta, propia: una cuenta de administrador.
 
-00:03:37.955 --> 00:03:39.241
+00:03:38.555 --> 00:03:39.841
 La de Jun es solo suya.
 
-00:03:40.341 --> 00:03:43.527
+00:03:40.941 --> 00:03:44.127
 Nunca se comparte, y nunca se usa para el correo ni la web.
 
-00:03:45.027 --> 00:03:48.417
+00:03:45.627 --> 00:03:49.017
 Entra solo con una llave de acceso, y solo para una tarea.
 
-00:03:49.917 --> 00:03:55.861
+00:03:50.517 --> 00:03:56.461
 Su cuenta diaria conserva su trabajo de cada día: escribir código, probarlo, vigilar los procesos.
 
-00:03:57.561 --> 00:03:58.843
+00:03:58.161 --> 00:03:59.443
 ¿Y la cuenta de administrador?
 
-00:03:59.943 --> 00:04:02.528
+00:04:00.543 --> 00:04:03.128
 Tampoco tiene poder, hasta que se enciende.
 
-00:04:04.228 --> 00:04:05.493
+00:04:04.828 --> 00:04:06.093
 Eso hace dos cerraduras.
 
-00:04:06.593 --> 00:04:10.130
+00:04:07.193 --> 00:04:10.730
 Un acceso diario robado no llega a la cuenta de administrador.
 
-00:04:11.830 --> 00:04:16.716
+00:04:12.430 --> 00:04:17.316
 Y quien roba la cuenta de administrador encuentra su poder apagado, y no puede encenderlo solo.
 
-00:04:20.816 --> 00:04:22.928
+00:04:19.016 --> 00:04:23.322
+Una segunda cuenta no siempre es práctica: puede costar una segunda licencia.
+
+00:04:24.822 --> 00:04:30.398
+En ese caso, el poder se queda en la cuenta diaria, pero apagado, hasta que una tarea lo pida.
+
+00:04:31.898 --> 00:04:36.227
+Es una cerradura, no dos: aun así, mucho más seguro que un poder siempre encendido.
+
+00:04:40.527 --> 00:04:42.639
 Para encenderlo, Jun dice para qué.
 
-00:04:24.228 --> 00:04:30.198
+00:04:43.939 --> 00:04:49.909
 Qué poder: solo el que la tarea necesita, para leer el almacenamiento, cambiar la configuración o restaurar una tabla.
 
-00:04:32.098 --> 00:04:34.429
+00:04:51.809 --> 00:04:54.140
 Un motivo, en palabras que otra persona pueda revisar.
 
-00:04:35.929 --> 00:04:39.111
+00:04:55.640 --> 00:04:58.822
 Y un tiempo: lo que la tarea necesita, cuatro horas como máximo.
 
-00:04:40.611 --> 00:04:46.977
+00:05:00.322 --> 00:05:06.688
 Otro especialista aprueba: Sam aprueba el de Jun, Jun el de Sam, y nadie aprueba el suyo.
 
-00:04:48.877 --> 00:04:51.876
+00:05:08.588 --> 00:05:11.587
 En cuanto se enciende, el equipo de plataforma recibe una alerta.
 
-00:04:53.976 --> 00:04:57.833
+00:05:13.687 --> 00:05:17.544
 Todo lo que hace la cuenta de administrador queda registrado, con su propio nombre.
 
-00:04:59.333 --> 00:05:05.245
+00:05:19.044 --> 00:05:24.956
 Cuando se acaba el tiempo, el poder se apaga solo; o Jun lo apaga en cuanto termina.
 
-00:05:06.945 --> 00:05:10.532
+00:05:26.656 --> 00:05:30.243
 Una cerradura de tiempo se abría a su hora, para quien tuviera los números.
 
-00:05:12.432 --> 00:05:16.693
+00:05:32.143 --> 00:05:36.404
 Este poder se abre solo para una tarea, y solo cuando otra persona dice que sí.
 
-00:05:18.393 --> 00:05:24.074
+00:05:38.104 --> 00:05:43.785
 Como los primeros banqueros con cerradura de tiempo, Sam y Jun lo ven lento al principio: también los deja fuera.
 
-00:05:25.774 --> 00:05:27.364
+00:05:45.485 --> 00:05:47.075
 Cuesta un minuto, y un sí.
 
-00:05:30.864 --> 00:05:33.345
+00:05:50.575 --> 00:05:53.056
 Una mañana, la carga de las dos se detuvo.
 
-00:05:34.645 --> 00:05:39.100
+00:05:54.356 --> 00:05:58.811
 Encontró una fila que no pudo leer, en el archivo de anoche de la oficina de registro.
 
-00:05:40.600 --> 00:05:43.893
+00:06:00.311 --> 00:06:03.604
 Para hallarla, Jun debe abrir ese archivo, en el almacenamiento.
 
-00:05:44.993 --> 00:05:47.807
+00:06:04.704 --> 00:06:07.518
 Su cuenta diaria no puede: la puerta trasera está cerrada.
 
-00:05:49.307 --> 00:05:53.774
+00:06:09.018 --> 00:06:13.485
 Así que enciende el poder de su cuenta de administrador para leer el almacenamiento, por una hora.
 
-00:05:55.274 --> 00:05:57.645
+00:06:14.985 --> 00:06:17.356
 Su motivo: abrir el archivo de anoche.
 
-00:05:58.745 --> 00:06:00.345
+00:06:18.456 --> 00:06:20.056
 Sam lo lee, y aprueba.
 
-00:06:02.245 --> 00:06:06.028
+00:06:21.956 --> 00:06:25.739
 La alerta llega al equipo de plataforma, y coincide con la tarea de la mañana.
 
-00:06:07.528 --> 00:06:13.385
+00:06:27.239 --> 00:06:33.096
 Jun abre el archivo, y va directo a la fila, la número 9,317.
 
-00:06:14.685 --> 00:06:18.396
+00:06:34.396 --> 00:06:38.107
 Una fecha de nacimiento que no existe: el treinta y uno de febrero.
 
-00:06:20.096 --> 00:06:25.489
+00:06:39.807 --> 00:06:45.200
 Le dice a la oficina de registro qué expediente corregir, por su número de estudiante, y apaga:
 
-00:06:25.689 --> 00:06:27.299
+00:06:45.400 --> 00:06:47.010
 catorce minutos de su hora.
 
-00:06:29.399 --> 00:06:34.654
+00:06:49.110 --> 00:06:54.365
 La bitácora lo guarda todo: quién encendió, por qué, quién dijo que sí, qué se leyó, y cuándo terminó.
 
-00:06:36.354 --> 00:06:38.000
+00:06:56.065 --> 00:06:57.711
 Esa noche, la carga corre sin errores.
 
-00:06:39.500 --> 00:06:44.200
+00:06:59.211 --> 00:07:03.911
 Y Jun se pregunta lo que vale preguntar en cada encendido: ¿se podría evitar el próximo?
 
-00:06:45.700 --> 00:06:52.589
+00:07:05.411 --> 00:07:12.300
 Ahora la carga aparta la fila que no puede leer, en una tabla que el catálogo protege, para que la vea la oficina de registro.
 
-00:06:54.889 --> 00:06:56.439
+00:07:14.600 --> 00:07:16.150
 ¿Quién recibe una cuenta de administrador?
 
-00:06:57.539 --> 00:07:02.105
+00:07:17.250 --> 00:07:21.816
 Solo los especialistas de datos que mantienen la plataforma en marcha: aquí, Sam y Jun.
 
-00:07:03.605 --> 00:07:07.672
+00:07:23.316 --> 00:07:27.383
 Nunca los usuarios de negocio, como Mei Tanaka, de la oficina de registro.
 
-00:07:08.972 --> 00:07:11.898
+00:07:28.683 --> 00:07:31.609
 Nunca los analistas, como Clara Jensen, de Planeación.
 
-00:07:13.198 --> 00:07:17.825
+00:07:32.909 --> 00:07:37.536
 Su trabajo pasa por el catálogo, que muestra a cada una lo que su rol permite.
 
-00:07:19.325 --> 00:07:23.813
+00:07:39.036 --> 00:07:43.524
 Si necesitan más, piden acceso al dueño de los datos, no poder.
 
-00:07:25.513 --> 00:07:26.786
+00:07:45.224 --> 00:07:46.497
 Y nunca un agente.
 
-00:07:27.886 --> 00:07:34.532
+00:07:47.597 --> 00:07:54.243
 Un agente puede proponer una tarea que necesita poder; una persona decide, y la hace con su propia cuenta de administrador.
 
-00:07:36.232 --> 00:07:39.971
+00:07:55.943 --> 00:07:59.682
 Agentes de IA en el trabajo con datos muestra cómo reciben sus permisos.
 
-00:07:41.271 --> 00:07:46.275
+00:08:00.982 --> 00:08:05.986
 Una excepción: dos cuentas de emergencia, guardadas bajo llave para el día en que nada más funcione.
 
-00:07:47.775 --> 00:07:49.523
+00:08:07.486 --> 00:08:09.234
 Quién hizo qué muestra cómo se vigilan.
 
-00:07:53.223 --> 00:07:58.702
+00:08:12.934 --> 00:08:18.413
 En Great Barrington, en 1875, los números correctos, del hombre correcto, no bastaron:
 
-00:07:58.902 --> 00:08:00.778
+00:08:18.613 --> 00:08:20.489
 la bóveda solo se abrió a su hora.
 
-00:08:02.678 --> 00:08:05.597
+00:08:22.389 --> 00:08:25.308
 En la plataforma, la cuenta correcta tampoco basta.
 
-00:08:07.097 --> 00:08:11.472
+00:08:26.808 --> 00:08:31.183
 Su poder está apagado, hasta que se enciende para una tarea, y otra persona dice que sí.
 
-00:08:13.172 --> 00:08:17.867
+00:08:32.883 --> 00:08:37.578
 Quien se apodera de la cuenta diaria de Jun obtiene su trabajo de cada día, y nada más.
 
-00:08:19.567 --> 00:08:22.906
+00:08:39.278 --> 00:08:42.617
 El gran poder es una cuenta aparte, que se enciende para una tarea.

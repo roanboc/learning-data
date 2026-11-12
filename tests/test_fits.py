@@ -224,7 +224,7 @@ def browser():
     except Exception:
         return None, None
     try:
-        return p, p.chromium.launch(args=["--allow-file-access-from-files"])
+        return p, fits.launch(p)
     except Exception:
         p.stop()
         return None, None
@@ -281,6 +281,58 @@ class PageTests(unittest.TestCase):
 
     def test_it_names_who_drew_the_words(self):
         self.assertEqual(fits.collect(self.b, self.page, 0.5, 0.25, who=[[1, "fits its card"]]), ["words"])
+
+
+class WaysTests(unittest.TestCase):
+    """Each film is drawn both ways (fits.WAYS), so the check finds the same on the machine a film is made on, where letters sit
+    where their font says, and on the one that checks it and renders the video, which moves each letter to a whole pixel."""
+
+    def parts(self, *pasts):
+        """what sort() finds each way, for one line that ends this far past its card's right edge in each"""
+        return [fits.sort(fits.measure_frames(moments(text("a line", 130, 140, 500 + past, 168, [box(*CARD, v=[40] * 4)])))) for past in pasts]
+
+    def test_a_fault_one_way_is_a_fault_and_the_line_says_which(self):
+        never, awhile, briefly = fits.both(self.parts(0.2, 3.0))
+        self.assertEqual([(x["s"], x["mx"], x["ways"]) for x in never], [("a line", 3.0, ["video"])])
+        self.assertTrue(fits.line(never[0]).endswith("in the video only"), fits.line(never[0]))
+        never, awhile, briefly = fits.both(self.parts(3.0, 0.2))
+        self.assertTrue(fits.line(never[0]).endswith("in the site's player only"), fits.line(never[0]))
+
+    def test_a_fault_both_ways_is_listed_once_by_the_way_it_is_worst_in(self):
+        never, awhile, briefly = fits.both(self.parts(4.0, 6.5))
+        self.assertEqual([(x["mx"], x["ways"]) for x in never], [(6.5, ["player", "video"])])
+        self.assertNotIn("only", fits.line(never[0]))
+        self.assertEqual(fits.both(self.parts(0.2, 0.4)), ([], [], []))
+
+    @unittest.skipUnless(sys.platform.startswith("linux"), "only Linux has both ways: elsewhere the browser places letters its own way, and CI holds the other")
+    def test_each_way_places_letters_its_own_way_whatever_the_machine(self):
+        import base64
+        p, b = browser()
+        if not b:
+            raise unittest.SkipTest("no browser here: the film checks install one")
+        b.close()
+        font = base64.b64encode((ROOT / "films" / "inner-life-of-data" / "source" / "fonts" / "manrope-latin.woff2").read_bytes()).decode()
+        with tempfile.TemporaryDirectory() as d:
+            page = pathlib.Path(d) / "page.html"
+            page.write_text('<!doctype html><meta charset="utf-8"><style>@font-face{font-family:M;src:url(data:font/woff2;base64,%s)}</style>' % font, encoding="utf-8")
+            wide = []
+            try:
+                for way in range(len(fits.WAYS)):
+                    b = fits.launch(p, way)
+                    pg = b.new_page()
+                    pg.goto(page.as_uri())
+                    wide.append(pg.evaluate("""async () => { await document.fonts.load('600 28px M'); const x = document.createElement('canvas').getContext('2d');
+                        return [28, 280].map(px => { x.font = '600 ' + px + 'px M'; return x.measureText('one row per credential awarded').width; }); }"""))
+                    b.close()
+            finally:
+                p.stop()
+        (small, large), (whole, _) = wide
+        # the player: each letter where its font says, so the same words at ten times the size are ten times as wide
+        self.assertAlmostEqual(small * 10, large, delta=0.05)
+        self.assertGreater(abs(small - round(small)), 0.01)
+        # the video: every letter on a whole pixel, and the line a little wider or narrower for it
+        self.assertAlmostEqual(whole, round(whole), delta=1e-6)
+        self.assertGreater(abs(whole - small), 0.5)
 
 
 class WhereTests(unittest.TestCase):

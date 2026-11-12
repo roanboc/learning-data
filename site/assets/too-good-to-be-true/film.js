@@ -1285,7 +1285,7 @@ function nightWorld(ctx,t,c,o){const y=470;
     T(ctx,"Applications for next year",1660,206,{w:700,size:22,align:"center"});T(ctx,"8,200  →  "+fmtN(o.num),1660,262,{w:800,size:40,align:"center",f:"mono"});
     gauge(ctx,1660,500,150,(o.num/8200-1)*100,{});
     withA(ctx,o.real,()=>T(ctx,"real growth: 40",1660,660,{w:700,size:24,align:"center",color:rgba(SOFT,1)}));
-    withA(ctx,red,()=>T(ctx,"error · the build stops before gold",1660,720,{w:700,size:20,align:"center",color:"rgba(255,170,160,1)"}));});
+    withA(ctx,red,()=>["error","the build stops before gold"].forEach((s,i)=>T(ctx,s,1660,708+i*36,{w:700,size:20,align:"center",color:"rgba(255,170,160,1)"})));});   // two lines: on one, the words were as wide as the panel
   withA(ctx,o.pair,()=>{glass(ctx,380,730,660,180,18,[170,205,255],{glow:8,ea:0.45,fill:"rgba(8,14,28,0.9)"});T(ctx,"3,100 applications, copied again with new IDs",404,768,{w:700,size:19});
     appTile(ctx,404,800,30,"A-40211 · applicant 88213 · BSc Data Science · 2027");appTile(ctx,404,852,30,"A-47988 · applicant 88213 · BSc Data Science · 2027",{dup:true});});}
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);

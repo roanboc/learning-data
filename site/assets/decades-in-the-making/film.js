@@ -2748,10 +2748,10 @@ scene("web",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({huge:wAt(sc,"t
       [["Grammar",P.grammar],["Facts",P.facts],["Ways of writing",P.ways]].forEach(([s2,t0],i)=>{const inA=ag_in(t,c.largest-0.2+i*0.15,0.9),px=lerp(1080,mx,ag_sine(inA)),py=lerp(440+i*100,my,ag_sine(inA));
         x.save();ag_about(x,px,py,1-1.2*Math.max(0,inA-0.5));ag_pill(x,px,py,s2,{size:32,a:ba*ag_in(t,t0-0.1,0.4)*(1-sstep(0.5,0.7,inA)),col:AG.violet});x.restore();});}
     // a hundred and seventy-five billion numbers to tune
-    const na=ag_io(t,P.hundred-0.2,c.help-0.2,0.6);if(na>0){x.save();x.globalAlpha*=na;ag_box(x,mx-350,768,700,92,20,{});
-      for(let k=0;k<4;k++){const dx=mx-308+k*44,dy=814;x.fillStyle="#fff";x.beginPath();x.arc(dx,dy,17,0,TAU);x.fill();x.strokeStyle=rgba(AG.label,0.4);x.lineWidth=2;x.stroke();
+    const na=ag_io(t,P.hundred-0.2,c.help-0.2,0.6);if(na>0){const nt="175,000,000,000 numbers to tune",bw=248+ag_tw(x,nt,{w:700,size:32}),bx=mx-bw/2;x.save();x.globalAlpha*=na;ag_box(x,bx,768,bw,92,20,{});   // the card is made from its four dials and its words: 30, the dials (166), 22, the words, 30
+      for(let k=0;k<4;k++){const dx=bx+47+k*44,dy=814;x.fillStyle="#fff";x.beginPath();x.arc(dx,dy,17,0,TAU);x.fill();x.strokeStyle=rgba(AG.label,0.4);x.lineWidth=2;x.stroke();
         const an=Math.sin(t*1.7+k*1.3)*1.4;x.strokeStyle=rgba(AG.blue,0.95);x.lineWidth=4;x.beginPath();x.moveTo(dx,dy);x.lineTo(dx+Math.sin(an)*12,dy-Math.cos(an)*12);x.stroke();}
-      ag_T(x,"175,000,000,000 numbers to tune",mx+96,826,{w:700,size:32,align:"center"});x.restore();}
+      ag_T(x,nt,bx+218,826,{w:700,size:32});x.restore();}
     // it wrote fluently, but only carried on the text
     const ha=ag_in(t,c.help-0.3,0.6);if(ha>0){x.save();x.globalAlpha*=ha;ag_box(x,140,400,780,300,22,{});ag_T(x,"How do I reset my password?",184,470,{w:800,size:34});
       const ty=clamp((t-P.fluently)/(P.carried-P.fluently+0.4),0,1),all=DM_MORE.join("\n"),n=Math.floor(all.length*ty);let shown=all.slice(0,n).split("\n");

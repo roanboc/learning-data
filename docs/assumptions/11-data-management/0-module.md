@@ -78,3 +78,11 @@ The expert review of the module's assumptions put three questions to Rodrigo, an
 These answers are also the first of his own practice that row 3 asked for: light methods, because they allow rapid iteration, with heavy ones kept for critical systems and for what the law requires, and added even there only when required; and work ordered by value and effort, where value is an opportunity or a risk prevented, with time as part of it. Both are now in the module's practical advice (`films/a-plan-in-ninety-days/proposal.md`). In row 2, "Kanban and the cost of delay" is now Kanban, with his value and effort for the order.
 
 Three assumptions in *One list, not twenty* go a step past what he said, and are the ones to check first: the two kinds of value are added on each card (row 24), the order is value divided by effort (row 25), and time counts inside the two kinds of value, with no row of its own on the card (row 33). One question on *A case worth funding* is still open: whether "critical" also covers mistakes that can't be undone (row 34).
+
+## 12 November 2026: plan, do, study, act, across the site
+
+After his answer on the data quality film *Small, every week* ("let's go with PDSA"), Rodrigo was asked on 12 November 2026 whether the other modules follow, and he answered that day. The thread "Apply review answers to Data quality" made the change.
+
+| Question put to him | His answer | What changed | Recorded in |
+|---|---|---|---|
+| PDSA across the site. Should other modules that say "plan, do, check, act" switch to "study" too, for one consistent term? | "yes, knowing the difference was explained in the video that introduced the topic" | In this module only *Better every week* says the cycle's name (PR #NNN): its one line was voiced again ("…out loud: plan, do, study, act."), its ring's third word is "Study", and its Spanish caption, its page and its script follow. The film doesn't explain study against check: the data quality film *Small, every week* does. The module's table of references and its insights (`films/a-plan-in-ninety-days/proposal.md`) say plan, do, study, act too, and so does the note in *Strategy is a habit*'s script. In row 2 above, the rhythm's "plan, do, check, act" is now plan, do, study, act | [Better every week](4-small-steps-measured/3-better-every-week.md), rows 20 to 24 |

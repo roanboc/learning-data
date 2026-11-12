@@ -16,10 +16,11 @@ scene("worked",(ctx,S,t,sc)=>{const c=sc.cues,T=mp_once(sc,"T",()=>({dec:wAt(sc,
       md_pill(cx,1280,640,"It worked",{col:MD.pass,icon:"tick",k:tt-c.job-0.2,a:ag_in(tt,c.job+0.2,0.3)});}},
     // a week later: a meeting table from above, and two sheets with two counts of the same class
     {later:true,at:c.why-0.1,place:"map",keys:MP_CAM,push:0,draw:(cx,tt)=>{
-      md_label(cx,960,170,"One week later",{align:"center",col:MD.flow});mp_table(cx,1);md_label(cx,960,312,"Data Science 101 · 180 seats",{align:"center"});
-      if(tt>T.two)mp_sheet(cx,lerp(-260,700,ag_eo((tt-T.two)/0.9)),545,360,390,-0.05,{head:"Student office",num:"176",foot:"enrolled"},1,{col:MD.sys.sis});
-      if(tt>T.nums)mp_sheet(cx,lerp(2180,1220,ag_eo((tt-T.nums)/0.9)),545,360,390,0.04,{head:"Finance",num:"149",foot:"enrolled"},1,{col:MD.sys.fin});
-      md_tag(cx,960,790,"Which one?",{align:"center",col:MD.wait,a:ag_in(tt,T.same+0.4,0.35)});}}],0.6);
+      const out=1-ag_in(tt,c.breath,0.8);  // the table leaves as the title card comes
+      md_label(cx,960,170,"One week later",{align:"center",col:MD.flow,a:out});mp_table(cx,out);md_label(cx,960,312,"Data Science 101 · 180 seats",{align:"center",a:out});
+      if(tt>T.two)mp_sheet(cx,lerp(-260,700,ag_eo((tt-T.two)/0.9)),545,360,390,-0.05,{head:"Student office",num:"176",foot:"enrolled"},out,{col:MD.sys.sis});
+      if(tt>T.nums)mp_sheet(cx,lerp(2180,1220,ag_eo((tt-T.nums)/0.9)),545,360,390,0.04,{head:"Finance",num:"149",foot:"enrolled"},out,{col:MD.sys.fin});
+      md_tag(cx,960,790,"Which one?",{align:"center",col:MD.wait,a:out*ag_in(tt,T.same+0.4,0.35)});}}],0.6);
   setScreen(ctx,S);md_title(ctx,S,t,c.breath,"More than a platform",null,"AFTER THE INNER LIFE OF DATA");});
 
 /* ---------------------------------------------------------------- 2 · One word */
@@ -125,7 +126,8 @@ scene("start",(ctx,S,t,sc)=>{const c=sc.cues;
     {at:0,place:"map",keys:MP_CAM,push:0,draw:(cx,tt)=>{const lit={start:ag_io(tt,c.matured,c.hard,0.4)},go=ag_in(tt,c.there,0.3);
       // the platform's station is done; everything else lights, and the next stop is the first of the foundations
       MP_ORDER.slice(1).forEach((id,i)=>{lit[id]=0.7*ag_io(tt,c.hard+0.2+i*0.1,c.there,0.4);});lit.ea=Math.max(lit.ea,go);
-      mp_route(cx,{done:{start:1},lit});md_tag(cx,300,540,"Start here",{align:"center",col:MD.flow,a:ag_in(tt,c.there+0.1,0.3)});}}],0.6);
+      const out=1-ag_in(tt,c.breath,0.8);  // the route leaves as the end card comes
+      mp_route(cx,{done:{start:1},lit,a:out});md_tag(cx,300,540,"Start here",{align:"center",col:MD.flow,a:out*ag_in(tt,c.there+0.1,0.3)});}}],0.6);
   setScreen(ctx,S);md_end(ctx,S,t,c.breath,"More than a platform","The hard part is everything else.","","Start here");});
 
 ag_cutInto(["word","route","wheel","here","start"]);

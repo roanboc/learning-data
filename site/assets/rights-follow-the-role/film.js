@@ -441,7 +441,7 @@ const NARR={
  {"id":"three","gap":0.8,"text":"The planning contributor does three of them: draft the change, build it in development, and open a pull request."},
  {"id":"each","gap":0.8,"text":"Each step says what it reads, what it writes, and which tools it calls."},
  {"id":"draft","gap":0.8,"text":"To draft the change, it reads the ticket and what the change touches, and writes on its own branch."},
- {"id":"build","gap":0.8,"text":"To build it, it reads production, names masked, and writes its tests' results in its own development schema."},
+ {"id":"build","gap":0.8,"text":"To build it, it reads production, with personal and sensitive data masked, and writes its tests' results in its own development schema."},
  {"id":"open","gap":0.8,"text":"To open the pull request, it reads its change and its results, and writes one pull request."},
  {"id":"exactly","gap":0.8,"text":"Its rights are exactly those, and every right names the step that needs it."},
  {"id":"like","gap":0.8,"text":"Like the drawer: filled from the order, not from the shelf."},
@@ -481,12 +481,12 @@ const NARR={
 "close":{"name":"A drawer of its own","lead":0.9,"tail":1.2,"vo":[
  {"id":"drawer","gap":0.8,"text":"On the ward, each patient's drawer held one day's doses, filled from one order."},
  {"id":"here","gap":0.8,"text":"Here, the planning agent holds what its three steps need, and nothing more."},
- {"id":"reason","gap":0.8,"text":"Every right it holds has a reason anyone can read, and none of them reaches production."},
+ {"id":"reason","gap":0.8,"text":"Every right it holds has a reason anyone can read, and none of them lets it change production."},
  {"id":"jun","gap":0.8,"text":"And Jun's rights stay his own."},
  {"id":"lesson","gap":0.8,"text":"An agent's rights come from its work, not from a person's."}]}
 };
 
-const VODUR={"ward/ward": 3.345, "ward/stock": 5.346, "ward/pour": 3.98, "ward/order": 6.292, "ward/wrong": 7.712, "ward/reach": 4.429, "ward/change": 5.026, "ward/arkansas": 7.585, "ward/drawer": 7.848, "ward/each": 3.726, "ward/fell": 5.609, "ward/day": 6.801, "ward/spread": 3.943, "ward/uni": 6.481, "ward/shelf": 7.635, "ward/fill": 6.277, "ward/slip": 2.511, "borrowed/ask": 4.892, "borrowed/quote": 2.214, "borrowed/helper": 6.094, "borrowed/many": 2.491, "borrowed/today": 5.03, "borrowed/person": 4.421, "borrowed/old": 6.12, "borrowed/twice": 1.666, "borrowed/wide": 5.365, "borrowed/history": 5.636, "borrowed/other": 3.345, "steps/monday": 5.956, "steps/service": 5.461, "steps/three": 6.518, "steps/each": 3.87, "steps/draft": 5.59, "steps/build": 6.288, "steps/open": 5.527, "steps/exactly": 4.233, "steps/like": 3.0, "steps/short": 4.538, "steps/grants": 3.67, "reads/part": 3.321, "reads/first": 7.517, "reads/owner": 2.81, "reads/second": 5.346, "reads/wrong": 3.724, "reads/wins": 3.778, "reads/says": 3.897, "reads/original": 5.369, "left/left": 2.652, "left/four": 2.151, "left/ticket": 2.773, "left/review": 3.137, "left/approve": 3.159, "left/release": 2.381, "left/word": 6.698, "left/never": 6.118, "left/falls": 4.474, "left/ward": 3.098, "left/check": 5.473, "change/follow": 3.565, "change/say": 5.024, "change/step": 5.081, "change/agree": 4.095, "change/view": 3.324, "change/tools": 3.034, "change/asks": 6.911, "change/goes": 2.215, "change/drift": 4.378, "close/drawer": 4.691, "close/here": 4.094, "close/reason": 4.902, "close/jun": 1.578, "close/lesson": 3.163};
+const VODUR={"ward/ward": 3.345, "ward/stock": 5.346, "ward/pour": 3.98, "ward/order": 6.292, "ward/wrong": 7.712, "ward/reach": 4.429, "ward/change": 5.026, "ward/arkansas": 7.585, "ward/drawer": 7.848, "ward/each": 3.726, "ward/fell": 5.609, "ward/day": 6.801, "ward/spread": 3.943, "ward/uni": 6.481, "ward/shelf": 7.635, "ward/fill": 6.277, "ward/slip": 2.511, "borrowed/ask": 4.892, "borrowed/quote": 2.214, "borrowed/helper": 6.094, "borrowed/many": 2.491, "borrowed/today": 5.03, "borrowed/person": 4.421, "borrowed/old": 6.12, "borrowed/twice": 1.666, "borrowed/wide": 5.365, "borrowed/history": 5.636, "borrowed/other": 3.345, "steps/monday": 5.956, "steps/service": 5.461, "steps/three": 6.518, "steps/each": 3.87, "steps/draft": 5.59, "steps/build": 7.913, "steps/open": 5.527, "steps/exactly": 4.233, "steps/like": 3.0, "steps/short": 4.538, "steps/grants": 3.67, "reads/part": 3.321, "reads/first": 7.517, "reads/owner": 2.81, "reads/second": 5.346, "reads/wrong": 3.724, "reads/wins": 3.778, "reads/says": 3.897, "reads/original": 5.369, "left/left": 2.652, "left/four": 2.151, "left/ticket": 2.773, "left/review": 3.137, "left/approve": 3.159, "left/release": 2.381, "left/word": 6.698, "left/never": 6.118, "left/falls": 4.474, "left/ward": 3.098, "left/check": 5.473, "change/follow": 3.565, "change/say": 5.024, "change/step": 5.081, "change/agree": 4.095, "change/view": 3.324, "change/tools": 3.034, "change/asks": 6.911, "change/goes": 2.215, "change/drift": 4.378, "close/drawer": 4.691, "close/here": 4.094, "close/reason": 5.255, "close/jun": 1.578, "close/lesson": 3.163};
 
 /* Pauses: the film stops where an idea needs a moment to land, or a picture needs time to be read.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2023,13 +2023,14 @@ function rf_flow(ctx,x,y,items,o){o=o||{};let px=x;const out=[];items.forEach((i
     out.push(rf_pillL(ctx,px,y,q.t,{col:q.col||AG.blue,icon:q.icon,a,size:o.size}));px+=w;});return out;}
 
 /* ---------------------------------------------------------------- a card of rows
-   head {kick, title, kickCol}; rows [{t, lab, chip, chipA, a, col, icon, dash, mute, size}]: each row's words (wrapped to the card),
+   head {kick, title, kickCol}; rows [{t, lines, lab, chip, chipA, a, col, icon, dash, mute, size}]: each row's words (wrapped to the card,
+   or given as lines where the wrap would leave one word alone),
    an optional label in capitals before them (lab, such as READS), and an optional chip at the right (the step that needs it). The
    card's size is worked out from all its rows, so it never grows as they come in. o.labW: the labels' column; o.edge, o.glow, o.a,
    o.k (springs from its middle), o.rowH (46); o.dash draws the card's edge dashed (a step proposed, not yet on the map) */
 function rf_rows(ctx,x,y,w,head,rows,o){o=o||{};const a=o.a==null?1:o.a,pad=28,labW=o.labW||0,rh=o.rowH||46,size=o.size||30;
   const chipW=r=>r.chip?ag_tw(ctx,r.chip,{w:700,size:28})+44:0;
-  const lines=rows.map(r=>ag_wrap(ctx,r.t,w-pad*2-labW-(r.chip?chipW(r)+20:0)-(r.icon?40:0),{w:r.mute?600:700,size:r.size||size}));
+  const lines=rows.map(r=>r.lines||ag_wrap(ctx,r.t,w-pad*2-labW-(r.chip?chipW(r)+20:0)-(r.icon?40:0),{w:r.mute?600:700,size:r.size||size}));
   const hh=(head.kick?38:0)+(head.title?44:0),top=y+pad+hh+(hh?12:-8);let yy=top;const ys=lines.map(l=>{const at=yy;yy+=Math.max(1,l.length)*(rh-8)+8;return at;});
   const h=yy-y+pad-8,bb={x,y,w,h};if(a<=0)return Object.assign(bb,{rows:ys.map((ry,i)=>({y:ry,h:Math.max(1,lines[i].length)*(rh-8)}))});
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
@@ -2315,9 +2316,10 @@ scene("borrowed",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",(
 function rf_stepCard(x,name,reads,writes,calls,u,o){return rf_rows(x,720,120,1100,{kick:"Step · "+name},[
   {lab:"READS",t:reads,ta:u[0]},{lab:"WRITES",t:writes,ta:u[1]},{lab:"CALLS",t:calls,ta:u[2],mute:true}],{labW:170,a:o.a,k:o.k});}
 // the planning contributor's rights, each with the step that needs it; o.chips [6], o.glow
+// (what it reads in production takes two lines: personal and sensitive data come masked)
 const RF_RIGHTS=[["read the ticket","draft the change"],["read what the change touches","draft the change"],["write its own branch","draft the change"],
-  ["read production, names masked","build it in development"],["write its own development schema","build it in development"],["write one pull request","open a pull request"]];
-function rf_rightsCard(x,o){const b=rf_rows(x,720,120,1100,{kick:"Its rights · made from its steps"},RF_RIGHTS.map(([t,ch],i)=>({t,chip:ch,chipA:o.chips?o.chips[i]:1,
+  ["read production, personal and sensitive data masked","build it in development",["read production,","personal and sensitive data masked"]],["write its own development schema","build it in development"],["write one pull request","open a pull request"]];
+function rf_rightsCard(x,o){const b=rf_rows(x,720,120,1100,{kick:"Its rights · made from its steps"},RF_RIGHTS.map(([t,ch,ls],i)=>({t,lines:ls,chip:ch,chipA:o.chips?o.chips[i]:1,
     a:o.rows?o.rows[i]:1})),{a:o.a,k:o.k,glow:o.glow||0,glowCol:o.glowCol,edge:o.edge,edgeA:o.edgeA});
   return b;}
 scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>({pa:wAt(sc,"monday","the planning agent"),map:wAt(sc,"monday","on the map"),
@@ -2345,7 +2347,7 @@ scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>
       const cw=k=>[ag_in(tt,[P.d1,P.b1,P.o1][k],0.4),ag_in(tt,[P.d2,P.b2,P.o2][k],0.4),ag_in(tt,[P.d2+1.0,P.b2+1.2,P.o2+0.8][k],0.4)];
       rf_stepCard(x,"draft the change","the ticket · what the change touches","the change, on its own branch","tickets · docs · catalog · repository · memory · language model",
         cw(0),{a:ag_io(tt,P.reads-0.3,c.build-0.3,0.4),k:ag_spr(tt,P.reads-0.3)});
-      rf_stepCard(x,"build it in development","production, names masked","its tests' results, in its own development schema","build · query · language model",
+      rf_stepCard(x,"build it in development","production, personal and sensitive data masked","its tests' results, in its own development schema","build · query · language model",
         cw(1),{a:ag_io(tt,c.build+0.2,c.open-0.3,0.4)});
       rf_stepCard(x,"open a pull request","its change and its results","one pull request","repository · language model",cw(2),{a:ag_io(tt,c.open+0.2,c.exactly-0.3,0.4)});
       // its rights are exactly those, each naming the step that needs it; like the drawer; the map makes the list from the steps
@@ -2476,7 +2478,7 @@ scene("change",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=
 
 /* ---------------------------------------------------------------- 7 · A drawer of its own */
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>({one:wAt(sc,"drawer","one day's doses"),order:wAt(sc,"drawer","one order"),
-    three:wAt(sc,"here","its three steps"),more:wAt(sc,"here","nothing more"),reason:wAt(sc,"reason","a reason"),prod:wAt(sc,"reason","reaches production"),
+    three:wAt(sc,"here","its three steps"),more:wAt(sc,"here","nothing more"),reason:wAt(sc,"reason","a reason"),prod:wAt(sc,"reason","change production"),
     jun:wAt(sc,"jun","Jun's rights"),own:wAt(sc,"jun","his own"),lesson:wAt(sc,"lesson","An agent's rights")}));
   ag_shots(ctx,S,t,sc.dur,[
     // on the ward, each patient's drawer held one day's doses, filled from one order
@@ -2485,14 +2487,15 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>
       rf_order(x,1374,232,190,{h:118,r:-0.05,title:"ORDER",seed:3,a:ag_in(tt,P.order-0.3,0.4)});
       rf_scr(x,S,()=>{rf_pillL(x,560,170,"one day's doses",{col:AG.blue,a:ag_in(tt,P.one,0.4)});rf_pillL(x,560,250,"filled from one order",{col:AG.blue,a:ag_in(tt,P.order,0.4)});});}},
     // here, the planning agent holds what its three steps need, and nothing more; every right has a reason anyone can read, and none
-    // of them reaches production; and Jun's rights stay his own
+    // of them lets it change production (one of them reads it); and Jun's rights stay his own. The card is a line taller than
+    // its six rights, so the two pills and Jun stand 40 px lower, clear of it
     {at:c.here-0.5,place:"rfLab",keys:[[c.here-0.5,960,540,1]],push:0,draw:(x,tt)=>{const out=1-ag_in(tt,c.breath+0.4,0.8);withA(x,out,()=>{
       const jx=rf_slide(tt,P.jun-0.5,2150,1690,1.3),ja=ag_in(tt,P.jun-0.5,0.5);
-      rf_agent(x,FT,{});if(ja>0)rf_who(x,"jun",FT,jx,742,0.72,{a:ja,p:{flip:true,gaze:[4,-1]}});ag_roomLight(x,1);
+      rf_agent(x,FT,{});if(ja>0)rf_who(x,"jun",FT,jx,782,0.72,{a:ja,p:{flip:true,gaze:[4,-1]}});ag_roomLight(x,1);
       rf_rightsCard(x,{chips:[0,1,2,3,4,5].map(i=>1),glow:Math.max(ag_io(tt,P.reason,P.reason+1.8,0.4),ag_in(tt,P.lesson,0.6)),glowCol:AG.green,
         edge:tt>P.lesson?AG.green:AG.blue,edgeA:0.6});
-      rf_pillL(x,720,566,"none reaches production",{icon:"lock",col:AG.amber,a:ag_in(tt,P.prod,0.4)});
-      rf_pillL(x,720,662,"Jun's rights stay his own",{col:AG.blue,a:ag_in(tt,P.own-0.2,0.4)});
+      rf_pillL(x,720,606,"none changes production",{icon:"lock",col:AG.amber,a:ag_in(tt,P.prod,0.4)});
+      rf_pillL(x,720,702,"Jun's rights stay his own",{col:AG.blue,a:ag_in(tt,P.own-0.2,0.4)});
       RF_KICK(x);});}}
   ],0.6);
   rf_tags(ctx,S,t,[[0.6,c.here-0.7,RF_TAG_US]]);

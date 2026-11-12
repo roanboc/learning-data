@@ -107,133 +107,137 @@ Allí, su rol, colaborador de Planificación, hace los pasos de redacción de su
 Sam no teclea esos permisos en cada herramienta. Un script lee el mapa y escribe desde él la configuración de cada una, en un solo sentido.
 
 28
-00:03:43,142 --> 00:03:51,556
-En Unity Catalog, el grupo del rol tiene los permisos: leer producción, con los nombres enmascarados, y construir solo en sus esquemas.
+00:03:43,142 --> 00:03:46,982
+En Unity Catalog, el grupo del rol tiene los permisos.
 
 29
-00:03:53,856 --> 00:03:59,853
-El agente de Planificación es su único miembro, así que un segundo agente en el rol tendría los mismos permisos, y nada más.
+00:03:48,582 --> 00:03:54,585
+Puede leer producción, con datos personales y sensibles enmascarados, y construir solo en sus propios esquemas.
 
 30
-00:04:01,953 --> 00:04:09,024
-En Unity Gateway, parte del catálogo, el grupo puede llamar al único modelo de sus pasos y a los servidores de herramientas que nombran.
+00:03:56,885 --> 00:04:02,882
+El agente de Planificación es su único miembro, así que un segundo agente en el rol tendría los mismos permisos, y nada más.
 
 31
-00:04:11,324 --> 00:04:17,906
-En GitHub, su App recibe un repositorio y dos permisos. En dbt, un target propio.
+00:04:04,982 --> 00:04:12,053
+En Unity Gateway, parte del catálogo, el grupo puede llamar al único modelo de sus pasos y a los servidores de herramientas que nombran.
 
 32
-00:04:20,006 --> 00:04:27,162
-Lo que lee primero está gobernado: las definiciones del glosario y las reglas de datos, de solo lectura, a través de Unity Catalog.
+00:04:14,353 --> 00:04:20,935
+En GitHub, su App recibe un repositorio y dos permisos. En dbt, un target propio.
 
 33
-00:04:29,062 --> 00:04:35,446
-Su memoria, que la plataforma guarda en Lakebase, va en segundo lugar: donde las dos no coinciden, gana la definición.
+00:04:23,035 --> 00:04:30,191
+Lo que lee primero está gobernado: las definiciones del glosario y las reglas de datos, de solo lectura, a través de Unity Catalog.
 
 34
-00:04:37,746 --> 00:04:42,728
-Cada noche, una verificación lee los permisos que tiene cada herramienta y los compara con el mapa.
+00:04:32,091 --> 00:04:38,475
+Su memoria, que la plataforma guarda en Lakebase, va en segundo lugar: donde las dos no coinciden, gana la definición.
 
 35
-00:04:44,628 --> 00:04:51,133
-El martes, para ahorrar un día, a su grupo se le dio a mano el permiso de cambiar las tablas de producción de Planificación.
+00:04:40,775 --> 00:04:45,757
+Cada noche, una verificación lee los permisos que tiene cada herramienta y los compara con el mapa.
 
 36
-00:04:53,033 --> 00:04:58,119
-Esa noche, la verificación falló: un permiso que no está en el mapa. Por la mañana, Sam lo retiró.
+00:04:47,657 --> 00:04:54,162
+El martes, para ahorrar un día, a su grupo se le dio a mano el permiso de cambiar las tablas de producción de Planificación.
 
 37
-00:05:00,419 --> 00:05:06,616
-Si su trabajo necesita un permiso nuevo, primero cambia el mapa, con revisión, y las herramientas lo siguen, nunca al revés.
+00:04:56,062 --> 00:05:01,148
+Esa noche, la verificación falló: un permiso que no está en el mapa. Por la mañana, Sam lo retiró.
 
 38
-00:05:10,916 --> 00:05:16,825
-El mapa también dice dónde puede trabajar: un lugar propio, donde sus borradores no pueden tocar los de nadie más.
+00:05:03,448 --> 00:05:09,645
+Si su trabajo necesita un permiso nuevo, primero cambia el mapa, con revisión, y las herramientas lo siguen, nunca al revés.
 
 39
-00:05:18,525 --> 00:05:26,486
-En GitHub, su herramienta escribe solo en ramas llamadas agent/planning, y abre un pull request. No puede hacer push a main.
+00:05:13,945 --> 00:05:19,854
+El mapa también dice dónde puede trabajar: un lugar propio, donde sus borradores no pueden tocar los de nadie más.
 
 40
-00:05:28,586 --> 00:05:35,371
-No fusiona, y su aprobación nunca cuenta donde las reglas piden una persona. La próxima película muestra esas reglas.
+00:05:21,554 --> 00:05:29,515
+En GitHub, su herramienta escribe solo en ramas llamadas agent/planning, y abre un pull request. No puede hacer push a main.
 
 41
-00:05:37,471 --> 00:05:45,091
-En Databricks, trabaja en el espacio de desarrollo, donde producción solo se puede leer: ni un permiso equivocado puede escribir ahí.
+00:05:31,615 --> 00:05:38,400
+No fusiona, y su aprobación nunca cuenta donde las reglas piden una persona. La próxima película muestra esas reglas.
 
 42
-00:05:47,191 --> 00:05:55,968
-En desarrollo, puede crear esquemas propios. dbt construye uno por capa, así que las tablas de Planificación quedan en planning_agent_marts.
+00:05:40,500 --> 00:05:48,120
+En Databricks, trabaja en el espacio de desarrollo, donde producción solo se puede leer: ni un permiso equivocado puede escribir ahí.
 
 43
-00:05:58,068 --> 00:06:05,357
-Es dueño de lo que crea, y de nada más: no sobrescribe el trabajo de nadie, y ningún borrador suyo pasa por el de otro.
+00:05:50,220 --> 00:05:58,997
+En desarrollo, puede crear esquemas propios. dbt construye uno por capa, así que las tablas de Planificación quedan en planning_agent_marts.
 
 44
-00:06:09,257 --> 00:06:11,448
-Ahora cada bitácora dice de quién es el trabajo.
+00:06:01,097 --> 00:06:08,386
+Es dueño de lo que crea, y de nada más: no sobrescribe el trabajo de nadie, y ningún borrador suyo pasa por el de otro.
 
 45
-00:06:12,748 --> 00:06:19,813
-En GitHub, sus commits y pull requests dicen planning-agent[bot], y el trabajo de cada otro agente lleva su propio nombre.
+00:06:12,286 --> 00:06:14,477
+Ahora cada bitácora dice de quién es el trabajo.
 
 46
-00:06:21,713 --> 00:06:28,282
-Cualquiera podría escribir ese nombre en un commit. Los suyos se hacen a través de su App, así que GitHub los marca como verificados.
+00:06:15,777 --> 00:06:22,842
+En GitHub, sus commits y pull requests dicen planning-agent[bot], y el trabajo de cada otro agente lleva su propio nombre.
 
 47
-00:06:30,182 --> 00:06:35,575
-En Databricks, cada consulta que ejecuta está en el historial de consultas, bajo su entidad de servicio.
+00:06:24,742 --> 00:06:31,311
+Cualquiera podría escribir ese nombre en un commit. Los suyos se hacen a través de su App, así que GitHub los marca como verificados.
 
 48
-00:06:37,275 --> 00:06:43,164
-Y la tabla de la bitácora de auditoría lista todo lo demás que hace: cada tabla que lee, cada esquema que crea.
+00:06:33,211 --> 00:06:38,604
+En Databricks, cada consulta que ejecuta está en el historial de consultas, bajo su entidad de servicio.
 
 49
-00:06:45,064 --> 00:06:51,881
-Así, la pregunta de los auditores es una búsqueda: cada pull request de planning-agent[bot], y lo que cambió cada uno.
+00:06:40,304 --> 00:06:46,193
+Y la tabla de la bitácora de auditoría lista todo lo demás que hace: cada tabla que lee, cada esquema que crea.
 
 50
-00:06:53,981 --> 00:06:56,481
-Y el nombre de Jun está solo en lo que hizo Jun.
+00:06:48,093 --> 00:06:54,910
+Así, la pregunta de los auditores es una búsqueda: cada pull request de planning-agent[bot], y lo que cambió cada uno.
 
 51
-00:07:00,181 --> 00:07:05,479
-Por último, el interruptor. Un ayudante con el acceso de Jun solo se podía detener deteniendo a Jun.
+00:06:57,010 --> 00:06:59,510
+Y el nombre de Jun está solo en lo que hizo Jun.
 
 52
-00:07:06,979 --> 00:07:11,596
-El agente de Planificación se puede detener en cada herramienta por separado, y nadie se detiene con él.
+00:07:03,210 --> 00:07:08,508
+Por último, el interruptor. Un ayudante con el acceso de Jun solo se podía detener deteniendo a Jun.
 
 53
-00:07:13,096 --> 00:07:19,951
-En Databricks, Sam desactiva su entidad de servicio: no puede entrar, y conserva sus permisos para cuando vuelva.
+00:07:10,008 --> 00:07:14,625
+El agente de Planificación se puede detener en cada herramienta por separado, y nadie se detiene con él.
 
 54
-00:07:21,851 --> 00:07:28,938
-En GitHub, Sam suspende la instalación de su App: la App ya no puede llegar a los repositorios de la universidad.
+00:07:16,125 --> 00:07:22,980
+En Databricks, Sam desactiva su entidad de servicio: no puede entrar, y conserva sus permisos para cuando vuelva.
 
 55
-00:07:30,838 --> 00:07:35,924
-El miércoles, Sam probó ambas, diez minutos. La siguiente llamada del agente de Planificación falló.
+00:07:24,880 --> 00:07:31,967
+En GitHub, Sam suspende la instalación de su App: la App ya no puede llegar a los repositorios de la universidad.
 
 56
-00:07:37,624 --> 00:07:45,177
-Jun, Lucía y el agente de carga docente de Anil siguieron trabajando. Reactivado, el agente tenía todos sus permisos de antes.
+00:07:33,867 --> 00:07:38,953
+El miércoles, Sam probó ambas, diez minutos. La siguiente llamada del agente de Planificación falló.
 
 57
-00:07:47,077 --> 00:07:55,544
-Lo que nunca cambia: Clara es su dueña y responde por su trabajo. Nunca aprueba un cambio, y menos uno propio, ni se concede un permiso.
+00:07:40,653 --> 00:07:48,206
+Jun, Lucía y el agente de carga docente de Anil siguieron trabajando. Reactivado, el agente tenía todos sus permisos de antes.
 
 58
-00:07:57,444 --> 00:08:02,548
-¿De quién fue ese cambio? Ahora cada bitácora lo dice, y la pregunta de los auditores es una búsqueda.
+00:07:50,106 --> 00:07:58,573
+Lo que nunca cambia: Clara es su dueña y responde por su trabajo. Nunca aprueba un cambio, y menos uno propio, ni se concede un permiso.
 
 59
-00:08:04,248 --> 00:08:07,519
-El mapa dice qué puede hacer; cada herramienta se lo hace cumplir.
+00:08:00,473 --> 00:08:05,577
+¿De quién fue ese cambio? Ahora cada bitácora lo dice, y la pregunta de los auditores es una búsqueda.
 
 60
-00:08:09,819 --> 00:08:11,845
+00:08:07,277 --> 00:08:10,548
+El mapa dice qué puede hacer; cada herramienta se lo hace cumplir.
+
+61
+00:08:12,848 --> 00:08:14,874
 Después: cada cambio pasa por revisión.

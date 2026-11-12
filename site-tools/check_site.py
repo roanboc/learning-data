@@ -42,7 +42,7 @@ What it checks, page by page (every .html under site/):
   the options (at most half of its scenarios' in one place, and of its labs' rows, where a row marks one option right; a lab's own rows
   never all in one place); a sorting list's cards aren't written box by box, nor two boxes turn and turn about; and the Spanish pack keeps the English places. A page shows
   them in the order written. Only the labs a page shows are read (a series' pack can point to one lab of each film's own pack), and not a
-  series whose engine mixes the options as it shows them. The packs written before the check leave SPREAD_LATER one by one.
+  series whose engine mixes the options as it shows them.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
@@ -654,8 +654,6 @@ SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more t
 # an engine (site/assets/<engine>/learn.js) that mixes the options itself each time it shows them, with the words that do it:
 # the packs of the series it shows aren't read
 SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
-# packs written before this check, still to be spread: each leaves the list with its fix, and none joins it
-SPREAD_LATER = {"what-an-agent-is"}
 
 
 def spread_most(n, k):
@@ -1396,22 +1394,14 @@ def main():
     for k, P in read.items():
         rel, es_path = learn[k].relative_to(ROOT), learn[k].with_name("learn.es.js")
         faults[k] += spread_faults(rel, P, shown[k], learn_pack(es_path) if es_path.exists() else None)
-        if k not in SPREAD_LATER:
-            places.update(i for q in P["qs"] if q["opts"] is not None for i, (_, r) in enumerate(q["opts"]) if r)
-    for k in sorted(SPREAD_LATER - set(read)):
-        s["fails"].append(f"SPREAD_LATER names \"{k}\", which isn't a pack of labs and scenarios (site/assets/{k}/learn.en.js)")
+        places.update(i for q in P["qs"] if q["opts"] is not None for i, (_, r) in enumerate(q["opts"]) if r)
     for k in sorted(read):
-        if k not in SPREAD_LATER:
-            s["fails"] += faults[k]
-        elif not faults[k]:
-            s["fails"].append(f"{learn[k].relative_to(ROOT)}: its right answers are spread now: take \"{k}\" off SPREAD_LATER in site-tools/check_site.py")
+        s["fails"] += faults[k]
     total = sum(places.values())
     for i, c in sorted(places.items()):
         if total and c > SPREAD_ONE_PLACE * total:
             s["fails"].append(f"Scenarios: {c} of {total} right answers are option {i + 1}: spread them")
-    s["notes"].append(f"{len(read) - len(SPREAD_LATER & set(read))} packs, {total} scenarios with options; right answers by option: " + ", ".join(f"{i + 1}: {c}" for i, c in sorted(places.items())))
-    if SPREAD_LATER:
-        s["notes"].append(f"{len(SPREAD_LATER)} packs written before this check are still to be spread: " + ", ".join(sorted(SPREAD_LATER)))
+    s["notes"].append(f"{len(read)} packs, {total} scenarios with options; right answers by option: " + ", ".join(f"{i + 1}: {c}" for i, c in sorted(places.items())))
     s["notes"].append("not read, since their engine mixes the options as it shows them: " + ", ".join(mixed))
 
     # -- scripts and progress

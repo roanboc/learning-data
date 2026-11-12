@@ -1,0 +1,34 @@
+{
+  "kicker": "Rules and expectations",
+  "kicker_es": "Reglas y expectativas",
+  "title_es": "Reglas y expectativas del negocio",
+  "h1": "Rules and expectations the business owns: written down first, then checked",
+  "h1_es": "Reglas y expectativas del negocio: primero se escriben, luego se revisan",
+  "lead": "A fault holds back the night's meter readings until nine, but billing ran at six, so households get estimated bills while the data team's check says all is well. A reading is late only for the step that needs it, so billing's owner writes down what billing needs, and the check is built from it.",
+  "lead_es": "Una falla retiene las lecturas hasta las nueve, pero facturación corrió a las seis: hay hogares con facturas estimadas y la revisión del equipo de datos dice que todo va bien. Una lectura llega tarde solo para el paso que la necesita: su dueño escribe lo que necesita, y la revisión sale de ahí.",
+  "description": "A film from Business architecture for data about the rules and expectations the business owns: where a rule comes from, a policy made checkable by data rules and business rules, carried out by processes and procedures, and shown done by records, the chain the ISO 9000 standards draw; a decision's rules kept in a DMN decision table beside the BPMN step that applies them, owned by Grace's team, so a rule changes in the table and the flow stays as it is; readings late for billing and on time for planning, since a reading is late only against the step that needs it and that step's service level, which billing's owner had never written down; the expectation set by the owner of the step that uses the data, written down before the check is built from it; the meter system accountable for its own readings, the data platform only reading it, and the data team building a check only where the source can't; and the data product Meter readings, whose contract holds what each of its readers expects. Told with the qanats of Iran, where three hamlets at Sehdeh took shares of eight, eight and nine, set in the 1600s and built into the outlets of their basin, and kept for more than three hundred years; and with what the story didn't achieve: about half of Iran's qanats have run dry in the last fifty years.",
+  "description_es": "Una película de Arquitectura de negocio para datos sobre las reglas y expectativas de las que es dueño el negocio: de dónde viene una regla, una política que las reglas de datos y de negocio hacen verificable, que llevan a cabo procesos y procedimientos, y que los registros muestran cumplida, la cadena que dibujan las normas ISO 9000; las reglas de una decisión guardadas en una tabla de decisión en DMN junto al paso en BPMN que las aplica, de la que es dueño el equipo de Grace, así que una regla cambia en la tabla y el flujo queda igual; lecturas tardías para facturación y a tiempo para planificación, porque una lectura llega tarde solo frente al paso que la necesita y al nivel de servicio de ese paso, que el dueño de facturación nunca había escrito; la expectativa que fija el dueño del paso que usa los datos, escrita antes de construir a partir de ella la revisión; el sistema de medidores, que rinde cuentas de sus propias lecturas, la plataforma de datos, que solo lo lee, y el equipo de datos, que construye una revisión solo donde la fuente no puede; y el producto de datos Meter readings, cuyo contrato guarda lo que espera cada uno de sus lectores. Contada con los qanats de Irán, donde tres aldeas de Sehdeh tomaban partes de ocho, ocho y nueve, fijadas en el siglo XVII y construidas en las bocas de su estanque, y mantenidas por más de trescientos años; y con lo que la historia no logró: cerca de la mitad de los qanats de Irán se han secado en los últimos cincuenta años.",
+  "card": "A reading is late only for the step that needs it. The business writes down what it expects, and the check follows.",
+  "card_es": "Una lectura llega tarde solo para el paso que la necesita. El negocio escribe lo que espera, y la revisión lo sigue.",
+  "chapters_es": {
+    "outlets": "Ocho, ocho y nueve",
+    "note": "Lo que espera el negocio",
+    "policy": "Política, proceso, procedimiento",
+    "decide": "Una decisión, en una tabla",
+    "late": "¿Tarde, para quién?",
+    "set": "Escrito por sus dueños",
+    "source": "Corregido en la fuente",
+    "practice": "La práctica de datos",
+    "end": "Cuidadas, y cambiadas"
+  },
+  "next_h": "You've seen what the business owns about its data. Data architecture, the next series, starts from it.",
+  "next_h_es": "Viste de qué es dueño el negocio en sus datos. Arquitectura de datos, la siguiente serie, parte de ahí.",
+  "past": [
+    "The qanats of Iran: eight, eight and nine",
+    "Sehdeh's three hamlets took the shares built into their outlets for three hundred years, as long as the qanat was kept."
+  ],
+  "past_es": [
+    "Los qanats de Irán: ocho, ocho y nueve",
+    "Las tres aldeas de Sehdeh tomaron las partes construidas en sus bocas durante trescientos años, mientras se cuidó el qanat."
+  ]
+}

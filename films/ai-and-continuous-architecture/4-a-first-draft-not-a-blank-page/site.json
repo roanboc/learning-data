@@ -1,0 +1,65 @@
+{
+  "kicker": "An agent's first draft",
+  "kicker_es": "El primer borrador de un agente",
+  "title_es": "Un primer borrador, no una página en blanco",
+  "h1": "A first draft, not a blank page: keep only what's confirmed",
+  "h1_es": "Un primer borrador, no una página en blanco: solo queda lo confirmado",
+  "lead": "The utility's last new service stalled for eight months in workshops that started from nothing. This time the map agent drafts the community batteries' design from the industry's models and the utility's documents, every source shown. The owners say what's missing and what's wrong, and confirm it.",
+  "lead_es": "El último servicio nuevo se estancó ocho meses en talleres que partían de cero. Ahora el agente del mapa redacta el diseño de las baterías comunitarias desde los modelos de la industria y los documentos de la empresa, con cada fuente. Los responsables dicen qué falta y qué está mal, y lo confirman.",
+  "description": "A film about starting a design from a first draft, not a blank page: a new service, community batteries in three suburbs, needed in twelve weeks, where the last new service stalled for eight months in workshops that asked every team what it does and how it works; the map agent's first draft, from the industry's reference models (CIM, the IEC's list of what a distribution utility does, Europe's market role model) and the utility's own documents (the government's request, the network's procedures, retail's product rules, the map), drawn as notes on a wall: capabilities, a value stream from sign-up to credit, processes, information and rules, fifty-eight elements, each with its source and each a draft until its owner confirms it; the agent's own guess marked as a guess; a review that asks what's missing and what's wrong, not whether it's right, since people tend to nod through what looks confident; the regulatory lead finding a step that carried the network's list of homes across the wall to retail, and network operations finding a step no document had, switching the battery off before crews work; each owner confirming their part, with their name and the date, the agent drafting again what they correct and never confirming; and only what the owners confirmed becoming the model, in five weeks.",
+  "description_es": "Una película sobre empezar un diseño desde un primer borrador, no desde una página en blanco: un servicio nuevo, baterías comunitarias en tres barrios, necesario en doce semanas, cuando el último servicio nuevo se estancó ocho meses en talleres que preguntaban a cada equipo qué hace y cómo trabaja; el primer borrador del agente del mapa, desde los modelos de referencia de la industria (el CIM, la lista de la IEC de lo que hace una distribuidora, el modelo europeo de roles del mercado) y los documentos propios de la empresa (la solicitud del gobierno, los procedimientos de la red, las reglas de producto de comercialización, el mapa), dibujado como notas en un muro: capacidades, un flujo de valor del alta al crédito, procesos, información y reglas, cincuenta y ocho elementos, cada uno con su fuente y cada uno un borrador hasta que su responsable lo confirme; la suposición del propio agente, marcada como tal; una revisión que pregunta qué falta y qué está mal, no si está bien, porque la gente tiende a aprobar sin mirar lo que parece seguro; la responsable regulatoria, que encuentra un paso que llevaba la lista de hogares de la red al otro lado del muro, a comercialización, y operaciones de la red, que encuentra un paso que ningún documento tenía, apagar la batería antes de que trabaje una cuadrilla; cada responsable que confirma su parte, con su nombre y la fecha, mientras el agente vuelve a redactar lo que corrigen y nunca confirma; y solo lo que confirmaron los responsables pasa a ser el modelo, en cinco semanas.",
+  "card": "The last new service stalled on a blank page. This time an agent drafts, every source shown, and only what the owners confirm is kept.",
+  "card_es": "El último servicio nuevo se estancó en una página en blanco. Esta vez un agente redacta, con cada fuente, y solo queda lo que confirman los responsables.",
+  "chapters_es": {
+    "found": "Un cimiento antiguo",
+    "ask": "¿Qué hacen ustedes?",
+    "draft": "Un primer borrador",
+    "source": "De dónde viene cada uno",
+    "review": "Qué falta, qué está mal",
+    "confirm": "Solo lo confirmado",
+    "back": "De vuelta al cimiento antiguo",
+    "end": "Un primer borrador, no una página en blanco"
+  },
+  "past": [
+    "Babylon, about 620 BCE",
+    "Before the temple-tower was rebuilt, specialists inspected its old foundation and measured the site; the place was confirmed through divination, and the king set the new foundation on its original socle."
+  ],
+  "past_es": [
+    "Babilonia, hacia el 620 a. C.",
+    "Antes de reconstruir la torre-templo, unos especialistas inspeccionaron su antiguo cimiento y midieron el terreno; el lugar se confirmó por adivinación, y el rey puso el nuevo cimiento sobre su zócalo original."
+  ],
+  "next_h": "Every element drafted, and only what's confirmed kept. Next, every change, checked.",
+  "next_h_es": "Cada elemento redactado, y solo queda lo confirmado. Luego, cada cambio, comprobado.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The kings' own words",
+        "title_es": "Las palabras de los reyes (en inglés)",
+        "line": "Nabopolassar's and Nebuchadnezzar II's inscriptions, in an open edition (RINBE 1/1, 2024): the old foundation inspected and measured, the place confirmed, the original socle.",
+        "line_es": "Las inscripciones de Nabopolasar y Nabucodonosor II, en una edición abierta (RINBE 1/1, 2024): el antiguo cimiento inspeccionado y medido, el lugar confirmado, el zócalo original.",
+        "href": "https://epub.ub.uni-muenchen.de/118421/",
+        "href_es": "https://epub.ub.uni-muenchen.de/118421/"
+      },
+      {
+        "title": "The Common Information Model",
+        "title_es": "El modelo común de información (en inglés)",
+        "line": "ENTSO-E's page on CIM, the IEC's standard model of a power system's information, which the agent drafts the battery from.",
+        "line_es": "La página de ENTSO-E sobre el CIM, el modelo estándar de la IEC para la información de un sistema eléctrico, del que el agente toma la batería.",
+        "href": "https://www.entsoe.eu/data/cim/",
+        "href_es": "https://www.entsoe.eu/data/cim/"
+      },
+      {
+        "title": "The Harmonised Electricity Role Model",
+        "title_es": "El modelo armonizado de roles de la electricidad (en inglés)",
+        "line": "Europe's market role model, from ENTSO-E and the EU DSO Entity: one name for each role in the wholesale and retail electricity markets.",
+        "line_es": "El modelo europeo de roles del mercado, de ENTSO-E y la EU DSO Entity: un nombre para cada rol en los mercados eléctricos mayorista y minorista.",
+        "href": "https://www.entsoe.eu/data/cim/role-models/",
+        "href_es": "https://www.entsoe.eu/data/cim/role-models/"
+      }
+    ]
+  }
+}

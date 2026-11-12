@@ -195,20 +195,22 @@ function cj_legend(ctx,cx,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
 /* ---------------------------------------------------------------- the role's rights: may, may not, asks
    o.may, o.maynot, o.asks: functions of the line's index (0 to 1), how far each line has come in; o.head (0 to 1) the card itself;
    o.glow (0 to 1) lights whom it asks; o.rule (0 to 1) the rule under them, in green: when it isn't sure, a person decides.
-   One line each, at 30 px; whom it asks in two columns. 790 by 786: at y 90 it ends at 876, above the captions. */
-const CJ_MAY=["read the project and production, names masked","draft on its own branches","build in its own development schema","open a pull request"];
+   One line each, at 30 px, but the first, which takes two: what it reads in production comes with personal and sensitive data masked, and
+   o.may2 (0 to 1) brings that second line in on its words. Whom it asks in two columns, a little further under the last lock, so the green panel clears its words.
+   790 by 794: at y 84 it ends at 878, above the captions. */
+const CJ_MAY=[["read the project and production,","personal and sensitive data masked"],["draft on its own branches"],["build in its own development schema"],["open a pull request"]];
 const CJ_MAYNOT=["approve","merge","change production","change an approved test","change what a word means","grant itself rights"];
 const CJ_ASKS=[["Clara","what Planning needs"],["Mei","what a word means"],["Noor","the model"],["Jun","the code"]];
 function cj_rights(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,hd=o.head==null?1:o.head;if(a<=0.01||hd<=0.01)return null;const f=k=>typeof k==="function"?k:(()=>k==null?1:k);
-  const may=f(o.may),no=f(o.maynot),ask=f(o.asks),LH=40,GAP=52,h=108+CJ_MAY.length*LH+GAP+CJ_MAYNOT.length*LH+GAP+2*LH+94,F={w:600,size:30};ctx.save();ctx.globalAlpha*=a*hd;if(o.k!=null)ag_about(ctx,x+w/2,y+40,lerp(0.85,1,o.k));
+  const may=f(o.may),no=f(o.maynot),ask=f(o.asks),LH=38,GAP=48,GAP2=54,MAYN=CJ_MAY.reduce((n,l)=>n+l.length,0),h=108+MAYN*LH+GAP+CJ_MAYNOT.length*LH+GAP2+2*LH+90,F={w:600,size:30},m2=o.may2==null?1:clamp(o.may2,0,1);ctx.save();ctx.globalAlpha*=a*hd;if(o.k!=null)ag_about(ctx,x+w/2,y+40,lerp(0.85,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.55});
   cj_icon(ctx,"role",x+44,y+48,1,rgba(AG.blue,0.95));ag_T(ctx,"PLANNING CONTRIBUTOR",x+76,y+58,{w:700,size:28,ls:4,col:AG.blue});
   let yy=y+108;ag_T(ctx,"May",x+32,yy,{w:800,size:30});
-  CJ_MAY.forEach((s,i)=>{const u=clamp(may(i),0,1);yy+=LH;if(u<=0.01)return;ctx.save();ctx.globalAlpha*=u;ctx.fillStyle=rgba(AG.ink,0.55);ctx.beginPath();ctx.arc(x+46,yy-10,5,0,TAU);ctx.fill();
-    ag_T(ctx,s,x+66,yy,F);ctx.restore();});
+  CJ_MAY.forEach((ls,i)=>{const u=clamp(may(i),0,1),y0=yy+LH;yy+=ls.length*LH;if(u<=0.01)return;ctx.save();ctx.globalAlpha*=u;ctx.fillStyle=rgba(AG.ink,0.55);ctx.beginPath();ctx.arc(x+46,y0-10,5,0,TAU);ctx.fill();
+    ls.forEach((s,k)=>ag_T(ctx,s,x+66,y0+k*LH,Object.assign({},F,{a:k?m2:1})));ctx.restore();});
   yy+=GAP;ag_T(ctx,"May not",x+32,yy,{w:800,size:30});
   CJ_MAYNOT.forEach((s,i)=>{const u=clamp(no(i),0,1);yy+=LH;if(u<=0.01)return;ctx.save();ctx.globalAlpha*=u;ag_lock(ctx,x+46,yy-9,26,rgba(AG.blue,0.9));ag_T(ctx,s,x+66,yy,F);ctx.restore();});
-  yy+=GAP;const ay=yy,gl=clamp(o.glow||0,0,1),ru=clamp(o.rule||0,0,1);
+  yy+=GAP2;const ay=yy,gl=clamp(o.glow||0,0,1),ru=clamp(o.rule||0,0,1);
   // whom it asks, lit when it isn't sure: a soft green panel behind them and the rule
   if(gl>0.01){ctx.save();ctx.globalAlpha*=gl;ctx.fillStyle=rgba(AG.green,0.09);rr(ctx,x+14,ay-40,w-28,y+h-14-(ay-40),16);ctx.fill();ctx.strokeStyle=rgba(AG.green,0.55);ctx.lineWidth=2.4;ctx.stroke();ctx.restore();}
   ag_T(ctx,"Asks",x+32,ay,{w:800,size:30});

@@ -63,8 +63,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Allí, su rol, colaborador de Planificación, hace los pasos de redacción de sus cambios, y cada paso dice qué lee, qué escribe y a qué llama.",
 "Sam doesn't type those rights into each tool. A script reads the map and writes every tool's settings from it, one way.":
 "Sam no teclea esos permisos en cada herramienta. Un script lee el mapa y escribe desde él la configuración de cada una, en un solo sentido.",
-"In Unity Catalog, a group named for the role holds the grants: read production, with names masked, and build only in its own schemas.":
-"En Unity Catalog, el grupo del rol tiene los permisos: leer producción, con los nombres enmascarados, y construir solo en sus esquemas.",
+"In Unity Catalog, a group named for the role holds the grants.":
+"En Unity Catalog, el grupo del rol tiene los permisos.",
+"It may read production, with personal and sensitive data masked, and build only in its own schemas.":
+"Puede leer producción, con datos personales y sensibles enmascarados, y construir solo en sus propios esquemas.",
 "The planning agent is its only member, so a second agent in the role would get the same rights, and no more.":
 "El agente de Planificación es su único miembro, así que un segundo agente en el rol tendría los mismos permisos, y nada más.",
 "In Unity Gateway, part of the catalog, the group may call the one model its steps use, and the tool servers they name.":

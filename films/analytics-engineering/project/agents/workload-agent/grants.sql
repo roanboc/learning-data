@@ -10,7 +10,8 @@
 -- Each grant says which thing on the map it's for, and which of its role's steps reads or writes it.
 
 -- data product, which it reads in: find why the night build failed, build it in development
--- Names masked: the group isn't a reader of direct personal data, so the catalog's policy masks them.
+-- Personal and sensitive data masked: the group isn't a reader of direct personal data, so the catalog's policy
+-- masks it, and these schemas hold nothing special category or restricted.
 grant use catalog on catalog analytics to `workload_contributors`;
 grant use schema, select on schema analytics.prod_core to `workload_contributors`;
 grant use schema, select on schema analytics.prod_marts to `workload_contributors`;

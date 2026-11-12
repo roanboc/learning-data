@@ -449,7 +449,7 @@ const NARR={
  {"id":"people","gap":0.8,"text":"People keep the rest. Clara raises the ticket, Jun reviews the code, and Noor approves the change and releases it."},
  {"id":"sod","gap":0.8,"text":"So whoever drafts a change never approves or releases it: separation of duties, on the map."},
  {"id":"agent","gap":0.8,"text":"Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place."},
- {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with names masked, and draft on its own branches."},
+ {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with personal and sensitive data masked, and draft on its own branches."},
  {"id":"build","gap":0.8,"text":"It may also build in its own development schema, and open a pull request."},
  {"id":"maynot","gap":0.8,"text":"What it may not do: approve, merge, change production, change an approved test, change what a word means, or grant itself rights."},
  {"id":"asks","gap":0.8,"text":"And whom it asks: Clara for what Planning needs, Mei for what a word means, Noor for the model, and Jun for the code."},
@@ -484,7 +484,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: rights that come from the work, and not from a person's."}]}
 };
 
-const VODUR={"first/place": 6.744, "first/lost": 4.655, "first/came": 7.325, "first/own": 5.89, "first/reach": 5.212, "first/picture": 3.325, "first/send": 5.894, "first/best": 6.456, "first/change": 2.352, "scope/began": 7.734, "scope/door": 4.739, "scope/card": 5.129, "scope/role": 2.982, "scope/seven": 1.98, "scope/plain": 3.417, "scope/wide": 8.888, "scope/national": 7.185, "scope/team": 6.423, "scope/uni": 7.981, "scope/alone": 6.978, "scope/checks": 8.166, "monday/two": 4.617, "monday/tickets": 8.056, "monday/same": 2.715, "monday/badge": 6.31, "monday/role": 4.91, "monday/owner": 6.202, "monday/rights": 6.892, "monday/admin": 5.86, "monday/signed": 8.802, "monday/differ": 5.245, "monday/alone": 3.439, "map/noor": 5.561, "map/work": 5.06, "map/process": 6.263, "map/roles": 4.34, "map/contrib": 6.549, "map/people": 7.267, "map/sod": 5.987, "map/agent": 7.483, "map/may": 6.733, "map/build": 4.425, "map/maynot": 7.663, "map/asks": 6.81, "map/guess": 3.837, "map/ahead": 3.277, "map/workload": 7.743, "map/stages": 2.954, "map/three": 3.537, "map/third": 8.034, "gate/before": 2.749, "gate/redo": 6.585, "gate/bar": 7.416, "gate/result": 5.399, "gate/matters": 5.908, "gate/audit": 4.715, "gate/stage": 5.096, "gate/word": 6.128, "gate/check": 6.485, "stop/written": 2.523, "stop/own": 8.176, "stop/set": 5.828, "stop/stop": 4.18, "stop/anyone": 5.892, "close/back": 4.921, "close/since": 4.782, "close/now": 7.288, "close/so": 4.153, "close/lesson": 3.546, "close/next": 3.497};
+const VODUR={"first/place": 6.744, "first/lost": 4.655, "first/came": 7.325, "first/own": 5.89, "first/reach": 5.212, "first/picture": 3.325, "first/send": 5.894, "first/best": 6.456, "first/change": 2.352, "scope/began": 7.734, "scope/door": 4.739, "scope/card": 5.129, "scope/role": 2.982, "scope/seven": 1.98, "scope/plain": 3.417, "scope/wide": 8.888, "scope/national": 7.185, "scope/team": 6.423, "scope/uni": 7.981, "scope/alone": 6.978, "scope/checks": 8.166, "monday/two": 4.617, "monday/tickets": 8.056, "monday/same": 2.715, "monday/badge": 6.31, "monday/role": 4.91, "monday/owner": 6.202, "monday/rights": 6.892, "monday/admin": 5.86, "monday/signed": 8.802, "monday/differ": 5.245, "monday/alone": 3.439, "map/noor": 5.561, "map/work": 5.06, "map/process": 6.263, "map/roles": 4.34, "map/contrib": 6.549, "map/people": 7.267, "map/sod": 5.987, "map/agent": 7.483, "map/may": 8.231, "map/build": 4.425, "map/maynot": 7.663, "map/asks": 6.81, "map/guess": 3.837, "map/ahead": 3.277, "map/workload": 7.743, "map/stages": 2.954, "map/three": 3.537, "map/third": 8.034, "gate/before": 2.749, "gate/redo": 6.585, "gate/bar": 7.416, "gate/result": 5.399, "gate/matters": 5.908, "gate/audit": 4.715, "gate/stage": 5.096, "gate/word": 6.128, "gate/check": 6.485, "stop/written": 2.523, "stop/own": 8.176, "stop/set": 5.828, "stop/stop": 4.18, "stop/anyone": 5.892, "close/back": 4.921, "close/since": 4.782, "close/now": 7.288, "close/so": 4.153, "close/lesson": 3.546, "close/next": 3.497};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land, or a picture needs a moment to build.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2230,20 +2230,22 @@ function cj_legend(ctx,cx,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
 /* ---------------------------------------------------------------- the role's rights: may, may not, asks
    o.may, o.maynot, o.asks: functions of the line's index (0 to 1), how far each line has come in; o.head (0 to 1) the card itself;
    o.glow (0 to 1) lights whom it asks; o.rule (0 to 1) the rule under them, in green: when it isn't sure, a person decides.
-   One line each, at 30 px; whom it asks in two columns. 790 by 786: at y 90 it ends at 876, above the captions. */
-const CJ_MAY=["read the project and production, names masked","draft on its own branches","build in its own development schema","open a pull request"];
+   One line each, at 30 px, but the first, which takes two: what it reads in production comes with personal and sensitive data masked, and
+   o.may2 (0 to 1) brings that second line in on its words. Whom it asks in two columns, a little further under the last lock, so the green panel clears its words.
+   790 by 794: at y 84 it ends at 878, above the captions. */
+const CJ_MAY=[["read the project and production,","personal and sensitive data masked"],["draft on its own branches"],["build in its own development schema"],["open a pull request"]];
 const CJ_MAYNOT=["approve","merge","change production","change an approved test","change what a word means","grant itself rights"];
 const CJ_ASKS=[["Clara","what Planning needs"],["Mei","what a word means"],["Noor","the model"],["Jun","the code"]];
 function cj_rights(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,hd=o.head==null?1:o.head;if(a<=0.01||hd<=0.01)return null;const f=k=>typeof k==="function"?k:(()=>k==null?1:k);
-  const may=f(o.may),no=f(o.maynot),ask=f(o.asks),LH=40,GAP=52,h=108+CJ_MAY.length*LH+GAP+CJ_MAYNOT.length*LH+GAP+2*LH+94,F={w:600,size:30};ctx.save();ctx.globalAlpha*=a*hd;if(o.k!=null)ag_about(ctx,x+w/2,y+40,lerp(0.85,1,o.k));
+  const may=f(o.may),no=f(o.maynot),ask=f(o.asks),LH=38,GAP=48,GAP2=54,MAYN=CJ_MAY.reduce((n,l)=>n+l.length,0),h=108+MAYN*LH+GAP+CJ_MAYNOT.length*LH+GAP2+2*LH+90,F={w:600,size:30},m2=o.may2==null?1:clamp(o.may2,0,1);ctx.save();ctx.globalAlpha*=a*hd;if(o.k!=null)ag_about(ctx,x+w/2,y+40,lerp(0.85,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.55});
   cj_icon(ctx,"role",x+44,y+48,1,rgba(AG.blue,0.95));ag_T(ctx,"PLANNING CONTRIBUTOR",x+76,y+58,{w:700,size:28,ls:4,col:AG.blue});
   let yy=y+108;ag_T(ctx,"May",x+32,yy,{w:800,size:30});
-  CJ_MAY.forEach((s,i)=>{const u=clamp(may(i),0,1);yy+=LH;if(u<=0.01)return;ctx.save();ctx.globalAlpha*=u;ctx.fillStyle=rgba(AG.ink,0.55);ctx.beginPath();ctx.arc(x+46,yy-10,5,0,TAU);ctx.fill();
-    ag_T(ctx,s,x+66,yy,F);ctx.restore();});
+  CJ_MAY.forEach((ls,i)=>{const u=clamp(may(i),0,1),y0=yy+LH;yy+=ls.length*LH;if(u<=0.01)return;ctx.save();ctx.globalAlpha*=u;ctx.fillStyle=rgba(AG.ink,0.55);ctx.beginPath();ctx.arc(x+46,y0-10,5,0,TAU);ctx.fill();
+    ls.forEach((s,k)=>ag_T(ctx,s,x+66,y0+k*LH,Object.assign({},F,{a:k?m2:1})));ctx.restore();});
   yy+=GAP;ag_T(ctx,"May not",x+32,yy,{w:800,size:30});
   CJ_MAYNOT.forEach((s,i)=>{const u=clamp(no(i),0,1);yy+=LH;if(u<=0.01)return;ctx.save();ctx.globalAlpha*=u;ag_lock(ctx,x+46,yy-9,26,rgba(AG.blue,0.9));ag_T(ctx,s,x+66,yy,F);ctx.restore();});
-  yy+=GAP;const ay=yy,gl=clamp(o.glow||0,0,1),ru=clamp(o.rule||0,0,1);
+  yy+=GAP2;const ay=yy,gl=clamp(o.glow||0,0,1),ru=clamp(o.rule||0,0,1);
   // whom it asks, lit when it isn't sure: a soft green panel behind them and the rule
   if(gl>0.01){ctx.save();ctx.globalAlpha*=gl;ctx.fillStyle=rgba(AG.green,0.09);rr(ctx,x+14,ay-40,w-28,y+h-14-(ay-40),16);ctx.fill();ctx.strokeStyle=rgba(AG.green,0.55);ctx.lineWidth=2.4;ctx.stroke();ctx.restore();}
   ag_T(ctx,"Asks",x+32,ay,{w:800,size:30});
@@ -2501,7 +2503,7 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     rest:wAt(sc,"people","People keep the rest"),clara:wAt(sc,"people","Clara raises"),jun:wAt(sc,"people","Jun reviews"),noor:wAt(sc,"people","Noor approves"),rel:wAt(sc,"people","releases it"),
     so:wAt(sc,"sod","So whoever drafts"),never:wAt(sc,"sod","never approves"),sep:wAt(sc,"sod","separation of duties"),
     then:wAt(sc,"agent","Then Noor"),assigned:wAt(sc,"agent","assigned the planning agent"),that:wAt(sc,"agent","to that role"),owner:wAt(sc,"agent","Clara as its owner"),had:wAt(sc,"agent","it had its place"),
-    may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],
+    may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],masked:wAt(sc,"may","personal and sensitive"),
     n:[wAt(sc,"maynot","approve"),wAt(sc,"maynot","merge"),wAt(sc,"maynot","change production"),wAt(sc,"maynot","change an approved"),wAt(sc,"maynot","change what"),wAt(sc,"maynot","grant")],
     a:[wAt(sc,"asks","Clara"),wAt(sc,"asks","Mei"),wAt(sc,"asks","Noor"),wAt(sc,"asks","Jun")],
     guess:wAt(sc,"guess","When"),decides:wAt(sc,"guess","a person decides"),
@@ -2545,8 +2547,8 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
       // like a crew's card on the board, it has its place: the words the opening left under it
       cj_pillAt(cx,CJ_PAG.x+CJ_PAG.w/2,834,"its place on the map",tt,T.had-0.1,T.may-0.6,{col:AG.blue});
       // the role's rights: may, may not, whom it asks; when it isn't sure, it asks, and a person decides
-      cj_rights(cx,1090,90,790,{a:ag_in(tt,T.may-0.4,0.5),k:Math.min(1,ag_spr(tt,T.may-0.4,0.5)),
-        may:i=>ag_in(tt,T.m[i]-0.15,0.35),maynot:i=>ag_in(tt,T.n[i]-0.15,0.35),asks:i=>ag_in(tt,T.a[i]-0.15,0.35),glow:ag_io(tt,T.guess-0.2,T.where-0.4,0.4),rule:ag_in(tt,T.decides-0.3,0.4)});}},
+      cj_rights(cx,1090,84,790,{a:ag_in(tt,T.may-0.4,0.5),k:Math.min(1,ag_spr(tt,T.may-0.4,0.5)),
+        may:i=>ag_in(tt,T.m[i]-0.15,0.35),may2:ag_in(tt,T.masked-0.15,0.35),maynot:i=>ag_in(tt,T.n[i]-0.15,0.35),asks:i=>ag_in(tt,T.a[i]-0.15,0.35),glow:ag_io(tt,T.guess-0.2,T.where-0.4,0.4),rule:ag_in(tt,T.decides-0.3,0.4)});}},
     // the same day, Noor places Anil Kurian's workload agent, with its stage for each kind of task on its assignment; the map now holds
     // three agents, each with a role and an owner; the third, the governance review agent, was there before (a later moment)
     {later:true,at:T.same-0.7,place:"cjWall",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{

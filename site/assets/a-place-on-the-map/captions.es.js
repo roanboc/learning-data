@@ -87,8 +87,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así, quien redacta un cambio nunca lo aprueba ni lo libera: separación de funciones, en el mapa.",
 "Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place.":
 "Luego Noor asignó el agente a ese rol, con Clara como su dueña. Como la tarjeta de una cuadrilla en el tablero, tenía su lugar.",
-"Its role says what it may do: read the project and production, with names masked, and draft on its own branches.":
-"Su rol dice qué puede hacer: leer el proyecto y producción, con los nombres enmascarados, y redactar en sus propias ramas.",
+"Its role says what it may do: read the project and production, with personal and sensitive data masked, and draft on its own branches.":
+"Su rol dice qué puede hacer: leer el proyecto y producción, con datos personales y sensibles enmascarados, y redactar en sus propias ramas.",
 "It may also build in its own development schema, and open a pull request.":
 "También puede construir en su propio esquema de desarrollo y abrir un pull request.",
 "What it may not do: approve, merge, change production, change an approved test, change what a word means, or grant itself rights.":

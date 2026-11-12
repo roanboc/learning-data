@@ -74,9 +74,9 @@ labs:[
 ],
 qs:[
  {type:"choice",lab:"access",vis:"wo_q_copy",title:"Already there",sit:"Spot the problem. The wallet team needs learners near an award. It copies mart_planning__near_award into its own folder, “because it's already there.”",
-  opts:[{t:"Nothing: the copy is in the wallet's folder, so the wallet owns it.",why:"The file is the wallet's, but what it encodes is Planning's: its rule, as at census date. When Planning changes its mart, the copy silently disagrees."},
-   {t:"It copies Planning's consumer contract, shaped for Planning's question. The wallet should build on the public core, and ask its owner if the core lacks something.",ok:true},
-   {t:"It should ref Planning's mart instead of copying it.",why:"dbt allows that (the mart is protected, in the same project), and it's still wrong: the mart changes when Planning needs it to."}],
+  opts:[{t:"Nothing: the copy is in the wallet's folder, so the wallet owns it and can change it.",why:"The file is the wallet's, but what it encodes is Planning's: its rule, as at census date. When Planning changes its mart, the copy silently disagrees."},
+   {t:"It copies a mart shaped for Planning: the wallet should build on the public core.",ok:true},
+   {t:"It should ref Planning's mart instead of copying it, so the two never disagree.",why:"dbt allows that (the mart is protected, in the same project), and it's still wrong: the mart changes when Planning needs it to."}],
   why:"Each mart is one consumer's shape. Consumers build on the public core, which has an owner, a contract and a version, never on each other's marts.",repo:["models/marts/wallet/","models/core/student/_core_student__models.yml"]},
  {type:"choice",lab:"access",vis:"wo_q_private",title:"How were the keys matched?",sit:"Planning wants to ref int_learner_keys_matched, to see how each learner's keys were matched. What do you do?",
   opts:[{t:"Make the model public, so Planning can ref it.",why:"Then any project can build on a step with no contract and no version, and break whenever Noor's group changes the matching."},

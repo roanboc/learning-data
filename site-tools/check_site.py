@@ -236,10 +236,37 @@ NO_COPY = re.compile(r"\bzero[- ]cop(?:y|ies)\b|\bin place\b|\bnot (?:one|a sing
                      r"\bno cop(?:y|ies)\b(?! (?:for|of) )|\bcero copias\b|\ben su sitio\b|\bsin copiar\b|\bsin copias?\b", re.I)
 
 
+# names the voice misreads as written (PLAYBOOK §5, Hear a real person's name, too): it reads "Deming", and "Deeming", with a long e,
+# and W. Edwards Deming's surname is said DEM-ing, with a short e. A line's "say", or a pair in the film's film.json "say", spells
+# such a name for the voice ("Demming"); the words on screen, the captions and the page keep it as it is written. Each row: the
+# name as the voice would misread it, the spelling that makes the voice say it, and how it is said
+VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surname is said DEM-ing, with a short e")]
+
+
 def release_status(text):
     """where a piece of a film's text names a feature's release status: (the words, the words around them)"""
     return [(m.group(0), ("…" if m.start() > 50 else "") + text[max(0, m.start() - 50):m.end() + 30].strip() + ("…" if m.end() + 30 < len(text) else ""))
             for m in sorted(list(STATUS.finditer(text)) + list(STATUS_GA.finditer(text)), key=lambda m: m.start())]
+
+
+def voice_names(narr, pairs=None):
+    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the film's
+    own respellings (film.json "say": [[pattern, words], ...], as the voice tool applies them)."""
+    src = narr.read_text(encoding="utf-8")
+    if pairs is None:
+        meta = narr.parents[1] / "film.json"
+        pairs = json.loads(meta.read_text(encoding="utf-8")).get("say", []) if meta.exists() else []
+    out = []
+    for sid, sc in json.loads(src[src.index("{"):src.rindex("}") + 1]).items():
+        for ln in sc.get("vo", []):
+            said = ln.get("say") or ln["text"]
+            for pattern, words in pairs:
+                said = re.sub(pattern, words, said)
+            for name, spelled, how in VOICE_NAMES:
+                for hit in name.finditer(said):
+                    out.append(f"{narr.relative_to(ROOT)} {sid}/{ln['id']}: the voice would read \"{hit.group(0)}\" as it's written: {how}; "
+                               f"spell it \"{spelled}\" in the line's \"say\", or in film.json's \"say\"")
+    return out
 
 
 def json_strings(v, where=""):
@@ -1410,6 +1437,10 @@ def main():
         s["notes"].append("say what copies and who keeps it: the platform keeps the rows in a second form, or a managed copy, with no pipeline "
                           "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
     s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
+    s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e)")
+    for f in st_voices:
+        s["fails"] += voice_names(f)
+    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after the film's own respellings")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     # every film's pack, and the first film's, whose questions are a block of its pack of labs and scenarios

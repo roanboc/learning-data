@@ -21,6 +21,10 @@
     [
       "\\bA I\\b",
       "AI"
+    ],
+    [
+      "\\bDeming\\b",
+      "Demming"
     ]
   ],
   "story": [

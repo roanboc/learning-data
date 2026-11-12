@@ -1,0 +1,219 @@
+1
+00:00:01,400 --> 00:00:09,423
+Para 1972, fábricas de todo Chile enviaban sus cifras al equipo de Cybersyn en Santiago por télex, una vez al día.
+
+2
+00:00:11,123 --> 00:00:16,735
+Pero la cifra de una fábrica no dice nada junto a la de otra, a menos que ambas se midan igual.
+
+3
+00:00:17,435 --> 00:00:24,667
+Si una fábrica cuenta a los ausentes de una forma y la siguiente de otra, una fábrica en problemas puede parecerse al resto.
+
+4
+00:00:26,167 --> 00:00:32,067
+Santiago necesitaba que las palabras de cada fábrica significaran lo mismo, o no podría compararlas ni sumarlas.
+
+5
+00:00:33,367 --> 00:00:40,994
+Así que en el modelo de cada fábrica, el malestar social se mediría de una sola forma: la parte de los trabajadores de su nómina ausentes ese día.
+
+6
+00:00:42,694 --> 00:00:50,043
+Y la sala de operaciones mostraría cada fábrica con los mismos íconos, para que cualquiera pudiera leerlos sin formación científica.
+
+7
+00:00:51,543 --> 00:00:59,660
+Después del paro de octubre de 1972, las cifras de todo el país entraban en un solo informe, escrito cada día en la CORFO.
+
+8
+00:01:00,960 --> 00:01:09,557
+Llevado a mano al palacio presidencial, mostraba la producción nacional y los puntos de crisis, con cifras de hace unos días, no de seis meses.
+
+9
+00:01:11,257 --> 00:01:18,052
+En la empresa, un equipo nuevo que construye la app de energía del hogar abre un cambio: su primera tabla, llamada customer.
+
+10
+00:01:18,752 --> 00:01:24,185
+Cliente ya significa tres cosas aquí. Esta sería una cuarta: quien inicia sesión en la app.
+
+11
+00:01:25,485 --> 00:01:30,340
+La revisión lo detecta antes de que llegue a una tabla, gracias a lo que guarda la arquitectura de datos.
+
+12
+00:01:37,040 --> 00:01:44,352
+La tabla de la app guarda a todos los que inician sesión: el titular de la cuenta, pero también una pareja, un inquilino, un hijo adulto.
+
+13
+00:01:45,852 --> 00:01:50,102
+Llamada solo customer, quien la leyera la tomaría por una de las otras tres.
+
+14
+00:01:51,402 --> 00:01:57,567
+La última vez que una cosa tuvo seis nombres, los avisos de la tormenta de enero no llegaron a 180 hogares.
+
+15
+00:01:59,267 --> 00:02:04,800
+Así que la revisión lo señala: cliente tiene tres significados aquí, y una tabla no puede llamarse solo así.
+
+16
+00:02:06,300 --> 00:02:14,193
+Lee lo que la arquitectura de datos guarda en el repositorio, junto al mapa: nombres, un modelo de referencia, principios y decisiones.
+
+17
+00:02:16,893 --> 00:02:22,110
+Cada nombre se arma con partes, como sugiere una norma internacional para nombrar datos.
+
+18
+00:02:23,410 --> 00:02:27,166
+Primero, la cosa de la que trata, en palabras del glosario: titular de la cuenta.
+
+19
+00:02:28,266 --> 00:02:29,924
+Luego, qué de ella: el inicio.
+
+20
+00:02:31,224 --> 00:02:35,820
+Por último, el tipo de valor, de una lista corta: una fecha. Fecha de inicio del titular de la cuenta.
+
+21
+00:02:37,520 --> 00:02:43,340
+Como el malestar social, cada término se define una vez, y todo sistema lo usa igual.
+
+22
+00:02:44,640 --> 00:02:49,375
+Una palabra con más de un significado aquí, como cliente, nunca es un nombre por sí sola.
+
+23
+00:02:50,675 --> 00:02:57,328
+Los sistemas viejos conservan sus nombres, cada uno relacionado una vez con el del glosario: el premise de facturación es un punto de conexión.
+
+24
+00:03:00,428 --> 00:03:08,541
+Para buena parte de esto, la industria ya tiene palabras: el Common Information Model, un modelo de referencia para la electricidad, de la IEC.
+
+25
+00:03:10,441 --> 00:03:15,973
+Llama usage point al punto donde se entrega la energía, y service location al inmueble.
+
+26
+00:03:17,473 --> 00:03:22,019
+Quien recibe el servicio es un customer, con una customer account para la facturación.
+
+27
+00:03:23,919 --> 00:03:31,829
+La empresa conserva sus palabras y relaciona cada una con el modelo: punto de conexión con usage point, titular de la cuenta con customer.
+
+28
+00:03:34,129 --> 00:03:39,901
+Así, un sistema nuevo o un socio pueden emparejarse con las palabras de la empresa a través de palabras que ya conocen.
+
+29
+00:03:41,801 --> 00:03:48,117
+Quien inicia sesión en la app no es ninguno de los tres: un concepto nuevo, que necesita su propio nombre y un responsable.
+
+30
+00:03:51,417 --> 00:03:56,569
+Luego, unos pocos principios: cada uno una regla corta, con por qué vale y qué se sigue de ella.
+
+31
+00:03:58,069 --> 00:04:05,723
+Un concepto, un nombre, del glosario: seis nombres para una cosa dejaron a 180 hogares sin aviso.
+
+32
+00:04:07,223 --> 00:04:10,770
+Cada hecho tiene una sola casa, y cada copia se remonta a ella.
+
+33
+00:04:12,070 --> 00:04:16,792
+Los datos cruzan el borde de un dominio solo por un flujo publicado, con su contrato.
+
+34
+00:04:18,092 --> 00:04:23,429
+Y toda tabla pertenece a un producto de datos, del área del negocio que crea sus datos.
+
+35
+00:04:26,129 --> 00:04:33,515
+Cada decisión queda por escrito junto al mapa: qué se decidió y por qué, qué más se consideró, quién decidió y cuándo.
+
+36
+00:04:35,015 --> 00:04:43,307
+Decisión siete: cliente nunca es un nombre por sí solo. Lo decidieron Grace, quien dirige comercialización y Ama, el 14 de octubre.
+
+37
+00:04:45,007 --> 00:04:50,451
+Por qué: aquí cliente significa tres cosas, y una tabla llamada solo así se leería como cualquiera de ellas.
+
+38
+00:04:51,151 --> 00:04:57,034
+Considerada y descartada: una sola definición de cliente para todos. No le serviría a ningún lado.
+
+39
+00:04:58,334 --> 00:05:03,285
+Qué se sigue: todo nombre dice cuál: titular de la cuenta, punto de conexión o contacto.
+
+40
+00:05:04,785 --> 00:05:10,321
+Un registro sobrevive a la reunión y a quienes estuvieron en ella: el próximo equipo puede leer por qué, no solo qué.
+
+41
+00:05:13,021 --> 00:05:17,641
+Todo se guarda junto al mapa, y cada cambio se revisa contra ello antes de hacerse.
+
+42
+00:05:19,341 --> 00:05:24,776
+El equipo de datos revisa el cambio del equipo de la app. Qué significa un término nuevo no le toca decidirlo.
+
+43
+00:05:26,676 --> 00:05:33,108
+Así que el equipo de la app pregunta a comercialización en un ticket, y quien la dirige define primero el término en el glosario.
+
+44
+00:05:34,808 --> 00:05:38,110
+Usuario de la app: una persona que inicia sesión en la app por una cuenta.
+
+45
+00:05:40,010 --> 00:05:47,174
+Luego la tabla se construye con él: usuario de la app, con la cuenta por la que actúa. Pasa la verificación, y también la revisión.
+
+46
+00:05:49,274 --> 00:05:54,989
+En el mapa, usuario de la app se suma a los conceptos de comercialización, con su responsable y la decisión siete.
+
+47
+00:06:01,489 --> 00:06:09,614
+Para mayo de 1973, Cybersyn llegaba a un cuarto de las industrias nacionalizadas, más de cien, con la mitad de sus ingresos.
+
+48
+00:06:11,114 --> 00:06:18,902
+Nunca funcionó como se diseñó. La sala de operaciones podía hacer muy poco, y el simulador nunca salió de la etapa experimental.
+
+49
+00:06:20,202 --> 00:06:22,735
+Solo la red de télex se usó con regularidad.
+
+50
+00:06:23,435 --> 00:06:28,193
+Beer escribió después que el modelo no podía representar bien los cambios de esos años.
+
+51
+00:06:29,893 --> 00:06:38,950
+El 11 de septiembre de 1973, un golpe militar terminó con el gobierno de Allende. Más tarde, la sala de operaciones fue desmantelada.
+
+52
+00:06:41,250 --> 00:06:48,108
+El día del golpe, miembros del equipo sacaron de la CORFO copias de sus documentos, para guardarlas para el futuro.
+
+53
+00:06:49,808 --> 00:06:53,187
+Las ideas perduraron. La práctica nunca tuvo tiempo de madurar.
+
+54
+00:06:55,287 --> 00:07:01,107
+En la empresa, la arquitectura de datos tampoco está nunca terminada: madura un cambio a la vez.
+
+55
+00:07:02,407 --> 00:07:08,941
+En su primer año, la revisión detuvo nueve nombres antes de que llegaran a una tabla, y quedaron por escrito catorce decisiones.

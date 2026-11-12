@@ -1,0 +1,44 @@
+{
+  "key": "one-language-kept",
+  "title": "One language, kept",
+  "sub": "Data architecture, a series on what DAMA calls data architecture, between the business and the systems: one language for the data, kept with the map, with names built from parts, the industry's reference model, a few principles and decisions written down, and every change checked against them.",
+  "howto": "Glass in the layers' colours is the confirmed model: gold is the business layer, peach the information layer, where data architecture works. A change is a dark card in code blue, with the table it would make: a red ring marks a name the review stops, a gold tick what passes. The glossary is a gold card, each meaning with its owner on a chip. Chile in 1972 is drawn in lamp-light: the telex, two factories' sheets, one definition, the operations room and the daily report.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "kept",
+    "built",
+    7.6
+  ],
+  "say": [
+    [
+      "\\bInés\\b",
+      "Ee-ness"
+    ],
+    [
+      "\\bCybersyn's\\b",
+      "Cyber-sin's"
+    ],
+    [
+      "\\bCybersyn\\b",
+      "Cyber-sin"
+    ],
+    [
+      "\\bCORFO\\b",
+      "Cor-foe"
+    ],
+    [
+      "\\bAllende\\b",
+      "Ah-yenday"
+    ],
+    [
+      "\\bAma\\b",
+      "Ah-mah"
+    ]
+  ],
+  "story": [
+    "same"
+  ]
+}

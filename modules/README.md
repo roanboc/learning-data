@@ -222,6 +222,7 @@ Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data
 - [Where each fact is born](../films/data-architecture/3-where-each-fact-is-born/) — `where-each-fact-is-born`
 - [How it travels](../films/data-architecture/4-how-it-travels/) — `how-it-travels`
 - [Who owns which data](../films/data-architecture/5-who-owns-which-data/) — `who-owns-which-data`
+- [One language, kept](../films/data-architecture/6-one-language-kept/) — `one-language-kept`
 
 ### Platform and solution architecture
 

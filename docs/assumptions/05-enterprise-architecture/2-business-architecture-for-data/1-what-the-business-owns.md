@@ -1,6 +1,6 @@
 # What the business owns: questions and assumptions
 
-*Enterprise architecture* · *Business architecture for data*, film 1 · pull request to follow
+*Enterprise architecture* · *Business architecture for data*, film 1 of 5 · PR #321 · [pull request](https://github.com/roanboc/learning-data/pull/321)
 
 [Watch it on the site](https://data.learn-all.org/business-architecture-for-data/what-the-business-owns/)
 

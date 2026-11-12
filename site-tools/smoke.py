@@ -516,9 +516,10 @@ async def check_deeplinks(run):
             pg, _ = await run.page(ctx, lang + "#film-three")
             await run.settle(pg)
             r = await pg.evaluate("""() => { const g = document.getElementById('go-deeper'), s = document.getElementById('film-three'), h = g && g.querySelector('h2');
-              return {inside: !!(g && s && g.contains(s)), top: h ? h.getBoundingClientRect().top : null,
-                      head: document.querySelector('header.top').getBoundingClientRect().bottom}; }""")
-            expect(sec, r["inside"] and r["top"] is not None and r["head"] - 1 <= r["top"] <= 300,
+              return {inside: !!(g && s && g.contains(s)), top: h ? h.getBoundingClientRect().top : null, ih: innerHeight,
+                      head: document.querySelector('header.top').getBoundingClientRect().bottom, end: scrollY + innerHeight >= document.documentElement.scrollHeight - 2}; }""")
+            # "Go deeper" is now the short last section: the page may reach its end before the heading reaches the top
+            expect(sec, r["inside"] and r["top"] is not None and r["head"] - 1 <= r["top"] <= (r["ih"] - 40 if r["end"] else 300),
                    f"/{lang}#film-three: doesn't land on #go-deeper ({r})")
             await pg.close()
         # chapter links: the page scrolls to the film and seeks; the chapter is highlighted
@@ -1563,7 +1564,7 @@ async def take_shots(run):
 
 # ---------------------------------------------------------------- the learning route
 async def check_route(run):
-    sec = run.rep.sec("route", "The learning route: drawn on the Topics page, as a map and as a rail on a phone, with goals; the list, its rows and the search; the home page's links to the topics; readable in dark mode")
+    sec = run.rep.sec("route", "The learning route: drawn on the Topics page, as a map and as a rail on a phone, with goals; the list, its rows and the search; the home page's ways on; readable in dark mode")
     tkeys, hkeys = run.pick(("topics/", "es/topics/")), run.pick(("", "es/"))
     if not (tkeys or hkeys):
         return
@@ -1632,26 +1633,25 @@ async def check_route(run):
         finally:
             await ctx.close()
 
-    # the home page stays a first view: every other topic a link to its row, then the route and the Making of; on a phone its
-    # links wrap and nothing scrolls sideways; a topic's link lands on the Topics list with that row open
+    # the home page stays a first view: after the film's two other steps, the route and the Making of, and no map or list of
+    # topics; on a phone nothing scrolls sideways, and the first button lands on the Topics page's route
     for width in (1280, 390):
         ctx = await seeded(width, "dark", {})
         try:
             for key in hkeys:
                 d = D[lang(key)]; pre = "es/" if lang(key) == "es" else ""
                 pg, log = await run.page(ctx, key)
-                r = await pg.evaluate("""() => ({links: [...document.querySelectorAll('.topic-links a')].map(a => a.textContent), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
-                    map: document.querySelectorAll('[data-route], .r-map, .r-rail').length, wide: document.documentElement.scrollWidth <= innerWidth,
-                    small: [...document.querySelectorAll('.topic-links a, .home-next a')].filter(a => a.getBoundingClientRect().height < 32).length})""")
-                expect(sec, r["links"] == [t["name"] for t in d["topics"][1:]], f"/{key} @{width}: its topic links are {r['links']}")
-                expect(sec, r["ways"] == ["topics/", "journey/"] and not r["map"], f"/{key} @{width}: after the topics, the route and the Making of, and no map ({r['ways']}, {r['map']})")
+                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.more-steps a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
+                    map: document.querySelectorAll('[data-route], .r-map, .r-rail, .topic-links, .topic-tiles').length, wide: document.documentElement.scrollWidth <= innerWidth,
+                    small: [...document.querySelectorAll('.more-steps a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
+                expect(sec, r["steps"] == ["labs/", "scenarios/"], f"/{key} @{width}: after the film, its two other steps are {r['steps']}")
+                expect(sec, r["ways"] == ["topics/", "journey/"] and not r["map"], f"/{key} @{width}: then the route and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
                 expect(sec, r["wide"] and not r["small"], f"/{key} @{width}: scrolls sideways ({not r['wide']}) or has {r['small']} links under 32 px tall")
                 if width == 390:
-                    last = d["topics"][-1]
-                    await pg.click(f'.topic-links a[href$="#{last["id"]}"]')
+                    await pg.click('.home-next a.primary')
                     await pg.wait_for_load_state("load")
-                    await pg.wait_for_selector(f'#{last["id"]} details[open]', timeout=5000)
-                    expect(sec, run.key(pg.url) == pre + "topics/" and await pg.locator("#list").is_visible(), f"/{key}: the link to {last['id']} doesn't open its row in the Topics list ({pg.url})")
+                    await pg.wait_for_selector(".route.drawn", timeout=5000)
+                    expect(sec, run.key(pg.url) == pre + "topics/" and await pg.locator("#route").is_visible(), f"/{key}: its first button doesn't land on the Topics page's route ({pg.url})")
                 expect(sec, not log["console"] and not log["errors"], f"/{key} @{width}: {(log['console'] + log['errors'])[:2]}")
                 await pg.close()
         finally:
@@ -1710,19 +1710,15 @@ async def check_route(run):
             await pg.close()
         finally:
             await ctx.close()
-    # without scripts, the Topics page is the list, and the home page still links to every topic
+    # without scripts, the Topics page is the list
     ctx = await run.browser.new_context(java_script_enabled=False, viewport={"width": 1280, "height": 800})
     try:
-        for key in tkeys + hkeys:
+        for key in tkeys:
             pg = await ctx.new_page()
             await pg.goto(run.url(key), wait_until="load")
-            if key in tkeys:
-                vis = await pg.locator("#list summary").first.is_visible()
-                hid = await pg.locator("#route").is_hidden() and await pg.locator(".view-switch").is_hidden() and await pg.locator(".ix-tools").is_hidden()
-                expect(sec, vis and hid, f"/{key} without scripts: the list shows ({vis}) and the route, the switch and the search stay hidden ({hid})")
-            else:
-                n = await pg.locator(".topic-links a").count()
-                expect(sec, n == len(D[lang(key)]["topics"]) - 1, f"/{key} without scripts: {n} plain links to the topics")
+            vis = await pg.locator("#list summary").first.is_visible()
+            hid = await pg.locator("#route").is_hidden() and await pg.locator(".view-switch").is_hidden() and await pg.locator(".ix-tools").is_hidden()
+            expect(sec, vis and hid, f"/{key} without scripts: the list shows ({vis}) and the route, the switch and the search stay hidden ({hid})")
             await pg.close()
     finally:
         await ctx.close()

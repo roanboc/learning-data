@@ -36,7 +36,7 @@ hand-written pages that show its cards, and what each film builds on. The films 
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
 For each series: its page (site/<slug>/) and, for each film, its Watch page (site/<slug>/<film>/) and, if it has them, its
 Take it apart and Make the call pages (labs/, scenarios/), and their twins under site/es/. Then the Topics page (topics/):
-the learning route and the list, from modules/route.json (see docs/navigation.md); the topics as links on the home page and as
+the learning route and the list, from modules/route.json (see docs/navigation.md); the ways on from the home page, and the topics as
 tiles on the intro's scenarios page (between <!-- topics: made by site-tools/build_series.py --> and <!-- /topics -->); and the
 route's data (assets/learn/route.<lang>.js). The words come from the series' series.json and each film's site.json; the length and chapters from
 the film's own source (narration.js, vodur.js and breath.js, timed as The Inner Life of Data's engine times them); the counts
@@ -411,7 +411,7 @@ HAND = {
                           ("too-good-to-be-true", "ld-too-good-to-be-true", "when-things-go-wrong/2-too-good-to-be-true")], labs=True),
 }
 # The big topics, in order: their names, who each is for, what it covers, and what it holds (an id of HAND or SERIES). The Topics
-# page shows them all, each with its cards, as a route and as a list; the home page plays the first and links to the others.
+# page shows them all, each with its cards, as a route and as a list; the home page plays the first and leads to the route.
 from catalog import load_modules
 TOPICS = load_modules()
 
@@ -1085,7 +1085,7 @@ def topics_page(lg):
 
 def tiles(lg, R):
     """Every topic after the first, as a tile: its name (a link to it on the Topics page), what it covers, and its films and
-    series, each a link. For the intro's scenarios page, whose path to the site's root is R (the home page shows the topics as links: home_topics())."""
+    series, each a link. For the intro's scenarios page, whose path to the site's root is R (the home page only leads to the route: home_next())."""
     RL = R if lg == "en" else R[3:]
     out = []
     for t in live()[1:]:
@@ -1234,17 +1234,16 @@ def route_box(lg, R, RL):
     return f'<div class="route" data-route data-root="{R}" data-base="{RL}" data-topics=""></div>'
 
 
-# The home page stays a first view: the film, then the other topics as plain links, each to its row on the Topics page, and two
-# ways on: the learning route, and how the films were made. The route itself is on the Topics page only.
+# The home page stays a first view: the film, its two other steps, then two ways on: the learning route, and how the films were
+# made. It names no topic and draws no route: both are on the Topics page (the author, 12 November 2026).
 HOME_TEXT = {"en": ("Find your learning route", "How the films were made"),
              "es": ("Encuentra tu ruta de aprendizaje", "Cómo se hicieron las películas")}
 
 
-def home_topics(lg, R):
-    """The home page's topics: every topic after the first as a link, in the route's order, then the two ways on."""
+def home_next(lg, R):
+    """The home page's ways on, after the film and its steps: the learning route, and how the films were made."""
     RL = R if lg == "en" else R[3:]
-    rows = "\n".join(f'<li><a href="{RL}topics/#{t["id"]}">{E(t["name"])}</a></li>' for t in route_data(lg)["topics"][1:])
-    return (f'<ul class="topic-links">\n{rows}\n</ul>\n<p class="home-next"><a class="btn primary" href="{RL}topics/">{HOME_TEXT[lg][0]}</a>'
+    return (f'<p class="home-next"><a class="btn primary" href="{RL}topics/">{HOME_TEXT[lg][0]}</a>'
             f'<a class="btn" href="{RL}journey/">{HOME_TEXT[lg][1]}</a></p>\n')
 
 
@@ -1316,7 +1315,7 @@ BLOCKS = FW["blocks"]  # kept for callers that count From words to data's blocks
 # the hand-written pages that show the topics as tiles: (path under site/, language, the path from that page to the site's root)
 PUBLISH = "--publish" in sys.argv[1:]  # the site's publish: the tiles carry each series' count of films
 TILES = [("scenarios/index.html", "en", "../"), ("es/scenarios/index.html", "es", "../../")]
-HOME = [("index.html", "en", ""), ("es/index.html", "es", "../")]  # the home pages show the topics as plain links instead (home_topics())
+HOME = [("index.html", "en", ""), ("es/index.html", "es", "../")]  # the home pages show two ways on instead (home_next())
 TILE_MARKS = ('<!-- topics: made by site-tools/build_series.py -->', '<!-- /topics -->')
 
 
@@ -1344,7 +1343,7 @@ def blocks():
     for rel_path, lg, R in TILES:
         fill(rel_path, *TILE_MARKS, tiles(lg, R))
     for rel_path, lg, R in HOME:
-        fill(rel_path, *TILE_MARKS, home_topics(lg, R))
+        fill(rel_path, *TILE_MARKS, home_next(lg, R))
     for rel_path in HAND_PAGES:
         src = texts.get(rel_path) or (WEB / rel_path).read_text()
         texts[rel_path] = re.sub(r'<header class="top">.*?</header>', lambda m: hand_header(rel_path), src, count=1)

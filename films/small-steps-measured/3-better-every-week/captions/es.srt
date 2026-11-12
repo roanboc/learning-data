@@ -87,121 +87,121 @@ Esas lecturas ya resolvieron dos esperas: el módulo Liderar equipos de datos cu
 Desde el viernes 3 de septiembre, Helena protege media hora semanal para cómo trabaja el equipo: los viernes, de 15:30 a 16:00.
 
 23
-00:03:01,029 --> 00:03:07,883
-Una medida. Un pequeño cambio, probado una semana, y conservado o descartado en voz alta: planificar, hacer, verificar, actuar.
+00:03:01,029 --> 00:03:07,750
+Una medida. Un pequeño cambio, probado una semana, y conservado o descartado en voz alta: planificar, hacer, estudiar, actuar.
 
 24
-00:03:09,983 --> 00:03:17,520
+00:03:09,850 --> 00:03:17,387
 El módulo Calidad de datos sigue el mismo ritmo para una lista, quince minutos los jueves; aquí, es para cómo trabaja el equipo.
 
 25
-00:03:21,220 --> 00:03:25,405
+00:03:21,087 --> 00:03:25,272
 El primer viernes, Noor busca en el gestor de solicitudes dónde espera más el trabajo.
 
 26
-00:03:27,105 --> 00:03:33,215
+00:03:26,972 --> 00:03:33,082
 Está al principio de todo: una solicitud por la puerta de entrada espera seis días hábiles su primera pregunta de vuelta.
 
 27
-00:03:35,115 --> 00:03:40,010
+00:03:34,982 --> 00:03:39,877
 Así que empiezan donde empieza la tarjeta: dividir el trabajo, detalle a detalle.
 
 28
-00:03:41,710 --> 00:03:47,775
+00:03:41,577 --> 00:03:47,642
 Llega a la lista única. Espera la planificación del lunes. Pasa a alguien, que la lee y pregunta.
 
 29
-00:03:49,875 --> 00:03:57,243
+00:03:49,742 --> 00:03:57,110
 Luego cuestionan cada detalle. ¿Por qué esperar al lunes? Las cinco respuestas del formulario bastan para preguntar ese día.
 
 30
-00:03:59,143 --> 00:04:06,684
+00:03:59,010 --> 00:04:06,551
 Ivy propone un cambio: la siguiente persona libre lee cada solicitud nueva el día que llega, y pregunta en un día hábil.
 
 31
-00:04:08,584 --> 00:04:13,309
+00:04:08,451 --> 00:04:13,176
 La planificación del lunes sigue fijando el orden del trabajo. Solo se adelanta la primera pregunta.
 
 32
-00:04:15,209 --> 00:04:16,560
+00:04:15,076 --> 00:04:16,427
 Lo prueban una semana.
 
 33
-00:04:20,660 --> 00:04:27,141
+00:04:20,527 --> 00:04:27,008
 Viernes 10 de septiembre: cada solicitud que llegó esa semana tuvo su primera pregunta de vuelta en un día hábil.
 
 34
-00:04:28,841 --> 00:04:31,942
+00:04:28,708 --> 00:04:31,809
 Un día, no seis. El equipo lo conserva, y lo dice.
 
 35
-00:04:34,042 --> 00:04:39,415
+00:04:33,909 --> 00:04:39,282
 Luego prueban un segundo cambio: diez minutos cada mañana, todo el equipo mirando toda la lista.
 
 36
-00:04:41,115 --> 00:04:46,957
+00:04:40,982 --> 00:04:46,824
 Una semana después lo descartan, en voz alta: costaba diez minutos diarios a todo el equipo y no encontró nada nuevo.
 
 37
-00:04:48,857 --> 00:04:52,473
+00:04:48,724 --> 00:04:52,340
 Descartar también es un resultado: nadie sigue haciéndolo por costumbre.
 
 38
-00:04:54,373 --> 00:05:01,816
+00:04:54,240 --> 00:05:01,683
 Cada viernes, la misma media hora. Al 17 de diciembre: quince cambios probados, catorce conservados, uno descartado.
 
 39
-00:05:05,916 --> 00:05:11,072
+00:05:05,783 --> 00:05:10,939
 Cada cambio conservado se escribe en el procedimiento que cambió, uno de los seis, ese mismo día.
 
 40
-00:05:13,172 --> 00:05:17,796
+00:05:13,039 --> 00:05:17,663
 El segundo paso del procedimiento para pedir ya lo dice, con la fecha del cambio y el porqué.
 
 41
-00:05:19,896 --> 00:05:25,762
+00:05:19,763 --> 00:05:25,629
 Así perdura: alguien nuevo lo aprende de la página, y se mantiene aunque quien lo pensó no esté.
 
 42
-00:05:27,662 --> 00:05:36,427
+00:05:27,529 --> 00:05:36,294
 Los días de la solicitud al primer uso bajan a 14, desde 24 en junio: los cambios de los viernes son parte de eso, con los de julio.
 
 43
-00:05:38,727 --> 00:05:43,881
+00:05:38,594 --> 00:05:43,748
 Y el trabajo devuelto para cambios baja a 6 de cada 100: más rápido no ha significado peor.
 
 44
-00:05:45,781 --> 00:05:51,588
+00:05:45,648 --> 00:05:51,455
 En cada revisión quincenal, quienes pidieron oyen qué cambió y por qué: los pequeños logros, a la vista.
 
 45
-00:05:55,488 --> 00:06:01,032
+00:05:55,355 --> 00:06:00,899
 En los años cuarenta, el último paso de la tarjeta decía: úsalo hasta que se desarrolle una forma mejor.
 
 46
-00:06:02,732 --> 00:06:08,840
+00:06:02,599 --> 00:06:08,707
 La página de cada procedimiento funciona igual: la mejor forma hasta ahora, hasta que un viernes encuentre una mejor.
 
 47
-00:06:10,740 --> 00:06:14,376
+00:06:10,607 --> 00:06:14,243
 El lunes, protege media hora, a la misma hora cada semana.
 
 48
-00:06:15,476 --> 00:06:18,075
+00:06:15,343 --> 00:06:17,942
 Elige una medida y busca dónde espera el trabajo.
 
 49
-00:06:19,175 --> 00:06:22,947
+00:06:19,042 --> 00:06:22,814
 Cambia una cosa una semana; luego consérvala o déjala, en voz alta.
 
 50
-00:06:24,047 --> 00:06:27,575
+00:06:23,914 --> 00:06:27,442
 Escribe lo que conservas en el procedimiento, y muestra los pequeños logros.
 
 51
-00:06:29,075 --> 00:06:33,659
+00:06:28,942 --> 00:06:33,526
 Cómo un líder lo vuelve hábito de todos, lo muestra el módulo Liderar equipos de datos.
 
 52
-00:06:35,159 --> 00:06:37,697
+00:06:35,026 --> 00:06:37,564
 Una medida, un pequeño cambio, cada semana.

@@ -233,7 +233,7 @@ note(Eb4, ow('one', 'six', 0.1), 0.45, 1.4)
 mark(oc('breath', 0.3), 0.6, 0.42, 0.7, 2.2, until=END)
 
 # 2. Half an hour on Fridays: the chapter turns on the partner's low E flat and a G; the September sheet; the two waits already fixed;
-#    the Friday half-hour on the calendar: the high A flat; the four words of the rules, a sheet; plan, do, check, act: the ring drawn,
+#    the Friday half-hour on the calendar: the high A flat; the four words of the rules, a sheet; plan, do, study, act: the ring drawn,
 #    one soft rub; the data quality module's Thursdays: a tag
 LV[0] = 0.9
 fw = lambda lid, word, off=0: W('friday', lid, word, off)

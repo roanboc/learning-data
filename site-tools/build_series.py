@@ -35,9 +35,10 @@ film is out, as the Topics and home pages leave out a topic with nothing on the 
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
 For each series: its page (site/<slug>/) and, for each film, its Watch page (site/<slug>/<film>/) and, if it has them, its
-Take it apart and Make the call pages (labs/, scenarios/), and their twins under site/es/. Then the Topics page (topics/),
-and the topics on the home page and the intro's scenarios page (between <!-- topics: made by site-tools/build_series.py -->
-and <!-- /topics -->). The words come from the series' series.json and each film's site.json; the length and chapters from
+Take it apart and Make the call pages (labs/, scenarios/), and their twins under site/es/. Then the Topics page (topics/):
+the learning route and the list, from modules/route.json (see docs/navigation.md); the ways on from the home page, and the topics as
+tiles on the intro's scenarios page (between <!-- topics: made by site-tools/build_series.py --> and <!-- /topics -->); and the
+route's data (assets/learn/route.<lang>.js). The words come from the series' series.json and each film's site.json; the length and chapters from
 the film's own source (narration.js, vodur.js and breath.js, timed as The Inner Life of Data's engine times them); the counts
 of labs and scenarios from the film's words in site/assets/<film>/learn.en.js (a film without one has none, and its page
 offers its Pause and think questions instead), and the count of Pause and think questions from think.en.js. A film whose
@@ -410,7 +411,7 @@ HAND = {
                           ("too-good-to-be-true", "ld-too-good-to-be-true", "when-things-go-wrong/2-too-good-to-be-true")], labs=True),
 }
 # The big topics, in order: their names, who each is for, what it covers, and what it holds (an id of HAND or SERIES). The Topics
-# page shows them all, each with its cards; the home page plays the first and shows the others as tiles.
+# page shows them all, each with its cards, as a route and as a list; the home page plays the first and leads to the route.
 from catalog import load_modules
 TOPICS = load_modules()
 
@@ -1008,42 +1009,83 @@ def topic_card(lg, e, RL, R):
 # the Topics page's words; {n}, {N} and {list} say how many topics the site shows, and which (topic_words())
 TOPICS_PAGE = {
     "title": {"en": "Topics · Learning Data", "es": "Temas · Learning Data"},
+    "h1": {"en": "Find your learning route", "es": "Encuentra tu ruta de aprendizaje"},
     "desc": {"en": "Short films on data, in {n} topics: {list}. Start with how a data platform works, then pick the topic you need.",
              "es": "Películas cortas sobre datos, en {n} temas: {list}. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas."},
-    "lead": {"en": "{N} topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.",
-             "es": "{N} temas, cada uno con sus películas y series. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas. Tu progreso se guarda en este navegador."},
+    "lead": {"en": "{N} topics on one route. Start with the introduction, build the foundations, then take the line you need. Your progress stays in this browser.",
+             "es": "{N} temas en una ruta. Empieza por la introducción, construye los fundamentos y luego toma la línea que necesitas. Tu progreso se guarda en este navegador."},
     "foot": {"en": "The university, the utility, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Films, scripts, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
              "es": "La universidad, la empresa de energía, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Películas, guiones, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."},
 }
+# The Topics page has two views of the same topics: the learning route (a line map, drawn by assets/learn/route.js from
+# assets/learn/route.<lang>.js) and the list (every topic a row that opens on its films and series, with a search of every
+# film's words). Without scripts the page is the list. VIEW: the words of the switch, the search and the rows.
+VIEW = {
+    "en": dict(view="View", route="Learning route", list="Topics list", search="Search the films: a word, a tool, an idea", soon="Coming soon",
+               more1="1 more series coming", more="{n} more series coming",
+               text=dict(loading="Reading the films…", none="Nothing found for “{q}”. Try a shorter word.", near="No film says “{q}”. Showing “{s}”.",
+                         film1="1 film", films="{n} films", topics="Topics and series", said="Said in the film", off="Search isn't available right now.",
+                         clear="Clear the search", topic="Topic", series="Series")),
+    "es": dict(view="Vista", route="Ruta de aprendizaje", list="Lista de temas", search="Busca en las películas: una palabra, una herramienta, una idea", soon="Próximamente",
+               more1="1 serie más en camino", more="{n} series más en camino",
+               text=dict(loading="Leyendo las películas…", none="No hay nada para «{q}». Prueba con una palabra más corta.", near="Ninguna película dice «{q}». Se muestra «{s}».",
+                         film1="1 película", films="{n} películas", topics="Temas y series", said="Se dice en la película", off="La búsqueda no está disponible ahora.",
+                         clear="Borrar la búsqueda", topic="Tema", series="Serie")),
+}
+
+
+def soon_card(lg, u):
+    """A series still being made, on its topic's row: its name and how many films it plans; no link and no progress."""
+    n = u["films"]
+    return (f'<article class="topic-card row soon">\n<div class="tc-body">\n<p class="kicker">{T(lg, f"Series · {n} films", f"Serie · {n} películas")} · {VIEW[lg]["soon"]}</p>\n'
+            f'<h3>{E(u["name"][lg])}</h3>\n</div>\n</article>')
 
 
 def topics_page(lg):
-    """The Topics page: every topic, who it's for and what it covers, with a card for each of its films and series."""
+    """The Topics page: the learning route, and the list: every topic a row, in the route's groups, that opens on who it's for,
+    what it covers, and a card for each of its films and series."""
     path = "topics/"
-    TW = topic_words(lg); desc = TOPICS_PAGE["desc"][lg].format(**TW); TL = live()
+    TW = topic_words(lg); desc = TOPICS_PAGE["desc"][lg].format(**TW); V = VIEW[lg]
     h, R = head(lg, path, TOPICS_PAGE["title"][lg], desc, desc, "poster.jpg")
     RL = R if lg == "en" else R[3:]
-    es = {t["id"]: [entry(lg, i) for i in shown(t)] for t in TL}
-    firsts = [e["posters"][0] for t in TL for e in es[t["id"]]]
-    seconds = [p for t in TL for e in es[t["id"]] for p in e["posters"][1:2]]
+    D = route_data(lg); TL = {t["id"]: t for t in live()}
+    es = {tid: [entry(lg, i) for i in shown(t)] for tid, t in TL.items()}
+    order = [TL[t["id"]] for t in D["topics"]]
+    firsts = [e["posters"][0] for t in order for e in es[t["id"]]]
+    seconds = [p for t in order for e in es[t["id"]] for p in e["posters"][1:2]]
     mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (firsts + seconds)[:8])
-    jump = "".join(f'<a href="#{t["id"]}">{E(t["name"][lg])}</a>' for t in TL)
     body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
-            f'<p class="eyebrow">Learning Data</p>\n<h1>{T(lg, "Topics", "Temas")}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg].format(**TW)}</p>\n'
-            f'<nav class="topic-jump" aria-label="{T(lg, f"The {NUM['en'][len(TL) - 1]} topics", f"Los {NUM['es'][len(TL) - 1]} temas")}">{jump}</nav>\n</section>\n')
-    for t in TL:
-        cards = "\n".join(topic_card(lg, e, RL, R) for e in es[t["id"]])
-        body += (f'\n<section class="module topic" id="{t["id"]}" aria-labelledby="{t["id"]}-h">\n'
-                 f'<div class="mhead"><div><p class="step">{E(t["who"][lg])}</p><h2 id="{t["id"]}-h">{E(t["name"][lg])}</h2><p>{E(t["line"][lg])}</p></div></div>\n'
-                 f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n</section>\n')
-    body += (f'</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
-             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
-    return h + "</head>\n" + body
+            f'<p class="eyebrow">Learning Data</p>\n<h1>{TOPICS_PAGE["h1"][lg]}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg].format(**TW)}</p>\n'
+            f'<div class="view-switch" role="group" aria-label="{V["view"]}" hidden><button type="button" data-view="route" aria-pressed="false">{V["route"]}</button>'
+            f'<button type="button" data-view="list" aria-pressed="true">{V["list"]}</button></div>\n</section>\n'
+            f'\n<section class="route-view" id="route" aria-labelledby="route-h" hidden>\n<h2 class="route-sr" id="route-h">{V["route"]}</h2>\n'
+            f'{route_box(lg, R, RL)}\n</section>\n'
+            f'\n<div class="list-view" id="list">\n<div class="ix-tools" hidden>\n<label class="ix-search" for="ix-q"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">'
+            '<circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>'
+            f'<input id="ix-q" type="search" autocomplete="off" placeholder="{E(V["search"])}" aria-label="{E(V["search"])}" data-index="{R}assets/learn/search.{lg}.json" '
+            f'data-base="{RL}" data-root="{R}" data-text="{E(json.dumps(V["text"], ensure_ascii=False))}"></label>\n'
+            '<p class="ix-count" id="ix-count" role="status" hidden></p>\n</div>\n<div class="ix-results" id="ix-results" hidden></div>\n')
+    for g in D["groups"]:
+        body += f'\n<div class="ix-group ln-{g["line"]}">\n<p class="step ix-gh"><i></i>{E(g["name"])}</p>\n'
+        for t in (TL[x["id"]] for x in D["topics"] if x["group"] == g["id"]):
+            up = upcoming(t)
+            cards = "\n".join([topic_card(lg, e, RL, R) for e in es[t["id"]]] + [soon_card(lg, u) for u in up])
+            more = f' · {V["more1"] if len(up) == 1 else V["more"].format(n=len(up))}' if up else ""
+            body += (f'<section class="module topic" id="{t["id"]}" aria-labelledby="{t["id"]}-h">\n<details>\n'
+                     f'<summary><i class="ix-ring" aria-hidden="true"></i><h2 id="{t["id"]}-h">{E(t["name"][lg])}</h2>'
+                     f'<span class="ix-who">{E(t["who"][lg])}</span><span class="ix-cnt">{topic_counts(lg, es[t["id"]])}{more}</span></summary>\n'
+                     f'<p class="ix-line">{E(t["line"][lg])}</p>\n'
+                     f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n</details>\n</section>\n')
+        body += '</div>\n'
+    body += (f'</div>\n</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
+             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/route.js"></script>\n<script src="{R}assets/learn/topics.js"></script>\n'
+             f'<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
+    return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n</head>\n' + body
 
 
 def tiles(lg, R):
     """Every topic after the first, as a tile: its name (a link to it on the Topics page), what it covers, and its films and
-    series, each a link. For the home page and the intro's scenarios page, whose path to the site's root is R."""
+    series, each a link. For the intro's scenarios page, whose path to the site's root is R (the home page only leads to the route: home_next())."""
     RL = R if lg == "en" else R[3:]
     out = []
     for t in live()[1:]:
@@ -1062,6 +1104,208 @@ def tiles(lg, R):
     return '<div class="topic-tiles">\n' + "\n".join(out) + '\n</div>\n'
 
 
+# ---------------------------------------------------------------- the learning route
+# modules/route.json puts the topics on one route: its groups, in order (the first is the start, the film every visitor begins
+# with; a group on the "main" line is a stretch of the suggested route, and a group on another line is a loop beside it, which
+# leaves after the foundations and joins again before the last stretch), each with its topics in order; the goals, each a short
+# list of films and series to watch in order; and the series a topic has in the works (upcoming), named on its row until their
+# first film is on the site. A new topic is added to one group there.
+ROUTE_FILE = ROOT / "modules" / "route.json"
+LINES = ("main", "share", "agents")  # the suggested route, and the two loops assets/learn/route.js draws above and below it
+_ROUTE = []
+
+
+def load_route():
+    """modules/route.json, checked against the topics: every topic in one group, and every goal's stops among the films and series."""
+    if _ROUTE:
+        return _ROUTE[0]
+    R = json.loads(ROUTE_FILE.read_text(encoding="utf-8")); where = "modules/route.json"
+    known = [t["id"] for t in TOPICS]; placed = [x for g in R["groups"] for x in g["topics"]]
+    if sorted(placed) != sorted(known):
+        sys.exit(f"{where}: every topic belongs to one group of the route. Not placed: {sorted(set(known) - set(placed)) or 'none'}; "
+                 f"unknown or placed twice: {sorted(x for x in set(placed) if x not in known or placed.count(x) > 1) or 'none'}")
+    both = lambda d: isinstance(d, dict) and set(d) == {"en", "es"} and all(isinstance(v, str) and v.strip() for v in d.values())
+    lines = [g["line"] for g in R["groups"]]
+    if any(l not in LINES or not both(g["name"]) for l, g in zip(lines, R["groups"])) or any(lines.count(l) > 1 for l in LINES[1:]):
+        sys.exit(f"{where}: a group needs a name in English and Spanish and a line ({', '.join(LINES)}); each loop is one group")
+    if lines[0] != "main" or len(R["groups"][0]["topics"]) != 1 or lines[-1] != "main":
+        sys.exit(f"{where}: the first group is the start, one topic on the main line, and the route ends on the main line")
+    items = {i for t in live() for i in shown(t)}
+    for g in R["goals"]:
+        bad = [x for x in g["stops"] if x not in items]
+        if bad or not both(g["name"]) or not both(g["line"]) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", g["id"]):
+            sys.exit(f"{where}: goal {g.get('id')!r} needs an id, a name and a line in English and Spanish, and stops that are films or series "
+                     f"on the site ({', '.join(bad) or 'none'} isn't)")
+    for tid, us in R.get("upcoming", {}).items():
+        if tid not in known or any(not both(u["name"]) or type(u["films"]) is not int for u in us):
+            sys.exit(f"{where}: upcoming names series by their topic ({tid!r}), each with a name in English and Spanish and its count of films")
+    _ROUTE.append(R)
+    return R
+
+
+def upcoming(t):
+    """The series a topic has in the works (modules/route.json's "upcoming"), until their first film is on the site."""
+    out = {S["dir"] for S in SERIES if S["id"] in shown(t)} | set(shown(t))
+    return [u for u in load_route().get("upcoming", {}).get(t["id"], []) if u["id"] not in out]
+
+
+def dur(m):
+    """Minutes as the route and the list say them: "40½ min", "2 h 3 min"."""
+    if m < 60:
+        return f'{int(m)}{"½" if m % 1 else ""} min'
+    h, r = divmod(round(m), 60)
+    return f"{h} h {r} min" if r else f"{h} h"
+
+
+def mins(e):
+    """An entry's length in minutes, from its card's words ("35 min", "5½ min")."""
+    return float(e["meta"].split(" · ")[0].split()[0].replace("½", ".5"))
+
+
+def watch(e):
+    """The progress prefixes of the films an entry counts as watched: a film's own, or each of a series' films."""
+    return [e["progress"][1]] if e["kind"] == "film" else list(e["progress"][1])
+
+
+def topic_counts(lg, entries):
+    """A topic's row, in numbers: "3 series · 20 films · 2 h 3 min"."""
+    ns, nf = sum(e["kind"] == "series" for e in entries), sum(len(watch(e)) for e in entries)
+    return " · ".join(([f"{ns} series"] if ns > 1 else []) + [T(lg, "1 film", "1 película") if nf == 1 else f'{nf} {T(lg, "films", "películas")}',
+                                                               dur(sum(mins(e) for e in entries))])
+
+
+def topic_totals():
+    """The minutes each topic's row states, as check_site.py allows lengths: whole ("3 min", of "2 h 3 min") and with a half ("40½")."""
+    whole, halves = set(), set()
+    for t in live():
+        m = re.search(r"(\d+)(½?) min$", dur(sum(mins(entry("en", i)) for i in shown(t))))
+        if m:
+            (halves if m.group(2) else whole).add(m.group(1) + ("½" if m.group(2) else " min"))
+    return whole, halves
+
+
+ROUTE_TEXT = {
+    "en": dict(start="Start here", play="Play introduction", open="Open topic", next="Your next stop", soon="Coming soon", route="Suggested route",
+               any="Suggested paths, not locked steps. Open any topic at any time.", whole="Whole route", want="I want to", stops="{n} stops",
+               go="Start this route", on="Continue this route", again="Watch again", watched="Watched", of="{n} of {of} watched", yours="Your route",
+               film1="1 film", films="{n} films", series="{n} series", more1="1 more series coming", more="{n} more series coming",
+               map="The learning route: {n} topics. Select a topic to see its films and series."),
+    "es": dict(start="Empieza aquí", play="Ver la introducción", open="Abrir el tema", next="Tu próxima parada", soon="Próximamente", route="Ruta sugerida",
+               any="Rutas sugeridas, no pasos obligatorios. Abre cualquier tema cuando quieras.", whole="Toda la ruta", want="Quiero", stops="{n} paradas",
+               go="Empezar esta ruta", on="Seguir esta ruta", again="Ver de nuevo", watched="Vista", of="{n} de {of} vistas", yours="Tu ruta",
+               film1="1 película", films="{n} películas", series="{n} series", more1="1 serie más en camino", more="{n} series más en camino",
+               map="La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series."),
+}
+
+
+def route_data(lg):
+    """What assets/learn/route.js draws, in a language: the route's groups, its topics in the route's order (each with who it's
+    for, what it covers, and its films and series: title, page, poster, length, and the progress prefixes of its films), the
+    goals, and the words."""
+    R = load_route(); TL = {t["id"]: t for t in live()}
+    topics = []
+    for g in R["groups"]:
+        for tid in g["topics"]:
+            if tid not in TL:
+                continue
+            t = TL[tid]; items = []
+            for i in shown(t):
+                e = entry(lg, i)
+                items.append(dict(id=i, kind=e["kind"], title=e["title"], href=e["href"], poster=e["posters"][0], kicker=e["kicker"],
+                                  len=e["meta"].split(" · ")[0], min=mins(e), films=watch(e),
+                                  **({"lang": "en"} if lg == "es" and e["title_lang"] == "en" else {})))
+            items += [dict(id=u["id"], soon=True, title=u["name"][lg], kicker=T(lg, f'Series · {u["films"]} films', f'Serie · {u["films"]} películas'))
+                      for u in upcoming(t)]
+            topics.append(dict(id=tid, group=g["id"], name=t["name"][lg], who=t["who"][lg], line=t["line"][lg], items=items))
+    on = {t["group"] for t in topics}
+    return dict(lang=lg, text=ROUTE_TEXT[lg], groups=[dict(id=g["id"], line=g["line"], name=g["name"][lg]) for g in R["groups"] if g["id"] in on],
+                topics=topics, goals=[dict(id=g["id"], name=g["name"][lg], line=g["line"][lg], stops=g["stops"]) for g in R["goals"]])
+
+
+def route_js(lg):
+    """assets/learn/route.<lang>.js: the route's data, one value a line, so two films of different series never change the same line."""
+    return ("/* Learning Data: the learning route's topics, films and series, in one language. Made by site-tools/build_series.py from\n"
+            "   modules/route.json and the topics: never edit it by hand. Drawn by route.js. */\n"
+            "window.LD_ROUTE = " + json.dumps(route_data(lg), ensure_ascii=False, indent=1) + ";\n")
+
+
+def route_box(lg, R, RL):
+    """Where assets/learn/route.js draws the route, on the Topics page."""
+    return f'<div class="route" data-route data-root="{R}" data-base="{RL}" data-topics=""></div>'
+
+
+# The home page stays a first view: the film, its two other steps, then two ways on: the learning route, and how the films were
+# made. It names no topic and draws no route: both are on the Topics page (the author, 12 November 2026).
+HOME_TEXT = {"en": ("Find your learning route", "How the films were made"),
+             "es": ("Encuentra tu ruta de aprendizaje", "Cómo se hicieron las películas")}
+
+
+def home_next(lg, R):
+    """The home page's ways on, after the film and its steps: the learning route, and how the films were made."""
+    RL = R if lg == "en" else R[3:]
+    return (f'<p class="home-next"><a class="btn primary" href="{RL}topics/">{HOME_TEXT[lg][0]}</a>'
+            f'<a class="btn" href="{RL}journey/">{HOME_TEXT[lg][1]}</a></p>\n')
+
+
+# ---------------------------------------------------------------- the search of every film's words
+# The Topics list searches what the films say: assets/learn/search.<lang>.json holds, for every film on the site, its title,
+# series, topic, page, intro and captions (each line with its second, so a result opens the film there), and the topics and
+# series themselves. It is made from the films' own caption files and site.json, and it changes with every film, so it isn't
+# committed: `python site-tools/build_series.py --search` writes it, and so does the site's publish (--publish).
+def cues(p):
+    """A caption file's lines: [[second, text], ...]."""
+    out = []
+    for block in re.split(r"\n\s*\n", p.read_text(encoding="utf-8")):
+        m = re.search(r"(?:(\d+):)?(\d\d):(\d\d)[.,]\d+\s*-->", block)
+        if m:
+            text = " ".join(l.strip() for l in block[m.end():].split("\n")[1:] if l.strip())
+            out.append([int(m.group(1) or 0) * 3600 + int(m.group(2)) * 60 + int(m.group(3)), re.sub(r"<[^>]+>", "", text)])
+    return out
+
+
+def search_index(lg):
+    """Every film, series and topic the search finds, in a language."""
+    out_f, out_s = [], []
+    for t in live():
+        tn = t["name"][lg]
+        out_s.append(dict(k="topic", t=tn, u=f'topics/#{t["id"]}', x=f'{t["who"][lg]}. {t["line"][lg]}'))
+        for i in shown(t):
+            e = entry(lg, i)
+            if e["kind"] == "series":
+                out_s.append(dict(k="series", t=e["title"], m=tn, u=e["href"], x=e["card"]))
+            S = next((x for x in SERIES if x["id"] == i), None)
+            if S is not None:
+                for f in films(S)[1]:
+                    site = f["site"]
+                    out_f.append(dict(t=site.get("title_es", f["title"]) if lg == "es" else f["title"], s=e["title"], m=tn, u=f'{S["slug"]}/{f["key"]}/',
+                                      p=f'{f["key"]}-poster.jpg', x=f'{site[T(lg, "kicker", "kicker_es")]}. {site[T(lg, "lead", "lead_es")]}',
+                                      c=cues(S["root"] / f["dir"] / "captions" / f"{lg}.vtt")))
+                continue
+            h = HAND[i]
+            if "films" in h:
+                for key, _, d in h["films"]:
+                    meta = json.loads((ROOT / "films" / d / "source" / "film.json").read_text()) if (ROOT / "films" / d / "source" / "film.json").exists() else {}
+                    out_f.append(dict(t=meta.get("title", key.replace("-", " ").capitalize()), s=e["title"], m=tn, u=f'{h["href"]}{key}/', p=f"{key}-poster.jpg", x=e["card"],
+                                      c=cues(ROOT / "films" / d / "captions" / f"{lg}.vtt")))
+            else:
+                out_f.append(dict(t=e["title"], s="", m=tn, u=h["href"], p=h["poster"][lg], x=e["card"], c=cues(ROOT / h["source"] / "captions" / f"{lg}.vtt")))
+    return dict(v=1, films=out_f, groups=out_s)
+
+
+def write_search():
+    """Writes the search's words for each language; returns how many films they hold."""
+    n = 0
+    for lg in ("en", "es"):
+        D = search_index(lg); n = len(D["films"])
+        (WEB / "assets" / "learn" / f"search.{lg}.json").write_text(json.dumps(D, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    return n
+
+
+def data():
+    """The generated files that aren't pages: (path under site/, text)."""
+    return [(f"assets/learn/route.{lg}.js", route_js(lg)) for lg in ("en", "es")]
+
+
 def marks(S):
     return f'<!-- {S["id"]}: made by site-tools/build_series.py -->', f'<!-- /{S["id"]} -->'
 
@@ -1070,7 +1314,8 @@ OPEN, CLOSE = marks(FW)
 BLOCKS = FW["blocks"]  # kept for callers that count From words to data's blocks
 # the hand-written pages that show the topics as tiles: (path under site/, language, the path from that page to the site's root)
 PUBLISH = "--publish" in sys.argv[1:]  # the site's publish: the tiles carry each series' count of films
-TILES = [("index.html", "en", ""), ("es/index.html", "es", "../"), ("scenarios/index.html", "en", "../"), ("es/scenarios/index.html", "es", "../../")]
+TILES = [("scenarios/index.html", "en", "../"), ("es/scenarios/index.html", "es", "../../")]
+HOME = [("index.html", "en", ""), ("es/index.html", "es", "../")]  # the home pages show two ways on instead (home_next())
 TILE_MARKS = ('<!-- topics: made by site-tools/build_series.py -->', '<!-- /topics -->')
 
 
@@ -1097,6 +1342,8 @@ def blocks():
             fill(rel_path, o, c, block(lg, what, R, rel, films_, S))
     for rel_path, lg, R in TILES:
         fill(rel_path, *TILE_MARKS, tiles(lg, R))
+    for rel_path, lg, R in HOME:
+        fill(rel_path, *TILE_MARKS, home_next(lg, R))
     for rel_path in HAND_PAGES:
         src = texts.get(rel_path) or (WEB / rel_path).read_text()
         texts[rel_path] = re.sub(r'<header class="top">.*?</header>', lambda m: hand_header(rel_path), src, count=1)
@@ -1233,9 +1480,11 @@ if __name__ == "__main__":
         for rel, text in blocks():
             if rel in tiled:
                 (WEB / rel).write_text(text)
-        print(f"filled the series' counts of films in {len(tiled)} pages"); sys.exit()
+        print(f"filled the series' counts of films in {len(tiled)} pages, and wrote the search's words for {write_search()} films"); sys.exit()
+    if sys.argv[1:] == ["--search"]:  # for a local look or a browser check: the file isn't committed
+        print(f"wrote the search's words for {write_search()} films"); sys.exit()
     n = 0
-    for rel, text in pages() + blocks():
+    for rel, text in pages() + blocks() + data():
         p = WEB / rel
         p.parent.mkdir(parents=True, exist_ok=True)
         if not p.exists() or p.read_text() != text:
@@ -1248,5 +1497,5 @@ if __name__ == "__main__":
             (S["root"] / "README.md").write_text(readme(S)); n += 1
         series, films_ = films(S)
         print(f"{S['name']['en']}: {len(films_)} film{'s' if len(films_) != 1 else ''}: " + ", ".join(f"{f['title']} ({f['len']} min, {offers('en', f)})" for f in films_))
-    print(f"wrote {n} of {len(pages()) + len(blocks()) + len(lists()) + len(SERIES)} files (the series' own pages and the Topics page, their blocks in {len(blocks())} others, "
+    print(f"wrote {n} of {len(pages()) + len(blocks()) + len(data()) + len(lists()) + len(SERIES)} files (the series' own pages and the Topics page, their blocks in {len(blocks())} others, "
           f"the series' READMEs, and {len(lists())} lists the films have rows in)")

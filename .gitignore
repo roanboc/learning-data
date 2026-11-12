@@ -7,3 +7,5 @@ site/assets/**/*.mp3
 films/**/source/build/
 films/**/source/dist/
 films/**/source/models/
+# the search of every film's words: made at publish and by `python site-tools/build_series.py --search`
+site/assets/learn/search.*.json

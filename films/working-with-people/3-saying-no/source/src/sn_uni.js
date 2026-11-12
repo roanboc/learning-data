@@ -69,7 +69,7 @@ function sn_list(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
     if(dw>0.004){ctx.save();ctx.globalAlpha*=ag_sine(dw);lp_T(ctx,r.agreed,C[2],ry+(r.date?84:46),{w:800,size:30,col:LP.blue});ctx.restore();}
     lp_T(ctx,r.weeks,C[3],ry+46,{w:600,size:28,col:LP.ink});
     ctx.fillStyle=rgba(LP.mut,0.16);ctx.fillRect(x+40,ry+102,w-80,2);ctx.restore();});
-  lp_T(ctx,"Ordered by value, urgency, effort and risk",x+40,y+h-30,{w:600,size:28,col:LP.mut});
+  lp_T(ctx,"Ordered by value and effort",x+40,y+h-30,{w:600,size:28,col:LP.mut});
   const tk=clamp(o.tick||0,0,1);if(tk>0.004){ctx.save();ctx.globalAlpha*=ag_sine(tk);const f=lerp(0.6,1,ag_spr(tk*1.2,0,0.5));ctx.fillStyle=rgba(LP.green,1);ctx.beginPath();ctx.arc(x+w-56,y+58,26*f,0,TAU);ctx.fill();lp_icon(ctx,"tick",x+w-56,y+58,34*f,[255,255,255]);ctx.restore();}
   ctx.restore();return{x,y,w,h};}
 

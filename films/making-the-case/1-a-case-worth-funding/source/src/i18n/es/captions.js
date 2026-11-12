@@ -67,6 +67,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "¿Hace falta? ¿Es la opción de mejor valor? ¿Se puede comprar? ¿Se puede costear? ¿Se puede llevar a cabo?",
 "Helena uses them as a checklist, not a form.":
 "Helena las usa como lista de control, no como formulario.",
+"She keeps heavy methods for critical systems, where a mistake can cost lives.":
+"Deja los métodos pesados para los sistemas críticos, donde un error puede costar vidas.",
+"Everywhere else, a light one lets her try, learn and change course quickly.":
+"En todo lo demás, uno ligero le permite probar, aprender y cambiar de rumbo rápido.",
 "Then the options, and one always carries on as now: doing nothing has a price too.":
 "Luego las opciones, y una siempre sigue como hasta ahora: no hacer nada también tiene un precio.",
 "Option A: renew the licence for three years. A$930,000, for an old version on old servers.":

@@ -53,6 +53,7 @@
 | 10 November 2026 | Its Pause and think stops after *Nine gaps* (what makes a gap: any layer where today and the target differ, not only systems), *What each unlocks* (why the front door first: it unlocks the list, not because it's cheap) and *Each stage on its own* (why the whole move goes to stage two: half a move is no use on its own), with the right answers at options 2, 3 and 1, options of like length and one near miss each. In Spanish it is *De las brechas a la hoja de ruta*, its kicker *Planificar por etapas*, with the module's words (situación actual y deseada, brecha, paquete de trabajo, meseta once, etapa, hoja de ruta, puerta de entrada, lista única, referente de datos, el antiguo almacén, responsable), and its last line "Convierte las brechas en etapas que funcionen por sí solas." Its page links, under *Go further*, The Open Group's overview pages for TOGAF and ArchiMate (the standards' own pages ask for a login), Rail 2000 and clock-face scheduling on Wikipedia, and Gisela Hürlimann's 2005 history of the Swiss path to the "Railway of the Future" (STRC), each checked on 10 November 2026. |
 | 10 November 2026 | Its soundtrack ships as every film merged since PR #243 ships its own: `audio.json` from `media.py index --film from-gaps-to-a-roadmap-en`, with the MP3 committed beside it (`git add -f`); the *Store audio outside Git* workflow publishes the release when the film reaches main, so no one runs it by hand. |
 | 10 November 2026 | Made and merged while the author was away, on the assumptions in its own file, `docs/assumptions/11-data-management/1-a-plan-in-ninety-days/4-from-gaps-to-a-roadmap.md`, for his final checklist; its page carries the series' Draft label until he has seen it. It closes *A plan in ninety days*, and merges after *Design it simple*, the film before it. |
+| 12 November 2026 | From the author's review of the module's assumptions (his answer of 12 November 2026): the five layers stay, and "data" or "information" are both fine at the enterprise level, since DAMA names it data; a note is enough, because another film explains the two words. This film's line on ArchiMate was already right ("ArchiMate, the architects' notation, has no information layer"), so its voice and soundtrack stay as they are. It gains one note on screen, under "Information, a layer of its own": "TOGAF and DAMA call it data". The film that explains the two words, *Between the business and the systems*, is named in *Services with customers*, where the line had to change; here the shot has room and time for the note only. |
 <!-- /decided -->
 
 ## The brief
@@ -80,7 +81,7 @@ No single body of knowledge covers the whole job, so the module uses three, each
 | The Five Case Model (the UK Treasury's guidance on business cases); benefits management (John Ward and Elizabeth Daniel, 2006) | A case answers five questions; benefits have owners and are tracked after the decision | *A case worth funding*, *Measures that matter* |
 | ISO 31000 (2018); Gary Klein's pre-mortem (2007) | The words of risk; imagining the failure before it happens | *Risks, said out loud* |
 | A power and interest grid (Aubrey Mendelow, 1991) | Stakeholders mapped by influence and interest | *Everyone at the table* |
-| The cost of delay (Donald Reinertsen, 2009) | Ordering work by what waiting costs | *One list, not twenty* |
+| The author's own principle (12 November 2026): value and effort, where value is an opportunity or a risk prevented. The cost of delay (Donald Reinertsen, 2009) is its fuller relative: on the film's page as further reading, not in the film | Ordering work by what it's worth, for the effort it takes | *One list, not twenty* |
 | The balanced scorecard (Robert Kaplan and David Norton, 1992); Goodhart's law (1975) | Measures in groups; a measure made a target stops measuring | *Measures that matter* |
 | Training Within Industry's job methods (1940 to 1945) | Improving one's own work, in small steps, written down so it lasts | *Better every week* |
 | Data mesh's domain ownership and federated governance (Zhamak Dehghani, 2022); Piethein Strengholt, *Data Management at Scale* (2020) | A small team in the middle and partners in each area | *Design it simple* |
@@ -102,12 +103,12 @@ Where the module differs from them: DAMA-DMBOK describes each area in depth, and
 | A case is a decision on one page: options, costs once and running, benefits with owners, one clear ask | The Five Case Model; benefits management | *A case worth funding* |
 | Risks said early, with owners and early signs, build trust | ISO 31000; the pre-mortem | *Risks, said out loud* |
 | Stakeholders are kept by being heard and seeing progress, the same story for everyone | Mendelow; the author's people's engagement first | *Everyone at the table* |
-| One door and one list, ordered in the open, never by who shouts | Kanban; the cost of delay | *One list, not twenty* |
+| One door and one list, ordered in the open by value and effort, never by who shouts | Kanban; the author's value and effort (12 November 2026) | *One list, not twenty* |
 | Something real in front of the person who decides within two weeks, then short rounds | The Agile Manifesto; the author's "prototype and iterate fast" | *Prototype first* |
 | Measure what people get, with baselines; a measure for the team, never a target for one person | The balanced scorecard; Goodhart | *Measures that matter* |
 | One measure, one small change, every week, written down so it lasts | Training Within Industry; plan, do, check, act | *Better every week* |
 | A strategy is reviewed on a rhythm and moved out loud when the world moves | Rumelt; TOGAF's change management | *Strategy is a habit* |
-| Run your services as a business, with suppliers and customers; design every layer, strategy to technology, for them | The author (10 November 2026); ArchiMate's layers | *Services with customers*; *Listen first* and *Design it simple* use the five layers |
+| Run your services as a business, with suppliers and customers; design every layer, strategy to technology, for them | The author (10 November 2026); four of the five layers are ArchiMate's, and information is what TOGAF and DAMA call data | *Services with customers*; *Listen first* and *Design it simple* use the five layers |
 | Every page has its picture, drawn with it | The author: "visualization everywhere" | Every film |
 | One map in a repository, updated with every change, everything else made from it; architecture a shared capability | The author; docs as code | *One map, in the repo* |
 | One preferred way, and a path for every provider that can't reach it; value first | The author | *A path for every provider* |
@@ -130,6 +131,7 @@ Practitioners' advice, for the author to confirm or correct (each film's own is 
 - Protect a short time every week to improve how the team works.
 - Review the strategy every quarter, and say what moved and why.
 - The author's own (10 November 2026): define your services and who they're for before you design; draw a picture for every page; keep the architecture in one repository and update it with every change, never waiting for funding; make it the team's job, starting with yours; give every provider a path, and put value first.
+- The author's own (12 November 2026): prefer light methods, because they allow rapid iteration, and keep heavy frameworks, for business cases, project management and everything else, for critical systems where errors can cost lives; order work by value and effort, where value is an opportunity or a risk prevented; at the level of the whole organisation, call the layer data or information, as either word is fine.
 
 ## The world and the people
 

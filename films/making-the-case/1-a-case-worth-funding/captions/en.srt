@@ -115,145 +115,153 @@ Is it needed? Is it the best value? Can it be bought? Can it be afforded? Can it
 Helena uses them as a checklist, not a form.
 
 30
-00:03:39,795 --> 00:03:44,661
-Then the options, and one always carries on as now: doing nothing has a price too.
+00:03:38,595 --> 00:03:43,215
+She keeps heavy methods for critical systems, where a mistake can cost lives.
 
 31
-00:03:45,861 --> 00:03:53,404
-Option A: renew the licence for three years. A$930,000, for an old version on old servers.
+00:03:44,715 --> 00:03:48,964
+Everywhere else, a light one lets her try, learn and change course quickly.
 
 32
-00:03:54,604 --> 00:04:00,499
-Option B: move all 38 reports as they are. A$520,000, once.
+00:03:51,664 --> 00:03:56,530
+Then the options, and one always carries on as now: doing nothing has a price too.
 
 33
-00:04:01,699 --> 00:04:04,733
-But the warehouse's own logs show who opens what.
+00:03:57,730 --> 00:04:05,273
+Option A: renew the licence for three years. A$930,000, for an old version on old servers.
 
 34
-00:04:05,733 --> 00:04:14,237
-17 of the 38 reports haven't been opened in a year. The other 21 are used by about 260 people.
+00:04:06,473 --> 00:04:12,368
+Option B: move all 38 reports as they are. A$520,000, once.
 
 35
-00:04:15,437 --> 00:04:25,877
-Option C: move those 21, rebuilt on the platform from governed products, and retire the 17 nobody opens. A$380,000, once.
+00:04:13,568 --> 00:04:16,602
+But the warehouse's own logs show who opens what.
 
 36
-00:04:27,277 --> 00:04:32,820
-C is the one Helena recommends. A and B stay on the page, so the council can see why.
+00:04:17,602 --> 00:04:26,106
+17 of the 38 reports haven't been opened in a year. The other 21 are used by about 260 people.
 
 37
-00:04:35,420 --> 00:04:40,947
-Then the costs, once and every year: the canal's case counted its tolls, not only the digging.
+00:04:27,306 --> 00:04:37,746
+Option C: move those 21, rebuilt on the platform from governed products, and retire the 17 nobody opens. A$380,000, once.
 
 38
-00:04:41,947 --> 00:04:49,310
-Running the 21 rebuilt reports will cost about A$40,000 a year, from the platform's own cost records.
+00:04:39,146 --> 00:04:44,689
+C is the one Helena recommends. A and B stay on the page, so the council can see why.
 
 39
-00:04:50,310 --> 00:05:00,085
-So A$310,000 a year stops, and A$40,000 starts: a saving of A$270,000 a year, from January 2028.
+00:04:47,289 --> 00:04:52,816
+Then the costs, once and every year: the canal's case counted its tolls, not only the digging.
 
 40
-00:05:01,485 --> 00:05:09,844
-The A$380,000 is paid back in about 17 months: the case's payback, the time until the saving covers the cost.
+00:04:53,816 --> 00:05:01,179
+Running the 21 rebuilt reports will cost about A$40,000 a year, from the platform's own cost records.
 
 41
-00:05:11,244 --> 00:05:14,894
-Over five years, it saves A$970,000.
+00:05:02,179 --> 00:05:11,954
+So A$310,000 a year stops, and A$40,000 starts: a saving of A$270,000 a year, from January 2028.
 
 42
-00:05:15,894 --> 00:05:22,204
-Rohan Desai, Finance's management accountant, checks every figure before it goes to the council.
+00:05:13,354 --> 00:05:21,713
+The A$380,000 is paid back in about 17 months: the case's payback, the time until the saving covers the cost.
 
 43
-00:05:23,004 --> 00:05:26,270
-Then the council can argue about the choice, not the numbers.
+00:05:23,113 --> 00:05:26,763
+Over five years, it saves A$970,000.
 
 44
-00:05:28,870 --> 00:05:31,543
-Then the benefits, each with an owner and a date.
+00:05:27,763 --> 00:05:34,073
+Rohan Desai, Finance's management accountant, checks every figure before it goes to the council.
 
 45
-00:05:33,043 --> 00:05:41,205
-The saving, from January 2028, belongs to the director of digital services, whose budget pays for the licence today.
+00:05:34,873 --> 00:05:38,139
+Then the council can argue about the choice, not the numbers.
 
 46
-00:05:43,105 --> 00:05:44,659
-Some benefits aren't money.
+00:05:40,739 --> 00:05:43,412
+Then the benefits, each with an owner and a date.
 
 47
-00:05:45,959 --> 00:05:53,371
-Every report reads one staff list, not the warehouse's old copy: Ingrid Holm in HR owns that, from December.
+00:05:44,912 --> 00:05:53,074
+The saving, from January 2028, belongs to the director of digital services, whose budget pays for the licence today.
 
 48
-00:05:55,271 --> 00:06:01,835
-And every report has an owner, named in the catalog by March 2028: that benefit is Helena's.
+00:05:54,974 --> 00:05:56,528
+Some benefits aren't money.
 
 49
-00:06:03,735 --> 00:06:12,092
-Benefits management, as John Ward and Elizabeth Daniel describe it, adds one more step: track the benefits after the decision.
+00:05:57,828 --> 00:06:05,240
+Every report reads one staff list, not the warehouse's old copy: Ingrid Holm in HR owns that, from December.
 
 50
-00:06:13,792 --> 00:06:20,317
-Each quarter, the council will see each benefit against its date. Without that, the case was only a pitch.
+00:06:07,140 --> 00:06:13,704
+And every report has an owner, named in the catalog by March 2028: that benefit is Helena's.
 
 51
-00:06:23,017 --> 00:06:26,330
-Tuesday 25 May. The data council meets.
+00:06:15,604 --> 00:06:23,961
+Benefits management, as John Ward and Elizabeth Daniel describe it, adds one more step: track the benefits after the decision.
 
 52
-00:06:27,530 --> 00:06:31,124
-Helena has ten minutes and one page, with Rohan beside her.
+00:06:25,661 --> 00:06:32,186
+Each quarter, the council will see each benefit against its date. Without that, the case was only a pitch.
 
 53
-00:06:32,124 --> 00:06:37,541
-The page leads with the decision; the leading data people module shows how to write one.
+00:06:34,886 --> 00:06:38,199
+Tuesday 25 May. The data council meets.
 
 54
-00:06:38,541 --> 00:06:45,958
-Then the ask, said plainly: A$380,000 and two of the team for six months, and a decision today.
+00:06:39,399 --> 00:06:42,993
+Helena has ten minutes and one page, with Rohan beside her.
 
 55
-00:06:47,558 --> 00:06:51,610
-Mei, from the registrar's office, asks what waiting a year would cost.
+00:06:43,993 --> 00:06:49,410
+The page leads with the decision; the leading data people module shows how to write one.
 
 56
-00:06:52,610 --> 00:07:00,580
-The answer is on the page: waiting is option A, three more years of the old licence, A$930,000.
+00:06:50,410 --> 00:06:57,827
+Then the ask, said plainly: A$380,000 and two of the team for six months, and a decision today.
 
 57
-00:07:01,980 --> 00:07:03,662
-The council says yes, that day.
+00:06:59,427 --> 00:07:03,479
+Mei, from the registrar's office, asks what waiting a year would cost.
 
 58
-00:07:06,262 --> 00:07:12,249
-The Erie Canal's case put one decision plainly: the route, the cost, and how it would be paid back.
+00:07:04,479 --> 00:07:12,449
+The answer is on the page: waiting is option A, three more years of the old licence, A$930,000.
 
 59
-00:07:13,949 --> 00:07:22,044
-Its tolls repaid it within ten years. Helena's case should repay itself in 17 months, and the council will see it every quarter.
+00:07:13,849 --> 00:07:15,531
+The council says yes, that day.
 
 60
-00:07:23,944 --> 00:07:26,374
-On Monday, start from the decision you need.
+00:07:18,131 --> 00:07:24,118
+The Erie Canal's case put one decision plainly: the route, the cost, and how it would be paid back.
 
 61
-00:07:27,474 --> 00:07:29,922
-Always show the option of carrying on as now.
+00:07:25,818 --> 00:07:33,913
+Its tolls repaid it within ten years. Helena's case should repay itself in 17 months, and the council will see it every quarter.
 
 62
-00:07:31,022 --> 00:07:33,234
-Count running costs, not only building.
+00:07:35,813 --> 00:07:38,243
+On Monday, start from the decision you need.
 
 63
-00:07:34,334 --> 00:07:37,536
-Give each benefit an owner and a date, and track it after.
+00:07:39,343 --> 00:07:41,791
+Always show the option of carrying on as now.
 
 64
-00:07:38,636 --> 00:07:44,010
-Have Finance check the money. One page, ten minutes, and ask for a decision, with a date.
+00:07:42,891 --> 00:07:45,103
+Count running costs, not only building.
 
 65
-00:07:45,510 --> 00:07:49,019
+00:07:46,203 --> 00:07:49,405
+Give each benefit an owner and a date, and track it after.
+
+66
+00:07:50,505 --> 00:07:55,879
+Have Finance check the money. One page, ten minutes, and ask for a decision, with a date.
+
+67
+00:07:57,379 --> 00:08:00,888
 Options, costs, benefits with owners, and one clear ask.

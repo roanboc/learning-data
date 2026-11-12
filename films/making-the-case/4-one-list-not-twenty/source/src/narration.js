@@ -38,10 +38,10 @@ const NARR={
 "order":{"name":"Ordered in the open","lead":1.0,"tail":1.0,"vo":[
  {"id":"rule","gap":0.8,"text":"After Jena, Larrey wrote down one order: the most dangerously wounded first, without regard to rank or distinction."},
  {"id":"wait","gap":0.8,"text":"Those hurt less could wait. Their lives weren't in danger."},
- {"id":"weigh","gap":0.8,"text":"Helena's team orders its list the same way, in the open: each request is weighed for its value, its urgency, and the risk while it waits."},
- {"id":"cost","gap":0.8,"text":"Together, they say what waiting costs: what Donald Reinertsen calls the cost of delay."},
- {"id":"effort","gap":0.8,"text":"Divided by the effort, it puts small, urgent, valuable work first."},
- {"id":"anil","gap":0.8,"text":"Anil's request is small, and while it waits, his own spreadsheet keeps a copy of staff records. It goes near the top."},
+ {"id":"weigh","gap":0.8,"text":"Helena's team orders its list the same way, in the open: each request is weighed for the opportunity it brings, and the risk it prevents."},
+ {"id":"value","gap":0.8,"text":"Together, they're its value."},
+ {"id":"effort","gap":0.8,"text":"Divided by the effort, it puts small, valuable work first."},
+ {"id":"anil","gap":0.8,"text":"Anil's request is small, and it prevents a risk: his own spreadsheet keeps a copy of staff records. It goes near the top."},
  {"id":"dash","gap":0.8,"text":"A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again."},
  {"id":"loud","gap":0.8,"text":"Never by who asks, or how loudly."},
  {"id":"board","gap":0.8,"text":"The list is a board in the tracker that anyone at the university can see, and the data council reads it every month."}
@@ -56,7 +56,8 @@ const NARR={
 ]},
 "when":{"name":"Not now, and when","lead":1.0,"tail":1.0,"vo":[
  {"id":"council","gap":0.8,"text":"On Thursday 24 June, the University Council asks for the timetable to change from 2028.","say":"On Thursday the twenty-fourth of June, the University Council asks for the timetable to change from twenty twenty-eight."},
- {"id":"rooms","gap":0.8,"text":"The registrar's office needs the rooms' data for it by the end of August. That date can't move, so it goes near the top."},
+ {"id":"rooms","gap":0.8,"text":"The registrar's office needs the rooms' data for it by the end of August."},
+ {"id":"late","gap":0.8,"text":"That date can't move: a late timetable is a risk to prevent. So it goes near the top."},
  {"id":"clara","gap":0.8,"text":"On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.","say":"On Monday the twelfth of July, Clara, in Planning, asks for a new student forecast model, by the end of August too."},
  {"id":"same","gap":0.8,"text":"It goes on the same list, weighed the same way, and it hears not now, with a reason and a date."},
  {"id":"reason","gap":0.8,"text":"The reason: the timetable's date can't move. The date: the current model refreshed by the end of August, and the new one in October."},
@@ -68,7 +69,7 @@ const NARR={
  {"id":"back","gap":0.8,"text":"Larrey brought the wounded in from wherever they fell, and treated the worst first."},
  {"id":"helena","gap":0.8,"text":"Helena's team does the same with data: every request through one door, on one list, the most needed first."},
  {"id":"close","gap":0.8,"text":"On Monday, close every side door, kindly, and ask what each request is for."},
- {"id":"order","gap":0.8,"text":"Order the list in the open, by value, urgency, risk and effort."},
+ {"id":"order","gap":0.8,"text":"Order the list in the open, by value and effort."},
  {"id":"time","gap":0.8,"text":"Protect time for the roadmap and for running what you have, and limit what's in progress."},
  {"id":"tell","gap":0.8,"text":"Give every request that waits a reason and a date, and show the list to everyone."}
 ]}

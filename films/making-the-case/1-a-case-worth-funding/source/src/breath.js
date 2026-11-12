@@ -4,7 +4,7 @@
    four parts, as they become the end card. */
 const BREATH={
 "ditch":{"hold":{"when":1.2,"farms":1.0,"road":0.8,"cost":1.2,"harm":1.4,"canal":1.0,"refuse":1.2,"change":1.4,"case":1.0,"what":1.4,"yes":1.2,"dug":1.0,"land":1.4,"open":1.2,"cheaper":1.2,"tolls":1.2,"port":1.2,"data":0.8},"breathe":5.4},
-"decide":{"hold":{"may":1.0,"old":0.8,"pay":1.0,"renew":1.2,"helena":1.0,"first":1.4,"capability":1.2,"five":0.6,"questions":1.2}},
+"decide":{"hold":{"may":1.0,"old":0.8,"pay":1.0,"renew":1.2,"helena":1.0,"first":1.4,"capability":1.2,"five":0.6,"questions":1.2,"checklist":0.8,"heavy":0.8}},
 "options":{"hold":{"options":0.6,"a":0.6,"b":0.6,"logs":0.4,"unopened":0.6,"c":0.8}},
 "costs":{"hold":{"running":0.4,"forty":0.4,"stops":0.8,"payback":0.8,"five":0.4,"rohan":0.2}},
 "benefits":{"hold":{"each":0.8,"saving":1.2,"money":0.6,"staff":1.2,"owner":1.2,"ward":1.0}},

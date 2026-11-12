@@ -44,20 +44,42 @@ new, so every source has it, in the same form. Each of the two sources writes a 
 as it makes its file, so on a quiet night the newest record is still that night's; for a source
 with no heartbeat, the level has to allow for its quiet days.
 
+The records' dates are the right measure of how old the data is, and they leave one thing unsaid:
+why. An old newest record looks the same whether no file came or a file came with nothing new in
+it, and a file with nothing new is all a quiet day brings from a source with no heartbeat. Record
+dates can't tell "nothing arrived" from "nothing happened". So the load date keeps one job, as a
+second alarm beside the age: did a file arrive tonight? If not, the source has gone silent.
+
 ## Where it is in the project
 
 | Where | What it holds |
 |---|---|
 | `data/student_system/nightly_files.csv`, `data/portal/nightly_files.csv` | Each source's receipts: one row for each nightly file, when it arrived (`received_at`) and when the source saved the newest record in it (`newest_record_at`). Lines 595 to 597 of the student system's are the night: `nightly_2026-06-16.csv` arrived at 02:00 on 17 June, its newest record saved at 01:52; then `nightly_2026-06-17.csv` at 11:40 on 18 June, made at 11:31, once the disk was freed. Lines 378 and 379 are the December before: `nightly_2025-11-12.csv` arrived at 02:00 on Thursday 13 November 2025, on time, and its newest record was the night before's, saved at 01:49 on Wednesday |
 | `sources/student_system/`, `sources/portal/` (`nightly_files`) | The freshness check, on each source's newest record (`loaded_at_field: "cast(newest_record_at as timestamp)"`), never on when its file arrived. One level, agreed with the list's users: older than 24 hours, the check fails (`error_after: {count: 24, period: hour}`, and `warn_after: null`, so the sources' older default, a warning after a day, doesn't apply to it) |
+| `tests/quality/nightly_file_from_each_source_tonight.sql` | The second alarm: each source's last file was received since midnight, read from the receipts' `received_at`. It measures no age; it says whether a source has gone silent. Off in the build; the night's job turns it on |
 | `mart_graduations__graduation_list` | Two columns on every row, `student_system_as_of` and `portal_as_of`: when each source saved the newest record the list was built from. Two, because each source has its own age. The printer's file shows both in its header: "Student system data as of Wed 17 Jun, 01:52 · Portal as of Thu 18 Jun, 01:47" |
 | `models/marts/graduations/_graduations__models.yml` | The level, on each of the two columns: for the certificates, at most 24 hours old when the list goes to the printer, agreed with Malia Fonoti, who sends it. Seating the Great Hall is counted a week before, from a list a few days old; Planning's count of awards comes after the year's end, when weeks are fine. The strictest use sets the level |
 | `tests/quality/graduation_list_at_most_a_day_old_at_the_send.sql` | The send's check: the list's own two columns, against the clock. Off in the night's build, which builds the list whatever its age; the send's job turns it on |
 | `governance/4-data-products/graduation_list.yml` | The product's latency, among its `service_levels`: 24 hours, with the two columns as its `element`, the dates it's counted from |
 
+## Two checks, read together
+
 The receipts tell the two nights apart. In June no row came until 11:40: a file was missing. In
 December a row came on time, and its newest record was the night before's: a file was stale. The
-check fails on both, because both leave the newest record more than a day old.
+freshness check fails on both, because both leave the newest record more than a day old, and it
+can't say which night it is. The second alarm can:
+
+| At 03:00 on | The age: the newest record | The arrival: a file since midnight | Read together |
+|---|---|---|---|
+| Thursday 18 June 2026 | 25 hours old: fails | None, the last came on Wednesday at 02:00: fails | Nothing arrived. The student system has gone silent: ask its team where the file is |
+| Thursday 13 November 2025 | 25 hours old: fails | One, at 02:00: passes | A file arrived, with nothing new in it: ask its team whether the export ran |
+| Friday 19 June 2026 | An hour old: passes | One, at 02:00: passes | Fresh |
+
+Each check keeps its own job. The age is the measure the list's users agreed, and the one the list
+says. The arrival measures no age: it's there to say why, and to hear a silent source at once. On
+the night after a late file the newest record is still under a day old (at 03:00 on Friday 19 June
+it would have been Thursday's, saved at 11:31), so had no file come that night, the age would have
+passed, and failed only a night later; the arrival would have failed there and then.
 
 ## Run the check
 
@@ -79,15 +101,31 @@ seconds (`max_loaded_at_time_ago_in_s`). And at 03:00 on Thursday 13 November 20
 that night's file had arrived on time, the same check would have failed: the student system's
 newest record was 25 hours old.
 
+The second alarm runs beside it:
+
+```sh
+dbt test --profiles-dir . --select nightly_file_from_each_source_tonight --vars '{at_the_update: true}'
+```
+
+It's off unless the var `at_the_update` turns it on, so `dbt build` never runs it, and `update_at`
+sets the clock, to try it on the sample files. With
+`--vars '{at_the_update: true, update_at: "2026-06-18 03:00:00"}'` it fails with one row: the
+student system, whose last file was received at 02:00 on 17 June. With
+`update_at: "2025-11-13 03:00:00"` it passes: a file had arrived an hour before, though its newest
+record was 25 hours old. And with `update_at: "2026-06-18 12:10:00"`, once the late file had
+landed, it passes.
+
 ## Warn first, then stop the send
 
-Freshness isn't part of `dbt build`, so it runs as its own task, first, in the night's job. The
-send has a job of its own, in Lakeflow Jobs on Databricks, and a check of its own:
+Freshness isn't part of `dbt build`, so it runs as its own task, first, in the night's job, and
+the second alarm as another beside it. The send has a job of its own, in Lakeflow Jobs on
+Databricks, and a check of its own:
 
 | Job | Its tasks, in order | Run if | When a task fails |
 |---|---|---|---|
-| The night's update, at 03:00 | 1. Check the sources' age: the command above | | Sam Okafor and Malia Fonoti are told |
-| | 2. Build the list: `dbt build --select +mart_graduations__graduation_list` | All done | |
+| The night's update, at 03:00 | 1. Check the sources' age: the freshness command above | | Sam Okafor and Malia Fonoti are told |
+| | 2. Check the files' arrival: the second alarm's command above | | Sam Okafor and Malia Fonoti are told |
+| | 3. Build the list, once both are done: `dbt build --select +mart_graduations__graduation_list` | All done | |
 | The send to the printer, started by Malia | 1. Check the list's age: the command below | | Malia Fonoti is told why it waits |
 | | 2. Send the printer's file | All succeeded | |
 
@@ -95,9 +133,10 @@ send has a job of its own, in Lakeflow Jobs on Databricks, and a check of its ow
 dbt test --profiles-dir . --select graduation_list_at_most_a_day_old_at_the_send --vars '{at_the_send: true}'
 ```
 
-The night's job never stops the data: if the check fails, its task fails, the two people it names
+The night's job never stops the data: if a check fails, its task fails, the two people it names
 are told at once, and the list is built anyway (*All done*), saying how old it is. That failure is
-the warning. dbt's own warning level isn't used: a warning exits as a success, so no failure notice
+the warning. The two checks are two tasks, and neither waits for the other, so each runs whatever
+the other says, and the notice names the one that failed. dbt's own warning level isn't used: a warning exits as a success, so no failure notice
 would go out. The send is what stops: its job checks the list's own age, its two columns against
 the clock, and sends only if the check passes (*All succeeded*). It reads the list, not the
 sources again: once a late file lands, the sources read fresh, and a list built before it is still

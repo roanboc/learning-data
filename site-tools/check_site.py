@@ -40,7 +40,7 @@ What it checks, page by page (every .html under site/):
   and scenarios, are read too.
 - scenarios and labs: in every pack of labs and scenarios, each choice has one right option; a pack's right answers are spread across
   the options (at most half of its scenarios' in one place, and of its labs' rows, where a row marks one option right; a lab's own rows
-  never all in one place); a sorting list's cards aren't written box by box; and the Spanish pack keeps the English places. A page shows
+  never all in one place); a sorting list's cards aren't written box by box, nor two boxes turn and turn about; and the Spanish pack keeps the English places. A page shows
   them in the order written. Only the labs a page shows are read (a series' pack can point to one lab of each film's own pack), and not a
   series whose engine mixes the options as it shows them. The packs written before the check leave SPREAD_LATER one by one.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
@@ -655,10 +655,9 @@ SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more t
 # the packs of the series it shows aren't read
 SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
 # packs written before this check, still to be spread: each leaves the list with its fix, and none joins it
-SPREAD_LATER = {"both-at-once", "built-to-write-built-to-read", "data-governance", "declare-it-then-build-it", "end-to-end",
-                "from-words-to-data", "governance-in-practice", "governance-on-the-map", "keeping-it-true", "many-ways-to-read",
-                "master-and-reference-data", "meaning-machines-can-read", "older-than-the-systems", "promises-and-proofs", "sketch",
-                "too-good-to-be-true", "what-an-agent-is", "what-makes-it-the-same-one", "whats-in-a-word", "who-owns-what"}
+SPREAD_LATER = {"data-governance", "declare-it-then-build-it", "end-to-end", "governance-in-practice", "governance-on-the-map",
+                "master-and-reference-data", "promises-and-proofs", "too-good-to-be-true", "what-an-agent-is",
+                "what-makes-it-the-same-one", "who-owns-what"}
 
 
 def spread_most(n, k):
@@ -673,6 +672,11 @@ def box_by_box(boxes):
         return False
     runs = [b for i, b in enumerate(boxes) if not i or boxes[i - 1] != b]
     return runs == sorted(runs) or (len(runs) == len(set(boxes)) and len(boxes) > len(runs))
+
+
+def turn_about(boxes):
+    """True where four or more cards go to two boxes turn and turn about: one, the other, one, the other."""
+    return len(boxes) > 3 and len(set(boxes)) == 2 and all(x != y for x, y in zip(boxes, boxes[1:]))
 
 
 def learn_pack(path):
@@ -754,8 +758,8 @@ def spread_faults(rel, P, labs, es=None):
     """What gives a pack's answers away by where they sit: P is what learn_pack() read, labs the ids of the labs a page shows,
     es the Spanish pack (rel names the English one, so the Spanish one's faults name its twin). One right option in each
     choice; among the scenarios, and again among the labs' rows, no place holds more of the right answers than spread_most()
-    allows; a lab's own rows not all in one place; a sorting list's cards not box by box; an order's first showing not in
-    order; and the Spanish pack's options and cards in the English places."""
+    allows; a lab's own rows not all in one place; a sorting list's cards not box by box, nor two boxes turn and turn about; an
+    order's first showing not in order; and the Spanish pack's options and cards in the English places."""
     out = []
     choices = [(f'"{q["title"]}"', q["opts"]) for q in P["qs"] if q["opts"] is not None]
     rows = [(f'lab "{k}"', row) for k, lab in P["labs"].items() if k in labs for row in lab["rows"]]
@@ -777,8 +781,8 @@ def spread_faults(rel, P, labs, es=None):
     for name, boxes in sorts:
         if -1 in boxes:
             out.append(f"{rel}: {name}: a card names a box that isn't one of its boxes")
-        elif box_by_box(boxes):
-            out.append(f"{rel}: {name} lists its cards box by box ({', '.join(str(b + 1) for b in boxes)}): mix them")
+        elif box_by_box(boxes) or turn_about(boxes):
+            out.append(f"{rel}: {name} lists its cards {'box by box' if box_by_box(boxes) else 'turn and turn about'} ({', '.join(str(b + 1) for b in boxes)}): mix them")
     for q in P["qs"]:
         if q["start"] is not None and (sorted(q["start"]) != list(range(q["n"])) or q["start"] == sorted(q["start"])):
             out.append(f"{rel}: \"{q['title']}\": its start ({q['start']}) must hold each of its {q['n']} steps once, and not in order")

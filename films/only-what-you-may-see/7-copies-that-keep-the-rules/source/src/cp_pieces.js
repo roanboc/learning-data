@@ -3,6 +3,8 @@
      cpHall       the hall, with pools of light where people stand, on the left and on the right
      cp_record    one row of a table on a card: each column, its value and its class's gold chip (as Show the least and Proof it held
                   show classes); a value can turn into what a reader is shown (*** where a policy masks it whole)
+     cp_pair      two rows on one card, column by column: a real record and one a model learned from the real ones
+     cp_kind      one of the two kinds of synthetic data: the kit's card, with a dark film on its glass under the words
      cp_agree     an agreement's card: its number on a band, its sub-title, then its lines, each a label and its words
      cp_hospital  the teaching hospital, a building drawn in light with an "H" over its door, never a red cross (an emblem the law keeps
                   for the medical services of armed forces and the Red Cross)
@@ -39,6 +41,32 @@ function cp_record(ctx,x,y,o){o=o||{};const w=o.w||900,lh=58,rows=o.rows||[],top
     if(r.v2!=null&&u>0)dp_T(ctx,r.v2,x+30+cw,by,{w:600,size:28,col:r.v2c||"violet",a:u});
     if(r.cls&&(r.ca==null||r.ca>0))cp_chip(ctx,x+w-28,by,r.cls,{a:r.ca==null?1:r.ca,align:"right"});
     ctx.restore();});
+  ctx.restore();return bb;}
+
+/* cp_pair(ctx, x, y, w, {heads, rows, la, ring, a, k}): two records on one card, column by column, so the eye can compare them: a real
+   one and one learned from the real ones. heads [left, right] name them; rows [{c, v, cls, l, lc, ca}]: the column c (mono), the real
+   value v with its class's chip, and the learned value l in the colour lc (a meaning's key or [r, g, b]), its chip at ca (0 to 1);
+   la the learned side's opacity; ring [first row, how many, 0 to 1] rings the rows that match, in coral; returns its box */
+function cp_pair(ctx,x,y,w,o){o=o||{};const rows=o.rows||[],lh=58,top=86,h=top+rows.length*lh+18,bb={x,y,w,h},a=o.a==null?1:o.a;if(a<=0||o.measure)return bb;
+  const x1=x+300,x2=x+w/2+160,r1=x2-60,r2=x+w-28,la=o.la==null?1:o.la,hd=o.heads||[];ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
+  dp_panel(ctx,x,y,w,h,{col:"cyan",r:20,behind:o.behind,glowR:36});
+  if(o.ring&&o.ring[2]>0){const c=DP.F.coral;ctx.save();ctx.globalAlpha*=o.ring[2];rr(ctx,x+12,y+top+o.ring[0]*lh,w-24,o.ring[1]*lh,10);ctx.fillStyle=rgba(c,0.10);ctx.fill();
+    ctx.strokeStyle=rgba(c,0.95);ctx.lineWidth=2.4;ctx.shadowColor=rgba(c,0.8);ctx.shadowBlur=12;ctx.stroke();ctx.restore();}
+  dp_T(ctx,hd[0]||"",x1,y+54,{w:700,size:28,col:"cyan"});dp_T(ctx,hd[1]||"",x2,y+54,{w:700,size:28,col:"grey",a:la});
+  ctx.fillStyle=rgba(DP.T.mut,0.35);ctx.fillRect(x+24,y+top-6,w-48,1.4);ctx.fillRect(x2-31,y+24,1.4,h-48);
+  rows.forEach((r,i)=>{const by=y+top+i*lh+40;
+    dp_T(ctx,r.c,x+30,by,{w:500,size:28,f:"mono",col:"mut"});dp_T(ctx,r.v,x1,by,{w:600,size:28});if(r.cls)cp_chip(ctx,r1,by,r.cls,{align:"right"});
+    if(la>0)dp_T(ctx,r.l,x2,by,{w:600,size:28,col:r.lc||"ink",a:la});if(r.cls&&r.ca>0)cp_chip(ctx,r2,by,r.cls,{a:r.ca,align:"right"});});
+  ctx.restore();return bb;}
+
+/* cp_kind(ctx, x, y, w, kick, title, col, {a, k}): one of the two kinds of synthetic data, on the kit's card (dp_card: the same size,
+   place and words), with a dark film on its glass under the words, as cp_tag's: a card's line of capitals in coral stood out only 3.9 to 1
+   from the glass's own light; returns its box */
+function cp_kind(ctx,x,y,w,kick,title,col,o){o=o||{};const bb=dp_card(ctx,x,y,w,{kick,title},{measure:true}),a=o.a==null?1:o.a;if(a<=0)return bb;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+bb.h/2,lerp(0.5,1,o.k));
+  dp_panel(ctx,x,y,w,bb.h,{col,r:20,glowR:36});
+  ctx.save();rr(ctx,x+2.2,y+2.2,w-4.4,bb.h-4.4,18);ctx.fillStyle="rgba(4,14,18,0.4)";ctx.fill();ctx.restore();
+  dp_T(ctx,String(kick).toUpperCase(),x+DP_PAD,y+DP_PAD+20,{w:800,size:28,ls:4,col});dp_T(ctx,title,x+DP_PAD,y+DP_PAD+70,{w:700,size:36});
   ctx.restore();return bb;}
 
 /* cp_agree(ctx, x, y, w, {kind, sub, lines, lw, a, k, behind, hi}): an agreement, its number on a band of the identity's cyan (who may),

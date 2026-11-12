@@ -478,7 +478,10 @@ const NARR={
  {"id":"madeup","gap":0.8,"text":"So, wherever they can, development and test get made-up learners, and none of them is anyone."},
  {"id":"script","gap":0.8,"text":"For size, a script writes 2,614 of them, with production's columns and their classes.","say":"For size, a script writes two thousand, six hundred and fourteen of them, with production's columns and their classes."},
  {"id":"easy","gap":0.8,"text":"That's synthetic data, and it's easy to write now."},
- {"id":"harder","gap":0.8,"text":"How closely it should follow the real records, gaps and odd cases included, is the harder question, and still an open one."},
+ {"id":"written","gap":0.8,"text":"This kind is written without reading a record: only the columns and their classes go in, so it can give no one away."},
+ {"id":"learned","gap":0.8,"text":"The other kind is learned from the real records, and the closer it fits them, the more likely it is to give a real person away."},
+ {"id":"treated","gap":0.8,"text":"So the university treats that kind as a copy of the real records."},
+ {"id":"harder","gap":0.8,"text":"How closely made-up data should follow the real records, gaps and odd cases included, is the harder question, and still an open one."},
  {"id":"unit","gap":0.8,"text":"dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.","say":"dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than ten."},
  {"id":"never","gap":0.8,"text":"dbt's clone and sample bring production's rows in, so they're never used on tables about people."},
  {"id":"lascaux","gap":0.8,"text":"Like Lascaux II, they stand in for the learners, and not one is real.","say":"Like Lascaux Two, they stand in for the learners, and not one is real."},
@@ -527,7 +530,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/air": 5.166, "cave/algae": 6.667, "cave/lost": 5.97, "cave/change": 3.751, "cave/closed": 5.751, "cave/copy": 6.184, "cave/paint": 5.953, "cave/opens": 5.299, "cave/millions": 3.251, "cave/rests": 5.139, "cave/records": 3.165, "cave/copies": 6.382, "cave/rules": 5.791, "home/kept": 3.788, "home/classes": 5.987, "home/policy": 5.412, "home/inside": 7.386, "home/catalog": 4.37, "home/leave": 3.995, "home/wrote": 4.029, "home/four": 2.072, "madeup/day": 1.829, "madeup/jun": 6.209, "madeup/ask": 4.983, "madeup/clone": 5.191, "madeup/exempt": 6.673, "madeup/masked": 7.43, "madeup/madeup": 5.599, "madeup/script": 6.853, "madeup/easy": 2.768, "madeup/harder": 7.55, "madeup/unit": 9.137, "madeup/never": 5.946, "madeup/lascaux": 3.829, "madeup/runs": 6.084, "share/day": 1.742, "share/hospital": 7.506, "share/agreement": 9.208, "share/opensharing": 6.022, "share/travel": 2.961, "share/why": 6.924, "share/every": 3.268, "share/totals": 6.558, "share/ends": 8.239, "room/harder": 6.083, "room/both": 7.689, "room/cleanroom": 6.689, "room/view": 6.938, "room/code": 6.238, "room/approve": 8.878, "room/hides": 7.694, "room/runs": 5.779, "room/answer": 5.065, "room/lascaux": 5.045, "out/day": 1.661, "out/elena": 7.17, "out/file": 5.061, "out/switches": 4.826, "out/ways": 5.793, "out/code": 5.998, "out/network": 7.636, "out/photo": 4.807, "out/clean": 4.13, "out/lascaux": 3.076, "kept/seen": 3.982, "kept/four": 2.122, "kept/each": 7.33, "kept/idea": 2.688};
+const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/air": 5.166, "cave/algae": 6.667, "cave/lost": 5.97, "cave/change": 3.751, "cave/closed": 5.751, "cave/copy": 6.184, "cave/paint": 5.953, "cave/opens": 5.299, "cave/millions": 3.251, "cave/rests": 5.139, "cave/records": 3.165, "cave/copies": 6.382, "cave/rules": 5.791, "home/kept": 3.788, "home/classes": 5.987, "home/policy": 5.412, "home/inside": 7.386, "home/catalog": 4.37, "home/leave": 3.995, "home/wrote": 4.029, "home/four": 2.072, "madeup/day": 1.829, "madeup/jun": 6.209, "madeup/ask": 4.983, "madeup/clone": 5.191, "madeup/exempt": 6.673, "madeup/masked": 7.43, "madeup/madeup": 5.599, "madeup/script": 6.853, "madeup/easy": 2.768, "madeup/written": 6.622, "madeup/learned": 7.308, "madeup/treated": 3.952, "madeup/harder": 8.343, "madeup/unit": 9.137, "madeup/never": 5.946, "madeup/lascaux": 3.829, "madeup/runs": 6.084, "share/day": 1.742, "share/hospital": 7.506, "share/agreement": 9.208, "share/opensharing": 6.022, "share/travel": 2.961, "share/why": 6.924, "share/every": 3.268, "share/totals": 6.558, "share/ends": 8.239, "room/harder": 6.083, "room/both": 7.689, "room/cleanroom": 6.689, "room/view": 6.938, "room/code": 6.238, "room/approve": 8.878, "room/hides": 7.694, "room/runs": 5.779, "room/answer": 5.065, "room/lascaux": 5.045, "out/day": 1.661, "out/elena": 7.17, "out/file": 5.061, "out/switches": 4.826, "out/ways": 5.793, "out/code": 5.998, "out/network": 7.636, "out/photo": 4.807, "out/clean": 4.13, "out/lascaux": 3.076, "kept/seen": 3.982, "kept/four": 2.122, "kept/each": 7.33, "kept/idea": 2.688};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -535,7 +538,7 @@ const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/
 const BREATH={
 "cave":{"hold":{"place":0.6,"cave":0.8,"crowd":0.6,"air":0.6,"algae":1.0,"lost":0.8,"change":1.2,"closed":1.2,"copy":0.6,"paint":1.0,"opens":1.4,"millions":0.6,"rests":1.4,"records":0.4,"copies":0.6},"breathe":4.4},
 "home":{"hold":{"kept":0.8,"classes":1.0,"policy":1.2,"inside":1.4,"catalog":1.0,"leave":1.4,"wrote":1.2,"four":0.6}},
-"madeup":{"hold":{"day":0.4,"jun":0.6,"ask":0.8,"clone":0.8,"exempt":1.2,"masked":1.0,"madeup":0.8,"script":0.6,"easy":0.6,"harder":1.0,"unit":1.0,"never":0.8,"lascaux":1.0}},
+"madeup":{"hold":{"day":0.4,"jun":0.6,"ask":0.8,"clone":0.8,"exempt":1.2,"masked":1.0,"madeup":0.8,"script":0.6,"easy":0.6,"written":0.8,"learned":1.0,"treated":1.2,"harder":1.0,"unit":1.0,"never":0.8,"lascaux":1.0}},
 "share":{"hold":{"day":0.4,"hospital":0.6,"agreement":1.0,"opensharing":0.6,"travel":0.6,"why":0.8,"every":1.2,"totals":1.0}},
 "room":{"hold":{"harder":1.0,"both":1.0,"cleanroom":1.0,"view":1.0,"code":0.8,"approve":1.0,"hides":1.2,"runs":1.0,"answer":1.0}},
 "out":{"hold":{"day":0.4,"elena":0.6,"file":1.0,"switches":0.4,"ways":0.8,"code":0.8,"network":0.6,"photo":1.0,"clean":0.8}},
@@ -1958,6 +1961,8 @@ function cp_dim(c,d){if(d<=0.001)return;c.save();c.globalAlpha=d*0.55;const g=c.
      cpHall       the hall, with pools of light where people stand, on the left and on the right
      cp_record    one row of a table on a card: each column, its value and its class's gold chip (as Show the least and Proof it held
                   show classes); a value can turn into what a reader is shown (*** where a policy masks it whole)
+     cp_pair      two rows on one card, column by column: a real record and one a model learned from the real ones
+     cp_kind      one of the two kinds of synthetic data: the kit's card, with a dark film on its glass under the words
      cp_agree     an agreement's card: its number on a band, its sub-title, then its lines, each a label and its words
      cp_hospital  the teaching hospital, a building drawn in light with an "H" over its door, never a red cross (an emblem the law keeps
                   for the medical services of armed forces and the Red Cross)
@@ -1994,6 +1999,32 @@ function cp_record(ctx,x,y,o){o=o||{};const w=o.w||900,lh=58,rows=o.rows||[],top
     if(r.v2!=null&&u>0)dp_T(ctx,r.v2,x+30+cw,by,{w:600,size:28,col:r.v2c||"violet",a:u});
     if(r.cls&&(r.ca==null||r.ca>0))cp_chip(ctx,x+w-28,by,r.cls,{a:r.ca==null?1:r.ca,align:"right"});
     ctx.restore();});
+  ctx.restore();return bb;}
+
+/* cp_pair(ctx, x, y, w, {heads, rows, la, ring, a, k}): two records on one card, column by column, so the eye can compare them: a real
+   one and one learned from the real ones. heads [left, right] name them; rows [{c, v, cls, l, lc, ca}]: the column c (mono), the real
+   value v with its class's chip, and the learned value l in the colour lc (a meaning's key or [r, g, b]), its chip at ca (0 to 1);
+   la the learned side's opacity; ring [first row, how many, 0 to 1] rings the rows that match, in coral; returns its box */
+function cp_pair(ctx,x,y,w,o){o=o||{};const rows=o.rows||[],lh=58,top=86,h=top+rows.length*lh+18,bb={x,y,w,h},a=o.a==null?1:o.a;if(a<=0||o.measure)return bb;
+  const x1=x+300,x2=x+w/2+160,r1=x2-60,r2=x+w-28,la=o.la==null?1:o.la,hd=o.heads||[];ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
+  dp_panel(ctx,x,y,w,h,{col:"cyan",r:20,behind:o.behind,glowR:36});
+  if(o.ring&&o.ring[2]>0){const c=DP.F.coral;ctx.save();ctx.globalAlpha*=o.ring[2];rr(ctx,x+12,y+top+o.ring[0]*lh,w-24,o.ring[1]*lh,10);ctx.fillStyle=rgba(c,0.10);ctx.fill();
+    ctx.strokeStyle=rgba(c,0.95);ctx.lineWidth=2.4;ctx.shadowColor=rgba(c,0.8);ctx.shadowBlur=12;ctx.stroke();ctx.restore();}
+  dp_T(ctx,hd[0]||"",x1,y+54,{w:700,size:28,col:"cyan"});dp_T(ctx,hd[1]||"",x2,y+54,{w:700,size:28,col:"grey",a:la});
+  ctx.fillStyle=rgba(DP.T.mut,0.35);ctx.fillRect(x+24,y+top-6,w-48,1.4);ctx.fillRect(x2-31,y+24,1.4,h-48);
+  rows.forEach((r,i)=>{const by=y+top+i*lh+40;
+    dp_T(ctx,r.c,x+30,by,{w:500,size:28,f:"mono",col:"mut"});dp_T(ctx,r.v,x1,by,{w:600,size:28});if(r.cls)cp_chip(ctx,r1,by,r.cls,{align:"right"});
+    if(la>0)dp_T(ctx,r.l,x2,by,{w:600,size:28,col:r.lc||"ink",a:la});if(r.cls&&r.ca>0)cp_chip(ctx,r2,by,r.cls,{a:r.ca,align:"right"});});
+  ctx.restore();return bb;}
+
+/* cp_kind(ctx, x, y, w, kick, title, col, {a, k}): one of the two kinds of synthetic data, on the kit's card (dp_card: the same size,
+   place and words), with a dark film on its glass under the words, as cp_tag's: a card's line of capitals in coral stood out only 3.9 to 1
+   from the glass's own light; returns its box */
+function cp_kind(ctx,x,y,w,kick,title,col,o){o=o||{};const bb=dp_card(ctx,x,y,w,{kick,title},{measure:true}),a=o.a==null?1:o.a;if(a<=0)return bb;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+bb.h/2,lerp(0.5,1,o.k));
+  dp_panel(ctx,x,y,w,bb.h,{col,r:20,glowR:36});
+  ctx.save();rr(ctx,x+2.2,y+2.2,w-4.4,bb.h-4.4,18);ctx.fillStyle="rgba(4,14,18,0.4)";ctx.fill();ctx.restore();
+  dp_T(ctx,String(kick).toUpperCase(),x+DP_PAD,y+DP_PAD+20,{w:800,size:28,ls:4,col});dp_T(ctx,title,x+DP_PAD,y+DP_PAD+70,{w:700,size:36});
   ctx.restore();return bb;}
 
 /* cp_agree(ctx, x, y, w, {kind, sub, lines, lw, a, k, behind, hi}): an agreement, its number on a band of the identity's cyan (who may),
@@ -2131,6 +2162,8 @@ function cp_figure(x,who,px,py,s,tt,a,o){withA(x,a,()=>dp_person(x,who,px,py,s,O
 // the learner of Show the least, and a made-up one
 const CP_SAMUEL=[["student_number","S-20412","direct"],["name","Samuel Osei","direct"],["date_of_birth","14 May 1987","indirect"],["course","Public health","none"],["results","90 of 120","none"]];
 const CP_MADE=[["student_number","S-90017","direct"],["name","Noa Halden","direct"],["date_of_birth","3 March 1999","indirect"],["course","Midwifery","none"],["results","45 of 120","none"]];
+// the name a model gives a learner it learned from the real records: new, while the rest of the row is still Samuel's
+const CP_LEARNED="Rui Dalen";
 
 /* ---------------------------------------------------------------- 1. A copy to visit: Lascaux, 1948 to 1983 */
 scene("cave",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
@@ -2235,7 +2268,9 @@ scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   const tRefuses=A("clone","refuses"),tReal=A("exempt","every real name"),tNoCls=A("exempt","no column's class"),tPeople=A("masked","real people"),tAsIs=A("masked","as it is"),
     tNone=A("madeup","none of them"),tSize=A("script","For size"),tCols=A("script","columns"),tFewer=A("unit","fewer than ten"),tGiven=A("unit","if nine"),
     tClone=A("never","clone"),tSample=A("never","sample"),tNever=A("never","never used"),tReal2=A("lascaux","not one is real"),tNoRec=A("runs","no record"),
-    tSynth=A("easy","synthetic data"),tClose=A("harder","How closely"),tGaps=A("harder","gaps"),tOdd=A("harder","odd cases"),tOpen=A("harder","open");
+    tSynth=A("easy","synthetic data"),tNoRead=A("written","without reading"),tCls2=A("written","their classes"),tNoOne=A("written","no one"),
+    tFrom=A("learned","learned from"),tFits=A("learned","fits"),tAway=A("learned","real person"),tTreats=A("treated","treats"),tCopy=A("treated","a copy"),
+    tKinds=c.harder-1.3,tClose=A("harder","How closely"),tGaps=A("harder","gaps"),tOdd=A("harder","odd cases"),tOpen=A("harder","open");
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"cpHall",keys:[[0,960,540,1.0]],push:0.015,draw:(x,tt)=>{
     cp_figure(x,"jun",1640,612,0.95,tt,cp_io(tt,c.jun-0.3,sc.dur-1.6,0.7),{flip:true});
     cp_who(x,1500,240,"Jun Park","Analytics engineer",{align:"right",a:cp_io(tt,c.jun+0.4,c.clone-0.45)});
@@ -2260,15 +2295,29 @@ scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     cp_record(x,90,250,{name:"dev.core_learner_v1",rows:CP_MADE.map(r=>({c:r[0],v:r[1],cls:r[2]})),w:900,cw:262,col:"green",a:da,k:ag_spr(tt,c.madeup,0.7)});
     cp_tag(x,90,680,"Made up: none of them is anyone","green",{a:da*ag_in(tt,tNone,0.4)});
     // the script that writes them, in the registrar's bundle
-    const ga=cp_io(tt,c.script+0.2,c.unit-0.5,0.5);if(ga>0){const bx=dp_page(x,90,230,1260,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar/tests/made_up_learners.py",a:ga});
+    const ga=cp_io(tt,c.script+0.2,c.learned-0.5,0.5);if(ga>0){const bx=dp_page(x,90,230,1260,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar/tests/made_up_learners.py",a:ga});
+      // "only the columns and their classes go in": the classes' line lights too, under the columns'
+      const h2=ga*ag_in(tt,tCls2,0.4);if(h2>0){x.save();x.globalAlpha*=h2;rr(x,bx.x-14,bx.y+44+2*46-34,1180,46,8);x.fillStyle=rgba(DP.F.green,0.16);x.fill();x.strokeStyle=rgba(DP.F.green,0.9);x.lineWidth=2;x.stroke();x.restore();}
       cp_code(x,bx.x,bx.y+44,["learners = make_learners(2614)","columns  = like(\"core_learner_v1\")","classes  = like(\"core_learner_v1\")"],
         {a:ga,w:1180,hi:tt<tCols?[0,ag_in(tt,tSize,0.4)]:[1,ag_in(tt,tCols,0.4)]});
-      // synthetic data is easy to write now; how closely it should follow the real records is the harder question, and an open one
-      // (the author, 12 November 2026)
+      // synthetic data is easy to write now (the author, 12 November 2026), and this kind is written without reading a record
       cp_tag(x,90,676,"Synthetic data: easy to write now","green",{a:ga*ag_in(tt,tSynth,0.4)});
-      let gx=90+cp_tag(x,90,764,"How close to the real records?","grey",{a:ga*ag_in(tt,tClose,0.4)})+24;
-      gx+=dp_pill(x,gx,805,"gaps","grey",{a:ga*ag_in(tt,tGaps,0.4)})+14;gx+=dp_pill(x,gx,805,"odd cases","grey",{a:ga*ag_in(tt,tOdd,0.4)})+24;
-      cp_tag(x,gx,764,"Still an open question","grey",{a:ga*ag_in(tt,tOpen,0.4)});}
+      const tw=cp_tag(x,90,764,"Written without reading a record","green",{a:ga*ag_in(tt,tNoRead,0.4)});
+      withA(x,ga,()=>dp_tick(x,90+tw+36,795,"green",cp_lin(tt,tNoOne,0.6)));}
+    // the other kind, learned from the real records: one of its learners beside a real one. A new name, and the rest is Samuel's;
+    // so the university treats it as a copy of the real records, and its columns get their classes (the author, 12 November 2026)
+    const ba=cp_io(tt,c.learned,tKinds-0.6,0.5);if(ba>0){const fit=ag_in(tt,tFits,0.5),lc=mix(DP.T.ink,DP.T.coral,fit);
+      cp_pair(x,90,250,1260,{heads:["A real record","Learned from the records"],la:ag_in(tt,tFrom,0.45),ring:[1,3,fit],a:ba,k:ag_spr(tt,c.learned,0.7),
+        rows:CP_SAMUEL.slice(1).map((r,i)=>({c:r[0],v:r[1],cls:r[2],l:i?r[1]:CP_LEARNED,lc:i?lc:"ink",ca:ag_in(tt,tCopy+i*0.12,0.4)}))});
+      const sw=cp_tag(x,90,612,"Still Samuel, under a new name","coral",{a:ba*ag_in(tt,tAway,0.4)});
+      cp_tag(x,90+sw+24,612,"Treated as a copy of the real records","cyan",{a:ba*ag_in(tt,tTreats,0.4)});}
+    // the two kinds, one over the other, and the question still open between them: how close to the real records
+    const ka=cp_io(tt,tKinds,c.unit-0.5,0.5);
+    cp_kind(x,90,250,900,"Written without the records","Gives no one away","green",{a:ka,k:ag_spr(tt,tKinds,0.7)});
+    cp_kind(x,90,404,900,"Learned from the real records","Can give someone away","coral",{a:ka*ag_in(tt,tKinds+0.25,0.5),k:ag_spr(tt,tKinds+0.25,0.7)});
+    if(ka>0){let gx=90+cp_tag(x,90,586,"How close to the real records?","grey",{a:ka*ag_in(tt,tClose,0.4)})+24;
+      gx+=dp_pill(x,gx,627,"gaps","grey",{a:ka*ag_in(tt,tGaps,0.4)})+14;gx+=dp_pill(x,gx,627,"odd cases","grey",{a:ka*ag_in(tt,tOdd,0.4)})+24;
+      cp_tag(x,gx,586,"Still an open question","grey",{a:ka*ag_in(tt,tOpen,0.4)});}
     // dbt's unit test, on rows written for it
     const ua=cp_io(tt,c.unit,c.lascaux-0.5,0.5);if(ua>0){const bx=dp_page(x,90,230,1260,420,{tool:"dbt",name:"dbt",where:"unit test",title:"small_counts_hidden",a:ua*(1-0.55*ag_in(tt,c.never,0.6))});
       cp_code(x,bx.x,bx.y+44,["model:  left_after_first_year","given:  9 learners leave Midwifery","expect: Midwifery, fewer than 10"],{a:ua*(1-0.55*ag_in(tt,c.never,0.6)),w:1180,hi:[1,ag_in(tt,tGiven,0.4)]});

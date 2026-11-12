@@ -93,164 +93,164 @@ The results come from the checks that run every night.
 00:03:03.193 --> 00:03:07.932
 And from what people count: reports, hours of hand work, and the hundred records.
 
-00:03:11.032 --> 00:03:18.835
+00:03:11.032 --> 00:03:18.750
 Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deming.
 
-00:03:20.135 --> 00:03:27.489
+00:03:20.050 --> 00:03:27.427
 Many say check for its third step. Deming preferred study: compare what happened with what the plan expected, and learn from it.
 
-00:03:28.989 --> 00:03:33.448
+00:03:28.927 --> 00:03:33.386
 Borlaug's team ran the loop twice a year: sow, look, keep the best, sow again.
 
-00:03:34.948 --> 00:03:41.939
+00:03:34.886 --> 00:03:41.877
 Here is one turn of it, from Thursday 1 October 2026, before December's round of hand checks.
 
-00:03:42.639 --> 00:03:47.716
+00:03:42.577 --> 00:03:47.654
 Last December, two people checked every name by hand: 240 hours.
 
-00:03:48.416 --> 00:03:53.850
+00:03:48.354 --> 00:03:53.788
 Since September, names are fixed where they're born, and each night the checks hold the doubtful ones.
 
-00:03:54.950 --> 00:03:58.904
+00:03:54.888 --> 00:03:58.842
 So Malia asks: do we still need to check every name by hand?
 
-00:04:00.404 --> 00:04:07.975
+00:04:00.342 --> 00:04:07.913
 Plan: check by hand only the names a check holds or a graduate reports, and let the hundred records look at the rest.
 
-00:04:08.675 --> 00:04:14.647
+00:04:08.613 --> 00:04:14.585
 They'll know by two measures they keep already: the round's hours, and the perfect records in the hundred.
 
-00:04:15.547 --> 00:04:20.868
+00:04:15.485 --> 00:04:20.806
 And they say what they expect: far fewer hours, and at least 95 perfect records.
 
-00:04:22.168 --> 00:04:29.912
+00:04:22.106 --> 00:04:29.850
 Do: from Monday 19 October, the team checks 78 names by hand, not 2,140.
 
-00:04:30.612 --> 00:04:40.032
+00:04:30.550 --> 00:04:39.970
 Study: the round takes 26 hours, not 240. And on Friday 6 November, 97 of the hundred records are perfect.
 
-00:04:41.132 --> 00:04:42.896
+00:04:41.070 --> 00:04:42.834
 Both as the plan expected.
 
-00:04:44.396 --> 00:04:47.395
+00:04:44.334 --> 00:04:47.333
 Act: they keep it, and write it into the round's steps.
 
-00:04:49.495 --> 00:04:55.270
+00:04:49.433 --> 00:04:55.208
 With agents, study matters more. An agent can draft the whole change, for a person to approve.
 
-00:04:56.570 --> 00:05:01.760
+00:04:56.508 --> 00:05:01.698
 People learn by doing the work. Handed to an agent, that understanding can stay hidden.
 
-00:05:03.360 --> 00:05:07.902
+00:05:03.298 --> 00:05:07.840
 So a person still has to understand the plan, and know enough to help with the doing.
 
-00:05:09.102 --> 00:05:12.781
+00:05:09.040 --> 00:05:12.719
 Then study the results against the plan, and act on what they show.
 
-00:05:16.681 --> 00:05:21.399
+00:05:16.619 --> 00:05:21.337
 The order mattered: measure, simplify, standardise, and only then automate.
 
-00:05:22.699 --> 00:05:27.736
+00:05:22.637 --> 00:05:27.674
 They measured the hand work first, in August: about 320 hours a year.
 
-00:05:28.436 --> 00:05:31.311
+00:05:28.374 --> 00:05:31.249
 They simplified it: only the names a check holds.
 
-00:05:32.011 --> 00:05:39.375
+00:05:31.949 --> 00:05:39.313
 They standardised it: one way to settle a held name, in the student system, against the document seen at enrolment.
 
-00:05:40.075 --> 00:05:46.742
+00:05:40.013 --> 00:05:46.680
 Then they automated: each night the checks hold names, in a list the registrar's office reads each morning.
 
-00:05:48.042 --> 00:05:51.215
+00:05:47.980 --> 00:05:51.153
 Automate first, and you only do the wrong work faster.
 
-00:05:54.715 --> 00:05:57.749
+00:05:54.653 --> 00:05:57.687
 The last step of every change is a check that keeps it.
 
-00:05:58.449 --> 00:06:02.133
+00:05:58.387 --> 00:06:02.071
 Without one, a change lasts only until someone forgets it.
 
-00:06:03.633 --> 00:06:09.271
+00:06:03.571 --> 00:06:09.209
 The hand checks are kept by the hundred records, now every month, at a level agreed with Malia.
 
-00:06:09.971 --> 00:06:13.596
+00:06:09.909 --> 00:06:13.534
 Below 95 perfect, the next round checks more by hand.
 
-00:06:15.096 --> 00:06:17.186
+00:06:15.034 --> 00:06:17.124
 Every change of the year has its keeper.
 
-00:06:20.486 --> 00:06:22.877
+00:06:20.424 --> 00:06:22.815
 The scorecard shows only last night's checks.
 
-00:06:23.577 --> 00:06:28.842
+00:06:23.515 --> 00:06:28.780
 So a last step of each night's run in dbt now keeps every result, in a table.
 
-00:06:29.542 --> 00:06:34.814
+00:06:29.480 --> 00:06:34.752
 On Thursdays, one dashboard on Databricks reads that table, beside what people count.
 
-00:06:35.514 --> 00:06:40.576
+00:06:35.452 --> 00:06:40.514
 It shows the whole week: a check that holds more names each night is something to look at.
 
-00:06:41.876 --> 00:06:54.247
+00:06:41.814 --> 00:06:54.185
 Certificates printed again: 41, 14, 6. Perfect records: 79, 88, 97. Hours by hand: about 320 a year, now about 40.
 
-00:06:57.747 --> 00:07:03.970
+00:06:57.685 --> 00:07:03.908
 Fifteen minutes is enough because the people who use the list and the people who make it stand at the same table.
 
-00:07:05.670 --> 00:07:11.658
+00:07:05.608 --> 00:07:11.596
 Malia brings what the ceremonies need. Mei's office brings the names, made right at the source.
 
-00:07:13.158 --> 00:07:15.807
+00:07:13.096 --> 00:07:15.745
 Jun and Sam bring the checks, and the night's run.
 
-00:07:17.107 --> 00:07:23.777
+00:07:17.045 --> 00:07:23.715
 When a change needs someone else, such as admissions, who make each student's first record, they're asked to that Thursday.
 
-00:07:25.477 --> 00:07:28.330
+00:07:25.415 --> 00:07:28.268
 In Mexico, the farmers came to the table too.
 
-00:07:29.630 --> 00:07:36.198
+00:07:29.568 --> 00:07:36.136
 In 1955, they helped buy land for a new research station, and taxed their own wheat to add more.
 
-00:07:40.098 --> 00:07:45.137
+00:07:40.036 --> 00:07:45.075
 Wednesday 9 December 2026, ten in the morning, in the Great Hall.
 
-00:07:46.437 --> 00:07:48.906
+00:07:46.375 --> 00:07:48.844
 Andrés Peñaloza crosses the stage.
 
-00:07:51.006 --> 00:07:55.469
+00:07:50.944 --> 00:07:55.407
 Mei reads his name from the list: Andrés Peñaloza, as he says it.
 
-00:07:56.969 --> 00:08:00.327
+00:07:56.907 --> 00:08:00.265
 His certificate says Andrés Peñaloza, every letter.
 
-00:08:02.227 --> 00:08:06.107
+00:08:02.165 --> 00:08:06.045
 This December, 3 certificates were printed again, not 41.
 
-00:08:07.207 --> 00:08:12.385
+00:08:07.145 --> 00:08:12.323
 Two graduates had changed their names after the list was sent, and one hadn't confirmed hers.
 
-00:08:13.085 --> 00:08:18.478
+00:08:13.023 --> 00:08:18.416
 On Thursday 17 December, the four look at the three, and pick the next small change.
 
-00:08:19.978 --> 00:08:23.342
+00:08:19.916 --> 00:08:23.280
 Borlaug's team didn't stop in 1956 either.
 
-00:08:24.042 --> 00:08:30.332
+00:08:23.980 --> 00:08:30.270
 Round after round, its wheats got better, and by 1963 Mexico was selling wheat abroad.
 
-00:08:32.032 --> 00:08:36.157
+00:08:31.970 --> 00:08:36.095
 Quality isn't a property of data. It's whether data is fit for a use.
 
-00:08:37.457 --> 00:08:42.428
+00:08:37.395 --> 00:08:42.366
 Say what good means for each use. Measure it. Check it against the truth and the clock.
 
-00:08:43.128 --> 00:08:48.701
+00:08:43.066 --> 00:08:48.639
 Fix it where it's born. Answer the people who report. Write it down for readers who can't ask.
 
-00:08:50.001 --> 00:08:51.899
+00:08:49.939 --> 00:08:51.837
 And get better, a little, every week.
 
-00:08:53.199 --> 00:08:55.861
+00:08:53.137 --> 00:08:55.799
 One small change a week, measured, then kept.

@@ -316,7 +316,7 @@ for word, m, x_ in (('plan', G4, 760), ('do,', Bb4, 960), ('study', Eb5, 1160), 
     jet(m, C('loop', word, 0.0), hold=0.16 if word != 'act' else 0.9, g=0.44, pan=px(x_), rel=0.2 if word != 'act' else 0.6)
 tap(C('loop', 'Walter', -0.3), 0.008, px(1500))
 # the third step's two names: a chip for the one many say, a card for Deming's word
-tap(G('cycle', 'name', 0.25), 0.007, px(1480)); knock(C('name', 'Deeming', -0.3), 0.012, px(1585), 230)
+tap(G('cycle', 'name', 0.25), 0.007, px(1480)); knock(C('name', 'Demming', -0.3), 0.012, px(1585), 230)
 air(C('wheat', 'sow', -0.3), 1.0, 0.006, 0.0, 150, 700)
 # one turn, from Thursday 1 October: the loop moves aside
 tO = G('cycle', 'oct')

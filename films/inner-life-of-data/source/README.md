@@ -84,7 +84,8 @@ About `render.py`:
 A language lives in `src/i18n/<lang>/`, and `FILM_LANG=<lang>` builds it into `build/<lang>/` and `dist/<lang>/`:
 
 - `narration.js`: the narration, with the same line ids as the English, so the film re-times itself to the new voice.
-- `voice.json`: the Kokoro voice, language and speed, plus `say` rules that respell words for the voice only (for example product names). The voice can be a blend of Kokoro voices, such as `{"ef_dora": 0.4, "af_heart": 0.6}`: the Spanish film blends the Spanish voice with the English narrator's, which sounds more natural than the Spanish voice alone.
+- `voice.json`: the voice and its settings, plus `say` rules that respell words for the voice only (for example product names). A Kokoro voice has a name, a language and a speed, and can be a blend, such as `{"ef_dora": 0.4, "af_heart": 0.6}`. The Spanish film used that blend until 12 November 2026; it is now read by a hosted voice, `"engine": "edge"` with `"voice": "es-MX-DaliaNeural"`, the Mexican voice the agent films use, which the author found more natural.
+- `vo/`, for a hosted voice only: each line as the service voiced it, a small MP3, with `lines.json` saying which words and settings it was made from. The service needs a network and may change, so a line is voiced once and kept: `tts.py`, the checks and the release workflow decode the kept lines, and only a new or changed line is voiced again (`pip install edge-tts`, in `requirements.txt`).
 - `strings.js`: the on-screen text, as English → translation pairs, plus pattern rules for text built from numbers, and the player's Play and Pause labels. `src/i18n.js` swaps every string drawn on the canvas, so boxes size to the translated text.
 - `page.json`: the player page's text, as English → translation pairs.
 

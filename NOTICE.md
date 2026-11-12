@@ -31,7 +31,7 @@ DCAM is a trademark of the EDM Association (formerly the EDM Council). *The same
 
 ## Third-party components
 
-- **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.
+- **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository. The Spanish narration of *The Inner Life of Data*, and the Spanish soundtracks of other films, are read by a hosted synthetic voice, Microsoft's es-MX-DaliaNeural, through the [edge-tts](https://github.com/rany2/edge-tts) package.
 - **Open standards' schemas:** the JSON schemas of the Open Data Contract Standard and the Open Data Product Standard, Bitol projects at the Linux Foundation, under the Apache License 2.0, copied unchanged into `films/analytics-engineering/project/governance/7-standards/` (its README says from where).
 - **Map of Europe:** in *Decades in the making*, the land is Natural Earth's 1:50m land boundaries, in the public domain, from the [world-atlas](https://github.com/topojson/world-atlas) package (ISC licence), projected and simplified for the frame in `films/what-an-agent-is/1-decades-in-the-making/source/src/dm_map.js`.
 - **Map of Japan:** in *Valid isn't true*, the land is Natural Earth's 1:50m land, in the public domain, from the [world-atlas](https://github.com/topojson/world-atlas) package (ISC licence), projected and simplified for the frame in `films/fit-for-use/3-valid-isnt-true/source/src/past.js`.

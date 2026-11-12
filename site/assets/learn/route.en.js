@@ -73,8 +73,8 @@ window.LD_ROUTE = {
      "href": "",
      "poster": "poster.jpg",
      "kicker": "One film",
-     "len": "7 min",
-     "min": 7.0,
+     "len": "7½ min",
+     "min": 7.5,
      "films": [
       "ld"
      ]

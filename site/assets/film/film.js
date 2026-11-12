@@ -458,7 +458,7 @@ const NARR={
  {"id":"appdom","gap":0.8,"text":"Application domains flow in on one side."},
  {"id":"bsg","gap":0.8,"text":"Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful."},
  {"id":"busdom","gap":0.8,"text":"Business domains flow out on the other, into dashboards, apps and Genie."},
- {"id":"dbtgov","gap":0.8,"text":"dbt governs every step, from source to exposure, and its lineage maps every connection."},
+ {"id":"dbtgov","gap":0.8,"text":"dbt checks and documents every step, from source to exposure, and its lineage maps every connection."},
  {"id":"dbx","text":"And the Databricks lakehouse runs and stores it all, governed by Unity Catalog."}]},
 "meaning":{"name":"Meaning","lead":0.6,"tail":1.6,"vo":[
  {"id":"noise","gap":0.8,"text":"But pictures without meaning are just noise."},
@@ -499,10 +499,11 @@ const NARR={
 "end":{"name":"Pull back","lead":0.5,"tail":4.2,"vo":[
  {"id":"recap","text":"One tap became a snapshot, then a clear picture, and finally a decision:"},
  {"id":"seats","gap":0.8,"text":"a new class opens, and 140 more students get a seat."},
+ {"id":"rest","gap":0.8,"text":"The platform moved it. What it means, and who decides, is the rest of the story."},
  {"id":"tag","text":"Move less. Mean more.","gap":0.4}]}
 };
 
-const VODUR={"tap/enrolled": 2.778, "tap/tap": 2.283, "tap/stored": 6.082, "tap/travel": 3.744, "tap/follow": 0.917, "in/systems": 5.719, "in/colours": 2.326, "in/events": 3.16, "in/integ": 4.288, "in/zerobus": 3.639, "in/files": 4.793, "in/auto": 4.651, "in/bronze": 3.156, "in/hot": 4.638, "sketch/first": 4.533, "sketch/model": 3.767, "sketch/concept": 4.092, "sketch/wrong": 2.447, "sketch/downstream": 4.305, "sketch/right": 2.334, "refine/recipes": 8.066, "refine/runs": 2.557, "refine/closer": 2.581, "refine/rough": 3.646, "refine/sources": 3.621, "refine/staging": 5.463, "refine/tests": 3.151, "refine/inter": 3.964, "refine/orphan": 2.523, "refine/silver": 4.716, "refine/trace": 4.601, "gold/split": 6.249, "gold/products": 3.937, "gold/subject": 3.734, "gold/analysts": 1.631, "gold/execs": 2.895, "gold/reports": 5.553, "gold/live": 2.933, "gold/marts": 5.333, "gold/exposure": 4.513, "gold/gold": 0.775, "layers/back": 2.502, "layers/appdom": 2.254, "layers/bsg": 4.77, "layers/busdom": 4.302, "layers/dbtgov": 6.003, "layers/dbx": 4.62, "meaning/noise": 2.371, "meaning/bricks": 3.296, "meaning/catalog": 6.353, "meaning/define": 5.266, "meaning/uc": 6.809, "meaning/knowledge": 6.988, "meaning/mcp": 4.724, "meaning/reads": 3.59, "meaning/onto": 4.061, "speeds/now": 5.696, "speeds/years": 3.751, "speeds/jobs": 1.828, "speeds/lake": 6.096, "speeds/sync": 3.198, "out/four": 2.062, "out/events": 7.636, "out/sql": 5.499, "out/copies": 6.198, "out/stale": 2.901, "out/twist": 1.899, "out/projector": 3.898, "out/share": 4.233, "out/mirror": 3.932, "out/fed": 4.782, "out/one": 2.646, "people/two": 1.788, "people/app": 3.117, "people/fix": 4.847, "people/genie": 1.66, "people/ask": 3.472, "people/answer": 6.318, "people/perms": 2.249, "end/recap": 4.312, "end/seats": 3.798, "end/tag": 1.278};
+const VODUR={"tap/enrolled": 2.778, "tap/tap": 2.283, "tap/stored": 6.082, "tap/travel": 3.744, "tap/follow": 0.917, "in/systems": 5.719, "in/colours": 2.326, "in/events": 3.16, "in/integ": 4.288, "in/zerobus": 3.639, "in/files": 4.793, "in/auto": 4.651, "in/bronze": 3.156, "in/hot": 4.638, "sketch/first": 4.533, "sketch/model": 3.767, "sketch/concept": 4.092, "sketch/wrong": 2.447, "sketch/downstream": 4.305, "sketch/right": 2.334, "refine/recipes": 8.066, "refine/runs": 2.557, "refine/closer": 2.581, "refine/rough": 3.646, "refine/sources": 3.621, "refine/staging": 5.463, "refine/tests": 3.151, "refine/inter": 3.964, "refine/orphan": 2.523, "refine/silver": 4.716, "refine/trace": 4.601, "gold/split": 6.249, "gold/products": 3.937, "gold/subject": 3.734, "gold/analysts": 1.631, "gold/execs": 2.895, "gold/reports": 5.553, "gold/live": 2.933, "gold/marts": 5.333, "gold/exposure": 4.513, "gold/gold": 0.775, "layers/back": 2.502, "layers/appdom": 2.254, "layers/bsg": 4.77, "layers/busdom": 4.302, "layers/dbtgov": 6.832, "layers/dbx": 4.62, "meaning/noise": 2.371, "meaning/bricks": 3.296, "meaning/catalog": 6.353, "meaning/define": 5.266, "meaning/uc": 6.809, "meaning/knowledge": 6.988, "meaning/mcp": 4.724, "meaning/reads": 3.59, "meaning/onto": 4.061, "speeds/now": 5.696, "speeds/years": 3.751, "speeds/jobs": 1.828, "speeds/lake": 6.096, "speeds/sync": 3.198, "out/four": 2.062, "out/events": 7.636, "out/sql": 5.499, "out/copies": 6.198, "out/stale": 2.901, "out/twist": 1.899, "out/projector": 3.898, "out/share": 4.233, "out/mirror": 3.932, "out/fed": 4.782, "out/one": 2.646, "people/two": 1.788, "people/app": 3.117, "people/fix": 4.847, "people/genie": 1.66, "people/ask": 3.472, "people/answer": 6.318, "people/perms": 2.249, "end/recap": 4.312, "end/seats": 3.798, "end/rest": 4.649, "end/tag": 1.278};
 
 /* Room to think, shared by every language (see ../breathing-cut.md and ../pacing-review.md).
    Each sentence ends on the beat narration.js gives it (0.8 s in English), and 0.3 s is left where a sentence runs on into the next line (engine3.js).
@@ -521,7 +522,7 @@ const BREATH={
 "speeds":{"hold":{"years":0.8}},
 "out":{"hold":{"stale":0.3}},
 "people":{"hold":{"fix":0.5,"ask":1.0},"breathe":3.5},
-"end":{"hold":{"seats":1.3},"breathe":1}
+"end":{"hold":{"rest":1.3},"breathe":1}
 };
 
 /* ===== Shared components for the v4 film ===== */

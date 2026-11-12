@@ -15,5 +15,5 @@ const BREATH={
 "speeds":{"hold":{"years":0.8}},
 "out":{"hold":{"stale":0.3}},
 "people":{"hold":{"fix":0.5,"ask":1.0},"breathe":3.5},
-"end":{"hold":{"seats":1.3},"breathe":1}
+"end":{"hold":{"rest":1.3},"breathe":1}
 };

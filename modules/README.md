@@ -208,6 +208,7 @@ Labs and assessments: [site/assets/enterprise-architecture/learn.en.js](../site/
 Source: [films/business-architecture-for-data](../films/business-architecture-for-data/) · Portal: `/business-architecture-for-data/`
 
 - [What the business owns](../films/business-architecture-for-data/1-what-the-business-owns/) — `what-the-business-owns`
+- [What the business needs to know](../films/business-architecture-for-data/2-what-the-business-needs-to-know/) — `what-the-business-needs-to-know`
 
 ### Data architecture
 

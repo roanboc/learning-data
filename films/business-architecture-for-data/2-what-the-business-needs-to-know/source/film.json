@@ -1,0 +1,27 @@
+{
+  "key": "what-the-business-needs-to-know",
+  "title": "What the business needs to know",
+  "sub": "Business architecture for data, the second series on enterprise architecture: the concepts each capability needs, seeded from the industry's reference models (for electricity, the IEC's Common Information Model and its list of what a distribution utility does), named in the business's own words, defined once in their domain, and gathered into a glossary drawn from the map; and a concept nobody holds yet.",
+  "howto": "Paper notes on a wall are drafts: blue where a reference model gave the word, yellow where the business named it; glass in the layers' colours is the confirmed model. Light gold is the strategy layer, where the capabilities sit; salmon the information layer, where the business's concepts sit. Blue outlines the network's domain, rose retail's, and cyan the reference models and what the two domains share. Gold marks an owner, a person in the business. In the desert, blue is the water, and the people of the story are silhouettes.",
+  "src": [
+    "../../../shared/src/ba.js",
+    "scenes.js"
+  ],
+  "story": ["shares"],
+  "poster": ["words", "map", 2.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bqanat's\\b", "kah-naht's"],
+    ["\\bqanat\\b", "kah-naht"],
+    ["\\bMahan\\b", "Mah-hahn"],
+    ["\\bKerman\\b", "Ker-mahn"],
+    ["\\bCIM's\\b", "C I M's"],
+    ["\\bCIM\\b", "C I M"],
+    ["\\bIEC's\\b", "I E C's"],
+    ["\\bIEC\\b", "I E C"],
+    ["\\bArchiMate\\b", "Arky-mate"],
+    ["\\bBIAN\\b", "Bee-an"],
+    ["\\bHERM\\b", "Herm"]
+  ]
+}

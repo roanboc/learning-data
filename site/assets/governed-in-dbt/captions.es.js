@@ -73,6 +73,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "la primera versión de credenciales se retira el 31 de marzo de 2027.",
 "And exposures name who uses each table, and who answers for each use.":
 "Y las exposiciones nombran quién usa cada tabla, y quién responde por cada uso.",
+"Contracts like these are agreed team to team, with whoever reads the data or sends it, and don't wait on governance.":
+"Contratos como estos se pactan de equipo a equipo, con quien lee los datos o quien los envía, y no esperan a gobernanza.",
 "Only the canonical tables, the shared core, also have an enterprise contract, in an open standard.":
 "Solo las tablas canónicas, el núcleo compartido, tienen además un contrato empresarial, en un estándar abierto.",
 "Data governance's information architect writes it first, and the data team builds to it.":

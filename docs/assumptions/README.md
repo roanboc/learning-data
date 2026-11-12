@@ -33,6 +33,7 @@ A film's thread writes its questions and assumptions to that film's own file, in
   - [AI and continuous architecture](05-enterprise-architecture/5-ai-and-continuous-architecture/)
 - [Data governance](07-data-governance/)
   - [Governance principles](07-data-governance/1-data-governance/)
+  - [Governance you can use](07-data-governance/3-governance-in-practice/)
 - [Data protection and privacy](08-data-protection/)
   - [Locks before the data](08-data-protection/1-locks-before-the-data/)
   - [Only what you may see](08-data-protection/2-only-what-you-may-see/)

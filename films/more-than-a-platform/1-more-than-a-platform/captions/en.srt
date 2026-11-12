@@ -1,0 +1,195 @@
+1
+00:00:01,400 --> 00:00:03,044
+One tap became a decision.
+
+2
+00:00:03,744 --> 00:00:07,600
+A new class opened, and 140 more students got a seat.
+
+3
+00:00:08,300 --> 00:00:09,866
+The platform did its job.
+
+4
+00:00:11,166 --> 00:00:16,765
+So why, a week later, do two offices bring two numbers for the same class to the same meeting?
+
+5
+00:00:24,865 --> 00:00:26,927
+Start with one word: enrolled.
+
+6
+00:00:27,627 --> 00:00:32,287
+In one office, with one system, it means one thing. Nobody has to ask.
+
+7
+00:00:33,387 --> 00:00:34,987
+Then the university grows.
+
+8
+00:00:35,687 --> 00:00:38,532
+The student system counts everyone who signed up.
+
+9
+00:00:39,232 --> 00:00:42,705
+The learning platform counts everyone who can open the course.
+
+10
+00:00:43,405 --> 00:00:45,490
+Finance counts everyone who has paid.
+
+11
+00:00:46,190 --> 00:00:49,091
+Three systems, three meanings, and each one is right.
+
+12
+00:00:50,591 --> 00:00:53,193
+The platform moves all three, without a fault.
+
+13
+00:00:54,493 --> 00:00:55,773
+Now add more teams.
+
+14
+00:00:56,473 --> 00:00:59,641
+Add an AI agent that answers from the same data.
+
+15
+00:01:00,341 --> 00:01:04,983
+Whatever the word means now is repeated everywhere, at once, and with confidence.
+
+16
+00:01:06,483 --> 00:01:08,506
+The platform was never the problem.
+
+17
+00:01:09,806 --> 00:01:15,385
+What changes the answer is how the organisation works, what was defined, and who decided.
+
+18
+00:01:19,685 --> 00:01:22,141
+So where do you start? Not with the platform.
+
+19
+00:01:22,841 --> 00:01:23,899
+Here is the route.
+
+20
+00:01:24,999 --> 00:01:28,361
+Enterprise architecture: how does this organisation work?
+
+21
+00:01:29,061 --> 00:01:31,091
+Data governance: who decides?
+
+22
+00:01:31,791 --> 00:01:33,482
+Those two are the foundations.
+
+23
+00:01:34,782 --> 00:01:35,722
+Then you build.
+
+24
+00:01:36,422 --> 00:01:38,792
+Data modelling: what does each word mean?
+
+25
+00:01:39,492 --> 00:01:43,553
+Modern data basics: how does data move, run and get served today?
+
+26
+00:01:44,253 --> 00:01:47,319
+Analytics engineering: how is it built, and tested?
+
+27
+00:01:48,019 --> 00:01:50,417
+Data quality: is it right, and in time?
+
+28
+00:01:51,517 --> 00:01:54,011
+Two side routes leave after the foundations.
+
+29
+00:01:54,711 --> 00:01:56,608
+One is about sharing and protecting.
+
+30
+00:01:57,308 --> 00:02:00,977
+Master and reference data: is it the same student everywhere?
+
+31
+00:02:01,677 --> 00:02:05,596
+Data protection and privacy: who may see it, and for how long?
+
+32
+00:02:06,296 --> 00:02:09,523
+The other is about agents: what may an agent do with it?
+
+33
+00:02:10,623 --> 00:02:12,119
+They all meet again at the end.
+
+34
+00:02:12,819 --> 00:02:15,858
+Data management: how does it all fit in one plan?
+
+35
+00:02:16,558 --> 00:02:20,501
+And last, leading data people: who leads the people who do the work?
+
+36
+00:02:24,601 --> 00:02:26,489
+People have mapped this ground before.
+
+37
+00:02:27,189 --> 00:02:31,025
+The best known map is DAMA's wheel, with governance at its centre.
+
+38
+00:02:32,325 --> 00:02:33,636
+Any good map will do.
+
+39
+00:02:34,336 --> 00:02:37,263
+This one is a route, because you have to start somewhere.
+
+40
+00:02:41,163 --> 00:02:44,048
+At every stop there are short films. Watch one.
+
+41
+00:02:45,348 --> 00:02:47,115
+Let it stop and ask you a question.
+
+42
+00:02:48,215 --> 00:02:49,706
+Take it apart in a lab.
+
+43
+00:02:50,806 --> 00:02:52,896
+Make the call in a real situation.
+
+44
+00:02:53,996 --> 00:02:56,444
+Pick a goal, and the route lights up your stops.
+
+45
+00:02:57,944 --> 00:03:00,908
+Or search for a word, and find the film that says it.
+
+46
+00:03:02,208 --> 00:03:04,770
+What you have done stays with you, in your own browser.
+
+47
+00:03:08,670 --> 00:03:09,979
+Platforms have matured.
+
+48
+00:03:10,679 --> 00:03:12,581
+The hard part is everything else.
+
+49
+00:03:13,881 --> 00:03:14,704
+Start there.

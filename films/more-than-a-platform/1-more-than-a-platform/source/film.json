@@ -1,0 +1,33 @@
+{
+  "key": "more-than-a-platform",
+  "title": "More than a platform",
+  "sub": "The film that follows The Inner Life of Data: the platform worked, and a week later two offices bring two numbers for the same class to the same meeting. One word, enrolled, means three things in three systems. What changes the answer is how the organisation works, what was defined and who decided: the topics of the learning route, each named with its question, and what a visitor can do at every stop.",
+  "howto": "The film is drawn on the dark navy map of The Inner Life of Data. The blue line is the suggested route, the amber loop is sharing and protecting, and the violet loop is agents, as on the Topics page. Gold is what people agree on, such as a definition.",
+  "src": [
+    "mp_draw.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "route",
+    "lead",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bDAMA's\\b",
+      "Dah-ma's"
+    ],
+    [
+      "\\bDAMA\\b",
+      "Dah-ma"
+    ]
+  ],
+  "story": [
+    "worked"
+  ],
+  "urgent": []
+}

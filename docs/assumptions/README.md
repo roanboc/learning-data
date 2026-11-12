@@ -18,6 +18,8 @@ A film's thread writes its questions and assumptions to that film's own file, in
 
 ## Modules and series
 
+- [Data platforms](00-data-platforms/)
+  - [More than a platform](00-data-platforms/1-more-than-a-platform/)
 - [Modern data basics](02-modern-data-basics/)
   - [Data that moves](02-modern-data-basics/1-data-that-moves/)
   - [Data as software](02-modern-data-basics/2-data-as-software/)

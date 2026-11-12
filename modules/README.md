@@ -16,6 +16,12 @@ Source: [films/inner-life-of-data](../films/inner-life-of-data/) · Portal: `/`
 
 Labs and assessments: [site/assets/learn/learn.en.js](../site/assets/learn/learn.en.js), [site/assets/learn/learn.es.js](../site/assets/learn/learn.es.js)
 
+### More than a platform
+
+Source: [films/more-than-a-platform](../films/more-than-a-platform/) · Portal: `/more-than-a-platform/`
+
+- [More than a platform](../films/more-than-a-platform/1-more-than-a-platform/) — `more-than-a-platform`
+
 ## Data modelling
 
 Module: `data-modelling` · [metadata](data-modelling/module.json)

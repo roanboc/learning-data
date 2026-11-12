@@ -2,7 +2,8 @@
   "order": 0,
   "id": "data-platforms",
   "items": [
-    "intro"
+    "intro",
+    "more-than-a-platform"
   ],
   "name": {
     "en": "Data platforms",

@@ -45,7 +45,7 @@
         "en": "New to data work. The short way through how it fits together.",
         "es": "Para quien empieza. El camino corto para ver cómo encaja todo."
       },
-      "stops": ["intro", "sketch", "data-that-moves", "when-things-go-wrong"]
+      "stops": ["intro", "more-than-a-platform", "sketch", "data-that-moves", "when-things-go-wrong"]
     },
     {
       "id": "trusted-report",

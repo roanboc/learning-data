@@ -1,0 +1,43 @@
+{
+  "title": "More than a platform",
+  "title_es": "Más que una plataforma",
+  "planned": 1,
+  "lead": "The film that follows The Inner Life of Data. The platform worked, and two offices still bring two numbers for the same class. One short film on why, and on the route through everything else.",
+  "lead_es": "La película que sigue a La vida interior de los datos. La plataforma funcionó, y aun así dos oficinas llevan dos cifras de la misma clase. Una película corta sobre por qué, y sobre la ruta por todo lo demás.",
+  "description": "A short film that follows The Inner Life of Data: a platform that works can still feed a meeting two numbers for one class, because one word means three things in three systems. It names the topics of the learning route, each with the question it answers, and shows what a visitor can do at every stop.",
+  "description_es": "Una película corta que sigue a La vida interior de los datos: una plataforma que funciona puede llevar a una reunión dos cifras de una misma clase, porque una palabra significa tres cosas en tres sistemas. Nombra los temas de la ruta de aprendizaje, cada uno con la pregunta que responde, y muestra lo que se puede hacer en cada parada.",
+  "card": "The platform worked, and two offices still bring two numbers. Why, and the route through everything else: each topic with its question.",
+  "card_es": "La plataforma funcionó, y aun así dos oficinas llevan dos cifras. Por qué, y la ruta por todo lo demás: cada tema con su pregunta.",
+  "order": "One film.",
+  "order_es": "Una película.",
+  "thread_h": "One thread: one word, enrolled",
+  "thread_h_es": "Un hilo: una palabra, inscrito",
+  "thread": "Data Science 101 has 180 seats. The student system counts 176 enrolled, the learning platform 171, and Finance 149: each counts something different, and each is right.",
+  "thread_es": "Data Science 101 tiene 180 cupos. El sistema de estudiantes cuenta 176 inscritos, la plataforma de aprendizaje 171 y Finanzas 149: cada uno cuenta algo distinto, y cada uno acierta.",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "The student office",
+      "Brings 176: everyone who signed up"
+    ],
+    [
+      "biz",
+      "Finance",
+      "Brings 149: everyone who has paid"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "La oficina de estudiantes",
+      "Lleva 176: quienes se inscribieron"
+    ],
+    [
+      "biz",
+      "Finanzas",
+      "Lleva 149: quienes ya pagaron"
+    ]
+  ]
+}

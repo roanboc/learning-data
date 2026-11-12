@@ -1,6 +1,6 @@
 # Better every week: questions and assumptions
 
-*Data management* · *Small steps, measured*, film 3 of 4 · merged, PR #276 · [pull request](https://github.com/roanboc/learning-data/pull/276); changed on 12 November 2026 from Rodrigo's decision that every module names the cycle plan, do, study, act (PR #NNN)
+*Data management* · *Small steps, measured*, film 3 of 4 · merged, PR #276 · [pull request](https://github.com/roanboc/learning-data/pull/276); changed on 12 November 2026 from Rodrigo's decision that every module names the cycle plan, do, study, act (PR #355)
 
 [Watch it on the site](https://data.learn-all.org/small-steps-measured/better-every-week/)
 
@@ -40,7 +40,7 @@ After his answer on the data quality film *Small, every week* ("let's go with PD
 
 > yes, knowing the difference was explained in the video that introduced the topic
 
-That video is *Small, every week*, which names the loop plan, do, study, act and says once that many say check (PR #336). This film said "plan, do, check, act" once, so it changed (PR #NNN):
+That video is *Small, every week*, which names the loop plan, do, study, act and says once that many say check (PR #336). This film said "plan, do, check, act" once, so it changed (PR #355):
 
 | His words | The film's line now | Where it shows |
 |---|---|---|

@@ -1,6 +1,6 @@
 # One small change at a time: questions and assumptions
 
-*Leading data people* · *Leading a data team*, film 2 of 4 · merged, PR #268 · [pull request](https://github.com/roanboc/learning-data/pull/268); changed on 12 November 2026 from Rodrigo's decision that every module names the cycle plan, do, study, act (PR #NNN)
+*Leading data people* · *Leading a data team*, film 2 of 4 · merged, PR #268 · [pull request](https://github.com/roanboc/learning-data/pull/268); changed on 12 November 2026 from Rodrigo's decision that every module names the cycle plan, do, study, act (PR #351)
 
 [Watch it on the site](https://data.learn-all.org/leading-a-data-team/one-small-change/)
 
@@ -37,7 +37,7 @@ After his answer on the data quality film *Small, every week* ("let's go with PD
 
 > yes, knowing the difference was explained in the video that introduced the topic
 
-That video is *Small, every week*, which names the loop plan, do, study, act and says once that many say check (PR #336). This film named the cycle plan, do, check, act, so it changed (PR #NNN):
+That video is *Small, every week*, which names the loop plan, do, study, act and says once that many say check (PR #336). This film named the cycle plan, do, check, act, so it changed (PR #351):
 
 | His words | The film's line now | Where it shows |
 |---|---|---|

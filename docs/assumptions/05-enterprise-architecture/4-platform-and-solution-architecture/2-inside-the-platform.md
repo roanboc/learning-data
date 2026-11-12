@@ -1,6 +1,6 @@
 # Inside the platform: questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, film 2 of 8 · PR #PRNUM · [pull request](https://github.com/roanboc/learning-data/pull/PRNUM)
+*Enterprise architecture* · *Platform and solution architecture*, film 2 of 8 · PR #338 · [pull request](https://github.com/roanboc/learning-data/pull/338)
 
 [Watch it on the site](https://data.learn-all.org/platform-and-solution-architecture/inside-the-platform/)
 

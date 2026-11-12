@@ -1,0 +1,199 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:07.069
+En 1972, los ingenieros de Cybersyn recorrieron fábrica por fábrica todo Chile.
+
+00:00:08.769 --> 00:00:13.606
+En cada una, con sus trabajadores y gerentes, eligieron unas cinco cifras para vigilar.
+
+00:00:14.906 --> 00:00:18.239
+Si una salía de su rango, el software enviaría un aviso.
+
+00:00:19.739 --> 00:00:23.637
+Stafford Beer y el equipo tenían que decidir a quién le llegaría ese aviso.
+
+00:00:25.337 --> 00:00:32.800
+Si cada aviso iba a Santiago, unas pocas personas allí quedarían enterradas en problemas pequeños, y las fábricas esperarían órdenes.
+
+00:00:34.300 --> 00:00:41.218
+El presidente Allende había insistido en que el sistema descentralizara, con los trabajadores participando, y sin burocracia.
+
+00:00:42.718 --> 00:00:49.191
+Las fábricas necesitaban margen para resolver sus problemas, y el centro, enterarse solo de los que ellas no pudieran.
+
+00:00:50.891 --> 00:00:56.790
+Así que, en el diseño de Beer, un aviso iría primero al gerente de la propia fábrica, y a nadie más.
+
+00:00:58.090 --> 00:01:00.993
+Tendría un plazo fijo para atenderlo, a su manera.
+
+00:01:02.693 --> 00:01:08.843
+Solo si no se resolvía a tiempo el equipo avisaría al nivel siguiente: el comité de esa industria, en la CORFO.
+
+00:01:10.343 --> 00:01:14.876
+Los ingenieros eligieron el plazo de cada fábrica. Beer lo llamó diseñar la libertad.
+
+00:01:16.576 --> 00:01:24.635
+Cada fábrica, sostenía Beer, conservaría un control casi total de su trabajo, y el centro intervendría solo en problemas graves.
+
+00:01:26.335 --> 00:01:31.558
+En la empresa, Inés abre el catálogo: la lista de todas las tablas de la plataforma.
+
+00:01:32.858 --> 00:01:39.050
+De sus 412 tablas, 300 tienen al equipo de datos como responsable, porque él las construyó.
+
+00:01:46.550 --> 00:01:50.653
+Una de ellas es la capacidad de alojamiento: cuánta solar admite cada calle.
+
+00:01:52.153 --> 00:01:56.661
+En el mapa, es de Grace: sus ingenieros la definieron, y cómo calcularla.
+
+00:01:58.261 --> 00:02:03.050
+El equipo de datos construyó la tabla con su método, y los hogares la consultan en el sitio web.
+
+00:02:04.750 --> 00:02:11.354
+En mayo, los ingenieros vieron que los cables viejos llevan menos, y cambiaron su método. La tabla siguió con el viejo.
+
+00:02:13.454 --> 00:02:18.611
+Los ingenieros no sentían que les tocara avisar a la tabla, y el equipo de datos no tenía cómo saberlo.
+
+00:02:20.511 --> 00:02:25.611
+Durante cuatro meses, el sitio web les dijo a los hogares que su calle admitía más solar de la que podía.
+
+00:02:27.511 --> 00:02:32.764
+Noventa familias compraron paneles, y luego vieron que solo podían devolver parte de la energía que generaban.
+
+00:02:35.064 --> 00:02:40.506
+Nadie fue descuidado. La responsable de la tabla era el único equipo que no podía saber qué significaban sus cifras.
+
+00:02:44.206 --> 00:02:51.018
+Quién es responsable de una tabla lo deciden los responsables, así que Inés les lleva una regla: que la plataforma coincida con el mapa.
+
+00:02:52.318 --> 00:02:59.427
+Cada tabla pertenece a un producto de datos, y cada producto a quien es responsable de la capacidad que crea sus datos.
+
+00:03:01.327 --> 00:03:06.811
+Planificar la red crea la capacidad de alojamiento, así que su producto es de Grace, con método y todo.
+
+00:03:08.111 --> 00:03:12.205
+Atender a los clientes crea las cuentas, así que el suyo es de quien dirige comercialización.
+
+00:03:13.505 --> 00:03:20.148
+Una medida que cruza dominios pertenece al dominio empresarial: para las del regulador, eso es Ama.
+
+00:03:21.648 --> 00:03:30.162
+El equipo de datos construye y opera cada producto. El centro guarda solo lo que todos comparten: la plataforma, el catálogo, unas reglas.
+
+00:03:31.862 --> 00:03:36.274
+Como en el diseño de Beer, cada dominio resuelve primero los problemas de sus propios datos.
+
+00:03:37.774 --> 00:03:41.132
+Los responsables están de acuerdo, y la regla va al mapa con su fecha.
+
+00:03:43.832 --> 00:03:48.514
+Un producto de datos son datos hechos para que otros los usen, con alguien que responde por ellos.
+
+00:03:50.214 --> 00:03:54.145
+En la empresa, un producto se publica solo cuando tiene cinco cosas.
+
+00:03:55.445 --> 00:03:58.000
+Un responsable: para la capacidad de alojamiento, Grace.
+
+00:03:59.100 --> 00:04:03.738
+Documentación: qué significa, en palabras del negocio, y cómo se calcula.
+
+00:04:05.038 --> 00:04:09.336
+Linaje: de dónde sale cada cifra, hasta los cables del mapa de la red.
+
+00:04:10.636 --> 00:04:16.676
+Un contrato: al día cada lunes, y un método nuevo solo como versión nueva, avisando antes a los lectores.
+
+00:04:18.176 --> 00:04:22.882
+Y una vía de acceso aprobada: los lectores lo piden en el catálogo, y el responsable decide.
+
+00:04:24.182 --> 00:04:28.204
+El único catálogo los lista todos: qué existe, y quién responde por ello.
+
+00:04:31.704 --> 00:04:36.808
+Pregunta cómo guardar los datos y oirás cuatro palabras: warehouse, lakehouse, mesh y fabric.
+
+00:04:38.108 --> 00:04:41.186
+Suenan a rivales. Responden preguntas distintas.
+
+00:04:42.886 --> 00:04:48.897
+Un warehouse es un solo almacén, modelado para informes, que suele construir y operar un equipo central.
+
+00:04:50.397 --> 00:04:58.704
+Un lakehouse guarda archivos en formato abierto, con tablas y controles de warehouse encima, para informes y aprendizaje automático.
+
+00:05:00.204 --> 00:05:09.077
+Un mesh no es tecnología: cada dominio responde por sus datos como productos, en una plataforma de autoservicio, con reglas que pactan.
+
+00:05:10.777 --> 00:05:17.288
+Un fabric usa metadatos para encontrar, conectar y gobernar datos en muchos almacenes, automatizando lo que puede.
+
+00:05:18.788 --> 00:05:24.521
+Así que se combinan. El objetivo de la empresa es un mesh de responsables, sobre su lakehouse, con un solo catálogo.
+
+00:05:26.221 --> 00:05:29.410
+Si una plataforma o varias es la pregunta de la próxima serie.
+
+00:05:32.110 --> 00:05:36.872
+Inés dibuja los datos como son, la línea base, y como deberían ser, el objetivo.
+
+00:05:38.372 --> 00:05:44.538
+Hoy, el equipo de datos es responsable de 300 tablas, pocas tienen contrato, y el acceso es un correo.
+
+00:05:46.038 --> 00:05:53.528
+En el objetivo, toda tabla está en un producto con responsable de negocio o retirada, y el equipo de datos solo responde por la plataforma.
+
+00:05:55.228 --> 00:05:59.477
+Cada diferencia es una brecha, y va a la hoja de ruta con un responsable y un trimestre.
+
+00:06:00.977 --> 00:06:06.178
+Empieza donde duele: primero la capacidad de alojamiento, luego los productos con más lectores.
+
+00:06:07.478 --> 00:06:10.097
+Cada dominio tiene tres meses para reclamar sus tablas.
+
+00:06:11.397 --> 00:06:17.170
+Lo que nadie reclame para entonces se archiva, avisando antes a sus lectores, y después se retira.
+
+00:06:19.070 --> 00:06:24.193
+Los dominios lo resuelven primero. El centro interviene solo donde no se resuelve a tiempo.
+
+00:06:27.493 --> 00:06:34.222
+En el mapa de la práctica de datos, los dominios ya tienen sus conceptos: la red, comercialización y lo que comparten.
+
+00:06:35.722 --> 00:06:39.745
+Ahora se les suma el dominio empresarial, para las medidas que los cruzan.
+
+00:06:41.245 --> 00:06:47.982
+Cada producto de datos va en su dominio, dibujado como producto: algo que el negocio ofrece, con un contrato.
+
+00:06:49.682 --> 00:06:55.258
+La capacidad de alojamiento reúne los datos que ofrece y su contrato, y Grace es su responsable.
+
+00:06:56.958 --> 00:07:03.038
+Cada tabla del catálogo apunta ahora a su producto, así que el mapa y la plataforma dicen lo mismo.
+
+00:07:08.938 --> 00:07:16.476
+En el diseño de Beer, cada fábrica resolvería primero sus problemas, y el centro sabría solo de los no resueltos a tiempo.
+
+00:07:18.176 --> 00:07:22.511
+En la empresa, cada dominio resuelve ahora primero los problemas de sus propios datos.
+
+00:07:23.811 --> 00:07:30.943
+En tres meses, los dominios reclamaron 246 de las 300 tablas, en 31 productos de datos.
+
+00:07:32.443 --> 00:07:37.790
+Nadie reclamó las otras 54. Se archivaron, y nadie ha pedido que vuelva ninguna.
+
+00:07:39.290 --> 00:07:45.349
+Cuando los ingenieros de Grace volvieron a cambiar su método, la capacidad de alojamiento cambió con él, como versión nueva.
+
+00:07:46.649 --> 00:07:51.140
+Sus lectores lo supieron una semana antes, y ninguna familia compró paneles que su calle no admitiera.
+
+00:07:52.840 --> 00:07:58.836
+Cada dominio es ahora responsable de sus datos. Pero con tantos responsables, ¿quién hace que todos hablen un mismo idioma?

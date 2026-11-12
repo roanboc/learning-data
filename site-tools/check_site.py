@@ -655,8 +655,7 @@ SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more t
 # the packs of the series it shows aren't read
 SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
 # packs written before this check, still to be spread: each leaves the list with its fix, and none joins it
-SPREAD_LATER = {"data-governance", "governance-in-practice", "governance-on-the-map", "master-and-reference-data",
-                "too-good-to-be-true", "what-an-agent-is"}
+SPREAD_LATER = {"data-governance", "governance-in-practice", "governance-on-the-map", "master-and-reference-data", "what-an-agent-is"}
 
 
 def spread_most(n, k):

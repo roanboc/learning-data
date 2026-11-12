@@ -1,0 +1,24 @@
+{
+  "key": "agents-on-the-map",
+  "title": "Agents on the map",
+  "sub": "AI and continuous architecture, the last series on enterprise architecture: agents arrive in vendors' updates and in teams' own tools, so the map shows each one as software in a role of its own, covering tasks and never a whole activity; how far it may go on each task, set by the process's owner; its own identity, a hand-off to a person, and a person who answers for it.",
+  "howto": "Warm clay and brick are Babylon, from about 620 BCE. In the present, the map's six layers are glass in their colours; a teal orb is an agent, and a faint, dashed one is an agent nobody put on the map. Gold marks the business side and its owners, cyan the technical side. Four rising steps are how far an agent may go on a task: inform, draft, verify or run.",
+  "src": [
+    "../../../shared/src/aca.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["hands", "tasks", 6.5],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bArchiMate\\b", "Arky-mate"],
+    ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],
+    ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
+    ["\\bNebuchadnezzar\\b", "Nebbu-kad-nezzar"],
+    ["\\bMarduk\\b", "Mar-dook"],
+    ["\\bBabel\\b", "Bay-bel"],
+    ["\\bNIST's\\b", "Nist's"],
+    ["\\bIT\\b", "I T"]
+  ]
+}

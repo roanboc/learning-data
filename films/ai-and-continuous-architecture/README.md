@@ -11,6 +11,7 @@ Agents and AI services on the map, AI in the architecture practice, and architec
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Agents on the map](https://data.learn-all.org/ai-and-continuous-architecture/agents-on-the-map/) | Agents in the architecture | 8½ min | 11 | 3 questions | [script](1-agents-on-the-map/script.md) · [source](1-agents-on-the-map/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

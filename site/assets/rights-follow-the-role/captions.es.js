@@ -2,8 +2,8 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the series and A place on the map: Planificación, el agente de Planificación, el ayudante, los encargos for the tickets, el acceso de Jun for his sign-in, permisos for
-   rights, un pull request, una verificación for a check, una dueña and un dueño, un paso, un rol, colaborador de Planificación, separación de funciones, liberar a producción, los nombres
-   enmascarados, su esquema de desarrollo, su propia rama; and, for this film, cambiar un producto de datos for the service, el contexto gobernado, la memoria del equipo, una deriva for
+   rights, un pull request, una verificación for a check, una dueña and un dueño, un paso, un rol, colaborador de Planificación, separación de funciones, liberar a producción, los datos
+   personales y sensibles enmascarados, su esquema de desarrollo, su propia rama; and, for this film, cambiar un producto de datos for the service, el contexto gobernado, la memoria del equipo, una deriva for
    drift. Each role is said as who fills it where a person is named (de quien lo solicita, de quien aprueba la liberación). The ward: una sala de hospital, las existencias for the
    stock, la orden del médico and its copia, el farmacéutico, la enfermera, un cajón for each patient, dosis únicas, etiquetadas. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
@@ -73,8 +73,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cada paso dice qué lee, qué escribe y qué herramientas llama.",
 "To draft the change, it reads the ticket and what the change touches, and writes on its own branch.":
 "Para redactar el cambio, lee el encargo y lo que el cambio toca, y escribe en su propia rama.",
-"To build it, it reads production, names masked, and writes its tests' results in its own development schema.":
-"Para construirlo, lee producción con los nombres enmascarados y escribe los resultados de sus pruebas en su esquema de desarrollo.",
+"To build it, it reads production, with personal and sensitive data masked, and writes its tests' results in its own development schema.":
+"Al construirlo, lee producción con datos personales y sensibles enmascarados y escribe sus resultados de prueba en su esquema de desarrollo.",
 "To open the pull request, it reads its change and its results, and writes one pull request.":
 "Para abrir el pull request, lee su cambio y sus resultados, y escribe un pull request.",
 "Its rights are exactly those, and every right names the step that needs it.":
@@ -145,8 +145,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la sala, el cajón de cada paciente tenía las dosis de un día, llenado desde una orden.",
 "Here, the planning agent holds what its three steps need, and nothing more.":
 "Aquí, el agente de Planificación tiene lo que necesitan sus tres pasos, y nada más.",
-"Every right it holds has a reason anyone can read, and none of them reaches production.":
-"Cada permiso suyo tiene un motivo que cualquiera puede leer, y ninguno llega a producción.",
+"Every right it holds has a reason anyone can read, and none of them lets it change production.":
+"Cada permiso suyo tiene un motivo que cualquiera puede leer, y ninguno le permite cambiar producción.",
 "And Jun's rights stay his own.":
 "Y los permisos de Jun siguen siendo suyos.",
 "An agent's rights come from its work, not from a person's.":

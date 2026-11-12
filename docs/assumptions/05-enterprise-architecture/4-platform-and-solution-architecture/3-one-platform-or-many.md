@@ -1,6 +1,6 @@
 # One platform, or many: questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, film 3 of 8 · PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*Enterprise architecture* · *Platform and solution architecture*, film 3 of 8 · PR #361 · [pull request](https://github.com/roanboc/learning-data/pull/361)
 
 [Watch it on the site](https://data.learn-all.org/platform-and-solution-architecture/one-platform-or-many/)
 

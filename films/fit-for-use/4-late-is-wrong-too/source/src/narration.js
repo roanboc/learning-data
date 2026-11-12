@@ -45,12 +45,12 @@ const NARR={
  {"id":"calls","gap":0.8,"text":"Sam calls the student system team, and Malia Fonoti, who sends the list. Malia holds the send."},
  {"id":"arrives","gap":0.8,"text":"At 11:40 the file arrives; at 12:10 the list is built again, with 712 graduates.","say":"At eleven forty the file arrives; at twelve ten the list is built again, with seven hundred and twelve graduates."},
  {"id":"goes","gap":0.8,"text":"Malia's team checks the 23 new names, and at 3:20 the list goes.","say":"Malia's team checks the twenty-three new names, and at three twenty the list goes."},
- {"id":"december","gap":1.0,"text":"The December before, six graduates were left off the same way, and nobody saw. Their certificates were printed late, and posted."}
+ {"id":"december","gap":1.0,"text":"The December before, six graduates were left off, and nobody saw. Their certificates were printed late, and posted."}
 ]},
 "fresh":{"name":"How fresh, for what","lead":1.0,"tail":1.0,"vo":[
  {"id":"monday","gap":0.8,"text":"On Monday, Malia and Sam meet Mei Tanaka, who owns the list."},
  {"id":"knows","gap":0.8,"text":"The platform can see that a table is late. Only its users can say when late is too late."},
- {"id":"certs","gap":0.8,"text":"The certificates can't wait: they need that night's files when the list goes to the printer."},
+ {"id":"certs","gap":0.8,"text":"The certificates can't wait: they need yesterday's awards on the list when it goes to the printer."},
  {"id":"seats","gap":0.8,"text":"Seating the Great Hall can: it's counted a week before, from a list a few days old."},
  {"id":"planning","gap":0.8,"text":"Planning's count for the government comes after the year's end: weeks are fine."},
  {"id":"clocks","gap":0.8,"text":"One list, three clocks. The strictest sets the level: a day old at most, at the send."},
@@ -60,8 +60,15 @@ const NARR={
 ]},
 "age":{"name":"Say how old it is","lead":1.0,"tail":1.0,"vo":[
  {"id":"says","gap":0.8,"text":"From now on, the list says how old it is."},
- {"id":"row","gap":0.8,"text":"Every row carries its sources' age: when the files it was built from arrived."},
- {"id":"own","gap":0.8,"text":"Each source has its own. That Thursday, it would have said: student system, Wednesday at two; portal, Thursday at two."},
+ {"id":"from","gap":0.8,"text":"Old, counted from when? Every record has three dates."},
+ {"id":"happened","gap":0.8,"text":"When it happened: the board approved this award on Wednesday."},
+ {"id":"saved","gap":0.8,"text":"When the student system saved it: that afternoon."},
+ {"id":"came","gap":0.8,"text":"And when its file arrived: Thursday, at 11:40.","say":"And when its file arrived: Thursday, at eleven forty."},
+ {"id":"matters","gap":0.8,"text":"The first is the one that matters. But each table says it in its own way, and when no board meets, there's none to read."},
+ {"id":"easiest","gap":0.8,"text":"The last is the easiest, and says the least: for December's list, a file came on time, full of the day before's records."},
+ {"id":"second","gap":0.8,"text":"So the list goes by the second: the date every load already uses to find what's new."},
+ {"id":"row","gap":0.8,"text":"Every row carries its sources' age: the newest record each one had saved."},
+ {"id":"own","gap":0.8,"text":"Each source has its own. That Thursday, it would have said: student system, Wednesday, before two; portal, Thursday, before two."},
  {"id":"shown","gap":0.8,"text":"It's shown wherever the list is, first of all in the printer's file."},
  {"id":"flags","gap":0.8,"text":"Like the volunteers' flags, it's a signal everyone can read."},
  {"id":"labelled","gap":0.8,"text":"Too good to be true labelled a number from the night before. Here, every list says its age, on good nights too."},
@@ -70,19 +77,19 @@ const NARR={
 ]},
 "stop":{"name":"Warn first, then stop the send","lead":1.0,"tail":1.0,"vo":[
  {"id":"source","gap":0.8,"text":"Then Sam checks the age where it starts: at each source."},
- {"id":"arrived","gap":0.8,"text":"dbt reads when each night's file arrived, not the newest row, which can be days old when no board has met."},
+ {"id":"reads","gap":0.8,"text":"dbt reads the same date there: the newest record each source saved, not when its file arrived."},
  {"id":"level","gap":0.8,"text":"One level on each: older than twenty-four hours, the check fails."},
  {"id":"first","gap":0.8,"text":"Each night, the update runs that check first."},
  {"id":"tells","gap":0.8,"text":"If it fails, Sam and Malia hear at once, and the list is still built, saying its age."},
  {"id":"warn","gap":0.8,"text":"That's the warning: nothing stops, and the people who need to know, know."},
- {"id":"send","gap":0.8,"text":"The send to the printer is a job too, and runs the same check."},
+ {"id":"send","gap":0.8,"text":"The send to the printer is a job too. It checks the list's own age."},
  {"id":"waits","gap":0.8,"text":"It sends only if the check passes; if not, the list waits, and Malia is told why."},
  {"id":"data","gap":1.0,"text":"The data isn't stopped. The send is."}
 ]},
 "time":{"name":"In time","lead":1.0,"tail":1.2,"vo":[
  {"id":"storm","gap":0.8,"text":"The volunteers can't stop a storm. They make sure the warning arrives in time, in words people understand."},
  {"id":"list","gap":0.8,"text":"A list can't make a late file come. It can say how old it is, and the send can wait until it's fresh."},
- {"id":"since","gap":0.8,"text":"Since June, no graduate has been left off a list by a late file."},
+ {"id":"since","gap":0.8,"text":"Since June, no graduate has been left off a list by late data."},
  {"id":"take","gap":1.0,"text":"Agree how fresh it must be, and always say how old it is."},
  {"id":"series","gap":1.0,"text":"Fit for use ends here: a use, a measure, a reference and a clock. Next, Quality as a habit."}
 ]}

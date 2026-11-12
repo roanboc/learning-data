@@ -1,0 +1,21 @@
+{
+  "key": "what-an-agent-may-read",
+  "title": "What an agent may read",
+  "sub": "AI and continuous architecture: an agent's context belongs on the map: the data products it may read, with their contracts and the glossary's terms, in a place of its own that holds nothing it may not read, reached by its own identity.",
+  "howto": "Clay and lamp-light are Uruk, in 229 BCE: a scribe copying a tablet, and what he writes at its end. In the present, the map's six layers are glass in their colours, and a teal orb is an agent. A data product is a gold card with its contract; a coloured pill is its level, from public to restricted; the chat's place is a room of glass that holds only what it may read. Gold marks owners and the business side, cyan the technical side.",
+  "src": [
+    "../../../shared/src/aca.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["tablet", "who", 2.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bInés\\b", "Ee-ness"],
+    ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],
+    ["\\bUruk\\b", "Oo-rook"],
+    ["\\bBorsippa\\b", "Bor-sippa"],
+    ["\\bDatabricks'\\b", "Data-bricks's"]
+  ]
+}

@@ -43,6 +43,10 @@ What it checks, page by page (every .html under site/):
   never all in one place); a sorting list's cards aren't written box by box, nor two boxes turn and turn about; an order scenario first shows its steps mixed, from its pack's start or by the one line every engine shares (MIXED); and the Spanish pack keeps the English places. A page shows
   them in the order written. Only the labs a page shows are read (a series' pack can point to one lab of each film's own pack), and not a
   series whose engine mixes the options as it shows them.
+- scenarios' lengths: in the scenarios a page shows, in English and Spanish, the right option is at most a quarter longer than the
+  longest wrong one, no option is under half the longest, and the right one is clearly the longest in at most half of a page's
+  scenarios, as in Pause and think. Options that only name something (every one under 25 characters) aren't compared, nor the
+  scenarios no page shows. The series still to be reworded are listed in LENGTHS_LATER.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
@@ -691,6 +695,13 @@ MIXED = ("const mixed=(n,s)=>{"
          "for(let t=0;t<60;t++){const key=Array.from({length:n},(_,i)=>hs(((s|0)+1)*7919+t*104729+i*1013+n)),"
          "o=key.map((_,i)=>i).sort((a,b)=>key[a]-key[b]||a-b);if(fine(o))return o;}"
          "return Array.from({length:n},(_,i)=>(2*i+1)%(n|1));};")
+# A scenario's options: the right one mustn't be the one that explains everything. The limits are Pause and think's (THINK_*), read
+# on the scenarios a page shows, in English and Spanish. In the packs written before 12 November 2026, the right option was more
+# than a quarter longer than every wrong one in 85 of the 97 scenarios a page shows.
+SPREAD_NAMES = 25  # options that only name something, every one shorter than this, aren't compared: a name's length says nothing
+# the series whose scenarios aren't of like length yet, by the folder of their pack: each leaves the list with its fix
+LENGTHS_LATER = {"sketch", "from-words-to-data", "in-the-weeds", "too-good-to-be-true", "master-and-reference-data", "data-governance",
+                 "governance-on-the-map", "governance-in-practice", "what-an-agent-is", "enterprise-architecture"}
 
 
 def spread_most(n, k):
@@ -841,6 +852,40 @@ def spread_faults(rel, P, labs, es=None):
         else:
             out += [f"{twin}: scenario {i + 1} (\"{P['qs'][i]['title']}\"): its options or cards aren't in the places the English pack puts them" for i, (x, y) in enumerate(zip(qs, qs_es)) if x != y]
             out += [f"{twin}: lab \"{k}\": its options or cards aren't in the places the English pack puts them" for k in ls if ls[k] != ls_es[k]]
+    return out
+
+
+def length_read(q):
+    """A scenario's options by their lengths: (the right one's, the longest wrong one's, every option's), or None where lengths
+    aren't compared: no options, not one right option (spread_faults() says so), or options that only name something, every
+    one under SPREAD_NAMES characters."""
+    opts = q["opts"]
+    if opts is None or len(opts) < 2 or sum(r for _, r in opts) != 1:
+        return None
+    size = [len(t) for t, _ in opts]
+    if max(size) < SPREAD_NAMES:
+        return None
+    return next(x for x, (_, r) in zip(size, opts) if r), max(x for x, (_, r) in zip(size, opts) if not r), size
+
+
+def length_faults(group, shown):
+    """What gives a scenario's answer away by its length, as in Pause and think: shown is [(file, scenario)], the scenarios one
+    page shows, as learn_pack() read them, and group names that page's pack in the fault about them all. The right option at most
+    THINK_LONGER times the longest wrong one; no option under THINK_SHORTEST of the longest; and the right one clearly the
+    longest (by more than THINK_CLEARLY) in at most half of the page's scenarios."""
+    out, clearly, n = [], 0, 0
+    for rel, q in shown:
+        if length_read(q) is None:
+            continue
+        right, wrong, size = length_read(q)
+        n += 1
+        if right > THINK_LONGER * wrong:
+            out.append(f"{rel}: \"{q['title']}\": the right option is {right} characters, the longest wrong one {wrong}: its length gives it away")
+        if min(size) < THINK_SHORTEST * max(size):
+            out.append(f"{rel}: \"{q['title']}\": options of {'/'.join(map(str, size))} characters: give the short ones the same detail")
+        clearly += right > THINK_CLEARLY * wrong
+    if clearly > -(-n // 2):
+        out.append(f"{group}: the right option is clearly the longest in {clearly} of the {n} scenarios its page shows: make the wrong ones as full")
     return out
 
 
@@ -1467,6 +1512,42 @@ def main():
         elif "q.start" not in src and p.parent.name not in SPREAD_SHUFFLED:
             s["fails"].append(f"{rel}: an order scenario's first showing comes neither from its pack's start nor from mixed(), so it can show in order: mix it with MIXED (site-tools/check_site.py)")
     s["notes"].append(f"{len(orders)} engines show order scenarios: {sum('mixed(' in p.read_text(encoding='utf-8') for p in orders)} mix the steps with the shared line, the others take the pack's start or mix every list themselves")
+
+    s = rep.check("Scenarios: options of like length, the right one not the one that explains everything")
+    theirs = {k: learn_pack(p) for k, p in learn.items()}  # every pack, also those an engine mixes as it shows them: a length shows either way
+    twin = lambda k: learn[k].with_name("learn.es.js")
+    theirs_es = {k: learn_pack(twin(k)) for k in theirs if twin(k).exists()}
+    shows, through = [], set()  # (the series' pack, the file a fault names, the scenarios its page shows); packs a page shows only through a series' pack
+    for S, SL in SERIES_LEARN.values():
+        P = theirs.get(SL["dir"])
+        if not P or not any(q["q"] is not None and q["opts"] is None for q in P["qs"]):
+            continue
+        keys = {x["index"] + 1: x["key"] for x in build_series.films(S)[1]}
+        through |= {SL["dir"]} | {k for k in keys.values() if k in theirs}
+        for lg, all_ in (("en", theirs), ("es", theirs_es)):
+            mine = [(f"site/assets/{keys[q['film']]}/learn.{lg}.js", all_[keys[q["film"]]]["qs"][q["q"]]) for q in P["qs"]
+                    if keys.get(q["film"]) in all_ and q["q"] is not None and q["q"] < len(all_[keys[q["film"]]]["qs"])]
+            shows.append((SL["dir"], f"site/assets/{SL['dir']}/learn.{lg}.js", mine))
+    for k, P in theirs.items():
+        if k not in through:
+            shows.append((k, learn[k].relative_to(ROOT), [(learn[k].relative_to(ROOT), q) for q in P["qs"]]))
+            if k in theirs_es:
+                shows.append((k, twin(k).relative_to(ROOT), [(twin(k).relative_to(ROOT), q) for q in theirs_es[k]["qs"]]))
+    lengths = defaultdict(list)
+    for k, rel, mine in shows:
+        lengths[k] += length_faults(rel, mine)
+    for k in sorted(lengths):
+        if k not in LENGTHS_LATER:
+            s["fails"] += lengths[k]
+        elif not lengths[k]:
+            s["fails"].append(f"site/assets/{k}: its scenarios' options are of like length now: take \"{k}\" off LENGTHS_LATER in site-tools/check_site.py")
+    for k in sorted(LENGTHS_LATER - set(lengths)):
+        s["fails"].append(f"LENGTHS_LATER names \"{k}\", which isn't a series' pack of scenarios (site/assets/{k})")
+    held = {k for k, _, _ in shows} - LENGTHS_LATER
+    compared = sum(length_read(q) is not None for k, _, mine in shows if k in held for _, q in mine)
+    s["notes"].append(f"{len(held)} pack{'s' * (len(held) != 1)}, {compared} scenarios compared, in English and Spanish; a page's own scenarios only, and not options that only name something (every one under {SPREAD_NAMES} characters)")
+    if LENGTHS_LATER:
+        s["notes"].append(f"{len(LENGTHS_LATER)} packs written before this check are still to be reworded: " + ", ".join(sorted(LENGTHS_LATER)))
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")

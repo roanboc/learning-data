@@ -1,0 +1,259 @@
+1
+00:00:01,400 --> 00:00:06,391
+En 1971, el nuevo gobierno de Chile tomó el control de fábricas en todo el país.
+
+2
+00:00:07,891 --> 00:00:10,955
+Su agencia de desarrollo, la CORFO, tenía que dirigirlas.
+
+3
+00:00:12,255 --> 00:00:15,951
+Pero sus cifras de lo que producían tardaban unos seis meses en reunirse.
+
+4
+00:00:17,251 --> 00:00:20,368
+Cuando un problema aparecía en ellas, ya tenía medio año.
+
+5
+00:00:21,868 --> 00:00:27,113
+Los responsables necesitaban ver qué hacía cada fábrica ahora, no hace seis meses.
+
+6
+00:00:28,813 --> 00:00:34,689
+La CORFO pidió ayuda a un experto británico en cómo se dirigen las organizaciones, Stafford Beer.
+
+7
+00:00:35,989 --> 00:00:39,923
+Su proyecto, Cybersyn, conectaría las fábricas con Santiago.
+
+8
+00:00:41,623 --> 00:00:45,246
+Antes de usar ninguna computadora, los ingenieros fueron a las fábricas.
+
+9
+00:00:46,746 --> 00:00:50,468
+Recorrieron cada una con la gente que trabajaba allí, y dibujaron cómo funcionaba.
+
+10
+00:00:52,568 --> 00:00:54,695
+Solo entonces eligieron qué medir.
+
+11
+00:00:56,195 --> 00:01:02,581
+Cada fábrica informaría unas cinco cifras, como cuánto producía y cuántos trabajadores faltaban.
+
+12
+00:01:04,681 --> 00:01:08,412
+Cada cifra tenía su lugar en el dibujo, así que todos sabían qué significaba.
+
+13
+00:01:10,112 --> 00:01:18,236
+Inés Duarte, la nueva arquitecta de datos de la empresa, halla el mismo problema: muchos datos, y ninguna idea acordada de qué significan.
+
+14
+00:01:19,736 --> 00:01:23,041
+Ella empieza donde empezaron los ingenieros: por cómo funciona el negocio.
+
+15
+00:01:30,141 --> 00:01:36,089
+Este es el mapa de la empresa que hizo Tomás: seis capas, desde por qué existe hasta lo que la hace funcionar.
+
+16
+00:01:37,789 --> 00:01:41,738
+Lo dibujó en El mapa antes de los datos, con las personas responsables de cada parte.
+
+17
+00:01:43,238 --> 00:01:51,144
+Arquitectura de negocio para datos dibujó luego lo que el negocio tiene sobre sus datos: sus conceptos, sus responsables y sus reglas.
+
+18
+00:01:52,844 --> 00:01:57,280
+Cada concepto es un objeto de negocio, definido una vez, con las palabras del negocio.
+
+19
+00:01:58,880 --> 00:02:06,095
+Bajo el negocio está la cuarta capa, la información, y la arquitectura de datos trabaja ahí, entre el negocio y los sistemas.
+
+20
+00:02:07,795 --> 00:02:12,777
+Inés acaba de llegar como arquitecta de datos de la empresa. Esa capa es suya.
+
+21
+00:02:15,477 --> 00:02:19,772
+En su primera reunión, pregunta quién trabaja aquí en arquitectura de la información.
+
+22
+00:02:21,072 --> 00:02:24,285
+Tres personas dicen que sí, y cada una se refiere a otra cosa.
+
+23
+00:02:25,785 --> 00:02:32,020
+El equipo web se refiere a cómo se organiza y se rotula el sitio: sus menús, sus páginas, su búsqueda.
+
+24
+00:02:33,720 --> 00:02:36,089
+Es una disciplina real, pero no es esta.
+
+25
+00:02:37,389 --> 00:02:42,777
+Una analista se refiere a un modelo de la información de la empresa, y de cómo fluye entre sus partes.
+
+26
+00:02:44,477 --> 00:02:47,876
+Tomás, que estudió TOGAF, se refiere a una fase de su método.
+
+27
+00:02:49,576 --> 00:02:55,055
+Así que Inés deja por escrito qué significará para este equipo: arquitectura de datos, como la define DAMA.
+
+28
+00:02:57,755 --> 00:03:04,232
+El cuerpo de conocimiento de DAMA conoce la vieja distinción: los datos como hechos, la información como datos con significado.
+
+29
+00:03:05,832 --> 00:03:12,208
+Pero critica separarlos. Los datos son una forma de información, y la información es una forma de datos.
+
+30
+00:03:14,108 --> 00:03:18,548
+Así que usa las dos palabras como una sola, y llama a la disciplina arquitectura de datos.
+
+31
+00:03:20,048 --> 00:03:26,059
+TOGAF nombra la arquitectura de datos como uno de sus cuatro dominios, pero la agrupa con las aplicaciones.
+
+32
+00:03:27,759 --> 00:03:34,238
+ArchiMate pone lo que significa algo para el negocio en su capa de negocio, y cómo lo registra un sistema en su capa de aplicación.
+
+33
+00:03:35,738 --> 00:03:37,294
+No tiene nada en medio.
+
+34
+00:03:38,594 --> 00:03:42,086
+El mapa de Tomás dibuja una capa ahí, como hacen muchos arquitectos.
+
+35
+00:03:44,786 --> 00:03:50,174
+Inés empieza por una palabra: punto de conexión, donde un hogar o un negocio se une a la red.
+
+36
+00:03:51,674 --> 00:03:56,487
+El negocio la definió una vez, y Grace, que dirige las operaciones de la red, es su responsable.
+
+37
+00:03:57,987 --> 00:04:00,631
+Seis sistemas lo registran, cada uno a su manera.
+
+38
+00:04:01,731 --> 00:04:07,475
+El mapa de la red lo llama service point. Los datos de medidores, metering point. Facturación, premise.
+
+39
+00:04:08,975 --> 00:04:17,035
+Atención al cliente, supply address. El sistema de cortes, service location. Y la plataforma de datos tiene su propia tabla.
+
+40
+00:04:18,735 --> 00:04:23,328
+En enero, una tormenta dejó sin luz a 3,400 puntos de conexión.
+
+41
+00:04:24,828 --> 00:04:29,964
+Los avisos del corte salieron por dirección de suministro, cruzada con las ubicaciones del sistema de cortes.
+
+42
+00:04:31,264 --> 00:04:37,029
+180 hogares nunca recibieron el suyo: los dos sistemas escribían sus direcciones distinto.
+
+43
+00:04:38,729 --> 00:04:41,459
+Se quedaron a oscuras, sin saber si alguien estaba enterado.
+
+44
+00:04:43,159 --> 00:04:46,877
+¿Quién es responsable de la línea entre la palabra y sus seis registros? Nadie.
+
+45
+00:04:49,577 --> 00:04:54,791
+Esa línea es para lo que sirve la arquitectura de datos, y por eso es una arquitectura propia.
+
+46
+00:04:56,091 --> 00:05:02,617
+Los datos sobreviven a las aplicaciones que los guardan. Los puntos de conexión son más viejos que todos esos sistemas.
+
+47
+00:05:04,117 --> 00:05:07,879
+Facturación pasó a un sistema nuevo en marzo. Los puntos siguieron siendo los mismos.
+
+48
+00:05:09,379 --> 00:05:14,020
+Un concepto sirve a muchas aplicaciones, así que ninguna aplicación puede ser su dueña.
+
+49
+00:05:15,320 --> 00:05:20,694
+El significado es del negocio, y el almacenamiento, de los sistemas. Alguien tiene que hacerse cargo de la unión.
+
+50
+00:05:22,394 --> 00:05:24,705
+DAMA hace de eso una disciplina propia.
+
+51
+00:05:26,005 --> 00:05:30,476
+Así que Inés traza la línea: cada registro, unido a la palabra que representa.
+
+52
+00:05:32,376 --> 00:05:37,691
+Y decide que todo sistema que necesite un punto de conexión lleve el identificador de la red para él.
+
+53
+00:05:39,191 --> 00:05:42,771
+Ahora los avisos se cruzan por ese identificador, no por direcciones.
+
+54
+00:05:44,071 --> 00:05:48,662
+En la siguiente tormenta, los 2,100 hogares de la lista recibieron su aviso.
+
+55
+00:05:51,362 --> 00:05:54,137
+Esto agrega una capa a la práctica de datos en el mapa.
+
+56
+00:05:55,437 --> 00:05:59,559
+La capa de negocio tiene los conceptos, como objetos de negocio con responsables.
+
+57
+00:06:01,059 --> 00:06:04,476
+La arquitectura de datos agrega debajo de ellos la capa de información.
+
+58
+00:06:05,976 --> 00:06:11,592
+El registro de cada sistema es un objeto de datos, y una línea dice qué objeto de negocio realiza.
+
+59
+00:06:13,492 --> 00:06:17,451
+Una palabra, seis registros, seis líneas, y cada línea tiene un responsable.
+
+60
+00:06:19,151 --> 00:06:24,597
+Luego, esta capa muestra dónde nace cada hecho, cómo viaja y quién es responsable de qué datos.
+
+61
+00:06:29,697 --> 00:06:34,474
+En Chile, los ingenieros dibujaron cada fábrica antes de elegir una sola cifra.
+
+62
+00:06:35,974 --> 00:06:40,068
+El dibujo fue primero, así que una cifra significaba lo mismo para todos los que la leían.
+
+63
+00:06:41,568 --> 00:06:46,556
+Inés también dibujó primero el negocio: una palabra, sus registros y una línea con un responsable.
+
+64
+00:06:48,056 --> 00:06:51,136
+Así, el próximo aviso de corte llega a cada hogar de la lista.
+
+65
+00:06:52,436 --> 00:06:58,252
+Pero ¿cómo se vuelven decisiones los registros? Hay una pirámide famosa sobre eso, y solo tiene la mitad de razón.

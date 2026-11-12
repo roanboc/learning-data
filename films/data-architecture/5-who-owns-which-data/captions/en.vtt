@@ -1,0 +1,199 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:07.069
+In 1972, Cybersyn's engineers went from factory to factory across Chile.
+
+00:00:08.769 --> 00:00:13.606
+In each, with its workers and managers, they chose about five numbers to watch.
+
+00:00:14.906 --> 00:00:18.239
+If one went out of its range, the software would send a warning.
+
+00:00:19.739 --> 00:00:23.637
+Stafford Beer and the team had to decide who that warning would go to.
+
+00:00:25.337 --> 00:00:32.800
+If every warning went to Santiago, a few people there would be buried in small problems, and factories would wait for orders.
+
+00:00:34.300 --> 00:00:41.218
+President Allende had insisted the system be decentralising, with workers taking part, and not bureaucratic.
+
+00:00:42.718 --> 00:00:49.191
+Factories needed room to solve their own problems, and the centre needed to hear only of the ones they couldn't.
+
+00:00:50.891 --> 00:00:56.790
+So, in Beer's design, a warning would go first to the factory's own manager, and nobody else.
+
+00:00:58.090 --> 00:01:00.993
+They would have a set time to deal with it, in their own way.
+
+00:01:02.693 --> 00:01:08.843
+Only if it wasn't solved in time would the team tell the next level: that industry's committee, at CORFO.
+
+00:01:10.343 --> 00:01:14.876
+The engineers chose each factory's time. Beer called it designing freedom.
+
+00:01:16.576 --> 00:01:24.635
+Each factory, Beer argued, would keep almost complete control of its work, and the centre would step in only on serious problems.
+
+00:01:26.335 --> 00:01:31.558
+At the utility, Inés opens the catalogue: the list of every table on the platform.
+
+00:01:32.858 --> 00:01:39.050
+Of its 412 tables, 300 name the data team as their owner, because it built them.
+
+00:01:46.550 --> 00:01:50.653
+One of them is hosting capacity: how much solar each street can take.
+
+00:01:52.153 --> 00:01:56.661
+On the map, it's Grace's: her engineers defined it, and how to work it out.
+
+00:01:58.261 --> 00:02:03.050
+The data team built the table from their method, and households check it on the website.
+
+00:02:04.750 --> 00:02:11.354
+In May, the engineers found older cables carry less, and changed their method. The table kept the old one.
+
+00:02:13.454 --> 00:02:18.611
+The engineers didn't see the table as theirs to tell, and the data team had no way to know.
+
+00:02:20.511 --> 00:02:25.611
+For four months, the website told households their street could take more solar than it could.
+
+00:02:27.511 --> 00:02:32.764
+Ninety families bought panels, then found they could send back only part of the power they made.
+
+00:02:35.064 --> 00:02:40.506
+Nobody was careless. The table's owner was the one team that couldn't know what its numbers meant.
+
+00:02:44.206 --> 00:02:51.018
+Who owns a table is for the owners to decide, so Inés brings them one rule, to make the platform match the map.
+
+00:02:52.318 --> 00:02:59.427
+Every table belongs to a data product, and each product to whoever owns the capability that creates its data.
+
+00:03:01.327 --> 00:03:06.811
+Planning the network creates hosting capacity, so its product is Grace's, method and all.
+
+00:03:08.111 --> 00:03:12.205
+Serving customers creates accounts, so theirs is the head of retail's.
+
+00:03:13.505 --> 00:03:20.148
+A measure that crosses domains belongs to the enterprise domain: for the regulator's measures, that's Ama.
+
+00:03:21.648 --> 00:03:30.162
+The data team builds and runs every product. The centre keeps only what all domains share: the platform, the catalogue, a few rules.
+
+00:03:31.862 --> 00:03:36.274
+As in Beer's design, each domain solves its own data's problems first.
+
+00:03:37.774 --> 00:03:41.132
+The owners agree, and the rule goes on the map with its date.
+
+00:03:43.832 --> 00:03:48.514
+A data product is data made for others to use, with someone who answers for it.
+
+00:03:50.214 --> 00:03:54.145
+At the utility, a product is published only when it has five things.
+
+00:03:55.445 --> 00:03:58.000
+An owner: for hosting capacity, Grace.
+
+00:03:59.100 --> 00:04:03.738
+Documentation: what it means, in the business's words, and how it's worked out.
+
+00:04:05.038 --> 00:04:09.336
+Lineage: where each number comes from, back to the network map's cables.
+
+00:04:10.636 --> 00:04:16.676
+A contract: fresh every Monday, and a new method only as a new version, with readers told first.
+
+00:04:18.176 --> 00:04:22.882
+And an approved way in: readers ask in the catalogue, and the owner decides.
+
+00:04:24.182 --> 00:04:28.204
+The one catalogue lists them all: what exists, and who answers for it.
+
+00:04:31.704 --> 00:04:36.808
+Ask how to keep data, and you'll hear four words: warehouse, lakehouse, mesh and fabric.
+
+00:04:38.108 --> 00:04:41.186
+They sound like rivals. They answer different questions.
+
+00:04:42.886 --> 00:04:48.897
+A warehouse is one store, modelled for reports, usually built and run by one central team.
+
+00:04:50.397 --> 00:04:58.704
+A lakehouse keeps files in an open format, with a warehouse's tables and controls on top, for reports and machine learning alike.
+
+00:05:00.204 --> 00:05:09.077
+A mesh isn't a technology: each domain owns its data as products, on a self-serve platform, under rules the domains agree together.
+
+00:05:10.777 --> 00:05:17.288
+A fabric uses metadata to find, connect and govern data across many stores, automating what it can.
+
+00:05:18.788 --> 00:05:24.521
+So they mix. The utility's target is a mesh of owners, on its lakehouse, with one catalogue.
+
+00:05:26.221 --> 00:05:29.410
+One platform or several is the next series' question.
+
+00:05:32.110 --> 00:05:36.872
+Inés draws the data as it is, the baseline, and as it should be, the target.
+
+00:05:38.372 --> 00:05:44.538
+Today, the data team owns 300 tables, few have a contract, and access means an email.
+
+00:05:46.038 --> 00:05:53.528
+In the target, every table is in a product with a business owner, or retired, and the data team owns only the platform.
+
+00:05:55.228 --> 00:05:59.477
+Each difference is a gap, and goes into the roadmap with an owner and a quarter.
+
+00:06:00.977 --> 00:06:06.178
+It starts where it hurts: hosting capacity first, then the products with the most readers.
+
+00:06:07.478 --> 00:06:10.097
+Each domain has three months to claim its tables.
+
+00:06:11.397 --> 00:06:17.170
+What nobody claims by then is archived, its readers told first, and retired after that.
+
+00:06:19.070 --> 00:06:24.193
+The domains solve it first. The centre steps in only where it isn't solved in time.
+
+00:06:27.493 --> 00:06:34.222
+On the data practice's map, the domains already hold their concepts: the network, retail and what they share.
+
+00:06:35.722 --> 00:06:39.745
+Now the enterprise domain joins them, for the measures that cross them.
+
+00:06:41.245 --> 00:06:47.982
+Each data product goes in its domain, drawn as a product: something the business offers, under a contract.
+
+00:06:49.682 --> 00:06:55.258
+Hosting capacity brings together the data it offers and its contract, and Grace owns it.
+
+00:06:56.958 --> 00:07:03.038
+Every table in the catalogue now points to its product, so the map and the platform say the same thing.
+
+00:07:08.938 --> 00:07:16.476
+In Beer's design, each factory would solve its own problems first, and the centre would hear only of those not solved in time.
+
+00:07:18.176 --> 00:07:22.511
+At the utility, each domain now solves its own data's problems first.
+
+00:07:23.811 --> 00:07:30.943
+In three months, the domains claimed 246 of the 300 tables, in 31 data products.
+
+00:07:32.443 --> 00:07:37.790
+Nobody claimed the other 54. They were archived, and nobody has asked for one back.
+
+00:07:39.290 --> 00:07:45.349
+When Grace's engineers next changed their method, hosting capacity changed with it, as a new version.
+
+00:07:46.649 --> 00:07:51.140
+Its readers knew a week ahead, and no family bought panels its street couldn't take.
+
+00:07:52.840 --> 00:07:58.836
+Each domain now owns its data. But with so many owners, who keeps them all speaking one language?

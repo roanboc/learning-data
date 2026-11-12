@@ -47,7 +47,7 @@ What it checks, page by page (every .html under site/):
 - scenarios' lengths: in the scenarios a page shows, in English and Spanish, the right option is at most a quarter longer than the
   longest wrong one, no option is under half the longest, and the right one is clearly the longest in at most half of a page's
   scenarios, as in Pause and think. Options that only name something (every one under 25 characters) aren't compared, nor the
-  scenarios no page shows. The series still to be reworded are listed in LENGTHS_LATER.
+  scenarios no page shows.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
@@ -700,8 +700,6 @@ MIXED = ("const mixed=(n,s)=>{"
 # on the scenarios a page shows, in English and Spanish. In the packs written before 12 November 2026, the right option was more
 # than a quarter longer than every wrong one in 85 of the 97 scenarios a page shows.
 SPREAD_NAMES = 25  # options that only name something, every one shorter than this, aren't compared: a name's length says nothing
-# the series whose scenarios aren't of like length yet, by the folder of their pack: each leaves the list with its fix
-LENGTHS_LATER = {"enterprise-architecture"}
 
 
 def spread_most(n, k):
@@ -1537,17 +1535,9 @@ def main():
     for k, rel, mine in shows:
         lengths[k] += length_faults(rel, mine)
     for k in sorted(lengths):
-        if k not in LENGTHS_LATER:
-            s["fails"] += lengths[k]
-        elif not lengths[k]:
-            s["fails"].append(f"site/assets/{k}: its scenarios' options are of like length now: take \"{k}\" off LENGTHS_LATER in site-tools/check_site.py")
-    for k in sorted(LENGTHS_LATER - set(lengths)):
-        s["fails"].append(f"LENGTHS_LATER names \"{k}\", which isn't a series' pack of scenarios (site/assets/{k})")
-    held = {k for k, _, _ in shows} - LENGTHS_LATER
-    compared = sum(length_read(q) is not None for k, _, mine in shows if k in held for _, q in mine)
-    s["notes"].append(f"{len(held)} pack{'s' * (len(held) != 1)}, {compared} scenarios compared, in English and Spanish; a page's own scenarios only, and not options that only name something (every one under {SPREAD_NAMES} characters)")
-    if LENGTHS_LATER:
-        s["notes"].append(f"{len(LENGTHS_LATER)} packs written before this check are still to be reworded: " + ", ".join(sorted(LENGTHS_LATER)))
+        s["fails"] += lengths[k]
+    compared = sum(length_read(q) is not None for _, _, mine in shows for _, q in mine)
+    s["notes"].append(f"{len(lengths)} packs, {compared} scenarios compared, in English and Spanish; a page's own scenarios only, and not options that only name something (every one under {SPREAD_NAMES} characters)")
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")

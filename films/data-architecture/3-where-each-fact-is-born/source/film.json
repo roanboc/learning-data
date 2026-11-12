@@ -1,0 +1,32 @@
+{
+  "key": "where-each-fact-is-born",
+  "title": "Where each fact is born",
+  "sub": "Data architecture, a series on what DAMA calls data architecture, between the business and the systems: where each fact is born, its system of record, one home and one owner for it, every copy with a line back to where it came from, and what's left to master data when two places have to create the same thing.",
+  "howto": "Glass in the layers' colours is the confirmed model: gold is the business layer, peach the information layer, where data architecture works. Each system is a glass card; a fact born there is marked with a small gold star, and a copy is drawn fainter, with a dashed line back to where it was born. Chile in 1972 is drawn in lamp-light: the telex lines, the factories, and the strips of paper each one sent.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "master",
+    "breath",
+    1.4
+  ],
+  "say": [
+    [
+      "\\bInés\\b",
+      "Ee-ness"
+    ],
+    [
+      "\\bCybersyn\\b",
+      "Cyber-sin"
+    ],
+    [
+      "\\bDAMA\\b",
+      "Dah-ma"
+    ]
+  ],
+  "story": [
+    "sender"
+  ]
+}

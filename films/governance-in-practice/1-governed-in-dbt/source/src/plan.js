@@ -263,9 +263,31 @@ function gd_versions(ctx,t,o){o=o||{};const v2=o.v2||0,v1=o.v1||0,rd=o.rd||0;
     withA(ctx,v,()=>{wc_panel(ctx,260,y,490,74,{kind:"card",seed:175+i});wc_T(ctx,s,284,y+48,{w:500,size:28,f:"mono",col:WC_DARK});
       wc_T(ctx,"ref('core_credential', v=2)",790,y+48,{w:500,size:28,f:"mono",col:GV.greenInk});});
     gd_arrow(ctx,i?[262,y+30]:[400,y-4],i?[300,382]:[420,382],0,Math.min(clamp((v-0.4)/0.6,0,1),clamp(v2*1.5,0,1)),{col:GV.greenInk,bx:i?-110:0});});}
+// contracts agreed team to team (the author, 12 November 2026): the data team between a team that sends it data and a team that reads
+// its data, each pair with a contract of its own between them, in the data team's green, and no gold on the board, since data
+// governance isn't asked. o.me brings the data team, o.head the heading, o.rd the team that reads and its contract, o.sd the team that
+// sends and its contract, and the tag under them comes at o.govAt
+const GD_TEAMS=[["A provider","sends the data"],["Data team","builds the tables"],["A consumer","reads the data"]],GD_TMY=420,GD_TMK=220;
+function gd_teams(ctx,t,o){o=o||{};const y=GD_TMY,wK=GD_TMK,ws=GD_TEAMS.map(([n,r])=>Math.round(Math.max(tw(ctx,n,32,800),tw(ctx,r,28,600))+60)),
+    g=(1420-ws[0]-ws[1]-ws[2]-2*wK)/4,xL=250,xK1=xL+ws[0]+g,xC=xK1+wK+g,xK2=xC+ws[1]+g,xR=xK2+wK+g,cy=y+56;
+  // the heading: a strip of paper pinned over them
+  const h=clamp(o.head||0,0,1);if(h>0.01){const s="agreed team to team",hw=Math.round(tw(ctx,s,44,700)/2+70),k=0.92+0.08*spring(h);ctx.save();ctx.translate(960,GD_TMY-180);ctx.scale(k,k);
+    withA(ctx,clamp(h*2,0,1),()=>{wc_panel(ctx,-hw,-52,hw*2,104,{kind:"card",seed:176});gv_pin(ctx,0,-36,GV.red,1.1);wc_hand(ctx,s,0,26,{size:44,w:700,align:"center",col:WC_DARK});});ctx.restore();}
+  // a contract between two teams, the one on its left ending at xa and the one on its right starting at xb: a line from each, drawn on
+  // as far as where the contract goes, never under it (a line through its word would read as struck out while it comes in), then the
+  // contract pinned between them
+  const pair=(u,xa,xb,xk,seed)=>{u=clamp(u,0,1);if(u<=0.01)return;const p=clamp(u*2-0.5,0,1);gd_arrow(ctx,[xa,cy],[xk,cy],0,p,{col:GV.greenInk,head:false});
+    gd_arrow(ctx,[xb,cy],[xk+wK,cy],0,p,{col:GV.greenInk,head:false});const a=clamp(u*2-1,0,1);if(a<=0.01)return;const k=0.92+0.08*spring(a),cx=xk+wK/2;
+    ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);ctx.translate(-cx,-cy);withA(ctx,clamp(a*2,0,1),()=>{wc_panel(ctx,xk,y,wK,112,{kind:"card",wash:GV.green,washA:0.18,seed});
+      gv_pin(ctx,cx,y+18,GV.red,1.0);wc_hand(ctx,"contract",cx,y+82,{size:40,w:700,align:"center",col:WC_DARK});});ctx.restore();};
+  gu_nameCard(ctx,xC,y,GD_TEAMS[1][0],GD_TEAMS[1][1],clamp(o.me||0,0,1));
+  const rd=clamp(o.rd||0,0,1),sd=clamp(o.sd||0,0,1);
+  gu_nameCard(ctx,xR,y,GD_TEAMS[2][0],GD_TEAMS[2][1],clamp(rd*2,0,1));pair(rd,xC+ws[1],xR,xK2,178);
+  gu_nameCard(ctx,xL,y,GD_TEAMS[0][0],GD_TEAMS[0][1],clamp(sd*2,0,1));pair(sd,xL+ws[0],xC,xK1,177);
+  gu_tagAt(ctx,t,o.govAt==null?1e9:o.govAt,null,960,GD_TMY+250,"no agreement from data governance needed",{size:30});}
 // enterprise contracts: only the canonical tables, the shared core, have one, in an open standard, written first by data governance's
 // information architect; the data team's dbt contract builds to it, and a check compares the two. o.ent brings the enterprise contract,
-// o.core the canonical tables (the marts keep dbt contracts only), o.arch who writes it, o.team the dbt contract and who builds it,
+// o.core the canonical tables (the marts keep dbt contracts, agreed team to team), o.arch who writes it, o.team the dbt contract and who builds it,
 // o.cmp the check between them, o.diff a difference, and data governance looking at how it got there
 const GD_CORE=["core_learner","core_credential","core_award"];
 function gd_enterprise(ctx,t,o){o=o||{};const card=(a,x,w,wash,seed,title,code,note)=>{if(a<=0.01)return;const k=0.92+0.08*spring(clamp(a,0,1)),cx=x+w/2;
@@ -277,10 +299,10 @@ function gd_enterprise(ctx,t,o){o=o||{};const card=(a,x,w,wash,seed,title,code,n
   card(o.team||0,1030,640,GV.green,182,"dbt contract","core_credential_v2","enforced on every build");
   gu_nameCard(ctx,280,410,"Information architect","data governance · writes it first",clamp(o.arch||0,0,1));
   gu_nameCard(ctx,1060,410,"Data team","builds to it",clamp((o.team||0)*1.6-0.6,0,1));
-  // the canonical tables, which have one; the marts keep dbt contracts only. They give way to data governance where the two differ
+  // the canonical tables, which have one; the marts keep dbt contracts, agreed team to team. They give way to data governance where the two differ
   const cr=clamp(o.core||0,0,1)*(1-d);if(cr>0.01){let x=250;GD_CORE.forEach((n,i)=>{const v=clamp(cr*2-i*0.4,0,1),w=Math.round(gu_mw(ctx,n)+36);if(v>0.01)withA(ctx,v,()=>{
       wc_panel(ctx,x,590,w,60,{kind:"pill",wash:GV.gold,washA:0.45,seed:190+i});wc_T(ctx,n,x+18,630,{w:500,size:28,f:"mono",col:WC_DARK});});x+=w+12;});
-    withA(ctx,clamp(cr*2-1,0,1),()=>wc_T(ctx,"the marts: dbt contracts only",250,710,{w:600,size:30,col:WC_MUTED}));}
+    withA(ctx,clamp(cr*2-1,0,1),()=>wc_T(ctx,"the marts: dbt contracts, team to team",250,710,{w:600,size:30,col:WC_MUTED}));}
   if(c>0.01){gd_arrow(ctx,[894,240],[1026,240],0,c,{col:d>0.5?GV.redInk:GV.greenInk});
     gu_checks(ctx,1030,580,640,{h:180,items:[{name:"contracts",st:d>0.5?"fail":c>=1?"pass":"run"}],t,summary:false,pop:[d*(1-fin(t,(o.diffAt||0)+1.2,0.6))]});}
   if(d>0.01){const k=0.92+0.08*spring(d);ctx.save();ctx.translate(570,650);ctx.scale(k,k);ctx.translate(-570,-650);withA(ctx,clamp(d*2,0,1),()=>{

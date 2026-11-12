@@ -161,7 +161,7 @@ scene("thursdays",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
 // a person's part in each step, when an agent does much of the doing: a card under each step's head
 const SW_PART=["Understand the plan","Know enough to help","The results, against the plan","On what they show"];
 scene("cycle",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
-    said:["plan","do,","study","act"].map(k=>wAt(sc,"loop",k)),shewhart:wAt(sc,"loop","Walter"),name:c.name,deming:wAt(sc,"name","Deeming"),wheat:c.wheat,sow:wAt(sc,"wheat","sow"),
+    said:["plan","do,","study","act"].map(k=>wAt(sc,"loop",k)),shewhart:wAt(sc,"loop","Walter"),name:c.name,deming:wAt(sc,"name","Demming"),wheat:c.wheat,sow:wAt(sc,"wheat","sow"),
     oct:c.oct,last:c.last,hours:wAt(sc,"last","two hundred"),since:c.since,hold:wAt(sc,"since","hold"),
     ask:c.ask,plan:c.plan,rest:wAt(sc,"plan","hundred records"),know:c.know,roundH:wAt(sc,"know","round's hours"),perfect:wAt(sc,"know","perfect"),
     fewer:wAt(sc,"expect","far fewer"),n95:wAt(sc,"expect","at least"),

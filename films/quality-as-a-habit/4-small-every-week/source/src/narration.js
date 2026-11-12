@@ -35,8 +35,8 @@ const NARR={
  {"id":"results","gap":0.8,"text":"The results come from the checks that run every night."},
  {"id":"count","gap":0.8,"text":"And from what people count: reports, hours of hand work, and the hundred records."}]},
 "cycle":{"name":"Plan, do, study, act","lead":0.8,"tail":0.8,"vo":[
- {"id":"loop","gap":0.8,"text":"Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deming.","say":"Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deeming."},
- {"id":"name","gap":0.8,"text":"Many say check for its third step. Deming preferred study: compare what happened with what the plan expected, and learn from it.","say":"Many say check for its third step. Deeming preferred study: compare what happened with what the plan expected, and learn from it."},
+ {"id":"loop","gap":0.8,"text":"Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Deming.","say":"Quality engineers call it plan, do, study, act: a loop drawn by Walter Shewhart and taught by W. Edwards Demming."},
+ {"id":"name","gap":0.8,"text":"Many say check for its third step. Deming preferred study: compare what happened with what the plan expected, and learn from it.","say":"Many say check for its third step. Demming preferred study: compare what happened with what the plan expected, and learn from it."},
  {"id":"wheat","gap":0.8,"text":"Borlaug's team ran the loop twice a year: sow, look, keep the best, sow again."},
  {"id":"oct","gap":0.8,"text":"Here is one turn of it, from Thursday 1 October 2026, before December's round of hand checks.","say":"Here is one turn of it, from Thursday the first of October, twenty twenty-six, before December's round of hand checks."},
  {"id":"last","gap":0.8,"text":"Last December, two people checked every name by hand: 240 hours.","say":"Last December, two people checked every name by hand: two hundred and forty hours."},

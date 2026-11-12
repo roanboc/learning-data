@@ -50,7 +50,7 @@ const NARR={
  {"id":"appdom","gap":0.8,"text":"Los dominios de aplicación entran por un lado."},
  {"id":"bsg","gap":0.8,"text":"Bronce guarda lo que llegó. Plata lo hace consistente. Oro lo hace útil."},
  {"id":"busdom","gap":0.8,"text":"Los dominios de negocio salen por el otro, hacia dashboards, apps y Genie."},
- {"id":"dbtgov","gap":0.8,"text":"dbt gobierna cada paso, de la fuente al exposure, y su linaje traza cada conexión."},
+ {"id":"dbtgov","gap":0.8,"text":"dbt revisa y documenta cada paso, de la fuente al exposure, y su linaje traza cada conexión."},
  {"id":"dbx","text":"Y el lakehouse de Databricks ejecuta y guarda todo, gobernado por Unity Catalog."}]},
 "meaning":{"name":"Significado","lead":0.6,"tail":1.6,"vo":[
  {"id":"noise","gap":1.1,"text":"Pero las imágenes sin significado son solo ruido."},
@@ -91,5 +91,6 @@ const NARR={
 "end":{"name":"Vista completa","lead":0.5,"tail":4.2,"vo":[
  {"id":"recap","text":"Un toque se volvió una foto, luego una imagen clara, y al final una decisión:"},
  {"id":"seats","gap":0.8,"text":"se abre una clase nueva, y 140 estudiantes más consiguen cupo."},
+ {"id":"rest","gap":0.8,"text":"La plataforma lo movió. Qué significa, y quién decide, es el resto de la historia."},
  {"id":"tag","text":"Menos movimiento. Más significado.","gap":0.4}]}
 };

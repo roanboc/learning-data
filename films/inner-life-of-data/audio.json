@@ -3,15 +3,15 @@
   "files": [
     {
       "path": "site/assets/film/soundtrack.es.mp3",
-      "size": 7077712,
-      "sha256": "d5ef004bff269d829bd80d875ccae42fd6a2ff50eec7b552d9959cecfeb724d7",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/d5ef004bff269d829bd80d875ccae42fd6a2ff50eec7b552d9959cecfeb724d7.mp3"
+      "size": 6891197,
+      "sha256": "c983559b3a3ffe0787f9d522189084134fb7ce56d4f2c07eea342945850496d1",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-inner-life-of-data-07ca58824f1144e62fdd/c983559b3a3ffe0787f9d522189084134fb7ce56d4f2c07eea342945850496d1.mp3"
     },
     {
       "path": "site/assets/film/soundtrack.mp3",
-      "size": 6050420,
-      "sha256": "d6d61e8a15ee5b534cd185df64677794eb8b5ae0a4f8d887339dfe2c56b89ff4",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/d6d61e8a15ee5b534cd185df64677794eb8b5ae0a4f8d887339dfe2c56b89ff4.mp3"
+      "size": 6138192,
+      "sha256": "758d2ef50a83db9af1c31db07909f07011b448b5daa8295aef9f353cdc91515c",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-inner-life-of-data-07ca58824f1144e62fdd/758d2ef50a83db9af1c31db07909f07011b448b5daa8295aef9f353cdc91515c.mp3"
     }
   ]
 }

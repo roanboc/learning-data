@@ -33,3 +33,33 @@ Film 1 of 4 of *Making the case* (film 5 of *Data management*), made on 10 Novem
 | 21 | The README's topics | Other films of the module reached main first, in the README's one *Data management* row, and *Prototype first* (#266) brought the *Leading data people* row and the twelve topics; this pull request adds *Making the case* to the *Data management* row, in the module's order (after *A plan in ninety days*, before *Architecture that keeps up* and *Small steps, measured*). | `README.md` |
 | 22 | Render, review page and audio release | Not made in the session (the film merge rule). `media.py index --film a-case-worth-funding-en` wrote `audio.json` for the release `audio-a-case-worth-funding-5a4ef9c8b05b0f2e8f3e`; the MP3 is committed beside it, and *Store audio outside Git* publishes and verifies the release once the change reaches main, so nobody runs it by hand. | The pull request |
 | 23 | Merge order | The series' opening film waits for no other: squash-merged with its own title and message on the latest main once its checks pass. *Risks, said out loud* (#272) follows it. | The pull request |
+
+## The author's answer, 12 November 2026
+
+The expert review asked about row 8: the film uses the UK Treasury's Five Case Model as a checklist of five questions. Is a checklist the right level? Rodrigo answered in the project chat on 12 November 2026: "The lightweight for UK is fine. I generally go with lightweight approaches as they enable rapid iteration." He added, as advice, to avoid heavy frameworks for business cases, for project management and everywhere else, and to leave them for critical systems where errors can cost lives.
+
+So row 8 stands: the checklist stays. His advice was added to the film, which was recorded again that day. What was assumed in adding it:
+
+| # | Question | Assumption | Where it shows |
+|---|---|---|---|
+| 24 | Where does the advice go, and who says it? | At the end of *The decision first*, straight after "Helena uses them as a checklist, not a form.", as Helena's own practice, so the Treasury isn't made to say it: "She keeps heavy methods for critical systems, where a mistake can cost lives." "Everywhere else, a light one lets her try, learn and change course quickly." On screen, the amber tag "Heavy: where a mistake can cost lives" and the green tag "Light: try, learn, change course" take turns beside the pill "A checklist, not a form" | Chapter 2 |
+| 25 | "Heavy frameworks", and "rapid iteration", in plain words? | "Heavy methods", so no framework seems blamed by name, and "try, learn and change course quickly" for rapid iteration. "Everywhere else" keeps the advice as wide as you gave it, not only for business cases | Chapter 2 |
+| 26 | Does the Treasury's own guidance say the same? | In part. Its page on proportionate business cases (published 28 October 2026, read on 12 November) asks that a case be no longer or more detailed than necessary for its scale, cost, complexity and risk. It doesn't speak of risk to life: that rule of thumb is yours, and the script says so | The script's rigour sheet |
+| 27 | Does the advice go into other films too (project management, "and everywhere")? | Not yet. It is written into the module's practical advice (`films/a-plan-in-ninety-days/proposal.md`), so later films and changes start from it. Say if a film should say it out loud, such as *From gaps to a roadmap* or *Prototype first* | The module's proposal |
+| 28 | Length and pace | 8:07.6 (it was 7:54), 979 words, 120 words a minute; *Once, and every year* stays at 114, as row 19 explains. Replaced by row 35 later that day | The film |
+| 29 | The audio release | A new soundtrack and a new release tag. Replaced by row 35 later that day, before it was ever published | `audio.json` |
+
+## The author's second answer, 12 November 2026
+
+Row 25's "everywhere else" raised a question, put to Rodrigo in the project chat the same day: "Heavy frameworks. You keep them for systems where errors cost lives. Would you add cases where the law or public money demands the paperwork, such as privacy or regulated spending?" He answered: "yes, but even there only add tools when required (even from a societal perspective as that's regulation in the end, even if it looks as extra irrelevant work for the org, it's a wider scope for our society. Clear example is PII regulation)".
+
+So the film says it, between the two lines of that morning, and was recorded once more. What was assumed:
+
+| # | Question | Assumption | Where it shows |
+|---|---|---|---|
+| 30 | How does the film say it? | In two lines, as Helena's practice: "And for what the law requires, as with personal data: it may look like extra work, but it protects everyone." "Even there, she adds a method only when it's required." On screen, four tags now take turns beside the pill: "Heavy: where a mistake can cost lives", "Heavy: where the law requires it", "Even there: only when required" (amber) and "Light: try, learn, change course" (green) | Chapter 2 |
+| 31 | "Regulation", "PII" and "a wider scope for our society", in plain words? | "The law", "personal data" and "it protects everyone". "It may look like extra work" stands for your "extra irrelevant work for the org": the film doesn't call any rule irrelevant | Chapter 2 |
+| 32 | Public money: does the film name it? | No. "What the law requires" stands for regulation and for the rules on public money alike, as you called both regulation in the end. The university's own spending rules aren't told. The Five Case Model is itself the UK Treasury's rule for public money, and Helena, in Australia, uses it only as a checklist. Say if regulated spending should be said out loud | Chapter 2; the script |
+| 33 | Does "only when it's required" clash with your rule for AI films of the same day, that a law is the least to do? | Taken as no. This line is about methods and paperwork, your "tools"; that rule is about the care a system needs. The script's rigour sheet says so. Say if you'd word either differently | The script's rigour sheet |
+| 34 | Does "critical" also cover mistakes that can't be undone, such as a wrong payroll run or lost records? | Still open: asked in the thread on 12 November, and not answered directly. The film keeps your words: lives, and the law | Chapter 2 |
+| 35 | Length, pace and audio (replaces rows 28 and 29) | 8:20.3, 1009 words, 121 words a minute; *Once, and every year* stays at 114, as row 19 explains. A new soundtrack, so a new release tag (`audio-a-case-worth-funding-84bab9f62d02a1cb0156`); the MP3 is committed beside `audio.json`, and *Store audio outside Git* publishes it once the change reaches main | The film; `audio.json` |

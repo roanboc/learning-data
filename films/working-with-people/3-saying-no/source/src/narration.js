@@ -47,7 +47,7 @@ const NARR={
  {"id":"each","gap":0.8,"text":"Each with its date, what it's for, and the weeks of work it takes."},
  {"id":"weeks","gap":0.8,"text":"The rooms' data takes three of August's four weeks. A new model takes six, and time to test it."},
  {"id":"refresh","gap":0.8,"text":"Refreshing the current model takes one week."},
- {"id":"order","gap":0.8,"text":"The order isn't Helena's to choose. The list is ordered by value, urgency, effort and risk, never by who asks."},
+ {"id":"order","gap":0.8,"text":"The order isn't Helena's to choose. The list is ordered by value and effort, never by who asks."},
  {"id":"fair","gap":0.8,"text":"Fisher and Ury call that fair criteria: what both sides can check, not who pushes harder."},
  {"id":"options","gap":0.8,"text":"Then they look for options that serve both interests: the budget by September, and early warning by December."}
 ]},

@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:10.442
+Japan, the 1600s. In Shinano, a province of high mountains, the rivers can't carry boats, so goods cross the passes on horseback.
+
+00:00:11.942 --> 00:00:22.847
+On the main roads, goods go by the stations' relay: a station's horses carry a load only to the next station. There it moves to another horse, and the shipper pays again.
+
+00:00:24.547 --> 00:00:32.565
+Every change costs time and money, and can damage the goods. When officials travel, the horses go to them first, and loads wait.
+
+00:00:33.865 --> 00:00:39.294
+For the mountain villages, everything they sell or buy costs more to carry, and takes longer.
+
+00:00:40.594 --> 00:00:50.604
+So farmers began carrying loads on their own horses, straight through: no change of horse and no station fee, so cheaper, and less damaged. These were the chūma.
+
+00:00:52.504 --> 00:01:02.661
+But the stations lost loads and fees, and still had to keep horses for the shogunate. From 1673, they took the farmers to court, again and again.
+
+00:01:04.161 --> 00:01:08.069
+The mountains needed the cheaper way, and the road needed its stations.
+
+00:01:09.769 --> 00:01:18.754
+In 1764, the shogunate ruled. For each road, it set which goods the farmers' horses could carry, and which went by the relay.
+
+00:01:20.054 --> 00:01:29.682
+It wrote down every village that could run them, 679, and more than eighteen thousand horses. And the farmers would help keep the relay going.
+
+00:01:31.382 --> 00:01:44.657
+Each kind of load had its way, written down. That year, 9,600 loads went from Iida to Matsumoto, and the farmers' horses spread across Shinano, joining its mountains to both coasts.
+
+00:01:46.357 --> 00:01:55.201
+At the utility, the integration team finds loads it can't see: 34 flows in and out of the data platform, none of them on its map.
+
+00:01:56.501 --> 00:02:05.296
+So Ravi and the team's new lead sort the flows by kind: each takes the route that suits it, and every one goes on one map both teams keep.
+
+00:02:12.396 --> 00:02:20.590
+The integration platform joins the utility's applications: billing, the customer system, outages, metering and work orders.
+
+00:02:22.090 --> 00:02:30.569
+Through its gateway, one application asks another for something. Through its events, news of a change reaches every application that wants it.
+
+00:02:32.469 --> 00:02:38.341
+Every message is checked and logged, so the integration team sees every flow between applications.
+
+00:02:39.641 --> 00:02:49.383
+This year, Yasmin Saleh joins as integration lead. Her first review finds 34 flows in and out of the data platform that aren't on her map.
+
+00:02:51.083 --> 00:03:02.499
+One was a nightly read of the customer system. When that system was upgraded, the read broke, and retail's reports were wrong for two days: nobody upgrading it knew the read was there.
+
+00:03:04.399 --> 00:03:10.668
+So Yasmin asks for a rule: every flow goes through the integration platform, so nothing is hidden.
+
+00:03:14.368 --> 00:03:19.529
+Ravi agrees with half of it. A flow nobody can see is a flow nobody can govern.
+
+00:03:20.829 --> 00:03:27.384
+But data comes into a data platform, and goes out of it, in more ways than applications pass messages.
+
+00:03:28.484 --> 00:03:36.631
+Between applications, the traffic is small messages, one at a time: a customer moved, a fault was reported, a job was done.
+
+00:03:38.331 --> 00:03:48.506
+Into the data platform come bulk loads: each night, forty million meter readings, loaded by the platform's own connectors. In Databricks, that's Lakeflow Connect.
+
+00:03:50.406 --> 00:03:59.621
+Sent through the integration platform, each reading would be a message of its own: a load changing horses at every station, slower, and costlier.
+
+00:04:01.521 --> 00:04:06.344
+Both kinds are flows, and both need governing. They just don't take the same road.
+
+00:04:10.044 --> 00:04:15.450
+So Ravi and Yasmin sort the 34 flows by kind, and give each kind one rule.
+
+00:04:16.750 --> 00:04:21.588
+Bulk loads and history come in natively, through the data platform's own connectors.
+
+00:04:23.288 --> 00:04:35.629
+A change in an application, such as a customer moving, is already an event on the integration platform. The data platform subscribes to it, instead of reading the customer system a second way.
+
+00:04:37.529 --> 00:04:45.949
+And data served back to an application goes through the integration platform's gateway, the way every application already asks for what it needs.
+
+00:04:47.849 --> 00:04:52.029
+Each flow takes the route that's simplest, cheapest and easiest to govern.
+
+00:04:53.529 --> 00:05:00.876
+Data that moves shows how each kind of flow is built, and A path for every provider how a team chooses one for each source.
+
+00:05:04.376 --> 00:05:10.299
+And every flow goes on one map: where it starts and ends, its route, who owns it, and its contract.
+
+00:05:11.999 --> 00:05:20.225
+Both teams keep it. A new flow goes on the map in the same pull request that builds it, reviewed by the team whose platform carries it.
+
+00:05:22.225 --> 00:05:29.858
+As the ruling of 1764 wrote down every village and its horses, the map writes down every flow and its route.
+
+00:05:31.858 --> 00:05:37.037
+Yasmin sees all 34 flows now, and Ravi keeps the routes that suit data.
+
+00:05:40.737 --> 00:05:45.890
+Then Grace asks, in a ticket, for each feeder's risk of a fault, shown in the outage app.
+
+00:05:47.190 --> 00:05:50.292
+A feeder is a line that carries power to a few streets.
+
+00:05:52.192 --> 00:06:00.152
+Network's data product makes the score on the data platform, every hour, from the weather, each feeder's load and its past faults.
+
+00:06:02.252 --> 00:06:11.705
+It's data served back to an application, so by the rule it goes through the integration platform's gateway, as an API the outage app already calls.
+
+00:06:14.005 --> 00:06:21.723
+The data team reviews the score's pull request, the integration team adds its route to the gateway, and the flow goes on the map.
+
+00:06:24.023 --> 00:06:28.478
+Grace checks the scores in the outage app, in test, before the ticket closes.
+
+00:06:32.578 --> 00:06:43.993
+Of the 34 flows they found, 25 stay native, and now they're on the map. Nine move to the integration platform: six become its events, and three go through its gateway.
+
+00:06:46.093 --> 00:06:54.119
+Nothing reads the customer system unseen any more. When it's next upgraded, both teams know from the map which flows it touches.
+
+00:06:55.819 --> 00:07:05.706
+And the two platforms help each other: the data platform takes the integration platform's events, and the integration platform serves the data platform's products.
+
+00:07:07.406 --> 00:07:11.056
+For operations and for governance, the two work better together.
+
+00:07:14.556 --> 00:07:17.204
+Here's the data practice, on Tomás's map.
+
+00:07:18.504 --> 00:07:27.152
+In the technology layer, the integration platform is a node beside the data platform, with services of its own: a gateway and events.
+
+00:07:28.852 --> 00:07:36.136
+Each of the 34 flows is drawn as a flow between applications and data products, labelled with the route it takes.
+
+00:07:38.036 --> 00:07:46.093
+And the rule is a principle: each flow takes the route that's simplest, cheapest and easiest to govern, and every flow is on the map.
+
+00:07:49.793 --> 00:07:56.118
+Across Shinano, the farmers' horses and the stations' horses worked the same roads, under one ruling.
+
+00:07:57.618 --> 00:08:01.568
+The quarrels didn't end, but now there was a ruling to settle them by.
+
+00:08:03.068 --> 00:08:08.707
+At the utility, two platforms each carry what they carry best, and every flow is on one map.
+
+00:08:10.207 --> 00:08:12.287
+Next: security all the way through.

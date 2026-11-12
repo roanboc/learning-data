@@ -347,7 +347,7 @@ HEADER_WIDTHS = (320, 360, 390, 720, 721, 768, 1280)  # 720 and 721: either side
 
 async def check_header(run):
     sec = run.rep.sec("header", f"Header at {', '.join(map(str, HEADER_WIDTHS))} px, in English and Spanish: every link shown, inside it, not overlapping; "
-                                "one line; on phones the language, theme and icon links in a More menu; the icon links reached and followed by keyboard")
+                                "one line; on phones the language, tour, theme and icon links in a More menu; the icon links reached and followed by keyboard")
     keys = [k for k in ("", "es/") if run.want(k)]
 
     async def one(key, width):
@@ -378,13 +378,13 @@ async def check_header(run):
                 for x in m["shown"]:
                     if not any(abs(x["y"] - y) <= 6 for y in rows):
                         rows.append(x["y"])
-                # one line: phones show the brand, the site's links and "More"; wider, EN/ES, the theme and the two icon links too
+                # one line: phones show the brand, the site's links and "More"; wider, EN/ES, the tour, the theme and the two icon links too
                 phone = width <= 720
-                expect(sec, len(m["shown"]) == (5 if phone else 8) and len(rows) == 1,
+                expect(sec, len(m["shown"]) == (5 if phone else 9) and len(rows) == 1,
                        f"{where}: the header shows {[x['t'] for x in m['shown']]} on {len(rows)} lines; expected the brand, Start here, Topics, "
-                       f"Making of and " + ("More" if phone else "EN/ES, the theme and the two icon links") + " on one")
+                       f"Making of and " + ("More" if phone else "EN/ES, the tour, the theme and the two icon links") + " on one")
                 if phone:
-                    # "More" opens by keyboard, and shows EN/ES, the theme and the two links inside the window
+                    # "More" opens by keyboard, and shows EN/ES, the tour, the theme and the two links inside the window
                     await pg.evaluate("() => document.activeElement.blur()")
                     for _ in range(8):
                         await pg.keyboard.press("Tab")
@@ -394,7 +394,7 @@ async def check_header(run):
                     menu = await pg.evaluate("""() => { const p = document.querySelector('.more');
                       return {open: p.matches(':popover-open'), items: [...p.querySelectorAll('.lang, .nav-tools > *')].map(e => {
                         const b = e.getBoundingClientRect(); return b.width > 0 && b.left >= 0 && b.right <= innerWidth && b.bottom <= innerHeight; })}; }""")
-                    expect(sec, menu["open"] and menu["items"] == [True] * 4, f"{where}: \"More\" must open by keyboard and show EN/ES, the theme and the two links: {menu}")
+                    expect(sec, menu["open"] and menu["items"] == [True] * 5, f"{where}: \"More\" must open by keyboard and show EN/ES, the tour, the theme and the two links: {menu}")
                     await pg.keyboard.press("Escape")
                 if width not in (390, 1280):
                     return
@@ -1576,6 +1576,98 @@ async def take_shots(run):
     sec["notes"].append(f"{n} screenshots in {out}")
 
 
+# ---------------------------------------------------------------- the guided tour
+async def check_tour(run):
+    sec = run.rep.sec("tour", "The guided tour: \"?\" in the header opens it on any page, with the steps for what that page shows; keyboard, phone, focus")
+    want = ("", "es/", "topics/", "es/topics/", "what-an-agent-is/decades-in-the-making/", "labs/", "journey/", "404.html")
+    keys = run.pick(want)
+    if not keys:
+        return
+    words = {lg: (WEB / "assets/learn" / f"tour.{lg}.js").read_text(encoding="utf-8") for lg in ("en", "es")}
+    titles = {lg: re.findall(r'title:"([^"]+)"', w) for lg, w in words.items()}
+    STATE = """() => { const c = document.querySelector('.tour'), lit = [...document.querySelectorAll('.tour-on')];
+        if (!c) return {open: false, lit: lit.length, focus: document.activeElement.className};
+        const b = c.getBoundingClientRect(), r = lit[0] && lit[0].getBoundingClientRect();
+        return {open: true, n: c.querySelector('.tour-n').textContent, title: c.querySelector('#tour-h').textContent, lit: lit.length,
+                inside: b.left >= 0 && b.right <= innerWidth && b.bottom <= innerHeight && b.top >= 0,
+                seen: !r || (r.bottom > 0 && r.top < innerHeight && r.width > 0), focus: c.contains(document.activeElement),
+                wide: document.documentElement.scrollWidth <= innerWidth,
+                small: [...c.querySelectorAll('h2, p, button')].filter(e => parseFloat(getComputedStyle(e).fontSize) < 12).length}; }"""
+    for width, theme in ((1280, "dark"), (390, "light")):
+        ctx = await run.context(width, theme)
+        try:
+            for key in keys:
+                lg = "es" if key.startswith("es/") else "en"; at = f"/{key} @{width} {theme}"
+                pg, log = await run.page(ctx, key, main_status_ok=key == "404.html")
+                before = await pg.evaluate("() => [...document.scripts].filter(s => /tour/.test(s.src)).length + document.querySelectorAll('link[href*=\"tour.css\"]').length")
+                expect(sec, before == 0, f"{at}: the tour's files load before anyone asks for it ({before})")
+                # by keyboard: on a phone "?" is in the More menu
+                if width <= 720:
+                    await pg.click(".more-btn")
+                await pg.focus(".help")
+                await pg.keyboard.press("Enter")
+                try:
+                    await pg.wait_for_selector(".tour", timeout=6000)
+                except Exception:  # noqa: BLE001
+                    expect(sec, False, f"{at}: \"?\" doesn't open the tour")
+                    await pg.close()
+                    continue
+                seen, total = [], 0
+                for _ in range(len(titles[lg]) + 2):
+                    await pg.wait_for_timeout(120)
+                    s = await pg.evaluate(STATE)
+                    if not s["open"]:
+                        break
+                    if not s["seen"]:  # pictures that load as the page scrolls can move the part: the tour brings it back
+                        await pg.wait_for_timeout(1100)
+                        s = await pg.evaluate(STATE)
+                    total = int(re.findall(r"\d+", s["n"])[-1])
+                    seen.append(s["title"])
+                    expect(sec, s["inside"] and s["wide"] and not s["small"], f"{at}: step {s['title']!r}: the card leaves the window, the page scrolls sideways, or its words are under 12 px ({s})")
+                    expect(sec, s["lit"] <= 1 and s["seen"], f"{at}: step {s['title']!r}: its part isn't in view, or {s['lit']} parts are ringed")
+                    expect(sec, s["focus"], f"{at}: step {s['title']!r}: focus isn't in the tour's card")
+                    if len(seen) == total:
+                        break
+                    await pg.keyboard.press("ArrowRight")
+                expect(sec, len(seen) == total >= 2 and len(set(seen)) == len(seen), f"{at}: the tour showed {len(seen)} of {total} steps ({seen})")
+                expect(sec, [t for t in titles[lg] if t in seen] == seen and seen[-1] == titles[lg][-1],
+                       f"{at}: its steps aren't in the words' order, in the page's language, ending on the last ({seen})")
+                await pg.keyboard.press("Escape")
+                await pg.wait_for_timeout(120)
+                s = await pg.evaluate(STATE)
+                expect(sec, not s["open"] and not s["lit"] and s["focus"] in ("help", "more-btn"), f"{at}: Escape doesn't close the tour, clear its ring and give the focus back ({s})")
+                expect(sec, not log["console"] and not log["errors"] and not log["failed"], f"{at}: {(log['console'] + log['errors'] + log['failed'])[:2]}")
+                await pg.close()
+        finally:
+            await ctx.close()
+    # what a page shows decides its steps: the Topics page's two views have different ones
+    for key in run.pick(("topics/",)):
+        ctx = await run.context(1280)
+        try:
+            pg, _ = await run.page(ctx, key)
+            await pg.wait_for_selector(".route.drawn", timeout=5000)
+
+            async def steps():
+                await pg.click(".help")
+                await pg.wait_for_selector(".tour")
+                out = []
+                while True:
+                    out.append(await pg.inner_text("#tour-h"))
+                    if await pg.locator('.tour [data-t="next"]').count() == 0:
+                        break
+                    await pg.click('.tour [data-t="next"]')
+                await pg.click('.tour .primary')  # Done
+                return out
+            a = await steps()
+            await pg.click('.view-switch [data-view="list"]')
+            b = await steps()
+            expect(sec, "Pick a goal" in a and "Pick a goal" not in b and "Search what the films say" in b and "Search what the films say" not in a,
+                   f"/{key}: the route's tour is {a} and the list's is {b}; each shows only its own view's steps")
+            await pg.close()
+        finally:
+            await ctx.close()
+
+
 # ---------------------------------------------------------------- the learning route
 async def check_route(run):
     sec = run.rep.sec("route", "The learning route: drawn on the Topics page, as a map and as a rail on a phone, with goals; the list, its rows and the search; the home page's ways on; readable in dark mode")
@@ -1742,7 +1834,7 @@ CHECKS = {"pages": check_pages, "header": check_header, "notfound": check_404, "
           "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
           "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn,
-          "labs-drawn": check_labs_drawn, "drawn": check_drawn, "route": check_route}
+          "labs-drawn": check_labs_drawn, "drawn": check_drawn, "route": check_route, "tour": check_tour}
 
 
 async def amain(args):

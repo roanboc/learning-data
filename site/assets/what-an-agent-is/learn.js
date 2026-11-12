@@ -330,13 +330,13 @@ if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visit
   function paintFilms(){films.replaceChildren(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>{const ls=ofFilm(f.n),seen=ls.filter(x=>visited.has(x.id)).length;
     return h("button",{type:"button","aria-pressed":String(f.n===film),onclick:()=>show(ofFilm(f.n)[0].id)},h("i",null,String(f.n)),h("span",null,f.title),h("small",null,fill(U.seen,{n:seen,of:ls.length})));}));}
   rails.append(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel+" · "+f.title,"data-film":String(f.n)},
-    ...ofFilm(f.n).map((Lb,i)=>h("button",{type:"button",role:"tab","data-id":Lb.id,style:"--c:"+pc(Lb.c),onclick:()=>show(Lb.id)},h("i",null,String(i+1)),Lb.name)))));
+    ...ofFilm(f.n).map(Lb=>h("button",{type:"button",role:"tab","data-id":Lb.id,style:"--c:"+pc(Lb.c),onclick:()=>show(Lb.id)},h("i",null,String(LABS.indexOf(Lb)+1)),Lb.name)))));
   const tabs=()=>[...rails.querySelectorAll("[role=tab]")];
   function paintRail(){[...rails.children].forEach(r=>{r.hidden=r.dataset.film!==String(film);});}
   // the next lab of the series, across films
   function show(id,focus){const Lb=labOf(id)||LABS[0];visited.add(Lb.id);set("visited",[...visited]);if(Lb.film!==film){film=Lb.film;paintRail();}paintFilms();
     tabs().forEach(b=>{const on=b.dataset.id===Lb.id;b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1;b.classList.toggle("done",visited.has(b.dataset.id));});
-    const ls=ofFilm(film),i=ls.indexOf(Lb),all=LABS.indexOf(Lb),nxt=LABS[all+1],f=filmOf(film);
+    const all=LABS.indexOf(Lb),nxt=LABS[all+1],f=filmOf(film);
     holder.replaceChildren(h("div",{class:"stop",style:"--c:"+pc(Lb.c)},
       h("div",{class:"stop-text"},h("p",{class:"kicker"},h("b",null,U.lab+" "+(all+1))," "+U.of+" "+LABS.length+" · "+f.title),h("h3",null,Lb.name),h("p",{class:"idea"},Lb.idea),h("ul",null,...Lb.points.map(p=>h("li",null,p))),
         h("details",{class:"real"},h("summary",null,U.inPractice),h("p",null,Lb.real)),

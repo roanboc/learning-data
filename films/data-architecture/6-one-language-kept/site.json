@@ -1,0 +1,33 @@
+{
+  "kicker": "Names, principles and decisions",
+  "kicker_es": "Nombres, principios y decisiones",
+  "title_es": "Un mismo idioma, mantenido",
+  "h1": "One language, kept: names and decisions, checked with every change",
+  "h1_es": "Un mismo idioma, mantenido: nombres y decisiones, revisados en cada cambio",
+  "lead": "At the utility, a new team names its first table customer, a word that already means three things there. The review catches it from what the data architecture keeps with the map: names built from parts, the industry's reference model, a few principles and decisions written down.",
+  "lead_es": "En la empresa, un equipo nuevo llama customer a su primera tabla, una palabra que allí ya significa tres cosas. La revisión lo detecta con lo que la arquitectura de datos guarda junto al mapa: nombres armados con partes, el modelo de la industria, principios y decisiones por escrito.",
+  "description": "A film on keeping one language for the data: a new team's first table, called customer, a word that already means three things at the utility, caught in review before it reaches a table; names built from parts, as ISO/IEC 11179 suggests, the thing from the glossary, what about it, and the kind of value, so customer is never a name on its own, and older systems' names mapped once to the glossary's; the industry's own words, the IEC's Common Information Model, with each of the utility's words mapped to it; a few principles, each a short rule with why it holds and what follows; decisions written down beside the map, what was decided and why, what else was considered, who decided and when; and all of it kept with the map, so every change is checked against it, and a new term is defined in the glossary first, by the business that owns it, before the table is built.",
+  "description_es": "Una película sobre cómo mantener un mismo idioma para los datos: la primera tabla de un equipo nuevo, llamada customer, una palabra que en la empresa ya significa tres cosas, detectada en la revisión antes de llegar a una tabla; nombres armados con partes, como sugiere la norma ISO/IEC 11179, la cosa según el glosario, qué de ella y el tipo de valor, así que cliente nunca es un nombre por sí solo, y los nombres de los sistemas viejos relacionados una vez con los del glosario; las palabras de la propia industria, el Common Information Model de la IEC, con cada palabra de la empresa relacionada con él; unos pocos principios, cada uno una regla corta con por qué vale y qué se sigue de ella; las decisiones por escrito junto al mapa, qué se decidió y por qué, qué más se consideró, quién decidió y cuándo; y todo guardado junto al mapa, para revisar cada cambio contra ello, y que un término nuevo se defina primero en el glosario, por la parte del negocio que es su responsable, antes de construir la tabla.",
+  "card": "Say what each word means once, build every name from it, and check every change against what's kept with the map.",
+  "card_es": "Decir una vez qué significa cada palabra, armar cada nombre con ella y revisar cada cambio contra lo que se guarda junto al mapa.",
+  "chapters_es": {
+    "same": "Las mismas palabras",
+    "fourth": "Un cuarto significado",
+    "names": "Nombres con partes",
+    "model": "Las palabras de la industria",
+    "principles": "Unos pocos principios",
+    "decisions": "Decisiones, por escrito",
+    "kept": "Mantenido en cada cambio",
+    "back": "Nunca terminado"
+  },
+  "next_h": "You've seen the data architecture whole. Next, platform and solution architecture: the platform the data lives on, and what's built on it.",
+  "next_h_es": "Viste la arquitectura de datos completa. Después, la arquitectura de plataforma y de soluciones: la plataforma donde viven los datos y lo que se construye sobre ella.",
+  "past": [
+    "The same words, Chile, 1972",
+    "In Cybersyn's design, every factory's model would measure social unease one way, the share of the workers on its payroll absent that day, and the operations room would show every factory with the same icons, so anyone could read them."
+  ],
+  "past_es": [
+    "Las mismas palabras, Chile, 1972",
+    "En el diseño de Cybersyn, el modelo de cada fábrica mediría el malestar social de una sola forma, la parte de los trabajadores de su nómina ausentes ese día, y la sala de operaciones mostraría cada fábrica con los mismos íconos, para que cualquiera pudiera leerlos."
+  ]
+}

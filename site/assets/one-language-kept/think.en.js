@@ -1,10 +1,11 @@
 /* Learning Data: "Pause and think" for One language, kept, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (fourth, model, kept), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). A question without a "stop" has no lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  fourth:{q:"The app team's first table is called customer. Why does the review stop it before it reaches a table?",
+  fourth:{stop:"names",q:"The app team's first table is called customer. Why does the review stop it before it reaches a table?",
     opts:[{t:"Customer is retail's word, so only the head of retail's team may build a table called that.",near:true},{t:"Customer already means three things here, so anyone would read the table as one of them.",ok:true},{t:"Names need three parts, and customer is one word, too short to pass the naming rules."}],
     why:"The trouble isn't who may use the word, or how long it is: customer already means three things at the utility, an account holder, a connection point and a contact, so a table called just customer would be read as any of them. The last time one thing had six names, the January storm's texts missed 180 households. The review catches it from what the data architecture keeps with the map, before it reaches a table."},
   model:{q:"The utility keeps its own words, and maps each to the Common Information Model. What does that give it?",

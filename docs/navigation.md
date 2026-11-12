@@ -16,12 +16,15 @@ How the Topics page and the home page show the topics, and where to change it.
 | 11 November 2026 | A series in the works can be named on its topic, as *Coming soon*, until one of its films is on the site (`upcoming` in `modules/route.json`). The four new architecture series were the reason; their films reached the site on 12 November, so the list is empty again. |
 | 11 November 2026 | The list searches what the films say, from their captions, so a word finds the film and the line that says it. If no film says a word, it is shortened until one does (*agentic* finds *agent*), and the page says so. |
 | 11 November 2026 | Both views follow the visitor's theme, and are checked in dark mode first: many visitors prefer it. |
+| 12 November 2026 | A guided tour explains the site's controls, on the site itself and not in a film: a film of the interface dates every time the interface changes. A "?" in the header opens it on any page, in the More menu on a phone. It never opens by itself. |
+| 12 November 2026 | The tour shows only the steps for what the page in front of the visitor has: the player and Pause and think on a film's page, goals and stations on the route, the search on the list. Each step rings the real control. |
 
 ## Where it lives
 
 - **`modules/route.json`** holds the route: its groups in order, each with its topics in order; the goals and their stops; and the series in the works (`upcoming`). The first group is the start. A group on the `main` line is a stretch of the suggested route; the other two lines are the loops.
 - **`site-tools/build_series.py`** reads it and makes `site/assets/learn/route.en.js` and `route.es.js` (the route's data, one value a line), the Topics page, and the card and the two buttons on the home pages. It stops if a topic isn't in one group, or a goal's stop isn't a film or series on the site.
 - **`site/assets/learn/route.js`** draws the route in any `[data-route]` box: a map from 880 px, and below that a list with a rail, with no sideways panning. **`topics.js`** switches the Topics page's views, fills each row's ring and runs the search. **`route.css`** styles both; only these pages load it.
+- **The guided tour** is `site/assets/learn/tour.js`, with its words in `tour.en.js` and `tour.es.js` and its styles in `tour.css`. The header's "?" (`external_nav()` and `TOUR_JS` in `build_series.py`) loads them only when someone asks. A step is a title, a text and the part of the page it is about (`sel`); a step whose part isn't on the page, or isn't visible, is left out. To explain a new control, add a step to both files, in the same place.
 - **Progress** comes from the keys the films already write (`<prefix>:watched`), in the visitor's browser only.
 
 ## Changing it

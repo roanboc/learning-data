@@ -1,10 +1,11 @@
 /* Learning Data: "Pausa para pensar" de How it travels, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (paths, once, contract), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). Una pregunta sin "stop" no tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  paths:{q:"En marzo, un script nocturno escribió durante meses en una cola que nadie leía, y unas 1,900 facturas quedaron sin corregir. ¿Por qué nadie lo notó?",
+  paths:{stop:"paths",q:"En marzo, un script nocturno escribió durante meses en una cola que nadie leía, y unas 1,900 facturas quedaron sin corregir. ¿Por qué nadie lo notó?",
     opts:[{t:"No estaba en el mapa, así que no tenía responsable en ningún extremo que viera el cambio.",ok:true},{t:"Estaba en el mapa, pero el responsable del lado de la red olvidó avisar del cambio a facturación.",near:true},{t:"La cola se llenó, y una cola llena descarta todo lo que se le escribe a partir de entonces."}],
     why:"Solo cuatro de los once caminos que cruzan el muro estaban en el mapa. Un camino que no está en el mapa no tiene responsable en ningún extremo, así que cuando un extremo cambia, el otro se entera cuando falla: aquí, meses después, por las facturas. Un flujo dibujado tiene un responsable en cada extremo, y un contrato que dice a quién se avisa, y cuándo, si llega tarde o mal. ¿Qué caminos hacia tus sistemas no ha dibujado nadie?"},
   once:{q:"¿Por qué la red publica cada lectura reemplazada una vez, cuando se reemplaza, en vez de conectar los sistemas de cada comercializadora a los datos de medidores?",

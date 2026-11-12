@@ -90,89 +90,98 @@ Y el costo de la docencia ocasional es de Finanzas: su dueño es Rohan, para el 
 00:03:53.910 --> 00:03:58.169
 Cada dueño decide qué significa la suya, en el glosario, antes de cualquier código.
 
-00:03:59.469 --> 00:04:04.525
+00:03:59.469 --> 00:04:06.301
+Sean cuales sean las herramientas, eso es lo mínimo: cada medida bien catalogada, con su nombre, su dueño y su significado.
+
+00:04:07.801 --> 00:04:12.857
 Ahora todos ven por qué difieren las tres cifras, y cuál responde a su pregunta.
 
-00:04:08.025 --> 00:04:13.682
+00:04:16.357 --> 00:04:22.014
 El hogar de cada medida es una vista de métricas en Unity Catalog, junto a las tablas de las que se calcula.
 
-00:04:15.182 --> 00:04:23.662
+00:04:23.514 --> 00:04:31.994
 Una vista de métricas define una medida una vez, y da la cifra correcta como se agrupe: por facultad, asignatura o período lectivo.
 
-00:04:25.362 --> 00:04:29.847
+00:04:33.694 --> 00:04:38.179
 Unity Catalog la gobierna como a una tabla: quién puede leerla y qué la lee.
 
-00:04:31.147 --> 00:04:33.692
+00:04:39.479 --> 00:04:42.024
 Así, todas las herramientas de la plataforma leen esta.
 
-00:04:35.392 --> 00:04:43.132
+00:04:43.724 --> 00:04:51.464
 Jun la escribe en unas líneas de YAML en el proyecto de datos, que la construye, como títulos otorgados en El significado en la plataforma.
 
-00:04:44.632 --> 00:04:51.699
+00:04:52.964 --> 00:05:00.031
 El equipo de datos revisa el código en un pull request, y Noor Rahman, la arquitecta de datos, lo aprueba para producción.
 
-00:04:53.399 --> 00:04:56.875
+00:05:01.731 --> 00:05:05.207
 A Rohan, dueño de la medida, se le avisa a qué afecta el cambio.
 
-00:04:57.575 --> 00:05:04.592
+00:05:05.907 --> 00:05:12.924
 Sus palabras van con ella: un nombre para mostrar, una descripción, sinónimos para Genie y su formato, en dólares australianos.
 
-00:05:08.092 --> 00:05:14.683
+00:05:16.424 --> 00:05:23.015
 Nada de esto es nuevo: hace décadas que las herramientas de BI guardan una capa de definiciones de negocio sobre las tablas.
 
-00:05:16.183 --> 00:05:22.623
+00:05:24.515 --> 00:05:30.955
 Pero cada una las guardaba en su propio formato, ninguna otra podía leerlas, y una herramienta nueva obligaba a escribirlas todas de nuevo.
 
-00:05:24.323 --> 00:05:30.931
+00:05:32.655 --> 00:05:39.263
 dbt también tiene una capa semántica, MetricFlow, que lee las medidas definidas en el YAML del proyecto.
 
-00:05:32.431 --> 00:05:37.108
+00:05:40.763 --> 00:05:45.440
 Planificación cuenta con ella a los estudiantes cerca de un certificado de posgrado, en el mismo proyecto.
 
-00:05:38.608 --> 00:05:42.271
+00:05:46.940 --> 00:05:50.603
 MetricFlow es de código abierto, así que otras herramientas pueden construir sobre él.
 
-00:05:43.771 --> 00:05:49.864
-Cualquiera puede ser el hogar de una medida. Elige uno para cada una, cerca de la mayoría de sus lectores, y nunca la definas dos veces.
+00:05:52.103 --> 00:05:59.029
+Una sola herramienta para todas las medidas es lo más simple, pero depende de la organización: esta universidad usa las dos.
 
-00:05:53.564 --> 00:05:58.817
+00:06:00.529 --> 00:06:05.858
+Así que cada medida tiene un solo hogar, cerca de la mayoría de sus lectores, y nunca se define dos veces.
+
+00:06:09.558 --> 00:06:14.811
 Para que las herramientas lean las definiciones de las demás, necesitan un formato común: Apache Ossie.
 
-00:06:00.117 --> 00:06:09.222
+00:06:16.111 --> 00:06:25.216
 Empezó como el Open Semantic Interchange, y hoy lo respaldan más de cincuenta organizaciones, entre ellas Databricks y dbt Labs.
 
-00:06:10.722 --> 00:06:18.521
+00:06:26.716 --> 00:06:34.515
 Los conversores traducen una definición entre Ossie y el formato de cada herramienta: una vista de métricas, MetricFlow y muchos más.
 
-00:06:20.021 --> 00:06:27.771
+00:06:36.015 --> 00:06:43.765
 dbt escribe las medidas del proyecto en Ossie cada vez que lee el proyecto, y también lee definiciones en Ossie.
 
-00:06:29.271 --> 00:06:36.715
+00:06:45.265 --> 00:06:52.709
 Así, el costo de la docencia ocasional llega a cualquier herramienta que lea Ossie, con sus palabras y sus reglas, y nadie lo reescribe.
 
-00:06:38.215 --> 00:06:41.243
+00:06:54.209 --> 00:06:57.237
 Deja cada regla dentro de la medida, para que viaje con ella.
 
-00:06:42.743 --> 00:06:46.033
+00:06:58.737 --> 00:07:02.027
 Y revisa lo que llega: un conversor avisa lo que no puede llevar.
 
-00:06:49.333 --> 00:06:52.371
+00:07:03.527 --> 00:07:09.999
+Lo ideal: la definición se escribe primero en Ossie, en el proyecto de datos, y de ella se construye la vista de métricas.
+
+00:07:13.699 --> 00:07:16.737
 Hoy, jueves 5 de noviembre, es día de pago.
 
-00:06:53.671 --> 00:07:01.657
+00:07:18.037 --> 00:07:26.023
 Rohan le pregunta a Genie One cuánto le ha costado la docencia ocasional a Salud en este semestre: 1.84 millones de dólares.
 
-00:07:03.157 --> 00:07:07.675
+00:07:27.523 --> 00:07:32.041
 El botón Ask Genie del tablero quincenal da lo mismo, desde la misma definición.
 
-00:07:08.975 --> 00:07:16.294
+00:07:33.341 --> 00:07:40.660
 La del semestre pasado es 2.21 millones, y a su lado, las otras dos medidas, cada una con su nombre y su dueño.
 
-00:07:17.794 --> 00:07:22.715
+00:07:42.160 --> 00:07:47.081
 Rohan fija con el costo el presupuesto de Salud del año siguiente, con el tutor de cada tutoría incluido.
 
-00:07:24.215 --> 00:07:31.144
+00:07:48.581 --> 00:07:55.510
 Como el kilogramo, cada medida es una definición, escrita donde cualquiera la lee, y no la guarda ninguna herramienta.
 
-00:07:33.044 --> 00:07:41.107
+00:07:57.410 --> 00:08:05.473
 Los estándares ya existen, así que no los reinventes: investiga, adapta, implementa, itera, empezando por la documentación oficial.

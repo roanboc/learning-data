@@ -241,7 +241,8 @@ for i in range(3):
 # 3. Three measures, three owners: C major. Like the kilogram, the Planck card, low C and G at the turn; in September, not one measure
 #    but three: a short rise, and three empty cards, each a tap; each filled by its domain's measure, a card set down and a note of its
 #    own, the same three notes as the three numbers in the opening (E, A, C), and a tap as each owner's name and moment come in; the
-#    glossary: one soft note; why the numbers differ: the three notes together, settled in C
+#    glossary: one soft note; the minimum, clearly catalogued: a tap as its pill comes in, and one as each part of an entry is named;
+#    why the numbers differ: the three notes together, settled in C
 ow = lambda lid, word, off=0: W('once', lid, word, off)
 knock(ow('like', 'Like', -0.2), 0.012, px(960), 230)
 low(C3, ow('like', 'Like', -0.1), 0.6, 0.7); reed(G4, ow('like', 'Like', -0.1), 0.45, 0.6, px(960))
@@ -257,6 +258,9 @@ for i, (lid, name, who_, when, m, play) in enumerate((('clara', 'Casual hours co
     tap(ow(lid, who_, -0.1), 0.007, px(300))
     tap(ow(lid, when, 0.0), 0.006, px(960))
 reed(G4, ow('owner', 'glossary', 0.0), 0.4, 0.5, px(960))
+tap(ow('least', 'minimum', 0.0), 0.008, px(960))
+for word in ('its name', 'its owner', 'its meaning'):
+    tap(ow('least', word, -0.05), 0.006, px(960))
 low(C3, ow('differ', 'differ', 0.0), 0.6, 0.65); reed(E4, ow('differ', 'differ', 0.1), 0.4, 0.5, px(760)); reed(G4, ow('differ', 'differ', 0.2), 0.4, 0.5, px(1160))
 
 # 4. Near the data, built as code: the platform comes up, low C and E at the turn; the metric view and the fact beside it, each set
@@ -289,8 +293,9 @@ for word in ('a name to show', 'a description', 'synonyms', 'its format'):
 
 # 5. The same idea in dbt: decades of BI tools, each window set down, low G at the turn; no other tool could read them, two soft
 #    crosses and a falling line; a new tool, its definitions written again; dbt's MetricFlow window opens, low C and C above; its
-#    YAML typed, Planning's card; open source; either can be a measure's home: the measure set in one, a short line as it lands;
-#    never a second definition: a pen's stroke through it
+#    YAML typed, Planning's card; open source; one tool is simplest: the metric view and Finance's measure set down; it depends on
+#    the organisation: MetricFlow set down under Planning's, and a tag for each half of the advice; this university uses both: a tap as each lights; one home for
+#    each measure: a breath as the two lanes run, and a short line as they arrive; never a second definition: a pen's stroke through it
 dw = lambda lid, word, off=0: W('dbt', lid, word, off)
 for i in range(3):
     knock(dw('old', 'decades', -0.2 + 0.3 * i), 0.011, px(370 + 560 * i), 240 + 15 * i)
@@ -305,17 +310,23 @@ keys(dw('mf', 'YAML', -0.2), 6, 1.2, 0.006, px(645))
 knock(dw('planning', 'Planning', 0.0), 0.011, px(1550), 240)
 tap(dw('planning', 'learners', 0.0), 0.007, px(645))
 tap(dw('source', 'open source', 0.0), 0.008, px(1450))
-knock(dw('choose', 'Either', 0.0), 0.011, px(450), 240); knock(dw('choose', 'Either', 0.3), 0.011, px(1470), 255)
-air(dw('choose', 'Choose', 0.0), 1.2, 0.006, px(600), 160, 800)
-knock(dw('choose', 'Choose', 1.2), 0.012, px(450), 230)
-line(((E4, 0.0, 0.3), (C5, 0.36, 0.5)), dw('choose', 'Choose', 1.2), 0.55, px(450))
-tap(dw('choose', 'never', 0.0), 0.007, px(1470))
-scrape(dw('choose', 'never', 0.3), 0.5, 0.006, px(1470), 400, 1400)
+knock(dw('one', 'One tool', 0.0), 0.011, px(370), 240); knock(dw('one', 'One tool', 0.5), 0.011, px(370), 250)
+tap(dw('one', 'simplest', 0.0), 0.007, px(960))
+knock(dw('one', 'depends', 0.0), 0.011, px(1550), 255)
+tap(dw('one', 'organisation', 0.0), 0.007, px(960))
+tap(dw('one', 'both', 0.0), 0.007, px(370)); tap(dw('one', 'both', 0.12), 0.007, px(1550))
+tap(dw('choose', 'each measure', 0.0), 0.006, px(1550))
+air(dw('choose', 'one home', 0.0), 0.7, 0.006, px(960), 160, 800)
+line(((E4, 0.0, 0.3), (C5, 0.36, 0.5)), dw('choose', 'one home', 0.5), 0.55, px(960))
+tap(dw('choose', 'never', 0.0), 0.007, px(1550))
+scrape(dw('choose', 'never', 0.3), 0.5, 0.006, px(1550), 400, 1400)
 
 # 6. A format any tool can read: the tools round the hub; Apache Ossie at the centre, a rising line over low C; the ring of fifty
 #    organisations; the converters run out to each tool; dbt writes the project's measures in Ossie, and reads them; casual teaching
 #    cost travels from its home over the format into a tool that reads it, and a short line as it arrives; each rule kept inside the
-#    measure; and a converter's notice, a line that falls
+#    measure; and a converter's notice, a line that falls; ideally, written in Ossie first: its card set down and a tap as each of its
+#    lines comes in, with no music so soon after the notice's line; the metric view built from it: a breath as one packet runs through
+#    the converter, and a tap as it arrives
 pw = lambda lid, word, off=0: W('open', lid, word, off)
 air(pw('common', 'For tools', 0.0), 0.9, 0.007, px(960), 150, 800)
 low(C3, pw('common', 'common format', 0.0), 0.8, 0.7)
@@ -339,6 +350,11 @@ tap(pw('inside', 'inside the measure', 0.0), 0.007, px(500))
 tap(pw('inside', 'travels', 0.2), 0.007, px(520))
 tap(pw('check', 'a converter', 0.0), 0.008, px(1450))
 line(((B4, 0.0, 0.3), (A4, 0.36, 0.5)), pw('check', 'a converter', 0.05), 0.55, px(1450))
+knock(pw('first', 'Ideally', 0.0), 0.011, px(960), 240)
+tap(pw('first', 'written', -0.1), 0.007, px(960))
+tap(pw('first', 'in the data project', -0.1), 0.006, px(960))
+air(pw('first', 'the metric view', 0.0), 0.9, 0.006, px(655), 160, 800)
+tap(pw('first', 'the metric view', 0.9), 0.008, px(305))
 
 # 7. One number, in every tool: pay day, low C at the turn and the dashboard set down; Rohan asks Genie One, the question typed, the
 #    answer one note; the dashboard's Ask Genie gives the same, from the same definition: the mark, the small organette at Genie One and

@@ -7,6 +7,6 @@ const BREATH={
 "hours":{"hold":{"eight":0.4,"thirty":0.6,"signal":0.8,"calls":0.4,"goes":0.8}},
 "fresh":{"hold":{"monday":0.8,"knows":1.2,"certs":1.0,"seats":1.0,"planning":1.0,"clocks":1.0,"moves":1.0,"contract":1.0}},
 "age":{"hold":{"says":0.6,"from":0.8,"happened":0.6,"saved":0.6,"came":0.8,"matters":1.0,"easiest":1.0,"second":1.2,"row":0.8,"own":1.0,"shown":0.6,"flags":0.8,"labelled":0.8,"trust":0.6}},
-"stop":{"hold":{"source":0.8,"reads":1.0,"level":0.8,"first":0.6,"tells":0.8,"warn":1.2,"send":0.8,"waits":1.0}},
+"stop":{"hold":{"source":0.8,"reads":1.0,"level":0.8,"why":1.2,"alarm":1.6,"first":0.6,"tells":0.8,"warn":1.2,"send":0.8,"waits":1.0}},
 "time":{"hold":{"storm":0.6,"list":0.6,"since":0.8,"take":1.2},"breathe":5.0}
 };

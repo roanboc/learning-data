@@ -43,3 +43,7 @@ Rodrigo answered questions put to him on 12 November 2026. Each answer is record
 | # | Question put to him | His answer | What changed |
 |---|---|---|---|
 | A1 | PDSA across the site. Should other modules that say "plan, do, check, act" switch to "study" too, for one consistent term? | "yes, knowing the difference was explained in the video that introduced the topic" | In this module only *One small change at a time* named the cycle (PR #351): its two lines, its ring and sheets, its Spanish captions and its page now say plan, do, study, act, and so does the module's table of references. The film doesn't explain study against check: the data quality film *Small, every week* does. Seven assumptions came with it, in [the film's rows 21 to 27](3-leading-a-data-team/2-one-small-change.md): among them, that the takeaway keeps its plain verb ("Change one small thing, check it, keep what works."), and that the voice now says Deming's name with its short e |
+
+## Found on 12 November: Deming's name in the voice
+
+Not one of Rodrigo's answers: the thread that applied them found that the voice said W. Edwards Deming's name as "deeming". It now says DEM-ing, with the short e, in *One small change at a time* (PR #351, [row 26](3-leading-a-data-team/2-one-small-change.md)) and in *Measure the work, not the people* (PR #NNN, [rows 13 to 15](4-ownership-and-performance/2-measure-the-work.md)), and the site's checks fail a film whose voice would read the name as it's written. It is an assumption for him to confirm.

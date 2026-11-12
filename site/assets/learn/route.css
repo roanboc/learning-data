@@ -92,8 +92,12 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 .r-rail{position:relative;padding-top:14px}
 .r-rail::before{content:"";position:absolute;left:19.5px;top:0;height:14px;width:5px;background:var(--r-main)}
 .r-rg{position:relative}
-.r-rh{position:relative;margin:0;height:34px;padding:12px 0 0 50px;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.r-rg.loop .r-rh{color:var(--c)}
+/* a group's name: in full colour, with a divider and a tick on the line, and room above it, so the groups read as groups on a phone */
+.r-rh{position:relative;margin:0;display:flex;align-items:center;gap:10px;padding:26px 0 6px 50px;font-weight:800;font-size:13px;line-height:18px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg)}
+.r-rh::after{content:"";flex:1;height:1px;background:currentColor;opacity:.28}
+.r-rg:not(.loop) .r-rh{background:linear-gradient(var(--r-main),var(--r-main)) no-repeat 13px 33px/18px 4px}
+.r-rail>.r-rg:first-child .r-rh{padding-top:12px;background-position:13px 19px}
+.r-rg.loop .r-rh{color:var(--c);padding-top:14px}
 .r-rg:not(.loop) .r-rh::before,.r-rg:not(.loop) .r-rs::before{content:"";position:absolute;left:19.5px;top:0;bottom:0;width:5px;background:var(--r-main)}
 .r-rg.end .r-rs:last-child::before{bottom:auto;height:28px;border-radius:0 0 3px 3px}
 .r-rg.loop{margin-left:30px;padding-bottom:26px}

@@ -18,11 +18,11 @@ A 7-minute film that follows one enrolment at a fictional university, from a tap
 | 1:45 | [Refining with dbt](https://data.learn-all.org/#t=106) |
 | 2:42 | [Gold](https://data.learn-all.org/#t=163) |
 | 3:29 | [The layers together](https://data.learn-all.org/#t=210) |
-| 4:00 | [Meaning](https://data.learn-all.org/#t=241) |
-| 4:53 | [Two speeds](https://data.learn-all.org/#t=294) |
-| 5:20 | [Ways out](https://data.learn-all.org/#t=321) |
-| 6:17 | [Apps and Genie](https://data.learn-all.org/#t=378) |
-| 6:53 | [Pull back](https://data.learn-all.org/#t=414) |
+| 4:01 | [Meaning](https://data.learn-all.org/#t=242) |
+| 4:54 | [Two speeds](https://data.learn-all.org/#t=295) |
+| 5:21 | [Ways out](https://data.learn-all.org/#t=322) |
+| 6:18 | [Apps and Genie](https://data.learn-all.org/#t=379) |
+| 6:54 | [Pull back](https://data.learn-all.org/#t=415) |
 
 ## How it was made
 

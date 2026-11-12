@@ -1,8 +1,10 @@
 # The Inner Life of Data
 
-**Video script v6, university edition** · Matches the fourth cut, which flows like the later films: a beat after every sentence, and wordless endings only in the sketch, the people and the end
+**Video script v7, university edition** · Matches the fourth cut, which flows like the later films: a beat after every sentence, and wordless endings only in the sketch, the people and the end
 
-Runtime 7:11, with 922 words of narration (about 128 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web. Captions are separate `.srt` files, in English and Spanish, not burned into the picture. Every name, place and number is fictional, and no real institution is shown.
+Runtime 7:17, with 940 words of narration (about 129 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web. Captions are separate `.srt` files, in English and Spanish, not burned into the picture. Every name, place and number is fictional, and no real institution is shown.
+
+New in v7 (12 November 2026, the author): two lines. In *The layers together*, dbt "checks and documents" every step; it no longer "governs" it, because since the films on data governance that word means who decides. And before the closing line, one new line hands over to the other topics: "The platform moved it. What it means, and who decides, is the rest of the story." The Spanish film says both, and is now read by the Mexican voice the agent films use (es-MX-DaliaNeural), which the author found more natural than the blend it had; it runs 8:11, not 8:30.
 
 New in v5, the breathing cut: the same narration with room to think. The voice breathes after every sentence, each new idea gets a short beat, and each chapter ends with a wordless breather that applies its idea to a new case (see [breathing-cut.md](breathing-cut.md), revised after [a review](pacing-review.md)). The timing lives in `source/src/breath.js`. On the site, **Pause and think** can stop the film after each chapter to ask one question.
 
@@ -68,15 +70,15 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** for analysts · for executives · for government reports · for live operations · DATA PRODUCT · DBT MART · DBT EXPOSURE · OWNER
 
-### Scene 5 · The layers together · 3:29–4:00
+### Scene 5 · The layers together · 3:29–4:01
 
-**Narration.** Step back, and the whole system comes into view. Application domains flow in on one side. Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful. Business domains flow out on the other, into dashboards, apps and Genie. dbt governs every step, from source to exposure, and its lineage maps every connection. And the Databricks lakehouse runs and stores it all, governed by Unity Catalog.
+**Narration.** Step back, and the whole system comes into view. Application domains flow in on one side. Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful. Business domains flow out on the other, into dashboards, apps and Genie. dbt checks and documents every step, from source to exposure, and its lineage maps every connection. And the Databricks lakehouse runs and stores it all, governed by Unity Catalog.
 
 **Picture.** The whole system in one view: application domains flow into bronze, silver and gold on the Databricks Lakehouse (Delta Lake storage, SQL warehouses, Unity Catalog), and business domains flow out. Above, the dbt lineage graph lights up from sources through staging, intermediate and marts to exposures, with dashed links showing that dbt compiles the SQL and Databricks runs it. On the right, consumption: Databricks Apps, Genie, and dashboards and SQL.
 
 **On screen.** dbt · sources · staging · intermediate · marts · exposures · Bronze keeps what arrived · Silver makes it consistent · Gold makes it useful · Databricks Lakehouse · Consumption: Databricks Apps, Genie, Dashboards and SQL
 
-### Scene 6 · Meaning · 4:00–4:53
+### Scene 6 · Meaning · 4:01–4:54
 
 **Narration.** But pictures without meaning are just noise. The platform is the bricks. Meaning is the shared language. In the dbt Catalog, anyone can read what each picture shows, where it came from, and who owns it. Words are defined once: an enrolled student is one still enrolled on census date. Unity Catalog marks trusted data as certified, decides who can see what, and masks personal details. And a university's knowledge lives everywhere: intranet pages, policy libraries, the handbook, process maps. Through MCP, a standard plug that lets AI connect to other systems, the platform reads those sources where they live, with your permissions. Together with the sketch, they become one map of meaning: Genie Ontology.
 
@@ -84,7 +86,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Catalog in dbt · Unity Catalog · certified · MCP · Genie Ontology
 
-### Scene 7 · Two speeds · 4:53–5:20
+### Scene 7 · Two speeds · 4:54–5:21
 
 **Narration.** Some questions need one answer, right now: is there still a seat in Tuesday's 9 am class? Others need every record, over years: which classes fill up first? Different jobs, different engines. Lakebase, a Postgres database built into the platform, gives apps a fast desk copy of what they need, kept in sync automatically, with changes flowing back.
 
@@ -92,7 +94,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** One answer, right now · Every record, over years · Lakebase · Lakehouse · synced automatically · changes flow back
 
-### Scene 8 · Ways out · 5:20–6:17
+### Scene 8 · Ways out · 5:21–6:18
 
 **Narration.** Now the pictures go out, four ways. Events: when something changes, the integration platform rings a bell, and each system comes back for exactly what it needs. SQL endpoints: a reading room where tools can scan millions of records for big questions. Copies: for older systems that can't read the originals, the integration platform delivers copies. Useful, but every copy has to be kept up to date. [two-second pause] And the fourth way changes everything. A projector shows the original somewhere else, without making a copy. OpenSharing projects live research data to a partner university. Mirroring lets Microsoft Fabric see the same pictures in place. Federation turns the projector around, so we can see other systems where they live. One original. No copies to keep in sync.
 
@@ -100,7 +102,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Integration platform · SQL endpoint · Older system · out of date · Projector · OpenSharing · Mirroring · Federation · Zero-copy
 
-### Scene 9 · Apps and Genie · 6:17–6:53
+### Scene 9 · Apps and Genie · 6:18–6:54
 
 **Narration.** People meet the data in two ways. Apps: a Databricks App shows an officer a student's record, she fixes a wrong degree code, and the correction flows straight back into the platform. And conversation: Genie. Ask: which first-year classes need more seats next semester? A Genie Agent answers with certified numbers and shows its sources, guided by Genie Ontology. And it only shows you what you're allowed to see.
 
@@ -108,11 +110,11 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Databricks App · Lakebase · back into the platform · Genie
 
-### Scene 10 · Pull back · 6:53–7:11
+### Scene 10 · Pull back · 6:54–7:17
 
-**Narration.** One tap became a snapshot, then a clear picture, and finally a decision: a new class opens, and 140 more students get a seat. Move less. Mean more.
+**Narration.** One tap became a snapshot, then a clear picture, and finally a decision: a new class opens, and 140 more students get a seat. The platform moved it. What it means, and who decides, is the rest of the story. Move less. Mean more.
 
-**Picture.** The whole system again, with one pulse of light travelling from the student system to a business domain. Cut to the phone, Enrolment confirmed, beside a card: New class added, 140 more seats. Black, then the tagline.
+**Picture.** The whole system again, with one pulse of light travelling from the student system to a business domain. Cut to the phone, Enrolment confirmed, beside a card: New class added, 140 more seats; the card stays, under a slow push in, while the new line is said. Black, then the tagline.
 
 **On screen.** Move less. Mean more. · The Inner Life of Data · University edition
 

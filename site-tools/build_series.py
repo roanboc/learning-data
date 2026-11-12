@@ -393,7 +393,7 @@ def learn_text(lg, S, series, key):
 HAND = {
     "intro": dict(href="", source="films/inner-life-of-data", learning=["site/assets/learn/learn.en.js", "site/assets/learn/learn.es.js"],
                   title={"en": "The Inner Life of Data", "es": "La vida interior de los datos"},
-                  poster={"en": "poster.jpg", "es": "poster.es.jpg"}, len={"en": "7", "es": "8½"}, labs=8, quiz=12, prefix="ld",
+                  poster={"en": "poster.jpg", "es": "poster.es.jpg"}, len={"en": "7½", "es": "8"}, labs=8, quiz=12, prefix="ld",
                   card={"en": "Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.",
                         "es": "Sigue una inscripción desde un toque en el teléfono hasta una decisión, pasando por Databricks y dbt."},
                   note={"en": "English and Spanish", "es": "En español e inglés"}),

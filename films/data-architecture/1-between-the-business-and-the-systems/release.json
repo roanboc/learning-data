@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Between the business and the systems",
+    "key": "between-the-business-and-the-systems-en",
+    "dir": "films/data-architecture/1-between-the-business-and-the-systems/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/between-the-business-and-the-systems/film.js",
+    "video": "dist/between-the-business-and-the-systems.mp4",
+    "file": "between-the-business-and-the-systems.mp4",
+    "captions": [
+      [
+        "films/data-architecture/1-between-the-business-and-the-systems/captions/en.srt",
+        "between-the-business-and-the-systems.en.srt"
+      ],
+      [
+        "films/data-architecture/1-between-the-business-and-the-systems/captions/es.srt",
+        "between-the-business-and-the-systems.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-architecture/1-between-the-business-and-the-systems/source",
+      ":(exclude)films/data-architecture/1-between-the-business-and-the-systems/source/src/i18n/es/captions.js",
+      "films/data-architecture/shared",
+      "films/enterprise-architecture/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+      "films/when-things-go-wrong/characters",
+      "films/when-things-go-wrong/1-silent-change/source/src",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/data-governance/shared/tools/twice.py"
+    ],
+    "legibility": {
+      "texts": 258,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

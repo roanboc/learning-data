@@ -1,0 +1,56 @@
+{
+  "key": "between-the-business-and-the-systems",
+  "title": "Between the business and the systems",
+  "sub": "Data architecture, a series on what DAMA calls data architecture, between the business and the systems: Inés Duarte, the utility's new data architect, finds that \"information architecture\" means three things, settles on DAMA's data architecture, and draws one word, connection point, as one business object and the six data objects that record it, with an owner for the line between them.",
+  "howto": "Glass in the layers' colours is the confirmed model: gold is the business layer, peach the information layer, where data architecture works, and blue the applications. A dotted line with a hollow arrowhead says a data object realises a business object. Paper on a wall is a draft. Chile in 1971 is drawn in lamp-light: its factories, the engineers who walked them, and the drawings they made.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "point",
+    "storm",
+    -1.4
+  ],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bInés\\b",
+      "Ee-ness"
+    ],
+    [
+      "\\bCORFO\\b",
+      "Cor-foe"
+    ],
+    [
+      "\\bCybersyn\\b",
+      "Cyber-sin"
+    ],
+    [
+      "\\bArchiMate\\b",
+      "Arky-mate"
+    ],
+    [
+      "\\bTOGAF\\b",
+      "Toe-gaff"
+    ],
+    [
+      "\\bDAMA's\\b",
+      "Dah-ma's"
+    ],
+    [
+      "\\bDAMA\\b",
+      "Dah-ma"
+    ]
+  ],
+  "story": [
+    "walk"
+  ]
+}

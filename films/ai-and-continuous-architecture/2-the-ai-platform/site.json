@@ -1,0 +1,68 @@
+{
+  "kicker": "The platform under the agents",
+  "kicker_es": "La plataforma bajo los agentes",
+  "title_es": "La plataforma de IA",
+  "h1": "The AI platform: made once and shared, under every agent",
+  "h1_es": "La plataforma de IA: hecha una vez y compartida, bajo cada agente",
+  "lead": "Six agents each reach a model their own way, and when a provider retires one, the crew planner stops and nobody can say who else is hit. Ravi sorts what's shared from what's each agent's own, and puts every call through one gateway.",
+  "lead_es": "Seis agentes llegan cada uno a un modelo a su manera, y cuando un proveedor retira uno, el planificador de cuadrillas se detiene y nadie sabe a quién más afecta. Ravi separa lo compartido de lo propio de cada agente, y hace pasar cada llamada por una sola puerta.",
+  "description": "A film about the platform under AI agents: the model, tools, memory and search every agent uses, sorted with Platform and solution architecture's test into the platform's shared capabilities, while what each agent is for, its purpose, instructions and logic, stays its own, an application with an owner; the platform drawn once on the map, as services every agent uses; one gateway in front of every model, which takes each call under the agent's own identity, writes it down with what it cost, keeps each agent within limits and reaches only models the utility has terms with; a retired model found from the gateway's log, and replaced once each agent's owner has looked at its checks; who owns the platform, and who owns each agent; and, on Databricks, Unity Gateway, built on Unity Catalog, with the functions agents use as tools under the data's permissions.",
+  "description_es": "Una película sobre la plataforma bajo los agentes de IA: el modelo, las herramientas, la memoria y la búsqueda que usa cada agente, ordenados con la prueba de Arquitectura de plataforma y de soluciones en capacidades compartidas de la plataforma, mientras que para qué sirve cada agente, su propósito, sus instrucciones y su lógica, sigue siendo suyo, una aplicación con un responsable; la plataforma dibujada una vez en el mapa, como servicios que usa cada agente; una sola puerta de enlace delante de cada modelo, que recibe cada llamada con la identidad propia del agente, la anota con su costo, mantiene a cada agente dentro de límites y solo llega a modelos con los que la empresa tiene condiciones; un modelo retirado que se encuentra con el registro de la puerta de enlace, y se reemplaza cuando el responsable de cada agente revisó sus controles; quién es responsable de la plataforma, y quién de cada agente; y, en Databricks, Unity Gateway, sobre Unity Catalog, con las funciones que los agentes usan como herramientas bajo los permisos de los datos.",
+  "card": "Every agent reached its model its own way, until one was retired. Now they share one platform, behind one gateway; each keeps its own purpose.",
+  "card_es": "Cada agente llegaba a su modelo a su manera, hasta que se retiró uno. Ahora comparten una plataforma, tras una sola puerta; cada uno conserva su propósito.",
+  "chapters_es": {
+    "brick": "Barro y ladrillo cocido",
+    "ways": "Cada uno a su manera",
+    "retired": "Un modelo retirado",
+    "test": "Plataforma o aplicación",
+    "map": "Debajo de cada agente",
+    "gateway": "Una puerta a todos los modelos",
+    "swap": "El siguiente retiro",
+    "owners": "Quién responde por qué",
+    "dbx": "En Databricks",
+    "brickback": "Un ladrillo, muchos propósitos",
+    "end": "La plataforma de IA"
+  },
+  "past": [
+    "Babylon's walls, in Nabopolassar's reign, 625 to 605 BCE",
+    "Rain carried the mud-brick wall away; one baked brick, laid in bitumen, went into a river wall and the temple-tower."
+  ],
+  "past_es": [
+    "Las murallas de Babilonia, en el reinado de Nabopolasar, 625 a 605 a. C.",
+    "La lluvia se llevó la muralla de barro; un mismo ladrillo cocido, asentado con betún, fue al dique del río y a la torre-templo."
+  ],
+  "next_h": "Every agent stands on one platform. Next, what an agent may read.",
+  "next_h_es": "Cada agente se apoya en una plataforma. Luego, qué puede leer un agente.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The kings' own words",
+        "title_es": "Las palabras de los reyes (en inglés)",
+        "line": "Nabopolassar's inscriptions on Babylon's wall and its embankment of baked brick, in an open edition (RINBE 1/1, 2024).",
+        "line_es": "Las inscripciones de Nabopolasar sobre la muralla de Babilonia y su dique de ladrillo cocido, en una edición abierta (RINBE 1/1, 2024).",
+        "href": "https://epub.ub.uni-muenchen.de/118421/",
+        "href_es": "https://epub.ub.uni-muenchen.de/118421/"
+      },
+      {
+        "title": "Babylon, a World Heritage site",
+        "title_es": "Babilonia, patrimonio mundial",
+        "line": "UNESCO's page on Babylon, inscribed in 2019, and cared for by Iraq's State Board of Antiquities and Heritage.",
+        "line_es": "La página de la UNESCO sobre Babilonia, inscrita en 2019, que cuida la Junta Estatal de Antigüedades y Patrimonio de Irak.",
+        "href": "https://whc.unesco.org/en/list/278/",
+        "href_es": "https://whc.unesco.org/es/list/278/"
+      },
+      {
+        "title": "AI governance with Unity Gateway",
+        "title_es": "Gobierno de la IA con Unity Gateway (en inglés)",
+        "line": "Databricks' guide: which AI services teams may use, limits, splitting calls and falling back, usage, and the functions agents use as tools.",
+        "line_es": "La guía de Databricks: qué servicios de IA puede usar cada equipo, límites, repartir llamadas y pasar a otro modelo, el uso, y las funciones que usan los agentes.",
+        "href": "https://docs.databricks.com/aws/en/ai-gateway/",
+        "href_es": "https://docs.databricks.com/aws/en/ai-gateway/"
+      }
+    ]
+  }
+}

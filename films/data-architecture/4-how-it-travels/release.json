@@ -1,0 +1,50 @@
+[
+ {
+  "name": "How it travels",
+  "key": "how-it-travels-en",
+  "dir": "films/data-architecture/4-how-it-travels/source",
+  "lang": "en",
+  "player": "dist/film.js",
+  "site_player": "site/assets/how-it-travels/film.js",
+  "video": "dist/how-it-travels.mp4",
+  "file": "how-it-travels.mp4",
+  "captions": [
+   [
+    "films/data-architecture/4-how-it-travels/captions/en.srt",
+    "how-it-travels.en.srt"
+   ],
+   [
+    "films/data-architecture/4-how-it-travels/captions/es.srt",
+    "how-it-travels.es.srt"
+   ]
+  ],
+  "paths": [
+   "films/data-architecture/4-how-it-travels/source",
+   ":(exclude)films/data-architecture/4-how-it-travels/source/src/i18n/es/captions.js",
+   "films/data-architecture/shared",
+   "films/enterprise-architecture/shared",
+   "films/analytics-engineering/shared",
+   "films/from-words-to-data/shared",
+   "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+   "films/when-things-go-wrong/characters",
+   "films/when-things-go-wrong/1-silent-change/source/src",
+   "films/a-sharper-sketch/source/src",
+   "films/inner-life-of-data/source/src/core.js",
+   "films/inner-life-of-data/source/src/logos.js",
+   "films/inner-life-of-data/source/src/style2.js",
+   "films/inner-life-of-data/source/src/ui3.js",
+   "films/inner-life-of-data/source/src/engine3.js",
+   "films/inner-life-of-data/source/fonts",
+   "films/data-governance/shared/tools/quiet.py",
+   "films/data-governance/shared/tools/held.py",
+   "films/data-governance/shared/tools/twice.py"
+  ],
+  "legibility": {
+   "texts": 294,
+   "under_28": "0%",
+   "under_20": 0,
+   "median": 28,
+   "status": "Drawn to the rule"
+  }
+ }
+]

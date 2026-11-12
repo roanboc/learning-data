@@ -1,0 +1,227 @@
+1
+00:00:01,400 --> 00:00:07,451
+En octubre de 1972, las líneas de télex de Cybersyn iban del norte de Chile al sur.
+
+2
+00:00:09,151 --> 00:00:14,384
+Cada tarde, cada fábrica enviaba por ellas sus cifras, en un solo sentido, a Santiago.
+
+3
+00:00:15,884 --> 00:00:23,623
+Ese mes, los dueños de camiones hicieron huelga contra un plan de empresa estatal de camiones; se les unieron comerciantes, bancarios y otros.
+
+4
+00:00:25,123 --> 00:00:31,229
+Con casi todos los camiones parados, tiendas y fábricas de todo el país podían quedarse sin bienes esenciales.
+
+5
+00:00:32,929 --> 00:00:36,182
+Un informe diario y en un solo sentido no hacía circular los bienes.
+
+6
+00:00:37,282 --> 00:00:42,452
+El gobierno necesitaba saber, en el momento, dónde faltaban bienes y qué camiones aún podían circular.
+
+7
+00:00:44,152 --> 00:00:51,425
+Así que Fernando Flores, que había iniciado Cybersyn en la CORFO, montó un centro de operaciones de emergencia en Santiago.
+
+8
+00:00:52,925 --> 00:01:00,201
+Allí, el equipo de Cybersyn y funcionarios leían unos dos mil télex al día, de todo el país, y los respondían.
+
+9
+00:01:01,701 --> 00:01:06,688
+Las mismas líneas llevaban ahora mensajes nuevos, muchas veces al día, en ambos sentidos.
+
+10
+00:01:08,388 --> 00:01:15,686
+Con ellas, unos doscientos camiones que aún circulaban fueron adonde más se necesitaban, frente a los efectos de cuarenta mil en huelga.
+
+11
+00:01:17,386 --> 00:01:22,800
+En la empresa, Inés anota cada camino que cruza el muro entre la red y comercialización.
+
+12
+00:01:24,100 --> 00:01:26,782
+Encuentra once. Solo cuatro están en el mapa.
+
+13
+00:01:34,282 --> 00:01:41,290
+Uno es un enlace a la base de datos de medidores, creado hace años para que el equipo de reclamos viera una lectura durante una llamada.
+
+14
+00:01:43,190 --> 00:01:52,298
+Muestra las lecturas de cada punto de conexión: los 540,000, entre ellos los 230,000 que atienden otras comercializadoras.
+
+15
+00:01:54,198 --> 00:01:59,722
+Eso es justo lo que el muro debe impedir: la información de los clientes se queda con el negocio que la recogió.
+
+16
+00:02:01,622 --> 00:02:08,338
+Un camino que no está en el mapa no tiene responsable en ningún extremo. Cuando uno cambia, el otro se entera cuando falla.
+
+17
+00:02:10,038 --> 00:02:18,137
+En marzo, uno de ellos, un script nocturno, escribió meses en una cola que nadie leía. Unas mil novecientas facturas quedaron sin corregir.
+
+18
+00:02:21,637 --> 00:02:29,587
+En noviembre, el medidor de los Mendoza, en 14 Quarry Lane, dejó de enviar lecturas nueve días, mientras reparaban una antena de radio.
+
+19
+00:02:31,287 --> 00:02:34,999
+La red estimó esos días, y facturación usó la estimación.
+
+20
+00:02:36,299 --> 00:02:41,168
+Cuando el medidor volvió, envió lo que había guardado, y la red reemplazó la estimación.
+
+21
+00:02:42,868 --> 00:02:47,485
+Ahora el reemplazo tiene que cruzar el muro, y la lista acordada dice qué puede cruzar.
+
+22
+00:02:48,985 --> 00:02:51,579
+Para una lectura reemplazada, enumera cinco cosas.
+
+23
+00:02:52,479 --> 00:02:59,745
+El punto de conexión, por su ID de la red; los días; la estimación que reemplaza; las lecturas; y cuándo se reemplazó.
+
+24
+00:03:01,845 --> 00:03:08,505
+Cada comercializadora las recibe solo de los puntos de conexión que atiende, la del propio grupo igual que las demás.
+
+25
+00:03:10,205 --> 00:03:12,066
+Nada más del medidor cruza.
+
+26
+00:03:15,566 --> 00:03:19,046
+Cómo viaja también es una elección, y DAMA nombra tres formas.
+
+27
+00:03:20,546 --> 00:03:25,524
+Punto a punto: un sistema conectado directo a otro, como el enlace del equipo de reclamos.
+
+28
+00:03:26,824 --> 00:03:33,077
+Es rápido de construir. Pero cada lector nuevo suma un cable, y un cambio en un extremo puede romper el otro, sin verse.
+
+29
+00:03:34,977 --> 00:03:42,001
+Concentrador y radios: cada sistema envía a un concentrador, y lee de él, como las fábricas de Cybersyn enviaban a Santiago.
+
+30
+00:03:43,901 --> 00:03:51,117
+Publicación y suscripción: la casa envía cada cambio una vez, cuando ocurre, y cada lector autorizado a leerlo se suscribe.
+
+31
+00:03:53,017 --> 00:03:58,643
+Cuál conviene depende de tres preguntas: quién lo lee, cuándo actúa con él, y qué puede ver cada uno.
+
+32
+00:04:02,343 --> 00:04:08,373
+La lectura reemplazada tiene muchos lectores: cada comercializadora, y en ella, facturación y atención al cliente.
+
+33
+00:04:09,873 --> 00:04:15,630
+Facturación actúa con ella en la próxima factura. Atención al cliente, mientras un cliente está al teléfono.
+
+34
+00:04:17,130 --> 00:04:20,322
+Y cada comercializadora puede ver solo a sus clientes.
+
+35
+00:04:21,622 --> 00:04:28,599
+Así que la red publica cada lectura reemplazada una vez, cuando se reemplaza, y cada comercializadora recibe solo las suyas.
+
+36
+00:04:30,699 --> 00:04:33,964
+Dentro de la hora alcanza: nadie actúa con ella antes.
+
+37
+00:04:35,264 --> 00:04:40,985
+El enlace del equipo de reclamos se cierra: leen los mismos mensajes que el resto de atención al cliente.
+
+38
+00:04:44,685 --> 00:04:51,596
+El flujo tiene un contrato, acordado por los dos equipos de sus extremos: el de Grace, que lo envía, y el de facturación, que lo lee.
+
+39
+00:04:53,296 --> 00:04:57,027
+Se ciñe a la lista acordada, así que no necesitan la aprobación de nadie más.
+
+40
+00:04:58,527 --> 00:05:01,359
+Dice qué cruza, y qué significa cada parte.
+
+41
+00:05:02,659 --> 00:05:05,270
+Qué tan pronto: antes de una hora del reemplazo.
+
+42
+00:05:06,570 --> 00:05:13,550
+Qué pasa si una llega tarde o mal: se avisa ese día al equipo de la red, que la corrige en casa, nunca en la copia.
+
+43
+00:05:15,450 --> 00:05:22,898
+Y cómo cambia: se pueden agregar partes, pero ninguna se quita ni se renombra sin una versión nueva, y antes se avisa a los lectores.
+
+44
+00:05:26,998 --> 00:05:34,703
+En la práctica de datos en el mapa, el flujo se dibuja cruzando el muro: de la lectura en datos de medidores, a su copia en facturación.
+
+45
+00:05:36,603 --> 00:05:42,001
+Nombra su forma y su contrato, y un responsable en cada extremo: Grace, y quien dirige comercialización.
+
+46
+00:05:43,701 --> 00:05:46,704
+Cada camino que cruza el muro va al mapa, o desaparece.
+
+47
+00:05:48,004 --> 00:05:53,606
+Cinco se vuelven flujos, cada uno con su contrato. Los otros seis, el enlace entre ellos, se cierran.
+
+48
+00:05:55,306 --> 00:06:00,958
+Cómo se construye cada flujo, con conectores, eventos y pipelines, es la serie Data that moves.
+
+49
+00:06:06,858 --> 00:06:10,992
+En octubre de 1972, las líneas de télex de Chile no cambiaron.
+
+50
+00:06:12,092 --> 00:06:17,986
+Lo que las cruzaba sí: mensajes nuevos, muchas veces al día, en ambos sentidos, a tiempo para quien podía actuar.
+
+51
+00:06:19,686 --> 00:06:26,653
+En la empresa, cada hecho que cruza el muro ahora cruza a propósito: dibujado, con su forma y su contrato.
+
+52
+00:06:28,153 --> 00:06:32,746
+El veintinueve de noviembre, el medidor de los Mendoza envió sus nueve días guardados.
+
+53
+00:06:34,046 --> 00:06:38,246
+La estimación se reemplazó a las 10:14, y facturación la tuvo un minuto después.
+
+54
+00:06:39,746 --> 00:06:44,079
+Su factura de diciembre cobró lo que de verdad usaron, y nadie tuvo que llamar.
+
+55
+00:06:45,779 --> 00:06:49,468
+Ese mes se reemplazaron 2,140 estimaciones.
+
+56
+00:06:50,568 --> 00:06:56,275
+Todas menos nueve llegaron a su comercializadora dentro de la hora, y esas nueve se encontraron y enviaron el mismo día.
+
+57
+00:06:57,775 --> 00:07:04,350
+Cada dominio envía ya a los otros lo que necesitan. Pero ¿quién es responsable de qué datos, y quién responde por lo que se hace con ellos?

@@ -1,0 +1,227 @@
+1
+00:00:01,400 --> 00:00:09,436
+Japan, the early 1600s. The Tōkaidō runs from Edo to Kyoto, with a station about every ten kilometres.
+
+2
+00:00:10,136 --> 00:00:17,101
+Each station has the same parts: an office that finds horses and porters, and a clerk who writes each one down.
+
+3
+00:00:17,801 --> 00:00:20,923
+Inns, for every traveller, from lords to pilgrims.
+
+4
+00:00:21,623 --> 00:00:26,741
+And each load goes one stage, to the next station, where it's moved onto fresh horses.
+
+5
+00:00:28,041 --> 00:00:37,014
+But one stage was different: from Odawara to Mishima, about thirty kilometres over the Hakone mountains, the hardest stretch of the road.
+
+6
+00:00:38,114 --> 00:00:44,249
+From the sea, the road climbs more than seven hundred metres and down again, with no station on the way.
+
+7
+00:00:45,549 --> 00:00:54,445
+Everywhere else, fresh horses took over every ten kilometres or so. Here, the same horses and porters carried every load up and over the mountains.
+
+8
+00:00:55,945 --> 00:00:58,470
+The road needed a station where it was hardest.
+
+9
+00:00:59,970 --> 00:01:10,845
+In 1618, the shogunate founded one, at Hakone, by a lake on the mountain, and moved fifty households from Odawara and fifty from Mishima to run it.
+
+10
+00:01:12,145 --> 00:01:19,763
+The hardest stage became two, of about fifteen kilometres each, and every load changed to fresh horses and porters halfway.
+
+11
+00:01:21,463 --> 00:01:27,642
+At the utility, Ravi draws his data platform by its parts too, before he names a single product.
+
+12
+00:01:28,342 --> 00:01:37,143
+Every part has something under it but one: nothing watches the platform itself, and its bill has gone up by half, with nobody able to say why.
+
+13
+00:01:38,243 --> 00:01:42,423
+Drawn whole, the gap shows, and the platform gets the part it was missing.
+
+14
+00:01:49,123 --> 00:01:55,388
+On Tomás's map, the data platform now sits in the technology layer, shared by every domain.
+
+15
+00:01:56,488 --> 00:02:02,388
+Ravi opens it up and draws what it has to do, before what it's made of: a reference architecture.
+
+16
+00:02:03,688 --> 00:02:10,525
+Products change. What a data platform has to do stays much the same, and drawn first, it shows what's missing.
+
+17
+00:02:13,225 --> 00:02:20,772
+Four parts follow the data. Bring it in: from billing, the meters and the network map, as files, tables or streams.
+
+18
+00:02:22,072 --> 00:02:26,055
+Store it, once, in an open format, where anyone allowed can read it.
+
+19
+00:02:27,255 --> 00:02:31,582
+Process it: clean it, join it, and build each domain's data products.
+
+20
+00:02:32,682 --> 00:02:36,754
+And serve it: to reports and dashboards, to apps, and to other systems.
+
+21
+00:02:38,054 --> 00:02:41,472
+The Inner Life of Data follows one record through all four.
+
+22
+00:02:44,572 --> 00:02:46,512
+Four more run across all of them.
+
+23
+00:02:47,212 --> 00:02:51,848
+Catalogue and govern: what each table means, who owns it, and who may use it.
+
+24
+00:02:52,548 --> 00:02:56,581
+Secure: who's asking, what they may reach, and every request checked.
+
+25
+00:02:57,281 --> 00:02:59,891
+Orchestrate: what runs, in what order, and when.
+
+26
+00:03:00,591 --> 00:03:03,720
+And observe: whether it all runs well, and what it costs.
+
+27
+00:03:07,220 --> 00:03:11,208
+Then, under each part, the product that does it. Most are Databricks.
+
+28
+00:03:11,908 --> 00:03:18,912
+Lakeflow Connect brings data in. The tables are kept in the cloud's storage, in Delta Lake, an open format.
+
+29
+00:03:19,612 --> 00:03:25,740
+Lakeflow pipelines and dbt process it. Databricks SQL and the reporting tool serve it.
+
+30
+00:03:26,440 --> 00:03:30,861
+Unity Catalog catalogues and governs. Lakeflow Jobs orchestrates.
+
+31
+00:03:31,561 --> 00:03:37,417
+Secure takes three: the utility's identity provider, its network, and the catalogue's permissions.
+
+32
+00:03:38,517 --> 00:03:40,112
+Under observe: nothing.
+
+33
+00:03:44,012 --> 00:03:51,082
+The platform keeps its own records: every job's runs, every query, and what each one costs, in its system tables.
+
+34
+00:03:51,782 --> 00:03:57,628
+Nobody reads them. Each domain watches its own data products, and nobody watches the whole.
+
+35
+00:03:58,928 --> 00:04:04,600
+In September, finance asks, in a ticket, why the platform's bill is up by half since June.
+
+36
+00:04:05,900 --> 00:04:09,334
+Nobody can say which jobs made it grow, or whose they are.
+
+37
+00:04:10,834 --> 00:04:16,493
+So the only choices are poor ones: pay it, or cut every domain back, whether it grew or not.
+
+38
+00:04:20,193 --> 00:04:27,050
+Hakone's station was the highest on the road, more than seven hundred metres up, on empty ground by the lake.
+
+39
+00:04:28,550 --> 00:04:34,504
+It was hard to keep going, and the shogunate took pains to keep it: the road's owner, for the whole road.
+
+40
+00:04:36,604 --> 00:04:43,002
+Watching the platform is like that station: it serves every domain, so no one domain should have to build it.
+
+41
+00:04:44,702 --> 00:04:51,052
+Each domain's logic belongs to the business. The platform's health and cost belong to the platform team.
+
+42
+00:04:54,952 --> 00:04:59,166
+So Ravi's team builds the missing part, from the platform's own records.
+
+43
+00:05:00,466 --> 00:05:05,371
+Every job and warehouse gets a tag with its domain, so the bill splits by domain.
+
+44
+00:05:06,871 --> 00:05:14,387
+One dashboard shows every run, how long it took and what it cost, and a budget for each domain sends an alert when it's passed.
+
+45
+00:05:16,287 --> 00:05:24,252
+In a week, it shows where the money went. One job had rebuilt three years of meter readings every night, not just the day's new ones.
+
+46
+00:05:26,352 --> 00:05:30,718
+And a warehouse ran all night, for a dashboard nobody opened after six.
+
+47
+00:05:32,618 --> 00:05:36,077
+The data team changes both, and reviews the pull requests.
+
+48
+00:05:37,777 --> 00:05:42,109
+By November, the bill is back to June's, and finance closes its ticket.
+
+49
+00:05:43,809 --> 00:05:46,800
+And each domain now sees its own share, every month.
+
+50
+00:05:50,900 --> 00:05:53,548
+Here's the data practice, on Tomás's map.
+
+51
+00:05:54,848 --> 00:06:00,478
+In the technology layer, the eight parts are the platform's services: what it does for every domain.
+
+52
+00:06:01,978 --> 00:06:09,940
+Under them, the system software that realises each one: Databricks for most, the identity provider and the network for security.
+
+53
+00:06:11,640 --> 00:06:16,890
+Drawn without the software, that's the reference architecture: any product can change under it.
+
+54
+00:06:18,590 --> 00:06:25,749
+And what was missing is a gap between the platform today and the one it should be, drawn on the map with the work that closes it.
+
+55
+00:06:29,249 --> 00:06:37,212
+Hakone's station served the Tōkaidō for two and a half centuries, until the post-station system ended, in 1872.
+
+56
+00:06:37,912 --> 00:06:44,165
+Ravi's platform has all eight parts now, each with something under it, and one of them watches the rest.
+
+57
+00:06:45,665 --> 00:06:47,702
+Next: one platform, or many.

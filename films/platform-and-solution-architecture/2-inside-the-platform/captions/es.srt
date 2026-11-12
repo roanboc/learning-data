@@ -1,0 +1,227 @@
+1
+00:00:01,400 --> 00:00:09,436
+Japón, a principios del siglo XVII. El Tōkaidō va de Edo a Kioto, con una posta más o menos cada diez kilómetros.
+
+2
+00:00:10,136 --> 00:00:17,101
+Cada posta tiene las mismas partes: una oficina que consigue caballos y cargadores, y un escribano que anota cada uno.
+
+3
+00:00:17,801 --> 00:00:20,923
+Posadas, para todo viajero, de señores a peregrinos.
+
+4
+00:00:21,623 --> 00:00:26,741
+Y cada carga recorre un tramo, hasta la siguiente posta, donde pasa a caballos de refresco.
+
+5
+00:00:28,041 --> 00:00:37,014
+Pero un tramo era distinto: de Odawara a Mishima, unos treinta kilómetros por las montañas de Hakone, el trecho más duro del camino.
+
+6
+00:00:38,114 --> 00:00:44,249
+Desde el mar, el camino sube más de setecientos metros y vuelve a bajar, sin ninguna posta en medio.
+
+7
+00:00:45,549 --> 00:00:54,445
+En el resto, caballos de refresco relevaban cada diez kilómetros más o menos. Aquí, los mismos caballos y cargadores llevaban cada carga sobre la montaña.
+
+8
+00:00:55,945 --> 00:00:58,470
+El camino necesitaba una posta donde era más duro.
+
+9
+00:00:59,970 --> 00:01:10,845
+En 1618, el shogunato fundó una en Hakone, junto a un lago de montaña, y llevó cincuenta familias de Odawara y cincuenta de Mishima a atenderla.
+
+10
+00:01:12,145 --> 00:01:19,763
+El tramo más duro se volvió dos, de unos quince kilómetros cada uno, y cada carga pasaba a caballos y cargadores de refresco a medio camino.
+
+11
+00:01:21,463 --> 00:01:27,642
+En la empresa de energía, Ravi también dibuja su plataforma de datos por sus partes, antes de nombrar un solo producto.
+
+12
+00:01:28,342 --> 00:01:37,143
+Todas las partes tienen algo debajo menos una: nada vigila la plataforma en sí, y su factura subió un 50 %, sin que nadie sepa decir por qué.
+
+13
+00:01:38,243 --> 00:01:42,423
+Dibujada entera, se ve la brecha, y la plataforma recibe la parte que le faltaba.
+
+14
+00:01:49,123 --> 00:01:55,388
+En el mapa de Tomás, la plataforma de datos está ahora en la capa de tecnología, compartida por todos los dominios.
+
+15
+00:01:56,488 --> 00:02:02,388
+Ravi la abre y dibuja lo que tiene que hacer, antes que lo que la compone: una arquitectura de referencia.
+
+16
+00:02:03,688 --> 00:02:10,525
+Los productos cambian. Lo que una plataforma de datos tiene que hacer se mantiene casi igual, y dibujado primero, muestra lo que falta.
+
+17
+00:02:13,225 --> 00:02:20,772
+Cuatro partes siguen a los datos. Traerlos: desde facturación, los medidores y el mapa de la red, como archivos, tablas o flujos.
+
+18
+00:02:22,072 --> 00:02:26,055
+Guardarlos, una vez, en un formato abierto, que cualquiera con permiso pueda leer.
+
+19
+00:02:27,255 --> 00:02:31,582
+Procesarlos: limpiarlos, unirlos y construir los productos de datos de cada dominio.
+
+20
+00:02:32,682 --> 00:02:36,754
+Y servirlos: a reportes y tableros, a aplicaciones y a otros sistemas.
+
+21
+00:02:38,054 --> 00:02:41,472
+La vida interior de los datos sigue un registro por las cuatro.
+
+22
+00:02:44,572 --> 00:02:46,512
+Otras cuatro las atraviesan a todas.
+
+23
+00:02:47,212 --> 00:02:51,848
+Catalogar y gobernar: qué significa cada tabla, de quién es y quién puede usarla.
+
+24
+00:02:52,548 --> 00:02:56,581
+Proteger: quién pide, a qué puede llegar, y cada solicitud revisada.
+
+25
+00:02:57,281 --> 00:02:59,891
+Orquestar: qué corre, en qué orden y cuándo.
+
+26
+00:03:00,591 --> 00:03:03,720
+Y observar: si todo funciona bien, y cuánto cuesta.
+
+27
+00:03:07,220 --> 00:03:11,208
+Luego, bajo cada parte, el producto que la hace. Casi todos son de Databricks.
+
+28
+00:03:11,908 --> 00:03:18,912
+Lakeflow Connect trae los datos. Las tablas se guardan en el almacenamiento de la nube, en Delta Lake, un formato abierto.
+
+29
+00:03:19,612 --> 00:03:25,740
+Los pipelines de Lakeflow y dbt los procesan. Databricks SQL y la herramienta de reportes los sirven.
+
+30
+00:03:26,440 --> 00:03:30,861
+Unity Catalog cataloga y gobierna. Lakeflow Jobs orquesta.
+
+31
+00:03:31,561 --> 00:03:37,417
+Proteger lleva tres: el proveedor de identidad de la empresa, su red y los permisos del catálogo.
+
+32
+00:03:38,517 --> 00:03:40,112
+Bajo observar: nada.
+
+33
+00:03:44,012 --> 00:03:51,082
+La plataforma guarda sus propios registros: cada ejecución de cada trabajo, cada consulta y su costo, en sus tablas de sistema.
+
+34
+00:03:51,782 --> 00:03:57,628
+Nadie los lee. Cada dominio vigila sus propios productos de datos, y nadie vigila el conjunto.
+
+35
+00:03:58,928 --> 00:04:04,600
+En septiembre, finanzas pregunta en un ticket por qué la factura de la plataforma subió un 50 % desde junio.
+
+36
+00:04:05,900 --> 00:04:09,334
+Nadie sabe decir qué trabajos la hicieron crecer, ni de quién son.
+
+37
+00:04:10,834 --> 00:04:16,493
+Así que solo quedan malas opciones: pagarla, o recortar a todos los dominios, hayan crecido o no.
+
+38
+00:04:20,193 --> 00:04:27,050
+La posta de Hakone era la más alta del camino, a más de setecientos metros, en un terreno vacío junto al lago.
+
+39
+00:04:28,550 --> 00:04:34,504
+Era difícil de sostener, y el shogunato se esforzó por mantenerla: el dueño del camino, por todo el camino.
+
+40
+00:04:36,604 --> 00:04:43,002
+Vigilar la plataforma es como esa posta: sirve a todos los dominios, así que ningún dominio debería tener que construirla.
+
+41
+00:04:44,702 --> 00:04:51,052
+La lógica de cada dominio es del negocio. La salud y el costo de la plataforma son del equipo de la plataforma.
+
+42
+00:04:54,952 --> 00:04:59,166
+Así que el equipo de Ravi construye la parte que faltaba, con los registros de la plataforma.
+
+43
+00:05:00,466 --> 00:05:05,371
+Cada trabajo y warehouse lleva una etiqueta con su dominio, y la factura se divide por dominio.
+
+44
+00:05:06,871 --> 00:05:14,387
+Un tablero muestra cada ejecución, cuánto tardó y cuánto costó, y un presupuesto por dominio envía una alerta cuando se supera.
+
+45
+00:05:16,287 --> 00:05:24,252
+En una semana, muestra adónde fue el dinero. Un trabajo reconstruía cada noche tres años de lecturas de medidores, no solo las nuevas del día.
+
+46
+00:05:26,352 --> 00:05:30,718
+Y un warehouse corría toda la noche, para un tablero que nadie abría después de las seis.
+
+47
+00:05:32,618 --> 00:05:36,077
+El equipo de datos cambia ambos y revisa los pull requests.
+
+48
+00:05:37,777 --> 00:05:42,109
+Para noviembre, la factura vuelve a la de junio, y finanzas cierra su ticket.
+
+49
+00:05:43,809 --> 00:05:46,800
+Y cada dominio ve ahora su propia parte, cada mes.
+
+50
+00:05:50,900 --> 00:05:53,548
+Esta es la práctica de datos, en el mapa de Tomás.
+
+51
+00:05:54,848 --> 00:06:00,478
+En la capa de tecnología, las ocho partes son los servicios de la plataforma: lo que hace por todos los dominios.
+
+52
+00:06:01,978 --> 00:06:09,940
+Debajo, el software de sistema que realiza cada uno: Databricks para casi todos, el proveedor de identidad y la red para la seguridad.
+
+53
+00:06:11,640 --> 00:06:16,890
+Dibujada sin el software, esa es la arquitectura de referencia: cualquier producto puede cambiar debajo.
+
+54
+00:06:18,590 --> 00:06:25,749
+Y lo que faltaba es una brecha entre la plataforma de hoy y la que debería ser, dibujada en el mapa con el trabajo que la cierra.
+
+55
+00:06:29,249 --> 00:06:37,212
+La posta de Hakone sirvió al Tōkaidō durante dos siglos y medio, hasta que terminó el sistema de postas, en 1872.
+
+56
+00:06:37,912 --> 00:06:44,165
+La plataforma de Ravi tiene ahora las ocho partes, cada una con algo debajo, y una de ellas vigila a las demás.
+
+57
+00:06:45,665 --> 00:06:47,702
+Sigue: una plataforma, o muchas.

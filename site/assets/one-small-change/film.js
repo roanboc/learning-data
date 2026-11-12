@@ -437,9 +437,9 @@ const NARR={
  {"id":"idea","gap":0.8,"text":"That's kaizen's first idea: improvement is everyone's job, on their own work, in small steps."}
 ]},
 "measure":{"name":"Measure, then simplify","lead":1.0,"tail":1.0,"vo":[
- {"id":"cycle","gap":0.8,"text":"Each small step runs through one cycle: plan a change, do it, check it, then act: keep it, or drop it."},
+ {"id":"cycle","gap":0.8,"text":"Each small step runs through one cycle: plan a change, do it, study the result, then act: keep it, or drop it."},
  {"id":"shew","gap":0.8,"text":"Walter Shewhart drew the cycle as a circle in 1939.","say":"Walter Shewhart drew the cycle as a circle in nineteen thirty-nine."},
- {"id":"deming","gap":0.8,"text":"W. Edwards Deming taught it in Japan in 1950, where managers made it plan, do, check, act.","say":"W. Edwards Deming taught it in Japan in nineteen fifty, where managers made it plan, do, check, act."},
+ {"id":"deming","gap":0.8,"text":"W. Edwards Deming taught it in Japan in 1950, and later called it plan, do, study, act.","say":"W. Edwards Deming taught it in Japan in nineteen fifty, and later called it plan, do, study, act."},
  {"id":"imai","gap":0.8,"text":"In 1986, Masaaki Imai's book took the Japanese word for this kind of improvement around the world: kaizen, change for the better.","say":"In nineteen eighty-six, Masaaki Imai's book took the Japanese word for this kind of improvement around the world: kaizen, change for the better."},
  {"id":"measure","gap":0.8,"text":"Ivy starts by measuring. On Monday 26 July, she times each step of her refresh: six steps, a hundred and twenty minutes.","say":"Ivy starts by measuring. On Monday the twenty-sixth of July, she times each step of her refresh: six steps, a hundred and twenty minutes."},
  {"id":"back","gap":0.8,"text":"Like the staff at Castle Street, she starts with her own corner of the work, and asks of each step: who needs this?"},
@@ -481,7 +481,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"wards/when": 2.592, "wards/where": 7.953, "wards/infect": 7.563, "wards/means": 8.781, "wards/money": 4.254, "wards/change": 3.106, "wards/fives": 8.551, "wards/steps": 8.671, "wards/cheap": 3.774, "wards/own": 4.358, "wards/kaizen": 6.203, "wards/spread": 4.583, "wards/fall": 6.104, "wards/africa": 10.052, "wards/blame": 5.576, "wards/data": 6.151, "wards/same": 5.917, "hours/own": 9.569, "hours/promise": 7.09, "hours/job": 3.797, "hours/hand": 5.747, "hours/risk": 6.31, "hours/talk": 5.841, "hours/wants": 4.968, "hours/way": 6.071, "hours/time": 5.884, "hours/idea": 6.047, "measure/cycle": 6.187, "measure/shew": 3.972, "measure/deming": 6.499, "measure/imai": 8.927, "measure/measure": 8.719, "measure/back": 6.333, "measure/rooms": 4.257, "measure/test": 4.061, "measure/try": 6.426, "measure/copy": 7.391, "measure/ninety": 2.961, "automate/list": 5.882, "automate/same": 4.033, "automate/jun": 5.493, "automate/muddle": 4.08, "automate/sept": 5.891, "automate/review": 7.69, "automate/stop": 7.812, "automate/ten": 7.0, "automate/safe": 2.906, "leader/none": 3.908, "leader/ask": 6.245, "leader/give": 4.979, "leader/show": 8.135, "leader/named": 2.785, "leader/no": 4.906, "leader/habit": 8.387, "leader/others": 4.895, "monday/back": 8.637, "monday/ivy": 4.076, "monday/one": 3.062, "monday/two": 4.014, "monday/three": 3.723, "monday/four": 4.208, "monday/take": 2.626};
+const VODUR={"wards/when": 2.592, "wards/where": 7.953, "wards/infect": 7.563, "wards/means": 8.781, "wards/money": 4.254, "wards/change": 3.106, "wards/fives": 8.551, "wards/steps": 8.671, "wards/cheap": 3.774, "wards/own": 4.358, "wards/kaizen": 6.203, "wards/spread": 4.583, "wards/fall": 6.104, "wards/africa": 10.052, "wards/blame": 5.576, "wards/data": 6.151, "wards/same": 5.917, "hours/own": 9.569, "hours/promise": 7.09, "hours/job": 3.797, "hours/hand": 5.747, "hours/risk": 6.31, "hours/talk": 5.841, "hours/wants": 4.968, "hours/way": 6.071, "hours/time": 5.884, "hours/idea": 6.047, "measure/cycle": 6.777, "measure/shew": 3.972, "measure/deming": 6.173, "measure/imai": 8.927, "measure/measure": 8.719, "measure/back": 6.333, "measure/rooms": 4.257, "measure/test": 4.061, "measure/try": 6.426, "measure/copy": 7.391, "measure/ninety": 2.961, "automate/list": 5.882, "automate/same": 4.033, "automate/jun": 5.493, "automate/muddle": 4.08, "automate/sept": 5.891, "automate/review": 7.69, "automate/stop": 7.812, "automate/ten": 7.0, "automate/safe": 2.906, "leader/none": 3.908, "leader/ask": 6.245, "leader/give": 4.979, "leader/show": 8.135, "leader/named": 2.785, "leader/no": 4.906, "leader/habit": 8.387, "leader/others": 4.895, "monday/back": 8.637, "monday/ivy": 4.076, "monday/one": 3.062, "monday/two": 4.014, "monday/three": 3.723, "monday/four": 4.208, "monday/take": 2.626};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2033,7 +2033,7 @@ function kz_spread(c,x,y,w,o){return kz_minis(c,x,y,w,{kick:"From 2007, with Jap
      kz_clock(ctx, x, y, r, m)                a clock on the wall at m minutes past midnight
      kz_monday(ctx, x, y, w, o)               a Monday, from 06:00 to 11:00: the job that publishes at six, the promise at seven,
                                               Ivy's two hours of checks by hand, and the hours when the page isn't checked yet
-     kz_cycle(ctx, cx, cy, r, o)              the cycle: plan, do, check, act (keep it, or drop it), drawn as a ring
+     kz_cycle(ctx, cx, cy, r, o)              the cycle: plan, do, study, act (keep it, or drop it), drawn as a ring
      kz_steps(ctx, x, y, w, o)                Ivy's refresh, step by step, with the minutes each takes: six steps, 120 minutes
      kz_checklist(ctx, x, y, w, o)            the four steps left, as one checklist: each step, and what good looks like
      kz_job(ctx, x, y, w, o)                  the job: load, build, check, publish; the checks that come into it one a week
@@ -2093,11 +2093,11 @@ function kz_monday(c,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
   mark(t0,LP.orange,o.jobText||"The job publishes",o.job||0,236);mark(kz_hm(7),LP.blue,"The promise: by 07:00",o.promise||0,190);
   c.restore();}
 
-/* ---------------------------------------------------------------- the cycle: plan, do, check, act
+/* ---------------------------------------------------------------- the cycle: plan, do, study, act
    o: a; u (0 to 1: the ring draws itself, arc by arc, each word with its arc), labels (0 to 1), hi (0 to 3: the arc lit now, as a number that can move between
    them; null for none), dot (0 to 1: a dot going once round), small (true: no words but the four, for a cycle drawn small). Plan is
    blue (a plan); act ends in two: keep it (green) or drop it (amber). */
-const KZ_CYCLE=[{t:"Plan",col:LP.blue},{t:"Do",col:LP.ink},{t:"Check",col:LP.ink},{t:"Act",col:LP.ink}];
+const KZ_CYCLE=[{t:"Plan",col:LP.blue},{t:"Do",col:LP.ink},{t:"Study",col:LP.ink},{t:"Act",col:LP.ink}];
 function kz_cycle(c,cx,cy,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c.save();c.globalAlpha*=a;const u=o.u==null?1:o.u,lw=o.lw||(o.small?14:22),gap=0.16;
   for(let i=0;i<4;i++){const s0=-Math.PI/2+i*TAU/4+gap/2,s1=s0+TAU/4-gap,f=clamp(u*4-i,0,1);if(f<=0)continue;const lit=o.hi==null?1:clamp(1-Math.abs(o.hi-i),0,1);
     c.strokeStyle=rgba(KZ_CYCLE[i].col,lerp(0.35,1,lit));c.lineWidth=lw;c.lineCap="round";c.beginPath();c.arc(cx,cy,r,s0,lerp(s0,s1,ag_sine(f)));c.stroke();
@@ -2343,15 +2343,15 @@ scene("hours",(ctx,S,t,sc)=>{const c=sc.cues,T=tt=>tt+sc.start,mo={light:"mornin
 /* ---------------------------------------------------------------- 3. Measure, then simplify */
 scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,T=tt=>tt+sc.start,mo={light:"morning"};
   const r0=c.test-0.6,n0=c.ninety-0.3,try0=c.try+0.1;
-  // the line lit in the plan, do, check, act of skipping her hand check: one after another, as the voice says each
+  // the line lit in the plan, do, study, act of skipping her hand check: one after another, as the voice says each
   const tryHi=tt=>{const ts=[try0+0.3,wAt(sc,"try","reads",-0.1),wAt(sc,"try","covers",-0.1),wAt(sc,"try","keeps",-0.1)];let k=-1;ts.forEach((t0,i)=>{if(tt>=t0)k=i;});return k;};
   ag_shots(ctx,S,t,sc.dur,[
     // the cycle every small step runs through, and where it comes from
     {at:0,place:"kzThursday",keys:[[0,960,540,1.0]],draw:(x,tt)=>{
-      const cu=kz_u(tt,[wAt(sc,"cycle","plan",-0.1),wAt(sc,"cycle","do",-0.1),wAt(sc,"cycle","check",-0.1),wAt(sc,"cycle","act",-0.1)]);
+      const cu=kz_u(tt,[wAt(sc,"cycle","plan",-0.1),wAt(sc,"cycle","do",-0.1),wAt(sc,"cycle","study",-0.1),wAt(sc,"cycle","act",-0.1)]);
       kz_paper(x,tt,0.5,100,150,860,700,s=>kz_cycle(s,530,500,180,{u:cu}),{light:"day"});
-      kz_sheet(x,tt,c.shew+0.2,1040,110,780,{kick:"The cycle's history",lines:["1939: Walter Shewhart draws it as a circle","1950: W. Edwards Deming teaches it in Japan","There, managers make it plan, do, check, act"]},
-        {light:"day",u:kz_u(tt,[c.shew+0.4,c.deming-0.1,wAt(sc,"deming","managers",-0.1)])});
+      kz_sheet(x,tt,c.shew+0.2,1040,110,780,{kick:"The cycle's history",lines:["1939: Walter Shewhart draws it as a circle","1950: W. Edwards Deming teaches it in Japan","Later, he calls it plan, do, study, act"]},
+        {light:"day",u:kz_u(tt,[c.shew+0.4,c.deming-0.1,wAt(sc,"deming","later",-0.1)])});
       kz_sheet(x,tt,wAt(sc,"imai","Imai's",-0.4),1040,440,780,{kick:"1986 · Masaaki Imai's book",title:"Kaizen",sub:"Change for the better"},{light:"day"});}},
     // Monday 26 July: Ivy times each step; who needs this? Two steps nobody needed, tried and dropped
     {at:c.measure-0.3,place:"kzMonday",dis:1.0,keys:[[c.measure-0.3,960,540,1.0]],draw:(x,tt)=>{
@@ -2363,7 +2363,7 @@ scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,T=tt=>tt+sc.start,mo={light:"morn
       const ts0=wAt(sc,"test","since",-0.2);
       kz_sheet(x,tt,ts0,720,110,1100,{kick:"Since April, in Jun's models",title:"A test of the same 14 rooms"},{col:LP.orange,light:"morning",out:c.copy-0.6});
       if(tt<c.copy-0.2)kz_tick(x,tt,wAt(sc,"test","checked",-0.1),1764,170,1-ag_in(tt,c.copy-0.6,0.4));
-      const pb=kz_sheet(x,tt,try0,720,330,1100,{kick:"One Monday, one small change",lines:["Plan: skip her check of the 14 rooms","Do: read the test instead","Check: it covers all 14","Act: keep the change"]},
+      const pb=kz_sheet(x,tt,try0,720,330,1100,{kick:"One Monday, one small change",lines:["Plan: skip her check of the 14 rooms","Do: read the test instead","Study: it covers all 14","Act: keep the change"]},
         {col:LP.blue,light:"morning",out:c.copy-0.6,u:kz_u(tt,[try0+0.3,wAt(sc,"try","reads",-0.1),wAt(sc,"try","covers",-0.1),wAt(sc,"try","keeps",-0.1)])});
       if(pb){const k=tryHi(tt);kz_cycle(x,1640,pb.y+pb.h/2+10,86,{a:ag_in(tt,try0+0.5,0.4)*(1-ag_in(tt,c.copy-0.6,0.4)),small:true,labels:0,hi:k<0?null:k,lw:14});}
       kz_sheet(x,tt,c.copy+0.2,720,110,1100,{kick:"Step five",title:"The copy for Facilities",lines:["Since July, Facilities reads the product's page","She asks them, and drops the copy"]},

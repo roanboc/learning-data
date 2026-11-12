@@ -4,7 +4,8 @@
    Words as the module has them: el equipo, la revisión (a review), el tablero; Ivy's product keeps the Spanish name the series page gives it, Uso de los espacios
    docentes, and Facilities is Instalaciones; las aulas (the rooms), las reservas y los conteos, la página del producto, sus lectores. As the data quality films say
    it, un control for a check inside the job, which falla, and una prueba for a test in Jun's models; the job is un proceso. Ivy's own check by hand is su revisión
-   a mano. The cycle is the one Latin America knows as PHVA: planear, hacer, verificar, actuar; so to check a change is verificar, and checked is verificado.
+   a mano. The cycle is plan, do, study, act, as the whole site names it since 12 November 2026: planificar, hacer, estudiar, actuar, as the data quality film that
+   tells study from check (Small, every week) says it. To check a change, in plain words, stays verificar, and checked is verificado.
    Learning time is el tiempo de aprendizaje; a refresh, la actualización; a checklist, una lista de verificación; what's in the way, qué obstáculos hay.
    In Colombo, 2000: el Hospital de Mujeres de Castle Street, el director, el personal, las salas (the wards), una cesárea, los recién nacidos, el ministerio;
    5S and kaizen stay as they are, kaizen glossed as cambio para mejor; Japan's aid agency is la cooperación japonesa. The modules named are Gestión de datos
@@ -65,12 +66,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que Helena le da para eso su tiempo de aprendizaje del jueves: dos horas semanales, ya suyas, ahora para esto.",
 "That's kaizen's first idea: improvement is everyone's job, on their own work, in small steps.":
 "Es la primera idea del kaizen: mejorar es tarea de todos, cada uno en su propio trabajo, a pasos pequeños.",
-"Each small step runs through one cycle: plan a change, do it, check it, then act: keep it, or drop it.":
-"Cada paso pequeño sigue un ciclo: planea un cambio, hazlo, verifícalo, y luego actúa: consérvalo o descártalo.",
+"Each small step runs through one cycle: plan a change, do it, study the result, then act: keep it, or drop it.":
+"Cada paso pequeño sigue un ciclo: planifica un cambio, hazlo, estudia el resultado, y luego actúa: consérvalo o descártalo.",
 "Walter Shewhart drew the cycle as a circle in 1939.":
 "Walter Shewhart dibujó el ciclo como un círculo en 1939.",
-"W. Edwards Deming taught it in Japan in 1950, where managers made it plan, do, check, act.":
-"W. Edwards Deming lo enseñó en Japón en 1950, donde los directivos lo convirtieron en planear, hacer, verificar, actuar.",
+"W. Edwards Deming taught it in Japan in 1950, and later called it plan, do, study, act.":
+"W. Edwards Deming lo enseñó en Japón en 1950, y más tarde lo llamó planificar, hacer, estudiar, actuar.",
 "In 1986, Masaaki Imai's book took the Japanese word for this kind of improvement around the world: kaizen, change for the better.":
 "En 1986, el libro de Masaaki Imai llevó por el mundo la palabra japonesa para esta forma de mejorar: kaizen, cambio para mejor.",
 "Ivy starts by measuring. On Monday 26 July, she times each step of her refresh: six steps, a hundred and twenty minutes.":

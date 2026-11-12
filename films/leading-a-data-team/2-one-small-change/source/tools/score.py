@@ -316,7 +316,7 @@ LV[0] = 0.9
 mw = lambda lid, word, off=0: W('measure', lid, word, off)
 mc = lambda lid, off=0: G('measure', lid, off)
 card(S0('measure') + 0.5, 0.0035, px(530))
-for word, m in (('plan', Bb3), ('do', D4), ('check', F4), ('act', Bb4)):
+for word, m in (('plan', Bb3), ('do', D4), ('study', F4), ('act', Bb4)):
     pipe(m, mw('cycle', word, 0.0), 0.45, px(530) * 0.4)
 card(mc('shew', 0.2), 0.0035, px(1430))
 card(mw('imai', 'Imai', -0.4), 0.0035, px(1430))

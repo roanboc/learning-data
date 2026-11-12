@@ -6,7 +6,7 @@
      kz_clock(ctx, x, y, r, m)                a clock on the wall at m minutes past midnight
      kz_monday(ctx, x, y, w, o)               a Monday, from 06:00 to 11:00: the job that publishes at six, the promise at seven,
                                               Ivy's two hours of checks by hand, and the hours when the page isn't checked yet
-     kz_cycle(ctx, cx, cy, r, o)              the cycle: plan, do, check, act (keep it, or drop it), drawn as a ring
+     kz_cycle(ctx, cx, cy, r, o)              the cycle: plan, do, study, act (keep it, or drop it), drawn as a ring
      kz_steps(ctx, x, y, w, o)                Ivy's refresh, step by step, with the minutes each takes: six steps, 120 minutes
      kz_checklist(ctx, x, y, w, o)            the four steps left, as one checklist: each step, and what good looks like
      kz_job(ctx, x, y, w, o)                  the job: load, build, check, publish; the checks that come into it one a week
@@ -66,11 +66,11 @@ function kz_monday(c,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
   mark(t0,LP.orange,o.jobText||"The job publishes",o.job||0,236);mark(kz_hm(7),LP.blue,"The promise: by 07:00",o.promise||0,190);
   c.restore();}
 
-/* ---------------------------------------------------------------- the cycle: plan, do, check, act
+/* ---------------------------------------------------------------- the cycle: plan, do, study, act
    o: a; u (0 to 1: the ring draws itself, arc by arc, each word with its arc), labels (0 to 1), hi (0 to 3: the arc lit now, as a number that can move between
    them; null for none), dot (0 to 1: a dot going once round), small (true: no words but the four, for a cycle drawn small). Plan is
    blue (a plan); act ends in two: keep it (green) or drop it (amber). */
-const KZ_CYCLE=[{t:"Plan",col:LP.blue},{t:"Do",col:LP.ink},{t:"Check",col:LP.ink},{t:"Act",col:LP.ink}];
+const KZ_CYCLE=[{t:"Plan",col:LP.blue},{t:"Do",col:LP.ink},{t:"Study",col:LP.ink},{t:"Act",col:LP.ink}];
 function kz_cycle(c,cx,cy,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c.save();c.globalAlpha*=a;const u=o.u==null?1:o.u,lw=o.lw||(o.small?14:22),gap=0.16;
   for(let i=0;i<4;i++){const s0=-Math.PI/2+i*TAU/4+gap/2,s1=s0+TAU/4-gap,f=clamp(u*4-i,0,1);if(f<=0)continue;const lit=o.hi==null?1:clamp(1-Math.abs(o.hi-i),0,1);
     c.strokeStyle=rgba(KZ_CYCLE[i].col,lerp(0.35,1,lit));c.lineWidth=lw;c.lineCap="round";c.beginPath();c.arc(cx,cy,r,s0,lerp(s0,s1,ag_sine(f)));c.stroke();

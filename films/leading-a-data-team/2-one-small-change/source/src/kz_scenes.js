@@ -141,15 +141,15 @@ scene("hours",(ctx,S,t,sc)=>{const c=sc.cues,T=tt=>tt+sc.start,mo={light:"mornin
 /* ---------------------------------------------------------------- 3. Measure, then simplify */
 scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,T=tt=>tt+sc.start,mo={light:"morning"};
   const r0=c.test-0.6,n0=c.ninety-0.3,try0=c.try+0.1;
-  // the line lit in the plan, do, check, act of skipping her hand check: one after another, as the voice says each
+  // the line lit in the plan, do, study, act of skipping her hand check: one after another, as the voice says each
   const tryHi=tt=>{const ts=[try0+0.3,wAt(sc,"try","reads",-0.1),wAt(sc,"try","covers",-0.1),wAt(sc,"try","keeps",-0.1)];let k=-1;ts.forEach((t0,i)=>{if(tt>=t0)k=i;});return k;};
   ag_shots(ctx,S,t,sc.dur,[
     // the cycle every small step runs through, and where it comes from
     {at:0,place:"kzThursday",keys:[[0,960,540,1.0]],draw:(x,tt)=>{
-      const cu=kz_u(tt,[wAt(sc,"cycle","plan",-0.1),wAt(sc,"cycle","do",-0.1),wAt(sc,"cycle","check",-0.1),wAt(sc,"cycle","act",-0.1)]);
+      const cu=kz_u(tt,[wAt(sc,"cycle","plan",-0.1),wAt(sc,"cycle","do",-0.1),wAt(sc,"cycle","study",-0.1),wAt(sc,"cycle","act",-0.1)]);
       kz_paper(x,tt,0.5,100,150,860,700,s=>kz_cycle(s,530,500,180,{u:cu}),{light:"day"});
-      kz_sheet(x,tt,c.shew+0.2,1040,110,780,{kick:"The cycle's history",lines:["1939: Walter Shewhart draws it as a circle","1950: W. Edwards Deming teaches it in Japan","There, managers make it plan, do, check, act"]},
-        {light:"day",u:kz_u(tt,[c.shew+0.4,c.deming-0.1,wAt(sc,"deming","managers",-0.1)])});
+      kz_sheet(x,tt,c.shew+0.2,1040,110,780,{kick:"The cycle's history",lines:["1939: Walter Shewhart draws it as a circle","1950: W. Edwards Deming teaches it in Japan","Later, he calls it plan, do, study, act"]},
+        {light:"day",u:kz_u(tt,[c.shew+0.4,c.deming-0.1,wAt(sc,"deming","later",-0.1)])});
       kz_sheet(x,tt,wAt(sc,"imai","Imai's",-0.4),1040,440,780,{kick:"1986 · Masaaki Imai's book",title:"Kaizen",sub:"Change for the better"},{light:"day"});}},
     // Monday 26 July: Ivy times each step; who needs this? Two steps nobody needed, tried and dropped
     {at:c.measure-0.3,place:"kzMonday",dis:1.0,keys:[[c.measure-0.3,960,540,1.0]],draw:(x,tt)=>{
@@ -161,7 +161,7 @@ scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,T=tt=>tt+sc.start,mo={light:"morn
       const ts0=wAt(sc,"test","since",-0.2);
       kz_sheet(x,tt,ts0,720,110,1100,{kick:"Since April, in Jun's models",title:"A test of the same 14 rooms"},{col:LP.orange,light:"morning",out:c.copy-0.6});
       if(tt<c.copy-0.2)kz_tick(x,tt,wAt(sc,"test","checked",-0.1),1764,170,1-ag_in(tt,c.copy-0.6,0.4));
-      const pb=kz_sheet(x,tt,try0,720,330,1100,{kick:"One Monday, one small change",lines:["Plan: skip her check of the 14 rooms","Do: read the test instead","Check: it covers all 14","Act: keep the change"]},
+      const pb=kz_sheet(x,tt,try0,720,330,1100,{kick:"One Monday, one small change",lines:["Plan: skip her check of the 14 rooms","Do: read the test instead","Study: it covers all 14","Act: keep the change"]},
         {col:LP.blue,light:"morning",out:c.copy-0.6,u:kz_u(tt,[try0+0.3,wAt(sc,"try","reads",-0.1),wAt(sc,"try","covers",-0.1),wAt(sc,"try","keeps",-0.1)])});
       if(pb){const k=tryHi(tt);kz_cycle(x,1640,pb.y+pb.h/2+10,86,{a:ag_in(tt,try0+0.5,0.4)*(1-ag_in(tt,c.copy-0.6,0.4)),small:true,labels:0,hi:k<0?null:k,lw:14});}
       kz_sheet(x,tt,c.copy+0.2,720,110,1100,{kick:"Step five",title:"The copy for Facilities",lines:["Since July, Facilities reads the product's page","She asks them, and drops the copy"]},

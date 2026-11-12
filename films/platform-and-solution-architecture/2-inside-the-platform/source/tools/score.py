@@ -388,7 +388,7 @@ for k in range(4):
 tick(ww('team', 'platform team', -0.3), 0.003, px(1560))
 consort((G2, B2, D3, G3), ww('team', 'platform team', 0.2), 1.6, 0.45)
 
-# 8. The platform watches itself: what it was missing, set in under observe, a tick each, and a cornett's G, then B. The dashboard: a
+# 8. The part that watches: what it was missing, set in under observe, a tick each, and a cornett's G, then B. The dashboard: a
 #    page; its runs, its domains' tags, their costs drawn out; a budget for each domain, filling; the alert, a soft knock and a sackbut's
 #    low B. What it found: E minor, low, as the job is lit; the warehouse, a tick. The data team's pull requests, a page each, reviewed,
 #    a tick each. Back to June's: the band whole, G major; the ticket closed, a tick; each domain's share, drawn in

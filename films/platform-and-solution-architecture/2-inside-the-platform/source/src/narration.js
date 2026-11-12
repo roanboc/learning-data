@@ -49,7 +49,7 @@ const NARR={
  {"id":"kept","gap":0.8,"text":"It was hard to keep going, and the shogunate took pains to keep it: the road's owner, for the whole road."},
  {"id":"like","gap":0.8,"text":"Watching the platform is like that station: it serves every domain, so no one domain should have to build it."},
  {"id":"team","gap":0.8,"text":"Each domain's logic belongs to the business. The platform's health and cost belong to the platform team."}]},
-"watch":{"name":"The platform watches itself","lead":1.0,"tail":1.0,"vo":[
+"watch":{"name":"The part that watches","lead":1.0,"tail":1.0,"vo":[
  {"id":"build","gap":0.8,"text":"So Ravi's team builds the missing part, from the platform's own records."},
  {"id":"tags","gap":0.8,"text":"Every job and warehouse gets a tag with its domain, so the bill splits by domain."},
  {"id":"dash","gap":0.8,"text":"One dashboard shows every run, how long it took and what it cost, and a budget for each domain sends an alert when it's passed."},

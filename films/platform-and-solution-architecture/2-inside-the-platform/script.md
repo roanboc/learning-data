@@ -35,12 +35,14 @@ The series follows TOGAF 10 and ArchiMate 4, as *The map before the data* does (
 | TOGAF 10: the Architecture Continuum's reference architectures, and the Technical Reference Model, a taxonomy of platform services drawn without products | A reference architecture: what the platform has to do, drawn before what it's made of, so any product can change under it | *Parts before products*, *The data practice on the map* |
 | ArchiMate 4: technology services realised by system software; the implementation and migration layer's plateaus, gap and work package | The eight parts as the platform's services; the products under them as system software; the missing part as a gap between the platform today and the one it should be, with the work that closes it | *The data practice on the map* |
 | DAMA-DMBOK 2: the knowledge areas of data management (data integration and interoperability, data storage and operations, data security, metadata, data governance) | The jobs the eight parts do, named in plain words | *Four along the way*, *Four across it all* |
-| The FinOps Foundation's FinOps Framework: allocation by tags, reporting, anomaly management, budgeting, and showback; its *Data Cloud Platforms* category | Every job and warehouse tagged with its domain; one dashboard of every run and its cost; a budget for each domain with an alert; each domain seeing its own share every month | *The platform watches itself* |
+| The FinOps Foundation's FinOps Framework: allocation by tags, reporting, anomaly management, budgeting, and showback; its *Data Cloud Platforms* category | Every job and warehouse tagged with its domain; one dashboard of every run and its cost; a budget for each domain with an alert; each domain seeing its own share every month | *The part that watches* |
 | *Team Topologies* (Skelton and Pais, 2019) and the CNCF Platforms White Paper (2023) | What serves every domain is the platform team's to build and run | *Whose part it is* |
 
 Where the film differs: no standard fixes the list of a data platform's parts. The eight are the parts most published data platform reference architectures share, the cloud providers' among them, named in plain words; the film keeps four along the way the data goes and four across them all, so a newcomer sees why the second four are easy to forget. *Observe* means the platform's own health and cost, not a domain's data quality, which each domain watches in its own data products (*Fit for use* and *Data quality*).
 
-Practice, from the author's brief: draw the platform's parts before its products, so a part with nothing under it shows; watching the platform's health and cost is the platform team's, not a domain's, since it serves them all; finance asks in a ticket, the data team changes the jobs and reviews the pull requests, and finance checks the result before its ticket closes (AGENTS.md, *Business users ask in tickets*). All of it is said in *Nobody watching* and *The platform watches itself*.
+*Data as software*'s *A platform that watches itself* follows a failed night job from its alert to its fix; this film's part is the one before it, the platform's health and cost watched as a whole, and who builds it.
+
+Practice, from the author's brief: draw the platform's parts before its products, so a part with nothing under it shows; watching the platform's health and cost is the platform team's, not a domain's, since it serves them all; finance asks in a ticket, the data team changes the jobs and reviews the pull requests, and finance checks the result before its ticket closes (AGENTS.md, *Business users ask in tickets*). All of it is said in *Nobody watching* and *The part that watches*.
 
 ## What each object stands for
 
@@ -105,7 +107,7 @@ The platform's own tables, its job runs, query history and billing usage, greyed
 ### 7 · Whose part it is · 4:19–4:54
 The station on the mountain at dusk, the highest on the road, by the lake; kept by the road's owner for the whole road. Then the platform with every domain's block and owner: watching it serves them all, so it's the platform team's.
 
-### 8 · The platform watches itself · 4:54–5:50
+### 8 · The part that watches · 4:54–5:50
 Observe gets what it was missing, from the platform's own records. Tags by domain; the dashboard of runs by cost; budgets by domain and an alert. In a week: the nightly rebuild of three years of meter readings, and the warehouse left on all night. The data team's two pull requests. November: the bill back to June's, finance's ticket checked and closed; each month split by domain.
 
 ### 9 · The data practice on the map · 5:50–6:28

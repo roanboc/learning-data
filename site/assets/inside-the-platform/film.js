@@ -457,7 +457,7 @@ const NARR={
  {"id":"kept","gap":0.8,"text":"It was hard to keep going, and the shogunate took pains to keep it: the road's owner, for the whole road."},
  {"id":"like","gap":0.8,"text":"Watching the platform is like that station: it serves every domain, so no one domain should have to build it."},
  {"id":"team","gap":0.8,"text":"Each domain's logic belongs to the business. The platform's health and cost belong to the platform team."}]},
-"watch":{"name":"The platform watches itself","lead":1.0,"tail":1.0,"vo":[
+"watch":{"name":"The part that watches","lead":1.0,"tail":1.0,"vo":[
  {"id":"build","gap":0.8,"text":"So Ravi's team builds the missing part, from the platform's own records."},
  {"id":"tags","gap":0.8,"text":"Every job and warehouse gets a tag with its domain, so the bill splits by domain."},
  {"id":"dash","gap":0.8,"text":"One dashboard shows every run, how long it took and what it cost, and a budget for each domain sends an alert when it's passed."},
@@ -2792,7 +2792,7 @@ scene("whose",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     ctx.restore();}]]);
   vign(ctx,S);});
 
-/* ---------- 8. The platform watches itself ---------- */
+/* ---------- 8. The part that watches ---------- */
 // the platform's own dashboard: its runs by cost, each with its domain's tag, and a budget for each domain
 const P2_RUNS=[["meter readings, nightly","network","5 h 40 min",1.0],["reports warehouse","retail","on all night",0.62],["billing load","retail","40 min",0.18],["outage history","network","25 min",0.12],["month-end close","finance","35 min",0.1]];
 const P2_BUD=[["network",1.18],["retail",1.04],["finance",0.71],["enterprise",0.66]];
@@ -2888,7 +2888,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   psaEnd(ctx,S,t,B+0.6,"Inside the platform","Every part drawn, and one that watches the rest.","film 2 of 8");});
 
 /* where the chapters meet: the drawing stays put, its camera gliding on, from Parts before products to Nobody watching; The
-   platform watches itself opens on the drawing again once the platform with its domains has left (From words to data's joins.js) */
+   part that watches opens on the drawing again once the platform with its domains has left (From words to data's joins.js) */
 const CHAPTER_JOINS={glide:["along","across","products","nothing"],leave:["watch"],bare:(ctx,S,t)=>{p2_room(ctx,S,t);vign(ctx,S);}};
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

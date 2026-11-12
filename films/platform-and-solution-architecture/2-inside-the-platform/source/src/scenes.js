@@ -427,7 +427,7 @@ scene("whose",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     ctx.restore();}]]);
   vign(ctx,S);});
 
-/* ---------- 8. The platform watches itself ---------- */
+/* ---------- 8. The part that watches ---------- */
 // the platform's own dashboard: its runs by cost, each with its domain's tag, and a budget for each domain
 const P2_RUNS=[["meter readings, nightly","network","5 h 40 min",1.0],["reports warehouse","retail","on all night",0.62],["billing load","retail","40 min",0.18],["outage history","network","25 min",0.12],["month-end close","finance","35 min",0.1]];
 const P2_BUD=[["network",1.18],["retail",1.04],["finance",0.71],["enterprise",0.66]];
@@ -523,5 +523,5 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   psaEnd(ctx,S,t,B+0.6,"Inside the platform","Every part drawn, and one that watches the rest.","film 2 of 8");});
 
 /* where the chapters meet: the drawing stays put, its camera gliding on, from Parts before products to Nobody watching; The
-   platform watches itself opens on the drawing again once the platform with its domains has left (From words to data's joins.js) */
+   part that watches opens on the drawing again once the platform with its domains has left (From words to data's joins.js) */
 const CHAPTER_JOINS={glide:["along","across","products","nothing"],leave:["watch"],bare:(ctx,S,t)=>{p2_room(ctx,S,t);vign(ctx,S);}};

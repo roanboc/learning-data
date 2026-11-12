@@ -335,7 +335,8 @@ air(rd - 0.1, 1.2, 0.008, px(1700)); knock(rd + 1.2, 0.012, px(1500), 300); tap(
 chord({'vc': 39, 'va': 55, 'vn2': 58}, rd + 1.3, E('access') + 0.3, 0.45, step=0.2, att=0.8, rel=0.8)
 
 # 4. A promise the build keeps: the contract's sheet and its pin; one line of SQL changed, and the contract fails, red; the two
-#    versions pinned on the board, the date ringed and the version's pin; the three exposures set down, who uses each and who answers
+#    versions pinned on the board, the date ringed and the version's pin; the three exposures set down, who uses each and who answers;
+#    the strip "agreed team to team" and a contract pinned between each pair of teams
 kw = lambda lid, word, off=0: W('contract', lid, word, off)
 kc = lambda lid, off=0: G('contract', lid, off)
 k0 = S0('contract')
@@ -354,6 +355,10 @@ chord({'vc': 39, 'va': 55, 'vn2': 58, 'vn1': 63}, dt - 0.1, dt + 2.6, 0.5, step=
 ex = kc('exposures', -0.4)
 for i in range(3):
     paper(ex + 0.1 + 0.35 * i, 0.016 * 0.9 ** i, px([450, 960, 1450][i]), 0.35)
+# agreed team to team: the strip of paper, then a contract pinned between the data team and the team that reads, and one between it and
+# the team that sends, each as its card lands
+paper(kw('teams', 'agreed team to team') - 0.05, 0.012, 0.0, 0.35)
+pin(kw('teams', 'reads the data') + 0.5, 0.014, px(1260)); pin(kw('teams', 'sends it') + 0.5, 0.014, px(665))
 # the enterprise contract pinned, then the dbt contract beside it; the check between them, a tap as it passes, then red where they differ
 pin(kw('canonical', 'an enterprise contract') - 0.05, 0.016, px(530))
 pin(kw('architect', 'the data team') - 0.05, 0.016, px(1390))

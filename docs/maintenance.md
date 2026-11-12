@@ -22,6 +22,8 @@ Expensive frame checks still run for changed visual/timing inputs. Only producti
 
 ## Find a module, series, film, lab or assessment
 
+How visitors find them on the site, the learning route, its goals and the search, is in [navigation.md](navigation.md).
+
 Start at [the generated catalog](../modules/README.md). It has each module's portal title, each series' source directory and public route, and each film's source link. Labs and assessments link to their current English and Spanish packs. `python site-tools/catalog.py --json` also lists stable film ids, release keys and the check-tool directory.
 
 Each `modules/<id>/module.json` owns its title, description, position and series membership. The portal reads these files directly. `python site-tools/catalog.py --write` regenerates the index; `--check` validates membership, translations and the generated index. New series still declare their rendering/site configuration in `build_series.py`.

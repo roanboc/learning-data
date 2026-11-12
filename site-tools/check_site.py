@@ -47,7 +47,8 @@ What it checks, page by page (every .html under site/):
 - scenarios' lengths: in the scenarios a page shows, in English and Spanish, the right option is at most a quarter longer than the
   longest wrong one, no option is under half the longest, and the right one is clearly the longest in at most half of a page's
   scenarios, as in Pause and think. Options that only name something (every one under 25 characters) aren't compared, nor the
-  scenarios no page shows.
+  scenarios no page shows. A lab's rows of options are held to the same limits: among the rows of the labs a page shows, in each
+  pack, in English and Spanish.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
@@ -698,7 +699,8 @@ MIXED = ("const mixed=(n,s)=>{"
          "return Array.from({length:n},(_,i)=>(2*i+1)%(n|1));};")
 # A scenario's options: the right one mustn't be the one that explains everything. The limits are Pause and think's (THINK_*), read
 # on the scenarios a page shows, in English and Spanish. In the packs written before 12 November 2026, the right option was more
-# than a quarter longer than every wrong one in 85 of the 97 scenarios a page shows.
+# than a quarter longer than every wrong one in 85 of the 97 scenarios a page shows. A lab's rows of options are held to the same
+# limits: the right phrase was that much longer in 16 of the 25 rows a page shows whose options are more than names.
 SPREAD_NAMES = 25  # options that only name something, every one shorter than this, aren't compared: a name's length says nothing
 
 
@@ -866,11 +868,18 @@ def length_read(q):
     return next(x for x, (_, r) in zip(size, opts) if r), max(x for x, (_, r) in zip(size, opts) if not r), size
 
 
-def length_faults(group, shown):
+def lab_rows(P, labs):
+    """The rows of options in the labs a page shows, as length_faults() reads a scenario: P is what learn_pack() read, labs the
+    ids of the labs a page shows. Each row is named by its lab and its place there."""
+    return [{"title": f"lab {k}, row {i + 1}", "opts": row} for k, lab in P["labs"].items() if k in labs for i, row in enumerate(lab["rows"])]
+
+
+def length_faults(group, shown, what="scenarios"):
     """What gives a scenario's answer away by its length, as in Pause and think: shown is [(file, scenario)], the scenarios one
     page shows, as learn_pack() read them, and group names that page's pack in the fault about them all. The right option at most
     THINK_LONGER times the longest wrong one; no option under THINK_SHORTEST of the longest; and the right one clearly the
-    longest (by more than THINK_CLEARLY) in at most half of the page's scenarios."""
+    longest (by more than THINK_CLEARLY) in at most half of the page's scenarios. A pack's lab rows are read the same way
+    (lab_rows(), with what="lab rows")."""
     out, clearly, n = [], 0, 0
     for rel, q in shown:
         if length_read(q) is None:
@@ -883,7 +892,7 @@ def length_faults(group, shown):
             out.append(f"{rel}: \"{q['title']}\": options of {'/'.join(map(str, size))} characters: give the short ones the same detail")
         clearly += right > THINK_CLEARLY * wrong
     if clearly > -(-n // 2):
-        out.append(f"{group}: the right option is clearly the longest in {clearly} of the {n} scenarios its page shows: make the wrong ones as full")
+        out.append(f"{group}: the right option is clearly the longest in {clearly} of the {n} {what} its page shows: make the wrong ones as full")
     return out
 
 
@@ -1511,7 +1520,7 @@ def main():
             s["fails"].append(f"{rel}: an order scenario's first showing comes neither from its pack's start nor from mixed(), so it can show in order: mix it with MIXED (site-tools/check_site.py)")
     s["notes"].append(f"{len(orders)} engines show order scenarios: {sum('mixed(' in p.read_text(encoding='utf-8') for p in orders)} mix the steps with the shared line, the others take the pack's start or mix every list themselves")
 
-    s = rep.check("Scenarios: options of like length, the right one not the one that explains everything")
+    s = rep.check("Scenarios and labs' rows: options of like length, the right one not the one that explains everything")
     theirs = {k: learn_pack(p) for k, p in learn.items()}  # every pack, also those an engine mixes as it shows them: a length shows either way
     twin = lambda k: learn[k].with_name("learn.es.js")
     theirs_es = {k: learn_pack(twin(k)) for k in theirs if twin(k).exists()}
@@ -1534,10 +1543,17 @@ def main():
     lengths = defaultdict(list)
     for k, rel, mine in shows:
         lengths[k] += length_faults(rel, mine)
+    packs, rows = len(lengths), []  # a lab's rows of options: those of the labs a page shows, pack by pack
+    for k, P in theirs.items():
+        for path, X in ((learn[k], P), (twin(k), theirs_es.get(k))):
+            mine = [(path.relative_to(ROOT), row) for row in lab_rows(X, shown.get(k, set(P["labs"])))] if X else []
+            lengths[k] += length_faults(path.relative_to(ROOT), mine, "lab rows")
+            rows += [(k, row) for _, row in mine]
     for k in sorted(lengths):
         s["fails"] += lengths[k]
     compared = sum(length_read(q) is not None for _, _, mine in shows for _, q in mine)
-    s["notes"].append(f"{len(lengths)} packs, {compared} scenarios compared, in English and Spanish; a page's own scenarios only, and not options that only name something (every one under {SPREAD_NAMES} characters)")
+    s["notes"].append(f"{packs} packs, {compared} scenarios compared, in English and Spanish; a page's own scenarios only, and not options that only name something (every one under {SPREAD_NAMES} characters)")
+    s["notes"].append(f"{len({k for k, _ in rows})} packs with lab rows, {sum(length_read(row) is not None for _, row in rows)} of their {len(rows)} rows compared, in English and Spanish; the labs a page shows only")
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")

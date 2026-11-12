@@ -68,7 +68,7 @@ def catalog():
                 fs = []
                 for name in b.series_data(s)["films"]:
                     f = film(folder + "/" + name)
-                    f["url"] = s["slug"] + "/" + f["id"] + "/"
+                    f["url"] = b.film_path(s, f["id"])
                     fs.append(f)
                 learning = sorted(p.relative_to(ROOT).as_posix() for p in
                                   (ROOT / "site/assets" / s.get("learn", {}).get("dir", s["dir"])).glob("learn.*.js"))

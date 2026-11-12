@@ -72,9 +72,8 @@ ES_NAMES = {
 # the series (From words to data, In the weeds of data crafting): their films' chapter counts and Spanish chapter names come from
 # their own data (site-tools/build_series.py)
 for _f in check_site.build_series.all_films():
-    _sl = _f["series"]["slug"]
-    FILMS[f"{_sl}/{_f['key']}/"] = FILMS[f"es/{_sl}/{_f['key']}/"] = len(_f["chapters"])
-    ES_NAMES[f"es/{_sl}/{_f['key']}/"] = _f["site"]["chapters_es"]
+    FILMS[_f["path"]] = FILMS["es/" + _f["path"]] = len(_f["chapters"])
+    ES_NAMES["es/" + _f["path"]] = _f["site"]["chapters_es"]
 # Silent change as re-cut: 336.9 s, and its chapter starts
 SILENT = {"total": 336.9, "starts": {"banner": 0, "night": 29.9, "sam": 75.9, "thread": 96.7, "bronze": 124.0,
                                      "halves": 144.7, "fix": 208.1, "recover": 223.7, "contract": 257.4,

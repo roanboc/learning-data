@@ -1,0 +1,195 @@
+1
+00:00:01,400 --> 00:00:03,044
+Un toque se volvió una decisión.
+
+2
+00:00:03,744 --> 00:00:07,600
+Se abrió una clase nueva, y 140 estudiantes más tuvieron cupo.
+
+3
+00:00:08,300 --> 00:00:09,866
+La plataforma cumplió.
+
+4
+00:00:11,166 --> 00:00:16,765
+¿Por qué, una semana después, dos oficinas llevan dos cifras de la misma clase a la misma reunión?
+
+5
+00:00:24,865 --> 00:00:26,927
+Empieza con una palabra: inscrito.
+
+6
+00:00:27,627 --> 00:00:32,287
+En una oficina, con un sistema, significa una cosa. Nadie pregunta.
+
+7
+00:00:33,387 --> 00:00:34,987
+Luego la universidad crece.
+
+8
+00:00:35,687 --> 00:00:38,532
+El sistema de estudiantes cuenta a quien se inscribió.
+
+9
+00:00:39,232 --> 00:00:42,705
+La plataforma de aprendizaje cuenta a quien puede abrir el curso.
+
+10
+00:00:43,405 --> 00:00:45,490
+Finanzas cuenta a quien ya pagó.
+
+11
+00:00:46,190 --> 00:00:49,091
+Tres sistemas, tres significados, todos correctos.
+
+12
+00:00:50,591 --> 00:00:53,193
+La plataforma mueve los tres, sin una falla.
+
+13
+00:00:54,493 --> 00:00:55,773
+Suma más equipos.
+
+14
+00:00:56,473 --> 00:00:59,641
+Suma un agente de IA que responde con los mismos datos.
+
+15
+00:01:00,341 --> 00:01:04,983
+Lo que la palabra signifique ahora se repite en todas partes, a la vez, y con seguridad.
+
+16
+00:01:06,483 --> 00:01:08,506
+La plataforma nunca fue el problema.
+
+17
+00:01:09,806 --> 00:01:15,385
+Lo que cambia la respuesta es cómo trabaja la organización, qué se definió, y quién decidió.
+
+18
+00:01:19,685 --> 00:01:22,141
+¿Dónde empezar? No en la plataforma.
+
+19
+00:01:22,841 --> 00:01:23,899
+Esta es la ruta.
+
+20
+00:01:24,999 --> 00:01:28,361
+Arquitectura empresarial: ¿cómo trabaja esta organización?
+
+21
+00:01:29,061 --> 00:01:31,091
+Gobernanza de datos: ¿quién decide?
+
+22
+00:01:31,791 --> 00:01:33,482
+Esos dos son los fundamentos.
+
+23
+00:01:34,782 --> 00:01:35,722
+Y construyes.
+
+24
+00:01:36,422 --> 00:01:38,792
+Modelado de datos: ¿qué significa cada palabra?
+
+25
+00:01:39,492 --> 00:01:43,553
+Lo básico de los datos modernos: ¿cómo se mueven, corren y se sirven hoy?
+
+26
+00:01:44,253 --> 00:01:47,319
+Ingeniería analítica: ¿cómo se construye y se prueba?
+
+27
+00:01:48,019 --> 00:01:50,417
+Calidad de datos: ¿correctos y a tiempo?
+
+28
+00:01:51,517 --> 00:01:54,011
+Dos rutas laterales salen tras los fundamentos.
+
+29
+00:01:54,711 --> 00:01:56,608
+Una trata de compartir y proteger.
+
+30
+00:01:57,308 --> 00:02:00,977
+Datos maestros y de referencia: ¿es el mismo estudiante en todas partes?
+
+31
+00:02:01,677 --> 00:02:05,596
+Protección de datos y privacidad: ¿quién puede verlo, y por cuánto tiempo?
+
+32
+00:02:06,296 --> 00:02:09,523
+La otra trata de agentes: ¿qué puede hacer un agente con ello?
+
+33
+00:02:10,623 --> 00:02:12,119
+Todas se juntan al final.
+
+34
+00:02:12,819 --> 00:02:15,858
+Gestión de datos: ¿cómo encaja todo en un plan?
+
+35
+00:02:16,558 --> 00:02:20,501
+Y al final, liderar equipos de datos: ¿quién lidera a quienes hacen el trabajo?
+
+36
+00:02:24,601 --> 00:02:26,489
+Este terreno ya tiene mapas.
+
+37
+00:02:27,189 --> 00:02:31,025
+El mapa más conocido es la rueda de DAMA, con la gobernanza en el centro.
+
+38
+00:02:32,325 --> 00:02:33,636
+Cualquier buen mapa sirve.
+
+39
+00:02:34,336 --> 00:02:37,263
+Este es una ruta, porque por algún lado hay que empezar.
+
+40
+00:02:41,163 --> 00:02:44,048
+Cada parada tiene películas cortas. Mira una.
+
+41
+00:02:45,348 --> 00:02:47,115
+Deja que se detenga y te pregunte.
+
+42
+00:02:48,215 --> 00:02:49,706
+Desármala en un lab.
+
+43
+00:02:50,806 --> 00:02:52,896
+Decide tú en una situación real.
+
+44
+00:02:53,996 --> 00:02:56,444
+Elige una meta, y la ruta ilumina tus paradas.
+
+45
+00:02:57,944 --> 00:03:00,908
+O busca una palabra, y halla la película que la dice.
+
+46
+00:03:02,208 --> 00:03:04,770
+Lo que hiciste se queda contigo, en tu navegador.
+
+47
+00:03:08,670 --> 00:03:09,979
+Las plataformas maduraron.
+
+48
+00:03:10,679 --> 00:03:12,581
+Lo difícil es todo lo demás.
+
+49
+00:03:13,881 --> 00:03:14,704
+Empieza ahí.

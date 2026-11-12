@@ -158,7 +158,7 @@ import build_series  # noqa: E402
 SERIES_FILMS = build_series.all_films()
 for _S in build_series.SERIES:
     _sl, _nm = _S["slug"], _S["name"]
-    if not build_series.films(_S)[1]:
+    if not build_series.films(_S)[1] or _S.get("single"):  # a film that stands alone has no series page
         continue
     _tn = build_series.topic_of(_S["id"])["name"]
     TWINS.append(f"{_sl}/")
@@ -184,12 +184,16 @@ for _S in build_series.SERIES:
 for _f in SERIES_FILMS:
     _k, _S = _f["key"], _f["series"]; _sl, _nm = _S["slug"], _S["name"]; _tn = build_series.topic_of(_S["id"])["name"]
     for _sub in ("", "labs/", "scenarios/") if _f["labs"] else ("",):  # a film without labs and scenarios has only its Watch page
-        TWINS.append(f"{_sl}/{_k}/{_sub}")
+        TWINS.append(f"{_f['path']}{_sub}")
+        if _S.get("single"):  # a film that stands alone sits under its topic, where a series' page would be
+            CRUMBS[f"{_f['path']}{_sub}"] = (f"Topics › {_tn['en']}", ["topics/", "topics/"])
+            CRUMBS[f"es/{_f['path']}{_sub}"] = (f"Temas › {_tn['es']}", ["es/topics/", "es/topics/"])
+            continue
         CRUMBS[f"{_sl}/{_k}/{_sub}"] = (f"Topics › {_tn['en']} › {_nm['en']}", ["topics/", "topics/", f"{_sl}/"])
         CRUMBS[f"es/{_sl}/{_k}/{_sub}"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/", f"es/{_sl}/"])
     BUNDLES[f"assets/{_k}/film.js"] = f"ld-{_k}"
     COMMENT_OK.add(f"assets/{_k}/film.js")  # the shared code's comments name The Inner Life of Data as the first film
-    for _lg in ("en", "es"):
+    for _lg in ("en", "es") if _f["think"] else ():  # a film may have no Pause and think
         PACKS.add(f"assets/{_k}/think.{_lg}.js")
         if _f["labs"]:  # its questions' lab links go to its own labs; a film without labs has none (its .player data-labs is empty)
             OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"{_sl}/{_k}/labs/index.html", f"assets/{_k}/learn.{_lg}.js")

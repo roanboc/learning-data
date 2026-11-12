@@ -1,6 +1,6 @@
 # How it travels: questions and assumptions
 
-*Enterprise architecture* · *Data architecture*, film 4 of 6 · PR (to come)
+*Enterprise architecture* · *Data architecture*, film 4 of 6 · PR #363 · [pull request](https://github.com/roanboc/learning-data/pull/363)
 
 [Watch it on the site](https://data.learn-all.org/data-architecture/how-it-travels/)
 

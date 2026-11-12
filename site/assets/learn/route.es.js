@@ -117,12 +117,13 @@ window.LD_ROUTE = {
      "title": "Arquitectura de negocio para datos",
      "href": "business-architecture-for-data/",
      "poster": "what-the-business-owns-poster.jpg",
-     "kicker": "Serie · 2 de 5 películas",
-     "len": "14 min",
-     "min": 14.0,
+     "kicker": "Serie · 3 de 5 películas",
+     "len": "21 min",
+     "min": 21.0,
      "films": [
       "ld-what-the-business-owns",
-      "ld-what-the-business-needs-to-know"
+      "ld-what-the-business-needs-to-know",
+      "ld-who-creates-it-who-owns-it"
      ]
     },
     {
@@ -131,12 +132,13 @@ window.LD_ROUTE = {
      "title": "Arquitectura de datos",
      "href": "data-architecture/",
      "poster": "between-the-business-and-the-systems-poster.jpg",
-     "kicker": "Serie · 2 de 6 películas",
-     "len": "13 min",
-     "min": 13.0,
+     "kicker": "Serie · 3 de 6 películas",
+     "len": "20 min",
+     "min": 20.0,
      "films": [
       "ld-between-the-business-and-the-systems",
-      "ld-the-pyramid-taken-apart"
+      "ld-the-pyramid-taken-apart",
+      "ld-where-each-fact-is-born"
      ]
     },
     {
@@ -145,11 +147,13 @@ window.LD_ROUTE = {
      "title": "Arquitectura de plataforma y de soluciones",
      "href": "platform-and-solution-architecture/",
      "poster": "an-application-or-a-platform-poster.jpg",
-     "kicker": "Serie · 1 de 8 películas",
-     "len": "8 min",
-     "min": 8.0,
+     "kicker": "Serie · 3 de 8 películas",
+     "len": "23 min",
+     "min": 23.0,
      "films": [
-      "ld-an-application-or-a-platform"
+      "ld-an-application-or-a-platform",
+      "ld-inside-the-platform",
+      "ld-one-platform-or-many"
      ]
     },
     {
@@ -158,12 +162,13 @@ window.LD_ROUTE = {
      "title": "IA y arquitectura continua",
      "href": "ai-and-continuous-architecture/",
      "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Serie · 2 de 6 películas",
-     "len": "17 min",
-     "min": 17.0,
+     "kicker": "Serie · 3 de 6 películas",
+     "len": "24 min",
+     "min": 24.0,
      "films": [
       "ld-agents-on-the-map",
-      "ld-the-ai-platform"
+      "ld-the-ai-platform",
+      "ld-what-an-agent-may-read"
      ]
     }
    ]

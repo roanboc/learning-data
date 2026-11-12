@@ -117,12 +117,13 @@ window.LD_ROUTE = {
      "title": "Business architecture for data",
      "href": "business-architecture-for-data/",
      "poster": "what-the-business-owns-poster.jpg",
-     "kicker": "Series · 2 of 5 films",
-     "len": "14 min",
-     "min": 14.0,
+     "kicker": "Series · 3 of 5 films",
+     "len": "21 min",
+     "min": 21.0,
      "films": [
       "ld-what-the-business-owns",
-      "ld-what-the-business-needs-to-know"
+      "ld-what-the-business-needs-to-know",
+      "ld-who-creates-it-who-owns-it"
      ]
     },
     {
@@ -131,12 +132,13 @@ window.LD_ROUTE = {
      "title": "Data architecture",
      "href": "data-architecture/",
      "poster": "between-the-business-and-the-systems-poster.jpg",
-     "kicker": "Series · 2 of 6 films",
-     "len": "13 min",
-     "min": 13.0,
+     "kicker": "Series · 3 of 6 films",
+     "len": "20 min",
+     "min": 20.0,
      "films": [
       "ld-between-the-business-and-the-systems",
-      "ld-the-pyramid-taken-apart"
+      "ld-the-pyramid-taken-apart",
+      "ld-where-each-fact-is-born"
      ]
     },
     {
@@ -145,11 +147,13 @@ window.LD_ROUTE = {
      "title": "Platform and solution architecture",
      "href": "platform-and-solution-architecture/",
      "poster": "an-application-or-a-platform-poster.jpg",
-     "kicker": "Series · 1 of 8 films",
-     "len": "8 min",
-     "min": 8.0,
+     "kicker": "Series · 3 of 8 films",
+     "len": "23 min",
+     "min": 23.0,
      "films": [
-      "ld-an-application-or-a-platform"
+      "ld-an-application-or-a-platform",
+      "ld-inside-the-platform",
+      "ld-one-platform-or-many"
      ]
     },
     {
@@ -158,12 +162,13 @@ window.LD_ROUTE = {
      "title": "AI and continuous architecture",
      "href": "ai-and-continuous-architecture/",
      "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Series · 2 of 6 films",
-     "len": "17 min",
-     "min": 17.0,
+     "kicker": "Series · 3 of 6 films",
+     "len": "24 min",
+     "min": 24.0,
      "films": [
       "ld-agents-on-the-map",
-      "ld-the-ai-platform"
+      "ld-the-ai-platform",
+      "ld-what-an-agent-may-read"
      ]
     }
    ]

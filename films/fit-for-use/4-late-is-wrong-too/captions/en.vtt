@@ -198,35 +198,41 @@ dbt reads the same date there: the newest record each source saved, not when its
 00:07:01.080 --> 00:07:04.944
 One level on each: older than twenty-four hours, the check fails.
 
-00:07:06.444 --> 00:07:08.771
-Each night, the update runs that check first.
+00:07:06.444 --> 00:07:11.536
+But old records can't say why: did no file come, or did the file bring nothing new?
 
-00:07:10.071 --> 00:07:15.218
-If it fails, Sam and Malia hear at once, and the list is still built, saying its age.
+00:07:13.436 --> 00:07:20.241
+So the file's arrival is still checked, as a second alarm: no file tonight means the source has gone silent.
 
-00:07:16.718 --> 00:07:20.497
+00:07:22.541 --> 00:07:24.993
+Each night, the update runs both checks first.
+
+00:07:26.293 --> 00:07:31.616
+If either fails, Sam and Malia hear at once, and the list is still built, saying its age.
+
+00:07:33.116 --> 00:07:36.895
 That's the warning: nothing stops, and the people who need to know, know.
 
-00:07:22.397 --> 00:07:26.322
+00:07:38.795 --> 00:07:42.720
 The send to the printer is a job too. It checks the list's own age.
 
-00:07:27.822 --> 00:07:33.326
+00:07:44.220 --> 00:07:49.724
 It sends only if the check passes; if not, the list waits, and Malia is told why.
 
-00:07:35.026 --> 00:07:37.296
+00:07:51.424 --> 00:07:53.694
 The data isn't stopped. The send is.
 
-00:07:40.196 --> 00:07:46.740
+00:07:56.594 --> 00:08:03.138
 The volunteers can't stop a storm. They make sure the warning arrives in time, in words people understand.
 
-00:07:48.040 --> 00:07:54.253
+00:08:04.438 --> 00:08:10.651
 A list can't make a late file come. It can say how old it is, and the send can wait until it's fresh.
 
-00:07:55.553 --> 00:07:59.457
+00:08:11.951 --> 00:08:15.855
 Since June, no graduate has been left off a list by late data.
 
-00:08:00.957 --> 00:08:04.471
+00:08:17.355 --> 00:08:20.869
 Agree how fresh it must be, and always say how old it is.
 
-00:08:06.571 --> 00:08:12.491
+00:08:22.969 --> 00:08:28.889
 Fit for use ends here: a use, a measure, a reference and a clock. Next, Quality as a habit.

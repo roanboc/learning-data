@@ -198,35 +198,41 @@ dbt lee allí la misma fecha: el registro más nuevo que guardó cada fuente, no
 00:07:01.080 --> 00:07:04.944
 Un nivel en cada una: con más de veinticuatro horas, el control falla.
 
-00:07:06.444 --> 00:07:08.771
-Cada noche, la actualización ejecuta ese control primero.
+00:07:06.444 --> 00:07:11.536
+Pero los registros viejos no dicen por qué: ¿no llegó el archivo, o llegó sin nada nuevo?
 
-00:07:10.071 --> 00:07:15.218
-Si falla, Sam y Malia se enteran de inmediato, y la lista se construye igual, diciendo su antigüedad.
+00:07:13.436 --> 00:07:20.241
+Así que la llegada del archivo se sigue revisando, como segunda alarma: sin archivo esta noche, la fuente quedó en silencio.
 
-00:07:16.718 --> 00:07:20.497
+00:07:22.541 --> 00:07:24.993
+Cada noche, la actualización ejecuta primero ambos controles.
+
+00:07:26.293 --> 00:07:31.616
+Si alguno falla, Sam y Malia se enteran de inmediato, y la lista se construye igual, diciendo su antigüedad.
+
+00:07:33.116 --> 00:07:36.895
 Ese es el aviso: nada se detiene, y quienes necesitan saberlo, lo saben.
 
-00:07:22.397 --> 00:07:26.322
+00:07:38.795 --> 00:07:42.720
 El envío a la imprenta también es un trabajo. Revisa la antigüedad de la propia lista.
 
-00:07:27.822 --> 00:07:33.326
+00:07:44.220 --> 00:07:49.724
 Solo envía si el control pasa; si no, la lista espera, y a Malia se le dice por qué.
 
-00:07:35.026 --> 00:07:37.296
+00:07:51.424 --> 00:07:53.694
 Los datos no se detienen. El envío, sí.
 
-00:07:40.196 --> 00:07:46.740
+00:07:56.594 --> 00:08:03.138
 Los voluntarios no pueden detener una tormenta. Se aseguran de que el aviso llegue a tiempo, en palabras que la gente entiende.
 
-00:07:48.040 --> 00:07:54.253
+00:08:04.438 --> 00:08:10.651
 Una lista no puede hacer llegar un archivo atrasado. Puede decir su antigüedad, y el envío puede esperar a que esté fresca.
 
-00:07:55.553 --> 00:07:59.457
+00:08:11.951 --> 00:08:15.855
 Desde junio, ningún graduado ha quedado fuera de una lista por datos atrasados.
 
-00:08:00.957 --> 00:08:04.471
+00:08:17.355 --> 00:08:20.869
 Acuerda cuán frescos deben estar los datos, y di siempre su antigüedad.
 
-00:08:06.571 --> 00:08:12.491
+00:08:22.969 --> 00:08:28.889
 Apto para su uso termina aquí: un uso, una medida, una referencia y un reloj. Después, La calidad como hábito.

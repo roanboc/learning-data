@@ -1,0 +1,24 @@
+# What the business owns: questions and assumptions
+
+*Enterprise architecture* · *Business architecture for data*, film 1 of 5 · PR #321 · [pull request](https://github.com/roanboc/learning-data/pull/321)
+
+[Watch it on the site](https://data.learn-all.org/business-architecture-for-data/what-the-business-owns/)
+
+> Written by the film's thread on 11 and 12 November 2026, from the series' proposal the author confirmed and merged that day (PR #318). Every question below would have gone to the author, and was answered instead with the best-reasoned option, for him to review when he watches the film.
+
+| # | Question | Assumption taken | Where it shows |
+|---|---|---|---|
+| 1 | Which part of the qanat story opens the series? | Who owns what: the shareholders own the water in shares of time, the mirab keeps the turns, and the muqannis build and repair the tunnel, paid for their work, owning none of the water. The later films take the rest: what a share means (film 2), shares held and inherited, the mirab as steward (film 3), the rotation and its water clock (film 4), the rules and a qanat nobody keeps (film 5) | Chapter 1; `script.md`, *Opening story* |
+| 2 | Which share of time does the film tell? | One town's, from Paul Ward English's account of Mahan, near Kerman: fifteen shares of ninety-six minutes in a day, on a twelve-day rotation. Shares vary by region, so the narration says "in one town" and names none | Chapter 1, the bar of twelve days |
+| 3 | Do the muqannis own none of the water? | Yes, as the series' plan says: English describes them as a hereditary class of paid specialists who travel from settlement to settlement, and the water's records are the shareholders'. No source found says otherwise | Chapter 1; `script.md`, *Rigour* |
+| 4 | How long is the Qasabeh qanat? | Thirty-three kilometres, the listed complex's length (427 wells, 33,113 m). Wikipedia's *Qanat* gives 45 km for the Gonabad system as a whole; the film gives the shorter, sourced figure | Chapter 1 |
+| 5 | How are the qanat's people drawn? | As plain silhouettes with no faces, in what they wear, lit at the edge, in the series' own style; nothing borrowed from Persian art, and no Persian instrument or mode in the music | Chapter 1, chapter 9 |
+| 6 | Which customer counts? | *Day one*'s: retail's 310,000 accounts and the network's 540,000 connection points, with a third, the data team's own table, 352,000 customers merged by address in 2023 | Chapters 3 and 4 |
+| 7 | Who asks, and who decides? | Ama Owusu, the regulatory lead, who owns the utility's obligations, asks in ticket DATA-2041 and decides with the two owners: the head of retail (text only, as the series' cast has it) and Grace Achieng, who runs the network | Chapters 3 and 7 |
+| 8 | The minister in parliament: real? | Invented, like every number and person at the utility: last year's annual report and regulator's return gave different numbers, and the minister couldn't say which was true | Chapter 3 |
+| 9 | Does the report count one customer number? | No: it counts both, each by its own name, accounts as retail defines them and connection points as the network does. The merged table is retired, not fixed | Chapter 7 |
+| 10 | Which parts of BIZBOK does the film name? | Its core (capabilities, value streams, information, the organisation), the parts around it (stakeholders, products, policies, initiatives "and more") and what business architecture covers beyond data (products, partners, finance, organisation design), then the four films to come, each on the parts it draws on | Chapter 6 |
+| 11 | How much of the data practice goes on the map in film 1? | The data team as a business actor, its business services (answering data requests), tickets as their interface, and account and connection point as business objects. The glossary, owners, processes and products wait as dashed outlines for films 2 to 5 | Chapter 8 |
+| 12 | Which sound? | A consort of viols for the series, which no film on the site plays (checked on every branch, 11 November 2026); this film takes the bass viol, bowed and plucked; each later film takes other members of the consort | The soundtrack; `script.md`, *Sound* |
+| 13 | Labs for the series? | None yet: the series' lab, *Model the data practice*, comes with the platform series' last film, as the proposal plans; the Pause and think questions link to no lab | `site/assets/what-the-business-owns/think.en.js` |
+| 14 | Spanish captions: which words? | Latin American Spanish: la empresa (the utility), comercialización and quien dirige comercialización (retail and its head), punto de conexión, flujo de valor, parte interesada, objeto de negocio, accionistas (shareholders), excavadores (diggers), informe al regulador (the regulator's return) | `source/src/i18n/es/captions.js` |

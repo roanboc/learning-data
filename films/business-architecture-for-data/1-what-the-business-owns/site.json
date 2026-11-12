@@ -1,0 +1,28 @@
+{
+  "kicker": "Who owns what",
+  "kicker_es": "Quién es dueño de qué",
+  "title_es": "De qué es dueño el negocio",
+  "h1": "What the business owns: the meaning of its data",
+  "h1_es": "De qué es dueño el negocio: el significado de sus datos",
+  "lead": "A ticket asks the data team for all customers and gets three answers, each right about something. Nobody in the business ever said which one the report meant. Tomás writes down who owns what: the business owns what its data means, and the data team keeps how it's stored, moved and checked.",
+  "lead_es": "Un ticket le pide al equipo de datos todos los clientes y recibe tres respuestas, cada una correcta en algo. Nadie en el negocio dijo cuál quería el informe. Tomás escribe quién es dueño de qué: el negocio, de lo que significan sus datos; el equipo de datos, de cómo se guardan, mueven y verifican.",
+  "description": "A film about what the business owns about its data, the opening film of Business architecture for data: a request for all customers that gets three answers (billing's accounts, the network's connection points and the data team's own table, which merged them by address); why the data team can't fix its way out by picking one; what the business owns (what its data means, who creates it, the rules on it, the quality it needs and the decisions it serves) and what the data team owns (how it's stored, moved and checked); the parts of business architecture in the BIZBOK Guide and the ones that matter for data; and the data practice drawn on the map like any part of the business. Told with the qanats of Iran, whose shareholders own the water and whose diggers keep the channel.",
+  "description_es": "Una película sobre lo que pertenece al negocio en sus datos, la primera de Arquitectura de negocio para datos: un pedido de todos los clientes que recibe tres respuestas (las cuentas de facturación, los puntos de conexión de la red y la propia tabla del equipo de datos, que los fusionó por dirección); por qué el equipo de datos no puede salir de ahí eligiendo una; de qué es dueño el negocio (lo que significan sus datos, quién los crea, sus reglas, la calidad que necesitan y las decisiones a las que sirven) y de qué el equipo de datos (cómo se guardan, se mueven y se verifican); las partes de la arquitectura de negocio en la guía BIZBOK y las que importan para los datos; y la práctica de datos dibujada en el mapa como cualquier parte del negocio. Contada con los qanats de Irán, cuyos accionistas son dueños del agua y cuyos excavadores mantienen el canal.",
+  "card": "Three answers to one request. The business owns what its data means; the data team keeps the channel.",
+  "card_es": "Tres respuestas a un mismo pedido. El negocio es dueño de lo que significan sus datos; el equipo de datos mantiene el canal.",
+  "chapters_es": {
+    "water": "Agua bajo el desierto",
+    "map": "El mapa de Tomás",
+    "three": "Tres respuestas",
+    "whose": "¿De quién es el significado?",
+    "owns": "Quién es dueño de qué",
+    "parts": "Solo lo que necesitan los datos",
+    "answer": "Responden los dueños",
+    "practice": "La práctica de datos en el mapa",
+    "end": "El agua y el canal"
+  },
+  "next_h": "Next: the concepts behind each capability, in the business's own words.",
+  "next_h_es": "Lo que sigue: los conceptos detrás de cada capacidad, en palabras del negocio.",
+  "past": ["The qanats of Iran: shareholders and diggers", "The shareholders own the water and its rules; the diggers keep the channel."],
+  "past_es": ["Los qanats de Irán: accionistas y excavadores", "Los accionistas son dueños del agua y de sus reglas; los excavadores mantienen el canal."]
+}

@@ -30,251 +30,260 @@ So every banker who knows them, and his family, is in danger.
 00:00:46.873 --> 00:00:50.729
 The vault has to stay shut, even to the man who knows the numbers.
 
-00:00:53.029 --> 00:00:58.719
+00:00:53.629 --> 00:00:59.319
 In Rochester, New York, a lock maker, James Sargent, builds clocks into a vault's lock.
 
-00:01:00.219 --> 00:01:02.972
+00:01:00.819 --> 00:01:03.572
 Each evening, the bank sets the hour it may open.
 
-00:01:04.272 --> 00:01:08.207
+00:01:04.872 --> 00:01:08.807
 Until that hour, no one can open it, even with the right numbers.
 
-00:01:09.907 --> 00:01:15.428
+00:01:10.507 --> 00:01:16.028
 In May 1874, the first is fitted to a bank's vault, in Morrison, Illinois.
 
-00:01:16.928 --> 00:01:25.316
+00:01:17.528 --> 00:01:25.916
 One Friday night in May 1875, in Great Barrington, Massachusetts, eight robbers hold the Deland family at home,
 
-00:01:25.516 --> 00:01:28.724
+00:01:26.116 --> 00:01:29.324
 and take Fred Deland, who knows the numbers, to his bank.
 
-00:01:30.224 --> 00:01:33.734
+00:01:30.824 --> 00:01:34.334
 He turns the dial, but the bolts that hold the door won't move:
 
-00:01:33.934 --> 00:01:37.084
+00:01:34.534 --> 00:01:37.684
 the new time lock, put on three days before, holds them.
 
-00:01:38.984 --> 00:01:42.954
+00:01:39.584 --> 00:01:43.554
 The robbers take a few bonds from a desk, and flee; the vault stays shut.
 
-00:01:44.654 --> 00:01:47.860
+00:01:45.254 --> 00:01:48.460
 Now, taking a banker from his home at night opens nothing.
 
-00:01:49.560 --> 00:01:53.292
+00:01:50.160 --> 00:01:53.892
 Sargent's lock sells in the thousands, and banks soon expect one.
 
-00:01:54.792 --> 00:01:57.692
+00:01:55.392 --> 00:01:58.292
 The university's platform has the same problem.
 
-00:01:58.992 --> 00:02:04.141
+00:01:59.592 --> 00:02:04.741
 Sam's and Jun's everyday accounts hold its greatest power, every hour of every day.
 
-00:02:05.841 --> 00:02:08.401
+00:02:06.441 --> 00:02:09.001
 Whoever takes one of those accounts takes all of it.
 
-00:02:09.901 --> 00:02:13.622
+00:02:10.501 --> 00:02:14.222
 It needs what the bank had: great power, shut until it's needed.
 
-00:02:20.722 --> 00:02:23.496
+00:02:21.322 --> 00:02:24.096
 Most work on the platform goes through the catalog.
 
-00:02:24.796 --> 00:02:30.311
+00:02:25.396 --> 00:02:30.911
 It checks every request, and shows each person what their role allows, masked where it must be.
 
-00:02:32.011 --> 00:02:33.606
+00:02:32.611 --> 00:02:34.206
 Some work can't go through it.
 
-00:02:34.706 --> 00:02:37.265
+00:02:35.306 --> 00:02:37.865
 The storage: the files under every table.
 
-00:02:38.765 --> 00:02:44.110
+00:02:39.365 --> 00:02:44.710
 There, no mask and no filter applies: every name and every date of birth, in the clear.
 
-00:02:45.810 --> 00:02:48.503
+00:02:46.410 --> 00:02:49.103
 Walls, doors and keys shut that back door.
 
-00:02:50.003 --> 00:02:54.891
+00:02:50.603 --> 00:02:55.491
 The admin settings: what the whole platform allows, such as who may sign in, and how.
 
-00:02:56.591 --> 00:03:01.108
+00:02:57.191 --> 00:03:01.708
 And restoring a table: putting it back as it was, over everyone's work since.
 
-00:03:02.808 --> 00:03:04.424
+00:03:03.408 --> 00:03:05.024
 That's great power over data.
 
-00:03:05.924 --> 00:03:13.315
+00:03:06.524 --> 00:03:13.915
 In data governance, the platform team are its keepers: they keep the platform running, and don't decide what the data means.
 
-00:03:14.815 --> 00:03:18.803
+00:03:15.415 --> 00:03:19.403
 Until now, that power sat in Sam's and Jun's everyday accounts:
 
-00:03:19.003 --> 00:03:22.542
+00:03:19.603 --> 00:03:23.142
 the same accounts that open their email, and every link in it.
 
-00:03:24.242 --> 00:03:28.354
+00:03:24.842 --> 00:03:28.954
 Some had gone to others too, each for one task, and never come back.
 
-00:03:31.254 --> 00:03:36.255
+00:03:31.854 --> 00:03:36.855
 So each data specialist gets a second account, of their own: an admin account.
 
-00:03:37.955 --> 00:03:39.241
+00:03:38.555 --> 00:03:39.841
 Jun's is his alone.
 
-00:03:40.341 --> 00:03:43.527
+00:03:40.941 --> 00:03:44.127
 It's never shared, and never used for email or the web.
 
-00:03:45.027 --> 00:03:48.417
+00:03:45.627 --> 00:03:49.017
 It signs in only with a passkey, and only for a task.
 
-00:03:49.917 --> 00:03:55.861
+00:03:50.517 --> 00:03:56.461
 His everyday account keeps his daily work: writing code, testing it, watching the jobs run.
 
-00:03:57.561 --> 00:03:58.843
+00:03:58.161 --> 00:03:59.443
 And the admin account?
 
-00:03:59.943 --> 00:04:02.528
+00:04:00.543 --> 00:04:03.128
 It has no power either, until it's switched on.
 
-00:04:04.228 --> 00:04:05.493
+00:04:04.828 --> 00:04:06.093
 That makes two locks.
 
-00:04:06.593 --> 00:04:10.130
+00:04:07.193 --> 00:04:10.730
 A stolen everyday sign-in doesn't reach the admin account.
 
-00:04:11.830 --> 00:04:16.716
+00:04:12.430 --> 00:04:17.316
 And whoever steals the admin account finds its power off, and can't switch it on alone.
 
-00:04:20.816 --> 00:04:22.928
+00:04:19.016 --> 00:04:23.322
+A second account isn't always practical: it can cost a second licence.
+
+00:04:24.822 --> 00:04:30.398
+In that case, the power stays in the everyday account, but switched off, until a task needs it.
+
+00:04:31.898 --> 00:04:36.227
+That's one lock, not two: still far safer than power that's always on.
+
+00:04:40.527 --> 00:04:42.639
 To switch it on, Jun says what for.
 
-00:04:24.228 --> 00:04:30.198
+00:04:43.939 --> 00:04:49.909
 Which power: only the one the task needs, to read the storage, change the settings, or restore a table.
 
-00:04:32.098 --> 00:04:34.429
+00:04:51.809 --> 00:04:54.140
 A reason, in words someone else can check.
 
-00:04:35.929 --> 00:04:39.111
+00:04:55.640 --> 00:04:58.822
 And a time: what the task needs, four hours at most.
 
-00:04:40.611 --> 00:04:46.977
+00:05:00.322 --> 00:05:06.688
 Another specialist approves: Sam approves Jun's, Jun approves Sam's, and no one approves their own.
 
-00:04:48.877 --> 00:04:51.876
+00:05:08.588 --> 00:05:11.587
 The moment it's on, the platform team gets an alert.
 
-00:04:53.976 --> 00:04:57.833
+00:05:13.687 --> 00:05:17.544
 Everything the admin account does is recorded, under its own name.
 
-00:04:59.333 --> 00:05:05.245
+00:05:19.044 --> 00:05:24.956
 When the time is up, the power switches off by itself; or Jun switches it off as soon as he's done.
 
-00:05:06.945 --> 00:05:10.532
+00:05:26.656 --> 00:05:30.243
 A time lock opened at its hour, for whoever had the numbers.
 
-00:05:12.432 --> 00:05:16.693
+00:05:32.143 --> 00:05:36.404
 This power opens only for a task, and only when someone else says yes.
 
-00:05:18.393 --> 00:05:24.074
+00:05:38.104 --> 00:05:43.785
 Like the first bankers with a time lock, Sam and Jun find it slow at first: it keeps them out too.
 
-00:05:25.774 --> 00:05:27.364
+00:05:45.485 --> 00:05:47.075
 It costs a minute, and a yes.
 
-00:05:30.864 --> 00:05:33.345
+00:05:50.575 --> 00:05:53.056
 One morning, the two o'clock load has stopped.
 
-00:05:34.645 --> 00:05:39.100
+00:05:54.356 --> 00:05:58.811
 It met a row it couldn't read, in last night's file from the registrar's office.
 
-00:05:40.600 --> 00:05:43.893
+00:06:00.311 --> 00:06:03.604
 To find it, Jun must open that file, in the storage.
 
-00:05:44.993 --> 00:05:47.807
+00:06:04.704 --> 00:06:07.518
 His everyday account can't: the back door is shut.
 
-00:05:49.307 --> 00:05:53.774
+00:06:09.018 --> 00:06:13.485
 So he switches on his admin account's power to read the storage, for one hour.
 
-00:05:55.274 --> 00:05:57.645
+00:06:14.985 --> 00:06:17.356
 His reason: open last night's file.
 
-00:05:58.745 --> 00:06:00.345
+00:06:18.456 --> 00:06:20.056
 Sam reads it, and approves.
 
-00:06:02.245 --> 00:06:06.028
+00:06:21.956 --> 00:06:25.739
 The alert reaches the platform team, and matches the morning's task.
 
-00:06:07.528 --> 00:06:13.385
+00:06:27.239 --> 00:06:33.096
 Jun opens the file, and goes straight to the row, number 9,317.
 
-00:06:14.685 --> 00:06:18.396
+00:06:34.396 --> 00:06:38.107
 A date of birth that doesn't exist: the thirty-first of February.
 
-00:06:20.096 --> 00:06:25.489
+00:06:39.807 --> 00:06:45.200
 He tells the registrar's office which record to fix, by its student number, and switches off:
 
-00:06:25.689 --> 00:06:27.299
+00:06:45.400 --> 00:06:47.010
 fourteen minutes of his hour.
 
-00:06:29.399 --> 00:06:34.654
+00:06:49.110 --> 00:06:54.365
 The record keeps it all: who switched on, why, who said yes, what was read, and when it ended.
 
-00:06:36.354 --> 00:06:38.000
+00:06:56.065 --> 00:06:57.711
 That night, the load runs clean.
 
-00:06:39.500 --> 00:06:44.200
+00:06:59.211 --> 00:07:03.911
 And Jun asks what every switch-on is worth asking: could the next one be avoided?
 
-00:06:45.700 --> 00:06:52.589
+00:07:05.411 --> 00:07:12.300
 Now the load sets a row it can't read aside, in a table the catalog guards, for the registrar's office to see.
 
-00:06:54.889 --> 00:06:56.439
+00:07:14.600 --> 00:07:16.150
 Who gets an admin account?
 
-00:06:57.539 --> 00:07:02.105
+00:07:17.250 --> 00:07:21.816
 Only the data specialists who keep the platform running: here, Sam and Jun.
 
-00:07:03.605 --> 00:07:07.672
+00:07:23.316 --> 00:07:27.383
 Never business users, like Mei Tanaka in the registrar's office.
 
-00:07:08.972 --> 00:07:11.898
+00:07:28.683 --> 00:07:31.609
 Never analysts, like Clara Jensen in Planning.
 
-00:07:13.198 --> 00:07:17.825
+00:07:32.909 --> 00:07:37.536
 Their work goes through the catalog, which shows each of them what their role allows.
 
-00:07:19.325 --> 00:07:23.813
+00:07:39.036 --> 00:07:43.524
 If they need more, they ask the data's owner for access, not for power.
 
-00:07:25.513 --> 00:07:26.786
+00:07:45.224 --> 00:07:46.497
 And never an agent.
 
-00:07:27.886 --> 00:07:34.532
+00:07:47.597 --> 00:07:54.243
 An agent can propose a task that needs power; a person decides, and does it with their own admin account.
 
-00:07:36.232 --> 00:07:39.971
+00:07:55.943 --> 00:07:59.682
 AI agents in data work shows how agents get their rights.
 
-00:07:41.271 --> 00:07:46.275
+00:08:00.982 --> 00:08:05.986
 One exception: two emergency accounts, locked away for the day nothing else works.
 
-00:07:47.775 --> 00:07:49.523
+00:08:07.486 --> 00:08:09.234
 Who did what shows how they're watched.
 
-00:07:53.223 --> 00:07:58.702
+00:08:12.934 --> 00:08:18.413
 In Great Barrington, in 1875, the right numbers, from the right man, weren't enough:
 
-00:07:58.902 --> 00:08:00.778
+00:08:18.613 --> 00:08:20.489
 the vault opened only at its hour.
 
-00:08:02.678 --> 00:08:05.597
+00:08:22.389 --> 00:08:25.308
 On the platform, the right account isn't enough either.
 
-00:08:07.097 --> 00:08:11.472
+00:08:26.808 --> 00:08:31.183
 Its power is off, until it's switched on for a task, and someone else says yes.
 
-00:08:13.172 --> 00:08:17.867
+00:08:32.883 --> 00:08:37.578
 Whoever takes Jun's everyday account gets his everyday work, and nothing more.
 
-00:08:19.567 --> 00:08:22.906
+00:08:39.278 --> 00:08:42.617
 Great power is a separate account, switched on for a task.

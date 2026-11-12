@@ -353,7 +353,8 @@ sq((D3, A3, Fs4), T_turn + 1.5, key=0.8, g=0.6, vel=0.35)
 # 4. A second account. The admin accounts laid down (Jun's, then Sam's); never for email or the web (a tap, then the cross); a passkey
 #    (its sealed card, and a tap for its chip); his daily work (three knocks); the power leaving the everyday accounts, and the admin
 #    accounts' dashed lines to it; "Off". Two locks (two thuds); the stolen everyday sign-in stops at the first (its tag lands, the lock
-#    holds), the stolen admin account at the second; someone else's yes. The turn: B, D, E and G over D, held open
+#    holds), the stolen admin account at the second; someone else's yes. Then one account, where a second isn't practical: its power
+#    off, and one lock. The turn: B, D, E and G over D, held open
 sw2 = lambda lid, word, off=0: W('second', lid, word, off)
 sc2 = lambda lid, off=0: G('second', lid, off)
 T_second = sw2('gets', 'a second account')
@@ -373,7 +374,14 @@ T_stolen, T_steals = sc2('stolen'), sc2('steals')
 knock(T_stolen + 0.7, 0.012, px(980), 230); thud(T_stolen + 1.4, 0.011, px(1075))
 knock(T_steals + 0.8, 0.012, px(1450), 230); thud(sw2('steals', 'finds its power off', 0.05), 0.011, px(1545))
 knock(sw2('steals', "can't switch it on alone", -0.15), 0.012, px(1650), 220)
-tune([(0, B3, G2, 1), (1, D4, None, 1), (2, E4, C3, 1), (3, G4, D3, 1.6)], END('second', 'steals') + 0.3, 0.65, g=0.78)
+# where a second account isn't practical: a note under the admin accounts, "Can cost a second licence" (a knock); a third account laid
+# down, the only one its owner has (paper); its way to its power drawn on (air); "Off" (a knock); and its one lock (a thud)
+knock(sw2('licence', 'a second licence', -0.15), 0.011, px(1310), 240)
+paper(sc2('stays', -0.2), 0.011, px(840))
+air(sw2('stays', 'the power stays', 0.2), 0.8, 0.005, px(1310))
+knock(sw2('stays', 'switched off', 0.05), 0.011, px(1725), 220)
+thud(sw2('onelock', 'one lock', -0.1), 0.012, px(1545))
+tune([(0, B3, G2, 1), (1, D4, None, 1), (2, E4, C3, 1), (3, G4, D3, 1.6)], END('second', 'onelock') + 0.3, 0.65, g=0.78)
 
 # 5. Switched on for a task. The room makes way (air); what for: the card, and the admin account's line to it; which power, each glowing
 #    as it's named (a tap), and the one the task needs carried into the card; a reason, a time (its day filling); Sam's line and his
@@ -495,7 +503,7 @@ tap(T_notp - 0.55, 0.010, px(430)); knock(T_notp - 0.15, 0.011, px(500), 260)
 T_agent = hc_('agent')
 air(T_agent - 0.2, 1.2, 0.005, px(1700)); knock(T_agent + 0.45, 0.011, px(1640), 220)
 T_prop = hw_('propose', 'propose a task')
-paper(T_prop - 0.25, 0.011, px(1400)); air(T_prop, 1.4, 0.004, px(1250))
+paper(T_prop - 0.25, 0.011, px(1310)); air(T_prop, 1.4, 0.004, px(1300))
 tap(hw_('propose', 'a person decides', 0.05), 0.010, px(1430))
 switch(hw_('propose', 'their own admin account', 0.05), 0.010, px(1500))
 paper(hc_('rights', -0.15), 0.011, px(1410))

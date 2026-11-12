@@ -475,11 +475,13 @@ const NARR={
  {"id":"clone","gap":0.8,"text":"Azure Databricks refuses to clone a table its policies cover, for anyone they cover."},
  {"id":"exempt","gap":0.8,"text":"Cloned by someone they leave out, it would hold every real name, and no column's class, so no policy would match it."},
  {"id":"masked","gap":0.8,"text":"A masked copy is possible, but it's still about real people, and a column nobody has classed yet goes through as it is."},
- {"id":"madeup","gap":0.8,"text":"So development and test get made-up learners, and none of them is anyone."},
+ {"id":"madeup","gap":0.8,"text":"So, wherever they can, development and test get made-up learners, and none of them is anyone."},
  {"id":"script","gap":0.8,"text":"For size, a script writes 2,614 of them, with production's columns and their classes.","say":"For size, a script writes two thousand, six hundred and fourteen of them, with production's columns and their classes."},
+ {"id":"easy","gap":0.8,"text":"That's synthetic data, and it's easy to write now."},
+ {"id":"harder","gap":0.8,"text":"How closely it should follow the real records, gaps and odd cases included, is the harder question, and still an open one."},
  {"id":"unit","gap":0.8,"text":"dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.","say":"dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than ten."},
  {"id":"never","gap":0.8,"text":"dbt's clone and sample bring production's rows in, so they're never used on tables about people."},
- {"id":"lascaux","gap":0.8,"text":"Like Lascaux II, they're true to the learners, and not one is real.","say":"Like Lascaux Two, they're true to the learners, and not one is real."},
+ {"id":"lascaux","gap":0.8,"text":"Like Lascaux II, they stand in for the learners, and not one is real.","say":"Like Lascaux Two, they stand in for the learners, and not one is real."},
  {"id":"runs","gap":0.8,"text":"Jun's change runs on 2,614 of them, and no record leaves production.","say":"Jun's change runs on two thousand, six hundred and fourteen of them, and no record leaves production."}
 ]},
 "share":{"name":"Protected before it leaves","lead":0.8,"tail":1.0,"vo":[
@@ -525,7 +527,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/air": 5.166, "cave/algae": 6.667, "cave/lost": 5.97, "cave/change": 3.751, "cave/closed": 5.751, "cave/copy": 6.184, "cave/paint": 5.953, "cave/opens": 5.299, "cave/millions": 3.251, "cave/rests": 5.139, "cave/records": 3.165, "cave/copies": 6.382, "cave/rules": 5.791, "home/kept": 3.788, "home/classes": 5.987, "home/policy": 5.412, "home/inside": 7.386, "home/catalog": 4.37, "home/leave": 3.995, "home/wrote": 4.029, "home/four": 2.072, "madeup/day": 1.829, "madeup/jun": 6.209, "madeup/ask": 4.983, "madeup/clone": 5.191, "madeup/exempt": 6.673, "madeup/masked": 7.43, "madeup/madeup": 4.035, "madeup/script": 6.853, "madeup/unit": 9.137, "madeup/never": 5.946, "madeup/lascaux": 3.457, "madeup/runs": 6.084, "share/day": 1.742, "share/hospital": 7.506, "share/agreement": 9.208, "share/opensharing": 6.022, "share/travel": 2.961, "share/why": 6.924, "share/every": 3.268, "share/totals": 6.558, "share/ends": 8.239, "room/harder": 6.083, "room/both": 7.689, "room/cleanroom": 6.689, "room/view": 6.938, "room/code": 6.238, "room/approve": 8.878, "room/hides": 7.694, "room/runs": 5.779, "room/answer": 5.065, "room/lascaux": 5.045, "out/day": 1.661, "out/elena": 7.17, "out/file": 5.061, "out/switches": 4.826, "out/ways": 5.793, "out/code": 5.998, "out/network": 7.636, "out/photo": 4.807, "out/clean": 4.13, "out/lascaux": 3.076, "kept/seen": 3.982, "kept/four": 2.122, "kept/each": 7.33, "kept/idea": 2.688};
+const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/air": 5.166, "cave/algae": 6.667, "cave/lost": 5.97, "cave/change": 3.751, "cave/closed": 5.751, "cave/copy": 6.184, "cave/paint": 5.953, "cave/opens": 5.299, "cave/millions": 3.251, "cave/rests": 5.139, "cave/records": 3.165, "cave/copies": 6.382, "cave/rules": 5.791, "home/kept": 3.788, "home/classes": 5.987, "home/policy": 5.412, "home/inside": 7.386, "home/catalog": 4.37, "home/leave": 3.995, "home/wrote": 4.029, "home/four": 2.072, "madeup/day": 1.829, "madeup/jun": 6.209, "madeup/ask": 4.983, "madeup/clone": 5.191, "madeup/exempt": 6.673, "madeup/masked": 7.43, "madeup/madeup": 5.599, "madeup/script": 6.853, "madeup/easy": 2.768, "madeup/harder": 7.55, "madeup/unit": 9.137, "madeup/never": 5.946, "madeup/lascaux": 3.829, "madeup/runs": 6.084, "share/day": 1.742, "share/hospital": 7.506, "share/agreement": 9.208, "share/opensharing": 6.022, "share/travel": 2.961, "share/why": 6.924, "share/every": 3.268, "share/totals": 6.558, "share/ends": 8.239, "room/harder": 6.083, "room/both": 7.689, "room/cleanroom": 6.689, "room/view": 6.938, "room/code": 6.238, "room/approve": 8.878, "room/hides": 7.694, "room/runs": 5.779, "room/answer": 5.065, "room/lascaux": 5.045, "out/day": 1.661, "out/elena": 7.17, "out/file": 5.061, "out/switches": 4.826, "out/ways": 5.793, "out/code": 5.998, "out/network": 7.636, "out/photo": 4.807, "out/clean": 4.13, "out/lascaux": 3.076, "kept/seen": 3.982, "kept/four": 2.122, "kept/each": 7.33, "kept/idea": 2.688};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -533,7 +535,7 @@ const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/
 const BREATH={
 "cave":{"hold":{"place":0.6,"cave":0.8,"crowd":0.6,"air":0.6,"algae":1.0,"lost":0.8,"change":1.2,"closed":1.2,"copy":0.6,"paint":1.0,"opens":1.4,"millions":0.6,"rests":1.4,"records":0.4,"copies":0.6},"breathe":4.4},
 "home":{"hold":{"kept":0.8,"classes":1.0,"policy":1.2,"inside":1.4,"catalog":1.0,"leave":1.4,"wrote":1.2,"four":0.6}},
-"madeup":{"hold":{"day":0.4,"jun":0.6,"ask":0.8,"clone":0.8,"exempt":1.2,"masked":1.0,"madeup":0.8,"script":0.6,"unit":1.0,"never":0.8,"lascaux":1.0}},
+"madeup":{"hold":{"day":0.4,"jun":0.6,"ask":0.8,"clone":0.8,"exempt":1.2,"masked":1.0,"madeup":0.8,"script":0.6,"easy":0.6,"harder":1.0,"unit":1.0,"never":0.8,"lascaux":1.0}},
 "share":{"hold":{"day":0.4,"hospital":0.6,"agreement":1.0,"opensharing":0.6,"travel":0.6,"why":0.8,"every":1.2,"totals":1.0}},
 "room":{"hold":{"harder":1.0,"both":1.0,"cleanroom":1.0,"view":1.0,"code":0.8,"approve":1.0,"hides":1.2,"runs":1.0,"answer":1.0}},
 "out":{"hold":{"day":0.4,"elena":0.6,"file":1.0,"switches":0.4,"ways":0.8,"code":0.8,"network":0.6,"photo":1.0,"clean":0.8}},
@@ -2232,7 +2234,8 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
 scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   const tRefuses=A("clone","refuses"),tReal=A("exempt","every real name"),tNoCls=A("exempt","no column's class"),tPeople=A("masked","real people"),tAsIs=A("masked","as it is"),
     tNone=A("madeup","none of them"),tSize=A("script","For size"),tCols=A("script","columns"),tFewer=A("unit","fewer than ten"),tGiven=A("unit","if nine"),
-    tClone=A("never","clone"),tSample=A("never","sample"),tNever=A("never","never used"),tReal2=A("lascaux","not one is real"),tNoRec=A("runs","no record");
+    tClone=A("never","clone"),tSample=A("never","sample"),tNever=A("never","never used"),tReal2=A("lascaux","not one is real"),tNoRec=A("runs","no record"),
+    tSynth=A("easy","synthetic data"),tClose=A("harder","How closely"),tGaps=A("harder","gaps"),tOdd=A("harder","odd cases"),tOpen=A("harder","open");
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"cpHall",keys:[[0,960,540,1.0]],push:0.015,draw:(x,tt)=>{
     cp_figure(x,"jun",1640,612,0.95,tt,cp_io(tt,c.jun-0.3,sc.dur-1.6,0.7),{flip:true});
     cp_who(x,1500,240,"Jun Park","Analytics engineer",{align:"right",a:cp_io(tt,c.jun+0.4,c.clone-0.45)});
@@ -2252,14 +2255,20 @@ scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
       rows:[{c:"student_number",v:"***",vc:"violet",cls:"direct"},{c:"name",v:"***",vc:"violet",cls:"direct"},{c:"date_of_birth",v:"1987",cls:"indirect"},{c:"notes",v:"Extra time: anxiety",vc:"coral"}]});
     cp_tag(x,1010,300,"Still about real people","grey",{a:ma*ag_in(tt,tPeople,0.4)});
     cp_tag(x,420,640,"Not classed yet: shown as it is","coral",{a:ma*ag_in(tt,tAsIs,0.4),to:[640,560],p:cp_lin(tt,tAsIs+0.2,0.5)});
-    // made-up learners: true to the real ones, and none of them is anyone
+    // made-up learners, wherever development and test can use them: none of them is anyone
     const da=cp_io(tt,c.madeup,c.script-0.3,0.5);
     cp_record(x,90,250,{name:"dev.core_learner_v1",rows:CP_MADE.map(r=>({c:r[0],v:r[1],cls:r[2]})),w:900,cw:262,col:"green",a:da,k:ag_spr(tt,c.madeup,0.7)});
     cp_tag(x,90,680,"Made up: none of them is anyone","green",{a:da*ag_in(tt,tNone,0.4)});
     // the script that writes them, in the registrar's bundle
     const ga=cp_io(tt,c.script+0.2,c.unit-0.5,0.5);if(ga>0){const bx=dp_page(x,90,230,1260,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar/tests/made_up_learners.py",a:ga});
       cp_code(x,bx.x,bx.y+44,["learners = make_learners(2614)","columns  = like(\"core_learner_v1\")","classes  = like(\"core_learner_v1\")"],
-        {a:ga,w:1180,hi:tt<tCols?[0,ag_in(tt,tSize,0.4)]:[1,ag_in(tt,tCols,0.4)]});}
+        {a:ga,w:1180,hi:tt<tCols?[0,ag_in(tt,tSize,0.4)]:[1,ag_in(tt,tCols,0.4)]});
+      // synthetic data is easy to write now; how closely it should follow the real records is the harder question, and an open one
+      // (the author, 12 November 2026)
+      cp_tag(x,90,676,"Synthetic data: easy to write now","green",{a:ga*ag_in(tt,tSynth,0.4)});
+      let gx=90+cp_tag(x,90,764,"How close to the real records?","grey",{a:ga*ag_in(tt,tClose,0.4)})+24;
+      gx+=dp_pill(x,gx,805,"gaps","grey",{a:ga*ag_in(tt,tGaps,0.4)})+14;gx+=dp_pill(x,gx,805,"odd cases","grey",{a:ga*ag_in(tt,tOdd,0.4)})+24;
+      cp_tag(x,gx,764,"Still an open question","grey",{a:ga*ag_in(tt,tOpen,0.4)});}
     // dbt's unit test, on rows written for it
     const ua=cp_io(tt,c.unit,c.lascaux-0.5,0.5);if(ua>0){const bx=dp_page(x,90,230,1260,420,{tool:"dbt",name:"dbt",where:"unit test",title:"small_counts_hidden",a:ua*(1-0.55*ag_in(tt,c.never,0.6))});
       cp_code(x,bx.x,bx.y+44,["model:  left_after_first_year","given:  9 learners leave Midwifery","expect: Midwifery, fewer than 10"],{a:ua*(1-0.55*ag_in(tt,c.never,0.6)),w:1180,hi:[1,ag_in(tt,tGiven,0.4)]});

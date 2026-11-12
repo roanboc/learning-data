@@ -42,10 +42,10 @@
       "films/inner-life-of-data/source/fonts"
     ],
     "legibility": {
-      "texts": 291,
+      "texts": 296,
       "under_28": "0%",
       "under_20": 0,
-      "median": 28.4,
+      "median": 28.3,
       "status": "Drawn to the rule"
     }
   }

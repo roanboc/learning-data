@@ -243,7 +243,8 @@ for i, x_ in enumerate((560, 1360, 560, 1360)):
 chord((A3, D4), tFour + 0.1, 0.6)
 
 # 3. Made up, for building: A at the turn; Jun's cards; the clone page, refused; the clone someone left out would make, coral; a masked
-#    copy, still about real people; made-up learners: the mark's shape from other notes; the script, the unit test passed; dbt's clone
+#    copy, still about real people; made-up learners: the mark's shape from other notes; the script; synthetic data, easy to write, and
+#    the open question of how close to the real records (three taps and a tag set down, no music); the unit test passed; dbt's clone
 #    and sample struck through; like Lascaux II: the shape again; Jun's change runs on them
 mw = lambda lid, word, off=0: W('madeup', lid, word, off)
 mc = lambda lid, off=0: G('madeup', lid, off)
@@ -262,6 +263,9 @@ strike(MADE, mc('madeup', 0.5), 0.75, px(540))
 tap(mw('madeup', 'none of them', 0.05), 0.006, px(420))
 glass(mc('script', 0.25), 0.012, px(720))
 tap(mw('script', 'For size', 0.05), 0.006, px(720)); tap(mw('script', 'columns', 0.05), 0.006, px(720))
+tap(mw('easy', 'synthetic data', 0.05), 0.006, px(360))
+glass(mw('harder', 'How closely', 0.05), 0.010, px(360))
+tap(mw('harder', 'gaps', 0.05), 0.006, px(760)); tap(mw('harder', 'open', 0.05), 0.006, px(1160))
 glass(mc('unit', 0.05), 0.012, px(720))
 tap(mw('unit', 'if nine', 0.05), 0.006, px(720)); tap(mw('unit', 'fewer than ten', 0.1), 0.007, px(1200))
 glass(mw('never', 'clone', 0.05), 0.010, px(250)); glass(mw('never', 'sample', 0.05), 0.010, px(640))

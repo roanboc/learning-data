@@ -30,13 +30,13 @@ const NARR={
  {"id":"uni","gap":0.8,"text":"Data piles up the same way: at the university, the platform keeps every record with no end date, because nobody has decided."},
  {"id":"end","gap":0.8,"text":"Like the schedules of 1943, each kind of record can have its end date, decided before it's needed.","say":"Like the schedules of nineteen forty-three, each kind of record can have its end date, decided before it's needed."}
 ]},
-"lives":{"name":"Three lives of a record","lead":0.9,"tail":1.0,"vo":[
+"lives":{"name":"Three stages of a record","lead":0.9,"tail":1.0,"vo":[
  {"id":"oct","gap":0.8,"text":"October 2026.","say":"October, twenty twenty-six."},
  {"id":"look","gap":0.8,"text":"Ingrid Holm, who owns HR's records, looks at what the platform holds, with Yusuf Demir from data governance."},
  {"id":"pay","gap":0.8,"text":"Pay records going back to 2016, and applications from people never hired, back to 2017.","say":"Pay records going back to twenty sixteen, and applications from people never hired, back to twenty seventeen."},
  {"id":"never","gap":0.8,"text":"Nothing has ever been deleted: every record is kept as if it were in use, forever."},
- {"id":"three","gap":0.8,"text":"But a record has three lives."},
- {"id":"use","gap":0.8,"text":"First, it's in use, read and changed often, like Linh Nguyen's pay records this year."},
+ {"id":"three","gap":0.8,"text":"But a record goes through three stages."},
+ {"id":"use","gap":0.8,"text":"First, it's live: in use, read and changed often, like Linh Nguyen's pay records this year."},
  {"id":"archived","gap":0.8,"text":"Then it's archived: kept cold, read rarely, by fewer people, like her pay records from past years."},
  {"id":"deleted","gap":0.8,"text":"Then, at its end date, it's deleted."},
  {"id":"good","gap":0.8,"text":"Or, for the few with lasting value, it's kept for good, like her degrees and results."},

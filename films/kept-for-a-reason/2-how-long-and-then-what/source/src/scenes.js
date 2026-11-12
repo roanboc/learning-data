@@ -129,18 +129,18 @@ scene("before",(ctx,S,t,sc)=>{
   dp_title(ctx,S,t,sc.cues.breath,"How long, and then what","An end date for every record","FILM 2 OF 5 · KEPT FOR A REASON");
 });
 
-/* ---------------------------------------------------------------- 3 · Three lives of a record */
-// Ingrid and Yusuf at the hall's edges, looking in at the platform; between them, the block, then the three lives
+/* ---------------------------------------------------------------- 3 · Three stages of a record */
+// Ingrid and Yusuf at the hall's edges, looking in at the platform; between them, the block, then the three stages
 const HL_INGRID=[200,712,0.76],HL_YUSUF=[1720,712,0.76];
 function hl_pair(c,t,o){o=o||{};dp_person(c,"ingrid",HL_INGRID[0],HL_INGRID[1],HL_INGRID[2],{t,gaze:[3,0]});dp_person(c,"yusuf",HL_YUSUF[0],HL_YUSUF[1],HL_YUSUF[2],{t,flip:true,gaze:[3,0]});
   if(o.names>0){dp_pill(c,322,566,"Ingrid Holm","identity",{a:o.names*(o.ingrid==null?1:o.ingrid)});dp_pill(c,1598,566,"Yusuf Demir","identity",{a:o.names*(o.yusuf==null?1:o.yusuf),align:"right"});}}
 scene("lives",(ctx,S,t,sc)=>{
-  const tPay=wAt(sc,"pay","Pay records"),tApps=wAt(sc,"pay","applications"),tNever=wAt(sc,"never","Nothing"),tThree=wAt(sc,"three","three lives");
-  const tUse=wAt(sc,"use","in use"),tLinh=wAt(sc,"use","Linh"),tArch=wAt(sc,"archived","archived"),tCold=wAt(sc,"archived","read rarely");
+  const tPay=wAt(sc,"pay","Pay records"),tApps=wAt(sc,"pay","applications"),tNever=wAt(sc,"never","Nothing"),tThree=wAt(sc,"three","three stages");
+  const tUse=wAt(sc,"use","live"),tLinh=wAt(sc,"use","Linh"),tArch=wAt(sc,"archived","archived"),tCold=wAt(sc,"archived","read rarely");
   const tDel=wAt(sc,"deleted","deleted"),tGood=wAt(sc,"good","kept for good"),tYear=sc.cues.year-0.3,tLeak=wAt(sc,"year","leak"),tPlan=wAt(sc,"plan","deleting"),tLaw=wAt(sc,"plan","the law");
   const panesA=hl_v(t,tThree,tYear,0.8);
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"hlHall",push:0.012,draw:(x,tt)=>{
-    // the platform: full, nothing ever deleted; dimmed while the three lives are shown
+    // the platform: full, nothing ever deleted; dimmed while the three stages are shown
     const bA=1-0.82*panesA,yrs=Math.round(lerp(2016,2026,clamp((tt-tLeak+1.5)/2.6,0,1))),coral=ag_in(tt,tLeak,1.2);
     const sh=[0,1,2,3,4,5,6].map(i=>({n:8,warm:i===6,coral:i===0?coral:0}));hl_block(x,sh,{a:bA,behind:"hlHall"});
     hl_greyTag(x,1190,hl_shelfAt(1,7),"Pay records · since 2016",{behind:"hlHall",a:hl_v(tt,tPay,tThree-0.6,0.6)*bA,p:ag_in(tt,tPay+0.2,0.6)});
@@ -152,9 +152,9 @@ scene("lives",(ctx,S,t,sc)=>{
     // deleting without a plan: a record the law needs goes too soon
     if(tt>tPlan){const u=ag_in(tt,tLaw,1.6);hl_rec(x,1180,420,410,["Pay record the law needs"],{a:ag_in(tt,tPlan,0.6)*(1-0.75*u),coral:u,behind:"hlHall"});
       dp_pill(x,1180,566,"Gone too soon","closed",{a:ag_in(tt,tLaw+1.0,0.6)});}
-    // three lives: in use, archived, deleted; kept for good above archived
+    // three stages: live (in use), archived, deleted; kept for good above archived (the author's names, 12 November 2026)
     if(panesA>0){x.save();x.globalAlpha*=panesA;
-      hl_pane(x,440,470,330,330,"In use",{behind:"hlHall",glow:0.8+ag_in(tt,tUse,0.6)*hl_v(tt,tUse,tArch,0.5)});
+      hl_pane(x,440,470,330,330,"Live",{behind:"hlHall",glow:0.8+ag_in(tt,tUse,0.6)*hl_v(tt,tUse,tArch,0.5)});
       hl_pane(x,800,470,330,330,"Archived",{behind:"hlHall"});hl_pane(x,1160,470,330,330,"Deleted",{behind:"hlHall"});
       hl_pane(x,800,200,330,240,"Kept for good",{behind:"hlHall",a:ag_in(tt,tGood-0.4,0.6)});
       hl_rec(x,465,575,280,["Pay records","this year"],{a:ag_in(tt,tUse+0.3,0.6),warm:true,behind:"hlHall"});

@@ -52,7 +52,10 @@ const NARR={
  {"id":"none","gap":0.8,"text":"It has no power either, until it's switched on."},
  {"id":"locks","gap":0.8,"text":"That makes two locks."},
  {"id":"stolen","gap":0.8,"text":"A stolen everyday sign-in doesn't reach the admin account."},
- {"id":"steals","gap":0.8,"text":"And whoever steals the admin account finds its power off, and can't switch it on alone."}]},
+ {"id":"steals","gap":0.8,"text":"And whoever steals the admin account finds its power off, and can't switch it on alone."},
+ {"id":"licence","gap":0.8,"text":"A second account isn't always practical: it can cost a second licence."},
+ {"id":"stays","gap":0.8,"text":"In that case, the power stays in the everyday account, but switched off, until a task needs it."},
+ {"id":"onelock","gap":0.8,"text":"That's one lock, not two: still far safer than power that's always on."}]},
 "switched":{"name":"Switched on for a task","lead":0.8,"tail":0.8,"vo":[
  {"id":"what","gap":0.8,"text":"To switch it on, Jun says what for."},
  {"id":"which","gap":0.8,"text":"Which power: only the one the task needs, to read the storage, change the settings, or restore a table."},

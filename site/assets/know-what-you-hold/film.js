@@ -449,7 +449,9 @@ const NARR={
  {"id":"public","gap":0.8,"text":"Public, like published totals. Internal, for the university's own people, like the timetable."},
  {"id":"confidential","gap":0.8,"text":"Confidential, for those with a reason, like the learner table. Restricted, for a named few."},
  {"id":"floors","gap":0.8,"text":"Two floors come from the columns. A table with anything that points to a person is never public."},
- {"id":"restricted","gap":0.8,"text":"A table with anything special is restricted."}
+ {"id":"restricted","gap":0.8,"text":"A table with anything special is restricted."},
+ {"id":"own","gap":0.8,"text":"These five classes and four levels are the university's own. Another organisation may choose others."},
+ {"id":"same","gap":0.8,"text":"What matters is one list, and that everyone uses its words the same way."}
 ]},
 "holds":{"name":"What it holds","lead":1.0,"tail":1.0,"vo":[
  {"id":"support","gap":0.8,"text":"Back to exam support. Its values name no illness: extra time, a separate room, a reader."},
@@ -488,7 +490,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"high/place": 1.219, "high/back": 6.572, "high/print": 4.769, "high/lot": 1.594, "high/obese": 6.228, "high/change": 2.53, "high/law": 5.516, "high/limits": 5.372, "high/octagon": 8.63, "high/maker": 2.547, "high/schools": 4.23, "high/bought": 5.662, "high/reform": 4.11, "high/front": 3.683, "plain/tables": 4.351, "plain/tuesday": 6.484, "plain/signed": 4.192, "plain/may": 7.176, "plain/never": 3.584, "plain/columns": 2.849, "plain/question": 4.606, "plain/three": 7.595, "plain/none": 5.516, "plain/both": 5.509, "classes/yusuf": 4.201, "classes/adds": 1.984, "classes/indirect": 5.401, "classes/birthday": 2.941, "classes/special": 6.029, "classes/five": 4.672, "classes/words": 2.354, "classes/names": 4.12, "classes/code": 6.457, "levels/level": 6.741, "levels/public": 5.661, "levels/confidential": 5.385, "levels/floors": 5.676, "levels/restricted": 2.544, "holds/support": 5.904, "holds/why": 3.186, "holds/health": 2.884, "holds/owner": 3.276, "holds/strict": 7.423, "holds/moves": 6.944, "holds/stays": 1.92, "source/who": 4.343, "source/like": 5.604, "source/list": 4.811, "source/scan": 6.124, "source/new": 6.234, "follows/carries": 5.769, "follows/reach": 3.413, "follows/code": 6.489, "follows/year": 1.65, "follows/step": 4.316, "follows/mei": 5.421, "follows/never": 2.261, "follows/totals": 6.023, "follows/goes": 4.295, "named/sugar": 2.477, "named/acted": 5.733, "named/either": 2.727, "named/now": 7.041, "named/next": 2.556, "named/protect": 1.838};
+const VODUR={"high/place": 1.219, "high/back": 6.572, "high/print": 4.769, "high/lot": 1.594, "high/obese": 6.228, "high/change": 2.53, "high/law": 5.516, "high/limits": 5.372, "high/octagon": 8.63, "high/maker": 2.547, "high/schools": 4.23, "high/bought": 5.662, "high/reform": 4.11, "high/front": 3.683, "plain/tables": 4.351, "plain/tuesday": 6.484, "plain/signed": 4.192, "plain/may": 7.176, "plain/never": 3.584, "plain/columns": 2.849, "plain/question": 4.606, "plain/three": 7.595, "plain/none": 5.516, "plain/both": 5.509, "classes/yusuf": 4.201, "classes/adds": 1.984, "classes/indirect": 5.401, "classes/birthday": 2.941, "classes/special": 6.029, "classes/five": 4.672, "classes/words": 2.354, "classes/names": 4.12, "classes/code": 6.457, "levels/level": 6.741, "levels/public": 5.661, "levels/confidential": 5.385, "levels/floors": 5.676, "levels/restricted": 2.544, "levels/own": 6.139, "levels/same": 4.286, "holds/support": 5.904, "holds/why": 3.186, "holds/health": 2.884, "holds/owner": 3.276, "holds/strict": 7.423, "holds/moves": 6.944, "holds/stays": 1.92, "source/who": 4.343, "source/like": 5.604, "source/list": 4.811, "source/scan": 6.124, "source/new": 6.234, "follows/carries": 5.769, "follows/reach": 3.413, "follows/code": 6.489, "follows/year": 1.65, "follows/step": 4.316, "follows/mei": 5.421, "follows/never": 2.261, "follows/totals": 6.023, "follows/goes": 4.295, "named/sugar": 2.477, "named/acted": 5.733, "named/either": 2.727, "named/now": 7.041, "named/next": 2.556, "named/protect": 1.838};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -497,7 +499,7 @@ const BREATH={
 "high":{"hold":{"place":0.6,"back":0.8,"print":0.6,"lot":1.2,"obese":1.0,"change":1.4,"law":0.6,"limits":0.6,"octagon":1.2,"maker":0.8,"schools":0.8,"bought":1.0,"reform":0.8,"front":0.6},"breathe":4.4},
 "plain":{"hold":{"tables":1.0,"tuesday":0.4,"signed":0.6,"may":0.8,"never":1.0,"columns":0.8,"question":0.8,"three":1.0,"none":0.8,"both":1.0}},
 "classes":{"hold":{"yusuf":0.4,"adds":0.6,"indirect":0.6,"birthday":1.0,"special":1.0,"five":1.0,"words":0.6,"names":0.6,"code":1.0}},
-"levels":{"hold":{"level":0.8,"public":0.6,"confidential":0.8,"floors":0.8,"restricted":0.6}},
+"levels":{"hold":{"level":0.8,"public":0.6,"confidential":0.8,"floors":0.8,"restricted":1.0,"own":0.8,"same":1.0}},
 "holds":{"hold":{"support":0.8,"why":0.6,"health":1.0,"owner":1.2,"strict":0.6,"moves":0.8,"stays":0.6}},
 "source":{"hold":{"who":1.4,"like":1.6,"list":1.4,"scan":1.6,"new":1.4}},
 "follows":{"hold":{"carries":1.0,"reach":1.0,"code":0.9,"year":1.0,"step":1.0,"mei":0.8,"never":1.0,"totals":1.2,"goes":0.6}},
@@ -2333,6 +2335,21 @@ function kw_floors(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.001)return
     const ax=cx0+12,ay=yy-12;ctx.strokeStyle=rgba(DP.ice,0.85);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax+66,ay);
     ctx.moveTo(ax+54,ay-9);ctx.lineTo(ax+66,ay);ctx.lineTo(ax+54,ay+9);ctx.stroke();dp_T(ctx,r[1],ax+86,yy,{w:700,size:30});ctx.restore();});
   ctx.restore();return{x,y,w,h};}
+// the university's own list, under the row (1010 by 170): its five classes as chips, strictest first, and what it counts; o.a, o.chip
+// (i => what chip i takes: its a and its spring k), o.count (0 to 1, the count's words)
+function kw_ownList(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.001)return null;const w=1010,h=170;ctx.save();ctx.globalAlpha*=clamp(a,0,1);
+  dp_panel(ctx,x,y,w,h,{col:"grey",r:20,glowR:34});
+  dp_T(ctx,"THE UNIVERSITY'S LIST",x+30,y+58,{w:800,size:28,ls:4,col:"cyan"});
+  dp_T(ctx,"5 classes · 4 levels",x+w-30,y+58,{w:600,size:28,col:"mut",align:"right",a:o.count==null?1:o.count});
+  let cx0=x+30;KW_ORDER.forEach((cl,i)=>{cx0+=kw_chip(ctx,cx0,y+130,cl,o.chip?o.chip(i):{})+14;});
+  ctx.restore();return{x,y,w,h};}
+// another organisation's list (710 by 170): its own classes and levels, not named here, each an empty slot with its words
+function kw_otherList(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.001)return null;const w=710,h=170;ctx.save();ctx.globalAlpha*=clamp(a,0,1);
+  dp_panel(ctx,x,y,w,h,{col:"grey",r:20,glowR:34});
+  dp_T(ctx,"ANOTHER ORGANISATION",x+30,y+58,{w:800,size:28,ls:4,col:"mut"});
+  const w1=dp_tw(ctx,"its own classes",{w:600,size:28})+40,w2=dp_tw(ctx,"its own levels",{w:600,size:28})+40;
+  kw_slot(ctx,x+30,y+130,w1,{text:"its own classes"});kw_slot(ctx,x+30+w1+14,y+130,w2,{text:"its own levels"});
+  ctx.restore();return{x,y,w,h};}
 // the four tables of chapter 4, left to right, and their levels
 const KW_PANES=[["Published totals","Planning","public"],["Timetable","Timetabling","internal"],["Learner table","registrar's office","confidential"],[null,null,"restricted"]];
 const KW_PANEX=[85,530,975,1420];
@@ -2340,15 +2357,22 @@ const KW_PANEX=[85,530,975,1420];
 scene("levels",(ctx,S,t,sc)=>{const c=sc.cues,T=kw_once(sc,"T",()=>({
     level:c.level,each:wAt(sc,"level","Each table"),harm:wAt(sc,"level","how much harm"),owner:wAt(sc,"level","Its owner"),
     pub:c.public,inter:wAt(sc,"public","Internal"),conf:c.confidential,restr:wAt(sc,"confidential","Restricted"),
-    floors:c.floors,never:wAt(sc,"floors","never public"),restricted:c.restricted,isR:wAt(sc,"restricted","is restricted"),breath:c.breath}));
+    floors:c.floors,never:wAt(sc,"floors","never public"),restricted:c.restricted,isR:wAt(sc,"restricted","is restricted"),
+    own:c.own,five:wAt(sc,"own","five classes"),four:wAt(sc,"own","four levels"),other:wAt(sc,"own","Another organisation"),
+    one:wAt(sc,"same","one list"),way:wAt(sc,"same","the same way"),breath:c.breath}));
   const lv=[T.pub,T.inter,T.conf,T.restr],L=KW_LEVEL;
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"kwGov",keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
       KW_PANES.forEach((p,i)=>{const at=lv[i],k=ag_sine(clamp((tt-at)/0.9,0,1)),q=L[p[2]];
         kw_tablePane(cx,KW_PANEX[i],236,p[0],p[1],{a:ag_in(tt,T.level+0.3+i*0.2,0.5),frost:q.frost*k,rim:q.rim*k,level:p[2],levelA:ag_in(tt,at,0.45),
-          lit:i===3?kw_io(tt,T.isR,T.isR+1.4,0.4):0,ownerLit:kw_io(tt,T.owner,T.owner+1.6,0.4)});});
-      kw_floors(cx,410,600,{a:ag_in(tt,T.floors,0.5),r1:0.45+0.55*ag_in(tt,T.never-0.6,0.4),r2:0.45+0.55*ag_in(tt,T.restricted,0.4),
-        glow:[kw_io(tt,T.never-0.6,T.never+1.4,0.4),kw_io(tt,T.isR,T.isR+1.4,0.4)]});}}
+          lit:Math.max(i===3?kw_io(tt,T.isR,T.isR+1.4,0.4):0,kw_io(tt,T.four+i*0.1,T.four+1.5,0.4)),ownerLit:kw_io(tt,T.owner,T.owner+1.6,0.4)});});
+      kw_floors(cx,410,600,{a:ag_in(tt,T.floors,0.5)*(1-ag_in(tt,T.own-0.75,0.45)),r1:0.45+0.55*ag_in(tt,T.never-0.6,0.4),r2:0.45+0.55*ag_in(tt,T.restricted,0.4),
+        glow:[kw_io(tt,T.never-0.6,T.never+1.4,0.4),kw_io(tt,T.isR,T.isR+1.4,0.4)]});
+      // the floors card has left: the list is the university's own, another organisation has its own, and what matters is one list,
+      // used the same way by everyone (the author, 12 November 2026)
+      kw_ownList(cx,85,600,{a:ag_in(tt,T.own-0.25,0.5),count:ag_in(tt,T.four,0.4),chip:i=>({a:ag_in(tt,T.five+i*0.14,0.2),k:ag_spr(tt,T.five+i*0.14,0.7)})});
+      kw_otherList(cx,1125,600,{a:ag_in(tt,T.other-0.1,0.5)});
+      dp_pill(cx,960,836,"One list, used the same way by everyone","green",{align:"center",a:ag_in(tt,T.one,0.5)});}}
   ]);
   kw_kick(ctx,S,"A level for each table",null,ag_in(t,0.4,0.5)*(1-ag_in(t,T.pub-0.6,0.6)));});
 

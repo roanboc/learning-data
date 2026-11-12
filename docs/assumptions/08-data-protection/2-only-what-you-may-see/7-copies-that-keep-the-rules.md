@@ -1,8 +1,8 @@
 # Copies that keep the rules: questions and assumptions
 
-*Data protection and privacy* · *Only what you may see*, film 7 · open, PR #200 · [pull request](https://github.com/roanboc/learning-data/pull/200)
+*Data protection and privacy* · *Only what you may see*, film 7 · merged, PR #200 · [pull request](https://github.com/roanboc/learning-data/pull/200)
 
-On the site once PR #200 merges: https://data.learn-all.org/only-what-you-may-see/copies-that-keep-the-rules/
+[Watch it on the site](https://data.learn-all.org/only-what-you-may-see/copies-that-keep-the-rules/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
@@ -42,3 +42,18 @@ Film 16 of *Data protection and privacy*, film 7 of 8 of *Only what you may see*
 | 30 | Words on the cave's lit wall stood out less than 4.5 to 1 (found 10 Nov 2026) | The labels get a darker film on their glass, the wall's cards frost a dimmed copy of the wall, and Jun's refusal is in ice white beside its coral cross; a window on Lascaux II no longer makes the cards after it frost the cave. Every word now stands out 4.58 to 1 or more | Chapters 1 and 3 |
 | 31 | Which moment is the poster? | Lascaux II's finished wall as it opens in 1983, with "True to the cave" and "None of it is the cave" (76.5 s): the film's idea in the opening's own terms, a copy that keeps what matters and puts nothing at risk. No person, no product | The site's pages |
 | 32 | In the hall, pages and cards replaced each other by cross-fading, so for a moment one's words lay over the next's (found 10 Nov 2026, at full size) | Each page or card now leaves before the next comes in its place, and the clean room's window on Lascaux comes in once the notebook has stepped back; the sound of that window moved with it | Chapters 2 to 7 |
+
+## 12 November 2026: the author's answer
+
+Asked on his final checklist whether development and test always use made-up data, or whether a masked copy is sometimes fine (row 3 above), Rodrigo answered on 12 November 2026:
+
+> Made up as possible, especially now that synthetic data generation is so easy. We might need to define how synthetic data can reflect the reality of production data, which is a harder question.
+
+So the rule in *Made up, for building* is no longer "always". The film now says "So, wherever they can, development and test get made-up learners, and none of them is anyone.", then, after the script writes its 2,614 learners, two new lines: "That's synthetic data, and it's easy to write now." and "How closely it should follow the real records, gaps and odd cases included, is the harder question, and still an open one." The film is 8:42 (it was 8:27). What was assumed in applying the answer:
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 33 | Does "made up as possible" leave room for a masked copy? | Yes, as the exception: "wherever they can" replaces "always" (row 3). The line before it still says what a masked copy costs (it's still about real people, and a column nobody has classed yet goes through as it is), and the film makes none | *Made up, for building*, the line `madeup` | Say when a masked copy is the right choice, and who decides |
+| 34 | Does the film use the term "synthetic data"? | Yes, once, as the name for the made-up learners the script writes: "That's synthetic data, and it's easy to write now." The film names no tool or model for writing it, so the line doesn't date | The line `easy`; the green tag, "Synthetic data: easy to write now" | Drop the term, and keep "made-up learners" |
+| 35 | Does the film answer how closely synthetic data should follow production? | No. It says the question is the harder one and still open, and names the two things made-up data most often lacks: gaps and odd cases. How close is close enough isn't defined here, nor is the trade-off the script records (the closer the copy follows the real records, the more it can tell about real people). A later film or lab could take it on | The line `harder`; the tags "How close to the real records?", "gaps", "odd cases" and "Still an open question" | Define it: a new film or lab, with its own proposal |
+| 36 | Can the made-up learners still be called "true to the learners"? | No: that line claimed what the new one leaves open. The return to Lascaux now reads "Like Lascaux II, they stand in for the learners, and not one is real." The Pause and think explanation for this chapter says the same, in English and Spanish; its options are unchanged | The line `lascaux`; Pause and think, the question on development | Put "true to the learners" back |

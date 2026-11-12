@@ -1385,6 +1385,8 @@ SMOKE_DIR = pathlib.Path(__file__).resolve().parent / "smoke"
 LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = app && app.querySelector('[role=tab][aria-selected=true]');
   return {on: on && on.dataset.id, tabs: app ? app.querySelectorAll('[role=tab][data-id]').length : 0,
     watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
+    badges: app ? [...app.querySelectorAll('[role=tab][data-id]')].map(b => b.dataset.id + ' ' + ((b.querySelector('i') || {}).textContent || '')) : [],
+    kicker: ((app && app.querySelector('.stop-text .kicker')) || {}).textContent || '',
     sw: document.documentElement.scrollWidth - innerWidth}; }"""
 
 
@@ -1405,10 +1407,22 @@ async def check_series_learn(run):
                     where = f"/{key}#{x['id']}"
                     pg, log = await run.page(ctx, key + "#" + x["id"])
                     await run.ready(pg)
+                    try:  # a series whose engine loads each film's words as a lab opens draws its kicker a moment later
+                        await pg.wait_for_selector("#series-labs .stop-text .kicker", timeout=10000)
+                    except Exception:  # noqa: BLE001
+                        pass
                     await pg.wait_for_timeout(300)
                     r = await pg.evaluate(LEARN_JS)
                     expect(sec, r["tabs"] == SL["labs"], f"{where}: {r['tabs']} lab tabs, expected {SL['labs']}")
                     expect(sec, r["on"] == x["id"], f"{where}: the lab open is {r['on']!r}")
+                    # one numbering for the whole pack: each lab's tab shows its place among all the series' labs, whichever film it's
+                    # under, and the open lab's kicker says the same, "Lab 3 of 9"
+                    ids = [y["id"] for y in SL[lg]["labs"]]
+                    want_b = [f"{k} {i + 1}" for i, k in enumerate(ids)]
+                    expect(sec, r["badges"] == want_b, f"{where}: the lab tabs are numbered {r['badges']}, expected {want_b}")
+                    k = re.match(r"\D*(\d+)\D+(\d+)", r["kicker"])
+                    pos = ids.index(x["id"]) + 1 if x["id"] in ids else 0
+                    expect(sec, bool(k) and (int(k[1]), int(k[2])) == (pos, len(ids)), f"{where}: the kicker says {r['kicker']!r}, expected lab {pos} of {len(ids)}")
                     f = on_site.get(x["film"])
                     if f:  # a film still being made has no "Watch this part"
                         want = f"../{f['key']}/#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None

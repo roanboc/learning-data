@@ -1,6 +1,6 @@
 # Between the business and the systems: questions and assumptions
 
-*Enterprise architecture* · *Data architecture*, film 1 · PR pending · [pull requests](https://github.com/roanboc/learning-data/pulls)
+*Enterprise architecture* · *Data architecture*, film 1 of 6 · PR #323 · [pull request](https://github.com/roanboc/learning-data/pull/323)
 
 [Watch it on the site](https://data.learn-all.org/data-architecture/between-the-business-and-the-systems/)
 

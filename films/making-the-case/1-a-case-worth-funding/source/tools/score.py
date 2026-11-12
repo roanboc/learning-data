@@ -244,8 +244,8 @@ chord((E2, B2, E3, Gs3, B3, E4), oc('breath', 0.3), 0.65, step=0.2, dur=4.4, unt
 
 # 2. The decision first: the chapter turns on A major; the old warehouse's sheet and what it costs every year, under it the pedal's low G
 #    sharp; the licence's end and the ask, a sheet each; the decision, in one line: B major, a question; governance and this ask, a sheet
-#    each; the five questions, a soft tap as each comes in, and a tick for each; a checklist, not a form: a tap; heavy methods, then
-#    light ones: a tap each, and E major as the chapter closes on the light one
+#    each; the five questions, a soft tap as each comes in, and a tick for each; a checklist, not a form: a tap; heavy methods, what the
+#    law requires, only when required, then light ones: a tap each, and E major as the chapter closes on the light one
 LV[0] = 0.9
 dw = lambda lid, word, off=0: W('decide', lid, word, off)
 dc = lambda lid, off=0: G('decide', lid, off)
@@ -266,6 +266,8 @@ for i in range(5):
     ticked(dw('checklist', 'checklist', -0.2) + 0.3 * i, 0.004, px(760))
 tap(dw('checklist', 'form', -0.2), 0.0035, px(930))
 tap(dw('heavy', 'heavy', -0.2), 0.003, px(1480))
+tap(dw('law', 'law', -0.2), 0.003, px(1480))
+tap(dc('only', 0.1), 0.003, px(1480))
 tap(dc('light', 0.1), 0.003, px(1450))
 chord((E3, B3, E4, Gs4), dw('light', 'quickly', 0.0), 0.5, step=0.14, dur=1.8)
 

@@ -131,101 +131,109 @@ Together, they're its value.
 Divided by the effort, it puts small, valuable work first.
 
 34
-00:04:02,882 --> 00:04:10,442
-Anil's request is small, and it prevents a risk: his own spreadsheet keeps a copy of staff records. It goes near the top.
+00:04:02,882 --> 00:04:07,048
+And time is part of that value: what would be lost by waiting counts too.
 
 35
-00:04:12,142 --> 00:04:19,752
-A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again.
+00:04:08,948 --> 00:04:16,508
+Anil's request is small, and it prevents a risk: his own spreadsheet keeps a copy of staff records. It goes near the top.
 
 36
-00:04:21,452 --> 00:04:23,811
-Never by who asks, or how loudly.
+00:04:18,208 --> 00:04:25,818
+A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again.
 
 37
-00:04:25,711 --> 00:04:32,688
-The list is a board in the tracker that anyone at the university can see, and the data council reads it every month.
+00:04:27,518 --> 00:04:29,877
+Never by who asks, or how loudly.
 
 38
-00:04:35,388 --> 00:04:43,610
-Next, the team's time, split on purpose: half for the roadmap, a third for requests, and the rest for running and improving what it has.
+00:04:31,777 --> 00:04:38,754
+The list is a board in the tracker that anyone at the university can see, and the data council reads it every month.
 
 39
-00:04:45,510 --> 00:04:50,093
-Without the split, requests would take it all, and nothing on the roadmap would move.
+00:04:41,454 --> 00:04:49,676
+Next, the team's time, split on purpose: half for the roadmap, a third for requests, and the rest for running and improving what it has.
 
 40
-00:04:51,993 --> 00:04:59,668
-And at most six pieces of work are in progress at once: three for the roadmap, two for requests, one for running and improving.
+00:04:51,576 --> 00:04:56,159
+Without the split, requests would take it all, and nothing on the roadmap would move.
 
 41
-00:05:01,768 --> 00:05:07,365
-Kanban, as David J. Anderson set it out, calls this a limit on work in progress.
+00:04:58,059 --> 00:05:05,734
+And at most six pieces of work are in progress at once: three for the roadmap, two for requests, one for running and improving.
 
 42
-00:05:09,465 --> 00:05:14,189
-With fewer things started, each finishes sooner, and people get their answers sooner.
+00:05:07,834 --> 00:05:13,431
+Kanban, as David J. Anderson set it out, calls this a limit on work in progress.
 
 43
-00:05:16,489 --> 00:05:20,398
-When one is done, the top of the list moves in. Finish, then start.
+00:05:15,531 --> 00:05:20,255
+With fewer things started, each finishes sooner, and people get their answers sooner.
 
 44
-00:05:23,098 --> 00:05:30,189
-On Thursday 24 June, the University Council asks for the timetable to change from 2028.
+00:05:22,555 --> 00:05:26,464
+When one is done, the top of the list moves in. Finish, then start.
 
 45
-00:05:32,089 --> 00:05:36,386
-The registrar's office needs the rooms' data for it by the end of August.
+00:05:29,164 --> 00:05:36,255
+On Thursday 24 June, the University Council asks for the timetable to change from 2028.
 
 46
-00:05:37,086 --> 00:05:42,458
-That date can't move: a late timetable is a risk to prevent. So it goes near the top.
+00:05:38,155 --> 00:05:42,452
+The registrar's office needs the rooms' data for it by the end of August.
 
 47
-00:05:44,558 --> 00:05:51,568
-On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.
+00:05:43,152 --> 00:05:48,524
+That date can't move: a late timetable is a risk to prevent. So it goes near the top.
 
 48
-00:05:53,468 --> 00:05:59,125
-It goes on the same list, weighed the same way, and it hears not now, with a reason and a date.
+00:05:50,624 --> 00:05:57,634
+On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.
 
 49
-00:06:01,025 --> 00:06:09,187
-The reason: the timetable's date can't move. The date: the current model refreshed by the end of August, and the new one in October.
+00:05:59,534 --> 00:06:05,191
+It goes on the same list, weighed the same way, and it hears not now, with a reason and a date.
 
 50
-00:06:11,487 --> 00:06:17,310
-Saying it well, face to face, is a skill of its own, shown in the leading data people module.
+00:06:07,091 --> 00:06:12,784
+The reason: the timetable's date can't move, and her new model is for December's admissions.
 
 51
-00:06:19,410 --> 00:06:28,389
-Emergency departments still do this, and call it triage: in Australia, five categories, each with a longest wait, from at once to two hours.
+00:06:14,284 --> 00:06:19,982
+The date: the current model refreshed by the end of August, and the new one in October, still in time.
 
 52
-00:06:30,689 --> 00:06:32,463
-Not now always comes with a when.
+00:06:22,282 --> 00:06:28,105
+Saying it well, face to face, is a skill of its own, shown in the leading data people module.
 
 53
-00:06:35,163 --> 00:06:39,378
-Larrey brought the wounded in from wherever they fell, and treated the worst first.
+00:06:30,205 --> 00:06:39,184
+Emergency departments still do this, and call it triage: in Australia, five categories, each with a longest wait, from at once to two hours.
 
 54
-00:06:41,078 --> 00:06:47,708
-Helena's team does the same with data: every request through one door, on one list, the most needed first.
+00:06:41,484 --> 00:06:43,258
+Not now always comes with a when.
 
 55
-00:06:49,408 --> 00:06:54,208
-On Monday, close every side door, kindly, and ask what each request is for.
+00:06:45,958 --> 00:06:50,173
+Larrey brought the wounded in from wherever they fell, and treated the worst first.
 
 56
-00:06:55,308 --> 00:06:58,141
-Order the list in the open, by value and effort.
+00:06:51,873 --> 00:06:58,503
+Helena's team does the same with data: every request through one door, on one list, the most needed first.
 
 57
-00:06:59,241 --> 00:07:04,062
-Protect time for the roadmap and for running what you have, and limit what's in progress.
+00:07:00,203 --> 00:07:05,003
+On Monday, close every side door, kindly, and ask what each request is for.
 
 58
-00:07:05,162 --> 00:07:09,668
+00:07:06,103 --> 00:07:08,936
+Order the list in the open, by value and effort.
+
+59
+00:07:10,036 --> 00:07:14,857
+Protect time for the roadmap and for running what you have, and limit what's in progress.
+
+60
+00:07:15,957 --> 00:07:20,463
 Give every request that waits a reason and a date, and show the list to everyone.

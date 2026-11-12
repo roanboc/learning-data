@@ -131,7 +131,7 @@ Practitioners' advice, for the author to confirm or correct (each film's own is 
 - Protect a short time every week to improve how the team works.
 - Review the strategy every quarter, and say what moved and why.
 - The author's own (10 November 2026): define your services and who they're for before you design; draw a picture for every page; keep the architecture in one repository and update it with every change, never waiting for funding; make it the team's job, starting with yours; give every provider a path, and put value first.
-- The author's own (12 November 2026): prefer light methods, because they allow rapid iteration, and keep heavy frameworks, for business cases, project management and everything else, for critical systems where errors can cost lives; order work by value and effort, where value is an opportunity or a risk prevented; at the level of the whole organisation, call the layer data or information, as either word is fine.
+- The author's own (12 November 2026): prefer light methods, because they allow rapid iteration, and keep heavy frameworks, for business cases, project management and everything else, for critical systems where errors can cost lives and for what the law requires, where a rule that looks like extra work protects everyone (personal data is the clear case), adding a method even there only when it is required; order work by value and effort, where value is an opportunity or a risk prevented, and time is part of value, so what would be lost by waiting counts, with no method named; at the level of the whole organisation, call the layer data or information, as either word is fine.
 
 ## The world and the people
 

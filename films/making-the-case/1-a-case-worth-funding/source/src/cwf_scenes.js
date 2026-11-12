@@ -93,9 +93,12 @@ scene("decide",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
         u:cwf_u(tt,[w("questions","needed",-0.6),w("questions","value",-0.6),w("questions","bought",-0.6),w("questions","afforded",-0.6),w("questions","delivered",-0.6)]),
         tick:ag_in(tt,w("checklist","checklist",-0.2),1.6)});
       cwf_pill(x,tt,w("checklist","form",-0.2),null,930,830,"A checklist, not a form",{col:LP.green,icon:"tick"});
-      // the author's advice (12 November 2026): heavy methods only where a mistake can cost lives, light ones everywhere else, because
-      // they can change quickly. The two take turns beside the pill: the first leaves before the second comes in
-      cwf_tag(x,tt,w("heavy","heavy",-0.2),c.light-0.5,1200,830,"Heavy: where a mistake can cost lives",{col:LP.amber});
+      // the author's advice (12 November 2026): heavy methods where a mistake can cost lives and where the law requires them, and even
+      // there only when required; light ones everywhere else, because they can change quickly. The four take turns beside the pill:
+      // each leaves before the next comes in
+      cwf_tag(x,tt,w("heavy","heavy",-0.2),c.law-0.5,1200,830,"Heavy: where a mistake can cost lives",{col:LP.amber});
+      cwf_tag(x,tt,w("law","law",-0.2),c.only-0.5,1200,830,"Heavy: where the law requires it",{col:LP.amber});
+      cwf_tag(x,tt,c.only+0.1,c.light-0.5,1200,830,"Even there: only when required",{col:LP.amber});
       cwf_tag(x,tt,c.light+0.1,null,1200,830,"Light: try, learn, change course",{col:LP.green});}}
   ]);
   setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,w("may","May",-0.3),c.helena,0.5)});

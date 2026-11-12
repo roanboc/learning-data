@@ -445,6 +445,7 @@ const NARR={
  {"id":"weigh","gap":0.8,"text":"Helena's team orders its list the same way, in the open: each request is weighed for the opportunity it brings, and the risk it prevents."},
  {"id":"value","gap":0.8,"text":"Together, they're its value."},
  {"id":"effort","gap":0.8,"text":"Divided by the effort, it puts small, valuable work first."},
+ {"id":"time","gap":0.8,"text":"And time is part of that value: what would be lost by waiting counts too."},
  {"id":"anil","gap":0.8,"text":"Anil's request is small, and it prevents a risk: his own spreadsheet keeps a copy of staff records. It goes near the top."},
  {"id":"dash","gap":0.8,"text":"A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again."},
  {"id":"loud","gap":0.8,"text":"Never by who asks, or how loudly."},
@@ -464,7 +465,8 @@ const NARR={
  {"id":"late","gap":0.8,"text":"That date can't move: a late timetable is a risk to prevent. So it goes near the top."},
  {"id":"clara","gap":0.8,"text":"On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.","say":"On Monday the twelfth of July, Clara, in Planning, asks for a new student forecast model, by the end of August too."},
  {"id":"same","gap":0.8,"text":"It goes on the same list, weighed the same way, and it hears not now, with a reason and a date."},
- {"id":"reason","gap":0.8,"text":"The reason: the timetable's date can't move. The date: the current model refreshed by the end of August, and the new one in October."},
+ {"id":"reason","gap":0.8,"text":"The reason: the timetable's date can't move, and her new model is for December's admissions."},
+ {"id":"date","gap":0.8,"text":"The date: the current model refreshed by the end of August, and the new one in October, still in time."},
  {"id":"ldp","gap":0.8,"text":"Saying it well, face to face, is a skill of its own, shown in the leading data people module."},
  {"id":"ats","gap":0.8,"text":"Emergency departments still do this, and call it triage: in Australia, five categories, each with a longest wait, from at once to two hours."},
  {"id":"never","gap":0.8,"text":"Not now always comes with a when."}
@@ -479,7 +481,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"flying/rhine": 7.061, "flying/league": 6.806, "flying/lie": 7.516, "flying/die": 5.365, "flying/speyer": 5.391, "flying/fly": 5.974, "flying/bandage": 6.819, "flying/aboukir": 5.882, "flying/quarter": 5.082, "flying/data": 6.389, "flying/list": 6.051, "doors/uni": 7.056, "doors/places": 3.664, "doors/more": 4.776, "doors/twice": 4.863, "doors/first": 4.535, "doors/jena": 3.012, "doors/walk": 6.334, "doors/package": 5.167, "door/open": 5.177, "door/five": 5.592, "door/what": 2.535, "door/close": 3.882, "door/gov": 8.049, "door/gather": 4.432, "door/twins": 4.451, "door/thanks": 3.199, "door/left": 4.176, "order/rule": 7.188, "order/wait": 3.075, "order/weigh": 8.392, "order/value": 1.45, "order/effort": 3.641, "order/anil": 7.46, "order/dash": 7.51, "order/loud": 2.259, "order/board": 6.877, "six/split": 8.122, "six/why": 4.483, "six/limit": 7.575, "six/kanban": 5.497, "six/sooner": 4.624, "six/pull": 3.809, "when/council": 6.991, "when/rooms": 4.197, "when/late": 5.272, "when/clara": 6.91, "when/same": 5.557, "when/reason": 8.062, "when/ldp": 5.723, "when/ats": 8.879, "when/never": 1.674, "monday/back": 4.115, "monday/helena": 6.53, "monday/close": 4.7, "monday/order": 2.733, "monday/time": 4.721, "monday/tell": 4.406};
+const VODUR={"flying/rhine": 7.061, "flying/league": 6.806, "flying/lie": 7.516, "flying/die": 5.365, "flying/speyer": 5.391, "flying/fly": 5.974, "flying/bandage": 6.819, "flying/aboukir": 5.882, "flying/quarter": 5.082, "flying/data": 6.389, "flying/list": 6.051, "doors/uni": 7.056, "doors/places": 3.664, "doors/more": 4.776, "doors/twice": 4.863, "doors/first": 4.535, "doors/jena": 3.012, "doors/walk": 6.334, "doors/package": 5.167, "door/open": 5.177, "door/five": 5.592, "door/what": 2.535, "door/close": 3.882, "door/gov": 8.049, "door/gather": 4.432, "door/twins": 4.451, "door/thanks": 3.199, "door/left": 4.176, "order/rule": 7.188, "order/wait": 3.075, "order/weigh": 8.392, "order/value": 1.45, "order/effort": 3.641, "order/time": 4.066, "order/anil": 7.46, "order/dash": 7.51, "order/loud": 2.259, "order/board": 6.877, "six/split": 8.122, "six/why": 4.483, "six/limit": 7.575, "six/kanban": 5.497, "six/sooner": 4.624, "six/pull": 3.809, "when/council": 6.991, "when/rooms": 4.197, "when/late": 5.272, "when/clara": 6.91, "when/same": 5.557, "when/reason": 5.593, "when/date": 5.598, "when/ldp": 5.723, "when/ats": 8.879, "when/never": 1.674, "monday/back": 4.115, "monday/helena": 6.53, "monday/close": 4.7, "monday/order": 2.733, "monday/time": 4.721, "monday/tell": 4.406};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -489,9 +491,9 @@ const BREATH={
 "flying":{"hold":{"rhine":1.2,"league":1.0,"lie":1.0,"die":1.4,"speyer":1.2,"fly":1.0,"bandage":1.2,"aboukir":0.8,"quarter":1.4,"data":0.8},"breathe":5.4},
 "doors":{"hold":{"uni":0.8,"more":1.4,"twice":0.8,"first":0.8,"jena":0.4,"walk":1.4}},
 "door":{"hold":{"open":0.8,"five":1.4,"what":1.0,"close":1.0,"gov":1.0,"gather":1.2,"twins":0.8,"thanks":0.8}},
-"order":{"hold":{"rule":1.0,"wait":1.2,"weigh":0.8,"value":0.8,"effort":1.2,"anil":1.0,"dash":1.0,"loud":1.2}},
+"order":{"hold":{"rule":1.0,"wait":1.2,"weigh":0.8,"value":0.8,"effort":1.2,"time":1.2,"anil":1.0,"dash":1.0,"loud":1.2}},
 "six":{"hold":{"split":1.2,"why":1.2,"limit":1.4,"kanban":1.4,"sooner":1.6}},
-"when":{"hold":{"council":1.2,"late":1.4,"clara":1.2,"same":1.2,"reason":1.6,"ldp":1.4,"ats":1.6}},
+"when":{"hold":{"council":1.2,"late":1.4,"clara":1.2,"same":1.2,"reason":0.8,"date":1.6,"ldp":1.4,"ats":1.6}},
 "monday":{"hold":{"back":1.0,"helena":1.0,"close":0.4,"order":0.4,"time":0.4},"breathe":6.0}
 };
 
@@ -2164,7 +2166,9 @@ function ol_card(ctx,x,y,w,words,v,o){o=o||{};const a=o.a==null?1:o.a,ws=ol_card
   const sc=clamp(o.score||0,0,1);if(sc>0.004)ol_score(ctx,v,x+36,y+410,sc);
   const tp=clamp(o.top||0,0,1);if(tp>0.004)lp_pill(ctx,x+w-196,y+398,"Near the top",{col:LP.green,icon:"tick",size:28,a:tp,k:o.topK});
   const wt=clamp(o.wait||0,0,1);if(wt>0.004)lp_pill(ctx,x+36+102,y+472,"Not now",{col:LP.amber,icon:"wait",size:28,a:wt,k:o.waitK});
-  ws.forEach((l,j)=>{const q=clamp((o.why||0)-j,0,1);if(q>0.004)lp_T(ctx,l,x+36,y+530+j*38,{w:j?600:700,size:28,a:ag_sine(q),col:j?LP.mut:LP.ink});});
+  // the reason in ink (one line, or two), then when, quieter
+  const nw=[].concat(words.why||[]).length;
+  ws.forEach((l,j)=>{const q=clamp((o.why||0)-j,0,1),b=j<nw;if(q>0.004)lp_T(ctx,l,x+36,y+530+j*38,{w:b?700:600,size:28,a:ag_sine(q),col:b?LP.ink:LP.mut});});
   ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the board */
@@ -2416,6 +2420,8 @@ scene("order",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
         val:ag_in(tt,c.value,0.6),score:ag_in(tt,w("effort","puts",-0.2),0.5),hl:1,hlA:ag_io(tt,w("anil","risk",-0.3),c.dash-0.4),
         top:ag_in(tt,w("anil","top",-0.3),0.4),topK:tt-w("anil","top",-0.3)});
       ol_tagAt(x,tt,w("value","value",-0.3),c.loud-0.5,140,680,"Value: the opportunity and the risk prevented",{col:LP.green});
+      // time is part of that value (the author, 12 November 2026): what would be lost by waiting counts in it, with no measure of its own
+      ol_tagAt(x,tt,w("time","time",-0.3),c.loud-0.5,140,750,"Time is part of it: what would be lost by waiting",{col:LP.green});
       ol_tagAt(x,tt,w("anil","spreadsheet",-0.2),c.dash-0.5,940,394,"His own copy of staff records",{col:LP.amber});
       ol_cardAt(x,tt,d0,out,1020,150,760,OL_DASH,OL_DASHV,{light:"day",u:ag_in(tt,d0+0.3,1.2),val:ag_in(tt,d0+1.1,0.5),score:ag_in(tt,w("dash","decision",-0.2),0.5),
         wait:ag_in(tt,w("dash","waits",-0.2),0.4),waitK:tt-w("dash","waits",-0.2),why:ol_n(tt,[w("dash","why",-0.2),w("dash","when",-0.1)])});
@@ -2453,7 +2459,10 @@ scene("six",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
 
 /* ---------------------------------------------------------------- 6. Not now, and when */
 const OL_ROOMS={who:"The registrar's office",what:"Rooms' data for the new timetable"},OL_ROOMSV=[3,3,2];
-const OL_CLARA={who:"Clara, Planning",what:"A new student forecast model",why:"The timetable's date can't move",when:["Current model refreshed by 27 August","The new one by 29 October"]},OL_CLARAV=[3,1,3];
+// Clara's reason has two lines: the date that can't move, and why hers can (the new model is for December's admissions, so October is
+// still in time); her card is a line taller than the rooms' data's, and starts a line higher, so both end at the same height
+const OL_CLARA={who:"Clara, Planning",what:"A new student forecast model",why:["The timetable's date can't move","The new model is for December's admissions"],
+  when:["Current model refreshed by 27 August","The new one by 29 October"]},OL_CLARAV=[3,1,3];
 scene("when",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),gy={light:"grey"};
   ag_shots(ctx,S,t,sc.dur,[
     // the University Council's decision; the rooms' data the registrar's office needs for it, near the top
@@ -2467,9 +2476,9 @@ scene("when",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
     {at:c.clara-0.3,place:"olJuly",later:true,keys:[[0,960,540,1.0]],draw:(x,tt)=>{const k0=w("clara","asks",-0.2);
       lp_person(x,"clara",280,640,1.0,{t:tt,a:ag_in(tt,c.clara+0.2,0.6),light:gy});
       lp_nameTag(x,470,300,"clara",{a:ag_in(tt,w("clara","Clara",-0.1),0.5)});
-      ol_cardAt(x,tt,k0,null,1000,150,760,OL_CLARA,OL_CLARAV,{light:"grey",u:ag_in(tt,w("clara","model",0),2.0),val:ag_in(tt,w("clara","model",1.6),0.5),score:ag_in(tt,w("same","weighed",-0.1),0.5),
+      ol_cardAt(x,tt,k0,null,1000,112,760,OL_CLARA,OL_CLARAV,{light:"grey",u:ag_in(tt,w("clara","model",0),2.0),val:ag_in(tt,w("clara","model",1.6),0.5),score:ag_in(tt,w("same","weighed",-0.1),0.5),
         wait:ag_in(tt,w("same","not now",-0.2),0.4),waitK:tt-w("same","not now",-0.2),
-        why:ol_n(tt,[w("reason","timetable's",-0.2),w("reason","current",-0.2),w("reason","new one",-0.2)])});
+        why:ol_n(tt,[w("reason","timetable's",-0.2),w("reason","new model",-0.2),w("date","current",-0.2),w("date","new one",-0.2)])});
       ol_tagAt(x,tt,w("ldp","Saying",-0.1),null,1380,840,"Saying it well: Leading data people",{align:"center",col:LP.mut});}},
     // emergency departments still do this: triage, today
     {at:c.ats-0.3,place:"olJuly",later:true,keys:[[0,960,540,1.0]],draw:(x,tt)=>{const s0=c.ats+0.2;

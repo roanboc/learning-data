@@ -128,7 +128,9 @@ function ol_card(ctx,x,y,w,words,v,o){o=o||{};const a=o.a==null?1:o.a,ws=ol_card
   const sc=clamp(o.score||0,0,1);if(sc>0.004)ol_score(ctx,v,x+36,y+410,sc);
   const tp=clamp(o.top||0,0,1);if(tp>0.004)lp_pill(ctx,x+w-196,y+398,"Near the top",{col:LP.green,icon:"tick",size:28,a:tp,k:o.topK});
   const wt=clamp(o.wait||0,0,1);if(wt>0.004)lp_pill(ctx,x+36+102,y+472,"Not now",{col:LP.amber,icon:"wait",size:28,a:wt,k:o.waitK});
-  ws.forEach((l,j)=>{const q=clamp((o.why||0)-j,0,1);if(q>0.004)lp_T(ctx,l,x+36,y+530+j*38,{w:j?600:700,size:28,a:ag_sine(q),col:j?LP.mut:LP.ink});});
+  // the reason in ink (one line, or two), then when, quieter
+  const nw=[].concat(words.why||[]).length;
+  ws.forEach((l,j)=>{const q=clamp((o.why||0)-j,0,1),b=j<nw;if(q>0.004)lp_T(ctx,l,x+36,y+530+j*38,{w:b?700:600,size:28,a:ag_sine(q),col:b?LP.ink:LP.mut});});
   ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the board */

@@ -41,6 +41,7 @@ const NARR={
  {"id":"weigh","gap":0.8,"text":"Helena's team orders its list the same way, in the open: each request is weighed for the opportunity it brings, and the risk it prevents."},
  {"id":"value","gap":0.8,"text":"Together, they're its value."},
  {"id":"effort","gap":0.8,"text":"Divided by the effort, it puts small, valuable work first."},
+ {"id":"time","gap":0.8,"text":"And time is part of that value: what would be lost by waiting counts too."},
  {"id":"anil","gap":0.8,"text":"Anil's request is small, and it prevents a risk: his own spreadsheet keeps a copy of staff records. It goes near the top."},
  {"id":"dash","gap":0.8,"text":"A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again."},
  {"id":"loud","gap":0.8,"text":"Never by who asks, or how loudly."},
@@ -60,7 +61,8 @@ const NARR={
  {"id":"late","gap":0.8,"text":"That date can't move: a late timetable is a risk to prevent. So it goes near the top."},
  {"id":"clara","gap":0.8,"text":"On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.","say":"On Monday the twelfth of July, Clara, in Planning, asks for a new student forecast model, by the end of August too."},
  {"id":"same","gap":0.8,"text":"It goes on the same list, weighed the same way, and it hears not now, with a reason and a date."},
- {"id":"reason","gap":0.8,"text":"The reason: the timetable's date can't move. The date: the current model refreshed by the end of August, and the new one in October."},
+ {"id":"reason","gap":0.8,"text":"The reason: the timetable's date can't move, and her new model is for December's admissions."},
+ {"id":"date","gap":0.8,"text":"The date: the current model refreshed by the end of August, and the new one in October, still in time."},
  {"id":"ldp","gap":0.8,"text":"Saying it well, face to face, is a skill of its own, shown in the leading data people module."},
  {"id":"ats","gap":0.8,"text":"Emergency departments still do this, and call it triage: in Australia, five categories, each with a longest wait, from at once to two hours."},
  {"id":"never","gap":0.8,"text":"Not now always comes with a when."}

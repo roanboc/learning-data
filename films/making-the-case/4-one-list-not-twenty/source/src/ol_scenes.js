@@ -186,6 +186,8 @@ scene("order",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
         val:ag_in(tt,c.value,0.6),score:ag_in(tt,w("effort","puts",-0.2),0.5),hl:1,hlA:ag_io(tt,w("anil","risk",-0.3),c.dash-0.4),
         top:ag_in(tt,w("anil","top",-0.3),0.4),topK:tt-w("anil","top",-0.3)});
       ol_tagAt(x,tt,w("value","value",-0.3),c.loud-0.5,140,680,"Value: the opportunity and the risk prevented",{col:LP.green});
+      // time is part of that value (the author, 12 November 2026): what would be lost by waiting counts in it, with no measure of its own
+      ol_tagAt(x,tt,w("time","time",-0.3),c.loud-0.5,140,750,"Time is part of it: what would be lost by waiting",{col:LP.green});
       ol_tagAt(x,tt,w("anil","spreadsheet",-0.2),c.dash-0.5,940,394,"His own copy of staff records",{col:LP.amber});
       ol_cardAt(x,tt,d0,out,1020,150,760,OL_DASH,OL_DASHV,{light:"day",u:ag_in(tt,d0+0.3,1.2),val:ag_in(tt,d0+1.1,0.5),score:ag_in(tt,w("dash","decision",-0.2),0.5),
         wait:ag_in(tt,w("dash","waits",-0.2),0.4),waitK:tt-w("dash","waits",-0.2),why:ol_n(tt,[w("dash","why",-0.2),w("dash","when",-0.1)])});
@@ -223,7 +225,10 @@ scene("six",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
 
 /* ---------------------------------------------------------------- 6. Not now, and when */
 const OL_ROOMS={who:"The registrar's office",what:"Rooms' data for the new timetable"},OL_ROOMSV=[3,3,2];
-const OL_CLARA={who:"Clara, Planning",what:"A new student forecast model",why:"The timetable's date can't move",when:["Current model refreshed by 27 August","The new one by 29 October"]},OL_CLARAV=[3,1,3];
+// Clara's reason has two lines: the date that can't move, and why hers can (the new model is for December's admissions, so October is
+// still in time); her card is a line taller than the rooms' data's, and starts a line higher, so both end at the same height
+const OL_CLARA={who:"Clara, Planning",what:"A new student forecast model",why:["The timetable's date can't move","The new model is for December's admissions"],
+  when:["Current model refreshed by 27 August","The new one by 29 October"]},OL_CLARAV=[3,1,3];
 scene("when",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),gy={light:"grey"};
   ag_shots(ctx,S,t,sc.dur,[
     // the University Council's decision; the rooms' data the registrar's office needs for it, near the top
@@ -237,9 +242,9 @@ scene("when",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
     {at:c.clara-0.3,place:"olJuly",later:true,keys:[[0,960,540,1.0]],draw:(x,tt)=>{const k0=w("clara","asks",-0.2);
       lp_person(x,"clara",280,640,1.0,{t:tt,a:ag_in(tt,c.clara+0.2,0.6),light:gy});
       lp_nameTag(x,470,300,"clara",{a:ag_in(tt,w("clara","Clara",-0.1),0.5)});
-      ol_cardAt(x,tt,k0,null,1000,150,760,OL_CLARA,OL_CLARAV,{light:"grey",u:ag_in(tt,w("clara","model",0),2.0),val:ag_in(tt,w("clara","model",1.6),0.5),score:ag_in(tt,w("same","weighed",-0.1),0.5),
+      ol_cardAt(x,tt,k0,null,1000,112,760,OL_CLARA,OL_CLARAV,{light:"grey",u:ag_in(tt,w("clara","model",0),2.0),val:ag_in(tt,w("clara","model",1.6),0.5),score:ag_in(tt,w("same","weighed",-0.1),0.5),
         wait:ag_in(tt,w("same","not now",-0.2),0.4),waitK:tt-w("same","not now",-0.2),
-        why:ol_n(tt,[w("reason","timetable's",-0.2),w("reason","current",-0.2),w("reason","new one",-0.2)])});
+        why:ol_n(tt,[w("reason","timetable's",-0.2),w("reason","new model",-0.2),w("date","current",-0.2),w("date","new one",-0.2)])});
       ol_tagAt(x,tt,w("ldp","Saying",-0.1),null,1380,840,"Saying it well: Leading data people",{align:"center",col:LP.mut});}},
     // emergency departments still do this: triage, today
     {at:c.ats-0.3,place:"olJuly",later:true,keys:[[0,960,540,1.0]],draw:(x,tt)=>{const s0=c.ats+0.2;

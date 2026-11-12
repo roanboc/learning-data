@@ -207,7 +207,7 @@ scene("name",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({every:wAt(sc,
 scene("map",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({name:wAt(sc,"who","Its name"),map:wAt(sc,"who","Noor's map"),
     role:wAt(sc,"steps","planning contributor"),draft:wAt(sc,"steps","the drafting steps"),reads:wAt(sc,"steps","reads"),writes:wAt(sc,"steps","writes"),calls:wAt(sc,"steps","calls"),
     type:wAt(sc,"script","doesn't type"),script:wAt(sc,"script","A script"),rmap:wAt(sc,"script","reads the map"),wr:wAt(sc,"script","writes every tool's settings"),oneway:wAt(sc,"script","one way"),
-    grp:wAt(sc,"uc","a group named for the role"),rprod:wAt(sc,"uc","read production"),masked:wAt(sc,"uc","names masked"),build:wAt(sc,"uc","build only"),
+    grp:wAt(sc,"uc","a group named for the role"),rprod:wAt(sc,"ucmay","read production"),masked:wAt(sc,"ucmay","personal and sensitive"),build:wAt(sc,"ucmay","build only"),
     only:wAt(sc,"member","its only member"),second:wAt(sc,"member","a second agent"),same:wAt(sc,"member","the same rights"),
     ug:wAt(sc,"ug","In Unity Gateway"),model:wAt(sc,"ug","the one model"),servers:wAt(sc,"ug","the tool servers"),
     repo:wAt(sc,"gh","one repository"),perm:wAt(sc,"gh","two permissions"),dbt:wAt(sc,"gh","In dbt"),target:wAt(sc,"gh","a target of its own"),
@@ -243,15 +243,17 @@ scene("map",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({name:wAt(sc,"w
     {later:true,at:c.script,place:"obLab",keys:[[c.script,960,540,1]],push:0.015,draw:(x,tt)=>{
       ob_person(x,"sam",tt,{});ag_roomLight(x,1);ob_personCard(x,"sam",ag_in(tt,c.script+0.3,0.5));
       // the way the rights go: Noor's map, the script, every tool; by hand, tool by tool, is crossed out before the script comes
-      ob_tile(x,520,150,280,90,"Noor's map",{col:AG.kick,a:ag_in(tt,c.script+0.4,0.5)});
-      const ha=ag_io(tt,P.type,P.script-0.2,0.4);ob_tile(x,880,150,420,90,"by hand, tool by tool",{dash:true,a:ha});ob_cross(x,1090,195,26,ha*ag_in(tt,P.type+0.7,0.5),AG.amber);
-      ob_tile(x,880,150,420,90,"a script",{col:AG.blue,a:ag_in(tt,P.script,0.5),k:ag_spr(tt,P.script)});
-      arrow(x,808,195,872,195,P.rmap,tt);arrow(x,1308,195,1372,195,P.wr,tt);
-      ob_tile(x,1380,150,480,90,"every tool",{col:AG.blue,logos:["databricks","github","dbt"],a:ag_in(tt,P.wr+0.2,0.5),k:ag_spr(tt,P.wr+0.2)});
-      ob_pillL(x,1300,290,"one way",tt,P.oneway,c.uc-0.3,{col:AG.blue});
-      // Unity Catalog: the group and its grants, then its members
-      ob_list(x,520,300,640,{kick:"Unity Catalog",logo:"databricks",label:"group",title:"planning_contributors",titleF:"mono",a:ag_in(tt,P.grp,0.5),k:ag_spr(tt,P.grp),
-        rows:[{text:"read · production, names masked",marks:[["lock",ag_in(tt,P.masked,0.4)]],a:ag_in(tt,P.rprod,0.4)},
+      ob_tile(x,520,132,280,90,"Noor's map",{col:AG.kick,a:ag_in(tt,c.script+0.4,0.5)});
+      const ha=ag_io(tt,P.type,P.script-0.2,0.4);ob_tile(x,880,132,420,90,"by hand, tool by tool",{dash:true,a:ha});ob_cross(x,1090,177,26,ha*ag_in(tt,P.type+0.7,0.5),AG.amber);
+      ob_tile(x,880,132,420,90,"a script",{col:AG.blue,a:ag_in(tt,P.script,0.5),k:ag_spr(tt,P.script)});
+      arrow(x,808,177,872,177,P.rmap,tt);arrow(x,1308,177,1372,177,P.wr,tt);
+      ob_tile(x,1380,132,480,90,"every tool",{col:AG.blue,logos:["databricks","github","dbt"],a:ag_in(tt,P.wr+0.2,0.5),k:ag_spr(tt,P.wr+0.2)});
+      ob_pillL(x,1300,272,"one way",tt,P.oneway,c.uc-0.3,{col:AG.blue});
+      // Unity Catalog: the group and its grants, then its members. What it reads in production comes with personal and sensitive data
+      // masked, a row of its own; the card holds five rows, so it and the row of boxes above stand a little higher than four would need
+      ob_list(x,520,248,640,{kick:"Unity Catalog",logo:"databricks",label:"group",title:"planning_contributors",titleF:"mono",a:ag_in(tt,P.grp,0.5),k:ag_spr(tt,P.grp),
+        rows:[{text:"read · production",a:ag_in(tt,P.rprod,0.4)},
+          {text:"personal and sensitive data masked",marks:[["lock",1]],a:ag_in(tt,P.masked,0.4)},
           {text:"build · only in its own schemas",a:ag_in(tt,P.build,0.4)},
           {text:"member · planning agent",col:AG.violet,a:ag_in(tt,P.only,0.4),hl:ag_io(tt,P.only,P.second,0.4),hlCol:AG.violet},
           {text:"a second agent in the role",dash:true,a:ag_in(tt,P.second,0.4)}]});

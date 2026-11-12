@@ -167,9 +167,10 @@ scene("borrowed",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",(
 function rf_stepCard(x,name,reads,writes,calls,u,o){return rf_rows(x,720,120,1100,{kick:"Step · "+name},[
   {lab:"READS",t:reads,ta:u[0]},{lab:"WRITES",t:writes,ta:u[1]},{lab:"CALLS",t:calls,ta:u[2],mute:true}],{labW:170,a:o.a,k:o.k});}
 // the planning contributor's rights, each with the step that needs it; o.chips [6], o.glow
+// (what it reads in production takes two lines: personal and sensitive data come masked)
 const RF_RIGHTS=[["read the ticket","draft the change"],["read what the change touches","draft the change"],["write its own branch","draft the change"],
-  ["read production, names masked","build it in development"],["write its own development schema","build it in development"],["write one pull request","open a pull request"]];
-function rf_rightsCard(x,o){const b=rf_rows(x,720,120,1100,{kick:"Its rights · made from its steps"},RF_RIGHTS.map(([t,ch],i)=>({t,chip:ch,chipA:o.chips?o.chips[i]:1,
+  ["read production, personal and sensitive data masked","build it in development",["read production,","personal and sensitive data masked"]],["write its own development schema","build it in development"],["write one pull request","open a pull request"]];
+function rf_rightsCard(x,o){const b=rf_rows(x,720,120,1100,{kick:"Its rights · made from its steps"},RF_RIGHTS.map(([t,ch,ls],i)=>({t,lines:ls,chip:ch,chipA:o.chips?o.chips[i]:1,
     a:o.rows?o.rows[i]:1})),{a:o.a,k:o.k,glow:o.glow||0,glowCol:o.glowCol,edge:o.edge,edgeA:o.edgeA});
   return b;}
 scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>({pa:wAt(sc,"monday","the planning agent"),map:wAt(sc,"monday","on the map"),
@@ -197,7 +198,7 @@ scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>
       const cw=k=>[ag_in(tt,[P.d1,P.b1,P.o1][k],0.4),ag_in(tt,[P.d2,P.b2,P.o2][k],0.4),ag_in(tt,[P.d2+1.0,P.b2+1.2,P.o2+0.8][k],0.4)];
       rf_stepCard(x,"draft the change","the ticket · what the change touches","the change, on its own branch","tickets · docs · catalog · repository · memory · language model",
         cw(0),{a:ag_io(tt,P.reads-0.3,c.build-0.3,0.4),k:ag_spr(tt,P.reads-0.3)});
-      rf_stepCard(x,"build it in development","production, names masked","its tests' results, in its own development schema","build · query · language model",
+      rf_stepCard(x,"build it in development","production, personal and sensitive data masked","its tests' results, in its own development schema","build · query · language model",
         cw(1),{a:ag_io(tt,c.build+0.2,c.open-0.3,0.4)});
       rf_stepCard(x,"open a pull request","its change and its results","one pull request","repository · language model",cw(2),{a:ag_io(tt,c.open+0.2,c.exactly-0.3,0.4)});
       // its rights are exactly those, each naming the step that needs it; like the drawer; the map makes the list from the steps
@@ -328,7 +329,7 @@ scene("change",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=
 
 /* ---------------------------------------------------------------- 7 · A drawer of its own */
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>({one:wAt(sc,"drawer","one day's doses"),order:wAt(sc,"drawer","one order"),
-    three:wAt(sc,"here","its three steps"),more:wAt(sc,"here","nothing more"),reason:wAt(sc,"reason","a reason"),prod:wAt(sc,"reason","reaches production"),
+    three:wAt(sc,"here","its three steps"),more:wAt(sc,"here","nothing more"),reason:wAt(sc,"reason","a reason"),prod:wAt(sc,"reason","change production"),
     jun:wAt(sc,"jun","Jun's rights"),own:wAt(sc,"jun","his own"),lesson:wAt(sc,"lesson","An agent's rights")}));
   ag_shots(ctx,S,t,sc.dur,[
     // on the ward, each patient's drawer held one day's doses, filled from one order
@@ -337,14 +338,15 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>
       rf_order(x,1374,232,190,{h:118,r:-0.05,title:"ORDER",seed:3,a:ag_in(tt,P.order-0.3,0.4)});
       rf_scr(x,S,()=>{rf_pillL(x,560,170,"one day's doses",{col:AG.blue,a:ag_in(tt,P.one,0.4)});rf_pillL(x,560,250,"filled from one order",{col:AG.blue,a:ag_in(tt,P.order,0.4)});});}},
     // here, the planning agent holds what its three steps need, and nothing more; every right has a reason anyone can read, and none
-    // of them reaches production; and Jun's rights stay his own
+    // of them lets it change production (one of them reads it); and Jun's rights stay his own. The card is a line taller than
+    // its six rights, so the two pills and Jun stand 40 px lower, clear of it
     {at:c.here-0.5,place:"rfLab",keys:[[c.here-0.5,960,540,1]],push:0,draw:(x,tt)=>{const out=1-ag_in(tt,c.breath+0.4,0.8);withA(x,out,()=>{
       const jx=rf_slide(tt,P.jun-0.5,2150,1690,1.3),ja=ag_in(tt,P.jun-0.5,0.5);
-      rf_agent(x,FT,{});if(ja>0)rf_who(x,"jun",FT,jx,742,0.72,{a:ja,p:{flip:true,gaze:[4,-1]}});ag_roomLight(x,1);
+      rf_agent(x,FT,{});if(ja>0)rf_who(x,"jun",FT,jx,782,0.72,{a:ja,p:{flip:true,gaze:[4,-1]}});ag_roomLight(x,1);
       rf_rightsCard(x,{chips:[0,1,2,3,4,5].map(i=>1),glow:Math.max(ag_io(tt,P.reason,P.reason+1.8,0.4),ag_in(tt,P.lesson,0.6)),glowCol:AG.green,
         edge:tt>P.lesson?AG.green:AG.blue,edgeA:0.6});
-      rf_pillL(x,720,566,"none reaches production",{icon:"lock",col:AG.amber,a:ag_in(tt,P.prod,0.4)});
-      rf_pillL(x,720,662,"Jun's rights stay his own",{col:AG.blue,a:ag_in(tt,P.own-0.2,0.4)});
+      rf_pillL(x,720,606,"none changes production",{icon:"lock",col:AG.amber,a:ag_in(tt,P.prod,0.4)});
+      rf_pillL(x,720,702,"Jun's rights stay his own",{col:AG.blue,a:ag_in(tt,P.own-0.2,0.4)});
       RF_KICK(x);});}}
   ],0.6);
   rf_tags(ctx,S,t,[[0.6,c.here-0.7,RF_TAG_US]]);

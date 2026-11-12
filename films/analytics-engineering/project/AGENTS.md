@@ -33,9 +33,9 @@ grant use schema, select on schema <production catalog>.<schema>_marts to `<agen
 grant all privileges on schema <development catalog>.<agent's schema> to `<agent service principal>`;
 ```
 
-dbt's access levels (`private`, `protected`, `public`) say which models can `ref()` which; they
-don't say who can read a table. Grants do: see `+grants` on the Planning marts in
-`dbt_project.yml`.
+What you read in production is limited: only the schemas your role's steps need, read-only, and with personal and sensitive data masked. The catalog's policy stars every column of direct personal data for every identity outside its readers, and nothing special category or restricted is in the schemas you're granted.
+
+dbt's access levels (`private`, `protected`, `public`) say which models can `ref()` which; they don't say who can read a table. Grants do: see `+grants` on the Planning marts in `dbt_project.yml`.
 
 ## What you must not do
 

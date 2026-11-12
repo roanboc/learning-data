@@ -322,7 +322,7 @@ prep(C4, cw('goes', 'a step goes', 0.2), 0.5, px(1270), 'rubber')
 tap(cw('drift', 'is drift', -0.2), 0.008, px(1000)); tap(cw('drift', 'the next film'), 0.007, px(1000))
 
 # 7. A drawer of its own: back on the ward, B and G as the drawer comes, the order laid by it, the drawer slid shut. Here: "nothing
-#    more", the brake, damped. None reaches production: a lock. Jun's rights stay his own: a tap. The end card: the mark, the last
+#    more", the brake, damped. None changes production: a lock. Jun's rights stay his own: a tap. The end card: the mark, the last
 #    time, and G, D and G after it, prepared like every note before
 kw = lambda lid, word, off=0: W('close', lid, word, off)
 kc = lambda lid, off=0: G('close', lid, off)
@@ -331,7 +331,7 @@ P_order = kw('drawer', 'one order')
 paper(P_order - 0.3, 0.010, px(1374)); tap(kw('drawer', "one day's doses"), 0.007, px(560))
 drawer(kc('here', -1.5), 0.8, 0.006, px(1550), shut=True)
 brake(D4, kw('here', 'nothing more', 0.1), 0.7, px(1270), 0.2)
-lock(kw('reason', 'reaches production'), 0.009, px(990))
+lock(kw('reason', 'change production'), 0.009, px(990))
 tap(kw('jun', 'his own', -0.2), 0.008, px(960))
 P_end = kc('breath')
 mark(P_end + 0.3, 0.8, 0.0)

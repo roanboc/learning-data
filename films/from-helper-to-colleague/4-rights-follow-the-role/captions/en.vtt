@@ -99,119 +99,119 @@ Each step says what it reads, what it writes, and which tools it calls.
 00:03:43.025 --> 00:03:48.715
 To draft the change, it reads the ticket and what the change touches, and writes on its own branch.
 
-00:03:50.615 --> 00:03:57.003
-To build it, it reads production, names masked, and writes its tests' results in its own development schema.
+00:03:50.615 --> 00:03:58.628
+To build it, it reads production, with personal and sensitive data masked, and writes its tests' results in its own development schema.
 
-00:03:58.903 --> 00:04:04.530
+00:04:00.528 --> 00:04:06.155
 To open the pull request, it reads its change and its results, and writes one pull request.
 
-00:04:06.630 --> 00:04:10.963
+00:04:08.255 --> 00:04:12.588
 Its rights are exactly those, and every right names the step that needs it.
 
-00:04:12.863 --> 00:04:15.963
+00:04:14.488 --> 00:04:17.588
 Like the drawer: filled from the order, not from the shelf.
 
-00:04:17.463 --> 00:04:22.101
+00:04:19.088 --> 00:04:23.726
 The list is short, and nobody wrote it by hand: the map makes it from the steps.
 
-00:04:23.801 --> 00:04:27.571
+00:04:25.426 --> 00:04:29.196
 That Monday, Sam set up its grants from that list, and nothing more.
 
-00:04:31.171 --> 00:04:34.592
+00:04:32.796 --> 00:04:36.217
 What a role reads is part of its rights, and the order matters.
 
-00:04:35.692 --> 00:04:43.309
+00:04:37.317 --> 00:04:44.934
 First, the governed context: its place on the map, the glossary, the business and data rules, and the data's own descriptions.
 
-00:04:45.209 --> 00:04:48.119
+00:04:46.834 --> 00:04:49.744
 Each has an owner, and changes only through review.
 
-00:04:49.419 --> 00:04:54.865
+00:04:51.044 --> 00:04:56.490
 Second, the team's memory: what agents learned in earlier sessions, kept by the platform.
 
-00:04:56.365 --> 00:05:00.189
+00:04:57.990 --> 00:05:01.814
 Memory helps, but it can be wrong, and nobody checks every line of it.
 
-00:05:01.489 --> 00:05:05.367
+00:05:03.114 --> 00:05:06.992
 So when memory and a definition disagree, the definition wins.
 
-00:05:06.867 --> 00:05:10.864
+00:05:08.492 --> 00:05:12.489
 And the agent says so in its report, so the definition's owner sees it.
 
-00:05:12.364 --> 00:05:17.833
+00:05:13.989 --> 00:05:19.458
 Like the pharmacist with the doctor's own order: the original first, a copy only second.
 
-00:05:21.233 --> 00:05:23.985
+00:05:22.858 --> 00:05:25.610
 What's left out is written down too, with the reason.
 
-00:05:25.085 --> 00:05:27.336
+00:05:26.710 --> 00:05:28.961
 The other four steps belong to other roles.
 
-00:05:28.436 --> 00:05:31.309
+00:05:30.061 --> 00:05:32.934
 Raising a ticket is the requester's: Clara's.
 
-00:05:32.409 --> 00:05:35.646
+00:05:34.034 --> 00:05:37.271
 Reviewing the code is the analytics engineer's: Jun's.
 
-00:05:36.746 --> 00:05:40.005
+00:05:38.371 --> 00:05:41.630
 Approving the change is the release approver's: Noor's.
 
-00:05:41.105 --> 00:05:43.586
+00:05:42.730 --> 00:05:45.211
 And releasing it to production is Noor's too.
 
-00:05:44.886 --> 00:05:51.684
+00:05:46.511 --> 00:05:53.309
 And what a word means is decided by its owner, such as Mei for the students' words, before it goes into the glossary.
 
-00:05:53.184 --> 00:05:59.402
+00:05:54.809 --> 00:06:01.027
 So it never approves, never releases, never changes what a word means, and never writes to production.
 
-00:06:01.102 --> 00:06:05.676
+00:06:02.727 --> 00:06:07.301
 Nobody had to forbid each one: separation of duties falls out of the steps.
 
-00:06:07.176 --> 00:06:10.374
+00:06:08.801 --> 00:06:11.999
 As on the ward: one ordered, one filled, and one gave.
 
-00:06:11.874 --> 00:06:17.447
+00:06:13.499 --> 00:06:19.072
 And a check fails the map if a step only people do is given to a role an agent fills.
 
-00:06:20.847 --> 00:06:24.512
+00:06:22.472 --> 00:06:26.137
 Work changes, and the rights follow it, never the other way round.
 
-00:06:26.212 --> 00:06:31.336
+00:06:27.837 --> 00:06:32.961
 Say Planning wants the agent to answer its questions too, not only draft its changes.
 
-00:06:33.236 --> 00:06:38.417
+00:06:34.861 --> 00:06:40.042
 That's new work, so first it's a new step on the map, saying what it reads, writes and calls.
 
-00:06:40.717 --> 00:06:44.912
+00:06:42.342 --> 00:06:46.537
 Noor adds it to the role once Clara and the owners of what it reads agree.
 
-00:06:46.812 --> 00:06:50.236
+00:06:48.437 --> 00:06:51.861
 Then its rights follow: new lines, each with the new step.
 
-00:06:52.336 --> 00:06:55.470
+00:06:53.961 --> 00:06:57.095
 And the tools follow the rights, never a grant by hand.
 
-00:06:57.370 --> 00:07:04.381
+00:06:58.995 --> 00:07:06.006
 Until then, if a ticket needs more than its steps give, the agent doesn't borrow a way in: it stops, and asks.
 
-00:07:06.481 --> 00:07:08.796
+00:07:08.106 --> 00:07:10.421
 When a step goes, its rights go with it.
 
-00:07:10.696 --> 00:07:15.174
+00:07:12.321 --> 00:07:16.799
 A right given by hand is drift, and the next film shows the check that finds it.
 
-00:07:19.374 --> 00:07:24.165
+00:07:20.999 --> 00:07:25.790
 On the ward, each patient's drawer held one day's doses, filled from one order.
 
-00:07:25.665 --> 00:07:29.859
+00:07:27.290 --> 00:07:31.484
 Here, the planning agent holds what its three steps need, and nothing more.
 
-00:07:31.159 --> 00:07:36.161
-Every right it holds has a reason anyone can read, and none of them reaches production.
+00:07:32.784 --> 00:07:38.139
+Every right it holds has a reason anyone can read, and none of them lets it change production.
 
-00:07:37.461 --> 00:07:39.139
+00:07:39.439 --> 00:07:41.117
 And Jun's rights stay his own.
 
-00:07:40.439 --> 00:07:43.702
+00:07:42.417 --> 00:07:45.680
 An agent's rights come from its work, not from a person's.

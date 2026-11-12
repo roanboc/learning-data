@@ -45,7 +45,7 @@ const NARR={
  {"id":"people","gap":0.8,"text":"People keep the rest. Clara raises the ticket, Jun reviews the code, and Noor approves the change and releases it."},
  {"id":"sod","gap":0.8,"text":"So whoever drafts a change never approves or releases it: separation of duties, on the map."},
  {"id":"agent","gap":0.8,"text":"Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place."},
- {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with names masked, and draft on its own branches."},
+ {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with personal and sensitive data masked, and draft on its own branches."},
  {"id":"build","gap":0.8,"text":"It may also build in its own development schema, and open a pull request."},
  {"id":"maynot","gap":0.8,"text":"What it may not do: approve, merge, change production, change an approved test, change what a word means, or grant itself rights."},
  {"id":"asks","gap":0.8,"text":"And whom it asks: Clara for what Planning needs, Mei for what a word means, Noor for the model, and Jun for the code."},

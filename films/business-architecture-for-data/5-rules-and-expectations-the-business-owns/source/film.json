@@ -1,0 +1,31 @@
+{
+  "key": "rules-and-expectations-the-business-owns",
+  "title": "Rules and expectations the business owns",
+  "sub": "Business architecture for data, the second series on enterprise architecture: where the business's rules come from, a policy carried out by processes, procedures and records; a decision's rules kept in a table beside the step that applies them; quality expectations set by the owner of the step that uses the data, written down before any check is built; the source checking its own data first; and the data product whose contract holds what its readers expect.",
+  "howto": "Glass in the layers' colours is the confirmed model: yellow is the business layer, where the processes sit, salmon the information layer, where the business's concepts sit, and purple a requirement, a rule or an expectation. Gold marks an owner; blue the data team. Amber marks an estimate, and a reading late for the step that needs it. In the desert, blue is the water, and the people of the story are silhouettes.",
+  "src": [
+    "../../../shared/src/ba.js",
+    "scenes.js"
+  ],
+  "story": ["outlets"],
+  "poster": ["late", "rule", 3.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bqanat's\\b", "kah-naht's"],
+    ["\\bqanats\\b", "kah-nahts"],
+    ["\\bqanat\\b", "kah-naht"],
+    ["\\bSehdeh\\b", "Seh-deh"],
+    ["\\bDastgerd\\b", "Dahst-gerd"],
+    ["\\bParvar\\b", "Par-var"],
+    ["\\bKarton\\b", "Kar-tohn"],
+    ["\\bmuqannis\\b", "moo-kah-neez"],
+    ["\\bmirab\\b", "mee-rahb"],
+    ["\\b1960s\\b", "nineteen-sixties"],
+    ["\\b1600s\\b", "sixteen-hundreds"],
+    ["\\bISO 9000\\b", "eye-so nine thousand"],
+    ["\\bArchiMate\\b", "Arky-mate"],
+    ["\\bBPMN\\b", "B P M N"],
+    ["\\bDMN\\b", "D M N"]
+  ]
+}

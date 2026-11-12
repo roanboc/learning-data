@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for What an agent may read, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (level, tool, who), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the
+   series' labs page (the page's .player data-labs is "../labs/"); a question without one has no lab link. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  level:{q:"How does Inés keep people's medical needs away from the chat?",
+    opts:[{t:"She puts a mask over them, so the chat sees blanks where the medical needs would be.",near:true},{t:"She gives the chat a place of its own, and the medical needs are never put in it.",ok:true},{t:"She writes in the chat's instructions that it must never repeat a medical need."}],
+    why:"A mask leaves what the chat mustn't read in its reach, and one wrong rule lets it through. Inés gives the chat a place of its own that holds only what it may read, reached by its own identity: what it may not read isn't there at all. An instruction is no boundary either: the chat could still read what it reaches. An agent that works on the data team's pipelines reads production with personal and sensitive data masked, to find a cause; a chat that answers the public needs none of it, so none of it is in its place. In your organisation, could an agent reach data it's only told not to use?"},
+  tool:{q:"Some homes must hear from a person before planned work. What does the small tool tell the chat?",
+    opts:[{t:"Only whether to hand this signed-in household to a person now: yes or no.",ok:true},{t:"Whether to hand the household over, and which medical need makes it urgent.",near:true},{t:"The whole list of homes to hand to a person, so the chat can look one up."}],
+    why:"The chat can't tell which homes those are without reading medical needs, so it doesn't. The team that keeps the list offers a small tool that answers, for a signed-in household, only \"hand this to a person now\", or not. Never why: the person who calls back sees why, and first checks who they're speaking to. The reason, or the whole list, would put restricted data back in the chat's reach. What does an agent of yours need to know, and what could it be told instead?"},
+  who:{q:"The chat is to read the official products. Who agrees that it may read each one?",
+    opts:[{t:"The data team, as it reviews the pull request that builds the chat's place.",near:true},{t:"Ama, the regulatory lead, as she checks in test that nothing restricted is there."},{t:"Each product's owner, in the ticket, as for any new reader of their product.",ok:true}],
+    why:"The head of retail, who answers for the chat, asks in a ticket, and each product's owner agrees there, as for any new reader: Grace for planned work, retail for tariffs and accounts. The data team builds the chat's place and reviews the change in a pull request, and before the ticket closes Ama checks, in test, that nothing restricted is in it. Owners agree in the ticket; they don't review code. In your organisation, who agrees when a new reader wants a team's data?"}
+  }}};

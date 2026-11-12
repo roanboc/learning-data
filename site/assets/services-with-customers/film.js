@@ -450,7 +450,8 @@ const NARR={
 "layers":{"name":"Down every layer","lead":1.0,"tail":1.0,"vo":[
  {"id":"walk","gap":0.8,"text":"Then Helena and Noor walk one service, governed data products, down every layer, with a picture for each."},
  {"id":"five","gap":0.8,"text":"Five layers: strategy, business, information, application and technology."},
- {"id":"names","gap":0.8,"text":"They're ArchiMate's layers, with TOGAF's data called information; The map before the data draws them in full."},
+ {"id":"names","gap":0.8,"text":"Four are ArchiMate's layers; information is what TOGAF calls data."},
+ {"id":"either","gap":0.8,"text":"At the level of the whole university, either word is fine; Between the business and the systems tells why."},
  {"id":"strategy","gap":0.8,"text":"Strategy: the capability it serves, deciding from trusted data."},
  {"id":"business","gap":0.8,"text":"Business: the service and its promise, checked by seven each morning, and who builds, reviews and owns each product."},
  {"id":"info","gap":0.8,"text":"Information: what it's about, such as rooms, bookings and the people counted in them."},
@@ -480,7 +481,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"sight/when": 3.773, "sight/doctor": 6.127, "sight/beds": 3.01, "sight/cataract": 7.794, "sight/harm": 7.234, "sight/fix": 2.344, "sight/cost": 4.23, "sight/change": 3.478, "sight/service": 5.455, "sight/groups": 5.84, "sight/free": 3.111, "sight/camps": 4.904, "sight/below": 6.886, "sight/lenses": 6.313, "sight/today": 7.844, "sight/pays": 8.484, "sight/data": 3.368, "sight/design": 5.51, "services/series": 6.306, "services/may": 6.985, "services/run": 4.906, "services/first": 4.016, "services/products": 3.586, "services/platform": 4.202, "services/analysis": 2.274, "services/advice": 1.58, "services/catalogue": 6.687, "services/suppliers": 8.09, "customers/groups": 3.968, "customers/listen": 5.86, "customers/decide": 7.643, "customers/partners": 5.837, "customers/readers": 6.525, "customers/whose": 5.513, "customers/canvas": 5.95, "customers/noor": 6.378, "layers/walk": 6.254, "layers/five": 4.848, "layers/names": 6.536, "layers/strategy": 4.106, "layers/business": 6.897, "layers/info": 4.851, "layers/app": 4.829, "layers/tech": 1.816, "layers/each": 2.906, "layers/none": 6.626, "layers/why": 4.724, "door/open": 3.664, "door/list": 4.8, "door/graham": 4.575, "door/three": 2.708, "door/hand": 4.352, "door/fill": 5.499, "door/gap": 5.38, "monday/back": 5.619, "monday/helena": 6.56, "monday/define": 3.983, "monday/name": 4.884, "monday/walk": 3.216, "monday/ask": 2.775, "monday/take": 3.998};
+const VODUR={"sight/when": 3.773, "sight/doctor": 6.127, "sight/beds": 3.01, "sight/cataract": 7.794, "sight/harm": 7.234, "sight/fix": 2.344, "sight/cost": 4.23, "sight/change": 3.478, "sight/service": 5.455, "sight/groups": 5.84, "sight/free": 3.111, "sight/camps": 4.904, "sight/below": 6.886, "sight/lenses": 6.313, "sight/today": 7.844, "sight/pays": 8.484, "sight/data": 3.368, "sight/design": 5.51, "services/series": 6.306, "services/may": 6.985, "services/run": 4.906, "services/first": 4.016, "services/products": 3.586, "services/platform": 4.202, "services/analysis": 2.274, "services/advice": 1.58, "services/catalogue": 6.687, "services/suppliers": 8.09, "customers/groups": 3.968, "customers/listen": 5.86, "customers/decide": 7.643, "customers/partners": 5.837, "customers/readers": 6.525, "customers/whose": 5.513, "customers/canvas": 5.95, "customers/noor": 6.378, "layers/walk": 6.254, "layers/five": 4.848, "layers/names": 4.251, "layers/either": 6.23, "layers/strategy": 4.106, "layers/business": 6.897, "layers/info": 4.851, "layers/app": 4.829, "layers/tech": 1.816, "layers/each": 2.906, "layers/none": 6.626, "layers/why": 4.724, "door/open": 3.664, "door/list": 4.8, "door/graham": 4.575, "door/three": 2.708, "door/hand": 4.352, "door/fill": 5.499, "door/gap": 5.38, "monday/back": 5.619, "monday/helena": 6.56, "monday/define": 3.983, "monday/name": 4.884, "monday/walk": 3.216, "monday/ask": 2.775, "monday/take": 3.998};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -490,7 +491,7 @@ const BREATH={
 "sight":{"hold":{"when":1.2,"doctor":0.8,"beds":1.0,"cataract":1.0,"harm":1.4,"fix":0.8,"cost":1.0,"change":1.2,"service":1.2,"groups":1.0,"free":1.0,"camps":1.0,"below":1.2,"lenses":1.0,"today":1.2,"pays":1.2,"data":0.8},"breathe":5.4},
 "services":{"hold":{"series":1.2,"may":1.0,"run":1.0,"first":0.8,"products":0.8,"platform":0.8,"analysis":0.8,"advice":1.0,"catalogue":1.0}},
 "customers":{"hold":{"groups":0.8,"listen":1.0,"decide":1.2,"partners":1.2,"readers":1.2,"whose":1.2,"canvas":1.0}},
-"layers":{"hold":{"walk":0.8,"five":0.8,"names":0.8,"strategy":0.6,"business":0.8,"info":0.6,"app":0.6,"tech":0.6,"each":0.8,"none":1.2}},
+"layers":{"hold":{"walk":0.8,"five":0.8,"either":0.8,"strategy":0.6,"business":0.8,"info":0.6,"app":0.6,"tech":0.6,"each":0.8,"none":1.2}},
 "door":{"hold":{"open":1.0,"list":1.2,"graham":1.0,"three":1.0,"hand":1.0,"fill":1.0}},
 "monday":{"hold":{"back":1.0,"helena":1.0,"define":0.4,"name":0.4,"walk":0.4,"ask":0.8},"breathe":5.0}
 };
@@ -2273,9 +2274,13 @@ scene("layers",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       lp_person(x,"helena",330,640,1.0,{t:tt,a:g*ag_in(tt,0.4,0.6),light:mo});lp_person(x,"noor",1620,660,0.95,{t:tt,flip:true,a:g,light:mo});}},
     // five layers, a picture each
     {at:c.five-0.3,place:"swcMay",later:true,keys:[[c.five-0.3,960,540,1.0]],draw:(x,tt)=>{
-      let hl=-1;for(const [id,i] of HL)if(tt>=c[id]-0.1)hl=i;if(tt>=c.each-0.2)hl=-1;
+      // the information layer lights up while its other name is said: TOGAF and DAMA call it data
+      let hl=tt>=w("names","information",-0.1)?2:-1;for(const [id,i] of HL)if(tt>=c[id]-0.1)hl=i;if(tt>=c.each-0.2)hl=-1;
       swc_layers(x,360,206,1200,{a:1-ag_in(tt,c.none-0.7,0.4),u:L0.map(t0=>ag_in(tt,t0,0.6)),hl,top:ag_in(tt,w("each","customer",-0.2),0.6),light:"morning"});
-      swc_tag(x,tt,w("names","ArchiMate's",-0.2),c.strategy-0.3,960,130,"ArchiMate's layers; TOGAF's data is information",{align:"center",col:LP.ink});}},
+      // the note, then the film that explains the two words; the first leaves before the second comes in
+      const n1=w("either","Between",-0.3);
+      swc_tag(x,tt,w("names","TOGAF",-0.2),n1-0.5,960,130,"TOGAF and DAMA call it data",{align:"center",col:LP.ink});
+      swc_tag(x,tt,n1,c.strategy-0.3,960,130,"More in Between the business and the systems",{align:"center",col:LP.ink});}},
     // the old warehouse: the reports no one opens
     {at:c.none-0.3,place:"swcMay",later:true,keys:[[c.none-0.3,960,540,1.0]],draw:(x,tt)=>{const r0=w("none","warehouse",-0.1);
       swc_reports(x,540,170,{a:ag_in(tt,r0,0.4),u:ag_in(tt,r0,1.4),amb:ag_in(tt,w("none","seventeen",-0.1),1.0)});

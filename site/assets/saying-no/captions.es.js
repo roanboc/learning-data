@@ -86,8 +86,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los datos de las aulas toman tres de las cuatro semanas de agosto. Un modelo nuevo, seis, y tiempo para probarlo.",
 "Refreshing the current model takes one week.":
 "Poner al día el modelo actual lleva una semana.",
-"The order isn't Helena's to choose. The list is ordered by value, urgency, effort and risk, never by who asks.":
-"El orden no lo elige Helena. La lista se ordena por valor, urgencia, esfuerzo y riesgo, nunca por quién pide.",
+"The order isn't Helena's to choose. The list is ordered by value and effort, never by who asks.":
+"El orden no lo elige Helena. La lista se ordena por valor y esfuerzo, nunca por quién pide.",
 "Fisher and Ury call that fair criteria: what both sides can check, not who pushes harder.":
 "Fisher y Ury lo llaman criterios justos: lo que ambas partes pueden comprobar, no quién presiona más.",
 "Then they look for options that serve both interests: the budget by September, and early warning by December.":

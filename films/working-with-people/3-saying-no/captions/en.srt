@@ -155,101 +155,101 @@ The rooms' data takes three of August's four weeks. A new model takes six, and t
 Refreshing the current model takes one week.
 
 40
-00:05:13,255 --> 00:05:20,581
-The order isn't Helena's to choose. The list is ordered by value, urgency, effort and risk, never by who asks.
+00:05:13,255 --> 00:05:19,260
+The order isn't Helena's to choose. The list is ordered by value and effort, never by who asks.
 
 41
-00:05:22,281 --> 00:05:28,061
+00:05:20,960 --> 00:05:26,740
 Fisher and Ury call that fair criteria: what both sides can check, not who pushes harder.
 
 42
-00:05:29,961 --> 00:05:36,613
+00:05:28,640 --> 00:05:35,292
 Then they look for options that serve both interests: the budget by September, and early warning by December.
 
 43
-00:05:39,313 --> 00:05:45,602
+00:05:37,992 --> 00:05:44,281
 William Ury calls it a positive no: a yes to what you must protect, then a clear no, then an offer.
 
 44
-00:05:47,502 --> 00:05:53,445
+00:05:46,181 --> 00:05:52,124
 The Kok-Aral dam was one: a yes to the part that could be saved, and a plain no to the whole sea.
 
 45
-00:05:55,145 --> 00:05:59,090
+00:05:53,824 --> 00:05:57,769
 Helena's yes is to the timetable change, and to work done well.
 
 46
-00:06:00,590 --> 00:06:03,620
+00:05:59,269 --> 00:06:02,299
 Her no is to the date: no new model by August.
 
 47
-00:06:05,320 --> 00:06:12,823
+00:06:03,999 --> 00:06:11,502
 Her offer: the current model, refreshed with this year's figures, by Friday 27 August, in time for the budget.
 
 48
-00:06:14,723 --> 00:06:19,431
+00:06:13,402 --> 00:06:18,110
 And the new model by Friday 29 October, before the admissions round.
 
 49
-00:06:21,131 --> 00:06:22,889
+00:06:19,810 --> 00:06:21,568
 Then she asks: would that work?
 
 50
-00:06:24,789 --> 00:06:32,348
+00:06:23,468 --> 00:06:31,027
 It's Clara's to choose. If she disagreed, the data council would settle it in the open on Tuesday 27 July.
 
 51
-00:06:34,248 --> 00:06:40,267
+00:06:32,927 --> 00:06:38,946
 Clara agrees. Both dates go on the one list, in writing: not now, with a reason and a date.
 
 52
-00:06:42,967 --> 00:06:50,127
+00:06:41,646 --> 00:06:48,806
 On Friday 27 August, the refreshed model goes to Planning, and the rooms' data to the registrar's office.
 
 53
-00:06:52,027 --> 00:06:57,556
+00:06:50,706 --> 00:06:56,235
 On Friday 17 September, the budget round closes, with Planning's numbers in it.
 
 54
-00:06:59,456 --> 00:07:06,857
+00:06:58,135 --> 00:07:05,536
 On Friday 29 October, the new model is ready, reviewed before anyone reads it, in time for admissions.
 
 55
-00:07:08,757 --> 00:07:14,445
+00:07:07,436 --> 00:07:13,124
 In November, Clara brings Planning's next request early, with what it's for and when she needs it.
 
 56
-00:07:16,345 --> 00:07:20,850
+00:07:15,024 --> 00:07:19,529
 A clear no with an offer, kept, built more trust than a yes nobody could keep.
 
 57
-00:07:23,550 --> 00:07:29,453
+00:07:22,229 --> 00:07:28,132
 At the Aral, the dam didn't promise the whole sea. It saved the part it could, and the water came back.
 
 58
-00:07:31,353 --> 00:07:38,609
+00:07:30,032 --> 00:07:37,288
 Helena did the same: she asked what the date was for, showed the trade-off, offered what the team could do well, and kept her word.
 
 59
-00:07:40,509 --> 00:07:43,506
+00:07:39,188 --> 00:07:42,185
 On Monday, when a date can't be met, ask what it's for.
 
 60
-00:07:45,206 --> 00:07:48,056
+00:07:43,885 --> 00:07:46,735
 Put the trade-off on the list, where everyone can see it.
 
 61
-00:07:49,556 --> 00:07:53,686
+00:07:48,235 --> 00:07:52,365
 Say no to the date, not the person, and offer what you can do well, and when.
 
 62
-00:07:55,186 --> 00:07:58,903
+00:07:53,865 --> 00:07:57,582
 Let the people who decide choose, write it down, and keep your word.
 
 63
-00:08:00,403 --> 00:08:05,645
+00:07:59,082 --> 00:08:04,324
 The next film, Less, on purpose, opens a new series: what a team stops doing, together.
 
 64
-00:08:07,345 --> 00:08:10,042
+00:08:06,024 --> 00:08:08,721
 Never a bare no: say what you can do, and when.

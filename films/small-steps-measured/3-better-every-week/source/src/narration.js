@@ -26,7 +26,7 @@ const NARR={
  {"id":"sept","gap":0.8,"text":"September 2027, at the university. Since July, the team has read its measures together every second Thursday.","say":"September twenty twenty-seven, at the university. Since July, the team has read its measures together every second Thursday."},
  {"id":"fixes","gap":0.8,"text":"Those readings have fixed two waits already: the leading data people module tells how."},
  {"id":"half","gap":0.8,"text":"From Friday 3 September, Helena protects half an hour a week for how the team works: Fridays, half past three to four.","say":"From Friday the third of September, Helena protects half an hour a week for how the team works: Fridays, half past three to four."},
- {"id":"rules","gap":0.8,"text":"One measure. One small change, tried for a week, then kept or dropped, out loud: plan, do, check, act."},
+ {"id":"rules","gap":0.8,"text":"One measure. One small change, tried for a week, then kept or dropped, out loud: plan, do, study, act."},
  {"id":"dq","gap":0.8,"text":"The data quality module keeps the same rhythm for one list, fifteen minutes on Thursdays; here, it's for how the team works."}
 ]},
 "six":{"name":"Six days to one","lead":1.0,"tail":1.0,"vo":[

@@ -1,0 +1,33 @@
+{
+  "kicker": "What data architecture is",
+  "kicker_es": "Qué es la arquitectura de datos",
+  "title_es": "Entre el negocio y los sistemas",
+  "h1": "Between the business and the systems: the line nobody owned",
+  "h1_es": "Entre el negocio y los sistemas: la línea que no era de nadie",
+  "lead": "At the utility, three people say they work on information architecture and mean three things. Inés Duarte, the new data architect, settles on DAMA's data architecture, then follows one word, connection point, into the six systems that record it, and gives the line between them an owner.",
+  "lead_es": "En la empresa, tres personas dicen arquitectura de la información y quieren decir tres cosas. Inés Duarte, nueva arquitecta de datos, adopta la arquitectura de datos de DAMA, sigue una palabra, punto de conexión, hasta los seis sistemas que la registran y da un responsable a la línea entre ellos.",
+  "description": "A film on what data architecture is, and why it's an architecture of its own: the three meanings of information architecture (a website's menus and labels, a model of an enterprise's information and how it flows, and a phase of TOGAF's method); DAMA's view of data and information as one discipline; where TOGAF and ArchiMate put it, and the layer between the business and the applications where it works; and one business concept, connection point, recorded by six systems under six names, each record joined to it by a line with an owner, and one ID that every system carries.",
+  "description_es": "Una película sobre qué es la arquitectura de datos y por qué es una arquitectura propia: los tres significados de arquitectura de la información (los menús y etiquetas de un sitio web, un modelo de la información de una empresa y cómo fluye, y una fase del método de TOGAF); la visión de DAMA de datos e información como una sola disciplina; dónde la ponen TOGAF y ArchiMate, y la capa entre el negocio y las aplicaciones donde trabaja; y un concepto del negocio, punto de conexión, registrado por seis sistemas con seis nombres, cada registro unido a él por una línea con un responsable, y un identificador que todos los sistemas llevan.",
+  "card": "Three meanings of information architecture, one discipline, and one word recorded by six systems, each joined to it with an owner.",
+  "card_es": "Tres significados de arquitectura de la información, una disciplina, y una palabra registrada por seis sistemas, cada uno unido a ella con un responsable.",
+  "chapters_es": {
+    "walk": "Antes de cualquier computadora",
+    "map": "El mapa de Tomás",
+    "three": "Tres significados",
+    "dama": "Una sola disciplina",
+    "point": "Una palabra, seis registros",
+    "own": "Una arquitectura propia",
+    "practice": "La práctica de datos en el mapa",
+    "back": "Dibujarlo primero"
+  },
+  "next_h": "Next, how records become decisions: a famous pyramid, taken apart.",
+  "next_h_es": "Después, cómo los registros se vuelven decisiones: una pirámide famosa, desarmada.",
+  "past": [
+    "Project Cybersyn begins, Chile, 1971",
+    "Before any computer, engineers drew how each factory worked, and only then chose what to measure."
+  ],
+  "past_es": [
+    "Comienza el Proyecto Cybersyn, Chile, 1971",
+    "Antes de cualquier computadora, los ingenieros dibujaron cómo funcionaba cada fábrica, y solo entonces eligieron qué medir."
+  ]
+}

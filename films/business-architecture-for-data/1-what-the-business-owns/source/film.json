@@ -1,0 +1,25 @@
+{
+  "key": "what-the-business-owns",
+  "title": "What the business owns",
+  "sub": "Business architecture for data, the second series on enterprise architecture: what the business owns about its data (what it means, who creates it, the rules on it, the quality it needs and the decisions it serves) and what the data team owns (how it's stored, moved and checked); the parts of business architecture that matter for data; and the data practice drawn on the map as a business.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Yellow is the business layer, salmon the information layer, where the business's concepts sit. Gold marks an owner, a person in the business; cyan outlines the technical side. In the desert, blue is the water, and the people of the story are silhouettes.",
+  "src": [
+    "../../../shared/src/ba.js",
+    "scenes.js"
+  ],
+  "story": ["water"],
+  "poster": ["water", "link", 6.3],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bAma\\b", "Ah-mah"],
+    ["\\bqanats\\b", "kah-nahts"],
+    ["\\bqanat\\b", "kah-naht"],
+    ["\\bQanat\\b", "Kah-naht"],
+    ["\\bmirab\\b", "mee-rahb"],
+    ["\\bmuqannis\\b", "moo-kah-neez"],
+    ["\\bGonabad\\b", "Go-nah-bahd"],
+    ["\\bQasabeh\\b", "Kah-sah-beh"],
+    ["\\bBIZBOK\\b", "Biz-bock"]
+  ]
+}

@@ -125,7 +125,7 @@ qs:[
    {t:"Add distinct to the select, so each learner and award comes back once.",why:"The doubled rows differ in the award's name, so distinct keeps both. And it hides the cause: the next versioned join doubles again."}],
   why:"A join returns every matching pair. A versioned thing joined on its key alone multiplies rows without an error; the grain, tested as a key (unique on learner and award), would have stopped it.",repo:["analyses/design/fan_out_without_point_in_time.sql"]},
  {type:"choice",lab:"grain",vis:"rw_q_app",title:"The census number in the app",sit:"The wallet team asks to show “the census number” in the app, beside each learner's credentials.",
-  opts:[{t:"Explain that it's Planning's count as at 31 March, not a fact about a learner today. If the app needs it, it's a new output with its own grain and day.",ok:true},
+  opts:[{t:"Treat it as a new output with its own grain and day: it's Planning's count as at 31 March.",ok:true},
    {t:"Add Planning's count to mart_wallet__learners, as a column beside each learner's credentials.",why:"That mart is one row per learner, as it is now. A count of learners as at 31 March isn't a fact about one learner today; one row would mix two days."},
    {t:"Let the app read mart_planning__near_award directly: the number is already there, and tested.",why:"That mart is promised to Planning. The app would depend on a grain and a day it was never promised, and break when Planning's needs change."}],
   why:"Each output declares what a row is and which day it describes. A number about another day belongs in its own output.",repo:["models/marts/wallet/_wallet__models.yml","models/marts/planning/_planning__models.yml"]},

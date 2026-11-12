@@ -487,8 +487,10 @@ const NARR={
  {"id":"source","gap":0.8,"text":"Then Sam checks the age where it starts: at each source."},
  {"id":"reads","gap":0.8,"text":"dbt reads the same date there: the newest record each source saved, not when its file arrived."},
  {"id":"level","gap":0.8,"text":"One level on each: older than twenty-four hours, the check fails."},
- {"id":"first","gap":0.8,"text":"Each night, the update runs that check first."},
- {"id":"tells","gap":0.8,"text":"If it fails, Sam and Malia hear at once, and the list is still built, saying its age."},
+ {"id":"why","gap":0.8,"text":"But old records can't say why: did no file come, or did the file bring nothing new?"},
+ {"id":"alarm","gap":0.8,"text":"So the file's arrival is still checked, as a second alarm: no file tonight means the source has gone silent."},
+ {"id":"first","gap":0.8,"text":"Each night, the update runs both checks first."},
+ {"id":"tells","gap":0.8,"text":"If either fails, Sam and Malia hear at once, and the list is still built, saying its age."},
  {"id":"warn","gap":0.8,"text":"That's the warning: nothing stops, and the people who need to know, know."},
  {"id":"send","gap":0.8,"text":"The send to the printer is a job too. It checks the list's own age."},
  {"id":"waits","gap":0.8,"text":"It sends only if the check passes; if not, the list waits, and Malia is told why."},
@@ -503,7 +505,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"story/coast": 4.694, "story/islands": 4.716, "story/ashore": 4.04, "story/radio": 5.949, "story/little": 5.653, "story/stay": 4.011, "story/surge": 5.021, "story/toll": 3.615, "story/after": 6.813, "story/cpp": 9.265, "story/mile": 4.236, "story/house": 3.84, "story/flags": 5.823, "story/sidr": 8.744, "story/ahead": 4.643, "story/shelter": 5.264, "story/died": 6.177, "story/data": 1.494, "story/june": 6.032, "story/passed": 4.339, "story/heard": 4.128, "green/night": 8.226, "green/build": 2.969, "green/wed": 6.615, "green/anyway": 4.023, "green/green": 3.467, "green/boards": 5.987, "green/missing": 3.449, "green/looks": 1.473, "green/see": 3.485, "hours/eight": 3.894, "hours/sam": 6.653, "hours/thirty": 5.468, "hours/level": 6.116, "hours/signal": 4.137, "hours/calls": 6.665, "hours/arrives": 7.097, "hours/goes": 4.742, "hours/december": 6.864, "fresh/monday": 3.852, "fresh/knows": 5.388, "fresh/certs": 5.122, "fresh/seats": 4.727, "fresh/planning": 4.18, "fresh/clocks": 5.083, "fresh/moves": 5.313, "fresh/contract": 5.26, "fresh/pencil": 5.016, "age/says": 2.307, "age/from": 3.149, "age/happened": 3.088, "age/saved": 2.485, "age/came": 3.204, "age/matters": 6.862, "age/easiest": 7.077, "age/second": 4.743, "age/row": 4.375, "age/own": 7.614, "age/shown": 3.437, "age/flags": 3.574, "age/labelled": 6.423, "age/trust": 2.914, "age/cant": 1.318, "stop/source": 3.212, "stop/reads": 6.33, "stop/level": 3.764, "stop/first": 2.227, "stop/tells": 5.047, "stop/warn": 3.679, "stop/send": 3.825, "stop/waits": 5.404, "stop/data": 2.17, "time/storm": 6.444, "time/list": 6.113, "time/since": 3.804, "time/take": 3.414, "time/series": 5.82};
+const VODUR={"story/coast": 4.694, "story/islands": 4.716, "story/ashore": 4.04, "story/radio": 5.949, "story/little": 5.653, "story/stay": 4.011, "story/surge": 5.021, "story/toll": 3.615, "story/after": 6.813, "story/cpp": 9.265, "story/mile": 4.236, "story/house": 3.84, "story/flags": 5.823, "story/sidr": 8.744, "story/ahead": 4.643, "story/shelter": 5.264, "story/died": 6.177, "story/data": 1.494, "story/june": 6.032, "story/passed": 4.339, "story/heard": 4.128, "green/night": 8.226, "green/build": 2.969, "green/wed": 6.615, "green/anyway": 4.023, "green/green": 3.467, "green/boards": 5.987, "green/missing": 3.449, "green/looks": 1.473, "green/see": 3.485, "hours/eight": 3.894, "hours/sam": 6.653, "hours/thirty": 5.468, "hours/level": 6.116, "hours/signal": 4.137, "hours/calls": 6.665, "hours/arrives": 7.097, "hours/goes": 4.742, "hours/december": 6.864, "fresh/monday": 3.852, "fresh/knows": 5.388, "fresh/certs": 5.122, "fresh/seats": 4.727, "fresh/planning": 4.18, "fresh/clocks": 5.083, "fresh/moves": 5.313, "fresh/contract": 5.26, "fresh/pencil": 5.016, "age/says": 2.307, "age/from": 3.149, "age/happened": 3.088, "age/saved": 2.485, "age/came": 3.204, "age/matters": 6.862, "age/easiest": 7.077, "age/second": 4.743, "age/row": 4.375, "age/own": 7.614, "age/shown": 3.437, "age/flags": 3.574, "age/labelled": 6.423, "age/trust": 2.914, "age/cant": 1.318, "stop/source": 3.212, "stop/reads": 6.33, "stop/level": 3.764, "stop/why": 4.992, "stop/alarm": 6.705, "stop/first": 2.352, "stop/tells": 5.223, "stop/warn": 3.679, "stop/send": 3.825, "stop/waits": 5.404, "stop/data": 2.17, "time/storm": 6.444, "time/list": 6.113, "time/since": 3.804, "time/take": 3.414, "time/series": 5.82};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -514,7 +516,7 @@ const BREATH={
 "hours":{"hold":{"eight":0.4,"thirty":0.6,"signal":0.8,"calls":0.4,"goes":0.8}},
 "fresh":{"hold":{"monday":0.8,"knows":1.2,"certs":1.0,"seats":1.0,"planning":1.0,"clocks":1.0,"moves":1.0,"contract":1.0}},
 "age":{"hold":{"says":0.6,"from":0.8,"happened":0.6,"saved":0.6,"came":0.8,"matters":1.0,"easiest":1.0,"second":1.2,"row":0.8,"own":1.0,"shown":0.6,"flags":0.8,"labelled":0.8,"trust":0.6}},
-"stop":{"hold":{"source":0.8,"reads":1.0,"level":0.8,"first":0.6,"tells":0.8,"warn":1.2,"send":0.8,"waits":1.0}},
+"stop":{"hold":{"source":0.8,"reads":1.0,"level":0.8,"why":1.2,"alarm":1.6,"first":0.6,"tells":0.8,"warn":1.2,"send":0.8,"waits":1.0}},
 "time":{"hold":{"storm":0.6,"list":0.6,"since":0.8,"take":1.2},"breathe":5.0}
 };
 
@@ -2418,15 +2420,23 @@ function lw_flagCard(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)re
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the jobs
-   A job in Lakeflow Jobs, drawn for the film: two tasks joined left to right, the second's run condition under the join. Each task a
-   card with its state: o.states [first, second], each "pass" (it succeeded), "stop" (it failed), "wait" (not run: dashed, grey) or
-   null (not yet). o.tell: who the failed check tells, under it (0 to 1). x, y its top left. */
+   A job in Lakeflow Jobs, drawn for the film: two tasks joined left to right, the second's run condition under the join; or three,
+   the first two one over the other, each joined to the third, which runs after both. Each task a card with its state: o.states,
+   one for each task, "pass" (it succeeded), "stop" (it failed), "wait" (not run: dashed, grey) or null (not yet). o.tell: who a
+   failed check tells, under the checks (0 to 1). x, y its top left. */
 function lw_task(ctx,x,y,w,h,name,st){const tone=st==="pass"?"pass":st==="stop"?"stop":null;
   if(st==="wait"){dq_card(ctx,x,y,w,h,{dash:true});dq_icon(ctx,"hourglass",x+44,y+h/2,34,"none");dq_T(ctx,name,x+80,y+h/2+10,{w:700,size:30,col:"none"});return;}
   dq_card(ctx,x,y,w,h,{edge:tone});if(tone)dq_icon(ctx,tone==="pass"?"tick":"cross",x+44,y+h/2,34,tone);else dq_icon(ctx,"tools",x+44,y+h/2,34,DQ.soft);
   dq_T(ctx,name,x+80,y+h/2+10,{w:700,size:30});}
 function lw_job(ctx,x,y,o){o=o||{};const w=1240,h=o.h||420,st=o.states||[null,null];return dq_window(ctx,x,y,w,h,{logo:"databricks",product:"Databricks",title:"Lakeflow Jobs · "+o.job,a:o.a,k:o.k,draw:(c,b)=>{
-  const tw=440,th=104,ty=b.y+40,x0=b.x+20,x1=b.x+b.w-20-tw;lw_task(c,x0,ty,tw,th,o.tasks[0],st[0]);lw_task(c,x1,ty,tw,th,o.tasks[1],st[1]);
+  const tw=440,th=104,x0=b.x+20,x1=b.x+b.w-20-tw;
+  if(o.tasks.length===3){const t2=88,ya=b.y+14,yb=ya+t2+18,ty=(ya+yb+t2)/2-th/2;
+    lw_task(c,x0,ya,tw,t2,o.tasks[0],st[0]);lw_task(c,x0,yb,tw,t2,o.tasks[1],st[1]);lw_task(c,x1,ty,tw,th,o.tasks[2],st[2]);
+    lw_arrow(c,x0+tw+12,ya+t2/2,x1-12,ty+th/2-18,{});lw_arrow(c,x0+tw+12,yb+t2/2,x1-12,ty+th/2+18,{});
+    dq_T(c,"Run if",x1,ty+th+50,{w:800,size:28,col:DQ.soft});dq_T(c,o.runIf,x1+dq_tw(c,"Run if  ",{w:800,size:28}),ty+th+50,{w:700,size:28});
+    const tl=clamp(o.tell||0,0,1);if(tl>0.004&&o.who){c.save();c.globalAlpha*=tl;dq_icon(c,"mail",x0+40,yb+t2+44,34,"stop");dq_T(c,o.who,x0+80,yb+t2+54,{w:700,size:28,col:"stop"});c.restore();}
+    return;}
+  const ty=b.y+40;lw_task(c,x0,ty,tw,th,o.tasks[0],st[0]);lw_task(c,x1,ty,tw,th,o.tasks[1],st[1]);
   lw_arrow(c,x0+tw+12,ty+th/2,x1-12,ty+th/2,{});
   dq_T(c,"Run if",x1,ty+th+50,{w:800,size:28,col:DQ.soft});dq_T(c,o.runIf,x1+dq_tw(c,"Run if  ",{w:800,size:28}),ty+th+50,{w:700,size:28});
   const tl=clamp(o.tell||0,0,1);if(tl>0.004&&o.who){c.save();c.globalAlpha*=tl;dq_icon(c,"mail",x0+40,ty+th+60,34,"stop");dq_T(c,o.who,x0+80,ty+th+70,{w:700,size:28,col:"stop"});c.restore();}}});}
@@ -2710,27 +2720,46 @@ scene("age",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),every
 /* ---------------------------------------------------------------- 6 · Warn first, then stop the send
    The bench: Sam. The age is checked where it starts, at each source, on the same date: the newest record each source saved (each
    source's receipts, the newest record's column in steel beside when the file was received), not when its file arrived. One level on
-   each: the source's file, error after 24 hours. The night's job: the check first, then the build, run if all done; the check fails,
-   Sam and Malia hear at once, the list is still built, saying its age. The warning. The send's job: a check of the list's own age,
-   then the send, run if all succeeded; the check fails, the send waits, Malia is told why. */
+   each: the source's file, error after 24 hours. But old records can't say why: two nights of the student system's receipts, as they
+   stood at 03:00, June's, when no file came, and November's, when a file came on time with the day before's records; the newest
+   record is 25 hours old on both, and a question hangs under each. So the file's arrival is still checked, as a second alarm: the
+   received column lit, plain, then a red tag in place of June's question, NO FILE, a green one in place of November's, ON TIME, and
+   the alarm's card. The night's job: both checks first, one over
+   the other, then the build, run if all done; they fail, Sam and Malia hear at once, the list is still built, saying its age. The
+   warning. The send's job: a check of the list's own age, then the send, run if all succeeded; the check fails, the send waits,
+   Malia is told why. */
 const LW_NEW=["tables:","  - name: nightly_files","    config:",[["      loaded_at_field: ",null],['"cast(newest_record_at as timestamp)"',"steel"]],"      freshness:",
   [["        warn_after: ",null],["null","brass"]],[["        error_after: ",null],["{count: 24, period: hour}","brass"]]];
 // a source's receipts: each night's file, when it was received and when the source saved the newest record in it; o.lit (0 to 1)
-// lights the newest record's column in steel, the date the age is counted from
+// lights the newest record's column in steel, the date the age is counted from; o.litR (0 to 1) lights the received column, in no
+// colour of the six, the date the second alarm reads; o.sub: the line under the title (the table's name)
 function lw_receipts(x,X,y,title,rows,o){const a=o.a;if(a<=0.004)return;x.save();x.globalAlpha*=a;if(o.k!=null)ag_about(x,X+300,y+150,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-  dq_card(x,X,y,600,300,{});dq_label(x,X+DQ_PAD,y+54,title,{});dq_T(x,"nightly_files",X+DQ_PAD,y+100,{w:500,size:28,f:"mono",col:DQ.soft});
+  dq_card(x,X,y,600,300,{});dq_label(x,X+DQ_PAD,y+54,title,{});dq_T(x,o.sub||"nightly_files",X+DQ_PAD,y+100,{w:500,size:28,f:"mono",col:DQ.soft});
   const lt=clamp(o.lit||0,0,1),nx=X+DQ_PAD+246;if(lt>0.004){x.save();x.globalAlpha*=lt;x.fillStyle=rgba(DQ.steel,0.12);rr(x,nx-4,y+122,302,56*3-12,10);x.fill();x.fillStyle=rgba(DQ.steel,1);rr(x,nx-4,y+122,302,6,3);x.fill();x.restore();}
+  const lr=clamp(o.litR||0,0,1);if(lr>0.004){x.save();x.globalAlpha*=lr;x.fillStyle="rgba(196,172,128,0.3)";rr(x,X+DQ_PAD-8,y+122,244,56*3-12,10);x.fill();x.fillStyle=rgba(DQ.soft,1);rr(x,X+DQ_PAD-8,y+122,244,6,3);x.fill();x.restore();}
   dq_rows(x,X+DQ_PAD,y+116,[{h:"Received",w:246,f:"mono"},{h:"Newest record",w:298,f:"mono"}],rows,{rh:56});x.restore();}
-function lw_stop(x,tt,c,P){const G=P.g0+tt,J0=c.first-0.3,J1=c.send-0.3;lw_who(x,"sam",280,G,1);
+function lw_stop(x,tt,c,P){const G=P.g0+tt,W0=c.why-0.75,J0=c.first-0.3,J1=c.send-0.3;lw_who(x,"sam",280,G,1);
   let q=lw_pop(tt,c.source+0.2,c.level-0.3);lw_receipts(x,560,200,"Student system",[["16 Jun, 02:00","16 Jun, 01:49"],["17 Jun, 02:00","17 Jun, 01:52"]],{lit:ag_in(tt,P.newest,0.5),k:q.k,a:q.a});
   q=lw_pop(tt,c.source+0.5,c.level-0.3);lw_receipts(x,1200,200,"Portal",[["17 Jun, 02:00","17 Jun, 01:44"],["18 Jun, 02:00","18 Jun, 01:47"]],{lit:ag_in(tt,P.newest,0.5),k:q.k,a:q.a});
   dq_chip(x,560,560,"not when its file arrived: a file can come on time with old records",{icon:"dash",col:"none",a:ag_io(tt,P.notFile,c.level-0.3,0.4)});
-  q=lw_pop(tt,c.level,J0);lw_yml(x,560,200,1100,{title:"sources/student_system",lines:LW_NEW,lit:tt>P.h24?[5,6]:[],k:q.k,a:q.a});
-  dq_chip(x,560,712,"the same on the portal's",{icon:"tick",a:ag_io(tt,P.each,J0,0.4)});
-  // the night's job: the check first; it fails, two people hear, the list is still built
-  const fail1=ag_in(tt,c.tells+0.2,0.3)>0.5,built=tt>P.built;q=lw_pop(tt,c.first,J1);
-  lw_job(x,560,200,{job:"the night's update",tasks:["Check the sources' age","Build the list"],runIf:"All done",states:[fail1?"stop":null,built?"pass":null],
-    who:"Sam Okafor, Malia Fonoti",tell:ag_in(tt,P.hear,0.5),k:q.k,a:q.a});
+  q=lw_pop(tt,c.level,W0);lw_yml(x,560,200,1100,{title:"sources/student_system",lines:LW_NEW,lit:tt>P.h24?[5,6]:[],k:q.k,a:q.a});
+  dq_chip(x,560,712,"the same on the portal's",{icon:"tick",a:ag_io(tt,P.each,W0,0.4)});
+  // old records can't say why: two nights of the student system's receipts, as they stood at 03:00. On both the newest record is 25
+  // hours old, so the age's check fails on both (under each card's newest record, in red); the question under each received column
+  const lit2=ag_in(tt,P.old,0.5)*(1-0.6*ag_in(tt,P.arrival,0.5)),litR=ag_in(tt,P.arrival,0.5),sub="student_system.nightly_files";
+  q=lw_pop(tt,c.why-0.35,J0);lw_receipts(x,560,200,"Thu 18 Jun 2026, 03:00",[["16 Jun, 02:00","16 Jun, 01:49"],["17 Jun, 02:00","17 Jun, 01:52"]],{sub,lit:lit2,litR,k:q.k,a:q.a});
+  q=lw_pop(tt,c.why-0.1,J0);lw_receipts(x,1200,200,"Thu 13 Nov 2025, 03:00",[["12 Nov, 02:00","12 Nov, 01:49"],["13 Nov, 02:00","12 Nov, 01:49"]],{sub,lit:lit2,litR,k:q.k,a:q.a});
+  dq_chip(x,866,548,"25 hours old",{icon:"clock",col:"stop",a:ag_io(tt,P.old+0.1,J0,0.4)});dq_chip(x,1506,548,"25 hours old",{icon:"clock",col:"stop",a:ag_io(tt,P.old+0.4,J0,0.4)});
+  dq_chip(x,580,548,"no file?",{a:ag_io(tt,P.noFile,P.tonight-0.35,0.3)});dq_chip(x,1220,548,"nothing new?",{a:ag_io(tt,P.nothingNew,P.tonight+0.05,0.3)});
+  // the second alarm reads the other column, when the last file was received, and answers each question: none tonight in June, on
+  // time in November
+  q=lw_pop(tt,P.tonight,J0);dq_tag(x,600,548,"stop",{text:"NO FILE",to:[710,502],k:q.k,a:q.a});
+  q=lw_pop(tt,P.tonight+0.4,J0);dq_tag(x,1240,548,"pass",{text:"ON TIME",to:[1350,502],k:q.k,a:q.a});
+  q=lw_pop(tt,P.silent,J0);dq_textCard(x,560,630,900,{kick:"A second alarm",title:"No file tonight: the source has gone silent"},{edge:"hold",k:q.k,a:q.a});
+  // the night's job: both checks first, one over the other; they fail, two people hear, the list is still built
+  const fail1=ag_in(tt,c.tells+0.2,0.3)>0.5,fail1b=ag_in(tt,c.tells+0.5,0.3)>0.5,built=tt>P.built;q=lw_pop(tt,c.first,J1);
+  lw_job(x,560,200,{job:"the night's update",tasks:["Check the sources' age","Check the files' arrival","Build the list"],runIf:"All done",
+    states:[fail1?"stop":null,fail1b?"stop":null,built?"pass":null],who:"Sam Okafor, Malia Fonoti",tell:ag_in(tt,P.hear,0.5),k:q.k,a:q.a});
   dq_chip(x,1210,660,"the list says its age",{icon:"clock",col:"steel",a:ag_io(tt,P.saying,c.warn-0.3,0.4)});
   q=lw_pop(tt,c.warn,J1);dq_textCard(x,560,650,900,{kick:"That's the warning",title:"Nothing stops, and the people who need to know, know"},{edge:"hold",k:q.k,a:q.a});
   // the send's job: a check of the list's own age; it fails, the send waits, Malia is told why
@@ -2739,7 +2768,8 @@ function lw_stop(x,tt,c,P){const G=P.g0+tt,J0=c.first-0.3,J1=c.send-0.3;lw_who(x
     who:"Malia Fonoti: told why",tell:ag_in(tt,P.told,0.5),k:q.k,a:q.a});
   q=lw_pop(tt,c.data,null);dq_textCard(x,560,660,900,{title:"The data isn't stopped. The send is."},{edge:"stop",k:q.k,a:q.a});}
 scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),newest:wAt(sc,"reads","the newest record"),notFile:wAt(sc,"reads","not when its file arrived"),
-    each:wAt(sc,"level","on each"),h24:wAt(sc,"level","twenty-four hours"),hear:wAt(sc,"tells","hear at once"),built:wAt(sc,"tells","still built"),saying:wAt(sc,"tells","saying its age"),
+    each:wAt(sc,"level","on each"),h24:wAt(sc,"level","twenty-four hours"),old:wAt(sc,"why","old records"),noFile:wAt(sc,"why","no file come"),nothingNew:wAt(sc,"why","nothing new"),
+    arrival:wAt(sc,"alarm","arrival"),tonight:wAt(sc,"alarm","no file tonight"),silent:wAt(sc,"alarm","gone silent"),hear:wAt(sc,"tells","hear at once"),built:wAt(sc,"tells","still built"),saying:wAt(sc,"tells","saying its age"),
     ifNot:wAt(sc,"waits","if not"),waitsW:wAt(sc,"waits","the list waits"),told:wAt(sc,"waits","told why")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],draw:(x,tt)=>lw_stop(x,tt,c,P)}]);
   setScreen(ctx,S);dq_kicker(ctx,"6","Warn first, then stop the send",{a:ag_in(t,0.9,0.6)});});

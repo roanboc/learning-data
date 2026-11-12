@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Where it meets the applications",
+    "key": "where-it-meets-the-applications-en",
+    "dir": "films/platform-and-solution-architecture/4-where-it-meets-the-applications/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/where-it-meets-the-applications/film.js",
+    "video": "dist/where-it-meets-the-applications.mp4",
+    "file": "where-it-meets-the-applications.mp4",
+    "captions": [
+      [
+        "films/platform-and-solution-architecture/4-where-it-meets-the-applications/captions/en.srt",
+        "where-it-meets-the-applications.en.srt"
+      ],
+      [
+        "films/platform-and-solution-architecture/4-where-it-meets-the-applications/captions/es.srt",
+        "where-it-meets-the-applications.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/platform-and-solution-architecture/4-where-it-meets-the-applications/source",
+      ":(exclude)films/platform-and-solution-architecture/4-where-it-meets-the-applications/source/src/i18n/es/captions.js",
+      "films/platform-and-solution-architecture/shared",
+      "films/enterprise-architecture/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+      "films/when-things-go-wrong/characters",
+      "films/when-things-go-wrong/1-silent-change/source/src",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/hands.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py"
+    ],
+    "legibility": {
+      "texts": 279,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

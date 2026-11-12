@@ -1,0 +1,34 @@
+{
+  "kicker": "Two platforms, one map",
+  "kicker_es": "Dos plataformas, un mapa",
+  "title_es": "Donde se encuentra con las aplicaciones",
+  "h1": "Where it meets the applications: each flow on the route that suits it",
+  "h1_es": "Donde se encuentra con las aplicaciones: cada flujo por su ruta",
+  "lead": "Yasmin Saleh, the utility's new integration lead, finds 34 flows in and out of the data platform that her team can't see, and one broke retail's reports. With Ravi Menon, she sorts them by kind: each takes the route that suits it, and every one goes on one map both teams keep.",
+  "lead_es": "Yasmin Saleh, nueva líder de integración de la empresa, halla 34 flujos que entran y salen de la plataforma de datos y que su equipo no ve, y uno rompió los reportes de comercialización. Con Ravi Menon los ordena por tipo: cada uno toma su ruta, y todos van a un mapa que ambos equipos mantienen.",
+  "description": "A film about where the data platform meets the applications: the integration platform, which joins the applications through its gateway and its events and sees every message between them; flows in and out of the data platform that nobody can see, and a nightly read that broke when the system it read was upgraded; two kinds of traffic, small messages between applications and bulk loads into the data platform, loaded by the platform's own connectors (Lakeflow Connect, in Databricks); one rule for each kind of flow, so each takes the route that's simplest, cheapest and easiest to govern: bulk loads and history native, a change in an application as an event the data platform subscribes to, and data served back to an application through the gateway; one map of every flow, kept by both teams, a new flow added in the pull request that builds it; a feeder's risk of a fault, made on the data platform and served to the outage app; and the integration platform as a node on Tomás's map, with its gateway and events.",
+  "description_es": "Una película sobre dónde la plataforma de datos se encuentra con las aplicaciones: la plataforma de integración, que une las aplicaciones por su puerta de enlace y sus eventos y ve cada mensaje entre ellas; flujos que entran y salen de la plataforma de datos y que nadie ve, y una lectura nocturna que se rompió cuando se actualizó el sistema que leía; dos tipos de tráfico, mensajes pequeños entre aplicaciones y cargas masivas hacia la plataforma de datos, cargadas por los conectores de la propia plataforma (Lakeflow Connect, en Databricks); una regla para cada tipo de flujo, para que cada uno tome la ruta más simple, más barata y más fácil de gobernar: las cargas masivas y el historial de forma nativa, un cambio en una aplicación como un evento al que la plataforma de datos se suscribe, y los datos que vuelven a una aplicación por la puerta de enlace; un mapa de todos los flujos, que ambos equipos mantienen, con cada flujo nuevo agregado en el pull request que lo construye; el riesgo de falla de un alimentador, calculado en la plataforma de datos y servido a la aplicación de cortes; y la plataforma de integración como un nodo en el mapa de Tomás, con su puerta de enlace y sus eventos.",
+  "card": "Each flow on the route that's simplest, cheapest and easiest to govern, and every flow on one map both teams keep.",
+  "card_es": "Cada flujo por la ruta más simple, más barata y más fácil de gobernar, y todo flujo en un solo mapa que ambos equipos mantienen.",
+  "chapters_es": {
+    "chuma": "Un caballo todo el camino",
+    "unseen": "Flujos que nadie ve",
+    "kinds": "Dos tipos de tráfico",
+    "route": "La ruta más simple para cada uno",
+    "map": "Un mapa, ambos equipos",
+    "score": "Un puntaje para la aplicación de cortes",
+    "together": "Mejor juntas",
+    "practice": "La práctica de datos en el mapa",
+    "end": "Dos tipos de caballo, una resolución"
+  },
+  "next_h": "You've seen where the data platform meets the applications. Next: security all the way through.",
+  "next_h_es": "Viste dónde la plataforma de datos se encuentra con las aplicaciones. Sigue: la seguridad de punta a punta.",
+  "past": [
+    "The farmers' horses of Shinano, Japan, 1764",
+    "Farmers' horses carried loads straight through the mountains, beside the stations' relay; a ruling set which goods went which way."
+  ],
+  "past_es": [
+    "Los caballos de los campesinos de Shinano, Japón, 1764",
+    "Los caballos de los campesinos llevaban cargas de un tirón por las montañas, junto al relevo de las postas; una resolución fijó qué mercancías iban por cada camino."
+  ]
+}

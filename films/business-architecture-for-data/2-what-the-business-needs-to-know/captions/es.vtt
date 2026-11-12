@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:08.349
+En los pueblos del desierto de Irán, el agua de un qanat, un túnel que viene de las montañas, se posee por partes de tiempo.
+
+00:00:09.949 --> 00:00:12.965
+Una parte se puede vender, dividir o dejar a los hijos.
+
+00:00:14.365 --> 00:00:16.369
+Pero una parte no significaba lo mismo en todos lados.
+
+00:00:17.669 --> 00:00:23.001
+En un qanat, el agua volvía cada seis días. En otro, cada veintidós.
+
+00:00:24.701 --> 00:00:31.516
+En la década de 1960, cuando la tierra pasó a los campesinos que la trabajaban, el gobierno pidió escrituras del agua.
+
+00:00:32.816 --> 00:00:37.623
+En algunos pueblos, las escrituras sumaban más de veinticuatro horas de agua al día.
+
+00:00:39.323 --> 00:00:43.427
+Los dueños se pelearon, a veces con violencia, y algunos pueblos se dividieron.
+
+00:00:45.127 --> 00:00:50.260
+Antes de poder contar el agua, una parte tenía que significar lo mismo para todos los que tenían una.
+
+00:00:51.760 --> 00:00:57.381
+En Mahan, cerca de Kermán, los dueños de un qanat midieron cada parte con el propio día como medida.
+
+00:00:58.681 --> 00:01:03.449
+Un día de su agua eran quince partes, y cada parte volvía cada doce días.
+
+00:01:04.949 --> 00:01:11.068
+Cada parte era de noventa y seis minutos, así que quince hacen justo un día: las partes suman el agua.
+
+00:01:12.968 --> 00:01:19.565
+Otro qanat de allí, de tres hombres en la década de 1860, pasó poco a poco a unas setenta familias.
+
+00:01:21.065 --> 00:01:27.516
+Como una parte significaba una sola cosa, podía venderse, heredarse, dividirse hasta en treinta segundos, y seguir sumando.
+
+00:01:29.016 --> 00:01:36.176
+En la empresa, el negocio necesita lo mismo: cada cosa que cuenta, definida una vez, con sus palabras, antes de construirla.
+
+00:01:44.076 --> 00:01:47.400
+La siguiente nota de Tomás pregunta qué necesita saber el negocio.
+
+00:01:48.700 --> 00:01:53.815
+Empieza por las capacidades de su mapa: las ocho cosas que la empresa tiene que poder hacer.
+
+00:01:55.515 --> 00:01:59.269
+Cada una necesita información, crea alguna o la cambia.
+
+00:02:00.769 --> 00:02:07.148
+Esos son los conceptos del negocio. Van en la capa de información, debajo de las capacidades que los usan.
+
+00:02:10.448 --> 00:02:12.265
+No empieza de una hoja en blanco.
+
+00:02:13.365 --> 00:02:17.819
+Las eléctricas comparten modelos de referencia, escritos por los organismos de normas de su industria.
+
+00:02:18.919 --> 00:02:25.201
+La IEC, que fija las normas eléctricas del mundo, mantiene el Modelo de Información Común, CIM.
+
+00:02:26.501 --> 00:02:32.483
+Nombra aquello con lo que trabaja una empresa eléctrica, de sus cables y medidores a sus clientes, y cómo se relacionan.
+
+00:02:33.983 --> 00:02:39.891
+Una de sus normas enumera lo que hace una distribuidora, y los objetos de negocio que usa cada parte.
+
+00:02:41.391 --> 00:02:46.421
+Su edición de 2020 los dibuja en ArchiMate, el lenguaje del mapa de Tomás.
+
+00:02:47.721 --> 00:02:53.449
+El modelo de arquitectura de redes inteligentes, SGAM, muestra dónde está cada parte, de la central eléctrica al hogar.
+
+00:02:54.949 --> 00:02:59.157
+Y el modelo de roles del mercado europeo nombra quién hace qué en el mercado eléctrico.
+
+00:03:00.457 --> 00:03:05.184
+Otras industrias tienen los suyos, de BIAN para la banca a HERM para las universidades.
+
+00:03:06.884 --> 00:03:14.017
+Tomás toma el CIM y la lista de la IEC como primer borrador, y el mapa dice de dónde vino cada elemento.
+
+00:03:15.317 --> 00:03:21.864
+Un modelo de referencia no es de la empresa hasta que su gente lo confirma, así que todo elemento empieza como borrador.
+
+00:03:25.164 --> 00:03:29.618
+Recorre las capacidades una por una, con la gente que dirige cada una.
+
+00:03:30.918 --> 00:03:37.037
+Conectar clientes necesita una solicitud de conexión, la capacidad de la red, un punto de conexión y un medidor.
+
+00:03:38.537 --> 00:03:41.805
+Atender clientes necesita cuentas, facturas y reclamos.
+
+00:03:43.105 --> 00:03:46.427
+Operar la red necesita lecturas de medidor y cortes.
+
+00:03:47.727 --> 00:03:51.108
+Algunos los crea una capacidad; otros solo los lee.
+
+00:03:52.608 --> 00:03:56.837
+A la mayoría ya los nombra el CIM, así que el primer borrador sale rápido.
+
+00:04:00.137 --> 00:04:03.106
+Pero el CIM no siempre habla como la empresa.
+
+00:04:04.206 --> 00:04:10.439
+El CIM llama a un punto de conexión «usage point». El modelo de roles del mercado europeo lo llama «metering point».
+
+00:04:12.139 --> 00:04:17.916
+La gente de Grace lo llama punto de conexión, y también sus formularios, sus informes y sus clientes.
+
+00:04:19.216 --> 00:04:25.456
+Así que el mapa usa la palabra del negocio, y guarda al lado la del modelo de referencia, para cuando se intercambian datos.
+
+00:04:26.956 --> 00:04:31.063
+Como en Mahan, la medida es compartida, y las palabras son de la gente.
+
+00:04:32.763 --> 00:04:37.324
+Cada palabra tiene una definición en su dominio, escrita con la gente que la usa.
+
+00:04:38.624 --> 00:04:42.249
+Las palabras de la red van con la red, y las comerciales con comercialización.
+
+00:04:43.349 --> 00:04:49.678
+Una palabra de ambos, como ubicación, va en un dominio compartido, y el dueño de cada palabra se encuentra fácil.
+
+00:04:52.978 --> 00:04:59.615
+Luego, la capacidad que duele: conectar clientes. Una instalación solar nueva tarda treinta y cuatro días hábiles en conectarse.
+
+00:05:01.115 --> 00:05:07.820
+La espera está en evaluar la capacidad de la red, y eso necesita un número: cuánta energía solar admite cada calle.
+
+00:05:09.320 --> 00:05:13.155
+Ningún sistema lo guarda, ningún informe lo muestra, y nadie es su dueño.
+
+00:05:14.855 --> 00:05:23.152
+Los ingenieros de Grace lo llaman capacidad de alojamiento: la solar que admite una calle sin que su tensión o sus cables pasen el límite.
+
+00:05:24.852 --> 00:05:29.279
+Entra al mapa con sus palabras, con Grace como dueña, y todavía sin datos.
+
+00:05:30.779 --> 00:05:35.163
+El equipo de datos lo construirá después. Primero, el negocio dice qué significa.
+
+00:05:40.663 --> 00:05:46.769
+Cada concepto del mapa es un objeto de negocio, con un nombre, una definición, un dominio y un dueño.
+
+00:05:48.469 --> 00:05:52.843
+El glosario sale de ellos: un término para cada uno, agrupados por dominio.
+
+00:05:54.543 --> 00:05:59.796
+No necesita una herramienta para empezar. Basta una tabla, siempre que cada término tenga dueño.
+
+00:06:01.496 --> 00:06:06.383
+Después, cada tabla e informe que construya el equipo de datos apuntará a los términos que contiene.
+
+00:06:09.983 --> 00:06:15.896
+En el mapa de la práctica de datos aparecen los dominios del glosario: la red, comercialización y lo que comparten.
+
+00:06:17.396 --> 00:06:24.596
+Las lecturas de medidor y la capacidad de alojamiento se suman a la red, y las facturas a comercialización. La ubicación, al compartido.
+
+00:06:26.296 --> 00:06:31.924
+El punto de conexión y la cuenta ya estaban. Ahora cada uno está en su dominio, con su dueño.
+
+00:06:35.224 --> 00:06:41.270
+En Mahan, una parte significa lo mismo para todos los que tienen una, así que el agua se puede contar, y compartir.
+
+00:06:42.970 --> 00:06:49.174
+En la empresa, cada concepto significa ahora una sola cosa en su dominio, con las palabras de la gente que lo usa.
+
+00:06:50.874 --> 00:06:54.665
+La siguiente nota de Tomás pregunta quién crea cada uno, y quién es su dueño.

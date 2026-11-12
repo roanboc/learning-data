@@ -1,0 +1,28 @@
+{
+  "kicker": "The business's concepts",
+  "kicker_es": "Los conceptos del negocio",
+  "title_es": "Lo que el negocio necesita saber",
+  "h1": "What the business needs to know: each concept, in its own words",
+  "h1_es": "Lo que el negocio necesita saber: cada concepto, en sus palabras",
+  "lead": "Tomás needs the concepts behind each capability on the utility's map. He starts from the industry's reference models, not a blank page, and confirms each one with the people who use it, in their words. One concept nobody holds keeps new solar waiting, so the business defines it first.",
+  "lead_es": "Tomás necesita los conceptos de cada capacidad del mapa de la empresa. Parte de los modelos de referencia de la industria, no de una hoja en blanco, y confirma cada uno con quienes lo usan, en sus palabras. Un concepto que nadie guarda hace esperar a la solar nueva, y el negocio lo define primero.",
+  "description": "A film from Business architecture for data about what the business needs to know: the concepts each capability on Tomás's map needs, creates or changes; never a blank page, since the industry's reference models (for electricity, the IEC's Common Information Model, its list of what a distribution utility does, the Smart Grid Architecture Model and Europe's market role model) give the first draft, every element a draft until its people confirm it; the business's own words on the map, with the reference models' names kept beside them for exchanges; one definition per domain, with each domain's owner; hosting capacity, a concept nobody held, named and owned by the business before any data exists; and a glossary drawn from the map, where a table is enough to start. Told with the qanats of Iran, where a share of water had to mean the same to everyone who held one.",
+  "description_es": "Una película de Arquitectura de negocio para datos sobre lo que el negocio necesita saber: los conceptos que cada capacidad del mapa de Tomás necesita, crea o cambia; nunca una hoja en blanco, porque los modelos de referencia de la industria (para la electricidad, el Modelo de Información Común de la IEC, su lista de lo que hace una distribuidora, el Modelo de Arquitectura de Redes Inteligentes y el modelo de roles del mercado europeo) dan el primer borrador, con cada elemento como borrador hasta que su gente lo confirma; las propias palabras del negocio en el mapa, con los nombres de los modelos de referencia al lado para los intercambios; una definición por dominio, con el dueño de cada dominio; la capacidad de alojamiento, un concepto que nadie tenía, nombrado por el negocio y con dueño antes de que existan datos; y un glosario que sale del mapa, donde para empezar basta una tabla. Contada con los qanats de Irán, donde una parte del agua tenía que significar lo mismo para todos los que tenían una.",
+  "card": "Start from the industry's model, then confirm it. Each concept, defined once in its domain, in the business's own words.",
+  "card_es": "Parte del modelo de la industria y confírmalo. Cada concepto, definido una vez en su dominio, en las propias palabras del negocio.",
+  "chapters_es": {
+    "shares": "Una parte del agua",
+    "note": "La siguiente nota de Tomás",
+    "blank": "Nunca una hoja en blanco",
+    "needs": "Lo que necesita cada capacidad",
+    "words": "En palabras del negocio",
+    "missing": "Un concepto que nadie guarda",
+    "glossary": "Un glosario que sale del mapa",
+    "practice": "La práctica de datos en el mapa",
+    "end": "Un solo significado, en todas partes"
+  },
+  "next_h": "Next: who creates each concept, and who owns it.",
+  "next_h_es": "Lo que sigue: quién crea cada concepto y quién es su dueño.",
+  "past": ["The qanats of Iran: what a share means", "A share counts only if it means the same to everyone who holds one."],
+  "past_es": ["Los qanats de Irán: lo que significa una parte", "Una parte cuenta solo si significa lo mismo para todos los que tienen una."]
+}

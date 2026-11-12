@@ -1,6 +1,6 @@
 # One language, kept: questions and assumptions
 
-*Enterprise architecture* · *Data architecture*, film 6 of 6 · PR #PRNUM · [pull request](https://github.com/roanboc/learning-data/pull/PRNUM)
+*Enterprise architecture* · *Data architecture*, film 6 of 6 · PR #378 · [pull request](https://github.com/roanboc/learning-data/pull/378)
 
 [Watch it on the site](https://data.learn-all.org/data-architecture/one-language-kept/)
 

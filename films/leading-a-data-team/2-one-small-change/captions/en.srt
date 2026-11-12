@@ -107,141 +107,141 @@ So Helena gives it Ivy's Thursday learning time: two hours a week, already hers,
 That's kaizen's first idea: improvement is everyone's job, on their own work, in small steps.
 
 28
-00:03:44,713 --> 00:03:51,000
-Each small step runs through one cycle: plan a change, do it, check it, then act: keep it, or drop it.
+00:03:44,713 --> 00:03:51,590
+Each small step runs through one cycle: plan a change, do it, study the result, then act: keep it, or drop it.
 
 29
-00:03:52,900 --> 00:03:56,972
+00:03:53,490 --> 00:03:57,562
 Walter Shewhart drew the cycle as a circle in 1939.
 
 30
-00:03:57,872 --> 00:04:04,471
-W. Edwards Deming taught it in Japan in 1950, where managers made it plan, do, check, act.
+00:03:58,462 --> 00:04:04,735
+W. Edwards Deming taught it in Japan in 1950, and later called it plan, do, study, act.
 
 31
-00:04:06,171 --> 00:04:15,198
+00:04:06,435 --> 00:04:15,462
 In 1986, Masaaki Imai's book took the Japanese word for this kind of improvement around the world: kaizen, change for the better.
 
 32
-00:04:17,098 --> 00:04:25,917
+00:04:17,362 --> 00:04:26,181
 Ivy starts by measuring. On Monday 26 July, she times each step of her refresh: six steps, a hundred and twenty minutes.
 
 33
-00:04:28,017 --> 00:04:34,450
+00:04:28,281 --> 00:04:34,714
 Like the staff at Castle Street, she starts with her own corner of the work, and asks of each step: who needs this?
 
 34
-00:04:35,950 --> 00:04:40,307
+00:04:36,214 --> 00:04:40,571
 Every Monday, she checks by hand fourteen rooms that once had two names.
 
 35
-00:04:41,207 --> 00:04:45,368
+00:04:41,471 --> 00:04:45,632
 But since April, a test in Jun's models has checked the same fourteen.
 
 36
-00:04:46,868 --> 00:04:53,394
+00:04:47,132 --> 00:04:53,658
 So one Monday she skips her check, and reads the test instead. It covers all fourteen. She keeps the change.
 
 37
-00:04:55,094 --> 00:05:02,585
+00:04:55,358 --> 00:05:02,849
 Then the copy she makes for Facilities: since July, Facilities reads the product's page. She asks, and drops the copy.
 
 38
-00:05:04,285 --> 00:05:07,346
+00:05:04,549 --> 00:05:07,610
 Two steps nobody needed are gone: ninety minutes.
 
 39
-00:05:10,046 --> 00:05:16,028
+00:05:10,310 --> 00:05:16,292
 Next, she writes the four steps left as one checklist: each step, in order, and what good looks like.
 
 40
-00:05:18,128 --> 00:05:22,261
+00:05:18,392 --> 00:05:22,525
 The same steps every Monday show her what changes, and let anyone do it.
 
 41
-00:05:24,161 --> 00:05:29,754
+00:05:24,425 --> 00:05:30,018
 To test the checklist, Jun follows it one Monday, and gets the same result in the same time.
 
 42
-00:05:31,854 --> 00:05:36,034
+00:05:32,118 --> 00:05:36,298
 Only then does she automate: automate a muddle, and you get a faster muddle.
 
 43
-00:05:38,334 --> 00:05:44,325
+00:05:38,598 --> 00:05:44,589
 In September, in her Thursday learning time, she turns one step a week into a check inside the job.
 
 44
-00:05:46,225 --> 00:05:54,015
+00:05:46,489 --> 00:05:54,279
 Sam reviews each change before it goes in. And each new check runs beside her own for a Monday, before her hand check goes.
 
 45
-00:05:56,315 --> 00:06:04,227
+00:05:56,579 --> 00:06:04,491
 Now the job checks the data before it publishes. If a check fails, the page keeps last week's numbers, and Ivy is told.
 
 46
-00:06:06,527 --> 00:06:13,627
+00:06:06,791 --> 00:06:13,891
 By October, her Monday refresh takes ten minutes, checked: she reads what the checks found, and writes a note to readers.
 
 47
-00:06:15,927 --> 00:06:18,933
+00:06:16,191 --> 00:06:19,197
 And nobody opens the page to a number that's wrong.
 
 48
-00:06:21,633 --> 00:06:25,641
+00:06:21,897 --> 00:06:25,905
 Helena made none of these changes herself. Her part was three things.
 
 49
-00:06:27,541 --> 00:06:33,886
+00:06:27,805 --> 00:06:34,150
 She asked what was in the way, each Tuesday. When Sam's week was full, she made room in it for the reviews.
 
 50
-00:06:35,986 --> 00:06:41,065
+00:06:36,250 --> 00:06:41,329
 She gave the time: Thursday afternoons, for this, and no meeting allowed to take them.
 
 51
-00:06:43,165 --> 00:06:51,400
+00:06:43,429 --> 00:06:51,664
 And she showed the small wins: at the review on Thursday 7 October, she put Ivy's chart in front of the people who use the product.
 
 52
-00:06:52,500 --> 00:06:55,385
+00:06:52,764 --> 00:06:55,649
 She named who did the work: Ivy, Jun and Sam.
 
 53
-00:06:57,485 --> 00:07:02,491
+00:06:57,749 --> 00:07:02,755
 No target, no programme, no speech about change: questions, time, and a chart.
 
 54
-00:07:04,591 --> 00:07:13,078
+00:07:04,855 --> 00:07:13,342
 From Friday 3 September, the team's Friday half-hour makes small changes a habit for everyone: one measure, one change a week.
 
 55
-00:07:14,978 --> 00:07:19,973
+00:07:15,242 --> 00:07:20,237
 The data management films tell that story; the data quality films tell one of their own.
 
 56
-00:07:22,673 --> 00:07:31,410
+00:07:22,937 --> 00:07:31,674
 At Castle Street, nobody waited for a big reform. The staff changed their own wards, a step at a time, and infections fell by half.
 
 57
-00:07:33,310 --> 00:07:37,486
+00:07:33,574 --> 00:07:37,750
 Ivy did the same with her Monday: two hours became ten minutes, checked.
 
 58
-00:07:39,386 --> 00:07:42,548
+00:07:39,650 --> 00:07:42,812
 On Monday, pick one chore of your own, and time each step.
 
 59
-00:07:44,048 --> 00:07:48,162
+00:07:44,312 --> 00:07:48,426
 Drop what nobody needs, and write the rest down, the same each time.
 
 60
-00:07:49,662 --> 00:07:53,485
+00:07:49,926 --> 00:07:53,749
 Automate one step at a time, and check each one before you trust it.
 
 61
-00:07:54,985 --> 00:07:59,293
+00:07:55,249 --> 00:07:59,557
 And if you lead, ask what's in the way, give the time, and show the small wins.
 
 62
-00:08:00,993 --> 00:08:03,719
+00:08:01,257 --> 00:08:03,983
 Change one small thing, check it, keep what works.

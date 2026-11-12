@@ -33,9 +33,9 @@ const NARR={
  {"id":"idea","gap":0.8,"text":"That's kaizen's first idea: improvement is everyone's job, on their own work, in small steps."}
 ]},
 "measure":{"name":"Measure, then simplify","lead":1.0,"tail":1.0,"vo":[
- {"id":"cycle","gap":0.8,"text":"Each small step runs through one cycle: plan a change, do it, check it, then act: keep it, or drop it."},
+ {"id":"cycle","gap":0.8,"text":"Each small step runs through one cycle: plan a change, do it, study the result, then act: keep it, or drop it."},
  {"id":"shew","gap":0.8,"text":"Walter Shewhart drew the cycle as a circle in 1939.","say":"Walter Shewhart drew the cycle as a circle in nineteen thirty-nine."},
- {"id":"deming","gap":0.8,"text":"W. Edwards Deming taught it in Japan in 1950, where managers made it plan, do, check, act.","say":"W. Edwards Deming taught it in Japan in nineteen fifty, where managers made it plan, do, check, act."},
+ {"id":"deming","gap":0.8,"text":"W. Edwards Deming taught it in Japan in 1950, and later called it plan, do, study, act.","say":"W. Edwards Deming taught it in Japan in nineteen fifty, and later called it plan, do, study, act."},
  {"id":"imai","gap":0.8,"text":"In 1986, Masaaki Imai's book took the Japanese word for this kind of improvement around the world: kaizen, change for the better.","say":"In nineteen eighty-six, Masaaki Imai's book took the Japanese word for this kind of improvement around the world: kaizen, change for the better."},
  {"id":"measure","gap":0.8,"text":"Ivy starts by measuring. On Monday 26 July, she times each step of her refresh: six steps, a hundred and twenty minutes.","say":"Ivy starts by measuring. On Monday the twenty-sixth of July, she times each step of her refresh: six steps, a hundred and twenty minutes."},
  {"id":"back","gap":0.8,"text":"Like the staff at Castle Street, she starts with her own corner of the work, and asks of each step: who needs this?"},

@@ -22,3 +22,9 @@
 | 10 | Length? | 8 min 11 s, 1,038 words at 127 a minute, a little longer than *When someone falls behind* (7:18): the opening and two findings need the room | The whole film |
 | 11 | Music: the reserved lead and its partner? | The lead reserved for this film, tuned saw blades, round, struck softly with felt and damped; the partner, this thread's choice: the largest blades, low (D2 to D3), damped by the palm as they're struck, so one rings while the other stops (the film's pairs). Written into `palettes.md` before scoring. It sits near the site's bells and series 3's brake drums, so it is kept low, round and short (nothing above 2.3 kHz, no partials that beat); `quiet.py` passes | The score (`tools/score.py`) |
 | 12 | Ship the soundtrack how? | As the module's other films: `audio.json` from `media.py index --film measure-the-work-en`, the MP3 force-added beside it, no audio workflow run; copying it to its audio release is left for your checklist | `audio.json`, `site/assets/measure-the-work/soundtrack.mp3` |
+
+## 12 November 2026: the author's review
+
+The author answered the question in row 2 on 12 November 2026. Asked whether "managing and leading are two sides of one role, and hours or tickets per person say little about thinking work" says it the way he means it, he said: "Yes, there is no easy way to measure value." So row 2 is confirmed, and the film doesn't change.
+
+He added, from his own practice, that he is trying agents that improve how tickets are described, and that estimate the size of a piece of work from its kind, each kind tied to the process and the procedure it follows. Even that, he said, is "always hard to confirm and measure". It is kept here as background, and changes nothing in the film. It fits the film's rule that a measure describes the work, never a person, and it could become a lab, or a moment in a later film about how a team's requests are written: a question for the author when such a film is planned.

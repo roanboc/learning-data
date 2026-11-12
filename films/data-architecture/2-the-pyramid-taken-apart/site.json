@@ -1,0 +1,33 @@
+{
+  "kicker": "How records become decisions",
+  "kicker_es": "De registros a decisiones",
+  "title_es": "La pirámide, desarmada",
+  "h1": "The pyramid, taken apart: the question comes first",
+  "h1_es": "La pirámide, desarmada: primero la pregunta",
+  "lead": "Grace reads one measure every month, and it seems to come from the systems. Inés Duarte takes apart the famous pyramid of data, information, knowledge and wisdom, keeps what it gets right, and redraws it with arrows both ways: the question decides what's recorded.",
+  "lead_es": "Grace lee una medida cada mes, y parece salir de los sistemas. Inés Duarte desarma la famosa pirámide de datos, información, conocimiento y sabiduría, conserva lo que acierta, y la redibuja con flechas en ambos sentidos: la pregunta decide qué se registra.",
+  "description": "A film on the famous pyramid of data, information, knowledge and wisdom, and why data architecture draws it both ways: where it comes from (a poet's line in 1934, writers on management in the 1980s, Russell Ackoff in 1989); what it gets right (a number needs context, and people decide); what it gets wrong (it's drawn as a one-way factory, when a question decides what's recorded; there's no raw data; the levels aren't separate things, as DAMA says; and its top is vague); and Inés Duarte's redrawing, from a decision down to a definition and back up to a person who decides, with interruption as a business object on the data practice on the map, the outage system's record of each cut realising it, and the measure tracing to both.",
+  "description_es": "Una película sobre la famosa pirámide de datos, información, conocimiento y sabiduría, y por qué la arquitectura de datos la dibuja en ambos sentidos: de dónde viene (el verso de un poeta en 1934, autores de gestión en los años ochenta, Russell Ackoff en 1989); en qué acierta (un número necesita contexto, y deciden las personas); en qué se equivoca (se dibuja como una fábrica de un solo sentido, cuando una pregunta decide qué se registra; no hay datos en bruto; los niveles no son cosas separadas, como dice DAMA; y su cima es vaga); y el nuevo dibujo de Inés Duarte, de una decisión hacia abajo hasta una definición y de vuelta hacia arriba hasta una persona que decide, con interrupción como objeto de negocio en la práctica de datos en el mapa, el registro de cada corte en el sistema de cortes que lo realiza, y la medida vinculada con ambos.",
+  "card": "What the famous pyramid gets right and wrong, and how a question decides what's recorded, with the arrows drawn both ways.",
+  "card_es": "En qué acierta y en qué se equivoca la famosa pirámide, y cómo una pregunta decide qué se registra, con flechas en ambos sentidos.",
+  "chapters_es": {
+    "changed": "Solo lo que cambió",
+    "pyramid": "Una pirámide famosa",
+    "right": "Lo que acierta",
+    "first": "Primero la pregunta",
+    "raw": "No hay datos en bruto",
+    "levels": "Ni niveles separados ni una cima clara",
+    "both": "Flechas en ambos sentidos",
+    "back": "Definido primero"
+  },
+  "next_h": "Next, where each fact is born: one cut, recorded by more than one system.",
+  "next_h_es": "Después, dónde nace cada hecho: un corte, registrado por más de un sistema.",
+  "past": [
+    "Cyberstride's first results, Chile, 1972",
+    "Cybersyn's software worked out each factory's normal from its own history, and passed on only what had changed."
+  ],
+  "past_es": [
+    "Los primeros resultados de Cyberstride, Chile, 1972",
+    "El software de Cybersyn calculaba lo normal de cada fábrica a partir de su propia historia, y pasaba solo lo que había cambiado."
+  ]
+}

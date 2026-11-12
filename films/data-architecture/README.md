@@ -12,6 +12,7 @@ Data architecture as DAMA defines it, between the business and the systems: wher
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Between the business and the systems](https://data.learn-all.org/data-architecture/between-the-business-and-the-systems/) | What data architecture is | 7 min | 8 | 3 questions | [script](1-between-the-business-and-the-systems/script.md) · [source](1-between-the-business-and-the-systems/source/README.md) |
+| [The pyramid, taken apart](https://data.learn-all.org/data-architecture/the-pyramid-taken-apart/) | How records become decisions | 6½ min | 8 | 3 questions | [script](2-the-pyramid-taken-apart/script.md) · [source](2-the-pyramid-taken-apart/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

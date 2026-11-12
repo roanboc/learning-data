@@ -1,0 +1,239 @@
+1
+00:00:01,400 --> 00:00:09,060
+En 1972, el gobierno de Chile conectaba con Santiago las fábricas que dirigía, en un proyecto llamado Cybersyn.
+
+2
+00:00:10,360 --> 00:00:13,284
+Cada tarde, sus cifras llegaban por télex.
+
+3
+00:00:14,784 --> 00:00:17,889
+Pero una cifra sola no decía si algo andaba mal.
+
+4
+00:00:18,989 --> 00:00:23,331
+¿La tela de hoy era un buen día o uno malo? Dependía de la fábrica.
+
+5
+00:00:24,631 --> 00:00:30,100
+Y con cada fábrica informando cada día, una en problemas se perdería entre las que estaban bien.
+
+6
+00:00:31,400 --> 00:00:36,114
+Los responsables necesitaban ver las fábricas que los necesitaban, y solo esas.
+
+7
+00:00:37,614 --> 00:00:43,974
+Así que el software del proyecto, Cyberstride, calculaba con la historia de cada fábrica qué era normal para ella.
+
+8
+00:00:45,274 --> 00:00:49,644
+Comparaba con eso las cifras de cada día, y solo pasaba lo que había cambiado.
+
+9
+00:00:50,944 --> 00:00:55,550
+Un aviso debía ir primero al gerente de la propia fábrica, con tiempo para corregirlo.
+
+10
+00:00:56,850 --> 00:00:59,774
+Solo si seguía mal pasaría a Santiago.
+
+11
+00:01:01,274 --> 00:01:06,696
+El 21 de marzo de 1972, el software imprimió sus primeros resultados.
+
+12
+00:01:07,796 --> 00:01:11,715
+Stafford Beer, quien diseñó Cybersyn, avisó por télex que de verdad funcionaba.
+
+13
+00:01:13,215 --> 00:01:19,810
+En vez de un muro de cifras, los responsables verían unos pocos avisos, cada uno junto a lo normal de su fábrica.
+
+14
+00:01:21,510 --> 00:01:26,969
+En la empresa, Grace lee una medida cada mes: interrupciones por cliente, por año.
+
+15
+00:01:28,269 --> 00:01:34,918
+Parece una cifra que producen los sistemas. Pero existe solo porque alguien decidió antes qué es una interrupción.
+
+16
+00:01:42,618 --> 00:01:46,735
+Hay una imagen famosa de cómo los registros se vuelven decisiones: una pirámide.
+
+17
+00:01:48,035 --> 00:01:52,534
+Los datos abajo, luego la información, luego el conocimiento, y la sabiduría arriba.
+
+18
+00:01:54,234 --> 00:02:01,615
+Nadie la inventó solo. En 1934, un poeta preguntó dónde estaba el conocimiento que hemos perdido en información.
+
+19
+00:02:03,115 --> 00:02:11,623
+Autores de gestión dibujaron los niveles en los años ochenta, y un pensador de sistemas, Russell Ackoff, los hizo famosos en 1989.
+
+20
+00:02:12,923 --> 00:02:19,882
+Leída de abajo arriba, los datos se vuelven información, la información conocimiento, y el conocimiento sabiduría.
+
+21
+00:02:21,582 --> 00:02:22,865
+La mitad de eso es cierta.
+
+22
+00:02:25,565 --> 00:02:27,571
+Primero, una cifra necesita contexto.
+
+23
+00:02:28,671 --> 00:02:35,633
+Cuarenta y una interrupciones no dicen nada hasta saber: en qué línea, en cuánto tiempo y entre cuántos clientes.
+
+24
+00:02:37,333 --> 00:02:42,391
+Línea por línea, en un año, por cliente: ahora dice qué líneas fallan más a menudo.
+
+25
+00:02:44,091 --> 00:02:45,650
+Segundo, deciden las personas.
+
+26
+00:02:46,750 --> 00:02:52,356
+La medida no renueva ninguna línea. Grace decide cuáles renovar primero, y responde por ello.
+
+27
+00:02:54,056 --> 00:02:55,247
+Inés conserva las dos.
+
+28
+00:02:57,947 --> 00:02:59,906
+Lo que falla empieza por cómo se dibuja.
+
+29
+00:03:00,606 --> 00:03:05,373
+Parece una fábrica: los datos entran por abajo, y la sabiduría sale por arriba.
+
+30
+00:03:07,073 --> 00:03:10,954
+Pero nada se registra hasta que alguien decide qué registrar.
+
+31
+00:03:12,254 --> 00:03:17,245
+Antes de que el sistema de cortes registrara una sola interrupción, alguien escribió qué es una.
+
+32
+00:03:18,545 --> 00:03:21,884
+Un punto de conexión sin energía por más de cinco minutos.
+
+33
+00:03:23,384 --> 00:03:27,121
+Un corte más corto cuenta como momentáneo, en una medida aparte.
+
+34
+00:03:28,621 --> 00:03:33,622
+Así que el sistema de cortes registra cuándo empieza y termina cada corte, en cada punto de conexión.
+
+35
+00:03:35,322 --> 00:03:38,082
+La pregunta llegó primero, y decidió los datos.
+
+36
+00:03:39,582 --> 00:03:43,202
+En Chile también el dibujo llegó primero, y eligió las cifras.
+
+37
+00:03:45,902 --> 00:03:48,195
+Tampoco existen los datos en bruto.
+
+38
+00:03:49,295 --> 00:03:52,336
+Una lectura del medidor parece en bruto: una cifra, cada media hora.
+
+39
+00:03:53,636 --> 00:03:59,231
+Pero alguien eligió la media hora, eligió los kilovatios hora, y eligió guardar un decimal.
+
+40
+00:04:00,931 --> 00:04:05,784
+Un libro de ensayos sobre datos lo dice en su título: los datos en bruto son un oxímoron.
+
+41
+00:04:07,284 --> 00:04:10,563
+Cada registro lo diseñó alguien, para alguna pregunta.
+
+42
+00:04:13,263 --> 00:04:15,288
+Los niveles tampoco son cosas separadas.
+
+43
+00:04:16,588 --> 00:04:22,139
+Como dice DAMA, los datos son una forma de información, y la información es una forma de datos.
+
+44
+00:04:23,639 --> 00:04:28,480
+El mismo registro de un corte es dato para el sistema de cortes, e información para Grace.
+
+45
+00:04:30,180 --> 00:04:31,453
+Y la cima es vaga.
+
+46
+00:04:32,553 --> 00:04:38,903
+Quienes estudian la pirámide hallan poco acuerdo sobre qué es la sabiduría, o cómo podría guardarla un sistema.
+
+47
+00:04:40,403 --> 00:04:43,195
+En la práctica, la cima es una persona que decide.
+
+48
+00:04:45,895 --> 00:04:48,855
+Así que Inés la vuelve a dibujar, con flechas en ambos sentidos.
+
+49
+00:04:50,155 --> 00:04:56,029
+Hacia abajo: una decisión hace una pregunta, la pregunta necesita una medida, y la medida, una definición.
+
+50
+00:04:57,729 --> 00:05:00,054
+La definición decide qué se registra.
+
+51
+00:05:01,554 --> 00:05:06,919
+Hacia arriba: los registros responden a la medida, la medida a la pregunta, y una persona decide.
+
+52
+00:05:08,819 --> 00:05:15,292
+En la práctica de datos en el mapa, interrupción pasa a ser un objeto de negocio, definido una vez y a cargo de Grace.
+
+53
+00:05:16,792 --> 00:05:21,318
+El registro de cada corte en el sistema de cortes es un objeto de datos que lo realiza.
+
+54
+00:05:23,018 --> 00:05:27,125
+Y la medida se vincula con ambos: qué cuenta, y de dónde vienen los conteos.
+
+55
+00:05:32,425 --> 00:05:35,756
+En Chile, las cifras nunca llegaron en bruto de las fábricas.
+
+56
+00:05:37,056 --> 00:05:41,758
+Alguien dibujó cada fábrica, eligió lo que importaba, y calculó qué era normal para ella.
+
+57
+00:05:43,258 --> 00:05:47,187
+Luego el software pasaba solo lo que cambiaba, y una persona decidía.
+
+58
+00:05:48,687 --> 00:05:54,854
+La medida de Grace funciona igual: definida primero, registrada según la definición, y leída por alguien que actúa.
+
+59
+00:05:56,354 --> 00:06:01,450
+Así cuenta igual cada año, y las líneas que más fallan se renuevan primero.
+
+60
+00:06:03,150 --> 00:06:09,876
+Pero cada corte lo registra más de un sistema. ¿Qué registro es el hecho? Depende de dónde nace.

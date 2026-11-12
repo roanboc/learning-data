@@ -1,0 +1,40 @@
+{
+  "key": "the-pyramid-taken-apart",
+  "title": "The pyramid, taken apart",
+  "sub": "Data architecture, a series on what DAMA calls data architecture, between the business and the systems: the famous pyramid of data, information, knowledge and wisdom, what it gets right and what it gets wrong, and Inés Duarte's redrawing of it with arrows both ways, from a decision down to the records and back up to a person who decides.",
+  "howto": "Glass in the layers' colours is the confirmed model: gold is the business layer, peach the information layer, where data architecture works. The pyramid is drawn in glass, one colour for each level. A line down on the left is what asks; a line up on the right is what answers. Chile in 1972 is drawn in lamp-light: the telex, the factories, and the software's warnings, each beside its factory's normal band.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "both",
+    "up",
+    5.4
+  ],
+  "say": [
+    [
+      "\\bInés\\b",
+      "Ee-ness"
+    ],
+    [
+      "\\bCyberstride\\b",
+      "Cyber-stride"
+    ],
+    [
+      "\\bCybersyn\\b",
+      "Cyber-sin"
+    ],
+    [
+      "\\bDAMA\\b",
+      "Dah-ma"
+    ],
+    [
+      "\\bAckoff\\b",
+      "Ack-off"
+    ]
+  ],
+  "story": [
+    "changed"
+  ]
+}

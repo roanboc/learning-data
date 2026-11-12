@@ -1,0 +1,235 @@
+1
+00:00:01,400 --> 00:00:10,447
+Japón, 1601. Un año después de la batalla que puso fin a un siglo de guerra, Tokugawa Ieyasu es el señor más poderoso del país.
+
+2
+00:00:11,147 --> 00:00:21,335
+Su sede es Edo. La ciudad del emperador, Kioto, está a unos quinientos kilómetros al oeste por el camino, y entre ambas hay muchos dominios, cada uno con su propio señor.
+
+3
+00:00:22,435 --> 00:00:29,987
+A pie, un viajero tardaba unas dos semanas de Edo a Kioto, y las órdenes y las noticias no iban más rápido que quienes las llevaban.
+
+4
+00:00:31,287 --> 00:00:38,422
+Para gobernar desde Edo, Ieyasu necesitaba que sus cartas, funcionarios y bienes cruzaran el país en días, no en semanas.
+
+5
+00:00:39,722 --> 00:00:49,681
+A principios de 1601 dio a cada posta del camino a Kioto una orden: tener treinta y seis caballos y llevar a los viajeros oficiales hasta la siguiente posta.
+
+6
+00:00:50,381 --> 00:00:54,239
+Con ella iba su sello, y una sola línea: sin este sello, no hay caballos.
+
+7
+00:00:55,939 --> 00:01:04,698
+En las décadas siguientes, cinco grandes caminos salieron de Edo, casi todos por rutas más antiguas, con postas a lo largo: el Gokaidō.
+
+8
+00:01:06,198 --> 00:01:12,814
+Relevada de posta en posta, una carta oficial cruzaba ahora de Edo a Kioto en tres o cuatro días.
+
+9
+00:01:14,114 --> 00:01:21,836
+Y el camino servía a todos los dominios: señores que viajaban a Edo, correos, mercaderes y peregrinos, cada uno en lo suyo.
+
+10
+00:01:23,336 --> 00:01:31,123
+En la empresa de energía, Ravi Menon acaba de asumir la plataforma de datos. Como ese camino, lleva los asuntos de todos los dominios.
+
+11
+00:01:31,823 --> 00:01:39,188
+Pero en el mapa aparece como una aplicación más, y cuando uno de sus números sale mal, nadie sabe decir de quién es la regla.
+
+12
+00:01:40,288 --> 00:01:45,333
+Dibujada como plataforma, sirve a todos los dominios, y cada regla en ella tiene un responsable.
+
+13
+00:01:52,433 --> 00:02:00,072
+El mapa de Tomás tiene seis capas. Esta serie trabaja en las dos de abajo: las aplicaciones y la tecnología sobre la que corren.
+
+14
+00:02:00,772 --> 00:02:09,265
+Estos son los ciento cuarenta sistemas de Hoy, y hacia dónde va, cada uno con su tarea: facturación, cortes, datos de medidores, finanzas.
+
+15
+00:02:10,565 --> 00:02:15,635
+Sobre ellos, la capa de información: qué significan los datos y dónde nace cada hecho.
+
+16
+00:02:16,335 --> 00:02:23,536
+Y entre las aplicaciones, una caja: data warehouse. Es la plataforma de datos, dibujada como una aplicación más.
+
+17
+00:02:25,036 --> 00:02:29,692
+Ravi le pide a Tomás que la mueva. Pero antes, una palabra que significa dos cosas.
+
+18
+00:02:32,392 --> 00:02:42,093
+Databricks llama a su producto plataforma de datos, y otros proveedores también. En la capa de tecnología lo es: muchos componentes, vendidos como un producto.
+
+19
+00:02:43,393 --> 00:02:48,347
+Tu plataforma de datos es más: un servicio que la empresa opera para todos sus dominios.
+
+20
+00:02:49,047 --> 00:02:58,166
+Se construye con ese producto y los componentes que lo rodean: identidad, la red, integración, orquestación, herramientas de reportes y lo que lo vigila todo.
+
+21
+00:02:59,466 --> 00:03:03,604
+Y con un equipo, con reglas y soporte, que la mantiene en marcha para todos.
+
+22
+00:03:04,304 --> 00:03:09,026
+En esta serie, Databricks es el producto. La plataforma de datos es el servicio.
+
+23
+00:03:12,526 --> 00:03:19,502
+Tomemos facturación. Tiene un propósito: cobrar a los clientes. Sus reglas vienen dentro: tarifas, estimaciones, descuentos.
+
+24
+00:03:20,602 --> 00:03:28,057
+Su responsable es el jefe de ventas minoristas, que decide qué hace. Se mide por los resultados de esa área: facturas correctas y a tiempo.
+
+25
+00:03:29,357 --> 00:03:37,920
+La plataforma de datos no tiene un propósito propio. Da capacidades compartidas: traer datos, guardarlos, procesarlos, servirlos y gobernarlos.
+
+26
+00:03:39,220 --> 00:03:43,791
+Sobre ella, muchos responsables construyen su lógica: la red, minoristas, finanzas.
+
+27
+00:03:44,491 --> 00:03:50,694
+Y uno más: el dominio empresarial, para medidas que cruzan dominios, para desempeño y análisis.
+
+28
+00:03:51,794 --> 00:04:00,952
+Esa es la prueba. Un propósito, con su lógica dentro: una aplicación. Capacidades compartidas, sobre las que muchos construyen la suya: una plataforma.
+
+29
+00:04:04,652 --> 00:04:11,136
+Servir a todos los dominios no es la prueba por sí sola. El sistema financiero sirve a finanzas, compras y personas.
+
+30
+00:04:11,836 --> 00:04:18,959
+Pero es una suite de aplicaciones. Cada parte tiene un propósito, y su lógica viene dentro, como la diseñó su proveedor.
+
+31
+00:04:20,259 --> 00:04:25,547
+La línea está donde vive la lógica: dentro del sistema, o traída a él por sus responsables.
+
+32
+00:04:29,047 --> 00:04:35,121
+Las postas del Tōkaidō tenían listos los caballos y los cargadores. Nunca escribieron las cartas que llevaban.
+
+33
+00:04:36,821 --> 00:04:43,945
+En una plataforma de datos, la lógica corre sobre ella, en los productos de datos de cada dominio, nunca en sus propios componentes.
+
+34
+00:04:45,645 --> 00:04:49,918
+Y su responsable es siempre el negocio, nunca el equipo de la plataforma por defecto.
+
+35
+00:04:51,618 --> 00:04:57,235
+Es fácil de decir y difícil de ver, porque la plataforma trae los datos y ejecuta el código.
+
+36
+00:04:59,935 --> 00:05:06,140
+Una de las medidas del dominio empresarial: minutos sin suministro por cliente. Se reporta al regulador.
+
+37
+00:05:07,440 --> 00:05:13,362
+Se construye en la plataforma con tres sistemas: cortes, el mapa de la red y la vieja herramienta de tormentas.
+
+38
+00:05:14,662 --> 00:05:17,715
+En marzo, la cifra salta de unos ocho a diecinueve.
+
+39
+00:05:19,215 --> 00:05:27,200
+Contó una tormenta mayor. La regla que deja fuera las tormentas mayores venía en la exportación de esa herramienta, y una actualización en febrero la quitó.
+
+40
+00:05:28,900 --> 00:05:36,168
+¿De quién era la regla? El código era del equipo de la plataforma. La herramienta no tenía notas, y quien la configuró ya se había ido.
+
+41
+00:05:37,868 --> 00:05:46,471
+El mapa de Tomás y el catálogo encuentran a su responsable: la medida es del dominio empresarial, y para las medidas del regulador, esa es Ama.
+
+42
+00:05:48,171 --> 00:05:54,727
+Ama abre un ticket y escribe en el glosario qué tormentas no cuentan, como dice el método del regulador.
+
+43
+00:05:56,027 --> 00:06:01,416
+El equipo de datos construye la regla en la plataforma, con una prueba, y revisa el pull request.
+
+44
+00:06:02,916 --> 00:06:08,234
+Ama revisa el número en pruebas antes de que se cierre su ticket. Marzo vuelve a nueve.
+
+45
+00:06:11,734 --> 00:06:20,804
+Los caminos también tenían dueño: el shogunato. Sus funcionarios viajaban gratis, los demás pagaban su viaje, y las postas y aldeas cercanas cargaban con el peso.
+
+46
+00:06:23,104 --> 00:06:28,350
+La plataforma también tiene un responsable de negocio: un patrocinador, con un product owner.
+
+47
+00:06:30,050 --> 00:06:37,279
+Pero responde a todos los dominios que la usan. Decide menos de lo que se construye sobre ella, y responde por lo bien que les sirve a todos.
+
+48
+00:06:39,179 --> 00:06:47,661
+Se mide por los resultados de quienes la usan: cuántos construyen sobre ella, qué tan rápido sale un primer producto de datos, qué tan confiable es y cuánto cuesta.
+
+49
+00:06:51,761 --> 00:06:55,920
+Por eso, donde más importa la arquitectura empresarial es en una plataforma de datos.
+
+50
+00:06:56,620 --> 00:07:03,569
+Es el único sistema que cruza todos los dominios y todas las capas: negocio, datos, aplicaciones y tecnología.
+
+51
+00:07:04,869 --> 00:07:07,487
+No se puede diseñar desde dentro de ninguna de ellas.
+
+52
+00:07:11,187 --> 00:07:13,835
+Esta es la práctica de datos, en el mapa de Tomás.
+
+53
+00:07:14,535 --> 00:07:22,938
+En la capa de tecnología, los servicios de la plataforma: almacenamiento, cómputo, el catálogo. Databricks los realiza, como software de sistema.
+
+54
+00:07:24,238 --> 00:07:32,968
+En la capa de aplicaciones, el producto de datos de la medida: su pipeline y modelos, un componente de aplicación, del dominio empresarial.
+
+55
+00:07:34,268 --> 00:07:41,479
+Donde otros lo leen, su puerto de salida, es una interfaz de aplicación. Sus tablas son artefactos, guardados en la plataforma.
+
+56
+00:07:42,779 --> 00:07:47,381
+Los componentes de la plataforma no tienen reglas. El producto sobre ellos sí, con su responsable.
+
+57
+00:07:50,881 --> 00:07:59,195
+El Gokaidō llevó las cartas y los bienes de todos los dominios por más de dos siglos y medio. Lo que decían era siempre asunto de quien las enviaba.
+
+58
+00:08:00,695 --> 00:08:09,211
+Dibujada como plataforma, la de Ravi hace lo mismo: todos construyen sobre ella, y cada regla tiene un responsable que el mapa de Tomás encuentra.
+
+59
+00:08:10,711 --> 00:08:12,823
+Sigue: qué hay dentro de la plataforma.

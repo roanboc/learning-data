@@ -219,7 +219,7 @@ Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data
 
 Source: [films/platform-and-solution-architecture](../films/platform-and-solution-architecture/) · Portal: `/platform-and-solution-architecture/`
 
-No film source yet.
+- [An application or a platform?](../films/platform-and-solution-architecture/1-an-application-or-a-platform/) — `an-application-or-a-platform`
 
 ### AI and continuous architecture
 

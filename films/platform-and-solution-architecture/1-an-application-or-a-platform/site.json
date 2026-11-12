@@ -1,0 +1,36 @@
+{
+  "kicker": "Where the platform sits",
+  "kicker_es": "Dónde está la plataforma",
+  "title_es": "¿Una aplicación o una plataforma?",
+  "h1": "An application or a platform? Why a data platform serves every domain",
+  "h1_es": "¿Una aplicación o una plataforma? Por qué sirve a todos los dominios",
+  "lead": "Ravi Menon has just taken over the utility's data platform, drawn on the map as one more application. When a measure built on it for the regulator goes wrong, nobody can say whose rule it is. Drawn as a platform, it carries every domain's logic, and every rule on it has an owner in the business.",
+  "lead_es": "Ravi Menon acaba de asumir la plataforma de datos de la empresa, dibujada en el mapa como una aplicación más. Cuando falla una medida para el regulador hecha sobre ella, nadie sabe de quién es la regla. Como plataforma, lleva la lógica de cada dominio, y cada regla tiene responsable en el negocio.",
+  "description": "A film about why a data platform is a platform and not one more application: a platform product, such as Databricks, and your data platform, the service built from it, the components around it and the team that runs it; the test, one purpose with its logic built in, or shared capabilities on which many owners build their own; a finance system that serves many functions and is still an application suite; where the logic lives, on the platform in each domain's data products, never in its own components, and whose it is, always the business's; a measure for the regulator that nobody could say was whose, until the map and the catalogue found its owner; a platform owner who answers to every domain; and why enterprise architecture matters most for a data platform.",
+  "description_es": "Una película sobre por qué una plataforma de datos es una plataforma y no una aplicación más: un producto de plataforma, como Databricks, y tu plataforma de datos, el servicio hecho con él, los componentes que lo rodean y el equipo que lo opera; la prueba, un propósito con su lógica dentro, o capacidades compartidas sobre las que muchos responsables construyen la suya; un sistema financiero que sirve a muchas áreas y sigue siendo una suite de aplicaciones; dónde vive la lógica, sobre la plataforma, en los productos de datos de cada dominio, nunca en sus propios componentes, y de quién es, siempre del negocio; una medida para el regulador de la que nadie sabía quién era responsable, hasta que el mapa y el catálogo lo encontraron; un responsable de la plataforma que responde a todos los dominios; y por qué la arquitectura empresarial importa más en una plataforma de datos.",
+  "card": "An application has one purpose, its logic inside. A data platform carries every domain's logic, each rule with an owner.",
+  "card_es": "Una aplicación tiene un propósito y su lógica dentro. Una plataforma de datos lleva la lógica de cada dominio, cada regla con su responsable.",
+  "chapters_es": {
+    "road": "Cinco caminos desde Edo",
+    "map": "Dónde está",
+    "words": "Dos clases de plataforma",
+    "test": "La prueba",
+    "erp": "No todo sistema compartido",
+    "logic": "De quién es la lógica",
+    "minutes": "Una cifra sin responsable",
+    "owner": "Un responsable que responde a todos",
+    "why": "Por qué aquí el mapa importa más",
+    "practice": "La práctica de datos en el mapa",
+    "end": "El camino de todos los dominios"
+  },
+  "next_h": "You've seen why a data platform is a platform. Next: what's inside it, capability by capability.",
+  "next_h_es": "Viste por qué una plataforma de datos es una plataforma. Sigue: qué tiene dentro, capacidad por capacidad.",
+  "past": [
+    "Ieyasu's post stations, Japan, 1601",
+    "A road every domain shares carries their business; what it carries stays the sender's."
+  ],
+  "past_es": [
+    "Las postas de Ieyasu, Japón, 1601",
+    "Un camino que comparten todos los dominios lleva sus asuntos; lo que lleva sigue siendo de quien lo envía."
+  ]
+}

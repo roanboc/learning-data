@@ -61,8 +61,17 @@ class SelectionTests(unittest.TestCase):
         p = self.plan("site/assets/off-the-shelf/film.js")
         self.assertEqual([(f["key"], f["checks"]) for f in p["films"]], [("off-the-shelf-en", "player")])
         names = [s[0] for s in affected.steps(p)]
-        self.assertFalse(any("every moment" in n or "sound" in n for n in names))
+        self.assertFalse(any("every moment" in n or "sound" in n or "its box" in n for n in names))
         self.assertTrue(any("build" in n for n in names))
+
+    def test_a_changed_film_is_held_to_its_boxes(self):
+        p = self.plan("films/data-governance/1-off-the-shelf/source/src/scenes.js")
+        fits = [s for s in affected.steps(p) if "its box" in s[0]]
+        self.assertEqual(len(fits), 1)
+        name, cmd, cwd, env = fits[0]
+        self.assertEqual(pathlib.Path(cmd[1]), ROOT / "site-tools/fits.py")
+        self.assertTrue((cwd / "film.json").exists())  # run from the film's source folder, as its own tools are
+        self.assertEqual(env["FILM_LANG"], "en")
 
     def test_soundtrack_only_does_not_schedule_film(self):
         p = self.plan("site/assets/off-the-shelf/soundtrack.mp3")

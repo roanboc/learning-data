@@ -29,6 +29,8 @@ function cp_figure(x,who,px,py,s,tt,a,o){withA(x,a,()=>dp_person(x,who,px,py,s,O
 // the learner of Show the least, and a made-up one
 const CP_SAMUEL=[["student_number","S-20412","direct"],["name","Samuel Osei","direct"],["date_of_birth","14 May 1987","indirect"],["course","Public health","none"],["results","90 of 120","none"]];
 const CP_MADE=[["student_number","S-90017","direct"],["name","Noa Halden","direct"],["date_of_birth","3 March 1999","indirect"],["course","Midwifery","none"],["results","45 of 120","none"]];
+// the name a model gives a learner it learned from the real records: new, while the rest of the row is still Samuel's
+const CP_LEARNED="Rui Dalen";
 
 /* ---------------------------------------------------------------- 1. A copy to visit: Lascaux, 1948 to 1983 */
 scene("cave",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
@@ -132,7 +134,10 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
 scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   const tRefuses=A("clone","refuses"),tReal=A("exempt","every real name"),tNoCls=A("exempt","no column's class"),tPeople=A("masked","real people"),tAsIs=A("masked","as it is"),
     tNone=A("madeup","none of them"),tSize=A("script","For size"),tCols=A("script","columns"),tFewer=A("unit","fewer than ten"),tGiven=A("unit","if nine"),
-    tClone=A("never","clone"),tSample=A("never","sample"),tNever=A("never","never used"),tReal2=A("lascaux","not one is real"),tNoRec=A("runs","no record");
+    tClone=A("never","clone"),tSample=A("never","sample"),tNever=A("never","never used"),tReal2=A("lascaux","not one is real"),tNoRec=A("runs","no record"),
+    tSynth=A("easy","synthetic data"),tNoRead=A("written","without reading"),tCls2=A("written","their classes"),tNoOne=A("written","no one"),
+    tFrom=A("learned","learned from"),tFits=A("learned","fits"),tAway=A("learned","real person"),tTreats=A("treated","treats"),tCopy=A("treated","a copy"),
+    tKinds=c.harder-1.3,tClose=A("harder","How closely"),tGaps=A("harder","gaps"),tOdd=A("harder","odd cases"),tOpen=A("harder","open");
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"cpHall",keys:[[0,960,540,1.0]],push:0.015,draw:(x,tt)=>{
     cp_figure(x,"jun",1640,612,0.95,tt,cp_io(tt,c.jun-0.3,sc.dur-1.6,0.7),{flip:true});
     cp_who(x,1500,240,"Jun Park","Analytics engineer",{align:"right",a:cp_io(tt,c.jun+0.4,c.clone-0.45)});
@@ -152,14 +157,34 @@ scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
       rows:[{c:"student_number",v:"***",vc:"violet",cls:"direct"},{c:"name",v:"***",vc:"violet",cls:"direct"},{c:"date_of_birth",v:"1987",cls:"indirect"},{c:"notes",v:"Extra time: anxiety",vc:"coral"}]});
     cp_tag(x,1010,300,"Still about real people","grey",{a:ma*ag_in(tt,tPeople,0.4)});
     cp_tag(x,420,640,"Not classed yet: shown as it is","coral",{a:ma*ag_in(tt,tAsIs,0.4),to:[640,560],p:cp_lin(tt,tAsIs+0.2,0.5)});
-    // made-up learners: true to the real ones, and none of them is anyone
+    // made-up learners, wherever development and test can use them: none of them is anyone
     const da=cp_io(tt,c.madeup,c.script-0.3,0.5);
     cp_record(x,90,250,{name:"dev.core_learner_v1",rows:CP_MADE.map(r=>({c:r[0],v:r[1],cls:r[2]})),w:900,cw:262,col:"green",a:da,k:ag_spr(tt,c.madeup,0.7)});
     cp_tag(x,90,680,"Made up: none of them is anyone","green",{a:da*ag_in(tt,tNone,0.4)});
     // the script that writes them, in the registrar's bundle
-    const ga=cp_io(tt,c.script+0.2,c.unit-0.5,0.5);if(ga>0){const bx=dp_page(x,90,230,1260,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar/tests/made_up_learners.py",a:ga});
+    const ga=cp_io(tt,c.script+0.2,c.learned-0.5,0.5);if(ga>0){const bx=dp_page(x,90,230,1260,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar/tests/made_up_learners.py",a:ga});
+      // "only the columns and their classes go in": the classes' line lights too, under the columns'
+      const h2=ga*ag_in(tt,tCls2,0.4);if(h2>0){x.save();x.globalAlpha*=h2;rr(x,bx.x-14,bx.y+44+2*46-34,1180,46,8);x.fillStyle=rgba(DP.F.green,0.16);x.fill();x.strokeStyle=rgba(DP.F.green,0.9);x.lineWidth=2;x.stroke();x.restore();}
       cp_code(x,bx.x,bx.y+44,["learners = make_learners(2614)","columns  = like(\"core_learner_v1\")","classes  = like(\"core_learner_v1\")"],
-        {a:ga,w:1180,hi:tt<tCols?[0,ag_in(tt,tSize,0.4)]:[1,ag_in(tt,tCols,0.4)]});}
+        {a:ga,w:1180,hi:tt<tCols?[0,ag_in(tt,tSize,0.4)]:[1,ag_in(tt,tCols,0.4)]});
+      // synthetic data is easy to write now (the author, 12 November 2026), and this kind is written without reading a record
+      cp_tag(x,90,676,"Synthetic data: easy to write now","green",{a:ga*ag_in(tt,tSynth,0.4)});
+      const tw=cp_tag(x,90,764,"Written without reading a record","green",{a:ga*ag_in(tt,tNoRead,0.4)});
+      withA(x,ga,()=>dp_tick(x,90+tw+36,795,"green",cp_lin(tt,tNoOne,0.6)));}
+    // the other kind, learned from the real records: one of its learners beside a real one. A new name, and the rest is Samuel's;
+    // so the university treats it as a copy of the real records, and its columns get their classes (the author, 12 November 2026)
+    const ba=cp_io(tt,c.learned,tKinds-0.6,0.5);if(ba>0){const fit=ag_in(tt,tFits,0.5),lc=mix(DP.T.ink,DP.T.coral,fit);
+      cp_pair(x,90,250,1260,{heads:["A real record","Learned from the records"],la:ag_in(tt,tFrom,0.45),ring:[1,3,fit],a:ba,k:ag_spr(tt,c.learned,0.7),
+        rows:CP_SAMUEL.slice(1).map((r,i)=>({c:r[0],v:r[1],cls:r[2],l:i?r[1]:CP_LEARNED,lc:i?lc:"ink",ca:ag_in(tt,tCopy+i*0.12,0.4)}))});
+      const sw=cp_tag(x,90,612,"Still Samuel, under a new name","coral",{a:ba*ag_in(tt,tAway,0.4)});
+      cp_tag(x,90+sw+24,612,"Treated as a copy of the real records","cyan",{a:ba*ag_in(tt,tTreats,0.4)});}
+    // the two kinds, one over the other, and the question still open between them: how close to the real records
+    const ka=cp_io(tt,tKinds,c.unit-0.5,0.5);
+    cp_kind(x,90,250,900,"Written without the records","Gives no one away","green",{a:ka,k:ag_spr(tt,tKinds,0.7)});
+    cp_kind(x,90,404,900,"Learned from the real records","Can give someone away","coral",{a:ka*ag_in(tt,tKinds+0.25,0.5),k:ag_spr(tt,tKinds+0.25,0.7)});
+    if(ka>0){let gx=90+cp_tag(x,90,586,"How close to the real records?","grey",{a:ka*ag_in(tt,tClose,0.4)})+24;
+      gx+=dp_pill(x,gx,627,"gaps","grey",{a:ka*ag_in(tt,tGaps,0.4)})+14;gx+=dp_pill(x,gx,627,"odd cases","grey",{a:ka*ag_in(tt,tOdd,0.4)})+24;
+      cp_tag(x,gx,586,"Still an open question","grey",{a:ka*ag_in(tt,tOpen,0.4)});}
     // dbt's unit test, on rows written for it
     const ua=cp_io(tt,c.unit,c.lascaux-0.5,0.5);if(ua>0){const bx=dp_page(x,90,230,1260,420,{tool:"dbt",name:"dbt",where:"unit test",title:"small_counts_hidden",a:ua*(1-0.55*ag_in(tt,c.never,0.6))});
       cp_code(x,bx.x,bx.y+44,["model:  left_after_first_year","given:  9 learners leave Midwifery","expect: Midwifery, fewer than 10"],{a:ua*(1-0.55*ag_in(tt,c.never,0.6)),w:1180,hi:[1,ag_in(tt,tGiven,0.4)]});

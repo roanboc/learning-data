@@ -1,8 +1,8 @@
 {
   "key": "one-list-not-twenty",
   "title": "One list, not twenty",
-  "sub": "The fourth and last film of Making the case, the second series of Data management: one way in and one ordered list for all the data work. Helena's team closes its eleven side doors kindly, opens one front door with five questions, orders every request in the open by what waiting costs and the effort, splits its time on purpose, keeps six pieces of work in progress at most, and tells every request that waits why, and when.",
-  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the flying ambulance, the roadmap's work, the front door's form), green is value or something done (help that came in time, work finished), amber is risk, cost or waiting (the wounded waiting, what waiting costs, not now), and orange is data (the requests for it).",
+  "sub": "The fourth and last film of Making the case, the second series of Data management: one way in and one ordered list for all the data work. Helena's team closes its eleven side doors kindly, opens one front door with five questions, orders every request in the open by its value and the effort, splits its time on purpose, keeps six pieces of work in progress at most, and tells every request that waits why, and when.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the flying ambulance, the roadmap's work, the front door's form), green is value or something done (help that came in time, an opportunity, work finished), amber is risk, cost or waiting (the wounded waiting, the risk a request prevents, not now), and orange is data (the requests for it).",
   "src": [
     "../../../../a-plan-in-ninety-days/shared/src/mark.js",
     "ol_rhine.js",
@@ -21,7 +21,6 @@
     ["\\bSpeyer\\b", "Spyer"],
     ["\\bAboukir\\b", "Abookeer"],
     ["\\bJena\\b", "Yaynah"],
-    ["\\bReinertsen\\b", "Rynertsen"],
     ["\\bNovak's\\b", "Noh-vak's"],
     ["\\bJun\\b", "Joon"],
     ["\\bNoor\\b", "Nuur"],

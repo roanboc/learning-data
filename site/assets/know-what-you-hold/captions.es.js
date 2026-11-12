@@ -81,6 +81,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Dos mínimos vienen de las columnas. Una tabla con algo que señale a una persona nunca es pública.",
 "A table with anything special is restricted.":
 "Una tabla con algo especial es restringida.",
+"These five classes and four levels are the university's own. Another organisation may choose others.":
+"Estas cinco clases y cuatro niveles son los de la universidad. Otra organización puede elegir otros.",
+"What matters is one list, and that everyone uses its words the same way.":
+"Lo que importa es una sola lista, y que todos usen sus palabras de la misma manera.",
 "Back to exam support. Its values name no illness: extra time, a separate room, a reader.":
 "De vuelta al apoyo en exámenes. Sus valores no nombran ninguna enfermedad: más tiempo, una sala aparte, un lector.",
 "But Mei knows why a learner has them: for a disability.":

@@ -119,157 +119,177 @@ Clonada por alguien que ellas excluyen, tendría cada nombre real y ninguna clas
 Una copia enmascarada es posible, pero sigue siendo de personas reales, y una columna que nadie ha clasificado pasa tal cual.
 
 31
-00:03:32,583 --> 00:03:36,718
-Así que desarrollo y pruebas reciben estudiantes inventados, y ninguno de ellos es nadie.
+00:03:32,583 --> 00:03:38,282
+Así que, siempre que pueden, desarrollo y pruebas reciben estudiantes inventados, y ninguno de ellos es nadie.
 
 32
-00:03:38,218 --> 00:03:45,171
+00:03:39,782 --> 00:03:46,735
 Para el tamaño, un script escribe 2,614, con las columnas de producción y sus clases.
 
 33
-00:03:46,471 --> 00:03:55,708
-Las pruebas unitarias de dbt revisan el conteo con filas escritas para cada prueba: si nueve estudiantes dejan Partería, dice menos de 10.
+00:03:48,035 --> 00:03:50,903
+Son datos sintéticos, y hoy es fácil escribirlos.
 
 34
-00:03:57,408 --> 00:04:03,454
-El clone y el sample de dbt traen filas de producción, así que nunca se usan en tablas sobre personas.
+00:03:52,203 --> 00:03:58,925
+Este tipo se escribe sin leer ningún expediente: solo entran las columnas y sus clases, así que no puede delatar a nadie.
 
 35
-00:04:04,954 --> 00:04:08,511
-Como Lascaux II, son fieles a los estudiantes, y ninguno es real.
+00:04:00,425 --> 00:04:07,833
+El otro tipo se aprende de los expedientes reales, y cuanto más se les parece, más probable es que delate a una persona real.
 
 36
-00:04:10,211 --> 00:04:16,395
-El cambio de Jun corre sobre 2,614 de ellos, y ningún expediente sale de producción.
+00:04:09,533 --> 00:04:13,585
+Por eso la universidad trata ese tipo como una copia de los expedientes reales.
 
 37
-00:04:18,895 --> 00:04:20,737
-Lunes 2 de noviembre.
+00:04:15,485 --> 00:04:23,928
+Qué tanto deben parecerse los datos inventados a los reales, con sus huecos y casos raros, es la pregunta difícil, y sigue abierta.
 
 38
-00:04:21,837 --> 00:04:29,443
-El hospital universitario donde se forman los estudiantes pregunta cuántos dejan tras primer año, por carrera, para planear sus plazas.
+00:04:25,628 --> 00:04:34,865
+Las pruebas unitarias de dbt revisan el conteo con filas escritas para cada prueba: si nueve estudiantes dejan Partería, dice menos de 10.
 
 39
-00:04:30,743 --> 00:04:40,051
-Un fin nuevo pide un acuerdo nuevo, como dice Primero, un acuerdo: el 2026-21, firmado por Mei y la dirección de docencia del hospital.
+00:04:36,565 --> 00:04:42,611
+El clone y el sample de dbt traen filas de producción, así que nunca se usan en tablas sobre personas.
 
 40
-00:04:41,751 --> 00:04:47,873
-El hospital también usa Databricks, así que OpenSharing puede compartirle una tabla, como en El mercado de datos.
+00:04:44,111 --> 00:04:48,040
+Como Lascaux II, ocupan el lugar de los estudiantes, y ninguno es real.
 
 41
-00:04:49,173 --> 00:04:52,234
-Pero las políticas de la universidad no viajan con lo que se comparte.
+00:04:49,740 --> 00:04:55,924
+El cambio de Jun corre sobre 2,614 de ellos, y ningún expediente sale de producción.
 
 42
-00:04:53,534 --> 00:05:00,558
-Quien comparte una tabla debe quedar fuera de sus políticas, y el hospital la lee en su propia plataforma, donde nunca se aplican.
+00:04:58,424 --> 00:05:00,266
+Lunes 2 de noviembre.
 
 43
-00:05:02,058 --> 00:05:05,426
-Si se comparte la tabla de estudiantes, el hospital vería cada nombre.
+00:05:01,366 --> 00:05:08,972
+El hospital universitario donde se forman los estudiantes pregunta cuántos dejan tras primer año, por carrera, para planear sus plazas.
 
 44
-00:05:07,326 --> 00:05:13,984
-Así que se comparte una tabla que ya muestra solo lo que puede salir: los totales de Muestra lo mínimo, con las cifras pequeñas ocultas.
+00:05:10,272 --> 00:05:19,580
+Un fin nuevo pide un acuerdo nuevo, como dice Primero, un acuerdo: el 2026-21, firmado por Mei y la dirección de docencia del hospital.
 
 45
-00:05:15,684 --> 00:05:24,023
-Lo compartido no tiene fecha de fin, así que un proceso hecho del acuerdo quita el acceso del hospital el 30 de junio de 2027.
+00:05:21,280 --> 00:05:27,402
+El hospital también usa Databricks, así que OpenSharing puede compartirle una tabla, como en El mercado de datos.
 
 46
-00:05:26,523 --> 00:05:32,706
-Luego el hospital hace una pregunta más difícil: ¿a quienes pasan más semanas en sus salas les va mejor ese año?
+00:05:28,702 --> 00:05:31,763
+Pero las políticas de la universidad no viajan con lo que se comparte.
 
 47
-00:05:34,406 --> 00:05:42,195
-La respuesta pide las filas de ambos, las semanas del hospital y los resultados de la universidad, y ninguno puede darle sus filas al otro.
+00:05:33,063 --> 00:05:40,087
+Quien comparte una tabla debe quedar fuera de sus políticas, y el hospital la lee en su propia plataforma, donde nunca se aplican.
 
 48
-00:05:43,895 --> 00:05:50,684
-Así que se reúnen en una sala limpia, en Azure Databricks, donde ninguno ve las filas del otro, solo los nombres de sus columnas.
+00:05:41,587 --> 00:05:44,955
+Si se comparte la tabla de estudiantes, el hospital vería cada nombre.
 
 49
-00:05:52,384 --> 00:05:59,422
-La universidad agrega una vista, de un estante que nadie lee: el número, la carrera y el resultado de cada estudiante de Salud.
+00:05:46,855 --> 00:05:53,513
+Así que se comparte una tabla que ya muestra solo lo que puede salir: los totales de Muestra lo mínimo, con las cifras pequeñas ocultas.
 
 50
-00:06:01,122 --> 00:06:07,460
-El hospital escribe el código que une las dos y cuenta, por semanas en las salas, cuántos estudiantes aprobaron.
+00:05:55,213 --> 00:06:03,552
+Lo compartido no tiene fecha de fin, así que un proceso hecho del acuerdo quita el acceso del hospital el 30 de junio de 2027.
 
 51
-00:06:08,960 --> 00:06:17,938
-Nada corre hasta que la universidad lo aprueba: Mei dijo que sí en el acuerdo, y Jun revisa el código y lo aprueba el 1 de diciembre.
+00:06:06,052 --> 00:06:12,235
+Luego el hospital hace una pregunta más difícil: ¿a quienes pasan más semanas en sus salas les va mejor ese año?
 
 52
-00:06:19,638 --> 00:06:27,432
-La sala limpia no oculta nada por sí sola: sale lo que escribe el código aprobado, así que el código oculta toda cifra menor que 10.
+00:06:13,935 --> 00:06:21,724
+La respuesta pide las filas de ambos, las semanas del hospital y los resultados de la universidad, y ninguno puede darle sus filas al otro.
 
 53
-00:06:29,332 --> 00:06:35,211
-El 3 de diciembre, el hospital lo corre y recibe una tabla de totales, que se guarda 30 días.
+00:06:23,424 --> 00:06:30,213
+Así que se reúnen en una sala limpia, en Azure Databricks, donde ninguno ve las filas del otro, solo los nombres de sus columnas.
 
 54
-00:06:36,911 --> 00:06:42,076
-Con doce semanas o más, aprobaron 91 de cada 100; con cuatro a siete semanas, 84.
+00:06:31,913 --> 00:06:38,951
+La universidad agrega una vista, de un estante que nadie lee: el número, la carrera y el resultado de cada estudiante de Salud.
 
 55
-00:06:43,776 --> 00:06:48,921
-Como los científicos de Lascaux: lo que entra está aprobado, y las paredes nunca salen.
+00:06:40,651 --> 00:06:46,989
+El hospital escribe el código que une las dos y cuenta, por semanas en las salas, cuántos estudiantes aprobaron.
 
 56
-00:06:51,421 --> 00:06:53,182
-Martes 10 de noviembre.
+00:06:48,489 --> 00:06:57,467
+Nada corre hasta que la universidad lo aprueba: Mei dijo que sí en el acuerdo, y Jun revisa el código y lo aprueba el 1 de diciembre.
 
 57
-00:06:54,282 --> 00:07:01,552
-Elena Lindgren, la nueva asistente de investigación de Anil, quiere descargar la tabla del estudio para limpiarla en una hoja de cálculo.
+00:06:59,167 --> 00:07:06,961
+La sala limpia no oculta nada por sí sola: sale lo que escribe el código aprobado, así que el código oculta toda cifra menor que 10.
 
 58
-00:07:02,852 --> 00:07:08,013
-Pero un archivo en una laptop no mantiene ninguna regla, y el acuerdo dice que nada se descarga.
+00:07:08,861 --> 00:07:14,740
+El 3 de diciembre, el hospital lo corre y recibe una tabla de totales, que se guarda 30 días.
 
 59
-00:07:09,713 --> 00:07:14,639
-Así que en el espacio de trabajo de los estudios, de Permisos por diseño, toda salida está apagada.
+00:07:16,440 --> 00:07:21,605
+Con doce semanas o más, aprobaron 91 de cada 100; con cuatro a siete semanas, 84.
 
 60
-00:07:15,739 --> 00:07:21,632
-Descargar resultados, exportar notebooks, copiar una tabla, descargar un archivo: todo está apagado.
+00:07:23,305 --> 00:07:28,450
+Como los científicos de Lascaux: lo que entra está aprobado, y las paredes nunca salen.
 
 61
-00:07:23,132 --> 00:07:29,230
-Los interruptores se guardan como código: volver a encender uno pide un cambio revisado, y el registro de auditoría lo muestra.
+00:07:30,950 --> 00:07:32,711
+Martes 10 de noviembre.
 
 62
-00:07:30,730 --> 00:07:38,466
-Y lo que corre ahí solo llega al almacenamiento del catálogo y a una lista corta, como hizo Red, almacenamiento y claves en producción.
+00:07:33,811 --> 00:07:41,081
+Elena Lindgren, la nueva asistente de investigación de Anil, quiere descargar la tabla del estudio para limpiarla en una hoja de cálculo.
 
 63
-00:07:39,766 --> 00:07:44,673
-Ningún interruptor impide una foto de la pantalla; eso lo cubre su acuerdo de confidencialidad.
+00:07:42,381 --> 00:07:47,542
+Pero un archivo en una laptop no mantiene ninguna regla, y el acuerdo dice que nada se descarga.
 
 64
-00:07:46,373 --> 00:07:50,603
-Así que Elena limpia los datos donde están, en un notebook en el espacio del estudio.
+00:07:49,242 --> 00:07:54,168
+Así que en el espacio de trabajo de los estudios, de Permisos por diseño, toda salida está apagada.
 
 65
-00:07:52,103 --> 00:07:55,279
-Como en Lascaux, nadie se lleva a casa un pedazo de la pared.
+00:07:55,268 --> 00:08:01,161
+Descargar resultados, exportar notebooks, copiar una tabla, descargar un archivo: todo está apagado.
 
 66
-00:07:57,779 --> 00:08:01,861
-Millones de personas han visto las pinturas de Lascaux, y la cueva sigue descansando.
+00:08:02,661 --> 00:08:08,759
+Los interruptores se guardan como código: volver a encender uno pide un cambio revisado, y el registro de auditoría lo muestra.
 
 67
-00:08:03,561 --> 00:08:05,783
-Este otoño se pidieron cuatro copias.
+00:08:10,259 --> 00:08:17,995
+Y lo que corre ahí solo llega al almacenamiento del catálogo y a una lista corta, como hizo Red, almacenamiento y claves en producción.
 
 68
-00:08:07,083 --> 00:08:14,513
-Jun recibió estudiantes inventados, el hospital sus totales y una respuesta de una sala limpia, y la descarga de Elena nunca se hizo.
+00:08:19,295 --> 00:08:24,202
+Ningún interruptor impide una foto de la pantalla; eso lo cubre su acuerdo de confidencialidad.
 
 69
-00:08:16,413 --> 00:08:19,201
+00:08:25,902 --> 00:08:30,132
+Así que Elena limpia los datos donde están, en un notebook en el espacio del estudio.
+
+70
+00:08:31,632 --> 00:08:34,808
+Como en Lascaux, nadie se lleva a casa un pedazo de la pared.
+
+71
+00:08:37,308 --> 00:08:41,390
+Millones de personas han visto las pinturas de Lascaux, y la cueva sigue descansando.
+
+72
+00:08:43,090 --> 00:08:45,312
+Este otoño se pidieron cuatro copias.
+
+73
+00:08:46,612 --> 00:08:54,042
+Jun recibió estudiantes inventados, el hospital sus totales y una respuesta de una sala limpia, y la descarga de Elena nunca se hizo.
+
+74
+00:08:55,942 --> 00:08:58,730
 Toda copia mantiene la protección, o no se hace.

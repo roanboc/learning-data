@@ -219,6 +219,13 @@ for t_, x_ in ((G('levels', 'public'), 290), (L4('public', 'Internal'), 740), (G
 air(L4('confidential', 'Restricted', 0.1), 0.9, 0.005, px(1630), 150, 700)
 paper(G('levels', 'floors', 0.0), 0.009, px(960), 0.45)
 tap(L4('floors', 'never public', -0.6), 0.006, px(760)); tap(G('levels', 'restricted', 0.0), 0.006, px(760))
+# The list is the university's own (the author's answer, 12 November 2026): the floors card has left, and the list is laid down in its
+# place, its five chips coming in on one breath of air; another organisation's card, a tap; one list, used the same way: its pill set
+# down, a soft knock
+paper(G('levels', 'own', -0.2), 0.009, px(590), 0.45)
+air(L4('own', 'five classes', 0.0), 0.9, 0.005, px(590), 200, 900)
+tap(L4('own', 'Another organisation', -0.1), 0.006, px(1480))
+knock(L4('same', 'one list', 0.0), 0.008, px(960), 260)
 
 # 5. What it holds. Exam support's values, and why Mei knows: for a disability. Its class turns special: the special bell, as the chip
 #    takes its ring. The whole table would be restricted: its slip changes; the help desk and Planning, shut out. Exam support moves to a

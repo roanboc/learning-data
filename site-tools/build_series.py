@@ -3,10 +3,14 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Twenty-six series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Thirty-one series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
-enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
+enterprise-architecture/), the four series that follow it in the topic Enterprise architecture, each the next of the one before:
+Business architecture for data (films/business-architecture-for-data/, at business-architecture-for-data/, which holds what the
+four share), Data architecture (films/data-architecture/, at data-architecture/), Platform and solution architecture
+(films/platform-and-solution-architecture/, at platform-and-solution-architecture/) and AI and continuous architecture
+(films/ai-and-continuous-architecture/, at ai-and-continuous-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
 the three series of data governance: Governance principles (films/data-governance/, at data-governance/), Governance on the
 map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
 governance-in-practice/); and the series of the module on AI agents in data work: What an agent is
@@ -110,8 +114,29 @@ SERIES = [
          name={"en": "The map before the data", "es": "El mapa antes de los datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
          learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear", coming=True),
+         next="business-architecture-for-data",
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="business-architecture-for-data", dir="business-architecture-for-data", slug="business-architecture-for-data",
+         name={"en": "Business architecture for data", "es": "Arquitectura de negocio para datos"},
+         place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="data-architecture",
+         marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, BIZBOK of the Business Architecture Guild, APQC and its Process Classification Framework of APQC, and DAMA-DMBOK of DAMA International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
+                "es": "TOGAF y ArchiMate son marcas de The Open Group, BIZBOK de la Business Architecture Guild, APQC y su Process Classification Framework de APQC, y DAMA-DMBOK de DAMA International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="data-architecture", dir="data-architecture", slug="data-architecture",
+         name={"en": "Data architecture", "es": "Arquitectura de datos"},
+         place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="platform-and-solution-architecture",
+         marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and TOGAF and ArchiMate of The Open Group, named only to identify those bodies of knowledge; this project is not affiliated with or endorsed by them.",
+                "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y TOGAF y ArchiMate de The Open Group, nombradas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="platform-and-solution-architecture", dir="platform-and-solution-architecture", slug="platform-and-solution-architecture",
+         name={"en": "Platform and solution architecture", "es": "Arquitectura de plataforma y de soluciones"},
+         place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="ai-and-continuous-architecture",
+         marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, named only to identify those frameworks. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
+                "es": "TOGAF y ArchiMate son marcas de The Open Group, nombradas solo para identificar esos marcos. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="ai-and-continuous-architecture", dir="ai-and-continuous-architecture", slug="ai-and-continuous-architecture",
+         name={"en": "AI and continuous architecture", "es": "IA y arquitectura continua"},
+         place={"en": "utility", "es": "empresa de energía"}, blocks=[],
+         marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, named only to identify those frameworks. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
+                "es": "TOGAF y ArchiMate son marcas de The Open Group, nombradas solo para identificar esos marcos. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
          name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"},
          place={"en": "university", "es": "universidad"}, blocks=[], next="data-governance",

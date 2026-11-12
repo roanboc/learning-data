@@ -1,8 +1,8 @@
 # Every change through review: questions and assumptions
 
-*AI agents in data work* · *From helper to colleague*, film 6 · open, PR #185 · [pull request](https://github.com/roanboc/learning-data/pull/185)
+*AI agents in data work* · *From helper to colleague*, film 6 of 7 · merged, PR #185 · [pull request](https://github.com/roanboc/learning-data/pull/185)
 
-On the site once PR #185 merges: https://data.learn-all.org/from-helper-to-colleague/every-change-through-review/
+[Watch it on the site](https://data.learn-all.org/from-helper-to-colleague/every-change-through-review/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

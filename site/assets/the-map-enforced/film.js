@@ -439,7 +439,8 @@ const NARR={
  {"id":"who","gap":0.8,"text":"Its name says who it is. What it may do is on Noor's map."},
  {"id":"steps","gap":0.8,"text":"There, its role, planning contributor, does the drafting steps of Planning's changes, and each step says what it reads, writes and calls."},
  {"id":"script","gap":0.8,"text":"Sam doesn't type those rights into each tool. A script reads the map and writes every tool's settings from it, one way."},
- {"id":"uc","gap":0.8,"text":"In Unity Catalog, a group named for the role holds the grants: read production, with names masked, and build only in its own schemas."},
+ {"id":"uc","gap":0.8,"text":"In Unity Catalog, a group named for the role holds the grants."},
+ {"id":"ucmay","gap":0.8,"text":"It may read production, with personal and sensitive data masked, and build only in its own schemas."},
  {"id":"member","gap":0.8,"text":"The planning agent is its only member, so a second agent in the role would get the same rights, and no more."},
  {"id":"ug","gap":0.8,"text":"In Unity Gateway, part of the catalog, the group may call the one model its steps use, and the tool servers they name."},
  {"id":"gh","gap":0.8,"text":"In GitHub, its App gets one repository and two permissions. In dbt, a target of its own."},
@@ -477,7 +478,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: every change through review."}]}
 };
 
-const VODUR={"whose/place": 7.336, "whose/helper": 8.037, "whose/monday": 7.273, "whose/auditors": 5.723, "whose/which": 5.468, "whose/jun": 5.03, "whose/days": 4.597, "whose/wrong": 6.951, "whose/all": 7.164, "whose/change": 2.174, "whose/badge": 8.531, "whose/three": 8.814, "whose/since": 6.589, "whose/tried": 8.514, "whose/ask": 3.858, "whose/data": 7.232, "name/one": 2.677, "name/too": 1.688, "name/dbx": 7.837, "name/gh": 5.681, "name/dbt": 6.063, "name/keys": 5.475, "name/pass": 7.603, "name/so": 2.053, "map/who": 3.41, "map/steps": 8.068, "map/script": 6.896, "map/uc": 8.314, "map/member": 5.897, "map/ug": 6.971, "map/gh": 6.482, "map/context": 7.056, "map/memory": 6.284, "map/night": 4.882, "map/tuesday": 6.405, "map/failed": 4.986, "map/oneway": 6.097, "own/where": 5.809, "own/branches": 7.861, "own/merge": 6.685, "own/dbx": 7.52, "own/schemas": 8.677, "own/owns": 7.189, "logs/now": 2.091, "logs/gh": 6.965, "logs/verified": 6.469, "logs/qh": 5.293, "logs/audit": 5.789, "logs/search": 6.717, "logs/jun": 2.4, "stop/before": 5.198, "stop/each": 4.517, "stop/dbx": 6.755, "stop/gh": 6.987, "stop/wed": 4.986, "stop/on": 7.453, "stop/never": 8.367, "stop/back": 5.004, "stop/take": 3.171, "stop/next": 1.926};
+const VODUR={"whose/place": 7.336, "whose/helper": 8.037, "whose/monday": 7.273, "whose/auditors": 5.723, "whose/which": 5.468, "whose/jun": 5.03, "whose/days": 4.597, "whose/wrong": 6.951, "whose/all": 7.164, "whose/change": 2.174, "whose/badge": 8.531, "whose/three": 8.814, "whose/since": 6.589, "whose/tried": 8.514, "whose/ask": 3.858, "whose/data": 7.232, "name/one": 2.677, "name/too": 1.688, "name/dbx": 7.837, "name/gh": 5.681, "name/dbt": 6.063, "name/keys": 5.475, "name/pass": 7.603, "name/so": 2.053, "map/who": 3.41, "map/steps": 8.068, "map/script": 6.896, "map/uc": 3.74, "map/ucmay": 5.903, "map/member": 5.897, "map/ug": 6.971, "map/gh": 6.482, "map/context": 7.056, "map/memory": 6.284, "map/night": 4.882, "map/tuesday": 6.405, "map/failed": 4.986, "map/oneway": 6.097, "own/where": 5.809, "own/branches": 7.861, "own/merge": 6.685, "own/dbx": 7.52, "own/schemas": 8.677, "own/owns": 7.189, "logs/now": 2.091, "logs/gh": 6.965, "logs/verified": 6.469, "logs/qh": 5.293, "logs/audit": 5.789, "logs/search": 6.717, "logs/jun": 2.4, "stop/before": 5.198, "stop/each": 4.517, "stop/dbx": 6.755, "stop/gh": 6.987, "stop/wed": 4.986, "stop/on": 7.453, "stop/never": 8.367, "stop/back": 5.004, "stop/take": 3.171, "stop/next": 1.926};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -485,7 +486,7 @@ const VODUR={"whose/place": 7.336, "whose/helper": 8.037, "whose/monday": 7.273,
 const BREATH={
 "whose":{"hold":{"place":1.0,"helper":1.2,"monday":1.0,"auditors":0.6,"which":1.2,"jun":1.2,"days":1.4,"wrong":1.4,"all":1.6,"change":1.0,"badge":1.2,"three":1.4,"since":1.2,"tried":1.4,"ask":1.0,"data":0.6},"breathe":4.4},
 "name":{"hold":{"one":0.6,"too":0.6,"dbx":1.0,"gh":1.0,"dbt":1.2,"keys":1.2,"pass":1.4,"so":1.6}},
-"map":{"hold":{"who":1.0,"steps":1.6,"script":1.6,"uc":1.6,"member":1.4,"ug":1.6,"gh":1.4,"context":1.2,"memory":1.6,"night":1.2,"tuesday":1.2,"failed":1.6,"oneway":1.6}},
+"map":{"hold":{"who":1.0,"steps":1.6,"script":1.6,"uc":0.9,"ucmay":1.6,"member":1.4,"ug":1.6,"gh":1.4,"context":1.2,"memory":1.6,"night":1.2,"tuesday":1.2,"failed":1.6,"oneway":1.6}},
 "own":{"hold":{"where":1.0,"branches":1.4,"merge":1.4,"dbx":1.4,"schemas":1.4,"owns":1.6}},
 "logs":{"hold":{"now":0.6,"gh":1.2,"verified":1.2,"qh":1.0,"audit":1.2,"search":1.4,"jun":1.4}},
 "stop":{"hold":{"before":0.8,"each":0.8,"dbx":1.2,"gh":1.2,"wed":1.0,"on":1.2,"never":1.2,"back":1.0,"take":1.6,"next":0.4},"breathe":6.2}
@@ -2258,7 +2259,7 @@ scene("name",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({every:wAt(sc,
 scene("map",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({name:wAt(sc,"who","Its name"),map:wAt(sc,"who","Noor's map"),
     role:wAt(sc,"steps","planning contributor"),draft:wAt(sc,"steps","the drafting steps"),reads:wAt(sc,"steps","reads"),writes:wAt(sc,"steps","writes"),calls:wAt(sc,"steps","calls"),
     type:wAt(sc,"script","doesn't type"),script:wAt(sc,"script","A script"),rmap:wAt(sc,"script","reads the map"),wr:wAt(sc,"script","writes every tool's settings"),oneway:wAt(sc,"script","one way"),
-    grp:wAt(sc,"uc","a group named for the role"),rprod:wAt(sc,"uc","read production"),masked:wAt(sc,"uc","names masked"),build:wAt(sc,"uc","build only"),
+    grp:wAt(sc,"uc","a group named for the role"),rprod:wAt(sc,"ucmay","read production"),masked:wAt(sc,"ucmay","personal and sensitive"),build:wAt(sc,"ucmay","build only"),
     only:wAt(sc,"member","its only member"),second:wAt(sc,"member","a second agent"),same:wAt(sc,"member","the same rights"),
     ug:wAt(sc,"ug","In Unity Gateway"),model:wAt(sc,"ug","the one model"),servers:wAt(sc,"ug","the tool servers"),
     repo:wAt(sc,"gh","one repository"),perm:wAt(sc,"gh","two permissions"),dbt:wAt(sc,"gh","In dbt"),target:wAt(sc,"gh","a target of its own"),
@@ -2294,15 +2295,17 @@ scene("map",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({name:wAt(sc,"w
     {later:true,at:c.script,place:"obLab",keys:[[c.script,960,540,1]],push:0.015,draw:(x,tt)=>{
       ob_person(x,"sam",tt,{});ag_roomLight(x,1);ob_personCard(x,"sam",ag_in(tt,c.script+0.3,0.5));
       // the way the rights go: Noor's map, the script, every tool; by hand, tool by tool, is crossed out before the script comes
-      ob_tile(x,520,150,280,90,"Noor's map",{col:AG.kick,a:ag_in(tt,c.script+0.4,0.5)});
-      const ha=ag_io(tt,P.type,P.script-0.2,0.4);ob_tile(x,880,150,420,90,"by hand, tool by tool",{dash:true,a:ha});ob_cross(x,1090,195,26,ha*ag_in(tt,P.type+0.7,0.5),AG.amber);
-      ob_tile(x,880,150,420,90,"a script",{col:AG.blue,a:ag_in(tt,P.script,0.5),k:ag_spr(tt,P.script)});
-      arrow(x,808,195,872,195,P.rmap,tt);arrow(x,1308,195,1372,195,P.wr,tt);
-      ob_tile(x,1380,150,480,90,"every tool",{col:AG.blue,logos:["databricks","github","dbt"],a:ag_in(tt,P.wr+0.2,0.5),k:ag_spr(tt,P.wr+0.2)});
-      ob_pillL(x,1300,290,"one way",tt,P.oneway,c.uc-0.3,{col:AG.blue});
-      // Unity Catalog: the group and its grants, then its members
-      ob_list(x,520,300,640,{kick:"Unity Catalog",logo:"databricks",label:"group",title:"planning_contributors",titleF:"mono",a:ag_in(tt,P.grp,0.5),k:ag_spr(tt,P.grp),
-        rows:[{text:"read · production, names masked",marks:[["lock",ag_in(tt,P.masked,0.4)]],a:ag_in(tt,P.rprod,0.4)},
+      ob_tile(x,520,132,280,90,"Noor's map",{col:AG.kick,a:ag_in(tt,c.script+0.4,0.5)});
+      const ha=ag_io(tt,P.type,P.script-0.2,0.4);ob_tile(x,880,132,420,90,"by hand, tool by tool",{dash:true,a:ha});ob_cross(x,1090,177,26,ha*ag_in(tt,P.type+0.7,0.5),AG.amber);
+      ob_tile(x,880,132,420,90,"a script",{col:AG.blue,a:ag_in(tt,P.script,0.5),k:ag_spr(tt,P.script)});
+      arrow(x,808,177,872,177,P.rmap,tt);arrow(x,1308,177,1372,177,P.wr,tt);
+      ob_tile(x,1380,132,480,90,"every tool",{col:AG.blue,logos:["databricks","github","dbt"],a:ag_in(tt,P.wr+0.2,0.5),k:ag_spr(tt,P.wr+0.2)});
+      ob_pillL(x,1300,272,"one way",tt,P.oneway,c.uc-0.3,{col:AG.blue});
+      // Unity Catalog: the group and its grants, then its members. What it reads in production comes with personal and sensitive data
+      // masked, a row of its own; the card holds five rows, so it and the row of boxes above stand a little higher than four would need
+      ob_list(x,520,248,640,{kick:"Unity Catalog",logo:"databricks",label:"group",title:"planning_contributors",titleF:"mono",a:ag_in(tt,P.grp,0.5),k:ag_spr(tt,P.grp),
+        rows:[{text:"read · production",a:ag_in(tt,P.rprod,0.4)},
+          {text:"personal and sensitive data masked",marks:[["lock",1]],a:ag_in(tt,P.masked,0.4)},
           {text:"build · only in its own schemas",a:ag_in(tt,P.build,0.4)},
           {text:"member · planning agent",col:AG.violet,a:ag_in(tt,P.only,0.4),hl:ag_io(tt,P.only,P.second,0.4),hlCol:AG.violet},
           {text:"a second agent in the role",dash:true,a:ag_in(tt,P.second,0.4)}]});

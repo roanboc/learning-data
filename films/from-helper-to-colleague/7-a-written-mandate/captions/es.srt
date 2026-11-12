@@ -143,189 +143,197 @@ Firmarlo fue el último paso de su puerta a la etapa cinco, tras catorce noches 
 La ley de IA de Europa pide esto a lo que considera de alto riesgo: personas que puedan entenderlo, vigilarlo, revertirlo y detenerlo.
 
 37
-00:04:09,757 --> 00:04:15,633
-Cubre un tipo de tarea. En lo que significa un término de personal, el mismo agente solo sugiere.
+00:04:09,757 --> 00:04:13,565
+Pero la regulación suele avanzar más despacio que la tecnología.
 
 38
-00:04:19,533 --> 00:04:25,459
-Una página son solo palabras. Así que cada línea se escribe en las herramientas desde el mapa, como todo permiso.
+00:04:15,265 --> 00:04:19,513
+Así que ten más cuidado del que pide la ley, sobre todo en los sistemas críticos.
 
 39
-00:04:27,359 --> 00:04:34,071
-Dónde puede escribir está en los permisos de Unity Catalog: en pruebas, solo su propio esquema; en producción, en ninguna parte.
+00:04:21,613 --> 00:04:27,978
+El mandato cubre un tipo de tarea. En lo que significa un término de personal, el mismo agente solo sugiere.
 
 40
-00:04:36,171 --> 00:04:41,164
-Sus carpetas están en las reglas de push de GitHub: su App no puede subir un cambio a ningún otro lugar.
+00:04:31,878 --> 00:04:37,804
+Una página son solo palabras. Así que cada línea se escribe en las herramientas desde el mapa, como todo permiso.
 
 41
-00:04:43,264 --> 00:04:48,600
-La hora es el tiempo límite del propio flujo de trabajo: a los sesenta minutos, GitHub cancela el trabajo.
+00:04:39,704 --> 00:04:46,416
+Dónde puede escribir está en los permisos de Unity Catalog: en pruebas, solo su propio esquema; en producción, en ninguna parte.
 
 42
-00:04:50,500 --> 00:04:54,616
-Sus rondas las cuenta el código simple que lo ejecuta, no el modelo.
+00:04:48,516 --> 00:04:53,509
+Sus carpetas están en las reglas de push de GitHub: su App no puede subir un cambio a ningún otro lugar.
 
 43
-00:04:56,516 --> 00:05:04,600
-Su presupuesto es un límite en Unity Gateway a su propio nombre: 50,000 tokens por minuto. Con la hora, acota el costo de una noche.
+00:04:55,609 --> 00:05:00,945
+La hora es el tiempo límite del propio flujo de trabajo: a los sesenta minutos, GitHub cancela el trabajo.
 
 44
-00:05:06,700 --> 00:05:09,115
-La verificación simple es el primer paso del flujo de trabajo.
+00:05:02,845 --> 00:05:06,961
+Sus rondas las cuenta el código simple que lo ejecuta, no el modelo.
 
 45
-00:05:10,815 --> 00:05:19,643
-Y el proyecto coteja la página con esos lugares: si un permiso, regla o límite permite más, la verificación falla antes de fusionar nada.
+00:05:08,861 --> 00:05:16,945
+Su presupuesto es un límite en Unity Gateway a su propio nombre: 50,000 tokens por minuto. Con la hora, acota el costo de una noche.
 
 46
-00:05:21,743 --> 00:05:28,101
-Nada de lo que el agente lee puede ampliarlo, ni tampoco el agente: la página vive donde su App no puede hacer push.
+00:05:19,045 --> 00:05:21,460
+La verificación simple es el primer paso del flujo de trabajo.
 
 47
-00:05:32,001 --> 00:05:35,352
-Anoche, el agente encontró dos cosas mal en el mismo conteo.
+00:05:23,160 --> 00:05:31,988
+Y el proyecto coteja la página con esos lugares: si un permiso, regla o límite permite más, la verificación falla antes de fusionar nada.
 
 48
-00:05:37,252 --> 00:05:45,044
-La primera era un error. La regla está escrita: cada contrato cuenta una vez, como está hoy. El código contaba cada versión.
+00:05:34,088 --> 00:05:40,446
+Nada de lo que el agente lee puede ampliarlo, ni tampoco el agente: la página vive donde su App no puede hacer push.
 
 49
-00:05:47,344 --> 00:05:50,858
-Corregir eso es un arreglo que el mandato le permite hacer, en pruebas.
+00:05:44,346 --> 00:05:47,697
+Anoche, el agente encontró dos cosas mal en el mismo conteo.
 
 50
-00:05:52,958 --> 00:05:59,247
-La segunda la encontró mientras buscaba: uno de los tres tutores pasó de una asignatura de Enfermería a una de Salud Pública.
+00:05:49,597 --> 00:05:57,389
+La primera era un error. La regla está escrita: cada contrato cuenta una vez, como está hoy. El código contaba cada versión.
 
 51
-00:06:01,347 --> 00:06:07,577
-¿Ese tutor cuenta en ambas escuelas este periodo, o solo en la que enseña ahora? Ninguna regla lo dice.
+00:05:59,689 --> 00:06:03,203
+Corregir eso es un arreglo que el mandato le permite hacer, en pruebas.
 
 52
-00:06:09,877 --> 00:06:17,775
-No es un error: es qué significa un término de personal, y lo decide Recursos Humanos. El agente preguntó en su informe, y no cambió nada.
+00:06:05,303 --> 00:06:11,592
+La segunda la encontró mientras buscaba: uno de los tres tutores pasó de una asignatura de Enfermería a una de Salud Pública.
 
 53
-00:06:20,075 --> 00:06:24,630
-Un agente no siempre distingue lo uno de lo otro, y al principio, tampoco una persona.
+00:06:13,692 --> 00:06:19,922
+¿Ese tutor cuenta en ambas escuelas este periodo, o solo en la que enseña ahora? Ninguna regla lo dice.
 
 54
-00:06:26,730 --> 00:06:34,923
-Así que en producción solo redacta: Jun revisa el código, un significado va a su dueño, y Noor aprueba, como segunda persona.
+00:06:22,222 --> 00:06:30,120
+No es un error: es qué significa un término de personal, y lo decide Recursos Humanos. El agente preguntó en su informe, y no cambió nada.
 
 55
-00:06:37,223 --> 00:06:41,307
-En pruebas, una mala conjetura cuesta solo un pull request que nadie aprueba.
+00:06:32,420 --> 00:06:36,975
+Un agente no siempre distingue lo uno de lo otro, y al principio, tampoco una persona.
 
 56
-00:06:43,407 --> 00:06:48,480
-Y una noche que solo necesita volver a ejecutarse no necesita un agente: lo hace un proceso simple.
+00:06:39,075 --> 00:06:47,268
+Así que en producción solo redacta: Jun revisa el código, un significado va a su dueño, y Noor aprueba, como segunda persona.
 
 57
-00:06:52,580 --> 00:06:54,861
-Dos líneas más, mostradas aquí, sin usarse.
+00:06:49,568 --> 00:06:53,652
+En pruebas, una mala conjetura cuesta solo un pull request que nadie aprueba.
 
 58
-00:06:56,561 --> 00:07:01,725
-El interruptor: Sam desactiva su entidad de servicio, y suspende su App en GitHub.
+00:06:55,752 --> 00:07:00,825
+Y una noche que solo necesita volver a ejecutarse no necesita un agente: lo hace un proceso simple.
 
 59
-00:07:03,625 --> 00:07:07,544
-Entonces no puede iniciar sesión, y sus permisos se quedan, para cuando se vuelva a encender.
+00:07:04,925 --> 00:07:07,206
+Dos líneas más, mostradas aquí, sin usarse.
 
 60
-00:07:09,444 --> 00:07:12,814
-No puede llegar al repositorio, y todos los demás siguen trabajando.
+00:07:08,906 --> 00:07:14,070
+El interruptor: Sam desactiva su entidad de servicio, y suspende su App en GitHub.
 
 61
-00:07:14,714 --> 00:07:19,082
-Anil puede detenerlo, y Sam también, a cualquier hora, sin pedir permiso antes.
+00:07:15,970 --> 00:07:19,889
+Entonces no puede iniciar sesión, y sus permisos se quedan, para cuando se vuelva a encender.
 
 62
-00:07:20,982 --> 00:07:26,643
-El deshacer: cada cambio que propone es un pull request, y un pull request se puede revertir.
+00:07:21,789 --> 00:07:25,159
+No puede llegar al repositorio, y todos los demás siguen trabajando.
 
 63
-00:07:28,543 --> 00:07:36,763
-Y cada tabla guarda sus versiones, con quién escribió cada una y cuándo: una persona puede restaurar la anterior, siete días por defecto.
+00:07:27,059 --> 00:07:31,427
+Anil puede detenerlo, y Sam también, a cualquier hora, sin pedir permiso antes.
 
 64
-00:07:38,863 --> 00:07:46,351
-El mandato mismo se puede revocar: Anil puede acotarlo o retirarlo en un pull request, y la tarea vuelve a esperarlo a él.
+00:07:33,327 --> 00:07:38,988
+El deshacer: cada cambio que propone es un pull request, y un pull request se puede revertir.
 
 65
-00:07:48,251 --> 00:07:51,377
-Cada diciembre se vuelve a leer, con la revisión de accesos.
+00:07:40,888 --> 00:07:49,108
+Y cada tabla guarda sus versiones, con quién escribió cada una y cuándo: una persona puede restaurar la anterior, siete días por defecto.
 
 66
-00:07:53,077 --> 00:07:55,037
-Anoche, nadie necesitó ninguno de los dos.
+00:07:51,208 --> 00:07:58,696
+El mandato mismo se puede revocar: Anil puede acotarlo o retirarlo en un pull request, y la tarea vuelve a esperarlo a él.
 
 67
-00:07:58,937 --> 00:08:06,562
-De vuelta en la universidad esta mañana, Anil leyó el informe y sus medidas: tres rondas, veinte minutos, muy dentro de sus límites.
+00:08:00,596 --> 00:08:03,722
+Cada diciembre se vuelve a leer, con la revisión de accesos.
 
 68
-00:08:08,462 --> 00:08:14,106
-Jun revisó la corrección y la fusionó. Se ejecutó otra vez en pruebas, y Noor dio el sí para producción.
+00:08:05,422 --> 00:08:07,382
+Anoche, nadie necesitó ninguno de los dos.
 
 69
-00:08:16,006 --> 00:08:18,870
-La pregunta del tutor que cambió de asignatura está con Recursos Humanos.
+00:08:11,282 --> 00:08:18,907
+De vuelta en la universidad esta mañana, Anil leyó el informe y sus medidas: tres rondas, veinte minutos, muy dentro de sus límites.
 
 70
-00:08:20,570 --> 00:08:27,575
-Enfermería cuenta 64 docentes, 38 de ellos temporales, y el agente no decidió nada que le corresponda a una persona.
+00:08:20,807 --> 00:08:26,451
+Jun revisó la corrección y la fusionó. Se ejecutó otra vez en pruebas, y Noor dio el sí para producción.
 
 71
-00:08:29,475 --> 00:08:32,449
-Esta serie empezó con cinco etapas, no un interruptor.
+00:08:28,351 --> 00:08:31,215
+La pregunta del tutor que cambió de asignatura está con Recursos Humanos.
 
 72
-00:08:34,349 --> 00:08:40,598
-Cada etapa cambia qué identidad usa el agente, cuánto puede hacer, y qué hace la persona.
+00:08:32,915 --> 00:08:39,920
+Enfermería cuenta 64 docentes, 38 de ellos temporales, y el agente no decidió nada que le corresponda a una persona.
 
 73
-00:08:42,498 --> 00:08:50,564
-Cada una está escrita en el mapa, junto a su tipo de tarea, y tiene su puerta. La última es un mandato: escrito, acotado y revocable.
+00:08:41,820 --> 00:08:44,794
+Esta serie empezó con cinco etapas, no un interruptor.
 
 74
-00:08:52,664 --> 00:08:54,690
-Siete películas, siete lecciones.
+00:08:46,694 --> 00:08:52,943
+Cada etapa cambia qué identidad usa el agente, cuánto puede hacer, y qué hace la persona.
 
 75
-00:08:56,190 --> 00:08:58,965
-La autonomía se gana un tipo de tarea a la vez.
+00:08:54,843 --> 00:09:02,909
+Cada una está escrita en el mapa, junto a su tipo de tarea, y tiene su puerta. La última es un mandato: escrito, acotado y revocable.
 
 76
-00:09:00,065 --> 00:09:02,762
-Los permisos prestados son para aprender, en un sandbox.
+00:09:05,009 --> 00:09:07,035
+Siete películas, siete lecciones.
 
 77
-00:09:03,862 --> 00:09:07,508
-Antes de trabajar solo, un agente se integra a la arquitectura como un colega.
+00:09:08,535 --> 00:09:11,310
+La autonomía se gana un tipo de tarea a la vez.
 
 78
-00:09:08,608 --> 00:09:11,871
-Los permisos de un agente vienen de su trabajo, no de los de una persona.
+00:09:12,410 --> 00:09:15,107
+Los permisos prestados son para aprender, en un sandbox.
 
 79
-00:09:12,971 --> 00:09:16,242
-El mapa dice qué puede hacer; cada herramienta lo hace cumplir.
+00:09:16,207 --> 00:09:19,853
+Antes de trabajar solo, un agente se integra a la arquitectura como un colega.
 
 80
-00:09:17,342 --> 00:09:19,971
-Un agente propone; una persona libera.
+00:09:20,953 --> 00:09:24,216
+Los permisos de un agente vienen de su trabajo, no de los de una persona.
 
 81
-00:09:21,071 --> 00:09:24,342
-La autonomía es un mandato escrito, acotado y revocable.
+00:09:25,316 --> 00:09:28,587
+El mapa dice qué puede hacer; cada herramienta lo hace cumplir.
 
 82
-00:09:26,042 --> 00:09:33,167
-Esta serie es un paso más en un camino más largo: de un agente que ayuda a una persona, a uno que trabaja junto al equipo.
+00:09:29,687 --> 00:09:32,316
+Un agente propone; una persona libera.
 
 83
-00:09:35,067 --> 00:09:37,315
+00:09:33,416 --> 00:09:36,687
+La autonomía es un mandato escrito, acotado y revocable.
+
+84
+00:09:38,387 --> 00:09:45,512
+Esta serie es un paso más en un camino más largo: de un agente que ayuda a una persona, a uno que trabaja junto al equipo.
+
+85
+00:09:47,412 --> 00:09:49,660
 Después: un colega que no es una persona.

@@ -1,6 +1,6 @@
 # Good enough for what?: questions and assumptions
 
-*Data quality* · *Fit for use*, film 1 · merged, PR #203 · [pull request](https://github.com/roanboc/learning-data/pull/203)
+*Data quality* · *Fit for use*, film 1 · merged, PR #203 · [pull request](https://github.com/roanboc/learning-data/pull/203); Rodrigo confirmed DAMA's six dimensions on 12 November 2026 (no change to the film)
 
 [Watch it on the site](https://data.learn-all.org/fit-for-use/good-enough-for-what/)
 
@@ -41,7 +41,7 @@ Film 1 of *Fit for use*, `films/fit-for-use/1-good-enough-for-what`, and the gra
 | 22 | Whose row is the list's sample? | Hamid Karimi (S-19530, DEC25-3, Master of Data Analytics), from the example project | Chapter 2 |
 | 23 | "It passed every check on it" and "about four weeks before the first ceremony"? | Yes, from `numbers.md`: sent at 5 pm on Thursday 13 November 2025, the first ceremony four weeks later; every check on the list passed that day | Chapter 2 |
 | 24 | Give Juran's year? | No: he is named in a line ("quality is fitness for use"), without a year, since the phrase is older than any one book of his | Chapter 3 |
-| 25 | How many dimensions? | DAMA's six, asked as six questions; ISO/IEC 25012's fifteen named in one line ("six are enough to start") | Chapter 4 |
+| 25 | How many dimensions? | DAMA's six, asked as six questions; ISO/IEC 25012's fifteen named in one line ("six are enough to start"). **Answered by Rodrigo on 12 November 2026: yes, fine (the last section).** | Chapter 4 |
 | 26 | Which partner instrument? | A second set of glass bowls, larger and lower, struck once and left to ring under each use's card as its level is agreed. Written into the module's `palettes.md` | `source/tools/score.py` |
 | 27 | Where does the chart sit? | On an oak worktable, the film's one place of its own, drawn in ink, its name in a cartouche in the sea. The kicker shows on the wall and the granite, not in the Great Hall or on the oak, where the picture fills the frame | `source/src/chart.js` |
 | 28 | Which poster? | The chart with its two verdicts, Steering and Comparing sizes, at 80.8 s | `site/assets/good-enough-for-what-poster.jpg` |
@@ -50,3 +50,11 @@ Film 1 of *Fit for use*, `films/fit-for-use/1-good-enough-for-what`, and the gra
 | 31 | Link ISO/IEC 25012 on the page? | No: its sites refused an automated check on 10 November, so it couldn't be checked on the day. It stays in the script's sources. The page links ODCS, dbt, DAMA and Databricks (Microsoft Learn), all checked that day | `site.json`, `elsewhere` |
 | 32 | How is the soundtrack stored? | Outside Git in the end: the film commits its `audio.json` pointer (release `audio-good-enough-for-what-dbee9e70866ebde95989`), and, as the coordinator set for every thread on 10 November, the MP3 is tracked beside it (`git add -f`, its own last commit), so CI and the site's deploy use that copy until the release exists. Not run here: the audio workflow. For Rodrigo: publish that prerelease (the workflow on main, or by hand from the tar and README in this folder's `audio-release/`), then `media.py untrack` takes the MP3 out of Git. It stays in main's history (6 MB) | `audio.json`; `audio-release/README.md` |
 | 33 | How is it a draft? | By the series' `"draft": true` and the pull request's Draft label; `site.json` sets no draft of its own, so a `"draft": false` there takes the label off once he has reviewed it | `films/fit-for-use/series.json` |
+
+## Rodrigo's answer of 12 November 2026: DAMA's six dimensions
+
+Row 25 was the one put to Rodrigo for this film: *Assumed: DAMA's six dimensions, with ISO/IEC 25012's fifteen named in one line. Is DAMA's six the right starting set?* His answer, on 12 November 2026:
+
+> Yes, fine.
+
+The question is closed, and the film isn't changed: row 25 stands as made, and so does the module's row R4. Recorded in the thread "Apply review answers to Data quality" (PR #331).

@@ -36,11 +36,16 @@ const NARR={
  {"id":"clone","gap":0.8,"text":"Azure Databricks refuses to clone a table its policies cover, for anyone they cover."},
  {"id":"exempt","gap":0.8,"text":"Cloned by someone they leave out, it would hold every real name, and no column's class, so no policy would match it."},
  {"id":"masked","gap":0.8,"text":"A masked copy is possible, but it's still about real people, and a column nobody has classed yet goes through as it is."},
- {"id":"madeup","gap":0.8,"text":"So development and test get made-up learners, and none of them is anyone."},
+ {"id":"madeup","gap":0.8,"text":"So, wherever they can, development and test get made-up learners, and none of them is anyone."},
  {"id":"script","gap":0.8,"text":"For size, a script writes 2,614 of them, with production's columns and their classes.","say":"For size, a script writes two thousand, six hundred and fourteen of them, with production's columns and their classes."},
+ {"id":"easy","gap":0.8,"text":"That's synthetic data, and it's easy to write now."},
+ {"id":"written","gap":0.8,"text":"This kind is written without reading a record: only the columns and their classes go in, so it can give no one away."},
+ {"id":"learned","gap":0.8,"text":"The other kind is learned from the real records, and the closer it fits them, the more likely it is to give a real person away."},
+ {"id":"treated","gap":0.8,"text":"So the university treats that kind as a copy of the real records."},
+ {"id":"harder","gap":0.8,"text":"How closely made-up data should follow the real records, gaps and odd cases included, is the harder question, and still an open one."},
  {"id":"unit","gap":0.8,"text":"dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.","say":"dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than ten."},
  {"id":"never","gap":0.8,"text":"dbt's clone and sample bring production's rows in, so they're never used on tables about people."},
- {"id":"lascaux","gap":0.8,"text":"Like Lascaux II, they're true to the learners, and not one is real.","say":"Like Lascaux Two, they're true to the learners, and not one is real."},
+ {"id":"lascaux","gap":0.8,"text":"Like Lascaux II, they stand in for the learners, and not one is real.","say":"Like Lascaux Two, they stand in for the learners, and not one is real."},
  {"id":"runs","gap":0.8,"text":"Jun's change runs on 2,614 of them, and no record leaves production.","say":"Jun's change runs on two thousand, six hundred and fourteen of them, and no record leaves production."}
 ]},
 "share":{"name":"Protected before it leaves","lead":0.8,"tail":1.0,"vo":[

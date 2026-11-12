@@ -1,0 +1,75 @@
+{
+  "title": "Platform and solution architecture",
+  "title_es": "Arquitectura de plataforma y de soluciones",
+  "planned": 8,
+  "lead": "The fourth series on enterprise architecture. Ravi Menon, who leads the utility's data platform, shows why it's a platform and not an application: what's inside it, why one is simpler than many, where it meets the applications, how security runs through it, and how a solution is designed on it.",
+  "lead_es": "La cuarta serie sobre arquitectura empresarial. Ravi Menon, que lidera la plataforma de datos de la empresa, muestra por qué es una plataforma y no una aplicación: qué tiene dentro, por qué una es más simple que muchas, dónde se encuentra con las aplicaciones, cómo la recorre la seguridad, y cómo se diseña una solución sobre ella.",
+  "description": "Short films on platform and solution architecture for data: an application and a platform, and a platform product and your data platform; the platform's capabilities; one platform or many; where it meets the applications and the integration platform; security through every layer; one solution designed end to end; the platform as a product teams choose; and a platform built to change.",
+  "description_es": "Películas cortas sobre arquitectura de plataforma y de soluciones para datos: una aplicación y una plataforma, y un producto de plataforma y tu plataforma de datos; las capacidades de la plataforma; una plataforma o muchas; dónde se encuentra con las aplicaciones y la plataforma de integración; la seguridad en cada capa; una solución diseñada de punta a punta; la plataforma como un producto que los equipos eligen; y una plataforma hecha para cambiar.",
+  "card": "Why a data platform is a platform, not an application: its parts, its seams, its security, and one solution on it.",
+  "card_es": "Por qué una plataforma de datos es una plataforma y no una aplicación: sus partes, sus uniones, su seguridad y una solución sobre ella.",
+  "order": "Watch them in order, after The map before the data and Data architecture: each film builds on the one before.",
+  "order_es": "Míralas en orden, después de El mapa antes de los datos y Arquitectura de datos: cada película se apoya en la anterior.",
+  "thread_h": "One thread: the road every domain shares",
+  "thread_h_es": "Un hilo: el camino que comparten todos los dominios",
+  "thread": "Billing, outages and metering each have their applications; the data platform is the road they share. Film by film, Ravi Menon draws its parts, keeps it to one, joins it to the integration platform, secures it end to end, designs one solution on it, makes it the road teams choose, and makes sure it can change.",
+  "thread_es": "Facturación, cortes y medición tienen cada uno sus aplicaciones; la plataforma de datos es el camino que comparten. Película a película, Ravi Menon dibuja sus partes, la mantiene en una sola, la une a la plataforma de integración, la protege de punta a punta, diseña una solución sobre ella, la convierte en el camino que los equipos eligen y se asegura de que pueda cambiar.",
+  "past_h": "One story, film by film: Japan's Gokaidō",
+  "past_h_es": "Una historia, película a película: el Gokaidō de Japón",
+  "people_h": "Who's on the platform",
+  "people_h_es": "Quién está en la plataforma",
+  "people": [
+    [
+      "tech",
+      "Leads the platform",
+      "Ravi Menon, the platform lead, the series' guide"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Tomás Herrera, the enterprise architect"
+    ],
+    [
+      "tech",
+      "Designs the data",
+      "Inés Duarte, the data architect"
+    ],
+    [
+      "biz",
+      "Runs the network",
+      "Grace Achieng, who owns network operations"
+    ],
+    [
+      "biz",
+      "Knows the rules",
+      "Ama Owusu, the regulatory lead"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Lidera la plataforma",
+      "Ravi Menon, el líder de la plataforma, el guía de la serie"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Tomás Herrera, el arquitecto empresarial"
+    ],
+    [
+      "tech",
+      "Diseña los datos",
+      "Inés Duarte, la arquitecta de datos"
+    ],
+    [
+      "biz",
+      "Hace funcionar la red",
+      "Grace Achieng, dueña de las operaciones de la red"
+    ],
+    [
+      "biz",
+      "Conoce las reglas",
+      "Ama Owusu, la responsable regulatoria"
+    ]
+  ]
+}

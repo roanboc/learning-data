@@ -1,0 +1,231 @@
+1
+00:00:01,400 --> 00:00:08,694
+Iran, at the edge of the desert. For more than two thousand years, villages here have lived on water that nobody sees.
+
+2
+00:00:10,294 --> 00:00:17,856
+It comes through a qanat: a tunnel dug from the foot of the mountains, which brings groundwater to the surface by gravity alone.
+
+3
+00:00:19,556 --> 00:00:23,864
+A line of shafts marks its path. They let the diggers in, and the earth out.
+
+4
+00:00:25,364 --> 00:00:32,362
+There's never enough water for every field at once. Each family's crop lives or dies by when the water reaches it.
+
+5
+00:00:34,062 --> 00:00:37,884
+And the tunnel is fragile. One cave-in can cut off a whole village.
+
+6
+00:00:39,584 --> 00:00:43,341
+People needed to know whose water it was, and who would keep it flowing.
+
+7
+00:00:44,641 --> 00:00:55,302
+So each part has its own people. The water belongs to its shareholders, in shares of time. In one town, a share was ninety-six minutes of the flow, every twelve days.
+
+8
+00:00:57,002 --> 00:00:59,609
+A water master, the mirab, keeps the turns.
+
+9
+00:01:00,909 --> 00:01:07,283
+And the diggers, the muqannis, build and repair the tunnel. They're paid for the work. The water isn't theirs.
+
+10
+00:01:08,783 --> 00:01:15,242
+With each part in its own hands, the water has been shared this way for centuries, and the fields stay green.
+
+11
+00:01:16,742 --> 00:01:26,929
+In Gonabad, the Qasabeh qanat still flows, thirty-three kilometres long. In 2016, UNESCO listed eleven qanats as the Persian Qanat.
+
+12
+00:01:28,429 --> 00:01:35,520
+At the utility, the data team is the digger. It keeps the channel. The water, and what it means, belongs to the business.
+
+13
+00:01:43,420 --> 00:01:51,388
+Tomás, the utility's enterprise architect, has drawn its map, layer by layer: why it exists, how it works, and what runs it.
+
+14
+00:01:53,188 --> 00:01:57,398
+This series looks at one part of it: what the business owns about its data.
+
+15
+00:01:58,998 --> 00:02:07,701
+It sits in three layers: the capabilities, in strategy; the work, in business; and the concepts the business uses, in the information layer.
+
+16
+00:02:09,901 --> 00:02:14,802
+The series after it take the map down to the data and the platform, and they start from here.
+
+17
+00:02:17,902 --> 00:02:23,146
+A ticket reaches the data team: all customers, by district, for the annual report.
+
+18
+00:02:24,646 --> 00:02:25,951
+There are three answers.
+
+19
+00:02:27,051 --> 00:02:29,763
+Billing has three hundred and ten thousand accounts.
+
+20
+00:02:31,063 --> 00:02:34,781
+The network has five hundred and forty thousand connection points.
+
+21
+00:02:36,081 --> 00:02:40,829
+And the data team's own customer table has three hundred and fifty-two thousand.
+
+22
+00:02:42,529 --> 00:02:47,234
+Last year, the annual report gave one number, and the regulator's return another.
+
+23
+00:02:48,534 --> 00:02:52,195
+In parliament, the minister was asked which was true, and couldn't say.
+
+24
+00:02:53,895 --> 00:02:57,283
+Each count is right about something. But which one is a customer?
+
+25
+00:02:59,983 --> 00:03:05,193
+The data team's first idea is to pick one, or to fix its own table until it's right.
+
+26
+00:03:06,693 --> 00:03:09,794
+Tomás asks who decided what that table counts.
+
+27
+00:03:11,294 --> 00:03:19,302
+An analyst built it three years ago, for a report due that week: one customer per address, with accounts and connection points merged.
+
+28
+00:03:21,202 --> 00:03:26,352
+Nobody in the business had said which customer the report meant, so someone had to choose.
+
+29
+00:03:28,052 --> 00:03:31,984
+But an account belongs to the head of retail: someone who pays a bill.
+
+30
+00:03:33,484 --> 00:03:39,035
+A connection point belongs to Grace, who runs the network: a place where power is delivered.
+
+31
+00:03:40,735 --> 00:03:45,941
+The merged table's meaning had no owner. Nobody in the business had ever confirmed it.
+
+32
+00:03:47,841 --> 00:03:50,940
+In the village, the diggers don't decide whose turn it is.
+
+33
+00:03:53,640 --> 00:03:55,828
+So Tomás writes down who owns what.
+
+34
+00:03:57,128 --> 00:04:04,287
+The business owns what its data means, who creates it, the rules on it, the quality it needs, and the decisions it serves.
+
+35
+00:04:06,187 --> 00:04:09,265
+The data team owns how it's stored, moved and checked.
+
+36
+00:04:10,965 --> 00:04:16,873
+Like the shareholders and the diggers: one owns the water and its rules, the other keeps the channel.
+
+37
+00:04:18,573 --> 00:04:23,692
+Both matter. A channel nobody keeps silts up, and water nobody owns is fought over.
+
+38
+00:04:28,792 --> 00:04:38,192
+Business architecture has many parts. The BIZBOK Guide puts four at its core: capabilities, value streams, information and the organisation.
+
+39
+00:04:39,892 --> 00:04:44,136
+Around them sit stakeholders, products, policies, initiatives and more.
+
+40
+00:04:45,636 --> 00:04:51,551
+It covers much more than data: products, partners, finance, how the organisation is designed.
+
+41
+00:04:53,051 --> 00:04:56,366
+These films take only what matters for data, and say so.
+
+42
+00:04:57,666 --> 00:05:05,680
+What the business needs to know. Who creates it, and who owns it. The processes it's born in. The rules and expectations on it.
+
+43
+00:05:07,380 --> 00:05:09,183
+One film each, in that order.
+
+44
+00:05:11,883 --> 00:05:16,224
+The ticket goes back with one question: which customers does the report mean?
+
+45
+00:05:17,724 --> 00:05:23,486
+Ama, who owns the utility's obligations, asked for it. She decides, with the two owners.
+
+46
+00:05:24,786 --> 00:05:32,573
+The report counts both, each by its own name: accounts, as retail defines them, and connection points, as the network does.
+
+47
+00:05:34,273 --> 00:05:38,321
+The data team builds both counts from those definitions, and tests them.
+
+48
+00:05:39,821 --> 00:05:43,830
+The merged table is retired. Its rule was never the business's.
+
+49
+00:05:45,330 --> 00:05:47,990
+Ama checks the counts before the ticket closes.
+
+50
+00:05:49,290 --> 00:05:54,878
+This year, the annual report and the regulator's return agree, and each number says what it counts.
+
+51
+00:05:57,578 --> 00:06:03,154
+One more thing goes on the map: the data practice itself, drawn like any part of the business.
+
+52
+00:06:04,654 --> 00:06:11,016
+The data team is a business actor. What it offers are business services, like answering data requests.
+
+53
+00:06:12,716 --> 00:06:16,056
+People reach that service through tickets: its interface.
+
+54
+00:06:17,556 --> 00:06:22,643
+Account and connection point are business objects. What they mean stays with their owners.
+
+55
+00:06:24,343 --> 00:06:30,198
+Film by film, the practice fills in: its glossary, its owners, its processes and its products.
+
+56
+00:06:32,898 --> 00:06:38,106
+In the village, the diggers keep the channel, and the shareholders decide whose water it is.
+
+57
+00:06:39,806 --> 00:06:45,899
+At the utility, the data team keeps the channel. What flows in it, and what it means, is the business's.
+
+58
+00:06:47,599 --> 00:06:50,923
+Tomás's next note asks what the business needs to know.

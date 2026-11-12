@@ -11,6 +11,12 @@ const dn_io=(t,t0,t1,d0,d1)=>ag_in(t,t0,d0||0.5)*(1-ag_in(t,t1,d1||0.4));
 const dn_k=(t,t0)=>(t-t0)/0.5;
 // a person, faded as one picture
 function dn_person(ctx,who,x,y,s,a,o){if(a<=0.004)return;withA(ctx,a,()=>md_person(ctx,who,x,y,s,o));}
+// a gold edge and its light coming onto a card already drawn (b its box), as md_card draws them: a (0 to 1)
+function dn_goldEdge(ctx,b,a){if(a<=0.004)return;const r=18,path=()=>{ctx.moveTo(b.x+r,b.y);ctx.arcTo(b.x+b.w,b.y,b.x+b.w,b.y+b.h,r);ctx.arcTo(b.x+b.w,b.y+b.h,b.x,b.y+b.h,r);
+    ctx.arcTo(b.x,b.y+b.h,b.x,b.y,r);ctx.arcTo(b.x,b.y,b.x+b.w,b.y,r);ctx.closePath();};
+  ctx.save();ctx.globalAlpha*=a;ctx.save();ctx.beginPath();ctx.rect(b.x-200,b.y-200,b.w+400,b.h+400);path();ctx.clip("evenodd");
+  ctx.shadowColor=rgba(MD.agreed,0.5);ctx.shadowBlur=26;ctx.beginPath();path();ctx.fillStyle="rgba(11,19,38,1)";ctx.fill();ctx.restore();
+  ctx.strokeStyle=rgba(MD.agreed,0.9);ctx.lineWidth=2.2;ctx.beginPath();path();ctx.stroke();ctx.restore();}
 
 /* ---------------------------------------------------------------- 1 · A kilogram anyone can make */
 scene("kilo",(ctx,S,t,sc)=>{
@@ -112,23 +118,29 @@ scene("once",(ctx,S,t,sc)=>{
     name:[wAt(sc,"clara","Casual hours contracted"),wAt(sc,"ingrid","Casual pay paid"),wAt(sc,"rohan","casual teaching cost")],
     who:[wAt(sc,"clara","Clara"),wAt(sc,"ingrid","Ingrid"),wAt(sc,"rohan","Rohan")],
     when:[wAt(sc,"clara","to plan"),wAt(sc,"ingrid","counted"),wAt(sc,"rohan","counted")],
-    owner:wAt(sc,"owner","Each owner"),gloss:wAt(sc,"owner","glossary"),differ:wAt(sc,"differ","differ")};
+    owner:wAt(sc,"owner","Each owner"),gloss:wAt(sc,"owner","glossary"),min:wAt(sc,"least","minimum"),cat:wAt(sc,"least","catalogued"),
+    part:[wAt(sc,"least","its name"),wAt(sc,"least","its owner"),wAt(sc,"least","its meaning")],differ:wAt(sc,"differ","differ")};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"night",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
       // like the kilogram: the constant's card
       const pa=dn_io(tt,T.like-0.2,T.sept-0.2,0.5,0.5);if(pa>0)dn_planckCard(c,960,340,{sub:1,a:pa,k:dn_k(tt,T.like-0.2)});
       // not one measure, but three: three empty cards, each with its question, each filled by its domain's measure
-      const lit=ag_in(tt,T.gloss,0.4)*(1-ag_in(tt,T.gloss+1.2,0.6));
+      const lit=Math.max(ag_in(tt,T.gloss,0.4)*(1-ag_in(tt,T.gloss+1.2,0.6)),ag_in(tt,T.cat,0.4)*(1-ag_in(tt,T.cat+1.2,0.6)));
+      // the minimum, whatever the tools: every measure catalogued, and each part of its entry lit as it's named (its name, owner, meaning)
+      const part=j=>ag_in(tt,T.part[j]-0.05,0.3)*(1-ag_in(tt,T.part[j]+0.8,0.5));
       DN_MEASURES.forEach((M,i)=>{const y=DN_SLOT[i],ea=ag_in(tt,T.three+0.25*i,0.4)*(1-ag_in(tt,T.name[i]-0.1,0.4));
         if(ea>0){c.save();c.globalAlpha*=ea;md_card(c,530,y,860,218,{edge:MD.agreed,dash:[12,10]});c.restore();
           md_T(c,["what the contracts allow","what is paid","what the teaching costs"][i],960,y+122,{w:600,size:30,align:"center",col:MD.soft,a:ea*ag_in(tt,T.q[i],0.4)});}
-        const ca=ag_in(tt,T.name[i]-0.1,0.5);if(ca>0)dn_card(c,530,y,860,[{s:M.name,size:34,w:700},{s:"owner · "+M.who,k:clamp((tt-T.who[i]+0.1)/0.6,0,1)},{s:M.when,col:MD.soft,k:clamp((tt-T.when[i])/0.6,0,1)}],
+        const ca=ag_in(tt,T.name[i]-0.1,0.5);if(ca>0)dn_card(c,530,y,860,[{s:M.name,size:34,w:700,col:mix(MD.ink,MD.agreed,part(0))},
+            {s:"owner · "+M.who,col:mix(MD.ink,MD.agreed,part(1)),k:clamp((tt-T.who[i]+0.1)/0.6,0,1)},{s:M.when,col:mix(MD.soft,MD.agreed,part(2)),k:clamp((tt-T.when[i])/0.6,0,1)}],
           {edge:MD.agreed,kick:"glossary · "+M.dom,kickCol:M.col,glow:0.5+0.9*lit,a:ca,k:dn_k(tt,T.name[i]-0.1),minH:218});});
       // each owner, in turn, at the left; Jun, who builds the data project, at the right
       DN_MEASURES.forEach((M,i)=>{const t1=i<2?T.who[i+1]-0.9:1e9,pa=dn_io(tt,T.who[i]-0.3,t1,0.6,0.4);
         dn_person(c,M.owner,300,700,0.95,pa,{t:tt+0.6*i,gaze:[4,-2]});md_nameTag(c,120,330,M.owner,{role:M.dom+" · owner",col:M.col,a:dn_io(tt,T.who[i],t1,0.5,0.4)});});
       dn_person(c,"jun",1640,700,0.95,ag_in(tt,T.jun-0.3,0.6),{t:tt+0.7,flip:true,gaze:[4,-2]});
       md_nameTag(c,1640,330,"jun",{role:"Data project",col:MD.flow,align:"center",a:ag_in(tt,T.jun,0.5)});
+      // the minimum leaves before the chapter's close comes in, in its place
+      md_pill(c,960,822,"the minimum: clearly catalogued",{col:MD.agreed,size:30,a:dn_io(tt,T.min,T.differ-0.8,0.5,0.4),k:dn_k(tt,T.min)});
       // one activity, three measures: why the numbers differ
       md_pill(c,960,822,"three measures · three owners · one glossary",{col:MD.agreed,size:30,a:ag_in(tt,T.differ,0.5),k:dn_k(tt,T.differ)});}}
   ],0.5);
@@ -178,7 +190,8 @@ const DN_SEM=[["semantic_models:",0],["- name: near_award",2],["measures:",4],["
 scene("dbt",(ctx,S,t,sc)=>{
   const T={none:wAt(sc,"old","None"),dec:wAt(sc,"old","decades"),bi:wAt(sc,"old","BI tools"),layer:wAt(sc,"old","layer"),own:wAt(sc,"own","own format"),noother:wAt(sc,"own","no other tool"),
     newt:wAt(sc,"own","a new tool"),writing:wAt(sc,"own","writing"),dbt:wAt(sc,"mf","dbt"),mf:wAt(sc,"mf","MetricFlow"),yaml:wAt(sc,"mf","YAML"),plan:wAt(sc,"planning","Planning"),
-    learners:wAt(sc,"planning","learners"),open:wAt(sc,"source","open source"),either:wAt(sc,"choose","Either"),choose:wAt(sc,"choose","Choose"),near:wAt(sc,"choose","near most"),never:wAt(sc,"choose","never")};
+    learners:wAt(sc,"planning","learners"),open:wAt(sc,"source","open source"),one:wAt(sc,"one","One tool"),simple:wAt(sc,"one","simplest"),dep:wAt(sc,"one","depends"),org:wAt(sc,"one","organisation"),
+    both:wAt(sc,"one","both"),each:wAt(sc,"choose","each measure"),home:wAt(sc,"choose","one home"),never:wAt(sc,"choose","never")};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"night",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
       // BI tools of the past: each its own layer of definitions, in its own marks, that no other tool can read
@@ -187,16 +200,26 @@ scene("dbt",(ctx,S,t,sc)=>{
         const xa=ag_in(tt,T.noother,0.5);if(xa>0)for(let i=0;i<2;i++){const x0=620+i*560,x1=x0+60;md_lane(c,[[x0,300],[x1,300]],MD.soft,0.8*xa,{dash:[6,6]});md_icon(c,"cross",x0+30,300,30,MD.fail,{a:xa});}
         const na=ag_in(tt,T.newt,0.5);if(na>0)dn_bi(c,680,520,500,300,3,{a:na,k:dn_k(tt,T.newt),n:clamp((tt-T.writing)/2.2,0,1)});c.restore();}
       // dbt's semantic layer, MetricFlow, in the project: Planning's learners near a graduate certificate
-      const da=dn_io(tt,T.dbt-0.1,T.either-0.4,0.5,0.4);if(da>0){md_window(c,90,130,1110,500,{logo:"dbt",product:"dbt",title:"models/marts/planning/_planning__semantic.yml",a:da,k:dn_k(tt,T.dbt-0.1),draw:(cc,b)=>
+      const da=dn_io(tt,T.dbt-0.1,T.one-0.4,0.5,0.4);if(da>0){md_window(c,90,130,1110,500,{logo:"dbt",product:"dbt",title:"models/marts/planning/_planning__semantic.yml",a:da,k:dn_k(tt,T.dbt-0.1),draw:(cc,b)=>
           dn_code(cc,b.x+20,b.y+52,DN_SEM.map(([s,ind],i)=>({s,ind,k:clamp((tt-T.yaml+0.2-i*0.18)/0.4,0,1),lit:i===5?ag_in(tt,T.learners,0.4):0})),{lh:44,size:30})});
-        dn_card(c,1250,150,600,[{s:"PLANNING",size:28,w:800,col:MD.dom.students},{s:"learners near a",size:32,w:700},{s:"graduate certificate",size:32,w:700}],{a:da*ag_in(tt,T.plan,0.5),k:dn_k(tt,T.plan)});
         md_tag(c,1250,480,"open source · Apache License 2.0",{col:MD.pass,a:da*ag_in(tt,T.open,0.5)});}
-      // either can be a measure's home: choose one for each, and never define it twice
-      const ha=ag_in(tt,T.either,0.5);if(ha>0){dn_home(c,170,360,0,{a:ha,lit:ag_in(tt,T.choose+0.8,0.5)});dn_home(c,1190,360,1,{a:ha*ag_in(tt,T.either+0.3,0.4)});
-        const u=ag_sine(clamp((tt-T.choose)/1.2,0,1)),gx=lerp(610,170,u),gy=lerp(150,560,u);
-        md_textCard(c,gx,gy,560,{title:"casual teaching cost",sub:"Finance's measure"},{edge:MD.agreed,a:ag_in(tt,T.either+0.2,0.5),k:dn_k(tt,T.either+0.2)});
-        const sa=dn_io(tt,T.never,T.never+2.2,0.4,0.6);if(sa>0){c.save();c.globalAlpha*=sa;const b=md_textCard(c,1190,560,560,{title:"casual teaching cost",sub:"a second definition"},{edge:MD.agreed,dash:[10,8]});
-          c.strokeStyle=rgba(MD.fail,0.95);c.lineWidth=4;c.beginPath();c.moveTo(b.x+20,b.y+b.h/2);c.lineTo(b.x+20+(b.w-40)*ag_sine(clamp((tt-T.never-0.3)/0.5,0,1)),b.y+b.h/2);c.stroke();c.restore();}}}}
+      // Planning's measure stays where it is as the window leaves
+      const pb=dn_card(c,1250,150,600,[{s:"PLANNING",size:28,w:800,col:MD.dom.students},{s:"learners near a",size:32,w:700},{s:"graduate certificate",size:32,w:700}],{a:ag_in(tt,T.plan,0.5),k:dn_k(tt,T.plan)});
+      // one tool for every measure is simplest: a metric view, with Finance's measure over it. But that depends on the organisation,
+      // and this university uses both: MetricFlow comes in under Planning's measure, and both homes light
+      const hl=Math.max(dn_io(tt,T.both,T.both+1.2,0.4,0.6),ag_in(tt,T.home+0.5,0.5));
+      dn_home(c,90,400,0,{a:ag_in(tt,T.one,0.5),lit:hl});
+      const fb=dn_card(c,70,195,600,[{s:"FINANCE",size:28,w:800,col:MD.dom.finance},{s:"casual teaching cost",size:32,w:700}],{edge:MD.agreed,a:ag_in(tt,T.one+0.5,0.5),k:dn_k(tt,T.one+0.5)});
+      dn_home(c,1270,400,1,{a:ag_in(tt,T.dep,0.5),lit:hl});
+      // the advice, between the two tools it's about, each half as it's said
+      md_tag(c,960,442,"one tool is simplest",{align:"center",col:MD.flow,a:ag_in(tt,T.simple,0.5)});
+      md_tag(c,960,508,"it depends on the organisation",{align:"center",col:MD.flow,a:ag_in(tt,T.org,0.5)});
+      // so each measure gets one home: Planning's card turns gold like Finance's, and a gold lane joins each to its home
+      dn_goldEdge(c,pb,ag_in(tt,T.each,0.5));
+      const lu=ag_sine(clamp((tt-T.home)/0.7,0,1));if(lu>0)[fb,pb].forEach(b=>md_lane(c,[[b.x+b.w/2,b.y+b.h+4],[b.x+b.w/2,396]],MD.agreed,0.85,{u:lu}));
+      // and is never defined twice: a second definition under the other home, struck through
+      const sa=dn_io(tt,T.never,T.never+2.2,0.4,0.6);if(sa>0){c.save();c.globalAlpha*=sa;const b=md_textCard(c,1270,610,560,{title:"casual teaching cost",sub:"a second definition"},{edge:MD.agreed,dash:[10,8]});
+        c.strokeStyle=rgba(MD.fail,0.95);c.lineWidth=4;c.beginPath();c.moveTo(b.x+20,b.y+b.h/2);c.lineTo(b.x+20+(b.w-40)*ag_sine(clamp((tt-T.never-0.3)/0.5,0,1)),b.y+b.h/2);c.stroke();c.restore();}}}
   ],0.5);
 });
 
@@ -208,13 +231,16 @@ scene("open",(ctx,S,t,sc)=>{
     dbx:wAt(sc,"began","Databricks"),conv:wAt(sc,"conv","Converters"),mv:wAt(sc,"conv","a metric view"),mf:wAt(sc,"conv","MetricFlow"),others:wAt(sc,"conv","many others"),
     writes:wAt(sc,"writes","dbt writes"),time:wAt(sc,"writes","each time"),reads:wAt(sc,"writes","reads Ossie"),ctc:wAt(sc,"travel","casual teaching cost"),any:wAt(sc,"travel","any tool"),
     words:wAt(sc,"travel","with its words"),nobody:wAt(sc,"travel","nobody"),keep:wAt(sc,"inside","Keep"),inm:wAt(sc,"inside","inside the measure"),travels:wAt(sc,"inside","travels"),
-    check:wAt(sc,"check","check"),conv2:wAt(sc,"check","a converter")};
+    check:wAt(sc,"check","check"),conv2:wAt(sc,"check","a converter"),ideal:wAt(sc,"first","Ideally"),written:wAt(sc,"first","written"),
+    proj:wAt(sc,"first","in the data project"),built:wAt(sc,"first","the metric view")};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"map",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
       const lit=[];if(tt>T.mv)lit.push(0);if(tt>T.mf)lit.push(1);if(tt>T.others)lit.push(2);
       const ringA=1-ag_in(tt,T.writes-0.4,0.5);
       const sub=ag_in(tt,T.ctc+2.3,0.4);
-      dn_hub(c,tt,{tools:ag_in(tt,T.forT,0.6),subs:[null,null,sub>0?"casual teaching cost":null],subA:sub,hub:clamp((tt-T.common)/0.6,0,1),was:ag_in(tt,T.began,0.5)*ringA,ring:clamp((tt-T.fifty)/1.4,0,1)*ringA,named:ag_in(tt,T.dbx,0.5)*ringA,spokes:clamp((tt-T.conv)/1.6,0,1),lit:lit.filter(i=>tt<T.writes||i!==2||tt>T.any)});
+      // ideally: the definition is written in Ossie first, and the metric view is built from it, which it then shows under its name
+      const made=ag_in(tt,T.built+0.9,0.4),arr=dn_io(tt,T.built+0.9,T.built+2.0,0.3,0.8);if(arr>0)glow(c,305,470,300,MD.agreed,0.22*arr);
+      dn_hub(c,tt,{tools:ag_in(tt,T.forT,0.6),subs:[made>0?"built from Ossie":null,null,sub>0?"casual teaching cost":null],subA:[made,0,sub],hub:clamp((tt-T.common)/0.6,0,1),was:ag_in(tt,T.began,0.5)*ringA,ring:clamp((tt-T.fifty)/1.4,0,1)*ringA,named:ag_in(tt,T.dbx,0.5)*ringA,spokes:clamp((tt-T.conv)/1.6,0,1),lit:lit.filter(i=>tt<T.writes||i!==2||tt>T.any)});
       // dbt writes the project's measures in Ossie, each time it reads the project; and reads Ossie too
       const ja=dn_io(tt,T.writes,T.ctc-0.4,0.5,0.4);if(ja>0)md_window(c,1040,90,840,320,{logo:"dbt",product:"target/osi_document.json",a:ja,k:dn_k(tt,T.writes),draw:(cc,b)=>
         dn_code(cc,b.x+16,b.y+38,DN_OSI.map(([s,ind],i)=>({s,ind,k:clamp((tt-T.time+0.3-i*0.15)/0.4,0,1)})),{lh:36,size:28})});
@@ -224,12 +250,21 @@ scene("open",(ctx,S,t,sc)=>{
       const u=clamp((tt-T.ctc)/2.6,0,1),ta=ag_in(tt,T.ctc-0.2,0.4)*(1-ag_in(u,0.84,0.16));if(ta>0){const A=[305,330],B=[960,300],C=[1600,740];
         const p=u<0.5?[lerp(A[0],B[0],ag_sine(u*2)),lerp(A[1],B[1],ag_sine(u*2))]:[lerp(B[0],C[0],ag_sine(u*2-1)),lerp(B[1],C[1],ag_sine(u*2-1))];
         c.save();ag_about(c,p[0],p[1],lerp(1,0.55,ag_in(u,0.8,0.2)));dn_card(c,p[0]-210,p[1]-66,420,[{s:"casual teaching cost",size:30,w:700},{s:"owner · words · rules",col:MD.soft,k:ag_in(tt,T.words,0.4)}],{edge:MD.agreed,a:ta});c.restore();}
-      // keep each rule inside the measure; a filter on the whole view stays behind
-      const ka=ag_in(tt,T.keep-0.1,0.5);if(ka>0){md_window(c,70,590,860,290,{logo:"databricks",product:"casual_teaching_cost",title:"metric view",a:ka,k:dn_k(tt,T.keep-0.1),draw:(cc,b)=>
+      // keep each rule inside the measure; a filter on the whole view stays behind. All of it leaves before the chapter's last picture
+      const out=1-ag_in(tt,T.ideal-0.45,0.35),ka=ag_in(tt,T.keep-0.1,0.5)*out;if(ka>0){md_window(c,70,590,860,290,{logo:"databricks",product:"casual_teaching_cost",title:"metric view",a:ka,k:dn_k(tt,T.keep-0.1),draw:(cc,b)=>
           dn_code(cc,b.x+16,b.y+36,DN_RULE.map(([s,ind],i)=>({s,ind,lit:i>=3?ag_in(tt,T.inm,0.4):0,dim:i===0?ag_in(tt,T.travels,0.5):0})),{lh:36,size:28})});
-        md_tag(c,520,700,"stays behind",{col:MD.soft,a:ag_in(tt,T.travels+0.2,0.4)});}
+        md_tag(c,520,700,"stays behind",{col:MD.soft,a:ag_in(tt,T.travels+0.2,0.4)*out});}
       // and check what arrives: a converter says what it can't carry
-      md_tag(c,1176,838,"notice: dropped what this tool can't hold",{icon:"warn",col:MD.wait,a:ag_in(tt,T.conv2,0.5)});}}
+      md_tag(c,1176,838,"notice: dropped what this tool can't hold",{icon:"warn",col:MD.wait,a:ag_in(tt,T.conv2,0.5)*out});
+      // ideally, the definition is written in Ossie first, in the data project: its card over the format, joined to it by a gold lane;
+      // and the metric view is built from it: one gold packet runs from the format, through the converter, to the metric view
+      const ia=ag_in(tt,T.ideal,0.5);if(ia>0){const b=dn_card(c,730,120,460,[{s:"casual teaching cost",size:34,w:700},
+          {s:"written in Ossie first",size:30,col:MD.agreed,k:clamp((tt-T.written+0.1)/0.6,0,1)},{s:"in the data project",size:30,col:MD.soft,k:clamp((tt-T.proj+0.1)/0.6,0,1)}],
+          {edge:MD.agreed,kick:"ideally",kickCol:MD.agreed,a:ia,k:dn_k(tt,T.ideal),minH:224});
+        md_lane(c,[[960,b.y+b.h+4],[960,410]],MD.agreed,0.85*ia,{u:ag_sine(clamp((tt-T.written-0.1)/0.6,0,1))});}
+      const bu=clamp((tt-T.built)/1.0,0,1);if(bu>0&&bu<1){const x=lerp(790,520,ag_sine(bu)),f=sstep(0,0.12,bu)*(1-sstep(0.88,1,bu));
+        glow(c,655,470,70,MD.agreed,0.5*Math.max(0,1-Math.abs(x-655)/90));   // the converter, at work as the packet passes through it
+        glow(c,x,470,38,MD.agreed,0.6*f);c.save();c.globalAlpha*=f;rr(c,x-12,458,24,24,5);c.fillStyle=rgba(mix(MD.agreed,[255,255,255],0.5),1);c.fill();c.restore();}}}
   ],0.5);
 });
 

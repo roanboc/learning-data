@@ -110,12 +110,12 @@ left join ceremonies
 left join awards
     on current_graduations.award_bk = awards.award_bk
     and {{ valid_at('current_graduations.conferred_on', 'awards.valid_from', 'awards.valid_to') }}
--- How old the list is: when the night's files it's built from arrived, from each source's receipts,
--- the same on every row. The printer's file shows both in its header (Late is wrong too).
+-- How old the list is: when each source saved the newest record it's built from, from that source's
+-- receipts, the same on every row. The printer's file shows both in its header (Late is wrong too).
 cross join (
     select
-        (select max(received_at) from {{ ref('stg_student_system__nightly_files') }}) as student_system_as_of,
-        (select max(received_at) from {{ ref('stg_portal__nightly_files') }}) as portal_as_of
+        (select max(newest_record_at) from {{ ref('stg_student_system__nightly_files') }}) as student_system_as_of,
+        (select max(newest_record_at) from {{ ref('stg_portal__nightly_files') }}) as portal_as_of
 ) as ages
 left join current_applications
     on current_graduations.student_bk = current_applications.student_bk

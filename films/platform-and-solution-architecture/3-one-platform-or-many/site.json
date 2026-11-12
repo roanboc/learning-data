@@ -1,0 +1,35 @@
+{
+  "kicker": "How many platforms",
+  "kicker_es": "Cuántas plataformas",
+  "title_es": "Una plataforma, o muchas",
+  "h1": "One platform, or many: what every extra platform brings with it",
+  "h1_es": "Una plataforma, o muchas: lo que trae cada plataforma de más",
+  "lead": "Two parts of the utility bought two data platforms, and analysts propose a third product to join them. Ravi Menon draws the rules each brings: who may see what, masks, lineage and logs, kept three times. He proposes one platform, with every domain owning its data on it.",
+  "lead_es": "Dos áreas de la empresa compraron dos plataformas de datos, y unos analistas proponen un tercer producto para unirlas. Ravi Menon dibuja las reglas que trae cada una, mantenidas tres veces, y propone una sola plataforma, con cada dominio dueño de sus datos en ella.",
+  "description": "A film about how many data platforms an organisation should run: why every platform brings its own rules (who's who and who may see what, masks on private data, lineage, a log of who did what), so a second platform, or a third product to join two, means every rule kept again and kept in step; the simplest architecture that does the job, few components on one platform for most organisations, and many platforms joined only for a few; a data mesh as many owners on one self-serve platform; when a second platform can't be helped (a company just bought, a separate legal entity, data that must stay in its country), and what open table formats and a federated catalogue lessen and what they don't; generation's platform moved onto the data platform, its data products still its own; and the second set of rules, the principle and the move on Tomás's map.",
+  "description_es": "Una película sobre cuántas plataformas de datos debería operar una organización: por qué cada plataforma trae sus propias reglas (quién es quién y quién puede ver qué, máscaras sobre datos privados, linaje, un registro de quién hizo qué), así que una segunda plataforma, o un tercer producto para unir dos, significa cada regla mantenida otra vez y a la par; la arquitectura más simple que hace el trabajo, pocos componentes en una sola plataforma para la mayoría, y muchas plataformas unidas solo para unos pocos; un data mesh como muchos responsables en una sola plataforma de autoservicio; cuándo una segunda plataforma es inevitable (una empresa recién comprada, una entidad legal aparte, datos que deben quedarse en su país), y qué reducen los formatos de tabla abiertos y un catálogo federado y qué no; la plataforma de generación mudada a la plataforma de datos, con sus productos de datos aún suyos; y el segundo conjunto de reglas, el principio y la mudanza en el mapa de Tomás.",
+  "card": "Every platform brings its own rules: keep one, with every domain owning its data on it, and a second only for a reason you can name.",
+  "card_es": "Cada plataforma trae sus propias reglas: mantén una, con cada dominio dueño de sus datos en ella, y una segunda solo por una razón que puedas nombrar.",
+  "chapters_es": {
+    "tolls": "Un peaje en cada barrera",
+    "two": "Dos plataformas, y una tercera",
+    "layers": "Tres conjuntos de reglas",
+    "simple": "Tan simple como se pueda",
+    "mesh": "Muchos responsables, una plataforma",
+    "unavoid": "Cuando dos no se pueden evitar",
+    "move": "Generación se muda",
+    "once": "Cada regla, una vez",
+    "practice": "La práctica de datos en el mapa",
+    "end": "Un camino, muchos dominios"
+  },
+  "next_h": "You've seen why one platform is the simplest choice for most. Next: where it meets the applications.",
+  "next_h_es": "Viste por qué una sola plataforma es lo más simple para la mayoría. Sigue: donde se encuentra con las aplicaciones.",
+  "past": [
+    "Japan's toll barriers, 1462 to 1635",
+    "Every owner of a stretch of river or road could take a toll; one set of rules for the roads let travellers pay only for what they used."
+  ],
+  "past_es": [
+    "Las barreras de peaje de Japón, 1462 a 1635",
+    "Cada dueño de un tramo de río o de camino podía cobrar un peaje; unas mismas reglas para los caminos dejaron a los viajeros pagar solo lo que usaban."
+  ]
+}

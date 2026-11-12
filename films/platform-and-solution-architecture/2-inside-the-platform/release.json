@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Inside the platform",
+    "key": "inside-the-platform-en",
+    "dir": "films/platform-and-solution-architecture/2-inside-the-platform/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/inside-the-platform/film.js",
+    "video": "dist/inside-the-platform.mp4",
+    "file": "inside-the-platform.mp4",
+    "captions": [
+      [
+        "films/platform-and-solution-architecture/2-inside-the-platform/captions/en.srt",
+        "inside-the-platform.en.srt"
+      ],
+      [
+        "films/platform-and-solution-architecture/2-inside-the-platform/captions/es.srt",
+        "inside-the-platform.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/platform-and-solution-architecture/2-inside-the-platform/source",
+      ":(exclude)films/platform-and-solution-architecture/2-inside-the-platform/source/src/i18n/es/captions.js",
+      "films/platform-and-solution-architecture/shared",
+      "films/enterprise-architecture/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+      "films/when-things-go-wrong/characters",
+      "films/when-things-go-wrong/1-silent-change/source/src",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/hands.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py"
+    ],
+    "legibility": {
+      "texts": 346,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.2,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -1,6 +1,6 @@
 # Rules and expectations the business owns: questions and assumptions
 
-*Enterprise architecture* · *Business architecture for data*, film 5 of 5 · PR #PR · [pull request](https://github.com/roanboc/learning-data/pull/PR)
+*Enterprise architecture* · *Business architecture for data*, film 5 of 5 · PR #377 · [pull request](https://github.com/roanboc/learning-data/pull/377)
 
 [Watch it on the site](https://data.learn-all.org/business-architecture-for-data/rules-and-expectations-the-business-owns/)
 

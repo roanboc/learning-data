@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Rules and expectations the business owns, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (decide, set, source), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop"
+   (the lab it would open) and none links to one. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  decide:{q:"Grace's team decides that a reading lower than the last is still actual when the meter is new. What changes?",
+    opts:[{t:"The gateway in the BPMN flow, since that's where check readings chooses what to do.",near:true},{t:"A row is added to the decision table beside the step, and the BPMN flow stays as it is.",ok:true},{t:"The data team's check on the platform, which tests each reading before billing uses it."}],
+    why:"The flow draws the step and its choice; the rules that choice applies go beside it, in a decision table, as DMN draws them. Grace's team owns the table, so a new rule, such as a new meter's first reading, is a new row, and the flow stays as it is. The gateway only shows that a choice is made. And the data team's checks don't decide what billing may use; the owner's table does. Which of your processes keep their rules inside the flow?"},
+  set:{q:"After January's late readings, who writes down what billing needs of them, and when?",
+    opts:[{t:"The head of retail, who owns billing, the step that uses them, before a check is built.",ok:true},{t:"The data team, once its checks have run a while and shown when readings usually come."},{t:"Grace, who owns readings, since her team makes the data that billing uses each month.",near:true}],
+    why:"How good is good enough is the business's to say: the owner of the step that uses the data, since a reading is late only against the step that needs it. So the head of retail writes down what billing needs: by ten on billing day, a reading or an estimate for every active meter, and no more than one in a hundred estimated. Grace owns readings and agrees to meet it, but it isn't hers to set. The check is built from what's written, as Sehdeh's outlets were built to the shares. Whose needs are your checks built on?"},
+  source:{q:"A reading comes in far out of range. Where is it caught first, and who puts it right?",
+    opts:[{t:"On the data platform, whose checks find it, and the data team corrects the row there."},{t:"In the meter system as it comes, and the data team corrects the platform's copy to match.",near:true},{t:"In the meter system, which checks each reading as it comes, and its own team fixes it there.",ok:true}],
+    why:"The source is accountable for its own data: the meter system checks each reading as it comes, makes the estimates and reports what's missing by ten. The data platform only reads it and never writes back, so a problem is fixed at the source, by its own team, and every reader gets the fix. A copy corrected on the platform would leave the source wrong. The data team builds a check only where the source can't, such as a reading for every active account, which needs billing's accounts too. Which of your checks belongs at a source?"}
+  }}};

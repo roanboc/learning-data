@@ -26,7 +26,7 @@ what only people do.
 
 | Tool | Its name there | Its rights | File |
 |---|---|---|---|
-| Databricks | Its service principal, "planning agent", `4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73` | Its role's group, `planning_contributors`: reads production (prod_core, prod_marts, names masked), and builds only in schemas of its own in `analytics_dev` | `grants.sql` |
+| Databricks | Its service principal, "planning agent", `4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73` | Its role's group, `planning_contributors`: reads production (prod_core, prod_marts; personal and sensitive data masked), and builds only in schemas of its own in `analytics_dev` | `grants.sql` |
 | Unity Gateway | The same | `EXECUTE` on 1 model (`ai.models.drafting`) and 7 tool servers (`ai.tools.build`, `ai.tools.catalog`, `ai.tools.docs`, `ai.tools.memory`, `ai.tools.query`, `ai.tools.repository`, `ai.tools.tickets`) | `unity-gateway.yml` |
 | The team's memory | The same | Read only: `team-memory` | `memory.yml` |
 | GitHub | Its App, `planning-agent`: its work reads `planning-agent[bot]` | One repository, `uni-example/credentials`; contents and pull requests, write; only branches `agent/planning/*` | `github-app.yml` |

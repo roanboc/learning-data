@@ -171,11 +171,11 @@ for people.
 
    To stop it, an admin deactivates its service principal: it can't sign in, everyone else works on,
    and its grants stay for when it's switched on again.
-2. **The masks it already meets.** Section 3's policy masks every column tagged `direct` for
-   `account users` except the readers, and `account users` holds every user and every service
-   principal in the account. An agent outside the readers' group reads stars, as Clara does, with no
-   rule written for agents, and a row filter's `TO` clause covers it the same way. The staff key, a
-   hash of the staff ID, isn't tagged, so it stays readable, and an agent can count without a name.
+2. **The masks it already meets.** An agent reads production with limited access: read-only, only what its
+   steps need, and with personal and sensitive data masked. Section 3's policy masks every column tagged
+   `direct` for `account users` except the readers, and `account users` holds every user and every service
+   principal in the account: an agent outside the readers' group reads stars, as Clara does, with no rule written for agents, and a row filter's `TO` clause covers it the same way. The staff key, a hash of the staff ID, isn't tagged, so it stays readable, and an agent can count without a name.
+   Nothing an agent is granted here holds `special` data or is `restricted` (section 16): if it did, that data would need its own mask first, as in section 17.
 3. **Its tools, granted like tables.** A Unity Catalog function an agent calls as a tool needs
    `EXECUTE` on it, with `USE CATALOG` and `USE SCHEMA` on its catalog and schema: the agent can run
    it, and can't change it. The count of active research projects is one, `active_projects(faculty)`

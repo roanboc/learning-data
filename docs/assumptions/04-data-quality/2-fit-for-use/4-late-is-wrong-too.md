@@ -1,6 +1,6 @@
 # Late is wrong too: questions and assumptions
 
-*Data quality* · *Fit for use*, film 4 · merged, PR #226 · [pull request](https://github.com/roanboc/learning-data/pull/226); changed on 12 November 2026 from Rodrigo's answer on which date timeliness is counted from (PR #331), and again that day from the point he agreed on the file's arrival, kept as a second alarm (PR #NNN)
+*Data quality* · *Fit for use*, film 4 · merged, PR #226 · [pull request](https://github.com/roanboc/learning-data/pull/226); changed on 12 November 2026 from Rodrigo's answer on which date timeliness is counted from (PR #331), and again that day from the point he agreed on the file's arrival, kept as a second alarm (PR #343)
 
 [Watch it on the site](https://data.learn-all.org/fit-for-use/late-is-wrong-too/)
 
@@ -98,7 +98,7 @@ After his answer above, one point was put to Rodrigo on it, in the project's cha
 
 His answer, on 12 November 2026: "Agreed."
 
-The change above (PR #331) had left the file's arrival with no check: the receipts still said when each file arrived, and nothing read it. This follow-up brings the check back with one job, in the film and in the example project, in the thread "Apply review answers to Data quality" (PR #NNN):
+The change above (PR #331) had left the file's arrival with no check: the receipts still said when each file arrived, and nothing read it. This follow-up brings the check back with one job, in the film and in the example project, in the thread "Apply review answers to Data quality" (PR #343):
 
 | The agreed words | The film's line now | Where it shows |
 |---|---|---|

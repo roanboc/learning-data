@@ -6,7 +6,7 @@
    una tutoría. As the site's other Spanish captions say them: una vista de métricas for a metric view, un pull request, la capa semántica, El significado en la plataforma.
    The other two numbers' names: horas ocasionales contratadas and pago ocasional pagado. In 1889 and after: la bóveda, las copias, las pesas, una pesada, el patrón de masa,
    la balanza de Kibble, la constante de Planck. The platform's names stay as they are on screen: Unity Catalog, Genie, Genie One, the Ask Genie button, MetricFlow, Apache Ossie.
-   Tú, as the film's last lines speak to the viewer (Elige, Deja, revisa, no los reinventes).
+   Tú, as the film's last lines speak to the viewer (Deja, revisa, no los reinventes).
    Numbers keep the picture's comma and point (A$2.21M is 2.21 millones; 330 mil), as the module's other Spanish captions do, so a viewer reads the same number in the caption and on screen. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Near Paris, 1889. A small cylinder of platinum and iridium, kept in a vault, becomes the kilogram.":
@@ -71,6 +71,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y el costo de la docencia ocasional es de Finanzas: su dueño es Rohan, para el presupuesto, contado por el período lectivo de la docencia.",
 "Each owner decides what theirs means, in the glossary, before any code.":
 "Cada dueño decide qué significa la suya, en el glosario, antes de cualquier código.",
+"Whatever the tools, that is the minimum: every measure clearly catalogued, with its name, its owner and its meaning.":
+"Sean cuales sean las herramientas, eso es lo mínimo: cada medida bien catalogada, con su nombre, su dueño y su significado.",
 "Now everyone can see why the three numbers differ, and which one answers their question.":
 "Ahora todos ven por qué difieren las tres cifras, y cuál responde a su pregunta.",
 
@@ -101,8 +103,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Planificación cuenta con ella a los estudiantes cerca de un certificado de posgrado, en el mismo proyecto.",
 "MetricFlow is open source, so other tools can build on it.":
 "MetricFlow es de código abierto, así que otras herramientas pueden construir sobre él.",
-"Either can be a measure's home. Choose one for each, near most of its readers, and never define it twice.":
-"Cualquiera puede ser el hogar de una medida. Elige uno para cada una, cerca de la mayoría de sus lectores, y nunca la definas dos veces.",
+"One tool for every measure is simplest, but that depends on the organisation: this university uses both.":
+"Una sola herramienta para todas las medidas es lo más simple, pero depende de la organización: esta universidad usa las dos.",
+"So each measure gets one home, near most of its readers, and is never defined twice.":
+"Así que cada medida tiene un solo hogar, cerca de la mayoría de sus lectores, y nunca se define dos veces.",
 
 "For tools to read each other's definitions, they need a common format: Apache Ossie.":
 "Para que las herramientas lean las definiciones de las demás, necesitan un formato común: Apache Ossie.",
@@ -118,6 +122,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Deja cada regla dentro de la medida, para que viaje con ella.",
 "And check what arrives: a converter says what it can't carry.":
 "Y revisa lo que llega: un conversor avisa lo que no puede llevar.",
+"Ideally, the definition is written in Ossie first, in the data project, and the metric view is built from it.":
+"Lo ideal: la definición se escribe primero en Ossie, en el proyecto de datos, y de ella se construye la vista de métricas.",
 
 "Today, Thursday the fifth of November, is pay day.":
 "Hoy, jueves 5 de noviembre, es día de pago.",

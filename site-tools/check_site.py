@@ -24,6 +24,8 @@ What it checks, page by page (every .html under site/):
   chapters, the labs listed in film order (the labs page numbers them 1 to N in that order), each scenario numbered by its film,
   in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
+- the learning route (modules/route.json): every topic on it once, each goal's stops among the films and series on the site,
+  the Topics page draws it, the list's rows in the route's order, and the home page leads to it, in both languages.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
 - opening turns: no film's narration or captions say the stock "Something had to change" (or "has to", "Algo tenía que cambiar"):
@@ -196,6 +198,9 @@ for _f in SERIES_FILMS:
         WHOLE.add(_f["len"] + " min")
 # the Topics page states each series' length in all, in whole minutes, from the same data
 WHOLE |= build_series.series_totals()
+# and each topic's row its films' length in all ("2 h 3 min", "40½ min")
+_whole, _halves = build_series.topic_totals()
+WHOLE |= _whole; HALVES["en"] |= _halves; HALVES["es"] |= _halves
 # the Making of page states its two films' lengths: 5 min (Data for Films) and 4½ min (That's not quite right)
 MAKING_OF_PAGES = {"journey/index.html", "es/journey/index.html", "journey/index.md", "es/journey/index.md"}
 WORDS = {"en": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen "
@@ -1320,8 +1325,9 @@ def main():
                 allowed.append(f"site/{rel}:{line}")
                 continue
             s["fails"].append(f"site/{rel}:{line}: \"{m.group(0)}\"")
-        if rel in BUNDLES or rel in SEALED or rel in {c for c, _ in CAPTIONS_ES.values()}:
-            continue  # the players' own code (timings, comments) and their captions (time in the story) are not site copy
+        if rel in BUNDLES or rel in SEALED or rel in {c for c, _ in CAPTIONS_ES.values()} or re.fullmatch(r"assets/learn/search\.\w+\.json", rel):
+            continue  # the players' own code (timings, comments) and their captions (time in the story) are not site copy; nor
+            # are the search's words, made from those captions when someone runs build_series.py --search (never committed)
         mk = rel in MAKING_OF_PAGES
         for m in LENGTHS.finditer(src):
             if m.group(0).lstrip("· ") in WHOLE or mk and m.group(0).lstrip("· ") == "5 min":
@@ -1648,6 +1654,53 @@ def main():
     s["fails"] += faults
     s["notes"].append(f"{n} films show their places as pictures")
 
+    # -- the learning route
+    s = rep.check("The learning route: every topic on it once, each goal's stops on the site, the Topics page draws it and the home page leads to it, in both languages")
+    R = build_series.load_route()  # stops the run itself on a topic that isn't placed, or a goal's stop that isn't on the site
+    for lg in ("en", "es"):
+        D = build_series.route_data(lg); pre = "" if lg == "en" else "es/"
+        on = [t["id"] for t in D["topics"]]
+        if sorted(on) != sorted(t["id"] for t in build_series.live()):
+            s["fails"].append(f"route.{lg}.js: its topics aren't the topics the site shows")
+        if D["topics"][0]["items"][0]["kind"] != "film":
+            s["fails"].append("modules/route.json: the route starts with one film, the introduction; its first topic's first item is a series")
+        rel = f"{pre}topics/index.html"; pg = pages.get(rel)
+        if pg is None:
+            s["fails"].append(f"site/{rel}: missing"); continue
+        need = [f"assets/learn/route.{lg}.js", "assets/learn/route.js", "assets/learn/topics.js"]
+        if len([n for n in pg.dom.walk() if "data-route" in n.attrs]) != 1:
+            s["fails"].append(f"site/{rel}: needs one [data-route] box, where route.js draws the route")
+        if [x for x in need if x not in pg.local_scripts] or pg.local_scripts.index(need[0]) > pg.local_scripts.index(need[1]):
+            s["fails"].append(f"site/{rel}: loads {', '.join(need)}, the route's data before its script")
+        rows = [n.attrs.get("id") for n in pg.dom.all("section", cls="topic") if n.first("details") and n.first("summary")]
+        if rows != on:
+            s["fails"].append(f"site/{rel}: its list has a row for {rows}, but the route has {on}, in that order")
+        # the home page stays a first view: no map and no list of topics, only the ways on, to the route and the Making of
+        rel = f"{pre}index.html"; pg = pages.get(rel)
+        if pg is None:
+            s["fails"].append(f"site/{rel}: missing"); continue
+        ways = [a.attrs.get("href") for p in pg.dom.all("p", cls="home-next") for a in p.all("a")]
+        if ways != ["topics/", "journey/"]:
+            s["fails"].append(f"site/{rel}: after the film's steps, two buttons: the learning route (topics/) and how the films were made (journey/); it has {ways}")
+        # and the film's two other steps are said twice, since the bar above the film is easy to miss: in a section right
+        # after the film, and first in the panel that shows when the film ends
+        steps = [a.attrs.get("href") for d in pg.dom.all("div", cls="more-steps") for a in d.all("a")]
+        tpl = re.search(r'<template id="next-panel">.*?</template>', pg.src, re.S)
+        ends = re.findall(r'<a class="btn[^"]*" href="([^"]*)"', tpl.group(0)) if tpl else []
+        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="more-steps"') > pg.src.find('class="home-next"') or pg.dom.first("details", cls="howto"):
+            s["fails"].append(f"site/{rel}: after the film and before the ways on, a section offers the labs and the situations ({steps}), with no box to open, and the "
+                              f"\"Where next?\" panel offers them first ({ends[:2]}): people miss them in the bar above the film (the author, 12 November 2026)")
+        if [n for n in pg.dom.walk() if "data-route" in n.attrs] or any("route" in x for x in pg.local_scripts):
+            s["fails"].append(f"site/{rel}: the home page doesn't draw the route (the author, 12 November 2026): it links to it")
+        for t in D["topics"]:
+            if not any(not i.get("soon") for i in t["items"]):
+                s["fails"].append(f"route.{lg}.js: {t['id']} has no film or series on the site")
+    for g in R["goals"]:
+        if not 2 <= len(g["stops"]) <= 6 or len(set(g["stops"])) != len(g["stops"]):
+            s["fails"].append(f"modules/route.json: goal {g['id']} needs two to six stops, each once")
+    s["notes"].append(f"{len(R['groups'])} groups, {len(R['goals'])} goals; in the works: " +
+                      (", ".join(u["name"]["en"] for t in build_series.live() for u in build_series.upcoming(t)) or "nothing"))
+
     # -- topic cards
     s = rep.check("Topic cards: one link each, the linked film's progress prefix and counts (a series' card: its films'), a real poster")
     ncards = 0
@@ -1769,7 +1822,7 @@ def main():
 
     # -- generated pages
     s = rep.check("The series: their pages, and their blocks in other pages, are what site-tools/build_series.py makes")
-    for rel, text in build_series.pages() + build_series.blocks():
+    for rel, text in build_series.pages() + build_series.blocks() + build_series.data():
         f = WEB / rel
         if not f.exists() or f.read_text() != text:
             s["fails"].append(f"site/{rel} is not what build_series.py makes: run python site-tools/build_series.py")

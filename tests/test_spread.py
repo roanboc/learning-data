@@ -1,6 +1,9 @@
 """Where the right answer sits: check_site.py reads a pack of labs and scenarios as written, and tells a spread pack from one
 whose answers can be found by their place."""
+import json
 import pathlib
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -110,6 +113,32 @@ class Spread(unittest.TestCase):
         self.assertTrue(any("not in order" in x for x in C.spread_faults(rel, P, set())))
         P, rel = self.read(PACK.replace('items:["a","b","c"],', 'items:["a","b","c"],start:[2,0,1],'))
         self.assertEqual(C.spread_faults(rel, P, set()), [])
+
+    def test_an_orders_first_showing_is_mixed(self):
+        for start, want in (([0, 1, 2], False), ([0, 2, 1], True), ([1, 0], True), ([3, 2, 1, 0], False), ([1, 2, 3, 0], False),
+                            ([3, 4, 5, 0, 1, 2], False), ([3, 2, 1, 0, 7, 6, 5, 4], False), ([0, 1, 2, 4, 3], False), ([1, 3, 0, 2], True),
+                            ([2, 0, 4, 1, 3], True), ([1, 3, 5, 0, 2, 4], True)):
+            self.assertEqual(C.order_mixed(start), want, start)
+        P, rel = self.read(PACK.replace('items:["a","b","c"],', 'items:["a","b","c","d"],start:[3,2,1,0],'))
+        self.assertTrue(any("in reverse" in x for x in C.spread_faults(rel, P, set())))
+        P, rel = self.read(PACK.replace('items:["a","b","c"],', 'items:["a","b","c","d"],start:[1,3,0,2],'))
+        self.assertEqual(C.spread_faults(rel, P, set()), [])
+
+    def test_the_line_the_engines_mix_with(self):
+        node = shutil.which("node")
+        if not node:
+            self.skipTest("no node here to run the engines' line")
+        js = C.MIXED + "console.log(JSON.stringify(Array.from({length:12},(_,i)=>Array.from({length:60},(_,s)=>mixed(i+1,s)))));"
+        run = lambda: json.loads(subprocess.run([node, "-e", js], capture_output=True, text=True, check=True).stdout)
+        table = run()
+        self.assertEqual(run(), table)  # one scenario is mixed the same way each time
+        for n, row in enumerate(table, 1):
+            for s, o in enumerate(row):
+                self.assertEqual(sorted(o), list(range(n)), (n, s, o))
+                if n > 1:
+                    self.assertTrue(C.order_mixed(o), (n, s, o))
+            if n > 3:
+                self.assertGreater(len({tuple(o) for o in row}), 3, n)  # and not every scenario the same way
 
     def test_the_first_films_questions_are_read_from_its_pack(self):
         text = ('window.LEARN={lang:"en",\nstops:{a:{lab:{qs:[{q:"Not a Pause and think question",eng:"x"}]}}},\n'

@@ -260,9 +260,11 @@ const QV={
  levels:c=>{[["Conceptual",SK],["Logical",REF],["Physical",GOOD]].forEach(([n,col],i)=>{glass(c,30+i*190,60,170,200,14,col,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.9)"});T(c,n,115+i*190,100,{w:800,size:18,align:"center",color:rgba(col,1)});});},
  stamp:c=>{stamp(c,300,120,"sketch v2",GOOD,1);stamp(c,300,200,"sketch v3?",EXT,1,0.3);}};
 
-/* an order scenario's first showing: its steps mixed the same way each time, and never already in order (the first mix alone
-   left 3 or 7 steps just as they were) */
-const mixed=n=>{const by=m=>Array.from({length:n},(_,i)=>i).sort((a,b)=>((a*m+3)%n)-((b*m+3)%n));return [7,5,3,2].map(by).find(o=>o.some((k,p)=>k!==p))||by(1).reverse();};
+/* an order scenario's first showing: its steps mixed, the same way each time for one scenario and another way for the next, and
+   never in order, in reverse, in either from some step on round to the one before it, or with more than a few steps where
+   they belong or still following one another (the first mix left 3 or 7 steps as they were, turned 4 round and cut 6 in two,
+   and did the same to every scenario) */
+const mixed=(n,s)=>{const hs=x=>{x=Math.imul(x^x>>>16,0x45d9f3b);x=Math.imul(x^x>>>16,0x45d9f3b);return(x^x>>>16)>>>0;},run=o=>[1,n-1].some(d=>o.every((k,p)=>!p||(k-o[p-1]+n)%n===d)),fine=o=>n<4?o.some((k,p)=>k!==p):!run(o)&&o.filter((k,p)=>k===p).length<=n/4&&o.filter((k,p)=>p&&k===o[p-1]+1).length<=n/3;for(let t=0;t<60;t++){const key=Array.from({length:n},(_,i)=>hs(((s|0)+1)*7919+t*104729+i*1013+n)),o=key.map((_,i)=>i).sort((a,b)=>key[a]-key[b]||a-b);if(fine(o))return o;}return Array.from({length:n},(_,i)=>(2*i+1)%(n|1));};
 const quizApp=document.getElementById("quiz3-app");
 if(quizApp){quizApp.textContent="";const ans=get("quiz",{});let cur=0;
   const bar=h("div",{class:"qbar"}),dots=h("div",{class:"dots",role:"group","aria-label":"Scenarios"}),score=h("p",{class:"score"}),card=h("div");bar.append(dots,score);quizApp.append(h("div",{class:"quiz"},bar,card));
@@ -279,7 +281,7 @@ if(quizApp){quizApp.textContent="";const ans=get("quiz",{});let cur=0;
     if(q.type==="choice"){const box=h("div",{class:"qopts"});q.opts.forEach((o,i)=>box.append(h("button",{type:"button",class:"qopt",onclick:()=>{[...box.children].forEach((b,j)=>{b.disabled=true;if(q.opts[j].ok)b.classList.add("ok");});if(!o.ok){box.children[i].classList.add("no");box.children[i].append(h("small",null,o.why));}done(!!o.ok);out.replaceChildren(feed(!!o.ok,q),foot(q));}},h("span",{class:"k"},"ABC"[i]),h("span",null,o.t))));body.append(box);}
     if(q.type==="sort"){const pick={},box=h("div",{class:"qsort"});q.items.forEach(it=>box.append(h("div",{class:"row"},h("span",{class:"t"},it.t),h("div",{class:"qseg"},...q.buckets.map(([k,t])=>h("button",{type:"button","aria-pressed":"false",onclick:e=>{pick[it.t]=k;[...e.target.parentNode.children].forEach(b=>b.setAttribute("aria-pressed",String(b===e.target)));}},t))))));
       body.append(box,h("button",{type:"button",class:"btn primary",onclick:e=>{let ok=true;[...box.children].forEach((r,i)=>{const it=q.items[i],g=pick[it.t]===it.b;r.classList.add(g?"ok":"no");if(!g){ok=false;r.append(h("p",{class:"fix"},"→ "+q.buckets.find(b=>b[0]===it.b)[1]+": "+it.why));}r.querySelectorAll("button").forEach(b=>b.disabled=true);});e.target.remove();done(ok);out.replaceChildren(feed(ok,q),foot(q));}},"Check"));}
-    if(q.type==="order"){let ord=mixed(q.items.length);const box=h("ol",{class:"qorder"});
+    if(q.type==="order"){let ord=mixed(q.items.length,cur);const box=h("ol",{class:"qorder"});
       const draw=()=>box.replaceChildren(...ord.map((ix,p)=>h("li",null,h("span",{class:"n"},String(p+1)),h("span",null,q.items[ix]),h("span",{class:"mv"},h("button",{type:"button","aria-label":"Move up",onclick:()=>{if(p>0){[ord[p-1],ord[p]]=[ord[p],ord[p-1]];draw();}}},"↑"),h("button",{type:"button","aria-label":"Move down",onclick:()=>{if(p<ord.length-1){[ord[p+1],ord[p]]=[ord[p],ord[p+1]];draw();}}},"↓")))));draw();
       body.append(box,h("button",{type:"button",class:"btn primary",onclick:e=>{const ok=ord.every((ix,p)=>ix===p);[...box.children].forEach((li,p)=>{li.classList.add(ord[p]===p?"ok":"no");li.querySelectorAll("button").forEach(b=>b.disabled=true);});e.target.remove();done(ok);out.replaceChildren(feed(ok,q),foot(q));}},"Check"));}
     body.append(out);card.replaceChildren(h("div",{class:"qcard"},h("div",{class:"qvis"},vis.el),body));ready().then(()=>vis.paint());}

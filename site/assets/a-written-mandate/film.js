@@ -448,7 +448,9 @@ const NARR={
  {"id":"twice","gap":0.8,"text":"The same error twice: it stops and reports."},
  {"id":"gate","gap":0.8,"text":"Signing it was the last step of its gate to stage five, after fourteen nights in test without a miss."},
  {"id":"law","gap":0.8,"text":"Europe's AI law asks this of what it counts as high-risk: people who can understand it, watch it, reverse it and stop it."},
- {"id":"one","gap":0.8,"text":"It covers one kind of task. On what a word about staff means, the same agent only suggests."}
+ {"id":"lag","gap":0.8,"text":"But regulation usually moves more slowly than technology."},
+ {"id":"care","gap":0.8,"text":"So take more care than the law asks, most of all in critical systems."},
+ {"id":"one","gap":0.8,"text":"The mandate covers one kind of task. On what a word about staff means, the same agent only suggests."}
 ]},
 "held":{"name":"Held in every tool","lead":1.0,"tail":1.0,"vo":[
  {"id":"words","gap":0.8,"text":"A page is only words. So each line is written into the tools from the map, as every right is."},
@@ -506,14 +508,14 @@ const NARR={
 ]}
 };
 
-const VODUR={"first/place": 1.581, "first/ask": 7.315, "first/test": 5.557, "first/fail": 5.81, "first/nobody": 3.634, "first/harm": 2.771, "first/oct": 8.368, "first/overnight": 5.326, "first/where": 5.42, "first/change": 5.304, "first/mandate": 4.721, "first/which": 2.766, "first/limits": 2.321, "first/switch": 3.147, "first/map": 2.896, "first/signed": 4.955, "first/held": 2.888, "first/check": 4.143, "first/cause": 5.745, "first/twice": 4.636, "first/fixed": 5.423, "first/report": 3.738, "first/never": 5.846, "first/data": 7.6, "page/role": 5.845, "page/line": 4.248, "page/file": 4.135, "page/test": 7.258, "page/pr": 2.767, "page/else": 3.875, "page/prod": 6.049, "page/never": 7.104, "page/first": 5.976, "page/twice": 2.718, "page/gate": 5.833, "page/law": 7.438, "page/one": 5.776, "held/words": 5.826, "held/grants": 6.612, "held/folders": 4.893, "held/hour": 5.236, "held/rounds": 4.016, "held/budget": 7.984, "held/first": 2.315, "held/agree": 8.728, "held/widen": 6.258, "alone/two": 3.251, "alone/bug": 7.692, "alone/may": 3.414, "alone/moved": 6.189, "alone/which": 6.13, "alone/decide": 7.798, "alone/apart": 4.455, "alone/draft": 8.093, "alone/costs": 3.984, "alone/rerun": 4.973, "stop/shown": 2.181, "stop/switch": 5.064, "stop/sp": 3.819, "stop/app": 3.27, "stop/who": 4.268, "stop/undo": 5.561, "stop/table": 8.12, "stop/back": 7.388, "stop/december": 3.026, "stop/none": 1.86, "close/morning": 7.525, "close/jun": 5.544, "close/hr": 2.764, "close/count": 6.905, "close/began": 2.874, "close/three": 6.149, "close/gate": 7.966, "close/seven": 1.926, "close/l1": 2.675, "close/l2": 2.597, "close/l3": 3.546, "close/l4": 3.163, "close/l5": 3.171, "close/l6": 2.529, "close/l7": 3.171, "close/road": 7.025, "close/next": 2.148};
+const VODUR={"first/place": 1.581, "first/ask": 7.315, "first/test": 5.557, "first/fail": 5.81, "first/nobody": 3.634, "first/harm": 2.771, "first/oct": 8.368, "first/overnight": 5.326, "first/where": 5.42, "first/change": 5.304, "first/mandate": 4.721, "first/which": 2.766, "first/limits": 2.321, "first/switch": 3.147, "first/map": 2.896, "first/signed": 4.955, "first/held": 2.888, "first/check": 4.143, "first/cause": 5.745, "first/twice": 4.636, "first/fixed": 5.423, "first/report": 3.738, "first/never": 5.846, "first/data": 7.6, "page/role": 5.845, "page/line": 4.248, "page/file": 4.135, "page/test": 7.258, "page/pr": 2.767, "page/else": 3.875, "page/prod": 6.049, "page/never": 7.104, "page/first": 5.976, "page/twice": 2.718, "page/gate": 5.833, "page/law": 7.438, "page/lag": 3.708, "page/care": 4.148, "page/one": 6.265, "held/words": 5.826, "held/grants": 6.612, "held/folders": 4.893, "held/hour": 5.236, "held/rounds": 4.016, "held/budget": 7.984, "held/first": 2.315, "held/agree": 8.728, "held/widen": 6.258, "alone/two": 3.251, "alone/bug": 7.692, "alone/may": 3.414, "alone/moved": 6.189, "alone/which": 6.13, "alone/decide": 7.798, "alone/apart": 4.455, "alone/draft": 8.093, "alone/costs": 3.984, "alone/rerun": 4.973, "stop/shown": 2.181, "stop/switch": 5.064, "stop/sp": 3.819, "stop/app": 3.27, "stop/who": 4.268, "stop/undo": 5.561, "stop/table": 8.12, "stop/back": 7.388, "stop/december": 3.026, "stop/none": 1.86, "close/morning": 7.525, "close/jun": 5.544, "close/hr": 2.764, "close/count": 6.905, "close/began": 2.874, "close/three": 6.149, "close/gate": 7.966, "close/seven": 1.926, "close/l1": 2.675, "close/l2": 2.597, "close/l3": 3.546, "close/l4": 3.163, "close/l5": 3.171, "close/l6": 2.529, "close/l7": 3.171, "close/road": 7.025, "close/next": 2.148};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title card after the opening, and the end card. */
 const BREATH={
 "first":{"hold":{"place":0.4,"ask":0.8,"test":0.8,"fail":1.0,"nobody":1.2,"harm":0.8,"oct":0.8,"overnight":1.0,"where":1.2,"change":1.4,"mandate":1.0,"which":0.8,"limits":0.8,"switch":0.8,"map":1.0,"signed":1.2,"held":1.2,"check":1.0,"cause":1.0,"twice":1.2,"fixed":1.0,"report":1.0,"never":1.2,"data":0.4},"breathe":4.4},
-"page":{"hold":{"role":1.0,"line":1.2,"file":1.2,"test":1.4,"pr":1.0,"else":1.2,"prod":1.4,"never":1.4,"first":1.2,"twice":1.2,"gate":1.2,"law":1.4,"one":1.2}},
+"page":{"hold":{"role":1.0,"line":1.2,"file":1.2,"test":1.4,"pr":1.0,"else":1.2,"prod":1.4,"never":1.4,"first":1.2,"twice":1.2,"gate":1.2,"law":1.4,"lag":1.0,"care":1.4,"one":1.2}},
 "held":{"hold":{"words":1.2,"grants":1.4,"folders":1.4,"hour":1.2,"rounds":1.2,"budget":1.4,"first":1.0,"agree":1.4,"widen":1.2}},
 "alone":{"hold":{"two":1.2,"bug":1.6,"may":1.4,"moved":1.4,"which":1.6,"decide":1.6,"apart":1.4,"draft":1.6,"costs":1.4,"rerun":1.4}},
 "stop":{"hold":{"shown":1.0,"switch":1.2,"sp":1.2,"app":1.2,"who":1.2,"undo":1.2,"table":1.4,"back":1.2,"december":1.0,"none":1.2}},
@@ -1959,6 +1961,7 @@ function wm_undoIcon(ctx,x,y,s,col,lw){ctx.save();ctx.strokeStyle=col;ctx.fillSt
      wm_yaml(ctx, x, y, w, o)   the mandate file's first lines, in mono
      wm_checks(ctx, x, y, w, o) the project's check, scripts/check/mandates.py: each place against the page
      wm_law(ctx, x, y, w, o)    Europe's AI law on human oversight: four things a person must be able to do
+     wm_lag(ctx, x, y, w, o)    the law and the technology, two arrows from one start: the law's is overtaken, and the gap is care of one's own
      wm_nights(ctx, x, y, o)    the nights in test before the mandate, one mark each
      wm_tile(ctx, x, y, w, o)   a tool where lines are held, as a small tile: its mark, its name, what it holds
      wm_moved(ctx, x, y, o)     one tutor who moved: HR's two versions of their contract, before and today */
@@ -2246,16 +2249,39 @@ function wm_checks(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=84,top=y+124,
   ctx.restore();return bb;}
 
 /* Europe's AI law, the EU AI Act, on human oversight of what it counts as high-risk (Article 14): people able to understand it, watch
-   it, reverse what it does and stop it; o.show(i) 0..1 each, o.a, o.k */
-const WM_LAW=[["understand it","what it can do, and its limits"],["watch it","while it works"],["reverse it","undo what it did"],["stop it","at any time"]];
-function wm_law(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=212+2*120,bb={x,y,w,h};if(a<=0)return bb;
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.8,1,o.k));ag_box(ctx,x,y,w,h,22,{});
+   it, reverse what it does and stop it; o.show(i) 0..1 each, o.a, o.k; o.put 0..1 puts the four away, and o.fold 0..1 folds the card
+   to its name, its top edge and its words where they were */
+const WM_LAW=[["understand it","what it can do, and its limits"],["watch it","while it works"],["reverse it","undo what it did"],["stop it","at any time"]];const WM_LAW_H=132;
+function wm_law(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,full=212+2*120,h=lerp(full,WM_LAW_H,ag_sine(o.fold||0)),bb={x,y,w,h};if(a<=0)return bb;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+full/2,lerp(0.8,1,o.k));ag_box(ctx,x,y,w,h,22,{});
   ag_T(ctx,"THE EU AI ACT · ARTICLE 14",x+28,y+52,{w:700,size:28,ls:3.5,col:AG.kick});ag_T(ctx,"Human oversight, where it counts as high-risk",x+28,y+104,{w:700,size:34});
+  const rest=1-clamp(o.put||0,0,1);if(rest<=0.01){ctx.restore();return bb;}ctx.globalAlpha*=rest;
   ag_T(ctx,"people who can",x+28,y+154,{w:600,size:28,col:AG.mut});
   const cw=(w-56-24)/2;WM_LAW.forEach((r,i)=>{const s=o.show?clamp(o.show(i),0,1):1;if(s<=0.01)return;const cx=x+28+(i%2)*(cw+24),cy=y+178+Math.floor(i/2)*120;ctx.save();ctx.globalAlpha*=s;
     ag_about(ctx,cx+cw/2,cy+50,lerp(0.85,1,Math.min(1,ag_spr(s,0,0.5))));ag_box(ctx,cx,cy,cw,100,16,{edge:AG.green,edgeA:0.5});
     ag_T(ctx,r[0],cx+24,cy+44,{w:700,size:32,col:AG.ink});ag_T(ctx,r[1],cx+24,cy+82,{w:500,size:28,col:AG.mut});ctx.restore();});
   ctx.restore();return bb;}
+
+/* Regulation moves more slowly than technology: two arrows from one start, the law's the shorter, overtaken by the technology's. What
+   lies past the law's head, as far as the technology's, the law doesn't reach yet: care of one's own fills it, and most of all where a
+   system is critical. o.law, o.tech 0..1 how far each arrow has come, o.lawIn, o.techIn 0..1 their names; o.care 0..1 draws the span
+   from the law's head; o.t, with o.careAt and o.critAt, when its two pills spring in, one under the other, over the technology's arrow;
+   o.a */
+const WM_LAG={law:0.4,rows:[40,190],crit:72};
+function wm_lag(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const x0=x+262,x1=x+w-24,yl=y+WM_LAG.rows[0],yt=y+WM_LAG.rows[1],xe=lerp(x0,x1,WM_LAG.law);
+  ctx.save();ctx.globalAlpha*=a;ctx.lineCap="round";
+  // one start for both
+  const sa=Math.max(o.lawIn||0,o.techIn||0);if(sa>0.01){ctx.strokeStyle=rgba(AG.mut,0.35*sa);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(x0-14,yl-30);ctx.lineTo(x0-14,yt+30);ctx.stroke();}
+  const row=(name,col,yy,ia,xh)=>{if(ia<=0.01)return;ag_T(ctx,name,x+6,yy+12,{w:700,size:34,col,a:ia});if(xh-x0<4)return;ctx.save();ctx.globalAlpha*=ia;
+    ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=9;ctx.beginPath();ctx.moveTo(x0,yy);ctx.lineTo(Math.max(x0,xh-20),yy);ctx.stroke();ag_arrowHead(ctx,xh-10,yy,0,21,rgba(col,0.95));ctx.restore();};
+  row("the law",AG.blue,yl,clamp(o.lawIn||0,0,1),lerp(x0,xe,clamp(o.law||0,0,1)));
+  row("technology",AG.violet,yt,clamp(o.techIn||0,0,1),lerp(x0,x1,clamp(o.tech||0,0,1)));
+  // past the law's head, as far as the technology's: care of one's own
+  const cr=clamp(o.care||0,0,1),g0=xe+30;if(cr>0.01){ctx.save();ctx.strokeStyle=rgba(AG.green,0.9);ctx.lineWidth=6;ctx.setLineDash([16,14]);ctx.beginPath();ctx.moveTo(g0,yl);ctx.lineTo(lerp(g0,x1-4,ag_sine(cr)),yl);ctx.stroke();ctx.setLineDash([]);
+    if(cr>0.9){ctx.globalAlpha*=clamp((cr-0.9)*10,0,1);ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(x1-4,yl-20);ctx.lineTo(x1-4,yl+20);ctx.stroke();}ctx.restore();}
+  if(o.t!=null&&o.careAt!=null)wm_pillAt(ctx,(g0+x1)/2,yl,"your own care",o.t,o.careAt,null,{icon:"tick",col:AG.green});
+  if(o.t!=null&&o.critAt!=null)wm_pillAt(ctx,(g0+x1)/2,yl+WM_LAG.crit,"most of all in critical systems",o.t,o.critAt,null,{icon:"warn",col:AG.amber});
+  ctx.restore();}
 
 /* the nights in test before the mandate: n marks in a row, each a small moon with a green tick under it (o.n, o.u 0..1 how many shown) */
 function wm_nights(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,n=o.n||14,u=clamp(o.u==null?1:o.u,0,1);if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
@@ -2601,6 +2627,8 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,T=wm_once(sc,"T",()=>({
     sameErr:wAt(sc,"twice","The same error twice"),stops:wAt(sc,"twice","it stops"),
     signing:wAt(sc,"gate","Signing it"),gateW:wAt(sc,"gate","its gate"),fourteen:wAt(sc,"gate","fourteen nights"),miss:wAt(sc,"gate","without a miss"),
     risk:wAt(sc,"law","high-risk"),und:wAt(sc,"law","understand it"),watch:wAt(sc,"law","watch it"),rev:wAt(sc,"law","reverse it"),stopW:wAt(sc,"law","stop it"),
+    reg:wAt(sc,"lag","regulation"),tech:wAt(sc,"lag","technology"),
+    careW:wAt(sc,"care","more care"),crit:wAt(sc,"care","critical systems"),
     oneKind:wAt(sc,"one","one kind of task"),word:wAt(sc,"one","a word about staff"),suggests:wAt(sc,"one","only suggests")}));
   const P2=c.file-0.5,P3=c.test-0.6,P4=c.gate-0.6,P5=c.law-0.6,P6=c.one-0.6;
   // the detail cards beside the page, one after another, each with the page's row it opens
@@ -2637,9 +2665,12 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,T=wm_once(sc,"T",()=>({
       wm_stages(cx,150,800,1660,{k:[0,1,2,3,4].map(i=>ag_in(tt,P4+0.3+i*0.12,0.5)),lit:[0,0,0,0,ag_in(tt,T.gateW-0.2,0.5)],dim:0.3,gates:true,passed:[1,1,1,1,pass],
         gate:{i:4,a:ag_in(tt,T.gateW-0.3,0.5),k:wm_k(tt,T.gateW-0.3),x:860,y:40}});
       const na=ag_in(tt,T.fourteen-0.3,0.4);if(na>0){ag_T(cx,"14 nights in test",180,206,{w:700,size:28,col:AG.mut,a:na});wm_nights(cx,200,262,{n:14,u:clamp((tt-T.fourteen)/1.6,0,1),a:na});}}},
-    // Europe's AI law: people who can understand it, watch it, reverse it and stop it
+    // Europe's AI law: people who can understand it, watch it, reverse it and stop it. Then its card folds to its name, and under it the
+    // law's arrow sets off and the technology's overtakes it; the gap between them is care of one's own, most of all in critical systems
     {later:true,at:P5,place:"wmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
-      wm_law(cx,360,170,1200,{a:ag_in(tt,P5+0.5,0.5),k:wm_k(tt,P5+0.5),show:i=>ag_in(tt,[T.und,T.watch,T.rev,T.stopW][i]-0.2,0.4)});}},
+      wm_law(cx,360,170,1200,{a:ag_in(tt,P5+0.5,0.5),k:wm_k(tt,P5+0.5),show:i=>ag_in(tt,[T.und,T.watch,T.rev,T.stopW][i]-0.2,0.4),put:ag_in(tt,c.lag-0.7,0.4),fold:ag_in(tt,c.lag-0.45,0.7)});
+      wm_lag(cx,360,346,1200,{t:tt,lawIn:ag_in(tt,T.reg-0.2,0.4),law:1-Math.pow(1-clamp((tt-T.reg)/(T.tech+1.6-T.reg),0,1),2),techIn:ag_in(tt,T.tech-0.2,0.4),tech:ag_sine((tt-T.tech)/1.5),
+        care:clamp((tt-T.careW+0.1)/0.9,0,1),careAt:T.careW+0.5,critAt:T.crit-0.1});}},
     // it covers one kind of task; on what a word about staff means, the same agent only suggests
     {later:true,at:P6,place:"wmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
       const b=wm_stageList(cx,420,150,1000,{a:ag_in(tt,P6+0.5,0.5),k:wm_k(tt,P6+0.5),mandate:1,lit:i=>i===3?ag_io(tt,T.oneKind-0.3,T.word-0.2,0.4):i===0?ag_in(tt,T.word-0.2,0.4):0,

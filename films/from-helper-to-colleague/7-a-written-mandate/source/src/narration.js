@@ -40,7 +40,9 @@ const NARR={
  {"id":"twice","gap":0.8,"text":"The same error twice: it stops and reports."},
  {"id":"gate","gap":0.8,"text":"Signing it was the last step of its gate to stage five, after fourteen nights in test without a miss."},
  {"id":"law","gap":0.8,"text":"Europe's AI law asks this of what it counts as high-risk: people who can understand it, watch it, reverse it and stop it."},
- {"id":"one","gap":0.8,"text":"It covers one kind of task. On what a word about staff means, the same agent only suggests."}
+ {"id":"lag","gap":0.8,"text":"But regulation usually moves more slowly than technology."},
+ {"id":"care","gap":0.8,"text":"So take more care than the law asks, most of all in critical systems."},
+ {"id":"one","gap":0.8,"text":"The mandate covers one kind of task. On what a word about staff means, the same agent only suggests."}
 ]},
 "held":{"name":"Held in every tool","lead":1.0,"tail":1.0,"vo":[
  {"id":"words","gap":0.8,"text":"A page is only words. So each line is written into the tools from the map, as every right is."},

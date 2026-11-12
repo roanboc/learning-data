@@ -84,8 +84,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Firmarlo fue el último paso de su puerta a la etapa cinco, tras catorce noches en pruebas sin un fallo.",
 "Europe's AI law asks this of what it counts as high-risk: people who can understand it, watch it, reverse it and stop it.":
 "La ley de IA de Europa pide esto a lo que considera de alto riesgo: personas que puedan entenderlo, vigilarlo, revertirlo y detenerlo.",
-"It covers one kind of task. On what a word about staff means, the same agent only suggests.":
-"Cubre un tipo de tarea. En lo que significa un término de personal, el mismo agente solo sugiere.",
+"But regulation usually moves more slowly than technology.":
+"Pero la regulación suele avanzar más despacio que la tecnología.",
+"So take more care than the law asks, most of all in critical systems.":
+"Así que ten más cuidado del que pide la ley, sobre todo en los sistemas críticos.",
+"The mandate covers one kind of task. On what a word about staff means, the same agent only suggests.":
+"El mandato cubre un tipo de tarea. En lo que significa un término de personal, el mismo agente solo sugiere.",
 "A page is only words. So each line is written into the tools from the map, as every right is.":
 "Una página son solo palabras. Así que cada línea se escribe en las herramientas desde el mapa, como todo permiso.",
 "Where it may write lives in Unity Catalog's grants: in test, only its own schema; in production, nowhere.":

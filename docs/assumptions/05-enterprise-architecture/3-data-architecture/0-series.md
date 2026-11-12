@@ -1,6 +1,6 @@
 # Data architecture: the series' own questions and assumptions
 
-*Enterprise architecture* · *Data architecture*, its labs and scenarios, for all six films
+*Enterprise architecture* · *Data architecture*, its labs and scenarios, for all six films · PR #382 · [pull request](https://github.com/roanboc/learning-data/pull/382)
 
 [Take it apart](https://data.learn-all.org/data-architecture/labs/) · [Make the call](https://data.learn-all.org/data-architecture/scenarios/)
 

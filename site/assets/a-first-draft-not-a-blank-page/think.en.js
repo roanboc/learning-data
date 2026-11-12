@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for A first draft, not a blank page, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (draft, review, confirm), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the
+   series' labs page (the page's .player data-labs is "../labs/"); a question without one has no lab link. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  draft:{q:"Tomás asks the map agent for a first draft before the workshops. What does the draft give them?",
+    opts:[{t:"A design the owners can sign off as a whole, since every element in it shows its source.",near:true},{t:"A way to skip the workshops, since the industry's reference models already describe how any utility works."},{t:"Something to react to: people answer a proposal better than they describe everything from nothing.",ok:true}],
+    why:"Asked to describe everything from nothing, the last new service's workshops ran for eight months. A draft gives people something to react to, and they answer a proposal better than an open question: the workshops start from it. It doesn't replace them, and nobody signs it off as a whole: each owner confirms their own part, element by element, and a source shows where an element came from, not that it's right for this utility. In your organisation, where does a new design start?"},
+  review:{q:"Why does Tomás ask the owners what's missing and what's wrong, not whether the draft is right?",
+    opts:[{t:"People tend to nod through anything that looks confident, and a tidy draft looks confident.",ok:true},{t:"Each element shows its source, so the owners only need to look for what the sources left out.",near:true},{t:"Asking whether it's right would make the owners answer for work the agent did, not them."}],
+    why:"A tidy draft has a risk: people tend to nod through what looks confident, so Tomás asks what's missing and what's wrong. Sources help each owner check a line, but they aren't enough: Ama found a step that joined two sources, each right on its own, and carried customer information across the wall; Grace found a step no document had, switching the battery off before crews work. The owners answer for their parts either way. In your reviews, which question do you ask?"},
+  confirm:{q:"Who confirms an element before it becomes part of the model?",
+    opts:[{t:"The map agent, once an owner has corrected that element and the agent has drafted it once again.",near:true},{t:"Its owner: Grace for the network's, the head of retail for retail's, and Ama for the rules.",ok:true},{t:"Tomás, as the architect who asked for the draft and ran the review with the owners."}],
+    why:"The agent drafts; it never confirms. Each element names its owner, and only that owner confirms it, with their name and the date: Grace for the network's, the head of retail for retail's, Ama for the rules. What an owner corrects, the agent drafts again for them to confirm; what they strike out leaves the map. Tomás asks the questions and keeps the map, but he doesn't confirm another team's part. In your organisation, who confirms what the model says about their work?"}
+  }}};

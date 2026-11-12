@@ -1,0 +1,24 @@
+{
+  "key": "a-first-draft-not-a-blank-page",
+  "title": "A first draft, not a blank page",
+  "sub": "AI and continuous architecture: an agent drafts a first design for a new service from the industry's reference models and the organisation's own documents, every element with its source and unconfirmed; the owners say what's missing and what's wrong, and only what they confirm becomes the model.",
+  "howto": "Clay and dawn are Babylon, over 2,600 years ago: the old foundation of its temple-tower, and the form it was rebuilt in. In the present, a teal orb is the map agent. Its draft is paper: notes pinned to a wall, each with its source clipped to it and a half-filled dot, unconfirmed. A note an owner confirms turns to glass, with their name and the date. Blue is the network and rose is retail, with the wall between them; gold marks owners and the business side, cyan the technical side.",
+  "src": [
+    "../../../shared/src/aca.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["found", "socle", 4.2],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bNabopolassar's\\b", "Nabbo-poe-lassar's"],
+    ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
+    ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],
+    ["\\bUr\\b", "Oor"],
+    ["\\bsocle\\b", "soh-kul"],
+    ["\\bCIM\\b", "C I M"],
+    ["\\bIEC's\\b", "I E C's"],
+    ["\\bIEC\\b", "I E C"]
+  ]
+}

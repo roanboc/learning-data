@@ -108,9 +108,11 @@ const QV={g14:G(14),g38:G(38.3),g60:G(-60,V.tuition),g100:G(9900,V.revenue),g3:G
   reload:c=>{versionPane(c,25,60,270,190,"41","Tue 02:00",11340,RED,"");versionPane(c,305,60,270,190,"43","Tue 11:30",8240,GRN,"");},
   note:c=>committeeDash(c,60,40,480,240,{num:8200,note:true,s:0.8,noteText:"Last good data as of Mon 02:00"}),
   steps:c=>{[RED,LAYER.bronze,ADM,TECH,GRN,GRN].forEach((col,i)=>tag(c,300,48+i*46,(i+1)+"  "+V.steps[i],col,{align:"center",size:18}));}};
-/* an order scenario's first showing: its steps mixed the same way each time, and never already in order (the first mix alone
-   left 3 or 7 steps just as they were) */
-const mixed=n=>{const by=m=>Array.from({length:n},(_,i)=>i).sort((a,b)=>((a*m+3)%n)-((b*m+3)%n));return [7,5,3,2].map(by).find(o=>o.some((k,p)=>k!==p))||by(1).reverse();};
+/* an order scenario's first showing: its steps mixed, the same way each time for one scenario and another way for the next, and
+   never in order, in reverse, in either from some step on round to the one before it, or with more than a few steps where
+   they belong or still following one another (the first mix left 3 or 7 steps as they were, turned 4 round and cut 6 in two,
+   and did the same to every scenario) */
+const mixed=(n,s)=>{const hs=x=>{x=Math.imul(x^x>>>16,0x45d9f3b);x=Math.imul(x^x>>>16,0x45d9f3b);return(x^x>>>16)>>>0;},run=o=>[1,n-1].some(d=>o.every((k,p)=>!p||(k-o[p-1]+n)%n===d)),fine=o=>n<4?o.some((k,p)=>k!==p):!run(o)&&o.filter((k,p)=>k===p).length<=n/4&&o.filter((k,p)=>p&&k===o[p-1]+1).length<=n/3;for(let t=0;t<60;t++){const key=Array.from({length:n},(_,i)=>hs(((s|0)+1)*7919+t*104729+i*1013+n)),o=key.map((_,i)=>i).sort((a,b)=>key[a]-key[b]||a-b);if(fine(o))return o;}return Array.from({length:n},(_,i)=>(2*i+1)%(n|1));};
 const quizApp=document.getElementById("tg-quiz");
 if(quizApp){quizApp.textContent="";const QS=L.qs,ans=get("quiz",{});let cur=0;
   const bar=h("div",{class:"qbar"}),dots=h("div",{class:"dots",role:"group","aria-label":U.qsLabel}),score=h("p",{class:"score"}),card=h("div");bar.append(dots,score);quizApp.append(h("div",{class:"quiz"},bar,card));
@@ -125,7 +127,7 @@ if(quizApp){quizApp.textContent="";const QS=L.qs,ans=get("quiz",{});let cur=0;
     body.append(h("p",{class:"qtag",style:"--c:"+((labOf(q.lab)||{}).c||"#78c8ff")},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+QS.length),h("h3",null,q.title),h("p",{class:"qsit"},q.sit));
     if(q.type==="choice"){const box=h("div",{class:"qopts"});q.opts.forEach((o,i)=>box.append(h("button",{type:"button",class:"qopt",onclick:()=>{[...box.children].forEach((b,j)=>{b.disabled=true;if(q.opts[j].ok)b.classList.add("ok");});
       if(!o.ok){box.children[i].classList.add("no");box.children[i].append(h("small",null,o.why));}done(!!o.ok);out.replaceChildren(feed(!!o.ok,q),foot(q));}},h("span",{class:"k"},"ABC"[i]),h("span",null,o.t))));body.append(box);}
-    if(q.type==="order"){let ord=mixed(q.items.length);const box=h("ol",{class:"qorder"});
+    if(q.type==="order"){let ord=mixed(q.items.length,cur);const box=h("ol",{class:"qorder"});
       const draw=()=>box.replaceChildren(...ord.map((ix,p)=>h("li",null,h("span",{class:"n"},String(p+1)),h("span",null,q.items[ix]),h("span",{class:"mv"},h("button",{type:"button","aria-label":U.up,onclick:()=>{if(p>0){[ord[p-1],ord[p]]=[ord[p],ord[p-1]];draw();}}},"↑"),h("button",{type:"button","aria-label":U.down,onclick:()=>{if(p<ord.length-1){[ord[p+1],ord[p]]=[ord[p],ord[p+1]];draw();}}},"↓")))));draw();
       body.append(box,h("button",{type:"button",class:"btn primary",onclick:e=>{const ok=ord.every((ix,p)=>ix===p);[...box.children].forEach((li,p)=>{li.classList.add(ord[p]===p?"ok":"no");li.querySelectorAll("button").forEach(b=>b.disabled=true);});e.target.remove();done(ok);out.replaceChildren(feed(ok,q),foot(q));}},U.check));}
     body.append(out);card.replaceChildren(h("div",{class:"qcard"},h("div",{class:"qvis"},vis.el),body));ready().then(()=>vis.paint());}

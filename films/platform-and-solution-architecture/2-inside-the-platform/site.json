@@ -1,0 +1,35 @@
+{
+  "kicker": "The platform's parts",
+  "kicker_es": "Las partes de la plataforma",
+  "title_es": "Dentro de la plataforma",
+  "h1": "Inside the platform: the parts every data platform needs",
+  "h1_es": "Dentro de la plataforma: las partes que toda plataforma de datos necesita",
+  "lead": "Ravi Menon draws the utility's data platform by its parts before its products, then puts a product under each. One part has nothing under it: nothing watches the platform itself, and its bill is up by half, with nobody able to say why. His team builds that part from the platform's own records.",
+  "lead_es": "Ravi Menon dibuja la plataforma de datos de la empresa por sus partes antes que por sus productos, y pone un producto bajo cada una. Una no tiene nada: nada vigila la plataforma, y su factura subió un 50 % sin que nadie sepa por qué. Su equipo construye esa parte con los registros de la plataforma.",
+  "description": "A film about what a data platform has to do, drawn before what it's made of: a reference architecture of eight parts, four along the way the data goes (bring it in, store it, process it, serve it) and four across them all (catalogue and govern, secure, orchestrate, observe); a product under each, most of them Databricks, and one part with nothing under it; the platform's own records that nobody reads, and a bill up by half that nobody can explain; why watching the platform is the platform team's part, not a domain's; a tag for each domain, one dashboard and a budget for each domain, and what they found; and the reference architecture and the gap on Tomás's map.",
+  "description_es": "Una película sobre lo que una plataforma de datos tiene que hacer, dibujado antes que lo que la compone: una arquitectura de referencia de ocho partes, cuatro a lo largo del camino de los datos (traerlos, guardarlos, procesarlos, servirlos) y cuatro que las atraviesan a todas (catalogar y gobernar, proteger, orquestar, observar); un producto bajo cada una, casi todos de Databricks, y una parte sin nada debajo; los registros propios de la plataforma que nadie lee, y una factura que subió un 50 % sin que nadie sepa explicarla; por qué vigilar la plataforma le toca al equipo de la plataforma y no a un dominio; una etiqueta por dominio, un tablero y un presupuesto por dominio, y lo que encontraron; y la arquitectura de referencia y la brecha en el mapa de Tomás.",
+  "card": "Draw a data platform's parts before its products, and what's missing shows: here, nothing watched the platform itself.",
+  "card_es": "Dibuja las partes de una plataforma de datos antes que sus productos, y se ve lo que falta: aquí, nada vigilaba la plataforma.",
+  "chapters_es": {
+    "road": "El tramo más duro",
+    "draw": "Partes antes que productos",
+    "along": "Cuatro a lo largo del camino",
+    "across": "Cuatro que lo atraviesan todo",
+    "products": "Un producto bajo cada una",
+    "nothing": "Nadie vigila",
+    "whose": "De quién es esta parte",
+    "watch": "La plataforma se vigila a sí misma",
+    "practice": "La práctica de datos en el mapa",
+    "end": "Una posta en la montaña"
+  },
+  "next_h": "You've seen the parts every data platform needs. Next: one platform, or many.",
+  "next_h_es": "Viste las partes que toda plataforma de datos necesita. Sigue: una plataforma, o muchas.",
+  "past": [
+    "Hakone's station, Japan, 1618",
+    "The road's hardest stage needed a station of its own, kept by the road's owner for every traveller."
+  ],
+  "past_es": [
+    "La posta de Hakone, Japón, 1618",
+    "El tramo más duro del camino necesitaba una posta propia, mantenida por el dueño del camino para todo viajero."
+  ]
+}

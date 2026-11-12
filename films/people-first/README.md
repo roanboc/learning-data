@@ -32,7 +32,7 @@ The module's rules hold. The [proposal](proposal.md) adds these, for every film 
 - **Nobody is labelled, and nothing is diagnosed.** A person's way of working is shown in their own words, and the films say once where a manager's part ends.
 - **Private matters stay private.**
 - **The people are never the grass.** At the bridge, the people are the ones who build.
-- **Two traditions, told with respect:** from their own sources, the bridge in the present tense, and with no judgement of custom.
+- **Two traditions, told with respect:** from their own sources, the bridge as the living practice it is, with its dates as the sources give them, and with no judgement of custom.
 - **Nothing personal from the author's papers** is shown or named.
 
 ## When its opening film is out

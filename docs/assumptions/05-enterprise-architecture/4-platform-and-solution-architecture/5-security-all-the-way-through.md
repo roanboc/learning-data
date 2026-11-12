@@ -1,6 +1,6 @@
 # Security all the way through: questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, film 5 of 8 · PR #PR · [pull request](https://github.com/roanboc/learning-data/pull/PR)
+*Enterprise architecture* · *Platform and solution architecture*, film 5 of 8 · PR #379 · [pull request](https://github.com/roanboc/learning-data/pull/379)
 
 [Watch it on the site](https://data.learn-all.org/platform-and-solution-architecture/security-all-the-way-through/)
 

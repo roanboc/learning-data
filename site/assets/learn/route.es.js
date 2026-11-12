@@ -762,6 +762,12 @@ window.LD_ROUTE = {
       "ld-when-someone-falls-behind",
       "ld-growing-people"
      ]
+    },
+    {
+     "id": "people-first",
+     "soon": true,
+     "title": "Las personas primero",
+     "kicker": "Serie · 4 películas"
     }
    ]
   }

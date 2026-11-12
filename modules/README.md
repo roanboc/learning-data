@@ -407,6 +407,12 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 
 Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 
+### People first
+
+Source: [films/people-first](../films/people-first/) · Portal: `/people-first/`
+
+No film source yet.
+
 ### The new skills
 
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`

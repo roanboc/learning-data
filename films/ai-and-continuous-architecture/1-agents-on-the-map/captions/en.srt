@@ -1,0 +1,259 @@
+1
+00:00:01,400 --> 00:00:10,333
+Babylon, about 620 BCE. At the heart of the city stands the temple-tower of its god, Marduk: Etemenanki.
+
+2
+00:00:11,933 --> 00:00:19,893
+Its new king, Nabopolassar, finds it in ruins. In his own words, it had become very weak, and had been allowed to collapse.
+
+3
+00:00:21,593 --> 00:00:26,154
+For the people of Babylon, the house of their god lay broken at the centre of their city.
+
+4
+00:00:27,554 --> 00:00:34,124
+It had to stand again: the king writes that Marduk commanded him to raise it, its top to rival the heavens.
+
+5
+00:00:35,524 --> 00:00:42,743
+No one crew could build it: its base was about ninety metres on each side, and every brick was made and carried by hand.
+
+6
+00:00:44,143 --> 00:00:52,136
+So no one was told to build the whole tower. Surveyors measured the ground with a rod, and master builders stretched ropes for its plan.
+
+7
+00:00:53,536 --> 00:01:02,168
+The work was split into tasks: moulding mud bricks, firing them in kilns, carrying baskets, and bringing bitumen, a natural tar, by river.
+
+8
+00:01:03,968 --> 00:01:09,202
+And the king answered for the work: at its foundation, he carried bricks on his head himself.
+
+9
+00:01:10,602 --> 00:01:16,137
+When he died, in 605 BCE, the tower stood about fifteen metres high.
+
+10
+00:01:17,537 --> 00:01:24,769
+His son, Nebuchadnezzar, finished it with people from many lands, and their god's house stood again at the heart of the city.
+
+11
+00:01:26,969 --> 00:01:31,194
+Today, the utility's work has many hands too, and some of them are agents.
+
+12
+00:01:31,994 --> 00:01:39,339
+Given a task, a role and someone who answers, an agent helps. Given a whole job, it can harm the people it serves.
+
+13
+00:01:47,339 --> 00:01:50,723
+Tomás's new note asks where agents belong on the map.
+
+14
+00:01:52,123 --> 00:01:57,625
+His map shows the whole utility in six layers, from why it exists down to what it runs on.
+
+15
+00:01:59,425 --> 00:02:07,181
+Two of its applications are agents: the outage agent proposes which fault matters most, and the map agent drafts changes.
+
+16
+00:02:08,981 --> 00:02:15,146
+Each is software in a role, with its rights written down and an owner: Grace for one, Tomás for the other.
+
+17
+00:02:16,946 --> 00:02:23,769
+This series adds what's around them: the AI platform, AI in the architects' own work, and a map kept alive.
+
+18
+00:02:25,369 --> 00:02:32,397
+How an agent works is the AI agents module's; here, the map shows where agents work, and who answers for them.
+
+19
+00:02:35,597 --> 00:02:41,517
+Then Farah brings a household, behind on their bill. They asked the website's chat for more time to pay.
+
+20
+00:02:43,117 --> 00:02:46,808
+The chat said yes: a plan over three months, and no late fee.
+
+21
+00:02:48,408 --> 00:02:53,415
+Two weeks later, their bill came with a late fee, and a warning that their power could be cut.
+
+22
+00:02:55,615 --> 00:03:01,229
+The chat is an agent: its vendor switched it on in an update to the contact centre's software.
+
+23
+00:03:02,829 --> 00:03:08,693
+Nobody put it on the map. It was given a whole activity, payment requests, so it agreed plans.
+
+24
+00:03:10,293 --> 00:03:16,743
+But agreeing a plan is a billing officer's decision, under the regulator's rules for households who can't pay.
+
+25
+00:03:18,343 --> 00:03:25,371
+It wrote each plan in the contact centre's notes, which billing doesn't read: 212 plans in six weeks.
+
+26
+00:03:29,371 --> 00:03:37,535
+How many agents work here? The IT service management tool can't say: it lists applications, not what's switched on inside them.
+
+27
+00:03:38,735 --> 00:03:47,902
+So Tomás looks where agents leave traces: vendors' release notes and contracts, logs of calls to language models, and each team's answer.
+
+28
+00:03:49,302 --> 00:03:57,286
+He finds three more: a crew planner the network's analysts built, and a meter agent that drafts a work order when a meter goes quiet.
+
+29
+00:03:58,886 --> 00:04:03,172
+And the field app's assistant, which answers crews' questions from the manuals.
+
+30
+00:04:03,972 --> 00:04:11,644
+Inside billing, an assistant works on each officer's sign-in: a helper, with that person's rights, not an agent of its own.
+
+31
+00:04:13,044 --> 00:04:15,916
+Six agents and a helper, where the map showed two.
+
+32
+00:04:19,716 --> 00:04:27,932
+On the map, an agent is drawn as ArchiMate 4 draws software that works beside people: an application, assigned to a role.
+
+33
+00:04:29,732 --> 00:04:31,955
+A role of its own, never a person's.
+
+34
+00:04:33,555 --> 00:04:40,379
+In a billing officer's role, the chat would hold every right an officer holds, and no one could tell its work from theirs.
+
+35
+00:04:42,379 --> 00:04:49,413
+And it covers tasks, never a whole activity: the activity, and the decisions in it, stay with the people who own them.
+
+36
+00:04:52,213 --> 00:04:58,159
+Helping a household that can't pay is a process, written down, and its owner is the head of retail.
+
+37
+00:04:59,559 --> 00:05:08,364
+For each task, its owner sets how far the agent may go: inform a person, draft for them, verify their work, or run the task alone.
+
+38
+00:05:10,164 --> 00:05:14,024
+Answering a question about a bill: run. It may do that alone.
+
+39
+00:05:15,424 --> 00:05:23,019
+Taking a request for more time: draft. It writes the request for a billing officer, and tells the household when they'll hear back.
+
+40
+00:05:24,419 --> 00:05:28,382
+Telling the officer what the household owes, and has paid: inform.
+
+41
+00:05:29,782 --> 00:05:33,345
+Agreeing the plan: not at all. That stays with the officer.
+
+42
+00:05:34,945 --> 00:05:40,952
+Checking that the plan follows the hardship rules: verify. It checks, and the officer decides.
+
+43
+00:05:42,352 --> 00:05:47,478
+How an agent earns more is the AI agents module's Five stages, not a switch.
+
+44
+00:05:50,278 --> 00:05:55,539
+It works under its own identity, never a person's: one for each set of rights it needs.
+
+45
+00:05:56,939 --> 00:06:01,204
+One may read bills. The other may only write requests into billing's queue.
+
+46
+00:06:02,804 --> 00:06:07,106
+So every log says which agent did what, and it can be stopped on its own.
+
+47
+00:06:08,906 --> 00:06:11,460
+Its role says when it hands over, and to whom.
+
+48
+00:06:12,660 --> 00:06:19,463
+Anyone who mentions hardship, illness or life support goes to a person, the same day, and the agent says so.
+
+49
+00:06:23,063 --> 00:06:27,655
+Farah asks what the map couldn't say: when the agent is wrong, who answers for it?
+
+50
+00:06:28,455 --> 00:06:34,480
+Not the vendor, which answers to the utility under its contract. Not Tomás, who draws the map.
+
+51
+00:06:35,880 --> 00:06:42,276
+The head of retail, who owns the process and set its tasks, answers for it, as for anyone in that team.
+
+52
+00:06:44,076 --> 00:06:51,376
+AI frameworks, such as NIST's and ISO's, ask the same: a named person accountable for each AI system.
+
+53
+00:06:52,176 --> 00:06:55,386
+And it never approves. Approving is a person's job.
+
+54
+00:06:58,786 --> 00:07:06,668
+One by one, every agent goes on the map: its role, its tasks and how far, its identity, its hand-off, and who answers.
+
+55
+00:07:08,468 --> 00:07:13,765
+The crew planner drafts rosters, a supervisor approves them, and Grace answers for it.
+
+56
+00:07:14,565 --> 00:07:19,262
+The vendor's setting that let the chat agree plans is switched off. It drafts them now.
+
+57
+00:07:20,662 --> 00:07:28,192
+With every change, a check runs on the map: no agent without a role, an identity, a hand-off and a person who answers.
+
+58
+00:07:29,792 --> 00:07:34,939
+The field app's assistant is flagged: its vendor hasn't said which identity it uses.
+
+59
+00:07:36,339 --> 00:07:43,045
+And the 212 plans? Billing honours every one, refunds the late fees, and calls each household.
+
+60
+00:07:46,845 --> 00:07:53,463
+Many scholars think Babylon's tower may have inspired the story of the Tower of Babel, in the Book of Genesis.
+
+61
+00:07:54,263 --> 00:08:00,924
+In the story, the builders all speak one language, until they can no longer understand each other, and stop building.
+
+62
+00:08:02,524 --> 00:08:06,791
+Babylon's real builders came from many lands, and spoke many languages.
+
+63
+00:08:08,191 --> 00:08:12,814
+What they shared was the plan: a task for each, and a name that answered for the work.
+
+64
+00:08:18,214 --> 00:08:26,586
+Tomás's note has its answer: each agent in a role of its own, with its tasks, its identity, a hand-off and someone who answers.
+
+65
+00:08:28,386 --> 00:08:30,394
+Next, the platform they all run on.

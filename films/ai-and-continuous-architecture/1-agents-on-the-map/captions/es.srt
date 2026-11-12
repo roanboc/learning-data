@@ -1,0 +1,259 @@
+1
+00:00:01,400 --> 00:00:10,333
+Babilonia, hacia el 620 a. C. En el corazón de la ciudad se alza la torre-templo de su dios, Marduk: Etemenanki.
+
+2
+00:00:11,933 --> 00:00:19,893
+Su nuevo rey, Nabopolasar, la encuentra en ruinas. En sus propias palabras, se había debilitado mucho y la habían dejado derrumbarse.
+
+3
+00:00:21,593 --> 00:00:26,154
+Para la gente de Babilonia, la casa de su dios yacía rota en el centro de su ciudad.
+
+4
+00:00:27,554 --> 00:00:34,124
+Tenía que volver a alzarse: el rey escribe que Marduk le ordenó levantarla, con su cima a la altura de los cielos.
+
+5
+00:00:35,524 --> 00:00:42,743
+Ninguna cuadrilla sola podía construirla: su base medía unos noventa metros por lado, y cada ladrillo se hacía y se cargaba a mano.
+
+6
+00:00:44,143 --> 00:00:52,136
+Así que nadie recibió la torre entera. Los agrimensores midieron el suelo con una vara, y los maestros de obra trazaron su planta con cuerdas.
+
+7
+00:00:53,536 --> 00:01:02,168
+El trabajo se dividió en tareas: moldear ladrillos de barro, cocerlos en hornos, cargar canastas y traer por el río betún, un alquitrán natural.
+
+8
+00:01:03,968 --> 00:01:09,202
+Y el rey respondía por la obra: en sus cimientos, él mismo cargó ladrillos sobre la cabeza.
+
+9
+00:01:10,602 --> 00:01:16,137
+Cuando murió, en el 605 a. C., la torre tenía unos quince metros de alto.
+
+10
+00:01:17,537 --> 00:01:24,769
+Su hijo, Nabucodonosor, la terminó con gente de muchas tierras, y la casa de su dios volvió a alzarse en el corazón de la ciudad.
+
+11
+00:01:26,969 --> 00:01:31,194
+Hoy, el trabajo de la empresa también tiene muchas manos, y algunas son agentes.
+
+12
+00:01:31,994 --> 00:01:39,339
+Con una tarea, un rol y alguien que responde, un agente ayuda. Con un trabajo entero, puede dañar a la gente a la que sirve.
+
+13
+00:01:47,339 --> 00:01:50,723
+La nueva nota de Tomás pregunta dónde van los agentes en el mapa.
+
+14
+00:01:52,123 --> 00:01:57,625
+Su mapa muestra toda la empresa en seis capas, desde por qué existe hasta lo que la hace funcionar.
+
+15
+00:01:59,425 --> 00:02:07,181
+Dos de sus aplicaciones son agentes: el agente de cortes propone qué falla importa más, y el agente del mapa redacta cambios.
+
+16
+00:02:08,981 --> 00:02:15,146
+Cada uno es software en un rol, con sus permisos por escrito y un responsable: Grace para uno, Tomás para el otro.
+
+17
+00:02:16,946 --> 00:02:23,769
+Esta serie suma lo que los rodea: la plataforma de IA, la IA en el trabajo de los propios arquitectos y un mapa que sigue vivo.
+
+18
+00:02:25,369 --> 00:02:32,397
+Cómo funciona un agente lo cuenta el módulo de agentes de IA; aquí, el mapa muestra dónde trabajan, y quién responde por ellos.
+
+19
+00:02:35,597 --> 00:02:41,517
+Entonces Farah trae el caso de un hogar atrasado con su factura. Le pidió al chat del sitio web más tiempo para pagar.
+
+20
+00:02:43,117 --> 00:02:46,808
+El chat dijo que sí: un plan en tres meses, y sin recargo por atraso.
+
+21
+00:02:48,408 --> 00:02:53,415
+Dos semanas después, su factura llegó con un recargo por atraso, y un aviso de que podían cortarles la luz.
+
+22
+00:02:55,615 --> 00:03:01,229
+El chat es un agente: su proveedor lo activó en una actualización del software del centro de contacto.
+
+23
+00:03:02,829 --> 00:03:08,693
+Nadie lo puso en el mapa. Se le dio una actividad entera, las solicitudes de pago, así que acordaba planes.
+
+24
+00:03:10,293 --> 00:03:16,743
+Pero acordar un plan lo decide un gestor de facturación, según las reglas del regulador para los hogares que no pueden pagar.
+
+25
+00:03:18,343 --> 00:03:25,371
+Escribía cada plan en las notas del centro de contacto, que facturación no lee: 212 planes en seis semanas.
+
+26
+00:03:29,371 --> 00:03:37,535
+¿Cuántos agentes trabajan aquí? La herramienta de gestión de servicios de TI no lo sabe: lista aplicaciones, no lo que está activado dentro de ellas.
+
+27
+00:03:38,735 --> 00:03:47,902
+Así que Tomás busca sus rastros: notas de versión y contratos de proveedores, registros de llamadas a modelos de lenguaje, y la respuesta de cada equipo.
+
+28
+00:03:49,302 --> 00:03:57,286
+Halla tres más: un planificador de cuadrillas de los analistas de la red, y un agente de medidores que redacta una orden de trabajo si un medidor calla.
+
+29
+00:03:58,886 --> 00:04:03,172
+Y el asistente de la app de campo, que contesta las preguntas de las cuadrillas con los manuales.
+
+30
+00:04:03,972 --> 00:04:11,644
+Dentro de facturación, un asistente trabaja con el acceso de cada gestor: un ayudante, con los permisos de esa persona, no un agente propio.
+
+31
+00:04:13,044 --> 00:04:15,916
+Seis agentes y un ayudante, donde el mapa mostraba dos.
+
+32
+00:04:19,716 --> 00:04:27,932
+En el mapa, un agente se dibuja como ArchiMate 4 dibuja el software que trabaja junto a las personas: una aplicación, asignada a un rol.
+
+33
+00:04:29,732 --> 00:04:31,955
+Un rol propio, nunca el de una persona.
+
+34
+00:04:33,555 --> 00:04:40,379
+En el rol de un gestor de facturación, el chat tendría todos los permisos de un gestor, y nadie podría distinguir su trabajo del de ellos.
+
+35
+00:04:42,379 --> 00:04:49,413
+Y cubre tareas, nunca una actividad entera: la actividad, y las decisiones que hay en ella, se quedan con las personas responsables.
+
+36
+00:04:52,213 --> 00:04:58,159
+Ayudar a un hogar que no puede pagar es un proceso, por escrito, y su responsable es quien dirige comercialización.
+
+37
+00:04:59,559 --> 00:05:08,364
+En cada tarea, su responsable fija hasta dónde llega el agente: informar a una persona, redactar para ella, verificar su trabajo o ejecutarla solo.
+
+38
+00:05:10,164 --> 00:05:14,024
+Responder una pregunta sobre una factura: ejecutar. Puede hacerlo solo.
+
+39
+00:05:15,424 --> 00:05:23,019
+Recibir un pedido de más plazo: redactar. Escribe la solicitud para un gestor de facturación, y le dice al hogar cuándo tendrá respuesta.
+
+40
+00:05:24,419 --> 00:05:28,382
+Decirle al gestor cuánto debe el hogar, y cuánto ha pagado: informar.
+
+41
+00:05:29,782 --> 00:05:33,345
+Acordar el plan: nada. Eso se queda con el gestor.
+
+42
+00:05:34,945 --> 00:05:40,952
+Comprobar que el plan cumple las reglas para hogares en dificultades: verificar. Comprueba, y el gestor decide.
+
+43
+00:05:42,352 --> 00:05:47,478
+Cómo se gana más un agente: Cinco etapas, no un interruptor, del módulo de agentes de IA.
+
+44
+00:05:50,278 --> 00:05:55,539
+Trabaja con su propia identidad, nunca la de una persona: una por cada conjunto de permisos que necesita.
+
+45
+00:05:56,939 --> 00:06:01,204
+Una puede leer facturas. La otra solo puede escribir solicitudes en la cola de facturación.
+
+46
+00:06:02,804 --> 00:06:07,106
+Así, cada registro dice qué agente hizo qué, y se lo puede detener por separado.
+
+47
+00:06:08,906 --> 00:06:11,460
+Su rol dice cuándo deriva el caso, y a quién.
+
+48
+00:06:12,660 --> 00:06:19,463
+Quien mencione dificultades, una enfermedad o soporte vital pasa a una persona, el mismo día, y el agente se lo dice.
+
+49
+00:06:23,063 --> 00:06:27,655
+Farah pregunta lo que el mapa no podía decir: cuando el agente se equivoca, ¿quién responde por él?
+
+50
+00:06:28,455 --> 00:06:34,480
+No el proveedor, que responde ante la empresa según su contrato. Ni Tomás, que dibuja el mapa.
+
+51
+00:06:35,880 --> 00:06:42,276
+Quien dirige comercialización, a cargo del proceso y de fijar sus tareas, responde por él, como por cualquiera de ese equipo.
+
+52
+00:06:44,076 --> 00:06:51,376
+Los marcos de IA, como los del NIST y la ISO, piden lo mismo: alguien con nombre que rinda cuentas por cada sistema de IA.
+
+53
+00:06:52,176 --> 00:06:55,386
+Y nunca aprueba. Aprobar es trabajo de una persona.
+
+54
+00:06:58,786 --> 00:07:06,668
+Uno a uno, cada agente va al mapa: su rol, sus tareas y hasta dónde, su identidad, su derivación, y quién responde.
+
+55
+00:07:08,468 --> 00:07:13,765
+El planificador de cuadrillas redacta los turnos, un supervisor los aprueba, y Grace responde por él.
+
+56
+00:07:14,565 --> 00:07:19,262
+La opción del proveedor que dejaba al chat acordar planes queda desactivada. Ahora los redacta.
+
+57
+00:07:20,662 --> 00:07:28,192
+Con cada cambio, corre un control sobre el mapa: ningún agente sin un rol, una identidad, una derivación y una persona que responda.
+
+58
+00:07:29,792 --> 00:07:34,939
+El asistente de la app de campo queda marcado: su proveedor no ha dicho qué identidad usa.
+
+59
+00:07:36,339 --> 00:07:43,045
+¿Y los 212 planes? Facturación respeta cada uno, devuelve los recargos y llama a cada hogar.
+
+60
+00:07:46,845 --> 00:07:53,463
+Muchos estudiosos creen que la torre de Babilonia pudo inspirar el relato de la Torre de Babel, en el libro del Génesis.
+
+61
+00:07:54,263 --> 00:08:00,924
+En el relato, los constructores hablan todos una sola lengua, hasta que ya no se entienden, y dejan de construir.
+
+62
+00:08:02,524 --> 00:08:06,791
+Los verdaderos constructores venían de muchas tierras, y hablaban muchas lenguas.
+
+63
+00:08:08,191 --> 00:08:12,814
+Lo que compartían era el plan: una tarea para cada uno, y un nombre que respondía por la obra.
+
+64
+00:08:18,214 --> 00:08:26,586
+La nota de Tomás tiene su respuesta: cada agente en un rol propio, con sus tareas, su identidad, una derivación y alguien que responde.
+
+65
+00:08:28,386 --> 00:08:30,394
+Luego, la plataforma donde todos funcionan.

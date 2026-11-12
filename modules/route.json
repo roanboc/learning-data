@@ -78,15 +78,11 @@
       "id": "lead-a-team",
       "name": {"en": "lead a data team", "es": "liderar un equipo de datos"},
       "line": {
-        "en": "The organisation first, then the team, the plan and the case for it.",
-        "es": "Primero la organización, luego el equipo, el plan y su justificación."
+        "en": "The organisation first, then the people, the team, the plan and the case for it.",
+        "es": "Primero la organización, luego las personas, el equipo, el plan y su justificación."
       },
-      "stops": ["enterprise-architecture", "data-governance", "leading-a-data-team", "a-plan-in-ninety-days", "making-the-case"]
+      "stops": ["enterprise-architecture", "data-governance", "people-first", "leading-a-data-team", "a-plan-in-ninety-days", "making-the-case"]
     }
   ],
-  "upcoming": {
-    "leading-data-people": [
-      {"id": "people-first", "name": {"en": "People first", "es": "Las personas primero"}, "films": 4}
-    ]
-  }
+  "upcoming": {}
 }

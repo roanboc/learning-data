@@ -698,8 +698,21 @@ window.LD_ROUTE = {
    "group": "lead",
    "name": "Leading data people",
    "who": "For anyone who works in data, and anyone who leads the people who do",
-   "line": "The skills data work needs now, and leading the people who do it: seeing the whole, working beside agents, listening, explaining, saying no well, leading a team, owning an outcome, and growing people.",
+   "line": "The people before the work, the skills data work needs now, and leading the people who do it: knowing your team, seeing the whole, working beside agents, listening, explaining, saying no well, leading a team, owning an outcome, and growing people.",
    "items": [
+    {
+     "id": "people-first",
+     "kind": "series",
+     "title": "People first",
+     "href": "people-first/",
+     "poster": "people-before-roles-poster.jpg",
+     "kicker": "Series · 1 of 4 films",
+     "len": "8 min",
+     "min": 8.0,
+     "films": [
+      "ld-people-before-roles"
+     ]
+    },
     {
      "id": "the-new-skills",
      "kind": "series",
@@ -761,12 +774,6 @@ window.LD_ROUTE = {
       "ld-when-someone-falls-behind",
       "ld-growing-people"
      ]
-    },
-    {
-     "id": "people-first",
-     "soon": true,
-     "title": "People first",
-     "kicker": "Series · 4 films"
     }
    ]
   }
@@ -823,10 +830,11 @@ window.LD_ROUTE = {
   {
    "id": "lead-a-team",
    "name": "lead a data team",
-   "line": "The organisation first, then the team, the plan and the case for it.",
+   "line": "The organisation first, then the people, the team, the plan and the case for it.",
    "stops": [
     "enterprise-architecture",
     "data-governance",
+    "people-first",
     "leading-a-data-team",
     "a-plan-in-ninety-days",
     "making-the-case"

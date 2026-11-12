@@ -1,0 +1,267 @@
+1
+00:00:03,000 --> 00:00:07,451
+High in the Andes of Peru, the Apurímac river runs through a deep gorge.
+
+2
+00:00:09,151 --> 00:00:14,521
+Across it hangs a bridge made of grass, twisted by hand into cord: the keshwa chaca.
+
+3
+00:00:16,021 --> 00:00:20,587
+By their own account, the people there have crossed on rope since the time of the Incas.
+
+4
+00:00:21,887 --> 00:00:25,088
+It was once the only way between the communities around it.
+
+5
+00:00:26,588 --> 00:00:30,439
+Grass wears out, so the bridge has to be made new, by many hands.
+
+6
+00:00:32,139 --> 00:00:36,846
+In 1968, a steel bridge is built, almost a hundred metres away.
+
+7
+00:00:38,546 --> 00:00:42,680
+Now cars can cross the gorge with their loads, and few people need the rope.
+
+8
+00:00:44,180 --> 00:00:50,751
+A geographer who visits in 1970 finds it decaying: not raised, he writes, for a few years.
+
+9
+00:00:52,451 --> 00:00:55,812
+He expects the skill of making it to die with that generation.
+
+10
+00:00:57,912 --> 00:01:04,373
+In October 1972, one of the bridge's keepers tells two visitors what his people have decided.
+
+11
+00:01:05,673 --> 00:01:10,668
+"My people feel sad about abandoning the keshwa chaca for a new steel bridge upstream."
+
+12
+00:01:12,168 --> 00:01:14,723
+"So we're going to rebuild it when the New Year comes."
+
+13
+00:01:16,823 --> 00:01:23,435
+When the new year came, they did. Asked years later, the people there name nobody from outside who pushed them to.
+
+14
+00:01:25,135 --> 00:01:29,582
+Before, one elder says, few came to help. "Only now does everyone come."
+
+15
+00:01:31,482 --> 00:01:37,953
+Today, four communities make it new each June: about a thousand people, each family bringing its own cord.
+
+16
+00:01:39,653 --> 00:01:43,680
+They do it as minka: unpaid work, shared for everyone's benefit.
+
+17
+00:01:45,180 --> 00:01:51,045
+The communities, UNESCO says, see it as strengthening their ties, and not simply as a way across.
+
+18
+00:01:52,545 --> 00:01:57,904
+One of the builders says it more plainly: "If we stop preserving it, it would be like if we died."
+
+19
+00:02:00,204 --> 00:02:03,919
+A steel bridge could carry them across. It couldn't bring them together.
+
+20
+00:02:06,019 --> 00:02:11,416
+A data team can be read both ways too: as roles on a chart, or as the people in them.
+
+21
+00:02:12,916 --> 00:02:18,888
+Plan from the chart alone, and you plan for boxes. Know the people first, and the plan can fit them.
+
+22
+00:02:26,988 --> 00:02:32,251
+Monday 1 February 2027, a year from now, at the university.
+
+23
+00:02:33,751 --> 00:02:38,408
+Helena Novak starts as its data manager. Two sheets wait on her desk.
+
+24
+00:02:40,108 --> 00:02:46,231
+A chart of her team: seven boxes, with a role in each. And a list of forty-six open requests.
+
+25
+00:02:48,131 --> 00:02:51,557
+From those two sheets, she could plan everyone's work by lunch.
+
+26
+00:02:53,257 --> 00:02:59,043
+She does sort the list that day, as Every area, one job shows. But she changes nobody's work.
+
+27
+00:03:00,743 --> 00:03:05,027
+A chart shows who reports to whom. It doesn't show who is in the boxes.
+
+28
+00:03:07,127 --> 00:03:15,504
+There's even a standard for putting people first, ISO 27500: value your people, and count their differences as a strength.
+
+29
+00:03:17,404 --> 00:03:21,398
+So before she plans anyone's work, she sits down with each of the seven.
+
+30
+00:03:24,098 --> 00:03:28,491
+One at a time, from Monday to Thursday, where each of them works, for about an hour.
+
+31
+00:03:30,391 --> 00:03:33,731
+She asks each the same four questions, about them at work.
+
+32
+00:03:35,231 --> 00:03:37,696
+What are you proud of here? What would you like more of?
+
+33
+00:03:39,196 --> 00:03:42,464
+What gets in your way? And what should I know, to work well with you?
+
+34
+00:03:44,164 --> 00:03:48,466
+She never asks about health, family, or anything a person doesn't offer.
+
+35
+00:03:50,766 --> 00:03:58,145
+Noor Rahman, the data architect, is proud of her map of the university's data. She'd like more people to argue with it.
+
+36
+00:04:00,445 --> 00:04:07,915
+Sam Okafor runs the data platform. He's proud of each morning the data is simply there, and nobody has to ask.
+
+37
+00:04:10,215 --> 00:04:16,386
+Jun Park, the analytics engineer, is proudest when someone stops asking him, because now they know.
+
+38
+00:04:18,686 --> 00:04:24,888
+Yusuf Demir leads data governance. Ask me at the start, he says, and I can say yes more often.
+
+39
+00:04:27,188 --> 00:04:32,344
+Marta Silva, the analyst, would like to hear what became of a number after she sends it.
+
+40
+00:04:34,644 --> 00:04:40,819
+Erin Walsh, the platform engineer, started the same week as Marta. They still have lunch on Thursdays.
+
+41
+00:04:43,119 --> 00:04:49,030
+Tomás Ortega, the report developer, can tell you who reads each report, and what they do with it.
+
+42
+00:04:51,330 --> 00:04:52,828
+None of it is on the chart.
+
+43
+00:04:57,128 --> 00:05:00,257
+In those hours, Helena hears one name again and again.
+
+44
+00:05:01,757 --> 00:05:05,719
+Stuck on a number, Marta asks Jun. So does Erin, about a model.
+
+45
+00:05:07,419 --> 00:05:12,170
+Noor shows him her map before anyone else. Sam shows him a load that looks odd.
+
+46
+00:05:14,070 --> 00:05:18,996
+On the chart, Jun is one box of seven. Its one line goes up, to Helena.
+
+47
+00:05:20,896 --> 00:05:24,677
+A chart shows who manages. It doesn't show who people turn to.
+
+48
+00:05:26,977 --> 00:05:32,667
+Ubuntu, the idea behind The team comes first, says a person is a person through other people.
+
+49
+00:05:34,567 --> 00:05:40,257
+Researchers call it shared leadership: people in a team leading one another, whoever holds the title.
+
+50
+00:05:41,957 --> 00:05:47,996
+Across forty-two samples, teams that share the leading do better, most of all in how they work together.
+
+51
+00:05:49,896 --> 00:05:53,499
+Leading doesn't need a title. Anyone can lead from where they are.
+
+52
+00:05:55,599 --> 00:06:02,997
+Helena doesn't move Jun's box. She asks if he wants this, and makes room: in March, he'll be the one beside a newcomer.
+
+53
+00:06:05,697 --> 00:06:10,451
+On Friday 5 February, Helena brings all seven together in the team's room.
+
+54
+00:06:12,151 --> 00:06:16,386
+A new manager is a change, and people fear the changes they can't see.
+
+55
+00:06:18,086 --> 00:06:22,141
+So she says what she can promise: who does what stays as it is this month.
+
+56
+00:06:24,241 --> 00:06:28,852
+She doesn't promise that nothing will change: only what stays, and for how long.
+
+57
+00:06:30,752 --> 00:06:35,920
+At the gorge, four years after the steel bridge came, a keeper said what his people would keep.
+
+58
+00:06:38,020 --> 00:06:39,937
+Helena says it in her first week.
+
+59
+00:06:41,637 --> 00:06:47,330
+She has planned nobody's work yet. But she knows seven people, and they know what to expect from her.
+
+60
+00:06:54,830 --> 00:07:00,804
+At the gorge, steel could do the carrying. What people went back for was each other, and the work they share.
+
+61
+00:07:02,904 --> 00:07:07,100
+A chart and a list can carry a team's work. They can't tell you who is here.
+
+62
+00:07:09,000 --> 00:07:13,033
+On Monday, before you plan anyone's work, sit down with each person.
+
+63
+00:07:14,533 --> 00:07:18,313
+Ask about them at work: what they're proud of, and what gets in their way.
+
+64
+00:07:19,813 --> 00:07:24,077
+Notice who people turn to, whatever the chart says, and make room for it.
+
+65
+00:07:25,577 --> 00:07:27,536
+And say early what won't change yet.
+
+66
+00:07:29,436 --> 00:07:34,113
+Wellbeing is in the work, the next film, asks the next question: what do they need?
+
+67
+00:07:35,813 --> 00:07:37,785
+Know the people before you plan the work.

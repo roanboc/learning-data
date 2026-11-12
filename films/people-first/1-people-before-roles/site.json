@@ -1,0 +1,85 @@
+{
+  "kicker": "Know the people first",
+  "kicker_es": "Primero, conocer a las personas",
+  "title_es": "Las personas antes que los roles",
+  "h1": "People before roles: know the people before you plan the work",
+  "h1_es": "Las personas antes que los roles: conócelas antes de planear el trabajo",
+  "lead": "On her first day as the university's data manager, in February 2027, Helena Novak finds a chart of seven boxes and a list of 46 open requests. She could plan everyone's work by lunch. First she sits down with each of the seven, notices who the others turn to, and says what won't change yet.",
+  "lead_es": "En su primer día como gestora de datos de la universidad, en febrero de 2027, Helena Novak encuentra un organigrama de siete casillas y una lista de 46 solicitudes. Podría planear ya el trabajo de todos. Antes se sienta con cada persona, nota a quién acuden las demás y dice qué no cambia todavía.",
+  "description": "A film on knowing a team before planning its work, the opening film of People first, the series that opens the module Leading data people: a team is people before it is roles, and a chart shows who reports to whom, not who is in the boxes; ISO 27500's human-centred organisation, Ubuntu, the Andean minka and the research on shared leadership, each named once; Helena Novak's first week as the university's data manager, from Monday 1 February 2027, with a chart of seven boxes and a list of 46 open requests on her desk: she sorts the list, changes nobody's work, and sits down with each of the seven where they work, for about an hour, with the same four questions about them at work (what they're proud of, what they'd like more of, what gets in their way, and what she should know to work well with them), never about health, family or anything a person doesn't offer; she hears that four of the others turn to Jun Park when they're stuck, leaves his box where it is, asks if he wants this and makes room for it; and on Friday 5 February she tells all seven what she can promise: who does what stays as it is this month. It opens at a gorge of the Apurímac river in Peru, where a bridge of grass rope was left to decay after a steel bridge was built beside it in 1968, and its people chose to make it new again.",
+  "description_es": "Una película sobre conocer a un equipo antes de planear su trabajo, la que abre Las personas primero, la serie con la que empieza el módulo Liderar equipos de datos: un equipo es personas antes que roles, y un organigrama muestra quién depende de quién, no quién está en las casillas; la organización centrada en las personas de la norma ISO 27500, Ubuntu, la minka andina y la investigación sobre el liderazgo compartido, nombrados una vez; la primera semana de Helena Novak como gestora de datos de la universidad, desde el lunes 1 de febrero de 2027, con un organigrama de siete casillas y una lista de 46 solicitudes abiertas en el escritorio: ordena la lista, no cambia el trabajo de nadie y se sienta con cada una de las siete personas donde trabaja, cerca de una hora, con las mismas cuatro preguntas sobre ellas en el trabajo (de qué están orgullosas, de qué quisieran más, qué les estorba y qué debería saber ella para trabajar bien con cada una), nunca sobre la salud, la familia ni nada que la persona no ofrezca; oye que cuatro de las demás acuden a Jun Park cuando se atascan, deja su casilla donde está, le pregunta si quiere eso y le hace lugar; y el viernes 5 de febrero les dice a las siete lo que puede prometer: quién hace qué sigue igual este mes. Empieza en un cañón del río Apurímac, en el Perú, donde un puente de cuerda de paja quedó deteriorado después de que en 1968 se construyó a su lado un puente de acero, y su gente decidió volver a hacerlo.",
+  "card": "A chart of seven boxes and 46 requests on her first day. Before she plans anyone's work, Helena sits down with each person.",
+  "card_es": "Un organigrama de siete casillas y 46 solicitudes en su primer día. Antes de planear el trabajo de nadie, Helena se sienta con cada persona.",
+  "chapters_es": {
+    "bridge": "El puente al que volvieron",
+    "chart": "Un organigrama y una lista",
+    "seven": "Cuatro preguntas, siete personas",
+    "turn": "A quién acuden",
+    "friday": "Lo que no cambia todavía",
+    "monday": "El lunes"
+  },
+  "past": [
+    "The Apurímac gorge, 1968 to today: the bridge they went back to",
+    "A bridge of grass rope hangs across a gorge in Peru. After a steel bridge was built beside it in 1968, a visitor found it decaying. Its people chose to rebuild it, and today four communities make it new each June. A steel bridge could carry them across; it couldn't bring them together."
+  ],
+  "past_es": [
+    "El cañón del Apurímac, de 1968 a hoy: el puente al que volvieron",
+    "Un puente de cuerda de paja cuelga sobre un cañón del Perú. Después de que en 1968 se construyó a su lado un puente de acero, un visitante lo halló deteriorado. Su gente decidió reconstruirlo, y hoy cuatro comunidades lo renuevan cada junio. Un puente de acero podía llevarlos al otro lado; no podía reunirlos."
+  ],
+  "next_h": "You've seen how to know a team before you plan its work. Next: what the people need, and how the work itself gives it or takes it away.",
+  "next_h_es": "Viste cómo conocer a un equipo antes de planear su trabajo. Después: qué necesitan las personas, y cómo el propio trabajo se lo da o se lo quita.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The yearly renewal of the Q'eswachaka bridge, UNESCO",
+        "title_es": "La renovación anual del puente Q'eswachaka, UNESCO",
+        "line": "The heritage listing of 2013: four communities, three days of work, and why they see the bridge as more than a way across.",
+        "line_es": "La inscripción de 2013 como patrimonio: cuatro comunidades, tres días de trabajo, y por qué ven el puente como algo más que un paso.",
+        "href": "https://ich.unesco.org/en/RL/knowledge-skills-and-rituals-related-to-the-annual-renewal-of-the-qeswachaka-bridge-00594",
+        "href_es": "https://ich.unesco.org/es/RL/conocimientos-tecnicas-y-rituales-vinculados-a-la-renovacion-anual-del-puente-q-eswachaka-00594"
+      },
+      {
+        "title": "The spirit of the Inka survives in the Q'eswachaka bridge",
+        "title_es": "The spirit of the Inka survives in the Q'eswachaka bridge (en inglés)",
+        "line": "The Smithsonian Folklife Festival's interview with one of the bridge's builders, held in October 2014.",
+        "line_es": "La entrevista del Smithsonian Folklife Festival con uno de los constructores del puente, hecha en octubre de 2014.",
+        "href": "https://festival.si.edu/blog/2015/the-spirit-of-the-inka-survives-in-the-qeswachaka-bridge/",
+        "href_es": "https://festival.si.edu/blog/2015/the-spirit-of-the-inka-survives-in-the-qeswachaka-bridge/"
+      },
+      {
+        "title": "El Q'eswachaka de Canas (in Spanish)",
+        "title_es": "El Q'eswachaka de Canas",
+        "line": "The study by Peru's Ministry of Culture, 2015: the bridge's history, the years after the steel bridge, and its people's own words.",
+        "line_es": "El estudio del Ministerio de Cultura del Perú, de 2015: la historia del puente, los años que siguieron al puente de acero y las palabras de su gente.",
+        "href": "https://cdn.www.gob.pe/uploads/document/file/8963/ba_565c7ad9dc8b8.pdf.pdf",
+        "href_es": "https://cdn.www.gob.pe/uploads/document/file/8963/ba_565c7ad9dc8b8.pdf.pdf"
+      },
+      {
+        "title": "A meta-analysis of shared leadership and team effectiveness",
+        "title_es": "A meta-analysis of shared leadership and team effectiveness (en inglés)",
+        "line": "Wang, Waldman and Zhang, 2014: across 42 samples, teams whose members share the leading do better, most of all in how they work together.",
+        "line_es": "Wang, Waldman y Zhang, 2014: en 42 muestras, a los equipos que comparten el liderazgo les va mejor, sobre todo en cómo trabajan juntos.",
+        "href": "https://doi.org/10.1037/a0034531",
+        "href_es": "https://doi.org/10.1037/a0034531"
+      }
+    ],
+    "more": [
+      {
+        "text": "ISO 27500:2016, The human-centred organization: the standard's seven principles",
+        "text_es": "ISO 27500:2016, La organización centrada en las personas: los siete principios de la norma (en inglés)",
+        "href": "https://www.iso.org/standard/64239.html",
+        "href_es": "https://www.iso.org/standard/64239.html"
+      },
+      {
+        "text": "Safe Work Australia, Psychosocial hazards: poor change management, among the hazards of work",
+        "text_es": "Safe Work Australia, Riesgos psicosociales: la mala gestión del cambio, entre los riesgos del trabajo (en inglés)",
+        "href": "https://www.safeworkaustralia.gov.au/safety-topic/managing-health-and-safety/mental-health/psychosocial-hazards",
+        "href_es": "https://www.safeworkaustralia.gov.au/safety-topic/managing-health-and-safety/mental-health/psychosocial-hazards"
+      }
+    ]
+  }
+}

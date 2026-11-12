@@ -411,7 +411,7 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 
 Source: [films/people-first](../films/people-first/) · Portal: `/people-first/`
 
-No film source yet.
+- [People before roles](../films/people-first/1-people-before-roles/) — `people-before-roles`
 
 ### The new skills
 

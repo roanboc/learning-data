@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for People before roles, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (seven, turn, friday), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  seven:{q:"On her first day, Helena has a chart of seven boxes and a list of 46 open requests. What does she do before she plans anyone's work?",
+    opts:[{t:"She matches the 46 requests to the seven roles on the chart, so everyone has a plan by lunch."},{t:"She sits down with each of the seven, where they work, and asks how to share out the 46 requests.",near:true},{t:"She sits down with each of the seven, where they work, and asks four questions about them at work.",ok:true}],
+    why:"A chart shows who reports to whom, and a list what is asked. Neither shows who is in the boxes. Helena does sort the list that day, since people are waiting, but she changes nobody's work. First she asks each person about them at work: what they're proud of, what they'd like more of, what gets in their way, and what she should know to work well with them. She never asks about health, family or anything a person doesn't offer. What would you ask each person on a team you were new to?"},
+  turn:{q:"On the chart, Jun is one box of seven. Helena learns that four of the others turn to him when they're stuck. What does she do?",
+    opts:[{t:"She leaves his box where it is, asks him if he wants this, and makes room for it in his work.",ok:true},{t:"She moves his box up the chart and gives him a title, so the chart shows what the team does.",near:true},{t:"She asks the four to bring their questions to her, since the chart says they report to her."}],
+    why:"A chart shows who manages. It doesn't show who people turn to. Researchers call it shared leadership: people in a team leading one another, whoever holds the title, and teams that share the leading do better, most of all in how they work together. Leading doesn't need a title, so Helena doesn't move Jun's box. She asks if he wants this, and makes room: in March, he'll be the one beside a newcomer. Who do people turn to in your team, whatever the chart says?"},
+  friday:{q:"On Friday, at the end of her first week, what does Helena tell all seven?",
+    opts:[{t:"That the new plan she made from the chart and the list starts on Monday, with a task for each."},{t:"That who does what stays as it is this month: what stays the same, and for how long.",ok:true},{t:"That nothing will change while she gets to know the team, so nobody needs to worry.",near:true}],
+    why:"A new manager is a change, and people fear the changes they can't see. So Helena says early what she can promise: who does what stays as it is this month. She doesn't promise that nothing will change, only what stays, and for how long. She has planned nobody's work yet, but she knows seven people, and they know what to expect from her. What could you promise your team this month, and keep?"}
+  }}};

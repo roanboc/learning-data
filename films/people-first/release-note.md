@@ -1,0 +1,1 @@
+*People first*, the series that opens the module Leading data people, on the people before the work: who is in the team, what they need, how they differ and how they work together. Four films, listed as each one is out: {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

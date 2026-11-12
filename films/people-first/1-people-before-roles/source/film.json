@@ -1,0 +1,68 @@
+{
+  "key": "people-before-roles",
+  "title": "People before roles",
+  "sub": "The opening film of People first, in Leading data people: a team is people before it is roles. Before you plan anyone's work from a chart or a list, sit down with each person, notice who the others turn to, and say early what won't change yet.",
+  "howto": "The film is drawn in the module's sunlit plaster: a gorge in the Andes and the team's rooms, in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans (the chart of seven boxes), orange is data (the list of requests), green is something done or kept, and amber a risk or something waiting. People and their clothes wear none of them.",
+  "src": [
+    "pb_place.js",
+    "pb_bridge.js",
+    "pb_people.js",
+    "pb_uni.js",
+    "pb_scenes.js"
+  ],
+  "poster": [
+    "bridge",
+    "plan",
+    2.4
+  ],
+  "say": [
+    [
+      "\\bApurímac\\b",
+      "Apooreemak"
+    ],
+    [
+      "\\bminka\\b",
+      "meenka"
+    ],
+    [
+      "\\bJun's\\b",
+      "Joon's"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bYusuf Demir\\b",
+      "Yoosoof Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahss"
+    ],
+    [
+      "\\bOrtega\\b",
+      "Or-tega"
+    ],
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
+    ]
+  ],
+  "story": [
+    "bridge"
+  ],
+  "urgent": []
+}

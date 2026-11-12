@@ -11,6 +11,7 @@ Before the hats and the skills, the people. In February 2027, Helena Novak takes
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [People before roles](https://data.learn-all.org/people-first/people-before-roles/) | Know the people first | 7½ min | 6 | 3 questions | [script](1-people-before-roles/script.md) · [source](1-people-before-roles/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound
@@ -35,10 +36,10 @@ The module's rules hold. The [proposal](proposal.md) adds these, for every film 
 - **Two traditions, told with respect:** from their own sources, the bridge as the living practice it is, with its dates as the sources give them, and with no judgement of custom.
 - **Nothing personal from the author's papers** is shown or named.
 
-## When its opening film is out
+## With its opening film
 
-Three things wait for the series' opening film, since the site shows a series only then:
+Three things came with the series' opening film, *People before roles*, since the site shows a series only then:
 
-- the series' release note (`release-note.md`), which lists the films' videos;
-- the module's own line in [`modules/leading-data-people/module.json`](../../modules/leading-data-people/module.json), which then names the people before the skills;
-- the goal *lead a data team* in [`modules/route.json`](../../modules/route.json), which then takes *People first* as the stop before *Leading a data team*, with the series taken out of `upcoming` there.
+- the series' release note (`release-note.md`), which lists the films' videos as each one is out;
+- the module's own line in [`modules/leading-data-people/module.json`](../../modules/leading-data-people/module.json), which now names the people before the skills;
+- the goal *lead a data team* in [`modules/route.json`](../../modules/route.json), which now takes *People first* as the stop before *Leading a data team*, with the series taken out of `upcoming` there.

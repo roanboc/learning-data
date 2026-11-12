@@ -1,0 +1,267 @@
+1
+00:00:03,000 --> 00:00:07,451
+En lo alto de los Andes del Perú, el río Apurímac corre por un cañón profundo.
+
+2
+00:00:09,151 --> 00:00:14,521
+Sobre él cuelga un puente hecho de paja, torcida a mano en cuerdas: el keshwa chaca.
+
+3
+00:00:16,021 --> 00:00:20,587
+Según su propio relato, la gente de allí cruza sobre cuerda desde el tiempo de los incas.
+
+4
+00:00:21,887 --> 00:00:25,088
+Antes era el único paso entre las comunidades que lo rodean.
+
+5
+00:00:26,588 --> 00:00:30,439
+La paja se gasta, así que el puente hay que hacerlo de nuevo, entre muchas manos.
+
+6
+00:00:32,139 --> 00:00:36,846
+En 1968 se construye un puente de acero, a casi cien metros.
+
+7
+00:00:38,546 --> 00:00:42,680
+Ahora los autos cruzan el cañón con su carga, y pocos necesitan la cuerda.
+
+8
+00:00:44,180 --> 00:00:50,751
+Un geógrafo que lo visita en 1970 lo halla deteriorado: no se levanta, escribe, desde hace unos años.
+
+9
+00:00:52,451 --> 00:00:55,812
+Cree que el saber hacerlo morirá con esa generación.
+
+10
+00:00:57,912 --> 00:01:04,373
+En octubre de 1972, uno de los guardianes del puente cuenta a dos visitantes lo que su gente ha decidido.
+
+11
+00:01:05,673 --> 00:01:10,668
+«Mi gente está triste por abandonar el keshwa chaca por un nuevo puente de acero río arriba».
+
+12
+00:01:12,168 --> 00:01:14,723
+«Así que vamos a reconstruirlo cuando llegue el Año Nuevo».
+
+13
+00:01:16,823 --> 00:01:23,435
+Cuando llegó el año nuevo, lo hicieron. Años después, la gente de allí no nombra a nadie de fuera que la empujara.
+
+14
+00:01:25,135 --> 00:01:29,582
+Antes, dice un anciano, pocos venían a ayudar. «Recién ahora vienen todos».
+
+15
+00:01:31,482 --> 00:01:37,953
+Hoy, cuatro comunidades lo renuevan cada junio: unas mil personas, y cada familia trae su propia cuerda.
+
+16
+00:01:39,653 --> 00:01:43,680
+Lo hacen en minka: trabajo sin pago, compartido para el beneficio de todos.
+
+17
+00:01:45,180 --> 00:01:51,045
+Las comunidades, dice la UNESCO, lo ven como una forma de estrechar sus lazos, y no solo como un paso.
+
+18
+00:01:52,545 --> 00:01:57,904
+Uno de los constructores lo dice más claro: «Si dejamos de conservarlo, sería como si muriéramos».
+
+19
+00:02:00,204 --> 00:02:03,919
+Un puente de acero podía llevarlos al otro lado. No podía reunirlos.
+
+20
+00:02:06,019 --> 00:02:11,416
+Un equipo de datos también se lee de dos maneras: como roles en un organigrama, o como las personas en ellos.
+
+21
+00:02:12,916 --> 00:02:18,888
+Planea solo desde el organigrama, y planeas para casillas. Conoce primero a las personas, y el plan podrá ajustarse a ellas.
+
+22
+00:02:26,988 --> 00:02:32,251
+Lunes 1 de febrero de 2027, dentro de un año, en la universidad.
+
+23
+00:02:33,751 --> 00:02:38,408
+Helena Novak empieza como su gestora de datos. Dos hojas la esperan en el escritorio.
+
+24
+00:02:40,108 --> 00:02:46,231
+Un organigrama de su equipo: siete casillas, un rol en cada una. Y una lista de cuarenta y seis solicitudes abiertas.
+
+25
+00:02:48,131 --> 00:02:51,557
+Con esas dos hojas, podría planear el trabajo de todos antes del almuerzo.
+
+26
+00:02:53,257 --> 00:02:59,043
+Sí ordena la lista ese día, como muestra Todas las áreas, un trabajo. Pero no cambia el trabajo de nadie.
+
+27
+00:03:00,743 --> 00:03:05,027
+Un organigrama muestra quién responde ante quién. No muestra quién está en las casillas.
+
+28
+00:03:07,127 --> 00:03:15,504
+Hasta hay una norma para poner primero a las personas, la ISO 27500: valora a tu gente, y cuenta sus diferencias como una fortaleza.
+
+29
+00:03:17,404 --> 00:03:21,398
+Así que antes de planear el trabajo de nadie, se sienta con cada una de las siete personas.
+
+30
+00:03:24,098 --> 00:03:28,491
+Una por una, de lunes a jueves, donde trabaja cada quien, durante más o menos una hora.
+
+31
+00:03:30,391 --> 00:03:33,731
+A cada una le hace las mismas cuatro preguntas, sobre ella en el trabajo.
+
+32
+00:03:35,231 --> 00:03:37,696
+¿Qué te enorgullece aquí? ¿De qué te gustaría tener más?
+
+33
+00:03:39,196 --> 00:03:42,464
+¿Qué te estorba? ¿Y qué debo saber para trabajar bien contigo?
+
+34
+00:03:44,164 --> 00:03:48,466
+Nunca pregunta por la salud, la familia, ni nada que la persona no cuente por sí misma.
+
+35
+00:03:50,766 --> 00:03:58,145
+Noor Rahman, la arquitecta de datos, está orgullosa de su mapa de los datos de la universidad. Quisiera que más gente lo discutiera.
+
+36
+00:04:00,445 --> 00:04:07,915
+Sam Okafor lleva la plataforma de datos. Le enorgullece cada mañana en que los datos simplemente están, y nadie tiene que preguntar.
+
+37
+00:04:10,215 --> 00:04:16,386
+A Jun Park, el ingeniero de analítica, lo que más le enorgullece es que alguien deje de preguntarle, porque ya sabe.
+
+38
+00:04:18,686 --> 00:04:24,888
+Yusuf Demir lidera la gobernanza de datos. Pregúntenme al principio, dice, y podré decir que sí más veces.
+
+39
+00:04:27,188 --> 00:04:32,344
+A Marta Silva, la analista, le gustaría saber qué fue de un número después de enviarlo.
+
+40
+00:04:34,644 --> 00:04:40,819
+Erin Walsh, la ingeniera de plataforma, empezó la misma semana que Marta. Todavía almuerzan juntas los jueves.
+
+41
+00:04:43,119 --> 00:04:49,030
+Tomás Ortega, el desarrollador de informes, puede decirte quién lee cada informe, y qué hace con él.
+
+42
+00:04:51,330 --> 00:04:52,828
+Nada de eso está en el organigrama.
+
+43
+00:04:57,128 --> 00:05:00,257
+En esas horas, Helena oye un nombre una y otra vez.
+
+44
+00:05:01,757 --> 00:05:05,719
+Atascada con un número, Marta le pregunta a Jun. También Erin, por un modelo.
+
+45
+00:05:07,419 --> 00:05:12,170
+Noor le muestra su mapa antes que a nadie. Sam le muestra una carga que se ve rara.
+
+46
+00:05:14,070 --> 00:05:18,996
+En el organigrama, Jun es una casilla de siete. Su única línea va hacia arriba, a Helena.
+
+47
+00:05:20,896 --> 00:05:24,677
+Un organigrama muestra quién dirige. No muestra a quién acude la gente.
+
+48
+00:05:26,977 --> 00:05:32,667
+Ubuntu, la idea detrás de Primero el equipo, dice que una persona es persona a través de otras personas.
+
+49
+00:05:34,567 --> 00:05:40,257
+Los investigadores lo llaman liderazgo compartido: la gente de un equipo se lidera entre sí, tenga quien tenga el cargo.
+
+50
+00:05:41,957 --> 00:05:47,996
+En cuarenta y dos muestras, a los equipos que comparten el liderazgo les va mejor, sobre todo en cómo trabajan juntos.
+
+51
+00:05:49,896 --> 00:05:53,499
+Liderar no necesita un cargo. Cualquiera puede liderar desde donde está.
+
+52
+00:05:55,599 --> 00:06:02,997
+Helena no mueve la casilla de Jun. Le pregunta si quiere esto, y le hace lugar: en marzo, él acompañará a alguien nuevo.
+
+53
+00:06:05,697 --> 00:06:10,451
+El viernes 5 de febrero, Helena reúne a las siete personas en la sala del equipo.
+
+54
+00:06:12,151 --> 00:06:16,386
+Una jefa nueva es un cambio, y la gente teme los cambios que no puede ver.
+
+55
+00:06:18,086 --> 00:06:22,141
+Así que dice lo que sí puede prometer: quién hace qué sigue como está este mes.
+
+56
+00:06:24,241 --> 00:06:28,852
+No promete que nada va a cambiar: solo qué se queda, y por cuánto tiempo.
+
+57
+00:06:30,752 --> 00:06:35,920
+En el cañón, cuatro años después de que llegó el puente de acero, un guardián dijo lo que su gente iba a conservar.
+
+58
+00:06:38,020 --> 00:06:39,937
+Helena lo dice en su primera semana.
+
+59
+00:06:41,637 --> 00:06:47,330
+Todavía no ha planeado el trabajo de nadie. Pero conoce a siete personas, y ellas saben qué esperar de ella.
+
+60
+00:06:54,830 --> 00:07:00,804
+En el cañón, el acero podía encargarse del cruce. La gente volvió por los demás, y por el trabajo que comparten.
+
+61
+00:07:02,904 --> 00:07:07,100
+Un organigrama y una lista pueden llevar el trabajo de un equipo. No pueden decirte quién está aquí.
+
+62
+00:07:09,000 --> 00:07:13,033
+El lunes, antes de planear el trabajo de nadie, siéntate con cada persona.
+
+63
+00:07:14,533 --> 00:07:18,313
+Pregunta por ella en el trabajo: qué la enorgullece, y qué le estorba.
+
+64
+00:07:19,813 --> 00:07:24,077
+Fíjate a quién acude la gente, diga lo que diga el organigrama, y hazle lugar.
+
+65
+00:07:25,577 --> 00:07:27,536
+Y di pronto qué no va a cambiar todavía.
+
+66
+00:07:29,436 --> 00:07:34,113
+El bienestar está en el trabajo, la siguiente película, hace la siguiente pregunta: ¿qué necesitan?
+
+67
+00:07:35,813 --> 00:07:37,785
+Conoce a las personas antes de planear el trabajo.

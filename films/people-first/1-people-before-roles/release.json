@@ -1,0 +1,49 @@
+[
+  {
+    "name": "People before roles",
+    "key": "people-before-roles-en",
+    "dir": "films/people-first/1-people-before-roles/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/people-before-roles/film.js",
+    "video": "dist/people-before-roles.mp4",
+    "file": "people-before-roles.mp4",
+    "captions": [
+      [
+        "films/people-first/1-people-before-roles/captions/en.srt",
+        "people-before-roles.en.srt"
+      ],
+      [
+        "films/people-first/1-people-before-roles/captions/es.srt",
+        "people-before-roles.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/people-first/1-people-before-roles/source",
+      ":(exclude)films/people-first/1-people-before-roles/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 249,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

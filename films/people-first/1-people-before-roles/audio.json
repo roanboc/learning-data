@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/people-before-roles/soundtrack.mp3",
+      "size": 6517803,
+      "sha256": "0173014cf898f9faa75d92d939ef887608ac90433f9258f618540851e14aa46b",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-people-before-roles-d8fedce59d7ab3852cf9/0173014cf898f9faa75d92d939ef887608ac90433f9258f618540851e14aa46b.mp3"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ The site has twelve big topics. Start with the first, the overview; then pick th
 
 | Topic | What it covers | Films and series | For |
 |---|---|---|---|
-| Data platforms | How data moves through a modern data platform, from a tap on a phone to a decision. | [The Inner Life of Data](https://data.learn-all.org/) | Start here: for everyone |
+| Data platforms | How data moves through a modern data platform, from a tap on a phone to a decision. | [The Inner Life of Data](https://data.learn-all.org/), [More than a platform](https://data.learn-all.org/more-than-a-platform/) | Start here: for everyone |
 | Data modelling | What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system. | [A Sharper Sketch](https://data.learn-all.org/sketch/), [From words to data](https://data.learn-all.org/from-words-to-data/) | For anyone who designs models, definitions or reports |
 | Modern data basics | What today's tools make easier: moving data, running it as software, serving it to people and agents, and reading documents. The architecture only: the official docs go deeper. | [Data that moves](https://data.learn-all.org/data-that-moves/), [Data as software](https://data.learn-all.org/data-as-software/), [From tables to decisions](https://data.learn-all.org/from-tables-to-decisions/), [Documents and closing remarks](https://data.learn-all.org/documents-as-data/) | For anyone who moves, runs or serves data, and anyone choosing the tools |
 | Analytics engineering | How an agreed data model becomes tested, documented tables, with dbt. | [In the weeds of data crafting](https://data.learn-all.org/in-the-weeds/) | For analytics engineers |

@@ -20,6 +20,7 @@ A film's thread writes its questions and assumptions to that film's own file, in
 
 - [Data platforms](00-data-platforms/)
   - [The Inner Life of Data](00-data-platforms/1-inner-life-of-data.md)
+  - [More than a platform](00-data-platforms/1-more-than-a-platform/)
 - [Data modelling](01-data-modelling/)
   - [A Sharper Sketch](01-data-modelling/1-a-sharper-sketch.md)
   - [From words to data](01-data-modelling/2-from-words-to-data/)

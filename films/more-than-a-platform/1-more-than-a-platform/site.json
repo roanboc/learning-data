@@ -1,0 +1,25 @@
+{
+  "kicker": "After the introduction",
+  "kicker_es": "Después de la introducción",
+  "title_es": "Más que una plataforma",
+  "h1": "More than a platform: where the hard part of data starts",
+  "h1_es": "Más que una plataforma: donde empieza lo difícil de los datos",
+  "lead": "The platform worked. A week later, two offices bring two numbers for the same class to the same meeting, and both are right. This short film shows why, names the topics of the learning route with the question each one answers, and shows what you can do at every stop.",
+  "lead_es": "La plataforma funcionó. Una semana después, dos oficinas llevan dos cifras de la misma clase a la misma reunión, y las dos son correctas. Esta película corta muestra por qué, nombra los temas de la ruta con la pregunta que cada uno responde, y lo que puedes hacer en cada parada.",
+  "description": "A short film that follows The Inner Life of Data: a platform that works can still feed a meeting two numbers for one class, because one word means three things in three systems. It names the topics of the learning route, each with the question it answers, and shows what a visitor can do at every stop.",
+  "description_es": "Una película corta que sigue a La vida interior de los datos: una plataforma que funciona puede llevar a una reunión dos cifras de una misma clase, porque una palabra significa tres cosas en tres sistemas. Nombra los temas de la ruta de aprendizaje, cada uno con la pregunta que responde, y muestra lo que se puede hacer en cada parada.",
+  "card": "The platform worked, and two offices still bring two numbers. Why, and the route through everything else: each topic with its question.",
+  "card_es": "La plataforma funcionó, y aun así dos oficinas llevan dos cifras. Por qué, y la ruta por todo lo demás: cada tema con su pregunta.",
+  "chapters_es": {
+    "worked": "Funcionó",
+    "word": "Una palabra",
+    "route": "La ruta",
+    "wheel": "Un mapa entre muchos",
+    "here": "Lo que puedes hacer aquí",
+    "start": "Empieza"
+  },
+  "watch_p": "A short film, with no questions to stop it. Captions are on, and the chapters are under the film.",
+  "watch_p_es": "Una película corta, sin preguntas que la detengan. Los subtítulos están activados, y los capítulos están debajo.",
+  "next_h": "You've seen the route. Start with the foundations: how the organisation works, and who decides.",
+  "next_h_es": "Ya viste la ruta. Empieza por los fundamentos: cómo trabaja la organización, y quién decide."
+}

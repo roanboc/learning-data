@@ -1,0 +1,49 @@
+[
+  {
+    "name": "More than a platform",
+    "key": "more-than-a-platform-en",
+    "dir": "films/more-than-a-platform/1-more-than-a-platform/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/more-than-a-platform/film.js",
+    "video": "dist/more-than-a-platform.mp4",
+    "file": "more-than-a-platform.mp4",
+    "captions": [
+      [
+        "films/more-than-a-platform/1-more-than-a-platform/captions/en.srt",
+        "more-than-a-platform.en.srt"
+      ],
+      [
+        "films/more-than-a-platform/1-more-than-a-platform/captions/es.srt",
+        "more-than-a-platform.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/more-than-a-platform/1-more-than-a-platform/source",
+      ":(exclude)films/more-than-a-platform/1-more-than-a-platform/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 187,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

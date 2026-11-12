@@ -207,7 +207,7 @@ Labs and assessments: [site/assets/enterprise-architecture/learn.en.js](../site/
 
 Source: [films/business-architecture-for-data](../films/business-architecture-for-data/) · Portal: `/business-architecture-for-data/`
 
-No film source yet.
+- [What the business owns](../films/business-architecture-for-data/1-what-the-business-owns/) — `what-the-business-owns`
 
 ### Data architecture
 
@@ -226,6 +226,7 @@ No film source yet.
 Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-architecture/) · Portal: `/ai-and-continuous-architecture/`
 
 - [Agents on the map](../films/ai-and-continuous-architecture/1-agents-on-the-map/) — `agents-on-the-map`
+- [The AI platform](../films/ai-and-continuous-architecture/2-the-ai-platform/) — `the-ai-platform` (not published)
 
 ## Master and reference data
 

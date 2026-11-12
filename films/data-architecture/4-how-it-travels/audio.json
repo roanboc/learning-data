@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/how-it-travels/soundtrack.mp3",
+      "size": 6052614,
+      "sha256": "4d0cea705a733140c7648d1f7cc6852ec6a3ff61e6921a37694739637968ac7b",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-how-it-travels-2393f2e671b537a51962/4d0cea705a733140c7648d1f7cc6852ec6a3ff61e6921a37694739637968ac7b.mp3"
+    }
+  ]
+}

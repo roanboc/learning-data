@@ -1,6 +1,6 @@
 # Small, every week: questions and assumptions
 
-*Data quality* · *Quality as a habit*, film 4 · merged, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218); changed on 12 November 2026 from Rodrigo's answer on the loop's name, plan, do, study, act (PR #336)
+*Data quality* · *Quality as a habit*, film 4 · merged, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218); changed on 12 November 2026 from Rodrigo's answer on the loop's name, plan, do, study, act (PR #336), and that day again so the voice says Deming's name with its short e (PR #NNN)
 
 [Watch it on the site](https://data.learn-all.org/quality-as-a-habit/small-every-week/)
 
@@ -90,3 +90,13 @@ Questions this change raised, and the assumption made for each:
 | 49 | Do the module's other films and labs say plan, do, check, act? | No. Only this film names the loop, and the module has no labs yet. The module's reference table said plan, do, check, act, and now says plan, do, study, act. | `films/fit-for-use/proposal.md`; the module's row A3 | Nothing else in the module to change |
 | 50 | How much longer is the film, and does its pace hold? | 9:02, from 8:17. Chapter 3 runs 2:06 at 135 words a minute (a chapter's limit is 140), and the film is at 131. Sound: three entries more in the chapter, and `tools/quiet.py` passes (after the opening, music 35% of the time, once every 14.6 seconds). | The film; `script.md`, *Pacing report* and *Sound* | The agent's four lines are cut to two |
 | 51 | Does the example project change? | Only its notes of the Thursdays, `docs/every-week.md`, each line replaced in place. No model, check or seed changes. | `films/analytics-engineering/project/docs/every-week.md` | Nothing else to change |
+
+## 12 November 2026: Deming's name, said with its short e
+
+Rodrigo didn't ask for this change. This film's thread found it on 12 November 2026, while the leading data people film *One small change at a time* was changed (PR #351): the voice said W. Edwards Deming's name as "deeming". Here the two lines' `say` spelled it "Deeming" on purpose, since PR #218. It now says DEM-ing (PR #NNN). The questions it raised, and the assumption made for each:
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 52 | How is W. Edwards Deming's name said? | DEM-ing, with a short e, not "deeming". Read on 12 November 2026: Wikipedia gives the surname, in its article on the city of Deming, New Mexico, named for Mary Ann Deming Crocker, as DEM-ing (/ˈdɛmɪŋ/); the Japanese Wikipedia writes his own name デミング, and the prize named for him デミング賞 (デミングしょう), with a short e, in the country where he taught. His English article gives no pronunciation, and no recording of him was heard. | Chapter 3, the two lines that name him (`narration.js`, *say*: "Demming") | Two words of `say` go back, and the two lines are voiced again |
+| 53 | Does anything else in the film change? | No. The words on screen, the captions and the page are as they were: only the voice. The two lines' lengths change by under 0.1 s, the card "Deming's word: study" still comes in at his name, and the film is 9:02, as it was. | Chapter 3 | Nothing else |
+| 54 | Which other films name him in the voice? | Two, both in *Leading data people*: *One small change at a time*, which says DEM-ing since PR #351, and *Measure the work, not the people*, which follows in its own pull request, with a check that fails a line whose voice would say "deeming". | Those films | One word in each film's voice |

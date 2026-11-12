@@ -50,7 +50,7 @@ const NARR={
  {"id":"appdom","gap":0.8,"text":"Application domains flow in on one side."},
  {"id":"bsg","gap":0.8,"text":"Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful."},
  {"id":"busdom","gap":0.8,"text":"Business domains flow out on the other, into dashboards, apps and Genie."},
- {"id":"dbtgov","gap":0.8,"text":"dbt governs every step, from source to exposure, and its lineage maps every connection."},
+ {"id":"dbtgov","gap":0.8,"text":"dbt checks and documents every step, from source to exposure, and its lineage maps every connection."},
  {"id":"dbx","text":"And the Databricks lakehouse runs and stores it all, governed by Unity Catalog."}]},
 "meaning":{"name":"Meaning","lead":0.6,"tail":1.6,"vo":[
  {"id":"noise","gap":0.8,"text":"But pictures without meaning are just noise."},
@@ -91,5 +91,6 @@ const NARR={
 "end":{"name":"Pull back","lead":0.5,"tail":4.2,"vo":[
  {"id":"recap","text":"One tap became a snapshot, then a clear picture, and finally a decision:"},
  {"id":"seats","gap":0.8,"text":"a new class opens, and 140 more students get a seat."},
+ {"id":"rest","gap":0.8,"text":"The platform moved it. What it means, and who decides, is the rest of the story."},
  {"id":"tag","text":"Move less. Mean more.","gap":0.4}]}
 };

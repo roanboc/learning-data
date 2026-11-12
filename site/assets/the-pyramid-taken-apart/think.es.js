@@ -1,6 +1,7 @@
 /* Learning Data: "Pausa para pensar" de The pyramid, taken apart, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (first, levels, both), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). Una pregunta sin "stop" no tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
@@ -10,7 +11,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   "levels":{q:"El mismo registro de un corte es dato para el sistema de cortes e información para Grace. ¿Qué dice eso de los niveles?",
     opts:[{t:"No son cosas separadas: un registro es dato o información, según quién lo usa y para qué.",ok:true},{t:"El registro sube un nivel cuando Grace lo lee, así que los niveles son pasos en un orden fijo.",near:true},{t:"El sistema de cortes guarda los datos y el informe de Grace la información, en dos lugares separados."}],
     why:"DAMA lo dice claro: los datos son una forma de información, y la información es una forma de datos. El mismo registro de un corte es dato para el sistema de cortes e información para Grace al mismo tiempo; no sube de nivel. Y la cima es vaga: en la práctica, es una persona que decide. ¿Dónde, en tu trabajo, una misma tabla es dato para un equipo e informe para otro?"},
-  "both":{q:"Inés vuelve a dibujar la pirámide con flechas en ambos sentidos. ¿Qué agrega la flecha hacia abajo?",
+  "both":{stop:"chain",q:"Inés vuelve a dibujar la pirámide con flechas en ambos sentidos. ¿Qué agrega la flecha hacia abajo?",
     opts:[{t:"La sabiduría de la cima vuelve a ser datos en bruto, lista para pasar otra vez por la fábrica."},{t:"Una decisión hace una pregunta, que necesita una medida y una definición, y eso decide qué se registra.",ok:true},{t:"Los informes bajan de vuelta a los sistemas, para que quienes los leen corrijan los registros.",near:true}],
     why:"Leída solo hacia arriba, la pirámide hace parecer que todo empieza en los datos. Hacia abajo: una decisión hace una pregunta, la pregunta necesita una medida, y la medida, una definición, que decide qué se registra. Hacia arriba: los registros responden a la medida, la medida a la pregunta, y una persona decide. Las correcciones también vuelven, pero no es para eso la flecha hacia abajo. En la práctica de datos en el mapa, interrupción es un objeto de negocio a cargo de Grace, el registro de cada corte en el sistema de cortes lo realiza, y la medida se vincula con ambos. Elige una decisión que apoyas: ¿puedes dibujar las dos flechas?"}
   }}};

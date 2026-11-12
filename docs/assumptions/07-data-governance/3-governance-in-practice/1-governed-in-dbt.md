@@ -1,6 +1,6 @@
 # Governed in dbt: questions and assumptions
 
-*Data governance* · *Governance you can use*, film 1 of 6 · merged, PR #PRNUM · [pull request](https://github.com/roanboc/learning-data/pull/PRNUM)
+*Data governance* · *Governance you can use*, film 1 of 6 · merged, PR #326 · [pull request](https://github.com/roanboc/learning-data/pull/326)
 
 [Watch it on the site](https://data.learn-all.org/governance-in-practice/governed-in-dbt/)
 

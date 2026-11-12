@@ -189,15 +189,23 @@ function lw_flagCard(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)re
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the jobs
-   A job in Lakeflow Jobs, drawn for the film: two tasks joined left to right, the second's run condition under the join. Each task a
-   card with its state: o.states [first, second], each "pass" (it succeeded), "stop" (it failed), "wait" (not run: dashed, grey) or
-   null (not yet). o.tell: who the failed check tells, under it (0 to 1). x, y its top left. */
+   A job in Lakeflow Jobs, drawn for the film: two tasks joined left to right, the second's run condition under the join; or three,
+   the first two one over the other, each joined to the third, which runs after both. Each task a card with its state: o.states,
+   one for each task, "pass" (it succeeded), "stop" (it failed), "wait" (not run: dashed, grey) or null (not yet). o.tell: who a
+   failed check tells, under the checks (0 to 1). x, y its top left. */
 function lw_task(ctx,x,y,w,h,name,st){const tone=st==="pass"?"pass":st==="stop"?"stop":null;
   if(st==="wait"){dq_card(ctx,x,y,w,h,{dash:true});dq_icon(ctx,"hourglass",x+44,y+h/2,34,"none");dq_T(ctx,name,x+80,y+h/2+10,{w:700,size:30,col:"none"});return;}
   dq_card(ctx,x,y,w,h,{edge:tone});if(tone)dq_icon(ctx,tone==="pass"?"tick":"cross",x+44,y+h/2,34,tone);else dq_icon(ctx,"tools",x+44,y+h/2,34,DQ.soft);
   dq_T(ctx,name,x+80,y+h/2+10,{w:700,size:30});}
 function lw_job(ctx,x,y,o){o=o||{};const w=1240,h=o.h||420,st=o.states||[null,null];return dq_window(ctx,x,y,w,h,{logo:"databricks",product:"Databricks",title:"Lakeflow Jobs · "+o.job,a:o.a,k:o.k,draw:(c,b)=>{
-  const tw=440,th=104,ty=b.y+40,x0=b.x+20,x1=b.x+b.w-20-tw;lw_task(c,x0,ty,tw,th,o.tasks[0],st[0]);lw_task(c,x1,ty,tw,th,o.tasks[1],st[1]);
+  const tw=440,th=104,x0=b.x+20,x1=b.x+b.w-20-tw;
+  if(o.tasks.length===3){const t2=88,ya=b.y+14,yb=ya+t2+18,ty=(ya+yb+t2)/2-th/2;
+    lw_task(c,x0,ya,tw,t2,o.tasks[0],st[0]);lw_task(c,x0,yb,tw,t2,o.tasks[1],st[1]);lw_task(c,x1,ty,tw,th,o.tasks[2],st[2]);
+    lw_arrow(c,x0+tw+12,ya+t2/2,x1-12,ty+th/2-18,{});lw_arrow(c,x0+tw+12,yb+t2/2,x1-12,ty+th/2+18,{});
+    dq_T(c,"Run if",x1,ty+th+50,{w:800,size:28,col:DQ.soft});dq_T(c,o.runIf,x1+dq_tw(c,"Run if  ",{w:800,size:28}),ty+th+50,{w:700,size:28});
+    const tl=clamp(o.tell||0,0,1);if(tl>0.004&&o.who){c.save();c.globalAlpha*=tl;dq_icon(c,"mail",x0+40,yb+t2+44,34,"stop");dq_T(c,o.who,x0+80,yb+t2+54,{w:700,size:28,col:"stop"});c.restore();}
+    return;}
+  const ty=b.y+40;lw_task(c,x0,ty,tw,th,o.tasks[0],st[0]);lw_task(c,x1,ty,tw,th,o.tasks[1],st[1]);
   lw_arrow(c,x0+tw+12,ty+th/2,x1-12,ty+th/2,{});
   dq_T(c,"Run if",x1,ty+th+50,{w:800,size:28,col:DQ.soft});dq_T(c,o.runIf,x1+dq_tw(c,"Run if  ",{w:800,size:28}),ty+th+50,{w:700,size:28});
   const tl=clamp(o.tell||0,0,1);if(tl>0.004&&o.who){c.save();c.globalAlpha*=tl;dq_icon(c,"mail",x0+40,ty+th+60,34,"stop");dq_T(c,o.who,x0+80,ty+th+70,{w:700,size:28,col:"stop"});c.restore();}}});}

@@ -1,0 +1,84 @@
+{
+  "kicker": "Agents in the architecture",
+  "kicker_es": "Agentes en la arquitectura",
+  "title_es": "Agentes en el mapa",
+  "h1": "Agents on the map: each in a role of its own, with someone who answers",
+  "h1_es": "Agentes en el mapa: cada uno en un rol propio, con alguien que responde",
+  "lead": "A website chat agreed 212 payment plans that billing never saw: an agent nobody put on the map. Tomás finds every agent at work, and draws each in a role of its own, with its tasks and how far it may go, its own identity, a hand-off and a person who answers.",
+  "lead_es": "El chat del sitio web acordó 212 planes de pago que facturación nunca vio: un agente que nadie puso en el mapa. Tomás encuentra cada agente, y dibuja cada uno en un rol propio, con sus tareas y hasta dónde llega, su identidad, una derivación y alguien que responde.",
+  "description": "A film about drawing AI agents on the enterprise architecture map: finding the agents switched on in vendors' updates and built by teams, which the IT service management tool can't list; drawing each as ArchiMate 4 draws software that works beside people, an application assigned to a role of its own, never a person's, covering tasks and never a whole activity; how far it may go on each task of a written-down process, inform, draft, verify or run, set by the process's owner; its own identity, one for each set of rights; when it hands over to a person, and to whom; and a named person who answers for it, as AI frameworks such as NIST's and ISO's ask. It never approves.",
+  "description_es": "Una película sobre cómo dibujar agentes de IA en el mapa de arquitectura empresarial: encontrar los agentes que activan las actualizaciones de los proveedores y los que crean los equipos, que la herramienta de gestión de servicios de TI no puede listar; dibujar cada uno como ArchiMate 4 dibuja el software que trabaja junto a las personas, una aplicación asignada a un rol propio, nunca el de una persona, que cubre tareas y nunca una actividad entera; hasta dónde puede llegar en cada tarea de un proceso escrito, informar, redactar, verificar o ejecutar, según lo fija el responsable del proceso; su propia identidad, una por cada conjunto de permisos; cuándo deriva a una persona, y a quién; y una persona con nombre que responde por él, como piden marcos de IA como los del NIST y la ISO. Nunca aprueba.",
+  "card": "A chat nobody put on the map agreed 212 payment plans. Each agent goes on it: a role, its tasks, an identity and someone who answers.",
+  "card_es": "Un chat que nadie puso en el mapa acordó 212 planes de pago. Cada agente va al mapa: un rol, sus tareas, una identidad y alguien que responde.",
+  "chapters_es": {
+    "hands": "Muchas manos",
+    "map": "En el mapa de Tomás",
+    "unseen": "Un plan que nadie vio",
+    "find": "¿Cuántos agentes?",
+    "role": "Software en un rol",
+    "far": "Hasta dónde, tarea por tarea",
+    "name": "Su propio nombre, y una derivación",
+    "answers": "Alguien que responde",
+    "all": "Cada agente en el mapa",
+    "babel": "Muchas lenguas, un plan",
+    "end": "Agentes en el mapa"
+  },
+  "past": [
+    "Etemenanki, the tower of Babylon, about 620 BCE",
+    "Many hands built it, each with a task, and a king answered for the work."
+  ],
+  "past_es": [
+    "Etemenanki, la torre de Babilonia, hacia el 620 a. C.",
+    "Muchas manos la construyeron, cada una con una tarea, y un rey respondía por la obra."
+  ],
+  "next_h": "Every agent is on the map. Next, the platform they all run on.",
+  "next_h_es": "Cada agente está en el mapa. Luego, la plataforma donde todos funcionan.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The kings' own words",
+        "title_es": "Las palabras de los reyes (en inglés)",
+        "line": "Nabopolassar's and Nebuchadnezzar II's inscriptions, the tower's among them, in an open edition (RINBE 1/1, 2024).",
+        "line_es": "Las inscripciones de Nabopolasar y Nabucodonosor II, entre ellas las de la torre, en una edición abierta (RINBE 1/1, 2024).",
+        "href": "https://epub.ub.uni-muenchen.de/118421/",
+        "href_es": "https://epub.ub.uni-muenchen.de/118421/"
+      },
+      {
+        "title": "Babylon, a World Heritage site",
+        "title_es": "Babilonia, patrimonio mundial",
+        "line": "UNESCO's page on Babylon, inscribed in 2019, and cared for by Iraq's State Board of Antiquities and Heritage.",
+        "line_es": "La página de la UNESCO sobre Babilonia, inscrita en 2019, que cuida la Junta Estatal de Antigüedades y Patrimonio de Irak.",
+        "href": "https://whc.unesco.org/en/list/278/",
+        "href_es": "https://whc.unesco.org/es/list/278/"
+      },
+      {
+        "title": "ArchiMate",
+        "title_es": "ArchiMate (en inglés)",
+        "line": "The Open Group's notation for the map, in which software that works beside people is assigned to a role.",
+        "line_es": "La notación de The Open Group para el mapa, en la que el software que trabaja junto a las personas se asigna a un rol.",
+        "href": "https://www.opengroup.org/archimate-forum/archimate-overview",
+        "href_es": "https://www.opengroup.org/archimate-forum/archimate-overview"
+      },
+      {
+        "title": "NIST AI Risk Management Framework",
+        "title_es": "Marco de gestión de riesgos de IA del NIST (en inglés)",
+        "line": "Its Govern function asks for roles and responsibilities that are written down and clear to everyone, and people accountable for AI risks.",
+        "line_es": "Su función Gobernar pide roles y responsabilidades por escrito y claros para todos, y personas que rindan cuentas por los riesgos de la IA.",
+        "href": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "href_es": "https://www.nist.gov/itl/ai-risk-management-framework"
+      },
+      {
+        "title": "ISO/IEC 42001",
+        "title_es": "ISO/IEC 42001 (en inglés)",
+        "line": "ISO's page for the AI management system standard, which asks for roles, responsibilities and authorities for AI to be defined and assigned.",
+        "line_es": "La página de ISO de la norma de sistemas de gestión de IA, que pide definir y asignar roles, responsabilidades y autoridades para la IA.",
+        "href": "https://www.iso.org/standard/42001",
+        "href_es": "https://www.iso.org/standard/42001"
+      }
+    ]
+  }
+}

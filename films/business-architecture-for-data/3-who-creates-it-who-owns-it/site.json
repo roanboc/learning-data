@@ -1,0 +1,34 @@
+{
+  "kicker": "Owners and stewards",
+  "kicker_es": "Dueños y responsables de datos",
+  "title_es": "Quién lo crea, quién es su dueño",
+  "h1": "Who creates it, who owns it: each concept's creator, owner and steward",
+  "h1_es": "Quién lo crea, quién es su dueño: cada concepto, su dueño y su responsable",
+  "lead": "Tomás draws what each capability on the utility's map does with each concept. One capability should create each one, and its owner owns the concept. The account has two, and families get two first bills, so the business decides. Each owner names a steward to look after it day to day.",
+  "lead_es": "Tomás dibuja qué hace cada capacidad del mapa de la empresa con cada concepto. Una sola capacidad debería crear cada uno, y su dueño es el del concepto. La cuenta tiene dos, y hay familias con dos primeras facturas: decide el negocio. Cada dueño nombra a un responsable que lo cuida día a día.",
+  "description": "A film from Business architecture for data about who creates each of the business's concepts and who owns it: a matrix of what each capability on Tomás's map creates, reads, updates or deletes, filled in with the people who run each capability, not from what the systems say; one capability that creates each concept, and its owner owns it; the account, created by two capabilities until the business decides which one does; owners who decide what a concept means, who creates it, its rules and how good it must be, and the stewards they name to look after it day to day, while the data team builds what holds it and owns none of it; and an owner found by capability where nothing was written down. Told with the qanats of Iran, where every share of water had a named owner, the owners decided, and a water master looked after the water.",
+  "description_es": "Una película de Arquitectura de negocio para datos sobre quién crea cada concepto del negocio y quién es su dueño: una matriz de lo que cada capacidad del mapa de Tomás crea, lee, actualiza o borra, llenada con la gente que dirige cada capacidad, no con lo que dicen los sistemas; una sola capacidad que crea cada concepto, y su dueño es el del concepto; la cuenta, creada por dos capacidades hasta que el negocio decide cuál la crea; dueños que deciden qué significa un concepto, quién lo crea, sus reglas y qué tan bueno debe ser, y los responsables de datos que nombran para cuidarlo día a día, mientras el equipo de datos construye lo que lo guarda y no es dueño de nada; y un dueño que se encuentra por capacidad donde nada se anotó. Contada con los qanats de Irán, donde cada parte del agua tenía un dueño con nombre, los dueños decidían y un maestro del agua la cuidaba.",
+  "card": "One capability creates each concept, and its owner owns it. Each owner names a steward to look after it, day to day.",
+  "card_es": "Una capacidad crea cada concepto, y su dueño es el del concepto. Cada dueño nombra a un responsable de datos que lo cuida día a día.",
+  "chapters_es": {
+    "owners": "Dueños y un maestro del agua",
+    "note": "La siguiente nota de Tomás",
+    "matrix": "Crea, lee, actualiza, borra",
+    "two": "Dos que crean",
+    "decides": "El negocio decide",
+    "stewards": "Dueños y responsables de datos",
+    "unwritten": "Un dueño que nadie anotó",
+    "practice": "La práctica de datos en el mapa",
+    "end": "Cada parte, con un nombre"
+  },
+  "next_h": "Next: where each concept is born, in which process and at which step.",
+  "next_h_es": "Lo que sigue: dónde nace cada concepto, en qué proceso y en qué paso.",
+  "past": [
+    "The qanats of Iran: owners and a water master",
+    "Every share has a named owner: the owners decide, and the mirab looks after the water."
+  ],
+  "past_es": [
+    "Los qanats de Irán: dueños y un maestro del agua",
+    "Cada parte tiene un dueño con nombre: los dueños deciden, y el mirab cuida el agua."
+  ]
+}

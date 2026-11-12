@@ -1,0 +1,227 @@
+1
+00:00:01,400 --> 00:00:08,899
+In the 1860s, at Mahan, near Kerman, a new qanat was dug: a tunnel bringing water from the mountains.
+
+2
+00:00:10,499 --> 00:00:15,862
+Its water was owned in six shares of time, each a turn at the water, and three men held them.
+
+3
+00:00:17,362 --> 00:00:20,176
+One of the six went to the keeper of the town's shrine.
+
+4
+00:00:21,476 --> 00:00:26,124
+Over the years, its shares were sold, left to children, and split again and again.
+
+5
+00:00:27,624 --> 00:00:32,642
+Many qanats came to have two or three hundred owners, and some, ten thousand shares.
+
+6
+00:00:34,342 --> 00:00:39,867
+Each owner's water had to reach the right field at the right time, or a family could lose its crop.
+
+7
+00:00:41,367 --> 00:00:46,326
+And every year, the tunnel needed repairs, which someone had to decide on and pay for.
+
+8
+00:00:47,826 --> 00:00:53,573
+With so many owners, a qanat needed them to decide together, and someone to look after the water.
+
+9
+00:00:55,073 --> 00:01:00,428
+So the owners met each year to decide on the repairs, voting by the size of their shares.
+
+10
+00:01:01,928 --> 00:01:06,689
+They paid a water master, the mirab, to guide the water to each field in its turn.
+
+11
+00:01:07,989 --> 00:01:12,678
+With his helpers, he kept the channels clean and opened each field's gate on time.
+
+12
+00:01:13,978 --> 00:01:17,287
+The mirab looked after the water. Its owners decided.
+
+13
+00:01:19,187 --> 00:01:25,354
+For that qanat, the Vakilabad, every change of owner is on record, from the first three men on.
+
+14
+00:01:26,854 --> 00:01:32,862
+Generations later, the shrine keeper's share had become a third, held by twenty of his descendants.
+
+15
+00:01:34,362 --> 00:01:38,487
+Some seventy families held the rest, and every share had a named owner.
+
+16
+00:01:39,987 --> 00:01:46,771
+At the utility, each concept needs the same: an owner who decides, and someone to look after it every day.
+
+17
+00:01:54,671 --> 00:01:58,922
+Tomás's next note asks who creates each concept, and who owns it.
+
+18
+00:02:00,222 --> 00:02:04,639
+On his map, each concept already sits beneath the capabilities that use it.
+
+19
+00:02:06,139 --> 00:02:10,294
+Now he needs to know exactly what each capability does with each one.
+
+20
+00:02:13,594 --> 00:02:18,819
+He draws a matrix: the capabilities down one side, the concepts across the top.
+
+21
+00:02:20,319 --> 00:02:26,929
+In each square goes what the capability does with the concept: creates it, reads it, updates it, or deletes it.
+
+22
+00:02:28,629 --> 00:02:31,994
+Architects call it a CRUD matrix, after those four letters.
+
+23
+00:02:33,294 --> 00:02:38,175
+He fills it in with the people who run each capability, not from what the systems say.
+
+24
+00:02:39,675 --> 00:02:44,883
+Then he reads down each column: each concept should be created by one capability.
+
+25
+00:02:46,583 --> 00:02:49,303
+And its owner is the owner of that capability.
+
+26
+00:02:50,803 --> 00:02:55,602
+Connecting customers creates the connection point, so the connection point is Grace's.
+
+27
+00:02:58,902 --> 00:03:00,638
+But the account's column has two.
+
+28
+00:03:02,138 --> 00:03:05,636
+Serving customers opens an account when someone signs up.
+
+29
+00:03:06,936 --> 00:03:12,488
+And connecting customers opens one when a new home is switched on, so its first bill can go out.
+
+30
+00:03:13,988 --> 00:03:17,262
+So a family moving into a new home could end up with two.
+
+31
+00:03:18,762 --> 00:03:25,144
+Last year, twelve hundred new homes had two accounts, and three hundred and forty families got two first bills.
+
+32
+00:03:26,844 --> 00:03:32,358
+Farah, who speaks for the utility's customers, had been asking why. The matrix shows it.
+
+33
+00:03:33,858 --> 00:03:39,277
+Which capability should create the account isn't for Tomás or the data team to decide.
+
+34
+00:03:42,577 --> 00:03:48,969
+Grace runs connecting customers, and the head of retail runs serving customers. They decide it together.
+
+35
+00:03:50,469 --> 00:03:57,662
+Serving customers creates the account. Connecting customers creates the connection point, and only reads the account.
+
+36
+00:03:59,362 --> 00:04:03,979
+When a new home is switched on, it tells retail, and retail opens the account.
+
+37
+00:04:05,479 --> 00:04:10,365
+So the account's owner is the head of retail, who runs the capability that creates it.
+
+38
+00:04:12,065 --> 00:04:16,331
+The decision goes on the map with its date, so nobody has to settle it again.
+
+39
+00:04:17,831 --> 00:04:21,582
+Since then, each new home gets one account, and one first bill.
+
+40
+00:04:27,282 --> 00:04:33,107
+An owner decides what a concept means, who creates it, the rules on it, and how good it must be.
+
+41
+00:04:34,807 --> 00:04:40,093
+But the head of retail can't look after three hundred and ten thousand accounts, day to day.
+
+42
+00:04:41,793 --> 00:04:46,108
+So each owner names a steward: someone who works with the concept every day.
+
+43
+00:04:48,008 --> 00:04:55,750
+For accounts, it's retail's billing lead, who keeps the definition, answers questions about it, and follows up when something's wrong.
+
+44
+00:04:57,850 --> 00:05:01,943
+Like the mirab, a steward looks after it for its owner, and doesn't own it.
+
+45
+00:05:03,943 --> 00:05:10,144
+And the data team builds and runs what holds it, as diggers keep a qanat's tunnel, and owns none of it.
+
+46
+00:05:13,844 --> 00:05:16,613
+Some concepts have no owner written down anywhere.
+
+47
+00:05:17,713 --> 00:05:25,425
+An outage table, built in 2019, holds every outage, and Ama's yearly report to the regulator counts them from it.
+
+48
+00:05:26,925 --> 00:05:30,405
+Whoever built it has left, and nobody knows who owns what's in it.
+
+49
+00:05:31,905 --> 00:05:37,964
+Tomás doesn't ask which system the table came from. He asks which capability creates outages.
+
+50
+00:05:39,664 --> 00:05:45,807
+Operating the network does, so outages are Grace's, and her outage desk lead becomes their steward.
+
+51
+00:05:47,507 --> 00:05:52,816
+Owners are found by capability, not by system, even where nothing was written down.
+
+52
+00:05:56,316 --> 00:06:01,392
+On the data practice's map, two roles join: the data owner and the data steward.
+
+53
+00:06:03,092 --> 00:06:09,884
+Each domain's owner holds the owner's role: Grace for the network's concepts, and the head of retail for retail's.
+
+54
+00:06:11,584 --> 00:06:15,919
+And each owner names the stewards who look after their concepts, day to day.
+
+55
+00:06:19,419 --> 00:06:25,613
+On a qanat, every share has a named owner: the owners decide, and the mirab looks after the water.
+
+56
+00:06:27,313 --> 00:06:35,285
+At the utility, every concept now has one capability that creates it, an owner who decides, and a steward who looks after it.
+
+57
+00:06:36,985 --> 00:06:42,330
+Tomás's next note asks where each one is born: in which process, and at which step.

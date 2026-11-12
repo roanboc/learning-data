@@ -1,0 +1,33 @@
+{
+  "kicker": "Systems of record and lineage",
+  "kicker_es": "Sistemas de registro y linaje",
+  "title_es": "Dónde nace cada hecho",
+  "h1": "Where each fact is born: one home, one owner",
+  "h1_es": "Dónde nace cada hecho: una casa, un responsable",
+  "lead": "At the utility, 214 of 1,160 new homes were created twice last year, in billing and in the network map, and a cut nobody could match left a family waiting. Inés Duarte finds where each fact is born, gives it one home and one owner, and draws a line back from every copy.",
+  "lead_es": "En la empresa, 214 de 1,160 viviendas nuevas se crearon dos veces el año pasado, en facturación y en el mapa de la red, y un corte que nadie cruzó dejó esperando a una familia. Inés Duarte halla dónde nace cada hecho, le da una casa y un responsable, y traza una línea de vuelta desde cada copia.",
+  "description": "A film on where each fact is born: the one system where it's created and corrected, which DAMA calls the system of record, and the copies everywhere else; a matrix of what each system creates or copies, which finds the facts born twice; one home and one owner for each fact, and a copy corrected only at home; lineage, a line back from every copy to where it was born, and a correction made once that reaches every copy by the next morning; why one cut recorded by three systems is three facts, each with its own home, not three copies of one; and the facts that have to be born in two places, which master data takes from there.",
+  "description_es": "Una película sobre dónde nace cada hecho: el único sistema donde se crea y se corrige, que DAMA llama sistema de registro, y las copias en todos los demás; una matriz de lo que cada sistema crea o copia, que encuentra los hechos que nacen dos veces; una casa y un responsable para cada hecho, y una copia que se corrige solo en casa; el linaje, una línea de vuelta desde cada copia a donde nació, y una corrección hecha una vez que llega a cada copia a la mañana siguiente; por qué un corte registrado por tres sistemas son tres hechos, cada uno con su casa, y no tres copias de uno; y los hechos que tienen que nacer en dos lugares, que siguen en los datos maestros.",
+  "card": "Where each fact is born, one home and one owner for it, and a line back from every copy, so a correction is made once.",
+  "card_es": "Dónde nace cada hecho, una casa y un responsable para él, y una línea de vuelta desde cada copia, para corregir una sola vez.",
+  "chapters_es": {
+    "sender": "Desde la propia fábrica",
+    "twice": "Nacido dos veces",
+    "born": "Dónde nace",
+    "home": "Una casa, un responsable",
+    "lineage": "Una línea de vuelta",
+    "three": "Tres registros, tres hechos",
+    "master": "Dos lugares, una persona",
+    "back": "Desde donde se hizo"
+  },
+  "next_h": "Next, how it travels: a meter reading replaced in the network, on its way to billing.",
+  "next_h_es": "Después, cómo viaja: una lectura reemplazada en la red, en camino a facturación.",
+  "past": [
+    "Numbers from the factory itself, Chile, 1972",
+    "Each factory sent its own numbers by telex, once a day, and Santiago read a copy the same day, where statistics had taken six months."
+  ],
+  "past_es": [
+    "Cifras desde la propia fábrica, Chile, 1972",
+    "Cada fábrica enviaba sus propias cifras por télex, una vez al día, y Santiago leía una copia el mismo día, cuando las estadísticas tardaban seis meses."
+  ]
+}

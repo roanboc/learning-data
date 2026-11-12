@@ -1,0 +1,33 @@
+{
+  "kicker": "Data flows and their contracts",
+  "kicker_es": "Flujos de datos y sus contratos",
+  "title_es": "Cómo viaja",
+  "h1": "How it travels: what crosses, in which shape, under which contract",
+  "h1_es": "Cómo viaja: qué cruza, en qué forma, con qué contrato",
+  "lead": "At the utility, eleven paths cross the wall between the network and retail, and only four are on the map; through one, a nightly script wrote for months to a queue nothing read. Inés Duarte decides what may cross, in which shape and under which contract, and draws every flow on the map.",
+  "lead_es": "En la empresa, once caminos cruzan el muro entre la red y comercialización, y solo cuatro están en el mapa; por uno, un script escribió meses en una cola que nadie leía. Inés Duarte decide qué puede cruzar, en qué forma y con qué contrato, y dibuja cada flujo en el mapa.",
+  "description": "A film on how data travels between domains: every path that crosses the wall between the network and retail, listed, and the ones nobody drew, with no owner at either end; what may cross, on an agreed list; DAMA's three shapes, point to point, hub and spoke, and publish and subscribe, and the three questions that choose between them: who reads it, when they act on it, and what each may see; a replaced meter reading published once, as it's replaced, each retailer receiving only its own; the flow's contract, agreed by the two teams at its ends: what crosses and what it means, how soon, what happens when one is late or wrong, and how it changes; and every flow drawn on the map, with its shape, its contract and an owner at each end.",
+  "description_es": "Una película sobre cómo viajan los datos entre dominios: cada camino que cruza el muro entre la red y comercialización, en una lista, y los que nadie dibujó, sin responsable en ningún extremo; qué puede cruzar, en una lista acordada; las tres formas de DAMA, punto a punto, concentrador y radios, y publicación y suscripción, y las tres preguntas que eligen entre ellas: quién lo lee, cuándo actúa con ello y qué puede ver cada uno; una lectura del medidor reemplazada, publicada una vez, cuando se reemplaza, y cada comercializadora recibiendo solo las suyas; el contrato del flujo, acordado por los dos equipos de sus extremos: qué cruza y qué significa, qué tan pronto, qué pasa si una llega tarde o mal, y cómo cambia; y cada flujo dibujado en el mapa, con su forma, su contrato y un responsable en cada extremo.",
+  "card": "What crosses between domains, in which shape and under which contract, with every flow drawn on the map and an owner at each end.",
+  "card_es": "Qué cruza entre dominios, en qué forma y con qué contrato, con cada flujo dibujado en el mapa y un responsable en cada extremo.",
+  "chapters_es": {
+    "strike": "Las mismas líneas",
+    "paths": "Caminos que nadie dibujó",
+    "crosses": "Qué cruza",
+    "shapes": "Tres formas",
+    "once": "Publicada una vez",
+    "contract": "Con un contrato",
+    "map": "En el mapa",
+    "back": "A tiempo para actuar"
+  },
+  "next_h": "Next, who owns which data: each domain's data, and who answers for what's made from it.",
+  "next_h_es": "Después, quién es responsable de qué datos: los datos de cada dominio, y quién responde por lo que se hace con ellos.",
+  "past": [
+    "The same lines, Chile, 1972",
+    "In the October strike, the telex lines that had carried each factory's numbers to Santiago once a day carried new messages many times a day, both ways, and about 200 trucks still running were sent where goods were short."
+  ],
+  "past_es": [
+    "Las mismas líneas, Chile, 1972",
+    "En la huelga de octubre, las líneas de télex que llevaban las cifras de cada fábrica a Santiago una vez al día llevaron mensajes nuevos muchas veces al día, en ambos sentidos, y unos 200 camiones que aún circulaban fueron adonde faltaban bienes."
+  ]
+}

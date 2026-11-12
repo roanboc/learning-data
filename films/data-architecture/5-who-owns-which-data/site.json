@@ -1,0 +1,33 @@
+{
+  "kicker": "Data ownership and data products",
+  "kicker_es": "Dominios y productos de datos",
+  "title_es": "Quién es responsable de qué datos",
+  "h1": "Who owns which data: each domain's data, and who answers for it",
+  "h1_es": "Quién es responsable de qué datos: cada dominio responde por los suyos",
+  "lead": "At the utility, the data team owns 300 of 412 tables because it built them, so nobody told it when Grace's engineers changed how hosting capacity is worked out. Inés Duarte brings one rule: every table in a data product, owned by the domain whose work creates its data, in one catalogue.",
+  "lead_es": "En la empresa, el equipo de datos es responsable de 300 de 412 tablas porque las construyó, así que nadie le avisó cuando los ingenieros de Grace cambiaron cómo se calcula la capacidad de alojamiento. Inés Duarte lleva una regla: cada tabla en un producto de datos, del dominio que crea sus datos.",
+  "description": "A film on who owns which data: a catalogue where the data team owns 300 of 412 tables because it built them, and a hosting capacity table that kept an old method for four months while households bought panels their street couldn't take; one rule, every table in a data product, owned by whoever owns the capability that creates its data, with the enterprise domain for measures that cross domains; the five things a data product needs before it's published, an owner, documentation, lineage, a contract and an approved way in; the four words for keeping data, warehouse, lakehouse, mesh and fabric, and the different questions they answer; the baseline, the target and the gaps between them, put into a roadmap with an owner and a quarter; and every product drawn on the map, with each table in the catalogue pointing to it.",
+  "description_es": "Una película sobre quién es responsable de qué datos: un catálogo donde el equipo de datos es responsable de 300 de 412 tablas porque las construyó, y una tabla de capacidad de alojamiento que siguió con un método viejo durante cuatro meses mientras los hogares compraban paneles que su calle no admitía; una regla, cada tabla en un producto de datos, de quien es responsable de la capacidad que crea sus datos, con el dominio empresarial para las medidas que cruzan dominios; las cinco cosas que un producto de datos necesita antes de publicarse, un responsable, documentación, linaje, un contrato y una vía de acceso aprobada; las cuatro palabras para guardar datos, warehouse, lakehouse, mesh y fabric, y las preguntas distintas que responden; la línea base, el objetivo y las brechas entre ellos, en una hoja de ruta con un responsable y un trimestre; y cada producto dibujado en el mapa, con cada tabla del catálogo apuntando a él.",
+  "card": "Each table in a data product, owned by the domain that knows what its data means, with five things before it's published and one catalogue for all.",
+  "card_es": "Cada tabla en un producto de datos, del dominio que sabe qué significan sus datos, con cinco cosas antes de publicarse y un solo catálogo para todos.",
+  "chapters_es": {
+    "freedom": "Diseñar la libertad",
+    "default": "Responsable por defecto",
+    "knows": "El negocio que sabe",
+    "product": "Datos como producto",
+    "words": "Cuatro palabras",
+    "gaps": "El objetivo y sus brechas",
+    "map": "En el mapa",
+    "back": "Resuelto donde se sabe"
+  },
+  "next_h": "Next, one language, kept: the names, reference models and decisions that keep many owners speaking one language.",
+  "next_h_es": "Después, un mismo idioma, mantenido: los nombres, modelos de referencia y decisiones que hacen que muchos responsables hablen un mismo idioma.",
+  "past": [
+    "Designing freedom, Chile, 1972",
+    "In Stafford Beer's design for Cybersyn, a factory's warning would go first to its own manager, with a set time to solve it in their own way; only if it wasn't solved in time would the team tell that industry's committee, at CORFO."
+  ],
+  "past_es": [
+    "Diseñar la libertad, Chile, 1972",
+    "En el diseño de Stafford Beer para Cybersyn, el aviso de una fábrica iría primero a su propio gerente, con un plazo fijo para resolverlo a su manera; solo si no se resolvía a tiempo el equipo avisaría al comité de esa industria, en la CORFO."
+  ]
+}

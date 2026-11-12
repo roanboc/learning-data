@@ -1,6 +1,6 @@
 # The pyramid, taken apart: questions and assumptions
 
-*Enterprise architecture* · *Data architecture*, film 2 of 6 · PR #PRNUM · [pull request](https://github.com/roanboc/learning-data/pull/PRNUM)
+*Enterprise architecture* · *Data architecture*, film 2 of 6 · PR #334 · [pull request](https://github.com/roanboc/learning-data/pull/334)
 
 [Watch it on the site](https://data.learn-all.org/data-architecture/the-pyramid-taken-apart/)
 

@@ -244,8 +244,10 @@ chord((A3, D4), tFour + 0.1, 0.6)
 
 # 3. Made up, for building: A at the turn; Jun's cards; the clone page, refused; the clone someone left out would make, coral; a masked
 #    copy, still about real people; made-up learners: the mark's shape from other notes; the script; synthetic data, easy to write, and
-#    the open question of how close to the real records (three taps and a tag set down, no music); the unit test passed; dbt's clone
-#    and sample struck through; like Lascaux II: the shape again; Jun's change runs on them
+#    its two kinds: written without reading a record (a tag set down, a tick), and learned from the real records (the two records
+#    set down side by side, a low note where the rows match, a tag; a tap as it's treated as a copy); the two kinds set down, one over
+#    the other, and the open question of how close to the real records (three taps and a tag set down, no music); the unit test passed;
+#    dbt's clone and sample struck through; like Lascaux II: the shape again; Jun's change runs on them
 mw = lambda lid, word, off=0: W('madeup', lid, word, off)
 mc = lambda lid, off=0: G('madeup', lid, off)
 handpan(A3, mc('day', 0.1), 0.6, px(300))
@@ -264,6 +266,12 @@ tap(mw('madeup', 'none of them', 0.05), 0.006, px(420))
 glass(mc('script', 0.25), 0.012, px(720))
 tap(mw('script', 'For size', 0.05), 0.006, px(720)); tap(mw('script', 'columns', 0.05), 0.006, px(720))
 tap(mw('easy', 'synthetic data', 0.05), 0.006, px(360))
+tap(mw('written', 'without reading', 0.05), 0.006, px(360)); tap(mw('written', 'no one', 0.1), 0.007, px(660))
+glass(mc('learned', 0.05), 0.012, px(720))
+low(mw('learned', 'fits', 0.05), 0.011, px(720))
+tap(mw('learned', 'real person', 0.05), 0.006, px(330))
+tap(mw('treated', 'treats', 0.05), 0.006, px(890)); tap(mw('treated', 'a copy', 0.05), 0.006, px(1270))
+glass(mc('harder', -1.25), 0.012, px(540)); glass(mc('harder', -1.0), 0.010, px(540))
 glass(mw('harder', 'How closely', 0.05), 0.010, px(360))
 tap(mw('harder', 'gaps', 0.05), 0.006, px(760)); tap(mw('harder', 'open', 0.05), 0.006, px(1160))
 glass(mc('unit', 0.05), 0.012, px(720))

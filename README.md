@@ -42,7 +42,7 @@ flowchart TB
     films --> series["a series: README, series.json, proposal.md,<br/>shared/ components and tools, one numbered folder per film"]
     films --> film["a film: script.md, site.json, captions/, source/"]
     tools --> generators["build_series.py, build_pages.py"]
-    tools --> checks["check_site.py, smoke.py, review_page.py"]
+    tools --> checks["check_site.py, smoke.py, fits.py, review_page.py"]
 ```
 
 - The pages of the series, the Topics page, the *Decided* tables and the legibility report are generated (see *Each film keeps its own rows* below): never edit them by hand.

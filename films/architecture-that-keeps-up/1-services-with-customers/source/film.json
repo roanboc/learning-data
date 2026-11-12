@@ -20,7 +20,7 @@
     ["\\bVenkataswamy\\b", "Venkata-swahmy"],
     ["\\bAravind's\\b", "Ah-ra-vind's"],
     ["\\bArchiMate's\\b", "Arky-mate's"],
-    ["\\bTOGAF's\\b", "Toe-gaff's"],
+    ["\\bTOGAF\\b", "Toe-gaff"],
     ["\\bNovak's\\b", "Noh-vak's"],
     ["\\bJun\\b", "Joon"],
     ["\\bNoor\\b", "Nuur"],

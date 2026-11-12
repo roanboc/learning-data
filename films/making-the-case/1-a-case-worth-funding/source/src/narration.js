@@ -32,7 +32,11 @@ const NARR={
  {"id":"capability","gap":0.8,"text":"Governance gets a budget line every year, as A capability, not a project showed. This ask is money once, to stop paying every year."},
  {"id":"five","gap":0.8,"text":"A good case answers five questions; the UK Treasury's Five Case Model names them.","say":"A good case answers five questions; the U K Treasury's Five Case Model names them."},
  {"id":"questions","gap":0.8,"text":"Is it needed? Is it the best value? Can it be bought? Can it be afforded? Can it be delivered?"},
- {"id":"checklist","gap":0.8,"text":"Helena uses them as a checklist, not a form."}
+ {"id":"checklist","gap":0.8,"text":"Helena uses them as a checklist, not a form."},
+ {"id":"heavy","gap":0.8,"text":"She keeps heavy methods for critical systems, where a mistake can cost lives."},
+ {"id":"law","gap":0.8,"text":"And for what the law requires, as with personal data: it may look like extra work, but it protects everyone."},
+ {"id":"only","gap":0.8,"text":"Even there, she adds a method only when it's required."},
+ {"id":"light","gap":0.8,"text":"Everywhere else, a light one lets her try, learn and change course quickly."}
 ]},
 "options":{"name":"Three options","lead":1.0,"tail":1.0,"vo":[
  {"id":"options","gap":0.7,"text":"Then the options, and one always carries on as now: doing nothing has a price too."},

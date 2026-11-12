@@ -25,3 +25,16 @@ Data management film 13, *Architecture that keeps up* film 1. Made on 10 Novembe
 | 13 | Where does Graham appear? | Named, not drawn, in this film (his pain in *Who each is for*, his request on analysis); the film's people are Helena, Noor and the opening's three | The film |
 | 14 | Its order: does it wait for films 1 to 12? | No: series order is within *Architecture that keeps up*, and it is its series' opening film. It waits only for PR #148 (the kit and draft label) and PR #205 (the series' setup) | The merge |
 | 15 | The audio release | MP3 tracked beside `audio.json` (tag audio-services-with-customers-5ca789929fbd3093d9ad); the *Store audio outside Git* workflow publishes the release when the film reaches main (#243), so nothing is left for Rodrigo here | `audio.json` |
+
+## The author's answer, 12 November 2026
+
+The expert review asked about row 7: is it right for experts to present the five layers as ArchiMate's, with TOGAF's data called information? The architecture films' thread had found that ArchiMate has no information layer. Rodrigo answered in the project chat on 12 November 2026: DAMA names it data, so either word is fine at the enterprise level; the difference is already explained in a film, so "maybe just showing a note?"; and he wasn't sure what keeps the frameworks most consistent.
+
+So the five layers stay, and row 7's wording is replaced. What changed, and what was assumed in changing it:
+
+| # | Question | Assumption taken | Where it shows |
+|---|---|---|---|
+| 16 | How does the film name the frameworks now, so that none is misquoted? | "Four are ArchiMate's layers; information is what TOGAF calls data." Then: "At the level of the whole university, either word is fine; Between the business and the systems tells why." ArchiMate has strategy, business, application and technology, and no information layer: it keeps a business object in its business layer and a data object in its application layer | *Down every layer* |
+| 17 | A note on screen only, as you suggested, or the voice too? | Both. The old line said out loud that the five were ArchiMate's layers, and a note can't correct a spoken line. So two lines were voiced again and the film has a new soundtrack (7:18.2, 918 words). On screen the information layer lights up under the note "TOGAF and DAMA call it data", then "More in Between the business and the systems" | *Down every layer*; `audio.json` |
+| 18 | Which film is the one that already explains the difference? | *Between the business and the systems*, the opening film of *Data architecture*, on main since 12 November 2026, which tells data from information. The line no longer points to *The map before the data*, which draws the layers but doesn't explain the two words | *Down every layer* |
+| 19 | DAMA is your reason. Is it said in the voice? | On screen only ("TOGAF and DAMA call it data"); the voice names TOGAF alone, to keep the line short. DAMA-DMBOK2 is added to the series' references | *Down every layer*; the series' `proposal.md` |

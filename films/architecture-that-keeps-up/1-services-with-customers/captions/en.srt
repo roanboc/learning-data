@@ -151,93 +151,97 @@ Then Helena and Noor walk one service, governed data products, down every layer,
 Five layers: strategy, business, information, application and technology.
 
 39
-00:04:43,513 --> 00:04:50,149
-They're ArchiMate's layers, with TOGAF's data called information; The map before the data draws them in full.
+00:04:43,513 --> 00:04:47,864
+Four are ArchiMate's layers; information is what TOGAF calls data.
 
 40
-00:04:51,649 --> 00:04:55,855
-Strategy: the capability it serves, deciding from trusted data.
+00:04:48,564 --> 00:04:54,894
+At the level of the whole university, either word is fine; Between the business and the systems tells why.
 
 41
-00:04:57,155 --> 00:05:04,152
-Business: the service and its promise, checked by seven each morning, and who builds, reviews and owns each product.
+00:04:56,394 --> 00:05:00,600
+Strategy: the capability it serves, deciding from trusted data.
 
 42
-00:05:05,652 --> 00:05:10,603
-Information: what it's about, such as rooms, bookings and the people counted in them.
+00:05:01,900 --> 00:05:08,897
+Business: the service and its promise, checked by seven each morning, and who builds, reviews and owns each product.
 
 43
-00:05:11,903 --> 00:05:16,832
-Application: the platform, the catalog, and the project where the products are built.
+00:05:10,397 --> 00:05:15,348
+Information: what it's about, such as rooms, bookings and the people counted in them.
 
 44
-00:05:18,132 --> 00:05:20,048
-Technology: where it all runs.
+00:05:16,648 --> 00:05:21,577
+Application: the platform, the catalog, and the project where the products are built.
 
 45
-00:05:21,348 --> 00:05:24,354
-Each picture names the customer it serves, at the top.
+00:05:22,877 --> 00:05:24,793
+Technology: where it all runs.
 
 46
-00:05:25,854 --> 00:05:32,580
-In the old warehouse, the same walk finds 17 of 38 reports that no one has opened in a year.
+00:05:26,093 --> 00:05:29,099
+Each picture names the customer it serves, at the top.
 
 47
-00:05:34,480 --> 00:05:39,304
-A system that serves no customer's need raises one question: why is it there?
+00:05:30,599 --> 00:05:37,325
+In the old warehouse, the same walk finds 17 of 38 reports that no one has opened in a year.
 
 48
-00:05:42,004 --> 00:05:45,768
-On Monday 7 June, the team's one front door opens.
+00:05:39,225 --> 00:05:44,049
+A system that serves no customer's need raises one question: why is it there?
 
 49
-00:05:47,468 --> 00:05:52,368
-Of the 45 requests put in order, 42 land on one of the four services.
+00:05:46,749 --> 00:05:50,513
+On Monday 7 June, the team's one front door opens.
 
 50
-00:05:54,268 --> 00:05:58,943
-Graham's question about his rooms lands on analysis that answers a decision.
+00:05:52,213 --> 00:05:57,113
+Of the 45 requests put in order, 42 land on one of the four services.
 
 51
-00:06:00,643 --> 00:06:03,451
-Three land on none, and Helena says so openly.
+00:05:59,013 --> 00:06:03,688
+Graham's question about his rooms lands on analysis that answers a decision.
 
 52
-00:06:05,151 --> 00:06:09,603
-Two are for a new booking system, and go to digital services, with a note.
+00:06:05,388 --> 00:06:08,196
+Three land on none, and Helena says so openly.
 
 53
-00:06:11,303 --> 00:06:16,902
-One, help with a staff survey, shows a gap the team can fill, and joins advice and training.
+00:06:09,896 --> 00:06:14,348
+Two are for a new booking system, and go to digital services, with a note.
 
 54
-00:06:18,602 --> 00:06:24,082
-A request that lands on no service isn't a failure. It shows where the page needs to change.
+00:06:16,048 --> 00:06:21,647
+One, help with a staff survey, shows a gap the team can fill, and joins advice and training.
 
 55
-00:06:26,782 --> 00:06:32,501
-In Madurai, the eleven beds came after one sentence: sight, for everyone who needs it.
+00:06:23,347 --> 00:06:28,827
+A request that lands on no service isn't a failure. It shows where the page needs to change.
 
 56
-00:06:34,201 --> 00:06:40,861
-Helena's team did the same with data: every request now finds its service, and every system its customer.
+00:06:31,527 --> 00:06:37,246
+In Madurai, the eleven beds came after one sentence: sight, for everyone who needs it.
 
 57
-00:06:42,561 --> 00:06:46,644
-On Monday, write your services on one page, in a customer's words.
+00:06:38,946 --> 00:06:45,606
+Helena's team did the same with data: every request now finds its service, and every system its customer.
 
 58
-00:06:47,744 --> 00:06:52,728
-Name your suppliers and your customers, in groups, with what hurts and what drives each.
+00:06:47,306 --> 00:06:51,389
+On Monday, write your services on one page, in a customer's words.
 
 59
-00:06:53,828 --> 00:06:57,144
-Walk each service down every layer, with a picture for each.
+00:06:52,489 --> 00:06:57,473
+Name your suppliers and your customers, in groups, with what hurts and what drives each.
 
 60
-00:06:58,244 --> 00:07:01,119
-And if a system serves no one, ask why it's there.
+00:06:58,573 --> 00:07:01,889
+Walk each service down every layer, with a picture for each.
 
 61
-00:07:02,619 --> 00:07:06,717
+00:07:02,989 --> 00:07:05,864
+And if a system serves no one, ask why it's there.
+
+62
+00:07:07,364 --> 00:07:11,462
 Know your services and who they're for; then design every layer for them.

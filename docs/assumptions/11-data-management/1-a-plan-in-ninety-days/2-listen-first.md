@@ -34,3 +34,14 @@ Written 10 November 2026; rows 11, 12 and 17 updated the same day, when the line
 | 22 | What does Ingrid look like? | Ingrid Holm (HR) isn't in the kit's cast, so the film draws her as its own person (`LF_INGRID`): a warm brown blazer, nothing in the module's colours | *Three questions* | One person's look |
 | 23 | Which reprint numbers on the bars? | The data quality module's four ceremonies, "Certificates printed again": 41 (December 2025), 14 (March 2026), 6 (July 2026), 3 (December 2026); the voice says "from 41 to 3" | *What the systems count* | The bars |
 | 24 | The soundtrack's release | Nothing to run by hand: the film commits `audio.json` with its MP3 beside it (`git add -f`), and since 10 November (#243) *Store audio outside Git* publishes and verifies the release when the film reaches main. Once it verifies, `python site-tools/media.py untrack` can take the MP3 out of Git, for every film at once | The film's page plays the MP3 from Git until then | Nothing on the page; only where the MP3 is kept |
+
+## The author's answer, 12 November 2026
+
+The expert review asked whether the five layers (strategy, business, information, application, technology) can be presented as ArchiMate's, with TOGAF's data called information. The architecture films' thread had found that ArchiMate has no information layer. Rodrigo answered in the project chat on 12 November 2026: DAMA names it data, so either word is fine at the enterprise level; the difference is already explained in a film, so "maybe just showing a note?"; and he wasn't sure what keeps the frameworks most consistent.
+
+Rows 1 and 15 stand. The five layers stay, and this film's line was already right: "ArchiMate, the architects' notation, has no information layer". What changed, and what was assumed in changing it:
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 25 | What is the lightest change here that keeps the frameworks consistent? | One note on screen, under "Information, a layer of its own": "TOGAF and DAMA call it data". The voice is unchanged, so the soundtrack stays as it was | *Five layers* | A line voiced again, and a new soundtrack |
+| 26 | Name the film that explains the two words, *Between the business and the systems*, here too? | No. It is named in *Services with customers*, where the line had to change anyway; this shot has room and time for one note | *Five layers* | A second note on screen, or a line added |

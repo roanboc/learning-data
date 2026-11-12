@@ -70,16 +70,20 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Clonada por alguien que ellas excluyen, tendría cada nombre real y ninguna clase en sus columnas, y ninguna política la alcanzaría.",
 "A masked copy is possible, but it's still about real people, and a column nobody has classed yet goes through as it is.":
 "Una copia enmascarada es posible, pero sigue siendo de personas reales, y una columna que nadie ha clasificado pasa tal cual.",
-"So development and test get made-up learners, and none of them is anyone.":
-"Así que desarrollo y pruebas reciben estudiantes inventados, y ninguno de ellos es nadie.",
+"So, wherever they can, development and test get made-up learners, and none of them is anyone.":
+"Así que, siempre que pueden, desarrollo y pruebas reciben estudiantes inventados, y ninguno de ellos es nadie.",
 "For size, a script writes 2,614 of them, with production's columns and their classes.":
 "Para el tamaño, un script escribe 2,614, con las columnas de producción y sus clases.",
+"That's synthetic data, and it's easy to write now.":
+"Son datos sintéticos, y hoy es fácil escribirlos.",
+"How closely it should follow the real records, gaps and odd cases included, is the harder question, and still an open one.":
+"Qué tanto deben parecerse a los expedientes reales, con sus huecos y casos raros, es la pregunta difícil, y sigue abierta.",
 "dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.":
 "Las pruebas unitarias de dbt revisan el conteo con filas escritas para cada prueba: si nueve estudiantes dejan Partería, dice menos de 10.",
 "dbt's clone and sample bring production's rows in, so they're never used on tables about people.":
 "El clone y el sample de dbt traen filas de producción, así que nunca se usan en tablas sobre personas.",
-"Like Lascaux II, they're true to the learners, and not one is real.":
-"Como Lascaux II, son fieles a los estudiantes, y ninguno es real.",
+"Like Lascaux II, they stand in for the learners, and not one is real.":
+"Como Lascaux II, ocupan el lugar de los estudiantes, y ninguno es real.",
 "Jun's change runs on 2,614 of them, and no record leaves production.":
 "El cambio de Jun corre sobre 2,614 de ellos, y ningún expediente sale de producción.",
 

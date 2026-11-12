@@ -1,6 +1,6 @@
 /* ===== How long, and then what: the university =====
    The module's hall with the film's own lights; the platform as a tall block of clear glass, its shelves of frosted cards becoming
-   glass drawers once the schedule labels them; the three lives of a record; the retention schedule; Linh's contracts and their end
+   glass drawers once the schedule labels them; the three stages of a record; the retention schedule; Linh's contracts and their end
    dates; a drawer under a hold; and a record's line through time. Every word at least 28 px, on the kit's cards, slips and pills. */
 
 AG_PLACES.hlHall=c=>dp_paintHall(c,{seed:19,horizon:720,vx:960,pools:[[250,1010,420,0.11],[1670,1010,420,0.11],[960,860,760,0.05]]});

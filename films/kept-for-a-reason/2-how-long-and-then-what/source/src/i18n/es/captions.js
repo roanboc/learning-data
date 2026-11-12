@@ -66,10 +66,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nóminas desde 2016, y candidaturas de personas nunca contratadas, desde 2017.",
 "Nothing has ever been deleted: every record is kept as if it were in use, forever.":
 "Nunca se ha borrado nada: cada registro se guarda como si estuviera en uso, para siempre.",
-"But a record has three lives.":
-"Pero un registro tiene tres vidas.",
-"First, it's in use, read and changed often, like Linh Nguyen's pay records this year.":
-"Primero, está en uso, se lee y se cambia a menudo, como las nóminas de Linh Nguyen de este año.",
+"But a record goes through three stages.":
+"Pero un registro pasa por tres etapas.",
+"First, it's live: in use, read and changed often, like Linh Nguyen's pay records this year.":
+"Primero, está activo: en uso, se lee y se cambia a menudo, como las nóminas de Linh Nguyen de este año.",
 "Then it's archived: kept cold, read rarely, by fewer people, like her pay records from past years.":
 "Luego se archiva: guardado en frío, leído rara vez, por menos personas, como sus nóminas de años pasados.",
 "Then, at its end date, it's deleted.":

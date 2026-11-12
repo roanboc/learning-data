@@ -45,7 +45,9 @@ const NARR={
  {"id":"public","gap":0.8,"text":"Public, like published totals. Internal, for the university's own people, like the timetable."},
  {"id":"confidential","gap":0.8,"text":"Confidential, for those with a reason, like the learner table. Restricted, for a named few."},
  {"id":"floors","gap":0.8,"text":"Two floors come from the columns. A table with anything that points to a person is never public."},
- {"id":"restricted","gap":0.8,"text":"A table with anything special is restricted."}
+ {"id":"restricted","gap":0.8,"text":"A table with anything special is restricted."},
+ {"id":"own","gap":0.8,"text":"These five classes and four levels are the university's own. Another organisation may choose others."},
+ {"id":"same","gap":0.8,"text":"What matters is one list, and that everyone uses its words the same way."}
 ]},
 "holds":{"name":"What it holds","lead":1.0,"tail":1.0,"vo":[
  {"id":"support","gap":0.8,"text":"Back to exam support. Its values name no illness: extra time, a separate room, a reader."},

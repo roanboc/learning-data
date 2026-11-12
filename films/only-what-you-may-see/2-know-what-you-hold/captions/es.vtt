@@ -114,83 +114,89 @@ Dos mínimos vienen de las columnas. Una tabla con algo que señale a una person
 00:04:07.346 --> 00:04:09.990
 Una tabla con algo especial es restringida.
 
-00:04:13.290 --> 00:04:19.294
+00:04:11.690 --> 00:04:17.929
+Estas cinco clases y cuatro niveles son los de la universidad. Otra organización puede elegir otros.
+
+00:04:19.429 --> 00:04:23.815
+Lo que importa es una sola lista, y que todos usen sus palabras de la misma manera.
+
+00:04:27.515 --> 00:04:33.519
 De vuelta al apoyo en exámenes. Sus valores no nombran ninguna enfermedad: más tiempo, una sala aparte, un lector.
 
-00:04:20.794 --> 00:04:24.080
+00:04:35.019 --> 00:04:38.305
 Pero Mei sabe por qué un estudiante los tiene: por una discapacidad.
 
-00:04:25.380 --> 00:04:28.364
+00:04:39.605 --> 00:04:42.589
 Así que la columna dice algo sobre su salud: especial.
 
-00:04:30.064 --> 00:04:33.440
+00:04:44.289 --> 00:04:47.665
 El nombre de una columna no dice lo que guarda. Su dueño sí.
 
-00:04:35.340 --> 00:04:42.863
+00:04:49.565 --> 00:04:57.088
 Una columna especial haría restringida toda la tabla de estudiantes: demasiado para la mesa de ayuda y Planificación, que la usan a diario.
 
-00:04:44.163 --> 00:04:51.207
+00:04:58.388 --> 00:05:05.432
 Así que el apoyo en exámenes pasa a una tabla propia, la tabla de apoyos, restringida, para los pocos que organizan los exámenes.
 
-00:04:52.707 --> 00:04:54.727
+00:05:06.932 --> 00:05:08.952
 La tabla de estudiantes sigue confidencial.
 
-00:04:58.027 --> 00:05:02.470
+00:05:12.252 --> 00:05:16.695
 ¿Quién nombra cada columna? Su dueño, una vez, en el origen, donde nacen los datos.
 
-00:05:04.570 --> 00:05:10.274
+00:05:18.795 --> 00:05:24.499
 Como el octágono: el Ministerio fija los límites, y quien fabrica, que conoce la receta, lo pone.
 
-00:05:12.574 --> 00:05:17.485
+00:05:26.799 --> 00:05:31.710
 Gobernanza de datos guarda la lista de clases, y el dueño elige una para cada columna.
 
-00:05:19.585 --> 00:05:25.809
+00:05:33.810 --> 00:05:40.034
 Un escaneo puede sugerir una: esto parece un correo. Solo Mei sabe que el apoyo en exámenes es sobre salud.
 
-00:05:28.109 --> 00:05:34.443
+00:05:42.334 --> 00:05:48.668
 Y una columna nueva sin clase no pasa. Vuelve con una pregunta: ¿qué dice sobre una persona?
 
-00:05:38.543 --> 00:05:44.412
+00:05:52.768 --> 00:05:58.637
 Desde el origen, cada columna lleva su clase a todo lo que se hace con ella. Nadie la nombra otra vez.
 
-00:05:46.112 --> 00:05:49.625
+00:06:00.337 --> 00:06:03.850
 Curso y resultados llegan al estudio de Anil tal como son: ninguna.
 
-00:05:51.325 --> 00:05:57.914
+00:06:05.550 --> 00:06:12.139
 Dos cambian en el camino. El número de estudiante se vuelve un código, hecho con una clave que guarda la oficina de registro.
 
-00:05:59.514 --> 00:06:01.264
+00:06:13.739 --> 00:06:15.489
 La fecha de nacimiento se vuelve el año.
 
-00:06:02.964 --> 00:06:07.380
+00:06:17.189 --> 00:06:21.605
 Un paso que cambia lo que guarda una columna recibe su nueva clase del dueño.
 
-00:06:09.080 --> 00:06:14.601
+00:06:23.305 --> 00:06:28.826
 Mei le da al código la clase seudónima, y al año, indirecta: con un curso, aún puede señalar a uno.
 
-00:06:16.101 --> 00:06:18.462
+00:06:30.326 --> 00:06:32.687
 El apoyo en exámenes nunca llega al estudio.
 
-00:06:20.162 --> 00:06:26.285
+00:06:34.387 --> 00:06:40.510
 Y los totales por curso de Anil, con todo conteo menor de diez oculto, reciben una clase nueva, ninguna, en una tabla pública.
 
-00:06:28.185 --> 00:06:32.580
+00:06:42.410 --> 00:06:46.805
 La clase va adonde va la columna, como el octágono va con el envase.
 
-00:06:35.880 --> 00:06:38.457
+00:06:50.105 --> 00:06:52.682
 El octágono no quitó azúcar por sí solo.
 
-00:06:39.957 --> 00:06:45.790
+00:06:54.182 --> 00:07:00.015
 Nombró lo que guardaba cada envase, donde todos podían verlo, y familias, escuelas y fabricantes actuaron.
 
-00:06:47.490 --> 00:06:50.317
+00:07:01.715 --> 00:07:04.542
 Las clases de Mei tampoco protegen nada por sí solas.
 
-00:06:51.617 --> 00:06:58.758
+00:07:05.842 --> 00:07:12.983
 Pero ahora cada columna dice lo que cuenta de una persona, y cada tabla cuánto cuidado pide, antes de que nadie la abra.
 
-00:07:00.658 --> 00:07:03.314
+00:07:14.883 --> 00:07:17.539
 Cómo ocultar cada clase es la siguiente pregunta.
 
-00:07:04.814 --> 00:07:06.752
+00:07:19.039 --> 00:07:20.977
 No puedes proteger lo que no has nombrado.

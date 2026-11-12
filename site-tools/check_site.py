@@ -40,7 +40,7 @@ What it checks, page by page (every .html under site/):
   and scenarios, are read too.
 - scenarios and labs: in every pack of labs and scenarios, each choice has one right option; a pack's right answers are spread across
   the options (at most half of its scenarios' in one place, and of its labs' rows, where a row marks one option right; a lab's own rows
-  never all in one place); a sorting list's cards aren't written box by box, nor two boxes turn and turn about; and the Spanish pack keeps the English places. A page shows
+  never all in one place); a sorting list's cards aren't written box by box, nor two boxes turn and turn about; an order scenario first shows its steps mixed, from its pack's start or by the one line every engine shares (MIXED); and the Spanish pack keeps the English places. A page shows
   them in the order written. Only the labs a page shows are read (a series' pack can point to one lab of each film's own pack), and not a
   series whose engine mixes the options as it shows them.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
@@ -654,6 +654,16 @@ SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more t
 # an engine (site/assets/<engine>/learn.js) that mixes the options itself each time it shows them, with the words that do it:
 # the packs of the series it shows aren't read
 SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
+# an order scenario's first showing, where its pack gives no start: the one line every engine mixes the steps with, mixed(n, s) for
+# n steps and a number s of the scenario's own, so each scenario is mixed its own way, the same each time. It holds to
+# order_mixed(), which tests/test_spread.py tries on this line itself.
+MIXED = ("const mixed=(n,s)=>{"
+         "const hs=x=>{x=Math.imul(x^x>>>16,0x45d9f3b);x=Math.imul(x^x>>>16,0x45d9f3b);return(x^x>>>16)>>>0;},"
+         "run=o=>[1,n-1].some(d=>o.every((k,p)=>!p||(k-o[p-1]+n)%n===d)),"
+         "fine=o=>n<4?o.some((k,p)=>k!==p):!run(o)&&o.filter((k,p)=>k===p).length<=n/4&&o.filter((k,p)=>p&&k===o[p-1]+1).length<=n/3;"
+         "for(let t=0;t<60;t++){const key=Array.from({length:n},(_,i)=>hs(((s|0)+1)*7919+t*104729+i*1013+n)),"
+         "o=key.map((_,i)=>i).sort((a,b)=>key[a]-key[b]||a-b);if(fine(o))return o;}"
+         "return Array.from({length:n},(_,i)=>(2*i+1)%(n|1));};")
 
 
 def spread_most(n, k):
@@ -673,6 +683,17 @@ def box_by_box(boxes):
 def turn_about(boxes):
     """True where four or more cards go to two boxes turn and turn about: one, the other, one, the other."""
     return len(boxes) > 3 and len(set(boxes)) == 2 and all(x != y for x, y in zip(boxes, boxes[1:]))
+
+
+def order_mixed(start):
+    """Whether an order's first showing, the steps' numbers in the places it shows them, is mixed enough not to give the order
+    away: not in order; and with four steps or more, not in reverse, nor in either from some step on round to the one before
+    it, with at most a quarter of the steps where they belong and at most a third still following the step before them."""
+    n = len(start)
+    if n < 4:
+        return start != sorted(start)
+    run = any(all((start[p] - start[p - 1]) % n == d for p in range(1, n)) for d in (1, n - 1))
+    return not run and sum(k == p for p, k in enumerate(start)) <= n / 4 and sum(start[p] == start[p - 1] + 1 for p in range(1, n)) <= n / 3
 
 
 def learn_pack(path):
@@ -755,7 +776,8 @@ def spread_faults(rel, P, labs, es=None):
     es the Spanish pack (rel names the English one, so the Spanish one's faults name its twin). One right option in each
     choice; among the scenarios, and again among the labs' rows, no place holds more of the right answers than spread_most()
     allows; a lab's own rows not all in one place; a sorting list's cards not box by box, nor two boxes turn and turn about; an
-    order's first showing not in order; and the Spanish pack's options and cards in the English places."""
+    order's first showing mixed (order_mixed()), where the pack gives it; and the Spanish pack's options and cards in the English
+    places."""
     out = []
     choices = [(f'"{q["title"]}"', q["opts"]) for q in P["qs"] if q["opts"] is not None]
     rows = [(f'lab "{k}"', row) for k, lab in P["labs"].items() if k in labs for row in lab["rows"]]
@@ -780,8 +802,8 @@ def spread_faults(rel, P, labs, es=None):
         elif box_by_box(boxes) or turn_about(boxes):
             out.append(f"{rel}: {name} lists its cards {'box by box' if box_by_box(boxes) else 'turn and turn about'} ({', '.join(str(b + 1) for b in boxes)}): mix them")
     for q in P["qs"]:
-        if q["start"] is not None and (sorted(q["start"]) != list(range(q["n"])) or q["start"] == sorted(q["start"])):
-            out.append(f"{rel}: \"{q['title']}\": its start ({q['start']}) must hold each of its {q['n']} steps once, and not in order")
+        if q["start"] is not None and (sorted(q["start"]) != list(range(q["n"])) or not order_mixed(q["start"])):
+            out.append(f"{rel}: \"{q['title']}\": its start ({q['start']}) must hold each of its {q['n']} steps once, and mixed: not in order, in reverse, in either from some step on round, nor with most steps where they belong")
     if es is not None:
         shape = lambda X: ([(q["type"], [r for _, r in q["opts"]] if q["opts"] is not None else None, q["boxes"], q["start"]) for q in X["qs"]],
                            {k: ([[r for _, r in row] for row in lab["rows"]], lab["boxes"]) for k, lab in X["labs"].items()})
@@ -1360,7 +1382,7 @@ def main():
             s["fails"].append(f"Pause and think: {c} of {total} right answers are option {i + 1}: spread them")
     s["notes"].append(f"{packs} packs, {total} questions; right answers by option: " + ", ".join(f"{i + 1}: {c}" for i, c in sorted(places.items())))
 
-    s = rep.check("Scenarios and labs: one right option in each choice, right answers spread across the options, sorting cards not box by box")
+    s = rep.check("Scenarios and labs: one right option in each choice, right answers spread across the options, sorting cards not box by box, an order's steps mixed")
     learn = {p.parent.name: p for p in sorted(WEB.glob("assets/*/learn.en.js"))}
     learn["sketch"] = WEB / "assets/sketch/sketch.js"
     for k, words in SPREAD_SHUFFLED.items():
@@ -1403,6 +1425,17 @@ def main():
             s["fails"].append(f"Scenarios: {c} of {total} right answers are option {i + 1}: spread them")
     s["notes"].append(f"{len(read)} packs, {total} scenarios with options; right answers by option: " + ", ".join(f"{i + 1}: {c}" for i, c in sorted(places.items())))
     s["notes"].append("not read, since their engine mixes the options as it shows them: " + ", ".join(mixed))
+    # an order scenario's first showing: the pack's own start, or the one mix the engines share
+    engines = [p for p in sorted(WEB.glob("assets/*/*.js")) if not re.match(r"film\.|captions\.|think\.e|learn\.e", p.name) and ".captions." not in p.name]
+    orders = [p for p in engines if 'type==="order"' in p.read_text(encoding="utf-8")]
+    for p in orders:
+        src, rel = p.read_text(encoding="utf-8"), p.relative_to(ROOT)
+        if "mixed(" in src:
+            if MIXED not in src:
+                s["fails"].append(f"{rel}: its mixed() isn't the line every engine mixes an order's steps with: copy MIXED from site-tools/check_site.py")
+        elif "q.start" not in src and p.parent.name not in SPREAD_SHUFFLED:
+            s["fails"].append(f"{rel}: an order scenario's first showing comes neither from its pack's start nor from mixed(), so it can show in order: mix it with MIXED (site-tools/check_site.py)")
+    s["notes"].append(f"{len(orders)} engines show order scenarios: {sum('mixed(' in p.read_text(encoding='utf-8') for p in orders)} mix the steps with the shared line, the others take the pack's start or mix every list themselves")
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")

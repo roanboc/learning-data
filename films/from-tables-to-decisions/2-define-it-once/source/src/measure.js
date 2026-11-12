@@ -122,7 +122,8 @@ const DN_HUB={c:[960,470],tools:[{x:90,y:420,w:430,title:"a metric view",logo:"d
 function dn_hubPort(i){const T_=DN_HUB.tools[i];return i===0?[T_.x+T_.w,T_.y+50]:i===1?[T_.x,T_.y+50]:[T_.x,T_.y+50];}
 // o.hub (0 to 1) the hub; o.was (0 to 1) its first name under it; o.ring (0 to 1) the organisations round it, o.named (0 to 1) two of them;
 // o.tools (0 to 1) the tools, before their converters; o.spokes (0 to 1) the converters to each tool; o.lit [i...] tools lit;
-// o.subs [i: text] what a tool shows it has read, o.subA its light; o.a
+// o.subs [i: text] what a tool shows under its name (what it has read, or what it was built from), o.subA its light, one for all
+// or one for each tool [i]; o.a
 function dn_hub(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,[cx,cy]=DN_HUB.c;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
   const rg=clamp(o.ring||0,0,1);if(rg>0){for(let i=0;i<54;i++){const k=clamp(rg*1.6-i/54*0.6,0,1);if(k<=0)continue;const an=-Math.PI/2+i*TAU/54,r=200+18*hash(i,5);
       ctx.fillStyle=rgba(mix(MD.soft,MD.ink,hash(i,9)),0.75*k);ctx.beginPath();ctx.arc(cx+Math.cos(an)*r,cy+Math.sin(an)*r*0.82,5,0,TAU);ctx.fill();}
@@ -134,9 +135,10 @@ function dn_hub(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,[cx,cy]=DN_HUB.c;if(a<=
       // a converter: one arrow each way
       ctx.strokeStyle=rgba(MD.agreed,1);ctx.lineWidth=3;ctx.lineCap="round";for(const [dy,dir] of [[-7,1],[7,-1]]){ctx.beginPath();ctx.moveTo(m.x-13*dir,m.y+dy);ctx.lineTo(m.x+13*dir,m.y+dy);ctx.lineTo(m.x+7*dir,m.y+dy-5);ctx.stroke();}ctx.restore();}
     // what a tool has read comes in under its name, which rises to make room for it
-    const sb=o.subs&&o.subs[i],sa=sb?clamp(o.subA||0,0,1):0,lit=Math.max(o.lit&&o.lit.includes(i)?1:0,sa);ctx.save();ctx.globalAlpha*=ba;
+    const sb=o.subs&&o.subs[i],sa=sb?clamp((Array.isArray(o.subA)?o.subA[i]:o.subA)||0,0,1):0,lit=Math.max(o.lit&&o.lit.includes(i)?1:0,sa);ctx.save();ctx.globalAlpha*=ba;
     if(!sb)md_reader(ctx,T_.x,T_.y,T_.w,{title:T_.title,logo:T_.logo,icon:T_.icon,col:T_.icon?MD.soft:null,lit,h:100});
-    else{md_reader(ctx,T_.x,T_.y,T_.w,{title:"",icon:T_.icon,col:MD.soft,lit,h:100});const tx=T_.x+88,u=ag_sine(sa);
+    else{md_reader(ctx,T_.x,T_.y,T_.w,{title:"",logo:T_.logo,icon:T_.icon,col:T_.icon?MD.soft:null,lit,h:100});
+      const lg=T_.logo&&typeof LOGO!=="undefined"&&LOGO[T_.logo],tx=lg?T_.x+26+48*lg.width/lg.height+18:T_.x+88,u=ag_sine(sa);
       md_T(ctx,T_.title,tx,T_.y+lerp(61,44,u),{w:800,size:32});md_T(ctx,sb,tx,T_.y+82,{w:500,size:28,col:MD.soft,a:ag_in(sa,0.4,0.6)});}
     ctx.restore();});
   const hb=clamp(o.hub==null?1:o.hub,0,1);if(hb>0){ctx.save();ctx.globalAlpha*=hb;ag_about(ctx,cx,cy,lerp(0.6,1,ag_spr(hb,0,0.5)));glow(ctx,cx,cy,260,MD.agreed,0.25);

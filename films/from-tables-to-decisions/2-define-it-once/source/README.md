@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (the definition card, full, with Rohan beside it), the words the voice respells (Jun, AI, HR, Rohan, Desai, Noor, Ossie, MetricFlow, YAML, BI), its opening story (`kilo`), no chapter where the score may pulse, and `"logos": true` for Databricks' and dbt's marks. |
+| `film.json` | The film's key, title, subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (the three measures' cards in the glossary, full, with Rohan and Jun beside them), the words the voice respells (Jun, AI, HR, Rohan, Desai, Noor, Ossie, MetricFlow, YAML, BI), its opening story (`kilo`), no chapter where the score may pulse, and `"logos": true` for Databricks' and dbt's marks. |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. A line with a number or a year says it in words for the voice (`say`), and shows the digits in its caption. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The holds after some lines, and two wordless moments: the title card after the opening, and the end card. |

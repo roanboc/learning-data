@@ -26,7 +26,7 @@ Mexico, 1944. In the Yaqui Valley of Sonora, farmers hardly grow wheat any more:
 |---|---|---|
 | The author's practice (his request, 11 November 2026, and the module's brief) | The films stay light on purpose; the official docs and training for the how; check your own platform's capabilities if it isn't Databricks; a loop to test new features and iterate quickly | *Why the films stay light*; *Test what's new* |
 | The module's rules (its plan and *Decided* rows, 5 November 2026) | At the level of architecture; tools show, they don't lead; every film ends on the official docs: investigate, adapt, implement, iterate | Every chapter |
-| Build, measure, learn (Eric Ries, *The Lean Startup*, 2011) and plan, do, check, act (Deming) | Small experiments with a stated question and a set time, whose result decides the next step, including "no" | *Test what's new*: the sandbox, two days, the dropped trial |
+| Build, measure, learn (Eric Ries, *The Lean Startup*, 2011) and plan, do, study, act (Deming) | Small experiments with a stated question and a set time, whose result decides the next step, including "no" | *Test what's new*: the sandbox, two days, the dropped trial |
 | Timeboxed spikes (agile practice) | A fixed, short time to answer one question before committing to build | *Adapt*: two days, 200 invoices |
 | The data project's own path (*Data as software*) | A change goes in through the data project, with its tests, reviewed by the data team, with a way back | *Implement* |
 

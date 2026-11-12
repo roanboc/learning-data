@@ -12,6 +12,7 @@ What the business owns about its data: the concepts, their owners, the processes
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [What the business owns](https://data.learn-all.org/business-architecture-for-data/what-the-business-owns/) | Who owns what | 7 min | 9 | 3 questions | [script](1-what-the-business-owns/script.md) · [source](1-what-the-business-owns/source/README.md) |
+| [What the business needs to know](https://data.learn-all.org/business-architecture-for-data/what-the-business-needs-to-know/) | The business's concepts | 7 min | 9 | 3 questions | [script](2-what-the-business-needs-to-know/script.md) · [source](2-what-the-business-needs-to-know/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound
@@ -19,7 +20,7 @@ What the business owns about its data: the concepts, their owners, the processes
 - **The look of *The map before the data*:** paper drafts on a wall, the confirmed model in glass, the six layers in their colours, from [`../enterprise-architecture/shared/`](../enterprise-architecture/shared/), with the same people and the same energy utility.
 - **One true story across the series**, told in the series' own drawing style, each film opening on its part of it.
 - **The series' own components** in [`shared/src/ba.js`](shared/src/ba.js): the qanat cut away, the village and its fields, the desert from above, the story's people as plain silhouettes, the ticket and its counts, and the data practice on the map, which each film adds to.
-- **Its own sound in each film.** The series plays a consort of viols, which no other film on the site plays; each film takes its own members of the consort and its own partner sounds (*What the business owns*: the bass viol, bowed and plucked). Music under the opening story, then only now and then; nothing loops, trembles or pulses, except an urgent pulse where a story turns to an error or a rush.
+- **Its own sound in each film.** Each film takes its own instruments, under the topic's rules for its palettes: *What the business owns* plays a bass viol, bowed and plucked; *What the business needs to know*, a clavichord and an oboe. The series' mark, D and A and then the F sharp between them, comes back in every film. Music under the opening story, then only now and then; nothing loops, trembles or pulses, except an urgent pulse where a story turns to an error or a rush.
 
 ## How the films are made
 

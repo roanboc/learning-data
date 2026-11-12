@@ -1,0 +1,219 @@
+1
+00:00:01,400 --> 00:00:09,423
+By 1972, factories across Chile sent their numbers to Cybersyn's team in Santiago by telex, once a day.
+
+2
+00:00:11,123 --> 00:00:16,735
+But one factory's number means nothing beside another's, unless both are measured the same way.
+
+3
+00:00:17,435 --> 00:00:24,667
+Count workers absent one way in one factory and another way in the next, and a factory in trouble could look like the rest.
+
+4
+00:00:26,167 --> 00:00:32,067
+Santiago needed every factory's words to mean the same, or it couldn't compare them, or add them up.
+
+5
+00:00:33,367 --> 00:00:40,994
+So in every factory's model, social unease would be measured one way: the share of the workers on its payroll absent that day.
+
+6
+00:00:42,694 --> 00:00:50,043
+And the operations room would show every factory with the same icons, so anyone could read them without training in science.
+
+7
+00:00:51,543 --> 00:00:59,660
+After the strike of October 1972, numbers from across the country went into one report, written every day at CORFO.
+
+8
+00:01:00,960 --> 00:01:09,557
+Taken by hand to the presidential palace, it showed national production and the points of crisis, from numbers a few days old, not six months.
+
+9
+00:01:11,257 --> 00:01:18,052
+At the utility, a new team building the home energy app opens a change: its first table, called customer.
+
+10
+00:01:18,752 --> 00:01:24,185
+Customer already means three things here. This would be a fourth: whoever signs in to the app.
+
+11
+00:01:25,485 --> 00:01:30,340
+The review catches it before it reaches a table, from what the data architecture keeps.
+
+12
+00:01:37,040 --> 00:01:44,352
+The app's table holds everyone who signs in: an account holder, but also a partner, a tenant, a grown-up child.
+
+13
+00:01:45,852 --> 00:01:50,102
+Called just customer, anyone reading it would take it for one of the other three.
+
+14
+00:01:51,402 --> 00:01:57,567
+The last time one thing had six names, the January storm's texts missed 180 households.
+
+15
+00:01:59,267 --> 00:02:04,800
+So the review flags it: customer has three meanings here, and a table can't be called just that.
+
+16
+00:02:06,300 --> 00:02:14,193
+It reads what the data architecture keeps in the repository, with the map: names, a reference model, principles and decisions.
+
+17
+00:02:16,893 --> 00:02:22,110
+Each name is built from parts, as an international standard for naming data suggests.
+
+18
+00:02:23,410 --> 00:02:27,166
+First, the thing it's about, in the glossary's words: account holder.
+
+19
+00:02:28,266 --> 00:02:29,924
+Then, what about it: start.
+
+20
+00:02:31,224 --> 00:02:35,820
+Last, the kind of value, from a short list: a date. Account holder start date.
+
+21
+00:02:37,520 --> 00:02:43,340
+As with social unease, each term is defined once, and every system uses it the same way.
+
+22
+00:02:44,640 --> 00:02:49,375
+A word with more than one meaning here, like customer, is never a name on its own.
+
+23
+00:02:50,675 --> 00:02:57,328
+Older systems keep their own names, each mapped once to the glossary's: billing's premise is a connection point.
+
+24
+00:03:00,428 --> 00:03:08,541
+For much of this, the industry already has words: the Common Information Model, a reference model for electricity, from the IEC.
+
+25
+00:03:10,441 --> 00:03:15,973
+It calls the point where power is delivered a usage point, and the premises a service location.
+
+26
+00:03:17,473 --> 00:03:22,019
+Whoever receives the service is a customer, with a customer account for billing.
+
+27
+00:03:23,919 --> 00:03:31,829
+The utility keeps its own words, and maps each to the model: a connection point to a usage point, an account holder to a customer.
+
+28
+00:03:34,129 --> 00:03:39,901
+So a new system or a partner can be matched to the utility's words through words they already know.
+
+29
+00:03:41,801 --> 00:03:48,117
+Whoever signs in to the app is none of the three: a new concept, which needs its own name and an owner.
+
+30
+00:03:51,417 --> 00:03:56,569
+Then, a few principles: each a short rule, with why it holds and what follows from it.
+
+31
+00:03:58,069 --> 00:04:05,723
+One concept, one name, from the glossary: six names for one thing left 180 households without a text.
+
+32
+00:04:07,223 --> 00:04:10,770
+Each fact has one home, and every copy traces back to it.
+
+33
+00:04:12,070 --> 00:04:16,792
+Data crosses a domain's edge only by a published flow, with its contract.
+
+34
+00:04:18,092 --> 00:04:23,429
+And every table belongs to a data product, owned by the business that creates its data.
+
+35
+00:04:26,129 --> 00:04:33,515
+Each decision is written down beside the map: what was decided and why, what else was considered, who decided, and when.
+
+36
+00:04:35,015 --> 00:04:43,307
+Decision seven: customer is never a name on its own. Grace, the head of retail and Ama decided it on 14 October.
+
+37
+00:04:45,007 --> 00:04:50,451
+Why: here customer means three things, and a table called just that would be read as any of them.
+
+38
+00:04:51,151 --> 00:04:57,034
+Considered, and turned down: one definition of customer for everyone. It would fit neither side.
+
+39
+00:04:58,334 --> 00:05:03,285
+What follows: every name says which: account holder, connection point or contact.
+
+40
+00:05:04,785 --> 00:05:10,321
+A record outlives the meeting and the people in it: the next team can read why, not only what.
+
+41
+00:05:13,021 --> 00:05:17,641
+All of it is kept with the map, and every change is checked against it before it's made.
+
+42
+00:05:19,341 --> 00:05:24,776
+The data team reviews the app team's change. What a new term means isn't theirs to decide.
+
+43
+00:05:26,676 --> 00:05:33,108
+So the app team asks retail, in a ticket, and the head of retail defines the term in the glossary first.
+
+44
+00:05:34,808 --> 00:05:38,110
+App user: a person who signs in to the app for an account.
+
+45
+00:05:40,010 --> 00:05:47,174
+Then the table is built from it: app user, with the account each one acts for. The check passes, and so does the review.
+
+46
+00:05:49,274 --> 00:05:54,989
+On the map, app user joins retail's concepts, with its owner and a link to decision seven.
+
+47
+00:06:01,489 --> 00:06:09,614
+By May 1973, Cybersyn reached a quarter of the nationalised industries, more than a hundred, with half their revenue.
+
+48
+00:06:11,114 --> 00:06:18,902
+It never ran as designed. The operations room could do very little, and the simulator never left the experimental stage.
+
+49
+00:06:20,202 --> 00:06:22,735
+Only the telex network was used regularly.
+
+50
+00:06:23,435 --> 00:06:28,193
+Beer later wrote that the model couldn't adequately represent the changes of those years.
+
+51
+00:06:29,893 --> 00:06:38,950
+On 11 September 1973, a military coup ended Allende's government. Later, the operations room was dismantled.
+
+52
+00:06:41,250 --> 00:06:48,108
+On the day of the coup, members of the team carried copies of its documents out of CORFO, to keep them for the future.
+
+53
+00:06:49,808 --> 00:06:53,187
+The ideas held. The practice never had time to mature.
+
+54
+00:06:55,287 --> 00:07:01,107
+At the utility, the data architecture is never finished either: it matures one change at a time.
+
+55
+00:07:02,407 --> 00:07:08,941
+In its first year, the review stopped nine names before they reached a table, and fourteen decisions were written down.

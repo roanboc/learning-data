@@ -1,6 +1,6 @@
 # Defined in the open: questions and assumptions
 
-*Modern data basics* · *From tables to decisions*, film 2 of 3 · merged, PR #167 · [pull request](https://github.com/roanboc/learning-data/pull/167); reworked into three measures on 11 November 2026; changed on 12 November 2026 from Rodrigo's answer on where a measure is defined (PR #PRNUM)
+*Modern data basics* · *From tables to decisions*, film 2 of 3 · merged, PR #167 · [pull request](https://github.com/roanboc/learning-data/pull/167); reworked into three measures on 11 November 2026; changed on 12 November 2026 from Rodrigo's answer on where a measure is defined (PR #327)
 
 [Watch it on the site](https://data.learn-all.org/from-tables-to-decisions/define-it-once/)
 
@@ -52,7 +52,7 @@ Question 5 was the one put to Rodrigo for this film: *is "one home per measure, 
 
 > Define it once. In one place is fine, ideally in an agnostic layer like Ossie and then from there implemented in the tool (also ideally one, but that depends on the org context), but at least having them clearly catalogued.
 
-"Ossie" is read as Apache Ossie, the open format the film already names in *A format any tool can read*. It was called the Open Semantic Interchange (OSI) until July 2026, so both names are one standard. Question 5 is closed: one home per measure stands. The film now also says the three things it didn't, a line each, made in the thread "Apply review answers to Modern data basics" (PR #PRNUM):
+"Ossie" is read as Apache Ossie, the open format the film already names in *A format any tool can read*. It was called the Open Semantic Interchange (OSI) until July 2026, so both names are one standard. Question 5 is closed: one home per measure stands. The film now also says the three things it didn't, a line each, made in the thread "Apply review answers to Modern data basics" (PR #327):
 
 | His words | The film's line now | Where it shows |
 |---|---|---|

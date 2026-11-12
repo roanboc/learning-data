@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Security all the way through",
+    "key": "security-all-the-way-through-en",
+    "dir": "films/platform-and-solution-architecture/5-security-all-the-way-through/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/security-all-the-way-through/film.js",
+    "video": "dist/security-all-the-way-through.mp4",
+    "file": "security-all-the-way-through.mp4",
+    "captions": [
+      [
+        "films/platform-and-solution-architecture/5-security-all-the-way-through/captions/en.srt",
+        "security-all-the-way-through.en.srt"
+      ],
+      [
+        "films/platform-and-solution-architecture/5-security-all-the-way-through/captions/es.srt",
+        "security-all-the-way-through.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/platform-and-solution-architecture/5-security-all-the-way-through/source",
+      ":(exclude)films/platform-and-solution-architecture/5-security-all-the-way-through/source/src/i18n/es/captions.js",
+      "films/platform-and-solution-architecture/shared",
+      "films/enterprise-architecture/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+      "films/when-things-go-wrong/characters",
+      "films/when-things-go-wrong/1-silent-change/source/src",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/hands.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py"
+    ],
+    "legibility": {
+      "texts": 319,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

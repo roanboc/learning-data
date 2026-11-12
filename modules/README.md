@@ -230,6 +230,7 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 - [Inside the platform](../films/platform-and-solution-architecture/2-inside-the-platform/) — `inside-the-platform`
 - [One platform, or many](../films/platform-and-solution-architecture/3-one-platform-or-many/) — `one-platform-or-many`
 - [Where it meets the applications](../films/platform-and-solution-architecture/4-where-it-meets-the-applications/) — `where-it-meets-the-applications`
+- [Security all the way through](../films/platform-and-solution-architecture/5-security-all-the-way-through/) — `security-all-the-way-through`
 
 ### AI and continuous architecture
 

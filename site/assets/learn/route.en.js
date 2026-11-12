@@ -150,14 +150,15 @@ window.LD_ROUTE = {
      "title": "Platform and solution architecture",
      "href": "platform-and-solution-architecture/",
      "poster": "an-application-or-a-platform-poster.jpg",
-     "kicker": "Series · 4 of 8 films",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Series · 5 of 8 films",
+     "len": "39 min",
+     "min": 39.0,
      "films": [
       "ld-an-application-or-a-platform",
       "ld-inside-the-platform",
       "ld-one-platform-or-many",
-      "ld-where-it-meets-the-applications"
+      "ld-where-it-meets-the-applications",
+      "ld-security-all-the-way-through"
      ]
     },
     {

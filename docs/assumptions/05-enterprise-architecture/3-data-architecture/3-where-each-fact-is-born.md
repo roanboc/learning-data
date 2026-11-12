@@ -1,6 +1,6 @@
 # Where each fact is born: questions and assumptions
 
-*Enterprise architecture* · *Data architecture*, film 3 of 6 · PR #PRNUM · [pull request](https://github.com/roanboc/learning-data/pull/PRNUM)
+*Enterprise architecture* · *Data architecture*, film 3 of 6 · PR #348 · [pull request](https://github.com/roanboc/learning-data/pull/348)
 
 [Watch it on the site](https://data.learn-all.org/data-architecture/where-each-fact-is-born/)
 

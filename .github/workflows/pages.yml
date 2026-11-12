@@ -80,8 +80,9 @@ jobs:
       - name: Show how the films read on a phone
         if: steps.newer.outputs.go == 'true'
         run: python site-tools/build_series.py --legibility >> "$GITHUB_STEP_SUMMARY"
-      # The home and Scenarios pages are committed without each series' count of films, which every film changed: fill it in.
-      - name: Count each series' films on the home and Scenarios pages
+      # The Scenarios pages are committed without each series' count of films, which every film changed: fill it in. The
+      # search's words (assets/learn/search.<lang>.json), made from every film's captions, aren't committed either: write them.
+      - name: Count each series' films on the Scenarios pages, and write the search's words
         if: steps.newer.outputs.go == 'true'
         run: python site-tools/build_series.py --publish
       - name: Name the commit the site is built from

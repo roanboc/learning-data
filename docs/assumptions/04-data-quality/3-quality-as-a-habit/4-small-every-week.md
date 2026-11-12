@@ -1,6 +1,6 @@
 # Small, every week: questions and assumptions
 
-*Data quality* · *Quality as a habit*, film 4 · merged, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218); changed on 12 November 2026 from Rodrigo's answer on the loop's name, plan, do, study, act (PR #NNN)
+*Data quality* · *Quality as a habit*, film 4 · merged, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218); changed on 12 November 2026 from Rodrigo's answer on the loop's name, plan, do, study, act (PR #336)
 
 [Watch it on the site](https://data.learn-all.org/quality-as-a-habit/small-every-week/)
 
@@ -53,7 +53,7 @@ Row 17 was put to Rodrigo as question 5: *Small, every week. Assumed: Plan, do, 
 
 > Sure, let's go with PDSA, especially with Agents that's becoming more important because the understanding can be hidden during the do (delegated). So a person needs to understand in planning, know enough to assist the do, study the outcomes in regards to the plan, and act accordingly. I like it.
 
-So the film says plan, do, study, act, and it says his reason, in four lines that close the chapter. The change was made in the thread "Apply review answers to Data quality" (PR #NNN):
+So the film says plan, do, study, act, and it says his reason, in four lines that close the chapter. The change was made in the thread "Apply review answers to Data quality" (PR #336):
 
 | His words | The film's line now | Where it shows |
 |---|---|---|

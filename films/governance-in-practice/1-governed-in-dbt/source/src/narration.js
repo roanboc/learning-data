@@ -38,6 +38,7 @@ const NARR={
  {"id":"version","gap":0.3,"text":"A change that would break a reader becomes a new version, beside the old one, with a date to go:"},
  {"id":"date","gap":0.8,"text":"credentials' first version goes on 31 March 2027.","say":"credentials' first version goes on the thirty-first of March, twenty twenty-seven."},
  {"id":"exposures","gap":0.8,"text":"And exposures name who uses each table, and who answers for each use."},
+ {"id":"teams","gap":0.8,"text":"Contracts like these are agreed team to team, with whoever reads the data or sends it, and don't wait on governance."},
  {"id":"canonical","gap":0.8,"text":"Only the canonical tables, the shared core, also have an enterprise contract, in an open standard."},
  {"id":"architect","gap":0.8,"text":"Data governance's information architect writes it first, and the data team builds to it."},
  {"id":"differ","gap":0.8,"text":"A check compares the two, and if they differ, data governance looks at how the change got there."}]},

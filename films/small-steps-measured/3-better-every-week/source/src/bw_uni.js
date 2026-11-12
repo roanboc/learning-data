@@ -5,7 +5,7 @@
      bwFriday, bwMon  the team's room on a Friday afternoon (the late, low sun) and on a Monday morning
      bw_tracker      the tracker on a screen: a few requests, each with the days it waited for its first question
      bw_week         the week's calendar: the Friday half-hour, 15:30 to 16:00, kept for how the team works
-     bw_pdca         plan, do, check, act: a ring of four arcs
+     bw_pdca         plan, do, study, act: a ring of four arcs
      bw_steps        a request's first steps, a box each: it lands on the one list; it waits for Monday's planning; it goes to
                      someone; who reads it, and asks
      bw_fridays      fifteen Fridays, a chip each: kept (a green tick) or dropped (a grey cross)
@@ -49,10 +49,10 @@ function bw_week(ctx,x,y,w,words,o){o=o||{};const a=o.a==null?1:o.a,h=640,bb={x,
     lp_T(ctx,"15:30",bx+bw2/2,by+bh+38,{w:700,size:28,align:"center",col:LP.blue});ctx.restore();}
   ctx.restore();return bb;}
 
-/* ---------------------------------------------------------------- plan, do, check, act */
+/* ---------------------------------------------------------------- plan, do, study, act */
 // a ring of four arcs round (cx, cy), radius r, drawn clockwise from the top as u goes from 0 to 1, each named outside it; o.mid (0 to 1:
 // the words in the middle), o.midText (a line, or a list of lines), o.a
-const BW_PDCA=["Plan","Do","Check","Act"];
+const BW_PDCA=["Plan","Do","Study","Act"];
 function bw_pdca(ctx,cx,cy,r,o){o=o||{};const a=o.a==null?1:o.a,u=clamp(o.u||0,0,1);if(a<=0.004||u<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.lineCap="round";
   for(let i=0;i<4;i++){const k=clamp(u*4-i,0,1);if(k<=0)continue;const a0=-Math.PI/2+i*Math.PI/2+0.1,a1=a0+(Math.PI/2-0.2)*ag_sine(k);
     ctx.strokeStyle=rgba(LP.blue,1);ctx.lineWidth=14;ctx.beginPath();ctx.arc(cx,cy,r,a0,a1);ctx.stroke();

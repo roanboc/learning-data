@@ -1,0 +1,40 @@
+{
+  "key": "how-it-travels",
+  "title": "How it travels",
+  "sub": "Data architecture, a series on what DAMA calls data architecture, between the business and the systems: how a fact travels between domains, what crosses each edge, in which shape, under which contract, and every flow drawn on the map with an owner at each end.",
+  "howto": "Glass in the layers' colours is the confirmed model: gold is the business layer, peach the information layer, where data architecture works. Each system is a glass card; the wall between the network and retail is a frosted band, and a path across it is a line: solid and drawn on the map, or dashed and grey when nobody drew it. A message is a small card that travels along a line. Chile in 1972 is drawn in lamp-light: the long country, its telex lines, and the strips that crossed them.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "map",
+    "breath",
+    1.4
+  ],
+  "say": [
+    [
+      "\\bInés\\b",
+      "Ee-ness"
+    ],
+    [
+      "\\bCybersyn's\\b",
+      "Cyber-sin's"
+    ],
+    [
+      "\\bCybersyn\\b",
+      "Cyber-sin"
+    ],
+    [
+      "\\bCORFO\\b",
+      "Cor-foe"
+    ],
+    [
+      "\\bDAMA\\b",
+      "Dah-ma"
+    ]
+  ],
+  "story": [
+    "strike"
+  ]
+}

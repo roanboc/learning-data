@@ -1,10 +1,11 @@
 /* Learning Data: "Pausa para pensar" de One language, kept, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (fourth, model, kept), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). Una pregunta sin "stop" no tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  fourth:{q:"La primera tabla del equipo de la app se llama customer. ¿Por qué la revisión la detiene antes de llegar a una tabla?",
+  fourth:{stop:"names",q:"La primera tabla del equipo de la app se llama customer. ¿Por qué la revisión la detiene antes de llegar a una tabla?",
     opts:[{t:"Cliente es una palabra de comercialización, así que solo su equipo puede construir una tabla así.",near:true},{t:"Cliente ya significa tres cosas aquí, así que cualquiera leería la tabla como una de ellas.",ok:true},{t:"Los nombres necesitan tres partes, y customer es una palabra, muy corta para las reglas."}],
     why:"El problema no es quién puede usar la palabra, ni su largo: cliente ya significa tres cosas en la empresa, el titular de la cuenta, un punto de conexión y un contacto, así que una tabla llamada solo customer se leería como cualquiera de ellas. La última vez que una cosa tuvo seis nombres, los avisos de la tormenta de enero no llegaron a 180 hogares. La revisión lo detecta con lo que la arquitectura de datos guarda junto al mapa, antes de que llegue a una tabla."},
   model:{q:"La empresa conserva sus propias palabras y relaciona cada una con el Common Information Model. ¿Qué le da eso?",

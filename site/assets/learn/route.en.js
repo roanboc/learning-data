@@ -134,14 +134,15 @@ window.LD_ROUTE = {
      "title": "Data architecture",
      "href": "data-architecture/",
      "poster": "between-the-business-and-the-systems-poster.jpg",
-     "kicker": "Series · 4 of 6 films",
-     "len": "27 min",
-     "min": 27.0,
+     "kicker": "Series · 5 of 6 films",
+     "len": "35 min",
+     "min": 35.0,
      "films": [
       "ld-between-the-business-and-the-systems",
       "ld-the-pyramid-taken-apart",
       "ld-where-each-fact-is-born",
-      "ld-how-it-travels"
+      "ld-how-it-travels",
+      "ld-who-owns-which-data"
      ]
     },
     {

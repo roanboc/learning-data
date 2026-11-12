@@ -221,6 +221,7 @@ Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data
 - [The pyramid, taken apart](../films/data-architecture/2-the-pyramid-taken-apart/) — `the-pyramid-taken-apart`
 - [Where each fact is born](../films/data-architecture/3-where-each-fact-is-born/) — `where-each-fact-is-born`
 - [How it travels](../films/data-architecture/4-how-it-travels/) — `how-it-travels`
+- [Who owns which data](../films/data-architecture/5-who-owns-which-data/) — `who-owns-which-data`
 
 ### Platform and solution architecture
 

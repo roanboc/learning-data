@@ -208,12 +208,14 @@ Labs and assessments: [site/assets/enterprise-architecture/learn.en.js](../site/
 Source: [films/business-architecture-for-data](../films/business-architecture-for-data/) · Portal: `/business-architecture-for-data/`
 
 - [What the business owns](../films/business-architecture-for-data/1-what-the-business-owns/) — `what-the-business-owns`
+- [What the business needs to know](../films/business-architecture-for-data/2-what-the-business-needs-to-know/) — `what-the-business-needs-to-know`
 
 ### Data architecture
 
 Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data-architecture/`
 
 - [Between the business and the systems](../films/data-architecture/1-between-the-business-and-the-systems/) — `between-the-business-and-the-systems`
+- [The pyramid, taken apart](../films/data-architecture/2-the-pyramid-taken-apart/) — `the-pyramid-taken-apart`
 
 ### Platform and solution architecture
 
@@ -226,6 +228,7 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-architecture/) · Portal: `/ai-and-continuous-architecture/`
 
 - [Agents on the map](../films/ai-and-continuous-architecture/1-agents-on-the-map/) — `agents-on-the-map`
+- [The AI platform](../films/ai-and-continuous-architecture/2-the-ai-platform/) — `the-ai-platform`
 
 ## Master and reference data
 

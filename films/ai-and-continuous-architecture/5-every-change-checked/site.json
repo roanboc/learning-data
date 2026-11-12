@@ -1,0 +1,65 @@
+{
+  "kicker": "The map, tested on every change",
+  "kicker_es": "El mapa, probado en cada cambio",
+  "title_es": "Cada cambio, comprobado",
+  "h1": "Every change, checked: walked through all it touches before anyone builds",
+  "h1_es": "Cada cambio, comprobado: recorrido por todo lo que toca antes de construir",
+  "lead": "Last year, letters about planned work read an old table, and 1,900 households lost power without warning. Now the utility's map is tested on every change, and the map agent, tested first, walks a new one down to the tables, checked against what really runs. The owners decide.",
+  "lead_es": "El año pasado, las cartas de trabajos programados leían una tabla vieja, y 1,900 hogares se quedaron sin luz sin aviso. Ahora el mapa se prueba en cada cambio, y el agente del mapa, ya probado, recorre uno nuevo hasta las tablas, contrastado con lo que de verdad corre. Deciden los responsables.",
+  "description": "A film about checking every change to an architecture before anyone builds it: the utility's map now changes every day, and last year planned work moved to a new table while the letters that warn households kept reading the old one, so 1,900 households got the wrong date and lost power without warning, though nobody had done anything wrong and nobody could see what read the old table; every element on the map now says who owns it and where it came from, like the bricks of Babylon's river wall, stamped with the king's name and the work they were for, so the map is tested as code is, on every change: every element has an owner and a source, every capability is realised by a process or a system, every data object stands for a business object, nothing is left unlinked or there twice, and every rule has a home and a case that must fail, because a check that has never failed may be checking nothing; in software, checks like these are called fitness functions; the map agent's walk of a change is tested first on one whose answer is known, the social tariff, where it missed a secure exchange nobody had drawn, so the map gained the line and a new check; then it walks the head of retail's ask, a text to each household two days before planned work, down to the tables, stops at a new element with no owner, and names who must agree, each with its ID and evidence; the walk is checked against the running estate, read-only, with personal and sensitive data masked, where a copy of phone numbers in the contact centre's software differs in one number in eleven; and the head of retail decides which system is the source.",
+  "description_es": "Una película sobre comprobar cada cambio en una arquitectura antes de que nadie lo construya: el mapa de la empresa cambia cada día, y el año pasado el trabajo programado pasó a una tabla nueva mientras las cartas que avisan a los hogares seguían leyendo la antigua, así que 1,900 hogares recibieron la fecha equivocada y se quedaron sin luz sin aviso, aunque nadie había hecho nada mal y nadie podía ver qué leía la tabla antigua; ahora cada elemento del mapa dice quién es su responsable y de dónde viene, como los ladrillos del muro del río de Babilonia, estampados con el nombre del rey y la obra para la que eran, así que el mapa se prueba como el código, en cada cambio: cada elemento tiene un responsable y una fuente, cada capacidad la realiza un proceso o un sistema, cada objeto de datos representa un objeto de negocio, nada queda sin enlazar ni está dos veces, y cada regla tiene un lugar propio y un caso que debe fallar, porque una comprobación que nunca falló puede no comprobar nada; en software, comprobaciones así se llaman funciones de aptitud; el recorrido de un cambio que hace el agente del mapa se prueba primero con uno cuya respuesta se conoce, la tarifa social, donde se le escapó un intercambio seguro que nadie había dibujado, así que el mapa ganó la línea y una comprobación nueva; luego recorre el pedido de quien dirige comercialización, un mensaje a cada hogar dos días antes del trabajo programado, hasta las tablas, se detiene en un elemento nuevo sin responsable y nombra a quienes deben estar de acuerdo, cada uno con su ID y su evidencia; el recorrido se contrasta con lo que está en marcha, en solo lectura y con los datos personales y sensibles enmascarados, donde una copia de los teléfonos en el software del centro de contacto difiere en un número de cada once; y quien dirige comercialización decide qué sistema es la fuente.",
+  "card": "Letters once read an old table and households lost power without warning. Now the map is tested on every change, and each change walked before anyone builds.",
+  "card_es": "Unas cartas leyeron una tabla vieja y hubo hogares sin luz sin aviso. Ahora el mapa se prueba en cada cambio, y cada cambio se recorre antes de construir.",
+  "chapters_es": {
+    "brick": "Un nombre y un propósito",
+    "touch": "¿Qué va a tocar?",
+    "checks": "Comprobado en cada cambio",
+    "test": "Primero, probar al agente",
+    "walk": "Recorrer el cambio",
+    "estate": "Lo que de verdad está en marcha",
+    "back": "De vuelta al muro del río",
+    "end": "Cada cambio, comprobado"
+  },
+  "past": [
+    "Babylon, 625 to 605 BCE",
+    "On the edges of the baked bricks of Babylon's river wall, Nabopolassar's workmen stamped or wrote the king's name and the work each brick was for; archaeologists still read from them which king built each stretch."
+  ],
+  "past_es": [
+    "Babilonia, 625 a 605 a. C.",
+    "En el canto de los ladrillos cocidos del muro del río de Babilonia, los obreros de Nabopolasar estampaban o escribían el nombre del rey y la obra para la que era cada ladrillo; los arqueólogos aún leen en ellos qué rey construyó cada tramo."
+  ],
+  "next_h": "Every element owned and sourced, every change checked. Next, kept alive.",
+  "next_h_es": "Cada elemento con responsable y fuente, cada cambio comprobado. Luego, mantenerla viva.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The kings' own words",
+        "title_es": "Las palabras de los reyes (en inglés)",
+        "line": "Nabopolassar's inscriptions, in an open edition (RINBE 1/1, 2024): the bricks of the Arahtu embankment, and the older king's inscription he kept where it was.",
+        "line_es": "Las inscripciones de Nabopolasar, en una edición abierta (RINBE 1/1, 2024): los ladrillos del terraplén del Arahtu, y la inscripción del rey anterior que dejó donde estaba.",
+        "href": "https://epub.ub.uni-muenchen.de/118421/",
+        "href_es": "https://epub.ub.uni-muenchen.de/118421/"
+      },
+      {
+        "title": "Fitness function-driven development",
+        "title_es": "Desarrollo guiado por funciones de aptitud (en inglés)",
+        "line": "Thoughtworks on fitness functions: tests that say how close an architecture is to its aims, run as the work happens rather than after it.",
+        "line_es": "Thoughtworks sobre las funciones de aptitud: pruebas que dicen cuán cerca está una arquitectura de sus fines, y corren mientras se trabaja, no después.",
+        "href": "https://www.thoughtworks.com/insights/articles/fitness-function-driven-development",
+        "href_es": "https://www.thoughtworks.com/insights/articles/fitness-function-driven-development"
+      },
+      {
+        "title": "The ArchiMate modelling language",
+        "title_es": "El lenguaje de modelado ArchiMate (en inglés)",
+        "line": "The Open Group's overview of the layers and relationships a map like Tomás's is drawn in, such as a capability realised by a process.",
+        "line_es": "La presentación de The Open Group de las capas y relaciones con que se dibuja un mapa como el de Tomás, como una capacidad realizada por un proceso.",
+        "href": "https://www.opengroup.org/archimate-forum/archimate-overview",
+        "href_es": "https://www.opengroup.org/archimate-forum/archimate-overview"
+      }
+    ]
+  }
+}

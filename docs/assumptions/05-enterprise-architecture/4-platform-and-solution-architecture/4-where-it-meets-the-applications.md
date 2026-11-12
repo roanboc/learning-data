@@ -1,6 +1,6 @@
 # Where it meets the applications: questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, film 4 of 8 · PR #— · [pull request](https://github.com/roanboc/learning-data/pulls)
+*Enterprise architecture* · *Platform and solution architecture*, film 4 of 8 · PR #372 · [pull request](https://github.com/roanboc/learning-data/pull/372)
 
 [Watch it on the site](https://data.learn-all.org/platform-and-solution-architecture/where-it-meets-the-applications/)
 

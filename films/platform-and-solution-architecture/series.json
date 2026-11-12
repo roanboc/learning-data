@@ -38,6 +38,11 @@
       "biz",
       "Runs the network",
       "Grace Achieng, who owns network operations"
+    ],
+    [
+      "biz",
+      "Knows the rules",
+      "Ama Owusu, the regulatory lead"
     ]
   ],
   "people_es": [
@@ -60,6 +65,11 @@
       "biz",
       "Hace funcionar la red",
       "Grace Achieng, dueña de las operaciones de la red"
+    ],
+    [
+      "biz",
+      "Conoce las reglas",
+      "Ama Owusu, la responsable regulatoria"
     ]
   ]
 }

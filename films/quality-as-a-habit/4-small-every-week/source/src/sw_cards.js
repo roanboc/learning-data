@@ -1,8 +1,8 @@
 /* ===== Small, every week: the film's own helpers =====
    Timing, the corner that names the place and the year, the opening's live pictures (the team in the wheat, the field book's calendar
    of generations, the map's dots, lines, sacks and wheat, a certificate, a folder held open), and the bench's cards (the four steps of
-   plan, do, check, act; the order of measure, simplify, standardise, automate; the year's ledger; the week on the dashboard; the films'
-   cards). All prefixed sw_; the module's colours keep their meanings (look.js): steel for a measure taken, brass for what good means,
+   plan, do, study, act, an agent and what's handed to it; the order of measure, simplify, standardise, automate; the year's ledger; the
+   week on the dashboard; the films' cards). All prefixed sw_; the module's colours keep their meanings (look.js): steel for a measure taken, brass for what good means,
    amber for a check that holds names. */
 
 // made once per chapter, the first time it draws: its cues are known by then
@@ -82,15 +82,19 @@ function sw_folder(c,hands){if(!hands||!hands.near)return;const h=hands.near;c.s
   c.fillStyle=rgba(lin,1);rr(c,12,12,114,156,5);c.fill();rr(c,144,12,114,156,5);c.fill();
   c.fillStyle="rgba(120,96,64,0.12)";c.fillRect(126,12,6,156);c.restore();}
 
-/* ---------------------------------------------------------------- plan, do, check, act
+/* ---------------------------------------------------------------- plan, do, study, act
    A ring of four cards with arrows round it (u 0), or the same four as a row along the top of the wall (u 1), moving between the two
-   (each card glides, so its word never shows twice); o.lits ([4], how lit each step is, 0 to 1: its card in ink, its word in chalk), o.wheat
-   (0 to 1: the team's words beside each step: sow again, sow, look, keep the best), o.a. */
-const SW_STEPS=["Plan","Do","Check","Act"],SW_WHEAT=["sow again","sow","look","keep the best"];
-// Plan stands at the ring's left, then Do, Check and Act clockwise, so the ring opens into the row without two pills crossing: Plan, Do
-// and Check rise to the row together, Act after them, moving right before it rises
+   (each card glides, so its word never shows twice); o.spread (0 to 1) moves the row's steps apart, each to the head of one of four
+   columns (SW_COLX); o.lits ([4], how lit each step is, 0 to 1: its card in ink, its word in chalk), o.wheat (0 to 1: the team's words
+   beside each step: sow again, sow, look, keep the best), o.a. */
+const SW_STEPS=["Plan","Do","Study","Act"],SW_WHEAT=["sow again","sow","look","keep the best"];
+// four columns across the wall, the slots the next chapter's four steps stand in too: a column's left edge, and its width
+const SW_COLX=i=>120+i*440,SW_COLW=380;
+// Plan stands at the ring's left, then Do, Study and Act clockwise, so the ring opens into the row without two pills crossing: Plan, Do
+// and Study rise to the row together, Act after them, moving right before it rises
 function sw_cycle(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const u0=clamp(o.u||0,0,1),u=ag_sine(u0),R=220,cx=960,cy=430;ctx.save();ctx.globalAlpha*=a;
-  const ring=i=>{const an=Math.PI+i*Math.PI/2;return[cx+Math.cos(an)*R,cy+Math.sin(an)*R];},row=i=>[960+(i-1.5)*236,104],
+  const sp=ag_sine(clamp(o.spread||0,0,1)),gap=lerp(236,SW_COLX(1)-SW_COLX(0),sp),mid=lerp(960,(SW_COLX(0)+SW_COLX(3)+SW_COLW)/2,sp),
+    ring=i=>{const an=Math.PI+i*Math.PI/2;return[cx+Math.cos(an)*R,cy+Math.sin(an)*R];},row=i=>[mid+(i-1.5)*gap,104],
     own=i=>i<3?ag_sine(clamp(u0/0.6,0,1)):ag_sine(clamp((u0-0.5)/0.5,0,1));
   // the ring's arrows, clockwise, fading as it becomes the row
   if(u<1){ctx.save();ctx.globalAlpha*=1-sstep(0,0.5,u);ctx.strokeStyle=rgba(DQ.graphite,0.9);ctx.lineWidth=4;ctx.lineCap="round";ctx.fillStyle=rgba(DQ.graphite,0.9);
@@ -98,7 +102,7 @@ function sw_cycle(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const u0=c
       const ex=cx+Math.cos(a1)*R,ey=cy+Math.sin(a1)*R,d=a1+Math.PI/2;ctx.beginPath();ctx.moveTo(ex+Math.cos(d)*14,ey+Math.sin(d)*14);ctx.lineTo(ex+Math.cos(d+2.5)*12,ey+Math.sin(d+2.5)*12);ctx.lineTo(ex+Math.cos(d-2.5)*12,ey+Math.sin(d-2.5)*12);ctx.closePath();ctx.fill();}
     ctx.restore();}
   // the row's small arrows between the pills
-  if(u>0){ctx.save();ctx.globalAlpha*=sstep(0.5,1,u);ctx.strokeStyle=rgba(DQ.dim,1);ctx.lineWidth=3;ctx.lineCap="round";for(let i=0;i<3;i++){const x=row(i)[0]+118;ctx.beginPath();ctx.moveTo(x-6,96);ctx.lineTo(x+4,104);ctx.lineTo(x-6,112);ctx.stroke();}ctx.restore();}
+  if(u>0){ctx.save();ctx.globalAlpha*=sstep(0.5,1,u);ctx.strokeStyle=rgba(DQ.dim,1);ctx.lineWidth=3;ctx.lineCap="round";for(let i=0;i<3;i++){const x=row(i)[0]+gap/2;ctx.beginPath();ctx.moveTo(x-6,96);ctx.lineTo(x+4,104);ctx.lineTo(x-6,112);ctx.stroke();}ctx.restore();}
   for(let i=0;i<4;i++){const p0=ring(i),p1=row(i),ui=own(i),ux=i<3?ui:ag_sine(clamp(ui*1.6,0,1)),x=lerp(p0[0],p1[0],ux),y=lerp(p0[1],p1[1],ui),w=lerp(250,196,ui),h=lerp(96,62,ui),size=Math.round(lerp(40,30,ui)),
       lit=o.lits?clamp(o.lits[i]||0,0,1):0;
     ctx.save();dq_shadow(ctx,"wall",0.8);rr(ctx,x-w/2,y-h/2,w,h,h/2);ctx.fillStyle=rgba(mix(DQ.paper,DQ.ink,lit),1);ctx.fill();ctx.restore();
@@ -108,6 +112,19 @@ function sw_cycle(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const u0=c
     dq_T(ctx,SW_WHEAT[0],cx-R-150,cy+11,Object.assign({align:"right"},f));dq_T(ctx,SW_WHEAT[1],cx,cy-R-70,Object.assign({align:"center"},f));
     dq_T(ctx,SW_WHEAT[2],cx+R+150,cy+11,Object.assign({},f));dq_T(ctx,SW_WHEAT[3],cx,cy+R+90,Object.assign({align:"center"},f));}
   ctx.restore();}
+
+/* ---------------------------------------------------------------- an agent, and what's handed to it
+   sw_agent: the agent as Read by an agent draws it, the agent films' sphere (ag_model), its violet light on the wall and its soft
+   shadow on the bench below; o.k springs it in, o.think (0 to 1) runs its light faster while it works, o.a.
+   sw_handed: what's handed over, a dashed arrow down from (x, y0) to (x, y1), drawn on by u, o.text beside it once it's half drawn. */
+function sw_agent(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null){const k=lerp(0.5,1,ag_spr(o.k,0,0.6));ctx.translate(x,y);ctx.scale(k,k);ctx.translate(-x,-y);}
+  ag_modelLight(ctx,x,y,r,1);ctx.save();ctx.filter="blur(14px)";ctx.fillStyle="rgba(0,0,0,0.32)";ctx.beginPath();ctx.ellipse(x-12,DQ_BENCH.back+34,r*0.95,r*0.2,0,0,TAU);ctx.fill();ctx.restore();
+  ag_model(ctx,x,y,r,{t:o.t||0,core:o.core==null?0.7:o.core,think:o.think||0});ctx.restore();}
+function sw_handed(ctx,x,y0,y1,u,o){o=o||{};const a=o.a==null?1:o.a;u=clamp(u,0,1);if(a<=0.004||u<=0)return;const y=lerp(y0+24,y1,ag_sine(u));ctx.save();ctx.globalAlpha*=a;
+  ctx.strokeStyle=rgba(DQ.graphite,0.9);ctx.fillStyle=rgba(DQ.graphite,0.9);ctx.lineWidth=4;ctx.lineCap="round";ctx.setLineDash([10,12]);ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y-16);ctx.stroke();ctx.setLineDash([]);
+  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-11,y-18);ctx.lineTo(x+11,y-18);ctx.closePath();ctx.fill();
+  if(o.text)dq_T(ctx,o.text,x-30,(y0+y1)/2+10,{w:600,size:28,col:DQ.soft,align:"right",a:clamp((u-0.5)*2,0,1)});ctx.restore();}
 
 /* ---------------------------------------------------------------- measure, simplify, standardise, automate
    Four step cards in a row (slots 440 apart from x 120), arrows between them; o.order (which step stands in each slot, eased between

@@ -303,16 +303,20 @@ knock(G('thursdays', 'results', 0.4), 0.012, px(550), 230)
 knock(Q('count', 'people count', -0.2), 0.012, px(1360), 230)
 
 # =============================================================================================================================
-# 3. Plan, do, check, act: six entries. The loop, as its four words are said: a jet for each, round and back, over a low E-flat. One
+# 3. Plan, do, study, act: nine entries. The loop, as its four words are said: a jet for each, round and back, over a low E-flat. One
 #    turn, from Thursday 1 October, as the loop moves aside: B-flat. Last December's 240 hours: C minor. Malia's question: B-flat, a
-#    jet rising. Check: 26 hours and 97 of the hundred, E-flat. Act: the mark, six notes, as the turn is kept. The rest goes without
-#    music: a knock for each card and figure, a tap for the hold tag, one soft line written into the round's steps
+#    jet rising. Study: 26 hours and 97 of the hundred, E-flat. Act: the mark, six notes, as the turn is kept. With an agent: B-flat,
+#    one jet, as it comes in under Do; what a person learns by doing, fading as it's handed over: G minor, a doubt; a person's part
+#    in every step: E-flat, as the last card comes. The rest goes without music: a knock for each card and figure, a tap for each
+#    chip, tag and stamp, a breath of air as the steps move, one soft line written into the round's steps
 C = lambda lid, word, off=0: W('cycle', lid, word, off)
 c0 = S0('cycle')
 low(Eb2, c0 + 0.3, C('loop', 'act', 1.2), 0.6, att=1.0, rel=0.7)
-for word, m, x_ in (('plan', G4, 760), ('do,', Bb4, 960), ('check', Eb5, 1160), ('act', Bb4, 960)):
+for word, m, x_ in (('plan', G4, 760), ('do,', Bb4, 960), ('study', Eb5, 1160), ('act', Bb4, 960)):
     jet(m, C('loop', word, 0.0), hold=0.16 if word != 'act' else 0.9, g=0.44, pan=px(x_), rel=0.2 if word != 'act' else 0.6)
 tap(C('loop', 'Walter', -0.3), 0.008, px(1500))
+# the third step's two names: a chip for the one many say, a card for Deming's word
+tap(G('cycle', 'name', 0.25), 0.007, px(1480)); knock(C('name', 'Deeming', -0.3), 0.012, px(1585), 230)
 air(C('wheat', 'sow', -0.3), 1.0, 0.006, 0.0, 150, 700)
 # one turn, from Thursday 1 October: the loop moves aside
 tO = G('cycle', 'oct')
@@ -335,22 +339,45 @@ tQ = G('cycle', 'ask')
 knock(tQ + 0.1, 0.013, px(710), 230)
 low(Bb2, tQ - 0.3, tQ + 2.4, 0.55, att=0.8, rel=0.7)
 jet(F4, tQ + 0.2, hold=0.35, g=0.42, pan=px(1560), rel=0.3); jet(D5, tQ + 0.6, hold=1.0, g=0.44, pan=px(1560), rel=0.6)
-# the plan, the rest left to the hundred records, the two measures: a card each
+# the plan, the rest left to the hundred records, the two measures: a card each; what they expect of each measure: a chip each
 knock(G('cycle', 'plan', 0.2), 0.012, px(710), 230)
 knock(C('plan', 'hundred records', -0.3), 0.011, px(710), 230)
-knock(C('know', "round's hours", -0.3), 0.011, px(420), 230); knock(C('know', 'perfect', -0.3), 0.011, px(990), 230)
+knock(C('know', "round's hours", -0.3), 0.011, px(370), 230); knock(C('know', 'perfect', -0.3), 0.011, px(940), 230)
+tap(C('expect', 'far fewer', -0.3), 0.007, px(310)); tap(C('expect', 'at least', -0.3), 0.007, px(780))
 # do: from Monday 19 October, 78 names, not 2,140
 knock(G('cycle', 'do', 0.2), 0.012, px(540), 230); knock(C('do', 'seventy-eight', -0.3), 0.012, px(540), 210)
-# check: 26 hours, not 240; 97 of the hundred perfect: E-flat
-t26, t97 = C('check', 'twenty-six', 0.0), C('check', 'ninety-seven', 0.0)
+# study: 26 hours, not 240; 97 of the hundred perfect: E-flat; each as the plan expected: a stamp beside what was expected
+t26, t97 = C('study', 'twenty-six', 0.0), C('study', 'ninety-seven', 0.0)
 knock(t26 - 0.3, 0.012, px(540), 210); knock(t97 - 0.3, 0.012, px(1380), 210)
 low(Eb3, t26 - 0.3, t97 + 1.2, 0.5, att=0.8, rel=0.75)
 jet(Eb5, t26, hold=0.9, g=0.42, pan=px(540), rel=0.6); jet(Bb4, t97, hold=1.2, g=0.42, pan=px(1380), rel=0.7)
+tAp = G('cycle', 'asplan')
+tap(tAp + 0.1, 0.008, px(500)); tap(tAp + 0.55, 0.008, px(1365))
 # act: they keep it, and write it into the round's steps: the mark, six notes; the steps' card, and the new step written in
 tA = G('cycle', 'act')
 mark(tA + 0.1, 6, 0.95, under=1.8)
 knock(tA + 0.2, 0.012, px(960), 230)
 pen(C('act', 'steps', -0.6), 1.8, 0.005, px(700))
+# with an agent: the steps move apart, each to the head of a column; the agent comes in under Do: B-flat, one jet; its card
+tAg = G('cycle', 'agent')
+air(tAg - 0.5, 1.4, 0.008, 0.0, 150, 800)
+tAn = C('agent', 'An agent', 0.0)
+low(Bb2, tAn - 0.4, tAn + 2.2, 0.5, att=0.8, rel=0.7)
+jet(D5, tAn - 0.2, hold=0.9, g=0.42, pan=px(750), rel=0.6)
+knock(C('agent', 'draft', -0.3), 0.012, px(1130), 230)
+# what a person learns by doing, a card; handed over, a breath of air down to the agent; the card fades: G minor, a doubt
+knock(G('cycle', 'hidden', 0.1), 0.012, px(750), 230)
+air(C('hidden', 'Handed', -0.2), 0.9, 0.007, px(750), 150, 700)
+tHi = C('hidden', 'that understanding', 0.0)
+low(G2, tHi - 0.3, tHi + 2.2, 0.5, att=0.8, rel=0.7)
+jet(Bb4, tHi, hold=0.35, g=0.4, pan=px(750), rel=0.3); jet(G4, tHi + 0.45, hold=1.0, g=0.42, pan=px(750), rel=0.6)
+# a person's part in each step, a card a column: a knock each; E-flat as the last one comes, and a chip: a person, in every step
+for i, (lid, word, off) in enumerate((('person', 'understand', -0.2), ('person', 'know enough', -0.1), ('acts', 'study', -0.2), ('acts', 'act on', -0.2))):
+    knock(C(lid, word, off), 0.012, px(310 + 440 * i), 230)
+tAc = C('acts', 'act on', 0.0)
+low(Eb3, tAc - 0.3, tAc + 2.4, 0.5, att=0.8, rel=0.75)
+jet(G4, tAc - 0.1, hold=0.4, g=0.42, pan=px(1190), rel=0.35); jet(Eb5, tAc + 0.4, hold=1.2, g=0.44, pan=px(1630), rel=0.7)
+tap(tAc + 1.1, 0.007, px(1410))
 
 # =============================================================================================================================
 # 4. Measure, simplify, standardise, automate: two entries. The four steps, a jet for each as it lights, rising step by step, the low

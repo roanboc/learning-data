@@ -1,6 +1,6 @@
 # What the business needs to know: questions and assumptions
 
-*Enterprise architecture* · *Business architecture for data*, film 2 of 5 · PR #PRNUM · [pull request](https://github.com/roanboc/learning-data/pull/PRNUM)
+*Enterprise architecture* · *Business architecture for data*, film 2 of 5 · PR #329 · [pull request](https://github.com/roanboc/learning-data/pull/329)
 
 [Watch it on the site](https://data.learn-all.org/business-architecture-for-data/what-the-business-needs-to-know/)
 

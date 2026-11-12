@@ -1,6 +1,6 @@
 /* ===== One list, not twenty: the university, June and July 2027 =====
    The film's own pictures at the university, on the module's kit (prefix ol_). Colour keeps the module's meaning: requests for data in
-   orange, the roadmap's work and the front door's form in blue (plans and design), what waiting costs and "not now" in amber, work done
+   orange, the roadmap's work and the front door's form in blue (plans and design), a risk and "not now" in amber, value and work done
    in green; running and improving what the team has wears none of the five, and the agents' queue alone has a touch of violet.
      olRoom, olMonday, olJuly   the team's room on an afternoon, on Monday 7 June's morning, and on a grey July day
      ol_doors        the eleven places requests arrive, each a small sheet with how many wait there; o.note pins a note on each,
@@ -8,8 +8,8 @@
      ol_form         the front door's form: five questions
      ol_list         the one list: every request as a small card in a grid, gathering from the eleven places, the duplicates joining
                      their twins, the ones no longer needed leaving with thanks, 45 left
-     ol_card         one request, large: who asked, what for, and its value, urgency, risk and effort, with what waiting costs, its
-                     place in the order, and, for one that waits, "not now", why and when
+     ol_card         one request, large: who asked, what for, and the opportunity it brings, the risk it prevents and its effort, with
+                     its value, its place in the order, and, for one that waits, "not now", why and when
      ol_board        the one list as a board in the tracker: not now, next, in progress (six at most) and done, in three lanes
      ol_split        the team's time: half for the roadmap, a third for requests, the rest for running and improving
      ol_triage       an emergency department's five categories, each with a longest wait
@@ -97,34 +97,40 @@ function ol_list(ctx,L,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx
   ctx.restore();}
 
 /* ---------------------------------------------------------------- one request, large */
-// words {who, what, why, when}; v [value, urgency, risk, effort], 1 to 3 each. o.u (0 to 1: its four measures come in), o.cost (0 to 1:
-// the first three bracketed, what waiting costs), o.score (0 to 1: its place in the order, written), o.top (0 to 1: "Near the top"),
-// o.hl (a measure picked out, 0 to 3), o.wait (0 to 1: "Not now"), o.why (0 to n: its n lines, words.why then words.when, one by one),
-// o.a, o.k, o.light. A card that can wait (words.why) is its full height from the start, so it never grows in one frame
-const OL_MEAS=["Value","Urgency","Risk while it waits","Effort"];
+// words {who, what, why, when}; v [opportunity, risk prevented, effort], 1 to 3 each: the author's way of ordering work, value over
+// effort, where value is an opportunity or a risk prevented (12 November 2026). o.u (0 to 1: its three measures come in, and with the
+// effort the rule that divides value by it), o.val (0 to 1: the first two bracketed, its value), o.score (0 to 1: its place in the
+// order, written), o.top (0 to 1: "Near the top"), o.hl (a measure picked out, 0 to 2, as strongly as o.hlA, 0 to 1), o.wait (0 to 1:
+// "Not now"), o.why (0 to n: its n lines, words.why then words.when, one by one), o.a, o.k, o.light. A card that can wait (words.why)
+// is its full height from the start, so it never grows in one frame. Each measure: its name, how far down the card, its dots' colour
+const OL_MEAS=[["Opportunity",186,LP.green],["Risk prevented",238,LP.amber],["Effort",316,LP.graphite]];
 const ol_cardLines=words=>[].concat(words.why||[],words.when||[]);
 function ol_cardH(words){const n=ol_cardLines(words).length;return n?530+(n-1)*38+40:450;}
-// its place in the order, written "cost of delay ÷ effort = order", the sign drawn as large as the figures (the font's own is small)
-function ol_score(ctx,v,x,y,a){const cod=v[0]+v[1]+v[2],n=Math.round(cod/v[3]*10)/10,o={w:800,size:36,a},A=String(cod),wa=lp_tw(ctx,A,o),sw=24,sx=x+wa+14,sy=y-13;
+// its place in the order, written "value ÷ effort = order", the sign drawn as large as the figures (the font's own is small)
+function ol_score(ctx,v,x,y,a){const val=v[0]+v[1],n=Math.round(val/v[2]*10)/10,o={w:800,size:36,a},A=String(val),wa=lp_tw(ctx,A,o),sw=24,sx=x+wa+14,sy=y-13;
   lp_T(ctx,A,x,y,o);ctx.save();ctx.globalAlpha*=a;ctx.fillStyle=rgba(LP.ink,1);ctx.fillRect(sx,sy-2,sw,4);
   for(const dy of [-10,10]){ctx.beginPath();ctx.arc(sx+sw/2,sy+dy,3.8,0,TAU);ctx.fill();}ctx.restore();
-  lp_T(ctx,v[3]+" = "+(Number.isInteger(n)?n:n.toFixed(1)),sx+sw+14,y,o);}
+  lp_T(ctx,v[2]+" = "+(Number.isInteger(n)?n:n.toFixed(1)),sx+sw+14,y,o);}
 function ol_card(ctx,x,y,w,words,v,o){o=o||{};const a=o.a==null?1:o.a,ws=ol_cardLines(words),h=ol_cardH(words);if(a<=0.004)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   lp_sheet(ctx,x,y,w,h,{col:LP.orange,light:o.light});
   lp_label(ctx,x+36,y+76,words.who,{col:LP.orange});lp_T(ctx,words.what,x+36,y+128,{w:800,size:36});
-  OL_MEAS.forEach((m,i)=>{const k=o.u==null?1:clamp(o.u*4-i,0,1);if(k<=0.004)return;const ry=y+186+i*52;ctx.save();ctx.globalAlpha*=k;
-    if(o.hl===i){ctx.fillStyle=rgba(LP.amber,0.13);rr(ctx,x+18,ry-25,w-36,50,10);ctx.fill();}
+  OL_MEAS.forEach(([m,dy,col],i)=>{const k=o.u==null?1:clamp(o.u*3-i,0,1);if(k<=0.004)return;const ry=y+dy;ctx.save();ctx.globalAlpha*=k;
+    const q=o.hl===i?clamp(o.hlA==null?1:o.hlA,0,1):0;if(q>0.004){ctx.fillStyle=rgba(LP.amber,0.13*q);rr(ctx,x+18,ry-25,w-36,50,10);ctx.fill();}
+    // value over effort: the rule between them comes in with the effort
+    if(i===2){ctx.fillStyle=rgba(LP.mut,0.45);ctx.fillRect(x+36,y+276,w-72,3);}
     lp_T(ctx,m,x+36,ry+10,{w:700,size:28});
-    for(let d=0;d<3;d++){ctx.fillStyle=d<v[i]?rgba(i===3?LP.graphite:LP.amber,1):rgba(LP.mut,0.18);ctx.beginPath();ctx.arc(x+w-150+d*44,ry,13,0,TAU);ctx.fill();}
+    for(let d=0;d<3;d++){ctx.fillStyle=d<v[i]?rgba(col,1):rgba(LP.mut,0.18);ctx.beginPath();ctx.arc(x+w-150+d*44,ry,13,0,TAU);ctx.fill();}
     ctx.restore();});
-  // what waiting costs: value, urgency and risk, bracketed
-  const cst=clamp(o.cost||0,0,1);if(cst>0.004){ctx.save();ctx.globalAlpha*=cst;ctx.strokeStyle=rgba(LP.amber,1);ctx.lineWidth=4;ctx.lineCap="round";const bx=x+w-26,y0=y+164,y1=y+312;
+  // its value: the opportunity and the risk prevented, bracketed
+  const vl=clamp(o.val||0,0,1);if(vl>0.004){ctx.save();ctx.globalAlpha*=vl;ctx.strokeStyle=rgba(LP.green,1);ctx.lineWidth=4;ctx.lineCap="round";const bx=x+w-26,y0=y+164,y1=y+260;
     ctx.beginPath();ctx.moveTo(bx-12,y0);ctx.lineTo(bx,y0);ctx.lineTo(bx,y1);ctx.lineTo(bx-12,y1);ctx.stroke();ctx.restore();}
   const sc=clamp(o.score||0,0,1);if(sc>0.004)ol_score(ctx,v,x+36,y+410,sc);
   const tp=clamp(o.top||0,0,1);if(tp>0.004)lp_pill(ctx,x+w-196,y+398,"Near the top",{col:LP.green,icon:"tick",size:28,a:tp,k:o.topK});
   const wt=clamp(o.wait||0,0,1);if(wt>0.004)lp_pill(ctx,x+36+102,y+472,"Not now",{col:LP.amber,icon:"wait",size:28,a:wt,k:o.waitK});
-  ws.forEach((l,j)=>{const q=clamp((o.why||0)-j,0,1);if(q>0.004)lp_T(ctx,l,x+36,y+530+j*38,{w:j?600:700,size:28,a:ag_sine(q),col:j?LP.mut:LP.ink});});
+  // the reason in ink (one line, or two), then when, quieter
+  const nw=[].concat(words.why||[]).length;
+  ws.forEach((l,j)=>{const q=clamp((o.why||0)-j,0,1),b=j<nw;if(q>0.004)lp_T(ctx,l,x+36,y+530+j*38,{w:b?700:600,size:28,a:ag_sine(q),col:b?LP.ink:LP.mut});});
   ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the board */

@@ -436,7 +436,11 @@ const NARR={
  {"id":"capability","gap":0.8,"text":"Governance gets a budget line every year, as A capability, not a project showed. This ask is money once, to stop paying every year."},
  {"id":"five","gap":0.8,"text":"A good case answers five questions; the UK Treasury's Five Case Model names them.","say":"A good case answers five questions; the U K Treasury's Five Case Model names them."},
  {"id":"questions","gap":0.8,"text":"Is it needed? Is it the best value? Can it be bought? Can it be afforded? Can it be delivered?"},
- {"id":"checklist","gap":0.8,"text":"Helena uses them as a checklist, not a form."}
+ {"id":"checklist","gap":0.8,"text":"Helena uses them as a checklist, not a form."},
+ {"id":"heavy","gap":0.8,"text":"She keeps heavy methods for critical systems, where a mistake can cost lives."},
+ {"id":"law","gap":0.8,"text":"And for what the law requires, as with personal data: it may look like extra work, but it protects everyone."},
+ {"id":"only","gap":0.8,"text":"Even there, she adds a method only when it's required."},
+ {"id":"light","gap":0.8,"text":"Everywhere else, a light one lets her try, learn and change course quickly."}
 ]},
 "options":{"name":"Three options","lead":1.0,"tail":1.0,"vo":[
  {"id":"options","gap":0.7,"text":"Then the options, and one always carries on as now: doing nothing has a price too."},
@@ -486,7 +490,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"ditch/when": 2.128, "ditch/farms": 5.472, "ditch/road": 3.097, "ditch/cost": 6.128, "ditch/harm": 4.636, "ditch/canal": 5.608, "ditch/refuse": 7.793, "ditch/change": 3.348, "ditch/case": 5.112, "ditch/what": 8.1, "ditch/yes": 4.4, "ditch/dug": 7.726, "ditch/land": 5.994, "ditch/open": 5.053, "ditch/cheaper": 5.139, "ditch/tolls": 3.265, "ditch/port": 3.815, "ditch/data": 5.533, "ditch/same": 7.756, "decide/may": 2.551, "decide/old": 4.458, "decide/pay": 5.635, "decide/renew": 6.362, "decide/helena": 7.027, "decide/first": 6.553, "decide/capability": 8.273, "decide/five": 5.205, "decide/questions": 5.117, "decide/checklist": 2.711, "options/options": 4.766, "options/a": 7.443, "options/b": 5.795, "options/logs": 2.934, "options/unopened": 8.404, "options/c": 10.34, "options/recommend": 5.443, "costs/running": 5.427, "costs/forty": 7.263, "costs/stops": 9.675, "costs/payback": 8.259, "costs/five": 3.55, "costs/rohan": 6.21, "costs/argue": 3.166, "benefits/each": 2.573, "benefits/saving": 8.062, "benefits/money": 1.454, "benefits/staff": 7.312, "benefits/owner": 6.464, "benefits/ward": 8.257, "benefits/quarter": 6.425, "ask/tuesday": 3.213, "ask/ten": 3.494, "ask/page": 5.317, "ask/ask": 7.317, "ask/mei": 3.952, "ask/wait": 7.87, "ask/yes": 1.582, "monday/back": 5.887, "monday/helena": 7.995, "monday/start": 2.33, "monday/carry": 2.348, "monday/count": 2.112, "monday/owners": 3.102, "monday/check": 5.274, "monday/take": 3.409};
+const VODUR={"ditch/when": 2.128, "ditch/farms": 5.472, "ditch/road": 3.097, "ditch/cost": 6.128, "ditch/harm": 4.636, "ditch/canal": 5.608, "ditch/refuse": 7.793, "ditch/change": 3.348, "ditch/case": 5.112, "ditch/what": 8.1, "ditch/yes": 4.4, "ditch/dug": 7.726, "ditch/land": 5.994, "ditch/open": 5.053, "ditch/cheaper": 5.139, "ditch/tolls": 3.265, "ditch/port": 3.815, "ditch/data": 5.533, "ditch/same": 7.756, "decide/may": 2.551, "decide/old": 4.458, "decide/pay": 5.635, "decide/renew": 6.362, "decide/helena": 7.027, "decide/first": 6.553, "decide/capability": 8.273, "decide/five": 5.205, "decide/questions": 5.117, "decide/checklist": 2.711, "decide/heavy": 4.52, "decide/law": 6.385, "decide/only": 2.934, "decide/light": 4.149, "options/options": 4.766, "options/a": 7.443, "options/b": 5.795, "options/logs": 2.934, "options/unopened": 8.404, "options/c": 10.34, "options/recommend": 5.443, "costs/running": 5.427, "costs/forty": 7.263, "costs/stops": 9.675, "costs/payback": 8.259, "costs/five": 3.55, "costs/rohan": 6.21, "costs/argue": 3.166, "benefits/each": 2.573, "benefits/saving": 8.062, "benefits/money": 1.454, "benefits/staff": 7.312, "benefits/owner": 6.464, "benefits/ward": 8.257, "benefits/quarter": 6.425, "ask/tuesday": 3.213, "ask/ten": 3.494, "ask/page": 5.317, "ask/ask": 7.317, "ask/mei": 3.952, "ask/wait": 7.87, "ask/yes": 1.582, "monday/back": 5.887, "monday/helena": 7.995, "monday/start": 2.33, "monday/carry": 2.348, "monday/count": 2.112, "monday/owners": 3.102, "monday/check": 5.274, "monday/take": 3.409};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -494,7 +498,7 @@ const VODUR={"ditch/when": 2.128, "ditch/farms": 5.472, "ditch/road": 3.097, "di
    four parts, as they become the end card. */
 const BREATH={
 "ditch":{"hold":{"when":1.2,"farms":1.0,"road":0.8,"cost":1.2,"harm":1.4,"canal":1.0,"refuse":1.2,"change":1.4,"case":1.0,"what":1.4,"yes":1.2,"dug":1.0,"land":1.4,"open":1.2,"cheaper":1.2,"tolls":1.2,"port":1.2,"data":0.8},"breathe":5.4},
-"decide":{"hold":{"may":1.0,"old":0.8,"pay":1.0,"renew":1.2,"helena":1.0,"first":1.4,"capability":1.2,"five":0.6,"questions":1.2}},
+"decide":{"hold":{"may":1.0,"old":0.8,"pay":1.0,"renew":1.2,"helena":1.0,"first":1.4,"capability":1.2,"five":0.6,"questions":1.2,"checklist":0.8,"heavy":0.8,"law":1.0,"only":0.8}},
 "options":{"hold":{"options":0.6,"a":0.6,"b":0.6,"logs":0.4,"unopened":0.6,"c":0.8}},
 "costs":{"hold":{"running":0.4,"forty":0.4,"stops":0.8,"payback":0.8,"five":0.4,"rohan":0.2}},
 "benefits":{"hold":{"each":0.8,"saving":1.2,"money":0.6,"staff":1.2,"owner":1.2,"ward":1.0}},
@@ -2468,7 +2472,14 @@ scene("decide",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       const f0=w("five","questions",-0.4);if(tt>=f0)cwf_five(x,700,130,1150,{a:ag_in(tt,f0,0.35),k:tt-f0,light:"morning",
         u:cwf_u(tt,[w("questions","needed",-0.6),w("questions","value",-0.6),w("questions","bought",-0.6),w("questions","afforded",-0.6),w("questions","delivered",-0.6)]),
         tick:ag_in(tt,w("checklist","checklist",-0.2),1.6)});
-      cwf_pill(x,tt,w("checklist","form",-0.2),null,1275,830,"A checklist, not a form",{col:LP.green,icon:"tick"});}}
+      cwf_pill(x,tt,w("checklist","form",-0.2),null,930,830,"A checklist, not a form",{col:LP.green,icon:"tick"});
+      // the author's advice (12 November 2026): heavy methods where a mistake can cost lives and where the law requires them, and even
+      // there only when required; light ones everywhere else, because they can change quickly. The four take turns beside the pill:
+      // each leaves before the next comes in
+      cwf_tag(x,tt,w("heavy","heavy",-0.2),c.law-0.5,1200,830,"Heavy: where a mistake can cost lives",{col:LP.amber});
+      cwf_tag(x,tt,w("law","law",-0.2),c.only-0.5,1200,830,"Heavy: where the law requires it",{col:LP.amber});
+      cwf_tag(x,tt,c.only+0.1,c.light-0.5,1200,830,"Even there: only when required",{col:LP.amber});
+      cwf_tag(x,tt,c.light+0.1,null,1200,830,"Light: try, learn, change course",{col:LP.green});}}
   ]);
   setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,w("may","May",-0.3),c.helena,0.5)});
   cwf_kick(ctx,S,ag_in(t,0.6,0.6));

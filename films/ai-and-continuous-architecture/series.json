@@ -71,5 +71,11 @@
       "Conoce las reglas",
       "Ama Owusu, la responsable regulatoria"
     ]
-  ]
+  ],
+  "learn_p": "{Labs} hands-on labs, one for each film, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs, one for each film. Each puts one idea from a film in your hands, and shows you why it matters.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cada uno pone en tus manos una idea de una película, y te muestra por qué importa.",
+  "quiz_lead": "{quiz} situations an architect or a data team really faces, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrenta un arquitecto o un equipo de datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

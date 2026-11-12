@@ -24,7 +24,7 @@
 <section class="module" id="watch" data-store="ld-copies-that-keep-the-rules" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p><b>Pause and think</b> is on: the film stops for one question at the end of chapters.</p></div></div>
 <div class="player" data-labs="">
-<audio id="snd" preload="metadata" src="../../assets/copies-that-keep-the-rules/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/copies-that-keep-the-rules-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 8½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Copies that keep the rules"></canvas>
+<audio id="snd" preload="metadata" src="../../assets/copies-that-keep-the-rules/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/copies-that-keep-the-rules-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 9 min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Copies that keep the rules"></canvas>
 <div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Stop at the end of three chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Chapters"></div>
@@ -40,7 +40,7 @@
 </section>
 
 <section class="module" id="elsewhere" aria-labelledby="elsewhere-h">
-<div class="mhead"><div><h2 id="elsewhere-h">Read the guidance yourself</h2><p>The film shows Azure Databricks and dbt as their docs did on 10 November 2026. These are the pages it follows.</p></div></div>
+<div class="mhead"><div><h2 id="elsewhere-h">Read the guidance yourself</h2><p>The film shows Azure Databricks and dbt as their docs did on 10 November 2026, and synthetic data as the guidance read on 12 November 2026 describes it. These are the pages it follows.</p></div></div>
 <ul class="repo-list">
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/opensharing">Azure Databricks: OpenSharing and ABAC</a></b><span>Why whoever shares a protected table must be left out of its policies, and why the recipient then sees every value unless it applies policies of its own.</span></li>
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/requirements">Azure Databricks: requirements and limits of policies</a></b><span>Clones of a table with policies aren't allowed, except for someone every policy leaves out, who sees every value unmasked.</span></li>
@@ -49,6 +49,7 @@
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/admin/workspace-settings/notebooks">Azure Databricks: manage access to notebook features</a></b><span>The workspace's switches for downloading results, exporting notebooks and copying tables to the clipboard, which start switched on.</span></li>
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/security/network/serverless-network-security/network-policies">Azure Databricks: serverless egress control</a></b><span>A network policy that lets what runs on serverless compute reach only the catalog's storage and the places on a short list.</span></li>
 <li><b><a href="https://docs.getdbt.com/docs/build/unit-tests">dbt: unit tests</a></b><span>Testing a model's logic on a few rows written for the test, so no real data is needed to check it.</span></li>
+<li><b><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/privacy-enhancing-technologies/what-pets-are-there/synthetic-data/">Information Commissioner's Office (UK): synthetic data</a></b><span>Why data that a model learned from real records can still reveal a real person: the more it mimics them, the more likely that is.</span></li>
 </ul>
 </section>
 

@@ -1,6 +1,6 @@
 # An application or a platform?: questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, film 1 · pull request to come
+*Enterprise architecture* · *Platform and solution architecture*, film 1 of 8 · PR #324 · [pull request](https://github.com/roanboc/learning-data/pull/324)
 
 [Watch it on the site](https://data.learn-all.org/platform-and-solution-architecture/an-application-or-a-platform/)
 

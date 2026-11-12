@@ -1,0 +1,19 @@
+{
+  "key": "the-ai-platform",
+  "title": "The AI platform",
+  "sub": "AI and continuous architecture: every agent stands on the same few things, a model, tools, memory and search, so they're the platform's, made once and shared, behind one gateway that knows each agent by its own identity, while what each agent is for stays its own.",
+  "howto": "Warm clay and brick are Babylon, in Nabopolassar's reign: pale mud brick dried in the sun, red brick fired in kilns, and black bitumen. In the present, the map's six layers are glass in their colours, and a teal orb is an agent. Pills at the foot of the map are the platform's services; the gateway is the one door every call goes through. Gold marks owners and the business side, cyan the technical side.",
+  "src": [
+    "../../../shared/src/aca.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["brick", "river", 6.5],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
+    ["\\bEuphrates\\b", "You-fray-teez"],
+    ["\\bDatabricks'\\b", "Data-bricks's"]
+  ]
+}

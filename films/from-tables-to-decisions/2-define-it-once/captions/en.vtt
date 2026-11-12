@@ -90,89 +90,98 @@ And casual teaching cost is Finance's: Rohan owns it, to set the budget, counted
 00:03:53.910 --> 00:03:58.169
 Each owner decides what theirs means, in the glossary, before any code.
 
-00:03:59.469 --> 00:04:04.525
+00:03:59.469 --> 00:04:06.301
+Whatever the tools, that is the minimum: every measure clearly catalogued, with its name, its owner and its meaning.
+
+00:04:07.801 --> 00:04:12.857
 Now everyone can see why the three numbers differ, and which one answers their question.
 
-00:04:08.025 --> 00:04:13.682
+00:04:16.357 --> 00:04:22.014
 Each measure's home is a metric view in Unity Catalog, beside the tables it's counted from.
 
-00:04:15.182 --> 00:04:23.662
+00:04:23.514 --> 00:04:31.994
 A metric view holds a measure's definition once, and works out the right number however it's grouped: by faculty, unit or teaching period.
 
-00:04:25.362 --> 00:04:29.847
+00:04:33.694 --> 00:04:38.179
 Unity Catalog governs it like a table: who may read it, and what reads it.
 
-00:04:31.147 --> 00:04:33.692
+00:04:39.479 --> 00:04:42.024
 So every tool on the platform reads this one.
 
-00:04:35.392 --> 00:04:43.132
+00:04:43.724 --> 00:04:51.464
 Jun writes it as a few lines of YAML in the data project, which builds it, as Meaning on the platform built awards conferred.
 
-00:04:44.632 --> 00:04:51.699
+00:04:52.964 --> 00:05:00.031
 The data team reviews the code in a pull request, and Noor Rahman, the data architect, approves it for production.
 
-00:04:53.399 --> 00:04:56.875
+00:05:01.731 --> 00:05:05.207
 Rohan, the measure's owner, is told what the change touches.
 
-00:04:57.575 --> 00:05:04.592
+00:05:05.907 --> 00:05:12.924
 Its words go with it: a name to show, a description, synonyms for Genie, and its format, in Australian dollars.
 
-00:05:08.092 --> 00:05:14.683
+00:05:16.424 --> 00:05:23.015
 None of this is new: for decades, BI tools have kept a layer of business definitions over the tables.
 
-00:05:16.183 --> 00:05:22.623
+00:05:24.515 --> 00:05:30.955
 But each kept them in its own format, so no other tool could read them, and a new tool meant writing them all again.
 
-00:05:24.323 --> 00:05:30.931
+00:05:32.655 --> 00:05:39.263
 dbt has a semantic layer too, MetricFlow, which reads measures defined in the project's YAML.
 
-00:05:32.431 --> 00:05:37.108
+00:05:40.763 --> 00:05:45.440
 Planning counts learners near a graduate certificate with it, in the same project.
 
-00:05:38.608 --> 00:05:42.271
+00:05:46.940 --> 00:05:50.603
 MetricFlow is open source, so other tools can build on it.
 
-00:05:43.771 --> 00:05:49.864
-Either can be a measure's home. Choose one for each, near most of its readers, and never define it twice.
+00:05:52.103 --> 00:05:59.029
+One tool for every measure is simplest, but that depends on the organisation: this university uses both.
 
-00:05:53.564 --> 00:05:58.817
+00:06:00.529 --> 00:06:05.858
+So each measure gets one home, near most of its readers, and is never defined twice.
+
+00:06:09.558 --> 00:06:14.811
 For tools to read each other's definitions, they need a common format: Apache Ossie.
 
-00:06:00.117 --> 00:06:09.222
+00:06:16.111 --> 00:06:25.216
 It began as the Open Semantic Interchange, and more than fifty organisations now stand behind it, Databricks and dbt Labs among them.
 
-00:06:10.722 --> 00:06:18.521
+00:06:26.716 --> 00:06:34.515
 Converters translate a definition between Ossie and each tool's own format: a metric view, MetricFlow, and many others.
 
-00:06:20.021 --> 00:06:27.771
+00:06:36.015 --> 00:06:43.765
 dbt writes the project's measures in Ossie each time it reads the project, and it reads Ossie definitions too.
 
-00:06:29.271 --> 00:06:36.715
+00:06:45.265 --> 00:06:52.709
 So casual teaching cost can go to any tool that reads Ossie, with its words and its rules, and nobody types it again.
 
-00:06:38.215 --> 00:06:41.243
+00:06:54.209 --> 00:06:57.237
 Keep each rule inside the measure, so it travels with it.
 
-00:06:42.743 --> 00:06:46.033
+00:06:58.737 --> 00:07:02.027
 And check what arrives: a converter says what it can't carry.
 
-00:06:49.333 --> 00:06:52.371
+00:07:03.527 --> 00:07:09.999
+Ideally, the definition is written in Ossie first, in the data project, and the metric view is built from it.
+
+00:07:13.699 --> 00:07:16.737
 Today, Thursday the fifth of November, is pay day.
 
-00:06:53.671 --> 00:07:01.657
+00:07:18.037 --> 00:07:26.023
 Rohan asks Genie One what casual teaching has cost Health this semester so far: 1.84 million dollars.
 
-00:07:03.157 --> 00:07:07.675
+00:07:27.523 --> 00:07:32.041
 The fortnightly dashboard's Ask Genie gives the same, from the same definition.
 
-00:07:08.975 --> 00:07:16.294
+00:07:33.341 --> 00:07:40.660
 Last semester's is 2.21 million, and beside it, the other two measures, each under its own name and owner.
 
-00:07:17.794 --> 00:07:22.715
+00:07:42.160 --> 00:07:47.081
 Rohan sets Health's budget for next year on the cost, with every tutorial's tutor in it.
 
-00:07:24.215 --> 00:07:31.144
+00:07:48.581 --> 00:07:55.510
 Like the kilogram, each measure is one definition, written where anyone can read it, and held by no single tool.
 
-00:07:33.044 --> 00:07:41.107
+00:07:57.410 --> 00:08:05.473
 The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs.

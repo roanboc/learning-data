@@ -13,13 +13,9 @@
 .view-switch button:hover{background:rgba(106,168,255,.2);border-color:rgba(106,168,255,.65)}
 .view-switch button[aria-pressed=true]{border-color:#6aa8ff;background:rgba(106,168,255,.2);color:#a9cfff;box-shadow:0 0 0 1px #6aa8ff inset}
 .route-view{margin-top:28px}
-.route-all{margin:18px 0 0}
 
 /* ---- the route ---- */
-.route{position:relative;min-height:120px}
-.route:not(.drawn){min-height:0}
-.route-plain{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
-.route-plain a{display:inline-block;padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;font-weight:700;font-size:14px}
+.route{position:relative}
 .r-dot{display:block;flex:none}
 .r-dot .d-bg{fill:var(--bg)}.r-dot .d-track{fill:none;stroke:var(--c);stroke-width:3;opacity:.38}
 .r-dot .d-arc{fill:none;stroke:var(--c);stroke-width:3;stroke-linecap:round}
@@ -95,7 +91,6 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 .r-rail,.r-rail ol{list-style:none;margin:0;padding:0}
 .r-rail{position:relative;padding-top:14px}
 .r-rail::before{content:"";position:absolute;left:19.5px;top:0;height:14px;width:5px;background:var(--r-main)}
-.r-rail.capped::before{top:4px;height:10px;border-radius:3px 3px 0 0}
 .r-rg{position:relative}
 .r-rh{position:relative;margin:0;height:34px;padding:12px 0 0 50px;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .r-rg.loop .r-rh{color:var(--c)}

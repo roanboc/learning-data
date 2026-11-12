@@ -2,7 +2,7 @@
    route.<lang>.js (window.LD_ROUTE, made by site-tools/build_series.py from modules/route.json and the topics), so this file holds
    no topic, no link and no word of its own.
    - Wide boxes get the map: the suggested route as one line, and the other groups as loops above and below it. From 1040 px the
-     introduction's card sits at its left, as the first station; a box with data-home (the home page, which plays that film) has none.
+     introduction's card sits at its left, as the first station; narrower, it sits above the map.
      Narrow boxes (under 880 px) get the same route as a list with a rail, each topic opening in place: no sideways panning.
    - A station is a button: selecting it shows its films and series below the map. Its ring shows how many of its films were
      watched, from the same keys path.js reads ("<prefix>:watched"), in this browser only.
@@ -31,7 +31,7 @@ const counts=t=>{const s=stat(t),p=[];if(s.series>1)p.push(fill(X.series,{n:s.se
 const lineOf=t=>G(t.group).line;
 const MAIN=D.topics.filter(t=>t!==START&&lineOf(t)==="main"),LOOPS=D.groups.filter(g=>g.line!=="main");
 const order=()=>MAIN.concat(LOOPS.flatMap(g=>D.topics.filter(t=>t.group===g.id)));
-const nextStop=home=>(!home&&frac(START)<1?START:order().find(t=>frac(t)<1))||null;
+const nextStop=()=>(frac(START)<1?START:order().find(t=>frac(t)<1))||null;
 const goal=id=>D.goals.find(g=>g.id===id)||null;
 const stopsOf=g=>{const st=g.stops.map(id=>ITEM[id]).filter(Boolean),o=[];st.forEach(i=>{if(!o.includes(i.topic))o.push(i.topic);});
   return{st:st,order:o,min:st.reduce((a,i)=>a+i.min,0)};};
@@ -44,7 +44,7 @@ function dot(f,num){const r=12,c=2*Math.PI*r;
 const CHEV='<svg class="r-chev" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M7.5 4.5l5.5 5.5-5.5 5.5"/></svg>';
 
 function draw(box){
-  const home=box.hasAttribute("data-home"),base=box.dataset.base||"",root=box.dataset.root||"",topics=box.dataset.topics||"";
+  const base=box.dataset.base||"",root=box.dataset.root||"",topics=box.dataset.topics||"";
   const st={sel:null,goal:null,panel:"station",open:null,w:0};
   const g0=goal(get("ld-route:goal"));if(g0){st.goal=g0.id;st.panel="goal";}
   const img=p=>root+"assets/"+p,topicHref=t=>topics+"#"+t.id;
@@ -57,7 +57,7 @@ function draw(box){
     const body=pic+'<span><small>'+esc(i.kicker)+'</small><b'+(i.lang?' lang="'+i.lang+'"':'')+'>'+esc(i.title)+'</b>'+meta+(extra?'<small>'+esc(extra)+'</small>':'')+'</span>';
     return '<li>'+(i.soon?'<div class="r-sc soon">'+body+'</div>':'<a class="r-sc" href="'+esc(base+i.href)+'">'+body+'</a>')+'</li>';}
   function detail(t,inRail){
-    const s=stat(t),nx=nextStop(home),open='<a class="btn primary" href="'+esc(topicHref(t))+'">'+esc(X.open)+'</a>';
+    const s=stat(t),nx=nextStop(),open='<a class="btn primary" href="'+esc(topicHref(t))+'">'+esc(X.open)+'</a>';
     return '<div class="r-about">'+(inRail?'':'<p class="r-kick"><i></i>'+esc(G(t.group).name)+(nx===t?" · "+esc(X.next):"")+'</p><h3>'+esc(t.name)+'</h3>')+
       '<p class="r-who">'+esc(t.who)+'</p><p class="r-line">'+esc(t.line)+'</p>'+
       (inRail?'':'<p class="r-meta">'+esc(counts(t))+(s.seen?" · "+esc(fill(X.of,{n:s.seen,of:s.films})):"")+'</p>'+open)+'</div>'+
@@ -103,7 +103,7 @@ function draw(box){
     MAIN.forEach((t,i)=>{html+=station(t,Xp(i),yM,false,Math.max(84,col-6));});
     const panel=st.panel==="goal"&&g?'<div class="r-panel goal" aria-live="polite"><div class="r-about">'+goalHead(g,gi)+'</div>'+goalStops(gi)+'</div>':
       '<div class="r-panel ln-'+lineOf(T(st.sel))+'" aria-live="polite">'+detail(T(st.sel),false)+'</div>';
-    const ic=home?"":intro(gi&&gi.order.includes(START.id)?numOf(START.id):0);
+    const ic=intro(gi&&gi.order.includes(START.id)?numOf(START.id):0);
     return goals()+'<div class="r-wide m-'+mode+'">'+(side?'<div class="r-side" style="margin-top:'+(yM-150)+'px">'+ic+'</div>':ic)+
       '<div class="r-map" style="height:'+H+'px" role="group" aria-label="'+esc(fill(X.map,{n:D.topics.length}))+'"><svg class="r-lines" aria-hidden="true" focusable="false">'+svg+'</svg>'+html+'</div></div>'+
       '<p class="r-legend"><span><i class="ln-main"></i>'+esc(X.route)+'</span><span>'+esc(X.any)+'</span></p>'+panel;}
@@ -115,15 +115,15 @@ function draw(box){
         D.topics.filter(t=>t.group===gr.id).map(t=>{const op=st.open===t.id;
           return '<li class="r-rs'+(dim(t.id)?" dim":"")+'"><button type="button" class="r-rb" data-rs="'+t.id+'" data-k="r-'+t.id+'" aria-expanded="'+op+'">'+dot(frac(t),numOf(t.id))+
             '<span class="r-rt"><b>'+esc(t.name)+'</b><small>'+esc(counts(t))+'</small></span>'+CHEV+'</button>'+(op?'<div class="r-rd">'+detail(t,true)+'</div>':'')+'</li>';}).join("")+'</ol></li>';}).join("");
-    return '<div class="r-narrow">'+(home?"":intro(gi&&gi.order.includes(START.id)?numOf(START.id):0))+goals()+
+    return '<div class="r-narrow">'+intro(gi&&gi.order.includes(START.id)?numOf(START.id):0)+goals()+
       (g?'<div class="r-goalcard">'+goalHead(g,gi)+'<details><summary>'+esc(fill(X.stops,{n:gi.st.length}))+'</summary>'+goalStops(gi)+'</details></div>':'')+
-      '<ol class="r-rail'+(home?" capped":"")+'">'+rows+'</ol><p class="r-legend"><span>'+esc(X.any)+'</span></p></div>';}
+      '<ol class="r-rail">'+rows+'</ol><p class="r-legend"><span>'+esc(X.any)+'</span></p></div>';}
   function render(){
     const w=box.clientWidth;st.w=w;if(!w)return;
-    if(!st.sel||!T(st.sel)||(home&&st.sel===START.id))st.sel=(nextStop(home)||MAIN[0]).id;
+    if(!st.sel||!T(st.sel))st.sel=(nextStop()||MAIN[0]).id;
     const a=document.activeElement,k=a&&box.contains(a)&&a.dataset?a.dataset.k:null;
     box.classList.add("drawn");
-    box.innerHTML=w>=880?wide(!home&&w>=1040?"side":"top",w):rail();
+    box.innerHTML=w>=880?wide(w>=1040?"side":"top",w):rail();
     if(k){const e=box.querySelector('[data-k="'+k+'"]');if(e)e.focus({preventScroll:true});}}
   box.addEventListener("click",e=>{
     const s=e.target.closest("[data-st]"),r=e.target.closest("[data-rs]"),g=e.target.closest("[data-goal]");

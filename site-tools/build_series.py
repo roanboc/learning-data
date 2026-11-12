@@ -36,7 +36,7 @@ hand-written pages that show its cards, and what each film builds on. The films 
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
 For each series: its page (site/<slug>/) and, for each film, its Watch page (site/<slug>/<film>/) and, if it has them, its
 Take it apart and Make the call pages (labs/, scenarios/), and their twins under site/es/. Then the Topics page (topics/):
-the learning route and the list, from modules/route.json (see docs/navigation.md); the route on the home page and the topics'
+the learning route and the list, from modules/route.json (see docs/navigation.md); the topics as links on the home page and as
 tiles on the intro's scenarios page (between <!-- topics: made by site-tools/build_series.py --> and <!-- /topics -->); and the
 route's data (assets/learn/route.<lang>.js). The words come from the series' series.json and each film's site.json; the length and chapters from
 the film's own source (narration.js, vodur.js and breath.js, timed as The Inner Life of Data's engine times them); the counts
@@ -411,7 +411,7 @@ HAND = {
                           ("too-good-to-be-true", "ld-too-good-to-be-true", "when-things-go-wrong/2-too-good-to-be-true")], labs=True),
 }
 # The big topics, in order: their names, who each is for, what it covers, and what it holds (an id of HAND or SERIES). The Topics
-# page shows them all, each with its cards, as a route and as a list; the home page plays the first and shows the route.
+# page shows them all, each with its cards, as a route and as a list; the home page plays the first and links to the others.
 from catalog import load_modules
 TOPICS = load_modules()
 
@@ -1059,7 +1059,7 @@ def topics_page(lg):
             f'<div class="view-switch" role="group" aria-label="{V["view"]}" hidden><button type="button" data-view="route" aria-pressed="false">{V["route"]}</button>'
             f'<button type="button" data-view="list" aria-pressed="true">{V["list"]}</button></div>\n</section>\n'
             f'\n<section class="route-view" id="route" aria-labelledby="route-h" hidden>\n<h2 class="route-sr" id="route-h">{V["route"]}</h2>\n'
-            f'{route_box(lg, R, RL, home=False)}\n</section>\n'
+            f'{route_box(lg, R, RL)}\n</section>\n'
             f'\n<div class="list-view" id="list">\n<div class="ix-tools" hidden>\n<label class="ix-search" for="ix-q"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">'
             '<circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>'
             f'<input id="ix-q" type="search" autocomplete="off" placeholder="{E(V["search"])}" aria-label="{E(V["search"])}" data-index="{R}assets/learn/search.{lg}.json" '
@@ -1085,7 +1085,7 @@ def topics_page(lg):
 
 def tiles(lg, R):
     """Every topic after the first, as a tile: its name (a link to it on the Topics page), what it covers, and its films and
-    series, each a link. For the intro's scenarios page, whose path to the site's root is R (the home page shows the route: home_route())."""
+    series, each a link. For the intro's scenarios page, whose path to the site's root is R (the home page shows the topics as links: home_topics())."""
     RL = R if lg == "en" else R[3:]
     out = []
     for t in live()[1:]:
@@ -1189,12 +1189,12 @@ ROUTE_TEXT = {
                any="Suggested paths, not locked steps. Open any topic at any time.", whole="Whole route", want="I want to", stops="{n} stops",
                go="Start this route", on="Continue this route", again="Watch again", watched="Watched", of="{n} of {of} watched", yours="Your route",
                film1="1 film", films="{n} films", series="{n} series", more1="1 more series coming", more="{n} more series coming",
-               map="The learning route: {n} topics. Select a topic to see its films and series.", done="all watched", list="All topics as a list"),
+               map="The learning route: {n} topics. Select a topic to see its films and series."),
     "es": dict(start="Empieza aquí", play="Ver la introducción", open="Abrir el tema", next="Tu próxima parada", soon="Próximamente", route="Ruta sugerida",
                any="Rutas sugeridas, no pasos obligatorios. Abre cualquier tema cuando quieras.", whole="Toda la ruta", want="Quiero", stops="{n} paradas",
                go="Empezar esta ruta", on="Seguir esta ruta", again="Ver de nuevo", watched="Vista", of="{n} de {of} vistas", yours="Tu ruta",
                film1="1 película", films="{n} películas", series="{n} series", more1="1 serie más en camino", more="{n} series más en camino",
-               map="La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series.", done="todo visto", list="Todos los temas en una lista"),
+               map="La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series."),
 }
 
 
@@ -1229,24 +1229,23 @@ def route_js(lg):
             "window.LD_ROUTE = " + json.dumps(route_data(lg), ensure_ascii=False, indent=1) + ";\n")
 
 
-def route_box(lg, R, RL, home):
-    """Where assets/learn/route.js draws the route: on the Topics page, with the introduction's card; on the home page (home),
-    which plays that film itself, without it, and with the topics as plain links until the script runs."""
-    D = route_data(lg)
-    plain = ""
-    if home:
-        rows = "".join(f'<li><a href="{RL}topics/#{t["id"]}">{E(t["name"])}</a></li>' for t in D["topics"][1:])
-        plain = f'<ul class="route-plain">{rows}</ul>'
-    return (f'<div class="route" data-route data-root="{R}" data-base="{RL}"' + (f' data-topics="{RL}topics/" data-home' if home else ' data-topics=""') +
-            f'>{plain}</div>')
+def route_box(lg, R, RL):
+    """Where assets/learn/route.js draws the route, on the Topics page."""
+    return f'<div class="route" data-route data-root="{R}" data-base="{RL}" data-topics=""></div>'
 
 
-def home_route(lg, R):
-    """The home page's topics: the learning route, in place of a tile per topic, with its styles and scripts."""
+# The home page stays a first view: the film, then the other topics as plain links, each to its row on the Topics page, and two
+# ways on: the learning route, and how the films were made. The route itself is on the Topics page only.
+HOME_TEXT = {"en": ("Find your learning route", "How the films were made"),
+             "es": ("Encuentra tu ruta de aprendizaje", "Cómo se hicieron las películas")}
+
+
+def home_topics(lg, R):
+    """The home page's topics: every topic after the first as a link, in the route's order, then the two ways on."""
     RL = R if lg == "en" else R[3:]
-    return (f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n{route_box(lg, R, RL, home=True)}\n'
-            f'<p class="route-all"><a class="btn" href="{RL}topics/#list">{ROUTE_TEXT[lg]["list"]}</a></p>\n'
-            f'<script src="{R}assets/learn/route.{lg}.js" defer></script>\n<script src="{R}assets/learn/route.js" defer></script>\n')
+    rows = "\n".join(f'<li><a href="{RL}topics/#{t["id"]}">{E(t["name"])}</a></li>' for t in route_data(lg)["topics"][1:])
+    return (f'<ul class="topic-links">\n{rows}\n</ul>\n<p class="home-next"><a class="btn primary" href="{RL}topics/">{HOME_TEXT[lg][0]}</a>'
+            f'<a class="btn" href="{RL}journey/">{HOME_TEXT[lg][1]}</a></p>\n')
 
 
 # ---------------------------------------------------------------- the search of every film's words
@@ -1317,7 +1316,7 @@ BLOCKS = FW["blocks"]  # kept for callers that count From words to data's blocks
 # the hand-written pages that show the topics as tiles: (path under site/, language, the path from that page to the site's root)
 PUBLISH = "--publish" in sys.argv[1:]  # the site's publish: the tiles carry each series' count of films
 TILES = [("scenarios/index.html", "en", "../"), ("es/scenarios/index.html", "es", "../../")]
-HOME = [("index.html", "en", ""), ("es/index.html", "es", "../")]  # the home pages show the topics as the learning route instead
+HOME = [("index.html", "en", ""), ("es/index.html", "es", "../")]  # the home pages show the topics as plain links instead (home_topics())
 TILE_MARKS = ('<!-- topics: made by site-tools/build_series.py -->', '<!-- /topics -->')
 
 
@@ -1345,7 +1344,7 @@ def blocks():
     for rel_path, lg, R in TILES:
         fill(rel_path, *TILE_MARKS, tiles(lg, R))
     for rel_path, lg, R in HOME:
-        fill(rel_path, *TILE_MARKS, home_route(lg, R))
+        fill(rel_path, *TILE_MARKS, home_topics(lg, R))
     for rel_path in HAND_PAGES:
         src = texts.get(rel_path) or (WEB / rel_path).read_text()
         texts[rel_path] = re.sub(r'<header class="top">.*?</header>', lambda m: hand_header(rel_path), src, count=1)

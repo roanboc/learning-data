@@ -24,7 +24,7 @@ What it checks, page by page (every .html under site/):
   chapters, each scenario numbered by its film and pointing to a lab; its films' "Pause and think" questions stop at its labs.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - the learning route (modules/route.json): every topic on it once, each goal's stops among the films and series on the site,
-  and the Topics and home pages draw it, in both languages, the list's rows in the route's order.
+  the Topics page draws it, the list's rows in the route's order, and the home page links to every topic, in both languages.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
 - opening turns: no film's narration or captions say the stock "Something had to change" (or "has to", "Algo tenía que cambiar"):
@@ -1512,7 +1512,7 @@ def main():
     s["notes"].append(f"{n} films show their places as pictures")
 
     # -- the learning route
-    s = rep.check("The learning route: every topic on it once, each goal's stops on the site, and the Topics and home pages draw it, in both languages")
+    s = rep.check("The learning route: every topic on it once, each goal's stops on the site, the Topics page draws it and the home page links to every topic, in both languages")
     R = build_series.load_route()  # stops the run itself on a topic that isn't placed, or a goal's stop that isn't on the site
     for lg in ("en", "es"):
         D = build_series.route_data(lg); pre = "" if lg == "en" else "es/"
@@ -1521,20 +1521,37 @@ def main():
             s["fails"].append(f"route.{lg}.js: its topics aren't the topics the site shows")
         if D["topics"][0]["items"][0]["kind"] != "film":
             s["fails"].append("modules/route.json: the route starts with one film, the introduction; its first topic's first item is a series")
-        for rel, home in ((f"{pre}topics/index.html", False), (f"{pre}index.html", True)):
-            pg = pages.get(rel)
-            if pg is None:
-                s["fails"].append(f"site/{rel}: missing"); continue
-            box = [n for n in pg.dom.walk() if "data-route" in n.attrs]
-            need = [f"assets/learn/route.{lg}.js", "assets/learn/route.js"] + ([] if home else ["assets/learn/topics.js"])
-            if len(box) != 1 or ("data-home" in box[0].attrs) != home:
-                s["fails"].append(f"site/{rel}: needs one [data-route] box" + (" with data-home (the page plays the introduction itself)" if home else ""))
-            if [x for x in need if x not in pg.local_scripts] or pg.local_scripts.index(need[0]) > pg.local_scripts.index(need[1]):
-                s["fails"].append(f"site/{rel}: loads {', '.join(need)}, the route's data before its script")
-            if not home:
-                rows = [n.attrs.get("id") for n in pg.dom.all("section", cls="topic") if n.first("details") and n.first("summary")]
-                if rows != on:
-                    s["fails"].append(f"site/{rel}: its list has a row for {rows}, but the route has {on}, in that order")
+        rel = f"{pre}topics/index.html"; pg = pages.get(rel)
+        if pg is None:
+            s["fails"].append(f"site/{rel}: missing"); continue
+        need = [f"assets/learn/route.{lg}.js", "assets/learn/route.js", "assets/learn/topics.js"]
+        if len([n for n in pg.dom.walk() if "data-route" in n.attrs]) != 1:
+            s["fails"].append(f"site/{rel}: needs one [data-route] box, where route.js draws the route")
+        if [x for x in need if x not in pg.local_scripts] or pg.local_scripts.index(need[0]) > pg.local_scripts.index(need[1]):
+            s["fails"].append(f"site/{rel}: loads {', '.join(need)}, the route's data before its script")
+        rows = [n.attrs.get("id") for n in pg.dom.all("section", cls="topic") if n.first("details") and n.first("summary")]
+        if rows != on:
+            s["fails"].append(f"site/{rel}: its list has a row for {rows}, but the route has {on}, in that order")
+        # the home page stays a first view: no map, a link to every other topic's row, and the ways on, to the route and the Making of
+        rel = f"{pre}index.html"; pg = pages.get(rel)
+        if pg is None:
+            s["fails"].append(f"site/{rel}: missing"); continue
+        links = [a.attrs.get("href", "") for ul in pg.dom.all("ul", cls="topic-links") for a in ul.all("a")]
+        if [h.split("#")[-1] for h in links] != on[1:] or any(not h.startswith("topics/#") for h in links):
+            s["fails"].append(f"site/{rel}: links to the topics {[h.split('#')[-1] for h in links]}, but the route has {on[1:]} after the start, in that order")
+        ways = [a.attrs.get("href") for p in pg.dom.all("p", cls="home-next") for a in p.all("a")]
+        if ways != ["topics/", "journey/"]:
+            s["fails"].append(f"site/{rel}: after its topics, two buttons: the learning route (topics/) and how the films were made (journey/); it has {ways}")
+        # and the film's two other steps are said twice, since the bar above the film is easy to miss: in a section right
+        # after the film, and first in the panel that shows when the film ends
+        steps = [a.attrs.get("href") for d in pg.dom.all("div", cls="more-steps") for a in d.all("a")]
+        tpl = re.search(r'<template id="next-panel">.*?</template>', pg.src, re.S)
+        ends = re.findall(r'<a class="btn[^"]*" href="([^"]*)"', tpl.group(0)) if tpl else []
+        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="more-steps"') > pg.src.find('class="topic-links"'):
+            s["fails"].append(f"site/{rel}: after the film and before the topics, a section offers the labs and the situations ({steps}), and the "
+                              f"\"Where next?\" panel offers them first ({ends[:2]}): people miss them in the bar above the film (the author, 12 November 2026)")
+        if [n for n in pg.dom.walk() if "data-route" in n.attrs] or any("route" in x for x in pg.local_scripts):
+            s["fails"].append(f"site/{rel}: the home page doesn't draw the route (the author, 12 November 2026): it links to it")
         for t in D["topics"]:
             if not any(not i.get("soon") for i in t["items"]):
                 s["fails"].append(f"route.{lg}.js: {t['id']} has no film or series on the site")

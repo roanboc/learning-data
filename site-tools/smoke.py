@@ -1563,7 +1563,7 @@ async def take_shots(run):
 
 # ---------------------------------------------------------------- the learning route
 async def check_route(run):
-    sec = run.rep.sec("route", "The learning route: drawn on the Topics and home pages, as a map and as a rail on a phone, with goals; the list, its rows and the search; readable in dark mode")
+    sec = run.rep.sec("route", "The learning route: drawn on the Topics page, as a map and as a rail on a phone, with goals; the list, its rows and the search; the home page's links to the topics; readable in dark mode")
     tkeys, hkeys = run.pick(("topics/", "es/topics/")), run.pick(("", "es/"))
     if not (tkeys or hkeys):
         return
@@ -1594,15 +1594,14 @@ async def check_route(run):
     for width, theme in ((1280, "dark"), (1280, "light"), (1024, "dark"), (390, "dark"), (390, "light")):
         ctx = await seeded(width, theme, {})
         try:
-            for key in tkeys + hkeys:
-                home, d = key in hkeys, D[lang(key)]; n = len(d["topics"]) - 1; at = f"/{key} @{width} {theme}"
+            for key in tkeys:
+                d = D[lang(key)]; n = len(d["topics"]) - 1; at = f"/{key} @{width} {theme}"
                 pg, log = await run.page(ctx, key)
                 await pg.wait_for_selector(".route.drawn", timeout=5000)
                 f = await pg.evaluate(FACTS)
-                if not home:
-                    expect(sec, f["route"] and not f["list"] and f["pressed"] == ["route"], f"{at}: a first visit shows the route, not the list ({f['route']}, {f['list']}, {f['pressed']})")
+                expect(sec, f["route"] and not f["list"] and f["pressed"] == ["route"], f"{at}: a first visit shows the route, not the list ({f['route']}, {f['list']}, {f['pressed']})")
                 expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start")
-                expect(sec, f["intro"] == (0 if home else 1), f"{at}: {f['intro']} introduction cards (the home page plays that film itself)")
+                expect(sec, f["intro"] == 1, f"{at}: {f['intro']} introduction cards, the route's first station")
                 expect(sec, f["goals"] == len(d["goals"]) + 1, f"{at}: {f['goals']} goal buttons, for {len(d['goals'])} goals and the whole route")
                 expect(sec, f["wide"], f"{at}: the page scrolls sideways")
                 expect(sec, not f["over"], f"{at}: names on the map sit on each other ({f['over']})")
@@ -1629,6 +1628,31 @@ async def check_route(run):
                     await pg.wait_for_selector(".route.drawn", timeout=5000)
                     expect(sec, await pg.locator(f'[data-goal="{goal["id"]}"][aria-pressed=true]').count() == 1, f"{at}: the goal isn't kept after a reload")
                     await pg.click('[data-goal=""]')
+                await pg.close()
+        finally:
+            await ctx.close()
+
+    # the home page stays a first view: every other topic a link to its row, then the route and the Making of; on a phone its
+    # links wrap and nothing scrolls sideways; a topic's link lands on the Topics list with that row open
+    for width in (1280, 390):
+        ctx = await seeded(width, "dark", {})
+        try:
+            for key in hkeys:
+                d = D[lang(key)]; pre = "es/" if lang(key) == "es" else ""
+                pg, log = await run.page(ctx, key)
+                r = await pg.evaluate("""() => ({links: [...document.querySelectorAll('.topic-links a')].map(a => a.textContent), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
+                    map: document.querySelectorAll('[data-route], .r-map, .r-rail').length, wide: document.documentElement.scrollWidth <= innerWidth,
+                    small: [...document.querySelectorAll('.topic-links a, .home-next a')].filter(a => a.getBoundingClientRect().height < 32).length})""")
+                expect(sec, r["links"] == [t["name"] for t in d["topics"][1:]], f"/{key} @{width}: its topic links are {r['links']}")
+                expect(sec, r["ways"] == ["topics/", "journey/"] and not r["map"], f"/{key} @{width}: after the topics, the route and the Making of, and no map ({r['ways']}, {r['map']})")
+                expect(sec, r["wide"] and not r["small"], f"/{key} @{width}: scrolls sideways ({not r['wide']}) or has {r['small']} links under 32 px tall")
+                if width == 390:
+                    last = d["topics"][-1]
+                    await pg.click(f'.topic-links a[href$="#{last["id"]}"]')
+                    await pg.wait_for_load_state("load")
+                    await pg.wait_for_selector(f'#{last["id"]} details[open]', timeout=5000)
+                    expect(sec, run.key(pg.url) == pre + "topics/" and await pg.locator("#list").is_visible(), f"/{key}: the link to {last['id']} doesn't open its row in the Topics list ({pg.url})")
+                expect(sec, not log["console"] and not log["errors"], f"/{key} @{width}: {(log['console'] + log['errors'])[:2]}")
                 await pg.close()
         finally:
             await ctx.close()
@@ -1697,7 +1721,7 @@ async def check_route(run):
                 hid = await pg.locator("#route").is_hidden() and await pg.locator(".view-switch").is_hidden() and await pg.locator(".ix-tools").is_hidden()
                 expect(sec, vis and hid, f"/{key} without scripts: the list shows ({vis}) and the route, the switch and the search stay hidden ({hid})")
             else:
-                n = await pg.locator(".route-plain a").count()
+                n = await pg.locator(".topic-links a").count()
                 expect(sec, n == len(D[lang(key)]["topics"]) - 1, f"/{key} without scripts: {n} plain links to the topics")
             await pg.close()
     finally:

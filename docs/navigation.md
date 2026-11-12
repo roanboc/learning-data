@@ -2,7 +2,7 @@
 
 How the Topics page and the home page show the topics, and where to change it.
 
-## Decisions, 11 November 2026
+## Decisions, 11 and 12 November 2026
 
 | Date | Decision |
 |---|---|
@@ -10,7 +10,8 @@ How the Topics page and the home page show the topics, and where to change it.
 | 11 November 2026 | The route starts with the introduction, *The Inner Life of Data*, then the foundations (*Enterprise architecture*, then *Data governance*), then *Build and monitor* (*Data modelling*, *Modern data basics*, *Analytics engineering*, *Data quality*), and ends on *Lead* (*Data management*, then *Leading data people*, the last stop). Two loops leave after the foundations and join again before *Lead*: *Share and protect* (*Master and reference data*, *Data protection and privacy*) and *Agents* (*AI agents in data work*). |
 | 11 November 2026 | The route is a suggestion: nothing is locked, and every topic opens at any time. |
 | 11 November 2026 | Five goals light up a short route on the same map, which never changes shape: *start with data*, *build a report people trust*, *make governance work*, *work beside AI agents* and *lead a data team*. A goal's stops are films and series, not whole topics. |
-| 11 November 2026 | The home page shows the route in place of a tile per topic. The intro's scenarios pages keep their tiles. |
+| 12 November 2026 | The home page stays a first view: the film, then a short text that there is more to data than moving it, the other topics as links, and two buttons, to the learning route and to how the films were made. It doesn't draw the route: a first cut did, and it was too much for a first page. The intro's scenarios pages keep their tiles. |
+| 12 November 2026 | The home page says the film's two other steps twice, because the bar above the film is easy to miss: a section right after the film offers *Take it apart* (labs to interact with) and *Make the call* (a check of what you know), and the panel that shows when the film ends offers them first, then the topics. |
 | 11 November 2026 | A series in the works is named on its topic until one of its films is on the site: the four new architecture series are the first. |
 | 11 November 2026 | The list searches what the films say, from their captions, so a word finds the film and the line that says it. If no film says a word, it is shortened until one does (*agentic* finds *agent*), and the page says so. |
 | 11 November 2026 | Both views follow the visitor's theme, and are checked in dark mode first: many visitors prefer it. |
@@ -18,7 +19,7 @@ How the Topics page and the home page show the topics, and where to change it.
 ## Where it lives
 
 - **`modules/route.json`** holds the route: its groups in order, each with its topics in order; the goals and their stops; and the series in the works (`upcoming`). The first group is the start. A group on the `main` line is a stretch of the suggested route; the other two lines are the loops.
-- **`site-tools/build_series.py`** reads it and makes `site/assets/learn/route.en.js` and `route.es.js` (the route's data, one value a line), the Topics page, and the route's block on the home pages. It stops if a topic isn't in one group, or a goal's stop isn't a film or series on the site.
+- **`site-tools/build_series.py`** reads it and makes `site/assets/learn/route.en.js` and `route.es.js` (the route's data, one value a line), the Topics page, and the topics' links on the home pages. It stops if a topic isn't in one group, or a goal's stop isn't a film or series on the site.
 - **`site/assets/learn/route.js`** draws the route in any `[data-route]` box: a map from 880 px, and below that a list with a rail, with no sideways panning. **`topics.js`** switches the Topics page's views, fills each row's ring and runs the search. **`route.css`** styles both; only these pages load it.
 - **Progress** comes from the keys the films already write (`<prefix>:watched`), in the visitor's browser only.
 

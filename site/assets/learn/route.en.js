@@ -24,9 +24,7 @@ window.LD_ROUTE = {
   "series": "{n} series",
   "more1": "1 more series coming",
   "more": "{n} more series coming",
-  "map": "The learning route: {n} topics. Select a topic to see its films and series.",
-  "done": "all watched",
-  "list": "All topics as a list"
+  "map": "The learning route: {n} topics. Select a topic to see its films and series."
  },
  "groups": [
   {

@@ -1,0 +1,163 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:10.033
+In the twentieth century, at Mahan, near Kerman, the water of a qanat, a tunnel from the mountains, came round to each owner in turn.
+
+00:00:12.133 --> 00:00:18.519
+On one of its four qanats, the turns made a cycle of twelve days, and each day was fifteen shares of time.
+
+00:00:20.419 --> 00:00:27.870
+Most were more complex: on another, the water passed twelve dividers, each sending it to certain fields at certain times.
+
+00:00:30.170 --> 00:00:35.156
+A turn missed, or cut short, could leave a field dry until the cycle came round again.
+
+00:00:37.256 --> 00:00:44.088
+Where water was short and turns were disputed, some small villages drew lots each autumn for their place in the cycle.
+
+00:00:45.588 --> 00:00:47.900
+Those near the end of it usually got none.
+
+00:00:50.000 --> 00:00:53.956
+Every owner needed to know when their water would come, and when it would stop.
+
+00:00:55.856 --> 00:01:02.575
+So the cycle was kept in levels: its days, each day's shares, and each share in six parts of sixteen minutes.
+
+00:01:04.675 --> 00:01:09.148
+Where a share had been split among heirs and buyers, it went down to single minutes.
+
+00:01:11.448 --> 00:01:18.684
+The mirab, the water master, timed each turn with a water clock: a metal cup with a hole in its base, floating in water.
+
+00:01:20.384 --> 00:01:23.908
+Each time it filled and sank, one measure of time had passed.
+
+00:01:26.008 --> 00:01:32.172
+So each owner knew when their water would come and when it would stop, down to a single minute in twelve days.
+
+00:01:34.072 --> 00:01:37.601
+And the cycle went only as deep as each owner's share needed.
+
+00:01:39.701 --> 00:01:47.170
+At the utility, the business's work needs the same: its processes drawn in levels, and only as deep as each one needs.
+
+00:01:55.870 --> 00:02:01.640
+Tomás's next note asks where each concept is born: in which process, and at which step.
+
+00:02:02.940 --> 00:02:10.305
+His matrix says which capability creates each one, but a capability is what the utility can do, not how the work runs.
+
+00:02:11.805 --> 00:02:13.727
+For that, he needs the processes.
+
+00:02:16.027 --> 00:02:24.410
+Grace's process map sorts the utility's processes into four bands: strategic, operational, support and evaluation.
+
+00:02:25.910 --> 00:02:29.233
+The bands only sort them. They aren't elements of the model.
+
+00:02:30.533 --> 00:02:37.488
+The operational band holds the work customers feel: connecting a home, restoring supply, and meter to cash.
+
+00:02:38.788 --> 00:02:45.099
+If a band were empty, that would be a finding in itself: nobody setting direction, or nobody measuring.
+
+00:02:46.599 --> 00:02:52.832
+These thirteen are level one, the macro processes: eight to fifteen, for a whole organisation.
+
+00:02:55.132 --> 00:03:02.685
+Level two is a process with a trigger, an output and one person accountable, three to eight under each macro process.
+
+00:03:04.185 --> 00:03:10.227
+Level three is its activities, drawn as a flow. Level four, each task, stays out of the model.
+
+00:03:11.927 --> 00:03:17.395
+These levels are drawn from APQC's process framework, which has a version for utilities.
+
+00:03:18.495 --> 00:03:21.058
+Breadth first: levels one and two, everywhere.
+
+00:03:22.758 --> 00:03:27.181
+Depth only on pain: level three only where someone can name what hurts.
+
+00:03:28.881 --> 00:03:33.116
+And the map says which branches weren't drawn deeper, so nobody thinks they were.
+
+00:03:34.616 --> 00:03:39.715
+As in Mahan: days and shares everywhere, and minutes only where a share is split.
+
+00:03:43.015 --> 00:03:47.641
+Meter to cash is one macro process: from a meter's reading to a paid bill.
+
+00:03:49.341 --> 00:03:56.939
+At level two, it has five processes: read meters, check readings, make bills, collect payments, and answer billing questions.
+
+00:03:58.639 --> 00:04:05.148
+Each gets a SIPOC: who supplies it, what comes in, what goes out and to whom, with its trigger and its owner.
+
+00:04:07.448 --> 00:04:12.286
+What comes in and goes out are concepts from the map: readings, accounts and bills.
+
+00:04:13.986 --> 00:04:20.665
+A concept is born in the process that first writes it: readings in reading meters, bills in making bills.
+
+00:04:22.365 --> 00:04:26.749
+And one wasn't on the map yet: the payment, born in collecting payments.
+
+00:04:29.049 --> 00:04:30.787
+Only one branch needs more.
+
+00:04:31.887 --> 00:04:38.767
+Last winter, complaints about bills doubled. Reading them, Farah found two in three were about estimated bills.
+
+00:04:40.467 --> 00:04:47.626
+Most meters send a reading every night. When one doesn't, or its reading fails a check, the bill uses an estimate.
+
+00:04:49.126 --> 00:04:56.737
+Some meters had stopped sending for weeks, so their households got estimate after estimate, then a bill that caught up all at once.
+
+00:04:58.437 --> 00:05:06.579
+So check readings goes to level three, drawn in BPMN, the notation for steps, their order and the choices between them.
+
+00:05:08.879 --> 00:05:14.111
+On each billing day, every reading is checked: is it in range, and no lower than the last?
+
+00:05:16.411 --> 00:05:18.250
+If it passes, it goes to billing.
+
+00:05:20.350 --> 00:05:27.206
+If it fails, or never came, an estimate is made from the same month last year, and goes to billing in its place.
+
+00:05:29.506 --> 00:05:36.242
+Level three shows what level two couldn't: a second kind of reading is born here, in this step, not at the meter.
+
+00:05:38.542 --> 00:05:44.418
+But the data team's tables took readings from the meters, so Farah couldn't see a single estimate in them.
+
+00:05:46.718 --> 00:05:53.060
+Grace, who owns readings, decides a reading is what the check sends on, read from the meter or estimated.
+
+00:05:55.360 --> 00:06:03.280
+The head of retail decides each bill says if it used an estimate, and a ticket asks the data team to take readings from the check.
+
+00:06:05.580 --> 00:06:09.704
+Now Farah can see which households have had estimates, and for how long.
+
+00:06:15.204 --> 00:06:23.981
+On the data practice's map, the data team's own processes join: answering a data request, building a data product, taking on a source.
+
+00:06:25.681 --> 00:06:32.423
+Each is drawn like the utility's, at level two, with its trigger, its output, its owner, and what it reads and writes.
+
+00:06:33.923 --> 00:06:36.128
+None goes deeper until something hurts.
+
+00:06:38.628 --> 00:06:45.589
+On a qanat, the cycle went down to the minute only where a share was split, and every owner knew when their water would come.
+
+00:06:47.289 --> 00:06:55.009
+At the utility, every process is drawn to level two, and only the branch that hurt goes deeper, to where an estimate is born.
+
+00:06:56.709 --> 00:07:03.508
+Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be.

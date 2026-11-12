@@ -1,5 +1,5 @@
-"""Where the right answer sits: check_site.py reads a pack of labs and scenarios as written, and tells a spread pack from one
-whose answers can be found by their place."""
+"""Where the right answer sits, and how long it is: check_site.py reads a pack of labs and scenarios as written, and tells a
+spread pack from one whose answers can be found by their place or by their length."""
 import json
 import pathlib
 import shutil
@@ -139,6 +139,48 @@ class Spread(unittest.TestCase):
                     self.assertTrue(C.order_mixed(o), (n, s, o))
             if n > 3:
                 self.assertGreater(len({tuple(o) for o in row}), 3, n)  # and not every scenario the same way
+
+    def test_a_right_option_that_explains_everything_fails(self):
+        q = lambda title, *opts: ("learn.en.js", {"title": title, "opts": list(opts)})
+        full, like, short = "x" * 100, "x" * 70, "x" * 30
+        fair = q("Fair", (like, False), (like, True), (like, False))
+        self.assertEqual(C.length_faults("learn.en.js", [fair]), [])
+        out = C.length_faults("learn.en.js", [q("Longest", (like, False), (full, True), (like, False)), fair])
+        self.assertEqual(len(out), 1, out)
+        self.assertIn('"Longest": the right option is 100 characters, the longest wrong one 70', out[0])
+        out = C.length_faults("learn.en.js", [q("Short", (like, True), (like, False), (short, False)), fair])
+        self.assertEqual(len(out), 1, out)
+        self.assertIn('"Short": options of 70/70/30 characters', out[0])
+        # a wrong option may be the longest: only the right one's length gives an answer away
+        self.assertEqual(C.length_faults("learn.en.js", [q("Wrong is longest", (full, False), (like, True), (like, False))]), [])
+
+    def test_the_right_option_clearly_the_longest_in_at_most_half(self):
+        q = lambda right: ("learn.en.js", {"title": "T", "opts": [("x" * 70, False), ("x" * right, True), ("x" * 70, False)]})
+        clearly, level = q(80), q(72)  # 80 is more than a tenth longer than 70, and less than a quarter
+        self.assertEqual(C.length_faults("the pack", [clearly, level]), [])
+        self.assertEqual(C.length_faults("the pack", [clearly, clearly, level]), [])
+        self.assertEqual(C.length_faults("the pack", [clearly, clearly, clearly, level]),
+                         ["the pack: the right option is clearly the longest in 3 of the 4 scenarios its page shows: make the wrong ones as full"])
+
+    def test_names_and_scenarios_without_options_arent_compared(self):
+        names = {"title": "Names", "opts": [("TCSI", True), ("HESA Data Futures", False), ("CEDS", False)]}
+        self.assertIsNone(C.length_read(names))  # every option under 25 characters: a name's length says nothing
+        self.assertIsNone(C.length_read({"title": "An order", "opts": None}))
+        self.assertIsNone(C.length_read({"title": "Two right", "opts": [("x" * 40, True), ("x" * 40, True)]}))
+        self.assertEqual(C.length_read({"title": "T", "opts": [("x" * 40, False), ("x" * 30, True), ("x" * 26, False)]}), (30, 40, [40, 30, 26]))
+        # none of them counts among a page's scenarios either: one clearly longest of one compared is still at most half, rounded up
+        clearly = ("learn.en.js", {"title": "T", "opts": [("x" * 70, False), ("x" * 80, True)]})
+        self.assertEqual(C.length_faults("the pack", [("learn.en.js", names), clearly]), [])
+
+    def test_lengths_are_those_of_the_words_a_page_shows(self):
+        right = 'Ask what "student" means here, and write it down.'
+        P, rel = self.read(PACK.replace('{t:"no",why:"."},{t:"yes",ok:true},{t:"no again",why:"."}',
+                                        '{t:"Rerun both reports until the two of them agree.",why:"."},'
+                                        '{t:"Ask what \\"student\\" means here, and write it down.",ok:true},'
+                                        '{t:"Publish the average of the two as the one number.",why:"."}'))
+        self.assertEqual(P["qs"][0]["opts"][1], (right, True))
+        self.assertEqual(C.length_read(P["qs"][0]), (len(right), 49, [47, len(right), 49]))  # the quotes' escapes aren't counted
+        self.assertEqual(C.length_faults(rel, [(rel, q) for q in P["qs"]]), [])  # the order has no options; the third names things
 
     def test_the_first_films_questions_are_read_from_its_pack(self):
         text = ('window.LEARN={lang:"en",\nstops:{a:{lab:{qs:[{q:"Not a Pause and think question",eng:"x"}]}}},\n'

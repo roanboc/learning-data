@@ -103,6 +103,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un acceso diario robado no llega a la cuenta de administrador.",
 "And whoever steals the admin account finds its power off, and can't switch it on alone.":
 "Y quien roba la cuenta de administrador encuentra su poder apagado, y no puede encenderlo solo.",
+"A second account isn't always practical: it can cost a second licence.":
+"Una segunda cuenta no siempre es práctica: puede costar una segunda licencia.",
+"In that case, the power stays in the everyday account, but switched off, until a task needs it.":
+"En ese caso, el poder se queda en la cuenta diaria, pero apagado, hasta que una tarea lo pida.",
+"That's one lock, not two: still far safer than power that's always on.":
+"Es una cerradura, no dos: aun así, mucho más seguro que un poder siempre encendido.",
 "To switch it on, Jun says what for.":
 "Para encenderlo, Jun dice para qué.",
 "Which power: only the one the task needs, to read the storage, change the settings, or restore a table.":

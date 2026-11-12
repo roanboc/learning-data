@@ -1,0 +1,25 @@
+{
+  "key": "inside-the-platform",
+  "title": "Inside the platform",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: the parts every data platform needs, drawn before the products under them, so that what's missing shows.",
+  "howto": "Technology green is the platform: its eight parts, four along the way the data goes and four across them all, and a product under each, most of them Databricks. Blue is each domain's data products, and a gold tag is an owner in the business. Amber, a lantern's colour, is the road, and the part with nothing under it, drawn as a dashed outline.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["road"],
+  "poster": ["road", "two", 4.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bRavi's\\b", "Rah-vee's"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bEdo\\b", "Eh-doh"],
+    ["\\bTōkaidō\\b", "Toh-kai-doh"],
+    ["\\bshogunate\\b", "show-gun-ate"],
+    ["\\bOdawara\\b", "Oh-dah-wah-rah"],
+    ["\\bMishima\\b", "Mee-shee-mah"],
+    ["\\bHakone's\\b", "Hah-koh-neh's"],
+    ["\\bHakone\\b", "Hah-koh-neh"]
+  ]
+}

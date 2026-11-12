@@ -222,6 +222,7 @@ Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data
 Source: [films/platform-and-solution-architecture](../films/platform-and-solution-architecture/) · Portal: `/platform-and-solution-architecture/`
 
 - [An application or a platform?](../films/platform-and-solution-architecture/1-an-application-or-a-platform/) — `an-application-or-a-platform`
+- [Inside the platform](../films/platform-and-solution-architecture/2-inside-the-platform/) — `inside-the-platform`
 
 ### AI and continuous architecture
 

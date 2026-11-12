@@ -1,0 +1,163 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:12.905
+Para 1972, Cybersyn tenía una red: las líneas de télex de Chile, que se extendían a cada fábrica del Estado, a lo largo de un país de más de cuatro mil kilómetros.
+
+00:00:14.605 --> 00:00:18.166
+A algunos gerentes los convenció la oferta de un télex gratis.
+
+00:00:19.466 --> 00:00:25.177
+Pero el software solo podía avisar sobre una fábrica si tenía las cifras propias de esa fábrica, de ese día.
+
+00:00:26.677 --> 00:00:32.865
+Una cifra de cualquier otro lado lo engañaría: la del mes pasado, o una estimación hecha en una oficina de Santiago.
+
+00:00:34.365 --> 00:00:39.308
+Entonces un mal día podía parecer normal, y una hilandería sin algodón podía esperar una ayuda que nunca llegaba.
+
+00:00:41.008 --> 00:00:43.418
+Cada cifra tenía que venir del lugar donde se hacía.
+
+00:00:44.918 --> 00:00:50.359
+Así que cada fábrica enviaba sus propias cifras por télex, una vez al día, desde la propia fábrica.
+
+00:00:52.059 --> 00:00:56.198
+No fue fácil: el equipo tenía que recordar a los gerentes que las enviaran.
+
+00:00:57.698 --> 00:01:02.909
+Pero ahora cada cifra tenía un lugar donde nacía: la fábrica que hacía lo que contaba.
+
+00:01:04.409 --> 00:01:09.007
+Lo que leía Santiago era una copia de lo que esa fábrica había enviado, el mismo día.
+
+00:01:10.507 --> 00:01:12.850
+Antes, las estadísticas tardaban seis meses.
+
+00:01:14.350 --> 00:01:18.157
+En la empresa, Inés encuentra un hecho que nace en dos lugares.
+
+00:01:19.457 --> 00:01:27.499
+Cuando una familia contrata el servicio para una vivienda nueva, facturación crea un premise para ella. Cuando la vivienda se conecta, el mapa de la red crea un service point.
+
+00:01:29.199 --> 00:01:35.031
+El año pasado, 214 de 1,160 viviendas nuevas se crearon dos veces.
+
+00:01:42.531 --> 00:01:44.826
+Una vivienda nueva en 14 Quarry Lane.
+
+00:01:46.526 --> 00:01:54.852
+En marzo, la familia contrató. La vivienda aún no tenía identificador de la red, así que facturación creó un premise propio, con la dirección de su formulario.
+
+00:01:56.752 --> 00:02:05.574
+En abril, el equipo de la red la conectó, y el mapa de la red creó su service point, en Lot 14, Quarry Lane: el nombre que la constructora le daba al terreno.
+
+00:02:07.474 --> 00:02:13.097
+Atención al cliente copió el premise de facturación. El sistema de cortes copió el service point de la red.
+
+00:02:14.997 --> 00:02:17.373
+En junio, se cortó la luz en su calle.
+
+00:02:19.073 --> 00:02:23.289
+El sistema de cortes vio el corte en el service point, pero no había ninguna cuenta en él.
+
+00:02:24.989 --> 00:02:31.301
+Cuando la familia llamó, atención al cliente no encontró ningún corte en su dirección, y les dijo que llamaran a un electricista.
+
+00:02:33.201 --> 00:02:35.955
+Y la medida de Grace no contó a ningún cliente ahí.
+
+00:02:39.255 --> 00:02:44.393
+Cada hecho tiene un lugar donde nace: el único sistema donde se crea, y se corrige.
+
+00:02:46.293 --> 00:02:51.944
+DAMA lo llama sistema de registro. Cualquier otro sistema que guarde el hecho guarda una copia.
+
+00:02:54.044 --> 00:03:00.408
+Para hallar la casa de cada hecho, Inés dibuja qué hace cada sistema con cada cosa: la crea, o la copia.
+
+00:03:02.708 --> 00:03:05.572
+Donde una fila tiene un solo «crea», el hecho tiene casa.
+
+00:03:07.472 --> 00:03:15.877
+Donde tiene dos, nace dos veces: el punto de conexión, en facturación y en el mapa de la red, y el cliente, en facturación y en atención al cliente.
+
+00:03:19.577 --> 00:03:25.855
+Así que Inés propone una casa para el punto de conexión, y su responsable, Grace, está de acuerdo: el mapa de la red.
+
+00:03:27.755 --> 00:03:34.400
+Desde ahora, solo el mapa de la red crea un punto de conexión, con su identificador, en cuanto se planea una conexión.
+
+00:03:36.300 --> 00:03:43.173
+Facturación ya no crea el suyo. Le pide uno al equipo de la red, y lo copia, con identificador y todo, el mismo día.
+
+00:03:45.273 --> 00:03:48.883
+La casa de la cuenta es facturación; su responsable, quien dirige comercialización.
+
+00:03:50.783 --> 00:03:56.623
+Un hecho, una casa, un responsable. Una copia se puede leer en cualquier parte, pero se corrige solo en casa.
+
+00:04:00.523 --> 00:04:06.502
+Cada copia guarda una línea de vuelta a donde nació: qué sistema, qué registro, y cuándo se copió.
+
+00:04:08.202 --> 00:04:09.692
+Esa línea es su linaje.
+
+00:04:11.392 --> 00:04:18.765
+En julio, el equipo de la red corrigió la dirección al número de calle del terreno, 14 Quarry Lane, en su casa: el mapa de la red.
+
+00:04:20.665 --> 00:04:23.348
+A la mañana siguiente, todas las copias decían lo mismo.
+
+00:04:25.248 --> 00:04:34.259
+La medida de Grace también tiene linaje: cada interrupción que cuenta se vincula con un registro del sistema de cortes, y cada cliente con una cuenta de facturación.
+
+00:04:37.359 --> 00:04:41.492
+Ahora, volvamos al corte. Cada uno lo registra más de un sistema.
+
+00:04:43.192 --> 00:04:47.533
+El evento «power off» del medidor nace en los datos de medidores: lo que vio el medidor.
+
+00:04:49.233 --> 00:04:53.610
+La llamada de la familia nace en atención al cliente: lo que nos dijo una persona.
+
+00:04:55.310 --> 00:05:01.997
+La interrupción nace en el sistema de cortes: el corte como lo define el equipo de Grace, de su inicio a su fin.
+
+00:05:03.897 --> 00:05:08.295
+No son tres copias de un hecho. Son tres hechos, cada uno con su propia casa.
+
+00:05:10.395 --> 00:05:16.673
+El sistema de cortes lee los otros dos como evidencia, y su registro es el que cuenta la medida de Grace.
+
+00:05:20.173 --> 00:05:22.689
+Algunos hechos no pueden nacer en un solo lugar.
+
+00:05:23.789 --> 00:05:30.066
+Un cliente puede empezar en facturación, al contratar, o en atención al cliente, al llamar antes de haber firmado nada.
+
+00:05:31.366 --> 00:05:38.007
+Los dos tienen que crearlo. Entonces el trabajo es saber cuándo dos registros son la misma persona, y qué valor gana.
+
+00:05:39.507 --> 00:05:43.931
+Eso son los datos maestros, y la serie El mismo, en todas partes sigue desde aquí.
+
+00:05:45.431 --> 00:05:52.080
+En la práctica de datos en el mapa, cada objeto de datos ahora nombra su casa, y cada copia tiene una línea de vuelta a ella.
+
+00:05:57.980 --> 00:06:02.614
+En Chile, cada cifra nacía en su fábrica, y se enviaba desde ahí una vez al día.
+
+00:06:03.914 --> 00:06:07.269
+Santiago leía copias, y sabía de dónde venía cada una.
+
+00:06:08.769 --> 00:06:14.455
+En la empresa, cada hecho tiene ahora una casa y un responsable, y cada copia una línea de vuelta a ella.
+
+00:06:15.955 --> 00:06:23.264
+En octubre, cuando volvió a cortarse la luz en Quarry Lane, la llamada de la familia encontró el corte, y la medida de Grace los contó.
+
+00:06:24.964 --> 00:06:28.033
+Desde julio, ninguna vivienda nueva se creó dos veces.
+
+00:06:29.533 --> 00:06:35.936
+Pero un hecho no se queda en casa. Una lectura reemplazada en la red tiene que llegar a facturación. ¿Cómo viaja?

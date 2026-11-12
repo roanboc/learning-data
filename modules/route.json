@@ -84,28 +84,5 @@
       "stops": ["enterprise-architecture", "data-governance", "leading-a-data-team", "a-plan-in-ninety-days", "making-the-case"]
     }
   ],
-  "upcoming": {
-    "enterprise-architecture": [
-      {
-        "id": "business-architecture-for-data",
-        "films": 5,
-        "name": {"en": "Business architecture for data", "es": "Arquitectura de negocio para los datos"}
-      },
-      {
-        "id": "data-architecture",
-        "films": 6,
-        "name": {"en": "Data architecture", "es": "Arquitectura de datos"}
-      },
-      {
-        "id": "platform-and-solution-architecture",
-        "films": 8,
-        "name": {"en": "Platform and solution architecture", "es": "Arquitectura de plataformas y soluciones"}
-      },
-      {
-        "id": "ai-and-continuous-architecture",
-        "films": 6,
-        "name": {"en": "AI and continuous architecture", "es": "IA y arquitectura continua"}
-      }
-    ]
-  }
+  "upcoming": {}
 }

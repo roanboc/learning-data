@@ -113,27 +113,58 @@ window.LD_ROUTE = {
     },
     {
      "id": "business-architecture-for-data",
-     "soon": true,
-     "title": "Arquitectura de negocio para los datos",
-     "kicker": "Serie · 5 películas"
+     "kind": "series",
+     "title": "Arquitectura de negocio para datos",
+     "href": "business-architecture-for-data/",
+     "poster": "what-the-business-owns-poster.jpg",
+     "kicker": "Serie · 2 de 5 películas",
+     "len": "14 min",
+     "min": 14.0,
+     "films": [
+      "ld-what-the-business-owns",
+      "ld-what-the-business-needs-to-know"
+     ]
     },
     {
      "id": "data-architecture",
-     "soon": true,
+     "kind": "series",
      "title": "Arquitectura de datos",
-     "kicker": "Serie · 6 películas"
+     "href": "data-architecture/",
+     "poster": "between-the-business-and-the-systems-poster.jpg",
+     "kicker": "Serie · 2 de 6 películas",
+     "len": "13 min",
+     "min": 13.0,
+     "films": [
+      "ld-between-the-business-and-the-systems",
+      "ld-the-pyramid-taken-apart"
+     ]
     },
     {
      "id": "platform-and-solution-architecture",
-     "soon": true,
-     "title": "Arquitectura de plataformas y soluciones",
-     "kicker": "Serie · 8 películas"
+     "kind": "series",
+     "title": "Arquitectura de plataforma y de soluciones",
+     "href": "platform-and-solution-architecture/",
+     "poster": "an-application-or-a-platform-poster.jpg",
+     "kicker": "Serie · 1 de 8 películas",
+     "len": "8 min",
+     "min": 8.0,
+     "films": [
+      "ld-an-application-or-a-platform"
+     ]
     },
     {
      "id": "ai-and-continuous-architecture",
-     "soon": true,
+     "kind": "series",
      "title": "IA y arquitectura continua",
-     "kicker": "Serie · 6 películas"
+     "href": "ai-and-continuous-architecture/",
+     "poster": "agents-on-the-map-poster.jpg",
+     "kicker": "Serie · 2 de 6 películas",
+     "len": "17 min",
+     "min": 17.0,
+     "films": [
+      "ld-agents-on-the-map",
+      "ld-the-ai-platform"
+     ]
     }
    ]
   },
@@ -288,8 +319,8 @@ window.LD_ROUTE = {
      "href": "from-tables-to-decisions/",
      "poster": "reports-on-demand-poster.jpg",
      "kicker": "Serie · 3 películas",
-     "len": "22 min",
-     "min": 22.0,
+     "len": "23 min",
+     "min": 23.0,
      "films": [
       "ld-reports-on-demand",
       "ld-define-it-once",
@@ -371,8 +402,8 @@ window.LD_ROUTE = {
      "href": "fit-for-use/",
      "poster": "good-enough-for-what-poster.jpg",
      "kicker": "Serie · 4 películas",
-     "len": "32 min",
-     "min": 32.0,
+     "len": "33 min",
+     "min": 33.0,
      "films": [
       "ld-good-enough-for-what",
       "ld-a-hundred-records",
@@ -387,8 +418,8 @@ window.LD_ROUTE = {
      "href": "quality-as-a-habit/",
      "poster": "the-hidden-factory-poster.jpg",
      "kicker": "Serie · 4 películas",
-     "len": "34 min",
-     "min": 34.0,
+     "len": "35 min",
+     "min": 35.0,
      "films": [
       "ld-the-hidden-factory",
       "ld-report-fix-tell",
@@ -463,8 +494,8 @@ window.LD_ROUTE = {
      "href": "only-what-you-may-see/",
      "poster": "an-agreement-first-poster.jpg",
      "kicker": "Serie · 8 películas",
-     "len": "64 min",
-     "min": 64.0,
+     "len": "65 min",
+     "min": 65.0,
      "films": [
       "ld-an-agreement-first",
       "ld-know-what-you-hold",

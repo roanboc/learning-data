@@ -72,7 +72,7 @@ scene("pins",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({p:[wAt(sc,"pi
     // the desk: the learner table's YAML comes up; its owner and domain light, with Yusuf's pin and the film that decided it; then its term
     {at:P.line,place:"desk",keys:[[P.line,800,440,1.25]],push:0.02,draw:(x,tt)=>{const R=gd_learner(x,clamp((tt-P.line-0.2)/0.9,0,1),[fin(tt,P.owner,0.5),fin(tt,P.term,0.5),fin(tt,P.beside,0.6)]);
       if(!R)return;const ow=R.rows[5],tm=R.rows[7],oe=R.tx+gu_mw(x,GD_LRN[5].s)+30,te=R.tx+gu_mw(x,GD_LRN[7].s)+30;
-      gd_flyPin(x,[960,-60],[oe,ow],clamp((tt-P.owner+0.2)/0.9,0,1),"an owner");gu_filmTag(x,oe+200,ow,"Who decides",fin(tt,P.owner+0.6,0.5));
+      gd_flyPin(x,[960,-60],[oe,ow],clamp((tt-P.owner+0.2)/0.9,0,1),"an owner");gu_filmTag(x,Math.max(oe+200,R.right+24),ow,"Who decides",fin(tt,P.owner+0.6,0.5));
       gd_flyPin(x,[960,-60],[te,tm],clamp((tt-P.term+0.2)/0.9,0,1),"a term");gu_filmTag(x,te+170,tm,"One word, one home",fin(tt,P.term+0.6,0.5));}},
     // three of its columns, each saying whether it identifies a person, its class beside it, and the film that set the classes. The
     // same desk and the same file: the first sheet leaves before this one comes up (later), so its lines never show twice

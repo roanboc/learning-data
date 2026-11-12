@@ -36,6 +36,7 @@ A film's thread writes its questions and assumptions to that film's own file, in
   - [Fit for use](04-data-quality/2-fit-for-use/)
   - [Quality as a habit](04-data-quality/3-quality-as-a-habit/)
 - [Enterprise architecture](05-enterprise-architecture/)
+  - [The map before the data](05-enterprise-architecture/1-enterprise-architecture/)
   - [Business architecture for data](05-enterprise-architecture/2-business-architecture-for-data/)
   - [Data architecture](05-enterprise-architecture/3-data-architecture/)
   - [Platform and solution architecture](05-enterprise-architecture/4-platform-and-solution-architecture/)
@@ -61,3 +62,4 @@ A film's thread writes its questions and assumptions to that film's own file, in
   - [Making the case](11-data-management/2-making-the-case/)
   - [Architecture that keeps up](11-data-management/3-architecture-that-keeps-up/)
   - [Small steps, measured](11-data-management/4-small-steps-measured/)
+- [Making of](12-making-of/)

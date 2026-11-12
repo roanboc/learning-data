@@ -38,9 +38,10 @@ it in a visitor's browser, each letter where its font says, to a part of a pixel
 moves each letter to a whole pixel, where a line of words comes out up to about 1% wider or narrower (3 px in 420). Text that
 leaves its box either way is a fault, and the line says so when it is only one of them.
 
-It fails on any text that leaves its box. The films made before this check are fixed series by series: what each still does wrong
-is listed in site-tools/fits_later.json ({film key: [[chapter id, text], ...]}), is shown as known and doesn't fail, and leaves the
-list with its fix (the check says when a listed piece of text fits again). --later writes the list again for the films checked.
+It fails on any text that leaves its box. The films made before this check were fixed from a list, site-tools/fits_later.json
+({film key: [[chapter id, text], ...]}): what a film on it still does wrong is shown as known and doesn't fail, and leaves the list
+with its fix (the check says when a listed piece of text fits again). The list is empty since 12 November 2026, so every film is
+held to its boxes; --later writes it again for the films checked, should a stricter check find old faults to fix film by film.
 --json FILE writes what it found, with each piece of text's place in the frame."""
 import argparse, gzip, json, math, os, pathlib, sys
 

@@ -167,7 +167,7 @@ scene("warm",(ctx,S,t,sc)=>{
     const before=1-ag_in(tt,T.push-0.2,0.6),now=ag_in(tt,T.push,0.6),pipe=ag_in(tt,T.five-0.2,0.6);
     // the HR system, the platform's table of contracts, and the lanes between them and the claims app
     md_system(c,HR[0],HR[1],HR[2],"hr",{a:ag_in(tt,T.hr-0.2,0.5),lit:0.8*hw_io(tt,T.monday,T.night+0.6,0.4,0.6)+0.6*hw_io(tt,T.made,T.five,0.4,0.6)});
-    if(pipe>0.004){c.save();c.globalAlpha*=pipe;md_card(c,690,118,460,196,{dash:true,edge:MD.flow,r:20});md_label(c,712,150,"Pipeline · every 5 minutes",{col:MD.flow});c.restore();}
+    if(pipe>0.004){c.save();c.globalAlpha*=pipe;md_card(c,690,84,460,230,{dash:true,edge:MD.flow,r:20});["Pipeline","every 5 minutes"].forEach((s,i)=>md_label(c,712,116+i*34,s,{col:MD.flow}));c.restore();}   // the label in two lines, in a card 34 px taller: on one line it ran 44 px past the card
     md_table(c,TB[0],TB[1],TB[2],{name:"contracts",kind:"table",lit:0.6*ag_in(tt,T.stands,0.6),a:ag_in(tt,T.contract-0.3,0.5)});
     const lanesA=ag_in(tt,T.hr,0.6),gapLit=hw_io(tt,T.fills,T.mix+0.6,0.4,0.6);
     // until September, a whole file once a night; now each change pushed as it's made, through Zerobus Ingest, and taken in every five minutes

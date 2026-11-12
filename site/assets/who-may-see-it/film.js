@@ -3131,13 +3131,13 @@ const ws_bindCol=i=>WS_BIND.cols[Math.floor(hash(i,17)*WS_BIND.cols.length)];
 function ws_bindPos(i){const B=WS_BIND,row=i<17?0:1;return[B.x+(i%17)*B.gap,GV_OFF.shelf.rows[1+row]];}
 function ws_binders(ctx,o){o=o||{};const B=WS_BIND;for(let i=0;i<34;i++){if(i===1||i===11||(o.taken&&i===5))continue;const [x,y]=ws_bindPos(i),u=i===5&&o.out?o.out:0,bw=B.w+u*6;
   ctx.save();ctx.translate(0,-10*u);gv_binder(ctx,x-u*3,y-B.h,bw,B.h,ws_bindCol(i));ctx.restore();}}
-// a binder in both hands, its label the film's title (in the figure's units, like the series' heldBinder)
+// a binder in both hands, its label the film's title, inside the label: at 32 px "Who may" was wider than it (in the figure's units, like the series' heldBinder)
 function ws_heldTitled(lines,col){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+4);cx.rotate(-0.06);
   const w=168,h=214;cx.fillStyle=rgba(mix(col,[0,0,0],0.35),1);rr(cx,-w/2+9,-h/2+7,w,h,10);cx.fill();
   const g=cx.createLinearGradient(-w/2,-h/2,w/2,h/2);g.addColorStop(0,rgba(mix(col,[255,255,255],0.28),1));g.addColorStop(1,rgba(col,1));cx.fillStyle=g;rr(cx,-w/2,-h/2,w,h,10);cx.fill();
   cx.fillStyle="rgba(250,246,236,0.95)";for(let i=0;i<7;i++)cx.fillRect(w/2-2,-h/2+12+i*5,10,3.2);
-  cx.fillStyle="rgba(255,252,242,0.97)";rr(cx,-w/2+16,-h/2+26,w-32,112,10);cx.fill();
-  cx.fillStyle=rgba(mix(col,[0,0,0],0.5),1);cx.textAlign="center";cx.font=font(800,32);lines.forEach((s,i)=>cx.fillText(s,0,-h/2+74+i*38-(lines.length-1)*6));cx.restore();
+  cx.fillStyle="rgba(255,252,242,0.97)";rr(cx,-w/2+12,-h/2+26,w-24,112,10);cx.fill();
+  cx.fillStyle=rgba(mix(col,[0,0,0],0.5),1);cx.textAlign="center";cx.font=font(800,28);lines.forEach((s,i)=>cx.fillText(s,0,-h/2+76+i*34-(lines.length-1)*6));cx.restore();
   fingers(cx,P_,[[mx-w/2+4,my+30],[mx+w/2-2,my+24]]);};}
 // binder 6 open on Yusuf's desk, seen from above: the inside of its cover on the left, policy 6's first page on the right, the rings
 // between them. The paper is kept; the words are drawn every frame. WS_OB: where it lies; ws_obLine: where the policy's first line is.

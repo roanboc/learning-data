@@ -2192,11 +2192,11 @@ scene("methods",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const cC=c("champ"),gat=w("champ","Under the vocabulary"),cT=c("takes");
   // the map, small, in the middle, once the last chapter has faded; it gives way to what the methods agree on
   const shrink=ease(fin(t,0.5,1.2));withA(ctx,1-fin(t,gat-0.4,0.6),()=>layerStack(ctx,lerp(720,800,shrink),lerp(150,330,shrink),lerp(800,320,shrink),{sh:lerp(66,24,shrink),gap:lerp(16,8,shrink),size:lerp(30,13,shrink),deco:1}));
-  const P=[[40,96],[500,96],[960,96],[1420,96],[270,650],[730,650],[1190,650]],words=[["three","Toe-gaff"],["three","Arky-mate"],["three","Zack-man"],["more","Business architecture"],["more","process frameworks"],["more","domain-driven"],["more","data management"]];
-  P.forEach(([x,y],i)=>arrive(ctx,x+225,y+75,t,w(words[i][0],words[i][1])-0.15,()=>d1_methodCard(ctx,i,x,y,450,150,{hi:pulseAt(t,w(words[i][0],words[i][1]),1.6),a:1-0.45*fin(t,gat,0.8)}),{dy:24}));
+  const need=i=>110+Math.max(tw(ctx,D1_METHODS[i][0],32,800),tw(ctx,D1_METHODS[i][1],28,600))+28,w4=Math.ceil(need(3)),w3=Math.floor((1800-w4)/3),wb=Math.ceil(Math.max(450,need(4),need(5),need(6))),xb=960-(3*wb+20)/2,P=[[40,96,w3],[50+w3,96,w3],[60+2*w3,96,w3],[70+3*w3,96,w4],[xb,650,wb],[xb+wb+10,650,wb],[xb+2*wb+20,650,wb]],words=[["three","Toe-gaff"],["three","Arky-mate"],["three","Zack-man"],["more","Business architecture"],["more","process frameworks"],["more","domain-driven"],["more","data management"]];   // each card holds its words: the fourth, the longest, is as wide as they are and the first three share the rest of the row; the three below are all as wide as the widest of them needs
+  P.forEach(([x,y,wd],i)=>arrive(ctx,x+wd/2,y+75,t,w(words[i][0],words[i][1])-0.15,()=>d1_methodCard(ctx,i,x,y,wd,150,{hi:pulseAt(t,w(words[i][0],words[i][1]),1.6),a:1-0.45*fin(t,gat,0.8)}),{dy:24}));
   withA(ctx,fin(t,w("champ","champions"),0.5)*(1-fin(t,gat,0.5)),()=>T(ctx,"each has its champions",960,560,{w:700,size:34,align:"center",color:rgba(SOFT,1)}));
   // the lessons lift from the cards and gather in the middle
-  D1_LESSONS.forEach((s_,j)=>{const src=P[(j*3+1)%7],q=ease(fin(t,gat+j*0.3,1.0)),x=lerp(src[0]+225,960,q),y=lerp(src[1]+75,300+j*62,q);if(q<=0)return;
+  D1_LESSONS.forEach((s_,j)=>{const src=P[(j*3+1)%7],q=ease(fin(t,gat+j*0.3,1.0)),x=lerp(src[0]+src[2]/2,960,q),y=lerp(src[1]+75,300+j*62,q);if(q<=0)return;
     withA(ctx,clamp(q*2,0,1),()=>tag(ctx,x,y,s_,EAC,{align:"center",size:30}));});
   arrive(ctx,960,612,t,w("takes","agree on")-0.2,()=>T(ctx,"this series: what they agree on",960,616,{w:800,size:34,align:"center",color:rgba(INK,1)}),{dy:12});
   ctx.restore();vign(ctx,S);});

@@ -3149,9 +3149,10 @@ function gd_census(ctx,o){o=o||{};const a=o.a==null?1:o.a,dm=1-0.75*clamp(o.dim|
 const GD_LRN=[{n:3,s:"  - name: core_learner"},{fold:1},{n:8,s:"    config:"},{n:9,s:"      meta:"},{n:10,s:"        grain: One row per learner per version"},
   {n:11,s:"        owner: Mei Tanaka, registrar's office"},{n:12,s:"        domain: student"},{n:13,s:"        glossary_term: learner"},{fold:1}];
 const GD_LRNX=[110,120,1000];
-function gd_learner(ctx,u,lit){if(u<=0.01)return null;const L=lit||[],[x,y,w]=GD_LRNX,e=easeCam(clamp(u,0,1)),b=0.4*(L[2]||0),
+function gd_learner(ctx,u,lit){if(u<=0.01)return null;const L=lit||[],[x,y,w0]=GD_LRNX,e=easeCam(clamp(u,0,1)),b=0.4*(L[2]||0),
+    w=Math.max(w0,GU_F.gut+Math.ceil(gu_mw(ctx,GD_LRN[5].s)+56+tw(ctx,"an owner",32,700))+36),   // wide enough for its longest line, the pin and Yusuf's word beside it: at 1000, an owner ran off the sheet onto the desk
     lines=GD_LRN.map((r,i)=>i>=2&&i<=7?Object.assign({},r,{lit:Math.max(b,i===5||i===6?L[0]||0:i===7?L[1]||0:0)}):r);
-  return gu_file(ctx,x,lerp(H+60,y,e),w,{path:"models/core/student/_core_student__models.yml",lang:"yaml",lines});}
+  return Object.assign(gu_file(ctx,x,lerp(H+60,y,e),w,{path:"models/core/student/_core_student__models.yml",lang:"yaml",lines}),{right:x+w});}
 // three of its columns, each saying whether it identifies a person (lit[k], 0 to 1), with its class's chip beside it from at[k]
 const GD_COLS=[{n:44,s:"      - name: learner_key"},{n:49,s:"          meta: {glossary_term: learner, personal_data: pseudonymous}",cls:"pseudonymous"},{fold:1},
   {n:79,s:"      - name: email"},{n:83,s:"          meta: {personal_data: direct}",cls:"direct"},{n:84,s:"      - name: status"},{fold:1},
@@ -3598,7 +3599,7 @@ scene("pins",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({p:[wAt(sc,"pi
     // the desk: the learner table's YAML comes up; its owner and domain light, with Yusuf's pin and the film that decided it; then its term
     {at:P.line,place:"desk",keys:[[P.line,800,440,1.25]],push:0.02,draw:(x,tt)=>{const R=gd_learner(x,clamp((tt-P.line-0.2)/0.9,0,1),[fin(tt,P.owner,0.5),fin(tt,P.term,0.5),fin(tt,P.beside,0.6)]);
       if(!R)return;const ow=R.rows[5],tm=R.rows[7],oe=R.tx+gu_mw(x,GD_LRN[5].s)+30,te=R.tx+gu_mw(x,GD_LRN[7].s)+30;
-      gd_flyPin(x,[960,-60],[oe,ow],clamp((tt-P.owner+0.2)/0.9,0,1),"an owner");gu_filmTag(x,oe+200,ow,"Who decides",fin(tt,P.owner+0.6,0.5));
+      gd_flyPin(x,[960,-60],[oe,ow],clamp((tt-P.owner+0.2)/0.9,0,1),"an owner");gu_filmTag(x,Math.max(oe+200,R.right+24),ow,"Who decides",fin(tt,P.owner+0.6,0.5));
       gd_flyPin(x,[960,-60],[te,tm],clamp((tt-P.term+0.2)/0.9,0,1),"a term");gu_filmTag(x,te+170,tm,"One word, one home",fin(tt,P.term+0.6,0.5));}},
     // three of its columns, each saying whether it identifies a person, its class beside it, and the film that set the classes. The
     // same desk and the same file: the first sheet leaves before this one comes up (later), so its lines never show twice

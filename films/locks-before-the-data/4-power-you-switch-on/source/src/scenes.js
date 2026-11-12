@@ -6,7 +6,8 @@
    account (A second account), how its power is switched on (Switched on for a task), one morning's task (One morning), who gets one
    (Who gets one), and back to the story (Only at its hour). The 1870s are in pw_past.js; the hall's two rooms and what is shown in
    them in pw_hall.js. In the team's room the board reads left to right, everyday account, admin account, power, with a lock between
-   each step; to switch power on, the room makes way for the card (pw_adminXY, pw_shelfXY). In one room the camera glides and only what
+   each step; A second account ends on a third row (pw_oneAccount): where a second account isn't practical, one account keeps the power,
+   switched off, behind one lock. To switch power on, the room makes way for the card (pw_adminXY, pw_shelfXY). In one room the camera glides and only what
    changes fades or slides; between rooms the film cuts, and it dissolves only where the whole picture changes (the 1870s into the
    hall). People are drawn in the film's own time (T), so a chapter that glides on from the last one draws them as it left them. */
 
@@ -53,6 +54,20 @@ function pw_work(ctx,a,glow){let px=PW_T.E;["Code","Tests","Jobs"].forEach((s,i)
 // Jun's passkey: a sealed card with its gold chip, under his admin badge (k springs it in)
 function pw_passkey(ctx,a,k){if(!(a>0))return;const x=PW_T.A,y=PW_T.row.jun+172;withA(ctx,a,()=>{ctx.save();ag_about(ctx,x+200,y+48,lerp(0.7,1,clamp(k,0,1.15)));
   dp_sealed(ctx,x,y,400,"Passkey",{});dp_chip(ctx,x+300,y+20);ctx.restore();});}
+/* where a second account isn't practical: a third row under Sam's, one account that opens email and the web and keeps the power,
+   switched off, with one lock on its way to it, where the rows above have two. o.a the badge (o.k springs it in, o.glow lights it);
+   o.none "No second account", where an admin account would be; o.tok the power, dark (o.tk springs it in); o.line draws the way on;
+   o.off "Off"; o.lock the lock (o.lk springs it in, o.halo lights it); o.one "One lock, not two"; o.all fades the whole row */
+const PW_ONE={x:PW_T.E,y:640};
+function pw_oneAccount(ctx,o){const x=PW_ONE.x,y=PW_ONE.y,my=y+75,mx=(x+PW_T.bw+PW_T.S)/2,all=o.all==null?1:o.all;if(!(all>0))return;withA(ctx,all,()=>{
+  dp_halo(ctx,PW_T.lock2[0],my,54,"coral",0.6*(o.halo||0));   // a small glow: a wider one would light the glass under the power's words
+  if(o.line>0)pw_hang(ctx,[x+PW_T.bw,my],[PW_T.S,my],o.line,{col:"grey",dash:[8,10],alpha:0.8});
+  pw_id(ctx,x,y,PW_T.bw,{a:o.a||0,k:o.k,name:"A specialist",icons:1,glow:o.glow||0});
+  dp_pill(ctx,mx,my-25,"No second account","grey",{align:"center",a:o.none||0});
+  pw_token(ctx,PW_T.S,my-28,"Great power",{a:o.tok||0,k:o.tk,on:0});
+  dp_pill(ctx,PW_T.S+PW_T.sw/2,my+88,"Off","grey",{align:"center",a:o.off||0});
+  pw_lockMark(ctx,PW_T.lock2[0],my,o.lock||0,{k:o.lk});
+  dp_pill(ctx,mx,my+52,"One lock, not two","grey",{align:"center",a:o.one||0});});}
 // the token's way from the shelf, made way, into the card's Power row: a curve that passes under Sam's admin badge
 function pw_tokAt(u){const a=pw_shelfXY(0,1),c=[1180,640],b=pw_cardTok(),v=ag_sine(clamp(u,0,1));
   return[(1-v)*(1-v)*a[0]+2*v*(1-v)*c[0]+v*v*b[0],(1-v)*(1-v)*a[1]+2*v*(1-v)*c[1]+v*v*b[1]];}
@@ -236,29 +251,40 @@ scene("second",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
   const tSecond=wAt(sc,"gets","a second account"),tAlone=C.alone,tUsed=wAt(sc,"never","never used"),tPass=wAt(sc,"passkey","a passkey"),tDaily=C.daily;
   const tCode=wAt(sc,"daily","writing code"),tTest=wAt(sc,"daily","testing it"),tJobs=wAt(sc,"daily","watching the jobs"),tAdm=C.admin,tUntil=wAt(sc,"none","until it's switched on");
   const tLocks=wAt(sc,"locks","two locks"),tStolen=C.stolen,tSteals=C.steals,tOff=wAt(sc,"steals","finds its power off"),tAlone2=wAt(sc,"steals","can't switch it on alone");
+  // where a second account isn't practical: the power stays in the everyday account, switched off; one lock, not two
+  const tLic=C.licence,tLicW=wAt(sc,"licence","a second licence"),tCase=C.stays,tStays=wAt(sc,"stays","the power stays"),tEvery=wAt(sc,"stays","the everyday account"),tOffW=wAt(sc,"stays","switched off");
+  const tOne=wAt(sc,"onelock","one lock"),tTwo=wAt(sc,"onelock","not two");
   const L1=PW_T.lock1,L2=PW_T.lock2;
   const shots=[{at:0,place:"pwTeam",keys:[[0,960,540,1.0]],push:0,draw(ctx,t){const T=t+sc.start;
     const out=ag_in(t,br-0.7,0.6);   // what this chapter showed leaves before the next one, which opens on the room as it is
+    const th=(1-ag_in(t,tLic-0.6,0.5))*(1-out);   // the two stolen accounts' marks leave before the chapter's last thought
+    const sec=ag_io(t,tLic-0.1,tLicW+0.3,0.4);   // "a second account": both admin accounts glow
     pw_two(ctx,T);
     // the power leaves the everyday accounts, which keep the daily work; the admin accounts' way to it, switched off
     const leave=ag_in(t,tDaily-0.2,1.0);pw_hangE(ctx,1,1-leave);
     const al=ag_in(t,tAdm-0.2,0.8)*(1-out);
     if(al>0)withA(ctx,al,()=>{pw_hang(ctx,pw_aR("jun"),[PW_T.S,PW_T.shelfY[0]+28],1,{col:"grey",dash:[8,10],alpha:0.8});pw_hang(ctx,pw_aR("sam"),[PW_T.S,PW_T.shelfY[2]+28],1,{col:"grey",dash:[8,10],alpha:0.8});});
-    pw_everyday(ctx,"sam",{icons:1});pw_everyday(ctx,"jun",{icons:1,coral:ag_in(t,tStolen+1.0,0.4)*(1-out)});
-    pw_admin(ctx,"sam",{a:ag_in(t,tSecond+0.4,0.6),k:ag_spr(t,tSecond+0.4,0.6)});
-    pw_admin(ctx,"jun",{a:ag_in(t,tSecond-0.2,0.6),k:ag_spr(t,tSecond-0.2,0.6),glow:ag_io(t,tAlone-0.2,tAlone+1.6,0.4),
-      icons:ag_in(t,tUsed-0.2,0.5)*(1-ag_in(t,tDaily,0.6)),iconCross:ag_in(t,tUsed+0.3,0.5),coral:ag_in(t,tSteals+1.0,0.4)*(1-out)});
+    pw_everyday(ctx,"sam",{icons:1});pw_everyday(ctx,"jun",{icons:1,coral:ag_in(t,tStolen+1.0,0.4)*th});
+    pw_admin(ctx,"sam",{a:ag_in(t,tSecond+0.4,0.6),k:ag_spr(t,tSecond+0.4,0.6),glow:sec});
+    pw_admin(ctx,"jun",{a:ag_in(t,tSecond-0.2,0.6),k:ag_spr(t,tSecond-0.2,0.6),glow:Math.max(ag_io(t,tAlone-0.2,tAlone+1.6,0.4),sec),
+      icons:ag_in(t,tUsed-0.2,0.5)*(1-ag_in(t,tDaily,0.6)),iconCross:ag_in(t,tUsed+0.3,0.5),coral:ag_in(t,tSteals+1.0,0.4)*th});
     pw_shelf(ctx,0,i=>({on:1-leave}));
     pw_passkey(ctx,ag_io(t,tPass-0.3,tDaily+0.4,0.5),ag_spr(t,tPass-0.3,0.6));
     pw_work(ctx,i=>ag_in(t,[tCode,tTest,tJobs][i]-0.2,0.4)*(1-out),0);
     dp_pill(ctx,PW_T.S+PW_T.sw/2,436,"Off","grey",{align:"center",a:ag_in(t,tUntil,0.5)*(1-out)});
     // two locks; someone in the dark: a stolen everyday sign-in stops at the first, the stolen admin account at the second
-    pw_take(ctx,PW_TAKE_E,ag_in(t,tStolen+0.1,1.0),1-out);
-    pw_take(ctx,PW_TAKE_A,ag_in(t,tSteals+0.2,0.9),1-out);
-    const lk=ag_in(t,tLocks-0.2,0.5)*(1-out);
-    dp_halo(ctx,...L1,96,"coral",0.5*ag_io(t,tStolen+1.4,tStolen+2.8,0.3)*(1-out));dp_halo(ctx,...L2,96,"coral",0.5*ag_io(t,tOff,tOff+1.4,0.3)*(1-out));
+    pw_take(ctx,PW_TAKE_E,ag_in(t,tStolen+0.1,1.0),th);
+    pw_take(ctx,PW_TAKE_A,ag_in(t,tSteals+0.2,0.9),th);
+    const lk=ag_in(t,tLocks-0.2,0.5)*(1-out),two=0.4*ag_io(t,tTwo-0.1,tTwo+1.2,0.3)*(1-out);   // "not two": the two locks above glow
+    dp_halo(ctx,...L1,96,"coral",0.5*ag_io(t,tStolen+1.4,tStolen+2.8,0.3)*th+two);dp_halo(ctx,...L2,96,"coral",0.5*ag_io(t,tOff,tOff+1.4,0.3)*th+two);
     pw_lockMark(ctx,...L1,lk,{k:ag_spr(t,tLocks-0.2,0.6)});pw_lockMark(ctx,...L2,lk,{k:ag_spr(t,tLocks+0.2,0.6)});
-    dp_pill(ctx,1870,620,"Needs someone else's yes","coral",{align:"right",a:ag_in(t,tAlone2-0.2,0.5)*(1-out)});}}];
+    dp_pill(ctx,1870,620,"Needs someone else's yes","coral",{align:"right",a:ag_in(t,tAlone2-0.2,0.5)*th});
+    // where a second account isn't practical, since it can cost a second licence: a third account, the only one its owner has, keeps
+    // the power, switched off; one lock on its way to it, where Jun's row has two
+    dp_pill(ctx,PW_T.A,352,"Can cost a second licence","grey",{a:ag_in(t,tLicW-0.2,0.5)*(1-out)});
+    pw_oneAccount(ctx,{all:1-out,a:ag_in(t,tCase-0.2,0.6),k:ag_spr(t,tCase-0.2,0.6),glow:ag_io(t,tEvery-0.2,tEvery+1.4,0.4),none:ag_in(t,tCase+0.5,0.5),
+      tok:ag_in(t,tStays-0.2,0.5),tk:ag_spr(t,tStays-0.2,0.6),line:ag_in(t,tStays+0.2,0.8),off:ag_in(t,tOffW,0.5),
+      lock:ag_in(t,tOne-0.2,0.5),lk:ag_spr(t,tOne-0.2,0.6),halo:ag_io(t,tOne+0.2,tOne+1.6,0.3),one:ag_in(t,tOne+0.1,0.5)});}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);
   pw_kick(ctx,S,1);});
 
@@ -423,8 +449,9 @@ scene("who",(ctx,S,t,sc)=>{const C=sc.cues;
       const ga=ag_in(t,tAgent-0.2,0.6)*(1-gone),ax=lerp(1780,1640,ag_eo(clamp((t-tAgent+0.2)/1.4,0,1)));
       if(ga>0){ag_model(ctx,ax,250,64,{t:T,a:ga,col:"cyan"});withA(ctx,ga,()=>dp_T(ctx,"Agent",ax,360,{w:700,size:30,align:"center",col:"cyan"}));}
       dp_pill(ctx,1640,440,"No admin account","coral",{align:"center",a:ag_in(t,tAgent+0.4,0.4)*(1-gone)});
-      // its proposal goes to Jun; he decides
-      const pu=ag_sine(clamp((t-tPropose)/1.4,0,1)),pa=ag_in(t,tPropose-0.3,0.4)*(1-gone),px=lerp(1400,1110,pu),py=lerp(500,150,pu);
+      // its proposal goes to Jun; he decides. The card comes in beside the agent's pill and rises straight to Jun's row, clear of it:
+      // from under the agent, it crossed the agent's name and "No admin account" on its way (found 12 November 2026)
+      const pu=ag_sine(clamp((t-tPropose)/1.4,0,1)),pa=ag_in(t,tPropose-0.3,0.4)*(1-gone),px=1110,py=lerp(500,150,pu);
       dp_card(ctx,px,py,360,{kick:"Proposal",title:"Restore a table"},{a:pa,k:ag_spr(t,tPropose-0.3,0.5)});
       if(pa>0)dp_tick(ctx,px+360-40,py+40,"green",ag_in(t,tDecides,0.6)*(1-gone));
       dp_card(ctx,1110,560,600,{kick:"Module",title:"AI agents in data work"},{a:ag_in(t,tRights-0.2,0.5)*(1-gone),k:ag_spr(t,tRights-0.2,0.6)});

@@ -283,5 +283,37 @@ class PageTests(unittest.TestCase):
         self.assertEqual(fits.collect(self.b, self.page, 0.5, 0.25, who=[[1, "fits its card"]]), ["words"])
 
 
+class WhereTests(unittest.TestCase):
+    """CI runs the check from each film's source folder, in the film's language (affected.py's steps)."""
+
+    def setUp(self):
+        import films
+        self.inv = {e["key"]: e for e in films.films()}
+
+    def test_every_film_is_found_from_its_own_folder(self):
+        for e in self.inv.values():
+            got = fits.at(ROOT / e["dir"], e["lang"], self.inv)
+            self.assertIsNotNone(got, e["key"])
+            self.assertEqual((got[0], got[2]), (e["key"], fits.entry_page(e)))
+
+    def test_the_first_films_have_no_film_json_and_are_found_by_their_release_entry(self):
+        src = ROOT / "films/inner-life-of-data/source"
+        self.assertFalse((src / "film.json").exists())
+        self.assertEqual(fits.at(src, "en", self.inv)[0], "inner-life-of-data-en")
+        key, _, page, _ = fits.at(src, "es", self.inv)
+        self.assertEqual((key, page), ("inner-life-of-data-es", src / "dist" / "es" / "render.html"))
+
+    def test_a_film_being_made_is_found_by_its_film_json(self):
+        with tempfile.TemporaryDirectory() as d:
+            src = pathlib.Path(d).resolve() / "9-a-new-film" / "source"
+            src.mkdir(parents=True)
+            self.assertIsNone(fits.at(src, "en", self.inv))
+            (src / "film.json").write_text("{}", encoding="utf-8")
+            self.assertEqual(fits.at(src, "en", self.inv), ("9-a-new-film", None, src / "dist" / "render.html", src))
+
+    def test_a_folder_that_is_no_films_is_refused(self):
+        self.assertIsNone(fits.at(ROOT / "site-tools", "en", self.inv))
+
+
 if __name__ == "__main__":
     unittest.main()

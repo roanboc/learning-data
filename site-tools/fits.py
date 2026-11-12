@@ -445,6 +445,19 @@ def entry_page(e):
     return ROOT / e['dir'] / pathlib.Path(e['player']).parent / 'render.html'
 
 
+def at(here, lang, inv):
+    """The film whose source folder this is, as (key, name, the page it builds, its source folder), or None if it is no film's.
+    A film is known by its entry in a release.json, in the language asked for: the first films have no film.json, and CI runs
+    this check from every film's folder. A film that has no entry yet, as while it is made, is known by its film.json."""
+    here = pathlib.Path(here).resolve()
+    mine = [e for e in inv.values() if (ROOT / e['dir']).resolve() == here and e['lang'] == lang]
+    if mine:
+        return mine[0]['key'], None, entry_page(mine[0]), here
+    if (here / 'film.json').exists():
+        return here.parent.name, None, here / 'dist' / 'render.html', here
+    return None
+
+
 def collect(browser, page, every, scale, t0=0, t1=1e9, phone=0, init=None, who=None):
     """What the page draws: the film's moments, or (phone) its captions as a phone draws them; init: a script to run first, such
     as another language's captions. who: [(seconds, text)] to name the functions that drew them, added to the result."""
@@ -490,11 +503,10 @@ def main():
             ap.error('unknown film key %s' % ', '.join(unknown))
         todo = [(k, inv[k]['name'], entry_page(inv[k]), ROOT / inv[k]['dir']) for k in keys]
     else:
-        here, lang = pathlib.Path.cwd(), os.environ.get('FILM_LANG', 'en')
-        if not (here / 'film.json').exists():
+        here = at(pathlib.Path.cwd(), os.environ.get('FILM_LANG', 'en'), inv)
+        if not here:
             ap.error('run this from a film\'s source folder, or name films with --film or --all')
-        mine = [e for e in inv.values() if (ROOT / e['dir']).resolve() == here.resolve() and e['lang'] == lang]
-        todo = [(mine[0]['key'], None, entry_page(mine[0]), here)] if mine else [(here.parent.name, None, here / 'dist' / 'render.html', here)]
+        todo = [here]
     out, failed, known, was = {}, [], later(), later()
     with sync_playwright() as p:
         b = p.chromium.launch(args=['--allow-file-access-from-files'])

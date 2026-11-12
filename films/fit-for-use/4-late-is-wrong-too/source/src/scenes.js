@@ -171,7 +171,7 @@ function lw_hours(x,tt,c,P){const G=P.g0+tt,M0=c.december-0.5;
     noteA:fl*(tk>0.5?ag_in(tt,P.checks+0.9,0.3):1-ag_in(tt,P.checks+0.6,0.3)),k:q.k,a:q.a});
   if(q.a>0.004){x.save();x.globalAlpha*=q.a;lw_count(x,560,290,"712",ag_in(tt,P.n712+0.25,0.25));x.restore();}
   q=lw_pop(tt,P.arrivesW,M0);lw_file(x,1110,470,{when:"Thu 18 Jun, 11:40",whenCol:DQ_TONE.hold.word,k:q.k,a:q.a});}
-function lw_december(x,tt,c,P){let q=lw_pop(tt,c.december,null);dq_textCard(x,560,230,820,{kick:"December 2025",title:"Six graduates left off the same way",sub:"and nobody saw"},{k:q.k,a:q.a});
+function lw_december(x,tt,c,P){let q=lw_pop(tt,c.december,null);dq_textCard(x,560,230,820,{kick:"December 2025",title:"Six graduates left off",sub:"and nobody saw"},{k:q.k,a:q.a});
   lw_posted(x,560,520,(tt-P.printedW)/1.6,ag_in(tt,P.printedW,0.4));dq_chip(x,560,700,"printed late, and posted",{icon:"mail",a:ag_in(tt,P.posted,0.5)});}
 scene("hours",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),printer:wAt(sc,"eight","printer"),sam:wAt(sc,"sam","Sam Okafor"),monitoring:wAt(sc,"sam","monitoring"),
     late:wAt(sc,"sam","late"),hours:wAt(sc,"thirty","thirty hours"),warnAfter:wAt(sc,"level","a warning after a day"),builders:wAt(sc,"level","set by the builders"),
@@ -187,7 +187,7 @@ scene("hours",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),pri
 /* ---------------------------------------------------------------- 4 · How fresh, for what
    Monday 22 June: Sam, Malia and Mei behind the bench. The platform sees a table is late (steel, over Sam); only its users say when
    late is too late (brass, over Malia and Mei). The bench from above: the three uses as cards, each with its clock, a dial whose brass
-   range is how old the list may be for it: the certificates, that night's files at the send; the seating, a few days; Planning, weeks.
+   range is how old the list may be for it: the certificates, yesterday's awards at the send; the seating, a few days; Planning, weeks.
    The strictest sets the level. The list's rule in its model's YAML, agreed by Malia, owned by Mei. Then the six dimensions as Rules that run left them,
    timeliness in pencil, inked by its first rule. */
 // the rule as the list's model YAML has it (models/marts/graduations/_graduations__models.yml, lines 166 to 191), its other lines left out
@@ -200,7 +200,7 @@ function lw_meet(x,tt,c,P){const G=P.g0+tt,K0=c.knows-0.2;
   dq_nameTag(x,1450,410,"mei",{align:"right",role:"Owns the list",a:ag_io(tt,P.mei,K0,0.4)});
   dq_chip(x,330,216,"sees that a table is late",{align:"center",icon:"lens",col:"steel",a:ag_in(tt,P.platform,0.5)});
   dq_chip(x,1345,216,"its users say when late is too late",{align:"center",icon:"people",col:"brass",a:ag_in(tt,P.users,0.5)});}
-const LW_USES=[["Certificates","That night's files","when the list goes to the printer","certificate",{min:0,max:48,lo:0,hi:24,ticks:8,read:"24 hours"}],
+const LW_USES=[["Certificates","Yesterday's awards","when the list goes to the printer","certificate",{min:0,max:48,lo:0,hi:24,ticks:8,read:"24 hours"}],
   ["Seating","A list a few days old","counted a week before","seat",{min:0,max:14,lo:0,hi:5,ticks:7,read:"days"}],
   ["Planning","Weeks are fine","after the year's end","building",{min:0,max:12,lo:0,hi:8,ticks:6,read:"weeks"}]];
 function lw_uses(x,tt,c,P){const U0=c.contract-0.4,ts=[c.certs,c.seats,c.planning],st=ag_in(tt,P.strictest,0.6);
@@ -225,44 +225,74 @@ scene("fresh",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),mal
   lw_date(ctx,S,"Monday 22 June",ag_io(t,c.monday,c.knows-0.4,0.5));});
 
 /* ---------------------------------------------------------------- 5 · Say how old it is
-   The bench from above. From Tuesday 23 June the list says how old it is: two columns, each source's age, lit in steel; that
-   Thursday's values, the student system's amber (thirty hours), the portal's green. The printer's page, its age at the top, and the
-   volunteers' three flags beside it: a signal everyone can read. Too good to be true labelled a number from the night before; here,
-   every list says its age, on a good night too. Data that says its age can be trusted to be old; data that doesn't, can't. */
-function lw_age(x,tt,c,P){const P0=c.shown-0.3,H0=P.here-0.2,E0=c.trust-0.3;
-  let q=lw_pop(tt,c.says,P0);lw_table(x,210,226,{cells:ag_in(tt,c.row,0.6),lit:ag_in(tt,P.ageW,0.6),ssCol:tt>P.ownW?DQ_TONE.hold.word:null,poCol:tt>P.ownW?DQ_TONE.pass.word:null,on:"granite",k:q.k,a:q.a});
+   The bench from above. From Tuesday 23 June the list says how old it is. Old, counted from when? The list, and one of its records, an
+   award of one of the 23, with its three dates typed one by one: when the board approved it (the business date), when the student
+   system saved it (the system date), and when its file arrived (the load date). The first matters, and is the hardest to read as the
+   data is loaded; the last is the easiest and says the least: December's file, on time, full of the day before's records. So the
+   list goes by the second, the date every load already uses. Then the list as a table: two columns, each source's age, lit in steel;
+   that Thursday's values, the student system's amber (thirty hours), the portal's green. The printer's page, its age at the top, and
+   the volunteers' three flags beside it: a signal everyone can read. Too good to be true labelled a number from the night before;
+   here, every list says its age, on a good night too. Data that says its age can be trusted to be old; data that doesn't, can't. */
+function lw_three(x,tt,c,P){const D0=c.row-0.3,M1=c.easiest-0.3,S1=c.second-0.3;
+  // the list, and the question
+  let q=lw_pop(tt,c.says,D0);lw_list(x,120,250,{w:520,h:520,count:"712",fill:1,ticks:0,on:"granite",k:q.k,a:q.a});
+  dq_chip(x,120,822,"how old, counted from when?",{icon:"clock",col:"steel",on:"granite",a:ag_io(tt,c.from,D0,0.4)});
+  // one of its records, and its three dates, each typed as it's said, then named
+  const lit=tt>c.second+0.2?1:tt>c.easiest+0.2?2:tt>c.matters+0.2?0:null;q=lw_pop(tt,P.every,D0);
+  lw_dates(x,700,250,{rows:ag_in(tt,c.happened,0.4)+ag_in(tt,c.saved,0.4)+ag_in(tt,c.came,0.4),names:ag_in(tt,P.board,0.4)+ag_in(tt,P.afternoon,0.4)+ag_in(tt,P.thursday,0.4),
+    lit,litCol:lit===0?"brass":lit===1?"steel":null,on:"granite",k:q.k,a:q.a});
+  // the first matters, and is the hardest to read as the data is loaded
+  dq_chip(x,700,596,"each table says it in its own way",{icon:"table",on:"granite",a:ag_io(tt,P.ownWay,M1,0.4)});
+  dq_chip(x,700,672,"none to read when no board meets",{icon:"calendar",on:"granite",a:ag_io(tt,P.noBoard,M1,0.4)});
+  // the last says the least: for December's list, a file came on time (Thursday 13 November 2025, at two), full of the day before's records
+  q=lw_pop(tt,P.december,S1);lw_file(x,700,580,{when:"13 Nov 2025, 02:00",on:"granite",k:q.k,a:q.a});
+  q=lw_pop(tt,P.onTime,S1);dq_tag(x,1130,640,"pass",{text:"ON TIME",to:[1050,620],k:q.k,a:q.a});
+  dq_chip(x,1100,740,"its records: the day before's",{icon:"clock",col:"steel",on:"granite",a:ag_io(tt,P.dayBefore,S1,0.4)});
+  // so the list goes by the second: the date every load already uses to find what's new
+  dq_chip(x,700,596,"what every load uses to find what's new",{icon:"refresh",col:"steel",on:"granite",a:ag_io(tt,P.load,D0,0.4)});
+  dq_chip(x,700,672,"incremental loads · change data capture",{icon:"tools",on:"granite",a:ag_io(tt,P.load+0.7,D0,0.4)});}
+function lw_age(x,tt,c,P){const P0=c.shown-0.3,H0=P.here-0.2,E0=c.trust-0.3;lw_three(x,tt,c,P);
+  let q=lw_pop(tt,c.row,P0);lw_table(x,210,226,{cells:ag_in(tt,c.row+0.4,0.6),lit:ag_in(tt,P.ageW,0.6),ssCol:tt>P.ownW?DQ_TONE.hold.word:null,poCol:tt>P.ownW?DQ_TONE.pass.word:null,on:"granite",k:q.k,a:q.a});
   const o1=ag_io(tt,P.ss,P0,0.4),o2=ag_io(tt,P.po,P0,0.4);dq_chip(x,918,676,"30 hours old",{icon:"clock",col:"hold",on:"granite",a:o1});dq_chip(x,1328,676,"6 hours old",{icon:"clock",col:"pass",on:"granite",a:o2});
-  dq_chip(x,918,756,"student_system_as_of · portal_as_of",{col:"steel",on:"granite",a:ag_io(tt,c.row+0.8,c.own-0.2,0.4)});
+  dq_chip(x,918,676,"the newest record each source saved",{icon:"clock",col:"steel",on:"granite",a:ag_io(tt,P.newest,c.own-0.2,0.4)});
+  dq_chip(x,918,756,"student_system_as_of · portal_as_of",{col:"steel",on:"granite",a:ag_io(tt,P.newest+0.8,c.own-0.2,0.4)});
   // the printer's page; then a good night's
   q=lw_pop(tt,c.shown,H0);lw_page(x,440,160,{ssCol:DQ_TONE.hold.word,poCol:DQ_TONE.pass.word,on:"granite",k:q.k,a:q.a});
   q=lw_pop(tt,c.flags,E0);lw_flagCard(x,1540,220,tt,{on:"granite",k:q.k,a:q.a});
   dq_chip(x,1540,610,"read by everyone",{on:"granite",a:ag_io(tt,P.everyone,E0,0.4)});
   dq_chip(x,440,660,"Too good to be true",{icon:"flag",on:"granite",a:ag_io(tt,c.labelled,E0,0.4)});
-  q=lw_pop(tt,H0+0.4,E0);lw_page(x,440,160,{title:"Graduation list · December 2026 ceremonies",ss:"Thu 12 Nov, 02:00",po:"Thu 12 Nov, 02:00",ssCol:DQ_TONE.pass.word,poCol:DQ_TONE.pass.word,on:"granite",k:q.k,a:q.a});
+  q=lw_pop(tt,H0+0.4,E0);lw_page(x,440,160,{title:"Graduation list · December 2026 ceremonies",ss:"Thu 12 Nov, 01:54",po:"Thu 12 Nov, 01:49",ssCol:DQ_TONE.pass.word,poCol:DQ_TONE.pass.word,on:"granite",k:q.k,a:q.a});
   dq_chip(x,840,660,"on a good night too",{icon:"tick",col:"pass",on:"granite",a:ag_io(tt,P.good,E0,0.4)});
   q=lw_pop(tt,c.trust,null);dq_textCard(x,460,300,1000,{title:"Data that says its age can be trusted to be old"},{edge:"brass",on:"granite",k:q.k,a:q.a});
   q=lw_pop(tt,c.cant,null);const b=dq_textCard(x,460,450,1000,{title:"Data that doesn't, can't"},{on:"granite",k:q.k,a:q.a});
   const cw=dq_tw(x,"as of ?",{w:700,size:28})+84;dq_chip(x,460+1000-28-cw,b.y+b.h/2,"as of ?",{icon:"why",col:"stop",a:ag_in(tt,c.cant+0.5,0.4)});}
-scene("age",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),ageW:wAt(sc,"row","age"),ownW:wAt(sc,"own","That Thursday"),ss:wAt(sc,"own","student system"),
+scene("age",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),every:wAt(sc,"from","Every record"),board:wAt(sc,"happened","the board"),
+    afternoon:wAt(sc,"saved","that afternoon"),thursday:wAt(sc,"came","Thursday"),ownWay:wAt(sc,"matters","each table"),noBoard:wAt(sc,"matters","when no board meets"),
+    december:wAt(sc,"easiest","for December"),onTime:wAt(sc,"easiest","on time"),dayBefore:wAt(sc,"easiest","full of"),load:wAt(sc,"second","the date every load"),
+    ageW:wAt(sc,"row","age"),newest:wAt(sc,"row","the newest record"),ownW:wAt(sc,"own","That Thursday"),ss:wAt(sc,"own","student system"),
     po:wAt(sc,"own","portal"),everyone:wAt(sc,"flags","everyone"),here:wAt(sc,"labelled","Here"),good:wAt(sc,"labelled","on good nights")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"benchTop",later:true,dis:0.6,keys:[[0,960,540,1]],draw:(x,tt)=>lw_age(x,tt,c,P)}]);
   setScreen(ctx,S);dq_kicker(ctx,"5","Say how old it is",{dark:true,a:ag_in(t,0.9,0.6)});lw_date(ctx,S,"From Tuesday 23 June",ag_io(t,c.says,c.shown-0.4,0.5));});
 
 /* ---------------------------------------------------------------- 6 · Warn first, then stop the send
-   The bench: Sam. The age is checked where it starts, at each source: when each night's file arrived (a receipts table, received_at in
-   steel), not the newest row. One level on each: the source's file, error after 24 hours. The night's job: the check first, then the
-   build, run if all done; the check fails, Sam and Malia hear at once, the list is still built, saying its age. The warning. The send's
-   job: the same check, then the send, run if all succeeded; the check fails, the send waits, Malia is told why. */
-const LW_NEW=["tables:","  - name: nightly_files","    config:",[["      loaded_at_field: ",null],['"cast(received_at as timestamp)"',"steel"]],"      freshness:",
+   The bench: Sam. The age is checked where it starts, at each source, on the same date: the newest record each source saved (each
+   source's receipts, the newest record's column in steel beside when the file was received), not when its file arrived. One level on
+   each: the source's file, error after 24 hours. The night's job: the check first, then the build, run if all done; the check fails,
+   Sam and Malia hear at once, the list is still built, saying its age. The warning. The send's job: a check of the list's own age,
+   then the send, run if all succeeded; the check fails, the send waits, Malia is told why. */
+const LW_NEW=["tables:","  - name: nightly_files","    config:",[["      loaded_at_field: ",null],['"cast(newest_record_at as timestamp)"',"steel"]],"      freshness:",
   [["        warn_after: ",null],["null","brass"]],[["        error_after: ",null],["{count: 24, period: hour}","brass"]]];
-function lw_receipts(x,X,y,title,rows,o){const a=o.a;if(a<=0.004)return;x.save();x.globalAlpha*=a;if(o.k!=null)ag_about(x,X+290,y+150,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-  dq_card(x,X,y,580,300,{});dq_label(x,X+DQ_PAD,y+54,title,{});dq_T(x,"nightly_files",X+DQ_PAD,y+100,{w:500,size:28,f:"mono",col:DQ.soft});
-  dq_rows(x,X+DQ_PAD,y+116,[{h:"Received at",w:520,f:"mono"}],rows,{rh:56,lit:o.lit,litCol:"steel"});x.restore();}
+// a source's receipts: each night's file, when it was received and when the source saved the newest record in it; o.lit (0 to 1)
+// lights the newest record's column in steel, the date the age is counted from
+function lw_receipts(x,X,y,title,rows,o){const a=o.a;if(a<=0.004)return;x.save();x.globalAlpha*=a;if(o.k!=null)ag_about(x,X+300,y+150,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  dq_card(x,X,y,600,300,{});dq_label(x,X+DQ_PAD,y+54,title,{});dq_T(x,"nightly_files",X+DQ_PAD,y+100,{w:500,size:28,f:"mono",col:DQ.soft});
+  const lt=clamp(o.lit||0,0,1),nx=X+DQ_PAD+246;if(lt>0.004){x.save();x.globalAlpha*=lt;x.fillStyle=rgba(DQ.steel,0.12);rr(x,nx-4,y+122,302,56*3-12,10);x.fill();x.fillStyle=rgba(DQ.steel,1);rr(x,nx-4,y+122,302,6,3);x.fill();x.restore();}
+  dq_rows(x,X+DQ_PAD,y+116,[{h:"Received",w:246,f:"mono"},{h:"Newest record",w:298,f:"mono"}],rows,{rh:56});x.restore();}
 function lw_stop(x,tt,c,P){const G=P.g0+tt,J0=c.first-0.3,J1=c.send-0.3;lw_who(x,"sam",280,G,1);
-  let q=lw_pop(tt,c.source+0.2,c.level-0.3);lw_receipts(x,560,200,"Student system",[["Tue 16 Jun, 02:00"],["Wed 17 Jun, 02:00"]],{lit:tt>P.arrivedW?[0,1]:[],k:q.k,a:q.a});
-  q=lw_pop(tt,c.source+0.5,c.level-0.3);lw_receipts(x,1200,200,"Portal",[["Wed 17 Jun, 02:00"],["Thu 18 Jun, 02:00"]],{lit:tt>P.arrivedW?[0,1]:[],k:q.k,a:q.a});
-  dq_chip(x,560,560,"not the newest row: days old when no board has met",{icon:"dash",col:"none",a:ag_io(tt,P.newest,c.level-0.3,0.4)});
-  q=lw_pop(tt,c.level,J0);lw_yml(x,560,200,1060,{title:"sources/student_system",lines:LW_NEW,lit:tt>P.h24?[5,6]:[],k:q.k,a:q.a});
+  let q=lw_pop(tt,c.source+0.2,c.level-0.3);lw_receipts(x,560,200,"Student system",[["16 Jun, 02:00","16 Jun, 01:49"],["17 Jun, 02:00","17 Jun, 01:52"]],{lit:ag_in(tt,P.newest,0.5),k:q.k,a:q.a});
+  q=lw_pop(tt,c.source+0.5,c.level-0.3);lw_receipts(x,1200,200,"Portal",[["17 Jun, 02:00","17 Jun, 01:44"],["18 Jun, 02:00","18 Jun, 01:47"]],{lit:ag_in(tt,P.newest,0.5),k:q.k,a:q.a});
+  dq_chip(x,560,560,"not when its file arrived: a file can come on time with old records",{icon:"dash",col:"none",a:ag_io(tt,P.notFile,c.level-0.3,0.4)});
+  q=lw_pop(tt,c.level,J0);lw_yml(x,560,200,1100,{title:"sources/student_system",lines:LW_NEW,lit:tt>P.h24?[5,6]:[],k:q.k,a:q.a});
   dq_chip(x,560,712,"the same on the portal's",{icon:"tick",a:ag_io(tt,P.each,J0,0.4)});
   // the night's job: the check first; it fails, two people hear, the list is still built
   const fail1=ag_in(tt,c.tells+0.2,0.3)>0.5,built=tt>P.built;q=lw_pop(tt,c.first,J1);
@@ -270,12 +300,12 @@ function lw_stop(x,tt,c,P){const G=P.g0+tt,J0=c.first-0.3,J1=c.send-0.3;lw_who(x
     who:"Sam Okafor, Malia Fonoti",tell:ag_in(tt,P.hear,0.5),k:q.k,a:q.a});
   dq_chip(x,1210,660,"the list says its age",{icon:"clock",col:"steel",a:ag_io(tt,P.saying,c.warn-0.3,0.4)});
   q=lw_pop(tt,c.warn,J1);dq_textCard(x,560,650,900,{kick:"That's the warning",title:"Nothing stops, and the people who need to know, know"},{edge:"hold",k:q.k,a:q.a});
-  // the send's job: the same check; it fails, the send waits, Malia is told why
+  // the send's job: a check of the list's own age; it fails, the send waits, Malia is told why
   const fail2=tt>P.ifNot,wait=tt>P.waitsW;q=lw_pop(tt,c.send+0.1,null);
-  lw_job(x,560,200,{job:"the send to the printer",tasks:["Check the sources' age","Send to the printer"],runIf:"All succeeded",states:[fail2?"stop":null,wait?"wait":null],
+  lw_job(x,560,200,{job:"the send to the printer",tasks:["Check the list's age","Send to the printer"],runIf:"All succeeded",states:[fail2?"stop":null,wait?"wait":null],
     who:"Malia Fonoti: told why",tell:ag_in(tt,P.told,0.5),k:q.k,a:q.a});
   q=lw_pop(tt,c.data,null);dq_textCard(x,560,660,900,{title:"The data isn't stopped. The send is."},{edge:"stop",k:q.k,a:q.a});}
-scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),arrivedW:wAt(sc,"arrived","arrived"),newest:wAt(sc,"arrived","not the newest row"),
+scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),newest:wAt(sc,"reads","the newest record"),notFile:wAt(sc,"reads","not when its file arrived"),
     each:wAt(sc,"level","on each"),h24:wAt(sc,"level","twenty-four hours"),hear:wAt(sc,"tells","hear at once"),built:wAt(sc,"tells","still built"),saying:wAt(sc,"tells","saying its age"),
     ifNot:wAt(sc,"waits","if not"),waitsW:wAt(sc,"waits","the list waits"),told:wAt(sc,"waits","told why")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],draw:(x,tt)=>lw_stop(x,tt,c,P)}]);
@@ -283,15 +313,15 @@ scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),arri
 
 /* ---------------------------------------------------------------- 7 · In time
    The coast at dusk, 2007: the flags flying, the volunteers calling, people walking to the lit shelter. The bench: the printer's page
-   with its age, and the send, waiting until the list is fresh; since June, no graduate left off a list by a late file. The film's line,
+   with its age, and the send, waiting until the list is fresh; since June, no graduate left off a list by late data. The film's line,
    then a use, a measure, a reference and a clock, and the next series. */
 function lw_inTime(x,tt,c,P){const T0=c.take-0.3;
-  let q=lw_pop(tt,c.list+0.2,T0);lw_page(x,200,150,{w:960,ssCol:DQ_TONE.hold.word,poCol:DQ_TONE.pass.word,ss2:"Thu 18 Jun, 11:40",ss2Col:DQ_TONE.pass.word,
+  let q=lw_pop(tt,c.list+0.2,T0);lw_page(x,200,150,{w:960,ssCol:DQ_TONE.hold.word,poCol:DQ_TONE.pass.word,ss2:"Thu 18 Jun, 11:31",ss2Col:DQ_TONE.pass.word,
     ssU:ag_in(tt,P.fresh,0.6),k:q.k,a:q.a});
   q=lw_pop(tt,P.sendW,T0);lw_send(x,1260,170,{w:520,kick:"Due at 5 pm",k:q.k,a:q.a});
   dq_tag(x,1500,400,"hold",{text:"WAITS",icon:"hourglass",to:[1510,312],k:q.k,a:q.a*(1-ag_in(tt,P.fresh,0.3))});
   q=lw_pop(tt,P.fresh+0.3,T0);dq_tag(x,1500,400,"pass",{text:"FRESH · SENT",to:[1510,312],k:q.k,a:q.a});
-  q=lw_pop(tt,c.since,T0);dq_figure(x,200,720,"0","graduates left off a list by a late file, since June",{size:96,col:"pass",a:q.a});
+  q=lw_pop(tt,c.since,T0);dq_figure(x,200,720,"0","graduates left off a list by late data, since June",{size:96,col:"pass",a:q.a});
   const E0=c.breath-0.15;q=lw_pop(tt,c.take,E0);dq_textCard(x,330,250,1260,{title:"Agree how fresh it must be, and always say how old it is."},{edge:"brass",k:q.k,a:q.a});
   const words=[["a use",P.use],["a measure",P.measure],["a reference",P.reference],["a clock",P.clock]];let cx=330;
   words.forEach(([s,t0])=>{const b=dq_chip(x,cx,520,s,{a:ag_io(tt,t0,E0,0.4)});cx=b.x+b.w+20;});

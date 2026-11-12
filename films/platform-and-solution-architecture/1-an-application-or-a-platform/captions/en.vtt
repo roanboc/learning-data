@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:10.447
+Japan, 1601. A year after the battle that ended a century of war, Tokugawa Ieyasu is the most powerful lord in the land.
+
+00:00:11.147 --> 00:00:21.335
+His seat is Edo. The emperor's city, Kyoto, is about five hundred kilometres west by road, and between them, many domains, each ruled by its own lord.
+
+00:00:22.435 --> 00:00:29.987
+A traveller on foot took about two weeks from Edo to Kyoto, and orders and news went no faster than the people who carried them.
+
+00:00:31.287 --> 00:00:38.422
+To govern from Edo, Ieyasu needed his letters, officials and goods to cross the country in days, not weeks.
+
+00:00:39.722 --> 00:00:49.681
+Early in 1601, he gave each station on the road to Kyoto an order: keep thirty-six horses, and carry official travellers on to the next station.
+
+00:00:50.381 --> 00:00:54.239
+With it came his seal, and one line: without this seal, no horses.
+
+00:00:55.939 --> 00:01:04.698
+Over the decades that followed, five great roads ran out of Edo, most along older routes, with stations along the way: the Gokaidō.
+
+00:01:06.198 --> 00:01:12.814
+Relayed from station to station, an official letter now crossed from Edo to Kyoto in three or four days.
+
+00:01:14.114 --> 00:01:21.836
+And the road served every domain: lords travelling to Edo, couriers, merchants and pilgrims, each on their own business.
+
+00:01:23.336 --> 00:01:31.123
+At the utility, Ravi Menon has just taken over the data platform. Like that road, it carries every domain's business.
+
+00:01:31.823 --> 00:01:39.188
+But on the map it's drawn as one more application, and when one of its numbers goes wrong, nobody can say whose rule it is.
+
+00:01:40.288 --> 00:01:45.333
+Drawn as a platform, it serves every domain, and every rule on it has an owner.
+
+00:01:52.433 --> 00:02:00.072
+Tomás's map has six layers. This series works in the bottom two: the applications, and the technology they run on.
+
+00:02:00.772 --> 00:02:09.265
+Here are the hundred and forty systems from Today, and where it's going, each with its own job: billing, outages, meter data, finance.
+
+00:02:10.565 --> 00:02:15.635
+Above them, the information layer: what the data means, and where each fact is born.
+
+00:02:16.335 --> 00:02:23.536
+And among the applications, one box: data warehouse. That's the data platform, drawn as one more application.
+
+00:02:25.036 --> 00:02:29.692
+Ravi asks Tomás to move it. But first, a word that means two things.
+
+00:02:32.392 --> 00:02:42.093
+Databricks calls its product a data platform, and so do other vendors. At the technology layer, it is one: many components, sold as one product.
+
+00:02:43.393 --> 00:02:48.347
+Your data platform is more: a service the utility runs for all its domains.
+
+00:02:49.047 --> 00:02:58.166
+It's built from that product and the components around it: identity, the network, integration, orchestration, reporting tools, and what watches it all.
+
+00:02:59.466 --> 00:03:03.604
+And from a team, with rules and support, that keeps it running for everyone.
+
+00:03:04.304 --> 00:03:09.026
+In this series, Databricks is the product. The data platform is the service.
+
+00:03:12.526 --> 00:03:19.502
+Take billing. It has one purpose: to bill customers. Its rules are built into it: tariffs, estimates, discounts.
+
+00:03:20.602 --> 00:03:28.057
+Its owner is the head of retail, who decides what it does. It's measured by retail's outcomes: bills right, and on time.
+
+00:03:29.357 --> 00:03:37.920
+The data platform has no purpose of its own. It gives shared capabilities: bring data in, store it, process it, serve it, and govern it.
+
+00:03:39.220 --> 00:03:43.791
+On it, many owners build their own logic: the network, retail, finance.
+
+00:03:44.491 --> 00:03:50.694
+And one more: the enterprise domain, for measures that cross domains, for performance and analysis.
+
+00:03:51.794 --> 00:04:00.952
+That's the test. One purpose, with its logic built in: an application. Shared capabilities, on which many owners build their own: a platform.
+
+00:04:04.652 --> 00:04:11.136
+Serving every domain isn't the test on its own. The finance system serves finance, procurement and people.
+
+00:04:11.836 --> 00:04:18.959
+But it's an application suite. Each part has one purpose, and its logic is built in, the way its vendor designed it.
+
+00:04:20.259 --> 00:04:25.547
+The line is where the logic lives: inside the system, or brought to it by its owners.
+
+00:04:29.047 --> 00:04:35.121
+The stations of the Tōkaidō kept the horses and porters ready. They never wrote the letters they carried.
+
+00:04:36.821 --> 00:04:43.945
+On a data platform, the logic runs on it, in each domain's data products, never in the platform's own components.
+
+00:04:45.645 --> 00:04:49.918
+And its owner is always the business, never the platform team by default.
+
+00:04:51.618 --> 00:04:57.235
+That's easy to say, and hard to see, because the platform brings the data in and runs the code.
+
+00:04:59.935 --> 00:05:06.140
+One of the enterprise domain's measures: minutes without power, per customer. It goes to the regulator.
+
+00:05:07.440 --> 00:05:13.362
+It's built on the platform from three systems: outages, the network map, and the old storm tool.
+
+00:05:14.662 --> 00:05:17.715
+In March, it jumps from about eight minutes to nineteen.
+
+00:05:19.215 --> 00:05:27.200
+A major storm counted. The rule that leaves major storms out came in the storm tool's export, and an update in February dropped it.
+
+00:05:28.900 --> 00:05:36.168
+Whose rule was it? The code was the platform team's. The storm tool had no notes, and the person who set it up had left.
+
+00:05:37.868 --> 00:05:46.471
+Tomás's map and the catalogue find its owner: the measure belongs to the enterprise domain, and for the regulator's measures, that's Ama.
+
+00:05:48.171 --> 00:05:54.727
+Ama raises a ticket, and writes in the glossary which storms don't count, as the regulator's method says.
+
+00:05:56.027 --> 00:06:01.416
+The data team builds the rule on the platform, with a test, and reviews the pull request.
+
+00:06:02.916 --> 00:06:08.234
+Ama checks the number in test before her ticket closes. March is back to nine minutes.
+
+00:06:11.734 --> 00:06:20.804
+The roads had an owner too: the shogunate. Its officials rode free, others paid their way, and the stations and nearby villages carried the burden.
+
+00:06:23.104 --> 00:06:28.350
+A data platform has a business owner too: a sponsor, with a platform product owner.
+
+00:06:30.050 --> 00:06:37.279
+But it answers to every domain that uses it. It decides less of what's built on it, and answers for how well it serves them all.
+
+00:06:39.179 --> 00:06:47.661
+It's measured by its users' outcomes: how many build on it, how fast a first data product ships, how reliable it is, and what it costs.
+
+00:06:51.761 --> 00:06:55.920
+That's why enterprise architecture matters most for a data platform.
+
+00:06:56.620 --> 00:07:03.569
+It's the one system that crosses every domain, and every layer: business, data, applications and technology.
+
+00:07:04.869 --> 00:07:07.487
+It can't be designed from inside any one of them.
+
+00:07:11.187 --> 00:07:13.835
+Here's the data practice, on Tomás's map.
+
+00:07:14.535 --> 00:07:22.938
+In the technology layer, the platform's services: storage, compute, the catalogue. Databricks realises them, as system software.
+
+00:07:24.238 --> 00:07:32.968
+In the application layer, the measure's data product: its pipeline and models, one application component, owned by the enterprise domain.
+
+00:07:34.268 --> 00:07:41.479
+Where others read it, its output port, is an application interface. Its tables are artifacts, kept on the platform.
+
+00:07:42.779 --> 00:07:47.381
+The platform's components hold no rule. The product on them does, with its owner.
+
+00:07:50.881 --> 00:07:59.195
+The Gokaidō carried every domain's letters and goods for more than two and a half centuries. What they said was always the sender's business.
+
+00:08:00.695 --> 00:08:09.211
+Drawn as a platform, Ravi's does the same: every domain builds on it, and every rule on it has an owner Tomás's map can find.
+
+00:08:10.711 --> 00:08:12.823
+Next: what's inside the platform.

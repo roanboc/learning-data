@@ -1,0 +1,25 @@
+{
+  "key": "who-creates-it-who-owns-it",
+  "title": "Who creates it, who owns it",
+  "sub": "Business architecture for data, the second series on enterprise architecture: who creates each of the business's concepts and who owns it, read from a matrix of what each capability creates, reads, updates and deletes; two capabilities that both create the account, and the business deciding which one does; owners who decide and stewards who look after each concept day to day; and an owner found by capability where nothing was written down.",
+  "howto": "Glass in the layers' colours is the confirmed model: light gold is the strategy layer, where the capabilities sit, and salmon the information layer, where the business's concepts sit. In the matrix, C means a capability creates a concept, R that it reads it, U that it updates it and D that it deletes it. Gold marks an owner, who decides; sea-green a steward, who looks after a concept day to day; blue the data team. Rose is retail and blue the network. In the desert, blue is the water, and the people of the story are silhouettes.",
+  "src": [
+    "../../../shared/src/ba.js",
+    "scenes.js"
+  ],
+  "story": ["owners"],
+  "poster": ["matrix", "cp", 5.2],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bqanat's\\b", "kah-naht's"],
+    ["\\bqanats\\b", "kah-nahts"],
+    ["\\bqanat\\b", "kah-naht"],
+    ["\\bMahan\\b", "Mah-hahn"],
+    ["\\bKerman\\b", "Ker-mahn"],
+    ["\\bmirab\\b", "mee-rahb"],
+    ["\\bVakilabad\\b", "Vah-keel-ah-bahd"],
+    ["\\bCRUD\\b", "crud"],
+    ["\\bFarah\\b", "Fah-rah"]
+  ]
+}

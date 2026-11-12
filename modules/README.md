@@ -226,6 +226,7 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-architecture/) · Portal: `/ai-and-continuous-architecture/`
 
 - [Agents on the map](../films/ai-and-continuous-architecture/1-agents-on-the-map/) — `agents-on-the-map`
+- [The AI platform](../films/ai-and-continuous-architecture/2-the-ai-platform/) — `the-ai-platform`
 
 ## Master and reference data
 

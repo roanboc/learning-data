@@ -175,6 +175,8 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,T=wm_once(sc,"T",()=>({
     sameErr:wAt(sc,"twice","The same error twice"),stops:wAt(sc,"twice","it stops"),
     signing:wAt(sc,"gate","Signing it"),gateW:wAt(sc,"gate","its gate"),fourteen:wAt(sc,"gate","fourteen nights"),miss:wAt(sc,"gate","without a miss"),
     risk:wAt(sc,"law","high-risk"),und:wAt(sc,"law","understand it"),watch:wAt(sc,"law","watch it"),rev:wAt(sc,"law","reverse it"),stopW:wAt(sc,"law","stop it"),
+    reg:wAt(sc,"lag","regulation"),tech:wAt(sc,"lag","technology"),
+    careW:wAt(sc,"care","more care"),crit:wAt(sc,"care","critical systems"),
     oneKind:wAt(sc,"one","one kind of task"),word:wAt(sc,"one","a word about staff"),suggests:wAt(sc,"one","only suggests")}));
   const P2=c.file-0.5,P3=c.test-0.6,P4=c.gate-0.6,P5=c.law-0.6,P6=c.one-0.6;
   // the detail cards beside the page, one after another, each with the page's row it opens
@@ -211,9 +213,12 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,T=wm_once(sc,"T",()=>({
       wm_stages(cx,150,800,1660,{k:[0,1,2,3,4].map(i=>ag_in(tt,P4+0.3+i*0.12,0.5)),lit:[0,0,0,0,ag_in(tt,T.gateW-0.2,0.5)],dim:0.3,gates:true,passed:[1,1,1,1,pass],
         gate:{i:4,a:ag_in(tt,T.gateW-0.3,0.5),k:wm_k(tt,T.gateW-0.3),x:860,y:40}});
       const na=ag_in(tt,T.fourteen-0.3,0.4);if(na>0){ag_T(cx,"14 nights in test",180,206,{w:700,size:28,col:AG.mut,a:na});wm_nights(cx,200,262,{n:14,u:clamp((tt-T.fourteen)/1.6,0,1),a:na});}}},
-    // Europe's AI law: people who can understand it, watch it, reverse it and stop it
+    // Europe's AI law: people who can understand it, watch it, reverse it and stop it. Then its card folds to its name, and under it the
+    // law's arrow sets off and the technology's overtakes it; the gap between them is care of one's own, most of all in critical systems
     {later:true,at:P5,place:"wmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
-      wm_law(cx,360,170,1200,{a:ag_in(tt,P5+0.5,0.5),k:wm_k(tt,P5+0.5),show:i=>ag_in(tt,[T.und,T.watch,T.rev,T.stopW][i]-0.2,0.4)});}},
+      wm_law(cx,360,170,1200,{a:ag_in(tt,P5+0.5,0.5),k:wm_k(tt,P5+0.5),show:i=>ag_in(tt,[T.und,T.watch,T.rev,T.stopW][i]-0.2,0.4),put:ag_in(tt,c.lag-0.7,0.4),fold:ag_in(tt,c.lag-0.45,0.7)});
+      wm_lag(cx,360,346,1200,{t:tt,lawIn:ag_in(tt,T.reg-0.2,0.4),law:1-Math.pow(1-clamp((tt-T.reg)/(T.tech+1.6-T.reg),0,1),2),techIn:ag_in(tt,T.tech-0.2,0.4),tech:ag_sine((tt-T.tech)/1.5),
+        care:clamp((tt-T.careW+0.1)/0.9,0,1),careAt:T.careW+0.5,critAt:T.crit-0.1});}},
     // it covers one kind of task; on what a word about staff means, the same agent only suggests
     {later:true,at:P6,place:"wmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
       const b=wm_stageList(cx,420,150,1000,{a:ag_in(tt,P6+0.5,0.5),k:wm_k(tt,P6+0.5),mandate:1,lit:i=>i===3?ag_io(tt,T.oneKind-0.3,T.word-0.2,0.4):i===0?ag_in(tt,T.word-0.2,0.4):0,

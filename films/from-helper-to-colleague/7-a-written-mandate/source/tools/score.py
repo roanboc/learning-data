@@ -218,7 +218,9 @@ mark(fc('breath', 0.5), 0.7, 0.0)
 
 # 2. One page, on the map: the map's cards laid down; the agent assigned to its role, a low E flat; the mandate's line joining it; the
 #    folder and the file, its kind a requirement; the page's cards, each laid down; the gate passed, a person's decision: the bass
-#    trumpet; the law's card; the one task, and the word about staff where it only suggests
+#    trumpet; the law's card, folded to its name; the law's line setting off, a low E flat, and the technology's, quicker and higher,
+#    its last note left open; care of one's own, a person's word: the bass trumpet takes up the law's E flat where its line stopped;
+#    a tap for each of its two pills; the one task, and the word about staff where it only suggests
 pw = lambda lid, word, off=0: W('page', lid, word, off)
 pc = lambda lid, off=0: G('page', lid, off)
 paper(S0('page') + 0.4, 0.012, px(310))
@@ -232,6 +234,12 @@ for lid in ('test', 'prod', 'never', 'first', 'twice'):
 P_gate = pw('gate', 'without a miss', 0.5)
 knock(P_gate, 0.010, px(1500), 260); btp(Eb3, P_gate + 0.05, 2.0, 0.8, px(1500) * 0.5)
 paper(pc('law', -0.1), 0.011, px(960))
+paper(pc('lag', -0.45), 0.009, px(960), 0.6)
+drawn(Eb3, pw('lag', 'regulation'), 2.3, 0.6, px(800), strip=0, rise=0.3)
+line((Bb3, D4), pw('lag', 'technology'), 0.5, 0.55, px(1080), strip=1, last=1.1, cut=False)
+btp(Eb3, pw('care', 'more care', -0.1), 2.0, 0.75, px(1275) * 0.5)
+tap(pw('care', 'more care', 0.5), 0.008, px(1275))
+tap(pw('care', 'critical systems', -0.1), 0.009, px(1275))
 paper(pc('one', -0.1), 0.011, px(920))
 drawn(G3, pw('one', 'only suggests', -0.1), 1.6, 0.55, px(1500), strip=2)
 

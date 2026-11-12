@@ -134,9 +134,9 @@ OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/too
 COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": ("3", "10")}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
 # a series numbers its own films, always as "Film 2 of 7" ("Película 2 de 7"): that's allowed; numbering the site's films isn't
-NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)|(first|second|third) film|(primera|segunda|tercera) película|"
+NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)(?!-)|(first|second|third) film|(primera|segunda|tercera) película|"
                        r"episod(e|io) [0-9]|\b(first|second|third) (video|episode)\b|"
-                       r"\b(primer|segundo|tercer)[oa]? (video|episodio)\b|película (uno|dos|tres|[123])\b(?! de \d)", re.I)
+                       r"\b(primer|segundo|tercer)[oa]? (video|episodio)\b|película (uno|dos|tres|[123])\b(?! de \d)(?!-)", re.I)  # (?!-): a key such as one-map-in-the-repo is a name, not a number
 COMMENT_OK = {"assets/film3/film.js", "assets/silent-change/film.js", "assets/too-good-to-be-true/film.js"}
 LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis minutos|· 9 min|· 5 min|"
                      r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)-minute\b|"
@@ -991,6 +991,40 @@ def places_faults():
 
 
 # ---------------------------------------------------------------- the checks
+def md_links(text):
+    """The relative links of a Markdown text, [words](target), leaving out code blocks and code spans."""
+    text = re.sub(r"```.*?```", "", text, flags=re.S)
+    text = re.sub(r"`[^`\n]*`", "", text)
+    for m in re.finditer(r"\]\(<?([^)\s>]+)>?(?:\s+\"[^\"]*\")?\)", text):
+        ref = m.group(1).split("#")[0].split("?")[0]
+        if ref and not re.match(r"[a-zA-Z][\w+.-]*:", ref) and not ref.startswith("/"):
+            yield m.group(1), urllib.parse.unquote(ref)
+
+
+def md_link_faults():
+    """Every relative link in the repository's Markdown resolves (the site's own pages are read as pages). A row of a film's
+    decided.md is copied into its series' proposal.md, so a link there may resolve from either folder."""
+    try:
+        r = subprocess.run(["git", "ls-files", "*.md"], cwd=ROOT, capture_output=True, text=True, check=True)
+        files = [ROOT / f for f in r.stdout.splitlines()]
+    except (OSError, subprocess.CalledProcessError):
+        files = [p for p in ROOT.rglob("*.md") if "node_modules" not in p.parts]
+    bad, n = [], 0
+    for f in sorted(files):
+        rel = f.relative_to(ROOT)
+        if rel.parts[0] in ("site", "dist", "node_modules") or not f.exists():
+            continue
+        bases = [f.parent]
+        if f.name == "decided.md" and len(rel.parts) == 4 and rel.parts[0] == "films":
+            bases.append(f.parent.parent)
+        for shown, ref in md_links(f.read_text(encoding="utf-8")):
+            n += 1
+            if not any((b / ref).exists() for b in bases):
+                bad.append(f"{rel.as_posix()}: the link ({shown}) points at nothing in the repository: add the file, "
+                           "or mend the link (a series' table of films links each film's source/README.md)")
+    return bad, n
+
+
 def main():
     rep = Report()
     pages = {}
@@ -1858,6 +1892,11 @@ def main():
     if build_series.fill(rep_md, build_series.LEGIBLE, [build_series.LEGIBLE_NOTE]) != rep_md:
         s["fails"].append("films/legibility-report.md: keep only the note between its marks; the table is made when it's printed "
                           "(python site-tools/build_series.py --legibility), so films merging at once don't clash on it")
+
+    s = rep.check("Repository links: every relative link in the repository's Markdown, such as a series' table of films, points at a file that is there")
+    bad, n = md_link_faults()
+    s["fails"] += bad
+    s["notes"].append(f"{n} relative links read in the repository's Markdown files (the site's own pages are checked above)")
 
     s = rep.check("A series' own labs and scenarios: the same in both languages, each lab on one of its film's chapters, each scenario on a lab")
     for S, SL in SERIES_LEARN.values():

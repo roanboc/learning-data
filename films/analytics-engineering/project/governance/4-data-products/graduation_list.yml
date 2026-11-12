@@ -18,7 +18,7 @@ outputs:
   - {model: mart_graduations__graduation_list}
   - {model: mart_graduations__certificates_file}
 service_levels:
-  - {property: latency, value: 24, unit: h, element: "mart_graduations__graduation_list.student_system_as_of, mart_graduations__graduation_list.portal_as_of", driver: operational, description: "Built every night; each source at most 24 hours old when the list goes to the printer, as agreed with Malia Fonoti on 22 June 2026."}
+  - {property: latency, value: 24, unit: h, element: "mart_graduations__graduation_list.student_system_as_of, mart_graduations__graduation_list.portal_as_of", driver: operational, description: "Built every night; each source's newest record at most 24 hours old when the list goes to the printer, counted from when the source saved it, as agreed with Malia Fonoti on 22 June 2026."}
 support:
   - {channel: graduations, tool: email, url: "mailto:graduations@uni.example", scope: issues}
   - channel: This isn't my name

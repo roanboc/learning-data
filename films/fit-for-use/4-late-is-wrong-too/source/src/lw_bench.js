@@ -2,7 +2,8 @@
    This film's own pictures for the bench, in the kit's look (films/fit-for-use/shared, never changed for one film): the bench at night
    under its lamp (lw_night, the same room as the bench by day, so the morning comes in a glide), the student system and its nightly
    file, the graduation list, the platform's monitoring and dbt's freshness check, the uses and their clocks, the list's rule in dbt, the
-   six dimensions as Rules that run left them, the list with its age, the printer's page, and the jobs with their run conditions. Brass
+   six dimensions as Rules that run left them, a record's three dates, the list with its age, the printer's page, and the jobs with
+   their run conditions. Brass
    is the requirement (how fresh a use needs the list), steel blue a measure (how old the data is), the verdicts' colours their
    verdicts; nothing else here uses them. Every top-level name starts with lw_ or LW_. */
 
@@ -134,11 +135,28 @@ function lw_dims(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c
     if(fst>0.004){ctx.save();ctx.globalAlpha*=fst;dq_chip(ctx,cx,cy,s,{icon:"clock",col:"brass"});dq_T(ctx,"its first rule",cx+tw+20,cy+10,{w:700,size:28,col:"brass"});ctx.restore();}});
   ctx.restore();}
 
+/* ---------------------------------------------------------------- a record's three dates
+   One of the list's records, an award of one of the 23, typed on an index card with its three dates: when the exam board approved it
+   (its business date), when the student system saved it (its system date) and when its file arrived (its load date). o.rows (0 to 3)
+   types them one by one, and o.names (0 to 3) brings each date's name in at the right of its row. o.lit (a row) lights the one the
+   voice is on, with o.litCol: brass for the date a use cares about, steel for the one the age is measured from. x, y its top left;
+   LW_DATES_W its width. */
+const LW_DATES=[["The board approved it","Wed 17 Jun","business date","brass"],["The student system saved it","Wed 17 Jun, 16:10","system date","steel"],
+  ["Its file arrived","Thu 18 Jun, 11:40","load date",null]],LW_DATES_W=1100;
+function lw_dates(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,n=o.rows==null?3:o.rows,m=o.names==null?3:o.names;
+  const bb=dq_record(ctx,x,y,LW_DATES_W,{head:"One award, of the 23",rows:LW_DATES.map(([k,v])=>({k,v}))},{fixed:true,on:o.on,k:o.k,a,lit:o.lit,litCol:o.litCol,rowA:(r,i)=>clamp(n-i,0,1)});
+  if(a<=0.004)return bb;
+  // each date's name, a chip at the right of its row
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+bb.w/2,y+bb.h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  LW_DATES.forEach(([k,v,name,col],i)=>{const w=dq_tw(ctx,name,{w:700,size:28})+44;dq_chip(ctx,x+bb.w-DQ_PAD-w,bb.rows[i].cy,name,{col,a:clamp(m-i,0,1)});});
+  ctx.restore();return bb;}
+
 /* ---------------------------------------------------------------- the list says how old it is
-   The list as a table: each graduate and award, and its sources' age; o.cells (0 to 1) brings the two age columns in, o.lit lights
-   them (steel), and o.vals gives that Thursday's values, the student system's in amber (30 hours old), the portal's in green. */
+   The list as a table: each graduate and award, and its sources' age, the newest record each source had saved; o.cells (0 to 1) brings
+   the two age columns in, o.lit lights them (steel), and o.ssCol and o.poCol colour that Thursday's values, the student system's in
+   amber (30 hours old), the portal's in green. */
 const LW_ROWS=[["Amara Osei","Bachelor of Nursing"],["Liu Wei","Master of Engineering"],["Sofía Torres","Bachelor of Arts"]];
-function lw_table(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=1500,h=390,ca=clamp(o.cells==null?1:o.cells,0,1),ss=o.ss||"Wed 17 Jun, 02:00",po=o.po||"Thu 18 Jun, 02:00";
+function lw_table(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=1500,h=390,ca=clamp(o.cells==null?1:o.cells,0,1),ss=o.ss||"Wed 17 Jun, 01:52",po=o.po||"Thu 18 Jun, 01:47";
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));dq_card(ctx,x,y,w,h,{on:o.on});
   dq_label(ctx,x+DQ_PAD,y+56,"The graduation list",{});
   const cols=[{h:"Graduate",w:300},{h:"Award",w:380},{h:"Student system as of",w:410,f:"mono"},{h:"Portal as of",w:360,f:"mono"}];
@@ -158,9 +176,9 @@ function lw_page(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c
   if(o.none){dq_T(ctx,"As of ?",x+40,y+176,{w:800,size:30,col:"stop"});}
   else{const f={w:600,size:28};dq_T(ctx,"Student system data as of",x+40,y+176,Object.assign({col:DQ.soft},f));const sx=x+40+dq_tw(ctx,"Student system data as of ",f),su=clamp(o.ssU||0,0,1);
     // a newer age (o.ss2, in o.ss2Col) takes the place of the old one as o.ssU goes 0 to 1: the old leaves, then the new comes
-    if(su<0.5)dq_T(ctx,o.ss||"Wed 17 Jun, 02:00",sx,y+176,{w:500,size:28,f:"mono",col:o.ssCol||DQ.ink,a:1-ag_sine(su*2)});
+    if(su<0.5)dq_T(ctx,o.ss||"Wed 17 Jun, 01:52",sx,y+176,{w:500,size:28,f:"mono",col:o.ssCol||DQ.ink,a:1-ag_sine(su*2)});
     if(o.ss2&&su>0.5)dq_T(ctx,o.ss2,sx,y+176,{w:500,size:28,f:"mono",col:o.ss2Col||DQ.ink,a:ag_sine(su*2-1)});
-    dq_T(ctx,"Portal as of",x+40,y+220,Object.assign({col:DQ.soft},f));dq_T(ctx,o.po||"Thu 18 Jun, 02:00",x+40+dq_tw(ctx,"Portal as of ",f),y+220,{w:500,size:28,f:"mono",col:o.poCol||DQ.ink});}
+    dq_T(ctx,"Portal as of",x+40,y+220,Object.assign({col:DQ.soft},f));dq_T(ctx,o.po||"Thu 18 Jun, 01:47",x+40+dq_tw(ctx,"Portal as of ",f),y+220,{w:500,size:28,f:"mono",col:o.poCol||DQ.ink});}
   ctx.fillStyle="rgba(110,90,66,0.3)";ctx.fillRect(x+40,y+250,w-80,1.6);
   // the list under it, as faint lines (a picture: no words)
   const R=ag_rnd(712);for(let i=0;i<Math.floor((h-290)/34);i++){const ry=y+286+i*34;ctx.fillStyle="rgba(110,90,66,0.16)";rr(ctx,x+40,ry,180+R()*160,14,7);ctx.fill();rr(ctx,x+460,ry,140+R()*120,14,7);ctx.fill();}

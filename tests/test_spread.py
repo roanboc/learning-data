@@ -87,6 +87,12 @@ class Spread(unittest.TestCase):
         P, rel = self.read(PACK.replace('{t:"one",b:"b",why:"."},{t:"two",b:"a",why:"."}', '{t:"two",b:"a",why:"."},{t:"one",b:"b",why:"."}'))
         self.assertTrue(any("box by box (1, 2, 2)" in x for x in C.spread_faults(rel, P, set(P["labs"]))))
 
+    def test_cards_turn_and_turn_about(self):
+        for boxes, want in (([0, 1, 0, 1], True), ([1, 0, 1, 0, 1], True), ([0, 1, 0], False), ([0, 1, 1, 0], False), ([0, 1, 2, 0], False), ([0, 1, 0, 1, 1], False)):
+            self.assertEqual(C.turn_about(boxes), want, boxes)
+        P, rel = self.read(PACK.replace('{t:"three",b:"b",why:"."}', '{t:"three",b:"b",why:"."},{t:"four",b:"a",why:"."}'))
+        self.assertTrue(any("turn and turn about (2, 1, 2, 1)" in x for x in C.spread_faults(rel, P, set(P["labs"]))))
+
     def test_how_many_in_one_place(self):
         self.assertEqual([C.spread_most(n, k) for n, k in ((2, 4), (3, 3), (3, 2), (5, 2), (6, 4), (7, 3), (7, 4), (12, 2))], [1, 1, 2, 3, 3, 3, 3, 6])
 

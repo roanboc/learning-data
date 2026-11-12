@@ -1,0 +1,259 @@
+1
+00:00:01,400 --> 00:00:06,391
+In 1971, Chile's new government took over factories across the country.
+
+2
+00:00:07,891 --> 00:00:10,955
+Its development agency, CORFO, had to run them.
+
+3
+00:00:12,255 --> 00:00:15,951
+But its figures on what they made took about six months to collect.
+
+4
+00:00:17,251 --> 00:00:20,368
+By the time a problem showed in them, it was half a year old.
+
+5
+00:00:21,868 --> 00:00:27,113
+The people in charge needed to see what each factory was doing now, not six months ago.
+
+6
+00:00:28,813 --> 00:00:34,689
+CORFO asked a British expert on how organisations steer themselves, Stafford Beer, to help.
+
+7
+00:00:35,989 --> 00:00:39,923
+Their project, Cybersyn, would link the factories to Santiago.
+
+8
+00:00:41,623 --> 00:00:45,246
+Before any computer was used, engineers went to the factories.
+
+9
+00:00:46,746 --> 00:00:50,468
+They walked each one with the people who worked there, and drew how it worked.
+
+10
+00:00:52,568 --> 00:00:54,695
+Only then did they choose what to measure.
+
+11
+00:00:56,195 --> 00:01:02,581
+Each factory would report about five numbers, such as how much it produced and how many workers were absent.
+
+12
+00:01:04,681 --> 00:01:08,412
+Each number had its place in the drawing, so everyone knew what it meant.
+
+13
+00:01:10,112 --> 00:01:18,236
+Inés Duarte, the utility's new data architect, finds the same problem: plenty of data, and no agreed picture of what it means.
+
+14
+00:01:19,736 --> 00:01:23,041
+She starts where the engineers did: with how the business works.
+
+15
+00:01:30,141 --> 00:01:36,089
+This is Tomás's map of the utility: six layers, from why it exists down to what runs it.
+
+16
+00:01:37,789 --> 00:01:41,738
+He drew it in The map before the data, with the people who own each part.
+
+17
+00:01:43,238 --> 00:01:51,144
+Business architecture for data then drew what the business owns about its data: its concepts, their owners, and the rules on them.
+
+18
+00:01:52,844 --> 00:01:57,280
+Each concept is a business object, defined once, in the business's words.
+
+19
+00:01:58,880 --> 00:02:06,095
+Under the business sits the fourth layer, information, and data architecture works there, between the business and the systems.
+
+20
+00:02:07,795 --> 00:02:12,777
+Inés has just joined as the utility's data architect. That layer is hers.
+
+21
+00:02:15,477 --> 00:02:19,772
+In her first meeting, she asks who here works on information architecture.
+
+22
+00:02:21,072 --> 00:02:24,285
+Three people say they do, and each one means something else.
+
+23
+00:02:25,785 --> 00:02:32,020
+The web team means how the website is organised and labelled: its menus, its pages, its search.
+
+24
+00:02:33,720 --> 00:02:36,089
+That's a real discipline, and not this one.
+
+25
+00:02:37,389 --> 00:02:42,777
+An analyst means a model of the company's information, and how it flows between its parts.
+
+26
+00:02:44,477 --> 00:02:47,876
+Tomás, who learned TOGAF, means a phase of its method.
+
+27
+00:02:49,576 --> 00:02:55,055
+So Inés writes down what this team will mean: data architecture, as DAMA defines it.
+
+28
+00:02:57,755 --> 00:03:04,232
+DAMA's body of knowledge knows the old distinction: data as facts, information as data with meaning.
+
+29
+00:03:05,832 --> 00:03:12,208
+But it criticises splitting them. Data is a form of information, and information is a form of data.
+
+30
+00:03:14,108 --> 00:03:18,548
+So it uses the two words as one, and calls the discipline data architecture.
+
+31
+00:03:20,048 --> 00:03:26,059
+TOGAF names data architecture as one of its four domains, but groups it with the applications.
+
+32
+00:03:27,759 --> 00:03:34,238
+ArchiMate puts what the business means in its business layer, and how a system records it in its application layer.
+
+33
+00:03:35,738 --> 00:03:37,294
+It has nothing in between.
+
+34
+00:03:38,594 --> 00:03:42,086
+Tomás's map draws a layer there, as many architects do.
+
+35
+00:03:44,786 --> 00:03:50,174
+Inés starts with one word: connection point, where a home or a business meets the network.
+
+36
+00:03:51,674 --> 00:03:56,487
+The business defined it once, and Grace, who runs network operations, owns it.
+
+37
+00:03:57,987 --> 00:04:00,631
+Six systems record it, each in its own way.
+
+38
+00:04:01,731 --> 00:04:07,475
+The network map calls it a service point. Meter data, a metering point. Billing, a premise.
+
+39
+00:04:08,975 --> 00:04:17,035
+Customer service, a supply address. The outage system, a service location. And the data platform keeps a table of its own.
+
+40
+00:04:18,735 --> 00:04:23,328
+In January, a storm cut power to 3,400 connection points.
+
+41
+00:04:24,828 --> 00:04:29,964
+Outage texts went out by supply address, matched from the outage system's locations.
+
+42
+00:04:31,264 --> 00:04:37,029
+180 households never got one: the two systems wrote their addresses differently.
+
+43
+00:04:38,729 --> 00:04:41,459
+They sat in the dark, not knowing whether anyone knew.
+
+44
+00:04:43,159 --> 00:04:46,877
+Who owns the line between the word and its six records? Nobody.
+
+45
+00:04:49,577 --> 00:04:54,791
+That line is what data architecture is for, and it's why it's an architecture of its own.
+
+46
+00:04:56,091 --> 00:05:02,617
+Data outlives the applications that hold it. The connection points are older than every one of those systems.
+
+47
+00:05:04,117 --> 00:05:07,879
+Billing moved to a new system in March. The points stayed the same.
+
+48
+00:05:09,379 --> 00:05:14,020
+One concept serves many applications, so no single application can own it.
+
+49
+00:05:15,320 --> 00:05:20,694
+Meaning belongs to the business, and storage to the systems. Someone has to own the join.
+
+50
+00:05:22,394 --> 00:05:24,705
+DAMA makes that a discipline of its own.
+
+51
+00:05:26,005 --> 00:05:30,476
+So Inés draws the line: each record, joined to the word it stands for.
+
+52
+00:05:32,376 --> 00:05:37,691
+And she decides that every system that needs a connection point carries the network's ID for it.
+
+53
+00:05:39,191 --> 00:05:42,771
+Outage texts are now matched on that ID, not on addresses.
+
+54
+00:05:44,071 --> 00:05:48,662
+In the next storm, all 2,100 households on the list got their text.
+
+55
+00:05:51,362 --> 00:05:54,137
+This adds a layer to the data practice on the map.
+
+56
+00:05:55,437 --> 00:05:59,559
+The business layer holds the concepts, as business objects with owners.
+
+57
+00:06:01,059 --> 00:06:04,476
+Data architecture adds the information layer under them.
+
+58
+00:06:05,976 --> 00:06:11,592
+Each system's record is a data object, and a line says which business object it realises.
+
+59
+00:06:13,492 --> 00:06:17,451
+One word, six records, six lines, and each line has an owner.
+
+60
+00:06:19,151 --> 00:06:24,597
+Next, this layer shows where each fact is born, how it travels, and who owns which data.
+
+61
+00:06:29,697 --> 00:06:34,474
+In Chile, the engineers drew each factory before they chose a single number.
+
+62
+00:06:35,974 --> 00:06:40,068
+The drawing came first, so a number meant the same thing to everyone who read it.
+
+63
+00:06:41,568 --> 00:06:46,556
+Inés drew the business first too: one word, its records, and a line with an owner.
+
+64
+00:06:48,056 --> 00:06:51,136
+So the next outage text reaches every home on the list.
+
+65
+00:06:52,436 --> 00:06:58,252
+But how do records become decisions? There's a famous pyramid about that, and it's only half right.

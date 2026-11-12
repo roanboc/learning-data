@@ -1,6 +1,6 @@
 # Who creates it, who owns it: questions and assumptions
 
-*Enterprise architecture* · *Business architecture for data*, film 3 of 5 · PR #PR_NUMBER · [pull request](https://github.com/roanboc/learning-data/pull/PR_NUMBER)
+*Enterprise architecture* · *Business architecture for data*, film 3 of 5 · PR #346 · [pull request](https://github.com/roanboc/learning-data/pull/346)
 
 [Watch it on the site](https://data.learn-all.org/business-architecture-for-data/who-creates-it-who-owns-it/)
 

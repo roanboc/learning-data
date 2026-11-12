@@ -74,9 +74,9 @@ labs:[
 ],
 qs:[
  {type:"choice",lab:"access",vis:"wo_q_copy",title:"Ya está hecho",sit:"Encuentra el problema. El equipo de la billetera necesita los estudiantes cerca de un título. Copia mart_planning__near_award en su propia carpeta, «porque ya está hecho».",
-  opts:[{t:"Ninguno: la copia está en la carpeta de la billetera, así que es de la billetera.",why:"El archivo es de la billetera, pero lo que codifica es de Planificación: su regla, a la fecha de censo. Cuando Planificación cambie su mart, la copia quedará en desacuerdo sin aviso."},
-   {t:"Copia el contrato de consumidor de Planificación, hecho a la medida de su pregunta. La billetera debe construir sobre el núcleo público, y pedirle a su dueño lo que le falte.",ok:true},
-   {t:"Debería hacer ref al mart de Planificación en vez de copiarlo.",why:"dbt lo permite (el mart es protegido, en el mismo proyecto), y sigue estando mal: el mart cambia cuando Planificación lo necesita."}],
+  opts:[{t:"Ninguno: la copia está en la carpeta de la billetera, así que es suya y puede cambiarla.",why:"El archivo es de la billetera, pero lo que codifica es de Planificación: su regla, a la fecha de censo. Cuando Planificación cambie su mart, la copia quedará en desacuerdo sin aviso."},
+   {t:"Copia un mart hecho para Planificación: la billetera debe construir sobre el núcleo público.",ok:true},
+   {t:"Debería hacer ref al mart de Planificación en vez de copiarlo, para que nunca difieran.",why:"dbt lo permite (el mart es protegido, en el mismo proyecto), y sigue estando mal: el mart cambia cuando Planificación lo necesita."}],
   why:"Cada mart es la forma de un consumidor. Los consumidores construyen sobre el núcleo público, que tiene dueño, contrato y versión, nunca sobre los marts de otros.",repo:["models/marts/wallet/","models/core/student/_core_student__models.yml"]},
  {type:"choice",lab:"access",vis:"wo_q_private",title:"¿Cómo se unieron las claves?",sit:"Planificación quiere hacer ref a int_learner_keys_matched, para ver cómo se unieron las claves de cada estudiante. ¿Qué haces?",
   opts:[{t:"Hacer público el modelo, para que Planificación le haga ref.",why:"Entonces cualquier proyecto puede construir sobre un paso sin contrato ni versión, y romperse cada vez que el grupo de Noor cambie la unión."},

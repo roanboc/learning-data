@@ -1,6 +1,6 @@
 # Who owns which data: questions and assumptions
 
-*Enterprise architecture* · *Data architecture*, film 5 of 6 · PR #PRNUM · [pull request](https://github.com/roanboc/learning-data/pull/PRNUM)
+*Enterprise architecture* · *Data architecture*, film 5 of 6 · PR #373 · [pull request](https://github.com/roanboc/learning-data/pull/373)
 
 [Watch it on the site](https://data.learn-all.org/data-architecture/who-owns-which-data/)
 

@@ -119,7 +119,7 @@ if(labsApp){labsApp.textContent="";const rail=h("div",{class:"stops",role:"tabli
       const Lb=Object.assign({},(L.labs||[]).find(x=>x.id===hd.id)||{},{id:hd.id,c:hd.c,name:hd.name}),i=PK.labs.indexOf(hd),nxt=PK.labs[i+1];
       const t=hd.chapter&&F.starts[hd.chapter]!=null?F.starts[hd.chapter]:null;
       holder.replaceChildren(h("div",{class:"stop",style:"--c:"+Lb.c},
-        h("div",{class:"stop-text"},h("p",{class:"kicker"},h("b",null,U.lab+" "+(i+1))," "+U.of+" "+PK.labs.length),h("h3",null,Lb.name),h("p",{class:"idea"},Lb.idea),h("ul",null,...(Lb.points||[]).map(p=>h("li",null,p))),
+        h("div",{class:"stop-text"},h("p",{class:"kicker"},h("b",null,U.lab+" "+(i+1))," "+U.of+" "+PK.labs.length+((FILMS[hd.film]||{}).t?" · "+FILMS[hd.film].t:"")),h("h3",null,Lb.name),h("p",{class:"idea"},Lb.idea),h("ul",null,...(Lb.points||[]).map(p=>h("li",null,p))),
           h("details",{class:"real"},h("summary",null,U.inPractice),h("p",null,Lb.real),repoLinks(Lb)),
           h("div",{class:"stop-nav"},t!=null?h("a",{class:"btn",href:F.href+"#t="+t},U.watch):null,nxt?h("button",{type:"button",class:"btn primary",onclick:()=>show(nxt.id,true)},U.next+" "+nxt.name+" →"):h("a",{class:"btn primary",href:"../scenarios/"},U.makeCall))),
         BUILD[Lb.kind](Lb)));

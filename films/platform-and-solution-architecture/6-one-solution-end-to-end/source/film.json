@@ -1,0 +1,26 @@
+{
+  "key": "one-solution-end-to-end",
+  "title": "One solution, end to end",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: how one solution is designed end to end on the data platform, its context, three qualities with a measure each, two options tested against them, the decision written down with why, most of its parts reused, and every team told ahead; and how the enterprise, platform and solution architects work side by side.",
+  "howto": "Technology green is a platform, and blue an application, a data product or a job. A gold tag is an owner in the business. A red line is a piece nobody has joined, or a measure an option fails; a green tick, a measure it meets. Amber, a lantern's colour, is the road, its stations, and what every team shares.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["ahead"],
+  "poster": ["ahead", "sipho", 6.2],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bAma\\b", "Ah-mah"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bSipho\\b", "See-poh"],
+    ["\\bDlamini\\b", "Dlah-mee-nee"],
+    ["\\bYasmin's\\b", "Yahs-meen's"],
+    ["\\bYasmin\\b", "Yahs-meen"],
+    ["\\bEdo\\b", "Eh-doh"],
+    ["\\bTōkaidō\\b", "Toh-kai-doh"],
+    ["\\bshogunate\\b", "show-gun-ate"],
+    ["\\bIT\\b", "I T"]
+  ]
+}

@@ -1,6 +1,6 @@
 # Late is wrong too: questions and assumptions
 
-*Data quality* · *Fit for use*, film 4 · merged, PR #226 · [pull request](https://github.com/roanboc/learning-data/pull/226); changed on 12 November 2026 from Rodrigo's answer on which date timeliness is counted from (PR #NNN)
+*Data quality* · *Fit for use*, film 4 · merged, PR #226 · [pull request](https://github.com/roanboc/learning-data/pull/226); changed on 12 November 2026 from Rodrigo's answer on which date timeliness is counted from (PR #331)
 
 [Watch it on the site](https://data.learn-all.org/fit-for-use/late-is-wrong-too/)
 
@@ -52,7 +52,7 @@ Rows 9 and 10 were put to Rodrigo as one question: *freshness is measured by whe
 
 > Umm, relevant dates as usual are business dates, so a file could have arrived with stale data, so the important thing are the records and ideally the business dates but that's hard to determine in ingestion and, so system transaction dates (generally chosen for CDC and incremental ingestions) would be the next best fit to check Timeliness in DAMA.
 
-So an age is no longer counted from when a file arrived. Every record has three dates: when it happened (the business date), when its source saved it (the system date) and when its file arrived (the load date). The film now says so, and counts the list's age, and both checks, from the second. The change was made in the thread "Apply review answers to Data quality" (PR #NNN):
+So an age is no longer counted from when a file arrived. Every record has three dates: when it happened (the business date), when its source saved it (the system date) and when its file arrived (the load date). The film now says so, and counts the list's age, and both checks, from the second. The change was made in the thread "Apply review answers to Data quality" (PR #331):
 
 | His words | The film's line now | Where it shows |
 |---|---|---|

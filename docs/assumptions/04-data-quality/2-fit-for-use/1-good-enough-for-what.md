@@ -57,4 +57,4 @@ Row 25 was the one put to Rodrigo for this film: *Assumed: DAMA's six dimensions
 
 > Yes, fine.
 
-The question is closed, and the film isn't changed: row 25 stands as made, and so does the module's row R4. Recorded in the thread "Apply review answers to Data quality" (PR #NNN).
+The question is closed, and the film isn't changed: row 25 stands as made, and so does the module's row R4. Recorded in the thread "Apply review answers to Data quality" (PR #331).

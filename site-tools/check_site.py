@@ -701,7 +701,7 @@ MIXED = ("const mixed=(n,s)=>{"
 # than a quarter longer than every wrong one in 85 of the 97 scenarios a page shows.
 SPREAD_NAMES = 25  # options that only name something, every one shorter than this, aren't compared: a name's length says nothing
 # the series whose scenarios aren't of like length yet, by the folder of their pack: each leaves the list with its fix
-LENGTHS_LATER = {"data-governance", "governance-on-the-map", "governance-in-practice", "what-an-agent-is", "enterprise-architecture"}
+LENGTHS_LATER = {"what-an-agent-is", "enterprise-architecture"}
 
 
 def spread_most(n, k):

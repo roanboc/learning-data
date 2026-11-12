@@ -11,8 +11,8 @@ const SM_AK=[["SIS|","S-20417"],["LMS|","u-88213"],["SC|","·Aisha.K@Mail.exampl
 // a tag whose right edge sits at x
 function sm_tagR(ctx,x,y,s,col,sz){tag(ctx,x-tw(ctx,s,sz||18,700)-26,y,s,col,{size:sz||18});}
 
-// a tag whose last part (a code character, like |) is set in the mono font, so it can't be misread
-function sm_tagBar(ctx,x,y,s,m,col,sz){const w1=tw(ctx,s,sz,700),w=w1+sz*0.62+26,h=sz+16;glass(ctx,x,y-h/2,w,h,h/2,col,{fill:"rgba(7,12,24,0.88)",glow:10,ea:0.8});
+// a tag whose last part (a code character, like |) is set in the mono font, so it can't be misread; it is made at the size its words are drawn
+function sm_tagBar(ctx,x,y,s,m,col,sz){sz=phSz(ctx,sz);const w1=tw(ctx,s,sz,700),w=w1+sz*0.62+26,h=sz+16;glass(ctx,x,y-h/2,w,h,h/2,col,{fill:"rgba(7,12,24,0.88)",glow:10,ea:0.8});
   T(ctx,s,x+13,y+sz*0.36,{w:700,size:sz,color:rgba(col,1)});T(ctx,m,x+13+w1,y+sz*0.36,{f:"mono",w:700,size:sz,color:rgba(col,1)});}
 
 /* ---------- 1. Look-alikes ---------- */
@@ -211,7 +211,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     withA(ctx,pull*oA,()=>tag(ctx,700,360,"merged",SM_AMBER,{align:"center",size:18}));}
   const x6=fin(t,w("merge","six"),0.8)*(1-fin(t,un+0.3,0.8));
   arrive(ctx,320,605,t,0.9,()=>sm_wallet(ctx,60,500,520,{x6}),{dy:24});
-  withA(ctx,fin(t,w("merge","never earned"),0.5)*(1-fin(t,un+0.3,0.6)),()=>T(ctx,"one she never earned",320,752,{w:700,size:22,align:"center",color:rgba(SM_AMBER,1)}));
+  withA(ctx,fin(t,w("merge","never earned"),0.5)*(1-fin(t,un+0.3,0.6)),()=>T(ctx,"one she never earned",320,822,{w:700,size:22,align:"center",color:rgba(SM_AMBER,1)}));
   // every test stays green, tick after tick
   const tA=1-fin(t,dd-0.2,0.6),tt0=w("merge","every test");
   arrive(ctx,1610,300,t,w("merge","And every")-0.4,()=>sm_tests(ctx,1310,110,530,SM_TESTS,SM_TESTS.map((_,i)=>fin(t,tt0+i*0.25,0.3)),{a:tA}),{dy:24});

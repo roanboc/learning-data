@@ -160,7 +160,7 @@ function sq_loop(ctx,x,y,rx,ry,t,on,a){if(a<=0.01)return;const r=16;withA(ctx,a,
 // a source system's stream: its card, and its records rising from below in its colour
 function sq_stream(ctx,x,yTop,yBot,k,t,a){if(a<=0.01)return;const col=SRC3[k][1];withA(ctx,a,()=>{const g=ctx.createLinearGradient(0,yTop,0,yBot);g.addColorStop(0,rgba(col,0.14));g.addColorStop(1,rgba(col,0));ctx.fillStyle=g;rr(ctx,x-130,yTop,260,yBot-yTop,18);ctx.fill();
   for(let i=0;i<18;i++){const u=((t*0.18+hash(i,k+60))%1),yy=lerp(yBot,yTop+70,u),xx=x+(hash(i,k+61)-0.5)*200,al=Math.sin(Math.PI*u);ctx.fillStyle=rgba(col,0.55*al);rr(ctx,xx-18,yy-4,36,8,3);ctx.fill();}
-  srcCard(ctx,x-160,yTop,320,k,{});});}
+  const cw=Math.max(320,...SRC3.map(([nm])=>Math.ceil(34+tw(ctx,nm,phSz(ctx,21),700)+20)));srcCard(ctx,x-cw/2,yTop,cw,k,{});});}   // the three cards, as wide as the longest name at the size it's drawn
 // one learner as a source holds her: the name, and the key that source uses. Spaces are drawn as visible dots
 function sq_aisha(ctx,x,y,k,key,a){if(a<=0.01)return;const col=SRC3[k][1];withA(ctx,a,()=>{glass(ctx,x-150,y-44,300,96,16,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});
   T(ctx,"Aisha",x,y-8,{w:800,size:24,align:"center"});const shown=key.replace(/ /g,"·"),w=tw(ctx,shown,20,500,"mono");let xx=x-w/2;

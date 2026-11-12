@@ -23,6 +23,8 @@ A film's thread writes its questions and assumptions to that film's own file, in
   - [Data as software](02-modern-data-basics/2-data-as-software/)
   - [From tables to decisions](02-modern-data-basics/3-from-tables-to-decisions/)
   - [Documents and closing remarks](02-modern-data-basics/4-documents-as-data/)
+- [Analytics engineering](03-analytics-engineering/)
+  - [In the weeds of data crafting](03-analytics-engineering/1-analytics-engineering/)
 - [Data quality](04-data-quality/)
   - [Fit for use](04-data-quality/2-fit-for-use/)
   - [Quality as a habit](04-data-quality/3-quality-as-a-habit/)

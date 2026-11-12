@@ -26,8 +26,8 @@ function rw_calendar(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
   ctx.fillStyle="rgba(0,0,0,0.3)";ctx.beginPath();ctx.ellipse(w/2+5,14,9,5,0,0,TAU);ctx.fill();const pg=ctx.createRadialGradient(w/2-3,6,1,w/2,9,10);pg.addColorStop(0,"rgb(255,236,180)");pg.addColorStop(1,"rgb(140,96,40)");ctx.fillStyle=pg;ctx.beginPath();ctx.arc(w/2,9,9,0,TAU);ctx.fill();
   ctx.restore();});}
 // a small calendar leaf, for one of the days of June running past
-function rw_leaf(ctx,x,y,day,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.4)";ctx.shadowBlur=10;ctx.shadowOffsetY=4;ctx.fillStyle="rgb(232,222,198)";ctx.fillRect(x-38,y-46,76,92);ctx.restore();
-  ctx.fillStyle="rgb(150,44,38)";ctx.fillRect(x-38,y-46,76,22);T(ctx,"June",x,y-29,{w:700,size:16,align:"center",color:"rgba(250,236,214,0.95)"});T(ctx,String(day),x,y+30,{w:800,size:40,align:"center",color:rgba(RW_INK,0.88)});});}
+function rw_leaf(ctx,x,y,day,a){if(a<=0.01)return;withA(ctx,a,()=>{const ms=phSz(ctx,16),hw=Math.max(38,Math.ceil(tw(ctx,"June",ms,700)/2)+8),bh=Math.max(22,Math.round(ms*1.3)),g=bh-22,top=y-46-g*0.45,bot=y+46+g*0.15;ctx.save();ctx.shadowColor="rgba(0,0,0,0.4)";ctx.shadowBlur=10;ctx.shadowOffsetY=4;ctx.fillStyle="rgb(232,222,198)";ctx.fillRect(x-hw,top,2*hw,bot-top);ctx.restore();
+  ctx.fillStyle="rgb(150,44,38)";ctx.fillRect(x-hw,top,2*hw,bh);T(ctx,"June",x,top+bh/2+ms*0.375,{w:700,size:ms,align:"center",color:"rgba(250,236,214,0.95)"});T(ctx,String(day),x,y+30+g*0.15,{w:800,size:40,align:"center",color:rgba(RW_INK,0.88)});});}
 
 // the 1890 family schedule: one sheet per family, one column of answers per person. o.wr[i] (0..1) writes person i's column;
 // o.lift: a column lifted out (it fades from the sheet); o.note (0..1): Ruth's later note; o.hiCol: a column lit

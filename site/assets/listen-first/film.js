@@ -2599,7 +2599,9 @@ scene("layers",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       lf_archimate(x,120,280,760,{u:ag_in(tt,c.archi,1.0),obj:[ag_in(tt,w("archi2","business layer",-0.2),0.5),ag_in(tt,w("archi2","application layer",-0.2),0.5),0],a:ag_in(tt,c.archi,0.35),light:"morning"});
       lf_tag(x,tt,w("archi","no information",-0.1),null,840,228,"No information layer",{align:"right",col:LP.ink});
       lf_layerTabs(x,1000,250,{cur:2*ag_in(tt,o0,0.6)+(1-ag_in(tt,o0,0.6))*-1,u:ag_in(tt,h0,1.0),a:ag_in(tt,h0,0.35),light:"morning"});
-      lf_tag(x,tt,o0+0.3,null,1180,790,"Information, a layer of its own",{align:"center",col:LP.orange});
+      lf_tag(x,tt,o0+0.3,null,1180,778,"Information, a layer of its own",{align:"center",col:LP.orange});
+      // a note for the other frameworks: TOGAF and DAMA name this layer data, and either word is fine at this level
+      lf_tag(x,tt,o0+0.9,null,1180,846,"TOGAF and DAMA call it data",{align:"center",col:LP.ink});
       lp_person(x,"helena",1660,640,1.0,{t:tt,flip:true,a:ag_in(tt,h0,0.6),light:LF_MO});}},
     // Noor puts each page on her map
     {at:c.map-0.3,place:"lfFeb",later:true,keys:[[c.map-0.3,960,540,1.0]],draw:(x,tt)=>{const n0=w("map","Noor",-0.6);

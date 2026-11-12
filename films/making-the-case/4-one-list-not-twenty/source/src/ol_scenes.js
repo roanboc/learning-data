@@ -168,8 +168,9 @@ scene("door",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 });
 
 /* ---------------------------------------------------------------- 4. Ordered in the open */
-const OL_ANIL={who:"Anil, Faculty of Health",what:"Casual staff, from the one staff list"},OL_ANILV=[2,2,3,1];
-const OL_DASH={who:"A head of school",what:"A new dashboard",why:"No decision named yet",when:"Looked at again: Monday 5 July"},OL_DASHV=[1,1,1,3];
+// each request's [opportunity, risk prevented, effort]; its value is the first two together, and its place in the order value ÷ effort
+const OL_ANIL={who:"Anil, Faculty of Health",what:"Casual staff, from the one staff list"},OL_ANILV=[2,3,1];
+const OL_DASH={who:"A head of school",what:"A new dashboard",why:"No decision named yet",when:"Looked at again: Monday 5 July"},OL_DASHV=[1,1,3];
 scene("order",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
   ag_shots(ctx,S,t,sc.dur,[
     // after Jena, Larrey's order: the most dangerously wounded first; those hurt less can wait
@@ -181,13 +182,14 @@ scene("order",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
     // the team's list, ordered the same way: Anil's request, then a dashboard asked for three times
     {at:c.weigh-0.3,place:"olRoom",keys:[[0,960,540,1.0]],dis:1.2,draw:(x,tt)=>{const a0=c.weigh+0.3,d0=c.dash-0.1,out=c.board-0.6;
       ol_cardAt(x,tt,a0,out,140,150,760,OL_ANIL,OL_ANILV,{light:"day",
-        u:ol_u(tt,[w("weigh","value",-0.2),w("weigh","urgency",-0.2),w("weigh","risk",-0.2),w("effort","effort",-0.2)]),
-        cost:ag_in(tt,w("cost","waiting",-0.2),0.6),score:ag_in(tt,w("effort","puts",-0.2),0.5),hl:ag_io(tt,w("anil","spreadsheet",-0.4),c.dash-0.4)>0.5?2:null,
+        u:ol_u(tt,[w("weigh","opportunity",-0.2),w("weigh","risk",-0.2),w("effort","effort",-0.2)]),
+        val:ag_in(tt,c.value,0.6),score:ag_in(tt,w("effort","puts",-0.2),0.5),hl:1,hlA:ag_io(tt,w("anil","risk",-0.3),c.dash-0.4),
         top:ag_in(tt,w("anil","top",-0.3),0.4),topK:tt-w("anil","top",-0.3)});
-      ol_tagAt(x,tt,w("cost","waiting",-0.1),c.loud-0.5,140,680,"What waiting costs: the cost of delay",{col:LP.amber});
-      ol_tagAt(x,tt,w("cost","Reinertsen",-0.2),c.loud-0.5,140,758,"Donald Reinertsen, 2009",{col:LP.mut});
-      ol_tagAt(x,tt,w("anil","spreadsheet",-0.2),c.dash-0.5,940,446,"His own copy of staff records",{col:LP.amber});
-      ol_cardAt(x,tt,d0,out,1020,150,760,OL_DASH,OL_DASHV,{light:"day",u:ag_in(tt,d0+0.3,1.2),score:ag_in(tt,w("dash","decision",-0.2),0.5),
+      ol_tagAt(x,tt,w("value","value",-0.3),c.loud-0.5,140,680,"Value: the opportunity and the risk prevented",{col:LP.green});
+      // time is part of that value (the author, 12 November 2026): what would be lost by waiting counts in it, with no measure of its own
+      ol_tagAt(x,tt,w("time","time",-0.3),c.loud-0.5,140,750,"Time is part of it: what would be lost by waiting",{col:LP.green});
+      ol_tagAt(x,tt,w("anil","spreadsheet",-0.2),c.dash-0.5,940,394,"His own copy of staff records",{col:LP.amber});
+      ol_cardAt(x,tt,d0,out,1020,150,760,OL_DASH,OL_DASHV,{light:"day",u:ag_in(tt,d0+0.3,1.2),val:ag_in(tt,d0+1.1,0.5),score:ag_in(tt,w("dash","decision",-0.2),0.5),
         wait:ag_in(tt,w("dash","waits",-0.2),0.4),waitK:tt-w("dash","waits",-0.2),why:ol_n(tt,[w("dash","why",-0.2),w("dash","when",-0.1)])});
       ol_tagAt(x,tt,w("dash","three",-0.2),out,1400,816,"Asked for three times",{align:"center",col:LP.amber});
       ol_pillAt(x,tt,w("loud","Never",-0.1),out,520,700,"Never by who asks, or how loudly",{col:LP.ink});}},
@@ -222,24 +224,27 @@ scene("six",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
 });
 
 /* ---------------------------------------------------------------- 6. Not now, and when */
-const OL_ROOMS={who:"The registrar's office",what:"Rooms' data for the new timetable"},OL_ROOMSV=[3,3,3,2];
-const OL_CLARA={who:"Clara, Planning",what:"A new student forecast model",why:"The timetable's date can't move",when:["Current model refreshed by 27 August","The new one by 29 October"]},OL_CLARAV=[3,2,1,3];
+const OL_ROOMS={who:"The registrar's office",what:"Rooms' data for the new timetable"},OL_ROOMSV=[3,3,2];
+// Clara's reason has two lines: the date that can't move, and why hers can (the new model is for December's admissions, so October is
+// still in time); her card is a line taller than the rooms' data's, and starts a line higher, so both end at the same height
+const OL_CLARA={who:"Clara, Planning",what:"A new student forecast model",why:["The timetable's date can't move","The new model is for December's admissions"],
+  when:["Current model refreshed by 27 August","The new one by 29 October"]},OL_CLARAV=[3,1,3];
 scene("when",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),gy={light:"grey"};
   ag_shots(ctx,S,t,sc.dur,[
     // the University Council's decision; the rooms' data the registrar's office needs for it, near the top
     {at:0,place:"olJuly",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const r0=w("rooms","registrar's",-0.3);
       ol_sheet(x,tt,0.9,140,160,720,{kick:"Thursday 24 June 2027",title:"The University Council",lines:["The timetable changes from 2028"]},
         {light:"grey",u:ag_in(tt,w("council","timetable",-0.2),0.5)});
-      ol_cardAt(x,tt,r0,null,1000,150,760,OL_ROOMS,OL_ROOMSV,{light:"grey",u:ag_in(tt,r0+0.3,1.2),score:ag_in(tt,w("rooms","move",-0.2),0.5),
-        top:ag_in(tt,w("rooms","top",-0.3),0.4),topK:tt-w("rooms","top",-0.3)});
-      ol_tagAt(x,tt,w("rooms","date",-0.2),null,1380,680,"Its date can't move",{align:"center",col:LP.amber});}},
+      ol_cardAt(x,tt,r0,null,1000,150,760,OL_ROOMS,OL_ROOMSV,{light:"grey",u:ag_in(tt,r0+0.3,1.2),val:ag_in(tt,r0+1.1,0.5),score:ag_in(tt,w("late","goes",-0.3),0.5),
+        hl:1,hlA:ag_in(tt,w("late","risk",-0.3),0.4),top:ag_in(tt,w("late","top",-0.3),0.4),topK:tt-w("late","top",-0.3)});
+      ol_tagAt(x,tt,w("late","date",-0.2),null,1380,680,"Its date can't move",{align:"center",col:LP.amber});}},
     // Clara's request: the same list, weighed the same way; not now, with a reason and a date
     {at:c.clara-0.3,place:"olJuly",later:true,keys:[[0,960,540,1.0]],draw:(x,tt)=>{const k0=w("clara","asks",-0.2);
       lp_person(x,"clara",280,640,1.0,{t:tt,a:ag_in(tt,c.clara+0.2,0.6),light:gy});
       lp_nameTag(x,470,300,"clara",{a:ag_in(tt,w("clara","Clara",-0.1),0.5)});
-      ol_cardAt(x,tt,k0,null,1000,150,760,OL_CLARA,OL_CLARAV,{light:"grey",u:ag_in(tt,w("clara","model",0),2.0),score:ag_in(tt,w("same","weighed",-0.1),0.5),
+      ol_cardAt(x,tt,k0,null,1000,112,760,OL_CLARA,OL_CLARAV,{light:"grey",u:ag_in(tt,w("clara","model",0),2.0),val:ag_in(tt,w("clara","model",1.6),0.5),score:ag_in(tt,w("same","weighed",-0.1),0.5),
         wait:ag_in(tt,w("same","not now",-0.2),0.4),waitK:tt-w("same","not now",-0.2),
-        why:ol_n(tt,[w("reason","timetable's",-0.2),w("reason","current",-0.2),w("reason","new one",-0.2)])});
+        why:ol_n(tt,[w("reason","timetable's",-0.2),w("reason","new model",-0.2),w("date","current",-0.2),w("date","new one",-0.2)])});
       ol_tagAt(x,tt,w("ldp","Saying",-0.1),null,1380,840,"Saying it well: Leading data people",{align:"center",col:LP.mut});}},
     // emergency departments still do this: triage, today
     {at:c.ats-0.3,place:"olJuly",later:true,keys:[[0,960,540,1.0]],draw:(x,tt)=>{const s0=c.ats+0.2;
@@ -251,7 +256,7 @@ scene("when",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 
 /* ---------------------------------------------------------------- 7. On Monday */
 const OL_DO=[["One","Close every side door","Kindly, each with a note",null],["Two","Ask what it's for","Not what to build",LP.blue],
-  ["Three","Order it in the open","Value, urgency, risk, effort",null],["Four","Protect time","And limit what's in progress",LP.blue],["Five","A reason and a date","And the list open to everyone",LP.amber]];
+  ["Three","Order it in the open","By value and effort",null],["Four","Protect time","And limit what's in progress",LP.blue],["Five","A reason and a date","And the list open to everyone",LP.amber]];
 scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),day={light:"day"},b0=c.breath-0.5,e0=c.breath+1.6;
   const DT=[w("close","close",-0.2),w("close","ask",-0.2),c.order-0.1,c.time-0.1,c.tell-0.1];
   ag_shots(ctx,S,t,sc.dur,[

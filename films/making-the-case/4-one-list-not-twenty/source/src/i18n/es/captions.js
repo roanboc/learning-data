@@ -3,7 +3,7 @@
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as the module's numbers.md has them: el equipo, la gestora de datos, el consejo de datos, el Consejo Universitario, la puerta de entrada,
    la lista única, el paquete de trabajo, la hoja de ruta, el almacén antiguo. The tracker is el gestor de tareas, and the list on it un tablero; a
-   dashboard is un panel; a request una solicitud; work in progress, el trabajo en curso; the cost of delay, el costo de la demora; triage, el triaje;
+   dashboard is un panel; a request una solicitud; work in progress, el trabajo en curso; value, el valor (an opportunity, una oportunidad, or a risk prevented, un riesgo evitado); triage, el triaje;
    "not now", un ahora no. Places as the picture names them: Speyer, Aboukir and Jena stay; the Rhine and Egypt are el Rin and Egipto. The films
    named keep their Spanish titles on the site: Una capacidad, no un proyecto; Liderar equipos de datos is the module's. Tú, as the film speaks
    to the viewer. */
@@ -38,10 +38,11 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Forty-five are left, on one list, in the tracker the team already uses.":"Quedan cuarenta y cinco, en una lista, en el gestor de tareas que el equipo ya usa.",
 "After Jena, Larrey wrote down one order: the most dangerously wounded first, without regard to rank or distinction.":"Tras Jena, Larrey dejó escrita una orden: los heridos más graves primero, sin consideración de rango ni distinción.",
 "Those hurt less could wait. Their lives weren't in danger.":"Los menos heridos podían esperar. Sus vidas no corrían peligro.",
-"Helena's team orders its list the same way, in the open: each request is weighed for its value, its urgency, and the risk while it waits.":"El equipo de Helena ordena su lista igual, a la vista: cada solicitud se pesa por su valor, su urgencia y el riesgo mientras espera.",
-"Together, they say what waiting costs: what Donald Reinertsen calls the cost of delay.":"Juntos, dicen lo que cuesta esperar: lo que Donald Reinertsen llama el costo de la demora.",
-"Divided by the effort, it puts small, urgent, valuable work first.":"Dividido por el esfuerzo, pone primero el trabajo pequeño, urgente y valioso.",
-"Anil's request is small, and while it waits, his own spreadsheet keeps a copy of staff records. It goes near the top.":"La solicitud de Anil es pequeña, y mientras espera, su hoja de cálculo guarda una copia de datos del personal. Queda entre las primeras.",
+"Helena's team orders its list the same way, in the open: each request is weighed for the opportunity it brings, and the risk it prevents.":"El equipo de Helena ordena su lista igual, a la vista: cada solicitud se pesa por la oportunidad que trae y el riesgo que evita.",
+"Together, they're its value.":"Juntos, son su valor.",
+"Divided by the effort, it puts small, valuable work first.":"Dividido por el esfuerzo, pone primero el trabajo pequeño y valioso.",
+"And time is part of that value: what would be lost by waiting counts too.":"Y el tiempo es parte de ese valor: lo que se perdería por esperar también cuenta.",
+"Anil's request is small, and it prevents a risk: his own spreadsheet keeps a copy of staff records. It goes near the top.":"La solicitud de Anil es pequeña, y evita un riesgo: su hoja de cálculo guarda una copia de datos del personal. Queda entre las primeras.",
 "A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again.":"Un panel pedido tres veces aún no nombra ninguna decisión. Espera, con una nota que dice por qué, y cuándo se volverá a ver.",
 "Never by who asks, or how loudly.":"Nunca por quién pide, ni por cuán fuerte.",
 "The list is a board in the tracker that anyone at the university can see, and the data council reads it every month.":"La lista es un tablero en el gestor de tareas que cualquiera en la universidad puede ver, y el consejo de datos la lee cada mes.",
@@ -52,17 +53,19 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "With fewer things started, each finishes sooner, and people get their answers sooner.":"Con menos cosas empezadas, cada una termina antes, y la gente recibe antes sus respuestas.",
 "When one is done, the top of the list moves in. Finish, then start.":"Cuando una termina, entra la primera de la lista. Primero terminar, luego empezar.",
 "On Thursday 24 June, the University Council asks for the timetable to change from 2028.":"El jueves 24 de junio, el Consejo Universitario pide que el horario de clases cambie a partir de 2028.",
-"The registrar's office needs the rooms' data for it by the end of August. That date can't move, so it goes near the top.":"Registro Académico necesita los datos de las aulas para fines de agosto. Esa fecha no se mueve, así que queda entre las primeras.",
+"The registrar's office needs the rooms' data for it by the end of August.":"Registro Académico necesita los datos de las aulas para fines de agosto.",
+"That date can't move: a late timetable is a risk to prevent. So it goes near the top.":"Esa fecha no se mueve: un horario tardío es un riesgo que evitar. Así que queda entre las primeras.",
 "On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.":"El lunes 12 de julio, Clara, de Planificación, pide un nuevo modelo de previsión de estudiantes, también para fines de agosto.",
 "It goes on the same list, weighed the same way, and it hears not now, with a reason and a date.":"Entra en la misma lista, se pesa igual, y recibe un ahora no, con una razón y una fecha.",
-"The reason: the timetable's date can't move. The date: the current model refreshed by the end of August, and the new one in October.":"La razón: la fecha del horario no se mueve. La fecha: el modelo actual, actualizado para fines de agosto, y el nuevo en octubre.",
+"The reason: the timetable's date can't move, and her new model is for December's admissions.":"La razón: la fecha del horario no se mueve, y su nuevo modelo es para las admisiones de diciembre.",
+"The date: the current model refreshed by the end of August, and the new one in October, still in time.":"La fecha: el modelo actual, actualizado para fines de agosto, y el nuevo en octubre, todavía a tiempo.",
 "Saying it well, face to face, is a skill of its own, shown in the leading data people module.":"Decirlo bien, cara a cara, es una habilidad en sí misma, y la muestra el módulo Liderar equipos de datos.",
 "Emergency departments still do this, and call it triage: in Australia, five categories, each with a longest wait, from at once to two hours.":"Las urgencias aún lo hacen, y lo llaman triaje: en Australia, cinco categorías, cada una con su espera máxima, de inmediato a dos horas.",
 "Not now always comes with a when.":"Un ahora no siempre llega con un cuándo.",
 "Larrey brought the wounded in from wherever they fell, and treated the worst first.":"Larrey traía a los heridos desde donde cayeran, y atendía primero a los más graves.",
 "Helena's team does the same with data: every request through one door, on one list, the most needed first.":"El equipo de Helena hace lo mismo con los datos: cada solicitud por una puerta, en una lista, lo más necesario primero.",
 "On Monday, close every side door, kindly, and ask what each request is for.":"El lunes, cierra cada puerta lateral, con amabilidad, y pregunta para qué es cada solicitud.",
-"Order the list in the open, by value, urgency, risk and effort.":"Ordena la lista a la vista, por valor, urgencia, riesgo y esfuerzo.",
+"Order the list in the open, by value and effort.":"Ordena la lista a la vista, por valor y esfuerzo.",
 "Protect time for the roadmap and for running what you have, and limit what's in progress.":"Protege tiempo para la hoja de ruta y para operar lo que tienes, y limita lo que está en curso.",
 "Give every request that waits a reason and a date, and show the list to everyone.":"Da a cada solicitud que espera una razón y una fecha, y muestra la lista a todos."
 });

@@ -30,3 +30,11 @@ The last of three films of *Working with people*, in the module *Leading data pe
 | 18 | Does August agree with *Measure the work, not the people* (film 12), where the team is over its limit of six on Thursday 12 August? | Yes: the same busy August, seen from the other side. This film's no is one of the ways the team keeps its load down; it doesn't name film 12's measures. | Chapter 4 |
 | 19 | A Spanish voice (the optional `soundtrack.es.mp3`)? | Not made, as the module's other films: Spanish is captions and the page. | The Spanish page |
 | 20 | The poster | The offer: both dates above Helena and Clara, once both sheets are whole (4.4 s into "And the new model by Friday 29 October"). | The film's page and cards |
+
+## 12 November 2026: the list's order
+
+The expert review asked how *One list, not twenty* (data management) orders its list. Rodrigo answered in the project chat on 12 November 2026: "We generally follow the principle value (positive risk or negative risk prevention) and effort." That film changed the same day, and this one quotes its list, so it follows in the same pull request.
+
+| # | Question | Assumption | Where it shows |
+|---|---|---|---|
+| 21 | This film said the one list was "ordered by value, urgency, effort and risk". Change it with the film it quotes? | Yes, so the two films agree: "The list is ordered by value and effort, never by who asks." The list's footer says "Ordered by value and effort", and the order's sheet "By value and effort". What value means (an opportunity, or a risk prevented) is taught in *One list, not twenty*, not here. That one line was voiced again and the soundtrack mixed again (8:15.4, 1104 words), with a new audio release tag (`audio-saying-no-c944ee1f7975a2d88055`) | Chapters 2, 4 and 5 (the list's footer); chapter 4 (the line and the sheet); the question after chapter 4; the page's description |

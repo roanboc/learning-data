@@ -157,7 +157,7 @@ scene("open",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       sn_tag(x,tt,w("refresh","week",-0.2),null,1015,672,"The refresh fits",{align:"center",col:LP.orange});}},
     // the order isn't Helena's: fair criteria; then options that serve both interests
     {at:c.order-0.3,place:"lpRoom",later:true,keys:[[c.order-0.3,960,540,1.0]],draw:(x,tt)=>{
-      sn_sheet(x,tt,w("order","order",-0.2),120,130,820,{kick:"The order",title:"Not Helena's to choose",lines:["By value, urgency, effort and risk","Never by who asks"]},{light:"day",u:sn_u(tt,[w("order","value",-0.2),w("order","never",-0.1)])});
+      sn_sheet(x,tt,w("order","order",-0.2),120,130,820,{kick:"The order",title:"Not Helena's to choose",lines:["By value and effort","Never by who asks"]},{light:"day",u:sn_u(tt,[w("order","value",-0.2),w("order","never",-0.1)])});
       sn_sheet(x,tt,w("fair","Fisher",-0.3),980,130,820,{kick:"Fisher and Ury",title:"Fair criteria",lines:["What both sides can check","Not who pushes harder"]},{light:"day",u:sn_u(tt,[w("fair","check",-0.3),w("fair","pushes",-0.3)])});
       sn_sheet(x,tt,w("options","options",-0.3),550,500,820,{kick:"Options for both interests",lines:["The budget, by September","Early warning, by December"]},{col:LP.blue,light:"day",u:sn_u(tt,[w("options","budget",-0.3),w("options","warning",-0.3)])});}}
   ]);

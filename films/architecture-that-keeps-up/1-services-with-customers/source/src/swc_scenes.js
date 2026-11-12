@@ -144,9 +144,13 @@ scene("layers",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       lp_person(x,"helena",330,640,1.0,{t:tt,a:g*ag_in(tt,0.4,0.6),light:mo});lp_person(x,"noor",1620,660,0.95,{t:tt,flip:true,a:g,light:mo});}},
     // five layers, a picture each
     {at:c.five-0.3,place:"swcMay",later:true,keys:[[c.five-0.3,960,540,1.0]],draw:(x,tt)=>{
-      let hl=-1;for(const [id,i] of HL)if(tt>=c[id]-0.1)hl=i;if(tt>=c.each-0.2)hl=-1;
+      // the information layer lights up while its other name is said: TOGAF and DAMA call it data
+      let hl=tt>=w("names","information",-0.1)?2:-1;for(const [id,i] of HL)if(tt>=c[id]-0.1)hl=i;if(tt>=c.each-0.2)hl=-1;
       swc_layers(x,360,206,1200,{a:1-ag_in(tt,c.none-0.7,0.4),u:L0.map(t0=>ag_in(tt,t0,0.6)),hl,top:ag_in(tt,w("each","customer",-0.2),0.6),light:"morning"});
-      swc_tag(x,tt,w("names","ArchiMate's",-0.2),c.strategy-0.3,960,130,"ArchiMate's layers; TOGAF's data is information",{align:"center",col:LP.ink});}},
+      // the note, then the film that explains the two words; the first leaves before the second comes in
+      const n1=w("either","Between",-0.3);
+      swc_tag(x,tt,w("names","TOGAF",-0.2),n1-0.5,960,130,"TOGAF and DAMA call it data",{align:"center",col:LP.ink});
+      swc_tag(x,tt,n1,c.strategy-0.3,960,130,"More in Between the business and the systems",{align:"center",col:LP.ink});}},
     // the old warehouse: the reports no one opens
     {at:c.none-0.3,place:"swcMay",later:true,keys:[[c.none-0.3,960,540,1.0]],draw:(x,tt)=>{const r0=w("none","warehouse",-0.1);
       swc_reports(x,540,170,{a:ag_in(tt,r0,0.4),u:ag_in(tt,r0,1.4),amb:ag_in(tt,w("none","seventeen",-0.1),1.0)});

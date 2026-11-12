@@ -29,7 +29,7 @@ After his answer on the data quality film *Small, every week* ("let's go with PD
 
 > yes, knowing the difference was explained in the video that introduced the topic
 
-This film never says the cycle's name. Only its script's table of references did, so only that changed (PR #NNN).
+This film never says the cycle's name. Only its script's table of references did, so only that changed (PR #356).
 
 | # | Question | Assumption made | Where it shows | If it's wrong |
 |---|---|---|---|---|

@@ -1,6 +1,6 @@
 # Plan, define the check, do, check: questions and assumptions
 
-*AI agents in data work* · *Agents at work on data*, film 5 of 9 · made on 4 November 2026; its script's sources changed on 12 November 2026 from Rodrigo's decision that every module names the cycle plan, do, study, act (PR #NNN) · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*AI agents in data work* · *Agents at work on data*, film 5 of 9 · made on 4 November 2026; its script's sources changed on 12 November 2026 from Rodrigo's decision that every module names the cycle plan, do, study, act (PR #356) · [pull request](https://github.com/roanboc/learning-data/pull/356)
 
 [Watch it on the site](https://data.learn-all.org/agents-at-work-on-data/plan-check-do-check/)
 
@@ -12,7 +12,7 @@ After his answer on the data quality film *Small, every week* ("let's go with PD
 
 > yes, knowing the difference was explained in the video that introduced the topic
 
-This film never says that cycle's name. Its script's sources did, and so did the series' table of references, so only those changed (PR #NNN).
+This film never says that cycle's name. Its script's sources did, and so did the series' table of references, so only those changed (PR #356).
 
 | # | Question | Assumption made | Where it shows | If it's wrong |
 |---|---|---|---|---|

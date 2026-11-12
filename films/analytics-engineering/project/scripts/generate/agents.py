@@ -275,7 +275,8 @@ def grants_sql(p, tools):
                 lines.append(f"-- dbt builds a schema for each layer ({p['schema']}_staging, {p['schema']}_marts, ...), so it creates its")
                 lines.append("-- own schemas in the development catalog, and owns only what it creates.")
             elif reads:
-                lines.append("-- Names masked: the group isn't a reader of direct personal data, so the catalog's policy masks them.")
+                lines.append("-- Personal and sensitive data masked: the group isn't a reader of direct personal data, so the catalog's policy")
+                lines.append("-- masks it, and these schemas hold nothing special category or restricted.")
         else:
             lines.append("-- The tools its steps call, through Unity Gateway: their catalog and schemas. EXECUTE on each")
             lines.append("-- model and tool server is in unity-gateway.yml, with the steps that call it.")
@@ -439,7 +440,7 @@ def readme(p, tools, files):
     models = sorted(k[1] for k in p["gateway"] if k[0] == "model_service")
     perms = " and ".join(p["github"])
     names = [f"| Databricks | Its service principal, \"{p['name']}\", `{p['sp']}` | Its role's group, `{p['group']}`: "
-             f"reads production ({', '.join(sorted({k[2].split('.')[1] for k in p['uc'] if k[0] == 'SELECT'}))}, names masked), and builds only in "
+             f"reads production ({', '.join(sorted({k[2].split('.')[1] for k in p['uc'] if k[0] == 'SELECT'}))}; personal and sensitive data masked), and builds only in "
              f"schemas of its own in `{dbx['development']}` | `grants.sql` |",
              f"| Unity Gateway | The same | `EXECUTE` on {len(models)} model ({', '.join(f'`{m}`' for m in models)}) and {len(tools_)} tool servers "
              f"({', '.join(f'`{t}`' for t in tools_)}) | `unity-gateway.yml` |"]

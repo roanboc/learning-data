@@ -100,12 +100,14 @@ scene("access",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({grp:wAt(sc,
       err:clamp((tt-P.dbt-0.1)/1.6,0,1),jun:fin(tt,P.jun-0.3,0.6),refs:clamp((tt-P.only+0.1)/0.9,0,1),sql:clamp((tt-P.only)/1.0,0,1),
       key:clamp((tt-P.read+0.2)/1.4,0,1.5),nextAt:P.next})}],sc.dur));});
 
-// ---- 4 · A promise the build keeps: a contract, a mismatch that stops a build, two versions side by side, and exposures ----
+// ---- 4 · A promise the build keeps: a contract, a mismatch that stops a build, two versions side by side, exposures, contracts
+// agreed team to team, and the enterprise contract of the canonical tables ----
 scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({con:wAt(sc,"contract","a contract"),cols:wAt(sc,"contract","these columns"),
     types:wAt(sc,"contract","these types"),mis:c.mismatch-0.4,checks:wAt(sc,"mismatch","checks it"),mism:wAt(sc,"mismatch","a mismatch"),stops:wAt(sc,"mismatch","stops the table"),
     ver:c.version-0.4,verS:c.version,newv:wAt(sc,"version","a new version"),old:wAt(sc,"version","the old one"),dateTo:wAt(sc,"version","a date to go"),
     date:wAt(sc,"date","goes on",0.3),exp:c.exposures-0.4,uses:wAt(sc,"exposures","who uses"),answers:wAt(sc,"exposures","who answers"),
-    can:c.canonical-0.4,core:wAt(sc,"canonical","the shared core"),ent:wAt(sc,"canonical","an enterprise contract"),arch:wAt(sc,"architect","information architect"),
+    tm:c.teams-0.4,tmS:c.teams,head:wAt(sc,"teams","agreed team to team"),rd:wAt(sc,"teams","reads the data"),sd:wAt(sc,"teams","sends it"),gov:wAt(sc,"teams","wait on governance"),
+    can:wAt(sc,"canonical","the shared core")-0.5,core:wAt(sc,"canonical","the shared core"),ent:wAt(sc,"canonical","an enterprise contract"),arch:wAt(sc,"architect","information architect"),
     team:wAt(sc,"architect","the data team"),cmp:wAt(sc,"differ","compares the two"),diff:wAt(sc,"differ","data governance")}));
   gv_shots(ctx,S,t,sc.dur,gd_run([
     // the desk: the near-award table's columns and types, and the setting that enforces its contract, with Yusuf's pin
@@ -121,9 +123,14 @@ scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({con:wAt(s
     // the desk: three exposures, who uses each table and who answers for each use
     {at:P.exp,place:"desk",keys:[[P.exp,960,480,1]],push:0.02,draw:(x,tt)=>gd_exposures(x,{at:[0,1,2].map(i=>clamp((tt-P.exp-0.1-0.35*i)/0.7,0,1)),
       use:fin(tt,P.uses,0.5),own:fin(tt,P.answers,0.5)})},
-    // the board: an enterprise contract for the canonical tables only, written first by data governance's information architect; the
-    // data team's dbt contract builds to it; a check compares the two, and a difference goes to data governance
-    {at:P.can,place:"board",keys:[[P.can,960,480,1]],push:0.02,draw:(x,tt)=>gd_enterprise(x,tt,{ent:fin(tt,P.ent-0.1,0.6),core:clamp((tt-P.core)/1.2,0,1),
+    // the board: contracts like these are agreed team to team, the data team with a team that reads its data or one that sends it, and
+    // data governance isn't asked
+    {at:P.tm,place:"board",keys:[[P.tm,960,480,1]],push:0.02,draw:(x,tt)=>gd_teams(x,tt,{me:fin(tt,P.tmS-0.1,0.5),head:fin(tt,P.head-0.1,0.6),
+      rd:clamp((tt-P.rd+0.1)/1.0,0,1),sd:clamp((tt-P.sd+0.1)/1.0,0,1),govAt:P.gov})},
+    // the board, a moment later: an enterprise contract for the canonical tables only, written first by data governance's information
+    // architect; the data team's dbt contract builds to it; a check compares the two, and a difference goes to data governance. The teams
+    // stay through the pause and leave just before the shared core is named, so the board is never bare for long
+    {at:P.can,place:"board",later:true,keys:[[P.can,960,480,1]],push:0.02,draw:(x,tt)=>gd_enterprise(x,tt,{ent:fin(tt,P.ent-0.1,0.6),core:clamp((tt-P.core)/1.2,0,1),
       arch:fin(tt,P.arch,0.5),team:fin(tt,P.team-0.1,0.6),cmp:clamp((tt-P.cmp)/0.8,0,1),diff:fin(tt,P.diff,0.4),diffAt:P.diff})}],sc.dur));});
 
 // ---- 5 · What this change touches: the impact report on Jun's pull request; Monday's meaning, in the glossary first; Tuesday's

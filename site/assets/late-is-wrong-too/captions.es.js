@@ -5,10 +5,11 @@
    award, el control for a check, la imprenta for the printer, el sistema de estudiantes, el Aula Magna, Planificación, la actualización nocturna for the night's update,
    la frescura (dbt's freshness) and la puntualidad (the dimension, timeliness), as the series' page says. New here: la antigüedad for how old the data is ("la lista
    dice su antigüedad"), el archivo nocturno for the nightly file, atrasado for late, las juntas de examen for the exam boards, el envío for the send, un trabajo for a
-   job (as Microsoft Learn's Spanish pages call a Lakeflow job); for the opening, Pakistán Oriental and Bangladés (the Real Academia's spelling), la marejada
+   job (as Microsoft Learn's Spanish pages call a Lakeflow job), el registro for a record and la carga for a load; for the opening, Pakistán Oriental and Bangladés (the Real Academia's spelling), la marejada
    ciclónica for the storm surge, la señal de gran peligro, la última milla, la Sociedad de la Cruz Roja de Bangladés and el Programa de Preparación ante Ciclones.
    The films the voice names keep their Spanish titles (Reglas que se ejecutan, Demasiado bueno para ser verdad, Caliente, tibio, frío, Apto para su uso, La calidad
-   como hábito). Names on screen stay as they are: EVERY CHECK PASSES, 30 HOURS OLD, student_system_as_of, nightly_files, received_at. */
+   como hábito). Names on screen stay as they are: EVERY CHECK PASSES, 30 HOURS OLD, student_system_as_of, nightly_files, newest_record_at, and the three dates'
+   names (business date, system date, load date). */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "November 1970: the coast of East Pakistan, now Bangladesh.":
 "Noviembre de 1970: la costa de Pakistán Oriental, hoy Bangladés.",
@@ -86,14 +87,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A las 11:40 llega el archivo; a las 12:10 la lista se construye de nuevo, con 712 graduados.",
 "Malia's team checks the 23 new names, and at 3:20 the list goes.":
 "El equipo de Malia revisa los 23 nombres nuevos, y a las 3:20 la lista sale.",
-"The December before, six graduates were left off the same way, and nobody saw. Their certificates were printed late, and posted.":
-"El diciembre anterior, seis graduados quedaron fuera igual, y nadie lo vio. Sus diplomas se imprimieron tarde, y se enviaron por correo.",
+"The December before, six graduates were left off, and nobody saw. Their certificates were printed late, and posted.":
+"El diciembre anterior, seis graduados quedaron fuera, y nadie lo vio. Sus diplomas se imprimieron tarde, y se enviaron por correo.",
 "On Monday, Malia and Sam meet Mei Tanaka, who owns the list.":
 "El lunes, Malia y Sam se reúnen con Mei Tanaka, que está a cargo de la lista.",
 "The platform can see that a table is late. Only its users can say when late is too late.":
 "La plataforma puede ver que una tabla está atrasada. Solo sus usuarios pueden decir cuándo es demasiado tarde.",
-"The certificates can't wait: they need that night's files when the list goes to the printer.":
-"Los diplomas no pueden esperar: necesitan los archivos de esa noche cuando la lista va a la imprenta.",
+"The certificates can't wait: they need yesterday's awards on the list when it goes to the printer.":
+"Los diplomas no pueden esperar: necesitan los títulos de ayer en la lista cuando va a la imprenta.",
 "Seating the Great Hall can: it's counted a week before, from a list a few days old.":
 "Los asientos del Aula Magna sí: se cuentan una semana antes, con una lista de hace unos días.",
 "Planning's count for the government comes after the year's end: weeks are fine.":
@@ -108,10 +109,24 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Reglas que se ejecutan dejó la puntualidad a lápiz, sin controles. Esta es su primera regla.",
 "From now on, the list says how old it is.":
 "Desde ahora, la lista dice su antigüedad.",
-"Every row carries its sources' age: when the files it was built from arrived.":
-"Cada fila lleva la antigüedad de sus fuentes: cuándo llegaron los archivos con que se construyó.",
-"Each source has its own. That Thursday, it would have said: student system, Wednesday at two; portal, Thursday at two.":
-"Cada fuente tiene la suya. Aquel jueves habría dicho: sistema de estudiantes, miércoles a las dos; portal, jueves a las dos.",
+"Old, counted from when? Every record has three dates.":
+"¿Antigüedad contada desde cuándo? Cada registro tiene tres fechas.",
+"When it happened: the board approved this award on Wednesday.":
+"Cuándo ocurrió: la junta aprobó este título el miércoles.",
+"When the student system saved it: that afternoon.":
+"Cuándo lo guardó el sistema de estudiantes: esa tarde.",
+"And when its file arrived: Thursday, at 11:40.":
+"Y cuándo llegó su archivo: el jueves, a las 11:40.",
+"The first is the one that matters. But each table says it in its own way, and when no board meets, there's none to read.":
+"La primera es la que importa. Pero cada tabla la dice a su manera, y si ninguna junta se reúne, no hay ninguna que leer.",
+"The last is the easiest, and says the least: for December's list, a file came on time, full of the day before's records.":
+"La última es la más fácil, y la que menos dice: para la lista de diciembre, un archivo llegó a tiempo, con registros del día anterior.",
+"So the list goes by the second: the date every load already uses to find what's new.":
+"Así que la lista se guía por la segunda: la fecha que toda carga ya usa para saber qué es nuevo.",
+"Every row carries its sources' age: the newest record each one had saved.":
+"Cada fila lleva la antigüedad de sus fuentes: el registro más nuevo que cada una había guardado.",
+"Each source has its own. That Thursday, it would have said: student system, Wednesday, before two; portal, Thursday, before two.":
+"Cada fuente tiene la suya. Aquel jueves habría dicho: sistema de estudiantes, miércoles antes de las dos; portal, jueves antes de las dos.",
 "It's shown wherever the list is, first of all in the printer's file.":
 "Se muestra dondequiera que esté la lista, primero en el archivo de la imprenta.",
 "Like the volunteers' flags, it's a signal everyone can read.":
@@ -124,18 +139,22 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los que no la dicen, no.",
 "Then Sam checks the age where it starts: at each source.":
 "Luego Sam revisa la antigüedad donde empieza: en cada fuente.",
-"dbt reads when each night's file arrived, not the newest row, which can be days old when no board has met.":
-"dbt lee cuándo llegó el archivo de cada noche, no la fila más nueva, que puede tener días si ninguna junta se ha reunido.",
+"dbt reads the same date there: the newest record each source saved, not when its file arrived.":
+"dbt lee allí la misma fecha: el registro más nuevo que guardó cada fuente, no cuándo llegó su archivo.",
 "One level on each: older than twenty-four hours, the check fails.":
 "Un nivel en cada una: con más de veinticuatro horas, el control falla.",
-"Each night, the update runs that check first.":
-"Cada noche, la actualización ejecuta ese control primero.",
-"If it fails, Sam and Malia hear at once, and the list is still built, saying its age.":
-"Si falla, Sam y Malia se enteran de inmediato, y la lista se construye igual, diciendo su antigüedad.",
+"But old records can't say why: did no file come, or did the file bring nothing new?":
+"Pero los registros viejos no dicen por qué: ¿no llegó el archivo, o llegó sin nada nuevo?",
+"So the file's arrival is still checked, as a second alarm: no file tonight means the source has gone silent.":
+"Así que la llegada del archivo se sigue revisando, como segunda alarma: sin archivo esta noche, la fuente quedó en silencio.",
+"Each night, the update runs both checks first.":
+"Cada noche, la actualización ejecuta primero ambos controles.",
+"If either fails, Sam and Malia hear at once, and the list is still built, saying its age.":
+"Si alguno falla, Sam y Malia se enteran de inmediato, y la lista se construye igual, diciendo su antigüedad.",
 "That's the warning: nothing stops, and the people who need to know, know.":
 "Ese es el aviso: nada se detiene, y quienes necesitan saberlo, lo saben.",
-"The send to the printer is a job too, and runs the same check.":
-"El envío a la imprenta también es un trabajo, y ejecuta el mismo control.",
+"The send to the printer is a job too. It checks the list's own age.":
+"El envío a la imprenta también es un trabajo. Revisa la antigüedad de la propia lista.",
 "It sends only if the check passes; if not, the list waits, and Malia is told why.":
 "Solo envía si el control pasa; si no, la lista espera, y a Malia se le dice por qué.",
 "The data isn't stopped. The send is.":
@@ -144,8 +163,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los voluntarios no pueden detener una tormenta. Se aseguran de que el aviso llegue a tiempo, en palabras que la gente entiende.",
 "A list can't make a late file come. It can say how old it is, and the send can wait until it's fresh.":
 "Una lista no puede hacer llegar un archivo atrasado. Puede decir su antigüedad, y el envío puede esperar a que esté fresca.",
-"Since June, no graduate has been left off a list by a late file.":
-"Desde junio, ningún graduado ha quedado fuera de una lista por un archivo atrasado.",
+"Since June, no graduate has been left off a list by late data.":
+"Desde junio, ningún graduado ha quedado fuera de una lista por datos atrasados.",
 "Agree how fresh it must be, and always say how old it is.":
 "Acuerda cuán frescos deben estar los datos, y di siempre su antigüedad.",
 "Fit for use ends here: a use, a measure, a reference and a clock. Next, Quality as a habit.":

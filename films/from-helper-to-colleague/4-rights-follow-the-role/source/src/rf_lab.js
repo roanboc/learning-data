@@ -58,13 +58,14 @@ function rf_flow(ctx,x,y,items,o){o=o||{};let px=x;const out=[];items.forEach((i
     out.push(rf_pillL(ctx,px,y,q.t,{col:q.col||AG.blue,icon:q.icon,a,size:o.size}));px+=w;});return out;}
 
 /* ---------------------------------------------------------------- a card of rows
-   head {kick, title, kickCol}; rows [{t, lab, chip, chipA, a, col, icon, dash, mute, size}]: each row's words (wrapped to the card),
+   head {kick, title, kickCol}; rows [{t, lines, lab, chip, chipA, a, col, icon, dash, mute, size}]: each row's words (wrapped to the card,
+   or given as lines where the wrap would leave one word alone),
    an optional label in capitals before them (lab, such as READS), and an optional chip at the right (the step that needs it). The
    card's size is worked out from all its rows, so it never grows as they come in. o.labW: the labels' column; o.edge, o.glow, o.a,
    o.k (springs from its middle), o.rowH (46); o.dash draws the card's edge dashed (a step proposed, not yet on the map) */
 function rf_rows(ctx,x,y,w,head,rows,o){o=o||{};const a=o.a==null?1:o.a,pad=28,labW=o.labW||0,rh=o.rowH||46,size=o.size||30;
   const chipW=r=>r.chip?ag_tw(ctx,r.chip,{w:700,size:28})+44:0;
-  const lines=rows.map(r=>ag_wrap(ctx,r.t,w-pad*2-labW-(r.chip?chipW(r)+20:0)-(r.icon?40:0),{w:r.mute?600:700,size:r.size||size}));
+  const lines=rows.map(r=>r.lines||ag_wrap(ctx,r.t,w-pad*2-labW-(r.chip?chipW(r)+20:0)-(r.icon?40:0),{w:r.mute?600:700,size:r.size||size}));
   const hh=(head.kick?38:0)+(head.title?44:0),top=y+pad+hh+(hh?12:-8);let yy=top;const ys=lines.map(l=>{const at=yy;yy+=Math.max(1,l.length)*(rh-8)+8;return at;});
   const h=yy-y+pad-8,bb={x,y,w,h};if(a<=0)return Object.assign(bb,{rows:ys.map((ry,i)=>({y:ry,h:Math.max(1,lines[i].length)*(rh-8)}))});
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));

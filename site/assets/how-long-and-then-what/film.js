@@ -434,13 +434,13 @@ const NARR={
  {"id":"uni","gap":0.8,"text":"Data piles up the same way: at the university, the platform keeps every record with no end date, because nobody has decided."},
  {"id":"end","gap":0.8,"text":"Like the schedules of 1943, each kind of record can have its end date, decided before it's needed.","say":"Like the schedules of nineteen forty-three, each kind of record can have its end date, decided before it's needed."}
 ]},
-"lives":{"name":"Three lives of a record","lead":0.9,"tail":1.0,"vo":[
+"lives":{"name":"Three stages of a record","lead":0.9,"tail":1.0,"vo":[
  {"id":"oct","gap":0.8,"text":"October 2026.","say":"October, twenty twenty-six."},
  {"id":"look","gap":0.8,"text":"Ingrid Holm, who owns HR's records, looks at what the platform holds, with Yusuf Demir from data governance."},
  {"id":"pay","gap":0.8,"text":"Pay records going back to 2016, and applications from people never hired, back to 2017.","say":"Pay records going back to twenty sixteen, and applications from people never hired, back to twenty seventeen."},
  {"id":"never","gap":0.8,"text":"Nothing has ever been deleted: every record is kept as if it were in use, forever."},
- {"id":"three","gap":0.8,"text":"But a record has three lives."},
- {"id":"use","gap":0.8,"text":"First, it's in use, read and changed often, like Linh Nguyen's pay records this year."},
+ {"id":"three","gap":0.8,"text":"But a record goes through three stages."},
+ {"id":"use","gap":0.8,"text":"First, it's live: in use, read and changed often, like Linh Nguyen's pay records this year."},
  {"id":"archived","gap":0.8,"text":"Then it's archived: kept cold, read rarely, by fewer people, like her pay records from past years."},
  {"id":"deleted","gap":0.8,"text":"Then, at its end date, it's deleted."},
  {"id":"good","gap":0.8,"text":"Or, for the few with lasting value, it's kept for good, like her degrees and results."},
@@ -497,7 +497,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"flood/dc": 2.016, "flood/war": 5.975, "flood/cabinets": 4.149, "flood/flood": 6.505, "flood/eighty": 4.567, "flood/list": 4.193, "flood/again": 4.825, "flood/kept": 5.202, "flood/cost": 3.793, "flood/close": 5.968, "flood/proof": 3.938, "flood/change": 3.442, "before/law": 7.807, "before/once": 2.057, "before/kind": 3.719, "before/approve": 4.486, "before/pile": 2.783, "before/claim": 5.964, "before/other": 2.739, "before/saved": 7.845, "before/budget": 3.344, "before/today": 4.668, "before/family": 3.668, "before/uni": 8.12, "before/end": 6.583, "lives/oct": 1.792, "lives/look": 6.972, "lives/pay": 6.723, "lives/never": 4.829, "lives/three": 1.545, "lives/use": 5.39, "lives/archived": 6.193, "lives/deleted": 2.119, "lives/good": 5.057, "lives/year": 6.182, "lives/plan": 5.049, "schedule/lists": 4.236, "schedule/one": 3.27, "schedule/row": 5.025, "schedule/owners": 7.191, "schedule/payrow": 7.781, "schedule/academic": 6.132, "schedule/others": 5.048, "schedule/reason": 5.768, "schedule/signed": 3.043, "schedule/first": 3.387, "schedule/went": 5.874, "clock/event": 3.617, "clock/contract": 2.767, "clock/eight": 6.724, "clock/firstc": 6.999, "clock/lastc": 8.013, "clock/others": 5.623, "clock/follows": 3.71, "clock/friday": 3.752, "clock/nobody": 4.754, "clock/as43": 3.497, "hold/stay": 2.608, "hold/tutor": 5.623, "hold/due": 5.068, "hold/show": 3.62, "hold/places": 2.74, "hold/names": 4.601, "hold/skips": 3.347, "hold/never": 4.493, "hold/lifts": 5.619, "hold/as43": 4.274, "end/short": 5.016, "end/long": 4.077, "end/laws": 5.462, "end/outside": 5.813, "end/copy": 5.579, "end/dmd": 3.061, "end/pile": 7.381, "end/few": 3.09, "end/every": 4.965};
+const VODUR={"flood/dc": 2.016, "flood/war": 5.975, "flood/cabinets": 4.149, "flood/flood": 6.505, "flood/eighty": 4.567, "flood/list": 4.193, "flood/again": 4.825, "flood/kept": 5.202, "flood/cost": 3.793, "flood/close": 5.968, "flood/proof": 3.938, "flood/change": 3.442, "before/law": 7.807, "before/once": 2.057, "before/kind": 3.719, "before/approve": 4.486, "before/pile": 2.783, "before/claim": 5.964, "before/other": 2.739, "before/saved": 7.845, "before/budget": 3.344, "before/today": 4.668, "before/family": 3.668, "before/uni": 8.12, "before/end": 6.583, "lives/oct": 1.792, "lives/look": 6.972, "lives/pay": 6.723, "lives/never": 4.829, "lives/three": 2.078, "lives/use": 5.834, "lives/archived": 6.193, "lives/deleted": 2.119, "lives/good": 5.057, "lives/year": 6.182, "lives/plan": 5.049, "schedule/lists": 4.236, "schedule/one": 3.27, "schedule/row": 5.025, "schedule/owners": 7.191, "schedule/payrow": 7.781, "schedule/academic": 6.132, "schedule/others": 5.048, "schedule/reason": 5.768, "schedule/signed": 3.043, "schedule/first": 3.387, "schedule/went": 5.874, "clock/event": 3.617, "clock/contract": 2.767, "clock/eight": 6.724, "clock/firstc": 6.999, "clock/lastc": 8.013, "clock/others": 5.623, "clock/follows": 3.71, "clock/friday": 3.752, "clock/nobody": 4.754, "clock/as43": 3.497, "hold/stay": 2.608, "hold/tutor": 5.623, "hold/due": 5.068, "hold/show": 3.62, "hold/places": 2.74, "hold/names": 4.601, "hold/skips": 3.347, "hold/never": 4.493, "hold/lifts": 5.619, "hold/as43": 4.274, "end/short": 5.016, "end/long": 4.077, "end/laws": 5.462, "end/outside": 5.813, "end/copy": 5.579, "end/dmd": 3.061, "end/pile": 7.381, "end/few": 3.09, "end/every": 4.965};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the
@@ -2268,7 +2268,7 @@ function hl_heap(c,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.save();c.
 
 /* ===== How long, and then what: the university =====
    The module's hall with the film's own lights; the platform as a tall block of clear glass, its shelves of frosted cards becoming
-   glass drawers once the schedule labels them; the three lives of a record; the retention schedule; Linh's contracts and their end
+   glass drawers once the schedule labels them; the three stages of a record; the retention schedule; Linh's contracts and their end
    dates; a drawer under a hold; and a record's line through time. Every word at least 28 px, on the kit's cards, slips and pills. */
 
 AG_PLACES.hlHall=c=>dp_paintHall(c,{seed:19,horizon:720,vx:960,pools:[[250,1010,420,0.11],[1670,1010,420,0.11],[960,860,760,0.05]]});
@@ -2510,18 +2510,18 @@ scene("before",(ctx,S,t,sc)=>{
   dp_title(ctx,S,t,sc.cues.breath,"How long, and then what","An end date for every record","FILM 2 OF 5 · KEPT FOR A REASON");
 });
 
-/* ---------------------------------------------------------------- 3 · Three lives of a record */
-// Ingrid and Yusuf at the hall's edges, looking in at the platform; between them, the block, then the three lives
+/* ---------------------------------------------------------------- 3 · Three stages of a record */
+// Ingrid and Yusuf at the hall's edges, looking in at the platform; between them, the block, then the three stages
 const HL_INGRID=[200,712,0.76],HL_YUSUF=[1720,712,0.76];
 function hl_pair(c,t,o){o=o||{};dp_person(c,"ingrid",HL_INGRID[0],HL_INGRID[1],HL_INGRID[2],{t,gaze:[3,0]});dp_person(c,"yusuf",HL_YUSUF[0],HL_YUSUF[1],HL_YUSUF[2],{t,flip:true,gaze:[3,0]});
   if(o.names>0){dp_pill(c,322,566,"Ingrid Holm","identity",{a:o.names*(o.ingrid==null?1:o.ingrid)});dp_pill(c,1598,566,"Yusuf Demir","identity",{a:o.names*(o.yusuf==null?1:o.yusuf),align:"right"});}}
 scene("lives",(ctx,S,t,sc)=>{
-  const tPay=wAt(sc,"pay","Pay records"),tApps=wAt(sc,"pay","applications"),tNever=wAt(sc,"never","Nothing"),tThree=wAt(sc,"three","three lives");
-  const tUse=wAt(sc,"use","in use"),tLinh=wAt(sc,"use","Linh"),tArch=wAt(sc,"archived","archived"),tCold=wAt(sc,"archived","read rarely");
+  const tPay=wAt(sc,"pay","Pay records"),tApps=wAt(sc,"pay","applications"),tNever=wAt(sc,"never","Nothing"),tThree=wAt(sc,"three","three stages");
+  const tUse=wAt(sc,"use","live"),tLinh=wAt(sc,"use","Linh"),tArch=wAt(sc,"archived","archived"),tCold=wAt(sc,"archived","read rarely");
   const tDel=wAt(sc,"deleted","deleted"),tGood=wAt(sc,"good","kept for good"),tYear=sc.cues.year-0.3,tLeak=wAt(sc,"year","leak"),tPlan=wAt(sc,"plan","deleting"),tLaw=wAt(sc,"plan","the law");
   const panesA=hl_v(t,tThree,tYear,0.8);
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"hlHall",push:0.012,draw:(x,tt)=>{
-    // the platform: full, nothing ever deleted; dimmed while the three lives are shown
+    // the platform: full, nothing ever deleted; dimmed while the three stages are shown
     const bA=1-0.82*panesA,yrs=Math.round(lerp(2016,2026,clamp((tt-tLeak+1.5)/2.6,0,1))),coral=ag_in(tt,tLeak,1.2);
     const sh=[0,1,2,3,4,5,6].map(i=>({n:8,warm:i===6,coral:i===0?coral:0}));hl_block(x,sh,{a:bA,behind:"hlHall"});
     hl_greyTag(x,1190,hl_shelfAt(1,7),"Pay records · since 2016",{behind:"hlHall",a:hl_v(tt,tPay,tThree-0.6,0.6)*bA,p:ag_in(tt,tPay+0.2,0.6)});
@@ -2533,9 +2533,9 @@ scene("lives",(ctx,S,t,sc)=>{
     // deleting without a plan: a record the law needs goes too soon
     if(tt>tPlan){const u=ag_in(tt,tLaw,1.6);hl_rec(x,1180,420,410,["Pay record the law needs"],{a:ag_in(tt,tPlan,0.6)*(1-0.75*u),coral:u,behind:"hlHall"});
       dp_pill(x,1180,566,"Gone too soon","closed",{a:ag_in(tt,tLaw+1.0,0.6)});}
-    // three lives: in use, archived, deleted; kept for good above archived
+    // three stages: live (in use), archived, deleted; kept for good above archived (the author's names, 12 November 2026)
     if(panesA>0){x.save();x.globalAlpha*=panesA;
-      hl_pane(x,440,470,330,330,"In use",{behind:"hlHall",glow:0.8+ag_in(tt,tUse,0.6)*hl_v(tt,tUse,tArch,0.5)});
+      hl_pane(x,440,470,330,330,"Live",{behind:"hlHall",glow:0.8+ag_in(tt,tUse,0.6)*hl_v(tt,tUse,tArch,0.5)});
       hl_pane(x,800,470,330,330,"Archived",{behind:"hlHall"});hl_pane(x,1160,470,330,330,"Deleted",{behind:"hlHall"});
       hl_pane(x,800,200,330,240,"Kept for good",{behind:"hlHall",a:ag_in(tt,tGood-0.4,0.6)});
       hl_rec(x,465,575,280,["Pay records","this year"],{a:ag_in(tt,tUse+0.3,0.6),warm:true,behind:"hlHall"});

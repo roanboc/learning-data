@@ -22,3 +22,15 @@ Made by the film's thread on 11 November 2026, on Rodrigo's request of that day:
 | 10 | What does the close say about the tools? | "Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means.", moved here from *Files as data and as context*. | Chapter 5 | One line |
 | 11 | What do the Spanish captions call things? | Latin American Spanish: la roya del tallo, el fitomejorador, la Secretaría de Agricultura, bushels por acre as on screen, un sandbox, un ticket; the loop as investigar, adaptar, implementar, iterar; the series by their Spanish titles. | Captions and page | Captions |
 | 12 | How is it released? | Merged on green after *Files as data and as context*, with the module's Draft label; no render or review page in the session, as you asked for every film. Its audio pointer and MP3 are committed beside it. | The site | Nothing to undo |
+
+## Rodrigo's decision of 12 November 2026: plan, do, study, act, across the site
+
+After his answer on the data quality film *Small, every week* ("let's go with PDSA"), he was asked, on 12 November 2026: "PDSA across the site. Should other modules that say "plan, do, check, act" switch to "study" too, for one consistent term?" His answer:
+
+> yes, knowing the difference was explained in the video that introduced the topic
+
+This film never says the cycle's name. Only its script's table of references did, so only that changed (PR #356).
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 13 | Does the film change? | No. Its loop is its own four words, investigate, adapt, implement, iterate, and neither its voice, its pictures, its captions nor its page name Deming's cycle. The script's table of references now says "plan, do, study, act (Deming)". | `script.md`, *The reference* | Nothing in the film |

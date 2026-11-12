@@ -208,24 +208,33 @@ Labs and assessments: [site/assets/enterprise-architecture/learn.en.js](../site/
 Source: [films/business-architecture-for-data](../films/business-architecture-for-data/) · Portal: `/business-architecture-for-data/`
 
 - [What the business owns](../films/business-architecture-for-data/1-what-the-business-owns/) — `what-the-business-owns`
+- [What the business needs to know](../films/business-architecture-for-data/2-what-the-business-needs-to-know/) — `what-the-business-needs-to-know`
+- [Who creates it, who owns it](../films/business-architecture-for-data/3-who-creates-it-who-owns-it/) — `who-creates-it-who-owns-it`
 
 ### Data architecture
 
 Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data-architecture/`
 
 - [Between the business and the systems](../films/data-architecture/1-between-the-business-and-the-systems/) — `between-the-business-and-the-systems`
+- [The pyramid, taken apart](../films/data-architecture/2-the-pyramid-taken-apart/) — `the-pyramid-taken-apart`
+- [Where each fact is born](../films/data-architecture/3-where-each-fact-is-born/) — `where-each-fact-is-born`
+- [How it travels](../films/data-architecture/4-how-it-travels/) — `how-it-travels`
 
 ### Platform and solution architecture
 
 Source: [films/platform-and-solution-architecture](../films/platform-and-solution-architecture/) · Portal: `/platform-and-solution-architecture/`
 
-No film source yet.
+- [An application or a platform?](../films/platform-and-solution-architecture/1-an-application-or-a-platform/) — `an-application-or-a-platform`
+- [Inside the platform](../films/platform-and-solution-architecture/2-inside-the-platform/) — `inside-the-platform`
+- [One platform, or many](../films/platform-and-solution-architecture/3-one-platform-or-many/) — `one-platform-or-many`
 
 ### AI and continuous architecture
 
 Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-architecture/) · Portal: `/ai-and-continuous-architecture/`
 
 - [Agents on the map](../films/ai-and-continuous-architecture/1-agents-on-the-map/) — `agents-on-the-map`
+- [The AI platform](../films/ai-and-continuous-architecture/2-the-ai-platform/) — `the-ai-platform`
+- [What an agent may read](../films/ai-and-continuous-architecture/3-what-an-agent-may-read/) — `what-an-agent-may-read`
 
 ## Master and reference data
 

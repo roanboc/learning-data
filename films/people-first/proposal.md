@@ -297,7 +297,7 @@ No film is voiced or drawn again.
 
 **The module's plan** (in *The new skills*' proposal) gets a dated row for the new opening, and its table of films gains the four.
 
-**Order of work.** The pull request that takes the Draft label off *The new skills* (#319) is open on that series' files, so the registration follows it. As with the four architecture series, registering the series is a change of its own, made once this proposal is confirmed; no page appears until a film is on the site.
+**Order of work.** The pull request that took the Draft label off *The new skills* (#319) has merged, so nothing on that series' files is in the way. As with the four architecture series, registering the series is a change of its own, made once this proposal is confirmed; no page appears until a film is on the site.
 
 ## Rules from the plan
 

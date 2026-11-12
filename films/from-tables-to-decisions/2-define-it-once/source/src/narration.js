@@ -34,6 +34,7 @@ const NARR={
  {"id":"ingrid","gap":0.8,"text":"Casual pay paid is HR's: Ingrid Holm owns it, counted by pay day, to check each pay run."},
  {"id":"rohan","gap":0.8,"text":"And casual teaching cost is Finance's: Rohan owns it, to set the budget, counted by the teaching period the teaching was done in."},
  {"id":"owner","gap":0.8,"text":"Each owner decides what theirs means, in the glossary, before any code."},
+ {"id":"least","gap":0.8,"text":"Whatever the tools, that is the minimum: every measure clearly catalogued, with its name, its owner and its meaning."},
  {"id":"differ","gap":0.8,"text":"Now everyone can see why the three numbers differ, and which one answers their question."}]},
 "near":{"name":"Near the data, built as code","lead":1.0,"tail":1.0,"vo":[
  {"id":"home","gap":0.8,"text":"Each measure's home is a metric view in Unity Catalog, beside the tables it's counted from."},
@@ -50,7 +51,8 @@ const NARR={
  {"id":"mf","gap":0.8,"text":"dbt has a semantic layer too, MetricFlow, which reads measures defined in the project's YAML."},
  {"id":"planning","gap":0.8,"text":"Planning counts learners near a graduate certificate with it, in the same project."},
  {"id":"source","gap":0.8,"text":"MetricFlow is open source, so other tools can build on it."},
- {"id":"choose","gap":0.8,"text":"Either can be a measure's home. Choose one for each, near most of its readers, and never define it twice."}]},
+ {"id":"one","gap":0.8,"text":"One tool for every measure is simplest, but that depends on the organisation: this university uses both."},
+ {"id":"choose","gap":0.8,"text":"So each measure gets one home, near most of its readers, and is never defined twice."}]},
 "open":{"name":"A format any tool can read","lead":1.0,"tail":1.0,"vo":[
  {"id":"common","gap":0.8,"text":"For tools to read each other's definitions, they need a common format: Apache Ossie."},
  {"id":"began","gap":0.8,"text":"It began as the Open Semantic Interchange, and more than fifty organisations now stand behind it, Databricks and dbt Labs among them."},
@@ -58,7 +60,8 @@ const NARR={
  {"id":"writes","gap":0.8,"text":"dbt writes the project's measures in Ossie each time it reads the project, and it reads Ossie definitions too."},
  {"id":"travel","gap":0.8,"text":"So casual teaching cost can go to any tool that reads Ossie, with its words and its rules, and nobody types it again."},
  {"id":"inside","gap":0.8,"text":"Keep each rule inside the measure, so it travels with it."},
- {"id":"check","gap":0.8,"text":"And check what arrives: a converter says what it can't carry."}]},
+ {"id":"check","gap":0.8,"text":"And check what arrives: a converter says what it can't carry."},
+ {"id":"first","gap":0.8,"text":"Ideally, the definition is written in Ossie first, in the data project, and the metric view is built from it."}]},
 "same":{"name":"One number, in every tool","lead":1.0,"tail":1.0,"vo":[
  {"id":"today","gap":0.8,"text":"Today, Thursday the fifth of November, is pay day."},
  {"id":"asks","gap":0.8,"text":"Rohan asks Genie One what casual teaching has cost Health this semester so far: 1.84 million dollars.","say":"Rohan asks Genie One what casual teaching has cost Health this semester so far: one point eight four million dollars."},

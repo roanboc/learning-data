@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Inside the platform, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (products, nothing, whose), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
+   (el lab que abre) y ninguna tiene enlace a un lab. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  products:{q:"Ravi dibuja las ocho partes de la plataforma antes de nombrar un solo producto. ¿Qué le da eso?",
+    opts:[{t:"Los productos cambian, así que los deja fuera de sus dibujos para siempre y los anota en otra lista.",near:true},{t:"Un dibujo que dura mientras los productos cambian, y que muestra enseguida una parte sin nada debajo.",ok:true},{t:"Un producto para cada una de las partes, para que la plataforma nunca necesite más de ocho herramientas."}],
+    why:"Lo que una plataforma de datos tiene que hacer se mantiene casi igual, así que, dibujadas primero, sus partes duran mientras cambian los productos que tienen debajo. Luego va un producto bajo cada parte, y una parte sin nada debajo se ve enseguida: aquí, observar. Los productos no se dejan fuera para siempre, y una parte puede llevar más de uno, como proteger lleva tres. ¿Qué tendrían debajo las ocho partes de tu plataforma?"},
+  nothing:{q:"Finanzas pregunta por qué la factura de la plataforma subió un 50 % desde junio. ¿Por qué nadie sabe decir qué trabajos la hicieron crecer?",
+    opts:[{t:"La plataforma no guarda registro de sus ejecuciones ni de lo que cuestan, así que no hay nada que mirar.",near:true},{t:"La factura es de finanzas, así que ni los dominios ni el equipo de la plataforma ven lo que cuesta su trabajo."},{t:"La plataforma guarda sus registros, pero nadie los lee: cada dominio vigila solo su propio trabajo.",ok:true}],
+    why:"La plataforma anota las ejecuciones de cada trabajo, cada consulta y lo que cuesta cada una, en sus tablas de sistema. Nadie las leía: cada dominio vigilaba sus propios productos de datos, y nadie vigilaba el conjunto. Así que solo quedaban malas opciones: pagar la factura, o recortar a todos los dominios, hubieran crecido o no. ¿Quién lee hoy los registros propios de tu plataforma?"},
+  whose:{q:"¿Quién debería construir la parte que vigila la salud de la plataforma y lo que cuesta?",
+    opts:[{t:"El equipo de la plataforma: vigilarla sirve a todos los dominios, así que ningún dominio debería construirla.",ok:true},{t:"Cada dominio, para su propia parte de la plataforma, ya que cada uno es responsable de la lógica que corre en ella.",near:true},{t:"Finanzas, ya que abrió el ticket, paga toda la factura y revisa el resultado cada mes."}],
+    why:"La lógica de cada dominio es del negocio, pero la salud y el costo de la plataforma son del equipo de la plataforma. Como la posta en la montaña, que el dueño del camino mantenía para todo el camino, vigilar la plataforma sirve a todos los dominios. Finanzas pregunta en un ticket y revisa el resultado; el equipo de la plataforma construye la parte. ¿Quién vigila tu plataforma en su conjunto?"}
+  }}};

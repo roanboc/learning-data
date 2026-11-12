@@ -33,3 +33,17 @@ Film 11 of *Data protection and privacy* (film 2 of 8 of *Only what you may see*
 | 21 | Which notes are the bells? | `special` A3, `direct` C4, `pseudonymous` E4, `indirect` G4, `none` C5, tuned pure from C so nothing beats; the five together, strictest first, are the title and the end. The next films choose their own palettes. | The score |
 | 22 | How is the soundtrack stored, and who publishes its release copy? | Its pointer is in `audio.json` (`media.py index`, release tag `audio-know-what-you-hold-20548bacce3e1f3431f2`), and the MP3 stays in Git beside it, as its own commit, as the coordinator asked threads on 10 November until you set one rule; so CI and the site use the tracked copy and nothing breaks before the release exists. Your step: run *Store audio outside Git* with that tag and film `know-what-you-hold-en`, check it with `python site-tools/media.py verify-remote --film know-what-you-hold-en`, then untrack the MP3. | `audio.json`; the MP3 |
 | 23 | Does the octagon need a credit? | Yes: in `NOTICE.md`, as Chile's Ministry of Health's warning, redrawn without change only to tell the story, with a line that the project isn't affiliated with or endorsed by the Ministry. | `NOTICE.md` |
+
+## 12 November 2026: the author's answer
+
+Asked on his final checklist whether the five classes and four levels are the right ones (rows 1 and 2 above), Rodrigo answered on 12 November 2026:
+
+> Yes, that can vary from one org to another, the important thing is to align to that definition.
+
+So the classes, the levels and the two floors stay as they were, and the film now says what he said. *A level for each table* ends on two new lines: "These five classes and four levels are the university's own. Another organisation may choose others." and "What matters is one list, and that everyone uses its words the same way." The film is 7:28 (it was 7:13). What was assumed in applying the answer:
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 24 | Where does the film say it? | At the end of *A level for each table*, the first moment the viewer has seen both the classes and the levels. The later films of the series build on these five and four, and are unchanged | *A level for each table*, the lines `own` and `same` | Move the two lines, and their cards, to another chapter |
+| 25 | How is "align to that definition" said in plain words? | "One list, and that everyone uses its words the same way": data governance keeps the list (chapters 3 and 6), and owners, the platform and the people who read the data all mean the same by each class and level | The line `same`; the green pill, "One list, used the same way by everyone" | Voice the line `same` again |
+| 26 | What does another organisation's list look like on screen? | A card, "ANOTHER ORGANISATION", with two empty slots, "its own classes" and "its own levels": the film invents no other scheme and names no standard | *A level for each table*, the second card | Draw a named example beside it |

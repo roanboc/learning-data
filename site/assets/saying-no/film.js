@@ -451,7 +451,7 @@ const NARR={
  {"id":"each","gap":0.8,"text":"Each with its date, what it's for, and the weeks of work it takes."},
  {"id":"weeks","gap":0.8,"text":"The rooms' data takes three of August's four weeks. A new model takes six, and time to test it."},
  {"id":"refresh","gap":0.8,"text":"Refreshing the current model takes one week."},
- {"id":"order","gap":0.8,"text":"The order isn't Helena's to choose. The list is ordered by value, urgency, effort and risk, never by who asks."},
+ {"id":"order","gap":0.8,"text":"The order isn't Helena's to choose. The list is ordered by value and effort, never by who asks."},
  {"id":"fair","gap":0.8,"text":"Fisher and Ury call that fair criteria: what both sides can check, not who pushes harder."},
  {"id":"options","gap":0.8,"text":"Then they look for options that serve both interests: the budget by September, and early warning by December."}
 ]},
@@ -485,7 +485,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"aral/sea": 5.984, "aral/rivers": 7.753, "aral/shrank": 8.383, "aral/split": 6.785, "aral/towns": 8.309, "aral/dust": 6.252, "aral/whole": 3.836, "aral/change": 3.334, "aral/chose": 3.977, "aral/dam": 7.382, "aral/done": 5.361, "aral/rose": 8.754, "aral/fresh": 8.775, "aral/plants": 6.1, "aral/shore": 2.838, "aral/south": 6.764, "aral/no": 6.451, "aral/data": 7.271, "aral/instead": 4.04, "asks/clara": 7.661, "asks/same": 8.336, "asks/mei": 7.041, "asks/list": 5.611, "asks/both": 3.55, "asks/yes": 7.71, "asks/bare": 1.984, "asks/asks": 3.985, "date/book": 4.911, "date/position": 6.128, "date/wed": 6.012, "date/budget": 8.051, "date/new": 7.936, "date/enough": 4.197, "date/interest": 7.498, "date/back": 3.296, "open/side": 5.57, "open/each": 3.347, "open/weeks": 5.633, "open/refresh": 2.249, "open/order": 7.226, "open/fair": 5.68, "open/options": 6.552, "offer/ury": 6.189, "offer/dam": 5.843, "offer/yes": 3.845, "offer/no": 2.93, "offer/refresh": 7.403, "offer/october": 4.608, "offer/work": 1.658, "offer/choose": 7.459, "offer/agrees": 5.919, "kept/aug": 7.06, "kept/sep": 5.429, "kept/oct": 7.301, "kept/next": 5.588, "kept/trust": 4.405, "monday/back": 5.803, "monday/helena": 7.156, "monday/ask": 2.897, "monday/show": 2.75, "monday/offer": 4.03, "monday/write": 3.617, "monday/next": 5.142, "monday/take": 2.597};
+const VODUR={"aral/sea": 5.984, "aral/rivers": 7.753, "aral/shrank": 8.383, "aral/split": 6.785, "aral/towns": 8.309, "aral/dust": 6.252, "aral/whole": 3.836, "aral/change": 3.334, "aral/chose": 3.977, "aral/dam": 7.382, "aral/done": 5.361, "aral/rose": 8.754, "aral/fresh": 8.775, "aral/plants": 6.1, "aral/shore": 2.838, "aral/south": 6.764, "aral/no": 6.451, "aral/data": 7.271, "aral/instead": 4.04, "asks/clara": 7.661, "asks/same": 8.336, "asks/mei": 7.041, "asks/list": 5.611, "asks/both": 3.55, "asks/yes": 7.71, "asks/bare": 1.984, "asks/asks": 3.985, "date/book": 4.911, "date/position": 6.128, "date/wed": 6.012, "date/budget": 8.051, "date/new": 7.936, "date/enough": 4.197, "date/interest": 7.498, "date/back": 3.296, "open/side": 5.57, "open/each": 3.347, "open/weeks": 5.633, "open/refresh": 2.249, "open/order": 5.905, "open/fair": 5.68, "open/options": 6.552, "offer/ury": 6.189, "offer/dam": 5.843, "offer/yes": 3.845, "offer/no": 2.93, "offer/refresh": 7.403, "offer/october": 4.608, "offer/work": 1.658, "offer/choose": 7.459, "offer/agrees": 5.919, "kept/aug": 7.06, "kept/sep": 5.429, "kept/oct": 7.301, "kept/next": 5.588, "kept/trust": 4.405, "monday/back": 5.803, "monday/helena": 7.156, "monday/ask": 2.897, "monday/show": 2.75, "monday/offer": 4.03, "monday/write": 3.617, "monday/next": 5.142, "monday/take": 2.597};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2100,7 +2100,7 @@ function sn_list(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
     if(dw>0.004){ctx.save();ctx.globalAlpha*=ag_sine(dw);lp_T(ctx,r.agreed,C[2],ry+(r.date?84:46),{w:800,size:30,col:LP.blue});ctx.restore();}
     lp_T(ctx,r.weeks,C[3],ry+46,{w:600,size:28,col:LP.ink});
     ctx.fillStyle=rgba(LP.mut,0.16);ctx.fillRect(x+40,ry+102,w-80,2);ctx.restore();});
-  lp_T(ctx,"Ordered by value, urgency, effort and risk",x+40,y+h-30,{w:600,size:28,col:LP.mut});
+  lp_T(ctx,"Ordered by value and effort",x+40,y+h-30,{w:600,size:28,col:LP.mut});
   const tk=clamp(o.tick||0,0,1);if(tk>0.004){ctx.save();ctx.globalAlpha*=ag_sine(tk);const f=lerp(0.6,1,ag_spr(tk*1.2,0,0.5));ctx.fillStyle=rgba(LP.green,1);ctx.beginPath();ctx.arc(x+w-56,y+58,26*f,0,TAU);ctx.fill();lp_icon(ctx,"tick",x+w-56,y+58,34*f,[255,255,255]);ctx.restore();}
   ctx.restore();return{x,y,w,h};}
 
@@ -2289,7 +2289,7 @@ scene("open",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       sn_tag(x,tt,w("refresh","week",-0.2),null,1015,672,"The refresh fits",{align:"center",col:LP.orange});}},
     // the order isn't Helena's: fair criteria; then options that serve both interests
     {at:c.order-0.3,place:"lpRoom",later:true,keys:[[c.order-0.3,960,540,1.0]],draw:(x,tt)=>{
-      sn_sheet(x,tt,w("order","order",-0.2),120,130,820,{kick:"The order",title:"Not Helena's to choose",lines:["By value, urgency, effort and risk","Never by who asks"]},{light:"day",u:sn_u(tt,[w("order","value",-0.2),w("order","never",-0.1)])});
+      sn_sheet(x,tt,w("order","order",-0.2),120,130,820,{kick:"The order",title:"Not Helena's to choose",lines:["By value and effort","Never by who asks"]},{light:"day",u:sn_u(tt,[w("order","value",-0.2),w("order","never",-0.1)])});
       sn_sheet(x,tt,w("fair","Fisher",-0.3),980,130,820,{kick:"Fisher and Ury",title:"Fair criteria",lines:["What both sides can check","Not who pushes harder"]},{light:"day",u:sn_u(tt,[w("fair","check",-0.3),w("fair","pushes",-0.3)])});
       sn_sheet(x,tt,w("options","options",-0.3),550,500,820,{kick:"Options for both interests",lines:["The budget, by September","Early warning, by December"]},{col:LP.blue,light:"day",u:sn_u(tt,[w("options","budget",-0.3),w("options","warning",-0.3)])});}}
   ]);

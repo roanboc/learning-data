@@ -99,119 +99,119 @@ Cada paso dice qué lee, qué escribe y qué herramientas llama.
 00:03:43.025 --> 00:03:48.715
 Para redactar el cambio, lee el encargo y lo que el cambio toca, y escribe en su propia rama.
 
-00:03:50.615 --> 00:03:57.003
-Para construirlo, lee producción con los nombres enmascarados y escribe los resultados de sus pruebas en su esquema de desarrollo.
+00:03:50.615 --> 00:03:58.628
+Al construirlo, lee producción con datos personales y sensibles enmascarados y escribe sus resultados de prueba en su esquema de desarrollo.
 
-00:03:58.903 --> 00:04:04.530
+00:04:00.528 --> 00:04:06.155
 Para abrir el pull request, lee su cambio y sus resultados, y escribe un pull request.
 
-00:04:06.630 --> 00:04:10.963
+00:04:08.255 --> 00:04:12.588
 Sus permisos son exactamente esos, y cada permiso nombra el paso que lo necesita.
 
-00:04:12.863 --> 00:04:15.963
+00:04:14.488 --> 00:04:17.588
 Como el cajón: llenado desde la orden, no desde el estante.
 
-00:04:17.463 --> 00:04:22.101
+00:04:19.088 --> 00:04:23.726
 La lista es corta, y nadie la escribió a mano: el mapa la hace a partir de los pasos.
 
-00:04:23.801 --> 00:04:27.571
+00:04:25.426 --> 00:04:29.196
 Ese lunes, Sam le dio sus permisos a partir de esa lista, y nada más.
 
-00:04:31.171 --> 00:04:34.592
+00:04:32.796 --> 00:04:36.217
 Lo que lee un rol es parte de sus permisos, y el orden importa.
 
-00:04:35.692 --> 00:04:43.309
+00:04:37.317 --> 00:04:44.934
 Primero, el contexto gobernado: su lugar en el mapa, el glosario, las reglas de negocio y de datos, y las descripciones de los datos.
 
-00:04:45.209 --> 00:04:48.119
+00:04:46.834 --> 00:04:49.744
 Cada uno tiene un dueño y solo cambia con una revisión.
 
-00:04:49.419 --> 00:04:54.865
+00:04:51.044 --> 00:04:56.490
 Segundo, la memoria del equipo: lo que los agentes aprendieron en sesiones anteriores, guardado por la plataforma.
 
-00:04:56.365 --> 00:05:00.189
+00:04:57.990 --> 00:05:01.814
 La memoria ayuda, pero puede estar equivocada, y nadie revisa cada una de sus líneas.
 
-00:05:01.489 --> 00:05:05.367
+00:05:03.114 --> 00:05:06.992
 Así que cuando la memoria y una definición no coinciden, gana la definición.
 
-00:05:06.867 --> 00:05:10.864
+00:05:08.492 --> 00:05:12.489
 Y el agente lo dice en su informe, para que lo vea el dueño de la definición.
 
-00:05:12.364 --> 00:05:17.833
+00:05:13.989 --> 00:05:19.458
 Como el farmacéutico con la orden del propio médico: primero el original, una copia solo después.
 
-00:05:21.233 --> 00:05:23.985
+00:05:22.858 --> 00:05:25.610
 Lo que queda fuera también se escribe, con su motivo.
 
-00:05:25.085 --> 00:05:27.336
+00:05:26.710 --> 00:05:28.961
 Los otros cuatro pasos son de otros roles.
 
-00:05:28.436 --> 00:05:31.309
+00:05:30.061 --> 00:05:32.934
 Abrir un encargo es de quien lo solicita: de Clara.
 
-00:05:32.409 --> 00:05:35.646
+00:05:34.034 --> 00:05:37.271
 Revisar el código es del ingeniero de analítica: de Jun.
 
-00:05:36.746 --> 00:05:40.005
+00:05:38.371 --> 00:05:41.630
 Aprobar el cambio es de quien aprueba la liberación: de Noor.
 
-00:05:41.105 --> 00:05:43.586
+00:05:42.730 --> 00:05:45.211
 Y liberarlo a producción también es de Noor.
 
-00:05:44.886 --> 00:05:51.684
+00:05:46.511 --> 00:05:53.309
 Y lo que significa una palabra lo decide su dueño, como Mei para las palabras de los estudiantes, antes de que entre al glosario.
 
-00:05:53.184 --> 00:05:59.402
+00:05:54.809 --> 00:06:01.027
 Así que nunca aprueba, nunca libera, nunca cambia lo que significa una palabra y nunca escribe en producción.
 
-00:06:01.102 --> 00:06:05.676
+00:06:02.727 --> 00:06:07.301
 Nadie tuvo que prohibir cada uno: la separación de funciones sale de los pasos.
 
-00:06:07.176 --> 00:06:10.374
+00:06:08.801 --> 00:06:11.999
 Como en la sala: uno ordenaba, otro llenaba y otro daba.
 
-00:06:11.874 --> 00:06:17.447
+00:06:13.499 --> 00:06:19.072
 Y una verificación rechaza el mapa si un paso que solo hacen personas se da a un rol que ocupa un agente.
 
-00:06:20.847 --> 00:06:24.512
+00:06:22.472 --> 00:06:26.137
 El trabajo cambia, y los permisos lo siguen, nunca al revés.
 
-00:06:26.212 --> 00:06:31.336
+00:06:27.837 --> 00:06:32.961
 Digamos que Planificación quiere que el agente también responda sus preguntas, no solo redacte sus cambios.
 
-00:06:33.236 --> 00:06:38.417
+00:06:34.861 --> 00:06:40.042
 Es trabajo nuevo, así que primero es un paso nuevo en el mapa, que dice qué lee, qué escribe y qué llama.
 
-00:06:40.717 --> 00:06:44.912
+00:06:42.342 --> 00:06:46.537
 Noor lo agrega al rol cuando Clara y los dueños de lo que lee están de acuerdo.
 
-00:06:46.812 --> 00:06:50.236
+00:06:48.437 --> 00:06:51.861
 Luego sus permisos lo siguen: líneas nuevas, cada una con el paso nuevo.
 
-00:06:52.336 --> 00:06:55.470
+00:06:53.961 --> 00:06:57.095
 Y las herramientas siguen a los permisos, nunca un permiso dado a mano.
 
-00:06:57.370 --> 00:07:04.381
+00:06:58.995 --> 00:07:06.006
 Hasta entonces, si un encargo necesita más de lo que dan sus pasos, el agente no toma prestado un acceso: se detiene y pregunta.
 
-00:07:06.481 --> 00:07:08.796
+00:07:08.106 --> 00:07:10.421
 Cuando un paso se va, sus permisos se van con él.
 
-00:07:10.696 --> 00:07:15.174
+00:07:12.321 --> 00:07:16.799
 Un permiso dado a mano es una deriva, y la próxima película muestra la verificación que la encuentra.
 
-00:07:19.374 --> 00:07:24.165
+00:07:20.999 --> 00:07:25.790
 En la sala, el cajón de cada paciente tenía las dosis de un día, llenado desde una orden.
 
-00:07:25.665 --> 00:07:29.859
+00:07:27.290 --> 00:07:31.484
 Aquí, el agente de Planificación tiene lo que necesitan sus tres pasos, y nada más.
 
-00:07:31.159 --> 00:07:36.161
-Cada permiso suyo tiene un motivo que cualquiera puede leer, y ninguno llega a producción.
+00:07:32.784 --> 00:07:38.139
+Cada permiso suyo tiene un motivo que cualquiera puede leer, y ninguno le permite cambiar producción.
 
-00:07:37.461 --> 00:07:39.139
+00:07:39.439 --> 00:07:41.117
 Y los permisos de Jun siguen siendo suyos.
 
-00:07:40.439 --> 00:07:43.702
+00:07:42.417 --> 00:07:45.680
 Los permisos de un agente vienen de su trabajo, no del de una persona.

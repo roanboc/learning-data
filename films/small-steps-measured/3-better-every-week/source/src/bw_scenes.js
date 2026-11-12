@@ -99,7 +99,7 @@ scene("friday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       if(tt>=k0)bw_week(x,250,150,1180,{kick:"From Friday 3 September",title:"Half an hour, every week"},
         {a:ag_in(tt,k0,0.35),k:tt-k0,u:ag_in(tt,w("half","protects",-0.1),0.6),lit:ag_in(tt,w("half","Fridays",0.0),0.6),light:"late"});
       lp_nameTag(x,1470,220,"helena",{role:"Data manager",a:ag_in(tt,w("half","Helena",-0.2),0.5)});}},
-    // the rules: one measure; one small change, tried for a week, then kept or dropped, out loud; plan, do, check, act; data quality's
+    // the rules: one measure; one small change, tried for a week, then kept or dropped, out loud; plan, do, study, act; data quality's
     // Thursdays keep the same rhythm for one list
     {at:c.rules-0.3,place:"bwFriday",later:true,keys:[[c.rules-0.3,960,540,1.0]],draw:(x,tt)=>{
       bw_sheet(x,tt,w("rules","One",-0.2),140,250,760,{kick:"Every Friday, half an hour",lines:["One measure","One small change, tried for a week","Then kept or dropped, out loud"]},

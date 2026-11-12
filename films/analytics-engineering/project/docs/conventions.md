@@ -323,12 +323,12 @@ Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduati
 is the first.
 
 A requirement about how old the data may be, timeliness, sits on the column that says its age.
-The graduation list has two, `student_system_as_of` and `portal_as_of`: when the night's files
-it was built from arrived, from each source's receipts (`nightly_files`). Each carries its level
-in its own `meta.quality`, and the product's latency names them as its `element`. The freshness
-check that measures it is on the receipts, at the same level: `error_after` only, with
-`warn_after: null`, because the night's job runs the check first and its failure is the warning
-(`examples/a-late-file/`).
+The graduation list has two, `student_system_as_of` and `portal_as_of`: when each source saved the
+newest record the list was built from, its system date, never when its file arrived. Each carries
+its level in its own `meta.quality`, and the product's latency names them as its `element`. The
+freshness check on each source's receipts (`nightly_files`) measures it each night: `error_after`
+only, with `warn_after: null`, because its failure is the warning; the send's own check reads the
+list's two columns (`examples/a-late-file/`). A second alarm beside the freshness check reads when each file arrived, and says whether a source has gone silent (`tests/quality/nightly_file_from_each_source_tonight.sql`).
 
 ### Which reference
 

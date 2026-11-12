@@ -1,0 +1,25 @@
+{
+  "key": "an-application-or-a-platform",
+  "title": "An application or a platform?",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: why a data platform is a platform and not one more application, what the word means for a vendor's product and for the service an organisation runs, whose logic it carries, and who owns it.",
+  "howto": "Application blue is an application, with its logic built in; technology green is the platform, shared by every domain; blocks set down on it are each domain's logic, and a gold tag is its owner in the business. Amber, a lantern's colour, is the road every domain shares, in Japan from 1601 and at the utility today.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["road"],
+  "poster": ["road", "shared", 7.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bAma\\b", "Ah-mah"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bTokugawa Ieyasu\\b", "Toh-koo-gah-wah Ee-eh-yah-soo"],
+    ["\\bIeyasu\\b", "Ee-eh-yah-soo"],
+    ["\\bEdo\\b", "Eh-doh"],
+    ["\\bGokaidō\\b", "Go-kai-doh"],
+    ["\\bTōkaidō\\b", "Toh-kai-doh"],
+    ["\\bshogunate\\b", "show-gun-ate"],
+    ["\\bIT\\b", "I T"]
+  ]
+}

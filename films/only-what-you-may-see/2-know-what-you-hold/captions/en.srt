@@ -151,109 +151,117 @@ Two floors come from the columns. A table with anything that points to a person 
 A table with anything special is restricted.
 
 39
-00:04:13,290 --> 00:04:19,294
-Back to exam support. Its values name no illness: extra time, a separate room, a reader.
+00:04:11,690 --> 00:04:17,929
+These five classes and four levels are the university's own. Another organisation may choose others.
 
 40
-00:04:20,794 --> 00:04:24,080
-But Mei knows why a learner has them: for a disability.
+00:04:19,429 --> 00:04:23,815
+What matters is one list, and that everyone uses its words the same way.
 
 41
-00:04:25,380 --> 00:04:28,364
-So the column tells something about their health: special.
+00:04:27,515 --> 00:04:33,519
+Back to exam support. Its values name no illness: extra time, a separate room, a reader.
 
 42
-00:04:30,064 --> 00:04:33,440
-A column's name doesn't say what it holds. Its owner does.
+00:04:35,019 --> 00:04:38,305
+But Mei knows why a learner has them: for a disability.
 
 43
-00:04:35,340 --> 00:04:42,863
-And one special column would make the whole learner table restricted, too strict for the help desk and Planning, who read it every day.
+00:04:39,605 --> 00:04:42,589
+So the column tells something about their health: special.
 
 44
-00:04:44,163 --> 00:04:51,207
-So exam support moves to a table of its own, the support table, restricted, for the few who arrange exams.
+00:04:44,289 --> 00:04:47,665
+A column's name doesn't say what it holds. Its owner does.
 
 45
-00:04:52,707 --> 00:04:54,727
-The learner table stays confidential.
+00:04:49,565 --> 00:04:57,088
+And one special column would make the whole learner table restricted, too strict for the help desk and Planning, who read it every day.
 
 46
-00:04:58,027 --> 00:05:02,470
-Who names each column? Its owner, once, at the source, where the data is born.
+00:04:58,388 --> 00:05:05,432
+So exam support moves to a table of its own, the support table, restricted, for the few who arrange exams.
 
 47
-00:05:04,570 --> 00:05:10,274
-Like the octagon: the Ministry sets the limits, and the maker, who knows the recipe, puts it on.
+00:05:06,932 --> 00:05:08,952
+The learner table stays confidential.
 
 48
-00:05:12,574 --> 00:05:17,485
-Data governance keeps the list of classes, and the owner picks one for each column.
+00:05:12,252 --> 00:05:16,695
+Who names each column? Its owner, once, at the source, where the data is born.
 
 49
-00:05:19,585 --> 00:05:25,809
-A scan can suggest one: this looks like an email. Only Mei knows that exam support is about health.
+00:05:18,795 --> 00:05:24,499
+Like the octagon: the Ministry sets the limits, and the maker, who knows the recipe, puts it on.
 
 50
-00:05:28,109 --> 00:05:34,443
-And a new column with no class doesn't go through. It comes back with a question: what does it tell about a person?
+00:05:26,799 --> 00:05:31,710
+Data governance keeps the list of classes, and the owner picks one for each column.
 
 51
-00:05:38,543 --> 00:05:44,412
-From the source, each column carries its class into everything made from it. Nobody names it again.
+00:05:33,810 --> 00:05:40,034
+A scan can suggest one: this looks like an email. Only Mei knows that exam support is about health.
 
 52
-00:05:46,112 --> 00:05:49,625
-Course and results reach Anil's study as they are: none.
+00:05:42,334 --> 00:05:48,668
+And a new column with no class doesn't go through. It comes back with a question: what does it tell about a person?
 
 53
-00:05:51,325 --> 00:05:57,914
-Two change on the way. The student number becomes a learner code, made with a key the registrar's office keeps.
+00:05:52,768 --> 00:05:58,637
+From the source, each column carries its class into everything made from it. Nobody names it again.
 
 54
-00:05:59,514 --> 00:06:01,264
-The date of birth becomes the year.
+00:06:00,337 --> 00:06:03,850
+Course and results reach Anil's study as they are: none.
 
 55
-00:06:02,964 --> 00:06:07,380
-A step that changes what a column holds gets its new class from the owner.
+00:06:05,550 --> 00:06:12,139
+Two change on the way. The student number becomes a learner code, made with a key the registrar's office keeps.
 
 56
-00:06:09,080 --> 00:06:14,601
-Mei names the code pseudonymous, and the year indirect: with a course, it can still point to one.
+00:06:13,739 --> 00:06:15,489
+The date of birth becomes the year.
 
 57
-00:06:16,101 --> 00:06:18,462
-Exam support never reaches the study.
+00:06:17,189 --> 00:06:21,605
+A step that changes what a column holds gets its new class from the owner.
 
 58
-00:06:20,162 --> 00:06:26,285
-And Anil's totals by course, any count under ten hidden, get a new class, none, in a public table.
+00:06:23,305 --> 00:06:28,826
+Mei names the code pseudonymous, and the year indirect: with a course, it can still point to one.
 
 59
-00:06:28,185 --> 00:06:32,580
-The class goes wherever the column goes, as the octagon goes with the pack.
+00:06:30,326 --> 00:06:32,687
+Exam support never reaches the study.
 
 60
-00:06:35,880 --> 00:06:38,457
-The octagon took no sugar out by itself.
+00:06:34,387 --> 00:06:40,510
+And Anil's totals by course, any count under ten hidden, get a new class, none, in a public table.
 
 61
-00:06:39,957 --> 00:06:45,790
-It named what each pack held, where everyone could see it, and families, schools and makers acted on it.
+00:06:42,410 --> 00:06:46,805
+The class goes wherever the column goes, as the octagon goes with the pack.
 
 62
-00:06:47,490 --> 00:06:50,317
-Mei's classes protect nothing by themselves either.
+00:06:50,105 --> 00:06:52,682
+The octagon took no sugar out by itself.
 
 63
-00:06:51,617 --> 00:06:58,758
-But now every column says what it tells about a person, and every table how careful to be, before anyone opens it.
+00:06:54,182 --> 00:07:00,015
+It named what each pack held, where everyone could see it, and families, schools and makers acted on it.
 
 64
-00:07:00,658 --> 00:07:03,314
-Which way to hide each class is the next question.
+00:07:01,715 --> 00:07:04,542
+Mei's classes protect nothing by themselves either.
 
 65
-00:07:04,814 --> 00:07:06,752
+00:07:05,842 --> 00:07:12,983
+But now every column says what it tells about a person, and every table how careful to be, before anyone opens it.
+
+66
+00:07:14,883 --> 00:07:17,539
+Which way to hide each class is the next question.
+
+67
+00:07:19,039 --> 00:07:20,977
 You can't protect what you haven't named.

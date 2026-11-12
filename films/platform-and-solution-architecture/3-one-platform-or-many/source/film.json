@@ -1,0 +1,30 @@
+{
+  "key": "one-platform-or-many",
+  "title": "One platform, or many",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: why one platform, with every domain owning its data on it, is the simplest choice for most organisations, what every extra platform brings with it, and when a second can't be helped.",
+  "howto": "Technology green is a platform, and the rules each one brings with it are drawn as bands across it: who's who and who may see what, masks on private data, lineage, and a log of who did what. Blue is each domain's data products, and a gold tag is an owner in the business. Red is a barrier and its toll, on the river and between the platforms; amber, a lantern's colour, is the road every domain shares.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["tolls"],
+  "poster": ["tolls", "kept", 5.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bAma's\\b", "Ah-mah's"],
+    ["\\bAma\\b", "Ah-mah"],
+    ["\\bRavi's\\b", "Rah-vee's"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bYodo\\b", "Yoh-doh"],
+    ["\\bIse\\b", "Ee-seh"],
+    ["\\bOda Nobunaga\\b", "Oh-dah Noh-boo-nah-gah"],
+    ["\\bToyotomi Hideyoshi\\b", "Toh-yoh-toh-mee Hee-deh-yoh-shee"],
+    ["\\bTokugawa\\b", "Toh-koo-gah-wah"],
+    ["\\bshogunate\\b", "show-gun-ate"],
+    ["\\bZhamak Dehghani\\b", "Zhah-mahk Deh-gah-nee"],
+    ["\\bKuwana\\b", "Koo-wah-nah"],
+    ["\\bHinaga\\b", "Hee-nah-gah"],
+    ["\\bTōkaidō\\b", "Toh-kai-doh"]
+  ]
+}

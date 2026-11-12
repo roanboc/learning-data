@@ -26,7 +26,7 @@ what only people do.
 
 | Tool | Its name there | Its rights | File |
 |---|---|---|---|
-| Databricks | Its service principal, "workload agent", `7d2b5e90-1c4a-4f83-b6e7-3a9c0d1f2e58` | Its role's group, `workload_contributors`: reads production (prod_core, prod_marts, names masked), and builds only in schemas of its own in `analytics_dev` | `grants.sql` |
+| Databricks | Its service principal, "workload agent", `7d2b5e90-1c4a-4f83-b6e7-3a9c0d1f2e58` | Its role's group, `workload_contributors`: reads production (prod_core, prod_marts; personal and sensitive data masked), and builds only in schemas of its own in `analytics_dev` | `grants.sql` |
 | Unity Gateway | The same | `EXECUTE` on 1 model (`ai.models.drafting`) and 3 tool servers (`ai.tools.build`, `ai.tools.query`, `ai.tools.repository`) | `unity-gateway.yml` |
 | GitHub | Its App, `workload-agent`: its work reads `workload-agent[bot]` | One repository, `uni-example/credentials`; contents and pull requests, write; only branches `agent/workload/*` | `github-app.yml` |
 | dbt | The target `agent` (`profiles.yml`), signed in as its service principal | Builds into `workload_agent_marts` and its other layers in `analytics_dev` | `workflow.yml` |

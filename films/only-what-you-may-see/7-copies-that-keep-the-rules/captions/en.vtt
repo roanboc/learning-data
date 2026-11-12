@@ -90,119 +90,134 @@ Cloned by someone they leave out, it would hold every real name, and no column's
 00:03:23.353 --> 00:03:30.883
 A masked copy is possible, but it's still about real people, and a column nobody has classed yet goes through as it is.
 
-00:03:32.583 --> 00:03:36.718
-So development and test get made-up learners, and none of them is anyone.
+00:03:32.583 --> 00:03:38.282
+So, wherever they can, development and test get made-up learners, and none of them is anyone.
 
-00:03:38.218 --> 00:03:45.171
+00:03:39.782 --> 00:03:46.735
 For size, a script writes 2,614 of them, with production's columns and their classes.
 
-00:03:46.471 --> 00:03:55.708
+00:03:48.035 --> 00:03:50.903
+That's synthetic data, and it's easy to write now.
+
+00:03:52.203 --> 00:03:58.925
+This kind is written without reading a record: only the columns and their classes go in, so it can give no one away.
+
+00:04:00.425 --> 00:04:07.833
+The other kind is learned from the real records, and the closer it fits them, the more likely it is to give a real person away.
+
+00:04:09.533 --> 00:04:13.585
+So the university treats that kind as a copy of the real records.
+
+00:04:15.485 --> 00:04:23.928
+How closely made-up data should follow the real records, gaps and odd cases included, is the harder question, and still an open one.
+
+00:04:25.628 --> 00:04:34.865
 dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.
 
-00:03:57.408 --> 00:04:03.454
+00:04:36.565 --> 00:04:42.611
 dbt's clone and sample bring production's rows in, so they're never used on tables about people.
 
-00:04:04.954 --> 00:04:08.511
-Like Lascaux II, they're true to the learners, and not one is real.
+00:04:44.111 --> 00:04:48.040
+Like Lascaux II, they stand in for the learners, and not one is real.
 
-00:04:10.211 --> 00:04:16.395
+00:04:49.740 --> 00:04:55.924
 Jun's change runs on 2,614 of them, and no record leaves production.
 
-00:04:18.895 --> 00:04:20.737
+00:04:58.424 --> 00:05:00.266
 Monday, 2 November.
 
-00:04:21.837 --> 00:04:29.443
+00:05:01.366 --> 00:05:08.972
 The teaching hospital where the faculty's learners train asks how many leave after first year, by course, to plan its places.
 
-00:04:30.743 --> 00:04:40.051
+00:05:10.272 --> 00:05:19.580
 A new purpose needs a new agreement, as An agreement first says: 2026-21, signed by Mei and the hospital's head of education.
 
-00:04:41.751 --> 00:04:47.873
+00:05:21.280 --> 00:05:27.402
 The hospital is on Databricks too, so OpenSharing can share a table with it, as in The marketplace.
 
-00:04:49.173 --> 00:04:52.234
+00:05:28.702 --> 00:05:31.763
 But the university's policies don't travel with a share.
 
-00:04:53.534 --> 00:05:00.558
+00:05:33.063 --> 00:05:40.087
 Whoever shares a table must be left out of its policies, and the hospital reads it on its own platform, where they never run.
 
-00:05:02.058 --> 00:05:05.426
+00:05:41.587 --> 00:05:44.955
 Share the learner table, and the hospital would see every name.
 
-00:05:07.326 --> 00:05:13.984
+00:05:46.855 --> 00:05:53.513
 So the share holds one table that already shows no more than may leave: Show the least's totals, small counts hidden.
 
-00:05:15.684 --> 00:05:24.023
+00:05:55.213 --> 00:06:03.552
 A share has no end date, so a job made from the agreement removes the hospital's access on 30 June 2027.
 
-00:05:26.523 --> 00:05:32.706
+00:06:06.052 --> 00:06:12.235
 Then the hospital asks a harder question: do learners who spend more weeks on its wards do better that year?
 
-00:05:34.406 --> 00:05:42.195
+00:06:13.935 --> 00:06:21.724
 The answer needs both sides' rows, the hospital's weeks and the university's results, and neither may hand its rows to the other.
 
-00:05:43.895 --> 00:05:50.684
+00:06:23.424 --> 00:06:30.213
 So they meet in a clean room, on Azure Databricks, where neither can see the other's rows, only their columns' names.
 
-00:05:52.384 --> 00:05:59.422
+00:06:31.913 --> 00:06:38.951
 The university adds one view, from a shelf no one reads: each Health learner's student number, course and result.
 
-00:06:01.122 --> 00:06:07.460
+00:06:40.651 --> 00:06:46.989
 The hospital writes the code that matches the two, and counts, by weeks on the wards, how many learners passed.
 
-00:06:08.960 --> 00:06:17.938
+00:06:48.489 --> 00:06:57.467
 Nothing runs until the university approves it: Mei said yes in the agreement, and Jun reviews the code and approves it on 1 December.
 
-00:06:19.638 --> 00:06:27.432
+00:06:59.167 --> 00:07:06.961
 The clean room hides nothing by itself: what comes out is what the approved code writes, so the code hides any count under 10.
 
-00:06:29.332 --> 00:06:35.211
+00:07:08.861 --> 00:07:14.740
 On 3 December, the hospital runs it, and gets one table of totals, kept for 30 days.
 
-00:06:36.911 --> 00:06:42.076
+00:07:16.440 --> 00:07:21.605
 Twelve weeks or more, 91 in 100 passed; four to seven weeks, 84.
 
-00:06:43.776 --> 00:06:48.921
+00:07:23.305 --> 00:07:28.450
 Like the scientists at Lascaux: what goes in is approved, and the walls never leave.
 
-00:06:51.421 --> 00:06:53.182
+00:07:30.950 --> 00:07:32.711
 Tuesday, 10 November.
 
-00:06:54.282 --> 00:07:01.552
+00:07:33.811 --> 00:07:41.081
 Elena Lindgren, Anil's new research assistant, would like to download the study's table, to clean it in a spreadsheet.
 
-00:07:02.852 --> 00:07:08.013
+00:07:42.381 --> 00:07:47.542
 But a file on a laptop keeps no rules at all, and the agreement says nothing is downloaded.
 
-00:07:09.713 --> 00:07:14.639
+00:07:49.242 --> 00:07:54.168
 So in the studies' workspace, from Grants by design, every way out is switched off.
 
-00:07:15.739 --> 00:07:21.632
+00:07:55.268 --> 00:08:01.161
 Downloading results, exporting notebooks, copying a table, downloading a file: each one is off.
 
-00:07:23.132 --> 00:07:29.230
+00:08:02.661 --> 00:08:08.759
 The switches are kept as code: turning one back on takes a reviewed change, and the audit log shows it.
 
-00:07:30.730 --> 00:07:38.466
+00:08:10.259 --> 00:08:17.995
 And what runs there can reach only the catalog's storage and a short list, as Network, storage and keys set up for production.
 
-00:07:39.766 --> 00:07:44.673
+00:08:19.295 --> 00:08:24.202
 No switch stops a photo of a screen; her confidentiality agreement covers that.
 
-00:07:46.373 --> 00:07:50.603
+00:08:25.902 --> 00:08:30.132
 So Elena cleans the data where it is, in a notebook in the study's space.
 
-00:07:52.103 --> 00:07:55.279
+00:08:31.632 --> 00:08:34.808
 As at Lascaux, nobody takes a piece of the wall home.
 
-00:07:57.779 --> 00:08:01.861
+00:08:37.308 --> 00:08:41.390
 Lascaux's paintings have been seen by millions, and the cave still rests.
 
-00:08:03.561 --> 00:08:05.783
+00:08:43.090 --> 00:08:45.312
 This autumn, four copies were asked for.
 
-00:08:07.083 --> 00:08:14.513
+00:08:46.612 --> 00:08:54.042
 Jun got made-up learners, the hospital its totals and one answer from a clean room, and Elena's download was never made.
 
-00:08:16.413 --> 00:08:19.201
+00:08:55.942 --> 00:08:58.730
 Every copy keeps the protection, or isn't made.

@@ -41,6 +41,11 @@ LD.buildQuiz=()=>{
   const root=$("#quiz-app");if(!root)return;root.textContent="";
   const QS=Q.qs,saved=store.get("quiz",{}),S={cur:Math.min(saved.cur||0,QS.length-1),ans:saved.ans||{},sum:!!saved.sum};let kill=null;
   const save=()=>store.set("quiz",{cur:S.cur,ans:S.ans,sum:S.sum});
+  /* a saved answer has to fit its scenario as it is now: where the pick no longer gives the result saved with it (the options or cards have moved since), the scenario is asked again */
+  const fits=(q,a)=>{const p=a.pick;if(q.type==="choice")return !!q.opts[p]&&!!q.opts[p].ok===!!a.ok;if(q.type==="spot")return p>=0&&p<q.rows.length&&(p===q.answer)===!!a.ok;
+    return Array.isArray(p)&&p.length===q.items.length&&(q.type==="sort"?q.items.every((it,k)=>p[k]===it.b):p.every((k,pos)=>k===pos))===!!a.ok;};
+  const stale=Object.keys(S.ans).filter(i=>!QS[i]||!fits(QS[i],S.ans[i]));
+  if(stale.length){stale.forEach(i=>delete S.ans[i]);S.sum=false;S.cur=Math.max(0,QS.findIndex((_,j)=>!S.ans[j]));save();}
   const bar=h("div",{class:"qbar"}),dots=h("div",{class:"dots",role:"group","aria-label":Q.ui.progress}),score=h("p",{class:"score",style:{margin:0}});
   const restart=h("button",{type:"button",class:"btn",onclick:()=>{S.ans={};S.cur=0;S.sum=false;save();render();}},"↺ "+Q.ui.restart);
   bar.append(dots,h("div",{style:{display:"flex",gap:"12px",alignItems:"center",flexWrap:"wrap"}},score,restart));

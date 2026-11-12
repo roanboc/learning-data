@@ -12,9 +12,9 @@
 #    has. Never two bells on one pitch a little apart, so nothing beats.
 #  - The mark: one bell, the student system's, D 5: struck clear when its night's file comes, then the same bell struck again later,
 #    duller, its ring short and its glint gone, like ice that has begun to melt: the same file, a day old. In the opening (the night's
-#    file, then the list built without it), in chapter 2 (the file of the night before), as the two sources' ages in chapter 5 (the
-#    student system's, dull; the portal's own bell, B-flat 4, clear) and, at the end, the other way round: dull while the send waits,
-#    clear when the list is fresh.
+#    file, then the list built without it), in chapter 2 (the file of the night before), in chapter 5 (December's file, on time and
+#    full of the day before's records: dull; then the two sources' ages, the student system's dull and the portal's own bell, B-flat 4,
+#    clear) and, at the end, the other way round: dull while the send waits, clear when the list is fresh.
 #  - B-flat major for the coast and the programme, the list in time and the end; G minor for the late night and the problem; E-flat
 #    major for people; F major where something has to change, before B-flat. Just intonation from B-flat (see hz()), so nothing beats;
 #    no C held with E-flat or G: those aren't pure in this table.
@@ -329,14 +329,26 @@ paper(G('fresh', 'pencil', 0.0), 0.010, px(960), 0.4)
 tFr = R('pencil', 'This is its first rule', 0.0)
 big(Eb3, tFr, 0.55); ice(G4, tFr + 0.45, 0.45, 0.0); ice(Eb4, tFr + 1.0, 0.4, 0.2, ring=0.6)
 
-# 5. Say how old it is: from now on the list says how old it is: B-flat, as the chapter turns. Every row carries its sources' age.
-#    That Thursday, over a large B-flat: the student system's, thirty hours, its bell dull; the portal's, six hours, its own bell clear. Shown wherever the
-#    list is, first in the printer's file. Like the flags: the three bells, quicker now. On good nights too. Data that says its age:
-#    F; data that doesn't, can't: a large low G, alone
+# 5. Say how old it is: from now on the list says how old it is: B-flat, as the chapter turns. Old, counted from when? One of its
+#    records, and its three dates, a tap as each is typed. The first matters, and is the hardest to read. The last says the least:
+#    December's file, on time, and the student system's bell, dull, alone: full of the day before's records. So the list goes by the
+#    second. Every row carries its sources' age. That Thursday, over a large B-flat: the student system's, thirty hours, its bell
+#    dull; the portal's, six hours, its own bell clear. Shown wherever the list is, first in the printer's file. Like the flags: the
+#    three bells, quicker now. On good nights too. Data that says its age: F; data that doesn't, can't: a large low G, alone
 A = lambda lid, word, off=0: W('age', lid, word, off)
 a0 = S0('age')
-knock(G('age', 'says', 0.0), 0.012, px(700)); big(Bb2, G('age', 'says', -0.2), 0.6); ice(F4, G('age', 'says', 0.35), 0.45, 0.0)
-tap(G('age', 'row', 0.0), 0.008, px(700)); tap(A('row', 'age', 0.0), 0.008, px(1100)); tap(G('age', 'row', 0.8), 0.008, px(1150))
+knock(G('age', 'says', 0.0), 0.012, px(380)); big(Bb2, G('age', 'says', -0.2), 0.6); ice(F4, G('age', 'says', 0.35), 0.45, 0.0)
+tap(G('age', 'from', 0.0), 0.008, px(330)); knock(A('from', 'Every record', 0.0), 0.012, px(1250))
+for l_ in ('happened', 'saved', 'came'):
+    tap(G('age', l_, 0.0), 0.007, px(1000))
+tap(G('age', 'matters', 0.2), 0.008, px(1250))
+tap(A('matters', 'each table', 0.0), 0.007, px(960)); tap(A('matters', 'when no board meets', 0.0), 0.007, px(960))
+tap(G('age', 'easiest', 0.2), 0.008, px(1250))
+paper(A('easiest', 'for December', 0.0), 0.010, px(880), 0.35); tap(A('easiest', 'on time', 0.0), 0.008, px(1130))
+tDb = A('easiest', 'full of', 0.0)
+tap(tDb, 0.008, px(1300)); dull(tDb + 0.05, 0.75, px(880))
+tap(G('age', 'second', 0.2), 0.008, px(1250)); tap(A('second', 'the date every load', 0.0), 0.008, px(1000))
+knock(G('age', 'row', 0.0), 0.012, px(960)); tap(A('row', 'age', 0.0), 0.008, px(1300)); tap(A('row', 'the newest record', 0.0), 0.008, px(1150))
 tSs = A('own', 'student system', 0.0); tPo = A('own', 'portal', 0.0)
 big(Bb2, tSs - 0.1, 0.45); tap(tSs, 0.008, px(1000)); dull(tSs + 0.05, 0.75, px(1000))
 tap(tPo, 0.008, px(1410)); clear(tPo + 0.05, 0.75, px(1410), m=PORTAL)
@@ -354,18 +366,31 @@ tCt = G('age', 'cant', 0.0)
 knock(tCt, 0.012, px(960)); tap(tCt + 0.5, 0.009, px(1380)); big(G2, END('age', 'cant') + 0.2, 0.55, ring=1.0)
 
 # 6. Warn first, then stop the send: Sam checks the age where it starts: F, a large bell and a small one, as the chapter turns. The
-#    receipts, when each file arrived; one level on each. The night's update: the check first; it fails, and Sam and Malia hear at
-#    once: a large D; the list is still built, saying its age. That's the warning: E-flat, warm. The send's job: the same check; if it
-#    fails, the list waits: the student system's bell, dull. The data isn't stopped. The send is: F, then B-flat, low
+#    receipts: the newest record each source saved, not when its file arrived; one level on each. But old records can't say why:
+#    two nights' receipts, set down side by side, the same age under each. The second alarm, the file's arrival: no file on June's
+#    night, a tag and no bell, where the student system's would ring: the source has gone silent; on November's, on time, the same
+#    bell, dull: a file came, a day old. The night's update: both checks first; they fail, and Sam and Malia hear at once: a large
+#    D; the list is still built, saying its age. That's the warning: E-flat, warm. The send's job: a check of the list's own age; if
+#    it fails, the list waits: the student system's bell, dull. The data isn't stopped. The send is: F, then B-flat, low
 T = lambda lid, word, off=0: W('stop', lid, word, off)
 t0_ = S0('stop')
 big(F2, G('stop', 'source', -0.2), 0.6); ice(C5, G('stop', 'source', 0.35), 0.45, 0.2)
-knock(G('stop', 'source', 0.2), 0.012, px(850)); knock(G('stop', 'source', 0.5), 0.012, px(1490))
-tap(T('arrived', 'arrived', 0.0), 0.008, px(1170)); tap(T('arrived', 'not the newest row', 0.0), 0.008, px(900))
-paper(G('stop', 'level', 0.0), 0.010, px(1090), 0.4); tap(T('level', 'twenty-four hours', 0.0), 0.008, px(1000))
+knock(G('stop', 'source', 0.2), 0.012, px(860)); knock(G('stop', 'source', 0.5), 0.012, px(1500))
+tap(T('reads', 'the newest record', 0.0), 0.008, px(1180)); tap(T('reads', 'not when its file arrived', 0.0), 0.008, px(1000))
+paper(G('stop', 'level', 0.0), 0.010, px(1110), 0.4); tap(T('level', 'twenty-four hours', 0.0), 0.008, px(1000))
 tap(T('level', 'on each', 0.0), 0.008, px(760))
+# old records can't say why: June's receipts and November's, a card each; the same age under both; a question under each
+knock(G('stop', 'why', -0.35), 0.012, px(860)); knock(G('stop', 'why', -0.1), 0.012, px(1500))
+tap(T('why', 'old records', 0.1), 0.008, px(1180))
+tap(T('why', 'no file come', 0.0), 0.007, px(650)); tap(T('why', 'nothing new', 0.0), 0.007, px(1330))
+# the second alarm reads when the last file was received: no file on June's night, its tag, and no bell; on time on November's, its
+# tag, and the student system's bell, dull: a file came, a day old. The alarm's card: a knock, and nothing rings
+tap(T('alarm', 'arrival', 0.0), 0.008, px(1010))
+tNf = T('alarm', 'no file tonight', 0.0)
+tap(tNf, 0.009, px(690)); tap(tNf + 0.4, 0.008, px(1340)); dull(tNf + 0.45, 0.7, px(1340))
+knock(T('alarm', 'gone silent', 0.0), 0.012, px(1010))
 knock(G('stop', 'first', 0.0), 0.012, px(1090))
-knock(G('stop', 'tells', 0.2), 0.010, px(800), 190)
+knock(G('stop', 'tells', 0.2), 0.010, px(800), 190); knock(G('stop', 'tells', 0.5), 0.008, px(800), 190)
 tHr = T('tells', 'hear at once', 0.0)
 tap(tHr, 0.008, px(1300)); big(D3, tHr - 0.1, 0.6); ice(F4, tHr + 0.4, 0.45, 0.2)
 tap(T('tells', 'still built', 0.0), 0.009, px(1000)); tap(T('tells', 'saying its age', 0.0), 0.008, px(1380))

@@ -21,7 +21,8 @@ What it checks, page by page (every .html under site/):
 - Spanish captions: a Spanish page that plays an English film loads the film's captions first, each a copy of its source.
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
 - a series' own labs and scenarios (build_series.series_learn): the same in both languages, each lab on one of its film's
-  chapters, each scenario numbered by its film and pointing to a lab; its films' "Pause and think" questions stop at its labs.
+  chapters, the labs listed in film order (the labs page numbers them 1 to N in that order), each scenario numbered by its film,
+  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
@@ -36,7 +37,17 @@ What it checks, page by page (every .html under site/):
   the platform keeps the rows in a second form, or a managed copy; only a query sent to the source stores none.
 - Pause and think: every pack's questions have one right answer and one near miss, options of like length (the right one at most a quarter
   longer than the longest wrong one, and clearly the longest in at most half a pack's questions), right answers spread across the options,
-  and each Spanish pack's right answers and near misses in the English places.
+  and each Spanish pack's right answers and near misses in the English places. The first film's questions, a block of its pack of labs
+  and scenarios, are read too.
+- scenarios and labs: in every pack of labs and scenarios, each choice has one right option; a pack's right answers are spread across
+  the options (at most half of its scenarios' in one place, and of its labs' rows, where a row marks one option right; a lab's own rows
+  never all in one place); a sorting list's cards aren't written box by box, nor two boxes turn and turn about; an order scenario first shows its steps mixed, from its pack's start or by the one line every engine shares (MIXED); and the Spanish pack keeps the English places. A page shows
+  them in the order written. Only the labs a page shows are read (a series' pack can point to one lab of each film's own pack), and not a
+  series whose engine mixes the options as it shows them.
+- scenarios' lengths: in the scenarios a page shows, in English and Spanish, the right option is at most a quarter longer than the
+  longest wrong one, no option is under half the longest, and the right one is clearly the longest in at most half of a page's
+  scenarios, as in Pause and think. Options that only name something (every one under 25 characters) aren't compared, nor the
+  scenarios no page shows. The series still to be reworded are listed in LENGTHS_LATER.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
@@ -226,10 +237,37 @@ NO_COPY = re.compile(r"\bzero[- ]cop(?:y|ies)\b|\bin place\b|\bnot (?:one|a sing
                      r"\bno cop(?:y|ies)\b(?! (?:for|of) )|\bcero copias\b|\ben su sitio\b|\bsin copiar\b|\bsin copias?\b", re.I)
 
 
+# names the voice misreads as written (PLAYBOOK §5, Hear a real person's name, too): it reads "Deming", and "Deeming", with a long e,
+# and W. Edwards Deming's surname is said DEM-ing, with a short e. A line's "say", or a pair in the film's film.json "say", spells
+# such a name for the voice ("Demming"); the words on screen, the captions and the page keep it as it is written. Each row: the
+# name as the voice would misread it, the spelling that makes the voice say it, and how it is said
+VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surname is said DEM-ing, with a short e")]
+
+
 def release_status(text):
     """where a piece of a film's text names a feature's release status: (the words, the words around them)"""
     return [(m.group(0), ("…" if m.start() > 50 else "") + text[max(0, m.start() - 50):m.end() + 30].strip() + ("…" if m.end() + 30 < len(text) else ""))
             for m in sorted(list(STATUS.finditer(text)) + list(STATUS_GA.finditer(text)), key=lambda m: m.start())]
+
+
+def voice_names(narr, pairs=None):
+    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the film's
+    own respellings (film.json "say": [[pattern, words], ...], as the voice tool applies them)."""
+    src = narr.read_text(encoding="utf-8")
+    if pairs is None:
+        meta = narr.parents[1] / "film.json"
+        pairs = json.loads(meta.read_text(encoding="utf-8")).get("say", []) if meta.exists() else []
+    out = []
+    for sid, sc in json.loads(src[src.index("{"):src.rindex("}") + 1]).items():
+        for ln in sc.get("vo", []):
+            said = ln.get("say") or ln["text"]
+            for pattern, words in pairs:
+                said = re.sub(pattern, words, said)
+            for name, spelled, how in VOICE_NAMES:
+                for hit in name.finditer(said):
+                    out.append(f"{narr.relative_to(ROOT)} {sid}/{ln['id']}: the voice would read \"{hit.group(0)}\" as it's written: {how}; "
+                               f"spell it \"{spelled}\" in the line's \"say\", or in film.json's \"say\"")
+    return out
 
 
 def json_strings(v, where=""):
@@ -489,6 +527,54 @@ def js_comment_spans(src):
     return spans
 
 
+def js_flat(src):
+    """A script with its comments, and the words inside its strings, blanked: every bracket, comma and key stays where it was,
+    so brackets can be matched and keys found without a string's words getting in the way."""
+    out, i, n = list(src), 0, len(src)
+    for a, b in js_comment_spans(src):
+        out[a:b] = [c if c == "\n" else " " for c in out[a:b]]
+    while i < n:
+        c = out[i]
+        if c in "'\"`":
+            j = i + 1
+            while j < n and out[j] != c:
+                j += 2 if out[j] == "\\" else 1
+            out[i + 1:j] = [x if x == "\n" else " " for x in out[i + 1:j]]
+            i = j
+        i += 1
+    return "".join(out)
+
+
+def js_close(flat, i):
+    """The place just past the bracket that closes the one opening at flat[i], in a script js_flat() has blanked."""
+    depth = 0
+    for j in range(i, len(flat)):
+        if flat[j] in "[{(":
+            depth += 1
+        elif flat[j] in "]})":
+            depth -= 1
+            if not depth:
+                return j + 1
+    return len(flat)
+
+
+def js_items(flat, i):
+    """The items of the array (or the entries of the object) that opens at flat[i], as (start, end), split at its own commas."""
+    out, depth, start = [], 0, i + 1
+    for j in range(i, len(flat)):
+        c = flat[j]
+        if c in "[{(":
+            depth += 1
+        elif c in "]})":
+            depth -= 1
+            if not depth:
+                return out + ([(start, j)] if flat[start:j].strip() else [])
+        elif c == "," and depth == 1:
+            out.append((start, j))
+            start = j + 1
+    return out
+
+
 # ---------------------------------------------------------------- opening stories
 def plain_words(t):
     """Text as it's said: JS escapes undone, curly quotes straightened, spaces collapsed."""
@@ -533,9 +619,15 @@ THINK_ONE_PLACE = 0.40  # across the site, no position holds more than this shar
 
 
 def think_questions(path):
-    """A Pause and think pack's questions, in order: {key: [(text, ok, near), ...]}, read from its source as written."""
+    """A Pause and think pack's questions, in order: {key: [(text, ok, near), ...]}, read from its source as written. The first
+    film's are the think:{ block of its pack of labs and scenarios (assets/learn/learn.<lang>.js), and only that block is read."""
     src, out = path.read_text(), {}
-    for m in re.finditer(r'(?:"([\w-]+)"|\b([\w-]+))\s*:\s*\{(?:\s*\w+:"(?:[^"\\]|\\.)*",)*\s*q:"', src):
+    block = re.search(r"^think:\{", src, re.M)
+    if block:
+        src = src[block.end() - 1:]
+        src = src[:js_close(js_flat(src), 0)]
+    said = r'"(?:[^"\\]|\\.)*"'  # a string; a key before the question holds one, or an object of them (a link to go deeper)
+    for m in re.finditer(r'(?:"([\w-]+)"|\b([\w-]+))\s*:\s*\{(?:\s*\w+:(?:' + said + r'|\{(?:[^{}"]|' + said + r')*\}),)*\s*q:"', src):
         s = src.find("opts:[", m.end())
         i, depth, in_str = s + 6, 1, False
         while i < len(src) and depth:
@@ -584,6 +676,216 @@ def think_faults(path, en=None):
     places = {[i for i, o in enumerate(opts) if o[1]][0] for opts in qs.values() if sum(o[1] for o in opts) == 1}
     if len(qs) > 1 and len(places) == 1:
         out.append(f"{rel}: every right answer is option {places.pop() + 1}: spread them")
+    return out
+
+
+# Scenarios and labs: where the right answer sits (AGENTS.md, Video craft; PLAYBOOK §7). A page shows a scenario's options, a
+# lab's rows of options and a sorting list's cards in the order their pack writes them. Until 12 November 2026 only Pause and
+# think was checked, and in most scenarios the right answer was the second option.
+SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more than this share of the right answers
+# an engine (site/assets/<engine>/learn.js) that mixes the options itself each time it shows them, with the words that do it:
+# the packs of the series it shows aren't read
+SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
+# an order scenario's first showing, where its pack gives no start: the one line every engine mixes the steps with, mixed(n, s) for
+# n steps and a number s of the scenario's own, so each scenario is mixed its own way, the same each time. It holds to
+# order_mixed(), which tests/test_spread.py tries on this line itself.
+MIXED = ("const mixed=(n,s)=>{"
+         "const hs=x=>{x=Math.imul(x^x>>>16,0x45d9f3b);x=Math.imul(x^x>>>16,0x45d9f3b);return(x^x>>>16)>>>0;},"
+         "run=o=>[1,n-1].some(d=>o.every((k,p)=>!p||(k-o[p-1]+n)%n===d)),"
+         "fine=o=>n<4?o.some((k,p)=>k!==p):!run(o)&&o.filter((k,p)=>k===p).length<=n/4&&o.filter((k,p)=>p&&k===o[p-1]+1).length<=n/3;"
+         "for(let t=0;t<60;t++){const key=Array.from({length:n},(_,i)=>hs(((s|0)+1)*7919+t*104729+i*1013+n)),"
+         "o=key.map((_,i)=>i).sort((a,b)=>key[a]-key[b]||a-b);if(fine(o))return o;}"
+         "return Array.from({length:n},(_,i)=>(2*i+1)%(n|1));};")
+# A scenario's options: the right one mustn't be the one that explains everything. The limits are Pause and think's (THINK_*), read
+# on the scenarios a page shows, in English and Spanish. In the packs written before 12 November 2026, the right option was more
+# than a quarter longer than every wrong one in 85 of the 97 scenarios a page shows.
+SPREAD_NAMES = 25  # options that only name something, every one shorter than this, aren't compared: a name's length says nothing
+# the series whose scenarios aren't of like length yet, by the folder of their pack: each leaves the list with its fix
+LENGTHS_LATER = {"data-governance", "governance-on-the-map", "governance-in-practice", "what-an-agent-is", "enterprise-architecture"}
+
+
+def spread_most(n, k):
+    """How many of n right answers one place may hold, with k options each: half of them, or an even share where the options
+    are too few for half (three rows of two options can do no better than two and one)."""
+    return max(n // 2, -(-n // k))
+
+
+def box_by_box(boxes):
+    """True where a sorting list's cards are written box by box: in the boxes' own order, or each box's cards together."""
+    if len(boxes) < 3 or len(set(boxes)) < 2:
+        return False
+    runs = [b for i, b in enumerate(boxes) if not i or boxes[i - 1] != b]
+    return runs == sorted(runs) or (len(runs) == len(set(boxes)) and len(boxes) > len(runs))
+
+
+def turn_about(boxes):
+    """True where four or more cards go to two boxes turn and turn about: one, the other, one, the other."""
+    return len(boxes) > 3 and len(set(boxes)) == 2 and all(x != y for x, y in zip(boxes, boxes[1:]))
+
+
+def order_mixed(start):
+    """Whether an order's first showing, the steps' numbers in the places it shows them, is mixed enough not to give the order
+    away: not in order; and with four steps or more, not in reverse, nor in either from some step on round to the one before
+    it, with at most a quarter of the steps where they belong and at most a third still following the step before them."""
+    n = len(start)
+    if n < 4:
+        return start != sorted(start)
+    run = any(all((start[p] - start[p - 1]) % n == d for p in range(1, n)) for d in (1, n - 1))
+    return not run and sum(k == p for p, k in enumerate(start)) <= n / 4 and sum(start[p] == start[p - 1] + 1 for p in range(1, n)) <= n / 3
+
+
+def learn_pack(path):
+    """What a pack of labs and scenarios asks, read from its source as written: {"qs": [...], "labs": {id: {...}}}.
+    A scenario has its type and title; for a "choice", opts, the (text, right) of its options; for a "sort", boxes, the place
+    of each card's box among the boxes; for an "order", n, its steps, and start, its first showing where the pack gives one;
+    film and q where a series' pack only points to a film's own scenario (its place in that film's pack).
+    A lab has its kind and film; rows, the (text, right) options of each row that marks one right (a compose lab's parts, a
+    field's rules); and boxes for a sorting lab.
+    The scenarios are the array that starts a line with qs:[ (the first film's is inside its quiz:{, A Sharper Sketch's is
+    const QS=[), and the labs the one that starts a line with labs:[."""
+    src, out = path.read_text(), {"qs": [], "labs": {}}
+
+    def part(pattern, text):
+        m = re.search(pattern, text, re.M)
+        if not m:
+            return None, None
+        text = text[m.end() - 1:]
+        flat = js_flat(text)
+        end = js_close(flat, 0)
+        return text[:end], flat[:end]
+
+    def word(text, flat, a, b, key):
+        m = re.compile(r"\b" + key + r':"').search(flat, a, b)
+        return plain_words(text[m.end():flat.index('"', m.end())]) if m else None
+
+    def number(flat, a, b, key):
+        m = re.compile(r"\b" + key + r":(\d+)").search(flat, a, b)
+        return int(m.group(1)) if m else None
+
+    def options(text, flat, i):
+        return [(word(text, flat, a, b, "t") or "", bool(re.compile(r"\bok:(?:true|!0)").search(flat, a, b)))
+                for a, b in js_items(flat, i) if flat[a:b].lstrip().startswith("{")]
+
+    def boxes(text, flat, a, b):
+        bm, im = re.compile(r"\bbuckets:\[").search(flat, a, b), re.compile(r"\bitems:\[").search(flat, a, b)
+        if not bm or not im:
+            return None
+        keys = [plain_words(m.group(1)) for x, y in js_items(flat, bm.end() - 1) for m in [re.match(r'\s*\["((?:[^"\\]|\\.)*)"', text[x:y])] if m]
+        cards = [word(text, flat, x, y, "b") for x, y in js_items(flat, im.end() - 1)]
+        return [keys.index(c) if c in keys else -1 for c in cards]
+
+    text, flat = part(r"^(?:qs:|const QS=)\[", src)
+    if text is None:
+        text, flat = part(r"^quiz:\{", src)
+        if text is not None:
+            m = re.search(r"\bqs:\[", flat)
+            text, flat = (text[m.end() - 1:], flat[m.end() - 1:]) if m else (None, None)
+    for a, b in js_items(flat, 0) if flat else []:
+        if not flat[a:b].lstrip().startswith("{"):
+            continue
+        q = {"type": word(text, flat, a, b, "type"), "title": word(text, flat, a, b, "title") or "", "film": number(flat, a, b, "film"),
+             "q": number(flat, a, b, "q"), "opts": None, "boxes": None, "n": None, "start": None}
+        m = re.compile(r"\bopts:\[").search(flat, a, b)
+        if q["type"] == "choice" and m:
+            q["opts"] = options(text, flat, m.end() - 1)
+        elif q["type"] == "sort":
+            q["boxes"] = boxes(text, flat, a, b)
+        elif q["type"] == "order":
+            m, st = re.compile(r"\bitems:\[").search(flat, a, b), re.compile(r"\bstart:\[([\d,\s]*)\]").search(flat, a, b)
+            q["n"] = len(js_items(flat, m.end() - 1)) if m else 0
+            q["start"] = [int(x) for x in st.group(1).split(",") if x.strip()] if st else None
+        out["qs"].append(q)
+    text, flat = part(r"^labs:\[", src)
+    for a, b in js_items(flat, 0) if flat else []:
+        if not flat[a:b].lstrip().startswith("{"):
+            continue
+        lab = {"kind": word(text, flat, a, b, "kind"), "film": number(flat, a, b, "film"), "rows": [], "boxes": None}
+        for m in re.compile(r"\b(?:opts|rules):\[").finditer(flat, a, b):
+            if re.compile(r"\bok:").search(flat, m.end(), js_close(flat, m.end() - 1)):
+                lab["rows"].append(options(text, flat, m.end() - 1))
+        if lab["kind"] == "sort":
+            lab["boxes"] = boxes(text, flat, a, b)
+        out["labs"][word(text, flat, a, b, "id")] = lab
+    return out
+
+
+def spread_faults(rel, P, labs, es=None):
+    """What gives a pack's answers away by where they sit: P is what learn_pack() read, labs the ids of the labs a page shows,
+    es the Spanish pack (rel names the English one, so the Spanish one's faults name its twin). One right option in each
+    choice; among the scenarios, and again among the labs' rows, no place holds more of the right answers than spread_most()
+    allows; a lab's own rows not all in one place; a sorting list's cards not box by box, nor two boxes turn and turn about; an
+    order's first showing mixed (order_mixed()), where the pack gives it; and the Spanish pack's options and cards in the English
+    places."""
+    out = []
+    choices = [(f'"{q["title"]}"', q["opts"]) for q in P["qs"] if q["opts"] is not None]
+    rows = [(f'lab "{k}"', row) for k, lab in P["labs"].items() if k in labs for row in lab["rows"]]
+    for name, opts in choices + rows:
+        if sum(r for _, r in opts) != 1:
+            out.append(f"{rel}: {name}: {sum(r for _, r in opts)} of its options are marked right (ok:true); a choice has one")
+    at = lambda opts: next(i for i, (_, r) in enumerate(opts) if r)
+    for what, group in (("scenarios", choices), ("labs' rows", rows)):
+        group = [opts for _, opts in group if sum(r for _, r in opts) == 1]
+        if len(group) > 1:
+            most, (i, c) = spread_most(len(group), min(map(len, group))), Counter(map(at, group)).most_common(1)[0]
+            if c > most:
+                out.append(f"{rel}: the right answer is option {i + 1} in {c} of its {len(group)} {what} (at most {most} in one place): spread them")
+    for k, lab in P["labs"].items():
+        one = [row for row in lab["rows"] if sum(r for _, r in row) == 1] if k in labs else []
+        if len(one) > 1 and len({at(row) for row in one}) == 1:
+            out.append(f"{rel}: lab \"{k}\": the right option is number {at(one[0]) + 1} in every row: spread them")
+    sorts = [(f'"{q["title"]}"', q["boxes"]) for q in P["qs"] if q["boxes"]] + [(f'lab "{k}"', lab["boxes"]) for k, lab in P["labs"].items() if k in labs and lab["boxes"]]
+    for name, boxes in sorts:
+        if -1 in boxes:
+            out.append(f"{rel}: {name}: a card names a box that isn't one of its boxes")
+        elif box_by_box(boxes) or turn_about(boxes):
+            out.append(f"{rel}: {name} lists its cards {'box by box' if box_by_box(boxes) else 'turn and turn about'} ({', '.join(str(b + 1) for b in boxes)}): mix them")
+    for q in P["qs"]:
+        if q["start"] is not None and (sorted(q["start"]) != list(range(q["n"])) or not order_mixed(q["start"])):
+            out.append(f"{rel}: \"{q['title']}\": its start ({q['start']}) must hold each of its {q['n']} steps once, and mixed: not in order, in reverse, in either from some step on round, nor with most steps where they belong")
+    if es is not None:
+        shape = lambda X: ([(q["type"], [r for _, r in q["opts"]] if q["opts"] is not None else None, q["boxes"], q["start"]) for q in X["qs"]],
+                           {k: ([[r for _, r in row] for row in lab["rows"]], lab["boxes"]) for k, lab in X["labs"].items()})
+        (qs, ls), (qs_es, ls_es) = shape(P), shape(es)
+        twin = str(rel).replace(".en.js", ".es.js")
+        if len(qs) != len(qs_es) or set(ls) != set(ls_es):
+            out.append(f"{twin}: its labs and scenarios aren't the English pack's")
+        else:
+            out += [f"{twin}: scenario {i + 1} (\"{P['qs'][i]['title']}\"): its options or cards aren't in the places the English pack puts them" for i, (x, y) in enumerate(zip(qs, qs_es)) if x != y]
+            out += [f"{twin}: lab \"{k}\": its options or cards aren't in the places the English pack puts them" for k in ls if ls[k] != ls_es[k]]
+    return out
+
+
+def length_read(q):
+    """A scenario's options by their lengths: (the right one's, the longest wrong one's, every option's), or None where lengths
+    aren't compared: no options, not one right option (spread_faults() says so), or options that only name something, every
+    one under SPREAD_NAMES characters."""
+    opts = q["opts"]
+    if opts is None or len(opts) < 2 or sum(r for _, r in opts) != 1:
+        return None
+    size = [len(t) for t, _ in opts]
+    if max(size) < SPREAD_NAMES:
+        return None
+    return next(x for x, (_, r) in zip(size, opts) if r), max(x for x, (_, r) in zip(size, opts) if not r), size
+
+
+def length_faults(group, shown):
+    """What gives a scenario's answer away by its length, as in Pause and think: shown is [(file, scenario)], the scenarios one
+    page shows, as learn_pack() read them, and group names that page's pack in the fault about them all. The right option at most
+    THINK_LONGER times the longest wrong one; no option under THINK_SHORTEST of the longest; and the right one clearly the
+    longest (by more than THINK_CLEARLY) in at most half of the page's scenarios."""
+    out, clearly, n = [], 0, 0
+    for rel, q in shown:
+        if length_read(q) is None:
+            continue
+        right, wrong, size = length_read(q)
+        n += 1
+        if right > THINK_LONGER * wrong:
+            out.append(f"{rel}: \"{q['title']}\": the right option is {right} characters, the longest wrong one {wrong}: its length gives it away")
+        if min(size) < THINK_SHORTEST * max(size):
+            out.append(f"{rel}: \"{q['title']}\": options of {'/'.join(map(str, size))} characters: give the short ones the same detail")
+        clearly += right > THINK_CLEARLY * wrong
+    if clearly > -(-n // 2):
+        out.append(f"{group}: the right option is clearly the longest in {clearly} of the {n} scenarios its page shows: make the wrong ones as full")
     return out
 
 
@@ -1135,13 +1437,18 @@ def main():
         s["notes"].append("say what copies and who keeps it: the platform keeps the rows in a second form, or a managed copy, with no pipeline "
                           "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
     s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
+    s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e)")
+    for f in st_voices:
+        s["fails"] += voice_names(f)
+    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after the film's own respellings")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
-    for en_path in sorted(WEB.glob("assets/*/think.en.js")):
+    # every film's pack, and the first film's, whose questions are a block of its pack of labs and scenarios
+    for en_path in sorted(WEB.glob("assets/*/think.en.js")) + [WEB / "assets/learn/learn.en.js"]:
         packs += 1
         en = think_questions(en_path)
         s["fails"] += think_faults(en_path)
-        es_path = en_path.with_name("think.es.js")
+        es_path = en_path.with_name(en_path.name.replace(".en.js", ".es.js"))
         if es_path.exists():
             s["fails"] += think_faults(es_path, en)
         places.update(i for opts in en.values() for i, o in enumerate(opts) if o[1])
@@ -1150,6 +1457,97 @@ def main():
         if total and c > THINK_ONE_PLACE * total:
             s["fails"].append(f"Pause and think: {c} of {total} right answers are option {i + 1}: spread them")
     s["notes"].append(f"{packs} packs, {total} questions; right answers by option: " + ", ".join(f"{i + 1}: {c}" for i, c in sorted(places.items())))
+
+    s = rep.check("Scenarios and labs: one right option in each choice, right answers spread across the options, sorting cards not box by box, an order's steps mixed")
+    learn = {p.parent.name: p for p in sorted(WEB.glob("assets/*/learn.en.js"))}
+    learn["sketch"] = WEB / "assets/sketch/sketch.js"
+    for k, words in SPREAD_SHUFFLED.items():
+        if words not in (WEB / "assets" / k / "learn.js").read_text():
+            s["fails"].append(f"site/assets/{k}/learn.js no longer mixes its options as it shows them ({words}…): take \"{k}\" off SPREAD_SHUFFLED, and spread the right answers of the packs it shows")
+    mixed = sorted(SL["dir"] for _, SL in SERIES_LEARN.values() if SL["engine"] in SPREAD_SHUFFLED)
+    read = {k: learn_pack(p) for k, p in learn.items() if k not in mixed}
+    shown = {k: set(P["labs"]) for k, P in read.items()}  # the labs a page shows, by pack: every lab of a pack with pages of its own
+    faults = defaultdict(list)
+    # a series' pack that only points to each film's own lab and scenario: the film's pack holds the words, and shows nothing else
+    for S, SL in SERIES_LEARN.values():
+        P = read.get(SL["dir"])
+        if not P or not any(q["q"] is not None and q["opts"] is None for q in P["qs"]):
+            continue
+        rel, keys = learn[SL["dir"]].relative_to(ROOT), {x["index"] + 1: x["key"] for x in build_series.films(S)[1]}
+        shown.update({k: set() for k in keys.values() if k in read})
+        for i, lab in P["labs"].items():
+            if keys.get(lab["film"]) in read:
+                shown[keys[lab["film"]]].add(i)
+        mine = []
+        for q in P["qs"]:
+            F = read.get(keys.get(q["film"]))
+            if F is None:
+                continue  # a film still being made
+            if q["q"] is None or q["q"] >= len(F["qs"]) or F["qs"][q["q"]]["type"] != q["type"]:
+                faults[SL["dir"]].append(f"{rel}: \"{q['title']}\" points to scenario {q['q']} of film {q['film']}, which isn't a {q['type']} in site/assets/{keys[q['film']]}/learn.en.js")
+            else:
+                mine.append(F["qs"][q["q"]])
+        faults[SL["dir"]] += spread_faults(rel, {"qs": mine, "labs": {}}, set())
+    places = Counter()
+    for k, P in read.items():
+        rel, es_path = learn[k].relative_to(ROOT), learn[k].with_name("learn.es.js")
+        faults[k] += spread_faults(rel, P, shown[k], learn_pack(es_path) if es_path.exists() else None)
+        places.update(i for q in P["qs"] if q["opts"] is not None for i, (_, r) in enumerate(q["opts"]) if r)
+    for k in sorted(read):
+        s["fails"] += faults[k]
+    total = sum(places.values())
+    for i, c in sorted(places.items()):
+        if total and c > SPREAD_ONE_PLACE * total:
+            s["fails"].append(f"Scenarios: {c} of {total} right answers are option {i + 1}: spread them")
+    s["notes"].append(f"{len(read)} packs, {total} scenarios with options; right answers by option: " + ", ".join(f"{i + 1}: {c}" for i, c in sorted(places.items())))
+    s["notes"].append("not read, since their engine mixes the options as it shows them: " + ", ".join(mixed))
+    # an order scenario's first showing: the pack's own start, or the one mix the engines share
+    engines = [p for p in sorted(WEB.glob("assets/*/*.js")) if not re.match(r"film\.|captions\.|think\.e|learn\.e", p.name) and ".captions." not in p.name]
+    orders = [p for p in engines if 'type==="order"' in p.read_text(encoding="utf-8")]
+    for p in orders:
+        src, rel = p.read_text(encoding="utf-8"), p.relative_to(ROOT)
+        if "mixed(" in src:
+            if MIXED not in src:
+                s["fails"].append(f"{rel}: its mixed() isn't the line every engine mixes an order's steps with: copy MIXED from site-tools/check_site.py")
+        elif "q.start" not in src and p.parent.name not in SPREAD_SHUFFLED:
+            s["fails"].append(f"{rel}: an order scenario's first showing comes neither from its pack's start nor from mixed(), so it can show in order: mix it with MIXED (site-tools/check_site.py)")
+    s["notes"].append(f"{len(orders)} engines show order scenarios: {sum('mixed(' in p.read_text(encoding='utf-8') for p in orders)} mix the steps with the shared line, the others take the pack's start or mix every list themselves")
+
+    s = rep.check("Scenarios: options of like length, the right one not the one that explains everything")
+    theirs = {k: learn_pack(p) for k, p in learn.items()}  # every pack, also those an engine mixes as it shows them: a length shows either way
+    twin = lambda k: learn[k].with_name("learn.es.js")
+    theirs_es = {k: learn_pack(twin(k)) for k in theirs if twin(k).exists()}
+    shows, through = [], set()  # (the series' pack, the file a fault names, the scenarios its page shows); packs a page shows only through a series' pack
+    for S, SL in SERIES_LEARN.values():
+        P = theirs.get(SL["dir"])
+        if not P or not any(q["q"] is not None and q["opts"] is None for q in P["qs"]):
+            continue
+        keys = {x["index"] + 1: x["key"] for x in build_series.films(S)[1]}
+        through |= {SL["dir"]} | {k for k in keys.values() if k in theirs}
+        for lg, all_ in (("en", theirs), ("es", theirs_es)):
+            mine = [(f"site/assets/{keys[q['film']]}/learn.{lg}.js", all_[keys[q["film"]]]["qs"][q["q"]]) for q in P["qs"]
+                    if keys.get(q["film"]) in all_ and q["q"] is not None and q["q"] < len(all_[keys[q["film"]]]["qs"])]
+            shows.append((SL["dir"], f"site/assets/{SL['dir']}/learn.{lg}.js", mine))
+    for k, P in theirs.items():
+        if k not in through:
+            shows.append((k, learn[k].relative_to(ROOT), [(learn[k].relative_to(ROOT), q) for q in P["qs"]]))
+            if k in theirs_es:
+                shows.append((k, twin(k).relative_to(ROOT), [(twin(k).relative_to(ROOT), q) for q in theirs_es[k]["qs"]]))
+    lengths = defaultdict(list)
+    for k, rel, mine in shows:
+        lengths[k] += length_faults(rel, mine)
+    for k in sorted(lengths):
+        if k not in LENGTHS_LATER:
+            s["fails"] += lengths[k]
+        elif not lengths[k]:
+            s["fails"].append(f"site/assets/{k}: its scenarios' options are of like length now: take \"{k}\" off LENGTHS_LATER in site-tools/check_site.py")
+    for k in sorted(LENGTHS_LATER - set(lengths)):
+        s["fails"].append(f"LENGTHS_LATER names \"{k}\", which isn't a series' pack of scenarios (site/assets/{k})")
+    held = {k for k, _, _ in shows} - LENGTHS_LATER
+    compared = sum(length_read(q) is not None for k, _, mine in shows if k in held for _, q in mine)
+    s["notes"].append(f"{len(held)} pack{'s' * (len(held) != 1)}, {compared} scenarios compared, in English and Spanish; a page's own scenarios only, and not options that only name something (every one under {SPREAD_NAMES} characters)")
+    if LENGTHS_LATER:
+        s["notes"].append(f"{len(LENGTHS_LATER)} packs written before this check are still to be reworded: " + ", ".join(sorted(LENGTHS_LATER)))
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")
@@ -1397,6 +1795,14 @@ def main():
         for k, c in Counter(ns).items():
             if c > 1:
                 s["fails"].append(f"{words}.en.js: {c} scenarios have the number {k}, which keeps their answers apart")
+        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, under their films'
+        # buttons, so they're listed in film order; the scenarios likewise, by their numbers
+        fl = [x["film"] for x in en["labs"]]
+        if fl != sorted(fl):
+            s["fails"].append(f"{words}.en.js: its labs aren't listed in film order (" + ", ".join(f"{x['id']} (film {x['film']})" for x in en["labs"]) + "): "
+                              "the labs page numbers them in that order, so a lab listed after a later film's shows under its film with the wrong number")
+        if ns != sorted(ns):
+            s["fails"].append(f"{words}.en.js: its scenarios aren't listed in order of their numbers ({', '.join(map(str, ns))})")
         on = {x["index"] + 1: x for x in build_series.films(S)[1]}
         for x in en["labs"]:
             f = on.get(x["film"])

@@ -1,6 +1,6 @@
 # Measure the work, not the people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250)
+*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/measure-the-work/)
 
@@ -22,6 +22,16 @@
 | 10 | Length? | 8 min 11 s, 1,038 words at 127 a minute, a little longer than *When someone falls behind* (7:18): the opening and two findings need the room | The whole film |
 | 11 | Music: the reserved lead and its partner? | The lead reserved for this film, tuned saw blades, round, struck softly with felt and damped; the partner, this thread's choice: the largest blades, low (D2 to D3), damped by the palm as they're struck, so one rings while the other stops (the film's pairs). Written into `palettes.md` before scoring. It sits near the site's bells and series 3's brake drums, so it is kept low, round and short (nothing above 2.3 kHz, no partials that beat); `quiet.py` passes | The score (`tools/score.py`) |
 | 12 | Ship the soundtrack how? | As the module's other films: `audio.json` from `media.py index --film measure-the-work-en`, the MP3 force-added beside it, no audio workflow run; copying it to its audio release is left for your checklist | `audio.json`, `site/assets/measure-the-work/soundtrack.mp3` |
+
+## 12 November 2026: Deming's name, said with its short e
+
+Rodrigo didn't ask for this change. The thread that applied his answer on the cycle's name found, while it changed *One small change at a time* (PR #351), that the voice said W. Edwards Deming's name as "deeming". This film says it once, in *Not a target*. It now says DEM-ing (PR #360). The questions it raised, and the assumption made for each:
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 13 | How is W. Edwards Deming's name said? | DEM-ing, with a short e, not "deeming". Read on 12 November 2026: Wikipedia gives the surname, in its article on the city of Deming, New Mexico, named for Mary Ann Deming Crocker, as DEM-ing (/ˈdɛmɪŋ/); the Japanese Wikipedia writes his own name デミング, and the prize named for him デミング賞 (デミングしょう), with a short e, in the country where he taught. His English article gives no pronunciation, and no recording of him was heard. | Chapter 5, the line "And W. Edwards Deming estimated that about 94 in 100 problems belong to the system, not to the people in it." (`film.json`, *say*: "Demming") | One pair leaves `film.json`, and the line is voiced again |
+| 14 | Does anything else in the film change? | No. The words on screen ("W. Edwards Deming, 1986"), the captions and the page are as they were: only the voice. The line is a hundredth of a second longer, the figure "94 in 100" still comes in at his name, and the film is 8:14, as it was. The script's chapter times and pacing report still gave the film as it was on 10 November 2026 (8:11); they now give it as it is since the opening's line changed on 11 November 2026 (PR #315). | Chapter 5; `script.md` | Nothing else |
+| 15 | How do later films keep the name right? | A check: `site-tools/check_site.py` takes each line as the voice reads it (its `say`, or its text, after the film's own respellings in `film.json`) and fails a film whose voice would read "Deming" or "Deeming" as it's written. The three films that name him pass: *One small change at a time* (PR #351), *Small, every week* (PR #357) and this one. The lesson is in `PLAYBOOK.md` (§5) and the fault in `AGENTS.md`; the check's list (`VOICE_NAMES`) takes the next name the voice misreads. | `site-tools/check_site.py`, `tests/test_voice_names.py` | The check leaves, or its list changes |
 
 ## 12 November 2026: the author's review
 

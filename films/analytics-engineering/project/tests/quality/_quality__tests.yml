@@ -30,3 +30,28 @@ data_tests:
       A ceremony season's list of more than 200 graduates in which not one name has a letter outside
       A to Z: eight in the hundred had lost their accents, so a list with none isn't chance. It holds
       the list for a person to look; it never stops it on its own.
+
+  - name: graduation_list_at_most_a_day_old_at_the_send
+    config:
+      enabled: "{{ var('at_the_send', false) }}"
+      meta:
+        owner: "Mei Tanaka, registrar's office"
+        dimension: timeliness
+    description: >
+      The send's check, on the list itself: each source's newest record at most 24 hours old when
+      the list goes to the printer, the level Malia Fonoti agreed on 22 June 2026 (Late is wrong too).
+      It runs only in the send's job, turned on with the var at_the_send, never in the night's build:
+      the night builds the list whatever its age, and says it. This one stops the send, not the data.
+
+  - name: nightly_file_from_each_source_tonight
+    config:
+      enabled: "{{ var('at_the_update', false) }}"
+      meta:
+        owner: "Sam Okafor, data platform"
+        dimension: timeliness
+    description: >
+      The second alarm, on each source's receipts: a nightly file has arrived since midnight. The
+      list's age is counted from each source's newest record, and old records can't say why they're
+      old: no file came, or a file came with nothing new. This check can: no file tonight means the
+      source has gone silent (Late is wrong too). It runs only in the night's job, first, beside the
+      freshness check, turned on with the var at_the_update, never in the build. It stops nothing.

@@ -24,3 +24,17 @@ Film 2 of *Kept for a reason* (the module's film 19). Rodrigo asked on 5 Novembe
 | 12 | Where does Linh's request come in? | Not here: the film ends with her last contract ending on 20 November 2026 and every record already knowing its date; *Forgetting a person* takes up her request of 24 November | *The clock starts at an event*; the page's "Next" |
 | 13 | Which Spanish words for the schedule and a hold? | Latin American Spanish, as the site's other Spanish pages: "un calendario" for the schedule, "una retención" (poner, levantar) for a hold, "la limpieza" for the clean-up, "las nóminas" for pay records, "las candidaturas no seleccionadas"; numbers keep the picture's form (927,000; 80%). The full list is at the top of the film's `source/src/i18n/es/captions.js` (10 November) | Spanish captions and page |
 | 14 | Publish the soundtrack's audio copy? | Since main's change of 9 November, audio lives outside Git, and a thread can't publish a release. So the film keeps its MP3 in Git (`git add -f`, as *Forgetting a person* does) beside its `audio.json`, whose release `audio-how-long-and-then-what-678adef73189ca13e5d7` isn't published yet. Run *Store audio outside Git* for `how-long-and-then-what-en` before the MP3 leaves Git (10 November) | The film's `audio.json`; the page's sound |
+
+## 12 November 2026: the author's answer
+
+Asked on his final checklist whether the reason and the two terms were right (rows 4 and 6 above), Rodrigo answered on 12 November 2026:
+
+> generally there are 3 stages, live, archived, deleted, not sure the best naming, but the data lifecycle for storage is basically that.
+
+The film's three were the same stages under other names, so only the names changed. Its third chapter is now *Three stages of a record* (it was *Three lives of a record*): "But a record goes through three stages. First, it's live: in use, read and changed often", and the first pane reads "Live" (it read "In use"). Two lines were voiced again; the Spanish captions and page say "tres etapas" and "activo: en uso". What was assumed in applying the answer:
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 15 | Which names for the three stages, since he isn't sure of the best ones? | His own: live, archived, deleted. "Live" comes with its plain meaning the first time it's said ("it's live: in use, read and changed often"), so a newcomer needs no other word | *Three stages of a record*: the lines `three` and `use`, and the first pane | Change the pane's word and voice the line `use` again |
+| 16 | Is "kept for good" a fourth stage? | No: it is the few records with no end date, which never reach "deleted" (degrees and results). The film keeps it as it was, "Or, for the few with lasting value, it's kept for good", in its own pane above "Archived" | *Three stages of a record*, the line `good` | Drop the fourth pane, and say those records stay archived with no end date |
+| 17 | Is "fair interest" the right reason for keeping applications from people not hired for 12 months (row 4)? | Not answered, so kept as assumed | *One schedule, by kind of record* | Change the reason's pill on the schedule and the line in the script's rigour sheet |

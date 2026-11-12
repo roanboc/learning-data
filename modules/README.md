@@ -242,6 +242,7 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 - [Where it meets the applications](../films/platform-and-solution-architecture/4-where-it-meets-the-applications/) — `where-it-meets-the-applications`
 - [Security all the way through](../films/platform-and-solution-architecture/5-security-all-the-way-through/) — `security-all-the-way-through`
 - [One solution, end to end](../films/platform-and-solution-architecture/6-one-solution-end-to-end/) — `one-solution-end-to-end`
+- [A road people choose](../films/platform-and-solution-architecture/7-a-road-people-choose/) — `a-road-people-choose`
 
 ### AI and continuous architecture
 

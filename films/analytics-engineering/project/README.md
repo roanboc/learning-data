@@ -61,7 +61,7 @@ report has no number for that date.
 
 Source freshness isn't part of `dbt build`. `dbt source freshness --profiles-dir .` checks it, and
 since the sample files don't change, it reports every source as stale (`ERROR STALE`). CI doesn't
-run it. The student system's and the portal's receipts (`nightly_files`) carry the level the graduation list's users agreed, older than 24 hours fails, and a night's job runs that check before the build: `examples/a-late-file/`.
+run it. The student system's and the portal's receipts (`nightly_files`) carry the level the graduation list's users agreed, older than 24 hours fails, counted from each source's newest record, not from when its file arrived. A night's job runs that check before the build, and the send checks the list's own age: `examples/a-late-file/`.
 
 ## Run it on Databricks
 
@@ -245,8 +245,8 @@ project/
 │                             insight by morning, the fix and the pull request a person approved;
 │                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and
 │                             the fortnightly dashboard (Databricks only);
-│                             a-late-file/: the night a file came late, its freshness check on the
-│                             receipts, and the send that waits;
+│                             a-late-file/: the night a file came late, a record's three dates, the
+│                             check on each source's newest record, and the send that waits;
 │                             files-as-data/: supplier invoices read with the platform's functions and
 │                             checked, a signed contract found by its metadata, and the claims app's
 │                             data contract (Databricks only);

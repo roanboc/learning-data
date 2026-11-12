@@ -115,25 +115,25 @@ sources:
       - name: nightly_files
         description: >
           The receipts of the night's transfer: one row for each nightly file the student system
-          sends, and when it arrived on the platform. The load writes the row as the file lands.
-          A file arrives every night, even one with few new records, so its age is the student
-          system's age; the newest row of a table can be days old after a night when no exam
-          board met. The graduation list says its age from it (student_system_as_of).
+          sends, written once its records are loaded: when the file arrived, and when the student
+          system saved the newest record in it, by its own clock (it writes a heartbeat record as it
+          makes each file, so a quiet night's newest record is still that night's). The graduation
+          list says its age from that date (student_system_as_of), never from the arrival.
         config:
-          loaded_at_field: "cast(received_at as timestamp)"
-          # The level the graduation list's users agreed on 22 June 2026, for the certificates: older
-          # than 24 hours, the check fails. One level, with no warning: the night's job runs this check
-          # first, and its failure tells Sam Okafor and Malia Fonoti (examples/a-late-file/).
+          loaded_at_field: "cast(newest_record_at as timestamp)"
+          # The level the graduation list's users agreed on 22 June 2026, for the certificates: older than
+          # 24 hours, the check fails. One level, no warning: the night's job runs it first (examples/a-late-file/).
           freshness:
             warn_after: null
             error_after: {count: 24, period: hour}
-          meta:
-            system_key: [file_name]
+          meta: {system_key: [file_name]}
         columns:
           - name: file_name
             description: The file's name, with the day of the records it brings, like nightly_2026-06-17.csv.
           - name: received_at
-            description: When the file arrived on the platform. The night's files are due at 02:00.
+            description: When the file arrived on the platform, its load date. The night's files are due at 02:00.
+          - name: newest_record_at
+            description: When the student system saved the newest record in the file, by its own clock, its system date.
       - name: graduation_applications
         description: >
           The student system's applications to graduate: one row per version of a graduate's

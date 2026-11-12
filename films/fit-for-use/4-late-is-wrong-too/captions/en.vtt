@@ -114,98 +114,119 @@ At 11:40 the file arrives; at 12:10 the list is built again, with 712 graduates.
 00:04:02.421 --> 00:04:07.263
 Malia's team checks the 23 new names, and at 3:20 the list goes.
 
-00:04:08.763 --> 00:04:16.551
-The December before, six graduates were left off the same way, and nobody saw. Their certificates were printed late, and posted.
+00:04:08.763 --> 00:04:15.727
+The December before, six graduates were left off, and nobody saw. Their certificates were printed late, and posted.
 
-00:04:19.451 --> 00:04:23.403
+00:04:18.627 --> 00:04:22.579
 On Monday, Malia and Sam meet Mei Tanaka, who owns the list.
 
-00:04:24.903 --> 00:04:30.391
+00:04:24.079 --> 00:04:29.567
 The platform can see that a table is late. Only its users can say when late is too late.
 
-00:04:32.291 --> 00:04:37.039
-The certificates can't wait: they need that night's files when the list goes to the printer.
+00:04:31.467 --> 00:04:36.689
+The certificates can't wait: they need yesterday's awards on the list when it goes to the printer.
 
-00:04:38.739 --> 00:04:43.566
+00:04:38.389 --> 00:04:43.216
 Seating the Great Hall can: it's counted a week before, from a list a few days old.
 
-00:04:45.266 --> 00:04:49.546
+00:04:44.916 --> 00:04:49.196
 Planning's count for the government comes after the year's end: weeks are fine.
 
-00:04:51.246 --> 00:04:56.429
+00:04:50.896 --> 00:04:56.079
 One list, three clocks. The strictest sets the level: a day old at most, at the send.
 
-00:04:58.129 --> 00:05:03.542
+00:04:57.779 --> 00:05:03.192
 A nightly file meets it. For fresher data, Hot, warm, cold shows how it moves.
 
-00:05:05.242 --> 00:05:10.602
+00:05:04.892 --> 00:05:10.252
 Malia agrees it, Mei owns it, and it goes beside the list's columns, in dbt.
 
-00:05:12.302 --> 00:05:17.418
+00:05:11.952 --> 00:05:17.068
 Rules that run left timeliness in pencil, with no checks. This is its first rule.
 
-00:05:20.318 --> 00:05:22.725
+00:05:19.968 --> 00:05:22.375
 From now on, the list says how old it is.
 
-00:05:24.025 --> 00:05:28.452
-Every row carries its sources' age: when the files it was built from arrived.
+00:05:23.675 --> 00:05:26.924
+Old, counted from when? Every record has three dates.
 
-00:05:29.752 --> 00:05:36.790
-Each source has its own. That Thursday, it would have said: student system, Wednesday at two; portal, Thursday at two.
+00:05:28.424 --> 00:05:31.612
+When it happened: the board approved this award on Wednesday.
 
-00:05:38.490 --> 00:05:42.027
+00:05:32.912 --> 00:05:35.497
+When the student system saved it: that afternoon.
+
+00:05:36.797 --> 00:05:40.101
+And when its file arrived: Thursday, at 11:40.
+
+00:05:41.601 --> 00:05:48.563
+The first is the one that matters. But each table says it in its own way, and when no board meets, there's none to read.
+
+00:05:50.263 --> 00:05:57.440
+The last is the easiest, and says the least: for December's list, a file came on time, full of the day before's records.
+
+00:05:59.140 --> 00:06:03.983
+So the list goes by the second: the date every load already uses to find what's new.
+
+00:06:05.883 --> 00:06:10.358
+Every row carries its sources' age: the newest record each one had saved.
+
+00:06:11.858 --> 00:06:19.572
+Each source has its own. That Thursday, it would have said: student system, Wednesday, before two; portal, Thursday, before two.
+
+00:06:21.272 --> 00:06:24.809
 It's shown wherever the list is, first of all in the printer's file.
 
-00:05:43.327 --> 00:05:47.001
+00:06:26.109 --> 00:06:29.783
 Like the volunteers' flags, it's a signal everyone can read.
 
-00:05:48.501 --> 00:05:55.024
+00:06:31.283 --> 00:06:37.806
 Too good to be true labelled a number from the night before. Here, every list says its age, on good nights too.
 
-00:05:56.524 --> 00:05:59.538
+00:06:39.306 --> 00:06:42.320
 Data that says its age can be trusted to be old.
 
-00:06:00.838 --> 00:06:02.256
+00:06:43.620 --> 00:06:45.038
 Data that doesn't, can't.
 
-00:06:05.356 --> 00:06:08.668
+00:06:48.138 --> 00:06:51.450
 Then Sam checks the age where it starts: at each source.
 
-00:06:10.168 --> 00:06:17.157
-dbt reads when each night's file arrived, not the newest row, which can be days old when no board has met.
+00:06:52.950 --> 00:06:59.380
+dbt reads the same date there: the newest record each source saved, not when its file arrived.
 
-00:06:18.857 --> 00:06:22.721
+00:07:01.080 --> 00:07:04.944
 One level on each: older than twenty-four hours, the check fails.
 
-00:06:24.221 --> 00:06:26.548
+00:07:06.444 --> 00:07:08.771
 Each night, the update runs that check first.
 
-00:06:27.848 --> 00:06:32.995
+00:07:10.071 --> 00:07:15.218
 If it fails, Sam and Malia hear at once, and the list is still built, saying its age.
 
-00:06:34.495 --> 00:06:38.274
+00:07:16.718 --> 00:07:20.497
 That's the warning: nothing stops, and the people who need to know, know.
 
-00:06:40.174 --> 00:06:43.679
-The send to the printer is a job too, and runs the same check.
+00:07:22.397 --> 00:07:26.322
+The send to the printer is a job too. It checks the list's own age.
 
-00:06:45.179 --> 00:06:50.683
+00:07:27.822 --> 00:07:33.326
 It sends only if the check passes; if not, the list waits, and Malia is told why.
 
-00:06:52.383 --> 00:06:54.653
+00:07:35.026 --> 00:07:37.296
 The data isn't stopped. The send is.
 
-00:06:57.553 --> 00:07:04.097
+00:07:40.196 --> 00:07:46.740
 The volunteers can't stop a storm. They make sure the warning arrives in time, in words people understand.
 
-00:07:05.397 --> 00:07:11.610
+00:07:48.040 --> 00:07:54.253
 A list can't make a late file come. It can say how old it is, and the send can wait until it's fresh.
 
-00:07:12.910 --> 00:07:16.734
-Since June, no graduate has been left off a list by a late file.
+00:07:55.553 --> 00:07:59.457
+Since June, no graduate has been left off a list by late data.
 
-00:07:18.234 --> 00:07:21.748
+00:08:00.957 --> 00:08:04.471
 Agree how fresh it must be, and always say how old it is.
 
-00:07:23.848 --> 00:07:29.768
+00:08:06.571 --> 00:08:12.491
 Fit for use ends here: a use, a measure, a reference and a clock. Next, Quality as a habit.

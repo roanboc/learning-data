@@ -92,6 +92,9 @@ def series_link(lg, RE, sid):
 # <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder);
 # project: the folder under films/ whose example project its films show (its own folder if not given); built: the id of the series
 # that built that project, which each film's See it in the project names for how it was built (none if not given).
+# single: True for a film that stands alone, such as More than a platform, which follows the introduction: its folder is a series'
+# (films/<dir>/1-<film>/, with a series.json), but the site shows no series page: the film's page is where the series' page would
+# be (site/<slug>/), its cards and crumbs say nothing of a series, and a block with "next" is its card on the home pages, a row.
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are

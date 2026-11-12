@@ -1,0 +1,26 @@
+{
+  "key": "where-it-meets-the-applications",
+  "title": "Where it meets the applications",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: how the data platform and the integration platform work better together, each flow on the route that's simplest, cheapest and easiest to govern, and every flow on one map both teams keep.",
+  "howto": "Technology green is a platform: the integration platform, which joins the applications, and the data platform. Blue is an application or a domain's data product, and a gold tag an owner in the business. A grey dashed line is a flow nobody can see; a green line, a flow on the map, on its route. Amber, a lantern's colour, is the road, and on the map of Shinano, the farmers' horses.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["chuma"],
+  "poster": ["chuma", "sort", 7.5],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bRavi's\\b", "Rah-vee's"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bYasmin\\b", "Yahs-meen"],
+    ["\\bSaleh\\b", "Sah-leh"],
+    ["\\bShinano\\b", "Shee-nah-noh"],
+    ["\\bchūma\\b", "choo-mah"],
+    ["\\bIida\\b", "Ee-ee-dah"],
+    ["\\bMatsumoto\\b", "Maht-soo-moh-toh"],
+    ["\\bshogunate\\b", "show-gun-ate"],
+    ["\\bLakeflow\\b", "Lake-flow"]
+  ]
+}

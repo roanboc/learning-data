@@ -247,9 +247,15 @@ if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visit
   const fromHash=()=>{const hs=(location.hash||"").slice(1),fm=/^film-(\d+)$/.exec(hs);return fm&&ofFilm(+fm[1]).length?ofFilm(+fm[1])[0].id:hs;};
   show(fromHash());window.addEventListener("hashchange",()=>{const id=fromHash();if(labOf(id))show(id,true);});}
 
+/* an order scenario's first showing: its steps mixed the same way each time, and never already in order (the first mix alone
+   left 3 or 7 steps just as they were) */
+const mixed=n=>{const by=m=>Array.from({length:n},(_,i)=>i).sort((a,b)=>((a*m+3)%n)-((b*m+3)%n));return [7,5,3,2].map(by).find(o=>o.some((k,p)=>k!==p))||by(1).reverse();};
 /* ---------- the scenarios page: evaluation, a film at a time or all of them ---------- */
 const quizApp=document.getElementById("series-quiz");
 if(quizApp&&QS.length){quizApp.textContent="";const ans=get("quiz",{}),ALL=-1;let sel=ALL,list=QS,cur=0;
+  /* a saved answer keeps the place of the option picked: where that place no longer gives the result saved with it (the options
+     have moved since), the scenario is asked again */
+  {let moved=0;QS.forEach(q=>{const a=ans[q.n];if(!a||q.type!=="choice"||a.pick==null)return;const o=q.opts[a.pick];if(!o||!!o.ok!==!!a.ok){delete ans[q.n];moved++;}});if(moved)set("quiz",ans);}
   const films=h("div",{class:"mr-films",role:"group","aria-label":U.filmsLabel}),bar=h("div",{class:"qbar"}),dots=h("div",{class:"dots",role:"group","aria-label":U.qsLabel}),score=h("p",{class:"score"}),card=h("div");
   bar.append(dots,score);quizApp.append(films,h("div",{class:"quiz"},bar,card));
   const labName=id=>(labOf(id)||{name:""}).name,labHref=id=>"../labs/#"+id,A=q=>ans[q.n];
@@ -271,7 +277,7 @@ if(quizApp&&QS.length){quizApp.textContent="";const ans=get("quiz",{}),ALL=-1;le
         if(!o.ok){box.children[i].classList.add("no");box.children[i].append(h("small",null,o.why));}if(save)done(q,!!o.ok,i);out.replaceChildren(feed(!!o.ok,q),foot(q));};
       q.opts.forEach((o,i)=>box.append(h("button",{type:"button",class:"qopt",onclick:()=>answer(i,true)},h("span",{class:"k"},"ABCD"[i]),h("span",null,o.t))));body.append(box);
       if(prev&&prev.pick!=null&&q.opts[prev.pick])answer(prev.pick,false);}
-    if(q.type==="order"){const n=q.items.length;let ord=prev&&Array.isArray(prev.pick)&&prev.pick.length===n?prev.pick.slice():q.items.map((t,i)=>i).sort((a,b)=>((a*7+3)%n)-((b*7+3)%n));const box=h("ol",{class:"qorder"});
+    if(q.type==="order"){const n=q.items.length;let ord=prev&&Array.isArray(prev.pick)&&prev.pick.length===n?prev.pick.slice():mixed(q.items.length);const box=h("ol",{class:"qorder"});
       const draw=()=>box.replaceChildren(...ord.map((ix,p)=>h("li",null,h("span",{class:"n"},String(p+1)),h("span",null,q.items[ix]),h("span",{class:"mv"},h("button",{type:"button","aria-label":U.up+": "+q.items[ix],onclick:()=>{if(p>0){[ord[p-1],ord[p]]=[ord[p],ord[p-1]];draw();}}},"↑"),h("button",{type:"button","aria-label":U.down+": "+q.items[ix],onclick:()=>{if(p<ord.length-1){[ord[p+1],ord[p]]=[ord[p],ord[p+1]];draw();}}},"↓")))));draw();
       const chk=h("button",{type:"button",class:"btn primary",onclick:()=>finish(true)},U.check);
       function finish(save){const ok=ord.every((ix,p)=>ix===p);[...box.children].forEach((li,p)=>{li.classList.add(ord[p]===p?"ok":"no");li.querySelectorAll("button").forEach(b=>b.disabled=true);});chk.remove();if(save)done(q,ok,ord.slice());out.replaceChildren(feed(ok,q),foot(q));}

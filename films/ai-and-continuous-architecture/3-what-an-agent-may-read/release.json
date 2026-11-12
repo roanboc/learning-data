@@ -1,0 +1,15 @@
+[
+  {
+    "name": "What an agent may read",
+    "key": "what-an-agent-may-read-en",
+    "dir": "films/ai-and-continuous-architecture/3-what-an-agent-may-read/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/what-an-agent-may-read/film.js",
+    "video": "dist/what-an-agent-may-read.mp4",
+    "file": "what-an-agent-may-read.mp4",
+    "captions": [["films/ai-and-continuous-architecture/3-what-an-agent-may-read/captions/en.srt", "what-an-agent-may-read.en.srt"], ["films/ai-and-continuous-architecture/3-what-an-agent-may-read/captions/es.srt", "what-an-agent-may-read.es.srt"]],
+    "paths": ["films/ai-and-continuous-architecture/3-what-an-agent-may-read/source", ":(exclude)films/ai-and-continuous-architecture/3-what-an-agent-may-read/source/src/i18n/es/captions.js", "films/ai-and-continuous-architecture/shared", "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts", "films/data-governance/shared/tools/twice.py", "films/data-governance/shared/tools/quiet.py", "films/data-governance/shared/tools/held.py"],
+    "legibility": {"texts": 293, "under_28": "0%", "under_20": 0, "median": 28.4, "status": "Drawn to the rule"}
+  }
+]

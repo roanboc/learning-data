@@ -216,6 +216,7 @@ Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data
 
 - [Between the business and the systems](../films/data-architecture/1-between-the-business-and-the-systems/) — `between-the-business-and-the-systems`
 - [The pyramid, taken apart](../films/data-architecture/2-the-pyramid-taken-apart/) — `the-pyramid-taken-apart`
+- [Where each fact is born](../films/data-architecture/3-where-each-fact-is-born/) — `where-each-fact-is-born`
 
 ### Platform and solution architecture
 

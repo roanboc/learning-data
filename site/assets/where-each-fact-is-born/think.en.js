@@ -1,10 +1,11 @@
 /* Learning Data: "Pause and think" for Where each fact is born, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (born, lineage, three), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). A question without a "stop" has no lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  born:{q:"In Inés's matrix, the connection point's row has \"creates\" under both billing and the network map. What does that tell her?",
+  born:{stop:"born",q:"In Inés's matrix, the connection point's row has \"creates\" under both billing and the network map. What does that tell her?",
     opts:[{t:"Billing is its system of record, because billing creates it first, when the family signs up.",near:true},{t:"It's born twice: two systems create the same fact, so their two records can disagree.",ok:true},{t:"Both systems hold copies of it, which the outage system matches up when a cut comes in."}],
     why:"One \"creates\" in a row means the fact has a home: the one system where it's created and corrected, which DAMA calls the system of record. Two means it's born twice, and nothing keeps the two records the same: at 14 Quarry Lane, billing's premise and the network map's service point never met, so the cut found no account. Being first doesn't make billing the home; the team decides where it's born, and here Grace agrees it's the network map. Which of your facts is created in two systems?"},
   lineage:{q:"In July, the network team corrected the address once, in the network map. Why did every copy have it by the next morning?",

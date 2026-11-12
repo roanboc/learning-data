@@ -145,6 +145,9 @@ LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis mi
 # Silent change), and 6 min (Too good to be true)
 HALVES = {"en": {"5½", "7½"}, "es": {"5½"}}
 WHOLE = {"6 min", "8 min", "8 minutos"}
+# time in a story, not a film's length, that this rule would read as one, by page: in Data architecture's labs and scenarios, an
+# interruption is power lost for more than five minutes, and a cut of three minutes falls short of it; Spanish says the number in words
+STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres minutos"}}
 # the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
 # lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),
 # so a new film, or a new series, needs no change here
@@ -1331,7 +1334,7 @@ def main():
             # are the search's words, made from those captions when someone runs build_series.py --search (never committed)
         mk = rel in MAKING_OF_PAGES
         for m in LENGTHS.finditer(src):
-            if m.group(0).lstrip("· ") in WHOLE or mk and m.group(0).lstrip("· ") == "5 min":
+            if m.group(0).lstrip("· ") in WHOLE or mk and m.group(0).lstrip("· ") == "5 min" or m.group(0).lower() in STORY_TIME.get(rel, ()):
                 continue
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":

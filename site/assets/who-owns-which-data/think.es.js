@@ -1,13 +1,14 @@
 /* Learning Data: "Pausa para pensar" de Who owns which data, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (default, knows, words), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). Una pregunta sin "stop" no tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
   default:{q:"Durante cuatro meses, el sitio web les dijo a los hogares que su calle admitía más solar de la que podía. ¿Por qué?",
     opts:[{t:"Los ingenieros olvidaron avisarle al equipo de datos, en mayo, que su método había cambiado.",near:true},{t:"El sitio web guardaba una copia vieja de la tabla, y nadie la actualizó tras el cambio de mayo."},{t:"La responsable de la tabla era el equipo de datos, que la construyó pero no podía saber del cambio.",ok:true}],
     why:"Nadie fue descuidado. En el mapa, la capacidad de alojamiento es de Grace: sus ingenieros la definieron, y cómo calcularla. Pero el catálogo tenía al equipo de datos como responsable de la tabla, porque él la construyó: el único equipo que no podía saber qué significaban sus cifras. Los ingenieros no sentían que les tocara avisar a la tabla, y el equipo de datos no tenía cómo saberlo. En tu plataforma, ¿qué tablas tienen como responsable a quien las construyó?"},
-  knows:{q:"Los minutos sin suministro del regulador se calculan con las interrupciones de la red y los clientes de comercialización. Según la regla, ¿quién es responsable de ese producto?",
+  knows:{stop:"owner",q:"Los minutos sin suministro del regulador se calculan con las interrupciones de la red y los clientes de comercialización. Según la regla, ¿quién es responsable de ese producto?",
     opts:[{t:"El dominio empresarial, Ama: la medida cruza dominios, así que tiene un responsable propio.",ok:true},{t:"Grace, porque cada interrupción que cuenta la medida ocurre en su red, no en comercialización.",near:true},{t:"El equipo de datos, porque construye y opera el producto y sabe cómo se calcula."}],
     why:"Cada tabla pertenece a un producto de datos, y cada producto a quien es responsable de la capacidad que crea sus datos. Los minutos sin suministro necesitan las interrupciones de la red y los clientes de comercialización, así que ningún dominio los crea solo: una medida que cruza dominios pertenece al dominio empresarial, y para las del regulador, eso es Ama. Grace sigue siendo responsable de la capacidad de alojamiento, y de las interrupciones que crea su red; el equipo de datos construye y opera cada producto, pero no es responsable de ninguno."},
   words:{q:"El objetivo de la empresa es un mesh de responsables, sobre su lakehouse, con un solo catálogo. ¿Cómo puede ser las tres cosas?",

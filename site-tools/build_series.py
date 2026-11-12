@@ -126,6 +126,7 @@ SERIES = [
     dict(id="data-architecture", dir="data-architecture", slug="data-architecture",
          name={"en": "Data architecture", "es": "Arquitectura de datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="platform-and-solution-architecture",
+         learn=dict(dir="data-architecture", bundle="one-language-kept"),
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and TOGAF and ArchiMate of The Open Group, named only to identify those bodies of knowledge; this project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y TOGAF y ArchiMate de The Open Group, nombradas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="platform-and-solution-architecture", dir="platform-and-solution-architecture", slug="platform-and-solution-architecture",

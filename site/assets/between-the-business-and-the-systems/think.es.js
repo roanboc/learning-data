@@ -1,13 +1,14 @@
 /* Learning Data: "Pausa para pensar" de Between the business and the systems, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (dama, point, own), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). Una pregunta sin "stop" no tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
   "dama":{q:"El cuerpo de conocimiento de DAMA conoce la vieja línea entre datos e información. ¿Por qué igual usa las dos palabras como una?",
     opts:[{t:"Los datos son una forma de información, y la información una forma de datos: separarlas da dos disciplinas para un trabajo.",ok:true},{t:"La información son datos con significado, así que la arquitectura de datos guarda los datos y deja su significado al negocio.",near:true},{t:"Arquitectura de la información era el nombre antiguo, y DAMA lo reemplazó cuando las bases de datos sustituyeron al papel."}],
     why:"DAMA conoce la distinción, los datos como hechos y la información como datos con significado, y critica separarlos: los datos son una forma de información, y la información es una forma de datos. Por eso llama a la única disciplina arquitectura de datos. Lo que los datos significan sigue siendo del negocio; la arquitectura de datos une ese significado a los registros. ¿Dónde tiene tu organización dos equipos, o dos nombres, para un mismo trabajo?"},
-  "point":{q:"En la tormenta de enero, 180 hogares nunca recibieron su aviso del corte. ¿Quién debía ser responsable de lo que falló?",
+  "point":{stop:"records",q:"En la tormenta de enero, 180 hogares nunca recibieron su aviso del corte. ¿Quién debía ser responsable de lo que falló?",
     opts:[{t:"El equipo del sistema de cortes, porque sus ubicaciones escriben las direcciones distinto que atención al cliente."},{t:"Grace, porque es la responsable de punto de conexión, y quien responde por una palabra responde por cada registro.",near:true},{t:"Alguien para la línea entre la palabra y sus seis registros: cómo el registro de cada sistema se une a la palabra.",ok:true}],
     why:"Grace es la responsable de lo que significa punto de conexión, y el equipo de cada sistema responde por cómo su sistema guarda su registro. Nadie era responsable de la línea entre ellos, así que los avisos se cruzaron por lo que dos sistemas escribieron, y 180 hogares se quedaron sin el suyo. Esa línea, la unión, es para lo que existe la arquitectura de datos. ¿Qué palabra de tu organización registran varios sistemas, sin que nadie sea responsable de la línea entre ellos?"},
   "own":{q:"Inés decide que todo sistema que necesite un punto de conexión lleve el identificador de la red para él. ¿Por qué eso arregla los avisos?",

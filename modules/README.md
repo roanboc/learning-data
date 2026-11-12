@@ -224,6 +224,8 @@ Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data
 - [Who owns which data](../films/data-architecture/5-who-owns-which-data/) — `who-owns-which-data`
 - [One language, kept](../films/data-architecture/6-one-language-kept/) — `one-language-kept`
 
+Labs and assessments: [site/assets/data-architecture/learn.en.js](../site/assets/data-architecture/learn.en.js), [site/assets/data-architecture/learn.es.js](../site/assets/data-architecture/learn.es.js)
+
 ### Platform and solution architecture
 
 Source: [films/platform-and-solution-architecture](../films/platform-and-solution-architecture/) · Portal: `/platform-and-solution-architecture/`

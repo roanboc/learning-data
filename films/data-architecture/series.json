@@ -16,6 +16,12 @@
   "thread_es": "Tres personas dicen arquitectura de la información y quieren decir tres cosas distintas. Película a película, Inés Duarte lleva a la empresa desde lo que el negocio posee hasta dónde nace cada dato, cómo viaja, quién es dueño de qué datos, y un solo lenguaje mantenido con cada cambio.",
   "past_h": "One story, film by film: Project Cybersyn",
   "past_h_es": "Una historia, película a película: el Proyecto Cybersyn",
+  "learn_p": "{Labs} hands-on labs, one for each film, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs, one for each film. Each puts one idea from a film in your hands: tell a word from its records, find where a fact is born, decide who owns it, name a column from its parts.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cada uno pone en tus manos una idea de una película: distingue una palabra de sus registros, encuentra dónde nace un dato, decide quién es su dueño, nombra una columna por sus partes.",
+  "quiz_lead": "{quiz} situations that the people who design data really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes diseñan los datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata.",
   "people_h": "Who's at the table",
   "people_h_es": "Quiénes están en la mesa",
   "people": [

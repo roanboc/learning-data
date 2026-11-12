@@ -1,6 +1,7 @@
 /* Learning Data: "Pause and think" for The pyramid, taken apart, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (first, levels, both), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). A question without a "stop" has no lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
@@ -10,7 +11,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "levels":{q:"The same record of a cut is data to the outage system and information to Grace. What does that say about the levels?",
     opts:[{t:"They aren't separate things: one record is data or information, depending on who uses it and why.",ok:true},{t:"The record climbs a level when Grace reads it, so the levels are steps taken in a fixed order.",near:true},{t:"The outage system keeps the data and Grace's report keeps the information, in two separate stores."}],
     why:"DAMA puts it plainly: data is a form of information, and information is a form of data. The same record of a cut is data to the outage system and information to Grace at the same moment; it doesn't climb a level. And the top is vague: in practice, it's a person, deciding. Where in your work does one table serve as data for one team and as a report for another?"},
-  "both":{q:"Inés redraws the pyramid with arrows both ways. What does the arrow down add to it?",
+  "both":{stop:"chain",q:"Inés redraws the pyramid with arrows both ways. What does the arrow down add to it?",
     opts:[{t:"Wisdom at the top turns back into raw data, ready to go round the pyramid's factory once more."},{t:"A decision asks a question, which needs a measure and a definition, and that decides what's recorded.",ok:true},{t:"Reports go back down to the systems, so that the people who read them can correct the records.",near:true}],
     why:"Read only upwards, the pyramid makes data look like where everything starts. Down: a decision asks a question, the question needs a measure, and the measure needs a definition, which decides what's recorded. Up: the records answer the measure, the measure answers the question, and a person decides. Corrections do flow back, but that's not what the arrow down is for. On the data practice on the map, interruption is a business object owned by Grace, the outage system's record of each cut realises it, and the measure traces to both. Pick a decision you support: can you draw both arrows for it?"}
   }}};

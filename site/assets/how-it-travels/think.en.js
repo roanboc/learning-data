@@ -1,10 +1,11 @@
 /* Learning Data: "Pause and think" for How it travels, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (paths, once, contract), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). A question without a "stop" has no lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  paths:{q:"In March, a nightly script wrote for months to a queue nothing read, and about 1,900 bills went uncorrected. Why did nobody notice?",
+  paths:{stop:"paths",q:"In March, a nightly script wrote for months to a queue nothing read, and about 1,900 bills went uncorrected. Why did nobody notice?",
     opts:[{t:"It wasn't on the map, so it had no owner at either end to see that one end had changed.",ok:true},{t:"It was on the map, but the owner at the network's end forgot to tell billing about the change.",near:true},{t:"The queue filled up, and a full queue throws away whatever is written to it after that."}],
     why:"Only four of the eleven paths across the wall were on the map. A path that isn't on the map has no owner at either end, so when one end changes, the other finds out when it breaks: here, months later, from the bills. A flow that's drawn has an owner at each end, and a contract that says who is told, and when, if it's late or wrong. Which paths into your systems has nobody drawn?"},
   once:{q:"Why does the network publish each replaced reading once, as it's replaced, instead of wiring each retailer's systems to meter data?",

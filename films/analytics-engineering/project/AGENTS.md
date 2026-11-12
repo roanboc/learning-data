@@ -78,7 +78,7 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 | Change | Approves |
 |---|---|
 | Meaning: a definition, a key, an identity rule, a business rule | Its owner, in the glossary, before any code: Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials. The code follows the glossary |
-| An enterprise contract, for a canonical table | Data governance's information architect writes it; the data team builds to it. Other dbt contracts are the data team's |
+| An enterprise contract, for a canonical table | Data governance's information architect writes it; the data team builds to it. The data team's other contracts, a mart's dbt contract or an input's (`examples/hr-system-interface/`), are agreed team to team, with the team that reads the data or sends it, in a linked ticket; they need no agreement from data governance |
 | The model and the code: grain, entities, versions, models, tests, macros | The data team, in review (Noor, data architect, for the model) |
 | A change that doesn't match the glossary or an enterprise contract | Data governance, which checks how it got there. It isn't a reviewer |
 

@@ -1,6 +1,6 @@
 # Measure the work, not the people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #NNN)
+*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/measure-the-work/)
 
@@ -25,7 +25,7 @@
 
 ## 12 November 2026: Deming's name, said with its short e
 
-Rodrigo didn't ask for this change. The thread that applied his answer on the cycle's name found, while it changed *One small change at a time* (PR #351), that the voice said W. Edwards Deming's name as "deeming". This film says it once, in *Not a target*. It now says DEM-ing (PR #NNN). The questions it raised, and the assumption made for each:
+Rodrigo didn't ask for this change. The thread that applied his answer on the cycle's name found, while it changed *One small change at a time* (PR #351), that the voice said W. Edwards Deming's name as "deeming". This film says it once, in *Not a target*. It now says DEM-ing (PR #360). The questions it raised, and the assumption made for each:
 
 | # | Question | Assumption made | Where it shows | If it's wrong |
 |---|---|---|---|---|

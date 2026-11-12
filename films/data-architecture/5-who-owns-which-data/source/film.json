@@ -1,0 +1,44 @@
+{
+  "key": "who-owns-which-data",
+  "title": "Who owns which data",
+  "sub": "Data architecture, a series on what DAMA calls data architecture, between the business and the systems: who owns which data, each table in a data product owned by the business that knows what its data means, what a data product needs before it's published, the four words people use for keeping data, and the gaps between today and the target, put into a roadmap.",
+  "howto": "Glass in the layers' colours is the confirmed model: gold is the business layer, peach the information layer, where data architecture works. A table is a row in the catalogue, with its owner on a chip: gold for a business owner, grey for the data team by default. A data product is a gold card that holds its tables and its contract. Chile in 1972 is drawn in lamp-light: a factory, its few numbers, and a warning that goes first to the factory's own manager, with a clock for the time they have.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "freedom",
+    "chose",
+    4.9
+  ],
+  "say": [
+    [
+      "\\bInés\\b",
+      "Ee-ness"
+    ],
+    [
+      "\\bCybersyn's\\b",
+      "Cyber-sin's"
+    ],
+    [
+      "\\bCybersyn\\b",
+      "Cyber-sin"
+    ],
+    [
+      "\\bCORFO\\b",
+      "Cor-foe"
+    ],
+    [
+      "\\bAllende\\b",
+      "Ah-yenday"
+    ],
+    [
+      "\\bAma\\b",
+      "Ah-mah"
+    ]
+  ],
+  "story": [
+    "freedom"
+  ]
+}

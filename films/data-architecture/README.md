@@ -17,6 +17,8 @@ Data architecture as DAMA defines it, between the business and the systems: wher
 | [How it travels](https://data.learn-all.org/data-architecture/how-it-travels/) | Data flows and their contracts | 7 min | 8 | 3 questions | [script](4-how-it-travels/script.md) · [source](4-how-it-travels/source/README.md) |
 | [Who owns which data](https://data.learn-all.org/data-architecture/who-owns-which-data/) | Data ownership and data products | 8 min | 8 | 3 questions | [script](5-who-owns-which-data/script.md) · [source](5-who-owns-which-data/source/README.md) |
 | [One language, kept](https://data.learn-all.org/data-architecture/one-language-kept/) | Names, principles and decisions | 7½ min | 8 | 3 questions | [script](6-one-language-kept/script.md) · [source](6-one-language-kept/source/README.md) |
+
+For the whole series, on the site: [6 labs](https://data.learn-all.org/data-architecture/labs/) and [12 scenarios](https://data.learn-all.org/data-architecture/scenarios/), in English and Spanish, from the words in [site/assets/data-architecture/](../../site/assets/data-architecture/).
 <!-- /films -->
 
 ## The look and the sound

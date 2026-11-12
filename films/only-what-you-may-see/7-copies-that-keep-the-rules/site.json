@@ -32,8 +32,8 @@
   "elsewhere": {
     "h": "Read the guidance yourself",
     "h_es": "Lee la guía por tu cuenta",
-    "p": "The film shows Azure Databricks and dbt as their docs did on 10 November 2026. These are the pages it follows.",
-    "p_es": "La película muestra Azure Databricks y dbt como los describían sus documentos el 10 de noviembre de 2026. Estas son las páginas que sigue.",
+    "p": "The film shows Azure Databricks and dbt as their docs did on 10 November 2026, and synthetic data as the guidance read on 12 November 2026 describes it. These are the pages it follows.",
+    "p_es": "La película muestra Azure Databricks y dbt como los describían sus documentos el 10 de noviembre de 2026, y los datos sintéticos como los describe la guía leída el 12 de noviembre de 2026. Estas son las páginas que sigue.",
     "links": [
       {
         "title": "Azure Databricks: OpenSharing and ABAC",
@@ -90,6 +90,14 @@
         "line_es": "Probar la lógica de un modelo con unas pocas filas escritas para la prueba, sin necesitar datos reales.",
         "href": "https://docs.getdbt.com/docs/build/unit-tests",
         "href_es": "https://docs.getdbt.com/docs/build/unit-tests"
+      },
+      {
+        "title": "Information Commissioner's Office (UK): synthetic data",
+        "title_es": "Information Commissioner's Office (Reino Unido): datos sintéticos (en inglés)",
+        "line": "Why data that a model learned from real records can still reveal a real person: the more it mimics them, the more likely that is.",
+        "line_es": "Por qué los datos que un modelo aprendió de expedientes reales aún pueden revelar a una persona real: cuanto más los imitan, más probable es.",
+        "href": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/privacy-enhancing-technologies/what-pets-are-there/synthetic-data/",
+        "href_es": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/privacy-enhancing-technologies/what-pets-are-there/synthetic-data/"
       }
     ]
   },

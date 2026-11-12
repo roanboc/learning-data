@@ -6,7 +6,8 @@
    room), un estante (a shelf, a schema), el espacio de trabajo (a workspace), el registro de auditoría (the audit log), desarrollo, pruebas and producción; the hospital's head of
    education as la dirección de docencia, a role with no gender. The films by their Spanish titles: Primero, un acuerdo; Conoce lo que guardas; Etiquetas que viajan; Una política
    para muchas tablas; Muestra lo mínimo; Permisos por diseño; Red, almacenamiento y claves; El mercado de datos. Lascaux, André Malraux, Azure Databricks, OpenSharing, dbt and its
-   clone and sample keep their names, as the voice says them. Numbers keep the picture's comma (2,614), as the series' other Spanish captions do. */
+   clone and sample keep their names, as the voice says them. Numbers keep the picture's comma (2,614), as the series' other Spanish captions do. A kind of synthetic data is un tipo, never una clase, which is a column's class; to give
+   a person away is delatar. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "France, 1948.":
 "Francia, 1948.",
@@ -76,8 +77,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Para el tamaño, un script escribe 2,614, con las columnas de producción y sus clases.",
 "That's synthetic data, and it's easy to write now.":
 "Son datos sintéticos, y hoy es fácil escribirlos.",
-"How closely it should follow the real records, gaps and odd cases included, is the harder question, and still an open one.":
-"Qué tanto deben parecerse a los expedientes reales, con sus huecos y casos raros, es la pregunta difícil, y sigue abierta.",
+"This kind is written without reading a record: only the columns and their classes go in, so it can give no one away.":
+"Este tipo se escribe sin leer ningún expediente: solo entran las columnas y sus clases, así que no puede delatar a nadie.",
+"The other kind is learned from the real records, and the closer it fits them, the more likely it is to give a real person away.":
+"El otro tipo se aprende de los expedientes reales, y cuanto más se les parece, más probable es que delate a una persona real.",
+"So the university treats that kind as a copy of the real records.":
+"Por eso la universidad trata ese tipo como una copia de los expedientes reales.",
+"How closely made-up data should follow the real records, gaps and odd cases included, is the harder question, and still an open one.":
+"Qué tanto deben parecerse los datos inventados a los reales, con sus huecos y casos raros, es la pregunta difícil, y sigue abierta.",
 "dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.":
 "Las pruebas unitarias de dbt revisan el conteo con filas escritas para cada prueba: si nueve estudiantes dejan Partería, dice menos de 10.",
 "dbt's clone and sample bring production's rows in, so they're never used on tables about people.":

@@ -41,6 +41,8 @@ button{font:inherit;color:inherit}
 .more{display:flex;align-items:center;gap:4px;position:static;inset:auto;width:auto;height:auto;margin:0;padding:0;border:0;background:none;color:inherit;overflow:visible}
 @media (max-width:640px){.top-in{padding:0 12px;gap:6px}.top nav{gap:0}.top nav>a{font-size:14px;padding:6px 8px}.lang{margin-left:4px}.lang a{padding:3px 7px}footer{padding:22px 16px 40px}}
 @media (max-width:900px){.nav-tools .parent-site{padding:0;width:44px}.parent-site span{display:none}}
+/* just above the phones' More menu the row is full, most of all in Spanish, since the tour's "?" joined it: closer together */
+@media (min-width:721px) and (max-width:860px){.top-in{padding:0 12px;gap:6px}.top nav{gap:0}.top nav>a{padding:7px 8px}.lang{margin-left:4px}.nav-tools{gap:2px}}
 @supports selector(:popover-open){@media (max-width:720px){
   .top-in{gap:2px}.top nav{gap:0}.top nav>a{min-height:44px;display:inline-flex;align-items:center}
   .more-btn{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;padding:0;border:1px solid rgba(170,200,245,.45);border-radius:999px;background:none;color:#ecf3ff;cursor:pointer}

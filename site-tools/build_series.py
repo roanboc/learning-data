@@ -539,8 +539,8 @@ def header(lg, path, R, cur="true", item="topics", other=None, here=None):
     return (f'<header class="top"><div class="top-in"><a class="brand" href="{home}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a>'
             f'<nav aria-label="{site}">{nav}</nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="{more}">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>'
-            f'<div class="more" id="top-more" popover><span class="lang" role="group" aria-label="{language}">{en}{es}</span>{external_nav(lg)}</div>'
-            f'<script>{THEME_JS}</script></div></header>')
+            f'<div class="more" id="top-more" popover><span class="lang" role="group" aria-label="{language}">{en}{es}</span>{external_nav(lg, R)}</div>'
+            f'<script>{THEME_JS};{TOUR_JS}</script></div></header>')
 
 
 # The theme switch: the visitor's choice, kept in this browser, else the device's setting. Run inside the header, before the page is drawn.
@@ -549,6 +549,16 @@ THEME_JS = ('(function(){var d=document.documentElement,b=document.currentScript
             'function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}'
             'show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";'
             'try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()')
+
+
+# The guided tour: "?" in the header. Nothing of it loads until someone asks: then its styles, its words in the page's language and
+# its script (assets/learn/tour.css, tour.<lang>.js, tour.js), and it starts. On a phone "?" is in the More menu, which closes first.
+TOUR_JS = ('(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){'
+           'var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}'
+           'if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";'
+           'function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}'
+           'add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){'
+           'add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()')
 
 
 # The hand-written pages: their header is made by header() too, and written over theirs by blocks() below.
@@ -572,10 +582,14 @@ def hand_header(rel):
     return header(lg, path, R, cur="page" if path == "" else "true", item="start" if path in ("", "labs/", "scenarios/") else "topics", other=other)
 
 
-def external_nav(lg):
-    home, contact, theme = (("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn", "Modo oscuro") if lg == "es"
-                            else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn", "Dark mode"))
-    return (f'<div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="{theme}">'
+def external_nav(lg, R=""):
+    """The header's tools: the guided tour ("?"), the dark mode switch, and the links to learn-all.org and to Rodrigo. R: the way to
+    the site's root, from which the tour's script, words and styles load when someone asks for it (assets/learn/tour*)."""
+    home, contact, theme, tour = (("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn", "Modo oscuro", "Cómo funciona este sitio") if lg == "es"
+                                  else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn", "Dark mode", "How this site works"))
+    return (f'<div class="nav-tools"><button class="help" type="button" aria-label="{tour}" data-tour="{R}assets/learn/">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button>'
+            f'<button class="theme" type="button" aria-pressed="false" aria-label="{theme}">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>'
             f'<a class="parent-site" href="https://learn-all.org" aria-label="{home}">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a>'

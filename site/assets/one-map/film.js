@@ -2156,6 +2156,15 @@ const om_u=(t,ts)=>ts.reduce((s,t0)=>s+ag_in(t,t0,0.5),0)/ts.length;
 function om_tag(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_tag(ctx,x,y,text,Object.assign({},o,{a}));}
 // a pill that springs in at t0 and goes at t1 (null: stays)
 function om_pill(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_pill(ctx,x,y,text,Object.assign({},o,{a,k:t-t0}));}
+// a sheet with one number, as lp_figure draws it, with the number at the largest size, up to its 96 px, that fits the sheet: at 96,
+// "500 million+" is wider than its sheet, which stands beside the map and can't grow
+function om_figure(ctx,x,y,w,words,o){o=o||{};const col=o.col||LP.orange,room=w-LP_PAD*2,ll=words.label?lp_wrap(ctx,words.label,room,{w:600,size:28}):[],
+    sz=Math.min(96,Math.floor(96*room/ag_tw(ctx,words.num,{w:800,size:96}))),h=LP_PAD+16+(words.kick?44:0)+sz+8+ll.length*38+LP_PAD,bb={x,y,w,h},a=o.a==null?1:o.a;
+  if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  lp_sheet(ctx,x,y,w,h,Object.assign({},o,{a:1,k:null,col}));let yy=y+LP_PAD+30;
+  if(words.kick){lp_T(ctx,String(words.kick).toUpperCase(),x+LP_PAD,yy+14,{w:800,size:28,ls:3,col});yy+=44;}
+  lp_T(ctx,words.num,x+LP_PAD,yy+sz-4,{w:800,size:sz,col});yy+=sz+8;for(const l of ll){yy+=38;lp_T(ctx,l,x+LP_PAD,yy,{w:600,size:28});}
+  ctx.restore();return bb;}
 
 /* ---------------------------------------------------------------- 1. One database, every map: Great Britain, from the late 1990s */
 const OM_M={x:640,y:190,s:1.12};
@@ -2215,7 +2224,7 @@ scene("tiles",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       om_pill(x,tt,w("point","doubt",-0.1),hs,sx,sy-150,"The same building",{col:LP.green,icon:"tick"});
       om_sheet(x,tt,w("history","version",-0.2),RX,170,RW,{kick:"The school's feature",title:"TOID 1000005567801",lines:["Version 1 · first drawn","Version 2 · a new wing","Version 3 · a new hall"]},
         {col:LP.blue,light:null,pin:false,out:c.grew-0.4,u:om_u(tt,[w("history","changed",-0.2),w("history","when",-0.6),w("history","when",-0.2)])});
-      const g0=w("grew","million",-0.3);if(tt>g0){const a=ag_in(tt,g0,0.35);lp_figure(x,RX,190,RW,{kick:"By 2016",num:"500 million+",label:"Features, each with its identifier"},{col:LP.green,light:null,pin:false,a,k:tt-g0});}}},
+      const g0=w("grew","million",-0.3);if(tt>g0){const a=ag_in(tt,g0,0.35);om_figure(x,RX,190,RW,{kick:"By 2016",num:"500 million+",label:"Features, each with its identifier"},{col:LP.green,light:null,pin:false,a,k:tt-g0});}}},
     // a data team's architecture: three copies that drift apart; then one source, and every copy made from it
     {at:c.data-0.3,place:"lpRoom",keys:[[c.data-0.3,960,540,1.0]],push:0,draw:(x,tt)=>{const d0=w("data","copies",-0.1),o0=w("one","source",-0.2),m0=w("one","make",-0.1),fd=1-ag_in(tt,c.breath+0.2,0.8);
       const dr=ag_in(tt,d0+0.4,2.2)*(1-ag_in(tt,m0,1.4));x.save();x.globalAlpha*=fd;

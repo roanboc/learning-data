@@ -201,8 +201,8 @@ scene("ticket",(ctx,S,t,sc)=>{const c=sc.cues,P=hw_once(sc,"P",()=>({white:wAt(s
       ag_pill(x,800,626,"an order, or data?",{col:AG.violet,a:ag_io(tt,P.order,c.data-0.2,0.4)});
       // what it reads is data, never orders, and no hand it holds can send anything out
       hw_rule(x,476,196,780,{a:ag_in(tt,c.data+0.1,0.4)*end,k:ag_spr(tt,c.data+0.1)});
-      hw_tools6(x,476,476,{a:[0,1,2,3,4,5].map(i=>ag_in(tt,P.hand+0.1*i,0.4)*end)});
-      hw_pillL(x,476,790,"No tool can send anything out",{icon:"lock",col:AG.blue,a:ag_in(tt,P.out,0.4)*end});}},
+      hw_tools6(x,476,432,{a:[0,1,2,3,4,5].map(i=>ag_in(tt,P.hand+0.1*i,0.4)*end)});
+      hw_pillL(x,476,837,"No tool can send anything out",{icon:"lock",col:AG.blue,a:ag_in(tt,P.out,0.4)*end});}},
     // like the walls above Lisbon's roofs, the fire stops where it starts
     {at:c.walls,place:"hwRow",keys:[[c.walls,980,560,1.04]],push:0.03,draw:(x,tt)=>hw_roofFire(x,tt,c.walls+0.2,1)}
   ],0.6);

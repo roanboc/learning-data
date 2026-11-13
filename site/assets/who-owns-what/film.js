@@ -1941,22 +1941,24 @@ function wo_register(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
       const sh=ctx.createRadialGradient(bx+bw2*0.3,y+h*0.25,10,bx+bw2*0.4,y+h*0.35,bw2);sh.addColorStop(0,"rgba(255,220,170,0.16)");sh.addColorStop(1,"rgba(255,220,170,0)");ctx.fillStyle=sh;ctx.fillRect(bx,y,bw2,h);
       ctx.strokeStyle="rgba(222,178,98,0.85)";ctx.lineWidth=3;rr(ctx,bx+26,y+20,bw2-52,h-40,6);ctx.stroke();ctx.lineWidth=1.2;rr(ctx,bx+36,y+30,bw2-72,h-60,4);ctx.stroke();
       T(ctx,"REGISTER BOOK",bx+bw2/2,y+h*0.42,{w:800,size:28,align:"center",color:"rgba(232,192,112,0.95)"});T(ctx,"South Australia · 1858",bx+bw2/2,y+h*0.42+40,{w:700,size:20,align:"center",color:"rgba(232,192,112,0.85)"});});});}
-// a memorandum of transfer: a printed form, the owner's signature (sig 0..1) and the registrar's stamp (press 0..1)
+// a memorandum of transfer: a printed form, the owner's signature (sig 0..1) and the registrar's stamp (press 0..1). Its heading
+// takes two lines where one would run off the paper at the size it's drawn, and the stamp's frame is made from its word
 function wo_transfer(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot==null?0.04:o.rot);ctx.translate(-w/2,-h/2);
   kt_paper(ctx,0,0,w,h,t,{seed:11,col:[240,228,200],curl:0.7,age:0.2});
-  T(ctx,"MEMORANDUM OF TRANSFER",w/2,40,{w:800,size:20,align:"center",color:"rgba(70,46,26,0.95)"});T(ctx,"Real Property Act, 1858",w/2,66,{w:600,size:18,align:"center",color:"rgba(100,70,40,0.9)"});
-  wo_script(ctx,26,104,w-52,5,24,1,21);
+  const hs=phSz(ctx,20),H="MEMORANDUM OF TRANSFER",hl=tw(ctx,H,hs,800)>w-40?["MEMORANDUM","OF TRANSFER"]:[H],lh=Math.round(hs*1.12),ay=40+(hl.length-1)*lh+Math.max(26,Math.round(phSz(ctx,18)*1.15));
+  hl.forEach((l,i)=>T(ctx,l,w/2,40+i*lh,{w:800,size:20,align:"center",color:"rgba(70,46,26,0.95)"}));T(ctx,"Real Property Act, 1858",w/2,ay,{w:600,size:18,align:"center",color:"rgba(100,70,40,0.9)"});
+  wo_script(ctx,26,ay+38,w-52,hl.length>1?4:5,24,1,21);
   ctx.strokeStyle="rgba(90,62,36,0.6)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(26,h-96);ctx.lineTo(w*0.62,h-96);ctx.stroke();T(ctx,"signed by the proprietor",26,h-72,{w:600,size:18,color:"rgba(100,70,40,0.9)"});
   wo_sign(ctx,34,h-112,0.9,o.sig||0);
-  const pr=o.press||0;if(pr>0){const sx=w-86,sy=h-100,k=ease(clamp(pr,0,1));withA(ctx,k,()=>{ctx.save();ctx.translate(sx,sy);ctx.rotate(-0.2);ctx.scale(1.4-0.4*k,1.4-0.4*k);ctx.strokeStyle="rgba(140,36,30,0.85)";ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,50,0,TAU);ctx.stroke();ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(0,0,42,0,TAU);ctx.stroke();
-    T(ctx,"REGISTERED",0,6,{w:800,size:18,align:"center",color:"rgba(140,36,30,0.9)"});ctx.restore();});}
+  const pr=o.press||0;if(pr>0){const zs=phSz(ctx,18),sw=tw(ctx,"REGISTERED",zs,800)+30,sh=zs+20,sx=w-34-sw/2,sy=h-190,k=ease(clamp(pr,0,1));withA(ctx,k,()=>{ctx.save();ctx.translate(sx,sy);ctx.rotate(-0.12);ctx.scale(1.4-0.4*k,1.4-0.4*k);ctx.strokeStyle="rgba(140,36,30,0.85)";ctx.lineWidth=3;rr(ctx,-sw/2,-sh/2,sw,sh,7);ctx.stroke();ctx.lineWidth=1.2;rr(ctx,-sw/2+5,-sh/2+5,sw-10,sh-10,4);ctx.stroke();
+    T(ctx,"REGISTERED",0,zs*0.36,{w:800,size:zs,align:"center",color:"rgba(140,36,30,0.9)"});ctx.restore();});}
   ctx.restore();});}
 
 /* ---------- the present ---------- */
-// a gold-edged card: a core model, published. o.stack draws the other core models behind it
+// a gold-edged card: a core model, published. o.stack draws the other core models behind it, each a line of its name higher
 const WO_CORE=["core_learner","core_award","core_credential","core_credit_towards_award"];
 function wo_coreCard(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const st=o.stack||0;
-  for(let i=3;i>=1;i--){if(st<=0)break;withA(ctx,st*(0.9-i*0.15),()=>{const dx=i*26,dy=-i*22;glass(ctx,x+dx,y+dy,w,h,16,TRUST,{glow:6,ea:0.4,fill:"rgba(10,12,20,0.96)"});T(ctx,WO_CORE[i],x+dx+w-20,y+dy+30,{f:"mono",w:500,size:18,align:"right",color:rgba(TRUST,0.7)});});}
+  for(let i=3;i>=1;i--){if(st<=0)break;withA(ctx,st*(0.9-i*0.15),()=>{const dx=i*26,dy=-i*Math.max(22,Math.round(phSz(ctx,18)+6));glass(ctx,x+dx,y+dy,w,h,16,TRUST,{glow:6,ea:0.4,fill:"rgba(10,12,20,0.96)"});T(ctx,WO_CORE[i],x+dx+w-20,y+dy+30,{f:"mono",w:500,size:18,align:"right",color:rgba(TRUST,0.7)});});}
   glow(ctx,x+w/2,y+h/2,w*0.7,TRUST,0.12+0.1*(o.hi||0));glass(ctx,x,y,w,h,16,TRUST,{glow:22,ea:0.95,lw:3,fill:"rgba(12,12,18,0.97)"});
   ctx.strokeStyle=rgba(TRUST,0.5);ctx.lineWidth=1;rr(ctx,x+8,y+8,w-16,h-16,10);ctx.stroke();
   T(ctx,o.name||"core_learner",x+28,y+56,{f:"mono",w:500,size:30,color:rgba(TRUST,1)});
@@ -1981,20 +1983,20 @@ function wo_terr(ctx,x,y,w,h,col,name,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<
     const px=cx+ex*k*w/2*wob,py=cy+ey*k*h/2*wob;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();
   const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,rgba(col,0.13));g.addColorStop(1,rgba(col,0.04));ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=rgba(col,0.75);ctx.lineWidth=2;ctx.setLineDash([2,0]);ctx.shadowColor=rgba(col,0.5);ctx.shadowBlur=10;ctx.stroke();ctx.restore();
   T(ctx,name,x+44,y+52,{w:800,size:24,color:rgba(col,1)});});}
-// a chip: one thing a domain owns
-function wo_chip(ctx,x,y,s,col,o){o=o||{};const sz=o.size||20,mono=!!o.mono,w=tw(ctx,s,sz,mono?500:700,mono?"mono":undefined)+28,h=sz+18;glass(ctx,x,y-h/2,w,h,10,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.93)"});
+// a chip: one thing a domain owns, as wide and as tall as its words at the size they're drawn
+function wo_chip(ctx,x,y,s,col,o){o=o||{};const sz=phSz(ctx,o.size||20),mono=!!o.mono,w=tw(ctx,s,sz,mono?500:700,mono?"mono":undefined)+28,h=sz+18;glass(ctx,x,y-h/2,w,h,10,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.93)"});
   T(ctx,s,x+14,y+sz*0.36,{f:mono?"mono":undefined,w:mono?500:700,size:sz,color:rgba(o.text||INK,1)});return w;}
 // a small pennant on a model: its meta.domain
 function wo_pennant(ctx,x,y,col,a){if(a<=0.01)return;withA(ctx,a,()=>{const k=ease(a);ctx.strokeStyle=rgba(INK,0.8);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y-26*k);ctx.stroke();
   ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(x,y-26*k);ctx.lineTo(x+16,y-21*k);ctx.lineTo(x,y-15*k);ctx.closePath();ctx.fill();});}
 function wo_dot(ctx,x,y,col,a,r){if(a<=0.01)return;withA(ctx,a,()=>{glow(ctx,x,y,(r||7)*3,col,0.3);ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,y,r||7,0,TAU);ctx.fill();});}
 
-// a project: a box with its name on a tab. o.dash for a sketch
+// a project: a box with its name on a tab, as wide and as tall as the name at the size it's drawn. o.dash for a sketch
 function wo_proj(ctx,x,y,w,h,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.fillStyle="rgba(8,12,24,0.55)";rr(ctx,x,y,w,h,22);ctx.fill();
   ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2.4;if(o.dash)ctx.setLineDash([14,10]);const p=o.p==null?1:o.p;
   if(p<1){const per=2*(w+h);ctx.setLineDash(o.dash?[14,10]:[per*p,per]);}rr(ctx,x,y,w,h,22);ctx.stroke();ctx.restore();
-  const tw_=tw(ctx,name,22,800)+36;ctx.fillStyle="rgba(8,12,24,0.98)";rr(ctx,x+24,y-18,tw_,36,18);ctx.fill();ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=1.6;rr(ctx,x+24,y-18,tw_,36,18);ctx.stroke();
-  T(ctx,name,x+42,y+8,{w:800,size:22,color:rgba(col,1)});});}
+  const sz=phSz(ctx,22),tw_=tw(ctx,name,sz,800)+36,th=sz+14;ctx.fillStyle="rgba(8,12,24,0.98)";rr(ctx,x+24,y-th/2,tw_,th,th/2);ctx.fill();ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=1.6;rr(ctx,x+24,y-th/2,tw_,th,th/2);ctx.stroke();
+  T(ctx,name,x+42,y+sz*0.36,{w:800,size:sz,color:rgba(col,1)});});}
 
 // dbt's three rings of access around (cx,cy): public (outer), protected, private (inner). o.ring[i] draws each, o.lit[i] lights it
 const WO_RING=[["public","any project",TRUST,520,330],["protected","this project only",[120,215,155],370,232],["private","same group only",[178,156,255],215,128]];
@@ -2033,8 +2035,8 @@ function wo_table(ctx,x,y,w,h,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=
   ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.4;ctx.strokeRect(dx,dy,dw,dh);
   const pw=dw*(1-0.75*op);ctx.fillStyle=rgba(mix(col,[20,26,40],0.6),1);ctx.beginPath();ctx.moveTo(dx,dy);ctx.lineTo(dx+pw,dy+op*10);ctx.lineTo(dx+pw,dy+dh-op*10);ctx.lineTo(dx,dy+dh);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=1.6;ctx.stroke();
   kt_lock(ctx,dx+dw+16,dy+dh*0.5,0.36,o.lockCol||TRUST,1,op);});}
-// a dashboard: a small chart frame, Planning's
-function wo_dash(ctx,x,y,w,h,col,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,12,col,{glow:12,ea:0.8,fill:"rgba(8,14,26,0.96)"});
+// a dashboard: a small chart frame, Planning's; in the film it is at least as wide as its title at the size it's drawn
+function wo_dash(ctx,x,y,w,h,col,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;if(phMin(ctx))w=Math.max(w,tw(ctx,o.title||"dashboard",phSz(ctx,18),700)+32);withA(ctx,a,()=>{glass(ctx,x,y,w,h,12,col,{glow:12,ea:0.8,fill:"rgba(8,14,26,0.96)"});
   T(ctx,o.title||"dashboard",x+16,y+32,{w:700,size:18,color:rgba(col,1)});const bh=[0.5,0.8,0.35,0.65,0.9];bh.forEach((v,i)=>{const bw=(w-60)/bh.length,hh=(h-70)*v*(0.92+0.08*Math.sin(t*1.2+i));ctx.fillStyle=rgba(col,0.55+0.08*i);rr(ctx,x+20+i*bw,y+h-16-hh,bw-10,hh,3);ctx.fill();});});}
 
 // a slab of the ground every project stands on
@@ -2278,7 +2280,8 @@ scene("register",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   const tt=[["the Real Property Act · Robert Torrens",w("chain","law")-0.2,w("chain","register the title")-0.3],["the register is the title",w("chain","register the title")-0.2,cT-0.2],["rely on it",w("title","rely")-0.2,cR-0.3],["only a registered transfer",w("transfer","registered")-0.2,w("transfer","signed")-0.1],["signed by the owner",w("transfer","signed"),cB-0.4]];
   tt.forEach(([s,t0,t1])=>{const q=fin(t,t0,0.4)*(1-fin(t,t1,0.4));if(q>0)arrive(ctx,960,104,t,t0,()=>withA(ctx,q,()=>tag(ctx,960,104,s,PARCH,{align:"center",size:24})),{dy:12});});
   // the bridge: the closed register drifts right, towards the present, and becomes a core model
-  const cx=lerp(1040,1220,m);wo_coreCard(ctx,cx,300,480,170,{a:fin(t,cB+0.4,1.0),stack:fin(t,w("bridge","core models"),0.8),sub:"a core model · published by its owner"});
+  // the card is as wide as its second line at the size it's drawn, about the same centre
+  const cs="a core model · published by its owner",cw=Math.max(480,Math.ceil(tw(ctx,cs,phSz(ctx,20),600))+64),cx=lerp(1040,1220,m)-(cw-480)/2;wo_coreCard(ctx,cx,300,cw,170,{a:fin(t,cB+0.4,1.0),stack:fin(t,w("bridge","core models"),0.8),sub:cs});
   [["their owner publishes them","publishes"],["everyone relies on them","relies"],["only their owner changes them","only their owner"]].forEach(([s,k_],i)=>arrive(ctx,170,420+i*72,t,w("bridge",k_)-0.1,()=>tag(ctx,170,420+i*72,s,TRUST,{size:24}),{dy:16}));
   arrive(ctx,1460,560,t,w("bridge","core models")+0.2,()=>T(ctx,"the credential's core models",1460,560,{w:700,size:22,align:"center",color:rgba(SOFT,1)}),{dy:12});
   ctx.restore();weedsTitle(ctx,S,t,B,"Who owns what","owners publish; consumers build on what's published",WEED);
@@ -2295,17 +2298,20 @@ const WO_TER=[["registrar","student system","the registrar's office · Mei",[70,
   ["wallet","wallet app","owns its marts",[1290,570,560,320],[680,470,300,270],[["mart_wallet__learners",2],["mart_wallet__credentials",2]],"team",2,"business"]];
 const WO_KX={application:[[70,630],[40,340]],data:[[680,1240],[360,660]],business:[[1290,1850],[680,980]]};   // each kind's column, full and small
 function wo_map(ctx,t,o){const m=o.m||0,on=o.on||WO_TER.map(()=>1),ch=o.chips||[],fl=o.flags||0,kh=o.kinds||{};
-  // the three kinds, as column heads: the kind, and the folders it lives in
+  // the three kinds, as column heads: the kind, and the folders it lives in, beside its name where every head has room for both
+  // on one line at the size they're drawn, and under the rule where one hasn't
+  const dz=phSz(ctx,18),under=WO_KINDS.some(([k,nm,dir])=>tw(ctx,nm,phSz(ctx,26),800)+tw(ctx,dir,dz,500,"mono")+40>WO_KX[k][0][1]-WO_KX[k][0][0]);
   WO_KINDS.forEach(([k,nm,dir])=>{const a=kh[k]||0;if(a<=0.01)return;const[F,C]=WO_KX[k],x0=lerp(F[0],C[0],m),x1=lerp(F[1],C[1],m),col=WO_DOM[k][1],y=lerp(150,118,m);
-    withA(ctx,a,()=>{T(ctx,nm,x0+8,y,{w:800,size:lerp(26,20,m),color:rgba(col,1)});withA(ctx,1-m,()=>T(ctx,dir,x1-8,y,{f:"mono",w:500,size:18,align:"right",color:rgba(col,0.9)}));
+    withA(ctx,a,()=>{T(ctx,nm,x0+8,y,{w:800,size:lerp(26,20,m),color:rgba(col,1)});withA(ctx,1-m,()=>T(ctx,dir,under?x0+8:x1-8,under?y+14+dz:y,{f:"mono",w:500,size:18,align:under?"left":"right",color:rgba(col,0.9)}));
       ctx.fillStyle=rgba(col,0.5);ctx.fillRect(x0,y+12,(x1-x0)*a,2);});});
   WO_TER.forEach(([dk,nm,who,F,C,items,pid,nDots,kind],i)=>{const a=on[i];if(a<=0.01)return;const[x,y,w,h]=F.map((v,j)=>lerp(v,C[j],m)),col=WO_DOM[dk][1];
     arrive(ctx,x+w/2,y+h/2,t,o.t0[i],()=>{wo_terr(ctx,x,y,w,h,col,nm,t,{seed:i+1});withA(ctx,1-m,()=>T(ctx,who,x+44,y+80,{w:600,size:18,color:rgba(SOFT,1)}));
       // the owner, on the right, while the map is full size
-      if(pid)withA(ctx,1-m,()=>{if(pid==="team")wo_team(ctx,x+w-120,y+h-150,0.95,col,t);else person(ctx,pid,x+w-110,y+h-14,0.4,{t});});
+      if(pid)withA(ctx,1-m,()=>{if(pid==="team")wo_team(ctx,x+w-112,y+h-100,0.8,col,t);else person(ctx,pid,x+w-110,y+h-14,0.4,{t});});   // a team stands under its chips, which are as wide as their words
       // what it owns: one column on the full map, two on the small one
-      let cx=x+26,cy=y+116,col2=x+26+Math.max(...items.filter((_,j)=>j%2===0).map(([s,k])=>tw(ctx,s,k===2?18:20,k?500:700,k?"mono":undefined)+28))+16;
-      items.forEach(([s,k,kc],j)=>{const q=(ch[i]||[])[j]||0;if(q<=0)return;const two=items.length>2,xx=lerp(x+26,two&&j%2?col2:x+26,m),yy=lerp(y+116+j*48,y+116+(two?Math.floor(j/2):j)*48,m);
+      const rg=Math.max(48,phSz(ctx,20)+26);   // from one chip to the next, at the size their words are drawn
+      let cx=x+26,cy=y+116,col2=x+26+Math.max(...items.filter((_,j)=>j%2===0).map(([s,k])=>tw(ctx,s,phSz(ctx,k===2?18:20),k?500:700,k?"mono":undefined)+28))+16;
+      items.forEach(([s,k,kc],j)=>{const q=(ch[i]||[])[j]||0;if(q<=0)return;const two=items.length>2,xx=lerp(x+26,two&&j%2?col2:x+26,m),yy=lerp(y+116+j*rg,y+116+(two?Math.floor(j/2):j)*rg,m);
         withA(ctx,1-m,()=>arrive(ctx,xx+60,yy,t,q,()=>wo_chip(ctx,xx,yy,s,col,{mono:!!k,size:k===2?18:20,text:kc||INK}),{dy:10,from:0.8}));});
       // its models, each with a small flag that reads its meta.domain
       if(m>0.5)withA(ctx,fin(m,0.5,0.5),()=>{for(let d=0;d<nDots;d++){const px=x+40+d*30,py=y+h-70;wo_dot(ctx,px,py,kind==="data"?TRUST:kind==="business"?LAYER4[3][1]:LAYER4[0][1],1,7);wo_pennant(ctx,px+2,py-8,col,fin(fl,d*0.06,0.4));}

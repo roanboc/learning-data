@@ -1792,8 +1792,8 @@ function rw_calendar(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
   ctx.fillStyle="rgba(0,0,0,0.3)";ctx.beginPath();ctx.ellipse(w/2+5,14,9,5,0,0,TAU);ctx.fill();const pg=ctx.createRadialGradient(w/2-3,6,1,w/2,9,10);pg.addColorStop(0,"rgb(255,236,180)");pg.addColorStop(1,"rgb(140,96,40)");ctx.fillStyle=pg;ctx.beginPath();ctx.arc(w/2,9,9,0,TAU);ctx.fill();
   ctx.restore();});}
 // a small calendar leaf, for one of the days of June running past
-function rw_leaf(ctx,x,y,day,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.4)";ctx.shadowBlur=10;ctx.shadowOffsetY=4;ctx.fillStyle="rgb(232,222,198)";ctx.fillRect(x-38,y-46,76,92);ctx.restore();
-  ctx.fillStyle="rgb(150,44,38)";ctx.fillRect(x-38,y-46,76,22);T(ctx,"June",x,y-29,{w:700,size:16,align:"center",color:"rgba(250,236,214,0.95)"});T(ctx,String(day),x,y+30,{w:800,size:40,align:"center",color:rgba(RW_INK,0.88)});});}
+function rw_leaf(ctx,x,y,day,a){if(a<=0.01)return;withA(ctx,a,()=>{const ms=phSz(ctx,16),hw=Math.max(38,Math.ceil(tw(ctx,"June",ms,700)/2)+8),bh=Math.max(22,Math.round(ms*1.3)),g=bh-22,top=y-46-g*0.45,bot=y+46+g*0.15;ctx.save();ctx.shadowColor="rgba(0,0,0,0.4)";ctx.shadowBlur=10;ctx.shadowOffsetY=4;ctx.fillStyle="rgb(232,222,198)";ctx.fillRect(x-hw,top,2*hw,bot-top);ctx.restore();
+  ctx.fillStyle="rgb(150,44,38)";ctx.fillRect(x-hw,top,2*hw,bh);T(ctx,"June",x,top+bh/2+ms*0.375,{w:700,size:ms,align:"center",color:"rgba(250,236,214,0.95)"});T(ctx,String(day),x,y+30+g*0.15,{w:800,size:40,align:"center",color:rgba(RW_INK,0.88)});});}
 
 // the 1890 family schedule: one sheet per family, one column of answers per person. o.wr[i] (0..1) writes person i's column;
 // o.lift: a column lifted out (it fades from the sheet); o.note (0..1): Ruth's later note; o.hiCol: a column lit
@@ -2436,8 +2436,8 @@ scene("was",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
     arrive(ctx,1500,160,t,w("today","about today"),()=>rw_pin(ctx,1500,160,"30 Sep 2026 · today",1),{dy:12});
     arrive(ctx,490,764,t,w("census","forty-five"),()=>tag(ctx,490,764,"45 of 60 · 15 to go",RW_TIME,{align:"center",size:22}),{dy:12});
     arrive(ctx,490,826,t,w("census","She counts"),()=>{tag(ctx,476,826,"counted",GOOD,{align:"center",size:22});tick_(ctx,560,826,24,GOOD,1);},{dy:12});
-    arrive(ctx,1430,780,t,w("today","finished in July"),()=>{glass(ctx,1060,710,740,140,18,RW_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.96)"});T(ctx,"Aisha · completed",1090,752,{w:800,size:26});
-      T(ctx,"5 credentials: 1 award · 3 microcredentials · 1 badge · 0 revoked",1090,789,{w:600,size:19,color:rgba(INK,0.9)});T(ctx,"not counted: she's there",1090,825,{w:700,size:19,color:rgba(SOFT,1)});},{dy:20});});
+    arrive(ctx,1430,780,t,w("today","finished in July"),()=>{glass(ctx,1060,710,740,140,18,RW_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.96)"});T(ctx,"Aisha · completed · 5 credentials",1090,752,{w:800,size:26});
+      T(ctx,"1 award · 3 microcredentials · 1 badge · 0 revoked",1090,789,{w:600,size:19,color:rgba(INK,0.9)});T(ctx,"not counted: she's there",1090,825,{w:700,size:19,color:rgba(SOFT,1)});},{dy:20});});
   // the two badges: at the top of each half, then beside the table, then over the code
   const bP=[[150,160],[250,430],[130,170]],bW=[[1090,160],[1670,430],[1010,170]],at=(P)=>[lerp(lerp(P[0][0],P[1][0],close),P[2][0],dc),lerp(lerp(P[0][1],P[1][1],close),P[2][1],dc)];
   const[px,py]=at(bP),[wx,wy]=at(bW),ga=fin(t,cB+0.4,0.6);
@@ -2450,8 +2450,8 @@ scene("was",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   // the same question, asked about two days: faculty by faculty
   withA(ctx,close*(1-dc),()=>{const tq=w("totals","Ask Planning's question");
     arrive(ctx,960,155,t,tq-0.3,()=>{glass(ctx,360,110,1200,90,20,RW_CON,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"learners within 15 points of a graduate certificate, by faculty",960,166,{w:700,size:28,align:"center"});},{dy:16});
-    arrive(ctx,960,450,t,tq,()=>{const lit=fin(t,cB,0.5);glass(ctx,560,230,800,440,18,[150,180,220],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});
-      [[1080,"as at census","31 Mar 2026",tq+0.6],[1260,"now","30 Sep 2026",w("totals","Ask it today")]].forEach(([x,h1,h2,t0],j)=>{if(lit>0)withA(ctx,lit,()=>{glow(ctx,x,450,160,j?RW_CON:RW_TIME,0.12);ctx.fillStyle=rgba(j?RW_CON:RW_TIME,0.07);rr(ctx,x-80,244,160,412,12);ctx.fill();});
+    arrive(ctx,960,450,t,tq,()=>{const lit=fin(t,cB,0.5),bw=Math.max(160,Math.ceil(tw(ctx,"31 Mar 2026",phSz(ctx,18),500,"mono"))+24);glass(ctx,560,230,800,440,18,[150,180,220],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});
+      [[1320-bw*1.5,"as at census","31 Mar 2026",tq+0.6],[1340-bw/2,"now","30 Sep 2026",w("totals","Ask it today")]].forEach(([x,h1,h2,t0],j)=>{if(lit>0)withA(ctx,lit,()=>{glow(ctx,x,450,bw,j?RW_CON:RW_TIME,0.12);ctx.fillStyle=rgba(j?RW_CON:RW_TIME,0.07);rr(ctx,x-bw/2,244,bw,412,12);ctx.fill();});
         T(ctx,h1,x,270,{w:700,size:20,align:"center",color:rgba(j?RW_CON:RW_TIME,1)});T(ctx,h2,x,298,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,1)});
         RW_FACS.forEach((r,i)=>withA(ctx,fin(t,t0+0.3+i*0.3,0.3),()=>T(ctx,r[1+j],x,370+i*58,{f:"mono",w:500,size:30,align:"center"})));
         withA(ctx,fin(t,w("totals",j?"nine":"twelve")-0.1,0.3),()=>T(ctx,j?"9":"12",x,640,{w:800,size:44,align:"center",color:rgba(j?RW_CON:RW_TIME,1)}));});
@@ -2557,9 +2557,9 @@ scene("late",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,rw_lx(10.5),AY-60,t,w("week","a week late"),()=>withA(ctx,1-clamp(dm*4,0,1),()=>tag(ctx,rw_lx(10.5)-160,AY-50,"7 days late",EDGE_,{align:"center",size:18})),{dy:8});
   // Business: our count against the census report
   const tB=w("recorded","Business would count"),tR=w("recorded","census report says");
-  arrive(ctx,560,585,t,tB-0.2,()=>{[[160,"Business · our count",tB],[640,"Business · census report",tR]].forEach(([x,s,t0],i)=>withA(ctx,fin(t,t0-0.2,0.5),()=>{const col=i?SOFT:mix(RW_AMB,GOOD,dm);
-      glass(ctx,x,530,320,110,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x+20,562,{w:700,size:18,color:rgba(SOFT,1)});
-      if(i)T(ctx,"3",x+160,624,{w:800,size:50,align:"center"});else{withA(ctx,dO,()=>T(ctx,"4",x+160,624,{w:800,size:50,align:"center",color:rgba(RW_AMB,1)}));withA(ctx,dI,()=>T(ctx,"3",x+160,624,{w:800,size:50,align:"center",color:rgba(GOOD,1)}));}}));
+  const bw=Math.max(320,Math.ceil(tw(ctx,"Business · census report",phSz(ctx,18),700))+40);arrive(ctx,560,585,t,tB-0.2,()=>{[[480-bw,"Business · our count",tB],[640,"Business · census report",tR]].forEach(([x,s,t0],i)=>withA(ctx,fin(t,t0-0.2,0.5),()=>{const col=i?SOFT:mix(RW_AMB,GOOD,dm);
+      glass(ctx,x,530,bw,110,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x+20,562,{w:700,size:18,color:rgba(SOFT,1)});
+      if(i)T(ctx,"3",x+bw/2,624,{w:800,size:50,align:"center"});else{withA(ctx,dO,()=>T(ctx,"4",x+bw/2,624,{w:800,size:50,align:"center",color:rgba(RW_AMB,1)}));withA(ctx,dI,()=>T(ctx,"3",x+bw/2,624,{w:800,size:50,align:"center",color:rgba(GOOD,1)}));}}));
     cross_(ctx,560,588,30,RW_RED,fin(t,tR+0.3,0.3)*dO);tick_(ctx,560,588,34,GOOD,dI);
     withA(ctx,fin(t,tB,0.4),()=>{T(ctx,dm<0.5?"dated by when it was recorded":"dated by when it took effect",560,672,{w:700,size:20,align:"center",color:rgba(dm<0.5?RW_AMB:GOOD,1)});});},{dy:16});
   // the evidence, then the rule
@@ -2585,10 +2585,10 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   arrive(ctx,960,610,t,0.4,()=>{for(let v=3;v>0;v--){withA(ctx,0.5,()=>{ctx.fillStyle="rgba(10,14,24,0.95)";rr(ctx,760+v*12,560-v*12,400,110,14);ctx.fill();ctx.strokeStyle=rgba(TRUST,0.35);ctx.lineWidth=1.5;rr(ctx,760+v*12,560-v*12,400,110,14);ctx.stroke();});}
     glow(ctx,960,615,260,TRUST,0.15);glass(ctx,760,560,400,110,14,TRUST,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.97)"});T(ctx,"core",960,606,{w:800,size:32,align:"center",color:rgba(TRUST,1)});T(ctx,"every version kept",960,644,{w:600,size:20,align:"center",color:rgba(SOFT,1)});},{d:1.0,from:0.9});
   // two consumers, each with its grain and its day; below, the contract still to write
-  [[260,"planning","Planning","as it was · one row per learner per award",cW+0.4],[1040,"wallet","Wallet app","as it is · one row per learner",cW+0.8]].forEach(([x,k,n,g,t0])=>{
-    arrowTo(ctx,960,556,x+310,446,RW_CON,0.7*fin(t,t0,0.6),{p:fin(t,t0,0.8),head:12});
-    arrive(ctx,x+310,330,t,t0,()=>{glass(ctx,x,220,620,220,18,RW_CON,{glow:12+10*lp,ea:0.8,fill:"rgba(7,12,24,0.96)"});rw_badge(ctx,x+60,270,30,k,null,{});T(ctx,n,x+108,262,{w:800,size:26});T(ctx,g,x+108,294,{w:600,size:20,color:rgba(RW_TIME,1)});
-      ctx.save();ctx.setLineDash([6,8]);ctx.strokeStyle=rgba(SOFT,0.35+0.4*lp);ctx.lineWidth=1.5;[350,392].forEach(y=>{ctx.beginPath();ctx.moveTo(x+30,y);ctx.lineTo(x+590,y);ctx.stroke();});ctx.restore();
+  const kw=Math.max(620,Math.ceil(108+tw(ctx,"as it was · one row per learner per award",phSz(ctx,20),600)+28));[[570-kw/2,"planning","Planning","as it was · one row per learner per award",cW+0.4],[1350-kw/2,"wallet","Wallet app","as it is · one row per learner",cW+0.8]].forEach(([x,k,n,g,t0])=>{
+    arrowTo(ctx,960,556,x+kw/2,446,RW_CON,0.7*fin(t,t0,0.6),{p:fin(t,t0,0.8),head:12});
+    arrive(ctx,x+kw/2,330,t,t0,()=>{glass(ctx,x,220,kw,220,18,RW_CON,{glow:12+10*lp,ea:0.8,fill:"rgba(7,12,24,0.96)"});rw_badge(ctx,x+60,270,30,k,null,{});T(ctx,n,x+108,262,{w:800,size:26});T(ctx,g,x+108,294,{w:600,size:20,color:rgba(RW_TIME,1)});
+      ctx.save();ctx.setLineDash([6,8]);ctx.strokeStyle=rgba(SOFT,0.35+0.4*lp);ctx.lineWidth=1.5;[350,392].forEach(y=>{ctx.beginPath();ctx.moveTo(x+30,y);ctx.lineTo(x+kw-30,y);ctx.stroke();});ctx.restore();
       withA(ctx,lp,()=>T(ctx,"what it's promised: to be written",x+30,338,{w:600,size:18,color:rgba(SOFT,1)}));},{dy:20});});
   arrive(ctx,960,760,t,w("what","Declared"),()=>tag(ctx,960,760,"one row of what · and when · declared · tested",WEED,{align:"center",size:22}),{dy:10});
   arrive(ctx,960,822,t,w("promise","one core"),()=>tag(ctx,960,822,"two consumers · one core",RW_CON,{align:"center",size:22}),{dy:10});

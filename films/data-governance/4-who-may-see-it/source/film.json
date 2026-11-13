@@ -33,5 +33,12 @@
       "\\bID\\b",
       "eye dee"
     ]
+  ],
+  "spills": [
+    [
+      "column",
+      "S-20417-GCDA",
+      "The plum highlight marks the student number inside the award's code, S-20417, so the rest of the code runs on past it."
+    ]
   ]
 }

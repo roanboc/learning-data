@@ -1462,7 +1462,7 @@ const OT_CRED_ATTRS=[["credential id","id"],["issuer id",""],["learner id",""],[
 // the ruler: our logical model's parts, marked along a gold bar
 function ot_ruler(ctx,x0,x1,y,marks,a,p,sz){if(a<=0.01)return;withA(ctx,a,()=>{const w=x1-x0,q=p==null?1:p;ctx.save();ctx.shadowColor=rgba(OT_GOLD,0.8);ctx.shadowBlur=18;const g=ctx.createLinearGradient(0,y-30,0,y+30);g.addColorStop(0,"#f6d98a");g.addColorStop(1,"#b8862e");ctx.fillStyle=g;rr(ctx,x0,y-30,w*q,60,8);ctx.fill();ctx.restore();
   ctx.strokeStyle="rgba(60,40,10,0.8)";ctx.lineWidth=2;for(let i=0;i<=80;i++){const xx=x0+i*w/80;if(xx>x0+w*q)break;ctx.beginPath();ctx.moveTo(xx,y-30);ctx.lineTo(xx,y-30+(i%10===0?26:i%5===0?18:10));ctx.stroke();}
-  marks.forEach((m,i)=>{const xx=x0+(i+0.5)*w/marks.length;if(xx>x0+w*q)return;T(ctx,m,xx,y+(sz||19)*0.4+12,{w:800,size:sz||19,align:"center",color:"rgba(50,32,8,0.95)"});});});}
+  marks.forEach((m,i)=>{const xx=x0+(i+0.5)*w/marks.length,hw=tw(ctx,m,phSz(ctx,sz||19),800)/2+8;if(xx>x0+w*q)return;T(ctx,m,2*hw>w?xx:clamp(xx,x0+hw,x1-hw),y+(sz||19)*0.4+12,{w:800,size:sz||19,align:"center",color:"rgba(50,32,8,0.95)"});});});}   // a mark at an end stays on the ruler at the size it's drawn
 
 /* ---------- pictures for the labs and the scenarios (site/assets/older-than-the-systems/learn.*.js name them in "vis") ----------
    Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW); every word it draws comes from FW.vis. */
@@ -1675,9 +1675,9 @@ scene("meet",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const q=path(18,up),q2=path(18,Math.min(1,up+0.02)),lost=fin(t,cM+2.7,0.5);ot_craft(ctx,q[0],q[1],1.1,Math.atan2(q2[1]-q[1],q2[0]-q[0]),1-lost);
     if(t>cM+2.6&&t<cM+3.6)glow(ctx,q[0],q[1],90,[255,160,120],0.8*(1-fin(t,cM+2.8,0.8)));
     withA(ctx,fin(t,cM+3.0,0.5),()=>{const e=path(18,1);ot_pill(ctx,e[0]+96,e[1]+6,"signal lost",BAD,{size:21});const pl=path(95,0.45,0.1);ot_pill(ctx,pl[0]+60,pl[1]-34,"planned",[220,230,255],{size:21});const ac=path(18,0.42);ot_pill(ctx,ac[0]-40,ac[1]+46,"actual: too low",BAD,{size:21});});
-    // two teams, two units; each program ran without an error
+    // two teams, two units; each program ran without an error (its status takes two lines, set to the right, where one would run past the card at the size it's drawn)
     const card=(y,a,title,verb,unit,col,run)=>withA(ctx,a,()=>{glass(ctx,110,y,600,160,18,col,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,title,140,y+44,{w:700,size:22,color:rgba(SOFT,1)});T(ctx,verb,140,y+80,{w:600,size:20,color:rgba(SOFT,1)});T(ctx,unit,140,y+132,{w:800,size:40,color:rgba(col,1)});
-      withA(ctx,run,()=>{ctx.fillStyle=rgba(GOOD,1);ctx.beginPath();ctx.arc(500,y+38,6,0,TAU);ctx.fill();T(ctx,"ran · no errors",516,y+45,{f:"mono",w:500,size:18,color:rgba(GOOD,0.95)});});});
+      withA(ctx,run,()=>{const rs=phSz(ctx,18),two=tw(ctx,"ran · no errors",rs,500,"mono")>174,o={f:"mono",w:500,size:18,color:rgba(GOOD,0.95)};ctx.fillStyle=rgba(GOOD,1);ctx.beginPath();ctx.arc(two?660-tw(ctx,"ran",rs,500,"mono"):500,y+38,6,0,TAU);ctx.fill();if(two){o.align="right";T(ctx,"ran",676,y+45,o);T(ctx,"no errors",676,y+45+Math.round(rs*1.22),o);}else T(ctx,"ran · no errors",516,y+45,o);});});
     card(230,fin(t,cM+3.7,0.5),"One team's software","gave the thrusters' push in","pound-force seconds",[255,190,110],fin(t,cB+0.4,0.4));
     card(520,fin(t,cM+7.9,0.5),"The navigation software","expected","newton-seconds",CYAN,fin(t,cB+0.9,0.4));
     // the interface specification already said newton-seconds: the meaning was written down, and one side wasn't held to it
@@ -1785,8 +1785,8 @@ scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     ot_pill(ctx,1010,y2+170,"owner: Noor, data architect",OT_GOLD,{size:21});});
   // the tables, and their teams
   const bA=fin(t,cA+3.4,0.5);withA(ctx,bA,()=>{person(ctx,"ben",470,y3+OT_BH-10,0.34,{t});
-    [["awards","sis","student system team"],["certificates","short","platform team"],["badges","careers","careers team"]].forEach(([n,k,own],i)=>{const x=560+i*322,y=y3+42,col=OT_SYS[k].c;glass(ctx,x,y,300,140,14,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});
-      T(ctx,n,x+22,y+42,{f:"mono",w:500,size:24,color:rgba(col,1)});for(let r=0;r<2;r++){ctx.fillStyle=rgba(col,0.22);ctx.fillRect(x+22,y+58+r*18,256,11);}T(ctx,own,x+22,y+122,{w:600,size:19,color:rgba(SOFT,1)});});});
+    const TB=[["awards","sis","student system team"],["certificates","short","platform team"],["badges","careers","careers team"]],tbW=TB.map(r=>Math.max(300,Math.ceil(tw(ctx,r[2],phSz(ctx,19),600))+36)),tbG=Math.min(22,(952-tbW.reduce((u,v)=>u+v,0))/2);   // each card as wide as its team's name at the size it's drawn
+    TB.forEach(([n,k,own],i)=>{const x=560+tbW.slice(0,i).reduce((u,v)=>u+v+tbG,0),cw_=tbW[i],y=y3+42,col=OT_SYS[k].c;glass(ctx,x,y,cw_,140,14,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,n,x+22,y+42,{f:"mono",w:500,size:24,color:rgba(col,1)});for(let r=0;r<2;r++){ctx.fillStyle=rgba(col,0.22);ctx.fillRect(x+22,y+58+r*18,cw_-44,11);}T(ctx,own,x+22,y+122,{w:600,size:19,color:rgba(SOFT,1)});});});
   // a change of meaning travels down; news of a change in a system travels up, before it ships
   const dA=fin(t,cD+0.1,0.5),uA=fin(t,cD+3.6,0.5),ax=1620,ux=1810;
   withA(ctx,dA,()=>{arrowTo(ctx,ax,110,ax,760,OT_WAX,0.85,{lw:4,head:18});ot_pill(ctx,ax,74,"meaning",OT_WAX,{size:21});});

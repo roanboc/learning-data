@@ -51,6 +51,21 @@ class SelectionTests(unittest.TestCase):
         p = self.plan("films/inner-life-of-data/source/src/engine3.js")
         self.assertEqual({f["key"] for f in p["films"]}, {f["key"] for f in affected.films()})
 
+    def test_a_lent_file_does_not_lend_its_films_own_scenes(self):
+        # sketch3.js and silent.js are drawn with by many films; the scenes beside them are their own film's alone
+        for path, owner in (("films/a-sharper-sketch/source/src/scenes.js", "a-sharper-sketch-en"),
+                            ("films/a-sharper-sketch/source/src/narration.js", "a-sharper-sketch-en"),
+                            ("films/when-things-go-wrong/1-silent-change/source/src/scenes.js", "silent-change-en")):
+            self.assertEqual([f["key"] for f in self.plan(path)["films"]], [owner], path)
+        sketch = {f["key"] for f in self.plan("films/a-sharper-sketch/source/src/sketch3.js")["films"]}
+        silent = {f["key"] for f in self.plan("films/when-things-go-wrong/1-silent-change/source/src/silent.js")["films"]}
+        self.assertGreater(len(sketch), 150)
+        self.assertGreater(len(silent), 50)
+        self.assertLessEqual({"a-sharper-sketch-en", "silent-change-en", "too-good-to-be-true-en", "whats-in-a-word-en"}, sketch)
+        self.assertLessEqual({"silent-change-en", "too-good-to-be-true-en", "whats-in-a-word-en"}, silent)
+        for f in affected.films():  # no row is left naming a lender's whole src folder
+            self.assertFalse(set(f["paths"]) & set(affected.release_films.LENT), f["key"])
+
     def test_shared_style_does_not_select_unrelated_series(self):
         p = self.plan("films/data-governance/shared/src/people.js")
         keys = {f["key"] for f in p["films"]}

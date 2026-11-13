@@ -1109,8 +1109,8 @@ function gauge(ctx,cx,cy,r,v,o){o=o||{};const pm=phMin(ctx);if(pm&&r*0.3<pm*0.9)
   // the needle
   const q=ang(Math.abs(v)),c=bandCol(v,o);ctx.shadowColor=rgba(c,0.9);ctx.shadowBlur=14;ctx.strokeStyle=rgba(INK,0.95);ctx.lineWidth=Math.max(3,r*0.035);ctx.lineCap="round";
   ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(q)*(r-lw*0.2),cy+Math.sin(q)*(r-lw*0.2));ctx.stroke();ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(cx,cy,r*0.07,0,TAU);ctx.fill();ctx.restore();
-  if(o.label!==false){T(ctx,(v>=0?"+":"−")+Math.abs(v).toFixed(Math.abs(v)<10?1:0)+"%",cx,cy+r*0.36,{w:800,size:r*0.3,align:"center",color:rgba(c,1)});
-    T(ctx,o.sub||"overnight change",cx,cy+r*0.58,{w:600,size:Math.max(14,r*0.13),align:"center",color:rgba(SOFT,0.95)});}}
+  if(o.label!==false){const ss=Math.max(14,r*0.13),sd=phSz(ctx,ss);T(ctx,(v>=0?"+":"−")+Math.abs(v).toFixed(Math.abs(v)<10?1:0)+"%",cx,cy+r*0.36,{w:800,size:r*0.3,align:"center",color:rgba(c,1)});
+    T(ctx,o.sub||"overnight change",cx,cy+(sd>ss?Math.max(r*0.58,r*0.36+sd*0.94):r*0.58),{w:600,size:ss,align:"center",color:rgba(SOFT,0.95)});}}   // where the line under the number is drawn larger, for a phone, it sits clear of the number
 
 /* the gold painting: one big number, a gold data product. o.num, o.delta (in %), o.note (0 to 1: the amber "last good data" note),
    o.gauge: false, or the gauge's options; o.stamp: a small line under the number */
@@ -1285,7 +1285,7 @@ function nightWorld(ctx,t,c,o){const y=470;
     T(ctx,"Applications for next year",1660,206,{w:700,size:22,align:"center"});T(ctx,"8,200  →  "+fmtN(o.num),1660,262,{w:800,size:40,align:"center",f:"mono"});
     gauge(ctx,1660,500,150,(o.num/8200-1)*100,{});
     withA(ctx,o.real,()=>T(ctx,"real growth: 40",1660,660,{w:700,size:24,align:"center",color:rgba(SOFT,1)}));
-    withA(ctx,red,()=>T(ctx,"error · the build stops before gold",1660,720,{w:700,size:20,align:"center",color:"rgba(255,170,160,1)"}));});
+    withA(ctx,red,()=>["error","the build stops before gold"].forEach((s,i)=>T(ctx,s,1660,708+i*36,{w:700,size:20,align:"center",color:"rgba(255,170,160,1)"})));});   // two lines: on one, the words were as wide as the panel
   withA(ctx,o.pair,()=>{glass(ctx,380,730,660,180,18,[170,205,255],{glow:8,ea:0.45,fill:"rgba(8,14,28,0.9)"});T(ctx,"3,100 applications, copied again with new IDs",404,768,{w:700,size:19});
     appTile(ctx,404,800,30,"A-40211 · applicant 88213 · BSc Data Science · 2027");appTile(ctx,404,852,30,"A-47988 · applicant 88213 · BSc Data Science · 2027",{dup:true});});}
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
@@ -1388,7 +1388,7 @@ scene("reload",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),y=540,bx=440,by=y-170,bw=30
   msg(ctx,340,160,420,"Rosa → Sam","Found it: the sync restarted from Monday. Copies removed.",TECH,fin(t,c("rosa")+2.4,0.4),t>c("rosa")+1.2&&t<c("rosa")+2.6?t:0);
   const rem=fin(t,c("source")+0.4),safe=fin(t,c("source")+3.4),lift=clamp((t-c("patch")-0.6)/2.4,0,1),pour=clamp((t-c("patch")-2.6)/2.4,0,1),reb=clamp((t-c("rebuild")-0.1)/1.8,0,1);
   sysCard(ctx,40,y-70,300,140,"Admissions system",rem>0.5?"copies removed":"a week, twice",ADM);
-  withA(ctx,safe,()=>{glass(ctx,60,y+100,260,52,14,GRN,{glow:10,ea:0.8,fill:"rgba(8,24,16,0.9)"});ctx.save();ctx.strokeStyle=rgba(GRN,1);ctx.lineWidth=3;rr(ctx,80,y+120,22,18,4);ctx.stroke();ctx.beginPath();ctx.arc(91,y+120,7,Math.PI,0);ctx.stroke();ctx.restore();T(ctx,"sync: safe to run twice",116,y+134,{w:700,size:18});});
+  withA(ctx,safe,()=>{const ps=phSz(ctx,18),two=tw(ctx,"sync: safe to run twice",ps,700)>204,lh=two?ps*1.2:0,px=two?40:60,o={w:700,size:18};glass(ctx,px,y+100,two?300:260,52+lh,14,GRN,{glow:10,ea:0.8,fill:"rgba(8,24,16,0.9)"});ctx.save();ctx.strokeStyle=rgba(GRN,1);ctx.lineWidth=3;rr(ctx,px+20,y+120,22,18,4);ctx.stroke();ctx.beginPath();ctx.arc(px+31,y+120,7,Math.PI,0);ctx.stroke();ctx.restore();if(two){T(ctx,"sync:",px+56,y+134,o);T(ctx,"safe to run twice",px+56,y+134+lh,o);}else T(ctx,"sync: safe to run twice",px+56,y+134,o);}); // at the size a phone needs, the words take two lines in a pill as wide as the card above it
   // the week in bronze: first with its copies, then lifted out, then poured in again once
   vault(ctx,bx,by,bw,bh,LAYER.bronze,(r,c2)=>{if(r>=3&&r<=6){const k=(r-3)/4;if(lift>0&&pour<k+0.25)return null;}return hash(r*29+c2,4)<0.82?(lift===0&&c2%2===1&&r<11?[235,215,255]:ADM):null;},"Bronze","as it arrived");
   withA(ctx,fin(t,c("patch")+0.4),()=>{ctx.save();ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(AMB,0.9);ctx.lineWidth=2;rr(ctx,bx+14,by+184,bw-28,96,10);ctx.stroke();ctx.restore();tag(ctx,bx+bw/2,by+bh+34,"replace one week",AMB,{align:"center",size:17});});
@@ -1403,7 +1403,7 @@ scene("reload",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),y=540,bx=440,by=y-170,bw=30
     versionPane(ctx,1430,190,420,190,"41","Tue 02:00",11340,RED,"with the copies");});
   withA(ctx,fin(t,c("travel")+1.6),()=>versionPane(ctx,1430,410,420,190,"43","Tue 11:30",8240,GRN,"from the corrected source"));
   withA(ctx,fin(t,c("travel")+3.4),()=>T(ctx,"+40 since Monday",1640,650,{w:800,size:30,align:"center",color:rgba(GRN,1)}));
-  withA(ctx,fin(t,c("wednesday")+0.2),()=>{gauge(ctx,1640,820,90,0.5,{sub:"overnight change"});tag(ctx,1180,860,"Wednesday · the committee plans with 8,240",BIZ,{align:"center",size:19});});
+  withA(ctx,fin(t,c("wednesday")+0.2),()=>{gauge(ctx,1640,813,90,0.5,{sub:"overnight change"});tag(ctx,1180,860,"Wednesday · the committee plans with 8,240",BIZ,{align:"center",size:19});});   // the gauge stands 7 px higher than it did: the line under its number is drawn larger, for a phone, so it sits lower under the number, and it stays above the captions
   setScreen(ctx,S);clockChip(ctx,S,t<c("wednesday")?"Tue 11:30":"Wed 10:05",t<c("wednesday")?"fix at the source":"the committee",fin(t,0.2));});
 
 /* ---------- 8. Pull back ---------- */

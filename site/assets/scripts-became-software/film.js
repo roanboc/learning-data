@@ -2271,13 +2271,13 @@ scene("laptop",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
       const na=ag_in(tt,T.every-0.2,0.6)*(1-ag_in(tt,T.inside-0.6,0.5));
       md_textCard(cx,1110,100,714,{kick:"Every second Thursday",title:"What casual staff are paid that day",sub:"by faculty and unit"},{edge:MD.dom.finance,icon:"table",a:na,k:sb_k(tt,T.every-0.2)});
       sb_rule(cx,1110,100,714,{a:ag_in(tt,T.inside,0.6),k:sb_k(tt,T.inside),r1:ag_in(tt,T.noon-0.2,0.5),r2:ag_in(tt,T.later-0.2,0.5)});
-      // the spreadsheets each faculty sent, until February; then the claims app
-      const sa=ag_in(tt,T.scriptW+0.6,0.6),stop=ag_in(tt,T.stopped-0.3,0.5),src={x:96,y:340,w:310};
+      // the spreadsheets each faculty sent, until February; then the claims app. Both cards are 20 px wider, to the left: "from each faculty" ran past the card's edge
+      const sa=ag_in(tt,T.scriptW+0.6,0.6),stop=ag_in(tt,T.stopped-0.3,0.5),src={x:76,y:340,w:330};
       md_reader(cx,src.x,src.y,src.w,{title:"Spreadsheets",sub:"from each faculty",icon:"batch",a:sa*(1-0.55*stop),h:110});
       const lane=md_path([[src.x+src.w,src.y+55],[L.x-14,src.y+55]]);md_lane(cx,lane,stop>0.5?MD.fail:MD.flow,sa*0.9,{dash:stop>0.5?[10,8]:null});
       if(stop<1)md_flow(cx,lane,tt,{kind:"batch",a:sa*(1-stop),every:2.4});
       if(stop>0)md_icon(cx,"cross",(src.x+src.w+L.x)/2,src.y+55,40,MD.fail,{a:stop});
-      md_system(cx,96,510,310,{n:"Claims app",s:"since February",c:MD.sys.hr},{a:ag_in(tt,T.app-0.3,0.6)});
+      md_system(cx,src.x,510,src.w,{n:"Claims app",s:"since February",c:MD.sys.hr},{a:ag_in(tt,T.app-0.3,0.6)});
       // by hand, before six, and emailed to Finance
       const ha=ag_in(tt,T.six-0.2,0.5)*(1-ag_in(tt,T.inside-0.6,0.5));md_tag(cx,L.x,800,"Before 6:00, by hand",{col:MD.soft,icon:"clock",a:ha});
       const mail=md_curve([L.x+L.w+14,L.y+200],[1440,L.y+300],{bend:0.5}),ma=ag_in(tt,T.emailed-0.3,0.5)*(1-ag_in(tt,T.inside-0.6,0.5));

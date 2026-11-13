@@ -26,3 +26,10 @@ Data management film 14, film 2 of *Architecture that keeps up*. Made on 10 Nove
 - The MP3 is in Git beside `audio.json` (release tag `audio-one-map-30d938f9b456061a8dbb`). The *Store audio outside Git* workflow publishes it to that release when the film reaches main (since PR #243), so nothing is left for you.
 - No render or review page was made in the session.
 - It merges after film 1 of the series (*Services with customers*, PR #240); the module kit (PR #148) is already on main.
+
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film. It was fixed while he was away.
+
+- **Question:** the sheet *By 2016 · 500 million+ · Features, each with its identifier* writes its number at 96 px, the size the module's kit gives every such number. It ran 84 px past the sheet, which stands beside the map and can't grow. A smaller number, fewer words, or a smaller map?
+- **Assumption taken:** a smaller number: the film draws this sheet itself, as the kit does, with the number at the largest size that fits, 75 px. Every word stays and the map keeps its size. The kit is unchanged, so no other film changes. It shows at 1:52 to 1:54.

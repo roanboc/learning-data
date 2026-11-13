@@ -115,7 +115,7 @@ function fu_students(ctx,x,y,cols,rows,o){o=o||{};const s=o.s||0.62,dx=o.dx||52,
 function fu_table(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,y,w,h,18,{edge:o.edge,edgeA:o.edgeA});
   ag_T(ctx,"Student load",x+30,y+54,{w:700,size:36});ag_T(ctx,"reported to the government",x+30,y+94,{w:500,size:28,col:AG.mut});
   ctx.fillStyle="rgba(60,50,40,0.12)";ctx.fillRect(x+24,y+118,w-48,1.5);
-  const cx=x+(o.colX||w*0.5);ctx.fillStyle=rgba(AG.blue,0.07+0.08*(o.colLit||0));rr(ctx,cx-120,y+128,240,h-148,12);ctx.fill();
+  const cx=x+(o.colX||w*0.5),nw=Math.max(o.note?ag_tw(ctx,"full-time equivalents",{w:600,size:28}):0,o.alt?ag_tw(ctx,o.alt,{w:600,size:28}):0),bw=Math.max(240,nw+32);ctx.fillStyle=rgba(AG.blue,0.07+0.08*(o.colLit||0));rr(ctx,cx-bw/2,y+128,bw,h-148,12);ctx.fill();   // the column is as wide as the words under its name
   ag_T(ctx,"students",cx,y+168,{w:700,size:32,align:"center",col:AG.blue});
   if(o.note)ag_T(ctx,"full-time equivalents",cx,y+206,{w:600,size:28,align:"center",col:o.noteCol||AG.mut,a:o.note});
   if(o.alt)ag_T(ctx,o.alt,cx,y+206,{w:600,size:28,align:"center",col:AG.blue,a:o.altA==null?1:o.altA});
@@ -178,7 +178,7 @@ function fu_log(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.
   ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the faculty's own list of students: something the agent didn't make */
-function fu_facList(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=o.w||330,h=o.h||236;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));ag_box(ctx,x,y,w,h,18,{});
+function fu_facList(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=Math.max(o.w||330,ag_tw(ctx,"The faculty's own list",{w:700,size:30})+52),h=o.h||236;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));ag_box(ctx,x,y,w,h,18,{});   // never narrower than its title
   ag_T(ctx,"The faculty's own list",x+26,y+50,{w:700,size:30});const nl=o.lines==null?4:o.lines;for(let i=0;i<nl;i++){ctx.fillStyle=rgba(AG.mut,0.3);ctx.fillRect(x+28,y+84+i*24,w*(0.5+0.12*(i%3)),8);}
   ag_T(ctx,"2,880 people",x+26,y+h-30,{w:700,size:36});ctx.restore();return{x,y,w,h};}
 

@@ -1855,8 +1855,9 @@ function mt_middle(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
 
 // the eight films to come, with the steps each takes (0-based, on the loop of ten)
 const MT_FILMS=[[2,"Start from a question",[0]],[3,"What makes it the same one",[1]],[4,"One row of what, and when",[2]],[5,"Promises and proofs",[3,4]],[6,"Built in layers",[5]],[7,"Who owns what",[9]],[8,"An agent on the team",[6,7]],[9,"Written once",[8]]];
-function mt_filmCard(ctx,x,y,n,title,a,on){if(a<=0.01)return;withA(ctx,a,()=>{const w=tw(ctx,title,20,700)+84;glass(ctx,x-w/2,y-28,w,56,14,mix(SOFT,WEED,on),{glow:10+10*on,ea:0.7,fill:"rgba(7,12,24,0.95)"});
-  T(ctx,n+"",x-w/2+22,y+8,{f:"mono",w:500,size:20,color:rgba(WEED,1)});T(ctx,title,x-w/2+52,y+8,{w:700,size:20});});}
+function mt_filmCardW(ctx,n,title){const sz=phSz(ctx,20);return 22+tw(ctx,n+"",sz,500,"mono")+18+tw(ctx,title,sz,700)+32;}
+function mt_filmCard(ctx,x,y,n,title,a,on){if(a<=0.01)return;withA(ctx,a,()=>{const sz=phSz(ctx,20),w=mt_filmCardW(ctx,n,title),h=sz+36;glass(ctx,x-w/2,y-h/2,w,h,14,mix(SOFT,WEED,on),{glow:10+10*on,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+  T(ctx,n+"",x-w/2+22,y+sz*0.38,{f:"mono",w:500,size:sz,color:rgba(WEED,1)});T(ctx,title,x-w/2+40+tw(ctx,n+"",sz,500,"mono"),y+sz*0.38,{w:700,size:sz});});}
 
 /* ---------- the labs' and scenarios' pictures ----------
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed mt_ so they never clash).
@@ -1985,7 +1986,7 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const cA=c("arrive"),cT=c("turn"),cJ=c("jun"),b=fin(t,w("still","blueprint")-0.4,1.0),m=ease(fin(t,0,1.4));
   // the approved model, carried from the last chapter, settles and turns into a blueprint
   bpPaper(ctx,500,70,920,300,b,{title:"CREDENTIAL MODEL · v3",sub:"approved"});bpModel(ctx,960,lerp(380,290,m),lerp(1,0.82,m),{b});
-  withA(ctx,1-b,()=>kt_rstamp(ctx,lerp(1640,1340,m),lerp(220,120,m),"v3 · approved",TRUST,1,1,{size:lerp(30,22,m),rot:-0.1}));
+  withA(ctx,1-b,()=>kt_rstamp(ctx,lerp(1640,1340,m),lerp(220,120,m),"v3 · approved",TRUST,1,1,{size:phSz(ctx,lerp(30,22,m)),rot:-0.1}));   // the stamp's frame is made at the size its words are drawn
   // the data as it arrives: three systems into bronze, one learner under three keys, three codes, every version
   SRC3.forEach((s,i)=>{const t0=cA+0.3+i*0.35;arrive(ctx,245,592+i*110,t,t0,()=>srcCard(ctx,80,560+i*110,330,i,{}),{dy:0,from:0.8});arrowTo(ctx,410,592+i*110,520,600+i*100,s[1],fin(t,t0,0.5)*0.8,{p:fin(t,t0,0.5),head:12});});
   arrive(ctx,910,720,t,cA+0.6,()=>{glass(ctx,520,540,780,360,20,[205,140,80],{glow:14,ea:0.7,fill:"rgba(16,10,6,0.9)"});T(ctx,"bronze · as it arrived",550,580,{w:800,size:22,color:rgba([225,165,100],1)});},{from:0.95});
@@ -2119,8 +2120,12 @@ scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7),phases:1-fin(t,0,0.7),phaseSize:30});
   arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"Declare it, then build it",cx,cy+24,{w:800,size:22,align:"center"});});
   arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});
-  // each film arrives in its place, beside the steps it takes, and a line joins it to them
-  MT_FILMS.forEach(([n,title,st],i)=>{const t0=w(ids[i],words[i])-0.2,a=fin(t,t0,0.5),an=-Math.PI/2+(st.reduce((s,x)=>s+x,0)/st.length)/10*TAU,px=cx+Math.cos(an)*(rx+300),py=cy+Math.sin(an)*(ry+(Math.sin(an)>0.9?70:Math.sin(an)<-0.9?80:120));
+  // each film arrives in its place, beside the steps it takes, and a line joins it to them. A card is as wide as its title at the
+  // size it's drawn: where it would touch a card nearer the middle on its row, it sits further out
+  const FP=MT_FILMS.map(([n,title,st])=>{const an=-Math.PI/2+(st.reduce((s,x)=>s+x,0)/st.length)/10*TAU;return[cx+Math.cos(an)*(rx+300),cy+Math.sin(an)*(ry+(Math.sin(an)>0.9?70:Math.sin(an)<-0.9?80:120)),mt_filmCardW(ctx,n,title)];});
+  FP.map((p,i)=>i).sort((i,j)=>Math.abs(FP[i][0]-cx)-Math.abs(FP[j][0]-cx)).forEach((i,k,ord)=>ord.slice(0,k).forEach(j=>{const need=(FP[i][2]+FP[j][2])/2+24;
+    if(Math.abs(FP[i][1]-FP[j][1])<phSz(ctx,20)+48&&Math.abs(FP[i][0]-FP[j][0])<need)FP[i][0]=FP[j][0]+(FP[i][0]<cx?-need:need);}));
+  MT_FILMS.forEach(([n,title,st],i)=>{const t0=w(ids[i],words[i])-0.2,a=fin(t,t0,0.5),px=FP[i][0],py=FP[i][1];
     st.forEach(k=>{const[sx,sy]=stepPos(k,cx,cy,rx,ry),q=fin(t,t0+0.2,0.6);withA(ctx,a,()=>{ctx.strokeStyle=rgba(WEED,0.5);ctx.lineWidth=1.5;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(lerp(sx,px,q),lerp(sy,py,q));ctx.stroke();ctx.setLineDash([]);glow(ctx,sx,sy,50,WEED,0.3);});});
     arrive(ctx,px,py,t,t0,()=>mt_filmCard(ctx,px,py,n,title,1,pulseAt(t,t0+0.2,1.2)),{from:0.75});});
   // the films' code and data are real: the example project runs on dbt Core with DuckDB

@@ -61,3 +61,10 @@ Rows 4 to 6 were put to Rodrigo as one question: *Power BI reading through a Fab
 > yes, right warning, currently our mirrors are generally exposed and then new grants must be placed in Fabric, duplicating work. So it's fine as is.
 
 The question is closed, and the film isn't changed: rows 4, 5 and 6 stand as made. His practice adds one detail the film doesn't say: with a mirror, access has to be granted again in Fabric, a second set of grants to keep in step with Unity Catalog's. It is kept here for a later change to the Power BI chapter, should one come; the film's rule already avoids it, since Power BI reads the measure directly from Databricks, each analyst as themselves.
+
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film, in two pictures. It was fixed while he was away.
+
+- **Question:** the share's sign stands on the university's edge, with its name, *OpenSharing*, under it, so the platform's edge and the university's ran through the name. There is no room for the name on either side: the gap to the group of universities is 160 px and the name is 182. Move the sign off the edge, write the name elsewhere, or let the edges stop at the name?
+- **Assumption taken:** let the edges stop short of the name, as lines do at a name on a map: the name has a soft dark ground of its own. The sign stays on the edge, where the share crosses it, and the name stays under its sign, as the film's other two ways are named. In the second picture, with the small table, the name sits 10 px closer to its sign, clear of Unity Catalog's bar. No word changed, and the module's kit is unchanged. It shows at 5:57 to 6:03 and 6:19 to 6:30.

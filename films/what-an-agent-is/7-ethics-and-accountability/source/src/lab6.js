@@ -181,11 +181,11 @@ function ox_web(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const 
   ctx.restore();}
 /* the makers' guidelines: the values these models are trained to follow, published, with a note that they don't always hold */
 function ox_guides(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
-  const bb=ag_textCard(ctx,x,y,780,{kick:"The makers' guidelines",title:"The values these models are trained to follow"},{a:1,k:o.k});
-  const ty=bb.y+bb.h+26;["Guidelines · one maker","Guidelines · another maker"].forEach((lab,i)=>{const tx=x+i*300;
-    ag_box(ctx,tx,ty,262,116,16,{edge:AG.blue,edgeA:0.5});ag_T(ctx,lab,tx+24,ty+48,{w:600,size:28});
-    for(let k=0;k<3;k++){ctx.strokeStyle=rgba(AG.mut,0.5);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tx+24,ty+70+k*16);ctx.lineTo(tx+238,ty+70+k*16);ctx.stroke();}});
-  ag_pill(ctx,x+300,ty+168,"but they don't always hold",{icon:"warn",col:AG.amber,a:o.note==null?1:o.note});ctx.restore();}
+  const bb=ag_textCard(ctx,x,y,780,{kick:"The makers' guidelines",title:"The values these models are trained to\u00a0follow"},{a:1,k:o.k});   // "to follow" kept together: "follow" stood alone on the second line
+  const ty=bb.y+bb.h+26;["one maker","another maker"].forEach((lab,i)=>{const tx=x+i*300;   // "Guidelines", then whose, on a second line: on one line the two were wider than their cards
+    ag_box(ctx,tx,ty,262,152,16,{edge:AG.blue,edgeA:0.5});ag_T(ctx,"Guidelines",tx+24,ty+48,{w:600,size:28});ag_T(ctx,lab,tx+24,ty+84,{w:600,size:28});
+    for(let k=0;k<3;k++){ctx.strokeStyle=rgba(AG.mut,0.5);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tx+24,ty+106+k*16);ctx.lineTo(tx+238,ty+106+k*16);ctx.stroke();}});
+  ag_pill(ctx,x+300,ty+204,"but they don't always hold",{icon:"warn",col:AG.amber,a:o.note==null?1:o.note});ctx.restore();}
 
 /* a list of students' names on its way to the agent: o.mask (0 to 1) turns each name to "*** ***", one after another */
 const OX_NAMES=["Ana Ruiz","Tomás Okoye","Priya Lund","Kenji Moreau"];

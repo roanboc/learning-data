@@ -40,7 +40,8 @@ scene("register",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   const tt=[["the Real Property Act · Robert Torrens",w("chain","law")-0.2,w("chain","register the title")-0.3],["the register is the title",w("chain","register the title")-0.2,cT-0.2],["rely on it",w("title","rely")-0.2,cR-0.3],["only a registered transfer",w("transfer","registered")-0.2,w("transfer","signed")-0.1],["signed by the owner",w("transfer","signed"),cB-0.4]];
   tt.forEach(([s,t0,t1])=>{const q=fin(t,t0,0.4)*(1-fin(t,t1,0.4));if(q>0)arrive(ctx,960,104,t,t0,()=>withA(ctx,q,()=>tag(ctx,960,104,s,PARCH,{align:"center",size:24})),{dy:12});});
   // the bridge: the closed register drifts right, towards the present, and becomes a core model
-  const cx=lerp(1040,1220,m);wo_coreCard(ctx,cx,300,480,170,{a:fin(t,cB+0.4,1.0),stack:fin(t,w("bridge","core models"),0.8),sub:"a core model · published by its owner"});
+  // the card is as wide as its second line at the size it's drawn, about the same centre
+  const cs="a core model · published by its owner",cw=Math.max(480,Math.ceil(tw(ctx,cs,phSz(ctx,20),600))+64),cx=lerp(1040,1220,m)-(cw-480)/2;wo_coreCard(ctx,cx,300,cw,170,{a:fin(t,cB+0.4,1.0),stack:fin(t,w("bridge","core models"),0.8),sub:cs});
   [["their owner publishes them","publishes"],["everyone relies on them","relies"],["only their owner changes them","only their owner"]].forEach(([s,k_],i)=>arrive(ctx,170,420+i*72,t,w("bridge",k_)-0.1,()=>tag(ctx,170,420+i*72,s,TRUST,{size:24}),{dy:16}));
   arrive(ctx,1460,560,t,w("bridge","core models")+0.2,()=>T(ctx,"the credential's core models",1460,560,{w:700,size:22,align:"center",color:rgba(SOFT,1)}),{dy:12});
   ctx.restore();weedsTitle(ctx,S,t,B,"Who owns what","owners publish; consumers build on what's published",WEED);
@@ -57,17 +58,20 @@ const WO_TER=[["registrar","student system","the registrar's office · Mei",[70,
   ["wallet","wallet app","owns its marts",[1290,570,560,320],[680,470,300,270],[["mart_wallet__learners",2],["mart_wallet__credentials",2]],"team",2,"business"]];
 const WO_KX={application:[[70,630],[40,340]],data:[[680,1240],[360,660]],business:[[1290,1850],[680,980]]};   // each kind's column, full and small
 function wo_map(ctx,t,o){const m=o.m||0,on=o.on||WO_TER.map(()=>1),ch=o.chips||[],fl=o.flags||0,kh=o.kinds||{};
-  // the three kinds, as column heads: the kind, and the folders it lives in
+  // the three kinds, as column heads: the kind, and the folders it lives in, beside its name where every head has room for both
+  // on one line at the size they're drawn, and under the rule where one hasn't
+  const dz=phSz(ctx,18),under=WO_KINDS.some(([k,nm,dir])=>tw(ctx,nm,phSz(ctx,26),800)+tw(ctx,dir,dz,500,"mono")+40>WO_KX[k][0][1]-WO_KX[k][0][0]);
   WO_KINDS.forEach(([k,nm,dir])=>{const a=kh[k]||0;if(a<=0.01)return;const[F,C]=WO_KX[k],x0=lerp(F[0],C[0],m),x1=lerp(F[1],C[1],m),col=WO_DOM[k][1],y=lerp(150,118,m);
-    withA(ctx,a,()=>{T(ctx,nm,x0+8,y,{w:800,size:lerp(26,20,m),color:rgba(col,1)});withA(ctx,1-m,()=>T(ctx,dir,x1-8,y,{f:"mono",w:500,size:18,align:"right",color:rgba(col,0.9)}));
+    withA(ctx,a,()=>{T(ctx,nm,x0+8,y,{w:800,size:lerp(26,20,m),color:rgba(col,1)});withA(ctx,1-m,()=>T(ctx,dir,under?x0+8:x1-8,under?y+14+dz:y,{f:"mono",w:500,size:18,align:under?"left":"right",color:rgba(col,0.9)}));
       ctx.fillStyle=rgba(col,0.5);ctx.fillRect(x0,y+12,(x1-x0)*a,2);});});
   WO_TER.forEach(([dk,nm,who,F,C,items,pid,nDots,kind],i)=>{const a=on[i];if(a<=0.01)return;const[x,y,w,h]=F.map((v,j)=>lerp(v,C[j],m)),col=WO_DOM[dk][1];
     arrive(ctx,x+w/2,y+h/2,t,o.t0[i],()=>{wo_terr(ctx,x,y,w,h,col,nm,t,{seed:i+1});withA(ctx,1-m,()=>T(ctx,who,x+44,y+80,{w:600,size:18,color:rgba(SOFT,1)}));
       // the owner, on the right, while the map is full size
-      if(pid)withA(ctx,1-m,()=>{if(pid==="team")wo_team(ctx,x+w-120,y+h-150,0.95,col,t);else person(ctx,pid,x+w-110,y+h-14,0.4,{t});});
+      if(pid)withA(ctx,1-m,()=>{if(pid==="team")wo_team(ctx,x+w-112,y+h-100,0.8,col,t);else person(ctx,pid,x+w-110,y+h-14,0.4,{t});});   // a team stands under its chips, which are as wide as their words
       // what it owns: one column on the full map, two on the small one
-      let cx=x+26,cy=y+116,col2=x+26+Math.max(...items.filter((_,j)=>j%2===0).map(([s,k])=>tw(ctx,s,k===2?18:20,k?500:700,k?"mono":undefined)+28))+16;
-      items.forEach(([s,k,kc],j)=>{const q=(ch[i]||[])[j]||0;if(q<=0)return;const two=items.length>2,xx=lerp(x+26,two&&j%2?col2:x+26,m),yy=lerp(y+116+j*48,y+116+(two?Math.floor(j/2):j)*48,m);
+      const rg=Math.max(48,phSz(ctx,20)+26);   // from one chip to the next, at the size their words are drawn
+      let cx=x+26,cy=y+116,col2=x+26+Math.max(...items.filter((_,j)=>j%2===0).map(([s,k])=>tw(ctx,s,phSz(ctx,k===2?18:20),k?500:700,k?"mono":undefined)+28))+16;
+      items.forEach(([s,k,kc],j)=>{const q=(ch[i]||[])[j]||0;if(q<=0)return;const two=items.length>2,xx=lerp(x+26,two&&j%2?col2:x+26,m),yy=lerp(y+116+j*rg,y+116+(two?Math.floor(j/2):j)*rg,m);
         withA(ctx,1-m,()=>arrive(ctx,xx+60,yy,t,q,()=>wo_chip(ctx,xx,yy,s,col,{mono:!!k,size:k===2?18:20,text:kc||INK}),{dy:10,from:0.8}));});
       // its models, each with a small flag that reads its meta.domain
       if(m>0.5)withA(ctx,fin(m,0.5,0.5),()=>{for(let d=0;d<nDots;d++){const px=x+40+d*30,py=y+h-70;wo_dot(ctx,px,py,kind==="data"?TRUST:kind==="business"?LAYER4[3][1]:LAYER4[0][1],1,7);wo_pennant(ctx,px+2,py-8,col,fin(fl,d*0.06,0.4));}

@@ -1,6 +1,6 @@
 # Built to change: questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, film 8 of 8 · PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*Enterprise architecture* · *Platform and solution architecture*, film 8 of 8 · PR #396 · [pull request](https://github.com/roanboc/learning-data/pull/396)
 
 [Watch it on the site](https://data.learn-all.org/platform-and-solution-architecture/built-to-change/)
 

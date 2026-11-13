@@ -1,0 +1,303 @@
+1
+00:00:01,400 --> 00:00:07,198
+Japón, 1635. El shogunato obliga a los señores a vivir en Edo un año sí y otro no.
+
+2
+00:00:08,498 --> 00:00:12,221
+Así que cada año, cada señor hace el viaje, a Edo o de vuelta a casa.
+
+3
+00:00:13,921 --> 00:00:20,412
+Un señor menor lleva unas cien personas. Los más grandes, dos mil o más, con todo lo que el señor necesitará.
+
+4
+00:00:22,312 --> 00:00:29,544
+En el Tōkaidō, cada posta mantiene cien cargadores y cien caballos para todos los del camino, y una posada para señores.
+
+5
+00:00:31,444 --> 00:00:35,482
+Una comitiva de trescientos que llegara sin aviso encontraría muy pocos.
+
+6
+00:00:36,582 --> 00:00:42,262
+Sus cargas esperarían, y la posada podría estar ocupada. Cada día de camino le cuesta caro al dominio.
+
+7
+00:00:43,962 --> 00:00:50,292
+Así que las postas necesitan saber qué viene, y cuándo, y el dominio necesita el viaje planeado antes de partir.
+
+8
+00:00:52,192 --> 00:00:55,903
+Antes de que el señor parta, sus funcionarios planean el viaje de principio a fin.
+
+9
+00:00:56,803 --> 00:01:00,760
+Anotan quién va, dentro de los límites que el shogunato fija para su rango.
+
+10
+00:01:02,060 --> 00:01:09,591
+Y envían un aviso por delante a cada posta: cuántos cargadores y caballos, qué día, y dónde descansará y dormirá el señor.
+
+11
+00:01:11,691 --> 00:01:17,056
+Un día o dos antes, se pone en la posada una tabla con su nombre, y nadie más puede alojarse allí.
+
+12
+00:01:18,956 --> 00:01:25,702
+Así cada posta sabe con días de antelación qué viene, y si lo suyo no alcanza, llama a tiempo a las aldeas cercanas.
+
+13
+00:01:27,402 --> 00:01:33,028
+Las cargas siguen, de posta en posta, con los cargadores y caballos que sirven a todo viajero.
+
+14
+00:01:34,328 --> 00:01:37,767
+Un camino para todos, y cada viaje planeado de principio a fin.
+
+15
+00:01:39,667 --> 00:01:46,051
+En la empresa de energía, tres equipos empiezan tres piezas de la tarifa social, y nadie ha dibujado cómo se unen.
+
+16
+00:01:47,351 --> 00:01:54,185
+Así que Sipho Dlamini, arquitecto de soluciones, la diseña de principio a fin, en la plataforma que todos comparten.
+
+17
+00:02:01,285 --> 00:02:09,684
+En noviembre, el gobierno fija una tarifa social: desde el primero de julio, un descuento para cada hogar elegible, sin formularios.
+
+18
+00:02:11,184 --> 00:02:15,131
+Solo la agencia de servicios sociales sabe quién es elegible.
+
+19
+00:02:16,431 --> 00:02:21,923
+En diciembre, el proveedor de facturación ofrece hacerlo todo dentro de facturación, en su versión de octubre.
+
+20
+00:02:23,423 --> 00:02:27,146
+El equipo de datos empieza su propia tabla de hogares elegibles.
+
+21
+00:02:28,246 --> 00:02:31,969
+Y TI encarga un servidor, para recibir los archivos de la agencia.
+
+22
+00:02:33,469 --> 00:02:38,368
+Pronto hay dos listas de quién es elegible, y nadie ha dibujado cómo se unen las piezas.
+
+23
+00:02:40,268 --> 00:02:44,257
+Nadie fue descuidado. Cada equipo hizo lo que podía ver desde donde estaba.
+
+24
+00:02:45,957 --> 00:02:49,008
+Quien dirige comercialización pide un solo diseño, en un ticket.
+
+25
+00:02:52,708 --> 00:02:56,547
+El ticket llega a Sipho, que trabaja junto a otros dos arquitectos.
+
+26
+00:02:57,847 --> 00:03:02,958
+Tomás, el arquitecto empresarial, lleva el mapa: qué cambia, y quién debe estar de acuerdo.
+
+27
+00:03:04,658 --> 00:03:09,009
+Ravi, que dirige la plataforma, construye una vez lo que toda solución comparte.
+
+28
+00:03:10,709 --> 00:03:16,719
+Y Sipho diseña una solución de principio a fin: desde la respuesta de la agencia hasta la línea en una factura.
+
+29
+00:03:18,619 --> 00:03:25,182
+Lo que cualquier equipo podría usar, Ravi lo construye en la plataforma. Lo que cambiaría el mapa, se le pregunta antes a Tomás.
+
+30
+00:03:27,282 --> 00:03:33,140
+Como en el Tōkaidō, el shogunato cuidaba el camino, y cada dominio planeaba su propio viaje por él.
+
+31
+00:03:37,040 --> 00:03:41,997
+Sipho empieza por el contexto: todo lo que la solución toca, en una sola página.
+
+32
+00:03:43,497 --> 00:03:49,483
+La agencia, el sistema de clientes, facturación, el centro de llamadas, y los hogares, que reciben una carta y una factura.
+
+33
+00:03:51,583 --> 00:03:54,816
+En el centro, la solución misma, en la plataforma de datos.
+
+34
+00:03:56,316 --> 00:04:02,500
+Fuera del alcance por ahora: inquilinos con la cuenta a nombre del propietario. Su vía llega más adelante en el año.
+
+35
+00:04:04,400 --> 00:04:08,915
+Fijo: lista para el primero de julio, bajo las tres reglas ya acordadas.
+
+36
+00:04:12,815 --> 00:04:17,757
+Luego, las cualidades que debe tener, cada una con una medida contra la que se pueda probar un diseño.
+
+37
+00:04:19,057 --> 00:04:22,626
+Una norma enumera nueve. Sipho elige las tres que importan aquí.
+
+38
+00:04:24,126 --> 00:04:29,726
+Seguridad: solo el trabajo de facturación lee las respuestas de la agencia, y cada lectura queda registrada.
+
+39
+00:04:31,626 --> 00:04:37,322
+Confiabilidad: cada ciclo de facturación tiene respuestas, las más recientes, o las anteriores si las nuevas se atrasan.
+
+40
+00:04:39,222 --> 00:04:44,687
+Fácil de cambiar: si la agencia cambia su archivo, el intercambio cambia en menos de una semana.
+
+41
+00:04:46,587 --> 00:04:49,760
+La velocidad casi no importa: el cruce se hace una vez al mes.
+
+42
+00:04:53,460 --> 00:04:57,834
+Sipho dibuja dos opciones, y prueba ambas contra las mismas tres medidas.
+
+43
+00:04:59,134 --> 00:05:02,347
+La primera lo hace todo dentro de facturación, como ofreció el proveedor.
+
+44
+00:05:03,647 --> 00:05:11,852
+Pero facturación registra quién modifica un dato, no quién lo lee. Cada cambio espera la próxima versión del proveedor. Y estaría lista en octubre.
+
+45
+00:05:13,952 --> 00:05:19,653
+La segunda guarda las respuestas de la agencia en la plataforma de datos, como un producto de datos de comercialización.
+
+46
+00:05:20,953 --> 00:05:28,679
+Antes de cada ciclo, facturación pide por la plataforma de integración solo lo que una factura necesita: si tiene la tarifa, y desde qué fecha.
+
+47
+00:05:30,579 --> 00:05:36,193
+El catálogo revisa y registra cada lectura, un cambio es un pull request, y está lista en mayo.
+
+48
+00:05:38,093 --> 00:05:44,920
+Su riesgo: facturación ahora depende de la plataforma. Así que pide el día antes de cada ciclo, y guarda lo que recibió.
+
+49
+00:05:48,820 --> 00:05:53,112
+Sipho deja la decisión por escrito, en un registro que se guarda con el código de la solución.
+
+50
+00:05:54,412 --> 00:06:00,148
+Decidido: las respuestas en la plataforma, el descuento en facturación. Considerado: todo en facturación.
+
+51
+00:06:01,848 --> 00:06:08,952
+Por qué: cada lectura registrada, un cambio en días, y lista para mayo. La consecuencia: facturación pide el día antes.
+
+52
+00:06:10,852 --> 00:06:19,989
+Ama lo revisa contra los principios: usar lo que tenemos antes de construir, y la información del cliente queda en el negocio que la recogió. Ambos se cumplen.
+
+53
+00:06:21,889 --> 00:06:26,403
+Sipho, Ravi y quien dirige comercialización están de acuerdo, y el registro dice aceptado.
+
+54
+00:06:28,103 --> 00:06:32,459
+Un año después, quien pregunte por qué facturación no lo hace todo encontrará aquí la respuesta.
+
+55
+00:06:36,359 --> 00:06:40,405
+Luego Sipho cuenta las partes. De diez, seis ya existen.
+
+56
+00:06:41,705 --> 00:06:50,328
+Las cuentas de clientes de comercialización, un trabajo de la plantilla de la plataforma, sus conectores, las máscaras y el registro del catálogo, la puerta de enlace, y el monitoreo.
+
+57
+00:06:52,228 --> 00:06:58,017
+Cuatro son nuevas: el cruce y sus respuestas, un paso de descuento en facturación, la carta, y el envío de un archivo.
+
+58
+00:06:59,917 --> 00:07:07,844
+Todo equipo necesitará enviar archivos. Así que Ravi lo construye una vez, en la plataforma. Los informes del regulador lo usan después.
+
+59
+00:07:09,944 --> 00:07:14,345
+En el Tōkaidō, las postas ya estaban ahí. Solo el viaje era nuevo.
+
+60
+00:07:18,245 --> 00:07:27,420
+Cada equipo conoce su parte meses antes: el equipo de la plataforma, el equipo de integración de Yasmin, comercialización, por la carta y el centro de llamadas, y el proveedor de facturación.
+
+61
+00:07:29,320 --> 00:07:32,318
+El proveedor pone el paso de descuento en su versión de abril.
+
+62
+00:07:33,818 --> 00:07:38,350
+Como un aviso iba por delante a cada posta, cada equipo sabe qué viene, y cuándo.
+
+63
+00:07:42,250 --> 00:07:46,441
+Queda construida en mayo, y probada con una muestra de la agencia en junio.
+
+64
+00:07:47,941 --> 00:07:54,247
+El primero de julio, las primeras facturas llevan el descuento, para cerca de nueve de cada diez hogares elegibles.
+
+65
+00:07:56,147 --> 00:08:02,756
+En septiembre, las respuestas de la agencia llegan dos días tarde. Facturación usa las de agosto, y las facturas siguientes se ponen al día.
+
+66
+00:08:04,656 --> 00:08:08,026
+El registro muestra un solo lector de las respuestas: el trabajo de facturación.
+
+67
+00:08:09,726 --> 00:08:13,208
+Quien dirige comercialización revisa las primeras facturas, y cierra el ticket.
+
+68
+00:08:17,108 --> 00:08:19,535
+Esta es la solución, en el mapa de Tomás.
+
+69
+00:08:20,835 --> 00:08:24,140
+Sus partes nuevas están en la capa de aplicaciones, junto a facturación.
+
+70
+00:08:25,640 --> 00:08:30,738
+Debajo, los servicios de la plataforma, reutilizados, y uno nuevo: el envío de un archivo.
+
+71
+00:08:32,638 --> 00:08:36,123
+Un paquete de trabajo construye las partes nuevas, para el primero de julio.
+
+72
+00:08:37,823 --> 00:08:42,013
+Y cada cualidad es un requisito, realizado por las partes que lo cumplen.
+
+73
+00:08:45,913 --> 00:08:53,656
+Las postas servían a todo viajero. El viaje de cada señor era el plan propio de su dominio, enviado por delante, posta por posta.
+
+74
+00:08:55,356 --> 00:09:03,337
+En la plataforma de datos, cada solución se planea de principio a fin: su contexto, sus cualidades, sus opciones, y el porqué, por escrito.
+
+75
+00:09:04,837 --> 00:09:09,243
+Casi todo lo que necesita ya está ahí. Lo nuevo, cada equipo lo sabe con tiempo.
+
+76
+00:09:10,943 --> 00:09:12,827
+Sigue: un camino que la gente elige.

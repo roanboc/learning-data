@@ -11,7 +11,8 @@ for a film on its own): a list, one entry per video (The Inner Life of Data has 
   video, file          the rendered video, and its name in the release
   captions             its caption files, [path, name in the release]
   paths                everything the video is built from (git pathspecs): its own source, and the shared code it draws with.
-                       A change under any of them means the video needs rendering again
+                       A change under any of them means the video needs rendering again. A file borrowed from another film
+                       is named as that file, never as the film's src folder (LENT below reads the older rows that way)
   legibility           its row in the legibility report's table, printed by build_series.py --legibility (texts, under_28,
                        under_20, median, status), from
                        site-tools/legibility.py
@@ -52,9 +53,17 @@ def films():
     return [e for f in files() for e in entries(f)]
 
 
+# Two of the first films lend one file each to the films made after them: A Sharper Sketch its sketch3.js, and Silent change its
+# silent.js. Many rows name the whole src folder for it, which also holds the lender's own scenes, narration and timings, so a
+# change to one scene of A Sharper Sketch checked, and would render again, some ninety films. A row that names the folder is read
+# as naming the file. The lenders' own rows name their source folder, one level up, and keep every file in it.
+LENT = {"films/a-sharper-sketch/source/src": "films/a-sharper-sketch/source/src/sketch3.js",
+        "films/when-things-go-wrong/1-silent-change/source/src": "films/when-things-go-wrong/1-silent-change/source/src/silent.js"}
+
+
 def entries(path):
     """Shared production dependencies are declared once, rather than edited into every film's rows."""
-    return [dict(e, paths=list(dict.fromkeys(e["paths"] + ["site-tools/voice_cache.py"])))
+    return [dict(e, paths=list(dict.fromkeys([LENT.get(p, p) for p in e["paths"]] + ["site-tools/voice_cache.py"])))
             for e in json.loads(path.read_text(encoding="utf-8"))]
 
 

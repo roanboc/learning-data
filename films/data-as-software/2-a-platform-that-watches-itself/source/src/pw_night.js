@@ -105,14 +105,14 @@ function pw_zeroBody(c,B,o){{
         md_T(c,"its cause, what it touches, and a fix to review",rx+76,ry+108,{w:600,size:28,col:MD.soft});
         md_pill(c,rx+rw-120,ry+50,"1 insight",{col:MD.wait,size:28});
         if(o.lock>0)withA(c,o.lock,()=>{md_tag(c,rx,ry+240,"nothing changed in production",{icon:"lock",col:MD.pass});});});return;}
-    // the insight: its four steps on the left, the step's detail on the right
-    const sx=B.x+24,sy=B.y+24;PW_STEPS.forEach(([s,sub],i)=>{const v=(o.steps||[])[i]||0,yy=sy+i*118,cur=i===o.view?1:0;
-      if(cur&&v>0)withA(c,v,()=>{c.fillStyle=rgba(MD.flow,0.1);rr(c,sx-10,yy-8,372,102,14);c.fill();});
+    // the insight: its four steps on the left, the step's detail on the right; the band behind the step in view is as wide as the longest step's words (traced through lineage ran past it), and the rule and the detail stand 16 px further right
+    const sx=B.x+24,sy=B.y+24,hw=94+Math.max(...PW_STEPS.map(([s,sub])=>Math.max(md_tw(c,s,{w:800,size:30}),md_tw(c,sub,{w:600,size:28}))));PW_STEPS.forEach(([s,sub],i)=>{const v=(o.steps||[])[i]||0,yy=sy+i*118,cur=i===o.view?1:0;
+      if(cur&&v>0)withA(c,v,()=>{c.fillStyle=rgba(MD.flow,0.1);rr(c,sx-10,yy-8,Math.max(372,hw),102,14);c.fill();});
       c.save();c.beginPath();c.arc(sx+28,yy+36,24,0,TAU);c.fillStyle=v>0.5?rgba(mix(MD.flow,MD.navy,0.6),1):"rgba(20,30,52,0.9)";c.fill();c.strokeStyle=rgba(v>0.02?MD.flow:MD.dim,0.4+0.6*v);c.lineWidth=2.4;c.stroke();c.restore();
       if(v>0.5)md_icon(c,"tick",sx+28,yy+36,30,MD.flow,{a:(v-0.5)*2});else md_T(c,String(i+1),sx+28,yy+46,{w:800,size:28,align:"center",col:MD.soft});
       md_T(c,s,sx+68,yy+46,{w:800,size:30,col:v>0.02?MD.ink:MD.soft,a:0.45+0.55*v});md_T(c,sub,sx+68,yy+82,{w:600,size:28,col:MD.soft,a:0.45+0.55*v});});
-    c.strokeStyle="rgba(170,200,245,0.18)";c.lineWidth=1.4;c.beginPath();c.moveTo(B.x+404,B.y+16);c.lineTo(B.x+404,B.y+B.h-16);c.stroke();
-    const dx=B.x+436,dw=B.w-456,vu=o.vu==null?1:o.vu;
+    c.strokeStyle="rgba(170,200,245,0.18)";c.lineWidth=1.4;c.beginPath();c.moveTo(B.x+420,B.y+16);c.lineTo(B.x+420,B.y+B.h-16);c.stroke();
+    const dx=B.x+452,dw=B.w-472,vu=o.vu==null?1:o.vu;
     if(o.view===0)withA(c,vu,()=>{pw_task(c,dx,B.y+40,dw,132,["build the","hours to pay"],{state:"fail"});md_T(c,"claims job · Monday 22:03",dx+4,B.y+228,{w:700,size:30,col:MD.soft});
       md_T(c,"can't read '1:30' as a number",dx+4,B.y+290,{w:500,size:28,f:"mono",col:mix(MD.fail,MD.ink,0.35)});});
     if(o.view===1)withA(c,vu,()=>pw_lineage(c,dx,B.y+20,dw,o));

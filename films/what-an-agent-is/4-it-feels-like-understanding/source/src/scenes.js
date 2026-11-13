@@ -165,11 +165,11 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       ag_loop(x,1440,400,{R:150,r:72,label:null,core:0.7,think:0.2+0.3*ag_io(tt,P.eachSure-0.6,P.say,0.5),t:tt,a:fu_fin(tt,P.agents-0.2,0.6),floor:null});
       ag_roomLight(x,1);
       const say=fu_fin(tt,P.say,0.8),tag=say>0.5?"people":"",out=1-fu_fin(tt,P.br-0.3,0.7);
-      fu_numberCard(x,560,330,"2,880",tag,{a:fu_fin(tt,P.agents,0.6)*out,k:ag_spr(tt,P.agents,0.7),fill:say});
+      fu_numberCard(x,530,330,"2,880",tag,{a:fu_fin(tt,P.agents,0.6)*out,k:ag_spr(tt,P.agents,0.7),fill:say});
       const turn=lerp(0.12,1,ag_sine((tt-P.say)/0.8));
       fu_bubble(x,330,292,"people",{a:fu_fin(tt,P.person-0.1,0.5)*out,k:ag_spr(tt,P.person-0.1,0.7),px:322,py:378,blank:tt<P.say+0.4,turn,w:230});
       fu_bubble(x,1440,152,"people",{a:fu_fin(tt,P.eachSure-0.6,0.5)*out,k:ag_spr(tt,P.eachSure-0.6,0.7),px:1440,py:238,blank:tt<P.say+0.4,turn,w:230,edge:AG.violet});
-      const ck=fu_fin(tt,P.check,0.6)*out;if(ck>0){fu_facList(x,lerp(1300,940,ag_sine((tt-P.check)/1.0)),316,{a:ck,w:300,h:200});
+      const ck=fu_fin(tt,P.check,0.6)*out;if(ck>0){fu_facList(x,lerp(1300,900,ag_sine((tt-P.check)/1.0)),316,{a:ck,h:200,lines:2});   // as wide as its title, between the number (30 px further left) and the ring; two lines, so none runs under its count
         if(tt>P.check+1.1)ag_tick(x,1206,474,34*ag_eo(clamp((tt-P.check-1.1)/0.4,0,1)),rgba(AG.green,1),5);}}}
   ];
   ag_shots(ctx,S,t,sc.dur,sh,0.5);

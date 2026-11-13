@@ -44,10 +44,12 @@ def demote(text):
     return "\n".join(lines)
 
 
-def label(folder):
-    """A module's or series' name, from its own metadata; the folder's name if it has none."""
+def label(folder, series=False):
+    """A module's or series' name, from its own metadata; the folder's name if it has none. A series' folder can be named as its
+    module is (analytics-engineering, data-governance): it takes the series' title, not the module's name."""
     slug = folder.name.split("-", 1)[1]
-    for meta, key in ((ROOT / "modules" / slug / "module.json", "name"), (ROOT / "films" / slug / "series.json", "title")):
+    metas = [(ROOT / "modules" / slug / "module.json", "name"), (ROOT / "films" / slug / "series.json", "title")]
+    for meta, key in metas[::-1] if series else metas:
         if meta.exists():
             value = json.loads(meta.read_text(encoding="utf-8")).get(key)
             return value["en"] if isinstance(value, dict) else value
@@ -63,7 +65,7 @@ def joined(folder=FOLDER):
             d = folder.joinpath(*rel[: depth + 1])
             if d not in seen:
                 seen.add(d)
-                out.append(f"{'  ' * depth}- **{label(d)}**")
+                out.append(f"{'  ' * depth}- **{label(d, depth > 0)}**")
         out.append(f"{'  ' * (len(rel) - 1)}- {title(p)}")
     for p in parts:
         out += ["", "---", "", demote(p.read_text(encoding="utf-8").rstrip())]

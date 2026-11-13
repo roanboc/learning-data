@@ -1096,7 +1096,7 @@ scene("banner",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),oA=fin(t,B+0.
   dashboard(ctx,860,150,960,580,{banner:fin(t,c("note")+0.2),pulse:pulse(t,c("note")+0.2,2.4)+pulse(t,c("old")+1.2,2.4)});
   msg(ctx,490,236,330,"Ana → Sam","Are these numbers safe to use?",BIZ,fin(t,c("asks")+0.9,0.4),t>c("asks")-0.1?t:0);
   clockChip(ctx,S,"7:58","the morning before census date",fin(t,0.3));
-  setScreen(ctx,S);withA(ctx,fin(t,c("ana")+0.6),()=>{glass(ctx,1560,52,296,64,18,BIZ,{glow:10,ea:0.6,fill:"rgba(8,14,28,0.85)"});T(ctx,"9:00 · confirm classes",1586,94,{w:700,size:22});});}
+  setScreen(ctx,S);withA(ctx,fin(t,c("ana")+0.6),()=>{const cw=Math.max(296,Math.ceil(tw(ctx,"9:00 · confirm classes",phSz(ctx,22),700))+52);glass(ctx,1856-cw,52,cw,64,18,BIZ,{glow:10,ea:0.6,fill:"rgba(8,14,28,0.85)"});T(ctx,"9:00 · confirm classes",1882-cw,94,{w:700,size:22});});} // the chip is as wide as its words, as they are drawn
   // the title, over a darker frame
   // the frame darkens first; the title comes in only once the dashboard has gone
   if(oA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+oA+")";ctx.fillRect(0,0,W,H);
@@ -1158,13 +1158,13 @@ scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   lineWorld(ctx,t,k,fin(t,c("staging")+1.6),1-fin(t,c("staging")-0.2,1.0));});
 
 /* ---------- 5. The cause, in bronze ---------- */
-// the rows in bronze as they arrived: the columns the contract will later name
-const ROWS=[["S-2231","DS101-S2","enrolled","2026-07-28"],["S-4410","DS101-S2","waitlisted","2026-08-24"],["S-1187","DS101-S2","enrolled","2026-08-02"],["S-5092","DS101-S2","waitlisted","2026-08-24"],["S-3368","DS101-S2","enrolled","2026-08-05"],["S-6120","DS101-S2","waitlisted","2026-08-24"]],COLX=[24,130,270,420];
+// the rows in bronze as they arrived: the columns the contract will later name. The columns and the card (594 wide) hold the words at the size a phone needs
+const ROWS=[["S-2231","DS101-S2","enrolled","2026-07-28"],["S-4410","DS101-S2","waitlisted","2026-08-24"],["S-1187","DS101-S2","enrolled","2026-08-02"],["S-5092","DS101-S2","waitlisted","2026-08-24"],["S-3368","DS101-S2","enrolled","2026-08-05"],["S-6120","DS101-S2","waitlisted","2026-08-24"]],COLX=[24,130,268,430];
 scene("bronze",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   // the lineage carries on from the last chapter: it holds still while that fades, then steps back to bronze
   world(ctx,S);camKeys(ctx,S,[[0,750,560,1.3],[0.5,750,560,1.3],[2.0,712,440,1.2],[c("new"),712,430,1.22],[sc.dur+1,712,430,1.24]],t);
   lineWorld(ctx,t,3+ease(clamp((t-0.6)/1.4,0,1)),1-fin(t,c("arrived")+0.3,0.8),0);
-  const a=fin(t,c("arrived")+0.6,0.8);withA(ctx,a,()=>{const x=0,y=40,w=560;glass(ctx,x,y,w,344,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
+  const a=fin(t,c("arrived")+0.6,0.8);withA(ctx,a,()=>{const x=-17,y=40,w=594;glass(ctx,x,y,w,344,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
     T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","offering","status","date"].forEach((h,i)=>T(ctx,h,x+COLX[i],y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
     ROWS.forEach((r,i)=>{const yy=y+112+i*36,wl=r[2]==="waitlisted",hi=wl?fin(t,c("new")+0.3+i*0.1):0;if(hi>0){ctx.fillStyle=rgba(AMBER,0.16*hi);rr(ctx,x+12,yy-24,w-24,32,8);ctx.fill();}
       r.forEach((v,j)=>T(ctx,v,x+COLX[j],yy,{w:600,size:19,f:"mono",color:wl&&j===2&&hi>0?rgba(AMBER,1):rgba(INK,0.9)}));});

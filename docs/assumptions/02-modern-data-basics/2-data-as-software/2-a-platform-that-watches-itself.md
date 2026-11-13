@@ -43,3 +43,9 @@ Kept by the film's thread, "Make data basics film 5 A platform that watches itse
 |---|---|---|---|---|
 | A1 | How does Sam ask Ingrid to change the contract first, now that a pull request never asks an owner? | In a ticket he opens for her, linked to his pull request, where she decides DEC-CLM-03. Noor, the data architect, still reviews and approves the code. | Chapter 5; the worked example | The ask goes through another channel, such as the contract catalogue's own change request |
 
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film. It was fixed while he was away.
+
+- **Question:** among the insight's four steps, the band behind the step in view was narrower than the longest step's second line: *traced through lineage* ran 12 px past it. Widen the band, or shorten the line?
+- **Assumption taken:** widen: the band is as wide as the longest step's words, and the rule beside the steps and the step's detail stand 16 px further right. No word changed. It shows at 2:54 to 3:19.

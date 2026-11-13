@@ -1437,7 +1437,7 @@ function bo_change(ctx,x,y,w,n,text,id,o){o=o||{};const a=o.a==null?1:o.a;if(a<=
 // a table row, as the app stores it: a key and its values, drawn as one horizontal stripe
 function bo_row(ctx,x,y,w,id,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_W,fs=Math.max(o.fs||21,phMin(ctx)),h=o.h||44;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.min(w*0.4,150),o.hiCol||col,0.22*Math.min(1,o.hi));
   ctx.fillStyle=rgba(o.bad?BAD:col,0.14+0.1*(o.hi||0));rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(o.bad?BAD:col,0.35+0.5*(o.hi||0));ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
-  const ty=y+h/2+fs*0.36;bo_key(ctx,x+24,y+h/2,1.15,id,1,o.keyHi||0);T(ctx,id,x+48,ty,{f:"mono",w:500,size:fs,color:rgba(bo_kc(id),1)});let cx=x+48+tw(ctx,id,fs,500,"mono")+20;
+  const my=o.more?y+22:y+h/2,ty=my+fs*0.36;bo_key(ctx,x+24,my,1.15,id,1,o.keyHi||0);T(ctx,id,x+48,ty,{f:"mono",w:500,size:fs,color:rgba(bo_kc(id),1)});let cx=x+48+tw(ctx,id,fs,500,"mono")+20;if(o.more)T(ctx,o.more,cx,ty+Math.round(fs*1.2),{f:"mono",w:500,size:fs,color:rgba(INK,0.9)});   // o.more: a second line, under the values, in a taller row (o.h)
   vals.forEach((v,i)=>{const vc=o.vc&&o.vc[i];T(ctx,v,cx,ty,{f:"mono",w:500,size:fs,color:vc?rgba(vc,1):rgba(INK,0.9)});cx+=tw(ctx,v,fs,500,"mono")+20;});});}
 // a column, as the reading side stores it: a name and its values, stacked in one vertical stripe
 function bo_colStripe(ctx,x,y,w,h,name,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_R,fs=Math.max(o.fs||19,phMin(ctx)+1),gap=o.gap||52;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.12);rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
@@ -1471,7 +1471,7 @@ function bo_capsule(ctx,x,y,s,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save()
 /* a data contract for the awards, drawn like Silent change's card: what's in it, what it means, how fresh each direction must be,
    and who owns each direction (w × h is 760 × 560; draw it scaled) */
 function bo_contract(ctx,x,y,w,h,o){o=o||{};glass(ctx,x,y,w,h,24,[236,243,255],{glow:24,ea:0.9,fill:"rgba(10,16,32,0.95)"});
-  T(ctx,"Data contract · awards",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v1.0",0);if(o.decoBody)PH_OFF++;
+  T(ctx,"Data contract · awards",x+36,y+60,{w:800,size:34});const vs=phSz(ctx,22),vw=tw(ctx,"v1.0",vs,800,"mono")+26,vh=vs+18;if(vs>22.5){glass(ctx,x+w-40-vw,y+48-vh/2,vw,vh,12,GOOD,{glow:8,ea:0.8,fill:"rgba(10,30,20,0.8)"});T(ctx,"v1.0",x+w-40-vw/2,y+48+vs*0.36,{w:800,size:22,f:"mono",align:"center",color:"rgba(200,255,220,1)"});}else stampV(ctx,x+w-40,y+50,"v1.0",0);if(o.decoBody)PH_OFF++;   // the version's stamp is made from its words at the size they're drawn
   const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+196;
   key("Fields",y+136);T(ctx,"award, learner, status, date",vx,y+136,{w:600,size:23});
   key("Statuses",y+192);T(ctx,"issued · revoked",vx,y+192,{w:600,size:22,f:"mono"});
@@ -1761,9 +1761,9 @@ scene("back",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);set
   withA(ctx,sa,()=>{if(gs)glow(ctx,1590,400,300,LAYER.gold,0.25*gs);vault(ctx,1400,150,380,520,LAYER.gold,(r,cc)=>hash(r*11+cc,5)<0.62?LAYER.gold:null,null);chip(ctx,1590,212,null,"Gold","ready to read",{align:"center",edge:LAYER.gold});});
   // the app, and its own database
   bo_phone(ctx,330,380,1.55,{a:sa,screen:sg>0?"suggest":"issue",sa:sg,hi:pulseAt(t,at("serve",0.58),1.2),edge:sg>0?BO_M:null});
-  withA(ctx,sa,()=>{glass(ctx,110,620,580,236,18,BO_W,{glow:14+10*pulseAt(t,at("agents",0.3),1.4),ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"the app's database",134,662,{w:800,size:26,color:rgba(BO_W,1)});
+  withA(ctx,sa,()=>{const long=tw(ctx,"S-0091L-207agent: suggested Data Ethics",phSz(ctx,19),500,"mono")+88>528;glass(ctx,110,620,580,long?250:236,18,BO_W,{glow:14+10*pulseAt(t,at("agents",0.3),1.4),ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"the app's database",134,662,{w:800,size:26,color:rgba(BO_W,1)});   // long: the agent's row takes two lines where one would run past the card at the size it's drawn
     bo_row(ctx,130,680,540,"L-207",["Aisha K.","2 of 4"],{fs:20});bo_row(ctx,130,726,540,"A-1042",["L-207","revoked"],{fs:20,vc:[null,BAD]});
-    if(wr>0)bo_row(ctx,130,772,540,"S-0091",["L-207","agent: suggested Data Ethics"],{a:wr,fs:19,hi:pulseAt(t,at("agents",0.7),1.2),col:BO_W});});
+    if(wr>0)bo_row(ctx,130,772,540,"S-0091",long?["L-207","agent:"]:["L-207","agent: suggested Data Ethics"],{a:wr,fs:19,h:long?78:44,more:long?"suggested Data Ethics":null,hi:pulseAt(t,at("agents",0.7),1.2),col:BO_W});});
   // data flowing back to the app
   withA(ctx,fl*dim,()=>{arrowTo(ctx,1390,300,440,300,BO_M,0.5,{head:18,lw:3,bend:0.06});packets(ctx,t,bez(P(1390,300),P(1100,250),P(740,250),P(446,300),20),0.35,1.4,c("serve"),BO_M,14,1);
     tag(ctx,915,214,t>fs+0.4?"served in 8 ms":"data flowing back",BO_M,{align:"center",size:28});});
@@ -1799,7 +1799,7 @@ scene("questions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f
   withA(ctx,vis(2),()=>{const w1=fin(t,at("fresh",0.42),0.5),p1=fin(t,at("fresh",0.72),0.5);
     bo_fresh(ctx,860,640,940,{labels:["seconds","minutes","hours","a day"],ls:26,ms:26,marks:[w1>0.02?[0,"a wallet",BO_M,0]:null,p1>0.02?[3,"a plan",BO_R,0]:null].filter(Boolean)});
     const kx=860+940*clamp(ease(clamp((t-c("fresh"))/1.4,0,1))*0.5+0.5*ease(fin(t,at("fresh",0.5),1.2))-0.0,0,1)*(1-w1)*(1-p1);withA(ctx,(1-w1)*fin(t,c("fresh"),0.4),()=>{glow(ctx,kx,640,44,BO_ACC,0.6);ctx.fillStyle=rgba(INK,1);ctx.beginPath();ctx.arc(kx,640,13,0,TAU);ctx.fill();});
-    withA(ctx,w1,()=>bo_phone(ctx,860,330,1.35,{screen:"wallet"}));withA(ctx,p1,()=>bo_answer(ctx,1480,170,360,280,"a plan","ten years of awards",BO_R,t,1));});
+    withA(ctx,w1,()=>phAsDeco(phMin(ctx)>0,()=>bo_phone(ctx,860,330,1.35,{screen:"wallet"})));withA(ctx,p1,()=>bo_answer(ctx,1480,170,360,280,"a plan","ten years of awards",BO_R,t,1));});
   // 4: definitions in one place
   withA(ctx,vis(3),()=>{const o1=fin(t,at("defs",0.3),0.5),nt=fin(t,at("defs",0.78),0.5);
     glass(ctx,1060,190,540,270,22,TRUST,{glow:20,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"credits towards a certificate",1090,242,{w:800,size:27,color:rgba(TRUST,1)});

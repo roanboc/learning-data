@@ -124,17 +124,17 @@ scene("least",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,330,560,t,w("principal","never as a person")-0.2,()=>ag_key(ctx,330,560,1,1-fin(t,cS-0.4,0.5),{title:"a person's badge",sub:"jun.park",col:AG_GREY,cross:fin(t,w("principal","never as a person")+0.3,0.4)}),{dy:20});
   ag_tag(ctx,330,180,"never a person",KT_AI,fin(t,w("principal","never"),0.5)*(1-fin(t,cS,0.5)),{size:22});
   // production, read-only: three doors; the agent's own wing of development schemas
-  const wA=fin(t,0.4,0.8);withA(ctx,wA,()=>{glass(ctx,640,120,820,400,20,[150,176,214],{glow:10,ea:0.5,fill:"rgba(8,12,22,0.9)"});T(ctx,"production",664,158,{w:800,size:20,color:rgba(SOFT,1)});
-    glass(ctx,1500,190,360,330,20,KT_AI,{glow:10,ea:0.5,fill:"rgba(6,14,18,0.9)"});T(ctx,"development schemas",1680,172,{w:800,size:20,align:"center",color:rgba(KT_AI,1)});});
+  const wA=fin(t,0.4,0.8),tW=Math.max(150,Math.ceil(tw(ctx,"intermediate",phSz(ctx,18),700))+18),wide=tW>150,TG=wide?14:20,WW=2*tW+3*TG,WX=wide?1880-WW:1500,PW=wide?780:820,DP=wide?240:260,RO=Math.round((phSz(ctx,18)-18)*0.8);withA(ctx,wA,()=>{glass(ctx,640,120,PW,400+RO,20,[150,176,214],{glow:10,ea:0.5,fill:"rgba(8,12,22,0.9)"});T(ctx,"production",664,158,{w:800,size:20,color:rgba(SOFT,1)});
+    glass(ctx,WX,190,WW,330+RO,20,KT_AI,{glow:10,ea:0.5,fill:"rgba(6,14,18,0.9)"});T(ctx,"development schemas",WX+WW/2,172,{w:800,size:20,align:"center",color:rgba(KT_AI,1)});});
   const DO=[["sources",SRC3[0][1],"sources"],["core",TRUST,"core"],["marts",LAYER4[3][1],"marts"]];
-  DO.forEach(([n,col,k],i)=>{const x=700+i*260,op=fin(t,w("reads",k)-0.1,0.9);ag_door(ctx,x,230,180,250,n,col,op*0.8,t,{a:wA});
-    if(op>0)withA(ctx,op,()=>{ctx.save();ctx.setLineDash([3,7]);ctx.strokeStyle=rgba(col,0.75);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(368,300);ctx.bezierCurveTo(520,250+i*10,x-60,260,x+90,355);ctx.stroke();ctx.restore();T(ctx,"read-only",x+90,505,{w:700,size:18,align:"center",color:rgba(col,0.95)});});});
-  const wr=fin(t,w("reads","writes")-0.1,0.8);["staging","intermediate","core","marts"].forEach((n,i)=>{const x=1520+(i%2)*170,y=220+Math.floor(i/2)*140,col=LAYER4[i][1];withA(ctx,wA,()=>{
-    ctx.fillStyle=rgba(mix([6,12,20],KT_AI,0.12*wr),1);rr(ctx,x,y,150,120,10);ctx.fill();ctx.strokeStyle=rgba(mix(col,KT_AI,wr*0.5),0.4+0.5*wr);ctx.lineWidth=2;rr(ctx,x,y,150,120,10);ctx.stroke();
-    T(ctx,n,x+75,y+30,{w:700,size:18,align:"center",color:rgba(col,1)});});});
-  if(wr>0)withA(ctx,wr,()=>{arrowTo(ctx,360,280,1500,262,KT_AI,0.9,{p:wr,bend:-0.4,head:14});});
-  ag_tag(ctx,1050,575,"reads: sources, core, marts",SOFT,fin(t,w("reads","It reads"),0.5)*(1-fin(t,cS-0.2,0.5)),{size:22});
-  const RX=s_=>Math.min(1680,1880-(tw(ctx,s_,phSz(ctx,20),700)+26)/2);   // a tag centred under the wing, kept inside the frame
+  DO.forEach(([n,col,k],i)=>{const x=700+i*DP,op=fin(t,w("reads",k)-0.1,0.9);ag_door(ctx,x,230,180,250,n,col,op*0.8,t,{a:wA});
+    if(op>0)withA(ctx,op,()=>{ctx.save();ctx.setLineDash([3,7]);ctx.strokeStyle=rgba(col,0.75);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(368,300);ctx.bezierCurveTo(520,250+i*10,x-60,260,x+90,355);ctx.stroke();ctx.restore();T(ctx,"read-only",x+90,505+RO,{w:700,size:18,align:"center",color:rgba(col,0.95)});});});
+  const wr=fin(t,w("reads","writes")-0.1,0.8);["staging","intermediate","core","marts"].forEach((n,i)=>{const x=WX+TG+(i%2)*(tW+TG),y=220+Math.floor(i/2)*140,col=LAYER4[i][1];withA(ctx,wA,()=>{
+    ctx.fillStyle=rgba(mix([6,12,20],KT_AI,0.12*wr),1);rr(ctx,x,y,tW,120,10);ctx.fill();ctx.strokeStyle=rgba(mix(col,KT_AI,wr*0.5),0.4+0.5*wr);ctx.lineWidth=2;rr(ctx,x,y,tW,120,10);ctx.stroke();
+    T(ctx,n,x+tW/2,y+30,{w:700,size:18,align:"center",color:rgba(col,1)});});});
+  if(wr>0)withA(ctx,wr,()=>{arrowTo(ctx,360,280,WX,262,KT_AI,0.9,{p:wr,bend:-0.4,head:14});});
+  ag_tag(ctx,640+PW/2,575,"reads: sources, core, marts",SOFT,fin(t,w("reads","It reads"),0.5)*(1-fin(t,cS-0.2,0.5)),{size:22});
+  const RX=s_=>Math.min(WX+WW/2,1880-(tw(ctx,s_,phSz(ctx,20),700)+26)/2);   // a tag centred under the wing, kept inside the frame
   ag_tag(ctx,RX("writes: its own development schemas"),575,"writes: its own development schemas",KT_AI,fin(t,w("reads","writes"),0.5)*(1-fin(t,cX-0.2,0.5)),{size:20});
   // the grants that say so (Databricks only)
   const gA=fin(t,w("reads","writes")+0.6,0.6)*(1-fin(t,cS-0.3,0.5));if(gA>0)arrive(ctx,690,710,t,w("reads","writes")+0.6,()=>ag_code(ctx,100,630,1180,"AGENTS.md",AG_GRANTS,{a:gA,label:AG_DBX,edge:[150,176,214],p:clamp((t-w("reads","writes")-0.7)/1.4,0,1),lit:{3:fin(t,w("reads","writes")+2.2,0.5)},litCol:KT_AI}),{dy:30});
@@ -148,7 +148,7 @@ scene("least",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     ag_tag(ctx,CX,552,"counts · small samples",AG_GRN,fin(t,w("samples","counts"),0.5),{size:20});}
   const bA=fin(t,w("samples","small samples")-0.2,0.6);if(bA>0)arrive(ctx,1320,685,t,w("samples","small samples")-0.2,()=>ag_code(ctx,790,618,1080,"AGENTS.md",AG_BULK,{a:bA,p:clamp((t-w("samples","small samples"))/1.4,0,1),edge:KT_AI,lit:{0:fin(t,w("samples","Names"),0.5),1:fin(t,w("samples","Names")+0.2,0.5)},litCol:AG_RED}),{dy:30});
   // whatever it gets wrong stays in its own room; production doesn't flicker
-  ag_scribble(ctx,1765,300,60,clamp((t-w("stays","gets wrong"))/1.0,0,1));
+  ag_scribble(ctx,WX+2*TG+tW*1.5,300,60,clamp((t-w("stays","gets wrong"))/1.0,0,1));
   ag_tag(ctx,RX("mistakes stay in its own room"),575,"mistakes stay in its own room",AG_RED,fin(t,w("stays","stays"),0.5),{size:20});
   ctx.restore();vign(ctx,S);});
 

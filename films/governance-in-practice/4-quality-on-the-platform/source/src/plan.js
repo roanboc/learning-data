@@ -406,8 +406,9 @@ const GQ_DP=[{n:102,s:"# Who owns each test: the owner of the data it checks, by
   {n:103,s:"# owner names its own in its meta, which wins. Each kind of test names its quality dimension where"},
   {n:104,s:"# it's defined (tests/generic/). The governance check fails on a test with no owner or dimension."},{n:105,s:"data_tests:"},{n:106,s:"  credentials:"},
   {fold:1},{n:109,s:"    short_courses: {+meta: {owner: Learning team}}"},{n:110,s:"    staging:"},{fold:1},{n:113,s:"      short_courses: {+meta: {owner: Learning team}}"}];
-function gq_dpSheet(ctx,o){o=o||{};const e=easeCam(clamp(o.u==null?1:o.u,0,1)),y=lerp(H+40,70,e),l=clamp(o.lit||0,0,1);
-  return gu_file(ctx,70,y,1780,{path:"dbt_project.yml",lang:"yaml",lines:GQ_DP.map((r,i)=>i===6||i===9?Object.assign({},r,{lit:l}):i<3?Object.assign({},r,{lit:clamp(o.head||0,0,1)}):r)});}
+function gq_dpSheet(ctx,o){o=o||{};const e=easeCam(clamp(o.u==null?1:o.u,0,1)),y=lerp(H+40,70,e),l=clamp(o.lit||0,0,1),
+    w=Math.max(1780,Math.ceil(Math.max(...GQ_DP.map(r=>r.s?gu_mw(ctx,r.s):0)))+130);   // wide enough for its longest line and the band that lights it: in the video, whose letters sit on whole pixels, line 103 is 20 px longer and ran past its band
+  return gu_file(ctx,W/2-w/2,y,w,{path:"dbt_project.yml",lang:"yaml",lines:GQ_DP.map((r,i)=>i===6||i===9?Object.assign({},r,{lit:l}):i<3?Object.assign({},r,{lit:clamp(o.head||0,0,1)}):r)});}
 // tests/generic/builtin.sql: dbt's not_null, with the dimension it checks (lines 7 to 13); line 11 lit cyan (o.lit)
 const GQ_BI=[{n:7,s:"    The dimensions are DAMA's: completeness, uniqueness, validity, consistency, accuracy and",col:WC_MUTED},
   {n:8,s:"    timeliness. Each test's owner is set by folder, in dbt_project.yml.",col:WC_MUTED},{n:9,s:"-#}",col:WC_MUTED},{n:10,s:"{% test not_null(model, column_name) %}"},
@@ -570,7 +571,8 @@ function gq_badges(ctx,o){o=o||{};const [x,y,w,h]=GU_BIG;gu_page(ctx,x,y,w,h,{ba
 const GQ_CP=[{n:64,s:"      - name: credit_points"},{fold:1},{n:66,s:"        data_tests:"},{n:67,s:"          - not_null"},{n:68,s:"          # A microcredential badge carries credit (DEC-LMS-03)."},
   {n:69,s:"          - positive:"},{n:70,s:"              config:"},{n:71,s:"                where: \"badge_code like 'MC-%'\""}];
 function gq_cpSheet(ctx,o){o=o||{};const ad=clamp(o.add||0,0,1),rows=ad>0.01?GQ_CP:GQ_CP.slice(0,4),e=easeCam(clamp(o.u==null?1:o.u,0,1)),y=lerp(H+40,o.y||80,e);
-  const f=gu_file(ctx,90,y,o.w||1180,{path:"models/staging/learning_platform/_learning_platform__models.yml",lang:"yaml",lines:rows.map((r,i)=>i>=4?Object.assign({},r,{add:1,dA:ad,p:clamp(ad*4-(i-4)*0.6,0,1)}):r)});
+  // as wide as its longest line, line 68, with room in the band that marks it as added: at 1180 the line filled the band to the last pixel, and ran 12 px past it in the video; the sheet grows to the left, so its right edge stays clear of the card beside it
+  const w=o.w||Math.max(1180,Math.ceil(Math.max(...GQ_CP.map(r=>r.s?gu_mw(ctx,r.s):0)))+134),f=gu_file(ctx,1270-w,y,w,{path:"models/staging/learning_platform/_learning_platform__models.yml",lang:"yaml",lines:rows.map((r,i)=>i>=4?Object.assign({},r,{add:1,dA:ad,p:clamp(ad*4-(i-4)*0.6,0,1)}):r)});
   const ps=clamp(o.pass||0,0,1);if(ps>0.01&&f.rows.length>3){const px=f.tx+gu_mw(ctx,GQ_CP[3].s)+40;gu_light(ctx,px,f.rows[3],"pass",0,ps);
     wc_hand(ctx,"0 isn't empty: it passes",px+40,f.rows[3]+10,{size:32,w:700,col:GV.greenInk,p:ps});}
   return f;}

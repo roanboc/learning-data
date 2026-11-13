@@ -31,3 +31,10 @@ Film 22 of *Data protection and privacy* (film 5 of 5 of *Kept for a reason*, th
 | 19 | The five lessons at the end | Each card types its film's end card word for word, as read on 10 November (films 18 and 19 on main, film 20 on its branch, film 21 on its pull request, and this film's own); the voice says film 20's as one sentence. Read again on main the day this film merges | *Kept for a reason* |
 | 20 | The soundtrack, under main's new audio process (9 November) | A per-film pointer (`audio.json`) to an audio prerelease tagged for this film; the MP3 stays tracked on the branch until the audio workflow publishes and verifies it, then leaves Git | The pull request |
 | 21 | When do her numbers leave the table of keys? | Not when the ticket closes: they stay until the last locked copy that can hold her rows is gone, on 24 December, because a locked copy restored before then has every answered request applied again before anyone reads it (*Deleted means deleted*'s rule, agreed with its thread on 10 November) | *Proof, on time*; the governance page's section; the example issue |
+
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film. It was fixed while he was away.
+
+- **Question:** on the deleter's badge, the second line, *for an approved request only*, ran 29 px past the badge. Widen the badge, or wrap?
+- **Assumption taken:** wrap: *for an approved*, then *request only*. The badge keeps its size and its place beside the list's two tables. The finder's badge, whose line *for a logged request only* fits, is unchanged. No word changed. It shows at 6:15 to 6:25.

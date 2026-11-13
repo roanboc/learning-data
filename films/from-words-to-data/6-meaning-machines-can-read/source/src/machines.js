@@ -97,9 +97,9 @@ function mm_tree(ctx,t,grow,path,labA){const P=MM_TREE.map((n,i)=>mm_treePos(i,t
 function mm_treeTags(ctx,t,P,labA,hi){const off={1:[-120,-8],2:[-10,40],3:[40,48],4:[30,40],6:[0,-96],7:[40,-92],8:[-20,-86]};
   MM_TREE.forEach((n,i)=>{if(!n[6])return;const a=labA[i]||0;if(a<=0)return;const o=off[i]||[0,30],x=P[i][0]+o[0],y=P[i][1]+o[1];
     if(n[5])mm_ptag(ctx,x,y,n[6][0],n[6][1],a,t,i,hi&&hi[i]);else withA(ctx,a*0.8,()=>T(ctx,n[6][1],x,y+20,{w:700,size:20,align:"center",color:rgba(PARCH,0.7)}));});}
-
 /* ---------- the stack: four floors of meaning ---------- */
-// glossary at the bottom, the semantic layer at the top. o.a, o.hi, o.qa, o.ca: per floor, 0..1 (visible, highlighted, question shown, content shown)
+// glossary at the bottom, the semantic layer at the top. o.a, o.hi, o.qa, o.ca: per floor, 0..1 (visible, highlighted, question shown, content shown).
+// The three cards of the semantic layer are 290 wide, to hold the longest formula at the size a phone needs; the glossary's are too, so the two floors line up
 const MM_FL={x:160,w:1600,h:140,y0:650,gap:170};
 const mm_fy=(k,g)=>(g||MM_FL).y0-k*(g||MM_FL).gap;
 // measured at the size its words are really drawn (the phone layer raises them in the film), so they stay inside it
@@ -108,8 +108,8 @@ function mm_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,ds=phSz(ctx,sz),w=
     if(o.dash){ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(col,0.8);ctx.lineWidth=1.6;rr(ctx,x-w/2,y-h/2,w,h,h/2);ctx.stroke();ctx.restore();}
     T(ctx,s,x,y+ds*0.36,{w:700,size:sz,align:"center",color:o.tc||rgba(col,1)});});return{x,y,w,h};}
 function mm_glossC(ctx,x,y,h,t,p,hi){const W_=[["credential","a trusted, checkable claim of learning"],["microcredential","a small credential, with its learning assessed"],["stacking","counting credentials towards a bigger one"]];
-  W_.forEach(([wd,df],i)=>{const cx=x+i*305,cy=y+16,cw=270,ch=h-32,on=i===1?hi:0;withA(ctx,clamp(p*3-i,0,1),()=>{if(on>0)glow(ctx,cx+cw/2,cy+ch/2,190,MM_GLO,0.35*on);
-    glass(ctx,cx,cy,cw,ch,12,MM_GLO,{glow:8+12*on,ea:0.6+0.4*on,fill:"rgba(24,19,8,0.94)"});T(ctx,wd,cx+18,cy+34,{w:800,size:22,color:rgba(MM_GLO,1)});wrapT(ctx,df,cx+18,cy+62,cw-30,{w:600,size:16,lh:20,color:rgba(PARCH,0.85)});});});
+  W_.forEach(([wd,df],i)=>{const cx=x+i*305-10,cy=y+16,cw=290,ch=h-32,on=i===1?hi:0;withA(ctx,clamp(p*3-i,0,1),()=>{if(on>0)glow(ctx,cx+cw/2,cy+ch/2,190,MM_GLO,0.35*on);
+    glass(ctx,cx,cy,cw,ch,12,MM_GLO,{glow:8+12*on,ea:0.6+0.4*on,fill:"rgba(24,19,8,0.94)"});T(ctx,wd,cx+18,cy+34,{w:800,size:22,color:rgba(MM_GLO,1)});wrapT(ctx,df,cx+18,cy+62,cw-50,{w:600,size:16,lh:20,color:rgba(PARCH,0.85)});});});
   return{x:x+440,top:y+16,bot:y+h-16};}
 function mm_taxC(ctx,x,y,h,t,p,hi){const R=[x+110,y+h/2],C=[["Award",y+30,x+330],["Microcredential",y+70,x+440],["Badge",y+110,x+570]],G=[["Degree",y+24],["Graduate certificate",y+56]];
   const q=k=>clamp(p*4-k,0,1),dk="#08121a";
@@ -129,7 +129,7 @@ function mm_ontoC(ctx,x,y,h,t,p,hi){const q=k=>clamp(p*4-k,0,1),yy=y+46;
   withA(ctx,q(2.8),()=>{const s="rule: up to 4 · approved only",w=tw(ctx,s,19,500,"mono")+28,cx=x+470+w/2;glass(ctx,cx-w/2,y+84,w,40,10,MM_ONT,{glow:10,ea:0.8,fill:"rgba(22,14,40,0.95)"});T(ctx,s,cx,y+111,{f:"mono",w:500,size:19,align:"center",color:rgba(MM_ONT,1)});});
   return{x:x+440,top:yy-Mc.h/2,bot:yy+Mc.h/2};}
 const MM_METRICS=[["credentials awarded","11,890","count · revoked left out"],["near a certificate","132","3 approved, of 4 needed"],["completion rate","71%","completed ÷ enrolled"]];
-function mm_semC(ctx,x,y,h,t,p,hi){MM_METRICS.forEach(([n,v,f],i)=>{const cx=x+i*305,cy=y+16,cw=270,ch=h-32,on=i===1?hi:0;withA(ctx,clamp(p*3-i,0,1),()=>{if(on>0)glow(ctx,cx+cw/2,cy+ch/2,190,MM_SEM,0.35*on);
+function mm_semC(ctx,x,y,h,t,p,hi){MM_METRICS.forEach(([n,v,f],i)=>{const cx=x+i*305-10,cy=y+16,cw=290,ch=h-32,on=i===1?hi:0;withA(ctx,clamp(p*3-i,0,1),()=>{if(on>0)glow(ctx,cx+cw/2,cy+ch/2,190,MM_SEM,0.35*on);
     glass(ctx,cx,cy,cw,ch,12,MM_SEM,{glow:8+12*on,ea:0.6+0.4*on,fill:"rgba(8,16,32,0.95)"});T(ctx,"Σ",cx+18,cy+32,{w:800,size:22,color:rgba(MM_SEM,1)});T(ctx,n,cx+44,cy+31,{w:700,size:17,color:rgba(MM_SEM,1)});
     T(ctx,v,cx+18,cy+70,{w:800,size:30,color:rgba(INK,1)});T(ctx,f,cx+18,cy+95,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});});});
   return{x:x+440,top:y+16,bot:y+h-16};}

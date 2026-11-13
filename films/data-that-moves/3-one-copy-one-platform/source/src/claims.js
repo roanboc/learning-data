@@ -79,8 +79,8 @@ function oc_usual(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;co
    writing them), serve (served to the app), check (each claim checked against its contract), payroll, tuesday (the hours to pay leaving
    by noon on Tuesday); o.lit: what glows ("claims", "contracts", "lakebase", "lakehouse", "uc", "tuesday", "once"); o.dim (0 to 1) all
    but the hours' lane fade; o.writer (0 to 1 each: claims, contracts) each table's writer named; o.ucText; o.a */
-const OC_ONE={app:[50,236,370],hr:[50,610,370],plat:[440,138,1060,742],lakebase:[476,236,456],lakehouse:[1012,236,456],copy:[476,404,560,330],claims:[510,474,492],
-  contracts:[510,596,492],readers:[[1078,404,"Payroll","claims still waiting","clock"],[1078,520,"Claims job","the hours to pay","refresh"],[1078,636,"Finance","casual teaching cost","contract"]],readerW:390,payroll:[1536,690,350]};
+const OC_ONE={app:[50,236,370],hr:[50,610,370],plat:[440,138,1060,742],lakebase:[476,236,456],lakehouse:[1012,236,456],copy:[476,404,560,364],claims:[510,508,492],
+  contracts:[510,630,492],readers:[[1078,404,"Payroll","claims still waiting","clock"],[1078,520,"Claims job","the hours to pay","refresh"],[1078,636,"Finance","casual teaching cost","contract"]],readerW:390,payroll:[1536,690,350]};
 function oc_one(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null;const p=o.parts||{},O=OC_ONE,pa=k=>p[k]==null?0:clamp(p[k],0,1),lit=k=>o.lit===k||(Array.isArray(o.lit)&&o.lit.includes(k))?1:0,
     dm=1-0.75*clamp(o.dim||0,0,1),wr=o.writer||{},out={};ctx.save();ctx.globalAlpha*=a;
   // the platform, with Unity Catalog along its foot
@@ -96,14 +96,14 @@ function oc_one(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null
   // one copy: the rows in the lake's open storage, two tables, each with one writer
   if(pa("copy")>0){const [x,y,w,h]=O.copy;withA(ctx,pa("copy")*dm,()=>{if(lit("once")>0)glow(ctx,x+w/2,y+h/2,w*0.7,MD.agreed,0.22*lit("once"));
       md_card(ctx,x,y,w,h,{edge:lit("once")>0?mix(MD.flow,MD.agreed,lit("once")):MD.flow,glow:0.7+0.7*lit("once"),r:18,fill:"rgba(8,14,30,0.9)"});
-      md_icon(ctx,"store",x+36,y+40,34,MD.flow);md_label(ctx,x+66,y+50,"One copy, kept in two forms",{col:MD.ink});
+      md_icon(ctx,"store",x+36,y+40,34,MD.flow);["One copy,","kept in two forms"].forEach((s,i)=>md_label(ctx,x+66,y+50+i*34,s,{col:MD.ink}));   // two lines, in a card 34 px taller with its tables 34 px lower: on one line the label ran 46 px past the card
       const [cx,cy,cw]=O.claims,[kx,ky,kw]=O.contracts;
       out.claims=md_table(ctx,cx,cy,cw,{name:"claims",kind:wr.claims>0?"the app writes it":"rows",lit:lit("claims")});
       if(pa("contracts")>0||wr.contracts>0)withA(ctx,Math.max(pa("contracts"),pa("hr")),()=>{out.contracts=md_table(ctx,kx,ky,kw,{name:"contracts",kind:wr.contracts>0?"the lakehouse writes it":"rows",lit:lit("contracts")});});});}
   const C=O.copy,cr=[C[0]+C[2],C[1]+C[3]/2];
   // the app writes its claims through Postgres: a request out, an answer back; and its rows go down into the copy
   if(pa("write")>0){const [ax,ay,aw]=O.app,[lx,ly,lw]=O.lakebase;withA(ctx,dm,()=>{md_way(ctx,"api",[ax+aw,ay+55],[lx,ly+55],t,{u:pa("write")});
-      const pts=md_path([[lx+340,ly+110],[lx+340,O.claims[1]]]);md_lane(ctx,pts,MD.flow,0.85,{u:pa("write")});if(pa("write")>=1)md_flow(ctx,pts,t,{every:1.4,dur:0.9});});}
+      const pts=md_path([[lx+436,ly+110],[lx+436,O.claims[1]]]);md_lane(ctx,pts,MD.flow,0.85,{u:pa("write")});if(pa("write")>=1)md_flow(ctx,pts,t,{every:1.4,dur:0.9});});}   // 96 px further right than it was, clear of the copy's label, which it crossed
   // the lakehouse reads the same rows, in the second form the platform keeps for analysis: a dashed lane, a question down and the answer back
   if(pa("read")>0){const [lx,ly,lw]=O.lakehouse;withA(ctx,dm,()=>md_way(ctx,"query",[lx+80,ly+110],[C[0]+C[2]-60,C[1]],t,{u:pa("read"),pts:md_path([[lx+80,ly+110],[lx+80,ly+140],[C[0]+C[2]-60,ly+140],[C[0]+C[2]-60,C[1]]])}));}
   // the readers, each reading that copy through Unity Catalog

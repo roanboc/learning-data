@@ -211,11 +211,11 @@ function bw_store(ctx,x,y,w,h,col,a,t){if(a<=0.01)return;withA(ctx,a,()=>{glass(
 
 /* ---------- the star: the shape built to read ---------- */
 // the fact at the centre: its grain, its measures (what you add up) and its keys; o.g (grain), o.m (measures), o.k (keys), each 0..1
-function bw_fact(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||440,h=o.h||280,x=cx-w/2,y=cy-h/2,col=BW_R;if(a<=0.01)return{x:cx,y:cy,w,h};
+const BW_GRAIN="one row per credential awarded";function bw_fact(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||440,h=o.h||280,x=cx-w/2,y=cy-h/2,col=BW_R;if(a<=0.01)return{x:cx,y:cy,w,h};
   withA(ctx,a,()=>{if(o.hi)glow(ctx,cx,cy,w*0.8,col,0.3*o.hi);glass(ctx,x,y,w,h,16,col,{glow:18+10*(o.hi||0),ea:0.9,fill:"rgba(8,20,22,0.95)"});
     T(ctx,"FACT",x+24,y+36,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"credential awarded",x+24,y+72,{w:800,size:32,color:rgba(col,1)});
     const ph=phMin(ctx)>0;
-    withA(ctx,o.g==null?1:o.g,()=>{if(o.gHi)glow(ctx,cx,y+110,w*0.5,TRUST,0.3*o.gHi);T(ctx,"one row per credential awarded",x+24,y+114,ph?{w:600,size:19,color:rgba(TRUST,0.75+0.25*(o.gHi||0))}:{f:"mono",w:500,size:19,color:rgba(TRUST,0.75+0.25*(o.gHi||0))});});
+    withA(ctx,o.g==null?1:o.g,()=>{if(o.gHi)glow(ctx,cx,y+110,w*0.5,TRUST,0.3*o.gHi);T(ctx,BW_GRAIN,x+24,y+114,ph?{w:600,size:19,color:rgba(TRUST,0.75+0.25*(o.gHi||0))}:{f:"mono",w:500,size:19,color:rgba(TRUST,0.75+0.25*(o.gHi||0))});});
     ctx.strokeStyle=rgba(col,0.3);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+14,y+136);ctx.lineTo(x+w-14,y+136);ctx.stroke();
     [["award","count"],["credit points","sum"]].forEach(([m,how],i)=>withA(ctx,clamp((o.m==null?1:o.m)*2-i,0,1),()=>{const yy=y+178+i*40;
       T(ctx,"Σ",x+34,yy,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,m,x+60,yy,{w:700,size:25});T(ctx,how,x+w-24,yy,{f:"mono",w:500,size:19,align:"right",color:rgba(SOFT,1)});}));
@@ -229,9 +229,9 @@ const BW_DIMS={learner:["Learner","name · faculty · dates"],kind:["Credential 
 function bw_dimWord(ctx,x,y,s,k,word,col,a){if(a<=0.01)return;const sub=BW_DIMS[k][1],i=sub.indexOf(word);if(i<0)return;const b=entBox(ctx,{x,y,name:BW_DIMS[k][0],sub,s}),m=phMin(ctx),sz=Math.max(16*s,m);
   const x0=b.x-tw(ctx,sub,sz,600)/2+tw(ctx,sub.slice(0,i),sz,600),ww=tw(ctx,word,sz,600),by=m?b.y-b.h/2+34*s*Math.max(24*s,m)/(24*s)+sz*1.15:b.y-b.h/2+62*s;
   withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.22);rr(ctx,x0-6,by-sz*0.95,ww+12,sz*1.3,6);ctx.fill();T(ctx,word,x0,by,{w:600,size:sz,color:rgba(col,1)});});}
-// a whole star, at (cx,cy): P maps each dimension to its place; o.dimA, o.join (0..1 per dimension: a join lit), o.hi
+// a whole star, at (cx,cy): P maps each dimension to its place; o.dimA, o.join (0..1 per dimension: a join lit), o.hi. In the film, the small fact is at least as wide as its second line at the size it's drawn, and the large one as its grain's line, with 24 px on each side
 function bw_star(ctx,cx,cy,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P=o.P||{course:[-340,-230],kind:[340,-230],learner:[-340,240],date:[340,240]},da=o.dimA||{},jn=o.join||{},ds=o.ds||s;
-  withA(ctx,a,()=>{const F={x:cx,y:cy,w:(o.fw||440)*s,h:(o.fh||280)*s};
+  withA(ctx,a,()=>{const F={x:cx,y:cy,w:(o.fw||440)*s,h:(o.fh||280)*s};if(o.small&&phMin(ctx))F.w=Math.max(F.w,Math.ceil(tw(ctx,o.factSub||"Σ count · credit points",phSz(ctx,24*s),500,"mono"))+40);else if(phMin(ctx))F.w=Math.max(F.w,Math.ceil(tw(ctx,BW_GRAIN,phSz(ctx,19),600))+48);
     Object.keys(P).forEach(k=>{const q=da[k]==null?1:da[k];if(q<=0.01)return;const D=entBox(ctx,{x:cx+P[k][0]*s,y:cy+P[k][1]*s,name:(o.names||{})[k]||BW_DIMS[k][0],sub:o.nosub?null:BW_DIMS[k][1],s:ds});
       relLine(ctx,F,D,"*","1",{col:jn[k]>0.01?mix(BW_R,[255,255,255],0.4*jn[k]):BW_R,a:q*(o.relA==null?1:o.relA),s:ds,lw:2.2+2.4*(jn[k]||0)});
       if(jn[k]>0.01)glow(ctx,(F.x+D.x)/2,(F.y+D.y)/2,90*s,BW_R,0.35*jn[k]);});

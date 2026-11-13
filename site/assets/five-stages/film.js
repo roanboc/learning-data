@@ -2327,8 +2327,8 @@ scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({never:wAt(sc
       const gp="A person approves production",gpw=ag_tw(x,gp,{w:700,size:30})+96;
       ag_pill(x,R.stages[4].x+46-gpw/2,R.stages[4].y-40,gp,{icon:"tick",col:AG.green,a:ag_in(tt,P.always,0.5)*(1-ag_in(tt,c.law-0.3,0.5))});
       // the law and the standard, side by side at the top, once the levels have gone
-      fs_card(x,150,128,680,"Europe's AI law · high-risk systems","People who can understand it, watch it, and stop it",null,{kickCol:AG.blue,a:ag_in(tt,c.law+0.2,0.4),k:ag_spr(tt,c.law+0.2)});
-      fs_card(x,860,128,600,"ISO/IEC 42001 · managing AI","Who is responsible for what",null,{kickCol:AG.blue,a:ag_in(tt,P.resp-0.3,0.4),k:ag_spr(tt,P.resp-0.3)});
+      fs_card(x,150,128,720,"Europe's AI law · high-risk systems","People who can understand it, watch\u00a0it, and stop it",null,{kickCol:AG.blue,a:ag_in(tt,c.law+0.2,0.4),k:ag_spr(tt,c.law+0.2)});   // 720: as wide as its first line in capitals; "watch it" kept together, so the lines break where they did
+      fs_card(x,900,128,560,"ISO/IEC 42001 · managing AI","Who is responsible for what",null,{kickCol:AG.blue,a:ag_in(tt,P.resp-0.3,0.4),k:ag_spr(tt,P.resp-0.3)});
       ag_roomLight(x,1);FS_KICK(x);}}
   ],0.6);});
 

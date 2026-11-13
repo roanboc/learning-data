@@ -318,11 +318,11 @@ scene("team",(ctx,S,t,sc)=>{
     // Clara asks again: 18,412, with the entry it followed (a later moment: the team's memory and its agents leave, then Clara comes in)
     {at:T.clara-0.4,later:true,dis:0.5,place:"lab",keys:[[0,960,540,1.0]],push:0.02,draw:(c,tt)=>{
       const think=ag_io(tt,T.clara+0.5,T.answers,0.4);ag_person(c,"clara",1600,644,1.0,{t:tt,flip:true,gaze:[3,0]});
-      tm_agent(c,1080,470,80,tt,{label:"Clara's agent",core:0.6+0.3*think,think,busy:think});ag_roomLight(c,1);
+      tm_agent(c,1100,470,80,tt,{label:"Clara's agent",core:0.6+0.3*think,think,busy:think});ag_roomLight(c,1);
       tm_cardAt(c,980,96,560,{kick:"Clara",title:"Students on census day, by mode of study?"},tt,T.clara,T.answers,{kickCol:AG.kick});
-      const a=ag_in(tt,T.answers-0.1,0.5);if(a>0)ag_evidence(c,140,150,660,{kick:"Clara's agent",title:"18,412 students",sub:"on census day, by mode of study"},
-        [{kick:"Team memory",title:"Status as it was on census day",col:AG.blue},{kick:"Query",title:"Counted as at 31 March",col:AG.orange},{kick:"Check",title:"Matches the count reported",col:AG.green}],
-        {open:clamp((tt-T.shows)/1.6,0,1),ew:250,gap:20,a,k:Math.min(1,ag_spr(tt,T.answers-0.1,0.5))});}},
+      const a=ag_in(tt,T.answers-0.1,0.5);if(a>0)ag_evidence(c,160,150,660,{kick:"Clara's agent",title:"18,412 students",sub:"on census day, by mode of study"},
+        [{kick:"Team memory",title:"Status as it was on census day",col:AG.blue},{kick:"Query",title:"Counted as at 31\u00a0March",col:AG.orange},{kick:"Check",title:"Matches the count reported",col:AG.green}],
+        {open:clamp((tt-T.shows)/1.6,0,1),ew:272,gap:12,a,k:Math.min(1,ag_spr(tt,T.answers-0.1,0.5))});}},   // each card as wide as TEAM MEMORY needs, so the answer and the agent stand 20 px further right; "31 March" kept on one line
     // a lesson needed every time moves to its home: a skill, a test, the glossary (a new page)
     {at:T.home-0.4,later:true,dis:0.5,place:"lab",keys:[[0,960,540,1.0]],push:0.02,draw:(c,tt)=>{
       const cards=TM_OLD.concat([{title:"Status as on census day",ok:true,lift:30*ag_in(tt,T.home,0.6),glow:ag_in(tt,T.home,0.6)}]),pos=tm_file(c,384,330,{cards});

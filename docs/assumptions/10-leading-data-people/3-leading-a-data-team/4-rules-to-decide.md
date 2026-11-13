@@ -47,3 +47,10 @@ The fourth and last film of *Leading a data team*, the third series of *Leading 
 | 37 | Which say rules? | Subak is said "soo-bahk" and subaks "soo-bahks", Jun is "Joon", and "A I" is said as AI. Lucy Tran needed none. | The voice |
 | 38 | Who writes the series' release note? | *Less, on purpose*, which opens the series (PR #259), adds `films/leading-a-data-team/release-note.md`, and its `{files}` picks up this film. This film adds none, so the two don't clash. | The release notes |
 | 39 | When does it merge? | After the series' first three films (*Less, on purpose*, *One small change at a time* and *The team comes first*), in module order, one at a time on the latest main, with the Draft label. *Many hats, one picture*, the module's first, is on main. | This film's pull request |
+
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film. It was fixed while he was away.
+
+- **Question:** the sheet *Indonesia, 1977 · 2 million tons · of rice destroyed* writes its number at 96 px, the size the module's kit gives every such number. It ran 24 px past the sheet. A smaller number, or a wider sheet?
+- **Assumption taken:** a wider sheet: it is as wide as its number, 700 px where it was 640, the same as the planthopper's sheet beside it. No word changed, and the kit is unchanged. It shows at 1:10 to 1:15.

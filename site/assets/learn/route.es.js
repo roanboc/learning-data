@@ -165,14 +165,15 @@ window.LD_ROUTE = {
      "title": "Arquitectura de plataforma y de soluciones",
      "href": "platform-and-solution-architecture/",
      "poster": "an-application-or-a-platform-poster.jpg",
-     "kicker": "Serie · 4 de 8 películas",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Serie · 5 de 8 películas",
+     "len": "39 min",
+     "min": 39.0,
      "films": [
       "ld-an-application-or-a-platform",
       "ld-inside-the-platform",
       "ld-one-platform-or-many",
-      "ld-where-it-meets-the-applications"
+      "ld-where-it-meets-the-applications",
+      "ld-security-all-the-way-through"
      ]
     },
     {

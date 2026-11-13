@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Security all the way through, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (who, checked, default), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question names a "stop"
+   (the lab a question opens) and none has a lab link. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  who:{q:"Ravi gives each of the 47 jobs an identity of its own, and each run a pass that lasts an hour. What does that give the utility?",
+    opts:[{t:"Each job keeps its own key in its own script, so a copied key opens only that one job's tables.",near:true},{t:"The jobs read faster, since the catalogue no longer looks up one account that everyone shares."},{t:"Every line of the log names the job that read, and there's no key in a script for anyone to copy.",ok:true}],
+    why:"A key in a script works for whoever holds it, as data_loader's did; a pass at Hakone described the one woman it was for. With an identity of its own, each job says who's asking, so every line of the log names it, and each run's pass lasts an hour, so there's no key to keep or to copy. A key of its own in a script could still be copied, and used by anyone. Which of your jobs still run on a key someone could copy?"},
+  checked:{q:"A laptop in the utility's own office asks to read customers' bank details. What happens before a single row is read?",
+    opts:[{t:"The catalogue checks who's asking and what they may do, just as it would for a laptop anywhere.",ok:true},{t:"The catalogue checks it the first time it asks, then trusts that laptop for the rest of the day.",near:true},{t:"It's on the utility's own network, so it may read the files under the tables without asking."}],
+    why:"Being on the utility's network proves nothing: every request is checked where the data is, every time, by the catalogue, which looks at who's asking and what they may do. A laptop checked once and trusted after would be a door left open for the rest of the day. And there are no side roads: nobody reads the files under the tables without going through the catalogue. Where could someone reach your data without being checked?"},
+  default:{q:"Why does every new job start from the platform's template, with its identity, rights, secrets and log, instead of each domain setting up its own?",
+    opts:[{t:"Only the platform team may build jobs on the data platform, so the domains never write their own."},{t:"Left to each domain, the quick way would win again, as with data_loader: the template makes it safe.",ok:true},{t:"The platform checks pull requests for keys, and that check runs only on jobs made from its template.",near:true}],
+    why:"Nobody meant harm with data_loader: a new account took a ticket and two weeks, and the shared account worked at once. Left to each domain, the quick way would win again. So the platform makes the safe way the easy way: a new job starts from a template with its own identity, its rights, its secrets and its log from the first day, in minutes. Every pull request is checked for keys too, every one, but that check alone doesn't make the safe way quick. What's the quick way on your platform, and is it the safe one?"}
+  }}};

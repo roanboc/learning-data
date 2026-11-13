@@ -241,6 +241,7 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 - [One platform, or many](../films/platform-and-solution-architecture/3-one-platform-or-many/) — `one-platform-or-many`
 - [Where it meets the applications](../films/platform-and-solution-architecture/4-where-it-meets-the-applications/) — `where-it-meets-the-applications`
 - [Security all the way through](../films/platform-and-solution-architecture/5-security-all-the-way-through/) — `security-all-the-way-through`
+- [One solution, end to end](../films/platform-and-solution-architecture/6-one-solution-end-to-end/) — `one-solution-end-to-end`
 
 ### AI and continuous architecture
 

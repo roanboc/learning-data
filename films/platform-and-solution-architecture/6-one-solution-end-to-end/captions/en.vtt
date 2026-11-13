@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:07.198
+Japan, 1635. The shogunate makes the lords live in Edo every other year.
+
+00:00:08.498 --> 00:00:12.221
+So every year, each lord makes the journey, to Edo or home.
+
+00:00:13.921 --> 00:00:20.412
+A small lord brings about a hundred people. The greatest bring two thousand or more, with all the lord will need.
+
+00:00:22.312 --> 00:00:29.544
+On the Tōkaidō, each station keeps a hundred porters and a hundred horses for everyone on the road, and an inn for lords.
+
+00:00:31.444 --> 00:00:35.482
+A procession of three hundred, arriving unannounced, would find too few.
+
+00:00:36.582 --> 00:00:42.262
+Its loads would wait, and the inn might be taken. Each day on the road costs the domain dearly.
+
+00:00:43.962 --> 00:00:50.292
+So the stations need to know what's coming, and when, and the domain needs the journey planned before it starts.
+
+00:00:52.192 --> 00:00:55.903
+Before the lord sets out, his officials plan the journey end to end.
+
+00:00:56.803 --> 00:01:00.760
+They list who goes, within the limits the shogunate sets for his rank.
+
+00:01:02.060 --> 00:01:09.591
+And they send a notice ahead to every station: how many porters and horses, on which day, and where the lord will rest and sleep.
+
+00:01:11.691 --> 00:01:17.056
+A day or two before, a board with his name goes up at the inn, and nobody else may stay there.
+
+00:01:18.956 --> 00:01:25.702
+So each station knows days ahead what's coming, and if its own aren't enough, calls on nearby villages in time.
+
+00:01:27.402 --> 00:01:33.028
+The loads go on, station to station, on the porters and horses that serve every traveller.
+
+00:01:34.328 --> 00:01:37.767
+One road for everyone, and each journey planned end to end.
+
+00:01:39.667 --> 00:01:46.051
+At the utility, three teams start three pieces of the social tariff, and nobody has drawn how they join.
+
+00:01:47.351 --> 00:01:54.185
+So Sipho Dlamini, a solution architect, designs it end to end, on the platform everyone shares.
+
+00:02:01.285 --> 00:02:09.684
+In November, the government sets a social tariff: from the first of July, a discount for every eligible household, with no forms.
+
+00:02:11.184 --> 00:02:15.131
+Only the social services agency knows who is eligible.
+
+00:02:16.431 --> 00:02:21.923
+By December, billing's vendor offers to do it all inside billing, in its October release.
+
+00:02:23.423 --> 00:02:27.146
+The data team starts its own table of eligible households.
+
+00:02:28.246 --> 00:02:31.969
+And IT orders a server, to receive the agency's files.
+
+00:02:33.469 --> 00:02:38.368
+Soon there are two lists of who's eligible, and nobody has drawn how the pieces join.
+
+00:02:40.268 --> 00:02:44.257
+Nobody was careless. Each team did what it could see from where it stood.
+
+00:02:45.957 --> 00:02:49.008
+The head of retail asks for one design, in a ticket.
+
+00:02:52.708 --> 00:02:56.547
+The ticket goes to Sipho, who works beside two other architects.
+
+00:02:57.847 --> 00:03:02.958
+Tomás, the enterprise architect, keeps the map: what changes, and who must agree.
+
+00:03:04.658 --> 00:03:09.009
+Ravi, who leads the platform, builds what every solution shares, once.
+
+00:03:10.709 --> 00:03:16.719
+And Sipho designs one solution, end to end: from the agency's answer to the line on a bill.
+
+00:03:18.619 --> 00:03:25.182
+What every team could use, Ravi builds into the platform. What would change the map, Tomás is asked first.
+
+00:03:27.282 --> 00:03:33.140
+As on the Tōkaidō, the shogunate kept the road, and each domain planned its own journey on it.
+
+00:03:37.040 --> 00:03:41.997
+Sipho starts with the context: everything the solution touches, on one page.
+
+00:03:43.497 --> 00:03:49.483
+The agency, the customer system, billing, the call centre, and the households, who get a letter and a bill.
+
+00:03:51.583 --> 00:03:54.816
+In the middle, the solution itself, on the data platform.
+
+00:03:56.316 --> 00:04:02.500
+Out of scope for now: tenants whose account is in a landlord's name. Their route comes later in the year.
+
+00:04:04.400 --> 00:04:08.915
+Fixed: ready by the first of July, under the three rules already agreed.
+
+00:04:12.815 --> 00:04:17.757
+Then, the qualities it must have, each with a measure a design can be tested against.
+
+00:04:19.057 --> 00:04:22.626
+A standard lists nine. Sipho picks the three that matter here.
+
+00:04:24.126 --> 00:04:29.726
+Security: only billing's job reads the agency's answers, and every read is logged.
+
+00:04:31.626 --> 00:04:37.322
+Reliability: every bill run has answers, the latest, or the last ones if new ones are late.
+
+00:04:39.222 --> 00:04:44.687
+Easy to change: when the agency changes its file, the exchange changes within a week.
+
+00:04:46.587 --> 00:04:49.760
+Speed hardly matters: the match runs once a month.
+
+00:04:53.460 --> 00:04:57.834
+Sipho draws two options, and tests both against the same three measures.
+
+00:04:59.134 --> 00:05:02.347
+The first does it all inside billing, as the vendor offered.
+
+00:05:03.647 --> 00:05:11.852
+But billing logs who changes a record, not who reads it. Every change waits for the vendor's next release. And it's ready in October.
+
+00:05:13.952 --> 00:05:19.653
+The second keeps the agency's answers on the data platform, as a data product of retail's.
+
+00:05:20.953 --> 00:05:28.679
+Before each bill run, billing asks through the integration platform for only what a bill needs: on the tariff, and from which date.
+
+00:05:30.579 --> 00:05:36.193
+The catalogue checks and logs every read, a change is a pull request, and it's ready in May.
+
+00:05:38.093 --> 00:05:44.920
+Its risk: billing now depends on the platform. So billing asks the day before each run, and keeps what it got.
+
+00:05:48.820 --> 00:05:53.112
+Sipho writes the decision down, in a record kept with the solution's code.
+
+00:05:54.412 --> 00:06:00.148
+Decided: the answers on the platform, the discount in billing. Considered: all of it in billing.
+
+00:06:01.848 --> 00:06:08.952
+Why: every read logged, a change in days, and ready by May. The consequence: billing asks the day before.
+
+00:06:10.852 --> 00:06:19.989
+Ama checks it against the principles: use what we have before we build, and customer information stays with the business that collected it. Both hold.
+
+00:06:21.889 --> 00:06:26.403
+Sipho, Ravi and the head of retail agree, and the record says accepted.
+
+00:06:28.103 --> 00:06:32.459
+A year on, whoever asks why billing doesn't do it all will find the answer here.
+
+00:06:36.359 --> 00:06:40.405
+Then Sipho counts the parts. Of ten, six already exist.
+
+00:06:41.705 --> 00:06:50.328
+Retail's customer accounts, a job from the platform's template, its connectors, the catalogue's masks and log, the gateway, and monitoring.
+
+00:06:52.228 --> 00:06:58.017
+Four are new: the match and its answers, a discount step in billing, the letter, and sending a file out.
+
+00:06:59.917 --> 00:07:07.844
+Every team will need to send files out. So Ravi builds that once, into the platform. The regulator's reports use it next.
+
+00:07:09.944 --> 00:07:14.345
+On the Tōkaidō, the stations were already there. Only the journey was new.
+
+00:07:18.245 --> 00:07:27.420
+Each team hears its part months ahead: the platform team, Yasmin's integration team, retail, for the letter and the call centre, and billing's vendor.
+
+00:07:29.320 --> 00:07:32.318
+The vendor puts the discount step in its April release.
+
+00:07:33.818 --> 00:07:38.350
+As a notice went ahead to every station, each team knows what's coming, and when.
+
+00:07:42.250 --> 00:07:46.441
+It's built by May, and tested with a sample from the agency in June.
+
+00:07:47.941 --> 00:07:54.247
+On the first of July, the first bills carry the discount, for about nine in ten eligible households.
+
+00:07:56.147 --> 00:08:02.756
+In September, the agency's answers come two days late. Billing uses August's, and the next bills catch up.
+
+00:08:04.656 --> 00:08:08.026
+The log shows one reader of the answers: billing's job.
+
+00:08:09.726 --> 00:08:13.208
+The head of retail checks the first bills, and closes the ticket.
+
+00:08:17.108 --> 00:08:19.535
+Here's the solution, on Tomás's map.
+
+00:08:20.835 --> 00:08:24.140
+Its new parts sit in the application layer, beside billing.
+
+00:08:25.640 --> 00:08:30.738
+Under them, the platform's services, reused, and one new one: sending a file out.
+
+00:08:32.638 --> 00:08:36.123
+A work package builds the new parts, by the first of July.
+
+00:08:37.823 --> 00:08:42.013
+And each quality is a requirement, realised by the parts that meet it.
+
+00:08:45.913 --> 00:08:53.656
+The stations served every traveller. Each lord's journey was his domain's own plan, sent ahead, station by station.
+
+00:08:55.356 --> 00:09:03.337
+On the data platform, each solution is planned end to end: its context, its qualities, its options, and why, written down.
+
+00:09:04.837 --> 00:09:09.243
+Most of what it needs is already there. What's new, every team hears ahead.
+
+00:09:10.943 --> 00:09:12.827
+Next: a road people choose.

@@ -1,0 +1,35 @@
+{
+  "kicker": "The platform as a product",
+  "kicker_es": "La plataforma como producto",
+  "title_es": "Un camino que la gente elige",
+  "h1": "A road people choose: the platform as the easiest way to do it right",
+  "h1_es": "Un camino que la gente elige: la forma más fácil de hacerlo bien",
+  "lead": "At the utility, a team waited six weeks for its first data product on the platform, and two teams gave up and built their own. Ravi Menon makes the platform a product teams choose: a path already laid from a template, the rules built in, a guide, and someone to ask.",
+  "lead_es": "En la empresa de energía, un equipo esperó seis semanas por su primer producto de datos en la plataforma, y dos se rindieron e hicieron lo suyo. Ravi Menon la hace un producto que los equipos eligen: un camino ya trazado, las reglas incluidas, una guía y alguien a quien preguntar.",
+  "description": "A film about the data platform as a product its users choose: a year ago network's team needed eleven tickets, each waiting its turn in the platform team's queue, wrote its pipeline from nothing and learned the catalogue's rules when its first pull request came back, six weeks before the call centre saw one planned outage, and two other teams gave up, field services with a database on its own server and metering with spreadsheets; nobody did anything wrong, the platform was the safe way but not yet the easy one, and an order would make teams use it, not want it; so Ravi Menon treats the platform as a product and the teams that build on it as its customers, his team sitting with each domain team to see what gets in its way; a path already laid, one form and minutes later a repository with all a data product needs, the team writing only its own logic, in a pull request the data team reviews, and free to leave the path where it needs something else; the rules built into the path, guardrails, not gates; a guide written from the questions teams asked, and an answer in the platform's channel the same day; metering's team on the path in March, its checked meter reads in the catalogue in two days; and what Ravi counts: eight of the eleven domain teams choosing the path, none told to, a first data product in two to four days, and nine in ten teams who would tell another to use it.",
+  "description_es": "Una película sobre la plataforma de datos como un producto que sus usuarios eligen: hace un año el equipo de la red necesitó once tickets, cada uno esperando su turno en la fila del equipo de plataforma, escribió su pipeline desde cero y aprendió las reglas del catálogo cuando le devolvieron su primer pull request, seis semanas antes de que el centro de llamadas viera un solo corte programado, y otros dos equipos se rindieron, servicios de campo con una base de datos en su propio servidor y medición con planillas; nadie hizo nada mal, la plataforma era el camino seguro pero todavía no el fácil, y una orden haría que los equipos la usen, no que la quieran; así que Ravi Menon trata la plataforma como un producto y a los equipos que construyen en ella como sus clientes, y su equipo se sienta con cada equipo de dominio para ver qué se lo impide; un camino ya trazado, un formulario y minutos después un repositorio con todo lo que un producto de datos necesita, el equipo escribiendo solo su propia lógica, en un pull request que revisa el equipo de datos, y libre de salirse del camino donde necesite otra cosa; las reglas dentro del camino, barandas, no portones; una guía escrita a partir de las preguntas de los equipos, y una respuesta en el canal de la plataforma el mismo día; el equipo de medición en el camino en marzo, sus lecturas de medidores revisadas en el catálogo en dos días; y lo que Ravi cuenta: ocho de los once equipos de dominio eligiendo el camino, sin que se lo ordenaran, un primer producto de datos en dos a cuatro días, y nueve de cada diez equipos que le dirían a otro que lo use.",
+  "card": "A platform teams choose: a path already laid, the rules built in, a guide, and someone to ask.",
+  "card_es": "Una plataforma que los equipos eligen: un camino ya trazado, las reglas incluidas, una guía y alguien a quien preguntar.",
+  "chapters_es": {
+    "ise": "Una vez en la vida",
+    "weeks": "Seis semanas",
+    "users": "Los equipos, como clientes",
+    "path": "Un camino ya trazado",
+    "rules": "Las reglas incluidas",
+    "guide": "Una guía, y alguien a quien preguntar",
+    "days": "Dos días",
+    "count": "Contados en la barca",
+    "practice": "La práctica de datos en el mapa",
+    "end": "El camino, elegido"
+  },
+  "next_h": "You've seen a platform teams choose. Next: built to change.",
+  "next_h_es": "Viste una plataforma que los equipos eligen. Sigue: hecha para cambiar.",
+  "past": [
+    "The pilgrimage to Ise, Japan, the 1700s",
+    "Villages paid in together and sent two or three by lot, priests from Ise lodged and guided them, and guidebooks listed every station, so ordinary people chose to go: in 1771, more than two million crossed the ferry into Ise."
+  ],
+  "past_es": [
+    "La peregrinación a Ise, Japón, siglo XVIII",
+    "Las aldeas aportaban entre todas y enviaban a dos o tres por sorteo, sacerdotes de Ise los alojaban y guiaban, y las guías de viaje listaban cada posta, así la gente común elegía ir: en 1771, más de dos millones cruzaron en barca hacia Ise."
+  ]
+}

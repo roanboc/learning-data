@@ -1,0 +1,25 @@
+{
+  "key": "security-all-the-way-through",
+  "title": "Security all the way through",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: how security runs through every layer of the data platform, every person and every job with an identity of its own and only the rights it needs, every request checked where the data is, no key in the code and a name on every line of the log, and why the platform makes the safe way the easy one.",
+  "howto": "Technology green is a platform, and blue a domain's data product or job. A gold tag is an owner in the business. A red line is a door that opens for anyone, or a key in the open; a green pass is an identity of its own, with only the rights it needs. Amber, a lantern's colour, is the road and the checkpoint.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["pass"],
+  "poster": ["pass", "every", 6.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bAma's\\b", "Ah-mah's"],
+    ["\\bAma\\b", "Ah-mah"],
+    ["\\bOwusu\\b", "Oh-woo-soo"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bEdo\\b", "Eh-doh"],
+    ["\\bTōkaidō\\b", "Toh-kai-doh"],
+    ["\\bshogunate\\b", "show-gun-ate"],
+    ["\\bHakone\\b", "Hah-koh-neh"],
+    ["\\bAshi\\b", "Ah-shee"]
+  ]
+}

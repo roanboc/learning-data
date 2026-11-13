@@ -1,0 +1,243 @@
+1
+00:00:01,400 --> 00:00:09,517
+Japón, a principios del siglo XVII. Acaba de terminar un siglo de guerra, pero los señores que la libraron aún gobiernan sus dominios.
+
+2
+00:00:11,017 --> 00:00:17,319
+Para que no vuelvan a alzarse, el shogunato retiene a sus esposas e hijos en Edo, como rehenes.
+
+3
+00:00:18,819 --> 00:00:25,966
+Así que en los caminos teme dos cosas: que la familia de un señor salga de Edo, y que entren armas para una revuelta.
+
+4
+00:00:27,666 --> 00:00:32,058
+Necesita ver quién sale de Edo, y detener a quien no tenga derecho a salir.
+
+5
+00:00:33,758 --> 00:00:40,394
+Hacia 1619 pone un puesto de control en el Tōkaidō, en las montañas de Hakone, junto al lago Ashi.
+
+6
+00:00:41,294 --> 00:00:44,878
+Todo viajero pasa por su puerta, entre el alba y el anochecer.
+
+7
+00:00:46,778 --> 00:00:51,368
+Al salir de Edo, una mujer muestra un salvoconducto escrito en el castillo de Edo.
+
+8
+00:00:52,268 --> 00:00:58,725
+Dice quién es, adónde va y por qué, y describe su cabello y cualquier marca en su cara, manos y pies.
+
+9
+00:01:00,625 --> 00:01:07,457
+Una examinadora la compara con él, y hasta le suelta el cabello. Si no coincide con su salvoconducto, no sigue adelante.
+
+10
+00:01:09,357 --> 00:01:15,179
+Nadie puede rodearlo: evitar un puesto de control por un sendero lateral es un delito, castigado con dureza.
+
+11
+00:01:16,679 --> 00:01:21,912
+Casi ningún hombre necesita salvoconducto. El puesto vigila más lo que teme el shogunato.
+
+12
+00:01:23,412 --> 00:01:29,265
+Así, quien sale de Edo por este camino es visto y revisado, y el camino sigue abierto para todos los demás.
+
+13
+00:01:30,365 --> 00:01:35,090
+El puesto de control dura unos 250 años, hasta 1869.
+
+14
+00:01:36,990 --> 00:01:41,056
+En la empresa de energía, una cuenta abre todas las puertas de la plataforma de datos.
+
+15
+00:01:41,956 --> 00:01:46,522
+Su clave está en un script que cualquiera puede copiar, y el registro no dice quién la usó.
+
+16
+00:01:48,022 --> 00:01:55,110
+Así que Ravi da a cada trabajo y a cada persona su propio salvoconducto, y cada solicitud se revisa donde están los datos.
+
+17
+00:02:02,210 --> 00:02:08,606
+En marzo, el regulador le hace una pregunta a la empresa: ¿quién leyó los datos bancarios de los clientes en febrero?
+
+18
+00:02:10,106 --> 00:02:14,589
+Ama Owusu, líder regulatoria, se lo pregunta al equipo de datos en un ticket.
+
+19
+00:02:15,889 --> 00:02:21,974
+El registro de la plataforma tiene una línea por cada lectura. Pero todas nombran la misma cuenta: data_loader.
+
+20
+00:02:23,874 --> 00:02:31,650
+Se creó el primer mes de la plataforma. Hoy 47 trabajos corren con ella, y cuatro personas entran con ella desde sus laptops.
+
+21
+00:02:33,350 --> 00:02:39,814
+Su clave está en un script del repositorio, sin fecha de vencimiento. Quien pueda leer el script puede usarla.
+
+22
+00:02:41,514 --> 00:02:44,887
+Y puede leer y cambiar todas las tablas, de todos los dominios.
+
+23
+00:02:46,387 --> 00:02:53,408
+Así que nadie puede decirle al regulador quién leyó los datos bancarios. Y quien haya copiado la clave aún podría leerlos hoy.
+
+24
+00:02:55,308 --> 00:03:00,935
+Nadie quiso hacer daño. Una cuenta nueva costaba un ticket y dos semanas, y data_loader funcionaba al instante.
+
+25
+00:03:02,435 --> 00:03:04,149
+El camino seguro era el camino lento.
+
+26
+00:03:07,849 --> 00:03:11,607
+Ravi empieza por la identidad: cada solicitud dice quién pregunta.
+
+27
+00:03:12,907 --> 00:03:18,949
+Cada persona entra como sí misma, por el inicio de sesión único de la empresa, con una segunda verificación en su teléfono.
+
+28
+00:03:20,849 --> 00:03:29,785
+Los 47 trabajos reciben cada uno su identidad. Cada ejecución, un salvoconducto de una hora: no hay clave que guardar ni copiar.
+
+29
+00:03:31,885 --> 00:03:38,177
+En Hakone, un salvoconducto describía a la única mujer para la que era. Una clave en un script sirve a quien la tenga.
+
+30
+00:03:42,077 --> 00:03:45,065
+Luego, cada identidad recibe solo los permisos que necesita.
+
+31
+00:03:46,365 --> 00:03:52,413
+La carga de facturación escribe sus tablas en bruto, y nada más. El tablero de cortes lee dos tablas.
+
+32
+00:03:54,513 --> 00:03:58,402
+Las personas reciben sus permisos por grupos, según su rol, nunca uno por uno.
+
+33
+00:04:00,302 --> 00:04:05,517
+Y los datos bancarios de los clientes pueden leerlos dos trabajos y el equipo de facturación. Nadie más.
+
+34
+00:04:07,417 --> 00:04:10,327
+El salvoconducto de una mujer nombraba un viaje, no todos los caminos.
+
+35
+00:04:14,227 --> 00:04:21,958
+Cada solicitud se revisa donde están los datos. Antes de leer una sola fila, el catálogo revisa quién pregunta y qué puede hacer.
+
+36
+00:04:23,858 --> 00:04:29,324
+Estar en la red de la empresa no prueba nada: una laptop en la oficina se revisa como cualquier otra.
+
+37
+00:04:31,024 --> 00:04:37,148
+Y no hay senderos laterales: nadie puede leer los archivos bajo las tablas sin pasar por el catálogo.
+
+38
+00:04:39,048 --> 00:04:44,970
+Los datos van cifrados donde se guardan y al moverse, y la plataforma lo configura una vez para todos los dominios.
+
+39
+00:04:46,670 --> 00:04:49,655
+Como en Hakone, nadie rodea el puesto de control.
+
+40
+00:04:53,355 --> 00:04:59,699
+Algunas claves deben quedarse: la contraseña de un viejo sistema de facturación, o la clave de un proveedor para su servicio.
+
+41
+00:05:01,399 --> 00:05:08,511
+Esas van al almacén de secretos de la plataforma. Un trabajo pide una por su nombre al correr, así que nunca se escribe en el código.
+
+42
+00:05:10,611 --> 00:05:14,087
+Y cada pull request se revisa en busca de claves antes de fusionarse.
+
+43
+00:05:15,787 --> 00:05:21,233
+La clave vieja se anula, y seis semanas después del ticket de Ama, data_loader se desactiva.
+
+44
+00:05:25,133 --> 00:05:30,713
+Ahora cada línea del registro de auditoría nombra a quien pidió: una persona o la identidad de un trabajo.
+
+45
+00:05:32,613 --> 00:05:35,554
+En junio, el regulador pregunta de nuevo, por mayo.
+
+46
+00:05:36,854 --> 00:05:42,872
+Esta vez la respuesta toma diez minutos: dos trabajos de facturación, y un analista de facturación que trabaja en un ticket.
+
+47
+00:05:44,972 --> 00:05:47,170
+Ama lo revisa y cierra su ticket.
+
+48
+00:05:51,070 --> 00:05:57,481
+¿Por qué es tarea de la plataforma? Si cada dominio decidiera, el camino rápido volvería a ganar, como ganó data_loader.
+
+49
+00:05:58,981 --> 00:06:01,715
+Así que la plataforma hace fácil el camino seguro.
+
+50
+00:06:02,615 --> 00:06:09,359
+Un trabajo nuevo parte de una plantilla, con su identidad, sus permisos, sus secretos y su registro desde el primer día.
+
+51
+00:06:11,659 --> 00:06:18,242
+Toma minutos, no un ticket y dos semanas. Desde junio, doce trabajos nuevos, y ni una cuenta prestada.
+
+52
+00:06:20,142 --> 00:06:24,633
+Cómo se hace cada cerradura, una a una, lo cuenta la serie Cerraduras antes que los datos.
+
+53
+00:06:28,333 --> 00:06:30,981
+Esta es la práctica de datos, en el mapa de Tomás.
+
+54
+00:06:32,281 --> 00:06:37,090
+En la capa de tecnología, la seguridad de la plataforma de datos son servicios propios.
+
+55
+00:06:37,990 --> 00:06:44,565
+El inicio de sesión por el proveedor de identidad, el acceso que revisa el catálogo, el almacén de secretos y el registro de auditoría.
+
+56
+00:06:46,665 --> 00:06:51,615
+Cada producto de datos, y cada trabajo que construye uno, usa los mismos servicios.
+
+57
+00:06:53,315 --> 00:06:58,720
+Y la regla es un principio: cada solicitud dice quién pregunta, y se revisa donde están los datos.
+
+58
+00:07:02,420 --> 00:07:10,060
+El puesto de Hakone no cerró el camino. Miraba con más cuidado a los pocos que el shogunato temía, y dejaba seguir a los demás.
+
+59
+00:07:11,760 --> 00:07:17,648
+En la plataforma de datos, cada solicitud se revisa donde están los datos, por nombre, solo para lo que necesita.
+
+60
+00:07:18,748 --> 00:07:21,757
+Cada dominio recibe eso de la plataforma, por defecto.
+
+61
+00:07:23,457 --> 00:07:25,578
+Sigue: una solución, de principio a fin.

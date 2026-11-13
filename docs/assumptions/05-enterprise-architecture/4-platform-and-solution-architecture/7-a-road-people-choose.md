@@ -1,6 +1,6 @@
 # A road people choose: questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, film 7 of 8 · PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*Enterprise architecture* · *Platform and solution architecture*, film 7 of 8 · PR #394 · [pull request](https://github.com/roanboc/learning-data/pull/394)
 
 [Watch it on the site](https://data.learn-all.org/platform-and-solution-architecture/a-road-people-choose/)
 

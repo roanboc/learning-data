@@ -184,14 +184,15 @@ window.LD_ROUTE = {
      "title": "AI and continuous architecture",
      "href": "ai-and-continuous-architecture/",
      "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Series · 4 of 6 films",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Series · 5 of 6 films",
+     "len": "39 min",
+     "min": 39.0,
      "films": [
       "ld-agents-on-the-map",
       "ld-the-ai-platform",
       "ld-what-an-agent-may-read",
-      "ld-a-first-draft-not-a-blank-page"
+      "ld-a-first-draft-not-a-blank-page",
+      "ld-every-change-checked"
      ]
     }
    ]

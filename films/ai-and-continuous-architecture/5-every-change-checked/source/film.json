@@ -1,0 +1,22 @@
+{
+  "key": "every-change-checked",
+  "title": "Every change, checked",
+  "sub": "AI and continuous architecture: every element on the map carries its owner and its source, so the map is tested on every change, each rule with a case that must fail; the map agent's walk of a change is tested on one whose answer is known, then walks a new one down to the tables, checked against what is really running, and the owners decide.",
+  "howto": "Clay and daylight are Babylon, over 2,600 years ago: its river wall of baked brick, and the king's name and the brick's work stamped on its edge. In the present, a teal orb is the map agent. The map is glass in its layers' colours, each element with its owner's gold tag and its source. A check that passes ticks green; one that fails is marked red. Blue is the network and rose is retail, with the wall between them; gold marks owners and the business side, cyan the technical side.",
+  "src": [
+    "../../../shared/src/aca.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["brick", "reads", 3.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bInés\\b", "Ee-ness"],
+    ["\\bNabopolassar's\\b", "Nabbo-poe-lassar's"],
+    ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
+    ["\\bMarduk\\b", "Mar-dook"],
+    ["\\bArahtu\\b", "Ah-rakh-too"],
+    ["\\bID\\b", "I D"]
+  ]
+}

@@ -1,0 +1,231 @@
+1
+00:00:01,400 --> 00:00:10,814
+Babylon, over 2,600 years ago. Along the river, King Nabopolassar's workmen were building a wall of baked brick, to keep its water out.
+
+2
+00:00:12,514 --> 00:00:18,169
+A wall like that was never done: king after king repaired it, on the same line, for centuries.
+
+3
+00:00:19,869 --> 00:00:24,830
+Once a brick was laid among millions, nobody could tell who had made it, or what it was for.
+
+4
+00:00:26,630 --> 00:00:32,288
+And a king feared his work would be forgotten, or his words removed by a king who came after him.
+
+5
+00:00:34,088 --> 00:00:37,689
+Every stretch of wall needed to say who had built it, and what for.
+
+6
+00:00:39,689 --> 00:00:46,134
+So on the edges of his baked bricks, his workmen stamped or wrote the king's name, and the work the brick was for.
+
+7
+00:00:47,834 --> 00:00:56,209
+One reads: "Nabopolassar, king of Babylon, … the one who built the embankment of the Arahtu River for the god Marduk, his lord."
+
+8
+00:00:58,409 --> 00:01:06,086
+About two and a half thousand years later, archaeologists dug out the river wall, and its bricks still said which king built each stretch.
+
+9
+00:01:07,786 --> 00:01:12,803
+In one stretch alone, they mapped sixteen of Nabopolassar's bricks, still in place.
+
+10
+00:01:14,803 --> 00:01:19,797
+At the utility today, every element on the map says who owns it and where it came from.
+
+11
+00:01:21,197 --> 00:01:26,011
+So every change can be checked, and walked through what it touches, before anyone builds.
+
+12
+00:01:33,611 --> 00:01:40,732
+Tomás's map changes every day now: 140 changes last month, each confirmed by its owner.
+
+13
+00:01:42,532 --> 00:01:49,772
+Planned work is when the network's crews switch a street off, to mend or replace its lines. Households get a letter first.
+
+14
+00:01:51,572 --> 00:01:56,341
+Last year, planned work moved to a new table, and the letters kept reading the old one.
+
+15
+00:01:58,141 --> 00:02:04,852
+For three weeks, 1,900 households got the wrong date. On the real day, their power went off without warning.
+
+16
+00:02:06,752 --> 00:02:10,977
+Nobody had done anything wrong. Nobody could see what read the old table.
+
+17
+00:02:12,777 --> 00:02:19,048
+Now the head of retail asks, in a ticket, for a text to each household two days before planned work.
+
+18
+00:02:20,748 --> 00:02:25,607
+Before anyone builds it, Tomás needs to know what it touches, and who must agree.
+
+19
+00:02:29,007 --> 00:02:37,096
+Like a stamped brick, every element says who owns it and where it came from. So the map can be tested, as code is, on every change.
+
+20
+00:02:38,796 --> 00:02:45,255
+Every element has an owner and a source. Every capability is realised by a process or a system.
+
+21
+00:02:47,055 --> 00:02:53,579
+Every data object stands for a business object. No element is left unlinked, and none is there twice.
+
+22
+00:02:55,379 --> 00:02:58,444
+And every rule has a home, and a case that must fail.
+
+23
+00:03:00,244 --> 00:03:07,476
+A check that has never failed may be checking nothing. So each rule's check is shown a change that breaks it, and must stop it.
+
+24
+00:03:09,576 --> 00:03:14,778
+Sending the network's list of homes with solar panels to retail must fail. It does.
+
+25
+00:03:16,578 --> 00:03:22,510
+In software, checks like these are called fitness functions: tests that the architecture still holds.
+
+26
+00:03:24,210 --> 00:03:28,749
+A change that fails one waits, until it's fixed, or its owner says why.
+
+27
+00:03:31,849 --> 00:03:39,261
+Walking a change through every layer took Tomás a day, for the social tariff. The map agent can draft a walk in minutes.
+
+28
+00:03:40,961 --> 00:03:46,044
+But before anyone relies on its walks, it's tested on a change whose answer is known.
+
+29
+00:03:47,744 --> 00:03:52,017
+The social tariff touched fourteen elements, and five owners had to agree.
+
+30
+00:03:53,817 --> 00:04:00,569
+The first time, the agent finds thirteen. It misses the secure exchange that carries the agency's answers.
+
+31
+00:04:02,469 --> 00:04:08,545
+On the map, nothing linked the agreement to it. Tomás knew it from his walk, but nobody had drawn the line.
+
+32
+00:04:10,345 --> 00:04:17,697
+The gap was the map's. So the line is drawn, and a check added: every agreement with a partner says how its data travels.
+
+33
+00:04:19,497 --> 00:04:27,625
+Run again, it finds all fourteen, and the five owners. The test runs again whenever its model or its instructions change.
+
+34
+00:04:30,925 --> 00:04:35,753
+Now the new change. The agent walks it down the map, from the ticket to the tables.
+
+35
+00:04:37,453 --> 00:04:41,604
+Planned work is the network's: Grace's teams plan it, street by street.
+
+36
+00:04:43,204 --> 00:04:47,401
+Phone numbers are retail's: each retailer holds its own customers'.
+
+37
+00:04:49,001 --> 00:04:57,451
+So the network tells every retailer, on the same terms, which homes lose power and when, and each retailer texts its own customers.
+
+38
+00:04:59,251 --> 00:05:05,779
+Down to the tables: the planned work, the supply points it cuts off, and each retailer's customer contacts.
+
+39
+00:05:07,579 --> 00:05:14,649
+One element is new: a texting service, with no owner yet. The checks stop there, until the head of retail takes it.
+
+40
+00:05:16,449 --> 00:05:23,444
+It lists who must agree: Grace, the head of retail, Ama for the rule at the wall, and Inés for the data between them.
+
+41
+00:05:25,344 --> 00:05:28,913
+Each with its ID and its evidence, so a person can check it.
+
+42
+00:05:32,013 --> 00:05:37,549
+The map and the code say how things are meant to run. Only the running estate shows how they do.
+
+43
+00:05:39,449 --> 00:05:45,230
+So the walk is checked against the estate itself: what reads each table, and what runs each night.
+
+44
+00:05:46,830 --> 00:05:52,613
+The agent reads there as it reads the map: read-only, with personal and sensitive data masked.
+
+45
+00:05:54,213 --> 00:06:00,497
+It finds a reader the map doesn't show: the contact centre's software keeps its own copy of phone numbers.
+
+46
+00:06:02,297 --> 00:06:08,207
+When a household calls with a new number, the copy changes. The customer system never hears of it.
+
+47
+00:06:10,007 --> 00:06:15,796
+The data team counts the difference: one number in eleven. The texts would have gone to old numbers.
+
+48
+00:06:17,896 --> 00:06:24,970
+The head of retail decides: the customer system is the source, and the contact centre's changes go back to it first.
+
+49
+00:06:27,070 --> 00:06:29,323
+And the copy goes on the map, with an owner.
+
+50
+00:06:32,423 --> 00:06:37,306
+In Babylon, the river wall said, brick by brick, who had built each stretch, and what for.
+
+51
+00:06:39,006 --> 00:06:46,186
+When Nabopolassar found an older king's inscription in a wall, in his own words, he did not change its location.
+
+52
+00:06:47,786 --> 00:06:51,239
+And he asked the kings after him to keep his words with theirs.
+
+53
+00:06:52,839 --> 00:07:00,291
+At the utility, every element carries its owner and its source, so every change is checked, and walked, before anyone builds.
+
+54
+00:07:01,691 --> 00:07:08,588
+In April, the first texts go out: 3,400 households, each two days before the crews reach its street.
+
+55
+00:07:10,188 --> 00:07:12,291
+Every one has the date the crews have.
+
+56
+00:07:17,991 --> 00:07:24,148
+Give every element an owner and a source, and test the map on every change, with a case that must fail.
+
+57
+00:07:25,548 --> 00:07:31,617
+Walk each change through all it touches, check it against what's really running, and let the owners decide.
+
+58
+00:07:33,517 --> 00:07:34,893
+Next: kept alive.

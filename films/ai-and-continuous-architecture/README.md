@@ -15,6 +15,7 @@ Agents and AI services on the map, AI in the architecture practice, and architec
 | [The AI platform](https://data.learn-all.org/ai-and-continuous-architecture/the-ai-platform/) | The platform under the agents | 8 min | 11 | 3 questions | [script](2-the-ai-platform/script.md) · [source](2-the-ai-platform/source/README.md) |
 | [What an agent may read](https://data.learn-all.org/ai-and-continuous-architecture/what-an-agent-may-read/) | The context an agent reads | 7½ min | 9 | 3 questions | [script](3-what-an-agent-may-read/script.md) · [source](3-what-an-agent-may-read/source/README.md) |
 | [A first draft, not a blank page](https://data.learn-all.org/ai-and-continuous-architecture/a-first-draft-not-a-blank-page/) | An agent's first draft | 7½ min | 8 | 3 questions | [script](4-a-first-draft-not-a-blank-page/script.md) · [source](4-a-first-draft-not-a-blank-page/source/README.md) |
+| [Every change, checked](https://data.learn-all.org/ai-and-continuous-architecture/every-change-checked/) | The map, tested on every change | 7½ min | 8 | 3 questions | [script](5-every-change-checked/script.md) · [source](5-every-change-checked/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

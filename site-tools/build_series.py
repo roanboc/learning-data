@@ -141,6 +141,7 @@ SERIES = [
     dict(id="ai-and-continuous-architecture", dir="ai-and-continuous-architecture", slug="ai-and-continuous-architecture",
          name={"en": "AI and continuous architecture", "es": "IA y arquitectura continua"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
+         learn=dict(dir="ai-and-continuous-architecture", bundle="every-change-checked"),
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, named only to identify those frameworks. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, nombradas solo para identificar esos marcos. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",

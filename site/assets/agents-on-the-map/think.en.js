@@ -5,13 +5,13 @@
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  role:{q:"The chat does billing officers' work for households. Why isn't it given a billing officer's role on the map?",
+  role:{stop:"far",q:"The chat does billing officers' work for households. Why isn't it given a billing officer's role on the map?",
     opts:[{t:"It may share the officers' role, as long as its vendor switches off the rights it doesn't need.",near:true},{t:"In an officer's role it would hold all an officer's rights, and no one could tell its work from theirs.",ok:true},{t:"A role is for people: an agent is drawn as an application, so on the map it has no role at all."}],
     why:"An agent is software assigned to a role of its own, never a person's. In a billing officer's role, it would hold every right the role gives, and its work would look like an officer's, so nobody could tell who agreed a plan, or stop the agent alone. Fewer rights in a shared role still mixes its work with people's. Which agent in your organisation works under a person's role, or a person's sign-in?"},
-  far:{q:"A household asks the chat for more time to pay. Why may the agent only draft the request, and not agree a plan?",
+  far:{stop:"far",q:"A household asks the chat for more time to pay. Why may the agent only draft the request, and not agree a plan?",
     opts:[{t:"The bills are in billing's system, and the chat's identity isn't allowed to read any of them."},{t:"Every new agent starts at draft, whatever the task, and earns more only once it has proved itself.",near:true},{t:"Agreeing a plan is an officer's decision under the hardship rules: the agent writes, and the officer decides.",ok:true}],
     why:"How far an agent may go is set for each task, by the owner of the process it belongs to: answering a question about a bill, it runs alone; taking a request for more time, it drafts; agreeing the plan, it does nothing, because that decision is an officer's, under the regulator's rules. How an agent earns more is a separate path, and it doesn't change who decides. In one process you know, which task would you let an agent run alone, and which would it only draft?"},
-  answers:{q:"When the chat agent gets something wrong, why does the head of retail answer for it?",
+  answers:{stop:"far",q:"When the chat agent gets something wrong, why does the head of retail answer for it?",
     opts:[{t:"They own the process and set the agent's tasks, as they answer for anyone else in that team.",ok:true},{t:"Tomás put it on the map, with its role and identity, so the head of retail answers only when he's away.",near:true},{t:"They approved each plan the agent agreed, so its mistakes were theirs from the start."}],
     why:"The vendor answers to the utility, under its contract; Tomás draws the map. The person who owns the process, and set how far the agent may go on each of its tasks, answers for the agent's work, as for anyone in the team. The agent itself never approves anything: approving is a person's job. For each agent in your organisation, could you name the person who answers for it?"}
   }}};

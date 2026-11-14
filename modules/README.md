@@ -257,6 +257,8 @@ Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-archit
 - [A first draft, not a blank page](../films/ai-and-continuous-architecture/4-a-first-draft-not-a-blank-page/) — `a-first-draft-not-a-blank-page`
 - [Every change, checked](../films/ai-and-continuous-architecture/5-every-change-checked/) — `every-change-checked`
 
+Labs and assessments: [site/assets/ai-and-continuous-architecture/learn.en.js](../site/assets/ai-and-continuous-architecture/learn.en.js), [site/assets/ai-and-continuous-architecture/learn.es.js](../site/assets/ai-and-continuous-architecture/learn.es.js)
+
 ## Master and reference data
 
 Module: `master-data` · [metadata](master-data/module.json)

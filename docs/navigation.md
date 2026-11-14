@@ -18,6 +18,7 @@ How the Topics page and the home page show the topics, and where to change it.
 | 11 November 2026 | Both views follow the visitor's theme, and are checked in dark mode first: many visitors prefer it. |
 | 12 November 2026 | A guided tour explains the site's controls, on the site itself and not in a film: a film of the interface dates every time the interface changes. A "?" in the header opens it on any page, in the More menu on a phone. It never opens by itself. |
 | 12 November 2026 | The tour shows only the steps for what the page in front of the visitor has: the player and Pause and think on a film's page, goals and stations on the route, the search on the list. Each step rings the real control. |
+| 14 November 2026 | The example dbt project is shown on the route (the author). A topic with films that show its files carries the project's icon, readable on a closed station: on the map, a badge on the station's ring, so its name doesn't widen; on the rail and in the list, by its name. The topic opens on a box that links to GitHub and to the project's own page, `dbt-project/`, which says what the project is, how to run it on a laptop or on Databricks, where its main folders are, and, for every film that shows it, which files each chapter shows. A film shows the project when its `site.json` has `repo`, so the marks and the page follow the films by themselves. |
 
 ## Where it lives
 
@@ -25,6 +26,7 @@ How the Topics page and the home page show the topics, and where to change it.
 - **`site-tools/build_series.py`** reads it and makes `site/assets/learn/route.en.js` and `route.es.js` (the route's data, one value a line), the Topics page, and the card and the two buttons on the home pages. It stops if a topic isn't in one group, or a goal's stop isn't a film or series on the site.
 - **`site/assets/learn/route.js`** draws the route in any `[data-route]` box: a map from 880 px, and below that a list with a rail, with no sideways panning. **`topics.js`** switches the Topics page's views, fills each row's ring and runs the search. **`route.css`** styles both; only these pages load it.
 - **The guided tour** is `site/assets/learn/tour.js`, with its words in `tour.en.js` and `tour.es.js` and its styles in `tour.css`. The header's "?" (`external_nav()` and `TOUR_JS` in `build_series.py`) loads them only when someone asks. A step is a title, a text and the part of the page it is about (`sel`); a step whose part isn't on the page, or isn't visible, is left out. To explain a new control, add a step to both files, in the same place.
+- **The example dbt project's** page and marks come from `project_page()`, `project_films()` and `PROJECT_PARTS` in `build_series.py` (the folders the page lists); `route.js` draws the icon and the box from `D.project` and each topic's `proj`, its count of films.
 - **Progress** comes from the keys the films already write (`<prefix>:watched`), in the visitor's browser only.
 
 ## Changing it

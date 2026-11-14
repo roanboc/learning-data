@@ -1,148 +1,196 @@
 WEBVTT
 
-00:00:01.400 --> 00:00:03.044
-Un toque se volvió una decisión.
+00:00:01.400 --> 00:00:08.033
+La introducción mostró lo básico: cómo una plataforma de datos lleva los datos de un toque en el teléfono a una decisión.
 
-00:00:03.744 --> 00:00:07.600
-Se abrió una clase nueva, y 140 estudiantes más tuvieron cupo.
+00:00:08.733 --> 00:00:09.885
+Esa parte importa.
 
-00:00:08.300 --> 00:00:09.866
-La plataforma cumplió.
+00:00:10.985 --> 00:00:15.033
+Pero una plataforma sola no hace que los datos sirvan a una organización.
 
-00:00:11.166 --> 00:00:16.765
-¿Por qué, una semana después, dos oficinas llevan dos cifras de la misma clase a la misma reunión?
+00:00:16.333 --> 00:00:23.165
+Alguien tiene que saber cómo funciona la organización, qué significa cada palabra, quién decide y quién puede ver qué.
 
-00:00:24.865 --> 00:00:26.927
-Empieza con una palabra: inscrito.
+00:00:31.065 --> 00:00:35.451
+Muchos cursos y buena parte de la documentación dan solo la mitad de eso.
 
-00:00:27.627 --> 00:00:32.287
-En una oficina, con un sistema, significa una cosa. Nadie pregunta.
+00:00:36.151 --> 00:00:40.523
+Algunos son muy técnicos, sin negocio ni gobernanza alrededor del código.
 
-00:00:33.387 --> 00:00:34.987
-Luego la universidad crece.
+00:00:41.223 --> 00:00:44.805
+Otros son neutrales, y nunca dicen qué hacer ni con qué herramienta.
 
-00:00:35.687 --> 00:00:38.532
-El sistema de estudiantes cuenta a quien se inscribió.
+00:00:45.505 --> 00:00:48.561
+Así que unes las mitades tú, en el trabajo, bajo presión.
 
-00:00:39.232 --> 00:00:42.705
-La plataforma de aprendizaje cuenta a quien puede abrir el curso.
+00:00:49.661 --> 00:00:56.024
+Así un modelo pasa todas las pruebas y responde la pregunta equivocada, o una política nunca llega al código.
 
-00:00:43.405 --> 00:00:45.490
-Finanzas cuenta a quien ya pagó.
+00:00:57.724 --> 00:01:05.416
+El autor de este portal ha trabajado en aplicaciones, datos y arquitectura empresarial por más de dieciséis años.
 
-00:00:46.190 --> 00:00:49.091
-Tres sistemas, tres significados, todos correctos.
+00:01:06.116 --> 00:01:09.438
+Las piezas se juntaron despacio, un proyecto a la vez.
 
-00:00:50.591 --> 00:00:53.193
-La plataforma mueve los tres, sin una falla.
+00:01:10.538 --> 00:01:14.418
+Nadie que trabaje con datos debería necesitar dieciséis años para unirlas.
 
-00:00:54.493 --> 00:00:55.773
-Suma más equipos.
+00:01:15.718 --> 00:01:18.443
+Por eso las lecciones clave están aquí, en un solo lugar.
 
-00:00:56.473 --> 00:00:59.641
-Suma un agente de IA que responde con los mismos datos.
+00:01:19.143 --> 00:01:25.221
+Esto es Learning Data: el contexto y la práctica, desde cómo funciona la organización hasta el código.
 
-00:01:00.341 --> 00:01:04.983
-Lo que la palabra signifique ahora se repite en todas partes, a la vez, y con seguridad.
+00:01:26.521 --> 00:01:30.861
+Unir las dos es lo que este portal llama arquitectura empresarial de datos.
 
-00:01:06.483 --> 00:01:08.506
-La plataforma nunca fue el problema.
+00:01:34.961 --> 00:01:40.747
+El portal está armado como una ruta de estaciones, como una línea de tren, en un orden con sentido.
 
-00:01:09.806 --> 00:01:15.385
-Lo que cambia la respuesta es cómo trabaja la organización, qué se definió, y quién decidió.
+00:01:42.047 --> 00:01:43.676
+Empieza por los fundamentos.
 
-00:01:19.685 --> 00:01:22.141
-¿Dónde empezar? No en la plataforma.
+00:01:44.776 --> 00:01:49.784
+Se habla mucho de herramientas, y mucho menos de los fundamentos que las sostienen.
 
-00:01:22.841 --> 00:01:23.899
-Esta es la ruta.
+00:01:51.284 --> 00:01:53.394
+Primero, la arquitectura empresarial.
 
-00:01:24.999 --> 00:01:28.361
-Arquitectura empresarial: ¿cómo trabaja esta organización?
+00:01:54.494 --> 00:02:00.651
+Describe cómo funciona un negocio: qué hace, qué necesita, qué sistemas lo sirven y cómo se conectan.
 
-00:01:29.061 --> 00:01:31.091
-Gobernanza de datos: ¿quién decide?
+00:02:01.951 --> 00:02:05.484
+En la experiencia del autor, rara vez se enseña en contexto.
 
-00:01:31.791 --> 00:01:33.482
-Esos dos son los fundamentos.
+00:02:06.184 --> 00:02:10.649
+Por eso cuesta describir un negocio, y entender aquel en el que uno trabaja.
 
-00:01:34.782 --> 00:01:35.722
-Y construyes.
+00:02:12.149 --> 00:02:16.706
+Luego, la gobernanza de datos: quién decide qué significan y quién puede usarlos.
 
-00:01:36.422 --> 00:01:38.792
-Modelado de datos: ¿qué significa cada palabra?
+00:02:17.406 --> 00:02:21.092
+Por años se vio a menudo como un trabajo lento que pocos querían hacer.
 
-00:01:39.492 --> 00:01:43.553
-Lo básico de los datos modernos: ¿cómo se mueven, corren y se sirven hoy?
+00:02:22.192 --> 00:02:24.925
+A menudo, los fundamentos de la empresa eran débiles.
 
-00:01:44.253 --> 00:01:47.319
-Ingeniería analítica: ¿cómo se construye y se prueba?
+00:02:26.025 --> 00:02:31.534
+O la tecnología no estaba lista para dar gobernanza como servicio, dentro del trabajo diario.
 
-00:01:48.019 --> 00:01:50.417
-Calidad de datos: ¿correctos y a tiempo?
+00:02:32.634 --> 00:02:34.303
+Así quedó en políticas.
 
-00:01:51.517 --> 00:01:54.011
-Dos rutas laterales salen tras los fundamentos.
+00:02:35.603 --> 00:02:40.992
+Este portal muestra la forma nueva: gobernanza dentro del trabajo, del glosario al código.
 
-00:01:54.711 --> 00:01:56.608
-Una trata de compartir y proteger.
+00:02:45.092 --> 00:02:48.254
+Luego, la línea principal: construir los datos y cuidarlos.
 
-00:01:57.308 --> 00:02:00.977
-Datos maestros y de referencia: ¿es el mismo estudiante en todas partes?
+00:02:48.954 --> 00:02:52.658
+Sus estaciones profundizan en cada capa que mostró la introducción.
 
-00:02:01.677 --> 00:02:05.596
-Protección de datos y privacidad: ¿quién puede verlo, y por cuánto tiempo?
+00:02:53.958 --> 00:02:57.129
+Dos ramales salen de ella, y vuelven a unirse más adelante.
 
-00:02:06.296 --> 00:02:09.523
-La otra trata de agentes: ¿qué puede hacer un agente con ello?
+00:02:57.829 --> 00:02:59.665
+Uno comparte y protege los datos.
 
-00:02:10.623 --> 00:02:12.119
-Todas se juntan al final.
+00:03:00.365 --> 00:03:03.579
+El otro pone agentes de IA a trabajar con datos, con seguridad.
 
-00:02:12.819 --> 00:02:15.858
-Gestión de datos: ¿cómo encaja todo en un plan?
+00:03:04.679 --> 00:03:08.664
+La ruta termina en el panorama completo: un plan para la gestión de datos.
 
-00:02:16.558 --> 00:02:20.501
-Y al final, liderar equipos de datos: ¿quién lidera a quienes hacen el trabajo?
+00:03:09.364 --> 00:03:14.025
+Y liderar equipos de datos, para quien lidera un equipo, y para quien es liderado.
 
-00:02:24.601 --> 00:02:26.489
-Este terreno ya tiene mapas.
+00:03:18.125 --> 00:03:26.914
+En la línea principal, los videos muestran un proyecto real: un proyecto de dbt en GitHub, que corre en tu máquina y en Databricks.
 
-00:02:27.189 --> 00:02:31.025
-El mapa más conocido es la rueda de DAMA, con la gobernanza en el centro.
+00:03:27.614 --> 00:03:30.902
+Lo que los videos muestran en pantalla es código que puedes abrir y correr.
 
-00:02:32.325 --> 00:02:33.636
-Cualquier buen mapa sirve.
+00:03:32.002 --> 00:03:34.092
+Y tiene más que modelos y pruebas.
 
-00:02:34.336 --> 00:02:37.263
-Este es una ruta, porque por algún lado hay que empezar.
+00:03:34.792 --> 00:03:38.102
+Junto al código están las carpetas que la mayoría de los proyectos omite.
 
-00:02:41.163 --> 00:02:44.048
-Cada parada tiene películas cortas. Mira una.
+00:03:38.802 --> 00:03:46.091
+El glosario del negocio, los dueños, el mapa de arquitectura, los productos de datos y sus contratos, y las decisiones detrás.
 
-00:02:45.348 --> 00:02:47.115
-Deja que se detenga y te pregunte.
+00:03:47.391 --> 00:03:53.146
+Esos son los metadatos de negocio y gobernanza, en el mismo lugar que el código que describen.
 
-00:02:48.215 --> 00:02:49.706
-Desármala en un lab.
+00:03:54.646 --> 00:03:56.479
+Se discute mucho sobre herramientas.
 
-00:02:50.806 --> 00:02:52.896
-Decide tú en una situación real.
+00:03:57.179 --> 00:04:04.501
+Aquí, dbt y Databricks muestran las ideas en una solución real, pero serviría cualquier herramienta con las mismas capacidades.
 
-00:02:53.996 --> 00:02:56.444
+00:04:05.601 --> 00:04:08.237
+Lo que importa es usar bien esas capacidades.
+
+00:04:12.337 --> 00:04:14.155
+Este terreno ya se ha mapeado antes.
+
+00:04:14.855 --> 00:04:18.250
+La rueda de DAMA es la más conocida, y este portal la cubre.
+
+00:04:19.350 --> 00:04:25.527
+También va más allá: arquitectura empresarial, agentes de IA en el trabajo con datos y liderazgo.
+
+00:04:26.227 --> 00:04:29.812
+Suma otros marcos que probaron su valor en esos años.
+
+00:04:30.912 --> 00:04:32.605
+Hay muchos paradigmas de datos.
+
+00:04:33.305 --> 00:04:38.312
+Muchos los hizo gente de datos, para datos, y miran poco a la empresa que los rodea.
+
+00:04:39.612 --> 00:04:42.216
+Por eso este portal parte de la empresa.
+
+00:04:42.916 --> 00:04:49.816
+Arquitectura empresarial de datos es justo eso: datos diseñados como parte de la organización a la que sirven.
+
+00:04:53.916 --> 00:04:56.992
+Cada estación es algo que hacer, no solo que mirar.
+
+00:04:58.292 --> 00:05:01.979
+En un video, una pregunta detiene la imagen y te pregunta qué harías.
+
+00:05:03.279 --> 00:05:08.166
+Las respuestas se parecen: una casi acierta, y el video ya te dijo por qué no.
+
+00:05:09.866 --> 00:05:12.843
+En un laboratorio, desarmas una idea con tus propias manos.
+
+00:05:14.143 --> 00:05:18.514
+Inscribe a un estudiante, y mira el evento llegar a la plataforma, en segundos.
+
+00:05:20.214 --> 00:05:26.556
+En un escenario, decides en una situación real, ordenas los pasos, o clasificas qué va dónde.
+
+00:05:28.056 --> 00:05:29.588
+Cada respuesta te dice por qué.
+
+00:05:30.888 --> 00:05:33.336
 Elige una meta, y la ruta ilumina tus paradas.
 
-00:02:57.944 --> 00:03:00.908
-O busca una palabra, y halla la película que la dice.
+00:05:34.636 --> 00:05:37.373
+Busca una palabra, y encuentra el video que la dice.
 
-00:03:02.208 --> 00:03:04.770
-Lo que hiciste se queda contigo, en tu navegador.
+00:05:38.673 --> 00:05:40.648
+Tu avance se queda en tu propio navegador.
 
-00:03:08.670 --> 00:03:09.979
-Las plataformas maduraron.
+00:05:44.948 --> 00:05:46.257
+Las plataformas han madurado.
 
-00:03:10.679 --> 00:03:12.581
-Lo difícil es todo lo demás.
+00:05:46.957 --> 00:05:52.634
+Lo difícil es todo lo demás: la organización, el significado, las decisiones y las personas.
 
-00:03:13.881 --> 00:03:14.704
+00:05:54.134 --> 00:05:54.957
 Empieza ahí.

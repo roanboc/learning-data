@@ -3,15 +3,15 @@
   "files": [
     {
       "path": "site/assets/more-than-a-platform/soundtrack.es.mp3",
-      "size": 2843106,
-      "sha256": "ea8aceff79bcc71f4e2353f7735d869f89f8b2b820c4785ef9aa07a8ea865b3d",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-more-than-a-platform-df8c3cbc5ebd8dfde8b9/ea8aceff79bcc71f4e2353f7735d869f89f8b2b820c4785ef9aa07a8ea865b3d.mp3"
+      "size": 5086397,
+      "sha256": "2fb8c8710caaec17a9c399cea242a25f2645cd9be1af49be9720eb3fa4421353",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-more-than-a-platform-c44500a008f727c889ba/2fb8c8710caaec17a9c399cea242a25f2645cd9be1af49be9720eb3fa4421353.mp3"
     },
     {
       "path": "site/assets/more-than-a-platform/soundtrack.mp3",
-      "size": 2843106,
-      "sha256": "f2488349441ba56904d4b57cc1a1e657903be166372356151c2142c1bfa8db2f",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-more-than-a-platform-df8c3cbc5ebd8dfde8b9/f2488349441ba56904d4b57cc1a1e657903be166372356151c2142c1bfa8db2f.mp3"
+      "size": 5086397,
+      "sha256": "080e3c79eaeccea9c47be909beafbf809479392af78d1dabc002e3859ec356ba",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-more-than-a-platform-c44500a008f727c889ba/080e3c79eaeccea9c47be909beafbf809479392af78d1dabc002e3859ec356ba.mp3"
     }
   ]
 }

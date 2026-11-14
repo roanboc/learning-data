@@ -1,65 +1,85 @@
-// More than a platform, the film that follows The Inner Life of Data. One line per id; the film re-times itself to the voice.
-// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers in words). The few longer stops are in breath.js.
+// More than a platform: the portal, why it exists, its route of stations, its example project, and what you can do on it. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. The few longer stops are in breath.js.
 const NARR={
-"worked":{"name":"It worked","lead":1.4,"tail":1.0,"vo":[
- {"id":"tap","gap":0.8,"text":"One tap became a decision."},
- {"id":"seat","gap":0.8,"text":"A new class opened, and 140 more students got a seat.","say":"A new class opened, and a hundred and forty more students got a seat."},
- {"id":"job","gap":0.8,"text":"The platform did its job."},
- {"id":"why","gap":0.8,"text":"So why, a week later, do two offices bring two numbers for the same class to the same meeting?"}
+"beyond":{"name":"Beyond the platform","lead":1.4,"tail":1.0,"vo":[
+ {"id": "basics", "gap": 0.8, "text": "The introduction showed the basics: how a data platform carries data from a tap on a phone to a decision."},
+ {"id": "matters", "gap": 0.8, "text": "That part matters."},
+ {"id": "alone", "gap": 0.8, "text": "But a platform alone doesn't make data useful to an organisation."},
+ {"id": "still", "gap": 0.8, "text": "Someone still has to know how the organisation works, what each word means, who decides, and who may see what."}
 ]},
-"word":{"name":"One word","lead":1.2,"tail":1.0,"vo":[
- {"id":"one","gap":0.8,"text":"Start with one word: enrolled."},
- {"id":"office","gap":0.8,"text":"In one office, with one system, it means one thing. Nobody has to ask."},
- {"id":"grows","gap":0.8,"text":"Then the university grows."},
- {"id":"sis","gap":0.8,"text":"The student system counts everyone who signed up."},
- {"id":"lms","gap":0.8,"text":"The learning platform counts everyone who can open the course."},
- {"id":"fin","gap":0.8,"text":"Finance counts everyone who has paid."},
- {"id":"three","gap":0.8,"text":"Three systems, three meanings, and each one is right."},
- {"id":"moves","gap":0.8,"text":"The platform moves all three, without a fault."},
- {"id":"teams","gap":0.8,"text":"Now add more teams."},
- {"id":"agent","gap":0.8,"text":"Add an AI agent that answers from the same data."},
- {"id":"repeat","gap":0.8,"text":"Whatever the word means now is repeated everywhere, at once, and with confidence."},
- {"id":"never","gap":0.8,"text":"The platform was never the problem."},
- {"id":"answer","gap":0.8,"text":"What changes the answer is how the organisation works, what was defined, and who decided."}
+"portal":{"name":"Why this portal","lead":1.2,"tail":1.0,"vo":[
+ {"id": "half", "gap": 0.8, "text": "Many courses and much of the documentation give you only half of that."},
+ {"id": "tech", "gap": 0.8, "text": "Some are deeply technical, with no business and no governance around the code."},
+ {"id": "neutral", "gap": 0.8, "text": "Others stay neutral, and never say what to do, or in which tool."},
+ {"id": "join", "gap": 0.8, "text": "So you join the halves yourself, at work, under pressure."},
+ {"id": "wrong", "gap": 0.8, "text": "That's how a model passes every test and answers the wrong question, or a policy never reaches the code."},
+ {"id": "author", "gap": 0.8, "text": "The author of this portal has worked in applications, data and enterprise architecture roles for more than sixteen years."},
+ {"id": "slowly", "gap": 0.8, "text": "The pieces came together slowly, one project at a time."},
+ {"id": "nobody", "gap": 0.8, "text": "Nobody who works with data should need sixteen years to join them."},
+ {"id": "gather", "gap": 0.8, "text": "So the key lessons are gathered here, in one place."},
+ {"id": "ld", "gap": 0.8, "text": "This is Learning Data: the context and the practice, from how the organisation works down to the code."},
+ {"id": "eda", "gap": 0.8, "text": "Joining the two is what this portal calls enterprise data architecture."}
 ]},
-"route":{"name":"The route","lead":1.2,"tail":1.0,"vo":[
- {"id":"where","gap":0.8,"text":"So where do you start? Not with the platform."},
- {"id":"here","gap":0.8,"text":"Here is the route."},
- {"id":"ea","gap":0.8,"text":"Enterprise architecture: how does this organisation work?"},
- {"id":"gov","gap":0.8,"text":"Data governance: who decides?"},
- {"id":"found","gap":0.8,"text":"Those two are the foundations."},
- {"id":"build","gap":0.8,"text":"Then you build."},
- {"id":"model","gap":0.8,"text":"Data modelling: what does each word mean?"},
- {"id":"basics","gap":0.8,"text":"Modern data basics: how does data move, run and get served today?"},
- {"id":"ae","gap":0.8,"text":"Analytics engineering: how is it built, and tested?"},
- {"id":"dq","gap":0.8,"text":"Data quality: is it right, and in time?"},
- {"id":"side","gap":0.8,"text":"Two side routes leave after the foundations."},
- {"id":"share","gap":0.8,"text":"One is about sharing and protecting."},
- {"id":"mdm","gap":0.8,"text":"Master and reference data: is it the same student everywhere?"},
- {"id":"prot","gap":0.8,"text":"Data protection and privacy: who may see it, and for how long?"},
- {"id":"agents","gap":0.8,"text":"The other is about agents: what may an agent do with it?"},
- {"id":"meet","gap":0.8,"text":"They all meet again at the end."},
- {"id":"dm","gap":0.8,"text":"Data management: how does it all fit in one plan?"},
- {"id":"lead","gap":0.8,"text":"And last, leading data people: who leads the people who do the work?"}
+"found":{"name":"The foundations","lead":1.2,"tail":1.0,"vo":[
+ {"id": "route", "gap": 0.8, "text": "The portal is laid out as a route of stations, like a railway line, in an order that makes sense."},
+ {"id": "first", "gap": 0.8, "text": "It starts with the foundations."},
+ {"id": "tools", "gap": 0.8, "text": "There are many conversations about tools, and far fewer about the foundations under them."},
+ {"id": "ea", "gap": 0.8, "text": "Enterprise architecture comes first."},
+ {"id": "how", "gap": 0.8, "text": "It describes how a business works: what it does, what it needs, which systems serve it, and how they connect."},
+ {"id": "taught", "gap": 0.8, "text": "In the author's experience, it's rarely taught in context."},
+ {"id": "struggle", "gap": 0.8, "text": "So people struggle to describe a business, and to understand the one they work in."},
+ {"id": "gov", "gap": 0.8, "text": "Then data governance: who decides what the data means, and who may use it."},
+ {"id": "slow", "gap": 0.8, "text": "For years it was often seen as slow work that few wanted to do."},
+ {"id": "weak", "gap": 0.8, "text": "Often the enterprise foundations under it were weak."},
+ {"id": "ready", "gap": 0.8, "text": "Or the technology wasn't ready to deliver governance as a service, built into the daily work."},
+ {"id": "policies", "gap": 0.8, "text": "So it stayed a set of policies."},
+ {"id": "newer", "gap": 0.8, "text": "This portal shows the newer way: governance built into the work, from the glossary to the code."}
 ]},
-"wheel":{"name":"One map among many","lead":1.2,"tail":1.0,"vo":[
- {"id":"before","gap":0.8,"text":"People have mapped this ground before."},
- {"id":"dama","gap":0.8,"text":"The best known map is DAMA's wheel, with governance at its centre."},
- {"id":"any","gap":0.8,"text":"Any good map will do."},
- {"id":"ours","gap":0.8,"text":"This one is a route, because you have to start somewhere."}
+"rest":{"name":"The rest of the route","lead":1.2,"tail":1.0,"vo":[
+ {"id": "main", "gap": 0.8, "text": "Then the main line, where data is built and kept right."},
+ {"id": "deeper", "gap": 0.8, "text": "Its stations go deeper into each layer the introduction showed."},
+ {"id": "branch", "gap": 0.8, "text": "Two branch lines leave it, and join it again further on."},
+ {"id": "share", "gap": 0.8, "text": "One shares and protects data."},
+ {"id": "agents", "gap": 0.8, "text": "The other puts AI agents to work on data, safely."},
+ {"id": "whole", "gap": 0.8, "text": "The route ends on the whole picture: one plan for data management."},
+ {"id": "lead", "gap": 0.8, "text": "And leading data people, for those who lead a data team, and for those being led."}
 ]},
-"here":{"name":"What you can do here","lead":1.2,"tail":1.0,"vo":[
- {"id":"films","gap":0.8,"text":"At every stop there are short films. Watch one."},
- {"id":"ask","gap":0.8,"text":"Let it stop and ask you a question."},
- {"id":"lab","gap":0.8,"text":"Take it apart in a lab."},
- {"id":"call","gap":0.8,"text":"Make the call in a real situation."},
- {"id":"goal","gap":0.8,"text":"Pick a goal, and the route lights up your stops."},
- {"id":"search","gap":0.8,"text":"Or search for a word, and find the film that says it."},
- {"id":"stays","gap":0.8,"text":"What you have done stays with you, in your own browser."}
+"project":{"name":"A real project","lead":1.2,"tail":1.0,"vo":[
+ {"id": "real", "gap": 0.8, "text": "Along the main line, the films show a real project: a dbt project on GitHub, which runs on your own machine and on Databricks."},
+ {"id": "open", "gap": 0.8, "text": "What the films show on screen is code you can open, and run."},
+ {"id": "more", "gap": 0.8, "text": "And it holds more than models and tests."},
+ {"id": "leave", "gap": 0.8, "text": "Next to the code sit the folders most projects leave out."},
+ {"id": "list", "gap": 0.8, "text": "The business glossary, the owners, the architecture map, the data products and their contracts, and the decisions behind them."},
+ {"id": "meta", "gap": 0.8, "text": "That is the business and governance metadata, kept in the same place as the code it describes."},
+ {"id": "argue", "gap": 0.8, "text": "People argue a lot about tools."},
+ {"id": "show", "gap": 0.8, "text": "Here, dbt and Databricks show the ideas in a working solution, but any tools with the same capabilities would do."},
+ {"id": "well", "gap": 0.8, "text": "What matters is using those capabilities well."}
+]},
+"dama":{"name":"Beyond DAMA","lead":1.2,"tail":1.0,"vo":[
+ {"id": "mapped", "gap": 0.8, "text": "This ground has been mapped before."},
+ {"id": "dama", "gap": 0.8, "text": "DAMA's wheel is the best known, and this portal covers it."},
+ {"id": "further", "gap": 0.8, "text": "It also goes further, into enterprise architecture, AI agents in data work and leadership."},
+ {"id": "others", "gap": 0.8, "text": "It adds other frameworks that proved their worth over those years."},
+ {"id": "paradigms", "gap": 0.8, "text": "Data has many paradigms."},
+ {"id": "many", "gap": 0.8, "text": "Many were made by data people, for data, and look little at the enterprise around them."},
+ {"id": "why", "gap": 0.8, "text": "That is why this portal starts from the enterprise."},
+ {"id": "means", "gap": 0.8, "text": "Enterprise data architecture means exactly that: data designed as part of the organisation it serves."}
+]},
+"doing":{"name":"Learn by doing","lead":1.2,"tail":1.0,"vo":[
+ {"id": "do", "gap": 0.8, "text": "Every station is something to do, not only to watch."},
+ {"id": "question", "gap": 0.8, "text": "In a film, a question stops the picture and asks what you'd do."},
+ {"id": "close", "gap": 0.8, "text": "The answers are close: one is almost right, and the film has told you why it isn't."},
+ {"id": "lab", "gap": 0.8, "text": "In a lab, you take an idea apart with your own hands."},
+ {"id": "enrol", "gap": 0.8, "text": "Enrol a student, and watch the event race into the platform, in seconds."},
+ {"id": "scenario", "gap": 0.8, "text": "In a scenario, you make the call in a real situation, put the steps in order, or sort what belongs where."},
+ {"id": "why", "gap": 0.8, "text": "Each answer tells you why."},
+ {"id": "goal", "gap": 0.8, "text": "Pick a goal, and the route lights up your stops."},
+ {"id": "search", "gap": 0.8, "text": "Search for a word, and find the film that says it."},
+ {"id": "stays", "gap": 0.8, "text": "Your progress stays in your own browser."}
 ]},
 "start":{"name":"Start","lead":1.2,"tail":1.0,"vo":[
- {"id":"matured","gap":0.8,"text":"Platforms have matured."},
- {"id":"hard","gap":0.8,"text":"The hard part is everything else."},
- {"id":"there","gap":0.8,"text":"Start there."}
+ {"id": "matured", "gap": 0.8, "text": "Platforms have matured."},
+ {"id": "hard", "gap": 0.8, "text": "The hard part is everything else: the organisation, the meaning, the decisions and the people."},
+ {"id": "there", "gap": 0.8, "text": "Start there."}
 ]}
 };

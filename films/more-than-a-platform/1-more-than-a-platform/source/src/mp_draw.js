@@ -91,7 +91,7 @@ function mp_folder(ctx,x,y,s,col,a){if(a<=0.004)return;const u=s/48;ctx.save();c
 function mp_badge(ctx,x,y,a,k){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.5,1,ag_spr(k,0,0.6)));glow(ctx,x,y,40,MD.agreed,0.4);
   ctx.beginPath();ctx.arc(x,y,20,0,TAU);ctx.fillStyle="rgba(7,12,26,1)";ctx.fill();ctx.strokeStyle=rgba(MD.agreed,1);ctx.lineWidth=2.6;ctx.stroke();mp_folder(ctx,x,y+1,26,MD.agreed,1);ctx.restore();}
 // the project's tree: [name, depth, kind] rows; kind "code" or "gov" or "doc"; lit(i) is how much row i glows, band(i) its highlighter
-const MP_TREE=[["models/",0,"code"],["tests/",0,"code"],["sources/",0,"code"],["governance/",0,"gov"],["1-glossary/",1,"gov"],["2-owners/",1,"gov"],
+const MP_TREE=[["models/",0,"code"],["tests/",0,"code"],["sources/",0,"code"],["../20-data-governance/",0,"gov"],["1-glossary/",1,"gov"],["2-owners/",1,"gov"],
   ["3-architecture-map/",1,"gov"],["4-data-products/",1,"gov"],["5-data-contracts/",1,"gov"],["docs/decisions.md",0,"doc"]];
 function mp_tree(ctx,x,y,rh,a,lit,band){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
   MP_TREE.forEach((r,i)=>{const yy=y+i*rh,xx=x+r[1]*44,b=band(i),l=lit(i);

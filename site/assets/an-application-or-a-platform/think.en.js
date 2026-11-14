@@ -1,11 +1,11 @@
 /* Learning Data: "Pause and think" for An application or a platform?, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (erp, minutes, owner), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question names a "stop"
-   (the lab a question opens) and none has a lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  "erp":{q:"The finance system serves finance, procurement and people. Why is it still an application, and not a platform?",
+  "erp":{stop:"test",q:"The finance system serves finance, procurement and people. Why is it still an application, and not a platform?",
     opts:[{t:"Each of its parts has one purpose, and it serves only some of the utility's domains, where the data platform serves them all.",near:true},{t:"It was bought from a vendor as one product, and a platform is something an organisation builds for itself from its parts."},{t:"Each of its parts has one purpose, with its logic built in, the way its vendor designed it. Owners don't bring their own logic to it.",ok:true}],
     why:"Serving many functions isn't the test on its own. The line is where the logic lives: in an application it's built in, the way its vendor designed it; on a platform, its owners bring their own, as the domains do on the data platform, which is itself built from a vendor's product. Which of your organisation's shared systems carry their own logic, and which carry their users'?"},
   "minutes":{q:"The rule that leaves major storms out of the measure was lost in an update. Who decides it now, and where is it written?",

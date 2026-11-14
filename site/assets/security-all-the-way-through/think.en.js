@@ -1,11 +1,11 @@
 /* Learning Data: "Pause and think" for Security all the way through, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (who, checked, default), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question names a "stop"
-   (the lab a question opens) and none has a lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  who:{q:"Ravi gives each of the 47 jobs an identity of its own, and each run a pass that lasts an hour. What does that give the utility?",
+  who:{stop:"pass",q:"Ravi gives each of the 47 jobs an identity of its own, and each run a pass that lasts an hour. What does that give the utility?",
     opts:[{t:"Each job keeps its own key in its own script, so a copied key opens only that one job's tables.",near:true},{t:"The jobs read faster, since the catalogue no longer looks up one account that everyone shares."},{t:"Every line of the log names the job that read, and there's no key in a script for anyone to copy.",ok:true}],
     why:"A key in a script works for whoever holds it, as data_loader's did; a pass at Hakone described the one woman it was for. With an identity of its own, each job says who's asking, so every line of the log names it, and each run's pass lasts an hour, so there's no key to keep or to copy. A key of its own in a script could still be copied, and used by anyone. Which of your jobs still run on a key someone could copy?"},
   checked:{q:"A laptop in the utility's own office asks to read customers' bank details. What happens before a single row is read?",

@@ -1,7 +1,7 @@
 /* Learning Data: "Pausa para pensar" de One platform, or many, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (layers, mesh, unavoid), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
-   (el lab que abre) y ninguna tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
@@ -11,7 +11,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   mesh:{q:"En un data mesh, cada dominio es dueño de sus datos. ¿Significa eso que cada dominio opera su propia plataforma?",
     opts:[{t:"No: un equipo central de datos es dueño de los datos de todos los dominios, y cada dominio le pide, en un ticket, lo que necesita."},{t:"Sí: ser dueño de sus datos significa que cada dominio elige y opera su propia plataforma, con reglas que acuerdan.",near:true},{t:"No: cada dominio es dueño de sus datos, como productos, en una sola plataforma de autoservicio que todos comparten.",ok:true}],
     why:"La responsabilidad se reparte; la plataforma no. El data mesh de Zhamak Dehghani pone los productos de datos de cada dominio en una plataforma de autoservicio, con reglas que los dominios acuerdan juntos, y esa plataforma es una sola, compartida. Hecho así, un mesh suele ser la arquitectura más simple: una plataforma, muchos responsables. Mal hecho, son los mismos equipos con nombres nuevos. ¿Quién es responsable de cada producto de datos en tu plataforma?"},
-  unavoid:{q:"¿Cuándo vale la pena mantener una segunda plataforma de datos?",
+  unavoid:{stop:"second",q:"¿Cuándo vale la pena mantener una segunda plataforma de datos?",
     opts:[{t:"Cuando un área del negocio ya compró una, porque cada dominio debería elegir las herramientas que mejor conoce."},{t:"Solo por una razón que puedas nombrar: una empresa recién comprada, una entidad legal aparte, datos que deben quedarse en su país.",ok:true},{t:"Siempre que formatos de tabla abiertos y un catálogo federado unan las dos, porque así ninguna regla se mantiene dos veces.",near:true}],
     why:"Los formatos de tabla abiertos y un catálogo federado reducen el daño: ambas plataformas leen los mismos archivos, y la gente encuentra todos los datos en un solo lugar. Pero cada plataforma conserva sus propios permisos, políticas y registros, así que el segundo conjunto de reglas se queda. Como los puestos de control del shogunato, una segunda plataforma se mantiene solo por una razón que cualquiera pueda nombrar; la de generación no tenía ninguna, así que se mudó. ¿Cuál de tus plataformas tiene una razón que podrías nombrar?"}
   }}};

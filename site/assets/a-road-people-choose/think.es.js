@@ -1,14 +1,14 @@
 /* Learning Data: "Pausa para pensar" de A road people choose, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (weeks, rules, count), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
-   (el lab que abre) y ninguna tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
   weeks:{q:"Dos equipos se rindieron con la plataforma e hicieron lo suyo. ¿Por qué Ravi no ordena simplemente que todos los equipos la usen?",
     opts:[{t:"Una orden hace que la usen, no que la quieran, y el atajo igual encuentra cómo rodearla.",ok:true},{t:"La plataforma todavía no era el camino seguro, y había que hacerla más segura antes de ordenar nada.",near:true},{t:"Cada equipo de dominio elige sus herramientas, y el equipo de plataforma no decide dónde van los datos."}],
     why:"Una orden llevaría a todos los equipos a la plataforma, pero no la haría el camino fácil: los once tickets y el pull request devuelto seguirían ahí, y un equipo con prisa encontraría cómo rodearlos, como hicieron servicios de campo y medición. La plataforma ya era el camino seguro; todavía no era el fácil. Así que Ravi la hace la forma más fácil de hacerlo bien, y deja que los equipos la elijan. ¿Dónde hace tu plataforma que el camino seguro sea todavía el lento?"},
-  rules:{q:"Los datos personales se clasifican antes de publicar nada, las pruebas corren en cada pull request, y nada sale a producción sin responsable. ¿Qué cambia para un equipo que esas reglas vengan dentro del camino?",
+  rules:{stop:"path",q:"Los datos personales se clasifican antes de publicar nada, las pruebas corren en cada pull request, y nada sale a producción sin responsable. ¿Qué cambia para un equipo que esas reglas vengan dentro del camino?",
     opts:[{t:"El equipo de datos ya no revisa el pull request del equipo, porque las pruebas del camino cubren cada regla."},{t:"El equipo recibe la lista completa de reglas el primer día, y las aprende antes de escribir su lógica.",near:true},{t:"El equipo cumple cada regla mientras trabaja, y ningún pull request vuelve por una regla que nadie mencionó.",ok:true}],
     why:"Dentro del camino, una regla se cumple donde se hace el trabajo, mientras el equipo trabaja, no al final. Una lista el primer día es mejor que nada, pero igual deja al equipo recordar cada regla, y aprender las que se le pasaron cuando le devuelven un pull request. El equipo de datos sigue revisando la lógica: el camino mantiene al equipo en la ruta sin detenerlo, como una baranda, no como un portón. ¿Qué regla tuya aprende todavía un equipo a fuerza de rechazos?"},
   count:{q:"Ravi cuenta lo que le dice si la plataforma funciona como producto. ¿Qué cuenta?",

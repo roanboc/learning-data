@@ -1,11 +1,11 @@
 /* Learning Data: "Pausa para pensar" de Security all the way through, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (who, checked, default), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
-   (el lab que abre) y ninguna tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  who:{q:"Ravi da a cada uno de los 47 trabajos su propia identidad, y a cada ejecución un salvoconducto de una hora. ¿Qué le da eso a la empresa?",
+  who:{stop:"pass",q:"Ravi da a cada uno de los 47 trabajos su propia identidad, y a cada ejecución un salvoconducto de una hora. ¿Qué le da eso a la empresa?",
     opts:[{t:"Cada trabajo guarda su propia clave en su script, así que una clave copiada solo abre las tablas de ese trabajo.",near:true},{t:"Los trabajos leen más rápido, porque el catálogo ya no busca una cuenta que todos comparten."},{t:"Cada línea del registro nombra al trabajo que leyó, y no hay clave en un script que alguien pueda copiar.",ok:true}],
     why:"Una clave en un script sirve a quien la tenga, como la de data_loader; un salvoconducto en Hakone describía a la única mujer para la que era. Con su propia identidad, cada trabajo dice quién pregunta, así que cada línea del registro lo nombra, y el salvoconducto de cada ejecución dura una hora: no hay clave que guardar ni copiar. Una clave propia en un script todavía podría copiarla y usarla cualquiera. ¿Cuáles de tus trabajos corren todavía con una clave que alguien podría copiar?"},
   checked:{q:"Una laptop en la propia oficina de la empresa pide leer los datos bancarios de los clientes. ¿Qué pasa antes de leer una sola fila?",

@@ -245,6 +245,8 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 - [A road people choose](../films/platform-and-solution-architecture/7-a-road-people-choose/) — `a-road-people-choose`
 - [Built to change](../films/platform-and-solution-architecture/8-built-to-change/) — `built-to-change`
 
+Labs and assessments: [site/assets/platform-and-solution-architecture/learn.en.js](../site/assets/platform-and-solution-architecture/learn.en.js), [site/assets/platform-and-solution-architecture/learn.es.js](../site/assets/platform-and-solution-architecture/learn.es.js)
+
 ### AI and continuous architecture
 
 Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-architecture/) · Portal: `/ai-and-continuous-architecture/`

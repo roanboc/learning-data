@@ -1,11 +1,11 @@
 /* Learning Data: "Pausa para pensar" de One solution, end to end, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (quality, options, reuse), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
-   (el lab que abre) y ninguna tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  quality:{q:"Sipho escribe cada cualidad con una medida, como «el intercambio cambia en menos de una semana». ¿Por qué una medida, y no solo «fácil de cambiar»?",
+  quality:{stop:"context",q:"Sipho escribe cada cualidad con una medida, como «el intercambio cambia en menos de una semana». ¿Por qué una medida, y no solo «fácil de cambiar»?",
     opts:[{t:"Para que el proveedor de facturación apruebe antes su versión, ya que la norma pide un número."},{t:"Para que el equipo la mida después de la versión, y corrija el diseño entonces si no la cumple.",near:true},{t:"Para probar cada opción contra ella antes de construir nada: la cumple, o no la cumple.",ok:true}],
     why:"Sin una medida, toda opción dice ser segura, confiable y fácil de cambiar, y nada las distingue. Con una, como «el intercambio cambia en menos de una semana», cada opción se prueba antes de construir nada, como Sipho prueba ambas: dentro de facturación, un cambio espera la próxima versión del proveedor; en la plataforma, es un pull request. Medir después de la versión sigue importando, pero para entonces el diseño ya está elegido. ¿Qué cualidad de tu solución tiene una medida que un diseño podría no cumplir?"},
   options:{q:"La segunda opción guarda las respuestas de la agencia en la plataforma de datos, y su riesgo es que facturación ahora depende de la plataforma. ¿Cómo lo resuelve Sipho?",

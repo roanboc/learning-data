@@ -1,11 +1,11 @@
 /* Learning Data: "Pause and think" for One solution, end to end, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (quality, options, reuse), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question names a "stop"
-   (the lab a question opens) and none has a lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  quality:{q:"Sipho writes each quality with a measure, such as \"the exchange changes within a week\". Why a measure, and not just \"easy to change\"?",
+  quality:{stop:"context",q:"Sipho writes each quality with a measure, such as \"the exchange changes within a week\". Why a measure, and not just \"easy to change\"?",
     opts:[{t:"So billing's vendor can sign off its release sooner, since the standard asks for a number."},{t:"So the team can measure it after the release, and fix the design then if it falls short.",near:true},{t:"So each option can be tested against it before anything is built: it meets it, or not.",ok:true}],
     why:"Without a measure, every option claims to be secure, reliable and easy to change, and nothing tells them apart. With one, such as \"the exchange changes within a week\", each option is tested before anything is built, as Sipho tests both: inside billing, a change waits for the vendor's next release; on the platform, it's a pull request. Measuring after the release still matters, but by then the design is chosen. Which of your solution's qualities has a measure a design could fail?"},
   options:{q:"The second option keeps the agency's answers on the data platform, and its risk is that billing now depends on the platform. How does Sipho handle it?",

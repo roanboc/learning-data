@@ -3,7 +3,7 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Thirty-one series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Thirty-two series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), the four series that follow it in the topic Enterprise architecture, each the next of the one before:
@@ -23,9 +23,10 @@ documents-as-data/, two films); and the three series of the module Data protecti
 data (films/locks-before-the-data/, at locks-before-the-data/, which holds the module's plan), Only what you may see
 (films/only-what-you-may-see/, at only-what-you-may-see/) and Kept for a reason (films/kept-for-a-reason/, at
 kept-for-a-reason/); and the two series of the module Data quality: Fit for use (films/fit-for-use/, at fit-for-use/, which
-holds the module's plan) and Quality as a habit (films/quality-as-a-habit/, at quality-as-a-habit/); and the four series of the module
-Leading data people: The new skills (films/the-new-skills/, at the-new-skills/, which holds the module's plan and the kit it shares
-with Data management), Working with people (films/working-with-people/, at working-with-people/), Leading a data team
+holds the module's plan) and Quality as a habit (films/quality-as-a-habit/, at quality-as-a-habit/); and the five series of the module
+Leading data people: People first (films/people-first/, at people-first/), The new skills (films/the-new-skills/, at
+the-new-skills/, which holds the module's plan and the kit it shares with Data management), Working with people
+(films/working-with-people/, at working-with-people/), Leading a data team
 (films/leading-a-data-team/, at leading-a-data-team/) and Ownership and performance (films/ownership-and-performance/, at
 ownership-and-performance/); and the three series of the module Data
 management: A plan in ninety days (films/a-plan-in-ninety-days/, at a-plan-in-ninety-days/, which holds the module's plan), Making
@@ -100,8 +101,8 @@ def series_link(lg, RE, sid):
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
 # each the next of the one before; the last, Documents and closing remarks, has two films. Locks before the data opens the module
 # Data protection and privacy, whose three series are each the next of the one before. Fit for use opens the module Data quality,
-# and Quality as a habit follows it; the topic Data quality holds them after When things go wrong. The new skills opens the module
-# Leading data people, whose four series are each the next of the one before; its topic sits just before Data management's. A plan
+# and Quality as a habit follows it; the topic Data quality holds them after When things go wrong. People first opens the module
+# Leading data people, whose five series are each the next of the one before; its topic sits just before Data management's. A plan
 # in ninety days opens the module Data management, whose three series are each the next of the one before; its topic is the site's
 # last.
 SERIES = [
@@ -218,6 +219,10 @@ SERIES = [
          name={"en": "Quality as a habit", "es": "La calidad como hábito"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
+    dict(id="people-first", dir="people-first", slug="people-first",
+         name={"en": "People first", "es": "Las personas primero"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="the-new-skills"),
     dict(id="the-new-skills", dir="the-new-skills", slug="the-new-skills",
          name={"en": "The new skills", "es": "Las nuevas habilidades"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",

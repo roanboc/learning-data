@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Built to change",
+    "key": "built-to-change-en",
+    "dir": "films/platform-and-solution-architecture/8-built-to-change/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/built-to-change/film.js",
+    "video": "dist/built-to-change.mp4",
+    "file": "built-to-change.mp4",
+    "captions": [
+      [
+        "films/platform-and-solution-architecture/8-built-to-change/captions/en.srt",
+        "built-to-change.en.srt"
+      ],
+      [
+        "films/platform-and-solution-architecture/8-built-to-change/captions/es.srt",
+        "built-to-change.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/platform-and-solution-architecture/8-built-to-change/source",
+      ":(exclude)films/platform-and-solution-architecture/8-built-to-change/source/src/i18n/es/captions.js",
+      "films/platform-and-solution-architecture/shared",
+      "films/enterprise-architecture/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+      "films/when-things-go-wrong/characters",
+      "films/when-things-go-wrong/1-silent-change/source/src",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/hands.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py"
+    ],
+    "legibility": {
+      "texts": 444,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.2,
+      "status": "Drawn to the rule"
+    }
+  }
+]

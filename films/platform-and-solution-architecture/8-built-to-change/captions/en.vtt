@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:10.873
+Japan, the 1860s. For over 250 years, the Tōkaidō's stations have handed loads and travellers on, station to station.
+
+00:00:12.573 --> 00:00:19.313
+The road was kept by adjusting it: thirty-six horses at each station, then a hundred, and a hundred porters.
+
+00:00:21.013 --> 00:00:26.440
+When that wasn't enough, nearby villages had to send people and horses: the helper villages.
+
+00:00:28.140 --> 00:00:32.173
+But travel kept growing, and lords and nobles took horses without paying.
+
+00:00:33.673 --> 00:00:39.760
+Helper villages were called from further away, and farmers left their fields to carry other people's loads.
+
+00:00:41.460 --> 00:00:46.204
+Their duty grew to several hundred times what was set in 1694.
+
+00:00:47.904 --> 00:00:55.395
+In 1764, on the Nakasendō, more than two hundred thousand farmers rose against a new demand to carry.
+
+00:00:57.295 --> 00:01:03.395
+In the 1860s, armies on the march took more than the stations could give, and their money ran out.
+
+00:01:05.095 --> 00:01:10.847
+The relay couldn't be stretched any further, and the country needed to move more, faster, than horses could.
+
+00:01:12.947 --> 00:01:20.518
+In 1872, the new government ended the relay and freed the helper villages, and Japan's first railway opened.
+
+00:01:22.418 --> 00:01:32.707
+The main line west was to cross the mountains. They proved far harder than expected, so in 1886, the line to Nagoya moved to the Tōkaidō's route.
+
+00:01:34.607 --> 00:01:44.768
+On the first of July 1889, the whole line opened: Tokyo to Kobe in about twenty hours, where Kyoto alone had taken two weeks on foot.
+
+00:01:46.868 --> 00:01:53.712
+At the utility, a tool's maker is ending its support, with twelve years of the utility's storms locked inside.
+
+00:01:55.212 --> 00:02:00.344
+So Ravi builds so that any part can change, and what's the utility's own goes with it.
+
+00:02:06.844 --> 00:02:11.140
+In January, the storm tool's maker writes: support ends in December.
+
+00:02:12.640 --> 00:02:18.762
+The control room bought it twelve years ago, to record every storm, each fault and each line that failed.
+
+00:02:20.262 --> 00:02:23.894
+All twelve years are inside it, in a format only it can read.
+
+00:02:25.594 --> 00:02:30.296
+Its one way out is an export made for the regulator's measure, carrying little else.
+
+00:02:31.796 --> 00:02:36.029
+And Grace's engineers choose which lines to strengthen from those storms.
+
+00:02:37.529 --> 00:02:40.522
+Without them, next year's work would be chosen blind.
+
+00:02:42.422 --> 00:02:47.012
+Only the maker can bring it all out, as a project of its own, at its price.
+
+00:02:48.712 --> 00:02:54.748
+Nobody did anything wrong. But nobody asked, when it was bought, how the utility's data would come out.
+
+00:02:56.648 --> 00:03:02.524
+So Ravi asks what else holds the utility like this, the data platform's own product included.
+
+00:03:04.824 --> 00:03:07.546
+Ravi and Tomás start with build or buy.
+
+00:03:08.846 --> 00:03:13.794
+Buy what every utility needs in much the same way, such as a tool to record storms.
+
+00:03:15.494 --> 00:03:21.852
+Build what's the utility's own: its rules, its measures, and data products such as hosting capacity.
+
+00:03:23.552 --> 00:03:29.001
+And before buying, ask how the data comes out, in what format, and how long leaving would take.
+
+00:03:30.901 --> 00:03:36.960
+The control room's new tool sends every record to the data platform each night, in an open format.
+
+00:03:38.460 --> 00:03:42.276
+Its agreement says the utility may take all of its data, any day.
+
+00:03:43.976 --> 00:03:49.225
+The data platform is the same: its product bought, what's built on it the utility's own.
+
+00:03:51.525 --> 00:03:58.255
+Then Ravi looks for seams: places where two parts meet through something both sides agree on, such as a format.
+
+00:03:59.955 --> 00:04:04.483
+Behind a seam, a part can be replaced, and nothing in front of it has to change.
+
+00:04:06.383 --> 00:04:12.774
+On the data platform, the tables are files in an open table format, in the utility's own storage.
+
+00:04:14.274 --> 00:04:16.994
+Any engine that knows the format can read them.
+
+00:04:18.694 --> 00:04:22.168
+The logic is code in the utility's own repository.
+
+00:04:23.668 --> 00:04:28.782
+Not everything has a seam: the schedules, alerts and dashboards are the product's own.
+
+00:04:30.482 --> 00:04:34.709
+That's lock-in, and it isn't wrong: it's the price of what a product does well.
+
+00:04:36.409 --> 00:04:40.437
+Ravi writes down what leaving would cost, so it's chosen, not found.
+
+00:04:42.337 --> 00:04:48.428
+The railway took much of the road's route, between the same cities. What changed was what carried the loads.
+
+00:04:50.728 --> 00:04:57.340
+Next, every technology on Tomás's map gets a stage: tried, in use, on its way out, retired.
+
+00:04:59.040 --> 00:05:02.965
+And a date to look at it again, beside its maker's end of support.
+
+00:05:04.465 --> 00:05:09.554
+The storm tool would have shown on its way out four years ago, when its maker stopped improving it.
+
+00:05:11.454 --> 00:05:16.775
+Two more parts turn out to be near their end: a file transfer server and a reporting tool.
+
+00:05:18.475 --> 00:05:21.435
+Each gets its plan now, years ahead, not months.
+
+00:05:23.735 --> 00:05:31.288
+Last, an exit plan for every part, the platform's own product included: how it would leave, how long, and at what cost.
+
+00:05:32.988 --> 00:05:37.643
+A plan nobody has tried is a guess, so the platform team tries it each year.
+
+00:05:39.343 --> 00:05:43.970
+This year it's Grace's hosting capacity: how much solar each street can take.
+
+00:05:45.470 --> 00:05:50.213
+For a week, in test, it runs on another engine that reads the same files.
+
+00:05:51.913 --> 00:05:55.740
+Its models run with eleven lines changed, of fourteen hundred.
+
+00:05:57.440 --> 00:06:02.102
+The contract, the owner and the glossary don't change, and every number matches.
+
+00:06:03.802 --> 00:06:08.551
+Three things have to be set up again: its schedule, its alerts, and who may read it.
+
+00:06:10.251 --> 00:06:16.638
+From that, Ravi works out the whole platform: about eight months to leave, a migration, not a rewrite.
+
+00:06:18.738 --> 00:06:22.544
+Nobody plans to leave, but now the utility knows what it would take.
+
+00:06:24.844 --> 00:06:28.336
+Grace asks, in a ticket, for the storm history to be kept.
+
+00:06:29.836 --> 00:06:35.662
+The maker brings all twelve years out, and the data team checks each against the old tool's reports.
+
+00:06:37.362 --> 00:06:43.494
+They land on the data platform as files in an open format: storm history, owned by network.
+
+00:06:45.194 --> 00:06:48.892
+From March, the new tool sends each night's records the same way.
+
+00:06:50.392 --> 00:06:54.002
+Grace's engineers check them in test, and her ticket closes.
+
+00:06:55.502 --> 00:06:58.628
+In November, a month early, the old tool is switched off.
+
+00:07:00.328 --> 00:07:03.290
+Next year's work is chosen from all twelve winters.
+
+00:07:05.590 --> 00:07:11.758
+Here's the whole data practice on Tomás's map: one data product, from its owner to its files.
+
+00:07:13.258 --> 00:07:16.373
+In the business layer, Grace holds the data owner's role.
+
+00:07:17.673 --> 00:07:22.245
+Hosting capacity is a product: it bundles its service and its contract.
+
+00:07:23.745 --> 00:07:27.137
+What it means is a business object, defined in the glossary.
+
+00:07:28.637 --> 00:07:34.150
+In the information layer, the data object that realises it: capacity, street by street.
+
+00:07:35.650 --> 00:07:41.804
+In the application layer, its pipeline and models: one application component, owned by network.
+
+00:07:43.304 --> 00:07:47.614
+Its output port, an application interface, is where the website reads it.
+
+00:07:49.114 --> 00:07:54.999
+In the technology layer, the platform's services, which Databricks realises, as system software.
+
+00:07:56.499 --> 00:08:04.208
+And its artifacts: the tables, as files in an open format, and the models, as code in the utility's repository.
+
+00:08:05.908 --> 00:08:13.947
+The seam runs between those files and the product that reads them. Another product could read the same files and run the same code.
+
+00:08:16.047 --> 00:08:20.287
+Ask what breaks if a table changes, and the lines lead up to Grace.
+
+00:08:22.187 --> 00:08:28.761
+Business architecture for data drew its top, Data architecture its middle, and this series its foundations.
+
+00:08:31.061 --> 00:08:39.009
+The Gokaidō lasted more than 250 years because it was kept: horses added, villages called on, rules rewritten.
+
+00:08:40.709 --> 00:08:46.799
+But it never changed who carried the cost. The stations and helper villages bore it, until it broke them.
+
+00:08:48.699 --> 00:08:51.931
+And when the railway came, many station towns declined.
+
+00:08:53.631 --> 00:08:59.289
+A data practice isn't built once either: products end, needs grow, and people move on.
+
+00:09:00.789 --> 00:09:08.047
+So it's kept: every part with a stage and a date, a way out tested each year, and the map changed with every change.
+
+00:09:09.747 --> 00:09:15.293
+At the utility, the next end is planned, not forced, and what's the utility's own goes with it.
+
+00:09:16.993 --> 00:09:22.647
+Next, the last series on enterprise architecture: AI and continuous architecture.

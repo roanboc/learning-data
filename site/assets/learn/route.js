@@ -8,8 +8,8 @@
      watched, from the same keys path.js reads ("<prefix>:watched"), in this browser only.
    - A goal ("I want to…") lights up the stops of its route and numbers them; the map itself never changes. The goal is kept in
      this browser ("ld-route:goal").
-   - A topic with films that show the example dbt project (D.project) carries the project's icon by its name, on the map and
-     on the rail, so it reads on a closed station, and opens on a box that links to the project's page and to GitHub.
+   - A topic with films that show the example dbt project (D.project) carries the project's icon: on the map, a badge on its
+     station's ring, which doesn't widen its name; on the rail, by its name. It reads on a closed station, and opens on a box that links to the project's page and to GitHub.
    data-base: the way to the language's home, for the films' links; data-root: the way to the site's root, for the posters;
    data-topics: the way to the Topics page ("" on that page itself, where a topic's link opens its row in the list). */
 (()=>{"use strict";
@@ -42,8 +42,6 @@ const P=D.project,PJ=t=>!!(P&&t.proj),anyPJ=D.topics.some(PJ);
 const pjMark=t=>PJ(t)?'<span class="pj-mark">'+P.icon+'</span>':"";
 function pjBox(t,base){return PJ(t)?'<div class="pj-box">'+P.icon+'<div><p class="pj-t">'+esc(X.proj)+'</p><p class="pj-l">'+esc(t.proj===1?X.proj1:fill(X.projn,{n:t.proj}))+'</p>'+
   '<p class="pj-a"><a href="'+esc(base+P.href)+'">'+esc(X.projpage)+'</a><a href="'+esc(P.repo)+'">'+esc(X.projrepo)+'</a></p></div></div>':"";}
-// the mark stays with the name's last word, so it never wraps onto a line of its own under a station
-const named=t=>{if(!PJ(t))return esc(t.name);const w=t.name.split(" "),l=w.pop();return esc(w.length?w.join(" ")+" ":"")+'<span class="pj-nw">'+esc(l)+pjMark(t)+'</span>';};
 const pjLegend=()=>anyPJ?'<span class="pj-leg">'+P.icon+esc(X.projmark)+'</span>':"";
 
 function dot(f,num){const r=12,c=2*Math.PI*r;
@@ -99,7 +97,7 @@ function draw(box){
     let svg="",html="";
     function station(t,x,y,up,w){const sel=st.panel==="station"&&st.sel===t.id;
       return '<button type="button" class="r-st ln-'+lineOf(t)+(up?" up":"")+(sel?" sel":"")+(dim(t.id)?" dim":"")+'" data-st="'+t.id+'" data-k="s-'+t.id+'" aria-pressed="'+sel+'" aria-label="'+esc(label(t))+
-        '" style="left:'+x.toFixed(1)+'px;top:'+(up?y+16:y-16)+'px;max-width:'+w.toFixed(0)+'px"><span class="r-sd">'+dot(frac(t),numOf(t.id))+'</span><span class="r-sl">'+named(t)+'</span></button>';}
+        '" style="left:'+x.toFixed(1)+'px;top:'+(up?y+16:y-16)+'px;max-width:'+w.toFixed(0)+'px"><span class="r-sd">'+dot(frac(t),numOf(t.id))+(PJ(t)?'<span class="pj-badge">'+P.icon+'</span>':'')+'</span><span class="r-sl">'+esc(t.name)+'</span></button>';}
     LOOPS.slice(0,2).forEach((gr,k)=>{const up=k===0,y=up?yT:yB,ts=D.topics.filter(t=>t.group===gr.id),off=ts.every(t=>dim(t.id));
       svg+='<path class="r-loop ln-'+gr.line+(off?" dim":"")+'" d="'+path(y)+'"/>';
       html+='<span class="r-gl loop ln-'+gr.line+(off?" dim":"")+'" style="left:'+(xa+s+14)+'px;top:'+(up?y+22:y-38)+'px">'+esc(gr.name)+'</span>';

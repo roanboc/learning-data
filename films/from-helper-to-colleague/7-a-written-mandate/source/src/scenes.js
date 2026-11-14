@@ -195,7 +195,7 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,T=wm_once(sc,"T",()=>({
       const la=ag_in(tt,T.stage-0.3,0.5),q=M.assignAt;
       if(la>0){cx.save();cx.globalAlpha*=la;cx.strokeStyle=rgba(AG.blue,0.6);cx.lineWidth=2.6;cx.setLineDash([8,7]);cx.beginPath();cx.moveTo(q[0]+10,q[1]);cx.lineTo(WM_SL.x-6,q[1]);cx.stroke();cx.setLineDash([]);cx.restore();}
       wm_stageList(cx,WM_SL.x,WM_SL.y,WM_SL.w,{a:la,k:wm_k(tt,T.stage-0.3),show:i=>ag_in(tt,T.each-0.2+i*0.18,0.4),lit:i=>i===3?ag_in(tt,T.night-0.2,0.4):0,mandate:ag_in(tt,T.more,1.0)});}},
-    // the mandate itself: a requirement, kept with the project's governance, in governance/8-mandates/
+    // the mandate itself: a requirement, kept with the project's governance, in 20-data-governance/8-mandates/
     {later:true,at:P2,place:"wmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
       const F=wm_folders(cx,120,120,600,{lit:ag_in(tt,T.gov-0.2,0.5),show:i=>ag_in(tt,P2+0.5+i*0.08,0.4)});
       const r=F.rows[7],ya=ag_in(tt,P2+0.9,0.5);
@@ -377,7 +377,7 @@ scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,T=wm_once(sc,"T",()=>({
     // each December it's read again, with the access review
     {later:true,at:X4,place:"wmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
       const w=ag_in(tt,T.waits,0.8);
-      wm_pr(cx,100,96,820,{a:ag_in(tt,T.taken-0.3,0.5),k:wm_k(tt,T.taken-0.3),title:"Narrow or withdraw the mandate",by:"Opened by Anil Kurian, its owner",branch:WM_FILE,
+      wm_pr(cx,80,96,860,{a:ag_in(tt,T.taken-0.3,0.5),k:wm_k(tt,T.taken-0.3),title:"Narrow or withdraw the mandate",by:"Opened by Anil Kurian, its owner",branch:WM_FILE,
         rows:[{text:"Anil's to change, at any time",state:"wait",tick:ag_in(tt,T.narrow,0.4),a:ag_in(tt,T.narrow-0.2,0.4)}]});
       wm_stageList(cx,1000,96,840,{a:ag_in(tt,T.narrow,0.5),k:wm_k(tt,T.narrow),mandate:1,mandateA:1-0.65*w,lit:i=>i===3?ag_in(tt,T.waits-0.3,0.4):0,litCol:i=>AG.amber,
         num:i=>i===3?[5,4,w]:null});

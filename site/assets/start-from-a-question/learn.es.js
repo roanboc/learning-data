@@ -1,7 +1,7 @@
 /* Learning Data: Empieza por una pregunta, en español: las palabras de los labs (práctica) y de las situaciones (evaluación).
    Mantén las claves iguales a learn.en.js. assets/from-words-to-data/learn.js las dibuja; "vis" nombra un dibujo del LV de la película
    (films/analytics-engineering/2-start-from-a-question/source/src/plan.js), que toma sus palabras de vis. */
-window.FW={lang:"es",store:"ld-start-from-a-question",repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.FW={lang:"es",store:"ld-start-from-a-question",repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"de",inPractice:"En la práctica",watch:"Ver esta parte",next:"Siguiente:",makeCall:"Tú decides →",repo:"Míralo en el proyecto:",
   scenario:"Situación",score:"Puntaje",answered:"respondidas",toGo:"por responder",good:"Buena decisión",notQuite:"No del todo",
   explore:"Explóralo en el lab:",nextQ:"Siguiente situación",results:"Ver tus resultados",again:"Empezar de nuevo",check:"Comprobar",

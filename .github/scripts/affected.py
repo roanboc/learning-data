@@ -23,7 +23,7 @@ The checks it picks from:
              cover it (every link resolves, and the players check the right soundtrack is selected). A change to only
              the site's copy of the player (site/assets/<key>/film.js) builds the film and compares the two, but draws
              no frame, since the picture didn't change.
-The dbt project (films/analytics-engineering/project) has its own workflow, credential-project.yml.
+The example dbt project lives in its own repository, roanboc/learning-data-project, with its own checks.
 Changes to the planner and workflow are covered by the tooling regression suite, not every film.
 A change to a film's release.json checks that film. --all remains the explicit full regression run.
 

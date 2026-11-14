@@ -2,7 +2,7 @@
    para sus nueve películas. Mantén las claves iguales a learn.en.js: los mismos labs y situaciones, en el mismo orden, con los mismos
    números, códigos, colores y fechas; solo cambia lo que se lee. assets/master-and-reference-data/learn.js los dibuja.
    site-tools/build_series.py lee este archivo como texto, igual que el inglés (ver el comentario de learn.en.js). */
-window.MR={lang:"es",store:"ld-master-and-reference-data",bundleFilm:1,repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.MR={lang:"es",store:"ld-master-and-reference-data",bundleFilm:1,repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"de",inPractice:"En la práctica",watch:"Ver esta parte",next:"Siguiente:",makeCall:"Tú decides →",
   scenario:"Situación",score:"Puntaje",answered:"respondidas",toGo:"por responder",good:"Buena decisión",notQuite:"No del todo",
   explore:"Explóralo en el lab:",nextQ:"Siguiente situación",results:"Ver tus resultados",again:"Empezar de nuevo",check:"Comprobar",

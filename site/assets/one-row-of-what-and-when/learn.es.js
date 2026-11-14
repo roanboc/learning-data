@@ -2,7 +2,7 @@
    Mantén las claves iguales a learn.en.js. assets/from-words-to-data/learn.js las dibuja; "vis" nombra un dibujo del LV de la película
    (films/analytics-engineering/4-one-row-of-what-and-when/source/src/plan.js), que toma sus palabras de vis.
    La "k" de cada opción del lab del grano le dice al dibujo qué grano se eligió. */
-window.FW={lang:"es",store:"ld-one-row-of-what-and-when",repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.FW={lang:"es",store:"ld-one-row-of-what-and-when",repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"de",inPractice:"En la práctica",watch:"Ver esta parte",next:"Siguiente:",makeCall:"Tú decides →",
   scenario:"Situación",score:"Puntaje",answered:"respondidas",toGo:"por responder",good:"Buena decisión",notQuite:"No del todo",
   explore:"Explóralo en el lab:",nextQ:"Siguiente situación",results:"Ver tus resultados",again:"Empezar de nuevo",check:"Comprobar",

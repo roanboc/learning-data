@@ -1,0 +1,106 @@
+{
+  "draft": true,
+  "title": "People first",
+  "title_es": "Las personas primero",
+  "planned": 4,
+  "lead": "Leading data people starts with the people. In February 2027 Helena Novak takes over the university's data team: seven people, a chart of seven boxes and 46 open requests. Before the hats and the skills, four questions: who is here, what do they need, how do they differ, and how do they work together?",
+  "lead_es": "Liderar equipos de datos empieza por las personas. En febrero de 2027 Helena Novak se hace cargo del equipo de datos de la universidad: siete personas, un organigrama de siete casillas y 46 solicitudes abiertas. Antes de los roles y las habilidades, cuatro preguntas: quiénes están aquí, qué necesitan, en qué se diferencian y cómo trabajan juntas.",
+  "description": "Four films for anyone who leads a team, on the people before the work: knowing who is in the team before planning what they do; wellbeing as something the work itself gives or takes away; how people differ by degree, with nobody sorted or assessed by it; and agreeing how the team works together.",
+  "description_es": "Cuatro películas para quien lidera un equipo, sobre las personas antes que el trabajo: conocer a quienes forman el equipo antes de planear lo que hacen; el bienestar como algo que el propio trabajo da o quita; cómo las personas se diferencian por grados, sin clasificar ni evaluar a nadie por eso; y acordar cómo trabaja junto el equipo.",
+  "card": "Know the people before you plan the work, fix the work before asking anyone to cope, ask how each person works, and agree how you work together.",
+  "card_es": "Conoce a las personas antes de planear el trabajo, arregla el trabajo antes de pedir aguante, pregunta cómo trabaja cada quien, y acuerda con el equipo cómo trabajar.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: Helena's first month, and the seven people she finds",
+  "thread_h_es": "Un hilo: el primer mes de Helena, y las siete personas que encuentra",
+  "thread": "In 2027, a year from now, Helena Novak takes over the university's data team. In February, her first month, a chart of seven boxes and a list of 46 open requests are on her desk. Before she plans anyone's work from either, she sits down with the seven people, one at a time. Film by film, she learns who they are, changes the work that wears one of them down, asks each how they work, and the team writes its first page of agreements. It's on the wall when Ivy Reyes arrives on 1 March.",
+  "thread_es": "En 2027, dentro de un año, Helena Novak se hace cargo del equipo de datos de la universidad. En febrero, su primer mes, tiene en el escritorio un organigrama de siete casillas y una lista de 46 solicitudes abiertas. Antes de planear con ellos el trabajo de nadie, se sienta con las siete personas, una por una. Película a película, aprende quiénes son, cambia el trabajo que desgasta a una de ellas, le pregunta a cada una cómo trabaja, y el equipo escribe su primera página de acuerdos. Está en la pared cuando Ivy Reyes llega el 1 de marzo.",
+  "past_h": "Where the films open: a rope bridge in Peru, and a school in China",
+  "past_h_es": "Dónde empiezan las películas: un puente de cuerda en Perú, y una escuela en China",
+  "people_h": "Who's in the team",
+  "people_h_es": "Quiénes forman el equipo",
+  "people": [
+    [
+      "tech",
+      "Leads the team",
+      "Helena Novak, the new data manager, in her first month with the team"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who runs the data platform and gets every night alert"
+    ],
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, the analytics engineer"
+    ],
+    [
+      "tech",
+      "Leads data governance",
+      "Yusuf Demir, the data governance lead"
+    ],
+    [
+      "tech",
+      "Answers the requests",
+      "Marta Silva, the team's only analyst"
+    ],
+    [
+      "tech",
+      "Builds the platform",
+      "Erin Walsh, the platform engineer"
+    ],
+    [
+      "tech",
+      "Builds the reports",
+      "Tomás Ortega, the report developer"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Dirige el equipo",
+      "Helena Novak, la nueva gestora de datos, en su primer mes con el equipo"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que lleva la plataforma de datos y recibe todas las alertas de la noche"
+    ],
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, ingeniero de analítica"
+    ],
+    [
+      "tech",
+      "Lidera la gobernanza de datos",
+      "Yusuf Demir, responsable de gobernanza de datos"
+    ],
+    [
+      "tech",
+      "Responde las solicitudes",
+      "Marta Silva, la única analista del equipo"
+    ],
+    [
+      "tech",
+      "Construye la plataforma",
+      "Erin Walsh, ingeniera de plataforma"
+    ],
+    [
+      "tech",
+      "Construye los informes",
+      "Tomás Ortega, desarrollador de informes"
+    ]
+  ]
+}

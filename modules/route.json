@@ -84,5 +84,9 @@
       "stops": ["enterprise-architecture", "data-governance", "leading-a-data-team", "a-plan-in-ninety-days", "making-the-case"]
     }
   ],
-  "upcoming": {}
+  "upcoming": {
+    "leading-data-people": [
+      {"id": "people-first", "name": {"en": "People first", "es": "Las personas primero"}, "films": 4}
+    ]
+  }
 }

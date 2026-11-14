@@ -3461,7 +3461,7 @@ function gm_oneNumber(ctx,t,o){o=o||{};const pg=[560,150],mt=[1360,150];
 /* ---------- three layers, one home each ---------- */
 // on Noor's map, close, a sheet pinned over it (as Governed in Unity Catalog pinned one): the three layers of meaning, a row each, in the
 // order the film says them: what a word means, how a number is counted, how things relate. Each row's home, gold, and its copies, each on
-// a thread from what it's synced from, as the map's business objects say (governance/3-architecture-map/4-information/): the glossary
+// a thread from what it's synced from, as the map's business objects say (20-data-governance/3-architecture-map/4-information/): the glossary
 // from the map, the data team's copy from the glossary, the conceptual models from the map; a tick on its corner where a copy is
 // checked for drift, "built" where it's built from its home. o.row[i] brings a row in, o.home lights the homes (o.hw[i], 0.3 to 1, how much each), o.c[i]
 // its copies, o.ck the ticks

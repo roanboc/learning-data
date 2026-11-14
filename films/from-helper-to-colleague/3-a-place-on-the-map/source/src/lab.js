@@ -99,7 +99,7 @@ const cj_at=(b,side,f)=>{f=f==null?0.5:f;return side==="top"?[b.x+b.w*f,b.y]:sid
    it the service's seven steps, in order, from a ticket to production; under each step the role assigned to it; and under each role
    who fills it. The planning contributor has the three drafting steps; people keep the rest: Clara raises the ticket, Jun
    reviews the code, and Noor, the release approver, approves the change and releases it (no owner approves a pull request). The planning agent comes in under its
-   role, owned by Clara (a dashed line under the people). The names are the map's own (governance/3-architecture-map/ in the project).
+   role, owned by Clara (a dashed line under the people). The names are the map's own (20-data-governance/3-architecture-map/ in the project).
      cj_process(ctx, o)   o.cap, o.srv, o.srvLine (0 to 1); o.step(i), o.bracket; o.role(k), o.roleLine(k); o.who(k), o.whoLine(k);
                           o.agent, o.agentLine, o.owner; o.tint(i) [colour, 0 to 1]; o.glow(key) a colour (keys "cap", "srv", "s0"
                           to "s6", "r0" to "r3", "jun", "clara", "noor", "agent"); o.divide (0 to 1); o.dim (0 to 1) and o.keep(key) */

@@ -553,7 +553,7 @@ function gk_reads(ctx,t,o){o=o||{};const rd=clamp(o.read||0,0,1),cp=clamp(o.copy
   if(cp>0.01){const e=easeCam(clamp(cp*1.4,0,1)),[ex,ey]=gk_along([460,440],[960,560],40,e);gk_env(ctx,ex,ey,1,1,{clip:1});wc_cross(ctx,ex,ey,110,GV.redInk,clamp(o.x||0,0,1));
     if(o.x>0.3)wc_hand(ctx,"a copy",ex-120,ey+70,{size:36,w:700,col:GV.redInk,align:"center",p:clamp(o.x*1.6-0.5,0,1)});}
   const ky=clamp(o.key||0,0,1);if(ky>0.01)gk_key(ctx,1180,456,-0.3,"expires · at most a year",{a:ky});
-  const cn=clamp(o.con||0,0,1);if(cn>0.01)gk_file(ctx,1000,640,860,cn,{path:"governance/5-data-contracts/core_award_v1.yaml",lang:"yaml",lines:[{n:6,s:"name: core_award_v1"}]});}
+  const cn=clamp(o.con||0,0,1);if(cn>0.01)gk_file(ctx,900,640,960,cn,{path:"20-data-governance/5-data-contracts/core_award_v1.yaml",lang:"yaml",lines:[{n:6,s:"name: core_award_v1"}]});}
 // a private exchange: a smaller shop window, locked, Awards in it (o.u), its sign (o.sign); two partners in front of it, and no one else (o.only)
 const GK_XCH={glass:[660,330,600,400],small:1};
 function gk_lock(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=rgba([120,104,70],1);ctx.lineWidth=9;ctx.beginPath();ctx.arc(0,-20,24,Math.PI,0);ctx.lineTo(24,0);ctx.moveTo(-24,0);ctx.lineTo(-24,-20);ctx.stroke();

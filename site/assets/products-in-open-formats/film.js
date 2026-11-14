@@ -3081,7 +3081,7 @@ const GP_CATBAR=[84,112,96],GP_NEWBAR=[110,84,120];
 // each product, its owner as its card names them, and the colour of its awning (A product with an owner's)
 const GP_SIX=[["Learner records","Mei Tanaka",[104,128,170]],["Awards","Mei Tanaka",[176,104,88]],["Learners near an award","Clara Jensen",[204,150,64]],
   ["Learner wallet","Wallet app team",[110,146,104]],["Tuition forgone","Finance",[138,112,150]],["Short-course follow-ups","Learning team",[86,146,142]]];
-// the ten tables other teams read, and the product each is in (governance/4-data-products/, each product's outputs)
+// the ten tables other teams read, and the product each is in (20-data-governance/4-data-products/, each product's outputs)
 const GP_TEN=[["core_learner_v1",0],["core_credential_v2",0],["core_credential_v1",0],["core_credit_towards_award_v1",0],["core_award_v1",1],
   ["mart_planning__near_award",2],["mart_wallet__learners",3],["mart_wallet__credentials",3],["mart_finance__tuition_forgone",4],["mart_learning__enrolments_to_follow_up",5]];
 // an awning w wide, kept: stripes of its colour and a paler one, the edge scalloped, a soft shadow under it
@@ -3177,7 +3177,7 @@ function gp_formats(ctx,t,o){o=o||{};const L=[150,96,790,600],R=[980,96,790,600]
     const cnt="typed again: "+Math.max(1,Math.min(6,Math.ceil(re)))+" of 6";gp_pill(q,R[0]+40,R[1]+R[3]-70,cnt,{size:30,wash:GV.amber,washA:0.35,seed:321});},GP_NEWBAR);}
 // now: the project's folders on a card, the product descriptor and a core table's contract (the awards, which Clara's is built on) each in its folder (o.tree, o.d, o.c, 0 to 1); each
 // file's standard on a tag beside it (o.std[0], o.std[1])
-const GP_TREE=[["models/",0],["governance/",0],["4-data-products/",1],["5-data-contracts/",1],["6-product-descriptors/",1]];
+const GP_TREE=[["30-data-project/",0],["20-data-governance/",0],["4-data-products/",1],["5-data-contracts/",1],["6-product-descriptors/",1]];
 function gp_treeCard(ctx,x,y,o){o=o||{};const w=520,h=420;wc_panel(ctx,x,y,w,h,{kind:"card",seed:331});gv_pin(ctx,x+w/2,y+16,GV.red,1.1);
   wc_hand(ctx,"the project",x+36,y+78,{size:38,w:700,col:WC_INK});
   GP_TREE.forEach(([s,ind],i)=>{const yy=y+150+i*54,l=clamp((o.lit||[])[i]||0,0,1),tx=x+40+ind*40;if(l>0.01)gv_tint(ctx,tx-10,yy-34,gu_mw(ctx,s)+20,46,o.litCol&&o.litCol[i]||GV.gold,0.8*l);
@@ -3185,9 +3185,9 @@ function gp_treeCard(ctx,x,y,o){o=o||{};const w=520,h=420;wc_panel(ctx,x,y,w,h,{
 const GP_DESC=[{n:3,s:"apiVersion: v1.0.0"},{n:4,s:"kind: DataProduct"},{fold:1},{n:6,s:"name: Learners near an award"}],
   GP_CON=[{n:3,s:"apiVersion: v3.1.0"},{n:4,s:"kind: DataContract"},{fold:1},{n:6,s:"name: core_award_v1"},{fold:1},{n:10,s:"dataProduct: awards"}];
 function gp_nowFiles(ctx,t,o){o=o||{};gp_rise(ctx,clamp(o.tree==null?1:o.tree,0,1),()=>gp_treeCard(ctx,60,120,{lit:[0,0,0,o.c||0,o.d||0],litCol:[0,0,0,GU_CYAN,GU_CYAN]}));
-  const d=gp_file(ctx,620,70,1240,o.d||0,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",lines:GP_DESC});
+  const d=gp_file(ctx,620,70,1240,o.d||0,{path:"20-data-governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",lines:GP_DESC});
   if(d.rows.length)withA(ctx,clamp((o.std||[])[0]||0,0,1),()=>wc_tag(ctx,1830,d.rows[1],"Open Data Product Standard",{align:"right",size:30,wash:GU_CYAN,washA:0.25,seed:341}));
-  const c=gp_file(ctx,620,410,1240,o.c||0,{path:"governance/5-data-contracts/core_award_v1.yaml",lang:"yaml",lines:GP_CON});
+  const c=gp_file(ctx,620,410,1240,o.c||0,{path:"20-data-governance/5-data-contracts/core_award_v1.yaml",lang:"yaml",lines:GP_CON});
   if(c.rows.length)withA(ctx,clamp((o.std||[])[1]||0,0,1),()=>wc_tag(ctx,1830,c.rows[1],"Open Data Contract Standard",{align:"right",size:30,wash:GU_CYAN,washA:0.25,seed:342}));}
 // written first: a core table's enterprise contract (left), written by data governance's information architect (o.u, 0 to 1), and the
 // model the data team builds to it (right, o.m); the check between them, threads joining matching lines (o.thr, 0 to 1); then the two
@@ -3206,7 +3206,7 @@ function gp_written(ctx,t,o){o=o||{};const u=clamp(o.u==null?1:o.u,0,1),m=clamp(
     if(C.rows.length&&M.rows.length)[[0,0],[1,2],[3,3]].forEach(([a,b],k)=>gp_thread(ctx,[912,C.rows[a]],[1008,M.rows[b]],clamp(th*3-k,0,1),{bend:0,lw:4}));});
   if(ck<=0.01)return;gp_rise(ctx,ck,()=>{const its=["build","governance","products","reviewers","impact"].map(n=>({name:n,st:n==="products"?(ck>0.5?"fail":"run"):"pass"}));
     gu_checks(ctx,150,520,1620,{h:300,items:its,t,msg:GP_DRIFT.map(s_=>({s:s_,col:GV.redInk,p:clamp(ck*2-1,0,1)})),pop:[0,0,clamp(ck*2-1,0,1),0,0],msgGap:66,summary:true});});}
-// a new column on credentials: the enterprise contract of core_credential version 2 (governance/5-data-contracts/core_credential_v2.yaml),
+// a new column on credentials: the enterprise contract of core_credential version 2 (20-data-governance/5-data-contracts/core_credential_v2.yaml),
 // its new property written in first, by data governance's information architect (o.add, 0 to 1), which Jun then builds; its readers, each still whole (o.read, o.ok); the film it comes from (o.tag)
 const GP_CV=[{n:140,s:"  - name: credit_points"},{fold:1},{s:"  - name: counts_as_award",add:1},{s:"    logicalType: boolean",add:1},{s:"    physicalType: boolean",add:1},
   {s:"    required: false",add:1},{s:"    classification: none",add:1},{n:147,s:"  - name: issued_on"}],
@@ -3214,7 +3214,7 @@ const GP_CV=[{n:140,s:"  - name: credit_points"},{fold:1},{s:"  - name: counts_a
 // The sheet is as long as the contract will be. The five new lines open first (op), the last line moving down to make room for them,
 // then they're typed in (ty), so no line jumps down in a frame
 function gp_junCol(ctx,t,o){o=o||{};const ad=clamp(o.add||0,0,1),op=easeCam(clamp(ad/0.25,0,1)),ty=clamp((ad-0.25)/0.75,0,1),lh=GU_F.lh;
-  const f=gu_file(ctx,90,60,1180,{path:"governance/5-data-contracts/core_credential_v2.yaml",lang:"yaml",lines:GP_CV.map(r=>r.add||r.n===147?{s:""}:r)});gp_ent(ctx,1250,30,1);
+  const f=gu_file(ctx,90,60,1180,{path:"20-data-governance/5-data-contracts/core_credential_v2.yaml",lang:"yaml",lines:GP_CV.map(r=>r.add||r.n===147?{s:""}:r)});gp_ent(ctx,1250,30,1);
   if(op>0.01)GP_CV.forEach((r,i)=>{if(!r.add)return;const cy=f.rows[i],by=cy+10,p=clamp(ty*6-(i-2),0,1);
     withA(ctx,op,()=>{gv_tint(ctx,104,cy-lh/2+3,1152,lh-6,GV.green,0.5);wc_T(ctx,"+",f.tx-26,by,{w:500,size:28,f:"mono",col:GV.greenInk,align:"right"});});
     if(p>0){const lw=gu_code(ctx,r.s.slice(0,Math.ceil(r.s.length*p)),f.tx,by,{lang:"yaml"});if(p<1){ctx.fillStyle=rgba(WC_DARK,0.8);ctx.fillRect(f.tx+lw+3,by-26,3,32);}}});
@@ -3240,12 +3240,12 @@ function gp_card(q,x,y,w){wc_T(q,"Learners near an award",x+40,y+120,{w:800,size
   wc_T(q,"ready by 7 a.m. on census day",x+40,y+244,{w:600,size:30,col:WC_INK});}
 function gp_stay(ctx,t,o){o=o||{};const cd=clamp(o.cards==null?1:o.cards,0,1),rd=clamp(o.read||0,0,1);
   [[150,"Catalogue · today",GP_CATBAR],[1010,"Another catalogue",GP_NEWBAR]].forEach(([x,ttl,bar],i)=>gp_rise(ctx,clamp(cd*2-i,0,1),()=>gp_win(ctx,x,96,760,330,ttl,q=>gp_card(q,x,96,760),bar),16));
-  const f=gu_file(ctx,360,560,1200,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",lines:[{n:6,s:"name: Learners near an award"}]});
+  const f=gu_file(ctx,300,560,1320,{path:"20-data-governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",lines:[{n:6,s:"name: Learners near an award"}]});
   [[[760,556],[530,440]],[[1160,556],[1390,440]]].forEach(([a,b],i)=>gp_arrow(ctx,a,b,-10,clamp(rd*2-i*0.5,0,1),{col:GU_CYAN,lw:4}));
   if(o.own>0.01)gp_hand(ctx,"the university's, kept in its project",960,800,{size:38,w:700,col:GV.goldInk,align:"center",p:clamp(o.own,0,1)});}
 
 /* ---------- 2 · written by its owner ---------- */
-// Clara's product file, as she wrote it (governance/4-data-products/learners_near_an_award.yml): o.lit[k] lights its parts as they're
+// Clara's product file, as she wrote it (20-data-governance/4-data-products/learners_near_an_award.yml): o.lit[k] lights its parts as they're
 // named: 0 what it's for, 1 how to use it, 2 its owner, 3 the table it offers, 4 its service levels, 5 built every night, 6 ready by seven,
 // 7 where to ask; o.u slides it in; o.note, the pencil's "written by its owner"
 const GP_PF=[{n:6,s:"name: learners_near_an_award"},{fold:1},{n:8,s:"owner: \"Clara Jensen, Planning\""},{fold:1},
@@ -3255,7 +3255,7 @@ const GP_PF=[{n:6,s:"name: learners_near_an_award"},{fold:1},{n:8,s:"owner: \"Cl
   {n:24,s:"  - {channel: planning-data, tool: email, url: \"mailto:planning@uni.example\", scope: issues}"}],
   GP_PFL=[[4],[6],[2],[8,9],[10],[11],[12],[13,14]];
 function gp_prodFile(ctx,o){o=o||{};const L=o.lit||[],lit=new Array(GP_PF.length).fill(0);GP_PFL.forEach((rs,k)=>rs.forEach(r=>{lit[r]=Math.max(lit[r],clamp(L[k]||0,0,1));}));
-  const f=gp_file(ctx,70,50,1780,o.u==null?1:o.u,{path:"governance/4-data-products/learners_near_an_award.yml",lang:"yaml",lines:GP_PF.map((r,i)=>lit[i]>0.01?Object.assign({},r,{lit:lit[i]}):r)});
+  const f=gp_file(ctx,70,50,1780,o.u==null?1:o.u,{path:"20-data-governance/4-data-products/learners_near_an_award.yml",lang:"yaml",lines:GP_PF.map((r,i)=>lit[i]>0.01?Object.assign({},r,{lit:lit[i]}):r)});
   if(f.rows.length&&o.note>0.01)gp_hand(ctx,"written by its owner",1820,f.rows[0]-58,{size:38,w:700,col:WC_PENCIL,align:"right",p:clamp(o.note,0,1)});}
 // Planning's office, close, the camera at the height of someone sitting (as Quality on the platform drew it): a pale green wall, a
 // window, a chart pinned up; the desk (its front layer) with a screen, a keyboard and a mug
@@ -3278,7 +3278,7 @@ function gp_planDesk(x,tt,o){o=o||{};gv_behind(x,"clara",GP_PX.seat[0],GP_PX.top
     gp_rise(x,clamp(v*1.6-0.4,0,1),()=>wc_tag(x,tx,ty,s,{size:30,wash:col,washA:0.4,seed:401+i}));});}
 
 /* ---------- 3 · a contract written first ---------- */
-// a core table's enterprise contract on the desk (governance/5-data-contracts/core_award_v1.yaml): its header, the column award_type and
+// a core table's enterprise contract on the desk (20-data-governance/5-data-contracts/core_award_v1.yaml): its header, the column award_type and
 // its quality rule. What each part says, in pencil at its left, on a thread to its line (o.note[k], 0 to 1), going as the core tables'
 // contracts come in on a card at the left (o.core, in then out); the header lit, and its tag: written first, by data governance's
 // information architect (o.ia); its standard on a tag (o.std); then the model the data team builds to it (o.src), and threads joining
@@ -3299,7 +3299,7 @@ function gp_contractDesk(ctx,t,o){o=o||{};const ia=clamp(o.ia||0,0,1),C=gu_file(
     gp_arrow(ctx,[938,ry-6],[C.tx-10,ry-6],0,clamp(v*2,0,1),{col:WC_PENCIL,lw:3,a:0.7*out});gp_hand(ctx,s_,920,ry+6,{size:38,w:700,col:WC_PENCIL,align:"right",p:v});});
   // the core tables' contracts, the only ones there are, on a card pinned at the left
   if(cr>0.01)gp_rise(ctx,cr,()=>{const x=70,y=130,w=860,h=470;wc_panel(ctx,x,y,w,h,{kind:"card",seed:412});gv_pin(ctx,x+w/2,y+16,GV.red,1.1);
-    wc_T(ctx,"governance/5-data-contracts/",x+40,y+94,{w:500,size:30,f:"mono",col:WC_DARK});
+    wc_T(ctx,"20-data-governance/5-data-contracts/",x+40,y+94,{w:500,size:30,f:"mono",col:WC_DARK});
     GP_CORE.forEach((f,i)=>wc_T(ctx,f,x+80,y+166+i*54,{w:500,size:28,f:"mono",col:WC_INK}));
     gp_hand(ctx,"only the core tables",x+w-40,y+h-28,{size:38,w:700,col:GV.goldInk,align:"right",p:clamp(cr*1.6-0.4,0,1)});},14);
   const src=clamp(o.src||0,0,1);if(src<=0.01)return;const e=easeCam(src),ma=clamp(src*2.2-0.9,0,1),dy=24*(1-e);
@@ -3353,9 +3353,9 @@ function gp_33(ctx,t,o){o=o||{};const u=clamp(o.u==null?1:o.u,0,1),ten=clamp(o.t
 // changes, its checks: the products check fails, and says what to do (o.fail); a product takes it in, its file added (o.prod, 0 to 1, line
 // by line), and the check passes (o.pass). The film it comes from (o.tag)
 const GP_NEWPR={title:"Completions for Planning",sub:"Jun Park wants to merge into main"},
-  GP_NOPROD=["mart_planning__completions is shared but in no product: add it to a","product's outputs in governance/4-data-products/"],
+  GP_NOPROD=["mart_planning__completions is shared but in no product: add it to a","product's outputs in 20-data-governance/4-data-products/"],
   GP_OK18=["7 products are up to date and valid (product standard v1.0.0),","5 enterprise contracts match their models (contract standard v3.1.0)"],
-  GP_NEWF=[[null,"models/marts/planning/mart_planning__completions.sql",0],[null,"models/marts/planning/_planning__models.yml",0],[null,"governance/4-data-products/completions.yml",1],
+  GP_NEWF=[[null,"models/marts/planning/mart_planning__completions.sql",0],[null,"models/marts/planning/_planning__models.yml",0],[null,"20-data-governance/4-data-products/completions.yml",1],
     [6,"name: completions",2],[8,"owner: \"Clara Jensen, Planning\"",3],[18,"  - {model: mart_planning__completions}",4]];
 function gp_newPR(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,fl=clamp(o.fail||0,0,1),pr=clamp(o.prod||0,0,1),ps=clamp(o.pass||0,0,1);
   gu_page(ctx,x,y,w,h,{bar:"GitHub · pull request",title:GP_NEWPR.title,titleSize:40,state:["Open",GV.green],sub:GP_NEWPR.sub});
@@ -3428,7 +3428,7 @@ function gp_credVers(ctx,t,o){o=o||{};const A=gp_file(ctx,80,60,1100,o.u==null?1
     lines:GP_CRV.map((r,i)=>i===1||i===3?Object.assign({},r,{lit:clamp(o.two||0,0,1)}):i===4?Object.assign({},r,{lit:clamp(o.date||0,0,1),litCol:GV.red}):r)});
   if(A.rows.length&&o.ring>0.01){const s=GP_CRV[4].s,i0=s.indexOf("2027"),x0=A.tx+gu_mw(ctx,s.slice(0,i0)),x1=A.tx+gu_mw(ctx,s);
     wc_ring(ctx,(x0+x1)/2,A.rows[4],(x1-x0)/2+30,34,clamp(o.ring,0,1),{col:GV.redInk,lw:4});}
-  const c=clamp(o.c||0,0,1),C=gp_file(ctx,760,500,1100,c,{path:"governance/5-data-contracts/core_credential_v1.yaml",lang:"yaml",
+  const c=clamp(o.c||0,0,1),C=gp_file(ctx,760,500,1100,c,{path:"20-data-governance/5-data-contracts/core_credential_v1.yaml",lang:"yaml",
     lines:GP_CR1.map((r,i)=>i===2?Object.assign({},r,{lit:clamp(o.dep||0,0,1),litCol:GV.amber}):r)});gp_ent(ctx,1850,470,c);
   if(C.rows.length&&o.out>0.01)wc_hand(ctx,"on its way out",C.tx+gu_mw(ctx,GP_CR1[2].s)+60,C.rows[2]+12,{size:40,w:700,col:GV.amberInk,p:clamp(o.out,0,1)});}
 
@@ -3439,7 +3439,7 @@ function gp_credVers(ctx,t,o){o=o||{};const A=gp_file(ctx,80,60,1100,o.u==null?1
 const GP_RDS=[{n:16,s:"inputPorts:"},{n:17,s:"- name: core_learner_v1",pr:0},{fold:1},{n:20,s:"- name: core_award_v1",pr:1},{fold:1},{n:23,s:"- name: core_credit_towards_award_v1",pr:0},{fold:1},
   {n:26,s:"outputPorts:"},{n:27,s:"- name: mart_planning__near_award"},{fold:1},{n:44,s:"- property: consumers"},{n:45,s:"  value:"},{n:46,s:"  - exposure census_dashboard"}];
 function gp_readers(ctx,t,o){o=o||{};const rd=clamp(o.rd||0,0,1),bl=clamp(o.built||0,0,1);
-  const F=gp_file(ctx,60,70,1100,o.u==null?1:o.u,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",
+  const F=gp_file(ctx,60,70,1100,o.u==null?1:o.u,{path:"20-data-governance/…/learners_near_an_award.yaml",lang:"yaml",
     lines:GP_RDS.map((r,i)=>i>=10?Object.assign({},r,{lit:rd}):r.pr!=null?Object.assign({},r,{lit:bl,litCol:GP_SIX[r.pr][2]}):i===0?Object.assign({},r,{lit:bl}):r)});
   if(!F.rows.length)return;gp_gen(ctx,1150,46,clamp((o.u==null?1:o.u)*1.6,0,1));
   if(rd>0.01){const x=1250,y=600,w=600,h=140,end=[F.tx+gu_mw(ctx,GP_RDS[12].s)+18,F.rows[12]];
@@ -3457,9 +3457,9 @@ const GP_MEIL=[{n:50,s:"customProperties:"},{n:51,s:"- property: consumers"},{n:
 function gp_env(ctx,x,y,s,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.scale(s,s);withA(ctx,a,()=>{wc_panel(ctx,-46,-30,92,60,{kind:"envelope",seed:481});
   ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(-44,-28);ctx.lineTo(0,4);ctx.lineTo(44,-28);ctx.stroke();});ctx.restore();}
 function gp_meiTells(ctx,t,o){o=o||{};const L=clamp(o.lit||0,0,1),tl=clamp(o.tell||0,0,1);
-  const F=gp_file(ctx,60,60,1000,o.u==null?1:o.u,{path:"governance/6-product-descriptors/learner_records.yaml",lang:"yaml",
+  const F=gp_file(ctx,60,60,1080,o.u==null?1:o.u,{path:"20-data-governance/6-product-descriptors/learner_records.yaml",lang:"yaml",
     lines:GP_MEIL.map((r,i)=>i>=3?Object.assign({},r,{lit:clamp(L*3-(i-3),0,1),litCol:GP_SIX[GP_TELL[i-3][1]][2]}):r)});
-  if(F.rows.length)gp_gen(ctx,1050,36,clamp((o.u==null?1:o.u)*1.6,0,1));gu_nameCard(ctx,90,560,"Mei Tanaka","registrar's office",clamp(o.mei||0,0,1));
+  if(F.rows.length)gp_gen(ctx,1130,36,clamp((o.u==null?1:o.u)*1.6,0,1));gu_nameCard(ctx,90,560,"Mei Tanaka","registrar's office",clamp(o.mei||0,0,1));
   GP_TELL.forEach(([who,p],k)=>{const v=clamp(tl*3-k,0,1);if(v<=0.01)return;const x=1220,y=80+k*190,w=620,h=150;
     if(F.rows.length)gp_thread(ctx,[F.tx+gu_mw(ctx,GP_MEIL[3+k].s)+18,F.rows[3+k]],[x,y+h/2],clamp(v*2,0,1),{col:mix(GP_SIX[p][2],WC_DARK,0.3),bend:-14,lw:3.5});
     gp_rise(ctx,clamp(v*2-0.3,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:490+k});ctx.save();ctx.fillStyle=rgba(GP_SIX[p][2],0.9);ctx.fillRect(x+8,y+8,14,h-16);ctx.restore();
@@ -3502,16 +3502,16 @@ function gp_tools(ctx,t,o){o=o||{};const rd=clamp(o.read||0,0,1),ck=clamp(o.chk|
   if(ck<=0.01)return;gp_rise(ctx,ck,()=>gp_win(ctx,60,610,1460,250,"Terminal",q=>{wc_T(q,"$ python scripts/generate/products.py --check",96,704,{w:500,size:28,f:"mono",col:WC_DARK});
     const p=clamp(ck*2-0.8,0,1);GP_OK16.forEach((s,i)=>{const n=Math.ceil(s.length*p);if(n<=0)return;const yy=752+i*44;
       if(i===0&&o.valid>0.01&&p>=1)gp_mark(q,96,yy-10,s,"up to date and valid",clamp(o.valid,0,1),GV.green);wc_T(q,s.slice(0,n),96,yy,{w:500,size:28,f:"mono",col:GV.greenInk});});},[60,66,74]),14);}
-// the versions the project keeps: governance/7-standards/, the two schemas it checks the files against (o.dir), and what its README says
+// the versions the project keeps: 20-data-governance/7-standards/, the two schemas it checks the files against (o.dir), and what its README says
 // about them (o.u): the catalogue reads contract standard 3.1.0 (o.lit), and how to move to a newer one (o.move)
 const GP_7R=[{n:12,s:"… The contract standard's 3.2.0 and the product standard's 1.1.0"},{n:13,s:"are newer. Contract standard 3.1.0 is the version Ontos reads and writes (checked on …"},
   {n:14,s:"and product standard 1.0.0 is the release of the same time. To move to a newer version, copy its"},{n:15,s:"schema here and change the versions in the script."}];
 function gp_kept(ctx,t,o){o=o||{};const dv=clamp(o.dir==null?1:o.dir,0,1);
   gp_rise(ctx,dv,()=>{const x=60,y=470,w=1000,h=300;wc_panel(ctx,x,y,w,h,{kind:"card",seed:521});gv_pin(ctx,x+w/2,y+16,GV.red,1.1);
-    wc_T(ctx,"governance/7-standards/",x+40,y+92,{w:500,size:30,f:"mono",col:WC_DARK});
+    wc_T(ctx,"20-data-governance/7-standards/",x+40,y+92,{w:500,size:30,f:"mono",col:WC_DARK});
     ["open-data-contract-standard-3.1.0.schema.json","open-data-product-standard-1.0.0.schema.json"].forEach((s,i)=>{const yy=y+164+i*54;
       if(o.lit>0.01){const v=i?"1.0.0":"3.1.0";gp_mark(ctx,x+80,yy-10,s,v,clamp(o.lit,0,1),GV.gold);}wc_T(ctx,s,x+80,yy,{w:500,size:28,f:"mono",col:WC_INK});});},16);
-  const R=gp_file(ctx,60,60,1800,o.u==null?1:o.u,{path:"governance/7-standards/README.md",lines:GP_7R});
+  const R=gp_file(ctx,60,60,1800,o.u==null?1:o.u,{path:"20-data-governance/7-standards/README.md",lines:GP_7R});
   if(!R.rows.length)return;gp_mark(ctx,R.tx,R.rows[1],GP_7R[1].s,"Contract standard 3.1.0 is the version Ontos reads and writes",clamp(o.lit||0,0,1),GV.gold);
   gp_mark(ctx,R.tx,R.rows[2],GP_7R[2].s,"To move to a newer version, copy its",clamp(o.move||0,0,1),GU_CYAN);gp_mark(ctx,R.tx,R.rows[3],GP_7R[3].s,"schema here and change the versions in the script.",clamp(o.move||0,0,1),GU_CYAN);}
 
@@ -3600,7 +3600,7 @@ function gp_house(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.fi
   ctx.beginPath();ctx.moveTo(-16,-2);ctx.lineTo(0,-16);ctx.lineTo(16,-2);ctx.lineTo(16,16);ctx.lineTo(-16,16);ctx.closePath();ctx.fill();ctx.stroke();
   ctx.beginPath();ctx.moveTo(-5,16);ctx.lineTo(-5,5);ctx.lineTo(5,5);ctx.lineTo(5,16);ctx.stroke();ctx.restore();}
 function gp_home(ctx,t,o){o=o||{};const [bx,by,bw,bh]=gv_mapFree(GV_MC[0],GV_MC[1],GV_MC[2],GV_MC[3],4),cy=by+bh/2,hm=clamp(o.home||0,0,1),cp=clamp(o.copy||0,0,1),ar=clamp(o.arr||0,0,1);
-  const s1="governance/",w1=Math.round(gu_mw(ctx,s1)+92),x1=bx+20,s2="Ontos",w2=Math.round(tw(ctx,s2,30,700)+40),x2=x1+w1+170;
+  const s1="20-data-governance/",w1=Math.round(gu_mw(ctx,s1)+92),x1=bx+20,s2="Ontos",w2=Math.round(tw(ctx,s2,30,700)+40),x2=x1+w1+170;
   if(hm>0.01)gp_rise(ctx,hm,()=>{wc_panel(ctx,x1,cy-30,w1,60,{kind:"chip",wash:[255,253,246],washA:0.9,seed:591});gp_house(ctx,x1+34,cy+1,0.9);
     wc_T(ctx,s1,x1+64,cy+10,{w:500,size:28,f:"mono",col:WC_DARK});},10);
   if(ar>0.01){gp_arrow(ctx,[x1+w1+16,cy],[x2-16,cy],0,clamp(ar*1.4,0,1),{col:WC_PENCIL,lw:4});gp_hand(ctx,"copy",(x1+w1+x2)/2,cy-42,{size:32,w:700,col:WC_PENCIL,align:"center",p:clamp(ar*1.6-0.4,0,1)});}
@@ -3629,7 +3629,7 @@ const GP_FR=[{n:3,s:"apiVersion: v1.0.0"},{n:4,s:"kind: DataProduct"},{n:6,s:"na
 function gp_frames(ctx,t,o){o=o||{};const sw=clamp(o.swap||0,0,1),go=clamp(o.go||0,0,1),wx=580,wy=40,ww=760,wh=330;
   withA(ctx,1-go,()=>{if(sw<0.99)withA(ctx,1-sw,()=>gp_win(ctx,wx,wy,ww,wh,"Catalogue · today",q=>gp_card(q,wx,wy,ww),GP_CATBAR));
     if(sw>0.01)withA(ctx,sw,()=>gp_win(ctx,wx,wy,ww,wh,"Another catalogue",q=>gp_card(q,wx,wy,ww),GP_NEWBAR));});
-  const F=gp_file(ctx,360,450,1200,o.file||0,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",
+  const F=gp_file(ctx,270,450,1290,o.file||0,{path:"20-data-governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",
     lines:GP_FR.map((r,i)=>i>=4?Object.assign({},r,{lit:clamp(o.own||0,0,1)}):r)});
   if(!F.rows.length)return;gp_gen(ctx,1550,424,clamp((o.file||0)*1.6,0,1));
   withA(ctx,clamp(o.std||0,0,1),()=>wc_tag(ctx,1530,F.rows[1],"Open Data Product Standard",{align:"right",size:30,wash:GU_CYAN,washA:0.25,seed:341}));

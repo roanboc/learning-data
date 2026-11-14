@@ -1,5 +1,5 @@
 /* ===== A mandate, written and enforced: the page, the map, and where each line is held =====
-     WM_ROWS            the mandate, as one page: each row a line of governance/8-mandates/workload-agent.yml, said plainly
+     WM_ROWS            the mandate, as one page: each row a line of 20-data-governance/8-mandates/workload-agent.yml, said plainly
      wm_page(ctx, x, y, w, o)   the page: its file at the top, its title, and its rows; o.show(i) 0..1 brings row i in, o.lit(i) 0..1
                         lights it (o.litCol(i) its colour), o.sign 0..1 draws Anil's signature, o.approve 0..1 Noor's tick, o.blank
                         0..1 the page still empty (a dashed edge, nothing written), o.a, o.k; returns {x, y, w, h, rows: [{x, y, w, h}]}
@@ -21,7 +21,7 @@
                         requirement), an assignment, who owns it
      wm_onMap(ctx, o)           the workload agent on the map: Anil, who owns it, and its role, which it's assigned to
      wm_stageList(ctx, x, y, w, o) its stage beside each kind of task, as its assignment holds them; o.mandate 0..1 the mandate's line
-     wm_folders(ctx, x, y, w, o) governance/ and its folders, 8-mandates/ the new one
+     wm_folders(ctx, x, y, w, o) 20-data-governance/ and its folders, 8-mandates/ the new one
      wm_yaml(ctx, x, y, w, o)   the mandate file's first lines, in mono
      wm_checks(ctx, x, y, w, o) the project's check, scripts/check/mandates.py: each place against the page
      wm_law(ctx, x, y, w, o)    Europe's AI law on human oversight: four things a person must be able to do
@@ -36,7 +36,7 @@ const WM_ROWS=[["In test","Find why the night build failed, and fix it"],["In pr
   ["Checks","First: has tonight's copy arrived?"],["Limits","10 rounds · 1 hour · a set budget"],
   ["Switch","Off in both tools, at any hour"],["Undo","Revert the change, restore the table"],
   ["Signed","Anil Kurian, owner · 30 October 2026"],["Approved","Noor Rahman, as a second person"]];
-const WM_SIGN=8,WM_APPROVE=9,WM_FILE="governance/8-mandates/workload-agent.yml";
+const WM_SIGN=8,WM_APPROVE=9,WM_FILE="20-data-governance/8-mandates/workload-agent.yml";
 const WM_PG={lab:232,rowH:58,top:132};
 function wm_pageRows(ctx,x,y,w){const P=WM_PG,vw=w-P.lab-40,out=[];let yy=y+P.top;
   WM_ROWS.forEach((r,i)=>{const ls=Array.isArray(r[1])?r[1].slice():wm_wrap(ctx,r[1],vw,{w:600,size:28}),h=P.rowH+(ls.length-1)*36;out.push({x:x+14,y:yy,w:w-28,h,ls});yy+=h;});
@@ -272,13 +272,13 @@ function wm_stageList(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||62,m
     ag_T(ctx,"mandate:",x+128,my+40,{w:700,size:28,col:AG.blue});ag_T(ctx,"8-mandates/workload-agent.yml",x+128+ag_tw(ctx,"mandate: ",{w:700,size:28}),my+40,{w:500,size:28,f:"mono",col:AG.ink});ctx.restore();}
   ctx.restore();return bb;}
 
-/* governance/, the project's governance folder, its folders one under another (the governance README's table), 8-mandates/ the new
+/* 20-data-governance/, the project's governance folder, its folders one under another (the governance README's table), 8-mandates/ the new
    one (o.lit 0..1); o.show(i); returns the box and each row's */
 const WM_GOV=["1-glossary/","2-owners/","3-architecture-map/","4-data-products/","5-data-contracts/","6-product-descriptors/","7-standards/","8-mandates/"];
 function wm_folders(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=52,h=96+WM_GOV.length*rh+14,bb={x,y,w,h,rows:[]};
   WM_GOV.forEach((f,i)=>bb.rows.push({x:x+14,y:y+86+i*rh,w:w-28,h:rh-4}));if(a<=0)return bb;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.8,1,o.k));ag_box(ctx,x,y,w,h,22,{});
-  wm_fileIcon(ctx,x+44,y+46,rgba(AG.kick,1),true);ag_T(ctx,"governance/",x+76,y+56,{w:500,size:30,f:"mono",col:AG.ink});
+  wm_fileIcon(ctx,x+44,y+46,rgba(AG.kick,1),true);ag_T(ctx,"20-data-governance/",x+76,y+56,{w:500,size:30,f:"mono",col:AG.ink});
   WM_GOV.forEach((f,i)=>{const s=o.show?clamp(o.show(i),0,1):1;if(s<=0.01)return;const b=bb.rows[i],last=i===WM_GOV.length-1,lit=last?clamp(o.lit||0,0,1):0;ctx.save();ctx.globalAlpha*=s;
     if(lit>0){ctx.fillStyle=rgba(AG.blue,0.11*lit);rr(ctx,b.x,b.y,b.w,b.h,10);ctx.fill();ctx.strokeStyle=rgba(AG.blue,0.5*lit);ctx.lineWidth=2;rr(ctx,b.x,b.y,b.w,b.h,10);ctx.stroke();}
     wm_fileIcon(ctx,x+70,b.y+b.h/2,rgba(last?mix(AG.mut,AG.blue,lit):AG.mut,0.9),true);
@@ -286,7 +286,7 @@ function wm_folders(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=52,h=96+WM_G
     if(last&&lit>0)ag_T(ctx,"new",x+w-30,b.y+b.h/2+10,{w:700,size:28,align:"right",col:AG.blue,a:lit});ctx.restore();});
   ctx.restore();return bb;}
 
-/* the mandate file's first lines, in mono (governance/8-mandates/workload-agent.yml): o.show(i) 0..1 each line, o.lit(i) */
+/* the mandate file's first lines, in mono (20-data-governance/8-mandates/workload-agent.yml): o.show(i) 0..1 each line, o.lit(i) */
 const WM_YAML=[["name","the workload agent's mandate"],["kind","requirement"],["owner","Anil Kurian, Faculty of Health"],["task","find why the night build failed, in test"],
   ["status","in force"]];
 function wm_yaml(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=50,h=100+WM_YAML.length*rh+16,bb={x,y,w,h};if(a<=0)return bb;

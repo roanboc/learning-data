@@ -275,7 +275,7 @@ pics:{
  draft:{title:"first draft · the battery",guess:"no source: a guess",rows:[["Operate the battery","IEC's list","Grace"],["Invite households","network's list + retail","head of retail"],["Decide when it charges","—","Grace"],["Credit each bill","retail's product rules","head of retail"]]},
  checks:{title:"the map's checks",agent:"the map agent's own test",test:"the social tariff: 14 elements, 5 owners",model:"a new model",rows:["an owner and a source","realised","stands for a business object","linked, and only once","a rule's case must fail"],
   estate:"the map, and what really runs",map:"the map",running:"what's running",table:"contacts",reader:"a nightly job"},
- keep:{copyT:"an agent's instructions, and where things are kept",instr:"its instructions",pasted:"a copy, pasted in: this year's glossary and tariff rules",
+ keep:{copyT:"a pasted copy, or where it's kept",instr:"its instructions",pasted:"a copy, pasted in: this year's glossary and tariff rules",
   kept:["the glossary","the tariff rules"],where:"where they're kept",tool:"read as it answers, naming the version",
   projT:"a project to bring the map up to date",project:"a project: six months",ends:"it ends",after:"and after?",drift:"how far the map is from what's running",
   rhythm:"a rhythm: on every change, every month, every quarter, every year",

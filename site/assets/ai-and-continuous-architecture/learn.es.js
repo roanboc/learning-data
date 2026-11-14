@@ -273,7 +273,7 @@ pics:{
  draft:{title:"primer borrador · la batería",guess:"sin fuente: suposición",rows:[["Operar la batería","lista de la IEC","Grace"],["Invitar hogares","lista de la red + comercialización","comercialización"],["Decidir cuándo se carga","—","Grace"],["Acreditar cada factura","reglas de producto de comercialización","comercialización"]]},
  checks:{title:"las comprobaciones del mapa",agent:"la prueba propia del agente del mapa",test:"la tarifa social: 14 elementos, 5 responsables",model:"un modelo nuevo",rows:["un responsable y una fuente","realizada","representa un objeto de negocio","enlazado, y una sola vez","el caso de una regla debe fallar"],
   estate:"el mapa, y lo que de verdad está en marcha",map:"el mapa",running:"lo que está en marcha",table:"contactos",reader:"una tarea nocturna"},
- keep:{copyT:"las instrucciones de un agente, y donde se guardan las cosas",instr:"sus instrucciones",pasted:"una copia, pegada: el glosario y las reglas de tarifas de este año",
+ keep:{copyT:"una copia pegada, o donde se guarda",instr:"sus instrucciones",pasted:"una copia, pegada: el glosario y las reglas de tarifas de este año",
   kept:["el glosario","las reglas de tarifas"],where:"donde se guardan",tool:"leídos al responder, con su versión",
   projT:"un proyecto para poner el mapa al día",project:"un proyecto: seis meses",ends:"termina",after:"¿y después?",drift:"cuánto se aleja el mapa de lo que está en marcha",
   rhythm:"un ritmo: en cada cambio, cada mes, cada trimestre, cada año",

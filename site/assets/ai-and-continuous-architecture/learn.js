@@ -443,7 +443,7 @@ VIS.keep=(ctx,o,now,q,S)=>{const P2=PK.keep,v=q.vis,m=14,a=after(now,S,900),w=o.
   if(v.copy){ground(ctx,o.lw,o.h,K.ai);ttl(ctx,o,P2.copyT,K.ai);
     const iw=Math.round(Math.min(w*0.52,250)),ix=m,iy=44,ih=o.h-iy-14,kx=ix+iw+44,kw=o.lw-m-kx;
     glass(ctx,ix,iy,iw,ih,12,K.ai,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.92)"});orb(ctx,ix+19,iy+21,9,now);
-    const th=lines(ctx,P2.instr,ix+36,iy+25,iw-46,{size:12.5,max:2,w:800,color:rgbaS(K.ai,1)}),py=iy+Math.max(42,th+22);
+    const th=lines(ctx,P2.instr,ix+41,iy+25,iw-51,{size:12.5,max:2,w:800,color:rgbaS(K.ai,1)}),py=iy+Math.max(42,th+22);
     // the copy pasted on top: grey paper, struck out once it's answered
     paper(ctx,ix+12,py,iw-24,iy+ih-py-12,P2.pasted,[206,204,198],{rot:-0.03,size:12.5,max:4,strike:a>0.6});
     // where they're kept, at the right, each on a card; once it's answered, read through a tool as the agent answers

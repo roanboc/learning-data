@@ -176,3 +176,30 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
   .topic summary .ix-cnt{grid-column:2;grid-row:2;text-align:left}
   .ix-line{margin-left:0}.topic details .topic-grid{margin-left:0}}
 @media (prefers-reduced-motion:reduce){.r-st,.r-sd,.r-loop,.r-chev,.topic summary::after,.view-switch button{transition:none}}
+
+/* the example dbt project: its mark by a topic's name (route, rail and list), the box the topic opens on, and its own page */
+.pj-ic{display:block;width:100%;height:100%}.pj-ic path{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+.pj-mark{display:inline-block;width:1.05em;height:1.05em;margin-left:.4em;vertical-align:-.12em;color:var(--accent)}
+.r-st .pj-mark{width:16px;height:16px;margin-left:5px;vertical-align:-3px}
+.pj-leg{display:inline-flex;align-items:center;gap:7px}.pj-leg .pj-ic{width:18px;height:18px;color:var(--accent)}
+.pj-box{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;margin:14px 0 4px;padding:12px 14px;border:1px solid var(--accent);border-radius:12px;background:var(--card)}
+.pj-box>.pj-ic{width:30px;height:30px;color:var(--accent)}
+.pj-box p{margin:0}.pj-t{font-weight:800;font-size:15.5px}.pj-l{color:var(--muted);font-size:14px;margin-top:2px!important}
+.pj-a{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px!important;font-weight:700;font-size:14.5px}
+.pj-a a{text-decoration:none;padding:4px 0}.pj-a a:hover{text-decoration:underline}
+.r-rd .pj-box{margin:0 0 12px}
+.list-view .pj-box{max-width:640px;margin:0 0 16px}
+.pj-run{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.pj-run>div{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 16px;min-width:0}
+.pj-run h3{margin:0 0 6px;font-size:17px}.pj-run p{margin:0 0 10px;color:var(--muted);font-size:14.5px}
+.pj-run pre{margin:0;overflow-x:auto;padding:10px 12px;border-radius:8px;background:var(--card2);font-size:13px;line-height:1.5}
+.pj-topic{margin-top:22px}
+.pj-topic h3{display:flex;align-items:center;gap:10px;margin:0 0 4px;font-size:20px}.pj-topic h3 .pj-ic{width:22px;height:22px;flex:none;color:var(--accent)}
+.pj-topic h3 a{text-decoration:none;color:var(--fg)}.pj-topic h3 a:hover{text-decoration:underline}
+.pj-series{margin:12px 0 6px;font-weight:700;font-size:15px}
+.pj-films{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.pj-films details{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 14px}
+.pj-films summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;padding:12px 0;cursor:pointer;min-height:24px}
+.pj-ft{font-weight:800;font-size:16px}.pj-films summary small{color:var(--muted);font-size:13.5px}
+.pj-films details[open]{padding-bottom:12px}.pj-films .film-links{margin-top:0}
+.pj-nw{white-space:nowrap}

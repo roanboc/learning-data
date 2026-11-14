@@ -1102,7 +1102,7 @@ def topics_page(lg):
     TW = topic_words(lg); desc = TOPICS_PAGE["desc"][lg].format(**TW); V = VIEW[lg]
     h, R = head(lg, path, TOPICS_PAGE["title"][lg], desc, desc, "poster.jpg")
     RL = R if lg == "en" else R[3:]
-    D = route_data(lg); TL = {t["id"]: t for t in live()}
+    D = route_data(lg); TL = {t["id"]: t for t in live()}; PC = project_counts()
     es = {tid: [entry(lg, i) for i in shown(t)] for tid, t in TL.items()}
     order = [TL[t["id"]] for t in D["topics"]]
     firsts = [e["posters"][0] for t in order for e in es[t["id"]]]
@@ -1126,9 +1126,11 @@ def topics_page(lg):
             cards = "\n".join([topic_card(lg, e, RL, R) for e in es[t["id"]]] + [soon_card(lg, u) for u in up])
             more = f' · {V["more1"] if len(up) == 1 else V["more"].format(n=len(up))}' if up else ""
             body += (f'<section class="module topic" id="{t["id"]}" aria-labelledby="{t["id"]}-h">\n<details>\n'
-                     f'<summary><i class="ix-ring" aria-hidden="true"></i><h2 id="{t["id"]}-h">{E(t["name"][lg])}</h2>'
-                     f'<span class="ix-who">{E(t["who"][lg])}</span><span class="ix-cnt">{topic_counts(lg, es[t["id"]])}{more}</span></summary>\n'
+                     f'<summary><i class="ix-ring" aria-hidden="true"></i><h2 id="{t["id"]}-h">{E(t["name"][lg])}'
+                     + (f'<span class="pj-mark" title="{E(ROUTE_TEXT[lg]["projmark"])}">{PROJECT_ICON}<span class="route-sr">{E(ROUTE_TEXT[lg]["projmark"])}</span></span>' if PC.get(t["id"]) else "")
+                     + f'</h2><span class="ix-who">{E(t["who"][lg])}</span><span class="ix-cnt">{topic_counts(lg, es[t["id"]])}{more}</span></summary>\n'
                      f'<p class="ix-line">{E(t["line"][lg])}</p>\n'
+                     + (project_box(lg, PC[t["id"]], RL) + "\n" if PC.get(t["id"]) else "") +
                      f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n</details>\n</section>\n')
         body += '</div>\n'
     body += (f'</div>\n</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
@@ -1244,12 +1246,18 @@ ROUTE_TEXT = {
                any="Suggested paths, not locked steps. Open any topic at any time.", whole="Whole route", want="I want to", stops="{n} stops",
                go="Start this route", on="Continue this route", again="Watch again", watched="Watched", of="{n} of {of} watched", yours="Your route",
                film1="1 film", films="{n} films", series="{n} series", more1="1 more series coming", more="{n} more series coming",
-               map="The learning route: {n} topics. Select a topic to see its films and series."),
+               map="The learning route: {n} topics. Select a topic to see its films and series.",
+               proj="The example dbt project", proj1="1 film here shows its real files, and you can run it yourself.",
+               projn="{n} films here show its real files, and you can run it yourself.", projpage="About the project", projrepo="Open it on GitHub",
+               projmark="Shows the example dbt project"),
     "es": dict(start="Empieza aquí", play="Ver la introducción", open="Abrir el tema", next="Tu próxima parada", soon="Próximamente", route="Ruta sugerida",
                any="Rutas sugeridas, no pasos obligatorios. Abre cualquier tema cuando quieras.", whole="Toda la ruta", want="Quiero", stops="{n} paradas",
                go="Empezar esta ruta", on="Seguir esta ruta", again="Ver de nuevo", watched="Vista", of="{n} de {of} vistas", yours="Tu ruta",
                film1="1 película", films="{n} películas", series="{n} series", more1="1 serie más en camino", more="{n} series más en camino",
-               map="La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series."),
+               map="La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series.",
+               proj="El proyecto de dbt de ejemplo", proj1="1 película de aquí muestra sus archivos reales, y puedes ejecutarlo tú.",
+               projn="{n} películas de aquí muestran sus archivos reales, y puedes ejecutarlo tú.", projpage="Sobre el proyecto", projrepo="Ábrelo en GitHub",
+               projmark="Muestra el proyecto de dbt de ejemplo"),
 }
 
 
@@ -1257,7 +1265,7 @@ def route_data(lg):
     """What assets/learn/route.js draws, in a language: the route's groups, its topics in the route's order (each with who it's
     for, what it covers, and its films and series: title, page, poster, length, and the progress prefixes of its films), the
     goals, and the words."""
-    R = load_route(); TL = {t["id"]: t for t in live()}
+    R = load_route(); TL = {t["id"]: t for t in live()}; PC = project_counts()
     topics = []
     for g in R["groups"]:
         for tid in g["topics"]:
@@ -1271,10 +1279,11 @@ def route_data(lg):
                                   **({"lang": "en"} if lg == "es" and e["title_lang"] == "en" else {})))
             items += [dict(id=u["id"], soon=True, title=u["name"][lg], kicker=T(lg, f'Series · {u["films"]} films', f'Serie · {u["films"]} películas'))
                       for u in upcoming(t)]
-            topics.append(dict(id=tid, group=g["id"], name=t["name"][lg], who=t["who"][lg], line=t["line"][lg], items=items))
+            topics.append(dict(id=tid, group=g["id"], name=t["name"][lg], who=t["who"][lg], line=t["line"][lg], items=items,
+                               **({"proj": PC[tid]} if PC.get(tid) else {})))
     on = {t["group"] for t in topics}
     return dict(lang=lg, text=ROUTE_TEXT[lg], groups=[dict(id=g["id"], line=g["line"], name=g["name"][lg]) for g in R["groups"] if g["id"] in on],
-                topics=topics, goals=[dict(id=g["id"], name=g["name"][lg], line=g["line"][lg], stops=g["stops"]) for g in R["goals"]])
+                project=dict(href=PROJECT_PATH, repo=proj_url(), icon=PROJECT_ICON), topics=topics, goals=[dict(id=g["id"], name=g["name"][lg], line=g["line"][lg], stops=g["stops"]) for g in R["goals"]])
 
 
 def route_js(lg):
@@ -1287,6 +1296,164 @@ def route_js(lg):
 def route_box(lg, R, RL):
     """Where assets/learn/route.js draws the route, on the Topics page."""
     return f'<div class="route" data-route data-root="{R}" data-base="{RL}" data-topics=""></div>'
+
+
+# ---------------------------------------------------------------- the example dbt project
+# One dbt project, in films/analytics-engineering/project/, is behind many films: In the weeds builds it, and later series
+# add to it. A film "shows" it when its site.json has "repo" (its chapters' files, as on its See it in the project). Its page,
+# dbt-project/, says what it is, how to run it, where things live, and which films show which files; the learning route marks
+# each topic with such films with the project's icon, readable on a closed station, and opens on a box that links to it.
+PROJECT_DIR = "analytics-engineering"
+PROJECT_PATH = "dbt-project/"
+# a box with its lid: the project's mark on the route, the list and its page (no product's logo)
+PROJECT_ICON = ('<svg class="pj-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z"/>'
+                '<path d="M3.6 6.3L10 10l6.4-3.7M10 10v7.4"/></svg>')
+PROJECT_TEXT = {
+    "en": dict(
+        title="The example dbt project · Learning Data", h1="The example dbt project",
+        desc="One real dbt project behind many of the films: what it answers, how to run it on your laptop or on Databricks, where each part lives, and which films show it.",
+        lead="One real dbt project, for a fictional university, is behind many of these films. Every file they show on screen is in it. It runs on your laptop with DuckDB, and the same code runs on Databricks.",
+        repo="Open it on GitHub", run="How to run it",
+        what_h="What it is",
+        what="It started with one question from Planning: how many learners are within 15 credit points of a graduate certificate, by faculty, at census date? In the weeds of data crafting builds that answer step by step. Later films add what a real team needs around it: a wallet app and Finance reading the same facts, payroll's jobs, data quality checks, governance files, and the rules AI agents work under.",
+        run_h="Run it yourself",
+        laptop="On your laptop", laptop_p="Python 3.11 or later, no account. dbt loads the sample data, builds every model and runs every test, on DuckDB.",
+        dbx="On Databricks", dbx_p="The same code, with dbt Cloud or dbt Core. Load the sample files into Unity Catalog first; the README has the steps.",
+        where_h="Where things live", where_p="The main folders, and what each holds. Each link opens it on GitHub.",
+        films_h="Films that show it", films_p="{n} films show its real files on screen. Open a film to see, chapter by chapter, which files it shows and where they are.",
+        files1="1 file", files="{n} files",
+        icon="Shows the example dbt project",
+        foot="The university, people and records in the project are fictional. Code: MIT licence. Text: CC BY 4.0.",
+    ),
+    "es": dict(
+        title="El proyecto de dbt de ejemplo · Learning Data", h1="El proyecto de dbt de ejemplo",
+        desc="Un proyecto de dbt real detrás de muchas de las películas: qué responde, cómo ejecutarlo en tu computadora o en Databricks, dónde está cada parte y qué películas lo muestran.",
+        lead="Un proyecto de dbt real, para una universidad ficticia, está detrás de muchas de estas películas. Cada archivo que muestran en pantalla está en él. Corre en tu computadora con DuckDB, y el mismo código corre en Databricks.",
+        repo="Ábrelo en GitHub", run="Cómo ejecutarlo",
+        what_h="Qué es",
+        what="Empezó con una pregunta de Planificación: ¿cuántos estudiantes están a 15 créditos o menos de un certificado de posgrado, por facultad, a la fecha del censo? In the weeds of data crafting construye esa respuesta paso a paso. Las películas siguientes le suman lo que un equipo real necesita alrededor: una billetera digital y Finanzas leyendo los mismos hechos, los trabajos de la nómina, controles de calidad de datos, archivos de gobernanza y las reglas con las que trabajan los agentes de IA.",
+        run_h="Ejecútalo tú",
+        laptop="En tu computadora", laptop_p="Python 3.11 o posterior, sin cuenta. dbt carga los datos de muestra, construye cada modelo y corre cada prueba, en DuckDB.",
+        dbx="En Databricks", dbx_p="El mismo código, con dbt Cloud o dbt Core. Primero carga los archivos de muestra en Unity Catalog; el README tiene los pasos.",
+        where_h="Dónde está cada cosa", where_p="Las carpetas principales y lo que guarda cada una. Cada enlace la abre en GitHub.",
+        films_h="Películas que lo muestran", films_p="{n} películas muestran en pantalla sus archivos reales. Abre una película para ver, capítulo a capítulo, qué archivos muestra y dónde están.",
+        files1="1 archivo", files="{n} archivos",
+        icon="Muestra el proyecto de dbt de ejemplo",
+        foot="La universidad, las personas y los registros del proyecto son ficticios. Código: licencia MIT. Texto: CC BY 4.0.",
+    ),
+}
+# the main folders of the project, and what each holds
+PROJECT_PARTS = [
+    (["models/"], "What's built, by domain: staging, the core tables every team shares, and the marts each team reads.",
+     "Lo que se construye, por dominio: staging, las tablas centrales que comparten todos y los marts que lee cada equipo."),
+    (["sources/"], "What comes in from the three systems: tables, keys, freshness and known limits.",
+     "Lo que llega de los tres sistemas: tablas, claves, frescura y límites conocidos."),
+    (["seeds/"], "Reference data the business owns, and published numbers to reconcile against.",
+     "Datos de referencia que son del negocio, y cifras publicadas para conciliar."),
+    (["tests/"], "Business rules that must hold, reconciliations, and rules about the project itself.",
+     "Reglas del negocio que deben cumplirse, conciliaciones y reglas sobre el propio proyecto."),
+    (["macros/"], "Conventions written once: keys, point in time, Planning's rule, and Databricks tags and masks.",
+     "Convenciones escritas una vez: claves, punto en el tiempo, la regla de Planificación, y etiquetas y máscaras en Databricks."),
+    (["analyses/"], "The evidence: profiling the sources, a design choice, and checking the result.",
+     "La evidencia: perfilar las fuentes, una decisión de diseño y la revisión del resultado."),
+    (["exposures/"], "Who uses each output: dashboards, apps, forecasts and agents.",
+     "Quién usa cada resultado: tableros, aplicaciones, pronósticos y agentes."),
+    (["governance/"], "The glossary, owners, the architecture map, data products, contracts and agents' mandates.",
+     "El glosario, los responsables, el mapa de arquitectura, los productos de datos, los contratos y los mandatos de los agentes."),
+    (["docs/"], "How the work is done: the process, conventions, decisions and the quality scorecard.",
+     "Cómo se hace el trabajo: el proceso, las convenciones, las decisiones y el tablero de calidad."),
+    (["AGENTS.md", "skills/"], "What an AI agent may and may not do here, and the skills it uses.",
+     "Qué puede y qué no puede hacer aquí un agente de IA, y las habilidades que usa."),
+    (["examples/"], "Pull requests, nights and Databricks set-ups that the films tell as stories.",
+     "Pull requests, noches y configuraciones de Databricks que las películas cuentan como historias."),
+    (["databricks.yml", "resources/"], "The jobs, deployed as one bundle to test and to production.",
+     "Los trabajos, desplegados como un solo paquete en prueba y en producción."),
+]
+
+
+def proj_url(path=""):
+    """A file or folder of the example project on GitHub: a folder ends with /."""
+    kind = "tree" if path.endswith("/") or not path else "blob"
+    return f'{REPO}/{kind}/main/films/{PROJECT_DIR}/project/{path}'.rstrip("/")
+
+
+def route_topics():
+    """The topics the site shows, in the route's order."""
+    TL = {t["id"]: t for t in live()}
+    return [TL[tid] for g in load_route()["groups"] for tid in g["topics"] if tid in TL]
+
+
+def project_films():
+    """The films that show the example project (site.json's "repo"), by topic in the route's order, then by series:
+    [(topic, [(series, [film, ...]), ...]), ...]."""
+    out = []
+    for t in route_topics():
+        rows = []
+        for i in shown(t):
+            S = next((x for x in SERIES if x["id"] == i), None)
+            if S is None or S.get("project", S["dir"]) != PROJECT_DIR:
+                continue
+            fs = [f for f in films(S)[1] if f["site"].get("repo")]
+            if fs:
+                rows.append((S, fs))
+        if rows:
+            out.append((t, rows))
+    return out
+
+
+def project_counts():
+    """How many films of each topic show the example project: {topic id: n}."""
+    return {t["id"]: sum(len(fs) for _, fs in rows) for t, rows in project_films()}
+
+
+def project_box(lg, n, RL):
+    """The box a topic with films that show the project opens on, in the Topics list (route.js draws the same on the route)."""
+    X = ROUTE_TEXT[lg]
+    return (f'<div class="pj-box">{PROJECT_ICON}<div><p class="pj-t">{E(X["proj"])}</p><p class="pj-l">{E(X["proj1"] if n == 1 else X["projn"].format(n=n))}</p>'
+            f'<p class="pj-a"><a href="{RL}{PROJECT_PATH}">{E(X["projpage"])}</a><a href="{proj_url()}">{E(X["projrepo"])}</a></p></div></div>')
+
+
+def project_page(lg):
+    """dbt-project/: what the example project is, how to run it, where things live, and the films that show it, each with the
+    files its chapters show."""
+    P = PROJECT_TEXT[lg]; path = PROJECT_PATH
+    h, R = head(lg, path, P["title"], P["desc"], P["lead"], f'{project_films()[0][1][0][1][0]["key"]}-poster.jpg')
+    RL = R if lg == "en" else R[3:]
+    groups = project_films(); n = sum(len(fs) for _, rows in groups for _, fs in rows)
+    posters = [f'<img src="{R}assets/{f["key"]}-poster.jpg" alt="">' for _, rows in groups for _, fs in rows for f in fs[:1]]
+    parts = "\n".join(f'<li><b>' + " ".join(f'<a href="{proj_url(p)}"><code>{E(p)}</code></a>' for p in ps) + f'</b><span>{E(T(lg, en, es))}</span></li>'
+                      for ps, en, es in PROJECT_PARTS)
+    body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{"".join((posters * 2)[:8])}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
+            f'<p class="eyebrow crumbs"><a href="{RL}topics/">{T(lg, "Topics", "Temas")}</a></p>\n<h1>{E(P["h1"])}</h1>\n<p class="lead">{E(P["lead"])}</p>\n'
+            f'<p class="stop-nav"><a class="btn primary" href="{proj_url()}">{E(P["repo"])}</a><a class="btn" href="{proj_url("README.md")}">{E(P["run"])}</a></p>\n</section>\n\n'
+            f'<section class="module" id="what" aria-labelledby="what-h">\n<div class="mhead"><div><h2 id="what-h">{E(P["what_h"])}</h2><p>{E(P["what"])}</p></div></div>\n</section>\n\n'
+            f'<section class="module" id="run" aria-labelledby="run-h">\n<div class="mhead"><div><h2 id="run-h">{E(P["run_h"])}</h2></div></div>\n<div class="pj-run">\n'
+            f'<div><h3>{E(P["laptop"])}</h3><p>{E(P["laptop_p"])}</p><pre><code>cd films/{PROJECT_DIR}/project\npip install -r requirements.txt\ndbt build --profiles-dir .</code></pre></div>\n'
+            f'<div><h3>{E(P["dbx"])}</h3><p>{E(P["dbx_p"])}</p><pre><code>pip install -r requirements-databricks.txt\ndbt build --target databricks --profiles-dir .</code></pre></div>\n'
+            f'</div>\n<p class="film-links"><a href="{proj_url("README.md")}">{E(P["run"])}</a></p>\n</section>\n\n'
+            f'<section class="module" id="where" aria-labelledby="where-h">\n<div class="mhead"><div><h2 id="where-h">{E(P["where_h"])}</h2><p>{E(P["where_p"])}</p></div></div>\n'
+            f'<ul class="repo-list">\n{parts}\n</ul>\n</section>\n\n'
+            f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{E(P["films_h"])}</h2><p>{E(P["films_p"].format(n=n))}</p></div></div>\n')
+    for t, rows in groups:
+        body += f'<div class="pj-topic">\n<h3>{PROJECT_ICON}<a href="{RL}topics/#{t["id"]}">{E(t["name"][lg])}</a></h3>\n'
+        for S, fs in rows:
+            body += f'<p class="pj-series">{series_link(lg, RL, S["id"])}</p>\n<ul class="pj-films">\n'
+            for f in fs:
+                repo = f["site"]["repo"]
+                names = dict(f["chapters"]) if lg == "en" else {k: f["site"]["chapters_es"].get(k, v) for k, v in f["chapters"]}
+                uniq = {p for ps in repo.values() for p in ps}
+                cnt = P["files1"] if len(uniq) == 1 else P["files"].format(n=len(uniq))
+                title = f["title"] if lg == "en" else f["site"].get("title_es", f["title"])
+                rws = "\n".join(f'<li><b>{E(names[cid])}</b><span>' + " ".join(f'<a href="{proj_url(p)}"><code>{E(p)}</code></a>' for p in repo[cid]) + '</span></li>'
+                                for cid, _ in f["chapters"] if repo.get(cid))
+                body += (f'<li><details><summary><span class="pj-ft">{E(title)}</span><small>{num(lg, f)} · {E(cnt)}</small></summary>\n'
+                         f'<p class="film-links"><a href="{RL}{f["path"]}">{T(lg, "Watch the film", "Ver la película")}</a></p>\n'
+                         f'<ul class="repo-list">\n{rws}\n</ul>\n</details></li>\n')
+            body += '</ul>\n'
+        body += '</div>\n'
+    body += (f'</section>\n</main>\n<footer>{SOURCE[lg]}<p>{E(P["foot"])} {LOGOS[lg]} {NOTICES[lg]}</p></footer>\n'
+             f'<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
+    return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n</head>\n' + body
 
 
 # The home page stays a first view: the film, its two other steps, then two ways on: the learning route, and how the films were
@@ -1506,7 +1673,8 @@ def lists():
 
 def pages():
     """Every generated page, of every series, and the Topics page: (path under site/, html)."""
-    out = [("topics/index.html", topics_page("en")), ("es/topics/index.html", topics_page("es"))]
+    out = [("topics/index.html", topics_page("en")), ("es/topics/index.html", topics_page("es")),
+           (f"{PROJECT_PATH}index.html", project_page("en")), (f"es/{PROJECT_PATH}index.html", project_page("es"))]
     for S in SERIES:
         series, films_ = films(S)
         if not films_:

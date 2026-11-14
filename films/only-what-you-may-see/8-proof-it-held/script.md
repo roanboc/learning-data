@@ -182,7 +182,7 @@ Four questions, at the ends of *Who could read it*, *A class and a policy*, *Whe
 
 ## What the example project gets
 
-New files, so no cited line moves (`films/analytics-engineering/project/`):
+New files, so no cited line moves (`learning-data-project/30-data-project/`):
 
 - `analyses/governance/morning_check.sql`: the two gaps the alert looks for every morning, on the shelves people read (`core`, `support`, `published` and the studies' own spaces; the raw tables and the build's views carry no class, as *Tags that travel* sets them): a column that `system.data_classification.results` finds personal, with no `personal_data` tag in `information_schema.column_tags` and not a column the project's YAML classes `none` (which has no tag); and a class that has to be hidden, on a column, with no column mask policy whose tags name it in `information_schema.abac_policy_definitions`. It reads names and classes only, never classification's sample values. A Databricks SQL alert runs it at 07:00 and emails Yusuf Demir and Sam Okafor when it returns a row.
 - `analyses/governance/who_read_in_a_window.sql`: who read a table's data in a window of time, from `system.access.audit`, by the event logged when the platform hands a reader a credential for the table (`generateTemporaryTableCredential`): here, the exam support table in the 31 hours.

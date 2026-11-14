@@ -43,7 +43,7 @@ Kept by the film's thread ("Make data basics film 9 Files as data and context"),
 |---|---|---|---|---|
 | 15 | How did claims for hours come in before the claims app? | As spreadsheets by email, each tutor's its own way, typed into payroll by hand, until February 2026. | Chapter 4 | One line |
 | 16 | What does the claim on screen show? | The example project's own claim, CL-103807, from the claims app's table (*One copy, one platform*'s): who claimed (E-4417), on which contract (T-26188), whether it's approved and when. Never its amount, a person's pay. It depends on that film's columns (`status`, `approved_at`); if they change, this card does. | Chapter 4 | One card and one line |
-| 17 | Who keeps the claims app's data contract, and in what form? | The app's team, with the app's own code, as a YAML file in the Open Data Contract Standard (v3.1.0), valid against the standard's schema in `governance/7-standards/`; HR, as Ingrid Holm, answers for what each field means. The fields are the app's own table's, `hours` kept as text, as the app keeps it. | Chapter 4, `claims_contract.yaml` | The YAML and one line |
+| 17 | Who keeps the claims app's data contract, and in what form? | The app's team, with the app's own code, as a YAML file in the Open Data Contract Standard (v3.1.0), valid against the standard's schema in `20-data-governance/7-standards/`; HR, as Ingrid Holm, answers for what each field means. The fields are the app's own table's, `hours` kept as text, as the app keeps it. | Chapter 4, `claims_contract.yaml` | The YAML and one line |
 | 18 | Who reads the claims? | Payroll, Finance and the reports, each from the same row. | Chapter 4 | One card |
 
 ## The close, the page and the release

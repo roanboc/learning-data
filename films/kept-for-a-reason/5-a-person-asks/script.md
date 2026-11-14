@@ -226,7 +226,7 @@ The film can stop at the end of three chapters, with one question each ([`site/a
 
 ## Where it comes from in the project
 
-The example project, `films/analytics-engineering/project/`. Everything this film adds is new files and a new section at the end of `docs/databricks-governance.md`, so no line another film cites moves; nothing in it changes a number *In the weeds of data crafting* shows.
+The example project, `learning-data-project/30-data-project/`. Everything this film adds is new files and a new section at the end of `docs/databricks-governance.md`, so no line another film cites moves; nothing in it changes a number *In the weeds of data crafting* shows.
 
 | On screen | In the example project |
 |---|---|

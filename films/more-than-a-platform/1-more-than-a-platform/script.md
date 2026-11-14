@@ -122,9 +122,9 @@ Chime bars, made for this film (`source/tools/score.py`): single bars struck wit
 | 3 | Governance was often seen as slow because the foundations were weak or the technology wasn't ready to deliver it as a service | The author's experience, 14 November 2026, said with "often"; *Governance on the map* and *Governance in practice* show it built into the work |
 | 4 | The main line goes deeper into the introduction's layers | The author, 14 November 2026: what *Build and monitor*'s topics do |
 | 4 | The stations, their groups and their order | `modules/route.json`: Start, Foundations, Build and monitor, Share and protect, Agents, Lead; *Leading data people* last |
-| 5 | A real dbt project on GitHub runs on your machine and on Databricks | `films/analytics-engineering/project/README.md`: it runs on DuckDB with no account, and the same code on Databricks (`profiles.yml`, target `databricks`) |
+| 5 | A real dbt project on GitHub runs on your machine and on Databricks | `learning-data-project/30-data-project/README.md`: it runs on DuckDB with no account, and the same code on Databricks (`profiles.yml`, target `databricks`) |
 | 5 | What the films show on screen is code you can open | The project's README: every snippet the films show is code in that folder. Said of what the films show, not of every film |
-| 5 | The project keeps a glossary, owners, an architecture map, data products, contracts and decisions | `governance/1-glossary`, `2-owners`, `3-architecture-map`, `4-data-products`, `5-data-contracts`; `docs/decisions.md` |
+| 5 | The project keeps a glossary, owners, an architecture map, data products, contracts and decisions | `20-data-governance/1-glossary`, `2-owners`, `3-architecture-map`, `4-data-products`, `5-data-contracts`; `docs/decisions.md` |
 | 5 | Any tools with the same capabilities would do | The author, 14 November 2026; AGENTS.md: "Tools show, they don't lead" |
 | 6 | DAMA's wheel has governance at its centre and ten areas around it | DAMA-DMBOK, second edition, revised 2024, as *Every area, one job* cites it |
 | 6 | The portal goes beyond the wheel into enterprise architecture, agents and leadership | The route's topics: *Enterprise architecture*, *AI agents in data work*, *Leading data people* are not areas of the wheel |

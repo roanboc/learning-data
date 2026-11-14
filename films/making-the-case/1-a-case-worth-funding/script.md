@@ -233,7 +233,7 @@ Each source with the day it was read: 10 November 2026, the links on the film's 
 
 ## What the example project has
 
-Nothing new: the film shows the job, not the data work, as the module's briefs expect of most of its films. The governed products option C is rebuilt from are the example project's (`films/analytics-engineering/project/`), as earlier films show them; this film names them and shows none.
+Nothing new: the film shows the job, not the data work, as the module's briefs expect of most of its films. The governed products option C is rebuilt from are the example project's (`learning-data-project/30-data-project/`), as earlier films show them; this film names them and shows none.
 
 ## Sources
 

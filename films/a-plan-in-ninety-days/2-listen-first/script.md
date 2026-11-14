@@ -211,4 +211,4 @@ Each source with the day it was read.
 
 ## What the example project has
 
-Nothing new: the film shows the job, not the data work. The current state is drawn on Noor's map as the governance films keep it, and no model, check or file in `films/analytics-engineering/project/` changes.
+Nothing new: the film shows the job, not the data work. The current state is drawn on Noor's map as the governance films keep it, and no model, check or file in `learning-data-project/30-data-project/` changes.

@@ -72,7 +72,7 @@ Its result row slides out beneath: `learning_platform.users | student_id | 42 | 
 
 **On screen.** profile first · claim · query · result · 4 of 42 accounts: no student ID · one email, two students · one email, two accounts · 2 orphans as typed · 0 once trimmed and lower-cased, of those with an email · a claim without its query is a guess
 
-**In the repo.** [`analyses/profiling/profile_null_keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_null_keys.sql) · [`analyses/profiling/profile_shared_emails.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_shared_emails.sql) · [`analyses/profiling/profile_orphans.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_orphans.sql)
+**In the repo.** [`analyses/profiling/profile_null_keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_null_keys.sql) · [`analyses/profiling/profile_shared_emails.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_shared_emails.sql) · [`analyses/profiling/profile_orphans.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_orphans.sql)
 
 ### 4 · Key sets · 1:35–2:04
 
@@ -110,7 +110,7 @@ The visible dots fall off Aisha's email and its capitals drop: `SC|aisha.k@mail.
 
 **On screen.** key set · `SIS` student system · Registrar's office · `LMS` learning platform · `SC` short-course platform · Learning team · same-looking key, different people · qualified · trimmed · one case · `SC|aisha.k@mail.example`
 
-**In the repo.** [`seeds/reference/shared/key_sets.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/shared/key_sets.csv) · [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql) · [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql)
+**In the repo.** [`seeds/reference/shared/key_sets.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/shared/key_sets.csv) · [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql) · [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/short_courses/stg_short_courses__learners.sql)
 
 ### 5 · Rules, most trusted first · 2:04–2:51
 
@@ -155,7 +155,7 @@ Mei, in her business outline, and a gold tick: "approved 6 Oct 2026".
 
 **On screen.** rules, most trusted first · 1 a recorded decision · 2 student ID · 3 student ID held by the platform · 4 same email as exactly one student · 5 same email as one platform user · 9 own key · the most trusted rule that fits · 90 keys → 46 learners · in words: the model · in code: two models · approved · Mei Tanaka, registrar's office
 
-**In the repo.** [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_key_candidates.sql) · [`models/intermediate/student/int_learner_keys_matched.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_keys_matched.sql) · [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml)
+**In the repo.** [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_key_candidates.sql) · [`models/intermediate/student/int_learner_keys_matched.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_keys_matched.sql) · [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml)
 
 ### 6 · Keep them apart · 2:51–3:33
 
@@ -197,7 +197,7 @@ The dashed line breaks; the microcredential slides back; the wallet reads 5. A l
 
 **On screen.** another Aisha · her account holds our Aisha's student ID · typed by mistake · merged · 6 credentials · one she never earned · every test passes · no test knew · D-003 · different · Mei Tanaka · 7 Oct 2026 · a decision beats every rule · 5 credentials · the decision is data · the code keeps them apart · a test fails if they merge
 
-**In the repo.** [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/learner_identity_decisions.csv) · [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_key_candidates.sql) · [`tests/rules/keys_decided_different_stay_apart.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/rules/keys_decided_different_stay_apart.sql)
+**In the repo.** [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/learner_identity_decisions.csv) · [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_key_candidates.sql) · [`tests/rules/keys_decided_different_stay_apart.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/rules/keys_decided_different_stay_apart.sql)
 
 ### 7 · The same hash everywhere · 3:33–4:07
 
@@ -229,7 +229,7 @@ Both give `0905e6e2…`. Finally a row: `learner_bk SIS|S-20417` pinned beside `
 
 **On screen.** 64 hex characters · one trailing space · a different hash · trim · upper case · `<null>` for a missing part · joined with `|` · one macro · the same hash, every model, every engine · DuckDB `sha256` · Databricks `sha2(…, 256)` · the readable key stays beside the hash
 
-**In the repo.** [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql)
+**In the repo.** [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql)
 
 ### 8 · Codes, too · 4:07–4:33
 
@@ -253,7 +253,7 @@ A card from `seeds/reference/student/_student__seeds.yml`, line 10: `meta: {owne
 
 **On screen.** `ENR` · `active` · `1` → studying · status map · one row per code · owner: registrar's office · one key · many rows? · many versions? · Looking alike isn't being the same. Write down what is.
 
-**In the repo.** [`seeds/reference/student/status_map.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/status_map.csv) · [`seeds/reference/student/_student__seeds.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/_student__seeds.yml)
+**In the repo.** [`seeds/reference/student/status_map.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/status_map.csv) · [`seeds/reference/student/_student__seeds.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/_student__seeds.yml)
 
 ## Pause and think
 
@@ -297,25 +297,25 @@ Technical claims checked on 30 September 2026 against a run of the project (dbt 
 
 ## Project files each snippet comes from
 
-All under `films/analytics-engineering/project/`, lines checked against the files on 6 October 2026.
+All under `learning-data-project/30-data-project/`, lines checked against the files on 6 October 2026.
 
 | Chapter | File | Lines |
 |---|---|---|
-| 3 | [`analyses/profiling/profile_null_keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_null_keys.sql) | 1-7 |
-| 3 | [`analyses/profiling/profile_shared_emails.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_shared_emails.sql), [`analyses/profiling/profile_orphans.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_orphans.sql) | results only, from `dbt show` |
-| 4 | [`seeds/reference/shared/key_sets.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/shared/key_sets.csv) | 1-4 (generated from each source's `meta.key_set`) |
-| 4 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql) | 4-7 |
-| 4 | [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql) | 12, 25-27 |
-| 5 | [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_key_candidates.sql) | 35-44, 48-58, 62-72 (trimmed with `…`), 89-99 (`by_own_key`, name and priority only) |
-| 5 | [`models/intermediate/student/int_learner_keys_matched.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_keys_matched.sql) | 51-57 (trimmed with `…`) |
-| 5 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml) | 34-39 |
+| 3 | [`analyses/profiling/profile_null_keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_null_keys.sql) | 1-7 |
+| 3 | [`analyses/profiling/profile_shared_emails.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_shared_emails.sql), [`analyses/profiling/profile_orphans.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_orphans.sql) | results only, from `dbt show` |
+| 4 | [`seeds/reference/shared/key_sets.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/shared/key_sets.csv) | 1-4 (generated from each source's `meta.key_set`) |
+| 4 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql) | 4-7 |
+| 4 | [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/short_courses/stg_short_courses__learners.sql) | 12, 25-27 |
+| 5 | [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_key_candidates.sql) | 35-44, 48-58, 62-72 (trimmed with `…`), 89-99 (`by_own_key`, name and priority only) |
+| 5 | [`models/intermediate/student/int_learner_keys_matched.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_keys_matched.sql) | 51-57 (trimmed with `…`) |
+| 5 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml) | 34-39 |
 | 5 | query of `int_learner_keys_matched` | — |
-| 6 | [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/learner_identity_decisions.csv) | 1, 4 (columns trimmed) |
-| 6 | [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_key_candidates.sql) | 116-135 (blank lines kept; the select list, 125-130, trimmed with `…`) |
-| 6 | [`tests/rules/keys_decided_different_stay_apart.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/rules/keys_decided_different_stay_apart.sql) | 1-2 |
-| 7 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql) | 66-70, 52-58 |
-| 8 | [`seeds/reference/student/status_map.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/status_map.csv) | 1-9 |
-| 8 | [`seeds/reference/student/_student__seeds.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/_student__seeds.yml) | 10 |
+| 6 | [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/learner_identity_decisions.csv) | 1, 4 (columns trimmed) |
+| 6 | [`models/intermediate/student/int_learner_key_candidates.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_key_candidates.sql) | 116-135 (blank lines kept; the select list, 125-130, trimmed with `…`) |
+| 6 | [`tests/rules/keys_decided_different_stay_apart.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/rules/keys_decided_different_stay_apart.sql) | 1-2 |
+| 7 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql) | 66-70, 52-58 |
+| 8 | [`seeds/reference/student/status_map.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/status_map.csv) | 1-9 |
+| 8 | [`seeds/reference/student/_student__seeds.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/_student__seeds.yml) | 10 |
 
 ## Sources
 

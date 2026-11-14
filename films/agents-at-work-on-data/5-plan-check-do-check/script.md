@@ -170,7 +170,7 @@ The plan's lab for this film, for the module's set of labs (they come later, as 
 
 ## What the example project has
 
-The film shows the example project's own words, and adds what it needs in place (`films/analytics-engineering/project/`):
+The film shows the example project's own words, and adds what it needs in place (`learning-data-project/30-data-project/`):
 
 - `AGENTS.md`: what an agent may and may not do, its access, *Evidence* ("Every claim about the data comes with the query that shows it and the result it gave"), and *Who approves what* (meanings: Mei Tanaka; the model: Noor; the code: Jun Park, in review). New: *Start from the plan* (lines 140 to 155), which says every job starts from a one-page plan, the agent uses only the tools it names, stops at its limit and reports, takes a question of meaning to its owner with the options, and that only a person changes the plan's tests; and, at the end, *When nobody knows the answer* (from line 171, added on 5 November 2026): the checks say what any right answer must meet, how the parts relate and what the words mean; what everyone uses can be wrong, sometimes for years, so the agent says so, with its evidence; and where nobody can say what's right, it brings the options to the owner of the meaning. Lines 145 and 152 were changed in place, so no cited line moved.
 - `docs/process.md`: step 5, *Tests*, "Tests, before any model", which the agent writes first and Jun approves in review. Unchanged.

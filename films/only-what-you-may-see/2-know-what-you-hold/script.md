@@ -235,7 +235,7 @@ The near misses are near for a reason the film gives: a postcode names no one al
 - Reyes M, Smith Taillie L, Popkin B, Kanter R, Vandevijvere S, Corvalán C (2020), "Changes in the amount of nutrient of packaged foods and beverages after the initial implementation of the Chilean Law of Food Labelling and Advertising", *PLOS Medicine* 17(7): e1003220 (abstract and summaries, 5 November 2026).
 - Corvalán C, Reyes M, Garmendia ML, Uauy R (2013), "Structural responses to the obesity and non-communicable diseases epidemic: the Chilean Law of Food Labeling and Advertising", *Obesity Reviews* 14 (Suppl. 2): 79-87 (abstract, 5 November 2026).
 - JUNAEB's *Mapa Nutricional* 2013 and 2016, as reported by CNN Chile's ChileCheck ("El 50% de los niños en primero año básico tiene sobrepeso") and *The Clinic* (11 November 2016), 5 November 2026.
-- *Who may see it* (`films/data-governance/4-who-may-see-it/script.md`) and the example project (`films/analytics-engineering/project/`), read on main, 5 November 2026.
+- *Who may see it* (`films/data-governance/4-who-may-see-it/script.md`) and the example project (`learning-data-project/30-data-project/`), read on main, 5 November 2026.
 - DAMA International, *DAMA-DMBOK: Data Management Body of Knowledge*, second edition (2017), chapter 7, *Data Security*.
 - ISO/IEC 20889:2018, *Privacy enhancing data de-identification terminology and classification of techniques*; NIST SP 800-188, *De-Identifying Government Data Sets* (September 2023).
 - Regulation (EU) 2016/679, articles 4 and 9, recital 26; the ICO's *What is special category data?* (updated 2024) and commentary on inferred data and dietary needs (Fieldfisher; URM Consulting), 5 November 2026.

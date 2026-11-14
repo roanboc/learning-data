@@ -147,8 +147,12 @@ LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis mi
 HALVES = {"en": {"5½", "7½"}, "es": {"5½"}}
 WHOLE = {"6 min", "8 min", "8 minutos"}
 # time in a story, not a film's length, that this rule would read as one, by page: in Data architecture's labs and scenarios, an
-# interruption is power lost for more than five minutes, and a cut of three minutes falls short of it; Spanish says the number in words
-STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres minutos"}}
+# interruption is power lost for more than five minutes, and a cut of three minutes falls short of it; Spanish says the number in words.
+# In Platform and solution architecture's, minutes without power per customer jump from about eight to nineteen and go back to nine
+# (Spanish "diecinueve minutos" ends in "nueve minutos"), and the regulator's answer takes ten minutes
+STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres minutos"},
+              "assets/platform-and-solution-architecture/learn.en.js": {"19 minutes"},
+              "assets/platform-and-solution-architecture/learn.es.js": {"nueve minutos", "diez minutos", "19 minutos"}}
 # the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
 # lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),
 # so a new film, or a new series, needs no change here

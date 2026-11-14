@@ -1,7 +1,7 @@
 /* Learning Data: "Pause and think" for Built to change, in English. Keep the keys in step with think.es.js.
    The film stops at the end of three chapters (buy, seams, exit), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question names a "stop"
-   (the lab a question opens) and none has a lab link. */
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
@@ -11,7 +11,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   seams:{q:"The schedules, alerts and dashboards on the data platform are the product's own, with no seam. What does Ravi do about them?",
     opts:[{t:"Moves them into the utility's own repository, so no part of the platform is left without a seam.",near:true},{t:"Plans to replace the platform's product with one that has no lock-in, before anything more is built."},{t:"Accepts the lock-in as the price of what the product does well, and writes down what leaving would cost.",ok:true}],
     why:"Not everything has a seam, and that's lock-in. It isn't wrong: it's the price of what a product does well. Rebuilding the schedules, alerts and dashboards in the repository would give that up to avoid a cost nobody has to pay yet, and a product with no lock-in at all would do nothing a product does well. So Ravi writes down what leaving would cost, what would be set up again and what made again, so the lock-in is chosen, not found. Where is your platform locked in, and is it written down?"},
-  exit:{q:"Each year the platform team runs one data product for a week, in test, on another engine that reads the same files. Why?",
+  exit:{stop:"exit",q:"Each year the platform team runs one data product for a week, in test, on another engine that reads the same files. Why?",
     opts:[{t:"A plan nobody has tried is a guess, and a week in test shows what leaving would really take.",ok:true},{t:"To move one data product a year onto the other engine, until the platform's product isn't needed.",near:true},{t:"Because the product's maker asks for a yearly test before it renews the utility's agreement."}],
     why:"An exit plan nobody has tried is a guess. A week in test showed what would really change: eleven lines of fourteen hundred, the schedule, the alerts and who may read it set up again, and every number matching. From that, Ravi works out the whole platform: about eight months to leave, a migration, not a rewrite. The trial runs in test, and nobody plans to leave; but now the utility knows what it would take. Which of your exit plans has anyone tried?"}
   }}};

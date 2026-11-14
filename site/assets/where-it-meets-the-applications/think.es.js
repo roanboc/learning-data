@@ -1,14 +1,14 @@
 /* Learning Data: "Pausa para pensar" de Where it meets the applications, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (kinds, route, score), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
-   (el lab que abre) y ninguna tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
   kinds:{q:"Yasmin pide que todo flujo pase por la plataforma de integración. ¿Por qué Ravi está de acuerdo solo con la mitad?",
     opts:[{t:"La plataforma de integración registra solo mensajes entre aplicaciones, así que los flujos hacia la de datos seguirían sin verse."},{t:"Todo flujo debe verse y gobernarse, pero las cargas masivas enviadas como un mensaje por lectura serían más lentas y caras.",ok:true},{t:"Los mensajes deben verse y gobernarse, pero las cargas masivas son asunto del equipo de datos y no van en ningún mapa.",near:true}],
     why:"Ravi está de acuerdo en que un flujo que nadie ve es un flujo que nadie puede gobernar. Pero cada noche entran a la plataforma de datos cuarenta millones de lecturas de medidores, cargadas por sus propios conectores. Enviada por la plataforma de integración, cada lectura sería un mensaje propio, como una carga que cambia de caballo en cada posta. Ambos tipos son flujos, y ambos necesitan gobierno, así que ambos van al mapa; solo que no van por el mismo camino. ¿Cuáles de tus flujos son cargas masivas, y cuáles son mensajes?"},
-  route:{q:"Un cliente se muda, y el sistema de clientes ya lo envía como un evento en la plataforma de integración. ¿Cómo debería recibir el cambio la plataforma de datos?",
+  route:{stop:"routes",q:"Un cliente se muda, y el sistema de clientes ya lo envía como un evento en la plataforma de integración. ¿Cómo debería recibir el cambio la plataforma de datos?",
     opts:[{t:"Se suscribe a ese evento en la plataforma de integración, como cada aplicación que quiere enterarse del cambio.",ok:true},{t:"Lee cada noche las tablas del sistema de clientes con sus propios conectores, como entran sus cargas masivas.",near:true},{t:"Le pide cada hora al sistema de clientes, por la puerta de enlace, todos sus clientes, para tener su copia al día."}],
     why:"El cambio ya es un evento, así que la plataforma de datos se suscribe a él, como lo haría cualquier aplicación, en vez de leer el sistema de clientes por otra vía. Una segunda vía de entrada es lo que rompió los reportes de comercialización cuando se actualizó el sistema de clientes. Los conectores de la propia plataforma son para cargas masivas e historial; la puerta de enlace, para los datos que vuelven a una aplicación. ¿Qué lecturas de tu plataforma de datos podrían ser un evento al que se suscriba?"},
   score:{q:"El producto de datos de la red calcula en la plataforma de datos el riesgo de falla de cada alimentador. ¿Cómo debería llegar el puntaje a la aplicación de cortes?",

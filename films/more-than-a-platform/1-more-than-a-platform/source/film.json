@@ -1,14 +1,14 @@
 {
   "key": "more-than-a-platform",
   "title": "More than a platform",
-  "sub": "The film that follows The Inner Life of Data: the platform worked, and a week later two offices bring two numbers for the same class to the same meeting. One word, enrolled, means three things in three systems. What changes the answer is how the organisation works, what was defined and who decided: the topics of the learning route, each named with its question, and what a visitor can do at every stop.",
-  "howto": "The film is drawn on the dark navy map of The Inner Life of Data. The blue line is the suggested route, the amber loop is sharing and protecting, and the violet loop is agents, as on the Topics page. Gold is what people agree on, such as a definition.",
+  "sub": "The film that follows The Inner Life of Data: what the Learning Data portal is, why it exists, its route of stations from the foundations to leading data people, its example dbt project with the business and governance metadata beside the code, and what a visitor can do at every stop.",
+  "howto": "The film is drawn on the dark navy map of The Inner Life of Data. The blue line is the suggested route, the amber branch line is sharing and protecting, and the violet branch line is agents, as on the Topics page. Gold is what people agree on, and the thread of enterprise data architecture. The tools' pages are drawn for the film, with their official logos.",
   "src": [
     "mp_draw.js",
     "scenes.js"
   ],
   "poster": [
-    "route",
+    "rest",
     "lead",
     3.0
   ],
@@ -16,6 +16,10 @@
     [
       "\\bA I\\b",
       "AI"
+    ],
+    [
+      "\\bdbt\\b",
+      "dee bee tee"
     ],
     [
       "\\bDAMA's\\b",
@@ -27,7 +31,8 @@
     ]
   ],
   "story": [
-    "worked"
+    "beyond"
   ],
-  "urgent": []
+  "urgent": [],
+  "logos": true
 }

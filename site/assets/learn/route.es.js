@@ -97,8 +97,8 @@ window.LD_ROUTE = {
      "href": "more-than-a-platform/",
      "poster": "more-than-a-platform-poster.jpg",
      "kicker": "Una película",
-     "len": "3½ min",
-     "min": 3.5,
+     "len": "6 min",
+     "min": 6.0,
      "films": [
       "ld-more-than-a-platform"
      ]
@@ -110,7 +110,7 @@ window.LD_ROUTE = {
    "group": "foundations",
    "name": "Arquitectura empresarial",
    "who": "Para arquitectos, y para quien llega nuevo a una organización",
-   "line": "Cómo funciona una organización, por capas, antes de preguntar qué deberían responder sus datos.",
+   "line": "Cómo funciona una organización, por capas, para diseñar sus datos como parte de ella: arquitectura empresarial de datos.",
    "items": [
     {
      "id": "enterprise-architecture",

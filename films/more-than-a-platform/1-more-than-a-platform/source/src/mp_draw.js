@@ -1,8 +1,9 @@
 /* ===== More than a platform: the film's own pictures =====
    Drawn with the module's look (films/data-that-moves/shared/src/): the navy map, glass cards, words in white. This file adds what
    only this film shows: the learning route as the Topics page draws it (one blue line, an amber loop above for sharing and
-   protecting, a violet loop below for agents), a phone, a sheet of paper with a count, a meeting table seen from above, a wheel
-   with a hub and ten parts, and six plain shapes for what a visitor can do. No people: the film is shapes and words.
+   protecting, a violet loop below for agents), an empty place the platform leaves (one of four things it can't do alone), a card
+   of code and a card of boxes (the two halves courses give), a role on a timeline, a folder and the project's tree, a wheel with a
+   hub and ten parts, diagrams that look only at themselves, and plain shapes for what a visitor can do. No people: the film is shapes and words.
    Every top-level name starts with mp_ or MP_. Sizes are in the 1920 x 1080 frame; every word is at least 28 px. */
 const mp_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
 // the route's lines keep the Topics page's colours in its dark look; paper is a sheet on the meeting table
@@ -54,36 +55,54 @@ function mp_route(ctx,st){st=st||{};const a=st.a==null?1:st.a;if(a<=0.004)return
   for(const key in MP_GROUPS)mp_group(ctx,key,a*g(st.grp,key,1));
   for(const id of MP_ORDER){const k=g(st.on,id,1);mp_station(ctx,id,{k,a,lit:g(st.lit,id,0),done:g(st.done,id,0),num:g(st.num,id,0),numA:st.numA||0});mp_name(ctx,id,a*g(st.lab,id,k>=1?1:0),g(st.lit,id,0));}}
 
-/* ---------------------------------------------------------------- the opening: a phone, a sheet, a table */
-// a phone, its screen saying the enrolment went through; k springs it in
-function mp_phone(ctx,x,y,w,h,k,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(k,0,0.6)));
-  md_card(ctx,x,y,w,h,{r:44,edge:MD.flow,glow:0.7});md_card(ctx,x+16,y+16,w-32,h-32,{r:30,fill:"rgba(8,14,30,0.96)"});
-  ctx.fillStyle="rgba(170,200,245,0.4)";rr(ctx,x+w/2-34,y+30,68,8,4);ctx.fill();
-  md_T(ctx,"Data Science 101",x+w/2,y+130,{w:700,size:28,align:"center",col:MD.soft});
-  const cy=y+h*0.46;glow(ctx,x+w/2,cy,150,MD.pass,0.35);ctx.beginPath();ctx.arc(x+w/2,cy,62,0,TAU);ctx.fillStyle=rgba(MD.pass,1);ctx.fill();md_icon(ctx,"tick",x+w/2,cy,70,MD.navy,{lw:5});
-  md_T(ctx,"Enrolment",x+w/2,cy+130,{w:800,size:34,align:"center"});md_T(ctx,"confirmed",x+w/2,cy+172,{w:800,size:34,align:"center"});ctx.restore();}
-// a sheet of paper on the table, a little turned: who brought it, its count, and the word the count is of
-function mp_sheet(ctx,cx,cy,w,h,rot,words,a,o){o=o||{};if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(cx,cy);ctx.rotate(rot);
-  ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=30;ctx.shadowOffsetY=12;rr(ctx,-w/2,-h/2,w,h,10);ctx.fillStyle=rgba(MP.paper,1);ctx.fill();ctx.shadowColor="transparent";ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  if(o.col){ctx.fillStyle=rgba(o.col,1);rr(ctx,-w/2,-h/2,w,12,6);ctx.fill();}
-  const big=o.big||132;
-  if(words.head)md_T(ctx,words.head,0,-h/2+70,{w:700,size:o.small?28:32,align:"center",color:MP.darkSoft});
-  md_T(ctx,words.num,0,(words.head?big*0.36+10:big*0.3-(words.foot?14:0)),{w:800,size:big,align:"center",color:MP.dark});
-  if(words.foot)md_T(ctx,words.foot,0,h/2-(o.small?22:44),{w:600,size:o.small?28:34,align:"center",color:MP.darkSoft});ctx.restore();}
-// the meeting table, seen from above: a long pane of glass with a soft edge
-function mp_table(ctx,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;glow(ctx,960,540,760,MD.flow,0.08);md_card(ctx,330,236,1260,590,{r:80,fill:"rgba(13,22,44,0.94)"});ctx.restore();}
+/* ---------------------------------------------------------------- what a platform can't do alone
+   One of four places around the platform: dashed and empty until it's named, then its words in white on a gold edge. */
+function mp_place(ctx,x,y,w,words,a,fill){if(a<=0.004)return;const h=104;ctx.save();ctx.globalAlpha*=a;
+  if(fill<1)md_card(ctx,x,y,w,h,{dash:true,edge:MD.dim,r:20});
+  if(fill>0){ctx.save();ctx.globalAlpha*=fill;md_card(ctx,x,y,w,h,{edge:MD.agreed,glow:0.6,r:20});md_T(ctx,words,x+w/2,y+h/2+11,{w:700,size:32,align:"center"});ctx.restore();}
+  ctx.restore();}
 
-/* ---------------------------------------------------------------- one word, three systems */
-// a row inside the platform: the word, as it arrived, and its count
-function mp_row(ctx,x,y,w,col,num,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;md_card(ctx,x,y,w,96,{edge:col,glow:0.5,r:14});led(ctx,x+14,y+18,6,60,col);
-  md_T(ctx,"enrolled",x+40,y+60,{w:700,size:32});md_T(ctx,num,x+w-28,y+64,{w:800,size:44,align:"right",col});ctx.restore();}
-// who reads it: a card with a name, and later the count it repeats
-function mp_reader(ctx,x,y,w,title,col,a,num,numCol,since){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;md_card(ctx,x,y,w,96,{edge:col||null,glow:0.6,r:16});
-  md_T(ctx,title,x+28,y+60,{w:800,size:32});ctx.restore();
-  if(num&&since>0)md_pill(ctx,x+w-76,y+48,num,{col:numCol,size:30,a:a*ag_in(since,0,0.3),k:since});}
-// one of the three things that change the answer: an icon in gold, and its words
-function mp_thing(ctx,y,icon,words,a,k){if(a<=0.004)return;const w=md_tw(ctx,words,{w:800,size:64}),x0=960-(w+96)/2;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,960,y-20,lerp(0.9,1,ag_spr(k,0,0.6)));
-  glow(ctx,x0+32,y-22,70,MD.agreed,0.3);md_icon(ctx,icon,x0+32,y-22,64,MD.agreed,{lw:3.2});md_T(ctx,words,x0+96,y,{w:800,size:64});ctx.restore();}
+/* ---------------------------------------------------------------- the two halves
+   A card of code with nothing around it, and a card of boxes and arrows with no code under them. */
+const MP_CODE=["select learner_id,","  sum(credit_points)","from core_credit","group by learner_id"];
+function mp_codeCard(ctx,x,y,w,h,a,k){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;if(k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.85,1,ag_spr(k,0,0.6)));
+  md_card(ctx,x,y,w,h,{r:18});md_label(ctx,x+32,y+56,"Too technical",{col:MD.wait});
+  MP_CODE.forEach((l,i)=>md_T(ctx,l,x+32,y+124+i*44,{w:500,size:28,f:"mono",col:i===0||i===2?MD.flow:MD.ink}));ctx.restore();}
+function mp_boxCard(ctx,x,y,w,h,a,k){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;if(k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.85,1,ag_spr(k,0,0.6)));
+  md_card(ctx,x,y,w,h,{r:18});md_label(ctx,x+32,y+56,"Too neutral",{col:MD.wait});
+  const bx=[[x+48,y+110],[x+w/2-70,y+190],[x+w-188,y+110]];ctx.strokeStyle=rgba(MD.soft,0.9);ctx.lineWidth=3;
+  for(const [bx_,by_] of bx){rr(ctx,bx_,by_,140,70,12);ctx.stroke();}
+  const ar=(a_,b_)=>{ctx.beginPath();ctx.moveTo(a_[0],a_[1]);ctx.lineTo(b_[0],b_[1]);ctx.stroke();const an=Math.atan2(b_[1]-a_[1],b_[0]-a_[0]);ctx.beginPath();ctx.moveTo(b_[0],b_[1]);ctx.lineTo(b_[0]-14*Math.cos(an-0.45),b_[1]-14*Math.sin(an-0.45));ctx.lineTo(b_[0]-14*Math.cos(an+0.45),b_[1]-14*Math.sin(an+0.45));ctx.closePath();ctx.fillStyle=rgba(MD.soft,0.9);ctx.fill();};
+  ar([bx[0][0]+140,bx[0][1]+52],[bx[1][0]-4,bx[1][1]+24]);ar([bx[1][0]+144,bx[1][1]+24],[bx[2][0],bx[2][1]+52]);ctx.restore();}
+// a role on the timeline: a card with the role's name, and a dot on the line 270 px under its top
+function mp_role(ctx,x,y,w,words,a,k){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x+w/2,y+50,lerp(0.8,1,ag_spr(k,0,0.6)));
+  md_card(ctx,x,y,w,100,{edge:MD.flow,glow:0.5,r:18});md_T(ctx,words,x+w/2,y+61,{w:800,size:32,align:"center"});
+  ctx.strokeStyle=rgba(MD.flow,0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+w/2,y+100);ctx.lineTo(x+w/2,y+258);ctx.stroke();ctx.beginPath();ctx.arc(x+w/2,y+270,12,0,TAU);ctx.fillStyle=rgba(MD.flow,1);ctx.fill();ctx.restore();}
+
+/* ---------------------------------------------------------------- the example project
+   A folder with a branch mark, as the route on the site shows the project: on the route it is a small badge; opened, it is the tree. */
+function mp_folder(ctx,x,y,s,col,a){if(a<=0.004)return;const u=s/48;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.scale(u,u);
+  ctx.beginPath();ctx.moveTo(-22,-14);ctx.lineTo(-8,-14);ctx.lineTo(-3,-9);ctx.lineTo(22,-9);ctx.lineTo(22,16);ctx.lineTo(-22,16);ctx.closePath();
+  ctx.fillStyle="rgba(7,12,26,0.96)";ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3.4;ctx.lineJoin="round";ctx.stroke();
+  // the branch mark: two dots joined, and a third off the line
+  ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(-8,10);ctx.lineTo(-8,-2);ctx.moveTo(-8,4);ctx.quadraticCurveTo(6,4,8,-2);ctx.stroke();
+  for(const [px,py] of [[-8,10],[-8,-3],[8,-3]]){ctx.beginPath();ctx.arc(px,py,3,0,TAU);ctx.fillStyle=rgba(col,1);ctx.fill();}ctx.restore();}
+// the badge on the route, beside Analytics engineering: a dark disc with the folder in it
+function mp_badge(ctx,x,y,a,k){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.5,1,ag_spr(k,0,0.6)));glow(ctx,x,y,40,MD.agreed,0.4);
+  ctx.beginPath();ctx.arc(x,y,20,0,TAU);ctx.fillStyle="rgba(7,12,26,1)";ctx.fill();ctx.strokeStyle=rgba(MD.agreed,1);ctx.lineWidth=2.6;ctx.stroke();mp_folder(ctx,x,y+1,26,MD.agreed,1);ctx.restore();}
+// the project's tree: [name, depth, kind] rows; kind "code" or "gov" or "doc"; lit(i) is how much row i glows, band(i) its highlighter
+const MP_TREE=[["models/",0,"code"],["tests/",0,"code"],["sources/",0,"code"],["governance/",0,"gov"],["1-glossary/",1,"gov"],["2-owners/",1,"gov"],
+  ["3-architecture-map/",1,"gov"],["4-data-products/",1,"gov"],["5-data-contracts/",1,"gov"],["docs/decisions.md",0,"doc"]];
+function mp_tree(ctx,x,y,rh,a,lit,band){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
+  MP_TREE.forEach((r,i)=>{const yy=y+i*rh,xx=x+r[1]*44,b=band(i),l=lit(i);
+    if(b>0.004){ctx.fillStyle=rgba(MD.agreed,0.2*b);rr(ctx,xx-10,yy-rh/2+4,lerp(0,md_tw(ctx,r[0],{w:500,size:28,f:"mono"})+76,b),rh-8,8);ctx.fill();}
+    if(r[1]){ctx.strokeStyle="rgba(170,200,245,0.25)";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(xx-28,yy-rh/2);ctx.lineTo(xx-28,yy);ctx.lineTo(xx-12,yy);ctx.stroke();}
+    const col=r[2]==="code"?MD.flow:r[2]==="gov"?MD.agreed:MD.soft;
+    if(r[2]==="doc")md_icon(ctx,"doc",xx+16,yy,30,mix(MD.soft,MD.agreed,b));else mp_folder(ctx,xx+16,yy,30,mix(col,MD.ink,0.15*l),1);
+    md_T(ctx,r[0],xx+46,yy+10,{w:500,size:28,f:"mono",col:mix(MD.ink,col,0.35*Math.max(l,b))});});ctx.restore();}
+// one of three neutral blocks: what a tool does, not which tool
+function mp_cap(ctx,x,y,w,icon,words,a,k){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x+w/2,y+70,lerp(0.8,1,ag_spr(k,0,0.6)));
+  md_card(ctx,x,y,w,140,{edge:MD.flow,glow:0.5,r:20});md_icon(ctx,icon,x+w/2,y+48,44,MD.flow);md_T(ctx,words,x+w/2,y+112,{w:700,size:32,align:"center"});ctx.restore();}
 
 /* ---------------------------------------------------------------- a wheel, and two other maps
    The wheel is drawn in the film's own hand: a hub and ten parts around it, with no words but the hub's. p draws it (0 to 1). */
@@ -100,7 +119,17 @@ function mp_wheelDots(cx,cy,R){const out=[[cx,cy]];for(let i=0;i<10;i++){const a
 function mp_layers(ctx,cx,cy,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(MD.soft,0.9);ctx.lineWidth=3.5;for(let i=0;i<4;i++){rr(ctx,cx-150+i*18,cy-124+i*64,300-i*36,48,10);ctx.stroke();}ctx.restore();}
 function mp_grid(ctx,cx,cy,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(MD.soft,0.9);ctx.lineWidth=3.5;for(let r=0;r<3;r++)for(let c=0;c<4;c++){rr(ctx,cx-158+c*80,cy-112+r*78,70,64,8);ctx.stroke();}ctx.restore();}
 
-/* ---------------------------------------------------------------- what a visitor can do: six plain shapes, none a picture of the screen */
+/* ---------------------------------------------------------------- diagrams that look only at themselves
+   A small outline, turned inward: a circle, a grid, a triangle or a stack, with a short arrow that points back at itself. */
+function mp_inward(ctx,kind,x,y,col,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.lineCap="round";ctx.lineJoin="round";
+  if(kind===0){ctx.beginPath();ctx.arc(x,y,34,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(x,y,14,0,TAU);ctx.stroke();}
+  else if(kind===1){for(let r=0;r<2;r++)for(let q=0;q<2;q++){rr(ctx,x-30+q*32,y-30+r*32,28,28,5);ctx.stroke();}}
+  else if(kind===2){ctx.beginPath();ctx.moveTo(x,y-34);ctx.lineTo(x+34,y+26);ctx.lineTo(x-34,y+26);ctx.closePath();ctx.stroke();}
+  else{for(let i=0;i<3;i++){rr(ctx,x-34+i*6,y-28+i*20,68-i*12,16,5);ctx.stroke();}}
+  ctx.beginPath();ctx.arc(x,y,48,-0.6,0.9);ctx.stroke();const an=0.9;ctx.beginPath();ctx.moveTo(x+48*Math.cos(an),y+48*Math.sin(an));ctx.lineTo(x+48*Math.cos(an)+9,y+48*Math.sin(an)-12);ctx.stroke();
+  ctx.restore();}
+
+/* ---------------------------------------------------------------- what a visitor can do : six plain shapes, none a picture of the screen */
 function mp_tool(ctx,kind,x,y,col,k,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.6,1,ag_spr(k,0,0.6)));glow(ctx,x,y,96,col,0.22);
   ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=5;ctx.lineCap="round";ctx.lineJoin="round";
   const L=p=>{ctx.beginPath();p.forEach((q,i)=>i?ctx.lineTo(x+q[0],y+q[1]):ctx.moveTo(x+q[0],y+q[1]));ctx.stroke();};

@@ -62,6 +62,27 @@ class VoiceNames(unittest.TestCase):
     def test_the_plain_word_is_left_alone(self):
         self.assertEqual(self.faults([LINES[3]]), [])
 
+    def test_a_story_told_by_several_films_says_its_names_one_way(self):
+        bridge = [{"id": "where", "gap": 0.8, "text": "At Quehue, a bridge of grass rope crosses the Apurímac river."},
+                  {"id": "who", "gap": 0.8, "text": "Quechua-speaking families make it as minka. Minka is unpaid work."}]
+        out = self.faults(bridge)
+        self.assertEqual(len(out), 5)
+        self.assertIn('one/where: the voice would read "Quehue"', out[0])
+        self.assertIn('spell it "Kehweh"', out[0])
+        self.assertIn('spell it "Ahpooreemahk"', out[1])
+        self.assertIn('spell it "Ketchwa"', out[2])
+        self.assertIn('spell it "meenka"', out[3])
+        agreed = [["\\bQuehue\\b", "Kehweh"], ["\\bApurímac\\b", "Ahpooreemahk"], ["\\bQuechua\\b", "Ketchwa"], ["\\b[Mm]inka\\b", "meenka"]]
+        self.assertEqual(self.faults(bridge, agreed), [])
+        # the spellings two of the films first used, set aside when the series settled on one
+        out = self.faults(bridge[:1], [["\\bQuehue\\b", "Keway"], ["\\bApurímac\\b", "Apooreemak"]])
+        self.assertEqual(len(out), 2)
+        self.assertIn('the voice would read "Keway"', out[0])
+        self.assertIn('spell it "Kehweh"', out[0])
+        self.assertIn('the voice would read "Apooreemak"', out[1])
+        # a longer word that only starts the same way is another word
+        self.assertEqual(self.faults([{"id": "x", "gap": 0.8, "text": "The Quechuan languages are a family."}]), [])
+
 
 if __name__ == "__main__":
     unittest.main()

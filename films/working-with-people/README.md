@@ -1,6 +1,6 @@
 # Working with people
 
-*The second series of the module Leading data people.*
+*A series of the module Leading data people.*
 
 The skills that help most when someone asks for data have little to do with tools. On Thursday 11 February 2027, Graham Ellis, the new Director of Facilities, asks for "a dashboard of room use, by Easter"; behind it is a decision worth about A$140 million. Three films: *The question behind the request* (ask what it's for, and agree it in writing); *Explaining so people can decide* (lead with the decision, and show the part of the data it turns on, not only the average); and *Saying no, and what instead* (never a bare no: say what you can do, and when). *The new skills* comes before it, and *Leading a data team* follows. The plan for the module is in [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md); this series' own part is in its [proposal](proposal.md).
 

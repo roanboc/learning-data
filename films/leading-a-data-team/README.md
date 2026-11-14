@@ -1,6 +1,6 @@
 # Leading a data team
 
-*The third series of the module Leading data people.*
+*A series of the module Leading data people.*
 
 Four ideas to lead a data team by, one in each film, each taught from its own sources. In 2027 the university's data team keeps 38 old reports, spends about eight hours a week each in meetings and gets about sixty alerts a week, most needing nothing. Four films: *Less, on purpose* (keep what people use, and stop the rest, together); *One small change at a time* (change one small thing, check it, keep what works); *The team comes first* (nobody alone, nobody the only one who knows); and *Rules that let people decide* (a few clear rules, good tools, and trust). *Working with people* comes before it, and *Ownership and performance* follows. The plan for the module is in [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md); this series' own part is in its [proposal](proposal.md).
 

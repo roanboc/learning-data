@@ -1,6 +1,6 @@
 # The new skills
 
-*The first series of the module Leading data people.*
+*A series of the module Leading data people.*
 
 What a data person needs to be good at now. In 2027, a year from now, Ivy Reyes joins the university's data team straight from her degree, and Graham Ellis, the new Director of Facilities, asks for "a dashboard of room use". Three films: *Many hats, one picture* (go deep in one thing, and learn enough of the others to see the whole route of a decision); *The draft and the decision* (when an agent writes the first draft, framing, checking and deciding are the skills that grow); and *Learning while doing* (learn on the real work, beside someone who knows, then teach it). *Working with people* follows. This folder also holds the plan for the whole module, in the [proposal](proposal.md), and the kit this module shares with the module *Data management*, in [`shared/`](shared/).
 

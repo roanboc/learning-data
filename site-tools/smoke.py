@@ -933,6 +933,12 @@ async def check_think_silent(run):
             # "Watch this part" plays that chapter only (the soundtrack runs fast to get there quickly), and hands focus to Play
             await pg.evaluate("() => { const d = [...document.querySelectorAll('#think-list details')].find(d => d.querySelector('[data-scene=halves]')); d.open = true; }")
             await pg.click("#think-list [data-scene=halves]")
+            # the page scrolls there smoothly, and the scroll may not have started when the click returns: wait for the film
+            # itself to come into view, then for the page to hold still (waiting for a still page alone read it before it moved)
+            try:
+                await pg.wait_for_function("() => { const t = document.getElementById('watch').getBoundingClientRect().top; return t >= -2 && t <= 160; }", timeout=2000)
+            except Exception:  # noqa: BLE001
+                pass
             await run.settle(pg)
             r = await pg.evaluate("() => { const s = SCENES.find(x => x.id === 'halves'); return {t: FILM.time(), start: s.start, end: s.start + s.dur, playing: FILM.playing(), top: document.getElementById('watch').getBoundingClientRect().top}; }")
             expect(sec, r["playing"] and r["start"] <= r["t"] < r["start"] + 3, f"{where}: \"Watch this part\" doesn't play \"halves\" from its start ({r})")

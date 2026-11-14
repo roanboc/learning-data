@@ -1,0 +1,251 @@
+1
+00:00:01,400 --> 00:00:12,386
+Babylon, 331 BCE. Alexander the Great enters the city, nearly three hundred years after Nabopolassar began to rebuild its temple-tower.
+
+2
+00:00:13,786 --> 00:00:21,085
+Etemenanki, the tower he and his son raised, is falling into ruin. In the centuries since, it had not been kept up.
+
+3
+00:00:22,685 --> 00:00:26,165
+Alexander orders what's left cleared away, to build it again.
+
+4
+00:00:26,965 --> 00:00:32,398
+The Greek geographer Strabo writes that clearing it was work for ten thousand men, for two months.
+
+5
+00:00:33,898 --> 00:00:41,404
+But in June 323 BCE, Alexander dies in Babylon, and the tower is never rebuilt.
+
+6
+00:00:43,204 --> 00:00:51,536
+With nobody to keep them, its ruins became a quarry. For centuries, people carried Babylon's bricks away, to build houses nearby.
+
+7
+00:00:53,036 --> 00:00:58,964
+Brick by brick, Iraq's history went into house walls, until the tower was mostly a hole in the ground.
+
+8
+00:01:00,764 --> 00:01:03,609
+What was left needed keepers, whose job it was.
+
+9
+00:01:05,409 --> 00:01:13,025
+In 1983, Iraq asked for Babylon to be listed as World Heritage. In 2019, UNESCO listed it.
+
+10
+00:01:14,425 --> 00:01:21,492
+Now Iraq's archaeologists keep what's left, with the world's protection, though UNESCO called it extremely vulnerable.
+
+11
+00:01:23,192 --> 00:01:28,154
+At the utility, the map is like the tower: it stays true only while someone keeps it.
+
+12
+00:01:29,554 --> 00:01:34,924
+And everything it describes keeps moving: processes, words, people, and what agents know.
+
+13
+00:01:41,124 --> 00:01:46,134
+A year on, one of Grace's crews connects a home's new solar panels to the network.
+
+14
+00:01:47,634 --> 00:01:51,923
+The crew asks the field app's assistant for the steps. It answers with four.
+
+15
+00:01:53,823 --> 00:02:01,642
+Since the spring, there are five. Before a home may sell power back, the crew checks that its panels stop when the street's power goes off.
+
+16
+00:02:03,642 --> 00:02:10,202
+Otherwise, when a crew switches the street off to mend a line, the panels could keep its wires live, and hurt the crew.
+
+17
+00:02:12,302 --> 00:02:18,376
+The assistant answers from a copy of last year's manual, pasted into its instructions when it was built.
+
+18
+00:02:20,176 --> 00:02:27,098
+Two homes were connected without the check. A supervisor reading the job sheets caught it that week, and nobody was hurt.
+
+19
+00:02:29,198 --> 00:02:33,024
+Grace asks Tomás: what else has moved, without the map knowing?
+
+20
+00:02:38,524 --> 00:02:45,423
+The map agent reads what's really running against the whole map: read-only, with personal and sensitive data masked.
+
+21
+00:02:47,223 --> 00:02:51,552
+Nine steps run in the systems that the map doesn't show, like the solar check.
+
+22
+00:02:53,252 --> 00:03:00,742
+Three words mean something new. "Customer" now includes households that sell power back, but the glossary still says "buys".
+
+23
+00:03:02,542 --> 00:03:05,616
+Forty-one elements still name an owner who has left.
+
+24
+00:03:07,316 --> 00:03:12,209
+And two agents work from copies: the field app's assistant, and the meter agent.
+
+25
+00:03:13,909 --> 00:03:18,096
+Every check had passed, because the checks test each change made to the map.
+
+26
+00:03:19,896 --> 00:03:25,592
+None of this came to the map as a change. The work, the words and the people moved; the map didn't.
+
+27
+00:03:28,892 --> 00:03:34,237
+An agent's instructions can hold a copy: of a manual, a process or the glossary.
+
+28
+00:03:36,337 --> 00:03:41,933
+The copy is right the day it's pasted in. From then on, it drifts, and nothing tells the agent.
+
+29
+00:03:44,133 --> 00:03:49,984
+The website's chat never had this trouble: it reads the glossary and its data products where they're kept.
+
+30
+00:03:51,984 --> 00:03:59,976
+Now every agent does the same. It reads the map, the glossary and the manuals through a tool, as it answers, never from a copy.
+
+31
+00:04:02,076 --> 00:04:05,648
+Each answer names the version it read, so a person can check it.
+
+32
+00:04:07,648 --> 00:04:15,948
+And each agent is tested again when what it reads changes. The field app's assistant now gives five steps, and the reason for the fifth.
+
+33
+00:04:20,048 --> 00:04:25,639
+Thirty of the forty-one were the metering lead's. She retired in March, after thirty-one years.
+
+34
+00:04:27,639 --> 00:04:32,332
+Her name was still on them, so the check that every element has an owner kept passing.
+
+35
+00:04:34,032 --> 00:04:36,881
+A check reads the map. It can't see who has left.
+
+36
+00:04:38,781 --> 00:04:44,901
+Among them was the meter agent, which Grace had handed to her. For five months, nobody answered for it.
+
+37
+00:04:47,001 --> 00:04:55,767
+Now the owner check also reads the staff directory. The day someone leaves or changes job, it lists what they owned, for their manager.
+
+38
+00:04:57,667 --> 00:05:01,627
+The new metering lead confirms each one, or hands it to its new owner.
+
+39
+00:05:04,727 --> 00:05:10,104
+Everyone keeps their own part of the map. But keeping the whole of it true was nobody's job.
+
+40
+00:05:12,104 --> 00:05:17,480
+In software, Murat Erder and Pierre Pureur call the answer continuous architecture.
+
+41
+00:05:19,180 --> 00:05:24,327
+Architecture kept as a product, not a project, and checked as the system changes.
+
+42
+00:05:26,127 --> 00:05:31,298
+At the utility, keeping the map becomes a capability of its own, on the map itself.
+
+43
+00:05:32,998 --> 00:05:41,161
+Its owner is a role, the architecture lead, held by Tomás, with Inés as deputy, so it doesn't stop when one of them moves on.
+
+44
+00:05:42,961 --> 00:05:48,193
+Its budget is in the yearly plan, not a project's, so it doesn't end when a project does.
+
+45
+00:05:49,993 --> 00:05:55,574
+And it has a rhythm. On every change, the map's checks. The day someone leaves, the owner check.
+
+46
+00:05:57,374 --> 00:06:04,730
+Every month, the map agent reads what's running against the map, and drafts a change for each difference, for its owner to confirm.
+
+47
+00:06:06,530 --> 00:06:12,368
+Every quarter, each agent is tested again. And every year, each owner confirms what they own.
+
+48
+00:06:15,868 --> 00:06:22,314
+This is the last film on enterprise architecture, and each of its five series ends on the same idea.
+
+49
+00:06:24,314 --> 00:06:30,077
+The map before the data: a map stays alive while people use it, keep it true, and pass it on.
+
+50
+00:06:31,877 --> 00:06:38,685
+Business architecture for data: rules last only while people keep them, and change them when the world changes.
+
+51
+00:06:40,485 --> 00:06:45,082
+Data architecture: it's never finished. It matures one change at a time.
+
+52
+00:06:46,882 --> 00:06:54,959
+Platform and solution architecture: a practice isn't built once. It's kept, every part with a stage, a date and a way out.
+
+53
+00:06:56,759 --> 00:07:01,501
+And this one: an architecture stays true only while keeping it is someone's job.
+
+54
+00:07:03,401 --> 00:07:11,220
+How to keep one map, in a tool or in a repository, is in A map people and agents can read, and One map, in the repo.
+
+55
+00:07:14,320 --> 00:07:23,651
+In the city wall he rebuilt, Nabopolassar left words for the kings after him: when this wall grows old and you repair it, keep my words with yours.
+
+56
+00:07:25,451 --> 00:07:31,202
+But a request in clay isn't a practice. Once keeping the tower was nobody's job, it fell.
+
+57
+00:07:33,202 --> 00:07:40,164
+In the story of Babel, which many scholars think this tower may have inspired, the builders stopped understanding each other.
+
+58
+00:07:41,764 --> 00:07:45,613
+A map nobody keeps does the same, slowly, one word at a time.
+
+59
+00:07:47,513 --> 00:07:55,334
+By the next spring, the utility's monthly read finds six differences, where the first found fifty-five, each fixed within a month.
+
+60
+00:07:57,034 --> 00:08:02,174
+Every new solar home has had its check, and every agent answers from this month's words.
+
+61
+00:08:08,874 --> 00:08:12,863
+Give the map an owner, a budget and a rhythm, not a project's end date.
+
+62
+00:08:14,263 --> 00:08:20,759
+Check every change, read the map again from what's running, and let agents read the map itself, never a copy.
+
+63
+00:08:22,659 --> 00:08:28,137
+The architecture is kept. Who decides about the data in it is where Data governance begins.

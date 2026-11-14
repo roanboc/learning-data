@@ -256,6 +256,7 @@ Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-archit
 - [What an agent may read](../films/ai-and-continuous-architecture/3-what-an-agent-may-read/) — `what-an-agent-may-read`
 - [A first draft, not a blank page](../films/ai-and-continuous-architecture/4-a-first-draft-not-a-blank-page/) — `a-first-draft-not-a-blank-page`
 - [Every change, checked](../films/ai-and-continuous-architecture/5-every-change-checked/) — `every-change-checked`
+- [Kept alive](../films/ai-and-continuous-architecture/6-kept-alive/) — `kept-alive`
 
 Labs and assessments: [site/assets/ai-and-continuous-architecture/learn.en.js](../site/assets/ai-and-continuous-architecture/learn.en.js), [site/assets/ai-and-continuous-architecture/learn.es.js](../site/assets/ai-and-continuous-architecture/learn.es.js)
 

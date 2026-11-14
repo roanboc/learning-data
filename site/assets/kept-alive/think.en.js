@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Kept alive, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (moved, copy, job), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the
+   series' labs page (the page's .player data-labs is "../labs/"); a question without one has no lab link. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  moved:{stop:"keep",q:"Every check on the map had passed, yet the map had drifted. Why didn't the checks catch it?",
+    opts:[{t:"No check covered owners or words, so the map had no rule that a leaver or a new meaning would break.",near:true},{t:"The checks test each change made to the map, and none of this came as a change: the world moved instead.",ok:true},{t:"The checks run once a year, when owners confirm what they own, and all of this happened since the last run."}],
+    why:"The checks test each change made to the map. A process that gains a step, a word that gains a meaning, an owner who leaves: none of that comes to the map as a change, so no check runs. There was an owner check, and it kept passing, because it reads the map, and the map still had her name. So the map is read again from what's running, every month, and the owner check now reads the staff directory too. What in your world moves without a change to your map?"},
+  copy:{stop:"keep",q:"The manual changed in the spring. How does the field app's assistant keep up now?",
+    opts:[{t:"It reads the manual where it's kept, through a tool, as it answers, and names the version it read.",ok:true},{t:"A fresh copy of the manual is pasted into its instructions every month, so it's never far behind.",near:true},{t:"A person reads each of its answers before the crew sees it, and corrects any step that's out of date."}],
+    why:"A copy is right the day it's pasted in, and from then on it drifts, with nothing to tell the agent. A fresh copy every month only shortens the drift. So every agent reads the map, the glossary and the manuals where they're kept, as it answers; names the version it read, so a person can check it; and is tested again when what it reads changes. Which of your agents answers from a copy?"},
+  job:{stop:"keep",q:"Why does keeping the map become a capability with an owner, a budget and a rhythm, not a project?",
+    opts:[{t:"A project to bring the map up to date would do, as long as one is run again every few years.",near:true},{t:"So one person answers for every element, and the other owners no longer keep their own parts."},{t:"A project ends with its budget, but what the map describes never stops moving, so keeping it can't end.",ok:true}],
+    why:"Everyone keeps their own part of the map, but keeping the whole of it true was nobody's job. A project would end, and the map would start to drift again the next day, because the work, the words and the people keep moving. So keeping it is a capability on the map: its owner a role, the architecture lead, with a deputy; its budget in the yearly plan; and a rhythm, from the checks on every change to each owner's yearly confirmation. Who keeps the whole of your map?"}
+  }}};

@@ -1,11 +1,11 @@
 /* Learning Data: AI and continuous architecture. The words of the series' labs (Take it apart) and scenarios (Make the call), in
    English. Keep the keys in step with learn.es.js, and every right answer in the same place in both. One set for the whole series: a
-   lab for each film, and three situations from each; the last film adds its own when it's made. Each lab names its film by number
+   lab for each film, and three situations from each. Each lab names its film by number
    and the chapter it plays (film, chapter).
    learn.js draws every picture from these words, with the films' own parts, and keeps progress in this browser under
    "ld-ai-and-continuous-architecture": the labs visited, and the answers by scenario number (film × 10 + its place).
    A lab's cards and a scenario's options show in the order written here, so the right ones are spread: no lab's cards go box by
-   box, and the scenarios' right answers are five in each place (check_site.py reads both).
+   box, and the scenarios' right answers are six in each place (check_site.py reads both).
    build_series.py (series_learn) reads the first keys of each lab, in this order: id, kind, film, chapter, c, name; and of each
    scenario: type, n, lab, film. check_site.py reads the lab ids that the films' Pause and think questions stop at. */
 window.ACA={lang:"en",films:6,
@@ -133,7 +133,30 @@ labs:[
    {t:"Give the texting service its owner, the head of retail, and its source",s:"the service, owned",b:"pass",why:"Once the head of retail takes it, with its source, the checks pass, and the walk goes on."}],
   end:"{n} of {of} on the first try. Seven changes wait until they're fixed, or their owners say why; three go ahead. And the case that must fail did: sending the network's list of homes with solar panels to retail is stopped every time.",
   pic:{title:"every change, checked",sub:"each element stamped with its owner and its source",done:"Seven wait until they're fixed · three go ahead",
-   alt:"The map's checks, one row each, and a row for what passes, with each change placed on the check that stops it, or on passes."}}}
+   alt:"The map's checks, one row each, and a row for what passes, with each change placed on the check that stops it, or on passes."}}},
+/* ---------- 6 · Kept alive ---------- */
+{id:"keep",kind:"sort",film:6,chapter:"job",c:"#9ad0ff",name:"Who keeps it, and when",
+ idea:"Every check had passed, yet the map had drifted: a step, a word, an owner and two agents had moved without a change. Keeping the map is a job with a rhythm. Which beat of it catches each of these?",
+ points:["<b>On every change, the map's checks.</b> They test each change made to the map, so they catch only what comes as a change.",
+  "<b>The day someone leaves or changes job, the owner check.</b> It reads the staff directory, and lists what they owned, for their manager.",
+  "<b>Every month, the map agent reads what's running against the map,</b> and drafts a change for each difference. Every quarter, each agent is tested again; every year, each owner confirms what they own."],
+ real:"Write your map's rhythm down: what runs on every change, the day someone leaves, every month, every quarter and every year, and who answers for each beat. Then ask what moved last year that none of them would have caught.",
+ w:{prompt:"Ten things that move, or need keeping. Which beat of the rhythm catches each one?",
+  buckets:[["change","on every change"],["leaves","the day someone leaves"],["month","every month"],["quarter","every quarter"],["year","every year"]],
+  items:[
+   {t:"A new texting service is added to the map, with no owner yet",s:"a service, no owner",b:"change",why:"It comes as a change, so the map's checks run: every element has an owner. The change waits until someone takes it."},
+   {t:"The metering lead retires, with thirty elements still in her name",s:"a lead retires",b:"leaves",why:"The owner check reads the staff directory. The day she leaves, it lists what she owned for her manager, and the new owner confirms each one."},
+   {t:"A step runs in the systems that the map doesn't show, like the solar check",s:"a step not on the map",b:"month",why:"No change ever brought it to the map, so no check ran. The monthly read of what's running against the map finds it, and drafts a change for its owner."},
+   {t:"Grace confirms that each element in her name is still hers, and still true",s:"an owner confirms",b:"year",why:"Every year, each owner confirms what they own. A name on an element is a promise that someone keeps."},
+   {t:"The field app's assistant is tried on known questions, though nothing about it changed",s:"the assistant, tried again",b:"quarter",why:"Every quarter, each agent is tested again, even when nothing about it seems to have changed: what it reads may have."},
+   {t:"The glossary still says a customer “buys”, though customers now also sell power back",s:"a word's new meaning",b:"month",why:"A word that gains a meaning never comes as a change. The monthly read finds what the glossary no longer says, and drafts a change for its owner."},
+   {t:"A change links a new process to a capability that nothing realises yet",s:"a capability, unrealised",b:"change",why:"On every change, the map's checks run: every capability is realised by a process or a system. It waits until it's fixed, or its owner says why."},
+   {t:"Someone in metering moves to a new job in billing",s:"a move to billing",b:"leaves",why:"The day someone leaves or changes job, the owner check lists what they owned, for their manager. A new job counts, not only leaving."},
+   {t:"The head of retail confirms that every element of billing still says what's true",s:"billing's owner confirms",b:"year",why:"Every year, each owner confirms what they own. It's how a name on an element stays a person who answers for it."},
+   {t:"The website's chat is tested again on questions whose answers are known",s:"the chat, tested again",b:"quarter",why:"Every quarter, each agent is tested again on answers that are known, so a copy, or a change in what it reads, can't drift for long."}],
+  end:"{n} of {of} on the first try. Two things came as changes, and the map's checks caught them. The other eight moved without one, so the rhythm catches them: the day someone leaves, every month, every quarter and every year.",
+  pic:{title:"who keeps it, and when",sub:"keeping the map: an owner, a budget and a rhythm",done:"Two came as changes · eight are caught by the rhythm",
+   alt:"The map's rhythm, one row for each beat, from every change to every year, with each thing placed on the beat that catches it."}}}
 ],
 qs:[
 {type:"choice",n:11,lab:"far",film:1,title:"Its own sign-in",vis:{k:"role",own:1},
@@ -225,7 +248,25 @@ qs:[
  opts:[{t:"It reports what it found, with its evidence, and the owner of the contacts decides what happens.",ok:true},
   {t:"It switches the job off, since nothing that isn't on the map should touch customer contacts.",why:"Agents never change production: there, an agent only reads, finds and drafts. A person decides, and a release makes the change."},
   {t:"It adds the job to the map itself, with the data team as its owner, so the checks can run on it.",why:"The agent drafts; an owner confirms. And the job's owner answers for the contacts, which isn't the data team by default."}],
- why:"In production, the agent reads read-only, with personal and sensitive data masked, and drafts what it finds. The owner decides, as the head of retail did about the contact centre's copy, and the copy goes on the map with an owner."}
+ why:"In production, the agent reads read-only, with personal and sensitive data masked, and drafts what it finds. The owner decides, as the head of retail did about the contact centre's copy, and the copy goes on the map with an owner."},
+{type:"choice",n:61,lab:"keep",film:6,title:"The glossary, pasted in",vis:{k:"keep",copy:1},
+ sit:"Retail's analysts build an agent to answer staff questions about tariffs. To make it quick, they paste this year's glossary and tariff rules into its instructions.",
+ opts:[{t:"Paste them in, and paste in a fresh copy of each whenever the glossary or the tariff rules change.",why:"Someone has to remember every time, and nothing tells the agent when they forget: that's how the field app's assistant gave four steps."},
+  {t:"Paste them in, and add a line to its instructions asking it to check every answer it gives carefully.",why:"An instruction can't tell it what has changed since the copy was made. A copy is right the day it's pasted in, and drifts from then on."},
+  {t:"Let it read the glossary and the tariff rules where they're kept, through a tool, naming the version.",ok:true}],
+ why:"A copy is right the day it's pasted in, and from then on it drifts, with nothing to tell the agent. Every agent reads where things are kept, as it answers, names the version it read so a person can check it, and is tested again when what it reads changes."},
+{type:"choice",n:62,lab:"keep",film:6,title:"A project to catch up",vis:{k:"keep",project:1,alt:"keepProject"},
+ sit:"The map has drifted, and the board offers a six-month project, with its own budget and an end date, to bring it up to date.",
+ opts:[{t:"Bring it up to date, then keep it as a capability: a role with a deputy, a yearly budget and a rhythm.",ok:true},
+  {t:"Run the project now, and plan another one in three years, by when the map will have drifted again.",why:"Between projects, keeping the whole map true is nobody's job, and it starts drifting again the day the project ends."},
+  {t:"Turn it down, and ask each owner to keep their own part of the map true, in whatever time they have.",why:"Everyone keeps their own part already. Keeping the whole of it true was nobody's job, which is how it drifted."}],
+ why:"A project ends with its budget, but what the map describes never stops moving. So keeping the map is a capability on the map: its owner a role, the architecture lead, with a deputy; its budget in the yearly plan; and a rhythm, from the checks on every change to each owner's yearly confirmation."},
+{type:"choice",n:63,lab:"keep",film:6,title:"Found in the monthly read",vis:{k:"keep",read:1,alt:"keepRead"},
+ sit:"This month's read finds a step running in billing that the map doesn't show: a check of each new direct debit before its first payment.",
+ opts:[{t:"The map agent adds the step to the map itself, since what's running is what the map must show.",why:"The agent drafts, and an owner confirms. A step on the map says the business means it, and only its owner can say that."},
+  {t:"The agent drafts a change to the map for the step, with its evidence, and billing's owner confirms it.",ok:true},
+  {t:"The agent switches the step off until it's on the map, since nothing should run that the map can't show.",why:"Agents never change production: there, an agent only reads, finds and drafts. A person decides, and a release makes any change."}],
+ why:"Every month, the map agent reads what's running against the map, read-only, with personal and sensitive data masked, and drafts a change for each difference, for its owner to confirm. The step never came as a change, so no check would have found it."}
 ],
 pics:{
  role:{title:"an agent on the map",role:"a role of its own",id:"an identity of its own",steps:["inform","draft","verify","run"],person:"a person"},
@@ -234,11 +275,20 @@ pics:{
  draft:{title:"first draft · the battery",guess:"no source: a guess",rows:[["Operate the battery","IEC's list","Grace"],["Invite households","network's list + retail","head of retail"],["Decide when it charges","—","Grace"],["Credit each bill","retail's product rules","head of retail"]]},
  checks:{title:"the map's checks",agent:"the map agent's own test",test:"the social tariff: 14 elements, 5 owners",model:"a new model",rows:["an owner and a source","realised","stands for a business object","linked, and only once","a rule's case must fail"],
   estate:"the map, and what really runs",map:"the map",running:"what's running",table:"contacts",reader:"a nightly job"},
+ keep:{copyT:"an agent's instructions, and where things are kept",instr:"its instructions",pasted:"a copy, pasted in: this year's glossary and tariff rules",
+  kept:["the glossary","the tariff rules"],where:"where they're kept",tool:"read as it answers, naming the version",
+  projT:"a project to bring the map up to date",project:"a project: six months",ends:"it ends",after:"and after?",drift:"how far the map is from what's running",
+  rhythm:"a rhythm: on every change, every month, every quarter, every year",
+  readT:"this month's read: billing",map:"the map",running:"what's running",rows:["bill a household","take a payment","remind a late payer"],
+  step:"check a new direct debit",draft:"a change, drafted",confirm:"for its owner to confirm"},
  alt:{role:"An agent on the map, in a role of its own with an identity of its own, and the four steps it may take on a task.",gate:"Six agents, the gateway every call goes through, and the models behind it.",
   place:"The chat's own place, with the products it may read inside, and what it may not read outside.",draft:"A first draft on paper: each element with its source, and the owner who must confirm it.",
   checks:"The map's checks, each with its last runs.",test:"The map agent's own test on the social tariff, passed on every run so far, and the run it still needs on its new model.",
-  estate:"The map beside what really runs: the same contacts table, and a nightly job reading it that the map never drew."}},
-done:[["Every call right.","You'd keep each agent in a role of its own, on one platform, reading only what it may; start from a draft that owners confirm; and check the map on every change."],
+  estate:"The map beside what really runs: the same contacts table, and a nightly job reading it that the map never drew.",
+  keep:"An agent's instructions with a copy pasted in, beside the glossary and the tariff rules where they're kept.",
+  keepProject:"A timeline: a six-month project brings the map up to date and ends, and the months after it.",
+  keepRead:"The map of billing beside what's running there, with one step running that the map doesn't show."}},
+done:[["Every call right.","You'd keep each agent in a role of its own, on one platform, reading only what it may; start from a draft that owners confirm; check the map on every change; and keep it alive, with an owner, a budget and a rhythm."],
  ["Nearly there.","Open the lab beside any situation you missed: it puts that idea in your hands."],
  ["A good start.","Watch the chapters behind the labs you missed, then try those situations again."],
  ["Start with the films.","Each lab and situation comes from one film: watch it, then try its lab."]]};

@@ -223,7 +223,7 @@ Each source with the day it was read: 5 November 2026, and the links on the film
 
 ## What the example project has
 
-Every file on screen is real, in `films/analytics-engineering/project/`, on the graduation list that *Good enough for what?* uses (`models/marts/graduations/`, `mart_graduations__graduation_list`, one row per certificate). This film adds, appended where it doesn't move any line other films cite:
+Every file on screen is real, in `learning-data-project/30-data-project/`, on the graduation list that *Good enough for what?* uses (`models/marts/graduations/`, `mart_graduations__graduation_list`, one row per certificate). This film adds, appended where it doesn't move any line other films cite:
 
 1. **The hundred.** `analyses/quality/hundred_most_recent.sql`: the hundred most recent records of a ceremony season's list, ordered by the day each joined the list (`added_on`) and then by its key, with the five fields the team marked; run with `dbt show`, as the project's other analyses are.
 2. **The profile, in SQL.** `analyses/profiling/profile_graduation_list.sql`: what the platform's profile and its three custom metrics count, for anyone without the platform, counting graduates, not rows (a double degree is two rows). Its header gives them as Databricks' data profiling takes them: a snapshot profile sliced by ceremony season, with the three counts as custom metrics, Type Aggregate, Output type Long.

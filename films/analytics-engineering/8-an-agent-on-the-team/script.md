@@ -101,7 +101,7 @@ On "not a long prompt", a long scroll of text beside the orb fades; the files st
 
 **On screen.** read the project · run dbt · draft on a branch · AGENTS.md · may · must not · five skills · one file each · the process · the agent's part · who approves · the backlog tool · who, when, how big · requirements/ · only what's still open · deleted once it's done · files, not a prompt · versioned · reviewed · shared by people and agents
 
-**In the repo.** [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) · [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-a-model/SKILL.md) · [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/reconcile-and-diff/SKILL.md) · [`docs/process.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/process.md) · [`requirements/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/requirements/)
+**In the repo.** [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) · [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/draft-a-model/SKILL.md) · [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/reconcile-and-diff/SKILL.md) · [`docs/process.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/process.md) · [`requirements/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/requirements/)
 
 ### 3 · Least access · 1:36–2:05
 
@@ -130,7 +130,7 @@ On "gets wrong", a red scribble appears in the orb's small room, and stays there
 
 **On screen.** service principal · never a person · reads: sources, core, marts · writes: its own development schemas · Databricks only · counts · small samples · personal data stays in the database · mistakes stay in its own room
 
-**In the repo.** [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md)
+**In the repo.** [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md)
 
 ### 4 · Evidence · 2:05–2:43
 
@@ -167,7 +167,7 @@ On "without its query", a fourth card, "emails are unique", arrives with no quer
 
 **On screen.** claim · query · result · seen before · 4 of 42 · no student ID · one email, two learners, two systems · recorded 7 days late · now a rule · AGENTS.md · rules can't decide · short courses: the same email · Mei decides · D-001 · no query: sent back
 
-**In the repo.** [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) · [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/learner_identity_decisions.csv)
+**In the repo.** [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) · [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/learner_identity_decisions.csv)
 
 ### 5 · The shortcut · 2:43–3:37
 
@@ -251,7 +251,7 @@ On "the fix", both lines return: `student_records.effective_date as valid_from`,
 
 **On screen.** tidy the timeline · one date for every version: when it was recorded · FAIL 1 · reconciliation · Business 4 · report 3 · took effect 27 Mar · recorded 3 Apr · census 31 Mar · severity: warn · the agent's draft · never merged · draft pull request · review stops it · never weaken a test to make it pass · a failing test is news · the fix: when each change took effect · Business 3 · PASS
 
-**In the repo.** [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql) · [`tests/reconciliation/_reconciliation__tests.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/reconciliation/_reconciliation__tests.yml) · [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md)
+**In the repo.** [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql) · [`tests/reconciliation/_reconciliation__tests.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/reconciliation/_reconciliation__tests.yml) · [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md)
 
 ### 6 · Reconcile and diff · 3:37–4:16
 
@@ -311,7 +311,7 @@ On "the diff is empty", the right-hand column, the fix, settles: no key on one s
 
 **On screen.** two checks before sign-off · reconcile · the census report · 2 · 3 · 5 · 2 · difference 0 · diff · main · the branch · --full-refresh · key by key · counts only · incremental hides a change in logic · the mart: 1 row changed · the core: 55 versions moved · the fix: the diff is empty
 
-**In the repo.** [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/reconcile-and-diff/SKILL.md) · [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/tools/diff_against_main.py)
+**In the repo.** [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/reconcile-and-diff/SKILL.md) · [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/tools/diff_against_main.py)
 
 ### 7 · Review and ship · 4:16–5:04
 
@@ -366,7 +366,7 @@ Jun presses merge.
 
 **On screen.** ready for review · what changed · why · what was checked · evidence · CI · build on DuckDB · docs current · diagram current · the metric: the census number · parse for Databricks · dbt Cloud: only what changed · state:modified+ · Jun: the code · Noor: the model · Planning: its number · the agent never merges · the agent recommends; people approve
 
-**In the repo.** [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/tools/diff_against_main.py) · [`README.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md) · [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md)
+**In the repo.** [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/tools/diff_against_main.py) · [`README.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/README.md) · [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md)
 
 ### 8 · The same words, four places · 5:04–5:26
 
@@ -387,7 +387,7 @@ On "four places", four small cards drift apart around the graph, each holding a 
 
 **On screen.** merged · tested · signed off · review the metadata · in the project and beyond · something no test checks · award · four places · three wrong · *An agent on the team* · The agent drafts and checks, with evidence. People approve. · Build · validate · review and ship
 
-**In the repo.** [`skills/review-metadata/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/review-metadata/SKILL.md)
+**In the repo.** [`skills/review-metadata/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/review-metadata/SKILL.md)
 
 ## Pause and think
 
@@ -433,27 +433,27 @@ Four stops, one question each.
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) | 1-5, 7-9, 14 (trimmed with …) |
-| 2 | [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-a-model/SKILL.md) | 1-4 (the description wrapped) |
-| 2 | [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/reconcile-and-diff/SKILL.md) | 1-4 (description trimmed) |
-| 2 | [`docs/process.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/process.md) | 12, 20, 21 (columns trimmed with …) |
-| 3 | [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) | 30-33 (from the `sql` block) |
-| 3 | [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) | 43 (wrapped) |
-| 4 | [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) | 54-55, and 57 as a highlighted line |
+| 2 | [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) | 1-5, 7-9, 14 (trimmed with …) |
+| 2 | [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/draft-a-model/SKILL.md) | 1-4 (the description wrapped) |
+| 2 | [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/reconcile-and-diff/SKILL.md) | 1-4 (description trimmed) |
+| 2 | [`docs/process.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/process.md) | 12, 20, 21 (columns trimmed with …) |
+| 3 | [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) | 30-33 (from the `sql` block) |
+| 3 | [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) | 43 (wrapped) |
+| 4 | [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) | 54-55, and 57 as a highlighted line |
 | 4 | `dbt show` of `profile_shared_emails` and `profile_late_changes` | real output, 30 September 2026 |
-| 4 | [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/learner_identity_decisions.csv) | 1-2 (the reason column trimmed; the email truncated as in the profile card, `nguyen.family@mai…`; `SC` tagged "short courses") |
-| 5 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql) | 39-48, 51, 53 (trimmed with …): `valid_from` and `valid_to`, both changed in the agent's drawn diff and both restored by the fix |
+| 4 | [`seeds/reference/student/learner_identity_decisions.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/student/learner_identity_decisions.csv) | 1-2 (the reason column trimmed; the email truncated as in the profile card, `nguyen.family@mai…`; `SC` tagged "short courses") |
+| 5 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql) | 39-48, 51, 53 (trimmed with …): `valid_from` and `valid_to`, both changed in the agent's drawn diff and both restored by the fix |
 | 5 | scratch run output | `FAIL 1 reconcile_planning_with_census_report`; `BUS | 4 | 3` |
-| 5 | [`tests/reconciliation/_reconciliation__tests.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/reconciliation/_reconciliation__tests.yml) | 3, 10-11, plus the drawn `severity: warn` (never merged) |
-| 5 | [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) | 44 (wrapped) |
-| 5 | [`tests/reconciliation/_reconciliation__tests.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/reconciliation/_reconciliation__tests.yml) | 3-7, 10-11 (trimmed) |
-| 6 | [`analyses/validation/reconcile_census_report.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/validation/reconcile_census_report.sql) | result, 30 September 2026 |
-| 6 | [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/reconcile-and-diff/SKILL.md) | 20-27 |
-| 6 | [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/tools/diff_against_main.py) | its output, on the scratch branches: `mart_planning__near_award` and `core_learner_v1` |
+| 5 | [`tests/reconciliation/_reconciliation__tests.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/reconciliation/_reconciliation__tests.yml) | 3, 10-11, plus the drawn `severity: warn` (never merged) |
+| 5 | [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) | 44 (wrapped) |
+| 5 | [`tests/reconciliation/_reconciliation__tests.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/reconciliation/_reconciliation__tests.yml) | 3-7, 10-11 (trimmed) |
+| 6 | [`analyses/validation/reconcile_census_report.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/validation/reconcile_census_report.sql) | result, 30 September 2026 |
+| 6 | [`skills/reconcile-and-diff/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/reconcile-and-diff/SKILL.md) | 20-27 |
+| 6 | [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/tools/diff_against_main.py) | its output, on the scratch branches: `mart_planning__near_award` and `core_learner_v1` |
 | 7 | `.github/workflows/credential-project.yml` (at the repository root) | 43-50, 52-56 (shown as "…"), 58-59, 63 (trimmed) |
-| 7 | [`README.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md) | 104-106 (starting "… With dbt Cloud"; rewrapped) |
-| 7 | [`AGENTS.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/AGENTS.md) | 73-80 (line 75, Mei's row, trimmed with …) |
-| 8 | [`skills/review-metadata/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/review-metadata/SKILL.md) | 1-4 (description trimmed) |
+| 7 | [`README.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/README.md) | 104-106 (starting "… With dbt Cloud"; rewrapped) |
+| 7 | [`AGENTS.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/AGENTS.md) | 73-80 (line 75, Mei's row, trimmed with …) |
+| 8 | [`skills/review-metadata/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/review-metadata/SKILL.md) | 1-4 (description trimmed) |
 
 **dbt and Databricks documentation** (the pages behind each claim; on 30 September 2026 docs.getdbt.com and docs.databricks.com couldn't be reached from the build machine, so each claim was checked against the project's own runs and a web search; to confirm on the pages on the day):
 

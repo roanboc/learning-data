@@ -166,7 +166,7 @@ For the module's set of labs, which come later as one set.
 
 ## What the example project has
 
-The film shows the example project's own files (`films/analytics-engineering/project/`), and adds what it needs after *Good enough for what?*'s graduation list is on main, appending lines or replacing them in place, so no line another film cites moves:
+The film shows the example project's own files (`learning-data-project/30-data-project/`), and adds what it needs after *Good enough for what?*'s graduation list is on main, appending lines or replacing them in place, so no line another film cites moves:
 
 - **The exam boards' approved lists, as a source kept apart from the student system:** one row per award a faculty's board approved, with the graduate, the award, the day and the faculty (`data/exam_boards/approved_awards.csv`, declared in `sources/exam_boards/_exam_boards__sources.yml`), owned by the registrar's office with the faculties, with its own key set, `EB`, and a staging model, `stg_exam_boards__approved_awards`, that names the board's day `conferred_on`, as the list does.
 - **The reconciliation, a generic data test,** `reconciles_with` (`tests/generic/reconciles_with.sql`), set on the list's model as `awards_match_the_boards`: the list's awards against the boards' approvals, keyed on the graduate and the award, a full outer join both ways, returning every award one side has and the other hasn't, and every conferral date that differs; `meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy, reference: the exam boards' approved lists}` and `method: reconciliation`. It's generic, not singular, because only a test set on a model reaches that model's data contract; the project has no `dbt_utils`, so it's written by hand.
@@ -202,7 +202,7 @@ Checked on 5 November 2026, and again as built on 10 November 2026 for the examp
 - DAMA International, *DAMA-DMBOK: Data Management Body of Knowledge*, second edition, 2017, chapter 13, *Data Quality*.
 - Danette McGilvray, *Executing Data Quality Projects: Ten Steps to Quality Data and Trusted Information*, second edition, Academic Press, 2021.
 - ISO 8000-8:2015, *Data quality: Information and data quality: concepts and measuring*; ISO/IEC 25012:2008, *Data quality model*: https://iso25000.com/index.php/en/iso-25000-standards/iso-25012
-- Open Data Contract Standard, version 3.1.0, *Data quality* (the project's copy of its schema: `governance/7-standards/open-data-contract-standard-3.1.0.schema.json`; `dimension`, `method` and `customProperties`): https://bitol-io.github.io/open-data-contract-standard/latest/data-quality/
+- Open Data Contract Standard, version 3.1.0, *Data quality* (the project's copy of its schema: `20-data-governance/7-standards/open-data-contract-standard-3.1.0.schema.json`; `dimension`, `method` and `customProperties`): https://bitol-io.github.io/open-data-contract-standard/latest/data-quality/
 - dbt, *Add data tests to your DAG* (singular data tests; `meta`; `severity`): https://docs.getdbt.com/docs/build/data-tests
 - dbt, *meta* (resource config): https://docs.getdbt.com/reference/resource-configs/meta
 - dbt, *Writing custom generic data tests* (10 November 2026): a generic test is a `test` block in `tests/generic/`, takes `model` and its own arguments, fails when its query returns rows, and can carry a `config()` block: https://docs.getdbt.com/best-practices/writing-custom-generic-tests

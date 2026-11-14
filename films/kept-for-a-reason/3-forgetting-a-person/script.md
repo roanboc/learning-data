@@ -147,7 +147,7 @@ The plan's lab for this film, for the module's set of labs (they come later, as 
 | What to find | Four records a search by name misses: the 2019 record written "Nguyen Thi Linh"; the research office's "L. Nguyen"; her contracts, kept as documents; a spreadsheet exported from a table, found through lineage. And one row that shows her students' marks |
 | What they choose | For each part: why it's held, where it came from, who gets it, until when; what to leave out; for the list, delete her row or put her no on the person; for what stays, its reason and its date |
 | What it teaches | Find a person by every key, not by name; answer with a reason for every part, without other people's data; keep a no where the list is built from; say what stays, why, and until when |
-| From the example project | The six systems' data in `films/analytics-engineering/project/data/`, the person record of *The same one, everywhere*, and the retention schedule and the tutors' mailing list as *A person asks* shows them |
+| From the example project | The six systems' data in `learning-data-project/30-data-project/data/`, the person record of *The same one, everywhere*, and the retention schedule and the tutors' mailing list as *A person asks* shows them |
 
 ## What the example project has
 

@@ -90,7 +90,7 @@ On "turns a key into a hash", the words "key → hash" write themselves a beat b
 
 **On screen.** Ask · step 1 · a question · Planning · within 15 credit points · graduate certificate · by faculty · as at census date · the decision · places to offer · the wallet app · as they are today · census report · 12 · runs on dbt Core · DuckDB · Databricks · dbt Cloud · the connection · key → hash
 
-**In the repo.** [`models/marts/planning/_planning__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__conceptual.yml) · [`profiles.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/profiles.yml) · [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql)
+**In the repo.** [`models/marts/planning/_planning__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__conceptual.yml) · [`profiles.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/profiles.yml) · [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql)
 
 ### 3 · The slice · 1:24–1:54
 
@@ -109,7 +109,7 @@ On "turns a key into a hash", the words "key → hash" write themselves a beat b
 
 **On screen.** glossary · fees · timetables · rooms · staff · the question touches four · learner · credential · award · credit towards an award · everything else stays out · DEC-PLN-01 · Noor, data architect, with Planning
 
-**In the repo.** [`models/marts/planning/_planning__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__conceptual.yml) · [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml)
+**In the repo.** [`models/marts/planning/_planning__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__conceptual.yml) · [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__decisions.yml)
 
 ### 4 · Written as YAML, drawn for people · 1:54–2:28
 
@@ -145,7 +145,7 @@ erDiagram
 
 **On screen.** written once · YAML · definition · owner · business key · the business's words, not a system's · drawn by hand · holds · holds credit · the meaning · anyone can read it
 
-**In the repo.** [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml) · [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md)
+**In the repo.** [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml) · [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.md)
 
 ### 5 · Keys and owners · 2:28–3:10
 
@@ -171,7 +171,7 @@ On "owner", faces arrive on the entities: Mei (business outline) on learner, cre
 
 **On screen.** business keys · before any source · student ID · award code · the ID its issuer gave it · SIS · LMS · SC · key sets · owners · Mei, registrar's office · the learning team · the sources will disagree · the owner decides
 
-**In the repo.** [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml) · [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__sources.yml) · [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__sources.yml)
+**In the repo.** [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/student_system/_student_system__sources.yml) · [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/learning_platform/_learning_platform__sources.yml) · [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/short_courses/_short_courses__sources.yml)
 
 ### 6 · Combine or split · 3:10–3:47
 
@@ -209,7 +209,7 @@ completed_courses as (
 
 **On screen.** combine or split? · identity · lifecycle · credit points · one entity, with kinds · award · microcredential · badge · different identity, grain or lifecycle → split · certificate of attendance · was there, not can do · stays out
 
-**In the repo.** [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml) · [`models/intermediate/student/int_credentials_unioned.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql)
+**In the repo.** [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml) · [`models/intermediate/student/int_credentials_unioned.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_credentials_unioned.sql)
 
 ### 7 · The agent's draft · 3:47–4:21
 
@@ -253,7 +253,7 @@ The student domain's decision log, `models/core/student/_student__decisions.yml`
 
 **On screen.** the agent drafts · a skill · the question first · only what it touches · combine or split · Mei adds one clause · approved · DEC-STU-01 · DEC-STU-02 · 2026-10-02 · the owner approves the meaning
 
-**In the repo.** [`skills/draft-the-conceptual-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-the-conceptual-model/SKILL.md) · [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml) · [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml)
+**In the repo.** [`skills/draft-the-conceptual-model/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/draft-the-conceptual-model/SKILL.md) · [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml) · [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__decisions.yml)
 
 ### 8 · Now, the sources · 4:21–4:43
 
@@ -285,7 +285,7 @@ Four stops, one question each.
 | 1 | His map showed only what the question needed. | A simplification: the map shows streets and some landmarks for orientation. The point is the selection, not an empty map. |
 | 2 | Planning's question and its decision. | Verbatim from Planning's conceptual model, `models/marts/planning/_planning__conceptual.yml` 10-16: a mart's question lives in its own conceptual model (while it's still being worked out, it can be an open item in `requirements/`, deleted once it's agreed). The wallet app, the second consumer, asks its own question in `models/marts/wallet/_wallet__conceptual.yml`; the card shows Planning's only. The university, its people and its numbers are fictional. |
 | 2 | The census report counted twelve; the model has to reach it. | `seeds/expected/planning/census_report.csv`: 2 + 3 + 5 + 2 = 12 as at 31 March 2026, published 14 April 2026 by the census team. `dbt show --select reconcile_census_report` gives difference 0 in all four faculties (run 30 September 2026). Reconciliation is the subject of later films. |
-| 2 | The code and the data on screen are real; they run on dbt Core with DuckDB, in the series' repository. | Only the code and the data: the university, its people and the story's events are fictional, and the glossary cards are illustrative (chapter 3). `films/analytics-engineering/project/`. Run 30 September 2026: `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'`, dbt Core 1.12.5, dbt-duckdb 1.11.0: 146 nodes, PASS 143, WARN 1 (by design: an enrolment with no email, now LIM-SC-02), ERROR 0. Not rerun on the reorganised project. |
+| 2 | The code and the data on screen are real; they run on dbt Core with DuckDB, in the series' repository. | Only the code and the data: the university, its people and the story's events are fictional, and the glossary cards are illustrative (chapter 3). `learning-data-project/30-data-project/`. Run 30 September 2026: `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'`, dbt Core 1.12.5, dbt-duckdb 1.11.0: 146 nodes, PASS 143, WARN 1 (by design: an enrolment with no email, now LIM-SC-02), ERROR 0. Not rerun on the reorganised project. |
 | 2 | The same project runs on Databricks with dbt Cloud. | "dbt Cloud" is the author's name for it; dbt Labs now calls it the dbt platform (its IDE is the Studio IDE, its explorer Catalog: getdbt.com/blog/updated-names-for-dbt-platform-and-features), to check on the day. `profiles.yml` holds a `databricks` target for dbt Core; dbt Cloud ignores `profiles.yml` and keeps the connection and credentials in the environment (the file's own comment, lines 1-2). The project's CI runs DuckDB; the Databricks target is the author's workspace. |
 | 2 | Only the connection changes, and one function: the one that turns a key into a hash. | True of the SQL. The project also switches some things by target, in configuration rather than code (README, "What differs between engines"): where sources are read (CSV files through `external_location` on DuckDB, ingested tables on Databricks); primary and foreign keys (declared and informational on Databricks, left out on DuckDB by `macros/adapters/duckdb_constraints.sql`); `persist_docs` (on for Databricks only, `dbt_project.yml` 27-30); grants on the Planning marts; liquid clustering on `core_credential`. |
 | 2 | The hash: `sha256` on DuckDB, `sha2(…, 256)` on Databricks, the same value. | `hash_key` is chosen per engine with `adapter.dispatch` (macro prefixes `duckdb__` and `databricks__`). Both functions return SHA-256 as a 64-character lower-case hex string. Checked here: DuckDB `sha256('SIS|S-20417')` = `0905e6e2b60bd76bfa5c6d3ed43ac6a4d55cf046c2c0cbce4c590300145f76a2`, identical to Python's `hashlib.sha256`. Databricks' `sha2` is documented to return the hex string of the SHA-2 digest; confirm on the day on a workspace. |
@@ -305,18 +305,18 @@ Four stops, one question each.
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | [`models/marts/planning/_planning__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__conceptual.yml) | 10-16 |
-| 2 | [`profiles.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/profiles.yml) | 3-5, 7-8, 13-14 (trimmed with …) |
-| 2 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql) | 52-58 |
-| 3 | [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml) | 10, 12, 15-16 (trimmed with …) |
-| 4 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml) | 22-31 (trimmed with … mid-line 31) |
-| 4 | [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md) | 9-14 |
-| 5 | [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml) · [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__sources.yml) · [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__sources.yml) | 17-19 in each, without their indent, under one comment |
-| 6 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml) | 55-63 |
-| 6 | [`models/intermediate/student/int_credentials_unioned.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql) | 72-80 |
-| 7 | [`skills/draft-the-conceptual-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-the-conceptual-model/SKILL.md) | 13-14, 21 (trimmed with …) |
-| 7 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml) | 44-49 |
-| 7 | [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml) | 10, 12, 16-17, 20, 22, 25-26 (trimmed: id, title, who and when) |
+| 2 | [`models/marts/planning/_planning__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__conceptual.yml) | 10-16 |
+| 2 | [`profiles.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/profiles.yml) | 3-5, 7-8, 13-14 (trimmed with …) |
+| 2 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql) | 52-58 |
+| 3 | [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__decisions.yml) | 10, 12, 15-16 (trimmed with …) |
+| 4 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml) | 22-31 (trimmed with … mid-line 31) |
+| 4 | [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.md) | 9-14 |
+| 5 | [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/student_system/_student_system__sources.yml) · [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/learning_platform/_learning_platform__sources.yml) · [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/short_courses/_short_courses__sources.yml) | 17-19 in each, without their indent, under one comment |
+| 6 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml) | 55-63 |
+| 6 | [`models/intermediate/student/int_credentials_unioned.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_credentials_unioned.sql) | 72-80 |
+| 7 | [`skills/draft-the-conceptual-model/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/draft-the-conceptual-model/SKILL.md) | 13-14, 21 (trimmed with …) |
+| 7 | [`models/core/student/_student__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.yml) | 44-49 |
+| 7 | [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__decisions.yml) | 10, 12, 16-17, 20, 22, 25-26 (trimmed: id, title, who and when) |
 
 **dbt and Databricks documentation** (the pages behind each claim; on 30 September 2026 the pages couldn't be reached from the build machine, so each claim was checked against the project's own run instead; to confirm on the pages on the day):
 

@@ -72,7 +72,7 @@ On "drift", three cards turn amber, each drifted phrase underlined. On "only the
 
 **On screen.** the agent's review · award · four places · wiki · YAML description · catalog · tooltip · as it drifts · on paper · no credit points · a degree · only the tooltip · what Mei approved · models/core/course/_course__conceptual.yml · nothing kept them in step · one small edit at a time
 
-**In the repo.** [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml)
+**In the repo.** [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__conceptual.yml)
 
 ### 3 · What goes where · 1:14–2:07
 
@@ -133,7 +133,7 @@ On "a decision log isn't a copy", the decision's `why:` lights gold-edged, and a
 
 **On screen.** not a fifth copy · the home already exists · one home per fact · the conceptual model · meaning · what it is · its key · its owner · Unity Catalog · Glossary · outside dbt · its home · named by data governance · takes its words · the glossary's term · a decision log · why · who · accepted gaps · on the model · YAML · grain · keys · contracts · tests · owners · a decision log holds why · a model's YAML has no place for why
 
-**In the repo.** [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml) · [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml) (DEC-PRJ-11, the glossary) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+**In the repo.** [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__conceptual.yml) · [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_shared/_shared__decisions.yml) (DEC-PRJ-11, the glossary) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) · [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md)
 
 ### 4 · Written once, shown everywhere · 2:07–2:47
 
@@ -209,7 +209,7 @@ On "the wiki now links", the amber wiki card from the chapter before returns: it
 
 **On screen.** defined once · _course__conceptual.yml · scripts/generate/definitions.py · doc blocks · _course__definitions.md · generated · don't edit this file · doc("award") · named, not copied · one line · Mei's approval · the check fails · in the project: 0 descriptions written twice · the wiki links to the docs site
 
-**In the repo.** [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml) · [`scripts/generate/definitions.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/generate/definitions.py) · [`models/core/course/_course__definitions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__definitions.md) · [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_core_course__models.yml)
+**In the repo.** [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__conceptual.yml) · [`scripts/generate/definitions.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/generate/definitions.py) · [`models/core/course/_course__definitions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__definitions.md) · [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_core_course__models.yml)
 
 ### 5 · Diagrams that can't drift · 2:47–3:17
 
@@ -260,7 +260,7 @@ and their real output: `the definitions, the map and seeds/reference/shared/key_
 
 **On screen.** diagrams drift too · conceptual · drawn by hand · for people · physical · generated · every table · columns · types · keys · from what dbt parsed · _core_student__models.yml: data_type changed · CI fails if it's out of date · draw the meaning · generate the structure
 
-**In the repo.** [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md) · [`models/core/student/_student__physical.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__physical.md)
+**In the repo.** [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.md) · [`models/core/student/_student__physical.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__physical.md)
 
 ### 6 · One direction · 3:17–4:02
 
@@ -282,7 +282,7 @@ On "pushes", descriptions flow along one arrow from the files into the catalog p
 
 **On screen.** Databricks · Unity Catalog · descriptions · persist_docs · each table · its columns · nobody edits them there · a rebuild writes over it · fix it at home · upstream · on a schedule · Unity Catalog · Glossary · changed · pull request · sync award from the glossary · touches · the owner approves · one direction · tuned from one source, never the other way round
 
-**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`skills/sync-the-glossary/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/sync-the-glossary/SKILL.md)
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) · [`skills/sync-the-glossary/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/sync-the-glossary/SKILL.md)
 
 ### 7 · The next version · 4:02–5:00
 
@@ -365,7 +365,7 @@ On "a choice with a deadline", the decision, in the student domain's log, with N
 
 **On screen.** written once ≠ never changed · is_revoked · status · valid · expired · revoked · breaks the old column · a new version · v2 · v1 · v1 came first · now built from v2 · Version 2 now holds the logic · deprecation 31 Mar 2027 · lineage · one exposure · wallet_app · pins v2 · dbt's warning · a choice with a deadline · not a surprise
 
-**In the repo.** [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) · [`models/core/student/core_credential_v1.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v1.sql) · [`models/marts/wallet/mart_wallet__credentials.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/mart_wallet__credentials.sql) · [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml)
+**In the repo.** [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) · [`models/core/student/core_credential_v1.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/core_credential_v1.sql) · [`models/marts/wallet/mart_wallet__credentials.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/mart_wallet__credentials.sql) · [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__decisions.yml)
 
 ### 8 · The loop closes · 5:00–5:31
 
@@ -426,27 +426,27 @@ Four stops, one question each.
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml) | 18-22, the source the tooltip matches (the four copies, the tooltip among them, are drawn, not files) |
-| 3 | [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml) | 18-26, the award on the blueprint; 27-31, its `source:` (the glossary panel beside it is drawn, not a file) |
-| 3 | [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml) | 43, 45, 48-49 (trimmed with …) |
-| 3 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) | 111, 123, 137-140 (trimmed with …) |
-| 3 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 222-227 (trimmed with …; lines wrapped) |
-| 4 | [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml) | 1-6 |
-| 4 | [`scripts/generate/definitions.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/generate/definitions.py) | 1-8, 20-22 (trimmed with …) |
-| 4 | [`models/core/course/_course__definitions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__definitions.md) | 1-11 (lines 3 and 6 wrapped) |
-| 4 | [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_core_course__models.yml) | 3-6 |
-| 4 | [`skills/review-metadata/find_repeats.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/review-metadata/find_repeats.py) | its output |
-| 4 | [`scripts/generate/definitions.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/generate/definitions.py) | `--check`: its message (scratch copy) |
-| 5 | [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md) | 8-15 |
-| 5 | [`models/core/student/_student__physical.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__physical.md) | 1-3, 9-12 (line 3 wrapped; the Mermaid fence left out; trimmed with …) |
+| 2 | [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__conceptual.yml) | 18-22, the source the tooltip matches (the four copies, the tooltip among them, are drawn, not files) |
+| 3 | [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__conceptual.yml) | 18-26, the award on the blueprint; 27-31, its `source:` (the glossary panel beside it is drawn, not a file) |
+| 3 | [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_shared/_shared__decisions.yml) | 43, 45, 48-49 (trimmed with …) |
+| 3 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) | 111, 123, 137-140 (trimmed with …) |
+| 3 | [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md) | 222-227 (trimmed with …; lines wrapped) |
+| 4 | [`models/core/course/_course__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__conceptual.yml) | 1-6 |
+| 4 | [`scripts/generate/definitions.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/generate/definitions.py) | 1-8, 20-22 (trimmed with …) |
+| 4 | [`models/core/course/_course__definitions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__definitions.md) | 1-11 (lines 3 and 6 wrapped) |
+| 4 | [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_core_course__models.yml) | 3-6 |
+| 4 | [`skills/review-metadata/find_repeats.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/review-metadata/find_repeats.py) | its output |
+| 4 | [`scripts/generate/definitions.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/generate/definitions.py) | `--check`: its message (scratch copy) |
+| 5 | [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.md) | 8-15 |
+| 5 | [`models/core/student/_student__physical.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__physical.md) | 1-3, 9-12 (line 3 wrapped; the Mermaid fence left out; trimmed with …) |
 | 5 | `.github/workflows/credential-project.yml` (repository root) | 46-50 |
-| 6 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 25-30 (the glossary card and the pull request card are drawn, from `skills/sync-the-glossary/SKILL.md`) |
-| 7 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) | 213-214, 220-226, 232-235 (trimmed with …) |
-| 7 | [`models/core/student/core_credential_v1.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v1.sql) | 1-6, 20 |
-| 7 | [`models/marts/wallet/mart_wallet__credentials.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/mart_wallet__credentials.sql) | 3-7 |
+| 6 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 25-30 (the glossary card and the pull request card are drawn, from `skills/sync-the-glossary/SKILL.md`) |
+| 7 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) | 213-214, 220-226, 232-235 (trimmed with …) |
+| 7 | [`models/core/student/core_credential_v1.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/core_credential_v1.sql) | 1-6, 20 |
+| 7 | [`models/marts/wallet/mart_wallet__credentials.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/mart_wallet__credentials.sql) | 3-7 |
 | 7 | `dbt ls` | its output |
 | 7 | dbt's warning (scratch copy) | wrapped to fit |
-| 7 | [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml) | 78, 80, 85, 88 (trimmed with …) |
+| 7 | [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__decisions.yml) | 78, 80, 85, 88 (trimmed with …) |
 
 **The run.** `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'` on 30 September 2026, dbt Core 1.12.5 with dbt-duckdb 1.11.0: PASS 143, WARN 1 (by design, gap 5), ERROR 0, 146 nodes. Run again on 6 October 2026, on the project organised by domain, with the same versions: PASS 144, WARN 1 (by design: an enrolment with no email, LIM-SC-02 and DEC-SC-01 on the `short_courses` source), ERROR 0, 147 nodes. Every card carries the label `runs on dbt Core · DuckDB`; the catalog panel is labelled `Databricks · Unity Catalog`, the story's stack, where `persist_docs` is on.
 

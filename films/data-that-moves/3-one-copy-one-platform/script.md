@@ -157,7 +157,7 @@ Checked on 5 November 2026. Product names and what they do are as Databricks' do
 
 ## What the example project has
 
-What the film shows of the university's data is in the example project, [`../../analytics-engineering/project/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project), added by this film on 5 November 2026:
+What the film shows of the university's data is in the example project, [`learning-data-project/30-data-project/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project), added by this film on 5 November 2026:
 
 - `sources/claims_app/_claims_app__sources.yml`: the source `claims_app`, owner HR, key set `CLM`, read on Databricks from the catalog `claims_app` (schema `public`, where the app's database is registered in Unity Catalog) and from a CSV on DuckDB; freshness reads `updated_at`, the app's own time of a claim's last change, since no copy of ours is loaded; and the limitation LIM-CLM-01 (the app keeps each claim as it stands now).
 - `sources/claims_app/_claims_app__docs.md`: the claims app in words (built on Lakebase, live since 23 February 2026; each claim written once; payroll and Finance read the same row; each table has one writer).

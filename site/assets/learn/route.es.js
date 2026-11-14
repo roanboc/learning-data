@@ -24,7 +24,13 @@ window.LD_ROUTE = {
   "series": "{n} series",
   "more1": "1 serie más en camino",
   "more": "{n} series más en camino",
-  "map": "La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series."
+  "map": "La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series.",
+  "proj": "El proyecto de dbt de ejemplo",
+  "proj1": "1 película de aquí muestra sus archivos reales, y puedes ejecutarlo tú.",
+  "projn": "{n} películas de aquí muestran sus archivos reales, y puedes ejecutarlo tú.",
+  "projpage": "Sobre el proyecto",
+  "projrepo": "Ábrelo en GitHub",
+  "projmark": "Muestra el proyecto de dbt de ejemplo"
  },
  "groups": [
   {
@@ -58,6 +64,11 @@ window.LD_ROUTE = {
    "name": "Liderar"
   }
  ],
+ "project": {
+  "href": "dbt-project/",
+  "repo": "https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project",
+  "icon": "<svg class=\"pj-ic\" viewBox=\"0 0 20 20\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z\"/><path d=\"M3.6 6.3L10 10l6.4-3.7M10 10v7.4\"/></svg>"
+ },
  "topics": [
   {
    "id": "data-platforms",
@@ -372,7 +383,8 @@ window.LD_ROUTE = {
       "ld-ideas-that-last"
      ]
     }
-   ]
+   ],
+   "proj": 10
   },
   {
    "id": "analytics-engineering",
@@ -403,7 +415,8 @@ window.LD_ROUTE = {
       "ld-end-to-end"
      ]
     }
-   ]
+   ],
+   "proj": 10
   },
   {
    "id": "data-quality",
@@ -458,7 +471,8 @@ window.LD_ROUTE = {
       "ld-small-every-week"
      ]
     }
-   ]
+   ],
+   "proj": 8
   },
   {
    "id": "master-data",
@@ -626,7 +640,8 @@ window.LD_ROUTE = {
       "ld-a-written-mandate"
      ]
     }
-   ]
+   ],
+   "proj": 7
   },
   {
    "id": "data-management",

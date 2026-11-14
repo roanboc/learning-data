@@ -86,7 +86,8 @@ INTRO_MOST = {"kicker": 32, "h1": 75, "lead": 300}
 # pages with a real twin in the other language (§3.2); everything else has no hreflang
 TWINS = ["", "labs/", "scenarios/", "journey/", "topics/", "sketch/", "when-things-go-wrong/",
          "when-things-go-wrong/silent-change/", "when-things-go-wrong/too-good-to-be-true/",
-         "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/"]
+         "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/",
+         "dbt-project/"]
 # English-only pages and where their ES toggle goes
 ES_TOGGLE = {"sketch/labs/": "es/sketch/", "sketch/scenarios/": "es/sketch/"}
 NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Temas", "Cómo se hizo"]}
@@ -94,6 +95,8 @@ NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Tem
 FOOT = {"en": "Source on GitHub", "es": "Código en GitHub"}
 OLD_NAV = {"Watch", "Take it apart", "Sharpen it", "All films", "Mira", "Desarma", "Labs", "Scenarios", "Situaciones"}
 CRUMBS = {  # page: (text, the pages its links go to, in order)
+    "dbt-project/": ("Topics", ["topics/"]),  # the example dbt project's page, which the route's topics link to
+    "es/dbt-project/": ("Temas", ["es/topics/"]),
     "labs/": ("Start here › The Inner Life of Data", [""]),
     "scenarios/": ("Start here › The Inner Life of Data", [""]),
     "es/labs/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
@@ -1234,6 +1237,8 @@ def main():
             exp = (2, "page")
         elif base.startswith(("labs/", "scenarios/")):
             exp = (0, "true")
+        elif base == "dbt-project/":
+            exp = (1, "true")
         elif base.startswith(("sketch/", "when-things-go-wrong/") + tuple(S["slug"] + "/" for S in build_series.SERIES)):
             exp = (1, "true")
         if pg.is404:

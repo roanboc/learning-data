@@ -1,0 +1,23 @@
+{
+  "key": "built-to-change",
+  "title": "Built to change",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: build or buy, lock-in, open formats and seams, a stage and a date for every technology, an exit plan tested once a year, and the whole data practice on one map, from a data product's owner to its files.",
+  "howto": "Technology green is a platform, and blue an application, a data product or a team. A gold tag is an owner in the business. Red is a lock, a cost or what can't come out; a green tick, what passed. Amber, a lantern's colour, is the road, its stations, and what the utility keeps as its own.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["kept"],
+  "poster": ["practice", "seam", 2.0],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bTōkaidō's\\b", "Toh-kai-doh's"],
+    ["\\bTōkaidō\\b", "Toh-kai-doh"],
+    ["\\bNakasendō\\b", "Nah-kah-sen-doh"],
+    ["\\bGokaidō\\b", "Go-kai-doh"],
+    ["\\bKobe\\b", "Koh-beh"],
+    ["\\bSQL\\b", "sequel"]
+  ]
+}

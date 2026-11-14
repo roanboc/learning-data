@@ -1,0 +1,34 @@
+{
+  "kicker": "Choosing for change",
+  "kicker_es": "Elegir pensando en el cambio",
+  "title_es": "Hecha para cambiar",
+  "h1": "Built to change: every part with a date and a way out",
+  "h1_es": "Hecha para cambiar: cada pieza con una fecha y una salida",
+  "lead": "At the utility, the storm tool's maker ends its support, with twelve years of storms inside, in a format only it can read. Ravi Menon builds so any part can change: open formats and seams, a stage and a date for every part, and a way out, tested each year.",
+  "lead_es": "En la empresa de energía, el fabricante de la herramienta de tormentas deja de darle soporte, con doce años dentro, en un formato que solo ella lee. Ravi Menon construye para que cualquier pieza pueda cambiar: formatos abiertos y costuras, una etapa y una fecha, y una salida probada cada año.",
+  "description": "A film about a data practice built to change: in January the storm tool's maker writes that support ends in December, with twelve years of the control room's storms inside it, in a format only it can read, its one way out an export made for the regulator's measure; Grace's engineers choose which lines to strengthen from those storms, and only the maker can bring them all out, as a project of its own, at its price; nobody did anything wrong, but nobody asked, when it was bought, how the utility's data would come out; so Ravi Menon and Tomás Herrera buy what every utility needs in much the same way and build what's the utility's own, and before buying ask how the data comes out, in what format, and how long leaving would take; they look for seams, where two parts meet through something both sides agree on: the platform's tables are files in an open table format, in the utility's own storage, which any engine that knows the format can read, and the logic is code in the utility's own repository, while the schedules, alerts and dashboards are the product's own, a lock-in chosen and written down; every technology on Tomás's map gets a stage and a date to look at it again, and two more parts near their end get their plans years ahead; every part gets an exit plan, the platform's own product included, tried each year: this year Grace's hosting capacity runs for a week, in test, on another engine that reads the same files, eleven lines changed of fourteen hundred and every number matching, so leaving the whole platform would take about eight months, a migration, not a rewrite; the maker brings all twelve years out, they land on the data platform as files in an open format, owned by network, and in November, a month early, the old tool is switched off; and the whole data practice on Tomás's map, one data product followed from its owner to its files.",
+  "description_es": "Una película sobre una práctica de datos hecha para cambiar: en enero el fabricante de la herramienta de tormentas escribe que el soporte acaba en diciembre, con doce años de tormentas de la sala de control dentro, en un formato que solo ella puede leer, y su única salida es una exportación hecha para la medida del regulador; los ingenieros de Grace eligen qué líneas reforzar a partir de esas tormentas, y solo el fabricante puede sacarlas todas, como un proyecto aparte, a su precio; nadie hizo nada mal, pero nadie preguntó, al comprarla, cómo saldrían los datos de la empresa; así que Ravi Menon y Tomás Herrera compran lo que toda empresa de energía necesita casi de la misma forma y construyen lo propio, y antes de comprar preguntan cómo salen los datos, en qué formato y cuánto tomaría irse; buscan costuras, donde dos piezas se unen por algo que ambos lados acuerdan: las tablas de la plataforma son archivos en un formato abierto de tablas, en el almacenamiento propio de la empresa, que cualquier motor que conozca el formato puede leer, y la lógica es código en el repositorio propio de la empresa, mientras las programaciones, las alertas y los tableros son del producto, una dependencia elegida y escrita; cada tecnología del mapa de Tomás recibe una etapa y una fecha para volver a mirarla, y otras dos piezas cerca de su fin tienen su plan con años de anticipación; cada pieza tiene un plan de salida, incluido el producto de la propia plataforma, probado cada año: este año la capacidad de alojamiento de Grace corre una semana, en prueba, en otro motor que lee los mismos archivos, con once líneas cambiadas de mil cuatrocientas y cada número igual, así que dejar toda la plataforma tomaría unos ocho meses, una migración, no una reescritura; el fabricante saca los doce años, llegan a la plataforma de datos como archivos en un formato abierto, con la red como responsable, y en noviembre, un mes antes, la herramienta vieja se apaga; y toda la práctica de datos en el mapa de Tomás, un producto de datos seguido desde su responsable hasta sus archivos.",
+  "card": "Buy what every utility needs, build what's your own, keep your data in open formats, and test the way out each year.",
+  "card_es": "Comprar lo que toda empresa necesita, construir lo propio, guardar los datos en formatos abiertos y probar la salida cada año.",
+  "chapters_es": {
+    "kept": "Mantenido durante 250 años",
+    "locked": "Doce años adentro",
+    "buy": "Construir o comprar",
+    "seams": "Costuras",
+    "dates": "Una fecha para cada pieza",
+    "exit": "Una salida, probada",
+    "storm": "Doce inviernos, guardados",
+    "practice": "Toda la práctica, en el mapa",
+    "end": "Mantenida, nunca terminada"
+  },
+  "next_h": "You've seen the platform whole, built to change. Next, AI and continuous architecture: agents on the map, and the map kept alive.",
+  "next_h_es": "Viste la plataforma completa, hecha para cambiar. Después, IA y arquitectura continua: los agentes en el mapa, y el mapa mantenido vivo.",
+  "past": [
+    "The Tōkaidō's last years and the railway, Japan, the 1860s to 1889",
+    "The relay was kept for over 250 years by adding horses and calling on villages, until its cost broke the stations and the villages; in 1872 it ended, and in 1889 the railway along the Tōkaidō's route took Tokyo to Kobe in about twenty hours."
+  ],
+  "past_es": [
+    "Los últimos años del Tōkaidō y el ferrocarril, Japón, de la década de 1860 a 1889",
+    "El relevo se mantuvo más de 250 años sumando caballos y llamando a las aldeas, hasta que su costo quebró a las postas y a las aldeas; en 1872 terminó, y en 1889 el ferrocarril por la ruta del Tōkaidō unió Tokio y Kobe en unas veinte horas."
+  ]
+}

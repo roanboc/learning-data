@@ -63,7 +63,7 @@ Three tags drop in on "three decisions", each in its colour: "fix at source", "r
 
 **On screen.** Promise · step 4 · the gap register · requirements/ · the open gaps · expects · holds · GAP-LMS-01 · a revoked credential is known as revoked · the platform deletes it · fix at source · rule in the model · accept and document · LMS|B-5028 · revoked · 12 Aug 2026 · 10 gaps · 10 decisions · Mei approves meaning · a decision, in its source's log · a known limitation, on the model · still open, until the fix arrives
 
-**In the repo.** [`requirements/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/requirements/) · [`requirements/sources/learning_platform/_learning_platform__requirements.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/requirements/sources/learning_platform/_learning_platform__requirements.yml) · [`sources/learning_platform/_learning_platform__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__decisions.yml)
+**In the repo.** [`requirements/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/requirements/) · [`requirements/sources/learning_platform/_learning_platform__requirements.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/requirements/sources/learning_platform/_learning_platform__requirements.yml) · [`sources/learning_platform/_learning_platform__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/learning_platform/_learning_platform__decisions.yml)
 
 ### 3 · The enterprise contract · 1:44–2:25
 
@@ -117,7 +117,7 @@ The type flips back; the bar turns green. Noor (cyan outline) gives the card a g
 
 **On screen.** the contracts · the core · the strongest promise · public · enforced · every column · its type · not null · one row per credential · query and contract disagree → build stops · checked at every build · Noor approves
 
-**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml)
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml)
 
 ### 4 · Two consumer contracts · 2:25–3:06
 
@@ -158,7 +158,7 @@ and the wallet's, from `exposures/wallet/_wallet__exposures.yml` (`wallet_app`, 
 
 **On screen.** consumer contracts · Planning · one row per learner per award, as at census date · the wallet · one row per learner, as it is now · enforced · protected · exposure · owner · email · change the credential → the wallet app · who to tell · Planning approves · the wallet team approves
 
-**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`exposures/planning/_planning__exposures.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml) · [`exposures/wallet/_wallet__exposures.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/wallet/_wallet__exposures.yml)
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) · [`exposures/planning/_planning__exposures.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/exposures/planning/_planning__exposures.yml) · [`exposures/wallet/_wallet__exposures.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/exposures/wallet/_wallet__exposures.yml)
 
 ### 5 · Tests first · 3:06–3:47
 
@@ -205,7 +205,7 @@ The teal orb writes the list in teal; Jun (cyan) reads it and gives a gold tick.
 
 **On screen.** Promise · step 5 · tests, before the code · what done looks like · unique · not null · relationships · agreed values · graduate certificate · master · versions never overlap · census report · 12 · faculty by faculty · the agent drafts · Jun reviews
 
-**In the repo.** [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_core_course__models.yml) · [`tests/generic/versions_do_not_overlap.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/generic/versions_do_not_overlap.sql) · [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/expected/planning/census_report.csv) · [`tests/reconciliation/reconcile_planning_with_census_report.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/reconciliation/reconcile_planning_with_census_report.sql)
+**In the repo.** [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_core_course__models.yml) · [`tests/generic/versions_do_not_overlap.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/generic/versions_do_not_overlap.sql) · [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/expected/planning/census_report.csv) · [`tests/reconciliation/reconcile_planning_with_census_report.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/reconciliation/reconcile_planning_with_census_report.sql)
 
 ### 6 · Logic, tested alone · 3:47–4:29
 
@@ -243,7 +243,7 @@ On "Jordan's", the February and August dates link back to the revoked badge of c
 
 **On screen.** data tests: the tables · unit tests: the logic · given · a unit from 10 Jan · a microcredential 2 Feb → 12 Aug · expect · 15 → 20 → 15 · three versions · the microcredential's dates: Jordan's · proved before real data
 
-**In the repo.** [`models/intermediate/student/_int_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/_int_student__models.yml)
+**In the repo.** [`models/intermediate/student/_int_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/_int_student__models.yml)
 
 ### 7 · Warn or stop · 4:29–5:11
 
@@ -278,7 +278,7 @@ A counter of missing emails runs 0 (green) → 1 to 5 (amber) → 6 (red), then 
 
 **On screen.** warn · stop · SC|E-7010 · no email · walk-in · warn if > 0 · stop if > 5 · agreed with the learning team · 9 Oct 2026 · today: WARN 1 · freshness · warn after a day · error after three · the owner sets the level · the reason, written down
 
-**In the repo.** [`models/staging/short_courses/_short_courses__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/_short_courses__models.yml) · [`sources/short_courses/_short_courses__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__decisions.yml) · [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml)
+**In the repo.** [`models/staging/short_courses/_short_courses__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/short_courses/_short_courses__models.yml) · [`sources/short_courses/_short_courses__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/short_courses/_short_courses__decisions.yml) · [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/student_system/_student_system__sources.yml)
 
 ### 8 · Waiting, on purpose · 5:11–5:36
 
@@ -337,24 +337,24 @@ Four stops, one question each.
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | [`requirements/sources/learning_platform/_learning_platform__requirements.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/requirements/sources/learning_platform/_learning_platform__requirements.yml) | 8, 12-13, 15 (GAP-LMS-01: the expectation, the reality and the fix requested), rendered as a table with the rule; the rest of the decision trimmed with … |
-| 2 | [`sources/learning_platform/_learning_platform__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__decisions.yml) | 13, 18 (DEC-LMS-01: the rule, and where it lives) |
-| 3 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 46-52 |
-| 3 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) | 111, 117-120, 141-142, 144-146, 191, 193 (each left-out run of lines marked …) |
+| 2 | [`requirements/sources/learning_platform/_learning_platform__requirements.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/requirements/sources/learning_platform/_learning_platform__requirements.yml) | 8, 12-13, 15 (GAP-LMS-01: the expectation, the reality and the fix requested), rendered as a table with the rule; the rest of the decision trimmed with … |
+| 2 | [`sources/learning_platform/_learning_platform__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/learning_platform/_learning_platform__decisions.yml) | 13, 18 (DEC-LMS-01: the rule, and where it lives) |
+| 3 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 46-52 |
+| 3 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) | 111, 117-120, 141-142, 144-146, 191, 193 (each left-out run of lines marked …) |
 | 3 | dbt's message (scratch copy) | the contract error, trimmed to three lines |
-| 4 | [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml) | 12 (grain) |
-| 4 | [`exposures/planning/_planning__exposures.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml) | 1-6, 10-15 (the description trimmed with …) |
-| 4 | [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__models.yml) | 10 (grain) |
-| 4 | [`exposures/wallet/_wallet__exposures.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/wallet/_wallet__exposures.yml) | 1-6, 10-15 (the description trimmed with …) |
-| 4 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 54-59 |
-| 5 | [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_core_course__models.yml) | 55-61 |
-| 5 | [`tests/generic/versions_do_not_overlap.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/generic/versions_do_not_overlap.sql) | 1-5 |
-| 5 | [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/expected/planning/census_report.csv) | 1-5 (as a table) |
-| 5 | [`tests/reconciliation/reconcile_planning_with_census_report.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/reconciliation/reconcile_planning_with_census_report.sql) | 1-2, 32-35 (trimmed with …) |
-| 6 | [`models/intermediate/student/_int_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/_int_student__models.yml) | given card: 221, 226-227, 229-232 (9 lines with the two …); expect card: 233, 235-239 (7 lines with the …); `model:`, the description and the `format: csv` lines marked … |
-| 7 | [`models/staging/short_courses/_short_courses__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/_short_courses__models.yml) | 47-57 |
-| 7 | [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml) | 10-13 |
-| 7 | [`sources/short_courses/_short_courses__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__decisions.yml) | 10, 13, 16-17 (DEC-SC-01: id, text, who and when) |
+| 4 | [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__models.yml) | 12 (grain) |
+| 4 | [`exposures/planning/_planning__exposures.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/exposures/planning/_planning__exposures.yml) | 1-6, 10-15 (the description trimmed with …) |
+| 4 | [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/_wallet__models.yml) | 10 (grain) |
+| 4 | [`exposures/wallet/_wallet__exposures.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/exposures/wallet/_wallet__exposures.yml) | 1-6, 10-15 (the description trimmed with …) |
+| 4 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 54-59 |
+| 5 | [`models/core/course/_core_course__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_core_course__models.yml) | 55-61 |
+| 5 | [`tests/generic/versions_do_not_overlap.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/generic/versions_do_not_overlap.sql) | 1-5 |
+| 5 | [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/expected/planning/census_report.csv) | 1-5 (as a table) |
+| 5 | [`tests/reconciliation/reconcile_planning_with_census_report.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/reconciliation/reconcile_planning_with_census_report.sql) | 1-2, 32-35 (trimmed with …) |
+| 6 | [`models/intermediate/student/_int_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/_int_student__models.yml) | given card: 221, 226-227, 229-232 (9 lines with the two …); expect card: 233, 235-239 (7 lines with the …); `model:`, the description and the `format: csv` lines marked … |
+| 7 | [`models/staging/short_courses/_short_courses__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/short_courses/_short_courses__models.yml) | 47-57 |
+| 7 | [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/student_system/_student_system__sources.yml) | 10-13 |
+| 7 | [`sources/short_courses/_short_courses__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/short_courses/_short_courses__decisions.yml) | 10, 13, 16-17 (DEC-SC-01: id, text, who and when) |
 
 **dbt and Databricks documentation** (the pages behind each claim; on 30 September 2026 docs.getdbt.com and docs.databricks.com couldn't be reached from the build machine, so each claim was checked against the project's own runs and a web search; to confirm on the pages on the day):
 

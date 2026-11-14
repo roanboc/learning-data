@@ -137,7 +137,7 @@ The times are the recorded voice's, as `tools/pace.py` measured them (*Pacing re
 
 **On screen.** 2 · Tool servers · Databricks SQL · runs queries · Unity Catalog functions · a function as a tool · AI Search · searches documents · Genie One · ask it · Genie Agent · Research projects · Databricks (with its logo) · Anil's agent · signed in as Anil · `active_projects(faculty)` · Research projects active in one faculty: started, not yet ended, each counted once, in the faculty that leads it · reviewed · Jun · approved · Noor · Genie · project check · Jun's agent · 168 · MCP (with its mark)
 
-**In the repo.** `films/analytics-engineering/project/examples/agents-on-databricks/active_projects.sql`
+**In the repo.** `learning-data-project/30-data-project/examples/agents-on-databricks/active_projects.sql`
 
 ### 5 · Agents the team builds · 4:28–5:28
 
@@ -147,7 +147,7 @@ The times are the recorded voice's, as `tools/pace.py` measured them (*Pacing re
 
 **On screen.** 3 · Agents the team builds · Active projects · every night · ✓ Matches the Research Office · ⚠ Check failed · Research Office · Why? · Plan · Act · Check · Project check agent · built in code · Databricks (with its logo) · Agent Bricks · Agent Runtime · Databricks SQL · Unity Catalog functions · AI Search · Genie One · Genie Agent · Trace · 1 · SQL · count by faculty · 2 · SQL · what changed · 3 · AI Search · the definition · 4 · Note for Jun · Evaluation · Left out 12 projects given more time · they still count: 547 · Business: 88 against 86 · two projects entered twice · Health: 141 · the report's half shares read as projects · Health: 177 · the Bridge Health Lab counted in Health · judges · sums · Mei · Jun · Note for Jun · Two projects entered twice? · Business: 88 against 86 · Evidence attached · query · count by faculty · trace · its four steps · Jun decides
 
-**In the repo.** `films/analytics-engineering/project/examples/agents-on-databricks/project_check_evaluation.yml`
+**In the repo.** `learning-data-project/30-data-project/examples/agents-on-databricks/project_check_evaluation.yml`
 
 ### 6 · Agents that write code · 5:28–6:25
 
@@ -157,7 +157,7 @@ The times are the recorded voice's, as `tools/pace.py` measured them (*Pacing re
 
 **On screen.** 4 · Agents that write code · Databricks (with its logo) · Lakeflow Pipelines Editor · Sam Okafor · Data platform · `create or refresh streaming table` · `learning_platform.users (` · `constraint has_an_id` · `expect (user_id is not null)` · `on violation drop row` · `)` · Genie Code · with Sam's rights · Skills · the team's · `profile-a-source` · `draft-a-model` · `reconcile-and-diff` · dbt project (with its logo) · `skills/` · `SKILL.md · name · description` · Using profile-a-source · 4 of 42 current learning platform accounts have no student ID. · `profile_null_keys` · `learning_platform.users` · `student_id · 42 · 4` · `AGENTS.md` · `models/` · `examples/` · tool servers · Databricks' skills · Skills teach an agent how to work; · tool servers let it do the work. · Sandbox · drafts only · draft · by Genie Code · by Jun's agent · reviewed · Sam · reviewed · Jun · approved · Noor · Production
 
-**In the repo.** `films/analytics-engineering/project/scripts/setup/loading_pipeline.sql` · `films/analytics-engineering/project/skills/` · `films/analytics-engineering/project/analyses/profiling/profile_null_keys.sql` · `films/analytics-engineering/project/AGENTS.md`
+**In the repo.** `learning-data-project/30-data-project/scripts/setup/loading_pipeline.sql` · `learning-data-project/30-data-project/skills/` · `learning-data-project/30-data-project/analyses/profiling/profile_null_keys.sql` · `learning-data-project/30-data-project/AGENTS.md`
 
 ### 7 · The same answer · 6:25–7:12
 
@@ -239,7 +239,7 @@ Checked on 4 November 2026, and again for the new story, its numbers and the log
 
 ## What the example project has
 
-This film adds a worked example to the example project, `films/analytics-engineering/project/examples/agents-on-databricks/`, Databricks only and not run by CI:
+This film adds a worked example to the example project, `learning-data-project/30-data-project/examples/agents-on-databricks/`, Databricks only and not run by CI:
 
 - `active_projects.sql`: the count of active projects as a Unity Catalog function, which counts the Research Office's governed table of projects, each once, in the faculty that leads it;
 - `research_projects_genie_agent.md`: the *Research projects* Genie Agent as the data team sets it up and reviews it: its data, its instructions (each with where its words come from), its example query and its three benchmarks, each with its SQL answer;

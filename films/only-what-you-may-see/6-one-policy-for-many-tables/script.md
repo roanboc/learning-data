@@ -233,7 +233,7 @@ Four questions, at the ends of *A policy for each class*, *A function for each w
 
 ## What the example project gets
 
-New files only, so no cited line moves, in `films/analytics-engineering/project/examples/one-policy-for-many-tables/` (the project's `examples/` folder holds each film's worked example):
+New files only, so no cited line moves, in `learning-data-project/30-data-project/examples/one-policy-for-many-tables/` (the project's `examples/` folder holds each film's worked example):
 
 - `README.md`: what each file is, how the job runs them (a SQL task in the registrar's bundle, as `registrar-loader`, test first, then production after a release approver), and the rules: one policy per class at the highest level that fits; one mask per column per reader; let the builder through; set the level last, never on a catalog or shelf; policies before the grant that opens the door; check with `SHOW EFFECTIVE POLICIES`.
 - `registrar/policies/functions.sql`: `mask_whole` (one function for every type, through `VARIANT`), `mask_in_part`, `generalise`, `in_faculty`, `no_rows`, each a few plain, deterministic lines.

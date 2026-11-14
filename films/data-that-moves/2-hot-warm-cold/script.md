@@ -44,7 +44,7 @@ The module's reference is DAMA-DMBOK as the map and the data engineering lifecyc
 
 ## What the example project has
 
-`examples/hot-warm-cold/` in the example project (`films/analytics-engineering/project/`), for Databricks only and not run by CI:
+`examples/hot-warm-cold/` in the example project (`learning-data-project/30-data-project/`), for Databricks only and not run by CI:
 
 - **Cold,** `spending_by_faculty.sql` and `.yml`: Jun's dbt model, a materialized view of what each faculty has spent against its budget, from the finance system's ledger read in place, each night at 02:00, Sydney time.
 - **Warm,** `contracts_as_they_stand.sql`: the pipeline that applies the changes the HR system pushes (Zerobus Ingest) to a streaming table of every contract as it stands, triggered every five minutes, with why it runs through the platform until the ERP of 2028.

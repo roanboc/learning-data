@@ -203,4 +203,4 @@ Each source with the day it was read.
 
 ## What the example project has
 
-Nothing new: the film designs how the work is organised, not the data work itself. The build page's steps are the ones the example project already keeps (a definition in the glossary first, built and tested on the platform, owners told what it touches, the data team's review), and no model, check or file in `films/analytics-engineering/project/` changes.
+Nothing new: the film designs how the work is organised, not the data work itself. The build page's steps are the ones the example project already keeps (a definition in the glossary first, built and tested on the platform, owners told what it touches, the data team's review), and no model, check or file in `learning-data-project/30-data-project/` changes.

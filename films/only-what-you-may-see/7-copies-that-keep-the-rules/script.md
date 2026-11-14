@@ -230,7 +230,7 @@ Every fact below was read on 10 November 2026 unless dated otherwise; the first 
 
 ## In the example project
 
-The example project, `films/analytics-engineering/project/`, is unchanged. What the film shows on GitHub, `uni-example/data-platform` (`registrar/tests/made_up_learners.py`, `platform/workspaces/studies.yml`), is the module's own platform repository, drawn, not a folder here. The project already does what the film asks of development: its sample data is invented (its README: "The university, its people and its data are fictional"), and its unit tests (in `_int_student__models.yml`, `_planning__models.yml` and `_finance__models.yml`) run on rows written for each test, with no real data.
+The example project, `learning-data-project/30-data-project/`, is unchanged. What the film shows on GitHub, `uni-example/data-platform` (`registrar/tests/made_up_learners.py`, `platform/workspaces/studies.yml`), is the module's own platform repository, drawn, not a folder here. The project already does what the film asks of development: its sample data is invented (its README: "The university, its people and its data are fictional"), and its unit tests (in `_int_student__models.yml`, `_planning__models.yml` and `_finance__models.yml`) run on rows written for each test, with no real data.
 
 ## Decided
 

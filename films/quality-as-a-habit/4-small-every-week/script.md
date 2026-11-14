@@ -209,7 +209,7 @@ The Spanish pack (`think.es.js`) keeps the same keys, with the right answers and
 
 ## What the example project has
 
-Added to the example dbt project (`films/analytics-engineering/project/`) on 10 November 2026, appended or replaced in place so no cited line moves; the page's *See it in the project* (`site.json` `repo`) links each file.
+Added to the example dbt project (`learning-data-project/30-data-project/`) on 10 November 2026, appended or replaced in place so no cited line moves; the page's *See it in the project* (`site.json` `repo`) links each file.
 
 - **The last step of every run:** `on-run-end` in `dbt_project.yml` calls `keep_check_results(results)` (`macros/governance/keep_check_results.sql`), which adds a row for each check that ran to one table, `check_results`, in the target's own schema: when the run started, the run's id, the check, its status (pass, warn, fail, error or skipped), how many rows it held or failed, and its owner and dimension from the check's `meta`. Nothing is replaced: each night adds to the nights before. The project's own checks on itself (`tests/governance/`) aren't kept, as the scorecard doesn't score them; a run with no checks adds nothing, and nor does `dbt compile`, which runs the same last step with no results to keep.
 - **The week, night by night:** `analyses/quality/checks_by_night.sql`, for each check a row for each of the last seven nights, from that night's last run, with how many more rows it held than the night before: what the Thursday dashboard reads on Databricks (the dashboard itself is kept on the platform, not in the project).

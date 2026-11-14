@@ -161,7 +161,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 
 ## Where it comes from in the project
 
-The example project is *In the weeds of data crafting*'s dbt project, in `films/analytics-engineering/project/`.
+The example project is *In the weeds of data crafting*'s dbt project, in `learning-data-project/30-data-project/`.
 
 | On screen | In the example project |
 |---|---|

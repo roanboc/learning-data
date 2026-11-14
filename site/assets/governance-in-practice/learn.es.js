@@ -160,7 +160,7 @@ labs:[
     toggles:[{k:"out",label:"outputs: mart_planning__completions"},{k:"owner",label:"owner: Clara Jensen, Planning"},{k:"purpose",label:"purpose y usage"},{k:"sl",label:"niveles de servicio"},{k:"support",label:"support: dónde preguntar"}],
     code:[[null,"name: completions"],[null,"title: Completions"],[null,"domain: planning"],["owner","owner: \"Clara Jensen, Planning\""],["purpose","purpose: The awards conferred this year, by faculty."],["purpose","usage: Count the rows for each faculty."],
       ["out","outputs:"],["out","  - {model: mart_planning__completions}"],["sl","service_levels:"],["sl","  - {property: latency, value: 1, unit: d}"],["support","support:"],["support","  - {channel: planning-data, tool: email}"]],
-    checks:[{s:"la tabla compartida está en un producto",t:"shared:",need:["out"],fail:"mart_planning__completions is shared but in no product: add it to a product's outputs in governance/4-data-products/.",pass:"Está en un producto."},
+    checks:[{s:"la tabla compartida está en un producto",t:"shared:",need:["out"],fail:"mart_planning__completions is shared but in no product: add it to a product's outputs in 20-data-governance/4-data-products/.",pass:"Está en un producto."},
       {s:"el producto nombra a su dueña",t:"owner:",need:["owner"],fail:"completions no nombra dueño: di quién cumple su promesa.",pass:"Clara cumple su promesa."},
       {s:"dice para qué es",t:"purpose:",need:["purpose"],fail:"completions no tiene purpose ni usage: el estándar abierto pregunta para qué es, y cómo usarlo.",pass:"Los lectores saben para qué es."},
       {s:"niveles de servicio y soporte",t:"promesa:",need:["sl","support"],level:"warn",fail:"completions no tiene niveles de servicio ni soporte: los lectores no sabrán cuándo está lista, ni dónde preguntar.",pass:"Los lectores saben cuándo, y dónde preguntar."}],
@@ -249,7 +249,7 @@ qs:[
     {t:"Nada en absoluto, hasta que cada celda del tablero vuelva a estar en verde.",why:"Las cifras del día anterior están bien; solo lo construido con los datos detenidos está en duda."}],
   why:"Todo lo construido con ellas se detuvo, así que no salió nada mal: Planificación conservó las cifras del día anterior. Al mediodía, el equipo de aprendizaje había agregado los seis correos, y esa noche pasaron los 160 controles."},
 /* ---------- Productos en formatos abiertos ---------- */
-{type:"choice",n:52,lab:"shared",film:5,vis:"code",st:{path:"products",lines:[{t:"mart_planning__completions is shared but in",c:"no"},{t:"no product: add it to a product's outputs",c:"no"},"in governance/4-data-products/"],say:"1 falló",sayC:"no"},
+{type:"choice",n:52,lab:"shared",film:5,vis:"code",st:{path:"products",lines:[{t:"mart_planning__completions is shared but in",c:"no"},{t:"no product: add it to a product's outputs",c:"no"},"in 20-data-governance/4-data-products/"],say:"1 falló",sayC:"no"},
   alt:"El control de productos falla: la tabla de egresos de Jun es compartida pero no está en ningún producto.",
   title:"Compartida, sin producto",sit:"La tabla de egresos de Jun la leerá Planificación, pero no está en ningún producto, y el control de productos detiene su solicitud de cambio. ¿Cuál es el arreglo?",
   opts:[{t:"Hacer privada la tabla, para que ya no cuente como compartida.",why:"Planificación la necesita: esconderla mueve la pregunta, no la responde."},

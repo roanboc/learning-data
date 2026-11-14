@@ -93,7 +93,7 @@ On "no joins", a dashed arrow tries to reach from the pink file to a blue one an
 
 **On screen.** Build · step 6 · in layers · tests first · now the code · the agent drafts · runs · red · the least code · Jun reviews · staging · one per source table · 7 views · rename · cast · trim · one case · readable key · key set · hash · no joins · no rules · still a customer · runs on dbt Core · DuckDB
 
-**In the repo.** [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-a-model/SKILL.md) · [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+**In the repo.** [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/draft-a-model/SKILL.md) · [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/short_courses/stg_short_courses__learners.sql) · [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md)
 
 ### 3 · Intermediate · 1:13–1:41
 
@@ -120,7 +120,7 @@ changed
 
 **On screen.** intermediate · 8 views · steps, not products · match keys · one timeline · three systems, one list · the credit rule · customer → learner · the recipe
 
-**In the repo.** [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) · [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql)
+**In the repo.** [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md) · [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql)
 
 ### 4 · Core · 1:41–2:12
 
@@ -160,7 +160,7 @@ Noor, outlined in cyan, looks over the gold column and adds a gold tick.
 
 **On screen.** core · what the blueprint names · learner · award · credential · credit towards an award · declared grain · public · contract enforced · tests green · the award: one source, nothing to resolve · Noor reviews
 
-**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`models/core/course/core_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/core_award.sql)
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) · [`models/core/course/core_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/core_award.sql)
 
 ### 5 · Marts · 2:12–2:42
 
@@ -184,7 +184,7 @@ On "never", an arrow from the wallet's mart to Planning's appears and is crossed
 
 **On screen.** marts · each for one consumer · Planning · one row per learner per award · as at census date · 73 rows · the wallet · one wide row · as it is now · one lookup · on the core, not on another mart
 
-**In the repo.** [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__models.yml)
+**In the repo.** [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/_wallet__models.yml)
 
 ### 6 · One CTE, one step · 2:42–3:14
 
@@ -249,7 +249,7 @@ Beside it, the CTE names as an outline: learners · awards · credit → learner
 
 **On screen.** import CTEs · one per model it reads · logical CTEs · one step each · named for what they hold · learners_at_census, not cte2 · final select · every column · the contract's order · top to bottom
 
-**In the repo.** [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/mart_planning__near_award.sql) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+**In the repo.** [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/mart_planning__near_award.sql) · [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md)
 
 ### 7 · Physical choices · 3:14–3:52
 
@@ -295,7 +295,7 @@ On "twice", a second run: the new layer is empty: "0 rows to merge". On "Databri
 
 **On screen.** how it's used · views: staging and steps · tables: core and marts · incremental · merge · on the credential's key · second run: 0 rows to merge · clustered by learner on Databricks · logic changed: --full-refresh
 
-**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`models/core/student/core_credential_v2.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v2.sql)
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) · [`models/core/student/core_credential_v2.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/core_credential_v2.sql)
 
 ### 8 · Metrics once · 3:52–4:36
 
@@ -350,7 +350,7 @@ and the build line `PASS reconcile_planning_with_census_report`, green, with the
 
 **On screen.** is_near_award · more than 0 left · no more than 15 · written once · the count, one macro · the metric · the same column · the pass · 12 · 12 · green · one team · one project · the registrar · the learning team · a project of its own · *Built in layers* · Each layer one job; each CTE one step; each rule written once.
 
-**In the repo.** [`macros/planning/near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/planning/near_award.sql) · [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`models/marts/planning/_planning__semantic.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__semantic.yml)
+**In the repo.** [`macros/planning/near_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/planning/near_award.sql) · [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) · [`models/marts/planning/_planning__semantic.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__semantic.yml)
 
 ## Pause and think
 
@@ -398,23 +398,23 @@ Four stops, one question each.
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-a-model/SKILL.md) | 8-9 |
-| 2 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 8, 11-14 (the Sources row and the Folder column left out; the Job column trimmed with …) |
-| 2 | [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql) | 9-12, 19, 21, 23, 25-28, 30, 32-35 (blank lines removed; trimmed with …) |
+| 2 | [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/draft-a-model/SKILL.md) | 8-9 |
+| 2 | [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md) | 8, 11-14 (the Sources row and the Folder column left out; the Job column trimmed with …) |
+| 2 | [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/short_courses/stg_short_courses__learners.sql) | 9-12, 19, 21, 23, 25-28, 30, 32-35 (blank lines removed; trimmed with …) |
 | 2 | test names | from the build output of 30 September 2026 |
-| 3 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 12 (trimmed) |
-| 3 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql) | the CTE names, lines 9-213 (a list drawn from the file, labelled "CTE names from"; not lines of it) |
-| 4 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 46-52 |
-| 4 | [`models/core/course/core_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/core_award.sql) | 1-5, 7, 9-13, 22 (blank lines removed; trimmed with …) |
-| 5 | [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml) | 12 |
-| 5 | [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__models.yml) | 3-10 |
-| 6 | [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/mart_planning__near_award.sql) | 3-19, 21-27, 79-86, 88-92, 105-109 (blank lines removed; trimmed with …) |
-| 6 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 192-194 (trimmed) |
-| 7 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 32-33, 38-39, 46-47, 54-55 (trimmed with …) |
-| 7 | [`models/core/student/core_credential_v2.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v2.sql) | 1-9, 24-25 (trimmed with …) |
-| 8 | [`macros/planning/near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/planning/near_award.sql) | 6-9, 17-25 |
-| 8 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 18, 21 (trimmed) |
-| 8 | [`models/marts/planning/_planning__semantic.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__semantic.yml) | 49-50, 55-59 (trimmed with …) |
+| 3 | [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md) | 12 (trimmed) |
+| 3 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql) | the CTE names, lines 9-213 (a list drawn from the file, labelled "CTE names from"; not lines of it) |
+| 4 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 46-52 |
+| 4 | [`models/core/course/core_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/core_award.sql) | 1-5, 7, 9-13, 22 (blank lines removed; trimmed with …) |
+| 5 | [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__models.yml) | 12 |
+| 5 | [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/_wallet__models.yml) | 3-10 |
+| 6 | [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/mart_planning__near_award.sql) | 3-19, 21-27, 79-86, 88-92, 105-109 (blank lines removed; trimmed with …) |
+| 6 | [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md) | 192-194 (trimmed) |
+| 7 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 32-33, 38-39, 46-47, 54-55 (trimmed with …) |
+| 7 | [`models/core/student/core_credential_v2.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/core_credential_v2.sql) | 1-9, 24-25 (trimmed with …) |
+| 8 | [`macros/planning/near_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/planning/near_award.sql) | 6-9, 17-25 |
+| 8 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 18, 21 (trimmed) |
+| 8 | [`models/marts/planning/_planning__semantic.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__semantic.yml) | 49-50, 55-59 (trimmed with …) |
 | 8 | `dbt show --select reconcile_census_report --profiles-dir .` | result, with its real column names and full faculty names (dbt show's separator row dropped) |
 | 8 | build output | `PASS reconcile_planning_with_census_report` |
 

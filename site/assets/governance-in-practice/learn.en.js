@@ -161,7 +161,7 @@ labs:[
     toggles:[{k:"out",label:"outputs: mart_planning__completions"},{k:"owner",label:"owner: Clara Jensen, Planning"},{k:"purpose",label:"purpose and usage"},{k:"sl",label:"service levels"},{k:"support",label:"support: where to ask"}],
     code:[[null,"name: completions"],[null,"title: Completions"],[null,"domain: planning"],["owner","owner: \"Clara Jensen, Planning\""],["purpose","purpose: The awards conferred this year, by faculty."],["purpose","usage: Count the rows for each faculty."],
       ["out","outputs:"],["out","  - {model: mart_planning__completions}"],["sl","service_levels:"],["sl","  - {property: latency, value: 1, unit: d}"],["support","support:"],["support","  - {channel: planning-data, tool: email}"]],
-    checks:[{s:"the shared table is in a product",t:"shared:",need:["out"],fail:"mart_planning__completions is shared but in no product: add it to a product's outputs in governance/4-data-products/.",pass:"It's in one product."},
+    checks:[{s:"the shared table is in a product",t:"shared:",need:["out"],fail:"mart_planning__completions is shared but in no product: add it to a product's outputs in 20-data-governance/4-data-products/.",pass:"It's in one product."},
       {s:"the product names its owner",t:"owner:",need:["owner"],fail:"completions names no owner: say who keeps its promise.",pass:"Clara keeps its promise."},
       {s:"it says what it's for",t:"purpose:",need:["purpose"],fail:"completions has no purpose or usage: the open standard asks what it's for, and how to use it.",pass:"Readers know what it's for."},
       {s:"service levels and support",t:"promise:",need:["sl","support"],level:"warn",fail:"completions has no service levels or support: readers won't know when it's ready, or where to ask.",pass:"Readers know when, and where to ask."}],
@@ -250,7 +250,7 @@ qs:[
     {t:"Nothing at all, until every cell of the scorecard is green again.",why:"The day before's numbers are good; only what was built from the stopped data is in doubt."}],
   why:"Everything built from them stopped, so nothing wrong went out: Planning kept the day before's numbers. By noon, the learning team had added the six emails, and that night, all 160 checks passed."},
 /* ---------- Products in open formats ---------- */
-{type:"choice",n:52,lab:"shared",film:5,vis:"code",st:{path:"products",lines:[{t:"mart_planning__completions is shared but in",c:"no"},{t:"no product: add it to a product's outputs",c:"no"},"in governance/4-data-products/"],say:"1 failed",sayC:"no"},
+{type:"choice",n:52,lab:"shared",film:5,vis:"code",st:{path:"products",lines:[{t:"mart_planning__completions is shared but in",c:"no"},{t:"no product: add it to a product's outputs",c:"no"},"in 20-data-governance/4-data-products/"],say:"1 failed",sayC:"no"},
   alt:"The products check fails: Jun's completions table is shared but in no product.",
   title:"Shared, in no product",sit:"Jun's completions table will be read by Planning, but it isn't in any product, and the products check stops his pull request. What's the fix?",
   opts:[{t:"Make the table private, so that it no longer counts as shared.",why:"Planning needs it: hiding it moves the question, it doesn't answer it."},

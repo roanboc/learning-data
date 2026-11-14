@@ -186,7 +186,7 @@ Each source with the day it was read.
 
 ## What the example project has
 
-The graduation list's core came first, in its own pull request (#163, merged 5 November 2026), so the module's other films could build on it. In `films/analytics-engineering/project/`:
+The graduation list's core came first, in its own pull request (#163, merged 5 November 2026), so the module's other films could build on it. In `learning-data-project/30-data-project/`:
 
 - `models/marts/graduations/mart_graduations__graduation_list.sql` and `_graduations__models.yml`: the list, one row per certificate (a graduate, an award and a ceremony); each column's `meta.critical_for` names the uses that can't do without it; each check names its owner in its own `config: meta: owner`; `meta.quality` holds each use's level.
 - `exposures/graduations/_graduations__exposures.yml` and `exposures/planning/_planning__exposures.yml`: the four uses, the seating plan, the certificates and the programme owned by Malia Fonoti's graduations office, and the government's count of awards owned by Planning.

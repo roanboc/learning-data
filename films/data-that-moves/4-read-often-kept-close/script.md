@@ -34,7 +34,7 @@ This film sits in the lifecycle's *storage* stage (*Fundamentals of Data Enginee
 
 ## What the example project has
 
-`examples/hot-warm-cold/` in the example project (`films/analytics-engineering/project/`), for Databricks only and not run by CI: `pay_records_archive.sql` (the table told when its files go to the archive tier, `SHOW ARCHIVED FILES` for an audit, and the yearly deletion: `DELETE`, `REORG TABLE ... APPLY (PURGE)` and `VACUUM`), and `service_levels.yaml`, whose `pay_records` contract holds its retention of seven years and its `storageTier`, hot, then archive.
+`examples/hot-warm-cold/` in the example project (`learning-data-project/30-data-project/`), for Databricks only and not run by CI: `pay_records_archive.sql` (the table told when its files go to the archive tier, `SHOW ARCHIVED FILES` for an audit, and the yearly deletion: `DELETE`, `REORG TABLE ... APPLY (PURGE)` and `VACUUM`), and `service_levels.yaml`, whose `pay_records` contract holds its retention of seven years and its `storageTier`, hot, then archive.
 
 ## The look
 

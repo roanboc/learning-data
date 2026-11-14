@@ -54,7 +54,7 @@ If he reads only a few rows, these shape the most: R3 (his own practice in data 
 | W1 | Which data story? | The graduation list: who graduates, at which ceremony, with which award, and the name printed on their certificate, followed for one year, December 2025 to December 2026. Chosen because he found the census and student counts repetitive (11:13), and because everyone understands a name spelled wrong on a degree certificate. 41 certificates printed again in December 2025; 3 in December 2026 | `numbers.md`; every film |
 | W2 | Who are the people? | Mei Tanaka (registrar's office, owns the names and awards), Jun Park (builds the list), Sam Okafor (runs the platform) and Noor Rahman (architect), drawn as the agent films draw them; two new people: Malia Fonoti, the graduations officer who uses the list, and Andrés Peñaloza, a graduate whose name lost its accents. Every story blameless | `numbers.md`, *The people* |
 | W3 | Is a real name of a person on a certificate all right to show? | Yes for the fictional graduate's name, which is the story. No identity document, date of birth or contact details on screen, and no student number next to a face | `numbers.md` |
-| W4 | Where does the data live? | In the example dbt project, beside the student and alumni systems it already holds: the opening film adds the list's core; later films add their own parts | `films/analytics-engineering/project/` |
+| W4 | Where does the data live? | In the example dbt project, beside the student and alumni systems it already holds: the opening film adds the list's core; later films add their own parts | `learning-data-project/30-data-project/` |
 
 ## The look
 

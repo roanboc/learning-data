@@ -245,7 +245,7 @@ Read on 5 November 2026 unless a date is given.
 
 ## What the example project has
 
-In [`films/analytics-engineering/project/examples/files-as-data/`](../../analytics-engineering/project/examples/files-as-data/), for Databricks only and not run by CI:
+In [`films/analytics-engineering/project/examples/files-as-data/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/examples/files-as-data), for Databricks only and not run by CI:
 
 - `read_invoices.sql`: the volume's files read once by `ai_parse_document` and the result kept, the fields Finance names taken out by `ai_extract`, and one row for each invoice, typed, each with its `file_path`.
 - `check_invoices.sql`: the data project's checks and Finance's rules, each invoice's first reason, and the counts the film shows (3,734 passed; 72, 31, 14 and 9).

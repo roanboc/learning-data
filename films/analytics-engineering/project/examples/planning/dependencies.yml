@@ -1,4 +1,0 @@
-# Cross-project refs, a dbt Cloud feature: the credential project publishes its public models,
-# and this project refs them by project name. Both projects must be in the same dbt Cloud account.
-projects:
-  - name: credentials

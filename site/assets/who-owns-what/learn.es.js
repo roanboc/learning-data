@@ -3,7 +3,7 @@
    (films/analytics-engineering/7-who-owns-what/source/src/plan.js), que toma sus palabras de vis (y, en el lab de dominios,
    la etiqueta corta "s" de cada elemento). */
 window.FW={lang:"es",store:"ld-who-owns-what",
-repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"de",inPractice:"En la práctica",watch:"Ver esta parte",next:"Siguiente:",makeCall:"Tú decides →",
   scenario:"Situación",score:"Puntaje",answered:"respondidas",toGo:"por responder",good:"Buena decisión",notQuite:"No del todo",
   explore:"Explóralo en el lab:",nextQ:"Siguiente situación",results:"Ver tus resultados",again:"Empezar de nuevo",check:"Comprobar",

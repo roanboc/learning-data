@@ -6,7 +6,7 @@
 
 *From words to data* explained what a data model is and why it matters. This series goes one level deeper, into the weeds: how an analytics engineer turns an agreed model into tables, with dbt. It follows Jun, the university's analytics engineer, building version 3 of the credential model, from a question to versioned, tested and documented models, in four phases (ask, promise, build, keep) and ten steps, with an AI agent that helps at every step and a person who approves each one. It's for practitioners: it shows real code, YAML and Markdown, and names dbt's features.
 
-**Status:** all ten films are on the site, each with labs, scenarios and Pause and think, in English and Spanish. Their code and data come from [the example dbt project](project/), which runs on dbt Core with DuckDB. The plan is in the [proposal](proposal.md).
+**Status:** all ten films are on the site, each with labs, scenarios and Pause and think, in English and Spanish. Their code and data come from [the example dbt project](https://github.com/roanboc/learning-data-project/tree/main/30-data-project), which runs on dbt Core with DuckDB. The plan is in the [proposal](proposal.md).
 
 **The example project** is laid out the way a large project with several domains would be: sources by system (application domains), the core by what the facts mean (data domains, following TCSI), and the marts and exposures by who decides with them (business domains). Any domain can move out to its own dbt project later, with its folders. Each film's page, script, labs and scenarios link the files its chapters show.
 

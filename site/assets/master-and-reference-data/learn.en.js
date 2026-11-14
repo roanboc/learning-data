@@ -8,7 +8,7 @@
    Names, numbers and dates follow each film's script: check a film's labs and scenarios against it when it's published.
    close: the series' last words, under the scenarios' results for all films and for the last film: that film's closing chapter
    (chapter), in its own words, and in learn.es.js in its Spanish captions. */
-window.MR={lang:"en",store:"ld-master-and-reference-data",bundleFilm:1,repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.MR={lang:"en",store:"ld-master-and-reference-data",bundleFilm:1,repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"of",inPractice:"In practice",watch:"Watch this part",next:"Next:",makeCall:"Make the call →",
   scenario:"Scenario",score:"Score",answered:"answered",toGo:"to go",good:"Good call",notQuite:"Not quite",
   explore:"Explore this in the lab:",nextQ:"Next scenario",results:"See your results",again:"Start again",check:"Check",

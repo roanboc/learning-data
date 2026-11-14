@@ -1035,9 +1035,15 @@ async def check_progress(run):
         await pg.close()
         return ctx
 
+    async def kept(seed):  # every page starts from the seed: a page with the scenarios on it (Make the call, which now shows
+        # More than a platform's card and its chip) checks the saved answers against its own and rewrites them
+        ctx = await seeded(seed)
+        await ctx.add_init_script(f"(s => {{ for (const k in s) localStorage.setItem(k, JSON.stringify(s[k])); }})({json.dumps(seed)})")
+        return ctx
+
     stops = re.findall(r'\["(\w+)","\w+",\[', (WEB / "assets/learn/learn.js").read_text())
     # seed 1: the intro watched, every lab, two answers
-    ctx = await seeded({"ld:watched": True, "ld:visited": stops, "ld:quiz": {"cur": 3, "ans": {"0": {"ok": True}, "1": {"ok": False}}, "sum": {}}})
+    ctx = await kept({"ld:watched": True, "ld:visited": stops, "ld:quiz": {"cur": 3, "ans": {"0": {"ok": True}, "1": {"ok": False}}, "sum": {}}})
     try:
         for key in run.pick(("", "es/")):
             pg, _ = await run.page(ctx, key)
@@ -1058,7 +1064,7 @@ async def check_progress(run):
     finally:
         await ctx.close()
     # seed 2: A Sharper Sketch, one lab and two answers
-    ctx = await seeded({"ld3:quiz": {"0": {"ok": True}, "5": {"ok": True}}, "ld3:visited": ["grain"]})
+    ctx = await kept({"ld3:quiz": {"0": {"ok": True}, "5": {"ok": True}}, "ld3:visited": ["grain"]})
     try:
         for key in chip_pages:
             pg, _ = await run.page(ctx, key)
@@ -1712,7 +1718,7 @@ async def check_route(run):
                 await pg.wait_for_selector(".route.drawn", timeout=5000)
                 f = await pg.evaluate(FACTS)
                 expect(sec, f["route"] and not f["list"] and f["pressed"] == ["route"], f"{at}: a first visit shows the route, not the list ({f['route']}, {f['list']}, {f['pressed']})")
-                expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start")
+                expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n + 1)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start (and the start, first on the rail)")
                 expect(sec, f["intro"] == 1, f"{at}: {f['intro']} introduction cards, the route's first station")
                 expect(sec, f["goals"] == len(d["goals"]) + 1, f"{at}: {f['goals']} goal buttons, for {len(d['goals'])} goals and the whole route")
                 expect(sec, f["wide"], f"{at}: the page scrolls sideways")

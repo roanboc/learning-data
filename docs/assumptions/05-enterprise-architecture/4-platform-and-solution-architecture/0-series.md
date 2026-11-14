@@ -1,6 +1,6 @@
 # Platform and solution architecture: the series' own questions and assumptions
 
-*Enterprise architecture* · *Platform and solution architecture*, its labs and scenarios, for all eight films · PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*Enterprise architecture* · *Platform and solution architecture*, its labs and scenarios, for all eight films · PR #397 · [pull request](https://github.com/roanboc/learning-data/pull/397)
 
 [Take it apart](https://data.learn-all.org/platform-and-solution-architecture/labs/) · [Make the call](https://data.learn-all.org/platform-and-solution-architecture/scenarios/)
 

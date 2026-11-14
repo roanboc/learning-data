@@ -260,7 +260,15 @@ NO_COPY = re.compile(r"\bzero[- ]cop(?:y|ies)\b|\bin place\b|\bnot (?:one|a sing
 # and W. Edwards Deming's surname is said DEM-ing, with a short e. A line's "say", or a pair in the film's film.json "say", spells
 # such a name for the voice ("Demming"); the words on screen, the captions and the page keep it as it is written. Each row: the
 # name as the voice would misread it, the spelling that makes the voice say it, and how it is said
-VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surname is said DEM-ing, with a short e")]
+VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surname is said DEM-ing, with a short e"),
+               # The rope bridge at Quehue, which three films of People first follow, each made by its own thread: one spelling
+               # of each name for the voice in every film, with the two spellings set aside on 12 November 2026 found too.
+               (re.compile(r"\bQuehue\b|\bKeh?way\b"), "Kehweh",
+                "Quehue, in Peru, is said KEH-weh, and every film that names it spells it one way for the voice"),
+               (re.compile(r"\bApur[ií]mac\b|\bApooreemak\b"), "Ahpooreemahk",
+                "the Apurímac is said ah-poo-REE-mahk, and every film that names it spells it one way for the voice"),
+               (re.compile(r"\bQuechua\b"), "Ketchwa", "Quechua is said KETCH-wa"),
+               (re.compile(r"\b[Mm]inka\b"), "meenka", "minka is said MEEN-ka")]
 
 
 def release_status(text):
@@ -1509,7 +1517,8 @@ def main():
         s["notes"].append("say what copies and who keeps it: the platform keeps the rows in a second form, or a managed copy, with no pipeline "
                           "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
     s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
-    s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e)")
+    s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e), "
+                  "and a story's names are spelled one way in every film that tells it (the rope bridge at Quehue)")
     for f in st_voices:
         s["fails"] += voice_names(f)
     s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after the film's own respellings")

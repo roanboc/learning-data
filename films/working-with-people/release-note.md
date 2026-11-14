@@ -1,1 +1,1 @@
-*Working with people*, the second series of the module Leading data people, on working with the people who ask for data: three films, {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.
+*Working with people*, a series of the module Leading data people, on working with the people who ask for data: three films, {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

@@ -55,3 +55,7 @@ The author reviewed the module on 12 November 2026 and found that it wasn't real
 - **The series' own questions and assumptions** are in [`1-people-first/0-series.md`](1-people-first/0-series.md), and each of its films will keep its own file beside it.
 - **The folders here are numbered in the module's order,** so the four series that were here moved up by one: *The new skills* is now `2-`, *Working with people* `3-`, *Leading a data team* `4-` and *Ownership and performance* `5-`. Nothing inside their files changed.
 - **Where a film's notes here name a series by its place,** as *Rules that let people decide*'s do ("the third series"), they mean the order before this date.
+
+## 13 November 2026: a fourth film for *The new skills*
+
+The author asked for a film on management styles on 12 November 2026, with his yes to *People first*, and confirmed its plan on 13 November 2026, opening in India: *More than one way to lead*, the fourth film of *The new skills*, after *Learning while doing*. The module becomes five series and nineteen films, and no film is voiced or drawn again. The plan is the last part of [*The new skills*' proposal](../../../films/the-new-skills/proposal.md). Six questions about his own practice are still open, with the assumptions the film takes meanwhile, in [`2-the-new-skills/4-more-than-one-way.md`](2-the-new-skills/4-more-than-one-way.md).

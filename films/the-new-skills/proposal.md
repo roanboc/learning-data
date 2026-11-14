@@ -1,6 +1,6 @@
 # The new skills
 
-*Proposal for the series *The new skills*, of the module Leading data people (Liderar equipos de datos), and the plan for the module as it was first made: four series, fourteen films (thirteen planned on 5 November 2026; the fourteenth, *When someone falls behind*, added on 10 November from the author's advice for technical managers), on the skills data work needs now and on leading the people who do it. Planned on 5 November 2026, on assumptions, at the author's request, for the author to review later. This file holds what the four series share: the brief, the reference, the insights, the advice, the world, the people, the look and the sound. The other series keep their own parts in their folders: [`../working-with-people/`](../working-with-people/), [`../leading-a-data-team/`](../leading-a-data-team/) and [`../ownership-and-performance/`](../ownership-and-performance/). Since 12 November 2026 a fifth series, *People first*, opens the module before this one: it keeps its own plan in [`../people-first/`](../people-first/), which also says what it changes here. Status: set up; the films are being made, each marked draft on the site.*
+*Proposal for the series *The new skills*, of the module Leading data people (Liderar equipos de datos), and the plan for the module as it was first made: four series, fourteen films (thirteen planned on 5 November 2026; the fourteenth, *When someone falls behind*, added on 10 November from the author's advice for technical managers), on the skills data work needs now and on leading the people who do it. Planned on 5 November 2026, on assumptions, at the author's request, for the author to review later. This file holds what the four series share: the brief, the reference, the insights, the advice, the world, the people, the look and the sound. The other series keep their own parts in their folders: [`../working-with-people/`](../working-with-people/), [`../leading-a-data-team/`](../leading-a-data-team/) and [`../ownership-and-performance/`](../ownership-and-performance/). Since 12 November 2026 a fifth series, *People first*, opens the module before this one: it keeps its own plan in [`../people-first/`](../people-first/), which also says what it changes here. Since 13 November 2026 this series has a fourth film, *More than one way to lead*, on ways of leading: its plan is the last part of this file, and with it the module has five series and nineteen films. Status: set up; the films are being made, each marked draft on the site.*
 
 ## Decided
 
@@ -52,6 +52,13 @@
 | 11 November 2026 | Turned toward the leader, at the author's request ("the module states this is for leading data people ... we need to bring why that's important for the data leader or manager to understand"). Helena stands where Ding Wei stood: everyone in her team wears more than one hat, a job title names one, and what falls between the hats is nobody's job unless the leader sees it; so she gives Ivy a month with every part and one real question. The 14 rooms fall between Mei's hats and Sam's; Helena gives the join an owner; *On Monday* gives the leader four steps (write down the hats each person wears, give someone new time with every part, have them draw one question's whole route, give what falls between the hats an owner), and the takeaway is "Grow people who go deep in one thing, and learn enough of the rest to see the whole." The page's kicker is *Seeing across the team* (*Ver el equipo como un todo*), its title *Many hats, one picture: what a leader sees across the team*. The opening's turn is "The rebuilding needs a plan that doesn't fill the streets with carts." Kaifeng, the numbers, the look and the poster stay; the film runs 9:20. |
 | 12 November 2026 | The module names the improvement cycle plan, do, study, act, as the whole site does. The author, asked on 12 November 2026 whether other modules that say "plan, do, check, act" switch to "study" too, for one consistent term: "yes, knowing the difference was explained in the video that introduced the topic" (that video is the data quality film *Small, every week*). In this module only *One small change at a time* names the cycle; its rows in *Leading a data team*'s table say what changed, and the module's table of references says plan, do, study, act too. |
 | 12 November 2026 | The module opens with a new series, *People first* (*Las personas primero*), before *The new skills*. The author asked for it on 12 November 2026, after reviewing the module ("we are not really starting with people"), and confirmed its plan the same day. Four films, set in February 2027, Helena Novak's first month with the team, before Ivy Reyes joins on 1 March: *People before roles*, *Wellbeing is in the work*, *No two alike* and *How, more than who*. The module becomes five series and eighteen films; none of the fourteen is voiced or drawn again, and *Many hats, one picture* follows on as it is. The series keeps its own plan, and says what it changes in the module, in [`../people-first/proposal.md`](../people-first/proposal.md); this file goes on holding what the other four series share. |
+| 12 November 2026 | A fourth film for this series, asked for by the author on 12 November 2026, at 11:52 UTC, with his yes to *People first*: "Yes, start the series as proposed and add the film for management styles". It is the sixth idea the *People first* plan found in four papers from his master's studies (2015 and 2016), read as his view then: more than one way to lead, chosen for the person and the moment. Nothing personal from the papers is shown or named. |
+| 12 November 2026 | Proposed: one film, *More than one way to lead* (*Más de una forma de liderar*), the fourth of *The new skills*, in `films/the-new-skills/4-more-than-one-way`, after *Learning while doing*. With it the series has four films, and the module five series and nineteen films. It sits here because the module promises that "leading the people who do it is a skill too" and no film of the series teaches it, because it carries on from Ivy's weeks beside Jun, and because no voiced line of the series counts its films. No film is voiced or drawn again; the series' texts that count its films change in the film's own pull request. |
+| 12 November 2026 | Proposed: the reference. The map is Daniel Goleman's six ways of leading (2000), the author's own reference in his papers, named once and as what it is: a consulting firm's study, a map and not a law. Under it the film teaches what the better-tested research shares: every way mixes direction about the work and support for the person (the Ohio State studies); the way is chosen for the person on this piece of work (situational leadership, with its limits) and for the moment (Robert Tannenbaum and Warren Schmidt; Victor Vroom and Philip Yetton); and a leader who is absent does harm (Timothy Judge and Ronald Piccolo; Anders Skogstad and others). A way of leading is something a leader does, never a kind of leader: no test, no "your style", nobody labelled. Checked on 12 November 2026; the sources, and what wasn't read, are in the film's part of the proposal. |
+| 12 November 2026 | Proposed: the film's picture is where the leader stands: in front, beside or behind. It is credited once to Ki Hajar Dewantara's three lines for teachers (Taman Siswa, Yogyakarta, 1922), with its limit said: he wrote for teachers of children. Sorting Goleman's six into the three places is the film's own reading, and the film says so. |
+| 12 November 2026 | Proposed: the film opens in Sriharikota, India, in 1979 and 1980, in the four beats, as A. P. J. Abdul Kalam told it in 2008: India's first rocket built to launch a satellite fails on 10 August 1979; Satish Dhawan, the head of the space agency, faces the press himself and leaves the rocket with Kalam's team; on 18 July 1980 it puts a satellite of 35 kilograms into orbit, and Dhawan sends Kalam out to tell it. Checked on 12 November 2026 against Kalam's interview, the space agency's own page and Wikipedia; what is still to check is in the film's part of the proposal. Two other stories were ready: Taman Siswa (Java, 1922) and Escuela Nueva (Colombia, from the mid-1970s). India is outside the three regions the author named on 11 November 2026, so the story was his to choose. |
+| 12 November 2026 | Proposed: the film's thread is May and June 2027. Jun Park hands the room models over to Ivy Reyes; with the numbers for Graham's page due, he starts finishing her changes himself. Helena asks him what Ivy learns from it and answers herself for the day a question costs, and Jun goes back to a question in place of a fix. The same weeks show the three places: Sam in front on a late feed, Helena beside the team at planning, Jun behind Ivy at a review. Each new fact goes into the module's numbers before a script uses it, and nothing in the eighteen films changes. An assumption for the author: Jun, who teaches well, is the one who slips. |
+| 13 November 2026 | Confirmed by the author on 13 November 2026, at 23:07 UTC, asked "Confirm the plan for the film on management styles?": "Yes, opening in India". So the rows above that begin *Proposed* stand as decided, with Sriharikota as the opening, and the film's script can be written (AGENTS.md, stage 1). The six questions about his own practice were left open: they wait in the film's questions and assumptions (`docs/assumptions/10-leading-data-people/2-the-new-skills/4-more-than-one-way.md`) for his final checklist, and meanwhile the film takes the plan's answers. |
 <!-- /decided -->
 
 ## The brief
@@ -86,6 +93,7 @@ No single framework covers leading data people, so each series names its own, on
 | Charles Goodhart (1975) and Marilyn Strathern (1997); W. Edwards Deming, *Out of the Crisis* (1986); Nicole Forsgren, Jez Humble and Gene Kim, *Accelerate* (2018); the SPACE framework (2021) | A measure made a target stops measuring; most problems are in the system, not the people; a team's flow, measured in balance | *Measure the work, not the people* |
 | Robert Mager and Peter Pipe, *Analyzing Performance Problems* (1970); Thomas Gilbert, *Human Competence* (1978) | When someone's work falls short, ask first whether it's a skill, an obstacle or a consequence; look at the work's conditions before the person | *When someone falls behind* |
 | Avraham Kluger and Angelo DeNisi (1996); the situation-behaviour-impact way of giving feedback; Kim Scott, *Radical Candor* (2017) | Feedback that helps and feedback that harms; feedback about the work and its effect; care and challenge together | *Growing people* |
+| Daniel Goleman's six ways of leading ("Leadership That Gets Results", 2000); support and direction (the Ohio State studies); situational leadership (Paul Hersey and Kenneth Blanchard, 1969); Robert Tannenbaum and Warren Schmidt (1958); Victor Vroom and Philip Yetton (1973) | More than one way to lead, and none right everywhere; every way mixes direction about the work and support for the person; the way chosen for the person on this piece of work, and for the moment | *More than one way to lead* |
 | The Agile Manifesto (2001); servant leadership (Robert Greenleaf, 1970) | Considered as a spine and not followed: their ideas run through the films (working results over plans, people over process, the leader who serves the team) without a film of their own | Named where a film uses the idea |
 
 ## The insights, and where each comes from
@@ -95,6 +103,7 @@ No single framework covers leading data people, so each series names its own, on
 | Go deep in one thing, and learn enough of the others to see the whole route of a decision: someone has to see across the specialists | T-shaped skills; SFIA; *Range* | 1 |
 | A draft is cheap; judgement isn't. When an agent drafts, framing the question, checking the answer against what you know, deciding and answering for it are the skills that grow | Advanced chess, and Kasparov on the 2005 freestyle tournament: "Weak human + machine + better process was superior to a strong computer alone"; the agent films | 2 |
 | Skills grow fastest on real work, in small steps, beside someone who knows; teaching what you learn makes it last; learning needs protected time | Lave and Wenger, *Situated Learning* (1991); Ericsson on deliberate practice (1993); pairing | 3 |
+| There is more than one way to lead, and none is right everywhere: choose for the person on this piece of work and for the moment. Giving orders and doing the work yourself harm a team when they become the habit; the way out is a question in place of a fix | Goleman; the Ohio State studies; situational leadership, with its limits; the author's papers | 19 |
 | A request names someone's guess at a solution; listening finds the decision behind it; agree the question in writing | Schein; Rogers and Farson | 4 |
 | Lead with the decision and the answer; show the part of the data the decision turns on, not only the average; say what you don't know | Minto; Knaflic; Tufte; Gilbert Daniels' measurements of pilots (1952) | 5 |
 | Saying no to a date isn't saying no to the person: find the interest behind the position, show the trade-off, offer what you can do well, and when | Fisher and Ury; Ury | 6 |
@@ -114,6 +123,7 @@ The module was planned on assumptions overnight, without the author's advice fro
 - Keep depth in one area; learn the words of the others; draw the whole route of one real question on one page; spend time with each specialist; ask "who uses this, for which decision?" (1)
 - Give an agent the decision, the words and what counts; check its draft against something you know is true; the decision, and the responsibility, stay with a person. (2)
 - Pair with someone who knows, an hour a day at the start; protect learning time; teach what you learned within a week. (3)
+- Before a piece of work, ask how able and how sure the person is on it, and agree the answer with them; review the work, don't redo it, and put a question where the fix would go; say what is already decided before you ask; practise one way at a time, in a meeting you already keep. (19)
 - Ask what the request is for: what will you decide with it, by when, who else decides, what would change your mind; say back what you heard; agree the question in writing. (4)
 - One page: the decision first, then the answer, then the evidence; the peak, not only the average; what you don't know; the same numbers for everyone. (5)
 - Never a bare no: ask what the date is for, put the trade-off where everyone can see it, offer what you can do well and when, let the people who decide choose, and keep your word. (6)
@@ -178,6 +188,7 @@ Each film has a lead instrument of its own, which the site doesn't have, reserve
 | 1 | *The new skills* | `films/the-new-skills/1-many-hats` | Many hats, one picture | Ivy spends her first month with each part of the team's work and draws the whole route of Graham's question on one page, from his decision back to the sensors; there she sees what no one part saw: 14 rooms named two ways, so their counts never met their bookings | Go deep in one thing; learn enough of the others to see the whole. | Ding Wei rebuilds the palace at Kaifeng, 1015 |
 | 2 | *The new skills* | `2-draft-and-decision` | The draft and the decision | Ivy asks the team's agent for a first model of room use; its draft counts booked hours as used ones, and she catches it, because Graham had said "used" means people in the room. Framing, checking and deciding stay with a person | Let the agent draft; you frame, check and decide. | Advanced chess, León, 1998, and the freestyle tournament of 2005 |
 | 3 | *The new skills* | `3-learning-while-doing` | Learning while doing | Ivy learns the example project beside Jun, an hour a day; two hours of learning time every Thursday for everyone; what she learns, she teaches | Learn on the real work, beside someone, then teach it. | Paulo Freire's culture circles, Angicos, 1963 |
+| 19 | *The new skills* | `4-more-than-one-way` | More than one way to lead | Jun hands the room models over to Ivy. When a date comes close he starts finishing her changes himself: each fix is right, and she stops asking. Helena asks him one question, and he goes back to asking. The same weeks show three places to stand, each right for a person and a moment: Sam in front on a late feed, Helena beside the team at planning, Jun behind Ivy at a review | Choose how you lead for the person and the moment. | Sriharikota, India, 1979 and 1980 |
 | 4 | *Working with people* | `films/working-with-people/1-the-question-behind` | The question behind the request | "A dashboard of room use, by Easter" becomes, in half an hour, the decision behind it: should Graham ask for a new building? Said back, and agreed in writing | Ask what it's for, and agree it in writing. | Saving the Leaning Tower of Pisa, 1990 to 2001 |
 | 5 | *Working with people* | `2-explaining-to-decide` | Explaining so people can decide | The average hides both truths: 38% booked across the week, 93% at the peak. One page for the University Council: the decision first, then the peak, then what it would take not to build | Lead with the decision; show what it turns on. | The average pilot, 1950 to 1952 |
 | 6 | *Working with people* | `3-saying-no` | Saying no, and what instead | Planning asks for a new forecast model in the same weeks as the timetable change; Helena says no to the date, not to the work: the current model refreshed by the end of August, the new one in October | Never a bare no: say what you can do, and when. | The Kok-Aral dam and the North Aral Sea, 2005 |
@@ -194,6 +205,8 @@ Each opening is told in the four beats said outright; each film's thread checks 
 
 Rows 15 to 18 are *People first*, added on 12 November 2026: they come first in the module, and the series' own plan is in [`../people-first/proposal.md`](../people-first/proposal.md). It follows one true story across its films, as the author preferred for new series on 11 November 2026, with *No two alike* stepping aside to its own.
 
+Row 19 is *More than one way to lead*, added on 13 November 2026: the fourth film of *The new skills*, after *Learning while doing*. Its plan is the last part of this file.
+
 ## Rules from the plan
 
 - **Draft, and the merge is the release.** Each series' `series.json` says `"draft": true`; a film merges into main once its checks pass, and that is its release. Nobody runs the release workflow for these films.
@@ -204,3 +217,288 @@ Rows 15 to 18 are *People first*, added on 12 November 2026: they come first in 
 - **Blameless, and fair to everyone.** People on every side of a problem, each right about what they saw. Measures are the team's, never a target for one person; nobody is ranked.
 - **The kit as it is.** Every film bundles `films/the-new-skills/shared/` unchanged; a film's own pictures go in its own source, with a prefix of its own; a change every film needs goes in a pull request of its own.
 - **The fictional university**, a year ahead and tagged as imagined; Spanish as captions and pages only.
+
+## A fourth film: More than one way to lead
+
+The author asked on 12 November 2026 for a film on management styles. Its plan was written that day, and he confirmed it on 13 November 2026, opening in India. Its rows are in the *Decided* table above. The six questions about his own practice, under *In practice* below, are still open: the film takes this plan's answers meanwhile, and they wait in the film's questions and assumptions, [`4-more-than-one-way.md`](../../docs/assumptions/10-leading-data-people/2-the-new-skills/4-more-than-one-way.md), for his final checklist.
+
+### In short
+
+- **What:** one film, *More than one way to lead* (*Más de una forma de liderar*), the fourth of *The new skills*, straight after *Learning while doing*. The module becomes five series and nineteen films. No film is voiced or drawn again.
+- **The idea:** there is more than one way to lead, none is right everywhere, and a leader chooses for the person and the moment. To take away: *Choose how you lead for the person and the moment.*
+- **The reference:** Daniel Goleman's six ways of leading, the author's own reference in 2015 and 2016, as the map, named once. Under it, what the better-tested research agrees on.
+- **The picture:** where the leader stands: in front, beside, or behind.
+- **The trap it names:** "it's faster if I do it", the habit the author saw most among technical leaders. The way out is a question in place of a fix.
+- **The story:** India, 1979 and 1980. A rocket fails, and the head of the space agency faces the press himself. A year later it flies, and he sends the project's leader out to tell it.
+- **At the university:** May and June 2027. Jun hands the room models over to Ivy, a date comes close, and he starts finishing her work himself.
+
+### The brief
+
+The author, on 12 November 2026, at 11:52 UTC, answering the two open decisions on *People first*:
+
+> "Yes, start the series as proposed and add the film for management styles"
+
+The film he means is the sixth idea the *People first* plan found in four papers from his master's studies, written in 2015 and 2016, which he shared that day as having shaped his management style. As that plan records it ([`../people-first/proposal.md`](../people-first/proposal.md)):
+
+> **More than one way to lead, chosen for the person and the moment.** The papers build on Daniel Goleman's six ways of leading. Two of them, giving orders and setting the pace by one's own example, harm a team when they are most of what a leader does, and the author saw the second most among technical leaders. Coaching is used least. His own proposal: learn the ways one at a time, each in a meeting the team already keeps.
+
+The papers are read as his view then, which he may see differently now. Nothing personal from them is shown or named: they shape the emphasis only.
+
+| What the author asked, or wrote | Where it goes |
+|---|---|
+| "The film for management styles" | One film, the fourth of *The new skills* |
+| More than one way to lead, chosen for the person and the moment | The film's idea, and its two questions: where is this person on this piece of work, and what does this moment need? |
+| Goleman's six ways | The map, named once, with how sure it is |
+| Two ways harm when they are most of what a leader does; the second is the one he saw most among technical leaders | *It's faster if I do it*: the trap, shown in someone who knows the work best and means well |
+| Coaching is used least | A question in place of a fix |
+| Learn the ways one at a time, each in a meeting the team already keeps | How the film ends: one way, one meeting, a fortnight |
+| "Management and leadership are aspects of the same role" (10 November 2026) | Every way mixes direction about the work and support for the person |
+
+**What the module has, and what was missing.** Helena already leads in more than one way. She tells the team what won't change yet (*People before roles*). She asks one question about Ivy's page (*Explaining so people can decide*). She lets the team design its own week (*Less, on purpose*). She says no to a date (*Saying no, and what instead*). She clears the way for Tomás, who writes his own plan (*When someone falls behind*). And Ivy tells her that she answers too fast (*Growing people*). No film says that these are different ways, that each was a choice, or how to choose. *No two alike* says in one line that a leader changes her way too, and leaves the rest to this film.
+
+**Why *The new skills*.** The module promises that "leading the people who do it is a skill too", and no film of the series teaches that skill. The film carries straight on from *Learning while doing*: Ivy beside Jun, and then on her own. No voiced line of the series counts its films. And *People first* keeps to people, as the author asked. The other homes were a fifth film of *People first*, which would bring a skill into that series; *Leading a data team*, whose voice says it follows four ideas; or *Ownership and performance*, beside *Growing people*, far from the months it shows.
+
+**Its neighbours.**
+
+- *No two alike* asks who the person is: traits, which change slowly and are never used to decide anything. This film asks where the person is on this piece of work, and what the moment needs. Both change in weeks.
+- *Learning while doing* shows how a skill grows, from the learner's side. This film shows the same months from the side of whoever leads her.
+- *Growing people* keeps feedback, goals and the weekly half-hour. *When someone falls behind* keeps the search for a cause. *Rules that let people decide* keeps decisions spread across teams. *The team comes first* keeps the safety to speak up. Each is named once, and none is retold.
+
+**Where it stops.** It isn't a list of kinds of leader, and it has no test. It says nothing of charisma, and doesn't set leading against managing. How to frame work for an agent is *The draft and the decision*: an agent isn't led.
+
+**One word.** People say "management styles" and "leadership styles". The film says so once, and then says *ways of leading*. A style sounds like something a person is; a way is something a person does, and can change. It is the line *No two alike* draws between a type and a trait.
+
+### The reference, and its alternatives
+
+AGENTS.md asks the author first which framework is the reference. His papers answer it for 2015 and 2016: Goleman's six. The first question under *In practice* asks whether it still is. This plan takes it as the map, and builds the film on what the research under it shares. No framework is the syllabus.
+
+| Body of knowledge | What it adds | Here |
+|---|---|---|
+| **Goleman's six ways of leading** ("Leadership That Gets Results", 2000) | Six ways, each in a phrase: "Do what I tell you." "Come with me." "People come first." "What do you think?" "Do as I do, now." "Try this." Leaders with the best results "do not rely on only one leadership style". Two of the six go with a worse climate in the team, and coaching "is used least often" | **The map**, named once. The film uses the phrases, not the labels |
+| **Support and direction** (the Ohio State studies of the 1950s, which called them consideration and initiating structure) | The two things under every list of styles: care for the person, and structure for the work. Both count, across some 160 results each | **What every way mixes.** It is also the author's "aspects of the same role" |
+| **Situational leadership** (Paul Hersey and Kenneth Blanchard, 1969) | Choose by the person on this task: how able, and how willing. Four ways, from telling to delegating | **The question for the person**, with its limits said: taught everywhere, supported only in part. The film teaches the question, not the grid |
+| **How much say, for this decision** (Robert Tannenbaum and Warren Schmidt, 1958; Victor Vroom and Philip Yetton, 1973) | A scale from the manager who decides and announces to the team that decides within limits, chosen by who has the knowledge, whose commitment the decision needs, and how much time there is | **The question for the moment**, and one rule: say which it is before you ask |
+| **Coaching** (Google's study of its own managers; John Whitmore's *Coaching for Performance*, 1992; Herminia Ibarra and Anne Scoular, 2019) | "Be a good coach" heads Google's list of what its best managers do. Many managers who think they coach are telling | The way to practise first. Feedback and goals stay with *Growing people* |
+| **Leaders who know the work** (Benjamin Artz, Amanda Goodall and Andrew Oswald, 2017) | "A boss's technical competence is the single strongest predictor of a worker's job satisfaction" | The guard on the trap: knowing the work is an asset. Doing it in the team's place is the trap |
+| **The absent leader** (Timothy Judge and Ronald Piccolo, 2004; Anders Skogstad and others, 2007) | Leaving people alone isn't neutral. It goes with unclear roles, conflict and distress | One line: standing behind is never leaving |
+| **Different relationships in one team** (the research on leader and member exchange) | The more a leader's relationships differ across a team, the worse the team's harmony | The fairness line: different ways, the same standards, and say why |
+| **GLOBE** (Robert House and others, 2004) | What people expect of a leader differs between countries: more than 17,000 managers in 62 cultures | One line, since the films are watched in many countries |
+| **Ki Hajar Dewantara's three lines** for teachers (Taman Siswa, Java, 1922) | In front, an example; in the middle, building the will; from behind, support | **The film's picture**, credited once (below) |
+| Considered, and not followed | **Kurt Lewin's three climates** (1939): where "styles" began, as three climates set against each other (authoritarian, democratic and laissez-faire), not chosen by the moment. **The managerial grid** (Robert Blake and Jane Mouton, 1964): it argues for one best way. **Fred Fiedler's contingency model** (1967): a leader's way is fixed, so change the situation, the opposite of what this film says. **Path-goal theory** (Robert House, 1971): the leader clears the path; close to situational leadership. **Transformational leadership:** the most studied model, about inspiring people more than choosing a way. **Servant leadership:** as in the module's plan, an idea that runs through the films. None of these was read again on 12 November 2026 | Named here so the author can say if one should lead |
+
+#### What the evidence says
+
+Checked on 12 November 2026. What was read in full, as an abstract or only as a summary is under *Sources*.
+
+1. **The six ways are a map, not a law.** They come from a consulting firm's study of "a random sample of 3,871 executives", published in a business review and not a research journal. It reports how each way goes with the team's climate, and gives no more of its method. Its main finding is the film's: the leaders with the best results "do not rely on only one leadership style; they use most of them in a given week". And they "don't mechanically match their style to fit a checklist of situations".
+2. **Two things sit under every list.** Across 163 results for support and 159 for direction, both go with good outcomes (.48 and .29). Support counts more for how satisfied and motivated people are; direction a little more for the group's results (Judge, Piccolo and Ilies, 2004). So a way of leading is a mix of the two, and neither is the outdated half: the author's point about managing and leading.
+3. **Matching the way to the person is taught everywhere, and supported only in part.** A study in Norway found that it holds when the leader and the person agree about where the person is, and found no support for going by the person's own rating when they differ (Thompson and Glasø, 2018). The older tests are usually summed up as supporting it most clearly for people new to the work, who need more direction; they weren't read on the day. So the film teaches the question, and that the two agree the answer. It draws no grid.
+4. **The leader who is absent does harm.** Across 626 results from 87 sources, leaving people to it goes with worse outcomes (-.37; Judge and Piccolo, 2004). Among 2,273 employees in Norway it went with unclear roles, conflicting demands and conflict between colleagues, and through those with bullying and distress: "not a type of zero-leadership, but a type of destructive leadership behavior" (Skogstad and others, 2007).
+5. **Knowing the work is an asset.** A boss's competence in the work is the strongest single predictor of how satisfied people are in their jobs (Artz, Goodall and Oswald, 2017, with American and British data). Google's own list of what its best managers do puts "Be a good coach" at the head and "Have key technical skills" eighth of ten, and an engineering manager there said that engineers "hate being micromanaged on the technical side but love being closely managed on the career side". The trap isn't knowing the work. It is doing it in the team's place.
+6. **Coaching is used least.** In Goleman's study, leaders said they had no time for "the slow and tedious work of teaching people and helping them grow". A later article says managers "think they're coaching when they're actually just telling their employees what to do" (Milner and Milner, 2018).
+7. **Different ways can look like favourites.** Across 4,114 work groups, the more a leader's relationships with the members differed, the worse the group's harmony and solidarity (Yu, Matta and Cornfield, 2018). That study is about how close each relationship is, not about telling or asking, so the film takes only the caution.
+8. **A way is learned by practice.** Goleman again: it "takes diligent practice on the job, over several months". The author's own proposal says where: in a meeting the team already keeps.
+
+**Where the film adopts, extends and differs.**
+
+- **Adopt:** several ways, and none right everywhere; the six as a map; the two that harm as a habit; coaching used least; support and direction; the question about the person, agreed with the person.
+- **Extend:** three places to stand, from Ki Hajar Dewantara's lines, as the film's own way to hold the six in mind. One way practised in one meeting, from the author's papers: practice, not research, and the film says so. And saying which way you are in, before you ask.
+- **Differ:** from styles as kinds of leader, and from any test that tells a leader "your style". From grids that prescribe a way for each box. From the split the author rejected, leading as good and managing as bad. And from reading the trap as "technical people lead badly".
+
+### The picture: where the leader stands
+
+Six labels are hard to hold in mind, and five of them are jargon. So the film draws one picture: where does the leader stand?
+
+| The place | What the leader does | Goleman's phrases | Right when | The harm, as a habit |
+|---|---|---|---|---|
+| **In front** | Shows and tells: the direction, the standard, the step | "Come with me." "Do as I do, now." "Do what I tell you." | The person is new to this; there is no time; the direction is the leader's to give | People wait to be told, or to be corrected |
+| **Beside** | Asks, and works it out with them | "What do you think?" "People come first." | The team knows more than the leader, and has to carry it out | Meetings without end; poor work that nobody names |
+| **Behind** | Hands over the outcome, asks in place of fixing, and stays within reach | "Try this." | The person can do it, and it is theirs | It turns into leaving them alone |
+
+Three of the six are said from the front, two from beside and one from behind. The one used least is the one from behind.
+
+The three places come from Ki Hajar Dewantara, who opened the Taman Siswa school in Yogyakarta, on Java, in 1922, and gave its teachers three lines: *ing ngarsa sung tuladha, ing madya mangun karsa, tut wuri handayani*. In front, give an example; in the middle, build the will; from behind, give support. The last line is the motto of Indonesia's ministry of education. The film credits him once, and says the limit: he wrote for teachers of children, and a team is adults. Sorting Goleman's six into the three places is the film's own reading, and the film says so.
+
+Two things hold wherever the leader stands. **Support doesn't go away:** what changes with the place is how much direction the leader gives. And **absence isn't a place:** behind means close enough to step in.
+
+### The story
+
+Each film of *The new skills* opens on a story of its own: Kaifeng in 1015, chess from 1997 to 2005, Angicos in 1963. The author prefers stories from outside the West (11 November 2026), and chose this one on 13 November 2026.
+
+#### A rocket, and two press conferences
+
+Sriharikota, India, 1979 and 1980, as A. P. J. Abdul Kalam told it. Checked on 12 November 2026:
+
+- SLV-3 was India's first rocket made to put a satellite in orbit: "an all solid, four stage vehicle weighing 17 tonnes with a height of 22m" (the Indian Space Research Organisation, ISRO). Satish Dhawan chaired ISRO from 1972 to 1984. Kalam, in an interview in 2008: "In 1973 I became the project director", and "Thousands of people worked together in scientific and technical teams".
+- On 10 August 1979, minutes before the launch, the computer put the countdown on hold. Kalam's experts told him there was enough fuel in reserve: "So I bypassed the computer, switched to manual mode, and launched the rocket." A problem came in the second stage, and "the whole rocket system plunged into the Bay of Bengal". ISRO calls the flight "only partially successful".
+- The launch was at 7:00 and the press conference at 7:45, with "journalists from around the world". Dhawan "conducted the press conference himself". He said the team had worked very hard and needed more support, and that in another year it would succeed. Kalam: "I was the project director, and it was my failure, but instead, he took responsibility for the failure as chairman of the organization."
+- On 18 July 1980 the rocket put Rohini, a satellite of 35 kilograms, into orbit. Dhawan called Kalam aside: "You conduct the press conference today."
+- Kalam, who was later India's president: "When failure occurred, the leader of the organization owned that failure. When success came, he gave it to his team." And: "The best management lesson I have learned did not come to me from reading a book; it came from that experience."
+
+| Beat | In the story |
+|---|---|
+| **Scenario** | An island on India's east coast, 10 August 1979. The country's first rocket built to carry a satellite into orbit stands ready, the work of thousands of people over years. Abdul Kalam leads the project; Satish Dhawan heads the space agency |
+| **Problem** | Minutes before the launch a computer stops the countdown. Kalam's experts say there is fuel enough, and he launches by hand. The second stage fails, and the rocket falls into the sea. Forty-five minutes later the world's press is waiting, and the failure is his. A team blamed in public for a call that went wrong stops making calls; a team whose rocket is taken out of its hands never learns to fly one. The next launch needed a team that still dared to decide, and someone had to answer for this one |
+| **Solution** | Dhawan faces the press himself. He says the team worked hard, that it needed more support, and that within a year it will succeed. He takes the failure as his own, as the head of the organisation, and leaves the rocket with the same team and the same leader |
+| **Benefits** | Eleven months later the rocket puts a satellite of 35 kilograms into orbit, and India can launch its own. That day Dhawan sends Kalam out to tell it. Then the same at the university: when the date is at risk, Helena answers for the day; when the change is right, Ivy shows it |
+| **Back to the story** | Where the film sorts the ways into three places (Dhawan stood in front on the day it failed and behind on the day it worked, and never took the rocket back), and at the close |
+
+Why this story. It shows a leader choosing where to stand by the moment, in two days a year apart. It shows the trap refused: he could have taken the work back, and didn't. It is told in the words of the person who was led. And India opens no film of this module.
+
+**Where it stops being a guide,** for the script to weigh.
+
+- It is one man's memory of his chief, told almost thirty years later and many times since, and the tellings differ in detail: the English Wikipedia's article on Dhawan has the team knowing of a leak, where the interview has a computer's hold. The film says "as Kalam told it", follows the interview, and keeps to what the tellings share.
+- It shows a stance at two moments, not a way to choose. The choosing is the rest of the film.
+- Answering for a failure in public isn't hiding its cause. The script checks how the cause was found, so the film doesn't suggest otherwise.
+- Sources differ on whether India became the sixth or the seventh country to launch its own satellite. The film gives no rank.
+- The rocket's technology later went into missiles, and Kalam went on to lead that work. The film tells only the satellite launch.
+- A space agency and a country's press aren't a data team and a review meeting.
+
+Both men are named. Whether they are drawn is the script's to settle, and never as a likeness: *Learning while doing* names Paulo Freire on a card and doesn't draw him. Nothing Indian is borrowed for the look or the sound.
+
+#### The other ways it could have opened
+
+- **Taman Siswa, Java, 1922.** Ki Hajar Dewantara comes back from exile, opens a school on 3 July 1922, and gives its teachers the three lines. It is the picture's own source, so story and picture would be one. Against it: it would be a second story about teaching straight after Angicos; Indonesia already opens *Rules that let people decide*; the lines were written for teachers of children; its numbers aren't checked; and it is checked so far only in the Indonesian and English Wikipedia.
+- **Escuela Nueva, Colombia, from the mid-1970s.** In a one-room country school, one teacher has every grade at once, so a lesson from the front fits one grade and loses the rest. Vicky Colbert, Beryl Levinger and Oscar Mogollón moved the teacher from the front to beside the tables: guides for each subject, children working at their own pace and helping each other, the teacher advising as needed. It is used in about 20,000 rural schools in Colombia and in 19 countries, and a UNESCO report of the 1990s credited it for rural schools that did better than city ones. It is from South America, and it would show plainly that one way from the front fits nobody. Against it: again a school straight after Angicos; it is a method more than a leader choosing by the moment; and it is checked so far only in the English Wikipedia.
+- **Not checked:** Nelson Mandela's memory of the regent's meetings, and the shepherd who leads from behind (South Africa already opens *The team comes first*); and Laozi's leader of whom people say "we did it ourselves", which is a saying and not a story.
+
+The author named the Middle East, the Far East and South America. India is outside the West and outside those three, so the choice was his, and he made it on 13 November 2026.
+
+### The insights, and where each comes from
+
+| # | Insight | From |
+|---|---|---|
+| 1 | There is more than one way to lead, and none is right everywhere. The leaders with the best results use several in the same week | Goleman; the author's papers |
+| 2 | Every way mixes two things: direction about the work and support for the person. Change the direction with the place you stand; never drop the support. Standing behind isn't leaving | The Ohio State studies (Judge, Piccolo and Ilies); Skogstad and others; the author's advice of 10 November 2026 |
+| 3 | Choose for the person on this piece of work, not for the person in general. New to it: show the steps. Able and unsure: ask, and back the answer. Able and sure: hand over the outcome and stay within reach. It moves as people grow, it can differ between two jobs in one week, and the two of you agree it | Situational leadership, with its limits; Thompson and Glasø |
+| 4 | Choose for the moment. No time, and one person knows: say who does what, and explain afterwards. The team knows more and has to carry it out: ask first. And say which it is, so nobody is asked about what is already decided | Goleman's "when it works"; Tannenbaum and Schmidt; Vroom and Yetton |
+| 5 | Two ways harm when they become the habit: giving orders, and setting the pace by doing it yourself. The second is the expert's trap. Every fix is right, the work is on time, and the team learns to wait. The way out is the way used least: a question in place of a fix, the work left with the person, and the cost in time answered for by the leader | Goleman; the author's papers; Artz, Goodall and Oswald; Google's managers |
+| 6 | A way is practised, not announced: one at a time, in a meeting the team already keeps. And different ways, the same fairness: one standard for everyone, and say why one person is told and another asked | The author's own proposal; Goleman; Yu, Matta and Cornfield; GLOBE |
+
+### In practice
+
+What practitioners do, from the sources above, for the author to correct:
+
+- Before a piece of work, ask two things about the person and this work: how able, and how sure? Don't answer alone. Ask them: "How much do you want me in this?"
+- New to it: show it step by step, write the steps down, and look early.
+- Able and unsure: ask what they would do, back it, and look afterwards.
+- Able and sure: hand over the outcome, not the steps. Agree when you'll look. Stay within reach.
+- Review the work; don't redo it. Put a question where the fix would go: "Which room did you check by hand?" If you must fix it, say why, show how, and give the next one back.
+- When a date tempts you to take the work back, ask what leaving it costs: often a day. Answer for the day yourself.
+- When there is no time, whoever owns the thing says who does what. Explain afterwards, every time.
+- Before you ask the team, say what is already decided and what is open.
+- Know the way you fall back on when you are under pressure. Ask the team which way they see most.
+- Practise one way at a time, in a meeting you already have, for a fortnight. Tell the team you are practising.
+- Hold everyone to the same standard, and say why your way differs from one person to the next.
+- When it fails, stand in front. When it works, let the person who did it show it.
+
+**Questions for the author's own practice,** still open on 13 November 2026 (a line each is plenty):
+
+1. Is Goleman's map still the one you use? If you think in another now, which?
+2. Which way do you still see most in technical leads, and what do you say to them?
+3. In your own proposal, which meeting went with which way? What happened when you tried it?
+4. A time when giving orders was right, and a time when it wasn't?
+5. How do you keep different ways from looking like favourites?
+6. What would you tell a new lead that the books get wrong?
+
+The papers answer the first three as he saw it in 2015 and 2016. He need only say what he sees differently now. Until he answers, the film takes the answers in its questions and assumptions.
+
+### The thread, the world and the people
+
+The film is set in **May and June 2027**, the months after *Learning while doing*, at the same university, with the scene tag *The university, 2027 · imagined*. No new person is drawn: Helena, Jun, Ivy and Sam are in the kit, and Graham is named.
+
+**What is already settled** (the module's numbers), and stays as it is:
+
+- When someone on the team is stuck, they go to Jun (a seed of *People before roles*, not yet made).
+- Ivy pairs with Jun an hour a day for six weeks from Monday 1 March. By the sixth week she writes changes on her own, and Jun reviews them (*Learning while doing*).
+- In May the team lists nine jobs that must keep running. The room models are only Jun's, and the sensors' feed only Sam's. They pair on each and write it down step by step. By Wednesday 30 June Ivy is the second name on both.
+- From Monday 10 May the team keeps four standing meetings: a stand-up of fifteen minutes each morning, planning on Monday, a review with the people who asked every second Thursday, and half an hour a week with Helena for each person (*Less, on purpose*).
+- Graham's page for the University Council is due on Tuesday 1 June. Ivy drafts it with Helena in May.
+- On Tuesday 25 May Helena tells Ivy that the week before she kept a change to herself for four days, to make it perfect, so Jun had one afternoon to review it. In June Ivy tells Helena that she answers a question at once, and Helena starts asking first what Ivy has tried (*Growing people*).
+- From Thursday 1 July Ivy owns *Teaching space use* (*Owning the outcome*).
+
+**What the film adds,** each written into the module's numbers and checked against the films above before a script uses it:
+
+- **Ivy's four months, seen by whoever leads her.** For her first six weeks she pairs with Jun, an hour a day, one small change at a time. From then on she writes changes on her own, and Jun reviews them. By June she is the second name on two jobs. In July she owns a product. The way she was led moved four times in four months, and nobody named it. This adds no fact: the film reads what is already told as a leader's choices.
+- **One person, two jobs, the same weeks.** On the sensors' feed Ivy is new, so Sam shows her each step of the runbook, in order, and that is right. On the room models she has made more than twenty-five changes since March. There she needs a question, not a fix.
+- **"It's faster if I do it."** In May, with the numbers for Graham's page due, Jun starts finishing Ivy's changes himself. Each fix is right, and the work is on time. Then Ivy's next change takes four days: she is making it perfect before he sees it. It is the week *Growing people* shows from Ivy's side, and nothing in that film changes. Nobody is at fault: Jun is protecting a date, and Ivy is protecting her work.
+- **Helena's half-hour with Jun.** She doesn't order him to stop, and she doesn't take the reviews from him: either would be the same trap. She asks what Ivy learns when he fixes it, and what a question would cost. A day. Helena tells Graham the numbers come a day later, and answers for it; the paper still goes in on Tuesday 1 June. Jun goes back to a question in place of a fix, the one he asked in April: "Which room did you check by hand?"
+- **Two moments.** One morning in June the sensors' feed is late. Sam, whose job it is, says who does what, and explains each call afterwards. On a Monday, at planning, Helena says what is already decided, and asks about the rest.
+- **One way, one meeting.** Jun picks his: a question before any fix, in every review, for a fortnight. He tells the team.
+- **The close.** At one of June's reviews with the people who asked, Ivy shows the change. Jun says what he got wrong: the date never needed him to do the work himself.
+
+**An assumption for the author:** the one who slips is Jun, who teaches well and whom the team turns to. It could be Helena instead, but *Growing people* already shows her slip, in June, in Ivy's words; this film names that once and doesn't retell it.
+
+**Rules the thread keeps.** Nobody approves their own change, so a change Jun finished is reviewed by someone else. The pull request is where a question or a fix is seen, drawn at the level of what people do. No agent is in the film.
+
+### The film
+
+| # | Series | Folder | Film | What it shows | The idea to take away | Opening |
+|---|---|---|---|---|---|---|
+| 19 | *The new skills* | `films/the-new-skills/4-more-than-one-way` | More than one way to lead (*Más de una forma de liderar*) | Jun hands the room models over to Ivy. When a date comes close he starts finishing her changes himself: each fix is right, and she stops asking. Helena asks him one question, and he goes back to asking. The same weeks show three places to stand, each right for a person and a moment: Sam in front on a late feed, Helena beside the team at planning, Jun behind Ivy at a review | Choose how you lead for the person and the moment. | Sriharikota, India, 1979 and 1980 |
+
+Its page's topic label is *Ways of leading* (*Formas de liderar*).
+
+**Chapter by chapter,** for the script to settle:
+
+1. The rocket, and two press conferences.
+2. More than one way, and none right everywhere: six ways, three places to stand.
+3. For the person: Ivy on two jobs in the same weeks, and her four months.
+4. *It's faster if I do it:* Jun's fixes, what they teach, and Helena's question.
+5. For the moment: a late feed, and a Monday's planning. Say which way you are in.
+6. One way, one meeting: how to practise, and the same fairness for everyone.
+7. On Monday, and back to Sriharikota.
+
+### What changes, and when
+
+No film is voiced or drawn again. This plan changes only this file, the series' decisions and the module's questions; the rest comes with the film, in its own pull request:
+
+- **The series.** *The new skills* becomes four films: its `series.json` plans four, so its cards say "Film N of 4". Its description, its README and its release note say three films today, and gain the fourth.
+- ***Learning while doing*.** Its page's description calls it the last of *The new skills*, and its closing line points to *Working with people*. Both are reworded: it points to this film, and this film points on to *The question behind the request*. No line of its voice counts the films or calls it the last.
+- **The Draft label.** The series stays validated. The new film's page carries the label on its own (`"draft": true` in its own `site.json`) until the author has watched it.
+- **The module.** Five series and nineteen films; its table of films above has row 19. The module's numbers gain the film's rows, and the film's thread reserves its sound in the module's palettes, as the *People first* films do.
+- **The learning route.** Nothing: a new film in a series already on the route is taken up when it is on the site.
+- **Questions and assumptions.** The film's own file is written with this plan, for the six open questions; the film's thread adds its own rows to it.
+- **Order of work.** First this plan, in a change of its own. Then the film, in a thread and a pull request of its own.
+
+### Rules for this film
+
+The module's rules hold: no release status; nothing personal about the author on the site; light on tools; blameless, and fair to everyone; the kit as it is; the fictional university, a year ahead. This film adds:
+
+- **A way is something a leader does, never a kind of leader.** No test, no "your style", and nobody is labelled: the film never says what Jun "is".
+- **No way is the villain.** Each of the six is shown where it is right. The two that harm are shown as habits, in someone who means well.
+- **Knowing the work is never the problem.**
+- **The map is named as what it is:** a consulting firm's study. Its numbers stay in the script's sources.
+- **A story told with respect:** from Kalam's own words, with nothing claimed that the sources don't say, no rank among nations, no likeness, and nothing Indian borrowed for the look or the sound.
+- **Nothing personal from the author's papers** is shown or named.
+
+### Sources (checked 12 November 2026)
+
+**The map**
+
+- D. Goleman, "[Leadership That Gets Results](https://hbr.org/2000/03/leadership-that-gets-results)", *Harvard Business Review*, March-April 2000: read in full. The six styles (coercive, authoritative, affiliative, democratic, pacesetting and coaching) and their phrases; "a random sample of 3,871 executives selected from a database of more than 20,000 executives worldwide"; each style's tie to climate (coercive -.26, authoritative .54, affiliative .46, democratic .43, pacesetting -.25, coaching .42); "climate accounts for nearly a third of results"; "only four of the six consistently have a positive effect on climate and results"; pacesetting "should be used sparingly", and its leader "jumps in to take over when he thinks they're lagging"; coaching "flops if the leader lacks the expertise to help the employee along"; leaders "who have mastered four or more" have "the best climate and business performance". Its own example of pacesetting is a scientist whose "superb technical expertise made him an early star".
+
+**The research under it**
+
+- T. Judge, R. Piccolo and R. Ilies, "The forgotten ones? The validity of consideration and initiating structure in leadership research", *Journal of Applied Psychology* 89 (2004): the abstract.
+- T. Judge and R. Piccolo, "Transformational and transactional leadership: a meta-analytic test of their relative validity", *Journal of Applied Psychology* 89 (2004): the abstract.
+- A. Skogstad and others, "The destructiveness of laissez-faire leadership behavior", *Journal of Occupational Health Psychology* 12 (2007): the abstract.
+- G. Thompson and L. Glasø, "Situational leadership theory: a test from a leader-follower congruence approach", *Leadership & Organization Development Journal* 39 (2018): the abstract.
+- B. Artz, A. Goodall and A. Oswald, "Boss competence and worker well-being", *ILR Review* 70 (2017): the abstract.
+- A. Yu, F. Matta and B. Cornfield, on differences in leader and member exchange, *Academy of Management Journal* 61 (2018): the abstract. It finds a mixed tie to how the group performs, which the film doesn't lean on.
+- Situational leadership: P. Hersey and K. Blanchard, "Life cycle theory of leadership", *Training and Development Journal* 23 (1969), as the English Wikipedia gives it. R. Vecchio, *Journal of Applied Psychology* 72 (1987), 303 teachers in 14 high schools: only the start of its abstract. G. Thompson and R. Vecchio, *The Leadership Quarterly* 20 (2009), and C. Fernandez and R. Vecchio, *The Leadership Quarterly* 8 (1997): titles only. To be read before a script says more than "supported only in part".
+- GLOBE: the project's [own summary of its 2004 study](https://globeproject.com/study_2004_2007). It names the attributes wanted everywhere, unwanted everywhere and "culturally contingent" without listing them: the book is to be read before a script says which.
+- Google, re:Work, [Following the data: the research behind great managers](https://rework.withgoogle.com/intl/en/guides/following-the-data-the-research-behind-great-managers): the ten behaviours. D. Garvin, "[How Google Sold Its Engineers on Management](https://hbr.org/2013/12/how-google-sold-its-engineers-on-management)", *Harvard Business Review*, December 2013: the part its publisher shows.
+- H. Ibarra and A. Scoular, "The Leader as Coach", *Harvard Business Review*, November-December 2019, and J. Milner and T. Milner, "Most Managers Don't Know How to Coach People. But They Can Learn", *Harvard Business Review* online, August 2018: their summaries only.
+- Known from general reading and not read on the day, each to be read before a script leans on it: R. Tannenbaum and W. Schmidt, "How to Choose a Leadership Pattern" (1958; reprinted in *Harvard Business Review*, May-June 1973); V. Vroom and P. Yetton, *Leadership and Decision-Making* (1973); J. Whitmore, *Coaching for Performance* (1992); and everything in the reference table's last row.
+
+**The picture**
+
+- Ki Hajar Dewantara and Taman Siswa: the Indonesian and English Wikipedia's articles (the school's founding on 3 July 1922, the three lines, the ministry's motto). To be checked against Taman Siswa's own writing and a history of the school before a script; an idea once heard, that the first two lines were added by someone else, was found in neither article.
+
+**The story**
+
+- A. P. J. Abdul Kalam, interview with Knowledge at Wharton, "[A Leader Should Know How to Manage Failure](https://knowledge.wharton.upenn.edu/article/former-president-apj-abdul-kalam-a-leader-should-know-how-to-manage-failure/)" (3 April 2008): read in full. His quoted words are from it.
+- ISRO, [SLV](https://www.isro.gov.in/SLV.html): the rocket, the two flights, and "the sixth member of an exclusive club of space-faring nations". The English Wikipedia's articles on the Satellite Launch Vehicle, on Rohini (the satellite of 35 kilograms; "the seventh nation"), on Satish Dhawan and on Kalam.
+- Still to check before a script: Kalam's *Wings of Fire* (1999) on the same days; how the cause of the failure was found; a source other than Kalam for the size of the team and the hour of the launch; whether Kalam sat beside Dhawan at the first press conference. Kalam's speech at the launch site as president, on India's presidential site, couldn't be opened.
+- For the other openings: the English Wikipedia's article on Escuela Nueva; nothing yet from Fundación Escuela Nueva or UNESCO themselves.

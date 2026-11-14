@@ -2378,7 +2378,7 @@ function hw_place(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a,w=250,h=170;if
   ctx.strokeStyle=rgba(AG.amber,0.55);ctx.lineWidth=2.4;ctx.setLineDash([8,7]);rr(ctx,x+24,y+128,w-48,20,8);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
 // the six tools, each with its lock, in a grid of three by two; none sends anything outside the university
 const HW_TOOLS=[["Tickets","read only","lock"],["Catalog","read only","lock"],["Docs","read only","lock"],["Query","samples, masked","lock"],["Repository","its own branch","draft"],["Build","in its sandbox","draft"]];
-function hw_tools6(ctx,x,y,o){o=o||{};HW_TOOLS.forEach(([n,s,ic],i)=>{const a=o.a?o.a[i]:1;if(a<=0)return;ag_tool(ctx,x+(i%3)*262,y+Math.floor(i/3)*128,244,112,n,{a,sub:s,icon:ic,touch:o.touch||0});});}
+function hw_tools6(ctx,x,y,o){o=o||{};HW_TOOLS.forEach(([n,s,ic],i)=>{const a=o.a?o.a[i]:1;if(a<=0)return;ag_tool(ctx,x+Math.floor(i/3)*393,y+(i%3)*124,375,112,n,{a,sub:s,icon:ic,touch:o.touch||0});});}   // two columns of three, 768 px in all as before: three across were narrower than "samples, masked"
 
 /* ---------------------------------------------------------------- 5 · a loop all night */
 // the stack of the night's rounds: each line the same error; n how many have dropped (the card grows smoothly as each one arrives)
@@ -2615,8 +2615,8 @@ scene("ticket",(ctx,S,t,sc)=>{const c=sc.cues,P=hw_once(sc,"P",()=>({white:wAt(s
       ag_pill(x,800,626,"an order, or data?",{col:AG.violet,a:ag_io(tt,P.order,c.data-0.2,0.4)});
       // what it reads is data, never orders, and no hand it holds can send anything out
       hw_rule(x,476,196,780,{a:ag_in(tt,c.data+0.1,0.4)*end,k:ag_spr(tt,c.data+0.1)});
-      hw_tools6(x,476,476,{a:[0,1,2,3,4,5].map(i=>ag_in(tt,P.hand+0.1*i,0.4)*end)});
-      hw_pillL(x,476,790,"No tool can send anything out",{icon:"lock",col:AG.blue,a:ag_in(tt,P.out,0.4)*end});}},
+      hw_tools6(x,476,432,{a:[0,1,2,3,4,5].map(i=>ag_in(tt,P.hand+0.1*i,0.4)*end)});
+      hw_pillL(x,476,837,"No tool can send anything out",{icon:"lock",col:AG.blue,a:ag_in(tt,P.out,0.4)*end});}},
     // like the walls above Lisbon's roofs, the fire stops where it starts
     {at:c.walls,place:"hwRow",keys:[[c.walls,980,560,1.04]],push:0.03,draw:(x,tt)=>hw_roofFire(x,tt,c.walls+0.2,1)}
   ],0.6);

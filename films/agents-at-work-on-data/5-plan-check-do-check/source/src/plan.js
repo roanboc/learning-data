@@ -19,7 +19,7 @@
      pc_whole     draws a person (or anything) into a layer and lays it on the frame at one opacity, so a person comes and goes whole
    Words are drawn live with ag_T, at least 28 px, above y 890. */
 
-const PC_ROOM={jun:[290,612,0.95],desk:{x:-90,y:1004,w:770,depth:150},tx:1540,tw:290,th:134,ty:[300,456,612],tools:["Catalog","Query","Docs"],
+const PC_ROOM={jun:[290,612,0.95],desk:{x:-90,y:1004,w:770,depth:150},tx:1514,tw:342,th:134,ty:[300,456,612],tools:["Catalog","Query","Docs"],   // tw: the widest of PC_TOOLDO, "the university's words", with 28 on each side
   steps:[1250,82]};
 const PC_TOOLDO=["tables and columns","counts and samples","the university's words"];
 

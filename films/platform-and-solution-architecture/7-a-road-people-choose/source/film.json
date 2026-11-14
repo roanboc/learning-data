@@ -1,0 +1,21 @@
+{
+  "key": "a-road-people-choose",
+  "title": "A road people choose",
+  "sub": "Platform and solution architecture, a series on the data platform and what is built on it: the platform as a product its users choose, a path already laid from a template, the rules built into it, a guide and someone to ask, no tickets to wait on, and what the platform team counts to know it works.",
+  "howto": "Technology green is a platform, and blue an application, a data product or a team. A gold tag is an owner in the business. Red is a wait, a ticket or a team that gave up; a green tick, a step done. Amber, a lantern's colour, is the road, its stations, and what every team shares.",
+  "src": [
+    "../../../shared/src/psa.js",
+    "scenes.js"
+  ],
+  "story": ["ise"],
+  "poster": ["end", "what", 7.35],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bRavi\\b", "Rah-vee"],
+    ["\\bEdo\\b", "Eh-doh"],
+    ["\\bTōkaidō\\b", "Toh-kai-doh"],
+    ["\\bIse\\b", "Ee-seh"],
+    ["\\boshi\\b", "oh-shee"]
+  ]
+}

@@ -16,6 +16,11 @@ The data platform as a platform, not an application: its parts, one platform or 
 | [One platform, or many](https://data.learn-all.org/platform-and-solution-architecture/one-platform-or-many/) | How many platforms | 8 min | 10 | 3 questions | [script](3-one-platform-or-many/script.md) · [source](3-one-platform-or-many/source/README.md) |
 | [Where it meets the applications](https://data.learn-all.org/platform-and-solution-architecture/where-it-meets-the-applications/) | Two platforms, one map | 8½ min | 9 | 3 questions | [script](4-where-it-meets-the-applications/script.md) · [source](4-where-it-meets-the-applications/source/README.md) |
 | [Security all the way through](https://data.learn-all.org/platform-and-solution-architecture/security-all-the-way-through/) | Security on the platform | 7½ min | 10 | 3 questions | [script](5-security-all-the-way-through/script.md) · [source](5-security-all-the-way-through/source/README.md) |
+| [One solution, end to end](https://data.learn-all.org/platform-and-solution-architecture/one-solution-end-to-end/) | Solution architecture | 9½ min | 12 | 3 questions | [script](6-one-solution-end-to-end/script.md) · [source](6-one-solution-end-to-end/source/README.md) |
+| [A road people choose](https://data.learn-all.org/platform-and-solution-architecture/a-road-people-choose/) | The platform as a product | 8½ min | 10 | 3 questions | [script](7-a-road-people-choose/script.md) · [source](7-a-road-people-choose/source/README.md) |
+| [Built to change](https://data.learn-all.org/platform-and-solution-architecture/built-to-change/) | Choosing for change | 9½ min | 9 | 3 questions | [script](8-built-to-change/script.md) · [source](8-built-to-change/source/README.md) |
+
+For the whole series, on the site: [9 labs](https://data.learn-all.org/platform-and-solution-architecture/labs/) and [16 scenarios](https://data.learn-all.org/platform-and-solution-architecture/scenarios/), in English and Spanish, from the words in [site/assets/platform-and-solution-architecture/](../../site/assets/platform-and-solution-architecture/).
 <!-- /films -->
 
 ## The look and the sound

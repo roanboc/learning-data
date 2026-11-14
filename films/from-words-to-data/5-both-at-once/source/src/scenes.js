@@ -224,9 +224,9 @@ scene("back",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);set
   withA(ctx,sa,()=>{if(gs)glow(ctx,1590,400,300,LAYER.gold,0.25*gs);vault(ctx,1400,150,380,520,LAYER.gold,(r,cc)=>hash(r*11+cc,5)<0.62?LAYER.gold:null,null);chip(ctx,1590,212,null,"Gold","ready to read",{align:"center",edge:LAYER.gold});});
   // the app, and its own database
   bo_phone(ctx,330,380,1.55,{a:sa,screen:sg>0?"suggest":"issue",sa:sg,hi:pulseAt(t,at("serve",0.58),1.2),edge:sg>0?BO_M:null});
-  withA(ctx,sa,()=>{glass(ctx,110,620,580,236,18,BO_W,{glow:14+10*pulseAt(t,at("agents",0.3),1.4),ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"the app's database",134,662,{w:800,size:26,color:rgba(BO_W,1)});
+  withA(ctx,sa,()=>{const long=tw(ctx,"S-0091L-207agent: suggested Data Ethics",phSz(ctx,19),500,"mono")+88>528;glass(ctx,110,620,580,long?250:236,18,BO_W,{glow:14+10*pulseAt(t,at("agents",0.3),1.4),ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"the app's database",134,662,{w:800,size:26,color:rgba(BO_W,1)});   // long: the agent's row takes two lines where one would run past the card at the size it's drawn
     bo_row(ctx,130,680,540,"L-207",["Aisha K.","2 of 4"],{fs:20});bo_row(ctx,130,726,540,"A-1042",["L-207","revoked"],{fs:20,vc:[null,BAD]});
-    if(wr>0)bo_row(ctx,130,772,540,"S-0091",["L-207","agent: suggested Data Ethics"],{a:wr,fs:19,hi:pulseAt(t,at("agents",0.7),1.2),col:BO_W});});
+    if(wr>0)bo_row(ctx,130,772,540,"S-0091",long?["L-207","agent:"]:["L-207","agent: suggested Data Ethics"],{a:wr,fs:19,h:long?78:44,more:long?"suggested Data Ethics":null,hi:pulseAt(t,at("agents",0.7),1.2),col:BO_W});});
   // data flowing back to the app
   withA(ctx,fl*dim,()=>{arrowTo(ctx,1390,300,440,300,BO_M,0.5,{head:18,lw:3,bend:0.06});packets(ctx,t,bez(P(1390,300),P(1100,250),P(740,250),P(446,300),20),0.35,1.4,c("serve"),BO_M,14,1);
     tag(ctx,915,214,t>fs+0.4?"served in 8 ms":"data flowing back",BO_M,{align:"center",size:28});});
@@ -262,7 +262,7 @@ scene("questions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f
   withA(ctx,vis(2),()=>{const w1=fin(t,at("fresh",0.42),0.5),p1=fin(t,at("fresh",0.72),0.5);
     bo_fresh(ctx,860,640,940,{labels:["seconds","minutes","hours","a day"],ls:26,ms:26,marks:[w1>0.02?[0,"a wallet",BO_M,0]:null,p1>0.02?[3,"a plan",BO_R,0]:null].filter(Boolean)});
     const kx=860+940*clamp(ease(clamp((t-c("fresh"))/1.4,0,1))*0.5+0.5*ease(fin(t,at("fresh",0.5),1.2))-0.0,0,1)*(1-w1)*(1-p1);withA(ctx,(1-w1)*fin(t,c("fresh"),0.4),()=>{glow(ctx,kx,640,44,BO_ACC,0.6);ctx.fillStyle=rgba(INK,1);ctx.beginPath();ctx.arc(kx,640,13,0,TAU);ctx.fill();});
-    withA(ctx,w1,()=>bo_phone(ctx,860,330,1.35,{screen:"wallet"}));withA(ctx,p1,()=>bo_answer(ctx,1480,170,360,280,"a plan","ten years of awards",BO_R,t,1));});
+    withA(ctx,w1,()=>phAsDeco(phMin(ctx)>0,()=>bo_phone(ctx,860,330,1.35,{screen:"wallet"})));withA(ctx,p1,()=>bo_answer(ctx,1480,170,360,280,"a plan","ten years of awards",BO_R,t,1));});
   // 4: definitions in one place
   withA(ctx,vis(3),()=>{const o1=fin(t,at("defs",0.3),0.5),nt=fin(t,at("defs",0.78),0.5);
     glass(ctx,1060,190,540,270,22,TRUST,{glow:20,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"credits towards a certificate",1090,242,{w:800,size:27,color:rgba(TRUST,1)});

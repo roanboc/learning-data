@@ -165,15 +165,18 @@ window.LD_ROUTE = {
      "title": "Platform and solution architecture",
      "href": "platform-and-solution-architecture/",
      "poster": "an-application-or-a-platform-poster.jpg",
-     "kicker": "Series · 5 of 8 films",
-     "len": "39 min",
-     "min": 39.0,
+     "kicker": "Series · 8 films",
+     "len": "67 min",
+     "min": 67.0,
      "films": [
       "ld-an-application-or-a-platform",
       "ld-inside-the-platform",
       "ld-one-platform-or-many",
       "ld-where-it-meets-the-applications",
-      "ld-security-all-the-way-through"
+      "ld-security-all-the-way-through",
+      "ld-one-solution-end-to-end",
+      "ld-a-road-people-choose",
+      "ld-built-to-change"
      ]
     },
     {
@@ -182,14 +185,15 @@ window.LD_ROUTE = {
      "title": "AI and continuous architecture",
      "href": "ai-and-continuous-architecture/",
      "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Series · 4 of 6 films",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Series · 5 of 6 films",
+     "len": "39 min",
+     "min": 39.0,
      "films": [
       "ld-agents-on-the-map",
       "ld-the-ai-platform",
       "ld-what-an-agent-may-read",
-      "ld-a-first-draft-not-a-blank-page"
+      "ld-a-first-draft-not-a-blank-page",
+      "ld-every-change-checked"
      ]
     }
    ]

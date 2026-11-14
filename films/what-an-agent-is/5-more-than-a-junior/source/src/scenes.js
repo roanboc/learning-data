@@ -120,9 +120,9 @@ scene("hans",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten;
     // the slate when nobody there knows the answer: the ticks go on past it, amber
     const sl=mj_card(t,c.nobody-0.2,tBlind+0.2);if(sl.a>0){const k=mj_count(t,tNone);x.save();x.globalAlpha*=sl.a;ag_about(x,1180,183,lerp(0.6,1,sl.k));mj_slate(x,1000,50,360,{text:"?",ticks:k.n,tick:k.tick,past:5});x.restore();}
     // the two dot grids: out of sight, then in sight
-    const g1=mj_card(t,c.blinkers+0.3,tCheat),g2=mj_card(t,c.sight-0.2,tCheat);
-    if(g1.a>0)mj_grid(x,1452,96,26,MJ_RIGHT.blind,ag_in(t,c.blinkers+0.9,3.6),"Out of sight · 6 in 100",{a:g1.a,k:g1.k});
-    if(g2.a>0)mj_grid(x,1452,500,26,MJ_RIGHT.seen,ag_in(t,c.sight+0.1,2.4),"In sight · 89 in 100",{a:g2.a,k:g2.k});
+    const g1=mj_card(t,c.blinkers+0.3,tCheat),g2=mj_card(t,c.sight-0.2,tCheat),gl=["Out of sight · 6 in 100","In sight · 89 in 100"],lw=Math.max(...gl.map(s=>ag_tw(x,s,{w:700,size:30}))),gx=1772-lw-60;   // both cards as wide as the longer label, their right edge where it was
+    if(g1.a>0)mj_grid(x,gx,96,26,MJ_RIGHT.blind,ag_in(t,c.blinkers+0.9,3.6),gl[0],{a:g1.a,k:g1.k,lw});
+    if(g2.a>0)mj_grid(x,gx,500,26,MJ_RIGHT.seen,ag_in(t,c.sight+0.1,2.4),gl[1],{a:g2.a,k:g2.k,lw});
     const r2=mj_card(t,c.cheat+0.1,tGift);if(r2.a>0)ag_textCard(x,560,86,800,{kick:"9 December 1904",title:"No fraud. Hans can't count.",sub:"He reads the one who asks."},{kickCol:AG.kick,k:r2.k,a:r2.a});
   });
   ag_title(ctx,S,t,c.breath,"More than a junior","less than a person","FILM 5 OF 10 · WHAT AN AGENT IS");

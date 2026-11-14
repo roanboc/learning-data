@@ -39,3 +39,10 @@ So the line holds, and one thing is added: the data team's other contracts, with
 ## Release
 
 Nothing for Rodrigo to run. The new soundtrack is indexed as `audio-governed-in-dbt-12faad7b2be02c305f20` and publishes itself when the change reaches main. The film isn't rendered here; the release workflow renders it.
+
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film. It was fixed while he was away.
+
+- **Question:** Yusuf's pin lands at the end of the line *owner: Mei Tanaka, registrar's office*, with his word, *an owner*, written beside it. The word began on the sheet and ran 68 px past its edge, onto the desk. Move the word, or widen the sheet?
+- **Assumption taken:** widen: the sheet is as wide as its longest line with the pin and the word beside it, about 85 px more, and the tag *Who decides* stands just past its new edge. The tag *One word, one home*, two lines down, still lies across the sheet's edge, as it did: a tag is its own box. No word changed, and the series' shared tools are unchanged. It shows at 2:06 to 2:08.

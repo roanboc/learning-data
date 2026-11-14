@@ -1844,16 +1844,16 @@ function sm_rule(ctx,x,y,w,pri,txt,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
     ctx.fillStyle="rgba(7,12,24,1)";ctx.beginPath();ctx.arc(x+34,y+h/2,20,0,TAU);ctx.fill();ring(ctx,x+34,y+h/2,20,col,1,2.4);
     T(ctx,pri+"",x+34,y+h/2+8,{w:800,size:22,align:"center",color:rgba(col,1)});T(ctx,txt,x+68,y+h/2+8,{w:700,size:22,color:rgba(mix(INK,col,0.2),1)});});}
 
-// Aisha's wallet: her credentials as tiles (an award, three microcredentials, a badge); x6 (0..1) slides in a sixth, one she never earned
-function sm_wallet(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const x6=o.x6||0,n=5+(x6>0.5?1:0),h=210;
+// Aisha's wallet: her credentials as tiles (an award, three microcredentials, a badge), three to a row, so each tile is wider than
+// its name at the size it's drawn; x6 (0..1) slides a sixth into the place left, one she never earned
+function sm_wallet(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const x6=o.x6||0,n=5+(x6>0.5?1:0),th=92,h=66+2*th+12+18;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(ctx,"Aisha's wallet",x+22,y+38,{w:700,size:22,color:rgba(TRUST,1)});
     T(ctx,n+" credentials",x+w-22,y+38,{w:800,size:22,align:"right",color:rgba(x6>0.5?SM_AMBER:INK,1)});
-    const K=[["award",TRUST],["micro",KIND],["micro",KIND],["micro",KIND],["badge",[180,150,255]]],tw_=(w-44-5*12)/6;
-    K.forEach(([k,c],i)=>{const tx=x+22+i*(tw_+12),ty=y+66;glass(ctx,tx,ty,tw_,104,10,c,{glow:6,ea:0.7,fill:"rgba(10,16,30,0.96)"});ctx.fillStyle=rgba(c,0.85);rr(ctx,tx+10,ty+12,tw_-20,10,4);ctx.fill();
-      for(let r=0;r<3;r++){ctx.fillStyle=rgba(c,0.22);rr(ctx,tx+10,ty+36+r*16,(tw_-20)*(0.9-r*0.2),7,3);ctx.fill();}T(ctx,k,tx+tw_/2,ty+94,{w:600,size:18,align:"center",color:rgba(SOFT,1)});});
-    if(x6>0.01){const k=spring(x6*1.6),tx=lerp(x+w+80,x+22+5*(tw_+12),k),ty=y+66;withA(ctx,clamp(x6*3,0,1),()=>{glass(ctx,tx,ty,tw_,104,10,SM_AMBER,{glow:14,ea:0.9,fill:"rgba(26,18,6,0.96)"});
-      ctx.fillStyle=rgba(KIND,0.85);rr(ctx,tx+10,ty+12,tw_-20,10,4);ctx.fill();for(let r=0;r<3;r++){ctx.fillStyle=rgba(KIND,0.22);rr(ctx,tx+10,ty+36+r*16,(tw_-20)*(0.9-r*0.2),7,3);ctx.fill();}
-      T(ctx,"micro",tx+tw_/2,ty+94,{w:600,size:18,align:"center",color:rgba(SM_AMBER,1)});});}});}
+    const K=[["award",TRUST],["micro",KIND],["micro",KIND],["micro",KIND],["badge",[180,150,255]]],tw_=(w-44-2*12)/3,at=i=>[x+22+(i%3)*(tw_+12),y+66+Math.floor(i/3)*(th+12)];
+    const tile=(tx,ty,k,c,edge,fill,lc)=>{glass(ctx,tx,ty,tw_,th,10,edge,fill);ctx.fillStyle=rgba(c,0.85);rr(ctx,tx+10,ty+12,tw_-20,10,4);ctx.fill();
+      for(let r=0;r<2;r++){ctx.fillStyle=rgba(c,0.22);rr(ctx,tx+10,ty+31+r*13,(tw_-20)*(0.9-r*0.25),7,3);ctx.fill();}T(ctx,k,tx+tw_/2,ty+th-12,{w:600,size:18,align:"center",color:rgba(lc,1)});};
+    K.forEach(([k,c],i)=>{const[tx,ty]=at(i);tile(tx,ty,k,c,c,{glow:6,ea:0.7,fill:"rgba(10,16,30,0.96)"},SOFT);});
+    if(x6>0.01){const k=spring(x6*1.6),[sx,ty]=at(5),tx=lerp(x+w+80,sx,k);withA(ctx,clamp(x6*3,0,1),()=>tile(tx,ty,"micro",KIND,SM_AMBER,{glow:14,ea:0.9,fill:"rgba(26,18,6,0.96)"},SM_AMBER));}});}
 
 // a test list: each test's name, and a tick that lands one after another as on[i] goes 0 to 1
 function sm_tests(ctx,x,y,w,names,on,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const lh=42,h=74+names.length*lh;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,GOOD,{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});
@@ -1932,8 +1932,10 @@ function sm_drawer(ctx,x,y,w,h,t,a){if(a<=0.01)return;withA(ctx,a,()=>{const d=h
   const g=ctx.createLinearGradient(x,y+d,x,y+h);g.addColorStop(0,"rgb(140,92,52)");g.addColorStop(1,"rgb(92,58,30)");ctx.fillStyle=g;ctx.fillRect(x,y+d,w,h-d);
   ctx.strokeStyle="rgba(60,34,14,0.45)";ctx.lineWidth=1.2;for(let k=0;k<7;k++){ctx.beginPath();ctx.moveTo(x,y+d+8+k*(h-d-12)/6);for(let xx=0;xx<=w;xx+=40)ctx.lineTo(x+xx,y+d+8+k*(h-d-12)/6+Math.sin(xx*0.02+k*1.3)*3);ctx.stroke();}
   ctx.fillStyle="rgba(255,230,190,0.18)";ctx.fillRect(x,y+d,w,3);
-  const hx=x+w/2,hy=y+d+(h-d)/2;ctx.fillStyle=rgba(SM_BRASS,1);rr(ctx,hx-50,hy-12,100,24,8);ctx.fill();ctx.strokeStyle="rgba(70,46,16,0.9)";ctx.lineWidth=1.5;rr(ctx,hx-50,hy-12,100,24,8);ctx.stroke();
-  ctx.fillStyle="rgb(240,228,200)";ctx.fillRect(hx-62,hy-50,124,32);ctx.strokeStyle="rgba(70,46,16,0.6)";ctx.strokeRect(hx-62,hy-50,124,32);T(ctx,"19.0–19.9",hx,hy-27,{f:"mono",w:500,size:18,align:"center",color:rgba(SM_INK,1)});});}
+  // the label over the handle, both on the drawer's front; the label is as wide and as tall as its numbers at the size they're drawn
+  const ls=phSz(ctx,18),lw=Math.max(124,Math.ceil(tw(ctx,"19.0–19.9",ls,500,"mono"))+24),lh=Math.max(32,Math.round(ls+12)),hx=x+w/2,ly=y+d+Math.max(4,(h-d-lh-32)/2),hy=ly+lh+20;
+  ctx.fillStyle=rgba(SM_BRASS,1);rr(ctx,hx-50,hy-12,100,24,8);ctx.fill();ctx.strokeStyle="rgba(70,46,16,0.9)";ctx.lineWidth=1.5;rr(ctx,hx-50,hy-12,100,24,8);ctx.stroke();
+  ctx.fillStyle="rgb(240,228,200)";ctx.fillRect(hx-lw/2,ly,lw,lh);ctx.strokeStyle="rgba(70,46,16,0.6)";ctx.strokeRect(hx-lw/2,ly,lw,lh);T(ctx,"19.0–19.9",hx,ly+lh/2+ls*0.36,{f:"mono",w:500,size:18,align:"center",color:rgba(SM_INK,1)});});}
 // a fingerprint in ink, drawn ridge by ridge as p goes 0 to 1: kind 0 is a loop, kind 1 a whorl
 function sm_print(ctx,x,y,r,kind,p,a){if(a<=0.01||p<=0)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.ellipse(0,0,r*0.78,r,0,0,TAU);ctx.clip();
   const g=ctx.createRadialGradient(0,0,r*0.2,0,0,r);g.addColorStop(0,"rgba(40,30,40,0.06)");g.addColorStop(1,"rgba(40,30,40,0)");ctx.fillStyle=g;ctx.fillRect(-r,-r,2*r,2*r);
@@ -2095,8 +2097,8 @@ const SM_AK=[["SIS|","S-20417"],["LMS|","u-88213"],["SC|","·Aisha.K@Mail.exampl
 // a tag whose right edge sits at x
 function sm_tagR(ctx,x,y,s,col,sz){tag(ctx,x-tw(ctx,s,sz||18,700)-26,y,s,col,{size:sz||18});}
 
-// a tag whose last part (a code character, like |) is set in the mono font, so it can't be misread
-function sm_tagBar(ctx,x,y,s,m,col,sz){const w1=tw(ctx,s,sz,700),w=w1+sz*0.62+26,h=sz+16;glass(ctx,x,y-h/2,w,h,h/2,col,{fill:"rgba(7,12,24,0.88)",glow:10,ea:0.8});
+// a tag whose last part (a code character, like |) is set in the mono font, so it can't be misread; it is made at the size its words are drawn
+function sm_tagBar(ctx,x,y,s,m,col,sz){sz=phSz(ctx,sz);const w1=tw(ctx,s,sz,700),w=w1+sz*0.62+26,h=sz+16;glass(ctx,x,y-h/2,w,h,h/2,col,{fill:"rgba(7,12,24,0.88)",glow:10,ea:0.8});
   T(ctx,s,x+13,y+sz*0.36,{w:700,size:sz,color:rgba(col,1)});T(ctx,m,x+13+w1,y+sz*0.36,{f:"mono",w:700,size:sz,color:rgba(col,1)});}
 
 /* ---------- 1. Look-alikes ---------- */
@@ -2295,7 +2297,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     withA(ctx,pull*oA,()=>tag(ctx,700,360,"merged",SM_AMBER,{align:"center",size:18}));}
   const x6=fin(t,w("merge","six"),0.8)*(1-fin(t,un+0.3,0.8));
   arrive(ctx,320,605,t,0.9,()=>sm_wallet(ctx,60,500,520,{x6}),{dy:24});
-  withA(ctx,fin(t,w("merge","never earned"),0.5)*(1-fin(t,un+0.3,0.6)),()=>T(ctx,"one she never earned",320,752,{w:700,size:22,align:"center",color:rgba(SM_AMBER,1)}));
+  withA(ctx,fin(t,w("merge","never earned"),0.5)*(1-fin(t,un+0.3,0.6)),()=>T(ctx,"one she never earned",320,822,{w:700,size:22,align:"center",color:rgba(SM_AMBER,1)}));
   // every test stays green, tick after tick
   const tA=1-fin(t,dd-0.2,0.6),tt0=w("merge","every test");
   arrive(ctx,1610,300,t,w("merge","And every")-0.4,()=>sm_tests(ctx,1310,110,530,SM_TESTS,SM_TESTS.map((_,i)=>fin(t,tt0+i*0.25,0.3)),{a:tA}),{dy:24});

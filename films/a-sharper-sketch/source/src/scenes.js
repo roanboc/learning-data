@@ -230,8 +230,8 @@ scene("end",(ctx,S,t,sc)=>{
     withA(ctx,q1,()=>{asker(ctx,t,fin(t,0.1),"How many students were enrolled in Data Science 101 on census date?",fin(t,cAg));
       withA(ctx,fin(t,cAs-0.1),()=>{tag(ctx,500,470,"Genie",LAYER.gold,{size:18});bubble(ctx,480,505,660,"Enrolled on census date, in the Semester 1 offering?",LAYER.gold,{size:28});});
       withA(ctx,fin(t,cAn),()=>{numCard(ctx,1220,230,560,"Genie","118","matches the census report",GOOD);
-        glass(ctx,1220,470,560,230,18,SK,{glow:12,ea:0.6,fill:"rgba(7,12,24,0.92)"});T(ctx,"How it counted",1248,512,{w:800,size:22});
-        ["one row = one student in one unit offering","enrolled on census date, 31 Mar","each student counted once"].forEach((s,i)=>withA(ctx,fin(t,cAn+0.8+i*0.5),()=>{led(ctx,1250,538+i*50,6,30,SK);T(ctx,s,1270,560+i*50,{w:600,size:19,color:rgba(INK,0.95)});}));});});
+        const hs=phSz(ctx,19),two=tw(ctx,"one row = one student in one unit offering",hs,600)>482,hl=two?Math.round(hs*1.2):0;glass(ctx,1220,470,560,230+hl,18,SK,{glow:12,ea:0.6,fill:"rgba(7,12,24,0.92)"});T(ctx,"How it counted",1248,512,{w:800,size:22}); // the first line is too long for the card at the size a phone needs: it takes two lines there, and the card grows by one
+        [two?["one row = one student","in one unit offering"]:["one row = one student in one unit offering"],["enrolled on census date, 31 Mar"],["each student counted once"]].forEach((L,i)=>withA(ctx,fin(t,cAn+0.8+i*0.5),()=>{const y=i?hl:0;led(ctx,1250,538+i*50+y,6,30+(L.length-1)*hl,SK);L.forEach((l,j)=>T(ctx,l,1270,560+i*50+y+j*hl,{w:600,size:19,color:rgba(INK,0.95)}));}));});});
     // the sketch, version 2, with a note that says why it changed; then a new question arrives
     const vA=fin(t,cV-0.1,0.8);withA(ctx,vA,()=>{const pos=lay(L3,0.72,760,520);glass(ctx,110,170,1300,720,22,SK,{glow:18,ea:0.35,fill:"rgba(10,18,36,0.5)"});sketchV2(ctx,{pos,s:0.72,pins:true});
       const fl=t>cE+2.2?t:0;stamp(ctx,1390,845,t>cE+2.2?"sketch v3?":"sketch v2",t>cE+2.2?EXT:GOOD,1,fl?t-cE:0);

@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for A road people choose, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (weeks, rules, count), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the series' labs page;
+   a question without one has no lab link. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  weeks:{q:"Two teams gave up on the platform and built their own. Why doesn't Ravi just order every team onto it?",
+    opts:[{t:"An order makes teams use it, not want it, and the quick way still finds a way around it.",ok:true},{t:"The platform wasn't yet the safe way, so it had to be made safer before anyone was told.",near:true},{t:"Each domain team picks its own tools, so the platform team has no say in where data lives."}],
+    why:"An order would bring every team onto the platform, but it wouldn't make the platform the easy way: the eleven tickets and the pull request sent back would still be there, and a team in a hurry would find a way around them, as field services and metering did. The platform was already the safe way; it wasn't yet the easy one. So Ravi makes it the easiest way to do it right, and lets teams choose it. Where does your platform still make the safe way the slow one?"},
+  rules:{stop:"path",q:"Personal data is classed before anything is published, the tests run on every pull request, and nothing goes live without an owner. What does building those rules into the path change for a team?",
+    opts:[{t:"The data team no longer reviews the team's pull request, since the path's checks cover every rule."},{t:"The team gets the whole list of rules on day one, and learns them before it writes any logic.",near:true},{t:"The team meets each rule as it works, so no pull request comes back for a rule nobody mentioned.",ok:true}],
+    why:"Built into the path, a rule is met where the work is done, as the team works, not at the end. A list on day one is better than nothing, but it still leaves the team to remember every rule, and to learn the ones it missed when a pull request comes back. The data team still reviews the logic: the path keeps a team on the road without stopping it, as a guardrail does, not a gate. Which of your rules does a team still learn by being refused?"},
+  count:{q:"Ravi counts what tells him the platform works as a product. What does he count?",
+    opts:[{t:"How many tickets his team closes each week, since a busy queue shows how much teams need it."},{t:"Teams that choose the path unasked, the days a first data product takes, and what teams say.",ok:true},{t:"Whether every domain team is on the platform by December, since a product works when all use it.",near:true}],
+    why:"A product works when its customers choose it, so Ravi counts the choice: by December eight of the eleven domain teams have chosen the path, and none was told to; a first data product takes two to four days; and nine in ten teams would tell another to use it. Every team on the platform by order would look the same on a count of teams, and say nothing about whether it's the easy way. A busy queue of tickets is what the path took away. What would you count to know your platform is chosen?"}
+  }}};

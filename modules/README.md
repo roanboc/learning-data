@@ -241,6 +241,11 @@ Source: [films/platform-and-solution-architecture](../films/platform-and-solutio
 - [One platform, or many](../films/platform-and-solution-architecture/3-one-platform-or-many/) — `one-platform-or-many`
 - [Where it meets the applications](../films/platform-and-solution-architecture/4-where-it-meets-the-applications/) — `where-it-meets-the-applications`
 - [Security all the way through](../films/platform-and-solution-architecture/5-security-all-the-way-through/) — `security-all-the-way-through`
+- [One solution, end to end](../films/platform-and-solution-architecture/6-one-solution-end-to-end/) — `one-solution-end-to-end`
+- [A road people choose](../films/platform-and-solution-architecture/7-a-road-people-choose/) — `a-road-people-choose`
+- [Built to change](../films/platform-and-solution-architecture/8-built-to-change/) — `built-to-change`
+
+Labs and assessments: [site/assets/platform-and-solution-architecture/learn.en.js](../site/assets/platform-and-solution-architecture/learn.en.js), [site/assets/platform-and-solution-architecture/learn.es.js](../site/assets/platform-and-solution-architecture/learn.es.js)
 
 ### AI and continuous architecture
 
@@ -250,6 +255,9 @@ Source: [films/ai-and-continuous-architecture](../films/ai-and-continuous-archit
 - [The AI platform](../films/ai-and-continuous-architecture/2-the-ai-platform/) — `the-ai-platform`
 - [What an agent may read](../films/ai-and-continuous-architecture/3-what-an-agent-may-read/) — `what-an-agent-may-read`
 - [A first draft, not a blank page](../films/ai-and-continuous-architecture/4-a-first-draft-not-a-blank-page/) — `a-first-draft-not-a-blank-page`
+- [Every change, checked](../films/ai-and-continuous-architecture/5-every-change-checked/) — `every-change-checked`
+
+Labs and assessments: [site/assets/ai-and-continuous-architecture/learn.en.js](../site/assets/ai-and-continuous-architecture/learn.en.js), [site/assets/ai-and-continuous-architecture/learn.es.js](../site/assets/ai-and-continuous-architecture/learn.es.js)
 
 ## Master and reference data
 

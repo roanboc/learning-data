@@ -1,0 +1,193 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:09.121
+Japón, el siglo XVIII. La gente común no puede viajar a su gusto, pero una peregrinación es difícil de negar.
+
+00:00:10.821 --> 00:00:15.047
+Y la gente dice: una vez en la vida, a Ise, al gran santuario.
+
+00:00:16.947 --> 00:00:21.644
+Desde Edo, es el Tōkaidō casi todo el trayecto, y luego el camino al sur, a Ise.
+
+00:00:23.544 --> 00:00:30.868
+Pero un campesino que nunca salió de su aldea no conoce el camino: dónde dormir, cuánto falta a la próxima posta, cuánto cuesta todo.
+
+00:00:32.568 --> 00:00:35.426
+Y el viaje cuesta más de lo que un solo hogar puede gastar.
+
+00:00:37.326 --> 00:00:42.981
+Los aldeanos necesitan una forma de ir que puedan seguir sin conocer el camino, y una forma de pagarla.
+
+00:00:45.081 --> 00:00:53.428
+Así que las aldeas forman grupos de peregrinación. Cada hogar aporta cada año, y cada año dos o tres, elegidos por sorteo, van por todos.
+
+00:00:55.328 --> 00:01:01.415
+Sacerdotes de Ise, los oshi, visitan esas aldeas cada año, con amuletos y calendarios.
+
+00:01:03.115 --> 00:01:08.531
+En Ise, los oshi alojan a los peregrinos en sus propias casas, y los guían a los santuarios.
+
+00:01:10.231 --> 00:01:15.906
+Y las guías de viaje listan cada posta del camino: qué distancia las separa, las posadas y lo que hay que ver.
+
+00:01:17.806 --> 00:01:24.513
+Nadie está obligado a ir. Pero el camino está trazado, pagado entre todos, y alguien los espera al final.
+
+00:01:26.613 --> 00:01:30.990
+Así que la gente común va: cientos de miles en un año cualquiera.
+
+00:01:32.490 --> 00:01:39.096
+En 1771, más de dos millones cruzan el río hacia Ise en pocos meses, contados en la barca del río.
+
+00:01:41.196 --> 00:01:49.374
+Más tarde, un relato cómico de dos viajeros camino a Ise causa un furor como ningún otro, y le siguen estampas de las postas del camino.
+
+00:01:51.274 --> 00:01:59.381
+En la empresa de energía, el último equipo que puso su primer producto de datos en la plataforma esperó seis semanas, y dos equipos se rindieron e hicieron lo suyo.
+
+00:02:00.881 --> 00:02:06.345
+Así que Ravi Menon hace de la plataforma un camino que los equipos eligen: la forma más fácil de hacerlo bien.
+
+00:02:14.045 --> 00:02:20.851
+Hace un año, el equipo de la red quería su primer producto de datos en la plataforma: los cortes programados, para el centro de llamadas.
+
+00:02:22.351 --> 00:02:28.237
+Hicieron falta once tickets: un espacio de trabajo, almacenamiento, una cuenta para su trabajo, y cada permiso que necesitaba.
+
+00:02:29.737 --> 00:02:32.735
+Cada uno esperó su turno en la fila del equipo de plataforma.
+
+00:02:34.435 --> 00:02:40.817
+Luego el equipo escribió su pipeline desde cero, y aprendió las reglas del catálogo cuando le devolvieron su primer pull request.
+
+00:02:42.517 --> 00:02:46.030
+Seis semanas, antes de que el centro de llamadas viera un solo corte programado.
+
+00:02:47.930 --> 00:02:54.977
+Otros dos equipos se rindieron. Servicios de campo tiene una base de datos en su propio servidor, y medición trabaja con planillas.
+
+00:02:56.677 --> 00:03:01.934
+Nadie hizo nada mal. La plataforma era el camino seguro, pero todavía no el fácil.
+
+00:03:03.634 --> 00:03:11.768
+Ravi podría ordenar que todos los equipos usen la plataforma. Pero una orden hace que la usen, no que la quieran, y el atajo encuentra cómo rodearla.
+
+00:03:16.868 --> 00:03:22.315
+Así que Ravi trata la plataforma como un producto, y a los equipos que construyen en ella como sus clientes.
+
+00:03:24.015 --> 00:03:29.307
+Su equipo se sienta con cada equipo de dominio, para ver qué necesita hacer, y qué se lo impide.
+
+00:03:31.207 --> 00:03:38.432
+Tres cosas salen una y otra vez: esperar tickets, no saber por dónde empezar, y aprender las reglas a fuerza de rechazos.
+
+00:03:40.732 --> 00:03:45.513
+Como los oshi visitaban las aldeas cada año, el equipo de plataforma va a los equipos.
+
+00:03:47.613 --> 00:03:53.197
+Servicios con clientes muestra cómo escribirlo: para quién es cada servicio, y qué necesita.
+
+00:03:58.097 --> 00:04:05.027
+Primero, un camino ya trazado. La plantilla de la que parte cada trabajo nuevo crece hasta una para todo un producto de datos.
+
+00:04:06.727 --> 00:04:12.454
+Un equipo llena un solo formulario: el nombre del producto, su responsable y qué contiene. Sin tickets.
+
+00:04:14.354 --> 00:04:18.386
+Minutos después, tiene un repositorio con todo lo que un producto de datos necesita.
+
+00:04:19.686 --> 00:04:26.948
+Un pipeline que corre, sus pruebas, un contrato para quienes lo leen, su entrada en el catálogo, permisos por rol, y su registro.
+
+00:04:29.048 --> 00:04:34.616
+El equipo escribe solo lo que es suyo: la lógica, en un pull request que revisa el equipo de datos.
+
+00:04:36.516 --> 00:04:41.551
+Un equipo puede salirse del camino donde necesite otra cosa. Esa parte queda entonces a su cargo.
+
+00:04:43.451 --> 00:04:46.796
+Así, la forma más rápida de tener un producto de datos es también la correcta.
+
+00:04:51.696 --> 00:04:56.361
+Las reglas vienen dentro del camino, así un equipo las cumple mientras trabaja, no al final.
+
+00:04:57.861 --> 00:05:06.129
+Los datos personales se clasifican antes de publicar nada. Las pruebas corren en cada pull request. Y nada sale a producción sin responsable.
+
+00:05:08.229 --> 00:05:12.162
+Así, ningún primer pull request vuelve por una regla que nadie mencionó.
+
+00:05:13.862 --> 00:05:18.005
+Barandas, no portones: mantienen al equipo en el camino, sin detenerlo.
+
+00:05:23.105 --> 00:05:29.413
+Luego una guía: cada paso del formulario al primer producto de datos, cuánto toma cada uno, y a quién preguntar.
+
+00:05:31.313 --> 00:05:35.267
+Se escribe a partir de las preguntas de los equipos, y crece con cada pregunta nueva.
+
+00:05:36.967 --> 00:05:40.768
+Y una pregunta en el canal de la plataforma recibe respuesta el mismo día.
+
+00:05:42.468 --> 00:05:48.554
+Como las guías de viaje listaban cada posta, las posadas y lo que había que ver, la guía lista cada paso del camino.
+
+00:05:53.654 --> 00:05:59.357
+En marzo, el equipo de medición lo intenta de nuevo, por el camino. El lunes por la mañana, llena el formulario.
+
+00:06:00.857 --> 00:06:07.478
+Para el almuerzo tiene su repositorio, y escribe su lógica: qué lecturas cuentan, y cómo se marcan las estimaciones.
+
+00:06:09.378 --> 00:06:13.744
+El martes, el equipo de datos revisa el pull request, y las pruebas pasan.
+
+00:06:15.444 --> 00:06:21.678
+El martes por la tarde, las lecturas de medidores revisadas están en el catálogo, con su responsable, listas para la red y comercialización.
+
+00:06:23.578 --> 00:06:27.489
+Dos días, no seis semanas. Y las planillas de medición se retiran.
+
+00:06:32.589 --> 00:06:36.206
+Ravi cuenta lo que le dice si la plataforma funciona como producto.
+
+00:06:37.506 --> 00:06:44.080
+Cuántos equipos eligen el camino, cuánto tarda un primer producto de datos, y qué dicen los equipos, consultados cada trimestre.
+
+00:06:45.980 --> 00:06:50.864
+Para diciembre, ocho de los once equipos de dominio lo eligieron, y a ninguno se lo ordenaron.
+
+00:06:52.764 --> 00:06:58.536
+Un primer producto de datos toma de dos a cuatro días, y nueve de cada diez equipos le dirían a otro que lo use.
+
+00:07:00.236 --> 00:07:05.228
+Servicios de campo pasa sus trabajos a la plataforma, y su propio servidor se apaga.
+
+00:07:06.928 --> 00:07:10.883
+Y el equipo de medición agrega una prueba a la plantilla, así todos los equipos la tienen.
+
+00:07:12.583 --> 00:07:18.217
+En Ise, a los peregrinos los contaban en la barca del río. Aquí, Ravi cuenta quién elige el camino.
+
+00:07:22.917 --> 00:07:26.122
+Esta es la plataforma como producto, en el mapa de Tomás.
+
+00:07:27.422 --> 00:07:33.517
+El camino es uno de los servicios de tecnología de la plataforma de datos: un producto de datos nuevo, desde la plantilla.
+
+00:07:35.217 --> 00:07:39.357
+Sirve a cada producto de datos hecho con él, cada uno a cargo de su dominio.
+
+00:07:41.057 --> 00:07:49.082
+Y la meta, que los equipos elijan la plataforma, se realiza con dos resultados: ocho equipos de once, y un primer producto de datos en días.
+
+00:07:53.382 --> 00:08:00.611
+A nadie lo obligaban a ir a Ise. El camino estaba trazado, pagado entre todos, y alguien los esperaba al final.
+
+00:08:02.311 --> 00:08:07.354
+En la plataforma de datos, los equipos eligen el camino porque es la forma más fácil de hacerlo bien.
+
+00:08:08.854 --> 00:08:15.430
+Un camino ya trazado, las reglas incluidas, una guía, y alguien a quien preguntar. Y alguien cuenta quién lo elige.
+
+00:08:17.130 --> 00:08:18.713
+Sigue: hecha para cambiar.

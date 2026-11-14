@@ -1737,8 +1737,8 @@ function pic(ctx,img,x,y,w,h,edge,o){o=o||{};if(!img)return;glass(ctx,x-8,y-8,w+
   if(o.label)T(ctx,o.label,x,y+h+32,{w:600,size:17,color:rgba(SOFT,1)});}
 // words wrapped to a width
 function wrapT(ctx,s,w,size,wt){const words=s.split(" "),lines=[];let cur="";words.forEach(x=>{const tr=cur?cur+" "+x:x;if(tw(ctx,tr,size,wt||600)>w&&cur){lines.push(cur);cur=x;}else cur=tr;});if(cur)lines.push(cur);return lines;}
-// a message in the conversation: from the author (warm, left edge) or from Claude (cool)
-function bubble(ctx,x,y,w,text,from,a,o){o=o||{};if(a<=0)return;const c=from==="author"?WARM:COOL,size=o.size||24,lines=wrapT(ctx,text,w-48,size,o.wt||600),lh=size*1.35,h=lines.length*lh+(o.kicker===false?30:62);
+// a message in the conversation: from the author (warm, left edge) or from Claude (cool); wrapped at the size its words are drawn, which a phone raises to 28 px
+function bubble(ctx,x,y,w,text,from,a,o){o=o||{};if(a<=0)return;const c=from==="author"?WARM:COOL,size=phSz(ctx,o.size||24),lines=wrapT(ctx,text,w-48,size,o.wt||600),lh=size*1.35,h=lines.length*lh+(o.kicker===false?30:62);
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,c,{glow:16,ea:0.55,fill:"rgba(8,12,22,0.94)"});ctx.fillStyle=rgba(c,0.95);rr(ctx,x,y+14,4,h-28,2);ctx.fill();
     if(o.kicker!==false)T(ctx,o.kicker||(from==="author"?"the author":"Claude"),x+24,y+34,{w:800,size:16,color:rgba(c,1)});
     const shown=o.type==null?1:clamp(o.type,0,1),n=Math.ceil(text.length*shown);let used=0;

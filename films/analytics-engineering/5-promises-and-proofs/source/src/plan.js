@@ -213,7 +213,7 @@ function pp_consumer(ctx,x,y,r,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
 
 // a decision tag, in its colour: k is 0 fix at source, 1 rule in the model, 2 accept and document
 const PP_DECS=["fix","rule","accept"];  // the decisions' short names, for the register on a phone (the scene names them in full first)
-function pp_dtag(ctx,x,y,k,a,o){o=o||{};if(a<=0.01)return 0;const[s0,c]=PP_DEC[k],s=o.short?PP_DECS[k]:s0,sz=o.size||20,w=tw(ctx,s,sz,700)+(o.dot===false?28:46),h=sz+18,X=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
+function pp_dtag(ctx,x,y,k,a,o){o=o||{};if(a<=0.01)return 0;const[s0,c]=PP_DEC[k],s=o.short?PP_DECS[k]:s0,sz=phSz(ctx,o.size||20),w=tw(ctx,s,sz,700)+(o.dot===false?28:46),h=sz+18,X=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
   withA(ctx,a,()=>{if(o.hi)glow(ctx,X+w/2,y,w*0.6,c,0.35*o.hi);glass(ctx,X,y-h/2,w,h,h/2,c,{glow:10,ea:0.9,fill:"rgba(8,12,22,0.95)"});if(o.dot!==false){ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(X+18,y,6,0,TAU);ctx.fill();}
     T(ctx,s,X+(o.dot===false?14:32),y+sz*0.35,{w:700,size:sz,color:rgba(mix(INK,c,0.25),1)});});return w;}
 
@@ -225,7 +225,7 @@ function pp_cred(ctx,x,y,w,h,key,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0
       ctx.fillStyle=rgba(cc,0.9);ctx.beginPath();ctx.arc(x+34,y+38,14,0,TAU);ctx.fill();ctx.fillStyle="rgba(7,12,24,1)";ctx.beginPath();ctx.arc(x+34,y+38,6,0,TAU);ctx.fill();
       T(ctx,o.kind||"microcredential",x+58,y+44,{w:600,size:18,color:rgba(SOFT,1)});T(ctx,name,x+22,y+88,{w:800,size:22});T(ctx,key,x+22,y+124,{f:"mono",w:500,size:18,color:rgba(cc,1)});});
     if(f>0&&bk<=0){withA(ctx,fin(f,0.5,0.5),()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(SOFT,0.5);ctx.lineWidth=2;rr(ctx,x,y,w,h,16);ctx.stroke();ctx.restore();T(ctx,"deleted",x+w/2,y+h/2+8,{w:700,size:20,align:"center",color:rgba(SOFT,0.8)});});}
-    if(bk>0)kt_rstamp(ctx,x+w/2,y+h-24,"revoked · 12 Aug 2026",BAD,1,clamp((bk-0.3)/0.7,0,1),{size:18,rot:-0.06});});}
+    if(bk>0)kt_rstamp(ctx,x+w/2,y+h-24,"revoked · 12 Aug 2026",BAD,1,clamp((bk-0.3)/0.7,0,1),{size:phSz(ctx,18),rot:-0.06});});}
 
 // a box for a model that isn't built yet: a dashed outline, its name, and its layer's colour
 function pp_outline(ctx,x,y,w,h,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,w*0.6,col,0.3*o.hi);
@@ -284,7 +284,7 @@ const PP_REG={x:140,y:150,w:1400,rh:56,cols:[60,420,380,540]};
 // o.hiRow {i:0..1} glows a row; o.ticks {i:0..1} gold ticks at the row's end; o.gone {i:0..1} fades a row out of the register, struck through, once its gap is settled
 // On a phone the columns are as wide as their words, and the decisions take their short names
 function pp_register(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const m=phMin(ctx),fs=phSz(ctx,20),hh=118,p=o.p==null?10:o.p;let R=PP_REG;
-  if(m){const c1=Math.max(...PP_GAPS.map(g=>tw(ctx,g[0],fs,600)))+36,c2=Math.max(...PP_GAPS.map(g=>tw(ctx,g[1],fs,600)))+36,w=Math.max(R.w,56+c1+c2+300);R=Object.assign({},R,{x:Math.min(R.x,1540-w),w,cols:[56,c1,c2,w-56-c1-c2]});}
+  if(m){const c1=Math.max(...PP_GAPS.map(g=>tw(ctx,g[0],fs,600)))+36,c2=Math.max(...PP_GAPS.map(g=>tw(ctx,g[1],fs,600)))+36,c3=Math.max(300,Math.ceil(Math.max(...PP_GAPS.map(g=>g[2].reduce((v,k)=>v+tw(ctx,PP_DECS[k],phSz(ctx,18),700)+54,0))))+55),w=Math.max(R.w,56+c1+c2+c3);R=Object.assign({},R,{x:Math.min(R.x,1540-w),w,cols:[56,c1,c2,w-56-c1-c2]});}
   const h=hh+R.rh*10+14;
   withA(ctx,a,()=>{glass(ctx,R.x,R.y,R.w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
     ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,R.x+18,R.y+22,10,10,3);ctx.fill();T(ctx,"requirements/ · the open gaps",R.x+38,R.y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
@@ -318,7 +318,7 @@ function pp_gap1(ctx,x,y,t,o){o=o||{};if(phMin(ctx))return pp_gap1P(ctx,x,y,t,o)
 
 // gap 1 on a phone: the same table, its cells' words wrapped to the column at the phone's size, the card as tall as they need;
 // returns the same {w, h, dec} (h is what the scene places the decisions under)
-function pp_gap1H(ctx){const fs=phSz(ctx,20),C=[50,330,470,610,280],lh=Math.round(fs*1.25),wr=(s,j,wt)=>phWrap(ctx,s,C[j]-32,fs,wt||600);
+function pp_gap1H(ctx){const fs=phSz(ctx,20),C=[50,340,430,620,300],lh=Math.round(fs*1.25),wr=(s,j,wt)=>phWrap(ctx,s,C[j]-32,fs,wt||600);
   const E=wr("A revoked credential is known as revoked.",1),R=wr("The learning platform has no revocation flag. It deletes a revoked badge.",2),D=wr("a badge that disappears is revoked from the day the platform stopped showing it.",3);
   const n=Math.max(E.length,R.length,D.length+2,2);return{C,fs,lh,E,R,D,h:120+n*lh+24};}
 function pp_gap1P(ctx,x,y,t,o){const a=o.a==null?1:o.a,G=pp_gap1H(ctx),{C,fs,lh,h}=G,w=C.reduce((s,c)=>s+c,0),lit=o.lit||{};x=Math.min(x,1880-w);if(a<=0.01)return{w,h,dec:[x+C[0]+C[1]+C[2],y+h]};
@@ -368,7 +368,7 @@ function pp_mart(ctx,x,y,w,h,kind,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
     if(o.chips>0)withA(ctx,o.chips,()=>{tag(ctx,x+24,y+h-30,"contract: enforced",TRUST,{size:18});});});}
 
 // a short flow of boxes joined by arrows, centred on cx: items [[text, colour, dashed]], q[i] (0..1) brings box i in
-function pp_flow(ctx,cx,y,items,q,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sz=o.size||22,h=sz+40,gap=o.gap||84,ws=items.map(([s])=>tw(ctx,s,sz,700)+48),tot=ws.reduce((s_,w_)=>s_+w_,0)+gap*(items.length-1);
+function pp_flow(ctx,cx,y,items,q,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sz=phSz(ctx,o.size||22),h=sz+40,gap=o.gap||84,ws=items.map(([s])=>tw(ctx,s,sz,700)+48),tot=ws.reduce((s_,w_)=>s_+w_,0)+gap*(items.length-1);
   withA(ctx,a,()=>{let x=cx-tot/2;items.forEach(([s,col,dash],i)=>{const qi=q[i]||0,w_=ws[i];if(qi>0.01)withA(ctx,qi,()=>{const yy=y-(1-spring(qi*1.6))*14;
       if(dash){ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,x,yy-h/2,w_,h,14);ctx.fill();ctx.save();ctx.setLineDash([7,6]);ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=1.8;rr(ctx,x,yy-h/2,w_,h,14);ctx.stroke();ctx.restore();}
       else glass(ctx,x,yy-h/2,w_,h,14,col,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});

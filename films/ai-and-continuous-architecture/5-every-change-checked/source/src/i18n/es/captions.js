@@ -1,0 +1,72 @@
+/* Every change, checked: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
+   Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
+   The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
+   Words, as in the series' films before it: Babilonia, Nabopolasar, la empresa for the utility, el agente del mapa, un responsable for an owner,
+   quien dirige comercialización for the head of retail, la red for the network, comercialización for retail and una comercializadora for a retailer,
+   el muro for the wall between them, una capacidad, en un ticket, el trabajo programado for planned work (as the other films say it), las cuadrillas
+   for the crews, la tarifa social, el sistema de clientes, el intercambio seguro con la agencia, el centro de contacto; and, new here, el muro del río
+   for the river wall, el ladrillo cocido (baked brick), el canto del ladrillo for its edge, estampar for stamping, el terraplén del río Arahtu, un tramo
+   for a stretch of wall, comprobar and una comprobación for checking and a check, recorrer and el recorrido for walking a change, funciones de aptitud
+   for fitness functions (as Spanish editions of the books on evolutionary architecture say it), los puntos de suministro, un servicio de SMS for
+   the texting service, lo que está en marcha for the running estate, enmascarados for masked. Numbers as the series writes them: 2,600 años, 140
+   cambios, 1,900 hogares, 3,400 hogares. The next film, Kept alive, is "mantenerla viva" (the architecture). */
+window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
+"Babylon, over 2,600 years ago. Along the river, King Nabopolassar's workmen were building a wall of baked brick, to keep its water out.":"Babilonia, hace más de 2,600 años. Junto al río, los obreros del rey Nabopolasar alzaban un muro de ladrillo cocido para frenar su agua.",
+"A wall like that was never done: king after king repaired it, on the same line, for centuries.":"Un muro así nunca se terminaba: rey tras rey lo reparó, sobre la misma línea, durante siglos.",
+"Once a brick was laid among millions, nobody could tell who had made it, or what it was for.":"Una vez puesto entre millones, nadie podía saber quién había hecho un ladrillo, ni para qué era.",
+"And a king feared his work would be forgotten, or his words removed by a king who came after him.":"Y un rey temía que su obra se olvidara, o que un rey posterior borrara sus palabras.",
+"Every stretch of wall needed to say who had built it, and what for.":"Cada tramo del muro tenía que decir quién lo había construido, y para qué.",
+"So on the edges of his baked bricks, his workmen stamped or wrote the king's name, and the work the brick was for.":"Así que en el canto de sus ladrillos cocidos, sus obreros estampaban o escribían el nombre del rey, y la obra para la que era.",
+"One reads: \"Nabopolassar, king of Babylon, … the one who built the embankment of the Arahtu River for the god Marduk, his lord.\"":"Uno dice: «Nabopolasar, rey de Babilonia, … el que construyó el terraplén del río Arahtu para el dios Marduk, su señor».",
+"About two and a half thousand years later, archaeologists dug out the river wall, and its bricks still said which king built each stretch.":"Unos dos mil quinientos años después, los arqueólogos desenterraron el muro del río, y sus ladrillos aún decían qué rey hizo cada tramo.",
+"In one stretch alone, they mapped sixteen of Nabopolassar's bricks, still in place.":"Solo en un tramo, situaron en su plano dieciséis ladrillos de Nabopolasar, aún en su sitio.",
+"At the utility today, every element on the map says who owns it and where it came from.":"Hoy, en la empresa, cada elemento del mapa dice quién es su responsable y de dónde viene.",
+"So every change can be checked, and walked through what it touches, before anyone builds.":"Así, cada cambio puede comprobarse, y recorrerse por todo lo que toca, antes de que nadie construya.",
+"Tomás's map changes every day now: 140 changes last month, each confirmed by its owner.":"El mapa de Tomás ahora cambia cada día: 140 cambios el mes pasado, cada uno confirmado por su responsable.",
+"Planned work is when the network's crews switch a street off, to mend or replace its lines. Households get a letter first.":"En un trabajo programado, las cuadrillas de la red cortan la luz de una calle para reparar o cambiar sus líneas. Antes llega una carta.",
+"Last year, planned work moved to a new table, and the letters kept reading the old one.":"El año pasado, el trabajo programado pasó a una tabla nueva, y las cartas siguieron leyendo la antigua.",
+"For three weeks, 1,900 households got the wrong date. On the real day, their power went off without warning.":"Durante tres semanas, 1,900 hogares recibieron la fecha equivocada. El día real, se quedaron sin luz sin aviso.",
+"Nobody had done anything wrong. Nobody could see what read the old table.":"Nadie había hecho nada mal. Nadie podía ver qué leía la tabla antigua.",
+"Now the head of retail asks, in a ticket, for a text to each household two days before planned work.":"Ahora, quien dirige comercialización pide, en un ticket, un mensaje a cada hogar dos días antes del trabajo programado.",
+"Before anyone builds it, Tomás needs to know what it touches, and who must agree.":"Antes de que nadie lo construya, Tomás necesita saber qué toca, y quién debe estar de acuerdo.",
+"Like a stamped brick, every element says who owns it and where it came from. So the map can be tested, as code is, on every change.":"Como un ladrillo estampado, cada elemento dice su responsable y su origen. Así el mapa puede probarse, como el código, en cada cambio.",
+"Every element has an owner and a source. Every capability is realised by a process or a system.":"Cada elemento tiene un responsable y una fuente. Cada capacidad la realiza un proceso o un sistema.",
+"Every data object stands for a business object. No element is left unlinked, and none is there twice.":"Cada objeto de datos representa un objeto de negocio. Ningún elemento queda sin enlazar, y ninguno está dos veces.",
+"And every rule has a home, and a case that must fail.":"Y cada regla tiene un lugar propio, y un caso que debe fallar.",
+"A check that has never failed may be checking nothing. So each rule's check is shown a change that breaks it, and must stop it.":"Una comprobación que nunca falló puede no comprobar nada. Por eso, a cada una se le muestra un cambio que rompe su regla, y debe pararlo.",
+"Sending the network's list of homes with solar panels to retail must fail. It does.":"Enviar a comercialización la lista de la red de hogares con paneles solares debe fallar. Y falla.",
+"In software, checks like these are called fitness functions: tests that the architecture still holds.":"En software, comprobaciones así se llaman funciones de aptitud: pruebas de que la arquitectura sigue en pie.",
+"A change that fails one waits, until it's fixed, or its owner says why.":"Un cambio que falla en una espera, hasta corregirse o hasta que su responsable diga por qué.",
+"Walking a change through every layer took Tomás a day, for the social tariff. The map agent can draft a walk in minutes.":"Recorrer un cambio por cada capa le llevó a Tomás un día, con la tarifa social. El agente del mapa redacta un recorrido en minutos.",
+"But before anyone relies on its walks, it's tested on a change whose answer is known.":"Pero antes de que nadie confíe en sus recorridos, se lo prueba con un cambio cuya respuesta se conoce.",
+"The social tariff touched fourteen elements, and five owners had to agree.":"La tarifa social tocó catorce elementos, y cinco responsables tuvieron que estar de acuerdo.",
+"The first time, the agent finds thirteen. It misses the secure exchange that carries the agency's answers.":"La primera vez, el agente encuentra trece. Se le escapa el intercambio seguro que trae las respuestas de la agencia.",
+"On the map, nothing linked the agreement to it. Tomás knew it from his walk, but nobody had drawn the line.":"En el mapa, nada unía el acuerdo con él. Tomás lo sabía por su recorrido, pero nadie había trazado la línea.",
+"The gap was the map's. So the line is drawn, and a check added: every agreement with a partner says how its data travels.":"El hueco era del mapa. Así que se traza la línea, y se suma una comprobación: cada acuerdo con un socio dice cómo viajan sus datos.",
+"Run again, it finds all fourteen, and the five owners. The test runs again whenever its model or its instructions change.":"De nuevo, encuentra los catorce, y los cinco responsables. La prueba se repite cada vez que cambian su modelo o sus instrucciones.",
+"Now the new change. The agent walks it down the map, from the ticket to the tables.":"Ahora, el cambio nuevo. El agente lo recorre mapa abajo, del ticket a las tablas.",
+"Planned work is the network's: Grace's teams plan it, street by street.":"El trabajo programado es de la red: los equipos de Grace lo planifican, calle por calle.",
+"Phone numbers are retail's: each retailer holds its own customers'.":"Los teléfonos son de comercialización: cada comercializadora guarda los de sus clientes.",
+"So the network tells every retailer, on the same terms, which homes lose power and when, and each retailer texts its own customers.":"Así, la red avisa a cada comercializadora, en iguales condiciones, qué hogares pierden la luz y cuándo, y cada una escribe a sus clientes.",
+"Down to the tables: the planned work, the supply points it cuts off, and each retailer's customer contacts.":"Hasta las tablas: el trabajo programado, los puntos de suministro que corta, y los contactos de clientes de cada comercializadora.",
+"One element is new: a texting service, with no owner yet. The checks stop there, until the head of retail takes it.":"Hay un elemento nuevo: un servicio de SMS, sin responsable. Las comprobaciones paran ahí hasta que lo asume quien dirige comercialización.",
+"It lists who must agree: Grace, the head of retail, Ama for the rule at the wall, and Inés for the data between them.":"Enumera quién debe estar de acuerdo: Grace, quien dirige comercialización, Ama por la regla del muro, e Inés por los datos entre ambas.",
+"Each with its ID and its evidence, so a person can check it.":"Cada uno con su ID y su evidencia, para que una persona pueda comprobarlo.",
+"The map and the code say how things are meant to run. Only the running estate shows how they do.":"El mapa y el código dicen cómo deberían funcionar las cosas. Solo lo que está en marcha muestra cómo funcionan.",
+"So the walk is checked against the estate itself: what reads each table, and what runs each night.":"Así que el recorrido se contrasta con lo que está en marcha: qué lee cada tabla, y qué corre cada noche.",
+"The agent reads there as it reads the map: read-only, with personal and sensitive data masked.":"El agente lee ahí como lee el mapa: solo lectura, con los datos personales y sensibles enmascarados.",
+"It finds a reader the map doesn't show: the contact centre's software keeps its own copy of phone numbers.":"Encuentra un lector que el mapa no muestra: el software del centro de contacto guarda su propia copia de los teléfonos.",
+"When a household calls with a new number, the copy changes. The customer system never hears of it.":"Cuando un hogar llama con un número nuevo, la copia cambia. El sistema de clientes nunca se entera.",
+"The data team counts the difference: one number in eleven. The texts would have gone to old numbers.":"El equipo de datos cuenta la diferencia: un número de cada once. Los mensajes habrían ido a números viejos.",
+"The head of retail decides: the customer system is the source, and the contact centre's changes go back to it first.":"Quien dirige comercialización decide: el sistema de clientes es la fuente, y los cambios del centro de contacto vuelven primero a él.",
+"And the copy goes on the map, with an owner.":"Y la copia entra en el mapa, con un responsable.",
+"In Babylon, the river wall said, brick by brick, who had built each stretch, and what for.":"En Babilonia, el muro del río decía, ladrillo a ladrillo, quién había construido cada tramo, y para qué.",
+"When Nabopolassar found an older king's inscription in a wall, in his own words, he did not change its location.":"Cuando Nabopolasar halló en un muro la inscripción de un rey anterior, según sus propias palabras, no cambió su lugar.",
+"And he asked the kings after him to keep his words with theirs.":"Y pidió a los reyes futuros que guardaran sus palabras junto a las suyas.",
+"At the utility, every element carries its owner and its source, so every change is checked, and walked, before anyone builds.":"En la empresa, cada elemento lleva su responsable y su fuente, así que cada cambio se comprueba, y se recorre, antes de construir.",
+"In April, the first texts go out: 3,400 households, each two days before the crews reach its street.":"En abril salen los primeros mensajes: 3,400 hogares, cada uno dos días antes de que las cuadrillas lleguen a su calle.",
+"Every one has the date the crews have.":"Cada uno tiene la fecha que tienen las cuadrillas.",
+"Give every element an owner and a source, and test the map on every change, with a case that must fail.":"Da a cada elemento un responsable y una fuente, y prueba el mapa en cada cambio, con un caso que debe fallar.",
+"Walk each change through all it touches, check it against what's really running, and let the owners decide.":"Recorre cada cambio por todo lo que toca, contrástalo con lo que de verdad está en marcha, y deja decidir a los responsables.",
+"Next: kept alive.":"Luego: mantenerla viva."
+});

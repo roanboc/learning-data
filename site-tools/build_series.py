@@ -739,9 +739,8 @@ def series_nav(lg, f, films_, R, rel):
 
 
 def project_url(f, path):
-    """A file or folder of the series' example project on GitHub (its "project" folder's, in SERIES): a folder ends with /."""
-    kind = "tree" if path.endswith("/") or not path else "blob"
-    return f'{REPO}/{kind}/main/films/{f["series"].get("project", f["series"]["dir"])}/project/{path}'.rstrip("/")
+    """A file or folder of the example project on GitHub, in its own repository (proj_url): a folder ends with /."""
+    return proj_url(path)
 
 
 def project_section(lg, f):
@@ -757,7 +756,7 @@ def project_section(lg, f):
     for cid, _ in f["chapters"]:
         paths = repo.get(cid)
         if paths:
-            links = " ".join(f'<a href="{project_url(f, x)}"><code>{E(x)}</code></a>' for x in paths)
+            links = " ".join(f'<a href="{project_url(f, x)}"><code>{E(proj_shown(x))}</code></a>' for x in paths)
             rows.append(f'<li><b>{E(names[cid])}</b><span>{links}</span></li>')
     return (f'<section class="module" id="in-the-project" aria-labelledby="project-h">\n<div class="mhead"><div><h2 id="project-h">{T(lg, "See it in the project", "Míralo en el proyecto")}</h2>'
             f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}{how}</p></div></div>\n'
@@ -1300,12 +1299,15 @@ def route_box(lg, R, RL):
 
 
 # ---------------------------------------------------------------- the example dbt project
-# One dbt project, in films/analytics-engineering/project/, is behind many films: In the weeds builds it, and later series
+# One dbt project, in its own repository (PROJECT_REPO), is behind many films: In the weeds builds it, and later series
 # add to it. A film "shows" it when its site.json has "repo" (its chapters' files, as on its See it in the project). Its page,
 # dbt-project/, says what it is, how to run it, where things live, and which films show which files; the learning route marks
 # each topic with such films with the project's icon, readable on a closed station, and opens on a box that links to it.
 PROJECT_DIR = "analytics-engineering"
 PROJECT_PATH = "dbt-project/"
+# The project's own repository: three teams' folders, the architecture, governance and the data project (the dbt project)
+PROJECT_REPO = "https://github.com/roanboc/learning-data-project"
+PROJECT_FOLDER = "30-data-project/"
 # a box with its lid: the project's mark on the route, the list and its page (no product's logo)
 PROJECT_ICON = ('<svg class="pj-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z"/>'
                 '<path d="M3.6 6.3L10 10l6.4-3.7M10 10v7.4"/></svg>')
@@ -1320,7 +1322,7 @@ PROJECT_TEXT = {
         run_h="Run it yourself",
         laptop="On your laptop", laptop_p="Python 3.11 or later, no account. dbt loads the sample data, builds every model and runs every test, on DuckDB.",
         dbx="On Databricks", dbx_p="The same code, with dbt Cloud or dbt Core. Load the sample files into Unity Catalog first; the README has the steps.",
-        where_h="Where things live", where_p="The main folders, and what each holds. Each link opens it on GitHub.",
+        where_h="Where things live", where_p="The project has a repository of its own, with three folders that are usually three teams' own: the enterprise architecture, data governance and the data project. Below, the main folders, and what each holds. Each link opens it on GitHub.",
         films_h="Films that show it", films_p="{n} films show its real files on screen. Open a film to see, chapter by chapter, which files it shows and where they are.",
         files1="1 file", files="{n} files",
         icon="Shows the example dbt project",
@@ -1336,7 +1338,7 @@ PROJECT_TEXT = {
         run_h="Ejecútalo tú",
         laptop="En tu computadora", laptop_p="Python 3.11 o posterior, sin cuenta. dbt carga los datos de muestra, construye cada modelo y corre cada prueba, en DuckDB.",
         dbx="En Databricks", dbx_p="El mismo código, con dbt Cloud o dbt Core. Primero carga los archivos de muestra en Unity Catalog; el README tiene los pasos.",
-        where_h="Dónde está cada cosa", where_p="Las carpetas principales y lo que guarda cada una. Cada enlace la abre en GitHub.",
+        where_h="Dónde está cada cosa", where_p="El proyecto tiene un repositorio propio, con tres carpetas que suelen ser de tres equipos: la arquitectura empresarial, el gobierno de datos y el proyecto de datos. Abajo, las carpetas principales y lo que guarda cada una. Cada enlace la abre en GitHub.",
         films_h="Películas que lo muestran", films_p="{n} películas muestran en pantalla sus archivos reales. Abre una película para ver, capítulo a capítulo, qué archivos muestra y dónde están.",
         files1="1 archivo", files="{n} archivos",
         icon="Muestra el proyecto de dbt de ejemplo",
@@ -1345,6 +1347,8 @@ PROJECT_TEXT = {
 }
 # the main folders of the project, and what each holds
 PROJECT_PARTS = [
+    (["../10-enterprise-architecture/"], "The university's enterprise architecture: the questions its data answers, every area and data domain, and only what those questions need below them.",
+     "La arquitectura empresarial de la universidad: las preguntas que responden sus datos, cada área y dominio de datos, y debajo solo lo que esas preguntas necesitan."),
     (["models/"], "What's built, by domain: staging, the core tables every team shares, and the marts each team reads.",
      "Lo que se construye, por dominio: staging, las tablas centrales que comparten todos y los marts que lee cada equipo."),
     (["sources/"], "What comes in from the three systems: tables, keys, freshness and known limits.",
@@ -1359,8 +1363,8 @@ PROJECT_PARTS = [
      "La evidencia: perfilar las fuentes, una decisión de diseño y la revisión del resultado."),
     (["exposures/"], "Who uses each output: dashboards, apps, forecasts and agents.",
      "Quién usa cada resultado: tableros, aplicaciones, pronósticos y agentes."),
-    (["governance/"], "The glossary, owners, the architecture map, data products, contracts and agents' mandates.",
-     "El glosario, los responsables, el mapa de arquitectura, los productos de datos, los contratos y los mandatos de los agentes."),
+    (["governance/"], "Data governance's own folder, beside the project: the glossary, owners, the architecture map, information assets, data products, contracts, metrics and agents' mandates.",
+     "La carpeta propia de gobierno de datos, junto al proyecto: el glosario, los responsables, el mapa de arquitectura, los activos de información, los productos de datos, los contratos, las métricas y los mandatos de los agentes."),
     (["docs/"], "How the work is done: the process, conventions, decisions and the quality scorecard.",
      "Cómo se hace el trabajo: el proceso, las convenciones, las decisiones y el tablero de calidad."),
     (["AGENTS.md", "skills/"], "What an AI agent may and may not do here, and the skills it uses.",
@@ -1372,10 +1376,29 @@ PROJECT_PARTS = [
 ]
 
 
-def proj_url(path=""):
-    """A file or folder of the example project on GitHub: a folder ends with /."""
+def proj_path(path=""):
+    """Where a path the films name lives in the project's repository. The films name the data project's files from its
+    own folder (models/, AGENTS.md) and governance's as governance/...: data governance has its own folder now."""
+    if path.startswith("governance/"):
+        return "20-data-governance/" + path[len("governance/"):]
+    if path.startswith("../"):  # the repository's other folders, beside the data project
+        return path[len("../"):]
+    if path == "CODEOWNERS":  # GitHub reads it only at the repository's root, in .github/ or in docs/
+        return ".github/CODEOWNERS"
+    return PROJECT_FOLDER + path
+
+
+def proj_shown(path):
+    """A path as a page shows it: the data project's from its folder, as the films do; governance's from the repository."""
+    return proj_path(path) if path.startswith(("governance/", "../")) else path
+
+
+def proj_url(path="", root=False):
+    """A file or folder of the example project on GitHub, in its own repository: a folder ends with /. root: the repository."""
+    if root:
+        return PROJECT_REPO
     kind = "tree" if path.endswith("/") or not path else "blob"
-    return f'{REPO}/{kind}/main/films/{PROJECT_DIR}/project/{path}'.rstrip("/")
+    return f'{PROJECT_REPO}/{kind}/main/{proj_path(path)}'.rstrip("/")
 
 
 def route_topics():
@@ -1422,14 +1445,14 @@ def project_page(lg):
     RL = R if lg == "en" else R[3:]
     groups = project_films(); n = sum(len(fs) for _, rows in groups for _, fs in rows)
     posters = [f'<img src="{R}assets/{f["key"]}-poster.jpg" alt="">' for _, rows in groups for _, fs in rows for f in fs[:1]]
-    parts = "\n".join(f'<li><b>' + " ".join(f'<a href="{proj_url(p)}"><code>{E(p)}</code></a>' for p in ps) + f'</b><span>{E(T(lg, en, es))}</span></li>'
+    parts = "\n".join(f'<li><b>' + " ".join(f'<a href="{proj_url(p)}"><code>{E(proj_shown(p))}</code></a>' for p in ps) + f'</b><span>{E(T(lg, en, es))}</span></li>'
                       for ps, en, es in PROJECT_PARTS)
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{"".join((posters * 2)[:8])}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow crumbs"><a href="{RL}topics/">{T(lg, "Topics", "Temas")}</a></p>\n<h1>{E(P["h1"])}</h1>\n<p class="lead">{E(P["lead"])}</p>\n'
-            f'<p class="stop-nav"><a class="btn primary" href="{proj_url()}">{E(P["repo"])}</a><a class="btn" href="{proj_url("README.md")}">{E(P["run"])}</a></p>\n</section>\n\n'
+            f'<p class="stop-nav"><a class="btn primary" href="{proj_url(root=True)}">{E(P["repo"])}</a><a class="btn" href="{proj_url("README.md")}">{E(P["run"])}</a></p>\n</section>\n\n'
             f'<section class="module" id="what" aria-labelledby="what-h">\n<div class="mhead"><div><h2 id="what-h">{E(P["what_h"])}</h2><p>{E(P["what"])}</p></div></div>\n</section>\n\n'
             f'<section class="module" id="run" aria-labelledby="run-h">\n<div class="mhead"><div><h2 id="run-h">{E(P["run_h"])}</h2></div></div>\n<div class="pj-run">\n'
-            f'<div><h3>{E(P["laptop"])}</h3><p>{E(P["laptop_p"])}</p><pre><code>cd films/{PROJECT_DIR}/project\npip install -r requirements.txt\ndbt build --profiles-dir .</code></pre></div>\n'
+            f'<div><h3>{E(P["laptop"])}</h3><p>{E(P["laptop_p"])}</p><pre><code>git clone {PROJECT_REPO}\ncd learning-data-project/30-data-project\npip install -r requirements.txt\ndbt build --profiles-dir .</code></pre></div>\n'
             f'<div><h3>{E(P["dbx"])}</h3><p>{E(P["dbx_p"])}</p><pre><code>pip install -r requirements-databricks.txt\ndbt build --target databricks --profiles-dir .</code></pre></div>\n'
             f'</div>\n<p class="film-links"><a href="{proj_url("README.md")}">{E(P["run"])}</a></p>\n</section>\n\n'
             f'<section class="module" id="where" aria-labelledby="where-h">\n<div class="mhead"><div><h2 id="where-h">{E(P["where_h"])}</h2><p>{E(P["where_p"])}</p></div></div>\n'
@@ -1445,7 +1468,7 @@ def project_page(lg):
                 uniq = {p for ps in repo.values() for p in ps}
                 cnt = P["files1"] if len(uniq) == 1 else P["files"].format(n=len(uniq))
                 title = f["title"] if lg == "en" else f["site"].get("title_es", f["title"])
-                rws = "\n".join(f'<li><b>{E(names[cid])}</b><span>' + " ".join(f'<a href="{proj_url(p)}"><code>{E(p)}</code></a>' for p in repo[cid]) + '</span></li>'
+                rws = "\n".join(f'<li><b>{E(names[cid])}</b><span>' + " ".join(f'<a href="{proj_url(p)}"><code>{E(proj_shown(p))}</code></a>' for p in repo[cid]) + '</span></li>'
                                 for cid, _ in f["chapters"] if repo.get(cid))
                 body += (f'<li><details><summary><span class="pj-ft">{E(title)}</span><small>{num(lg, f)} · {E(cnt)}</small></summary>\n'
                          f'<p class="film-links"><a href="{RL}{f["path"]}">{T(lg, "Watch the film", "Ver la película")}</a></p>\n'

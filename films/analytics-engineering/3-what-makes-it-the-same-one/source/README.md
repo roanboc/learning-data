@@ -14,7 +14,7 @@
 | `tools/score.py` | The film's music and sounds: low divided strings in E-flat major, C minor and a bassoon line for the past, and the series' mark, 1-4-5-8, on a soft vibraphone at the title and the end. Nothing loops except a low, muted pulse under the wrong merge, and each effect (a caliper click, the drawer, knocks, muffled keys, paper, felt notes, a low stamp) fires at the same moment, with the same word and offset, as the thing it belongs to in `src/scenes.js`: change one, change both. |
 | `tools/` | Each tool runs the series' tool (`../../shared/tools/run.py`) on this film. |
 
-Every code, CSV and YAML card shows real lines from [`../../project/`](../../project/), as [the script](../script.md) lists them.
+Every code, CSV and YAML card shows real lines from [`../../project/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project), as [the script](../script.md) lists them.
 
 ## Setup (once)
 

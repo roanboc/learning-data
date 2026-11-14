@@ -8,7 +8,7 @@
    Names, numbers and dates follow each film's script and narration: check a film's labs and scenarios against them when it changes.
    close: the series' last words, under the scenarios' results for all films and for the last film: that film's closing chapter
    (chapter), in its own words, and in learn.es.js in its Spanish captions. */
-window.GP={lang:"en",store:"ld-governance-in-practice",repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.GP={lang:"en",store:"ld-governance-in-practice",repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"of",inPractice:"In practice",watch:"Watch this part",next:"Next:",makeCall:"Make the call →",
   scenario:"Scenario",score:"Score",answered:"answered",toGo:"to go",good:"Good call",notQuite:"Not quite",
   explore:"Explore this in the lab:",nextQ:"Next scenario",results:"See your results",again:"Start again",check:"Check",
@@ -155,9 +155,9 @@ labs:[
   points:["Of the data team's thirty-three tables, ten are read by other teams, each in one of six products.","A product names its owner and the tables it offers.",
     "Its service levels and its support are part of the promise.","The same script checks the product's file against its standard's rules."],
   real:"Shared tables without a product are the ones nobody owns: they were made for one request and stayed. A check that asks “which product is this in?” on every new shared table turns that question into a short conversation, before the table has readers.",
-  repo:["governance/4-data-products/","scripts/generate/products.py"],
+  repo:["../20-data-governance/4-data-products/","scripts/generate/products.py"],
   w:{prompt:"Jun's completions table is shared, so it needs a product. Write the lines the products check asks for, then run it.",togglesL:"Lines in the product's file",run:"Run the products check",
-    path:"governance/4-data-products/completions.yml",panel:"products",sumFail:"{n} failed",sumWarn:"passed · {n} with a warning",sumPass:"up to date and valid",
+    path:"../20-data-governance/4-data-products/completions.yml",panel:"products",sumFail:"{n} failed",sumWarn:"passed · {n} with a warning",sumPass:"up to date and valid",
     toggles:[{k:"out",label:"outputs: mart_planning__completions"},{k:"owner",label:"owner: Clara Jensen, Planning"},{k:"purpose",label:"purpose and usage"},{k:"sl",label:"service levels"},{k:"support",label:"support: where to ask"}],
     code:[[null,"name: completions"],[null,"title: Completions"],[null,"domain: planning"],["owner","owner: \"Clara Jensen, Planning\""],["purpose","purpose: The awards conferred this year, by faculty."],["purpose","usage: Count the rows for each faculty."],
       ["out","outputs:"],["out","  - {model: mart_planning__completions}"],["sl","service_levels:"],["sl","  - {property: latency, value: 1, unit: d}"],["support","support:"],["support","  - {channel: planning-data, tool: email}"]],
@@ -174,7 +174,7 @@ labs:[
   points:["Why: a purpose the owner can weigh against what the product is for.","For how long: a date, so access ends by itself.",
     "To whom: the product's owner, not whoever built the table.","Governance promises an answer within five working days."],
   real:"Requests without a purpose get answered by habit: yes to colleagues, no to strangers. A purpose and a date let the owner decide on the merits, and let a reviewer read the decision later. Keep the form to two questions: every extra field is a reason to ask around instead.",
-  repo:["governance/4-data-products/learners_near_an_award.yml"],
+  repo:["../20-data-governance/4-data-products/learners_near_an_award.yml"],
   w:{prompt:"Build Anil's request for Learners near an award.",head:"Request access:",form:"Request access · Learners near an award",formSub:"owner: Clara Jensen, Planning",
     slots:[{label:"Why do you need access?",opts:[{t:"Just in case the faculty needs it at some point next year.",why:"No purpose to weigh: the owner can't say yes to what it's for."},
         {t:"To plan next semester's places in the certificate's last unit.",ok:true,why:"A purpose Clara can weigh: it's what the product is for, planning support for learners near an award."},

@@ -45,4 +45,4 @@ The video adds a finishing pass that stills and the site's player don't show (`.
 
 ## The project behind the cards
 
-Every code card shows real lines of [`../../project/`](../../project/), the series' dbt project, as the script's table of files lists them; the numbers on screen (seven staging views, eight steps, 73 rows and 17 columns in Planning's mart, 14 columns in the wallet's, the faculties' 38, 15, 15 and 5 rows, and twelve near-award learners in both the mart and the census report) come from its build of 30 September 2026 on dbt Core with DuckDB.
+Every code card shows real lines of [`../../project/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project), the series' dbt project, as the script's table of files lists them; the numbers on screen (seven staging views, eight steps, 73 rows and 17 columns in Planning's mart, 14 columns in the wallet's, the faculties' 38, 15, 15 and 5 rows, and twelve near-award learners in both the mart and the census report) come from its build of 30 September 2026 on dbt Core with DuckDB.

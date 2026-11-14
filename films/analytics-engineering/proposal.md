@@ -305,4 +305,4 @@ Confirm against current documentation, and record in each film's rigour sheet wi
 
 1. The author's answers to the decisions above.
 2. ~~A script and rigour sheet for the opening film.~~ Built, 30 September 2026: [script](1-declare-it-then-build-it/script.md), [source](1-declare-it-then-build-it/source/README.md), [Jun's character card](characters/card-jun.jpg). Next for it: the author's review of the video, then publishing (site page, Spanish captions, Pause and think, labs).
-3. ~~The example dbt project the films draw from.~~ Built, 30 September 2026: [project/](project/), on dbt Core with DuckDB, with a Databricks target; every film's code and data come from it.
+3. ~~The example dbt project the films draw from.~~ Built, 30 September 2026: [project/](https://github.com/roanboc/learning-data-project/tree/main/30-data-project), on dbt Core with DuckDB, with a Databricks target; every film's code and data come from it.

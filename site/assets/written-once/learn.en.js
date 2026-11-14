@@ -1,7 +1,7 @@
 /* Learning Data: Written once, in English: the words of the labs (training) and the scenarios (evaluation).
    Keep the keys in step with learn.es.js. assets/from-words-to-data/learn.js draws them; "vis" names a picture in the film's LV
    (films/analytics-engineering/9-written-once/source/src/plan.js), which takes its words from vis below. */
-window.FW={lang:"en",store:"ld-written-once",repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.FW={lang:"en",store:"ld-written-once",repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"of",inPractice:"In practice",watch:"Watch this part",next:"Next:",makeCall:"Make the call →",
   scenario:"Scenario",score:"Score",answered:"answered",toGo:"to go",good:"Good call",notQuite:"Not quite",
   explore:"Explore this in the lab:",nextQ:"Next scenario",results:"See your results",again:"Start again",check:"Check",

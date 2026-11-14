@@ -7,7 +7,7 @@
    ninguna), una etiqueta, asteriscos, un grupo con fecha de fin, un parámetro, una vista de métricas, el tablero de calidad, una
    incidencia, un producto de datos, su promesa, el contrato, el catálogo, el mercado, el directorio de cuentas, una universidad socia.
    site-tools/build_series.py lee este archivo como texto, igual que el inglés (ver el comentario de learn.en.js). */
-window.GP={lang:"es",store:"ld-governance-in-practice",repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.GP={lang:"es",store:"ld-governance-in-practice",repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"de",inPractice:"En la práctica",watch:"Ver esta parte",next:"Siguiente:",makeCall:"Tú decides →",
   scenario:"Situación",score:"Puntaje",answered:"respondidas",toGo:"por responder",good:"Buena decisión",notQuite:"No del todo",
   explore:"Explóralo en el lab:",nextQ:"Siguiente situación",results:"Ver tus resultados",again:"Empezar de nuevo",check:"Comprobar",
@@ -154,9 +154,9 @@ labs:[
   points:["De las treinta y tres tablas del equipo de datos, otros equipos leen diez, cada una en uno de seis productos.","Un producto nombra a su dueño y las tablas que ofrece.",
     "Sus niveles de servicio y su soporte son parte de la promesa.","El mismo script revisa el archivo del producto contra las reglas de su estándar."],
   real:"Las tablas compartidas sin producto son las que nadie cuida: se hicieron para un pedido y se quedaron. Un control que pregunta «¿en qué producto está?» en cada tabla compartida nueva convierte esa pregunta en una conversación corta, antes de que la tabla tenga lectores.",
-  repo:["governance/4-data-products/","scripts/generate/products.py"],
+  repo:["../20-data-governance/4-data-products/","scripts/generate/products.py"],
   w:{prompt:"La tabla de egresos de Jun es compartida, así que necesita un producto. Escribe las líneas que pide el control de productos, y ejecútalo.",togglesL:"Líneas en el archivo del producto",run:"Ejecutar el control de productos",
-    path:"governance/4-data-products/completions.yml",panel:"products",sumFail:"{n} fallaron",sumWarn:"pasó · {n} con advertencia",sumPass:"al día y válidos",
+    path:"../20-data-governance/4-data-products/completions.yml",panel:"products",sumFail:"{n} fallaron",sumWarn:"pasó · {n} con advertencia",sumPass:"al día y válidos",
     toggles:[{k:"out",label:"outputs: mart_planning__completions"},{k:"owner",label:"owner: Clara Jensen, Planning"},{k:"purpose",label:"purpose y usage"},{k:"sl",label:"niveles de servicio"},{k:"support",label:"support: dónde preguntar"}],
     code:[[null,"name: completions"],[null,"title: Completions"],[null,"domain: planning"],["owner","owner: \"Clara Jensen, Planning\""],["purpose","purpose: The awards conferred this year, by faculty."],["purpose","usage: Count the rows for each faculty."],
       ["out","outputs:"],["out","  - {model: mart_planning__completions}"],["sl","service_levels:"],["sl","  - {property: latency, value: 1, unit: d}"],["support","support:"],["support","  - {channel: planning-data, tool: email}"]],
@@ -173,7 +173,7 @@ labs:[
   points:["Por qué: un propósito que la dueña pueda comparar con aquello para lo que es el producto.","Por cuánto tiempo: una fecha, para que el acceso termine solo.",
     "A quién: a la dueña del producto, no a quien construyó la tabla.","Gobernanza promete una respuesta en cinco días hábiles."],
   real:"Las solicitudes sin propósito se responden por costumbre: sí a los colegas, no a los desconocidos. Un propósito y una fecha dejan que la dueña decida por el fondo, y que alguien lea la decisión después. Deja el formulario en dos preguntas: cada campo de más es un motivo para preguntar por ahí.",
-  repo:["governance/4-data-products/learners_near_an_award.yml"],
+  repo:["../20-data-governance/4-data-products/learners_near_an_award.yml"],
   w:{prompt:"Arma la solicitud de Anil para Estudiantes cerca de un título.",head:"Solicitar acceso:",form:"Solicitar acceso · Estudiantes cerca de un título",formSub:"dueña: Clara Jensen, Planificación",
     slots:[{label:"¿Para qué necesitas acceso?",opts:[{t:"Por si la facultad llega a necesitarlo en algún momento del próximo año.",why:"Sin propósito que sopesar: la dueña no puede decir que sí a aquello para lo que es."},
         {t:"Para planificar los cupos del próximo semestre en la última materia del certificado.",ok:true,why:"Un propósito que Clara puede sopesar: es para lo que es el producto, apoyar a los estudiantes cerca de un título."},

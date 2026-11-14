@@ -1,8 +1,8 @@
 # More than a platform: new script, draft
 
-**Draft for the author, 14 November 2026.** Not built yet. It reshapes the whole film from the author's brief of 14 November 2026: the film now introduces the portal itself, directly. The film on the site still follows [the script as built](script.md) until the author confirms this draft. Nothing here is rendered, voiced or checked by the film's tools.
+**Draft for the author, second version, 14 November 2026.** Not built yet. It reshapes the whole film from the author's brief of 14 November 2026, so that the film introduces the portal itself, directly. This version works in the author's revisions and answers from later that day. The film on the site still follows [the script as built](script.md) until the author confirms this draft. Nothing here is rendered, voiced or checked by the film's tools.
 
-About 4 minutes, with some 460 words of narration (about 125 words a minute, with pauses). English narration in the voice the films have used so far; Spanish captions, page and narration follow once the English is agreed.
+About 6½ minutes, with some 790 words of narration (about 125 words a minute, with pauses), in eight chapters. That is twice the film as built, because the author asked for more time on the foundations, the project, and the labs and evaluation. English narration in the voice the films have used so far. Spanish captions, page and narration follow once the English is agreed.
 
 ## The brief, in the author's words
 
@@ -12,14 +12,24 @@ About 4 minutes, with some 460 words of narration (about 125 words a minute, wit
 >
 > Make it better structured and worded, but be direct about this portal.
 
+The author's revisions, later the same day:
+
+> In chapter 2, add that I (the author of the portal) have worked in applications, data, and enterprise architecture roles for more than 16 years, and connecting all the pieces slowly, so I decided to consolidate the key learnings here.
+> When showing the stations, indicate that I found enterprise architecture as one of the key elements that are not well taught in context and makes people struggle constantly at describing and understanding businesses. Data governance has been generally seen as a slow body of work no one ones to do, generally because enterprise foundations are weak, or the technology was still immature to deliver governance as a service and embedded in the practice instead of just policies. So this portal shows the new approach. Take a bit of extra time explaining the foundations as that's the part data professionals lack the most.
+>
+> Improve chapter 4 to avoid repetition from added context. And dedicate a bit of extra time describing the interactive labs and evaluation, showing even some of them in action. Also restate again the demo project in GitHub, show some folders and highlight sections that people don't consider generally like folders adding business and governance metadata.
+
+His answers: the portal is called *Learning Data*. "The streams" should become clearer wording for the side paths. Name dbt and Databricks as the tools that show the concepts in real solutions, and say that any tools with similar features would do: "The tool doesn't matter much as it provides the capability and you use them correctly. This should be stated as there are many tools wars."
+
 ## What changes from the film as built
 
 - **It opens on the portal, not on a meeting.** The two offices with 176 and 149 for one class are gone. The film says what the portal is and why it exists in its first minute.
-- **It says why the portal exists:** courses are either technical without the business and governance around the code, or neutral without practical advice.
-- **The stations are grouped, not listed one by one with a question each.** The voice names every station, in the route's order, in four groups. Each station's question stays on screen only.
-- **It names the example project:** a real dbt project that runs on your own machine and on Databricks. This changes an earlier rule that no product is named in the voice.
-- **A new chapter on what the portal adds to DAMA,** and on enterprise data architecture.
-- **What you can do here is shorter,** one line for all the tools. The closing line stays.
+- **It says why the portal exists, and who made it:** courses are either technical with no business or governance around the code, or neutral with no practical advice. The author spent more than sixteen years joining those pieces.
+- **The foundations get a chapter of their own:** why enterprise architecture comes first, and why governance became slow and how the portal does it now.
+- **The route is a railway:** a main line, two branch lines that leave it and rejoin it, and the last two stations. "Streams" is gone.
+- **The example project gets a chapter of its own:** a dbt project on GitHub, its folders, and the business and governance metadata most projects leave out. dbt and Databricks are named in the voice, as the tools that show the ideas, with any tools of the same capabilities said to do as well.
+- **Beyond DAMA is shorter,** because the foundations chapter now says why enterprise architecture matters.
+- **Labs and evaluation get a chapter of their own,** with a question, a lab and a scenario shown in action. The closing line stays.
 
 ## Script
 
@@ -31,39 +41,55 @@ About 4 minutes, with some 460 words of narration (about 125 words a minute, wit
 
 **On screen.** The Inner Life of Data · how the organisation works · what each word means · who decides · who may see what
 
-### 2 · Why this portal · 0:30–1:20
+### 2 · Why this portal · 0:30–1:35
 
-**Narration.** Most courses and documentation give you only half of that. Some are deeply technical, with no business and no governance around the code. Others stay neutral, and never say what to do, or in which tool. So you join the halves yourself, at work, under pressure. That's how a model passes every test and answers the wrong question, or a policy never reaches the code. People who work with data need both halves in one place: the context and the practice. That's why this portal exists. Learning Data brings every topic of data together, from how the organisation works down to the code.
+**Narration.** Most courses and documentation give you only half of that. Some are deeply technical, with no business and no governance around the code. Others stay neutral, and never say what to do, or in which tool. So you join the halves yourself, at work, under pressure. That's how a model passes every test and answers the wrong question, or a policy never reaches the code. The author of this portal has worked in applications, data and enterprise architecture roles for more than sixteen years, joining those pieces slowly, one project at a time. Nobody who works with data should need sixteen years to join them. So the key lessons are gathered here, in one place. This is Learning Data: the context and the practice, from how the organisation works down to the code.
 
-**Picture.** Two stacks of pages, left and right. The left is dense code, with nothing around it; the right is boxes and arrows, with no code under them. A gap between them. A model card turns green with every test passed, then shows a question mark: the wrong question. A policy sheet drifts and never reaches the code. Then the two stacks slide together and become one: the portal's mark, and the address under it.
+**Picture.** Two stacks of pages, left and right. The left is dense code, with nothing around it; the right is boxes and arrows, with no code under them. A gap between them. A model card turns green with every test passed, then shows a question mark: the wrong question. A policy sheet drifts and never reaches the code. Then three plain role cards, one after another along a timeline: applications, data, enterprise architecture, with *16+ years* across them. Small pieces from both stacks gather one by one along the timeline. They settle into one: the portal's mark, and the address under it.
 
-**On screen.** Too technical: no business, no governance · Too neutral: no practice · All tests passed · Answers the wrong question · The context and the practice · Learning Data · data.learn-all.org
+**On screen.** Too technical: no business, no governance · Too neutral: no practice · All tests passed · Answers the wrong question · Applications · Data · Enterprise architecture · 16+ years · The context and the practice · Learning Data · data.learn-all.org
 
-### 3 · A route of stations · 1:20–2:35
+### 3 · The foundations · 1:35–2:45
 
-**Narration.** It is laid out as a route of stations, in an order that makes sense. First, understand the organisation. Enterprise architecture shows how it works. Data governance, who decides. Then the streams of work. Data modelling, modern data basics, analytics engineering and data quality build the data and keep it right. One side route shares and protects it: master and reference data, and data protection and privacy. Another puts AI agents to work on it, safely. Along the way you reach the detail of delivering data and working with it, with a real dbt project you can run on your own machine, and on Databricks. What the films show on screen is code you can open. The route ends on the whole picture. Data management fits it all in one plan. And leading data people is for those who lead a data team, and for those being led.
+**Narration.** The portal is laid out as a route of stations, like a railway line, in an order that makes sense. It starts with the foundations, because that's what data professionals lack most. Enterprise architecture comes first. It describes how a business works: what it does, what it needs, which systems serve it, and how they connect. It's rarely taught in context, so people keep struggling to describe a business, and to understand the one they work in. Then data governance: who decides what the data means, and who may use it. For years it was seen as slow work that nobody wanted to do. Often the enterprise foundations under it were weak, or the technology wasn't ready to deliver governance as a service, built into the daily work. So it stayed a set of policies. This portal shows the newer way: governance built into the work, from the glossary to the code.
 
-**Picture.** The learning route draws itself, as the Topics page draws it: the blue line, the amber loop for sharing and protecting, the violet loop for agents. Each group lights as it is named, and each station's name appears as it is said, with its question on a small card under the route. At analytics engineering, a small project icon sits on the line, as the route on the site shows it: a folder with a branch mark. It opens for a moment into a few lines of real code and a green build, then closes, still readable as a project. The loops rejoin the line before the last two stations, which light last.
+**Picture.** The learning route draws itself, as the Topics page draws it, but only its first stretch for now: the introduction's station, then *Foundations*. At *Enterprise architecture*, the station opens into a simple layered map: what the business does, what it needs, the systems, the links between them, one layer at a time. Beside it, a person-free sketch of a blank whiteboard with a question mark: struggling to describe the business. At *Data governance*, a heavy binder of policies sits on its own, with a slow clock beside it; a cracked foundation stone under it, then an old, unfinished machine. Then the binder opens, and its rules flow out as small cards into the work: a glossary term, a check on a column, a line of code.
 
-**On screen.** Understand the organisation · Enterprise architecture: How does it work? · Data governance: Who decides? · Build and monitor · Data modelling · Modern data basics · Analytics engineering · Data quality · Share and protect · Master and reference data · Data protection and privacy · Agents · AI agents in data work · The example project: dbt · runs on your machine and on Databricks · Lead · Data management: One plan · Leading data people: For leads and the people they lead
+**On screen.** Foundations · Enterprise architecture: How does the business work? · capabilities · information · systems · links · Data governance: Who decides? · Policies · Weak foundations · Unready technology · Governance as a service · glossary → code
 
-### 4 · Beyond DAMA · 2:35–3:30
+### 4 · The rest of the route · 2:45–3:30
 
-**Narration.** People have mapped this ground before. DAMA's wheel is the best known, and this portal covers it. But it goes further: into enterprise architecture, AI agents in data work and leadership, with other frameworks that proved their worth over a career in data. Why go further? Because data now has many paradigms, most of them made by data people for data people, and many of them blind to how the rest of the enterprise is designed. Data can't be architected apart from the organisation it serves. Joining the two has a name: enterprise data architecture. It runs through every station.
+**Narration.** Then the main line, where data is built and kept right: data modelling, modern data basics, analytics engineering and data quality. Two branch lines leave it, and join it again further on. One shares and protects data: master and reference data, and data protection and privacy. The other puts AI agents to work on data, safely. The route ends on the whole picture. Data management fits it all in one plan. And leading data people is for those who lead a data team, and for those being led.
 
-**Picture.** DAMA's wheel, drawn in the film's own hand: a centre and ten parts, with only *Governance* written in the middle. Three new pieces arrive beside it: a layered map for enterprise architecture, an agent's mark, a figure-free mark for leadership. Then several small competing diagrams crowd in, each self-contained, each facing away from a faint outline of the whole organisation behind them. The outline brightens; the wheel and the new pieces settle inside it. Two words join: enterprise, data architecture. The route returns, and a thin gold thread runs along it, through every station.
+**Picture.** The route goes on drawing itself: the blue main line, station by station; the amber branch line rising for sharing and protecting; the violet branch line dropping for agents. Each station's name appears as it is said, with its question on a small card under the route. At *Analytics engineering*, the project icon sits on the line, as the route on the site shows it: a folder with a branch mark, closed for now. The branch lines rejoin the main line before the last two stations, which light last.
+
+**On screen.** Build and monitor · Data modelling · Modern data basics · Analytics engineering · Data quality · Share and protect · Master and reference data · Data protection and privacy · Agents · AI agents in data work · Lead · Data management: One plan · Leading data people: For leads and the people they lead
+
+### 5 · A real project · 3:30–4:30
+
+**Narration.** Along the main line, the films show a real project: a dbt project on GitHub, which runs on your own machine and on Databricks. What the films show on screen is code you can open, and run. And it holds more than models and tests. Next to the code sit the folders most projects leave out: the business glossary, the owners, the architecture map, the data products and their contracts, and the decisions behind them. That is the business and governance metadata, kept in the same place as the code it describes. People argue a lot about tools. Here, dbt and Databricks show the ideas in a working solution, but any tools with the same capabilities would do. What matters is using those capabilities well.
+
+**Picture.** The camera glides into the project icon on the route, and it opens into the project's folder tree, drawn in the film's own hand, not as a screenshot. The code folders light first: models, tests, sources. Then a highlighter band moves down the folders most projects leave out, one at a time as each is said: governance, then glossary, owners, architecture map, data products, data contracts, and the decisions file. A small terminal card shows `dbt build` ending green; beside it, a Databricks target. Then two plain logos step back, and three neutral blocks take their place, each with a capability under it: builds and tests, runs and stores, governs. The icon closes again on the route, still readable as a project.
+
+**On screen.** The example project · GitHub · models · tests · sources · governance · 1-glossary · 2-owners · 3-architecture-map · 4-data-products · 5-data-contracts · docs/decisions.md · business and governance metadata · dbt build: green · runs on your machine and on Databricks · builds and tests · runs and stores · governs · any tool with these capabilities
+
+### 6 · Beyond DAMA · 4:30–5:15
+
+**Narration.** People have mapped this ground before. DAMA's wheel is the best known, and this portal covers it. It also goes further, into enterprise architecture, AI agents in data work and leadership, with other frameworks that proved their worth over those years. Data has many paradigms. Most were made by data people, for data, and many never look at the enterprise around them. This portal starts from the enterprise, and calls it enterprise data architecture: data designed as part of the organisation it serves.
+
+**Picture.** DAMA's wheel, drawn in the film's own hand: a centre and ten parts, with only *Governance* written in the middle. Three new pieces arrive beside it: a layered map, an agent's mark, a person-free mark for leadership. Small competing diagrams crowd in, each turned inward, away from a faint outline of the whole organisation behind them. The outline brightens; the wheel and the new pieces settle inside it. Two words join: enterprise, data architecture. The route returns, with a thin gold thread along it, through every station.
 
 **On screen.** DAMA-DMBOK · Governance · Enterprise architecture · AI agents in data work · Leadership · Enterprise data architecture
 
-### 5 · What you can do here · 3:30–3:52
+### 7 · Learn by doing · 5:15–6:20
 
-**Narration.** At every stop, watch a short film, answer its questions, take the idea apart in a lab, and make the call in a real situation. Pick a goal, or search what the films say. Your progress stays in your own browser.
+**Narration.** Every station is something to do, not only to watch. In a film, a question stops the picture and asks what you'd do. The answers are close: one is almost right, and the film has told you why it isn't. In a lab, you take an idea apart with your own hands. Enrol a student, and watch the event race into the platform. Drop the nightly files, run the loader twice, and see each file read only once. In a scenario, you make the call in a real situation, put the steps in order, or sort what belongs where, and each answer tells you why. Pick a goal, and the route lights up your stops. Search for a word, and find the film that says it. Your progress stays in your own browser.
 
-**Picture.** Six simple shapes in a row under the route, each drawn as it is said: a play triangle, a question mark, a lab's dial, three options with one picked, a flag, a magnifier. None is a picture of the screen.
+**Picture.** Three short moments in action, drawn in the film's own hand from the site's own parts, not as screenshots. First, a film's picture pauses, and a question card rises with three answers of equal length; one is picked, the near miss shows why it was almost right. Second, the *Capture* lab: a button is pressed, *Enrol a student*, and an event races from the student system into bronze, with its time in seconds; nightly files drop into the landing zone; *Run* is pressed twice, and the checkpoint count stays the same the second time. Third, a scenario: three options, one picked, and its reason under it; then four steps slide into order. Last, the route with a goal picked, four stops numbered 1 to 4, and a magnifier over lines of words.
 
-**On screen.** Watch · Pause and think · Take it apart · Make the call · Pick a goal · Search
+**On screen.** Pause and think · Almost right: why not · Take it apart · Enrol a student · Event to bronze: 2.1 s · Nightly files arrive · Run the loader · Checkpoint: 4 files · Make the call · Put it in order · Pick a goal · Search
 
-### 6 · Start · 3:52–4:08
+### 8 · Start · 6:20–6:35
 
 **Narration.** Platforms have matured. The hard part is everything else. Start there.
 
@@ -78,9 +104,9 @@ It has no story from the past: the author asked for the film to be direct about 
 | Beat | The line that says it |
 |---|---|
 | Scenario | "The introduction showed the basics: how a data platform carries data from a tap on a phone to a decision." |
-| Problem | "Most courses and documentation give you only half of that." "That's how a model passes every test and answers the wrong question, or a policy never reaches the code." "People who work with data need both halves in one place: the context and the practice." |
-| Solution | "That's why this portal exists." "It is laid out as a route of stations, in an order that makes sense." |
-| Benefits | "Learning Data brings every topic of data together, from how the organisation works down to the code." "With a real dbt project you can run on your own machine, and on Databricks." |
+| Problem | "Most courses and documentation give you only half of that." "That's how a model passes every test and answers the wrong question, or a policy never reaches the code." "Nobody who works with data should need sixteen years to join them." |
+| Solution | "So the key lessons are gathered here, in one place." "The portal is laid out as a route of stations, like a railway line, in an order that makes sense." |
+| Benefits | "This is Learning Data: the context and the practice, from how the organisation works down to the code." "What the films show on screen is code you can open, and run." |
 | Back to the story | "Platforms have matured. The hard part is everything else. Start there." |
 
 ## Rigour
@@ -88,22 +114,28 @@ It has no story from the past: the author asked for the film to be direct about 
 | Scene | What it claims | Why it holds |
 |---|---|---|
 | 1 | The introduction shows a platform carrying data from a tap to a decision | *The Inner Life of Data*, and its topic's own line on the site |
-| 2 | Courses tend to be technical without context, or neutral without practice | The author's experience (brief, 14 November 2026); said as the portal's reason, not as a measured fact |
-| 3 | The stations and their order | `modules/route.json`: Start, Foundations, Build and monitor, Share and protect, Agents, Lead; *Leading data people* last |
-| 3 | A real dbt project runs on your machine and on Databricks | `films/analytics-engineering/project/README.md`: it runs on DuckDB with no account, and the same code on Databricks (`profiles.yml`, target `databricks`) |
-| 3 | What the films show on screen is code you can open | The project's README: from *Start from a question* on, every snippet the films show is code in that folder. Said of the films that show code, not of every film |
-| 4 | DAMA's wheel has governance at its centre and ten areas around it | DAMA-DMBOK, second edition, revised 2024, as *Every area, one job* cites it |
-| 4 | The portal goes beyond the wheel into enterprise architecture, agents and leadership | The route's topics: *Enterprise architecture*, *AI agents in data work*, *Leading data people* are not areas of the wheel |
-| 4 | Enterprise data architecture: data architected from the organisation it serves | The author's term for the portal's approach; the *Enterprise architecture* topic and its *Data architecture* series carry it |
-| 5 | What a visitor can do | The site as it is: films, Pause and think, labs, scenarios, goals, search, progress kept in the browser |
+| 2 | Courses tend to be technical without context, or neutral without practice | The author's experience (brief, 14 November 2026), said as the portal's reason, not as a measured fact |
+| 2 | The author has worked in applications, data and enterprise architecture roles for more than sixteen years | The author, 14 November 2026 |
+| 3 | Enterprise architecture is rarely taught in context, and people struggle to describe a business | The author's experience, 14 November 2026; the *Enterprise architecture* topic's own line: "How an organisation works, in layers, before you ask what its data should answer." |
+| 3 | Governance was seen as slow because the foundations were weak or the technology wasn't ready to deliver it as a service | The author's experience, 14 November 2026; *Governance on the map* and *Governance in practice* show it built into the work |
+| 4 | The stations and their order | `modules/route.json`: Start, Foundations, Build and monitor, Share and protect, Agents, Lead; *Leading data people* last |
+| 5 | A real dbt project on GitHub runs on your machine and on Databricks | `films/analytics-engineering/project/README.md`: it runs on DuckDB with no account, and the same code on Databricks (`profiles.yml`, target `databricks`) |
+| 5 | What the films show on screen is code you can open | The project's README: from *Start from a question* on, every snippet the films show is code in that folder. Said of the films that show code, not of every film |
+| 5 | The project keeps a glossary, owners, an architecture map, data products, contracts and decisions | `governance/1-glossary`, `2-owners`, `3-architecture-map`, `4-data-products`, `5-data-contracts`; `docs/decisions.md` |
+| 5 | Any tools with the same capabilities would do | The author, 14 November 2026; AGENTS.md: "Tools show, they don't lead" |
+| 6 | DAMA's wheel has governance at its centre and ten areas around it | DAMA-DMBOK, second edition, revised 2024, as *Every area, one job* cites it |
+| 6 | The portal goes beyond the wheel into enterprise architecture, agents and leadership | The route's topics: *Enterprise architecture*, *AI agents in data work*, *Leading data people* are not areas of the wheel |
+| 6 | Enterprise data architecture: data designed as part of the organisation it serves | The author's term for the portal's approach; the *Enterprise architecture* topic and its *Data architecture* series carry it |
+| 7 | Pause and think questions have one near miss, explained by the film | AGENTS.md, *Pause and think*; `check_site.py` holds every pack to it |
+| 7 | The *Capture* lab: enrol a student and watch the event reach bronze; drop nightly files and run the loader twice | `site/assets/learn/learn.en.js`, lab *Send data in*: "Enrol a student and watch the event race to bronze. Drop the nightly files, then run Auto Loader twice." The voice says "the loader", so no product is named there |
+| 7 | Scenarios ask for a choice, an order or a sort, each with a reason | The packs' scenario types (`choice`, `order`, `sort`), each with its `why` |
 
-Rules it keeps: no feature's release status; no count of topics or films in the voice, so the film needn't change when the site grows; the portal's tools as shapes, not pictures of the screen; no people on screen; DAMA said "Dah-ma" (the film's `say`).
+Rules it keeps: no feature's release status; no count of topics or films in the voice, so the film needn't change when the site grows; the portal's tools as shapes drawn from the site's parts, not screenshots; no people on screen; DAMA said "Dah-ma" (the film's `say`).
 
 ## For the author
 
-1. **The portal's name.** The site's title is *Learning Data*, and its address is data.learn-all.org. The draft says "Learning Data" in the voice and shows the address. Or should the voice say "Learn All Data"?
-2. **"The different streams."** I read it as the work after the foundations: build and monitor, the side route for sharing and protecting, and the side route for agents. Is that what you meant?
-3. **Naming dbt and Databricks in the voice.** The earlier rule was no product in the voice. Your brief names both, so the draft does too, once, for the example project only.
-4. **Enterprise data architecture.** The draft gives it one plain line: data can't be architected apart from the organisation it serves, and joining the two has a name. Is that the definition you want, and should a page or film define it more fully?
-5. **"Over a career in data."** The draft doesn't name the author. Would you rather it said "the author's career", or your name?
-6. **No story from the past.** The draft opens on the portal, as you asked. If you'd like a short opening story before it, from South America, the Middle East or the Far East, I can suggest one.
+1. **Branch lines.** The draft calls the two side paths *branch lines*, as on a railway: they leave the main line and join it again. The site's route calls them *Share and protect* and *Agents*. Does *branch line* work, or would you rather say *side route*?
+2. **Length.** Your additions bring it to about 6½ minutes. If that's too long, the first places to trim are the rest of the route (chapter 4) and the lab's second step (chapter 7).
+3. **Third person.** The voice says "the author of this portal", not "I", since the voice isn't yours. Should it name you instead?
+4. **Enterprise data architecture.** It now gets one line: "data designed as part of the organisation it serves". Is that the definition you want?
+5. **No story from the past.** The draft opens on the portal, as you asked. If you'd like a short opening story before it, from South America, the Middle East or the Far East, I can suggest one.

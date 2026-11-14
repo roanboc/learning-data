@@ -198,7 +198,8 @@ SERIES = [
     dict(id="more-than-a-platform", dir="more-than-a-platform", slug="more-than-a-platform", single=True,
          name={"en": "More than a platform", "es": "Más que una plataforma"},
          place={"en": "university", "es": "universidad"},
-         blocks=[("index.html", "en", "next", "", "more-than-a-platform/"), ("es/index.html", "es", "next", "../", "more-than-a-platform/")]),
+         blocks=[("index.html", "en", "next", "", "more-than-a-platform/"), ("es/index.html", "es", "next", "../", "more-than-a-platform/"),
+                 ("scenarios/index.html", "en", "next", "../", "more-than-a-platform/"), ("es/scenarios/index.html", "es", "next", "../../", "more-than-a-platform/")]),
     dict(id="locks-before-the-data", dir="locks-before-the-data", slug="locks-before-the-data",
          name={"en": "Locks before the data", "es": "Cerraduras antes que los datos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
@@ -1130,8 +1131,8 @@ def topics_page(lg):
                      + (f'<span class="pj-mark" title="{E(ROUTE_TEXT[lg]["projmark"])}">{PROJECT_ICON}<span class="route-sr">{E(ROUTE_TEXT[lg]["projmark"])}</span></span>' if PC.get(t["id"]) else "")
                      + f'</h2><span class="ix-who">{E(t["who"][lg])}</span><span class="ix-cnt">{topic_counts(lg, es[t["id"]])}{more}</span></summary>\n'
                      f'<p class="ix-line">{E(t["line"][lg])}</p>\n'
-                     + (project_box(lg, PC[t["id"]], RL) + "\n" if PC.get(t["id"]) else "") +
-                     f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n</details>\n</section>\n')
+                     + f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n'
+                     + (project_box(lg, PC[t["id"]], RL) + "\n" if PC.get(t["id"]) else "") + '</details>\n</section>\n')
         body += '</div>\n'
     body += (f'</div>\n</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
              f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/route.js"></script>\n<script src="{R}assets/learn/topics.js"></script>\n'
@@ -1248,7 +1249,7 @@ ROUTE_TEXT = {
                film1="1 film", films="{n} films", series="{n} series", more1="1 more series coming", more="{n} more series coming",
                map="The learning route: {n} topics. Select a topic to see its films and series.",
                proj="The example dbt project", proj1="1 film here shows its real files, and you can run it yourself.",
-               projn="{n} films here show its real files, and you can run it yourself.", projpage="About the project", projrepo="Open it on GitHub",
+               projn="{n} films here show its real files, and you can run it yourself.", projpage="About the project",
                projmark="Shows the example dbt project"),
     "es": dict(start="Empieza aquí", play="Ver la introducción", open="Abrir el tema", next="Tu próxima parada", soon="Próximamente", route="Ruta sugerida",
                any="Rutas sugeridas, no pasos obligatorios. Abre cualquier tema cuando quieras.", whole="Toda la ruta", want="Quiero", stops="{n} paradas",
@@ -1256,7 +1257,7 @@ ROUTE_TEXT = {
                film1="1 película", films="{n} películas", series="{n} series", more1="1 serie más en camino", more="{n} series más en camino",
                map="La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series.",
                proj="El proyecto de dbt de ejemplo", proj1="1 película de aquí muestra sus archivos reales, y puedes ejecutarlo tú.",
-               projn="{n} películas de aquí muestran sus archivos reales, y puedes ejecutarlo tú.", projpage="Sobre el proyecto", projrepo="Ábrelo en GitHub",
+               projn="{n} películas de aquí muestran sus archivos reales, y puedes ejecutarlo tú.", projpage="Sobre el proyecto",
                projmark="Muestra el proyecto de dbt de ejemplo"),
 }
 
@@ -1283,7 +1284,7 @@ def route_data(lg):
                                **({"proj": PC[tid]} if PC.get(tid) else {})))
     on = {t["group"] for t in topics}
     return dict(lang=lg, text=ROUTE_TEXT[lg], groups=[dict(id=g["id"], line=g["line"], name=g["name"][lg]) for g in R["groups"] if g["id"] in on],
-                project=dict(href=PROJECT_PATH, repo=proj_url(), icon=PROJECT_ICON), topics=topics, goals=[dict(id=g["id"], name=g["name"][lg], line=g["line"][lg], stops=g["stops"]) for g in R["goals"]])
+                project=dict(href=PROJECT_PATH, icon=PROJECT_ICON), topics=topics, goals=[dict(id=g["id"], name=g["name"][lg], line=g["line"][lg], stops=g["stops"]) for g in R["goals"]])
 
 
 def route_js(lg):
@@ -1410,7 +1411,7 @@ def project_box(lg, n, RL):
     """The box a topic with films that show the project opens on, in the Topics list (route.js draws the same on the route)."""
     X = ROUTE_TEXT[lg]
     return (f'<div class="pj-box">{PROJECT_ICON}<div><p class="pj-t">{E(X["proj"])}</p><p class="pj-l">{E(X["proj1"] if n == 1 else X["projn"].format(n=n))}</p>'
-            f'<p class="pj-a"><a href="{RL}{PROJECT_PATH}">{E(X["projpage"])}</a><a href="{proj_url()}">{E(X["projrepo"])}</a></p></div></div>')
+            f'<p class="pj-a"><a href="{RL}{PROJECT_PATH}">{E(X["projpage"])}</a></p></div></div>')
 
 
 def project_page(lg):
@@ -1458,15 +1459,15 @@ def project_page(lg):
 
 # The home page stays a first view: the film, its two other steps, then two ways on: the learning route, and how the films were
 # made. It names no topic and draws no route: both are on the Topics page (the author, 12 November 2026).
-HOME_TEXT = {"en": ("Find your learning route", "How the films were made"),
-             "es": ("Encuentra tu ruta de aprendizaje", "Cómo se hicieron las películas")}
+HOME_TEXT = {"en": ("Find your learning route", "How the films were made", "The example dbt project"),
+             "es": ("Encuentra tu ruta de aprendizaje", "Cómo se hicieron las películas", "El proyecto de dbt de ejemplo")}
 
 
 def home_next(lg, R):
     """The home page's ways on, after the film and its steps: the learning route, and how the films were made."""
     RL = R if lg == "en" else R[3:]
     return (f'<p class="home-next"><a class="btn primary" href="{RL}topics/">{HOME_TEXT[lg][0]}</a>'
-            f'<a class="btn" href="{RL}journey/">{HOME_TEXT[lg][1]}</a></p>\n')
+            f'<a class="btn" href="{RL}{PROJECT_PATH}">{HOME_TEXT[lg][2]}</a><a class="btn" href="{RL}journey/">{HOME_TEXT[lg][1]}</a></p>\n')
 
 
 # ---------------------------------------------------------------- the search of every film's words
@@ -1536,8 +1537,8 @@ OPEN, CLOSE = marks(FW)
 BLOCKS = FW["blocks"]  # kept for callers that count From words to data's blocks
 # the hand-written pages that show the topics as tiles: (path under site/, language, the path from that page to the site's root)
 PUBLISH = "--publish" in sys.argv[1:]  # the site's publish: the tiles carry each series' count of films
-TILES = [("scenarios/index.html", "en", "../"), ("es/scenarios/index.html", "es", "../../")]
-HOME = [("index.html", "en", ""), ("es/index.html", "es", "../")]  # the home pages show two ways on instead (home_next())
+TILES = []  # the pages that showed the topics as tiles; Make the call ends as the home page does now (the author, 14 November 2026)
+HOME = [("index.html", "en", ""), ("es/index.html", "es", "../"), ("scenarios/index.html", "en", "../"), ("es/scenarios/index.html", "es", "../../")]  # three ways on (home_next())
 TILE_MARKS = ('<!-- topics: made by site-tools/build_series.py -->', '<!-- /topics -->')
 
 

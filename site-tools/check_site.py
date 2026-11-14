@@ -1753,15 +1753,15 @@ def main():
         if pg is None:
             s["fails"].append(f"site/{rel}: missing"); continue
         ways = [a.attrs.get("href") for p in pg.dom.all("p", cls="home-next") for a in p.all("a")]
-        if ways != ["topics/", "journey/"]:
-            s["fails"].append(f"site/{rel}: after the film's steps, two buttons: the learning route (topics/) and how the films were made (journey/); it has {ways}")
+        if ways != ["topics/", "dbt-project/", "journey/"]:
+            s["fails"].append(f"site/{rel}: after the film's steps, three buttons: the learning route (topics/), the example project (dbt-project/) and how the films were made (journey/); it has {ways}")
         # and the film's two other steps are said twice, since the bar above the film is easy to miss: in a section right
-        # after the film, and first in the panel that shows when the film ends
-        steps = [a.attrs.get("href") for d in pg.dom.all("div", cls="more-steps") for a in d.all("a")]
+        # after the film, in a short note (the author, 14 November 2026), and first in the panel that shows when the film ends
+        steps = [a.attrs.get("href") for d in pg.dom.all("aside", cls="steps-note") for a in d.all("a")]
         tpl = re.search(r'<template id="next-panel">.*?</template>', pg.src, re.S)
         ends = re.findall(r'<a class="btn[^"]*" href="([^"]*)"', tpl.group(0)) if tpl else []
-        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="more-steps"') > pg.src.find('class="home-next"') or pg.dom.first("details", cls="howto"):
-            s["fails"].append(f"site/{rel}: after the film and before the ways on, a section offers the labs and the situations ({steps}), with no box to open, and the "
+        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="steps-note"') > pg.src.find('class="home-next"') or pg.dom.first("details", cls="howto"):
+            s["fails"].append(f"site/{rel}: after the film and before the ways on, a note offers the labs and the situations ({steps}), with no box to open, and the "
                               f"\"Where next?\" panel offers them first ({ends[:2]}): people miss them in the bar above the film (the author, 12 November 2026)")
         if [n for n in pg.dom.walk() if "data-route" in n.attrs] or any("route" in x for x in pg.local_scripts):
             s["fails"].append(f"site/{rel}: the home page doesn't draw the route (the author, 12 November 2026): it links to it")

@@ -29,7 +29,6 @@ window.LD_ROUTE = {
   "proj1": "1 film here shows its real files, and you can run it yourself.",
   "projn": "{n} films here show its real files, and you can run it yourself.",
   "projpage": "About the project",
-  "projrepo": "Open it on GitHub",
   "projmark": "Shows the example dbt project"
  },
  "groups": [
@@ -66,7 +65,6 @@ window.LD_ROUTE = {
  ],
  "project": {
   "href": "dbt-project/",
-  "repo": "https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project",
   "icon": "<svg class=\"pj-ic\" viewBox=\"0 0 20 20\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z\"/><path d=\"M3.6 6.3L10 10l6.4-3.7M10 10v7.4\"/></svg>"
  },
  "topics": [

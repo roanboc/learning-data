@@ -1752,11 +1752,11 @@ async def check_route(run):
             for key in hkeys:
                 d = D[lang(key)]; pre = "es/" if lang(key) == "es" else ""
                 pg, log = await run.page(ctx, key)
-                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.more-steps a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
+                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.steps-note a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
                     map: document.querySelectorAll('[data-route], .r-map, .r-rail, .topic-links, .topic-tiles').length, wide: document.documentElement.scrollWidth <= innerWidth,
-                    small: [...document.querySelectorAll('.more-steps a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
+                    small: [...document.querySelectorAll('.steps-note a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
                 expect(sec, r["steps"] == ["labs/", "scenarios/"], f"/{key} @{width}: after the film, its two other steps are {r['steps']}")
-                expect(sec, r["ways"] == ["topics/", "journey/"] and not r["map"], f"/{key} @{width}: then the route and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
+                expect(sec, r["ways"] == ["topics/", "dbt-project/", "journey/"] and not r["map"], f"/{key} @{width}: then the route, the example project and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
                 expect(sec, r["wide"] and not r["small"], f"/{key} @{width}: scrolls sideways ({not r['wide']}) or has {r['small']} links under 32 px tall")
                 if width == 390:
                     await pg.click('.home-next a.primary')

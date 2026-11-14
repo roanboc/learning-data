@@ -409,7 +409,7 @@ The film is set in **May and June 2027**, the months after *Learning while doing
 
 **What is already settled** (the module's numbers), and stays as it is:
 
-- When someone on the team is stuck, they go to Jun (a seed of *People before roles*, not yet made).
+- When someone on the team is stuck, they go to Jun (*People before roles*).
 - Ivy pairs with Jun an hour a day for six weeks from Monday 1 March. By the sixth week she writes changes on her own, and Jun reviews them (*Learning while doing*).
 - In May the team lists nine jobs that must keep running. The room models are only Jun's, and the sensors' feed only Sam's. They pair on each and write it down step by step. By Wednesday 30 June Ivy is the second name on both.
 - From Monday 10 May the team keeps four standing meetings: a stand-up of fifteen minutes each morning, planning on Monday, a review with the people who asked every second Thursday, and half an hour a week with Helena for each person (*Less, on purpose*).
@@ -419,7 +419,7 @@ The film is set in **May and June 2027**, the months after *Learning while doing
 
 **What the film adds,** each written into the module's numbers and checked against the films above before a script uses it:
 
-- **Ivy's four months, seen by whoever leads her.** For her first six weeks she pairs with Jun, an hour a day, one small change at a time. From then on she writes changes on her own, and Jun reviews them. By June she is the second name on two jobs. In July she owns a product. The way she was led moved four times in four months, and nobody named it. This adds no fact: the film reads what is already told as a leader's choices.
+- **Ivy's four months, seen by whoever leads her.** For her first six weeks she pairs with Jun, an hour a day, one small change at a time. From then on she writes changes on her own, and Jun reviews them. By the end of June she is the second name on two jobs. In July she owns a product. The way she was led moved four times in four months, and nobody named it. This adds no fact: the film reads what is already told as a leader's choices.
 - **One person, two jobs, the same weeks.** On the sensors' feed Ivy is new, so Sam shows her each step of the runbook, in order, and that is right. On the room models she has made more than twenty-five changes since March. There she needs a question, not a fix.
 - **"It's faster if I do it."** In May, with the numbers for Graham's page due, Jun starts finishing Ivy's changes himself. Each fix is right, and the work is on time. Then Ivy's next change takes four days: she is making it perfect before he sees it. It is the week *Growing people* shows from Ivy's side, and nothing in that film changes. Nobody is at fault: Jun is protecting a date, and Ivy is protecting her work.
 - **Helena's half-hour with Jun.** She doesn't order him to stop, and she doesn't take the reviews from him: either would be the same trap. She asks what Ivy learns when he fixes it, and what a question would cost. A day. Helena tells Graham the numbers come a day later, and answers for it; the paper still goes in on Tuesday 1 June. Jun goes back to a question in place of a fix, the one he asked in April: "Which room did you check by hand?"

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/kept-alive/soundtrack.mp3",
+      "size": 7225460,
+      "sha256": "789fe04e05ed1ac5785e7e90a558d004769d65d3192bd3691c80652a25e1db81",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-kept-alive-c542fbc02030c38c009b/789fe04e05ed1ac5785e7e90a558d004769d65d3192bd3691c80652a25e1db81.mp3"
+    }
+  ]
+}

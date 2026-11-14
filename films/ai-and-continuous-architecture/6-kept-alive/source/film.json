@@ -1,0 +1,24 @@
+{
+  "key": "kept-alive",
+  "title": "Kept alive",
+  "sub": "AI and continuous architecture: a year on, the utility's map has drifted though every check passed, because the work, the words and the people moved without a change; keeping it becomes a capability with an owner, a budget and a rhythm, its agents read the map itself, never a copy, and the topic closes on what its five series said about maturing.",
+  "howto": "Clay and dusk are Babylon in 331 BCE and after: Etemenanki falling into ruin, its bricks carried off to houses nearby, and today the hole in the ground its keepers look after. In the present, a teal orb is the map agent; the field app's assistant answers on a crew's tablet. The map is glass in its layers' colours, each element with its owner's gold tag. What has drifted is drawn in amber; a copy is a grey sheet, the map itself is glass. Blue is the network and rose is retail; gold marks owners and the business side, cyan the technical side.",
+  "src": [
+    "../../../shared/src/aca.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["fall", "walls", 1.5],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bInés\\b", "Ee-ness"],
+    ["\\bNabopolassar's\\b", "Nabbo-poe-lassar's"],
+    ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
+    ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],
+    ["\\bBabel\\b", "Bay-bel"],
+    ["\\bErder\\b", "Er-der"],
+    ["\\bPureur\\b", "Pew-rur"],
+    ["\\bUNESCO\\b", "you-ness-co"]
+  ]
+}

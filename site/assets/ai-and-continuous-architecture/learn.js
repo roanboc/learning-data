@@ -218,7 +218,10 @@ const IC={
   // an owner's tag, as the films hang one on an element
   tag:(ctx,x,y,col)=>{ctx.save();ctx.strokeStyle=rgbaS(col,1);ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(x-7,y-5);ctx.lineTo(x+3,y-5);ctx.lineTo(x+8,y);ctx.lineTo(x+3,y+5);ctx.lineTo(x-7,y+5);ctx.closePath();ctx.stroke();
     ctx.beginPath();ctx.arc(x+2,y,1.4,0,TP);ctx.fillStyle=rgbaS(col,1);ctx.fill();ctx.restore();},
-  no:(ctx,x,y)=>mark(ctx,x,y,"no"),ok:(ctx,x,y)=>mark(ctx,x,y,"ok")};
+  no:(ctx,x,y)=>mark(ctx,x,y,"no"),ok:(ctx,x,y)=>mark(ctx,x,y,"ok"),
+  // a month: a calendar's page, its rings at the top and one day marked
+  cal:(ctx,x,y,col)=>{ctx.save();ctx.strokeStyle=rgbaS(col,1);ctx.lineWidth=1.6;rr(ctx,x-7,y-5.5,14,13,2);ctx.stroke();ctx.beginPath();ctx.moveTo(x-7,y-1.5);ctx.lineTo(x+7,y-1.5);
+    ctx.moveTo(x-3.5,y-8);ctx.lineTo(x-3.5,y-4);ctx.moveTo(x+3.5,y-8);ctx.lineTo(x+3.5,y-4);ctx.stroke();ctx.fillStyle=rgbaS(col,1);ctx.fillRect(x-4.5,y+1.5,3.4,3.4);ctx.restore();}};
 // a head over the rows: a mark of the lab's own at its left, a title in the lab's colour and a line under it, clear of the pile at the right
 // (L2.hx, L2.hw: where the head's words go; L2.sub: the line under the title, fitted in its layout to one or two lines)
 function head(ctx,L2,now,col,P2,mk){if(mk)mk(ctx,L2.x0+13,26,now);line1(ctx,P2.title,L2.hx,24,L2.hw,15,{w:800,color:rgbaS(col,1)});
@@ -264,6 +267,11 @@ PIC.confirm=(Lb,S)=>rows(Lb,S,{col:k=>k==="agent"?K.ai:k==="tomas"?K.tech:K.biz,
 // 5 · Run the map's checks: each check that stops a change, and what passes; the head is a brick stamped on its edge
 PIC.checks=(Lb,S)=>rows(Lb,S,{col:k=>k==="pass"?K.good:K.brick,icon:(ctx,x,y,c,now,k)=>k==="pass"?IC.ok(ctx,x,y):IC.no(ctx,x,y),
   mark:(ctx,x,y)=>{if(typeof bab_brick==="function"){ctx.save();ctx.translate(x,y);ctx.scale(0.42,0.42);bab_brick(ctx,0,0,56,{stamp:1});ctx.restore();}else{ctx.fillStyle=rgbaS(K.brick,1);rr(ctx,x-12,y-7,24,14,2);ctx.fill();}}});
+// 6 · Who keeps it, and when: a row for each beat of the map's rhythm, from every change to every year (the checks' tick, a person
+// leaving, a month, an agent tested, an owner's tag); the head is the map as a tower of glass, its tiers its layers
+PIC.keep=(Lb,S)=>rows(Lb,S,{col:k=>k==="change"?K.good:k==="leaves"?K.ret:k==="month"?K.ai:k==="quarter"?K.tech:K.biz,
+  icon:(ctx,x,y,c,now,k)=>k==="change"?IC.ok(ctx,x,y):k==="leaves"?IC.person(ctx,x,y,c):k==="month"?IC.cal(ctx,x,y,c):k==="quarter"?IC.agent(ctx,x,y,c,now):IC.tag(ctx,x,y,c),
+  mark:(ctx,x,y)=>{for(let i=0;i<4;i++){const bw=24-i*5;glass(ctx,x-bw/2,y+6-i*6,bw,5,2,K.lay[5-i],{glow:3,ea:0.85,fill:"rgba(7,12,24,0.94)"});}}});
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"aca-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));
@@ -426,4 +434,54 @@ VIS.checks=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.brick);const P2=PK.checks,v=q
     // its last runs, newest at the right: green for a pass, red where it stopped a change; the failing check's newest run is red
     for(let r=0;r<6;r++){const x=o.lw-m-12-r*13,fail=bad&&r===0||r>0&&(i*7+r*3+5)%11===0;ctx.fillStyle=rgbaS(fail?K.bad:K.good,0.85);ctx.beginPath();ctx.arc(x,y+rh/2,4,0,TP);ctx.fill();}});};
 VIS.checks.h=lw=>cl(lw*0.6,220,300);
+// 6 · keeping the map. vis.copy: an agent's instructions with a copy pasted in, beside where the things it copies are kept; once it's
+// answered, the copy is struck out and the agent reads them where they're kept, through a tool. vis.project: a timeline, the map's
+// distance from what's running brought down by a project that ends, and after it, drift again, or, once it's answered, a rhythm that
+// keeps it down. vis.read: the map of billing beside what's running there, with a step the map doesn't show; once it's answered, a
+// change drafted on the map's side, for its owner to confirm
+VIS.keep=(ctx,o,now,q,S)=>{const P2=PK.keep,v=q.vis,m=14,a=after(now,S,900),w=o.lw-m*2;
+  if(v.copy){ground(ctx,o.lw,o.h,K.ai);ttl(ctx,o,P2.copyT,K.ai);
+    const iw=Math.round(Math.min(w*0.52,250)),ix=m,iy=44,ih=o.h-iy-14,kx=ix+iw+44,kw=o.lw-m-kx;
+    glass(ctx,ix,iy,iw,ih,12,K.ai,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.92)"});orb(ctx,ix+19,iy+21,9,now);
+    const th=lines(ctx,P2.instr,ix+41,iy+25,iw-51,{size:12.5,max:2,w:800,color:rgbaS(K.ai,1)}),py=iy+Math.max(42,th+22);
+    // the copy pasted on top: grey paper, struck out once it's answered
+    paper(ctx,ix+12,py,iw-24,iy+ih-py-12,P2.pasted,[206,204,198],{rot:-0.03,size:12.5,max:4,strike:a>0.6});
+    // where they're kept, at the right, each on a card; once it's answered, read through a tool as the agent answers
+    P2.kept.forEach((s,i)=>chip(ctx,kx,iy+6+i*46,kw,36,s,K.biz,{size:12.5}));
+    const ly=iy+6+P2.kept.length*46+14;withA(ctx,1-a,()=>lines(ctx,P2.where,kx,ly,kw,{size:12,max:2,color:rgbaS(K.soft,1)}));
+    if(a>0)withA(ctx,a,()=>{const tx=ix+iw+22,ty=iy+6+18;ctx.save();ctx.strokeStyle=rgbaS(K.ai,1);ctx.lineWidth=2;ctx.beginPath();ctx.arc(tx,ty,9,0,TP);ctx.stroke();ctx.restore();IC.key(ctx,tx-1,ty,K.ai);
+      arrow(ctx,kx-3,ty,tx+12,ty,K.ai,1,{dash:[4,3],lw:1.6,head:6});arrow(ctx,tx-12,ty,ix+iw-3,ty,K.ai,1,{dash:[4,3],lw:1.6,head:6});
+      lines(ctx,P2.tool,kx,ly,kw,{size:12,max:3,color:rgbaS(K.ai,1)});});
+    return;}
+  if(v.project){ground(ctx,o.lw,o.h,K.biz);ttl(ctx,o,P2.projT,K.biz);
+    const x0=m+6,x1=o.lw-m-6,base=o.h-42,top=96,pe=lp(x0,x1,0.42);
+    lines(ctx,P2.drift,x0,48,w-12,{size:12,max:2,color:rgbaS(K.soft,1)});
+    ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.5);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x0,base);ctx.lineTo(x1,base);ctx.stroke();ctx.restore();
+    // the project, along the foot from its start to its end date
+    chip(ctx,x0,base+5,pe-x0,34,P2.project,K.biz,{size:12.5,max:2});
+    ctx.save();ctx.setLineDash([4,3]);ctx.strokeStyle=rgbaS(K.gold,0.9);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(pe,top-10);ctx.lineTo(pe,base);ctx.stroke();ctx.restore();
+    pill(ctx,pe+6,top-12,P2.ends,K.gold,{size:12});
+    // the map's distance from what's running: high where it had drifted, brought down by the project
+    const curve=(u0,u1,f,col,dash)=>{ctx.save();ctx.strokeStyle=rgbaS(col,1);ctx.lineWidth=2.4;ctx.lineCap="round";if(dash)ctx.setLineDash(dash);ctx.beginPath();
+      for(let i=0;i<=40;i++){const u=lp(u0,u1,i/40),x=lp(x0,x1,u),y=f(u);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();ctx.restore();};
+    curve(0,0.42,u=>lp(top+4,base-10,eo(u/0.42)),K.biz);
+    // after it: drifting again, until it's answered; then a rhythm that keeps it down, its beats along the way
+    withA(ctx,1-a,()=>{curve(0.42,1,u=>lp(base-10,top+18,0.9*eo((u-0.42)/0.58)),K.bad,[5,4]);line1(ctx,P2.after,pe+12,top+40,x1-pe-12,13,{w:800,align:"right",color:rgbaS(K.bad,1)});});
+    if(a>0)withA(ctx,a,()=>{curve(0.42,1,()=>base-10,K.good);for(let i=0;i<8;i++){const x=lp(pe+14,x1-4,i/7);ctx.fillStyle=rgbaS(K.good,1);ctx.beginPath();ctx.arc(x,base-10,3.6,0,TP);ctx.fill();}
+      lines(ctx,P2.rhythm,pe+12,top+24,x1-pe-12,{size:12,max:3,color:rgbaS(K.good,1)});});
+    return;}
+  // vis.read
+  ground(ctx,o.lw,o.h,K.ai);ttl(ctx,o,P2.readT,K.ai);
+  const pw=(w-12)/2,y0=44,rh=32,gap=6,ph=o.h-y0-14,tl=[P2.map,P2.running].map(s=>fitL(ctx,s,pw-20,12.5,2)),
+    ty=y0+14+Math.max(...tl.map(f=>f[0].length*f[1]*1.2))+6,cols=[K.lay[4],K.ai];
+  [P2.map,P2.running].forEach((s,j)=>{const x=m+j*(pw+12),c=cols[j];glass(ctx,x,y0,pw,ph,12,c,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.92)"});
+    lines(ctx,s,x+10,y0+22,pw-20,{size:12.5,max:2,w:800,color:rgbaS(c,1)});
+    P2.rows.forEach((r,i)=>chip(ctx,x+8,ty+i*(rh+gap),pw-16,rh,r,c,{size:12,max:2,tint:0.08}));
+    // what's running has a step the map doesn't show, and the map agent reading it
+    if(j===1){chip(ctx,x+8,ty+3*(rh+gap),pw-16,rh+8,P2.step,K.gold,{size:12,max:2,dash:1});orb(ctx,x+pw-14,y0+ph-14,7,now);}});
+  // once it's answered: a change drafted on the map's side, for its owner to confirm
+  if(a>0)withA(ctx,a,()=>{const x=m+8,y=ty+3*(rh+gap),cw=pw-16;paper(ctx,x,y,cw,rh+8,P2.draft,K.notes[0],{size:12,rot:-0.02});
+    arrow(ctx,m+pw+12+6,y+(rh+8)/2,x+cw+5,y+(rh+8)/2,K.gold,1,{dash:[4,3],lw:1.6,head:6});
+    lines(ctx,P2.confirm,x,y+rh+8+16,cw,{size:12,max:2,color:rgbaS(K.biz,1)});});};
+VIS.keep.h=(lw,q)=>q&&q.vis.read?cl(lw*0.74,300,340):cl(lw*0.66,260,300);
 })();

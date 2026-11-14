@@ -1,148 +1,196 @@
 WEBVTT
 
-00:00:01.400 --> 00:00:03.044
-One tap became a decision.
+00:00:01.400 --> 00:00:08.033
+The introduction showed the basics: how a data platform carries data from a tap on a phone to a decision.
 
-00:00:03.744 --> 00:00:07.600
-A new class opened, and 140 more students got a seat.
+00:00:08.733 --> 00:00:09.885
+That part matters.
 
-00:00:08.300 --> 00:00:09.866
-The platform did its job.
+00:00:10.985 --> 00:00:15.033
+But a platform alone doesn't make data useful to an organisation.
 
-00:00:11.166 --> 00:00:16.765
-So why, a week later, do two offices bring two numbers for the same class to the same meeting?
+00:00:16.333 --> 00:00:23.165
+Someone still has to know how the organisation works, what each word means, who decides, and who may see what.
 
-00:00:24.865 --> 00:00:26.927
-Start with one word: enrolled.
+00:00:31.065 --> 00:00:35.451
+Many courses and much of the documentation give you only half of that.
 
-00:00:27.627 --> 00:00:32.287
-In one office, with one system, it means one thing. Nobody has to ask.
+00:00:36.151 --> 00:00:40.523
+Some are deeply technical, with no business and no governance around the code.
 
-00:00:33.387 --> 00:00:34.987
-Then the university grows.
+00:00:41.223 --> 00:00:44.805
+Others stay neutral, and never say what to do, or in which tool.
 
-00:00:35.687 --> 00:00:38.532
-The student system counts everyone who signed up.
+00:00:45.505 --> 00:00:48.561
+So you join the halves yourself, at work, under pressure.
 
-00:00:39.232 --> 00:00:42.705
-The learning platform counts everyone who can open the course.
+00:00:49.661 --> 00:00:56.024
+That's how a model passes every test and answers the wrong question, or a policy never reaches the code.
 
-00:00:43.405 --> 00:00:45.490
-Finance counts everyone who has paid.
+00:00:57.724 --> 00:01:05.416
+The author of this portal has worked in applications, data and enterprise architecture roles for more than sixteen years.
 
-00:00:46.190 --> 00:00:49.091
-Three systems, three meanings, and each one is right.
+00:01:06.116 --> 00:01:09.438
+The pieces came together slowly, one project at a time.
 
-00:00:50.591 --> 00:00:53.193
-The platform moves all three, without a fault.
+00:01:10.538 --> 00:01:14.418
+Nobody who works with data should need sixteen years to join them.
 
-00:00:54.493 --> 00:00:55.773
-Now add more teams.
+00:01:15.718 --> 00:01:18.443
+So the key lessons are gathered here, in one place.
 
-00:00:56.473 --> 00:00:59.641
-Add an AI agent that answers from the same data.
+00:01:19.143 --> 00:01:25.221
+This is Learning Data: the context and the practice, from how the organisation works down to the code.
 
-00:01:00.341 --> 00:01:04.983
-Whatever the word means now is repeated everywhere, at once, and with confidence.
+00:01:26.521 --> 00:01:30.861
+Joining the two is what this portal calls enterprise data architecture.
 
-00:01:06.483 --> 00:01:08.506
-The platform was never the problem.
+00:01:34.961 --> 00:01:40.747
+The portal is laid out as a route of stations, like a railway line, in an order that makes sense.
 
-00:01:09.806 --> 00:01:15.385
-What changes the answer is how the organisation works, what was defined, and who decided.
+00:01:42.047 --> 00:01:43.676
+It starts with the foundations.
 
-00:01:19.685 --> 00:01:22.141
-So where do you start? Not with the platform.
+00:01:44.776 --> 00:01:49.784
+There are many conversations about tools, and far fewer about the foundations under them.
 
-00:01:22.841 --> 00:01:23.899
-Here is the route.
+00:01:51.284 --> 00:01:53.394
+Enterprise architecture comes first.
 
-00:01:24.999 --> 00:01:28.361
-Enterprise architecture: how does this organisation work?
+00:01:54.494 --> 00:02:00.651
+It describes how a business works: what it does, what it needs, which systems serve it, and how they connect.
 
-00:01:29.061 --> 00:01:31.091
-Data governance: who decides?
+00:02:01.951 --> 00:02:05.484
+In the author's experience, it's rarely taught in context.
 
-00:01:31.791 --> 00:01:33.482
-Those two are the foundations.
+00:02:06.184 --> 00:02:10.649
+So people struggle to describe a business, and to understand the one they work in.
 
-00:01:34.782 --> 00:01:35.722
-Then you build.
+00:02:12.149 --> 00:02:16.706
+Then data governance: who decides what the data means, and who may use it.
 
-00:01:36.422 --> 00:01:38.792
-Data modelling: what does each word mean?
+00:02:17.406 --> 00:02:21.092
+For years it was often seen as slow work that few wanted to do.
 
-00:01:39.492 --> 00:01:43.553
-Modern data basics: how does data move, run and get served today?
+00:02:22.192 --> 00:02:24.925
+Often the enterprise foundations under it were weak.
 
-00:01:44.253 --> 00:01:47.319
-Analytics engineering: how is it built, and tested?
+00:02:26.025 --> 00:02:31.534
+Or the technology wasn't ready to deliver governance as a service, built into the daily work.
 
-00:01:48.019 --> 00:01:50.417
-Data quality: is it right, and in time?
+00:02:32.634 --> 00:02:34.303
+So it stayed a set of policies.
 
-00:01:51.517 --> 00:01:54.011
-Two side routes leave after the foundations.
+00:02:35.603 --> 00:02:40.992
+This portal shows the newer way: governance built into the work, from the glossary to the code.
 
-00:01:54.711 --> 00:01:56.608
-One is about sharing and protecting.
+00:02:45.092 --> 00:02:48.254
+Then the main line, where data is built and kept right.
 
-00:01:57.308 --> 00:02:00.977
-Master and reference data: is it the same student everywhere?
+00:02:48.954 --> 00:02:52.658
+Its stations go deeper into each layer the introduction showed.
 
-00:02:01.677 --> 00:02:05.596
-Data protection and privacy: who may see it, and for how long?
+00:02:53.958 --> 00:02:57.129
+Two branch lines leave it, and join it again further on.
 
-00:02:06.296 --> 00:02:09.523
-The other is about agents: what may an agent do with it?
+00:02:57.829 --> 00:02:59.665
+One shares and protects data.
 
-00:02:10.623 --> 00:02:12.119
-They all meet again at the end.
+00:03:00.365 --> 00:03:03.579
+The other puts AI agents to work on data, safely.
 
-00:02:12.819 --> 00:02:15.858
-Data management: how does it all fit in one plan?
+00:03:04.679 --> 00:03:08.664
+The route ends on the whole picture: one plan for data management.
 
-00:02:16.558 --> 00:02:20.501
-And last, leading data people: who leads the people who do the work?
+00:03:09.364 --> 00:03:14.025
+And leading data people, for those who lead a data team, and for those being led.
 
-00:02:24.601 --> 00:02:26.489
-People have mapped this ground before.
+00:03:18.125 --> 00:03:26.914
+Along the main line, the films show a real project: a dbt project on GitHub, which runs on your own machine and on Databricks.
 
-00:02:27.189 --> 00:02:31.025
-The best known map is DAMA's wheel, with governance at its centre.
+00:03:27.614 --> 00:03:30.902
+What the films show on screen is code you can open, and run.
 
-00:02:32.325 --> 00:02:33.636
-Any good map will do.
+00:03:32.002 --> 00:03:34.092
+And it holds more than models and tests.
 
-00:02:34.336 --> 00:02:37.263
-This one is a route, because you have to start somewhere.
+00:03:34.792 --> 00:03:38.102
+Next to the code sit the folders most projects leave out.
 
-00:02:41.163 --> 00:02:44.048
-At every stop there are short films. Watch one.
+00:03:38.802 --> 00:03:46.091
+The business glossary, the owners, the architecture map, the data products and their contracts, and the decisions behind them.
 
-00:02:45.348 --> 00:02:47.115
-Let it stop and ask you a question.
+00:03:47.391 --> 00:03:53.146
+That is the business and governance metadata, kept in the same place as the code it describes.
 
-00:02:48.215 --> 00:02:49.706
-Take it apart in a lab.
+00:03:54.646 --> 00:03:56.479
+People argue a lot about tools.
 
-00:02:50.806 --> 00:02:52.896
-Make the call in a real situation.
+00:03:57.179 --> 00:04:04.501
+Here, dbt and Databricks show the ideas in a working solution, but any tools with the same capabilities would do.
 
-00:02:53.996 --> 00:02:56.444
+00:04:05.601 --> 00:04:08.237
+What matters is using those capabilities well.
+
+00:04:12.337 --> 00:04:14.155
+This ground has been mapped before.
+
+00:04:14.855 --> 00:04:18.250
+DAMA's wheel is the best known, and this portal covers it.
+
+00:04:19.350 --> 00:04:25.527
+It also goes further, into enterprise architecture, AI agents in data work and leadership.
+
+00:04:26.227 --> 00:04:29.812
+It adds other frameworks that proved their worth over those years.
+
+00:04:30.912 --> 00:04:32.605
+Data has many paradigms.
+
+00:04:33.305 --> 00:04:38.312
+Many were made by data people, for data, and look little at the enterprise around them.
+
+00:04:39.612 --> 00:04:42.216
+That is why this portal starts from the enterprise.
+
+00:04:42.916 --> 00:04:49.816
+Enterprise data architecture means exactly that: data designed as part of the organisation it serves.
+
+00:04:53.916 --> 00:04:56.992
+Every station is something to do, not only to watch.
+
+00:04:58.292 --> 00:05:01.979
+In a film, a question stops the picture and asks what you'd do.
+
+00:05:03.279 --> 00:05:08.166
+The answers are close: one is almost right, and the film has told you why it isn't.
+
+00:05:09.866 --> 00:05:12.843
+In a lab, you take an idea apart with your own hands.
+
+00:05:14.143 --> 00:05:18.514
+Enrol a student, and watch the event race into the platform, in seconds.
+
+00:05:20.214 --> 00:05:26.556
+In a scenario, you make the call in a real situation, put the steps in order, or sort what belongs where.
+
+00:05:28.056 --> 00:05:29.588
+Each answer tells you why.
+
+00:05:30.888 --> 00:05:33.336
 Pick a goal, and the route lights up your stops.
 
-00:02:57.944 --> 00:03:00.908
-Or search for a word, and find the film that says it.
+00:05:34.636 --> 00:05:37.373
+Search for a word, and find the film that says it.
 
-00:03:02.208 --> 00:03:04.770
-What you have done stays with you, in your own browser.
+00:05:38.673 --> 00:05:40.648
+Your progress stays in your own browser.
 
-00:03:08.670 --> 00:03:09.979
+00:05:44.948 --> 00:05:46.257
 Platforms have matured.
 
-00:03:10.679 --> 00:03:12.581
-The hard part is everything else.
+00:05:46.957 --> 00:05:52.634
+The hard part is everything else: the organisation, the meaning, the decisions and the people.
 
-00:03:13.881 --> 00:03:14.704
+00:05:54.134 --> 00:05:54.957
 Start there.

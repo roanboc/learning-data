@@ -97,8 +97,8 @@ window.LD_ROUTE = {
      "href": "more-than-a-platform/",
      "poster": "more-than-a-platform-poster.jpg",
      "kicker": "One film",
-     "len": "3½ min",
-     "min": 3.5,
+     "len": "6 min",
+     "min": 6.0,
      "films": [
       "ld-more-than-a-platform"
      ]
@@ -110,7 +110,7 @@ window.LD_ROUTE = {
    "group": "foundations",
    "name": "Enterprise architecture",
    "who": "For architects, and anyone new to an organisation",
-   "line": "How an organisation works, in layers, before you ask what its data should answer.",
+   "line": "How an organisation works, in layers, so its data is designed as part of it: enterprise data architecture.",
    "items": [
     {
      "id": "enterprise-architecture",

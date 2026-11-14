@@ -4,14 +4,14 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (the whole route, as the last station is named), the words the voice respells (AI, DAMA), and its opening (`worked`), where music may play throughout. |
+| `film.json` | The film's key, title, subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (the whole route, as the last station is named), the words the voice respells (AI, dbt, DAMA), its opening (`beyond`), where music may play throughout, and the product marks it draws (`logos`). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
-| `src/breath.js` | The holds after some lines, and two wordless moments: the title card after the opening's question, and the end card. |
-| `src/mp_draw.js` | The film's own pictures: the learning route as the Topics page draws it (`mp_route`, with its stations, names and groups), a phone, a sheet of paper with a count, the meeting table, a row in the platform, a reader's card, a wheel with a hub and ten parts, two other maps as outlines, and six shapes for what a visitor can do. |
-| `src/scenes.js` | The six chapters. The whole film is on the module's map, one room, and the camera never moves: a new moment is a later one (`later:true`), and a chapter opens on what the one before ends on (`ag_cutInto`). From the fourth chapter the route stays where it is. |
+| `src/breath.js` | The holds after some lines, which keep every chapter at or under 140 words a minute, and two wordless moments: the title card after the opening, and the end card. |
+| `src/mp_draw.js` | The film's own pictures: the learning route as the Topics page draws it (`mp_route`, with its stations, names and groups), the opening's four places, a code card and a boxes card, the author's roles on a timeline, the project's folder tree with its governance folders, a wheel with a hub and ten parts, diagrams turned inward, and the shapes for what a visitor can do. |
+| `src/scenes.js` | The eight chapters. The whole film is on the module's map, one room, and the camera never moves: a new moment is a later one (`later:true`), and a chapter opens on what the one before ends on (`ag_cutInto`). |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line. |
-| `tools/score.py` | The film's music and sounds: chime bars, made here, as a station's announcement plays them. G major, E minor for the meeting's two numbers, tuned pure from G. Each sound uses the same timing as its picture. |
+| `tools/score.py` | The film's music and sounds: chime bars, made here, as a station's announcement plays them. G major for the route, E minor for the half courses leave out, C major for the foundations and enterprise data architecture, tuned pure from G. Each sound uses the same timing as its picture. |
 | `tools/audio_es.py` | The Spanish narration: each Spanish caption read aloud (es-MX-DaliaNeural) from its English line's cue, over the same score, as `soundtrack.es.mp3`. It needs the network for the voice. |
 | `tools/` | Each other tool runs the module's tool (`../../../data-that-moves/shared/tools/run.py`) on this film. |
 

@@ -1315,10 +1315,10 @@ PROJECT_TEXT = {
     "en": dict(
         title="The example dbt project · Learning Data", h1="The example dbt project",
         desc="One real dbt project behind many of the films: what it answers, how to run it on your laptop or on Databricks, where each part lives, and which films show it.",
-        lead="One real dbt project, for a fictional university, is behind many of these films. Every file they show on screen is in it. It runs on your laptop with DuckDB, and the same code runs on Databricks.",
+        lead="One real project, for a fictional university, is behind many of these films. It adds what a dbt project lacks on its own: who asks, what the words mean, who owns the data and what was promised.",
         repo="Open it on GitHub", run="How to run it",
         what_h="What it is",
-        what="It started with one question from Planning: how many learners are within 15 credit points of a graduate certificate, by faculty, at census date? In the weeds of data crafting builds that answer step by step. Later films add what a real team needs around it: a wallet app and Finance reading the same facts, payroll's jobs, data quality checks, governance files, and the rules AI agents work under.",
+        what="Every file the films show on screen is in it. It started with one question from Planning: how many learners are within 15 credit points of a graduate certificate, by faculty, at census date? In the weeds of data crafting builds that answer step by step. Later films add what a real team needs around it: a wallet app and Finance reading the same facts, payroll's jobs, data quality checks, governance files, and the rules AI agents work under.",
         run_h="Run it yourself",
         laptop="On your laptop", laptop_p="Python 3.11 or later, no account. dbt loads the sample data, builds every model and runs every test, on DuckDB.",
         dbx="On Databricks", dbx_p="The same code, with dbt Cloud or dbt Core. Load the sample files into Unity Catalog first; the README has the steps.",
@@ -1331,10 +1331,10 @@ PROJECT_TEXT = {
     "es": dict(
         title="El proyecto de dbt de ejemplo · Learning Data", h1="El proyecto de dbt de ejemplo",
         desc="Un proyecto de dbt real detrás de muchas de las películas: qué responde, cómo ejecutarlo en tu computadora o en Databricks, dónde está cada parte y qué películas lo muestran.",
-        lead="Un proyecto de dbt real, para una universidad ficticia, está detrás de muchas de estas películas. Cada archivo que muestran en pantalla está en él. Corre en tu computadora con DuckDB, y el mismo código corre en Databricks.",
+        lead="Un proyecto real, para una universidad ficticia, está detrás de muchas de estas películas. Suma lo que a un proyecto de dbt le falta solo: quién pregunta, qué significan las palabras, de quién son los datos y qué se prometió.",
         repo="Ábrelo en GitHub", run="Cómo ejecutarlo",
         what_h="Qué es",
-        what="Empezó con una pregunta de Planificación: ¿cuántos estudiantes están a 15 créditos o menos de un certificado de posgrado, por facultad, a la fecha del censo? In the weeds of data crafting construye esa respuesta paso a paso. Las películas siguientes le suman lo que un equipo real necesita alrededor: una billetera digital y Finanzas leyendo los mismos hechos, los trabajos de la nómina, controles de calidad de datos, archivos de gobernanza y las reglas con las que trabajan los agentes de IA.",
+        what="Cada archivo que las películas muestran en pantalla está en él. Empezó con una pregunta de Planificación: ¿cuántos estudiantes están a 15 créditos o menos de un certificado de posgrado, por facultad, a la fecha del censo? In the weeds of data crafting construye esa respuesta paso a paso. Las películas siguientes le suman lo que un equipo real necesita alrededor: una billetera digital y Finanzas leyendo los mismos hechos, los trabajos de la nómina, controles de calidad de datos, archivos de gobernanza y las reglas con las que trabajan los agentes de IA.",
         run_h="Ejecútalo tú",
         laptop="En tu computadora", laptop_p="Python 3.11 o posterior, sin cuenta. dbt carga los datos de muestra, construye cada modelo y corre cada prueba, en DuckDB.",
         dbx="En Databricks", dbx_p="El mismo código, con dbt Cloud o dbt Core. Primero carga los archivos de muestra en Unity Catalog; el README tiene los pasos.",
@@ -1437,6 +1437,180 @@ def project_box(lg, n, RL):
             f'<p class="pj-a"><a href="{RL}{PROJECT_PATH}">{E(X["projpage"])}</a></p></div></div>')
 
 
+# How the project fits together, drawn on its page: the three teams' folders and what passes between them, the data project's
+# layers, the open standards that carry the business into the code, one answer followed, and what dbt alone doesn't hold
+# (the author, 15 November 2026). Paths are as the films name them (proj_path finds them in the repository).
+PROJECT_LANES = [
+    ("ea", "10", ("Enterprise architecture", "Arquitectura empresarial"), ("Why, and where", "Por qué y dónde"), "../10-enterprise-architecture/", [
+        (("Questions and goals", "Preguntas y metas"), "../10-enterprise-architecture/architecture/1_strategy/1_motivation.md"),
+        (("Capabilities", "Capacidades"), "../10-enterprise-architecture/architecture/1_strategy/2_capabilities.md"),
+        (("Services and actors", "Servicios y actores"), "../10-enterprise-architecture/architecture/2_business/1_actors-and-services.md"),
+        (("Data domains and objects", "Dominios y objetos de datos"), "../10-enterprise-architecture/architecture/3_information/1_data-domains-and-objects.md"),
+        (("Systems of record", "Sistemas de registro"), "../10-enterprise-architecture/architecture/4_application/1_realization-register.md"),
+        (("The platform's parts", "Las partes de la plataforma"), "../10-enterprise-architecture/architecture/5_technology/1_platforms.md")]),
+    ("dg", "20", ("Data governance", "Gobierno de datos"), ("What it means, who answers, what is promised", "Qué significa, quién responde, qué se promete"), "governance/", [
+        (("Business glossary", "Glosario del negocio"), "governance/1-glossary/business-glossary.yml"),
+        (("Owners", "Responsables"), "governance/2-owners/owners.yml"),
+        (("Information assets", "Activos de información"), "governance/9-information-assets/information-assets.yml"),
+        (("Enterprise contracts · ODCS", "Contratos empresariales · ODCS"), "governance/5-data-contracts/"),
+        (("Data products · ODPS", "Productos de datos · ODPS"), "governance/4-data-products/"),
+        (("Metrics · Apache Ossie", "Métricas · Apache Ossie"), "governance/11-metrics/"),
+        (("Agent mandates", "Mandatos de agentes"), "governance/8-mandates/")]),
+    ("dp", "30", ("Data project", "Proyecto de datos"), ("Built, tested and run", "Construido, probado y ejecutado"), "", [
+        (("Sources", "Fuentes"), "sources/"),
+        (("Models, in layers", "Modelos, en capas"), "models/"),
+        (("Tests and reconciliations", "Pruebas y conciliaciones"), "tests/"),
+        (("Semantic layer", "Capa semántica"), "models/marts/planning/_planning__semantic.yml"),
+        (("Exposures", "Exposiciones"), "exposures/"),
+        (("Checks against governance", "Verificaciones contra gobierno"), "scripts/check/"),
+        (("Jobs on the platform", "Trabajos en la plataforma"), "resources/")]),
+]
+PROJECT_ARROWS = [("refined by", "refinado por"), ("read and checked by", "leído y verificado por")]
+# what passes from one team to the next, and what holds it
+PROJECT_HANDOFFS = [
+    ("ea", ("Data object: Learner", "Objeto de datos: Estudiante"), "dg", ("Information asset: owner, steward, level", "Activo de información: responsable, custodio, nivel"),
+     ("Governance's check: every asset on the map", "La verificación de gobierno: cada activo en el mapa"), "governance/scripts/check.py"),
+    ("dg", ("Glossary term", "Término del glosario"), "dp", ("Column and model descriptions", "Descripciones de columnas y modelos"),
+     ("Copied with its source, checked for drift", "Copiado con su fuente, verificado contra desvíos"), "scripts/check/from_governance.py"),
+    ("dg", ("Enterprise contract", "Contrato empresarial"), "dp", ("Core model, contract enforced", "Modelo central, contrato exigido"),
+     ("The build fails if they differ", "La construcción falla si difieren"), "scripts/generate/products.py"),
+    ("dg", ("Data product", "Producto de datos"), "dp", ("Its marts, and its descriptor", "Sus marts y su descriptor"),
+     ("The descriptor is written from the models", "El descriptor se escribe desde los modelos"), "scripts/generate/products.py"),
+    ("dg", ("Metric, defined once", "Métrica, definida una vez"), "dp", ("Semantic layer's metric", "Métrica de la capa semántica"),
+     ("Same measure, filter and expression", "Misma medida, filtro y expresión"), "scripts/check/from_governance.py"),
+    ("dg", ("Agent mandate", "Mandato de agente"), "dp", ("The agent's tools and rights", "Las herramientas y derechos del agente"),
+     ("No tool allows more than the mandate", "Ninguna herramienta permite más que el mandato"), "scripts/check/mandates.py"),
+    ("dg", ("Owners", "Responsables"), "dp", ("A change's impact report", "El informe de impacto de un cambio"),
+     ("Owners are told what it touches, not asked to review", "A los responsables se les informa, no se les pide revisar"), "scripts/check/impact.py"),
+]
+PROJECT_LAYERS = [
+    (("Sources", "Fuentes"), ("Nine systems, with keys, freshness and known limits", "Nueve sistemas, con claves, frescura y límites conocidos"), None, "sources/"),
+    (("Staging", "Staging"), ("One model per table: rename, cast, add keys", "Un modelo por tabla: renombrar, tipar, agregar claves"), None, "models/staging/"),
+    (("Intermediate", "Intermedia"), ("One learner across systems, one timeline", "Un estudiante en todos los sistemas, una línea de tiempo"), None, "models/intermediate/"),
+    (("Core", "Central"), ("One table per entity, shared by every team", "Una tabla por entidad, compartida por todos"), ("Enterprise contract · ODCS", "Contrato empresarial · ODCS"), "models/core/"),
+    (("Marts", "Marts"), ("One per consumer team", "Uno por equipo consumidor"), ("Consumer contract · ODPS product", "Contrato de consumidor · producto ODPS"), "models/marts/"),
+    (("Metrics", "Métricas"), ("Each measure built from its definition", "Cada medida construida desde su definición"), ("Apache Ossie", "Apache Ossie"), "models/marts/planning/_planning__semantic.yml"),
+    (("Exposures", "Exposiciones"), ("Dashboards, apps, exports and agents", "Tableros, aplicaciones, exportaciones y agentes"), None, "exposures/"),
+]
+PROJECT_STANDARDS = [
+    (("Data contracts", "Contratos de datos"), "Open Data Contract Standard 3.1.0",
+     ("Written first by data governance's information architect, only for canonical tables. The data team builds the model to it.",
+      "Lo escribe primero el arquitecto de información de gobierno de datos, solo para las tablas canónicas. El equipo de datos construye el modelo según él."),
+     ("Schema, keys, each column's class, quality rules, version", "Esquema, claves, la clase de cada columna, reglas de calidad, versión"),
+     ("The core model's enforced dbt contract", "El contrato de dbt exigido del modelo central"), "governance/5-data-contracts/core_learner_v1.yaml"),
+    (("Data products", "Productos de datos"), "Open Data Product Standard 1.0.0",
+     ("Written by each product's owner. The descriptor in the standard is generated from the dbt models.",
+      "Lo escribe el responsable de cada producto. El descriptor en el estándar se genera desde los modelos de dbt."),
+     ("Owner, purpose, outputs, service levels, support", "Responsable, propósito, salidas, niveles de servicio, soporte"),
+     ("The marts it serves, and who reads them", "Los marts que sirve, y quién los lee"), "governance/4-data-products/learners_near_an_award.yml"),
+    (("Metrics", "Métricas"), "Apache Ossie 0.1.1",
+     ("Written by each measure's owner, once, in a format no tool owns.", "Lo escribe el responsable de cada medida, una vez, en un formato que no es de ninguna herramienta."),
+     ("Dataset, measures, filters, and context for AI", "Conjunto de datos, medidas, filtros y contexto para la IA"),
+     ("dbt's semantic layer, and the platform's metric views", "La capa semántica de dbt y las vistas de métricas de la plataforma"), "governance/11-metrics/learners_near_an_award.ossie.yaml"),
+]
+PROJECT_TRACE = [
+    ("ea", ("Who asks", "Quién pregunta"), ("Planning: how many learners are within 15 credit points of a graduate certificate, by faculty?", "Planificación: ¿cuántos estudiantes están a 15 créditos o menos de un certificado de posgrado, por facultad?"), "../10-enterprise-architecture/architecture/1_strategy/1_motivation.md"),
+    ("ea", ("What exists", "Qué existe"), ("Learner, a data object first recorded in the student system", "Estudiante, un objeto de datos registrado primero en el sistema de estudiantes"), "../10-enterprise-architecture/architecture/3_information/1_data-domains-and-objects.md"),
+    ("dg", ("What it means", "Qué significa"), ("Award, a glossary term owned by Mei Tanaka, registrar's office", "Título, un término del glosario cuya responsable es Mei Tanaka, de la oficina de registro"), "governance/1-glossary/business-glossary.yml"),
+    ("dg", ("Who answers", "Quién responde"), ("The learner asset: confidential, with direct personal data", "El activo estudiante: confidencial, con datos personales directos"), "governance/9-information-assets/information-assets.yml"),
+    ("dg", ("What the shared table promises", "Qué promete la tabla compartida"), ("core_learner, version 1, in ODCS", "core_learner, versión 1, en ODCS"), "governance/5-data-contracts/core_learner_v1.yaml"),
+    ("dg", ("What Planning is promised", "Qué se le promete a Planificación"), ("Learners near an award: owner Clara Jensen, ready by 7 a.m.", "Estudiantes cerca de un título: responsable Clara Jensen, listo a las 7 a. m."), "governance/4-data-products/learners_near_an_award.yml"),
+    ("dg", ("How it's counted", "Cómo se cuenta"), ("Defined once, in Apache Ossie", "Definido una vez, en Apache Ossie"), "governance/11-metrics/learners_near_an_award.ossie.yaml"),
+    ("dp", ("How it's built", "Cómo se construye"), ("Staging, core_learner, then Planning's mart", "Staging, core_learner y luego el mart de Planificación"), "models/marts/planning/mart_planning__near_award.sql"),
+    ("dp", ("How it's proved", "Cómo se prueba"), ("Tests, and a reconciliation with the census report", "Pruebas y una conciliación con el informe del censo"), "tests/reconciliation/"),
+    ("dp", ("Who reads it", "Quién lo lee"), ("The census dashboard", "El tablero del censo"), "exposures/planning/_planning__exposures.yml"),
+]
+PROJECT_COMPARE = [
+    (("Why it exists", "Por qué existe"), ("A model's description, if someone wrote one", "La descripción de un modelo, si alguien la escribió"),
+     ("A question, who asks it, and the goal it serves", "Una pregunta, quién la hace y la meta a la que sirve")),
+    (("What words mean", "Qué significan las palabras"), ("Column descriptions, written model by model", "Descripciones de columnas, escritas modelo por modelo"),
+     ("Copied from one glossary, with each term's owner", "Copiadas de un solo glosario, con el responsable de cada término")),
+    (("Who answers for it", "Quién responde"), ("An owner tag, if anyone added one", "Una etiqueta de responsable, si alguien la puso"),
+     ("An owner and a steward for each asset, with its level", "Un responsable y un custodio por activo, con su nivel")),
+    (("What is promised", "Qué se promete"), ("Column names and types", "Nombres y tipos de columnas"),
+     ("A contract in ODCS and a product in ODPS, with service levels", "Un contrato en ODCS y un producto en ODPS, con niveles de servicio")),
+    (("How a measure is defined", "Cómo se define una medida"), ("In one tool's own format", "En el formato propio de una herramienta"),
+     ("Once, in Apache Ossie, then built into each tool", "Una vez, en Apache Ossie, y luego en cada herramienta")),
+    (("What an agent may do", "Qué puede hacer un agente"), ("Whatever its credentials allow", "Lo que permitan sus credenciales"),
+     ("A signed mandate, checked against its tools", "Un mandato firmado, verificado contra sus herramientas")),
+]
+PROJECT_VIS = {
+    "en": dict(
+        fit_h="How it fits together", fit_p="A dbt project knows its models, columns and tests. It doesn't know who asked, what the words mean, who owns the data or what was promised. Here that business context comes first, from two other teams, and flows one way into the code.",
+        fit_alt="Enterprise architecture, refined by data governance, then read and checked by the data project. Each box lists what that team holds, and opens its file.",
+        pass_h="What passes between them, and what holds it", from_="From", to="To",
+        lay_h="The layers of the data project", lay_p="Each layer does one job. Only the core's shared tables have an enterprise contract; the marts' contracts are agreed team to team.",
+        lay_alt="Seven steps, in order: sources, staging, intermediate, core, marts, metrics and exposures.",
+        across="On every model, in every layer: an owner, each column's class and glossary term, and tests with an owner and a quality dimension.",
+        std_h="Open standards that carry the business", std_p="Three kinds of promise, each in an open standard, so they outlive any tool. Each one is written by the people who answer for it, and the build checks the code against it.",
+        who="Written by", holds="Holds", lands="Lands in", example="See an example",
+        tr_h="One answer, followed", tr_p="Planning's question, from the architecture to the number on the dashboard.",
+        cmp_h="What dbt alone doesn't hold", cmp_a="A dbt project alone", cmp_b="With the business context",
+        all_h="Every folder, and what it holds"),
+    "es": dict(
+        fit_h="Cómo encaja todo", fit_p="Un proyecto de dbt conoce sus modelos, columnas y pruebas. No sabe quién preguntó, qué significan las palabras, de quién son los datos ni qué se prometió. Aquí ese contexto del negocio va primero, desde otros dos equipos, y fluye en un solo sentido hacia el código.",
+        fit_alt="La arquitectura empresarial, refinada por gobierno de datos, y luego leída y verificada por el proyecto de datos. Cada caja lista lo que guarda ese equipo y abre su archivo.",
+        pass_h="Qué pasa de uno a otro, y qué lo sostiene", from_="Desde", to="Hacia",
+        lay_h="Las capas del proyecto de datos", lay_p="Cada capa hace un solo trabajo. Solo las tablas compartidas del núcleo tienen contrato empresarial; los contratos de los marts se acuerdan entre equipos.",
+        lay_alt="Siete pasos, en orden: fuentes, staging, intermedia, central, marts, métricas y exposiciones.",
+        across="En cada modelo, en cada capa: un responsable, la clase y el término del glosario de cada columna, y pruebas con responsable y dimensión de calidad.",
+        std_h="Estándares abiertos que llevan el negocio", std_p="Tres tipos de promesa, cada uno en un estándar abierto, para que duren más que cualquier herramienta. Cada uno lo escriben quienes responden por él, y la construcción verifica el código contra él.",
+        who="Lo escribe", holds="Guarda", lands="Llega a", example="Ver un ejemplo",
+        tr_h="Una respuesta, seguida", tr_p="La pregunta de Planificación, desde la arquitectura hasta el número en el tablero.",
+        cmp_h="Lo que dbt solo no guarda", cmp_a="Un proyecto de dbt solo", cmp_b="Con el contexto del negocio",
+        all_h="Cada carpeta y lo que guarda"),
+}
+
+
+def project_visuals(lg):
+    """The project page's drawings, as HTML that reflows on a phone: the three folders and what passes between them, the layers,
+    the open standards, one answer followed and what dbt alone doesn't hold. Every box links to its file on GitHub."""
+    V = PROJECT_VIS[lg]; L = lambda p: T(lg, *p)
+    lane_name = {k: L(n) for k, _, n, _, _, _ in PROJECT_LANES}
+    out = (f'<section class="module" id="fit" aria-labelledby="fit-h">\n<div class="mhead"><div><h2 id="fit-h">{E(V["fit_h"])}</h2><p>{E(V["fit_p"])}</p></div></div>\n'
+           f'<figure class="pv-fig"><div class="pv-lanes">\n')
+    for i, (k, nb, name, whose, folder, items) in enumerate(PROJECT_LANES):
+        if i:
+            out += f'<div class="pv-arrow" aria-hidden="true"><span>{E(L(PROJECT_ARROWS[i - 1]))}</span></div>\n'
+        lis = "".join(f'<li><a href="{proj_url(p)}">{E(L(lab))}</a></li>' for lab, p in items)
+        out += (f'<div class="pv-lane pv-{k}"><p class="pv-num"><a href="{proj_url(folder)}">{nb}</a></p>'
+                f'<h3>{E(L(name))}</h3><p class="pv-who">{E(L(whose))}</p><ul>{lis}</ul></div>\n')
+    out += f'</div><figcaption class="pv-cap">{E(V["fit_alt"])}</figcaption></figure>\n'
+    out += f'<h3 class="pv-sub">{E(V["pass_h"])}</h3>\n<ol class="pv-pass">\n'
+    for fk, fl, tk, tl, how, p in PROJECT_HANDOFFS:
+        out += (f'<li><span class="pv-chip pv-{fk}"><small>{E(lane_name[fk])}</small>{E(L(fl))}</span><span class="pv-to" aria-label="{E(V["to"])}">→</span>'
+                f'<span class="pv-chip pv-{tk}"><small>{E(lane_name[tk])}</small>{E(L(tl))}</span>'
+                f'<a class="pv-how" href="{proj_url(p)}">{E(L(how))}</a></li>\n')
+    out += '</ol>\n</section>\n\n'
+    # the layers
+    out += (f'<section class="module" id="layers" aria-labelledby="layers-h">\n<div class="mhead"><div><h2 id="layers-h">{E(V["lay_h"])}</h2><p>{E(V["lay_p"])}</p></div></div>\n'
+            f'<figure class="pv-fig"><ol class="pv-layers">\n')
+    for name, line, tag, p in PROJECT_LAYERS:
+        t = f'<span class="pv-tag">{E(L(tag))}</span>' if tag else ''
+        out += f'<li><a href="{proj_url(p)}"><b>{E(L(name))}</b><span>{E(L(line))}</span>{t}</a></li>\n'
+    out += (f'</ol><p class="pv-across"><a href="{proj_url("docs/how-to/")}">{E(V["across"])}</a></p>'
+            f'<figcaption class="pv-cap">{E(V["lay_alt"])}</figcaption></figure>\n</section>\n\n')
+    # the open standards
+    out += (f'<section class="module" id="standards" aria-labelledby="standards-h">\n<div class="mhead"><div><h2 id="standards-h">{E(V["std_h"])}</h2><p>{E(V["std_p"])}</p></div></div>\n'
+            f'<div class="pv-std">\n')
+    for name, std, who, holds, lands, p in PROJECT_STANDARDS:
+        out += (f'<div><h3>{E(L(name))}</h3><p class="pv-sn">{E(std)}</p><dl><dt>{E(V["who"])}</dt><dd>{E(L(who))}</dd>'
+                f'<dt>{E(V["holds"])}</dt><dd>{E(L(holds))}</dd><dt>{E(V["lands"])}</dt><dd>{E(L(lands))}</dd></dl>'
+                f'<p class="film-links"><a href="{proj_url(p)}">{E(V["example"])}</a></p></div>\n')
+    out += '</div>\n</section>\n\n'
+    # one answer, followed
+    out += (f'<section class="module" id="trace" aria-labelledby="trace-h">\n<div class="mhead"><div><h2 id="trace-h">{E(V["tr_h"])}</h2><p>{E(V["tr_p"])}</p></div></div>\n'
+            f'<ol class="pv-trace">\n')
+    for k, step, what, p in PROJECT_TRACE:
+        out += f'<li class="pv-{k}"><small>{E(lane_name[k])} · {E(L(step))}</small><a href="{proj_url(p)}">{E(L(what))}</a></li>\n'
+    out += '</ol>\n</section>\n\n'
+    # what dbt alone doesn't hold
+    rows = "".join(f'<tr><th scope="row">{E(L(a))}</th><td>{E(L(b))}</td><td>{E(L(c))}</td></tr>' for a, b, c in PROJECT_COMPARE)
+    out += (f'<section class="module" id="context" aria-labelledby="context-h">\n<div class="mhead"><div><h2 id="context-h">{E(V["cmp_h"])}</h2></div></div>\n'
+            f'<div class="pv-cmp"><table><thead><tr><td></td><th scope="col">{E(V["cmp_a"])}</th><th scope="col">{E(V["cmp_b"])}</th></tr></thead><tbody>{rows}</tbody></table></div>\n</section>\n\n')
+    return out
+
+
 def project_page(lg):
     """dbt-project/: what the example project is, how to run it, where things live, and the films that show it, each with the
     files its chapters show."""
@@ -1451,12 +1625,13 @@ def project_page(lg):
             f'<p class="eyebrow crumbs"><a href="{RL}topics/">{T(lg, "Topics", "Temas")}</a></p>\n<h1>{E(P["h1"])}</h1>\n<p class="lead">{E(P["lead"])}</p>\n'
             f'<p class="stop-nav"><a class="btn primary" href="{proj_url(root=True)}">{E(P["repo"])}</a><a class="btn" href="{proj_url("README.md")}">{E(P["run"])}</a></p>\n</section>\n\n'
             f'<section class="module" id="what" aria-labelledby="what-h">\n<div class="mhead"><div><h2 id="what-h">{E(P["what_h"])}</h2><p>{E(P["what"])}</p></div></div>\n</section>\n\n'
+            f'{project_visuals(lg)}'
             f'<section class="module" id="run" aria-labelledby="run-h">\n<div class="mhead"><div><h2 id="run-h">{E(P["run_h"])}</h2></div></div>\n<div class="pj-run">\n'
             f'<div><h3>{E(P["laptop"])}</h3><p>{E(P["laptop_p"])}</p><pre><code>git clone {PROJECT_REPO}\ncd learning-data-project/30-data-project\npip install -r requirements.txt\ndbt build --profiles-dir .</code></pre></div>\n'
             f'<div><h3>{E(P["dbx"])}</h3><p>{E(P["dbx_p"])}</p><pre><code>pip install -r requirements-databricks.txt\ndbt build --target databricks --profiles-dir .</code></pre></div>\n'
             f'</div>\n<p class="film-links"><a href="{proj_url("README.md")}">{E(P["run"])}</a></p>\n</section>\n\n'
             f'<section class="module" id="where" aria-labelledby="where-h">\n<div class="mhead"><div><h2 id="where-h">{E(P["where_h"])}</h2><p>{E(P["where_p"])}</p></div></div>\n'
-            f'<ul class="repo-list">\n{parts}\n</ul>\n</section>\n\n'
+            f'<details class="pv-all"><summary>{E(PROJECT_VIS[lg]["all_h"])}</summary>\n<ul class="repo-list">\n{parts}\n</ul>\n</details>\n</section>\n\n'
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{E(P["films_h"])}</h2><p>{E(P["films_p"].format(n=n))}</p></div></div>\n')
     for t, rows in groups:
         body += f'<div class="pj-topic">\n<h3>{PROJECT_ICON}<a href="{RL}topics/#{t["id"]}">{E(t["name"][lg])}</a></h3>\n'

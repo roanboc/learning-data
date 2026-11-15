@@ -71,6 +71,8 @@
 
 /* a topic's films and series, below the map and inside the rail */
 .r-panel{margin-top:18px;border-top:1px solid var(--line);padding-top:20px;display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:28px}
+.r-col{min-width:0}.r-col>.pj-box{max-width:560px}
+a.r-rb{text-decoration:none}a.r-rb:hover b{text-decoration:underline;text-underline-offset:3px}
 .r-about h3{font-size:22px;margin:6px 0 8px}
 .r-who{color:var(--accent);font-weight:700;font-size:14.5px;margin:0 0 6px}
 .r-line{color:var(--muted);font-size:15px;margin:0 0 10px}

@@ -1035,9 +1035,15 @@ async def check_progress(run):
         await pg.close()
         return ctx
 
+    async def kept(seed):  # every page starts from the seed: a page with the scenarios on it (Make the call, which now shows
+        # More than a platform's card and its chip) checks the saved answers against its own and rewrites them
+        ctx = await seeded(seed)
+        await ctx.add_init_script(f"(s => {{ for (const k in s) localStorage.setItem(k, JSON.stringify(s[k])); }})({json.dumps(seed)})")
+        return ctx
+
     stops = re.findall(r'\["(\w+)","\w+",\[', (WEB / "assets/learn/learn.js").read_text())
     # seed 1: the intro watched, every lab, two answers
-    ctx = await seeded({"ld:watched": True, "ld:visited": stops, "ld:quiz": {"cur": 3, "ans": {"0": {"ok": True}, "1": {"ok": False}}, "sum": {}}})
+    ctx = await kept({"ld:watched": True, "ld:visited": stops, "ld:quiz": {"cur": 3, "ans": {"0": {"ok": True}, "1": {"ok": False}}, "sum": {}}})
     try:
         for key in run.pick(("", "es/")):
             pg, _ = await run.page(ctx, key)
@@ -1058,7 +1064,7 @@ async def check_progress(run):
     finally:
         await ctx.close()
     # seed 2: A Sharper Sketch, one lab and two answers
-    ctx = await seeded({"ld3:quiz": {"0": {"ok": True}, "5": {"ok": True}}, "ld3:visited": ["grain"]})
+    ctx = await kept({"ld3:quiz": {"0": {"ok": True}, "5": {"ok": True}}, "ld3:visited": ["grain"]})
     try:
         for key in chip_pages:
             pg, _ = await run.page(ctx, key)
@@ -1712,7 +1718,7 @@ async def check_route(run):
                 await pg.wait_for_selector(".route.drawn", timeout=5000)
                 f = await pg.evaluate(FACTS)
                 expect(sec, f["route"] and not f["list"] and f["pressed"] == ["route"], f"{at}: a first visit shows the route, not the list ({f['route']}, {f['list']}, {f['pressed']})")
-                expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start")
+                expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n + 1)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start (and the start, first on the rail)")
                 expect(sec, f["intro"] == 1, f"{at}: {f['intro']} introduction cards, the route's first station")
                 expect(sec, f["goals"] == len(d["goals"]) + 1, f"{at}: {f['goals']} goal buttons, for {len(d['goals'])} goals and the whole route")
                 expect(sec, f["wide"], f"{at}: the page scrolls sideways")
@@ -1752,11 +1758,11 @@ async def check_route(run):
             for key in hkeys:
                 d = D[lang(key)]; pre = "es/" if lang(key) == "es" else ""
                 pg, log = await run.page(ctx, key)
-                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.more-steps a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
+                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.steps-note a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
                     map: document.querySelectorAll('[data-route], .r-map, .r-rail, .topic-links, .topic-tiles').length, wide: document.documentElement.scrollWidth <= innerWidth,
-                    small: [...document.querySelectorAll('.more-steps a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
+                    small: [...document.querySelectorAll('.steps-note a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
                 expect(sec, r["steps"] == ["labs/", "scenarios/"], f"/{key} @{width}: after the film, its two other steps are {r['steps']}")
-                expect(sec, r["ways"] == ["topics/", "journey/"] and not r["map"], f"/{key} @{width}: then the route and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
+                expect(sec, r["ways"] == ["topics/", "dbt-project/", "journey/"] and not r["map"], f"/{key} @{width}: then the route, the example project and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
                 expect(sec, r["wide"] and not r["small"], f"/{key} @{width}: scrolls sideways ({not r['wide']}) or has {r['small']} links under 32 px tall")
                 if width == 390:
                     await pg.click('.home-next a.primary')

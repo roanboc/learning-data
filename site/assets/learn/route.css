@@ -207,7 +207,7 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 .pj-films details[open]{padding-bottom:12px}.pj-films .film-links{margin-top:0}
 /* the example project's page: how the three folders fit together, drawn in HTML so it reflows on a phone */
 .pv-fig{margin:0}
-.pv-ea{--pv:#a36a12;--pv-bg:rgba(183,121,31,.1)}.pv-dg{--pv:#6b46b8;--pv-bg:rgba(107,70,184,.09)}.pv-dp{--pv:#2a64c4;--pv-bg:rgba(42,100,196,.09)}
+.pv-ea{--pv:#7a4e08;--pv-bg:rgba(183,121,31,.1)}.pv-dg{--pv:#6b46b8;--pv-bg:rgba(107,70,184,.09)}.pv-dp{--pv:#2a64c4;--pv-bg:rgba(42,100,196,.09)}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .pv-ea{--pv:#ffc860;--pv-bg:rgba(255,200,96,.1)}:root:not([data-theme=light]) .pv-dg{--pv:#b9a2ff;--pv-bg:rgba(185,162,255,.1)}:root:not([data-theme=light]) .pv-dp{--pv:#6aa8ff;--pv-bg:rgba(106,168,255,.1)}}
 :root[data-theme=dark] .pv-ea{--pv:#ffc860;--pv-bg:rgba(255,200,96,.1)}:root[data-theme=dark] .pv-dg{--pv:#b9a2ff;--pv-bg:rgba(185,162,255,.1)}:root[data-theme=dark] .pv-dp{--pv:#6aa8ff;--pv-bg:rgba(106,168,255,.1)}
 .pv-lanes{display:grid;grid-template-columns:minmax(0,1fr) 78px minmax(0,1fr) 78px minmax(0,1fr);align-items:stretch}

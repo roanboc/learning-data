@@ -1636,10 +1636,12 @@ function lp_person(ctx,who,x,y,s,o){o=o||{};const a=ctx.globalAlpha*(o.a==null?1
   // the person, whole, on a canvas of their own
   const [pc,px]=ag_buf("lpPerson",cw,ch);px.setTransform(m);let hands,o2=Object.assign({},o,{light:undefined,a:undefined,__legs:undefined});
   if(Lg){const P=ag_spec(W0);px.save();px.setTransform(M);
-    if(Lg.pose==="walk")lp_legs(px,P,Lg.J,"walk");else ag_drawLayer(px,lp_legsPic(P,Lg.pose,Lg.J));px.restore();o2.covered=true;}
+    if(Lg.pose==="walk")lp_legs(px,P,Lg.J,"walk");else ag_drawLayer(px,lp_legsPic(P,Lg.pose,Lg.J));px.restore();o2.covered=true;
+    // sitting, the hands rest in the lap: both forearms forward, over the thighs
+    if(Lg.J.arms&&(!o.pose||o.pose==="hang"))o2.pose=Lg.J.arms;}
   try{hands=ag_person(px,W0,x,y,s,o2);
     // a whole person's painted arms carry on past the waist to their hands
-    if(Lg){const F=ag_fig(W0),P=F.P,pose=o.pose&&o.pose!=="hang"?(typeof o.pose==="string"?(ag_namedPose(o.pose)||{}):o.pose):null,
+    if(Lg){const F=ag_fig(W0),P=F.P,pose=o2.pose&&o2.pose!=="hang"?(typeof o2.pose==="string"?(ag_namedPose(o2.pose)||{}):o2.pose):null,
         br=Math.sin((o.t||0)*TAU/(P.breath?1/P.breath:3.6))*2.2;
       px.save();px.setTransform(M);px.translate(0,br);if(!pose||!pose.far)lp_forearm(px,P,F.C,true);if(!pose)lp_forearm(px,P,F.C,false);px.restore();}}
   finally{px.setTransform(1,0,0,1,0,0);px.globalAlpha=1;}
@@ -1684,21 +1686,21 @@ function lp_nameTag(ctx,x,y,who,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)r
 const LP_LEGS={hipN:[210,1140],hipF:[336,1134],L1:432,L2:402,w:[150,112,96],bare:[136,86,56],fore:0.82,sole:30,foot:156,
   // each leg: [thigh, shin] in degrees from straight down, positive the way the person faces; foot: the foot's angle, positive toe down
   poses:{stand:{n:[-3,2],f:[5,1],fn:0,ff:0},
-         sit:{n:[86,-2],f:[82,-6],fn:0,ff:0},
-         kneel:{n:[2,-100],f:[84,-3],fn:62,ff:0}},
+         sit:{n:[86,-2],f:[82,-6],fn:0,ff:0,fore:0.6,arms:{near:[4,64,"rest"],far:[0,58,"rest"]}},
+         kneel:{n:[-6,-96],f:[84,-3],fn:58,ff:0}},
   trousers:[[58,60,70],[74,66,60],[92,86,74],[52,58,72],[86,80,72],[66,62,58]],shoes:[[44,38,36],[64,48,38],[36,36,40],[80,64,50]]};
 // where a pose's lowest point (a sole or a knee) is below the neck, in figure units
-function lp_legJoints(pose,step,stride){const G=LP_LEGS;let n,f,fn,ff;
+function lp_legJoints(pose,step,stride){const G=LP_LEGS;let n,f,fn,ff,fo,arms=null;
   if(pose==="walk"){const ph=TAU*(step||0),sn=Math.sin(ph),cs=Math.cos(ph),bend=c=>6+40*Math.pow(Math.max(0,c),1.4);
     const k=stride==null?1:clamp(stride,0,1),S=G.poses.stand,m=(a,b)=>[lerp(a[0],b[0],k),lerp(a[1],b[1],k)];
     n=m(S.n,[22*sn,22*sn-bend(cs)]);f=m(S.f,[-22*sn,-22*sn-bend(-cs)]);fn=k*(cs>0?12*cs:0);ff=k*(cs<0?-12*cs:0);}
-  else{const P=G.poses[pose]||G.poses.stand;n=P.n;f=P.f;fn=P.fn;ff=P.ff;}
-  const leg=(H,a)=>{const a1=a[0]*Math.PI/180,a2=a[1]*Math.PI/180,K=[H[0]+Math.sin(a1)*G.L1*G.fore,H[1]+Math.cos(a1)*G.L1],
+  else{const P=G.poses[pose]||G.poses.stand;n=P.n;f=P.f;fn=P.fn;ff=P.ff;fo=P.fore;arms=P.arms;}
+  const leg=(H,a)=>{const a1=a[0]*Math.PI/180,a2=a[1]*Math.PI/180,K=[H[0]+Math.sin(a1)*G.L1*(fo||G.fore),H[1]+Math.cos(a1)*G.L1],
     A=[K[0]+Math.sin(a2)*G.L2*G.fore,K[1]+Math.cos(a2)*G.L2];return{H,K,A,a};};
   const N=leg(G.hipN,n),F=leg(G.hipF,f);
   // the lowest point: a sole (the ankle and the shoe under it), or a knee on the ground
   const low=L=>Math.max(L.A[1]+G.sole,pose==="kneel"?L.K[1]+G.w[1]*0.5:-1e9);
-  return{N,F,fn,ff,low:Math.max(low(N),low(F))};}
+  return{N,F,fn,ff,arms,low:Math.max(low(N),low(F))};}
 const LP_FLOOR={};for(const p of ["stand","sit","kneel","walk"])LP_FLOOR[p]=lp_legJoints(p,0).low-AG_FIG.anchor[1];
 // the height of a seat's top for someone sitting with their feet on the floor at y = floor
 const lp_seatY=(floor,s)=>floor-(LP_FLOOR.sit+AG_FIG.anchor[1]-LP_LEGS.hipN[1]-LP_LEGS.w[0]*0.5)*s;
@@ -1745,7 +1747,12 @@ function lp_legs(c,P,J,pose){const B=lp_bottomOf(P),G=LP_LEGS,skirt=B.kind==="sk
   if(draped){const tB=Object.assign({},B);lp_leg(c,{H:J.F.H,K:J.F.K,A:[lerp(J.F.K[0],J.F.A[0],0.32),lerp(J.F.K[1],J.F.A[1],0.32)]},tB,true,false);}
   if(pose==="kneel"){lp_leg(c,J.N,B,false,bare);shoe(J.N,J.fn,false);}else{shoe(J.N,J.fn,false);lp_leg(c,J.N,B,false,bare);}
   if(draped)lp_leg(c,{H:J.N.H,K:J.N.K,A:[lerp(J.N.K[0],J.N.A[0],0.32),lerp(J.N.K[1],J.N.A[1],0.32)]},B,false,false);
-  if(skirt&&!draped)lp_skirt(c,B,J);}
+  if(skirt&&!draped)lp_skirt(c,B,J);
+  // sitting or kneeling, the seat: the hips rounded behind, from under the top's hem down to the thighs
+  if(pose==="sit"||pose==="kneel"){const col=B.c,fn=cc=>{cc.moveTo(126,1050);cc.lineTo(300,1050);cc.lineTo(300,1214);cc.bezierCurveTo(220,1216,150,1212,124,1190);
+      cc.bezierCurveTo(104,1160,108,1100,126,1050);cc.closePath();};
+    ag_soft(c,fn,ag_dk(col,0.12),ag_lt(col,0.2),260,1110,160);
+    c.save();ag_shape(c,fn);c.clip();c.strokeStyle=rgba(ag_dk(col,0.6),0.3);c.lineWidth=3;c.beginPath();c.moveTo(118,1150);c.bezierCurveTo(130,1196,190,1212,250,1212);c.stroke();c.restore();}}
 // the painted arms' forearms, from just above the waist (where the agent films' arms end, flat, at figure y 1100) to the wrists, with
 // the hands hanging at rest: drawn over the person, along the painted arm's own edges, so no seam shows where the two meet
 const LP_FORE={near:{top:1046,W:[260,1178],u:[0.435,0.9],w:74,up:1,

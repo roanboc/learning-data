@@ -23,7 +23,7 @@ What it checks, page by page (every .html under site/):
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
 - a series' own labs and scenarios (build_series.series_learn): the same in both languages, each lab on one of its film's
   chapters, the labs listed in film order (the labs page numbers them 1 to N in that order), each scenario numbered by its film,
-  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs.
+  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs; one level, never split by film.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - the learning route (modules/route.json): every topic on it once, each goal's stops among the films and series on the site,
   the Topics page draws it, the list's rows in the route's order, and the home page leads to it, in both languages.
@@ -174,6 +174,9 @@ for _S in build_series.SERIES:
     CRUMBS[f"es/{_sl}/"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/"])
 # a series' own labs and scenarios (build_series.series_learn): their two pages, the ids learn.js makes on them (each lab's, and
 # #film-<n> for a film's situations), and their progress prefix, the series'
+# what an engine (site/assets/<engine>/learn.js) builds when it splits its labs or scenarios by film: a film's buttons, a choice of
+# film, or a rail of labs for each film
+SPLIT_BY_FILM = r'U\.(?:filmsLabel|allFilms|filter)\b|h\("select"|-films"|"data-film":'
 SERIES_LEARN, LEARN_IDS, LEARN_STORE = {}, {}, {}
 for _S in build_series.SERIES:
     _SL = build_series.series_learn(_S) if build_series.films(_S)[1] else None
@@ -1959,12 +1962,12 @@ def main():
         for k, c in Counter(ns).items():
             if c > 1:
                 s["fails"].append(f"{words}.en.js: {c} scenarios have the number {k}, which keeps their answers apart")
-        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, under their films'
-        # buttons, so they're listed in film order; the scenarios likewise, by their numbers
+        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, in one rail, so
+        # they're listed in film order; the scenarios likewise, by their numbers
         fl = [x["film"] for x in en["labs"]]
         if fl != sorted(fl):
             s["fails"].append(f"{words}.en.js: its labs aren't listed in film order (" + ", ".join(f"{x['id']} (film {x['film']})" for x in en["labs"]) + "): "
-                              "the labs page numbers them in that order, so a lab listed after a later film's shows under its film with the wrong number")
+                              "the labs page numbers them in that order, so a lab listed after a later film's shows out of its film's place")
         if ns != sorted(ns):
             s["fails"].append(f"{words}.en.js: its scenarios aren't listed in order of their numbers ({', '.join(map(str, ns))})")
         on = {x["index"] + 1: x for x in build_series.films(S)[1]}
@@ -1982,6 +1985,13 @@ def main():
             if not f["labs"] and not any(x["film"] == n for x in en["labs"]) and not any(q[1] == n for q in en["qs"]):
                 s["notes"].append(f"{f['title']}: no lab or scenario among the series' own")
         s["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, for films {', '.join(map(str, SL['films']))}")
+    # one level: an engine shows every lab of its series in one rail and every scenario in one list, numbered 1 to N, never a
+    # film's buttons, a film's own rail of labs or a choice of film above them (the author, 11 and 16 Nov 2026); smoke.py's
+    # series-learn checks the pages as drawn
+    for eng in sorted({SL["engine"] for _, SL in SERIES_LEARN.values()}):
+        src, rel = (WEB / "assets" / eng / "learn.js").read_text(encoding="utf-8"), f"site/assets/{eng}/learn.js"
+        for m in sorted(set(re.findall(SPLIT_BY_FILM, src))):
+            s["fails"].append(f"{rel}: its labs or scenarios are split by film again ({m}): show every lab in one rail and every scenario in one list")
 
     s = rep.check("Journey pages: the same as site-tools/build_pages.py makes from their Markdown")
     try:

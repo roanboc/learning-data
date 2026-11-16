@@ -74,6 +74,12 @@
 :root .px-app .px-dp{--ln:#7cb4ff;--lb:rgba(106,168,255,.13);--lf:#6aa8ff;--lo:#06101f;--lr:106,168,255}
 :root .px-app .px-ok{--ln:#5fe0a0;--lb:rgba(95,224,160,.13);--lf:#5fe0a0;--lo:#03140b;--lr:95,224,160}
 .px-app.is-side{grid-template-columns:minmax(0,1fr) 368px;grid-template-areas:"bar bar" "vp insp" "foot insp"}
+/* On a phone the map runs top to bottom: a note under the toolbar says it is best on a bigger screen, only then */
+.px-big{display:none}
+.px-app.is-live.is-tall{grid-template-areas:"bar" "note" "vp" "foot" "insp"}
+.px-app.is-live.is-tall .px-big{grid-area:note;display:flex;align-items:flex-start;gap:10px;margin:0;padding:10px 14px 11px;border-bottom:1px solid var(--line);background:#0c1527;font-size:13.5px;line-height:1.42;color:var(--muted)}
+.px-big b{color:var(--fg);font-weight:700}
+.px-bigi{flex:none;width:20px;height:20px;margin-top:0;color:var(--accent)}
 @media (min-width:1124px){  /* before the script: the panel already beside the map, so nothing moves when it starts */
   .px-app:not(.is-live){grid-template-columns:minmax(0,1fr) 368px;grid-template-areas:"bar bar" "vp insp" "foot insp"}
   .px-app:not(.is-live) .px-insp{contain:size;overflow:auto;border-top:0;border-left:1px solid var(--line)}

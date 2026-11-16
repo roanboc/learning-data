@@ -1788,6 +1788,7 @@ PROJECT_UI = {
                 "promises": "What is promised where, in open standards: a contract for the shared table, a product for Planning and one definition for the measure.",
                 "checks": "A check holds each handoff. Pick a shield to change one side, and see what stops the merge."},
         zin="Zoom in", zout="Zoom out", fit="Show all", side="Show or hide the details", wide="Expand the details",
+        big="Best on a bigger screen.", big_p="On a phone, the map runs top to bottom. Open this page on a laptop or a tablet to see it whole.",
         intro_k="The map", intro_h="One question, four folders",
         intro_p="Light is data. The question starts in Analytics’ records, and its ticket takes it to the architecture. Data governance adds what the code can’t know, each piece landing where it applies, and rows flow through the dbt project’s seven layers. The answer goes back to the question.",
         legend=[("in", "The question"), ("dp", "Rows of data"), ("dg", "Business context"), ("ok", "The answer")], go="Follow the question",
@@ -1828,6 +1829,7 @@ PROJECT_UI = {
                 "promises": "Qué se promete y dónde, en estándares abiertos: un contrato para la tabla compartida, un producto para Planificación y una sola definición para la medida.",
                 "checks": "Una verificación sostiene cada traspaso. Elige un escudo para cambiar un lado y mira qué detiene la fusión."},
         zin="Acercar", zout="Alejar", fit="Ver todo", side="Mostrar u ocultar los detalles", wide="Ampliar los detalles",
+        big="Se ve mejor en una pantalla grande.", big_p="En un teléfono, el mapa va de arriba abajo. Abre esta página en una computadora o una tableta para verlo entero.",
         intro_k="El mapa", intro_h="Una pregunta, cuatro carpetas",
         intro_p="La luz es dato. La pregunta empieza en los registros de Analítica, y su ticket la lleva a la arquitectura. Gobierno de datos suma lo que el código no puede saber, cada pieza llegando donde se aplica, y las filas fluyen por las siete capas del proyecto de dbt. La respuesta vuelve a la pregunta.",
         legend=[("in", "La pregunta"), ("dp", "Filas de datos"), ("dg", "Contexto del negocio"), ("ok", "La respuesta")], go="Sigue la pregunta",
@@ -2044,6 +2046,7 @@ PX_ICONS = {
     "check": '<path d="M12 3l7 3v5.8c0 4.4-3 7.6-7 9.2-4-1.6-7-4.8-7-9.2V6z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.7"/>',
     "layers": '<path d="M12 3.5l8.5 4.6-8.5 4.6-8.5-4.6z"/><path d="M3.5 12.2l8.5 4.6 8.5-4.6M3.5 16.2l8.5 4.6 8.5-4.6"/>',
     "panel": '<rect x="3.5" y="4.5" width="17" height="15" rx="2.2"/><path d="M14.5 4.5v15"/>',
+    "screen": '<rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16.5V20"/>',
     "widen": '<g class="px-wo"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5"/></g>'
              '<g class="px-wi"><path d="M20 4l-6 6M14 5v5h5M4 20l6-6M10 19v-5H5"/></g>',
 }
@@ -2267,6 +2270,8 @@ def px_canvas(lg):
             f'<button type="button" class="px-z" data-z="in" aria-label="{E(U["zin"])}" title="{E(U["zin"])}">+</button>'
             f'<button type="button" class="px-z px-side" aria-pressed="true" aria-label="{E(U["side"])}" title="{E(U["side"])}">{px_icon("panel", "px-zi")}</button></div>'
             f'{lensp}</div>\n'
+            # on a phone the map runs top to bottom: a note, shown only then (project.css), says it's best on a bigger screen
+            f'<p class="px-big" role="note">{px_icon("screen", "px-bigi")}<span><b>{E(U["big"])}</b> {E(U["big_p"])}</span></p>\n'
             f'<div class="px-vp" role="region" aria-label="{E(U["map"])}" aria-describedby="px-map-d"><p class="sr" id="px-map-d">{E(U["map_d"])}</p>\n'
             f'<div class="px-w px-back">{zones}{svg}</div>\n'
             f'<canvas class="px-dots" aria-hidden="true"></canvas>\n'

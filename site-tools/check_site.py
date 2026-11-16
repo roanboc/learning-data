@@ -63,6 +63,7 @@ What it checks, page by page (every .html under site/):
 import hashlib
 import html.parser
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -1910,6 +1911,32 @@ def main():
     if build_series.fill(rep_md, build_series.LEGIBLE, [build_series.LEGIBLE_NOTE]) != rep_md:
         s["fails"].append("films/legibility-report.md: keep only the note between its marks; the table is made when it's printed "
                           "(python site-tools/build_series.py --legibility), so films merging at once don't clash on it")
+
+    # the example project's page shows its files' lines as they are (build_series.py's PROJECT_STEPS and PROJECT_STANDARDS): held to a
+    # checkout of the project, beside this repository or named by LEARNING_DATA_PROJECT, where there is one
+    s = rep.check("The example project's page: every line it shows from the project's files is that line in the project, where a checkout is at hand")
+    proj = pathlib.Path(os.environ.get("LEARNING_DATA_PROJECT") or ROOT.parent / "learning-data-project")
+    if not (proj / build_series.PROJECT_FOLDER).is_dir():
+        s["notes"].append(f"skipped: no checkout of the project at {proj} (set LEARNING_DATA_PROJECT to one)")
+    else:
+        n = 0
+        for path, code, rows in build_series.project_excerpts():
+            f = proj / build_series.proj_path(path)
+            if not f.is_file():
+                s["fails"].append(f"build_series.py shows {path}, which isn't in the project ({f})")
+                continue
+            have = f.read_text(encoding="utf-8").split("\n")
+            for first, lines in code:
+                for i, line in enumerate(lines):
+                    at = first + i; n += 1
+                    if at > len(have) or have[at - 1] != line:
+                        s["fails"].append(f"{path}:{at}: the project page shows {line.strip()[:60]!r}; the project has "
+                                          f"{(have[at - 1].strip()[:60] if at <= len(have) else 'no such line')!r}")
+            for line in rows:
+                n += 1
+                if line not in have:
+                    s["fails"].append(f"{path}: the project page shows a row the file no longer has: {line[:70]!r}")
+        s["notes"].append(f"{n} lines matched against {proj}")
 
     s = rep.check("Repository links: every relative link in the repository's Markdown, such as a series' table of films, points at a file that is there")
     bad, n = md_link_faults()

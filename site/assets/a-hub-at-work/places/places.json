@@ -1,5 +1,5 @@
 {
- "player": "08cabda0517fafc5",
+ "player": "953fe0a717fc516c",
  "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
  "places": {
   "place:office": {
@@ -12,8 +12,8 @@
      33.0
     ],
     [
-     126.75,
-     146.0
+     127.0,
+     146.25
     ]
    ]
   },
@@ -49,12 +49,12 @@
      33.0
     ],
     [
-     126.75,
-     146.0
+     127.0,
+     146.25
     ],
     [
      244.25,
-     258.75
+     259.0
     ]
    ]
   },
@@ -69,11 +69,11 @@
     ],
     [
      73.5,
-     127.75
+     128.0
     ],
     [
-     186.25,
-     186.75
+     186.5,
+     187.0
     ],
     [
      244.25,
@@ -142,8 +142,8 @@
    "h": 1080,
    "shows": [
     [
-     126.75,
-     146.0
+     127.0,
+     146.25
     ]
    ]
   },
@@ -153,8 +153,8 @@
    "h": 1080,
    "shows": [
     [
-     126.75,
-     146.0
+     127.0,
+     146.25
     ]
    ]
   },
@@ -164,12 +164,12 @@
    "h": 1080,
    "shows": [
     [
-     145.0,
+     145.25,
      187.5
     ],
     [
-     217.5,
-     245.25
+     217.75,
+     245.5
     ]
    ]
   },
@@ -179,7 +179,7 @@
    "h": 1080,
    "shows": [
     [
-     186.25,
+     186.5,
      218.75
     ]
    ]
@@ -190,7 +190,7 @@
    "h": 1080,
    "shows": [
     [
-     186.25,
+     186.5,
      218.75
     ]
    ]
@@ -201,7 +201,7 @@
    "h": 960,
    "shows": [
     [
-     186.25,
+     186.5,
      218.75
     ]
    ]
@@ -213,7 +213,7 @@
    "shows": [
     [
      244.25,
-     258.75
+     259.0
     ]
    ]
   },
@@ -224,7 +224,7 @@
    "shows": [
     [
      244.25,
-     258.75
+     259.0
     ]
    ]
   }

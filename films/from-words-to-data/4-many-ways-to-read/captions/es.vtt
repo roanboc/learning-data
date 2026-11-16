@@ -39,68 +39,68 @@ Los satélites guardan las descripciones, y todos sus cambios, con la fuente y l
 00:01:32.349 --> 00:01:36.867
 Una fuente nueva solo agrega satélites nuevos. Nada de lo que existe tiene que cambiar.
 
-00:01:38.167 --> 00:01:42.653
+00:01:38.167 --> 00:01:42.660
 Está hecho para el cambio y la auditoría. No para que la gente lo consulte.
 
-00:01:45.353 --> 00:01:50.303
+00:01:45.360 --> 00:01:50.310
 Para las personas, está la estrella: una de credenciales otorgadas, una de inscripciones, una de cuotas.
 
-00:01:51.503 --> 00:01:59.905
+00:01:51.510 --> 00:01:59.912
 Comparten el mismo aprendiz y el mismo calendario, así que una pregunta puede cruzarlas: credenciales y cuotas, de los mismos aprendices, en el mismo año.
 
-00:02:01.405 --> 00:02:06.208
+00:02:01.412 --> 00:02:06.215
 Estas dimensiones compartidas se llaman conformadas. Hacen que las estrellas coincidan.
 
-00:02:07.508 --> 00:02:15.360
+00:02:07.515 --> 00:02:15.367
 Los ingenieros las planean en una cuadrícula llamada matriz de bus: procesos de negocio en las filas, dimensiones compartidas en las columnas.
 
-00:02:18.060 --> 00:02:21.240
+00:02:18.067 --> 00:02:21.247
 Algunas preguntas siempre tratan de una sola cosa: un aprendiz.
 
-00:02:21.940 --> 00:02:28.570
+00:02:21.947 --> 00:02:28.577
 Así que arma una fila ancha por aprendiz: su curso actual, sus créditos hasta hoy, cada credencial y lo que sigue.
 
-00:02:29.970 --> 00:02:36.549
+00:02:29.977 --> 00:02:36.657
 Es fácil para personas, aprendizaje automático y asistentes de IA. La mayoría de las preguntas se reducen a una búsqueda.
 
-00:02:37.649 --> 00:02:44.252
+00:02:37.757 --> 00:02:44.360
 ¿Qué aprendices están cerca de un diplomado de posgrado? Con una tabla ancha, es un filtro, no cinco uniones.
 
-00:02:45.752 --> 00:02:51.520
+00:02:45.860 --> 00:02:51.628
 El costo: muchas columnas que mantener, y la misma medida definida dos veces, si no tienes cuidado.
 
-00:02:54.220 --> 00:02:58.113
+00:02:54.328 --> 00:02:58.221
 En la plataforma de La vida interior de los datos, cada forma tiene su lugar.
 
-00:02:58.813 --> 00:03:02.065
+00:02:58.921 --> 00:03:02.173
 Plata integra, en un núcleo normalizado o en un vault.
 
-00:03:03.165 --> 00:03:07.290
+00:03:03.273 --> 00:03:07.398
 Oro presenta estrellas a las personas, y sirve tablas anchas a las herramientas.
 
-00:03:08.490 --> 00:03:13.554
+00:03:08.598 --> 00:03:13.662
 Y encima puede ir una capa semántica, para que cada herramienta pida las mismas definiciones.
 
-00:03:19.254 --> 00:03:24.871
+00:03:19.362 --> 00:03:24.979
 Muchas fuentes que no dejan de cambiar, y auditores que preguntan de dónde vino cada valor: un vault.
 
-00:03:25.971 --> 00:03:29.951
+00:03:26.079 --> 00:03:30.059
 Muchos procesos que comparten el mismo contexto: estrellas conformadas.
 
-00:03:31.051 --> 00:03:36.025
+00:03:31.159 --> 00:03:36.132
 Una entidad, consultada de muchas formas, por personas y por IA: tablas anchas.
 
-00:03:37.325 --> 00:03:43.536
+00:03:37.432 --> 00:03:43.642
 Y no copies por copiar. Cada forma es otra copia que mantener al día, como las fichas de la biblioteca.
 
-00:03:44.736 --> 00:03:49.002
+00:03:44.842 --> 00:03:49.108
 Elige según la pregunta, no según la moda. La mayoría de las plataformas usa más de una.
 
-00:03:51.702 --> 00:03:56.676
+00:03:51.808 --> 00:03:56.784
 Las credenciales de cursos cortos llegaron esta semana. El vault las recibió sin cambiar nada.
 
-00:03:57.876 --> 00:04:02.397
+00:03:57.984 --> 00:04:02.505
 La estrella de credenciales sumó filas, y la fila ancha de cada aprendiz, una columna.
 
-00:04:03.697 --> 00:04:07.429
+00:04:03.805 --> 00:04:07.537
 Siguiente: ¿y si la app y los analistas usaran la misma base de datos?

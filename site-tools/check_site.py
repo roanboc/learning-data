@@ -60,6 +60,7 @@ What it checks, page by page (every .html under site/):
   and no other film has the folder. The site's player shows those pictures instead of painting the places while the film plays,
   which froze the governance films again and again on a laptop (5 November 2026).
 """
+import ast
 import hashlib
 import html.parser
 import json
@@ -275,7 +276,25 @@ VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surn
                (re.compile(r"\bApur[ií]mac\b|\bApooreemak\b"), "Ahpooreemahk",
                 "the Apurímac is said ah-poo-REE-mahk, and every film that names it spells it one way for the voice"),
                (re.compile(r"\bQuechua\b"), "Ketchwa", "Quechua is said KETCH-wa"),
-               (re.compile(r"\b[Mm]inka\b"), "meenka", "minka is said MEEN-ka")]
+               (re.compile(r"\b[Mm]inka\b"), "meenka", "minka is said MEEN-ka"),
+               # The shared voice tool spelled AI "A I", which the voice reads "uh eye": every film that said AI said it so until
+               # 16 November 2026, when the author heard it at the end of Built to change. Written whole, AI is said ay-eye.
+               (re.compile(r"\bA I\b"), "AI", "AI is said ay-eye, and the voice reads \"A I\" as \"uh eye\"")]
+VOICE_TOOL = ROOT / "films" / "from-words-to-data" / "shared" / "tools" / "tts.py"
+
+
+def tool_respellings(source):
+    """The words a film's voice tool respells before the film's own: the SAY list in its tools/tts.py, or in the shared voice tool
+    (From words to data's) when its tts.py only runs a series' tool."""
+    f = source / "tools" / "tts.py"
+    if not f.exists():
+        return []
+    for tool in (f, VOICE_TOOL):
+        for node in ast.walk(ast.parse(tool.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "SAY" for t in node.targets):
+                return [(e.elts[0].value, e.elts[1].value) for e in ast.walk(node.value)
+                        if isinstance(e, ast.Tuple) and len(e.elts) == 2 and all(isinstance(x, ast.Constant) and isinstance(x.value, str) for x in e.elts)]
+    return []
 
 
 def release_status(text):
@@ -285,12 +304,13 @@ def release_status(text):
 
 
 def voice_names(narr, pairs=None):
-    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the film's
-    own respellings (film.json "say": [[pattern, words], ...], as the voice tool applies them)."""
+    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the voice
+    tool's respellings and then the film's own (film.json "say": [[pattern, words], ...]), in the order the voice tool applies them."""
     src = narr.read_text(encoding="utf-8")
     if pairs is None:
         meta = narr.parents[1] / "film.json"
         pairs = json.loads(meta.read_text(encoding="utf-8")).get("say", []) if meta.exists() else []
+    pairs = tool_respellings(narr.parents[1]) + list(pairs)
     out = []
     for sid, sc in json.loads(src[src.index("{"):src.rindex("}") + 1]).items():
         for ln in sc.get("vo", []):
@@ -1527,10 +1547,10 @@ def main():
                           "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
     s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
     s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e), "
-                  "and a story's names are spelled one way in every film that tells it (the rope bridge at Quehue)")
+                  "a story's names are spelled one way in every film that tells it (the rope bridge at Quehue), and AI is said ay-eye")
     for f in st_voices:
         s["fails"] += voice_names(f)
-    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after the film's own respellings")
+    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after its voice tool's and its own respellings")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     # every film's pack, and the first film's, whose questions are a block of its pack of labs and scenarios

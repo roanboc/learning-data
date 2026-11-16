@@ -13,9 +13,10 @@ sys.path.insert(0,str(next(p for p in pathlib.Path(__file__).resolve().parents i
 from voice_cache import KokoroVoice
 
 N = load_obj(NARR)
-# the voice reads some words better respelled: the series' own, then the film's (film.json "say": [[pattern, words], ...])
+# the voice reads some words better respelled: the series' own, then the film's (film.json "say": [[pattern, words], ...]).
+# "AI" stays as it is: the voice says it ay-eye, while "A I" reads as "uh eye" (site-tools/check_site.py fails it).
 SAY = [(r'\bIDs\b', 'I Ds'), (r'\bID\b', 'I D'), (r'\bdbt\b', 'D B T'), (r'\bOED\b', 'O E D'), (r'\bICD\b', 'I C D'),
-       (r'\bBCE\b', 'B C E'), (r'\bAI\b', 'A I'), (r'\bHTAP\b', 'H tap'), (r'\bSQL\b', 'sequel'), (r'\bUNESCO\b', 'you nesko')] + [tuple(x) for x in META.get('say', [])]
+       (r'\bBCE\b', 'B C E'), (r'\bHTAP\b', 'H tap'), (r'\bSQL\b', 'sequel'), (r'\bUNESCO\b', 'you nesko')] + [tuple(x) for x in META.get('say', [])]
 V = {'voice': 'af_heart', 'lang': 'en-us', 'speed': 0.95}
 voice = KokoroVoice(MODELS, V, __file__)
 dur = {}; t0 = time.time()

@@ -1,17 +1,20 @@
-/* Learning Data: the example project's page (dbt-project/). First a map of the project to play with: the three folders, one
-   question followed in ten steps, lenses that show what attaches where, each layer with one learner, and a shield on each
+/* Learning Data: the example project's page (dbt-project/). First a map of the project to play with: the four folders, one
+   question followed in eleven steps, lenses that show what attaches where, each layer with one learner, and a shield on each
    handoff; then what dbt alone can't answer, and the open standards line by line. Drawn for build_series.py's px_*() and made to
    move by project.js; without the script (no .is-live), the map is a still picture and every panel reads in order.
    Each folder has its colour: --ln for its words and lines, --lb a wash behind them, --lf a fill, --lo the words on that fill. */
+.px-in{--ln:#b0264f;--lb:rgba(176,38,79,.09);--lf:#b0264f;--lo:#fff}
 .px-ea{--ln:#7a4e08;--lb:rgba(183,121,31,.11);--lf:#8a5a0c;--lo:#fff}
 .px-dg{--ln:#6b46b8;--lb:rgba(107,70,184,.09);--lf:#6b46b8;--lo:#fff}
 .px-dp{--ln:#2a64c4;--lb:rgba(42,100,196,.09);--lf:#2a64c4;--lo:#fff}
 .px{--px-key:#0b5c8a;--px-bad:#b3261e;--px-ok:#157347}
 @media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) .px-in{--ln:#ff94ad;--lb:rgba(255,148,173,.11);--lf:#ff94ad;--lo:#2a0611}
   :root:not([data-theme=light]) .px-ea{--ln:#ffc860;--lb:rgba(255,200,96,.1);--lf:#ffc860;--lo:#1a1203}
   :root:not([data-theme=light]) .px-dg{--ln:#b9a2ff;--lb:rgba(185,162,255,.11);--lf:#b9a2ff;--lo:#130c26}
   :root:not([data-theme=light]) .px-dp{--ln:#6aa8ff;--lb:rgba(106,168,255,.11);--lf:#6aa8ff;--lo:#06101f}
   :root:not([data-theme=light]) .px{--px-key:#8cc8ff;--px-bad:#ff8a7e;--px-ok:#5fe0a0}}
+:root[data-theme=dark] .px-in{--ln:#ff94ad;--lb:rgba(255,148,173,.11);--lf:#ff94ad;--lo:#2a0611}
 :root[data-theme=dark] .px-ea{--ln:#ffc860;--lb:rgba(255,200,96,.1);--lf:#ffc860;--lo:#1a1203}
 :root[data-theme=dark] .px-dg{--ln:#b9a2ff;--lb:rgba(185,162,255,.11);--lf:#b9a2ff;--lo:#130c26}
 :root[data-theme=dark] .px-dp{--ln:#6aa8ff;--lb:rgba(106,168,255,.11);--lf:#6aa8ff;--lo:#06101f}
@@ -65,6 +68,7 @@
   position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"bar" "vp" "foot" "insp";
   border-radius:20px;border:1px solid rgba(170,200,245,.2);background-color:#070c18;color:var(--fg);
   box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 6px rgba(106,168,255,.04);overflow:hidden}
+:root .px-app .px-in{--ln:#ff94ad;--lb:rgba(255,148,173,.13);--lf:#ff94ad;--lo:#2a0611;--lr:255,148,173}
 :root .px-app .px-ea{--ln:#ffc860;--lb:rgba(255,200,96,.12);--lf:#ffc860;--lo:#1a1203;--lr:255,200,96}
 :root .px-app .px-dg{--ln:#b9a2ff;--lb:rgba(185,162,255,.13);--lf:#b9a2ff;--lo:#130c26;--lr:185,162,255}
 :root .px-app .px-dp{--ln:#7cb4ff;--lb:rgba(106,168,255,.13);--lf:#6aa8ff;--lo:#06101f;--lr:106,168,255}
@@ -117,7 +121,7 @@
 .px-hint{position:absolute;right:12px;bottom:10px;z-index:3;margin:0;padding:4px 10px;border-radius:999px;background:rgba(7,12,24,.78);font-size:12px;font-weight:600;color:var(--muted);pointer-events:none;transition:opacity .4s}
 .px-app:not(.is-live) .px-hint,.px-hint.is-gone{opacity:0}
 
-/* the three folders */
+/* the folders; the two on top, side by side, say what they hold on a line of its own */
 .px-zone{position:absolute;left:calc(var(--x) * 1px);top:calc(var(--y) * 1px);width:calc(var(--w) * 1px);height:calc(var(--h) * 1px);border-radius:22px;
   border:1px solid rgba(var(--lr),.24);background:linear-gradient(180deg,rgba(var(--lr),.08),rgba(var(--lr),.02) 70%);overflow:hidden;transition:opacity .45s}
 .px-zone::after{content:attr(data-nb);position:absolute;right:14px;bottom:-22px;font-size:118px;font-weight:800;line-height:1;letter-spacing:-.04em;color:rgba(var(--lr),.07);pointer-events:none}
@@ -126,10 +130,14 @@
 .px-zl b,.px-zlb b{font-size:22px;font-weight:800;line-height:1;letter-spacing:-.02em}
 .px-zl span{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
 .px-zl small{margin-left:10px;font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.px-zone.px-in .px-zl,.px-zone.px-ea .px-zl{align-items:flex-start}
+.px-zone.px-in .px-zl small,.px-zone.px-ea .px-zl small{display:block;margin:4px 0 0}
+/* wide, governance's label starts right of the two lines that drop from the data object into it */
+.px-app:not(.is-tall) .px-zone.px-dg .px-zl{left:334px}
 .px-app.is-tall .px-zl{left:14px;top:12px;white-space:normal;max-width:140px;align-items:flex-start;gap:8px}
 .px-app.is-tall .px-zl small{display:block;margin:2px 0 0;font-size:11.5px;line-height:1.3}
-.px-app.is-tall .px-ea .px-zl{max-width:none}
-.px-app.is-tall .px-ea .px-zl small{display:inline;margin-left:8px}
+.px-app.is-tall .px-ea .px-zl,.px-app.is-tall .px-in .px-zl{max-width:none}
+.px-app.is-tall .px-ea .px-zl small,.px-app.is-tall .px-in .px-zl small{display:inline;margin:0 0 0 8px}
 
 /* the lines, and how they light */
 .px-edges{position:absolute;left:0;top:0;overflow:visible}
@@ -166,15 +174,15 @@
 .px-nd.is-land{animation:px-land .9s ease-out}
 @keyframes px-land{0%{box-shadow:0 0 0 0 rgba(var(--lr),.9)}100%{box-shadow:0 0 0 18px rgba(var(--lr),0)}}
 /* the question, and the answer it waits for */
-.px-qn{display:grid;grid-template-columns:minmax(0,1fr) 88px;grid-template-rows:auto 1fr;gap:6px 14px;padding:12px 12px 12px 16px;border-width:1.5px}
+.px-qn{display:grid;grid-template-columns:minmax(0,1fr) 74px;grid-template-rows:auto 1fr;gap:6px 14px;padding:12px 12px 12px 16px;border-width:1.5px}
 .px-qk{grid-column:1;display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ln)}
 .px-qk .px-ic{width:20px;height:20px}
 .px-qk .px-no{margin-left:auto}
-.px-qq{grid-column:1;font-size:16px;font-weight:700;line-height:1.36;color:#fff}
+.px-qq{grid-column:1;font-size:14.5px;font-weight:700;line-height:1.34;color:#fff}
 .px-qa{grid-column:2;grid-row:1/3;display:grid;justify-items:center;align-content:center;gap:2px;border-radius:12px;border:1.5px dashed rgba(95,224,160,.55);background:rgba(95,224,160,.06);text-align:center;transition:border-color .4s,box-shadow .4s}
 .px-qa small{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.px-qa b{font-size:36px;line-height:1;font-weight:800;color:#5fe0a0}
-.px-qa i{display:none;font-style:normal;font-size:36px;line-height:1;font-weight:800;color:var(--muted)}
+.px-qa b{font-size:32px;line-height:1;font-weight:800;color:#5fe0a0}
+.px-qa i{display:none;font-style:normal;font-size:32px;line-height:1;font-weight:800;color:var(--muted)}
 .px-app.is-asking .px-qa b{display:none}
 .px-app.is-asking .px-qa i{display:block}
 .px-app.is-answered .px-qa{border-style:solid;border-color:#5fe0a0;box-shadow:0 0 26px rgba(95,224,160,.4)}
@@ -187,20 +195,13 @@
 .px-ndk{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;line-height:1.25;color:var(--ln)}
 .px-ndt{font-size:14.5px;font-weight:800;line-height:1.24;color:#fff;overflow-wrap:anywhere}
 .px-ndm{font-size:12px;line-height:1.3;color:var(--muted)}
-.px-nc[data-id=o]{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto auto;column-gap:10px;row-gap:1px;align-content:center}
-.px-nc[data-id=o] .px-ndi{display:contents}
-.px-nc[data-id=o] .px-ic{grid-row:1/4;align-self:center}
-.px-nc[data-id=o] .px-no{grid-column:3;grid-row:1}
-.px-nc[data-id=o] .px-ndk,.px-nc[data-id=o] .px-ndt,.px-nc[data-id=o] .px-ndm{grid-column:2}
 .px-app.is-tall .px-nc{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto 1fr;align-items:center;column-gap:8px;row-gap:5px;padding:9px 10px}
 .px-app.is-tall .px-nc .px-ndi{display:contents}
 .px-app.is-tall .px-nc .px-ic{grid-column:1;grid-row:1;width:26px;height:26px;padding:4px}
 .px-app.is-tall .px-nc .px-ndk{grid-column:2;grid-row:1}
 .px-app.is-tall .px-nc .px-no{grid-column:3;grid-row:1}
 .px-app.is-tall .px-nc .px-ndt{grid-column:1/-1;grid-row:2;align-self:start;font-size:13.5px}
-.px-app.is-tall .px-nc[data-id=o] .px-ic{grid-row:1/3}
-.px-app.is-tall .px-nc[data-id=o] .px-ndt{grid-column:2;grid-row:2;font-size:14px}
-.px-app.is-tall .px-nc[data-id=o] .px-ndm{display:none}
+.px-app.is-tall .px-nc .px-ndm{grid-column:1/-1;grid-row:3;align-self:start}
 /* the dbt project's label: step 8 */
 .px-zlb{display:flex;align-items:center;gap:10px;padding:0 10px;border-radius:12px;color:var(--ln)}
 .px-zlb span{display:grid;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
@@ -247,7 +248,7 @@
   transform:translateX(-50%);background:var(--bd);color:#0a1222;font-size:11.5px;font-weight:800;line-height:1.25;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.5);pointer-events:none}
 .px-app[data-lens=learner] .px-bdg[data-lens=learner],.px-app[data-lens=owners] .px-bdg[data-lens=owners],
 .px-app[data-lens=pii] .px-bdg[data-lens=pii],.px-app[data-lens=promises] .px-bdg[data-lens=promises]{display:block;animation:px-pop .35s ease-out}
-.px-qn .px-bdg{top:-13px;left:auto;right:100px;transform:none;max-width:220px}
+.px-qn .px-bdg{top:-13px;left:auto;right:86px;transform:none;max-width:220px}
 .px-app.is-tall .px-nc .px-bdg{left:auto;right:8px;transform:none}
 .px-app.is-tall .px-st .px-bdg{left:auto;right:8px;transform:none}
 /* a shield on each handoff, for the checks lens */
@@ -258,7 +259,7 @@
 .px-shd:hover{transform:scale(1.12)}
 .px-shd[aria-pressed=true]{border-color:#ff8a7e;background:#2a0b0b;color:#ff8a7e;box-shadow:0 0 0 5px rgba(255,138,126,.2),0 0 24px rgba(255,138,126,.5);animation:px-shake .5s}
 
-/* the play bar: play, step, and a scrubber along the ten steps */
+/* the play bar: play, step, and a scrubber along the eleven steps */
 .px-foot{grid-area:foot;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;grid-template-areas:"play prev scrub next" "count count count count";align-items:center;gap:4px 10px;padding:10px 14px 12px;border-top:1px solid var(--line);background:#0a1121}
 .px-play{grid-area:play;position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 13px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);font-size:15px;font-weight:800;line-height:1.3;cursor:pointer;overflow:hidden;box-shadow:0 0 24px rgba(106,168,255,.35);transition:transform .2s,box-shadow .2s}
 .px-play:hover{transform:translateY(-1px);box-shadow:0 0 34px rgba(106,168,255,.5)}
@@ -545,3 +546,21 @@ details.px-all .repo-list{margin-top:0}
 @media (prefers-reduced-motion:reduce){
   .px *,.px *::before,.px *::after{animation:none!important;transition:none!important}
 }
+
+/* where the build starts: from nothing, or on models already built (the author, 16 November 2026) */
+.px-path{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 2px}
+.px-pth{padding:6px 12px;border-radius:999px;border:1.5px solid rgba(var(--lr),.6);background:transparent;color:var(--ln);font-size:13px;font-weight:800;line-height:1.2;cursor:pointer}
+.px-pth:hover{background:rgba(var(--lr),.14)}
+.px-pth[aria-pressed=true]{background:var(--lf);border-color:var(--lf);color:var(--lo)}
+.px-pthp{margin:8px 0 0}
+.px-pthp b{color:var(--fg)}
+.px-app.is-live .px-pthp b{display:none}
+.px-stamp{position:absolute;left:0;right:0;bottom:calc(100% + 17px);z-index:3;display:none;width:max-content;margin:0 auto;padding:3px 8px;border-radius:8px;
+  font-size:11px;font-weight:800;line-height:1.25;white-space:nowrap;pointer-events:none;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+/* tall, the layers stand in a column: a stamp above a box would sit in the gap, as if it named the box before, so it rides the box's own top edge */
+.px-app.is-tall .px-stamp{top:-10px;bottom:auto;right:auto;left:10px;margin:0}
+.px-stamp-built{border:1px dashed rgba(201,214,234,.7);background:#16202f;color:#d5e0f0}
+.px-stamp-top{background:#5fe0a0;color:#03140b}
+.px-app.is-exists[data-lens=""] .px-stamp,.px-app.is-exists:not([data-lens]) .px-stamp{display:block;animation:px-pop .35s ease-out}
+.px-app.is-exists .px-st[data-id=staging],.px-app.is-exists .px-st[data-id=intermediate]{border-style:dashed}
+.px-app.is-exists .px-st[data-id=core]{border-color:#5fe0a0;box-shadow:0 0 0 2px #5fe0a0,0 0 30px rgba(95,224,160,.5)}

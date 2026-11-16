@@ -1,5 +1,5 @@
-/* Learning Data: the example project's page (dbt-project/). Makes its three parts interactive: a live map of the three folders,
-   where one question is followed in ten steps and lenses show what attaches where; what dbt alone can't answer; and the open
+/* Learning Data: the example project's page (dbt-project/). Makes its three parts interactive: a live map of the four folders,
+   where one question is followed in eleven steps and lenses show what attaches where; what dbt alone can't answer; and the open
    standards, line by line. Without this script every part reads in order, as site-tools/build_series.py writes it; with it, each
    part gets .is-live. */
 (() => {
@@ -52,7 +52,7 @@
 
   // 1. The map. Two layers move together as a camera over the map: the folders and their lines behind, the pieces in front, and
   // between them a canvas where light is data: rows along the dbt project's line, context down from governance, the answer back
-  // to the question. The play bar follows the question in ten steps; a piece opens its panel; a lens shows what attaches where.
+  // to the question. The play bar follows the question in eleven steps; a piece opens its panel; a lens shows what attaches where.
   function map(app) {
     const vp = $('.px-vp', app), back = $('.px-back', app), front = $('.px-front', app), cv = $('.px-dots', app);
     const bar = $('.px-bar', app), foot = $('.px-foot', app), insp = $('.px-insp', app), hint = $('.px-hint', app);
@@ -80,6 +80,8 @@
     app.classList.add('is-live'); bar.hidden = false; foot.hidden = false;
     $$('.px-hbtn, .px-go', app).forEach(b => { b.hidden = false; });
     $$('.px-tog', app).forEach(b => { b.hidden = false; });
+    const pathBtns = $$('.px-pth', insp), pathPs = $$('.px-pthp', insp);
+    let path = 'new';  // where the build starts: from nothing, or on models already built
 
     // ---- where things are
     const rect = el => (tall ? el.dataset.t : el.dataset.r).split(' ').map(Number);
@@ -99,7 +101,7 @@
       edges = $$('.px-eg', svg).map((g, gi) => {
         const p = $('.px-tr', g), L = p.getTotalLength(), n = Math.max(2, Math.ceil(L / 4)), pts = new Float32Array(2 * n + 2);
         for (let i = 0; i <= n; i++) { const q = p.getPointAtLength(L * i / n); pts[2 * i] = q.x; pts[2 * i + 1] = q.y; }
-        const lane = (g.getAttribute('class').match(/px-(ea|dg|dp|ok)/) || [])[1], pipe = g.dataset.e === 'pipe';
+        const lane = (g.getAttribute('class').match(/px-(in|ea|dg|dp|ok)/) || [])[1], pipe = g.dataset.e === 'pipe';
         const k = pipe ? { n: Math.round(L / 24), v: 64, r: 2.3 } : lane === 'ok' ? { n: Math.max(5, Math.round(L / 55)), v: 125, r: 2.6 }
           : { n: Math.max(2, Math.round(L / 44)), v: 44, r: 2.1 };
         return { id: g.dataset.e, a: g.dataset.a, b: g.dataset.b, step: g.dataset.step === '' ? null : +g.dataset.step, h: +g.dataset.h,
@@ -170,13 +172,25 @@
       const r = el.classList.contains('px-shd') ? [+el.style.getPropertyValue(tall ? '--X' : '--x') - 15, +el.style.getPropertyValue(tall ? '--Y' : '--y') - 15, 30, 30] : rect(el);
       const c = anim ? anim.to : cam;  // where the camera will be: it may be on its way somewhere else
       const s = Math.max(c.s, tall ? 0.8 : 0.7), m = 24;
-      const x0 = r[0] * s + c.x, y0 = r[1] * s + c.y, x1 = (r[0] + r[2]) * s + c.x, y1 = (r[1] + r[3]) * s + c.y;
-      if (s === c.s && x0 >= m && y0 >= m && x1 <= W - m && y1 <= H - m) return;
-      glide(keep({ s, x: W / 2 - (r[0] + r[2] / 2) * s, y: H / 2 - (r[1] + r[3] / 2) * s }));
+      // each way moves only as far as it must: a piece already in view one way stays put that way, and one too big for the window is centred
+      const along = (p, len, size, cur) => {
+        const a = p * s + cur, z = (p + len) * s + cur;
+        if (len * s > size - 2 * m) return size / 2 - (p + len / 2) * s;
+        return a < m ? cur + m - a : z > size - m ? cur - (z - size + m) : cur;
+      };
+      const to = keep({ s, x: along(r[0], r[2], W, W / 2 - (W / 2 - c.x) / c.s * s), y: along(r[1], r[3], H, H / 2 - (H / 2 - c.y) / c.s * s) });
+      if (to.s !== c.s || Math.abs(to.x - c.x) > 0.5 || Math.abs(to.y - c.y) > 0.5) glide(to);
+      // and the page: on a phone the map can reach below the window, so where the piece lands once the camera is there stays in it,
+      // under the header (a frame later, after any scroll of the browser's own for the focus)
+      requestAnimationFrame(() => {
+        const v = vp.getBoundingClientRect(), hb = (document.querySelector('header.top') || { getBoundingClientRect: () => ({ bottom: 0 }) }).getBoundingClientRect().bottom;
+        const y0 = v.top + r[1] * to.s + to.y, y1 = v.top + (r[1] + r[3]) * to.s + to.y, lo = hb + 8, hi = innerHeight - 8;
+        if (y1 > hi || y0 < lo) window.scrollBy({ top: y1 > hi && y0 - (y1 - hi) >= lo ? y1 - hi : y0 - lo, behavior: reduce ? 'auto' : 'smooth' });
+      });
     }
 
     // ---- the light
-    const RGB = { ea: '255,200,96', dg: '185,162,255', dp: '126,182,255', ok: '95,224,160', bad: '255,138,126' };
+    const RGB = { in: '255,148,173', ea: '255,200,96', dg: '185,162,255', dp: '126,182,255', ok: '95,224,160', bad: '255,138,126' };
     const SPR = {};
     function sprite(c) {
       if (SPR[c]) return SPR[c];
@@ -321,9 +335,19 @@
       const t = id[0];
       if (t === 's') setStep(+id.slice(1), how); else if (t === 'i' || step !== 0) setStep(0, how);
       if (how !== 'play') stop();
+      app.classList.toggle('is-exists', path === 'exists' && !!$('.px-pth', a));
       paint(); say(a);
       aim(id === 'i0' ? 'home' : a.dataset.frame || '*', how);
     }
+
+    function setPath(p) {
+      path = p;
+      pathBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.path === p ? 'true' : 'false'));
+      pathPs.forEach(x => { x.hidden = x.dataset.path !== p; });
+      app.classList.toggle('is-exists', p === 'exists' && !!$('.px-pth', arts[sel]));
+    }
+    pathBtns.forEach(b => { b.hidden = false; b.addEventListener('click', () => { stop(); setPath(b.dataset.path); }); });
+    setPath('new');
 
     // ---- playing
     function setPlay() {

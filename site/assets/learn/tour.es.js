@@ -14,7 +14,7 @@ window.LD_TOUR_STEPS={
   {sel:"#ix-q",title:"Busca lo que dicen las películas",text:"Escribe una palabra. Los resultados nombran la película y las frases que la dicen, y cada frase abre la película en ese segundo."},
   {sel:".list-view .ix-group",title:"Una fila por tema",text:"Abre una fila para ver para quién es el tema, y sus películas y series."},
   {sel:".px-lenses",title:"Mira qué se une dónde",text:"Cada lente ilumina un tipo de contexto en las piezas a las que se une: responsables, datos personales, promesas, verificaciones o una persona."},
-  {sel:".px-foot",title:"Sigue una pregunta",text:"Pulsa Reproducir, o arrastra por los diez pasos. El mapa va a cada pieza, y el panel muestra el archivo real que hay detrás."},
+  {sel:".px-foot",title:"Sigue una pregunta",text:"Pulsa Reproducir, o arrastra por los once pasos. El mapa va a cada pieza, y el panel muestra el archivo real que hay detrás."},
   {sel:".px-cx-bar",title:"Agrega el contexto",text:"Cada interruptor suma una pieza del contexto del negocio. Mira qué preguntas responde."},
   {sel:".px-stabs",title:"Estándares abiertos, línea a línea",text:"Elige un estándar y luego una nota: ilumina las líneas del archivo real que explica."},
   {sel:".more .lang",title:"Español o inglés",text:"Cada página tiene ambos. Las películas están en inglés, con subtítulos en español, y algunas tienen sonido en español."},

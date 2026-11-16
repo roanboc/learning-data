@@ -75,121 +75,121 @@ Un correo nuevo resta un poco: el de estudiante se cerró cuando se graduó.
 Si las fechas coincidieran, sería 93, y se vincularía sin preguntar a nadie.
 
 20
-00:01:43,949 --> 00:01:46,973
+00:01:43,949 --> 00:01:47,176
 Un asistente de IA leyó el caso y redactó una nota.
 
 21
-00:01:48,173 --> 00:01:53,114
+00:01:48,376 --> 00:01:53,317
 En el formulario, escribió que estudió aquí: una licenciatura, terminada en 2019.
 
 22
-00:01:54,514 --> 00:01:57,306
+00:01:54,717 --> 00:01:57,509
 El registro antiguo dice lo mismo, con otras palabras.
 
 23
-00:01:58,406 --> 00:02:00,843
+00:01:58,609 --> 00:02:01,046
 El asistente lee el sentido, no solo la ortografía.
 
 24
-00:02:01,943 --> 00:02:05,128
+00:02:02,146 --> 00:02:05,331
 Sugiere que son la misma persona. No decide.
 
 25
-00:02:07,628 --> 00:02:10,520
+00:02:07,831 --> 00:02:10,723
 Mei decide. Los vincula y anota por qué.
 
 26
-00:02:11,820 --> 00:02:14,561
+00:02:12,023 --> 00:02:14,764
 El hub guarda su nombre, la hora y su razón.
 
 27
-00:02:15,861 --> 00:02:17,915
+00:02:16,064 --> 00:02:18,118
 Su decisión también le enseña al asistente.
 
 28
-00:02:18,915 --> 00:02:23,387
+00:02:19,118 --> 00:02:23,590
 Y se puede deshacer: desvincular es un paso, y se guarda cada versión.
 
 29
-00:02:25,887 --> 00:02:30,351
+00:02:26,090 --> 00:02:30,554
 Luego el cambio se publica, no se envía: cada sistema lee lo que le concierne.
 
 30
-00:02:31,651 --> 00:02:36,395
+00:02:31,854 --> 00:02:36,598
 Su solicitud sigue con su número antiguo, con su título ya registrado.
 
 31
-00:02:37,695 --> 00:02:40,153
+00:02:37,898 --> 00:02:40,356
 La oficina de egresados deja de invitarlo a volver.
 
 32
-00:02:41,353 --> 00:02:44,157
+00:02:41,556 --> 00:02:44,360
 Y nunca ve su fecha de nacimiento. No la necesita.
 
 33
-00:02:46,657 --> 00:02:49,150
+00:02:46,860 --> 00:02:49,353
 Su registro muestra de dónde vino cada valor.
 
 34
-00:02:50,150 --> 00:02:55,088
+00:02:50,353 --> 00:02:55,291
 Sus nombres y su fecha de nacimiento vienen del sistema de estudiantes, verificados al matricularse.
 
 35
-00:02:56,388 --> 00:03:00,455
+00:02:56,591 --> 00:03:00,658
 Su correo viene de la solicitud: el más reciente que confirmó.
 
 36
-00:03:01,655 --> 00:03:04,784
+00:03:01,858 --> 00:03:04,987
 El error queda en la solicitud, pero no gana.
 
 37
-00:03:07,284 --> 00:03:15,158
+00:03:07,487 --> 00:03:15,361
 El viernes, Leila, responsable de datos en admisiones, revisa 50 vínculos automáticos de la semana, sobre todo los que apenas pasaron.
 
 38
-00:03:16,458 --> 00:03:21,373
+00:03:16,661 --> 00:03:21,576
 Ve cada par de registros, pero no lo que decidieron las reglas, para no dejarse influir.
 
 39
-00:03:22,773 --> 00:03:25,222
+00:03:22,976 --> 00:03:25,425
 Esta semana, uno estaba mal, y Mei lo desvincula.
 
 40
-00:03:26,622 --> 00:03:29,886
+00:03:26,825 --> 00:03:30,089
 Si más de tres estuvieran mal, la vinculación automática se detendría.
 
 41
-00:03:30,886 --> 00:03:34,611
+00:03:31,089 --> 00:03:34,814
 Cada coincidencia esperaría a una persona, hasta acordar reglas nuevas.
 
 42
-00:03:38,511 --> 00:03:43,647
+00:03:38,714 --> 00:03:43,850
 Sea cual sea el hub, en una universidad, un hospital o un banco, hazle cinco preguntas.
 
 43
-00:03:44,847 --> 00:03:47,439
+00:03:45,050 --> 00:03:47,642
 ¿Puede explicar cada coincidencia, y cada valor?
 
 44
-00:03:48,639 --> 00:03:50,399
+00:03:48,842 --> 00:03:50,602
 ¿Se puede deshacer cada decisión?
 
 45
-00:03:51,599 --> 00:03:54,630
+00:03:51,802 --> 00:03:54,833
 ¿Las personas deciden lo dudoso, y revisan lo que no lo es?
 
 46
-00:03:55,830 --> 00:03:57,844
+00:03:56,033 --> 00:03:58,047
 ¿Cada oficina ve solo lo que necesita?
 
 47
-00:03:59,044 --> 00:04:02,565
+00:03:59,247 --> 00:04:02,768
 ¿Y los sistemas leen los cambios, en vez de ser sobrescritos?
 
 48
-00:04:05,065 --> 00:04:07,947
+00:04:05,268 --> 00:04:08,325
 Las reglas actúan. La IA sugiere. La gente decide.
 
 49
-00:04:09,447 --> 00:04:11,864
+00:04:09,825 --> 00:04:12,242
 Y todo se puede explicar, y deshacer.

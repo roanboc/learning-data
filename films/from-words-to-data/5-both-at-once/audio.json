@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/both-at-once/soundtrack.mp3",
-      "size": 3302443,
-      "sha256": "f15323f5ef07b731fc3ba2ceb823ffa07435df6291d5a0618cbe545fa020ced2",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/f15323f5ef07b731fc3ba2ceb823ffa07435df6291d5a0618cbe545fa020ced2.mp3"
+      "size": 3306466,
+      "sha256": "95d517b4e1bbc3b8f1c3ffc4bf2608985d89f0610e88fab4527473c88081a953",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-both-at-once-9da2f74d392edd3ea276/95d517b4e1bbc3b8f1c3ffc4bf2608985d89f0610e88fab4527473c88081a953.mp3"
     }
   ]
 }

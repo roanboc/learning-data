@@ -80,6 +80,18 @@
 }
 .px-app.is-side.is-closed{grid-template-columns:minmax(0,1fr);grid-template-areas:"bar" "vp" "foot"}
 .px-app.is-closed .px-insp{display:none}
+/* the details beside the map open wider, for a table or a file that needs the room (the author, 16 November 2026): a button in
+   their own top corner, outside what scrolls, so it stays in reach; the map keeps the rest and the camera frames the step again */
+.px-app.is-side.is-wide:not(.is-closed){grid-template-columns:minmax(0,1fr) min(720px,56%)}
+.px-expand{display:none}
+.px-app.is-side:not(.is-closed) .px-expand{grid-area:insp;align-self:start;justify-self:end;position:relative;z-index:4;display:inline-grid;place-items:center;
+  width:34px;height:34px;margin:12px 14px 0 0;padding:0;border-radius:10px;border:1px solid var(--line);background:#0f1830;color:var(--fg);cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.4);transition:border-color .2s,background-color .2s}
+.px-expand:hover{border-color:var(--accent)}
+.px-expand[aria-pressed=true]{border-color:rgba(106,168,255,.6);background:#16294a}
+.px-expand .px-wi,.px-expand[aria-pressed=true] .px-wo{display:none}
+.px-expand[aria-pressed=true] .px-wi{display:inline}
+.px-app.is-side .px-art .px-k{padding-right:44px}  /* each panel's first line leaves the button its corner */
 
 /* the toolbar: lenses, zoom and the panel */
 .px-bar{grid-area:bar;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 14px;padding:10px 12px 10px 14px;border-bottom:1px solid var(--line);background:#0a1121}
@@ -294,6 +306,9 @@
 .px-ticks li:nth-child(even)::before{content:"";position:absolute;top:16px;width:1px;height:20px;background:rgba(var(--lr),.35)}
 .px-app.is-side .px-scrub,.px-app.is-mid .px-scrub{padding-bottom:46px}
 .px-app:not(.is-side):not(.is-mid) .px-ticks span{display:none}
+/* with the details wide, the play bar is too narrow for every step's name: the line under it names the step */
+.px-app.is-side.is-wide:not(.is-closed) .px-ticks span,.px-app.is-side.is-wide:not(.is-closed) .px-ticks li:nth-child(even)::before{display:none}
+.px-app.is-side.is-wide:not(.is-closed) .px-scrub{padding-bottom:0}
 .px-count{grid-area:count;margin:6px 0 0;font-size:14.5px;font-weight:700;color:#d3deef}
 
 /* the panel: the piece picked, with its real file */
@@ -427,6 +442,8 @@
 .px-kv td{padding:6px 10px;border-top:1px solid var(--line);overflow-wrap:anywhere}
 .px-kv tr:first-child th,.px-kv tr:first-child td{border-top:0}
 .px-cl{font:600 11.5px/1 var(--mono);padding:3px 7px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:var(--muted);white-space:nowrap}
+.px-kv td:has(.px-cl) code{white-space:nowrap}  /* a short value beside its class stays whole */
+.px-kv td .px-cl{display:inline-block;margin:2px 0}  /* a class beside its value, or under it when the panel is narrow */
 .px-direct{border-color:var(--px-bad);color:var(--px-bad);background:var(--card)}
 .px-mask{letter-spacing:.12em;color:var(--muted)}
 .px-credit{display:flex;height:32px;margin:4px 0 6px;border-radius:8px;overflow:hidden;font-size:13px;font-weight:800;border:1px solid var(--line)}

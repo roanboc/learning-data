@@ -1787,7 +1787,7 @@ PROJECT_UI = {
                 "pii": "Each column’s class follows the learner. Direct personal data is masked from the core on, and Planning’s mart holds no names or emails.",
                 "promises": "What is promised where, in open standards: a contract for the shared table, a product for Planning and one definition for the measure.",
                 "checks": "A check holds each handoff. Pick a shield to change one side, and see what stops the merge."},
-        zin="Zoom in", zout="Zoom out", fit="Show all", side="Show or hide the details",
+        zin="Zoom in", zout="Zoom out", fit="Show all", side="Show or hide the details", wide="Expand the details",
         intro_k="The map", intro_h="One question, four folders",
         intro_p="Light is data. The question starts in Analytics’ records, and its ticket takes it to the architecture. Data governance adds what the code can’t know, each piece landing where it applies, and rows flow through the dbt project’s seven layers. The answer goes back to the question.",
         legend=[("in", "The question"), ("dp", "Rows of data"), ("dg", "Business context"), ("ok", "The answer")], go="Follow the question",
@@ -1827,7 +1827,7 @@ PROJECT_UI = {
                 "pii": "La clase de cada columna sigue a la persona. Los datos personales directos quedan enmascarados desde la capa central, y el mart de Planificación no guarda nombres ni correos.",
                 "promises": "Qué se promete y dónde, en estándares abiertos: un contrato para la tabla compartida, un producto para Planificación y una sola definición para la medida.",
                 "checks": "Una verificación sostiene cada traspaso. Elige un escudo para cambiar un lado y mira qué detiene la fusión."},
-        zin="Acercar", zout="Alejar", fit="Ver todo", side="Mostrar u ocultar los detalles",
+        zin="Acercar", zout="Alejar", fit="Ver todo", side="Mostrar u ocultar los detalles", wide="Ampliar los detalles",
         intro_k="El mapa", intro_h="Una pregunta, cuatro carpetas",
         intro_p="La luz es dato. La pregunta empieza en los registros de Analítica, y su ticket la lleva a la arquitectura. Gobierno de datos suma lo que el código no puede saber, cada pieza llegando donde se aplica, y las filas fluyen por las siete capas del proyecto de dbt. La respuesta vuelve a la pregunta.",
         legend=[("in", "La pregunta"), ("dp", "Filas de datos"), ("dg", "Contexto del negocio"), ("ok", "La respuesta")], go="Sigue la pregunta",
@@ -2044,6 +2044,8 @@ PX_ICONS = {
     "check": '<path d="M12 3l7 3v5.8c0 4.4-3 7.6-7 9.2-4-1.6-7-4.8-7-9.2V6z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.7"/>',
     "layers": '<path d="M12 3.5l8.5 4.6-8.5 4.6-8.5-4.6z"/><path d="M3.5 12.2l8.5 4.6 8.5-4.6M3.5 16.2l8.5 4.6 8.5-4.6"/>',
     "panel": '<rect x="3.5" y="4.5" width="17" height="15" rx="2.2"/><path d="M14.5 4.5v15"/>',
+    "widen": '<g class="px-wo"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5"/></g>'
+             '<g class="px-wi"><path d="M20 4l-6 6M14 5v5h5M4 20l6-6M10 19v-5H5"/></g>',
 }
 
 
@@ -2277,6 +2279,7 @@ def px_canvas(lg):
             f'<ol class="px-ticks" aria-hidden="true"><li class="px-map"><i></i><span>{E(U["intro_k"])}</span></li>{ticks}</ol></div>'
             f'<button type="button" class="px-next" aria-label="{E(U["next"])}" title="{E(U["next"])}"><span aria-hidden="true">›</span></button>'
             f'<p class="px-count" aria-live="polite" data-of="{E(U["step"])}" data-map="{E(U["whole"])}">{E(U["whole"])}</p></div>\n'
+            f'<button type="button" class="px-expand" hidden aria-pressed="false" aria-label="{E(U["wide"])}" title="{E(U["wide"])}">{px_icon("widen", "px-zi")}</button>\n'
             f'<div class="px-insp">\n{arts}</div>\n</div>\n</section>\n\n')
 
 
@@ -2359,10 +2362,10 @@ def px_learner(lg, key):
         return (f'<ul class="px-match">{li}</ul>'
                 f'<p class="px-sum">{t("Three keys, one learner. The registrar’s office decided the other two, and a decision it records beats every rule.", "Tres claves, una persona. La oficina de registro decidió las otras dos, y una decisión que registra le gana a cualquier regla.")}</p>')
     if key == "core":
-        kv = (f'<tr><th scope="row"><code>learner_key</code></th><td><code>0905e6e2…</code></td><td><span class="px-cl">pseudonymous</span></td></tr>'
-              f'<tr><th scope="row"><code>learner_bk</code></th><td><code class="px-mask">••••••••</code></td><td><span class="px-cl px-direct">direct · {t("masked", "enmascarado")}</span></td></tr>'
-              f'<tr><th scope="row"><code>status</code></th><td><code>studying</code></td><td></td></tr>'
-              f'<tr><th scope="row"><code>keys_held</code></th><td><code>3</code></td><td></td></tr>')
+        kv = (f'<tr><th scope="row"><code>learner_key</code></th><td><code>0905e6e2…</code> <span class="px-cl">pseudonymous</span></td></tr>'
+              f'<tr><th scope="row"><code>learner_bk</code></th><td><code class="px-mask">••••••••</code> <span class="px-cl px-direct">direct · {t("masked", "enmascarado")}</span></td></tr>'
+              f'<tr><th scope="row"><code>status</code></th><td><code>studying</code></td></tr>'
+              f'<tr><th scope="row"><code>keys_held</code></th><td><code>3</code></td></tr>')
         bar = t("45 of 60 credit points: 30 from two units, 15 from three microcredentials, 15 to go", "45 de 60 créditos: 30 de dos unidades, 15 de tres microcredenciales, faltan 15")
         return (f'<p class="px-tn"><code>core_learner</code><small>{t("as at census date", "a la fecha del censo")}</small></p><table class="px-kv">{kv}</table>'
                 f'<p class="px-tn"><code>core_credit_towards_award</code><small>{t("Graduate Certificate in Data Analytics, on 31 March 2026", "Graduate Certificate in Data Analytics, al 31 de marzo de 2026")}</small></p>'

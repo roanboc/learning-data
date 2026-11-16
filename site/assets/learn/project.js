@@ -503,6 +503,16 @@
       open = !open; app.classList.toggle('is-closed', !open); side.setAttribute('aria-pressed', open ? 'true' : 'false');
       layout(); aim(sel === 'i0' ? 'home' : arts[sel].dataset.frame || '*');
     });
+    // the details beside the map, wider for a table or a file, and back; the map keeps the rest, framed again on the step
+    const roomy = $('.px-expand', app);
+    if (roomy) {
+      roomy.hidden = false;
+      roomy.addEventListener('click', () => {
+        const on = roomy.getAttribute('aria-pressed') !== 'true';
+        roomy.setAttribute('aria-pressed', on ? 'true' : 'false'); app.classList.toggle('is-wide', on);
+        layout(); aim(sel === 'i0' ? 'home' : arts[sel].dataset.frame || '*');
+      });
+    }
     play.addEventListener('click', () => (playing ? stop() : start()));
     prev.addEventListener('click', () => show(step <= 1 ? 'i0' : 's' + (step - 1), 'step'));
     next.addEventListener('click', () => show('s' + Math.min(N, step + 1), 'step'));

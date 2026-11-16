@@ -143,37 +143,37 @@ Prometer. Nombrar las brechas, y escribir los contratos. Escribir las pruebas, a
 Construir. Capa por capa. Validar contra una cifra en la que la gente confía. Revisar y publicar.
 
 37
-00:04:33,133 --> 00:04:37,792
+00:04:33,133 --> 00:04:37,790
 Mantener. Cada dato escrito una sola vez, y un modelo que evoluciona sin romper nada a nadie.
 
 38
-00:04:38,892 --> 00:04:43,505
+00:04:38,890 --> 00:04:43,678
 Un agente de IA puede ayudar en cada paso. En cada paso, aprueba una persona.
 
 39
-00:04:47,605 --> 00:04:49,945
+00:04:47,778 --> 00:04:50,118
 Las próximas ocho películas recorren los pasos uno a uno.
 
 40
-00:04:50,645 --> 00:04:59,766
+00:04:50,818 --> 00:04:59,939
 Delimitar un modelo a partir de una pregunta. Qué hace que un estudiante sea el mismo en todos los sistemas, y cómo las claves y los hashes lo hacen explícito. Granularidad y tiempo.
 
 41
-00:05:00,366 --> 00:05:09,723
+00:05:00,539 --> 00:05:09,896
 Contratos y pruebas. Construir por capas. Quién es dueño de qué, entre dominios. Trabajar con un agente, con responsabilidad. Y escribirlo todo, una sola vez.
 
 42
-00:05:11,223 --> 00:05:19,564
+00:05:11,396 --> 00:05:19,737
 Todo lo que muestran es código real y datos reales. Corre en dbt Core, con DuckDB, y puedes ejecutarlo tú mismo.
 
 43
-00:05:23,064 --> 00:05:26,929
+00:05:23,237 --> 00:05:27,102
 Un plano dice cómo será un edificio. La obra lo hace realidad.
 
 44
-00:05:28,129 --> 00:05:32,927
+00:05:28,302 --> 00:05:33,100
 En los datos, el modelo es el plano, y dbt es una forma de construirlo.
 
 45
-00:05:34,227 --> 00:05:35,729
+00:05:34,400 --> 00:05:35,902
 Decláralo. Luego constrúyelo.

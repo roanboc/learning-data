@@ -1393,6 +1393,7 @@ async def check_a11y(run):
 # Each series draws them with its own engine (site/assets/<dir>/learn.js), which keeps to what build_series.py's pages expect:
 # the labs app (#series-labs) has a tab for each lab ([role=tab][data-id]), selected when it's open, and opens #<lab id> on load;
 # its "Watch this part" is a link with #t= to the lab's chapter; the scenarios app (#series-quiz) shows #film-<n> as data-film.
+# Both are one level: every lab in one rail and every scenario in one list, numbered 1 to N, never split by film.
 # A series can also have a play script, site-tools/smoke/<series id>.js: one expression, ({lab: async id => [...], quiz: async
 # () => [...]}), run in the page, that plays a lab (or every scenario) through and returns what went wrong, as text.
 SMOKE_DIR = pathlib.Path(__file__).resolve().parent / "smoke"
@@ -1401,6 +1402,7 @@ LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = a
     watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
     badges: app ? [...app.querySelectorAll('[role=tab][data-id]')].map(b => b.dataset.id + ' ' + ((b.querySelector('i') || {}).textContent || '')) : [],
     kicker: ((app && app.querySelector('.stop-text .kicker')) || {}).textContent || '',
+    rails: app ? app.querySelectorAll('[role=tablist]').length : 0, split: app ? app.querySelectorAll('.mr-films, .gp-films, select').length : 0,
     sw: document.documentElement.scrollWidth - innerWidth}; }"""
 
 
@@ -1429,6 +1431,8 @@ async def check_series_learn(run):
                     r = await pg.evaluate(LEARN_JS)
                     expect(sec, r["tabs"] == SL["labs"], f"{where}: {r['tabs']} lab tabs, expected {SL['labs']}")
                     expect(sec, r["on"] == x["id"], f"{where}: the lab open is {r['on']!r}")
+                    # one level: every lab of the series in one rail, never a film's buttons or a rail for each film (the author, 16 Nov 2026)
+                    expect(sec, r["rails"] == 1 and not r["split"], f"{where}: the labs are split by film again ({r['rails']} rails of tabs, {r['split']} film choices); keep one list")
                     # one numbering for the whole pack: each lab's tab shows its place among all the series' labs, whichever film it's
                     # under, and the open lab's kicker says the same, "Lab 3 of 9"
                     ids = [y["id"] for y in SL[lg]["labs"]]
@@ -1460,6 +1464,9 @@ async def check_series_learn(run):
                     await pg.wait_for_timeout(300)
                     got = await pg.evaluate("() => { const a = document.getElementById('series-quiz'); return a && a.dataset.film; }")
                     expect(sec, got == str(n), f"/{key}#film-{n}: the scenarios show film {got!r}")
+                    # one level: #film-<n> opens that film's first scenario in the one list of all of them, numbered 1 to N
+                    one = await pg.evaluate("() => { const a = document.getElementById('series-quiz'); return a ? [a.querySelectorAll('.dots button').length, a.querySelectorAll('.mr-films, .gp-films, select').length] : [0, 0]; }")
+                    expect(sec, one[0] == SL["quiz"] and not one[1], f"/{key}#film-{n}: {one[0]} of {SL['quiz']} scenarios in the list, {one[1]} film choices; keep one list of all of them")
                     for p in log_problems(log):
                         expect(sec, False, f"/{key}#film-{n}: {p}")
                     await pg.close()

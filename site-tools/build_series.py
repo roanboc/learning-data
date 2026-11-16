@@ -53,7 +53,7 @@ A series or a film its author hasn't reviewed yet is a draft ("draft": true in i
 under their title (DRAFT, is_draft() and draft_note() below).
 Never edit the generated pages by hand: change the words, and run this again. check_site.py and smoke.py read every series
 through SERIES and films() below, so a new film, or a new series, needs no change to them."""
-import html, json, math, pathlib, re, sys
+import hashlib, html, json, math, pathlib, re, sys
 from media import available as media_available
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -1442,6 +1442,7 @@ def project_box(lg, n, RL):
 # project's seven layers; the three open standards, line by line; and the check that holds each handoff. Each part is HTML that
 # reads on its own; assets/learn/project.js makes it interactive, and assets/learn/project.css draws it. The files' lines are
 # copied as they are in the project's repository (path, first line, lines): check_site.py compares them with a checkout of it.
+# The page loads the script and the stylesheet by a hash of each (asset_v()): after changing either, run this again.
 PROJECT_LANES = {  # the folders: their number, name and what each says
     "in": ("00", ("Initiatives", "Iniciativas"), ("Where a question starts", "Donde empieza una pregunta")),
     "ea": ("10", ("Enterprise architecture", "Arquitectura empresarial"), ("Why, and where", "Por qué y dónde")),
@@ -2438,6 +2439,13 @@ def project_visuals(lg):
     return px_canvas(lg) + px_context(lg) + px_standards(lg)
 
 
+def asset_v(rel):
+    """A short hash of a file under site/, for the link that loads it: a browser keeps a stylesheet or script for up to four
+    hours, but a page for ten minutes, so a changed file gets a new address and never meets a page it doesn't fit. Windows line
+    endings count as Unix ones, so a Windows checkout builds the same page."""
+    return hashlib.sha256((WEB / rel).read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")).hexdigest()[:10]
+
+
 def project_page(lg):
     """dbt-project/: how the example project carries the business into the code, on a map to play with (project_visuals()),
     how to run it, where things live, and the films that show it, each with the files its chapters show."""
@@ -2477,8 +2485,8 @@ def project_page(lg):
             body += '</ul>\n'
         body += '</div>\n'
     body += (f'</section>\n</main>\n<footer>{SOURCE[lg]}<p>{E(P["foot"])} {LOGOS[lg]} {NOTICES[lg]}</p></footer>\n'
-             f'<script src="{R}assets/ambient.js"></script>\n<script src="{R}assets/learn/project.js" defer></script>\n</body>\n</html>\n')
-    return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n<link rel="stylesheet" href="{R}assets/learn/project.css">\n</head>\n' + body
+             f'<script src="{R}assets/ambient.js"></script>\n<script src="{R}assets/learn/project.js?v={asset_v("assets/learn/project.js")}" defer></script>\n</body>\n</html>\n')
+    return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n<link rel="stylesheet" href="{R}assets/learn/project.css?v={asset_v("assets/learn/project.css")}">\n</head>\n' + body
 
 
 # The home page stays a first view: the film, its two other steps, then two ways on: the learning route, and how the films were

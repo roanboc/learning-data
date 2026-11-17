@@ -226,10 +226,12 @@ for j, pan in enumerate([-0.5, 0.14, 0.79]):
     paper(W(H_, 'back', 'one question', j * 0.25), 0.024, pan, 0.4)
 air(W(H_, 'back', 'goes back'), 1.7, 0.03)
 air(W(H_, 'back', 'decide with', 0.4), 1.3, 0.024)
-# 5. Down from a goal: a nylon note as the goal lands from above, and one for each row it implies, falling, G, E, C; air as the shape
-#    moves aside; knocks for the goal, its outcome and each step of its path; a soft stamp for "how would anyone check?"; paper for the
-#    planners' request; a press and two nylon notes as the two lines meet at one decision; then the celesta, rising, as the measure's
-#    light climbs to the goal and crosses to the outcome, now checkable, with a soft press for its tick; C major for the wordless moment
+# 5. Down from a goal: a nylon note as the goal lands from above, and one for each row it implies, falling, G, E, C; a knock as the
+#    method's name, Goal-Question-Metric, comes in over the shape, and a muffled key as the decision row lights, the step the film
+#    adds; air as the shape moves aside; knocks for the goal, its outcome and each step of its path; a soft stamp for "how would
+#    anyone check?"; paper for the planners' request; a press and two nylon notes as the two lines meet at one decision; then the
+#    celesta, rising, as the measure's light climbs to the goal and crosses to the outcome, now checkable, with a soft press for its
+#    tick; C major for the wordless moment
 D = 'down'
 bed(D, [FMAJ9, DM9, AM9, GSUS4], 0, cq(D, 'breath'))
 bed(D, [CMAJ9], cq(D, 'breath'), None, g=0.036)
@@ -238,6 +240,8 @@ for word, m, n, pan in [('implies decisions', 67, 2, 0.0), ('needs questions', 6
     t0 = W(D, 'way', word, -0.2); nylon(m, t0, 0.02, pan)
     for j in range(n):
         tap(t0 + j * 0.08, 0.008, -0.5 + j * (1.0 / max(1, n - 1)))
+knock(W(D, 'gqm', 'Goal', -0.3), 0.014, 0.0)
+tap(W(D, 'gqm', 'a decision added', -0.1), 0.012, 0.45)
 air(C(D, 'better', -0.5), 1.6, 0.018, -0.3)
 knock(W(D, 'better', 'Take'), 0.02, 0.08)
 knock(W(D, 'better', 'a better network', -0.3), 0.016, 0.66)

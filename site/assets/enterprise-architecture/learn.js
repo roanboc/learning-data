@@ -2,7 +2,8 @@
    engine: the series' labs page and scenarios page load the newest film's bundle (for the films' own parts: glass, slabs, paper,
    ArchiMate's glyphs), the words (learn.en.js or learn.es.js, which set window.EA), and this file.
    A lab is one of seven kinds, described by its words:
-     deal       cards dealt one at a time: put each where it belongs, and see why before the next (labs 1, 2, 3, 7, 8 and 12)
+     deal       cards dealt one at a time: put each where it belongs, and see why before the next (labs 1, 2, 3, 7, 8 and 12, and
+                film 8's second, Trace it down)
      change     put a capability map through three changes, and name what was under each box that broke (4)
      night      send two crews into a storm, then find where the rule's facts come from (5)
      gate       mark what may cross the wall between two domains, then open the gate (6)
@@ -98,12 +99,19 @@ function paper(ctx,x,y,w,hh,label,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0
     if(o.strike){ctx.strokeStyle="rgba(190,40,30,0.95)";ctx.lineWidth=2.4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-w/2+5,2);ctx.lineTo(w/2-5,-2);ctx.stroke();}ctx.restore();
     if(o.mark)mark(ctx,x+w-2,y+2,o.mark);});}
 // ArchiMate's glyphs: the films' own (archGlyph), and those the films never drew: a requirement and a constraint (parallelograms),
-// an interaction (two half circles) and a collaboration (two circles that overlap)
-function glyph(ctx,kind,x,y,s,col){if(!/^(requirement|constraint|interaction|collaboration)$/.test(kind))return archGlyph(ctx,kind,x,y,s,col);
+// an interaction (two half circles) and a collaboration (two circles that overlap); and film 8's own, which ArchiMate has no glyph
+// for: a decision (a diamond), a question (a speech bubble) and a measure (a gauge)
+function glyph(ctx,kind,x,y,s,col){if(!/^(requirement|constraint|interaction|collaboration|decision|question|measure)$/.test(kind))return archGlyph(ctx,kind,x,y,s,col);
   ctx.save();ctx.strokeStyle=rgbaS(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);ctx.lineJoin="round";
   if(kind==="requirement"||kind==="constraint"){ctx.beginPath();ctx.moveTo(x-s*0.5,y-s*0.5);ctx.lineTo(x+s*0.85,y-s*0.5);ctx.lineTo(x+s*0.5,y+s*0.5);ctx.lineTo(x-s*0.85,y+s*0.5);ctx.closePath();ctx.stroke();
     if(kind==="constraint"){ctx.beginPath();ctx.moveTo(x-s*0.2,y-s*0.5);ctx.lineTo(x-s*0.55,y+s*0.5);ctx.stroke();}}
   else if(kind==="interaction"){ctx.beginPath();ctx.arc(x-s*0.12,y,s*0.62,Math.PI/2,Math.PI*1.5);ctx.closePath();ctx.stroke();ctx.beginPath();ctx.arc(x+s*0.12,y,s*0.62,-Math.PI/2,Math.PI/2);ctx.closePath();ctx.stroke();}
+  else if(kind==="decision"){ctx.beginPath();ctx.moveTo(x,y-s*0.8);ctx.lineTo(x+s*0.8,y);ctx.lineTo(x,y+s*0.8);ctx.lineTo(x-s*0.8,y);ctx.closePath();ctx.stroke();}
+  else if(kind==="question"){ctx.lineCap="round";rr(ctx,x-s*0.8,y-s*0.7,s*1.6,s*1.1,s*0.35);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.3,y+s*0.4);ctx.lineTo(x-s*0.45,y+s*0.8);ctx.lineTo(x+s*0.05,y+s*0.4);ctx.stroke();
+    T(ctx,"?",x,y+s*0.18,{w:800,size:s,align:"center",color:rgbaS(col,1)});}
+  else if(kind==="measure"){ctx.lineCap="round";ctx.fillStyle=rgbaS(col,1);const cy=y+s*0.38;ctx.beginPath();ctx.arc(x,cy,s*0.85,Math.PI,0);ctx.stroke();
+    for(let k=0;k<=4;k++){const an=Math.PI+k*Math.PI/4;ctx.beginPath();ctx.moveTo(x+Math.cos(an)*s*0.85,cy+Math.sin(an)*s*0.85);ctx.lineTo(x+Math.cos(an)*s*0.62,cy+Math.sin(an)*s*0.62);ctx.stroke();}
+    const an=Math.PI*1.535;ctx.beginPath();ctx.moveTo(x,cy);ctx.lineTo(x+Math.cos(an)*s*0.7,cy+Math.sin(an)*s*0.7);ctx.stroke();ctx.beginPath();ctx.arc(x,cy,s*0.14,0,TP);ctx.fill();}
   else{ctx.beginPath();ctx.arc(x-s*0.3,y,s*0.55,0,TP);ctx.stroke();ctx.beginPath();ctx.arc(x+s*0.3,y,s*0.55,0,TP);ctx.stroke();}
   ctx.restore();}
 // an element of the model: glass in its colour, its name, and its glyph in the corner (o.g2: a second glyph beside the first)
@@ -308,6 +316,123 @@ PIC.skipper=(Lb,S)=>{const W=Lb.w,its=W.items,R=W.rungs,AC=rgb(Lb.c);
     S.done.forEach(i=>{const t2=since(now,S.t[i]),it2=its[i],B=o.slot[i],wait=it2.up?1500:1100;if(t2<wait&&i===cur)return;const u=i===cur?eo((t2-wait)/600):1,A=[o.m+lab,o.rung[it2.up?3:0].y+8];
       const x=lp(A[0],B.x,u),y=lp(A[1],B.y,sp(u));chip(ctx,x,y,B.w,B.h,it2.s,it2.up?K.good:K.gold,{a:cl(u*3,0,1),mark:u>=1&&S.first[i]===it2.b?"ok":null});});};
   return{lay,draw};};
+
+// 8 · Trace it down: a goal traced down to a decision, a question and a measure, as Goal, Question, Metric does, with the decision
+// the film adds; then the chain gives way to a tree, its measure carried across: the regulator's measure at the root, a solid line
+// for each formula, a dotted one for a driver to test, until the branch nobody asked about is lit and offered to its owner
+PIC.trace=(Lb,S)=>{const W=Lb.w,its=W.items,P=W.pic,TR=P.tree,AC=rgb(Lb.c),MOT=K.lay[0],BUS=K.lay[2],INF=K.lay[3];
+  const LV=[[P.levels[0],MOT,"goal"],[P.levels[1],BUS,"decision"],[P.levels[2],INF,"question"],[P.levels[3],INF,"measure"]],val=k=>k?its[k-1].s:P.goal;
+  // the tree, top to bottom, and each node's depth; the driver's row (trees) opens only once it's placed, so nothing gives it away.
+  // A tick on a branch sits on its lower corner, clear of the glyph on its upper one
+  const KEYS=["root","often","trees","long","reach","fix"],DEP={root:0,often:1,trees:2,long:1,reach:2,fix:2},WHO=["root","often","long"],LOW={long:1,reach:1,fix:1};
+  // lines that fit a width: two as even as they can be; three as they wrap, unless that leaves one word alone on the last
+  const even=(ctx,s,w,z,max,wt)=>{const f=fitL(ctx,s,w,z,max,wt),n=f[0].length;if(n<2||LN(ctx,s,w,f[1],wt).length!==n||n>2&&/\s/.test(f[0][n-1].trim()))return f;let lo=w/2,hi=w;
+    for(let k=0;k<12;k++){const mid=(lo+hi)/2;if(LN(ctx,s,mid,f[1],wt).length<=n)hi=mid;else lo=mid;}return[LN(ctx,s,hi,f[1],wt),f[1]];};
+  // the method's name, smaller if it must, so it fits the width: [first part, "+ the decision", size, widths]
+  const gqmFit=(ctx,w)=>{const[p1,p2]=String(P.gqm).split(/\s*\+\s*/),s2="+ "+p2;let z=13;while(z>11.5&&TW(ctx,p1,z,800)+TW(ctx,s2,z,800)+32>w)z-=0.5;
+    const w1=TW(ctx,p1,z,800),w2=TW(ctx,s2,z,800);if(w1+w2+32>w)MISS.add(P.gqm);return[p1,s2,z,w1,w2];};
+  const lay=(lw,ctx)=>{const m=12,ind=lw<400?24:32,o={lw,m,ind,r:[],n:{}};
+    // the chain: four rungs, each named on its left, the method's verbs between them, and its name under them
+    o.lab=Math.ceil(Math.max(...LV.map(l=>TW(ctx,l[0],12.5,800))))+44;o.vw=lw-m*2-o.lab-12;let y=0;
+    LV.forEach((l,k)=>{const[ls,z]=even(ctx,val(k),o.vw,13.5,2),hh=Math.max(40,Math.round(ls.length*16.2+16));o.r[k]={y,h:hh,ls,z};y+=hh+(k<3?26:0);});
+    o.tag=y+14;const h1=o.tag+26;
+    // the tree, under its legend: each node as wide as the page allows beside the pill that says who asks for it; the offer runs down
+    // from the long branch's pill along the right edge, so the nodes under that branch stop short of its line
+    const CAP=Math.round(cl(lw*0.58,180,380));
+    WHO.forEach(k=>{const x=m+DEP[k]*ind,pw=Math.ceil(TW(ctx,P.who[k],12.5))+20,w=Math.min(CAP,lw-m-x-pw-8);o.n[k]={x,w,pw,px:x+w+8};});
+    o.ax=o.n.long.px+o.n.long.pw-14;
+    ["reach","fix"].forEach(k=>{const x=m+2*ind;o.n[k]={x,w:Math.min(CAP,o.ax-12-x)};});
+    {const x=m+2*ind;o.n.trees={x,w:Math.min(CAP,lw-m-x,Math.ceil(TW(ctx,TR.trees,13))+30)};}
+    y=44;KEYS.forEach(k=>{const n=o.n[k];if(k!=="trees")[n.ls,n.z]=even(ctx,TR[k],n.w-42,13,3);const nl=k==="trees"?fitL(ctx,TR.trees,n.w-12,13,2)[0].length:n.ls.length;
+      n.h=k==="trees"?Math.max(34,Math.round(nl*15.6+14)):Math.max(36,Math.round(nl*15.6+16));if(k==="long")y+=4;n.y=y;y+=n.h+9;});
+    o.shift=o.n.trees.h+9;
+    // the question offered, under the tree; the legend's two entries, on one line from the right
+    const nx=m+ind,nw=lw-m-nx,[nls,nz]=even(ctx,P.offer,nw-48,13.5,2,800);o.note={x:nx,y:y+8,w:nw,h:Math.round(nls.length*16.2+15+21),ls:nls,z:nz};
+    o.lg=[TW(ctx,P.solid,12.5),TW(ctx,P.dotted,12.5)];if(o.lg[0]+o.lg[1]+80>lw-m*2){MISS.add(P.solid);MISS.add(P.dotted);}
+    o.h=Math.max(h1+24,o.note.y+o.note.h+12);o.cy=Math.round((o.h-h1)/2);return o;};
+  const ring=(ctx,x,y,w,hh,r,col,a)=>{if(a<=0.01)return;ctx.save();ctx.shadowColor=rgbaS(col,0.8*a);ctx.shadowBlur=14;ctx.strokeStyle=rgbaS(col,0.95*a);ctx.lineWidth=2.2;rr(ctx,x-3,y-3,w+6,hh+6,r+3);ctx.stroke();ctx.restore();};
+  const dashed=(ctx,x,y,w,hh,r,col,a)=>{if(a<=0.01)return;ctx.save();ctx.globalAlpha*=cl(a,0,1);ctx.setLineDash([5,4]);ctx.strokeStyle=rgbaS(col,0.95);ctx.lineWidth=1.6;rr(ctx,x+1,y+1,w-2,hh-2,r);ctx.stroke();ctx.restore();};
+  const hole=(ctx,n,a)=>chip(ctx,n.x,n.y,n.w,n.h,"?",K.soft,{a,dash:1,tint:0.04,glow:0,size:16});
+  const words=(ctx,ls,z,x,y,hh,col)=>{const lh=z*1.2;ls.forEach((l,i)=>T(ctx,l,x,y+hh/2-(ls.length-1)*lh/2+z*0.36+i*lh,{w:700,size:z,color:col||rgbaS(K.ink,0.96)}));};
+  const node=(ctx,o,k,x,y,a)=>{const n=o.n[k];if(a<=0.01)return;el(ctx,x,y,n.w,n.h,"",INF,"measure",{a});withA(ctx,a,()=>words(ctx,n.ls,n.z,x+10,y,n.h));};
+  // a line drawn part of the way: solid for a formula, dotted for a driver, dashed and grey while it isn't known
+  const path=(ctx,pts,p,st)=>{if(p<=0.01)return;const d=[];let L=0;for(let j=1;j<pts.length;j++){d.push(Math.hypot(pts[j][0]-pts[j-1][0],pts[j][1]-pts[j-1][1]));L+=d[j-1];}
+    let left=L*cl(p,0,1);ctx.save();ctx.lineCap="round";ctx.lineJoin="round";
+    if(st==="dot"){ctx.setLineDash([0.1,6.5]);ctx.lineWidth=3.2;ctx.strokeStyle=rgbaS(K.notes[3],1);}else if(st==="unk"){ctx.setLineDash([4,5]);ctx.lineWidth=1.6;ctx.strokeStyle=rgbaS(K.soft,0.6);}
+    else{ctx.lineWidth=2.2;ctx.strokeStyle=rgbaS(K.ink,0.82);}
+    ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let j=1;j<pts.length&&left>0;j++){const v=Math.min(1,left/d[j-1]);ctx.lineTo(lp(pts[j-1][0],pts[j][0],v),lp(pts[j-1][1],pts[j][1],v));left-=d[j-1];}
+    ctx.stroke();ctx.restore();};
+  const both=(ctx,pts,unk,sol)=>{if(sol<1)path(ctx,pts,unk,"unk");path(ctx,pts,sol,"sol");};
+  // where two branches join: × or +, or ? until it's known; it pops in with a spring
+  const op=(ctx,x,y,s,a,k)=>{if(a<=0.01)return;const q=s==="?",c=q?K.soft:K.ink;withA(ctx,cl(a,0,1),()=>{ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.fillStyle="rgba(7,12,24,0.97)";
+    ctx.beginPath();ctx.arc(0,0,9.5,0,TP);ctx.fill();ctx.strokeStyle=rgbaS(c,q?0.6:0.9);ctx.lineWidth=1.6;ctx.stroke();T(ctx,s,0,q?4.6:5.3,{w:800,size:q?13:15,align:"center",color:rgbaS(c,1)});ctx.restore();});};
+  // a rung of the chain: st 0 not dealt yet, 1 the card in hand, 2 answered (tv: how far its words have come in)
+  const rung=(ctx,o,k,x,y,w,hh,st,tv,a)=>{if(a<=0.01)return;const[nm,col,kind]=LV[k];withA(ctx,a,()=>{
+    glass(ctx,x,y,w,hh,10,col,{glow:st===2?10:0,ea:st===2?0.9:st===1?0.55:0.28,fill:"rgba(7,12,24,0.92)"});
+    if(st===2){ctx.fillStyle=rgbaS(col,0.1+0.05*tv);rr(ctx,x,y,w,hh,10);ctx.fill();}if(st===1)dashed(ctx,x,y,w,hh,10,K.gold,1);
+    glyph(ctx,kind,x+19,y+hh/2,7,st?col:mixC(col,[7,12,24],0.4));T(ctx,nm,x+34,y+hh/2+4.5,{w:800,size:12.5,color:rgbaS(col,st?1:0.6)});
+    if(st===2)withA(ctx,tv,()=>words(ctx,o.r[k].ls,o.r[k].z,x+o.lab,y+(1-tv)*6,hh));else if(st===1)T(ctx,"?",x+o.lab,y+hh/2+4.9,{w:700,size:13.5,color:rgbaS(K.gold,1)});});};
+  const chain=(ctx,o,now,a)=>{const y0=o.cy,x=o.m,w=o.lw-o.m*2;
+    // the verb between two rungs comes with the card that asks for the lower one
+    for(let k=0;k<3;k++){const sh=S.fx["s"+k];if(sh==null)continue;const A_=o.r[k],B_=o.r[k+1],p=eo(since(now,sh)/450),ya=y0+A_.y+A_.h,yb=y0+B_.y;
+      withA(ctx,a,()=>{arrow(ctx,x+19,ya+3,x+19,lp(ya+3,yb-3,p),LV[k+1][1],0.85,{lw:1.8,head:6});withA(ctx,p,()=>line1(ctx,P.links[k],x+34,(ya+yb)/2+4.5,w-40,12.5,{color:rgbaS(K.soft,1)}));});}
+    LV.forEach((l,k)=>{if(k===3&&S.fx.tree)return;const R=o.r[k],ans=k===0||S.first[k-1]!=null,hand=!ans&&S.i===k-1,tv=k===0?1:ans?eo(since(now,S.t[k-1])/400):0;
+      rung(ctx,o,k,x,y0+R.y,w,R.h,ans?2:hand?1:0,tv,a);
+      if(k>0&&ans&&S.first[k-1]===its[k-1].b&&since(now,S.t[k-1])>450)withA(ctx,a,()=>mark(ctx,x+w-2,y0+R.y+2,"ok"));});
+    // once the measure is found: the method's name, and the decision lit in gold, the step the film adds
+    if(S.first[2]!=null){const g=eo((since(now,S.t[2])-250)/350)*a;if(g>0.01){const R=o.r[1];ring(ctx,x,y0+R.y,w,R.h,10,K.gold,g);
+      const[p1,s2,z,w1,w2]=gqmFit(ctx,w),tw_=w1+8+w2+24,X=(o.lw-tw_)/2,Y=y0+o.tag;
+      withA(ctx,g,()=>{glass(ctx,X,Y,tw_,26,13,K.gold,{fill:"rgba(7,12,24,0.92)",glow:8,ea:0.8});T(ctx,p1,X+12,Y+13+z*0.36,{w:800,size:z,color:rgbaS(K.ink,0.96)});
+        T(ctx,s2,X+12+w1+8,Y+13+z*0.36,{w:800,size:z,color:rgbaS(K.gold,1)});});}}};
+  const tree=(ctx,o,now,u)=>{const N=o.n,ind=o.ind,A=i=>S.first[i]!=null,tA=i=>A(i)?since(now,S.t[i]):-1,dealt=i=>S.fx["s"+i]!=null,tS=i=>since(now,S.fx["s"+i]),okA=i=>S.first[i]===its[i].b;
+    // the driver's row opens as it's placed: the rows under it slide down to make room
+    const sh=(1-(A(5)?eo(tA(5)/350):0))*o.shift,at=k=>{const n=N[k],d=LOW[k]?sh:0;return{x:n.x,y:n.y-d,w:n.w,h:n.h,my:n.y-d+n.h/2,px:n.px,pw:n.pw};};
+    const R=at("root"),OF=at("often"),TE=at("trees"),LO=at("long"),RE=at("reach"),FX=at("fix"),rx=R.x+ind/2,ox=OF.x+ind/2,lx=LO.x+ind/2;
+    // the legend: a solid line is a formula; a dotted one, from the card that brings a driver, a driver to test
+    const lg=eo((u-500)/350);if(lg>0.01)withA(ctx,lg,()=>{const[w1,w2]=o.lg,dl=dealt(5)?eo(tS(5)/400):0,x0=o.lw-o.m-(w1+w2+80),y=22;
+      path(ctx,[[x0,y-4],[x0+22,y-4]],1,"sol");T(ctx,P.solid,x0+28,y,{w:700,size:12.5,color:rgbaS(K.soft,1)});
+      if(dl>0.01)withA(ctx,dl,()=>{const x1=x0+w1+52;path(ctx,[[x1+1,y-4],[x1+22,y-4]],1,"dot");T(ctx,P.dotted,x1+28,y,{w:700,size:12.5,color:rgbaS(K.soft,1)});});});
+    // the root, the regulator's measure, comes in; the lines from it stay dashed until the formula is known
+    const ra=eo((u-300)/350),pu=eo((u-450)/350),k3=A(3)?eo(tA(3)/450):0;
+    both(ctx,[[rx,R.y+R.h],[rx,OF.my],[OF.x,OF.my]],pu,k3);both(ctx,[[rx,R.y+R.h],[rx,LO.my],[LO.x,LO.my]],pu,k3);
+    node(ctx,o,"root",R.x,R.y-(1-ra)*10,ra);
+    // the measure that was traced moves from the chain to its branch: the rung's words leave before the branch's come in
+    const mu=eo((u-100)/650);if(mu<1){const S0={x:o.m,y:o.cy+o.r[3].y,w:o.lw-o.m*2,h:o.r[3].h},x=lp(S0.x,OF.x,mu),y=lp(S0.y,OF.y,mu),w=lp(S0.w,OF.w,mu),hh=lp(S0.h,OF.h,mu),r=lp(10,6,mu),f1=1-eo(mu/0.15),f2=eo((mu-0.45)/0.4);
+      glass(ctx,x,y,w,hh,r,INF,{glow:10,ea:0.88,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgbaS(INF,0.15);rr(ctx,x,y,w,hh,r);ctx.fill();glyph(ctx,"measure",lp(x+19,x+w-16,mu),lp(y+hh/2,y+15,mu),lp(7,8,mu),INF);
+      ctx.save();rr(ctx,x,y,w,hh,r);ctx.clip();
+      if(f1>0.01)withA(ctx,f1,()=>{T(ctx,LV[3][0],x+34,y+hh/2+4.5,{w:800,size:12.5,color:rgbaS(INF,1)});words(ctx,o.r[3].ls,o.r[3].z,x+o.lab,y,hh);});
+      if(f2>0.01)withA(ctx,f2,()=>words(ctx,N.often.ls,N.often.z,x+10,y,hh));
+      ctx.restore();if(okA(2)&&f1>0.01)withA(ctx,f1,()=>mark(ctx,x+w-2,y+2,"ok"));}
+    else node(ctx,o,"often",OF.x,OF.y,1);
+    // how long it stays off each time: a ? until the formula is known, then the branch, and × where the two join
+    const ph=eo((u-450)/350);if(!A(3))hole(ctx,LO,ph);
+    else{const t=tA(3),q=eo((t-200)/400);if(q<1)hole(ctx,LO,1-eo(t/200));node(ctx,o,"long",LO.x,LO.y+(1-q)*10,q);if(okA(3)&&t>600)mark(ctx,LO.x+LO.w-2,LO.y+LO.h-2,"ok");}
+    op(ctx,rx,(OF.my+LO.my)/2,A(3)?"×":"?",eo((u-600)/250),A(3)?lp(0.6,1,sp(cl((tA(3)-150)/400,0,1))):1);
+    // what each interruption's length is made of: two more branches, and + where they join
+    if(dealt(4)){const pd=eo(tS(4)/400),k4=A(4)?eo(tA(4)/450):0;if(!A(4))dashed(ctx,LO.x-4,LO.y-4,LO.w+8,LO.h+8,9,K.gold,pd);
+      both(ctx,[[lx,LO.y+LO.h],[lx,RE.my],[RE.x,RE.my]],pd,k4);both(ctx,[[lx,LO.y+LO.h],[lx,FX.my],[FX.x,FX.my]],pd,k4);
+      [[RE,"reach",200],[FX,"fix",300]].forEach(([n,k,d])=>{if(!A(4))return hole(ctx,n,pd);const t=tA(4),q=eo((t-d)/350);if(q<1)hole(ctx,n,1-eo(t/200));node(ctx,o,k,n.x,n.y+(1-q)*10,q);});
+      op(ctx,lx,(RE.my+FX.my)/2,A(4)?"+":"?",pd,A(4)?lp(0.6,1,sp(cl((tA(4)-150)/400,0,1))):1);if(A(4)&&okA(4)&&tA(4)>600)mark(ctx,FX.x+FX.w-2,FX.y+FX.h-2,"ok");}
+    // who asks for each branch: a ? beside each until the card is answered; then the pills, and the branch nobody asked about, in gold
+    if(dealt(6)){const pd=eo(tS(6)/400);WHO.forEach((k,j)=>{const n=at(k),y=n.my-12.25;
+        if(!A(6))return withA(ctx,pd,()=>{ctx.save();ctx.setLineDash([4,4]);ctx.strokeStyle=rgbaS(K.soft,0.6);ctx.lineWidth=1.4;rr(ctx,n.px,y,44,24.5,12.25);ctx.stroke();ctx.restore();
+          T(ctx,"?",n.px+22,y+17,{w:800,size:13,align:"center",color:rgbaS(K.soft,0.85)});});
+        const q=eo((tA(6)-j*120)/300);if(q>0.01)withA(ctx,q,()=>pill(ctx,n.px+(1-q)*8,y,P.who[k],k==="long"?K.gold:K.soft,{size:12.5}));});
+      if(A(6)){const t=tA(6);ring(ctx,LO.x,LO.y,LO.w,LO.h,6,K.gold,eo((t-300)/350));if(okA(6)&&t>600)mark(ctx,LO.px+LO.pw-2,LO.my-12,"ok");}}
+    // the branch offered as a question: down from its pill, along the right edge, to Grace
+    if(A(7)){const t=tA(7),pa=eo(t/350),q=eo((t-250)/400),NT=o.note,y=NT.y+(1-q)*10;
+      if(pa>0.05)arrow(ctx,o.ax,LO.my+14.5,o.ax,lp(LO.my+16,NT.y-3,pa),K.gold,0.9,{lw:2,dash:[5,4],head:7});
+      if(q>0.01)withA(ctx,q,()=>{glass(ctx,NT.x,y,NT.w,NT.h,12,K.gold,{fill:"rgba(30,22,6,0.94)",glow:12,ea:0.9});glyph(ctx,"question",NT.x+21,y+21,8,K.gold);
+        const ls=NT.ls,z=NT.z,lh=z*1.2;ls.forEach((l,i)=>T(ctx,l,NT.x+38,y+11+z+i*lh,{w:800,size:z,color:rgbaS(K.gold,1)}));
+        line1(ctx,P.to,NT.x+38,y+11+z+(ls.length-1)*lh+19,NT.w-50,12.5,{color:rgbaS(mixC(K.gold,K.ink,0.45),0.95)});});
+      if(okA(7)&&t>650)mark(ctx,NT.x+NT.w-2,y+2,"ok");}
+    // trees near the lines: in hand under the tree, then up to its branch on a dotted line (drawn last, so it passes over the rest)
+    if(dealt(5)){const H=o.note;if(!A(5))paper(ctx,H.x,H.y,TE.w,TE.h,TR.trees,K.notes[3],{a:eo(tS(5)/400),rot:-0.03});
+      else{const t=tA(5),v=cl(t/600,0,1),x=lp(H.x,TE.x,eo(v)),y=lp(H.y,TE.y,sp(v));path(ctx,[[ox,OF.y+OF.h],[ox,TE.my],[TE.x,TE.my]],eo((t-300)/350),"dot");
+        paper(ctx,x,y,TE.w,TE.h,TR.trees,K.notes[3],{rot:lp(-0.03,-0.012,eo(v)),mark:okA(5)&&t>650?"ok":null});}}};
+  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,AC);const tr=S.fx.tree,u=tr==null?-1:since(now,tr);
+    if(tr==null||u<350)chain(ctx,o,now,tr==null?1:1-eo(u/350));if(tr!=null)tree(ctx,o,now,u);};
+  return{lay,draw,show:i=>{const t=performance.now();if(S.fx["s"+i]==null)S.fx["s"+i]=t;if(i>=3&&S.fx.tree==null)S.fx.tree=t;}};};
 
 // 12 · Redraw it in ArchiMate 4: the element as version 3.2 drew it, and how version 4 draws it; the ones done so far, below
 const KIND_COL=k=>({actor:K.lay[2],contract:K.lay[2],object:K.lay[2],role:K.lay[2],process:K.lay[2],interaction:K.lay[2],collaboration:K.lay[2],gap:K.mig,assessment:K.lay[0],

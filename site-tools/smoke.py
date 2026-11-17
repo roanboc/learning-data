@@ -1848,11 +1848,96 @@ async def check_route(run):
         await ctx.close()
 
 
+# ---------------------------------------------------------------- the example project's map: its details panel
+# The map (site/assets/learn/project.js) keeps an article in its panel for every piece: the intro, the eleven steps, the seven
+# layers and the seven handoffs. This shows each in turn, as a phone, a tablet and a laptop draw the panel, and expanded, then
+# again with every alternative on (models already built, the view without the email match, every check broken), and fails rows
+# that overlap and text that leaves its row. The map's step badges once shared a class with the panel's rows (px-no), and the
+# rows took the badge's 20 px height, their words spilling over the next row (Rodrigo, 17 Nov 2026).
+PANEL_JS = """() => {
+  const app = document.querySelector('.px-app'), insp = app && app.querySelector('.px-insp');
+  if (!insp) return {n: 0, bad: ['no panel beside the map']};
+  const arts = [...insp.querySelectorAll('.px-art')], was = arts.find(x => !x.hidden), bad = [];
+  // the layout at rest: a piece shown again replays its entrance (px-in slides 10 px), which isn't a row out of place
+  const still = document.createElement('style');
+  still.textContent = '*, *::before, *::after { animation: none !important; transition: none !important; }';
+  document.head.appendChild(still);
+  const shown = e => { const s = getComputedStyle(e), r = e.getBoundingClientRect(); return s.display !== 'none' && s.visibility !== 'hidden' && r.width > 0 && r.height > 0; };
+  const say = e => JSON.stringify((e.innerText || e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 48));
+  const name = e => e.tagName.toLowerCase() + [...e.classList].map(c => '.' + c).join('');
+  for (const a of arts) {
+    arts.forEach(x => { x.hidden = x !== a; });
+    const at = a.id.slice(3) + ' ' + say(a.querySelector('h3') || a);
+    // a row, a paragraph or a box holds its own text: none spills out of it, down or across
+    for (const e of a.querySelectorAll('li, p, dt, dd, td, th, figure, figcaption, div')) {
+      if (!shown(e)) continue;
+      const s = getComputedStyle(e);
+      if (s.display === 'inline' || s.display === 'contents' || s.display.startsWith('table-row')) continue;
+      if (!/auto|scroll/.test(s.overflowY) && e.scrollHeight > e.clientHeight + 2)
+        bad.push(at + ': ' + name(e) + ' ' + say(e) + ' is ' + e.clientHeight + ' px high, its text ' + e.scrollHeight + ' px');
+      if (!/auto|scroll/.test(s.overflowX) && s.textOverflow !== 'ellipsis' && e.scrollWidth > e.clientWidth + 2)
+        bad.push(at + ': ' + name(e) + ' ' + say(e) + ' is ' + e.clientWidth + ' px wide, its text ' + e.scrollWidth + ' px');
+    }
+    // rows side by side or one under another: no two overlap
+    for (const box of a.querySelectorAll('ul, ol, tbody, dl, div, figure')) {
+      const kids = [...box.children].filter(k => shown(k) && !/absolute|fixed/.test(getComputedStyle(k).position)).map(k => [k, k.getBoundingClientRect()]);
+      for (let i = 0; i < kids.length; i++) for (let j = i + 1; j < kids.length; j++) {
+        const [k, p] = kids[i], [m, q] = kids[j];
+        const w = Math.min(p.right, q.right) - Math.max(p.left, q.left), h = Math.min(p.bottom, q.bottom) - Math.max(p.top, q.top);
+        if (w > 1 && h > 1) bad.push(at + ': ' + say(k) + ' and ' + say(m) + ' overlap by ' + Math.round(h) + ' px');
+      }
+    }
+  }
+  arts.forEach(x => { x.hidden = x !== was; });
+  still.remove();
+  return {n: arts.length, bad};
+}"""
+PANEL_ALT_JS = """() => {
+  const app = document.querySelector('.px-app');
+  app.querySelectorAll('.px-pth[data-path=exists], .px-tog, .px-hbtn').forEach(b => b.click());
+  return app.querySelectorAll('.px-pth[data-path=exists][aria-pressed=true], .px-tog[aria-pressed=true]').length; }"""
+
+
+async def check_project_panel(run):
+    sec = run.rep.sec("project-panel", "The example project's map: every piece's details, on a phone, a tablet and a laptop and expanded, with every alternative too: no rows that overlap, no text out of its row")
+    keys = run.pick(k for k in ("dbt-project/", "es/dbt-project/") if k in run.static)
+    layouts = [(390, 844, False), (768, 1024, False), (1280, 800, False), (1280, 800, True)]
+
+    async def one(key, width, height, wide):
+        async with run.sem:
+            ctx = await run.context(width, height=height)
+            try:
+                pg, log = await run.page(ctx, key)
+                await pg.wait_for_selector(".px-app.is-ready", timeout=20000)
+                where = f"/{key} @{width}" + (" expanded" if wide else "")
+                if wide:
+                    await pg.click(".px-expand")
+                    await pg.wait_for_timeout(400)
+                    expect(sec, await pg.evaluate("() => document.querySelector('.px-app').classList.contains('is-wide')"), f"{where}: the panel didn't expand")
+                r = await pg.evaluate(PANEL_JS)
+                expect(sec, r["n"] >= 26, f"{where}: {r['n']} pieces' details in the panel, not 26")
+                for x in r["bad"]:
+                    expect(sec, False, f"{where}: {x}")
+                on = await pg.evaluate(PANEL_ALT_JS)
+                expect(sec, on >= 2, f"{where}: only {on} of the panel's alternatives switched on")
+                await pg.wait_for_timeout(300)
+                for x in (await pg.evaluate(PANEL_JS))["bad"]:
+                    expect(sec, False, f"{where}, alternatives on: {x}")
+                for p in log_problems(log):
+                    expect(sec, False, f"{where}: {p}")
+            finally:
+                await ctx.close()
+
+    await asyncio.gather(*(one(k, *lay) for k in keys for lay in layouts))
+    sec["notes"].append(f"{len(keys)} pages × {len(layouts)} layouts, every piece's details, then with every alternative on")
+
+
 CHECKS = {"pages": check_pages, "header": check_header, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
           "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
           "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn,
-          "labs-drawn": check_labs_drawn, "drawn": check_drawn, "route": check_route, "tour": check_tour}
+          "labs-drawn": check_labs_drawn, "drawn": check_drawn, "route": check_route, "tour": check_tour,
+          "project-panel": check_project_panel}
 
 
 async def amain(args):

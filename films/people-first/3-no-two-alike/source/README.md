@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key (`no-two-alike`), title and subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (chapter `lu`, at `why`), the words the voice respells (Zilu, Ran You, Gongxi Hua, Kong Qiu, Yusuf Demir, Tomás, Noor, Jun, "A I"), its opening story (`lu`) and no chapter where the score may pulse. |
+| `film.json` | The film's key (`no-two-alike`), title and subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (chapter `lu`, at `why`), the words the voice respells (Zilu, Ran You, Gongxi Hua, Kong Qiu, Novak, Yusuf Demir, Tomás, Noor, Jun, "A I"), its opening story (`lu`) and no chapter where the score may pulse. |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. A line whose voice differs from its caption says so in `say`. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The holds after some lines, where an idea needs a moment to land, and the film's two wordless moments: the title card and the end card. |

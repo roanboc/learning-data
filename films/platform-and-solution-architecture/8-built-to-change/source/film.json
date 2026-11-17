@@ -8,7 +8,7 @@
     "scenes.js"
   ],
   "story": ["kept"],
-  "poster": ["practice", "seam", 2.0],
+  "poster": ["kept", "ended", 8.05],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

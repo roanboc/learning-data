@@ -9,7 +9,7 @@
     "scenes.js"
   ],
   "story": ["road"],
-  "poster": ["road", "shared", 7.0],
+  "poster": ["road", "shared", 0.89],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

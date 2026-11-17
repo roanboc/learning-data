@@ -7,7 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["split", "breath", 1.2],
+  "poster": ["tartu", "born", 0.85],
   "say": [
     [
       "\\bTomás's\\b",

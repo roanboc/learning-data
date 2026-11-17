@@ -1849,15 +1849,18 @@ async def check_route(run):
 
 
 # ---------------------------------------------------------------- the example project's map: its details panel
-# The map (site/assets/learn/project.js) keeps an article in its panel for every piece: the intro, the eleven steps, the seven
-# layers and the seven handoffs. This shows each in turn, as a phone, a tablet and a laptop draw the panel, and expanded, then
+# The map (site/assets/learn/project.js) keeps an article in its panel for the intro and for every piece it opens: each step, layer
+# and handoff (their data-go). This shows each in turn, as a phone, a tablet and a laptop draw the panel, and expanded, then
 # again with every alternative on (models already built, the view without the email match, every check broken), and fails rows
 # that overlap and text that leaves its row. The map's step badges once shared a class with the panel's rows (px-no), and the
 # rows took the badge's 20 px height, their words spilling over the next row (Rodrigo, 17 Nov 2026).
 PANEL_JS = """() => {
   const app = document.querySelector('.px-app'), insp = app && app.querySelector('.px-insp');
-  if (!insp) return {n: 0, bad: ['no panel beside the map']};
+  if (!insp) return {n: 0, want: 0, gone: [], bad: ['no panel beside the map']};
   const arts = [...insp.querySelectorAll('.px-art')], was = arts.find(x => !x.hidden), bad = [];
+  // every piece the map links to, and the intro, has its details
+  const want = ['i0', ...new Set([...app.querySelectorAll('.px-nd[data-go], .px-shd[data-go]')].map(e => e.dataset.go))];
+  const gone = want.filter(g => !arts.some(x => x.id === 'px-' + g));
   // the layout at rest: a piece shown again replays its entrance (px-in slides 10 px), which isn't a row out of place
   const still = document.createElement('style');
   still.textContent = '*, *::before, *::after { animation: none !important; transition: none !important; }';
@@ -1890,7 +1893,7 @@ PANEL_JS = """() => {
   }
   arts.forEach(x => { x.hidden = x !== was; });
   still.remove();
-  return {n: arts.length, bad};
+  return {n: arts.length, want: want.length, gone, bad};
 }"""
 PANEL_ALT_JS = """() => {
   const app = document.querySelector('.px-app');
@@ -1915,7 +1918,8 @@ async def check_project_panel(run):
                     await pg.wait_for_timeout(400)
                     expect(sec, await pg.evaluate("() => document.querySelector('.px-app').classList.contains('is-wide')"), f"{where}: the panel didn't expand")
                 r = await pg.evaluate(PANEL_JS)
-                expect(sec, r["n"] >= 26, f"{where}: {r['n']} pieces' details in the panel, not 26")
+                expect(sec, r["want"] > 1, f"{where}: the map links to no piece's details")
+                expect(sec, not r["gone"], f"{where}: no details in the panel for {', '.join(r['gone'])}")
                 for x in r["bad"]:
                     expect(sec, False, f"{where}: {x}")
                 on = await pg.evaluate(PANEL_ALT_JS)

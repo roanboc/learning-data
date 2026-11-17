@@ -1,8 +1,8 @@
 # Wellbeing is in the work: questions and assumptions
 
-*Leading data people* · *People first*, film 2 of 4 · merged, PR #419 · [pull request](https://github.com/roanboc/learning-data/pull/419)
+*Leading data people* · *People first*, film 2 of 4 · open, PR #419 · [pull request](https://github.com/roanboc/learning-data/pull/419)
 
-[Watch it on the site](https://data.learn-all.org/people-first/wellbeing-in-the-work/)
+[Watch it on the site](https://data.learn-all.org/people-first/wellbeing-in-the-work/), once merged
 
 Film 2 of 4 of *People first* (`films/people-first/2-wellbeing-in-the-work`), made from the plan the author confirmed on 12 November 2026 ("Yes, start the series as proposed") and the series' brief for this film. Each question I would have asked, the assumption I made instead, where it shows, and what changes if it's wrong. The series' own questions are in [`0-series.md`](0-series.md).
 

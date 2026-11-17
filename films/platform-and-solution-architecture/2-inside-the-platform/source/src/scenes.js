@@ -173,31 +173,31 @@ function p2_cedar(ctx,x,y,h,seed,col,rim){const w=h*(0.24+0.08*hash(seed,1)),n=5
 // where the cedars stand, in kilometres from Odawara: none on the lake's shore or by a station
 const P2_CEDARS=[2.2,3.4,4.1,5.6,6.3,7.7,8.8,9.6,10.4,11.6,12.2,13.1,13.8,14.4,14.9,15.15,17.15,17.7,18.0,18.6,19.1,19.6,20.2,21.0,21.9,22.6,23.6,24.4,25.3,26.2,27.4,28.3,29.4];
 function p2_mountain(ctx,S,t,o){o=o||{};setScreen(ctx,S);const d=o.d==null?0.9:o.d,night=o.night||0,N=c=>mix(c,[8,10,24],night*0.75),cam=o.cam||[960,540,1],par=k=>[cam[0],cam[1],1+(cam[2]-1)*k];
-  const g=ctx.createLinearGradient(0,0,0,800);g.addColorStop(0,rgba(mix(mix([10,14,30],[24,28,58],d),[5,7,18],night),1));g.addColorStop(0.55,rgba(mix(mix([18,20,40],[92,62,80],d),[10,12,28],night),1));g.addColorStop(1,rgba(mix(mix([30,26,38],[214,140,96],d),[20,22,40],night),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  const g=ctx.createLinearGradient(0,0,0,800);g.addColorStop(0,rgba(mix(mix([8,14,42],[16,38,110],d),[5,8,22],night),1));g.addColorStop(0.55,rgba(mix(mix([16,22,58],[108,76,144],d),[10,12,32],night),1));g.addColorStop(1,rgba(mix(mix([28,28,58],[242,136,96],d),[20,22,46],night),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   // the last of the light in the west, behind Mishima
   if(d*(1-night)>0.01)glow(ctx,240,620,760,[230,150,100],0.22*d*(1-night));
   if(night>0.01)for(let i=0;i<90;i++){const x=hash(i,31)*W,y=hash(i,32)*440,r=0.6+hash(i,33)*1.4;ctx.fillStyle="rgba(230,236,255,"+(0.25+0.5*hash(i,34))*night+")";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();}
   // the far mountains, hazy, rising behind the lake; then nearer ranges: the further, the less they move with the camera
-  ctx.save();p2_camAt(ctx,par(0.3));p2_range(ctx,470,36,0.4,[[1010,118,100],[870,92,110],[1180,104,120],[1430,66,150],[650,58,130],[390,80,190]],N(mix([56,48,72],[100,80,104],d*0.4)));ctx.restore();
-  ctx.save();p2_camAt(ctx,par(0.6));p2_range(ctx,560,34,2.1,[[300,80,170],[640,50,120],[1420,70,150],[1680,40,120]],N(mix([40,35,52],[64,50,66],d*0.3)));ctx.restore();
+  ctx.save();p2_camAt(ctx,par(0.3));p2_range(ctx,470,36,0.4,[[1010,118,100],[870,92,110],[1180,104,120],[1430,66,150],[650,58,130],[390,80,190]],N(mix([44,56,104],[90,86,146],d*0.4)));ctx.restore();
+  ctx.save();p2_camAt(ctx,par(0.6));p2_range(ctx,560,34,2.1,[[300,80,170],[640,50,120],[1420,70,150],[1680,40,120]],N(mix([28,42,76],[50,58,96],d*0.3)));ctx.restore();
   ctx.save();p2_camAt(ctx,cam);
   // the mountain itself, lit a little along its top, and the folds of its slopes
-  const mg=ctx.createLinearGradient(0,340,0,800);mg.addColorStop(0,rgba(N([36,31,44]),1));mg.addColorStop(1,rgba(N([13,12,16]),1));ctx.fillStyle=mg;
+  const mg=ctx.createLinearGradient(0,340,0,800);mg.addColorStop(0,rgba(N([20,40,60]),1));mg.addColorStop(1,rgba(N([7,14,24]),1));ctx.fillStyle=mg;
   ctx.beginPath();ctx.moveTo(1750,772);P2_PROF.forEach(([x,y])=>ctx.lineTo(x,y));ctx.lineTo(160,768);ctx.lineTo(0,768);ctx.lineTo(0,H);ctx.lineTo(1750,H);ctx.closePath();ctx.fill();
-  ctx.save();ctx.strokeStyle=rgba(N([70,60,78]),0.35);ctx.lineWidth=2.2;[[[P2_KX(14.2),P2_MY(762)],[1300,600],[1380,760]],[[P2_KX(11),P2_MY(500)],[1500,640],[1560,770]],[[P2_KX(19.3),P2_MY(846)],[660,560],[600,760]],
+  ctx.save();ctx.strokeStyle=rgba(N([56,84,110]),0.35);ctx.lineWidth=2.2;[[[P2_KX(14.2),P2_MY(762)],[1300,600],[1380,760]],[[P2_KX(11),P2_MY(500)],[1500,640],[1560,770]],[[P2_KX(19.3),P2_MY(846)],[660,560],[600,760]],
     [[P2_KX(23),P2_MY(590)],[460,660],[420,770]],[[P2_KX(17.4),P2_MY(762)],[860,560],[820,760]]].forEach(([a,c,b])=>{ctx.beginPath();ctx.moveTo(a[0],a[1]+6);ctx.quadraticCurveTo(c[0],c[1],b[0],b[1]);ctx.stroke();});ctx.restore();
   ctx.save();ctx.strokeStyle=rgba(N(mix([120,96,110],[240,170,120],d*0.5)),0.4);ctx.lineWidth=2;ctx.beginPath();P2_PROF.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();ctx.restore();
   // the lake in the hollow: the sky's light on its water
   const[xe,xw,ly]=P2_LK;ctx.save();ctx.beginPath();ctx.moveTo(xe+4,ly);ctx.quadraticCurveTo((xe+xw)/2,ly+46,xw-4,ly);ctx.closePath();
-  const lg=ctx.createLinearGradient(0,ly,0,ly+24);lg.addColorStop(0,rgba(mix(mix([150,122,150],[210,160,140],d*0.4),[44,54,92],night),1));lg.addColorStop(1,rgba(mix([40,40,66],[12,14,30],night),1));ctx.fillStyle=lg;ctx.fill();ctx.clip();
+  const lg=ctx.createLinearGradient(0,ly,0,ly+24);lg.addColorStop(0,rgba(mix(mix([100,150,210],[210,170,170],d*0.4),[44,54,92],night),1));lg.addColorStop(1,rgba(mix([30,44,86],[12,14,30],night),1));ctx.fillStyle=lg;ctx.fill();ctx.clip();
   ctx.strokeStyle=rgba(mix([255,220,190],[170,190,240],night),0.35);ctx.lineWidth=1.6;for(let i=0;i<5;i++){const yy=ly+4+i*4,x0=lerp(xw,xe,0.15+0.6*hash(i,51)),w_=20+30*hash(i,52);ctx.beginPath();ctx.moveTo(x0,yy);ctx.lineTo(x0+w_,yy);ctx.stroke();}
   if((o.hk||0)>0.01)glow(ctx,P2_HX+20,ly+10,40,PSC,0.35*(o.hkLit==null?1:o.hkLit)*clamp(o.hk,0,1));ctx.restore();
   ctx.save();ctx.strokeStyle=rgba(mix([255,226,200],[180,200,255],night),0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xe+2,ly+0.5);ctx.lineTo(xw-2,ly+0.5);ctx.stroke();ctx.restore();
   // the sea at Odawara
-  const sg=ctx.createLinearGradient(0,772,0,H);sg.addColorStop(0,rgba(mix([70,58,80],[18,22,44],night),1));sg.addColorStop(1,rgba([8,10,20],1));ctx.fillStyle=sg;ctx.fillRect(1750,772,W-1750,H-772);
+  const sg=ctx.createLinearGradient(0,772,0,H);sg.addColorStop(0,rgba(mix([50,70,120],[18,22,44],night),1));sg.addColorStop(1,rgba([8,10,20],1));ctx.fillStyle=sg;ctx.fillRect(1750,772,W-1750,H-772);
   for(let i=0;i<9;i++){const yy=786+i*14,xx=1770+hash(i,41)*90;ctx.strokeStyle=rgba(mix([220,170,120],[120,140,200],night),0.16*(1-i/9));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xx,yy);ctx.lineTo(xx+30+hash(i,42)*50,yy);ctx.stroke();}
   // cedars along the road
-  P2_CEDARS.forEach((k,i)=>{const x=P2_KX(k),m=P2_PROF,yy=psaAlong(m,P2_U(x))[1];p2_cedar(ctx,x+(hash(i,61)-0.5)*8,yy+3,22+20*hash(i,62),i+70,N([16,14,20]),mix(PSC,[150,170,230],night));});
+  P2_CEDARS.forEach((k,i)=>{const x=P2_KX(k),m=P2_PROF,yy=psaAlong(m,P2_U(x))[1];p2_cedar(ctx,x+(hash(i,61)-0.5)*8,yy+3,22+20*hash(i,62),i+70,N([10,24,30]),mix(PSC,[150,170,230],night));});
   // the road over it
   if((o.road||0)>0.01)psaPath(ctx,P2_PROF,o.roadP==null?1:o.roadP,{col:PSC,lw:3.2,glow:10,a:0.8*o.road});
   // the two stations at its feet, and the one by the lake

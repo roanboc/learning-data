@@ -136,13 +136,13 @@ function a5_face(ctx,t,o){o=o||{};const st=clamp(o.st||0,0,1),one=clamp(o.one||0
   for(let r=-2;r<H/bh+2;r++)for(let i=-2;i*bw<W+A5_FB*2;i++){const x=sx(i,r)+(hash(i*13+r,724)-0.5)*3,y=r*bh+(hash(i*7+r,725)-0.5)*2,v=hash(i*31+r+300,721);
     // which stretch it belongs to: the seams step with the courses, a brick at a time, as walls are joined
     const cx=x+A5_FB/2,jog=(r%3)*bw*0.5,k=cx<A5_SEAMS[0]+jog-bw*0.6?0:cx<A5_SEAMS[1]+jog-bw*0.6?1:2;
-    let c=mix(mix(BAB_BRICK,[196,150,104],0.2+0.4*v),[90,60,44],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TONE[k],(k===1?0.16:0.26)*st);
+    let c=mix(mix(BAB_BRICK,[204,150,104],0.2+0.4*v),[104,58,62],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TONE[k],(k===1?0.16:0.26)*st);
     ctx.fillStyle=rgba(c,1);rr(ctx,x,y,A5_FB,A5_FH,6);ctx.fill();
     ctx.fillStyle="rgba(255,236,210,0.14)";ctx.fillRect(x+5,y+2,A5_FB-10,3);ctx.fillStyle="rgba(0,0,0,0.18)";ctx.fillRect(x+5,y+A5_FH-4.5,A5_FB-10,3);
     if(hash(i*5+r*3,727)<0.18){const cx_=hash(i+r,728)<0.5?x:x+A5_FB,cy_=hash(i*3+r,729)<0.5?y:y+A5_FH,s=10+hash(i+r*11,730)*14;ctx.fillStyle=rgba(BAB_BIT,1);ctx.beginPath();ctx.moveTo(cx_,cy_);ctx.lineTo(cx_+(cx_===x?s:-s),cy_);ctx.lineTo(cx_,cy_+(cy_===y?s*0.6:-s*0.6));ctx.closePath();ctx.fill();}
     ctx.fillStyle="rgba(0,0,0,0.12)";for(let q=0;q<6;q++)ctx.fillRect(x+6+hash(q+i*7,722+r)*(A5_FB-14),y+5+hash(q+r*5,723+i)*(A5_FH-10),3,2.4);}
   // the morning sun, from the right, and a darker foot
-  const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(10,6,10,0.42)");g.addColorStop(0.6,"rgba(10,6,10,0.06)");g.addColorStop(1,"rgba(255,206,150,0.08)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(12,14,46,0.46)");g.addColorStop(0.6,"rgba(12,14,46,0.07)");g.addColorStop(1,"rgba(255,206,150,0.1)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   // the seams between the stretches, lit
   if(st>0.01){ctx.save();ctx.strokeStyle=rgba(ACA,0.75*st);ctx.lineWidth=3;ctx.shadowColor=rgba(ACA,0.8);ctx.shadowBlur=12;A5_SEAMS.forEach(s0=>{ctx.beginPath();for(let r=-1;r<H/bh+1;r++){const xx=s0+(r%3)*bw*0.5-bw*0.6+(r%2?bw/2:0)-A5_FJ/2;
       const xs=Math.round((xx-(r%2)*bw/2)/bw)*bw+(r%2)*bw/2-A5_FJ/2;if(r===-1)ctx.moveTo(xs,r*bh-A5_FJ/2);else ctx.lineTo(xs,r*bh-A5_FJ/2);ctx.lineTo(xs,(r+1)*bh-A5_FJ/2);}ctx.stroke();});ctx.restore();}
@@ -191,8 +191,8 @@ function a5_brick3(ctx,x,y,S,o){o=o||{};const a=o.a==null?1:o.a,Tk=S*0.24,dx=S*0
 // the layers of earth, and at its far wall the face of baked brick, worn and chipped, black bitumen in every joint, earth still caked
 // on it, a measuring rod leaning against it. o.p (0..1): the face uncovered, from the top down; o.st (0..1): its stretches, each in
 // its own tone, the seams between them lit (the work of more than one king); o.found (0..1): bricks with a king's name, lit
-function a5_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),st=clamp(o.st||0,0,1),fd=clamp(o.found||0,0,1),earth=[124,98,74],dk=[64,48,38],haze=[196,190,178];
-  let g=ctx.createLinearGradient(0,-200,0,300);g.addColorStop(0,"rgb(150,154,162)");g.addColorStop(1,rgba(haze,1));ctx.fillStyle=g;ctx.fillRect(-200,-200,W+400,500);
+function a5_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),st=clamp(o.st||0,0,1),fd=clamp(o.found||0,0,1),earth=[150,114,78],dk=[74,60,76],haze=[204,208,214];
+  let g=ctx.createLinearGradient(0,-200,0,300);g.addColorStop(0,"rgb(104,150,206)");g.addColorStop(1,rgba(haze,1));ctx.fillStyle=g;ctx.fillRect(-200,-200,W+400,500);
   ctx.fillStyle=rgba(mix(earth,haze,0.45),1);for(let i=0;i<7;i++){const x=-100+i*360+hash(i,741)*140,w=300+hash(i,742)*220,h=30+hash(i,743)*46;ctx.beginPath();ctx.moveTo(x-w/2,292);ctx.quadraticCurveTo(x-w*0.1,292-h*1.6,x+w/2,292);ctx.closePath();ctx.fill();}
   ctx.fillStyle=rgba(mix(earth,haze,0.3),1);ctx.fillRect(-200,288,W+400,H+200);
   const fx=420,fw=1080,fy=300,fb=846,Y=H+240;
@@ -207,7 +207,7 @@ function a5_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),st=clamp(o.s
   const bw=104,bh=25,jt=7,SM=[fx+fw*0.34,fx+fw*0.7],TN=[[0,0,0],[226,190,150],[70,40,28]],lit=[];
   for(let r=0;fb-(r+1)*(bh+jt)>fy-bh-jt;r++)for(let i=-1;i*(bw+jt)<fw+bw;i++){
     const x=fx+i*(bw+jt)+(r%2)*((bw+jt)/2)+(hash(i*13+r,724)-0.5)*3,y=fb-(r+1)*(bh+jt)+jt/2+(hash(i*7+r,725)-0.5)*2,v=hash(i*31+r,721),k=x+bw/2<SM[0]+(r%2)*20?0:x+bw/2<SM[1]-(r%2)*20?1:2;
-    let c=mix(mix(BAB_BRICK,[196,150,104],0.2+0.4*v),[90,60,44],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TN[k],(k===1?0.2:0.3)*st);
+    let c=mix(mix(BAB_BRICK,[204,150,104],0.2+0.4*v),[104,58,62],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TN[k],(k===1?0.2:0.3)*st);
     ctx.fillStyle=rgba(c,1);rr(ctx,x,y,bw,bh,5);ctx.fill();ctx.fillStyle="rgba(255,236,210,0.13)";ctx.fillRect(x+4,y+1.5,bw-8,2.5);ctx.fillStyle="rgba(0,0,0,0.17)";ctx.fillRect(x+4,y+bh-3.5,bw-8,2.5);
     if(hash(i*5+r*3,727)<0.22){const cx_=hash(i+r,728)<0.5?x:x+bw,cy_=hash(i*3+r,729)<0.5?y:y+bh,s=8+hash(i+r*11,730)*12;ctx.fillStyle=rgba(BAB_BIT,1);ctx.beginPath();ctx.moveTo(cx_,cy_);ctx.lineTo(cx_+(cx_===x?s:-s),cy_);ctx.lineTo(cx_,cy_+(cy_===y?s*0.6:-s*0.6));ctx.closePath();ctx.fill();}
     ctx.fillStyle="rgba(0,0,0,0.12)";for(let q=0;q<5;q++)ctx.fillRect(x+6+hash(q+i*7,722+r)*(bw-14),y+4+hash(q+r*5,723+i)*(bh-9),2.5,2);

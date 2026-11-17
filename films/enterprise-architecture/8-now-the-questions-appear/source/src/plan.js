@@ -86,7 +86,7 @@ function d8_map(ctx,t,c,o){o=o||{};const z=c.z,k=1/z,sun=o.sun||0,sy=Math.pow(z,
   // the land: India's south and Sri Lanka, warmed from the east as the sun comes up behind the hills
   const shape=(L)=>{ctx.beginPath();L.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();};
   [D8_INDIA,D8_LANKA].forEach(L=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=20;shape(L);const lg=ctx.createLinearGradient(c.x-700*k,0,c.x+900*k,0);
-    lg.addColorStop(0,rgba(mix([38,46,42],[64,78,62],sun),1));lg.addColorStop(1,rgba(mix([46,48,44],[112,96,72],sun),1));ctx.fillStyle=lg;ctx.fill();ctx.restore();});
+    lg.addColorStop(0,rgba(mix([30,50,46],[54,104,72],sun),1));lg.addColorStop(0.68,rgba(mix([36,50,48],[70,108,70],sun),1));lg.addColorStop(1,rgba(mix([44,50,50],[146,116,66],sun),1));ctx.fillStyle=lg;ctx.fill();ctx.restore();});
   // Kerala, lit
   const kr=o.ker||0;if(kr>0.01){ctx.save();d8_smooth(ctx,D8_KERALA);ctx.fillStyle=rgba(EAC,0.3*kr);ctx.shadowColor=rgba(EAC,0.9);ctx.shadowBlur=30*kr;ctx.fill();ctx.restore();}
   // the coastal plain, green with coconut palms, and the hills: a soft band of forest along the ridge, with lines of relief that catch

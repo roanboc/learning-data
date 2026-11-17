@@ -7,12 +7,12 @@ from lang import *
 SS, S = SHARED / 'src', ROOT / 'src'
 # The Inner Life of Data's engine and components; A Sharper Sketch's diagrams, tables and scene helpers; the films' people;
 # Silent change's messages and dashboards; From words to data's components and Keeping it true's; In the weeds of data
-# crafting's motion helpers; The map before the data's people and components, whose look this series keeps; this series' own
+# crafting's motion helpers; The map before the data's people and components and its colour (colour.js), whose look this series keeps; this series' own
 # (da.js); then the film's own pictures and scenes. The engine comes last, then where the film's chapters meet (From words to
 # data's joins.js) and In the weeds' finishing pass for the video.
 FILES = [SS / 'core.js', SS / 'logos.js', SS / 'style2.js', S / 'narration.js', S / 'vodur.js', S / 'breath.js', SS / 'ui3.js',
          SKETCH / 'sketch3.js', CHARS / 'people.js', EP1 / 'silent.js', WORDS / 'words.js', TRUE / 'true.js', WEEDS / 'weeds.js',
-         EA / 'people.js', EA / 'ea.js', DA / 'da.js'] + [S / f for f in META['src']] + [SS / 'engine3.js', WORDS / 'joins.js', WEEDS / 'post.js']
+         EA / 'people.js', EA / 'ea.js', EA / 'colour.js', DA / 'da.js'] + [S / f for f in META['src']] + [SS / 'engine3.js', WORDS / 'joins.js', WEEDS / 'post.js']
 missing = [str(f) for f in FILES if not f.exists() and f.parent != S]
 if missing:
     raise SystemExit('build.py: missing ' + ', '.join(missing))

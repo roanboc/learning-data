@@ -1966,6 +1966,32 @@ function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3]
 // how far the camera is zoomed in at t, for the same keys: a whole canvas seen from afar is context, and its notes are decoration
 function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;z=lerp(z,keys[i][3],u);}return z;}
 
+// The colour of the five series on enterprise architecture (17 November 2026). They drew on a brown wall, a brown ground for scenes in the
+// past and brown date pills, earthy beside their stories; now the wall is a slate blue under a cool light, a scene in the past a night blue,
+// and the layers' and the series' colours are clearer. The dark ground behind the diagrams stays as the whole site draws it: no need to
+// colour a picture whose ground is already dark (the author, 17 November 2026). Only these series' builds bundle this file, right after
+// ea.js, so it sets their look over ea.js and over the helpers the whole site shares (From words to data's histBg and yearTag), which every
+// other film keeps as they are. The master data films borrow ea.js for its glyphs and keep its first colours too.
+const EA_WALL=["#162b52","#0a1428"];                        // the wall the notes go on: a slate blue
+const EA_WALLGLOW=[[0.1,0.9,0.5,[60,180,210],0.06],[0.92,0.1,0.5,[160,110,240],0.06]];   // soft light on it: teal, bottom left; violet, top right
+const EA_HIST=["#16204a","#06071a"];                        // a scene in the past
+const EA_PILL="rgba(10,14,40,0.9)";                         // the glass of a date's pill
+// soft pools of coloured light: [x, y, radius, colour, strength], with x, y and the radius as parts of the frame's width and height
+function eaGlow(ctx,pools){pools.forEach(([x,y,r,c,a])=>{const g=ctx.createRadialGradient(W*x,H*y,0,W*x,H*y,W*r);g.addColorStop(0,rgba(c,a));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});}
+// the six layers and the series' own colour, deeper and clearer than ea.js's first ones
+[[188,162,255],[255,196,112],[255,228,96],[255,166,134],[108,200,255],[138,228,118]].forEach((c,i)=>{LAY6[i][1]=c;});
+EAC.splice(0,3,104,230,192);
+// the wall of canvases and sticky notes (ea.js's wallBg, in slate blue under a cool light)
+wallBg=function(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,EA_WALL[0]);g.addColorStop(1,EA_WALL[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){const x=hash(i,31)*W,y=hash(i,32)*H,r=60+hash(i,33)*200,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(190,225,255,"+(0.012+0.02*hash(i,34))+")");gg.addColorStop(1,"rgba(190,225,255,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  const l=ctx.createRadialGradient(W*0.5,H*0.25,40,W*0.5,H*0.4,W*0.7);l.addColorStop(0,"rgba(150,210,255,"+(o.light==null?0.10:o.light)+")");l.addColorStop(1,"rgba(150,210,255,0)");ctx.fillStyle=l;ctx.fillRect(0,0,W,H);eaGlow(ctx,EA_WALLGLOW);};
+// a scene in the past keeps its lamp's warm light and dust, on a night blue
+{const histBg0=histBg;histBg=function(ctx,S,t,o){return histBg0(ctx,S,t,Object.assign({top:EA_HIST[0],bottom:EA_HIST[1]},o));};}
+// the pills that date a moment (ea.js's eaYear and From words to data's yearTag), on blue glass
+eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,28,500,"mono")+52;glass(ctx,x,y-30,w,60,30,c,{glow:14,ea:0.8,fill:EA_PILL});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
+yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
+
 /* ===== Who it serves, and how it pays: the film's own pictures (prefixed d2_) =====
    1882: Pearl Street at dusk, its windows lighting one by one; a gas lamp beside an electric bulb; Edison's chemical meter, two zinc
    plates in a jar, one of them on a balance. Today: the annual report, the people who pay, use and decide, the segments' icons, the
@@ -1976,16 +2002,16 @@ const WARM=[255,214,150],GASC=[255,160,80],ZINC=[176,184,196];
 /* ---------- 1882 ---------- */
 // a street of brick buildings at dusk; lit (0..1) turns their windows on, one after another, with a steady electric light
 function d2_street(ctx,t,lit,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const base=820;
-  for(let i=0;i<7;i++){const x=40+i*270,w=250,h=360+hash(i,3)*170,y=base-h,col=mix([92,52,40],[60,40,36],hash(i,4));
-    ctx.fillStyle=rgba(col,1);ctx.fillRect(x,y,w,h);ctx.fillStyle="rgba(30,18,14,0.6)";ctx.fillRect(x,y,w,10);ctx.fillRect(x+w-6,y,6,h);
+  for(let i=0;i<7;i++){const x=40+i*270,w=250,h=360+hash(i,3)*170,y=base-h,col=mix([112,56,50],[66,48,74],hash(i,4));
+    ctx.fillStyle=rgba(col,1);ctx.fillRect(x,y,w,h);ctx.fillStyle="rgba(22,16,36,0.6)";ctx.fillRect(x,y,w,10);ctx.fillRect(x+w-6,y,6,h);
     // brick courses
-    ctx.strokeStyle="rgba(40,22,16,0.35)";ctx.lineWidth=1;for(let yy=y+18;yy<base;yy+=14){ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x+w,yy);ctx.stroke();}
+    ctx.strokeStyle="rgba(32,20,40,0.35)";ctx.lineWidth=1;for(let yy=y+18;yy<base;yy+=14){ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x+w,yy);ctx.stroke();}
     const rows=Math.floor((h-80)/90);for(let r=0;r<rows;r++)for(let c=0;c<3;c++){const wx=x+24+c*76,wy=y+40+r*90,on=clamp(lit*2.4-hash(i*9+r*3+c,5)*1.4,0,1);
-      ctx.fillStyle="rgba(20,16,20,0.95)";ctx.fillRect(wx,wy,50,62);if(on>0){ctx.fillStyle="rgba(255,236,190,"+0.9*on+")";ctx.fillRect(wx+3,wy+3,44,56);glow(ctx,wx+25,wy+31,60,WARM,0.18*on);}
+      ctx.fillStyle="rgba(14,16,32,0.95)";ctx.fillRect(wx,wy,50,62);if(on>0){ctx.fillStyle="rgba(255,236,190,"+0.9*on+")";ctx.fillRect(wx+3,wy+3,44,56);glow(ctx,wx+25,wy+31,60,WARM,0.18*on);}
       ctx.strokeStyle="rgba(200,180,150,0.35)";ctx.strokeRect(wx,wy,50,62);ctx.beginPath();ctx.moveTo(wx+25,wy);ctx.lineTo(wx+25,wy+62);ctx.stroke();}}
-  ctx.fillStyle="rgba(26,20,18,1)";ctx.fillRect(0,base,W,H-base);ctx.fillStyle="rgba(120,100,80,0.25)";ctx.fillRect(0,base,W,3);
+  ctx.fillStyle="rgba(16,18,32,1)";ctx.fillRect(0,base,W,H-base);ctx.fillStyle="rgba(140,132,156,0.25)";ctx.fillRect(0,base,W,3);
   // overhead wires, strung along the street
-  withA(ctx,0.4+0.6*lit,()=>{ctx.strokeStyle=rgba(mix([90,80,70],WARM,lit),0.7);ctx.lineWidth=1.6;[0,14].forEach(d=>{ctx.beginPath();ctx.moveTo(0,300+d);for(let x=0;x<=W;x+=320)ctx.quadraticCurveTo(x+160,330+d,x+320,300+d);ctx.stroke();});});});}
+  withA(ctx,0.4+0.6*lit,()=>{ctx.strokeStyle=rgba(mix([92,92,114],WARM,lit),0.7);ctx.lineWidth=1.6;[0,14].forEach(d=>{ctx.beginPath();ctx.moveTo(0,300+d);for(let x=0;x<=W;x+=320)ctx.quadraticCurveTo(x+160,330+d,x+320,300+d);ctx.stroke();});});});}
 // a gas lamp beside an electric bulb, at (x,y); g and e fade each in
 function d2_lamps(ctx,x,y,t,g,e){withA(ctx,g,()=>{const fx=x,fy=y;ctx.strokeStyle="rgba(150,140,120,0.9)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(fx,fy+40);ctx.lineTo(fx,fy+220);ctx.stroke();
     ctx.strokeStyle="rgba(200,190,160,0.8)";ctx.lineWidth=2;ctx.strokeRect(fx-34,fy-40,68,80);const fl=1+0.12*Math.sin(t*9)+0.08*Math.sin(t*23);glow(ctx,fx,fy,110*fl,GASC,0.35);

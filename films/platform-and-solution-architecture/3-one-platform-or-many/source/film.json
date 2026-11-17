@@ -8,7 +8,7 @@
     "scenes.js"
   ],
   "story": ["tolls"],
-  "poster": ["tolls", "kept", 5.0],
+  "poster": ["tolls", "need", 0.71],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

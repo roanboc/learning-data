@@ -8,7 +8,7 @@
     "scenes.js"
   ],
   "story": ["pass"],
-  "poster": ["pass", "every", 6.0],
+  "poster": ["end", "road", 1.08],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

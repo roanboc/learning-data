@@ -8,7 +8,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["brick", "river", 6.5],
+  "poster": ["brick", "river", 0.96],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

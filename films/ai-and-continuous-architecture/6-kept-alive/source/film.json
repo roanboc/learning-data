@@ -8,7 +8,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["fall", "walls", 1.5],
+  "poster": ["fall", "keepers", 2.57],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

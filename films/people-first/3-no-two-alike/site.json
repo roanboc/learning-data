@@ -1,0 +1,79 @@
+{
+  "kicker": "How people differ",
+  "kicker_es": "En qué se diferencian",
+  "title_es": "No hay dos iguales",
+  "h1": "No two alike: ask each person how they work, and never sort them",
+  "h1_es": "No hay dos iguales: pregunta a cada persona cómo trabaja, no la clasifiques",
+  "lead": "In February 2027 Helena Novak, the university's new data manager, reads Erin Walsh's silence in a meeting as lack of interest. She's wrong. People differ by degree, not by type. So she asks each person how they work, each writes a page in their own words, and her meetings change to suit them all.",
+  "lead_es": "En febrero de 2027 Helena Novak, nueva gestora de datos de la universidad, toma el silencio de Erin Walsh en una reunión como falta de interés. Se equivoca. Las personas se diferencian por grado, no por tipo. Le pregunta a cada una cómo trabaja, cada una escribe su página, y sus reuniones cambian.",
+  "description": "A film about how the people in a team differ, the third of People first in the module Leading data people: by degree, not by type. The five broad traits most research describes people with, each a scale; a person moves along them with the situation and with the years; no place on a scale is the right one, and a team has a use for each; traits are for understanding people, never for assessing them. Helena Novak, the university's new data manager, reads Erin Walsh's silence in a planning meeting as lack of interest, and is wrong, so she asks; a colleague proposes a test that sorts people into types, and she says yes as a way to start talking, with four rules; each person writes a page in their own words, How I work; and her meetings change to suit the one who thinks aloud and the one who thinks afterwards. It opens in Lu, in China, about 2,500 years ago, where a teacher gave two students opposite answers to the same question, because he answered the person as well as the question.",
+  "description_es": "Una película sobre en qué se diferencian las personas de un equipo, la tercera de Las personas primero en el módulo Liderar equipos de datos: por grado, no por tipo. Los cinco grandes rasgos con que la mayoría de los estudios describe a las personas, cada uno una escala; una persona se mueve por ellas según la situación y con los años; ningún lugar de una escala es el correcto, y a un equipo le sirve cada uno; los rasgos sirven para entender a las personas, nunca para evaluarlas. Helena Novak, la nueva gestora de datos de la universidad, toma el silencio de Erin Walsh en una reunión de planeación como falta de interés, y se equivoca, así que pregunta; un compañero propone una prueba que clasifica a la gente en tipos, y ella dice que sí como una forma de empezar a conversar, con cuatro reglas; cada persona escribe una página con sus propias palabras, Cómo trabajo; y sus reuniones cambian para servir a quien piensa en voz alta y a quien piensa después. Empieza en Lu, en China, hace unos 2,500 años, donde un maestro dio a dos alumnos respuestas opuestas a la misma pregunta, porque respondió a la persona además de a la pregunta.",
+  "card": "Erin says nothing in a meeting, and Helena guesses wrong. So she asks each person how they work, and changes the meeting.",
+  "card_es": "Erin no dice nada en una reunión, y Helena supone mal. Así que le pregunta a cada persona cómo trabaja, y cambia la reunión.",
+  "chapters_es": {
+    "lu": "Dos respuestas",
+    "silence": "El silencio de Erin",
+    "degree": "Cuestión de grado",
+    "cut": "Una escala, cortada en dos",
+    "page": "Cómo trabajo",
+    "range": "Para todo el abanico"
+  },
+  "past": [
+    "Lu, about 2,500 years ago: one question, two answers",
+    "Two students asked their teacher, Kong Qiu, whom the West calls Confucius, the same question. He told the bold one to ask his family first, and the one who held back to act at once. He had answered the person, as well as the question."
+  ],
+  "past_es": [
+    "Lu, hace unos 2,500 años: una pregunta, dos respuestas",
+    "Dos alumnos le hicieron la misma pregunta a su maestro, Kong Qiu, a quien Occidente llama Confucio. Al audaz le dijo que preguntara primero a su familia, y al que se contenía, que actuara de inmediato. Había respondido a la persona, además de a la pregunta."
+  ],
+  "next_h": "You've seen how people differ. Next: what matters even more, how they work together.",
+  "next_h_es": "Viste en qué se diferencian las personas. Después: lo que importa aún más, cómo trabajan juntas.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Analects, book 11",
+        "title_es": "Las Analectas, libro 11 (en inglés)",
+        "line": "The exchange itself, in chapter 21 of James Legge's translation of 1893: two students, one question, two answers, and the teacher's reason.",
+        "line_es": "El diálogo mismo, en el capítulo 21 de la traducción de James Legge de 1893: dos alumnos, una pregunta, dos respuestas, y la razón del maestro.",
+        "href": "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_1/Confucian_Analects/XI",
+        "href_es": "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_1/Confucian_Analects/XI"
+      },
+      {
+        "title": "Disciples of Confucius",
+        "title_es": "Los discípulos de Confucio (en inglés)",
+        "line": "Zilu, Ran You and Gongxi Hua, each with a few lines, among the seventy-seven that the historian Sima Qian counts.",
+        "line_es": "Zilu, Ran You y Gongxi Hua, cada uno con unas líneas, entre los setenta y siete que cuenta el historiador Sima Qian.",
+        "href": "https://en.wikipedia.org/wiki/Disciples_of_Confucius",
+        "href_es": "https://en.wikipedia.org/wiki/Disciples_of_Confucius"
+      },
+      {
+        "title": "Big Five personality traits",
+        "title_es": "Modelo de los cinco grandes",
+        "line": "The five broad traits most research describes people with, each a matter of degree, and what the model leaves open.",
+        "line_es": "Los cinco grandes rasgos con que la mayoría de los estudios describe a las personas, cada uno una cuestión de grado, y lo que el modelo deja abierto.",
+        "href": "https://en.wikipedia.org/wiki/Big_Five_personality_traits",
+        "href_es": "https://es.wikipedia.org/wiki/Modelo_de_los_cinco_grandes"
+      },
+      {
+        "title": "In the Mind's Eye, chapter 5",
+        "title_es": "In the Mind's Eye, capítulo 5 (en inglés)",
+        "line": "The US National Research Council's review of 1991, where the film's four in ten comes from.",
+        "line_es": "La revisión de 1991 del Consejo Nacional de Investigación de Estados Unidos, de donde salen los cuatro de cada diez de la película.",
+        "href": "https://nap.nationalacademies.org/read/1580/chapter/8",
+        "href_es": "https://nap.nationalacademies.org/read/1580/chapter/8"
+      },
+      {
+        "title": "My user manual",
+        "title_es": "Mi manual de uso (en inglés)",
+        "line": "One published form of the practice: a page each person writes on how they work best, shared with the team.",
+        "line_es": "Una forma publicada de la práctica: una página que cada persona escribe sobre cómo trabaja mejor, y comparte con el equipo.",
+        "href": "https://www.atlassian.com/team-playbook/plays/my-user-manual",
+        "href_es": "https://www.atlassian.com/team-playbook/plays/my-user-manual"
+      }
+    ]
+  }
+}

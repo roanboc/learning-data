@@ -11,6 +11,7 @@ Before the hats and the skills, the people. In February 2027, Helena Novak takes
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [No two alike](https://data.learn-all.org/people-first/no-two-alike/) | How people differ | 9 min | 6 | 3 questions | [script](3-no-two-alike/script.md) · [source](3-no-two-alike/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

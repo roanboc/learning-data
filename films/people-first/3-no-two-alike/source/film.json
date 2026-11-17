@@ -1,0 +1,65 @@
+{
+  "key": "no-two-alike",
+  "title": "No two alike",
+  "sub": "Film 3 of People first, in Leading data people: how the people in a team differ. By degree, not by type; every mix is of use, and none is for assessing anyone. Ask each person how they work, have each write a page in their own words, and meet in a way that suits the whole range.",
+  "howto": "The film is drawn in the module's sunlit plaster: a teacher's hall in Lu, about 2,500 years ago, then the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans (the plan for two weeks, four rules, a meeting's new steps), orange is data (what the studies counted), green is something done or of value (a use for every trait, a page shared), and amber a risk or a cost (a wrong first guess, a label that changes near the cut). People wear none of them.",
+  "src": [
+    "na_gorge.js",
+    "na_bridge.js",
+    "na_people.js",
+    "na_lu.js",
+    "na_uni.js",
+    "na_scenes.js"
+  ],
+  "poster": [
+    "lu",
+    "why",
+    6.4
+  ],
+  "say": [
+    [
+      "\\bZilu\\b",
+      "Zuh-loo"
+    ],
+    [
+      "\\bRan You\\b",
+      "Rahn Yo"
+    ],
+    [
+      "\\bGongxi Hua\\b",
+      "Gong-she Who-ah"
+    ],
+    [
+      "\\bKong Qiu\\b",
+      "Kong Cheoh"
+    ],
+    [
+      "\\bYusuf Demir\\b",
+      "Yoosoof Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahss"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "lu"
+  ],
+  "urgent": []
+}

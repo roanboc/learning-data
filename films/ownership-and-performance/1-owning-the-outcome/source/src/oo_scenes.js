@@ -19,14 +19,9 @@ function oo_pill(ctx,t,t0,t1,x,y,text,o){const a=ag_in(t,t0,0.4)*(t1==null?1:1-a
 // people out of doors: the day's light, no wall behind them
 const OO_OUT={light:"day",wall:0};
 // the women of the hills and Maathai, where they stand on the near slope; o.a fades them, as one
-// the women on the cleared slope, whole, where they work: one kneels to plant, one carries firewood, one a can of water; Maathai with them
-const OO_HILL=[{x:450,f:862,s:0.27,o:{body:"kneel",pose:{near:[34,18,"hold"]},hold:oo_hold}},
-  {x:720,f:846,s:0.27,o:{pose:{near:[6,44,"hold"]},hold:oo_wood}},
-  {x:960,f:856,s:0.27,o:{pose:{near:[3,8,"hold"]},hold:oo_can,flip:true}}];
-function oo_hillPeople(x,tt,a,o){o=o||{};if(a<=0.004)return;OO_WOMEN.forEach((P,i)=>{const H=OO_HILL[i];lp_body(x,P,H.x,H.f,H.s,Object.assign({t:tt,light:OO_OUT,a},H.o));});
-  if(!o.noMaathai)lp_body(x,OO_PEOPLE.maathai,1300,846,0.28,{t:tt,flip:true,light:OO_OUT,a});}
-const oo_crown=(f,s)=>f-1705*s;   // where a standing person's crown is, for a tag above it
-
+function oo_hillPeople(x,tt,a,o){o=o||{};if(a<=0.004)return;OO_WOMEN.forEach((P,i)=>lp_person(x,P,[330,640,940][i],[700,720,712][i],0.8,{t:tt,light:OO_OUT,a}));
+  if(!o.noMaathai)lp_person(x,OO_PEOPLE.maathai,1480,700,0.82,{t:tt,flip:true,light:OO_OUT,a});}
+// the row of seedlings on the near slope: g how far they've grown, dry how far the ones that died have died, at a size s
 function oo_row(x,tt,g,dry,s){OO_ROW.pts.forEach(([px,py],i)=>oo_seedling(x,px,py,s,{g:OO_ROW.alive[i]?g:Math.min(g,0.45),dry:OO_ROW.alive[i]?0:dry,seed:40+i}));}
 // a tick over each seedling still alive
 function oo_ticks(x,tt,t0,s){OO_ROW.pts.forEach(([px,py],i)=>{if(!OO_ROW.alive[i])return;const u=ag_in(tt,t0+i*0.08,0.4);if(u<=0.004)return;const f=lerp(0.5,1,ag_spr(tt,t0+i*0.08,0.5));
@@ -41,8 +36,8 @@ scene("trees",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
     // the hills of the central highlands, their forests cleared; the women tell Maathai what's going wrong
     {at:0,place:"ooHills",keys:[[0,1060,470,1.16],[c.when+0.2,980,520,1.06],[c.women,960,560,1.0]],d:3.4,draw:(x,tt)=>{
       oo_hillPeople(x,tt,pplA(tt));
-      oo_tag(x,tt,w("women","rural",-0.1),c.streams-0.6,720,oo_crown(846,0.27)-60,"Rural women",{align:"center",col:LP.ink});
-      lp_nameTag(x,1300,oo_crown(846,0.28)-110,OO_PEOPLE.maathai,{align:"center",a:ag_io(tt,w("women","Maathai",-0.2),c.streams-0.6,0.4)});
+      oo_tag(x,tt,w("women","rural",-0.1),c.streams-0.6,640,400,"Rural women",{align:"center",col:LP.ink});
+      lp_nameTag(x,1480,392,OO_PEOPLE.maathai,{align:"center",a:ag_io(tt,w("women","Maathai",-0.2),c.streams-0.6,0.4)});
       oo_sheet(x,tt,w("streams","streams",-0.3),150,110,780,{kick:"What's going wrong",lines:["Their streams are drying up","Their food is less sure","Further, each year, for firewood"]},
         {col:LP.amber,light:null,pin:false,out:c.cleared-0.7,u:oo_u(tt,[w("streams","streams",-0.2),w("streams","food",-0.2),w("streams","walk",-0.2)])});}},
     // the forests, cleared for farms, for tea and coffee to sell, for timber; each choice made sense
@@ -66,13 +61,10 @@ scene("trees",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       oo_tag(x,tt,w("change","bring the trees",-0.3),c.start-0.6,1460,190,"Bring the trees back",{align:"center",col:LP.ink});}},
     // 1977: the Green Belt Movement
     {at:c.start-0.3,place:"ooNursery",keys:[[c.start-0.3,960,520,1.0]],dis:1.2,draw:(x,tt)=>{const nA=ag_in(tt,w("nursery","Groups",-0.4),0.8);
-      // behind the beds, standing at them, whole: the beds hide their legs
-      if(nA>0.004){lp_body(x,OO_PEOPLE.nya,600,850,0.29,{t:tt,light:OO_OUT,a:nA});
-        lp_body(x,OO_PEOPLE.mum,1290,850,0.29,{t:tt,light:OO_OUT,flip:true,a:nA});}
-oo_beds(x,tt,{g:lerp(0.15,1,ag_sine(ag_in(tt,w("nursery","seedlings",-0.2),3.2)))});
-      // in front of the beds, whole: a woman kneels with a seedling, and Maathai stands by the right-hand bed
-      lp_body(x,OO_PEOPLE.wan,330,965,0.32,{t:tt,body:"kneel",pose:{near:[34,18,"hold"]},hold:oo_hold,light:OO_OUT,a:nA});
-      lp_body(x,OO_PEOPLE.maathai,1660,960,0.32,{t:tt,flip:true,light:OO_OUT});
+      if(nA>0.004){lp_person(x,OO_PEOPLE.wan,280,700,0.62,{t:tt,cut:796,light:OO_OUT,a:nA});lp_person(x,OO_PEOPLE.nya,560,690,0.62,{t:tt,cut:796,light:OO_OUT,a:nA});
+        lp_person(x,OO_PEOPLE.mum,1320,700,0.62,{t:tt,cut:796,light:OO_OUT,flip:true,a:nA});}
+      lp_person(x,OO_PEOPLE.maathai,1640,690,0.62,{t:tt,cut:796,light:OO_OUT,flip:true});
+      oo_beds(x,tt,{g:lerp(0.15,1,ag_sine(ag_in(tt,w("nursery","seedlings",-0.2),3.2)))});
       oo_sheet(x,tt,w("start","nineteen",-0.2),660,300,600,{kick:"1977",title:"The Green Belt Movement",lines:["With the National Council of Women of Kenya"]},
         {col:LP.blue,light:null,pin:false,out:c.nursery+0.6,u:ag_in(tt,w("start","National",-0.2),0.5)});
       oo_tag(x,tt,w("nursery","nurseries",-0.2),c.paid-0.6,960,380,"Seedlings in their own nurseries",{align:"center",col:LP.ink});
@@ -124,10 +116,9 @@ scene("owns",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       oo_sheet(x,tt,w("promise","promise",-0.2),180,150,800,{kick:"Its promise",title:"Every Monday by 07:00",lines:["With the week before"]},{col:LP.blue,light:"day",out:c.readers-0.5,u:ag_in(tt,w("promise","week",-0.1),0.5)});}},
     // its readers, by name
     {at:c.readers-0.3,place:"lpRoom",keys:[[c.readers-0.3,960,540,1.0]],draw:(x,tt)=>{ivy(x,tt);
-      // its readers, across the room, whole: Graham and Mei talk by the window
-      lp_body(x,"graham",470,1030,0.34,{t:tt,light:dy});lp_body(x,"mei",820,1036,0.34,{t:tt,flip:true,light:dy});
-      lp_nameTag(x,470,oo_crown(1030,0.34)-110,"graham",{align:"center",a:ag_in(tt,w("readers","Graham",-0.1),0.4)});
-      lp_nameTag(x,820,oo_crown(1036,0.34)-110,"mei",{align:"center",a:ag_in(tt,w("readers","Mei",-0.1),0.4)});
+      lp_person(x,"graham",440,700,0.9,{t:tt,light:dy});lp_person(x,"mei",860,700,0.9,{t:tt,light:dy});
+      lp_nameTag(x,440,360,"graham",{align:"center",a:ag_in(tt,w("readers","Graham",-0.1),0.4)});
+      lp_nameTag(x,860,360,"mei",{align:"center",a:ag_in(tt,w("readers","Mei",-0.1),0.4)});
       oo_tag(x,tt,w("readers","teams",-0.2),null,650,170,"Its readers, with their teams",{align:"center",col:LP.ink});}},
     // what it's for: next year's timetable; owning that it's judged on true counts
     {at:c.for-0.3,place:"lpRoom",keys:[[c.for-0.3,960,540,1.0]],draw:(x,tt)=>{ivy(x,tt);
@@ -138,8 +129,7 @@ scene("owns",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       oo_pill(x,tt,w("truly","judged",-0.4),c.many-0.5,590,400,"The timetable change, judged on true counts",{col:LP.green,size:28});}},
     // many do part of the work; one answers for the outcome
     {at:c.many-0.3,place:"lpRoom",keys:[[c.many-0.3,960,540,1.0]],draw:(x,tt)=>{ivy(x,tt);
-      for(const [who,px,f,ps,word] of [["graham",300,1040,0.3,"Facilities"],["sam",680,1026,0.29,"Sam"],["jun",1060,1046,0.3,"Jun"]])
-        lp_body(x,who,px,f,ps,{t:tt,light:dy,flip:who==="jun",a:ag_in(tt,w("many",word,-0.3),0.6)*(1-ag_in(tt,c.helena-1.0,0.5))});
+      for(const [who,px,word] of [["graham",300,"Facilities"],["sam",680,"Sam"],["jun",1060,"Jun"]])lp_person(x,who,px,760,0.78,{t:tt,light:dy,a:ag_in(tt,w("many",word,-0.3),0.6)*(1-ag_in(tt,c.helena-1.0,0.5))});
       oo_tag(x,tt,w("many","sensors",-0.1),c.one-0.4,300,450,"The sensors",{align:"center",col:LP.ink});
       oo_tag(x,tt,w("many","platform",-0.1),c.one-0.4,680,450,"The platform",{align:"center",col:LP.ink});
       oo_tag(x,tt,w("many","reviews",-0.1),c.one-0.4,1060,450,"Reviews her changes",{align:"center",col:LP.ink});
@@ -275,11 +265,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
   ag_shots(ctx,S,t,sc.dur,[
     // back at the Green Belt: trees still standing
     {at:0,place:"ooGreen",keys:[[0,960,560,1.04],[0.2,960,540,1.0]],d:3,draw:(x,tt)=>{
-      // the women among the trees they planted: one kneels at a young tree, one walks up the slope, one has brought water
-      const wx=lerp(620,840,ag_sine(clamp(tt/5,0,1)));
-      lp_body(x,OO_PEOPLE.wan,440,866,0.26,{t:tt,body:"kneel",light:OO_OUT});
-      lp_body(x,OO_PEOPLE.nya,wx,850,0.26,{t:tt,body:"walk",step:lp_step(wx-620,0.26),stride:1-ag_in(tt,5-0.4,0.4),light:OO_OUT});
-      lp_body(x,OO_PEOPLE.mum,1200,856,0.26,{t:tt,flip:true,pose:{near:[3,8,"hold"]},hold:oo_can,light:OO_OUT});
+      OO_WOMEN.forEach((P,i)=>lp_person(x,P,[420,760,1100][i],[740,756,748][i],0.75,{t:tt,light:OO_OUT}));
       oo_pill(x,tt,w("back","trees",-0.1),null,960,190,"Trees still standing, months later",{col:LP.green});
       oo_tag(x,tt,w("back","planting",-0.2),null,960,280,"Not the planting",{align:"center",col:LP.mut});}},
     // and Ivy: true counts, judged in June 2029

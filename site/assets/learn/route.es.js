@@ -29,7 +29,6 @@ window.LD_ROUTE = {
   "proj1": "1 película de aquí muestra sus archivos reales, y puedes ejecutarlo tú.",
   "projn": "{n} películas de aquí muestran sus archivos reales, y puedes ejecutarlo tú.",
   "projpage": "Sobre el proyecto",
-  "projrepo": "Ábrelo en GitHub",
   "projmark": "Muestra el proyecto de dbt de ejemplo"
  },
  "groups": [
@@ -66,7 +65,6 @@ window.LD_ROUTE = {
  ],
  "project": {
   "href": "dbt-project/",
-  "repo": "https://github.com/roanboc/learning-data-project",
   "icon": "<svg class=\"pj-ic\" viewBox=\"0 0 20 20\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z\"/><path d=\"M3.6 6.3L10 10l6.4-3.7M10 10v7.4\"/></svg>"
  },
  "topics": [
@@ -720,8 +718,21 @@ window.LD_ROUTE = {
    "group": "lead",
    "name": "Liderar equipos de datos",
    "who": "Para quien trabaja con datos, y para quien lidera a las personas que lo hacen",
-   "line": "Las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas.",
+   "line": "Las personas antes que el trabajo, las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: conocer a tu equipo, ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas.",
    "items": [
+    {
+     "id": "people-first",
+     "kind": "series",
+     "title": "Las personas primero",
+     "href": "people-first/",
+     "poster": "people-before-roles-poster.jpg",
+     "kicker": "Serie · 1 de 4 películas",
+     "len": "8 min",
+     "min": 8.0,
+     "films": [
+      "ld-people-before-roles"
+     ]
+    },
     {
      "id": "the-new-skills",
      "kind": "series",
@@ -783,12 +794,6 @@ window.LD_ROUTE = {
       "ld-when-someone-falls-behind",
       "ld-growing-people"
      ]
-    },
-    {
-     "id": "people-first",
-     "soon": true,
-     "title": "Las personas primero",
-     "kicker": "Serie · 4 películas"
     }
    ]
   }
@@ -845,10 +850,11 @@ window.LD_ROUTE = {
   {
    "id": "lead-a-team",
    "name": "liderar un equipo de datos",
-   "line": "Primero la organización, luego el equipo, el plan y su justificación.",
+   "line": "Primero la organización, luego las personas, el equipo, el plan y su justificación.",
    "stops": [
     "enterprise-architecture",
     "data-governance",
+    "people-first",
     "leading-a-data-team",
     "a-plan-in-ninety-days",
     "making-the-case"

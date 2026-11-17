@@ -302,9 +302,8 @@ if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",
 const VIS={};
 if(app.id==="series-quiz"){app.textContent="";const QS=L.qs,ans=get("quiz",{})||{};let film=0,cur=0;
   const films=[...new Set(QS.map(q=>q.film))].sort((a,b)=>a-b);
-  const sel=h("select",{id:"aca-pick"},h("option",{value:"0"},U.allFilms),...films.map(n=>h("option",{value:String(n)},filmN(n)+(filmName(n)?" · "+filmName(n):""))));
   const bar=h("div",{class:"qbar"}),dots=h("div",{class:"dots",role:"group","aria-label":U.qsLabel}),score=h("p",{class:"score"}),card=h("div");bar.append(dots,score);
-  app.append(h("div",{class:"quiz"},h("p",{class:"aca-filter"},h("label",{for:"aca-pick"},U.filter),sel),bar,card));
+  app.append(h("div",{class:"quiz"},bar,card));
   const list=()=>QS.filter(q=>!film||q.film===film),labOf=id=>L.labs.find(x=>x.id===id)||{name:"",c:"#a0b2cd"};
   // forget a saved answer whose option no longer gives the result it was saved with
   QS.forEach(q=>{const a=ans[q.n];if(a&&(a.pick==null||!q.opts[a.pick]||!!q.opts[a.pick].ok!==!!a.ok))delete ans[q.n];});
@@ -314,7 +313,7 @@ if(app.id==="series-quiz"){app.textContent="";const QS=L.qs,ans=get("quiz",{})||
   const feed=(ok,q)=>h("div",{class:"qfeed "+(ok?"ok":"no")},h("h4",null,ok?U.good:U.notQuite),h("p",null,q.why));
   function foot(q){const Q=list(),last=cur===Q.length-1;return h("div",{class:"qfoot"},h("a",{class:"link",href:"../labs/#"+q.lab},U.explore+" "+labOf(q.lab).name),
     h("button",{type:"button",class:"btn primary",onclick:()=>{if(last)results(true);else{cur+=1;render(true);}}},last?U.results:U.nextQ));}
-  function render(focus){paintBar();const Q=list(),q=Q[cur];if(!q)return;const f=VIS[q.vis.k],a=ans[q.n],body=h("div",{class:"qbody"}),out=h("div"),S={done:a?performance.now()-1e5:0};
+  function render(focus){paintBar();const Q=list(),q=Q[cur];if(!q)return;app.dataset.film=String(q.film);const f=VIS[q.vis.k],a=ans[q.n],body=h("div",{class:"qbody"}),out=h("div"),S={done:a?performance.now()-1e5:0};
     const vis=DRAW&&f?stage(lw=>({lw,h:Math.round(f.h?f.h(lw,q):cl(lw*0.56,190,300))}),(ctx,o,now)=>f(ctx,o,now,q,S),(L.pics.alt&&L.pics.alt[q.vis.alt||q.vis.k])||q.title):null;
     const F=FILMS[q.film]||{};body.append(h("p",{class:"qtag",style:"--c:"+labOf(q.lab).c},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+Q.length+" · "+filmN(q.film)+(F.t?", "+F.t:"")),h("h3",{tabindex:"-1"},q.title),h("p",{class:"qsit"},q.sit));
     const fin=(ok,pick)=>{if(!a)done(q,ok,pick);S.done=performance.now();if(vis)vis.kick(1600);out.replaceChildren(feed(ok,q),foot(q));};
@@ -331,12 +330,14 @@ if(app.id==="series-quiz"){app.textContent="";const QS=L.qs,ans=get("quiz",{})||
       film&&open?h("p",{class:"aca-open"},h("a",{href:"#",onclick:e=>{e.preventDefault();setFilm(0);}},fill(U.stillOpen,{n:open}))):null,
       h("button",{type:"button",class:"btn",onclick:()=>{Q.forEach(q=>delete ans[q.n]);put("quiz",ans);cur=0;render(true);}},U.again))));
     if(focus){const t=card.querySelector("h3");try{t.focus({preventScroll:true});}catch(e){}}}
-  function setFilm(n,keepHash){film=films.includes(n)?n:0;sel.value=String(film);app.dataset.film=String(film);if(!keepHash&&history.replaceState)history.replaceState(null,"",film?"#film-"+film:location.pathname+location.search);
-    const Q=list(),first=Q.findIndex(q=>!ans[q.n]);if(first<0)results(false);else{cur=first;render(false);}}
-  sel.addEventListener("change",()=>setFilm(+sel.value));
+  // one list of every scenario of the series, no film level: n, a film whose scenarios to start at (from #film-<n>), opens its first
+  // one left, or its first; otherwise the first one left, or the results
+  function setFilm(n){film=0;const one=films.includes(n),of=q=>!one||q.film===n,Q=list(),todo=Q.findIndex(q=>of(q)&&!ans[q.n]),first=Q.findIndex(of);
+    if(one&&history.replaceState)history.replaceState(null,"",location.pathname+location.search);
+    if(todo>=0){cur=todo;render(false);}else if(one&&first>=0){cur=first;render(false);}else results(false);}
   const fromHash=()=>{const m=(location.hash||"").match(/^#film-(\d+)$/);return m?+m[1]:0;};
   // the first one waits for the rest of this file, where the pictures are
-  window.addEventListener("hashchange",()=>setFilm(fromHash(),true));Promise.resolve().then(()=>setFilm(fromHash(),true));}
+  window.addEventListener("hashchange",()=>{const n=fromHash();if(n)setFilm(n);});Promise.resolve().then(()=>setFilm(fromHash()));}
 
 /* ---------- the scenarios' pictures ---------- */
 // Each draws the situation, not its answer; once it's answered (S.done), some show how it ends. Their words are in L.pics.

@@ -2093,7 +2093,7 @@ function cm_spec(ctx,x,y,w,kick,title,rows,o){o=o||{};const a=o.a==null?1:o.a,h=
   ctx.restore();return bb;}
 
 /* ===== Context and memory, governed: the repository and the platform =====
-   The team's context as code (the example project, films/analytics-engineering/project/, as its files are named there), how a change
+   The team's context as code (the example project, learning-data-project/30-data-project/, as its files are named there), how a change
    comes in (a pull request, the data team's review, a second person's approval for production), and where agents read it on Databricks.
    Each tool's official logo stands beside what it keeps or does, unaltered: GitHub's on the repository, dbt's on its descriptions,
    Databricks' on the platform's parts (o.mark, cm_mark in govern.js).
@@ -2507,8 +2507,8 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
 /* ---------------------------------------------------------------- 3 · Context, reviewed like code */
 // the team's project, as the example project names its files, and its reviewers, as CODEOWNERS lists them there
 const CM_REPO=[{name:"AGENTS.md",note:"the page for agents"},{name:"skills/",note:"the skills",folder:1},{name:"models/",note:"dbt's descriptions",folder:1,logo:"dbt"},
-  {name:"governance/5-data-contracts/",note:"the contracts",folder:1},{name:"CODEOWNERS",note:"who reviews each file"}];
-const CM_OWN=[["*","data.team@uni.example"],["/models/_shared/","noor@uni.example"],["/skills/review-for-governance/","data.governance@uni.example noor@uni.example"]];
+  {name:"../20-data-governance/",note:"the contracts",folder:1},{name:"../.github/CODEOWNERS",note:"who reviews each file"}];
+const CM_OWN=[["*","data.team@uni.example"],["/30-data-project/models/_shared/","noor@uni.example"],["/30-data-project/skills/review-for-governance/","data.governance@uni.example noor@uni.example"]];
 // the table agents read on Databricks, as dbt describes it in the example project (models/staging/student_system/)
 const CM_TABLE={name:"stg_student_system__unit_offerings",comment:"A unit taught in a semester, on campus, online or both.",col:["delivery_mode","How the unit is taught that semester: on campus, online or both."]};
 scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({

@@ -83,6 +83,25 @@ class VoiceNames(unittest.TestCase):
         # a longer word that only starts the same way is another word
         self.assertEqual(self.faults([{"id": "x", "gap": 0.8, "text": "The Quechuan languages are a family."}]), [])
 
+    def test_ai_is_said_whole_after_the_voice_tools_own_respellings(self):
+        line = [{"id": "ai", "gap": 0.8, "text": "Next: AI and continuous architecture."}]
+        self.assertEqual(self.faults(line), [])
+        out = self.faults([{"id": "ai", "gap": 0.8, "text": "AI helps.", "say": "A I helps."}])
+        self.assertEqual(len(out), 1)
+        self.assertIn('spell it "AI"', out[0])
+        # a voice tool that spells AI "A I", as the shared one did until 16 November 2026, is read before the film's own words
+        d = film(line)
+        self.made.append(d)
+        (d / "tools").mkdir()
+        (d / "tools" / "tts.py").write_text("SAY = [(r'\\bdbt\\b', 'D B T'), (r'\\bAI\\b', 'A I')] + []\n", encoding="utf-8")
+        self.assertEqual(len(C.voice_names(d / "src" / "narration.js")), 1)
+        (d / "film.json").write_text(json.dumps({"key": "a-film", "say": [["\\bA I\\b", "AI"]]}), encoding="utf-8")
+        self.assertEqual(C.voice_names(d / "src" / "narration.js"), [])
+
+    def test_a_tts_that_only_runs_a_series_tool_uses_the_shared_voice_tools_words(self):
+        self.assertIn((r"\bdbt\b", "D B T"), C.tool_respellings(ROOT / "films/platform-and-solution-architecture/8-built-to-change/source"))
+        self.assertNotIn("A I", [b for _, b in C.tool_respellings(ROOT / "films/platform-and-solution-architecture/8-built-to-change/source")])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -29,7 +29,6 @@ window.LD_ROUTE = {
   "proj1": "1 film here shows its real files, and you can run it yourself.",
   "projn": "{n} films here show its real files, and you can run it yourself.",
   "projpage": "About the project",
-  "projrepo": "Open it on GitHub",
   "projmark": "Shows the example dbt project"
  },
  "groups": [
@@ -66,7 +65,6 @@ window.LD_ROUTE = {
  ],
  "project": {
   "href": "dbt-project/",
-  "repo": "https://github.com/roanboc/learning-data-project",
   "icon": "<svg class=\"pj-ic\" viewBox=\"0 0 20 20\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z\"/><path d=\"M3.6 6.3L10 10l6.4-3.7M10 10v7.4\"/></svg>"
  },
  "topics": [
@@ -719,8 +717,21 @@ window.LD_ROUTE = {
    "group": "lead",
    "name": "Leading data people",
    "who": "For anyone who works in data, and anyone who leads the people who do",
-   "line": "The skills data work needs now, and leading the people who do it: seeing the whole, working beside agents, listening, explaining, saying no well, leading a team, owning an outcome, and growing people.",
+   "line": "The people before the work, the skills data work needs now, and leading the people who do it: knowing your team, seeing the whole, working beside agents, listening, explaining, saying no well, leading a team, owning an outcome, and growing people.",
    "items": [
+    {
+     "id": "people-first",
+     "kind": "series",
+     "title": "People first",
+     "href": "people-first/",
+     "poster": "people-before-roles-poster.jpg",
+     "kicker": "Series · 1 of 4 films",
+     "len": "8 min",
+     "min": 8.0,
+     "films": [
+      "ld-people-before-roles"
+     ]
+    },
     {
      "id": "the-new-skills",
      "kind": "series",
@@ -782,12 +793,6 @@ window.LD_ROUTE = {
       "ld-when-someone-falls-behind",
       "ld-growing-people"
      ]
-    },
-    {
-     "id": "people-first",
-     "soon": true,
-     "title": "People first",
-     "kicker": "Series · 4 films"
     }
    ]
   }
@@ -844,10 +849,11 @@ window.LD_ROUTE = {
   {
    "id": "lead-a-team",
    "name": "lead a data team",
-   "line": "The organisation first, then the team, the plan and the case for it.",
+   "line": "The organisation first, then the people, the team, the plan and the case for it.",
    "stops": [
     "enterprise-architecture",
     "data-governance",
+    "people-first",
     "leading-a-data-team",
     "a-plan-in-ninety-days",
     "making-the-case"

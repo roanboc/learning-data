@@ -292,21 +292,9 @@ function oo_scarf(col){return(c,P)=>{const f=cc=>{cc.moveTo(392,354);cc.bezierCu
   ag_soft(c,cc=>{cc.moveTo(214,458);cc.bezierCurveTo(216,478,218,494,216,512);cc.lineTo(230,510);cc.bezierCurveTo(230,492,226,476,222,460);cc.closePath();},col,ag_lt(col,0.25),224,484,36,null);
   ag_soft(c,cc=>cc.ellipse(210,454,17,13,-0.5,0,TAU),col,ag_lt(col,0.3),216,448,22,rgba(ag_dk(col,0.7),0.4),6);}}
 const OO_PEOPLE={
-  maathai:{name:"Wangari Maathai",role:"A biologist",key:"oo-maathai",skin:[112,72,52],hair:{style:"coily",c:[28,22,20]},earrings:[214,196,160],top:{kind:"cardigan",c:[128,104,86],inner:[232,226,214]},bottom:{kind:"long",c:[96,80,66]},shoe:[58,46,40],breath:0.27},
-  wan:{name:"A farmer",key:"oo-woman1",skin:[100,64,46],hair:{style:"cropped",c:[26,22,20]},top:{kind:"sweater",c:[98,88,80]},bottom:{kind:"skirt",c:[132,104,76],hem:0.55},shoe:[70,54,42],hat:{paint:oo_scarf([178,128,118])},breath:0.3},
-  nya:{name:"A farmer",key:"oo-woman2",skin:[124,82,58],hair:{style:"cropped",c:[28,24,22]},top:{kind:"cardigan",c:[118,66,60],inner:[218,206,186]},bottom:{kind:"long",c:[74,70,84]},shoe:[52,44,40],hat:{paint:oo_scarf([222,210,190])},breath:0.32},
-  mum:{name:"A farmer",key:"oo-woman3",skin:[90,58,42],hair:{style:"cropped",c:[60,56,54]},top:{kind:"cardigan",c:[132,120,100],inner:[206,196,180]},bottom:{kind:"skirt",c:[104,96,70],hem:0.6},shoe:[64,50,40],hat:{paint:oo_scarf([88,74,66])},breath:0.25}
+  maathai:{name:"Wangari Maathai",role:"A biologist",key:"oo-maathai",skin:[112,72,52],hair:{style:"coily",c:[28,22,20]},earrings:[214,196,160],top:{kind:"cardigan",c:[128,104,86],inner:[232,226,214]},breath:0.27},
+  wan:{name:"A farmer",key:"oo-woman1",skin:[100,64,46],hair:{style:"cropped",c:[26,22,20]},top:{kind:"sweater",c:[98,88,80]},hat:{paint:oo_scarf([178,128,118])},breath:0.3},
+  nya:{name:"A farmer",key:"oo-woman2",skin:[124,82,58],hair:{style:"cropped",c:[28,24,22]},top:{kind:"cardigan",c:[118,66,60],inner:[218,206,186]},hat:{paint:oo_scarf([222,210,190])},breath:0.32},
+  mum:{name:"A farmer",key:"oo-woman3",skin:[90,58,42],hair:{style:"cropped",c:[60,56,54]},top:{kind:"cardigan",c:[132,120,100],inner:[206,196,180]},hat:{paint:oo_scarf([88,74,66])},breath:0.25}
 };
 const OO_WOMEN=[OO_PEOPLE.wan,OO_PEOPLE.nya,OO_PEOPLE.mum];
-// what the women carry, in the hand that holds it (figure space, at the near wrist): a water can, a bundle of firewood, a seedling
-function oo_can(c,h){const [x,y]=h.near;c.save();c.translate(x,y);
-  const g=c.createLinearGradient(-70,0,80,0);g.addColorStop(0,rgba([150,120,62],1));g.addColorStop(0.45,rgba([214,184,112],1));g.addColorStop(1,rgba([160,128,66],1));
-  rr(c,-70,40,150,190,26);c.fillStyle=g;c.fill();c.strokeStyle=rgba([116,90,46],0.7);c.lineWidth=5;c.stroke();
-  c.fillStyle=rgba([120,94,48],0.35);c.fillRect(-66,120,142,8);
-  c.strokeStyle=rgba([120,96,52],1);c.lineWidth=14;c.lineCap="round";c.beginPath();c.moveTo(-26,44);c.quadraticCurveTo(0,-14,30,44);c.stroke();
-  c.fillStyle=rgba([150,122,66],1);rr(c,48,24,30,26,6);c.fill();c.restore();}
-function oo_wood(c,h){const [x,y]=h.near;c.save();c.translate(x,y);c.rotate(-0.12);c.lineCap="round";
-  for(let i=0;i<7;i++){const yy=-30+i*12,col=[[118,88,62],[96,72,52],[134,104,74]][i%3];c.strokeStyle=rgba(ag_dk(col,0.25),1);c.lineWidth=17;
-    c.beginPath();c.moveTo(-210+(i*37)%40,yy);c.lineTo(190-(i*23)%50,yy+((i%2)?4:-3));c.stroke();c.strokeStyle=rgba(col,1);c.lineWidth=11;c.stroke();}
-  c.strokeStyle=rgba([170,140,96],1);c.lineWidth=8;for(const d of [-90,80]){c.beginPath();c.moveTo(d,-44);c.lineTo(d+6,62);c.stroke();}c.restore();}
-function oo_hold(c,h){oo_seedling(c,h.near[0]+20,h.near[1]-20,4.2,{g:0.8,sleeve:true,seed:11});}

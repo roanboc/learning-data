@@ -23,7 +23,7 @@ What it checks, page by page (every .html under site/):
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
 - a series' own labs and scenarios (build_series.series_learn): the same in both languages, each lab on one of its film's
   chapters, the labs listed in film order (the labs page numbers them 1 to N in that order), each scenario numbered by its film,
-  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs.
+  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs; one level, never split by film.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - the learning route (modules/route.json): every topic on it once, each goal's stops among the films and series on the site,
   the Topics page draws it, the list's rows in the route's order, and the home page leads to it, in both languages.
@@ -55,14 +55,20 @@ What it checks, page by page (every .html under site/):
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
+- cue words: every word a film's pictures or sounds wait for (wAt, kt_w or a chapter's short name for either in its scenes, W in
+  its tools/score.py) is said, whole, in its line, as films/data-governance/shared/tools/cues.py reads them. A word that isn't
+  there quietly times its moment to the start of the line, so the picture comes early. Some series' builds stop on it; here
+  every film is held to it, whichever series it is in.
 - places: a film drawn in the master data series' watercolour (its film.js declares WC_PLACES) has each place as a picture,
   drawn by tools/publish.py from the player the site plays (site/assets/<key>/places/, listed with that player in places.json),
   and no other film has the folder. The site's player shows those pictures instead of painting the places while the film plays,
   which froze the governance films again and again on a laptop (5 November 2026).
 """
+import ast
 import hashlib
 import html.parser
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -173,6 +179,9 @@ for _S in build_series.SERIES:
     CRUMBS[f"es/{_sl}/"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/"])
 # a series' own labs and scenarios (build_series.series_learn): their two pages, the ids learn.js makes on them (each lab's, and
 # #film-<n> for a film's situations), and their progress prefix, the series'
+# what an engine (site/assets/<engine>/learn.js) builds when it splits its labs or scenarios by film: a film's buttons, a choice of
+# film, or a rail of labs for each film
+SPLIT_BY_FILM = r'U\.(?:filmsLabel|allFilms|filter)\b|h\("select"|-films"|"data-film":'
 SERIES_LEARN, LEARN_IDS, LEARN_STORE = {}, {}, {}
 for _S in build_series.SERIES:
     _SL = build_series.series_learn(_S) if build_series.films(_S)[1] else None
@@ -271,7 +280,36 @@ VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surn
                (re.compile(r"\bApur[ií]mac\b|\bApooreemak\b"), "Ahpooreemahk",
                 "the Apurímac is said ah-poo-REE-mahk, and every film that names it spells it one way for the voice"),
                (re.compile(r"\bQuechua\b"), "Ketchwa", "Quechua is said KETCH-wa"),
-               (re.compile(r"\b[Mm]inka\b"), "meenka", "minka is said MEEN-ka")]
+               (re.compile(r"\b[Mm]inka\b"), "meenka", "minka is said MEEN-ka"),
+               # The shared voice tool spelled AI "A I", which the voice reads "uh eye": every film that said AI said it so until
+               # 16 November 2026, when the author heard it at the end of Built to change. Written whole, AI is said ay-eye.
+               (re.compile(r"\bA I\b"), "AI", "AI is said ay-eye, and the voice reads \"A I\" as \"uh eye\"")]
+VOICE_TOOL = ROOT / "films" / "from-words-to-data" / "shared" / "tools" / "tts.py"
+
+
+def tool_respellings(source):
+    """The words a film's voice tool respells before the film's own: the SAY list in its tools/tts.py, or in the shared voice tool
+    (From words to data's) when its tts.py only runs a series' tool."""
+    f = source / "tools" / "tts.py"
+    if not f.exists():
+        return []
+    for tool in (f, VOICE_TOOL):
+        for node in ast.walk(ast.parse(tool.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "SAY" for t in node.targets):
+                return [(e.elts[0].value, e.elts[1].value) for e in ast.walk(node.value)
+                        if isinstance(e, ast.Tuple) and len(e.elts) == 2 and all(isinstance(x, ast.Constant) and isinstance(x.value, str) for x in e.elts)]
+    return []
+
+
+# the words a film's pictures and sounds wait for (films/data-governance/shared/tools/cues.py): every film is held to that file
+# here, since only some series' builds call it. Left as they are, by the film's source folder, each as the check words it:
+CUES_LATER = {
+    # the sound of Who owns what: three soft taps meant for the marts come with the line's first words, about five seconds before
+    # the marts are said and drawn, and the pencil lines a quarter of a second before "group". Only a new mix of the whole soundtrack
+    # moves a sound: when this film's sound next changes, write 'marts' and 'group' in its tools/score.py, as its scenes do
+    "films/analytics-engineering/7-who-owns-what/source": ['score.py: domains/consumers: "their marts" isn\'t in what the voice reads',
+                                                           'score.py: domains/follows: "groups" isn\'t in what the voice reads'],
+}
 
 
 def release_status(text):
@@ -281,12 +319,13 @@ def release_status(text):
 
 
 def voice_names(narr, pairs=None):
-    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the film's
-    own respellings (film.json "say": [[pattern, words], ...], as the voice tool applies them)."""
+    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the voice
+    tool's respellings and then the film's own (film.json "say": [[pattern, words], ...]), in the order the voice tool applies them."""
     src = narr.read_text(encoding="utf-8")
     if pairs is None:
         meta = narr.parents[1] / "film.json"
         pairs = json.loads(meta.read_text(encoding="utf-8")).get("say", []) if meta.exists() else []
+    pairs = tool_respellings(narr.parents[1]) + list(pairs)
     out = []
     for sid, sc in json.loads(src[src.index("{"):src.rindex("}") + 1]).items():
         for ln in sc.get("vo", []):
@@ -1523,10 +1562,33 @@ def main():
                           "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
     s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
     s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e), "
-                  "and a story's names are spelled one way in every film that tells it (the rope bridge at Quehue)")
+                  "a story's names are spelled one way in every film that tells it (the rope bridge at Quehue), and AI is said ay-eye")
     for f in st_voices:
         s["fails"] += voice_names(f)
-    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after the film's own respellings")
+    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after its voice tool's and its own respellings")
+    s = rep.check("Cue words: every word a film's pictures and sounds wait for is said, whole, in its line")
+    sys.path.append(str(ROOT / "films/data-governance/shared/tools"))  # last, so its lang.py and build.py hide nobody's
+    import cues
+    cue_words = cue_sounds = 0
+    for narr in st_voices:
+        source = narr.parents[1]
+        meta, score, rel = source / "film.json", source / "tools" / "score.py", source.relative_to(ROOT).as_posix()
+        # the files the film's build bundles (film.json "src": its own and its series'); the first films have no film.json
+        scenes = [narr.parent / f for f in json.loads(meta.read_text(encoding="utf-8"))["src"]] if meta.exists() else sorted(narr.parent.glob("*.js"))
+        gone = [f for f in scenes if not f.exists()]
+        s["fails"] += [f"{rel}: film.json names {f.name}, which isn't there" for f in gone]
+        scenes = [f for f in scenes if f not in gone]
+        found, known = cues.misplaced(narr, scenes, score), CUES_LATER.get(rel, [])
+        s["fails"] += [f"{rel}: {x}" for x in found if x not in known]
+        s["fails"] += [f"{rel}: this one is right now, so take it off CUES_LATER: {x}" for x in known if x not in found]
+        cue_words += sum(len(cues.moments(f.read_text())) for f in scenes)
+        cue_sounds += len(cues.IN_SCORE.findall(score.read_text())) if score.exists() else 0
+    s["fails"] += [f"CUES_LATER names {k}, which has no src/narration.js" for k in CUES_LATER if not (ROOT / k / "src" / "narration.js").exists()]
+    if s["fails"]:
+        s["notes"].append("a word that isn't in what the voice reads (the line's \"say\", or its text) times its moment to the start of the line, and one "
+                          "that first comes inside a longer word lands there: write the words as the line says them, whole")
+    s["notes"].append(f"{len(st_voices)} films, {cue_words} words their pictures wait for and {cue_sounds} their sounds; "
+                      f"{sum(len(v) for v in CUES_LATER.values())} of those sounds are left as they are until their film's sound is next mixed")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     # every film's pack, and the first film's, whose questions are a block of its pack of labs and scenarios
@@ -1753,15 +1815,15 @@ def main():
         if pg is None:
             s["fails"].append(f"site/{rel}: missing"); continue
         ways = [a.attrs.get("href") for p in pg.dom.all("p", cls="home-next") for a in p.all("a")]
-        if ways != ["topics/", "journey/"]:
-            s["fails"].append(f"site/{rel}: after the film's steps, two buttons: the learning route (topics/) and how the films were made (journey/); it has {ways}")
+        if ways != ["topics/", "dbt-project/", "journey/"]:
+            s["fails"].append(f"site/{rel}: after the film's steps, three buttons: the learning route (topics/), the example project (dbt-project/) and how the films were made (journey/); it has {ways}")
         # and the film's two other steps are said twice, since the bar above the film is easy to miss: in a section right
-        # after the film, and first in the panel that shows when the film ends
-        steps = [a.attrs.get("href") for d in pg.dom.all("div", cls="more-steps") for a in d.all("a")]
+        # after the film, in a short note (the author, 14 November 2026), and first in the panel that shows when the film ends
+        steps = [a.attrs.get("href") for d in pg.dom.all("aside", cls="steps-note") for a in d.all("a")]
         tpl = re.search(r'<template id="next-panel">.*?</template>', pg.src, re.S)
         ends = re.findall(r'<a class="btn[^"]*" href="([^"]*)"', tpl.group(0)) if tpl else []
-        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="more-steps"') > pg.src.find('class="home-next"') or pg.dom.first("details", cls="howto"):
-            s["fails"].append(f"site/{rel}: after the film and before the ways on, a section offers the labs and the situations ({steps}), with no box to open, and the "
+        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="steps-note"') > pg.src.find('class="home-next"') or pg.dom.first("details", cls="howto"):
+            s["fails"].append(f"site/{rel}: after the film and before the ways on, a note offers the labs and the situations ({steps}), with no box to open, and the "
                               f"\"Where next?\" panel offers them first ({ends[:2]}): people miss them in the bar above the film (the author, 12 November 2026)")
         if [n for n in pg.dom.walk() if "data-route" in n.attrs] or any("route" in x for x in pg.local_scripts):
             s["fails"].append(f"site/{rel}: the home page doesn't draw the route (the author, 12 November 2026): it links to it")
@@ -1911,6 +1973,32 @@ def main():
         s["fails"].append("films/legibility-report.md: keep only the note between its marks; the table is made when it's printed "
                           "(python site-tools/build_series.py --legibility), so films merging at once don't clash on it")
 
+    # the example project's page shows its files' lines as they are (build_series.py's PROJECT_STEPS and PROJECT_STANDARDS): held to a
+    # checkout of the project, beside this repository or named by LEARNING_DATA_PROJECT, where there is one
+    s = rep.check("The example project's page: every line it shows from the project's files is that line in the project, where a checkout is at hand")
+    proj = pathlib.Path(os.environ.get("LEARNING_DATA_PROJECT") or ROOT.parent / "learning-data-project")
+    if not (proj / build_series.PROJECT_FOLDER).is_dir():
+        s["notes"].append(f"skipped: no checkout of the project at {proj} (set LEARNING_DATA_PROJECT to one)")
+    else:
+        n = 0
+        for path, code, rows in build_series.project_excerpts():
+            f = proj / build_series.proj_path(path)
+            if not f.is_file():
+                s["fails"].append(f"build_series.py shows {path}, which isn't in the project ({f})")
+                continue
+            have = f.read_text(encoding="utf-8").split("\n")
+            for first, lines in code:
+                for i, line in enumerate(lines):
+                    at = first + i; n += 1
+                    if at > len(have) or have[at - 1] != line:
+                        s["fails"].append(f"{path}:{at}: the project page shows {line.strip()[:60]!r}; the project has "
+                                          f"{(have[at - 1].strip()[:60] if at <= len(have) else 'no such line')!r}")
+            for line in rows:
+                n += 1
+                if line not in have:
+                    s["fails"].append(f"{path}: the project page shows a row the file no longer has: {line[:70]!r}")
+        s["notes"].append(f"{n} lines matched against {proj}")
+
     s = rep.check("Repository links: every relative link in the repository's Markdown, such as a series' table of films, points at a file that is there")
     bad, n = md_link_faults()
     s["fails"] += bad
@@ -1932,12 +2020,12 @@ def main():
         for k, c in Counter(ns).items():
             if c > 1:
                 s["fails"].append(f"{words}.en.js: {c} scenarios have the number {k}, which keeps their answers apart")
-        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, under their films'
-        # buttons, so they're listed in film order; the scenarios likewise, by their numbers
+        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, in one rail, so
+        # they're listed in film order; the scenarios likewise, by their numbers
         fl = [x["film"] for x in en["labs"]]
         if fl != sorted(fl):
             s["fails"].append(f"{words}.en.js: its labs aren't listed in film order (" + ", ".join(f"{x['id']} (film {x['film']})" for x in en["labs"]) + "): "
-                              "the labs page numbers them in that order, so a lab listed after a later film's shows under its film with the wrong number")
+                              "the labs page numbers them in that order, so a lab listed after a later film's shows out of its film's place")
         if ns != sorted(ns):
             s["fails"].append(f"{words}.en.js: its scenarios aren't listed in order of their numbers ({', '.join(map(str, ns))})")
         on = {x["index"] + 1: x for x in build_series.films(S)[1]}
@@ -1955,6 +2043,13 @@ def main():
             if not f["labs"] and not any(x["film"] == n for x in en["labs"]) and not any(q[1] == n for q in en["qs"]):
                 s["notes"].append(f"{f['title']}: no lab or scenario among the series' own")
         s["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, for films {', '.join(map(str, SL['films']))}")
+    # one level: an engine shows every lab of its series in one rail and every scenario in one list, numbered 1 to N, never a
+    # film's buttons, a film's own rail of labs or a choice of film above them (the author, 11 and 16 Nov 2026); smoke.py's
+    # series-learn checks the pages as drawn
+    for eng in sorted({SL["engine"] for _, SL in SERIES_LEARN.values()}):
+        src, rel = (WEB / "assets" / eng / "learn.js").read_text(encoding="utf-8"), f"site/assets/{eng}/learn.js"
+        for m in sorted(set(re.findall(SPLIT_BY_FILM, src))):
+            s["fails"].append(f"{rel}: its labs or scenarios are split by film again ({m}): show every lab in one rail and every scenario in one list")
 
     s = rep.check("Journey pages: the same as site-tools/build_pages.py makes from their Markdown")
     try:

@@ -302,19 +302,18 @@ function labLevel(Lb){const V=Lb.w;let warn=V.warn,stop=V.stop;const say=h("p",{
 const BUILD={sort:labSort,pick:labPick,steps:labSteps,compose:labCompose,toggle:labToggle,level:labLevel};
 L.BUILD=BUILD;L.PIX=PIX;L.lib={h,seg,stage,picture,shell,info,btn,fill,num,tx,fit,wrap,lines,tag,card,tick,cross,mark,pencil,wash,head,light,C,OK,NO};
 
-/* ---------- the labs page: a film, then a rail of its labs, one lab at a time ---------- */
+/* ---------- the labs page: one rail of every lab of the series, in film order, one lab at a time; no film level ---------- */
 const labsApp=document.getElementById("series-labs");
 if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visited",[]));let film=LABS[0].film;
-  const films=h("div",{class:"gp-films",role:"group","aria-label":U.filmsLabel}),rails=h("div"),holder=h("div");
+  const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),holder=h("div");
   const ofFilm=n=>LABS.filter(x=>x.film===n);
-  function paintFilms(){films.replaceChildren(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>{const ls=ofFilm(f.n),seen=ls.filter(x=>visited.has(x.id)).length;
-    return h("button",{type:"button","aria-pressed":String(f.n===film),onclick:()=>show(ofFilm(f.n)[0].id)},h("i",null,String(f.n)),h("span",null,f.title),h("small",null,fill(U.seen,{n:seen,of:ls.length})));}));}
-  // one rail of tabs for each film, all on the page; only the open film's shows
-  rails.append(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel+" · "+f.title,"data-film":String(f.n)},
-    ...ofFilm(f.n).map(Lb=>h("button",{type:"button",role:"tab","data-id":Lb.id,style:"--c:"+Lb.c,onclick:()=>show(Lb.id)},h("i",null,String(LABS.indexOf(Lb)+1)),Lb.name)))));
-  const tabs=()=>[...rails.querySelectorAll("[role=tab]")];
-  function paintRail(){[...rails.children].forEach(r=>{r.hidden=r.dataset.film!==String(film);});}
-  function show(id,focus){const Lb=labOf(id)||LABS[0];visited.add(Lb.id);set("visited",[...visited]);if(Lb.film!==film){film=Lb.film;paintRail();}paintFilms();
+  rail.append(...LABS.map(Lb=>h("button",{type:"button",role:"tab","data-id":Lb.id,style:"--c:"+Lb.c,onclick:()=>show(Lb.id)},h("i",null,String(LABS.indexOf(Lb)+1)),Lb.name)));
+  const tabs=()=>[...rail.children];
+  // the rail is one stop for the keyboard: arrows move along it, Home and End go to its ends
+  rail.addEventListener("keydown",e=>{const bs=tabs(),k=bs.indexOf(document.activeElement);if(k<0)return;let j=null;
+    if(e.key==="ArrowRight"||e.key==="ArrowDown")j=(k+1)%bs.length;else if(e.key==="ArrowLeft"||e.key==="ArrowUp")j=(k-1+bs.length)%bs.length;else if(e.key==="Home")j=0;else if(e.key==="End")j=bs.length-1;
+    if(j==null)return;e.preventDefault();bs[j].focus();show(bs[j].dataset.id);});
+  function show(id,focus){const Lb=labOf(id)||LABS[0];visited.add(Lb.id);set("visited",[...visited]);film=Lb.film;
     tabs().forEach(b=>{const on=b.dataset.id===Lb.id;b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1;b.classList.toggle("done",visited.has(b.dataset.id));});
     const all=LABS.indexOf(Lb),nxt=LABS[all+1],f=filmOf(film);
     holder.replaceChildren(h("div",{class:"stop",style:"--c:"+Lb.c},
@@ -323,7 +322,7 @@ if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visit
         h("div",{class:"stop-nav"},watchHref(Lb)?h("a",{class:"btn",href:watchHref(Lb)},U.watch):h("span",{class:"gp-coming"},fill(U.coming,{n:f.n})),nxt?h("button",{type:"button",class:"btn primary",onclick:()=>show(nxt.id,true)},U.next+" "+nxt.name+" →"):h("a",{class:"btn primary",href:"../scenarios/"},U.makeCall))),
       BUILD[Lb.kind]?BUILD[Lb.kind](Lb):h("p",null,"")));
     if(history.replaceState)history.replaceState(null,"","#"+Lb.id);if(focus)holder.scrollIntoView({block:"start"});}
-  labsApp.append(films,rails,holder);paintRail();
+  labsApp.append(rail,holder);
   const fromHash=()=>{const hs=(location.hash||"").slice(1),fm=/^film-(\d+)$/.exec(hs);return fm&&ofFilm(+fm[1]).length?ofFilm(+fm[1])[0].id:hs;};
   show(fromHash());window.addEventListener("hashchange",()=>{const id=fromHash();if(labOf(id))show(id,true);});}
 
@@ -332,26 +331,26 @@ if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visit
    they belong or still following one another (the first mix left 3 or 7 steps as they were, turned 4 round and cut 6 in two,
    and did the same to every scenario) */
 const mixed=(n,s)=>{const hs=x=>{x=Math.imul(x^x>>>16,0x45d9f3b);x=Math.imul(x^x>>>16,0x45d9f3b);return(x^x>>>16)>>>0;},run=o=>[1,n-1].some(d=>o.every((k,p)=>!p||(k-o[p-1]+n)%n===d)),fine=o=>n<4?o.some((k,p)=>k!==p):!run(o)&&o.filter((k,p)=>k===p).length<=n/4&&o.filter((k,p)=>p&&k===o[p-1]+1).length<=n/3;for(let t=0;t<60;t++){const key=Array.from({length:n},(_,i)=>hs(((s|0)+1)*7919+t*104729+i*1013+n)),o=key.map((_,i)=>i).sort((a,b)=>key[a]-key[b]||a-b);if(fine(o))return o;}return Array.from({length:n},(_,i)=>(2*i+1)%(n|1));};
-/* ---------- the scenarios page: evaluation, a film at a time or all of them ---------- */
+/* ---------- the scenarios page: evaluation, one list of every scenario of the series; no film level ---------- */
 const quizApp=document.getElementById("series-quiz");
 if(quizApp&&QS.length){quizApp.textContent="";const ans=get("quiz",{});let sel=0,list=QS,cur=0;
   /* a saved answer keeps the place of the option picked: where that place no longer gives the result saved with it (the options
      have moved since), the scenario is asked again */
   {let moved=0;QS.forEach(q=>{const a=ans[q.n];if(!a||q.type!=="choice"||a.pick==null)return;const o=q.opts[a.pick];if(!o||!!o.ok!==!!a.ok){delete ans[q.n];moved++;}});if(moved)set("quiz",ans);}
-  const films=h("div",{class:"gp-films",role:"group","aria-label":U.filmsLabel}),bar=h("div",{class:"qbar"}),dots=h("div",{class:"dots",role:"group","aria-label":U.qsLabel}),score=h("p",{class:"score"}),card=h("div");
-  bar.append(dots,score);quizApp.append(films,h("div",{class:"quiz"},bar,card));
+  const bar=h("div",{class:"qbar"}),dots=h("div",{class:"dots",role:"group","aria-label":U.qsLabel}),score=h("p",{class:"score"}),card=h("div");
+  bar.append(dots,score);quizApp.append(h("div",{class:"quiz"},bar,card));
   const labName=id=>(labOf(id)||{name:""}).name,labHref=id=>"../labs/#"+id,A=q=>ans[q.n];
-  function paintFilms(){const fs=FILMS.filter(f=>QS.some(q=>q.film===f.n));films.replaceChildren(...[0,...fs.map(f=>f.n)].map(n=>{const qs=n?QS.filter(q=>q.film===n):QS,a=qs.filter(A).length,f=filmOf(n);
-    return h("button",{type:"button","aria-pressed":String(n===sel),onclick:()=>{pick(n);}},n?h("i",null,String(n)):null,h("span",null,n?f.title:U.allFilms),h("small",null,fill(U.done,{n:a,of:qs.length})));}));}
-  function pick(n,keep){sel=n;list=n?QS.filter(q=>q.film===n):QS;quizApp.dataset.film=String(n||0);if(history.replaceState)history.replaceState(null,"","#"+(n?"film-"+n:"all"));
-    paintFilms();const first=list.findIndex(q=>!A(q));if(first<0)results();else{cur=first;render();}}
+  // n: a film whose scenarios to start at (from #film-<n>), its first one left, or its first; otherwise the first one left
+  function pick(n){const of=q=>!n||q.film===n,todo=QS.findIndex(q=>of(q)&&!A(q)),first=QS.findIndex(of);
+    if(n&&history.replaceState)history.replaceState(null,"",location.pathname+location.search);
+    if(todo>=0)cur=todo;else if(n&&first>=0)cur=first;else{results();return;}render();}
   function paintBar(){dots.replaceChildren(...list.map((q,i)=>h("button",{type:"button",class:A(q)?(A(q).ok?"ok":"no"):"","aria-current":String(i===cur),"aria-label":U.scenario+" "+(i+1),onclick:()=>{cur=i;render();}},String(i+1))));
     const as=list.filter(A),ok=as.filter(q=>A(q).ok).length;score.replaceChildren(U.score+" "+ok+" ",h("span",null,U.of+" "+as.length+" "+U.answered+" · "+(list.length-as.length)+" "+U.toGo));}
-  function done(q,ok,pk){ans[q.n]={ok,pick:pk};set("quiz",ans);paintBar();paintFilms();}
+  function done(q,ok,pk){ans[q.n]={ok,pick:pk};set("quiz",ans);paintBar();}
   const feed=(ok,q)=>h("div",{class:"qfeed "+(ok?"ok":"no")},h("h4",null,ok?U.good:U.notQuite),h("p",null,q.why),repoLinks(q));
   function foot(q){const last=cur===list.length-1;return h("div",{class:"qfoot"},h("a",{class:"link",href:labHref(q.lab)},U.explore+" "+labName(q.lab)),
     h("button",{type:"button",class:"btn primary",onclick:()=>{if(last)results();else{cur+=1;render();}}},last?U.results:U.nextQ));}
-  function render(){paintBar();const q=list[cur],f=PIX[q.vis],body=h("div",{class:"qbody"}),out=h("div"),prev=A(q),Lq=labOf(q.lab)||{};
+  function render(){paintBar();quizApp.dataset.film=String(list[cur].film);const q=list[cur],f=PIX[q.vis],body=h("div",{class:"qbody"}),out=h("div"),prev=A(q),Lq=labOf(q.lab)||{};
     const vis=stage(1000,760,c=>{if(f)f(c,1000,760,q.st||{},Lq,1);},q.alt||q.title);
     body.append(h("p",{class:"qtag",style:"--c:"+(Lq.c||"#0e9692")},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+list.length+(sel?"":" · "+filmOf(q.film).title)),h("h3",null,q.title),h("p",{class:"qsit"},q.sit));
     if(q.type==="choice"){const box=h("div",{class:"qopts"});
@@ -369,7 +368,7 @@ if(quizApp&&QS.length){quizApp.textContent="";const ans=get("quiz",{});let sel=0
     const by={};list.forEach(q=>{const k=q.lab;by[k]=by[k]||{ok:0,n:0};by[k].n++;if(A(q)&&A(q).ok)by[k].ok++;});
     card.replaceChildren(h("div",{class:"qdone"},h("div",{class:"ring",style:"--p:"+Math.round(ok/n*100)},h("b",null,ok+"/"+n)),h("div",null,h("h3",null,band[0]),h("p",null,band[1]),
       h("div",{class:"mastery"},...Object.keys(by).map(k=>h("a",{href:labHref(k),class:by[k].ok===by[k].n?"ok":"no",style:"--c:"+(labOf(k)||{c:"#a0b2cd"}).c},h("i"),labName(k)+" · "+by[k].ok+"/"+by[k].n))),
-      h("button",{type:"button",class:"btn",onclick:()=>{list.forEach(q=>delete ans[q.n]);set("quiz",ans);paintFilms();cur=0;render();}},U.again)),closing(sel)));}
-  const fromHash=()=>{const hs=(location.hash||"").slice(1),fm=/^film-(\d+)$/.exec(hs),todo=QS.find(q=>!A(q));return fm&&QS.some(q=>q.film===+fm[1])?+fm[1]:hs==="all"?0:todo?todo.film:0;};
-  pick(fromHash());window.addEventListener("hashchange",()=>{const n=fromHash();if(n!==sel)pick(n);});}
+      h("button",{type:"button",class:"btn",onclick:()=>{list.forEach(q=>delete ans[q.n]);set("quiz",ans);cur=0;render();}},U.again)),closing(sel)));}
+  const fromHash=()=>{const fm=/^#film-(\d+)$/.exec(location.hash||"");return fm&&QS.some(q=>q.film===+fm[1])?+fm[1]:0;};
+  pick(fromHash());window.addEventListener("hashchange",()=>{const n=fromHash();if(n)pick(n);});}
 })();

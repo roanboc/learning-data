@@ -475,7 +475,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be."}]}
 };
 
-const VODUR={"turns/edge": 8.533, "turns/cycle": 6.286, "turns/complex": 7.351, "turns/missed": 4.886, "turns/lots": 6.732, "turns/last": 2.212, "turns/needed": 3.856, "turns/levels": 6.619, "turns/minutes": 4.373, "turns/clock": 7.136, "turns/sank": 3.424, "turns/knew": 6.064, "turns/deep": 3.429, "turns/link": 7.369, "note/note": 5.67, "note/matrix": 7.265, "note/process": 1.822, "bands/map": 8.283, "bands/sort": 3.223, "bands/ops": 6.855, "bands/empty": 6.211, "bands/one": 6.133, "levels/two": 7.453, "levels/three": 5.942, "levels/apqc": 5.368, "levels/breadth": 2.463, "levels/pain": 4.323, "levels/says": 4.135, "levels/mahan": 4.999, "cash/m2c": 4.526, "cash/five": 7.498, "cash/sipoc": 6.409, "cash/objects": 4.738, "cash/born": 6.579, "cash/missing": 4.284, "pain/one": 1.638, "pain/farah": 6.78, "pain/nightly": 7.059, "pain/weeks": 7.511, "pain/deeper": 8.042, "flow/gather": 5.132, "flow/pass": 1.739, "flow/fail": 6.756, "flow/sees": 6.636, "flow/same": 5.776, "flow/grace": 6.242, "flow/retail": 7.82, "flow/farah": 4.024, "practice/joins": 8.677, "practice/same": 6.642, "practice/none": 2.105, "end/village": 6.861, "end/utility": 7.62, "end/next": 6.699};
+const VODUR={"turns/edge": 8.533, "turns/cycle": 6.286, "turns/complex": 7.351, "turns/missed": 4.886, "turns/lots": 6.732, "turns/last": 2.212, "turns/needed": 3.856, "turns/levels": 6.619, "turns/minutes": 4.373, "turns/clock": 7.136, "turns/sank": 3.424, "turns/knew": 6.064, "turns/deep": 3.429, "turns/link": 7.369, "note/note": 5.663, "note/matrix": 7.265, "note/process": 1.822, "bands/map": 8.283, "bands/sort": 3.223, "bands/ops": 6.855, "bands/empty": 6.211, "bands/one": 6.133, "levels/two": 7.453, "levels/three": 5.942, "levels/apqc": 5.592, "levels/breadth": 2.463, "levels/pain": 4.323, "levels/says": 4.135, "levels/mahan": 4.999, "cash/m2c": 4.526, "cash/five": 7.498, "cash/sipoc": 6.409, "cash/objects": 4.738, "cash/born": 6.579, "cash/missing": 4.284, "pain/one": 1.638, "pain/farah": 6.78, "pain/nightly": 7.059, "pain/weeks": 7.511, "pain/deeper": 8.042, "flow/gather": 5.132, "flow/pass": 1.739, "flow/fail": 6.756, "flow/sees": 6.636, "flow/same": 5.776, "flow/grace": 6.242, "flow/retail": 7.82, "flow/farah": 4.024, "practice/joins": 8.677, "practice/same": 6.642, "practice/none": 2.105, "end/village": 6.861, "end/utility": 7.62, "end/next": 6.749};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1973,6 +1973,32 @@ function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3]
 // how far the camera is zoomed in at t, for the same keys: a whole canvas seen from afar is context, and its notes are decoration
 function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;z=lerp(z,keys[i][3],u);}return z;}
 
+// The colour of the five series on enterprise architecture (17 November 2026). They drew on a brown wall, a brown ground for scenes in the
+// past and brown date pills, earthy beside their stories; now the wall is a slate blue under a cool light, a scene in the past a night blue,
+// and the layers' and the series' colours are clearer. The dark ground behind the diagrams stays as the whole site draws it: no need to
+// colour a picture whose ground is already dark (the author, 17 November 2026). Only these series' builds bundle this file, right after
+// ea.js, so it sets their look over ea.js and over the helpers the whole site shares (From words to data's histBg and yearTag), which every
+// other film keeps as they are. The master data films borrow ea.js for its glyphs and keep its first colours too.
+const EA_WALL=["#162b52","#0a1428"];                        // the wall the notes go on: a slate blue
+const EA_WALLGLOW=[[0.1,0.9,0.5,[60,180,210],0.06],[0.92,0.1,0.5,[160,110,240],0.06]];   // soft light on it: teal, bottom left; violet, top right
+const EA_HIST=["#16204a","#06071a"];                        // a scene in the past
+const EA_PILL="rgba(10,14,40,0.9)";                         // the glass of a date's pill
+// soft pools of coloured light: [x, y, radius, colour, strength], with x, y and the radius as parts of the frame's width and height
+function eaGlow(ctx,pools){pools.forEach(([x,y,r,c,a])=>{const g=ctx.createRadialGradient(W*x,H*y,0,W*x,H*y,W*r);g.addColorStop(0,rgba(c,a));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});}
+// the six layers and the series' own colour, deeper and clearer than ea.js's first ones
+[[188,162,255],[255,196,112],[255,228,96],[255,166,134],[108,200,255],[138,228,118]].forEach((c,i)=>{LAY6[i][1]=c;});
+EAC.splice(0,3,104,230,192);
+// the wall of canvases and sticky notes (ea.js's wallBg, in slate blue under a cool light)
+wallBg=function(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,EA_WALL[0]);g.addColorStop(1,EA_WALL[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){const x=hash(i,31)*W,y=hash(i,32)*H,r=60+hash(i,33)*200,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(190,225,255,"+(0.012+0.02*hash(i,34))+")");gg.addColorStop(1,"rgba(190,225,255,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  const l=ctx.createRadialGradient(W*0.5,H*0.25,40,W*0.5,H*0.4,W*0.7);l.addColorStop(0,"rgba(150,210,255,"+(o.light==null?0.10:o.light)+")");l.addColorStop(1,"rgba(150,210,255,0)");ctx.fillStyle=l;ctx.fillRect(0,0,W,H);eaGlow(ctx,EA_WALLGLOW);};
+// a scene in the past keeps its lamp's warm light and dust, on a night blue
+{const histBg0=histBg;histBg=function(ctx,S,t,o){return histBg0(ctx,S,t,Object.assign({top:EA_HIST[0],bottom:EA_HIST[1]},o));};}
+// the pills that date a moment (ea.js's eaYear and From words to data's yearTag), on blue glass
+eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,28,500,"mono")+52;glass(ctx,x,y-30,w,60,30,c,{glow:14,ea:0.8,fill:EA_PILL});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
+yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
+
 /* ===== Business architecture for data: the series' components =====
    The second series on enterprise architecture, after The map before the data, in its look (films/enterprise-architecture/shared/src/ea.js:
    paper drafts on a wall, the confirmed model in glass, the six layers in their colours) and its world: the publicly owned energy
@@ -1987,10 +2013,10 @@ function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i+
 /* ---------- colours ---------- */
 // the series' colour (water), the layers it works in, the two sides of the utility's wall (the network in blue, retail in rose),
 // red for what fails, green for a check that passes; the desert's sand, earth and the water underground
-const BAC=[120,206,226];
+const BAC=[84,212,240];
 const BA_STR=LAY6[1][1],BA_BUS=LAY6[2][1],BA_INF=LAY6[3][1],BA_APP=LAY6[4][1];
 const BA_NET=[132,176,255],BA_RET=[255,150,186],BA_RED=[232,96,84],BA_OK=[132,226,160];
-const BA_SAND=[222,178,120],BA_EARTH=[120,82,56],BA_WATER=[110,196,240],BA_GREEN=[120,176,92],BA_DRY=[176,132,84];
+const BA_SAND=[222,178,120],BA_EARTH=[120,82,56],BA_WATER=[70,204,246],BA_GREEN=[96,196,92],BA_DRY=[176,132,84];
 // the series' five films, in order
 const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Rules and expectations the business owns"];
 // no-break spaces: words a label should keep on one line
@@ -2030,16 +2056,16 @@ const BA_HOUSES=[[1386,520,62,46],[1458,508,54,52],[1528,530,70,40],[1610,512,58
 const BA_DOMES=[[1478,560,20],[1630,566,18],[1712,500,16]];
 function ba_aerial(ctx,t,o){o=o||{};const X0=-1400,X1=3300,Y0=-900,Y1=2000,wm=o.warm||0;
   // sand: warm, with long low ripples and a few darker patches of gravel
-  const g=ctx.createLinearGradient(0,-200,0,1300);g.addColorStop(0,rgba(mix([168,124,82],[196,140,92],wm),1));g.addColorStop(0.5,rgba(mix([196,152,102],[214,156,104],wm),1));g.addColorStop(1,rgba(mix([150,110,74],[170,112,76],wm),1));
+  const g=ctx.createLinearGradient(0,-200,0,1300);g.addColorStop(0,rgba(mix([180,136,88],[200,144,92],wm),1));g.addColorStop(0.5,rgba(mix([214,170,114],[226,170,112],wm),1));g.addColorStop(1,rgba(mix([164,120,80],[178,118,80],wm),1));
   ctx.fillStyle=g;ctx.fillRect(X0,Y0,X1-X0,Y1-Y0);
   ctx.save();ctx.strokeStyle="rgba(255,236,200,0.05)";ctx.lineWidth=10;for(let i=0;i<34;i++){const y=-260+i*52;ctx.beginPath();for(let x=-400;x<=2400;x+=80){const yy=y+Math.sin(x*0.004+i*0.7)*18+x*0.08;x===-400?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}ctx.restore();
-  for(let i=0;i<22;i++){const x=hash(i,601)*2200-140,y=hash(i,602)*1200-60,r=60+hash(i,603)*160,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(70,46,30,"+(0.06+0.06*hash(i,604))+")");gg.addColorStop(1,"rgba(70,46,30,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  for(let i=0;i<22;i++){const x=hash(i,601)*2200-140,y=hash(i,602)*1200-60,r=60+hash(i,603)*160,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(80,60,120,"+(0.07+0.06*hash(i,604))+")");gg.addColorStop(1,"rgba(80,60,120,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
   // the mountains, top left, seen from high above: a dark mass, its ridges lit on the side towards the sun and in shadow on the
   // other, each spine with spurs running down to the plain
-  const mg=ctx.createRadialGradient(-260,-280,80,-260,-280,1000);mg.addColorStop(0,rgba(mix([92,64,52],[116,76,58],wm),0.95));mg.addColorStop(0.55,rgba(mix([128,92,68],[148,98,70],wm),0.62));mg.addColorStop(1,"rgba(150,110,76,0)");
+  const mg=ctx.createRadialGradient(-260,-280,80,-260,-280,1000);mg.addColorStop(0,rgba(mix([82,62,104],[104,72,96],wm),0.95));mg.addColorStop(0.55,rgba(mix([130,96,112],[150,100,100],wm),0.62));mg.addColorStop(1,"rgba(150,110,76,0)");
   ctx.fillStyle=mg;ctx.fillRect(-1400,-900,2400,2000);
   const ridge=(P,w0)=>{for(let i=1;i<P.length;i++){const[x0,y0]=P[i-1],[x1,y1]=P[i],w=w0*(1-0.55*i/P.length);
-      ctx.strokeStyle="rgba(52,34,28,0.42)";ctx.lineWidth=w*1.7;ctx.beginPath();ctx.moveTo(x0+w*0.55,y0+w*0.65);ctx.lineTo(x1+w*0.55,y1+w*0.65);ctx.stroke();
+      ctx.strokeStyle="rgba(46,34,90,0.45)";ctx.lineWidth=w*1.7;ctx.beginPath();ctx.moveTo(x0+w*0.55,y0+w*0.65);ctx.lineTo(x1+w*0.55,y1+w*0.65);ctx.stroke();
       ctx.strokeStyle=rgba(mix([218,174,128],[238,184,130],wm),0.5);ctx.lineWidth=w*0.6;ctx.beginPath();ctx.moveTo(x0-w*0.3,y0-w*0.3);ctx.lineTo(x1-w*0.3,y1-w*0.3);ctx.stroke();}};
   ctx.save();ctx.lineCap="round";ctx.lineJoin="round";
   [[[-760,-520],[-520,-360],[-300,-220],[-80,-90],[140,10],[300,96]],[[-300,-660],[-120,-430],[40,-270],[200,-150],[380,-60]],[[-940,-120],[-660,-40],[-430,46],[-220,156]]].forEach((sp,j)=>{
@@ -2070,7 +2096,7 @@ function ba_aerial(ctx,t,o){o=o||{};const X0=-1400,X1=3300,Y0=-900,Y1=2000,wm=o.
     ctx.strokeStyle="rgba(70,48,30,0.6)";ctx.lineWidth=3;ctx.strokeRect(x,y,w,h);});
   // trees along the channel and the village's edge: round canopies, dark at the bottom, lit at the top, with their shadows
   [[1296,640,26],[1340,628,22],[1372,650,20],[1800,650,24],[1840,610,20],[1360,470,24],[1760,470,22],[1300,560,22],[1822,540,20],[1700,640,18]].forEach(([x,y,r],i)=>{ctx.fillStyle="rgba(40,30,20,0.32)";ctx.beginPath();ctx.ellipse(x+r*0.4,y+r*0.5,r,r*0.86,0,0,TAU);ctx.fill();
-    const tg=ctx.createRadialGradient(x-r*0.35,y-r*0.4,2,x,y,r);tg.addColorStop(0,"rgba(150,190,104,1)");tg.addColorStop(1,"rgba(56,96,52,1)");ctx.fillStyle=tg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();});
+    const tg=ctx.createRadialGradient(x-r*0.35,y-r*0.4,2,x,y,r);tg.addColorStop(0,"rgba(140,214,100,1)");tg.addColorStop(1,"rgba(36,110,62,1)");ctx.fillStyle=tg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();});
   // the village: flat roofs of earth brick, each with its shadow; a few domes
   BA_HOUSES.forEach(([x,y,w,h],i)=>{ctx.fillStyle="rgba(50,34,22,0.34)";ctx.fillRect(x+6,y+7,w,h);const hg=ctx.createLinearGradient(x,y,x+w,y+h);hg.addColorStop(0,"rgba(232,196,150,1)");hg.addColorStop(1,"rgba(196,154,110,1)");ctx.fillStyle=hg;ctx.fillRect(x,y,w,h);
     ctx.strokeStyle="rgba(120,86,58,0.6)";ctx.lineWidth=2;ctx.strokeRect(x+3,y+3,w-6,h-6);});
@@ -2087,13 +2113,13 @@ const ba_ys=x=>ba_lin(BA_SURF,x),ba_yt=x=>770+(x-250)*0.0255,ba_yw=x=>x<250?640-
 const BA_TH=34,BA_XM=250,BA_XO=1440,BA_SH=(()=>{const S=[];for(let x=BA_XM;x<BA_XO-60;x+=100)S.push(x);return S;})();
 // the sky and the far ridges over the section; o.warm (0..1) warms it, o.dusk (0..1) darkens it towards evening
 function ba_secSky(ctx,o){o=o||{};const wm=o.warm||0,dk=o.dusk||0,X0=-1400,X1=3300,g=ctx.createLinearGradient(0,-600,0,840);
-  g.addColorStop(0,rgba(mix([48,80,136],[26,32,70],dk),1));g.addColorStop(0.45,rgba(mix(mix([120,150,192],[92,80,118],dk),[150,148,186],wm*0.3),1));
-  g.addColorStop(0.8,rgba(mix(mix([226,214,200],[200,132,108],dk),[250,206,162],wm),1));g.addColorStop(1,rgba(mix(mix([246,228,200],[216,150,110],dk),[255,216,170],wm),1));
+  g.addColorStop(0,rgba(mix([28,92,184],[20,36,100],dk),1));g.addColorStop(0.45,rgba(mix(mix([96,164,226],[110,86,160],dk),[140,170,220],wm*0.3),1));
+  g.addColorStop(0.66,rgba(mix(mix([160,210,236],[160,104,140],dk),[236,214,196],wm*0.4),1));g.addColorStop(0.8,rgba(mix(mix([226,214,200],[200,132,108],dk),[250,206,162],wm),1));g.addColorStop(1,rgba(mix(mix([246,228,200],[216,150,110],dk),[255,216,170],wm),1));
   ctx.fillStyle=g;ctx.fillRect(X0,-900,X1-X0,1900);
   // the low sun's light over the plain, to the right
   glow(ctx,2400,620,760,mix([255,216,166],[255,160,110],dk),0.32);
   // two ranges far off, pale with distance; they reach down behind the ground, so no sky shows under them
-  [[0.5,[190,172,172],-70,0],[0.72,[164,134,124],50,1]].forEach(([k,c,dy,i])=>{ctx.fillStyle=rgba(mix(mix(c,[226,170,140],wm*0.35),[90,70,90],dk*0.5),k);ctx.beginPath();ctx.moveTo(X0,1400);
+  [[0.5,[134,170,208],-70,0],[0.72,[104,138,184],50,1]].forEach(([k,c,dy,i])=>{ctx.fillStyle=rgba(mix(mix(c,[226,170,140],wm*0.35),[64,60,124],dk*0.5),k);ctx.beginPath();ctx.moveTo(X0,1400);
     for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,440+dy+Math.sin(x*0.0019+i*2.1)*44+Math.sin(x*0.0061+i*0.7)*15+Math.max(0,(300-x)*0.22));ctx.lineTo(X1,1400);ctx.closePath();ctx.fill();});}
 // the cut-away ground, the groundwater, the tunnel and its shafts. o.flow (0..1): how far the water has run down the tunnel; or
 // o.water, the stretches of tunnel that hold water, as [[x0, x1], ...] (a cave-in stops it, and what's below drains away);
@@ -2102,7 +2128,7 @@ function ba_secSky(ctx,o){o=o||{};const wm=o.warm||0,dk=o.dusk||0,X0=-1400,X1=33
 function ba_section(ctx,t,o){o=o||{};const X0=-1400,X1=3300;
   // the ground in cut: a warm, dark earth, with strata
   ctx.save();ctx.beginPath();ctx.moveTo(X0,ba_ys(X0));for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x));ctx.lineTo(X1,1900);ctx.lineTo(X0,1900);ctx.closePath();
-  const eg=ctx.createLinearGradient(0,300,0,1300);eg.addColorStop(0,"rgba(132,92,62,1)");eg.addColorStop(0.35,"rgba(96,64,44,1)");eg.addColorStop(1,"rgba(48,32,24,1)");ctx.fillStyle=eg;ctx.fill();ctx.clip();
+  const eg=ctx.createLinearGradient(0,300,0,1300);eg.addColorStop(0,"rgba(152,100,62,1)");eg.addColorStop(0.35,"rgba(104,66,46,1)");eg.addColorStop(1,"rgba(28,30,56,1)");ctx.fillStyle=eg;ctx.fill();ctx.clip();
   // a sandy band along the surface, then layers of earth and gravel that follow the ground's slope, with stones in them
   ctx.beginPath();ctx.moveTo(X0,ba_ys(X0)-4);for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x)-4);for(let x=X1;x>=X0;x-=40)ctx.lineTo(x,ba_ys(x)+30);ctx.closePath();ctx.fillStyle="rgba(196,150,100,0.42)";ctx.fill();
   for(let i=0;i<18;i++){const d=58+i*40+hash(i,716)*14,k=hash(i,717);ctx.strokeStyle="rgba(255,226,180,"+(0.025+0.04*k)+")";ctx.lineWidth=2+k*5;ctx.beginPath();
@@ -2110,14 +2136,14 @@ function ba_section(ctx,t,o){o=o||{};const X0=-1400,X1=3300;
   for(let i=0;i<170;i++){const x=hash(i,711)*3200-600,y=ba_ys(x)+26+hash(i,712)*760,r=2+hash(i,713)*6;ctx.fillStyle="rgba("+(hash(i,714)>0.5?"58,38,26,":"176,134,98,")+(0.22+0.3*hash(i,715))+")";ctx.beginPath();ctx.ellipse(x,y,r*1.4,r,hash(i,719)*3,0,TAU);ctx.fill();}
   // the groundwater: earth soaked with it, from the mountain down to where its top passes under the tunnel
   const wl=o.wet==null?1:o.wet;ctx.beginPath();ctx.moveTo(X0,ba_yw(X0));for(let x=X0;x<=1500;x+=30)ctx.lineTo(x,ba_yw(x));ctx.lineTo(1500,1900);ctx.lineTo(X0,1900);ctx.closePath();
-  const wg=ctx.createLinearGradient(0,600,0,1100);wg.addColorStop(0,rgba(BA_WATER,0.30*wl+0.06));wg.addColorStop(1,rgba([40,90,140],0.45*wl+0.1));ctx.fillStyle=wg;ctx.fill();
+  const wg=ctx.createLinearGradient(0,600,0,1100);wg.addColorStop(0,rgba(BA_WATER,0.30*wl+0.06));wg.addColorStop(1,rgba([20,96,180],0.5*wl+0.1));ctx.fillStyle=wg;ctx.fill();
   ctx.fillStyle=rgba([170,220,255],0.22*wl);for(let i=0;i<120;i++){const x=hash(i,721)*1900-400,y=ba_yw(x)+14+hash(i,722)*360;ctx.beginPath();ctx.arc(x,y,1.6+hash(i,723)*1.6,0,TAU);ctx.fill();}
   ctx.strokeStyle=rgba(BA_WATER,0.55*wl+0.15);ctx.lineWidth=2.5;ctx.setLineDash([12,10]);ctx.beginPath();for(let x=X0;x<=1500;x+=30)x===X0?ctx.moveTo(x,ba_yw(x)):ctx.lineTo(x,ba_yw(x));ctx.stroke();ctx.setLineDash([]);
   // the shafts: from the tunnel up to the surface; the mother well a little wider
-  BA_SH.forEach((x,i)=>{const w=i===0?12:8,ys=ba_ys(x),yt=ba_yt(x);ctx.fillStyle="rgba(22,14,10,0.96)";ctx.fillRect(x-w/2,ys,w,yt-ys);
+  BA_SH.forEach((x,i)=>{const w=i===0?12:8,ys=ba_ys(x),yt=ba_yt(x);ctx.fillStyle="rgba(14,12,24,0.96)";ctx.fillRect(x-w/2,ys,w,yt-ys);
     if(o.hiSh>0.01){ctx.fillStyle=rgba(BAC,0.35*o.hiSh);ctx.fillRect(x-w/2-2,ys,w+4,yt-ys);}});
   // the tunnel: a dark channel, BA_TH high (a stooping digger's height at the village's scale), sloping gently to the outlet
-  ctx.fillStyle="rgba(30,20,15,0.97)";ctx.beginPath();ctx.moveTo(BA_XM-8,ba_yt(BA_XM)-BA_TH);ctx.lineTo(BA_XO,ba_yt(BA_XO)-BA_TH);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+2);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+8);ctx.lineTo(BA_XO,ba_yt(BA_XO)+3);ctx.lineTo(BA_XM-8,ba_yt(BA_XM)+3);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(16,14,28,0.97)";ctx.beginPath();ctx.moveTo(BA_XM-8,ba_yt(BA_XM)-BA_TH);ctx.lineTo(BA_XO,ba_yt(BA_XO)-BA_TH);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+2);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+8);ctx.lineTo(BA_XO,ba_yt(BA_XO)+3);ctx.lineTo(BA_XM-8,ba_yt(BA_XM)+3);ctx.closePath();ctx.fill();
   if(o.hiT>0.01){ctx.strokeStyle=rgba(BAC,0.7*o.hiT);ctx.lineWidth=2.5;ctx.stroke();}
   // the water in it: seeping in along the wet reach, then running on its floor towards the outlet, in each stretch that holds it
   const fl=o.flow==null?1:o.flow,xb=o.block==null?BA_XO+40:o.block,WS=o.water||[[BA_XM,lerp(BA_XM,BA_XO+30,fl)]];
@@ -2489,10 +2515,10 @@ function b4_ladder(ctx,t,L){const op=L.open||0,own=L.own||0,dp=L.deep||0;
 // cup sits lower as it fills, until it fills and sinks (o.sink, 0..1), with a few bubbles
 const B4_BX0=852,B4_BX1=1268,B4_BTOP=720,B4_BBOT=900,B4_WL=760,B4_CUPX=968,B4_CUPR=58,B4_CUPD=46;
 function b4_clock(ctx,t,o){o=o||{};const fill=clamp(o.fill||0,0,1),sk=clamp(o.sink||0,0,1);
-  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#2b2233");g.addColorStop(0.5,"#6e5246");g.addColorStop(0.62,"#4d3a2e");g.addColorStop(1,"#211812");ctx.fillStyle=g;ctx.fillRect(-300,-300,W+600,H+600);
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#1c2148");g.addColorStop(0.5,"#7a5070");g.addColorStop(0.62,"#4a3a5a");g.addColorStop(1,"#1a1428");ctx.fillStyle=g;ctx.fillRect(-300,-300,W+600,H+600);
   glow(ctx,1500,380,760,[255,186,120],0.2);
   // the ground, and the ledge the basin stands on
-  ctx.fillStyle="rgba(40,28,20,0.6)";ctx.fillRect(-300,1010,W+600,300);
+  ctx.fillStyle="rgba(28,22,40,0.6)";ctx.fillRect(-300,1010,W+600,300);
   ctx.fillStyle="#5d4a3b";ctx.fillRect(820,912,480,200);ctx.fillStyle="#76604d";ctx.fillRect(808,900,504,22);
   ctx.strokeStyle="rgba(255,220,180,0.14)";ctx.lineWidth=2;for(let k=0;k<4;k++){ctx.beginPath();ctx.moveTo(820,950+k*40);ctx.lineTo(1300,950+k*40+((k%2)?4:-4));ctx.stroke();}
   // the basin, in section: its walls and floor, and the water in it
@@ -2863,8 +2889,8 @@ scene("pain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
     for(let k=0;k<5;k++){const x=150+k*120,y=720,out=k===2&&t>tDn,bad=k===4;b4_meter(ctx,x,y,{out});
       // its reading, up to read meters
       if(!(k===2&&t>tDn)){const u=clamp((t-tSe-k*0.12)/1.2,0,1);if(u>0&&u<1){const px=lerp(x,B4_RX(0)+B4_RW/2,u),py=lerp(y-46,B4_RY+B4_RH,u);glow(ctx,px,py,22,bad&&t>tFl-0.6?BA_RED:BA_NET,0.8);}}
-      if(out)withA(ctx,fin(t,tDn,0.4),()=>T(ctx,"none",x,y+80,{w:700,size:28,align:"center",color:rgba(BA_RED,1)}));
-      if(bad&&t>tFl)withA(ctx,fin(t,tFl,0.4),()=>T(ctx,"fails",x,y+80,{w:700,size:28,align:"center",color:rgba(BA_RED,1)}));}
+      if(out)withA(ctx,fin(t,tDn,0.4),()=>T(ctx,"none",x,y+80,{w:700,size:28,align:"center",color:rgba(mix(BA_RED,[255,255,255],0.22),1)}));
+      if(bad&&t>tFl)withA(ctx,fin(t,tFl,0.4),()=>T(ctx,"fails",x,y+80,{w:700,size:28,align:"center",color:rgba(mix(BA_RED,[255,255,255],0.22),1)}));}
     if(t>tEs)arrive(ctx,1050,520,t,tEs,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(AMBER,0.95);ctx.lineWidth=3;rr(ctx,940,482,220,76,10);ctx.stroke();ctx.restore();T(ctx,"an estimate",1050,530,{w:700,size:28,align:"center",color:rgba(AMBER,1)});
       arrowTo(ctx,1050,482,B4_RX(2)+B4_RW/2,B4_RY+B4_RH+6,AMBER,0.9,{p:clamp((t-tEs-0.2)/0.6,0,1),lw:2.5,head:12});},{dy:10});});
   // a household's bills: estimate after estimate, then one that caught up all at once

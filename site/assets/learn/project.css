@@ -1,6 +1,6 @@
-/* Learning Data: the example project's page (dbt-project/). First a map of the project to play with: the four folders, one
-   question followed in eleven steps, lenses that show what attaches where, each layer with one learner, and a shield on each
-   handoff; then what dbt alone can't answer, and the open standards line by line. Drawn for build_series.py's px_*() and made to
+/* Learning Data: the example project's page (dbt-project/). First a map of the project to play with: the four folders, a goal
+   and its question followed in twelve steps, lenses that show what attaches where, each layer with one learner, and a shield on
+   each handoff; then what dbt alone can't answer, and the open standards line by line. Drawn for build_series.py's px_*() and made to
    move by project.js; without the script (no .is-live), the map is a still picture and every panel reads in order.
    Each folder has its colour: --ln for its words and lines, --lb a wash behind them, --lf a fill, --lo the words on that fill. */
 .px-in{--ln:#b0264f;--lb:rgba(176,38,79,.09);--lf:#b0264f;--lo:#fff}
@@ -178,14 +178,14 @@
   border:0;background:none;color:var(--fg);text-align:left;cursor:pointer;transition:opacity .45s,transform .45s cubic-bezier(.2,1.25,.4,1),box-shadow .45s,border-color .45s,filter .45s}
 .px-app.is-tall .px-nd{left:calc(var(--X) * 1px);top:calc(var(--Y) * 1px);width:calc(var(--W) * 1px);height:calc(var(--H) * 1px)}
 .px-nd:focus-visible,.px-shd:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.px-qn,.px-nc,.px-st,.px-dash{border-radius:14px;border:1px solid rgba(var(--lr),.4);
+.px-gc,.px-qn,.px-nc,.px-st,.px-dash{border-radius:14px;border:1px solid rgba(var(--lr),.4);
   background:linear-gradient(180deg,rgba(20,31,56,.97),rgba(11,18,35,.97));box-shadow:0 12px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)}
 .px-nd:hover{border-color:rgba(var(--lr),.85);transform:translateY(-2px)}
 .px-ic{display:block;width:18px;height:18px;flex:none}
-.px-no{display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;border:1px solid rgba(var(--lr),.55);font-style:normal;font-size:11px;font-weight:800;line-height:1;color:var(--ln);background:#0b1222}
+.px-num{display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;border:1px solid rgba(var(--lr),.55);font-style:normal;font-size:11px;font-weight:800;line-height:1;color:var(--ln);background:#0b1222}
 /* a piece's states: the step it's on, the steps lit so far, the rest waiting; a lens fades what it says nothing about */
 .px-nd.is-on{border-color:var(--lf);box-shadow:0 0 0 2px var(--lf),0 0 34px rgba(var(--lr),.55),0 16px 34px rgba(0,0,0,.45);transform:scale(1.05)}
-.px-nd.is-on .px-no{background:var(--lf);border-color:var(--lf);color:var(--lo)}
+.px-nd.is-on .px-num{background:var(--lf);border-color:var(--lf);color:var(--lo)}
 .px-nd.is-wait{opacity:.38;filter:saturate(.5)}
 .px-nd.is-off{opacity:.3;filter:saturate(.35)}
 .px-app.is-hl .px-nd:not(.is-near):not(.is-on){opacity:.4}
@@ -195,7 +195,7 @@
 .px-qn{display:grid;grid-template-columns:minmax(0,1fr) 74px;grid-template-rows:auto 1fr;gap:6px 14px;padding:12px 12px 12px 16px;border-width:1.5px}
 .px-qk{grid-column:1;display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ln)}
 .px-qk .px-ic{width:20px;height:20px}
-.px-qk .px-no{margin-left:auto}
+.px-qk .px-num{margin-left:auto}
 .px-qq{grid-column:1;font-size:14.5px;font-weight:700;line-height:1.34;color:#fff}
 .px-qa{grid-column:2;grid-row:1/3;display:grid;justify-items:center;align-content:center;gap:2px;border-radius:12px;border:1.5px dashed rgba(95,224,160,.55);background:rgba(95,224,160,.06);text-align:center;transition:border-color .4s,box-shadow .4s}
 .px-qa small{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -206,6 +206,16 @@
 .px-app.is-answered .px-qa{border-style:solid;border-color:#5fe0a0;box-shadow:0 0 26px rgba(95,224,160,.4)}
 .px-app.is-answered .px-qa b{animation:px-pop .6s ease-out}
 .px-app.is-tall .px-qn{grid-template-columns:minmax(0,1fr) 70px;gap:6px 10px;padding:11px 10px 11px 13px}.px-app.is-tall .px-qq{font-size:14.5px;line-height:1.34}.px-app.is-tall .px-qa b,.px-app.is-tall .px-qa i{font-size:30px}
+/* the goal, above its question: Goal–Question–Metric's first word */
+.px-gc{display:flex;flex-direction:column;justify-content:center;gap:3px;padding:7px 12px;border-width:1.5px}
+.px-gck{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.2;color:var(--ln)}
+.px-gck .px-ic{width:18px;height:18px}
+.px-gck .px-num{margin-left:auto}
+.px-gct{font-size:13.5px;font-weight:800;line-height:1.22;color:#fff}
+.px-app.is-tall .px-gct{font-size:14.5px;line-height:1.26}
+.px-gc .px-bdg{top:-13px;left:auto;right:12px;transform:none;max-width:220px}
+/* wide, the goal sits right of the initiatives' name: a longer name wraps before it reaches the goal */
+.px-app:not(.is-tall) .px-zone.px-in .px-zl span{max-width:166px;white-space:normal}
 /* the architecture's and governance's cards */
 .px-nc{display:flex;flex-direction:column;gap:2px;padding:9px 10px}
 .px-ndi{display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;padding-bottom:6px}
@@ -217,10 +227,10 @@
 .px-app.is-tall .px-nc .px-ndi{display:contents}
 .px-app.is-tall .px-nc .px-ic{grid-column:1;grid-row:1;width:26px;height:26px;padding:4px}
 .px-app.is-tall .px-nc .px-ndk{grid-column:2;grid-row:1}
-.px-app.is-tall .px-nc .px-no{grid-column:3;grid-row:1}
+.px-app.is-tall .px-nc .px-num{grid-column:3;grid-row:1}
 .px-app.is-tall .px-nc .px-ndt{grid-column:1/-1;grid-row:2;align-self:start;font-size:13.5px}
 .px-app.is-tall .px-nc .px-ndm{grid-column:1/-1;grid-row:3;align-self:start}
-/* the dbt project's label: step 8 */
+/* the dbt project's label: step 9 */
 .px-zlb{display:flex;align-items:center;gap:10px;padding:0 10px;border-radius:12px;color:var(--ln)}
 .px-zlb span{display:grid;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
 .px-zlb small{font-size:12.5px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
@@ -228,7 +238,7 @@
 .px-zlb.is-on{background:rgba(var(--lr),.16);transform:none}
 .px-app.is-tall .px-zlb{gap:8px;padding:0 4px}
 .px-app.is-tall .px-zlb small{display:none}
-.px-app.is-tall .px-zlb{gap:6px}.px-app.is-tall .px-zlb b{font-size:18px}.px-app.is-tall .px-zlb span{font-size:11px;letter-spacing:0}.px-app.is-tall .px-zlb .px-no{margin-left:auto}
+.px-app.is-tall .px-zlb{gap:6px}.px-app.is-tall .px-zlb b{font-size:18px}.px-app.is-tall .px-zlb span{font-size:11px;letter-spacing:0}.px-app.is-tall .px-zlb .px-num{margin-left:auto}
 /* the seven layers: stations on the line rows flow along */
 .px-st{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 5px 6px;text-align:center;border-radius:16px;background:linear-gradient(180deg,rgba(20,34,62,.9),rgba(11,19,38,.9))}
 .px-sti{display:grid;place-items:center;width:30px;height:30px;margin-bottom:3px;border-radius:50%;border:1px solid rgba(var(--lr),.55);background:rgba(var(--lr),.16);color:var(--ln)}
@@ -246,14 +256,14 @@
 .px-gate{display:grid;place-items:center;border-radius:50%;border:1.5px solid rgba(95,224,160,.7);background:#08160f;color:#5fe0a0;box-shadow:0 0 0 4px rgba(95,224,160,.1)}
 .px-gate .px-ic{width:15px;height:15px}
 .px-gtl{position:absolute;left:50%;top:calc(100% + 40px);transform:translateX(-50%);font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5fe0a0;white-space:nowrap}
-.px-gate .px-no{position:absolute;left:50%;top:-27px;transform:translateX(-50%);--lr:95,224,160;--ln:#5fe0a0;--lf:#5fe0a0;--lo:#03140b}
+.px-gate .px-num{position:absolute;left:50%;top:-27px;transform:translateX(-50%);--lr:95,224,160;--ln:#5fe0a0;--lf:#5fe0a0;--lo:#03140b}
 .px-gate.is-on{--lr:95,224,160;--lf:#5fe0a0}
 .px-app.is-tall .px-gtl{left:calc(100% + 30px);top:50%;transform:translateY(-50%)}
-.px-app.is-tall .px-gate .px-no{left:calc(100% + 4px);top:3px;transform:none}
+.px-app.is-tall .px-gate .px-num{left:calc(100% + 4px);top:3px;transform:none}
 /* the census dashboard: the answer */
 .px-dash{display:flex;flex-direction:column;gap:6px;padding:10px 12px}
 .px-dash .px-ndk{display:flex;justify-content:space-between;gap:6px}
-.px-dash>.px-no{position:absolute;top:8px;right:10px}
+.px-dash>.px-num{position:absolute;top:8px;right:10px}
 .px-dsb{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:end;column-gap:10px}
 .px-bars{grid-row:1/3;display:flex;align-items:flex-end;gap:5px;height:40px}
 .px-bars i{flex:1;height:calc(var(--v) * 100%);border-radius:3px 3px 1px 1px;background:linear-gradient(#a8d0ff,#4d8fe8);transform-origin:bottom}
@@ -277,7 +287,7 @@
 .px-shd:hover{transform:scale(1.12)}
 .px-shd[aria-pressed=true]{border-color:#ff8a7e;background:#2a0b0b;color:#ff8a7e;box-shadow:0 0 0 5px rgba(255,138,126,.2),0 0 24px rgba(255,138,126,.5);animation:px-shake .5s}
 
-/* the play bar: play, step, and a scrubber along the eleven steps */
+/* the play bar: play, step, and a scrubber along the twelve steps */
 .px-foot{grid-area:foot;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;grid-template-areas:"play prev scrub next" "count count count count";align-items:center;gap:4px 10px;padding:10px 14px 12px;border-top:1px solid var(--line);background:#0a1121}
 .px-play{grid-area:play;position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 13px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);font-size:15px;font-weight:800;line-height:1.3;cursor:pointer;overflow:hidden;box-shadow:0 0 24px rgba(106,168,255,.35);transition:transform .2s,box-shadow .2s}
 .px-play:hover{transform:translateY(-1px);box-shadow:0 0 34px rgba(106,168,255,.5)}
@@ -329,6 +339,40 @@
 .px-art .px-lane{color:var(--ln)}
 .px-say>p:not(.px-k){margin:0 0 12px}
 .px-pass{padding:10px 12px;border-radius:10px;background:var(--lb);border-left:3px solid var(--ln)}
+/* the goal's tree, in its panel: an outline from the goal's measure down, each measure saying how it makes the one above */
+.px-gqt{margin:0 0 12px;padding:12px 12px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025)}
+.px-gqt figcaption{margin:0 0 6px;font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.px-gql{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0 0 10px;padding:0;list-style:none;font-size:13px;line-height:1.3;color:var(--muted)}
+.px-gql li{display:flex;align-items:center;gap:6px}
+.px-gql li i{flex:none;width:11px;height:11px;border-radius:3px;border:1.5px solid var(--ln);background:var(--lb)}
+.px-gql .px-gqx i{border:1.5px dashed rgba(201,214,234,.6);background:none}
+.px-gql-f span{font-weight:800;color:#fff}
+.px-gqu,.px-gqu ul{margin:0;padding:0;list-style:none}
+.px-gqu ul{margin:2px 0 0 9px;padding-left:11px;border-left:1px solid rgba(255,255,255,.16)}
+.px-gqu li{margin:3px 0}
+.px-gqs{display:inline-grid;place-items:center;width:18px;height:18px;margin-right:6px;border-radius:5px;background:rgba(255,255,255,.1);font-size:13px;font-weight:800;line-height:1;color:#fff;vertical-align:middle}
+.px-gqo::before{content:"";width:11px;border-top:2px dotted #e6edf8}
+.px-gql .px-gqo{margin:0}
+.px-gqn{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 8px;max-width:calc(100% - 26px);padding:2px 8px;border-radius:8px;font-size:14px;line-height:1.3;color:#c9d4e6;text-decoration:none;vertical-align:middle;overflow-wrap:anywhere}
+.px-gqx>.px-gqn{border:1px dashed rgba(201,214,234,.32)}
+.px-ok>.px-gqn,.px-in>.px-gqn{border:1.5px solid var(--ln);background:var(--lb);color:#fff;font-weight:700}
+a.px-gqn{cursor:pointer;transition:background-color .2s,box-shadow .2s}
+a.px-gqn:hover{background:rgba(var(--lr),.26)}
+a.px-gqn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+a.px-gqn[aria-current=true]{box-shadow:0 0 0 2px var(--lf),0 0 18px rgba(var(--lr),.45)}
+.px-gqp{flex:none;padding:3px 6px;border-radius:999px;background:var(--lf);color:var(--lo);font:700 11px/1 var(--mono);letter-spacing:0}
+.px-gqt .px-gqh{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.px-gqds{margin:0 0 12px}
+.px-gqd{padding:10px 12px;border-radius:10px;background:var(--lb);border-left:3px solid var(--ln)}
+.px-gqd+.px-gqd{margin-top:10px}
+.px-app.is-live .px-gqd+.px-gqd{margin-top:0}
+.px-gqd .px-gqm{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin:0 0 6px;font-size:13px;line-height:1.35;color:var(--muted)}
+.px-gqd .px-gqq{margin:0 0 8px;font-size:15px;font-weight:700;line-height:1.38;color:#fff}
+.px-gqd dl{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr);gap:6px 12px;margin:0;font-size:13.5px;line-height:1.4}
+.px-gqd dt{font-weight:700;color:var(--muted)}
+.px-gqd dd{margin:0;color:#dfe7f3}
+.px-gqd code{font-size:12.5px}
+.px-gqds .px-gqy{margin:10px 0 0;font-size:13.5px;line-height:1.4;color:var(--muted)}
 .px-pass b{display:block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ln)}
 .px-more{margin:12px 0 14px}
 .px-more a,.px-lgo{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(106,168,255,.5);background:rgba(106,168,255,.1);color:#cfe3ff;font-size:14px;font-weight:700;text-decoration:none;transition:background-color .2s}
@@ -483,6 +527,10 @@
 .px-cnt span{grid-column:1;font-size:13px;color:var(--muted)}
 .px-cnt em{grid-column:2;grid-row:1/3;align-self:center;font-style:normal;font-size:13px;font-weight:800;color:var(--muted);text-align:right}
 .px-cnt .px-yes em{color:var(--px-ok)}
+/* where the learner's box is narrow (a phone, the panel beside the map), a row's verdict goes under its name, so a long verdict
+   never squeezes the name into a column of single words */
+.px-see{container-type:inline-size}
+@container (max-width:520px){.px-cnt li{grid-template-columns:minmax(0,1fr)}.px-cnt em{grid-column:1;grid-row:auto;text-align:left}}
 
 /* ---------------------------------------------------------------- 2. what dbt alone can't tell you */
 .px-cx{margin-top:20px}

@@ -23,7 +23,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [When strategy moves](https://data.learn-all.org/enterprise-architecture/when-strategy-moves/) | Change, owners and contracts | 7 min | 11 | 3 questions | [script](10-when-strategy-moves/script.md) · [source](10-when-strategy-moves/source/README.md) |
 | [A map people and agents can read](https://data.learn-all.org/enterprise-architecture/a-map-people-and-agents-can-read/) | Keeping the map | 8½ min | 12 | 3 questions | [script](11-a-map-people-and-agents-can-read/script.md) · [source](11-a-map-people-and-agents-can-read/source/README.md) |
 
-For the whole series, on the site: [12 labs](https://data.learn-all.org/enterprise-architecture/labs/) and [26 scenarios](https://data.learn-all.org/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
+For the whole series, on the site: [13 labs](https://data.learn-all.org/enterprise-architecture/labs/) and [26 scenarios](https://data.learn-all.org/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
 <!-- /films -->
 
 ## The look and the sound
@@ -40,6 +40,7 @@ Like the other series, each film is generated from code. The series keeps what's
 | File | What it holds |
 |---|---|
 | `shared/src/ea.js` | The series' components: its colours, title and end cards, the six layers (`slab`, `layerStack`), the wall, canvases and sticky notes (`wallBg`, `vpCanvas`, `bmCanvas`, `sticky`, `statusDot`), glass elements of the model (`archEl`, with ArchiMate's glyph for each kind, `archGlyph`, value streams' chevron, actors' stick figure, contracts, resources, plateaus and gaps included), the data rule card (`ruleCard`), labelled canvases to pin notes into (`vpCanvas2`, `VPC.where`, `BMC_AT`), and a camera that moves in on part of a picture (`focus`, `focusZ`) |
+| `shared/src/colour.js` | The colour of the five series on enterprise architecture (17 November 2026): the wall in slate blue under a cool light, scenes in the past on a night blue, dates on blue glass, and deeper colours for the six layers and each series. The dark ground behind the diagrams stays as the whole site draws it. All five series' builds bundle it right after `ea.js`; the master data films, which borrow `ea.js`, keep its first colours |
 | `shared/tools/legible.py` | Checks that every piece of text on screen is large enough to read on a phone, frame by frame; text marked as decoration is skipped |
 | `shared/src/people.js` | The series' people: Tomás Herrera, Grace Achieng, Farah Siddiqui and Ama Owusu, drawn like the cast of *When things go wrong* |
 | `shared/src/page.html` | The standalone player page |

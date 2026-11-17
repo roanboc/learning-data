@@ -22,7 +22,7 @@
   "say": [
     [
       "\\bJoseon\\b",
-      "Joesun"
+      "Choh-sun"
     ],
     [
       "\\bJeonju\\b",
@@ -35,6 +35,10 @@
     [
       "\\bNoor\\b",
       "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
     ]
   ]
 }

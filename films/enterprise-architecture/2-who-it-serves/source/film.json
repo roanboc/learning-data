@@ -7,15 +7,15 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["edison", "knew", 1.0],
+  "poster": ["edison", "knew", 0.37],
   "say": [
     [
       "\\bTomás's\\b",
-      "Toh-mahs's"
+      "Toh-mahss's"
     ],
     [
       "\\bTomás\\b",
-      "Toh-mahs"
+      "Toh-mahss"
     ],
     [
       "\\bFarah\\b",

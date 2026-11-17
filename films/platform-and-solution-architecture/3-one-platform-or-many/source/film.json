@@ -8,10 +8,10 @@
     "scenes.js"
   ],
   "story": ["tolls"],
-  "poster": ["tolls", "kept", 5.0],
+  "poster": ["tolls", "count", 4.07],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bAma's\\b", "Ah-mah's"],
     ["\\bAma\\b", "Ah-mah"],
     ["\\bRavi's\\b", "Rah-vee's"],

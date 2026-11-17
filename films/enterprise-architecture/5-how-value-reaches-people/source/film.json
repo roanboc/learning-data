@@ -7,15 +7,15 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["lunch", "detail", 1.0],
+  "poster": ["lunch", "kitchen", 4.6],
   "say": [
     [
       "\\bTomás's\\b",
-      "Toh-mahs's"
+      "Toh-mahss's"
     ],
     [
       "\\bTomás\\b",
-      "Toh-mahs"
+      "Toh-mahss"
     ],
     [
       "\\bFarah\\b",

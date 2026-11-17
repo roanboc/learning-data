@@ -54,152 +54,152 @@ Estas películas toman de la arquitectura para dirigir los servicios de un equip
 00:02:10.829 --> 00:02:14.666
 Junio de 2027, en una universidad, dentro de un año.
 
-00:02:16.366 --> 00:02:24.895
+00:02:16.366 --> 00:02:24.911
 Helena Novak, la gestora de datos, y Noor Rahman, la arquitecta de datos, escriben en una página la forma preferida de recibir datos.
 
-00:02:26.595 --> 00:02:31.472
+00:02:26.611 --> 00:02:31.488
 La fuente publica sus datos como un producto gobernado, con un dueño y un contrato.
 
-00:02:33.172 --> 00:02:36.437
+00:02:33.188 --> 00:02:36.453
 Envía cada cambio como un evento, en el momento en que ocurre.
 
-00:02:38.137 --> 00:02:41.947
+00:02:38.153 --> 00:02:41.963
 Y dice qué se borró, para que un borrado llegue a cada copia.
 
-00:02:43.647 --> 00:02:51.027
+00:02:43.663 --> 00:02:51.043
 Los contratos y los borrados tienen sus propias películas: Mover es fácil, acordar es el trabajo, y Borrado es borrado.
 
-00:02:52.927 --> 00:02:58.647
+00:02:52.943 --> 00:02:58.663
 Sam Okafor, que lleva la plataforma de datos, enumera los sistemas de los que el equipo toma datos.
 
-00:03:00.147 --> 00:03:02.002
+00:03:00.163 --> 00:03:02.018
 Los sensores de las aulas pueden hacerlo todo.
 
-00:03:03.502 --> 00:03:07.843
+00:03:03.518 --> 00:03:07.859
 La nómina, en un sistema de 2004, envía un archivo cada noche.
 
-00:03:09.343 --> 00:03:16.440
+00:03:09.359 --> 00:03:16.456
 El horario nuevo, comprado como servicio en 2026, puede dar sus cambios, pero no puede decir qué se borró.
 
-00:03:17.940 --> 00:03:21.940
+00:03:17.956 --> 00:03:21.956
 Y la Facultad de Salud reserva sus nueve laboratorios clínicos en una hoja de cálculo.
 
-00:03:23.640 --> 00:03:27.322
+00:03:23.656 --> 00:03:27.338
 Los sistemas viejos no llegan a la forma preferida, y los nuevos tampoco.
 
-00:03:30.022 --> 00:03:35.155
+00:03:30.038 --> 00:03:35.171
 Así que la página tiene una segunda mitad: un árbol de decisión, para los proveedores que no pueden cumplirla.
 
-00:03:36.855 --> 00:03:40.659
+00:03:36.871 --> 00:03:40.675
 Primero: ¿puede enviar cada cambio como un evento? Entonces usa los eventos.
 
-00:03:42.559 --> 00:03:47.172
+00:03:42.575 --> 00:03:47.188
 Si no, ¿puede dar sus cambios desde un momento dado? Entonces tráelos cada hora.
 
-00:03:49.072 --> 00:03:56.514
+00:03:49.088 --> 00:03:56.530
 ¿Puede decir qué se borró? Si no, compara cada noche su lista completa con la nuestra. Lo que falta en su lista se borró.
 
-00:03:58.614 --> 00:04:02.896
+00:03:58.630 --> 00:04:02.912
 ¿Solo un archivo? Toma el archivo entero cada noche y compáralo igual.
 
-00:04:04.796 --> 00:04:09.302
+00:04:04.812 --> 00:04:09.318
 ¿Una hoja de cálculo? Un referente de datos la pasa a una tabla gobernada, con un dueño.
 
-00:04:11.202 --> 00:04:16.045
+00:04:11.218 --> 00:04:16.061
 Los primeros caminos tienen nombre: integración por eventos y captura de cambios de datos.
 
-00:04:17.745 --> 00:04:22.986
+00:04:17.761 --> 00:04:23.002
 Cada rama termina en una recomendación, y cada camino mantiene un contrato con un dueño.
 
-00:04:24.686 --> 00:04:29.625
+00:04:24.702 --> 00:04:29.641
 El árbol se guarda como texto en el repositorio del equipo, y su imagen se dibuja a partir de él.
 
-00:04:32.325 --> 00:04:35.839
+00:04:32.341 --> 00:04:35.855
 Lunes 14 de junio: Sam prueba el horario nuevo.
 
-00:04:37.339 --> 00:04:43.195
+00:04:37.355 --> 00:04:43.211
 Mei Tanaka, de la oficina de registro, cancela una clase. Los cambios de cada hora nunca lo mencionan.
 
-00:04:45.095 --> 00:04:47.360
+00:04:45.111 --> 00:04:47.376
 Así que en la plataforma, la clase sigue reservada.
 
-00:04:49.060 --> 00:04:57.192
+00:04:49.076 --> 00:04:57.208
 Graham Ellis, director de Instalaciones, vería un aula reservada y vacía: un aula que parece desperdiciada, cuando siempre estuvo libre.
 
-00:04:59.092 --> 00:05:04.755
+00:04:59.108 --> 00:05:04.771
 El proveedor puede sumar los borrados a sus cambios, pero no antes de su renovación, en 2028.
 
-00:05:06.455 --> 00:05:11.871
+00:05:06.471 --> 00:05:11.887
 El árbol tiene la respuesta: los cambios cada hora, y la lista completa de reservas cada noche.
 
-00:05:13.571 --> 00:05:18.413
+00:05:13.587 --> 00:05:18.429
 Cada noche, una reserva de la plataforma que falta en la lista completa se marca como borrada.
 
-00:05:20.313 --> 00:05:23.931
+00:05:20.329 --> 00:05:23.947
 El horario nuevo entra en servicio el lunes 19 de julio.
 
-00:05:25.431 --> 00:05:35.154
+00:05:25.447 --> 00:05:35.170
 Al viernes 30 de julio, primera semana de clases, la comparación nocturna ya halló 212 reservas borradas que los cambios no mencionaron.
 
-00:05:37.054 --> 00:05:42.443
+00:05:37.070 --> 00:05:42.459
 212 horas que habrían parecido reservadas y vacías en la página de Graham quedan fuera de ella.
 
-00:05:45.143 --> 00:05:49.854
+00:05:45.159 --> 00:05:49.870
 Los sensores de las aulas siguen la forma preferida: el conteo de cada hora llega como un evento.
 
-00:05:51.554 --> 00:05:57.025
+00:05:51.570 --> 00:05:57.041
 El archivo de la nómina se toma entero cada noche y se compara, para los costos de personal eventual de Finanzas.
 
-00:05:58.725 --> 00:06:00.705
+00:05:58.741 --> 00:06:00.721
 Un camino más débil se revisa más a menudo.
 
-00:06:02.205 --> 00:06:07.819
+00:06:02.221 --> 00:06:07.835
 Si el archivo de una noche es mucho más pequeño que el de la anterior, la comparación se detiene y pregunta a una persona.
 
-00:06:09.519 --> 00:06:18.553
+00:06:09.535 --> 00:06:18.569
 El martes 24 de agosto, el archivo de la nómina llega cortado, y la revisión lo detiene antes de que 2400 empleados se den por idos.
 
-00:06:20.653 --> 00:06:27.828
+00:06:20.669 --> 00:06:27.777
 Anil Kurian, referente de datos de la Facultad de Salud, pasa la hoja de los laboratorios a una tabla gobernada, y es su dueño.
 
-00:06:29.728 --> 00:06:33.331
+00:06:29.677 --> 00:06:33.280
 Y a cada proveedor se le pide, por escrito, su siguiente paso hacia arriba.
 
-00:06:34.831 --> 00:06:44.691
+00:06:34.780 --> 00:06:44.640
 El horario: sus borrados, en la renovación de 2028. La nómina: un archivo de cambios, en su próxima mejora. Los laboratorios: al horario.
 
-00:06:47.391 --> 00:06:51.462
+00:06:47.340 --> 00:06:51.411
 El equipo eleva a sus proveedores hacia la forma preferida, paso a paso.
 
-00:06:52.962 --> 00:06:56.113
+00:06:52.911 --> 00:06:56.062
 Pero nunca retiene los datos esperando lo ideal.
 
-00:06:58.013 --> 00:07:06.085
+00:06:57.962 --> 00:07:06.034
 El jueves 30 de septiembre, la página de Graham muestra cada aula y cada laboratorio, de cuatro fuentes, por cuatro caminos.
 
-00:07:07.985 --> 00:07:11.410
+00:07:07.934 --> 00:07:11.359
 Graham no ve los caminos. Ve conteos en los que puede confiar.
 
-00:07:13.310 --> 00:07:19.216
+00:07:13.259 --> 00:07:19.165
 Y la página de Helena sigue siendo una: la forma preferida, el árbol y el siguiente paso de cada proveedor.
 
-00:07:21.916 --> 00:07:28.487
+00:07:21.865 --> 00:07:28.436
 El Gateway City llevó sus propias grúas a puertos que no tenían, y la caja les llegó años antes que sus grúas.
 
-00:07:30.387 --> 00:07:36.545
+00:07:30.336 --> 00:07:36.494
 El equipo de Helena hizo lo mismo: un camino para cada proveedor, y los conteos de Graham ciertos desde la primera semana.
 
-00:07:38.445 --> 00:07:41.321
+00:07:38.394 --> 00:07:41.270
 El lunes, escribe tu forma preferida en una página.
 
-00:07:42.821 --> 00:07:47.553
+00:07:42.770 --> 00:07:47.502
 Dibuja el árbol para los proveedores que no pueden cumplirla, cada rama con su recomendación.
 
-00:07:49.053 --> 00:07:53.465
+00:07:49.002 --> 00:07:53.414
 Pide a cada proveedor su siguiente paso hacia arriba, en su contrato o en su renovación.
 
-00:07:54.965 --> 00:07:58.298
+00:07:54.914 --> 00:07:58.247
 Revisa más a menudo los caminos más débiles, y no retengas el valor.
 
-00:07:59.998 --> 00:08:03.825
+00:07:59.947 --> 00:08:03.774
 Una forma preferida, un camino para cada proveedor, y el valor primero.

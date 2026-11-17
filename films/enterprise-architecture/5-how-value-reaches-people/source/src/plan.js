@@ -12,17 +12,17 @@ const CLOTH=[238,234,224],D5_SKIN=[[140,94,64],[120,80,56],[156,104,72],[132,88,
 /* ---------- Mumbai ---------- */
 // the sky, in screen space: a hazy morning, warmer towards the afternoon as pm goes to 1
 function d5_sky(ctx,S,pm){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);
-  g.addColorStop(0,rgba(mix([84,106,140],[86,74,104],pm),1));g.addColorStop(0.42,rgba(mix([178,170,166],[206,150,116],pm),1));g.addColorStop(0.58,rgba(mix([232,208,170],[242,176,112],pm),1));g.addColorStop(1,"#241c18");
+  g.addColorStop(0,rgba(mix([62,116,184],[78,80,140],pm),1));g.addColorStop(0.42,rgba(mix([170,192,214],[214,150,128],pm),1));g.addColorStop(0.58,rgba(mix([232,208,170],[242,176,112],pm),1));g.addColorStop(1,"#1c2030");
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);glow(ctx,lerp(1480,620,pm),lerp(300,400,pm),520,[255,236,196],0.22);}
 // the city behind: towers in the haze, far then near, a few windows lit
 function d5_skyline(ctx,pm){[[0.32,580,0],[0.62,624,1]].forEach(([fade,base,k])=>{for(let i=0;i<46;i++){const x=-1020+i*72+hash(i,60+k)*30,w=44+hash(i,61+k)*58,h=(k?60:110)+hash(i,62+k)*(k?120:190);
-    ctx.fillStyle=rgba(mix(mix([150,140,148],[104,92,98],k),[210,160,124],pm*0.3),fade);ctx.fillRect(x,base-h,w,h);
+    ctx.fillStyle=rgba(mix(mix([138,150,176],[94,100,124],k),[210,160,124],pm*0.3),fade);ctx.fillRect(x,base-h,w,h);
     if(k)for(let r=0;r<Math.floor(h/22)-1;r++)for(let c=0;c<Math.floor(w/16)-1;c++)if(hash(i*31+r*7+c,63)>0.74){ctx.fillStyle="rgba(255,226,170,0.16)";ctx.fillRect(x+6+c*16,base-h+10+r*22,7,9);}}});}
 // the ground: the railway on its bank, then the road in front
-function d5_ground(ctx){const g=ctx.createLinearGradient(0,620,0,1080);g.addColorStop(0,"#3a302a");g.addColorStop(1,"#18130f");ctx.fillStyle=g;ctx.fillRect(-1100,620,W+1500,700);
-  ctx.fillStyle="#2c2622";ctx.fillRect(-1100,700,W+1500,22);ctx.strokeStyle="rgba(150,140,130,0.45)";ctx.lineWidth=2;for(let x=-1100;x<W+400;x+=18){ctx.beginPath();ctx.moveTo(x,701);ctx.lineTo(x+8,718);ctx.stroke();}
+function d5_ground(ctx){const g=ctx.createLinearGradient(0,620,0,1080);g.addColorStop(0,"#2c3240");g.addColorStop(1,"#10141e");ctx.fillStyle=g;ctx.fillRect(-1100,620,W+1500,700);
+  ctx.fillStyle="#262a34";ctx.fillRect(-1100,700,W+1500,22);ctx.strokeStyle="rgba(150,140,130,0.45)";ctx.lineWidth=2;for(let x=-1100;x<W+400;x+=18){ctx.beginPath();ctx.moveTo(x,701);ctx.lineTo(x+8,718);ctx.stroke();}
   ctx.strokeStyle="rgba(206,200,192,0.75)";ctx.lineWidth=3;[698,705].forEach(y=>{ctx.beginPath();ctx.moveTo(-1100,y);ctx.lineTo(W+400,y);ctx.stroke();});
-  ctx.fillStyle="#463c35";ctx.fillRect(-1100,762,W+1500,52);ctx.strokeStyle="rgba(230,214,180,0.3)";ctx.setLineDash([30,26]);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-1100,788);ctx.lineTo(W+400,788);ctx.stroke();ctx.setLineDash([]);}
+  ctx.fillStyle="#3a404c";ctx.fillRect(-1100,762,W+1500,52);ctx.strokeStyle="rgba(230,214,180,0.3)";ctx.setLineDash([30,26]);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-1100,788);ctx.lineTo(W+400,788);ctx.stroke();ctx.setLineDash([]);}
 // a home: a low block of flats, its kitchen window lit (k: how bright), a door on the right
 function d5_home(ctx,x,y,t,k){ctx.save();const w=290,h=240,g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,"#b98a64");g.addColorStop(1,"#8a6448");ctx.fillStyle=g;ctx.fillRect(x,y-h,w,h);
   ctx.fillStyle="#6e4e3a";ctx.fillRect(x-8,y-h-12,w+16,14);
@@ -138,11 +138,11 @@ const D5_LW=mk(D5_WEST.map(([x,y])=>P(x,y))),D5_LC=mk(D5_CENT.map(([x,y])=>P(x,y
 // o.flow (south, in the morning) and o.back (north, in the afternoon) set lunches moving along both lines; o.sort pulses the
 // sorting at the stations; o.pm warms the light towards the afternoon; o.labA fades the place names while the camera is close
 function d5_mumbai(ctx,t,o){o=o||{};const pm=o.pm||0;ctx.save();
-  const g=ctx.createLinearGradient(0,-200,0,1300);g.addColorStop(0,rgba(mix([18,38,58],[30,40,62],pm),1));g.addColorStop(1,rgba(mix([30,58,78],[46,64,84],pm),1));ctx.fillStyle=g;ctx.fillRect(-1200,-800,4400,2800);
+  const g=ctx.createLinearGradient(0,-200,0,1300);g.addColorStop(0,rgba(mix([12,40,80],[30,44,86],pm),1));g.addColorStop(1,rgba(mix([22,66,108],[46,72,112],pm),1));ctx.fillStyle=g;ctx.fillRect(-1200,-800,4400,2800);
   ctx.strokeStyle="rgba(170,210,230,0.07)";ctx.lineWidth=2;for(let i=0;i<26;i++){const y=-100+i*48,ph=t*0.4+i;ctx.beginPath();for(let x=-1200;x<=3200;x+=40){const yy=y+Math.sin(x*0.012+ph)*4;x===-1200?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}
   const poly=(pts,fill,edge)=>{ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(edge){ctx.strokeStyle=edge;ctx.lineWidth=3;ctx.stroke();}};
-  poly(D5_MAIN,rgba(mix([84,78,72],[110,90,76],pm),1),"rgba(200,186,160,0.35)");
-  const lg=ctx.createLinearGradient(700,0,1120,0);lg.addColorStop(0,rgba(mix([138,122,104],[170,134,104],pm),1));lg.addColorStop(1,rgba(mix([108,96,86],[136,108,88],pm),1));poly(D5_LAND,lg,"rgba(230,210,176,0.6)");
+  poly(D5_MAIN,rgba(mix([50,82,76],[78,94,80],pm),1),"rgba(200,186,160,0.35)");
+  const lg=ctx.createLinearGradient(700,0,1120,0);lg.addColorStop(0,rgba(mix([92,128,96],[132,134,96],pm),1));lg.addColorStop(1,rgba(mix([66,100,80],[100,106,82],pm),1));poly(D5_LAND,lg,"rgba(230,210,176,0.6)");
   // the city's texture: blocks, a little lighter where it's dense
   ctx.save();ctx.beginPath();D5_LAND.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.clip();
   for(let i=0;i<520;i++){const x=700+hash(i,120)*420,y=40+hash(i,121)*1000;ctx.fillStyle="rgba(240,226,200,"+(0.05+0.08*hash(i,122))+")";ctx.fillRect(x,y,6+8*hash(i,123),4+6*hash(i,124));}ctx.restore();

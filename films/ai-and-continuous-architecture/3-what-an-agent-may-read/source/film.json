@@ -8,10 +8,10 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["tablet", "who", 2.0],
+  "poster": ["tablet", "few", 1.26],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bInés\\b", "Ee-ness"],
     ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],
     ["\\bUruk\\b", "Oo-rook"],

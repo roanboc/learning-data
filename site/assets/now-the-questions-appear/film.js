@@ -432,6 +432,7 @@ const NARR={
  {"id":"back","gap":0.8,"text":"Each goes back to whoever asked for it, with one question: what would you decide with it?"}]},
 "down":{"name":"Down from a goal","lead":1.0,"tail":1.0,"vo":[
  {"id":"way","gap":0.8,"text":"Now the other way, from the top. A goal implies decisions. A decision needs questions answered. A question needs a measure."},
+ {"id":"gqm","gap":0.8,"text":"It's Goal, Question, Metric, a method from the 1980s, with a decision added.","say":"It's Goal, Question, Metric, a method from the nineteen eighties, with a decision added."},
  {"id":"better","gap":0.8,"text":"Take replacing assets before they fail. Its outcome said only a better network, and nobody could check that."},
  {"id":"measure","gap":0.8,"text":"Its decision is which lines to renew first, and its question is the one the planners asked."},
  {"id":"unit","gap":0.8,"text":"The measure: interruptions per customer, per year, line by line."},
@@ -466,7 +467,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"But a measure is only as true as the data beneath it, and the rules that data must keep. Next: where each rule belongs."}]}
 };
 
-const VODUR={"kerala/coast": 5.59, "kerala/markets": 6.796, "kerala/blind": 4.607, "kerala/dump": 9.393, "kerala/phones": 9.74, "kerala/act": 8.029, "kerala/time": 1.823, "backlog/note": 2.557, "backlog/pile": 8.843, "backlog/test": 8.011, "up/first": 7.71, "up/climb": 8.073, "up/lobby": 5.617, "up/live": 5.43, "half/all": 8.823, "half/none": 8.002, "half/back": 4.629, "down/way": 7.779, "down/better": 6.393, "down/measure": 5.526, "down/unit": 3.68, "down/meet": 5.108, "missing/afford": 5.287, "missing/behind": 7.747, "missing/register": 3.342, "missing/farah": 6.458, "count/two": 5.526, "count/disagree": 3.916, "count/clock": 5.126, "count/define": 8.898, "count/same": 2.458, "home/home": 4.002, "home/homes": 9.004, "home/owner": 5.76, "home/means": 3.102, "build/reports": 6.346, "build/group": 8.809, "build/each": 4.636, "coast/spread": 3.909, "coast/knew": 5.216, "coast/gain": 7.479, "end/confirm": 6.092, "end/answer": 8.913, "end/next": 7.488};
+const VODUR={"kerala/coast": 5.59, "kerala/markets": 6.796, "kerala/blind": 4.607, "kerala/dump": 9.393, "kerala/phones": 9.74, "kerala/act": 8.029, "kerala/time": 1.823, "backlog/note": 2.557, "backlog/pile": 8.843, "backlog/test": 8.011, "up/first": 7.71, "up/climb": 8.073, "up/lobby": 5.617, "up/live": 5.43, "half/all": 8.823, "half/none": 8.002, "half/back": 4.629, "down/way": 7.779, "down/gqm": 4.917, "down/better": 6.393, "down/measure": 5.526, "down/unit": 3.68, "down/meet": 5.108, "missing/afford": 5.287, "missing/behind": 7.747, "missing/register": 3.342, "missing/farah": 6.605, "count/two": 5.526, "count/disagree": 3.916, "count/clock": 5.126, "count/define": 8.898, "count/same": 2.458, "home/home": 4.002, "home/homes": 9.004, "home/owner": 5.76, "home/means": 3.102, "build/reports": 6.346, "build/group": 8.809, "build/each": 4.636, "coast/spread": 3.909, "coast/knew": 5.216, "coast/gain": 7.479, "end/confirm": 6.092, "end/answer": 8.913, "end/next": 7.488};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -477,7 +478,7 @@ const BREATH={
 "backlog":{"hold":{"note":0.7,"pile":0.9}},
 "up":{"hold":{"first":0.8,"climb":1.0,"lobby":0.9}},
 "half":{"hold":{"all":0.8,"none":0.9}},
-"down":{"hold":{"way":0.9,"better":0.9,"unit":1.0},"breathe":3.0},
+"down":{"hold":{"way":0.9,"gqm":0.8,"better":0.9,"unit":1.0},"breathe":3.0},
 "missing":{"hold":{"afford":0.8,"register":1.0}},
 "count":{"hold":{"disagree":0.9,"clock":0.9,"define":0.9}},
 "home":{"hold":{"homes":1.0}},
@@ -1966,6 +1967,32 @@ function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3]
 // how far the camera is zoomed in at t, for the same keys: a whole canvas seen from afar is context, and its notes are decoration
 function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;z=lerp(z,keys[i][3],u);}return z;}
 
+// The colour of the five series on enterprise architecture (17 November 2026). They drew on a brown wall, a brown ground for scenes in the
+// past and brown date pills, earthy beside their stories; now the wall is a slate blue under a cool light, a scene in the past a night blue,
+// and the layers' and the series' colours are clearer. The dark ground behind the diagrams stays as the whole site draws it: no need to
+// colour a picture whose ground is already dark (the author, 17 November 2026). Only these series' builds bundle this file, right after
+// ea.js, so it sets their look over ea.js and over the helpers the whole site shares (From words to data's histBg and yearTag), which every
+// other film keeps as they are. The master data films borrow ea.js for its glyphs and keep its first colours too.
+const EA_WALL=["#162b52","#0a1428"];                        // the wall the notes go on: a slate blue
+const EA_WALLGLOW=[[0.1,0.9,0.5,[60,180,210],0.06],[0.92,0.1,0.5,[160,110,240],0.06]];   // soft light on it: teal, bottom left; violet, top right
+const EA_HIST=["#16204a","#06071a"];                        // a scene in the past
+const EA_PILL="rgba(10,14,40,0.9)";                         // the glass of a date's pill
+// soft pools of coloured light: [x, y, radius, colour, strength], with x, y and the radius as parts of the frame's width and height
+function eaGlow(ctx,pools){pools.forEach(([x,y,r,c,a])=>{const g=ctx.createRadialGradient(W*x,H*y,0,W*x,H*y,W*r);g.addColorStop(0,rgba(c,a));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});}
+// the six layers and the series' own colour, deeper and clearer than ea.js's first ones
+[[188,162,255],[255,196,112],[255,228,96],[255,166,134],[108,200,255],[138,228,118]].forEach((c,i)=>{LAY6[i][1]=c;});
+EAC.splice(0,3,104,230,192);
+// the wall of canvases and sticky notes (ea.js's wallBg, in slate blue under a cool light)
+wallBg=function(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,EA_WALL[0]);g.addColorStop(1,EA_WALL[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){const x=hash(i,31)*W,y=hash(i,32)*H,r=60+hash(i,33)*200,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(190,225,255,"+(0.012+0.02*hash(i,34))+")");gg.addColorStop(1,"rgba(190,225,255,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  const l=ctx.createRadialGradient(W*0.5,H*0.25,40,W*0.5,H*0.4,W*0.7);l.addColorStop(0,"rgba(150,210,255,"+(o.light==null?0.10:o.light)+")");l.addColorStop(1,"rgba(150,210,255,0)");ctx.fillStyle=l;ctx.fillRect(0,0,W,H);eaGlow(ctx,EA_WALLGLOW);};
+// a scene in the past keeps its lamp's warm light and dust, on a night blue
+{const histBg0=histBg;histBg=function(ctx,S,t,o){return histBg0(ctx,S,t,Object.assign({top:EA_HIST[0],bottom:EA_HIST[1]},o));};}
+// the pills that date a moment (ea.js's eaYear and From words to data's yearTag), on blue glass
+eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,28,500,"mono")+52;glass(ctx,x,y-30,w,60,30,c,{glow:14,ea:0.8,fill:EA_PILL});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
+yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
+
 /* ===== Now the questions appear: the film's own pictures (prefixed d8_) =====
    Kerala, January 1997: a sketch map of India's south and of the northern Kerala coast, with the fifteen beach markets of Jensen's
    survey placed by their distances along the coast; sardine boats coming in at dawn, their skippers not knowing what the markets
@@ -2054,7 +2081,7 @@ function d8_map(ctx,t,c,o){o=o||{};const z=c.z,k=1/z,sun=o.sun||0,sy=Math.pow(z,
   // the land: India's south and Sri Lanka, warmed from the east as the sun comes up behind the hills
   const shape=(L)=>{ctx.beginPath();L.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();};
   [D8_INDIA,D8_LANKA].forEach(L=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=20;shape(L);const lg=ctx.createLinearGradient(c.x-700*k,0,c.x+900*k,0);
-    lg.addColorStop(0,rgba(mix([38,46,42],[64,78,62],sun),1));lg.addColorStop(1,rgba(mix([46,48,44],[112,96,72],sun),1));ctx.fillStyle=lg;ctx.fill();ctx.restore();});
+    lg.addColorStop(0,rgba(mix([30,50,46],[54,104,72],sun),1));lg.addColorStop(0.68,rgba(mix([36,50,48],[70,108,70],sun),1));lg.addColorStop(1,rgba(mix([44,50,50],[146,116,66],sun),1));ctx.fillStyle=lg;ctx.fill();ctx.restore();});
   // Kerala, lit
   const kr=o.ker||0;if(kr>0.01){ctx.save();d8_smooth(ctx,D8_KERALA);ctx.fillStyle=rgba(EAC,0.3*kr);ctx.shadowColor=rgba(EAC,0.9);ctx.shadowBlur=30*kr;ctx.fill();ctx.restore();}
   // the coastal plain, green with coconut palms, and the hills: a soft band of forest along the ridge, with lines of relief that catch
@@ -2366,7 +2393,7 @@ function d8_name(ctx,s,x,y,al,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();c
 // a tag that ends at x (its right edge) instead of starting there
 const d8_tagR=(ctx,x,y,s,col)=>tag(ctx,x-(tw(ctx,s,28,700)+26),y,s,col,{size:28});
 // the sea, from night (sun 0) towards day (sun 1)
-function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([6,12,26],[34,72,104],sun),1));g.addColorStop(1,rgba(mix([4,8,18],[22,54,82],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,20,52],[26,84,138],sun),1));g.addColorStop(1,rgba(mix([5,12,34],[16,62,108],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
 scene("kerala",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tM=c("markets"),tBl=c("blind"),tD=c("dump"),tP=c("phones"),tA=c("act"),sun=clamp((t-1)/46,0,1);
   d8_sky(ctx,S,sun);
@@ -2548,16 +2575,24 @@ scene("down",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const tB=c("better"),tMs=c("measure"),tMt=c("meet"),chk=w("meet","can be checked"),mv=ease(fin(t,tB-0.5,1.6)),meet=w("meet","meet at one");
   const X=760,gl=w("better","Take"),oc=w("better","a better network")-0.3,dc=w("measure","Its decision"),qu=w("measure","its question"),me=w("unit","The measure"),rq=w("measure","the planners asked");
   const rows=[w("way","the other way"),w("way","implies decisions"),w("way","needs questions"),w("way","needs a measure")],path=[gl,dc,qu,me];
+  // Goal, Question, Metric (Basili and Weiss, 1984): the rows the method names light as the voice names them, while the decision row
+  // waits, dimmed; then it lights in gold, the step the film adds. The method's name sits over the shape; it leaves, with the gold,
+  // before the shape moves aside
+  const gq=[w("gqm","Goal"),w("gqm","a decision added"),w("gqm","Question"),w("gqm","Metric")],gOut=1-fin(t,tB-0.9,0.5),gDim=fin(t,gq[0]-0.2,0.4)*(1-fin(t,gq[1]-0.1,0.4));
   // the shape, built from the top (the goal comes down from above the frame); then moved aside, small, where the example's path
   // through it lights up as the example is drawn beside it
   ctx.save();ctx.translate(lerp(0,-470,mv),lerp(70,160,mv));const sk=lerp(1,0.46,mv);ctx.translate(960,400);ctx.scale(sk,sk);ctx.translate(-960,-400);
-  D8_TREE.forEach(([n,col,kind,boxes],r)=>boxes.forEach(([x,y,bw,bh],j)=>{const on=j===0?fin(t,path[r],0.5):0,o={size:28,gs:11,deco:mv>0.1?1:0,a:1-0.35*mv*(1-on),hi:on};
+  D8_TREE.forEach(([n,col,kind,boxes],r)=>boxes.forEach(([x,y,bw,bh],j)=>{const on=j===0?fin(t,path[r],0.5):0,lit=fin(t,gq[r]-0.1,0.4)*gOut,dim=r===1?gDim*gOut:0,
+      o={size:28,gs:11,deco:mv>0.1?1:0,a:(1-0.35*mv*(1-on))*(1-0.55*dim),hi:Math.max(on,0.8*lit)};
+    if(r===1&&lit>0.01)glow(ctx,x+bw/2,y+bh/2,bw*0.75,TRUST,0.3*lit);
     if(r>0){const t0=rows[r]-0.2+j*0.08,pb=D8_TREE[r-1][3][r===1?0:r===2?Math.floor(j/2):j],q=clamp((t-t0+0.3)/0.5,0,1);
       if(q>0)arrowTo(ctx,pb[0]+pb[2]/2,pb[1]+pb[3],x+bw/2,y,col,0.7+0.3*on,{p:q,lw:2.5,head:10});
       arrive(ctx,x+bw/2,y+bh/2,t,t0,()=>d8_el(ctx,x,y,bw,bh,n,col,kind,o),{dy:-10});return;}
     const u=clamp((t-rows[0])/1.4,0,1);if(u<=0)return;const yy=lerp(-230,y,1-Math.pow(1-u,3));
     if(u<1){const g=ctx.createLinearGradient(0,yy-300,0,yy);g.addColorStop(0,rgba(col,0));g.addColorStop(1,rgba(col,0.5*(1-u)));ctx.strokeStyle=g;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+bw/2,yy-300);ctx.lineTo(x+bw/2,yy);ctx.stroke();}
     withA(ctx,Math.min(1,u*2.5),()=>d8_el(ctx,x,yy,bw,bh,n,col,kind,o));}));
+  if(gOut>0.01){arrive(ctx,960,55,t,gq[0]-0.3,()=>withA(ctx,gOut,()=>tag(ctx,960,55,"Goal–Question–Metric · 1980s",INK,{align:"center",size:32})),{dy:-8});
+    arrive(ctx,1485,318,t,gq[1]-0.1,()=>withA(ctx,gOut,()=>tag(ctx,1390,318,"+ a decision",TRUST,{size:28})),{dy:8});}
   ctx.restore();
   // one goal, traced down: the outcome nobody could check; the decision, the question and the measure
   arrive(ctx,X+280,178,t,gl,()=>d8_el(ctx,X,130,560,96,"replace assets before they fail",MOT,"goal",{size:30,gs:14}),{dy:-12});

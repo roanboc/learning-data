@@ -118,26 +118,26 @@ function a6_houses(ctx,by,p,t,o){o=o||{};const[dw,dy]=bab_light(o),face=mix(mix(
 // a window with a lamp. o.st (0..1): the stamped bricks lit; o.lamp (0..1); o.dim (0..1)
 const A6_STAMPED=[[430,300,150],[1060,400,150],[760,640,156],[1290,520,146],[250,760,140]];
 function a6_houseWall(ctx,t,o){o=o||{};const st=clamp(o.st||0,0,1),lamp=clamp(o.lamp==null?1:o.lamp,0,1);
-  ctx.fillStyle="rgb(58,48,40)";ctx.fillRect(-200,-200,W+400,H+400);
+  ctx.fillStyle="rgb(36,40,66)";ctx.fillRect(-200,-200,W+400,H+400);
   // the mortar's grain
   ctx.fillStyle="rgba(0,0,0,0.12)";for(let i=0;i<260;i++)ctx.fillRect(hash(i,712)*W,hash(i,713)*H,2+hash(i,714)*4,2);
   // the courses: bricks of the tower's size, laid on their edges, each a little different from the next
   let y=-30;for(let r=0;y<H+40;r++){const ch=34+hash(r,715)*8;let x=-60-hash(r,716)*120;for(let i=0;x<W+60;i++){const bw=118+hash(r*31+i,717)*70,v=hash(r*17+i,718),dk=hash(r*7+i,719);
-      let c=mix(mix(BAB_BRICK,[214,170,120],0.25+0.45*v),[96,64,48],0.35*dk);ctx.fillStyle=rgba(c,1);rr(ctx,x+4,y+4,bw-8,ch-8,4);ctx.fill();
+      let c=mix(mix(BAB_BRICK,[214,170,120],0.25+0.45*v),[96,54,66],0.35*dk);ctx.fillStyle=rgba(c,1);rr(ctx,x+4,y+4,bw-8,ch-8,4);ctx.fill();
       ctx.fillStyle="rgba(255,236,206,0.12)";ctx.fillRect(x+8,y+6,bw-16,3);ctx.fillStyle="rgba(0,0,0,0.2)";ctx.fillRect(x+8,y+ch-9,bw-16,3);
-      if(hash(r*13+i,720)<0.22){ctx.fillStyle="rgb(58,48,40)";const cx_=hash(r+i,721)<0.5?x+4:x+bw-4,cy_=y+4,s=8+hash(r*3+i,722)*14;ctx.beginPath();ctx.moveTo(cx_,cy_);ctx.lineTo(cx_+(cx_<x+bw/2?s:-s),cy_);ctx.lineTo(cx_,cy_+s*0.7);ctx.closePath();ctx.fill();}
+      if(hash(r*13+i,720)<0.22){ctx.fillStyle="rgb(36,40,66)";const cx_=hash(r+i,721)<0.5?x+4:x+bw-4,cy_=y+4,s=8+hash(r*3+i,722)*14;ctx.beginPath();ctx.moveTo(cx_,cy_);ctx.lineTo(cx_+(cx_<x+bw/2?s:-s),cy_);ctx.lineTo(cx_,cy_+s*0.7);ctx.closePath();ctx.fill();}
       ctx.fillStyle="rgba(0,0,0,0.1)";for(let q=0;q<4;q++)ctx.fillRect(x+10+hash(q+i*5,723+r)*(bw-24),y+8+hash(q+r*3,724+i)*(ch-18),3,2.4);x+=bw;}y+=ch;}
   // the bricks laid face out, with their stamps
-  A6_STAMPED.forEach(([x,y,w],i)=>{ctx.fillStyle="rgb(48,40,34)";ctx.fillRect(x-w/2-8,y-w/2-8,w+16,w+16);bab_brick(ctx,x,y,w,{stamp:1,rot:(hash(i,725)-0.5)*0.04});
+  A6_STAMPED.forEach(([x,y,w],i)=>{ctx.fillStyle="rgb(34,34,50)";ctx.fillRect(x-w/2-8,y-w/2-8,w+16,w+16);bab_brick(ctx,x,y,w,{stamp:1,rot:(hash(i,725)-0.5)*0.04});
     if(st>0.01){glow(ctx,x,y,w*1.1,BAB_SUN,0.28*st);ctx.save();ctx.strokeStyle=rgba(mix(BAB_SUN,[255,255,255],0.25),0.9*st);ctx.lineWidth=3.2;ctx.shadowColor=rgba(BAB_SUN,0.9);ctx.shadowBlur=16;rr(ctx,x-w/2-6,y-w/2-6,w+12,w+12,8);ctx.stroke();ctx.restore();}});
   // a window, its wooden frame, a lamp inside
-  const wx=1540,wy=240,ww=230,wh=300,fl=0.9+0.1*Math.sin(t*2.6)*Math.sin(t*1.3+1);ctx.fillStyle="rgb(44,34,28)";ctx.fillRect(wx-22,wy-22,ww+44,wh+44);
+  const wx=1540,wy=240,ww=230,wh=300,fl=0.9+0.1*Math.sin(t*2.6)*Math.sin(t*1.3+1);ctx.fillStyle="rgb(32,30,46)";ctx.fillRect(wx-22,wy-22,ww+44,wh+44);
   const lg=ctx.createRadialGradient(wx+ww*0.5,wy+wh*0.62,8,wx+ww*0.5,wy+wh*0.62,ww*0.9);lg.addColorStop(0,rgba([255,206,140],0.95*lamp*fl));lg.addColorStop(0.4,rgba([210,130,70],0.75*lamp));lg.addColorStop(1,rgba([40,26,20],1));
   ctx.fillStyle="rgb(26,18,16)";ctx.fillRect(wx,wy,ww,wh);ctx.fillStyle=lg;ctx.fillRect(wx,wy,ww,wh);
   ctx.strokeStyle="rgb(70,48,32)";ctx.lineWidth=10;ctx.strokeRect(wx,wy,ww,wh);ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(wx+ww/2,wy);ctx.lineTo(wx+ww/2,wy+wh);ctx.moveTo(wx,wy+wh*0.45);ctx.lineTo(wx+ww,wy+wh*0.45);ctx.stroke();
   if(lamp>0.01)glow(ctx,wx+ww/2,wy+wh*0.6,260,[255,170,90],0.22*lamp*fl);
   // the evening light along the wall, from the right, and a darker foot
-  const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(12,8,16,0.5)");g.addColorStop(0.62,"rgba(12,8,16,0.08)");g.addColorStop(1,"rgba(255,170,110,0.1)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(16,34,120,0.5)");g.addColorStop(0.62,"rgba(20,36,120,0.1)");g.addColorStop(1,"rgba(255,160,100,0.14)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   const d=clamp(o.dim||0,0,1);if(d>0.01){ctx.fillStyle="rgba(6,4,6,"+(0.7*d)+")";ctx.fillRect(0,0,W,H);}}
 // Where the tower stood, today: a square trench round a low core of mud brick, water and reeds in it, on the flat plain, seen from its
 // southern edge. o.p (0..1): the trench as it's dug by the centuries, the core sinking; o.day, o.dawn: the light; o.fence (0..1): a low

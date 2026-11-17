@@ -8,10 +8,10 @@
     "scenes.js"
   ],
   "story": ["ahead"],
-  "poster": ["ahead", "sipho", 6.2],
+  "poster": ["three", "rule", 6.38],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bAma\\b", "Ah-mah"],
     ["\\bRavi\\b", "Rah-vee"],
     ["\\bSipho\\b", "See-poh"],

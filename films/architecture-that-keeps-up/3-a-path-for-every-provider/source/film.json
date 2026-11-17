@@ -20,10 +20,12 @@
     ["\\bMalcom\\b", "Malcolm"],
     ["\\bIdeal X\\b", "Ideal Ex"],
     ["\\bOkafor\\b", "Oh-kah-for"],
-    ["\\bKurian\\b", "Koo-ree-an"],
+    ["\\bKurian\\b", "Coo-rean"],
     ["\\bJun\\b", "Joon"],
     ["\\bNoor\\b", "Nuur"],
-    ["\\bA I\\b", "AI"]
+    ["\\bA I\\b", "AI"],
+    ["\\bNovak\\b", "Noh-vak"],
+    ["\\bAnil\\b", "Unnil"]
   ],
   "story": [
     "box"

@@ -39,7 +39,7 @@ function d8_name(ctx,s,x,y,al,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();c
 // a tag that ends at x (its right edge) instead of starting there
 const d8_tagR=(ctx,x,y,s,col)=>tag(ctx,x-(tw(ctx,s,28,700)+26),y,s,col,{size:28});
 // the sea, from night (sun 0) towards day (sun 1)
-function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([6,12,26],[34,72,104],sun),1));g.addColorStop(1,rgba(mix([4,8,18],[22,54,82],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,20,52],[26,84,138],sun),1));g.addColorStop(1,rgba(mix([5,12,34],[16,62,108],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
 scene("kerala",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tM=c("markets"),tBl=c("blind"),tD=c("dump"),tP=c("phones"),tA=c("act"),sun=clamp((t-1)/46,0,1);
   d8_sky(ctx,S,sun);
@@ -221,16 +221,24 @@ scene("down",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const tB=c("better"),tMs=c("measure"),tMt=c("meet"),chk=w("meet","can be checked"),mv=ease(fin(t,tB-0.5,1.6)),meet=w("meet","meet at one");
   const X=760,gl=w("better","Take"),oc=w("better","a better network")-0.3,dc=w("measure","Its decision"),qu=w("measure","its question"),me=w("unit","The measure"),rq=w("measure","the planners asked");
   const rows=[w("way","the other way"),w("way","implies decisions"),w("way","needs questions"),w("way","needs a measure")],path=[gl,dc,qu,me];
+  // Goal, Question, Metric (Basili and Weiss, 1984): the rows the method names light as the voice names them, while the decision row
+  // waits, dimmed; then it lights in gold, the step the film adds. The method's name sits over the shape; it leaves, with the gold,
+  // before the shape moves aside
+  const gq=[w("gqm","Goal"),w("gqm","a decision added"),w("gqm","Question"),w("gqm","Metric")],gOut=1-fin(t,tB-0.9,0.5),gDim=fin(t,gq[0]-0.2,0.4)*(1-fin(t,gq[1]-0.1,0.4));
   // the shape, built from the top (the goal comes down from above the frame); then moved aside, small, where the example's path
   // through it lights up as the example is drawn beside it
   ctx.save();ctx.translate(lerp(0,-470,mv),lerp(70,160,mv));const sk=lerp(1,0.46,mv);ctx.translate(960,400);ctx.scale(sk,sk);ctx.translate(-960,-400);
-  D8_TREE.forEach(([n,col,kind,boxes],r)=>boxes.forEach(([x,y,bw,bh],j)=>{const on=j===0?fin(t,path[r],0.5):0,o={size:28,gs:11,deco:mv>0.1?1:0,a:1-0.35*mv*(1-on),hi:on};
+  D8_TREE.forEach(([n,col,kind,boxes],r)=>boxes.forEach(([x,y,bw,bh],j)=>{const on=j===0?fin(t,path[r],0.5):0,lit=fin(t,gq[r]-0.1,0.4)*gOut,dim=r===1?gDim*gOut:0,
+      o={size:28,gs:11,deco:mv>0.1?1:0,a:(1-0.35*mv*(1-on))*(1-0.55*dim),hi:Math.max(on,0.8*lit)};
+    if(r===1&&lit>0.01)glow(ctx,x+bw/2,y+bh/2,bw*0.75,TRUST,0.3*lit);
     if(r>0){const t0=rows[r]-0.2+j*0.08,pb=D8_TREE[r-1][3][r===1?0:r===2?Math.floor(j/2):j],q=clamp((t-t0+0.3)/0.5,0,1);
       if(q>0)arrowTo(ctx,pb[0]+pb[2]/2,pb[1]+pb[3],x+bw/2,y,col,0.7+0.3*on,{p:q,lw:2.5,head:10});
       arrive(ctx,x+bw/2,y+bh/2,t,t0,()=>d8_el(ctx,x,y,bw,bh,n,col,kind,o),{dy:-10});return;}
     const u=clamp((t-rows[0])/1.4,0,1);if(u<=0)return;const yy=lerp(-230,y,1-Math.pow(1-u,3));
     if(u<1){const g=ctx.createLinearGradient(0,yy-300,0,yy);g.addColorStop(0,rgba(col,0));g.addColorStop(1,rgba(col,0.5*(1-u)));ctx.strokeStyle=g;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+bw/2,yy-300);ctx.lineTo(x+bw/2,yy);ctx.stroke();}
     withA(ctx,Math.min(1,u*2.5),()=>d8_el(ctx,x,yy,bw,bh,n,col,kind,o));}));
+  if(gOut>0.01){arrive(ctx,960,55,t,gq[0]-0.3,()=>withA(ctx,gOut,()=>tag(ctx,960,55,"Goal–Question–Metric · 1980s",INK,{align:"center",size:32})),{dy:-8});
+    arrive(ctx,1485,318,t,gq[1]-0.1,()=>withA(ctx,gOut,()=>tag(ctx,1390,318,"+ a decision",TRUST,{size:28})),{dy:8});}
   ctx.restore();
   // one goal, traced down: the outcome nobody could check; the decision, the question and the measure
   arrive(ctx,X+280,178,t,gl,()=>d8_el(ctx,X,130,560,96,"replace assets before they fail",MOT,"goal",{size:30,gs:14}),{dy:-12});

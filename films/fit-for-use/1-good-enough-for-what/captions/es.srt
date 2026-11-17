@@ -175,69 +175,69 @@ Un diploma necesita el nombre tal como se imprime, el título y la fecha en que 
 Luego preguntaron seis cosas de cada uno. ¿Completo? ¿Único? ¿Válido? ¿Coherente? ¿Exacto? ¿A tiempo?
 
 45
-00:05:07,635 --> 00:05:14,634
+00:05:07,635 --> 00:05:14,836
 Son las seis dimensiones de calidad de datos de DAMA. Una norma ISO nombra quince; seis bastan para empezar.
 
 46
-00:05:16,134 --> 00:05:21,042
+00:05:16,336 --> 00:05:21,244
 Cada uso se apoya en distintas, como la carta de Mercator: ángulos antes que tamaños.
 
 47
-00:05:22,342 --> 00:05:26,843
+00:05:22,544 --> 00:05:27,045
 Los asientos necesitan la lista completa: cada graduado que cruza el escenario, una vez.
 
 48
-00:05:28,143 --> 00:05:32,128
+00:05:28,345 --> 00:05:32,330
 Un diploma la necesita exacta: el nombre que su graduado tiene de verdad.
 
 49
-00:05:33,628 --> 00:05:40,223
+00:05:33,830 --> 00:05:40,425
 Cada nivel se acordó con quienes la usan: Malia para las ceremonias, Planificación para el conteo del gobierno.
 
 50
-00:05:41,523 --> 00:05:44,805
+00:05:41,725 --> 00:05:45,007
 Y Mei es dueña de cada nivel, porque responde por la lista.
 
 51
-00:05:46,305 --> 00:05:53,693
+00:05:46,507 --> 00:05:53,895
 También se fija antes cómo avisa o detiene un control, y a quién: lo muestran Reglas que se ejecutan y Demasiado bueno para ser verdad.
 
 52
-00:05:57,393 --> 00:06:01,777
+00:05:57,595 --> 00:06:01,979
 Jun lo escribió todo junto a los datos, en el archivo que describe la lista.
 
 53
-00:06:03,277 --> 00:06:10,128
+00:06:03,479 --> 00:06:10,330
 Cada uso es una regla de calidad, escrita en palabras: su dimensión, su nivel, quién la acordó y qué cuesta un fallo.
 
 54
-00:06:11,828 --> 00:06:16,006
+00:06:12,030 --> 00:06:16,208
 Las columnas imprescindibles para cada uso se marcan como datos críticos.
 
 55
-00:06:17,506 --> 00:06:22,082
+00:06:17,708 --> 00:06:22,284
 En dbt, cada control de la lista nombra su dimensión y su responsable.
 
 56
-00:06:23,782 --> 00:06:31,307
+00:06:23,984 --> 00:06:31,509
 Y en Databricks, cada columna crítica lleva una etiqueta gobernada, para que quien encuentre la tabla vea de qué dependen sus usos.
 
 57
-00:06:33,007 --> 00:06:40,155
+00:06:33,209 --> 00:06:40,357
 Si la calidad sigue fallando, mira primero tu gobierno de datos, quién es dueño de los datos y decide, y luego tus herramientas.
 
 58
-00:06:42,055 --> 00:06:46,331
+00:06:42,257 --> 00:06:46,533
 La carta de Mercator decía para qué era, en su título: para el uso de los navegantes.
 
 59
-00:06:47,831 --> 00:06:52,532
+00:06:48,033 --> 00:06:52,734
 La lista de graduación ahora también dice para qué es: cuatro usos, cada uno con su nivel.
 
 60
-00:06:54,032 --> 00:06:57,662
+00:06:54,234 --> 00:06:57,864
 Después, el equipo revisa cien de sus registros, uno por uno.
 
 61
-00:06:58,962 --> 00:07:01,154
+00:06:59,164 --> 00:07:01,356
 Pregunta para qué es antes de preguntar si es bueno.

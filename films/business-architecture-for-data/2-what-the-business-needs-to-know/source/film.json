@@ -8,10 +8,10 @@
     "scenes.js"
   ],
   "story": ["shares"],
-  "poster": ["words", "map", 2.0],
+  "poster": ["missing", "wait", 1.88],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bqanat's\\b", "kah-naht's"],
     ["\\bqanat\\b", "kah-naht"],
     ["\\bMahan\\b", "Mah-hahn"],

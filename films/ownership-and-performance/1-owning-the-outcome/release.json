@@ -21,13 +21,13 @@
     "paths": [
       "films/ownership-and-performance/1-owning-the-outcome/source",
       ":(exclude)films/ownership-and-performance/1-owning-the-outcome/source/src/i18n/es/captions.js",
-      "films/the-new-skills/shared",
-      "films/what-an-agent-is/shared",
+      "films/people-first/shared",
+      "films/what-an-agent-is/shared/src/kit.js",
+      "films/what-an-agent-is/shared/src/finish.js",
       "films/from-words-to-data/shared/tools",
       "films/data-governance/shared/tools/names.py",
       "films/data-governance/shared/tools/cues.py",
       "films/data-governance/shared/tools/twice.py",
-      "films/data-governance/shared/tools/steady.py",
       "films/data-governance/shared/tools/jump.py",
       "films/data-governance/shared/tools/quiet.py",
       "films/data-governance/shared/tools/held.py",
@@ -39,10 +39,10 @@
       "films/inner-life-of-data/source/fonts"
     ],
     "legibility": {
-      "texts": 231,
+      "texts": 188,
       "under_28": "0%",
       "under_20": 0,
-      "median": 28.4,
+      "median": 34.7,
       "status": "Drawn to the rule"
     }
   }

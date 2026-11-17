@@ -3,7 +3,13 @@ The author watches new and changed films on this page (AGENTS.md, "Share the vid
 with a button for each chapter and captions in each language under it, so nothing has to be downloaded from the chat. It is made
 from the film's own files: the 720p copy that review_copy.py makes (made here if it's missing or older than the video), the chapters
 in script.md, and the captions in captions/*.vtt. Everything goes in <film>/source/dist/review/; publish the page as a private
-artifact with the files this prints, one page per film, and a new version of the film to the same link."""
+artifact with the files this prints, one page per film, and a new version of the film to the same link.
+
+A film made again is reviewed against the version before it: add --before <its render or review copy>, and the page gets a switch
+between the two, each with its own chapters, and the same moments of both side by side (--pair "what to look at|time before|time
+now", as m:ss or seconds; with none, the middle of every chapter). --before-chapters gives where the earlier version's chapters
+start, then its end ("0:00,1:59,3:38,4:56,6:16,7:05,8:01"), where they differ; --before-captions a folder with its captions, or the
+captions.json of its own review page."""
 import argparse, html, json, pathlib, re, shutil, subprocess, sys
 import imageio_ffmpeg
 
@@ -16,6 +22,12 @@ ap.add_argument('--video', help='the rendered film (default: source/dist/<key>.m
 ap.add_argument('--pr', type=int, help='the pull request the author approves')
 ap.add_argument('--note', action='append', default=[], help='one line on what changed in this version (repeat for more)')
 ap.add_argument('--poster-at', type=float, help='the moment the poster shows, in seconds (default: a second before chapter 2, the title card)')
+ap.add_argument('--before', help='an earlier version to compare with: its render, or its review copy (.review.mp4)')
+ap.add_argument('--before-label', default='Before', help='what the earlier version is called on the page (default: Before)')
+ap.add_argument('--label', default='Now', help='what this version is called beside it (default: Now)')
+ap.add_argument('--before-chapters', help='where the earlier version\'s chapters start, then its end, as m:ss (default: as in this version)')
+ap.add_argument('--before-captions', help='the earlier version\'s captions, where they differ: a folder of *.vtt, or the captions.json of its own review page')
+ap.add_argument('--pair', action='append', default=[], help='a moment of both versions, side by side: "what to look at|time before|time now" (repeat)')
 A = ap.parse_args()
 
 film = pathlib.Path(A.film).resolve()
@@ -212,6 +224,12 @@ page = '''<title>%(title)s</title>
            approve=approve, chapters=json.dumps([[a, name] for n, name, a, b in chapters], ensure_ascii=False))
 page_file = out / (key + '.html')
 page_file.write_text(page, encoding='utf-8')
+if A.before:
+    import review_both  # the page with the version before beside this one (site-tools/review_both.py)
+    files = review_both.write(A, out, key, title, eyebrow, chapters, caps, mp4, page, notes, approve, cues, FF)
+    print('wrote %s: %s and %s, %d moments side by side' % (page_file, A.before_label, A.label, files.pop('pairs')))
+    print('Publish it as a private artifact: file_path %s, files %s' % (page_file, json.dumps(files)))
+    sys.exit(0)
 size = mp4.stat().st_size / 1e6
 print('wrote %s (%d chapters, captions: %s), %s (%.1f MB), captions.json and poster.jpg' % (page_file, len(chapters), ', '.join(caps) or 'none', mp4.name, size))
 if size > 15:

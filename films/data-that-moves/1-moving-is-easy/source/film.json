@@ -28,7 +28,7 @@
     ],
     [
       "\\bNguyen\\b",
-      "Nwin"
+      "Win"
     ],
     [
       "\\bLinh's\\b",
@@ -57,6 +57,14 @@
     [
       "\\bAlbury\\b",
       "Awlbree"
+    ],
+    [
+      "\\bMelbourne\\b",
+      "Melbun"
+    ],
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
     ]
   ],
   "story": [

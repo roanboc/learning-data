@@ -11,11 +11,15 @@
   "say": [
     [
       "\\bTomás's\\b",
-      "Toh-mahs's"
+      "Toh-mahss's"
     ],
     [
       "\\bTomás\\b",
-      "Toh-mahs"
+      "Toh-mahss"
+    ],
+    [
+      "\\bFarah\\b",
+      "Fah-rah"
     ]
   ]
 }

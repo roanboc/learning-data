@@ -7,15 +7,15 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["kenya", "agents", 3.6],
+  "poster": ["kenya", "launch", 2.53],
   "say": [
     [
       "\\bTomás's\\b",
-      "Toh-mahs's"
+      "Toh-mahss's"
     ],
     [
       "\\bTomás\\b",
-      "Toh-mahs"
+      "Toh-mahss"
     ],
     [
       "\\bM-Pesa\\b",

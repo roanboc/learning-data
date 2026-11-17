@@ -9,7 +9,7 @@
    style, light on a dark ground, never in the style of the art of its time and place. */
 
 /* ---------- colours ---------- */
-const PSC=[244,184,108];                    // the series: a lantern's amber, for the road and the shared platform
+const PSC=[255,178,88];                    // the series: a lantern's amber, for the road and the shared platform
 const APPC=LAY6[4][1],TECC=LAY6[5][1],INFC=LAY6[3][1],BUSC=LAY6[2][1];
 const SEALC=[214,72,52];                    // a seal's vermilion
 const WASHI=[236,226,204];                  // paper
@@ -73,16 +73,16 @@ const PSA_LP={};
 function psaLandPath(v){const key=[v.lon,v.lat,v.k,v.cx,v.cy].join();if(PSA_LP[key])return PSA_LP[key];const p=new Path2D();
   PSA_COAST.forEach(r=>{r.forEach((q,i)=>{const[x,y]=psaJP(q[0],q[1],v);if(i)p.lineTo(x,y);else p.moveTo(x,y);});p.closePath();});return PSA_LP[key]=p;}
 function psaLand(ctx,v,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
-  const lit=o.lit||0,fill=mix([30,36,54],[60,52,44],lit),edge=mix([150,172,210],[236,206,160],lit),P=psaLandPath(v),z=Math.sqrt(Math.abs(ctx.getTransform().a));
+  const lit=o.lit||0,fill=mix([26,42,64],[54,66,72],lit),edge=mix([150,172,210],[236,206,160],lit),P=psaLandPath(v),z=Math.sqrt(Math.abs(ctx.getTransform().a));
   ctx.save();ctx.fillStyle=rgba(fill,1);ctx.fill(P);ctx.shadowColor=rgba(edge,0.55);ctx.shadowBlur=16;ctx.strokeStyle=rgba(edge,0.7);ctx.lineWidth=2.2/z;ctx.lineJoin="round";ctx.stroke(P);ctx.restore();
   // a little texture on the land: soft patches, as of hills and forest, and the mountains of the centre a shade lighter
   ctx.save();ctx.clip(P);
   for(let i=0;i<60;i++){const lon=131+hash(i,61)*10.5,lat=32+hash(i,62)*8.5,[x,y]=psaJP(lon,lat,v),r=(30+hash(i,63)*90)*v.k/330,g=ctx.createRadialGradient(x,y,0,x,y,r);
-    g.addColorStop(0,rgba(mix([62,72,70],[100,88,70],lit),0.16+0.1*hash(i,64)));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);}
+    g.addColorStop(0,rgba(mix([56,98,84],[90,112,82],lit),0.16+0.1*hash(i,64)));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);}
   [[137.7,36.2,1.1],[138.4,35.9,0.8],[136.9,35.8,0.7],[139.4,36.6,0.6]].forEach(([lon,lat,s])=>{const[x,y]=psaJP(lon,lat,v),r=s*v.k*0.5,g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(mix([80,86,100],[120,104,84],lit),0.22));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);});
   ctx.restore();});}
 // the sea and the sky at night (o.dusk, 0..1, warms it toward evening)
-function psaSea(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.dusk||0,g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,12,28],[34,26,36],d),1));g.addColorStop(1,rgba(mix([4,8,18],[16,14,22],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+function psaSea(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.dusk||0,g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,16,44],[28,32,78],d),1));g.addColorStop(1,rgba(mix([4,9,26],[12,14,40],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   for(let i=0;i<26;i++){const x=hash(i,71)*W,y=hash(i,72)*H,r=120+hash(i,73)*300,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(120,150,210,"+(0.018+0.02*hash(i,74))+")");gg.addColorStop(1,"rgba(120,150,210,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}}
 // a road on the map, drawn up to p (0..1) along its points; o.col, o.lw, o.glow
 function psaPath(ctx,pts,p,o){o=o||{};if(p<=0)return;const segs=[];let L=0;for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);segs.push(d);L+=d;}
@@ -118,14 +118,14 @@ function psaMap(ctx,v,t,o){o=o||{};const a=o.a==null?1:o.a;const TK=PSA_TKD.map(
 // Everyone is a figure in silhouette, lit from behind by the evening sky and by the station's lanterns, dressed for 1601 to the 1860s:
 // wide hats, robes, loads on a pole. A walk is drawn from the time t and a phase, so each keeps its own step.
 function psaDusk(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.d==null?1:o.d,y0=o.y0||760,g=ctx.createLinearGradient(0,0,0,y0);
-  g.addColorStop(0,rgba(mix([10,14,30],[24,28,58],d),1));g.addColorStop(0.62,rgba(mix([18,20,40],[96,64,74],d),1));g.addColorStop(1,rgba(mix([30,26,38],[214,140,92],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,y0+2);
+  g.addColorStop(0,rgba(mix([8,14,42],[16,38,110],d),1));g.addColorStop(0.62,rgba(mix([16,22,58],[112,76,144],d),1));g.addColorStop(1,rgba(mix([28,28,58],[242,136,94],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,y0+2);
   // far hills, two ranges
-  [[0.55,[38,32,46],0.0],[0.8,[26,22,32],1.7]].forEach(([k,c,ph],j)=>{ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.moveTo(0,y0);for(let x=0;x<=W;x+=24){const yy=y0-k*120-Math.sin(x*0.0021+ph)*44*k-Math.sin(x*0.0057+ph*2)*18*k;ctx.lineTo(x,yy);}ctx.lineTo(W,y0);ctx.closePath();ctx.fill();});
-  const gg=ctx.createLinearGradient(0,y0,0,H);gg.addColorStop(0,rgba([40,32,30],1));gg.addColorStop(1,rgba([14,12,14],1));ctx.fillStyle=gg;ctx.fillRect(0,y0,W,H-y0);
+  [[0.55,[34,40,82],0.0],[0.8,[18,28,50],1.7]].forEach(([k,c,ph],j)=>{ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.moveTo(0,y0);for(let x=0;x<=W;x+=24){const yy=y0-k*120-Math.sin(x*0.0021+ph)*44*k-Math.sin(x*0.0057+ph*2)*18*k;ctx.lineTo(x,yy);}ctx.lineTo(W,y0);ctx.closePath();ctx.fill();});
+  const gg=ctx.createLinearGradient(0,y0,0,H);gg.addColorStop(0,rgba([22,34,44],1));gg.addColorStop(1,rgba([8,12,22],1));ctx.fillStyle=gg;ctx.fillRect(0,y0,W,H-y0);
   // the road itself, a band of beaten earth catching the last light
-  const rg=ctx.createLinearGradient(0,y0,0,y0+70);rg.addColorStop(0,rgba(mix([70,58,50],[150,112,84],d),1));rg.addColorStop(1,rgba([46,38,34],1));ctx.fillStyle=rg;ctx.fillRect(0,y0,W,64);}
+  const rg=ctx.createLinearGradient(0,y0,0,y0+70);rg.addColorStop(0,rgba(mix([58,58,80],[160,112,90],d),1));rg.addColorStop(1,rgba([36,38,56],1));ctx.fillStyle=rg;ctx.fillRect(0,y0,W,64);}
 // a pine by the road: a trunk that leans a little and layered, tapering masses of needles
-function psaPine(ctx,x,y0,s,seed,o){o=o||{};const lean=(hash(seed,3)-0.5)*0.25,h=s*(220+hash(seed,4)*90),col=o.col||[18,22,24];ctx.save();ctx.translate(x,y0);
+function psaPine(ctx,x,y0,s,seed,o){o=o||{};const lean=(hash(seed,3)-0.5)*0.25,h=s*(220+hash(seed,4)*90),col=o.col||[12,30,38];ctx.save();ctx.translate(x,y0);
   ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(-s*7,0);ctx.quadraticCurveTo(-s*4+lean*h*0.4,-h*0.5,lean*h-s*2,-h);ctx.lineTo(lean*h+s*2,-h);ctx.quadraticCurveTo(s*4+lean*h*0.4,-h*0.5,s*7,0);ctx.closePath();ctx.fill();
   for(let i=0;i<4;i++){const u=0.45+i*0.17,cx=lean*h*u+(hash(seed,10+i)-0.5)*s*40,cy=-h*u,rw=s*(90-i*14)*(0.8+hash(seed,20+i)*0.4),rh=s*(22-i*2);
     ctx.beginPath();ctx.moveTo(cx-rw,cy+rh*0.4);ctx.quadraticCurveTo(cx-rw*0.5,cy-rh*1.2,cx,cy-rh);ctx.quadraticCurveTo(cx+rw*0.6,cy-rh*1.3,cx+rw,cy+rh*0.3);ctx.quadraticCurveTo(cx,cy+rh*0.9,cx-rw,cy+rh*0.4);ctx.fill();}

@@ -7,7 +7,7 @@ const BREATH={
 "backlog":{"hold":{"note":0.7,"pile":0.9}},
 "up":{"hold":{"first":0.8,"climb":1.0,"lobby":0.9}},
 "half":{"hold":{"all":0.8,"none":0.9}},
-"down":{"hold":{"way":0.9,"better":0.9,"unit":1.0},"breathe":3.0},
+"down":{"hold":{"way":0.9,"gqm":0.8,"better":0.9,"unit":1.0},"breathe":3.0},
 "missing":{"hold":{"afford":0.8,"register":1.0}},
 "count":{"hold":{"disagree":0.9,"clock":0.9,"define":0.9}},
 "home":{"hold":{"homes":1.0}},

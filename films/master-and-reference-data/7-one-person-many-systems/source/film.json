@@ -10,11 +10,12 @@
   "poster": ["bern", "one", -0.6],
   "story": ["bern"],
   "say": [
-    ["\\bNguyen\\b", "Nwin"],
+    ["\\bNguyen\\b", "Win"],
     ["\\bLinh's\\b", "Lin's"],
     ["\\bLinh\\b", "Lin"],
     ["\\bPhD\\b", "pee aitch dee"],
     ["\\bdbt\\b", "dee bee tee"],
-    ["\\bHR\\b", "H R"]
+    ["\\bHR\\b", "H R"],
+    ["\\bNoor\\b", "Nuur"]
   ]
 }

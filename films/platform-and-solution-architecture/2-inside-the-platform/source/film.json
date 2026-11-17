@@ -8,10 +8,10 @@
     "scenes.js"
   ],
   "story": ["road"],
-  "poster": ["road", "two", 4.0],
+  "poster": ["whose", "high", 4.56],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bRavi's\\b", "Rah-vee's"],
     ["\\bRavi\\b", "Rah-vee"],
     ["\\bEdo\\b", "Eh-doh"],

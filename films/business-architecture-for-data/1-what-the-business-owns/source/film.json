@@ -8,10 +8,10 @@
     "scenes.js"
   ],
   "story": ["water"],
-  "poster": ["water", "link", 6.3],
+  "poster": ["water", "never", 3.39],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bAma\\b", "Ah-mah"],
     ["\\bqanats\\b", "kah-nahts"],
     ["\\bqanat\\b", "kah-naht"],

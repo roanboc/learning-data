@@ -8,10 +8,10 @@
     "scenes.js"
   ],
   "story": ["turns"],
-  "poster": ["flow", "sees", 4.6],
+  "poster": ["turns", "clock", 1.55],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bqanat's\\b", "kah-naht's"],
     ["\\bqanats\\b", "kah-nahts"],
     ["\\bqanat\\b", "kah-naht"],
@@ -20,7 +20,7 @@
     ["\\bmirab\\b", "mee-rahb"],
     ["\\bFarah\\b", "Fah-rah"],
     ["\\bSIPOC\\b", "sigh-pock"],
-    ["\\bAPQC's\\b", "A P Q C's"],
+    ["\\bAPQC's\\b", "Eh P Q C's"],
     ["\\bBPMN\\b", "B P M N"]
   ]
 }

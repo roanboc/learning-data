@@ -29,6 +29,22 @@
     [
       "\\bA I\\b",
       "AI"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
+    ],
+    [
+      "\\bDemir\\b",
+      "Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
     ]
   ],
   "story": [

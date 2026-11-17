@@ -87,201 +87,201 @@ No one person drilled, doctored and fed them. Each part had someone who knew it,
 A data manager's work is calmer, but it's shaped the same way.
 
 23
-00:02:38,072 --> 00:02:45,573
+00:02:38,072 --> 00:02:45,570
 Helena Novak starts at a university with forty-six requests, from every area of data, and someone waiting on each.
 
 24
-00:02:47,273 --> 00:02:53,077
+00:02:47,270 --> 00:02:53,074
 By Friday she has one plan for her first ninety days, in three lanes, run side by side.
 
 25
-00:02:54,577 --> 00:02:57,275
+00:02:54,574 --> 00:02:57,272
 And everyone waiting hears where their request stands.
 
 26
-00:03:05,375 --> 00:03:12,559
+00:03:05,372 --> 00:03:12,556
 These films follow one data manager's first year: every area of data at once, and the management work around it.
 
 27
-00:03:14,259 --> 00:03:19,522
+00:03:14,256 --> 00:03:19,519
 Monday 1 February 2027, a year from now, at the university.
 
 28
-00:03:21,222 --> 00:03:27,739
+00:03:21,219 --> 00:03:27,736
 Helena Novak starts as its data manager. She has been an architect, a data lead and a product owner.
 
 29
-00:03:29,239 --> 00:03:33,647
+00:03:29,236 --> 00:03:33,644
 Forty-six requests are open, in the tracker and in the team's inboxes.
 
 30
-00:03:35,347 --> 00:03:39,286
+00:03:35,344 --> 00:03:39,283
 The oldest has waited since 14 August 2026.
 
 31
-00:03:40,786 --> 00:03:46,813
+00:03:40,783 --> 00:03:46,810
 A report for Planning, a fix to the staff list, access for a researcher: each has someone waiting.
 
 32
-00:03:48,513 --> 00:03:53,637
+00:03:48,510 --> 00:03:53,634
 It's tempting to start with the oldest, or the loudest, or to change everything at once.
 
 33
-00:03:55,337 --> 00:03:59,787
+00:03:55,334 --> 00:03:59,784
 Helena does none of that yet. First, she sorts them, to see the whole job.
 
 34
-00:04:02,487 --> 00:04:10,552
+00:04:02,484 --> 00:04:10,648
 Data managers share a map of the job: the wheel in DAMA-DMBOK, the Data Management Association's body of knowledge.
 
 35
-00:04:12,252 --> 00:04:19,302
+00:04:12,348 --> 00:04:19,398
 Data governance sits at its centre, with ten areas around it, from architecture and modelling to quality and security.
 
 36
-00:04:21,202 --> 00:04:24,918
+00:04:21,298 --> 00:04:25,014
 Helena puts each request on the wheel, where most of its work is.
 
 37
-00:04:26,418 --> 00:04:33,091
+00:04:26,514 --> 00:04:33,187
 Data warehousing and business intelligence: ten. Data quality: seven. Data security: five.
 
 38
-00:04:34,791 --> 00:04:41,048
+00:04:34,887 --> 00:04:41,144
 Then governance and integration, four each, and three or fewer in each of the rest: forty-four in all.
 
 39
-00:04:42,748 --> 00:04:49,915
+00:04:42,844 --> 00:04:50,011
 Two sit beside the wheel: an agent for timetable questions, and a forecast model, which this site doesn't teach yet.
 
 40
-00:04:51,615 --> 00:04:58,899
+00:04:51,711 --> 00:04:58,995
 Most requests touch three or four areas: a new report needs its data modelled, checked for quality, and kept safe.
 
 41
-00:05:00,799 --> 00:05:06,750
+00:05:00,895 --> 00:05:06,846
 So no request is someone else's. The areas are one system, and the job holds all of them.
 
 42
-00:05:08,650 --> 00:05:11,064
+00:05:08,746 --> 00:05:11,160
 The site's other films go deep in each area.
 
 43
-00:05:12,364 --> 00:05:18,991
+00:05:12,460 --> 00:05:19,087
 From words to data in modelling, Fit for use in quality, The same one, everywhere in master data, and more.
 
 44
-00:05:21,691 --> 00:05:25,513
+00:05:21,787 --> 00:05:25,609
 Nobody is expert in all eleven areas, Helena included.
 
 45
-00:05:27,013 --> 00:05:34,039
+00:05:27,109 --> 00:05:34,135
 And her job holds the work every manager does: strategy, money, risk, people, stakeholders and delivery.
 
 46
-00:05:35,939 --> 00:05:37,797
+00:05:36,035 --> 00:05:37,893
 So she finds who is deep in each.
 
 47
-00:05:39,097 --> 00:05:45,819
+00:05:39,193 --> 00:05:45,915
 Noor, the data architect, in architecture and modelling. Sam, in the platform, storage and integration.
 
 48
-00:05:47,319 --> 00:05:52,795
+00:05:47,415 --> 00:05:52,816
 Jun, in the warehouse and its reports. Yusuf, in governance, metadata and quality.
 
 49
-00:05:54,295 --> 00:05:57,430
+00:05:54,316 --> 00:05:57,451
 Where no one on the team is deep, she writes that down too.
 
 50
-00:05:59,130 --> 00:06:05,085
+00:05:59,151 --> 00:06:05,106
 Her part is to see the areas as one system, know who is deep in each, and decide where to start.
 
 51
-00:06:06,985 --> 00:06:11,719
+00:06:07,006 --> 00:06:11,740
 The generalist's skill, seeing the whole, has its own film: Many hats, one picture.
 
 52
-00:06:14,419 --> 00:06:22,799
+00:06:14,440 --> 00:06:22,820
 For her first three months, she borrows a shape from Michael Watkins's book, The First 90 Days: learn fast, and secure early wins.
 
 53
-00:06:24,499 --> 00:06:29,799
+00:06:24,520 --> 00:06:29,820
 Her plan has three lanes, run side by side: people, strategy and operations.
 
 54
-00:06:31,499 --> 00:06:36,245
+00:06:31,520 --> 00:06:36,266
 People, all twelve weeks: the team, the data's owners, and the people who use it.
 
 55
-00:06:37,745 --> 00:06:43,198
+00:06:37,766 --> 00:06:43,219
 Strategy, in three steps: discover what is, define what should be, and plan how to get there.
 
 56
-00:06:44,698 --> 00:06:51,425
+00:06:44,719 --> 00:06:51,446
 Each step ends on a date she can be held to: 15 March, 5 April and 26 April.
 
 57
-00:06:53,125 --> 00:06:56,198
+00:06:53,146 --> 00:06:56,219
 Operations keeps today's work going while she learns.
 
 58
-00:06:57,498 --> 00:07:05,774
+00:06:57,519 --> 00:07:05,795
 The first two weeks, the urgent problems. From 15 February, delivery in two-week sprints, with the team's procedures as they are.
 
 59
-00:07:07,474 --> 00:07:12,478
+00:07:07,495 --> 00:07:12,499
 Only in week six does she propose better ways, and she tests them in weeks nine to twelve.
 
 60
-00:07:14,178 --> 00:07:18,088
+00:07:14,199 --> 00:07:18,109
 Don't change everything on day one, and don't wait ninety days to help.
 
 61
-00:07:19,988 --> 00:07:25,005
+00:07:20,009 --> 00:07:25,026
 At the mine, the big drills took weeks, but food went down the narrow hole the whole time.
 
 62
-00:07:27,705 --> 00:07:30,206
+00:07:27,726 --> 00:07:30,227
 On Friday, the plan fits on one page.
 
 63
-00:07:31,706 --> 00:07:36,560
+00:07:31,727 --> 00:07:36,581
 She shows it to David Mensah, the deputy vice-chancellor, and then to her team.
 
 64
-00:07:38,060 --> 00:07:42,330
+00:07:38,081 --> 00:07:42,351
 It promises no fix before she has listened, and dates she can be held to.
 
 65
-00:07:44,030 --> 00:07:50,233
+00:07:44,051 --> 00:07:50,254
 Everyone waiting on a request hears where it stands, and by the end of the ninety days, each has an answer.
 
 66
-00:07:52,133 --> 00:07:57,496
+00:07:52,154 --> 00:07:57,517
 In the Atacama, every part of the rescue had someone who knew it, and all thirty-three came up.
 
 67
-00:07:59,396 --> 00:08:05,725
+00:07:59,417 --> 00:08:05,746
 Helena's ninety days work the same way: every area is one job, and no one waits without an answer.
 
 68
-00:08:07,425 --> 00:08:10,294
+00:08:07,446 --> 00:08:10,315
 On Monday, keep today's work running while you learn.
 
 69
-00:08:11,394 --> 00:08:15,515
+00:08:11,415 --> 00:08:15,536
 Put your plan on one page, in three lanes, with dates you can be held to.
 
 70
-00:08:16,615 --> 00:08:20,013
+00:08:16,636 --> 00:08:20,034
 Learn each area's words, and who on your team is deep in each.
 
 71
-00:08:21,313 --> 00:08:24,407
+00:08:21,334 --> 00:08:24,428
 What Helena does first is listen. That's the next film.
 
 72
-00:08:25,907 --> 00:08:29,897
+00:08:25,928 --> 00:08:29,918
 See every area as one job; plan ninety days in three lanes.

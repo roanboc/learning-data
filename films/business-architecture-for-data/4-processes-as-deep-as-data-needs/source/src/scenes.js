@@ -100,10 +100,10 @@ function b4_ladder(ctx,t,L){const op=L.open||0,own=L.own||0,dp=L.deep||0;
 // cup sits lower as it fills, until it fills and sinks (o.sink, 0..1), with a few bubbles
 const B4_BX0=852,B4_BX1=1268,B4_BTOP=720,B4_BBOT=900,B4_WL=760,B4_CUPX=968,B4_CUPR=58,B4_CUPD=46;
 function b4_clock(ctx,t,o){o=o||{};const fill=clamp(o.fill||0,0,1),sk=clamp(o.sink||0,0,1);
-  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#2b2233");g.addColorStop(0.5,"#6e5246");g.addColorStop(0.62,"#4d3a2e");g.addColorStop(1,"#211812");ctx.fillStyle=g;ctx.fillRect(-300,-300,W+600,H+600);
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#1c2148");g.addColorStop(0.5,"#7a5070");g.addColorStop(0.62,"#4a3a5a");g.addColorStop(1,"#1a1428");ctx.fillStyle=g;ctx.fillRect(-300,-300,W+600,H+600);
   glow(ctx,1500,380,760,[255,186,120],0.2);
   // the ground, and the ledge the basin stands on
-  ctx.fillStyle="rgba(40,28,20,0.6)";ctx.fillRect(-300,1010,W+600,300);
+  ctx.fillStyle="rgba(28,22,40,0.6)";ctx.fillRect(-300,1010,W+600,300);
   ctx.fillStyle="#5d4a3b";ctx.fillRect(820,912,480,200);ctx.fillStyle="#76604d";ctx.fillRect(808,900,504,22);
   ctx.strokeStyle="rgba(255,220,180,0.14)";ctx.lineWidth=2;for(let k=0;k<4;k++){ctx.beginPath();ctx.moveTo(820,950+k*40);ctx.lineTo(1300,950+k*40+((k%2)?4:-4));ctx.stroke();}
   // the basin, in section: its walls and floor, and the water in it
@@ -474,8 +474,8 @@ scene("pain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
     for(let k=0;k<5;k++){const x=150+k*120,y=720,out=k===2&&t>tDn,bad=k===4;b4_meter(ctx,x,y,{out});
       // its reading, up to read meters
       if(!(k===2&&t>tDn)){const u=clamp((t-tSe-k*0.12)/1.2,0,1);if(u>0&&u<1){const px=lerp(x,B4_RX(0)+B4_RW/2,u),py=lerp(y-46,B4_RY+B4_RH,u);glow(ctx,px,py,22,bad&&t>tFl-0.6?BA_RED:BA_NET,0.8);}}
-      if(out)withA(ctx,fin(t,tDn,0.4),()=>T(ctx,"none",x,y+80,{w:700,size:28,align:"center",color:rgba(BA_RED,1)}));
-      if(bad&&t>tFl)withA(ctx,fin(t,tFl,0.4),()=>T(ctx,"fails",x,y+80,{w:700,size:28,align:"center",color:rgba(BA_RED,1)}));}
+      if(out)withA(ctx,fin(t,tDn,0.4),()=>T(ctx,"none",x,y+80,{w:700,size:28,align:"center",color:rgba(mix(BA_RED,[255,255,255],0.22),1)}));
+      if(bad&&t>tFl)withA(ctx,fin(t,tFl,0.4),()=>T(ctx,"fails",x,y+80,{w:700,size:28,align:"center",color:rgba(mix(BA_RED,[255,255,255],0.22),1)}));}
     if(t>tEs)arrive(ctx,1050,520,t,tEs,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(AMBER,0.95);ctx.lineWidth=3;rr(ctx,940,482,220,76,10);ctx.stroke();ctx.restore();T(ctx,"an estimate",1050,530,{w:700,size:28,align:"center",color:rgba(AMBER,1)});
       arrowTo(ctx,1050,482,B4_RX(2)+B4_RW/2,B4_RY+B4_RH+6,AMBER,0.9,{p:clamp((t-tEs-0.2)/0.6,0,1),lw:2.5,head:12});},{dy:10});});
   // a household's bills: estimate after estimate, then one that caught up all at once

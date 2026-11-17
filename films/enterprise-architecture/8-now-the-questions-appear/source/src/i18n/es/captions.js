@@ -20,6 +20,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The other twenty-one reach nothing: a report someone needed once, a dashboard nobody acts on, an export nobody can explain.":"Los otros veintiuno no llegan a nada: un informe que alguien necesitó una vez, un tablero con el que nadie actúa, una exportación que nadie sabe explicar.",
 "Each goes back to whoever asked for it, with one question: what would you decide with it?":"Cada uno vuelve a quien lo pidió, con una pregunta: ¿qué decidirías con esto?",
 "Now the other way, from the top. A goal implies decisions. A decision needs questions answered. A question needs a measure.":"Ahora en sentido contrario, desde arriba. Una meta implica decisiones. Una decisión necesita preguntas respondidas. Una pregunta necesita una medida.",
+"It's Goal, Question, Metric, a method from the 1980s, with a decision added.":"Es Meta, Pregunta, Métrica, un método de los años ochenta, con una decisión añadida.",
 "Take replacing assets before they fail. Its outcome said only a better network, and nobody could check that.":"Por ejemplo, reemplazar los activos antes de que fallen. Su resultado solo decía «una red mejor», y nadie podía comprobarlo.",
 "Its decision is which lines to renew first, and its question is the one the planners asked.":"Su decisión es qué líneas renovar primero, y su pregunta es la que hicieron los planificadores.",
 "The measure: interruptions per customer, per year, line by line.":"La medida: interrupciones por cliente, por año, línea por línea.",

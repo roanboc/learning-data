@@ -9,10 +9,10 @@
     "scenes.js"
   ],
   "story": ["road"],
-  "poster": ["road", "shared", 7.0],
+  "poster": ["road", "shared", 0.89],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bAma\\b", "Ah-mah"],
     ["\\bRavi\\b", "Rah-vee"],
     ["\\bTokugawa Ieyasu\\b", "Toh-koo-gah-wah Ee-eh-yah-soo"],

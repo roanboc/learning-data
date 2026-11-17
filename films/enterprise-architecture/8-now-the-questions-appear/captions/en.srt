@@ -71,105 +71,109 @@ Each goes back to whoever asked for it, with one question: what would you decide
 Now the other way, from the top. A goal implies decisions. A decision needs questions answered. A question needs a measure.
 
 19
-00:02:41,052 --> 00:02:47,545
-Take replacing assets before they fail. Its outcome said only a better network, and nobody could check that.
+00:02:41,052 --> 00:02:46,069
+It's Goal, Question, Metric, a method from the 1980s, with a decision added.
 
 20
-00:02:49,145 --> 00:02:54,771
-Its decision is which lines to renew first, and its question is the one the planners asked.
+00:02:47,569 --> 00:02:54,062
+Take replacing assets before they fail. Its outcome said only a better network, and nobody could check that.
 
 21
-00:02:55,471 --> 00:02:59,251
-The measure: interruptions per customer, per year, line by line.
+00:02:55,662 --> 00:03:01,288
+Its decision is which lines to renew first, and its question is the one the planners asked.
 
 22
-00:03:00,951 --> 00:03:06,159
-From the top and from the bottom, they meet at one decision. Now the goal can be checked.
+00:03:01,988 --> 00:03:05,768
+The measure: interruptions per customer, per year, line by line.
 
 23
-00:03:11,859 --> 00:03:17,246
-Keeping bills affordable has a measure for the network charge, but none for the people who pay it.
+00:03:07,468 --> 00:03:12,676
+From the top and from the bottom, they meet at one decision. Now the goal can be checked.
 
 24
-00:03:18,746 --> 00:03:26,593
-Retail decides whom to offer help, before a household falls too far behind. Its question: how many are falling behind?
+00:03:18,376 --> 00:03:23,763
+Keeping bills affordable has a measure for the network charge, but none for the people who pay it.
 
 25
-00:03:27,293 --> 00:03:30,735
-The hardship register counts only those already getting help.
+00:03:25,263 --> 00:03:33,110
+Retail decides whom to offer help, before a household falls too far behind. Its question: how many are falling behind?
 
 26
-00:03:32,435 --> 00:03:38,993
-Farah, who speaks for customers, has asked for that number for years. A goal without a measure can't be steered.
+00:03:33,810 --> 00:03:37,252
+The hardship register counts only those already getting help.
 
 27
-00:03:41,693 --> 00:03:47,319
-Connecting renewable power does have a measure: new solar connected within ten working days.
+00:03:38,952 --> 00:03:45,657
+Farah, who speaks for customers, has asked for that number for years. A goal without a measure can't be steered.
 
 28
-00:03:48,019 --> 00:03:52,035
-Two reports count it, and disagree: thirty-four days, and twenty-one.
+00:03:48,357 --> 00:03:53,983
+Connecting renewable power does have a measure: new solar connected within ten working days.
 
 29
-00:03:53,635 --> 00:03:58,861
-They start and stop the clock at different moments. Both are right. Neither is the measure.
+00:03:54,683 --> 00:03:58,699
+Two reports count it, and disagree: thirty-four days, and twenty-one.
 
 30
-00:04:00,461 --> 00:04:09,459
-So Grace writes one definition down: from a complete application to the new meter, in working days, Monday to Friday, not public holidays.
+00:04:00,299 --> 00:04:05,525
+They start and stop the clock at different moments. Both are right. Neither is the measure.
 
 31
-00:04:11,059 --> 00:04:13,617
-Now everyone who counts it gets the same number.
+00:04:07,125 --> 00:04:16,123
+So Grace writes one definition down: from a complete application to the new meter, in working days, Monday to Friday, not public holidays.
 
 32
-00:04:16,317 --> 00:04:20,419
-Each measure gets a home on the map: the capability whose work it measures.
+00:04:17,723 --> 00:04:20,281
+Now everyone who counts it gets the same number.
 
 33
-00:04:21,119 --> 00:04:30,223
-Interruptions, under maintaining assets. Days to connect, under connecting customers. Households falling behind, under serving customers.
+00:04:22,981 --> 00:04:27,083
+Each measure gets a home on the map: the capability whose work it measures.
 
 34
-00:04:31,923 --> 00:04:37,783
-And each gets that capability's owner: Grace for the first two, the head of retail for the third.
+00:04:27,783 --> 00:04:36,887
+Interruptions, under maintaining assets. Days to connect, under connecting customers. Households falling behind, under serving customers.
 
 35
-00:04:38,483 --> 00:04:41,685
-An owner says what the number means, and acts when it moves.
+00:04:38,587 --> 00:04:44,447
+And each gets that capability's owner: Grace for the first two, the head of retail for the third.
 
 36
-00:04:44,385 --> 00:04:50,831
-Now, what to build. Twenty-one requests could become twenty-one reports, each kept by someone different.
+00:04:45,147 --> 00:04:48,349
+An owner says what the number means, and acts when it moves.
 
 37
-00:04:52,331 --> 00:05:01,240
-Grouped by capability, and by the domain they belong to, they need four data products: three on the network's side of the wall, one on retail's.
+00:04:51,049 --> 00:04:57,495
+Now, what to build. Twenty-one requests could become twenty-one reports, each kept by someone different.
 
 38
-00:05:02,940 --> 00:05:07,676
-Each answers many questions, has one owner, and stays on its own side of the wall.
+00:04:58,995 --> 00:05:07,904
+Grouped by capability, and by the domain they belong to, they need four data products: three on the network's side of the wall, one on retail's.
 
 39
-00:05:10,376 --> 00:05:14,385
-Back on the coast of Kerala, the phones spread, district by district.
+00:05:09,604 --> 00:05:14,340
+Each answers many questions, has one owner, and stays on its own side of the wall.
 
 40
-00:05:15,885 --> 00:05:21,201
-On boat after boat, the skipper now knew what each market would pay before choosing where to land.
+00:05:17,040 --> 00:05:21,049
+Back on the coast of Kerala, the phones spread, district by district.
 
 41
-00:05:22,901 --> 00:05:30,480
-The waste stopped, and prices along the coast evened out. Crews earned eight percent more, and fish cost four percent less.
+00:05:22,549 --> 00:05:27,865
+On boat after boat, the skipper now knew what each market would pay before choosing where to land.
 
 42
-00:05:33,180 --> 00:05:39,372
-Grace confirms her measures and their definitions. The third goes to the head of retail, as a draft.
+00:05:29,565 --> 00:05:37,144
+The waste stopped, and prices along the coast evened out. Crews earned eight percent more, and fish cost four percent less.
 
 43
-00:05:40,772 --> 00:05:49,785
-Tomás's note has an answer: the questions that matter are the ones someone will act on, in time, traced to a goal, with a measure and an owner.
+00:05:39,844 --> 00:05:46,036
+Grace confirms her measures and their definitions. The third goes to the head of retail, as a draft.
 
 44
-00:05:51,385 --> 00:05:58,973
+00:05:47,436 --> 00:05:56,449
+Tomás's note has an answer: the questions that matter are the ones someone will act on, in time, traced to a goal, with a measure and an owner.
+
+45
+00:05:58,049 --> 00:06:05,637
 But a measure is only as true as the data beneath it, and the rules that data must keep. Next: where each rule belongs.

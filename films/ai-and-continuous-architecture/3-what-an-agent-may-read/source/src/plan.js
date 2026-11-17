@@ -42,9 +42,9 @@ function a3_who(ctx,id,x,a,t,o){o=o||{};if(a<=0.01)return;a3_fade(ctx,a,cx=>{con
 // lamp is the film's. o.lamp (0..1): how bright the lamp burns; o.dim (0..1): the room in shadow, under cards
 const A3_LX=1086,A3_LY=664,A3_FL=812,A3_SX=650,A3_OX=930,A3_OY=706;
 function a3_room(ctx,t,o){o=o||{};const lp=o.lamp==null?1:o.lamp,fl=0.9+0.07*Math.sin(t*7.3)*Math.sin(t*3.1+1)+0.03*Math.sin(t*13.7);
-  const wall=[44,30,22],lit=mix(wall,A3_LAMP,0.42);
+  const wall=[34,30,54],lit=mix([72,48,32],A3_LAMP,0.42);
   // the back wall, its courses of mud brick, and the light of the lamp on it
-  const g=ctx.createRadialGradient(A3_LX,A3_LY-60,40,A3_LX,A3_LY-60,1100);g.addColorStop(0,rgba(mix(wall,lit,0.85*lp*fl),1));g.addColorStop(0.45,rgba(mix(wall,lit,0.35*lp),1));g.addColorStop(1,rgba(mix(wall,[10,8,8],0.55),1));
+  const g=ctx.createRadialGradient(A3_LX,A3_LY-60,40,A3_LX,A3_LY-60,1100);g.addColorStop(0,rgba(mix(wall,lit,0.85*lp*fl),1));g.addColorStop(0.45,rgba(mix(wall,lit,0.35*lp),1));g.addColorStop(1,rgba(mix(wall,[8,8,24],0.55),1));
   ctx.fillStyle=g;ctx.fillRect(-500,-400,2920,A3_FL+400);
   ctx.save();ctx.strokeStyle="rgba(0,0,0,0.13)";ctx.lineWidth=1.4;ctx.beginPath();for(let y=A3_FL-30,r=0;y>-380;y-=30,r++){ctx.moveTo(-500,y);ctx.lineTo(2420,y);for(let x=-500+(r%2)*36;x<2420;x+=72){ctx.moveTo(x,y);ctx.lineTo(x,y-30);}}ctx.stroke();ctx.restore();
   // the doorway onto the courtyard: the night, a few stars, the far wall and a palm against the sky
@@ -54,13 +54,13 @@ function a3_room(ctx,t,o){o=o||{};const lp=o.lamp==null?1:o.lamp,fl=0.9+0.07*Mat
   ctx.fillStyle="#0c0c14";ctx.fillRect(dx0-10,640,dx1-dx0+20,A3_FL-640);for(let x=dx0;x<dx1;x+=26)ctx.fillRect(x,632,14,8);bab_palm(ctx,dx0+150,642,150,t,{col:[12,12,20],lean:0.08});ctx.restore();
   ctx.save();ctx.strokeStyle=rgba(mix(wall,A3_LAMP,0.5),0.35*lp);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(dx1+1,A3_FL);ctx.lineTo(dx1+1,dy0+60);ctx.quadraticCurveTo(dx1+1,dy0-1,(dx0+dx1)/2,dy0-1);ctx.stroke();ctx.restore();
   // niches in the back wall, with tablets laid in them, and two jars of tablets on the floor
-  [[1330,330,230,150],[1610,330,230,150]].forEach(([x,y,w,h],k)=>{ctx.fillStyle="rgba(10,6,4,0.55)";ctx.fillRect(x,y,w,h);ctx.fillStyle="rgba(0,0,0,0.25)";ctx.fillRect(x,y,w,10);
+  [[1330,330,230,150],[1610,330,230,150]].forEach(([x,y,w,h],k)=>{ctx.fillStyle="rgba(8,8,24,0.55)";ctx.fillRect(x,y,w,h);ctx.fillStyle="rgba(0,0,0,0.25)";ctx.fillRect(x,y,w,10);
     for(let i=0;i<5;i++){const tx=x+18+i*42,th=46+hash(i+k*5,705)*30;ctx.fillStyle=rgba(mix(BAB_CLAY,[60,40,26],0.55-0.25*lp),1);rr(ctx,tx,y+h-th,32,th,5);ctx.fill();ctx.fillStyle="rgba(0,0,0,0.18)";ctx.fillRect(tx+26,y+h-th,6,th);}});
   [[1470,0],[1588,1]].forEach(([x,k])=>{const h=150-k*24,w=94-k*10,y=A3_FL+6;ctx.save();ctx.beginPath();ctx.moveTo(x-w*0.22,y-h);ctx.quadraticCurveTo(x-w*0.62,y-h*0.62,x-w*0.3,y);ctx.lineTo(x+w*0.3,y);ctx.quadraticCurveTo(x+w*0.62,y-h*0.62,x+w*0.22,y-h);ctx.closePath();
-    const jg=ctx.createLinearGradient(x-w/2,0,x+w/2,0);jg.addColorStop(0,rgba(mix(BAB_CLAY,[30,20,14],0.75),1));jg.addColorStop(1,rgba(mix(BAB_CLAY,[30,20,14],0.5-0.2*lp),1));ctx.fillStyle=jg;ctx.fill();
+    const jg=ctx.createLinearGradient(x-w/2,0,x+w/2,0);jg.addColorStop(0,rgba(mix(BAB_CLAY,[26,24,50],0.75),1));jg.addColorStop(1,rgba(mix(BAB_CLAY,[30,22,30],0.5-0.2*lp),1));ctx.fillStyle=jg;ctx.fill();
     ctx.fillStyle="rgba(0,0,0,0.3)";ctx.fillRect(x-w*0.24,y-h-8,w*0.48,10);ctx.fillStyle=rgba(mix(BAB_CLAY,[40,26,18],0.5),1);for(let i=0;i<3;i++){rr(ctx,x-w*0.18+i*w*0.12,y-h-30+hash(i+k*3,706)*10,w*0.1,28,3);ctx.fill();}ctx.restore();});
   // the floor of beaten earth, and the reed mat
-  const fg=ctx.createLinearGradient(0,A3_FL,0,1180);fg.addColorStop(0,rgba(mix([40,28,20],A3_LAMP,0.2*lp),1));fg.addColorStop(1,"#0b0807");ctx.fillStyle=fg;ctx.fillRect(-500,A3_FL,2920,700);
+  const fg=ctx.createLinearGradient(0,A3_FL,0,1180);fg.addColorStop(0,rgba(mix([36,30,50],A3_LAMP,0.2*lp),1));fg.addColorStop(1,"#0a0a1a");ctx.fillStyle=fg;ctx.fillRect(-500,A3_FL,2920,700);
   ctx.save();ctx.beginPath();ctx.moveTo(440,A3_FL+8);ctx.lineTo(980,A3_FL+8);ctx.lineTo(1030,A3_FL+70);ctx.lineTo(400,A3_FL+70);ctx.closePath();ctx.fillStyle=rgba(mix([92,70,42],A3_LAMP,0.25*lp),1);ctx.fill();ctx.clip();
   ctx.strokeStyle="rgba(40,26,14,0.35)";ctx.lineWidth=2;ctx.beginPath();for(let i=0;i<32;i++){const u=i/32;ctx.moveTo(lerp(440,400,0)+u*560,A3_FL+8);ctx.lineTo(400+u*640,A3_FL+70);}for(let y=A3_FL+16;y<A3_FL+70;y+=10){ctx.moveTo(380,y);ctx.lineTo(1040,y);}ctx.stroke();ctx.restore();
   // the low stand by the scribe, where the original lies and the lamp burns

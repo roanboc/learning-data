@@ -7,15 +7,15 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["morning", "crew", 4.5],
+  "poster": ["morning", "street", 2.47],
   "say": [
     [
       "\\bTomás's\\b",
-      "Toh-mahs's"
+      "Toh-mahss's"
     ],
     [
       "\\bTomás\\b",
-      "Toh-mahs"
+      "Toh-mahss"
     ]
   ]
 }

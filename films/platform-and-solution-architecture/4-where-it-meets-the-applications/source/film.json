@@ -8,10 +8,10 @@
     "scenes.js"
   ],
   "story": ["chuma"],
-  "poster": ["chuma", "sort", 7.5],
+  "poster": ["chuma", "better", 13.12],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bRavi's\\b", "Rah-vee's"],
     ["\\bRavi\\b", "Rah-vee"],
     ["\\bYasmin\\b", "Yahs-meen"],

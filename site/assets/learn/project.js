@@ -1,5 +1,5 @@
 /* Learning Data: the example project's page (dbt-project/). Makes its three parts interactive: a live map of the four folders,
-   where one question is followed in eleven steps and lenses show what attaches where; what dbt alone can't answer; and the open
+   where a goal and its question are followed in twelve steps and lenses show what attaches where; what dbt alone can't answer; and the open
    standards, line by line. Without this script every part reads in order, as site-tools/build_series.py writes it; with it, each
    part gets .is-live. */
 (() => {
@@ -52,7 +52,7 @@
 
   // 1. The map. Two layers move together as a camera over the map: the folders and their lines behind, the pieces in front, and
   // between them a canvas where light is data: rows along the dbt project's line, context down from governance, the answer back
-  // to the question. The play bar follows the question in eleven steps; a piece opens its panel; a lens shows what attaches where.
+  // to the question. The play bar follows the goal and its question in twelve steps; a piece opens its panel; a lens shows what attaches where.
   function map(app) {
     const vp = $('.px-vp', app), back = $('.px-back', app), front = $('.px-front', app), cv = $('.px-dots', app);
     const bar = $('.px-bar', app), foot = $('.px-foot', app), insp = $('.px-insp', app), hint = $('.px-hint', app);
@@ -349,6 +349,15 @@
     pathBtns.forEach(b => { b.hidden = false; b.addEventListener('click', () => { stop(); setPath(b.dataset.path); }); });
     setPath('new');
 
+    // the goal's tree: a question in it shows what it asks, one at a time, the first suggestion to start; a question already asked
+    // links to the step that follows it
+    const qs = $$('.px-gqn[data-q]', insp), qds = $$('.px-gqd', insp), qhint = $('.px-gqh', insp), qbox = $('.px-gqds', insp);
+    function pickQ(q) {
+      qs.forEach(a => a.setAttribute('aria-current', a.dataset.q === q ? 'true' : 'false'));
+      qds.forEach(d => { d.hidden = d.dataset.q !== q; });
+    }
+    if (qds.length) { if (qhint) qhint.hidden = false; qbox.setAttribute('aria-live', 'polite'); pickQ(qds[0].dataset.q); }
+
     // ---- playing
     function setPlay() {
       label.textContent = playing ? play.dataset.pause : step === N ? play.dataset.again : play.dataset.play;
@@ -524,6 +533,8 @@
       h.tabIndex = -1; h.focus({ preventScroll: true });
     }
     insp.addEventListener('click', e => {
+      const q = e.target.closest('.px-gqn[data-q]');
+      if (q) { e.preventDefault(); stop(); pickQ(q.dataset.q); return; }
       const a = e.target.closest('a[href^="#px-"]');
       if (a) { e.preventDefault(); const id = a.hash.slice(4); show(id, 'click'); land(id); return; }
       const b = e.target.closest('.px-hbtn');
@@ -554,7 +565,8 @@
     const first = (at0 && at0.closest('.px-art')) || arts.i0;
     mode(innerWidth <= 640 ? innerWidth : innerWidth - 2 * Math.max(12, innerWidth / 2 - 650) - 16);  // from the window, until the page is laid out
     Object.keys(arts).forEach(k => { arts[k].hidden = arts[k] !== first; });  // one panel from the first frame
-    rove(byId.q);
+    if (at0 && at0.classList.contains('px-gqd')) pickQ(at0.dataset.q);  // a link to a suggested question opens it
+    rove(nodes[0]);
     // what needs measuring waits until the page has been laid out once, so starting the map never holds the page
     requestAnimationFrame(() => setTimeout(() => {
       layout(); show(first.id.slice(3), 'init'); app.classList.add('is-ready');

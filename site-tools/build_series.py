@@ -1343,8 +1343,8 @@ PROJECT_TEXT = {
 }
 # the main folders of the project, and what each holds
 PROJECT_PARTS = [
-    (["../00-initiatives/"], "Where a question starts: Analytics' record of every question it's asked, and each initiative's business requirements, as its tickets hold them.",
-     "Donde empieza una pregunta: el registro de Analítica de cada pregunta que recibe, y los requisitos del negocio de cada iniciativa, tal como los guardan sus tickets."),
+    (["../00-initiatives/"], "Where a question starts: Analytics' record of every question it's asked, each initiative's business requirements, as its tickets hold them, and each goal's tree, where the data team finds the questions to suggest first.",
+     "Donde empieza una pregunta: el registro de Analítica de cada pregunta que recibe, los requisitos del negocio de cada iniciativa, tal como los guardan sus tickets, y el árbol de cada meta, donde el equipo de datos encuentra las preguntas que sugerir primero."),
     (["../10-enterprise-architecture/"], "The university's enterprise architecture: every area and data domain, and below them only what the questions need: their data objects and the systems of record that feed them.",
      "La arquitectura empresarial de la universidad: cada área y dominio de datos, y debajo solo lo que las preguntas necesitan: sus objetos de datos y los sistemas de registro que los alimentan."),
     (["models/"], "What's built, by domain: staging, the core tables every team shares, and the marts each team reads.",
@@ -1437,9 +1437,10 @@ def project_box(lg, n, RL):
 
 # The example project's page shows how the business reaches the code, in five parts to play with (the author, 15 November 2026:
 # "make it more interactive"; 16 November: the question starts in Analytics' records, and an initiative's ticket brings it to the
-# architecture): Planning's question, followed in eleven steps across the four folders, each with its real file; the
-# eight questions a dbt project alone can't answer, and the piece of context that answers each; one learner through the data
-# project's seven layers; the three open standards, line by line; and the check that holds each handoff. Each part is HTML that
+# architecture; 17 November: Goal–Question–Metric frames the question, and a goal's tree holds the measures): Planning's goal and
+# its question, followed in twelve steps across the four folders, each with its real file; the eight questions a dbt project
+# alone can't answer, and the piece of context that answers each; one learner through the data project's seven layers; the
+# three open standards, line by line; and the check that holds each handoff. Each part is HTML that
 # reads on its own; assets/learn/project.js makes it interactive, and assets/learn/project.css draws it. The files' lines are
 # copied as they are in the project's repository (path, first line, lines): check_site.py compares them with a checkout of it.
 # The page loads the script and the stylesheet by a hash of each (asset_v()): after changing either, run this again.
@@ -1451,13 +1452,94 @@ PROJECT_LANES = {  # the folders: their number, name and what each says
 }
 PROJECT_FACULTIES = [(("Arts and Education", "Artes y Educación"), 2), (("Business", "Negocios"), 3),
                      (("Engineering and IT", "Ingeniería y TI"), 5), (("Health", "Salud"), 2)]  # the census report's, as the mart gives them
-# Planning's question, in eleven steps, in the order the work happens (the author, 16 November 2026: the question is born in
-# analytics, often with no known answer; an initiative carries it into a ticket; then the architecture's data objects and systems
-# of record, governance's glossary entities and the core entity's contract, and the data team builds up to that core entity, or
-# checks first what's already built). Each step: the lane, the node's name and a short tag, what the step is, what it passes on,
-# and its file: a table's row (rows: the header and the row) or YAML lines (code: blocks of (first line, lines); hi: the lines to
-# light). paths: two ways the step can go, which the panel switches between.
+# Planning's goal and its question, in twelve steps, in the order the work happens (the author, 16 November 2026: the question is
+# born in analytics, often with no known answer; an initiative carries it into a ticket; then the architecture's data objects and
+# systems of record, governance's glossary entities and the core entity's contract, and the data team builds up to that core
+# entity, or checks first what's already built; 17 November: Goal–Question–Metric, so the goal comes first, with its tree of
+# measures, where the data team finds the questions to suggest before anyone asks). Each step: the lane, the node's name and a
+# short tag, what the step is, what it passes on, and its file: a table's row (rows: the header and the row), a table's rows of
+# names and values (pairs), or YAML lines (code: blocks of (first line, lines); hi: the lines to light). paths: two ways the step
+# can go, which the panel switches between; tree: the goal's tree (PROJECT_TREE).
+# Planning's goal, and its tree as 00-initiatives/goals/learning-and-teaching.md draws it (the author, 17 November 2026: "let's go
+# with goal question metric", a metric tree holding the measures): the goal's rows, its measures and arrows and the suggested
+# questions' rows are copied as they are, and check_site.py holds each line to the file. The page draws the tree as an outline,
+# from the goal's measure down: a solid arrow is a formula (+ or ×), a dotted one a driver. Then, in Spanish, each measure's name,
+# and each suggested question, where it stands, why now, the decision it informs and its size.
+PROJECT_GOAL_FILE = "../00-initiatives/goals/learning-and-teaching.md"
+PROJECT_GOAL_ROWS = [
+    "| **Goal** | **More learners finish the award they started** |",
+    "| Owner | Clara Jensen, Planning |",
+    "| What for | To put advising, units and support where they keep learners on track |",
+    "| Seeded from | The measures the whole sector reports: completions, retention and success, as the Department of Education publishes them from TCSI |",
+]
+PROJECT_GOAL_ES = "Más estudiantes terminan el título que empezaron"
+PROJECT_TREE = [
+    '  awards["Awards completed"]:::starter',
+    '  bach["Bachelor degrees"]:::starter',
+    '  gc["Graduate certificates"]:::starter',
+    '  mast["Masters and other awards"]:::starter',
+    '  fy["Final-year learners"]:::starter',
+    '  bshare["Share completing this year"]:::starter',
+    '  ret["Retention after first year · SQ3"]:::suggested',
+    '  succ["Final-year success rate"]:::starter',
+    '  nearfin["Finished from near the award"]:::starter',
+    '  far["Finished from further away"]:::starter',
+    '  near["Learners near the award · AQ1"]:::answered',
+    '  cp["Credit points held · AQ1"]:::answered',
+    '  finish["Share who finish this year · SQ1"]:::suggested',
+    '  pass["Pass rate, remaining units"]:::starter',
+    '  unit["Can\'t get a unit they need · SQ2"]:::suggested',
+    '  credit["Credit recognised"]:::starter',
+    '  bach -->|"+"| awards',
+    '  gc -->|"+"| awards',
+    '  mast -->|"+"| awards',
+    '  fy -->|"×"| bach',
+    '  bshare -->|"×"| bach',
+    '  ret -.->|"drives"| fy',
+    '  succ -.->|"drives"| bshare',
+    '  nearfin -->|"+"| gc',
+    '  far -->|"+"| gc',
+    '  near -->|"×"| nearfin',
+    '  finish -->|"×"| nearfin',
+    '  cp -.->|"drives"| near',
+    '  pass -.->|"drives"| finish',
+    '  unit -.->|"drives"| finish',
+    '  credit -.->|"drives"| finish',
+]
+PROJECT_TREE_ES = {
+    "awards": "Títulos completados", "bach": "Licenciaturas", "gc": "Certificados de posgrado", "mast": "Maestrías y otros títulos",
+    "fy": "Estudiantes de último año", "bshare": "Proporción que se titula este año", "ret": "Retención tras el primer año",
+    "succ": "Tasa de éxito en el último año", "nearfin": "Terminaron estando cerca del título", "far": "Terminaron desde más lejos",
+    "near": "Estudiantes cerca del título", "cp": "Créditos que tienen", "finish": "Proporción que termina este año",
+    "pass": "Tasa de aprobación, unidades que faltan", "unit": "No consiguen una unidad que necesitan", "credit": "Créditos reconocidos",
+}
+PROJECT_SUGGESTED = [  # each suggested question: its row in the questions, its row in what each suggestion says, and in Spanish
+    ("| `SQ1` | **Of the learners near a graduate certificate at census, how many finish within the year?** | Share who finish this year | Suggested to Clara Jensen, no answer yet |",
+     "| `SQ1` | Planning puts advising where learners are near an award at census. This shows whether it worked, faculty by faculty. | Where to put advising next census | Small: the date each award is conferred, beside what's already counted |",
+     ("De los estudiantes cerca de un certificado de posgrado en el censo, ¿cuántos terminan dentro del año?", "Sugerida a Clara Jensen, sin respuesta aún",
+      "Planificación pone la asesoría donde hay estudiantes cerca de un título en el censo. Esto muestra si funcionó, facultad por facultad.",
+      "Dónde poner la asesoría en el próximo censo", "Pequeña: la fecha en que se otorga cada título, junto a lo que ya se cuenta")),
+    ("| `SQ2` | **How many learners near an award can't get a unit they need next term, by faculty?** | Can't get a unit they need | Suggested to Clara Jensen, for Planning and the faculties, no answer yet |",
+     "| `SQ2` | It warns before census, while there's still time to put a unit on. Counts only, no names, as `BR3` asks of `AQ1` in [Census planning 2026](../census-planning-2026.md). | Which units to run next term | Medium: learners' study plans and the units on offer, neither read yet |",
+     ("¿Cuántos estudiantes cerca de un título no consiguen una unidad que necesitan el próximo periodo, por facultad?",
+      "Sugerida a Clara Jensen, para Planificación y las facultades, sin respuesta aún",
+      "Avisa antes del censo, cuando aún hay tiempo de abrir una unidad. Solo conteos, sin nombres, como pide `BR3` para `AQ1` en Census planning 2026.",
+      "Qué unidades abrir el próximo periodo", "Mediana: los planes de estudio de los estudiantes y las unidades que se ofrecen, ninguno leído todavía")),
+    ("| `SQ3` | **Of last year's new bachelor learners who didn't finish, how many came back this year, by faculty?** | Retention after first year | Suggested to Clara Jensen, no answer yet |",
+     "| `SQ3` | It's the sector's own retention rate, which the Department of Education publishes for every university, so the definition exists. | Where to put first-year support | Small: enrolments, year on year |",
+     ("De los nuevos estudiantes de licenciatura del año pasado que no terminaron, ¿cuántos volvieron este año, por facultad?",
+      "Sugerida a Clara Jensen, sin respuesta aún",
+      "Es la tasa de retención del propio sector, que el Departamento de Educación publica para cada universidad, así que la definición ya existe.",
+      "Dónde poner el apoyo de primer año", "Pequeña: matrículas, año contra año")),
+]
 PROJECT_STEPS = [
+    dict(lane="in", node=("Goal", "Meta"), tag=("Goal", "Meta"), title=("A goal, and its tree", "Una meta, y su árbol"),
+         text=("Planning's goal comes first: more learners finish the award they started. Below it hang the questions that show whether it's met, each with a measure, in a tree. This is Goal–Question–Metric. Clara Jensen asked one question herself; the data team keeps the tree with her and suggests first the ones nobody has asked.",
+               "Primero está la meta de Planificación: que más estudiantes terminen el título que empezaron. De ella cuelgan las preguntas que muestran si se cumple, cada una con su medida, en un árbol. Es el método Goal–Question–Metric. Clara Jensen hizo una pregunta ella misma; el equipo de datos cuida el árbol con ella y sugiere primero las que nadie ha hecho."),
+         passes=("Clara's own question goes to Analytics' records. A suggestion goes there too, once its owner says yes in a ticket.",
+                 "La pregunta de Clara va a los registros de Analítica. Una sugerencia también va allí, cuando su responsable dice que sí en un ticket."),
+         file=PROJECT_GOAL_FILE, pairs=PROJECT_GOAL_ROWS, tree=True,
+         holds=PROJECT_TREE + [line for q, w, _ in PROJECT_SUGGESTED for line in (q, w)]),
     dict(lane="in", node=("Question", "Pregunta"), tag=("AQ1", "AQ1"), title=("A question, born in analytics", "Una pregunta que nace en la analítica"),
          text=("Planning needs to know how many learners are close to a graduate certificate. Most questions arrive with no known answer; this one had only a count by hand. Analytics records it: who asks, what's known of the answer and who will check the result.",
                "Planificación necesita saber cuántos estudiantes están cerca de un certificado de posgrado. La mayoría de las preguntas llegan sin respuesta conocida; esta solo tenía un conteo a mano. Analítica la registra: quién pregunta, qué se sabe de la respuesta y quién revisará el resultado."),
@@ -1593,8 +1675,8 @@ PROJECT_ASKS = [
      None, ("30 · dbt", "30 · dbt"), "models/marts/planning/mart_planning__near_award.sql"),
     ("q", ("Who asked for it, and why?", "¿Quién lo pidió, y para qué?"),
      ("A model's description, if someone wrote one.", "La descripción de un modelo, si alguien la escribió."),
-     ("Planning, for the census. Analytics recorded the question as AQ1, and the initiative Census planning 2026 carries it in ticket DATA-142.",
-      "Planificación, para el censo. Analítica registró la pregunta como AQ1, y la iniciativa Census planning 2026 la lleva en el ticket DATA-142."),
+     ("Planning, for the census and for its goal: more learners finish the award they started. Analytics recorded the question as AQ1, and the initiative Census planning 2026 carries it in ticket DATA-142.",
+      "Planificación, para el censo y para su meta: que más estudiantes terminen el título que empezaron. Analítica registró la pregunta como AQ1, y la iniciativa Census planning 2026 la lleva en el ticket DATA-142."),
      ("00 · Analytics’ records", "00 · Registros de Analítica"), "../00-initiatives/analytics-questions.md"),
     ("g", ("What counts as an award?", "¿Qué cuenta como un título?"),
      ("A column description, written model by model, maybe differently in each.", "Una descripción de columna, escrita modelo por modelo, quizá distinta en cada uno."),
@@ -1773,15 +1855,20 @@ PROJECT_UI = {
         jump="On this page", follow="Follow one question",
         jumps=[("journey", "The map"), ("context", "What dbt alone misses"), ("standards", "Open standards"), ("run", "Run it")],
         j_h="Follow one question",
-        j_p="A question starts in analytics, usually with no answer yet, and an initiative carries it into a ticket. The architecture finds what it needs, data governance says what its words mean and what is promised, and the dbt project builds it. Press Play, or pick any piece of the map.",
+        j_p="A goal comes first, with the questions that show whether it's met. A question starts in analytics, usually with no answer yet, and an initiative carries it into a ticket. The architecture finds what it needs, data governance says what its words mean and what is promised, and the dbt project builds it. Press Play, or pick any piece of the map.",
         asks="Planning asks", question="How many learners are within 15 credit points of a graduate certificate, by faculty, as at census date?",
-        answer="Answer", steps="Eleven steps, from the question to the answer",
+        answer="Answer", steps="Twelve steps, from the goal to the answer", goal_k="Goal · Planning",
+        tree="Its measures, as a tree", t_legend=[("ok", "Answered"), ("in", "Suggested"), ("st", "Not asked yet")],
+        t_f="A formula", t_d="A driver, checked in the data", t_hint="Pick a question in the tree to see it.",
+        t_add="adds to the measure above", t_mul="multiplies into the measure above", t_drv="drives the measure above, with no formula",
+        t_why="Why now", t_dec="The decision it informs", t_size="Size, when suggested", t_aq="Asked by Clara Jensen: the next step follows it",
+        t_yes="If Clara says yes in a ticket, the question takes the next AQ number and follows the steps after this one.",
         play="Play", pause="Pause", again="Play again", back="Back", next="Next", step="Step {n} of {of}",
         passes="Passes on", result="The answer", open="Open the file", std="Standard", left="lines left out", left1="line left out",
         chart="Learners near a graduate certificate, as at 31 March 2026", total="In all",
         ok="Matches the census team’s report, faculty by faculty",
         map="The example project’s map", pieces="The map’s pieces",
-        map_d="A map of the example project, in four folders, read in a loop. At the top right, the initiatives: Planning’s question in Analytics’ records, and the ticket that carries it. At the top left, the enterprise architecture: the data object the question needs, Learner, and the student system, where it’s recorded first. In the middle, data governance: the information asset and its owner, the glossary’s Learner, the contract for the shared learner table, Planning’s data product, the metric and agents’ mandates, each beside the layer of the dbt project it lands on. Then the dbt project’s seven layers, from three systems to the census dashboard, which gives the answer, 12 learners, back to the question.",
+        map_d="A map of the example project, in four folders, read in a loop. At the top right, the initiatives: Planning’s goal, its question in Analytics’ records, and the ticket that carries it. At the top left, the enterprise architecture: the data object the question needs, Learner, and the student system, where it’s recorded first. In the middle, data governance: the information asset and its owner, the glossary’s Learner, the contract for the shared learner table, Planning’s data product, the metric and agents’ mandates, each beside the layer of the dbt project it lands on. Then the dbt project’s seven layers, from three systems to the census dashboard, which gives the answer, 12 learners, back to the question.",
         show="Show", lenses=[("learner", "dp", "One learner"), ("owners", "dg", "Owners"), ("pii", "dg", "Personal data"), ("promises", "dg", "Promises"), ("checks", "ok", "Checks")],
         lens_p={"learner": "Learner S-20417, from three systems to Planning’s count: what each layer holds of them. Pick a layer to see the records.",
                 "owners": "Who answers for each piece. Every model names its owner too, so the platform’s catalog shows them.",
@@ -1790,9 +1877,9 @@ PROJECT_UI = {
                 "checks": "A check holds each handoff. Pick a shield to change one side, and see what stops the merge."},
         zin="Zoom in", zout="Zoom out", fit="Show all", side="Show or hide the details", wide="Expand the details",
         big="Best on a bigger screen.", big_p="On a phone, the map runs top to bottom. Open this page on a laptop or a tablet to see it whole.",
-        intro_k="The map", intro_h="One question, four folders",
-        intro_p="Light is data. The question starts in Analytics’ records, and its ticket takes it to the architecture. Data governance adds what the code can’t know, each piece landing where it applies, and rows flow through the dbt project’s seven layers. The answer goes back to the question.",
-        legend=[("in", "The question"), ("dp", "Rows of data"), ("dg", "Business context"), ("ok", "The answer")], go="Follow the question",
+        intro_k="The map", intro_h="A goal, a question, four folders",
+        intro_p="Light is data. Planning’s goal comes first, then its question, in Analytics’ records, and the question’s ticket takes it to the architecture. Data governance adds what the code can’t know, each piece landing where it applies, and rows flow through the dbt project’s seven layers. The answer goes back to the question.",
+        legend=[("in", "The goal and its question"), ("dp", "Rows of data"), ("dg", "Business context"), ("ok", "The answer")], go="Follow the question",
         whole="The whole map", handoff="Handoff {n} of {of}", gate="Validated", dash="Census dashboard", learners="learners",
         drag="Drag to move · Ctrl or ⌘ and scroll to zoom",
         touch="Two fingers move and zoom the map",
@@ -1814,15 +1901,20 @@ PROJECT_UI = {
         jump="En esta página", follow="Sigue una pregunta",
         jumps=[("journey", "El mapa"), ("context", "Lo que dbt solo no tiene"), ("standards", "Estándares abiertos"), ("run", "Ejecútalo")],
         j_h="Sigue una pregunta",
-        j_p="Una pregunta empieza en la analítica, casi siempre sin respuesta todavía, y una iniciativa la lleva a un ticket. La arquitectura encuentra lo que necesita, gobierno de datos dice qué significan sus palabras y qué se promete, y el proyecto de dbt la construye. Pulsa Reproducir, o elige cualquier pieza del mapa.",
+        j_p="Primero, una meta, con las preguntas que muestran si se cumple. Una pregunta empieza en la analítica, casi siempre sin respuesta todavía, y una iniciativa la lleva a un ticket. La arquitectura encuentra lo que necesita, gobierno de datos dice qué significan sus palabras y qué se promete, y el proyecto de dbt la construye. Pulsa Reproducir, o elige cualquier pieza del mapa.",
         asks="Planificación pregunta", question="¿Cuántos estudiantes están a 15 créditos o menos de un certificado de posgrado, por facultad, a la fecha del censo?",
-        answer="Respuesta", steps="Once pasos, de la pregunta a la respuesta",
+        answer="Respuesta", steps="Doce pasos, de la meta a la respuesta", goal_k="Meta · Planificación",
+        tree="Sus medidas, en un árbol", t_legend=[("ok", "Respondida"), ("in", "Sugerida"), ("st", "Sin preguntar")],
+        t_f="Una fórmula", t_d="Un impulsor, que se comprueba en los datos", t_hint="Elige una pregunta del árbol para verla.",
+        t_add="se suma a la medida de arriba", t_mul="se multiplica en la medida de arriba", t_drv="impulsa la medida de arriba, sin fórmula",
+        t_why="Por qué ahora", t_dec="La decisión que informa", t_size="Tamaño, al sugerirla", t_aq="La pidió Clara Jensen: el paso siguiente la sigue",
+        t_yes="Si Clara dice que sí en un ticket, la pregunta toma el siguiente número AQ y sigue los pasos que vienen después de este.",
         play="Reproducir", pause="Pausa", again="Otra vez", back="Atrás", next="Siguiente", step="Paso {n} de {of}",
         passes="Lo que entrega", result="La respuesta", open="Abrir el archivo", std="Estándar", left="líneas omitidas", left1="línea omitida",
         chart="Estudiantes cerca de un certificado de posgrado, al 31 de marzo de 2026", total="En total",
         ok="Coincide con el informe del equipo del censo, facultad por facultad",
         map="El mapa del proyecto de ejemplo", pieces="Las piezas del mapa",
-        map_d="Un mapa del proyecto de ejemplo, en cuatro carpetas, que se lee en círculo. Arriba a la derecha, las iniciativas: la pregunta de Planificación en los registros de Analítica, y el ticket que la lleva. Arriba a la izquierda, la arquitectura empresarial: el objeto de datos que la pregunta necesita, Learner, y el sistema de estudiantes, donde se registra primero. En medio, gobierno de datos: el activo de información y su responsable, el término Learner del glosario, el contrato de la tabla compartida de estudiantes, el producto de datos de Planificación, la métrica y los mandatos de los agentes, cada uno junto a la capa del proyecto de dbt donde llega. Después, las siete capas del proyecto de dbt, desde tres sistemas hasta el tablero del censo, que devuelve la respuesta, 12 estudiantes, a la pregunta.",
+        map_d="Un mapa del proyecto de ejemplo, en cuatro carpetas, que se lee en círculo. Arriba a la derecha, las iniciativas: la meta de Planificación, su pregunta en los registros de Analítica, y el ticket que la lleva. Arriba a la izquierda, la arquitectura empresarial: el objeto de datos que la pregunta necesita, Learner, y el sistema de estudiantes, donde se registra primero. En medio, gobierno de datos: el activo de información y su responsable, el término Learner del glosario, el contrato de la tabla compartida de estudiantes, el producto de datos de Planificación, la métrica y los mandatos de los agentes, cada uno junto a la capa del proyecto de dbt donde llega. Después, las siete capas del proyecto de dbt, desde tres sistemas hasta el tablero del censo, que devuelve la respuesta, 12 estudiantes, a la pregunta.",
         show="Mostrar", lenses=[("learner", "dp", "Una persona"), ("owners", "dg", "Responsables"), ("pii", "dg", "Datos personales"), ("promises", "dg", "Promesas"), ("checks", "ok", "Verificaciones")],
         lens_p={"learner": "La persona S-20417, desde tres sistemas hasta el conteo de Planificación: qué guarda de ella cada capa. Elige una capa para ver los registros.",
                 "owners": "Quién responde por cada pieza. Cada modelo nombra también a su responsable, así que el catálogo de la plataforma lo muestra.",
@@ -1831,9 +1923,9 @@ PROJECT_UI = {
                 "checks": "Una verificación sostiene cada traspaso. Elige un escudo para cambiar un lado y mira qué detiene la fusión."},
         zin="Acercar", zout="Alejar", fit="Ver todo", side="Mostrar u ocultar los detalles", wide="Ampliar los detalles",
         big="Se ve mejor en una pantalla grande.", big_p="En un teléfono, el mapa va de arriba abajo. Abre esta página en una computadora o una tableta para verlo entero.",
-        intro_k="El mapa", intro_h="Una pregunta, cuatro carpetas",
-        intro_p="La luz es dato. La pregunta empieza en los registros de Analítica, y su ticket la lleva a la arquitectura. Gobierno de datos suma lo que el código no puede saber, cada pieza llegando donde se aplica, y las filas fluyen por las siete capas del proyecto de dbt. La respuesta vuelve a la pregunta.",
-        legend=[("in", "La pregunta"), ("dp", "Filas de datos"), ("dg", "Contexto del negocio"), ("ok", "La respuesta")], go="Sigue la pregunta",
+        intro_k="El mapa", intro_h="Una meta, una pregunta, cuatro carpetas",
+        intro_p="La luz es dato. Primero está la meta de Planificación, luego su pregunta, en los registros de Analítica, y el ticket de la pregunta la lleva a la arquitectura. Gobierno de datos suma lo que el código no puede saber, cada pieza llegando donde se aplica, y las filas fluyen por las siete capas del proyecto de dbt. La respuesta vuelve a la pregunta.",
+        legend=[("in", "La meta y su pregunta"), ("dp", "Filas de datos"), ("dg", "Contexto del negocio"), ("ok", "La respuesta")], go="Sigue la pregunta",
         whole="Todo el mapa", handoff="Traspaso {n} de {of}", gate="Validado", dash="Tablero del censo", learners="estudiantes",
         drag="Arrastra para moverte · Ctrl o ⌘ y desplaza para acercar",
         touch="Con dos dedos mueves y acercas el mapa",
@@ -1904,6 +1996,72 @@ def px_rows(rows):
                                                     for h, v in zip(cells(rows[0]), cells(rows[1]))) + "</tbody></table>")
 
 
+def md_cells(line):
+    """A Markdown table row's cells, trimmed."""
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def px_pairs(rows):
+    """A Markdown table's rows of a name and a value, each a line of the table."""
+    return ('<table class="px-rows"><tbody>' + "".join(f'<tr><th scope="row">{px_md(k)}</th><td>{px_md(v)}</td></tr>'
+                                                    for k, v in (md_cells(r) for r in rows)) + "</tbody></table>")
+
+
+def px_tree(lg):
+    """The goal's tree, as an outline from the goal's measure down (PROJECT_TREE, as the goal's file draws it): each measure says
+    how it makes the one above, by a formula (+, ×) or as a driver; the questions asked are answered, those suggested wait for
+    their owner. Each question opens what it asks and, for a suggestion, why now, the decision it informs and its size.
+    Without the script every suggestion is shown under the tree; with it, one at a time."""
+    U = PROJECT_UI[lg]
+    names, state, kids, up = {}, {}, {}, set()
+    for line in PROJECT_TREE:
+        m = re.match(r'\s*(\w+)\["(.+)"\]:::(\w+)$', line)
+        if m:
+            names[m[1]], state[m[1]] = m[2], m[3]
+            continue
+        m = re.match(r'\s*(\w+) (-->|-\.->)\|"(.+)"\| (\w+)$', line)
+        kids.setdefault(m[4], []).append((m[1], m[3])); up.add(m[1])
+    root = next(k for k in names if k not in up)
+    cls = {"answered": "px-ok", "suggested": "px-in", "starter": "px-gqx"}
+    sign = {"+": ("+", U["t_add"]), "×": ("×", U["t_mul"]), "drives": ("", U["t_drv"])}
+
+    def node(k, how=None):
+        name, q = (names[k].split(" · ") + [None])[:2]
+        name = PROJECT_TREE_ES[k] if lg == "es" else name
+        sg = ""
+        if how:
+            mark, say = sign[how]
+            sg = f'<span class="px-gqs{"" if mark else " px-gqo"}" aria-hidden="true">{mark}</span><span class="sr">{E(say)}: </span>'
+        if q and q.startswith("SQ"):
+            label = f'<a class="px-gqn" href="#px-gq-{q}" data-q="{q}"><span>{E(name)}</span><b class="px-gqp">{q}</b></a>'
+        elif q:  # asked, and followed by the map from the next step
+            label = (f'<a class="px-gqn" href="#px-s{PX_STORY.index("q") + 1}" title="{E(U["t_aq"])}"><span>{E(name)}</span><b class="px-gqp">{q}</b>'
+                     f'<span class="sr"> · {E(U["t_aq"])}</span></a>')
+        else:
+            label = f'<span class="px-gqn">{E(name)}</span>'
+        sub = "".join(node(c, h) for c, h in kids.get(k, []))
+        return f'<li class="{cls[state[k]]}">{sg}{label}' + (f'<ul>{sub}</ul>' if sub else "") + '</li>'
+
+    legend = "".join(f'<li class="{"px-gqx" if k == "st" else "px-" + k}"><i aria-hidden="true"></i>{E(x)}</li>' for k, x in U["t_legend"])
+    legend += (f'<li class="px-gql-f"><span aria-hidden="true">+ ×</span>{E(U["t_f"])}</li>'
+               f'<li class="px-gql-d"><span class="px-gqs px-gqo" aria-hidden="true"></span>{E(U["t_d"])}</li>')
+    details = ""
+    for qline, wline, es in PROJECT_SUGGESTED:
+        qid = md_cells(qline)[0].strip("`")
+        if lg == "es":
+            ask, stands, why, dec, size = es
+        else:
+            ask, stands = md_cells(qline)[1].strip("*"), md_cells(qline)[3]
+            why, dec, size = md_cells(wline)[1:4]
+        why = re.sub(r"\[(.+?)\]\(.+?\)", r"\1", why)  # a link in the file reads as its words here
+        details += (f'<div class="px-gqd px-in" id="px-gq-{qid}" data-q="{qid}"><p class="px-gqm"><b class="px-gqp">{qid}</b>{E(stands)}</p>'
+                    f'<p class="px-gqq">{E(ask)}</p><dl><dt>{E(U["t_why"])}</dt><dd>{px_md(why)}</dd><dt>{E(U["t_dec"])}</dt><dd>{E(dec)}</dd>'
+                    f'<dt>{E(U["t_size"])}</dt><dd>{E(size)}</dd></dl></div>')
+    return (f'<figure class="px-gqt"><figcaption>{E(U["tree"])}</figcaption><ul class="px-gql" aria-hidden="true">{legend}</ul>'
+            f'<ul class="px-gqu">{node(root)}</ul><p class="px-gqh" hidden>{E(U["t_hint"])}</p></figure>'
+            f'<div class="px-gqds">{details}<p class="px-gqy">{E(U["t_yes"])}</p></div>')
+
+
 def px_file(lg, path, inner, std=None):
     """A file of the project, as a figure: its path, a link to it on GitHub, its lines and the standard it's written in."""
     U = PROJECT_UI[lg]; shown = proj_path(path)
@@ -1936,48 +2094,51 @@ def px_lane(lg, k):
 # to try harder"): the folders as one live map, in the films' own language, where light is data. Planning's question starts in
 # Analytics' records, top right, and its ticket takes it to the architecture (16 November 2026); each of data governance's pieces sits
 # right above the dbt layer it lands on; the dbt project's seven layers are a line that rows of data flow along, and the answer flows
-# back up to the question, so the map reads as a loop. A play bar follows the question in eleven steps,
+# back up to the question, so the map reads as a loop. Planning's goal sits above the question (17 November 2026: Goal–Question–
+# Metric, the goal first). A play bar follows the goal and its question in twelve steps,
 # five lenses show what attaches where, each layer opens on what it holds of one learner, and a shield on each handoff can be
 # broken to see what stops the merge. Without the script it reads as a plain picture, with every step, layer and handoff below it.
 # Each piece's box, in the map's own units: on a wide screen (x, y, w, h), and tall, for a phone.
-PX_WIDE, PX_TALL = (932, 708), (400, 1530)
+PX_WIDE, PX_TALL = (932, 750), (400, 1618)
 PX_LAYER_IDS = [ly["key"] for ly in PROJECT_LAYERS]  # sources … exposures, left to right (wide) or top to bottom (tall)
 PX_GOV = ["a", "g", "c", "p", "m", "k"]  # data governance's pieces, each beside the layer it lands on: staging … exposures
-PX_STORY = ["q", "t", "o", "s", "g", "c", "dp", "p", "m", "gate", "dash"]  # the piece each of the eleven steps is about
+PX_STORY = ["goal", "q", "t", "o", "s", "g", "c", "dp", "p", "m", "gate", "dash"]  # the piece each of the twelve steps is about
 PX_ALSO = {"a": "h2", "k": "h7"}  # the pieces no step is about open the handoff they hold
 PATH_STEP = next(s for s in PROJECT_STEPS if s.get("paths"))  # the step that can start from models already built
 PATH_STAMPS = {"staging": "built", "intermediate": "built", "core": "top"}  # what those models are, on the map
 
 
 def px_geo():
-    """Each piece's box, wide and tall: {id: (x, y, w, h)}. Wide, the map reads as a loop: the question top right, its ticket and
-    the architecture leftwards, governance and the data project down and to the right, and the answer back up the right edge."""
+    """Each piece's box, wide and tall: {id: (x, y, w, h)}. Wide, the map reads as a loop: the goal and its question top right,
+    the question's ticket and the architecture leftwards, governance and the data project down and to the right, and the answer
+    back up the right edge. The goal sits right of the initiatives' name, above the question; tall, above the question."""
     L, P = {}, {}
-    L["z-ea"], L["z-in"], L["z-dg"], L["z-dp"] = (0, 0, 380, 190), (392, 0, 500, 190), (0, 202, 892, 194), (0, 408, 892, 292)
-    P["z-in"], P["z-ea"], P["z-dg"], P["z-dp"] = (0, 0, 400, 330), (0, 342, 400, 200), (0, 554, 198, 852), (206, 554, 194, 976)
-    L["q"], P["q"] = (546, 50, 332, 132), (14, 56, 372, 150)
-    L["t"], P["t"] = (406, 58, 118, 118), (14, 218, 372, 98)
-    L["o"], P["o"] = (186, 58, 180, 118), (16, 398, 176, 132)
-    L["s"], P["s"] = (14, 58, 160, 118), (208, 398, 176, 132)
+    L["z-ea"], L["z-in"], L["z-dg"], L["z-dp"] = (0, 0, 380, 232), (392, 0, 500, 232), (0, 244, 892, 194), (0, 450, 892, 292)
+    P["z-in"], P["z-ea"], P["z-dg"], P["z-dp"] = (0, 0, 400, 418), (0, 430, 400, 200), (0, 642, 198, 852), (206, 642, 194, 976)
+    L["goal"], P["goal"] = (628, 6, 250, 72), (14, 56, 372, 74)
+    L["q"], P["q"] = (546, 92, 332, 132), (14, 144, 372, 150)
+    L["t"], P["t"] = (406, 100, 118, 118), (14, 306, 372, 98)
+    L["o"], P["o"] = (186, 100, 180, 118), (16, 486, 176, 132)
+    L["s"], P["s"] = (14, 100, 160, 118), (208, 486, 176, 132)
     for i, k in enumerate(PX_GOV):  # each right above the layer it lands on
-        L[k], P[k] = (131 + 126 * i, 240, 118, 136), (16, 697 + 120 * i, 156, 96)
+        L[k], P[k] = (131 + 126 * i, 282, 118, 136), (16, 785 + 120 * i, 156, 96)
     for i, k in enumerate(PX_LAYER_IDS):
-        L[k], P[k] = (14 + 126 * i, 476, 100, 94), (228, 585 + 120 * i, 156, 80)
-    L["gate"], P["gate"] = (620, 512, 22, 22), (293, 1152, 26, 26)
-    L["dash"], P["dash"] = (752, 600, 136, 92), (228, 1416, 156, 100)
-    L["dp"], P["dp"] = (14, 644, 380, 42), (208, 559, 190, 24)
+        L[k], P[k] = (14 + 126 * i, 518, 100, 94), (228, 673 + 120 * i, 156, 80)
+    L["gate"], P["gate"] = (620, 554, 22, 22), (293, 1240, 26, 26)
+    L["dash"], P["dash"] = (752, 642, 136, 92), (228, 1504, 156, 100)
+    L["dp"], P["dp"] = (14, 686, 380, 42), (208, 647, 190, 24)
     return L, P
 
 
 # Each line on the map: its id, the pieces it joins, its colour (the folder it starts from; ok: the answer), the step that lights it
 # (None: only the whole map shows it), and the handoff it is (1 to 7, PROJECT_HANDOFFS' order; 0: none)
-PX_EDGES = [("qt", "q", "t", "in", 2, 0), ("to", "t", "o", "in", 3, 1), ("os", "o", "s", "ea", 4, 0), ("ssrc", "s", "sources", "ea", 4, 0),
-            ("og", "o", "g", "ea", 5, 0), ("oa", "o", "a", "ea", 5, 2), ("gin", "g", "intermediate", "dg", 5, 3),
-            ("cco", "c", "core", "dg", 6, 4), ("ast", "a", "staging", "dg", 7, 0), ("pma", "p", "marts", "dg", 8, 5),
-            ("mme", "m", "metrics", "dg", 9, 6), ("kex", "k", "exposures", "dg", None, 7),
-            ("pipe", "sources", "exposures", "dp", 7, 0), ("xd", "exposures", "dash", "dp", 11, 0), ("ans", "dash", "q", "ok", 11, 0)]
+PX_EDGES = [("gq", "goal", "q", "in", 2, 0), ("qt", "q", "t", "in", 3, 0), ("to", "t", "o", "in", 4, 1), ("os", "o", "s", "ea", 5, 0),
+            ("ssrc", "s", "sources", "ea", 5, 0), ("og", "o", "g", "ea", 6, 0), ("oa", "o", "a", "ea", 6, 2), ("gin", "g", "intermediate", "dg", 6, 3),
+            ("cco", "c", "core", "dg", 7, 4), ("ast", "a", "staging", "dg", 8, 0), ("pma", "p", "marts", "dg", 9, 5),
+            ("mme", "m", "metrics", "dg", 10, 6), ("kex", "k", "exposures", "dg", None, 7),
+            ("pipe", "sources", "exposures", "dp", 8, 0), ("xd", "exposures", "dash", "dp", 12, 0), ("ans", "dash", "q", "ok", 12, 0)]
 # What the camera frames for each step, layer and handoff ("*": the whole map)
-PX_FRAMES = ["q", "q t", "t o", "o s sources", "o a g intermediate", "g c core", "sources core dp", "p marts", "m metrics", "marts gate metrics", "*"]
+PX_FRAMES = ["goal q", "q", "q t", "t o", "o s sources", "o a g intermediate", "g c core", "sources core dp", "p marts", "m metrics", "marts gate metrics", "*"]
 PX_LFRAMES = ["s sources", "a staging", "g intermediate", "c core", "p marts gate", "m metrics", "k exposures dash"]
 PX_HFRAMES = ["t o", "o a", "g intermediate", "c core", "p marts", "m metrics", "k exposures"]
 # What each card says: its kind (above its title) and its title; the layers' short job; the icon each piece is drawn with
@@ -1999,6 +2160,8 @@ PX_JOBS = {"sources": ("3 systems", "3 sistemas", "db"), "staging": ("One per ta
 # What each lens shows on a piece: one learner (S-20417, as the project builds them), owners, personal data, and promises. A piece
 # a lens says nothing about fades while it's on; checks put a shield on each handoff instead.
 PX_BADGES = {
+    "goal": {"owners": ("Clara Jensen, Planning", "Clara Jensen, Planificación"), "pii": ("Counts and rates only", "Solo conteos y tasas"),
+             "promises": ("The data team suggests first", "El equipo de datos sugiere primero")},
     "q": {"owners": ("Asked by Planning", "Lo pide Planificación"), "promises": ("Checked before it closes", "Se revisa antes de cerrarse")},
     "t": {"owners": ("Approved by Planning", "Lo aprueba Planificación"), "promises": ("By 7 a.m. on census day", "A las 7 a. m. del día del censo")},
     "o": {"owners": ("Registrar’s office", "Oficina de registro"), "pii": ("A person", "Una persona")},
@@ -2042,6 +2205,8 @@ PX_ICONS = {
     "table": '<rect x="3.5" y="4.5" width="17" height="15" rx="2.2"/><path d="M3.5 9.5h17M9.5 9.5v10"/>',
     "target": '<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r="1"/>',
     "eye": '<path d="M2.5 12S6 5.6 12 5.6 21.5 12 21.5 12 18 18.4 12 18.4 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+    "tree": '<circle cx="12" cy="5" r="2.3"/><circle cx="5.5" cy="19" r="2.3"/><circle cx="12" cy="19" r="2.3"/><circle cx="18.5" cy="19" r="2.3"/>'
+            '<path d="M12 7.3v9.4M12 12H5.5v4.7M12 12h6.5v4.7"/>',
     "ticket": '<path d="M3.5 7.5a2 2 0 0 0 2-2h13a2 2 0 0 0 2 2v2.2a2.3 2.3 0 0 0 0 4.6v2.2a2 2 0 0 0-2 2h-13a2 2 0 0 0-2-2v-2.2a2.3 2.3 0 0 0 0-4.6z"/><path d="M14.5 6v2.2M14.5 10.9v2.2M14.5 15.8V18"/>',
     "apps": '<rect x="3.5" y="4" width="17" height="6.5" rx="1.6"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="1.6"/><path d="M6.5 7.25h.1M6.5 16.75h.1M9.5 7.25h6M9.5 16.75h6"/>',
     "check": '<path d="M12 3l7 3v5.8c0 4.4-3 7.6-7 9.2-4-1.6-7-4.8-7-9.2V6z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.7"/>',
@@ -2067,6 +2232,8 @@ def px_pts(e, G, tall):
     lef = lambda k: G[k][0]
     rig = lambda k: G[k][0] + G[k][2]
     i, a, b = e[0], e[1], e[2]
+    if i == "gq":  # the goal down to its question
+        return [(cx("q"), bot("goal")), (cx("q"), top("q"))] if tall else [(cx("goal"), bot("goal")), (cx("goal"), top("q"))]
     if i == "qt":  # the question to its ticket: leftwards (wide), down (tall)
         return [(cx("q"), bot("q")), (cx("q"), top("t"))] if tall else [(lef("q"), cy("t")), (rig("t"), cy("t"))]
     if i == "to":  # the ticket to the architecture
@@ -2142,7 +2309,7 @@ def px_edges_svg(cls, size, G, tall):
 def px_step_article(lg, i, s):
     """One step of the question, as the panel beside the map shows it: what it is, what it passes on, and its real file."""
     U = PROJECT_UI[lg]; L = lambda p: T(lg, *p); k = s["lane"]; n = len(PROJECT_STEPS)
-    lines = px_rows(s["rows"]) if "rows" in s else px_code(lg, s["code"], s.get("hi", ()))
+    lines = px_rows(s["rows"]) if "rows" in s else px_pairs(s["pairs"]) if "pairs" in s else px_code(lg, s["code"], s.get("hi", ()))
     more = (f'<p class="px-more"><a href="#px-l1"><span aria-hidden="true">{px_icon("layers", "px-mi")}</span>{E(L(s["more"][1]))}</a></p>'
             if s.get("more") else "")
     chart = px_chart(lg) if s.get("answer") else ""
@@ -2155,7 +2322,7 @@ def px_step_article(lg, i, s):
                  + "".join(f'<p class="px-pthp" data-path="{w}"><b>{E(L(pt[w][0]))}.</b> {E(L(pt[w][1]))}</p>' for w in ("new", "exists")))
     return (f'<article class="px-art px-panel px-{k}" id="px-s{i}" data-frame="{PX_FRAMES[i - 1]}" data-node="{PX_STORY[i - 1]}" aria-labelledby="px-s{i}-h">'
             f'<div class="px-say"><p class="px-k"><span class="px-lane">{E(px_lane(lg, k))}</span><span class="px-of">{E(U["step"].format(n=i, of=n))}</span></p>'
-            f'<h3 id="px-s{i}-h">{E(L(s["title"]))}</h3><p>{E(L(s["text"]))}</p>{paths}'
+            f'<h3 id="px-s{i}-h">{E(L(s["title"]))}</h3><p>{E(L(s["text"]))}</p>{paths}{px_tree(lg) if s.get("tree") else ""}'
             f'<p class="px-pass"><b>{E(U["result"] if s.get("answer") else U["passes"])}</b> {E(L(s["passes"]))}</p>{chart}{more}</div>'
             f'{px_file(lg, s["file"], lines, L(s["std"]) if s.get("std") else None)}</article>\n')
 
@@ -2210,11 +2377,15 @@ def px_canvas(lg):
     svg = px_edges_svg("px-wide", PX_WIDE, GL, False) + px_edges_svg("px-tall", PX_TALL, GP, True)
     # the pieces: buttons, in the order the keyboard walks them
     sn = lambda k: f'<span class="sr">{E(U["step"].format(n=PX_STORY.index(k) + 1, of=n))}: </span>' if k in PX_STORY else ""
-    badge = lambda k: f'<i class="px-no" aria-hidden="true">{PX_STORY.index(k) + 1}</i>' if k in PX_STORY else ""
-    nodes = (f'<button type="button" class="px-nd px-qn px-in" data-id="q" data-go="s1" {px_box("q", GL, GP)}>{sn("q")}'
-             f'<span class="px-qk">{px_icon("ask")}<span>AQ1 · {E(U["asks"])}</span>{badge("q")}</span>'
-             f'<span class="px-qq">{E(U["question"])}</span>'
-             f'<span class="px-qa"><small>{E(U["answer"])}</small><b>12</b><i aria-hidden="true">?</i></span>{px_badges(lg, "q")}</button>')
+    badge = lambda k: f'<i class="px-num" aria-hidden="true">{PX_STORY.index(k) + 1}</i>' if k in PX_STORY else ""
+    goal = md_cells(PROJECT_GOAL_ROWS[0])[1].strip("*") if lg == "en" else PROJECT_GOAL_ES
+    nodes = (f'<button type="button" class="px-nd px-gc px-in" data-id="goal" data-go="s{PX_STORY.index("goal") + 1}" {px_box("goal", GL, GP)}>{sn("goal")}'
+             f'<span class="px-gck">{px_icon("tree")}<span>{E(U["goal_k"])}</span>{badge("goal")}</span><b class="px-gct">{E(goal)}</b>'
+             f'{px_badges(lg, "goal")}</button>')
+    nodes += (f'<button type="button" class="px-nd px-qn px-in" data-id="q" data-go="s{PX_STORY.index("q") + 1}" {px_box("q", GL, GP)}>{sn("q")}'
+              f'<span class="px-qk">{px_icon("ask")}<span>AQ1 · {E(U["asks"])}</span>{badge("q")}</span>'
+              f'<span class="px-qq">{E(U["question"])}</span>'
+              f'<span class="px-qa"><small>{E(U["answer"])}</small><b>12</b><i aria-hidden="true">?</i></span>{px_badges(lg, "q")}</button>')
     for k in ["t", "o", "s"] + PX_GOV:
         kind, title, meta, icon = PX_CARDS[k]
         lane = {"t": "in", "o": "ea", "s": "ea"}.get(k, "dg")
@@ -2353,7 +2524,7 @@ def px_learner(lg, key):
         rows = [("SIS", "S-20417", ("Student system", "Sistema de estudiantes")), ("LMS", "u-88213", ("Learning platform", "Plataforma de aprendizaje")),
                 ("LMS", "u-88231", ("Learning platform", "Plataforma de aprendizaje")), ("SC", PX_MASKED[0], ("Short-courses system", "Sistema de cursos cortos")),
                 ("SC", PX_MASKED[1], ("Short-courses system", "Sistema de cursos cortos"))]
-        body = "".join(f'<tr><td><code><b>{a}</b>|{b}</code></td><td>{t(*c)}</td></tr>' for a, b, c in rows)
+        body = "".join(f'<tr><td><code><b>{a}</b>|{b.replace("@", "@<wbr>")}</code></td><td>{t(*c)}</td></tr>' for a, b, c in rows)
         return (f'<table class="px-keys"><thead><tr><th scope="col">{t("Key", "Clave")}</th><th scope="col">{t("From", "De")}</th></tr></thead><tbody>{body}</tbody></table>'
                 f'<p class="px-sum">{t("Every key names its system, so keys from two systems never clash. The emails are masked here: they are direct personal data.", "Cada clave nombra su sistema, así que las claves de dos sistemas nunca chocan. Los correos van enmascarados aquí: son datos personales directos.")}</p>')
     if key == "intermediate":
@@ -2380,9 +2551,10 @@ def px_learner(lg, key):
                 f'<span class="px-cg">{t("To go", "Faltan")}: 15</span></p>'
                 f'<p class="px-sum">{t("From the core on, the student ID is masked for anyone not allowed to read it. The third unit counts from July, after census date.", "Desde la capa central, el número de estudiante queda enmascarado para quien no tenga permiso de leerlo. La tercera unidad cuenta desde julio, después del censo.")}</p>')
     if key == "marts":
+        # <wbr> after each "_" (and after "@" in the staging keys): a narrow panel breaks a name between its words, not inside one
         rows = [("award_name", "Graduate Certificate in Data Analytics", None), ("faculty_name", "Faculty of Engineering and IT", None),
                 ("credit_points_required", "60", None), ("credit_points_earned", "45", "40"), ("credit_points_remaining", "15", "20"), ("is_near_award", "true", "false")]
-        kv = "".join(f'<tr{" class=" + chr(34) + "px-alt" + chr(34) if alt else ""}><th scope="row"><code>{a}</code></th><td><code{" data-alt=" + chr(34) + alt + chr(34) if alt else ""}>{b}</code></td></tr>'
+        kv = "".join(f'<tr{" class=" + chr(34) + "px-alt" + chr(34) if alt else ""}><th scope="row"><code>{a.replace("_", "_<wbr>")}</code></th><td><code{" data-alt=" + chr(34) + alt + chr(34) if alt else ""}>{b}</code></td></tr>'
                      for a, b, alt in rows)
         return (f'<p class="px-tn"><code>mart_planning__near_award</code><small>{t("census date: 31 March 2026", "fecha del censo: 31 de marzo de 2026")}</small></p><table class="px-kv">{kv}</table>'
                 f'<p class="px-tog-p"><button type="button" class="px-tog" aria-pressed="false" hidden>{t("Without the email match", "Sin el reconocimiento por correo")}</button></p>'
@@ -2429,7 +2601,7 @@ def px_standards(lg):
 def project_excerpts():
     """Every file's lines the project page shows, to compare with the project's repository (check_site.py): [(path as the films
     name it, [(first line, [lines])], [whole lines that must be in the file])]."""
-    return ([(st["file"], st.get("code", []), st.get("rows", [])) for st in PROJECT_STEPS]
+    return ([(st["file"], st.get("code", []), st.get("rows", []) + st.get("pairs", []) + st.get("holds", [])) for st in PROJECT_STEPS]
             + [(sd["file"], sd["code"], []) for sd in PROJECT_STANDARDS])
 
 

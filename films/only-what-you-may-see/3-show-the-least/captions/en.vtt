@@ -33,170 +33,170 @@ Britain took it up in 1872; by 1892, so had 38 American states.
 00:01:13.380 --> 00:01:18.498
 The roll says who voted, and nothing about how. The box says how, and nothing about who.
 
-00:01:20.398 --> 00:01:26.173
+00:01:20.398 --> 00:01:26.227
 Today, at the university, Anil Kurian studies how learners in the Faculty of Health progress.
 
-00:01:27.473 --> 00:01:35.262
+00:01:27.527 --> 00:01:35.316
 Their records, as kept, would show him far more: names, birthdays, and which of his own faculty's learners have a disability.
 
-00:01:36.962 --> 00:01:41.060
+00:01:37.016 --> 00:01:41.114
 Hide it all, and the study can't follow anyone from one year to the next.
 
-00:01:42.360 --> 00:01:48.412
+00:01:42.414 --> 00:01:48.466
 So Mei Tanaka, who owns the records, picks a way to hide each column that keeps what the study needs.
 
-00:01:49.712 --> 00:01:56.041
+00:01:49.766 --> 00:01:56.095
 The study follows 2,614 learners, year by year, and never sees who they are.
 
-00:01:57.741 --> 00:02:00.976
+00:01:57.795 --> 00:02:01.030
 And for data: show the least that still answers the question.
 
-00:02:07.276 --> 00:02:15.036
+00:02:07.330 --> 00:02:15.090
 The study's agreement says what it may have: each learner's course and results, their year of birth, and a code in place of who they are.
 
-00:02:16.536 --> 00:02:20.369
+00:02:16.590 --> 00:02:20.423
 And never anything that names a learner, or anything about their health.
 
-00:02:21.869 --> 00:02:27.130
+00:02:21.923 --> 00:02:27.184
 Each column already has the class its owner set: direct, indirect, special, or none.
 
-00:02:29.230 --> 00:02:33.936
+00:02:29.284 --> 00:02:33.990
 So which way should hide each one? There are nine, and three questions tell them apart.
 
-00:02:36.236 --> 00:02:37.454
+00:02:36.290 --> 00:02:37.508
 What does the reader see?
 
-00:02:38.954 --> 00:02:40.738
+00:02:39.008 --> 00:02:40.792
 Can it be undone, and by whom?
 
-00:02:42.238 --> 00:02:44.090
+00:02:42.292 --> 00:02:44.144
 And what can the reader still work out?
 
-00:02:47.190 --> 00:02:50.475
+00:02:47.244 --> 00:02:50.529
 Exam support is about health, and the agreement says never.
 
-00:02:51.575 --> 00:02:54.976
+00:02:51.629 --> 00:02:55.030
 So leave it out: the study isn't given the support table.
 
-00:02:56.676 --> 00:03:03.653
+00:02:56.730 --> 00:03:03.707
 Names and emails name a learner: the registrar's office needs them, the study never does, so mask them whole.
 
-00:03:04.753 --> 00:03:10.648
+00:03:04.807 --> 00:03:10.702
 The columns stay, but for the study every value reads as stars, and stars can't be turned back.
 
-00:03:12.348 --> 00:03:16.625
+00:03:12.402 --> 00:03:16.679
 The help desk needs a little more: to check it has the right learner on the phone.
 
-00:03:17.725 --> 00:03:21.317
+00:03:17.779 --> 00:03:21.371
 So mask them in part: the last two digits, and the first letter.
 
-00:03:23.017 --> 00:03:26.284
+00:03:23.071 --> 00:03:26.338
 Enough to recognise a record, too little to look anyone up.
 
-00:03:27.384 --> 00:03:37.332
+00:03:27.438 --> 00:03:37.386
 The date of birth helps the study see how age shapes progress, so generalise it: 14 May 1987 becomes 1987.
 
-00:03:39.032 --> 00:03:41.456
+00:03:39.086 --> 00:03:41.510
 The day and month are gone, and can't come back.
 
-00:03:42.556 --> 00:03:47.851
+00:03:42.610 --> 00:03:47.905
 But hidden isn't anonymous: in a small course, one year of birth may fit only one learner.
 
-00:03:49.751 --> 00:03:52.791
+00:03:49.805 --> 00:03:52.845
 So it stays indirect, and stays behind the agreement.
 
-00:03:54.091 --> 00:04:01.075
+00:03:54.145 --> 00:04:01.129
 Last, filter rows: the study gets only the Faculty of Health's 2,614 learners.
 
-00:04:02.775 --> 00:04:06.056
+00:04:02.829 --> 00:04:06.110
 That hides no value; it leaves out other people's rows.
 
-00:04:09.556 --> 00:04:14.484
+00:04:09.610 --> 00:04:14.538
 The study must follow each learner from year to year, so the student number becomes a code.
 
-00:04:15.984 --> 00:04:23.968
+00:04:16.038 --> 00:04:24.022
 The learner code you've seen before scrambles the number, and scrambled isn't anonymous: with the registrar's list, anyone can match it.
 
-00:04:26.068 --> 00:04:29.715
+00:04:26.122 --> 00:04:29.769
 So the study's code mixes in a secret key: a keyed hash.
 
-00:04:31.415 --> 00:04:33.707
+00:04:31.469 --> 00:04:33.761
 Without the key, the list matches nothing.
 
-00:04:35.407 --> 00:04:43.105
+00:04:35.461 --> 00:04:43.159
 With it, the registrar's office can find whose code it is: undone, but only with the key, kept sealed, apart from the study.
 
-00:04:45.005 --> 00:04:47.966
+00:04:45.059 --> 00:04:48.020
 So the code stays pseudonymous, behind the agreement.
 
-00:04:49.666 --> 00:04:58.734
+00:04:49.720 --> 00:04:58.788
 In Britain's ballot of 1872, each paper had a number, matched to its voter only in a sealed packet, opened only to trace a fraud.
 
-00:05:01.034 --> 00:05:09.017
+00:05:01.088 --> 00:05:09.071
 A token is a stand-in, paired with the real value in a vault: only the vault's owner can turn it back, to reach the person again.
 
-00:05:11.317 --> 00:05:14.378
+00:05:11.371 --> 00:05:14.432
 This study reaches no one, so it takes the keyed hash.
 
-00:05:16.078 --> 00:05:23.851
+00:05:16.132 --> 00:05:23.905
 And encryption keeps the whole value where it's stored or moved: unreadable without the key, all there for anyone allowed to read it.
 
-00:05:26.951 --> 00:05:31.357
+00:05:27.005 --> 00:05:31.411
 When the study is done, it may publish totals, with any count under 10 hidden.
 
-00:05:32.457 --> 00:05:35.628
+00:05:32.511 --> 00:05:35.682
 Here, learners who left after their first year, by course.
 
-00:05:37.528 --> 00:05:42.689
+00:05:37.582 --> 00:05:42.738
 Midwifery's 4 is a small count: in a class that size, people would know who left.
 
-00:05:44.189 --> 00:05:46.059
+00:05:44.238 --> 00:05:46.108
 So it reads: fewer than 10.
 
-00:05:47.759 --> 00:05:54.244
+00:05:47.808 --> 00:05:54.293
 But the faculty's total is there too: 80, less 38, 21 and 17, gives the 4 back.
 
-00:05:56.344 --> 00:05:59.686
+00:05:56.393 --> 00:05:59.735
 So one more count is hidden, and the 4 can't be worked out.
 
-00:06:01.386 --> 00:06:08.721
+00:06:01.435 --> 00:06:08.770
 Totals can't be undone, and they still answer the question: about 9 in 10 first-year learners went on to second year.
 
-00:06:10.421 --> 00:06:15.426
+00:06:10.470 --> 00:06:15.475
 As in 1856: everyone sees the totals, and nobody sees a vote.
 
-00:06:19.126 --> 00:06:23.619
+00:06:19.175 --> 00:06:23.668
 So for each line of the agreement, Mei picks the way that keeps what the study needs.
 
-00:06:24.719 --> 00:06:27.360
+00:06:24.768 --> 00:06:27.409
 A code in place of who they are: a keyed hash.
 
-00:06:28.260 --> 00:06:30.315
+00:06:28.309 --> 00:06:30.364
 Their year of birth: generalise.
 
-00:06:31.215 --> 00:06:33.670
+00:06:31.264 --> 00:06:33.719
 Nothing that names a learner: mask it whole.
 
-00:06:34.570 --> 00:06:36.859
+00:06:34.619 --> 00:06:36.908
 Nothing about their health: leave it out.
 
-00:06:37.759 --> 00:06:44.988
+00:06:37.808 --> 00:06:45.037
 Only its 2,614 learners: filter rows. And only totals leave, with small counts hidden.
 
-00:06:46.088 --> 00:06:51.177
+00:06:46.137 --> 00:06:51.226
 Each new column gets its class from her: the code pseudonymous, the year still indirect.
 
-00:06:52.477 --> 00:06:58.309
+00:06:52.526 --> 00:06:58.358
 Later films build these ways on the platform, so each class is hidden the same way, every time.
 
-00:06:59.409 --> 00:07:03.419
+00:06:59.458 --> 00:07:03.468
 And an agent helping the study sees what the study sees, never more.
 
-00:07:04.719 --> 00:07:09.755
+00:07:04.768 --> 00:07:09.804
 The roll, the box and the totals: each shows the least that still answers its question.
 
-00:07:11.255 --> 00:07:16.071
+00:07:11.304 --> 00:07:16.120
 Samuel's row now answers the study's question, and says nothing about who he is.
 
-00:07:17.371 --> 00:07:19.700
+00:07:17.420 --> 00:07:19.749
 Show the least that still answers the question.

@@ -5,7 +5,7 @@ which holds film.json: the film's key, title and subtitle, its own source files,
 its poster shows. The films draw with The Inner Life of Data's engine and components, A Sharper Sketch's diagrams, the people
 of When things go wrong, Silent change's messages and dashboards, From words to data's components (shared/src/words.js, and
 Keeping it true's true.js), In the weeds of data crafting's motion helpers and finishing pass (its shared/src/weeds.js and
-post.js), and this series' own, in shared/src/ea.js and people.js. Most tools are From words to data's, run with this lang.py
+post.js), and this series' own, in shared/src/ea.js, colour.js and people.js. Most tools are From words to data's, run with this lang.py
 (see run.py). The series is in English; another language is captions only, as in From words to data."""
 import json, os, pathlib, sys
 

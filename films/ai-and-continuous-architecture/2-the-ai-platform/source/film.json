@@ -8,10 +8,10 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["brick", "river", 6.5],
+  "poster": ["ways", "tool", 4.59],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
     ["\\bEuphrates\\b", "You-fray-teez"],
     ["\\bDatabricks'\\b", "Data-bricks's"]

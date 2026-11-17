@@ -8,7 +8,7 @@
     "scenes.js"
   ],
   "story": ["turns"],
-  "poster": ["flow", "sees", 4.6],
+  "poster": ["turns", "clock", 1.55],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

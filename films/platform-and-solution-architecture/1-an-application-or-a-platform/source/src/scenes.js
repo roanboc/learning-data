@@ -146,7 +146,20 @@ scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);p1
 
 /* ---------- 3. Two kinds of platform ---------- */
 const P1_PROD=["storage","compute","catalogue","pipelines","serving"];
-const P1_AROUND=[["identity",0],["network",1],["integration",2],["orchestration",3],["reporting tools",4],["observability",5]];
+// your data platform, at the utility: two vendors' products, the components outside them both, and what comes around them all
+// [name on screen, the word the voice says it on, the line, column, row, ArchiMate glyph]
+const P1_AROUND=[["data lake","data lake","two",0,0,"software"],["key vault","key vault","two",0,1,"software"],["network","network","two",0,2,"network"],
+  ["identity","identity","parts",0,3,"node"],["integration","integration","parts",1,0,"software"],["orchestration","orchestration","parts",1,1,"software"],
+  ["reporting tools","reporting","parts",1,2,"software"],["what watches it","watches","parts",1,3,"function"]];
+// ArchiMate's communication network: a line between two small discs, slanted
+function p1_netGlyph(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);
+  ctx.beginPath();ctx.moveTo(x-s*0.45,y+s*0.3);ctx.lineTo(x+s*0.45,y-s*0.3);ctx.stroke();[[-0.55,0.37],[0.55,-0.37]].forEach(([dx,dy])=>{ctx.beginPath();ctx.arc(x+dx*s,y+dy*s,s*0.2,0,TAU);ctx.fill();});ctx.restore();}
+// an element of the platform, drawn as psaEl, with the network's glyph the series' kit doesn't draw
+function p1_el(ctx,x,y,w,h,name,col,kind,o){psaEl(ctx,x,y,w,h,name,col,kind==="network"?"none":kind,o);if(kind==="network")withA(ctx,(o&&o.a!=null)?o.a:1,()=>p1_netGlyph(ctx,x+w-24,y+22,13,col));}
+// a vendor's product, as a card: its mark, its name, and what it is
+function p1_vendor(ctx,x,y,w,h,k,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,TECC,{glow:12+12*(o.hi||0),ea:0.85,fill:"rgba(6,14,10,0.96)"});ctx.fillStyle=rgba(TECC,0.1);rr(ctx,x,y,w,h,16);ctx.fill();
+  psaGlyph(ctx,"software",x+w-26,y+24,12,TECC);logo(ctx,k,x+24,y+22,48);T(ctx,name,x+88,y+58,{w:700,size:o.size||30});
+  T(ctx,o.sub||"a platform product",x+24,y+h-26,{f:"mono",w:500,size:30,color:rgba(TECC,1)});});}
 function p1_product(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,TECC,{glow:14+12*(o.hi||0),ea:0.85,fill:"rgba(6,14,10,0.96)"});ctx.fillStyle=rgba(TECC,0.08);rr(ctx,x,y,w,h,18);ctx.fill();
   const lw=logo(ctx,"databricks",x+26,y+22,o.lh||40);if(o.label!==false)T(ctx,"a platform product",x+w-24,y+52,{f:"mono",w:500,size:30,align:"right",color:rgba(TECC,1)});
   const ch=o.chips==null?1:o.chips,n=P1_PROD.length,cw=(w-52),rh=Math.min(80,(h-110)/n);P1_PROD.forEach((s_,i)=>{const q=clamp(ch*n-i,0,1);if(q<=0.01)return;withA(ctx,q,()=>{const yy=y+90+i*rh;ctx.fillStyle=rgba(TECC,0.13);rr(ctx,x+26,yy,cw,rh-12,10);ctx.fill();ctx.strokeStyle=rgba(TECC,0.55);ctx.lineWidth=1.5;rr(ctx,x+26,yy,cw,rh-12,10);ctx.stroke();
@@ -157,13 +170,23 @@ scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // left: the product, many components sold as one
   arrive(ctx,500,430,t,0.3,()=>p1_product(ctx,220,170,560,520,{chips:clamp((t-w("vendor","many components")+0.2)/1.4,0,1),hi:pulseAt(t,w("vendor","sold as one"),1.6)}),{dy:-14});
   withA(ctx,fin(t,w("vendor","sold as one")-0.2,0.6),()=>tag(ctx,500,742,"many components, sold as one",TECC,{align:"center",size:30}));
+  // other vendors call theirs a data platform too
+  const vA=1-fin(t,tY-0.6,0.5);if(vA>0.01){withA(ctx,vA*fin(t,w("vendor","Microsoft Fabric")-0.2,0.5),()=>{const cw=tw(ctx,"Microsoft Fabric",28,700)+96;glass(ctx,340-cw/2,92,cw,52,26,TECC,{fill:"rgba(7,12,24,0.9)",glow:10,ea:0.8});logo(ctx,"fabric",340-cw/2+18,100,36);T(ctx,"Microsoft Fabric",340-cw/2+66,128,{w:700,size:28});});
+    withA(ctx,vA*fin(t,w("vendor","Snowflake")-0.2,0.5),()=>tag(ctx,690,118,"Snowflake",TECC,{align:"center",size:28}));}
   // right: your data platform, the service, built from the product and what's around it, and the team that runs it
   const fA=fin(t,tY-0.2,0.8);if(fA>0.01)withA(ctx,fA,()=>{glass(ctx,880,120,960,700,24,PSC,{glow:16,ea:0.8,fill:"rgba(14,10,6,0.9)"});T(ctx,"your data platform",910,172,{f:"mono",w:500,size:30,color:rgba(PSC,1)});
-    withA(ctx,fin(t,w("yours","service"),0.6),()=>T(ctx,"a service for all the utility's domains",1810,172,{w:700,size:30,align:"right",color:rgba(INK,0.9)}));
-    // the product, inside it, small
-    withA(ctx,fin(t,tP-0.2,0.6),()=>p1_product(ctx,1180,220,360,370,{lh:30,cs:30,hi:0,label:false}));
-    P1_AROUND.forEach(([s_,i])=>{const t0=w("parts",s_==="observability"?"watches":s_)-0.15,col=i===5?[180,220,255]:TECC,xx=i<3?920:1570,yy=250+(i%3)*120;
-      if(t>t0)arrive(ctx,xx+120,yy+45,t,t0,()=>psaEl(ctx,xx,yy,240,90,s_==="observability"?"what watches it":s_,col,i<2?"node":i===5?"function":"software",{size:30,hi:pulseAt(t,t0+0.1,1.0)}),{dy:-10});});
+    const tWh=w("whole","technology component")-0.3,hW=fin(t,tWh,0.6);
+    withA(ctx,fin(t,w("yours","service"),0.6)*(1-hW),()=>T(ctx,"a service for all the utility's domains",1810,172,{w:700,size:30,align:"right",color:rgba(INK,0.9)}));
+    // one technology component of its own, made of all of them
+    if(hW>0.01)withA(ctx,hW,()=>{T(ctx,"one component, made of them all",1760,172,{w:700,size:30,align:"right",color:rgba(TECC,1)});archGlyph(ctx,"node",1795,162,16,TECC);});
+    const hP=pulseAt(t,tWh+0.3,1.6);if(hP>0.01){ctx.save();ctx.strokeStyle=rgba(TECC,0.8*hP);ctx.lineWidth=4;rr(ctx,884,124,952,692,22);ctx.stroke();ctx.restore();}
+    // two vendors' products, at the utility, in the middle
+    const tW=w("two","Databricks")-0.2,tF=w("two","Microsoft Fabric")-0.2;
+    if(t>tW)arrive(ctx,1365,290,t,tW,()=>p1_vendor(ctx,1165,215,400,150,"databricks","Databricks",{hi:pulseAt(t,tW+0.2,1.0)}),{dy:-10});
+    if(t>tF)arrive(ctx,1365,470,t,tF,()=>p1_vendor(ctx,1165,395,400,150,"fabric","Microsoft Fabric",{hi:pulseAt(t,tF+0.2,1.0)}),{dy:-10});
+    // the components outside them both, then what comes around them all
+    P1_AROUND.forEach(([s_,word,line,col_,row,kind])=>{const t0=w(line,word)-0.15,col=kind==="function"?[180,220,255]:TECC,xx=col_?1585:905,yy=205+row*95;
+      if(t>t0)arrive(ctx,xx+120,yy+43,t,t0,()=>p1_el(ctx,xx,yy,240,86,s_,col,kind,{size:30,hi:pulseAt(t,t0+0.1,1.0)}),{dy:-10});});
     // the team, its rules and its support
     const tq=w("team","team")-0.2;withA(ctx,fin(t,tq,0.6),()=>{[0,1,2].forEach(k=>{const hx=1010+k*58,hy=680;ctx.fillStyle=rgba(TECH,0.9);ctx.beginPath();ctx.arc(hx,hy-18,13,0,TAU);ctx.fill();ctx.beginPath();ctx.ellipse(hx,hy+16,22,16,0,Math.PI,TAU);ctx.fill();});
       T(ctx,"a team",1080,750,{w:700,size:30,align:"center",color:rgba(TECH,1)});});
@@ -172,7 +195,7 @@ scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
       T(ctx,"support",1620,780,{w:700,size:30,align:"center",color:rgba(TECH,1)});});});
   ctx.restore();
   // the two words, as the series uses them
-  withA(ctx,fin(t,w("keep","product")-0.3,0.6),()=>tag(ctx,528,140,"Databricks · the product",TECC,{align:"center",size:32}));
+  withA(ctx,fin(t,w("keep","products")-0.3,0.6),()=>tag(ctx,500,140,"Databricks, Fabric · products",TECC,{align:"center",size:32}));
   withA(ctx,fin(t,w("keep","service")-0.3,0.6),()=>tag(ctx,1336,140,"the data platform · the service",PSC,{align:"center",size:32}));
   vign(ctx,S);});
 
@@ -334,24 +357,30 @@ scene("why",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);p1
 
 /* ---------- 10. The data practice on the map ---------- */
 scene("practice",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);p1_room(ctx,S,t);
-  const tT=c("tech"),tA=c("app"),tP=c("port"),tN=c("none");
-  ctx.save();const CK=[[0,960,520,1.0],[tT-0.2,960,620,1.08],[tA-0.2,960,470,1.03],[tN-0.3,960,500,0.98]];focus(ctx,t,CK,1.8);
-  psaBand(ctx,150,330,"application layer",APPC,fin(t,0.3,0.8));psaBand(ctx,510,360,"technology layer",TECC,fin(t,0.5,0.8));
-  // the platform's services, realised by Databricks as system software
+  const tT=c("tech"),tM=c("made"),tS=c("serves"),tA=c("app"),tP=c("port"),tN=c("none");
+  ctx.save();const CK=[[0,960,500,1.0],[tT-0.2,900,640,1.06],[tA-0.2,960,480,1.0],[tN-0.3,960,490,0.98]];focus(ctx,t,CK,1.8);
+  psaBand(ctx,120,300,"application layer",APPC,fin(t,0.3,0.8));psaBand(ctx,440,390,"technology layer",TECC,fin(t,0.5,0.8));
+  // the data platform's place: one node, the enterprise data platform, made of the vendors' system software and what's beside them
+  const nA=fin(t,w("tech","one node")-0.2,0.6);if(nA>0.01)withA(ctx,nA,()=>{glass(ctx,150,600,1120,220,14,TECC,{glow:12+14*pulseAt(t,w("tech","enterprise data platform"),1.4),ea:0.85,fill:"rgba(6,14,10,0.94)"});ctx.fillStyle=rgba(TECC,0.08);rr(ctx,150,600,1120,220,14);ctx.fill();
+    T(ctx,"enterprise data platform",176,642,{f:"mono",w:500,size:28,color:rgba(TECC,1)});archGlyph(ctx,"node",1240,628,14,TECC);});
+  const PARTS=[["databricks","Databricks","Databricks"],["fabric","Fabric","Microsoft Fabric"],["data lake",null,"data lake"],["key vault",null,"key vault"],["network",null,"network"]];
+  PARTS.forEach(([k,nm,word],i)=>{const t0=w("made",word)-0.2,x=170+i*218,y=666,ww=204,hh=136,a=fin(t,t0,0.5);if(a<=0.01)return;
+    if(nm){withA(ctx,a,()=>{glass(ctx,x,y,ww,hh,10,TECC,{glow:10+12*pulseAt(t,t0+0.2,1.0),ea:0.85,fill:"rgba(7,14,12,0.96)"});ctx.fillStyle=rgba(TECC,0.14);rr(ctx,x,y,ww,hh,10);ctx.fill();psaGlyph(ctx,"software",x+ww-22,y+22,12,TECC);logo(ctx,k,x+ww/2-24,y+20,48);T(ctx,nm,x+ww/2,y+108,{w:700,size:28,align:"center"});});}
+    else p1_el(ctx,x,y,ww,hh,k,TECC,k==="network"?"network":"software",{a,size:28,hi:pulseAt(t,t0+0.2,1.0)});});
+  // together, they realise the platform's services: storage, compute, the catalogue
   const SV=[["storage","storage"],["compute","compute"],["catalogue","catalogue"]];
-  SV.forEach(([s_,k],i)=>{const t0=w("tech",k)-0.2,x=330+i*360;psaEl(ctx,x,560,300,84,s_,TECC,"service",{a:fin(t,t0,0.5),size:30,hi:pulseAt(t,t0+0.1,1.0)});});
-  const tR=w("tech","realises")-0.2;withA(ctx,fin(t,w("tech","Databricks")-0.2,0.5),()=>{psaEl(ctx,600,730,520,96,"",TECC,"software",{size:30});const lw=logo(ctx,"databricks",640,752,52);T(ctx,"system software",1090,792,{f:"mono",w:500,size:28,align:"right",color:rgba(TECC,1)});});
-  SV.forEach((s,i)=>psaRel(ctx,860,730,480+i*360,644,"realise",TECC,fin(t,tR,0.4),fin(t,tR+i*0.15,0.6)));
+  SV.forEach(([s_,k],i)=>{const t0=w("serves",k)-0.2,x=330+i*340;psaEl(ctx,x,460,300,76,s_,TECC,"service",{a:fin(t,t0,0.5),size:30,hi:pulseAt(t,t0+0.1,1.0)});});
+  const tR=w("serves","realise")-0.2;SV.forEach((s,i)=>psaRel(ctx,480+i*340,600,480+i*340,538,"realise",TECC,fin(t,tR,0.4),fin(t,tR+i*0.15,0.6)));
   // the measure's data product: its pipeline and models, one application component, owned by the enterprise domain; its port, an interface
-  const tC=w("app","pipeline")-0.2;psaEl(ctx,640,240,440,110,"minutes without power",APPC,"component",{a:fin(t,tC,0.5),size:32,hi:pulseAt(t,w("app","application component"),1.2)});
-  withA(ctx,fin(t,w("app","pipeline"),0.5),()=>{psaCog(ctx,690,330,10,APPC,t);T(ctx,"pipeline and models",712,340,{w:600,size:28,color:rgba(SOFT,1)});});
-  withA(ctx,fin(t,w("app","owned")-0.2,0.5),()=>psaOwner(ctx,860,196,"enterprise domain",{align:"center",size:28}));
-  SV.forEach((s,i)=>psaRel(ctx,480+i*360,560,700+i*160,352,"serve",TECC,fin(t,tC+0.4,0.4)*0.85,fin(t,tC+0.5+i*0.15,0.6)));
-  const tI=w("port","Where others")-0.2;psaEl(ctx,1260,250,340,90,"output port",APPC,"interface",{a:fin(t,tI,0.5),size:30,hi:pulseAt(t,w("port","output port"),1.2)+pulseAt(t,w("port","application interface"),1.2)});psaRel(ctx,1082,295,1258,295,"compose",APPC,fin(t,tI,0.4),fin(t,tI+0.1,0.6));
-  withA(ctx,fin(t,tI+0.2,0.5),()=>T(ctx,"where others read it",1430,390,{w:600,size:28,align:"center",color:rgba(SOFT,1)}));
-  const tAr=w("port","artifacts")-0.2;psaEl(ctx,1300,730,320,96,"its tables",TECC,"artifact",{a:fin(t,tAr,0.5),size:30});psaRel(ctx,1122,778,1298,778,"assign",TECC,fin(t,tAr,0.4),fin(t,tAr+0.1,0.6));
+  const tC=w("app","pipeline")-0.2;psaEl(ctx,640,210,440,110,"minutes without power",APPC,"component",{a:fin(t,tC,0.5),size:32,hi:pulseAt(t,w("app","application component"),1.2)});
+  withA(ctx,fin(t,w("app","pipeline"),0.5),()=>{psaCog(ctx,690,300,10,APPC,t);T(ctx,"pipeline and models",712,310,{w:600,size:28,color:rgba(SOFT,1)});});
+  withA(ctx,fin(t,w("app","owned")-0.2,0.5),()=>psaOwner(ctx,860,166,"enterprise domain",{align:"center",size:28}));
+  SV.forEach((s,i)=>psaRel(ctx,480+i*340,460,700+i*160,322,"serve",TECC,fin(t,tC+0.4,0.4)*0.85,fin(t,tC+0.5+i*0.15,0.6)));
+  const tI=w("port","Where others")-0.2;psaEl(ctx,1260,220,340,90,"output port",APPC,"interface",{a:fin(t,tI,0.5),size:30,hi:pulseAt(t,w("port","output port"),1.2)+pulseAt(t,w("port","application interface"),1.2)});psaRel(ctx,1082,265,1258,265,"compose",APPC,fin(t,tI,0.4),fin(t,tI+0.1,0.6));
+  withA(ctx,fin(t,tI+0.2,0.5),()=>T(ctx,"where others read it",1430,360,{w:600,size:28,align:"center",color:rgba(SOFT,1)}));
+  const tAr=w("port","artifacts")-0.2;psaEl(ctx,1360,660,320,96,"its tables",TECC,"artifact",{a:fin(t,tAr,0.5),size:30});psaRel(ctx,1272,708,1358,708,"assign",TECC,fin(t,tAr,0.4),fin(t,tAr+0.1,0.6));
   // no rule in the platform's components; the rule, in the product, with its owner
-  const k=fin(t,tN-0.1,0.5);if(k>0.01){SV.forEach((s,i)=>withA(ctx,k,()=>kt_rcross(ctx,610+i*360,560,15,1)));withA(ctx,fin(t,w("none","product")-0.2,0.5),()=>{glow(ctx,860,295,180,APPC,0.18);psaCog(ctx,1050,262,14,APPC,t);});}
+  const k=fin(t,tN-0.1,0.5);if(k>0.01){PARTS.forEach((p_,i)=>withA(ctx,k,()=>kt_rcross(ctx,170+i*218+22,684,13,1)));withA(ctx,fin(t,w("none","product")-0.2,0.5),()=>{glow(ctx,860,265,180,APPC,0.18);psaCog(ctx,1050,232,14,APPC,t);});}
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 11. Every domain's road ---------- */

@@ -73,7 +73,7 @@ scene("sight",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
     // a data team, and the same question
     {at:c.data-0.3,place:"lpRoom",keys:[[c.data-0.3,960,540,1.0]],dis:1.4,draw:(x,tt)=>{
       swc_sheet(x,tt,w("data","team",-0.2),560,180,800,{kick:"A data team",title:"Who is each service for?"},{col:LP.blue,light:"day",out:c.breath+0.2});
-      const l0=w("design","layer",-0.6);if(tt>=l0-0.2)swc_layers(x,560,390,800,{a:1-ag_in(tt,c.breath+0.2,0.8),u:SWC_LAYERS.map((_,i)=>ag_in(tt,l0+i*0.18,0.6)),compact:1,light:"day"});}}
+      const l0=w("design","system",-0.6);if(tt>=l0-0.2)swc_layers(x,560,390,800,{a:1-ag_in(tt,c.breath+0.2,0.8),u:SWC_LAYERS.map((_,i)=>ag_in(tt,l0+i*0.18,0.6)),compact:1,light:"day"});}}
   ]);
   lp_title(ctx,S,t,c.breath+0.2,SWC_TITLE,"Know who each service is for, then design every layer","Data management · Architecture that keeps up",{module:"Data management",mark:dm_mark});
 });

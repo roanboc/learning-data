@@ -21,11 +21,13 @@ const NARR={
  {"id":"box","gap":0.8,"text":"And among the applications, one box: data warehouse. That's the data platform, drawn as one more application."},
  {"id":"ask","gap":0.8,"text":"Ravi asks Tomás to move it. But first, a word that means two things."}]},
 "words":{"name":"Two kinds of platform","lead":1.0,"tail":1.0,"vo":[
- {"id":"vendor","gap":0.8,"text":"Databricks calls its product a data platform, and so do other vendors. At the technology layer, it is one: many components, sold as one product."},
+ {"id":"vendor","gap":0.8,"text":"Databricks calls its product a data platform, and so do other vendors, such as Microsoft Fabric and Snowflake. At the technology layer, each is one: many components, sold as one product."},
  {"id":"yours","gap":0.8,"text":"Your data platform is more: a service the utility runs for all its domains."},
- {"id":"parts","gap":0.8,"text":"It's built from that product and the components around it: identity, the network, integration, orchestration, reporting tools, and what watches it all."},
+ {"id":"two","gap":0.8,"text":"At the utility, it's built from two vendors' products, Databricks and Microsoft Fabric, and from components outside them both: the data lake, a key vault for secrets, and the network."},
+ {"id":"parts","gap":0.8,"text":"Around them come identity, integration, orchestration, reporting tools, and what watches it all."},
  {"id":"team","gap":0.8,"text":"And from a team, with rules and support, that keeps it running for everyone."},
- {"id":"keep","gap":0.8,"text":"In this series, Databricks is the product. The data platform is the service."}]},
+ {"id":"whole","gap":0.8,"text":"So the data platform is a technology component of its own, made of all of them. Whether it needs so many is a question for later."},
+ {"id":"keep","gap":0.8,"text":"In this series, Databricks and Fabric are products. The data platform is the service, and the component they make up."}]},
 "test":{"name":"The test","lead":1.0,"tail":1.0,"vo":[
  {"id":"billing","gap":0.8,"text":"Take billing. It has one purpose: to bill customers. Its rules are built into it: tariffs, estimates, discounts."},
  {"id":"owner","gap":0.8,"text":"Its owner is the head of retail, who decides what it does. It's measured by retail's outcomes: bills right, and on time."},
@@ -63,7 +65,9 @@ const NARR={
  {"id":"inside","gap":0.8,"text":"It can't be designed from inside any one of them."}]},
 "practice":{"name":"The data practice on the map","lead":1.0,"tail":1.0,"vo":[
  {"id":"intro","gap":0.8,"text":"Here's the data practice, on Tomás's map."},
- {"id":"tech","gap":0.8,"text":"In the technology layer, the platform's services: storage, compute, the catalogue. Databricks realises them, as system software."},
+ {"id":"tech","gap":0.8,"text":"In the technology layer, the data platform has a place of its own: one node, the enterprise data platform."},
+ {"id":"made","gap":0.8,"text":"It's made of the vendors' system software, Databricks and Microsoft Fabric, with the data lake, the key vault and the network."},
+ {"id":"serves","gap":0.8,"text":"Together, they realise the platform's services: storage, compute, the catalogue."},
  {"id":"app","gap":0.8,"text":"In the application layer, the measure's data product: its pipeline and models, one application component, owned by the enterprise domain."},
  {"id":"port","gap":0.8,"text":"Where others read it, its output port, is an application interface. Its tables are artifacts, kept on the platform."},
  {"id":"none","gap":0.8,"text":"The platform's components hold no rule. The product on them does, with its owner."}]},

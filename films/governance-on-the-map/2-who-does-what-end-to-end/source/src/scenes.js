@@ -156,7 +156,7 @@ const EE_FLY=ee_smooth([[262,646],[322,700],[420,724],[548,700],[528,652]],10);
 // the floor's 0.5: 0.46)
 const EE_FLYHAND=[[252,611.6],[520,612.8]];
 scene("request",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{drafts:w("mei","drafts"),ex:w("mei","with an"),checks:w("agent","checks"),needs:w("agent","needs"),lists:w("agent","lists"),three:w("agent","three"),two:w("agent","two dash"),
+    return{drafts:w("mei","drafts"),ex:w("mei","with an"),checks:w("agent","checks"),needs:w("agent","needs"),lists:w("agent","lists"),three:w("agent","three"),two:w("agent","two dashboards"),
       reg:w("owner","registrar"),decides:w("owner","decides"),once:w("once","once"),pub:w("once","publishes"),gloss:w("once","glossary"),
       dt:w("copies","data team"),dash:w("copies","the dashboards"),asst:w("copies","the assistant"),
       st:["Ask","draft","check","decide","publish","follow"].map(s=>w("steps",s))};});

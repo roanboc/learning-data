@@ -1900,11 +1900,11 @@ scene("play",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   // live: the browser asks the soundtrack where it is, and draws that moment
   withA(ctx,A*fin(t,c("live")-0.2,0.6),()=>{const tl=T231+Math.max(0,t-c("live")),mw=640;browserWin(ctx,170,180,mw,414,"roanboc.github.io/learning-data");
     const mini=ildMini(tl,mw-24);ctx.drawImage(mini,182,226,mw-24,(mw-24)*9/16);
-    glass(ctx,170,620,mw,170,16,CYAN,{glow:10,ea:0.4,fill:"rgba(6,10,20,0.92)"});T(ctx,"soundtrack",194,656,{w:700,size:17,color:rgba(CYAN,1)});waveBar(ctx,194,672,mw-48,50,(tl-120)/60,CYAN);
-    const tick=Math.floor(t*6)%2;T(ctx,"has played "+Math.floor(tl/60)+":"+(tl%60).toFixed(2).padStart(5,"0")+"  →  draw that moment",194,766,{f:"mono",w:500,size:18});
-    withA(ctx,fin(t,c("live")+4.0,0.5),()=>tag(ctx,660,656,"every screen refresh",CYAN,{align:"center",size:15}));glow(ctx,800,656,16,CYAN,0.4+0.5*tick);});
+    const lh=phSz(ctx,18)*1.25,two=phMin(ctx)>18;glass(ctx,170,620,mw,two?170+lh:170,16,CYAN,{glow:10,ea:0.4,fill:"rgba(6,10,20,0.92)"});T(ctx,"soundtrack",194,656,{w:700,size:17,color:rgba(CYAN,1)});waveBar(ctx,194,672,mw-48,50,(tl-120)/60,CYAN);   // on a phone the line under the wave is two, and the card grows by one: on one line it ran past the card
+    const tick=Math.floor(t*6)%2,played="has played "+Math.floor(tl/60)+":"+(tl%60).toFixed(2).padStart(5,"0");(two?[played,"→ draw that moment"]:[played+"  →  draw that moment"]).forEach((s,i)=>T(ctx,s,194,766+i*lh,{f:"mono",w:500,size:18}));
+    withA(ctx,fin(t,c("live")+4.0,0.5),()=>{const s="every screen refresh";tag(ctx,two?776-tw(ctx,s,phSz(ctx,15),700)-26:660,656,s,CYAN,two?{size:15}:{align:"center",size:15});});glow(ctx,800,656,16,CYAN,0.4+0.5*tick);});   // the pill ends before the light that blinks beside it
   // video: a browser with no window draws every frame; an encoder keeps what changed
-  withA(ctx,A*fin(t,c("video")-0.2,0.6),()=>{browserWin(ctx,1110,180,640,260,"a browser with no window, drawing every frame",{chrome:false});
+  withA(ctx,A*fin(t,c("video")-0.2,0.6),()=>{browserWin(ctx,1110,180,640,260,"",{chrome:false});["a browser with no window,","drawing every frame"].forEach((s,i)=>T(ctx,s,1134,214+i*phSz(ctx,16)*1.25,{w:600,size:16,f:"mono",color:rgba(SOFT,0.95)}));   // its title in two lines: on one it ran past the window
     if(FR.img){for(let i=0;i<6;i++){const u=((t-c("video"))*1.2+i/6)%1,x=lerp(1180,1560,u),y=lerp(300,300,u);withA(ctx,sstep(0,0.1,u)*(1-sstep(0.85,1,u)),()=>ctx.drawImage(FR.img,x,y,160,90));}}
     chip(ctx,1430,500,null,"encoder","H.264",{align:"center",edge:AMBER});
     const d=fin(t,c("diff")-0.2,0.6);for(let i=0;i<5;i++){const x=1130+i*124,y=610;glass(ctx,x,y,112,63,6,[190,210,240],{glow:0,fill:"rgba(4,7,14,0.96)"});if(FR.img){ctx.save();ctx.globalAlpha*=i===0||d<0.5?1:0.18;ctx.drawImage(FR.img,x,y,112,63);ctx.restore();

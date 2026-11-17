@@ -7,7 +7,7 @@
    ninguna), una etiqueta, asteriscos, un grupo con fecha de fin, un parámetro, una vista de métricas, el tablero de calidad, una
    incidencia, un producto de datos, su promesa, el contrato, el catálogo, el mercado, el directorio de cuentas, una universidad socia.
    site-tools/build_series.py lee este archivo como texto, igual que el inglés (ver el comentario de learn.en.js). */
-window.GP={lang:"es",store:"ld-governance-in-practice",repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+window.GP={lang:"es",store:"ld-governance-in-practice",repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"de",inPractice:"En la práctica",watch:"Ver esta parte",next:"Siguiente:",makeCall:"Tú decides →",
   scenario:"Situación",score:"Puntaje",answered:"respondidas",toGo:"por responder",good:"Buena decisión",notQuite:"No del todo",
   explore:"Explóralo en el lab:",nextQ:"Siguiente situación",results:"Ver tus resultados",again:"Empezar de nuevo",check:"Comprobar",
@@ -154,13 +154,13 @@ labs:[
   points:["De las treinta y tres tablas del equipo de datos, otros equipos leen diez, cada una en uno de seis productos.","Un producto nombra a su dueño y las tablas que ofrece.",
     "Sus niveles de servicio y su soporte son parte de la promesa.","El mismo script revisa el archivo del producto contra las reglas de su estándar."],
   real:"Las tablas compartidas sin producto son las que nadie cuida: se hicieron para un pedido y se quedaron. Un control que pregunta «¿en qué producto está?» en cada tabla compartida nueva convierte esa pregunta en una conversación corta, antes de que la tabla tenga lectores.",
-  repo:["governance/4-data-products/","scripts/generate/products.py"],
+  repo:["../20-data-governance/4-data-products/","scripts/generate/products.py"],
   w:{prompt:"La tabla de egresos de Jun es compartida, así que necesita un producto. Escribe las líneas que pide el control de productos, y ejecútalo.",togglesL:"Líneas en el archivo del producto",run:"Ejecutar el control de productos",
-    path:"governance/4-data-products/completions.yml",panel:"products",sumFail:"{n} fallaron",sumWarn:"pasó · {n} con advertencia",sumPass:"al día y válidos",
+    path:"../20-data-governance/4-data-products/completions.yml",panel:"products",sumFail:"{n} fallaron",sumWarn:"pasó · {n} con advertencia",sumPass:"al día y válidos",
     toggles:[{k:"out",label:"outputs: mart_planning__completions"},{k:"owner",label:"owner: Clara Jensen, Planning"},{k:"purpose",label:"purpose y usage"},{k:"sl",label:"niveles de servicio"},{k:"support",label:"support: dónde preguntar"}],
     code:[[null,"name: completions"],[null,"title: Completions"],[null,"domain: planning"],["owner","owner: \"Clara Jensen, Planning\""],["purpose","purpose: The awards conferred this year, by faculty."],["purpose","usage: Count the rows for each faculty."],
       ["out","outputs:"],["out","  - {model: mart_planning__completions}"],["sl","service_levels:"],["sl","  - {property: latency, value: 1, unit: d}"],["support","support:"],["support","  - {channel: planning-data, tool: email}"]],
-    checks:[{s:"la tabla compartida está en un producto",t:"shared:",need:["out"],fail:"mart_planning__completions is shared but in no product: add it to a product's outputs in governance/4-data-products/.",pass:"Está en un producto."},
+    checks:[{s:"la tabla compartida está en un producto",t:"shared:",need:["out"],fail:"mart_planning__completions is shared but in no product: add it to a product's outputs in 20-data-governance/4-data-products/.",pass:"Está en un producto."},
       {s:"el producto nombra a su dueña",t:"owner:",need:["owner"],fail:"completions no nombra dueño: di quién cumple su promesa.",pass:"Clara cumple su promesa."},
       {s:"dice para qué es",t:"purpose:",need:["purpose"],fail:"completions no tiene purpose ni usage: el estándar abierto pregunta para qué es, y cómo usarlo.",pass:"Los lectores saben para qué es."},
       {s:"niveles de servicio y soporte",t:"promesa:",need:["sl","support"],level:"warn",fail:"completions no tiene niveles de servicio ni soporte: los lectores no sabrán cuándo está lista, ni dónde preguntar.",pass:"Los lectores saben cuándo, y dónde preguntar."}],
@@ -173,7 +173,7 @@ labs:[
   points:["Por qué: un propósito que la dueña pueda comparar con aquello para lo que es el producto.","Por cuánto tiempo: una fecha, para que el acceso termine solo.",
     "A quién: a la dueña del producto, no a quien construyó la tabla.","Gobernanza promete una respuesta en cinco días hábiles."],
   real:"Las solicitudes sin propósito se responden por costumbre: sí a los colegas, no a los desconocidos. Un propósito y una fecha dejan que la dueña decida por el fondo, y que alguien lea la decisión después. Deja el formulario en dos preguntas: cada campo de más es un motivo para preguntar por ahí.",
-  repo:["governance/4-data-products/learners_near_an_award.yml"],
+  repo:["../20-data-governance/4-data-products/learners_near_an_award.yml"],
   w:{prompt:"Arma la solicitud de Anil para Estudiantes cerca de un título.",head:"Solicitar acceso:",form:"Solicitar acceso · Estudiantes cerca de un título",formSub:"dueña: Clara Jensen, Planificación",
     slots:[{label:"¿Para qué necesitas acceso?",opts:[{t:"Por si la facultad llega a necesitarlo en algún momento del próximo año.",why:"Sin propósito que sopesar: la dueña no puede decir que sí a aquello para lo que es."},
         {t:"Para planificar los cupos del próximo semestre en la última materia del certificado.",ok:true,why:"Un propósito que Clara puede sopesar: es para lo que es el producto, apoyar a los estudiantes cerca de un título."},
@@ -249,7 +249,7 @@ qs:[
     {t:"Nada en absoluto, hasta que cada celda del tablero vuelva a estar en verde.",why:"Las cifras del día anterior están bien; solo lo construido con los datos detenidos está en duda."}],
   why:"Todo lo construido con ellas se detuvo, así que no salió nada mal: Planificación conservó las cifras del día anterior. Al mediodía, el equipo de aprendizaje había agregado los seis correos, y esa noche pasaron los 160 controles."},
 /* ---------- Productos en formatos abiertos ---------- */
-{type:"choice",n:52,lab:"shared",film:5,vis:"code",st:{path:"products",lines:[{t:"mart_planning__completions is shared but in",c:"no"},{t:"no product: add it to a product's outputs",c:"no"},"in governance/4-data-products/"],say:"1 falló",sayC:"no"},
+{type:"choice",n:52,lab:"shared",film:5,vis:"code",st:{path:"products",lines:[{t:"mart_planning__completions is shared but in",c:"no"},{t:"no product: add it to a product's outputs",c:"no"},"in 20-data-governance/4-data-products/"],say:"1 falló",sayC:"no"},
   alt:"El control de productos falla: la tabla de egresos de Jun es compartida pero no está en ningún producto.",
   title:"Compartida, sin producto",sit:"La tabla de egresos de Jun la leerá Planificación, pero no está en ningún producto, y el control de productos detiene su solicitud de cambio. ¿Cuál es el arreglo?",
   opts:[{t:"Hacer privada la tabla, para que ya no cuente como compartida.",why:"Planificación la necesita: esconderla mueve la pregunta, no la responde."},

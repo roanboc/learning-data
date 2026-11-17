@@ -24,7 +24,12 @@ window.LD_ROUTE = {
   "series": "{n} series",
   "more1": "1 more series coming",
   "more": "{n} more series coming",
-  "map": "The learning route: {n} topics. Select a topic to see its films and series."
+  "map": "The learning route: {n} topics. Select a topic to see its films and series.",
+  "proj": "The example dbt project",
+  "proj1": "1 film here shows its real files, and you can run it yourself.",
+  "projn": "{n} films here show its real files, and you can run it yourself.",
+  "projpage": "About the project",
+  "projmark": "Shows the example dbt project"
  },
  "groups": [
   {
@@ -58,6 +63,10 @@ window.LD_ROUTE = {
    "name": "Lead"
   }
  ],
+ "project": {
+  "href": "dbt-project/",
+  "icon": "<svg class=\"pj-ic\" viewBox=\"0 0 20 20\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z\"/><path d=\"M3.6 6.3L10 10l6.4-3.7M10 10v7.4\"/></svg>"
+ },
  "topics": [
   {
    "id": "data-platforms",
@@ -86,8 +95,8 @@ window.LD_ROUTE = {
      "href": "more-than-a-platform/",
      "poster": "more-than-a-platform-poster.jpg",
      "kicker": "One film",
-     "len": "3½ min",
-     "min": 3.5,
+     "len": "6 min",
+     "min": 6.0,
      "films": [
       "ld-more-than-a-platform"
      ]
@@ -99,7 +108,7 @@ window.LD_ROUTE = {
    "group": "foundations",
    "name": "Enterprise architecture",
    "who": "For architects, and anyone new to an organisation",
-   "line": "How an organisation works, in layers, before you ask what its data should answer.",
+   "line": "How an organisation works, in layers, so its data is designed as part of it: enterprise data architecture.",
    "items": [
     {
      "id": "enterprise-architecture",
@@ -165,14 +174,18 @@ window.LD_ROUTE = {
      "title": "Platform and solution architecture",
      "href": "platform-and-solution-architecture/",
      "poster": "an-application-or-a-platform-poster.jpg",
-     "kicker": "Series · 4 of 8 films",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Series · 8 films",
+     "len": "67 min",
+     "min": 67.0,
      "films": [
       "ld-an-application-or-a-platform",
       "ld-inside-the-platform",
       "ld-one-platform-or-many",
-      "ld-where-it-meets-the-applications"
+      "ld-where-it-meets-the-applications",
+      "ld-security-all-the-way-through",
+      "ld-one-solution-end-to-end",
+      "ld-a-road-people-choose",
+      "ld-built-to-change"
      ]
     },
     {
@@ -181,14 +194,16 @@ window.LD_ROUTE = {
      "title": "AI and continuous architecture",
      "href": "ai-and-continuous-architecture/",
      "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Series · 4 of 6 films",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Series · 6 films",
+     "len": "48 min",
+     "min": 48.0,
      "films": [
       "ld-agents-on-the-map",
       "ld-the-ai-platform",
       "ld-what-an-agent-may-read",
-      "ld-a-first-draft-not-a-blank-page"
+      "ld-a-first-draft-not-a-blank-page",
+      "ld-every-change-checked",
+      "ld-kept-alive"
      ]
     }
    ]
@@ -365,7 +380,8 @@ window.LD_ROUTE = {
       "ld-ideas-that-last"
      ]
     }
-   ]
+   ],
+   "proj": 10
   },
   {
    "id": "analytics-engineering",
@@ -396,7 +412,8 @@ window.LD_ROUTE = {
       "ld-end-to-end"
      ]
     }
-   ]
+   ],
+   "proj": 10
   },
   {
    "id": "data-quality",
@@ -451,7 +468,8 @@ window.LD_ROUTE = {
       "ld-small-every-week"
      ]
     }
-   ]
+   ],
+   "proj": 8
   },
   {
    "id": "master-data",
@@ -619,7 +637,8 @@ window.LD_ROUTE = {
       "ld-a-written-mandate"
      ]
     }
-   ]
+   ],
+   "proj": 7
   },
   {
    "id": "data-management",

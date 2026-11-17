@@ -933,6 +933,12 @@ async def check_think_silent(run):
             # "Watch this part" plays that chapter only (the soundtrack runs fast to get there quickly), and hands focus to Play
             await pg.evaluate("() => { const d = [...document.querySelectorAll('#think-list details')].find(d => d.querySelector('[data-scene=halves]')); d.open = true; }")
             await pg.click("#think-list [data-scene=halves]")
+            # the page scrolls there smoothly, and the scroll may not have started when the click returns: wait for the film
+            # itself to come into view, then for the page to hold still (waiting for a still page alone read it before it moved)
+            try:
+                await pg.wait_for_function("() => { const t = document.getElementById('watch').getBoundingClientRect().top; return t >= -2 && t <= 160; }", timeout=2000)
+            except Exception:  # noqa: BLE001
+                pass
             await run.settle(pg)
             r = await pg.evaluate("() => { const s = SCENES.find(x => x.id === 'halves'); return {t: FILM.time(), start: s.start, end: s.start + s.dur, playing: FILM.playing(), top: document.getElementById('watch').getBoundingClientRect().top}; }")
             expect(sec, r["playing"] and r["start"] <= r["t"] < r["start"] + 3, f"{where}: \"Watch this part\" doesn't play \"halves\" from its start ({r})")
@@ -1029,9 +1035,15 @@ async def check_progress(run):
         await pg.close()
         return ctx
 
+    async def kept(seed):  # every page starts from the seed: a page with the scenarios on it (Make the call, which now shows
+        # More than a platform's card and its chip) checks the saved answers against its own and rewrites them
+        ctx = await seeded(seed)
+        await ctx.add_init_script(f"(s => {{ for (const k in s) localStorage.setItem(k, JSON.stringify(s[k])); }})({json.dumps(seed)})")
+        return ctx
+
     stops = re.findall(r'\["(\w+)","\w+",\[', (WEB / "assets/learn/learn.js").read_text())
     # seed 1: the intro watched, every lab, two answers
-    ctx = await seeded({"ld:watched": True, "ld:visited": stops, "ld:quiz": {"cur": 3, "ans": {"0": {"ok": True}, "1": {"ok": False}}, "sum": {}}})
+    ctx = await kept({"ld:watched": True, "ld:visited": stops, "ld:quiz": {"cur": 3, "ans": {"0": {"ok": True}, "1": {"ok": False}}, "sum": {}}})
     try:
         for key in run.pick(("", "es/")):
             pg, _ = await run.page(ctx, key)
@@ -1052,7 +1064,7 @@ async def check_progress(run):
     finally:
         await ctx.close()
     # seed 2: A Sharper Sketch, one lab and two answers
-    ctx = await seeded({"ld3:quiz": {"0": {"ok": True}, "5": {"ok": True}}, "ld3:visited": ["grain"]})
+    ctx = await kept({"ld3:quiz": {"0": {"ok": True}, "5": {"ok": True}}, "ld3:visited": ["grain"]})
     try:
         for key in chip_pages:
             pg, _ = await run.page(ctx, key)
@@ -1381,6 +1393,7 @@ async def check_a11y(run):
 # Each series draws them with its own engine (site/assets/<dir>/learn.js), which keeps to what build_series.py's pages expect:
 # the labs app (#series-labs) has a tab for each lab ([role=tab][data-id]), selected when it's open, and opens #<lab id> on load;
 # its "Watch this part" is a link with #t= to the lab's chapter; the scenarios app (#series-quiz) shows #film-<n> as data-film.
+# Both are one level: every lab in one rail and every scenario in one list, numbered 1 to N, never split by film.
 # A series can also have a play script, site-tools/smoke/<series id>.js: one expression, ({lab: async id => [...], quiz: async
 # () => [...]}), run in the page, that plays a lab (or every scenario) through and returns what went wrong, as text.
 SMOKE_DIR = pathlib.Path(__file__).resolve().parent / "smoke"
@@ -1389,6 +1402,7 @@ LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = a
     watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
     badges: app ? [...app.querySelectorAll('[role=tab][data-id]')].map(b => b.dataset.id + ' ' + ((b.querySelector('i') || {}).textContent || '')) : [],
     kicker: ((app && app.querySelector('.stop-text .kicker')) || {}).textContent || '',
+    rails: app ? app.querySelectorAll('[role=tablist]').length : 0, split: app ? app.querySelectorAll('.mr-films, .gp-films, select').length : 0,
     sw: document.documentElement.scrollWidth - innerWidth}; }"""
 
 
@@ -1417,6 +1431,8 @@ async def check_series_learn(run):
                     r = await pg.evaluate(LEARN_JS)
                     expect(sec, r["tabs"] == SL["labs"], f"{where}: {r['tabs']} lab tabs, expected {SL['labs']}")
                     expect(sec, r["on"] == x["id"], f"{where}: the lab open is {r['on']!r}")
+                    # one level: every lab of the series in one rail, never a film's buttons or a rail for each film (the author, 16 Nov 2026)
+                    expect(sec, r["rails"] == 1 and not r["split"], f"{where}: the labs are split by film again ({r['rails']} rails of tabs, {r['split']} film choices); keep one list")
                     # one numbering for the whole pack: each lab's tab shows its place among all the series' labs, whichever film it's
                     # under, and the open lab's kicker says the same, "Lab 3 of 9"
                     ids = [y["id"] for y in SL[lg]["labs"]]
@@ -1448,6 +1464,9 @@ async def check_series_learn(run):
                     await pg.wait_for_timeout(300)
                     got = await pg.evaluate("() => { const a = document.getElementById('series-quiz'); return a && a.dataset.film; }")
                     expect(sec, got == str(n), f"/{key}#film-{n}: the scenarios show film {got!r}")
+                    # one level: #film-<n> opens that film's first scenario in the one list of all of them, numbered 1 to N
+                    one = await pg.evaluate("() => { const a = document.getElementById('series-quiz'); return a ? [a.querySelectorAll('.dots button').length, a.querySelectorAll('.mr-films, .gp-films, select').length] : [0, 0]; }")
+                    expect(sec, one[0] == SL["quiz"] and not one[1], f"/{key}#film-{n}: {one[0]} of {SL['quiz']} scenarios in the list, {one[1]} film choices; keep one list of all of them")
                     for p in log_problems(log):
                         expect(sec, False, f"/{key}#film-{n}: {p}")
                     await pg.close()
@@ -1706,7 +1725,7 @@ async def check_route(run):
                 await pg.wait_for_selector(".route.drawn", timeout=5000)
                 f = await pg.evaluate(FACTS)
                 expect(sec, f["route"] and not f["list"] and f["pressed"] == ["route"], f"{at}: a first visit shows the route, not the list ({f['route']}, {f['list']}, {f['pressed']})")
-                expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start")
+                expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n + 1)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start (and the start, first on the rail)")
                 expect(sec, f["intro"] == 1, f"{at}: {f['intro']} introduction cards, the route's first station")
                 expect(sec, f["goals"] == len(d["goals"]) + 1, f"{at}: {f['goals']} goal buttons, for {len(d['goals'])} goals and the whole route")
                 expect(sec, f["wide"], f"{at}: the page scrolls sideways")
@@ -1746,11 +1765,11 @@ async def check_route(run):
             for key in hkeys:
                 d = D[lang(key)]; pre = "es/" if lang(key) == "es" else ""
                 pg, log = await run.page(ctx, key)
-                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.more-steps a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
+                r = await pg.evaluate("""() => ({steps: [...document.querySelectorAll('.steps-note a')].map(a => a.getAttribute('href')), ways: [...document.querySelectorAll('.home-next a')].map(a => a.getAttribute('href')),
                     map: document.querySelectorAll('[data-route], .r-map, .r-rail, .topic-links, .topic-tiles').length, wide: document.documentElement.scrollWidth <= innerWidth,
-                    small: [...document.querySelectorAll('.more-steps a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
+                    small: [...document.querySelectorAll('.steps-note a, .home-next a')].filter(a => a.getBoundingClientRect().height < 24).length})""")
                 expect(sec, r["steps"] == ["labs/", "scenarios/"], f"/{key} @{width}: after the film, its two other steps are {r['steps']}")
-                expect(sec, r["ways"] == ["topics/", "journey/"] and not r["map"], f"/{key} @{width}: then the route and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
+                expect(sec, r["ways"] == ["topics/", "dbt-project/", "journey/"] and not r["map"], f"/{key} @{width}: then the route, the example project and the Making of, and no map or list of topics ({r['ways']}, {r['map']})")
                 expect(sec, r["wide"] and not r["small"], f"/{key} @{width}: scrolls sideways ({not r['wide']}) or has {r['small']} links under 32 px tall")
                 if width == 390:
                     await pg.click('.home-next a.primary')

@@ -3196,9 +3196,9 @@ const OS_STEPS=[["Sign in","before anaesthesia",["Patient confirmed","Site marke
   ["Sign out","before leaving the room",["Sponges counted","Specimens labelled","Concerns for recovery"]]];
 function os_boxAt(c,r){const P=OS_PG2;return[P.x+P.col[c]+18,P.y+P.row[r]-10];}
 function os_page(ctx,ticks,o){o=o||{};const P=OS_PG2;wc_T(ctx,"Surgical Safety Checklist",W/2,P.y+84,{w:800,size:52,align:"center",col:WC_DARK});
-  OS_STEPS.forEach(([h,sub,items],c)=>{const x=P.x+P.col[c];gv_tint(ctx,x-30,P.y+140,400,P.h-180,GV.gold,o.lit===c?0.42*(o.litA==null?1:o.litA):0);
+  OS_STEPS.forEach(([h,sub,items],c)=>{const x=P.x+P.col[c],iw=items.map(s=>tw(ctx,s,32,600));gv_tint(ctx,x-30,P.y+140,Math.max(400,108+Math.max(...iw)),P.h-180,GV.gold,o.lit===c?0.42*(o.litA==null?1:o.litA):0);   // the lit column and an item's halo are as wide as their words: Concerns for recovery ran past both
     wc_T(ctx,h,x,P.y+200,{w:800,size:44,col:WC_DARK});wc_T(ctx,sub,x,P.y+246,{w:500,size:28,col:WC_MUTED});
-    items.forEach((s,r)=>{const [bx,by]=os_boxAt(c,r),k=c*3+r;if(o.halo===k)gv_tint(ctx,bx-34,by-36,404,72,GV.gold,0.7*(o.haloA==null?1:o.haloA));
+    items.forEach((s,r)=>{const [bx,by]=os_boxAt(c,r),k=c*3+r;if(o.halo===k)gv_tint(ctx,bx-34,by-36,Math.max(404,90+iw[r]),72,GV.gold,0.7*(o.haloA==null?1:o.haloA));
       ctx.save();ctx.strokeStyle=rgba(WC_INK,0.8);ctx.lineWidth=3;ctx.strokeRect(bx-18,by-18,36,36);ctx.restore();wc_T(ctx,s,bx+36,by+12,{w:600,size:32,col:WC_INK});
       const p=ticks[k]||0;if(p>0)wc_tick(ctx,bx+4,by-4,44,[36,120,80],p,5);});});}
 

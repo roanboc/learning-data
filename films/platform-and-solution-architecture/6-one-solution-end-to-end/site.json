@@ -1,0 +1,37 @@
+{
+  "kicker": "Solution architecture",
+  "kicker_es": "Arquitectura de soluciones",
+  "title_es": "Una solución, de principio a fin",
+  "h1": "One solution, end to end: designed on the platform everyone shares",
+  "h1_es": "Una solución, de principio a fin: diseñada en la plataforma de todos",
+  "lead": "At the utility, three teams start three pieces of a social tariff, and nobody has drawn how they join. Sipho Dlamini, a solution architect, designs it end to end on the data platform: its context, three qualities with a measure each, two options, and why one won, written down.",
+  "lead_es": "En la empresa de energía, tres equipos empiezan tres piezas de una tarifa social, y nadie ha dibujado cómo se unen. Sipho Dlamini, arquitecto de soluciones, la diseña de principio a fin en la plataforma de datos: su contexto, tres cualidades medidas, dos opciones y el porqué, por escrito.",
+  "description": "A film about solution architecture on a data platform: a social tariff that gives every eligible household a discount from the first of July, with no forms, where only the social services agency knows who is eligible; three teams starting three pieces, billing's vendor all inside billing, the data team's own table and IT's server for the agency's files, so two lists of who's eligible and nobody drawing how they join; the head of retail asking for one design in a ticket; the enterprise architect who keeps the map, the platform lead who builds what every solution shares, and the solution architect who designs one solution end to end, side by side; the solution's context on one page, with what's out of scope and what's fixed; three qualities from a standard's nine, each with a measure a design can be tested against; two options tested against the same measures, the one that fails them and the one chosen, with its risk handled; the decision written down, with what was considered, why and its consequence, checked against the principles and accepted; six of its ten parts already there, and the one every team will need built once into the platform; every team told its part months ahead; the first bills on the first of July, a late file handled, and one reader in the log; and the solution on the map, its new parts, the platform's services, a work package and each quality a requirement.",
+  "description_es": "Una película sobre arquitectura de soluciones en una plataforma de datos: una tarifa social que da a cada hogar elegible un descuento desde el primero de julio, sin formularios, donde solo la agencia de servicios sociales sabe quién es elegible; tres equipos que empiezan tres piezas, el proveedor de facturación todo dentro de facturación, la tabla propia del equipo de datos y el servidor de TI para los archivos de la agencia, así que dos listas de quién es elegible y nadie que dibuje cómo se unen; quien dirige comercialización pide un solo diseño en un ticket; el arquitecto empresarial que lleva el mapa, el líder de la plataforma que construye lo que toda solución comparte y el arquitecto de soluciones que diseña una solución de principio a fin, lado a lado; el contexto de la solución en una página, con lo que queda fuera del alcance y lo que está fijo; tres cualidades de las nueve de una norma, cada una con una medida contra la que probar un diseño; dos opciones probadas contra las mismas medidas, la que no las cumple y la elegida, con su riesgo resuelto; la decisión por escrito, con lo considerado, el porqué y su consecuencia, revisada contra los principios y aceptada; seis de sus diez partes ya existentes, y la que todo equipo necesitará construida una vez en la plataforma; cada equipo avisado de su parte con meses de antelación; las primeras facturas el primero de julio, un archivo atrasado resuelto y un solo lector en el registro; y la solución en el mapa, sus partes nuevas, los servicios de la plataforma, un paquete de trabajo y cada cualidad como requisito.",
+  "card": "Each solution planned end to end: its context, its qualities, its options, and why, written down.",
+  "card_es": "Cada solución planeada de principio a fin: su contexto, sus cualidades, sus opciones y el porqué, por escrito.",
+  "chapters_es": {
+    "ahead": "Un aviso por delante",
+    "pieces": "Tres piezas",
+    "three": "Tres arquitectos",
+    "context": "Todo lo que toca",
+    "quality": "Tres cualidades, medidas",
+    "options": "Dos opciones",
+    "record": "El porqué, por escrito",
+    "reuse": "Casi todo ya existe",
+    "told": "Avisados con tiempo",
+    "july": "El primero de julio",
+    "practice": "La práctica de datos en el mapa",
+    "end": "Cada viaje, planeado"
+  },
+  "next_h": "You've seen one solution designed end to end. Next: a road people choose.",
+  "next_h_es": "Viste una solución diseñada de principio a fin. Sigue: un camino que la gente elige.",
+  "past": [
+    "Alternate attendance, Japan, from 1635",
+    "Each lord's journey to Edo was planned before it set out, with a notice sent ahead to every station, so the stations' porters and horses served everyone, and each procession found what it needed."
+  ],
+  "past_es": [
+    "La residencia alterna, Japón, desde 1635",
+    "El viaje de cada señor a Edo se planeaba antes de partir, con un aviso enviado por delante a cada posta, así los cargadores y caballos de las postas servían a todos, y cada comitiva encontraba lo que necesitaba."
+  ]
+}

@@ -44,3 +44,10 @@ After Rodrigo's feedback that Finance and other users request and approve ticket
 | 23 | Where does the user check the result? | In test, after the merge and before Noor's release approval: Rohan compares the figures with his own, and the ticket stays open until he says they're right. | Chapter 5 | He checks after production instead, before the ticket closes |
 | 24 | Does Noor still approve the release? | Yes: she is the data architect, a technical approver of production, not a user. | Chapter 5 | Production goes on after Rohan's check alone |
 | 25 | Does *A platform that watches itself* need the same fix? | Not in this change: its line "Sam's pull request also asks Ingrid Holm, in HR, ... to change the contract first" is left for a change of its own. | Film 2 of the series | The same fix there: Ingrid gets a ticket, not a pull request |
+
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film. It was fixed while he was away.
+
+- **Question:** on the card of the spreadsheets, the second line, *from each faculty*, ran 10 px past the card. Widen the card, and which way?
+- **Assumption taken:** to the left, by 20 px, and the *Claims app* card under it with it, so the two stay one width. The laptop beside them stays where it is: the next chapter's panel takes its place, so it can't move. No word changed. It shows at 2:15 to 2:56.

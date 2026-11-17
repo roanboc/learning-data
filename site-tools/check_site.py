@@ -23,7 +23,7 @@ What it checks, page by page (every .html under site/):
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
 - a series' own labs and scenarios (build_series.series_learn): the same in both languages, each lab on one of its film's
   chapters, the labs listed in film order (the labs page numbers them 1 to N in that order), each scenario numbered by its film,
-  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs.
+  in order, and pointing to a lab; its films' "Pause and think" questions stop at its labs; one level, never split by film.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - the learning route (modules/route.json): every topic on it once, each goal's stops among the films and series on the site,
   the Topics page draws it, the list's rows in the route's order, and the home page leads to it, in both languages.
@@ -60,9 +60,11 @@ What it checks, page by page (every .html under site/):
   and no other film has the folder. The site's player shows those pictures instead of painting the places while the film plays,
   which froze the governance films again and again on a laptop (5 November 2026).
 """
+import ast
 import hashlib
 import html.parser
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -86,7 +88,8 @@ INTRO_MOST = {"kicker": 32, "h1": 75, "lead": 300}
 # pages with a real twin in the other language (§3.2); everything else has no hreflang
 TWINS = ["", "labs/", "scenarios/", "journey/", "topics/", "sketch/", "when-things-go-wrong/",
          "when-things-go-wrong/silent-change/", "when-things-go-wrong/too-good-to-be-true/",
-         "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/"]
+         "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/",
+         "dbt-project/"]
 # English-only pages and where their ES toggle goes
 ES_TOGGLE = {"sketch/labs/": "es/sketch/", "sketch/scenarios/": "es/sketch/"}
 NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Temas", "Cómo se hizo"]}
@@ -94,6 +97,8 @@ NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Tem
 FOOT = {"en": "Source on GitHub", "es": "Código en GitHub"}
 OLD_NAV = {"Watch", "Take it apart", "Sharpen it", "All films", "Mira", "Desarma", "Labs", "Scenarios", "Situaciones"}
 CRUMBS = {  # page: (text, the pages its links go to, in order)
+    "dbt-project/": ("Topics", ["topics/"]),  # the example dbt project's page, which the route's topics link to
+    "es/dbt-project/": ("Temas", ["es/topics/"]),
     "labs/": ("Start here › The Inner Life of Data", [""]),
     "scenarios/": ("Start here › The Inner Life of Data", [""]),
     "es/labs/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
@@ -134,9 +139,9 @@ OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/too
 COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": ("3", "10")}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
 # a series numbers its own films, always as "Film 2 of 7" ("Película 2 de 7"): that's allowed; numbering the site's films isn't
-NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)|(first|second|third) film|(primera|segunda|tercera) película|"
+NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)(?!-)|(first|second|third) film|(primera|segunda|tercera) película|"
                        r"episod(e|io) [0-9]|\b(first|second|third) (video|episode)\b|"
-                       r"\b(primer|segundo|tercer)[oa]? (video|episodio)\b|película (uno|dos|tres|[123])\b(?! de \d)", re.I)
+                       r"\b(primer|segundo|tercer)[oa]? (video|episodio)\b|película (uno|dos|tres|[123])\b(?! de \d)(?!-)", re.I)  # (?!-): a key such as one-map-in-the-repo is a name, not a number
 COMMENT_OK = {"assets/film3/film.js", "assets/silent-change/film.js", "assets/too-good-to-be-true/film.js"}
 LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis minutos|· 9 min|· 5 min|"
                      r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)-minute\b|"
@@ -147,8 +152,12 @@ LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis mi
 HALVES = {"en": {"5½", "7½"}, "es": {"5½"}}
 WHOLE = {"6 min", "8 min", "8 minutos"}
 # time in a story, not a film's length, that this rule would read as one, by page: in Data architecture's labs and scenarios, an
-# interruption is power lost for more than five minutes, and a cut of three minutes falls short of it; Spanish says the number in words
-STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres minutos"}}
+# interruption is power lost for more than five minutes, and a cut of three minutes falls short of it; Spanish says the number in words.
+# In Platform and solution architecture's, minutes without power per customer jump from about eight to nineteen and go back to nine
+# (Spanish "diecinueve minutos" ends in "nueve minutos"), and the regulator's answer takes ten minutes
+STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres minutos"},
+              "assets/platform-and-solution-architecture/learn.en.js": {"19 minutes"},
+              "assets/platform-and-solution-architecture/learn.es.js": {"nueve minutos", "diez minutos", "19 minutos"}}
 # the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
 # lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),
 # so a new film, or a new series, needs no change here
@@ -166,6 +175,9 @@ for _S in build_series.SERIES:
     CRUMBS[f"es/{_sl}/"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/"])
 # a series' own labs and scenarios (build_series.series_learn): their two pages, the ids learn.js makes on them (each lab's, and
 # #film-<n> for a film's situations), and their progress prefix, the series'
+# what an engine (site/assets/<engine>/learn.js) builds when it splits its labs or scenarios by film: a film's buttons, a choice of
+# film, or a rail of labs for each film
+SPLIT_BY_FILM = r'U\.(?:filmsLabel|allFilms|filter)\b|h\("select"|-films"|"data-film":'
 SERIES_LEARN, LEARN_IDS, LEARN_STORE = {}, {}, {}
 for _S in build_series.SERIES:
     _SL = build_series.series_learn(_S) if build_series.films(_S)[1] else None
@@ -256,7 +268,33 @@ NO_COPY = re.compile(r"\bzero[- ]cop(?:y|ies)\b|\bin place\b|\bnot (?:one|a sing
 # and W. Edwards Deming's surname is said DEM-ing, with a short e. A line's "say", or a pair in the film's film.json "say", spells
 # such a name for the voice ("Demming"); the words on screen, the captions and the page keep it as it is written. Each row: the
 # name as the voice would misread it, the spelling that makes the voice say it, and how it is said
-VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surname is said DEM-ing, with a short e")]
+VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surname is said DEM-ing, with a short e"),
+               # The rope bridge at Quehue, which three films of People first follow, each made by its own thread: one spelling
+               # of each name for the voice in every film, with the two spellings set aside on 12 November 2026 found too.
+               (re.compile(r"\bQuehue\b|\bKeh?way\b"), "Kehweh",
+                "Quehue, in Peru, is said KEH-weh, and every film that names it spells it one way for the voice"),
+               (re.compile(r"\bApur[ií]mac\b|\bApooreemak\b"), "Ahpooreemahk",
+                "the Apurímac is said ah-poo-REE-mahk, and every film that names it spells it one way for the voice"),
+               (re.compile(r"\bQuechua\b"), "Ketchwa", "Quechua is said KETCH-wa"),
+               (re.compile(r"\b[Mm]inka\b"), "meenka", "minka is said MEEN-ka"),
+               # The shared voice tool spelled AI "A I", which the voice reads "uh eye": every film that said AI said it so until
+               # 16 November 2026, when the author heard it at the end of Built to change. Written whole, AI is said ay-eye.
+               (re.compile(r"\bA I\b"), "AI", "AI is said ay-eye, and the voice reads \"A I\" as \"uh eye\"")]
+VOICE_TOOL = ROOT / "films" / "from-words-to-data" / "shared" / "tools" / "tts.py"
+
+
+def tool_respellings(source):
+    """The words a film's voice tool respells before the film's own: the SAY list in its tools/tts.py, or in the shared voice tool
+    (From words to data's) when its tts.py only runs a series' tool."""
+    f = source / "tools" / "tts.py"
+    if not f.exists():
+        return []
+    for tool in (f, VOICE_TOOL):
+        for node in ast.walk(ast.parse(tool.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "SAY" for t in node.targets):
+                return [(e.elts[0].value, e.elts[1].value) for e in ast.walk(node.value)
+                        if isinstance(e, ast.Tuple) and len(e.elts) == 2 and all(isinstance(x, ast.Constant) and isinstance(x.value, str) for x in e.elts)]
+    return []
 
 
 def release_status(text):
@@ -266,12 +304,13 @@ def release_status(text):
 
 
 def voice_names(narr, pairs=None):
-    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the film's
-    own respellings (film.json "say": [[pattern, words], ...], as the voice tool applies them)."""
+    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the voice
+    tool's respellings and then the film's own (film.json "say": [[pattern, words], ...]), in the order the voice tool applies them."""
     src = narr.read_text(encoding="utf-8")
     if pairs is None:
         meta = narr.parents[1] / "film.json"
         pairs = json.loads(meta.read_text(encoding="utf-8")).get("say", []) if meta.exists() else []
+    pairs = tool_respellings(narr.parents[1]) + list(pairs)
     out = []
     for sid, sc in json.loads(src[src.index("{"):src.rindex("}") + 1]).items():
         for ln in sc.get("vo", []):
@@ -991,6 +1030,40 @@ def places_faults():
 
 
 # ---------------------------------------------------------------- the checks
+def md_links(text):
+    """The relative links of a Markdown text, [words](target), leaving out code blocks and code spans."""
+    text = re.sub(r"```.*?```", "", text, flags=re.S)
+    text = re.sub(r"`[^`\n]*`", "", text)
+    for m in re.finditer(r"\]\(<?([^)\s>]+)>?(?:\s+\"[^\"]*\")?\)", text):
+        ref = m.group(1).split("#")[0].split("?")[0]
+        if ref and not re.match(r"[a-zA-Z][\w+.-]*:", ref) and not ref.startswith("/"):
+            yield m.group(1), urllib.parse.unquote(ref)
+
+
+def md_link_faults():
+    """Every relative link in the repository's Markdown resolves (the site's own pages are read as pages). A row of a film's
+    decided.md is copied into its series' proposal.md, so a link there may resolve from either folder."""
+    try:
+        r = subprocess.run(["git", "ls-files", "*.md"], cwd=ROOT, capture_output=True, text=True, check=True)
+        files = [ROOT / f for f in r.stdout.splitlines()]
+    except (OSError, subprocess.CalledProcessError):
+        files = [p for p in ROOT.rglob("*.md") if "node_modules" not in p.parts]
+    bad, n = [], 0
+    for f in sorted(files):
+        rel = f.relative_to(ROOT)
+        if rel.parts[0] in ("site", "dist", "node_modules") or not f.exists():
+            continue
+        bases = [f.parent]
+        if f.name == "decided.md" and len(rel.parts) == 4 and rel.parts[0] == "films":
+            bases.append(f.parent.parent)
+        for shown, ref in md_links(f.read_text(encoding="utf-8")):
+            n += 1
+            if not any((b / ref).exists() for b in bases):
+                bad.append(f"{rel.as_posix()}: the link ({shown}) points at nothing in the repository: add the file, "
+                           "or mend the link (a series' table of films links each film's source/README.md)")
+    return bad, n
+
+
 def main():
     rep = Report()
     pages = {}
@@ -1188,6 +1261,8 @@ def main():
             exp = (2, "page")
         elif base.startswith(("labs/", "scenarios/")):
             exp = (0, "true")
+        elif base == "dbt-project/":
+            exp = (1, "true")
         elif base.startswith(("sketch/", "when-things-go-wrong/") + tuple(S["slug"] + "/" for S in build_series.SERIES)):
             exp = (1, "true")
         if pg.is404:
@@ -1471,10 +1546,11 @@ def main():
         s["notes"].append("say what copies and who keeps it: the platform keeps the rows in a second form, or a managed copy, with no pipeline "
                           "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
     s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
-    s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e)")
+    s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e), "
+                  "a story's names are spelled one way in every film that tells it (the rope bridge at Quehue), and AI is said ay-eye")
     for f in st_voices:
         s["fails"] += voice_names(f)
-    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after the film's own respellings")
+    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after its voice tool's and its own respellings")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     # every film's pack, and the first film's, whose questions are a block of its pack of labs and scenarios
@@ -1701,15 +1777,15 @@ def main():
         if pg is None:
             s["fails"].append(f"site/{rel}: missing"); continue
         ways = [a.attrs.get("href") for p in pg.dom.all("p", cls="home-next") for a in p.all("a")]
-        if ways != ["topics/", "journey/"]:
-            s["fails"].append(f"site/{rel}: after the film's steps, two buttons: the learning route (topics/) and how the films were made (journey/); it has {ways}")
+        if ways != ["topics/", "dbt-project/", "journey/"]:
+            s["fails"].append(f"site/{rel}: after the film's steps, three buttons: the learning route (topics/), the example project (dbt-project/) and how the films were made (journey/); it has {ways}")
         # and the film's two other steps are said twice, since the bar above the film is easy to miss: in a section right
-        # after the film, and first in the panel that shows when the film ends
-        steps = [a.attrs.get("href") for d in pg.dom.all("div", cls="more-steps") for a in d.all("a")]
+        # after the film, in a short note (the author, 14 November 2026), and first in the panel that shows when the film ends
+        steps = [a.attrs.get("href") for d in pg.dom.all("aside", cls="steps-note") for a in d.all("a")]
         tpl = re.search(r'<template id="next-panel">.*?</template>', pg.src, re.S)
         ends = re.findall(r'<a class="btn[^"]*" href="([^"]*)"', tpl.group(0)) if tpl else []
-        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="more-steps"') > pg.src.find('class="home-next"') or pg.dom.first("details", cls="howto"):
-            s["fails"].append(f"site/{rel}: after the film and before the ways on, a section offers the labs and the situations ({steps}), with no box to open, and the "
+        if steps != ["labs/", "scenarios/"] or ends[:2] != ["labs/", "scenarios/"] or pg.src.find('class="steps-note"') > pg.src.find('class="home-next"') or pg.dom.first("details", cls="howto"):
+            s["fails"].append(f"site/{rel}: after the film and before the ways on, a note offers the labs and the situations ({steps}), with no box to open, and the "
                               f"\"Where next?\" panel offers them first ({ends[:2]}): people miss them in the bar above the film (the author, 12 November 2026)")
         if [n for n in pg.dom.walk() if "data-route" in n.attrs] or any("route" in x for x in pg.local_scripts):
             s["fails"].append(f"site/{rel}: the home page doesn't draw the route (the author, 12 November 2026): it links to it")
@@ -1859,6 +1935,37 @@ def main():
         s["fails"].append("films/legibility-report.md: keep only the note between its marks; the table is made when it's printed "
                           "(python site-tools/build_series.py --legibility), so films merging at once don't clash on it")
 
+    # the example project's page shows its files' lines as they are (build_series.py's PROJECT_STEPS and PROJECT_STANDARDS): held to a
+    # checkout of the project, beside this repository or named by LEARNING_DATA_PROJECT, where there is one
+    s = rep.check("The example project's page: every line it shows from the project's files is that line in the project, where a checkout is at hand")
+    proj = pathlib.Path(os.environ.get("LEARNING_DATA_PROJECT") or ROOT.parent / "learning-data-project")
+    if not (proj / build_series.PROJECT_FOLDER).is_dir():
+        s["notes"].append(f"skipped: no checkout of the project at {proj} (set LEARNING_DATA_PROJECT to one)")
+    else:
+        n = 0
+        for path, code, rows in build_series.project_excerpts():
+            f = proj / build_series.proj_path(path)
+            if not f.is_file():
+                s["fails"].append(f"build_series.py shows {path}, which isn't in the project ({f})")
+                continue
+            have = f.read_text(encoding="utf-8").split("\n")
+            for first, lines in code:
+                for i, line in enumerate(lines):
+                    at = first + i; n += 1
+                    if at > len(have) or have[at - 1] != line:
+                        s["fails"].append(f"{path}:{at}: the project page shows {line.strip()[:60]!r}; the project has "
+                                          f"{(have[at - 1].strip()[:60] if at <= len(have) else 'no such line')!r}")
+            for line in rows:
+                n += 1
+                if line not in have:
+                    s["fails"].append(f"{path}: the project page shows a row the file no longer has: {line[:70]!r}")
+        s["notes"].append(f"{n} lines matched against {proj}")
+
+    s = rep.check("Repository links: every relative link in the repository's Markdown, such as a series' table of films, points at a file that is there")
+    bad, n = md_link_faults()
+    s["fails"] += bad
+    s["notes"].append(f"{n} relative links read in the repository's Markdown files (the site's own pages are checked above)")
+
     s = rep.check("A series' own labs and scenarios: the same in both languages, each lab on one of its film's chapters, each scenario on a lab")
     for S, SL in SERIES_LEARN.values():
         words = f"site/assets/{SL['dir']}/learn"
@@ -1875,12 +1982,12 @@ def main():
         for k, c in Counter(ns).items():
             if c > 1:
                 s["fails"].append(f"{words}.en.js: {c} scenarios have the number {k}, which keeps their answers apart")
-        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, under their films'
-        # buttons, so they're listed in film order; the scenarios likewise, by their numbers
+        # one numbering for the whole pack: the labs page numbers its labs 1 to N in the order they're listed, in one rail, so
+        # they're listed in film order; the scenarios likewise, by their numbers
         fl = [x["film"] for x in en["labs"]]
         if fl != sorted(fl):
             s["fails"].append(f"{words}.en.js: its labs aren't listed in film order (" + ", ".join(f"{x['id']} (film {x['film']})" for x in en["labs"]) + "): "
-                              "the labs page numbers them in that order, so a lab listed after a later film's shows under its film with the wrong number")
+                              "the labs page numbers them in that order, so a lab listed after a later film's shows out of its film's place")
         if ns != sorted(ns):
             s["fails"].append(f"{words}.en.js: its scenarios aren't listed in order of their numbers ({', '.join(map(str, ns))})")
         on = {x["index"] + 1: x for x in build_series.films(S)[1]}
@@ -1898,6 +2005,13 @@ def main():
             if not f["labs"] and not any(x["film"] == n for x in en["labs"]) and not any(q[1] == n for q in en["qs"]):
                 s["notes"].append(f"{f['title']}: no lab or scenario among the series' own")
         s["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, for films {', '.join(map(str, SL['films']))}")
+    # one level: an engine shows every lab of its series in one rail and every scenario in one list, numbered 1 to N, never a
+    # film's buttons, a film's own rail of labs or a choice of film above them (the author, 11 and 16 Nov 2026); smoke.py's
+    # series-learn checks the pages as drawn
+    for eng in sorted({SL["engine"] for _, SL in SERIES_LEARN.values()}):
+        src, rel = (WEB / "assets" / eng / "learn.js").read_text(encoding="utf-8"), f"site/assets/{eng}/learn.js"
+        for m in sorted(set(re.findall(SPLIT_BY_FILM, src))):
+            s["fails"].append(f"{rel}: its labs or scenarios are split by film again ({m}): show every lab in one rail and every scenario in one list")
 
     s = rep.check("Journey pages: the same as site-tools/build_pages.py makes from their Markdown")
     try:

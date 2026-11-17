@@ -293,6 +293,11 @@ function mr_shareScene(ctx,tt,o){const U={x:440,y:230,w:760,h:560},ua=o.uni==nul
   const m=mr_measure(ctx,500,400,540,{sub:false,a:o.plat,lit:o.mLit});
   const p=md_reader(ctx,1360,250,500,{title:"A group of universities",sub:"compares teaching costs",icon:"share",a:o.partner,col:o.pCol||null,lit:o.pLit});
   return{U,m,p};}
+// the name of the way out, under its sign as md_way writes it (dy below the sign's middle), on a ground of its own: the sign stands on the
+// university's edge, so the platform's edge and the university's ran through the name; they stop short of it, as lines do at a name on a map
+function mr_wayName(ctx,a,b,text,dy,al){if(al<=0.004)return;const p=md_curve(a,b,{}),q=at(mk(p.map(v=>P(v[0],v[1]))),0.5),w=md_tw(ctx,text,{w:700,size:28});ctx.save();ctx.globalAlpha*=al;
+  rr(ctx,q.x-w/2-12,q.y+dy-28,w+24,40,12);ctx.fillStyle="rgba(7,12,26,0.96)";ctx.shadowColor="rgba(7,12,26,0.9)";ctx.shadowBlur=10;ctx.fill();ctx.restore();
+  md_T(ctx,text,q.x,q.y+dy,{w:700,size:28,align:"center",col:MD.flow,a:al});}
 scene("share",(ctx,S,t,sc)=>{const c=sc.cues,T=mr_once(sc,"T",()=>({
     outside:wAt(sc,"group","outside the university"),groupW:wAt(sc,"group","a group of universities"),fbf:wAt(sc,"group","faculty by faculty"),
     sam:wAt(sc,"share","Sam"),os:wAt(sc,"share","OpenSharing"),lives:wAt(sc,"share","where it lives"),copy:wAt(sc,"share","no copy"),
@@ -306,7 +311,7 @@ scene("share",(ctx,S,t,sc)=>{const c=sc.cues,T=mr_once(sc,"T",()=>({
       const B=mr_shareScene(cx,tt,{uni:ag_in(tt,0.6,0.6),plat:ag_in(tt,0.6,0.6),partner:ag_in(tt,T.groupW-0.3,0.5)});
       md_T(cx,"faculty by faculty, each semester",1610,410,{w:600,size:28,align:"center",col:MD.soft,a:ag_in(tt,T.fbf-0.2,0.5)});
       const sa=ag_in(tt,T.sam-0.4,0.6);if(sa>0){cx.save();cx.globalAlpha*=sa;md_person(cx,"sam",250,740,0.8,{t:tt,gaze:[3,0]});cx.restore();md_nameTag(cx,110,392,"sam",{col:MD.flow,a:sa});}
-      md_way(cx,"share",B.m.r,[1360,565],tt,{u:ag_sine(clamp((tt-T.os+0.3)/0.9,0,1)),icon:true,label:"OpenSharing",a:ag_in(tt,T.os-0.4,0.4)});
+      md_way(cx,"share",B.m.r,[1360,565],tt,{u:ag_sine(clamp((tt-T.os+0.3)/0.9,0,1)),icon:true,a:ag_in(tt,T.os-0.4,0.4)});mr_wayName(cx,B.m.r,[1360,565],"OpenSharing",78,ag_in(tt,T.os-0.4,0.4));
       mr_box(cx,1360,510,500,{icon:"view",iconCol:MD.flow,title:"Casual teaching cost",sub:"read where it lives",dash:[10,9],edge:MD.flow,a:ag_in(tt,T.lives-0.2,0.5)});
       md_tag(cx,1360,690,"no copy to keep up to date",{col:MD.pass,icon:"tick",a:ag_in(tt,T.copy-0.2,0.5)});}},
     // later: Ingrid's rule, totals by faculty, never by unit: a unit with one tutor would give away that tutor's pay
@@ -321,7 +326,7 @@ scene("share",(ctx,S,t,sc)=>{const c=sc.cues,T=mr_once(sc,"T",()=>({
       const ok=ag_in(tt,T.readsW-0.2,0.5),B=mr_shareScene(cx,tt,{uni:ag_in(tt,c.table-0.1,0.5),plat:ag_in(tt,c.table-0.1,0.5),partner:ag_in(tt,c.table-0.1,0.5),pCol:ok>0.5?MD.pass:null,pLit:ag_io(tt,T.readsW,T.nothing+1,0.4)});
       const ta=ag_in(tt,T.small-0.3,0.5),tb=md_table(cx,500,540,620,{name:"mart_finance__faculty_totals",kind:"made from the measure",a:ta,k:mr_k(tt,T.small-0.3),lit:ag_io(tt,T.made-0.1,T.made+1.4,0.4)});
       md_lane(cx,md_path([[770,B.m.y+118],[770,tb.y]]),MD.agreed,ag_in(tt,T.made-0.3,0.4),{u:ag_sine(clamp((tt-T.made+0.3)/0.6,0,1)),t:tt});
-      md_way(cx,"share",tb.r,[1360,562],tt,{icon:true,label:"OpenSharing",a:ag_in(tt,T.small,0.5)});
+      md_way(cx,"share",tb.r,[1360,562],tt,{icon:true,a:ag_in(tt,T.small,0.5)});mr_wayName(cx,tb.r,[1360,562],"OpenSharing",68,ag_in(tt,T.small,0.5));
       mr_sharedTable(cx,1360,510,500,"faculty_totals","Semester 1, 2026: ended",MR_S1,{a:ag_in(tt,T.small+0.3,0.5),edge:ok>0.5?MD.pass:null,rowA:MR_S1.map((r,i)=>ag_in(tt,T.byF-0.2+i*0.25,0.4)),semLit:ag_io(tt,T.ended-0.2,T.ended+1.6,0.4)});}},
     // later: the rule
     {later:true,at:c.rule-0.6,place:"map",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{

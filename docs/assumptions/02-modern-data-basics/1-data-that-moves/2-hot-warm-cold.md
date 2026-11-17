@@ -36,3 +36,10 @@ The author's review (11 November 2026) settled the main assumption above: the se
 | 16 | Why do contracts go through the platform at all? | Contracts live in HR's system and claims in the claims app; the new ERP brings them together in 2028, and until then the platform fills the gap. The ERP's year is invented, as the university is | *Warm*, lines `why`, `gap` and `mix` | Change the year, or the reason |
 | 17 | Is spending cold or warm? | Cold: asked, Finance wanted it live, but spending is talked over once a month, so a nightly view is in time. The project's data products, built each night, are cold too (the example README) | *Cold*; `spending_by_faculty.yml` | Move it to warm, and say why |
 | 18 | Which sound, now the pyrophone went with the seed vault? | A serinette and a merline, bird organs, for the pigeons; recorded in the module's `palettes.md` | `source/tools/score.py` | Choose another palette |
+
+## 12 November 2026: text inside its box (thread "Check that text stays inside its box")
+
+The author saw words run past a card on a phone in another series, and asked: "Can we check this via code to fix those glitches?" The check (`site-tools/fits.py`) found one piece of text past its box in this film. It was fixed while he was away.
+
+- **Question:** the dashed card round the pipeline is headed *Pipeline · every 5 minutes*, which the kit writes in capitals with spaced letters. It ran 44 px past the card. Shorten the heading, widen the card, or wrap?
+- **Assumption taken:** wrap: *Pipeline*, then *every 5 minutes*; the line break stands for the dot. The card is 34 px taller, upwards, so what stands in it stays where it was. No word changed, and the kit is unchanged. It shows at 5:05 to 5:30.

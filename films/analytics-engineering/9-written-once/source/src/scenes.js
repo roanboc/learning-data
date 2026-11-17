@@ -334,7 +334,7 @@ scene("version",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const rowsOld=[["credential_key","string"],["credential_kind","string"],["is_revoked","boolean",WR_AMB]],rowsNew=[["credential_key","string"],["credential_kind","string"],["status","string",TRUST]];
   arrive(ctx,vx+vw/2,vy+120,t,0.6,()=>{
     if(split>0.01)wr_prod(ctx,vx,vy-60*split,vw,{ver:"v1",dim:0.5,rows:rowsOld,a:split,behind:split>0.5});
-    if(split>0.01)kt_rstamp(ctx,vx+vw-200,vy-40,"31 Mar 2027",WR_AMB,fin(t,w("date","date to go"),0.3),fin(t,w("date","date to go")+0.1,0.35),{size:18,rot:0.06});
+    if(split>0.01)kt_rstamp(ctx,vx+vw-200,phMin(ctx)?vy-60*split-18:vy-40,"31 Mar 2027",WR_AMB,fin(t,w("date","date to go"),0.3),fin(t,w("date","date to go")+0.1,0.35),{size:phSz(ctx,18),rot:0.06});
     wr_prod(ctx,vx,vy,vw,{ver:split>0.5?"v2":null,rows:split>0.5?rowsNew:rowsOld,lit:{2:fin(t,w("expire","true or false"),0.4)*(1-split)+split*fin(t,cB,0.4)},hi:split});},{d:0.9,dy:30});
   const stA=fin(t,w("expire","becomes")-0.2,0.5)*(1-fin(t,tNew,0.5));
   if(stA>0.01)withA(ctx,stA,()=>{glass(ctx,840,260,700,150,18,TRUST,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"status",870,304,{f:"mono",w:500,size:22,color:rgba(TRUST,1)});

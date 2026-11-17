@@ -28,8 +28,8 @@ function gauge(ctx,cx,cy,r,v,o){o=o||{};const pm=phMin(ctx);if(pm&&r*0.3<pm*0.9)
   // the needle
   const q=ang(Math.abs(v)),c=bandCol(v,o);ctx.shadowColor=rgba(c,0.9);ctx.shadowBlur=14;ctx.strokeStyle=rgba(INK,0.95);ctx.lineWidth=Math.max(3,r*0.035);ctx.lineCap="round";
   ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(q)*(r-lw*0.2),cy+Math.sin(q)*(r-lw*0.2));ctx.stroke();ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(cx,cy,r*0.07,0,TAU);ctx.fill();ctx.restore();
-  if(o.label!==false){T(ctx,(v>=0?"+":"−")+Math.abs(v).toFixed(Math.abs(v)<10?1:0)+"%",cx,cy+r*0.36,{w:800,size:r*0.3,align:"center",color:rgba(c,1)});
-    T(ctx,o.sub||"overnight change",cx,cy+r*0.58,{w:600,size:Math.max(14,r*0.13),align:"center",color:rgba(SOFT,0.95)});}}
+  if(o.label!==false){const ss=Math.max(14,r*0.13),sd=phSz(ctx,ss);T(ctx,(v>=0?"+":"−")+Math.abs(v).toFixed(Math.abs(v)<10?1:0)+"%",cx,cy+r*0.36,{w:800,size:r*0.3,align:"center",color:rgba(c,1)});
+    T(ctx,o.sub||"overnight change",cx,cy+(sd>ss?Math.max(r*0.58,r*0.36+sd*0.94):r*0.58),{w:600,size:ss,align:"center",color:rgba(SOFT,0.95)});}}   // where the line under the number is drawn larger, for a phone, it sits clear of the number
 
 /* the gold painting: one big number, a gold data product. o.num, o.delta (in %), o.note (0 to 1: the amber "last good data" note),
    o.gauge: false, or the gauge's options; o.stamp: a small line under the number */

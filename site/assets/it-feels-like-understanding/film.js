@@ -2045,7 +2045,7 @@ function fu_students(ctx,x,y,cols,rows,o){o=o||{};const s=o.s||0.62,dx=o.dx||52,
 function fu_table(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,y,w,h,18,{edge:o.edge,edgeA:o.edgeA});
   ag_T(ctx,"Student load",x+30,y+54,{w:700,size:36});ag_T(ctx,"reported to the government",x+30,y+94,{w:500,size:28,col:AG.mut});
   ctx.fillStyle="rgba(60,50,40,0.12)";ctx.fillRect(x+24,y+118,w-48,1.5);
-  const cx=x+(o.colX||w*0.5);ctx.fillStyle=rgba(AG.blue,0.07+0.08*(o.colLit||0));rr(ctx,cx-120,y+128,240,h-148,12);ctx.fill();
+  const cx=x+(o.colX||w*0.5),nw=Math.max(o.note?ag_tw(ctx,"full-time equivalents",{w:600,size:28}):0,o.alt?ag_tw(ctx,o.alt,{w:600,size:28}):0),bw=Math.max(240,nw+32);ctx.fillStyle=rgba(AG.blue,0.07+0.08*(o.colLit||0));rr(ctx,cx-bw/2,y+128,bw,h-148,12);ctx.fill();   // the column is as wide as the words under its name
   ag_T(ctx,"students",cx,y+168,{w:700,size:32,align:"center",col:AG.blue});
   if(o.note)ag_T(ctx,"full-time equivalents",cx,y+206,{w:600,size:28,align:"center",col:o.noteCol||AG.mut,a:o.note});
   if(o.alt)ag_T(ctx,o.alt,cx,y+206,{w:600,size:28,align:"center",col:AG.blue,a:o.altA==null?1:o.altA});
@@ -2108,7 +2108,7 @@ function fu_log(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.
   ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the faculty's own list of students: something the agent didn't make */
-function fu_facList(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=o.w||330,h=o.h||236;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));ag_box(ctx,x,y,w,h,18,{});
+function fu_facList(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=Math.max(o.w||330,ag_tw(ctx,"The faculty's own list",{w:700,size:30})+52),h=o.h||236;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));ag_box(ctx,x,y,w,h,18,{});   // never narrower than its title
   ag_T(ctx,"The faculty's own list",x+26,y+50,{w:700,size:30});const nl=o.lines==null?4:o.lines;for(let i=0;i<nl;i++){ctx.fillStyle=rgba(AG.mut,0.3);ctx.fillRect(x+28,y+84+i*24,w*(0.5+0.12*(i%3)),8);}
   ag_T(ctx,"2,880 people",x+26,y+h-30,{w:700,size:36});ctx.restore();return{x,y,w,h};}
 
@@ -2435,11 +2435,11 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       ag_loop(x,1440,400,{R:150,r:72,label:null,core:0.7,think:0.2+0.3*ag_io(tt,P.eachSure-0.6,P.say,0.5),t:tt,a:fu_fin(tt,P.agents-0.2,0.6),floor:null});
       ag_roomLight(x,1);
       const say=fu_fin(tt,P.say,0.8),tag=say>0.5?"people":"",out=1-fu_fin(tt,P.br-0.3,0.7);
-      fu_numberCard(x,560,330,"2,880",tag,{a:fu_fin(tt,P.agents,0.6)*out,k:ag_spr(tt,P.agents,0.7),fill:say});
+      fu_numberCard(x,530,330,"2,880",tag,{a:fu_fin(tt,P.agents,0.6)*out,k:ag_spr(tt,P.agents,0.7),fill:say});
       const turn=lerp(0.12,1,ag_sine((tt-P.say)/0.8));
       fu_bubble(x,330,292,"people",{a:fu_fin(tt,P.person-0.1,0.5)*out,k:ag_spr(tt,P.person-0.1,0.7),px:322,py:378,blank:tt<P.say+0.4,turn,w:230});
       fu_bubble(x,1440,152,"people",{a:fu_fin(tt,P.eachSure-0.6,0.5)*out,k:ag_spr(tt,P.eachSure-0.6,0.7),px:1440,py:238,blank:tt<P.say+0.4,turn,w:230,edge:AG.violet});
-      const ck=fu_fin(tt,P.check,0.6)*out;if(ck>0){fu_facList(x,lerp(1300,940,ag_sine((tt-P.check)/1.0)),316,{a:ck,w:300,h:200});
+      const ck=fu_fin(tt,P.check,0.6)*out;if(ck>0){fu_facList(x,lerp(1300,900,ag_sine((tt-P.check)/1.0)),316,{a:ck,h:200,lines:2});   // as wide as its title, between the number (30 px further left) and the ring; two lines, so none runs under its count
         if(tt>P.check+1.1)ag_tick(x,1206,474,34*ag_eo(clamp((tt-P.check-1.1)/0.4,0,1)),rgba(AG.green,1),5);}}}
   ];
   ag_shots(ctx,S,t,sc.dur,sh,0.5);

@@ -458,7 +458,7 @@ const NARR={
  {"id":"award","gap":0.8,"text":"The definition of an award now lives in four places. And three of them are wrong."}]}
 };
 
-const VODUR={"almanac/first": 9.519, "almanac/posted": 6.548, "almanac/twice": 8.013, "almanac/bridge": 6.997, "skills/can": 5.231, "skills/agents": 5.527, "skills/five": 9.083, "skills/process": 4.483, "skills/backlog": 10.145, "skills/files": 7.087, "least/principal": 4.872, "least/reads": 6.729, "least/samples": 6.298, "least/stays": 3.028, "evidence/claim": 5.076, "evidence/four": 7.568, "evidence/more": 5.004, "evidence/mei": 7.103, "evidence/guess": 3.126, "shortcut/refactor": 7.749, "shortcut/fails": 6.215, "shortcut/why": 5.535, "shortcut/warn": 3.468, "shortcut/stop": 6.04, "shortcut/news": 5.731, "shortcut/fix": 4.87, "validate/two": 1.99, "validate/reconcile": 7.226, "validate/diff": 7.173, "validate/scratch": 5.334, "validate/none": 8.248, "ship/pr": 6.359, "ship/ci": 11.397, "ship/cloud": 8.328, "ship/people": 5.19, "ship/approve": 5.543, "next/merged": 1.936, "next/metadata": 6.004, "next/award": 4.627};
+const VODUR={"almanac/first": 9.519, "almanac/posted": 6.548, "almanac/twice": 8.013, "almanac/bridge": 7.206, "skills/can": 5.231, "skills/agents": 5.527, "skills/five": 9.083, "skills/process": 4.483, "skills/backlog": 10.145, "skills/files": 7.087, "least/principal": 4.872, "least/reads": 6.731, "least/samples": 6.298, "least/stays": 3.028, "evidence/claim": 5.076, "evidence/four": 7.567, "evidence/more": 5.004, "evidence/mei": 7.103, "evidence/guess": 3.126, "shortcut/refactor": 7.749, "shortcut/fails": 6.215, "shortcut/why": 5.535, "shortcut/warn": 3.468, "shortcut/stop": 6.04, "shortcut/news": 5.731, "shortcut/fix": 4.885, "validate/two": 1.99, "validate/reconcile": 7.226, "validate/diff": 7.173, "validate/scratch": 5.334, "validate/none": 8.248, "ship/pr": 6.359, "ship/ci": 11.397, "ship/cloud": 8.328, "ship/people": 5.19, "ship/approve": 5.543, "next/merged": 1.936, "next/metadata": 6.004, "next/award": 4.627};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2273,17 +2273,17 @@ scene("least",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,330,560,t,w("principal","never as a person")-0.2,()=>ag_key(ctx,330,560,1,1-fin(t,cS-0.4,0.5),{title:"a person's badge",sub:"jun.park",col:AG_GREY,cross:fin(t,w("principal","never as a person")+0.3,0.4)}),{dy:20});
   ag_tag(ctx,330,180,"never a person",KT_AI,fin(t,w("principal","never"),0.5)*(1-fin(t,cS,0.5)),{size:22});
   // production, read-only: three doors; the agent's own wing of development schemas
-  const wA=fin(t,0.4,0.8);withA(ctx,wA,()=>{glass(ctx,640,120,820,400,20,[150,176,214],{glow:10,ea:0.5,fill:"rgba(8,12,22,0.9)"});T(ctx,"production",664,158,{w:800,size:20,color:rgba(SOFT,1)});
-    glass(ctx,1500,190,360,330,20,KT_AI,{glow:10,ea:0.5,fill:"rgba(6,14,18,0.9)"});T(ctx,"development schemas",1680,172,{w:800,size:20,align:"center",color:rgba(KT_AI,1)});});
+  const wA=fin(t,0.4,0.8),tW=Math.max(150,Math.ceil(tw(ctx,"intermediate",phSz(ctx,18),700))+18),wide=tW>150,TG=wide?14:20,WW=2*tW+3*TG,WX=wide?1880-WW:1500,PW=wide?780:820,DP=wide?240:260,RO=Math.round((phSz(ctx,18)-18)*0.8);withA(ctx,wA,()=>{glass(ctx,640,120,PW,400+RO,20,[150,176,214],{glow:10,ea:0.5,fill:"rgba(8,12,22,0.9)"});T(ctx,"production",664,158,{w:800,size:20,color:rgba(SOFT,1)});
+    glass(ctx,WX,190,WW,330+RO,20,KT_AI,{glow:10,ea:0.5,fill:"rgba(6,14,18,0.9)"});T(ctx,"development schemas",WX+WW/2,172,{w:800,size:20,align:"center",color:rgba(KT_AI,1)});});
   const DO=[["sources",SRC3[0][1],"sources"],["core",TRUST,"core"],["marts",LAYER4[3][1],"marts"]];
-  DO.forEach(([n,col,k],i)=>{const x=700+i*260,op=fin(t,w("reads",k)-0.1,0.9);ag_door(ctx,x,230,180,250,n,col,op*0.8,t,{a:wA});
-    if(op>0)withA(ctx,op,()=>{ctx.save();ctx.setLineDash([3,7]);ctx.strokeStyle=rgba(col,0.75);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(368,300);ctx.bezierCurveTo(520,250+i*10,x-60,260,x+90,355);ctx.stroke();ctx.restore();T(ctx,"read-only",x+90,505,{w:700,size:18,align:"center",color:rgba(col,0.95)});});});
-  const wr=fin(t,w("reads","writes")-0.1,0.8);["staging","intermediate","core","marts"].forEach((n,i)=>{const x=1520+(i%2)*170,y=220+Math.floor(i/2)*140,col=LAYER4[i][1];withA(ctx,wA,()=>{
-    ctx.fillStyle=rgba(mix([6,12,20],KT_AI,0.12*wr),1);rr(ctx,x,y,150,120,10);ctx.fill();ctx.strokeStyle=rgba(mix(col,KT_AI,wr*0.5),0.4+0.5*wr);ctx.lineWidth=2;rr(ctx,x,y,150,120,10);ctx.stroke();
-    T(ctx,n,x+75,y+30,{w:700,size:18,align:"center",color:rgba(col,1)});});});
-  if(wr>0)withA(ctx,wr,()=>{arrowTo(ctx,360,280,1500,262,KT_AI,0.9,{p:wr,bend:-0.4,head:14});});
-  ag_tag(ctx,1050,575,"reads: sources, core, marts",SOFT,fin(t,w("reads","It reads"),0.5)*(1-fin(t,cS-0.2,0.5)),{size:22});
-  const RX=s_=>Math.min(1680,1880-(tw(ctx,s_,phSz(ctx,20),700)+26)/2);   // a tag centred under the wing, kept inside the frame
+  DO.forEach(([n,col,k],i)=>{const x=700+i*DP,op=fin(t,w("reads",k)-0.1,0.9);ag_door(ctx,x,230,180,250,n,col,op*0.8,t,{a:wA});
+    if(op>0)withA(ctx,op,()=>{ctx.save();ctx.setLineDash([3,7]);ctx.strokeStyle=rgba(col,0.75);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(368,300);ctx.bezierCurveTo(520,250+i*10,x-60,260,x+90,355);ctx.stroke();ctx.restore();T(ctx,"read-only",x+90,505+RO,{w:700,size:18,align:"center",color:rgba(col,0.95)});});});
+  const wr=fin(t,w("reads","writes")-0.1,0.8);["staging","intermediate","core","marts"].forEach((n,i)=>{const x=WX+TG+(i%2)*(tW+TG),y=220+Math.floor(i/2)*140,col=LAYER4[i][1];withA(ctx,wA,()=>{
+    ctx.fillStyle=rgba(mix([6,12,20],KT_AI,0.12*wr),1);rr(ctx,x,y,tW,120,10);ctx.fill();ctx.strokeStyle=rgba(mix(col,KT_AI,wr*0.5),0.4+0.5*wr);ctx.lineWidth=2;rr(ctx,x,y,tW,120,10);ctx.stroke();
+    T(ctx,n,x+tW/2,y+30,{w:700,size:18,align:"center",color:rgba(col,1)});});});
+  if(wr>0)withA(ctx,wr,()=>{arrowTo(ctx,360,280,WX,262,KT_AI,0.9,{p:wr,bend:-0.4,head:14});});
+  ag_tag(ctx,640+PW/2,575,"reads: sources, core, marts",SOFT,fin(t,w("reads","It reads"),0.5)*(1-fin(t,cS-0.2,0.5)),{size:22});
+  const RX=s_=>Math.min(WX+WW/2,1880-(tw(ctx,s_,phSz(ctx,20),700)+26)/2);   // a tag centred under the wing, kept inside the frame
   ag_tag(ctx,RX("writes: its own development schemas"),575,"writes: its own development schemas",KT_AI,fin(t,w("reads","writes"),0.5)*(1-fin(t,cX-0.2,0.5)),{size:20});
   // the grants that say so (Databricks only)
   const gA=fin(t,w("reads","writes")+0.6,0.6)*(1-fin(t,cS-0.3,0.5));if(gA>0)arrive(ctx,690,710,t,w("reads","writes")+0.6,()=>ag_code(ctx,100,630,1180,"AGENTS.md",AG_GRANTS,{a:gA,label:AG_DBX,edge:[150,176,214],p:clamp((t-w("reads","writes")-0.7)/1.4,0,1),lit:{3:fin(t,w("reads","writes")+2.2,0.5)},litCol:KT_AI}),{dy:30});
@@ -2297,7 +2297,7 @@ scene("least",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     ag_tag(ctx,CX,552,"counts · small samples",AG_GRN,fin(t,w("samples","counts"),0.5),{size:20});}
   const bA=fin(t,w("samples","small samples")-0.2,0.6);if(bA>0)arrive(ctx,1320,685,t,w("samples","small samples")-0.2,()=>ag_code(ctx,790,618,1080,"AGENTS.md",AG_BULK,{a:bA,p:clamp((t-w("samples","small samples"))/1.4,0,1),edge:KT_AI,lit:{0:fin(t,w("samples","Names"),0.5),1:fin(t,w("samples","Names")+0.2,0.5)},litCol:AG_RED}),{dy:30});
   // whatever it gets wrong stays in its own room; production doesn't flicker
-  ag_scribble(ctx,1765,300,60,clamp((t-w("stays","gets wrong"))/1.0,0,1));
+  ag_scribble(ctx,WX+2*TG+tW*1.5,300,60,clamp((t-w("stays","gets wrong"))/1.0,0,1));
   ag_tag(ctx,RX("mistakes stay in its own room"),575,"mistakes stay in its own room",AG_RED,fin(t,w("stays","stays"),0.5),{size:20});
   ctx.restore();vign(ctx,S);});
 

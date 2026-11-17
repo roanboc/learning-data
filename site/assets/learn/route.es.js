@@ -24,7 +24,12 @@ window.LD_ROUTE = {
   "series": "{n} series",
   "more1": "1 serie más en camino",
   "more": "{n} series más en camino",
-  "map": "La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series."
+  "map": "La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series.",
+  "proj": "El proyecto de dbt de ejemplo",
+  "proj1": "1 película de aquí muestra sus archivos reales, y puedes ejecutarlo tú.",
+  "projn": "{n} películas de aquí muestran sus archivos reales, y puedes ejecutarlo tú.",
+  "projpage": "Sobre el proyecto",
+  "projmark": "Muestra el proyecto de dbt de ejemplo"
  },
  "groups": [
   {
@@ -58,6 +63,10 @@ window.LD_ROUTE = {
    "name": "Liderar"
   }
  ],
+ "project": {
+  "href": "dbt-project/",
+  "icon": "<svg class=\"pj-ic\" viewBox=\"0 0 20 20\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z\"/><path d=\"M3.6 6.3L10 10l6.4-3.7M10 10v7.4\"/></svg>"
+ },
  "topics": [
   {
    "id": "data-platforms",
@@ -86,8 +95,8 @@ window.LD_ROUTE = {
      "href": "more-than-a-platform/",
      "poster": "more-than-a-platform-poster.jpg",
      "kicker": "Una película",
-     "len": "3½ min",
-     "min": 3.5,
+     "len": "6 min",
+     "min": 6.0,
      "films": [
       "ld-more-than-a-platform"
      ]
@@ -99,7 +108,7 @@ window.LD_ROUTE = {
    "group": "foundations",
    "name": "Arquitectura empresarial",
    "who": "Para arquitectos, y para quien llega nuevo a una organización",
-   "line": "Cómo funciona una organización, por capas, antes de preguntar qué deberían responder sus datos.",
+   "line": "Cómo funciona una organización, por capas, para diseñar sus datos como parte de ella: arquitectura empresarial de datos.",
    "items": [
     {
      "id": "enterprise-architecture",
@@ -165,14 +174,18 @@ window.LD_ROUTE = {
      "title": "Arquitectura de plataforma y de soluciones",
      "href": "platform-and-solution-architecture/",
      "poster": "an-application-or-a-platform-poster.jpg",
-     "kicker": "Serie · 4 de 8 películas",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Serie · 8 películas",
+     "len": "67 min",
+     "min": 67.0,
      "films": [
       "ld-an-application-or-a-platform",
       "ld-inside-the-platform",
       "ld-one-platform-or-many",
-      "ld-where-it-meets-the-applications"
+      "ld-where-it-meets-the-applications",
+      "ld-security-all-the-way-through",
+      "ld-one-solution-end-to-end",
+      "ld-a-road-people-choose",
+      "ld-built-to-change"
      ]
     },
     {
@@ -181,14 +194,16 @@ window.LD_ROUTE = {
      "title": "IA y arquitectura continua",
      "href": "ai-and-continuous-architecture/",
      "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Serie · 4 de 6 películas",
-     "len": "32 min",
-     "min": 32.0,
+     "kicker": "Serie · 6 películas",
+     "len": "48 min",
+     "min": 48.0,
      "films": [
       "ld-agents-on-the-map",
       "ld-the-ai-platform",
       "ld-what-an-agent-may-read",
-      "ld-a-first-draft-not-a-blank-page"
+      "ld-a-first-draft-not-a-blank-page",
+      "ld-every-change-checked",
+      "ld-kept-alive"
      ]
     }
    ]
@@ -366,7 +381,8 @@ window.LD_ROUTE = {
       "ld-ideas-that-last"
      ]
     }
-   ]
+   ],
+   "proj": 10
   },
   {
    "id": "analytics-engineering",
@@ -397,7 +413,8 @@ window.LD_ROUTE = {
       "ld-end-to-end"
      ]
     }
-   ]
+   ],
+   "proj": 10
   },
   {
    "id": "data-quality",
@@ -452,7 +469,8 @@ window.LD_ROUTE = {
       "ld-small-every-week"
      ]
     }
-   ]
+   ],
+   "proj": 8
   },
   {
    "id": "master-data",
@@ -620,7 +638,8 @@ window.LD_ROUTE = {
       "ld-a-written-mandate"
      ]
     }
-   ]
+   ],
+   "proj": 7
   },
   {
    "id": "data-management",

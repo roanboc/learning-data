@@ -1,11 +1,18 @@
 # Runs the series' check.py (films/master-and-reference-data/shared/tools/run.py finds it) on this film. Run it from this film's source folder.
-# First it checks that the film's dates are the example project's (films/analytics-engineering/project/data/): each office's card in
+# First it checks that the film's dates are the example project's (30-data-project/data/ in roanboc/learning-data-project, checked out
+# beside this repository or named by LEARNING_DATA_PROJECT; skipped if neither is there): each office's card in
 # chapter 4 shows its own dates, the last day included; the bands and the role table's valid_to, exclusive, end the day after; and
 # recorded_at is the day the platform recorded the row's latest change (a source's _valid_from), so no row knows its end too early.
-import csv, datetime, json, pathlib, re, sys
+import csv, datetime, json, os, pathlib, re, sys
 
 HERE = pathlib.Path(__file__).resolve()
-DATA = HERE.parents[4] / "analytics-engineering" / "project" / "data"
+SERIES_CHECK = lambda: (sys.path.insert(0, str(HERE.parents[3] / "shared" / "tools")), __import__("run").tool("check.py"))
+PROJECT = pathlib.Path(os.environ.get("LEARNING_DATA_PROJECT") or HERE.parents[5].parent / "learning-data-project")
+DATA = PROJECT / "30-data-project" / "data"
+if not DATA.is_dir():
+    print(f"the film's dates against the example project's: skipped, no {DATA} (set LEARNING_DATA_PROJECT to its checkout)")
+    SERIES_CHECK()
+    sys.exit(0)
 PLAN = (HERE.parents[1] / "src" / "plan.js").read_text()
 
 
@@ -64,5 +71,4 @@ if wrong:
     sys.exit("%d of the film's dates differ from the example project's" % len(wrong))
 print("the film's dates are the example project's: %d checked, with %d contracts known on %s" % (len(want), len(known), today))
 
-sys.path.insert(0, str(HERE.parents[3] / "shared" / "tools"))
-import run; run.tool("check.py")
+SERIES_CHECK()

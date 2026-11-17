@@ -4,10 +4,13 @@
    - Wide boxes get the map: the suggested route as one line, and the other groups as loops above and below it. From 1040 px the
      introduction's card sits at its left, as the first station; narrower, it sits above the map.
      Narrow boxes (under 880 px) get the same route as a list with a rail, each topic opening in place: no sideways panning.
+     The rail's first stop is the start, by name only, so a goal's numbers start on the rail too.
    - A station is a button: selecting it shows its films and series below the map. Its ring shows how many of its films were
      watched, from the same keys path.js reads ("<prefix>:watched"), in this browser only.
    - A goal ("I want to…") lights up the stops of its route and numbers them; the map itself never changes. The goal is kept in
      this browser ("ld-route:goal").
+   - A topic with films that show the example dbt project (D.project) carries the project's icon: on the map, a badge on its
+     station's ring, which doesn't widen its name; on the rail, by its name. It reads on a closed station, and opens on a box, after the topic's films and series, that links to the project's page (which links to GitHub).
    data-base: the way to the language's home, for the films' links; data-root: the way to the site's root, for the posters;
    data-topics: the way to the Topics page ("" on that page itself, where a topic's link opens its row in the list). */
 (()=>{"use strict";
@@ -36,6 +39,11 @@ const goal=id=>D.goals.find(g=>g.id===id)||null;
 const stopsOf=g=>{const st=g.stops.map(id=>ITEM[id]).filter(Boolean),o=[];st.forEach(i=>{if(!o.includes(i.topic))o.push(i.topic);});
   return{st:st,order:o,min:st.reduce((a,i)=>a+i.min,0)};};
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const P=D.project,PJ=t=>!!(P&&t.proj),anyPJ=D.topics.some(PJ);
+const pjMark=t=>PJ(t)?'<span class="pj-mark">'+P.icon+'</span>':"";
+function pjBox(t,base){return PJ(t)?'<div class="pj-box">'+P.icon+'<div><p class="pj-t">'+esc(X.proj)+'</p><p class="pj-l">'+esc(t.proj===1?X.proj1:fill(X.projn,{n:t.proj}))+'</p>'+
+  '<p class="pj-a"><a href="'+esc(base+P.href)+'">'+esc(X.projpage)+'</a></p></div></div>':"";}
+const pjLegend=()=>anyPJ?'<span class="pj-leg">'+P.icon+esc(X.projmark)+'</span>':"";
 
 function dot(f,num){const r=12,c=2*Math.PI*r;
   return '<svg class="r-dot" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="15.5" class="d-bg"/><circle cx="16" cy="16" r="'+r+'" class="d-track"/>'+
@@ -48,7 +56,7 @@ function draw(box){
   const st={sel:null,goal:null,panel:"station",open:null,w:0};
   const g0=goal(get("ld-route:goal"));if(g0){st.goal=g0.id;st.panel="goal";}
   const img=p=>root+"assets/"+p,topicHref=t=>topics+"#"+t.id;
-  const label=t=>{const s=stat(t);return t.name+", "+G(t.group).name+(s.seen?", "+fill(X.of,{n:s.seen,of:s.films}):"");};
+  const label=t=>{const s=stat(t);return t.name+", "+G(t.group).name+(PJ(t)?", "+X.projmark:"")+(s.seen?", "+fill(X.of,{n:s.seen,of:s.films}):"");};
 
   function card(i,extra){
     const s=seen(i),n=i.soon?0:i.films.length;
@@ -61,7 +69,7 @@ function draw(box){
     return '<div class="r-about">'+(inRail?'':'<p class="r-kick"><i></i>'+esc(G(t.group).name)+(nx===t?" · "+esc(X.next):"")+'</p><h3>'+esc(t.name)+'</h3>')+
       '<p class="r-who">'+esc(t.who)+'</p><p class="r-line">'+esc(t.line)+'</p>'+
       (inRail?'':'<p class="r-meta">'+esc(counts(t))+(s.seen?" · "+esc(fill(X.of,{n:s.seen,of:s.films})):"")+'</p>'+open)+'</div>'+
-      '<ul class="r-items">'+t.items.map(i=>card(i)).join("")+'</ul>'+(inRail?open:'');}
+      (inRail?'':'<div class="r-col">')+'<ul class="r-items">'+t.items.map(i=>card(i)).join("")+'</ul>'+pjBox(t,base)+(inRail?open:'</div>');}
   function intro(num){
     const w=seen(INTRO)>0;
     return '<a class="r-intro'+(st.panel==="station"&&st.sel===START.id?" sel":"")+'" href="'+esc(base+INTRO.href)+'">'+(num?'<span class="r-n">'+num+'</span>':'')+
@@ -90,7 +98,7 @@ function draw(box){
     let svg="",html="";
     function station(t,x,y,up,w){const sel=st.panel==="station"&&st.sel===t.id;
       return '<button type="button" class="r-st ln-'+lineOf(t)+(up?" up":"")+(sel?" sel":"")+(dim(t.id)?" dim":"")+'" data-st="'+t.id+'" data-k="s-'+t.id+'" aria-pressed="'+sel+'" aria-label="'+esc(label(t))+
-        '" style="left:'+x.toFixed(1)+'px;top:'+(up?y+16:y-16)+'px;max-width:'+w.toFixed(0)+'px"><span class="r-sd">'+dot(frac(t),numOf(t.id))+'</span><span class="r-sl">'+esc(t.name)+'</span></button>';}
+        '" style="left:'+x.toFixed(1)+'px;top:'+(up?y+16:y-16)+'px;max-width:'+w.toFixed(0)+'px"><span class="r-sd">'+dot(frac(t),numOf(t.id))+(PJ(t)?'<span class="pj-badge">'+P.icon+'</span>':'')+'</span><span class="r-sl">'+esc(t.name)+'</span></button>';}
     LOOPS.slice(0,2).forEach((gr,k)=>{const up=k===0,y=up?yT:yB,ts=D.topics.filter(t=>t.group===gr.id),off=ts.every(t=>dim(t.id));
       svg+='<path class="r-loop ln-'+gr.line+(off?" dim":"")+'" d="'+path(y)+'"/>';
       html+='<span class="r-gl loop ln-'+gr.line+(off?" dim":"")+'" style="left:'+(xa+s+14)+'px;top:'+(up?y+22:y-38)+'px">'+esc(gr.name)+'</span>';
@@ -106,18 +114,21 @@ function draw(box){
     const ic=intro(gi&&gi.order.includes(START.id)?numOf(START.id):0);
     return goals()+'<div class="r-wide m-'+mode+'">'+(side?'<div class="r-side" style="margin-top:'+(yM-150)+'px">'+ic+'</div>':ic)+
       '<div class="r-map" style="height:'+H+'px" role="group" aria-label="'+esc(fill(X.map,{n:D.topics.length}))+'"><svg class="r-lines" aria-hidden="true" focusable="false">'+svg+'</svg>'+html+'</div></div>'+
-      '<p class="r-legend"><span><i class="ln-main"></i>'+esc(X.route)+'</span><span>'+esc(X.any)+'</span></p>'+panel;}
+      '<p class="r-legend"><span><i class="ln-main"></i>'+esc(X.route)+'</span>'+pjLegend()+'<span>'+esc(X.any)+'</span></p>'+panel;}
   function rail(){
     const g=goal(st.goal),gi=g?stopsOf(g):null,numOf=id=>gi?gi.order.indexOf(id)+1:0,dim=id=>!!gi&&!gi.order.includes(id);
     const gs=D.groups.filter(gr=>gr.id!==START.group),mains=gs.filter(gr=>gr.line==="main"),seq=mains.slice(0,-1).concat(gs.filter(gr=>gr.line!=="main"),mains.slice(-1));
-    const rows=seq.map((gr,k)=>{const loop=gr.line!=="main";
+    // the start, first on the rail as on the map: its name only, a link to the introduction, its ring as the others'
+    const first='<li class="r-rg ln-main r-first"><ol><li class="r-rs'+(dim(START.id)?" dim":"")+'"><a class="r-rb" href="'+esc(base+INTRO.href)+'" data-k="r-start">'+dot(frac(START),numOf(START.id))+
+      '<span class="r-rt"><b>'+esc(X.start)+'</b></span>'+CHEV+'</a></li></ol></li>';
+    const rows=first+seq.map((gr,k)=>{const loop=gr.line!=="main";
       return '<li class="r-rg ln-'+gr.line+(loop?" loop":"")+(k===seq.length-1?" end":"")+'">'+(loop?'<i class="r-cn a"></i><i class="r-cn b"></i>':'')+'<p class="r-rh">'+esc(gr.name)+'</p><ol>'+
         D.topics.filter(t=>t.group===gr.id).map(t=>{const op=st.open===t.id;
           return '<li class="r-rs'+(dim(t.id)?" dim":"")+'"><button type="button" class="r-rb" data-rs="'+t.id+'" data-k="r-'+t.id+'" aria-expanded="'+op+'">'+dot(frac(t),numOf(t.id))+
-            '<span class="r-rt"><b>'+esc(t.name)+'</b><small>'+esc(counts(t))+'</small></span>'+CHEV+'</button>'+(op?'<div class="r-rd">'+detail(t,true)+'</div>':'')+'</li>';}).join("")+'</ol></li>';}).join("");
-    return '<div class="r-narrow">'+intro(gi&&gi.order.includes(START.id)?numOf(START.id):0)+goals()+
+            '<span class="r-rt"><b>'+esc(t.name)+pjMark(t)+'</b><small>'+esc(counts(t))+'</small></span>'+CHEV+'</button>'+(op?'<div class="r-rd">'+detail(t,true)+'</div>':'')+'</li>';}).join("")+'</ol></li>';}).join("");
+    return '<div class="r-narrow">'+intro(0)+goals()+
       (g?'<div class="r-goalcard">'+goalHead(g,gi)+'<details><summary>'+esc(fill(X.stops,{n:gi.st.length}))+'</summary>'+goalStops(gi)+'</details></div>':'')+
-      '<ol class="r-rail">'+rows+'</ol><p class="r-legend"><span>'+esc(X.any)+'</span></p></div>';}
+      '<ol class="r-rail">'+rows+'</ol><p class="r-legend">'+pjLegend()+'<span>'+esc(X.any)+'</span></p></div>';}
   function render(){
     const w=box.clientWidth;st.w=w;if(!w)return;
     if(!st.sel||!T(st.sel))st.sel=(nextStop()||MAIN[0]).id;

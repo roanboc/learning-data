@@ -1,5 +1,0 @@
-name: governance reviewer
-kind: business role
-definition: Checks a pull request against governance's rules and drafts what's missing. Never approves.
-owner: Yusuf Demir, data governance lead
-status: confirmed

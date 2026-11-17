@@ -3,7 +3,7 @@
    (films/analytics-engineering/7-who-owns-what/source/src/plan.js), which takes its words from vis below (and, for the domains lab,
    the short label "s" of each item). */
 window.FW={lang:"en",store:"ld-who-owns-what",
-repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
+repoBase:"https://github.com/roanboc/learning-data-project/blob/main/30-data-project/",
 ui:{lab:"Lab",of:"of",inPractice:"In practice",watch:"Watch this part",next:"Next:",makeCall:"Make the call →",
   scenario:"Scenario",score:"Score",answered:"answered",toGo:"to go",good:"Good call",notQuite:"Not quite",
   explore:"Explore this in the lab:",nextQ:"Next scenario",results:"See your results",again:"Start again",check:"Check",

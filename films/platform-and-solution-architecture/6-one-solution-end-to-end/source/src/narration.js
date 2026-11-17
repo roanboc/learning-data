@@ -1,0 +1,92 @@
+// Platform and solution architecture · One solution, end to end. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
+const NARR={
+"ahead":{"name":"A notice sent ahead","lead":1.4,"tail":1.0,"vo":[
+ {"id":"year","gap":0.8,"text":"Japan, 1635. The shogunate makes the lords live in Edo every other year.","say":"Japan, sixteen thirty-five. The shogunate makes the lords live in Edo every other year."},
+ {"id":"journey","gap":0.8,"text":"So every year, each lord makes the journey, to Edo or home."},
+ {"id":"size","gap":0.8,"text":"A small lord brings about a hundred people. The greatest bring two thousand or more, with all the lord will need."},
+ {"id":"station","gap":0.8,"text":"On the Tōkaidō, each station keeps a hundred porters and a hundred horses for everyone on the road, and an inn for lords."},
+ {"id":"problem","gap":0.8,"text":"A procession of three hundred, arriving unannounced, would find too few."},
+ {"id":"wait","gap":0.8,"text":"Its loads would wait, and the inn might be taken. Each day on the road costs the domain dearly."},
+ {"id":"need","gap":0.8,"text":"So the stations need to know what's coming, and when, and the domain needs the journey planned before it starts."},
+ {"id":"plan","gap":0.8,"text":"Before the lord sets out, his officials plan the journey end to end."},
+ {"id":"list","gap":0.8,"text":"They list who goes, within the limits the shogunate sets for his rank."},
+ {"id":"notice","gap":0.8,"text":"And they send a notice ahead to every station: how many porters and horses, on which day, and where the lord will rest and sleep."},
+ {"id":"board","gap":0.8,"text":"A day or two before, a board with his name goes up at the inn, and nobody else may stay there."},
+ {"id":"ready","gap":0.8,"text":"So each station knows days ahead what's coming, and if its own aren't enough, calls on nearby villages in time."},
+ {"id":"relay","gap":0.8,"text":"The loads go on, station to station, on the porters and horses that serve every traveller."},
+ {"id":"shared","gap":0.8,"text":"One road for everyone, and each journey planned end to end."},
+ {"id":"one","gap":0.8,"text":"At the utility, three teams start three pieces of the social tariff, and nobody has drawn how they join."},
+ {"id":"sipho","gap":0.8,"text":"So Sipho Dlamini, a solution architect, designs it end to end, on the platform everyone shares."}]},
+"pieces":{"name":"Three pieces","lead":1.0,"tail":1.0,"vo":[
+ {"id":"ask","gap":0.8,"text":"In November, the government sets a social tariff: from the first of July, a discount for every eligible household, with no forms."},
+ {"id":"agency","gap":0.8,"text":"Only the social services agency knows who is eligible."},
+ {"id":"vendor","gap":0.8,"text":"By December, billing's vendor offers to do it all inside billing, in its October release."},
+ {"id":"table","gap":0.8,"text":"The data team starts its own table of eligible households."},
+ {"id":"server","gap":0.8,"text":"And IT orders a server, to receive the agency's files."},
+ {"id":"two","gap":0.8,"text":"Soon there are two lists of who's eligible, and nobody has drawn how the pieces join."},
+ {"id":"careless","gap":0.8,"text":"Nobody was careless. Each team did what it could see from where it stood."},
+ {"id":"ticket","gap":0.8,"text":"The head of retail asks for one design, in a ticket."}]},
+"three":{"name":"Three architects","lead":1.0,"tail":1.0,"vo":[
+ {"id":"goes","gap":0.8,"text":"The ticket goes to Sipho, who works beside two other architects."},
+ {"id":"tomas","gap":0.8,"text":"Tomás, the enterprise architect, keeps the map: what changes, and who must agree."},
+ {"id":"ravi","gap":0.8,"text":"Ravi, who leads the platform, builds what every solution shares, once."},
+ {"id":"sipho","gap":0.8,"text":"And Sipho designs one solution, end to end: from the agency's answer to the line on a bill."},
+ {"id":"rule","gap":0.8,"text":"What every team could use, Ravi builds into the platform. What would change the map, Tomás is asked first."},
+ {"id":"story","gap":0.8,"text":"As on the Tōkaidō, the shogunate kept the road, and each domain planned its own journey on it."}]},
+"context":{"name":"Everything it touches","lead":1.0,"tail":1.0,"vo":[
+ {"id":"start","gap":0.8,"text":"Sipho starts with the context: everything the solution touches, on one page."},
+ {"id":"around","gap":0.8,"text":"The agency, the customer system, billing, the call centre, and the households, who get a letter and a bill."},
+ {"id":"middle","gap":0.8,"text":"In the middle, the solution itself, on the data platform."},
+ {"id":"out","gap":0.8,"text":"Out of scope for now: tenants whose account is in a landlord's name. Their route comes later in the year."},
+ {"id":"fixed","gap":0.8,"text":"Fixed: ready by the first of July, under the three rules already agreed."}]},
+"quality":{"name":"Three qualities, measured","lead":1.0,"tail":1.0,"vo":[
+ {"id":"then","gap":0.8,"text":"Then, the qualities it must have, each with a measure a design can be tested against."},
+ {"id":"nine","gap":0.8,"text":"A standard lists nine. Sipho picks the three that matter here."},
+ {"id":"sec","gap":0.8,"text":"Security: only billing's job reads the agency's answers, and every read is logged."},
+ {"id":"rel","gap":0.8,"text":"Reliability: every bill run has answers, the latest, or the last ones if new ones are late."},
+ {"id":"change","gap":0.8,"text":"Easy to change: when the agency changes its file, the exchange changes within a week."},
+ {"id":"speed","gap":0.8,"text":"Speed hardly matters: the match runs once a month."}]},
+"options":{"name":"Two options","lead":1.0,"tail":1.0,"vo":[
+ {"id":"two","gap":0.8,"text":"Sipho draws two options, and tests both against the same three measures."},
+ {"id":"first","gap":0.8,"text":"The first does it all inside billing, as the vendor offered."},
+ {"id":"fails","gap":0.8,"text":"But billing logs who changes a record, not who reads it. Every change waits for the vendor's next release. And it's ready in October."},
+ {"id":"second","gap":0.8,"text":"The second keeps the agency's answers on the data platform, as a data product of retail's."},
+ {"id":"asks","gap":0.8,"text":"Before each bill run, billing asks through the integration platform for only what a bill needs: on the tariff, and from which date."},
+ {"id":"holds","gap":0.8,"text":"The catalogue checks and logs every read, a change is a pull request, and it's ready in May."},
+ {"id":"risk","gap":0.8,"text":"Its risk: billing now depends on the platform. So billing asks the day before each run, and keeps what it got."}]},
+"record":{"name":"Why, written down","lead":1.0,"tail":1.0,"vo":[
+ {"id":"writes","gap":0.8,"text":"Sipho writes the decision down, in a record kept with the solution's code."},
+ {"id":"decided","gap":0.8,"text":"Decided: the answers on the platform, the discount in billing. Considered: all of it in billing."},
+ {"id":"why","gap":0.8,"text":"Why: every read logged, a change in days, and ready by May. The consequence: billing asks the day before."},
+ {"id":"check","gap":0.8,"text":"Ama checks it against the principles: use what we have before we build, and customer information stays with the business that collected it. Both hold."},
+ {"id":"agreed","gap":0.8,"text":"Sipho, Ravi and the head of retail agree, and the record says accepted."},
+ {"id":"later","gap":0.8,"text":"A year on, whoever asks why billing doesn't do it all will find the answer here."}]},
+"reuse":{"name":"Most of it is already there","lead":1.0,"tail":1.0,"vo":[
+ {"id":"count","gap":0.8,"text":"Then Sipho counts the parts. Of ten, six already exist."},
+ {"id":"six","gap":0.8,"text":"Retail's customer accounts, a job from the platform's template, its connectors, the catalogue's masks and log, the gateway, and monitoring."},
+ {"id":"four","gap":0.8,"text":"Four are new: the match and its answers, a discount step in billing, the letter, and sending a file out."},
+ {"id":"out","gap":0.8,"text":"Every team will need to send files out. So Ravi builds that once, into the platform. The regulator's reports use it next."},
+ {"id":"story","gap":0.8,"text":"On the Tōkaidō, the stations were already there. Only the journey was new."}]},
+"told":{"name":"Told ahead","lead":1.0,"tail":1.0,"vo":[
+ {"id":"each","gap":0.8,"text":"Each team hears its part months ahead: the platform team, Yasmin's integration team, retail, for the letter and the call centre, and billing's vendor."},
+ {"id":"april","gap":0.8,"text":"The vendor puts the discount step in its April release."},
+ {"id":"story","gap":0.8,"text":"As a notice went ahead to every station, each team knows what's coming, and when."}]},
+"july":{"name":"The first of July","lead":1.0,"tail":1.0,"vo":[
+ {"id":"built","gap":0.8,"text":"It's built by May, and tested with a sample from the agency in June."},
+ {"id":"bills","gap":0.8,"text":"On the first of July, the first bills carry the discount, for about nine in ten eligible households."},
+ {"id":"late","gap":0.8,"text":"In September, the agency's answers come two days late. Billing uses August's, and the next bills catch up."},
+ {"id":"log","gap":0.8,"text":"The log shows one reader of the answers: billing's job."},
+ {"id":"closed","gap":0.8,"text":"The head of retail checks the first bills, and closes the ticket."}]},
+"practice":{"name":"The data practice on the map","lead":1.0,"tail":1.0,"vo":[
+ {"id":"intro","gap":0.8,"text":"Here's the solution, on Tomás's map."},
+ {"id":"app","gap":0.8,"text":"Its new parts sit in the application layer, beside billing."},
+ {"id":"tech","gap":0.8,"text":"Under them, the platform's services, reused, and one new one: sending a file out."},
+ {"id":"work","gap":0.8,"text":"A work package builds the new parts, by the first of July."},
+ {"id":"req","gap":0.8,"text":"And each quality is a requirement, realised by the parts that meet it."}]},
+"end":{"name":"Each journey, planned","lead":1.0,"tail":1.0,"vo":[
+ {"id":"road","gap":0.8,"text":"The stations served every traveller. Each lord's journey was his domain's own plan, sent ahead, station by station."},
+ {"id":"data","gap":0.8,"text":"On the data platform, each solution is planned end to end: its context, its qualities, its options, and why, written down."},
+ {"id":"most","gap":0.8,"text":"Most of what it needs is already there. What's new, every team hears ahead."},
+ {"id":"next","gap":0.8,"text":"Next: a road people choose."}]}
+};

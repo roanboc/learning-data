@@ -5,9 +5,9 @@
 #    its tube, with the tube's octave faintly above it; the bar's second tone (2.76 times as high) sounds only at the strike, and the
 #    mallet is a soft thud. Nothing above 2.2 kHz, no vibrato, and each note simply dies away.
 #  - The mark: four notes (G, D, B, G above), the call before an announcement. It plays three times: under the title card, when the
-#    last station is named, and under the end card.
-#  - G major for the route and what works; E minor for the meeting's two numbers; C major where the film says what changes the
-#    answer. Just intonation from G (hz()), so every chord is pure.
+#    route's last station is named, and under the end card.
+#  - G major for the route and what works; E minor for the half that courses leave out; C major for the foundations and for
+#    enterprise data architecture. Just intonation from G (hz()), so every chord is pure.
 # The rules the films keep (tools/quiet.py checks them):
 #  - Music only from time to time: under the opening, and after it only at a chapter's turn, under a moment on screen or in a pause
 #    without words; never a bed under the voice.
@@ -100,85 +100,123 @@ def air(s, sec=0.8, g=0.007, pan=0.0, lo=150, hi=900):
     s_air(s, sec, g * FX, pan, lo, hi)
 
 # =============================================================================================================================
-# 1. It worked: the opening, with music under it. The phone: a low G. A decision: B, and the card set down. It worked: G and D,
-#    together. A week later, two numbers: E minor, a low E, then G and B as the two sheets slide onto the table. Which one? Nothing.
+# 1. Beyond the platform: the opening, with music under it. The introduction's map: a low G, then B as gold lights. It works: G and
+#    D, with the tag set down. A platform alone: a low E. The four places fill: a tap for each, and C, E and G under them, one by one.
 #    The title card: the mark.
-w0 = S0('worked')
-Wk = lambda lid, word, off=0: W('worked', lid, word, off)
-bar(G2, w0 + 0.4, 0.9, -0.3, 3.2)
-bar(D3, G('worked', 'tap', 0.1), 0.7, -0.3, 2.4)
-bar(B3, Wk('tap', 'decision', 0.0), 0.75, 0.1, 2.4)
-knock(Wk('seat', 'A new class', 0.0), 0.012, px(1280))
-bar(G3, Wk('seat', 'a hundred and forty', 0.0), 0.6, 0.15, 2.2)
-tJ = G('worked', 'job', 0.2)
-knock(tJ, 0.010, px(1280), 260); bar(G3, tJ + 0.05, 0.75, -0.1, 2.8); bar(D4, tJ + 0.05, 0.6, 0.2, 2.8)
-bar(E2, G('worked', 'why', 0.0), 0.85, 0.0, 3.6)
-paper(Wk('why', 'two offices', 0.0), 0.010, px(700), 0.6); bar(G3, Wk('why', 'two offices', 0.5), 0.6, -0.25, 2.6)
-paper(Wk('why', 'two numbers', 0.0), 0.010, px(1220), 0.6); bar(B3, Wk('why', 'two numbers', 0.5), 0.6, 0.25, 2.6)
-tap(Wk('why', 'same meeting', 0.4), 0.008, px(960))
-mark(G('worked', 'breath', 0.5), 0.9)
-bar(G2, G('worked', 'breath', 0.5), 0.7, 0.0, 3.6)
+b0 = S0('beyond')
+Bd = lambda lid, word, off=0: W('beyond', lid, word, off)
+bar(G2, b0 + 0.4, 0.9, -0.3, 3.4)
+bar(D3, G('beyond', 'basics', 0.2), 0.7, -0.2, 2.6)
+bar(B3, Bd('basics', 'decision', -0.3), 0.7, 0.2, 2.6)
+tJ = G('beyond', 'matters', 0.1)
+knock(tJ, 0.010, px(960), 260); bar(G3, tJ + 0.05, 0.7, -0.1, 2.8); bar(D4, tJ + 0.05, 0.55, 0.2, 2.8)
+bar(E2, G('beyond', 'alone', 0.0), 0.85, 0.0, 3.6)
+knock(G('beyond', 'alone', 0.25), 0.011, px(960), 240)
+for i, (word, m) in enumerate((('organisation', C3), ('word', E3), ('decides', G3), ('see', C4))):
+    tap(Bd('still', word, -0.1), 0.008, px((390, 1530, 390, 1530)[i])); bar(m, Bd('still', word, 0.0), 0.6, (-0.4, 0.4, -0.4, 0.4)[i], 2.6)
+mark(G('beyond', 'breath', 0.5), 0.9)
+bar(G2, G('beyond', 'breath', 0.5), 0.7, 0.0, 3.6)
 
-# 2. One word. "enrolled": one note, G. Three systems, three counts: a tap for each count. Each one is right: G, B and D, together.
-#    The platform moves all three: a breath of air along the lanes, and the pill set down. More teams, an agent: a tap for each card.
-#    Repeated everywhere: a tap for each count. The platform was never the problem: a low G. What changes the answer: C major, a
-#    note for each of the three things.
-Wd = lambda lid, word, off=0: W('word', lid, word, off)
-bar(G3, Wd('one', 'enrolled', -0.1), 0.8, 0.0, 3.0)
-knock(Wd('office', 'one system', 0.0), 0.010, px(960))
-for i, (lid, word) in enumerate((('sis', 'signed up'), ('lms', 'can open'), ('fin', 'has paid'))):
-    tap(Wd(lid, word, 0.3), 0.008, px((330, 960, 1590)[i]))
-tR = Wd('three', 'each one', 0.0)
-bar(G3, tR, 0.7, -0.3, 2.8); bar(B3, tR + 0.25, 0.6, 0.0, 2.8); bar(D4, tR + 0.5, 0.6, 0.3, 2.8)
-air(G('word', 'moves', 0.5), 1.6, 0.006, px(620), 150, 800)
-knock(Wd('moves', 'without', 0.0), 0.011, px(960), 260)
+# 2. Why this portal. Only half: a knock as each card is set down, and E minor, a low E. You join them: one tap. The model and the
+#    policy: a knock, a tap. The author: a breath of air as the line draws; a tap for each role; 16+ years: B, and the pill. The
+#    pieces gather: soft taps. Learning Data: G, B and D, together. The two halves joined by the gold thread: a low C.
+Pt = lambda lid, word, off=0: W('portal', lid, word, off)
+knock(Pt('tech', 'technical', -0.2), 0.011, px(460), 230); knock(Pt('neutral', 'neutral', -0.2), 0.011, px(1460), 230)
+bar(E2, G('portal', 'half', 0.3), 0.75, 0.0, 3.4)
+tap(G('portal', 'join', 0.1), 0.008, px(960))
+knock(Pt('wrong', 'model', 0.0), 0.010, px(620), 260); tap(Pt('wrong', 'policy', 0.0), 0.007, px(1300))
+air(G('portal', 'author', 0.2), 1.4, 0.006, 0.0, 150, 800)
+for i, word in enumerate(('applications', 'data', 'enterprise architecture')):
+    tap(Pt('author', word, -0.1), 0.007, px((410, 960, 1510)[i]))
+tY = Pt('author', 'sixteen', 0.0)
+knock(tY, 0.010, px(960), 260); bar(B3, tY + 0.05, 0.6, 0.0, 2.8)
+for i in range(0, 9, 2):
+    tap(G('portal', 'slowly', 0.2 + i * 0.32 + 0.9), 0.005, px(330 + i * 157))
+tL = G('portal', 'ld', 0.1)
+bar(G3, tL, 0.75, -0.3, 3.0); bar(B3, tL + 0.25, 0.6, 0.0, 3.0); bar(D4, tL + 0.5, 0.55, 0.3, 3.0)
+bar(C3, Pt('eda', 'Joining', 0.0), 0.75, 0.0, 3.4)
+
+# 3. The foundations. The route begins: G and D. Each of its first stations arrives with one soft tap. The many voices on tools:
+#    nothing, as the tags appear (no burst); the foundations: a low C. The layers of the business: a tap for each. Governance's three
+#    reasons: one low E under them. The newer way: C, E and G, one after another, as glossary, checks and code join up.
+Fd = lambda lid, word, off=0: W('found', lid, word, off)
+tR = Fd('route', 'route', 0.0)
+bar(G3, tR, 0.75, -0.6, 2.8); bar(D4, tR + 0.45, 0.6, -0.5, 2.8)
+tap(G('found', 'ea', 0.6), 0.008, px(300)); tap(G('found', 'gov', 0.6), 0.008, px(510))
+bar(C3, Fd('tools', 'far fewer', 0.0), 0.7, 0.0, 3.0)
+for i, word in enumerate(('does', 'needs', 'systems', 'connect')):
+    tap(Fd('how', word, 0.0), 0.006, px(960))
+bar(E2, G('found', 'slow', 0.2), 0.7, -0.4, 3.4)
+knock(Fd('policies', 'policies', 0.0), 0.010, px(430), 230)
+tN = Fd('newer', 'glossary', -0.2)
+bar(C4, tN, 0.6, 0.0, 2.6); bar(E4, (tN + Fd('newer', 'code', -0.2)) / 2, 0.55, 0.3, 2.6); bar(G4, Fd('newer', 'code', -0.2), 0.55, 0.6, 2.6)
+knock(Fd('newer', 'code', 0.4), 0.010, px(1315), 260)
+
+# 4. The rest of the route. The main line: a tap as each station arrives. Deeper into each layer: B and D. Two branch lines leave: a
+#    breath of air, E above and E below. They meet again: G, B and D together. The last station: the mark.
+Rs = lambda lid, word, off=0: W('rest', lid, word, off)
+tMn = Rs('main', 'main line', 0.0)
+for i, x in enumerate((760, 960, 1160, 1350)):
+    tap(tMn + 0.7 + i * 0.55, 0.007, px(x))
+tD = Rs('deeper', 'each layer', 0.0)
+bar(B3, tD, 0.6, 0.0, 2.6); bar(D4, tD + 0.3, 0.5, 0.2, 2.6)
+tB = G('rest', 'branch', 0.2)
+air(tB, 1.4, 0.006, px(700), 150, 800); bar(E4, tB + 0.6, 0.5, -0.1, 2.6)
+tap(Rs('share', 'shares', 0.5), 0.007, px(880)); tap(Rs('share', 'shares', 1.2), 0.007, px(1210))
+bar(E3, Rs('agents', 'AI agents', 0.4), 0.55, 0.1, 2.6); tap(Rs('agents', 'AI agents', 0.6), 0.007, px(1045))
+tM = Rs('whole', 'ends', 0.6)
+bar(G3, tM, 0.65, 0.3, 3.0); bar(B3, tM + 0.02, 0.55, 0.35, 3.0); bar(D4, tM + 0.04, 0.5, 0.4, 3.0)
+tap(Rs('whole', 'data management', 0.3), 0.007, px(1572))
+mark(Rs('lead', 'leading data people', 0.4), 0.85)
+
+# 5. A real project. The project opens: a breath of air, and a low G. The build ends green: G and D. The folders most projects leave
+#    out: a soft tap as each is marked, then the metadata's bracket: C and E. The tool wars: nothing. The capabilities: one knock for
+#    each block. Using them well: D and G.
+Pj = lambda lid, word, off=0: W('project', lid, word, off)
+air(Pj('real', 'real project', -0.3), 1.0, 0.006, px(630), 150, 800); bar(G2, Pj('real', 'real project', 0.0), 0.7, -0.3, 3.0)
+tG = Pj('open', 'run', 0.0)
+bar(G3, tG, 0.6, 0.5, 2.6); bar(D4, tG + 0.03, 0.5, 0.55, 2.6)
+for word in ('glossary', 'owners', 'architecture map', 'data products', 'contracts', 'decisions'):
+    tap(Pj('list', word, -0.1), 0.005, px(400))
+tMt = Pj('meta', 'business', -0.1)
+bar(C3, tMt, 0.65, -0.2, 3.0); bar(E3, tMt + 0.3, 0.55, -0.1, 3.0)
 for i in range(3):
-    tap(G('word', 'teams', 0.5 + i * 0.25), 0.006, px(1610))
-knock(G('word', 'agent', 0.5), 0.010, px(1610), 200)
-for i in range(3):
-    tap(Wd('repeat', 'everywhere', i * 0.22), 0.007, px(1740))
-tap(Wd('repeat', 'confidence', 0.0), 0.008, px(1740))
-bar(G2, G('word', 'never', 0.0), 0.8, 0.0, 3.4)
-for i, (word, m) in enumerate((('how the organisation', C3), ('what was defined', E3), ('who decided', G3))):
-    bar(m, Wd('answer', word, 0.0), 0.75, (-0.2, 0.0, 0.2)[i], 3.0)
+    knock(Pj('show', 'same capabilities', i * 0.2), 0.009, px(520 + i * 440), 240)
+tWl = Pj('well', 'using', 0.0)
+bar(D3, tWl, 0.6, 0.0, 2.8); bar(G3, tWl + 0.25, 0.55, 0.0, 2.8)
 
-# 3. The route. Here is the route: G and D. Each station arrives with one soft tap, where it is on the map. The foundations: a
-#    low G and D, together. Two side routes leave: a breath of air, E above and E below. They all meet again: G, B and D together.
-#    The last station: the mark.
-Rt = lambda lid, word, off=0: W('route', lid, word, off)
-bar(D3, G('route', 'where', 0.3), 0.7, 0.0, 2.6)
-tH = G('route', 'here', 0.0)
-bar(G3, tH, 0.8, -0.4, 2.6); bar(D4, tH + 0.45, 0.65, -0.3, 2.6)
-for lid, x in (('ea', 300), ('gov', 510), ('model', 760), ('basics', 960), ('ae', 1160), ('dq', 1350), ('mdm', 880), ('prot', 1210), ('agents', 1045), ('dm', 1572)):
-    tap(G('route', lid, 0.5), 0.008, px(x))
-tF = G('route', 'found', 0.1)
-bar(G2, tF, 0.8, -0.35, 3.2); bar(D3, tF + 0.05, 0.65, -0.3, 3.2)
-tS = G('route', 'side', 0.3)
-air(tS, 1.4, 0.006, px(700), 150, 800); bar(E4, tS + 0.5, 0.55, -0.1, 2.6); bar(E3, tS + 1.6, 0.6, -0.1, 2.6)
-tM = G('route', 'meet', 0.2)
-bar(G3, tM + 0.7, 0.7, 0.3, 3.0); bar(B3, tM + 0.72, 0.6, 0.35, 3.0); bar(D4, tM + 0.74, 0.55, 0.4, 3.0)
-mark(Rt('lead', 'leading data people', 0.4), 0.85)
+# 6. Beyond DAMA. The wheel draws itself: C and G. What this portal adds: a knock for each card. The enterprise around the
+#    paradigms brightens: a breath of air. Enterprise data architecture: C, E and G, together, held.
+Dm = lambda lid, word, off=0: W('dama', lid, word, off)
+tW = Dm('dama', "DAMA's wheel", -0.2)
+bar(C3, tW, 0.7, 0.0, 3.2); bar(G3, tW + 1.0, 0.55, 0.0, 3.0)
+for i, word in enumerate(('enterprise architecture', 'AI agents', 'leadership')):
+    knock(Dm('further', word, -0.1), 0.009, px((330, 1590, 1590)[i]), 240)
+air(Dm('why', 'enterprise', 0.0), 1.6, 0.006, 0.0, 150, 800)
+tE = Dm('means', 'Enterprise data architecture', -0.1)
+bar(C3, tE, 0.75, -0.2, 3.6); bar(E3, tE + 0.03, 0.6, 0.0, 3.6); bar(G3, tE + 0.06, 0.55, 0.2, 3.6)
 
-# 4. One map among many. DAMA's wheel: C and G, as the wheel draws itself. This one is a route: a breath of air as the wheel opens
-#    out, and one D as the route arrives.
-Wh = lambda lid, word, off=0: W('wheel', lid, word, off)
-tW = Wh('dama', "DAMA's wheel", -0.2)
-bar(C3, tW, 0.75, 0.0, 3.2); bar(G3, tW + 1.2, 0.6, 0.0, 3.0)
-air(G('wheel', 'ours', 0.2), 1.5, 0.006, 0.0, 150, 800)
-bar(D3, G('wheel', 'ours', 1.5), 0.7, 0.0, 3.0)
+# 7. Learn by doing. The question rises: a knock. The right answer: G and B. The near miss: nothing. The lab's button: a tap, and the
+#    event lands in bronze: a soft knock. The scenario's pick: a tap; the steps fall into order: D. A goal lights its stops: B and E.
+#    Progress stays: one G as the ring closes.
+Dg = lambda lid, word, off=0: W('doing', lid, word, off)
+knock(Dg('question', 'stops', 0.0), 0.010, px(960), 240)
+tOk = Dg('close', 'close', 0.4)
+bar(G3, tOk, 0.6, 0.4, 2.6); bar(B3, tOk + 0.03, 0.5, 0.45, 2.6)
+tEn = Dg('enrol', 'Enrol', 0.5)
+tap(tEn, 0.008, px(450)); knock(tEn + 1.8, 0.010, px(1560), 220)
+tap(Dg('scenario', 'make the call', 1.2), 0.007, px(560))
+bar(D4, Dg('scenario', 'order', 2.2), 0.55, 0.4, 2.6)
+tLg = Dg('goal', 'lights up', 0.0)
+bar(B3, tLg, 0.6, 0.0, 2.6); bar(E4, tLg + 0.04, 0.5, 0.2, 2.6)
+bar(G3, G('doing', 'stays', 1.2), 0.65, -0.4, 3.0)
 
-# 5. What you can do here: a tap for each of the six shapes. A goal lights up its stops: B and E, together. What you have done
-#    stays: one G as the first station's ring closes.
-Hr = lambda lid, word, off=0: W('here', lid, word, off)
-for i, t_ in enumerate((Hr('films', 'short films'), G('here', 'ask', 0.2), G('here', 'lab', 0.2), G('here', 'call', 0.2), G('here', 'goal', 0.2), G('here', 'search', 0.3))):
-    tap(t_ + 0.05, 0.008, px(210 + i * 300))
-tL = Hr('goal', 'lights up', 0.0)
-bar(B3, tL, 0.65, 0.0, 2.6); bar(E4, tL + 0.04, 0.5, 0.2, 2.6)
-bar(G3, G('here', 'stays', 1.2), 0.7, -0.4, 3.0)
-
-# 6. Start. Platforms have matured: nothing. Everything else: A and F sharp over D, together, short. Start there: a tap, as the next
-#    stop lights. The end card: the mark.
-tE = G('start', 'hard', 0.3)
-bar(D3, tE, 0.7, 0.0, 2.0); bar(Fs3, tE + 0.03, 0.55, 0.15, 2.0); bar(A3, tE + 0.06, 0.5, 0.3, 2.0)
+# 8. Start. Platforms have matured: nothing. Everything else: a tap as each of the four words lights, then A and F sharp over D,
+#    together, short. Start there: a tap, as the next stop lights. The end card: the mark.
+St = lambda lid, word, off=0: W('start', lid, word, off)
+for i, word in enumerate(('organisation', 'meaning', 'decisions', 'people')):
+    tap(St('hard', word, -0.1), 0.006, px((330, 750, 1170, 1590)[i]))
+tH = END('start', 'hard') + 0.2
+bar(D3, tH, 0.7, 0.0, 2.0); bar(Fs3, tH + 0.03, 0.55, 0.15, 2.0); bar(A3, tH + 0.06, 0.5, 0.3, 2.0)
 tap(G('start', 'there', 0.1), 0.008, px(300))
 mark(G('start', 'breath', 0.5), 0.95, last=2.8)

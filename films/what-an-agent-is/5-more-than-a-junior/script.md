@@ -283,7 +283,7 @@ The film's rows are in [decided.md](decided.md), which `site-tools/build_series.
 
 ## What the example project has
 
-Nothing new. The film names no product and shows no file; its numbers are the university's: the 33 tables are the example project's 33 models (`films/analytics-engineering/project/models`, on 3 November 2026), the meaning of *award* is the glossary's since the governance films' Monday (`examples/award-redefined/sync_on_monday.md`, lines 15 and 19), and 4,812 and 4,867 are the census report's and the draft submission's (*Off the shelf*'s narration, lines 24 and 25). The four faculties' awards (1,108, 1,574, 1,372 and 758, which make 4,812) are the film's own. The team's notes for agents stand for the project's `AGENTS.md` and `skills/`, which series 2 shows; this film doesn't add the line to them.
+Nothing new. The film names no product and shows no file; its numbers are the university's: the 33 tables are the example project's 33 models (`learning-data-project/30-data-project/models`, on 3 November 2026), the meaning of *award* is the glossary's since the governance films' Monday (`examples/award-redefined/sync_on_monday.md`, lines 15 and 19), and 4,812 and 4,867 are the census report's and the draft submission's (*Off the shelf*'s narration, lines 24 and 25). The four faculties' awards (1,108, 1,574, 1,372 and 758, which make 4,812) are the film's own. The team's notes for agents stand for the project's `AGENTS.md` and `skills/`, which series 2 shows; this film doesn't add the line to them.
 
 ## Rigour
 

@@ -459,7 +459,7 @@ const NARR={
  {"id":"three","gap":0.8,"text":"The model says a learner is one person. The sources say one learner, Aisha, is three."}]}
 };
 
-const VODUR={"map/soho": 4.686, "map/asked": 3.719, "map/marks": 5.147, "map/left": 2.287, "map/bridge": 3.804, "ask/step": 1.832, "ask/text": 6.684, "ask/decision": 7.672, "ask/wallet": 4.958, "ask/done": 6.804, "ask/real": 9.32, "ask/cloud": 6.661, "ask/hash": 4.922, "slice/glossary": 5.84, "slice/four": 6.884, "slice/out": 2.674, "slice/never": 7.923, "yaml/once": 2.508, "yaml/learner": 3.461, "yaml/words": 8.315, "yaml/diagram": 6.519, "yaml/read": 3.492, "owners/before": 4.823, "owners/keys": 9.103, "owners/sets": 7.079, "owners/mei": 9.903, "owners/why": 4.83, "split/harder": 5.011, "split/compare": 7.607, "split/same": 3.356, "split/rule": 7.371, "split/attend": 6.153, "draft/agent": 6.057, "draft/skill": 6.019, "draft/miss": 4.046, "draft/clause": 3.485, "draft/approve": 6.302, "next/count": 4.443, "next/sources": 1.019, "next/three": 5.236};
+const VODUR={"map/soho": 4.686, "map/asked": 3.719, "map/marks": 5.147, "map/left": 2.287, "map/bridge": 3.804, "ask/step": 1.832, "ask/text": 6.684, "ask/decision": 7.672, "ask/wallet": 4.958, "ask/done": 6.809, "ask/real": 9.32, "ask/cloud": 6.661, "ask/hash": 4.922, "slice/glossary": 5.84, "slice/four": 6.884, "slice/out": 2.674, "slice/never": 7.923, "yaml/once": 2.508, "yaml/learner": 3.461, "yaml/words": 8.315, "yaml/diagram": 6.519, "yaml/read": 3.492, "owners/before": 4.823, "owners/keys": 9.103, "owners/sets": 7.079, "owners/mei": 9.903, "owners/why": 4.83, "split/harder": 5.011, "split/compare": 7.607, "split/same": 3.356, "split/rule": 7.371, "split/attend": 6.153, "draft/agent": 6.256, "draft/skill": 6.019, "draft/miss": 4.046, "draft/clause": 3.485, "draft/approve": 6.302, "next/count": 4.443, "next/sources": 1.019, "next/three": 5.236};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1929,7 +1929,7 @@ function sq_loop(ctx,x,y,rx,ry,t,on,a){if(a<=0.01)return;const r=16;withA(ctx,a,
 // a source system's stream: its card, and its records rising from below in its colour
 function sq_stream(ctx,x,yTop,yBot,k,t,a){if(a<=0.01)return;const col=SRC3[k][1];withA(ctx,a,()=>{const g=ctx.createLinearGradient(0,yTop,0,yBot);g.addColorStop(0,rgba(col,0.14));g.addColorStop(1,rgba(col,0));ctx.fillStyle=g;rr(ctx,x-130,yTop,260,yBot-yTop,18);ctx.fill();
   for(let i=0;i<18;i++){const u=((t*0.18+hash(i,k+60))%1),yy=lerp(yBot,yTop+70,u),xx=x+(hash(i,k+61)-0.5)*200,al=Math.sin(Math.PI*u);ctx.fillStyle=rgba(col,0.55*al);rr(ctx,xx-18,yy-4,36,8,3);ctx.fill();}
-  srcCard(ctx,x-160,yTop,320,k,{});});}
+  const cw=Math.max(320,...SRC3.map(([nm])=>Math.ceil(34+tw(ctx,nm,phSz(ctx,21),700)+20)));srcCard(ctx,x-cw/2,yTop,cw,k,{});});}   // the three cards, as wide as the longest name at the size it's drawn
 // one learner as a source holds her: the name, and the key that source uses. Spaces are drawn as visible dots
 function sq_aisha(ctx,x,y,k,key,a){if(a<=0.01)return;const col=SRC3[k][1];withA(ctx,a,()=>{glass(ctx,x-150,y-44,300,96,16,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});
   T(ctx,"Aisha",x,y-8,{w:800,size:24,align:"center"});const shown=key.replace(/ /g,"·"),w=tw(ctx,shown,20,500,"mono");let xx=x-w/2;

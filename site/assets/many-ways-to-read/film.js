@@ -454,7 +454,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: what if the app and the analysts used the same database?"}]}
 };
 
-const VODUR={"cards/catalogue": 8.57, "cards/same": 2.088, "cards/step": 4.473, "cards/today": 5.005, "argue/four": 9.732, "argue/names": 6.862, "argue/new": 4.559, "argue/job": 2.95, "integrate/many": 3.615, "integrate/core": 5.164, "integrate/vault": 9.597, "integrate/sat": 6.234, "integrate/new": 4.418, "integrate/audit": 4.386, "present/star": 4.85, "present/share": 8.302, "present/conformed": 4.703, "present/bus": 7.752, "serve/one": 3.08, "serve/row": 6.53, "serve/easy": 6.479, "serve/genie": 6.503, "serve/cost": 5.668, "where/place": 3.793, "where/silver": 3.152, "where/gold": 4.025, "where/sem": 4.964, "choose/vault": 5.517, "choose/star": 3.88, "choose/wide": 4.874, "choose/copies": 6.111, "choose/fashion": 4.166, "end/arrived": 4.874, "end/grew": 4.421, "end/next": 3.632};
+const VODUR={"cards/catalogue": 8.57, "cards/same": 2.088, "cards/step": 4.473, "cards/today": 5.005, "argue/four": 9.732, "argue/names": 6.862, "argue/new": 4.559, "argue/job": 2.95, "integrate/many": 3.615, "integrate/core": 5.164, "integrate/vault": 9.597, "integrate/sat": 6.234, "integrate/new": 4.418, "integrate/audit": 4.393, "present/star": 4.85, "present/share": 8.302, "present/conformed": 4.703, "present/bus": 7.752, "serve/one": 3.08, "serve/row": 6.53, "serve/easy": 6.58, "serve/genie": 6.503, "serve/cost": 5.668, "where/place": 3.793, "where/silver": 3.152, "where/gold": 4.025, "where/sem": 4.964, "choose/vault": 5.517, "choose/star": 3.88, "choose/wide": 4.873, "choose/copies": 6.11, "choose/fashion": 4.166, "end/arrived": 4.876, "end/grew": 4.421, "end/next": 3.632};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1811,8 +1811,8 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cA=c("arrived"),cG=c("grew"),c
         if(k==="star"){mw_starGlyph(ctx,x+270,390,1.5,{});const n=Math.round(countTo(t,cG+0.6,0,748));withA(ctx,fin(t,cG+0.5,0.4),()=>tag(ctx,x+270,552,"+"+fmtNum(n)+" rows",MW_S,{align:"center",size:24}));}
         if(k==="wide"){const nc=fin(t,cG+2.7,0.6);mw_wideGlyph(ctx,x+270,390,1.5,{cols:nc>0.5?12:11,newCol:nc>0.5?11:null});withA(ctx,nc,()=>tag(ctx,x+270,552,"+1 column: short courses",MW_SC,{align:"center",size:24}));}});});
     withA(ctx,fin(t,cA+3.3,0.5),()=>{tag(ctx,380,552,"new satellites · nothing changed",GOOD,{align:"center",size:22});mw_ok(ctx,580,190,18,GOOD,1);});});
-  // next: the app and the analysts, at the same database
-  const nx=fin(t,cN+0.3,0.8);if(nx>0)withA(ctx,nx,()=>{phone2(ctx,560,450,1.25,{});T(ctx,"the app",560,640,{w:700,size:22,align:"center",color:rgba(SOFT,1)});
+  // next: the app and the analysts, at the same database (the phone is a small picture of the app: its screen's words are decoration, at the phone's own size)
+  const nx=fin(t,cN+0.3,0.8);if(nx>0)withA(ctx,nx,()=>{phAsDeco(phMin(ctx)>0,()=>phone2(ctx,560,450,1.25,{}));T(ctx,"the app",560,640,{w:700,size:22,align:"center",color:rgba(SOFT,1)});
     person(ctx,"sam",1380,760,0.52,{t,expr:"calm"});mw_dashIcon(ctx,1560,440,1,1,t);T(ctx,"the analysts",1470,800,{w:700,size:22,align:"center",color:rgba(SOFT,1)});
     const g=0.6+0.4*Math.sin(t*2);glow(ctx,960,430,160,CYAN,0.25*g);dbGlyph(ctx,960,440,CYAN,3.2);arrowTo(ctx,660,450,880,440,CYAN,0.7,{p:clamp((t-cN-0.8)/0.5,0,1),head:12});arrowTo(ctx,1300,450,1040,440,CYAN,0.7,{p:clamp((t-cN-1.0)/0.5,0,1),head:12});
     withA(ctx,fin(t,cN+1.8,0.5),()=>{T(ctx,"?",960,300,{w:800,size:72,align:"center",color:rgba(TRUST,0.6+0.4*g)});T(ctx,"one database?",960,580,{w:700,size:26,align:"center",color:rgba(CYAN,1)});});});

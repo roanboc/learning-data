@@ -86,7 +86,7 @@ On "name their domain", a small flag rises on each staging, core and mart model 
 
 **On screen.** everything green · one project · student system · the registrar's office · Mei · SIS · student IDs · learning platforms · the learning team · Tom · LMS · SC · student · learners · credentials · microcredentials · badges · course · awards · three kinds of domain · application domains · sources/<system>/ · data domains · models/core/<domain>/ · Planning · wallet app · their marts · business domains · marts/ · exposures/ · the project's folders · groups · owners · meta.domain · intermediate: no domain · ownership follows meaning, not the code
 
-**In the repo.** [`sources/student_system/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/student_system) · [`sources/learning_platform/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/learning_platform) · [`sources/short_courses/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/short_courses) · [`models/core/student/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core/student) · [`models/core/course/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core/course) · [`models/marts/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/planning) · [`exposures/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/planning) · [`models/marts/wallet/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/wallet) · [`exposures/wallet/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/wallet) · [`models/_groups.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_groups.yml)
+**In the repo.** [`sources/student_system/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/sources/student_system) · [`sources/learning_platform/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/sources/learning_platform) · [`sources/short_courses/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/sources/short_courses) · [`models/core/student/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/core/student) · [`models/core/course/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/core/course) · [`models/marts/planning/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/marts/planning) · [`exposures/planning/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/exposures/planning) · [`models/marts/wallet/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/marts/wallet) · [`exposures/wallet/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/exposures/wallet) · [`models/_groups.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_groups.yml)
 
 ### 3 · What a domain publishes · 1:54–2:28
 
@@ -113,7 +113,7 @@ Beside it, the product card fills in: grain · owner · domain · glossary term 
 
 **On screen.** a data product · core_learner · grain · one row per learner per version · owner · Mei Tanaka · domain · student · glossary term · learner · contract · enforced · version 1 · docs · Noor's group builds it · Mei owns the meaning · build on the product, not how it's made
 
-**In the repo.** [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml)
+**In the repo.** [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml)
 
 ### 4 · Private, protected, public · 2:28–3:20
 
@@ -164,7 +164,7 @@ On "Planning's mart", a second arrow runs from the wallet's model to `mart_plann
 
 **On screen.** access · public · any project · core · protected · this project only · marts · private · same group · staging · intermediate · refused at parse · private to the 'credential_model' group · allowed · protected · still wrong · shaped for Planning · build on the core, not on each other's marts
 
-**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) · [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md)
 
 ### 5 · Who can read · 3:20–3:48
 
@@ -189,7 +189,7 @@ On "a dashboard", a dashboard (Planning's, drawn as a small chart frame) reaches
 
 **On screen.** access: who can refer · grants: who can read · Databricks · Planning's readers · a dashboard · a private staging table · read with a grant · access doesn't stop it · two doors · two rules
 
-**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml)
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml)
 
 ### 6 · Across projects · 3:48–4:26
 
@@ -231,7 +231,7 @@ A thin bridge runs from the Planning box to the public ring of the credential pr
 
 **On screen.** one project today · Planning's own project · dependencies.yml · credentials · ref('credentials', 'core_learner', v=1) · pinned to v1 · only public models cross · the domains meet on the core · sketch · dbt Cloud only
 
-**In the repo.** [`examples/planning/dependencies.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/dependencies.yml) · [`examples/planning/models/planning_enrolments_at_census.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/models/planning_enrolments_at_census.sql) · [`examples/planning/README.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md)
+**In the repo.** [`examples/planning/dependencies.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/dependencies.yml) · [`examples/planning/models/planning_enrolments_at_census.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/models/planning_enrolments_at_census.sql) · [`examples/planning/README.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/README.md)
 
 ### 7 · What stays shared · 4:26–5:05
 
@@ -284,7 +284,7 @@ On "silos", the ground cracks between the two boxes for a moment, then closes.
 
 **On screen.** what stays shared · key sets · on each source, an owner each · one hash macro · one for every hash · SIS|S-20417 → 0905e6e2…f76a2 · the same in every project · sis|s-20417, in lower case → 8c73518c…447e · a second key · joins find nothing · no test fails · conventions · docs/conventions.md · glossary · _<domain>__conceptual.yml · a package both install · without shared keys, silos
 
-**In the repo.** [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml) · [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__sources.yml) · [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__sources.yml) · [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql) · [`examples/planning/README.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md)
+**In the repo.** [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/student_system/_student_system__sources.yml) · [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/learning_platform/_learning_platform__sources.yml) · [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/short_courses/_short_courses__sources.yml) · [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql) · [`examples/planning/README.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/README.md)
 
 ### 8 · Groups first · 5:05–5:44
 
@@ -306,7 +306,7 @@ The loop of ten steps, small in a corner: stations 4 and 10 lit. On "moves out",
 
 **On screen.** why not split now? · more to deploy · more to keep in step · DEC-PRJ-03 · 2026-10-12 · groups first · one project · projects later · when teams own their domains · planning, as its own project: · models/marts/planning/ · exposures/planning/ · seeds/expected/planning/ · _planning__decisions.yml · many owners · many hands · one isn't a person · *Who owns what* · Owners publish. Consumers build on what's published. · Promise and Keep · steps 4 and 10
 
-**In the repo.** [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml) · [`models/marts/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/planning) · [`exposures/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/planning) · [`seeds/expected/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/expected/planning) · [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml)
+**In the repo.** [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_shared/_shared__decisions.yml) · [`models/marts/planning/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/marts/planning) · [`exposures/planning/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/exposures/planning) · [`seeds/expected/planning/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/seeds/expected/planning) · [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__decisions.yml)
 
 ## Pause and think
 
@@ -355,20 +355,20 @@ Four stops, one question each.
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | the project's folders (a summary card, not a file) | one line per domain folder: [`sources/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources) by system, [`models/core/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core) by data domain, [`models/marts/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts) and [`exposures/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures) by consumer |
-| 2 | [`models/_groups.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_groups.yml) | 1-2, 6-7, 10, 12-13, 16, 18-19 (descriptions and emails trimmed with …) |
-| 3 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) | 3-13 |
-| 4 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 32, 35-36, 38, 41-42, 46, 49-50, 54, 57 (trimmed; materialisations and schemas left out) |
-| 4 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 164-168 (each row cut to its first sentence, or to its last, with …, so the card reads at the film's width) |
+| 2 | the project's folders (a summary card, not a file) | one line per domain folder: [`sources/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/sources) by system, [`models/core/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/core) by data domain, [`models/marts/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/marts) and [`exposures/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/exposures) by consumer |
+| 2 | [`models/_groups.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_groups.yml) | 1-2, 6-7, 10, 12-13, 16, 18-19 (descriptions and emails trimmed with …) |
+| 3 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) | 3-13 |
+| 4 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 32, 35-36, 38, 41-42, 46, 49-50, 54, 57 (trimmed; materialisations and schemas left out) |
+| 4 | [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md) | 164-168 (each row cut to its first sentence, or to its last, with …, so the card reads at the film's width) |
 | 4 | dbt's message (scratch copy) | the parsing error, wrapped to fit |
-| 5 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 60-61, 64 (the two comment lines 62-63 cut with …; line 64 wrapped on the card at `if`, `and` and `else`) |
-| 6 | [`examples/planning/dependencies.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/dependencies.yml) | 3-4 (the two long comment lines 1-2 cut with …) |
-| 6 | [`examples/planning/models/planning_enrolments_at_census.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/models/planning_enrolments_at_census.sql) | 3-9 (the two long comment lines 1-2 cut with …; then …) |
-| 6 | [`examples/planning/README.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md) | 12-14 (wrapped to fit) |
-| 7 | [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml), [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__sources.yml), [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__sources.yml) | 17-19 in each: the `code`, `system` and `owner` of `meta.key_set`, shown as one list under a comment line |
-| 7 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql) | 47-58 (line 47's comment trimmed with …) |
-| 7 | [`examples/planning/README.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md) | 16-17 (wrapped to fit) |
-| 8 | [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml) | 31, 33-34, 36, 38-39 (DEC-PRJ-03; `step`, `status` and `implemented_in` left out; `text` and `why` cut with …) |
+| 5 | [`dbt_project.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/dbt_project.yml) | 60-61, 64 (the two comment lines 62-63 cut with …; line 64 wrapped on the card at `if`, `and` and `else`) |
+| 6 | [`examples/planning/dependencies.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/dependencies.yml) | 3-4 (the two long comment lines 1-2 cut with …) |
+| 6 | [`examples/planning/models/planning_enrolments_at_census.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/models/planning_enrolments_at_census.sql) | 3-9 (the two long comment lines 1-2 cut with …; then …) |
+| 6 | [`examples/planning/README.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/README.md) | 12-14 (wrapped to fit) |
+| 7 | [`sources/student_system/_student_system__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/student_system/_student_system__sources.yml), [`sources/learning_platform/_learning_platform__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/learning_platform/_learning_platform__sources.yml), [`sources/short_courses/_short_courses__sources.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/sources/short_courses/_short_courses__sources.yml) | 17-19 in each: the `code`, `system` and `owner` of `meta.key_set`, shown as one list under a comment line |
+| 7 | [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/keys.sql) | 47-58 (line 47's comment trimmed with …) |
+| 7 | [`examples/planning/README.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/planning/README.md) | 16-17 (wrapped to fit) |
+| 8 | [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_shared/_shared__decisions.yml) | 31, 33-34, 36, 38-39 (DEC-PRJ-03; `step`, `status` and `implemented_in` left out; `text` and `why` cut with …) |
 
 **dbt and Databricks documentation** (the pages behind each claim; on 30 September 2026 docs.getdbt.com couldn't be reached from the build machine, so each claim was checked against the project's own runs and a web search; to confirm on the pages on the day):
 

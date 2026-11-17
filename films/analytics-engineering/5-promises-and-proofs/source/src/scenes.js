@@ -81,8 +81,8 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,960,290,t,Rv,()=>pp_gap1(ctx,150,160,t,{a:dA,lit:{exp:fin(t,w("revoked","expects"),0.4),real:fin(t,w("revoked","deletes"),0.4),dec:fin(t,Bo,0.4)}}),{dy:30,from:0.95});
   // three decisions drop in; gap 1 takes two of them
   const GD=phMin(ctx)?Math.max(0,160+pp_gap1H(ctx).h+34-452):0,BD=GD?Math.max(0,GD-18):0;  // on a phone, gap 1's card is taller: what sits under it moves down
-  const X=[560,960,1360],T3=[w("three","Fix it"),w("three","Write a rule"),w("three","Or accept")],toR=ease(fin(t,w("both","Anything")-0.2,0.9)),toF=ease(fin(t,w("both","asked")-0.2,0.9));
-  const tx=[lerp(X[0],1290,toF),lerp(X[1],1074,toR),X[2]],ty=[lerp(500+GD,452+GD,toF),lerp(500+GD,452+GD,toR),500+GD];
+  const pm=phMin(ctx),dW=k=>tw(ctx,PP_DEC[k][0],phSz(ctx,22),700)+46,DX=pm?(G=>Math.min(150,1880-G.C.reduce((v,c_)=>v+c_,0))+G.C[0]+G.C[1]+G.C[2]+6)(pp_gap1H(ctx)):960,RX=pm?DX+dW(1)/2:1074,FX=pm?DX+dW(1)+16+dW(0)/2:1290,RY=500+GD+(pm?14:0),X=pm?[500,960,1420]:[560,960,1360],T3=[w("three","Fix it"),w("three","Write a rule"),w("three","Or accept")],toR=ease(fin(t,w("both","Anything")-0.2,0.9)),toF=ease(fin(t,w("both","asked")-0.2,0.9));
+  const tx=[lerp(X[0],FX,toF),lerp(X[1],RX,toR),X[2]],ty=[lerp(RY,452+GD,toF),lerp(RY,452+GD,toR),RY];  // the tags are as wide as their words: the two that gap 1 takes sit side by side under its Decision cell, and the row they drop into is clear of them and of the arrow
   [0,1,2].forEach(k=>{const a=fin(t,T3[k]-0.1,0.3)*dA*(k===2?1-0.65*fin(t,Bo,0.6):1),y0=ty[k]-(1-pp_sp(t,T3[k]-0.1,0.6))*50;if(a>0)pp_dtag(ctx,tx[k],y0,k,a,{align:"center",size:22,hi:k<2?pulseAt(t,k?w("both","Anything"):w("both","asked"),1.2):0});});
   // Jordan's microcredential: deleted on 12 August, and read as revoked from that day
   const bA=fin(t,w("revoked","deletes")-0.3,0.6)*(1-fin(t,Tn-0.65,0.55)),del=fin(t,w("jordan","twelfth"),0.8),back=fin(t,w("jordan","From that day")-0.1,1.0);
@@ -90,7 +90,7 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   [["LMS|B-5010","SQL for Analysis",420],["LMS|B-5025","Python Foundations",800]].forEach(([k,n,x],i)=>arrive(ctx,x+160,700+BD,t,w("revoked","deletes")-0.3+i*0.15,()=>pp_cred(ctx,x,610+BD,320,184,k,n,{a:bA*0.75}),{dy:30}));
   arrive(ctx,1340,700+BD,t,w("revoked","deletes")+0.0,()=>pp_cred(ctx,1180,610+BD,320,184,"LMS|B-5028","Data Visualisation",{a:bA,fade:del,back,hi:pulseAt(t,Jo,1.4)}),{dy:30});
   withA(ctx,bA*fin(t,Jo,0.5),()=>{T(ctx,"Jordan's",1340,594+BD,{w:800,size:22,align:"center",color:rgba(PP_LMS,1)});withA(ctx,fin(t,w("jordan","twelfth")-0.1,0.4),()=>tag(ctx,1590,702+BD,"12 Aug",SOFT,{size:20}));});
-  if(back>0)withA(ctx,bA*(1-fin(t,Jo+5.6,0.6)),()=>arrowTo(ctx,1110,478+GD,1300,602+BD,PP_DEC[1][1],0.85,{p:back,bend:-0.15,dash:[6,6],head:12}));
+  if(back>0)withA(ctx,bA*(1-fin(t,Jo+5.6,0.6)),()=>arrowTo(ctx,RX+36,(pm?481:478)+GD,pm?1318-tw(ctx,"Jordan's",phSz(ctx,22),800)/2:1300,602+BD,PP_DEC[1][1],0.85,{p:back,bend:-0.15,dash:[6,6],head:12}));
   // where each gap goes once it's settled: a decision in its source's log, a known limitation on the model, or still open
   [["a decision, in its source's log","sources/<system>/_<system>__decisions.yml",w("leave","becomes a decision"),TRUST],["a known limitation, on the model","meta.limitations",w("leave","known limitation"),PP_DEC[2][1]],
    ["still open, until the fix arrives","requirements/sources/<system>/",w("leave","stays open"),PP_AMB]].forEach(([h,f,t0,col],k,A)=>{
@@ -248,8 +248,8 @@ scene("unit",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,370,240,t,tL+1.0,()=>T(ctx,"data tests: the tables",100,246,{w:700,size:22,color:rgba(SOFT,1)}),{from:0.92});
   // a few rows, made up for the purpose
   const mk=fin(t,w("alone","a few rows")-0.1,0.5)*(1-fin(t,w("rows","credit rule")-0.4,0.5));
-  [["L1 · A1 · unit · 15",0],["L1 · A1 · microcredential · 5",1]].forEach(([s_,i])=>arrive(ctx,330,360+i*56,t,w("alone","a few rows")+i*0.2,()=>withA(ctx,mk,()=>{glass(ctx,100,334+i*56,460,48,10,PP_INT,{glow:8,ea:0.7,fill:"rgba(8,10,20,0.95)"});T(ctx,s_,122,366+i*56,{f:"mono",w:500,size:18,color:rgba(mix(INK,PP_INT,0.3),1)});}),{dy:16}));
-  withA(ctx,mk,()=>T(ctx,"made up",572,394,{w:700,size:18,color:rgba(SOFT,1)}));
+  const rW=Math.max(460,Math.ceil(tw(ctx,"L1 · A1 · microcredential · 5",phSz(ctx,18),500,"mono"))+44);[["L1 · A1 · unit · 15",0],["L1 · A1 · microcredential · 5",1]].forEach(([s_,i])=>arrive(ctx,100+rW/2,360+i*56,t,w("alone","a few rows")+i*0.2,()=>withA(ctx,mk,()=>{glass(ctx,100,334+i*56,rW,48,10,PP_INT,{glow:8,ea:0.7,fill:"rgba(8,10,20,0.95)"});T(ctx,s_,122,366+i*56,{f:"mono",w:500,size:18,color:rgba(mix(INK,PP_INT,0.3),1)});}),{dy:16}));
+  withA(ctx,mk,()=>T(ctx,"made up",112+rW,394,{w:700,size:18,color:rgba(SOFT,1)}));
   arrive(ctx,370,284,t,w("alone","unit test")-0.1,()=>T(ctx,"unit tests: the logic",100,290,{w:800,size:24,color:rgba(PP_INT,1)}),{from:0.92});
   // what a unit test is: made-up rows in, the model's logic, the rows expected out
   const fA=1-fin(t,w("rows","credit rule")-0.9,0.5);

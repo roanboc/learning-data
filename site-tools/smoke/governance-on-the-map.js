@@ -36,10 +36,9 @@ lab: async (id) => {
 quiz: async () => {
   const L = window.MR, U = L.ui, app = document.getElementById("series-quiz"), wait = ms => new Promise(r => setTimeout(r, ms));
   const out = [], seen = new Set();
-  // the page opens on the first film with a scenario left; every film's are under "All films", the button with no number
-  const all = [...app.querySelectorAll(".mr-films button")].find(b => !b.querySelector("i"));
-  if (!all) return ["no way to choose all films"];
-  all.click(); await wait(30);
+  // one list of every scenario of the series, numbered 1 to N, with no film level above it; a fresh page opens on the first
+  if (app.querySelector(".mr-films, .gp-films, select")) return ["the scenarios are split by film again"];
+  if (app.querySelectorAll(".dots button").length !== L.qs.length) return ["the scenarios show " + app.querySelectorAll(".dots button").length + " of " + L.qs.length + " in one list"];
   for (let k = 0; k < L.qs.length + 2; k++) {
     if (app.querySelector(".qdone")) break;
     const q = L.qs[k], t = (app.querySelector(".qbody h3") || {}).textContent;

@@ -354,10 +354,10 @@ function ow_planDefs(ctx){const [sx,sy,sw,sh]=GV_PL.screen;ctx.save();ctx.fillSt
 function ow_anilDefs(ctx){const [sx,sy,sw,sh]=GV_FX.screen;ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(sx,sy,sw,sh);ctx.restore();ow_bar(ctx,sx,sy,sw,32,"Faculty of Health · about these measures",[96,70,80],18);
   [["intake","new learners, each February and July"],["award","degrees conferred this year"],["load","credit points a learner takes"]].forEach(([a,b],i)=>{const yy=sy+82+i*82;
     ctx.save();ctx.fillStyle=rgba([244,244,236],1);ctx.fillRect(sx+14,yy-30,sw-28,72);ctx.restore();ow_T(ctx,a,sx+28,yy,{size:21,w:800,col:WC_DARK});ow_T(ctx,b,sx+28,yy+28,{size:19,col:WC_INK,max:sw-56});});}
-// a card held in both hands, gold, "thank you" on it
+// a card held in both hands, gold, "thank you" on it, inside the line drawn round the card (at 46 px the words ran past it on both sides)
 function ow_heldThanks(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);cx.rotate(-0.05);cx.fillStyle="rgba(60,40,10,0.2)";rr(cx,-112,-70,230,150,10);cx.fill();
   cx.fillStyle=rgba([250,226,150],1);rr(cx,-118,-78,236,150,10);cx.fill();cx.strokeStyle=rgba(GV.goldInk,0.7);cx.lineWidth=3;rr(cx,-106,-66,212,126,6);cx.stroke();
-  cx.fillStyle=rgba(GV.goldInk,1);cx.textAlign="center";cx.font=font(800,46);cx.fillText("thank you",0,12);cx.restore();fingers(cx,P_,[[mx-110,my+30],[mx+110,my+26]]);}
+  cx.fillStyle=rgba(GV.goldInk,1);cx.textAlign="center";cx.font=font(800,38);cx.fillText("thank you",0,10);cx.restore();fingers(cx,P_,[[mx-110,my+30],[mx+110,my+26]]);}
 // the glossary on the meeting room's screen close: its terms, and the keepers' best definitions coming in with their names (u[])
 function ow_glossList(ctx,u){const [x,y,w,h]=OW_MS;ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(x,y,w,h);ctx.restore();ow_bar(ctx,x,y,w,56,"Business glossary · on the platform",[70,96,140],32);
   [["award","Mei Tanaka, registrar's office"],["credential","Mei Tanaka, registrar's office"],["learner","data governance"]].forEach(([a,b],i)=>{const yy=y+152+i*116;

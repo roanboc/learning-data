@@ -1,0 +1,193 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:09.121
+Japan, the 1700s. Ordinary people may not travel as they please, but a pilgrimage is hard to refuse.
+
+00:00:10.821 --> 00:00:15.047
+And people say: once in a lifetime, to Ise, to the great shrine.
+
+00:00:16.947 --> 00:00:21.644
+From Edo, that's the Tōkaidō most of the way, then the road south to Ise.
+
+00:00:23.544 --> 00:00:30.868
+But a farmer who has never left his village doesn't know the road: where to sleep, how far to the next station, what it all costs.
+
+00:00:32.568 --> 00:00:35.426
+And the journey costs more than one household can spare.
+
+00:00:37.326 --> 00:00:42.981
+Villagers need a way to go that they can follow without knowing the road, and a way to pay for it.
+
+00:00:45.081 --> 00:00:53.428
+So villages form pilgrimage groups. Every household pays in each year, and each year two or three, chosen by lot, go for everyone.
+
+00:00:55.328 --> 00:01:01.415
+Priests from Ise, the oshi, visit those villages every year, bringing charms and calendars.
+
+00:01:03.115 --> 00:01:08.531
+At Ise, the oshi lodge the pilgrims in their own houses, and guide them to the shrines.
+
+00:01:10.231 --> 00:01:15.906
+And guidebooks list every station on the way: how far apart they are, the inns, and the sights.
+
+00:01:17.806 --> 00:01:24.513
+Nobody is made to go. But the way is laid out, paid for together, and someone is expecting them at the end.
+
+00:01:26.613 --> 00:01:30.990
+So ordinary people go: hundreds of thousands in an ordinary year.
+
+00:01:32.490 --> 00:01:39.096
+In 1771, more than two million cross the river into Ise in a few months, counted at the ferry.
+
+00:01:41.196 --> 00:01:49.374
+Later, a comic tale of two travellers on their way to Ise becomes a craze like none before, and prints of the road's stations follow.
+
+00:01:51.274 --> 00:01:59.381
+At the utility, the last team to put its first data product on the platform waited six weeks, and two teams gave up and built their own.
+
+00:02:00.881 --> 00:02:06.345
+So Ravi Menon makes the platform a road teams choose: the easiest way to do it right.
+
+00:02:14.045 --> 00:02:20.851
+A year ago, network's team wanted its first data product on the platform: planned outages, for the call centre.
+
+00:02:22.351 --> 00:02:28.237
+It took eleven tickets: a workspace, storage, an account for its job, and each right it needed.
+
+00:02:29.737 --> 00:02:32.735
+Each one waited its turn in the platform team's queue.
+
+00:02:34.435 --> 00:02:40.817
+Then the team wrote its pipeline from nothing, and learned the catalogue's rules when its first pull request came back.
+
+00:02:42.517 --> 00:02:46.030
+Six weeks, before the call centre could see one planned outage.
+
+00:02:47.930 --> 00:02:54.977
+Two other teams gave up. Field services runs a database on its own server, and metering works from spreadsheets.
+
+00:02:56.677 --> 00:03:01.934
+Nobody did anything wrong. The platform was the safe way, but not yet the easy one.
+
+00:03:03.634 --> 00:03:11.768
+Ravi could order every team onto the platform. But an order makes teams use it, not want it, and the quick way finds a way around.
+
+00:03:16.868 --> 00:03:22.315
+So Ravi treats the platform as a product, and the teams that build on it as its customers.
+
+00:03:24.015 --> 00:03:29.307
+His team sits with each domain team, to see what it needs to do, and what gets in its way.
+
+00:03:31.207 --> 00:03:38.432
+Three things come up again and again: waiting on tickets, not knowing where to start, and learning the rules by being refused.
+
+00:03:40.732 --> 00:03:45.513
+As the oshi visited the villages every year, the platform team goes to the teams.
+
+00:03:47.613 --> 00:03:53.197
+Services with customers shows how to write it down: who each service is for, and what they need.
+
+00:03:58.097 --> 00:04:05.027
+First, a path already laid. The template every new job starts from grows into one for a whole data product.
+
+00:04:06.727 --> 00:04:12.454
+A team fills in one form: the product's name, its owner, and what it holds. No tickets.
+
+00:04:14.354 --> 00:04:18.386
+Minutes later, it has a repository with all a data product needs.
+
+00:04:19.686 --> 00:04:26.948
+A pipeline that runs, its tests, a contract for its readers, its entry in the catalogue, rights by role, and its log.
+
+00:04:29.048 --> 00:04:34.616
+The team writes only what's its own: the logic, in a pull request the data team reviews.
+
+00:04:36.516 --> 00:04:41.551
+A team may leave the path where it needs something else. That part is then its own to run.
+
+00:04:43.451 --> 00:04:46.796
+So the quickest way to a data product is also the right one.
+
+00:04:51.696 --> 00:04:56.361
+The rules are built into the path, so a team meets them as it works, not at the end.
+
+00:04:57.861 --> 00:05:06.129
+Personal data is classed before anything is published. The tests run on every pull request. And nothing goes live without an owner.
+
+00:05:08.229 --> 00:05:12.162
+So no first pull request comes back for a rule nobody mentioned.
+
+00:05:13.862 --> 00:05:18.005
+Guardrails, not gates: they keep a team on the road, without stopping it.
+
+00:05:23.105 --> 00:05:29.413
+Then a guide: every step from the form to a first data product, how long each takes, and whom to ask.
+
+00:05:31.313 --> 00:05:35.267
+It's written from the questions teams asked, and it grows with each new one.
+
+00:05:36.967 --> 00:05:40.768
+And a question in the platform's channel gets an answer the same day.
+
+00:05:42.468 --> 00:05:48.554
+As the guidebooks listed every station, the inns and the sights, the guide lists every step of the way.
+
+00:05:53.654 --> 00:05:59.357
+In March, metering's team tries again, on the path. On Monday morning, it fills in the form.
+
+00:06:00.857 --> 00:06:07.478
+By lunch it has its repository, and writes its logic: which reads count, and how estimates are marked.
+
+00:06:09.378 --> 00:06:13.744
+On Tuesday, the data team reviews the pull request, and the tests pass.
+
+00:06:15.444 --> 00:06:21.678
+By Tuesday evening, checked meter reads are in the catalogue, with their owner, ready for network and retail.
+
+00:06:23.578 --> 00:06:27.489
+Two days, not six weeks. And metering's spreadsheets are retired.
+
+00:06:32.589 --> 00:06:36.206
+Ravi counts what tells him the platform works as a product.
+
+00:06:37.506 --> 00:06:44.080
+How many teams choose the path, how long a first data product takes, and what teams say, asked every quarter.
+
+00:06:45.980 --> 00:06:50.864
+By December, eight of the eleven domain teams have chosen it, and none was told to.
+
+00:06:52.764 --> 00:06:58.536
+A first data product takes two to four days, and nine in ten teams would tell another to use it.
+
+00:07:00.236 --> 00:07:05.228
+Field services moves its jobs onto the platform, and its own server is switched off.
+
+00:07:06.928 --> 00:07:10.883
+And metering's team adds a check to the template, so every team gets it.
+
+00:07:12.583 --> 00:07:18.217
+At Ise, the pilgrims were counted at the ferry. Here, Ravi counts who chooses the road.
+
+00:07:22.917 --> 00:07:26.122
+Here's the platform as a product, on Tomás's map.
+
+00:07:27.422 --> 00:07:33.517
+The path is one of the data platform's technology services: a new data product, from the template.
+
+00:07:35.217 --> 00:07:39.357
+It serves each data product made from it, each owned by its domain.
+
+00:07:41.057 --> 00:07:49.082
+And the goal, teams choose the platform, is realised by two outcomes: eight teams of eleven, and a first data product in days.
+
+00:07:53.382 --> 00:08:00.611
+Nobody was made to go to Ise. The way was laid out, paid for together, and someone was expecting them at the end.
+
+00:08:02.311 --> 00:08:07.354
+On the data platform, teams choose the road because it's the easiest way to do it right.
+
+00:08:08.854 --> 00:08:15.430
+A path already laid, the rules built in, a guide, and someone to ask. And someone counts who chooses it.
+
+00:08:17.130 --> 00:08:18.713
+Next: built to change.

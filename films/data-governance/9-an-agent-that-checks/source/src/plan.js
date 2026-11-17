@@ -732,8 +732,8 @@ function ac_paintDawn(c){gv_paintCampus(c);ac_clockAt(c,7,58);c.save();c.globalC
   g.addColorStop(0,rgba([250,220,206],1));g.addColorStop(0.5,rgba([252,236,214],1));g.addColorStop(1,rgba([236,232,226],1));c.fillStyle=g;c.fillRect(0,0,W,H);c.restore();
   c.save();c.globalCompositeOperation="screen";wc_glowAt(c,1500,240,700,[255,214,170],0.3);c.restore();}
 // what the night is made of, each a picture of the paper that stands for it with its words under it: the checklist, the rules for AI
-// helpers with the agent's star, the register's page, and the approvals in gold (a, four, 0 to 1)
-const AC_PARTS=["a checklist in plain words","rules for AI helpers","a register of who owns what","people who decide"],AC_PT={cx:[520,1400],cy:[310,640]};
+// helpers with the agent's star, the register's page, and the approvals in gold (a, four, 0 to 1); both columns stand inside the screen they are shown on, words and all
+const AC_PARTS=["a checklist in plain words","rules for AI helpers","a register of who owns what","people who decide"],AC_PT={cx:[596,1324],cy:[310,640]};
 function ac_parts(ctx,t,a){AC_PARTS.forEach((s_,i)=>{const p=a[i]||0;if(p<=0.01)return;const cx=AC_PT.cx[i%2],cy=AC_PT.cy[i>>1],k=0.9+0.1*spring(p);
   ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);withA(ctx,clamp(p*1.6,0,1),()=>{
     if(i===0)ac_checkCopy(ctx,-190,-150,380,183,-0.015);

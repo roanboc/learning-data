@@ -1,11 +1,11 @@
 /* Learning Data: "Pausa para pensar" de An application or a platform?, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (erp, minutes, owner), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie aún no tiene labs, así que ninguna pregunta nombra un "stop"
-   (el lab que abre) y ninguna tiene enlace a un lab. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la página de labs de la
+   serie; una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  "erp":{q:"El sistema financiero sirve a finanzas, compras y personas. ¿Por qué sigue siendo una aplicación, y no una plataforma?",
+  "erp":{stop:"test",q:"El sistema financiero sirve a finanzas, compras y personas. ¿Por qué sigue siendo una aplicación, y no una plataforma?",
     opts:[{t:"Cada una de sus partes tiene un propósito, y sirve solo a algunos dominios de la empresa, mientras la plataforma de datos sirve a todos.",near:true},{t:"Se compró a un proveedor como un solo producto, y una plataforma es algo que una organización construye por sí misma con sus partes."},{t:"Cada una de sus partes tiene un propósito, con su lógica dentro, como la diseñó su proveedor. Sus responsables no le traen su propia lógica.",ok:true}],
     why:"Servir a muchas áreas no es la prueba por sí sola. La línea está donde vive la lógica: en una aplicación viene dentro, como la diseñó su proveedor; en una plataforma, sus responsables le traen la suya, como hacen los dominios en la plataforma de datos, que también está hecha con el producto de un proveedor. ¿Cuáles de los sistemas compartidos de tu organización llevan su propia lógica, y cuáles la de sus usuarios?"},
   "minutes":{q:"La regla que deja fuera las grandes tormentas se perdió en una actualización. ¿Quién la decide ahora, y dónde se escribe?",

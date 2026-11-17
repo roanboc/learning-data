@@ -2360,7 +2360,8 @@ scene("subak",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       terr(x,tt,{edge:f=>f.seed<0.45?{col:LP.amber,a:0.9*ag_in(tt,n0+f.seed*1.6,0.5),w:4}:null});
       if(tt>=h0){const a=ag_in(tt,h0,0.4);lp_sheet(x,1060,90,700,330,{light:null,pin:false,a,k:tt-h0});rd_hopper(x,1400,260,1.7*lerp(0.6,1,ag_spr(tt-h0,0,0.5)),a);
         lp_T(x,"The brown planthopper",1410,392,{w:700,size:28,align:"center",col:LP.mut,a});}
-      if(tt>=n0)lp_figure(x,160,90,640,{kick:"Indonesia, 1977",num:"2 million tons",label:"of rice destroyed"},{col:LP.amber,light:null,pin:false,a:ag_in(tt,n0,0.35),k:tt-n0});}},
+      // the sheet is as wide as its number, which the kit draws at 96 px: at 640, 2 million tons ran 24 px past it
+      if(tt>=n0)lp_figure(x,160,90,Math.max(640,Math.ceil(ag_tw(x,"2 million tons",{w:800,size:96}))+LP_PAD*2),{kick:"Indonesia, 1977",num:"2 million tons",label:"of rice destroyed"},{col:LP.amber,light:null,pin:false,a:ag_in(tt,n0,0.35),k:tt-n0});}},
     // the dry season: the water no longer reaches the fields downstream; a farmer's lost harvest
     {at:c.dry-0.3,place:"rdTerraces",later:true,keys:[[c.dry-0.3,960,540,1.0]],draw:(x,tt)=>{terr(x,tt);const f0=c.harm-0.4;
       rd_tag(x,tt,w("dry","downstream",0.2),null,1340,620,"Downstream: no water",{col:LP.amber,align:"center"});

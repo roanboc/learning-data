@@ -223,7 +223,7 @@ function bo_change(ctx,x,y,w,n,text,id,o){o=o||{};const a=o.a==null?1:o.a;if(a<=
 // a table row, as the app stores it: a key and its values, drawn as one horizontal stripe
 function bo_row(ctx,x,y,w,id,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_W,fs=Math.max(o.fs||21,phMin(ctx)),h=o.h||44;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.min(w*0.4,150),o.hiCol||col,0.22*Math.min(1,o.hi));
   ctx.fillStyle=rgba(o.bad?BAD:col,0.14+0.1*(o.hi||0));rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(o.bad?BAD:col,0.35+0.5*(o.hi||0));ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
-  const ty=y+h/2+fs*0.36;bo_key(ctx,x+24,y+h/2,1.15,id,1,o.keyHi||0);T(ctx,id,x+48,ty,{f:"mono",w:500,size:fs,color:rgba(bo_kc(id),1)});let cx=x+48+tw(ctx,id,fs,500,"mono")+20;
+  const my=o.more?y+22:y+h/2,ty=my+fs*0.36;bo_key(ctx,x+24,my,1.15,id,1,o.keyHi||0);T(ctx,id,x+48,ty,{f:"mono",w:500,size:fs,color:rgba(bo_kc(id),1)});let cx=x+48+tw(ctx,id,fs,500,"mono")+20;if(o.more)T(ctx,o.more,cx,ty+Math.round(fs*1.2),{f:"mono",w:500,size:fs,color:rgba(INK,0.9)});   // o.more: a second line, under the values, in a taller row (o.h)
   vals.forEach((v,i)=>{const vc=o.vc&&o.vc[i];T(ctx,v,cx,ty,{f:"mono",w:500,size:fs,color:vc?rgba(vc,1):rgba(INK,0.9)});cx+=tw(ctx,v,fs,500,"mono")+20;});});}
 // a column, as the reading side stores it: a name and its values, stacked in one vertical stripe
 function bo_colStripe(ctx,x,y,w,h,name,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_R,fs=Math.max(o.fs||19,phMin(ctx)+1),gap=o.gap||52;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.12);rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
@@ -257,7 +257,7 @@ function bo_capsule(ctx,x,y,s,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save()
 /* a data contract for the awards, drawn like Silent change's card: what's in it, what it means, how fresh each direction must be,
    and who owns each direction (w × h is 760 × 560; draw it scaled) */
 function bo_contract(ctx,x,y,w,h,o){o=o||{};glass(ctx,x,y,w,h,24,[236,243,255],{glow:24,ea:0.9,fill:"rgba(10,16,32,0.95)"});
-  T(ctx,"Data contract · awards",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v1.0",0);if(o.decoBody)PH_OFF++;
+  T(ctx,"Data contract · awards",x+36,y+60,{w:800,size:34});const vs=phSz(ctx,22),vw=tw(ctx,"v1.0",vs,800,"mono")+26,vh=vs+18;if(vs>22.5){glass(ctx,x+w-40-vw,y+48-vh/2,vw,vh,12,GOOD,{glow:8,ea:0.8,fill:"rgba(10,30,20,0.8)"});T(ctx,"v1.0",x+w-40-vw/2,y+48+vs*0.36,{w:800,size:22,f:"mono",align:"center",color:"rgba(200,255,220,1)"});}else stampV(ctx,x+w-40,y+50,"v1.0",0);if(o.decoBody)PH_OFF++;   // the version's stamp is made from its words at the size they're drawn
   const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+196;
   key("Fields",y+136);T(ctx,"award, learner, status, date",vx,y+136,{w:600,size:23});
   key("Statuses",y+192);T(ctx,"issued · revoked",vx,y+192,{w:600,size:22,f:"mono"});

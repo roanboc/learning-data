@@ -1,0 +1,35 @@
+{
+  "kicker": "Security on the platform",
+  "kicker_es": "La seguridad en la plataforma",
+  "title_es": "La seguridad de punta a punta",
+  "h1": "Security all the way through: every request checked where the data is",
+  "h1_es": "La seguridad de punta a punta: cada solicitud, revisada junto a los datos",
+  "lead": "At the utility, one account opens every door on the data platform, and when the regulator asks who read customers' bank details, the log names only that account. Ravi Menon gives every job and person an identity of its own, with only the rights it needs, checked where the data is.",
+  "lead_es": "En la empresa de energía, una cuenta abre todas las puertas de la plataforma de datos, y si el regulador pregunta quién leyó los datos bancarios, el registro solo nombra esa cuenta. Ravi Menon da a cada trabajo y persona su identidad, con solo los permisos que necesita, revisada junto a los datos.",
+  "description": "A film about security all the way through a data platform: one service account, made in the platform's first month, that 47 jobs and four people use, its key in a script with no end date, able to read and change every table, so the log can't say who read customers' bank details; every person signing in as themselves through single sign-on with a second check, and every job with an identity of its own and a pass that lasts an hour, so there's no key to copy; only the rights each identity needs, people's rights through groups by their role; every request checked where the data is, by the catalogue, with no side road to the files under the tables and the office network trusted no more than any other; data encrypted where it's kept and as it moves, set once by the platform; the keys that can't go away kept in the platform's secret store, and every pull request checked for keys; a name on every line of the audit log, so the regulator's next question takes ten minutes; why it's the platform's job: a template that makes the safe way the easy way; and the platform's security as services of its own on Tomás's map.",
+  "description_es": "Una película sobre la seguridad de punta a punta en una plataforma de datos: una cuenta de servicio, creada el primer mes de la plataforma, que usan 47 trabajos y cuatro personas, con su clave en un script sin fecha de vencimiento y capaz de leer y cambiar todas las tablas, así que el registro no puede decir quién leyó los datos bancarios de los clientes; cada persona que entra como sí misma por el inicio de sesión único, con una segunda verificación, y cada trabajo con su propia identidad y un salvoconducto que dura una hora, así que no hay clave que copiar; solo los permisos que cada identidad necesita, los de las personas por grupos según su rol; cada solicitud revisada donde están los datos, por el catálogo, sin senderos laterales hacia los archivos bajo las tablas y sin confiar más en la red de la oficina que en cualquier otra; los datos cifrados donde se guardan y al moverse, configurado una vez por la plataforma; las claves que deben quedarse, en el almacén de secretos de la plataforma, y cada pull request revisado en busca de claves; un nombre en cada línea del registro de auditoría, así que la siguiente pregunta del regulador se responde en minutos; por qué es tarea de la plataforma: una plantilla que hace fácil el camino seguro; y la seguridad de la plataforma como servicios propios en el mapa de Tomás.",
+  "card": "Every request says who's asking, and is checked where the data is, with only the rights it needs and no key in the code.",
+  "card_es": "Cada solicitud dice quién pregunta y se revisa donde están los datos, con solo los permisos que necesita y ninguna clave en el código.",
+  "chapters_es": {
+    "pass": "Un salvoconducto que coincide",
+    "account": "Una cuenta, todas las puertas",
+    "who": "Quién pregunta",
+    "least": "Solo lo que necesita",
+    "checked": "Revisado donde están los datos",
+    "secrets": "Ninguna clave en el código",
+    "log": "Un nombre en cada línea",
+    "default": "El camino seguro, el camino fácil",
+    "practice": "La práctica de datos en el mapa",
+    "end": "Nadie rodea el puesto"
+  },
+  "next_h": "You've seen security all the way through the platform. Next: one solution, end to end.",
+  "next_h_es": "Viste la seguridad de punta a punta en la plataforma. Sigue: una solución, de principio a fin.",
+  "past": [
+    "The Hakone checkpoint, Japan, about 1619",
+    "A woman leaving Edo showed a pass that described her, checked against her at the gate; nobody could go round, and the road stayed open to everyone else."
+  ],
+  "past_es": [
+    "El puesto de control de Hakone, Japón, hacia 1619",
+    "Una mujer que salía de Edo mostraba un salvoconducto que la describía, cotejado con ella en la puerta; nadie podía rodearlo, y el camino seguía abierto para los demás."
+  ]
+}

@@ -2160,7 +2160,7 @@ function ap_classes(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.sa
 // the search job's badge: its own identity, owned by a person, for a logged request only
 function ap_finder(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-finder",lines:[["owned by Jun Park"],["for a logged request only"]],pic:dp_gearPic,t:o.t,a:o.a});  // the light reads its picture, where no words are, so it never passes over a line of text
   const a=o.a==null?1:o.a;if(o.scan>0&&o.scan<1&&a>0){c.save();c.globalAlpha*=a;dp_scan(c,x+28,y+88,150,176,o.scan,"cyan",12);c.restore();}}
-function ap_deleter(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-deleter",lines:[["owned by Sam Okafor"],["for an approved request only"]],pic:dp_gearPic,t:o.t,a:o.a});}
+function ap_deleter(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-deleter",lines:[["owned by Sam Okafor"],["for an approved"],["request only"]],pic:dp_gearPic,t:o.t,a:o.a});}   // its purpose in two lines: on one, it ran 29 px past the badge
 // the search, table by table: each table, ticked when her numbers are found, and the marts where she's only a code
 const AP_STG=["stg_hr_system__staff","stg_student_system__learners","stg_alumni_system__alumni","stg_research_system__researchers","stg_learning_platform__users"];
 function ap_search(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.save();c.globalAlpha*=a;const rows=AP_STG.concat(AP_MARTS),v=o.violet||0;

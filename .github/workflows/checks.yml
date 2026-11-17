@@ -6,7 +6,7 @@
 # those files). .github/scripts/affected.py picks them; run it locally too.
 # On a pull request it compares with the base branch, on a push to main with the commit before it.
 # Run every check by hand: Actions → Checks → Run workflow.
-# The dbt project has its own workflow, credential-project.yml.
+# The example dbt project lives in its own repository, roanboc/learning-data-project, with its own checks.
 name: Checks
 
 on:

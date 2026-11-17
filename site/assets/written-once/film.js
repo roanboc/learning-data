@@ -2006,16 +2006,16 @@ function wr_docs(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(phMin(ctx))h=
     wr_para(ctx,"Award. A qualification the university confers, such as a graduate certificate or a master, for a set number of credit points. When it's conferred on a learner, it's a credential too.",x+28,top,w-56,{size:19,color:rgba(mix(INK,KIND,0.3),1)});});});}
 
 /* ---------- the present: two diagrams ---------- */
-// the conceptual diagram, drawn by hand: four entities and five relationships, white on blue; p (0..1) draws it
+// the conceptual diagram, drawn by hand: four entities and five relationships, white on blue; p (0..1) draws it. Each box is as wide as its name as it is drawn; where the names are raised for a phone, the widest box stays inside the paper's frame, "holds credit" sits under the long diagonal, "counts towards" takes two lines, and "is earned by" goes under its line, between the boxes
 const WR_ENT=[["LEARNER",0.18,0.3],["CREDENTIAL",0.78,0.3],["AWARD",0.78,0.78],["CREDIT_TOWARDS_AWARD",0.24,0.78]];
 const WR_REL=[[0,1,"holds"],[0,3,"holds credit"],[2,3,"is earned by"],[1,2,"counts towards"],[0,2,"is enrolled in"]];
-function wr_erdHand(ctx,x,y,w,h,p,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{bpPaper(ctx,x,y,w,h,1,{});const P=WR_ENT.map(([,u,v])=>[x+u*w,y+v*h]);
+function wr_erdHand(ctx,x,y,w,h,p,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{bpPaper(ctx,x,y,w,h,1,{});const es=phSz(ctx,18),big=es>18,BW=WR_ENT.map(([nm])=>Math.max(tw(ctx,nm,18,800),tw(ctx,nm,es,500,"mono"))+34),P=WR_ENT.map(([,u,v],i)=>[x+(big?clamp(u*w,30+BW[i]/2,w-30-BW[i]/2):u*w),y+v*h]);
   WR_REL.forEach(([i,j,lab],k)=>{const q=clamp(p*6-1.5-k*0.6,0,1);if(q<=0)return;const[x0,y0]=P[i],[x1,y1]=P[j];ctx.strokeStyle=rgba(BPL,0.9);ctx.lineWidth=2;ctx.beginPath();
     const bend=k===4?0.0:0;ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),lerp(y0,y1,q)+bend);ctx.stroke();
-    if(q>=1){const mx=(x0+x1)/2,my=(y0+y1)/2,dy=k===2?-12:-10;if(k===4){ctx.save();ctx.translate(mx,my);ctx.rotate(Math.atan2(y1-y0,x1-x0));T(ctx,lab,0,-12,{w:600,size:18,align:"center",color:rgba(BPL,0.95)});ctx.restore();}
-      else T(ctx,lab,mx+(k===1||k===3?12:0),my+dy,{w:600,size:18,align:k===1?"left":k===3?"left":"center",color:rgba(BPL,0.95)});}});
-  WR_ENT.forEach(([nm],i)=>{const q=clamp(p*6-i*0.35,0,1);if(q<=0)return;const bw=tw(ctx,nm,18,800)+34,[cx,cy]=P[i];withA(ctx,q,()=>{ctx.fillStyle="rgba(24,64,136,0.98)";ctx.fillRect(cx-bw/2,cy-24,bw,48);
-    ctx.strokeStyle=rgba(BPL,0.95);ctx.lineWidth=2.2;ctx.strokeRect(cx-bw/2,cy-24,bw,48);T(ctx,nm,cx,cy+7,{f:"mono",w:500,size:18,align:"center",color:rgba(BPL,1)});});});});}
+    if(q>=1){const mx=(x0+x1)/2,my=(y0+y1)/2,dy=k===2?-12:-10,L=(s_,lx,ly,al)=>T(ctx,s_,lx,ly,{w:600,size:18,align:al||"center",color:rgba(BPL,0.95)});if(k===4){ctx.save();ctx.translate(mx,my);ctx.rotate(Math.atan2(y1-y0,x1-x0));L(lab,0,-12);ctx.restore();}
+      else if(!big)L(lab,mx+(k===1||k===3?12:0),my+dy,k===1||k===3?"left":"center");else if(k===1){const ly=my+es*0.65;L(lab,lerp(x0,x1,(ly-y0)/(y1-y0))+14,ly,"left");}else if(k===3)lab.split(" ").forEach((s_,n)=>L(s_,mx+14,my-es*0.28+n*es*1.07,"left"));else{const sg=Math.sign(x1-x0);L(lab,(x0+sg*BW[i]/2+x1-sg*BW[j]/2)/2,k===2?my+es:my+dy);}}});
+  WR_ENT.forEach(([nm],i)=>{const q=clamp(p*6-i*0.35,0,1);if(q<=0)return;const bw=BW[i],[cx,cy]=P[i];withA(ctx,q,()=>{ctx.fillStyle="rgba(24,64,136,0.98)";ctx.fillRect(cx-bw/2,cy-24,bw,48);
+    ctx.strokeStyle=rgba(BPL,0.95);ctx.lineWidth=2.2;ctx.strokeRect(cx-bw/2,cy-24,bw,48);T(ctx,nm,cx,cy+0.5+es*0.36,{f:"mono",w:500,size:18,align:"center",color:rgba(BPL,1)});});});});}
 // the physical diagram, generated: tables with their columns and types, on glass, with a cog; o.amb turns it amber (stale); o.upd shows the changed type
 const WR_TAB=[["core_award_v1",[["award_key","string","PK"],["award_bk","string",""],["valid_from","date","PK"],["credit_points_required","int",""]]],
   ["core_credential_v2",[["credential_key","string","PK"],["learner_key","string","FK"],["status","string",""],["issued_on","date",""]]],
@@ -2078,7 +2078,7 @@ function wr_node(ctx,x,y,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
 
 /* ---------- the present: more pieces ---------- */
 // a project file drawn as the blueprint (white on blue): the conceptual model, where meaning lives. o.lit {line: a} lights lines; o.tags [[line, text, a]] names them at the right
-function wr_bpCode(ctx,x,y,w,name,lines,o){o=o||{};const m=phMin(ctx);if(m&&!o.rows){const sz=Math.max(o.size||18,m),lh=Math.max(o.lh||27,Math.round(sz*1.32)),R=phCodeRows(ctx,w,lines,sz),lab=o.label===undefined?WR_RUN:o.label,ls=phSz(ctx,18),
+function wr_bpCode(ctx,x,y,w,name,lines,o){o=o||{};const m=phMin(ctx);if(m&&!o.rows){const sz=Math.max(o.size||18,m),lh=Math.max(o.lh||27,Math.round(sz*1.32)),R=phCodeRows(ctx,w-18,lines,Math.max(sz,PH_MIN)),lab=o.label===undefined?WR_RUN:o.label,ls=phSz(ctx,18),
     rm=(v,f)=>{const n={};R.forEach((r,j)=>{if(v[r.i]!=null&&(!f||r.off===0))n[j]=v[r.i];});return n;},first=i=>R.findIndex(r=>r.i===i);
   return wr_bpCode(ctx,x,y,w,phFitPath(ctx,name,w-90-(lab?tw(ctx,lab,ls,700):0),ls),R.map(r=>r.s),Object.assign({},o,{rows:1,size:sz,lh,lit:o.lit?rm(o.lit):undefined,tags:(o.tags||[]).map(([li,s_,ta])=>[first(li),s_,ta]),p:o.p}));}
   const a=o.a==null?1:o.a,sz=o.size||18,lh=o.lh||27,h=o.h||(96+lines.length*lh);if(a<=0.01)return h;withA(ctx,a,()=>{bpPaper(ctx,x,y,w,h,1,{});
@@ -2099,9 +2099,9 @@ function wr_fifth(ctx,x,y,w,h,a,cr){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save(
   T(ctx,"a fifth copy?",x+w/2,y+h/2+10,{w:800,size:26,align:"center",color:rgba(WR_AMB,0.95)});
   if(cr>0){const q=ease(clamp(cr,0,1));ctx.strokeStyle=rgba(BAD,0.9);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+30,y+30);ctx.lineTo(x+30+(w-60)*q,y+30+(h-60)*q);ctx.stroke();}});}
 // a value's possible states, as chips: [[text, colour, lit]]
-function wr_chips(ctx,x,y,items,a){if(a<=0.01)return 0;let cx=x;withA(ctx,a,()=>{items.forEach(([s,col,on])=>{const w=tw(ctx,s,19,500,"mono")+34;if(on>0)glow(ctx,cx+w/2,y,w*0.7,col,0.3*on);
+function wr_chips(ctx,x,y,items,a){if(a<=0.01)return 0;let cx=x;const cs=phSz(ctx,19);withA(ctx,a,()=>{items.forEach(([s,col,on])=>{const w=tw(ctx,s,cs,500,"mono")+34;if(on>0)glow(ctx,cx+w/2,y,w*0.7,col,0.3*on);
   ctx.fillStyle=rgba(mix([10,14,24],col,0.12+0.2*on),0.97);rr(ctx,cx,y-22,w,44,22);ctx.fill();ctx.strokeStyle=rgba(col,0.5+0.5*on);ctx.lineWidth=2;rr(ctx,cx,y-22,w,44,22);ctx.stroke();
-  T(ctx,s,cx+17,y+7,{f:"mono",w:500,size:19,color:rgba(mix(INK,col,0.5*on),1)});cx+=w+14;});});return cx-x;}
+  T(ctx,s,cx+17,y+0.2+cs*0.36,{f:"mono",w:500,size:19,color:rgba(mix(INK,col,0.5*on),1)});cx+=w+14;});});return cx-x;}
 // glowing dots travelling along a path of points, for something that flows one way (p: 0..1 how far the flow has got; it keeps moving with t)
 function wr_flow(ctx,pts,t,a,col,o){o=o||{};if(a<=0.01)return;const L=[];let tot=0;for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);L.push(d);tot+=d;}
   const at=u=>{let d=u*tot;for(let i=0;i<L.length;i++){if(d<=L[i]){const k=d/L[i];return[lerp(pts[i][0],pts[i+1][0],k),lerp(pts[i][1],pts[i+1][1],k)];}d-=L[i];}return pts[pts.length-1];};
@@ -2618,7 +2618,7 @@ scene("version",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const rowsOld=[["credential_key","string"],["credential_kind","string"],["is_revoked","boolean",WR_AMB]],rowsNew=[["credential_key","string"],["credential_kind","string"],["status","string",TRUST]];
   arrive(ctx,vx+vw/2,vy+120,t,0.6,()=>{
     if(split>0.01)wr_prod(ctx,vx,vy-60*split,vw,{ver:"v1",dim:0.5,rows:rowsOld,a:split,behind:split>0.5});
-    if(split>0.01)kt_rstamp(ctx,vx+vw-200,vy-40,"31 Mar 2027",WR_AMB,fin(t,w("date","date to go"),0.3),fin(t,w("date","date to go")+0.1,0.35),{size:18,rot:0.06});
+    if(split>0.01)kt_rstamp(ctx,vx+vw-200,phMin(ctx)?vy-60*split-18:vy-40,"31 Mar 2027",WR_AMB,fin(t,w("date","date to go"),0.3),fin(t,w("date","date to go")+0.1,0.35),{size:phSz(ctx,18),rot:0.06});
     wr_prod(ctx,vx,vy,vw,{ver:split>0.5?"v2":null,rows:split>0.5?rowsNew:rowsOld,lit:{2:fin(t,w("expire","true or false"),0.4)*(1-split)+split*fin(t,cB,0.4)},hi:split});},{d:0.9,dy:30});
   const stA=fin(t,w("expire","becomes")-0.2,0.5)*(1-fin(t,tNew,0.5));
   if(stA>0.01)withA(ctx,stA,()=>{glass(ctx,840,260,700,150,18,TRUST,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"status",870,304,{f:"mono",w:500,size:22,color:rgba(TRUST,1)});

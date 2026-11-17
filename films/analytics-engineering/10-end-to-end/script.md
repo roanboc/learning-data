@@ -55,7 +55,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`9731784` Finance, step 1 of 10 (scope): the question, and a new business domain](https://github.com/roanboc/learning-data/commit/9731784e2f01d135b83c36650fc1ceffd995d493)
 
-**In the repo.** [`models/marts/finance/_finance__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__conceptual.yml) · [`models/marts/finance/_finance__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__decisions.yml) · [`exposures/finance/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/finance/) · [`models/_shared/_shared__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__conceptual.yml)
+**In the repo.** [`models/marts/finance/_finance__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/_finance__conceptual.yml) · [`models/marts/finance/_finance__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/_finance__decisions.yml) · [`exposures/finance/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/exposures/finance/) · [`models/_shared/_shared__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_shared/_shared__conceptual.yml)
 
 ### 3 · What the core holds · 1:37–2:22
 
@@ -67,7 +67,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`8e325c8` Finance, step 2 of 10 (source reality): credit counted towards several awards](https://github.com/roanboc/learning-data/commit/8e325c8533b1cbd73a2ff41bcc4c304f00ab51d3)
 
-**In the repo.** [`analyses/profiling/profile_credit_across_awards.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_credit_across_awards.sql) · [`seeds/reference/finance/tuition_rates.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/finance/tuition_rates.csv) · [`seeds/reference/finance/_finance__seeds.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/finance/_finance__seeds.yml)
+**In the repo.** [`analyses/profiling/profile_credit_across_awards.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_credit_across_awards.sql) · [`seeds/reference/finance/tuition_rates.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/finance/tuition_rates.csv) · [`seeds/reference/finance/_finance__seeds.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/reference/finance/_finance__seeds.yml)
 
 ### 4 · One row of what · 2:22–3:00
 
@@ -79,7 +79,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`ea693b7` Finance, step 3 of 10 (consumer output): one award, and the rows Finance needs](https://github.com/roanboc/learning-data/commit/ea693b7aaa8cd8c5083ff9d5cda3768e519f1cba)
 
-**In the repo.** [`models/marts/finance/_finance__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__conceptual.yml) · [`models/marts/finance/_finance__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__decisions.yml)
+**In the repo.** [`models/marts/finance/_finance__conceptual.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/_finance__conceptual.yml) · [`models/marts/finance/_finance__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/_finance__decisions.yml)
 
 ### 5 · The promise · 3:00–3:35
 
@@ -91,7 +91,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`d4cf5d1` Finance, step 4 of 10 (gaps and contracts): the promise, before the logic](https://github.com/roanboc/learning-data/commit/d4cf5d17fe0d07ba426d0826d0a097710d435e8b)
 
-**In the repo.** [`models/marts/finance/_finance__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__models.yml) · [`models/marts/finance/mart_finance__tuition_forgone.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/mart_finance__tuition_forgone.sql) · [`exposures/finance/_finance__exposures.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/finance/_finance__exposures.yml)
+**In the repo.** [`models/marts/finance/_finance__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/_finance__models.yml) · [`models/marts/finance/mart_finance__tuition_forgone.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/mart_finance__tuition_forgone.sql) · [`exposures/finance/_finance__exposures.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/exposures/finance/_finance__exposures.yml)
 
 ### 6 · Tests first · 3:35–4:19
 
@@ -103,7 +103,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`254da73` Finance, step 5 of 10 (tests): the proofs, before the code](https://github.com/roanboc/learning-data/commit/254da735d2349761fb1efe47d013ff0da5c6deeb)
 
-**In the repo.** [`models/marts/finance/_finance__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__models.yml) · [`seeds/expected/finance/tuition_report.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/expected/finance/tuition_report.csv) · [`tests/reconciliation/reconcile_finance_with_tuition_report.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/reconciliation/reconcile_finance_with_tuition_report.sql)
+**In the repo.** [`models/marts/finance/_finance__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/_finance__models.yml) · [`seeds/expected/finance/tuition_report.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/expected/finance/tuition_report.csv) · [`tests/reconciliation/reconcile_finance_with_tuition_report.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/tests/reconciliation/reconcile_finance_with_tuition_report.sql)
 
 ### 7 · The build · 4:19–4:55
 
@@ -115,7 +115,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`f761664` Finance, step 6 of 10 (build): the logic, on the public core](https://github.com/roanboc/learning-data/commit/f7616640059df74e6038a69e5b86c7bfc02c6658)
 
-**In the repo.** [`models/marts/finance/mart_finance__tuition_forgone.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/mart_finance__tuition_forgone.sql)
+**In the repo.** [`models/marts/finance/mart_finance__tuition_forgone.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/mart_finance__tuition_forgone.sql)
 
 ### 8 · Nothing else moved · 4:55–5:25
 
@@ -127,7 +127,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`130a72c` Finance, step 7 of 10 (validate): Finance's number, and nothing else moved](https://github.com/roanboc/learning-data/commit/130a72c422bc9ea8a67740da1483241bf8d5bd7e)
 
-**In the repo.** [`analyses/validation/reconcile_tuition_report.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/validation/reconcile_tuition_report.sql) · [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/tools/diff_against_main.py)
+**In the repo.** [`analyses/validation/reconcile_tuition_report.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/validation/reconcile_tuition_report.sql) · [`scripts/tools/diff_against_main.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/tools/diff_against_main.py)
 
 ### 9 · Review and ship · 5:25–5:58
 
@@ -139,7 +139,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`4efec1f` Finance, step 8 of 10 (review and ship): the last open item is done, and deleted](https://github.com/roanboc/learning-data/commit/4efec1f8df2f3f173386aca70802691544034bba)
 
-**In the repo.** [`scripts/check/requirements.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/check/requirements.py)
+**In the repo.** [`scripts/check/requirements.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/scripts/check/requirements.py)
 
 ### 10 · Written once · 5:58–6:31
 
@@ -151,7 +151,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`43f3f76` Finance, step 9 of 10 (written once): two descriptions, written once](https://github.com/roanboc/learning-data/commit/43f3f7621f16bc5d33e4173df411c795b06d2967)
 
-**In the repo.** [`skills/review-metadata/find_repeats.py`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/review-metadata/find_repeats.py) · [`models/core/course/_course__columns.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__columns.md) · [`models/marts/finance/_finance__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__models.yml) · [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml)
+**In the repo.** [`skills/review-metadata/find_repeats.py`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/skills/review-metadata/find_repeats.py) · [`models/core/course/_course__columns.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/course/_course__columns.md) · [`models/marts/finance/_finance__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/_finance__models.yml) · [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__models.yml)
 
 ### 11 · Ready to move · 6:31–7:04
 
@@ -163,7 +163,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **The commit.** [`39cd815` Finance, step 10 of 10 (operate and evolve): pinned, and ready to move out](https://github.com/roanboc/learning-data/commit/39cd8152885a61a353bb055733819bca2ef1783c)
 
-**In the repo.** [`models/marts/finance/mart_finance__tuition_forgone.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/mart_finance__tuition_forgone.sql) · [`models/marts/finance/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/finance/) · [`exposures/finance/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/finance/) · [`seeds/reference/finance/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/reference/finance/) · [`seeds/expected/finance/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/expected/finance/) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+**In the repo.** [`models/marts/finance/mart_finance__tuition_forgone.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/finance/mart_finance__tuition_forgone.sql) · [`models/marts/finance/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/marts/finance/) · [`exposures/finance/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/exposures/finance/) · [`seeds/reference/finance/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/seeds/reference/finance/) · [`seeds/expected/finance/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/seeds/expected/finance/) · [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md)
 
 ### 12 · The whole building · 7:04–8:22
 
@@ -173,7 +173,7 @@ The cards quote the project's files as each step's commit left them; each chapte
 
 **On screen.** git log --oneline · replay them, one by one, in the repository · arrived to stay · for the work · git keeps them · the project says only what's open · application domains · a system, and its team · data domains · what the facts mean · business domains · who decides with the data · written by hand · generated · only while the work goes on · the next question · from anyone, at any time · `models/marts/<consumer>/` · `exposures/<consumer>/` · `requirements/exposures/<consumer>/` · one file that won't last · Ask · Promise · Build · Keep · In the weeds of data crafting · ten films · four phases · ten steps · the model is the blueprint · dbt is how you build it · Declare it. Then build it. · *End to end* · Every file in its place, for as long as it's needed.
 
-**In the repo.** [`sources/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/) · [`models/core/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core/) · [`models/marts/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+**In the repo.** [`sources/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/sources/) · [`models/core/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/core/) · [`models/marts/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/marts/) · [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md)
 
 ## Pause and think
 

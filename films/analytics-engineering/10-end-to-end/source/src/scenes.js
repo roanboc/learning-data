@@ -108,16 +108,16 @@ scene("sources",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,EE_RX+640,420,t,w("profile","profiles the core")-0.6,()=>withA(ctx,pA,()=>ee_code(ctx,EE_RX+90,160,EE_RW-90,"analyses/profiling/profile_credit_across_awards.sql",EE_PROF,{size:18,lh:29,p:clamp((t-w("profile","profiles the core")+0.4)/1.6,0,1)})),{dy:24});
   arrive(ctx,EE_RX+400,780,t,w("profile","not the sources"),()=>withA(ctx,pA,()=>{ee_folder(ctx,EE_RX+90,780,"sources/",[110,170,255],{a:0.5});ee_folder(ctx,EE_RX+330,780,"models/core/",TRUST,{on:1});
       arrowTo(ctx,EE_RX+520,840,EE_RX+520,880,TRUST,0.0,{});tag(ctx,EE_RX+640,780,"the core: what Finance reads",TRUST,{size:20});}),{dy:12});
-  // Aisha's credit: one learner, recognised credit counted towards three awards
+  // Aisha's credit: one learner, recognised credit counted towards three awards (each award's card as wide as the longest name as it is drawn, kept inside the frame)
   const aA=fin(t,cA-0.2,0.6)*(1-fin(t,cW-0.4,0.6));if(aA>0.01)withA(ctx,aA,()=>{
     arrive(ctx,EE_RX+170,420,t,cA-0.1,()=>{glass(ctx,EE_RX+20,360,330,120,18,KIND,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.96)"});T(ctx,"Aisha",EE_RX+44,404,{w:800,size:26});T(ctx,"SIS|S-20417",EE_RX+44,440,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
       T(ctx,"recognised credit",EE_RX+44,466,{w:600,size:18,color:rgba(SOFT,1)});},{dy:20});
-    [["GCDA","Graduate Certificate in Data Analytics",15],["MDA","Master of Data Analytics",10],["GCCS","Graduate Certificate in Cyber Security",5]].forEach(([code,nm,cp],i)=>{const y=270+i*130,t0=w("across","counts towards three")+i*0.3;
-      arrive(ctx,EE_RX+760,y,t,t0,()=>{glass(ctx,EE_RX+560,y-46,560,92,14,KIND,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(ctx,code,EE_RX+584,y-8,{f:"mono",w:500,size:22,color:rgba(KIND,1)});
-        T(ctx,nm,EE_RX+690,y-8,{w:600,size:18,color:rgba(SOFT,1)});T(ctx,cp+" credit points",EE_RX+584,y+26,{f:"mono",w:500,size:18});},{dy:16});
-      arrowTo(ctx,EE_RX+360,420,EE_RX+550,y,KIND,fin(t,t0,0.4),{p:fin(t,t0,0.6),head:12,bend:0.05*(1-i)});});
-    arrive(ctx,EE_RX+900,700,t,w("numbers","Added up"),()=>{T(ctx,"385",EE_RX+580,720,{w:800,size:54,color:rgba(EE_AMB,1)});T(ctx,"credit points, added up across awards",EE_RX+700,712,{w:600,size:20,color:rgba(SOFT,1)});},{dy:14});
-    arrive(ctx,EE_RX+900,790,t,w("numbers","enrolled in"),()=>{T(ctx,"160",EE_RX+580,810,{w:800,size:54,color:rgba(TRUST,1)});T(ctx,"in the award each learner is enrolled in",EE_RX+700,802,{w:600,size:20,color:rgba(SOFT,1)});},{dy:14});});
+    const AW3=[["GCDA","Graduate Certificate in Data Analytics",15],["MDA","Master of Data Analytics",10],["GCCS","Graduate Certificate in Cyber Security",5]],aw=Math.max(560,Math.ceil(130+Math.max(...AW3.map(r=>tw(ctx,r[1],phSz(ctx,18),600)))+30)),ax=Math.min(EE_RX+560,1880-aw);AW3.forEach(([code,nm,cp],i)=>{const y=270+i*130,t0=w("across","counts towards three")+i*0.3;
+      arrive(ctx,ax+aw/2,y,t,t0,()=>{glass(ctx,ax,y-46,aw,92,14,KIND,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(ctx,code,ax+24,y-8,{f:"mono",w:500,size:22,color:rgba(KIND,1)});
+        T(ctx,nm,ax+130,y-8,{w:600,size:18,color:rgba(SOFT,1)});T(ctx,cp+" credit points",ax+24,y+26,{f:"mono",w:500,size:18});},{dy:16});
+      arrowTo(ctx,EE_RX+360,420,ax-10,y,KIND,fin(t,t0,0.4),{p:fin(t,t0,0.6),head:12,bend:0.05*(1-i)});});
+    arrive(ctx,ax+340,700,t,w("numbers","Added up"),()=>{T(ctx,"385",ax+20,720,{w:800,size:54,color:rgba(EE_AMB,1)});T(ctx,"credit points, added up across awards",ax+140,712,{w:600,size:20,color:rgba(SOFT,1)});},{dy:14});
+    arrive(ctx,ax+340,790,t,w("numbers","enrolled in"),()=>{T(ctx,"160",ax+20,810,{w:800,size:54,color:rgba(TRUST,1)});T(ctx,"in the award each learner is enrolled in",ax+140,802,{w:600,size:20,color:rgba(SOFT,1)});},{dy:14});});
   // the question opens, with the query as evidence; Finance's rates arrive as its own reference data
   const qA=fin(t,cW-0.2,0.6)*(1-fin(t,cR-0.3,0.5));
   if(qA>0.01){arrive(ctx,EE_RX+580,380,t,cW,()=>withA(ctx,qA,()=>ee_code(ctx,EE_RX,180,EE_RW,"requirements/exposures/finance/_finance__requirements.yml",EE_QF,{tmp:1,size:19,lh:30,p:clamp((t-cW)/1.6,0,1),lit:{2:fin(t,w("which","Which one"),0.5),6:fin(t,w("which","evidence"),0.5)},litCol:EE_TMP})),{dy:24});

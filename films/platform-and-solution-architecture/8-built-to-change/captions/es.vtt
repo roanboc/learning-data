@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:10.873
+Japón, la década de 1860. Por más de 250 años, las postas del Tōkaidō se han pasado cargas y viajeros, de posta en posta.
+
+00:00:12.573 --> 00:00:19.313
+El camino se mantuvo ajustándolo: treinta y seis caballos en cada posta, luego cien, y cien cargadores.
+
+00:00:21.013 --> 00:00:26.440
+Cuando eso no alcanzaba, las aldeas cercanas debían enviar gente y caballos: las aldeas de ayuda.
+
+00:00:28.140 --> 00:00:32.173
+Pero los viajes no dejaban de crecer, y señores y nobles tomaban caballos sin pagar.
+
+00:00:33.673 --> 00:00:39.760
+Se llamó a aldeas de ayuda cada vez más lejanas, y los campesinos dejaban sus campos para llevar cargas ajenas.
+
+00:00:41.460 --> 00:00:46.204
+Su obligación llegó a ser varios cientos de veces la fijada en 1694.
+
+00:00:47.904 --> 00:00:55.395
+En 1764, en el Nakasendō, más de doscientos mil campesinos se alzaron contra una nueva exigencia de cargar.
+
+00:00:57.295 --> 00:01:03.395
+En la década de 1860, los ejércitos en marcha tomaron más de lo que las postas podían dar, y ellas se quedaron sin dinero.
+
+00:01:05.095 --> 00:01:10.847
+El relevo de las postas no daba para más, y el país necesitaba mover más, y más rápido, de lo que podían los caballos.
+
+00:01:12.947 --> 00:01:20.518
+En 1872, el nuevo gobierno puso fin al relevo y liberó a las aldeas de ayuda, y se abrió el primer ferrocarril de Japón.
+
+00:01:22.418 --> 00:01:32.707
+La línea principal al oeste iba a cruzar las montañas. Resultaron mucho más difíciles de lo esperado, así que en 1886 la línea a Nagoya pasó a la ruta del Tōkaidō.
+
+00:01:34.607 --> 00:01:44.768
+El 1 de julio de 1889 se abrió toda la línea: de Tokio a Kobe en unas veinte horas, cuando solo llegar a Kioto llevaba dos semanas a pie.
+
+00:01:46.868 --> 00:01:53.712
+En la empresa de energía, el fabricante de una herramienta deja de darle soporte, con doce años de tormentas de la empresa encerrados dentro.
+
+00:01:55.212 --> 00:02:00.344
+Así que Ravi construye para que cualquier pieza pueda cambiar, y lo propio de la empresa se vaya con ella.
+
+00:02:06.844 --> 00:02:11.140
+En enero, el fabricante de la herramienta escribe: el soporte acaba en diciembre.
+
+00:02:12.640 --> 00:02:18.762
+La sala de control la compró hace doce años, para registrar cada tormenta, cada falla y cada línea que cayó.
+
+00:02:20.262 --> 00:02:23.894
+Los doce años están dentro, en un formato que solo ella puede leer.
+
+00:02:25.594 --> 00:02:30.296
+Su única salida es una exportación hecha para la medida del regulador, que trae poco más.
+
+00:02:31.796 --> 00:02:36.029
+Y los ingenieros de Grace eligen qué líneas reforzar a partir de esas tormentas.
+
+00:02:37.529 --> 00:02:40.522
+Sin ellas, el trabajo del año próximo se elegiría a ciegas.
+
+00:02:42.422 --> 00:02:47.012
+Solo el fabricante puede sacarlo todo, como un proyecto aparte, a su precio.
+
+00:02:48.712 --> 00:02:54.748
+Nadie hizo nada mal. Pero nadie preguntó, al comprarla, cómo saldrían los datos de la empresa.
+
+00:02:56.648 --> 00:03:02.524
+Así que Ravi pregunta qué más tiene atada así a la empresa, incluido el producto de la propia plataforma de datos.
+
+00:03:04.824 --> 00:03:07.546
+Ravi y Tomás empiezan por construir o comprar.
+
+00:03:08.846 --> 00:03:13.794
+Comprar lo que toda empresa de energía necesita casi igual, como una herramienta que registre tormentas.
+
+00:03:15.494 --> 00:03:21.852
+Construir lo que es propio de la empresa: sus reglas, sus medidas y productos de datos como la capacidad de alojamiento.
+
+00:03:23.552 --> 00:03:29.001
+Y antes de comprar, preguntar cómo salen los datos, en qué formato y cuánto llevaría irse.
+
+00:03:30.901 --> 00:03:36.960
+La nueva herramienta de la sala de control envía cada registro a la plataforma de datos cada noche, en un formato abierto.
+
+00:03:38.460 --> 00:03:42.276
+Su acuerdo dice que la empresa puede llevarse todos sus datos, cualquier día.
+
+00:03:43.976 --> 00:03:49.225
+La plataforma de datos es igual: su producto, comprado; lo que se construye encima, propio de la empresa.
+
+00:03:51.525 --> 00:03:58.255
+Luego Ravi busca costuras: lugares donde dos piezas se unen por algo que ambos lados acuerdan, como un formato.
+
+00:03:59.955 --> 00:04:04.483
+Detrás de una costura, una pieza se puede reemplazar, y nada delante de ella tiene que cambiar.
+
+00:04:06.383 --> 00:04:12.774
+En la plataforma de datos, las tablas son archivos en un formato de tabla abierto, en el almacenamiento propio de la empresa.
+
+00:04:14.274 --> 00:04:16.994
+Cualquier motor que conozca el formato puede leerlas.
+
+00:04:18.694 --> 00:04:22.168
+La lógica es código en el repositorio propio de la empresa.
+
+00:04:23.668 --> 00:04:28.782
+No todo tiene costura: las programaciones, las alertas y los tableros son del producto.
+
+00:04:30.482 --> 00:04:34.709
+Eso es dependencia del proveedor, y no está mal: es el precio de lo que un producto hace bien.
+
+00:04:36.409 --> 00:04:40.437
+Ravi anota lo que costaría irse, para que sea una elección, no un hallazgo.
+
+00:04:42.337 --> 00:04:48.428
+El ferrocarril tomó buena parte de la ruta del camino, entre las mismas ciudades. Lo que cambió fue lo que llevaba las cargas.
+
+00:04:50.728 --> 00:04:57.340
+Después, cada tecnología del mapa de Tomás recibe una etapa: en prueba, en uso, de salida, retirada.
+
+00:04:59.040 --> 00:05:02.965
+Y una fecha para volver a revisarla, junto al fin del soporte de su fabricante.
+
+00:05:04.465 --> 00:05:09.554
+La herramienta de tormentas habría aparecido de salida hace cuatro años, cuando su fabricante dejó de mejorarla.
+
+00:05:11.454 --> 00:05:16.775
+Otras dos piezas están cerca de su fin: un servidor de transferencia de archivos y una herramienta de informes.
+
+00:05:18.475 --> 00:05:21.435
+Cada una tiene su plan ya, con años de antelación, no meses.
+
+00:05:23.735 --> 00:05:31.288
+Por último, un plan de salida para cada pieza, incluido el producto de la propia plataforma: cómo se iría, cuánto tardaría y a qué costo.
+
+00:05:32.988 --> 00:05:37.643
+Un plan que nadie probó es una conjetura, así que el equipo de plataforma lo prueba cada año.
+
+00:05:39.343 --> 00:05:43.970
+Este año le toca a la capacidad de alojamiento de Grace: cuánta solar admite cada calle.
+
+00:05:45.470 --> 00:05:50.213
+Durante una semana, en pruebas, corre en otro motor que lee los mismos archivos.
+
+00:05:51.913 --> 00:05:55.740
+Sus modelos corren con once líneas cambiadas, de mil cuatrocientas.
+
+00:05:57.440 --> 00:06:02.102
+El contrato, la responsable y el glosario no cambian, y cada número coincide.
+
+00:06:03.802 --> 00:06:08.551
+Hay que volver a configurar tres cosas: su programación, sus alertas y quién puede leerla.
+
+00:06:10.251 --> 00:06:16.638
+Con eso, Ravi calcula toda la plataforma: unos ocho meses para irse, una migración, no una reescritura.
+
+00:06:18.738 --> 00:06:22.544
+Nadie planea irse, pero ahora la empresa sabe lo que haría falta.
+
+00:06:24.844 --> 00:06:28.336
+Grace pide, en un ticket, que se conserve el historial de tormentas.
+
+00:06:29.836 --> 00:06:35.662
+El fabricante saca los doce años, y el equipo de datos revisa cada uno contra los informes de la vieja herramienta.
+
+00:06:37.362 --> 00:06:43.494
+Llegan a la plataforma de datos como archivos en un formato abierto: el historial de tormentas, a cargo de la red.
+
+00:06:45.194 --> 00:06:48.892
+Desde marzo, la nueva herramienta envía los registros de cada noche del mismo modo.
+
+00:06:50.392 --> 00:06:54.002
+Los ingenieros de Grace los revisan en pruebas, y su ticket se cierra.
+
+00:06:55.502 --> 00:06:58.628
+En noviembre, un mes antes de lo previsto, se apaga la vieja herramienta.
+
+00:07:00.328 --> 00:07:03.290
+El trabajo del año próximo se elige con los doce inviernos.
+
+00:07:05.590 --> 00:07:11.758
+Aquí está toda la práctica de datos en el mapa de Tomás: un producto de datos, de su responsable a sus archivos.
+
+00:07:13.258 --> 00:07:16.373
+En la capa de negocio, Grace tiene el rol de responsable de los datos.
+
+00:07:17.673 --> 00:07:22.245
+La capacidad de alojamiento es un producto: reúne su servicio y su contrato.
+
+00:07:23.745 --> 00:07:27.137
+Lo que significa es un objeto de negocio, definido en el glosario.
+
+00:07:28.637 --> 00:07:34.150
+En la capa de información, el objeto de datos que lo realiza: la capacidad, calle por calle.
+
+00:07:35.650 --> 00:07:41.804
+En la capa de aplicación, su pipeline y sus modelos: un componente de aplicación, a cargo de la red.
+
+00:07:43.304 --> 00:07:47.614
+Su puerto de salida, una interfaz de aplicación, es donde el sitio web lo lee.
+
+00:07:49.114 --> 00:07:54.999
+En la capa de tecnología, los servicios de la plataforma, que Databricks realiza, como software de sistema.
+
+00:07:56.499 --> 00:08:04.208
+Y sus artefactos: las tablas, como archivos en un formato abierto, y los modelos, como código en el repositorio de la empresa.
+
+00:08:05.908 --> 00:08:13.947
+La costura pasa entre esos archivos y el producto que los lee. Otro producto podría leer los mismos archivos y correr el mismo código.
+
+00:08:16.047 --> 00:08:20.287
+Pregunta qué se rompe si cambia una tabla, y las líneas suben hasta Grace.
+
+00:08:22.187 --> 00:08:28.761
+Arquitectura de negocio para datos dibujó la parte de arriba, Arquitectura de datos el medio, y esta serie los cimientos.
+
+00:08:31.061 --> 00:08:39.009
+El Gokaidō duró más de 250 años porque se mantuvo: caballos añadidos, aldeas convocadas, reglas reescritas.
+
+00:08:40.709 --> 00:08:46.799
+Pero nunca cambió quién pagaba el costo. Las postas y las aldeas de ayuda lo cargaron, hasta que las quebró.
+
+00:08:48.699 --> 00:08:51.931
+Y cuando llegó el ferrocarril, muchos pueblos de posta decayeron.
+
+00:08:53.631 --> 00:08:59.289
+Una práctica de datos tampoco se hace de una vez: los productos acaban, las necesidades crecen, la gente se va.
+
+00:09:00.789 --> 00:09:08.047
+Así que se mantiene: cada pieza con una etapa y una fecha, una salida probada cada año, y el mapa cambiado con cada cambio.
+
+00:09:09.747 --> 00:09:15.293
+En la empresa de energía, el próximo final se planea, no se impone, y lo que es propio de la empresa se va con ella.
+
+00:09:16.993 --> 00:09:22.647
+Sigue la última serie de arquitectura empresarial: IA y arquitectura continua.

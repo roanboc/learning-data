@@ -260,7 +260,7 @@ Por qué: "Una cifra menor que 10 se oculta para que nadie sepa quién dejó una
 
 ## What the example project has
 
-The example dbt project (`films/analytics-engineering/project/`) is where the tools films build these ways; this film only uses its data and its words.
+The example dbt project (`learning-data-project/30-data-project/`) is where the tools films build these ways; this film only uses its data and its words.
 
 - Samuel Osei: `data/student_system/learners.csv`, line 19 (`S-20412`, `samuel.osei@mail.example`, award `MPH`); his six results of 15 credit points, `results.csv`, lines 38 to 43; the Master of Public Health, 120 points, Faculty of Health, `awards.csv`, line 9.
 - The mask the project already sets writes `***` (`macros/governance/personal_data.sql`, line 24), for every column classed `direct`, by policy (lines 69 to 81): *Mask it whole*.

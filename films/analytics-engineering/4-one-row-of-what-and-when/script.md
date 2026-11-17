@@ -69,7 +69,7 @@ On "a test", the `unique_combination` lines light, and a thin line from `docs/co
 
 **On screen.** Ask · step 3 · what each consumer needs · one row per learner per award · as at census date · the grain · what a row is · which day · drafted · approved · Noor · a test · no two rows, same learner, same award · runs on dbt Core · DuckDB
 
-**In the repo.** [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/expected/planning/census_report.csv) · [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+**In the repo.** [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/expected/planning/census_report.csv) · [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__models.yml) · [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md)
 
 ### 3 · Fan-out · 1:02–1:41
 
@@ -104,7 +104,7 @@ the version at census              8         8            185
 
 **On screen.** renamed · 2 Jul 2026 · two versions · joined on the key alone · 8 learners → 16 rows · 185 → 370 credit points · no error · the grain test · the version valid on census day · 8 rows
 
-**In the repo.** [`analyses/design/fan_out_without_point_in_time.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/design/fan_out_without_point_in_time.sql)
+**In the repo.** [`analyses/design/fan_out_without_point_in_time.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/design/fan_out_without_point_in_time.sql)
 
 ### 4 · Every version kept · 1:41–2:27
 
@@ -157,7 +157,7 @@ Then the core's YAML:
 
 **On screen.** every version kept · valid from · valid to · is current · loaded at · when the platform saw it · when it was true · effective date wins · built from dated facts · Aisha · Graduate Certificate in Data Analytics · 5 → 20 → 25 → 30 → 45 → 60 · one row per learner per award per version · no two versions overlap
 
-**In the repo.** [`models/_shared/_shared__columns.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__columns.md) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml)
+**In the repo.** [`models/_shared/_shared__columns.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_shared/_shared__columns.md) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml)
 
 ### 5 · As it was, as it is · 2:27–3:10
 
@@ -214,7 +214,7 @@ The two decisions write themselves at the bottom, one from each consumer's decis
 
 **On screen.** census day · 31 Mar 2026 · 45 of 60 · counted · today · completed · 5 credentials · learners within 15 points of a graduate certificate · 31 Mar 2026: 12 · 30 Sep 2026: 9 · both right · the same question · two days · one row per learner, as it is now · valid_at · from inclusive · to exclusive
 
-**In the repo.** [`macros/shared/time.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/time.sql) · [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/mart_planning__near_award.sql) · [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml) · [`models/marts/wallet/_wallet__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__decisions.yml)
+**In the repo.** [`macros/shared/time.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/time.sql) · [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/mart_planning__near_award.sql) · [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__decisions.yml) · [`models/marts/wallet/_wallet__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/_wallet__decisions.yml)
 
 ### 6 · One timeline · 3:10–3:46
 
@@ -240,7 +240,7 @@ resolved as (
 
 **On screen.** three systems · three timelines · 15 Jul 2025 · 21 Jul 2025 · 6 Jan 2026 · 20 Jul 2026 · cut at every change · one timeline · student system first · then the platform · then short courses · no change, no version · four dates → three versions
 
-**In the repo.** [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql)
+**In the repo.** [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql)
 
 ### 7 · Late news · 3:46–4:26
 
@@ -290,7 +290,7 @@ On "accepted", its two sentences light, and a tag below reads "accepted, and wri
 
 **On screen.** took effect 27 Mar · recorded 3 Apr · 7 days late · dated by recording: Business 4 · census report: 3 · dated by effect: Business 3 · when it was true · when it was recorded · recorded_at kept · LIM-STU-07 · accepted, and written down: a known limitation
 
-**In the repo.** [`analyses/profiling/profile_late_changes.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_late_changes.sql) · [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml)
+**In the repo.** [`analyses/profiling/profile_late_changes.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_late_changes.sql) · [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql) · [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml)
 
 ### 8 · A promise to write · 4:26–4:44
 
@@ -343,25 +343,25 @@ Four stops, one question each.
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml) | 3, 10-12, 30-34 (trimmed with …) |
-| 2 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 216 |
-| 2 | [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/expected/planning/census_report.csv) | 1 (the six column names) |
-| 3 | [`analyses/design/fan_out_without_point_in_time.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/design/fan_out_without_point_in_time.sql) | 20-36 (blank lines inside the CTEs removed) |
+| 2 | [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__models.yml) | 3, 10-12, 30-34 (trimmed with …) |
+| 2 | [`docs/conventions.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/docs/conventions.md) | 216 |
+| 2 | [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/seeds/expected/planning/census_report.csv) | 1 (the six column names) |
+| 3 | [`analyses/design/fan_out_without_point_in_time.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/design/fan_out_without_point_in_time.sql) | 20-36 (blank lines inside the CTEs removed) |
 | 3 | `dbt show --select fan_out_without_point_in_time` | result (header as printed: `joined_to`, `rows_returned`, `learners`, `credit_points`) |
-| 4 | [`models/_shared/_shared__columns.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__columns.md) | 51-59 (lines 54 and 56 trimmed with …) |
+| 4 | [`models/_shared/_shared__columns.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/_shared/_shared__columns.md) | 51-59 (lines 54 and 56 trimmed with …) |
 | 4 | `core_credit_towards_award_v1` rows for `SIS|S-20417`, `SIS|GCDA` | query of `target/credentials.duckdb` |
-| 4 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) | 239, 245-246, 260-266 (trimmed with …) |
-| 5 | [`analyses/validation/diff_as_was_as_is.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/validation/diff_as_was_as_is.sql) | result (faculty names shortened; the two dates and the totals added) |
-| 5 | [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__models.yml) | 10 |
-| 5 | [`macros/shared/time.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/time.sql) | 7-13 |
-| 5 | [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/mart_planning__near_award.sql) | 21-27, 36-41 (blank lines removed) |
-| 5 | [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml) | 23 |
-| 5 | [`models/marts/wallet/_wallet__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__decisions.yml) | 13 |
-| 6 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql) | 111-118, 166-174 (trimmed with …) |
+| 4 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) | 239, 245-246, 260-266 (trimmed with …) |
+| 5 | [`analyses/validation/diff_as_was_as_is.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/validation/diff_as_was_as_is.sql) | result (faculty names shortened; the two dates and the totals added) |
+| 5 | [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/_wallet__models.yml) | 10 |
+| 5 | [`macros/shared/time.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/macros/shared/time.sql) | 7-13 |
+| 5 | [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/mart_planning__near_award.sql) | 21-27, 36-41 (blank lines removed) |
+| 5 | [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/planning/_planning__decisions.yml) | 23 |
+| 5 | [`models/marts/wallet/_wallet__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/marts/wallet/_wallet__decisions.yml) | 13 |
+| 6 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql) | 111-118, 166-174 (trimmed with …) |
 | 6 | `core_learner_v1` rows for `SIS|S-20417` | query |
-| 7 | [`analyses/profiling/profile_late_changes.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_late_changes.sql) | 17-22, and its result |
-| 7 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql) | 39-46, 54 (trimmed with …) |
-| 7 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) | 27-30 |
+| 7 | [`analyses/profiling/profile_late_changes.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/analyses/profiling/profile_late_changes.sql) | 17-22, and its result |
+| 7 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learner_timeline.sql) | 39-46, 54 (trimmed with …) |
+| 7 | [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) | 27-30 |
 
 The run behind every number: `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'`, dbt Core 1.12.5 with dbt-duckdb, 30 September 2026: 146 nodes, PASS 143, WARN 1 (by design: gap 5, now the known limitation LIM-SC-02), ERROR 0.
 

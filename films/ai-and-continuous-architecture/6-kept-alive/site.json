@@ -1,0 +1,66 @@
+{
+  "kicker": "Keeping the architecture alive",
+  "kicker_es": "Mantener viva la arquitectura",
+  "title_es": "Mantenerla viva",
+  "h1": "Kept alive: a map stays true only while keeping it is someone's job",
+  "h1_es": "Mantenerla viva: un mapa es fiel solo si mantenerlo es trabajo de alguien",
+  "lead": "A year on, every check on the utility's map passes, yet a crew's assistant gives four steps where there are five, and a retired owner's name is still on thirty elements. Tomás makes keeping the map a job: an owner, a budget and a rhythm, and agents that read the map itself, never a copy.",
+  "lead_es": "Un año después, el mapa pasa todas sus comprobaciones, pero el asistente de una cuadrilla da cuatro pasos donde hay cinco, y una responsable jubilada sigue en treinta elementos. Tomás hace de mantener el mapa un trabajo: responsable, presupuesto y ritmo, y agentes que leen el mapa, nunca una copia.",
+  "description": "A film about keeping an architecture alive, the last on enterprise architecture: in 331 BCE, Alexander the Great found Babylon's temple-tower, Etemenanki, falling into ruin, not kept up in the centuries since, and ordered what was left cleared away to build it again, work Strabo put at ten thousand men for two months; but he died in Babylon in June 323 BCE, the tower was never rebuilt, and with nobody to keep them its ruins became a quarry for centuries, until the tower was mostly a hole in the ground; what was left needed keepers, and since UNESCO listed Babylon in 2019, as Iraq had asked since 1983, Iraq's archaeologists keep it, with the world's protection; at the utility, a year on, a crew connecting a home's solar panels gets four steps from the field app's assistant where the manual has had five since the spring, the fifth a check that the panels stop when the street's power goes off, because the assistant answered from a copy of last year's manual pasted into its instructions; a supervisor caught it that week and nobody was hurt; the map agent's read of what's running against the whole map, read-only with personal and sensitive data masked, finds nine steps the map doesn't show, three words with new meanings, forty-one elements naming an owner who has left and two agents working from copies, though every check had passed, because the checks test each change made to the map and none of this came as a change; now every agent reads the map, the glossary and the manuals through a tool as it answers, names the version it read and is tested again when what it reads changes; the owner check also reads the staff directory, after the metering lead retired with thirty elements and the meter agent still in her name; and keeping the map becomes a capability of its own, continuous architecture in Murat Erder and Pierre Pureur's words, kept as a product, not a project: its owner a role, the architecture lead, held by Tomás with Inés as deputy, its budget in the yearly plan, and a rhythm from the checks on every change to each owner's yearly confirmation; the topic's five series each ended on the same idea, and this one gives it its last words: an architecture stays true only while keeping it is someone's job.",
+  "description_es": "Una película sobre mantener viva una arquitectura, la última sobre arquitectura empresarial: en el 331 a. C., Alejandro Magno encontró la torre-templo de Babilonia, Etemenanki, en ruinas, sin mantenerse en los siglos anteriores, y ordenó despejar lo que quedaba para construirla de nuevo, un trabajo que Estrabón calculó en diez mil hombres durante dos meses; pero murió en Babilonia en junio del 323 a. C., la torre nunca se reconstruyó, y sin nadie que las cuidara sus ruinas fueron una cantera durante siglos, hasta que de la torre quedó casi solo un hoyo en el suelo; lo que quedaba necesitaba guardianes, y desde que la UNESCO inscribió Babilonia en 2019, como Irak pedía desde 1983, los arqueólogos de Irak la cuidan, con la protección del mundo; en la empresa, un año después, una cuadrilla que conecta los paneles solares de un hogar recibe cuatro pasos del asistente de la app de campo cuando el manual tiene cinco desde la primavera, el quinto una comprobación de que los paneles paren si se va la luz en la calle, porque el asistente respondía desde una copia del manual del año pasado pegada en sus instrucciones; quien supervisa lo vio esa semana y nadie salió herido; la lectura del agente del mapa de lo que está en marcha frente a todo el mapa, en solo lectura y con los datos personales y sensibles enmascarados, encuentra nueve pasos que el mapa no muestra, tres palabras con significados nuevos, cuarenta y un elementos que nombran a un responsable que ya se fue y dos agentes que trabajan con copias, aunque todas las comprobaciones habían pasado, porque prueban cada cambio que se hace al mapa y nada de esto llegó como un cambio; ahora cada agente lee el mapa, el glosario y los manuales con una herramienta al responder, nombra la versión que leyó y se prueba de nuevo cuando cambia lo que lee; la comprobación de responsables también lee el directorio de personal, después de que quien dirigía medición se jubiló con treinta elementos y el agente de medidores aún a su nombre; y mantener el mapa se vuelve una capacidad propia, arquitectura continua en palabras de Murat Erder y Pierre Pureur, mantenida como un producto, no un proyecto: su responsable un rol, el de líder de arquitectura, que ocupa Tomás con Inés de suplente, su presupuesto en el plan anual, y un ritmo que va de las comprobaciones en cada cambio a la confirmación anual de cada responsable; las cinco series del tema terminaron con la misma idea, y esta le da sus últimas palabras: una arquitectura sigue fiel solo mientras mantenerla sea el trabajo de alguien.",
+  "card": "Every check passed, yet the map had drifted. Keeping it becomes a job: an owner, a budget and a rhythm, and agents that read the map, never a copy.",
+  "card_es": "Todo pasaba las comprobaciones, pero el mapa se había desfasado. Mantenerlo se vuelve un trabajo: responsable, presupuesto y ritmo, y agentes que leen el mapa.",
+  "chapters_es": {
+    "fall": "La dejaron derrumbarse, otra vez",
+    "five": "Cinco pasos, no cuatro",
+    "moved": "Lo que se movió",
+    "copy": "Las palabras del año pasado",
+    "leaves": "Alguien se va",
+    "job": "Un trabajo, no un proyecto",
+    "series": "Cinco series, una idea",
+    "back": "De vuelta a Babilonia",
+    "end": "Mantenerla viva"
+  },
+  "past": [
+    "Babylon, 331 BCE and the centuries after",
+    "Alexander ordered Etemenanki's ruin cleared to build it again, and died in Babylon before he could; for centuries its bricks were carried off to build houses nearby, and since 2019 Iraq's archaeologists keep what's left, a World Heritage site."
+  ],
+  "past_es": [
+    "Babilonia, del 331 a. C. a los siglos siguientes",
+    "Alejandro ordenó despejar las ruinas de Etemenanki para reconstruirla, y murió en Babilonia antes de lograrlo; durante siglos se llevaron sus ladrillos para hacer casas cerca, y desde 2019 los arqueólogos de Irak cuidan lo que queda, patrimonio mundial."
+  ],
+  "next_h": "The architecture is kept, with an owner, a budget and a rhythm. Next, Data governance: who decides about the data in it.",
+  "next_h_es": "La arquitectura se mantiene, con responsable, presupuesto y ritmo. Después, Gobernanza de datos: quién decide sobre sus datos.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 14 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 14 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Strabo on the tomb of Belus",
+        "title_es": "Estrabón sobre la tumba de Belo (en inglés)",
+        "line": "Strabo's Geography, book 16, in the Loeb translation: the tower in ruins, Alexander's plan to repair it, and ten thousand men for two months to clear it.",
+        "line_es": "La Geografía de Estrabón, libro 16, en la traducción de Loeb: la torre en ruinas, el plan de Alejandro de repararla, y diez mil hombres durante dos meses para despejarla.",
+        "href": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/16A*.html",
+        "href_es": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/16A*.html"
+      },
+      {
+        "title": "Alexander in Babylon",
+        "title_es": "Alejandro en Babilonia (en inglés)",
+        "line": "Arrian's account of Alexander, in E. J. Chinnock's translation: entering Babylon in 331 BCE, he orders the temples rebuilt, Belus's above all.",
+        "line_es": "El relato de Arriano sobre Alejandro, en la traducción de E. J. Chinnock: al entrar en Babilonia en el 331 a. C., ordena reconstruir los templos, sobre todo el de Belo.",
+        "href": "https://en.wikisource.org/wiki/The_Anabasis_of_Alexander/Book_III/Chapter_XVI",
+        "href_es": "https://en.wikisource.org/wiki/The_Anabasis_of_Alexander/Book_III/Chapter_XVI"
+      },
+      {
+        "title": "Continuous architecture, from one of its authors",
+        "title_es": "La arquitectura continua, según uno de sus autores (en inglés)",
+        "line": "Murat Erder on Tech Lead Journal, December 2021, with a full transcript: architect products, not projects; test qualities as well as functions; keep feedback loops.",
+        "line_es": "Murat Erder en Tech Lead Journal, diciembre de 2021, con la transcripción completa: diseñar productos, no proyectos; probar las cualidades además de las funciones; mantener ciclos de retroalimentación.",
+        "href": "https://techleadjournal.dev/episodes/67/",
+        "href_es": "https://techleadjournal.dev/episodes/67/"
+      }
+    ]
+  }
+}

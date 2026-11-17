@@ -1,6 +1,6 @@
 # Working with people
 
-*Proposal for the second series of the module Leading data people: three films. Planned on 5 November 2026 from the module's plan, [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md), which holds the brief, the reference, the insights, the advice, the world, the people, the look and the sound the four series share; this file holds what is this series' own. Status: set up, on assumptions the author reviews later; the films are being made, each marked draft on the site.*
+*Proposal for the series *Working with people*, of the module Leading data people: three films. Planned on 5 November 2026 from the module's plan, [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md), which holds the brief, the reference, the insights, the advice, the world, the people, the look and the sound the four series share; this file holds what is this series' own. Status: set up, on assumptions the author reviews later; the films are being made, each marked draft on the site.*
 
 ## Decided
 

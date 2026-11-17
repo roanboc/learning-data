@@ -47,77 +47,77 @@ La idea tiene nombre: HTAP, procesamiento híbrido transaccional y analítico.
 Mantener dos formas sincronizadas significa capturar cada cambio cuando ocurre, y aplicarlo del otro lado, en el mismo orden.
 
 13
-00:01:35,490 --> 00:01:43,473
+00:01:35,490 --> 00:01:43,472
 Eso solo funciona si cada fila tiene una clave estable: así una actualización encuentra la fila que cambia, y un borrado, la que quita.
 
 14
-00:01:44,873 --> 00:01:52,040
+00:01:44,872 --> 00:01:52,039
 Aplica la revocación de un título antes que su emisión, y el título vuelve a la vida. El orden importa tanto como el contenido.
 
 15
-00:01:57,240 --> 00:02:04,069
+00:01:57,239 --> 00:02:04,068
 ¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera y un segundo conjunto de permisos que mantener sincronizado.
 
 16
-00:02:05,369 --> 00:02:06,753
+00:02:05,368 --> 00:02:06,752
 Son beneficios reales.
 
 17
-00:02:09,453 --> 00:02:12,068
+00:02:09,452 --> 00:02:12,067
 Ahora cuenta títulos directo de las tablas de la app.
 
 18
-00:02:12,768 --> 00:02:19,912
+00:02:12,767 --> 00:02:19,911
 Los títulos revocados siguen ahí, con un estado. La facultad del año pasado se sobrescribió. El conteo sale mal.
 
 19
-00:02:21,312 --> 00:02:26,042
+00:02:21,311 --> 00:02:26,041
 Es el mismo error que contar las inscripciones hoy y no en la fecha de censo.
 
 20
-00:02:27,242 --> 00:02:34,310
+00:02:27,241 --> 00:02:34,309
 La historia, las dimensiones compartidas y las definiciones aún necesitan modelarse. Lo híbrido quita la copia, no el modelo.
 
 21
-00:02:37,010 --> 00:02:46,106
+00:02:37,009 --> 00:02:46,105
 Ahora los datos también fluyen al revés. Oro sirve datos de vuelta a la app: la próxima microcredencial para sugerir, o un aprendiz que puede necesitar ayuda.
 
 22
-00:02:47,406 --> 00:02:53,181
+00:02:47,405 --> 00:02:53,180
 Las variables para aprendizaje automático viajan igual: calculadas en oro, servidas en milisegundos.
 
 23
-00:02:54,381 --> 00:02:59,879
+00:02:54,380 --> 00:03:00,165
 Y los agentes de IA necesitan las dos formas a la vez: leen lo que se sabe, y anotan lo que hicieron.
 
 24
-00:03:02,979 --> 00:03:07,939
+00:03:03,265 --> 00:03:08,225
 Así que quien modela tiene preguntas nuevas. Para cada idea, ¿qué forma es la fuente de verdad?
 
 25
-00:03:09,339 --> 00:03:12,014
+00:03:09,625 --> 00:03:12,300
 ¿Hacia dónde se sincroniza cada tabla, y de quién es?
 
 26
-00:03:13,414 --> 00:03:17,797
+00:03:13,700 --> 00:03:18,083
 ¿Qué tan al día debe estar cada respuesta? Segundos para una billetera. Un día para un plan.
 
 27
-00:03:19,197 --> 00:03:24,266
+00:03:19,483 --> 00:03:24,554
 ¿Dónde viven las definiciones, para que la app y el informe coincidan? En un solo lugar, no en dos.
 
 28
-00:03:25,566 --> 00:03:29,838
+00:03:25,854 --> 00:03:30,126
 Y los contratos de datos de Cambio silencioso ahora van en ambas direcciones.
 
 29
-00:03:33,038 --> 00:03:40,244
+00:03:33,326 --> 00:03:40,532
 Un modelo lógico. Una forma para escribir y una forma para leer, en una sola plataforma, con menos distancia entre ellas.
 
 30
-00:03:41,544 --> 00:03:44,030
+00:03:41,832 --> 00:03:44,318
 Lo híbrido quita la copia, no el modelo.
 
 31
-00:03:45,330 --> 00:03:48,910
+00:03:45,618 --> 00:03:49,198
 Siguiente: hacer del significado mismo algo que una máquina pueda leer.

@@ -114,7 +114,7 @@ Its two `ref()` lines light, and an arrow runs from the first file to it: "ref()
 
 **On screen.** transformation · select · join · clean · reshape · notebooks · stored procedures · pipeline tools · dbt · one query, one file · ref() · the order · table · view · tests · docs
 
-**In the repo.** [`models/staging/student_system/stg_student_system__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/student_system/stg_student_system__learners.sql) · [`models/intermediate/student/int_learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learners.sql) · [`models/intermediate/student/_int_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/_int_student__models.yml)
+**In the repo.** [`models/staging/student_system/stg_student_system__learners.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/student_system/stg_student_system__learners.sql) · [`models/intermediate/student/int_learners.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/int_learners.sql) · [`models/intermediate/student/_int_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/intermediate/student/_int_student__models.yml)
 
 ### 6 · The name that misleads · 2:36–3:01
 
@@ -124,7 +124,7 @@ Its two `ref()` lines light, and an arrow runs from the first file to it: "ref()
 
 **On screen.** model? · transformation · one step of the building work · the model · keep them apart · connect them · for analytics engineers · into the weeds · IN THE WEEDS OF DATA CRAFTING · *Declare it, then build it* · a technical series for analytics engineers
 
-**In the repo.** [`models/staging/student_system/stg_student_system__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/student_system/stg_student_system__learners.sql)
+**In the repo.** [`models/staging/student_system/stg_student_system__learners.sql`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/staging/student_system/stg_student_system__learners.sql)
 
 ### 7 · Three hundred models · 3:01–3:34
 
@@ -134,7 +134,7 @@ Its two `ref()` lines light, and an arrow runs from the first file to it: "ref()
 
 **On screen.** 300 files · staging · intermediate · core · marts · tidy a source · match three keys · one timeline · learner · credential · award · for planning · for the wallet · which file is the data model? · none of them
 
-**In the repo.** [`models/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/)
+**In the repo.** [`models/`](https://github.com/roanboc/learning-data-project/tree/main/30-data-project/models/)
 
 ### 8 · Where the model lives · 3:34–4:08
 
@@ -164,7 +164,7 @@ Then a Markdown card, `core/student/_student__conceptual.md`: "# Credential", it
 
 **On screen.** The model lives beside the code · YAML · one row per credential · the key · relationships · the contract · Markdown · the conceptual model · what it means · the decision log · DEC-STU-01 · why · tables ← the tests check → what the model says · unique · not_null · relationships · contract
 
-**In the repo.** [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) · [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md) · [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml)
+**In the repo.** [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_core_student__models.yml) · [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__conceptual.md) · [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/models/core/student/_student__decisions.yml)
 
 ### 9 · Four phases · 4:08–4:47
 

@@ -1,0 +1,243 @@
+1
+00:00:01,400 --> 00:00:09,517
+Japan, the early 1600s. A century of war has just ended, but the lords who fought it still rule their own domains.
+
+2
+00:00:11,017 --> 00:00:17,319
+To keep them from rising again, the shogunate keeps their wives and children in Edo, as hostages.
+
+3
+00:00:18,819 --> 00:00:25,966
+So on the roads it fears two things: a lord's family slipping out of Edo, and guns going in, to arm a revolt.
+
+4
+00:00:27,666 --> 00:00:32,058
+It needs to see who leaves Edo, and to stop anyone who has no right to.
+
+5
+00:00:33,758 --> 00:00:40,394
+Around 1619, it sets a checkpoint on the Tōkaidō, in the Hakone mountains, by Lake Ashi.
+
+6
+00:00:41,294 --> 00:00:44,878
+Every traveller passes through its gate, between dawn and dusk.
+
+7
+00:00:46,778 --> 00:00:51,368
+A woman leaving Edo shows a pass, written by officials in Edo Castle.
+
+8
+00:00:52,268 --> 00:00:58,725
+It says who she is, where she's going and why, and describes her hair, and any marks on her face, hands and feet.
+
+9
+00:01:00,625 --> 00:01:07,457
+A woman examiner checks her against it, and even unties her hair. If she doesn't match her pass, she goes no further.
+
+10
+00:01:09,357 --> 00:01:15,179
+Nobody may go round: taking a side road past a checkpoint is a crime, punished severely.
+
+11
+00:01:16,679 --> 00:01:21,912
+Most men need no pass at all. The checkpoint looks hardest at what the shogunate fears.
+
+12
+00:01:23,412 --> 00:01:29,265
+So whoever leaves Edo by this road is seen and checked, and the road stays open to everyone else.
+
+13
+00:01:30,365 --> 00:01:35,090
+The checkpoint stands for about 250 years, until 1869.
+
+14
+00:01:36,990 --> 00:01:41,056
+At the utility, one account opens every door on the data platform.
+
+15
+00:01:41,956 --> 00:01:46,522
+Its key sits in a script anyone could copy, and the log can't say who used it.
+
+16
+00:01:48,022 --> 00:01:55,110
+So Ravi gives every job and every person a pass of their own, and every request is checked where the data is.
+
+17
+00:02:02,210 --> 00:02:08,606
+In March, the regulator asks the utility a question: who read customers' bank details in February?
+
+18
+00:02:10,106 --> 00:02:14,589
+Ama Owusu, the regulatory lead, asks the data team in a ticket.
+
+19
+00:02:15,889 --> 00:02:21,974
+The platform's log has a line for every read. But every line names the same account: data_loader.
+
+20
+00:02:23,874 --> 00:02:31,650
+It was made in the platform's first month. Now 47 jobs run as it, and four people sign in as it from their laptops.
+
+21
+00:02:33,350 --> 00:02:39,814
+Its key sits in a script in the repository, with no end date. Anyone who can read the script can use it.
+
+22
+00:02:41,514 --> 00:02:44,887
+And it can read and change every table, in every domain.
+
+23
+00:02:46,387 --> 00:02:53,408
+So nobody can tell the regulator who read the bank details. And anyone who copied the key could still read them today.
+
+24
+00:02:55,308 --> 00:03:00,935
+Nobody meant harm. A new account took a ticket and two weeks, and data_loader worked at once.
+
+25
+00:03:02,435 --> 00:03:04,149
+The safe way was the slow way.
+
+26
+00:03:07,849 --> 00:03:11,607
+Ravi starts with identity: every request says who's asking.
+
+27
+00:03:12,907 --> 00:03:18,949
+People sign in as themselves, through the utility's single sign-on, with a second check on their phone.
+
+28
+00:03:20,849 --> 00:03:29,785
+Each of the 47 jobs gets an identity of its own. Each run is given a pass that lasts an hour, so there's no key to keep, or to copy.
+
+29
+00:03:31,885 --> 00:03:38,177
+At Hakone, a pass described the one woman it was for. A key in a script works for whoever holds it.
+
+30
+00:03:42,077 --> 00:03:45,065
+Then each identity gets only the rights it needs.
+
+31
+00:03:46,365 --> 00:03:52,413
+The billing load writes billing's raw tables, and nothing else. The outage dashboard reads two tables.
+
+32
+00:03:54,513 --> 00:03:58,402
+People get their rights through groups, by their role, never one by one.
+
+33
+00:04:00,302 --> 00:04:05,517
+And customers' bank details can be read by two jobs and the billing team. Nobody else.
+
+34
+00:04:07,417 --> 00:04:10,327
+A woman's pass named one journey, not every road.
+
+35
+00:04:14,227 --> 00:04:21,958
+Every request is checked where the data is. Before a single row is read, the catalogue checks who's asking and what they may do.
+
+36
+00:04:23,858 --> 00:04:29,324
+Being on the utility's network proves nothing: a laptop in the office is checked like any other.
+
+37
+00:04:31,024 --> 00:04:37,148
+And there are no side roads: nobody can read the files under the tables without going through the catalogue.
+
+38
+00:04:39,048 --> 00:04:44,970
+Data is encrypted where it's kept and as it moves, set once by the platform for every domain.
+
+39
+00:04:46,670 --> 00:04:49,655
+As at Hakone, nobody goes round the checkpoint.
+
+40
+00:04:53,355 --> 00:04:59,699
+Some keys can't go away: the password for an old billing system, or a supplier's key to its service.
+
+41
+00:05:01,399 --> 00:05:08,511
+Those go in the platform's secret store. A job asks for one by name as it runs, so it's never written in the code.
+
+42
+00:05:10,611 --> 00:05:14,087
+And every pull request is checked for keys before it's merged.
+
+43
+00:05:15,787 --> 00:05:21,233
+The old key is cancelled, and six weeks after Ama's ticket, data_loader is switched off.
+
+44
+00:05:25,133 --> 00:05:30,713
+Now every line of the audit log names who asked: a person, or a job's own identity.
+
+45
+00:05:32,613 --> 00:05:35,554
+In June, the regulator asks again, about May.
+
+46
+00:05:36,854 --> 00:05:42,872
+This time the answer takes ten minutes: two billing jobs, and one billing analyst working on a ticket.
+
+47
+00:05:44,972 --> 00:05:47,170
+Ama checks it, and closes her ticket.
+
+48
+00:05:51,070 --> 00:05:57,481
+Why is this the platform's job? Left to each domain, the quick way would win again, as data_loader did.
+
+49
+00:05:58,981 --> 00:06:01,715
+So the platform makes the safe way the easy way.
+
+50
+00:06:02,615 --> 00:06:09,359
+A new job starts from a template, with its own identity, its rights, its secrets and its log from the first day.
+
+51
+00:06:11,659 --> 00:06:18,242
+It takes minutes, not a ticket and two weeks. Since June, twelve new jobs, and not one borrowed account.
+
+52
+00:06:20,142 --> 00:06:24,633
+How each lock is built, one by one, is the series Locks before the data.
+
+53
+00:06:28,333 --> 00:06:30,981
+Here's the data practice, on Tomás's map.
+
+54
+00:06:32,281 --> 00:06:37,090
+In the technology layer, the data platform's security is services of its own.
+
+55
+00:06:37,990 --> 00:06:44,565
+There's sign-in through the identity provider, access checked by the catalogue, the secret store and the audit log.
+
+56
+00:06:46,665 --> 00:06:51,615
+Every data product, and every job that builds one, uses the same services.
+
+57
+00:06:53,315 --> 00:06:58,720
+And the rule is a principle: every request says who's asking, and is checked where the data is.
+
+58
+00:07:02,420 --> 00:07:10,060
+The checkpoint at Hakone didn't close the road. It looked hardest at the few the shogunate feared, and let everyone else go on.
+
+59
+00:07:11,760 --> 00:07:17,648
+On the data platform, every request is checked where the data is, by name, for only what it needs.
+
+60
+00:07:18,748 --> 00:07:21,757
+Every domain gets that from the platform, by default.
+
+61
+00:07:23,457 --> 00:07:25,578
+Next: one solution, end to end.

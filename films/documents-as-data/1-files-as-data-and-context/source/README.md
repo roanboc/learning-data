@@ -46,4 +46,4 @@ python tools/render.py --workers 4   # dist/files-as-data-and-context.mp4
 
 ## The example project
 
-What the film shows on the platform is in the example project, [`../../../analytics-engineering/project/examples/files-as-data/`](../../../analytics-engineering/project/examples/files-as-data/README.md), for Databricks only: the invoices read and checked, the metadata beside each contract and the function that finds a contract's signed file, and the claims app's data contract.
+What the film shows on the platform is in the example project, [`learning-data-project/30-data-project/examples/files-as-data/`](https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/files-as-data/README.md), for Databricks only: the invoices read and checked, the metadata beside each contract and the function that finds a contract's signed file, and the claims app's data contract.

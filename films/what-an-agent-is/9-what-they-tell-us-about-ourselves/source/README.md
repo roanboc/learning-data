@@ -1,0 +1,46 @@
+# Rebuilding What they tell us about ourselves
+
+*What they tell us about ourselves*, film 9 of 10 of *What an agent is*, the first series of the module *AI agents in data work*, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, and the module's look and tools in [`../../shared/`](../../shared/), whose [README](../../shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `tt_` or `TT_`:
+
+| File | What it holds |
+|---|---|
+| `film.json` | The film's key (`what-they-tell-us-about-ourselves`), title and subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (chapter `rough`, at `sang`), the words the voice respells (Melbourne, Graeme, Llinás, Searle, Hameroff, René, Jun, "A I") and its opening story (`rough`). |
+| `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. A line whose voice differs from its caption says so in `say`. |
+| `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
+| `src/breath.js` | The holds after some lines, where an idea needs a moment to land, and the film's wordless moments, such as the title card and the end card. |
+| `src/tt_world.js` | The places of the film's stories, each painted once: a living room in Melbourne in 1978, the laboratory where the implant was made, an office in Buffalo in 1958, a writing room in England in 1843, and others. |
+| `src/tt_minds.js` | Living things and their copies, drawn live: the ear, the brain, a neuron, the worm and the fly warm and matte; the implant, the perceptron, the network and the models of the worm and fly as blue lines, so the original and the copy never look alike. |
+| `src/scenes.js` | The eight chapters, shot by shot, on the module's camera and shots. Every moment is timed to a line's start or to a word in it (`wAt()`), so the pictures stay with the voice when it is recorded again. |
+| `src/i18n/es/captions.js` | The Spanish captions, one per English line. |
+| `tools/score.py` | The film's music and sounds: a Mellotron's flute tape and tuning forks on wooden boxes, both made here; both are copies of a kind, as the film is about rough copies. Each sound uses the same word and offset as the picture in `src/scenes.js`: change one, change both. |
+| `tools/` | Each other tool runs the module's tool (`../../../what-an-agent-is/shared/tools/run.py`) on this film. |
+
+## Setup (once)
+
+Follow the setup in [the build guide of *The Inner Life of Data*](../../../inner-life-of-data/source/README.md): Python, `pip install -r requirements.txt`, Chromium for Playwright, and the Kokoro voice model. The tools use `models/` here if it exists, and otherwise the `models/` of *The Inner Life of Data*.
+
+## Rebuild
+
+Run from this folder, `films/what-an-agent-is/9-what-they-tell-us-about-ourselves/source/`:
+
+```
+python tools/tts.py        # voices each line into build/vo/ and writes src/vodur.js
+python tools/build.py      # dist/render.html, dist/film.js, dist/film.html
+python tools/check.py      # every moment draws, every place paints in time, and nothing shows twice or jumps where the shot changes
+python tools/legible.py --overlaps   # every piece of text reads on a phone, and none covers another
+python ../../../../site-tools/fits.py   # every piece of text inside its box, and the captions on a phone
+python tools/pace.py       # pacing per chapter
+python tools/stills.py [chapter ...] [--at 12.5 ...] [--every 2] --size 1920   # review stills -> build/stills/
+python tools/quiet.py      # the music comes now and then, nothing beats, and nothing pulses
+python tools/audio.py      # mixes dist/soundtrack.mp3 from build/vo and tools/score.py
+python tools/build.py      # again, to embed the soundtrack
+python tools/captions.py   # ../captions/en.srt and en.vtt
+FILM_LANG=es python tools/captions.py   # ../captions/es.srt and es.vtt
+python tools/render.py --workers 4   # dist/what-they-tell-us-about-ourselves.mp4
+```
+
+`tts.py` voices a line again when its words, or a word the voice respells in `film.json`, have changed; `python tools/tts.py --keep-timings` voices them again and fails if a line's length has moved. `captions.py` reads the lines from the built player, so run `build.py` first after changing one.
+
+## Publish
+
+`python tools/publish.py` copies `dist/film.js` and `dist/soundtrack.mp3` to `site/assets/what-they-tell-us-about-ourselves/`, with the Spanish captions (`src/i18n/es/captions.js`, as `captions.es.js`), and draws the poster, `site/assets/what-they-tell-us-about-ourselves-poster.jpg`, at the moment `film.json` names (`--keep-sound` when only the pictures changed). The soundtrack is kept outside Git: `python site-tools/media.py index --film what-they-tell-us-about-ourselves-en` records it in the film's [`audio.json`](../audio.json), and [docs/maintenance.md](../../../../docs/maintenance.md) says how it reaches its release. Then run `python site-tools/build_series.py` from the repository's root: it makes the series' pages, in English and Spanish, from the series' `series.json` and the film's `site.json`. The release workflow renders the video, `what-they-tell-us-about-ourselves.mp4`, and checks that the site's `film.js` is byte for byte the one this source builds: publish again after any change to the source.

@@ -33,9 +33,15 @@ text, why]); nothing else is skipped.
 The engine draws the film's captions larger as the player gets smaller, so each caption is also drawn as the smallest phone shows
 it, in every language the film has captions for, and held to its own box and to the frame.
 
-It fails on any text that leaves its box. The films made before this check are fixed series by series: what each still does wrong
-is listed in site-tools/fits_later.json ({film key: [[chapter id, text], ...]}), is shown as known and doesn't fail, and leaves the
-list with its fix (the check says when a listed piece of text fits again). --later writes the list again for the films checked.
+Letters aren't placed the same way everywhere, so each film is drawn twice, on every machine (WAYS): as the site's player draws
+it in a visitor's browser, each letter where its font says, to a part of a pixel; and as the video is drawn, on a machine that
+moves each letter to a whole pixel, where a line of words comes out up to about 1% wider or narrower (3 px in 420). Text that
+leaves its box either way is a fault, and the line says so when it is only one of them.
+
+It fails on any text that leaves its box. The films made before this check were fixed from a list, site-tools/fits_later.json
+({film key: [[chapter id, text], ...]}): what a film on it still does wrong is shown as known and doesn't fail, and leaves the list
+with its fix (the check says when a listed piece of text fits again). The list is empty since 12 November 2026, so every film is
+held to its boxes; --later writes it again for the films checked, should a stricter check find old faults to fix film by film.
 --json FILE writes what it found, with each piece of text's place in the frame."""
 import argparse, gzip, json, math, os, pathlib, sys
 
@@ -237,6 +243,13 @@ SHOWS = 12    # an edge shows where the picture differs by this much (of 255) ac
 TURN = 0.035  # radians: text turned further than this against a box (a slanted heading over a column) isn't held to it
 LONG = 1.5    # seconds in a row past its box that make a fault; less is a moment in passing
 PHONE = 288   # css px: the narrowest player, a phone 320 px wide held upright, where the captions are drawn largest
+# The ways a film's letters are placed, each as (its name, Chromium's --font-render-hinting for it, where a viewer sees it). With
+# no hinting, a letter sits where its font says, to a part of a pixel, as browsers on phones, Macs and Windows place it. With
+# full hinting, the browser that draws the films moves every letter of a film's own fonts to a whole pixel, and on Linux it does
+# so unless it is told otherwise: GitHub's runners, which check the films and render the videos, don't tell it, and the machines
+# the films are made on do (their launcher passes --font-render-hinting=none). The same film, with the same check, passed on one
+# and failed on the other. So the check asks for each way by name, and finds the same on every machine.
+WAYS = (('player', 'none', "the site's player"), ('video', 'full', 'the video'))
 
 
 def _inv(m):
@@ -417,8 +430,9 @@ def line(x, every=0.5):
         when += ' and across a change of chapter'
     if x['bad'] < x['n'] or x['run'] > x['bad']:
         when += ', %.1f s in a row' % ((x['run'] - 1) * every)
-    return '%-10s %6.1f s  %-42s %5.1f px past the %s of its box (%s)%s' % (
-        x['sid'], x['t'], repr(x['s'][:38]), x['mx'], x['side'], when, '  drawn by ' + x['who'] if x.get('who') else '')
+    only = '  in %s only' % WAYS[x['way']][2] if len(x.get('ways', ())) == 1 else ''
+    return '%-10s %6.1f s  %-42s %5.1f px past the %s of its box (%s)%s%s' % (
+        x['sid'], x['t'], repr(x['s'][:38]), x['mx'], x['side'], when, '  drawn by ' + x['who'] if x.get('who') else '', only)
 
 
 def captions(frames, tol=TOL):
@@ -443,6 +457,46 @@ def captions(frames, tol=TOL):
 
 def entry_page(e):
     return ROOT / e['dir'] / pathlib.Path(e['player']).parent / 'render.html'
+
+
+def at(here, lang, inv):
+    """The film whose source folder this is, as (key, name, the page it builds, its source folder), or None if it is no film's.
+    A film is known by its entry in a release.json, in the language asked for: the first films have no film.json, and CI runs
+    this check from every film's folder. A film that has no entry yet, as while it is made, is known by its film.json."""
+    here = pathlib.Path(here).resolve()
+    mine = [e for e in inv.values() if (ROOT / e['dir']).resolve() == here and e['lang'] == lang]
+    if mine:
+        return mine[0]['key'], None, entry_page(mine[0]), here
+    if (here / 'film.json').exists():
+        return here.parent.name, None, here / 'dist' / 'render.html', here
+    return None
+
+
+def launch(p, way=0):
+    """the browser that draws a film one of the WAYS: 0, as the site's player does, or 1, as the video is drawn"""
+    return p.chromium.launch(args=['--allow-file-access-from-files', '--font-render-hinting=' + WAYS[way][1]])
+
+
+def both(parts):
+    """What was found each of the WAYS, as sort() gives it, made one (never fits, a while, briefly): each piece of text once, as
+    the way it does worst in shows it. A fault in one way is a fault: 'ways' names the ways it is one in, and 'way' the one shown."""
+    best = {}
+    for way, part in enumerate(parts):
+        for kind, xs in enumerate(part):  # 0: never fits, 1: for a while, 2: briefly
+            for x in xs:
+                k, x = (x['sid'], x['s']), dict(x, way=way, ways=[WAYS[way][0]] if kind < 2 else [])
+                was = best.get(k)
+                if was is None:
+                    best[k] = [kind, x]
+                    continue
+                ways = was[1]['ways'] + x['ways']
+                if (kind, -x['mx']) < (was[0], -was[1]['mx']):
+                    was[:] = [kind, x]
+                was[1]['ways'] = ways
+    out = ([], [], [])
+    for kind, x in best.values():
+        out[kind].append(x)
+    return tuple(sorted(xs, key=lambda x: -x['mx']) for xs in out)
 
 
 def collect(browser, page, every, scale, t0=0, t1=1e9, phone=0, init=None, who=None):
@@ -490,29 +544,36 @@ def main():
             ap.error('unknown film key %s' % ', '.join(unknown))
         todo = [(k, inv[k]['name'], entry_page(inv[k]), ROOT / inv[k]['dir']) for k in keys]
     else:
-        here, lang = pathlib.Path.cwd(), os.environ.get('FILM_LANG', 'en')
-        if not (here / 'film.json').exists():
+        here = at(pathlib.Path.cwd(), os.environ.get('FILM_LANG', 'en'), inv)
+        if not here:
             ap.error('run this from a film\'s source folder, or name films with --film or --all')
-        mine = [e for e in inv.values() if (ROOT / e['dir']).resolve() == here.resolve() and e['lang'] == lang]
-        todo = [(mine[0]['key'], None, entry_page(mine[0]), here)] if mine else [(here.parent.name, None, here / 'dist' / 'render.html', here)]
+        todo = [here]
     out, failed, known, was = {}, [], later(), later()
     with sync_playwright() as p:
-        b = p.chromium.launch(args=['--allow-file-access-from-files'])
+        bs = [launch(p, way) for way in range(len(WAYS))]
+        b = bs[0]  # the captions on a phone are the player's
         for key, name, page, src in todo:
             if not page.exists():
                 raise SystemExit('%s: no %s; run its tools/build.py first' % (key, page))
-            r = collect(b, page, A.every, A.scale, A.t0, A.t1)
-            if A.raw:
-                pathlib.Path(A.raw).mkdir(parents=True, exist_ok=True)
-                with gzip.open(pathlib.Path(A.raw) / (key + '.json.gz'), 'wt', encoding='utf-8', compresslevel=3) as f:
-                    json.dump(dict(r, page=str(page)), f)
             meta = json.loads((src / 'film.json').read_text(encoding='utf-8')) if (src / 'film.json').exists() else {}
-            stats = measure_frames(r['frames'], A.tol)
-            never, awhile, briefly = sort(stats, A.every, meta.get('spills', ()))
+            parts = []
+            for way, bw in enumerate(bs):
+                r = collect(bw, page, A.every, A.scale, A.t0, A.t1)
+                if A.raw:
+                    pathlib.Path(A.raw).mkdir(parents=True, exist_ok=True)
+                    with gzip.open(pathlib.Path(A.raw) / ('%s%s.json.gz' % (key, '.' + WAYS[way][0] if way else '')), 'wt', encoding='utf-8', compresslevel=3) as f:
+                        json.dump(dict(r, page=str(page)), f)
+                st = measure_frames(r['frames'], A.tol)
+                if not way:
+                    stats = st  # how many pieces of text there are: the same either way
+                parts.append(sort(st, A.every, meta.get('spills', ())))
+            never, awhile, briefly = both(parts)
             found = never + awhile
-            if found:
-                for x, w in zip(found, collect(b, page, A.every, A.scale, who=[[x['t'], x['s']] for x in found])):
-                    x['who'] = w
+            for way, bw in enumerate(bs):
+                mine = [x for x in found if x['way'] == way]
+                if mine:
+                    for x, w in zip(mine, collect(bw, page, A.every, A.scale, who=[[x['t'], x['s']] for x in mine])):
+                        x['who'] = w
             # the captions, as the smallest phone draws them, in each language the film has captions for
             caps = []
             if A.t0 == 0 and A.t1 >= r['total']:
@@ -542,7 +603,8 @@ def main():
                 failed.append(key)
             if A.json:
                 pathlib.Path(A.json).write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding='utf-8')
-        b.close()
+        for bw in bs:
+            bw.close()
     if A.later:
         known = {k: v for k, v in known.items() if v and k in inv}
         if known != was:

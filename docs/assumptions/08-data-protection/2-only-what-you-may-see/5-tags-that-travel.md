@@ -6,7 +6,7 @@
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
-Film 14 of *Data protection and privacy*, film 5 of 8 of *Only what you may see*, folder `5-tags-that-travel`. The author is away and asked for every question to be answered on a stated assumption, and the film merged as a draft (5 November 2026, 11:53 and 12:02 UTC). Each row is a question this thread would have asked him, the assumption it took, and where it shows. Written 5 November 2026 and brought up to date as built on 10 November 2026 (rows 5, 7, 11, 13, 15, 20, 23 and 25 changed; rows 21 to 32 new; row 29 changed again when *Deleted means deleted* and *A person asks* took sections 12 and 13 first); sources and dates in [`research.md`](research.md).
+Film 14 of *Data protection and privacy*, film 5 of 8 of *Only what you may see*, folder `5-tags-that-travel`. The author is away and asked for every question to be answered on a stated assumption, and the film merged as a draft (5 November 2026, 11:53 and 12:02 UTC). Each row is a question this thread would have asked him, the assumption it took, and where it shows. Written 5 November 2026 and brought up to date as built on 10 November 2026 (rows 5, 7, 11, 13, 15, 20, 23 and 25 changed; rows 21 to 32 new; row 29 changed again when *Deleted means deleted* and *A person asks* took sections 12 and 13 first); sources and dates in the film thread's `research.md`, kept with the project's working files, not in the repository.
 
 | # | Question | Assumption | Where it shows |
 |---|---|---|---|

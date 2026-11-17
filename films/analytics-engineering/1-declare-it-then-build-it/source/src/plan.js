@@ -75,8 +75,9 @@ function mt_middle(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
 
 // the eight films to come, with the steps each takes (0-based, on the loop of ten)
 const MT_FILMS=[[2,"Start from a question",[0]],[3,"What makes it the same one",[1]],[4,"One row of what, and when",[2]],[5,"Promises and proofs",[3,4]],[6,"Built in layers",[5]],[7,"Who owns what",[9]],[8,"An agent on the team",[6,7]],[9,"Written once",[8]]];
-function mt_filmCard(ctx,x,y,n,title,a,on){if(a<=0.01)return;withA(ctx,a,()=>{const w=tw(ctx,title,20,700)+84;glass(ctx,x-w/2,y-28,w,56,14,mix(SOFT,WEED,on),{glow:10+10*on,ea:0.7,fill:"rgba(7,12,24,0.95)"});
-  T(ctx,n+"",x-w/2+22,y+8,{f:"mono",w:500,size:20,color:rgba(WEED,1)});T(ctx,title,x-w/2+52,y+8,{w:700,size:20});});}
+function mt_filmCardW(ctx,n,title){const sz=phSz(ctx,20);return 22+tw(ctx,n+"",sz,500,"mono")+18+tw(ctx,title,sz,700)+32;}
+function mt_filmCard(ctx,x,y,n,title,a,on){if(a<=0.01)return;withA(ctx,a,()=>{const sz=phSz(ctx,20),w=mt_filmCardW(ctx,n,title),h=sz+36;glass(ctx,x-w/2,y-h/2,w,h,14,mix(SOFT,WEED,on),{glow:10+10*on,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+  T(ctx,n+"",x-w/2+22,y+sz*0.38,{f:"mono",w:500,size:sz,color:rgba(WEED,1)});T(ctx,title,x-w/2+40+tw(ctx,n+"",sz,500,"mono"),y+sz*0.38,{w:700,size:sz});});}
 
 /* ---------- the labs' and scenarios' pictures ----------
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed mt_ so they never clash).

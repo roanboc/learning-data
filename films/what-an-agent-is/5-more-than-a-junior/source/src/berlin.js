@@ -517,12 +517,12 @@ function mj_paper(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;co
    right: the indices of the right ones. (x, y) the card's top left, cell the dots' spacing. */
 const MJ_RIGHT={blind:[7,23,41,58,76,92],seen:[]};
 {const miss=[4,15,19,33,47,52,61,70,84,88,97];for(let i=0;i<100;i++)if(!miss.includes(i))MJ_RIGHT.seen.push(i);}
-function mj_grid(ctx,x,y,cell,right,p,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return null;const pad=30,lh=60,w=cell*10+pad*2,h=cell*10+pad*2+lh;
+function mj_grid(ctx,x,y,cell,right,p,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return null;const pad=30,lh=60,w=Math.max(cell*10,o.lw||0)+pad*2,h=cell*10+pad*2+lh,gx=x+w/2-cell*5;   // o.lw: its label's width, where that is wider than the dots; the label and the dots sit in the middle
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:o.edge||null,edgeA:0.6});
-  ag_T(ctx,label,x+pad,y+pad+28,{w:700,size:30,col:AG.ink});
+  ag_T(ctx,label,x+w/2,y+pad+28,{w:700,size:30,col:AG.ink,align:"center"});
   const n=Math.floor(clamp(p,0,1)*100+1e-6),set=new Set(right);
-  for(let i=0;i<100;i++){const cx=x+pad+cell*(i%10+0.5),cy=y+pad+lh+cell*(Math.floor(i/10)+0.5),r=cell*0.3;
+  for(let i=0;i<100;i++){const cx=gx+cell*(i%10+0.5),cy=y+pad+lh+cell*(Math.floor(i/10)+0.5),r=cell*0.3;
     if(i>=n){ctx.strokeStyle="rgba(86,92,100,0.22)";ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();continue;}
     const ok=set.has(i),pop=i===n-1?ag_eo((p*100-i)):1;ctx.fillStyle=ok?rgba(AG.green,1):"rgba(150,150,156,0.55)";ctx.beginPath();ctx.arc(cx,cy,r*lerp(0.4,1,pop),0,TAU);ctx.fill();}
   ctx.restore();return{x,y,w,h};}

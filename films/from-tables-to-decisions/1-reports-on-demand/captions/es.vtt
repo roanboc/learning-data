@@ -69,146 +69,146 @@ Jueves 5 de noviembre de 2026: día de pago en la universidad.
 00:01:54.212 --> 00:02:00.615
 Rohan Desai, de Finanzas, está fijando el presupuesto del año próximo para la docencia ocasional en la Facultad de Salud.
 
-00:02:01.715 --> 00:02:08.666
+00:02:01.715 --> 00:02:08.470
 La docencia ocasional la da personal que cobra por las horas que trabaja, como Linh Nguyen, tutora de informática de la salud.
 
-00:02:09.766 --> 00:02:15.362
+00:02:09.570 --> 00:02:15.166
 Primero necesita un número: cuánto le ha costado la docencia ocasional a Salud este semestre, hasta ahora.
 
-00:02:16.662 --> 00:02:19.999
+00:02:16.466 --> 00:02:19.803
 Antes eso pedía un reporte del equipo de datos, y una semana.
 
-00:02:20.899 --> 00:02:23.476
+00:02:20.703 --> 00:02:23.280
 Hoy le pregunta a Genie One, con sus palabras.
 
-00:02:24.576 --> 00:02:31.586
+00:02:24.380 --> 00:02:31.390
 Como la hora en 1936, la respuesta llega cuando pregunta: A$1.84 millones, hasta ahora.
 
-00:02:33.086 --> 00:02:38.823
+00:02:32.890 --> 00:02:38.627
 Con ella, Genie dice qué contó: las declaraciones de horas aprobadas de docencia ocasional, más las cargas sociales.
 
-00:02:39.723 --> 00:02:42.984
+00:02:39.527 --> 00:02:42.788
 Las cargas sociales son lo que la universidad paga además del sueldo.
 
-00:02:43.884 --> 00:02:46.899
+00:02:43.688 --> 00:02:46.703
 Y muestra la consulta que corrió, para que cualquiera la revise.
 
-00:02:48.199 --> 00:02:50.512
+00:02:48.003 --> 00:02:50.316
 Su siguiente pregunta: ¿y el semestre 1?
 
-00:02:51.412 --> 00:02:54.723
+00:02:51.216 --> 00:02:54.527
 A$2.21 millones, con todo ya declarado.
 
-00:02:56.023 --> 00:03:00.225
+00:02:55.827 --> 00:03:00.029
 Antes del almuerzo, el presupuesto de Salud queda fijado, con las cifras de este año.
 
-00:03:03.325 --> 00:03:10.116
+00:03:03.129 --> 00:03:09.920
 Genie One respondió desde un Genie Agent, que Sam y Jun, del equipo de datos, configuraron para este único tema.
 
-00:03:11.416 --> 00:03:13.705
+00:03:11.220 --> 00:03:13.509
 Dos películas anteriores muestran cómo se arma uno.
 
-00:03:14.805 --> 00:03:16.493
+00:03:14.609 --> 00:03:16.297
 Esto es lo que el equipo puso en él.
 
-00:03:17.593 --> 00:03:23.133
+00:03:17.397 --> 00:03:22.937
 Sus datos: una medida, el costo de la docencia ocasional, por facultad, asignatura y período lectivo.
 
-00:03:24.433 --> 00:03:28.360
+00:03:24.237 --> 00:03:28.164
 Rohan la definió una vez, en septiembre, como muestra la próxima película.
 
-00:03:29.660 --> 00:03:31.585
+00:03:29.464 --> 00:03:31.389
 Sus reglas, con las palabras de sus dueños.
 
-00:03:32.685 --> 00:03:36.114
+00:03:32.489 --> 00:03:35.918
 Las de Rohan: qué significa costo, y qué significa este semestre.
 
-00:03:37.414 --> 00:03:41.124
+00:03:37.218 --> 00:03:40.928
 La de Ingrid, de RR. HH.: solo totales, nunca el sueldo de alguien.
 
-00:03:42.424 --> 00:03:45.187
+00:03:42.228 --> 00:03:44.991
 Así que lee la medida, nunca las declaraciones de nadie.
 
-00:03:46.687 --> 00:03:51.325
+00:03:46.491 --> 00:03:51.129
 Sus ejemplos: preguntas que hace Finanzas, cada una con la consulta que la responde.
 
-00:03:52.625 --> 00:03:56.942
+00:03:52.429 --> 00:03:56.746
 Y sus pruebas: preguntas con respuestas conocidas, que se corren tras cada cambio.
 
-00:03:58.242 --> 00:04:02.959
+00:03:58.046 --> 00:04:02.763
 Cada respuesta se ejecuta como la persona que pregunta, así que ve solo lo que puede leer.
 
-00:04:04.259 --> 00:04:06.170
+00:04:04.063 --> 00:04:05.974
 Así se movió el trabajo del equipo de datos.
 
-00:04:07.470 --> 00:04:14.577
+00:04:07.274 --> 00:04:14.381
 No un reporte para cada pregunta, sino buenos modelos y su contexto, construidos una vez, para que personas y agentes los exploren.
 
-00:04:16.277 --> 00:04:20.901
+00:04:16.081 --> 00:04:20.705
 Empezaron con poco, y Rohan, quien mejor conoce el tema, fue su primer usuario.
 
-00:04:24.001 --> 00:04:27.529
+00:04:23.805 --> 00:04:27.333
 Algunas preguntas vuelven cada día de pago, de las mismas personas.
 
-00:04:28.629 --> 00:04:30.082
+00:04:28.433 --> 00:04:29.886
 ¿Cuánto costó la nómina?
 
-00:04:31.182 --> 00:04:33.653
+00:04:30.986 --> 00:04:33.457
 ¿Cuántas horas ocasionales, en cada facultad?
 
-00:04:34.753 --> 00:04:36.769
+00:04:34.557 --> 00:04:36.573
 ¿Cuántas declaraciones esperan todavía aprobación?
 
-00:04:38.069 --> 00:04:44.000
+00:04:37.873 --> 00:04:43.804
 Como la hora en 1936, reciben una máquina propia: un tablero, que se lee de un vistazo.
 
-00:04:45.500 --> 00:04:49.675
+00:04:45.304 --> 00:04:49.479
 Se actualiza tras cada nómina, y llega a las personas que actúan con él.
 
-00:04:50.975 --> 00:04:56.890
+00:04:50.779 --> 00:04:56.694
 Hoy: A$9.6 millones, pagados a 2,960 personas.
 
-00:04:58.190 --> 00:05:01.977
+00:04:57.994 --> 00:05:01.781
 Y 143 declaraciones siguen esperando, para la próxima nómina.
 
-00:05:03.277 --> 00:05:08.147
+00:05:03.081 --> 00:05:07.951
 Para una pregunta que no muestra, su botón Ask Genie abre el mismo Genie Agent.
 
-00:05:09.447 --> 00:05:12.963
+00:05:09.251 --> 00:05:12.767
 Reemplazó un reporte de 40 páginas, por correo cada día de pago.
 
-00:05:14.063 --> 00:05:17.184
+00:05:13.867 --> 00:05:16.988
 Las tres cifras que la gente leía estaban en su primera página.
 
-00:05:18.484 --> 00:05:19.656
+00:05:18.288 --> 00:05:19.460
 Ahora está retirado.
 
-00:05:21.156 --> 00:05:27.987
+00:05:20.960 --> 00:05:27.791
 Una regla práctica: una pregunta merece un tablero cuando vuelve con un calendario fijo, y alguien actúa según lo que muestra.
 
-00:05:29.687 --> 00:05:32.123
+00:05:29.491 --> 00:05:31.927
 Cualquier otra pregunta se hace cuando se necesita.
 
-00:05:35.223 --> 00:05:42.232
+00:05:35.027 --> 00:05:42.036
 En 1936, la pregunta que todos hacían tuvo una máquina propia, y cualquiera podía hacerla, a cualquier hora.
 
-00:05:43.332 --> 00:05:47.227
+00:05:43.136 --> 00:05:47.031
 En la universidad, las preguntas que se repiten tienen un tablero.
 
-00:05:48.127 --> 00:05:53.733
+00:05:47.931 --> 00:05:53.537
 Cualquier otra pregunta se responde cuando se hace, desde buenos modelos y su contexto, construidos una vez.
 
-00:05:54.833 --> 00:06:00.004
+00:05:54.637 --> 00:05:59.808
 Y el presupuesto de docencia ocasional de Salud se fijó con las cifras de este año, en una mañana, no en una semana.
 
-00:06:01.304 --> 00:06:04.882
+00:06:01.108 --> 00:06:04.686
 Ninguna de estas ideas es nueva; las herramientas ahora las hacen más fáciles.
 
-00:06:05.782 --> 00:06:13.780
+00:06:05.586 --> 00:06:13.584
 Así que no reinventes la rueda: investiga, adapta, implementa e itera, empezando por la documentación oficial, enlazada en esta página.
 
-00:06:15.080 --> 00:06:18.765
+00:06:14.884 --> 00:06:18.569
 Pide la respuesta; deja los tableros para las preguntas que se repiten.
 
-00:06:20.465 --> 00:06:26.234
+00:06:20.269 --> 00:06:26.038
 Después: el costo de la docencia ocasional, definido en formato abierto, para que todos lo cuenten igual.

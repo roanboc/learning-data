@@ -10,8 +10,8 @@
   "story": ["kept"],
   "poster": ["practice", "seam", 2.0],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bRavi\\b", "Rah-vee"],
     ["\\bTōkaidō's\\b", "Toh-kai-doh's"],
     ["\\bTōkaidō\\b", "Toh-kai-doh"],

@@ -174,7 +174,7 @@ scene("heat",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
   ctx.restore();
   arrive(ctx,760,110,t,w("now","hurts"),()=>tag(ctx,760,110,"where it hurts",[255,140,120],{align:"center",size:32}),{dy:10});
   // a key, then what it's for
-  const lg=fin(t,tH[0],0.5)*(1-fin(t,tM-0.3,0.4));if(lg>0)withA(ctx,lg,()=>[["works",HEAT.g,640],["strained",HEAT.a,960],["hurts",HEAT.r,1280]].forEach(([s_,col,x])=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x-70,866,12,0,TAU);ctx.fill();T(ctx,s_,x-48,876,{w:700,size:30,color:rgba(col,1)});}));
+  const lg=fin(t,tH[0],0.5)*(1-fin(t,tM-0.3,0.4));if(lg>0)withA(ctx,lg,()=>[["works",HEAT.g,640],["strained",HEAT.a,960],["hurts",HEAT.r,1280]].forEach(([s_,col,x])=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x-70,866,12,0,TAU);ctx.fill();T(ctx,s_,x-48,876,{w:700,size:30,color:rgba(mix(col,[255,255,255],0.2),1)});}));
   arrive(ctx,960,870,t,w("money","money")-0.2,()=>tag(ctx,960,870,"where it hurts is where the money should go",TRUST,{align:"center",size:30}),{dy:12});
   vign(ctx,S);});
 

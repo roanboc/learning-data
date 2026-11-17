@@ -1969,6 +1969,32 @@ function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3]
 // how far the camera is zoomed in at t, for the same keys: a whole canvas seen from afar is context, and its notes are decoration
 function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;z=lerp(z,keys[i][3],u);}return z;}
 
+// The colour of the five series on enterprise architecture (17 November 2026). They drew on a brown wall, a brown ground for scenes in the
+// past and brown date pills, earthy beside their stories; now the wall is a slate blue under a cool light, a scene in the past a night blue,
+// and the layers' and the series' colours are clearer. The dark ground behind the diagrams stays as the whole site draws it: no need to
+// colour a picture whose ground is already dark (the author, 17 November 2026). Only these series' builds bundle this file, right after
+// ea.js, so it sets their look over ea.js and over the helpers the whole site shares (From words to data's histBg and yearTag), which every
+// other film keeps as they are. The master data films borrow ea.js for its glyphs and keep its first colours too.
+const EA_WALL=["#162b52","#0a1428"];                        // the wall the notes go on: a slate blue
+const EA_WALLGLOW=[[0.1,0.9,0.5,[60,180,210],0.06],[0.92,0.1,0.5,[160,110,240],0.06]];   // soft light on it: teal, bottom left; violet, top right
+const EA_HIST=["#16204a","#06071a"];                        // a scene in the past
+const EA_PILL="rgba(10,14,40,0.9)";                         // the glass of a date's pill
+// soft pools of coloured light: [x, y, radius, colour, strength], with x, y and the radius as parts of the frame's width and height
+function eaGlow(ctx,pools){pools.forEach(([x,y,r,c,a])=>{const g=ctx.createRadialGradient(W*x,H*y,0,W*x,H*y,W*r);g.addColorStop(0,rgba(c,a));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});}
+// the six layers and the series' own colour, deeper and clearer than ea.js's first ones
+[[188,162,255],[255,196,112],[255,228,96],[255,166,134],[108,200,255],[138,228,118]].forEach((c,i)=>{LAY6[i][1]=c;});
+EAC.splice(0,3,104,230,192);
+// the wall of canvases and sticky notes (ea.js's wallBg, in slate blue under a cool light)
+wallBg=function(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,EA_WALL[0]);g.addColorStop(1,EA_WALL[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){const x=hash(i,31)*W,y=hash(i,32)*H,r=60+hash(i,33)*200,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(190,225,255,"+(0.012+0.02*hash(i,34))+")");gg.addColorStop(1,"rgba(190,225,255,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  const l=ctx.createRadialGradient(W*0.5,H*0.25,40,W*0.5,H*0.4,W*0.7);l.addColorStop(0,"rgba(150,210,255,"+(o.light==null?0.10:o.light)+")");l.addColorStop(1,"rgba(150,210,255,0)");ctx.fillStyle=l;ctx.fillRect(0,0,W,H);eaGlow(ctx,EA_WALLGLOW);};
+// a scene in the past keeps its lamp's warm light and dust, on a night blue
+{const histBg0=histBg;histBg=function(ctx,S,t,o){return histBg0(ctx,S,t,Object.assign({top:EA_HIST[0],bottom:EA_HIST[1]},o));};}
+// the pills that date a moment (ea.js's eaYear and From words to data's yearTag), on blue glass
+eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,28,500,"mono")+52;glass(ctx,x,y-30,w,60,30,c,{glow:14,ea:0.8,fill:EA_PILL});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
+yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
+
 /* ===== What it must be able to do: the film's own pictures (prefixed d4_) =====
    The 1400s: the Andes at dusk, a road winding across the slopes, small relay posts along it, chasqui runners who carry a message
    from one post to the next, and a khipu, the knotted cords a message could be kept in. Today: a printed org chart, capability cards
@@ -1982,14 +2008,14 @@ const HEAT={g:[110,200,120],a:[245,176,64],r:[232,92,80],n:[150,150,160]};
 
 /* ---------- the 1400s: the Andes ---------- */
 // three ridges, far to near, each a sum of slow waves; the far one keeps a little snow
-const D4_RIDGES=[[520,170,1,[96,74,70]],[660,120,2,[62,44,38]],[800,80,3,[40,28,24]]];
+const D4_RIDGES=[[520,170,1,[104,86,142]],[660,120,2,[54,54,100]],[800,80,3,[26,46,54]]];
 const d4_ridgeY=(x,base,amp,seed)=>base-amp*(0.55*Math.sin(x*0.0042+seed*1.7)+0.3*Math.sin(x*0.011+seed*3.1)+0.15*Math.sin(x*0.027+seed*5.3));
 function d4_andes(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
   // the first stars, and the last of the light low in the sky
-  const sk=ctx.createLinearGradient(0,0,0,760);sk.addColorStop(0,"rgba(24,26,52,0.55)");sk.addColorStop(1,"rgba(150,86,60,0.22)");ctx.fillStyle=sk;ctx.fillRect(-400,-300,W+800,1200);
+  const sk=ctx.createLinearGradient(0,0,0,760);sk.addColorStop(0,"rgba(18,34,98,0.55)");sk.addColorStop(1,"rgba(236,122,92,0.24)");ctx.fillStyle=sk;ctx.fillRect(-400,-300,W+800,1200);
   for(let i=0;i<90;i++){const x=hash(i,41)*(W+400)-200,y=hash(i,42)*420-120,tw_=0.5+0.5*Math.sin(t*(0.6+hash(i,43))+i);ctx.fillStyle="rgba(255,244,220,"+(0.12+0.35*hash(i,44)*tw_)+")";ctx.beginPath();ctx.arc(x,y,0.8+1.3*hash(i,45),0,TAU);ctx.fill();}
   D4_RIDGES.forEach(([base,amp,seed,col],k)=>{ctx.beginPath();ctx.moveTo(-400,H+400);for(let x=-400;x<=W+400;x+=16)ctx.lineTo(x,d4_ridgeY(x,base,amp,seed));ctx.lineTo(W+400,H+400);ctx.closePath();
-    const g=ctx.createLinearGradient(0,base-amp,0,base+360);g.addColorStop(0,rgba(mix(col,[255,214,170],k===0?0.42:0.16),1));g.addColorStop(1,rgba(mix(col,[8,6,8],0.4),1));ctx.fillStyle=g;ctx.fill();
+    const g=ctx.createLinearGradient(0,base-amp,0,base+360);g.addColorStop(0,rgba(mix(col,[255,214,170],k===0?0.42:0.16),1));g.addColorStop(1,rgba(mix(col,[6,8,24],0.4),1));ctx.fillStyle=g;ctx.fill();
     // the last light along each crest
     ctx.save();ctx.strokeStyle=rgba([255,206,150],0.22-0.05*k);ctx.lineWidth=2.4;ctx.beginPath();for(let x=-400;x<=W+400;x+=16){const y=d4_ridgeY(x,base,amp,seed);x===-400?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();ctx.restore();});});}
 // the road: a winding line across the near slopes, and the posts along it, at these fractions of its length
@@ -1999,7 +2025,7 @@ const D4_ROAD=(()=>{const K=[[-120,930],[160,880],[380,790],[600,830],[820,730],
 const D4_PU=[0.12,0.3,0.48,0.66,0.84];
 // the road drawn up to p, as a pale, worn track; o.gap [u0,u1] leaves a stretch out (for one that's being rebuilt)
 function d4_road(ctx,p,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01||p<=0)return;withA(ctx,a,()=>{const n=220,gp=o.gap;
-  [[16,"rgba(20,14,10,0.6)"],[9,"rgba(196,170,132,0.75)"],[3,"rgba(236,214,176,0.55)"]].forEach(([lw,c])=>{ctx.save();ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.lineCap="round";ctx.beginPath();let on=false;
+  [[16,"rgba(10,12,32,0.6)"],[9,"rgba(196,170,132,0.75)"],[3,"rgba(236,214,176,0.55)"]].forEach(([lw,c])=>{ctx.save();ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.lineCap="round";ctx.beginPath();let on=false;
     for(let i=0;i<=n;i++){const u=i/n*p;if(gp&&u>gp[0]&&u<gp[1]){on=false;continue;}const q=at(D4_ROAD,u);if(!on){ctx.moveTo(q.x,q.y);on=true;}else ctx.lineTo(q.x,q.y);}ctx.stroke();ctx.restore();});});}
 // a stretch of road being rebuilt: stones set down one by one along it as p goes from 0 to 1, then the track over them
 function d4_rebuild(ctx,u0,u1,p,a){if(a<=0.01)return;withA(ctx,a,()=>{const n=14;for(let i=0;i<n;i++){const q=clamp(p*n*1.2-i,0,1);if(q<=0)continue;const pt=at(D4_ROAD,lerp(u0,u1,(i+0.5)/n));
@@ -2291,7 +2317,7 @@ scene("heat",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
   ctx.restore();
   arrive(ctx,760,110,t,w("now","hurts"),()=>tag(ctx,760,110,"where it hurts",[255,140,120],{align:"center",size:32}),{dy:10});
   // a key, then what it's for
-  const lg=fin(t,tH[0],0.5)*(1-fin(t,tM-0.3,0.4));if(lg>0)withA(ctx,lg,()=>[["works",HEAT.g,640],["strained",HEAT.a,960],["hurts",HEAT.r,1280]].forEach(([s_,col,x])=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x-70,866,12,0,TAU);ctx.fill();T(ctx,s_,x-48,876,{w:700,size:30,color:rgba(col,1)});}));
+  const lg=fin(t,tH[0],0.5)*(1-fin(t,tM-0.3,0.4));if(lg>0)withA(ctx,lg,()=>[["works",HEAT.g,640],["strained",HEAT.a,960],["hurts",HEAT.r,1280]].forEach(([s_,col,x])=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x-70,866,12,0,TAU);ctx.fill();T(ctx,s_,x-48,876,{w:700,size:30,color:rgba(mix(col,[255,255,255],0.2),1)});}));
   arrive(ctx,960,870,t,w("money","money")-0.2,()=>tag(ctx,960,870,"where it hurts is where the money should go",TRUST,{align:"center",size:30}),{dy:12});
   vign(ctx,S);});
 

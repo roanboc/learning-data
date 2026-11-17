@@ -1,6 +1,6 @@
 # Rebuilding Owning the outcome
 
-*Owning the outcome*, film 1 of 4 of *Ownership and performance*, the last series of the module *Leading data people*, is generated from code like every other film here. It is the first film drawn with the people kit, *Ink line* ([`../../../people-first/shared/`](../../../people-first/shared/README.md)): whole people in the places where they work and meet, in flat colour with one even dark line. It also uses the agent films' camera and shots, *A Sharper Sketch*'s scenes and *The Inner Life of Data*'s engine, fonts and voice. The film never changes a shared kit for itself: only what is new in this film lives here, each top-level name prefixed `oo_` or `OO_`.
+*Owning the outcome*, film 1 of 4 of *Ownership and performance*, the last series of the module *Leading data people*, is generated from code like every other film here. It was drawn with the people kit, *Ink line*, before any other film ([`../../../people-first/shared/`](../../../people-first/shared/README.md)): whole people in the places where they work and meet, in flat colour with one even dark line. It also uses the agent films' camera and shots, *A Sharper Sketch*'s scenes and *The Inner Life of Data*'s engine, fonts and voice. The film never changes a shared kit for itself: only what is new in this film lives here, each top-level name prefixed `oo_` or `OO_`.
 
 | File | What it holds |
 |---|---|

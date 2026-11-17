@@ -2,7 +2,7 @@
 
 The films of *Leading data people* are about people, so they draw people first: whole, in a place where they act, meet or move, with faces that react and hands that rest on things. The author found the module's films disappointing: half-figures lined up in front of a plain wall, a giant bust beside small whole people, cards and charts carrying the story while the people stood by ([issue 391](https://github.com/roanboc/learning-data/issues/391), and 17 November 2026). He asked for "a more cartoon or soft style", easy to draw people in and light to play, and chose **Ink line** among four looks on 17 November 2026: flat colour, with one even dark line round every form.
 
-The kit is that look, a person who can stand, walk, sit, kneel, turn and react, the things people work with, the words on the frame, the university's places, and the tools that build and check a film. The first film drawn with it is *Owning the outcome*.
+The kit is that look, a person who can stand, walk, sit, kneel, turn and react, the things people work with, the words on the frame, the university's places, and the tools that build and check a film. *Owning the outcome* was drawn with it before any other film.
 
 Never change these files for one film. A film's own pictures, places and helpers go in its own `source/src/`, with a prefix of its own (such as `oo_` for *Owning the outcome*); a change every film needs goes in a pull request of its own, and it is a new version of every film whose `release.json` names this folder (AGENTS.md, *A shared drawing/timeline fix is a new version of every consumer*).
 

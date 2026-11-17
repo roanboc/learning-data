@@ -320,8 +320,7 @@ VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surn
                (re.compile(r"\bapartheid\b|\bapart-ate\b"), "apart hate",
                 "apartheid is said apart-hate, as South Africans say it, with the h of the Afrikaans heid"),
                (re.compile(r"\b[Mm]idwifery\b"), "mid-wiffery", "midwifery is said mid-WIF-ery"),
-               (re.compile(r"\bDAMA\b|\bDahmah?\b"), "Dah-ma", "DAMA is said DAH-mah"),
-               (re.compile(r"\bYAML\b"), "yammel", "YAML is said YAM-ul")]
+               (re.compile(r"\bDAMA\b|\bDahmah?\b"), "Dah-ma", "DAMA is said DAH-mah")]
 # The films made before 17 November 2026 that still say a name above another way, each with the names it does: each leaves the
 # list when it is voiced again with the name's spelling. check_site.py fails a film or a name the list keeps once it is fixed.
 VOICE_LATER = ROOT / "site-tools" / "voice_later.json"

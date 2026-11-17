@@ -1,5 +1,5 @@
 {
- "player": "6cd061aaf0c12474",
+ "player": "2edf0a0b19985b98",
  "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
  "places": {
   "place:valley": {
@@ -12,12 +12,12 @@
      38.0
     ],
     [
-     132.75,
-     133.25
+     132.5,
+     133.0
     ],
     [
-     264.25,
-     271.25
+     264.0,
+     271.0
     ]
    ]
   },
@@ -28,15 +28,15 @@
    "shows": [
     [
      37.0,
-     65.5
+     65.25
     ],
     [
      196.0,
-     238.0
+     237.75
     ],
     [
-     270.0,
-     285.25
+     269.75,
+     285.0
     ]
    ]
   },
@@ -46,11 +46,11 @@
    "h": 1080,
    "shows": [
     [
-     64.5,
-     118.75
+     64.25,
+     118.5
     ],
     [
-     181.0,
+     180.75,
      197.0
     ]
    ]
@@ -61,12 +61,12 @@
    "h": 1080,
    "shows": [
     [
-     117.75,
+     117.5,
      143.5
     ],
     [
-     157.25,
-     182.0
+     157.0,
+     181.75
     ],
     [
      236.75,
@@ -80,7 +80,7 @@
    "h": 1080,
    "shows": [
     [
-     132.75,
+     132.5,
      143.5
     ]
    ]
@@ -91,8 +91,8 @@
    "h": 1080,
    "shows": [
     [
-     142.5,
-     158.25
+     142.25,
+     158.0
     ]
    ]
   }

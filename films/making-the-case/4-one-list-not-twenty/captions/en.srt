@@ -135,105 +135,105 @@ Divided by the effort, it puts small, valuable work first.
 And time is part of that value: what would be lost by waiting counts too.
 
 35
-00:04:08,948 --> 00:04:16,508
+00:04:08,948 --> 00:04:16,646
 Anil's request is small, and it prevents a risk: his own spreadsheet keeps a copy of staff records. It goes near the top.
 
 36
-00:04:18,208 --> 00:04:25,818
+00:04:18,346 --> 00:04:25,956
 A dashboard asked for three times names no decision yet. It waits, with a note saying why, and when it's looked at again.
 
 37
-00:04:27,518 --> 00:04:29,877
+00:04:27,656 --> 00:04:30,015
 Never by who asks, or how loudly.
 
 38
-00:04:31,777 --> 00:04:38,754
+00:04:31,915 --> 00:04:38,892
 The list is a board in the tracker that anyone at the university can see, and the data council reads it every month.
 
 39
-00:04:41,454 --> 00:04:49,676
+00:04:41,592 --> 00:04:49,814
 Next, the team's time, split on purpose: half for the roadmap, a third for requests, and the rest for running and improving what it has.
 
 40
-00:04:51,576 --> 00:04:56,159
+00:04:51,714 --> 00:04:56,297
 Without the split, requests would take it all, and nothing on the roadmap would move.
 
 41
-00:04:58,059 --> 00:05:05,734
+00:04:58,197 --> 00:05:05,872
 And at most six pieces of work are in progress at once: three for the roadmap, two for requests, one for running and improving.
 
 42
-00:05:07,834 --> 00:05:13,431
+00:05:07,972 --> 00:05:13,569
 Kanban, as David J. Anderson set it out, calls this a limit on work in progress.
 
 43
-00:05:15,531 --> 00:05:20,255
+00:05:15,669 --> 00:05:20,393
 With fewer things started, each finishes sooner, and people get their answers sooner.
 
 44
-00:05:22,555 --> 00:05:26,464
+00:05:22,693 --> 00:05:26,602
 When one is done, the top of the list moves in. Finish, then start.
 
 45
-00:05:29,164 --> 00:05:36,255
+00:05:29,302 --> 00:05:36,393
 On Thursday 24 June, the University Council asks for the timetable to change from 2028.
 
 46
-00:05:38,155 --> 00:05:42,452
+00:05:38,293 --> 00:05:42,590
 The registrar's office needs the rooms' data for it by the end of August.
 
 47
-00:05:43,152 --> 00:05:48,524
+00:05:43,290 --> 00:05:48,662
 That date can't move: a late timetable is a risk to prevent. So it goes near the top.
 
 48
-00:05:50,624 --> 00:05:57,634
+00:05:50,762 --> 00:05:57,772
 On Monday 12 July, Clara, in Planning, asks for a new student forecast model, by the end of August too.
 
 49
-00:05:59,534 --> 00:06:05,191
+00:05:59,672 --> 00:06:05,329
 It goes on the same list, weighed the same way, and it hears not now, with a reason and a date.
 
 50
-00:06:07,091 --> 00:06:12,784
+00:06:07,229 --> 00:06:12,922
 The reason: the timetable's date can't move, and her new model is for December's admissions.
 
 51
-00:06:14,284 --> 00:06:19,982
+00:06:14,422 --> 00:06:20,120
 The date: the current model refreshed by the end of August, and the new one in October, still in time.
 
 52
-00:06:22,282 --> 00:06:28,105
+00:06:22,420 --> 00:06:28,243
 Saying it well, face to face, is a skill of its own, shown in the leading data people module.
 
 53
-00:06:30,205 --> 00:06:39,184
+00:06:30,343 --> 00:06:39,322
 Emergency departments still do this, and call it triage: in Australia, five categories, each with a longest wait, from at once to two hours.
 
 54
-00:06:41,484 --> 00:06:43,258
+00:06:41,622 --> 00:06:43,396
 Not now always comes with a when.
 
 55
-00:06:45,958 --> 00:06:50,173
+00:06:46,096 --> 00:06:50,311
 Larrey brought the wounded in from wherever they fell, and treated the worst first.
 
 56
-00:06:51,873 --> 00:06:58,503
+00:06:52,011 --> 00:06:58,641
 Helena's team does the same with data: every request through one door, on one list, the most needed first.
 
 57
-00:07:00,203 --> 00:07:05,003
+00:07:00,341 --> 00:07:05,141
 On Monday, close every side door, kindly, and ask what each request is for.
 
 58
-00:07:06,103 --> 00:07:08,936
+00:07:06,241 --> 00:07:09,074
 Order the list in the open, by value and effort.
 
 59
-00:07:10,036 --> 00:07:14,857
+00:07:10,174 --> 00:07:14,995
 Protect time for the roadmap and for running what you have, and limit what's in progress.
 
 60
-00:07:15,957 --> 00:07:20,463
+00:07:16,095 --> 00:07:20,601
 Give every request that waits a reason and a date, and show the list to everyone.

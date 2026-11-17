@@ -15,245 +15,245 @@ In 1947, the register gave everyone a number for life.
 One person, written down once, followed wherever they went.
 
 5
-00:00:35,883 --> 00:00:40,774
+00:00:35,883 --> 00:00:40,650
 Today, at the university. Linh Nguyen graduated here in 2022.
 
 6
-00:00:42,074 --> 00:00:45,127
+00:00:41,950 --> 00:00:45,003
 Last year, she came back to study health informatics.
 
 7
-00:00:46,227 --> 00:00:48,910
+00:00:46,103 --> 00:00:48,786
 She applied online, and got a new student number.
 
 8
-00:00:50,410 --> 00:00:53,156
+00:00:50,286 --> 00:00:53,032
 Nothing linked it to the number she graduated with.
 
 9
-00:00:55,656 --> 00:00:58,325
+00:00:55,532 --> 00:00:58,201
 Now the university has five records of her.
 
 10
-00:00:59,425 --> 00:01:02,669
+00:00:59,301 --> 00:01:02,545
 Two in the student system, under the old number and the new.
 
 11
-00:01:03,969 --> 00:01:07,314
+00:01:03,845 --> 00:01:07,190
 One at the alumni office, which knows only the old one.
 
 12
-00:01:08,614 --> 00:01:12,236
+00:01:08,490 --> 00:01:12,112
 One in HR, which pays her to tutor a first-year unit.
 
 13
-00:01:13,436 --> 00:01:17,167
+00:01:13,312 --> 00:01:17,043
 And one at the research office, for a project she joined this year.
 
 14
-00:01:18,567 --> 00:01:23,257
+00:01:18,443 --> 00:01:23,133
 So her application asked for a transcript of the degree the university gave her.
 
 15
-00:01:24,957 --> 00:01:29,617
+00:01:24,833 --> 00:01:29,493
 And the alumni office invites her back, for a master's. She's already doing one.
 
 16
-00:01:31,317 --> 00:01:35,478
+00:01:31,193 --> 00:01:35,354
 Five records, five Linhs, and nobody sees that she's one person.
 
 17
-00:01:38,178 --> 00:01:44,636
+00:01:38,054 --> 00:01:44,512
 Linh is master data: one of the things the university is about, shared by every process and system.
 
 18
-00:01:45,936 --> 00:01:50,331
+00:01:45,812 --> 00:01:50,207
 The lists that sort her, like “casual tutor” or a country, are reference data.
 
 19
-00:01:51,531 --> 00:01:55,915
+00:01:51,407 --> 00:01:55,791
 What happens to her, an enrolment or a payslip, is transactional data.
 
 20
-00:01:57,015 --> 00:01:59,657
+00:01:56,891 --> 00:01:59,533
 And the definition of a learner is metadata.
 
 21
-00:02:00,357 --> 00:02:04,231
+00:02:00,233 --> 00:02:04,107
 This series is about the first two, and the next film tells them apart.
 
 22
-00:02:06,931 --> 00:02:11,612
+00:02:06,807 --> 00:02:11,538
 Noor, the university's data architect, opens the university's own model.
 
 23
-00:02:12,312 --> 00:02:17,872
+00:02:12,238 --> 00:02:17,798
 It has a learner. A good one, with keys from three systems and a decision for every match.
 
 24
-00:02:19,172 --> 00:02:24,073
+00:02:19,098 --> 00:02:23,999
 But a learner isn't someone. It's how someone relates to the university, for a while.
 
 25
-00:02:25,673 --> 00:02:29,280
+00:02:25,599 --> 00:02:29,206
 The model has no person. She says so, and writes it down.
 
 26
-00:02:31,780 --> 00:02:33,610
+00:02:31,706 --> 00:02:33,536
 So she draws four things apart.
 
 27
-00:02:34,310 --> 00:02:36,013
+00:02:34,236 --> 00:02:35,939
 The person: someone, once.
 
 28
-00:02:37,213 --> 00:02:42,055
+00:02:37,139 --> 00:02:41,981
 The roles: student, tutor, researcher, each with a start, an end, and an owner.
 
 29
-00:02:43,355 --> 00:02:49,183
+00:02:43,281 --> 00:02:49,109
 The contact points: an email or an address, each with a purpose, and some shared by two people.
 
 30
-00:02:50,483 --> 00:02:56,393
+00:02:50,409 --> 00:02:56,319
 And the identifiers: a student number belongs to the student system, a staff number to HR.
 
 31
-00:02:57,493 --> 00:02:59,048
+00:02:57,419 --> 00:02:58,974
 None of them is the person.
 
 32
-00:03:00,548 --> 00:03:09,700
+00:03:00,474 --> 00:03:09,626
 Enterprise architects draw it the same way: a person, a team or an organisation is an actor, assigned to one or more roles, for a time.
 
 33
-00:03:14,600 --> 00:03:16,967
+00:03:14,526 --> 00:03:17,007
 Then Noor and Mei write down who keeps what.
 
 34
-00:03:17,667 --> 00:03:20,748
+00:03:17,707 --> 00:03:20,788
 For each role, which system creates it, and who owns it.
 
 35
-00:03:21,748 --> 00:03:24,762
+00:03:21,788 --> 00:03:24,802
 For each piece of the person, which system is trusted.
 
 36
-00:03:25,862 --> 00:03:28,402
+00:03:25,902 --> 00:03:28,442
 The registrar's office keeps the legal name.
 
 37
-00:03:29,102 --> 00:03:32,217
+00:03:29,142 --> 00:03:32,257
 Linh keeps her own preferred name, and her home address.
 
 38
-00:03:32,917 --> 00:03:34,712
+00:03:32,957 --> 00:03:34,752
 HR keeps her work details.
 
 39
-00:03:35,412 --> 00:03:40,659
+00:03:35,452 --> 00:03:40,699
 And Mei's office looks after the person: who someone is, and whether two records are one.
 
 40
-00:03:43,759 --> 00:03:45,286
+00:03:43,799 --> 00:03:45,326
 Every industry has a Linh.
 
 41
-00:03:45,986 --> 00:03:49,164
+00:03:46,026 --> 00:03:49,204
 A nurse admitted as a patient, in the same hospital.
 
 42
-00:03:50,464 --> 00:03:53,237
+00:03:50,504 --> 00:03:53,277
 A bank customer who guarantees a friend's loan.
 
 43
-00:03:54,537 --> 00:03:59,521
+00:03:54,577 --> 00:03:59,561
 A household where the account holder moved out, and the person who stays needs the power on.
 
 44
-00:04:00,921 --> 00:04:02,911
+00:04:00,961 --> 00:04:02,951
 Different words, the same four things.
 
 45
-00:04:05,411 --> 00:04:10,379
+00:04:05,451 --> 00:04:10,587
 The data management body of knowledge, DAMA, calls this reference and master data.
 
 46
-00:04:11,679 --> 00:04:21,709
+00:04:11,887 --> 00:04:21,917
 It names four ways to keep it: a registry that only links, a copy for analysis, a master that systems read back, or one place where people are created.
 
 47
-00:04:23,209 --> 00:04:26,349
+00:04:23,417 --> 00:04:26,557
 The series picks one later, and shows the tools that do it.
 
 48
-00:04:28,849 --> 00:04:30,817
+00:04:29,057 --> 00:04:31,025
 People aren't the only master data.
 
 49
-00:04:31,517 --> 00:04:38,030
+00:04:31,725 --> 00:04:38,238
 The university also has employers and partner universities, awards and units, campuses and rooms.
 
 50
-00:04:38,730 --> 00:04:41,815
+00:04:38,938 --> 00:04:42,023
 A hospital has patients, practitioners and wards.
 
 51
-00:04:42,315 --> 00:04:45,550
+00:04:42,523 --> 00:04:45,758
 A bank, customers, accounts and the firms it trades with.
 
 52
-00:04:46,050 --> 00:04:49,059
+00:04:46,258 --> 00:04:49,267
 A utility, meters, connection points and poles.
 
 53
-00:04:49,559 --> 00:04:52,048
+00:04:49,767 --> 00:04:52,256
 A shop, products, suppliers and stores.
 
 54
-00:04:53,248 --> 00:04:56,132
+00:04:53,456 --> 00:04:56,340
 Which of them need mastering? Ask four questions.
 
 55
-00:04:57,232 --> 00:05:00,535
+00:04:57,440 --> 00:05:00,743
 Is it a thing the business is about, not something that happens?
 
 56
-00:05:01,635 --> 00:05:03,761
+00:05:01,843 --> 00:05:03,969
 Is it used by more than one process?
 
 57
-00:05:04,861 --> 00:05:09,446
+00:05:05,069 --> 00:05:09,654
 Is it created or changed in more than one place, so the copies can disagree?
 
 58
-00:05:10,546 --> 00:05:14,921
+00:05:10,754 --> 00:05:15,129
 And does it matter when they do: money, safety, the law, or someone's trust?
 
 59
-00:05:16,221 --> 00:05:17,837
+00:05:16,429 --> 00:05:18,045
 Four yeses: master it.
 
 60
-00:05:20,337 --> 00:05:22,628
+00:05:20,545 --> 00:05:22,836
 Eight more films follow, in four parts.
 
 61
-00:05:23,728 --> 00:05:28,250
+00:05:23,936 --> 00:05:28,458
 Who someone is. Roles and lists. Sharing it safely. And keeping it right.
 
 62
-00:05:32,750 --> 00:05:36,451
+00:05:32,958 --> 00:05:36,659
 This time, when Linh applies, the university finds her first.
 
 63
-00:05:37,951 --> 00:05:39,692
+00:05:38,159 --> 00:05:39,900
 It adds a role, not a person.
 
 64
-00:05:41,292 --> 00:05:44,932
+00:05:41,500 --> 00:05:45,140
 Her degree is already there, and the alumni office sees she's back.
 
 65
-00:05:46,532 --> 00:05:48,504
+00:05:46,740 --> 00:05:48,712
 Know the person, not just the role.

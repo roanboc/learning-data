@@ -422,6 +422,7 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 Source: [films/people-first](../films/people-first/) · Portal: `/people-first/`
 
 - [People before roles](../films/people-first/1-people-before-roles/) — `people-before-roles`
+- [Wellbeing is in the work](../films/people-first/2-wellbeing-in-the-work/) — `wellbeing-in-the-work`
 
 ### The new skills
 

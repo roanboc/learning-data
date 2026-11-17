@@ -189,56 +189,56 @@ Dos tipos de dueño: Mei dice quién puede verlos, y el grupo es quien puede cam
 00:06:46.557 --> 00:06:53.812
 En Red, almacenamiento y llaves, cada catálogo se vinculó a su espacio de trabajo: desde otro, un permiso no basta.
 
-00:06:55.712 --> 00:07:02.508
+00:06:55.712 --> 00:07:02.342
 El estudio de Anil Kurian trabaja en un espacio de trabajo propio, studies, donde nada se puede descargar ni copiar afuera.
 
-00:07:04.408 --> 00:07:07.903
+00:07:04.242 --> 00:07:07.737
 El catálogo del registro también se vincula ahí, pero solo para leer.
 
-00:07:09.603 --> 00:07:16.842
+00:07:09.437 --> 00:07:16.676
 Desde ahí, el estudio lee la tabla de estudiantes según sus permisos, y nunca puede escribir en ella, diga lo que diga un permiso.
 
-00:07:18.942 --> 00:07:25.263
+00:07:18.776 --> 00:07:25.097
 Lo que produce va a su propio espacio, health progress, hecho para su acuerdo y borrado cuando el acuerdo termina.
 
-00:07:26.963 --> 00:07:29.487
+00:07:26.797 --> 00:07:29.321
 Mirar sin tocar, como en los senderos de las islas.
 
-00:07:32.987 --> 00:07:37.423
+00:07:32.821 --> 00:07:37.257
 El plan se escribe una vez, en dos archivos junto al código del proceso en GitHub.
 
-00:07:38.723 --> 00:07:41.174
+00:07:38.557 --> 00:07:41.008
 Cada estante y sus lectores ocupan unas pocas líneas.
 
-00:07:42.674 --> 00:07:47.526
+00:07:42.508 --> 00:07:47.360
 El equipo de datos revisa cada cambio en esos archivos, y a Mei le avisan qué toca.
 
-00:07:49.226 --> 00:07:58.886
+00:07:49.060 --> 00:07:58.720
 El permiso de un estudio sale del contrato de su acuerdo, y lo nombra: 2026-14, hasta el 30 de junio de 2027.
 
-00:08:00.586 --> 00:08:06.573
+00:08:00.420 --> 00:08:06.407
 Primero entran las políticas del estudio, y su permiso después, así que nunca lee la tabla sin máscara.
 
-00:08:08.273 --> 00:08:14.841
+00:08:08.107 --> 00:08:14.675
 Luego, el camino de De una rama a producción: primero pruebas, luego producción, cuando quien aprueba las entregas dice que sí.
 
-00:08:16.541 --> 00:08:22.852
+00:08:16.375 --> 00:08:22.686
 Y nadie puede dar permisos a mano: solo el grupo de propietarios, y su único miembro despliega solo desde main.
 
-00:08:24.352 --> 00:08:28.735
+00:08:24.186 --> 00:08:28.569
 Todo lo demás requiere una cuenta de administrador, encendida, aprobada y registrada.
 
-00:08:32.235 --> 00:08:37.142
+00:08:32.069 --> 00:08:36.976
 En las islas, el plan vino primero, y cada visitante desde entonces ha caminado dentro de él.
 
-00:08:38.842 --> 00:08:41.517
+00:08:38.676 --> 00:08:41.351
 En la universidad, el plan también viene primero.
 
-00:08:42.617 --> 00:08:50.822
+00:08:42.451 --> 00:08:50.656
 La oficina del registro lee sus registros; el estudio, solo lo que permite su acuerdo; los demás pueden encontrar lo que existe, y pedirlo.
 
-00:08:52.522 --> 00:08:56.823
+00:08:52.356 --> 00:08:56.657
 Cada tabla nueva, y cada persona nueva, encaja en el plan desde su primer día.
 
-00:08:58.323 --> 00:09:00.804
+00:08:58.157 --> 00:09:00.638
 Diseña los permisos una vez, por área y por rol.

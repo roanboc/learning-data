@@ -24,7 +24,7 @@
     ],
     [
       "\\bapartheid\\b",
-      "apart-ate"
+      "apart hate"
     ],
     [
       "\\bMogobe\\b",
@@ -49,6 +49,14 @@
     [
       "\\bA I\\b",
       "AI"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
+    ],
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
     ]
   ],
   "story": [

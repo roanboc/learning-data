@@ -10,8 +10,8 @@
   ],
   "poster": ["hands", "tasks", 6.5],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bArchiMate\\b", "Arky-mate"],
     ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],
     ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],

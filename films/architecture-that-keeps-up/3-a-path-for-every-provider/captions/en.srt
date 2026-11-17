@@ -71,201 +71,201 @@ These films borrow from architecture to run a data team's services. This one is 
 June 2027, at a university, a year from now.
 
 19
-00:02:16,366 --> 00:02:24,895
+00:02:16,366 --> 00:02:24,911
 Helena Novak, the data manager, and Noor Rahman, the data architect, write the team's preferred way to receive data, on one page.
 
 20
-00:02:26,595 --> 00:02:31,472
+00:02:26,611 --> 00:02:31,488
 The source publishes its data as a governed product, with an owner and a contract.
 
 21
-00:02:33,172 --> 00:02:36,437
+00:02:33,188 --> 00:02:36,453
 It sends each change as an event, the moment it happens.
 
 22
-00:02:38,137 --> 00:02:41,947
+00:02:38,153 --> 00:02:41,963
 And it says what was deleted, so a deletion reaches every copy.
 
 23
-00:02:43,647 --> 00:02:51,027
+00:02:43,663 --> 00:02:51,043
 Contracts and deletions have films of their own: Moving is easy, agreeing is the work, and Deleted means deleted.
 
 24
-00:02:52,927 --> 00:02:58,647
+00:02:52,943 --> 00:02:58,663
 Sam Okafor, who runs the data platform, lists the systems the team takes data from.
 
 25
-00:03:00,147 --> 00:03:02,002
+00:03:00,163 --> 00:03:02,018
 The rooms' sensors can do all of it.
 
 26
-00:03:03,502 --> 00:03:07,843
+00:03:03,518 --> 00:03:07,859
 Payroll, on a system from 2004, sends one file a night.
 
 27
-00:03:09,343 --> 00:03:16,440
+00:03:09,359 --> 00:03:16,456
 The new timetable, bought as a service in 2026, can give its changes, but can't say what was deleted.
 
 28
-00:03:17,940 --> 00:03:21,940
+00:03:17,956 --> 00:03:21,956
 And the Faculty of Health books its nine clinical labs in a spreadsheet.
 
 29
-00:03:23,640 --> 00:03:27,322
+00:03:23,656 --> 00:03:27,338
 Old systems fall short of the preferred way, and so do new ones.
 
 30
-00:03:30,022 --> 00:03:35,155
+00:03:30,038 --> 00:03:35,171
 So the page gets a second half: a decision tree, for the providers who can't meet it.
 
 31
-00:03:36,855 --> 00:03:40,659
+00:03:36,871 --> 00:03:40,675
 First: can it send each change as an event? Then use the events.
 
 32
-00:03:42,559 --> 00:03:47,172
+00:03:42,575 --> 00:03:47,188
 If not, can it give its changes since a given time? Then fetch them every hour.
 
 33
-00:03:49,072 --> 00:03:56,514
+00:03:49,088 --> 00:03:56,530
 Can it say what was deleted? If not, compare its full list with ours every night. What's gone from its list was deleted.
 
 34
-00:03:58,614 --> 00:04:02,896
+00:03:58,630 --> 00:04:02,912
 Only a file? Take the whole file each night, and compare it the same way.
 
 35
-00:04:04,796 --> 00:04:09,302
+00:04:04,812 --> 00:04:09,318
 A spreadsheet? A data partner moves it into a governed table, with an owner.
 
 36
-00:04:11,202 --> 00:04:16,045
+00:04:11,218 --> 00:04:16,061
 The first paths have names: event-driven integration, and change data capture.
 
 37
-00:04:17,745 --> 00:04:22,986
+00:04:17,761 --> 00:04:23,002
 Every branch ends in a recommendation, and every path still keeps a contract with an owner.
 
 38
-00:04:24,686 --> 00:04:29,625
+00:04:24,702 --> 00:04:29,641
 The tree is kept as text in the team's repository, and its picture is drawn from it.
 
 39
-00:04:32,325 --> 00:04:35,839
+00:04:32,341 --> 00:04:35,855
 Monday 14 June: Sam tests the new timetable.
 
 40
-00:04:37,339 --> 00:04:43,195
+00:04:37,355 --> 00:04:43,211
 Mei Tanaka, in the registrar's office, cancels a class. The hourly changes never mention it.
 
 41
-00:04:45,095 --> 00:04:47,360
+00:04:45,111 --> 00:04:47,376
 So on the platform, the class stays booked.
 
 42
-00:04:49,060 --> 00:04:57,192
+00:04:49,076 --> 00:04:57,208
 Graham Ellis, the Director of Facilities, would see a booked room with nobody in it: a room that looks wasted, when it was free all along.
 
 43
-00:04:59,092 --> 00:05:04,755
+00:04:59,108 --> 00:05:04,771
 The vendor can add deletions to its changes, but not before its renewal, in 2028.
 
 44
-00:05:06,455 --> 00:05:11,871
+00:05:06,471 --> 00:05:11,887
 The tree has the answer: the changes every hour, and the full list of bookings every night.
 
 45
-00:05:13,571 --> 00:05:18,413
+00:05:13,587 --> 00:05:18,429
 Each night, a booking on the platform that's missing from the full list is marked deleted.
 
 46
-00:05:20,313 --> 00:05:23,931
+00:05:20,329 --> 00:05:23,947
 The new timetable goes live on Monday 19 July.
 
 47
-00:05:25,431 --> 00:05:35,154
+00:05:25,447 --> 00:05:35,170
 By Friday 30 July, the first week of teaching, the nightly comparison has found 212 deleted bookings the changes never mentioned.
 
 48
-00:05:37,054 --> 00:05:42,443
+00:05:37,070 --> 00:05:42,459
 212 hours that would have looked booked and empty on Graham's page stay off it.
 
 49
-00:05:45,143 --> 00:05:49,854
+00:05:45,159 --> 00:05:49,870
 The rooms' sensors take the preferred way: each hour's count arrives as an event.
 
 50
-00:05:51,554 --> 00:05:57,025
+00:05:51,570 --> 00:05:57,041
 Payroll's file is taken whole each night and compared, for Finance's casual staff costs.
 
 51
-00:05:58,725 --> 00:06:00,705
+00:05:58,741 --> 00:06:00,721
 A weaker path is checked more often.
 
 52
-00:06:02,205 --> 00:06:07,819
+00:06:02,221 --> 00:06:07,835
 If a night's file is much smaller than the night before, the comparison stops, and asks a person.
 
 53
-00:06:09,519 --> 00:06:18,553
+00:06:09,535 --> 00:06:18,569
 On Tuesday 24 August, payroll's file arrives cut short, and the check stops it before 2,400 staff are marked as gone.
 
 54
-00:06:20,653 --> 00:06:27,828
+00:06:20,669 --> 00:06:27,777
 Anil Kurian, the Faculty of Health's data partner, moves the labs' spreadsheet into a governed table, and owns it.
 
 55
-00:06:29,728 --> 00:06:33,331
+00:06:29,677 --> 00:06:33,280
 And each provider is asked for its next step up, in writing.
 
 56
-00:06:34,831 --> 00:06:44,691
+00:06:34,780 --> 00:06:44,640
 The timetable: its deletions, in the 2028 renewal. Payroll: a file of its changes, at its next upgrade. The labs: into the timetable.
 
 57
-00:06:47,391 --> 00:06:51,462
+00:06:47,340 --> 00:06:51,411
 The team lifts its providers towards the preferred way, a step at a time.
 
 58
-00:06:52,962 --> 00:06:56,113
+00:06:52,911 --> 00:06:56,062
 But it never holds the data back, waiting for the ideal.
 
 59
-00:06:58,013 --> 00:07:06,085
+00:06:57,962 --> 00:07:06,034
 On Thursday 30 September, Graham's page shows every teaching room and every lab, from four sources, by four paths.
 
 60
-00:07:07,985 --> 00:07:11,410
+00:07:07,934 --> 00:07:11,359
 Graham doesn't see the paths. He sees counts he can trust.
 
 61
-00:07:13,310 --> 00:07:19,216
+00:07:13,259 --> 00:07:19,165
 And Helena's page is still one page: the preferred way, the tree, and each provider's next step.
 
 62
-00:07:21,916 --> 00:07:28,487
+00:07:21,865 --> 00:07:28,436
 The Gateway City took its own cranes to ports that had none, and the box reached them years before their cranes did.
 
 63
-00:07:30,387 --> 00:07:36,545
+00:07:30,336 --> 00:07:36,494
 Helena's team did the same: a path for every provider, and Graham's counts true from the first week.
 
 64
-00:07:38,445 --> 00:07:41,321
+00:07:38,394 --> 00:07:41,270
 On Monday, write your preferred way on one page.
 
 65
-00:07:42,821 --> 00:07:47,553
+00:07:42,770 --> 00:07:47,502
 Draw the tree for the providers who can't meet it, each branch with its recommendation.
 
 66
-00:07:49,053 --> 00:07:53,465
+00:07:49,002 --> 00:07:53,414
 Ask each provider for its next step up, in its contract or its renewal.
 
 67
-00:07:54,965 --> 00:07:58,298
+00:07:54,914 --> 00:07:58,247
 Check the weaker paths more often, and don't hold value back.
 
 68
-00:07:59,998 --> 00:08:03,825
+00:07:59,947 --> 00:08:03,774
 One preferred way, a path for every provider, and value first.

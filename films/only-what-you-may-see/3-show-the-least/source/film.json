@@ -29,6 +29,18 @@
     [
       "\\bMei\\b",
       "May"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ],
+    [
+      "\\bKurian\\b",
+      "Coo-rean"
+    ],
+    [
+      "\\b[Mm]idwifery\\b",
+      "mid-wiffery"
     ]
   ],
   "story": [

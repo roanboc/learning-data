@@ -182,10 +182,10 @@
   background:linear-gradient(180deg,rgba(20,31,56,.97),rgba(11,18,35,.97));box-shadow:0 12px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)}
 .px-nd:hover{border-color:rgba(var(--lr),.85);transform:translateY(-2px)}
 .px-ic{display:block;width:18px;height:18px;flex:none}
-.px-no{display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;border:1px solid rgba(var(--lr),.55);font-style:normal;font-size:11px;font-weight:800;line-height:1;color:var(--ln);background:#0b1222}
+.px-num{display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;border:1px solid rgba(var(--lr),.55);font-style:normal;font-size:11px;font-weight:800;line-height:1;color:var(--ln);background:#0b1222}
 /* a piece's states: the step it's on, the steps lit so far, the rest waiting; a lens fades what it says nothing about */
 .px-nd.is-on{border-color:var(--lf);box-shadow:0 0 0 2px var(--lf),0 0 34px rgba(var(--lr),.55),0 16px 34px rgba(0,0,0,.45);transform:scale(1.05)}
-.px-nd.is-on .px-no{background:var(--lf);border-color:var(--lf);color:var(--lo)}
+.px-nd.is-on .px-num{background:var(--lf);border-color:var(--lf);color:var(--lo)}
 .px-nd.is-wait{opacity:.38;filter:saturate(.5)}
 .px-nd.is-off{opacity:.3;filter:saturate(.35)}
 .px-app.is-hl .px-nd:not(.is-near):not(.is-on){opacity:.4}
@@ -195,7 +195,7 @@
 .px-qn{display:grid;grid-template-columns:minmax(0,1fr) 74px;grid-template-rows:auto 1fr;gap:6px 14px;padding:12px 12px 12px 16px;border-width:1.5px}
 .px-qk{grid-column:1;display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ln)}
 .px-qk .px-ic{width:20px;height:20px}
-.px-qk .px-no{margin-left:auto}
+.px-qk .px-num{margin-left:auto}
 .px-qq{grid-column:1;font-size:14.5px;font-weight:700;line-height:1.34;color:#fff}
 .px-qa{grid-column:2;grid-row:1/3;display:grid;justify-items:center;align-content:center;gap:2px;border-radius:12px;border:1.5px dashed rgba(95,224,160,.55);background:rgba(95,224,160,.06);text-align:center;transition:border-color .4s,box-shadow .4s}
 .px-qa small{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -217,7 +217,7 @@
 .px-app.is-tall .px-nc .px-ndi{display:contents}
 .px-app.is-tall .px-nc .px-ic{grid-column:1;grid-row:1;width:26px;height:26px;padding:4px}
 .px-app.is-tall .px-nc .px-ndk{grid-column:2;grid-row:1}
-.px-app.is-tall .px-nc .px-no{grid-column:3;grid-row:1}
+.px-app.is-tall .px-nc .px-num{grid-column:3;grid-row:1}
 .px-app.is-tall .px-nc .px-ndt{grid-column:1/-1;grid-row:2;align-self:start;font-size:13.5px}
 .px-app.is-tall .px-nc .px-ndm{grid-column:1/-1;grid-row:3;align-self:start}
 /* the dbt project's label: step 8 */
@@ -228,7 +228,7 @@
 .px-zlb.is-on{background:rgba(var(--lr),.16);transform:none}
 .px-app.is-tall .px-zlb{gap:8px;padding:0 4px}
 .px-app.is-tall .px-zlb small{display:none}
-.px-app.is-tall .px-zlb{gap:6px}.px-app.is-tall .px-zlb b{font-size:18px}.px-app.is-tall .px-zlb span{font-size:11px;letter-spacing:0}.px-app.is-tall .px-zlb .px-no{margin-left:auto}
+.px-app.is-tall .px-zlb{gap:6px}.px-app.is-tall .px-zlb b{font-size:18px}.px-app.is-tall .px-zlb span{font-size:11px;letter-spacing:0}.px-app.is-tall .px-zlb .px-num{margin-left:auto}
 /* the seven layers: stations on the line rows flow along */
 .px-st{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 5px 6px;text-align:center;border-radius:16px;background:linear-gradient(180deg,rgba(20,34,62,.9),rgba(11,19,38,.9))}
 .px-sti{display:grid;place-items:center;width:30px;height:30px;margin-bottom:3px;border-radius:50%;border:1px solid rgba(var(--lr),.55);background:rgba(var(--lr),.16);color:var(--ln)}
@@ -246,14 +246,14 @@
 .px-gate{display:grid;place-items:center;border-radius:50%;border:1.5px solid rgba(95,224,160,.7);background:#08160f;color:#5fe0a0;box-shadow:0 0 0 4px rgba(95,224,160,.1)}
 .px-gate .px-ic{width:15px;height:15px}
 .px-gtl{position:absolute;left:50%;top:calc(100% + 40px);transform:translateX(-50%);font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5fe0a0;white-space:nowrap}
-.px-gate .px-no{position:absolute;left:50%;top:-27px;transform:translateX(-50%);--lr:95,224,160;--ln:#5fe0a0;--lf:#5fe0a0;--lo:#03140b}
+.px-gate .px-num{position:absolute;left:50%;top:-27px;transform:translateX(-50%);--lr:95,224,160;--ln:#5fe0a0;--lf:#5fe0a0;--lo:#03140b}
 .px-gate.is-on{--lr:95,224,160;--lf:#5fe0a0}
 .px-app.is-tall .px-gtl{left:calc(100% + 30px);top:50%;transform:translateY(-50%)}
-.px-app.is-tall .px-gate .px-no{left:calc(100% + 4px);top:3px;transform:none}
+.px-app.is-tall .px-gate .px-num{left:calc(100% + 4px);top:3px;transform:none}
 /* the census dashboard: the answer */
 .px-dash{display:flex;flex-direction:column;gap:6px;padding:10px 12px}
 .px-dash .px-ndk{display:flex;justify-content:space-between;gap:6px}
-.px-dash>.px-no{position:absolute;top:8px;right:10px}
+.px-dash>.px-num{position:absolute;top:8px;right:10px}
 .px-dsb{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:end;column-gap:10px}
 .px-bars{grid-row:1/3;display:flex;align-items:flex-end;gap:5px;height:40px}
 .px-bars i{flex:1;height:calc(var(--v) * 100%);border-radius:3px 3px 1px 1px;background:linear-gradient(#a8d0ff,#4d8fe8);transform-origin:bottom}
@@ -483,6 +483,10 @@
 .px-cnt span{grid-column:1;font-size:13px;color:var(--muted)}
 .px-cnt em{grid-column:2;grid-row:1/3;align-self:center;font-style:normal;font-size:13px;font-weight:800;color:var(--muted);text-align:right}
 .px-cnt .px-yes em{color:var(--px-ok)}
+/* where the learner's box is narrow (a phone, the panel beside the map), a row's verdict goes under its name, so a long verdict
+   never squeezes the name into a column of single words */
+.px-see{container-type:inline-size}
+@container (max-width:520px){.px-cnt li{grid-template-columns:minmax(0,1fr)}.px-cnt em{grid-column:1;grid-row:auto;text-align:left}}
 
 /* ---------------------------------------------------------------- 2. what dbt alone can't tell you */
 .px-cx{margin-top:20px}

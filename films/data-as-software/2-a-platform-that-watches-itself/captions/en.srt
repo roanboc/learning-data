@@ -167,57 +167,57 @@ An agent never approves.
 At 9:20, the job runs again, and payroll has the hours by ten.
 
 43
-00:04:10,247 --> 00:04:15,538
+00:04:10,247 --> 00:04:15,214
 On Thursday, 856 casual staff are paid, Linh Nguyen among them.
 
 44
-00:04:17,438 --> 00:04:20,054
+00:04:17,114 --> 00:04:19,730
 The platform proposes; a person approves.
 
 45
-00:04:24,054 --> 00:04:26,369
+00:04:23,730 --> 00:04:26,045
 The fix mended the night, not its cause.
 
 46
-00:04:27,669 --> 00:04:31,750
+00:04:27,345 --> 00:04:31,426
 The app's change was a good one, for tutors; what was missing was a step.
 
 47
-00:04:32,850 --> 00:04:41,097
+00:04:32,526 --> 00:04:40,773
 So Sam also opens a ticket for Ingrid Holm, in HR, who owns the claims' data: change the contract first, next time.
 
 48
-00:04:42,797 --> 00:04:46,683
+00:04:42,473 --> 00:04:46,359
 Then everyone who reads the hours knows, before the app changes.
 
 49
-00:04:48,383 --> 00:04:51,227
+00:04:48,059 --> 00:04:50,903
 On Apollo 11, the cause took a night to find:
 
 50
-00:04:51,427 --> 00:04:58,986
+00:04:51,103 --> 00:04:58,662
 a document between two systems had said too little, so a radar's electronics took about 13% of the computer's time.
 
 51
-00:05:00,486 --> 00:05:04,592
+00:05:00,162 --> 00:05:04,268
 For the next missions, the checklist changed, and the software learned to check.
 
 52
-00:05:08,392 --> 00:05:16,901
+00:05:08,068 --> 00:05:16,577
 Watching systems isn't new: site reliability engineers have done it for years, with alerts, people on call and blameless reviews.
 
 53
-00:05:18,201 --> 00:05:22,329
+00:05:17,877 --> 00:05:22,005
 What's new is that the platform does the first hours of the work, overnight.
 
 54
-00:05:23,429 --> 00:05:29,766
+00:05:23,105 --> 00:05:29,442
 Choose what it watches, keep the lineage and the owners it reads, and decide who reviews and who approves.
 
 55
-00:05:31,466 --> 00:05:34,355
+00:05:31,142 --> 00:05:34,031
 There are already standards, so don't reinvent the wheel:
 
 56
-00:05:34,555 --> 00:05:39,103
+00:05:34,231 --> 00:05:38,779
 investigate, adapt, implement, iterate, starting from the official docs.

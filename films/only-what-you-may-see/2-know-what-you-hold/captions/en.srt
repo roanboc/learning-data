@@ -59,209 +59,209 @@ The numbers are still on the back. The front says which to be careful with.
 A university's tables list every value too. What they need is the front.
 
 16
-00:01:39,613 --> 00:01:46,197
+00:01:39,613 --> 00:01:45,872
 Tuesday, 13 October. Anil Kurian is studying how the Faculty of Health's learners progress.
 
 17
-00:01:47,297 --> 00:01:51,589
+00:01:46,972 --> 00:01:51,264
 Yesterday, Mei Tanaka, in the registrar's office, signed his agreement.
 
 18
-00:01:52,889 --> 00:02:00,165
+00:01:52,564 --> 00:01:59,840
 In plain words, his study may have each learner's course and results, their year of birth, and a code in place of who they are.
 
 19
-00:02:01,665 --> 00:02:05,349
+00:02:01,340 --> 00:02:05,024
 Never anything that names a learner, or anything about their health.
 
 20
-00:02:07,049 --> 00:02:09,998
+00:02:06,724 --> 00:02:09,673
 But the platform reads columns, not plain words.
 
 21
-00:02:11,498 --> 00:02:16,204
+00:02:11,173 --> 00:02:15,879
 Mei's register asks each column one question: does it identify a person?
 
 22
-00:02:17,704 --> 00:02:25,399
+00:02:17,379 --> 00:02:25,074
 By itself, that's direct: name, email, student number. Only with a key kept elsewhere, pseudonymous. Not at all, none.
 
 23
-00:02:27,099 --> 00:02:32,715
+00:02:26,774 --> 00:02:32,390
 Course and results: none. Date of birth and exam support name no one either: none.
 
 24
-00:02:34,215 --> 00:02:39,824
+00:02:33,890 --> 00:02:39,499
 So the study could have both. But the agreement allows only the year of birth, and nothing about health.
 
 25
-00:02:43,524 --> 00:02:47,825
+00:02:43,199 --> 00:02:47,500
 Mei takes it to Yusuf, in data governance, who keeps the list of classes.
 
 26
-00:02:48,925 --> 00:02:51,009
+00:02:48,600 --> 00:02:50,684
 He keeps those three, and adds two.
 
 27
-00:02:52,309 --> 00:02:57,810
+00:02:51,984 --> 00:02:57,485
 Indirect: it names no one alone, but with other columns it can single out one person.
 
 28
-00:02:59,110 --> 00:03:02,151
+00:02:58,785 --> 00:03:01,826
 In a course of twelve learners, a birthday points to one.
 
 29
-00:03:03,851 --> 00:03:09,980
+00:03:03,526 --> 00:03:09,655
 And special: it tells something that could harm a person if it got out, like health, disability or faith.
 
 30
-00:03:11,680 --> 00:03:16,452
+00:03:11,355 --> 00:03:16,127
 Five classes, strictest first. Each column gets the strictest that applies.
 
 31
-00:03:18,152 --> 00:03:20,606
+00:03:17,827 --> 00:03:20,281
 Now the agreement's plain words have classes.
 
 32
-00:03:21,906 --> 00:03:26,126
+00:03:21,581 --> 00:03:25,801
 Nothing that names a learner: direct. Nothing about their health: special.
 
 33
-00:03:27,426 --> 00:03:33,983
+00:03:27,101 --> 00:03:33,658
 A code in place of who they are: pseudonymous. Their year of birth: indirect. Course and results: none.
 
 34
-00:03:37,683 --> 00:03:44,524
+00:03:37,358 --> 00:03:44,199
 Columns get classes. Each table gets a level: how much harm if the whole table got out. Its owner sets it.
 
 35
-00:03:46,024 --> 00:03:51,785
+00:03:45,699 --> 00:03:51,460
 Public, like published totals. Internal, for the university's own people, like the timetable.
 
 36
-00:03:53,085 --> 00:03:58,570
+00:03:52,760 --> 00:03:58,245
 Confidential, for those with a reason, like the learner table. Restricted, for a named few.
 
 37
-00:04:00,070 --> 00:04:05,846
+00:03:59,745 --> 00:04:05,521
 Two floors come from the columns. A table with anything that points to a person is never public.
 
 38
-00:04:07,346 --> 00:04:09,990
+00:04:07,021 --> 00:04:09,665
 A table with anything special is restricted.
 
 39
-00:04:11,690 --> 00:04:17,929
+00:04:11,365 --> 00:04:17,604
 These five classes and four levels are the university's own. Another organisation may choose others.
 
 40
-00:04:19,429 --> 00:04:23,815
+00:04:19,104 --> 00:04:23,490
 What matters is one list, and that everyone uses its words the same way.
 
 41
-00:04:27,515 --> 00:04:33,519
+00:04:27,190 --> 00:04:33,194
 Back to exam support. Its values name no illness: extra time, a separate room, a reader.
 
 42
-00:04:35,019 --> 00:04:38,305
+00:04:34,694 --> 00:04:37,980
 But Mei knows why a learner has them: for a disability.
 
 43
-00:04:39,605 --> 00:04:42,589
+00:04:39,280 --> 00:04:42,264
 So the column tells something about their health: special.
 
 44
-00:04:44,289 --> 00:04:47,665
+00:04:43,964 --> 00:04:47,340
 A column's name doesn't say what it holds. Its owner does.
 
 45
-00:04:49,565 --> 00:04:57,088
+00:04:49,240 --> 00:04:56,763
 And one special column would make the whole learner table restricted, too strict for the help desk and Planning, who read it every day.
 
 46
-00:04:58,388 --> 00:05:05,432
+00:04:58,063 --> 00:05:05,107
 So exam support moves to a table of its own, the support table, restricted, for the few who arrange exams.
 
 47
-00:05:06,932 --> 00:05:08,952
+00:05:06,607 --> 00:05:08,627
 The learner table stays confidential.
 
 48
-00:05:12,252 --> 00:05:16,695
+00:05:11,927 --> 00:05:16,370
 Who names each column? Its owner, once, at the source, where the data is born.
 
 49
-00:05:18,795 --> 00:05:24,499
+00:05:18,470 --> 00:05:24,174
 Like the octagon: the Ministry sets the limits, and the maker, who knows the recipe, puts it on.
 
 50
-00:05:26,799 --> 00:05:31,710
+00:05:26,474 --> 00:05:31,385
 Data governance keeps the list of classes, and the owner picks one for each column.
 
 51
-00:05:33,810 --> 00:05:40,034
+00:05:33,485 --> 00:05:39,709
 A scan can suggest one: this looks like an email. Only Mei knows that exam support is about health.
 
 52
-00:05:42,334 --> 00:05:48,668
+00:05:42,009 --> 00:05:48,343
 And a new column with no class doesn't go through. It comes back with a question: what does it tell about a person?
 
 53
-00:05:52,768 --> 00:05:58,637
+00:05:52,443 --> 00:05:58,312
 From the source, each column carries its class into everything made from it. Nobody names it again.
 
 54
-00:06:00,337 --> 00:06:03,850
+00:06:00,012 --> 00:06:03,516
 Course and results reach Anil's study as they are: none.
 
 55
-00:06:05,550 --> 00:06:12,139
+00:06:05,216 --> 00:06:11,805
 Two change on the way. The student number becomes a learner code, made with a key the registrar's office keeps.
 
 56
-00:06:13,739 --> 00:06:15,489
+00:06:13,405 --> 00:06:15,155
 The date of birth becomes the year.
 
 57
-00:06:17,189 --> 00:06:21,605
+00:06:16,855 --> 00:06:21,271
 A step that changes what a column holds gets its new class from the owner.
 
 58
-00:06:23,305 --> 00:06:28,826
+00:06:22,971 --> 00:06:28,492
 Mei names the code pseudonymous, and the year indirect: with a course, it can still point to one.
 
 59
-00:06:30,326 --> 00:06:32,687
+00:06:29,992 --> 00:06:32,353
 Exam support never reaches the study.
 
 60
-00:06:34,387 --> 00:06:40,510
+00:06:34,053 --> 00:06:40,214
 And Anil's totals by course, any count under ten hidden, get a new class, none, in a public table.
 
 61
-00:06:42,410 --> 00:06:46,805
+00:06:42,114 --> 00:06:46,509
 The class goes wherever the column goes, as the octagon goes with the pack.
 
 62
-00:06:50,105 --> 00:06:52,682
+00:06:49,809 --> 00:06:52,386
 The octagon took no sugar out by itself.
 
 63
-00:06:54,182 --> 00:07:00,015
+00:06:53,886 --> 00:06:59,719
 It named what each pack held, where everyone could see it, and families, schools and makers acted on it.
 
 64
-00:07:01,715 --> 00:07:04,542
+00:07:01,419 --> 00:07:04,246
 Mei's classes protect nothing by themselves either.
 
 65
-00:07:05,842 --> 00:07:12,983
+00:07:05,546 --> 00:07:12,687
 But now every column says what it tells about a person, and every table how careful to be, before anyone opens it.
 
 66
-00:07:14,883 --> 00:07:17,539
+00:07:14,587 --> 00:07:17,243
 Which way to hide each class is the next question.
 
 67
-00:07:19,039 --> 00:07:20,977
+00:07:18,743 --> 00:07:20,681
 You can't protect what you haven't named.

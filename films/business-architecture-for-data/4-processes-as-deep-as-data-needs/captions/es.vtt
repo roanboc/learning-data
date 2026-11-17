@@ -42,122 +42,122 @@ Y el ciclo bajaba solo hasta donde la parte de cada dueño lo necesitaba.
 00:01:39.701 --> 00:01:47.170
 En la empresa, el trabajo del negocio necesita lo mismo: sus procesos dibujados en niveles, y solo tan a fondo como cada uno lo necesite.
 
-00:01:55.870 --> 00:02:01.640
+00:01:55.870 --> 00:02:01.633
 La siguiente nota de Tomás pregunta dónde nace cada concepto: en qué proceso, y en qué paso.
 
-00:02:02.940 --> 00:02:10.305
+00:02:02.933 --> 00:02:10.298
 Su matriz dice qué capacidad crea cada uno, pero una capacidad es lo que la empresa puede hacer, no cómo se hace el trabajo.
 
-00:02:11.805 --> 00:02:13.727
+00:02:11.798 --> 00:02:13.720
 Para eso, necesita los procesos.
 
-00:02:16.027 --> 00:02:24.410
+00:02:16.020 --> 00:02:24.403
 El mapa de procesos de Grace ordena los procesos de la empresa en cuatro franjas: estratégicos, operativos, de apoyo y de evaluación.
 
-00:02:25.910 --> 00:02:29.233
+00:02:25.903 --> 00:02:29.226
 Las franjas solo los ordenan. No son elementos del modelo.
 
-00:02:30.533 --> 00:02:37.488
+00:02:30.526 --> 00:02:37.481
 La franja operativa tiene el trabajo que sienten los clientes: conectar un hogar, restablecer el suministro y del medidor al cobro.
 
-00:02:38.788 --> 00:02:45.099
+00:02:38.781 --> 00:02:45.092
 Si una franja quedara vacía, eso ya sería un hallazgo: nadie marcando el rumbo, o nadie midiendo.
 
-00:02:46.599 --> 00:02:52.832
+00:02:46.592 --> 00:02:52.825
 Estos trece son el nivel uno, los macroprocesos: de ocho a quince, para toda una organización.
 
-00:02:55.132 --> 00:03:02.685
+00:02:55.125 --> 00:03:02.678
 El nivel dos es un proceso con un disparador, un resultado y una sola persona que rinde cuentas, de tres a ocho bajo cada macroproceso.
 
-00:03:04.185 --> 00:03:10.227
+00:03:04.178 --> 00:03:10.220
 El nivel tres son sus actividades, dibujadas como un flujo. El nivel cuatro, cada tarea, queda fuera del modelo.
 
-00:03:11.927 --> 00:03:17.395
+00:03:11.920 --> 00:03:17.612
 Estos niveles vienen del marco de procesos de APQC, que tiene una versión para empresas de servicios públicos.
 
-00:03:18.495 --> 00:03:21.058
+00:03:18.712 --> 00:03:21.275
 Primero a lo ancho: los niveles uno y dos, en todas partes.
 
-00:03:22.758 --> 00:03:27.181
+00:03:22.975 --> 00:03:27.398
 A lo hondo solo donde duele: el nivel tres solo donde alguien puede decir qué duele.
 
-00:03:28.881 --> 00:03:33.116
+00:03:29.098 --> 00:03:33.333
 Y el mapa dice qué ramas no se dibujaron más a fondo, para que nadie crea que sí.
 
-00:03:34.616 --> 00:03:39.715
+00:03:34.833 --> 00:03:39.932
 Como en Mahan: días y partes en todas partes, y minutos solo donde una parte está dividida.
 
-00:03:43.015 --> 00:03:47.641
+00:03:43.232 --> 00:03:47.858
 Del medidor al cobro es un macroproceso: de la lectura de un medidor a una factura pagada.
 
-00:03:49.341 --> 00:03:56.939
+00:03:49.558 --> 00:03:57.156
 En el nivel dos, tiene cinco procesos: leer medidores, revisar lecturas, hacer facturas, cobrar pagos y responder dudas de facturación.
 
-00:03:58.639 --> 00:04:05.148
+00:03:58.856 --> 00:04:05.365
 Cada uno tiene un SIPOC: quién lo abastece, qué entra, qué sale y para quién, con su disparador y su dueño.
 
-00:04:07.448 --> 00:04:12.286
+00:04:07.665 --> 00:04:12.503
 Lo que entra y sale son conceptos del mapa: lecturas, cuentas y facturas.
 
-00:04:13.986 --> 00:04:20.665
+00:04:14.203 --> 00:04:20.882
 Un concepto nace en el proceso que lo escribe primero: las lecturas al leer medidores, las facturas al hacer facturas.
 
-00:04:22.365 --> 00:04:26.749
+00:04:22.582 --> 00:04:26.966
 Y uno aún no estaba en el mapa: el pago, que nace al cobrar pagos.
 
-00:04:29.049 --> 00:04:30.787
+00:04:29.266 --> 00:04:31.004
 Solo una rama necesita más.
 
-00:04:31.887 --> 00:04:38.767
+00:04:32.104 --> 00:04:38.984
 El invierno pasado, los reclamos por facturas se duplicaron. Al leerlos, Farah vio que dos de cada tres eran por facturas estimadas.
 
-00:04:40.467 --> 00:04:47.626
+00:04:40.684 --> 00:04:47.843
 La mayoría de los medidores envía una lectura cada noche. Si uno no la envía, o su lectura no pasa una revisión, la factura usa una estimación.
 
-00:04:49.126 --> 00:04:56.737
+00:04:49.343 --> 00:04:56.954
 Algunos medidores llevaban semanas sin enviar, así que sus hogares recibieron estimación tras estimación, y luego una factura que cobró todo de golpe.
 
-00:04:58.437 --> 00:05:06.579
+00:04:58.654 --> 00:05:06.796
 Así que revisar lecturas baja al nivel tres, dibujado en BPMN, la notación para los pasos, su orden y las decisiones entre ellos.
 
-00:05:08.879 --> 00:05:14.111
+00:05:09.096 --> 00:05:14.328
 Cada día de facturación se revisa cada lectura: ¿está dentro del rango, y no es menor que la anterior?
 
-00:05:16.411 --> 00:05:18.250
+00:05:16.628 --> 00:05:18.467
 Si pasa, va a facturación.
 
-00:05:20.350 --> 00:05:27.206
+00:05:20.567 --> 00:05:27.423
 Si no pasa, o nunca llegó, se hace una estimación con el mismo mes del año pasado, y va a facturación en su lugar.
 
-00:05:29.506 --> 00:05:36.242
+00:05:29.723 --> 00:05:36.459
 El nivel tres muestra lo que el nivel dos no podía: aquí nace un segundo tipo de lectura, en este paso, no en el medidor.
 
-00:05:38.542 --> 00:05:44.418
+00:05:38.759 --> 00:05:44.635
 Pero las tablas del equipo de datos tomaban las lecturas de los medidores, así que Farah no veía ni una estimación en ellas.
 
-00:05:46.718 --> 00:05:53.060
+00:05:46.935 --> 00:05:53.277
 Grace, dueña de las lecturas, decide que una lectura es lo que la revisión envía, leída del medidor o estimada.
 
-00:05:55.360 --> 00:06:03.280
+00:05:55.577 --> 00:06:03.497
 Quien dirige comercialización decide que cada factura diga si usó una estimación, y un ticket le pide al equipo de datos tomar las lecturas de la revisión.
 
-00:06:05.580 --> 00:06:09.704
+00:06:05.797 --> 00:06:09.921
 Ahora Farah puede ver qué hogares han tenido estimaciones, y por cuánto tiempo.
 
-00:06:15.204 --> 00:06:23.981
+00:06:15.421 --> 00:06:24.198
 En el mapa de la práctica de datos se suman los procesos del propio equipo de datos: responder una solicitud de datos, construir un producto de datos, incorporar una fuente.
 
-00:06:25.681 --> 00:06:32.423
+00:06:25.898 --> 00:06:32.640
 Cada uno se dibuja como los de la empresa, en el nivel dos, con su disparador, su resultado, su dueño y lo que lee y escribe.
 
-00:06:33.923 --> 00:06:36.128
+00:06:34.140 --> 00:06:36.345
 Ninguno baja más hasta que algo duela.
 
-00:06:38.628 --> 00:06:45.589
+00:06:38.845 --> 00:06:45.806
 En un qanat, el ciclo bajaba hasta el minuto solo donde una parte estaba dividida, y cada dueño sabía cuándo llegaría su agua.
 
-00:06:47.289 --> 00:06:55.009
+00:06:47.506 --> 00:06:55.226
 En la empresa, cada proceso se dibuja hasta el nivel dos, y solo la rama que dolía baja más, hasta donde nace una estimación.
 
-00:06:56.709 --> 00:07:03.508
+00:06:56.926 --> 00:07:03.775
 La siguiente nota de Tomás pregunta qué espera el negocio de cada concepto: sus reglas, y qué tan bueno debe ser.

@@ -39,7 +39,7 @@ function d8_name(ctx,s,x,y,al,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();c
 // a tag that ends at x (its right edge) instead of starting there
 const d8_tagR=(ctx,x,y,s,col)=>tag(ctx,x-(tw(ctx,s,28,700)+26),y,s,col,{size:28});
 // the sea, from night (sun 0) towards day (sun 1)
-function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([6,12,26],[34,72,104],sun),1));g.addColorStop(1,rgba(mix([4,8,18],[22,54,82],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,20,52],[26,84,138],sun),1));g.addColorStop(1,rgba(mix([5,12,34],[16,62,108],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
 scene("kerala",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tM=c("markets"),tBl=c("blind"),tD=c("dump"),tP=c("phones"),tA=c("act"),sun=clamp((t-1)/46,0,1);
   d8_sky(ctx,S,sun);

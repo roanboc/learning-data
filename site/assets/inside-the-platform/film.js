@@ -1976,6 +1976,32 @@ function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3]
 // how far the camera is zoomed in at t, for the same keys: a whole canvas seen from afar is context, and its notes are decoration
 function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;z=lerp(z,keys[i][3],u);}return z;}
 
+// The colour of the five series on enterprise architecture (17 November 2026). They drew on a brown wall, a brown ground for scenes in the
+// past and brown date pills, earthy beside their stories; now the wall is a slate blue under a cool light, a scene in the past a night blue,
+// and the layers' and the series' colours are clearer. The dark ground behind the diagrams stays as the whole site draws it: no need to
+// colour a picture whose ground is already dark (the author, 17 November 2026). Only these series' builds bundle this file, right after
+// ea.js, so it sets their look over ea.js and over the helpers the whole site shares (From words to data's histBg and yearTag), which every
+// other film keeps as they are. The master data films borrow ea.js for its glyphs and keep its first colours too.
+const EA_WALL=["#162b52","#0a1428"];                        // the wall the notes go on: a slate blue
+const EA_WALLGLOW=[[0.1,0.9,0.5,[60,180,210],0.06],[0.92,0.1,0.5,[160,110,240],0.06]];   // soft light on it: teal, bottom left; violet, top right
+const EA_HIST=["#16204a","#06071a"];                        // a scene in the past
+const EA_PILL="rgba(10,14,40,0.9)";                         // the glass of a date's pill
+// soft pools of coloured light: [x, y, radius, colour, strength], with x, y and the radius as parts of the frame's width and height
+function eaGlow(ctx,pools){pools.forEach(([x,y,r,c,a])=>{const g=ctx.createRadialGradient(W*x,H*y,0,W*x,H*y,W*r);g.addColorStop(0,rgba(c,a));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});}
+// the six layers and the series' own colour, deeper and clearer than ea.js's first ones
+[[188,162,255],[255,196,112],[255,228,96],[255,166,134],[108,200,255],[138,228,118]].forEach((c,i)=>{LAY6[i][1]=c;});
+EAC.splice(0,3,104,230,192);
+// the wall of canvases and sticky notes (ea.js's wallBg, in slate blue under a cool light)
+wallBg=function(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,EA_WALL[0]);g.addColorStop(1,EA_WALL[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){const x=hash(i,31)*W,y=hash(i,32)*H,r=60+hash(i,33)*200,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(190,225,255,"+(0.012+0.02*hash(i,34))+")");gg.addColorStop(1,"rgba(190,225,255,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  const l=ctx.createRadialGradient(W*0.5,H*0.25,40,W*0.5,H*0.4,W*0.7);l.addColorStop(0,"rgba(150,210,255,"+(o.light==null?0.10:o.light)+")");l.addColorStop(1,"rgba(150,210,255,0)");ctx.fillStyle=l;ctx.fillRect(0,0,W,H);eaGlow(ctx,EA_WALLGLOW);};
+// a scene in the past keeps its lamp's warm light and dust, on a night blue
+{const histBg0=histBg;histBg=function(ctx,S,t,o){return histBg0(ctx,S,t,Object.assign({top:EA_HIST[0],bottom:EA_HIST[1]},o));};}
+// the pills that date a moment (ea.js's eaYear and From words to data's yearTag), on blue glass
+eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,28,500,"mono")+52;glass(ctx,x,y-30,w,60,30,c,{glow:14,ea:0.8,fill:EA_PILL});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
+yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
+
 /* ===== Platform and solution architecture: the series' components =====
    The fourth series on enterprise architecture, drawn in The map before the data's look (its ea.js and people.js come first in
    every film): Tomás's map, paper drafts on a wall and the confirmed model in glass, the six layers in their colours. This file adds
@@ -1987,7 +2013,7 @@ function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i+
    style, light on a dark ground, never in the style of the art of its time and place. */
 
 /* ---------- colours ---------- */
-const PSC=[244,184,108];                    // the series: a lantern's amber, for the road and the shared platform
+const PSC=[255,178,88];                    // the series: a lantern's amber, for the road and the shared platform
 const APPC=LAY6[4][1],TECC=LAY6[5][1],INFC=LAY6[3][1],BUSC=LAY6[2][1];
 const SEALC=[214,72,52];                    // a seal's vermilion
 const WASHI=[236,226,204];                  // paper
@@ -2051,16 +2077,16 @@ const PSA_LP={};
 function psaLandPath(v){const key=[v.lon,v.lat,v.k,v.cx,v.cy].join();if(PSA_LP[key])return PSA_LP[key];const p=new Path2D();
   PSA_COAST.forEach(r=>{r.forEach((q,i)=>{const[x,y]=psaJP(q[0],q[1],v);if(i)p.lineTo(x,y);else p.moveTo(x,y);});p.closePath();});return PSA_LP[key]=p;}
 function psaLand(ctx,v,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
-  const lit=o.lit||0,fill=mix([30,36,54],[60,52,44],lit),edge=mix([150,172,210],[236,206,160],lit),P=psaLandPath(v),z=Math.sqrt(Math.abs(ctx.getTransform().a));
+  const lit=o.lit||0,fill=mix([26,42,64],[54,66,72],lit),edge=mix([150,172,210],[236,206,160],lit),P=psaLandPath(v),z=Math.sqrt(Math.abs(ctx.getTransform().a));
   ctx.save();ctx.fillStyle=rgba(fill,1);ctx.fill(P);ctx.shadowColor=rgba(edge,0.55);ctx.shadowBlur=16;ctx.strokeStyle=rgba(edge,0.7);ctx.lineWidth=2.2/z;ctx.lineJoin="round";ctx.stroke(P);ctx.restore();
   // a little texture on the land: soft patches, as of hills and forest, and the mountains of the centre a shade lighter
   ctx.save();ctx.clip(P);
   for(let i=0;i<60;i++){const lon=131+hash(i,61)*10.5,lat=32+hash(i,62)*8.5,[x,y]=psaJP(lon,lat,v),r=(30+hash(i,63)*90)*v.k/330,g=ctx.createRadialGradient(x,y,0,x,y,r);
-    g.addColorStop(0,rgba(mix([62,72,70],[100,88,70],lit),0.16+0.1*hash(i,64)));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);}
+    g.addColorStop(0,rgba(mix([56,98,84],[90,112,82],lit),0.16+0.1*hash(i,64)));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);}
   [[137.7,36.2,1.1],[138.4,35.9,0.8],[136.9,35.8,0.7],[139.4,36.6,0.6]].forEach(([lon,lat,s])=>{const[x,y]=psaJP(lon,lat,v),r=s*v.k*0.5,g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(mix([80,86,100],[120,104,84],lit),0.22));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);});
   ctx.restore();});}
 // the sea and the sky at night (o.dusk, 0..1, warms it toward evening)
-function psaSea(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.dusk||0,g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,12,28],[34,26,36],d),1));g.addColorStop(1,rgba(mix([4,8,18],[16,14,22],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+function psaSea(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.dusk||0,g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,16,44],[28,32,78],d),1));g.addColorStop(1,rgba(mix([4,9,26],[12,14,40],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   for(let i=0;i<26;i++){const x=hash(i,71)*W,y=hash(i,72)*H,r=120+hash(i,73)*300,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(120,150,210,"+(0.018+0.02*hash(i,74))+")");gg.addColorStop(1,"rgba(120,150,210,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}}
 // a road on the map, drawn up to p (0..1) along its points; o.col, o.lw, o.glow
 function psaPath(ctx,pts,p,o){o=o||{};if(p<=0)return;const segs=[];let L=0;for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);segs.push(d);L+=d;}
@@ -2096,14 +2122,14 @@ function psaMap(ctx,v,t,o){o=o||{};const a=o.a==null?1:o.a;const TK=PSA_TKD.map(
 // Everyone is a figure in silhouette, lit from behind by the evening sky and by the station's lanterns, dressed for 1601 to the 1860s:
 // wide hats, robes, loads on a pole. A walk is drawn from the time t and a phase, so each keeps its own step.
 function psaDusk(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.d==null?1:o.d,y0=o.y0||760,g=ctx.createLinearGradient(0,0,0,y0);
-  g.addColorStop(0,rgba(mix([10,14,30],[24,28,58],d),1));g.addColorStop(0.62,rgba(mix([18,20,40],[96,64,74],d),1));g.addColorStop(1,rgba(mix([30,26,38],[214,140,92],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,y0+2);
+  g.addColorStop(0,rgba(mix([8,14,42],[16,38,110],d),1));g.addColorStop(0.62,rgba(mix([16,22,58],[112,76,144],d),1));g.addColorStop(1,rgba(mix([28,28,58],[242,136,94],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,y0+2);
   // far hills, two ranges
-  [[0.55,[38,32,46],0.0],[0.8,[26,22,32],1.7]].forEach(([k,c,ph],j)=>{ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.moveTo(0,y0);for(let x=0;x<=W;x+=24){const yy=y0-k*120-Math.sin(x*0.0021+ph)*44*k-Math.sin(x*0.0057+ph*2)*18*k;ctx.lineTo(x,yy);}ctx.lineTo(W,y0);ctx.closePath();ctx.fill();});
-  const gg=ctx.createLinearGradient(0,y0,0,H);gg.addColorStop(0,rgba([40,32,30],1));gg.addColorStop(1,rgba([14,12,14],1));ctx.fillStyle=gg;ctx.fillRect(0,y0,W,H-y0);
+  [[0.55,[34,40,82],0.0],[0.8,[18,28,50],1.7]].forEach(([k,c,ph],j)=>{ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.moveTo(0,y0);for(let x=0;x<=W;x+=24){const yy=y0-k*120-Math.sin(x*0.0021+ph)*44*k-Math.sin(x*0.0057+ph*2)*18*k;ctx.lineTo(x,yy);}ctx.lineTo(W,y0);ctx.closePath();ctx.fill();});
+  const gg=ctx.createLinearGradient(0,y0,0,H);gg.addColorStop(0,rgba([22,34,44],1));gg.addColorStop(1,rgba([8,12,22],1));ctx.fillStyle=gg;ctx.fillRect(0,y0,W,H-y0);
   // the road itself, a band of beaten earth catching the last light
-  const rg=ctx.createLinearGradient(0,y0,0,y0+70);rg.addColorStop(0,rgba(mix([70,58,50],[150,112,84],d),1));rg.addColorStop(1,rgba([46,38,34],1));ctx.fillStyle=rg;ctx.fillRect(0,y0,W,64);}
+  const rg=ctx.createLinearGradient(0,y0,0,y0+70);rg.addColorStop(0,rgba(mix([58,58,80],[160,112,90],d),1));rg.addColorStop(1,rgba([36,38,56],1));ctx.fillStyle=rg;ctx.fillRect(0,y0,W,64);}
 // a pine by the road: a trunk that leans a little and layered, tapering masses of needles
-function psaPine(ctx,x,y0,s,seed,o){o=o||{};const lean=(hash(seed,3)-0.5)*0.25,h=s*(220+hash(seed,4)*90),col=o.col||[18,22,24];ctx.save();ctx.translate(x,y0);
+function psaPine(ctx,x,y0,s,seed,o){o=o||{};const lean=(hash(seed,3)-0.5)*0.25,h=s*(220+hash(seed,4)*90),col=o.col||[12,30,38];ctx.save();ctx.translate(x,y0);
   ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(-s*7,0);ctx.quadraticCurveTo(-s*4+lean*h*0.4,-h*0.5,lean*h-s*2,-h);ctx.lineTo(lean*h+s*2,-h);ctx.quadraticCurveTo(s*4+lean*h*0.4,-h*0.5,s*7,0);ctx.closePath();ctx.fill();
   for(let i=0;i<4;i++){const u=0.45+i*0.17,cx=lean*h*u+(hash(seed,10+i)-0.5)*s*40,cy=-h*u,rw=s*(90-i*14)*(0.8+hash(seed,20+i)*0.4),rh=s*(22-i*2);
     ctx.beginPath();ctx.moveTo(cx-rw,cy+rh*0.4);ctx.quadraticCurveTo(cx-rw*0.5,cy-rh*1.2,cx,cy-rh);ctx.quadraticCurveTo(cx+rw*0.6,cy-rh*1.3,cx+rw,cy+rh*0.3);ctx.quadraticCurveTo(cx,cy+rh*0.9,cx-rw,cy+rh*0.4);ctx.fill();}
@@ -2538,31 +2564,31 @@ function p2_cedar(ctx,x,y,h,seed,col,rim){const w=h*(0.24+0.08*hash(seed,1)),n=5
 // where the cedars stand, in kilometres from Odawara: none on the lake's shore or by a station
 const P2_CEDARS=[2.2,3.4,4.1,5.6,6.3,7.7,8.8,9.6,10.4,11.6,12.2,13.1,13.8,14.4,14.9,15.15,17.15,17.7,18.0,18.6,19.1,19.6,20.2,21.0,21.9,22.6,23.6,24.4,25.3,26.2,27.4,28.3,29.4];
 function p2_mountain(ctx,S,t,o){o=o||{};setScreen(ctx,S);const d=o.d==null?0.9:o.d,night=o.night||0,N=c=>mix(c,[8,10,24],night*0.75),cam=o.cam||[960,540,1],par=k=>[cam[0],cam[1],1+(cam[2]-1)*k];
-  const g=ctx.createLinearGradient(0,0,0,800);g.addColorStop(0,rgba(mix(mix([10,14,30],[24,28,58],d),[5,7,18],night),1));g.addColorStop(0.55,rgba(mix(mix([18,20,40],[92,62,80],d),[10,12,28],night),1));g.addColorStop(1,rgba(mix(mix([30,26,38],[214,140,96],d),[20,22,40],night),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  const g=ctx.createLinearGradient(0,0,0,800);g.addColorStop(0,rgba(mix(mix([8,14,42],[16,38,110],d),[5,8,22],night),1));g.addColorStop(0.55,rgba(mix(mix([16,22,58],[108,76,144],d),[10,12,32],night),1));g.addColorStop(1,rgba(mix(mix([28,28,58],[242,136,96],d),[20,22,46],night),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   // the last of the light in the west, behind Mishima
   if(d*(1-night)>0.01)glow(ctx,240,620,760,[230,150,100],0.22*d*(1-night));
   if(night>0.01)for(let i=0;i<90;i++){const x=hash(i,31)*W,y=hash(i,32)*440,r=0.6+hash(i,33)*1.4;ctx.fillStyle="rgba(230,236,255,"+(0.25+0.5*hash(i,34))*night+")";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();}
   // the far mountains, hazy, rising behind the lake; then nearer ranges: the further, the less they move with the camera
-  ctx.save();p2_camAt(ctx,par(0.3));p2_range(ctx,470,36,0.4,[[1010,118,100],[870,92,110],[1180,104,120],[1430,66,150],[650,58,130],[390,80,190]],N(mix([56,48,72],[100,80,104],d*0.4)));ctx.restore();
-  ctx.save();p2_camAt(ctx,par(0.6));p2_range(ctx,560,34,2.1,[[300,80,170],[640,50,120],[1420,70,150],[1680,40,120]],N(mix([40,35,52],[64,50,66],d*0.3)));ctx.restore();
+  ctx.save();p2_camAt(ctx,par(0.3));p2_range(ctx,470,36,0.4,[[1010,118,100],[870,92,110],[1180,104,120],[1430,66,150],[650,58,130],[390,80,190]],N(mix([44,56,104],[90,86,146],d*0.4)));ctx.restore();
+  ctx.save();p2_camAt(ctx,par(0.6));p2_range(ctx,560,34,2.1,[[300,80,170],[640,50,120],[1420,70,150],[1680,40,120]],N(mix([28,42,76],[50,58,96],d*0.3)));ctx.restore();
   ctx.save();p2_camAt(ctx,cam);
   // the mountain itself, lit a little along its top, and the folds of its slopes
-  const mg=ctx.createLinearGradient(0,340,0,800);mg.addColorStop(0,rgba(N([36,31,44]),1));mg.addColorStop(1,rgba(N([13,12,16]),1));ctx.fillStyle=mg;
+  const mg=ctx.createLinearGradient(0,340,0,800);mg.addColorStop(0,rgba(N([20,40,60]),1));mg.addColorStop(1,rgba(N([7,14,24]),1));ctx.fillStyle=mg;
   ctx.beginPath();ctx.moveTo(1750,772);P2_PROF.forEach(([x,y])=>ctx.lineTo(x,y));ctx.lineTo(160,768);ctx.lineTo(0,768);ctx.lineTo(0,H);ctx.lineTo(1750,H);ctx.closePath();ctx.fill();
-  ctx.save();ctx.strokeStyle=rgba(N([70,60,78]),0.35);ctx.lineWidth=2.2;[[[P2_KX(14.2),P2_MY(762)],[1300,600],[1380,760]],[[P2_KX(11),P2_MY(500)],[1500,640],[1560,770]],[[P2_KX(19.3),P2_MY(846)],[660,560],[600,760]],
+  ctx.save();ctx.strokeStyle=rgba(N([56,84,110]),0.35);ctx.lineWidth=2.2;[[[P2_KX(14.2),P2_MY(762)],[1300,600],[1380,760]],[[P2_KX(11),P2_MY(500)],[1500,640],[1560,770]],[[P2_KX(19.3),P2_MY(846)],[660,560],[600,760]],
     [[P2_KX(23),P2_MY(590)],[460,660],[420,770]],[[P2_KX(17.4),P2_MY(762)],[860,560],[820,760]]].forEach(([a,c,b])=>{ctx.beginPath();ctx.moveTo(a[0],a[1]+6);ctx.quadraticCurveTo(c[0],c[1],b[0],b[1]);ctx.stroke();});ctx.restore();
   ctx.save();ctx.strokeStyle=rgba(N(mix([120,96,110],[240,170,120],d*0.5)),0.4);ctx.lineWidth=2;ctx.beginPath();P2_PROF.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();ctx.restore();
   // the lake in the hollow: the sky's light on its water
   const[xe,xw,ly]=P2_LK;ctx.save();ctx.beginPath();ctx.moveTo(xe+4,ly);ctx.quadraticCurveTo((xe+xw)/2,ly+46,xw-4,ly);ctx.closePath();
-  const lg=ctx.createLinearGradient(0,ly,0,ly+24);lg.addColorStop(0,rgba(mix(mix([150,122,150],[210,160,140],d*0.4),[44,54,92],night),1));lg.addColorStop(1,rgba(mix([40,40,66],[12,14,30],night),1));ctx.fillStyle=lg;ctx.fill();ctx.clip();
+  const lg=ctx.createLinearGradient(0,ly,0,ly+24);lg.addColorStop(0,rgba(mix(mix([100,150,210],[210,170,170],d*0.4),[44,54,92],night),1));lg.addColorStop(1,rgba(mix([30,44,86],[12,14,30],night),1));ctx.fillStyle=lg;ctx.fill();ctx.clip();
   ctx.strokeStyle=rgba(mix([255,220,190],[170,190,240],night),0.35);ctx.lineWidth=1.6;for(let i=0;i<5;i++){const yy=ly+4+i*4,x0=lerp(xw,xe,0.15+0.6*hash(i,51)),w_=20+30*hash(i,52);ctx.beginPath();ctx.moveTo(x0,yy);ctx.lineTo(x0+w_,yy);ctx.stroke();}
   if((o.hk||0)>0.01)glow(ctx,P2_HX+20,ly+10,40,PSC,0.35*(o.hkLit==null?1:o.hkLit)*clamp(o.hk,0,1));ctx.restore();
   ctx.save();ctx.strokeStyle=rgba(mix([255,226,200],[180,200,255],night),0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xe+2,ly+0.5);ctx.lineTo(xw-2,ly+0.5);ctx.stroke();ctx.restore();
   // the sea at Odawara
-  const sg=ctx.createLinearGradient(0,772,0,H);sg.addColorStop(0,rgba(mix([70,58,80],[18,22,44],night),1));sg.addColorStop(1,rgba([8,10,20],1));ctx.fillStyle=sg;ctx.fillRect(1750,772,W-1750,H-772);
+  const sg=ctx.createLinearGradient(0,772,0,H);sg.addColorStop(0,rgba(mix([50,70,120],[18,22,44],night),1));sg.addColorStop(1,rgba([8,10,20],1));ctx.fillStyle=sg;ctx.fillRect(1750,772,W-1750,H-772);
   for(let i=0;i<9;i++){const yy=786+i*14,xx=1770+hash(i,41)*90;ctx.strokeStyle=rgba(mix([220,170,120],[120,140,200],night),0.16*(1-i/9));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xx,yy);ctx.lineTo(xx+30+hash(i,42)*50,yy);ctx.stroke();}
   // cedars along the road
-  P2_CEDARS.forEach((k,i)=>{const x=P2_KX(k),m=P2_PROF,yy=psaAlong(m,P2_U(x))[1];p2_cedar(ctx,x+(hash(i,61)-0.5)*8,yy+3,22+20*hash(i,62),i+70,N([16,14,20]),mix(PSC,[150,170,230],night));});
+  P2_CEDARS.forEach((k,i)=>{const x=P2_KX(k),m=P2_PROF,yy=psaAlong(m,P2_U(x))[1];p2_cedar(ctx,x+(hash(i,61)-0.5)*8,yy+3,22+20*hash(i,62),i+70,N([10,24,30]),mix(PSC,[150,170,230],night));});
   // the road over it
   if((o.road||0)>0.01)psaPath(ctx,P2_PROF,o.roadP==null?1:o.roadP,{col:PSC,lw:3.2,glow:10,a:0.8*o.road});
   // the two stations at its feet, and the one by the lake

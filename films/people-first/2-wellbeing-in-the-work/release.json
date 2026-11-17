@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Wellbeing is in the work",
+    "key": "wellbeing-in-the-work-en",
+    "dir": "films/people-first/2-wellbeing-in-the-work/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/wellbeing-in-the-work/film.js",
+    "video": "dist/wellbeing-in-the-work.mp4",
+    "file": "wellbeing-in-the-work.mp4",
+    "captions": [
+      [
+        "films/people-first/2-wellbeing-in-the-work/captions/en.srt",
+        "wellbeing-in-the-work.en.srt"
+      ],
+      [
+        "films/people-first/2-wellbeing-in-the-work/captions/es.srt",
+        "wellbeing-in-the-work.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/people-first/2-wellbeing-in-the-work/source",
+      ":(exclude)films/people-first/2-wellbeing-in-the-work/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 301,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -119,85 +119,85 @@ Nobody rewrites it as a table. Beside it goes its metadata: the contract's ID, i
 The HR system writes that metadata as it makes the document, so nobody has to read it back.
 
 31
-00:04:12,647 --> 00:04:23,615
+00:04:12,647 --> 00:04:23,416
 Linh Nguyen's contract for this semester, T-26188, has two files: the offer HR sent on 9 July, and the contract she signed on 14 July.
 
 32
-00:04:25,315 --> 00:04:31,365
+00:04:25,116 --> 00:04:31,166
 The offer ended on the 13th of November. Before she signed, HR added a week for marking.
 
 33
-00:04:33,065 --> 00:04:36,593
+00:04:32,866 --> 00:04:36,394
 In a folder, the two look alike. By their metadata, they don't.
 
 34
-00:04:38,493 --> 00:04:47,078
+00:04:38,294 --> 00:04:46,879
 So if Linh asks when her contract ends, a person or an agent finds the signed version, and cites its file: the 20th of November.
 
 35
-00:04:48,978 --> 00:04:56,553
+00:04:48,779 --> 00:04:56,354
 The films Context engineering, and Context and memory, governed, show how a document becomes an agent's context.
 
 36
-00:04:58,053 --> 00:05:06,087
+00:04:57,854 --> 00:05:05,888
 Who may read a contract is Ingrid Holm's to decide, in HR. Data protection, a module of its own, teaches the rest.
 
 37
-00:05:09,387 --> 00:05:12,533
+00:05:09,188 --> 00:05:12,334
 Best of all is a document nobody has to read back.
 
 38
-00:05:13,833 --> 00:05:19,697
+00:05:13,634 --> 00:05:19,498
 Claims for hours worked used to come as spreadsheets by email, and someone typed each one into payroll.
 
 39
-00:05:21,197 --> 00:05:27,027
+00:05:20,998 --> 00:05:26,828
 Now the claims app writes each claim as data, the moment it's made: a row any system can read.
 
 40
-00:05:28,927 --> 00:05:34,143
+00:05:28,728 --> 00:05:33,944
 With it goes its metadata: who claimed, on which contract, whether it's approved, and when.
 
 41
-00:05:35,843 --> 00:05:42,539
+00:05:35,644 --> 00:05:42,340
 What each field means is written in its contract: a YAML file, in an open standard, kept with the app's code.
 
 42
-00:05:44,439 --> 00:05:51,058
+00:05:44,240 --> 00:05:50,859
 It's the log of 1853 again: one form, kept by everyone, so nobody has to read it back.
 
 43
-00:05:54,558 --> 00:06:02,256
+00:05:54,359 --> 00:06:02,057
 Those logs were kept. More than a century later, climate scientists read them again, into over a million weather reports.
 
 44
-00:06:03,756 --> 00:06:07,814
+00:06:03,557 --> 00:06:07,615
 Keep the file and its metadata, and better readers can read it again.
 
 45
-00:06:09,314 --> 00:06:14,151
+00:06:09,115 --> 00:06:13,952
 So Noor Rahman, the data architect, gives every document one of three answers.
 
 46
-00:06:15,251 --> 00:06:21,490
+00:06:15,052 --> 00:06:21,291
 If we write it, we write it as data, in a standard structure such as JSON or YAML, with its metadata.
 
 47
-00:06:22,590 --> 00:06:26,196
+00:06:22,391 --> 00:06:25,997
 If it's official, we keep it as it is, its metadata beside it.
 
 48
-00:06:27,296 --> 00:06:34,946
+00:06:27,097 --> 00:06:34,747
 If it's written for people, we read it, with the platform's functions or a scraper, only where a use case needs it, and keep the file.
 
 49
-00:06:36,446 --> 00:06:42,460
+00:06:36,247 --> 00:06:42,261
 Every organisation's documents differ, and the standards are there already: don't reinvent the wheel.
 
 50
-00:06:43,560 --> 00:06:48,206
+00:06:43,361 --> 00:06:48,007
 Start from the official docs. Investigate, adapt, implement, iterate.
 
 51
-00:06:49,906 --> 00:06:57,260
+00:06:49,707 --> 00:06:57,061
 In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data.

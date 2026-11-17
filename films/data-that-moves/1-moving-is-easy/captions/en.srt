@@ -3,233 +3,233 @@
 June 1883, on the Murray River, the border between two British colonies: New South Wales and Victoria.
 
 2
-00:00:10,118 --> 00:00:15,253
+00:00:10,118 --> 00:00:15,293
 At Albury, a new bridge joins the railway from Sydney to the railway from Melbourne.
 
 3
-00:00:16,553 --> 00:00:21,916
+00:00:16,593 --> 00:00:21,956
 But each colony had built its railway to its own gauge: the distance between the two rails.
 
 4
-00:00:23,016 --> 00:00:28,236
+00:00:23,056 --> 00:00:28,276
 Victoria's rails were about a hand's length further apart, so no train could run on both.
 
 5
-00:00:29,736 --> 00:00:36,751
+00:00:29,776 --> 00:00:36,791
 At Albury, every passenger had to change trains, and every crate and bale of wool was lifted into another wagon.
 
 6
-00:00:38,051 --> 00:00:41,690
+00:00:38,091 --> 00:00:41,730
 It cost travellers time, and traders money, on every journey.
 
 7
-00:00:42,790 --> 00:00:51,447
+00:00:42,830 --> 00:00:51,487
 Each colony had its reasons: New South Wales changed its gauge with a new engineer, and Victoria kept the one both had first chosen.
 
 8
-00:00:52,747 --> 00:00:58,851
+00:00:52,787 --> 00:00:58,891
 For 79 years, everything stopped at Albury, and it would go on stopping until the rails agreed.
 
 9
-00:01:00,551 --> 00:01:10,423
+00:01:00,591 --> 00:01:10,390
 In 1962, Australia's government, with New South Wales and Victoria, opened a new line from Albury to Melbourne, built to one agreed gauge.
 
 10
-00:01:11,723 --> 00:01:18,559
+00:01:11,690 --> 00:01:18,526
 Freight ran straight through that January, and from April, passengers did too, with nobody changing trains.
 
 11
-00:01:19,859 --> 00:01:22,853
+00:01:19,826 --> 00:01:22,820
 Within a year, the freight it carried had grown by a third.
 
 12
-00:01:24,553 --> 00:01:30,499
+00:01:24,520 --> 00:01:30,466
 At the university, HR's contracts once reached Finance as a file each teaching period.
 
 13
-00:01:31,199 --> 00:01:35,505
+00:01:31,166 --> 00:01:35,472
 Rohan Desai's team spent two days working out what each column meant.
 
 14
-00:01:36,805 --> 00:01:42,312
+00:01:36,772 --> 00:01:42,279
 Moving the data was never the hard part. Agree what it means, once, and it passes straight through.
 
 15
-00:01:49,612 --> 00:01:53,272
+00:01:49,579 --> 00:01:53,239
 Modern data basics is about what the tools now make easier.
 
 16
-00:01:53,972 --> 00:02:01,520
+00:01:53,939 --> 00:02:01,487
 Moving data, running a platform, serving data to people and agents, and reading documents all used to take whole teams.
 
 17
-00:02:02,620 --> 00:02:05,452
+00:02:02,587 --> 00:02:05,419
 Databricks and dbt now do much of it.
 
 18
-00:02:06,752 --> 00:02:13,252
+00:02:06,719 --> 00:02:13,219
 Each film shows what got easier, what still needs people to agree, and where the official docs take you next.
 
 19
-00:02:14,552 --> 00:02:19,919
+00:02:14,519 --> 00:02:19,886
 We don't go deep, on purpose: courses and the official docs do that, and they stay up to date.
 
 20
-00:02:21,019 --> 00:02:26,035
+00:02:20,986 --> 00:02:26,002
 These films give the architectural advice: what matters, what to choose, and why.
 
 21
-00:02:27,735 --> 00:02:36,244
+00:02:27,702 --> 00:02:35,962
 Our story follows one contract. Linh Nguyen tutors HI101 this semester, on contract T-26188.
 
 22
-00:02:37,544 --> 00:02:43,855
+00:02:37,262 --> 00:02:43,573
 It was born in the HR system, which sends its data in two shapes, as The Inner Life of Data shows.
 
 23
-00:02:44,955 --> 00:02:53,456
+00:02:44,673 --> 00:02:53,174
 Events: each change as it's made. HR recorded Linh's contract on 14 July, and it reached the platform as one change.
 
 24
-00:02:54,756 --> 00:03:02,316
+00:02:54,474 --> 00:03:02,034
 And batches: on 20 July, the first day of the teaching period, the HR system sent its whole file again.
 
 25
-00:03:03,616 --> 00:03:11,032
+00:03:03,334 --> 00:03:10,750
 Events, messages and batches have had names since Hohpe and Woolf's Enterprise Integration Patterns, over twenty years ago.
 
 26
-00:03:12,332 --> 00:03:15,080
+00:03:12,050 --> 00:03:14,798
 What changed is how little it now takes to move them.
 
 27
-00:03:17,780 --> 00:03:20,568
+00:03:17,498 --> 00:03:20,286
 A managed connector brings a system's data in.
 
 28
-00:03:21,668 --> 00:03:26,963
+00:03:21,386 --> 00:03:26,885
 Sam Okafor, who runs the platform, picked the HR system and the tables to bring.
 
 29
-00:03:28,063 --> 00:03:33,299
+00:03:27,985 --> 00:03:33,221
 The connector reads only what changed, tries again when a read fails, and keeps its place.
 
 30
-00:03:34,599 --> 00:03:38,817
+00:03:34,521 --> 00:03:38,739
 Linh's contract lands in bronze, just as the HR system sent it.
 
 31
-00:03:40,317 --> 00:03:43,971
+00:03:40,239 --> 00:03:43,893
 A query in place reads another system without copying it in.
 
 32
-00:03:45,071 --> 00:03:51,535
+00:03:44,993 --> 00:03:51,457
 Finance's general ledger stays in the finance system, and the platform reads it there, without changing it.
 
 33
-00:03:52,835 --> 00:03:57,581
+00:03:52,757 --> 00:03:57,503
 For large volumes, or quick answers, the docs recommend a connector instead.
 
 34
-00:03:59,081 --> 00:04:05,794
+00:03:59,003 --> 00:04:05,716
 A mirror goes the other way: it shows the university's catalog in another team's tool, without copying it out.
 
 35
-00:04:06,894 --> 00:04:12,598
+00:04:06,816 --> 00:04:12,520
 Rohan works in Microsoft Fabric, and the platform's tables appear there, read where they live.
 
 36
-00:04:14,098 --> 00:04:20,163
+00:04:14,020 --> 00:04:20,085
 A share gives a partner the data where it lives, as Products in open formats and The marketplace showed.
 
 37
-00:04:21,463 --> 00:04:26,685
+00:04:21,385 --> 00:04:26,607
 And an API serves data on request: an app asks, and gets just what it needs.
 
 38
-00:04:27,985 --> 00:04:32,294
+00:04:27,907 --> 00:04:32,216
 Each does what teams once built and mended by hand. Moving is easy now.
 
 39
-00:04:35,994 --> 00:04:42,036
+00:04:35,916 --> 00:04:41,958
 So what's left for people? The contract at each interface: what the data means where two systems meet.
 
 40
-00:04:43,336 --> 00:04:47,101
+00:04:43,258 --> 00:04:47,023
 Ingrid Holm, in HR, owns the HR system's data.
 
 41
-00:04:47,801 --> 00:04:51,479
+00:04:47,723 --> 00:04:51,401
 Noor Rahman, the data architect, agrees its contract with her.
 
 42
-00:04:52,579 --> 00:04:58,768
+00:04:52,501 --> 00:04:58,690
 First, what each field means. pay_type has three values: CAS, FT and CON.
 
 43
-00:04:59,868 --> 00:05:06,693
+00:04:59,790 --> 00:05:06,615
 CON means continuing, not contract. Read it wrong, and Finance counts continuing staff as casual.
 
 44
-00:05:08,193 --> 00:05:10,994
+00:05:08,115 --> 00:05:10,916
 Second, who answers for it: Ingrid, by name.
 
 45
-00:05:12,294 --> 00:05:17,080
+00:05:12,216 --> 00:05:17,002
 Third, what a deletion means. When a contract is cancelled, HR deletes it.
 
 46
-00:05:18,180 --> 00:05:25,797
+00:05:18,102 --> 00:05:25,719
 So the contract says how that arrives: as a change, with its time, never as a row that's just missing from the next file.
 
 47
-00:05:27,097 --> 00:05:30,646
+00:05:27,019 --> 00:05:30,568
 The platform then closes that contract, and keeps its history.
 
 48
-00:05:31,946 --> 00:05:37,226
+00:05:31,868 --> 00:05:37,148
 Fourth, what's personal. Names, birth dates and emails come across, marked personal.
 
 49
-00:05:38,326 --> 00:05:41,542
+00:05:38,248 --> 00:05:41,464
 Bank details and rates of pay never leave HR.
 
 50
-00:05:43,042 --> 00:05:49,011
+00:05:42,964 --> 00:05:48,933
 They write it down in the Open Data Contract Standard, and Jun Park's tests check every row against it.
 
 51
-00:05:50,311 --> 00:05:56,304
+00:05:50,233 --> 00:05:56,226
 Silent change shows what happens when a new value arrives, and only one side knows what it means.
 
 52
-00:05:57,404 --> 00:06:02,886
+00:05:57,326 --> 00:06:02,808
 And A platform that watches itself shows a night when a field changes, and its contract doesn't.
 
 53
-00:06:06,586 --> 00:06:12,063
+00:06:06,508 --> 00:06:11,985
 At Albury, the trains always ran. What took 79 years was agreeing the gauge.
 
 54
-00:06:13,563 --> 00:06:21,994
+00:06:13,485 --> 00:06:21,916
 Now HR's contracts reach Rohan in Fabric the day they're made, meaning just what HR means, and nobody spends two days on them.
 
 55
-00:06:23,494 --> 00:06:25,220
+00:06:23,416 --> 00:06:25,142
 There are already standards for this.
 
 56
-00:06:26,120 --> 00:06:32,747
+00:06:26,042 --> 00:06:32,669
 Enterprise Integration Patterns for how data moves, and the Open Data Contract Standard for what it means.
 
 57
-00:06:34,047 --> 00:06:40,564
+00:06:33,969 --> 00:06:40,486
 Don't reinvent the wheel. Investigate, adapt, implement and iterate, starting from the official docs.
 
 58
-00:06:41,864 --> 00:06:49,101
+00:06:41,786 --> 00:06:49,023
 If these basics are still a struggle where you work, look first at your governance or your tooling: other modules here show both.
 
 59
-00:06:50,601 --> 00:06:53,564
+00:06:50,523 --> 00:06:53,486
 Let the tools move it; spend your time on the contract.

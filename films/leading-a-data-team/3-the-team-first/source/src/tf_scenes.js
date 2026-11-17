@@ -233,7 +233,7 @@ scene("pairs",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       tf_sheet(x,tt,c.pair+0.1,150,140,580,{kick:"Through June",title:"Pairing on the platform"},{light:"day",out:r0-0.5});runbook(x,tt,r0);
       tf_who(x,tt,c.pair+0.1,null,"sam",560,690,0.8,{cut:806,light:dy});
       tf_who(x,tt,w("pair","Noor",-0.3),null,"noor",800,690,0.8,{cut:806,light:dy});
-      tf_who(x,tt,w("pair","Jun",-0.3),null,"jun",1120,690,0.8,{flip:true,cut:806,light:dy});
+      tf_who(x,tt,w("pair","Jun and",-0.3),null,"jun",1120,690,0.8,{flip:true,cut:806,light:dy});
       tf_who(x,tt,w("pair","Erin",-0.3),null,TF_ERIN,1360,690,0.8,{flip:true,cut:806,light:dy});
       lp_nameTag(x,1500,330,TF_ERIN,{a:ag_io(tt,w("pair","Erin",-0.1),r0-0.6,0.4)});
       lp_table(x,400,812,1120);lp_laptop(x,960,790,200,{glow:0.6});

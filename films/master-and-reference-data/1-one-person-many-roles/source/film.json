@@ -10,10 +10,11 @@
   "poster": ["parish", "moved", 2.95],
   "story": ["parish", "back", "five"],
   "say": [
-    ["\\bNguyen\\b", "Nwin"],
+    ["\\bNguyen\\b", "Win"],
     ["\\bLinh's\\b", "Lin's"],
     ["\\bLinh\\b", "Lin"],
-    ["\\bDAMA\\b", "Dahma"],
-    ["\\bHR\\b", "H R"]
+    ["\\bDAMA\\b", "Dah-ma"],
+    ["\\bHR\\b", "H R"],
+    ["\\bNoor\\b", "Nuur"]
   ]
 }

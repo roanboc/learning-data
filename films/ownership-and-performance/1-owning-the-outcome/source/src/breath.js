@@ -1,7 +1,7 @@
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: the seedling still alive on the hill, and the job's tick beside the counts it ran, as they become the title card;
-   and the words of the last line, alone, as they become the end card. */
+   Two wordless moments: Ivy looks up from her screen, and the title card comes over the room; and Ivy, back at her desk, puts a hand to
+   her seedling, and the end card comes with the last line. */
 const BREATH={
 "trees":{"hold":{"when":1.2,"streams":1.2,"cleared":0.8,"sense":1.0,"soil":1.0,"harm":1.2,"change":1.4,"start":1.0,"nursery":1.2,"paid":1.2,"answer":1.4,"fifty":1.0,"give":0.8,"nobel":1.4,"data":0.8},"breathe":5.4},
 "owns":{"hold":{"owner":0.8,"what":1.2,"mesh":1.0,"film":1.0,"promise":1.0,"readers":1.0,"which":1.0,"truly":1.4,"many":0.8,"one":1.2,"helena":0.4}},

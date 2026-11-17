@@ -172,7 +172,7 @@ scene("owns",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
   oo_card(ctx,S,t,w("owner","Thursday",-0.3),tR-0.3,{kick:"Thursday 1 July",title:"Ivy's first data product",col:PK.C.blue});
   oo_card(ctx,S,t,c.what+0.1,tM-0.4,{kick:"The data product",title:"Teaching space use",sub:"Each room, each hour: booked, and how many came",col:PK.C.orange},{right:true,y:76});
   oo_card(ctx,S,t,c.film+0.1,c.promise-0.5,{kick:"An earlier film",title:"A product with an owner",sub:"How a product gets one"});
-  oo_card(ctx,S,t,w("for","timetable",-0.4),c.which-0.5,{kick:"Next year's timetable",title:"Move one peak class in six",sub:"and release rooms nobody uses",col:PK.C.blue},{right:true,y:76});
+  oo_card(ctx,S,t,w("for","timetable",-0.4),c.which-0.5,{kick:"Next year's timetable",title:"Move about one peak class in six",sub:"and release rooms nobody uses",col:PK.C.blue},{right:true,y:76});
   oo_imagined(ctx,S,t,0.2,7.5);oo_kick(ctx,S,ag_in(t,1.0,0.6));
 });
 // the timetable plan Graham holds: a board with a grid, in his hand

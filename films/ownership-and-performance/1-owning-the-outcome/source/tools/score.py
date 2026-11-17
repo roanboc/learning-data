@@ -10,7 +10,7 @@
 #    lamellophone, which this film must not borrow (nothing Kenyan for the Green Belt). A bowed note is a note kept alive by the bow,
 #    which carries the film's idea: a planted seedling is a short sound that dies; a living tree is a note held.
 # The mark: B, D, then G, which wavers into place once, then stays: a seedling that takes. It is played where the story turns: when the
-#    women are paid for each tree still alive, under the title card, at the seedling that earned nothing until it lived, when the film
+#    women are paid for each tree still alive, under the title card, at the seedling that earns nothing until it lives, when the film
 #    comes back to the Green Belt, and at the close, held into the end card.
 # G major, E minor for the problem (the streams drying, the counts that drop). Every chord is tuned pure from G (just intonation, see
 #    hz()): G, C and D major, E and B minor are pure in this table; A minor, and A held with E or with C, are not, and never sound
@@ -20,8 +20,10 @@
 #    bed under the voice; a figure never played again soon after itself; the music and the effects no louder than the governance films'.
 #  - Nothing trembles or pulses: each note one tongue, steady, with no vibrato, its partials harmonic (a bowed note is periodic); each
 #    stopped before it would ring into the next chapter. No urgent pulse: nothing in the film is a rush.
-#  - Every sound is an event on screen, at the moment it appears. Each one below uses the same word and offset as the picture in
-#    src/oo_scenes.js, and pans to where it is drawn, so sound and picture stay together when the voice is re-timed.
+#  - Every sound is something a person does or something that comes in on screen, at that moment: water poured, coins paid, a pot
+#    handed over, a sheet pinned, a count, a marker on the board. Each one below uses the same word and offset as the picture in
+#    src/oo_scenes.js, and pans to where it is drawn, so sound and picture stay together when the voice is re-timed. People's steps and
+#    what they say have no sound of their own: the voice carries them.
 # And everything stays low and soft, below about 2.3 kHz; the effects about 12 dB under the music.
 
 import json as _json, pathlib as _pl
@@ -168,16 +170,16 @@ def _knock(n, f, d, at=0):
     return (np.sin(2 * np.pi * f * x) + 0.35 * np.sin(2 * np.pi * f * 2.3 * x) * np.exp(-x / (0.5 * d))) * np.exp(-x / d) * np.minimum(1, x / 0.0015) * k
 
 def card(s, g=0.004, pan=0.0):
-    """a sheet pinned to the wall, or a card laid down: a soft flap of paper, and its faint landing"""
+    """a sheet pinned to a board, or a card that says where and when: a soft flap of paper, and its faint landing"""
     n = int(0.16 * SR); x = np.arange(n) / SR
     fl = filt(noise(0.18)[:n], 'band', (380, 1800)) * _bump(x, 0.07) * (x < 0.07)
     _fx(fl + 0.6 * _knock(n, 150, 0.018, 0.06) / 1.35, s, g, pan, 1900)
 def tap(s, g=0.0035, pan=0.0):
-    """something small set down, a pill on a screen or a tag: one soft, short tap"""
+    """something small set down or counted: a pot in a hand, a tick, a sensor's count: one soft, short tap"""
     n = int(0.08 * SR); x = np.arange(n) / SR
     _fx(filt(noise(0.1)[:n], 'band', (250, 1100)) * np.exp(-x / 0.007) + 0.6 * _knock(n, 210, 0.012), s, g, pan, 1600)
 def slide(s, sec=0.9, g=0.004, pan=0.0):
-    """a line drawn out on a chart, or struck through a row: a dry, even rub that eases off"""
+    """a line drawn out on a chart or between people, or struck through words: a dry, even rub that eases off"""
     n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 30); gr = 0.7 + 0.3 * gr / max(1e-9, float(np.abs(gr).max()))
     _fx(filt(noise(sec + 0.02)[:n], 'band', (200, 1300)) * _bump(x, sec, 1.4) * gr, s, g, pan, 1500)
 def pen(s, sec=0.7, g=0.005, pan=0.0, n=3):
@@ -193,6 +195,22 @@ def rain(s, sec=4.0, g=0.004, pan=0.0):
     """rain on bare earth, and the water running off it: one soft, low hiss that swells in and settles, never a patter of drops"""
     n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 3); gr = 0.8 + 0.2 * gr / max(1e-9, float(np.abs(gr).max()))
     _fx(filt(noise(sec + 0.02)[:n], 'band', (220, 1300)) * _bump(x, sec, 0.9) * gr, s, g, pan, 1500)
+def pour(s, sec=2.3, g=0.0035, pan=0.0):
+    """water poured from a can onto a bed of earth: one soft, even hiss that swells in and eases off, and the low, round sound of the
+    earth taking it"""
+    n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 5); gr = 0.8 + 0.2 * gr / max(1e-9, float(np.abs(gr).max()))
+    _fx((filt(noise(sec + 0.02)[:n], 'band', (500, 1900)) + 0.5 * filt(noise(sec + 0.02)[:n], 'band', (160, 420))) * _bump(x, sec, 0.8) * gr, s, g, pan, 2000)
+def coin(s, g=0.003, pan=0.0):
+    """a few coins set in a palm: one soft, dull clink, low and short"""
+    n = int(0.22 * SR); x = np.arange(n) / SR
+    sig = sum(a * np.sin(2 * np.pi * f * x) * np.exp(-x / d) for f, a, d in ((1180, 1.0, 0.05), (1730, 0.6, 0.035), (2150, 0.3, 0.025))) * np.minimum(1, x / 0.002)
+    _fx(sig + 0.4 * _knock(n, 320, 0.012), s, g, pan, 2300)
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
 def leaves(s, sec=2.4, g=0.0035, pan=0.0):
     """the wind in young trees on a hillside: one soft, breathy texture that swells in and settles"""
     n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 2); gr = 0.75 + 0.25 * gr / max(1e-9, float(np.abs(gr).max()))
@@ -202,111 +220,122 @@ def leaves(s, sec=2.4, g=0.0035, pan=0.0):
 # 1. Trees still standing: the opening, the module's story from outside data. Kenya, the 1970s: the long tongue's low G alone, then
 #    G major as the hills come in; the women tell Maathai what's going wrong, a short figure as they come; E minor, low, as the streams dry
 #    up; a falling figure as the forests are cleared; C major, plain, for choices that each made sense; the rain on the bare slope, one
-#    soft texture; B minor, low, as the harm falls first on the women, gone before "Something had to change", which has nothing under it.
-#    1977: G major as the movement starts; a rising figure as the seedlings grow in the nurseries; the mark, as the women are paid for each
-#    tree still alive; D major, then G, for living trees, not the planting. Years later, G major spread wide over the green hills, and the
-#    wind in their young trees; a note for each of fuel, food and shelter; D major under the Nobel Prize. The team's room, the long
-#    tongue's G; and the mark again, with G major held, under the title card
+#    soft texture; B minor, low, as the harm falls first on the women, gone before the women bring the trees back, which has nothing
+#    under it. 1977: G major as the movement starts; water poured on a nursery's bed; a rising figure as the seedlings grow; the mark, as
+#    a woman walks her row and is paid for each tree still alive, and the coins in her palm; D major, then G, for living trees, not the
+#    planting. Years later, G major spread wide over the green hills, and the wind in their young trees; a note for each of fuel, food
+#    and shelter; D major under the Nobel Prize. The team's room, the long tongue's G; and the mark again, with G major held, under the
+#    title card
 LV[0] = 0.85
 ow = lambda lid, word, off=0: W('trees', lid, word, off)
 oc = lambda lid, off=0: G('trees', lid, off)
 END = E('trees')
 low(G2, 0.5, 0.8, 0.0, ring=2.6)
 chord((G3, B3, D4), ow('when', 'Kenya', 0.25), 0.65, step=0.16, ring=2.6)
-card(ow('when', 'Kenya', -0.2), 0.0035, px(430))
+card(oc('when', -0.2), 0.0035, px(300))
 figure((B3, D4, E4), ow('women', 'rural', 0.1), 0.6, step=0.3, ring=0.38, last=0.9)
 chord((E3, G3, B3), ow('streams', 'drying', -0.1), 0.55, step=0.16, ring=2.4)
-card(ow('streams', 'streams', -0.3), 0.0035, px(540))
 figure((E4, D4, B3), ow('cleared', 'cleared', 0.05), 0.5, step=0.32, ring=0.36, last=0.9)
 chord((C4, E4, G4), ow('sense', 'sense', 0.0), 0.45, step=0.14, ring=1.8)
-rain(ow('soil', 'washed', -0.6), 4.2, 0.004, px(1040))
+rain(oc('soil', -0.2), 4.6, 0.004, px(1040))
 chord((B2, D3, Fs3), ow('harm', 'harm', 0.0), 0.55, step=0.16, ring=2.4, until=oc('change', -0.4))
 chord((G2, D3, G3, B3), ow('start', 'Green', 0.0), 0.6, step=0.15, ring=2.4)
-card(ow('start', 'nineteen', -0.2), 0.0035, px(960))
+card(oc('start', 0.1), 0.0035, px(300))
+pour(oc('start', 4.6), 2.3, 0.0035, px(880))
 figure((G3, A3, B3, D4), ow('nursery', 'seedlings', 0.0), 0.5, step=0.34, ring=0.4, last=1.0)
-ticked(ow('paid', 'alive', -0.1), 0.004, px(1050))
 mark(ow('paid', 'alive', 0.15), 0.6, last=2.4, bass=((G2, 2, 1.4),))
+coin(ow('paid', 'not', 1.1), 0.003, px(1680))
 chord((D3, Fs3, A3), ow('answer', 'living', 0.0), 0.5, step=0.14, ring=1.2)
 chord((G3, B3, D4), ow('answer', 'living', 1.3), 0.5, step=0.12, ring=1.6)
 chord((G2, D3, B3, G4), oc('fifty', 0.1), 0.55, step=0.2, ring=2.6)
 leaves(oc('fifty', 0.4), 2.6, 0.003, px(960))
-for word, m, x in (('fuel', C4, 980), ('food', E4, 1200), ('shelter', G4, 1440)):
+for word, m, x in (('fuel', C4, 520), ('food', E4, 955), ('shelter', G4, 1420)):
     dax(m, ow('give', word, 0.0), 0.5, px(x) * 0.4, ring=0.5)
-card(ow('nobel', 'two', -0.2), 0.0035, px(960))
+card(oc('nobel', 0.2), 0.0035, px(300))
 chord((D3, A3, D4, Fs4), ow('nobel', 'Nobel', 0.0), 0.5, step=0.14, ring=2.0)
 low(G2, oc('data', 0.3), 0.6, None, ring=1.4)
-tap(ow('data', 'job', -0.1), 0.003, px(1290))
-card(ow('data', 'report', -0.2), 0.0035, px(460))
+tap(ow('data', 'job', -0.2), 0.003, px(380))
+tap(ow('data', 'report', -0.2), 0.003, px(420))
 mark(oc('breath', 0.3), 0.6, last=4.2, bass=((G2, 0, 1.2), (D3, 2, 4.2)), until=END)
 chord((B3, D4), oc('breath', 0.3 + 0.34 * 2 + 0.6), 0.45, step=0.0, ring=3.4, until=END)
 
-# 2. What she owns: the university, a year from now: the chapter turns on C major, low, and Ivy's sheet; the data mesh's sheet; G major
-#    as what Ivy owns comes clear: the timetable change, judged on true counts; one D, held, as the one A comes in; D major under the
-#    authority to match
+# 2. What she owns: the university, a year from now: the chapter turns on C major, low, as Helena brings a seedling in a pot; the pot
+#    in Ivy's hands; the sensor's count as three people come into a teaching room; the product's sheet and its promise, pinned to the
+#    board; G major as what Ivy owns comes clear: the timetable change, judged on true counts; one D, held, as the one A comes in;
+#    D major under the authority to match
 LV[0] = 0.9
 qw = lambda lid, word, off=0: W('owns', lid, word, off)
 qc = lambda lid, off=0: G('owns', lid, off)
 chord((C3, G3, C4, E4), S0('owns') + 0.3, 0.5, step=0.16, ring=2.0)
-card(qw('owner', 'Ivy', -0.2), 0.0035, px(580))
-card(qw('mesh', 'Zhamak', -0.2), 0.0035, px(580))
+card(qw('owner', 'Thursday', -0.3), 0.0035, px(300))
+tap(qw('owner', 'becomes', 1.0), 0.003, px(700))
+for i in range(3):
+    tap(qc('what', 0.8 + 1.4 * i), 0.003, px(350))
+card(qc('mesh', 0.1), 0.0035, px(1020))
+card(qw('promise', 'refreshed', -0.35), 0.0035, px(1020))
 chord((G3, D4, G4), qw('truly', 'judged', 0.0), 0.5, step=0.14, ring=1.8)
-dax(D4, qw('one', 'accountable', -0.3), 0.55, px(1085) * 0.4, ring=1.6)
+dax(D4, qw('one', 'accountable', -0.3), 0.55, px(540) * 0.4, ring=1.6)
 chord((D3, Fs3, A3, D4), qw('helena', 'authority', 0.0), 0.45, step=0.13, ring=1.6, until=E('owns'))
 
-# 3. A Monday that looked fine: G major, light, at the chapter's turn; the screen's two pills, a soft tap each; at the Green Belt, the
-#    mark, as the seedling lives; E minor, low, as the counts drop; B minor as the rooms that classes use would be released; Ivy's pen;
-#    and D major rising to G as she says it first
+# 3. A Monday that looked fine: G major, light, at the chapter's turn, as Ivy comes in; the tick beside every check; at the Green Belt,
+#    the mark, as a seedling goes back in the ground: its G arrives on "until it lived"; the line that falls on Ivy's chart, and
+#    E minor, low, as the counts drop; and D major rising to G as she says it first
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
 chord((G3, B3, D4, G4), S0('monday') + 0.25, 0.45, step=0.12, ring=1.6)
-tap(mw('ran', 'runs', -0.1), 0.003, px(386))
-tap(mw('ran', 'check', -0.1), 0.003, px(406))
-mark(mw('seedling', 'lived', -0.1), 0.5, last=2.0, bass=((G2, 2, 1.2),))
+card(S0('monday') + 1.2, 0.0035, px(300))
+tap(mw('ran', 'Every', -0.2), 0.003, px(200))
+mark(mw('seedling', 'nothing', 0.0), 0.5, last=1.8, bass=((G2, 2, 1.2),), until=mc('reads', -0.5))
+slide(mc('drop', -0.2), 1.3, 0.0035, px(350))
 chord((E3, B3, E4, G4), mw('drop', 'dropped', -0.1), 0.5, step=0.15, ring=2.2)
-chord((B2, Fs3, B3, D4), mw('release', 'release', 0.0), 0.5, step=0.15, ring=2.0)
-pen(mw('writes', 'ten', -0.2), 1.0, 0.0045, px(630), 4)
 figure((D4, Fs4, G4), mw('first', 'first', 0.0), 0.45, step=0.26, ring=0.34, last=1.6, hand=dax)
 
-# 4. Fix it, or raise it: the chapter turns on the long tongue's D; the rows struck through; the hour's highest kept, a figure that
-#    settles; Jun's review, a tick; the days run again, the line drawn, and G major for the right counts; the rule's sheet; the check:
-#    the long tongue's E as today's count falls, then D major as the refresh is held
+# 4. Fix it, or raise it: the chapter turns on the long tongue's D, as Sam comes over; the hour's four counts on Ivy's card, and the
+#    three her model dropped; G major for the right counts, on Tuesday morning; the sensor that sees Ivy come into the room; her check:
+#    the long tongue's E for a drop like this one, then D major as the refresh is held
 LV[0] = 0.9
 fw = lambda lid, word, off=0: W('fix', lid, word, off)
 fc = lambda lid, off=0: G('fix', lid, off)
 low(D3, S0('fix') + 0.3, 0.6, None, ring=1.4)
-slide(fw('step', 'kept', 0.1), 0.6, 0.0035, px(330))
-figure((Fs4, E4, G4), fw('fix', 'highest', 0.0), 0.45, step=0.26, ring=0.34, last=1.4, hand=dax)
-ticked(fw('review', 'every', -0.1), 0.004, px(530))
-slide(fw('rerun', 'run', -0.1), 1.8, 0.0035, px(620))
-chord((G2, D3, B3, G4), fw('rerun', 'right', 0.0), 0.5, step=0.16, ring=2.0)
-card(fw('raise', 'From', -0.2), 0.0035, px(510))
-low(E3, fw('holds', 'drop', 0.2), 0.6, px(810) * 0.4, ring=0.6)
-chord((D3, A3, D4, Fs4), fw('holds', 'holds', 0.0), 0.45, step=0.13, ring=1.8, until=E('fix'))
+tap(fw('four', 'four', -0.3), 0.003, px(350))
+slide(fw('four', 'model', 0.0), 0.7, 0.0035, px(350))
+card(fw('fix', 'Tuesday', -0.2), 0.0035, px(300))
+chord((G2, D3, B3, G4), fw('fix', 'right', 0.0), 0.5, step=0.16, ring=2.0)
+tap(fc('mine', 1.4), 0.003, px(350))
+low(E3, fw('check', 'a drop', 0.1), 0.6, px(350) * 0.4, ring=0.6)
+chord((D3, A3, D4, Fs4), fw('check', 'holds', 0.0), 0.45, step=0.13, ring=1.8, until=E('fix'))
 
-# 5. Nobody to blame: B and G at the chapter's turn, low and open; the three parts' sheets; the ticks; E minor at the joins that failed;
-#    Dekker's sheet; G major when saying it early is safe; the account's sheet
+# 5. Nobody to blame: B and G at the chapter's turn, low and open; a tick over each of the three as they say what they saw; the line
+#    drawn between them, and E minor, where the parts didn't fit; Dekker's card; the question Helena doesn't ask, struck out; G major
+#    when saying it early is safe; Ivy's marker on the board, as she gives her account
 LV[0] = 0.9
 bw = lambda lid, word, off=0: W('blame', lid, word, off)
 bc = lambda lid, off=0: G('blame', lid, off)
 chord((G2, B3), S0('blame') + 0.25, 0.45, step=0.2, ring=1.8)
-for word, x in (('Facilities', 390), ('platform', 960), ('step', 1530)):
-    card(bw('each', word, -0.2), 0.0035, px(x))
-ticked(bw('fit', 'right', -0.1), 0.004, px(960))
-chord((E3, B3, G4), bw('fit', 'fit', -0.3), 0.45, step=0.16, ring=1.8)
-card(bw('dekker', 'Sidney', -0.2), 0.0035, px(960))
+ticked(bw('each', "Sam's", -0.2), 0.004, px(810))
+ticked(bw('each', 'The step', -0.2), 0.004, px(1330))
+ticked(bc('each', 7.4), 0.004, px(1490))
+slide(bw('fit', 'What failed', 0.0), 1.2, 0.0035, px(1150))
+chord((E3, B3, G4), bw('fit', 'What failed', 0.3), 0.45, step=0.16, ring=1.8)
+card(bw('dekker', 'just', -0.3), 0.0035, px(960))
+slide(bw('helena', "isn't who", -0.1), 0.4, 0.0035, px(1100))
 chord((G3, D4, G4, B4), bw('safe', 'safe', 0.0), 0.45, step=0.13, ring=1.8)
-card(bw('account', 'accountable', -0.2), 0.0035, px(960))
+marker(bc('account', 0.0), 1.8, 0.004, px(900), 4)
 
-# 6. On Monday: back at the Green Belt, the mark, low, the trees still standing; Ivy's true counts, D major; each piece of advice, a sheet
-#    pinned; and the close, the mark again, its G held as G major into the end card
+# 6. On Monday: back at the Green Belt, the wind in a young tree, and the mark, low, the trees still standing; Ivy's true counts,
+#    D major; each of the four things, Ivy's marker on the board; and the close, the mark again, its G held as G major into the end card
 LV[0] = 0.9
 cw = lambda lid, word, off=0: W('close', lid, word, off)
 cc = lambda lid, off=0: G('close', lid, off)
+leaves(S0('close') + 0.5, 2.6, 0.003, px(1200))
 mark(cw('back', 'trees', 0.0), 0.45, last=1.8, octave=-1, bass=((G2, 2, 1.4),))
+card(cw('ivy', 'In June', -0.3), 0.0035, px(1640))
 chord((D3, Fs3, A3), cw('ivy', 'true', 0.0), 0.45, step=0.14, ring=1.4)
-card(cc('know', 0.3), 0.0035, px(530))
-for lid, word, x in (('watch', 'Watch', 1390), ('say', 'say', 530), ('mend', 'Fix', 1390)):
-    card(cw(lid, word, -0.1), 0.0035, px(x))
+marker(cw('know', 'know', -0.2), 1.6, 0.004, px(1000), 3)
+marker(cw('watch', 'Watch', -0.1), 1.7, 0.004, px(1000), 3)
+marker(cw('say', 'say so', -0.2), 1.2, 0.004, px(1000), 2)
+marker(cw('mend', 'Fix', -0.1), cw('mend', 'mend', 0.6) - cw('mend', 'Fix', -0.1), 0.004, px(1000), 5)
+card(cc('next', 0.2), 0.0035, px(300))
 mark(cw('take', 'Own', 0.1), 0.5, last=5.0, bass=((G2, 0, 2.0), (D3, 2, 5.0)), until=TOT)
 chord((B3, D4), cw('take', 'Own', 0.1 + 0.34 * 2 + 0.6), 0.42, step=0.0, ring=4.4, until=TOT)

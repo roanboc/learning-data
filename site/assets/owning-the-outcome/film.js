@@ -446,7 +446,7 @@ const NARR={
  {"id":"drop","gap":0.8,"text":"In forty rooms, the counts have dropped to about a quarter."},
  {"id":"release","gap":0.8,"text":"If nobody noticed, the timetable team would release rooms that classes really use."},
  {"id":"wait","gap":0.8,"text":"Ivy doesn't wait to be sure, or to be asked."},
- {"id":"tell","gap":0.8,"text":"She walks over and tells Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow."},
+ {"id":"tell","gap":0.8,"text":"She writes to Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow."},
  {"id":"first","gap":0.8,"text":"Saying it first, before the fix, is part of owning it."}
 ]},
 "fix":{"name":"Fix it, or raise it","lead":1.0,"tail":1.0,"vo":[
@@ -478,19 +478,21 @@ const NARR={
 ]}
 };
 
-const VODUR={"trees/when": 1.936, "trees/women": 6.423, "trees/streams": 5.15, "trees/cleared": 5.743, "trees/sense": 2.246, "trees/soil": 4.246, "trees/harm": 6.768, "trees/change": 3.023, "trees/start": 6.874, "trees/nursery": 6.01, "trees/paid": 5.883, "trees/answer": 2.917, "trees/fifty": 3.737, "trees/give": 4.755, "trees/nobel": 6.313, "trees/data": 4.521, "trees/own": 2.83, "owns/owner": 7.999, "owns/what": 7.312, "owns/mesh": 7.12, "owns/film": 4.713, "owns/promise": 3.903, "owns/readers": 7.564, "owns/for": 7.511, "owns/which": 1.943, "owns/truly": 6.122, "owns/many": 6.908, "owns/one": 6.514, "owns/helena": 2.237, "owns/can": 5.931, "monday/ran": 5.819, "monday/seedling": 3.775, "monday/reads": 2.63, "monday/drop": 2.943, "monday/release": 4.879, "monday/wait": 2.392, "monday/tell": 7.328, "monday/first": 2.766, "fix/sam": 1.66, "fix/four": 6.401, "fix/fix": 6.393, "fix/mine": 3.397, "fix/raise": 6.181, "fix/check": 6.007, "blame/nobody": 1.667, "blame/each": 7.211, "blame/fit": 4.526, "blame/dekker": 7.159, "blame/helena": 4.436, "blame/safe": 4.826, "blame/account": 5.032, "close/back": 5.339, "close/ivy": 8.166, "close/know": 3.092, "close/watch": 2.407, "close/say": 3.194, "close/mend": 5.662, "close/next": 5.375, "close/take": 2.216};
+const VODUR={"trees/when": 1.936, "trees/women": 6.423, "trees/streams": 5.15, "trees/cleared": 5.743, "trees/sense": 2.246, "trees/soil": 4.246, "trees/harm": 6.768, "trees/change": 3.023, "trees/start": 6.874, "trees/nursery": 6.01, "trees/paid": 5.883, "trees/answer": 2.917, "trees/fifty": 3.737, "trees/give": 4.755, "trees/nobel": 6.313, "trees/data": 4.521, "trees/own": 2.83, "owns/owner": 7.999, "owns/what": 7.312, "owns/mesh": 7.12, "owns/film": 4.713, "owns/promise": 3.903, "owns/readers": 7.564, "owns/for": 7.511, "owns/which": 1.943, "owns/truly": 6.122, "owns/many": 6.908, "owns/one": 6.514, "owns/helena": 2.237, "owns/can": 5.931, "monday/ran": 5.819, "monday/seedling": 3.775, "monday/reads": 2.63, "monday/drop": 2.943, "monday/release": 4.879, "monday/wait": 2.392, "monday/tell": 6.532, "monday/first": 2.766, "fix/sam": 1.66, "fix/four": 6.401, "fix/fix": 6.393, "fix/mine": 3.397, "fix/raise": 6.181, "fix/check": 6.007, "blame/nobody": 1.667, "blame/each": 7.211, "blame/fit": 4.526, "blame/dekker": 7.159, "blame/helena": 4.436, "blame/safe": 4.826, "blame/account": 5.032, "close/back": 5.339, "close/ivy": 8.166, "close/know": 3.092, "close/watch": 2.407, "close/say": 3.194, "close/mend": 5.662, "close/next": 5.375, "close/take": 2.216};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: Ivy looks up from her screen, and the title card comes over the room; and Ivy, back at her desk, puts a hand to
-   her seedling, and the end card comes with the last line. */
+   The longer holds give a hand the time to finish a note or a board's line, and the viewer the time to read it: before Carmen's
+   first board (the room, and who she is), after each page of Ivy's notebook, and while Graham answers her chat. Three wordless
+   moments: Ivy looks up from her screen, and the title card comes over the room; Ivy writes "Mine? Fix it. Not mine? Raise it.";
+   and Ivy, at her desk, puts a hand to her seedling, and the end card comes with the last line. */
 const BREATH={
 "trees":{"hold":{"when":1.2,"streams":1.2,"cleared":0.8,"sense":1.0,"soil":1.0,"harm":1.2,"change":1.4,"start":1.0,"nursery":1.2,"paid":1.2,"answer":1.4,"fifty":1.0,"give":0.8,"nobel":1.4,"data":0.8},"breathe":5.4},
-"owns":{"hold":{"owner":0.8,"what":1.2,"mesh":1.0,"film":1.0,"promise":1.0,"readers":1.0,"which":1.0,"truly":1.4,"many":0.8,"one":1.2,"helena":0.4}},
-"monday":{"hold":{"ran":1.2,"seedling":1.2,"reads":1.0,"drop":1.4,"release":1.4,"wait":1.0,"tell":1.4}},
-"fix":{"hold":{"sam":1.0,"four":1.4,"fix":1.4,"mine":1.0,"raise":1.4}},
-"blame":{"hold":{"nobody":0.8,"each":1.2,"fit":1.4,"dekker":1.4,"helena":1.0,"safe":1.0}},
-"close":{"hold":{"back":1.2,"ivy":1.4,"know":0.8,"watch":0.8,"say":0.8,"mend":1.0,"next":1.0},"breathe":5.0}
+"owns":{"hold":{"owner":0.8,"what":4.0,"mesh":1.6,"film":1.0,"promise":1.2,"readers":1.0,"which":1.0,"truly":3.0,"many":1.6,"one":2.2,"helena":0.4}},
+"monday":{"hold":{"ran":1.2,"seedling":1.2,"reads":1.0,"drop":1.4,"release":1.4,"wait":1.0,"tell":5.4,"first":2.6}},
+"fix":{"hold":{"sam":1.0,"four":1.4,"fix":1.4,"mine":1.0,"raise":1.4},"breathe":6.4},
+"blame":{"hold":{"nobody":0.8,"each":1.2,"fit":1.4,"dekker":2.6,"helena":1.0,"safe":1.0,"account":2.0}},
+"close":{"hold":{"back":1.2,"ivy":1.4,"know":0.8,"watch":0.8,"say":0.8,"mend":1.8,"next":1.0},"breathe":5.0}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -1078,7 +1080,9 @@ K.CAST={
   yusuf:{name:"Yusuf Demir",role:"Data governance lead",skin:[212,168,132],hair:{style:"short",c:[44,34,32]},beard:[52,40,36],top:{kind:"jacket",c:[168,104,84],inner:[240,234,224]},bottom:{kind:"trousers",c:[74,70,76]},shoe:[60,46,40]},
   marta:{name:"Marta Silva",role:"Data analyst",skin:[164,114,86],hair:{style:"coily",c:[44,32,28]},earrings:[226,190,128],top:{kind:"jacket",c:[190,168,140],inner:[92,84,88]},bottom:{kind:"trousers",c:[92,76,70]},shoe:[62,48,44]},
   erin:{name:"Erin Walsh",role:"Platform engineer",skin:[240,204,178],hair:{style:"bun",c:[150,88,54]},top:{kind:"sweater",c:[146,122,110]},bottom:{kind:"trousers",c:[66,70,88]},shoe:[58,48,50]},
-  tomas:{name:"Tomás Ortega",role:"Report developer",skin:[206,158,122],hair:{style:"short",c:[52,40,34]},beard:[64,50,44],top:{kind:"sweater",c:[150,96,90]},bottom:{kind:"trousers",c:[70,72,84]},shoe:[58,46,42]}
+  tomas:{name:"Tomás Ortega",role:"Report developer",skin:[206,158,122],hair:{style:"short",c:[52,40,34]},beard:[64,50,44],top:{kind:"sweater",c:[150,96,90]},bottom:{kind:"trousers",c:[70,72,84]},shoe:[58,46,42]},
+  // who explains a film's concepts at a board (PK.teach): a consultant who works with the team now and then
+  carmen:{name:"Carmen Vidal",role:"Consultant",skin:[176,124,92],hair:{style:"bun",c:[168,164,166]},glasses:[60,44,44],top:{kind:"jacket",c:[236,222,196],inner:[86,112,120]},bottom:{kind:"trousers",c:[98,80,92]},shoe:[70,50,52]}
 };
 /* people nobody names: students, staff, passers-by. PK.extra(i) is the i-th, of many backgrounds, the same every time */
 const X_SKIN=[[244,212,186],[226,180,146],[198,150,114],[160,112,84],[118,78,56],[92,60,44],[236,196,160]],X_HAIR=[[40,32,36],[92,60,40],[150,104,62],[30,24,24],[196,150,96],[62,44,40]],
@@ -1387,8 +1391,9 @@ function draw(ctx,P,x,floor,h,pose,o){const S=K.S,t=o.t||0,id=seedOf(P);
   return facing(J,x,tu.sg);}
 K.person=(ctx,who,x,floor,h,pose,o)=>{o=Object.assign({},o||{});const P=typeof who==="string"?K.CAST[who]:who;if(!P)throw new Error("PK.person: nobody called "+who);
   pose=poseOf(pose||"stand");if(typeof o.expr==="string")o.expr=K.EXPR[o.expr];const given=pose,gz=o.gaze||[0,0];pose=alive(P,pose,o);o.pose=pose;
-  // what the kit's checks follow about everyone a film draws (tools/people.py sets PK.watch)
-  const seen=J=>{if(K.watch)K.watch({who:typeof who==="string"?who:(P.key||P.name||"someone"),kid:!!P.kid,x,floor,h,flip:o.flip===true?1:(o.flip||0),part:o.part||"whole",mode:pose.mode||"stand",
+  // what the kit's checks follow about everyone a film draws (tools/people.py sets PK.watch): not a small picture of someone (o.icon),
+  // and someone on a screen (o.screen: a tile of a call) is followed as that, not as someone in the room
+  const seen=J=>{if(K.watch&&!o.icon)K.watch({who:typeof who==="string"?who:(P.key||P.name||"someone"),kid:!!P.kid,x,floor,h,flip:o.flip===true?1:(o.flip||0),part:o.part||"whole",mode:pose.mode||"stand",screen:!!o.screen,
       // the pose, the face and the eyes as the film gives them, before the kit's own life (a settle, a glance): what was staged
       pose:[given.lean||0,given.head||0,given.aN[0],given.aN[1],given.aF[0],given.aF[1],given.lN[0],given.lN[1],given.lF[0],given.lF[1]],
       reach:[o.reachN?(o.reachNk==null?1:o.reachNk):pose.clasp||0,o.reachF?(o.reachFk==null?1:o.reachFk):pose.clasp||0],hold:!!(o.hold||o.under||o.underF||o.holds),
@@ -1566,7 +1571,11 @@ K.nameTag=(ctx,x,y,name,role,a)=>{a=a==null?1:a;const w=Math.max(tw(ctx,name,800
 K.bubble=(ctx,x,y,lines,tail,a,o)=>{o=o||{};a=a==null?1:a;const S=K.S,size=o.size||34,wt=o.weight||700,lh=size*1.3,w=Math.max(...lines.map(l=>tw(ctx,l,wt,size)))+56,h=lines.length*lh+32,bx=x-w/2,by=y-h/2,bb={x:bx,y:by,w,h};
   if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;settle(ctx,tail?tail[0]:x,tail?tail[1]:y,a);
   const col=o.col||[255,253,247],ink=S.id==="line"?S.ink:null;
-  if(tail){const below=tail[1]>y,base=below?by+h:by,dir=below?1:-1,tcx=clamp(tail[0],bx+44,bx+w-44),tip=[lerp(tcx,tail[0],0.85),lerp(base,tail[1],0.72)];
+  // a tail to something beside the bubble, level with it (a tile of a call, a screen), comes out of its side
+  if(tail&&(tail[0]<bx-8||tail[0]>bx+w+8)&&tail[1]>by-8&&tail[1]<by+h+8){const left=tail[0]<bx,base=left?bx:bx+w,dir=left?-1:1,tcy=clamp(tail[1],by+34,by+h-34),tip=[lerp(base,tail[0],0.78),lerp(tcy,tail[1],0.85)];
+    ctx.beginPath();pg(ctx,[[base-dir*6,tcy-17],[base-dir*6,tcy+17],tip]);ctx.lineJoin="round";if(ink){ctx.lineWidth=5;ctx.strokeStyle=css(ink);ctx.stroke();}ctx.fillStyle=css(col);ctx.fill();
+    K.box(ctx,bx,by,w,h,26,col,1);ctx.fillStyle=css(col);ctx.beginPath();pg(ctx,[[base-dir*5,tcy-14],[base-dir*5,tcy+14],[base+dir*3,tcy+12],[base+dir*3,tcy-12]]);ctx.fill();}
+  else if(tail){const below=tail[1]>y,base=below?by+h:by,dir=below?1:-1,tcx=clamp(tail[0],bx+44,bx+w-44),tip=[lerp(tcx,tail[0],0.85),lerp(base,tail[1],0.72)];
     if(o.think){for(const [f,r] of [[0.3,11],[0.62,8],[0.9,5]]){ctx.beginPath();ctx.arc(lerp(tcx,tip[0],f),lerp(base+dir*8,tip[1],f),r,0,TAU);ctx.fillStyle=css(col);ctx.fill();if(ink){ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();}}}
     else{ctx.beginPath();pg(ctx,[[tcx-18,base-dir*6],[tcx+18,base-dir*6],tip]);ctx.lineJoin="round";if(ink){ctx.lineWidth=5;ctx.strokeStyle=css(ink);ctx.stroke();}
       else if(S.id==="paper"){ctx.save();ctx.translate(4,6);ctx.fillStyle="rgba(58,36,30,0.26)";ctx.fill();ctx.restore();ctx.beginPath();pg(ctx,[[tcx-18,base-dir*6],[tcx+18,base-dir*6],tip]);}
@@ -1659,6 +1668,8 @@ function campusView(ctx,x,y,w,h,o){o=o||{};const S=K.S,k=w/640;ctx.fillStyle=S.s
     S.fill(ctx,c=>{ell(c,tx,ty,rr,rr*0.82);ell(c,tx-rr*0.5,ty+rr*0.34,rr*0.6,rr*0.5);ell(c,tx+rr*0.52,ty+rr*0.3,rr*0.56,rr*0.48);},C(i?"viewTree2":"viewTree"),{sa:0.14});}
   S.fill(ctx,c=>rrect(c,x-10,y+h-60*k,w+20,80*k,0),C("lawn"),{flat:true,line:false});}
 K.view={campus:campusView};
+// what a place is painted with, for the kit's other files (concepts.js) and a film's own places: PK.paint.wall(ctx, col, y1) and the rest
+K.paint={wall,floorAt,skirting,rug,shelf,grad};
 K.windowFrame=(ctx,x,y,w,h,o)=>{o=o||{};const S=K.S,fr=C("frame");S.begin(ctx,{lw:3,far:0.1,sh:5});
   S.fill(ctx,c=>{rrect(c,x-18,y-18,w+36,18,4);rrect(c,x-18,y+h,w+36,18,4);rrect(c,x-18,y-18,18,h+36,4);rrect(c,x+w,y-18,18,h+36,4);if(o.bar!==false)rrect(c,x+w/2-7,y,14,h,2);},fr,{});
   S.fill(ctx,c=>rrect(c,x-40,y+h+16,w+80,22,6),lt(fr,0.2),{});};
@@ -1741,7 +1752,8 @@ K.sensor=(ctx,x,y,on)=>{const S=K.S;S.begin(ctx,{lw:2.4,far:0,sh:3});S.fill(ctx,
    hands on the keys. o.flip: they face left. o.w: the desk's length along the frame (0.62 h by default). o.work (0 to 1, 1 by
    default): how far their hands are on the keys; o.pose: their pose when they aren't ("sit"), o.workPose when they are; o.reachN,
    o.reachF: what their hands rest on instead of the keys. o.turn (0 to 1): turned round on the chair, away from the desk. o.screen: "laptop" (the default), "monitor" (it faces us: o.show(ctx, x, y, w, h) draws what it shows;
-   o.sx where it stands, o.sw and o.sh its size) or null. o.on(ctx, D) draws what else is on the desk. The rest as PK.person's.
+   o.sx where it stands, o.sw and o.sh its size; o.keysBack (0 to 1): its keyboard pushed back towards it, to make room for a
+   notebook) or null. o.on(ctx, D) draws what else is on the desk. The rest as PK.person's.
    Returns the person's joints, with J.desk = D: {x0, x1 (its near and far end), cx, top, floor, dir, w, k}. who null: the desk
    and its chair stand empty. */
 K.atDesk=(ctx,who,x,floor,h,o)=>{o=Object.assign({},o||{});const S=K.S,dir=o.flip?-1:1,w=o.w||0.62*h,top=floor-0.43*h,x0=x+dir*0.1*h,x1=x0+dir*w,k=h/660,
@@ -1751,7 +1763,7 @@ K.atDesk=(ctx,who,x,floor,h,o)=>{o=Object.assign({},o||{});const S=K.S,dir=o.fli
   if(who)K.person(ctx,who,x,floor,h,pose,Object.assign({},po,{part:"lower",busy:work>=0.5}));
   S.begin(ctx,lw);K.desk(ctx,D.cx,top,w,floor,{col:o.deskCol,k:h/600});
   if(o.screen==="monitor"){K.monitor(ctx,o.sx==null?x0+dir*w*0.6:o.sx,top,o.sw||0.36*h,o.sh||0.23*h,{draw:o.show});
-    S.begin(ctx,lw);S.fill(ctx,c=>rrect(c,Math.min(x0+dir*0.1*h,x0+dir*0.27*h),top-0.012*h,0.17*h,0.012*h,3),lt(C("laptop"),0.25),{w:0.7});}
+    S.begin(ctx,lw);S.fill(ctx,c=>rrect(c,Math.min(x0+dir*0.1*h,x0+dir*0.27*h)+dir*0.17*h*clamp(o.keysBack||0,0,1),top-0.012*h,0.17*h,0.012*h,3),lt(C("laptop"),0.25),{w:0.7});}
   else if(o.screen!==null)K.laptop(ctx,x0+dir*0.21*h,top,{k,flip:dir<0,glow:o.glow});
   if(o.on)o.on(ctx,D);
   if(!who)return{desk:D};
@@ -1810,6 +1822,509 @@ K.atBoard=(ctx,who,t,lines,o)=>{o=Object.assign({size:30,weight:700,lh:56,back:7
   const tr=down<1e8?pin(t,down-0.45,0.4)*(1-pin(t,down+0.15,0.45)):0,rk=tr>0?tr:wk*(1-turn),tg=tr>0?[o.tray[0],o.tray[1]-10*u]:[q[0]+2,q[1]+Math.sin(t*23)*2.5*wk];
   const pose=Object.assign({},walk,{aN:[walk.aN[0],walk.aN[1],held?"grip":"rest"]}),mk=held?(c,h,deg,J)=>marker(c,polar(h,deg,-6*J.u),polar(h,deg,62*J.u),inkOf(lines[wi])):null;
   const J=K.person(ctx,who,x,o.floor,o.h,pose,{t:o.t==null?t:o.t,flip:turn,expr:o.expr,gaze:o.gaze||[1,-0.3*wk],nod:o.nod,reachN:tg,reachNk:rk,hold:mk});J.writing=wk;return J;};
+})(PK);
+
+/* ===== The people kit: the handwriting font =====
+   Notes in a book and words on a board are written by hand, so the kit carries a handwriting font of its own: Kalam, by Indian Type
+   Foundry, under the SIL Open Font License 1.1 (fonts/OFL-Kalam.txt), in two weights: 400 for a pen, 700 for a heading or a board's
+   marker. These are its Latin subsets from Google Fonts (version 18, checked 17 November 2026), carried in the film's own script,
+   so the film looks the same in the video, in the site's player and in the checks, with no network. hand.js loads them before the
+   film starts. Never edit this file: python tools/font.py writes it again from the two .woff2 files in fonts/. */
+(K=>{K.KALAM={
+400:"data:font/woff2;base64,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",
+700:"data:font/woff2;base64,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"};
+})(PK);
+
+/* ===== The people kit: handwriting =====
+   A film's key ideas stand apart from its scenes (the author, 17 November 2026: "important information now too merged in the
+   scene"). The ideas a film opens with are explained by someone at a board; what to remember, a remark or a conclusion, is a
+   person's colourful notes in a book. Both are written by hand as the voice says them, in the kit's handwriting font (kalam.js),
+   with a pen's marks round them: a line under a heading, a highlighter's band, a ring, a box, an arrow, a tick. This file holds
+   the writing; concepts.js holds the board and the book.
+
+     PK.hand(ctx, s, x, y, o)   words written by hand, their baseline at (x, y). o.size (48), o.w (400; 700 for a heading or a
+                                marker), o.col, o.p (0 to 1: how far they are written, from the left), o.a, o.align, o.deco
+                                (decoration: too small to read on purpose, as on a board far off). -> {w, x0, x1, pen}
+     PK.handW(ctx, s, size, w)  how wide they are
+     PK.pen.<mark>(…)           a pen's mark, as rows of points: line, under, hl, strike, box, ring, arrow, tick, cross, star
+     PK.strokes(ctx, rows, col, w, p, o)   draws a mark as far as p (0 to 1) -> where the pen is
+     PK.ink(ctx, items, t, o)   a board's or a page's writing, item by item, each when its time comes -> where the pen is
+
+   PK.ink's items are rows, drawn in the order given, in the surface's own px from its top left corner:
+     {s, x, y, at, d, size, w, col, align, marks}   words. at: when the pen starts, in the scene's seconds (none: they are there
+          from the start); d: how long the pen takes (by default from their length). marks: what the pen adds once they are
+          written, each [kind, col, at, d]: "under" (a line under them), "under2" (two), "hl" (a highlighter's band), "strike"
+          (a line through them: what isn't so), "box" or "ring" (round them). A mark comes right after the words, one after
+          the other, unless it has an at of its own. Words with no x go on from the words before them, on their line, a
+          space on (gap): a few words of a line in another colour or weight
+     {k, at, d, col, …}    a mark of its own: k "line" or "arrow" (x, y, x1, y1, bow), "box" (x, y, w, h), "ring" (x, y, rx, ry),
+          "tick", "cross", "star" or "dot" (x, y, r), "hl" or "under" (x, y, w, size)
+     {draw(ctx, p, it), at, d, pen(p)}   a drawing of the film's own, p from 0 to 1 (pen: where its pen is)
+   A colour is one of the kit's names ("ink", "blue", "green", "amber", "orange", "mut") or [r, g, b]. Colour keeps its meaning
+   in handwriting too: ink for the words; blue a plan or a rule, green something done or of value, amber a risk or a cost, orange
+   data, for a heading's line, a highlight or a mark. o: {x, y (the surface's corner in the picture), k (its scale), a, lw (the
+   pen's width: 5; a marker's 7), deco, aside (1.4: between two items no further apart than this, the pen stays over the page)}.
+   -> {pen: [x, y] in the picture, on: 0 to 1 (how far the pen is down on the surface), lift, i (the item), col (its colour)}
+   Handwriting is 40 px or more as it is seen: 44 to 56 for a line, 60 to 84 for a heading. */
+(K=>{
+const {TAU,lerp,clamp,sine,pin,mix,css}=K.u;
+K.FT_HAND="Kalam,'Segoe Print','Bradley Hand','Comic Sans MS',cursive";
+if(typeof FT!=="undefined")FT.hand=K.FT_HAND;
+// the font's two weights, from the film's own script: loading starts here, and the film waits for the page's fonts before it starts
+K.handReady=(()=>{try{if(typeof FontFace==="undefined"||typeof document==="undefined"||!document.fonts||!K.KALAM)return Promise.resolve(false);
+  return Promise.all([400,700].map(w=>{const f=new FontFace("Kalam","url("+K.KALAM[w]+") format('woff2')",{weight:String(w),style:"normal"});document.fonts.add(f);return f.load();})).then(()=>true,()=>false);}
+  catch(e){return Promise.resolve(false);}})();
+// a highlighter's colours: the five meanings, light enough to write over
+K.HL={blue:[160,204,242],green:[164,222,180],amber:[250,214,122],orange:[250,190,152],violet:[204,194,246],mut:[222,216,206],ink:[222,216,206]};
+const colOf=c=>Array.isArray(c)?c:(c&&K.C[c])||K.C.ink,hlOf=c=>Array.isArray(c)?c:(c&&K.HL[c])||K.HL.amber;
+K.inkCol=colOf;
+
+K.handW=(ctx,s,size,w)=>ag_tw(ctx,s,{w:w||400,size:size||48,f:"hand"});
+K.hand=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||48,wt=o.w||400,W=K.handW(ctx,s,size,wt),p=o.p==null?1:clamp(o.p,0,1),x0=o.align==="center"?x-W/2:o.align==="right"?x-W:x;
+  if(p>0&&(o.a==null||o.a>0.004)){ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
+    if(p<1){ctx.beginPath();ctx.rect(x0-8,y-size*1.15,(W+16)*p,size*1.7);ctx.clip();}
+    ag_T(ctx,s,x0,y,{w:wt,size,f:"hand",color:css(colOf(o.col)),deco:o.deco});ctx.restore();}
+  return{w:W,x0,x1:x0+W,pen:[x0+W*p,y-size*0.26]};};
+
+/* ---------------------------------------------------------------- a pen's marks
+   A pen's line isn't ruled: its points sway a little, the same way every time. Each mark is rows of points (a row is one stroke),
+   so it can be drawn as far as the pen has come. */
+const sway=(i,seed,amp)=>(Math.sin(i*0.83+seed*1.7)+0.6*Math.sin(i*2.1+seed*0.9))*amp/1.6;
+const seg=(x0,y0,x1,y1,o)=>{o=o||{};const L=Math.hypot(x1-x0,y1-y0)||1,n=Math.max(2,Math.round(L/10)),nx=-(y1-y0)/L,ny=(x1-x0)/L,amp=o.amp==null?1.5:o.amp,out=[];
+  for(let i=0;i<=n;i++){const u=i/n,d=(o.bow||0)*Math.sin(Math.PI*u)+(i&&i<n?sway(i,o.seed||0,amp):0);out.push([lerp(x0,x1,u)+nx*d,lerp(y0,y1,u)+ny*d]);}return out;};
+K.pen={
+  line:(x0,y0,x1,y1,o)=>[seg(x0,y0,x1,y1,o)],
+  under:(x,y,w,o)=>{o=o||{};const g=o.gap==null?10:o.gap,a=[seg(x-4,y+g,x+w+6,y+g-2,{seed:x+y,bow:-1.5})];if(o.two)a.push(seg(x+w+2,y+g+9,x-2,y+g+10,{seed:x+y+3,bow:1}));return a;},
+  hl:(x,y,w,size)=>[seg(x-8,y-size*0.3,x+w+8,y-size*0.3-1,{seed:x+y,amp:0.8})],          // drawn wide, with a flat end
+  strike:(x,y,w,size)=>[seg(x-8,y-size*0.26,x+w+8,y-size*0.32,{seed:x+y,bow:1.5})],
+  box:(x,y,w,h,o)=>{const s=x+y,j=i=>sway(i,s,2.4),a=[x+j(1),y+j(2)],b=[x+w+j(3),y+j(4)],c=[x+w+j(5),y+h+j(6)],d=[x+j(7),y+h+j(8)];
+    return[[].concat(seg(a[0]+8,a[1],b[0],b[1],{seed:s}),seg(b[0],b[1],c[0],c[1],{seed:s+1}).slice(1),seg(c[0],c[1],d[0],d[1],{seed:s+2}).slice(1),seg(d[0],d[1],a[0]-1,a[1]-2,{seed:s+3}).slice(1),[[a[0]+16,a[1]-3]])];},
+  ring:(cx,cy,rx,ry,o)=>{o=o||{};const n=Math.max(26,Math.round((rx+ry)/5)),a0=o.a0==null?-2.5:o.a0,out=[];
+    for(let i=0;i<=n;i++){const u=i/n,a=a0+u*TAU*1.07,g=1+0.06*(u-0.5)+0.012*Math.sin(u*9+cx);out.push([cx+Math.cos(a)*rx*g,cy+Math.sin(a)*ry*g]);}return[out];},
+  arrow:(x0,y0,x1,y1,o)=>{o=o||{};const b=seg(x0,y0,x1,y1,{bow:o.bow||0,seed:x0+y1,amp:1}),n=b.length,e=b[n-1],q=b[Math.max(0,n-3)],g=Math.atan2(e[1]-q[1],e[0]-q[0]),h=o.head||22;
+    return[b,[[e[0]-Math.cos(g-0.5)*h,e[1]-Math.sin(g-0.5)*h],e,[e[0]-Math.cos(g+0.5)*h,e[1]-Math.sin(g+0.5)*h]]];},
+  tick:(x,y,r)=>[[[x-r*0.58,y-r*0.02],[x-r*0.34,y+r*0.2],[x-r*0.14,y+r*0.44],[x+r*0.06,y+r*0.12],[x+r*0.34,y-r*0.3],[x+r*0.66,y-r*0.66]]],
+  cross:(x,y,r)=>[seg(x-r*0.6,y-r*0.6,x+r*0.6,y+r*0.6,{seed:x,amp:0.8}),seg(x+r*0.6,y-r*0.62,x-r*0.6,y+r*0.58,{seed:y,amp:0.8})],
+  star:(x,y,r)=>{const out=[];for(let i=0;i<=5;i++){const a=-Math.PI/2+i*TAU*0.4;out.push([x+Math.cos(a)*r,y+Math.sin(a)*r]);}return[out];}
+};
+const lenOf=rows=>{let L=0;for(const r of rows)for(let i=1;i<r.length;i++)L+=Math.hypot(r[i][0]-r[i-1][0],r[i][1]-r[i-1][1]);return L;};
+// the box a mark's points lie in: [x0, y0, x1, y1]
+const boxOf=rows=>{const b=[1e9,1e9,-1e9,-1e9];for(const r of rows)for(const q of r){b[0]=Math.min(b[0],q[0]);b[1]=Math.min(b[1],q[1]);b[2]=Math.max(b[2],q[0]);b[3]=Math.max(b[3],q[1]);}return b;};
+K.strokes=(ctx,rows,col,w,p,o)=>{o=o||{};p=p==null?1:clamp(p,0,1);let end=rows[0][0];if(p<=0)return end;
+  let left=lenOf(rows)*p+0.01;ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);ctx.strokeStyle=css(colOf(col));ctx.lineWidth=w||5;ctx.lineCap=o.cap||"round";ctx.lineJoin="round";ctx.beginPath();
+  for(let k=0;k<rows.length&&left>0;k++){const r=rows[k];ctx.moveTo(r[0][0],r[0][1]);end=r[0];
+    for(let i=1;i<r.length&&left>0;i++){const d=Math.hypot(r[i][0]-r[i-1][0],r[i][1]-r[i-1][1]);
+      if(d>left){const u=left/(d||1);end=[lerp(r[i-1][0],r[i][0],u),lerp(r[i-1][1],r[i][1],u)];ctx.lineTo(end[0],end[1]);left=0;}else{ctx.lineTo(r[i][0],r[i][1]);end=r[i];left-=d;}}}
+  ctx.stroke();ctx.restore();return end;};
+// where a mark's pen is at p, without drawing it
+const penOn=(rows,p)=>{let left=lenOf(rows)*clamp(p,0,1),end=rows[0][0];for(const r of rows){end=r[0];for(let i=1;i<r.length;i++){const d=Math.hypot(r[i][0]-r[i-1][0],r[i][1]-r[i-1][1]);
+    if(d>=left)return[lerp(r[i-1][0],r[i][0],left/(d||1)),lerp(r[i-1][1],r[i][1],left/(d||1))];left-=d;end=r[i];}}return end;};
+
+/* ---------------------------------------------------------------- a surface's writing
+   Every stroke of the pen on a board or a page, in the order it is drawn: {i (its item), t0, t1, col, draw(ctx, p), at(p), box
+   ([x0, y0, x1, y1]: where it lies), text (words), line (a line drawn along something: a writer walks along it)} */
+const durOf=s=>clamp(0.3+String(s).length*0.05,0.5,2.6);
+function plan(ctx,items,o){const out=[],lw=o.lw||5;let last=null;
+  items.forEach((it,i)=>{const timed=it.at!=null,t0=timed?it.at:-1e9;
+    if(it.s!=null){const size=it.size||48,wt=it.w||400,W=K.handW(ctx,it.s,size,wt),
+        // words with no x go on from the words before them, on their line, a space on (another colour or weight in one line)
+        ix=it.x!=null?it.x:last?last.x1+(it.gap==null?size*0.3:it.gap):0,iy=it.y!=null?it.y:last?last.y:0,
+        x0=it.align==="center"?ix-W/2:it.align==="right"?ix-W:ix,d=it.d||durOf(it.s),t1=timed?t0+d:-1e9,col=colOf(it.col||o.col);last={x1:x0+W,y:iy};
+      const words={i,t0,t1,own:timed,col,text:true,x0,x1:x0+W,box:[x0,iy-size*0.78,x0+W,iy+size*0.24],draw:(c,p)=>K.hand(c,it.s,x0,iy,{size,w:wt,col,p,deco:o.deco}),at:p=>[x0+W*p,iy-size*0.26]},under=[],over=[];let tm=t1+0.18;
+      (it.marks||[]).forEach((m,mi)=>{const [kind,mc,mat,md]=m,hl=kind==="hl",c2=hl?hlOf(mc):colOf(mc||it.col),dd=md||(hl?0.5:kind==="ring"||kind==="box"?0.6:0.4),a0=!timed?-1e9:mat!=null?mat:tm;if(timed&&mat==null)tm=a0+dd+0.12;
+        const line=kind!=="box"&&kind!=="ring",r0=kind==="hl"?K.pen.hl(x0,iy,W,size):kind==="under"?K.pen.under(x0,iy,W):kind==="under2"?K.pen.under(x0,iy,W,{two:true}):kind==="strike"?K.pen.strike(x0,iy,W,size):
+          kind==="box"?K.pen.box(x0-16,iy-size*0.98,W+32,size*1.36):K.pen.ring(x0+W/2,iy-size*0.3,W/2+36,size*0.86),
+          // a writer who walks along a board (o.walk) draws a line back along the words, from where they stand
+          rows=o.walk&&line?r0.map(r=>r.slice().reverse()):r0;
+        (hl?under:over).push({i,m:mi,t0:a0,t1:timed?a0+dd:-1e9,own:timed&&mat!=null,col:c2,line,box:boxOf(rows),draw:(c,p)=>K.strokes(c,rows,c2,hl?size*0.66:lw*(kind==="strike"?1.1:1),p,hl?{cap:"butt",a:0.78}:{}),at:p=>penOn(rows,p)});});
+      out.push(...under,words,...over);return;}
+    if(it.draw){const d=it.d||0.6,at=p=>it.pen?it.pen(p):[it.x||0,it.y||0];out.push({i,t0,t1:timed?t0+d:-1e9,own:timed,col:colOf(it.col||o.col),box:it.box||boxOf([[at(0),at(0.25),at(0.5),at(0.75),at(1)]]),draw:(c,p)=>it.draw(c,p,it),at});return;}
+    const k=it.k,col=k==="hl"?hlOf(it.col):colOf(it.col||o.col),d=it.d||(k==="dot"?0.2:k==="tick"||k==="cross"?0.35:k==="hl"?0.5:0.55),t1=timed?t0+d:-1e9;
+    if(k==="dot"){out.push({i,t0,t1,own:timed,col,box:[it.x-(it.r||7),it.y-(it.r||7),it.x+(it.r||7),it.y+(it.r||7)],draw:(c,p)=>{c.save();c.fillStyle=css(col);c.beginPath();c.arc(it.x,it.y,(it.r||7)*sine(p),0,TAU);c.fill();c.restore();},at:()=>[it.x,it.y]});return;}
+    const rows=k==="line"?K.pen.line(it.x,it.y,it.x1,it.y1,{bow:it.bow,seed:it.x+it.y}):k==="arrow"?K.pen.arrow(it.x,it.y,it.x1,it.y1,{bow:it.bow,head:it.head}):k==="box"?K.pen.box(it.x,it.y,it.w,it.h):
+      k==="ring"?K.pen.ring(it.x,it.y,it.rx,it.ry):k==="tick"?K.pen.tick(it.x,it.y,it.r||18):k==="cross"?K.pen.cross(it.x,it.y,it.r||18):k==="star"?K.pen.star(it.x,it.y,it.r||18):
+      k==="hl"?K.pen.hl(it.x,it.y,it.w,it.size||48):k==="under"?K.pen.under(it.x,it.y,it.w,{two:it.two}):null;
+    if(!rows)throw new Error("PK.ink: no mark called "+k);
+    out.push({i,t0,t1,own:timed,col,line:k==="line"||k==="arrow"||k==="hl"||k==="under",box:boxOf(rows),draw:(c,p)=>K.strokes(c,rows,col,k==="hl"?(it.size||48)*0.66:(it.lw||lw),p,k==="hl"?{cap:"butt",a:0.78}:{}),at:p=>penOn(rows,p)});});
+  return out;}
+// every timed stroke, in the order the pen draws them: what a writer's hand and feet follow (concepts.js); all: also what is there
+// from the start, in the order given
+K.inkPlan=(ctx,items,o,all)=>{const P=plan(ctx,items,o||{});return all?P:P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);};
+K.ink=(ctx,items,t,o)=>{o=o||{};const k=o.k||1,ox=o.x||0,oy=o.y||0,P=plan(ctx,items,o),aside=o.aside==null?1.4:o.aside,a=o.a==null?1:clamp(o.a,0,1);
+  if(a>0.004){ctx.save();ctx.translate(ox,oy);ctx.scale(k,k);ctx.globalAlpha*=a;for(const s of P){const p=s.t1<=-1e8?1:clamp((t-s.t0)/((s.t1-s.t0)||1),0,1);if(p>0)s.draw(ctx,p);}ctx.restore();}
+  // where the pen is: on the stroke being drawn; between two strokes close in time, on its way from one to the next; else lifted away
+  const T=P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);let cur=null,pv=null,nx=null;
+  for(const s of T){if(t>=s.t0&&t<=s.t1){if(!cur)cur=s;}else if(s.t1<t){if(!pv||s.t1>=pv.t1)pv=s;}else if(!nx||s.t0<nx.t0)nx=s;}
+  const out=q=>[ox+q[0]*k,oy+q[1]*k];
+  if(cur)return{pen:out(cur.at(clamp((t-cur.t0)/((cur.t1-cur.t0)||1),0,1))),on:1,lift:0,i:cur.i,col:cur.col};
+  if(pv&&nx&&nx.t0-pv.t1<=aside){const u=sine((t-pv.t1)/((nx.t0-pv.t1)||1)),A=pv.at(1),B=nx.at(0);return{pen:out([lerp(A[0],B[0],u),lerp(A[1],B[1],u)]),on:1,lift:Math.sin(Math.PI*u),i:u<0.5?pv.i:nx.i,col:u<0.5?pv.col:nx.col};}
+  const kOut=pv?1-pin(t,pv.t1+0.2,0.5):0,kIn=nx?pin(t,nx.t0-0.6,0.5):0;
+  if(kIn>=kOut&&nx)return{pen:out(nx.at(0)),on:kIn,lift:1-kIn,i:nx.i,col:nx.col};
+  if(pv)return{pen:out(pv.at(1)),on:kOut,lift:1-kOut,i:pv.i,col:pv.col};
+  return{pen:null,on:0,lift:1,i:-1,col:K.C.ink};};
+})(PK);
+
+/* ===== The people kit: key ideas, apart from the scene =====
+   A film moves between people and its key ideas (the author, 17 November 2026). Two devices hold the ideas, both written by hand
+   (hand.js), and both keep a person in the picture:
+     a board   the ideas a film opens with, explained by someone at a board: a consultant, a teacher, a colleague. They write
+               each line as the voice says it, then turn to the room.
+     a book    what to remember: a remark, a conclusion, the film's takeaway, as someone's colourful notes in their notebook,
+               seen from above, their hand writing them.
+   A scene shows who writes and where (the consultant at the room's board; Ivy opening her notebook at her desk); then the film
+   cuts or dissolves to the board or the page, close enough to read, and back to the people.
+
+     PK.place.board      a wall with a wide board, close enough to read, and floor enough for whoever explains to stand whole.
+                         PK.ROOMS.board: eye, floor, h (their height), board {x, y, w, h}, rest (where they stand aside),
+                         reach [y0, y1] (the band of the board's own px a hand reaches: keep every line's baseline inside it)
+     PK.teach(ctx, who, t, items, o)   someone explains at a board. items: PK.ink's rows, in the board's own px from its top left
+                         corner. The explainer faces the board to write, standing to the right of the marker so that what they
+                         write stays in view, and walks along as a line grows. Then they turn to the room and step to the right
+                         of all that is written, so nobody has to read round them: at once after the last line, and between
+                         two lines when the next leaves the time to come back. They start at o.rest, beyond the board.
+                         o: x, y (the board's corner), k (the writing's scale), floor, h, rest, face (how far they turn to the
+                         room: 0.66), stand ("clasp"), say ([[t0, t1], …]: when they speak), events (PK.face's), deco, a (fades
+                         the writing). who null: only the writing. -> their joints, with J.pen (PK.ink's result) and J.late
+                         On a board far off (the room's own, in a wide shot) give k and deco: the words are too small to read
+                         there on purpose, since the close view shows them.
+     PK.pace(ctx, who, rows)   the rows, each moved as much later as whoever writes them needs to walk to it. Give each row the
+                         time the voice says it, pace them once, and hand the result to every PK.teach that shows them.
+     Lay a board out for someone who walks (the check, people.py, lists what goes against these):
+       - they walk about 0.95 of their height a second, so a new row costs its walk back: about 0.8 s for a row 500 px long.
+         PK.pace makes the row wait for it, and a row that waits is written after the voice has said it. So write on from left
+         to right: a few words in another colour go on along their line (a row with no x); a short row under a long one starts
+         where the long one ended, not at the left again; what the voice says first is written first;
+       - writing below the top of their head (the board's y 130 and below) is hidden while they stand in front of it. They step
+         clear by themselves (about 1 s for 600 px): leave that, and a second to read, before the film cuts away;
+       - a line drawn back along words (under them, or through them) leaves the writer at the words' start, in front of the
+         rows above. Words in a colour need no walk; a tick or a cross before a row, made before it, needs none either;
+       - what is added later to rows that are there (a letter beside each) goes to their right, never to their left, where the
+         writer would stand on the rows;
+       - a board is written with markers: words in a colour, a line under, a ring, a box, a tick, a cross, an arrow. A
+         highlighter's band belongs to a notebook.
+     PK.place.notes      a desk seen from above, an open notebook on it: PK.ROOMS.notes: page {x, y, w, h} (the page to write
+                         on, in the picture's px), rot (how the book is turned), rest (where the hand waits)
+     PK.notes(ctx, who, t, items, o)   someone's notes: items are PK.ink's rows in the page's own px; who gives the hand its skin
+                         and its sleeve. The hand writes each item, and waits at the page's corner between two that are far
+                         apart. o.a fades the writing; o.hand false: the notes without the hand. -> PK.ink's result
+     PK.penHand(ctx, who, tip, o)      a hand holding a pen, seen from above, the pen's point at tip; o.k its size, o.col the pen's
+                                       colour, o.lift (0 to 1: raised off the page)
+     PK.notebook(ctx, x, y, k, o)      a notebook as a thing, seen from the side: closed on a desk (its near corner at x, y), or
+                                       o.open: held open on a knee or a hand; o.rot, o.cover (its colour)
+     PK.inHand.pen(col), PK.inHand.marker(col), PK.inHand.notebook(o)   what a hand holds, for PK.person's o.hold and o.underF
+   Writing takes a hand: a pen or a marker in it is what the hand holds. Nothing here goes below y 890 but the desk, the floor
+   and the hand: the captions are there. */
+(K=>{
+const {TAU,rad,lerp,clamp,sine,pin,mix,dk,lt,css,hash,polar,capsule,pg,rrect,ell}=K.u,C=K.col;
+Object.assign(K.PAL,{page:[254,251,244],dot:[204,210,220],ring:[96,100,112],cover:[70,120,134],tab:[250,214,122],desk:[214,170,124]});
+
+/* ---------------------------------------------------------------- a board someone explains at */
+K.ROOMS.board={eye:300,floor:960,h:725,board:{x:150,y:118,w:1250,h:524},rest:1640,reach:[96,470]};
+const marker=(c,a,b,col,u)=>{const S=K.S;S.fill(c,cc=>capsule(cc,a,b,9*u,8*u),[70,74,90],{w:0.6});S.fill(c,cc=>capsule(cc,[lerp(a[0],b[0],0.8),lerp(a[1],b[1],0.8)],b,8*u,6*u),col,{w:0.6,flat:true});};
+K.place.board=ctx=>{const S=K.S,R=K.ROOMS.board,b=R.board;K.paint.wall(ctx,C("wall"),900);
+  S.begin(ctx,{lw:4,far:0.05,sh:6});K.board(ctx,b.x,b.y,b.w,b.h);
+  // the markers on its tray, one for each colour the writing uses
+  [K.C.blue,K.C.green,K.C.amber].forEach((c,i)=>marker(ctx,[b.x+b.w*0.5-150+i*112,b.y+b.h+3],[b.x+b.w*0.5-150+i*112+84,b.y+b.h+3],c,1));
+  K.paint.floorAt(ctx,900,C("floor"),true);K.paint.skirting(ctx,878);};
+K.inHand={
+  marker:col=>(c,hd,deg,J)=>marker(c,polar(hd,deg,-8*J.u),polar(hd,deg,60*J.u),K.inkCol(col),J.u),
+  pen:col=>(c,hd,deg,J)=>{const S=K.S,a=polar(hd,deg-150,34*J.u),b=polar(hd,deg+30,30*J.u);S.fill(c,cc=>capsule(cc,a,b,5.5*J.u,4.5*J.u),K.inkCol(col||"blue"),{w:0.6});},
+  notebook:o=>(c,hd,deg,J)=>K.notebook(c,hd[0],hd[1],J.u*1.5,Object.assign({open:true,held:true},o||{}))
+};
+/* whoever writes at a board, as a body that walks: where they stand for each stroke, and how fast they get there */
+/* for the check: the rows written near an edge of their board or page, or past it, each {s, room}: the px left between its ink
+   and the nearest edge (less than nothing: past it), in the surface's own px (w by h) */
+const nearEdge=(ctx,items,w,h)=>{const out=[];for(const s of K.inkPlan(ctx,items,{},true)){if(!s.box)continue;const room=Math.min(s.box[0],w-s.box[2],s.box[1],h-s.box[3]);
+  if(room<60)out.push({s:String(items[s.i].s||items[s.i].k||"a drawing"),room});}return out;};
+const boardOf=o=>{const R=K.ROOMS.board;return Object.assign({x:R.board.x,y:R.board.y,k:1,floor:R.floor,h:R.h,rest:R.rest,face:0.66,stand:"clasp",lw:7},o||{});};
+const walker=(P,o)=>{const h=o.h,u=h/1000,fl=o.floor,J0=K.rig(P,0,fl,h,"stand",{flip:true,life:0}),sdx=J0.shF[0],sy=J0.shF[1],A=(J0.p.uarm+J0.p.farm+J0.p.hand*0.45)*u,near=0.14*h,
+    // where they stand for the marker to be at q: the shoulder as far from it as an arm reaches with ease, and never so near that they hide it
+    standX=q=>q[0]-sdx+Math.max(near+sdx,Math.sqrt(Math.max(0.09*A*A,0.7*A*A-(q[1]-sy)*(q[1]-sy)))),
+    toPic=q=>[o.x+q[0]*o.k,o.y+q[1]*o.k],box=s=>{const a=toPic([s.box[0],s.box[1]]),b=toPic([s.box[2],s.box[3]]);return[a[0],a[1],b[0],b[1]];},
+    // the furthest to the right of q their shoulder can be for the marker to reach it
+    far=q=>q[0]-sdx+Math.sqrt(Math.max(0.04*A*A,0.85*A*A-(q[1]-sy)*(q[1]-sy))),
+    /* where they stand as a stroke starts, coming from px. Words, and a line drawn along something, they walk along, to the right
+       of the marker; a mark of its own (a tick, a ring) they make from one place, to the right of all of it. Where they are
+       already will do, or a hand's width from it, when the marker reaches from there and they don't hide the mark: nobody
+       walks for a tick */
+    stay=(px,lo,hi,best)=>{if(px==null)return best;const c=clamp(px,lo,Math.max(lo,hi));return Math.abs(c-px)<0.06*h?c:best;},
+    from=(s,px)=>{if(s.text||s.line){const q=toPic(s.at(0));return stay(px,q[0]+near,far(q),standX(q));}
+      const b=box(s),m=[(b[0]+b[2])/2,(b[1]+b[3])/2],lo=b[2]+near,hi=Math.max(lo,far([b[0],m[1]]));return stay(px,lo,hi,Math.max(lo,Math.min(standX(m),hi)));};
+  // how long a walk of d px takes at a speed: a step of a hand's width takes no time, since the arm reaches; a real walk has a turn in it
+  return{h,u,fl,sdx,sy,A,near,standX,toPic,box,speed:0.95*h,side:0.9*h,dur:(d,sp)=>Math.abs(d)<0.06*h?0:Math.max(0.3,Math.abs(d)/sp+0.1),
+    // what they could hide: writing that reaches below the top of their head
+    hid:s=>box(s)[3]>fl-0.95*h,from,to:(s,a)=>s.text||s.line?standX(toPic(s.at(1))):a};};
+/* PK.pace(ctx, who, rows, o) -> the rows, each line and mark that has a time moved as much later as whoever writes them needs to
+   walk to it from where the one before ended, and never earlier than its own at. So give each row the time the voice says it,
+   pace the rows once, and hand the result to PK.teach, for the board seen close and for the room's own board alike: both are
+   then at the same line at every moment. It paces for the board seen close (PK.ROOMS.board), where the walks are longest. A row
+   keeps how far its words were moved as lag (seconds): the check lists a row that comes long after the voice.
+   The hand needs time too: between two strokes the pen crosses to the next one's start, and a stroke that began the moment the
+   last one ended, a row below, would throw the arm there in one frame. So a stroke also waits until the hand can have crossed.
+   With who null it paces a page of notes (PK.notes), where only a hand moves: PK.pace(ctx, null, rows). There one stroke also
+   waits for the one before to end, since one pen writes them all. */
+K.pace=(ctx,who,items,o)=>{const P=typeof who==="string"?K.CAST[who]:who,out=items.map(it=>Object.assign({},it,it.marks?{marks:it.marks.map(m=>m.slice())}:{})),moved={};
+  if(P)o=boardOf(o);
+  const G=P?walker(P,o):null,S_=K.inkPlan(ctx,items,P?{x:o.x,y:o.y,k:o.k,lw:o.lw,walk:true}:{}),at=(s,p)=>G?G.toPic(s.at(p)):s.at(p),hand=G?0.7*G.h:1500;
+  let px=P?o.rest:0,pt=-1e9,pq=null;
+  for(const s of S_){const a=G?G.from(s,px):0,t0=s.t0+(s.own?0:moved[s.i]||0),q0=at(s,0),hop=pq?Math.min(0.35,Math.hypot(q0[0]-pq[0],q0[1]-pq[1])/hand):0,
+      t=Math.max(t0,pt+Math.max(G?G.dur(a-px,G.speed)+0.06:0.05,hop)),it=out[s.i];
+    if(s.m==null){if(t>t0+1e-6){it.at=t;it.lag=(it.lag||0)+t-t0;}moved[s.i]=t-s.t0;}
+    else if(s.own||t>t0+1e-6){const m=it.marks[s.m];m[2]=t;if(m[3]==null)m[3]=s.t1-s.t0;}
+    if(G)px=G.to(s,a);pt=t+(s.t1-s.t0);pq=at(s,1);}
+  return out;};
+/* PK.written(ctx, who, rows) -> every stroke of rows as PK.pace gave them, in the order the pen draws them: {s (a row's words, or
+   a mark's kind), mark (true for a pen's mark), t0, t1 (the scene's seconds), x, y (its middle in the picture: on the board seen
+   close, or on the page)}. A film's score asks for it (tools/pens.py), so a marker's or a pen's sound falls where the picture
+   writes: a paced row's moment isn't a word's time plus an offset. who: as for PK.pace (null for a page of notes) */
+K.written=(ctx,who,items)=>{const P=typeof who==="string"?K.CAST[who]:who,o=P?boardOf():null;
+  return K.inkPlan(ctx,items,P?{x:o.x,y:o.y,k:o.k,lw:o.lw,walk:true}:{}).map(s=>{const q=s.at(0.5),p=P?[o.x+q[0]*o.k,o.y+q[1]*o.k]:pageAt(K.ROOMS.notes,q),it=items[s.i];
+    return{s:s.m!=null?String(it.marks[s.m][0]):String(it.s||it.k||"drawing"),mark:s.m!=null||!it.s,t0:s.t0,t1:s.t1,x:p[0],y:p[1]};});};
+K.teach=(ctx,who,t,items,o)=>{o=boardOf(o);
+  const io={x:o.x,y:o.y,k:o.k,lw:o.lw,deco:o.deco,a:o.a,walk:true},pen=K.ink(ctx,items,t,io),P=typeof who==="string"?K.CAST[who]:who;if(!P)return{pen};
+  const G=walker(P,o),{h,u,fl,sdx,sy,A,toPic,box,hid,from,to,speed,side,dur}=G,all=K.inkPlan(ctx,items,io,true),S_=all.filter(s=>s.t1>-1e8).sort((a,b)=>a.t0-b.t0),
+    amp=K.ampOf(P),stride=K.strideOf(h,amp),mv=[],busyAt=[],late=[];
+  /* their feet: moves [t0, t1, x0, x1, eased]; between two, they stay where they are. To write, they walk to the line's start,
+     facing the board, and along it as it grows. Then they turn to the room, and never stay in front of what is written: they step
+     to the right of all of it (right: its right edge, as far as they could hide it) as soon as the next line leaves the time to
+     come back; and when the next is written from beyond the words, they go there at once. A line that starts before their legs
+     can bring them to it is late: PK.pace moves it, and the check lists one that is left (people.py). */
+  let px=o.rest,pt=-1e9,right=-1e9;for(const s of all)if(s.t1<=-1e8&&hid(s))right=Math.max(right,box(s)[2]);
+  const go=(t1,x1,sp,busy)=>{if(Math.abs(x1-px)<=0.5)return Math.max(pt,t1);const d=Math.max(0.12,dur(x1-px,sp)),t0=Math.max(pt,t1-d),te=Math.max(t1,t0+0.72*d);mv.push([t0,te,px,x1,1]);if(busy)busyAt.push([t0,te]);px=x1;pt=te;return te;};
+  S_.forEach((s,j)=>{const a=from(s,px),b=to(s,a),ta=go(s.t0-0.05,a,speed,true);if(ta>s.t0+0.2)late.push({i:s.i,t:s.t0,by:ta-s.t0});
+    if(b!==a&&ta<s.t1-0.05){mv.push([Math.max(s.t0,ta),s.t1,a,b,0]);px=b;}
+    pt=Math.max(pt,s.t1);busyAt.push([s.t0-0.2,s.t1+0.1]);if(hid(s))right=Math.max(right,box(s)[2]);
+    const nx=S_[j+1],clear=Math.max(px,right+0.26*h);if(clear-px<=0.03*h)return;
+    // the hand comes down and they turn, then they go
+    if(!nx){go(pt+0.2+dur(clear-px,side),clear,side,false);return;}
+    const aN=from(nx,px);
+    if(aN>=clear-0.02*h){if(nx.t0-pt>0.5+dur(aN-px,speed))go(pt+0.2+dur(aN-px,speed),aN,speed,false);}
+    else if(aN!==px&&nx.t0-0.05-pt>=0.2+dur(clear-px,side)+0.3+dur(aN-clear,speed))go(pt+0.2+dur(clear-px,side),clear,side,false);});
+  const xAt=tt=>{let x=o.rest;for(const [t0,t1,x0,x1,e] of mv){if(tt<=t0)break;const q=clamp((tt-t0)/(t1-t0),0,1);x=lerp(x0,x1,e?sine(q):q);}return x;};
+  let busy=0;for(const [t0,t1] of busyAt)busy=Math.max(busy,pin(t,t0-0.35,0.4)*(1-pin(t,t1+0.1,0.45)));
+  // off: they walk away from the board, to the right, and face the way they go
+  const x=xAt(t),vs=(xAt(t+0.04)-xAt(t-0.04))/0.08,v=Math.abs(vs),off=clamp(vs/(0.3*h),0,1)*(1-busy),wr=pen.on*busy,q=pen.pen||[x-0.2*h,sy],
+    walk=K.poseMix(K.poseMix(o.stand,"ease",Math.max(busy,off)),K.poseWalk(Math.abs(x-o.rest)/stride,1,amp*lerp(1,0.42,wr)),clamp(v/180,0,1)*0.85),low=clamp((q[1]-sy-0.5*A)/(0.45*A),0,1.3)*wr,
+    pose=Object.assign({},walk,{lean:(walk.lean||0)+14*low,aF:[walk.aF[0],walk.aF[1],"grip"]}),
+    // the hand, so that the marker's point is on the writing: the marker lies along the forearm, which points about where the shoulder does
+    sh=[x+sdx,sy],dl=Math.hypot(q[0]-sh[0],q[1]-sh[1])||1,tg=[q[0]-(q[0]-sh[0])/dl*58*u,q[1]-(q[1]-sh[1])/dl*58*u+Math.sin(t*23)*2.2*(1-pen.lift)*wr],
+    F=K.face(t,{expr:o.expr||"neutral",gaze:[lerp(0.1,1,busy),lerp(0,q[1]<sy?-0.4:0.3,wr)]},(o.events||[]).concat((o.say||[]).map(([a,b])=>[a,"say",b-a])));
+  const J=K.person(ctx,who,x,fl,h,pose,Object.assign({t:o.t==null?t:o.t,flip:lerp(lerp(o.face,0.25,off),1,busy),reachF:tg,reachFk:wr,underF:K.inHand.marker(pen.col)},F));
+  /* for the check: are they in front of words that are written, close enough to read, while they aren't writing; the lines that
+     start before they can be there; and the lines PK.pace moved long after the voice */
+  if(K.watch){const name=i=>String(items[i].s||items[i].k||"a drawing"),
+      over=!o.deco&&busy<0.5&&all.some(s=>{if(!hid(s)||s.t0>t)return false;const b=box(s),x1=s.t1>t&&(s.text||s.line)?toPic(s.at(clamp((t-s.t0)/((s.t1-s.t0)||1),0,1)))[0]:b[2];return b[0]<x+0.1*h&&Math.max(x1,b[0])>x-0.1*h;});
+    K.watch({teach:typeof who==="string"?who:(P.key||P.name||"someone"),over,late:o.deco?[]:late.map(l=>({s:name(l.i),t:l.t,by:l.by})),
+      lag:o.deco?[]:items.map((it,i)=>it.lag?{s:name(i),t:it.at,by:it.lag}:null).filter(Boolean),
+      edge:o.deco?[]:nearEdge(ctx,items,K.ROOMS.board.board.w,K.ROOMS.board.board.h),a:1,ctx});}
+  J.pen=pen;J.writing=wr;J.late=late;return J;};
+
+/* ---------------------------------------------------------------- a notebook someone writes in
+   The desk is seen from straight above; the book lies a little turned, its right page large in the picture, its left page mostly
+   out of it. What is written goes on the right page, in the page's own px. */
+K.ROOMS.notes={rot:-0.03,pivot:[960,540],page:{x:420,y:70,w:1100,h:1160},rest:[1610,960]};
+// the page's own px to the picture's, and back to draw on it
+const pageAt=(R,q)=>{const c=Math.cos(R.rot),s=Math.sin(R.rot),x=R.page.x+q[0]-R.pivot[0],y=R.page.y+q[1]-R.pivot[1];return[R.pivot[0]+x*c-y*s,R.pivot[1]+x*s+y*c];};
+const onBook=(ctx,R)=>{ctx.translate(R.pivot[0],R.pivot[1]);ctx.rotate(R.rot);ctx.translate(-R.pivot[0],-R.pivot[1]);};
+/* o.cover: the book's colour; o.left(ctx, page): what is on the left page (page: its {x, y, w, h}, in the turned book's px; the
+   part of it in the picture is about 330 px wide); o.on(ctx): what else lies on the desk, in the picture's px */
+K.place.notes=(ctx,o)=>{o=o||{};const S=K.S,R=K.ROOMS.notes,p=R.page,desk=C("desk"),cover=S.tone(o.cover||K.PAL.cover),page=C("page"),g=40,lp={x:p.x-g-1000,y:p.y,w:1000,h:p.h};
+  ctx.fillStyle=css(desk);ctx.fillRect(0,0,1920,1080);
+  // the desk's grain: a few long lines
+  ctx.save();ctx.strokeStyle=css(dk(desk,0.16),0.55);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();
+  for(let i=0;i<9;i++){const y=40+i*128+(hash(i,3)-0.5)*40,x0=hash(i,5)*600-100,x1=x0+500+hash(i,7)*900;ctx.moveTo(x0,y);ctx.bezierCurveTo(lerp(x0,x1,0.3),y+7,lerp(x0,x1,0.7),y-7,x1,y+3);}ctx.stroke();ctx.restore();
+  // the highlighters the notes are coloured with, lying beside the book (o.things false: a bare desk)
+  if(o.things!==false){S.begin(ctx,{lw:3.4,sh:6});[["blue",1668,196,82],["green",1752,236,97],["amber",1836,188,88]].forEach(([n,x,y,deg])=>{const c0=mix(K.C[n],[255,255,255],0.3);
+      ctx.save();ctx.translate(x,y);ctx.rotate(rad(deg));ctx.fillStyle="rgba(84,52,36,0.2)";ctx.beginPath();capsule(ctx,[8,10],[212,10],24,24);ctx.fill();
+      S.poly(ctx,[[-30,-9,1],[2,-15,1],[2,15,1],[-30,4,1]],dk(c0,0.42),{exact:true,w:0.8});S.fill(ctx,c=>capsule(c,[0,0],[206,0],23,23),c0,{});S.fill(ctx,c=>capsule(c,[150,0],[208,0],24,24),dk(c0,0.2),{w:0.8});ctx.restore();});}
+  if(o.on)o.on(ctx);
+  ctx.save();onBook(ctx,R);S.begin(ctx,{lw:4,sh:8});
+  // its shadow on the desk, the cover, the pages under the two that show, the two pages
+  ctx.fillStyle="rgba(84,52,36,0.22)";ctx.beginPath();rrect(ctx,lp.x-10,p.y+4,lp.w+g+p.w+44,p.h+30,22);ctx.fill();
+  S.fill(ctx,c=>rrect(c,lp.x-22,p.y-18,lp.w+g+p.w+46,p.h+40,20),cover,{});
+  S.fill(ctx,c=>rrect(c,p.x-6,p.y-4,p.w+18,p.h+12,10),dk(page,0.1),{w:0.7});S.fill(ctx,c=>rrect(c,p.x-6,p.y-4,p.w+10,p.h+8,10),dk(page,0.05),{w:0.7});
+  S.fill(ctx,c=>rrect(c,lp.x,lp.y,lp.w,lp.h,10),dk(page,0.025),{});S.fill(ctx,c=>rrect(c,p.x,p.y,p.w,p.h,10),page,{});
+  // a grid of dots to write on
+  ctx.fillStyle=css(C("dot"));ctx.beginPath();for(const q of [lp,p])for(let y=q.y+52;y<Math.min(q.y+q.h-20,1240);y+=46)for(let x=q.x+(q===p?46:lp.w-22-46*Math.floor((lp.w-40)/46));x<q.x+q.w-24;x+=46){if(x<-40)continue;ctx.moveTo(x+2.4,y);ctx.arc(x,y,2.4,0,TAU);}ctx.fill();
+  if(o.left)o.left(ctx,lp);
+  // a tab that marks the page
+  S.fill(ctx,c=>rrect(c,p.x+p.w-8,p.y+150,40,84,8),C("tab"),{w:0.7});
+  // the rings that hold the pages
+  for(let y=p.y+44;y<1240;y+=62){ctx.fillStyle=css(dk(page,0.4));ctx.beginPath();ell(ctx,p.x-g-14,y,7,7);ell(ctx,p.x+14,y,7,7);ctx.fill();
+    S.fill(ctx,c=>rrect(c,p.x-g-16,y-6.5,g+32,13,6.5),C("ring"),{w:0.7});}
+  ctx.restore();};
+/* a hand holding a pen, from above: the pen's point at tip, the hand behind it, the forearm away to the lower right */
+K.penHand=(ctx,who,tip,o)=>{o=o||{};const S=K.S,P=typeof who==="string"?K.CAST[who]:(who||{}),k=o.k||1.45,sk=S.tone(P.skin||[230,188,156]),sl=S.tone((P.top&&P.top.c)||[104,112,130]),col=K.inkCol(o.col),lift=clamp(o.lift||0,0,1);
+  const a=rad(o.deg==null?54:o.deg),d=[Math.cos(a),Math.sin(a)],n=[-d[1],d[0]],T=[tip[0]+lift*10*k,tip[1]-lift*16*k],at=(u,v)=>[T[0]+(d[0]*u+n[0]*v)*k,T[1]+(d[1]*u+n[1]*v)*k];
+  // a soft shadow on the page, under the hand: nearer the hand when it is down
+  ctx.save();ctx.fillStyle="rgba(84,60,60,0.085)";ctx.beginPath();const s0=at(158,10);ctx.ellipse(s0[0]+(6+lift*14)*k,s0[1]+(10+lift*18)*k,104*k,70*k,a,0,TAU);ctx.fill();ctx.restore();
+  S.begin(ctx,{lw:3.2*k/1.45+0.6,sh:6});
+  // the sleeve and its cuff, the back of the hand, the fingers that curl under it
+  const w0=at(262,-6),fa=rad((o.deg==null?54:o.deg)+9),w1=[w0[0]+Math.cos(fa)*1500,w0[1]+Math.sin(fa)*1500];
+  S.fill(ctx,c=>capsule(c,at(236,-6),w1,62*k,70*k),sl,{});S.fill(ctx,c=>capsule(c,at(232,-52),at(240,42),15*k,15*k),lt(sl,0.12),{w:0.8});
+  S.poly(ctx,[at(84,-58),at(128,-84),at(190,-82),at(236,-56),at(252,-4),at(236,46),at(186,62),at(128,52),at(96,20),at(78,-20)],sk,{exact:true});
+  S.fill(ctx,c=>{capsule(c,at(132,-74),at(92,-70),17*k,15*k);capsule(c,at(112,-52),at(66,-44),18*k,15*k);},dk(sk,0.04),{w:0.8});
+  // the pen, over the hand's web; then the finger and the thumb that hold it
+  S.fill(ctx,c=>capsule(c,at(30,0),at(318,0),8.5*k,8.5*k),lt(col,0.82),{w:0.8});
+  S.fill(ctx,c=>capsule(c,at(292,0),at(318,0),8.5*k,8.5*k),col,{w:0.8});S.fill(ctx,c=>capsule(c,at(26,0),at(84,0),8*k,9*k),col,{w:0.8});
+  S.poly(ctx,[[...at(2,0),1],[...at(28,-7),1],[...at(28,7),1]],dk(col,0.5),{exact:true,w:0.7});
+  S.fill(ctx,c=>capsule(c,at(160,-34),at(56,-13),19*k,14*k),sk,{w:0.8});
+  S.fill(ctx,c=>capsule(c,at(150,44),at(70,16),20*k,15*k),sk,{w:0.8});
+  S.line(ctx,c=>{const p0=at(148,-58),p1=at(186,-50),q0=at(172,30),q1=at(206,14);c.moveTo(p0[0],p0[1]);c.quadraticCurveTo(...at(170,-62),p1[0],p1[1]);c.moveTo(q0[0],q0[1]);c.quadraticCurveTo(...at(192,30),q1[0],q1[1]);},null,0.6);};
+K.notes=(ctx,who,t,items,o)=>{o=o||{};const R=K.ROOMS.notes;ctx.save();onBook(ctx,R);const r=K.ink(ctx,items,t,{x:R.page.x,y:R.page.y,lw:o.lw||5.5,a:o.a,aside:o.aside});ctx.restore();
+  // the pen's point, turned with the book; the hand waits at the page's corner when nothing is written for a while
+  const pic=r.pen?pageAt(R,[r.pen[0]-R.page.x,r.pen[1]-R.page.y]):R.rest,on=r.pen?r.on:0,tip=[lerp(R.rest[0],pic[0],on),lerp(R.rest[1],pic[1],on)];r.tip=tip;
+  // for the check: that notes are in the picture, the rows written near the page's edge, and where the hand is
+  if(K.watch)K.watch({note:true,who:typeof who==="string"?who:"someone",edge:nearEdge(ctx,items,R.page.w,R.page.h),tip:o.hand!==false?tip:null,a:1,ctx});
+  if(o.hand!==false)K.penHand(ctx,who,[tip[0]+(on>0.98?Math.sin(t*21)*1.6*(1-r.lift):0),tip[1]+(on>0.98?Math.cos(t*17)*1.2*(1-r.lift):0)],{col:r.col,lift:Math.max(r.lift*0.8,(1-on)*0.5),k:o.k});
+  return r;};
+
+/* a notebook as a thing, seen from the side: closed, lying flat, its near corner at (x, y); or o.open, held open: (x, y) is then
+   under its middle. k scales it; o.rot turns it; o.cover its colour */
+K.notebook=(ctx,x,y,k,o)=>{o=o||{};const S=K.S,cover=S.tone(o.cover||K.PAL.cover),page=C("page");ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);
+  if(o.open){const w=78*k;S.fill(ctx,c=>pg(c,[[-w,-3*k],[w,-3*k],[w+4*k,7*k],[-w-4*k,7*k]]),cover,{w:0.7});
+    S.fill(ctx,c=>pg(c,[[-w+3*k,-12*k],[0,-8*k],[0,-1*k],[-w+3*k,-3*k]]),page,{w:0.6});S.fill(ctx,c=>pg(c,[[w-3*k,-12*k],[0,-8*k],[0,-1*k],[w-3*k,-3*k]]),dk(page,0.04),{w:0.6});}
+  else{const w=112*k,h=16*k;S.fill(ctx,c=>rrect(c,0,-h,w,h,3*k),cover,{w:0.7});S.fill(ctx,c=>rrect(c,5*k,-h+4*k,w-3*k,h-8*k,2*k),page,{w:0.5,flat:true});
+    S.fill(ctx,c=>rrect(c,w*0.72,-h-1*k,8*k,h+2*k,2*k),C("tab"),{w:0.5,flat:true});}
+  ctx.restore();};
+})(PK);
+
+/* ===== The people kit: people who talk from where they are =====
+   People don't only walk over to each other (the author, 17 November 2026: "show sometimes people communicate with others via
+   chat or call, so not only jumping in personally. But personally always at least once should be shown"). A film shows a chat or
+   a call where the story has people in two places, and still brings people face to face at least once.
+   A chat and a call are panels that come out of a screen or a phone someone in the scene is using: the person stays in the
+   picture, whole, at their desk or on the path, and the panel shows what is on their screen, large enough to read.
+
+     PK.callout(ctx, x, y, w, h, tail, a, draw, o)   a panel that comes out of a screen or a phone at tail [x, y]: a box w by h at
+                              (x, y), with a tail towards it; draw(ctx, x, y, w, h) fills it. o.col
+     PK.chat(ctx, x, y, w, h, d, t, o)   a chat, to draw in a callout (or anywhere): d {title, who: [names] (the others, for the
+                              header), me (whose screen it is), msgs: [{who, s (a line) or lines, at, type}]}. A message comes in
+                              at its time (at). The others' are on the left, with their picture; me's on the right, and for
+                              type seconds before it is sent its words are typed in the field at the foot. The others' typing
+                              shows as three dots for o.dots seconds (0.9) before theirs. Words are 30 px (o.size).
+                              PK.chatSize(ctx, d, o) -> {w, h}: the panel its words need, as they are drawn
+     PK.call(ctx, x, y, w, h, people, t, o)   a video call, to draw in a callout: a tile for each of people: [{who, face
+                              (PK.face's base), events (PK.face's), say ([[t0, t1], …]), pose, hold, bg, flip, name, role, a (0 to 1: they join)}].
+                              Each is drawn whole and cut by their tile, as a camera frames them. Side by side, their first
+                              name is at the tile's foot; o.stack: one above the other, each with their name and what they do
+                              (their role; 26 px: keep the camera at 1.1 or closer) beside them, and whoever speaks can say it
+                              to the panel's side. -> their joints, one for each: PK.say brings what they say out of their tile
+     PK.avatar(ctx, who, x, y, r, a)   someone's picture in a round frame: who they are in a chat
+     PK.onScreen.chat(k, o), PK.onScreen.call(n, stack)   what a small screen in the scene shows meanwhile (PK.atDesk's o.show): no words
+     PK.inHand.phone(o)       a phone in a hand (PK.person's o.hold); PK.POSES.phone: reading it, PK.POSES.onPhone: at the ear
+   Everyone in a tile is on a screen: the kit's checks know (they aren't held to the room's eye line), and still follow their
+   faces. A panel is a box of words: keep it off the heads of the people in the scene. */
+(K=>{
+const {TAU,rad,lerp,clamp,sine,pin,pio,mix,dk,lt,css,hash,polar,capsule,pg,rrect,ell}=K.u,C=K.col;
+const tw=(ctx,s,w,size)=>ag_tw(ctx,s,{w,size}),tx=(ctx,s,x,y,o)=>ag_T(ctx,s,x,y,Object.assign({},o,{color:css(o.col||K.C.ink)}));
+Object.assign(K.PAL,{chatMe:[226,236,230],chatThem:[255,253,247],tile:[[222,230,226],[238,226,212],[226,224,236]],hang:[204,92,78],phone:[60,64,78]});
+Object.assign(K.POSES,{phone:{lean:3,head:9,aN:[22,112,"grip"],aF:[4,14],lN:[-2,-2],lF:[5,4]},onPhone:{lean:0,head:-2,aN:[38,168,"grip"],aF:[4,14],lN:[-2,-2],lF:[5,4]}});
+
+K.callout=(ctx,x,y,w,h,tail,a,draw,o)=>{o=o||{};a=a==null?1:a;if(a<=0.004)return;const S=K.S,col=o.col||C("board"),k=0.94+0.06*a;ctx.save();ctx.globalAlpha*=a;
+  if(tail){ctx.translate(tail[0],tail[1]);ctx.scale(k,k);ctx.translate(-tail[0],-tail[1]);
+    // the tail, from the side of the box that faces the screen
+    const below=tail[1]>y+h,above=tail[1]<y,left=tail[0]<x,pts=below||above?(()=>{const m=clamp(tail[0],x+50,x+w-50),e=below?y+h:y,d=below?1:-1;return{t:[[m-20,e-d*6],[m+20,e-d*6],[lerp(m,tail[0],0.8),lerp(e,tail[1],0.8)]],j:[[m-17,e-d*6],[m+17,e-d*6],[m+15,e+d*3],[m-15,e+d*3]]};})():
+      (()=>{const m=clamp(tail[1],y+50,y+h-50),e=left?x:x+w,d=left?-1:1;return{t:[[e-d*6,m-20],[e-d*6,m+20],[lerp(e,tail[0],0.8),lerp(m,tail[1],0.8)]],j:[[e-d*6,m-17],[e-d*6,m+17],[e+d*3,m+15],[e+d*3,m-15]]};})();
+    ctx.beginPath();pg(ctx,pts.t);ctx.lineJoin="round";ctx.lineWidth=5;ctx.strokeStyle=css(S.ink);if(S.id==="line")ctx.stroke();ctx.fillStyle=css(col);ctx.fill();
+    K.box(ctx,x,y,w,h,18,col,1);ctx.fillStyle=css(col);ctx.beginPath();pg(ctx,pts.j);ctx.fill();}
+  else K.box(ctx,x,y,w,h,18,col,1);
+  if(draw)draw(ctx,x,y,w,h);ctx.restore();};
+
+/* someone's picture in a round frame, painted once for each size: their head and shoulders, facing us a little */
+K.avatar=(ctx,who,x,y,r,a)=>{a=a==null?1:a;if(a<=0.004)return;const P=typeof who==="string"?K.CAST[who]:who,S=K.S,q=3,d=Math.ceil(r*2+8),key="pk:av:"+S.key+":"+(P.key||P.name)+":"+Math.round(r);
+  const pic=ag_kept(key,d*q,d*q,c=>{c.scale(q,q);const cx=d/2,h=r*7.4,J0=K.rig(P,0,0,h,"stand",{life:0,flip:0.3}),bg=lt(S.tone(P.top.c),0.62);
+    c.save();c.beginPath();c.arc(cx,cx,r,0,TAU);c.clip();c.fillStyle=css(bg);c.fillRect(0,0,d,d);
+    K.person(c,P,cx-J0.hc[0]-r*0.06,cx-r*0.08-J0.hc[1],h,"stand",{life:0,flip:0.3,shade:0,part:"upper",expr:"smile",icon:true});c.restore();
+    c.lineWidth=Math.max(2,r*0.1);c.strokeStyle=css(S.ink);c.beginPath();c.arc(cx,cx,r,0,TAU);c.stroke();});
+  ctx.save();ctx.globalAlpha*=a;ctx.drawImage(pic,x-d/2,y-d/2,d,d);ctx.restore();};
+
+/* ---------------------------------------------------------------- a chat */
+const CH={pad:22,head:78,gap:14,size:30,lh:40,bp:[20,13],av:24,field:64};
+const bubbleOf=(ctx,m,size)=>{size=size||CH.size;const lines=m.lines||[m.s],lh=size+10,bw=Math.max(...lines.map(l=>tw(ctx,l,600,size)))+CH.bp[0]*2,bh=lines.length*lh+CH.bp[1]*2-6;return{lines,bw,bh,size,lh};};
+const THEM=CH.av*2+12;
+K.chatSize=(ctx,d,o)=>{const bs=d.msgs.map(m=>[m,bubbleOf(ctx,m,o&&o.size)]),head=CH.av*(1.5*(d.who||[]).length+0.8)+(d.title?tw(ctx,d.title,800,30):0);
+  return{w:Math.ceil(Math.max(head,...bs.map(([m,b])=>b.bw+(m.who===d.me?0:THEM)))+CH.pad*2+4),h:Math.ceil(CH.head+CH.field+CH.pad+bs.reduce((s,[m,b])=>s+b.bh+CH.gap,0)+8)};};
+K.chat=(ctx,x,y,w,h,d,t,o)=>{o=o||{};if(K.watch)K.watch({talk:"chat",a:1,ctx});const S=K.S,me=d.me,ink=S.ink,dots=o.dots==null?0.9:o.dots,body={x:x+CH.pad,y:y+CH.head,w:w-CH.pad*2,h:h-CH.head-CH.field-10};
+  // the header: who the chat is with
+  let hx=x+CH.pad+CH.av;(d.who||[]).forEach((n,i)=>{K.avatar(ctx,n,hx,y+CH.head/2,CH.av);hx+=CH.av*1.5;});
+  if(d.title)tx(ctx,d.title,hx+CH.av*0.3,y+CH.head/2+11,{w:800,size:30});
+  ctx.save();ctx.strokeStyle=css(K.C.mut,0.35);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x+12,y+CH.head);ctx.lineTo(x+w-12,y+CH.head);ctx.stroke();ctx.restore();
+  // the messages that have come, the newest at the foot; when they are more than the panel holds, the oldest go up and out
+  const ms=d.msgs.map((m,i)=>Object.assign({b:bubbleOf(ctx,m,o.size),k:pin(t,m.at,0.28),mine:m.who===me,first:!i||d.msgs[i-1].who!==m.who},m)),shown=ms.filter(m=>m.k>0);
+  let tot=0;for(const m of shown)tot+=(m.b.bh+CH.gap)*m.k;const typing=ms.find(m=>!m.mine&&t>=m.at-dots&&t<m.at),tk=typing?pio(t,typing.at-dots,typing.at,0.15):0;tot+=tk*(46+CH.gap);
+  let yy=body.y+12-Math.max(0,tot+12-body.h);ctx.save();ctx.beginPath();ctx.rect(x+4,body.y+2,w-8,body.h);ctx.clip();
+  const bub=(m,by,k)=>{const b=m.b,bx=m.mine?body.x+body.w-b.bw:body.x+THEM,col=S.tone(K.PAL[m.mine?"chatMe":"chatThem"]);ctx.save();ctx.globalAlpha*=k;const sc=0.9+0.1*k,ax=m.mine?bx+b.bw:bx,ay=by+b.bh;ctx.translate(ax,ay);ctx.scale(sc,sc);ctx.translate(-ax,-ay);
+    if(!m.mine&&m.first)K.avatar(ctx,m.who,body.x+CH.av,by+CH.av+2,CH.av);
+    ctx.beginPath();rrect(ctx,bx,by,b.bw,b.bh,20);ctx.fillStyle=css(col);ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();
+    b.lines.forEach((l,i)=>tx(ctx,l,bx+CH.bp[0],by+CH.bp[1]+b.lh*(i+0.5)+b.size*0.36-3,{w:600,size:b.size}));ctx.restore();};
+  for(const m of shown){bub(m,yy,m.k);yy+=(m.b.bh+CH.gap)*m.k;}
+  if(tk>0){const bx=body.x+THEM;ctx.save();ctx.globalAlpha*=tk;K.avatar(ctx,typing.who,body.x+CH.av,yy+46-CH.av+2,CH.av);ctx.beginPath();rrect(ctx,bx,yy,92,46,20);ctx.fillStyle=css(S.tone(K.PAL.chatThem));ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();
+    ctx.fillStyle=css(K.C.mut);for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(bx+26+i*20,yy+23-Math.max(0,Math.sin(t*7-i*0.9))*6,5,0,TAU);ctx.fill();}ctx.restore();}
+  ctx.restore();
+  // the field at the foot: what me is typing, until it is sent
+  const fy=y+h-CH.field-6,fx=x+CH.pad,fw=w-CH.pad*2-66;ctx.beginPath();rrect(ctx,fx,fy,fw,CH.field-10,(CH.field-10)/2);ctx.fillStyle=css(lt(C("board"),0.5));ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(K.C.mut,0.6);ctx.stroke();
+  const ty=ms.find(m=>m.mine&&m.type&&t>=m.at-m.type&&t<m.at+0.05);
+  if(ty){const s=(ty.lines||[ty.s]).join(" "),p=clamp((t-(ty.at-ty.type))/(ty.type*0.86),0,1),vis=fw-44,typed=s.slice(0,Math.round(s.length*p));let k=0;
+    // a line longer than the field moves on a word at a time: what shows starts at a word, never at a cut letter
+    while(tw(ctx,typed.slice(k),600,28)>vis){const n=typed.indexOf(" ",k);if(n<0)break;k=n+1;}
+    const now=typed.slice(k),W=Math.min(vis,tw(ctx,now,600,28));ctx.save();ctx.beginPath();ctx.rect(fx+20,fy,vis+4,CH.field-10);ctx.clip();tx(ctx,now,fx+22,fy+(CH.field-10)/2+10,{w:600,size:28});ctx.restore();
+    if(Math.sin(t*9)>0){ctx.fillStyle=css(ink);ctx.fillRect(fx+24+Math.min(vis-4,W),fy+12,3,CH.field-34);}}
+  const sx=x+w-CH.pad-25,sy=fy+(CH.field-10)/2,sent=ms.some(m=>m.mine&&Math.abs(t-m.at)<0.18);ctx.beginPath();ctx.arc(sx,sy,25*(sent?0.9:1),0,TAU);ctx.fillStyle=css(K.C.blue);ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();
+  ctx.fillStyle="#fff";ctx.beginPath();pg(ctx,[[sx-9,sy-11],[sx+13,sy],[sx-9,sy+11],[sx-4,sy]]);ctx.fill();};
+
+/* ---------------------------------------------------------------- a call */
+K.call=(ctx,x,y,w,h,people,t,o)=>{o=o||{};if(K.watch)K.watch({talk:"call",a:1,ctx});const S=K.S,n=people.length,pad=18,bar=o.bar===false?0:(o.stack?54:64),gap=o.stack?12:14,stack=!!o.stack,
+    tw_=stack?w-pad*2:(w-pad*2-gap*(n-1))/n,th=stack?(h-pad*2-bar-gap*(n-1))/n:h-pad*2-bar,out=[];
+  people.forEach((p,i)=>{const P=typeof p.who==="string"?K.CAST[p.who]:p.who,X=stack?x+pad:x+pad+i*(tw_+gap),Y=stack?y+pad+i*(th+gap):y+pad,pose=p.pose||"stand",
+      fl=p.flip==null?(stack?0.4:n===1?0.42:lerp(0.36,0.64,i/(n-1))):p.flip,hh=p.h||th*(stack?3.5:2.5),
+      J0=K.rig(P,0,0,hh,pose,{life:0,flip:fl}),cx=(stack?X+th*0.5:X+tw_/2)-J0.hc[0],fy=Y+th*(stack?0.48:0.4)-J0.hc[1];
+    ctx.save();ctx.beginPath();rrect(ctx,X,Y,tw_,th,14);ctx.fillStyle=css(S.tone(p.bg||K.PAL.tile[i%3]));ctx.fill();ctx.clip();
+    const F=K.face(t,p.face||{expr:"listen"},(p.events||[]).concat((p.say||[]).map(([a,b])=>[a,"say",b-a])));
+    const pa=p.a==null?1:clamp(p.a,0,1),J=K.person(ctx,P,cx,fy,hh,pose,Object.assign({t:t+i*1.3,flip:fl,shade:0,screen:true,hold:p.hold,holds:!!p.hold,a:pa},F));ctx.restore();
+    ctx.beginPath();rrect(ctx,X,Y,tw_,th,14);ctx.lineWidth=3;ctx.strokeStyle=css(S.ink);ctx.stroke();
+    // a ring round the tile of whoever speaks; their name: beside them in a wide tile, with what they do, or at a tall tile's foot
+    const sp=(p.say||[]).reduce((m,[a,b])=>Math.max(m,pio(t,a,b,0.2)),0);if(sp>0){ctx.save();ctx.globalAlpha*=sp;ctx.beginPath();rrect(ctx,X+5,Y+5,tw_-10,th-10,10);ctx.lineWidth=5;ctx.strokeStyle=css(K.C.green);ctx.stroke();ctx.restore();}
+    ctx.save();ctx.globalAlpha*=pa;if(p.name!==false){if(stack){const nm=p.name||P.name,nx=X+th*1.02,role=p.role===undefined?P.role:p.role;tx(ctx,nm,nx,Y+th/2+(role?-6:11),{w:800,size:30});if(role)tx(ctx,role,nx,Y+th/2+30,{w:600,size:26,col:K.C.mut});}
+      else{const nm=p.name||P.name.split(" ")[0],nw=tw(ctx,nm,700,28)+32;ctx.beginPath();rrect(ctx,X+12,Y+th-56,nw,44,22);ctx.fillStyle=css(C("board"));ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(S.ink);ctx.stroke();tx(ctx,nm,X+28,Y+th-24,{w:700,size:28});}}ctx.restore();
+    J.tile={x:X,y:Y,w:tw_,h:th,panel:{x,y,w,h}};out.push(J);});
+  // the call's own buttons: a microphone, a camera, and the one that ends it
+  if(bar){const by=y+h-pad-bar/2+(stack?8:6),bx=x+w/2;[[-70,C("board")],[0,C("board")],[70,S.tone(K.PAL.hang)]].forEach(([dx,c],i)=>{ctx.beginPath();ctx.arc(bx+dx,by,23,0,TAU);ctx.fillStyle=css(c);ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(S.ink);ctx.stroke();
+      ctx.save();ctx.strokeStyle=css(i===2?[255,255,255]:S.ink);ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=3.2;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+      if(i===0){rrect(ctx,bx+dx-4.5,by-12,9,15,4.5);ctx.fill();ctx.beginPath();ctx.arc(bx+dx,by-2,9,0.15,Math.PI-0.15);ctx.moveTo(bx+dx,by+7);ctx.lineTo(bx+dx,by+12);ctx.stroke();}
+      else if(i===1){rrect(ctx,bx+dx-12,by-7,15,14,3);ctx.fill();ctx.beginPath();pg(ctx,[[bx+dx+5,by],[bx+dx+12,by-6],[bx+dx+12,by+6]]);ctx.fill();}
+      else{ctx.lineWidth=5.5;ctx.arc(bx+dx,by+10,13,Math.PI*1.2,Math.PI*1.8);ctx.stroke();}ctx.restore();});}
+  return out;};
+
+/* something said by someone in a tile of a call (J: one of PK.call's joints; PK.say does this by itself for such a J): the words
+   stand beside the call's panel, on the tile's side of it where there is room (o.side "left" or "right" asks for one), with a
+   tail into the tile. Put whoever speaks in the tile nearest the free side. o.cam, o.dx, o.dy as PK.say's */
+K.sayFrom=(ctx,J,lines,a,o)=>{o=o||{};const T=J.tile,P=T.panel||T,size=o.size||34,w=Math.max(...lines.map(l=>tw(ctx,l,o.weight||700,size)))+56,h=lines.length*size*1.3+32,
+    cm=o.cam,m=cm?40/cm.z:40,vx0=cm?cm.x-960/cm.z:0,vx1=cm?cm.x+960/cm.z:1920,vy0=cm?cm.y-540/cm.z:0;
+  const want=o.side||(T.x+T.w/2>=P.x+P.w/2?"right":"left"),fits=sd=>sd==="right"?P.x+P.w+46+w<=vx1-m:P.x-46-w>=vx0+m,side=fits(want)?want:(want==="right"?"left":"right"),right=side==="right";
+  const x=(right?P.x+P.w+46+w/2:P.x-46-w/2)+(o.dx||0),y=Math.max(vy0+h/2+m,T.y+T.h*0.36+(o.dy||0)),tail=[right?T.x+T.w-10:T.x+10,clamp(T.y+T.h*0.4,y-h/2+12,y+h/2-12)];
+  return K.bubble(ctx,x,y,lines,tail,a,o);};
+const say0=K.say;K.say=(ctx,J,lines,a,o)=>J&&J.tile?K.sayFrom(ctx,J,lines,a,o):say0(ctx,J,lines,a,o);
+
+/* what a small screen in the scene shows meanwhile: the same chat or call, too small for words (PK.atDesk's o.show).
+   chat(k, o): k (0 to 1) how many of its messages have come; o.rows: its messages, each [where it starts, how wide (both a share
+   of the screen's width), 1 for mine], when they aren't two people's in turn. Who it is with, at the top, and the field at the
+   foot are there before any message is, so an empty chat still reads as one, not as a blank screen */
+K.onScreen={
+  chat:(k,o)=>(c,x,y,w,h)=>{const rows=(o&&o.rows)||[[0.12,0.5,0],[0.4,0.48,1],[0.2,0.4,0],[0.5,0.38,1]],n=Math.round(clamp(k==null?1:k,0,1)*rows.length),grey=[214,216,212];c.fillStyle=css(lt(C("board"),0.3));c.fillRect(x,y,w,h);
+    c.fillStyle=css(grey);c.beginPath();c.arc(x+w*0.1,y+h*0.1,h*0.055,0,TAU);c.fill();c.beginPath();rrect(c,x+w*0.18,y+h*0.065,w*0.3,h*0.07,h*0.035);c.fill();c.fillRect(x+w*0.04,y+h*0.185,w*0.92,Math.max(1.5,h*0.012));
+    c.beginPath();rrect(c,x+w*0.06,y+h*0.86,w*0.7,h*0.09,h*0.045);c.fill();c.fillStyle=css(K.C.blue);c.beginPath();c.arc(x+w*0.88,y+h*0.905,h*0.05,0,TAU);c.fill();
+    rows.slice(0,n).forEach(([fx,fw,me],i)=>{c.fillStyle=css(me?mix(K.C.green,[255,255,255],0.62):grey);c.beginPath();rrect(c,x+w*fx,y+h*(0.23+i*0.15),w*fw,h*0.1,h*0.05);c.fill();});},
+  call:(n,stack)=>(c,x,y,w,h)=>{n=n||2;c.fillStyle=css([70,74,90]);c.fillRect(x,y,w,h);const g=w*0.04,tw2=stack?w-g*2:(w-g*(n+1))/n,H=stack?(h*0.78-g*(n+1))/n:h*0.66;
+    for(let i=0;i<n;i++){const X=stack?x+g:x+g+i*(tw2+g),Y=stack?y+g+i*(H+g):y+h*0.1,hx=stack?X+H*0.62:X+tw2/2;c.save();c.beginPath();rrect(c,X,Y,tw2,H,5);c.fillStyle=css(K.S.tone(K.PAL.tile[i%3]));c.fill();c.clip();
+      c.fillStyle=css([120,112,116]);c.beginPath();c.arc(hx,Y+H*0.4,H*0.19,0,TAU);c.fill();c.beginPath();c.ellipse(hx,Y+H*1.02,H*0.36,H*0.36,0,Math.PI,TAU);c.fill();
+      if(stack){c.fillStyle=css([150,146,150]);c.beginPath();rrect(c,X+H*1.3,Y+H*0.3,tw2*0.34,H*0.14,H*0.07);rrect(c,X+H*1.3,Y+H*0.56,tw2*0.24,H*0.12,H*0.06);c.fill();}c.restore();}
+    c.fillStyle=css(K.S.tone(K.PAL.hang));c.beginPath();c.arc(x+w/2,y+h*0.9,h*0.06,0,TAU);c.fill();}
+};
+/* a phone in a hand: its back to us when it is read (o.back), or its lit face */
+K.inHand.phone=o=>(c,hd,deg,J)=>{o=o||{};const S=K.S,u=J.u,a=polar(hd,deg-176,10*u),b=polar(hd,deg+4,o.ear?70*u:86*u),g=Math.atan2(b[1]-a[1],b[0]-a[0]);
+  c.save();c.translate(a[0],a[1]);c.rotate(g);const L=Math.hypot(b[0]-a[0],b[1]-a[1]),w=46*u;S.fill(c,cc=>rrect(cc,0,-w/2,L,w,7*u),S.tone(K.PAL.phone),{w:0.8});
+  if(!o.back)S.fill(c,cc=>rrect(cc,5*u,-w/2+4*u,L-10*u,w-8*u,4*u),C("screenLit"),{line:false,flat:true});c.restore();};
 })(PK);
 
 /* ===== Owning the outcome: Kenya's central highlands, from the 1970s =====
@@ -1947,11 +2462,13 @@ AG_BARE.ooHills=(x,tt)=>{oo_sky(x,tt);oo_plot(x);};AG_BARE.ooGreen=(x,tt)=>oo_sk
 
 /* ===== Owning the outcome: the university, 2027 and after (imagined) =====
    The places are the people kit's (films/people-first/shared/src/places.js): the team's room, Helena's corner, the campus and a
-   teaching room. This file holds what is this film's own in them: who sits where, the seedling Helena gives Ivy on her first day
-   as owner (it grows on the window's sill behind her desk through the film), what Ivy's screen shows and the small cards that come
-   out of it, the sensor's count by a teaching room's door, someone who passes on the campus, and the letters of a RACI chart worn
-   by the people they belong to. */
+   teaching room; and, apart from the scene, a board seen close and a page of Ivy's notebook (concepts.js). This file holds what
+   is this film's own in them: who sits where, the seedling Helena gives Ivy on her first day as owner (it grows on the window's
+   sill behind her desk through the film), what Ivy's screen shows and the small cards that come out of it, the sensor's count by
+   a teaching room's door, someone who passes on the campus, what Carmen writes on the board and what Ivy writes in her notebook,
+   and what Ivy, Graham and Mei say to each other in a call and in a chat. */
 AG_PLACES.ooTeam=PK.place.team;AG_PLACES.ooCorner=PK.place.corner;AG_PLACES.ooCampus=PK.place.campus;AG_PLACES.ooRoom=PK.place.lecture;
+AG_PLACES.ooBoard=PK.place.board;AG_PLACES.ooNotes=c=>PK.place.notes(c,{});
 const OO_T=PK.ROOMS.team,OO_L=PK.ROOMS.lecture,OO_CA=PK.ROOMS.campus,OO_CO=PK.ROOMS.corner;
 const OO_HI=PK.hAt(OO_T.mid,OO_T.eye),OO_HB=PK.hAt(OO_T.back,OO_T.eye),OO_HC=PK.hAt(OO_CA.near,OO_CA.eye),OO_IVY={x:560,floor:OO_T.mid};
 const oo_hT=fl=>PK.hAt(fl,OO_T.eye),oo_hL=fl=>PK.hAt(fl,OO_L.eye);
@@ -1963,14 +2480,21 @@ const oo_says=(base,tt,t0,t1)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(
    o.clock: the time on the wall (null: no hands); o.sam, o.jun, o.ivy: what PK.atDesk takes for each (null: the desk stands empty);
    o.pot: how grown the seedling on the sill is (null: none yet); o.show: what her screen shows; o.behind(x): what stands between
    the back desks and hers (someone at the board); o.away: Ivy has got up, and her chair stands as o.ivy left it (turned); o.bare:
-   the room with nobody in it and nothing going on (a blank screen, no steam). Returns {ivy, sam, jun}: their joints. */
+   the room with nobody in it and nothing going on (a blank screen, no steam); o.book: her notebook lies on her desk: shut, between
+   her screen and her keys (0); open in front of her, the keys pushed back (1: give her PK.atDesk's keysBack, as oo_jot does); or
+   shut where it lay open (2; between 1 and 2 it closes); o.pen (0 to 1): her pen lies beside it. Returns {ivy, sam, jun}: their
+   joints. */
 function oo_team(x,tt,o){o=o||{};const r={};PK.clock(x,OO_T.clock[0],OO_T.clock[1],OO_T.clock[2],o.clock===undefined?9:o.clock);
   if(o.pot!=null){PK.S.begin(x,{lw:2.6,sh:3});PK.potted(x,OO_T.sill[0],OO_T.sill[1],1.3+0.5*o.pot,0.6+0.4*o.pot);}
   r.sam=PK.atDesk(x,o.sam===null?null:"sam",1230,OO_T.back,OO_HB,Object.assign({t:tt,w:0.45*OO_HB},o.sam||{}));
   r.jun=PK.atDesk(x,o.jun===null?null:"jun",1808,OO_T.back,OO_HB,Object.assign({t:tt+3,flip:true,w:0.45*OO_HB},o.jun||{}));
   if(o.behind)o.behind(x);
   r.ivy=PK.atDesk(x,o.ivy===null||o.away?null:"ivy",OO_IVY.x,OO_IVY.floor,OO_HI,Object.assign({t:tt+1,flip:true,w:0.84*OO_HI,sx:205,screen:"monitor",show:o.bare?null:o.show||oo_scrTicks(1),
-    on:(c,D)=>{PK.S.begin(c,{lw:2.6,sh:3});PK.mug(c,D.x1+34,D.top,0.7,PK.col("mug"),tt,!o.bare&&o.steam!==false);}},o.ivy||{}));return r;}
+    on:(c,D)=>{PK.S.begin(c,{lw:2.6,sh:3});PK.mug(c,D.x1+34,D.top,0.7,PK.col("mug"),tt,!o.bare&&o.steam!==false);
+      const lie=(a,f)=>{if(a<=0.004)return;c.save();c.globalAlpha*=Math.min(1,a);PK.S.begin(c,{lw:2.2,sh:3});f();c.restore();};
+      if(o.book!=null){if(o.book<=0)lie(1,()=>PK.notebook(c,OO_IVY.x-314,D.top,0.86,{}));
+        else{lie(2-o.book,()=>PK.notebook(c,OO_IVY.x-164,D.top-2,0.86,{open:true}));lie(o.book-1,()=>PK.notebook(c,OO_IVY.x-214,D.top,0.86,{}));}}
+      if(o.pen)lie(o.pen,()=>PK.S.fill(c,cc=>PK.u.capsule(cc,[OO_IVY.x-104,D.top-3],[OO_IVY.x-66,D.top-4],3.2,2.6),PK.C.blue,{w:0.6}));}},o.ivy||{}));return r;}
 // the room with nobody in it: what a later moment in it passes through (the agent films' AG_BARE)
 AG_BARE.ooTeam=(x,tt)=>oo_team(x,tt,{sam:null,jun:null,ivy:null,clock:null,bare:true});
 // the seedling in its pot, carried in a hand (PK.person's hold); g how grown
@@ -1984,11 +2508,10 @@ const oo_scrTicks=(k,warn)=>(c,x,y,w,h)=>{const U=PK.u,n=4,rh=h/(n+0.6);warn=war
     c.strokeStyle="#fff";c.lineWidth=2.4;c.lineCap="round";c.lineJoin="round";
     if(on>0.5&&warn<0.999){c.save();c.globalAlpha*=1-warn;c.beginPath();c.moveTo(x+w*0.84-5,yy);c.lineTo(x+w*0.84-1.5,yy+4);c.lineTo(x+w*0.84+5.5,yy-4);c.stroke();c.restore();}
     if(on>0.5&&warn>0.001){c.save();c.globalAlpha*=warn;c.beginPath();c.moveTo(x+w*0.84-3,yy-5);c.lineTo(x+w*0.84-3,yy+5);c.moveTo(x+w*0.84+3,yy-5);c.lineTo(x+w*0.84+3,yy+5);c.stroke();c.restore();}}};
-/* a small card that comes out of Ivy's screen: a box w by h at (bx, by), with a tail to the screen at (tx, ty); draw(c, x, y, w, h)
-   fills it. The chart stays small: it is something Ivy looks at, not the picture. */
-function oo_callout(c,bx,by,w,h,tx,ty,a,draw){if(a<=0.004)return;const U=PK.u,S=PK.S,col=PK.col("board");c.save();c.globalAlpha*=a;const k=0.94+0.06*a;c.translate(tx,ty);c.scale(k,k);c.translate(-tx,-ty);
-  const mx=U.clamp(tx,bx+50,bx+w-50);c.beginPath();U.pg(c,[[mx-20,by+h-6],[mx+20,by+h-6],[U.lerp(mx,tx,0.8),U.lerp(by+h,ty,0.8)]]);c.lineJoin="round";c.lineWidth=5;c.strokeStyle=U.css(S.ink);c.stroke();c.fillStyle=U.css(col);c.fill();
-  PK.box(c,bx,by,w,h,18,col,1);c.fillStyle=U.css(col);c.beginPath();U.pg(c,[[mx-17,by+h-6],[mx+17,by+h-6],[mx+15,by+h+3],[mx-15,by+h+3]]);c.fill();draw(c,bx,by,w,h);c.restore();}
+/* what her screen says, as a card that comes out of it: rows of [words, how far each has come in (0 to 1), its colour], each with
+   its tick. y: the card's top; a: how far the card is there */
+function oo_screen(x,y,a,rows){const U=PK.u,wd=Math.max(...rows.map(r=>ag_tw(x,r[0],{w:700,size:30})));
+  PK.callout(x,40,y,wd+118,34+58*rows.length,[205,474],a,(c,bx,by)=>rows.forEach(([s,k,col],i)=>{const yy=by+46+58*i,q=U.clamp(k==null?1:k,0,1);PK.tick(c,bx+46,yy,20,q);ag_T(c,s,bx+82,yy+11,{w:700,size:30,col:col||PK.C.ink,a:q});}));}
 // the forty rooms' counts, week by week: level, then down to about a quarter; p: how far the line is drawn
 function oo_dropChart(c,x,y,w,h,p){const U=PK.u,v=[1,0.96,1.03,1,0.97,1.02,0.27,0.24,0.25],x0=x+38,x1=x+w-38,y0=y+h-84,y1=y+76,px=i=>U.lerp(x0,x1,i/(v.length-1)),py=q=>U.lerp(y0,y1,q/1.1);
   ag_T(c,"FORTY ROOMS",x+30,y+52,{w:800,size:28,ls:3,col:PK.C.mut});
@@ -2066,15 +2589,6 @@ function oo_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=
   return{helena,ivy};}
 
 /* ---------------------------------------------------------------- words this film puts in the picture */
-// a letter of the RACI chart, worn over the head of the person it belongs to: a round badge; big: the one A
-function oo_letter(x,J,s,a,big){if(a<=0.004)return;const U=PK.u,r=big?40:30,cx=J.hc[0],cy=J.hc[1]-J.p.head*J.u*0.62-r-14,k=0.6+0.4*U.clamp(a,0,1);x.save();x.globalAlpha*=U.clamp(a,0,1);
-  x.fillStyle=U.css(big?PK.C.blue:PK.col("board"));x.beginPath();x.arc(cx,cy,r*k,0,U.TAU);x.fill();x.lineWidth=3;x.strokeStyle=U.css(big?U.dk(PK.C.blue,0.3):PK.S.ink);x.stroke();
-  ag_T(x,s,cx,cy+(big?15:12),{w:800,size:big?44:34,align:"center",col:big?PK.C.white:PK.C.ink});x.restore();}
-// where a mark worn over someone's head goes: [x, y]
-const oo_over=(J,r)=>[J.hc[0],J.hc[1]-J.p.head*J.u*0.62-r-14];
-// a line between two marks worn over two heads, bowed upwards: what joins two people's parts of the work; p: how far it is drawn
-function oo_link(x,A,B,p,col,a){if(a<=0.004||p<=0)return;const U=PK.u,mx=(A[0]+B[0])/2,my=Math.min(A[1],B[1])-70,n=24;x.save();x.globalAlpha*=U.clamp(a,0,1);x.strokeStyle=U.css(col||PK.C.amber);x.lineWidth=5;x.lineCap="round";x.setLineDash([14,13]);x.beginPath();
-  for(let i=0;i<=n*U.clamp(p,0,1);i++){const u=i/n,q=[(1-u)*(1-u)*A[0]+2*u*(1-u)*mx+u*u*B[0],(1-u)*(1-u)*A[1]+2*u*(1-u)*my+u*u*B[1]];i?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]);}x.stroke();x.restore();}
 // a round mark with two bars: something held, not stopped for good
 function oo_pause(c,x,y,r,a,col){if(a<=0.004)return;const U=PK.u;c.save();c.globalAlpha*=U.clamp(a,0,1);c.fillStyle=U.css(col||PK.C.amber);c.beginPath();c.arc(x,y,r,0,U.TAU);c.fill();
   c.strokeStyle="#fff";c.lineWidth=r*0.26;c.lineCap="round";c.beginPath();c.moveTo(x-r*0.26,y-r*0.38);c.lineTo(x-r*0.26,y+r*0.38);c.moveTo(x+r*0.26,y-r*0.38);c.lineTo(x+r*0.26,y+r*0.38);c.stroke();c.restore();}
@@ -2082,13 +2596,130 @@ function oo_pause(c,x,y,r,a,col){if(a<=0.004)return;const U=PK.u;c.save();c.glob
 function oo_checkCard(c,x,y,w,h,la){const U=PK.u;ag_T(c,"IVY'S NEW CHECK",x+30,y+52,{w:800,size:28,ls:3,col:PK.C.blue});
   ag_T(c,"A drop like this one",x+30,y+104,{w:700,size:30,a:U.clamp(la[0],0,1)});oo_pause(c,x+48,y+138,18,la[1]);ag_T(c,"holds the refresh",x+80,y+148,{w:800,size:30,col:PK.C.amber,a:U.clamp(la[1],0,1)});
   ag_T(c,"before anyone reads it",x+30,y+192,{w:700,size:30,a:U.clamp(la[2],0,1)});}
-// a sheet pinned to the whiteboard, with a kick and a line of words; a: how far it has come in
-function oo_pinned(x,bx,by,kick,title,a,col){if(a<=0.004)return;const U=PK.u,w=Math.max(ag_tw(x,kick.toUpperCase(),{w:800,size:28,ls:3}),ag_tw(x,title,{w:800,size:32}))+52,h=112;x.save();x.globalAlpha*=U.clamp(a,0,1);const k=0.94+0.06*a;x.translate(bx+w/2,by);x.scale(k,k);x.translate(-bx-w/2,-by);
-  PK.S.begin(x,{lw:2.4,sh:4});PK.sheet(x,bx,by,w,h,{col:PK.col("board"),pin:col||PK.C.blue,r:6});ag_T(x,kick.toUpperCase(),bx+26,by+50,{w:800,size:28,ls:3,col:col||PK.C.blue});ag_T(x,title,bx+26,by+92,{w:800,size:32});x.restore();}
+
+/* ---------------------------------------------------------------- the key ideas, apart from the scene
+   Carmen Vidal, a consultant who works with the team now and then, explains each idea at the team's board (PK.teach). The film
+   cuts between the room, where its board shows her lines small, and the board seen close (the place ooBoard), where they are
+   large enough to read: both draw the same rows at the same times, so she is at the same line in both. What Ivy keeps from each
+   part of the story goes in her notebook (PK.notes, the place ooNotes). Every time comes from the voice: sc is the chapter, w
+   a word's time in a line. Colour means what it means in the film: blue a plan or a rule, green done or of value, amber a risk. */
+const OO_RB={x:742,y:206,k:0.35,deco:true,floor:848,rest:1212};
+// the team's board in a wide shot: the same rows, small; who: "carmen", or null when she has gone and her lines are still up
+const oo_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},OO_RB,{h:oo_hT(OO_RB.floor)},o||{}));
+/* Each row has the time the voice says it; PK.pace then makes a row wait until Carmen can have walked to it. So the boards are
+   laid out for someone who walks: a row goes on to the right of the one before where it can (words in another colour on the
+   same line; the short row under a long one where the long one ended), what is added to rows that are there goes to their
+   right, and nothing is underlined or struck back along its words, which would leave her standing on the rows above. */
+// 1. what a data product owner is, and the product's promise
+const oo_boardA=(sc,w)=>[
+  {s:"Zhamak Dehghani, data mesh",x:70,y:92,size:42,col:"mut",at:sc.cues.mesh+0.1,d:1.0},
+  {s:"Data product owner",x:70,y:188,size:76,w:700,col:"blue",at:w("mesh","data product",-0.5),d:1.2},
+  {s:"answers for what the product does",x:70,y:296,size:50,at:w("mesh","answers",-0.1),d:1.5},
+  {s:"for its readers",size:50,w:700,col:"green",at:w("mesh","for its",-0.1),d:0.8},
+  // what comes later, when she has stepped clear, goes at the right: a short walk, and the heading stays in view as she writes it
+  {s:"Its promise:",x:730,y:404,size:52,at:w("promise","promise",-0.3),d:0.8},
+  {s:"every Monday by 7:00",x:730,y:476,size:50,w:700,col:"blue",at:w("promise","every",-0.1),d:1.3}];
+/* 2. many do part of the work, one answers for the outcome: a RACI chart's letters, in a column to the right of the names. An R
+   for each who does part of the work, as the voice names the chart; then the one A, ringed, beside Ivy */
+const oo_boardB=(sc,w)=>{const tr=w("one","Ray-see",-0.15),ta=w("one","A,",-0.3),R=(y,i)=>({s:"R",x:780,y,size:56,w:700,col:"mut",at:tr+i*0.36,d:0.3});return[
+  {s:"Many do the work",x:70,y:104,size:58,at:w("many","Many",-0.1),d:1.2},
+  {s:"Facilities: the sensors",x:120,y:176,size:50,at:w("many","Facilities",0.1),d:1.0},
+  {s:"Sam: the platform",x:120,y:240,size:50,at:w("many","Sam",0.1),d:0.8},
+  {s:"Jun: reviews her changes",x:120,y:304,size:50,at:w("many","Jun",0.1),d:1.1},
+  {s:"Ivy: the outcome",x:120,y:392,size:50,w:700,col:"blue",at:w("one","One",-0.1),d:1.1},
+  R(176,0),R(240,1),R(304,2),
+  {s:"A",x:776,y:392,size:64,w:700,col:"blue",at:ta,d:0.3},{k:"ring",x:797,y:372,rx:44,ry:44,col:"blue",at:ta+0.4,d:0.45},
+  {s:"accountable:",x:880,y:392,size:50,at:w("one","accountable",-0.1),d:0.6},
+  {s:"only one",x:880,y:462,size:54,w:700,col:"blue",at:w("one","only one",-0.1),d:0.6}];};
+/* 3. the review: each part was right (Carmen ticks each as the room hears it), and what failed lies between them; then a just
+   culture's questions: two to ask, and one not to */
+const oo_boardC=(sc,w)=>{const rows=[],tk=[w("each","better",0.4),w("each","count",0.4),w("each","built",0.5)];
+  ["Sensors","Platform","The step"].forEach((s,i)=>rows.push({k:"box",x:70+i*360,y:44,w:300,h:96,col:"ink"},{s,x:96+i*360,y:110,size:54},{k:"tick",x:328+i*360,y:94,r:20,col:"green",at:tk[i]}));
+  return rows.concat([
+    {s:"What failed: how the parts fit",x:236,y:216,size:52,w:700,col:"amber",at:w("fit","What failed",-0.1),d:1.4},
+    // the two joins, ringed from where she stands: the nearer one first
+    {k:"ring",x:760,y:92,rx:38,ry:62,col:"amber",at:w("fit","parts",0.1),d:0.5},{k:"ring",x:400,y:92,rx:38,ry:62,col:"amber",at:w("fit","together",0.1),d:0.5},
+    {s:"Sidney Dekker:",x:70,y:316,size:42,col:"mut",at:sc.cues.dekker+0.1,d:0.9},
+    {s:"a just culture",size:72,w:700,col:"blue",at:w("dekker","just",-0.3),d:1.0},
+    {k:"tick",x:92,y:376,r:18,col:"green",at:w("dekker","what happened",-0.35),d:0.25},{s:"What happened?",x:128,y:394,size:54,at:w("dekker","what happened",-0.1),d:0.8},
+    {k:"tick",x:602,y:376,r:18,col:"green",at:w("dekker","what must",-0.35),d:0.25},{s:"What must change?",x:638,y:394,size:54,at:w("dekker","what must",-0.1),d:0.8},
+    {k:"cross",x:742,y:452,r:15,col:"amber",at:w("dekker","not who",-0.2),d:0.25},{s:"Who is to blame?",x:778,y:470,size:54,col:"mut",at:w("dekker","not who",0.1),d:0.8}]);};
+/* the team's room when Carmen explains at its board: Sam has pulled a chair round, Jun turns from her desk, and Ivy sits turned
+   to the board with her notebook open on her knee and a pen in her hand. o.rows: the board's rows; o.say: when Carmen speaks
+   ([[t0, t1], …]); o.events: PK.face's, for her; o.note (0 to 1): Ivy looks down and writes; o.ivy, o.sam, o.jun: their faces
+   (PK.face's result); o.clock, o.pot. Returns {ivy, sam, jun, carmen}. */
+const OO_KNEE={mode:"sit",lean:8,head:6,aN:[30,78,"grip"],aF:[26,70,"grip"],lN:[86,4],lF:[82,-4]};
+function oo_lesson(x,tt,o){o=o||{};const wr=o.note||0,lis=(g)=>PK.face(tt,{expr:"listen",gaze:[1,g]},[]);let Jc=null;
+  const R=oo_team(x,tt,{clock:o.clock,pot:o.pot,sam:null,jun:Object.assign({work:0,pose:"sit"},o.jun||lis(-0.2)),
+    behind:cx=>{if(o.behind)o.behind(cx);Jc=oo_roomBoard(cx,tt,o.rows||[],"carmen",{say:o.say,events:o.events});},
+    ivy:Object.assign({turn:1,work:0,pose:OO_KNEE,underF:PK.inHand.notebook({}),hold:PK.inHand.pen("blue"),holds:true},o.ivy||lis(-0.3),wr>0.004?{gaze:[1,-0.3+0.9*wr],nod:0.22*wr}:{})});
+  R.sam=PK.seated(x,"sam",1500,940,oo_hT(940),PK.poseMix("sit","sitBack",0.5),Object.assign({t:tt+2,flip:true},o.sam||lis(-0.25)));R.carmen=Jc;return R;}
+
+/* Ivy writes in the notebook on her desk (oo_team's book: 1), a pen in her hand: what PK.atDesk takes for her. wr (0 to 1): how
+   far she is bent to the page and writing; at 0 she sits up, the hand with the pen at rest beside the book */
+const OO_JOT={mode:"sit",lean:13,head:11,aN:[30,84,"grip"],aF:[30,80,"flat"],lN:[86,4],lF:[82,-4]};
+const oo_pen=k=>(c,hd,deg,J)=>{if(k<=0.004)return;c.save();c.globalAlpha*=Math.min(1,k);PK.inHand.pen("blue")(c,hd,deg,J);c.restore();};
+const oo_jot=(tt,wr,o)=>{const U=PK.u,top=OO_IVY.floor-0.43*OO_HI;return Object.assign({work:0,keysBack:1,pose:PK.poseMix("sit",OO_JOT,wr),hold:oo_pen(1),holds:true,
+  reachN:[U.lerp(OO_IVY.x-96,OO_IVY.x-128+Math.sin(tt*9)*3,wr),U.lerp(top-9,top-13,wr)],reachNk:1,reachF:[OO_IVY.x-72,top-6],reachFk:wr},o||{});};
+
+/* ---------------------------------------------------------------- Ivy's notebook: what she keeps (the page's own px)
+   One pen writes a page, so its strokes come one after the other, each with the time to cross to it: the film gives each row the
+   time the voice says it, in the order the pen writes them, and paces the page (PK.pace(ctx, null, rows)), which moves a row
+   that would start before the one before it has ended. A row is written fast, in under a second: the voice doesn't wait. */
+// what she owns: not Monday's job
+const oo_note1=(sc,w)=>[
+  {s:"What I own",x:70,y:124,size:84,w:700,col:"blue",at:sc.cues.truly-0.3,d:0.8,marks:[["under","blue",null,0.3]]},
+  {s:"Monday's job",x:140,y:268,size:68,at:w("truly","Monday's",-0.3),d:0.7,marks:[["strike","amber",w("truly","job",0.3),0.35]]},
+  {k:"cross",x:96,y:246,r:15,col:"amber",at:w("truly","job",0.7),d:0.25},
+  {k:"tick",x:96,y:372,r:18,col:"green",at:w("truly","timetable",-0.1),d:0.25},
+  {s:"The timetable change,",x:140,y:392,size:68,at:w("truly","timetable",0.2),d:0.9},
+  {s:"judged on",x:140,y:490,size:68,at:w("truly","judged",-0.1),d:0.5},
+  {s:"true counts",x:444,y:490,size:68,w:700,at:w("truly","true",-0.1),d:0.7,marks:[["hl","green"]]}];
+// say it first: she goes back to highlight "before the fix" once the page is written
+const oo_note2=(sc,w)=>[
+  {s:"Say it first,",x:70,y:176,size:96,w:700,col:"blue",at:sc.cues.first-0.1,d:0.8},
+  {s:"before the fix.",x:70,y:310,size:84,at:w("first","before",-0.1),d:0.7,marks:[["hl","amber",sc.ends.first+0.3]]},
+  {k:"arrow",x:92,y:404,x1:168,y1:440,bow:-16,col:"blue",at:w("first","is part",-0.2),d:0.3},
+  {s:"that's part of owning it",x:190,y:456,size:60,at:w("first","is part",0.1),d:1.0},
+  {k:"star",x:1000,y:150,r:32,col:"amber",at:sc.ends.first+0.9,d:0.45}];
+// fix it, or raise it: written in the pause that ends the chapter
+const oo_note3=sc=>{const b=sc.cues.breath;return[
+  {s:"Mine?",x:70,y:176,size:84,at:b+0.2,d:0.4},{k:"arrow",x:330,y:150,x1:444,y1:150,col:"green",at:b+0.65,d:0.35},{s:"Fix it.",x:474,y:176,size:84,w:700,at:b+1.05,d:0.5,marks:[["hl","green",null,0.4]]},
+  {s:"Not mine?",x:70,y:330,size:84,at:b+2.3,d:0.55},{k:"arrow",x:474,y:304,x1:588,y1:304,col:"blue",at:b+3.0,d:0.35},{s:"Raise it.",x:618,y:330,size:84,w:700,col:"blue",at:b+3.4,d:0.55,marks:[["under","blue",null,0.3]]}];};
+// being accountable: giving an account
+const oo_note4=(sc,w)=>[
+  {s:"Nobody blamed",x:70,y:112,size:58},{k:"arrow",x:462,y:92,x1:548,y1:92,col:"green"},{s:"safe to say it early",x:574,y:112,size:58,marks:[["hl","green"]]},
+  {s:"Accountable",x:70,y:270,size:92,w:700,col:"blue",at:w("account","accountable",-0.4),d:0.7,marks:[["under","blue",null,0.25]]},
+  {s:"= giving an account",x:70,y:388,size:68,at:w("account","giving",-0.2),d:0.75},
+  {k:"dot",x:100,y:476,r:9,col:"blue",at:w("account","what happened",-0.3),d:0.12},{s:"what happened",x:140,y:494,size:64,at:w("account","what happened",-0.1),d:0.65},
+  {k:"dot",x:100,y:576,r:9,col:"green",at:w("account","how",-0.3),d:0.12},{s:"how next time goes better",x:140,y:594,size:64,at:w("account","how",-0.1),d:1.0,marks:[["hl","green"]]}];
+// on Monday: the four things to keep, and beside each, in one column, what it means (inside the page: 1,100 px wide)
+const oo_note5=(sc,w)=>{const c=sc.cues,dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
+  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:c.know-0.45,d:0.6,marks:[["under","blue",null,0.3]]},
+  dot(250,"blue",w("know","know",0)),{s:"Know who uses it",x:128,y:250,size:62,at:w("know","know",0.1),d:0.9},
+  {s:"for which decision?",x:680,y:250,size:42,col:"mut",at:w("know","for which",-0.1),d:0.8},
+  dot(366,"green",w("watch","Watch",-0.3)),{s:"Watch what it's for",x:128,y:366,size:62,at:w("watch","Watch",-0.1),d:1.0,marks:[["hl","green"]]},
+  {s:"not only: did it run?",x:680,y:366,size:42,col:"mut",at:w("watch","not only",0.4),d:0.85},
+  dot(482,"amber",w("say","say so",-0.4)),{s:"Say so first",x:128,y:482,size:62,at:w("say","say so",-0.2),d:0.8,marks:[["hl","amber"]]},
+  {s:"even before the fix",x:680,y:482,size:42,col:"mut",at:w("say","even",0.2),d:0.8},
+  // the last has no dot: the ring round it would run through one
+  {s:"Fix, raise, mend",x:128,y:598,size:62,at:w("mend","Fix",-0.1),d:w("mend","mend",0.6)-w("mend","Fix",-0.1),marks:[["ring","blue",w("mend","mend",0.8)]]},
+  {s:"never blame a person",x:680,y:598,size:42,col:"mut",at:w("mend","never",0),d:0.9},
+  {k:"star",x:1010,y:104,r:30,col:"amber",at:sc.ends.mend+0.05,d:0.45}];};
+
+/* ---------------------------------------------------------------- what they write to each other
+   Ivy's chat with Graham and Mei, as her screen has it (f1, f2, f3: when the voice says each of her three lines; te: when it
+   ends), and as Graham's phone has it, where he answers at ta */
+const OO_SAID=[{s:"Forty rooms look wrong."},{s:"Don't use them yet."},{lines:["The right counts","come tomorrow."]}];
+const oo_chat=(f1,f2,f3,te)=>({title:"Graham, Mei",who:["graham","mei"],me:"ivy",msgs:[[f2-0.3,f1-0.1],[f3-0.3,f2-0.1],[te+0.1,f3-0.1]].map(([at,from],i)=>Object.assign({who:"ivy",at,type:at-from},OO_SAID[i]))});
+const oo_chat2=ta=>({title:"Ivy Reyes",who:["ivy"],me:"graham",msgs:OO_SAID.map(m=>Object.assign({who:"ivy",at:-1e3},m)).concat([{who:"graham",s:"Thanks. We'll hold off.",at:ta,type:1.7}])});
 
 /* ===== Owning the outcome: the chapters, shot by shot =====
-   Every picture has people in it, whole, doing what the line says: the words on screen are where and when, a name, or what someone
-   says. Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's
+   The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the
+   line says, and the words on the frame are where and when, a name, what someone says, or what a screen or a sensor shows. A key
+   idea is never a label in a scene: the ideas the story opens with are explained by Carmen Vidal, a consultant, at the team's
+   board, and what to keep from each chapter is a page of Ivy's notebook, in colour (oo_uni.js). People also talk from where they
+   are: Ivy calls Graham and Mei, and writes to them in a chat; they meet face to face too. Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's
    recorded again; the score (tools/score.py) takes the same words. A shot is one stay in a place: the camera glides between its
    keys, and everyone in it moves as one function of time, so nothing jumps; between places the film cuts, or dissolves where the
    whole picture changes (Kenya and the university). Sizes are in the 1920 x 1080 frame; people's sizes come from each place's eye
@@ -2123,8 +2754,7 @@ scene("trees",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       oo_tag(x,tt,w("women","rural",-0.1),sp[0]-0.3,470,348,"Rural women");PK.nameTag(x,1262,338,"Wangari Maathai","A biologist",ag_io(tt,w("women","Maathai",-0.2),sp[0]-0.3,0.4));
       oo_say(x,Jm,tt,sp[0],sp[1],["The stream is drying up."],cam);oo_say(x,Jw,tt,sp[1],sp[2],["Our food is less sure."],cam,{rise:70,dx:-110});oo_say(x,Jn,tt,sp[2],sp[3],["Each year, we walk further","for firewood."],cam);
       oo_tag(x,tt,w("cleared","farms",-0.1),c.soil-0.7,330,300,"Farms");oo_tag(x,tt,w("cleared","tea",-0.1),c.soil-0.7,900,330,"Tea and coffee, to sell");oo_tag(x,tt,w("cleared","plantations",-0.1),c.soil-0.7,1560,300,"Timber");
-      oo_tag(x,tt,c.sense-0.1,c.soil-0.7,960,232,"Each choice made sense to those who made it",{weight:800});
-      oo_tag(x,tt,w("soil","soil",-0.1),c.harm-0.7,1560,790,"The soil washed away",{col:PK.C.amber});oo_tag(x,tt,w("soil","springs",-0.1),c.harm-0.7,1470,470,"The springs ran dry",{col:PK.C.amber});}},
+}},
     // who carried it: the women, at their work, and their children; then Maathai comes with a seedling
     {at:c.harm-0.4,place:"ooHills",later:true,keys:[[c.harm-0.4,960,590,1.06],[c.change-0.5,1000,610,1.14]],d:2.4,draw:(x,tt,cam)=>{
       oo_sky(x,tt);oo_plot(x);const t0=c.harm-0.4,look=ag_in(tt,c.change-0.2,0.8);
@@ -2133,10 +2763,7 @@ scene("trees",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       PK.person(x,K.boy,1170,902,oo_h(902)*0.74,"stand",{t:tt,flip:true,expr:"neutral",gaze:[1,0.5-0.9*look]});
       PK.person(x,K.wan,826,900,oo_h(900),OO_KNEEL,{t:tt,expr:"worry",gaze:[1,0.5-1.1*look],reachN:PK.among(Math.min(tt,c.change-0.6),[[984,852],[1028,850],[954,858]],2.2,t0+0.8),reachF:[880,838]});
       PK.walk(x,K.mum,tt,mw,{hold:oo_can,expr:"neutral"});PK.walk(x,K.girl,tt,Object.assign({},mw,{x0:724,x1:384,floor:924,h:oo_h(924)*0.7,arms:null,then:"stand",phase:0.3}),{expr:"neutral"});
-      const Ja=PK.walk(x,K.maathai,tt,{x0:2010,x1:1370,t0:c.change-1.4,t1:c.change+1.6,floor:880,h:oo_h(880),arms:{aN:OO_SHOW.aN},then:OO_SHOW},{hold:oo_inHand(0.8),expr:"smile"});
-      oo_tag(x,tt,w("harm","fetched",-0.1),c.change-0.6,420,372,"Water");oo_tag(x,tt,w("harm","gathered",-0.1),c.change-0.6,1590,372,"Firewood");oo_tag(x,tt,w("harm","grew",-0.1),c.change-0.6,880,496,"Food");
-      oo_tag(x,tt,w("harm","harm",-0.2),c.change-0.6,960,262,"The harm fell first on them, and on their children",{col:PK.C.amber,weight:800});
-      oo_tag(x,tt,w("change","women",-0.4),c.start-0.8,Ja.hc[0]-40,Ja.hc[1]-170,"Bring the trees back",{col:PK.C.green,weight:800});}},
+      PK.walk(x,K.maathai,tt,{x0:2010,x1:1370,t0:c.change-1.4,t1:c.change+1.6,floor:880,h:oo_h(880),arms:{aN:OO_SHOW.aN},then:OO_SHOW},{hold:oo_inHand(0.8),expr:"smile"});}},
     // 1977: a group's nursery
     {at:c.start-0.4,cut:true,place:"ooNursery",keys:[[c.start-0.4,960,560,1.0],[c.nursery-0.4,900,630,1.16]],d:3,draw:(x,tt,cam)=>{
       oo_sky(x,tt);const t0=c.start-0.4;
@@ -2149,8 +2776,7 @@ scene("trees",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       const lift=Math.max(ag_io(tt,t0+2.2,t0+5.6,0.8),ag_io(tt,c.nursery+1.4,c.nursery+4.4,0.8));
       PK.person(x,K.girl,372,938,oo_h(938)*0.7,PK.poseMix(OO_CARRY,OO_SHOW,0.3+0.7*lift),{t:tt,hold:oo_inHand(0.6),expr:PK.exprMix("smile","glad",lift),gaze:[1,0.5-0.7*lift]});
       PK.person(x,K.wan,500,930,oo_h(930),OO_KNEEL,Object.assign({t:tt,reachN:PK.among(tt,[[612,866],[652,864],[588,870]],2.3,t0+0.6),reachF:[586,862]},
-        PK.face(tt,{expr:"neutral",gaze:[1,0.6]},[[c.start+2.6,"look",2.2,[1,-0.7]],[c.nursery+0.4,"smile",3.4]])));
-      oo_tag(x,tt,w("nursery","nurseries",-0.3),c.paid-0.9,960,300,"Their own nurseries");oo_tag(x,tt,w("nursery","seeds",-0.2),c.paid-0.9,1180,700,"From the seeds of local trees");}},
+        PK.face(tt,{expr:"neutral",gaze:[1,0.6]},[[c.start+2.6,"look",2.2,[1,-0.7]],[c.nursery+0.4,"smile",3.4]])));}},
     // months later: paid for each tree still alive; they answer for living trees
     {at:tP,cut:true,place:"ooHills",keys:[[tP,1040,610,1.12],[c.answer-0.4,1180,640,1.22]],d:2.6,draw:(x,tt,cam)=>{
       oo_sky(x,tt);const t1=w("paid","not",0.2),tE=c.answer-1.6,wk={x0:520,x1:1626,t0:tP+0.3,t1,floor:xx=>OO_ROW.y(xx)+44,h:oo_h,then:"stand"};
@@ -2160,44 +2786,40 @@ scene("trees",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       const q=PK.walkAt(tt,wk),fm=OO_ROW.y(1790)+50,hy=q.floor-oo_h(q.floor)*0.56,ry=OO_ROW.y(1460),face=PK.exprMix(PK.exprMix("neutral","glad",got),"smile",kn);
       PK.person(x,K.maathai,1790,fm,oo_h(fm),"stand",{t:tt,flip:true,expr:"smile",gaze:[1,0.5*kn],reachN:[1712,hy],reachNk:pay,hold:oo_coins(pay*(1-got))});
       if(kn<=0)PK.walk(x,K.wan,tt,wk,{flip:turn,expr:face,gaze:[1,0.6*(1-ag_in(tt,t1,0.4))],reachN:[1716,hy],reachNk:take,hold:oo_coins(take*got)});
-      else PK.person(x,K.wan,q.x,q.floor,q.h,PK.poseMix("stand",OO_KNEEL,kn),{t:tt,flip:turn,expr:face,gaze:[1,0.5*kn],reachN:[1482,ry-74],reachNk:kn,reachF:[1494,ry-44],reachFk:kn});
-      oo_tag(x,tt,w("paid","not",-0.1),c.answer-0.5,1040,470,"Not for each seedling planted",{col:PK.C.mut});
-      oo_tag(x,tt,w("answer","living",-0.3),tGr+0.2,1190,520,"Living trees, not the planting",{col:PK.C.green,weight:800});}},
+      else PK.person(x,K.wan,q.x,q.floor,q.h,PK.poseMix("stand",OO_KNEEL,kn),{t:tt,flip:turn,expr:face,gaze:[1,0.5*kn],reachN:[1482,ry-74],reachNk:kn,reachF:[1494,ry-44],reachFk:kn});}},
     // the same hills, years later: more than fifty million trees; then 2004
     {at:tGr,place:"ooGreen",dis:1.2,keys:[[tGr,1085,630,1.22],[tGr+0.3,960,540,1.0]],d:3.4,draw:(x,tt,cam)=>{
       oo_sky(x,tt);const a=ag_in(tt,tGr+1.3,0.6);
       PK.walk(x,K.nya,tt,{x0:150,x1:640,t0:tGr+1.3,t1:c.give+3.6,floor:866,h:oo_h(866),arms:{aN:[16,84,"grip"],aF:[24,92,"grip"],lean:-4},then:"armful"},{hold:oo_firewood,expr:"smile",a});
       PK.person(x,K.wan,1150,884,oo_h(884),"stand",{t:tt,flip:true,expr:"smile",a,gaze:[1,0.3]});
-      PK.person(x,K.boy,1010,894,oo_h(894)*0.74,"stand",{t:tt,expr:"glad",a});PK.person(x,K.girl,900,900,oo_h(900)*0.7,PK.poseMix("stand","wave",ag_io(tt,c.fifty+1,c.fifty+3,0.5)),{t:tt,expr:"glad",a});
-      oo_tag(x,tt,w("give","fuel",-0.1),tN-0.3,520,356,"Fuel");oo_tag(x,tt,w("give","food",-0.1),tN-0.3,955,468,"Food");oo_tag(x,tt,w("give","shelter",-0.1),tN-0.3,1420,330,"Shelter");
-      oo_tag(x,tt,w("give","thousands",-0.2),tN-0.3,960,216,"An income for thousands of women",{col:PK.C.green,weight:800});}},
+      PK.person(x,K.boy,1010,894,oo_h(894)*0.74,"stand",{t:tt,expr:"glad",a});PK.person(x,K.girl,900,900,oo_h(900)*0.7,PK.poseMix("stand","wave",ag_io(tt,c.fifty+1,c.fifty+3,0.5)),{t:tt,expr:"glad",a});}},
     {at:tN,place:"ooGreen",later:true,keys:[[tN,960,540,1.0],[tN+0.2,940,610,1.15]],d:2.6,draw:(x,tt,cam)=>{
       oo_sky(x,tt);PK.person(x,K.nya,620,872,oo_h(872),"stand",{t:tt,expr:"smile",gaze:[1,0.5]});
       PK.person(x,K.wan,1250,880,oo_h(880),"stand",{t:tt,flip:true,expr:"smile",gaze:[1,0.5]});PK.person(x,K.girl,1360,892,oo_h(892)*0.7,"stand",{t:tt,flip:true,expr:"glad"});
       PK.S.begin(x,{lw:2.6,far:0,sh:4});PK.seedling(x,1010,892,3.4,1,{});
       const Je=PK.person(x,K.elder,890,896,oo_h(896),OO_KNEEL,{t:tt,expr:"smile",gaze:[1,0.5],reachN:[992,880],reachF:[966,872]});
       PK.nameTag(x,Je.hc[0]-20,Je.hc[1]-150,"Wangari Maathai","",ag_io(tt,w("nobel","Wangari",-0.2),tU-0.3,0.4));}},
-    // the same in data work: Ivy at her desk, a job that ran, a report that was sent
+    // the same in data work: Ivy at her desk, and what her screen shows: a job that ran, a report that was sent
     {at:tU,place:"ooTeam",dis:1.0,keys:[[tU,835,590,1.15],[c.own+0.6,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
       const up=ag_in(tt,c.own+0.2,1.0),k=ag_in(tt,w("data","job",-0.2),0.6)*0.5+ag_in(tt,w("data","report",-0.2),0.6)*0.5;
       oo_team(x,tt,{clock:9.1,show:oo_scrTicks(k),ivy:{work:1-0.8*up,expr:PK.exprMix("neutral","think",up),gaze:[1,-0.8*up],nod:-0.1*up}});
-      const a1=ag_io(tt,w("data","job",-0.2),c.breath-0.2,0.4),a2=ag_io(tt,w("data","report",-0.2),c.breath-0.2,0.4);
-      PK.tag(x,330,286,"A job that ran",a1,{align:"left"});PK.tick(x,300,286,22,a1);PK.tag(x,330,350,"A report that was sent",a2,{align:"left"});PK.tick(x,300,350,22,a2);}}
+      oo_screen(x,236,ag_io(tt,w("data","job",-0.5),c.breath-0.2,0.4),[["A job that ran",ag_in(tt,w("data","job",-0.2),0.4)],["A report that was sent",ag_in(tt,w("data","report",-0.2),0.4)]]);}}
   ]);
   oo_card(ctx,S,t,c.when-0.2,w("women","rural",-0.6),{kick:"Kenya",title:"The 1970s",sub:"The central highlands"},{y:84});
   oo_card(ctx,S,t,c.start+0.1,c.nursery-0.4,{kick:"1977",title:"The Green Belt Movement",sub:"With the National Council of Women of Kenya",col:PK.C.green},{y:84});
-  oo_card(ctx,S,t,c.paid+0.1,c.answer-0.5,{kick:"Months later",title:"Paid for each tree still alive",col:PK.C.green},{y:84});
-  oo_card(ctx,S,t,c.fifty+0.1,c.give-0.3,{kick:"Kenya, since 1977",title:"More than 50 million trees",col:PK.C.green},{y:84});
+  oo_card(ctx,S,t,c.paid+0.1,tGr-0.3,{kick:"Months later",title:"Paid for each tree still alive",sub:"not for each seedling planted",col:PK.C.green},{y:84});
+  oo_card(ctx,S,t,c.fifty+0.1,tN-0.3,{kick:"Kenya, since 1977",title:"More than 50 million trees",col:PK.C.green},{y:84});
   oo_card(ctx,S,t,c.nobel+0.2,tU-0.3,{kick:"2004",title:"The Nobel Peace Prize",sub:"The first African woman to win it"},{y:84});
   oo_imagined(ctx,S,t,tU+0.8,c.breath-0.2);
   PK.title(ctx,S,t,c.breath+0.2,"Owning the outcome","Answer for what it's for","Leading data people · Ownership and performance",{side:"right"});
 });
 
 /* ---------------------------------------------------------------- 2. What she owns: Thursday 1 July */
-// the two sheets Ivy pins to the team's board on her first day as owner: the product, and its promise (a1, a2: how far each is up)
-const oo_sheets=(cx,a1,a2)=>{oo_pinned(cx,806,226,"Data product","Teaching space use",a1,PK.C.orange);oo_pinned(cx,806,352,"Its promise","Every Monday by 7:00",a2,PK.C.blue);};
+// while a chapter shows a key idea apart from the scene (a board seen close, a page of the notebook), its kicker steps back
+const oo_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
 scene("owns",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const tB=w("owner","becomes"),tR=c.what-0.4,tM=c.mesh-0.4,tC=c.readers-0.5,tL=c.truly-0.5,tD=w("many","Sam",-0.5);
+  const tB=w("owner","becomes"),tR=c.what-0.4,tM=c.mesh-3.8,tZ=w("mesh","data product",-1.1),tF=c.film-0.3,tP=c.promise-0.4,tC=c.readers-0.5,tL=c.truly-0.5,tY=c.many-0.5,tO=sc.ends.many+0.6,tH=c.helena-0.6;
+  const BA=PK.pace(ctx,"carmen",oo_boardA(sc,w)),BB=PK.pace(ctx,"carmen",oo_boardB(sc,w)),N1=PK.pace(ctx,null,oo_note1(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
     // her first day as owner: Helena brings her a seedling in a pot. The shot opens as the chapter before ends (Ivy looking up from
     // her screen), so only the title card fades
@@ -2214,54 +2836,57 @@ scene("owns",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       const seats=PK.seats(),ts=[c.what+0.3,c.what+1.7,c.what+3.1],n=31+ts.filter(q=>tt>q+0.5).length;let seen=0;
       oo_class(x,tt,{n:8,open:ag_io(tt,tR+0.1,c.what+6.4,0.5),look:0.2,teacher:false,between:(cx,row)=>{if(row===0)[0,2,3].forEach((s,i)=>{seen=Math.max(seen,oo_toSeat(cx,tt,PK.extra(30+i*3),seats[s],ts[i],2.8+i*0.5));});}});
       PK.sensor(x,OO_L.sensor[0],OO_L.sensor[1],seen);oo_count(x,n+" people");
-      PK.person(x,OO_TEACHER,1560,856,oo_hL(856),"stand",{t:tt,flip:true,expr:"smile"});
-      oo_tag(x,tt,w("what","Counts",-0.2),tM-0.4,322,306,"Counts, never people",{align:"left",weight:800});}},
-    // the data product owner: she pins the product to the board, and its promise; Sam, who keeps the platform, looks round at it
-    {at:tM,cut:true,place:"ooTeam",keys:[[tM,900,500,1.18]],d:2,draw:(x,tt,cam)=>{
-      const tq=w("promise","refreshed"),p1=ag_io(tt,tM+0.2,c.mesh+1.4,0.5),p2=ag_io(tt,tq-0.7,tq+0.9,0.5),back=ag_io(tt,c.mesh+2.2,tq-1.2,0.7),look=ag_io(tt,tq+0.5,tC-0.2,0.5);let Ji;
-      oo_team(x,tt,{clock:9.5,ivy:null,pot:0.3,sam:{turn:look,work:1,expr:PK.exprMix("neutral","smile",look),gaze:[1,-0.4*look]},behind:cx=>{
-        oo_sheets(cx,ag_in(tt,tM+0.5,0.35),ag_in(tt,tq-0.35,0.35));
-        Ji=PK.person(cx,"ivy",716,842,oo_hT(842),PK.poseMix("stand","listen",back),{t:tt,expr:PK.exprMix("neutral","smile",Math.max(back,ag_in(tt,tq+0.6,0.6))),gaze:[1,-0.5+0.5*back],reachN:[822,p2>p1?366:240],reachNk:Math.max(p1,p2)});}});
-      PK.nameTag(x,Ji.hc[0]-170,Ji.hc[1]-150,"Ivy Reyes","Data product owner",ag_io(tt,w("mesh","owner",-0.3),c.film-0.4,0.4));
-      PK.nameTag(x,975,590,"Zhamak Dehghani","Data mesh",ag_io(tt,w("mesh","Zhamak",0.3),c.film-0.4,0.4));}},
-    // its readers, by name, and what it is for; others come and go on the campus
-    {at:tC,cut:true,place:"ooCampus",keys:[[tC,960,560,1.0],[c.readers+2.6,830,585,1.1]],d:3,draw:(x,tt,cam)=>{
-      oo_passer(x,tt,PK.extra(4),tC+0.2,{});oo_passer(x,tt,PK.extra(11),tC+10.4,{out:true});
-      const show=ag_io(tt,c.for-0.2,c.truly-1,0.8),nod=Math.sin(tt*2.4)*0.04*ag_io(tt,c.which+0.2,c.truly-0.8,0.5);
-      const Ji=PK.walk(x,"ivy",tt,{x0:-120,x1:560,t0:tC+0.1,t1:c.readers+3.2,floor:OO_CA.near,h:OO_HC,then:PK.poseMix("ease","wave",ag_io(tt,c.readers+3.0,c.readers+4.4,0.4))},{expr:PK.exprMix("smile","listen",show),nod});
-      // Mei a step behind Graham, half hidden by his shoulder: two who came together, not three in a row
-      const Jm=PK.person(x,"mei",1016,OO_CA.near-30,PK.hAt(OO_CA.near-30,OO_CA.eye),"clasp",Object.assign({t:tt,flip:true},
-        PK.face(tt,{expr:"smile",gaze:[1,0]},[[c.readers+3.5,"nod"],[c.for+0.9,"look",2.6,[0.5,0.8]],[c.for+3.8,"nod"],[c.which,"say",1.8]])));
-      const Jg=PK.person(x,"graham",880,OO_CA.near,OO_HC,PK.poseMix("ease",OO_SHOW,show),Object.assign({t:tt,flip:true,hold:oo_plan},
-        PK.face(tt,{expr:"smile",gaze:[1,0.6*show]},[[c.readers+3.3,"nod"],[c.for,"say",3],[c.which+0.8,"nod"]])));
-      PK.nameTag(x,Jg.hc[0]-40,Jg.hc[1]-150,"Graham Ellis","Facilities",ag_io(tt,w("readers","Graham",-0.2),c.for-0.4,0.4));PK.nameTag(x,Jm.hc[0]+110,Jm.hc[1]-150,"Mei Tanaka","Registrar's office",ag_io(tt,w("readers","Mei",-0.2),c.for-0.4,0.4));
-      oo_say(x,Jm,tt,c.which-0.1,tL-0.3,["Which ones?","Your counts will tell us."],cam,{dx:60});}},
-    // what she answers for: a room in use; Graham comes to look at his sensor
-    {at:tL,cut:true,place:"ooRoom",keys:[[tL,960,560,1.0],[c.many-0.2,760,560,1.14]],d:2.6,draw:(x,tt,cam)=>{
-      oo_class(x,tt,{});oo_count(x,"34 people");const gz=ag_in(tt,c.many+0.6,0.6),tg=c.many+2.0;
-      PK.person(x,"ivy",150,892,oo_hL(892),"clasp",{t:tt,expr:"smile",gaze:[1,-0.2-0.5*gz]});
-      PK.walk(x,"graham",tt,{x0:-140,x1:372,t0:c.many-0.6,t1:tg,floor:902,h:oo_hL(902),then:"ease"},{flip:ag_in(tt,tg-0.1,0.4),expr:"neutral",gaze:[1,-0.9*ag_in(tt,tg+0.2,0.5)],nod:-0.12*ag_in(tt,tg+0.3,0.5)});
-      PK.bubble(x,960,112,["Monday's job"],null,ag_io(tt,w("truly","Monday's",-0.2),c.many-0.5,0.4),{size:30,weight:700,ink:PK.C.mut,strike:U.clamp((tt-w("truly","job",0.2))/0.5,0,1)||0});
-      oo_tag(x,tt,w("truly","true",-0.6),c.many-0.5,960,196,"True counts, for the timetable change",{col:PK.C.green,weight:800});
-      oo_tag(x,tt,w("many","Facilities",-0.1),tD-0.2,330,306,"Facilities keeps the sensors",{align:"left"});}},
-    // the team: Sam keeps the platform, Jun reviews her changes; one person answers; Helena gives her the authority to match
-    {at:tD,cut:true,place:"ooTeam",keys:[[tD,1100,570,1.15],[c.one-0.4,960,550,1.06],[c.helena-0.6,960,540,1.0]],d:2.6,draw:(x,tt,cam)=>{
-      const up=ag_in(tt,c.one-0.2,0.8),turn=ag_in(tt,c.one-0.5,0.5),ok=ag_in(tt,w("can","without",-0.2),0.6);
-      const jr=ag_io(tt,w("can","review",-0.5),w("can","tell",0.6),0.5);
-      const R=oo_team(x,tt,{clock:10.2,pot:0.3,sam:{expr:"neutral"},jun:Object.assign({work:1-0.8*jr},PK.face(tt,{expr:"neutral",gaze:[1,-0.3*jr]},[[w("can","review",-0.2),"smile",2.6],[w("can","review",0.3),"nod"]])),behind:cx=>oo_sheets(cx,1,1),
-        ivy:Object.assign({turn,work:1,pose:PK.poseSit(1-up,"ease")},PK.face(tt,{expr:PK.exprMix("neutral","glad",ok),gaze:[1,0.1]},
-          [[w("one","Ray-see",0.7),"look",2.4,[1,-0.25]],[c.helena-0.4,"look",Infinity,[1,-0.05]],[w("can","hold",0.9),"nod"],[w("can","change",1.7),"nod"]]))});
-      PK.nameTag(x,R.sam.hc[0]+130,R.sam.hc[1]-150,"Sam Okafor","Keeps the platform",ag_io(tt,w("many","Sam",-0.1),c.one-0.5,0.4));PK.nameTag(x,R.jun.hc[0]-60,R.jun.hc[1]-150,"Jun Park","Reviews her changes",ag_io(tt,w("many","Jun",-0.1),c.one-0.5,0.4));
-      oo_letter(x,R.sam,"R",ag_io(tt,w("one","Ray-see",-0.1),c.helena-0.5,0.4));oo_letter(x,R.jun,"R",ag_io(tt,w("one","Ray-see",0.2),c.helena-0.5,0.4));oo_letter(x,R.ivy,"A",ag_io(tt,w("one","A,",-0.2),c.helena-0.5,0.4),true);
-      oo_tag(x,tt,w("one","accountable",-0.2),c.helena-0.5,R.ivy.hc[0]+70,R.ivy.hc[1]-250,"Accountable: only one",{col:PK.C.blue,weight:800,align:"left"});
+      PK.person(x,OO_TEACHER,1560,856,oo_hL(856),"stand",{t:tt,flip:true,expr:"smile"});}},
+    // the idea, apart from the story: Carmen Vidal, a consultant, at the team's board. The team has turned to her: Sam has pulled
+    // a chair round, and Ivy has her notebook on her knee
+    {at:tM,cut:true,place:"ooTeam",keys:[[tM,960,540,1.0],[tM+0.3,1010,530,1.08]],d:3,draw:(x,tt,cam)=>{
+      const R=oo_lesson(x,tt,{clock:9.6,pot:0.3,rows:BA,say:[[c.mesh,tZ+0.6]]});
+      PK.nameTag(x,R.carmen.hc[0],R.carmen.hc[1]-150,"Carmen Vidal","Consultant",ag_io(tt,tM+0.4,c.mesh-1.5,0.4));}},
+    // the board, close enough to read: what a data product owner is
+    {at:tZ,cut:true,place:"ooBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[tZ,sc.ends.mesh]]});}},
+    // the room again: Ivy writes it down
+    {at:tF,cut:true,place:"ooTeam",keys:[[tF,1010,530,1.08]],d:2,draw:(x,tt,cam)=>{
+      oo_lesson(x,tt,{clock:9.7,pot:0.3,rows:BA,note:ag_io(tt,c.film+0.8,tP-0.7,0.6),
+        sam:PK.face(tt,{expr:"listen",gaze:[1,-0.25]},[[c.film+1.4,"nod"],[c.film+3.6,"smile",2.4]]),jun:PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[c.film+2.4,"nod"]])});}},
+    // the board: the product's promise
+    {at:tP,cut:true,place:"ooBoard",keys:[[tP,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[c.promise,sc.ends.promise]]});}},
+    // her readers, by name, and what the product is for: later that morning she calls Graham and Mei from her desk, her notebook
+    // open beside her. Each joins as the voice names them; Graham says what the timetable will do, and Mei what they need from her
+    {at:tC,cut:true,place:"ooTeam",keys:[[tC,800,470,1.2]],d:2,draw:(x,tt,cam)=>{
+      const tG=w("readers","Graham",-0.2),tMe=w("readers","Mei",-0.2),g1=w("for","timetable",-0.3),g2=w("for","release",-0.2),m1=c.which-0.1,tX=tL-1.2,
+        wr=Math.max(ag_io(tt,g1+1.2,g2+0.3,0.5),ag_io(tt,g2+1.7,c.which-0.5,0.5),ag_in(tt,tX+0.3,0.6));
+      oo_team(x,tt,{clock:11.0,pot:0.3,book:1,show:PK.onScreen.call(2,true),sam:{expr:"neutral"},jun:{expr:"neutral"},behind:cx=>oo_roomBoard(cx,tt,BA,null),
+        ivy:oo_jot(tt,wr,PK.face(tt,{expr:"smile",gaze:[1,-0.1+0.8*wr]},[[tG+0.7,"say",0.9],[tMe+0.8,"nod"],[g1+0.5,"nod"],[m1+1.0,"smile",2.4],[m1+1.5,"nod"]]))});
+      let J=null;
+      PK.callout(x,24,34,446,424,[205,474],ag_io(tt,tC+0.4,tX,0.4),(cc,bx,by,bw,bh)=>{J=PK.call(cc,bx,by,bw,bh,[
+        {who:"graham",a:ag_in(tt,tG,0.4),face:{expr:"smile"},say:[[tG+0.9,tG+1.7],[g1-0.2,sc.ends.for]],events:[[m1+0.8,"nod"]]},
+        {who:"mei",a:ag_in(tt,tMe,0.4),face:{expr:"smile"},say:[[tMe+0.9,tMe+1.6],[c.which,sc.ends.which+0.7]],events:[[g2+1.0,"nod"]]}],tt,{stack:true});});
+      if(J){PK.say(x,J[0],["We'll move about one peak class in six,","and release rooms nobody uses."],ag_io(tt,g1,c.which-0.4,0.3),{cam,la:[ag_in(tt,g1,0.3),ag_in(tt,g2,0.3)]});
+        PK.say(x,J[1],["Which ones?","Your counts will tell us."],ag_io(tt,m1,tX-0.2,0.3),{cam});}}},
+    // what she keeps from it, in her notebook: what she owns isn't Monday's job
+    {at:tL,place:"ooNotes",dis:0.6,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N1,{});}},
+    // that afternoon, Carmen again: many do part of the work. Sam and Jun are in the room, and each is named as the voice names them
+    {at:tY,place:"ooTeam",dis:0.6,keys:[[tY,1010,530,1.08]],d:2,draw:(x,tt,cam)=>{
+      const tS=w("many","Sam",-0.1),tJ=w("many","Jun",-0.1);
+      const R=oo_lesson(x,tt,{clock:14.0,pot:0.3,rows:BB,say:[[c.many,sc.ends.many]],
+        sam:PK.face(tt,{expr:"listen",gaze:[1,-0.25]},[[tS+0.5,"smile",2.6],[tS+1.0,"nod"]]),jun:PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[tJ+0.5,"smile",2.6],[tJ+1.0,"nod"]]),
+        ivy:PK.face(tt,{expr:"listen",gaze:[1,-0.3]},[[tS+0.3,"look",1.5,[1,0.05]],[tJ+0.3,"look",1.5,[1,0]]])});
+      PK.nameTag(x,R.sam.hc[0],R.sam.hc[1]-128,"Sam Okafor","",ag_io(tt,tS,tO-0.3,0.4));PK.nameTag(x,R.jun.hc[0]-10,R.jun.hc[1]-128,"Jun Park","",ag_io(tt,tJ,tO-0.3,0.4));}},
+    // the board: one person answers for the outcome
+    {at:tO,cut:true,place:"ooBoard",keys:[[tO,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BB,{say:[[c.one,sc.ends.one]]});}},
+    // Helena gives her the authority to match: she comes over, and Ivy stands to hear it. Carmen's lines are still on the board
+    {at:tH,cut:true,place:"ooTeam",keys:[[tH,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const up=ag_in(tt,c.helena+0.5,0.8),ok=ag_in(tt,w("can","without",-0.2),0.6),jr=ag_io(tt,w("can","review",-0.5),w("can","tell",0.6),0.5);
+      oo_team(x,tt,{clock:14.4,pot:0.3,book:0,sam:{expr:"neutral"},jun:Object.assign({work:1-0.8*jr},PK.face(tt,{expr:"neutral",gaze:[1,-0.3*jr]},[[w("can","review",-0.2),"smile",2.6],[w("can","review",0.3),"nod"]])),
+        behind:cx=>oo_roomBoard(cx,tt,BB,null),
+        ivy:Object.assign({turn:1,work:0,pose:PK.poseSit(1-up,"ease")},PK.face(tt,{expr:PK.exprMix("neutral","glad",ok),gaze:[1,-0.05]},[[w("can","hold",0.9),"nod"],[w("can","change",1.7),"nod"]]))});
       const Jh=PK.walk(x,"helena",tt,{x0:2030,x1:770,t0:c.helena-1.2,t1:c.helena+1.6,floor:904,h:oo_hT(904),then:"listen"},{expr:oo_says("smile",tt,c.can,c.can+5.4)});
-      PK.say(x,Jh,["Hold a refresh.","Change the model, with a review.","Tell the readers. No need to ask me."],ag_in(tt,c.can-0.1,0.3),{cam,dx:350,dy:-41,la:[ag_in(tt,w("can","hold",-0.1),0.3),ag_in(tt,w("can","change",-0.1),0.3),ag_in(tt,w("can","tell",-0.1),0.3)]});}}
+      PK.say(x,Jh,["Hold a refresh.","Change the model, with a review.","Tell the readers. No need to ask me."],ag_in(tt,w("can","hold",-0.25),0.3),{cam,dx:350,dy:-41,la:[ag_in(tt,w("can","hold",-0.15),0.3),ag_in(tt,w("can","change",-0.1),0.3),ag_in(tt,w("can","tell",-0.1),0.3)]});}}
   ]);
-  oo_card(ctx,S,t,w("owner","Thursday",-0.3),tR-0.3,{kick:"Thursday 1 July",title:"Ivy's first data product",col:PK.C.blue});
-  oo_card(ctx,S,t,c.what+0.1,tM-0.4,{kick:"The data product",title:"Teaching space use",sub:"Each room, each hour: booked, and how many came",col:PK.C.orange},{right:true,y:76});
-  oo_card(ctx,S,t,c.film+0.1,c.promise-0.5,{kick:"An earlier film",title:"A product with an owner",sub:"How a product gets one"});
-  oo_card(ctx,S,t,w("for","timetable",-0.4),c.which-0.5,{kick:"Next year's timetable",title:"Move about one peak class in six",sub:"and release rooms nobody uses",col:PK.C.blue},{right:true,y:76});
-  oo_imagined(ctx,S,t,0.2,7.5);oo_kick(ctx,S,ag_in(t,1.0,0.6));
+  oo_card(ctx,S,t,w("owner","Thursday",-0.3),tR-0.45,{kick:"Thursday 1 July",title:"Ivy's first data product",col:PK.C.blue});
+  oo_card(ctx,S,t,c.what+0.1,tM-0.45,{kick:"The data product",title:"Teaching space use",col:PK.C.orange},{right:true,y:76});
+  oo_card(ctx,S,t,c.film+0.1,tP-0.45,{kick:"An earlier film",title:"A product with an owner",sub:"How a product gets one"});
+  oo_imagined(ctx,S,t,0.2,7.5);oo_kick(ctx,S,ag_in(t,1.0,0.6)*(1-oo_apart(t,[[tZ,tF],[tP,tL-0.1],[tL,tY],[tO,tH]])));
 });
 // the timetable plan Graham holds: a board with a grid, in his hand
 function oo_plan(c,h,deg,J){const U=PK.u,u=J.u,x=h[0]-40*u,y=h[1]-150*u,w=170*u,hh=210*u;PK.S.begin(c,{lw:2.4,sh:3});PK.S.fill(c,cc=>U.rrect(cc,x,y,w,hh,8*u),PK.col("board"),{});
@@ -2271,74 +2896,74 @@ function oo_plan(c,h,deg,J){const U=PK.u,u=J.u,x=h[0]-40*u,y=h[1]-150*u,w=170*u,
 const OO_LEANIN={mode:"sit",lean:16,head:-2,aN:[30,84,"flat"],aF:[34,88,"flat"],lN:[86,4],lF:[82,-4]};
 const OO_PLANT={mode:"kneel",lean:48,head:-18,aN:[20,10,"grip"],aF:[10,20],lN:[28,-90],lF:[40,-88],fN:70,fF:70},OO_PLANT2={mode:"kneel",lean:32,head:-8,aN:[30,20,"grip"],aF:[14,28],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
 scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,K=OO_CAST;
-  const tEv=w("ran","Every"),tS=c.seedling-0.5,tR=c.reads-0.5,tC=c.release-0.5,tW=c.wait-0.5,tT=c.tell-0.5;
+  const tEv=w("ran","Every"),tS=c.seedling-0.5,tR=c.reads-0.5,tC=c.release-0.5,tW=c.wait-0.5,te=sc.ends.tell,tG=te+0.9,tN=c.first-0.4,N2=PK.pace(ctx,null,oo_note2(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
     // seven weeks on, before the others are in: Ivy comes in and sits down to the refresh, which ran at seven
     {at:0,place:"ooTeam",later:true,keys:[[0,960,540,1.0],[tEv-0.6,835,590,1.15]],d:2.6,draw:(x,tt,cam)=>{
       const tA=4.4,here=tt>=tA+0.3,sit=ag_in(tt,tA+0.3,0.9),ok=ag_in(tt,tEv+0.3,0.6);
-      oo_team(x,tt,{clock:8.0,pot:0.55,sam:null,jun:null,away:!here,ivy:{pose:PK.poseSit(sit),work:ag_in(tt,tA+1.0,0.8),expr:PK.exprMix("neutral","smile",0.6*ok),gaze:[1,0.3*sit]}});
+      oo_team(x,tt,{clock:8.0,pot:0.55,book:0,sam:null,jun:null,away:!here,ivy:{pose:PK.poseSit(sit),work:ag_in(tt,tA+1.0,0.8),expr:PK.exprMix("neutral","smile",0.6*ok),gaze:[1,0.3*sit]}});
       if(!here)PK.walk(x,"ivy",tt,{x0:2040,x1:OO_IVY.x,t0:0.4,t1:tA,floor:OO_IVY.floor,h:OO_HI,then:"stand"},{t:tt+1,expr:"neutral"});
-      const a=ag_io(tt,tEv-0.2,tS-0.2,0.4);PK.tag(x,136,432,"Every check passes",a,{align:"left",col:PK.C.green,weight:800});PK.tick(x,104,432,22,a);}},
+      oo_screen(x,330,ag_io(tt,tEv-0.2,tS-0.2,0.4),[["Every check passes",1,PK.C.green]]);}},
     // Kenya: where one died, a seedling goes back in the ground. It earns nothing yet
     {at:tS,cut:true,place:"ooHills",keys:[[tS,1100,640,1.18],[tS+0.6,1182,650,1.3]],d:3,draw:(x,tt,cam)=>{
       oo_sky(x,tt);oo_row(x,tt,0.5,1,null,{i:5,g:0.5});
       const ry=OO_ROW.y(1320),fw=OO_ROW.y(1196)+44,up=ag_in(tt,w("seedling","nothing",-0.3),0.9),pat=Math.sin(tt*5.2)*(1-up);
       PK.person(x,K.wan,1196,fw,oo_h(fw),PK.poseMix(OO_PLANT,OO_PLANT2,up),{t:tt,expr:PK.exprMix("neutral","smile",up),gaze:[1,0.6],reachN:[1292,ry-6+5*pat],reachNk:1-0.4*up,reachF:[1280,ry+14-5*pat],reachFk:1-0.4*up});
-      PK.walk(x,K.girl,tt,{x0:2010,x1:1560,t0:tS-0.6,t1:tS+2.8,floor:xx=>OO_ROW.y(xx)+50,h:fl=>oo_h(fl)*0.7,arms:{aN:[3,5,"grip"]},then:"can"},{hold:oo_can,expr:"smile"});
-      oo_tag(x,tt,w("seedling","nothing",-0.2),tR-0.3,1330,486,"Nothing, until it lives",{col:PK.C.mut,weight:800});}},
+      PK.walk(x,K.girl,tt,{x0:2010,x1:1560,t0:tS-0.6,t1:tS+2.8,floor:xx=>OO_ROW.y(xx)+50,h:fl=>oo_h(fl)*0.7,arms:{aN:[3,5,"grip"]},then:"can"},{hold:oo_can,expr:"smile"});}},
     // she reads the numbers themselves; Sam comes in behind her
     {at:tR,cut:true,place:"ooTeam",keys:[[tR,835,590,1.15],[c.drop-0.3,800,560,1.2]],d:2.4,draw:(x,tt,cam)=>{
       const lk=ag_in(tt,c.reads+0.2,0.8),bad=ag_in(tt,c.drop+0.6,0.8),bk=ag_in(tt,c.drop+2.0,0.9),tA=tR+3.4,in1=tt>=tA+0.3,sit=ag_in(tt,tA+0.3,0.9);
-      oo_team(x,tt,{clock:8.2,pot:0.55,jun:null,sam:in1?{pose:PK.poseSit(sit),work:ag_in(tt,tA+1.1,0.8),expr:"neutral"}:null,
+      oo_team(x,tt,{clock:8.05,pot:0.55,book:0,jun:null,sam:in1?{pose:PK.poseSit(sit),work:ag_in(tt,tA+1.1,0.8),expr:"neutral"}:null,
         behind:cx=>{if(!in1)PK.walk(cx,"sam",tt,{x0:2010,x1:1230,t0:tR+0.2,t1:tA,floor:xx=>U.lerp(838,872,U.clamp((xx-1230)/160,0,1)),h:oo_hT,then:"stand"},{flip:1-ag_in(tt,tA-0.3,0.4),expr:"neutral"});},
         ivy:{work:1-0.6*bk,workPose:PK.poseMix("sitWork",OO_LEANIN,lk*(1-bk)),expr:PK.exprMix(PK.exprMix("neutral","think",lk),"worry",bad),gaze:[1,0.2]}});
       const p=0.62*ag_in(tt,c.reads+0.9,1.2)+0.38*ag_in(tt,c.drop-0.2,1.4);
-      oo_callout(x,40,150,520,256,205,474,ag_io(tt,c.reads+0.5,tC-0.3,0.4),(cc,bx,by,bw,bh)=>oo_dropChart(cc,bx,by,bw,bh,p));}},
+      PK.callout(x,40,150,520,256,[205,474],ag_io(tt,c.reads+0.5,tC-0.3,0.4),(cc,bx,by,bw,bh)=>oo_dropChart(cc,bx,by,bw,bh,p));}},
     // what the counts would do: a full room, counted at nine, would be released
     {at:tC,cut:true,place:"ooRoom",keys:[[tC,960,560,1.0],[tC+0.4,900,560,1.06]],d:3,draw:(x,tt,cam)=>{
       const gone=ag_io(tt,w("release","release",-0.4),w("release","really",-0.2),0.6);
-      oo_class(x,tt,{a:1-0.78*gone});oo_count(x,"9 people",1,PK.C.amber);
-      oo_tag(x,tt,w("release","release",-0.1),w("release","really",0.3),900,196,"Release this room?",{col:PK.C.amber,weight:800});}},
-    // she doesn't wait: she gets up and goes
-    {at:tW,cut:true,place:"ooTeam",keys:[[tW,835,590,1.15],[c.wait+0.6,960,560,1.04]],d:2.4,draw:(x,tt,cam)=>{
-      const turn=ag_in(tt,c.wait-0.1,0.5),up=ag_in(tt,c.wait+0.2,0.7),tG=c.wait+0.9,gone=tt>=tG,look=ag_in(tt,tG+1.2,0.6);
-      oo_team(x,tt,{clock:8.4,pot:0.55,jun:null,sam:{work:1-0.7*look,expr:PK.exprMix("neutral","think",look),gaze:[1,-0.3*look],nod:-0.06*look},away:gone,
-        ivy:{turn:gone?1:turn,work:0.3,pose:PK.poseSit(1-up),expr:"worry",gaze:[1,0]}});
-      if(gone)PK.walk(x,"ivy",tt,{x0:OO_IVY.x,x1:1900,t0:tG,t1:tG+3.2,floor:OO_IVY.floor,h:OO_HI},{t:tt+1,expr:"worry"});}},
-    // she tells the readers herself, before the fix: Graham and Mei, on their way across the campus
-    {at:tT,cut:true,place:"ooCampus",keys:[[tT,960,560,1.0],[c.tell+2.2,830,585,1.1]],d:3,draw:(x,tt,cam)=>{
-      oo_passer(x,tt,PK.extra(16),tT+0.4,{out:true});
-      const tM=c.tell+1.5,tg=c.first-1.9,said=ag_in(tt,tg+0.4,0.8),f1=w("tell","forty",-0.1),f2=w("tell","Don't",-0.1),f3=w("tell","The right",-0.1),hear=ag_in(tt,tM,0.5);
-      PK.walk(x,"mei",tt,{x0:1700,x1:1036,t0:tT-1.4,t1:tM+0.2,floor:OO_CA.near-30,h:PK.hAt(OO_CA.near-30,OO_CA.eye),then:"clasp"},{expr:PK.exprMix("neutral","listen",hear),nod:Math.sin(tt*2.6+1)*0.04*ag_io(tt,f2,c.first+2,0.5)});
-      const Jg=PK.walk(x,"graham",tt,{x0:1560,x1:900,t0:tT-1.4,t1:tM,floor:OO_CA.near,h:OO_HC,arms:{aN:[2,9,"grip"]},then:"stand"},{hold:oo_plan,expr:oo_says(PK.exprMix("neutral","listen",hear),tt,tg,tg+1.8),nod:Math.sin(tt*2.2)*0.03*ag_io(tt,f1,tg,0.5)});
-      const Ji=PK.walk(x,"ivy",tt,{x0:-140,x1:600,t0:tT+0.1,t1:c.tell+1.6,floor:OO_CA.near,h:OO_HC,then:"clasp"},{expr:oo_says(PK.exprMix("worry","relief",said),tt,f1,tg-0.4)});
-      PK.say(x,Ji,["Forty rooms look wrong to me.","Please don't use them yet.","Right counts by tomorrow."],ag_io(tt,f1,tg-0.2,0.3),{cam,dx:40,la:[ag_in(tt,f1,0.3),ag_in(tt,f2,0.3),ag_in(tt,f3,0.3)]});
-      oo_say(x,Jg,tt,tg,c.first+2.9,["Thanks. We'll hold off."],cam,{dx:-40});}}
+      oo_class(x,tt,{a:1-0.78*gone});oo_count(x,"9 people",1,PK.C.amber);}},
+    // she doesn't wait: she writes to her readers, Graham and Mei, before she knows the cause. Each line is typed as the voice says it
+    {at:tW,cut:true,place:"ooTeam",keys:[[tW,835,590,1.15],[c.wait+0.2,800,470,1.2]],d:2.4,draw:(x,tt,cam)=>{
+      const f1=w("tell","forty",-0.1),f2=w("tell","Don't",-0.1),f3=w("tell","The right",-0.1),CH=oo_chat(f1,f2,f3,te),cs=PK.chatSize(x,CH,{size:28}),
+        on=ag_in(tt,c.tell-0.4,0.4),sent=[f2-0.3,f3-0.3,te+0.1].filter(q=>tt>=q).length,done=ag_in(tt,te+0.2,0.6);
+      oo_team(x,tt,{clock:8.17,pot:0.55,book:0,jun:null,sam:{expr:"neutral"},
+        show:(cc,sx,sy,sw,sh)=>{oo_scrTicks(1)(cc,sx,sy,sw,sh);if(on>0.004){cc.save();cc.globalAlpha*=on;PK.onScreen.chat(sent/3,{rows:[[0.44,0.5,1],[0.52,0.42,1],[0.4,0.54,1]]})(cc,sx,sy,sw,sh);cc.restore();}},
+        ivy:{work:U.lerp(0.35,1,ag_in(tt,c.wait+1.0,0.8))*(1-0.6*done),expr:PK.exprMix(PK.exprMix("worry","think",ag_in(tt,c.wait+0.6,0.8)),"relief",done),gaze:[1,0.15]}});
+      PK.callout(x,20,458-cs.h,cs.w,cs.h,[205,474],on,(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH,tt,{size:28}));}},
+    // on the campus, Graham reads it on his phone, Mei beside him; he answers
+    {at:tG,cut:true,place:"ooCampus",keys:[[tG,900,570,1.1]],d:2,draw:(x,tt,cam)=>{
+      oo_passer(x,tt,PK.extra(16),tG-3.5,{out:true});
+      const ta=tG+2.7,CH2=oo_chat2(ta),cs=PK.chatSize(x,CH2,{}),sent=ag_in(tt,ta+0.2,0.6);
+      PK.person(x,"mei",1066,OO_CA.near-30,PK.hAt(OO_CA.near-30,OO_CA.eye),"clasp",Object.assign({t:tt,flip:true},PK.face(tt,{expr:"listen",gaze:[1,0.7]},[[ta+0.6,"nod"],[ta+1.0,"look",2,[1,0.1]]])));
+      const Jg=PK.person(x,"graham",930,OO_CA.near,OO_HC,"phone",Object.assign({t:tt,flip:true,hold:PK.inHand.phone({back:true}),holds:true},PK.face(tt,{expr:PK.exprMix("think","smile",sent),gaze:[1,0.9]},[])));
+      PK.callout(x,300,250,cs.w,cs.h,[Jg.hdN[0]-20,Jg.hdN[1]-30],ag_in(tt,tG+0.3,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH2,tt,{}));}},
+    // what she keeps from it, in her notebook
+    {at:tN,place:"ooNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N2,{});}}
   ]);
-  oo_card(ctx,S,t,1.2,tS-0.3,{kick:"Monday 23 August",title:"Refreshed at 7:00",col:PK.C.blue});
-  oo_kick(ctx,S,1-ag_io(t,c.reads+0.5,tC-0.3,0.4));
+  oo_card(ctx,S,t,1.2,tEv-0.7,{kick:"Monday 23 August",title:"Refreshed at 7:00",col:PK.C.blue});
+  oo_kick(ctx,S,1-Math.max(ag_io(t,c.reads+0.5,tC-0.3,0.4),ag_io(t,c.tell-0.7,tG-0.05,0.3),oo_apart(t,[[tN,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 4. Fix it, or raise it */
 const OO_OVER={lean:12,head:4,aN:[40,60],aF:[6,14],lN:[-2,-2],lF:[5,4]};
 scene("fix",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const tF=c.four+0.4,tX=sc.ends.four,tJ=w("fix","Jun",-0.3),tM=c.mine-0.5,tK=c.check-0.5,ti=w("raise","raises",-0.2);
+  const tF=c.four+0.4,tX=sc.ends.four,tJ=w("fix","Jun",-0.3),tM=c.mine-0.5,tK=c.check-0.5,ti=w("raise","raises",-0.2),tb=c.breath,N3=PK.pace(ctx,null,oo_note3(sc));
   ag_shots(ctx,S,t,sc.dur,[
     // Monday, half past nine: Sam comes over, and they find it together on her screen
     {at:0,place:"ooTeam",keys:[[0,800,560,1.2],[tX-0.2,960,540,1.0]],d:2.6,draw:(x,tt,cam)=>{
       const tB=tX-0.4,turn=ag_in(tt,tX+0.1,0.5),found=ag_in(tt,w("four","model",0.8),0.8),mine=tX+0.8,up=ag_in(tt,tB-0.4,0.6);
-      const R=oo_team(x,tt,{clock:9.5,pot:0.55,sam:null,jun:{expr:"neutral"},ivy:{turn,work:1-0.5*found,expr:oo_says(PK.exprMix(PK.exprMix("worry","think",ag_in(tt,2,1)),"relief",found),tt,mine,mine+1.3),gaze:[1,0.2*(1-turn)-0.5*turn],nod:-0.06*turn}});
+      const R=oo_team(x,tt,{clock:9.5,pot:0.55,book:0,sam:null,jun:{expr:"neutral"},ivy:{turn,work:1-0.5*found,expr:oo_says(PK.exprMix(PK.exprMix("worry","think",ag_in(tt,2,1)),"relief",found),tt,mine,mine+1.3),gaze:[1,0.2*(1-turn)-0.5*turn],nod:-0.06*turn}});
       // he leans in with a hand on her chair's back; as she turns round to him he lets go, straightens and steps back
       const so={expr:PK.exprMix("think","smile",up),gaze:[1,0.5],nod:0.05*up+Math.sin(tt*2.3)*0.03*up,reachN:[656,562]};
       if(tt<tB-0.4)PK.walk(x,"sam",tt,{x0:1230,x1:790,t0:-0.6,t1:2.0,floor:xx=>U.lerp(900,838,U.clamp((xx-790)/440,0,1)),h:oo_hT,then:OO_OVER},Object.assign(so,{reachNk:ag_in(tt,1.8,0.6)}));
       else PK.walk(x,"sam",tt,{x0:790,x1:905,t0:tB,t1:tB+1.0,floor:900,h:oo_hT(900),flip:true,before:OO_OVER,then:"listen"},Object.assign(so,{reachNk:1-ag_in(tt,tB-0.4,0.4)}));
       const p=0.62*ag_in(tt,w("four","four",-0.3),1.6)+0.38*ag_in(tt,w("four","model",-0.1),1.2);
-      oo_callout(x,40,150,520,250,205,474,ag_io(tt,tF,tX-0.3,0.4),(cc,bx,by,bw,bh)=>oo_hourCard(cc,bx,by,bw,bh,p));
+      PK.callout(x,40,150,520,250,[205,474],ag_io(tt,tF,tX-0.3,0.4),(cc,bx,by,bw,bh)=>oo_hourCard(cc,bx,by,bw,bh,p));
       oo_say(x,R.ivy,tt,mine,tJ-0.6,["That one's mine."],cam,{lean:0,dx:-50});}},
     // that afternoon: Jun reviews her change
     {at:tJ,place:"ooTeam",later:true,keys:[[tJ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
       const tq=w("fix","reviews",0.9),ok=ag_in(tt,tq-0.2,0.6);
-      const R=oo_team(x,tt,{clock:15.2,pot:0.55,sam:{expr:"neutral"},jun:{work:1-0.9*ok,expr:oo_says(PK.exprMix("think","smile",ok),tt,tq,tq+1.4),gaze:[1,0]},
+      const R=oo_team(x,tt,{clock:15.2,pot:0.55,book:0,sam:{expr:"neutral"},jun:{work:1-0.9*ok,expr:oo_says(PK.exprMix("think","smile",ok),tt,tq,tq+1.4),gaze:[1,0]},
         ivy:{turn:ag_in(tt,tq+0.2,0.5),work:1,expr:PK.exprMix("think","glad",ag_in(tt,tq+0.6,0.6)),gaze:[1,0]}});
       oo_say(x,R.jun,tt,tq,tq+3.4,["Looks right to me."],cam);}},
     // what isn't hers: the sensors are Facilities'. She finds Graham under one, in a teaching room between classes
@@ -2353,57 +2978,53 @@ scene("fix",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),
     // her own check: a drop like this one now holds the refresh
     {at:tK,cut:true,place:"ooTeam",keys:[[tK,835,590,1.15],[c.check+4.6,900,560,1.06]],d:3,draw:(x,tt,cam)=>{
       const done=ag_in(tt,w("check","before",0.8),0.8);
-      oo_team(x,tt,{clock:14.3,pot:0.62,ivy:{work:1-0.7*done,expr:PK.exprMix("think","smile",done),gaze:[1,0.2*(1-done)]}});
-      oo_callout(x,60,170,440,236,205,474,ag_io(tt,c.check+0.5,sc.dur-0.9,0.4),(cc,bx,by,bw,bh)=>oo_checkCard(cc,bx,by,bw,bh,[ag_in(tt,w("check","a drop",-0.1),0.3),ag_in(tt,w("check","holds",-0.1),0.3),ag_in(tt,w("check","before",-0.1),0.3)]));}}
+      oo_team(x,tt,{clock:14.3,pot:0.62,book:0,ivy:{work:1-0.7*done,expr:PK.exprMix("think","smile",done),gaze:[1,0.2*(1-done)]}});
+      PK.callout(x,60,170,440,236,[205,474],ag_io(tt,c.check+0.5,tb-0.9,0.4),(cc,bx,by,bw,bh)=>oo_checkCard(cc,bx,by,bw,bh,[ag_in(tt,w("check","a drop",-0.1),0.3),ag_in(tt,w("check","holds",-0.1),0.3),ag_in(tt,w("check","before",-0.1),0.3)]));}},
+    // what she keeps from it, written in the pause that ends the chapter
+    {at:tb-0.2,place:"ooNotes",dis:0.6,keys:[[tb-0.2,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N3,{});}}
   ]);
   oo_card(ctx,S,t,w("fix","Tuesday",-0.2),c.mine-0.8,{kick:"Tuesday morning",title:"The right counts",sub:"for Graham's and Mei's teams",col:PK.C.green});
-  oo_kick(ctx,S,1-Math.max(ag_io(t,tF,tX-0.3,0.4),ag_io(t,ti-0.3,tK-0.2,0.4),ag_io(t,c.check+0.5,sc.dur-0.9,0.4)));
+  oo_kick(ctx,S,1-Math.max(ag_io(t,tF,tX-0.3,0.4),ag_io(t,ti-0.3,tK-0.2,0.4),ag_io(t,c.check+0.5,tb-0.9,0.4),oo_apart(t,[[tb-0.2,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 5. Nobody to blame */
 scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const tD=c.dekker-0.5,tA=c.account-0.5,tF=w("fit","What failed");
+  const tD=c.fit-0.4,tH=c.helena-0.5,tA=c.account-0.5,BC=PK.pace(ctx,"carmen",oo_boardC(sc,w)),N4=PK.pace(ctx,null,oo_note4(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the week after, in the team's room: everyone who had a part in it says what they saw, and Helena listens
+    // the week after, in the team's room: Carmen leads the review, and everyone who had a part in it says what they saw. Nobody
+    // sits by: each looks at whoever speaks, and nods at what they hear. The floor in front of the board is hers: Graham stands by
+    // Ivy, to its left, and Helena behind Sam, to its right, so nobody hides her as she ticks each part
     {at:0,place:"ooTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
-      const s=[w("each","Facilities",-0.1),w("each","Sam's",-0.1),w("each","The step",-0.1),c.each+7.5],ok=i=>ag_in(tt,s[i+1]-0.1,0.5),face=i=>PK.exprMix("worry","relief",ok(i));
-      // nobody sits by: each looks at whoever speaks, and nods at what they hear
-      const R=oo_team(x,tt,{clock:11.0,pot:0.75,away:true,ivy:{turn:1},
-        jun:Object.assign({work:0,pose:"sit"},PK.face(tt,{expr:"listen",gaze:[1,0]},[[s[0]+0.5,"look",2.2,[1,-0.3]],[s[1]+1.3,"nod"],[s[2]+0.4,"look",2.4,[0.4,-0.2]],[s[2]+1.2,"worry",2.6],[tF+0.8,"nod"]])),
-        sam:Object.assign({turn:1,work:0},PK.face(tt,{expr:face(1),gaze:[1,0]},[[s[0]+1.0,"nod"],[s[1],"say",s[2]-0.2-s[1]],[s[2]+0.5,"look",2.4,[1,-0.2]],[s[2]+1.9,"nod"],[tF+1.4,"think",3]]))});
-      PK.person(x,"helena",OO_IVY.x,OO_IVY.floor,OO_HI,PK.poseMix("sit","sitBack",0.5),Object.assign({t:tt+2},
-        PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[s[0]+1.5,"nod"],[s[1]+0.4,"look",2.4,[1,0.1]],[s[1]+1.6,"nod"],[s[2]+0.4,"look",2.6,[1,-0.35]],[s[2]+1.7,"nod"],[tF+0.5,"think",3.4]])));
-      const Jg=PK.person(x,"graham",810,930,oo_hT(930),"ease",Object.assign({t:tt},PK.face(tt,{expr:face(0),gaze:[1,0]},[[s[0],"say",s[1]-0.2-s[0]],[s[1]+0.5,"look",2.2,[1,-0.1]],[s[2]+1.3,"nod"],[tF+1.0,"think",3]])));
-      const Ji=PK.person(x,"ivy",1490,944,oo_hT(944),"clasp",Object.assign({t:tt+1,flip:true},PK.face(tt,{expr:face(2),gaze:[1,0]},[[s[0]+0.6,"look",2.2,[1,0.1]],[s[1]+1.1,"nod"],[s[2],"say",s[3]-0.2-s[2]],[tF+0.6,"nod"]])));
-      // each was right about what they saw: a tick over each of the three; what failed lies between them
-      const M=[oo_over(Jg,24),oo_over(R.sam,24),oo_over(Ji,24)],lk=ag_in(tt,tF,1.2),la=ag_io(tt,tF,tD-0.4,0.4);
-      oo_link(x,M[0],M[1],U.clamp(lk*2,0,1),PK.C.amber,la);oo_link(x,M[1],M[2],U.clamp(lk*2-1,0,1),PK.C.amber,la);
-      M.forEach((q,i)=>PK.tick(x,q[0],q[1],24,ag_io(tt,s[i+1]-0.1,tD-0.4,0.4)));
-      oo_say(x,Jg,tt,s[0],s[1]-0.2,["We upgraded them in August."],cam);oo_say(x,R.sam,tt,s[1],s[2]-0.2,["The platform took all four."],cam,{dx:70});oo_say(x,Ji,tt,s[2],s[3]-0.2,["My step kept the first one."],cam,{dx:-110});
-      oo_tag(x,tt,tF-0.1,tD-0.4,1000,120,"The gap was between the parts",{col:PK.C.amber,weight:800});}},
+      const s=[w("each","Facilities",-0.1),w("each","Sam's",-0.1),w("each","The step",-0.1),c.each+7.5],ok=i=>ag_in(tt,s[i+1]-0.1,0.5),face=i=>PK.exprMix("worry","relief",ok(i));let Jg=null;
+      const R=oo_team(x,tt,{clock:11.0,pot:0.75,book:0,sam:null,
+        jun:Object.assign({work:0,pose:"sit"},PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[s[0]+0.5,"look",2.2,[1,-0.3]],[s[1]+1.3,"nod"],[s[2]+0.4,"look",2.4,[1,-0.1]],[s[2]+1.2,"worry",2.6]])),
+        behind:cx=>{oo_roomBoard(cx,tt,BC,"carmen",{rest:1090,events:[[s[0]+1.2,"nod"],[s[1]+0.6,"look",2.2,[1,0.2]],[s[2]+0.5,"look",2.6,[0.6,0.3]],[s[2]+2.0,"nod"]]});
+          Jg=PK.person(cx,"graham",694,856,oo_hT(856),"ease",Object.assign({t:tt},PK.face(tt,{expr:face(0),gaze:[1,0]},[[s[0],"say",s[1]-0.2-s[0]],[s[1]+0.5,"look",2.2,[1,0.2]],[s[2]+0.4,"look",2.8,[-0.5,0.9]],[s[2]+1.5,"nod"]])));},
+        ivy:Object.assign({turn:1,work:0,pose:"sit"},PK.face(tt,{expr:face(2),gaze:[1,0]},[[s[0]+0.6,"look",2.2,[0.5,-0.7]],[s[1]+1.1,"nod"],[s[2],"say",s[3]-0.2-s[2]]]))});
+      PK.person(x,"helena",1392,892,oo_hT(892),"listen",Object.assign({t:tt+2,flip:true},PK.face(tt,{expr:"listen",gaze:[1,0]},[[s[0]+1.5,"nod"],[s[1]+0.4,"look",2.4,[0.3,0.8]],[s[1]+1.6,"nod"],[s[2]+0.3,"look",2.8,[1,0.2]],[s[2]+1.7,"nod"]])));
+      const Js=PK.seated(x,"sam",1520,940,oo_hT(940),PK.poseMix("sit","sitBack",0.5),Object.assign({t:tt+2,flip:true},PK.face(tt,{expr:face(1),gaze:[1,-0.25]},[[s[0]+1.0,"nod"],[s[1],"say",s[2]-0.2-s[1]],[s[2]+0.5,"look",2.4,[1,-0.1]],[s[2]+1.9,"nod"]])));
+      // what each says goes over the window or the wall, clear of the board's boxes and of every head
+      oo_say(x,Jg,tt,s[0],s[1]-0.2,["We upgraded them","in August."],cam,{lean:-180,rise:34});oo_say(x,Js,tt,s[1],s[2]-0.2,["The platform","took all four."],cam,{dx:175});
+      oo_say(x,R.ivy,tt,s[2],s[3]-0.2,["My step kept","the first one."],cam,{lean:-120});}},
+    // the board: each part was right, and what failed lies between them; then a just culture's questions
+    {at:tD,cut:true,place:"ooBoard",keys:[[tD,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BC,{say:[[c.fit,sc.ends.fit],[c.dekker,sc.ends.dekker]]});}},
     // Helena's corner: her first question isn't who
-    {at:tD,cut:true,place:"ooCorner",keys:[[tD,960,540,1.0],[c.helena-0.6,960,556,1.06]],d:3,draw:(x,tt,cam)=>{
+    {at:tH,cut:true,place:"ooCorner",keys:[[tH,960,540,1.0],[c.helena-0.6,960,556,1.06]],d:3,draw:(x,tt,cam)=>{
       const q0=w("helena","isn't who",-0.1),q1=w("helena","what happened",-0.1),q2=w("helena","what Ivy",-0.1),ti=c.safe-0.2,lean=ag_in(tt,c.helena-0.4,0.9),up=ag_in(tt,q1+0.4,0.9);
-      const R=oo_corner(x,tt,{t0:tD,lean,up,he:oo_says(PK.exprMix("listen","smile",0.5*lean),tt,q1,c.safe-1.0),ie:oo_says(PK.exprMix("worry","relief",ag_in(tt,q2+0.6,1.0)),tt,ti,ti+3.2)});
+      const R=oo_corner(x,tt,{t0:tH,lean,up,he:oo_says(PK.exprMix("listen","smile",0.5*lean),tt,q1,c.safe-1.0),ie:oo_says(PK.exprMix("worry","relief",ag_in(tt,q2+0.6,1.0)),tt,ti,ti+3.2)});
       // the question she doesn't ask, struck out; then the two she does
-      PK.bubble(x,R.helena.hc[0]+170,R.helena.hc[1]-170,["Who did this?"],null,ag_io(tt,c.helena-0.5,q1-0.15,0.3),{ink:PK.C.mut,strike:U.clamp((tt-q0)/0.4,0,1)});
+      PK.bubble(x,R.helena.hc[0]+170,R.helena.hc[1]-170,["Who did this?"],null,ag_io(tt,c.helena-0.3,q1-0.15,0.3),{ink:PK.C.mut,strike:U.clamp((tt-q0)/0.4,0,1)});
       PK.say(x,R.helena,["What happened?","What do you need?"],ag_io(tt,q1+0.1,c.safe-0.5,0.3),{cam,la:[ag_in(tt,q1+0.1,0.3),ag_in(tt,q2,0.3)]});
-      oo_say(x,R.ivy,tt,ti,tA-0.4,["The sensors changed,","and my step missed it."],cam);
-      oo_tag(x,tt,w("safe","early",-0.2),tA-0.4,700,214,"Safe to say it early",{col:PK.C.green,weight:800});}},
-    // giving an account: Ivy writes it up for the team, and for the two who read her counts
-    {at:tA,cut:true,place:"ooTeam",keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
-      oo_team(x,tt,{clock:11.6,pot:0.75,ivy:null,sam:Object.assign({turn:1,work:0},PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[tA+3.2,"nod"]])),jun:Object.assign({work:0,pose:"sit"},PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[tA+4.4,"smile",2.4]])),behind:cx=>{
-        PK.atBoard(cx,"ivy",tt,[{s:"What happened",t0:tA-4,t1:tA-2.4},{s:"What changes",t0:tA+0.5,t1:tA+2.3}],{x:836,y:330,lh:62,rest:745,floor:842,h:oo_hT(842),t:tt+1,expr:oo_says("neutral",tt,tA+3.6,sc.dur)});}});
-      PK.person(x,"graham",1384,930,oo_hT(930),"clasp",Object.assign({t:tt,flip:true},PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[tA+2.6,"nods"]])));
-      PK.seated(x,"mei",1664,946,oo_hT(946),PK.poseMix("sit","sitBack",0.4),Object.assign({t:tt+2,flip:true},PK.face(tt,{expr:"listen",gaze:[1,-0.3]},[[tA+3.8,"nod"],[tA+4.6,"smile",2.2]])));}}
+      oo_say(x,R.ivy,tt,ti,tA-0.4,["The sensors changed,","and my step missed it."],cam);}},
+    // what she keeps from it, in her notebook: being accountable is giving an account
+    {at:tA,place:"ooNotes",dis:0.6,keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}}
   ]);
-  const ca=ag_io(t,w("dekker","just",-0.3),c.helena-0.7,0.4);if(ca>0.004){setScreen(ctx,S);PK.card(ctx,960,64,{kick:"Sidney Dekker",title:"A just culture",sub:"Ask what happened, not who to blame",col:PK.C.blue},ca,{align:"center"});}
-  oo_kick(ctx,S,1);
+  oo_kick(ctx,S,1-oo_apart(t,[[tD,tH],[tA,1e9]]));
 });
 
 /* ---------------------------------------------------------------- 6. On Monday */
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,K=OO_CAST;
-  const tI=c.ivy-0.5,tK=c.know-0.5,tJ=w("ivy","In June",-0.3),tN=c.next-0.3,tE=c.breath+0.6;
+  const tI=c.ivy-0.5,tK=c.know-0.5,tJ=w("ivy","In June",-0.3),tN=c.next-0.3,tE=c.breath+0.6,N5=PK.pace(ctx,null,oo_note5(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
     // Kenya, years on: a young tree, still standing
     {at:0,place:"ooGreen",keys:[[0,960,560,1.0],[0.6,1040,600,1.12]],d:3,draw:(x,tt,cam)=>{
@@ -2418,27 +3039,24 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       oo_class(x,tt,{});oo_count(x,"34 people");const show=ag_in(tt,tJ,0.8);
       PK.person(x,"ivy",150,892,oo_hL(892),"ease",{t:tt+1,expr:PK.exprMix("neutral","smile",show),gaze:[1,0.1]});
       PK.person(x,"graham",372,902,oo_hL(902),PK.poseMix("stand",OO_SHOW,show),{t:tt,flip:true,expr:oo_says("smile",tt,tJ+0.4,tJ+2.6),hold:oo_plan});}},
-    // on Monday: the four things, written up for the team; then everyone goes back to work, and Ivy to her desk, by the seedling
-    {at:tK,cut:true,place:"ooTeam",keys:[[tK,960,500,1.04],[c.next+1.4,900,560,1.08],[c.take-1.0,880,600,1.15]],d:3,draw:(x,tt,cam)=>{
-      const L=[["Know who uses it",w("know","know",-0.2),1.6],["Watch what it's for",w("watch","Watch",-0.1),1.7],["Say so first",w("say","say so",-0.2),1.2],["Fix, raise, mend",w("mend","Fix",-0.1),w("mend","mend",0.6)-w("mend","Fix",-0.1)]].map(([s,t0,d])=>({s,t0,t1:t0+d}));
-      const tB=tN+0.9,tS=tB+1.7,board=tt<tB,seated=tt>=tS,sit=ag_in(tt,tS,0.9),look=ag_in(tt,tS+0.8,0.8),touch=ag_in(tt,c.take-0.4,0.9),back=ag_in(tt,tN+0.2,0.5);
-      oo_team(x,tt,{clock:9.2,pot:1,away:!seated,
-        sam:Object.assign({turn:1-ag_in(tt,tN+0.8,0.5),work:ag_in(tt,tN+1.5,0.8)},PK.face(tt,{expr:"listen",gaze:[1,-0.2*(1-back)]},[[L[0].t1+0.3,"nod"],[L[2].t0+0.4,"smile",2.6],[L[3].t1+0.2,"nod"]])),
-        jun:Object.assign({work:ag_in(tt,tN+1.1,0.8),pose:"sit"},PK.face(tt,{expr:"listen",gaze:[1,-0.2*(1-back)]},[[L[1].t1+0.2,"nod"],[L[3].t0+1.6,"look",2.2,[0.5,0.1]],[L[3].t1+0.9,"smile",2.4]])),
-        behind:cx=>{PK.atBoard(cx,board?"ivy":null,tt,L,{x:836,y:280,lh:56,rest:745,floor:842,h:oo_hT(842),t:tt+1,down:tN+0.3,tray:[886,506],a:1-ag_in(tt,tE-0.3,0.9),expr:"neutral"});},
-        ivy:{pose:PK.poseMix(PK.poseSit(sit),OO_LEANIN,0.5*touch),work:0,expr:PK.exprMix("neutral","smile",look),gaze:[1,0.4*look*(1-touch)],reachN:[385,512],reachNk:touch,reachF:[462,630],reachFk:touch}});
-      PK.walk(x,"helena",tt,{x0:1480,x1:2040,t0:tN-0.1,t1:tN+2.7,floor:926,h:oo_hT(926),before:"clasp"},Object.assign({t:tt+2,flip:1-ag_in(tt,tN-0.1,0.4)},
-        PK.face(tt,{expr:PK.exprMix("listen","smile",back),gaze:[1,-0.2*(1-back)]},[[L[0].t1+0.9,"nod"],[L[1].t0+0.8,"look",2,[1,0.1]],[L[2].t1+0.4,"nods"],[L[3].t0+2.2,"smile",2.6]])));
-      if(!board&&!seated)PK.walk(x,"ivy",tt,{x0:745,x1:OO_IVY.x,t0:tB,t1:tB+1.4,floor:xx=>U.lerp(OO_IVY.floor,842,U.clamp((xx-OO_IVY.x)/185,0,1)),h:oo_hT,before:"ease",then:"stand"},{t:tt+1,flip:ag_in(tt,tB,0.4),expr:"neutral"});}}
+    // what to keep, on Monday: the four things, in her notebook
+    {at:tK,place:"ooNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N5,{});}},
+    // she shuts the notebook and puts her pen down; the others are at work, and the seedling, grown, stands on the sill behind her
+    // desk. She puts a hand to it
+    {at:tN,place:"ooTeam",dis:0.6,keys:[[tN,900,560,1.08],[c.take-1.0,880,600,1.15]],d:3,draw:(x,tt,cam)=>{
+      const wr=1-ag_in(tt,tN+0.8,0.6),shut=ag_in(tt,tN+1.5,0.45),down=ag_in(tt,tN+2.1,0.4),look=ag_in(tt,tN+2.8,0.8),touch=ag_in(tt,c.take-0.4,0.9),top=OO_IVY.floor-0.43*OO_HI;
+      oo_team(x,tt,{clock:9.2,pot:1,book:1+shut,pen:down,sam:{expr:"neutral"},jun:Object.assign({},PK.face(tt,{expr:"neutral",gaze:[1,0]},[[c.next+2.6,"smile",2.4]])),
+        ivy:{work:0,keysBack:1,pose:PK.poseMix(PK.poseMix("sit",OO_JOT,wr),OO_LEANIN,0.5*touch),expr:PK.exprMix("neutral","smile",look),gaze:[1,0.7*wr+0.4*look*(1-touch)*(1-wr)],hold:oo_pen(1-down),holds:down<0.5,
+          reachN:[U.lerp(U.lerp(OO_IVY.x-96,OO_IVY.x-128+Math.sin(tt*9)*3,wr),385,touch),U.lerp(U.lerp(top-9,top-13,wr),512,touch)],reachNk:1,reachF:[462,630],reachFk:touch}});}}
   ]);
   oo_card(ctx,S,t,1.0,c.ivy-1.4,{kick:"Kenya",title:"Trees still standing",col:PK.C.green});
-  oo_card(ctx,S,t,tJ,tK-0.3,{kick:"June 2029",title:"The timetable change",sub:"Judged on true counts",col:PK.C.blue},{right:true,y:124});
-  oo_imagined(ctx,S,t,tJ,tK-0.3,"The university, 2029 · imagined");
-  oo_card(ctx,S,t,c.next+0.2,c.take-0.6,{kick:"The next film",title:"Measure the work,",sub:"not the people"});
-  oo_kick(ctx,S,1-ag_in(t,tE-0.2,0.6));
+  oo_card(ctx,S,t,tJ,tK-0.45,{kick:"June 2029",title:"The timetable change",col:PK.C.blue},{right:true,y:124});
+  oo_imagined(ctx,S,t,tJ,tK-0.45,"The university, 2029 · imagined");
+  oo_card(ctx,S,t,c.next+0.4,c.take-0.6,{kick:"The next film",title:"Measure the work,",sub:"not the people"});
+  oo_kick(ctx,S,(1-ag_in(t,tE-0.2,0.6))*(1-oo_apart(t,[[tK,tN]])));
   PK.end(ctx,S,t,tE,"Owning the outcome",OO_LAST,"Film 1 of 4","Ownership and performance",{side:"right"});
 });
-ag_cutInto(["owns","monday","fix","blame"]);
+ag_cutInto(["owns","monday"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

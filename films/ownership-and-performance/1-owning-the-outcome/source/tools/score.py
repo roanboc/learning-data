@@ -21,13 +21,17 @@
 #  - Nothing trembles or pulses: each note one tongue, steady, with no vibrato, its partials harmonic (a bowed note is periodic); each
 #    stopped before it would ring into the next chapter. No urgent pulse: nothing in the film is a rush.
 #  - Every sound is something a person does or something that comes in on screen, at that moment: water poured, coins paid, a pot
-#    handed over, a sheet pinned, a count, a marker on the board. Each one below uses the same word and offset as the picture in
-#    src/oo_scenes.js, and pans to where it is drawn, so sound and picture stay together when the voice is re-timed. People's steps and
-#    what they say have no sound of their own: the voice carries them.
+#    handed over, a count, a marker on the board, a pen in a notebook, a call that comes up, a message sent. Each one below uses the
+#    same word and offset as the picture in src/oo_scenes.js, and pans to where it is drawn, so sound and picture stay together when
+#    the voice is re-timed. People's steps and what they say have no sound of their own: the voice carries them.
+#  - What a hand writes is paced by the film (PK.pace): a row waits until Carmen has walked to it, and a stroke until the pen has
+#    crossed to it. So the marker's and the pen's sounds ask the film when each row is written (the people kit's tools/pens.py),
+#    and take no word's time: PEN, below.
 # And everything stays low and soft, below about 2.3 kHz; the effects about 12 dB under the music.
 
 import json as _json, pathlib as _pl
 from scipy.signal import fftconvolve
+import pens
 _obj = lambda f: (lambda s: _json.loads(s[s.index('{'):s.rindex('}') + 1]))((_pl.Path('src') / f).read_text())
 _NARR, _DUR = _obj('narration.js'), _obj('vodur.js')
 def W(sid, lid, word, off=0):
@@ -37,10 +41,18 @@ def W(sid, lid, word, off=0):
     assert (i == 0 or not s[i - 1].isalnum()) and (j == len(s) or not s[j].isalnum()), \
         'the first "%s" in %s/%s is inside a longer word' % (word, sid, lid)
     return G(sid, lid) + _DUR[sid + '/' + lid] * i / len(s) + off
+def E_(sid, lid, off=0):
+    """when a line of the voice ends, as the film's sc.ends has it"""
+    return G(sid, lid) + _DUR[sid + '/' + lid] + off
 def px(x):
     """where something drawn at x (in the 1920 px frame) sits in the stereo field"""
     return max(-0.85, min(0.85, (x - 960) / 960 * 0.9))
 R1 = np.random.default_rng(1977)  # this film's own randomness: the room, the bow, the rain, the paper
+# every stroke of the film's three boards (Carmen's) and five pages of notes (Ivy's), as the film writes them: the chapter, who writes
+# at the board (None: a page), and the film's function that gives the rows (src/oo_uni.js)
+PEN = pens.written({'A': ('owns', 'carmen', 'oo_boardA'), 'B': ('owns', 'carmen', 'oo_boardB'), 'C': ('blame', 'carmen', 'oo_boardC'),
+                    'N1': ('owns', None, 'oo_note1'), 'N2': ('monday', None, 'oo_note2'), 'N3': ('fix', None, 'oo_note3'),
+                    'N4': ('blame', None, 'oo_note4'), 'N5': ('close', None, 'oo_note5')})
 
 # ---- tuning: just intonation from G, so a chord's notes are whole-number ratios of each other and nothing beats. G, C and D major, and
 # E and B minor, are pure in this table; A minor, and A held with E or with C, are not, and never sound together
@@ -170,7 +182,7 @@ def _knock(n, f, d, at=0):
     return (np.sin(2 * np.pi * f * x) + 0.35 * np.sin(2 * np.pi * f * 2.3 * x) * np.exp(-x / (0.5 * d))) * np.exp(-x / d) * np.minimum(1, x / 0.0015) * k
 
 def card(s, g=0.004, pan=0.0):
-    """a sheet pinned to a board, or a card that says where and when: a soft flap of paper, and its faint landing"""
+    """a card that says where and when: a soft flap of paper, and its faint landing"""
     n = int(0.16 * SR); x = np.arange(n) / SR
     fl = filt(noise(0.18)[:n], 'band', (380, 1800)) * _bump(x, 0.07) * (x < 0.07)
     _fx(fl + 0.6 * _knock(n, 150, 0.018, 0.06) / 1.35, s, g, pan, 1900)
@@ -188,9 +200,33 @@ def pen(s, sec=0.7, g=0.005, pan=0.0, n=3):
         d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
         gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
         _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
-def ticked(s, g=0.0045, pan=0.0):
-    """a tick drawn: two quick strokes of a pen"""
-    pen(s, 0.24, g, pan, 2)
+def ticked(s, g=0.0045, pan=0.0, hand=None):
+    """a tick drawn: two quick strokes of a pen, or of a marker (hand=marker)"""
+    (hand or pen)(s, 0.24, g, pan, 2)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row of words and each long mark, a word at a
+    time, where the film writes it. A dot, a tick and an arrow's head are too short to sound; a tick that matters has its own"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def _note(n, f, at, d):
+    """a soft, round note inside a sound n samples long: a sine with a little of its octave, gone in d"""
+    x = np.arange(n) / SR - at; k = np.where(x >= 0, 1.0, 0.0); x = np.maximum(x, 0)
+    return (np.sin(2 * np.pi * f * x) + 0.22 * np.sin(2 * np.pi * 2 * f * x)) * np.minimum(1, x / 0.006) * np.exp(-x / d) * k
+def ring(s, g=0.0022, pan=0.0):
+    """a call that comes up on a screen: two soft, round notes, the second a fourth above the first, each gone in a fifth of a second"""
+    n = int(0.6 * SR)
+    _fx(_note(n, hz(D4), 0.0, 0.09) + _note(n, hz(G4), 0.17, 0.11), s, g, pan, 1800)
+def joined(s, m, g=0.002, pan=0.0):
+    """someone joins a call: one soft, round note"""
+    n = int(0.4 * SR)
+    _fx(_note(n, hz(m), 0.0, 0.1), s, g, pan, 1800)
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
 def rain(s, sec=4.0, g=0.004, pan=0.0):
     """rain on bare earth, and the water running off it: one soft, low hiss that swells in and settles, never a patter of drops"""
     n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 3); gr = 0.8 + 0.2 * gr / max(1e-9, float(np.abs(gr).max()))
@@ -260,9 +296,10 @@ mark(oc('breath', 0.3), 0.6, last=4.2, bass=((G2, 0, 1.2), (D3, 2, 4.2)), until=
 chord((B3, D4), oc('breath', 0.3 + 0.34 * 2 + 0.6), 0.45, step=0.0, ring=3.4, until=END)
 
 # 2. What she owns: the university, a year from now: the chapter turns on C major, low, as Helena brings a seedling in a pot; the pot
-#    in Ivy's hands; the sensor's count as three people come into a teaching room; the product's sheet and its promise, pinned to the
-#    board; G major as what Ivy owns comes clear: the timetable change, judged on true counts; one D, held, as the one A comes in;
-#    D major under the authority to match
+#    in Ivy's hands; the sensor's count as three people come into a teaching room; two notes, rising, as the team turns to Carmen at
+#    its board, and her marker on it, a row at a time; the call that comes up on Ivy's screen, and a note as Graham, then Mei, joins;
+#    Ivy's pen in her notebook, and G major as what she owns comes clear: the timetable change, judged on true counts; Carmen's
+#    marker again; one D, held, as she rings the one A; D major under the authority to match
 LV[0] = 0.9
 qw = lambda lid, word, off=0: W('owns', lid, word, off)
 qc = lambda lid, off=0: G('owns', lid, off)
@@ -271,15 +308,21 @@ card(qw('owner', 'Thursday', -0.3), 0.0035, px(300))
 tap(qw('owner', 'becomes', 1.0), 0.003, px(700))
 for i in range(3):
     tap(qc('what', 0.8 + 1.4 * i), 0.003, px(350))
-card(qc('mesh', 0.1), 0.0035, px(1020))
-card(qw('promise', 'refreshed', -0.35), 0.0035, px(1020))
+figure((E4, G4), qc('mesh', -3.3), 0.45, step=0.3, ring=0.4, last=1.2)
+written('A', marker, 0.004)
+ring(qc('readers', -0.1), 0.0022, px(250))
+joined(qw('readers', 'Graham', -0.2), G4, 0.002, px(250))
+joined(qw('readers', 'Mei', -0.2), B4, 0.002, px(250))
+written('N1', pen, 0.0042)
 chord((G3, D4, G4), qw('truly', 'judged', 0.0), 0.5, step=0.14, ring=1.8)
-dax(D4, qw('one', 'accountable', -0.3), 0.55, px(540) * 0.4, ring=1.6)
+written('B', marker, 0.004)
+dax(D4, next(k['t0'] for k in PEN['B'] if k['s'] == 'ring'), 0.55, px(540) * 0.4, ring=1.6)
 chord((D3, Fs3, A3, D4), qw('helena', 'authority', 0.0), 0.45, step=0.13, ring=1.6, until=E('owns'))
 
 # 3. A Monday that looked fine: G major, light, at the chapter's turn, as Ivy comes in; the tick beside every check; at the Green Belt,
 #    the mark, as a seedling goes back in the ground: its G arrives on "until it lived"; the line that falls on Ivy's chart, and
-#    E minor, low, as the counts drop; and D major rising to G as she says it first
+#    E minor, low, as the counts drop; each of the three lines she sends to Graham and Mei, and Graham's answer, on his phone; and
+#    D major rising to G as she writes it down: say it first
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
@@ -289,11 +332,17 @@ tap(mw('ran', 'Every', -0.2), 0.003, px(200))
 mark(mw('seedling', 'nothing', 0.0), 0.5, last=1.8, bass=((G2, 2, 1.2),), until=mc('reads', -0.5))
 slide(mc('drop', -0.2), 1.3, 0.0035, px(350))
 chord((E3, B3, E4, G4), mw('drop', 'dropped', -0.1), 0.5, step=0.15, ring=2.2)
+for word in ("Don't", 'The right'):
+    pop(mw('tell', word, -0.4), 0.0022, px(240))
+pop(E_('monday', 'tell', 0.1), 0.0022, px(240))
+pop(E_('monday', 'tell', 3.6), 0.0022, px(520))
 figure((D4, Fs4, G4), mw('first', 'first', 0.0), 0.45, step=0.26, ring=0.34, last=1.6, hand=dax)
+written('N2', pen, 0.0042)
 
 # 4. Fix it, or raise it: the chapter turns on the long tongue's D, as Sam comes over; the hour's four counts on Ivy's card, and the
 #    three her model dropped; G major for the right counts, on Tuesday morning; the sensor that sees Ivy come into the room; her check:
-#    the long tongue's E for a drop like this one, then D major as the refresh is held
+#    the long tongue's E for a drop like this one, then D major as the refresh is held; and in the pause that ends the chapter, her
+#    pen, and two notes held: G as she writes "Fix it.", and D, above it, as she writes "Raise it."
 LV[0] = 0.9
 fw = lambda lid, word, off=0: W('fix', lid, word, off)
 fc = lambda lid, off=0: G('fix', lid, off)
@@ -304,27 +353,31 @@ card(fw('fix', 'Tuesday', -0.2), 0.0035, px(300))
 chord((G2, D3, B3, G4), fw('fix', 'right', 0.0), 0.5, step=0.16, ring=2.0)
 tap(fc('mine', 1.4), 0.003, px(350))
 low(E3, fw('check', 'a drop', 0.1), 0.6, px(350) * 0.4, ring=0.6)
-chord((D3, A3, D4, Fs4), fw('check', 'holds', 0.0), 0.45, step=0.13, ring=1.8, until=E('fix'))
+chord((D3, A3, D4, Fs4), fw('check', 'holds', 0.0), 0.45, step=0.13, ring=1.8, until=fc('breath', -0.4))
+written('N3', pen, 0.0042)
+_n3 = {k['s']: k['t0'] for k in PEN['N3'] if not k['mark']}
+dax(G3, _n3['Fix it.'], 0.5, None, ring=_n3['Raise it.'] - _n3['Fix it.'] - 0.25)
+dax(D4, _n3['Raise it.'], 0.5, None, ring=1.7, until=E('fix'))
 
-# 5. Nobody to blame: B and G at the chapter's turn, low and open; a tick over each of the three as they say what they saw; the line
-#    drawn between them, and E minor, where the parts didn't fit; Dekker's card; the question Helena doesn't ask, struck out; G major
-#    when saying it early is safe; Ivy's marker on the board, as she gives her account
+# 5. Nobody to blame: B and G at the chapter's turn, low and open; Carmen's tick on the board for each of the three, as they say what
+#    they saw; her marker, as she writes what failed and rings the two joins, and E minor, where the parts didn't fit; a just culture
+#    and its questions, a row at a time; the question Helena doesn't ask, struck out; G major when saying it early is safe; Ivy's pen
+#    in her notebook, as she writes what being accountable means
 LV[0] = 0.9
 bw = lambda lid, word, off=0: W('blame', lid, word, off)
 bc = lambda lid, off=0: G('blame', lid, off)
 chord((G2, B3), S0('blame') + 0.25, 0.45, step=0.2, ring=1.8)
-ticked(bw('each', "Sam's", -0.2), 0.004, px(810))
-ticked(bw('each', 'The step', -0.2), 0.004, px(1330))
-ticked(bc('each', 7.4), 0.004, px(1490))
-slide(bw('fit', 'What failed', 0.0), 1.2, 0.0035, px(1150))
+for k in [k for k in PEN['C'] if k['s'] == 'tick'][:3]:
+    ticked(k['t0'], 0.004, px(k['x']) * 0.5, marker)
+written('C', marker, 0.004)
 chord((E3, B3, G4), bw('fit', 'What failed', 0.3), 0.45, step=0.16, ring=1.8)
-card(bw('dekker', 'just', -0.3), 0.0035, px(960))
-slide(bw('helena', "isn't who", -0.1), 0.4, 0.0035, px(1100))
+slide(bw('helena', "isn't who", -0.1), 0.4, 0.0035, px(850))
 chord((G3, D4, G4, B4), bw('safe', 'safe', 0.0), 0.45, step=0.13, ring=1.8)
-marker(bc('account', 0.0), 1.8, 0.004, px(900), 4)
+written('N4', pen, 0.0042)
 
 # 6. On Monday: back at the Green Belt, the wind in a young tree, and the mark, low, the trees still standing; Ivy's true counts,
-#    D major; each of the four things, Ivy's marker on the board; and the close, the mark again, its G held as G major into the end card
+#    D major; each of the four things, her pen in her notebook, and G major, plain, as she puts a star on the page; and the close, the
+#    mark again, its G held as G major into the end card
 LV[0] = 0.9
 cw = lambda lid, word, off=0: W('close', lid, word, off)
 cc = lambda lid, off=0: G('close', lid, off)
@@ -332,10 +385,8 @@ leaves(S0('close') + 0.5, 2.6, 0.003, px(1200))
 mark(cw('back', 'trees', 0.0), 0.45, last=1.8, octave=-1, bass=((G2, 2, 1.4),))
 card(cw('ivy', 'In June', -0.3), 0.0035, px(1640))
 chord((D3, Fs3, A3), cw('ivy', 'true', 0.0), 0.45, step=0.14, ring=1.4)
-marker(cw('know', 'know', -0.2), 1.6, 0.004, px(1000), 3)
-marker(cw('watch', 'Watch', -0.1), 1.7, 0.004, px(1000), 3)
-marker(cw('say', 'say so', -0.2), 1.2, 0.004, px(1000), 2)
-marker(cw('mend', 'Fix', -0.1), cw('mend', 'mend', 0.6) - cw('mend', 'Fix', -0.1), 0.004, px(1000), 5)
+written('N5', pen, 0.0042)
+chord((G3, B3, D4), next(k['t0'] for k in PEN['N5'] if k['s'] == 'star'), 0.4, step=0.12, ring=1.5)
 card(cc('next', 0.2), 0.0035, px(300))
 mark(cw('take', 'Own', 0.1), 0.5, last=5.0, bass=((G2, 0, 2.0), (D3, 2, 5.0)), until=TOT)
 chord((B3, D4), cw('take', 'Own', 0.1 + 0.34 * 2 + 0.6), 0.42, step=0.0, ring=4.4, until=TOT)

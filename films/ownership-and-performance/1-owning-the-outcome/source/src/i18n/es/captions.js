@@ -82,8 +82,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si nadie lo notara, el equipo de horarios liberaría aulas que las clases sí usan.",
 "Ivy doesn't wait to be sure, or to be asked.":
 "Ivy no espera a estar segura, ni a que le pregunten.",
-"She walks over and tells Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow.":
-"Va y se lo dice ella misma a Graham y a Mei: cuarenta aulas se ven mal. No las usen aún. Los conteos correctos llegan mañana.",
+"She writes to Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow.":
+"Les escribe ella misma a Graham y a Mei: cuarenta aulas se ven mal. No las usen aún. Los conteos correctos llegan mañana.",
 "Saying it first, before the fix, is part of owning it.":
 "Decirlo primero, antes de arreglarlo, es parte de hacerse cargo.",
 "With Sam, she finds the cause.":

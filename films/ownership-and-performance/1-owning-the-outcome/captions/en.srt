@@ -75,161 +75,161 @@ At the university, a year from now, Ivy Reyes becomes the owner of her first dat
 Teaching space use: for every teaching room and every hour, what was booked, and how many people came. Counts, never people.
 
 20
-00:02:18,886 --> 00:02:26,106
+00:02:21,686 --> 00:02:28,906
 Zhamak Dehghani's data mesh calls her the data product owner: she answers for what the product does for its readers.
 
 21
-00:02:27,806 --> 00:02:32,619
+00:02:31,206 --> 00:02:36,019
 A product with an owner shows how a product gets one. This film is about the owning.
 
 22
-00:02:34,319 --> 00:02:38,322
+00:02:37,719 --> 00:02:41,722
 Its promise: refreshed every Monday by seven, with the week before.
 
 23
-00:02:40,022 --> 00:02:47,686
+00:02:43,622 --> 00:02:51,286
 Ivy knows its readers by name: Graham Ellis at Facilities, and Mei Tanaka at the registrar's office, with their teams.
 
 24
-00:02:49,386 --> 00:02:56,997
+00:02:52,986 --> 00:03:00,597
 And she knows what it's for: next year's timetable will move about one peak class in six, and release rooms nobody uses.
 
 25
-00:02:57,697 --> 00:02:59,740
+00:03:01,297 --> 00:03:03,340
 Which ones, they'll choose from her counts.
 
 26
-00:03:01,440 --> 00:03:07,662
+00:03:05,040 --> 00:03:11,262
 So what Ivy owns isn't Monday's job. It's that the timetable change is judged on true counts.
 
 27
-00:03:09,762 --> 00:03:16,770
+00:03:14,962 --> 00:03:21,970
 Many people do part of the work. Facilities keeps the sensors, Sam the platform, and Jun reviews her changes.
 
 28
-00:03:18,270 --> 00:03:24,884
+00:03:24,270 --> 00:03:30,884
 One person answers for the outcome. In a RACI chart, that's the A, for accountable, and there's only one.
 
 29
-00:03:26,784 --> 00:03:29,121
+00:03:33,784 --> 00:03:36,121
 Helena gives her the authority to match.
 
 30
-00:03:30,221 --> 00:03:36,252
+00:03:37,221 --> 00:03:43,252
 Ivy can hold a refresh, change the model with a review, and tell the readers, without asking first.
 
 31
-00:03:38,952 --> 00:03:44,871
+00:03:45,952 --> 00:03:51,871
 On Monday 23 August, the refresh runs at seven, as promised. Every check passes.
 
 32
-00:03:46,771 --> 00:03:50,646
+00:03:53,771 --> 00:03:57,646
 At the Green Belt, a seedling in the ground earned nothing until it lived.
 
 33
-00:03:52,546 --> 00:03:55,276
+00:03:59,546 --> 00:04:02,276
 So Ivy reads the numbers, not only the tick.
 
 34
-00:03:56,976 --> 00:04:00,019
+00:04:03,976 --> 00:04:07,019
 In forty rooms, the counts have dropped to about a quarter.
 
 35
-00:04:02,119 --> 00:04:07,098
+00:04:09,119 --> 00:04:14,098
 If nobody noticed, the timetable team would release rooms that classes really use.
 
 36
-00:04:09,198 --> 00:04:11,690
+00:04:16,198 --> 00:04:18,690
 Ivy doesn't wait to be sure, or to be asked.
 
 37
-00:04:13,390 --> 00:04:20,818
-She walks over and tells Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow.
+00:04:20,390 --> 00:04:27,022
+She writes to Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow.
 
 38
-00:04:22,918 --> 00:04:25,784
+00:04:33,122 --> 00:04:35,988
 Saying it first, before the fix, is part of owning it.
 
 39
-00:04:28,484 --> 00:04:30,244
+00:04:41,288 --> 00:04:43,048
 With Sam, she finds the cause.
 
 40
-00:04:31,944 --> 00:04:38,445
+00:04:44,748 --> 00:04:51,249
 Facilities had upgraded the sensors: they now send four counts an hour, and her model kept only the first.
 
 41
-00:04:40,545 --> 00:04:47,038
+00:04:53,349 --> 00:04:59,842
 That part is hers to fix. Jun reviews her change, and by Tuesday morning the readers have the right counts.
 
 42
-00:04:49,138 --> 00:04:52,635
+00:05:01,942 --> 00:05:05,439
 Some of it isn't hers to fix. The sensors are Facilities'.
 
 43
-00:04:54,335 --> 00:05:00,616
+00:05:07,139 --> 00:05:13,420
 So she raises it with Graham. From now on, Facilities tells the data team before a sensor changes.
 
 44
-00:05:02,716 --> 00:05:08,823
+00:05:15,520 --> 00:05:21,627
 And she adds a check of her own: a drop like this one now holds the refresh, before anyone reads it.
 
 45
-00:05:11,523 --> 00:05:13,290
+00:05:30,727 --> 00:05:32,494
 Nobody here did anything wrong.
 
 46
-00:05:14,790 --> 00:05:22,101
+00:05:33,994 --> 00:05:41,305
 Facilities made the sensors better. Sam's platform loaded every count. The step was right for the data it was built for.
 
 47
-00:05:24,001 --> 00:05:28,627
+00:05:43,205 --> 00:05:47,831
 Each was right about what they saw. What failed was the way the parts fit together.
 
 48
-00:05:30,727 --> 00:05:37,986
+00:05:49,931 --> 00:05:57,190
 Sidney Dekker calls it a just culture: when something goes wrong, ask what happened and what must change, not who to blame.
 
 49
-00:05:40,086 --> 00:05:44,622
+00:06:00,490 --> 00:06:05,026
 Helena's first question isn't who. It's what happened, and what Ivy needs.
 
 50
-00:05:46,322 --> 00:05:51,248
+00:06:06,726 --> 00:06:11,652
 That's why Ivy could say it first: where nobody is blamed, saying it early is safe.
 
 51
-00:05:52,948 --> 00:05:58,080
+00:06:13,352 --> 00:06:18,484
 Being accountable means giving an account: what happened, and how the next time goes better.
 
 52
-00:06:00,780 --> 00:06:06,219
+00:06:23,184 --> 00:06:28,623
 The women of the Green Belt answered for trees still standing months later, not for the planting.
 
 53
-00:06:08,119 --> 00:06:16,385
+00:06:30,523 --> 00:06:38,789
 Ivy answers for true counts, not for a job that ran. In June 2029, the timetable change will be judged on them.
 
 54
-00:06:18,485 --> 00:06:21,677
+00:06:40,889 --> 00:06:44,081
 On Monday, know who uses your work, and for which decision.
 
 55
-00:06:23,177 --> 00:06:25,684
+00:06:45,581 --> 00:06:48,088
 Watch what it's for, not only whether it ran.
 
 56
-00:06:27,184 --> 00:06:30,478
+00:06:49,588 --> 00:06:52,882
 When something's wrong, say so first, even before the fix.
 
 57
-00:06:31,978 --> 00:06:37,740
+00:06:54,382 --> 00:07:00,144
 Fix what's yours, raise what isn't, and mend how the parts fit together, never blaming a person.
 
 58
-00:06:39,440 --> 00:06:44,915
+00:07:02,644 --> 00:07:08,119
 Measure the work, not the people, the next film, asks how a team can tell its work is getting better.
 
 59
-00:06:46,615 --> 00:06:48,931
+00:07:09,819 --> 00:07:12,135
 Own what it's for, not only what you did.

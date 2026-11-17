@@ -42,7 +42,7 @@ const NARR={
  {"id":"drop","gap":0.8,"text":"In forty rooms, the counts have dropped to about a quarter."},
  {"id":"release","gap":0.8,"text":"If nobody noticed, the timetable team would release rooms that classes really use."},
  {"id":"wait","gap":0.8,"text":"Ivy doesn't wait to be sure, or to be asked."},
- {"id":"tell","gap":0.8,"text":"She walks over and tells Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow."},
+ {"id":"tell","gap":0.8,"text":"She writes to Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow."},
  {"id":"first","gap":0.8,"text":"Saying it first, before the fix, is part of owning it."}
 ]},
 "fix":{"name":"Fix it, or raise it","lead":1.0,"tail":1.0,"vo":[

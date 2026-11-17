@@ -9,7 +9,8 @@
      x      under the hips; floor: where the feet stand (for a sitting person the floor under the seat; kneeling, the ground)
      h      how tall they stand, in px. In a place with an eye line, PK.hAt(floor, eye) gives the size at each depth
      pose   a name in PK.POSES, a row like its rows, or PK.poseMix(a, b, t); PK.poseWalk(step) for a stride
-     o.flip     faces left (true), or a number from 0 to 1: a turn from right to left, to cross in about a quarter of a second
+     o.flip     faces left (true), or a number from 0 to 1: a turn from right to left, through the front, as a body turns (half way
+                the person faces us); take about 0.4 s over it
      o.expr     a face: a name in PK.EXPR or {brow, smile, open}; o.gaze [x, y] moves the eyes; o.nod tilts the head (radians)
      o.reachN, o.reachF   a point of the frame the near or far hand rests on: the arm follows; o.reachNk, o.reachFk (0 to 1) blend it in
      o.hold(ctx, hand, deg, J)   draws what the near hand holds, over the hand; o.under and o.underF the same, under a hand
@@ -19,11 +20,14 @@
      o.seat     a seat's height above the floor, px, for a seat that isn't a chair's height (a stool, a log): the feet may hang
      o.t        the time, for breath and blinks; o.far (0 to 1) fades the line with distance; o.shade 0: no shadow on the ground
      o.a        fades the person, as one picture
-   PK.walk(ctx, who, t, w, o) walks a person from w.x0 to w.x1 between w.t0 and w.t1 (the stride dies away as they stop), then
-     takes up w.then (a pose); w.floor a number or a function of x; w.h a number or a function of the floor; w.arms {aN, aF} keeps
-     arms that carry something; w.before a pose to stand in before they set off. o as PK.person's (o.hold and the rest).
+   PK.walk(ctx, who, t, w, o) walks a person from w.x0 to w.x1 between w.t0 and w.t1: the stride grows out of w.before (the pose
+     they stand in before they set off) and dies into w.then (the pose they stop in), "stand" where none is given; w.floor a number
+     or a function of x; w.h a number or a function of the floor; w.arms {aN, aF} keeps arms that carry something. o as PK.person's
+     (o.hold and the rest).
    PK.poseMix(a, b, t), PK.exprMix(a, b, t), PK.talk(t, t0, t1) (a mouth that opens and closes while someone speaks).
    PK.poseSit(k, stand, sit): sitting down or standing up (k: 0 standing, 1 seated), leaning forward on the way.
+   Someone who stands for a while stands as people do: "ease" (the weight on one leg), "clasp" (hands together in front) or "listen";
+   "stand" is the plain row the others are blended from. Hands hold, carry, give, take, write, rest or greet: nobody waves one about.
    Every pose a person takes up is blended from the one before (poseMix, or PK.walk), never switched to. */
 (K=>{
 const {TAU,rad,lerp,clamp,sine,pin,pio,mix,dk,lt,css,hash,polar,pg,spline,capsule,rrect,ell}=K.u;
@@ -62,6 +66,8 @@ K.KID={head:1.34,neck:0.8,torso:0.98,thigh:0.84,shin:0.84,uarm:0.92,farm:0.92,ha
 K.POSES={
   stand:{lean:0,head:0,aN:[2,9],aF:[5,12],lN:[-2,-2],lF:[4,3]},
   listen:{lean:5,head:3,aN:[4,22],aF:[6,16],lN:[-2,-2],lF:[5,4]},
+  ease:{lean:1,head:2,aN:[-7,12],aF:[-3,16],lN:[-3,-3],lF:[9,3]},                      // at ease: the weight on one leg, the elbows a little back
+  clasp:{lean:1,head:2,aN:[4,30],aF:[8,36],lN:[-2,-2],lF:[5,4],clasp:1},              // hands held together in front, as people stand and listen
   talk:{lean:3,head:-3,aN:[20,92,"open"],aF:[6,14],lN:[-2,-2],lF:[5,4]},
   explain:{lean:4,head:-2,aN:[20,84,"open"],aF:[12,60,"open"],lN:[-2,-2],lF:[6,5]},
   point:{lean:5,head:-2,aN:[58,82,"point"],aF:[4,12],lN:[-3,-3],lF:[6,5]},
@@ -80,7 +86,7 @@ K.EXPR={neutral:{brow:0,smile:0.3,open:0},smile:{brow:0.25,smile:0.9,open:0},wor
   listen:{brow:0.25,smile:0.15,open:0},relief:{brow:0.5,smile:0.7,open:0.1},think:{brow:-0.35,smile:-0.05,open:0},glad:{brow:0.6,smile:1,open:0.35}};
 const poseOf=p=>typeof p==="string"?K.POSES[p]:p,exprOf=e=>typeof e==="string"?K.EXPR[e]:(e||K.EXPR.neutral);
 K.poseMix=(a,b,t)=>{a=poseOf(a);b=poseOf(b);if(t<=0)return a;if(t>=1)return b;const o={mode:(t<0.5?a:b).mode};
-  for(const k of ["lean","head","fN","fF"])o[k]=lerp(a[k]||0,b[k]||0,t);
+  for(const k of ["lean","head","fN","fF","clasp"])o[k]=lerp(a[k]||0,b[k]||0,t);
   for(const k of ["aN","aF","lN","lF"]){o[k]=[lerp(a[k][0],b[k][0],t),lerp(a[k][1],b[k][1],t)];if(k[0]==="a")o[k][2]=(t<0.5?a:b)[k][2];}return o;};
 K.exprMix=(a,b,t)=>{a=exprOf(a);b=exprOf(b);t=clamp(t,0,1);return{brow:lerp(a.brow,b.brow,t),smile:lerp(a.smile,b.smile,t),open:lerp(a.open||0,b.open||0,t)};};
 /* sitting down or standing up (k: 0 standing, 1 seated): the back leans forward on the way, as a body does to keep its balance, and
@@ -128,11 +134,13 @@ function rig(P,pose,x,floor,h,o){const p=propOf(P),u=h/1000,M=pose.mode||"stand"
   const sw=p.shW*u,sn=lerp(sw*1.06,sw*lerp(1,0.06,pr0),k),sf=lerp(sw*1.06,sw*0.8*lerp(1,0.16,pr0),k),dN=lerp(32,34,k)*u,dF=lerp(32,30,k)*u;
   const sc=[up[0]*T,up[1]*T],shN=[sc[0]-ax[0]*sn-up[0]*dN,sc[1]-ax[1]*sn-up[1]*dN],shF=[sc[0]+ax[0]*sf-up[0]*dF,sc[1]+ax[1]*sf-up[1]*dF];
   const ha=rad(scr((pose.lean||0)*0.55+(pose.head||0),k)),hu=[Math.sin(ha),-Math.cos(ha)],nb=[sc[0]+up[0]*4*u,sc[1]+up[1]*4*u],hc=[nb[0]+hu[0]*(p.neck+p.head*0.5)*u,nb[1]+hu[1]*(p.neck+p.head*0.5)*u];
-  const reach=(sh,a,tg,rk)=>{if(!tg||rk===0)return a;const q=ik(sh,[(tg[0]-x)*sg,tg[1]-(floor-low)],p.uarm*u,(p.farm+p.hand*0.45)*u);
-    return rk==null||rk>=1?[q[0],q[1],a[2]]:[lerp(a[0],q[0],rk),lerp(a[1],q[1],rk),a[2]];};
+  // hands held together in front of the hips (a pose's clasp): each arm goes there, unless it rests on something else; an arm lets
+  // go through a turn, since the hands would meet behind an elbow there
+  const cl=(pose.clasp||0)*clamp(k*2-1,0,1),loc=tg=>[(tg[0]-x)*sg,tg[1]-(floor-low)],tN=o.reachN?loc(o.reachN):cl>0?[28*u,12*u]:null,tF=o.reachF?loc(o.reachF):cl>0?[50*u,20*u]:null,
+    rN=o.reachN?(o.reachNk==null?1:clamp(o.reachNk,0,1)):cl,rF=o.reachF?(o.reachFk==null?1:clamp(o.reachFk,0,1)):cl;
+  const reach=(sh,a,q,rk)=>{if(!q||rk<=0)return a;const g=ik(sh,q,p.uarm*u,(p.farm+p.hand*0.45)*u);return rk>=1?[g[0],g[1],a[2]]:[lerp(a[0],g[0],rk),lerp(a[1],g[1],rk),a[2]];};
   // an arm that rests on something is in the frame's plane already: it is seen whole, however far round the person is
-  const aN=reach(shN,pose.aN,o.reachN,o.reachNk),aF=reach(shF,pose.aF,o.reachF,o.reachFk),rN=o.reachN?(o.reachNk==null?1:clamp(o.reachNk,0,1)):0,rF=o.reachF?(o.reachFk==null?1:clamp(o.reachFk,0,1)):0,
-    kaN=lerp(k,1,rN),kaF=lerp(k,1,rF);
+  const aN=reach(shN,pose.aN,tN,rN),aF=reach(shF,pose.aF,tF,rF),kaN=lerp(k,1,rN),kaF=lerp(k,1,rF);
   const eN=L(shN,aN[0],p.uarm,kaN),wN=L(eN,aN[1],p.farm,kaN),eF=L(shF,aF[0],p.uarm,kaF),wF=L(eF,aF[1],p.farm,kaF);
   const J={hip,hN,hF,kN,kF,nN,nF,sc,shN,shF,nb,hc,eN,wN,eF,wF};for(const j in J)J[j]=[x+J[j][0],floor-low+J[j][1]];
   // the arms' angles as they are seen: what a hand, a cuff and a held thing are drawn along
@@ -233,6 +241,9 @@ function head(ctx,P,J,o){const S=K.S,hh=J.p.head*J.u,H=HAIR[P.hair.style]||HAIR.
 function hand(ctx,P,J,W,deg,kind,far){const S=K.S,r=J.p.hand*J.u*0.52,c=polar(W,deg,r*0.75),sk=far?dk(S.tone(P.skin),0.07):S.tone(P.skin);
   if(kind==="open"||kind==="flat"){const tip=polar(c,deg,r*1.25),th=polar(polar(c,deg,-r*0.2),deg+62,r*(kind==="flat"?0.9:1.25));S.fill(ctx,cc=>{capsule(cc,polar(c,deg,-r*0.5),tip,r*0.98,r*0.8);capsule(cc,c,th,r*0.46,r*0.3);},sk,{w:0.8});
     if(kind==="open")S.line(ctx,cc=>{for(const k of [-0.34,0,0.34]){const a=polar(polar(c,deg,r*0.95),deg+90,r*k*1.5),b=polar(a,deg,r*0.75);cc.moveTo(a[0],a[1]);cc.lineTo(b[0],b[1]);}},null,0.42);return;}
+  // a hand at rest hangs open: a long mitten, the thumb lying along its front (a round hand with the thumb out is a fist)
+  if(kind==="rest"){const m=polar(W,deg,r*0.98),t0=polar(polar(m,deg,-r*0.62),deg+90,r*0.5),t1=polar(t0,deg+24,r*0.95);
+    S.fill(ctx,cc=>{ell(cc,m[0],m[1],r*0.82,r*1.36,-rad(deg));capsule(cc,t0,t1,r*0.4,r*0.28);},sk,{w:0.8});return;}
   S.fill(ctx,cc=>{ell(cc,c[0],c[1],r*0.92,r*1.16,-rad(deg));
     if(kind==="point"){const tip=polar(c,deg,r*1.9);capsule(cc,c,tip,r*0.42,r*0.3);}
     else{const th=polar(c,deg+95,r*(kind==="grip"?0.7:0.95));capsule(cc,c,th,r*0.5,r*0.34);}},sk,{w:0.8});}
@@ -310,7 +321,7 @@ function draw(ctx,P,x,floor,h,pose,o){const S=K.S,t=o.t||0,id=(P.name||P.key||"x
 K.person=(ctx,who,x,floor,h,pose,o)=>{o=Object.assign({},o||{});const P=typeof who==="string"?K.CAST[who]:who;if(!P)throw new Error("PK.person: nobody called "+who);
   pose=poseOf(pose||"stand");o.pose=pose;if(typeof o.expr==="string")o.expr=K.EXPR[o.expr];
   if(K.watch)K.watch({who:typeof who==="string"?who:(P.key||P.name||"someone"),x,floor,h,flip:o.flip===true?1:(o.flip||0),part:o.part||"whole",mode:pose.mode||"stand",
-    pose:[pose.lean||0,pose.head||0,pose.aN[0],pose.aN[1],pose.aF[0],pose.aF[1],pose.lN[0],pose.lN[1],pose.lF[0],pose.lF[1]],reach:[o.reachN?(o.reachNk==null?1:o.reachNk):0,o.reachF?(o.reachFk==null?1:o.reachFk):0],
+    pose:[pose.lean||0,pose.head||0,pose.aN[0],pose.aN[1],pose.aF[0],pose.aF[1],pose.lN[0],pose.lN[1],pose.lF[0],pose.lF[1]],reach:[o.reachN?(o.reachNk==null?1:o.reachNk):pose.clasp||0,o.reachF?(o.reachFk==null?1:o.reachFk):pose.clasp||0],
     expr:o.expr?[o.expr.brow||0,o.expr.smile||0,o.expr.open||0]:[0,0.3,0],a:o.a==null?1:o.a,ctx});
   if(o.a!=null&&o.a<0.999){if(o.a<=0.004)return facing(rig(P,pose,x,floor,h,o),x,turnOf(o).sg);
     const cv=ctx.canvas,[bc,bx]=ag_buf("pkFade",cv.width,cv.height);bx.setTransform(ctx.getTransform());const J=draw(bx,P,x,floor,h,pose,o);
@@ -321,9 +332,9 @@ K.rig=(who,x,floor,h,pose,o)=>facing(rig(typeof who==="string"?K.CAST[who]:who,p
 K.walkAt=(t,w)=>{const u=clamp((t-w.t0)/(w.t1-w.t0),0,1),k=0.16,s=u<k?u*u/(2*k*(1-k)):u>1-k?1-(1-u)*(1-u)/(2*k*(1-k)):(u-k/2)/(1-k),x=lerp(w.x0,w.x1,s),
     fl=typeof w.floor==="function"?w.floor(x):w.floor,h=typeof w.h==="function"?w.h(fl):w.h,go=clamp(Math.min(u/k,(1-u)/k),0,1);
   return{x,floor:fl,h,go:sine(go),step:Math.abs(x-w.x0)/K.strideOf(h,w.amp)+(w.phase||0),left:w.flip!=null?w.flip:w.x1<w.x0,u};};
-K.walk=(ctx,who,t,w,o)=>{const P=typeof who==="string"?K.CAST[who]:who,amp=w.amp||K.ampOf(P),q=K.walkAt(t,w.amp?w:Object.assign({},w,{amp}));let pose=K.poseWalk(q.step,q.go,amp);
-  if(w.arms)pose=Object.assign({},pose,{aN:w.arms.aN||pose.aN,aF:w.arms.aF||pose.aF},w.arms.lean!=null?{lean:w.arms.lean}:{});
-  if(t<w.t0&&w.before)pose=K.poseMix(w.before,pose,pin(t,w.t0-0.4,0.4));
-  if(t>w.t1-0.2&&w.then)pose=K.poseMix(pose,w.then,pin(t,w.t1-0.2,0.5));
+K.walk=(ctx,who,t,w,o)=>{const P=typeof who==="string"?K.CAST[who]:who,amp=w.amp||K.ampOf(P),q=K.walkAt(t,w.amp?w:Object.assign({},w,{amp})),carry=p=>w.arms?Object.assign({},p,{aN:w.arms.aN||p.aN,aF:w.arms.aF||p.aF},w.arms.lean!=null?{lean:w.arms.lean}:{}):p;
+  // the stride grows out of the stance they set off from (w.before) and dies into the one they stop in (w.then): never by way of a
+  // plain stand between two stances, and never switched to
+  const st=carry(K.POSES.stand),pose=K.poseMix(q.u<0.5?(w.before||st):(w.then||st),carry(K.poseWalk(q.step,1,amp)),q.go);
   const J=K.person(ctx,who,q.x,q.floor,q.h,pose,Object.assign({t,flip:q.left},o||{}));J.at=q;return J;};
 })(PK);

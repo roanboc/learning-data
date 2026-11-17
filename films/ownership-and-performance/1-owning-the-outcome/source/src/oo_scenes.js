@@ -131,23 +131,24 @@ scene("owns",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
     {at:tC,cut:true,place:"ooCampus",keys:[[tC,960,560,1.0],[c.readers+2.6,830,585,1.1]],d:3,draw:(x,tt,cam)=>{
       oo_passer(x,tt,PK.extra(4),tC+0.2,{});oo_passer(x,tt,PK.extra(11),tC+10.4,{out:true});
       const show=ag_io(tt,c.for-0.2,c.truly-1,0.8),nod=Math.sin(tt*2.4)*0.04*ag_io(tt,c.which+0.2,c.truly-0.8,0.5);
-      const Ji=PK.walk(x,"ivy",tt,{x0:-120,x1:560,t0:tC+0.1,t1:c.readers+3.2,floor:OO_CA.near,h:OO_HC,then:PK.poseMix("stand","wave",ag_io(tt,c.readers+3.0,c.readers+4.4,0.4))},{expr:PK.exprMix("smile","listen",show),nod});
+      const Ji=PK.walk(x,"ivy",tt,{x0:-120,x1:560,t0:tC+0.1,t1:c.readers+3.2,floor:OO_CA.near,h:OO_HC,then:PK.poseMix("ease","wave",ag_io(tt,c.readers+3.0,c.readers+4.4,0.4))},{expr:PK.exprMix("smile","listen",show),nod});
+      // Mei a step behind Graham, half hidden by his shoulder: two who came together, not three in a row
+      const Jm=PK.person(x,"mei",1016,OO_CA.near-30,PK.hAt(OO_CA.near-30,OO_CA.eye),"clasp",{t:tt,flip:true,expr:oo_says("smile",tt,c.which,c.which+1.8)});
       const Jg=PK.person(x,"graham",880,OO_CA.near,OO_HC,PK.poseMix("stand",OO_SHOW,show),{t:tt,flip:true,expr:oo_says("smile",tt,c.for,c.for+3),hold:oo_plan});
-      const Jm=PK.person(x,"mei",1070,OO_CA.near+10,PK.hAt(OO_CA.near+10,OO_CA.eye),"stand",{t:tt,flip:true,expr:oo_says("smile",tt,c.which,c.which+1.8)});
       PK.nameTag(x,Jg.hc[0]-40,Jg.hc[1]-150,"Graham Ellis","Facilities",ag_io(tt,w("readers","Graham",-0.2),c.for-0.4,0.4));PK.nameTag(x,Jm.hc[0]+110,Jm.hc[1]-150,"Mei Tanaka","Registrar's office",ag_io(tt,w("readers","Mei",-0.2),c.for-0.4,0.4));
       oo_say(x,Jm,tt,c.which-0.1,tL-0.3,["Which ones?","Your counts will tell us."],cam,{dx:60});}},
     // what she answers for: a room in use; Graham comes to look at his sensor
     {at:tL,cut:true,place:"ooRoom",keys:[[tL,960,560,1.0],[c.many-0.2,760,560,1.14]],d:2.6,draw:(x,tt,cam)=>{
       oo_class(x,tt,{});oo_count(x,"34 people");const gz=ag_in(tt,c.many+0.6,0.6),tg=c.many+2.0;
-      PK.person(x,"ivy",150,892,oo_hL(892),"stand",{t:tt,expr:"smile",gaze:[1,-0.2-0.5*gz]});
-      PK.walk(x,"graham",tt,{x0:-140,x1:372,t0:c.many-0.6,t1:tg,floor:902,h:oo_hL(902),then:"stand"},{flip:ag_in(tt,tg-0.1,0.4),expr:"neutral",gaze:[1,-0.9*ag_in(tt,tg+0.2,0.5)],nod:-0.12*ag_in(tt,tg+0.3,0.5)});
+      PK.person(x,"ivy",150,892,oo_hL(892),"clasp",{t:tt,expr:"smile",gaze:[1,-0.2-0.5*gz]});
+      PK.walk(x,"graham",tt,{x0:-140,x1:372,t0:c.many-0.6,t1:tg,floor:902,h:oo_hL(902),then:"ease"},{flip:ag_in(tt,tg-0.1,0.4),expr:"neutral",gaze:[1,-0.9*ag_in(tt,tg+0.2,0.5)],nod:-0.12*ag_in(tt,tg+0.3,0.5)});
       PK.bubble(x,960,112,["Monday's job"],null,ag_io(tt,w("truly","Monday's",-0.2),c.many-0.5,0.4),{size:30,weight:700,ink:PK.C.mut,strike:U.clamp((tt-w("truly","job",0.2))/0.5,0,1)||0});
       oo_tag(x,tt,w("truly","true",-0.6),c.many-0.5,960,196,"True counts, for the timetable change",{col:PK.C.green,weight:800});
       oo_tag(x,tt,w("many","Facilities",-0.1),tD-0.2,330,306,"Facilities keeps the sensors",{align:"left"});}},
     // the team: Sam keeps the platform, Jun reviews her changes; one person answers; Helena gives her the authority to match
     {at:tD,cut:true,place:"ooTeam",keys:[[tD,1100,570,1.15],[c.one-0.4,960,550,1.06],[c.helena-0.6,960,540,1.0]],d:2.6,draw:(x,tt,cam)=>{
       const up=ag_in(tt,c.one-0.2,0.8),turn=ag_in(tt,c.one-0.5,0.5),ok=ag_in(tt,w("can","without",-0.2),0.6);
-      const R=oo_team(x,tt,{clock:10.2,pot:0.3,sam:{expr:"neutral"},jun:{expr:"neutral"},behind:cx=>oo_sheets(cx,1,1),ivy:{turn,work:1,pose:PK.poseSit(1-up),expr:PK.exprMix("neutral","glad",ok),gaze:[1,0.1]}});
+      const R=oo_team(x,tt,{clock:10.2,pot:0.3,sam:{expr:"neutral"},jun:{expr:"neutral"},behind:cx=>oo_sheets(cx,1,1),ivy:{turn,work:1,pose:PK.poseSit(1-up,"ease"),expr:PK.exprMix("neutral","glad",ok),gaze:[1,0.1]}});
       PK.nameTag(x,R.sam.hc[0]+130,R.sam.hc[1]-150,"Sam Okafor","Keeps the platform",ag_io(tt,w("many","Sam",-0.1),c.one-0.5,0.4));PK.nameTag(x,R.jun.hc[0]-60,R.jun.hc[1]-150,"Jun Park","Reviews her changes",ag_io(tt,w("many","Jun",-0.1),c.one-0.5,0.4));
       oo_letter(x,R.sam,"R",ag_io(tt,w("one","Ray-see",-0.1),c.helena-0.5,0.4));oo_letter(x,R.jun,"R",ag_io(tt,w("one","Ray-see",0.2),c.helena-0.5,0.4));oo_letter(x,R.ivy,"A",ag_io(tt,w("one","A,",-0.2),c.helena-0.5,0.4),true);
       oo_tag(x,tt,w("one","accountable",-0.2),c.helena-0.5,R.ivy.hc[0]+70,R.ivy.hc[1]-250,"Accountable: only one",{col:PK.C.blue,weight:800,align:"left"});
@@ -206,9 +207,9 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
     {at:tT,cut:true,place:"ooCampus",keys:[[tT,960,560,1.0],[c.tell+2.2,830,585,1.1]],d:3,draw:(x,tt,cam)=>{
       oo_passer(x,tt,PK.extra(16),tT+0.4,{out:true});
       const tM=c.tell+1.5,tg=c.first-1.9,said=ag_in(tt,tg+0.4,0.8),f1=w("tell","forty",-0.1),f2=w("tell","Don't",-0.1),f3=w("tell","The right",-0.1),hear=ag_in(tt,tM,0.5);
+      PK.walk(x,"mei",tt,{x0:1700,x1:1036,t0:tT-1.4,t1:tM+0.2,floor:OO_CA.near-30,h:PK.hAt(OO_CA.near-30,OO_CA.eye),then:"clasp"},{expr:PK.exprMix("neutral","listen",hear),nod:Math.sin(tt*2.6+1)*0.04*ag_io(tt,f2,c.first+2,0.5)});
       const Jg=PK.walk(x,"graham",tt,{x0:1560,x1:900,t0:tT-1.4,t1:tM,floor:OO_CA.near,h:OO_HC,arms:{aN:[2,9,"grip"]},then:"stand"},{hold:oo_plan,expr:oo_says(PK.exprMix("neutral","listen",hear),tt,tg,tg+1.8),nod:Math.sin(tt*2.2)*0.03*ag_io(tt,f1,tg,0.5)});
-      PK.walk(x,"mei",tt,{x0:1750,x1:1080,t0:tT-1.4,t1:tM+0.2,floor:OO_CA.near+10,h:PK.hAt(OO_CA.near+10,OO_CA.eye),then:"listen"},{expr:PK.exprMix("neutral","listen",hear),nod:Math.sin(tt*2.6+1)*0.04*ag_io(tt,f2,c.first+2,0.5)});
-      const Ji=PK.walk(x,"ivy",tt,{x0:-140,x1:600,t0:tT+0.1,t1:c.tell+1.6,floor:OO_CA.near,h:OO_HC,then:"stand"},{expr:oo_says(PK.exprMix("worry","relief",said),tt,f1,tg-0.4)});
+      const Ji=PK.walk(x,"ivy",tt,{x0:-140,x1:600,t0:tT+0.1,t1:c.tell+1.6,floor:OO_CA.near,h:OO_HC,then:"clasp"},{expr:oo_says(PK.exprMix("worry","relief",said),tt,f1,tg-0.4)});
       PK.say(x,Ji,["Forty rooms look wrong to me.","Please don't use them yet.","Right counts by tomorrow."],ag_io(tt,f1,tg-0.2,0.3),{cam,dx:40,la:[ag_in(tt,f1,0.3),ag_in(tt,f2,0.3),ag_in(tt,f3,0.3)]});
       oo_say(x,Jg,tt,tg,c.first+2.9,["Thanks. We'll hold off."],cam,{dx:-40});}}
   ]);
@@ -243,7 +244,7 @@ scene("fix",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),
       const tg=c.mine+1.2,ta=w("raise","From",1.2),look=1-ag_in(tt,tg+1.2,0.6);
       oo_class(x,tt,{n:0,teacher:false,open:ag_io(tt,tg-0.3,tg+2.4,0.5),seen:U.pio(tt,tg+0.2,tg+1.0,0.25)});
       const Jg=PK.person(x,"graham",470,902,oo_hL(902),"listen",{t:tt,flip:true,expr:oo_says(PK.exprMix("neutral","smile",ag_in(tt,ta-0.4,0.6)),tt,ta,ta+1.6),gaze:[1,-0.9*look],nod:-0.12*look+Math.sin(tt*2.2)*0.03*ag_io(tt,ti+0.4,ta,0.5)});
-      if(tt>=tg){const x0=OO_L.door.x+24,Ji=PK.walk(x,"ivy",tt,{x0,x1:210,t0:tg,t1:tg+2.0,phase:0.9*(tt-tg),floor:xx=>U.lerp(812,896,U.clamp((x0-xx)/74,0,1)),h:oo_hL,flip:false,then:"stand"},{t:tt+1,a:U.pin(tt,tg,0.4),expr:oo_says(PK.exprMix("think","neutral",ag_in(tt,ta,0.6)),tt,ti,ti+2.4)});
+      if(tt>=tg){const x0=OO_L.door.x+24,Ji=PK.walk(x,"ivy",tt,{x0,x1:210,t0:tg,t1:tg+2.0,phase:0.9*(tt-tg),floor:xx=>U.lerp(812,896,U.clamp((x0-xx)/74,0,1)),h:oo_hL,flip:false,then:"ease"},{t:tt+1,a:U.pin(tt,tg,0.4),expr:oo_says(PK.exprMix("think","neutral",ag_in(tt,ta,0.6)),tt,ti,ti+2.4)});
         oo_say(x,Ji,tt,ti,ta-0.2,["Can you warn us","before the next upgrade?"],cam,{dx:200});}
       oo_tag(x,tt,w("mine","sensors",-0.1),c.raise-0.6,OO_L.sensor[0]+62,OO_L.sensor[1],"Facilities' sensors",{align:"left",weight:800});
       oo_say(x,Jg,tt,ta,tK-0.4,["We will. Every time."],cam,{dx:250});}},
@@ -266,30 +267,30 @@ scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       const s=[w("each","Facilities",-0.1),w("each","Sam's",-0.1),w("each","The step",-0.1),c.each+7.5],ok=i=>ag_in(tt,s[i+1]-0.1,0.5),face=i=>PK.exprMix("worry","relief",ok(i));
       const R=oo_team(x,tt,{clock:11.0,pot:0.75,away:true,ivy:{turn:1},jun:{work:0,pose:"sit",expr:"listen",gaze:[1,0]},sam:{turn:1,work:0,expr:oo_says(face(1),tt,s[1],s[2]-0.2),gaze:[1,0]}});
       PK.person(x,"helena",OO_IVY.x,OO_IVY.floor,OO_HI,PK.poseMix("sit","sitBack",0.5),{t:tt+2,expr:"listen",gaze:[1,-0.2],nod:Math.sin(tt*1.9)*0.03});
-      const Jg=PK.person(x,"graham",810,930,oo_hT(930),"stand",{t:tt,expr:oo_says(face(0),tt,s[0],s[1]-0.2),gaze:[1,0]});
-      const Ji=PK.person(x,"ivy",1490,944,oo_hT(944),"stand",{t:tt+1,flip:true,expr:oo_says(face(2),tt,s[2],s[3]-0.2),gaze:[1,0]});
+      const Jg=PK.person(x,"graham",810,930,oo_hT(930),"ease",{t:tt,expr:oo_says(face(0),tt,s[0],s[1]-0.2),gaze:[1,0]});
+      const Ji=PK.person(x,"ivy",1490,944,oo_hT(944),"clasp",{t:tt+1,flip:true,expr:oo_says(face(2),tt,s[2],s[3]-0.2),gaze:[1,0]});
       // each was right about what they saw: a tick over each of the three; what failed lies between them
       const M=[oo_over(Jg,24),oo_over(R.sam,24),oo_over(Ji,24)],lk=ag_in(tt,tF,1.2),la=ag_io(tt,tF,tD-0.4,0.4);
       oo_link(x,M[0],M[1],U.clamp(lk*2,0,1),PK.C.amber,la);oo_link(x,M[1],M[2],U.clamp(lk*2-1,0,1),PK.C.amber,la);
       M.forEach((q,i)=>PK.tick(x,q[0],q[1],24,ag_io(tt,s[i+1]-0.1,tD-0.4,0.4)));
-      oo_say(x,Jg,tt,s[0],s[1]-0.2,["We upgraded them in August."],cam);oo_say(x,R.sam,tt,s[1],s[2]-0.2,["The platform took all four."],cam);oo_say(x,Ji,tt,s[2],s[3]-0.2,["My step kept the first one."],cam);
+      oo_say(x,Jg,tt,s[0],s[1]-0.2,["We upgraded them in August."],cam);oo_say(x,R.sam,tt,s[1],s[2]-0.2,["The platform took all four."],cam,{dx:70});oo_say(x,Ji,tt,s[2],s[3]-0.2,["My step kept the first one."],cam,{dx:-110});
       oo_tag(x,tt,tF-0.1,tD-0.4,1000,120,"The gap was between the parts",{col:PK.C.amber,weight:800});}},
     // Helena's corner: her first question isn't who
     {at:tD,cut:true,place:"ooCorner",keys:[[tD,960,540,1.0],[c.helena-0.6,960,556,1.06]],d:3,draw:(x,tt,cam)=>{
       const q0=w("helena","isn't who",-0.1),q1=w("helena","what happened",-0.1),q2=w("helena","what Ivy",-0.1),ti=c.safe-0.2,lean=ag_in(tt,c.helena-0.4,0.9),up=ag_in(tt,q1+0.4,0.9);
       const R=oo_corner(x,tt,{t0:tD,lean,up,he:oo_says(PK.exprMix("listen","smile",0.5*lean),tt,q1,c.safe-1.0),ie:oo_says(PK.exprMix("worry","relief",ag_in(tt,q2+0.6,1.0)),tt,ti,ti+3.2)});
       // the question she doesn't ask, struck out; then the two she does
-      PK.bubble(x,R.helena.hc[0]+170,R.helena.hc[1]-170,["Who did this?"],null,ag_io(tt,c.helena-0.2,q1-0.3,0.3),{ink:PK.C.mut,strike:U.clamp((tt-q0)/0.5,0,1)});
-      PK.say(x,R.helena,["What happened?","What do you need?"],ag_io(tt,q1,c.safe-0.5,0.3),{cam,la:[ag_in(tt,q1,0.3),ag_in(tt,q2,0.3)]});
+      PK.bubble(x,R.helena.hc[0]+170,R.helena.hc[1]-170,["Who did this?"],null,ag_io(tt,c.helena-0.5,q1-0.15,0.3),{ink:PK.C.mut,strike:U.clamp((tt-q0)/0.4,0,1)});
+      PK.say(x,R.helena,["What happened?","What do you need?"],ag_io(tt,q1+0.1,c.safe-0.5,0.3),{cam,la:[ag_in(tt,q1+0.1,0.3),ag_in(tt,q2,0.3)]});
       oo_say(x,R.ivy,tt,ti,tA-0.4,["The sensors changed,","and my step missed it."],cam);
       oo_tag(x,tt,w("safe","early",-0.2),tA-0.4,700,214,"Safe to say it early",{col:PK.C.green,weight:800});}},
     // giving an account: Ivy writes it up for the team, and for the two who read her counts
-    {at:tA,cut:true,place:"ooTeam",keys:[[tA,960,520,1.05]],d:2,draw:(x,tt,cam)=>{
+    {at:tA,cut:true,place:"ooTeam",keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
       oo_team(x,tt,{clock:11.6,pot:0.75,ivy:null,sam:{turn:1,work:0,expr:"listen",gaze:[1,-0.2]},jun:{work:0,pose:"sit",expr:"listen",gaze:[1,-0.2]},behind:cx=>{
-        PK.atBoard(cx,"ivy",tt,[{s:"What happened",t0:tA+0.7,t1:tA+2.5},{s:"What changes",t0:w("account","happened",0.3),t1:w("account","next",1.0)}],{x:800,y:330,lh:62,rest:745,floor:842,h:oo_hT(842),t:tt+1,expr:"neutral"});}});
-      PK.person(x,"graham",1420,926,oo_hT(926),"listen",{t:tt,flip:true,expr:"listen",gaze:[1,-0.2]});PK.person(x,"mei",1600,938,oo_hT(938),"stand",{t:tt+2,flip:true,expr:"listen",gaze:[1,-0.2]});}}
+        PK.atBoard(cx,"ivy",tt,[{s:"What happened",t0:tA-4,t1:tA-2.4},{s:"What changes",t0:tA+0.5,t1:tA+2.3}],{x:836,y:330,lh:62,rest:745,floor:842,h:oo_hT(842),t:tt+1,expr:oo_says("neutral",tt,tA+3.6,sc.dur)});}});
+      PK.person(x,"graham",1384,930,oo_hT(930),"clasp",{t:tt,flip:true,expr:"listen",gaze:[1,-0.2]});PK.seated(x,"mei",1664,946,oo_hT(946),PK.poseMix("sit","sitBack",0.4),{t:tt+2,flip:true,expr:"listen",gaze:[1,-0.3]});}}
   ]);
-  const ca=ag_io(t,w("dekker","just",-0.3),c.helena-0.7,0.4);if(ca>0.004){setScreen(ctx,S);PK.card(ctx,960,64,{kick:"Sidney Dekker",title:"A just culture",sub:"Ask what happened, not who to blame"},ca,{align:"center"});}
+  const ca=ag_io(t,w("dekker","just",-0.3),c.helena-0.7,0.4);if(ca>0.004){setScreen(ctx,S);PK.card(ctx,960,64,{kick:"Sidney Dekker",title:"A just culture",sub:"Ask what happened, not who to blame",col:PK.C.blue},ca,{align:"center"});}
   oo_kick(ctx,S,1);
 });
 
@@ -306,9 +307,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       PK.person(x,K.wan,1105,890,oo_h(890),"stand",{t:tt,expr:"smile",gaze:[1,-0.3*tch],reachN:[1162,612],reachNk:tch});
       PK.walk(x,K.boy,tt,Object.assign({x0:420,x1:930},kw),{expr:"glad"});PK.walk(x,K.girl,tt,Object.assign({x0:300,x1:836,phase:0.4},kw,{floor:908,h:oo_h(908)*0.7}),{expr:"glad"});}},
     // the university, two years on: the timetable has changed, and it is judged on her counts
-    {at:tI,place:"ooRoom",dis:1.0,keys:[[tI,960,560,1.0],[c.ivy+3.4,860,560,1.1]],d:3,draw:(x,tt,cam)=>{
+    {at:tI,place:"ooRoom",dis:1.0,keys:[[tI,960,540,1.0],[c.ivy+3.4,860,536,1.1]],d:3,draw:(x,tt,cam)=>{
       oo_class(x,tt,{});oo_count(x,"34 people");const show=ag_in(tt,tJ,0.8);
-      PK.person(x,"ivy",150,892,oo_hL(892),"stand",{t:tt+1,expr:PK.exprMix("neutral","smile",show),gaze:[1,0.1]});
+      PK.person(x,"ivy",150,892,oo_hL(892),"ease",{t:tt+1,expr:PK.exprMix("neutral","smile",show),gaze:[1,0.1]});
       PK.person(x,"graham",372,902,oo_hL(902),PK.poseMix("stand",OO_SHOW,show),{t:tt,flip:true,expr:oo_says("smile",tt,tJ+0.4,tJ+2.6),hold:oo_plan});}},
     // on Monday: the four things, written up for the team; then everyone goes back to work, and Ivy to her desk, by the seedling
     {at:tK,cut:true,place:"ooTeam",keys:[[tK,960,500,1.04],[c.next+1.4,900,560,1.08],[c.take-1.0,880,600,1.15]],d:3,draw:(x,tt,cam)=>{
@@ -316,10 +317,10 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       const tB=tN+0.9,tS=tB+1.7,board=tt<tB,seated=tt>=tS,sit=ag_in(tt,tS,0.9),look=ag_in(tt,tS+0.8,0.8),touch=ag_in(tt,c.take-0.4,0.9),back=ag_in(tt,tN+0.2,0.5);
       oo_team(x,tt,{clock:9.2,pot:1,away:!seated,
         sam:{turn:1-ag_in(tt,tN+0.8,0.5),work:ag_in(tt,tN+1.5,0.8),expr:"listen",gaze:[1,-0.2*(1-back)]},jun:{work:ag_in(tt,tN+1.1,0.8),pose:"sit",expr:"listen",gaze:[1,-0.2*(1-back)]},
-        behind:cx=>{PK.atBoard(cx,board?"ivy":null,tt,L,{x:800,y:280,lh:56,rest:745,floor:842,h:oo_hT(842),t:tt+1,down:tN+0.3,tray:[886,506],a:1-ag_in(tt,tE-0.3,0.9),expr:"neutral"});},
-        ivy:{pose:PK.poseMix(PK.poseSit(sit),OO_LEANIN,0.5*touch),work:0,expr:PK.exprMix("neutral","smile",look),gaze:[1,0.4*look],reachN:[385,512],reachNk:touch}});
-      PK.walk(x,"helena",tt,{x0:1480,x1:2040,t0:tN+0.3,t1:tN+2.9,floor:926,h:oo_hT(926),before:"listen"},{t:tt+2,flip:1-ag_in(tt,tN-0.1,0.4),expr:PK.exprMix("listen","smile",back)});
-      if(!board&&!seated)PK.walk(x,"ivy",tt,{x0:745,x1:OO_IVY.x,t0:tB,t1:tB+1.4,floor:xx=>U.lerp(OO_IVY.floor,842,U.clamp((xx-OO_IVY.x)/185,0,1)),h:oo_hT,then:"stand"},{t:tt+1,flip:ag_in(tt,tB,0.4),expr:"neutral"});}}
+        behind:cx=>{PK.atBoard(cx,board?"ivy":null,tt,L,{x:836,y:280,lh:56,rest:745,floor:842,h:oo_hT(842),t:tt+1,down:tN+0.3,tray:[886,506],a:1-ag_in(tt,tE-0.3,0.9),expr:"neutral"});},
+        ivy:{pose:PK.poseMix(PK.poseSit(sit),OO_LEANIN,0.5*touch),work:0,expr:PK.exprMix("neutral","smile",look),gaze:[1,0.4*look*(1-touch)],reachN:[385,512],reachNk:touch,reachF:[462,630],reachFk:touch}});
+      PK.walk(x,"helena",tt,{x0:1480,x1:2040,t0:tN-0.1,t1:tN+2.7,floor:926,h:oo_hT(926),before:"clasp"},{t:tt+2,flip:1-ag_in(tt,tN-0.1,0.4),expr:PK.exprMix("listen","smile",back)});
+      if(!board&&!seated)PK.walk(x,"ivy",tt,{x0:745,x1:OO_IVY.x,t0:tB,t1:tB+1.4,floor:xx=>U.lerp(OO_IVY.floor,842,U.clamp((xx-OO_IVY.x)/185,0,1)),h:oo_hT,before:"ease",then:"stand"},{t:tt+1,flip:ag_in(tt,tB,0.4),expr:"neutral"});}}
   ]);
   oo_card(ctx,S,t,1.0,c.ivy-1.4,{kick:"Kenya",title:"Trees still standing",col:PK.C.green});
   oo_card(ctx,S,t,tJ,tK-0.3,{kick:"June 2029",title:"The timetable change",sub:"Judged on true counts",col:PK.C.blue},{right:true,y:124});

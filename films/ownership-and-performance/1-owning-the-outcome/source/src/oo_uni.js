@@ -78,8 +78,10 @@ function oo_class(x,tt,o){o=o||{};const d=OO_L.door,n=o.n==null?11:o.n,a=o.a==nu
 AG_BARE.ooRoom=(x,tt)=>oo_class(x,tt,{n:0,teacher:false});
 const oo_count=(x,text,a,col)=>PK.tag(x,OO_L.sensor[0]+62,OO_L.sensor[1],text,a==null?1:a,{align:"left",col:col||PK.C.orange,weight:800});
 // someone who comes in at the door and walks to a seat in the back row, then sits: from t0, over d seconds
-function oo_toSeat(x,tt,who,seat,t0,d){if(tt<t0)return 0;const x0=OO_L.door.x+24;
-  PK.walk(x,who,tt,{x0,x1:seat.x,t0,t1:t0+d,floor:xx=>PK.u.lerp(812,seat.fl,PK.u.clamp((xx-x0)/(seat.x-x0),0,1)),h:oo_hL,then:"sit"},{expr:"neutral",shade:0,a:PK.u.pin(tt,t0,0.4)});return PK.u.pio(tt,t0+0.1,t0+0.9,0.25);}
+function oo_toSeat(x,tt,who,seat,t0,d){if(tt<t0)return 0;const x0=OO_L.door.x+24,o={expr:"neutral",shade:0,a:PK.u.pin(tt,t0,0.4)};
+  if(tt<t0+d)PK.walk(x,who,tt,{x0,x1:seat.x,t0,t1:t0+d,floor:xx=>PK.u.lerp(812,seat.fl,PK.u.clamp((xx-x0)/(seat.x-x0),0,1)),h:oo_hL},o);
+  else PK.person(x,who,seat.x,seat.fl,oo_hL(seat.fl),PK.poseSit(PK.u.pin(tt,t0+d,0.7)),Object.assign(o,{t:tt}));
+  return PK.u.pio(tt,t0+0.1,t0+0.9,0.25);}
 
 /* ---------------------------------------------------------------- the campus
    Someone who passes, away from the people the film follows: in from the right along the front path, then up the path to the

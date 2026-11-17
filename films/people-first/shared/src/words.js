@@ -78,7 +78,9 @@ const veil=(ctx,S,a,side)=>{if(a<=0)return;setScreen(ctx,S);const c=K.col("board
   for(const [o,v] of st)g.addColorStop(o,css(c,v*clamp(a,0,1)));ctx.fillStyle=g;ctx.fillRect(0,0,1920,1080);};
 K.title=(ctx,S,t,t0,title,sub,line,o)=>{o=o||{};const oA=pin(t,t0,0.8),tA=pin(t,t0+0.5,0.8);if(oA<=0)return;veil(ctx,S,oA,o.side);setScreen(ctx,S);const x=o.side==="right"?1060:150;
   ctx.save();ctx.globalAlpha*=tA;K.mark(ctx,x+64,300,64,(t-t0-0.4)/1.8,1);tx(ctx,title,x,500,{w:800,size:o.size||76});if(sub)tx(ctx,sub,x,572,{w:600,size:36,col:K.C.mut});
-  ctx.globalAlpha*=pin(t,t0+1.2,0.8);tx(ctx,String(line).toUpperCase(),x,660,{w:800,size:28,ls:3,col:K.C.mut});ctx.restore();};
+  // the module and the series, in capitals: on one line where it fits the frame, else a line for each part
+  const cap=String(line).toUpperCase(),parts=tw(ctx,cap,800,28,3)<=1920-80-x?[cap]:cap.split(" · ");
+  ctx.globalAlpha*=pin(t,t0+1.2,0.8);parts.forEach((p,i)=>tx(ctx,p,x,660+i*44,{w:800,size:28,ls:3,col:K.C.mut}));ctx.restore();};
 K.end=(ctx,S,t,t0,title,line,n,series,o)=>{o=o||{};const oA=pin(t,t0,1.0),tA=pin(t,t0+0.6,0.9);if(oA<=0)return;veil(ctx,S,oA,o.side);setScreen(ctx,S);const x=o.side==="right"?1060:150;
   ctx.save();ctx.globalAlpha*=tA;if(line){const ls=ag_wrap(ctx,line,760,{w:700,size:46});ls.forEach((l,i)=>tx(ctx,l,x,330+i*62-(ls.length-1)*31,{w:700,size:46}));}
   K.mark(ctx,x+56,490,56,(t-t0-0.7)/1.6,1);tx(ctx,title,x,640,{w:800,size:44});tx(ctx,(n?n+" · ":"")+(series||"Leading data people")+" · Learning Data",x,698,{w:600,size:28,col:K.C.mut});ctx.restore();};

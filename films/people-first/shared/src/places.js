@@ -63,7 +63,9 @@ K.place={};
 K.place.team=ctx=>{const S=K.S,R=K.ROOMS.team,[wx,wy,ww,wh]=R.win;wall(ctx,C("wall"),800);
   K.window(ctx,wx,wy,ww,wh,campusView,{bld:0.44});
   S.begin(ctx,{lw:3,far:0.1,sh:5});K.board(ctx,R.board.x,R.board.y,R.board.w,R.board.h);
-  shelf(ctx,1440,330,390,41);shelf(ctx,1560,500,270,47);S.fill(ctx,c=>rrect(c,1440,500,130,14,4),C("wood"),{});K.pot(ctx,1500,500,64,50);K.plant(ctx,1500,450,0.5,5,0);
+  // the wall behind where people stand is left plain, from their shoulders up: a head reads best against nothing. The shelf is in
+  // the corner, over a desk, where nobody stands
+  shelf(ctx,1730,330,170,41,{free:76});K.pot(ctx,1846,330,60,46);K.plant(ctx,1846,284,0.46,5,0);
   floorAt(ctx,800,C("floor"),true);skirting(ctx,780);rug(ctx,900,952,600,92);
   S.begin(ctx,{lw:3,far:0.1,sh:5});K.pot(ctx,672,802,92,80);K.plant(ctx,672,722,1.0,8,0);};
 /* the manager's corner: a round table by the window */
@@ -160,8 +162,9 @@ K.audience=(ctx,t,n,o)=>{o=o||{};const seats=K.seats(o),order=o.order||[5,1,9,6,
 /* PK.atBoard: someone writes on a wall board, standing at it, seen from the side, facing right. lines: [{s, t0, t1, col}]: each
    line's words and when they are written (from t0 to t1), one under the other from (o.x, o.y: the first baseline), o.lh apart, in
    o.size px. An arm is only so long, so the writer stands o.back px behind the pen and steps along as the words come; when the
-   next line comes more than o.aside seconds later, and after the last, they step aside to o.rest (an x clear of the words), so
-   the words show. o.floor, o.h: where they stand and how tall; o.a fades the words (not the writer); o.expr, o.gaze as PK.person's.
+   next line comes more than o.aside seconds later, and after the last, they step back to o.rest (an x clear of the words), so
+   the words show: keep o.rest within a stride of the lines' ends, so that it is one step back, still facing the board, and
+   a head's width clear of the words' start. o.stand: how they stand when they aren't writing ("ease"). o.floor, o.h: where they stand and how tall; o.a fades the words (not the writer); o.expr, o.gaze as PK.person's.
    o.down: when they put the marker down on the board's tray, at o.tray [x, y] (within an arm of o.rest): it lies there from then
    on. who null: only the words, and the marker on the tray: the writer has left. Returns the joints, with J.writing (0 to 1). */
 K.atBoard=(ctx,who,t,lines,o)=>{o=Object.assign({size:30,weight:700,lh:56,back:74,aside:2.2,a:1},o||{});const u=o.h/1000,down=o.down==null||!o.tray?1e9:o.down;
@@ -182,10 +185,11 @@ K.atBoard=(ctx,who,t,lines,o)=>{o=Object.assign({size:30,weight:700,lh:56,back:7
   lines.forEach((l,i)=>{const sx=o.x-o.back,ex=sx+W[i];move(l.t0-0.1,sx);mv.push([l.t0,l.t1,sx,ex,0]);px=ex;pt=l.t1+0.25;
     if(i===lines.length-1||lines[i+1].t0-l.t1>o.aside)move(pt+clamp(Math.abs(o.rest-ex)/340,0.5,1.6),o.rest);});
   const xAt=tt=>{let x=o.rest;for(const [t0,t1,x0,x1,e] of mv){if(tt<=t0)break;const k=clamp((tt-t0)/(t1-t0),0,1);x=lerp(x0,x1,e?K.u.sine(k):k);}return x;};
-  // they turn round to step back a long way, and face the board's free side again when they stop
-  let turn=0;for(const [t0,t1,x0,x1,e] of mv)if(e&&x0-x1>160)turn=Math.max(turn,pin(t,t0-0.1,0.3)*(1-pin(t,t1-0.25,0.3)));
+  // a step or so back from the words is taken as people take it, still facing the board; only to walk back a long way do they turn
+  // round, and face the board's free side again when they stop
+  let turn=0;for(const [t0,t1,x0,x1,e] of mv)if(e&&x0-x1>stride*0.9)turn=Math.max(turn,pin(t,t0-0.1,0.3)*(1-pin(t,t1-0.25,0.3)));
   let wi=0,wk=0;lines.forEach((l,i)=>{const k=pin(t,l.t0-0.3,0.3)*(1-pin(t,l.t1+0.1,0.3));if(k>wk){wk=k;wi=i;}});
-  const x=xAt(t),v=Math.abs(xAt(t+0.04)-xAt(t-0.04))/0.08,walk=K.poseWalk(Math.abs(x-o.rest)/stride,clamp(v/180,0,1)*0.85,amp),q=pen(wi,pOf(wi,t)),held=t<down;
+  const x=xAt(t),v=Math.abs(xAt(t+0.04)-xAt(t-0.04))/0.08,walk=K.poseMix(o.stand||"ease",K.poseWalk(Math.abs(x-o.rest)/stride,1,amp),clamp(v/180,0,1)*0.85),q=pen(wi,pOf(wi,t)),held=t<down;
   // the hand: on the pen's place while a line is written; to the tray and back as the marker is put down
   const tr=down<1e8?pin(t,down-0.45,0.4)*(1-pin(t,down+0.15,0.45)):0,rk=tr>0?tr:wk*(1-turn),tg=tr>0?[o.tray[0],o.tray[1]-10*u]:[q[0]+2,q[1]+Math.sin(t*23)*2.5*wk];
   const pose=Object.assign({},walk,{aN:[walk.aN[0],walk.aN[1],held?"grip":"rest"]}),mk=held?(c,h,deg,J)=>marker(c,polar(h,deg,-6*J.u),polar(h,deg,62*J.u),inkOf(lines[wi])):null;

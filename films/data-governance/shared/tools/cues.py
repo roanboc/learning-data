@@ -7,7 +7,7 @@ lands on that word instead, so the moment comes early and nothing says so. build
 from a film's source folder, to list them: python ../../shared/tools/cues.py
 
 Most films give the helper a short name in each chapter, const w=(id,word,off)=>wAt(sc,id,word,off), and write w("line", "word").
-Until 12 November 2026 only wAt written out in full was read, so about ten thousand of those words were never looked at, and
+Until 17 November 2026 only wAt written out in full was read, so about ten thousand of those words were never looked at, and
 twelve moments in seven films came early or waited for a word their line doesn't say (A path for every provider timed five
 to figures, "16", "2,400", that the voice reads as words). What is read now, in a film's scenes:
   the helper       wAt(sc, "line", "word"), and Keeping it true's kt_w(sc, "line", "word"), the same helper under the name the

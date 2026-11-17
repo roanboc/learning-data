@@ -33,143 +33,143 @@ At the utility today, every element on the map says who owns it and where it cam
 00:01:21.197 --> 00:01:26.011
 So every change can be checked, and walked through what it touches, before anyone builds.
 
-00:01:33.611 --> 00:01:40.732
+00:01:33.611 --> 00:01:40.657
 Tomás's map changes every day now: 140 changes last month, each confirmed by its owner.
 
-00:01:42.532 --> 00:01:49.772
+00:01:42.457 --> 00:01:49.697
 Planned work is when the network's crews switch a street off, to mend or replace its lines. Households get a letter first.
 
-00:01:51.572 --> 00:01:56.341
+00:01:51.497 --> 00:01:56.266
 Last year, planned work moved to a new table, and the letters kept reading the old one.
 
-00:01:58.141 --> 00:02:04.852
+00:01:58.066 --> 00:02:04.777
 For three weeks, 1,900 households got the wrong date. On the real day, their power went off without warning.
 
-00:02:06.752 --> 00:02:10.977
+00:02:06.677 --> 00:02:10.902
 Nobody had done anything wrong. Nobody could see what read the old table.
 
-00:02:12.777 --> 00:02:19.048
+00:02:12.702 --> 00:02:18.973
 Now the head of retail asks, in a ticket, for a text to each household two days before planned work.
 
-00:02:20.748 --> 00:02:25.607
+00:02:20.673 --> 00:02:25.582
 Before anyone builds it, Tomás needs to know what it touches, and who must agree.
 
-00:02:29.007 --> 00:02:37.096
+00:02:28.982 --> 00:02:37.071
 Like a stamped brick, every element says who owns it and where it came from. So the map can be tested, as code is, on every change.
 
-00:02:38.796 --> 00:02:45.255
+00:02:38.771 --> 00:02:45.230
 Every element has an owner and a source. Every capability is realised by a process or a system.
 
-00:02:47.055 --> 00:02:53.579
+00:02:47.030 --> 00:02:53.554
 Every data object stands for a business object. No element is left unlinked, and none is there twice.
 
-00:02:55.379 --> 00:02:58.444
+00:02:55.354 --> 00:02:58.419
 And every rule has a home, and a case that must fail.
 
-00:03:00.244 --> 00:03:07.476
+00:03:00.219 --> 00:03:07.451
 A check that has never failed may be checking nothing. So each rule's check is shown a change that breaks it, and must stop it.
 
-00:03:09.576 --> 00:03:14.778
+00:03:09.551 --> 00:03:14.753
 Sending the network's list of homes with solar panels to retail must fail. It does.
 
-00:03:16.578 --> 00:03:22.510
+00:03:16.553 --> 00:03:22.485
 In software, checks like these are called fitness functions: tests that the architecture still holds.
 
-00:03:24.210 --> 00:03:28.749
+00:03:24.185 --> 00:03:28.724
 A change that fails one waits, until it's fixed, or its owner says why.
 
-00:03:31.849 --> 00:03:39.261
+00:03:31.824 --> 00:03:39.260
 Walking a change through every layer took Tomás a day, for the social tariff. The map agent can draft a walk in minutes.
 
-00:03:40.961 --> 00:03:46.044
+00:03:40.960 --> 00:03:46.043
 But before anyone relies on its walks, it's tested on a change whose answer is known.
 
-00:03:47.744 --> 00:03:52.017
+00:03:47.743 --> 00:03:52.016
 The social tariff touched fourteen elements, and five owners had to agree.
 
-00:03:53.817 --> 00:04:00.569
+00:03:53.816 --> 00:04:00.568
 The first time, the agent finds thirteen. It misses the secure exchange that carries the agency's answers.
 
-00:04:02.469 --> 00:04:08.545
+00:04:02.468 --> 00:04:08.544
 On the map, nothing linked the agreement to it. Tomás knew it from his walk, but nobody had drawn the line.
 
-00:04:10.345 --> 00:04:17.697
+00:04:10.344 --> 00:04:17.696
 The gap was the map's. So the line is drawn, and a check added: every agreement with a partner says how its data travels.
 
-00:04:19.497 --> 00:04:27.625
+00:04:19.496 --> 00:04:27.624
 Run again, it finds all fourteen, and the five owners. The test runs again whenever its model or its instructions change.
 
-00:04:30.925 --> 00:04:35.753
+00:04:30.924 --> 00:04:35.752
 Now the new change. The agent walks it down the map, from the ticket to the tables.
 
-00:04:37.453 --> 00:04:41.604
+00:04:37.452 --> 00:04:41.603
 Planned work is the network's: Grace's teams plan it, street by street.
 
-00:04:43.204 --> 00:04:47.401
+00:04:43.203 --> 00:04:47.400
 Phone numbers are retail's: each retailer holds its own customers'.
 
-00:04:49.001 --> 00:04:57.451
+00:04:49.000 --> 00:04:57.450
 So the network tells every retailer, on the same terms, which homes lose power and when, and each retailer texts its own customers.
 
-00:04:59.251 --> 00:05:05.779
+00:04:59.250 --> 00:05:05.778
 Down to the tables: the planned work, the supply points it cuts off, and each retailer's customer contacts.
 
-00:05:07.579 --> 00:05:14.649
+00:05:07.578 --> 00:05:14.648
 One element is new: a texting service, with no owner yet. The checks stop there, until the head of retail takes it.
 
-00:05:16.449 --> 00:05:23.444
+00:05:16.448 --> 00:05:23.443
 It lists who must agree: Grace, the head of retail, Ama for the rule at the wall, and Inés for the data between them.
 
-00:05:25.344 --> 00:05:28.913
+00:05:25.343 --> 00:05:28.912
 Each with its ID and its evidence, so a person can check it.
 
-00:05:32.013 --> 00:05:37.549
+00:05:32.012 --> 00:05:37.548
 The map and the code say how things are meant to run. Only the running estate shows how they do.
 
-00:05:39.449 --> 00:05:45.230
+00:05:39.448 --> 00:05:45.229
 So the walk is checked against the estate itself: what reads each table, and what runs each night.
 
-00:05:46.830 --> 00:05:52.613
+00:05:46.829 --> 00:05:52.612
 The agent reads there as it reads the map: read-only, with personal and sensitive data masked.
 
-00:05:54.213 --> 00:06:00.497
+00:05:54.212 --> 00:06:00.496
 It finds a reader the map doesn't show: the contact centre's software keeps its own copy of phone numbers.
 
-00:06:02.297 --> 00:06:08.207
+00:06:02.296 --> 00:06:08.206
 When a household calls with a new number, the copy changes. The customer system never hears of it.
 
-00:06:10.007 --> 00:06:15.796
+00:06:10.006 --> 00:06:15.795
 The data team counts the difference: one number in eleven. The texts would have gone to old numbers.
 
-00:06:17.896 --> 00:06:24.970
+00:06:17.895 --> 00:06:24.969
 The head of retail decides: the customer system is the source, and the contact centre's changes go back to it first.
 
-00:06:27.070 --> 00:06:29.323
+00:06:27.069 --> 00:06:29.322
 And the copy goes on the map, with an owner.
 
-00:06:32.423 --> 00:06:37.306
+00:06:32.422 --> 00:06:37.305
 In Babylon, the river wall said, brick by brick, who had built each stretch, and what for.
 
-00:06:39.006 --> 00:06:46.186
+00:06:39.005 --> 00:06:46.185
 When Nabopolassar found an older king's inscription in a wall, in his own words, he did not change its location.
 
-00:06:47.786 --> 00:06:51.239
+00:06:47.785 --> 00:06:51.238
 And he asked the kings after him to keep his words with theirs.
 
-00:06:52.839 --> 00:07:00.291
+00:06:52.838 --> 00:07:00.290
 At the utility, every element carries its owner and its source, so every change is checked, and walked, before anyone builds.
 
-00:07:01.691 --> 00:07:08.588
+00:07:01.690 --> 00:07:08.587
 In April, the first texts go out: 3,400 households, each two days before the crews reach its street.
 
-00:07:10.188 --> 00:07:12.291
+00:07:10.187 --> 00:07:12.290
 Every one has the date the crews have.
 
-00:07:17.991 --> 00:07:24.148
+00:07:17.990 --> 00:07:24.147
 Give every element an owner and a source, and test the map on every change, with a case that must fail.
 
-00:07:25.548 --> 00:07:31.617
+00:07:25.547 --> 00:07:31.616
 Walk each change through all it touches, check it against what's really running, and let the owners decide.
 
-00:07:33.517 --> 00:07:34.893
+00:07:33.516 --> 00:07:34.892
 Next: kept alive.

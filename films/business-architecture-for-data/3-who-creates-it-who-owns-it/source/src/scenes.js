@@ -329,9 +329,9 @@ scene("matrix",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 // A new home at dusk, just switched on: its walls, roof and door, its windows lit (o.on), the meter by its door glowing; the account
 // cards that come to it (o.cards [{a, t0, x, col, kick, name}]), and the first bills on its step (o.bills [{a, t0, x, rot}])
 function b3_home(ctx,t,o){o=o||{};const on=o.on||0;
-  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#17213c");g.addColorStop(0.5,"#3b3e5c");g.addColorStop(0.72,"#8a7280");g.addColorStop(0.72,"#2f2925");g.addColorStop(1,"#1d1916");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#17213c");g.addColorStop(0.5,"#3b3e5c");g.addColorStop(0.72,"#8a7280");g.addColorStop(0.72,"#262a3e");g.addColorStop(1,"#141628");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   for(let i=0;i<40;i++){const x=hash(i,301)*W,y=hash(i,302)*380;ctx.fillStyle="rgba(255,250,235,"+(0.25+0.4*hash(i,303))*(0.6+0.4*Math.sin(t*0.7+i))+")";ctx.beginPath();ctx.arc(x,y,1+hash(i,304)*1.2,0,TAU);ctx.fill();}
-  ctx.fillStyle="#4a423a";ctx.beginPath();ctx.moveTo(918,778);ctx.lineTo(1002,778);ctx.lineTo(1090,H);ctx.lineTo(830,H);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#46465a";ctx.beginPath();ctx.moveTo(918,778);ctx.lineTo(1002,778);ctx.lineTo(1090,H);ctx.lineTo(830,H);ctx.closePath();ctx.fill();
   const hx=700,hw=520,hy=480,hh=298;
   if(on>0.01)glow(ctx,960,700,520,[255,214,150],0.22*on);
   ctx.fillStyle="rgba(0,0,0,0.35)";ctx.fillRect(hx+14,hy+14,hw,hh);

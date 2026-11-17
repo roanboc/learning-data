@@ -49,9 +49,9 @@ function a2_top(x,x0,by,h,o){const sp=o.sp||200,u=((x-x0)%sp+sp)%sp,tH=Math.abs(
 // streaks down its face, a little slump everywhere, and the mud spread at its foot); o.wet (0..1): its face darkened by the rain;
 // o.haze (0..1): how far off it is; o.hi (0..1): the whole wall lit, when the narration names it
 function a2_wall(ctx,x0,x1,by,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const[dw,dy]=a2_light(o),sp=o.sp||200,tw_=o.tw||74,th=o.th||28,hz=o.haze||0,wet=clamp(o.wet||0,0,1),m=o.melt||0,sd=o.seed||651,hi=o.hi||0;
-  const sky=mix(mix([20,16,28],[150,96,84],dw),[200,180,160],dy);
-  let face=mix(mix([10,8,10],[56,38,32],dw),[118,96,76],dy);face=mix(face,[20,14,14],0.4*wet);face=mix(face,sky,0.32*hz);
-  const top_=mix(face,mix(BAB_SUN,sky,0.4),0.22+0.12*dw),foot=mix(face,[4,3,4],0.35),rim=mix(BAB_SUN,[255,236,210],0.2),top=x=>a2_top(x,x0,by,h,o);
+  const sky=mix(mix([14,16,48],[150,96,140],dw),[186,196,214],dy);
+  let face=mix(mix([10,10,26],[60,42,82],dw),[140,108,88],dy);face=mix(face,[16,16,34],0.4*wet);face=mix(face,sky,0.32*hz);
+  const top_=mix(face,mix(BAB_SUN,sky,0.4),0.22+0.12*dw),foot=mix(face,[4,4,14],0.35),rim=mix(BAB_SUN,[255,236,210],0.2),top=x=>a2_top(x,x0,by,h,o);
   withA(ctx,a,()=>{ctx.save();
     // its body, with the towers standing proud, and the breach where the rain has carried it away
     ctx.beginPath();ctx.moveTo(x0,by+2);for(let x=x0;x<=x1;x+=3){const u=((x-x0)%sp+sp)%sp;if(Math.abs(Math.abs(u-sp/2)-tw_/2)<1.6)ctx.lineTo(x,top(x-2));ctx.lineTo(x,top(x));}ctx.lineTo(x1,by+2);ctx.closePath();
@@ -89,12 +89,12 @@ function a2_wall(ctx,x0,x1,by,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
     if(hi>0.01){ctx.strokeStyle=rgba(ACA,0.85*hi);ctx.lineWidth=2.6;ctx.shadowColor=rgba(ACA,0.9);ctx.shadowBlur=16;ctx.beginPath();for(let x=x0;x<=x1;x+=3){const y=top(x)-0.5;x===x0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
     ctx.restore();});}
 // the city inside the walls, seen only through the breach: its ground, and the flat roofs of its houses, close-packed
-function a2_inside(ctx,t,o){const[dw,dy]=a2_light(o),col=mix(mix([14,11,13],[62,42,40],dw),[140,118,100],dy),lit=mix(col,BAB_SUN,0.2*dw);
+function a2_inside(ctx,t,o){const[dw,dy]=a2_light(o),col=mix(mix([12,14,38],[52,40,94],dw),[116,128,160],dy),lit=mix(col,BAB_SUN,0.2*dw);
   ctx.fillStyle=rgba(mix(col,[0,0,0],0.4),1);ctx.fillRect(A2_AT-170,A2_HZ-2,340,A2_IN[0]-A2_HZ+6);
   for(let r=0;r<5;r++){const y=A2_HZ+14+r*24,hh=12+r*5;for(let i=0;i<9;i++){const x=A2_AT-170+i*40+hash(i+r*9,731)*20-(r%2)*20,w=30+hash(i+r*9,732)*24;
     ctx.fillStyle=rgba(mix(col,[0,0,0],0.08*r),1);ctx.fillRect(x,y-hh,w,hh+30);ctx.fillStyle=rgba(lit,0.8);ctx.fillRect(x,y-hh,w,1.6);ctx.fillStyle="rgba(0,0,0,0.35)";ctx.fillRect(x+w-4,y-hh,4,hh+30);}}}
 // the bank between the outer wall and the water: beaten earth, darker towards the wall
-function a2_ground(ctx,o){const[dw,dy]=a2_light(o),col=mix(mix([14,11,11],[84,60,46],dw),[120,98,76],dy);
+function a2_ground(ctx,o){const[dw,dy]=a2_light(o),col=mix(mix([10,10,28],[72,52,90],dw),[150,124,94],dy);
   // the ground between the two walls, in their shade
   ctx.fillStyle=rgba(mix(col,[0,0,0],0.55),1);ctx.fillRect(A2_X0,A2_IN[0]-2,A2_X1-A2_X0,A2_OUT[0]-A2_IN[0]+4);
   const g=ctx.createLinearGradient(0,A2_OUT[0]-4,0,A2_WY);g.addColorStop(0,rgba(mix(col,[0,0,0],0.3),1));g.addColorStop(1,rgba(col,1));ctx.fillStyle=g;ctx.fillRect(A2_X0,A2_OUT[0]-4,A2_X1-A2_X0,A2_WY-A2_OUT[0]+6);}
@@ -102,7 +102,7 @@ function a2_ground(ctx,o){const[dw,dy]=a2_light(o),col=mix(mix([14,11,11],[84,60
 // each brick square and flat, its top catching the light and a long shadow cast away from the sun; and the pit of wet mud the moulder
 // works from
 function a2_field(ctx,o){const f=clamp(o.field||0,0,1);if(f<=0.01)return;const[dw,dy]=a2_light(o);
-  const mud=mix(mix([62,48,40],[176,146,112],dw),[204,180,142],dy),lit=mix(mud,BAB_SUN,0.3*dw),side=mix(mud,[0,0,0],0.42);
+  const mud=mix(mix([40,36,58],[186,146,108],dw),[214,184,140],dy),lit=mix(mud,BAB_SUN,0.3*dw),side=mix(mud,[0,0,0],0.42);
   withA(ctx,f,()=>{ctx.fillStyle=rgba(mix(mud,[0,0,0],0.55),1);ctx.beginPath();ctx.ellipse(356,806,22,4,0,0,TAU);ctx.fill();
     ctx.fillStyle=rgba(mix(lit,[255,255,255],0.1),0.3);ctx.beginPath();ctx.ellipse(360,805,12,1.4,0,0,TAU);ctx.fill();
     for(let r=0;r<6;r++){const y=A2_OUT[0]+9+r*10,bw=6.5+r*1.3,bd=1.5+r*0.45,bt=1.1+r*0.3,gp=bw*0.45,xs=[];
@@ -110,18 +110,18 @@ function a2_field(ctx,o){const f=clamp(o.field||0,0,1);if(f<=0.01)return;const[d
       ctx.fillStyle="rgba(0,0,0,0.3)";xs.forEach(x=>{const yb=y+bd+bt;ctx.beginPath();ctx.moveTo(x+bw,yb);ctx.lineTo(x,yb);ctx.lineTo(x-bw*1.4,yb-bd*0.25);ctx.lineTo(x-bw*0.4,y+bd*0.6);ctx.closePath();ctx.fill();});
       xs.forEach(x=>{ctx.fillStyle=rgba(lit,1);ctx.fillRect(x,y,bw,bd);ctx.fillStyle=rgba(side,1);ctx.fillRect(x,y+bd,bw,bt);ctx.fillStyle="rgba(255,236,200,0.25)";ctx.fillRect(x,y,bw,0.8);});}});}
 // palms on the bank, and reeds along the water (o.reeds, 0..1: they go where the embankment rises)
-function a2_palms(ctx,t,o){const[dw,dy]=a2_light(o),sil=mix(mix([6,5,6],[26,18,16],dw),[70,58,46],dy);
+function a2_palms(ctx,t,o){const[dw,dy]=a2_light(o),sil=mix(mix([6,6,16],[20,20,44],dw),[50,66,52],dy);
   [[-420,64],[90,70],[960,58],[1560,74],[2160,62]].forEach(([x,h],i)=>bab_palm(ctx,x,A2_EMB-2,h,t,{col:sil,lean:(hash(i,695)-0.5)*0.3,rim:0.2*dw}));}
-function a2_reeds(ctx,t,o,a){if(a<=0.01)return;const[dw,dy]=a2_light(o),sil=mix(mix([6,5,6],[26,18,16],dw),[70,58,46],dy);
-  withA(ctx,a,()=>{ctx.strokeStyle=rgba(mix(sil,[96,74,58],0.25*dw),1);ctx.lineCap="round";ctx.lineWidth=0.9;ctx.beginPath();
+function a2_reeds(ctx,t,o,a){if(a<=0.01)return;const[dw,dy]=a2_light(o),sil=mix(mix([6,6,16],[20,20,44],dw),[50,66,52],dy);
+  withA(ctx,a,()=>{ctx.strokeStyle=rgba(mix(sil,[104,84,124],0.25*dw),1);ctx.lineCap="round";ctx.lineWidth=0.9;ctx.beginPath();
     for(let i=0;i<220;i++){const bx=A2_X0+hash(i,692)*(A2_X1-A2_X0),hh=6+hash(i,693)*16,lw=Math.sin(t*0.7+i)*0.08;ctx.moveTo(bx,A2_WY+1);ctx.quadraticCurveTo(bx+1,A2_WY-hh*0.6,bx+(hash(i,694)-0.5)*hh*0.5+lw*hh,A2_WY-hh);}ctx.stroke();});}
 // the embankment of baked brick at the water's edge, outside the outer wall: from x0 to x1, its top at y0 and its foot at by, built
 // course by course from the foot as p goes from 0 to 1; its bricks red from the kiln, in the shade of the dawn, laid in black bitumen,
 // built in stretches a little different in tone, its coping catching the light and the water darkening its foot
 function a2_embank(ctx,x0,x1,y0,by,p,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01||p<=0.002)return;const[dw,dy]=a2_light(o),wet=clamp(o.wet||0,0,1);
-  let face=mix(mix([24,13,12],[98,52,38],dw),[156,98,72],dy);face=mix(face,[30,14,12],0.35*wet);const lit=mix(face,BAB_SUN,0.26*dw+0.08*dy),top=by-(by-y0)*clamp(p,0,1);
+  let face=mix(mix([20,14,32],[136,66,50],dw),[188,118,80],dy);face=mix(face,[24,16,36],0.35*wet);const lit=mix(face,BAB_SUN,0.26*dw+0.08*dy),top=by-(by-y0)*clamp(p,0,1);
   withA(ctx,a,()=>{ctx.save();ctx.beginPath();ctx.rect(x0,top,x1-x0,by-top+2);ctx.clip();
-    const g=ctx.createLinearGradient(0,y0,0,by);g.addColorStop(0,rgba(lit,1));g.addColorStop(0.4,rgba(face,1));g.addColorStop(1,rgba(mix(face,[6,4,4],0.55),1));ctx.fillStyle=g;ctx.fillRect(x0,y0,x1-x0,by-y0+2);
+    const g=ctx.createLinearGradient(0,y0,0,by);g.addColorStop(0,rgba(lit,1));g.addColorStop(0.4,rgba(face,1));g.addColorStop(1,rgba(mix(face,[4,4,14],0.55),1));ctx.fillStyle=g;ctx.fillRect(x0,y0,x1-x0,by-y0+2);
     for(let x=Math.floor(x0/140)*140;x<x1;x+=140){const v=hash(Math.floor(x/140)+40,676);ctx.fillStyle=v<0.5?"rgba(255,214,176,"+(0.07*v)+")":"rgba(0,0,0,"+(0.14*(v-0.5))+")";ctx.fillRect(x,y0,140,by-y0+2);}
     // brick by brick, each a little different, and the bitumen in every joint
     const ch=o.ch||4.5,bl=o.bl||15;let r=0;for(let y=by-ch;y>y0-ch;y-=ch,r++){for(let x=x0+(r%2)*bl/2-bl;x<x1;x+=bl){const v=hash(Math.floor(x/bl)*7+r,672);ctx.fillStyle=v<0.5?"rgba(255,220,180,"+(0.07*v)+")":"rgba(0,0,0,"+(0.12*(v-0.5))+")";ctx.fillRect(x,y,bl,ch);}}
@@ -148,7 +148,7 @@ function a2_mirror(ctx,y,t,amp,al,draw){const cv=ctx.canvas,m=ctx.getTransform()
 // the water in front, from its far edge at y0 to below the frame: the sky in it, the walls' reflection (o.refl draws them), slow
 // ripples, the rain's rings when o.rain, its level risen by o.rise px, and, in a storm or as it rises, the water lapping along its edge
 function a2_water(ctx,y0,t,o){o=o||{};const[dw,dy,st]=a2_light(o),y=y0-(o.rise||0),rn=clamp(o.rain||0,0,1);
-  const sky=mix(mix([12,12,26],[96,66,74],dw),[150,146,146],dy),deep=mix(mix([4,6,12],[18,20,32],dw),[52,66,82],dy);
+  const sky=mix(mix([8,16,46],[70,74,140],dw),[84,150,204],dy),deep=mix(mix([4,8,24],[14,26,64],dw),[30,80,134],dy);
   const g=ctx.createLinearGradient(0,y,0,y+300);g.addColorStop(0,rgba(mix(sky,BAB_SUN,0.18*dw),1));g.addColorStop(0.35,rgba(mix(sky,deep,0.65),1));g.addColorStop(1,rgba(deep,1));ctx.fillStyle=g;ctx.fillRect(A2_X0,y,A2_X1-A2_X0,1400);
   ctx.save();ctx.beginPath();ctx.rect(A2_X0,y,A2_X1-A2_X0,1400);ctx.clip();
   if(o.refl)a2_mirror(ctx,y,t,1.6+4*st+2*rn,0.6*(1-0.3*st),o.refl);
@@ -164,7 +164,7 @@ function a2_water(ctx,y0,t,o){o=o||{};const[dw,dy,st]=a2_light(o),y=y0-(o.rise||
     for(let x=A2_X0;x<=A2_X1;x+=6){const yy=y+2.2+Math.sin(x*0.05+t*2.2)*1.1+Math.sin(x*0.013-t*1.4);x===A2_X0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}
   ctx.restore();}
 // a storm over the city: low clouds that roll in from the left as a goes from 0 to 1, in world space above the horizon
-function a2_clouds(ctx,t,a,o){o=o||{};if(a<=0.01)return;const[dw,dy]=bab_light(o),col=mix(mix([14,14,22],[60,54,66],dw),[110,110,120],dy);
+function a2_clouds(ctx,t,a,o){o=o||{};if(a<=0.01)return;const[dw,dy]=bab_light(o),col=mix(mix([12,14,32],[66,56,96],dw),[108,116,140],dy);
   withA(ctx,a,()=>{for(let i=0;i<26;i++){const x=A2_X0+hash(i,701)*(A2_X1-A2_X0)+t*6*(0.5+hash(i,702)),y=60+hash(i,703)*420,r=120+hash(i,704)*240;
     const g=ctx.createRadialGradient(x,y,r*0.1,x,y,r);g.addColorStop(0,rgba(mix(col,[0,0,0],0.2),0.85));g.addColorStop(1,rgba(col,0));ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x,y,r*1.6,r*0.7,0,0,TAU);ctx.fill();}});}
 // the rain itself, in screen space over everything: streaks that fall a little slanted, and the dim of a storm's light
@@ -219,8 +219,8 @@ function a2_section(ctx,cx,by,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
 // The embankment as archaeologists found it, in a hazy morning: a trench cut down through the layers of earth, the spoil heaped along
 // its far edge, and at its far wall the face of baked brick, worn and chipped, black bitumen in every joint and earth still caked on it,
 // with a measuring rod leaning against it. o.p (0..1): the face uncovered, from the top down, as they dig
-function a2_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),earth=[124,98,74],dk=[64,48,38],haze=[196,190,178];
-  let g=ctx.createLinearGradient(0,-200,0,300);g.addColorStop(0,"rgb(150,154,162)");g.addColorStop(1,rgba(haze,1));ctx.fillStyle=g;ctx.fillRect(-200,-200,W+400,500);
+function a2_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),earth=[150,114,78],dk=[74,60,76],haze=[204,208,214];
+  let g=ctx.createLinearGradient(0,-200,0,300);g.addColorStop(0,"rgb(104,150,206)");g.addColorStop(1,rgba(haze,1));ctx.fillStyle=g;ctx.fillRect(-200,-200,W+400,500);
   ctx.fillStyle=rgba(mix(earth,haze,0.45),1);for(let i=0;i<7;i++){const x=-100+i*360+hash(i,741)*140,w=300+hash(i,742)*220,h=30+hash(i,743)*46;ctx.beginPath();ctx.moveTo(x-w/2,292);ctx.quadraticCurveTo(x-w*0.1,292-h*1.6,x+w/2,292);ctx.closePath();ctx.fill();}
   ctx.fillStyle=rgba(mix(earth,haze,0.3),1);ctx.fillRect(-200,288,W+400,H+200);
   // the trench: its sides in shade, cut through the layers of earth, and its floor in the light
@@ -235,7 +235,7 @@ function a2_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),earth=[124,9
   ctx.save();ctx.beginPath();ctx.rect(fx,fy,fw,fb-fy);ctx.clip();ctx.fillStyle=rgba(BAB_BIT,1);ctx.fillRect(fx,fy,fw,fb-fy);
   const bw=104,bh=25,jt=7;for(let r=0;fb-(r+1)*(bh+jt)>fy-bh-jt;r++)for(let i=-1;i*(bw+jt)<fw+bw;i++){
     const x=fx+i*(bw+jt)+(r%2)*((bw+jt)/2)+(hash(i*13+r,724)-0.5)*3,y=fb-(r+1)*(bh+jt)+jt/2+(hash(i*7+r,725)-0.5)*2,v=hash(i*31+r,721);
-    const c=mix(mix(BAB_BRICK,[196,150,104],0.2+0.4*v),[90,60,44],0.3*hash(i+r*17,726));
+    const c=mix(mix(BAB_BRICK,[204,150,104],0.2+0.4*v),[104,58,62],0.3*hash(i+r*17,726));
     ctx.fillStyle=rgba(c,1);rr(ctx,x,y,bw,bh,5);ctx.fill();ctx.fillStyle="rgba(255,236,210,0.13)";ctx.fillRect(x+4,y+1.5,bw-8,2.5);ctx.fillStyle="rgba(0,0,0,0.17)";ctx.fillRect(x+4,y+bh-3.5,bw-8,2.5);
     if(hash(i*5+r*3,727)<0.22){const cx_=hash(i+r,728)<0.5?x:x+bw,cy_=hash(i*3+r,729)<0.5?y:y+bh,s=8+hash(i+r*11,730)*12;ctx.fillStyle=rgba(BAB_BIT,1);ctx.beginPath();ctx.moveTo(cx_,cy_);ctx.lineTo(cx_+(cx_===x?s:-s),cy_);ctx.lineTo(cx_,cy_+(cy_===y?s*0.6:-s*0.6));ctx.closePath();ctx.fill();}
     ctx.fillStyle="rgba(0,0,0,0.12)";for(let k=0;k<5;k++)ctx.fillRect(x+6+hash(k+i*7,722+r)*(bw-14),y+4+hash(k+r*5,723+i)*(bh-9),2.5,2);}

@@ -91,193 +91,193 @@ Thursday, 5 November 2026: pay day at the university.
 Rohan Desai, in Finance, is setting next year's budget for casual teaching in the Faculty of Health.
 
 24
-00:02:01,715 --> 00:02:08,666
+00:02:01,715 --> 00:02:08,470
 Casual teaching is done by staff paid for the hours they work, like Linh Nguyen, who tutors health informatics.
 
 25
-00:02:09,766 --> 00:02:15,362
+00:02:09,570 --> 00:02:15,166
 First he needs one number: what casual teaching has cost Health this semester, so far.
 
 26
-00:02:16,662 --> 00:02:19,999
+00:02:16,466 --> 00:02:19,803
 That used to take a report from the data team, and a week.
 
 27
-00:02:20,899 --> 00:02:23,476
+00:02:20,703 --> 00:02:23,280
 Today he asks Genie One, in his own words.
 
 28
-00:02:24,576 --> 00:02:31,586
+00:02:24,380 --> 00:02:31,390
 Like the time in 1936, the answer comes when he asks: A$1.84 million, so far.
 
 29
-00:02:33,086 --> 00:02:38,823
+00:02:32,890 --> 00:02:38,627
 With it, Genie says what it counted: the claims approved for casual teaching, plus on-costs.
 
 30
-00:02:39,723 --> 00:02:42,984
+00:02:39,527 --> 00:02:42,788
 On-costs are what the university pays on top of pay.
 
 31
-00:02:43,884 --> 00:02:46,899
+00:02:43,688 --> 00:02:46,703
 And it shows the query it ran, so anyone can check it.
 
 32
-00:02:48,199 --> 00:02:50,512
+00:02:48,003 --> 00:02:50,316
 His next question: and Semester 1?
 
 33
-00:02:51,412 --> 00:02:54,723
+00:02:51,216 --> 00:02:54,527
 A$2.21 million, with every claim in.
 
 34
-00:02:56,023 --> 00:03:00,225
+00:02:55,827 --> 00:03:00,029
 By lunch, Health's casual teaching budget is set, from this year's numbers.
 
 35
-00:03:03,325 --> 00:03:10,116
+00:03:03,129 --> 00:03:09,920
 Genie One answered from a Genie Agent, which Sam and Jun, in the data team, set up for this one subject.
 
 36
-00:03:11,416 --> 00:03:13,705
+00:03:11,220 --> 00:03:13,509
 Two earlier films show how one is built.
 
 37
-00:03:14,805 --> 00:03:16,493
+00:03:14,609 --> 00:03:16,297
 Here is what the team put in it.
 
 38
-00:03:17,593 --> 00:03:23,133
+00:03:17,397 --> 00:03:22,937
 Its data: one measure, casual teaching cost, by faculty, unit and teaching period.
 
 39
-00:03:24,433 --> 00:03:28,360
+00:03:24,237 --> 00:03:28,164
 Rohan defined it once, in September, as the next film shows.
 
 40
-00:03:29,660 --> 00:03:31,585
+00:03:29,464 --> 00:03:31,389
 Its rules, in their owners' words.
 
 41
-00:03:32,685 --> 00:03:36,114
+00:03:32,489 --> 00:03:35,918
 Rohan's: what cost means, and what this semester means.
 
 42
-00:03:37,414 --> 00:03:41,124
+00:03:37,218 --> 00:03:40,928
 Ingrid's, in HR: totals only, never one person's pay.
 
 43
-00:03:42,424 --> 00:03:45,187
+00:03:42,228 --> 00:03:44,991
 So it reads the measure, never anyone's claims.
 
 44
-00:03:46,687 --> 00:03:51,325
+00:03:46,491 --> 00:03:51,129
 Its examples: questions Finance asks, each with the query that answers it.
 
 45
-00:03:52,625 --> 00:03:56,942
+00:03:52,429 --> 00:03:56,746
 And its tests: questions with known answers, run after every change.
 
 46
-00:03:58,242 --> 00:04:02,959
+00:03:58,046 --> 00:04:02,763
 Each answer runs as the person asking, so they see only what they may read.
 
 47
-00:04:04,259 --> 00:04:06,170
+00:04:04,063 --> 00:04:05,974
 So the data team's work has moved.
 
 48
-00:04:07,470 --> 00:04:14,577
+00:04:07,274 --> 00:04:14,381
 Not a report for each question, but good models and their context, built once, for people and agents to explore.
 
 49
-00:04:16,277 --> 00:04:20,901
+00:04:16,081 --> 00:04:20,705
 They started small, and Rohan, who knows the subject best, was its first user.
 
 50
-00:04:24,001 --> 00:04:27,529
+00:04:23,805 --> 00:04:27,333
 Some questions come back every pay day, from the same people.
 
 51
-00:04:28,629 --> 00:04:30,082
+00:04:28,433 --> 00:04:29,886
 What did the pay run cost?
 
 52
-00:04:31,182 --> 00:04:33,653
+00:04:30,986 --> 00:04:33,457
 How many casual hours, in each faculty?
 
 53
-00:04:34,753 --> 00:04:36,769
+00:04:34,557 --> 00:04:36,573
 How many claims still wait for approval?
 
 54
-00:04:38,069 --> 00:04:44,000
+00:04:37,873 --> 00:04:43,804
 Like the time in 1936, they get a machine of their own: one dashboard, read at a glance.
 
 55
-00:04:45,500 --> 00:04:49,675
+00:04:45,304 --> 00:04:49,479
 It refreshes after each pay run, and goes to the people who act on it.
 
 56
-00:04:50,975 --> 00:04:56,890
+00:04:50,779 --> 00:04:56,694
 Today: A$9.6 million, paid to 2,960 people.
 
 57
-00:04:58,190 --> 00:05:01,977
+00:04:57,994 --> 00:05:01,781
 And 143 claims still waiting, for the next pay run.
 
 58
-00:05:03,277 --> 00:05:08,147
+00:05:03,081 --> 00:05:07,951
 For a question it doesn't show, its Ask Genie button opens the same Genie Agent.
 
 59
-00:05:09,447 --> 00:05:12,963
+00:05:09,251 --> 00:05:12,767
 It replaced a 40-page report, emailed every pay day.
 
 60
-00:05:14,063 --> 00:05:17,184
+00:05:13,867 --> 00:05:16,988
 The three figures people read were on its first page.
 
 61
-00:05:18,484 --> 00:05:19,656
+00:05:18,288 --> 00:05:19,460
 Now it's retired.
 
 62
-00:05:21,156 --> 00:05:27,987
+00:05:20,960 --> 00:05:27,791
 A rule of thumb: a question deserves a dashboard when it comes back on a schedule, and someone acts on what it shows.
 
 63
-00:05:29,687 --> 00:05:32,123
+00:05:29,491 --> 00:05:31,927
 Every other question is asked when it's needed.
 
 64
-00:05:35,223 --> 00:05:42,232
+00:05:35,027 --> 00:05:42,036
 In 1936, the question everyone asked got a machine of its own, and anyone could ask it, at any hour.
 
 65
-00:05:43,332 --> 00:05:47,227
+00:05:43,136 --> 00:05:47,031
 At the university, the questions that come back have one dashboard.
 
 66
-00:05:48,127 --> 00:05:53,733
+00:05:47,931 --> 00:05:53,537
 Every other question is answered when it's asked, from good models and their context, built once.
 
 67
-00:05:54,833 --> 00:06:00,004
+00:05:54,637 --> 00:05:59,808
 And Health's casual teaching budget was set from this year's numbers, in a morning, not a week.
 
 68
-00:06:01,304 --> 00:06:04,882
+00:06:01,108 --> 00:06:04,686
 None of these ideas is new; the tools now make them easier.
 
 69
-00:06:05,782 --> 00:06:13,780
+00:06:05,586 --> 00:06:13,584
 So don't reinvent the wheel: investigate, adapt, implement and iterate, starting from the official docs, linked on this page.
 
 70
-00:06:15,080 --> 00:06:18,765
+00:06:14,884 --> 00:06:18,569
 Ask for the answer; keep dashboards for the questions that come back.
 
 71
-00:06:20,465 --> 00:06:26,234
+00:06:20,269 --> 00:06:26,038
 Next: casual teaching cost, defined in the open, so every reader counts it the same way.

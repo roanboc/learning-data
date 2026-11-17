@@ -14,7 +14,10 @@ are, as part of what is behind, but one: a word drawn again at the place where t
 size, is the same word drawn twice, not something behind it. A chapter that glides on in one room lays the last one's end over its first
 0.8 s, and a dissolve in one room lays one shot over the other, each with every word that stays, so that only what changes fades; measured
 against itself, a lasting word read as if a faint copy of it stood behind it (10 November 2026). That word goes with the frame's: magenta
-with it, and gone with it."""
+with it, and gone with it. Where two words' boxes meet, a magenta pixel can't be told to be one's or the other's, so neither word is
+measured there: a tag's own name, on a tag that slides across a column's name into its slot, was read as the column's letters and
+measured against the tag (Tags that travel, 17 November 2026; the author chose to fix the check). The same word drawn twice in one place
+is one word."""
 import argparse
 from lang import *
 from playwright.sync_api import sync_playwright
@@ -45,7 +48,7 @@ JS = r"""([EV,MIN])=>{const worst={};let sid="",mode=0,deco=0,rec=[];
        if(mode===1)magenta(this,colOf(this.fillStyle),arguments);return;}
      return F0.apply(this,arguments);}
    if(s==null||!String(s).trim())return;const col=colOf(this.fillStyle);
-   if(mode===1){const b=boxOf(this,String(s),X,Y);if(b)seen.push(Object.assign({s:String(s)},b));magenta(this,col,arguments);return;}
+   if(mode===1){const b=boxOf(this,String(s),X,Y);if(b)seen.push(Object.assign({s:String(s),a:this.globalAlpha*(col?col[3]:1)},b));magenta(this,col,arguments);return;}
    const m=this.getTransform();if(deco||!col||Math.abs(m.b)>1e-6||Math.abs(m.c)>1e-6)return;const a=this.globalAlpha*col[3];if(a<0.95)return;
    const b=boxOf(this,String(s),X,Y);rec.push({s:String(s),col,x0:b.x0-2,y0:b.top-2,w:b.w+4,h:b.sz*1.05+4,sz:b.sz});};
  const L=v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);},LT=new Float32Array(256);for(let i=0;i<256;i++)LT[i]=L(i);
@@ -56,7 +59,12 @@ JS = r"""([EV,MIN])=>{const worst={};let sid="",mode=0,deco=0,rec=[];
    const db=x.getImageData(0,0,1920,1080).data;
    for(const r of rec){const X0=Math.max(0,Math.floor(r.x0)),Y0=Math.max(0,Math.floor(r.y0)),X1=Math.min(1920,Math.ceil(r.x0+r.w)),Y1=Math.min(1080,Math.ceil(r.y0+r.h));
      if(X1-X0<4||Y1-Y0<4)continue;let foot=0;const core=[];
-     for(let yy=Y0;yy<Y1;yy++)for(let xx=X0;xx<X1;xx++){const p=(yy*1920+xx)*4,dr=dm[p]-db[p],dg=dm[p+1]-db[p+1],dbl=dm[p+2]-db[p+2];
+     // the boxes of the other words on the frame that show and meet this one's (not the same word in the same place): whose magenta
+     // a pixel there is can't be told, so neither word is measured there
+     const meet=seen.filter(q=>q.a>0.05&&!(q.s===r.s&&Math.abs(q.x0-r.x0-2)<=2&&Math.abs(q.top-r.y0-2)<=2&&Math.abs(q.sz-r.sz)<=1))
+       .map(q=>[q.x0-2,q.top-2,q.x0+q.w+2,q.top+q.sz*1.05+2]).filter(q=>q[0]<X1&&q[2]>X0&&q[1]<Y1&&q[3]>Y0);
+     for(let yy=Y0;yy<Y1;yy++)for(let xx=X0;xx<X1;xx++){if(meet.length&&meet.some(q=>xx>=q[0]&&xx<q[2]&&yy>=q[1]&&yy<q[3]))continue;
+       const p=(yy*1920+xx)*4,dr=dm[p]-db[p],dg=dm[p+1]-db[p+1],dbl=dm[p+2]-db[p+2];
        if(Math.max(Math.abs(dr),Math.abs(dg),Math.abs(dbl))<=30)continue;foot++;
        // a glyph's core: magenta, uncovered (a veil, a dissolve or a card drawn over the word darkens or mixes it)
        if(dm[p]>=200&&dm[p+1]<=70&&dm[p+2]>=200)core.push(lum(db[p],db[p+1],db[p+2]));}

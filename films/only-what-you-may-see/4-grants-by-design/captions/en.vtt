@@ -189,56 +189,56 @@ Two kinds of owner: Mei says who may see them, and the group is who may change t
 00:06:46.557 --> 00:06:53.812
 In Network, storage and keys, each catalog was bound to its own workspace, so a grant isn't enough from anywhere else.
 
-00:06:55.712 --> 00:07:02.508
+00:06:55.712 --> 00:07:02.342
 Anil Kurian's study works in a workspace of its own, studies, where nothing can be downloaded or copied out.
 
-00:07:04.408 --> 00:07:07.903
+00:07:04.242 --> 00:07:07.737
 The registrar's catalog is bound there too, but read only.
 
-00:07:09.603 --> 00:07:16.842
+00:07:09.437 --> 00:07:16.676
 From there, the study reads the learner table, as far as its grants allow, and can never write to it, whatever a grant says.
 
-00:07:18.942 --> 00:07:25.263
+00:07:18.776 --> 00:07:25.097
 What it makes goes in its own space, health progress, made for its agreement and deleted when the agreement ends.
 
-00:07:26.963 --> 00:07:29.487
+00:07:26.797 --> 00:07:29.321
 Look, don't touch, as on the islands' trails.
 
-00:07:32.987 --> 00:07:37.423
+00:07:32.821 --> 00:07:37.257
 The plan is written once, as two files beside the job's code in GitHub.
 
-00:07:38.723 --> 00:07:41.174
+00:07:38.557 --> 00:07:41.008
 Each shelf and its readers take a few lines.
 
-00:07:42.674 --> 00:07:47.526
+00:07:42.508 --> 00:07:47.360
 The data team reviews each change to those files, and Mei is told what it touches.
 
-00:07:49.226 --> 00:07:58.886
+00:07:49.060 --> 00:07:58.720
 A study's grant is made from its agreement's contract, and names it: 2026-14, until 30 June 2027.
 
-00:08:00.586 --> 00:08:06.573
+00:08:00.420 --> 00:08:06.407
 The study's policies go in first, and its grant after them, so it never reads the table unmasked.
 
-00:08:08.273 --> 00:08:14.841
+00:08:08.107 --> 00:08:14.675
 Then the path of From a branch to production: test first, then production, once a release approver says yes.
 
-00:08:16.541 --> 00:08:22.852
+00:08:16.375 --> 00:08:22.686
 And nobody can grant by hand: only the owners' group can, and its one member deploys only from main.
 
-00:08:24.352 --> 00:08:28.735
+00:08:24.186 --> 00:08:28.569
 Anything else takes an admin account, switched on, approved and recorded.
 
-00:08:32.235 --> 00:08:37.142
+00:08:32.069 --> 00:08:36.976
 On the islands, the plan came first, and every visitor since has walked inside it.
 
-00:08:38.842 --> 00:08:41.517
+00:08:38.676 --> 00:08:41.351
 At the university, the plan comes first too.
 
-00:08:42.617 --> 00:08:50.822
+00:08:42.451 --> 00:08:50.656
 The registrar's office reads its records; the study, only what its agreement allows; everyone else can find what exists, and ask.
 
-00:08:52.522 --> 00:08:56.823
+00:08:52.356 --> 00:08:56.657
 Every new table, and every new person, fits the plan from its first day.
 
-00:08:58.323 --> 00:09:00.804
+00:08:58.157 --> 00:09:00.638
 Design the grants once, by area and role.

@@ -90,167 +90,167 @@ From July to September, the faculties asked for 27 room reports.
 00:03:32.504 --> 00:03:36.655
 Each took about a day and a half to make, and waited about two weeks in the list.
 
-00:03:38.555 --> 00:03:45.645
+00:03:38.555 --> 00:03:45.639
 Helena Novak, the data manager, saw more: when two faculties asked at once, she chose whose rooms came first.
 
-00:03:47.345 --> 00:03:52.558
+00:03:47.339 --> 00:03:52.552
 Every room decision in the university now passed through one small team, and through her.
 
-00:03:54.458 --> 00:03:58.046
+00:03:54.452 --> 00:03:58.040
 The people who knew the courses were waiting for the people who knew the data.
 
-00:04:00.146 --> 00:04:04.942
+00:04:00.140 --> 00:04:04.936
 So she decided to stop deciding: the faculties would read the data themselves.
 
-00:04:07.642 --> 00:04:12.928
+00:04:07.636 --> 00:04:13.020
 Yusuf Demir, who leads data governance, drafted the rules for letting the faculties in.
 
-00:04:14.428 --> 00:04:19.157
+00:04:14.520 --> 00:04:19.249
 His first list had eleven, each guarding against something that had gone wrong somewhere.
 
-00:04:20.857 --> 00:04:24.001
+00:04:20.949 --> 00:04:24.093
 Of each, they asked: what goes wrong here, now, without it?
 
-00:04:25.901 --> 00:04:27.110
+00:04:25.993 --> 00:04:27.202
 Three were needed now.
 
-00:04:28.610 --> 00:04:36.085
+00:04:28.702 --> 00:04:36.177
 One: room use means one thing for everyone, the share of hours in which someone was counted, so the faculties' numbers add up.
 
-00:04:37.985 --> 00:04:43.922
+00:04:38.077 --> 00:04:44.014
 Two: the product's promise holds: counts per room per hour, never a person, so nobody is watched.
 
-00:04:45.822 --> 00:04:53.027
+00:04:45.914 --> 00:04:53.119
 Three: before you publish a new measure from it, ask its owner, Ivy, so each new number means one thing, written down first.
 
-00:04:54.927 --> 00:04:59.353
+00:04:55.019 --> 00:04:59.445
 The other eight went in a drawer, to come out only when a real problem showed.
 
-00:05:01.253 --> 00:05:09.049
+00:05:01.345 --> 00:05:09.141
 The political economist Elinor Ostrom studied fishing grounds, forests and irrigation that people had shared for centuries.
 
-00:05:10.549 --> 00:05:17.066
+00:05:10.641 --> 00:05:17.158
 The ones that lasted had a few clear rules, fitted to the place, made and changed by the people who live by them.
 
-00:05:18.966 --> 00:05:24.910
+00:05:19.058 --> 00:05:25.002
 Helena agreed the three with the four officers, not for them, and any of them can ask to change one.
 
-00:05:27.610 --> 00:05:30.265
+00:05:27.702 --> 00:05:30.357
 Rules say what's right. Tools make it easy.
 
-00:05:31.965 --> 00:05:40.357
+00:05:32.057 --> 00:05:40.449
 Ivy and Jun made a template: a page on the platform with booked hours beside counted ones, and room use worked out the agreed way.
 
-00:05:42.257 --> 00:05:49.252
+00:05:42.349 --> 00:05:49.344
 An officer copies it, picks their faculty's rooms, and asks their own questions: an afternoon, not two weeks.
 
-00:05:50.952 --> 00:05:54.958
+00:05:51.044 --> 00:05:55.187
 Anil, Health's data partner, sat with its officer for her first hour.
 
-00:05:56.658 --> 00:05:59.742
+00:05:56.887 --> 00:05:59.971
 Beside the numbers, one box says who decides what.
 
-00:06:01.042 --> 00:06:05.406
+00:06:01.271 --> 00:06:05.635
 The faculties decide their classes, and Ivy decides what the numbers mean.
 
-00:06:06.706 --> 00:06:11.052
+00:06:06.935 --> 00:06:11.281
 The team keeps the platform, and the registrar's office keeps the timetable.
 
-00:06:12.952 --> 00:06:21.173
+00:06:13.181 --> 00:06:21.402
 Data mesh and the book Team Topologies agree: decisions with the people who know the work, on a platform that makes the hard parts easy.
 
-00:06:23.073 --> 00:06:29.207
+00:06:23.302 --> 00:06:29.436
 On Monday 4 October, the officers started, and the team stopped making room reports by hand.
 
-00:06:31.907 --> 00:06:37.009
+00:06:32.136 --> 00:06:37.238
 Lucy Tran, Engineering's timetable officer, opened the template that Monday.
 
-00:06:38.509 --> 00:06:44.108
+00:06:38.738 --> 00:06:44.337
 Engineering books its own teaching labs, so they had never been in the university's room reports.
 
-00:06:45.608 --> 00:06:50.695
+00:06:45.837 --> 00:06:50.924
 The labs have sensors too, so Lucy put her faculty's lab bookings beside their counts.
 
-00:06:52.395 --> 00:06:58.721
+00:06:52.624 --> 00:06:58.950
 Every Monday morning, nine of Engineering's twelve labs were booked, and the sensors counted nobody in them.
 
-00:07:00.821 --> 00:07:04.795
+00:07:01.050 --> 00:07:05.024
 Nobody had asked: no report had ever put the two side by side.
 
-00:07:06.495 --> 00:07:15.044
+00:07:06.724 --> 00:07:15.273
 Lucy knew who to ask: two first-year courses had moved their lab classes to Thursdays, and their Monday bookings had rolled over every year.
 
-00:07:16.944 --> 00:07:20.967
+00:07:17.173 --> 00:07:21.196
 Lab use was a new measure, so before she shared it, Lucy asked Ivy.
 
-00:07:22.467 --> 00:07:29.310
+00:07:22.696 --> 00:07:29.539
 Ivy wrote it in the glossary the same way as room use, and the team built it into the product, for every faculty.
 
-00:07:31.010 --> 00:07:36.354
+00:07:31.239 --> 00:07:36.583
 Engineering released the nine Monday mornings, and put its request for two new labs on hold.
 
-00:07:38.254 --> 00:07:40.229
+00:07:38.483 --> 00:07:40.458
 Then something nobody planned happened.
 
-00:07:41.729 --> 00:07:48.032
+00:07:41.958 --> 00:07:48.261
 Within three weeks, Health had copied Lucy's page for its clinical skills rooms, and Arts for its studios.
 
-00:07:49.732 --> 00:07:54.217
+00:07:49.961 --> 00:07:54.446
 One faculty's question had become three, and nobody had sent an instruction.
 
-00:07:56.117 --> 00:08:04.240
+00:07:56.346 --> 00:08:04.469
 Lansing and Kremer saw the same in their model. Each year, every subak looked at its four nearest neighbours, and copied the best harvest.
 
-00:08:05.940 --> 00:08:12.644
+00:08:06.169 --> 00:08:12.873
 Within about eight years, groups planting together appeared, much like the real temple networks, and harvests rose.
 
-00:08:14.544 --> 00:08:15.818
+00:08:14.773 --> 00:08:16.047
 Nobody had drawn them.
 
-00:08:18.518 --> 00:08:25.589
+00:08:18.747 --> 00:08:25.818
 By Friday 26 November, all four faculties had sent the registrar's office their plans for February.
 
-00:08:27.289 --> 00:08:32.191
+00:08:27.518 --> 00:08:32.420
 Together, they moved one peak class in six, as the University Council had asked.
 
-00:08:34.091 --> 00:08:40.143
+00:08:34.320 --> 00:08:40.372
 In October and November the team made no room reports by hand, and the time went back to the roadmap.
 
-00:08:42.043 --> 00:08:48.028
+00:08:42.272 --> 00:08:48.257
 Helena's job changed too: less deciding, more watching what emerged, and asking what it taught.
 
-00:08:49.928 --> 00:08:58.215
+00:08:50.157 --> 00:08:58.444
 One real problem did show: Health sent its heads of school a copy of its page from three weeks before, and two planned from old numbers.
 
-00:08:59.915 --> 00:09:06.594
+00:09:00.144 --> 00:09:06.823
 So one rule came out of the drawer, with its reason: share the live page, not a copy, because copies go stale.
 
-00:09:08.494 --> 00:09:11.685
+00:09:08.723 --> 00:09:11.914
 And the template now shows the date of its data in the corner.
 
-00:09:13.385 --> 00:09:16.842
+00:09:13.614 --> 00:09:17.071
 Four rules, each with its reason, and still room to decide.
 
-00:09:19.542 --> 00:09:28.073
+00:09:19.771 --> 00:09:28.302
 In Bali, nobody planned every field. Each subak decided its own work, a shared calendar timed it together, and the harvests held.
 
-00:09:29.973 --> 00:09:38.218
+00:09:30.202 --> 00:09:38.447
 At the university, four officers planned their own rooms, a few rules kept the numbers true, and what nobody had looked for came to light.
 
-00:09:40.318 --> 00:09:43.171
+00:09:40.547 --> 00:09:43.400
 On Monday, write few rules, each with its reason.
 
-00:09:44.671 --> 00:09:46.369
+00:09:44.900 --> 00:09:46.598
 Make the right way the easy way.
 
-00:09:47.869 --> 00:09:49.227
+00:09:48.098 --> 00:09:49.456
 Say who decides what.
 
-00:09:50.727 --> 00:09:52.838
+00:09:50.956 --> 00:09:53.067
 Watch what emerges, and learn from it.
 
-00:09:54.338 --> 00:09:57.214
+00:09:54.567 --> 00:09:57.443
 And add a rule only when a real problem shows.
 
-00:09:58.914 --> 00:10:01.497
+00:09:59.143 --> 00:10:01.726
 A few clear rules, good tools, and trust.

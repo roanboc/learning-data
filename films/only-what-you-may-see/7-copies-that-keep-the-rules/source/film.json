@@ -37,7 +37,7 @@
     ],
     [
       "\\bAnil\\b",
-      "Ah-neel"
+      "Unnil"
     ],
     [
       "\\bMidwifery\\b",
@@ -46,6 +46,10 @@
     [
       "\\bOpenSharing\\b",
       "Open Sharing"
+    ],
+    [
+      "\\bLindgren\\b",
+      "Lind-gren"
     ]
   ],
   "story": [

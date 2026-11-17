@@ -718,18 +718,19 @@ window.LD_ROUTE = {
    "group": "lead",
    "name": "Liderar equipos de datos",
    "who": "Para quien trabaja con datos, y para quien lidera a las personas que lo hacen",
-   "line": "Las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas.",
+   "line": "Las personas antes que el trabajo, las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: conocer a tu equipo, ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas.",
    "items": [
     {
      "id": "people-first",
      "kind": "series",
      "title": "Las personas primero",
      "href": "people-first/",
-     "poster": "wellbeing-in-the-work-poster.jpg",
-     "kicker": "Serie · 1 de 4 películas",
-     "len": "10 min",
-     "min": 10.0,
+     "poster": "people-before-roles-poster.jpg",
+     "kicker": "Serie · 2 de 4 películas",
+     "len": "17 min",
+     "min": 17.0,
      "films": [
+      "ld-people-before-roles",
       "ld-wellbeing-in-the-work"
      ]
     },
@@ -850,10 +851,11 @@ window.LD_ROUTE = {
   {
    "id": "lead-a-team",
    "name": "liderar un equipo de datos",
-   "line": "Primero la organización, luego el equipo, el plan y su justificación.",
+   "line": "Primero la organización, luego las personas, el equipo, el plan y su justificación.",
    "stops": [
     "enterprise-architecture",
     "data-governance",
+    "people-first",
     "leading-a-data-team",
     "a-plan-in-ninety-days",
     "making-the-case"

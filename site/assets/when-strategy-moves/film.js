@@ -2079,9 +2079,9 @@ function d10_name(ctx,c,s,x,y,sz,col,a,al){if(a<=0.01)return;withA(ctx,a,()=>{ct
 // o.many (0..1): phones in use everywhere, years later
 function d10_map(ctx,t,c,o){o=o||{};const z=c.z,k=1/z;ctx.save();
   // the land: dry country in the north and east, greener in the highlands and the west, by the lake
-  const x0=c.x-1000*k,x1=c.x+1000*k,y0=c.y-600*k,y1=c.y+600*k;let g=ctx.createLinearGradient(0,d10_pr([0,5])[1],0,d10_pr([0,-5])[1]);g.addColorStop(0,"#76603a");g.addColorStop(0.55,"#566236");g.addColorStop(1,"#3a5e3e");
+  const x0=c.x-1000*k,x1=c.x+1000*k,y0=c.y-600*k,y1=c.y+600*k;let g=ctx.createLinearGradient(0,d10_pr([0,5])[1],0,d10_pr([0,-5])[1]);g.addColorStop(0,"#58472a");g.addColorStop(0.55,"#434d29");g.addColorStop(1,"#2f4d32");
   ctx.fillStyle=g;ctx.fillRect(x0,y0,x1-x0,y1-y0);
-  [[[35.4,0.0],2.6,[56,112,62],0.55],[[37.0,-0.6],1.6,[62,118,64],0.5],[[34.6,0.4],1.4,[60,124,66],0.5],[[39.4,-3.6],0.9,[52,112,70],0.4],[[39.5,2.6],3.4,[150,114,62],0.35]].forEach(([q,r,col,a])=>{const[x,y]=d10_pr(q),R=r*D10_S;
+  [[[35.4,0.0],2.6,[46,95,52],0.55],[[37.0,-0.6],1.6,[52,101,54],0.5],[[34.6,0.4],1.4,[51,106,56],0.5],[[39.4,-3.6],0.9,[45,98,61],0.4],[[39.5,2.6],3.4,[121,91,49],0.35]].forEach(([q,r,col,a])=>{const[x,y]=d10_pr(q),R=r*D10_S;
     const rg=ctx.createRadialGradient(x,y,0,x,y,R);rg.addColorStop(0,rgba(col,a));rg.addColorStop(1,rgba(col,0));ctx.fillStyle=rg;ctx.fillRect(x-R,y-R,2*R,2*R);});
   // the highlands and their peaks: soft relief, lit from the west by the evening sun, with snow on the two highest
   D10_PEAKS.forEach(([lo,la,r],i)=>{const[x,y]=d10_pr([lo,la]),R=r*D10_S;const rg=ctx.createRadialGradient(x-R*0.25,y-R*0.25,0,x,y,R);rg.addColorStop(0,"rgba(170,150,110,0.38)");rg.addColorStop(0.5,"rgba(110,100,72,0.18)");rg.addColorStop(1,"rgba(40,40,30,0)");

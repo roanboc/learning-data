@@ -45,101 +45,101 @@ Now each claim is written once, and payroll and Finance read that one copy.
 00:01:49.661 --> 00:01:54.537
 Thursday, the 5th of November 2026: pay day at the university.
 
-00:01:55.637 --> 00:02:01.626
+00:01:55.637 --> 00:02:01.276
 Linh Nguyen tutors HI101 on a casual contract, paid for the hours she claims.
 
-00:02:02.326 --> 00:02:06.490
+00:02:01.976 --> 00:02:06.140
 Claims used to be spreadsheets sent by email and typed again by payroll.
 
-00:02:07.190 --> 00:02:12.083
+00:02:06.840 --> 00:02:11.733
 The faculty kept its own tally, and Finance saw the hours only after pay day.
 
-00:02:13.583 --> 00:02:18.028
+00:02:13.233 --> 00:02:17.678
 So when the university built an app for claims, the usual design was ready:
 
-00:02:18.728 --> 00:02:25.789
+00:02:18.378 --> 00:02:25.439
 the app on its own database, a pipeline copying each change to an analytics platform, and reports on the copy.
 
-00:02:27.089 --> 00:02:33.326
+00:02:26.739 --> 00:02:32.976
 Two platforms, a pipeline between them, two sets of permissions, and a copy always a little behind.
 
-00:02:37.226 --> 00:02:41.582
+00:02:36.876 --> 00:02:41.232
 Noor, the data architect, chose one copy on one platform instead.
 
-00:02:42.282 --> 00:02:46.783
+00:02:41.932 --> 00:02:46.433
 The claims app is built on Lakebase, the Postgres database in Databricks.
 
-00:02:47.883 --> 00:02:53.208
+00:02:47.533 --> 00:02:52.858
 Linh writes each claim once, as a row, and her coordinator approves it in that same row.
 
-00:02:54.508 --> 00:03:02.742
+00:02:54.158 --> 00:03:02.392
 Postgres serves the app. The platform keeps the same rows in a second form for analysis, so the lakehouse reads them without slowing it.
 
-00:03:04.242 --> 00:03:10.274
+00:03:03.892 --> 00:03:09.924
 Payroll's list of claims still waiting and the job that builds the hours to pay both read that copy.
 
-00:03:10.974 --> 00:03:16.145
+00:03:10.624 --> 00:03:15.795
 So does Finance's casual teaching cost, and all three read through Unity Catalog.
 
-00:03:17.645 --> 00:03:20.872
+00:03:17.295 --> 00:03:20.522
 Each table has one writer. The app writes the claims.
 
-00:03:21.572 --> 00:03:29.270
+00:03:21.222 --> 00:03:28.920
 The lakehouse writes the contracts from the HR system, and a copy goes to the app, which checks each claim against its contract.
 
-00:03:30.770 --> 00:03:35.320
+00:03:30.420 --> 00:03:34.970
 As in Amsterdam's ledger, a claim is written once, and read where it's written.
 
-00:03:39.220 --> 00:03:44.567
+00:03:38.870 --> 00:03:44.217
 What's gone: the pipeline, the second database, and the work of keeping two copies in step.
 
-00:03:45.867 --> 00:03:51.000
+00:03:45.517 --> 00:03:50.650
 The integration services that ran between separate platforms come together on one.
 
-00:03:52.500 --> 00:04:00.392
+00:03:52.150 --> 00:04:00.042
 One catalog governs who may read the claims for analysis, with the same permissions, lineage and audit as every other table.
 
-00:04:01.692 --> 00:04:07.923
+00:04:01.342 --> 00:04:07.573
 What still moves? Payroll pays from a payroll system the university buys, which isn't on the platform.
 
-00:04:08.623 --> 00:04:15.004
+00:04:08.273 --> 00:04:14.654
 So each pay run, the hours to pay leave the platform by noon on Tuesday, under a contract with payroll.
 
-00:04:16.304 --> 00:04:19.974
+00:04:15.954 --> 00:04:19.624
 One thing moves, on purpose, instead of a copy of everything.
 
-00:04:21.474 --> 00:04:25.236
+00:04:21.124 --> 00:04:24.886
 The night it fails comes later, in A platform that watches itself.
 
-00:04:28.736 --> 00:04:30.073
+00:04:28.386 --> 00:04:29.723
 So, what should you choose?
 
-00:04:30.773 --> 00:04:36.195
+00:04:30.423 --> 00:04:35.845
 Keep one copy where you can, and move data only when a reader truly needs it somewhere else.
 
-00:04:37.495 --> 00:04:41.089
+00:04:37.145 --> 00:04:40.739
 Decide which system writes each table, and let the others read it.
 
-00:04:42.389 --> 00:04:50.325
+00:04:42.039 --> 00:04:49.975
 Where a system you buy keeps its own copy, agree the contract at that interface, as Moving is easy, agreeing is the work showed.
 
-00:04:51.625 --> 00:04:57.807
+00:04:51.275 --> 00:04:57.457
 Both at once showed one database that writes and reads. Here, one copy serves a whole platform.
 
-00:04:59.307 --> 00:05:02.592
+00:04:58.957 --> 00:05:02.242
 There are already standards for this, so don't reinvent the wheel.
 
-00:05:03.292 --> 00:05:07.990
+00:05:02.942 --> 00:05:07.640
 Investigate, adapt, implement and iterate, starting from the official docs.
 
-00:05:11.890 --> 00:05:18.519
+00:05:11.540 --> 00:05:18.169
 In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held.
 
-00:05:20.019 --> 00:05:27.965
+00:05:19.669 --> 00:05:27.615
 At the university, Linh's claim is one row: she writes it, her coordinator approves it, payroll pays it and Finance counts it.
 
-00:05:29.465 --> 00:05:37.252
+00:05:29.115 --> 00:05:36.902
 Today, 856 casual staff are paid from rows like hers, and no team had to copy a claim to get there.
 
-00:05:38.952 --> 00:05:40.993
+00:05:38.602 --> 00:05:40.643
 Keep one copy, governed once.

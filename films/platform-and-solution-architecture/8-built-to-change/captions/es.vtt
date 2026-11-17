@@ -69,170 +69,170 @@ Nadie hizo nada mal. Pero nadie preguntó, al comprarla, cómo saldrían los dat
 00:02:56.648 --> 00:03:02.524
 Así que Ravi pregunta qué más tiene atada así a la empresa, incluido el producto de la propia plataforma de datos.
 
-00:03:04.824 --> 00:03:07.546
+00:03:04.824 --> 00:03:07.474
 Ravi y Tomás empiezan por construir o comprar.
 
-00:03:08.846 --> 00:03:13.794
+00:03:08.774 --> 00:03:13.722
 Comprar lo que toda empresa de energía necesita casi igual, como una herramienta que registre tormentas.
 
-00:03:15.494 --> 00:03:21.852
+00:03:15.422 --> 00:03:21.780
 Construir lo que es propio de la empresa: sus reglas, sus medidas y productos de datos como la capacidad de alojamiento.
 
-00:03:23.552 --> 00:03:29.001
+00:03:23.480 --> 00:03:28.929
 Y antes de comprar, preguntar cómo salen los datos, en qué formato y cuánto llevaría irse.
 
-00:03:30.901 --> 00:03:36.960
+00:03:30.829 --> 00:03:36.888
 La nueva herramienta de la sala de control envía cada registro a la plataforma de datos cada noche, en un formato abierto.
 
-00:03:38.460 --> 00:03:42.276
+00:03:38.388 --> 00:03:42.204
 Su acuerdo dice que la empresa puede llevarse todos sus datos, cualquier día.
 
-00:03:43.976 --> 00:03:49.225
+00:03:43.904 --> 00:03:49.153
 La plataforma de datos es igual: su producto, comprado; lo que se construye encima, propio de la empresa.
 
-00:03:51.525 --> 00:03:58.255
+00:03:51.453 --> 00:03:58.183
 Luego Ravi busca costuras: lugares donde dos piezas se unen por algo que ambos lados acuerdan, como un formato.
 
-00:03:59.955 --> 00:04:04.483
+00:03:59.883 --> 00:04:04.411
 Detrás de una costura, una pieza se puede reemplazar, y nada delante de ella tiene que cambiar.
 
-00:04:06.383 --> 00:04:12.774
+00:04:06.311 --> 00:04:12.702
 En la plataforma de datos, las tablas son archivos en un formato de tabla abierto, en el almacenamiento propio de la empresa.
 
-00:04:14.274 --> 00:04:16.994
+00:04:14.202 --> 00:04:16.922
 Cualquier motor que conozca el formato puede leerlas.
 
-00:04:18.694 --> 00:04:22.168
+00:04:18.622 --> 00:04:22.096
 La lógica es código en el repositorio propio de la empresa.
 
-00:04:23.668 --> 00:04:28.782
+00:04:23.596 --> 00:04:28.710
 No todo tiene costura: las programaciones, las alertas y los tableros son del producto.
 
-00:04:30.482 --> 00:04:34.709
+00:04:30.410 --> 00:04:34.637
 Eso es dependencia del proveedor, y no está mal: es el precio de lo que un producto hace bien.
 
-00:04:36.409 --> 00:04:40.437
+00:04:36.337 --> 00:04:40.365
 Ravi anota lo que costaría irse, para que sea una elección, no un hallazgo.
 
-00:04:42.337 --> 00:04:48.428
+00:04:42.265 --> 00:04:48.356
 El ferrocarril tomó buena parte de la ruta del camino, entre las mismas ciudades. Lo que cambió fue lo que llevaba las cargas.
 
-00:04:50.728 --> 00:04:57.340
+00:04:50.656 --> 00:04:57.220
 Después, cada tecnología del mapa de Tomás recibe una etapa: en prueba, en uso, de salida, retirada.
 
-00:04:59.040 --> 00:05:02.965
+00:04:58.920 --> 00:05:02.845
 Y una fecha para volver a revisarla, junto al fin del soporte de su fabricante.
 
-00:05:04.465 --> 00:05:09.554
+00:05:04.345 --> 00:05:09.434
 La herramienta de tormentas habría aparecido de salida hace cuatro años, cuando su fabricante dejó de mejorarla.
 
-00:05:11.454 --> 00:05:16.775
+00:05:11.334 --> 00:05:16.655
 Otras dos piezas están cerca de su fin: un servidor de transferencia de archivos y una herramienta de informes.
 
-00:05:18.475 --> 00:05:21.435
+00:05:18.355 --> 00:05:21.315
 Cada una tiene su plan ya, con años de antelación, no meses.
 
-00:05:23.735 --> 00:05:31.288
+00:05:23.615 --> 00:05:31.168
 Por último, un plan de salida para cada pieza, incluido el producto de la propia plataforma: cómo se iría, cuánto tardaría y a qué costo.
 
-00:05:32.988 --> 00:05:37.643
+00:05:32.868 --> 00:05:37.523
 Un plan que nadie probó es una conjetura, así que el equipo de plataforma lo prueba cada año.
 
-00:05:39.343 --> 00:05:43.970
+00:05:39.223 --> 00:05:43.850
 Este año le toca a la capacidad de alojamiento de Grace: cuánta solar admite cada calle.
 
-00:05:45.470 --> 00:05:50.213
+00:05:45.350 --> 00:05:50.093
 Durante una semana, en pruebas, corre en otro motor que lee los mismos archivos.
 
-00:05:51.913 --> 00:05:55.740
+00:05:51.793 --> 00:05:55.620
 Sus modelos corren con once líneas cambiadas, de mil cuatrocientas.
 
-00:05:57.440 --> 00:06:02.102
+00:05:57.320 --> 00:06:01.982
 El contrato, la responsable y el glosario no cambian, y cada número coincide.
 
-00:06:03.802 --> 00:06:08.551
+00:06:03.682 --> 00:06:08.431
 Hay que volver a configurar tres cosas: su programación, sus alertas y quién puede leerla.
 
-00:06:10.251 --> 00:06:16.638
+00:06:10.131 --> 00:06:16.518
 Con eso, Ravi calcula toda la plataforma: unos ocho meses para irse, una migración, no una reescritura.
 
-00:06:18.738 --> 00:06:22.544
+00:06:18.618 --> 00:06:22.424
 Nadie planea irse, pero ahora la empresa sabe lo que haría falta.
 
-00:06:24.844 --> 00:06:28.336
+00:06:24.724 --> 00:06:28.216
 Grace pide, en un ticket, que se conserve el historial de tormentas.
 
-00:06:29.836 --> 00:06:35.662
+00:06:29.716 --> 00:06:35.542
 El fabricante saca los doce años, y el equipo de datos revisa cada uno contra los informes de la vieja herramienta.
 
-00:06:37.362 --> 00:06:43.494
+00:06:37.242 --> 00:06:43.374
 Llegan a la plataforma de datos como archivos en un formato abierto: el historial de tormentas, a cargo de la red.
 
-00:06:45.194 --> 00:06:48.892
+00:06:45.074 --> 00:06:48.772
 Desde marzo, la nueva herramienta envía los registros de cada noche del mismo modo.
 
-00:06:50.392 --> 00:06:54.002
+00:06:50.272 --> 00:06:53.882
 Los ingenieros de Grace los revisan en pruebas, y su ticket se cierra.
 
-00:06:55.502 --> 00:06:58.628
+00:06:55.382 --> 00:06:58.508
 En noviembre, un mes antes de lo previsto, se apaga la vieja herramienta.
 
-00:07:00.328 --> 00:07:03.290
+00:07:00.208 --> 00:07:03.170
 El trabajo del año próximo se elige con los doce inviernos.
 
-00:07:05.590 --> 00:07:11.758
+00:07:05.470 --> 00:07:11.633
 Aquí está toda la práctica de datos en el mapa de Tomás: un producto de datos, de su responsable a sus archivos.
 
-00:07:13.258 --> 00:07:16.373
+00:07:13.133 --> 00:07:16.248
 En la capa de negocio, Grace tiene el rol de responsable de los datos.
 
-00:07:17.673 --> 00:07:22.245
+00:07:17.548 --> 00:07:22.120
 La capacidad de alojamiento es un producto: reúne su servicio y su contrato.
 
-00:07:23.745 --> 00:07:27.137
+00:07:23.620 --> 00:07:27.012
 Lo que significa es un objeto de negocio, definido en el glosario.
 
-00:07:28.637 --> 00:07:34.150
+00:07:28.512 --> 00:07:34.025
 En la capa de información, el objeto de datos que lo realiza: la capacidad, calle por calle.
 
-00:07:35.650 --> 00:07:41.804
+00:07:35.525 --> 00:07:41.679
 En la capa de aplicación, su pipeline y sus modelos: un componente de aplicación, a cargo de la red.
 
-00:07:43.304 --> 00:07:47.614
+00:07:43.179 --> 00:07:47.489
 Su puerto de salida, una interfaz de aplicación, es donde el sitio web lo lee.
 
-00:07:49.114 --> 00:07:54.999
+00:07:48.989 --> 00:07:54.874
 En la capa de tecnología, los servicios de la plataforma, que Databricks realiza, como software de sistema.
 
-00:07:56.499 --> 00:08:04.208
+00:07:56.374 --> 00:08:04.083
 Y sus artefactos: las tablas, como archivos en un formato abierto, y los modelos, como código en el repositorio de la empresa.
 
-00:08:05.908 --> 00:08:13.947
+00:08:05.783 --> 00:08:13.822
 La costura pasa entre esos archivos y el producto que los lee. Otro producto podría leer los mismos archivos y correr el mismo código.
 
-00:08:16.047 --> 00:08:20.287
+00:08:15.922 --> 00:08:20.162
 Pregunta qué se rompe si cambia una tabla, y las líneas suben hasta Grace.
 
-00:08:22.187 --> 00:08:28.761
+00:08:22.062 --> 00:08:28.636
 Arquitectura de negocio para datos dibujó la parte de arriba, Arquitectura de datos el medio, y esta serie los cimientos.
 
-00:08:31.061 --> 00:08:39.009
+00:08:30.936 --> 00:08:38.884
 El Gokaidō duró más de 250 años porque se mantuvo: caballos añadidos, aldeas convocadas, reglas reescritas.
 
-00:08:40.709 --> 00:08:46.799
+00:08:40.584 --> 00:08:46.674
 Pero nunca cambió quién pagaba el costo. Las postas y las aldeas de ayuda lo cargaron, hasta que las quebró.
 
-00:08:48.699 --> 00:08:51.931
+00:08:48.574 --> 00:08:51.806
 Y cuando llegó el ferrocarril, muchos pueblos de posta decayeron.
 
-00:08:53.631 --> 00:08:59.289
+00:08:53.506 --> 00:08:59.164
 Una práctica de datos tampoco se hace de una vez: los productos acaban, las necesidades crecen, la gente se va.
 
-00:09:00.789 --> 00:09:08.047
+00:09:00.664 --> 00:09:07.922
 Así que se mantiene: cada pieza con una etapa y una fecha, una salida probada cada año, y el mapa cambiado con cada cambio.
 
-00:09:09.747 --> 00:09:15.293
+00:09:09.622 --> 00:09:15.168
 En la empresa de energía, el próximo final se planea, no se impone, y lo que es propio de la empresa se va con ella.
 
-00:09:16.993 --> 00:09:22.647
+00:09:16.868 --> 00:09:22.572
 Sigue la última serie de arquitectura empresarial: IA y arquitectura continua.

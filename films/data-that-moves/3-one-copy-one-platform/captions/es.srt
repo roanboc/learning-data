@@ -59,133 +59,133 @@ Ahora cada declaración se escribe una vez, y Nómina y Finanzas leen esa única
 Jueves 5 de noviembre de 2026: día de pago en la universidad.
 
 16
-00:01:55,637 --> 00:02:01,626
+00:01:55,637 --> 00:02:01,276
 Linh Nguyen es tutora de HI101 con un contrato ocasional, y cobra las horas que declara.
 
 17
-00:02:02,326 --> 00:02:06,490
+00:02:01,976 --> 00:02:06,140
 Antes, las declaraciones eran planillas enviadas por correo, que Nómina volvía a tipear.
 
 18
-00:02:07,190 --> 00:02:12,083
+00:02:06,840 --> 00:02:11,733
 La facultad llevaba su propia cuenta, y Finanzas veía las horas solo después del día de pago.
 
 19
-00:02:13,583 --> 00:02:18,028
+00:02:13,233 --> 00:02:17,678
 Cuando la universidad creó una app de declaraciones, el diseño de siempre estaba listo:
 
 20
-00:02:18,728 --> 00:02:25,789
+00:02:18,378 --> 00:02:25,439
 la app en su propia base de datos, un pipeline que copia cada cambio a una plataforma analítica, y reportes sobre la copia.
 
 21
-00:02:27,089 --> 00:02:33,326
+00:02:26,739 --> 00:02:32,976
 Dos plataformas, un pipeline entre ellas, dos juegos de permisos y una copia siempre un poco atrasada.
 
 22
-00:02:37,226 --> 00:02:41,582
+00:02:36,876 --> 00:02:41,232
 Noor, la arquitecta de datos, eligió en cambio una copia en una plataforma.
 
 23
-00:02:42,282 --> 00:02:46,783
+00:02:41,932 --> 00:02:46,433
 La app de declaraciones está hecha sobre Lakebase, la base de datos Postgres de Databricks.
 
 24
-00:02:47,883 --> 00:02:53,208
+00:02:47,533 --> 00:02:52,858
 Linh escribe cada declaración una vez, como fila, y su coordinación la aprueba en esa misma fila.
 
 25
-00:02:54,508 --> 00:03:02,742
+00:02:54,158 --> 00:03:02,392
 Postgres atiende a la app. La plataforma guarda las mismas filas en una segunda forma para análisis, y el lakehouse las lee sin frenarla.
 
 26
-00:03:04,242 --> 00:03:10,274
+00:03:03,892 --> 00:03:09,924
 La lista de Nómina de declaraciones pendientes y el proceso que arma las horas a pagar leen esa copia.
 
 27
-00:03:10,974 --> 00:03:16,145
+00:03:10,624 --> 00:03:15,795
 También el costo de la docencia ocasional de Finanzas, y los tres leen a través de Unity Catalog.
 
 28
-00:03:17,645 --> 00:03:20,872
+00:03:17,295 --> 00:03:20,522
 Cada tabla tiene un solo escritor: la app escribe las declaraciones.
 
 29
-00:03:21,572 --> 00:03:29,270
+00:03:21,222 --> 00:03:28,920
 El lakehouse escribe los contratos del sistema de RR. HH., y una copia va a la app, que valida cada declaración con su contrato.
 
 30
-00:03:30,770 --> 00:03:35,320
+00:03:30,420 --> 00:03:34,970
 Como en el libro de Ámsterdam, una declaración se escribe una vez, y se lee donde se escribe.
 
 31
-00:03:39,220 --> 00:03:44,567
+00:03:38,870 --> 00:03:44,217
 Lo que desaparece: el pipeline, la segunda base de datos y el trabajo de mantener dos copias sincronizadas.
 
 32
-00:03:45,867 --> 00:03:51,000
+00:03:45,517 --> 00:03:50,650
 Los servicios de integración que corrían entre plataformas separadas se juntan en una sola.
 
 33
-00:03:52,500 --> 00:04:00,392
+00:03:52,150 --> 00:04:00,042
 Un catálogo gobierna quién puede leer las declaraciones para análisis, con los mismos permisos, linaje y auditoría que las demás tablas.
 
 34
-00:04:01,692 --> 00:04:07,923
+00:04:01,342 --> 00:04:07,573
 ¿Qué se sigue moviendo? Nómina paga desde un sistema de nómina que la universidad compra, y que no está en la plataforma.
 
 35
-00:04:08,623 --> 00:04:15,004
+00:04:08,273 --> 00:04:14,654
 Así que en cada nómina, las horas a pagar salen de la plataforma antes del mediodía del martes, bajo un contrato con Nómina.
 
 36
-00:04:16,304 --> 00:04:19,974
+00:04:15,954 --> 00:04:19,624
 Se mueve una sola cosa, a propósito, en vez de una copia de todo.
 
 37
-00:04:21,474 --> 00:04:25,236
+00:04:21,124 --> 00:04:24,886
 La noche en que falla llega después, en «Una plataforma que se vigila sola».
 
 38
-00:04:28,736 --> 00:04:30,073
+00:04:28,386 --> 00:04:29,723
 Entonces, ¿qué conviene elegir?
 
 39
-00:04:30,773 --> 00:04:36,195
+00:04:30,423 --> 00:04:35,845
 Guarda una sola copia donde puedas, y mueve datos solo cuando quien los lee de verdad los necesita en otro lugar.
 
 40
-00:04:37,495 --> 00:04:41,089
+00:04:37,145 --> 00:04:40,739
 Decide qué sistema escribe cada tabla, y deja que los demás la lean.
 
 41
-00:04:42,389 --> 00:04:50,325
+00:04:42,039 --> 00:04:49,975
 Si un sistema comprado guarda su copia, acuerda el contrato en esa interfaz, como mostró «Mover es fácil, acordar es el trabajo».
 
 42
-00:04:51,625 --> 00:04:57,807
+00:04:51,275 --> 00:04:57,457
 «Las dos cosas a la vez» mostró una base de datos que escribe y lee. Aquí, una sola copia sirve a toda una plataforma.
 
 43
-00:04:59,307 --> 00:05:02,592
+00:04:58,957 --> 00:05:02,242
 Ya hay estándares para esto, así que no reinventes la rueda.
 
 44
-00:05:03,292 --> 00:05:07,990
+00:05:02,942 --> 00:05:07,640
 Investiga, adapta, implementa e itera, partiendo de la documentación oficial.
 
 45
-00:05:11,890 --> 00:05:18,519
+00:05:11,540 --> 00:05:18,169
 En Ámsterdam, un pago pasó a ser una línea movida en un solo libro, y el mismo libro mostraba lo que tenía cada uno.
 
 46
-00:05:20,019 --> 00:05:27,965
+00:05:19,669 --> 00:05:27,615
 En la universidad, la declaración de Linh es una fila: ella la escribe, su coordinación la aprueba, Nómina la paga y Finanzas la cuenta.
 
 47
-00:05:29,465 --> 00:05:37,252
+00:05:29,115 --> 00:05:36,902
 Hoy cobran 856 personas con contrato ocasional, desde filas como la suya, y ningún equipo tuvo que copiar una declaración.
 
 48
-00:05:38,952 --> 00:05:40,993
+00:05:38,602 --> 00:05:40,643
 Guarda una copia, gobernada una vez.

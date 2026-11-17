@@ -20,7 +20,10 @@
     ["\\bUrzúa\\b", "Oor-soo-ah"],
     ["\\bJun\\b", "Joon"],
     ["\\bNoor\\b", "Nuur"],
-    ["\\bA I\\b", "AI"]
+    ["\\bA I\\b", "AI"],
+    ["\\bNovak\\b", "Noh-vak"],
+    ["\\bDAMA\\b", "Dah-ma"],
+    ["\\bYusuf\\b", "Yoosoof"]
   ],
   "story": [
     "rescue"

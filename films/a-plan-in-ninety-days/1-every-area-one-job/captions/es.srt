@@ -87,201 +87,201 @@ Nadie solo perforó, los curó y los alimentó. Cada parte tuvo a alguien que la
 El trabajo de una gestora de datos es más calmo, pero con la misma forma.
 
 23
-00:02:38,072 --> 00:02:45,573
+00:02:38,072 --> 00:02:45,570
 Helena Novak empieza en una universidad con cuarenta y seis solicitudes, de todas las áreas de datos, y alguien esperando cada una.
 
 24
-00:02:47,273 --> 00:02:53,077
+00:02:47,270 --> 00:02:53,074
 Para el viernes tiene un plan para sus primeros noventa días, en tres carriles, que avanzan lado a lado.
 
 25
-00:02:54,577 --> 00:02:57,275
+00:02:54,574 --> 00:02:57,272
 Y todos los que esperan saben en qué punto está su solicitud.
 
 26
-00:03:05,375 --> 00:03:12,559
+00:03:05,372 --> 00:03:12,556
 Estas películas siguen el primer año de una gestora de datos: todas las áreas de datos a la vez, y el trabajo de gestión alrededor.
 
 27
-00:03:14,259 --> 00:03:19,522
+00:03:14,256 --> 00:03:19,519
 Lunes 1 de febrero de 2027, dentro de un año, en la universidad.
 
 28
-00:03:21,222 --> 00:03:27,739
+00:03:21,219 --> 00:03:27,736
 Helena Novak empieza como su gestora de datos. Ha sido arquitecta, líder de datos y dueña de producto.
 
 29
-00:03:29,239 --> 00:03:33,647
+00:03:29,236 --> 00:03:33,644
 Hay cuarenta y seis solicitudes abiertas, en el registro y en los correos del equipo.
 
 30
-00:03:35,347 --> 00:03:39,286
+00:03:35,344 --> 00:03:39,283
 La más antigua espera desde el 14 de agosto de 2026.
 
 31
-00:03:40,786 --> 00:03:46,813
+00:03:40,783 --> 00:03:46,810
 Un informe para Planificación, un arreglo a la lista del personal, acceso para un investigador: alguien espera cada una.
 
 32
-00:03:48,513 --> 00:03:53,637
+00:03:48,510 --> 00:03:53,634
 Es tentador empezar por la más antigua, o por la que más se oye, o cambiarlo todo de una vez.
 
 33
-00:03:55,337 --> 00:03:59,787
+00:03:55,334 --> 00:03:59,784
 Helena no hace nada de eso todavía. Primero las ordena, para ver el trabajo entero.
 
 34
-00:04:02,487 --> 00:04:10,552
+00:04:02,484 --> 00:04:10,648
 Quienes gestionan datos comparten un mapa del trabajo: la rueda del DAMA-DMBOK, el cuerpo de conocimiento de la Data Management Association.
 
 35
-00:04:12,252 --> 00:04:19,302
+00:04:12,348 --> 00:04:19,398
 El gobierno de datos está en el centro, con diez áreas alrededor, de la arquitectura y el modelado a la calidad y la seguridad.
 
 36
-00:04:21,202 --> 00:04:24,918
+00:04:21,298 --> 00:04:25,014
 Helena pone cada solicitud en la rueda, donde está la mayor parte de su trabajo.
 
 37
-00:04:26,418 --> 00:04:33,091
+00:04:26,514 --> 00:04:33,187
 Almacén de datos e inteligencia de negocio: diez. Calidad de datos: siete. Seguridad de datos: cinco.
 
 38
-00:04:34,791 --> 00:04:41,048
+00:04:34,887 --> 00:04:41,144
 Luego gobierno e integración, cuatro cada una, y tres o menos en cada una de las demás: cuarenta y cuatro en total.
 
 39
-00:04:42,748 --> 00:04:49,915
+00:04:42,844 --> 00:04:50,011
 Dos quedan junto a la rueda: un agente para preguntas de horarios, y un modelo de pronóstico, que este sitio aún no enseña.
 
 40
-00:04:51,615 --> 00:04:58,899
+00:04:51,711 --> 00:04:58,995
 La mayoría toca tres o cuatro áreas: un informe nuevo necesita sus datos modelados, revisados en calidad y protegidos.
 
 41
-00:05:00,799 --> 00:05:06,750
+00:05:00,895 --> 00:05:06,846
 Así que ninguna solicitud es de otro. Las áreas son un solo sistema, y el trabajo las abarca todas.
 
 42
-00:05:08,650 --> 00:05:11,064
+00:05:08,746 --> 00:05:11,160
 Las otras películas del sitio profundizan en cada área.
 
 43
-00:05:12,364 --> 00:05:18,991
+00:05:12,460 --> 00:05:19,087
 De las palabras a los datos en modelado, Apto para su uso en calidad, El mismo, en todas partes en datos maestros, y más.
 
 44
-00:05:21,691 --> 00:05:25,513
+00:05:21,787 --> 00:05:25,609
 Nadie es experto en las once áreas, tampoco Helena.
 
 45
-00:05:27,013 --> 00:05:34,039
+00:05:27,109 --> 00:05:34,135
 Y su trabajo incluye lo que hace toda gerencia: estrategia, dinero, riesgo, personas, partes interesadas y entrega.
 
 46
-00:05:35,939 --> 00:05:37,797
+00:05:36,035 --> 00:05:37,893
 Así que busca quién domina cada una.
 
 47
-00:05:39,097 --> 00:05:45,819
+00:05:39,193 --> 00:05:45,915
 Noor, la arquitecta de datos, en arquitectura y modelado. Sam, en la plataforma, el almacenamiento y la integración.
 
 48
-00:05:47,319 --> 00:05:52,795
+00:05:47,415 --> 00:05:52,816
 Jun, en el almacén y sus informes. Yusuf, en gobierno, metadatos y calidad.
 
 49
-00:05:54,295 --> 00:05:57,430
+00:05:54,316 --> 00:05:57,451
 Donde nadie del equipo domina un área, también lo anota.
 
 50
-00:05:59,130 --> 00:06:05,085
+00:05:59,151 --> 00:06:05,106
 Su parte es ver las áreas como un solo sistema, saber quién domina cada una y decidir por dónde empezar.
 
 51
-00:06:06,985 --> 00:06:11,719
+00:06:07,006 --> 00:06:11,740
 La habilidad generalista, ver el todo, tiene su propia película: Muchos roles, una sola mirada.
 
 52
-00:06:14,419 --> 00:06:22,799
+00:06:14,440 --> 00:06:22,820
 Para sus tres primeros meses, toma la forma del libro de Michael Watkins, Los primeros 90 días: aprender rápido y lograr victorias pronto.
 
 53
-00:06:24,499 --> 00:06:29,799
+00:06:24,520 --> 00:06:29,820
 Su plan tiene tres carriles, lado a lado: personas, estrategia y operaciones.
 
 54
-00:06:31,499 --> 00:06:36,245
+00:06:31,520 --> 00:06:36,266
 Personas, las doce semanas: el equipo, los dueños de los datos y quienes los usan.
 
 55
-00:06:37,745 --> 00:06:43,198
+00:06:37,766 --> 00:06:43,219
 Estrategia, en tres pasos: descubrir lo que hay, definir lo que debería haber y planificar cómo llegar.
 
 56
-00:06:44,698 --> 00:06:51,425
+00:06:44,719 --> 00:06:51,446
 Cada paso termina en una fecha que se le puede exigir: 15 de marzo, 5 de abril y 26 de abril.
 
 57
-00:06:53,125 --> 00:06:56,198
+00:06:53,146 --> 00:06:56,219
 Operaciones sostiene el trabajo de hoy mientras ella aprende.
 
 58
-00:06:57,498 --> 00:07:05,774
+00:06:57,519 --> 00:07:05,795
 Las dos primeras semanas, lo urgente. Desde el 15 de febrero, entregas en sprints de dos semanas, con los procedimientos actuales.
 
 59
-00:07:07,474 --> 00:07:12,478
+00:07:07,495 --> 00:07:12,499
 Solo en la semana seis propone mejores formas, y las prueba de la semana nueve a la doce.
 
 60
-00:07:14,178 --> 00:07:18,088
+00:07:14,199 --> 00:07:18,109
 No cambies todo el primer día, y no esperes noventa días para ayudar.
 
 61
-00:07:19,988 --> 00:07:25,005
+00:07:20,009 --> 00:07:25,026
 En la mina, las grandes perforadoras tardaron semanas, pero la comida bajaba siempre por el agujero estrecho.
 
 62
-00:07:27,705 --> 00:07:30,206
+00:07:27,726 --> 00:07:30,227
 El viernes, el plan cabe en una página.
 
 63
-00:07:31,706 --> 00:07:36,560
+00:07:31,727 --> 00:07:36,581
 Se lo muestra a David Mensah, el vicerrector adjunto, y luego a su equipo.
 
 64
-00:07:38,060 --> 00:07:42,330
+00:07:38,081 --> 00:07:42,351
 No promete arreglos antes de escuchar, y sí fechas que se le pueden exigir.
 
 65
-00:07:44,030 --> 00:07:50,233
+00:07:44,051 --> 00:07:50,254
 Quien espera una solicitud sabe en qué punto está, y al final de los noventa días, cada una tiene respuesta.
 
 66
-00:07:52,133 --> 00:07:57,496
+00:07:52,154 --> 00:07:57,517
 En Atacama, cada parte del rescate tuvo a alguien que la conocía, y los treinta y tres subieron.
 
 67
-00:07:59,396 --> 00:08:05,725
+00:07:59,417 --> 00:08:05,746
 Los noventa días de Helena funcionan igual: todas las áreas son un solo trabajo, y nadie espera sin respuesta.
 
 68
-00:08:07,425 --> 00:08:10,294
+00:08:07,446 --> 00:08:10,315
 El lunes, mantén en marcha el trabajo de hoy mientras aprendes.
 
 69
-00:08:11,394 --> 00:08:15,515
+00:08:11,415 --> 00:08:15,536
 Pon tu plan en una página, en tres carriles, con fechas que se te puedan exigir.
 
 70
-00:08:16,615 --> 00:08:20,013
+00:08:16,636 --> 00:08:20,034
 Aprende las palabras de cada área, y quién de tu equipo domina cada una.
 
 71
-00:08:21,313 --> 00:08:24,407
+00:08:21,334 --> 00:08:24,428
 Lo primero que hace Helena es escuchar. Esa es la próxima película.
 
 72
-00:08:25,907 --> 00:08:29,897
+00:08:25,928 --> 00:08:29,918
 Ve las áreas como un solo trabajo; planea noventa días en tres carriles.

@@ -19,305 +19,305 @@ Ocho o diez de ellas, que se conocen y confían entre sí, forman un stokvel: un
 En cada reunión, todas ponen la misma suma en un fondo común, y una se lo lleva entero, por turnos, hasta que a todas les toca.
 
 6
-00:00:36,079 --> 00:00:41,594
+00:00:36,079 --> 00:00:41,534
 Pocos sudafricanos negros tenían cuenta bancaria entonces, ni por décadas después, bajo el apartheid.
 
 7
-00:00:43,094 --> 00:00:51,169
+00:00:43,034 --> 00:00:51,109
 Los bancos no les prestaban: su paga era baja e irregular, y la ley les impedía tener bienes que un banco aceptara como garantía.
 
 8
-00:00:52,669 --> 00:01:00,909
+00:00:52,609 --> 00:01:00,849
 Sin dónde ahorrar seguro ni a quién pedir prestado, un funeral, un trimestre de escuela o un sueldo perdido podían arruinar a una familia.
 
 9
-00:01:02,809 --> 00:01:08,902
+00:01:02,749 --> 00:01:08,842
 Las familias necesitaban una forma de ahorrar y pedir prestado. No esperaron a un banco: construyeron la suya, hecha de confianza.
 
 10
-00:01:10,602 --> 00:01:19,077
+00:01:10,542 --> 00:01:19,017
 Cada grupo acuerda sus reglas: cuánto pagar, cada cuánto reunirse, a quién le toca después y qué pasa si alguien no puede pagar.
 
 11
-00:01:20,777 --> 00:01:27,827
+00:01:20,717 --> 00:01:27,767
 Cada una responde ante las demás, y casi nadie deja de pagar: ser de confianza vale más que cualquier fondo.
 
 12
-00:01:29,527 --> 00:01:34,597
+00:01:29,467 --> 00:01:34,537
 El tipo más común, la sociedad funeraria, sostiene a la familia de una socia durante un funeral.
 
 13
-00:01:36,097 --> 00:01:39,472
+00:01:36,037 --> 00:01:39,412
 Y cuando a una socia le llegan tiempos difíciles, el grupo la sostiene.
 
 14
-00:01:41,372 --> 00:01:49,580
+00:01:41,312 --> 00:01:49,520
 Detrás hay una idea del sur de África, Ubuntu, y un dicho en isiZulu: una persona es persona a través de otras personas.
 
 15
-00:01:51,680 --> 00:01:56,791
+00:01:51,620 --> 00:01:56,731
 Durante décadas, estos grupos fueron el ahorro de muchas familias, su crédito y su red de seguridad.
 
 16
-00:01:58,491 --> 00:02:05,125
+00:01:58,431 --> 00:02:05,065
 Hoy, según la Asociación Nacional de Stokvels, más de 11 millones de sudafricanos pertenecen a uno.
 
 17
-00:02:05,825 --> 00:02:08,782
+00:02:05,765 --> 00:02:08,722
 Juntos, aportan más de 50 000 millones de rands al año.
 
 18
-00:02:10,682 --> 00:02:16,514
+00:02:10,622 --> 00:02:16,454
 Un equipo puede sostener a su gente de la misma forma. Cuando todos aportan, nadie carga el trabajo solo.
 
 19
-00:02:18,214 --> 00:02:21,165
+00:02:18,154 --> 00:02:21,105
 Y cuando alguien tiene que apartarse, el grupo se sostiene.
 
 20
-00:02:29,465 --> 00:02:37,849
+00:02:29,405 --> 00:02:37,837
 En una universidad, dentro de un año, Helena Novak empieza como gestora de datos el lunes 1 de febrero de 2027.
 
 21
-00:02:39,549 --> 00:02:41,848
+00:02:39,537 --> 00:02:41,836
 Antes de juzgar a nadie, observa.
 
 22
-00:02:43,548 --> 00:02:48,614
+00:02:43,536 --> 00:02:48,602
 Cada semana pasa media hora con cada persona: sobre ella, nunca un reporte de estado.
 
 23
-00:02:50,314 --> 00:02:53,726
+00:02:50,302 --> 00:02:53,714
 Le pregunta cómo está, qué le estorba y de qué está orgullosa o orgulloso.
 
 24
-00:02:55,626 --> 00:03:01,104
+00:02:55,614 --> 00:03:01,092
 Luego lee al equipo como un todo: lo que logra en conjunto, y el trabajo de cada persona a su lado.
 
 25
-00:03:01,804 --> 00:03:06,327
+00:03:01,792 --> 00:03:06,315
 Lo mide todo con lo que este equipo hace de verdad, no con lo que hacía su equipo anterior.
 
 26
-00:03:08,427 --> 00:03:11,205
+00:03:08,415 --> 00:03:11,193
 Comparado con su equipo anterior, podría parecer lento.
 
 27
-00:03:11,905 --> 00:03:17,015
+00:03:11,893 --> 00:03:17,003
 Pero este recibe pedidos de once formas distintas y mantiene una plataforma funcionando día y noche.
 
 28
-00:03:18,915 --> 00:03:24,878
+00:03:18,903 --> 00:03:24,866
 Gestionar y liderar son parte de su trabajo, pero para Helena liderar pesa un poco más, siempre.
 
 29
-00:03:25,578 --> 00:03:29,244
+00:03:25,566 --> 00:03:29,232
 Las personas son la primera fortaleza del equipo, así que su bienestar va primero.
 
 30
-00:03:31,344 --> 00:03:38,665
+00:03:31,332 --> 00:03:38,653
 El bienestar no es solo comodidad. A veces alguien necesita más apoyo, una herramienta mejor, ánimo o un empujón.
 
 31
-00:03:39,365 --> 00:03:43,092
+00:03:39,353 --> 00:03:43,080
 Así el equipo sigue trabajando unido, y no se abre una gran brecha.
 
 32
-00:03:45,192 --> 00:03:48,382
+00:03:45,180 --> 00:03:48,370
 En sus primeras semanas, encuentra la brecha que más importa.
 
 33
-00:03:50,082 --> 00:03:54,721
+00:03:50,070 --> 00:03:54,930
 Cada alerta que la plataforma lanza de noche le llega a una sola persona: Sam Okafor.
 
 34
-00:03:56,421 --> 00:04:01,306
+00:03:56,630 --> 00:04:01,515
 Unas sesenta por semana, la mayoría sin necesitar nada, y solo Sam sabe cómo atenderlas.
 
 35
-00:04:03,206 --> 00:04:09,186
+00:04:03,415 --> 00:04:09,395
 Sam no se queja. Pero el equipo se apoya en una sola persona, y esa persona no tiene en quién apoyarse.
 
 36
-00:04:11,886 --> 00:04:18,451
+00:04:12,095 --> 00:04:18,660
 En abril, Ivy Reyes, una analista recién graduada, revisa un modelo que el agente del equipo le redactó.
 
 37
-00:04:19,951 --> 00:04:24,707
+00:04:20,160 --> 00:04:24,916
 Cuenta las horas reservadas como usadas, cuando usadas significa con gente de verdad en el aula.
 
 38
-00:04:26,407 --> 00:04:28,240
+00:04:26,616 --> 00:04:28,449
 Lo detecta, pero por poco.
 
 39
-00:04:29,740 --> 00:04:33,906
+00:04:29,949 --> 00:04:34,115
 En la reunión diaria de la mañana siguiente, lo dice en voz alta: casi lo dejo pasar.
 
 40
-00:04:35,806 --> 00:04:41,497
+00:04:36,015 --> 00:04:41,706
 Nadie la culpa. Jun le da las gracias, y Helena pregunta qué haría más fácil detectarlo la próxima vez.
 
 41
-00:04:43,197 --> 00:04:48,379
+00:04:43,406 --> 00:04:48,588
 La respuesta de Ivy: qué significa usada, escrito en el glosario, para que el próximo borrador parta de ahí.
 
 42
-00:04:50,079 --> 00:04:52,725
+00:04:50,288 --> 00:04:52,934
 Esa semana, dos personas más cuentan lo que casi se les pasa.
 
 43
-00:04:54,625 --> 00:04:58,542
+00:04:54,834 --> 00:04:58,751
 La investigadora Amy Edmondson llama a esto seguridad psicológica.
 
 44
-00:04:59,242 --> 00:05:05,139
+00:04:59,451 --> 00:05:05,348
 Es la creencia compartida de que en el equipo es seguro arriesgarse con los demás, como admitir un error.
 
 45
-00:05:07,039 --> 00:05:13,884
+00:05:07,248 --> 00:05:14,093
 En equipos de hospital que estudió, unas enfermeras hablaban abiertamente de errores con medicamentos y de cómo evitarlos.
 
 46
-00:05:14,584 --> 00:05:16,905
+00:05:14,793 --> 00:05:17,114
 En otros, la gente se los guardaba.
 
 47
-00:05:18,605 --> 00:05:24,585
+00:05:18,814 --> 00:05:24,794
 En 51 equipos de trabajo, los que se sentían más seguros aprendían más, y los que aprendían más rendían mejor.
 
 48
-00:05:26,285 --> 00:05:30,508
+00:05:26,494 --> 00:05:30,717
 Un error dicho en voz alta, y agradecido, es uno del que aprende todo el equipo.
 
 49
-00:05:33,208 --> 00:05:38,410
+00:05:33,417 --> 00:05:38,619
 Para junio, las alertas de la plataforma bajan a unas doce por semana, y cada una necesita a alguien.
 
 50
-00:05:40,310 --> 00:05:49,199
+00:05:40,519 --> 00:05:49,408
 Así que el equipo trabaja en parejas. En junio, Sam trabaja con Noor, Jun y Erin Walsh, la ingeniera de plataforma, alerta por alerta.
 
 51
-00:05:51,099 --> 00:05:58,086
+00:05:51,308 --> 00:05:58,295
 Cada vez que atienden una juntos, anotan cómo: una guía, paso a paso, que cualquiera del equipo puede seguir.
 
 52
-00:05:59,986 --> 00:06:04,112
+00:06:00,195 --> 00:06:04,321
 A fines de junio, cuatro personas pueden atender cada alerta nocturna, no una.
 
 53
-00:06:06,012 --> 00:06:11,005
+00:06:06,221 --> 00:06:11,214
 Desde el lunes 5 de julio, se reparten las noches por turnos, una semana de cada cuatro.
 
 54
-00:06:12,905 --> 00:06:18,947
+00:06:13,114 --> 00:06:19,156
 Hasta entonces, Sam atendía solo todas las noches. Ahora, tres semanas de cada cuatro, su teléfono queda en silencio.
 
 55
-00:06:20,847 --> 00:06:25,014
+00:06:21,056 --> 00:06:25,223
 En todo el equipo, ahora dos personas pueden hacer cada trabajo que más importa.
 
 56
-00:06:26,914 --> 00:06:33,104
+00:06:27,123 --> 00:06:33,313
 Desmond Tutu escribió que una persona con Ubuntu no se siente amenazada porque otros sean capaces y buenos.
 
 57
-00:06:35,204 --> 00:06:38,671
+00:06:35,413 --> 00:06:38,880
 Sam enseñó sus noches a tres personas, y no perdió nada con ello.
 
 58
-00:06:41,371 --> 00:06:47,483
+00:06:41,580 --> 00:06:47,692
 El domingo 1 de agosto, internan a la madre de Sam en el hospital, y él llama a Helena esa noche.
 
 59
-00:06:49,183 --> 00:06:51,896
+00:06:49,392 --> 00:06:52,105
 Ella le dice que vaya, y que apague el teléfono.
 
 60
-00:06:53,596 --> 00:06:57,390
+00:06:53,805 --> 00:06:57,599
 Es su semana de turno, y Jun y Erin la cubren entre los dos.
 
 61
-00:06:59,090 --> 00:07:06,139
+00:06:59,299 --> 00:07:06,348
 Helena mueve el resto de su trabajo: la actualización de la plataforma espera dos semanas, y avisa a quienes la pidieron, con nueva fecha.
 
 62
-00:07:07,839 --> 00:07:12,849
+00:07:08,048 --> 00:07:13,058
 Dos veces en esa quincena llega una alerta de noche. Las dos se atienden con las guías.
 
 63
-00:07:14,749 --> 00:07:15,934
+00:07:14,958 --> 00:07:16,143
 Nadie lo llama.
 
 64
-00:07:18,234 --> 00:07:25,074
+00:07:18,443 --> 00:07:25,283
 Cuando Sam vuelve el lunes 16 de agosto, la primera pregunta de Helena es por su madre, no por la plataforma.
 
 65
-00:07:26,974 --> 00:07:32,903
+00:07:27,183 --> 00:07:33,112
 Como un stokvel que sostiene a una socia en tiempos difíciles, el equipo sostuvo a Sam, porque todos habían aportado.
 
 66
-00:07:35,603 --> 00:07:39,807
+00:07:35,812 --> 00:07:40,016
 Cada semana siguen las reuniones uno a uno, sobre cada persona, no sobre sus tareas.
 
 67
-00:07:41,307 --> 00:07:48,157
+00:07:41,516 --> 00:07:48,366
 En septiembre, Jun dice que está bien, pero enseña a dos personas, construye modelos y cubre su turno.
 
 68
-00:07:49,857 --> 00:07:56,428
+00:07:50,066 --> 00:07:56,637
 Helena pasa uno de sus proyectos a noviembre, y avisa a quienes lo pidieron, antes de que la carga lo desgaste.
 
 69
-00:07:58,128 --> 00:08:04,363
+00:07:58,337 --> 00:08:04,572
 En la revisión trimestral de octubre, da el mérito al equipo, con nombres, y responde ella por lo que se retrasó.
 
 70
-00:08:06,063 --> 00:08:08,805
+00:08:06,272 --> 00:08:09,014
 Primero el equipo, luego cada persona, luego ella.
 
 71
-00:08:10,905 --> 00:08:18,791
+00:08:11,114 --> 00:08:19,000
 Filósofos en Sudáfrica, entre ellos Mogobe Ramose y Thaddeus Metz, han escrito Ubuntu como una ética.
 
 72
-00:08:20,291 --> 00:08:26,188
+00:08:20,500 --> 00:08:26,397
 Metz la lee como dos cosas unidas: compartir la vida con otros, y que te importe cómo les va.
 
 73
-00:08:28,088 --> 00:08:31,885
+00:08:28,297 --> 00:08:32,094
 El equipo de Helena comparte el trabajo, y le importa cómo está cada uno.
 
 74
-00:08:34,585 --> 00:08:41,896
+00:08:34,794 --> 00:08:42,105
 En un stokvel, todas aportan, y a todas les llega su turno. Cuando a una le llegan tiempos difíciles, el grupo la sostiene.
 
 75
-00:08:43,796 --> 00:08:50,017
+00:08:44,005 --> 00:08:50,226
 El equipo de Helena hizo lo mismo: cuatro personas aprendieron las noches, y cuando Sam tuvo que irse, nadie lo llamó.
 
 76
-00:08:51,917 --> 00:08:57,351
+00:08:52,126 --> 00:08:57,560
 El lunes, trabaja en parejas hasta que dos personas puedan hacer cada trabajo que más importa, y anota cómo.
 
 77
-00:08:58,851 --> 00:09:02,157
+00:08:59,060 --> 00:09:02,366
 Protege las licencias: cuando alguien no está, nadie lo llama.
 
 78
-00:09:03,657 --> 00:09:06,058
+00:09:03,866 --> 00:09:06,267
 Agradece a quien dice: me equivoqué.
 
 79
-00:09:07,558 --> 00:09:10,954
+00:09:07,767 --> 00:09:11,163
 En las reuniones uno a uno, pregunta cómo están, no solo qué hicieron.
 
 80
-00:09:12,454 --> 00:09:16,961
+00:09:12,663 --> 00:09:17,170
 Y si recién llegas, observa primero: juzga el trabajo compartido del equipo antes que el de nadie.
 
 81
-00:09:18,661 --> 00:09:21,592
+00:09:18,870 --> 00:09:21,801
 Nadie solo, nadie el único que sabe.

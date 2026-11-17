@@ -15,6 +15,7 @@
     ["\\bdbt\\b", "dee bee tee"],
     ["\\bSQL\\b", "sequel"],
     ["\\bDuckDB\\b", "duck dee bee"],
-    ["\\bPriya\\b", "Pree-ya"]
+    ["\\bPriya\\b", "Pree-yah"],
+    ["\\bNoor\\b", "Nuur"]
   ]
 }

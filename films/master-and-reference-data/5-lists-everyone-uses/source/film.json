@@ -11,7 +11,7 @@
   "poster": ["codes", "yyz", -0.3],
   "story": ["codes"],
   "say": [
-    ["\\bNguyen\\b", "Nwin"],
+    ["\\bNguyen\\b", "Win"],
     ["\\bLinh's\\b", "Lin's"],
     ["\\bLinh\\b", "Lin"],
     ["\\bHR's\\b", "H R's"],
@@ -19,7 +19,8 @@
     ["\\bYYZ\\b", "Y Y Z"],
     ["\\bSGN\\b", "S G N"],
     ["\\bENR\\b", "E N R"],
-    ["\\bCAS\\b", "C A S"],
-    ["\\bVN\\b", "V N"]
+    ["\\bCAS\\b", "C Eh S"],
+    ["\\bVN\\b", "V N"],
+    ["\\bJun\\b", "Joon"]
   ]
 }

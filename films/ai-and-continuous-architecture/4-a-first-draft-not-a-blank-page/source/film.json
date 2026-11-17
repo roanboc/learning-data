@@ -10,8 +10,8 @@
   ],
   "poster": ["found", "socle", 4.2],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bNabopolassar's\\b", "Nabbo-poe-lassar's"],
     ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
     ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],

@@ -10,8 +10,8 @@
   ],
   "poster": ["brick", "reads", 3.0],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bInés\\b", "Ee-ness"],
     ["\\bNabopolassar's\\b", "Nabbo-poe-lassar's"],
     ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],

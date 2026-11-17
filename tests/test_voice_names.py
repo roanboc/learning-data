@@ -98,6 +98,59 @@ class VoiceNames(unittest.TestCase):
         (d / "film.json").write_text(json.dumps({"key": "a-film", "say": [["\\bA I\\b", "AI"]]}), encoding="utf-8")
         self.assertEqual(C.voice_names(d / "src" / "narration.js"), [])
 
+    def test_a_name_the_films_share_is_said_one_way(self):
+        line = [{"id": "who", "gap": 0.8, "text": "Anil runs the sales team."}]
+        out = self.faults(line)
+        self.assertEqual(len(out), 1)
+        self.assertIn('one/who: the voice would read "Anil"', out[0])
+        self.assertIn('spell it "Unnil"', out[0])
+        self.assertEqual(self.faults(line, [["\\bAnil\\b", "Unnil"]]), [])
+        # a spelling set aside on 17 November 2026, which the voice says another way
+        out = self.faults(line, [["\\bAnil\\b", "Ah-neel"]])
+        self.assertEqual(len(out), 1)
+        self.assertIn('the voice would read "Ah-neel"', out[0])
+
+    def test_every_time_a_line_names_it(self):
+        # a line's own "say" that spells the name once, and another way the second time, still names it twice
+        out = self.faults([{"id": "two", "gap": 0.8, "text": "Anil asked, and Anil waited.", "say": "Unnil asked, and Aneel waited."}])
+        self.assertEqual(len(out), 1)
+        self.assertIn("names Anil 2 time(s) and gives the voice \"Unnil\" 1", out[0])
+        self.assertEqual(self.faults([{"id": "two", "gap": 0.8, "text": "Anil asked, and Anil waited.", "say": "Unnil asked, and unnil waited."}]), [])
+
+    def test_the_films_still_to_say_a_name_one_way_are_left_out_for_that_name_only(self):
+        d = film([{"id": "who", "gap": 0.8, "text": "Noor and Anil agree."}])
+        self.made.append(d)
+        narr = d / "src" / "narration.js"
+        self.assertEqual(len(C.voice_names(narr)), 2)
+        out = C.voice_names(narr, later=["Noor"])
+        self.assertEqual(len(out), 1)
+        self.assertIn('"Anil"', out[0])
+        self.assertEqual(C.voice_names(narr, later=["Noor", "Anil"]), [])
+
+    def test_no_word_is_respelled_two_ways(self):
+        a = film([{"id": "a", "gap": 0.8, "text": "Ingest it with Zerobus."}], [["\\bZerobus\\b", "Zero bus"]])
+        b = film([{"id": "b", "gap": 0.8, "text": "Zerobus writes the rows."}], [["\\bZerobus\\b", "Zero-bus"]])
+        c = film([{"id": "c", "gap": 0.8, "text": "Zerobus writes the rows."}], [["\\bZerobus\\b", "Zeerobus"]])
+        unused = film([{"id": "d", "gap": 0.8, "text": "Nothing to respell here."}], [["\\bZerobus\\b", "Zed bus"]])
+        self.made += [a, b, c, unused]
+        voices = [x / "src" / "narration.js" for x in (a, b, unused)]
+        # a hyphen gives the voice the same sounds as a space, and a pair that changes no line is not read
+        self.assertEqual(C.voice_respellings(voices), [])
+        out = C.voice_respellings(voices + [c / "src" / "narration.js"])
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0][0], "Zerobus")
+        self.assertEqual(sorted(out[0][1]), ["zeerobus", "zero bus"])
+        # a film still to voice again for the name keeps its old respelling until then
+        later = {C.voice_film(c / "src" / "narration.js"): ["Zerobus"]}
+        self.assertEqual(C.voice_respellings(voices + [c / "src" / "narration.js"], later), [])
+
+    def test_the_list_of_films_still_to_fix_names_real_films_and_names(self):
+        later = json.loads(C.VOICE_LATER.read_text(encoding="utf-8"))
+        for film_dir, names in later.items():
+            self.assertTrue((ROOT / "films" / film_dir / "source" / "src" / "narration.js").exists(), film_dir)
+            for n in names:
+                self.assertTrue(any(r[0].search(n) for r in C.VOICE_NAMES), f"{film_dir}: {n}")
+
     def test_a_tts_that_only_runs_a_series_tool_uses_the_shared_voice_tools_words(self):
         self.assertIn((r"\bdbt\b", "D B T"), C.tool_respellings(ROOT / "films/platform-and-solution-architecture/8-built-to-change/source"))
         self.assertNotIn("A I", [b for _, b in C.tool_respellings(ROOT / "films/platform-and-solution-architecture/8-built-to-change/source")])

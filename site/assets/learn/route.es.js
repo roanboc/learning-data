@@ -721,6 +721,19 @@ window.LD_ROUTE = {
    "line": "Las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas.",
    "items": [
     {
+     "id": "people-first",
+     "kind": "series",
+     "title": "Las personas primero",
+     "href": "people-first/",
+     "poster": "wellbeing-in-the-work-poster.jpg",
+     "kicker": "Serie · 1 de 4 películas",
+     "len": "10 min",
+     "min": 10.0,
+     "films": [
+      "ld-wellbeing-in-the-work"
+     ]
+    },
+    {
      "id": "the-new-skills",
      "kind": "series",
      "title": "Las nuevas habilidades",
@@ -781,12 +794,6 @@ window.LD_ROUTE = {
       "ld-when-someone-falls-behind",
       "ld-growing-people"
      ]
-    },
-    {
-     "id": "people-first",
-     "soon": true,
-     "title": "Las personas primero",
-     "kicker": "Serie · 4 películas"
     }
    ]
   }

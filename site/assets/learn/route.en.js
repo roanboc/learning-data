@@ -720,6 +720,19 @@ window.LD_ROUTE = {
    "line": "The skills data work needs now, and leading the people who do it: seeing the whole, working beside agents, listening, explaining, saying no well, leading a team, owning an outcome, and growing people.",
    "items": [
     {
+     "id": "people-first",
+     "kind": "series",
+     "title": "People first",
+     "href": "people-first/",
+     "poster": "wellbeing-in-the-work-poster.jpg",
+     "kicker": "Series · 1 of 4 films",
+     "len": "10 min",
+     "min": 10.0,
+     "films": [
+      "ld-wellbeing-in-the-work"
+     ]
+    },
+    {
      "id": "the-new-skills",
      "kind": "series",
      "title": "The new skills",
@@ -780,12 +793,6 @@ window.LD_ROUTE = {
       "ld-when-someone-falls-behind",
       "ld-growing-people"
      ]
-    },
-    {
-     "id": "people-first",
-     "soon": true,
-     "title": "People first",
-     "kicker": "Series · 4 films"
     }
    ]
   }

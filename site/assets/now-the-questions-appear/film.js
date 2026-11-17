@@ -432,6 +432,7 @@ const NARR={
  {"id":"back","gap":0.8,"text":"Each goes back to whoever asked for it, with one question: what would you decide with it?"}]},
 "down":{"name":"Down from a goal","lead":1.0,"tail":1.0,"vo":[
  {"id":"way","gap":0.8,"text":"Now the other way, from the top. A goal implies decisions. A decision needs questions answered. A question needs a measure."},
+ {"id":"gqm","gap":0.8,"text":"It's Goal, Question, Metric, a method from the 1980s, with a decision added.","say":"It's Goal, Question, Metric, a method from the nineteen eighties, with a decision added."},
  {"id":"better","gap":0.8,"text":"Take replacing assets before they fail. Its outcome said only a better network, and nobody could check that."},
  {"id":"measure","gap":0.8,"text":"Its decision is which lines to renew first, and its question is the one the planners asked."},
  {"id":"unit","gap":0.8,"text":"The measure: interruptions per customer, per year, line by line."},
@@ -466,7 +467,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"But a measure is only as true as the data beneath it, and the rules that data must keep. Next: where each rule belongs."}]}
 };
 
-const VODUR={"kerala/coast": 5.59, "kerala/markets": 6.796, "kerala/blind": 4.607, "kerala/dump": 9.393, "kerala/phones": 9.74, "kerala/act": 8.029, "kerala/time": 1.823, "backlog/note": 2.557, "backlog/pile": 8.843, "backlog/test": 8.011, "up/first": 7.71, "up/climb": 8.073, "up/lobby": 5.617, "up/live": 5.43, "half/all": 8.823, "half/none": 8.002, "half/back": 4.629, "down/way": 7.779, "down/better": 6.393, "down/measure": 5.526, "down/unit": 3.68, "down/meet": 5.108, "missing/afford": 5.287, "missing/behind": 7.747, "missing/register": 3.342, "missing/farah": 6.458, "count/two": 5.526, "count/disagree": 3.916, "count/clock": 5.126, "count/define": 8.898, "count/same": 2.458, "home/home": 4.002, "home/homes": 9.004, "home/owner": 5.76, "home/means": 3.102, "build/reports": 6.346, "build/group": 8.809, "build/each": 4.636, "coast/spread": 3.909, "coast/knew": 5.216, "coast/gain": 7.479, "end/confirm": 6.092, "end/answer": 8.913, "end/next": 7.488};
+const VODUR={"kerala/coast": 5.59, "kerala/markets": 6.796, "kerala/blind": 4.607, "kerala/dump": 9.393, "kerala/phones": 9.74, "kerala/act": 8.029, "kerala/time": 1.823, "backlog/note": 2.557, "backlog/pile": 8.843, "backlog/test": 8.011, "up/first": 7.71, "up/climb": 8.073, "up/lobby": 5.617, "up/live": 5.43, "half/all": 8.823, "half/none": 8.002, "half/back": 4.629, "down/way": 7.779, "down/gqm": 4.917, "down/better": 6.393, "down/measure": 5.526, "down/unit": 3.68, "down/meet": 5.108, "missing/afford": 5.287, "missing/behind": 7.747, "missing/register": 3.342, "missing/farah": 6.605, "count/two": 5.526, "count/disagree": 3.916, "count/clock": 5.126, "count/define": 8.898, "count/same": 2.458, "home/home": 4.002, "home/homes": 9.004, "home/owner": 5.76, "home/means": 3.102, "build/reports": 6.346, "build/group": 8.809, "build/each": 4.636, "coast/spread": 3.909, "coast/knew": 5.216, "coast/gain": 7.479, "end/confirm": 6.092, "end/answer": 8.913, "end/next": 7.488};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -477,7 +478,7 @@ const BREATH={
 "backlog":{"hold":{"note":0.7,"pile":0.9}},
 "up":{"hold":{"first":0.8,"climb":1.0,"lobby":0.9}},
 "half":{"hold":{"all":0.8,"none":0.9}},
-"down":{"hold":{"way":0.9,"better":0.9,"unit":1.0},"breathe":3.0},
+"down":{"hold":{"way":0.9,"gqm":0.8,"better":0.9,"unit":1.0},"breathe":3.0},
 "missing":{"hold":{"afford":0.8,"register":1.0}},
 "count":{"hold":{"disagree":0.9,"clock":0.9,"define":0.9}},
 "home":{"hold":{"homes":1.0}},
@@ -2574,16 +2575,24 @@ scene("down",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const tB=c("better"),tMs=c("measure"),tMt=c("meet"),chk=w("meet","can be checked"),mv=ease(fin(t,tB-0.5,1.6)),meet=w("meet","meet at one");
   const X=760,gl=w("better","Take"),oc=w("better","a better network")-0.3,dc=w("measure","Its decision"),qu=w("measure","its question"),me=w("unit","The measure"),rq=w("measure","the planners asked");
   const rows=[w("way","the other way"),w("way","implies decisions"),w("way","needs questions"),w("way","needs a measure")],path=[gl,dc,qu,me];
+  // Goal, Question, Metric (Basili and Weiss, 1984): the rows the method names light as the voice names them, while the decision row
+  // waits, dimmed; then it lights in gold, the step the film adds. The method's name sits over the shape; it leaves, with the gold,
+  // before the shape moves aside
+  const gq=[w("gqm","Goal"),w("gqm","a decision added"),w("gqm","Question"),w("gqm","Metric")],gOut=1-fin(t,tB-0.9,0.5),gDim=fin(t,gq[0]-0.2,0.4)*(1-fin(t,gq[1]-0.1,0.4));
   // the shape, built from the top (the goal comes down from above the frame); then moved aside, small, where the example's path
   // through it lights up as the example is drawn beside it
   ctx.save();ctx.translate(lerp(0,-470,mv),lerp(70,160,mv));const sk=lerp(1,0.46,mv);ctx.translate(960,400);ctx.scale(sk,sk);ctx.translate(-960,-400);
-  D8_TREE.forEach(([n,col,kind,boxes],r)=>boxes.forEach(([x,y,bw,bh],j)=>{const on=j===0?fin(t,path[r],0.5):0,o={size:28,gs:11,deco:mv>0.1?1:0,a:1-0.35*mv*(1-on),hi:on};
+  D8_TREE.forEach(([n,col,kind,boxes],r)=>boxes.forEach(([x,y,bw,bh],j)=>{const on=j===0?fin(t,path[r],0.5):0,lit=fin(t,gq[r]-0.1,0.4)*gOut,dim=r===1?gDim*gOut:0,
+      o={size:28,gs:11,deco:mv>0.1?1:0,a:(1-0.35*mv*(1-on))*(1-0.55*dim),hi:Math.max(on,0.8*lit)};
+    if(r===1&&lit>0.01)glow(ctx,x+bw/2,y+bh/2,bw*0.75,TRUST,0.3*lit);
     if(r>0){const t0=rows[r]-0.2+j*0.08,pb=D8_TREE[r-1][3][r===1?0:r===2?Math.floor(j/2):j],q=clamp((t-t0+0.3)/0.5,0,1);
       if(q>0)arrowTo(ctx,pb[0]+pb[2]/2,pb[1]+pb[3],x+bw/2,y,col,0.7+0.3*on,{p:q,lw:2.5,head:10});
       arrive(ctx,x+bw/2,y+bh/2,t,t0,()=>d8_el(ctx,x,y,bw,bh,n,col,kind,o),{dy:-10});return;}
     const u=clamp((t-rows[0])/1.4,0,1);if(u<=0)return;const yy=lerp(-230,y,1-Math.pow(1-u,3));
     if(u<1){const g=ctx.createLinearGradient(0,yy-300,0,yy);g.addColorStop(0,rgba(col,0));g.addColorStop(1,rgba(col,0.5*(1-u)));ctx.strokeStyle=g;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+bw/2,yy-300);ctx.lineTo(x+bw/2,yy);ctx.stroke();}
     withA(ctx,Math.min(1,u*2.5),()=>d8_el(ctx,x,yy,bw,bh,n,col,kind,o));}));
+  if(gOut>0.01){arrive(ctx,960,55,t,gq[0]-0.3,()=>withA(ctx,gOut,()=>tag(ctx,960,55,"Goal–Question–Metric · 1980s",INK,{align:"center",size:32})),{dy:-8});
+    arrive(ctx,1485,318,t,gq[1]-0.1,()=>withA(ctx,gOut,()=>tag(ctx,1390,318,"+ a decision",TRUST,{size:28})),{dy:8});}
   ctx.restore();
   // one goal, traced down: the outcome nobody could check; the decision, the question and the measure
   arrive(ctx,X+280,178,t,gl,()=>d8_el(ctx,X,130,560,96,"replace assets before they fail",MOT,"goal",{size:30,gs:14}),{dy:-12});

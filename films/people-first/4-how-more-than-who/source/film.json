@@ -1,0 +1,64 @@
+{
+  "key": "how-more-than-who",
+  "title": "How, more than who",
+  "sub": "Film 4 of People first, in Leading data people: how a team works together counts for more than who is in it. Give everyone a turn, disagree about the work and never the person, keep small promises, and write one page on how you work together, in the team's own words.",
+  "howto": "The film is drawn in the module's sunlit plaster: a gorge in the Andes, then the team's room in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans (the team's page), orange is data (the two numbers), green is something done or agreed, and amber a risk (a disagreement that turns to the person).",
+  "src": [
+    "hm_place.js",
+    "hm_bridge.js",
+    "hm_people.js",
+    "hm_uni.js",
+    "hm_scenes.js"
+  ],
+  "poster": [
+    "days",
+    "weave",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bQuehue\\b",
+      "Kehweh"
+    ],
+    [
+      "\\bApurímac\\b",
+      "Ahpooreemahk"
+    ],
+    [
+      "\\bQuechua\\b",
+      "Ketchwa"
+    ],
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahss"
+    ],
+    [
+      "\\bJun's\\b",
+      "Joon's"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
+    ],
+    [
+      "\\bOrtega\\b",
+      "Or-tega"
+    ],
+    [
+      "\\bReyes\\b",
+      "Rayess"
+    ]
+  ],
+  "story": [
+    "days"
+  ],
+  "urgent": []
+}

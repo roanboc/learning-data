@@ -1,6 +1,6 @@
 # How, more than who: questions and assumptions
 
-*Leading data people* · *People first*, film 4 · its pull request is opened once the series is registered on main
+*Leading data people* · *People first*, film 4 of 4 · open, not merged yet, PR #422 · [pull request](https://github.com/roanboc/learning-data/pull/422)
 
 [Watch it on the site](https://data.learn-all.org/people-first/how-more-than-who/), once merged
 

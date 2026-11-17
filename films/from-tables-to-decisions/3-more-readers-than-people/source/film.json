@@ -44,6 +44,14 @@
     [
       "\\bBI\\b",
       "B I"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ],
+    [
+      "\\bKurian\\b",
+      "Coo-rean"
     ]
   ],
   "story": [

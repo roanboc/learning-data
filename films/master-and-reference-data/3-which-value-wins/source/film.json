@@ -11,12 +11,13 @@
   "poster": ["clocks", "plymouth", 4.0],
   "story": ["clocks"],
   "say": [
-    ["\\bNguyễn\\b", "Nwin"],
-    ["\\bNguyen\\b", "Nwin"],
+    ["\\bNguyễn\\b", "Win"],
+    ["\\bNguyen\\b", "Win"],
     ["\\bThị\\b", "Tee"],
     ["\\bLinh's\\b", "Lin's"],
     ["\\bLinh\\b", "Lin"],
     ["\\bHR\\b", "H R"],
-    ["\\bHMS\\b", "H M S"]
+    ["\\bHMS\\b", "H M S"],
+    ["\\bJun\\b", "Joon"]
   ]
 }

@@ -10,8 +10,8 @@
   "story": ["ise"],
   "poster": ["end", "what", 7.35],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bRavi\\b", "Rah-vee"],
     ["\\bEdo\\b", "Eh-doh"],
     ["\\bTōkaidō\\b", "Toh-kai-doh"],

@@ -87,116 +87,116 @@ Pide la medida por su nombre y obtiene A$1.84 millones, igual que Genie One.
 00:03:22.245 --> 00:03:30.064
 Noor, la arquitecta de datos, escribe la regla: refleja solo lo que todo lector ahí puede ver, y lee una medida donde está definida.
 
-00:03:33.764 --> 00:03:38.022
+00:03:33.764 --> 00:03:38.021
 En la Facultad de Salud, Anil Kurian planifica los tutores del próximo semestre.
 
-00:03:39.322 --> 00:03:43.396
+00:03:39.321 --> 00:03:43.395
 Las facultades planifican en una app que el equipo de datos hizo con Databricks Apps.
 
-00:03:44.096 --> 00:03:49.912
+00:03:44.095 --> 00:03:49.911
 Muestra lo que la docencia ocasional le costó a la facultad hasta ahora, junto a las horas que necesitará cada asignatura.
 
-00:03:51.812 --> 00:03:55.213
+00:03:51.811 --> 00:03:55.212
 Todas las facultades la usan, y cada una puede ver solo lo suyo.
 
-00:03:56.913 --> 00:04:04.394
+00:03:56.912 --> 00:04:04.393
 Una app puede leer de dos maneras: como sí misma, y quienes la usan comparten sus permisos, o como la persona que la usa.
 
-00:04:06.694 --> 00:04:10.432
+00:04:06.693 --> 00:04:10.431
 Esta lee como la persona, y solo puede hacer consultas por ella.
 
-00:04:12.332 --> 00:04:17.529
+00:04:12.331 --> 00:04:17.528
 Y las declaraciones detrás de la medida llevan un filtro por facultad, puesto en Unity Catalog.
 
-00:04:19.429 --> 00:04:24.260
+00:04:19.428 --> 00:04:24.376
 Así, Anil ve las cifras de Salud, y nada en el código de la app decide quién ve qué.
 
-00:04:26.360 --> 00:04:30.906
+00:04:26.476 --> 00:04:31.022
 Haz que una app lea como la persona que la usa, y deja las reglas donde viven los datos.
 
-00:04:35.006 --> 00:04:40.525
+00:04:35.122 --> 00:04:40.641
 Cada día de pago, Rohan les envía a los decanos el costo de la docencia ocasional de cada facultad hasta ahora.
 
-00:04:41.225 --> 00:04:44.480
+00:04:41.341 --> 00:04:44.596
 Ahora el agente del día de pago de Finanzas le redacta la nota.
 
-00:04:45.980 --> 00:04:52.687
+00:04:46.096 --> 00:04:52.803
 Le pregunta a Genie One por un servidor de herramientas, como puede cualquier agente, y Genie One responde desde la misma definición.
 
-00:04:54.787 --> 00:05:02.193
+00:04:54.903 --> 00:05:02.309
 Sus instrucciones dicen «sessional teaching cost», y Genie One conoce la palabra: es uno de los sinónimos que Rohan le dio a la medida.
 
-00:05:04.293 --> 00:05:12.431
+00:05:04.409 --> 00:05:12.547
 Como un auto que lee las señales que pasa, un agente lee las palabras de una medida: su nombre, su descripción, sus sinónimos.
 
-00:05:14.731 --> 00:05:20.503
+00:05:14.847 --> 00:05:20.619
 El agente trabaja solo, con un horario, así que tiene un nombre propio, con las mismas reglas que las personas.
 
-00:05:22.403 --> 00:05:29.599
+00:05:22.519 --> 00:05:29.715
 Puede preguntarle a Genie One y leer la medida. No puede leer las declaraciones: quién trabajó qué horas y cuánto se le pagó.
 
-00:05:31.899 --> 00:05:34.701
+00:05:32.015 --> 00:05:34.817
 Redacta. Rohan revisa la nota y la envía.
 
-00:05:36.601 --> 00:05:41.494
+00:05:36.717 --> 00:05:41.610
 Dale a todo lector que trabaja solo un nombre propio, y solo lo que su tarea lee.
 
-00:05:45.594 --> 00:05:54.113
+00:05:45.710 --> 00:05:54.229
 Hay lectores fuera de la universidad: un grupo de universidades compara lo que cuesta la docencia, facultad por facultad, cada semestre.
 
-00:05:55.613 --> 00:06:02.948
+00:05:55.729 --> 00:06:03.064
 Sam se lo comparte por OpenSharing: su propio sistema lo lee donde vive, así que no hay copia que mantener al día.
 
-00:06:04.648 --> 00:06:11.475
+00:06:04.764 --> 00:06:11.591
 Ingrid, que responde por los datos de RR. HH., pide una regla más: totales por facultad, nunca por asignatura.
 
-00:06:12.175 --> 00:06:15.732
+00:06:12.291 --> 00:06:15.848
 Una asignatura con un solo tutor revelaría cuánto se le pagó a ese tutor.
 
-00:06:17.632 --> 00:06:25.324
+00:06:17.748 --> 00:06:25.440
 Así que se comparte una tabla pequeña, hecha desde la medida: el costo de la docencia ocasional por facultad, de semestres terminados.
 
-00:06:27.024 --> 00:06:30.550
+00:06:27.140 --> 00:06:30.666
 El grupo lee las cifras de la misma definición, y nada más.
 
-00:06:31.850 --> 00:06:36.823
+00:06:31.966 --> 00:06:36.939
 Fuera de la plataforma, comparte lo mínimo que un socio necesita, y hazlo desde la definición.
 
-00:06:40.323 --> 00:06:43.107
+00:06:40.439 --> 00:06:43.223
 De vuelta en Finanzas, el día de pago termina con un número.
 
-00:06:43.807 --> 00:06:51.865
+00:06:43.923 --> 00:06:51.981
 A$1.84 millones para Salud hasta ahora: en Genie One, en Power BI, en la app y en el borrador del agente.
 
-00:06:53.565 --> 00:06:55.611
+00:06:53.681 --> 00:06:55.727
 Y cada lector ve solo lo que puede.
 
-00:06:57.111 --> 00:07:03.231
+00:06:57.227 --> 00:07:03.347
 Como las señales acordadas en Viena, la definición se hizo una vez, para personas, y las máquinas también la leen.
 
-00:07:04.931 --> 00:07:10.480
+00:07:05.047 --> 00:07:10.596
 Pero, a diferencia de una señal, los datos no son para cualquiera que pase: cada lector muestra quién es.
 
-00:07:12.180 --> 00:07:17.798
+00:07:12.296 --> 00:07:17.914
 Y cada lector queda anotado en el proyecto de datos, así que un cambio en la medida dice a quién afecta.
 
-00:07:19.698 --> 00:07:23.234
+00:07:19.814 --> 00:07:23.350
 Lee cada medida donde está definida, por una puerta que la lleve.
 
-00:07:24.334 --> 00:07:29.542
+00:07:24.450 --> 00:07:29.658
 Que cada lector lea como la persona por la que actúa, o como sí mismo, con solo lo que necesita.
 
-00:07:30.642 --> 00:07:32.159
+00:07:30.758 --> 00:07:32.275
 Y afuera, comparte lo mínimo.
 
-00:07:33.859 --> 00:07:37.583
+00:07:33.975 --> 00:07:37.699
 Ya hay estándares para todo esto, así que no reinventes la rueda.
 
-00:07:38.883 --> 00:07:43.431
+00:07:38.999 --> 00:07:43.547
 Investiga, adapta, implementa, itera, empezando por la documentación oficial.
 
-00:07:44.931 --> 00:07:50.340
+00:07:45.047 --> 00:07:50.456
 Hasta la convención de las señales sigue mejorando: un texto nuevo entra en vigor la semana próxima.
 
-00:07:51.840 --> 00:07:56.529
+00:07:51.956 --> 00:07:56.645
 Después, la última película del módulo: archivos, leídos como datos y como contexto.

@@ -279,7 +279,48 @@ VOICE_NAMES = [(re.compile(r"\bDe+ming\b"), "Demming", "W. Edwards Deming's surn
                (re.compile(r"\b[Mm]inka\b"), "meenka", "minka is said MEEN-ka"),
                # The shared voice tool spelled AI "A I", which the voice reads "uh eye": every film that said AI said it so until
                # 16 November 2026, when the author heard it at the end of Built to change. Written whole, AI is said ay-eye.
-               (re.compile(r"\bA I\b"), "AI", "AI is said ay-eye, and the voice reads \"A I\" as \"uh eye\"")]
+               (re.compile(r"\bA I\b"), "AI", "AI is said ay-eye, and the voice reads \"A I\" as \"uh eye\""),
+               # Letters spelled for the voice with a lone A, which it reads as the article, "uh" (17 November 2026)
+               (re.compile(r"\bA P Q C\b"), "Eh P Q C", "APQC is said as its letters, and the voice reads a lone A as \"uh\""),
+               (re.compile(r"\bC A S\b"), "C Eh S", "CAS is said as its letters, and the voice reads a lone A as \"uh\""),
+               # The names many films share, each spelled one way for the voice in every film (17 November 2026). Films made side by
+               # side each respelled them on their own: Anil was "Unnil" in fourteen films, "Ah-neel" in six and left as written,
+               # AN-il, in six more, and Tomás "Toh-mahs" in thirty-one, which the voice says with a z, and "Toh-mahss", with the s
+               # of Spanish, in two. Each spelling is the one whose sounds the voice makes closest to the name's own language, with
+               # the spellings set aside found too. A line that names one gives the voice its spelling, every time it names it.
+               (re.compile(r"\bAnil\b|\bAh-neel\b"), "Unnil", "Anil is said uh-NIL, as in Hindi, and the voice reads it as written as AN-il"),
+               (re.compile(r"\bKurian\b|\bKoo-ree-an\b"), "Coo-rean", "Kurian is said KOO-ree-un, as in Malayalam"),
+               (re.compile(r"\bDemir\b|\bDeh-meer\b"), "Demeer", "Demir is said deh-MEER, as in Turkish"),
+               (re.compile(r"\bNguyen\b|\bNwin\b"), "Win", "Nguyen is said win in English, and the voice reads \"Nwin\" as en-win"),
+               (re.compile(r"\bJun\b"), "Joon", "Jun is said JOON, and the voice reads it as written to rhyme with fun"),
+               (re.compile(r"\bNoor\b"), "Nuur", "Noor is said NOOR, as Arabic says nūr, and the voice reads it as written as nor"),
+               (re.compile(r"\bYusuf\b"), "Yoosoof", "Yusuf is said YOO-soof"),
+               (re.compile(r"\bOkafor\b"), "Oh-kah-for", "Okafor is said oh-KAH-for, as in Igbo"),
+               (re.compile(r"\bFarah\b"), "Fah-rah", "Farah is said FAH-rah, as in Arabic"),
+               (re.compile(r"\bAma\b"), "Ah-mah", "Ama is said AH-mah, as in Akan"),
+               (re.compile(r"\bNovak\b"), "Noh-vak", "Novak is said NOH-vak"),
+               (re.compile(r"\bRavi\b"), "Rah-vee", "Ravi is said RAH-vee"),
+               (re.compile(r"\bReyes\b"), "Rayess", "Reyes is said RAY-ess, as in Spanish"),
+               (re.compile(r"\bOrtega\b"), "Or-tega", "Ortega is said or-TEH-gah, as in Spanish"),
+               (re.compile(r"\bTom[aá]s\b|\bToh-mahs\b"), "Toh-mahss", "Tomás is said toh-MAHS, with the s of Spanish, and the voice reads \"Toh-mahs\" with a z"),
+               (re.compile(r"\bPriya\b|\bPree-ya\b"), "Pree-yah", "Priya is said PREE-yah, as in Hindi, with its long final a"),
+               (re.compile(r"\bZhamak\b"), "Zhah-mahk", "Zhamak is said zhah-MAHK, as in Persian"),
+               (re.compile(r"\bDehghani\b"), "Deh-gah-nee", "Dehghani is said deh-gah-NEE, as in Persian"),
+               (re.compile(r"\bLindgren\b"), "Lind-gren", "Lindgren is said LIND-gren, as in Swedish"),
+               (re.compile(r"\bShewhart\b|\bShoo-hart\b"), "Shoohart", "Walter Shewhart's name is said SHOO-hart"),
+               (re.compile(r"\bBorlaug\b|\bBore-log\b"), "Bor-log", "Norman Borlaug's name is said BOR-log"),
+               (re.compile(r"\bEdo\b|\bEddo\b"), "Eh-doh", "Edo is said in two even syllables, eh-doh"),
+               (re.compile(r"\b[Ss]hogunate\b|\bShohgunnate\b"), "show-gun-ate", "shogunate is said SHOW-gun-ate"),
+               (re.compile(r"\bJoseon\b|\bJoesun\b"), "Choh-sun", "Joseon is said CHOH-sun, as Korean says 조선"),
+               (re.compile(r"\bMelbourne\b"), "Melbun", "Melbourne is said MEL-bun, as Australians say it"),
+               (re.compile(r"\bapartheid\b|\bapart-ate\b"), "apart hate",
+                "apartheid is said apart-hate, as South Africans say it, with the h of the Afrikaans heid"),
+               (re.compile(r"\b[Mm]idwifery\b"), "mid-wiffery", "midwifery is said mid-WIF-ery"),
+               (re.compile(r"\bDAMA\b|\bDahmah?\b"), "Dah-ma", "DAMA is said DAH-mah"),
+               (re.compile(r"\bYAML\b"), "yammel", "YAML is said YAM-ul")]
+# The films made before 17 November 2026 that still say a name above another way, each with the names it does: each leaves the
+# list when it is voiced again with the name's spelling. check_site.py fails a film or a name the list keeps once it is fixed.
+VOICE_LATER = ROOT / "site-tools" / "voice_later.json"
 VOICE_TOOL = ROOT / "films" / "from-words-to-data" / "shared" / "tools" / "tts.py"
 
 
@@ -303,25 +344,67 @@ def release_status(text):
             for m in sorted(list(STATUS.finditer(text)) + list(STATUS_GA.finditer(text)), key=lambda m: m.start())]
 
 
-def voice_names(narr, pairs=None):
-    """The names a film's voice would misread. Each line is taken as the voice reads it: its "say", or its text, after the voice
-    tool's respellings and then the film's own (film.json "say": [[pattern, words], ...]), in the order the voice tool applies them."""
+def voice_lines(narr, pairs=None):
+    """A film's lines as its voice reads them, each its "say", or its text, after the voice tool's respellings and then the film's
+    own (film.json "say": [[pattern, words], ...]), in the order the voice tool applies them: ([(chapter, line, said)], the
+    respellings that change a line, in that order)"""
     src = narr.read_text(encoding="utf-8")
     if pairs is None:
         meta = narr.parents[1] / "film.json"
         pairs = json.loads(meta.read_text(encoding="utf-8")).get("say", []) if meta.exists() else []
-    pairs = tool_respellings(narr.parents[1]) + list(pairs)
-    out = []
+    pairs = tool_respellings(narr.parents[1]) + [tuple(p) for p in pairs]
+    lines, used = [], set()
     for sid, sc in json.loads(src[src.index("{"):src.rindex("}") + 1]).items():
         for ln in sc.get("vo", []):
             said = ln.get("say") or ln["text"]
-            for pattern, words in pairs:
-                said = re.sub(pattern, words, said)
-            for name, spelled, how in VOICE_NAMES:
-                for hit in name.finditer(said):
-                    out.append(f"{narr.relative_to(ROOT)} {sid}/{ln['id']}: the voice would read \"{hit.group(0)}\" as it's written: {how}; "
-                               f"spell it \"{spelled}\" in the line's \"say\", or in film.json's \"say\"")
+            for i, (pattern, words) in enumerate(pairs):
+                said, n = re.subn(pattern, words, said)
+                if n:
+                    used.add(i)
+            lines.append((sid, ln, said))
+    return lines, [p for i, p in enumerate(pairs) if i in used]
+
+
+def voice_names(narr, pairs=None, later=()):
+    """The names a film's voice would misread, or say another way than the other films. Each line is taken as the voice reads it
+    (voice_lines). A name in VOICE_NAMES fails where the voice would read it as written, or in a spelling set aside, and where a
+    line names it more often than it gives the voice the name's spelling. The names in later (voice_later.json) are left out."""
+    rows = [r for r in VOICE_NAMES if not any(r[0].search(n) for n in later)]
+    out = []
+    for sid, ln, said in voice_lines(narr, pairs)[0]:
+        for name, spelled, how in rows:
+            where = f"{narr.relative_to(ROOT)} {sid}/{ln['id']}"
+            hits = [h.group(0) for h in name.finditer(said)]
+            for hit in hits:
+                out.append(f"{where}: the voice would read \"{hit}\": {how}; spell it \"{spelled}\" in the line's \"say\", or in film.json's \"say\"")
+            named = len(name.findall(ln["text"]))
+            given = len(re.findall(r"(?<!\w)" + re.escape(spelled) + r"(?!\w)", said, re.I))
+            if not hits and given < named:
+                out.append(f"{where}: the line names {name.findall(ln['text'])[0]} {named} time(s) and gives the voice \"{spelled}\" "
+                           f"{given}: {how}; spell it \"{spelled}\" every time, in the line's \"say\", or in film.json's \"say\"")
     return out
+
+
+def voice_film(narr):
+    """a film's folder under films/, as voice_later.json names it, from its source/src/narration.js (or the source folder's path
+    from the repository's root, for a film kept anywhere else)"""
+    src = narr.parents[1]
+    return src.parent.relative_to(ROOT / "films").as_posix() if ROOT / "films" in src.parents else src.relative_to(ROOT).as_posix()
+
+
+def voice_respellings(narrs, later=None):
+    """Words two films respell two ways for the voice: [(the pattern, {the words: [films]})]. Only the respellings that change a
+    line count, whether a film's or its voice tool's, compared without their \\b and their case, and with a hyphen read as a space
+    ("zero-bus" and "zero bus" give the voice the same sounds). A film's respellings of a name it is listed for in later
+    (voice_later.json: {film: [names]}) wait with it."""
+    seen = {}
+    for narr in narrs:
+        film = voice_film(narr)
+        for pattern, words in voice_lines(narr)[1]:
+            if any(re.search(pattern, n) for n in (later or {}).get(film, ())):
+                continue
+            seen.setdefault(pattern.replace(r"\b", ""), {}).setdefault(re.sub(r"[\s-]+", " ", words.lower()), []).append(film)
+    return [(p, w) for p, w in sorted(seen.items()) if len(w) > 1]
 
 
 def json_strings(v, where=""):
@@ -1547,10 +1630,25 @@ def main():
                           "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
     s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
     s = rep.check("Names in the voice: a name the voice misreads as written is spelled for it (Deming, said with its short e), "
-                  "a story's names are spelled one way in every film that tells it (the rope bridge at Quehue), and AI is said ay-eye")
+                  "a name the films share is spelled one way in every film that says it (Anil, Jun, the rope bridge at Quehue), "
+                  "no word is respelled two ways, and AI is said ay-eye")
+    later = json.loads(VOICE_LATER.read_text(encoding="utf-8")) if VOICE_LATER.exists() else {}
     for f in st_voices:
-        s["fails"] += voice_names(f)
-    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after its voice tool's and its own respellings")
+        film = voice_film(f)
+        faults = voice_names(f, later=later.get(film, ()))
+        s["fails"] += faults
+        for n in later.get(film, ()):
+            if not any(r[0].search(n) for r in VOICE_NAMES):
+                s["fails"].append(f"{VOICE_LATER.relative_to(ROOT)}: {film} lists {n}, which no row of VOICE_NAMES names")
+            elif len(voice_names(f, later=[x for x in later[film] if x != n])) == len(faults):
+                s["fails"].append(f"{VOICE_LATER.relative_to(ROOT)}: {film} says {n} one way now: take it off the list")
+    for film in sorted(set(later) - {voice_film(f) for f in st_voices}):
+        s["fails"].append(f"{VOICE_LATER.relative_to(ROOT)}: {film} is no film's folder")
+    for pattern, words in voice_respellings(st_voices, later):
+        s["fails"].append(f"{pattern} is respelled for the voice two ways or more: " + "; ".join(f"\"{w}\" in {len(fl)} film(s) ({', '.join(fl[:4])}"
+                          f"{', …' if len(fl) > 4 else ''})" for w, fl in words.items()) + ": spell it one way in every film, and add it to VOICE_NAMES")
+    s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after its voice tool's and its own respellings; "
+                      f"{sum(map(len, later.values()))} names in {len(later)} films still to say one way ({VOICE_LATER.relative_to(ROOT)})")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     # every film's pack, and the first film's, whose questions are a block of its pack of labs and scenarios

@@ -40,7 +40,7 @@
     ],
     [
       "\\bDAMA's\\b",
-      "Dahma's"
+      "Dah-ma's"
     ],
     [
       "\\bMei\\b",
@@ -57,6 +57,22 @@
     [
       "\\bA I\\b",
       "AI"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
+    ],
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
+    ],
+    [
+      "\\bDemir\\b",
+      "Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
     ]
   ],
   "story": [

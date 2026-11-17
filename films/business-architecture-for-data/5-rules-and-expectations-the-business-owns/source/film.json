@@ -10,8 +10,8 @@
   "story": ["outlets"],
   "poster": ["late", "rule", 3.0],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bqanat's\\b", "kah-naht's"],
     ["\\bqanats\\b", "kah-nahts"],
     ["\\bqanat\\b", "kah-naht"],

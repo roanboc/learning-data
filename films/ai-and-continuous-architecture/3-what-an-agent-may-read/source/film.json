@@ -8,7 +8,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["tablet", "who", 2.0],
+  "poster": ["tablet", "few", 1.26],
   "say": [
     ["\\bTomás's\\b", "Toh-mahss's"],
     ["\\bTomás\\b", "Toh-mahss"],

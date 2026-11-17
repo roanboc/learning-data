@@ -1,6 +1,7 @@
 /* Learning Data: The map before the data. The words of the series' labs (Take it apart) and scenarios (Make the call), in English.
    Keep the keys in step with learn.es.js. One set for the whole series (decided 9 October 2026, started 17 October): a lab for
-   each film, and one on ArchiMate 4, the standard of the later films, whose changes from version 3.2 the films don't state.
+   each film, a second for film 8 (Trace it down, 17 November 2026: Goal, Question, Metric and a metric tree), and one on
+   ArchiMate 4, the standard of the later films, whose changes from version 3.2 the films don't state.
    Each lab names its film by number and the chapter it plays (film, chapter). Films 9 to 11 are being made: their labs say the
    film is coming until build_series.py finds their players, and their chapter stays null until their chapters are settled.
    learn.js draws every picture from these words, with the films' own parts, and keeps progress in this browser under
@@ -239,6 +240,54 @@ labs:[
   back:"What would you decide with it?",
   end:"{n} of {of} on the first try. Four requests reach a decision and a goal; four go back with one question: what would you decide with it? A question matters when someone will act on its answer, in time.",
   pic:{back:"sent back",reached:"reaches a goal",alt:"A ladder from a request up to a decision, a capability and a goal, and a tray of requests sent back."}}},
+/* ---------- 8 · Now the questions appear, its second lab: Goal, Question, Metric, and a metric tree ----------
+   Each card settles one part of the picture (p): the chain down from the goal, then the measure's tree, its formulas and a driver,
+   the branch nobody asked about, and the question offered for it. The engine mixes each card's options as it shows them. */
+{id:"trace",kind:"deal",film:8,chapter:"down",c:"#ffcf70",name:"Trace it down",
+ idea:"Goal, Question, Metric works down from a goal to the measures that check it, and the film adds a decision. Trace one goal down, grow its measure into a tree, and find the branch nobody has asked about.",
+ points:["<b>Down from a goal:</b> a goal implies decisions, a decision needs questions answered, and a question needs a measure. It's Goal, Question, Metric, from the 1980s, with a decision added.",
+  "<b>A metric tree</b> breaks a measure into the measures that make it. A solid line is a formula, such as × or +, and always holds. A dotted line is a driver: something that seems to move the number, a guess to test with data.",
+  "<b>A branch nobody asked about</b> is a question the data team can offer first, with the decision it would serve, to the person who owns that work. Nothing is built until they say yes."],
+ real:"Grow each tree from the measures your sector already publishes, and look for the branches no request reaches. Offer each one as a question, with its decision and its owner, in a ticket, and build it only on a yes. Count the questions you offered and the ones accepted: a habit for the team, never a target for one person.",
+ w:{prompt:"Grace owns the goal: replace assets before they fail. Trace it down to a measure, then grow the measure into a tree.",
+  items:[
+   {p:"decision",t:"The goal: replace assets before they fail. Which decision does it imply: who decides what, and when?",s:"which lines to renew first",
+    opts:[["a","Grace's planners, each spring: which lines to renew first"],["b","The control room, each night: which crew to send to a fault"],["c","Finance, each year: how much to set aside for repairs"]],b:"a",
+    why:"Replacing assets before they fail means choosing which to replace first, and Grace's planners choose it every spring. A goal implies decisions.",
+    no:{b:"A real decision about the same lines, but it answers tonight's faults, after they've failed. It belongs to operating the network.",c:"The budget follows the plan. The decision the goal implies is which lines go first."}},
+   {p:"question",t:"Which lines to renew first. Which question must be answered before the planners decide?",s:"which lines fail most often?",
+    opts:[["a","Which outages are happening on the network right now?"],["b","Which lines fail most often, year after year?"],["c","How many kilometres of line does the network have?"]],b:"b",
+    why:"It's the question the planners asked, request #02: the lines that fail most often go first. A decision needs questions answered.",
+    no:{a:"It's about the same lines, and live, but tonight's faults don't say which lines fail most over the years.",c:"A count of the whole network can't put one line before another."}},
+   {p:"measure",t:"Which lines fail most often? Which measure answers it?",s:"interruptions per customer, per year",
+    opts:[["a","Interruptions per customer, per year, line by line"],["b","Faults logged on each line, since the line was built"],["c","A live map of every outage, refreshed every minute"]],b:"a",
+    why:"Known as SAIFI. It counts every customer each fault cuts off, each year, so lines compare fairly. Goal, decision, question and measure: Goal, Question, Metric, with a decision added.",
+    no:{b:"It counts faults, but a line with twenty homes counts as much as one with two thousand, and a fault from 1998 as much as last year's.",c:"A view, not a measure: it shows tonight, and counts nothing over a year."}},
+   {p:"times",t:"The regulator counts minutes without power, per customer, per year. Which formula makes it?",s:"minutes without power, per customer, per year",
+    opts:[["a","How often the power goes off, plus how long it stays off each time"],["b","How often the power goes off, times how long it stays off each time"],["c","How many lines fail, times how many customers each one serves"]],b:"b",
+    why:"Minutes per customer = interruptions per customer × minutes per interruption, known as SAIDI = SAIFI × CAIDI. A formula always holds, so its lines are solid.",
+    no:{a:"Close, but interruptions and minutes can't be added. Each interruption lasts some minutes, so the two multiply.",c:"That counts the customers cut off, which is how often. Minutes also need how long."}},
+   {p:"plus",t:"Minutes per interruption. What is each interruption's length made of?",s:"minutes per interruption",
+    opts:[["a","Minutes to find and reach the fault, times the crews on shift"],["b","Minutes to restore power, divided by the customers cut off"],["c","Minutes to find and reach the fault, plus minutes to restore power"]],b:"c",
+    why:"Each interruption lasts until the fault is found and reached, then until the power is back: the two add up. Another formula, so another solid line.",
+    no:{a:"More crews may shorten the wait, but that's a guess to test, not arithmetic: a driver, on a dotted line.",b:"The customers are counted already, in “per customer”. Dividing again gives a number nobody can read."}},
+   {p:"driver",t:"Trees growing into the lines. Where does it hang in the tree, and on which kind of line?",s:"trees near the lines",
+    opts:[["a","Under how long it stays off, on a dotted line: a guess to test"],["b","Under how often it goes off, on a solid line: part of the formula"],["c","Under how often it goes off, on a dotted line: a guess to test"]],b:"c",
+    why:"Branches touching the lines make the power go off more often, but no formula says how much. A driver is a guess you test with data, so its line is dotted: if trimming lowers a line's interruptions, the guess holds there.",
+    no:{a:"Trees make the power go off more often. How long it stays off depends on finding, reaching and fixing the fault.",b:"The right branch, but no arithmetic joins trees to interruptions. A driver, so a dotted line."}},
+   {p:"gap",t:"Every branch of the tree can answer someone's question. Which one has nobody asking it?",s:"nobody asked",
+    opts:[["a","How often the power goes off: interruptions per customer, per year"],["b","How long each one lasts: minutes per interruption, line by line"],["c","How long in all: minutes without power, per customer, per year"]],b:"b",
+    why:"The planners asked how often, in request #02, and the regulator counts how long in all. Nobody asked how long each interruption lasts, though it moves the regulator's number as much as how often does.",
+    no:{a:"The planners asked it: request #02, which lines fail most often.",c:"The regulator asks for it at every review: what the network may earn depends on it."}},
+   {p:"offer",t:"The data team can see the branch nobody asked about. What does it do?",s:"which lines stay off longest?",
+    opts:[["a","Asks Grace which lines stay off longest, and if that would change where crews start"],["b","Builds a dashboard of restore times now, and sends its link to the control room"],["c","Sets every crew a target of power back within the hour, at every fault"],["none","Waits until someone asks for it, then builds exactly what they ask for"]],b:"a",
+    why:"Offer it as a question, with the decision it would serve, to the person who owns that work: Grace owns operating the network. If she says yes, it becomes a request with a decision, and only then is it built.",
+    no:{b:"The right number, built before anyone decides anything with it: that's how half a backlog came to reach nothing.",c:"A measure is for deciding, never a target for one person: a target with no decision behind it gets the number hit, not the network fixed.",none:"Then the branch stays dark. Nobody asks for what they can't see, and the data team can see the whole tree."}}],
+  end:"{n} of {of} on the first try. Down from the goal: a decision, a question and a measure. Grown into a tree, the measure showed a branch nobody had asked about, and the data team offered it to its owner as a question, to build on a yes.",
+  pic:{levels:["goal","decision","question","measure"],links:["implies decisions","needs questions answered","needs a measure"],goal:"replace assets before they fail",gqm:"Goal, Question, Metric + a decision",
+   tree:{root:"minutes without power, per customer, per year",often:"interruptions per customer, per year",long:"minutes per interruption",reach:"minutes to find and reach the fault",fix:"minutes to restore power",trees:"trees near the lines"},
+   who:{root:"the regulator",often:"request #02",long:"nobody asked"},solid:"formula",dotted:"driver, to test",offer:"Which lines stay off longest?",to:"to Grace",
+   alt:"A goal traced down to a decision, a question and a measure; then the measure grown into a tree, with the branch nobody asked about offered to Grace as a question."}}},
 /* ---------- 9 · Rules with a home ---------- */
 {id:"rule",kind:"rule",film:9,chapter:"split",c:"#e8a0ff",name:"Give the rule a home",
  idea:"Day one's rule lives on the wall between the network and retail, so nobody owns it. Split it where it crosses, write each half once, and watch a tracking table come from each.",

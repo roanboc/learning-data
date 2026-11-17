@@ -68,7 +68,7 @@ function stage(vw,vh,draw,label){const cv=h("canvas",{role:"img","aria-label":la
   // k runs from 0 to 1 over 0.7 s after a change, so ticks draw on and lines grow; with reduced motion, it's 1 at once
   function paint(anim){cancelAnimationFrame(raf);if(!anim||RM){frame(1);return;}const t0=performance.now();
     const tick=()=>{const k=Math.min(1,(performance.now()-t0)/700);frame(k);if(k<1)raf=requestAnimationFrame(tick);};tick();}
-  cv.style.aspectRatio=vw+"/"+vh;if("ResizeObserver" in window)new ResizeObserver(()=>frame(1)).observe(cv);return{el:cv,paint};}
+  cv.style.aspectRatio=vw+"/"+vh;if("ResizeObserver" in window)new ResizeObserver(()=>frame(1)).observe(cv);FRAMES.set(cv,frame);return{el:cv,paint};}
 
 /* ---------- drawing helpers, on the series' components ---------- */
 const hexRGB=x=>{const m=/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(x||"");return m?[parseInt(m[1],16),parseInt(m[2],16),parseInt(m[3],16)]:null;};
@@ -81,6 +81,11 @@ const OK=[22,120,68],NO=[184,56,40];
 function tx(ctx,s,x,y,o){o=o||{};wc_T(ctx,String(s),x,y,{size:o.size||30,w:o.w||600,f:o.f,align:o.align,col:o.col||WC_INK,a:o.a});}
 // words a picture had to cut, or that still overflow at the smallest size: kept in window.MR_MISS, so checks can list them
 const MISS=(window.MR_MISS=window.MR_MISS||[]);function miss(s){s=String(s);if(MISS.indexOf(s)<0)MISS.push(s);}
+// A web font that comes after a picture was drawn, as on a slow connection, leaves its words cut short as the fallback font measured
+// them: forget those, and draw again each picture on the page (FRAMES finds a canvas's drawing, and lets it go with the canvas)
+const FRAMES=new WeakMap();
+if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener("loadingdone",()=>{MISS.length=0;
+  document.querySelectorAll("canvas").forEach(c=>{const f=FRAMES.get(c);if(f)f(1);});});
 // the biggest size, from size down to min, at which s fits in maxW. A browser can draw text a little wider than another, so a word
 // that still overflows at min may go down to nine tenths of it, and to nine tenths of its size in lines() and tag(), before it is cut
 function fit(ctx,s,maxW,size,w,f,min){let z=size;const lo=Math.floor((min||22)*0.9);while(z>(min||22)&&tw(ctx,String(s),z,w||600,f)>maxW)z-=1;

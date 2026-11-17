@@ -8,16 +8,16 @@ const WARM=[255,214,150],GASC=[255,160,80],ZINC=[176,184,196];
 /* ---------- 1882 ---------- */
 // a street of brick buildings at dusk; lit (0..1) turns their windows on, one after another, with a steady electric light
 function d2_street(ctx,t,lit,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const base=820;
-  for(let i=0;i<7;i++){const x=40+i*270,w=250,h=360+hash(i,3)*170,y=base-h,col=mix([92,52,40],[60,40,36],hash(i,4));
-    ctx.fillStyle=rgba(col,1);ctx.fillRect(x,y,w,h);ctx.fillStyle="rgba(30,18,14,0.6)";ctx.fillRect(x,y,w,10);ctx.fillRect(x+w-6,y,6,h);
+  for(let i=0;i<7;i++){const x=40+i*270,w=250,h=360+hash(i,3)*170,y=base-h,col=mix([112,56,50],[66,48,74],hash(i,4));
+    ctx.fillStyle=rgba(col,1);ctx.fillRect(x,y,w,h);ctx.fillStyle="rgba(22,16,36,0.6)";ctx.fillRect(x,y,w,10);ctx.fillRect(x+w-6,y,6,h);
     // brick courses
-    ctx.strokeStyle="rgba(40,22,16,0.35)";ctx.lineWidth=1;for(let yy=y+18;yy<base;yy+=14){ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x+w,yy);ctx.stroke();}
+    ctx.strokeStyle="rgba(32,20,40,0.35)";ctx.lineWidth=1;for(let yy=y+18;yy<base;yy+=14){ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x+w,yy);ctx.stroke();}
     const rows=Math.floor((h-80)/90);for(let r=0;r<rows;r++)for(let c=0;c<3;c++){const wx=x+24+c*76,wy=y+40+r*90,on=clamp(lit*2.4-hash(i*9+r*3+c,5)*1.4,0,1);
-      ctx.fillStyle="rgba(20,16,20,0.95)";ctx.fillRect(wx,wy,50,62);if(on>0){ctx.fillStyle="rgba(255,236,190,"+0.9*on+")";ctx.fillRect(wx+3,wy+3,44,56);glow(ctx,wx+25,wy+31,60,WARM,0.18*on);}
+      ctx.fillStyle="rgba(14,16,32,0.95)";ctx.fillRect(wx,wy,50,62);if(on>0){ctx.fillStyle="rgba(255,236,190,"+0.9*on+")";ctx.fillRect(wx+3,wy+3,44,56);glow(ctx,wx+25,wy+31,60,WARM,0.18*on);}
       ctx.strokeStyle="rgba(200,180,150,0.35)";ctx.strokeRect(wx,wy,50,62);ctx.beginPath();ctx.moveTo(wx+25,wy);ctx.lineTo(wx+25,wy+62);ctx.stroke();}}
-  ctx.fillStyle="rgba(26,20,18,1)";ctx.fillRect(0,base,W,H-base);ctx.fillStyle="rgba(120,100,80,0.25)";ctx.fillRect(0,base,W,3);
+  ctx.fillStyle="rgba(16,18,32,1)";ctx.fillRect(0,base,W,H-base);ctx.fillStyle="rgba(140,132,156,0.25)";ctx.fillRect(0,base,W,3);
   // overhead wires, strung along the street
-  withA(ctx,0.4+0.6*lit,()=>{ctx.strokeStyle=rgba(mix([90,80,70],WARM,lit),0.7);ctx.lineWidth=1.6;[0,14].forEach(d=>{ctx.beginPath();ctx.moveTo(0,300+d);for(let x=0;x<=W;x+=320)ctx.quadraticCurveTo(x+160,330+d,x+320,300+d);ctx.stroke();});});});}
+  withA(ctx,0.4+0.6*lit,()=>{ctx.strokeStyle=rgba(mix([92,92,114],WARM,lit),0.7);ctx.lineWidth=1.6;[0,14].forEach(d=>{ctx.beginPath();ctx.moveTo(0,300+d);for(let x=0;x<=W;x+=320)ctx.quadraticCurveTo(x+160,330+d,x+320,300+d);ctx.stroke();});});});}
 // a gas lamp beside an electric bulb, at (x,y); g and e fade each in
 function d2_lamps(ctx,x,y,t,g,e){withA(ctx,g,()=>{const fx=x,fy=y;ctx.strokeStyle="rgba(150,140,120,0.9)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(fx,fy+40);ctx.lineTo(fx,fy+220);ctx.stroke();
     ctx.strokeStyle="rgba(200,190,160,0.8)";ctx.lineWidth=2;ctx.strokeRect(fx-34,fy-40,68,80);const fl=1+0.12*Math.sin(t*9)+0.08*Math.sin(t*23);glow(ctx,fx,fy,110*fl,GASC,0.35);

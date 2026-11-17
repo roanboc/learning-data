@@ -2,7 +2,7 @@
 
 Every tool of the series Data architecture runs from a film's source folder, films/data-architecture/<n>-<name>/source/, which
 holds film.json: the film's key, title and subtitle, its own source files, the words the voice respells, and the moment its poster
-shows. The series is drawn in the look of The map before the data (films/enterprise-architecture/shared/src/: ea.js and people.js),
+shows. The series is drawn in the look of The map before the data (films/enterprise-architecture/shared/src/: ea.js, colour.js and people.js),
 with The Inner Life of Data's engine and components, A Sharper Sketch's diagrams, the people of When things go wrong, Silent change's
 messages and dashboards, From words to data's components (and Keeping it true's true.js), In the weeds of data crafting's motion
 helpers and finishing pass, and this series' own, in shared/src/da.js: its title card, Inés Duarte, Project Cybersyn's pictures and

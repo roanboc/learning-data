@@ -11,14 +11,14 @@ const HEAT={g:[110,200,120],a:[245,176,64],r:[232,92,80],n:[150,150,160]};
 
 /* ---------- the 1400s: the Andes ---------- */
 // three ridges, far to near, each a sum of slow waves; the far one keeps a little snow
-const D4_RIDGES=[[520,170,1,[96,74,70]],[660,120,2,[62,44,38]],[800,80,3,[40,28,24]]];
+const D4_RIDGES=[[520,170,1,[104,86,142]],[660,120,2,[54,54,100]],[800,80,3,[26,46,54]]];
 const d4_ridgeY=(x,base,amp,seed)=>base-amp*(0.55*Math.sin(x*0.0042+seed*1.7)+0.3*Math.sin(x*0.011+seed*3.1)+0.15*Math.sin(x*0.027+seed*5.3));
 function d4_andes(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
   // the first stars, and the last of the light low in the sky
-  const sk=ctx.createLinearGradient(0,0,0,760);sk.addColorStop(0,"rgba(24,26,52,0.55)");sk.addColorStop(1,"rgba(150,86,60,0.22)");ctx.fillStyle=sk;ctx.fillRect(-400,-300,W+800,1200);
+  const sk=ctx.createLinearGradient(0,0,0,760);sk.addColorStop(0,"rgba(18,34,98,0.55)");sk.addColorStop(1,"rgba(236,122,92,0.24)");ctx.fillStyle=sk;ctx.fillRect(-400,-300,W+800,1200);
   for(let i=0;i<90;i++){const x=hash(i,41)*(W+400)-200,y=hash(i,42)*420-120,tw_=0.5+0.5*Math.sin(t*(0.6+hash(i,43))+i);ctx.fillStyle="rgba(255,244,220,"+(0.12+0.35*hash(i,44)*tw_)+")";ctx.beginPath();ctx.arc(x,y,0.8+1.3*hash(i,45),0,TAU);ctx.fill();}
   D4_RIDGES.forEach(([base,amp,seed,col],k)=>{ctx.beginPath();ctx.moveTo(-400,H+400);for(let x=-400;x<=W+400;x+=16)ctx.lineTo(x,d4_ridgeY(x,base,amp,seed));ctx.lineTo(W+400,H+400);ctx.closePath();
-    const g=ctx.createLinearGradient(0,base-amp,0,base+360);g.addColorStop(0,rgba(mix(col,[255,214,170],k===0?0.42:0.16),1));g.addColorStop(1,rgba(mix(col,[8,6,8],0.4),1));ctx.fillStyle=g;ctx.fill();
+    const g=ctx.createLinearGradient(0,base-amp,0,base+360);g.addColorStop(0,rgba(mix(col,[255,214,170],k===0?0.42:0.16),1));g.addColorStop(1,rgba(mix(col,[6,8,24],0.4),1));ctx.fillStyle=g;ctx.fill();
     // the last light along each crest
     ctx.save();ctx.strokeStyle=rgba([255,206,150],0.22-0.05*k);ctx.lineWidth=2.4;ctx.beginPath();for(let x=-400;x<=W+400;x+=16){const y=d4_ridgeY(x,base,amp,seed);x===-400?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();ctx.restore();});});}
 // the road: a winding line across the near slopes, and the posts along it, at these fractions of its length
@@ -28,7 +28,7 @@ const D4_ROAD=(()=>{const K=[[-120,930],[160,880],[380,790],[600,830],[820,730],
 const D4_PU=[0.12,0.3,0.48,0.66,0.84];
 // the road drawn up to p, as a pale, worn track; o.gap [u0,u1] leaves a stretch out (for one that's being rebuilt)
 function d4_road(ctx,p,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01||p<=0)return;withA(ctx,a,()=>{const n=220,gp=o.gap;
-  [[16,"rgba(20,14,10,0.6)"],[9,"rgba(196,170,132,0.75)"],[3,"rgba(236,214,176,0.55)"]].forEach(([lw,c])=>{ctx.save();ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.lineCap="round";ctx.beginPath();let on=false;
+  [[16,"rgba(10,12,32,0.6)"],[9,"rgba(196,170,132,0.75)"],[3,"rgba(236,214,176,0.55)"]].forEach(([lw,c])=>{ctx.save();ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.lineCap="round";ctx.beginPath();let on=false;
     for(let i=0;i<=n;i++){const u=i/n*p;if(gp&&u>gp[0]&&u<gp[1]){on=false;continue;}const q=at(D4_ROAD,u);if(!on){ctx.moveTo(q.x,q.y);on=true;}else ctx.lineTo(q.x,q.y);}ctx.stroke();ctx.restore();});});}
 // a stretch of road being rebuilt: stones set down one by one along it as p goes from 0 to 1, then the track over them
 function d4_rebuild(ctx,u0,u1,p,a){if(a<=0.01)return;withA(ctx,a,()=>{const n=14;for(let i=0;i<n;i++){const q=clamp(p*n*1.2-i,0,1);if(q<=0)continue;const pt=at(D4_ROAD,lerp(u0,u1,(i+0.5)/n));

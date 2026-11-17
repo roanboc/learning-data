@@ -2006,6 +2006,32 @@ function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3]
 // how far the camera is zoomed in at t, for the same keys: a whole canvas seen from afar is context, and its notes are decoration
 function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;z=lerp(z,keys[i][3],u);}return z;}
 
+// The colour of the five series on enterprise architecture (17 November 2026). They drew on a brown wall, a brown ground for scenes in the
+// past and brown date pills, earthy beside their stories; now the wall is a slate blue under a cool light, a scene in the past a night blue,
+// and the layers' and the series' colours are clearer. The dark ground behind the diagrams stays as the whole site draws it: no need to
+// colour a picture whose ground is already dark (the author, 17 November 2026). Only these series' builds bundle this file, right after
+// ea.js, so it sets their look over ea.js and over the helpers the whole site shares (From words to data's histBg and yearTag), which every
+// other film keeps as they are. The master data films borrow ea.js for its glyphs and keep its first colours too.
+const EA_WALL=["#162b52","#0a1428"];                        // the wall the notes go on: a slate blue
+const EA_WALLGLOW=[[0.1,0.9,0.5,[60,180,210],0.06],[0.92,0.1,0.5,[160,110,240],0.06]];   // soft light on it: teal, bottom left; violet, top right
+const EA_HIST=["#16204a","#06071a"];                        // a scene in the past
+const EA_PILL="rgba(10,14,40,0.9)";                         // the glass of a date's pill
+// soft pools of coloured light: [x, y, radius, colour, strength], with x, y and the radius as parts of the frame's width and height
+function eaGlow(ctx,pools){pools.forEach(([x,y,r,c,a])=>{const g=ctx.createRadialGradient(W*x,H*y,0,W*x,H*y,W*r);g.addColorStop(0,rgba(c,a));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});}
+// the six layers and the series' own colour, deeper and clearer than ea.js's first ones
+[[188,162,255],[255,196,112],[255,228,96],[255,166,134],[108,200,255],[138,228,118]].forEach((c,i)=>{LAY6[i][1]=c;});
+EAC.splice(0,3,104,230,192);
+// the wall of canvases and sticky notes (ea.js's wallBg, in slate blue under a cool light)
+wallBg=function(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,EA_WALL[0]);g.addColorStop(1,EA_WALL[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){const x=hash(i,31)*W,y=hash(i,32)*H,r=60+hash(i,33)*200,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(190,225,255,"+(0.012+0.02*hash(i,34))+")");gg.addColorStop(1,"rgba(190,225,255,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  const l=ctx.createRadialGradient(W*0.5,H*0.25,40,W*0.5,H*0.4,W*0.7);l.addColorStop(0,"rgba(150,210,255,"+(o.light==null?0.10:o.light)+")");l.addColorStop(1,"rgba(150,210,255,0)");ctx.fillStyle=l;ctx.fillRect(0,0,W,H);eaGlow(ctx,EA_WALLGLOW);};
+// a scene in the past keeps its lamp's warm light and dust, on a night blue
+{const histBg0=histBg;histBg=function(ctx,S,t,o){return histBg0(ctx,S,t,Object.assign({top:EA_HIST[0],bottom:EA_HIST[1]},o));};}
+// the pills that date a moment (ea.js's eaYear and From words to data's yearTag), on blue glass
+eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,28,500,"mono")+52;glass(ctx,x,y-30,w,60,30,c,{glow:14,ea:0.8,fill:EA_PILL});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
+yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
+
 /* ===== Platform and solution architecture: the series' components =====
    The fourth series on enterprise architecture, drawn in The map before the data's look (its ea.js and people.js come first in
    every film): Tomás's map, paper drafts on a wall and the confirmed model in glass, the six layers in their colours. This file adds
@@ -2017,7 +2043,7 @@ function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i+
    style, light on a dark ground, never in the style of the art of its time and place. */
 
 /* ---------- colours ---------- */
-const PSC=[244,184,108];                    // the series: a lantern's amber, for the road and the shared platform
+const PSC=[255,178,88];                    // the series: a lantern's amber, for the road and the shared platform
 const APPC=LAY6[4][1],TECC=LAY6[5][1],INFC=LAY6[3][1],BUSC=LAY6[2][1];
 const SEALC=[214,72,52];                    // a seal's vermilion
 const WASHI=[236,226,204];                  // paper
@@ -2081,16 +2107,16 @@ const PSA_LP={};
 function psaLandPath(v){const key=[v.lon,v.lat,v.k,v.cx,v.cy].join();if(PSA_LP[key])return PSA_LP[key];const p=new Path2D();
   PSA_COAST.forEach(r=>{r.forEach((q,i)=>{const[x,y]=psaJP(q[0],q[1],v);if(i)p.lineTo(x,y);else p.moveTo(x,y);});p.closePath();});return PSA_LP[key]=p;}
 function psaLand(ctx,v,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
-  const lit=o.lit||0,fill=mix([30,36,54],[60,52,44],lit),edge=mix([150,172,210],[236,206,160],lit),P=psaLandPath(v),z=Math.sqrt(Math.abs(ctx.getTransform().a));
+  const lit=o.lit||0,fill=mix([26,42,64],[54,66,72],lit),edge=mix([150,172,210],[236,206,160],lit),P=psaLandPath(v),z=Math.sqrt(Math.abs(ctx.getTransform().a));
   ctx.save();ctx.fillStyle=rgba(fill,1);ctx.fill(P);ctx.shadowColor=rgba(edge,0.55);ctx.shadowBlur=16;ctx.strokeStyle=rgba(edge,0.7);ctx.lineWidth=2.2/z;ctx.lineJoin="round";ctx.stroke(P);ctx.restore();
   // a little texture on the land: soft patches, as of hills and forest, and the mountains of the centre a shade lighter
   ctx.save();ctx.clip(P);
   for(let i=0;i<60;i++){const lon=131+hash(i,61)*10.5,lat=32+hash(i,62)*8.5,[x,y]=psaJP(lon,lat,v),r=(30+hash(i,63)*90)*v.k/330,g=ctx.createRadialGradient(x,y,0,x,y,r);
-    g.addColorStop(0,rgba(mix([62,72,70],[100,88,70],lit),0.16+0.1*hash(i,64)));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);}
+    g.addColorStop(0,rgba(mix([56,98,84],[90,112,82],lit),0.16+0.1*hash(i,64)));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);}
   [[137.7,36.2,1.1],[138.4,35.9,0.8],[136.9,35.8,0.7],[139.4,36.6,0.6]].forEach(([lon,lat,s])=>{const[x,y]=psaJP(lon,lat,v),r=s*v.k*0.5,g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(mix([80,86,100],[120,104,84],lit),0.22));g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);});
   ctx.restore();});}
 // the sea and the sky at night (o.dusk, 0..1, warms it toward evening)
-function psaSea(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.dusk||0,g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,12,28],[34,26,36],d),1));g.addColorStop(1,rgba(mix([4,8,18],[16,14,22],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+function psaSea(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.dusk||0,g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,16,44],[28,32,78],d),1));g.addColorStop(1,rgba(mix([4,9,26],[12,14,40],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   for(let i=0;i<26;i++){const x=hash(i,71)*W,y=hash(i,72)*H,r=120+hash(i,73)*300,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(120,150,210,"+(0.018+0.02*hash(i,74))+")");gg.addColorStop(1,"rgba(120,150,210,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}}
 // a road on the map, drawn up to p (0..1) along its points; o.col, o.lw, o.glow
 function psaPath(ctx,pts,p,o){o=o||{};if(p<=0)return;const segs=[];let L=0;for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);segs.push(d);L+=d;}
@@ -2126,14 +2152,14 @@ function psaMap(ctx,v,t,o){o=o||{};const a=o.a==null?1:o.a;const TK=PSA_TKD.map(
 // Everyone is a figure in silhouette, lit from behind by the evening sky and by the station's lanterns, dressed for 1601 to the 1860s:
 // wide hats, robes, loads on a pole. A walk is drawn from the time t and a phase, so each keeps its own step.
 function psaDusk(ctx,S,o){o=o||{};setScreen(ctx,S);const d=o.d==null?1:o.d,y0=o.y0||760,g=ctx.createLinearGradient(0,0,0,y0);
-  g.addColorStop(0,rgba(mix([10,14,30],[24,28,58],d),1));g.addColorStop(0.62,rgba(mix([18,20,40],[96,64,74],d),1));g.addColorStop(1,rgba(mix([30,26,38],[214,140,92],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,y0+2);
+  g.addColorStop(0,rgba(mix([8,14,42],[16,38,110],d),1));g.addColorStop(0.62,rgba(mix([16,22,58],[112,76,144],d),1));g.addColorStop(1,rgba(mix([28,28,58],[242,136,94],d),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,y0+2);
   // far hills, two ranges
-  [[0.55,[38,32,46],0.0],[0.8,[26,22,32],1.7]].forEach(([k,c,ph],j)=>{ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.moveTo(0,y0);for(let x=0;x<=W;x+=24){const yy=y0-k*120-Math.sin(x*0.0021+ph)*44*k-Math.sin(x*0.0057+ph*2)*18*k;ctx.lineTo(x,yy);}ctx.lineTo(W,y0);ctx.closePath();ctx.fill();});
-  const gg=ctx.createLinearGradient(0,y0,0,H);gg.addColorStop(0,rgba([40,32,30],1));gg.addColorStop(1,rgba([14,12,14],1));ctx.fillStyle=gg;ctx.fillRect(0,y0,W,H-y0);
+  [[0.55,[34,40,82],0.0],[0.8,[18,28,50],1.7]].forEach(([k,c,ph],j)=>{ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.moveTo(0,y0);for(let x=0;x<=W;x+=24){const yy=y0-k*120-Math.sin(x*0.0021+ph)*44*k-Math.sin(x*0.0057+ph*2)*18*k;ctx.lineTo(x,yy);}ctx.lineTo(W,y0);ctx.closePath();ctx.fill();});
+  const gg=ctx.createLinearGradient(0,y0,0,H);gg.addColorStop(0,rgba([22,34,44],1));gg.addColorStop(1,rgba([8,12,22],1));ctx.fillStyle=gg;ctx.fillRect(0,y0,W,H-y0);
   // the road itself, a band of beaten earth catching the last light
-  const rg=ctx.createLinearGradient(0,y0,0,y0+70);rg.addColorStop(0,rgba(mix([70,58,50],[150,112,84],d),1));rg.addColorStop(1,rgba([46,38,34],1));ctx.fillStyle=rg;ctx.fillRect(0,y0,W,64);}
+  const rg=ctx.createLinearGradient(0,y0,0,y0+70);rg.addColorStop(0,rgba(mix([58,58,80],[160,112,90],d),1));rg.addColorStop(1,rgba([36,38,56],1));ctx.fillStyle=rg;ctx.fillRect(0,y0,W,64);}
 // a pine by the road: a trunk that leans a little and layered, tapering masses of needles
-function psaPine(ctx,x,y0,s,seed,o){o=o||{};const lean=(hash(seed,3)-0.5)*0.25,h=s*(220+hash(seed,4)*90),col=o.col||[18,22,24];ctx.save();ctx.translate(x,y0);
+function psaPine(ctx,x,y0,s,seed,o){o=o||{};const lean=(hash(seed,3)-0.5)*0.25,h=s*(220+hash(seed,4)*90),col=o.col||[12,30,38];ctx.save();ctx.translate(x,y0);
   ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(-s*7,0);ctx.quadraticCurveTo(-s*4+lean*h*0.4,-h*0.5,lean*h-s*2,-h);ctx.lineTo(lean*h+s*2,-h);ctx.quadraticCurveTo(s*4+lean*h*0.4,-h*0.5,s*7,0);ctx.closePath();ctx.fill();
   for(let i=0;i<4;i++){const u=0.45+i*0.17,cx=lean*h*u+(hash(seed,10+i)-0.5)*s*40,cy=-h*u,rw=s*(90-i*14)*(0.8+hash(seed,20+i)*0.4),rh=s*(22-i*2);
     ctx.beginPath();ctx.moveTo(cx-rw,cy+rh*0.4);ctx.quadraticCurveTo(cx-rw*0.5,cy-rh*1.2,cx,cy-rh);ctx.quadraticCurveTo(cx+rw*0.6,cy-rh*1.3,cx+rw,cy+rh*0.3);ctx.quadraticCurveTo(cx,cy+rh*0.9,cx-rw,cy+rh*0.4);ctx.fill();}

@@ -1982,6 +1982,32 @@ function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3]
 // how far the camera is zoomed in at t, for the same keys: a whole canvas seen from afar is context, and its notes are decoration
 function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;z=lerp(z,keys[i][3],u);}return z;}
 
+// The colour of the five series on enterprise architecture (17 November 2026). They drew on a brown wall, a brown ground for scenes in the
+// past and brown date pills, earthy beside their stories; now the wall is a slate blue under a cool light, a scene in the past a night blue,
+// and the layers' and the series' colours are clearer. The dark ground behind the diagrams stays as the whole site draws it: no need to
+// colour a picture whose ground is already dark (the author, 17 November 2026). Only these series' builds bundle this file, right after
+// ea.js, so it sets their look over ea.js and over the helpers the whole site shares (From words to data's histBg and yearTag), which every
+// other film keeps as they are. The master data films borrow ea.js for its glyphs and keep its first colours too.
+const EA_WALL=["#162b52","#0a1428"];                        // the wall the notes go on: a slate blue
+const EA_WALLGLOW=[[0.1,0.9,0.5,[60,180,210],0.06],[0.92,0.1,0.5,[160,110,240],0.06]];   // soft light on it: teal, bottom left; violet, top right
+const EA_HIST=["#16204a","#06071a"];                        // a scene in the past
+const EA_PILL="rgba(10,14,40,0.9)";                         // the glass of a date's pill
+// soft pools of coloured light: [x, y, radius, colour, strength], with x, y and the radius as parts of the frame's width and height
+function eaGlow(ctx,pools){pools.forEach(([x,y,r,c,a])=>{const g=ctx.createRadialGradient(W*x,H*y,0,W*x,H*y,W*r);g.addColorStop(0,rgba(c,a));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});}
+// the six layers and the series' own colour, deeper and clearer than ea.js's first ones
+[[188,162,255],[255,196,112],[255,228,96],[255,166,134],[108,200,255],[138,228,118]].forEach((c,i)=>{LAY6[i][1]=c;});
+EAC.splice(0,3,104,230,192);
+// the wall of canvases and sticky notes (ea.js's wallBg, in slate blue under a cool light)
+wallBg=function(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,EA_WALL[0]);g.addColorStop(1,EA_WALL[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){const x=hash(i,31)*W,y=hash(i,32)*H,r=60+hash(i,33)*200,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(190,225,255,"+(0.012+0.02*hash(i,34))+")");gg.addColorStop(1,"rgba(190,225,255,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  const l=ctx.createRadialGradient(W*0.5,H*0.25,40,W*0.5,H*0.4,W*0.7);l.addColorStop(0,"rgba(150,210,255,"+(o.light==null?0.10:o.light)+")");l.addColorStop(1,"rgba(150,210,255,0)");ctx.fillStyle=l;ctx.fillRect(0,0,W,H);eaGlow(ctx,EA_WALLGLOW);};
+// a scene in the past keeps its lamp's warm light and dust, on a night blue
+{const histBg0=histBg;histBg=function(ctx,S,t,o){return histBg0(ctx,S,t,Object.assign({top:EA_HIST[0],bottom:EA_HIST[1]},o));};}
+// the pills that date a moment (ea.js's eaYear and From words to data's yearTag), on blue glass
+eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,28,500,"mono")+52;glass(ctx,x,y-30,w,60,30,c,{glow:14,ea:0.8,fill:EA_PILL});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
+yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
+
 /* ===== AI and continuous architecture: the series' components =====
    The last series on enterprise architecture, drawn in the look of The map before the data (films/enterprise-architecture/shared/src/:
    the six layers in glass, paper drafts, the same people at the same energy utility), with one true story across its six films: the
@@ -1997,8 +2023,8 @@ function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i+
 
 /* ---------- colours ---------- */
 // the series' colour, fired brick; Babylon's clay, brick, mud brick and bitumen, its river and its dawn
-const ACA=[238,164,112];
-const BAB_CLAY=[226,188,140],BAB_BRICK=[178,108,70],BAB_MUD=[146,112,80],BAB_BIT=[40,32,28],BAB_RIV=[104,146,190],BAB_SUN=[255,196,132],BAB_ROPE=[226,204,160];
+const ACA=[255,150,98];
+const BAB_CLAY=[236,196,146],BAB_BRICK=[200,104,60],BAB_MUD=[156,112,80],BAB_BIT=[30,28,40],BAB_RIV=[70,160,220],BAB_SUN=[255,196,132],BAB_ROPE=[226,204,160];
 const ACA_WARN=[255,186,92],ACA_INK=[64,40,26];
 // the horizon in the wide shot, and the tower's seven stages as the Esagila tablet gives them: [width, height] in metres, about 91
 // metres square at its base and about as tall
@@ -2026,7 +2052,7 @@ function acaEnd(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,
 const BAB_STARS=(()=>{const S=[];for(let i=0;i<240;i++)S.push({x:hash(i,601)*5100-1600,y:hash(i,602)*1900-1400,m:Math.pow(hash(i,603),3),ph:hash(i,604)*TAU});return S;})();
 function bab_light(o){o=o||{};return[clamp(o.dawn==null?0.6:o.dawn,0,1),clamp(o.day||0,0,1)];}
 function bab_sky(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),X0=-1600,X1=3500,Y0=-1400;
-  const top=mix(mix([6,8,22],[30,36,74],dw),[92,124,168],dy),mid=mix(mix([12,12,30],[112,70,88],dw),[190,164,150],dy),low=mix(mix([20,16,28],[234,150,98],dw),[244,212,168],dy);
+  const top=mix(mix([6,10,38],[20,46,124],dw),[64,140,220],dy),mid=mix(mix([12,16,52],[118,84,160],dw),[160,196,226],dy),low=mix(mix([22,22,50],[252,144,96],dw),[252,220,170],dy);
   const g=ctx.createLinearGradient(0,hz-900,0,hz);g.addColorStop(0,rgba(top,1));g.addColorStop(0.55,rgba(mix(top,mid,0.5),1));g.addColorStop(0.85,rgba(mid,1));g.addColorStop(1,rgba(low,1));
   ctx.fillStyle=rgba(top,1);ctx.fillRect(X0,Y0,X1-X0,hz-900-Y0+2);ctx.fillStyle=g;ctx.fillRect(X0,hz-900,X1-X0,902);
   const sx=o.sunX==null?1560:o.sunX,sg=ctx.createRadialGradient(sx,hz,10,sx,hz,1000);sg.addColorStop(0,rgba(BAB_SUN,0.5*dw+0.3*dy));sg.addColorStop(0.3,rgba(BAB_SUN,0.14*dw+0.1*dy));sg.addColorStop(1,rgba(BAB_SUN,0));
@@ -2036,12 +2062,12 @@ function bab_sky(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),X0=
     ctx.fillStyle=rgba([236,236,255],a);ctx.beginPath();ctx.arc(s.x,s.y,0.8+1.6*s.m,0,TAU);ctx.fill();});}
 // the city on the horizon: low houses with flat roofs, the walls' towers, and palms, in the haze; the sacred precinct round the tower is open
 const BAB_SKY=(()=>{const R=[];let x=-1600;let i=0;while(x<3500){const w=30+hash(i,611)*70,tower=hash(i,612)>0.86;R.push([x,w,tower?42+hash(i,613)*24:8+hash(i,614)*26,tower]);x+=w+(hash(i,615)>0.7?18:2);i++;}return R;})();
-function bab_city(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),col=mix(mix([16,12,16],[70,46,46],dw),[150,126,108],dy),gap=o.gap||[700,1220];
+function bab_city(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),col=mix(mix([12,14,38],[52,40,94],dw),[116,128,160],dy),gap=o.gap||[700,1220];
   ctx.save();ctx.fillStyle=rgba(col,1);BAB_SKY.forEach(([x,w,h,tw_])=>{if(x+w>gap[0]&&x<gap[1])h*=0.35;ctx.fillRect(x,hz-h,w,h+2);if(tw_){for(let k=0;k<3;k++)ctx.fillRect(x+k*w/3+2,hz-h-6,w/3-6,6);}});ctx.restore();
   for(let i=0;i<9;i++){const x=-900+i*560+hash(i,617)*200;if(x>gap[0]-60&&x<gap[1]+60)continue;bab_palm(ctx,x,hz+2,70+hash(i,618)*36,t,{col,lean:(hash(i,619)-0.5)*0.3,rim:0.12*dw});}}
 // a date palm: a trunk that tapers and leans a little, a crown of feathery fronds that arch and droop, moving slowly in the air, and a
 // few old fronds hanging under it; (x,y) its foot, h its height. o.col: its colour; o.rim: the dawn along its trunk
-function bab_palm(ctx,x,y,h,t,o){o=o||{};const col=o.col||[18,14,14],lean=o.lean||0,tx=x+lean*h,ty=y-h,sw=Math.sin(t*0.45+x*0.013)*0.035,sd=Math.round(x*7)%997;
+function bab_palm(ctx,x,y,h,t,o){o=o||{};const col=o.col||[16,16,34],lean=o.lean||0,tx=x+lean*h,ty=y-h,sw=Math.sin(t*0.45+x*0.013)*0.035,sd=Math.round(x*7)%997;
   ctx.save();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(x-h*0.03,y);ctx.quadraticCurveTo(x+lean*h*0.45-h*0.026,y-h*0.55,tx-h*0.014,ty);ctx.lineTo(tx+h*0.014,ty);ctx.quadraticCurveTo(x+lean*h*0.45+h*0.026,y-h*0.55,x+h*0.03,y);ctx.closePath();ctx.fill();
   if(o.rim>0.01){ctx.strokeStyle=rgba(BAB_SUN,o.rim);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+h*0.03,y);ctx.quadraticCurveTo(x+lean*h*0.45+h*0.026,y-h*0.55,tx+h*0.014,ty);ctx.stroke();}
   ctx.strokeStyle=rgba(col,1);ctx.lineCap="round";
@@ -2057,7 +2083,7 @@ function bab_palm(ctx,x,y,h,t,o){o=o||{};const col=o.col||[18,14,14],lean=o.lean
 // the ground: the beaten earth of the precinct round the tower, its enclosure wall behind it, the plain, and the Euphrates on the right,
 // between banks of reeds, catching the light; haze lies along the horizon as the sun comes
 function bab_ground(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),X0=-1600,X1=3500,Y1=2600;
-  const far=mix(mix([24,18,20],[86,60,50],dw),[160,132,100],dy),near=mix(mix([9,7,9],[40,27,22],dw),[96,74,54],dy),sil=mix(mix([14,11,13],[52,36,34],dw),[120,98,80],dy);
+  const far=mix(mix([18,18,38],[90,58,98],dw),[184,148,108],dy),near=mix(mix([7,8,18],[28,24,58],dw),[100,80,70],dy),sil=mix(mix([12,12,30],[42,32,76],dw),[108,100,112],dy);
   const g=ctx.createLinearGradient(0,hz,0,hz+420);g.addColorStop(0,rgba(far,1));g.addColorStop(1,rgba(near,1));ctx.fillStyle=g;ctx.fillRect(X0,hz,X1-X0,Y1-hz);
   // the precinct: a broad, paler court round the tower
   ctx.save();const cg=ctx.createRadialGradient(960,hz+70,30,960,hz+70,640);cg.addColorStop(0,rgba(mix(far,BAB_SUN,0.16+0.12*dy),0.75));cg.addColorStop(1,rgba(far,0));ctx.translate(960,hz+70);ctx.scale(1,0.2);ctx.translate(-960,-(hz+70));ctx.fillStyle=cg;ctx.fillRect(200,hz-700,1520,1540);ctx.restore();
@@ -2067,7 +2093,7 @@ function bab_ground(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),
   // haze along the horizon as the light comes
   const hg=ctx.createLinearGradient(0,hz-40,0,hz+60);hg.addColorStop(0,rgba(BAB_SUN,0));hg.addColorStop(0.5,rgba(mix(BAB_SUN,[255,255,255],0.2),0.1*dw+0.12*dy));hg.addColorStop(1,rgba(BAB_SUN,0));ctx.fillStyle=hg;ctx.fillRect(X0,hz-40,X1-X0,100);
   // the river, from the haze on the right to the foreground, with the sky in it, between reeds
-  if(o.river!==false){const rv=mix(mix([10,14,26],[44,46,66],dw),[96,118,138],dy),bank=mix(mix([8,7,8],[30,22,20],dw),[78,62,48],dy);
+  if(o.river!==false){const rv=mix(mix([8,20,52],[28,88,156],dw),[48,150,206],dy),bank=mix(mix([6,10,18],[16,32,44],dw),[48,96,58],dy);
     const RB=u=>[lerp(1700,1500,u)+Math.sin(u*3)*30,hz+2+u*u*700],LB=u=>[lerp(1760,2600,u)-Math.sin(u*2.4)*40,hz+2+u*u*700];
     ctx.save();ctx.beginPath();for(let i=0;i<=20;i++){const[x,y]=RB(i/20);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}for(let i=20;i>=0;i--){const[x,y]=LB(i/20);ctx.lineTo(x,y);}ctx.closePath();
     const rg=ctx.createLinearGradient(0,hz,0,hz+600);rg.addColorStop(0,rgba(mix(rv,BAB_SUN,0.32*dw+0.12*dy),1));rg.addColorStop(1,rgba(rv,1));ctx.fillStyle=rg;ctx.fill();ctx.clip();
@@ -2085,7 +2111,7 @@ function bab_ground(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),
 // east (the right); o.hi (0..1): a warm glow along its top, as the sun reaches it.
 function bab_stageBox(i,cx,by,s){let y=by;for(let k=0;k<i;k++)y-=BAB_T[k][1]*s;const[w,h]=BAB_T[i];return[cx-w*s/2,y-h*s,w*s,h*s];}
 function bab_tower(ctx,cx,by,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const[dw,dy]=bab_light(o),m=clamp(o.m==null?BAB_TH:o.m,0,BAB_TH),ru=clamp(o.ruin||0,0,1);
-  const lit=mix(mix([70,48,40],[196,130,92],dw),[214,172,128],dy),shade=mix(mix([22,16,16],[72,44,38],dw),[128,98,76],dy);
+  const lit=mix(mix([76,46,40],[216,126,82],dw),[230,170,114],dy),shade=mix(mix([18,18,34],[72,44,92],dw),[118,96,118],dy);
   withA(ctx,a,()=>{
     if(ru>0.01)withA(ctx,ru,()=>bab_mound(ctx,cx,by,s,lit,shade));
     if(m>0.05){ctx.save();ctx.beginPath();ctx.rect(cx-200*s,by-m*s,400*s,m*s+2);ctx.clip();
@@ -2130,7 +2156,7 @@ function bab_arm(ctx,sx,sy,ex,ey,hx,hy){bab_limb(ctx,[[sx,sy],[ex,ey],[hx,hy]],7
 // the king's tall rounded cap and a robe to the ankle. o.step: the walk's phase, so they walk while it changes. The whole figure is one
 // silhouette, filled once, so no limb shows through another; its rim is the same shape, a little towards the light. Returns where the
 // hand on what they hold is, in the frame, for a rope to start from.
-function bab_folk(ctx,x,y,h,kind,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const k=h/100,dir=o.dir||1,ph=o.step||0,col=o.col||[20,15,14],rim=o.rim==null?0.55:o.rim;
+function bab_folk(ctx,x,y,h,kind,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const k=h/100,dir=o.dir||1,ph=o.step||0,col=o.col||[16,16,34],rim=o.rim==null?0.55:o.rim;
   const walk=kind==="walk"||kind==="carry",sw=walk?Math.sin(ph):0,hand=[];
   const path=()=>{ctx.beginPath();
     if(kind==="mould"){// kneeling on one knee, bent over the mould on the ground in front
@@ -2180,7 +2206,7 @@ function bab_brick(ctx,cx,cy,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)ret
     ctx.restore();});}
 // a kiln of mud brick, a beehive with courses of brick, its mouth glowing on the ground in front; smoke rises from its top slowly.
 // (x,y): the middle of its foot; s: its scale (1 is 130 px tall). o.col: its silhouette
-function bab_kiln(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[24,18,16],fire=o.fire==null?1:o.fire;
+function bab_kiln(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[20,20,38],fire=o.fire==null?1:o.fire;
   withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
     for(let i=0;i<5;i++){const u=((t*0.06+i*0.2)%1),sx=Math.sin(t*0.35+i*2)*16*u+u*30,sy=-128-u*240;ctx.fillStyle=`rgba(130,118,116,${0.1*(1-u)*fire})`;ctx.beginPath();ctx.ellipse(sx,sy,18+u*60,10+u*28,0,0,TAU);ctx.fill();}
     ctx.beginPath();ctx.moveTo(-84,0);ctx.bezierCurveTo(-92,-70,-46,-130,0,-130);ctx.bezierCurveTo(46,-130,92,-70,84,0);ctx.closePath();ctx.fillStyle=rgba(col,1);ctx.fill();
@@ -2192,7 +2218,7 @@ function bab_kiln(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retu
     ctx.restore();});}
 // a river boat with its cargo of bitumen in baskets, and its boatman with a pole, moving on the water. (x,y): the waterline's middle;
 // s: its scale (1 is about 300 px long)
-function bab_boat(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[20,15,14],bob=Math.sin(t*1.1+x*0.01)*2.4;
+function bab_boat(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[16,16,34],bob=Math.sin(t*1.1+x*0.01)*2.4;
   withA(ctx,a,()=>{ctx.save();ctx.translate(x,y+bob);ctx.scale(s,s);
     ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(-160,-46);ctx.quadraticCurveTo(-140,-6,-90,0);ctx.lineTo(90,0);ctx.quadraticCurveTo(140,-6,160,-46);ctx.quadraticCurveTo(130,-22,90,-20);ctx.lineTo(-90,-20);ctx.quadraticCurveTo(-130,-22,-160,-46);ctx.closePath();ctx.fill();
     for(let i=0;i<4;i++){ctx.fillStyle=rgba(BAB_BIT,1);ctx.beginPath();ctx.ellipse(-60+i*34,-28,16,11,0,0,TAU);ctx.fill();ctx.strokeStyle=rgba(mix(col,BAB_ROPE,0.4),0.9);ctx.lineWidth=1.6;ctx.stroke();}
@@ -2385,13 +2411,13 @@ function a5_face(ctx,t,o){o=o||{};const st=clamp(o.st||0,0,1),one=clamp(o.one||0
   for(let r=-2;r<H/bh+2;r++)for(let i=-2;i*bw<W+A5_FB*2;i++){const x=sx(i,r)+(hash(i*13+r,724)-0.5)*3,y=r*bh+(hash(i*7+r,725)-0.5)*2,v=hash(i*31+r+300,721);
     // which stretch it belongs to: the seams step with the courses, a brick at a time, as walls are joined
     const cx=x+A5_FB/2,jog=(r%3)*bw*0.5,k=cx<A5_SEAMS[0]+jog-bw*0.6?0:cx<A5_SEAMS[1]+jog-bw*0.6?1:2;
-    let c=mix(mix(BAB_BRICK,[196,150,104],0.2+0.4*v),[90,60,44],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TONE[k],(k===1?0.16:0.26)*st);
+    let c=mix(mix(BAB_BRICK,[204,150,104],0.2+0.4*v),[104,58,62],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TONE[k],(k===1?0.16:0.26)*st);
     ctx.fillStyle=rgba(c,1);rr(ctx,x,y,A5_FB,A5_FH,6);ctx.fill();
     ctx.fillStyle="rgba(255,236,210,0.14)";ctx.fillRect(x+5,y+2,A5_FB-10,3);ctx.fillStyle="rgba(0,0,0,0.18)";ctx.fillRect(x+5,y+A5_FH-4.5,A5_FB-10,3);
     if(hash(i*5+r*3,727)<0.18){const cx_=hash(i+r,728)<0.5?x:x+A5_FB,cy_=hash(i*3+r,729)<0.5?y:y+A5_FH,s=10+hash(i+r*11,730)*14;ctx.fillStyle=rgba(BAB_BIT,1);ctx.beginPath();ctx.moveTo(cx_,cy_);ctx.lineTo(cx_+(cx_===x?s:-s),cy_);ctx.lineTo(cx_,cy_+(cy_===y?s*0.6:-s*0.6));ctx.closePath();ctx.fill();}
     ctx.fillStyle="rgba(0,0,0,0.12)";for(let q=0;q<6;q++)ctx.fillRect(x+6+hash(q+i*7,722+r)*(A5_FB-14),y+5+hash(q+r*5,723+i)*(A5_FH-10),3,2.4);}
   // the morning sun, from the right, and a darker foot
-  const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(10,6,10,0.42)");g.addColorStop(0.6,"rgba(10,6,10,0.06)");g.addColorStop(1,"rgba(255,206,150,0.08)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(12,14,46,0.46)");g.addColorStop(0.6,"rgba(12,14,46,0.07)");g.addColorStop(1,"rgba(255,206,150,0.1)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   // the seams between the stretches, lit
   if(st>0.01){ctx.save();ctx.strokeStyle=rgba(ACA,0.75*st);ctx.lineWidth=3;ctx.shadowColor=rgba(ACA,0.8);ctx.shadowBlur=12;A5_SEAMS.forEach(s0=>{ctx.beginPath();for(let r=-1;r<H/bh+1;r++){const xx=s0+(r%3)*bw*0.5-bw*0.6+(r%2?bw/2:0)-A5_FJ/2;
       const xs=Math.round((xx-(r%2)*bw/2)/bw)*bw+(r%2)*bw/2-A5_FJ/2;if(r===-1)ctx.moveTo(xs,r*bh-A5_FJ/2);else ctx.lineTo(xs,r*bh-A5_FJ/2);ctx.lineTo(xs,(r+1)*bh-A5_FJ/2);}ctx.stroke();});ctx.restore();}
@@ -2440,8 +2466,8 @@ function a5_brick3(ctx,x,y,S,o){o=o||{};const a=o.a==null?1:o.a,Tk=S*0.24,dx=S*0
 // the layers of earth, and at its far wall the face of baked brick, worn and chipped, black bitumen in every joint, earth still caked
 // on it, a measuring rod leaning against it. o.p (0..1): the face uncovered, from the top down; o.st (0..1): its stretches, each in
 // its own tone, the seams between them lit (the work of more than one king); o.found (0..1): bricks with a king's name, lit
-function a5_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),st=clamp(o.st||0,0,1),fd=clamp(o.found||0,0,1),earth=[124,98,74],dk=[64,48,38],haze=[196,190,178];
-  let g=ctx.createLinearGradient(0,-200,0,300);g.addColorStop(0,"rgb(150,154,162)");g.addColorStop(1,rgba(haze,1));ctx.fillStyle=g;ctx.fillRect(-200,-200,W+400,500);
+function a5_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),st=clamp(o.st||0,0,1),fd=clamp(o.found||0,0,1),earth=[150,114,78],dk=[74,60,76],haze=[204,208,214];
+  let g=ctx.createLinearGradient(0,-200,0,300);g.addColorStop(0,"rgb(104,150,206)");g.addColorStop(1,rgba(haze,1));ctx.fillStyle=g;ctx.fillRect(-200,-200,W+400,500);
   ctx.fillStyle=rgba(mix(earth,haze,0.45),1);for(let i=0;i<7;i++){const x=-100+i*360+hash(i,741)*140,w=300+hash(i,742)*220,h=30+hash(i,743)*46;ctx.beginPath();ctx.moveTo(x-w/2,292);ctx.quadraticCurveTo(x-w*0.1,292-h*1.6,x+w/2,292);ctx.closePath();ctx.fill();}
   ctx.fillStyle=rgba(mix(earth,haze,0.3),1);ctx.fillRect(-200,288,W+400,H+200);
   const fx=420,fw=1080,fy=300,fb=846,Y=H+240;
@@ -2456,7 +2482,7 @@ function a5_dig(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),st=clamp(o.s
   const bw=104,bh=25,jt=7,SM=[fx+fw*0.34,fx+fw*0.7],TN=[[0,0,0],[226,190,150],[70,40,28]],lit=[];
   for(let r=0;fb-(r+1)*(bh+jt)>fy-bh-jt;r++)for(let i=-1;i*(bw+jt)<fw+bw;i++){
     const x=fx+i*(bw+jt)+(r%2)*((bw+jt)/2)+(hash(i*13+r,724)-0.5)*3,y=fb-(r+1)*(bh+jt)+jt/2+(hash(i*7+r,725)-0.5)*2,v=hash(i*31+r,721),k=x+bw/2<SM[0]+(r%2)*20?0:x+bw/2<SM[1]-(r%2)*20?1:2;
-    let c=mix(mix(BAB_BRICK,[196,150,104],0.2+0.4*v),[90,60,44],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TN[k],(k===1?0.2:0.3)*st);
+    let c=mix(mix(BAB_BRICK,[204,150,104],0.2+0.4*v),[104,58,62],0.3*hash(i+r*17,726));if(k>0&&st>0.01)c=mix(c,TN[k],(k===1?0.2:0.3)*st);
     ctx.fillStyle=rgba(c,1);rr(ctx,x,y,bw,bh,5);ctx.fill();ctx.fillStyle="rgba(255,236,210,0.13)";ctx.fillRect(x+4,y+1.5,bw-8,2.5);ctx.fillStyle="rgba(0,0,0,0.17)";ctx.fillRect(x+4,y+bh-3.5,bw-8,2.5);
     if(hash(i*5+r*3,727)<0.22){const cx_=hash(i+r,728)<0.5?x:x+bw,cy_=hash(i*3+r,729)<0.5?y:y+bh,s=8+hash(i+r*11,730)*12;ctx.fillStyle=rgba(BAB_BIT,1);ctx.beginPath();ctx.moveTo(cx_,cy_);ctx.lineTo(cx_+(cx_===x?s:-s),cy_);ctx.lineTo(cx_,cy_+(cy_===y?s*0.6:-s*0.6));ctx.closePath();ctx.fill();}
     ctx.fillStyle="rgba(0,0,0,0.12)";for(let q=0;q<5;q++)ctx.fillRect(x+6+hash(q+i*7,722+r)*(bw-14),y+4+hash(q+r*5,723+i)*(bh-9),2.5,2);

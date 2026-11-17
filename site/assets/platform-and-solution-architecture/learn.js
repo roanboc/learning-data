@@ -168,7 +168,13 @@ function stage(lay,draw,label){const cv=h("canvas",{role:"img","aria-label":labe
   st.paint=()=>st.kick(0);st.relayout=()=>{st.v++;st.kick(0);};
   if("ResizeObserver" in window)new ResizeObserver(()=>st.paint()).observe(cv);
   ready().then(()=>st.relayout());if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>st.relayout());
-  return st;}
+  STG.set(cv,st);return st;}
+// A web font that comes after a picture was laid out, as on a slow connection, leaves every fit measured with the fallback font
+// wrong, and words cut short that now fit: forget both, and lay out again each picture on the page (STG finds a canvas's picture,
+// and lets it go with the canvas)
+const STG=new WeakMap();
+if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener("loadingdone",()=>{FIT.clear();MISS.clear();
+  document.querySelectorAll("canvas").forEach(c=>{const s=STG.get(c);if(s)s.relayout();});});
 // a lab's picture, made only when the film's parts are here
 const picOf=(Lb,mk)=>DRAW&&mk?mk():null;
 

@@ -1,0 +1,48 @@
+{
+  "key": "wellbeing-in-the-work",
+  "title": "Wellbeing is in the work",
+  "sub": "Film 2 of People first, in Leading data people: what people need from work, and where a manager looks first. Fourteen urgent requests wait on one analyst, in no order. Her manager doesn't ask her to cope: they put her week on one page, agree an order with the people who asked, and ask the whole team the same five questions in writing.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall, and a gorge in the Andes under an open sky. Its colours mean the same in every film: blue is plans (the order agreed, and its dates), orange is data (the requests, and the team's written answers), green is something done or something that helps, and amber a cost, a risk or waiting (what the work asks, and what wears people out).",
+  "src": [
+    "ww_place.js",
+    "ww_bridge.js",
+    "ww_people.js",
+    "ww_uni.js",
+    "ww_scenes.js"
+  ],
+  "poster": [
+    "page",
+    "both",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bQuehue\\b",
+      "Kehweh"
+    ],
+    [
+      "\\bApurímac\\b",
+      "Ahpooreemahk"
+    ],
+    [
+      "\\bDeci\\b",
+      "Deesee"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "bridge"
+  ],
+  "urgent": []
+}

@@ -123,7 +123,8 @@ const D7_BLK=[["households","customer segment","value proposition canvas",NOTEC[
   "stakeholder",MOT,420,"customer segment"],["fewer, shorter outages","pain reliever","value proposition canvas",NOTEC[0],1,"manage outages","capability",STR,420,"pain reliever"],
   ["restore supply","key activity","business model canvas",NOTEC[2],2,"restore supply","process",BUS,420,"key activity"],["poles, wires and crews","key resource","business model canvas",NOTEC[3],1,"poles, wires and crews","resource",STR,790,"key resource"]];
 const D7_DECO=[["affordable bills","connect renewables"],[],["take the call","decide who goes first"],["outage record","account"],["OMS","CIS","GIS"],["data centre","radio network"]];
-const D7_WHY=[[0,"why it exists"],[1,"what it must be able to do"],[2,"how the work flows, who does it"],[4,"what runs it"]];
+// each label of the whole map, and the words the voice says it with where they differ (it says "why the utility exists")
+const D7_WHY=[[0,"why it exists","why the utility exists"],[1,"what it must be able to do"],[2,"how the work flows, who does it"],[4,"what runs it"]];
 scene("views",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const tB=c("blocks"),tW=c("whole"),tT=c("tools"),lx=820,ly=150,lw=1000;
@@ -135,7 +136,7 @@ scene("views",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     if(u>0.3)withA(ctx,clamp((u-0.3)/0.4,0,1),()=>archEl(ctx,tx-170,ty-38,340,76,el,ecol,kind,{size:28,gs:12,hi:pulseAt(t,t0+1.1,1.0)}));});
   // the rest of the map, layer by layer, as texture
   D7_DECO.forEach((els,li)=>{const[bx,by,bw,bh]=R[li],q=fin(t,tW+0.3+li*0.4,0.6);if(q>0)withA(ctx,q*0.8,()=>els.forEach((n,j)=>{const used=D7_BLK.some(b=>b[4]===li);const x0=bx+(used?620:250)+j*190;if(x0+180>bx+bw+20)return;archEl(ctx,x0,by+bh/2-30,180,60,n,LAY6[li][1],["stakeholder","capability","process","object","component","node"][li],{size:20,gs:9,deco:1});}));});
-  D7_WHY.forEach(([li,s_],k)=>{const[bx,by,bw,bh]=R[li];arrive(ctx,lx-40,by+bh/2,t,w("whole",s_.split(",")[0])-0.1,()=>T(ctx,s_,lx-40,by+bh/2+10,{w:700,size:28,align:"right",color:rgba(mix(LAY6[li][1],INK,0.3),1)}),{dy:6});});
+  D7_WHY.forEach(([li,s_,said],k)=>{const[bx,by,bw,bh]=R[li];arrive(ctx,lx-40,by+bh/2,t,w("whole",said||s_.split(",")[0])-0.1,()=>T(ctx,s_,lx-40,by+bh/2+10,{w:700,size:28,align:"right",color:rgba(mix(LAY6[li][1],INK,0.3),1)}),{dy:6});});
   ctx.restore();
   arrive(ctx,960,100,t,w("drafts","one model"),()=>withA(ctx,1-fin(t,tT-0.3,0.4),()=>tag(ctx,960,100,"one model, in ArchiMate's notation",PARCH,{align:"center",size:30})),{dy:8});
   arrive(ctx,960,100,t,tT,()=>tag(ctx,960,100,"modelling tools such as Archi or LeanIX keep it; the ideas don't depend on them",PARCH,{align:"center",size:28}),{dy:8});

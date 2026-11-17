@@ -20,3 +20,14 @@ Made on 11 and 12 November 2026 by the series' thread, from the author's brief o
 | 10 | Which Spanish words? | An owner is a *responsable* and the enterprise domain the *dominio empresarial*, as in the captions; a station is a *posta*, and the road the *camino*. The title is *¿Una aplicación o una plataforma?* | Spanish captions and page |
 | 11 | Where does Pause and think stop? | After *Not every shared system*, *A number nobody owns* and *An owner who answers to all*, right answers at options 3, 1 and 2, one near miss each. The one after *Not every shared system* opens its lab in the series' pack, *Application or platform?* (since the pack, 12 November 2026). | The film's page |
 | 12 | Anything left for the author to run? | No. There's no draft label, as decided; no render or review page was made in the session, by the project's film rule; the soundtrack's audio pointer and MP3 are in the pull request, and the *Store audio outside Git* workflow publishes them when the film reaches main. | — |
+
+## Issue #416: more than one vendor (17 November 2026)
+
+Made on 17 November 2026 from the author's issue #416, which asked for a data platform built from more than one vendor's components, and for the data platform as a technology component of its own, made of them.
+
+| # | Question | Assumption taken | Where it shows |
+|---|---|---|---|
+| 13 | Which vendors and components? | The utility's data platform is built from Databricks and Microsoft Fabric, as the issue says, with the data lake, a key vault and the network outside them both; Snowflake is named only as another vendor that sells its product as a data platform. Identity, integration, orchestration, reporting tools and what watches it all stay round them. | *Two kinds of platform* |
+| 14 | How is the data platform drawn on the map? | As one ArchiMate node, *enterprise data platform*, with Databricks, Fabric, the data lake and the key vault nested in it as system software and the network as a communication network (nesting is composition); the node realises storage, compute and the catalogue, and its tables are artifacts assigned to it. | *The data practice on the map* |
+| 15 | Does this change *One platform, or many*? | Not yet. That film's two platforms, from two parts of the business, read as these two vendors' products, generation's being the second, which moves onto the other and is switched off; its words weren't changed. Worth a look, to say so outright there if you want it. | *One platform, or many* |
+| 16 | Anything left for the author to run? | No. The new lines were voiced and the sound fitted to them in the session; the audio pointer and MP3 are in the pull request. | — |

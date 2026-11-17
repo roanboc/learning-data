@@ -9,8 +9,8 @@
   ],
   "poster": ["stars", "ring", 4.6],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bAma\\b", "Ah-mah"],
     ["\\bArchiMate\\b", "Arky-mate"],
     ["Hōkūleʻa", "Ho-kooleh-ah"],

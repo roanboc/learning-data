@@ -33,6 +33,14 @@
     [
       "\\bA I\\b",
       "AI"
+    ],
+    [
+      "\\bOrtega\\b",
+      "Or-tega"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
     ]
   ],
   "story": [

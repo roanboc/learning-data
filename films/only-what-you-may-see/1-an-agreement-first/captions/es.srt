@@ -83,197 +83,197 @@ El estudio obtiene lo que necesita, y ningún estudiante aparece con su nombre.
 Lunes 5 de octubre de 2026.
 
 22
-00:02:04,250 --> 00:02:10,743
+00:02:04,250 --> 00:02:10,605
 Anil Kurian, de la Facultad de Salud, quiere estudiar cómo avanzan sus estudiantes, y dónde necesitan apoyo.
 
 23
-00:02:12,043 --> 00:02:18,941
+00:02:11,905 --> 00:02:18,803
 Así que pide a la oficina de registro los expedientes de los 2,614 estudiantes de la facultad.
 
 24
-00:02:20,241 --> 00:02:22,454
+00:02:20,103 --> 00:02:22,316
 Mei Tanaka es su dueña, por la oficina.
 
 25
-00:02:23,754 --> 00:02:29,886
+00:02:23,616 --> 00:02:29,748
 Quién puede verlo le dio a cada acceso un propósito y una fecha de fin, y El mercado de datos puso las solicitudes en un solo lugar.
 
 26
-00:02:31,386 --> 00:02:37,177
+00:02:31,248 --> 00:02:37,039
 Pero un propósito y una fecha no dicen qué nunca debe tener el estudio, dónde puede trabajar, ni qué puede salir de él.
 
 27
-00:02:38,877 --> 00:02:46,017
+00:02:38,739 --> 00:02:45,879
 Sin decirlo, los nombres podrían quedar junto a los resultados, y quién tiene tiempo extra, y por qué, podría viajar adonde vaya el trabajo.
 
 28
-00:02:47,917 --> 00:02:52,679
+00:02:47,779 --> 00:02:52,541
 Así que primero van dos papeles: uno que firma cada persona, y uno para cada uso.
 
 29
-00:02:55,979 --> 00:02:59,881
+00:02:55,841 --> 00:02:59,743
 El primero es de cada persona: un acuerdo de confidencialidad.
 
 30
-00:03:01,181 --> 00:03:02,832
+00:03:01,043 --> 00:03:02,694
 Me guardo lo que veo.
 
 31
-00:03:03,532 --> 00:03:05,880
+00:03:03,394 --> 00:03:05,742
 Lo uso solo para el trabajo para el que me lo dan.
 
 32
-00:03:06,580 --> 00:03:08,786
+00:03:06,442 --> 00:03:08,648
 No guardo copias donde no está permitido.
 
 33
-00:03:09,486 --> 00:03:11,426
+00:03:09,348 --> 00:03:11,288
 Respondo por los datos que me dan.
 
 34
-00:03:12,126 --> 00:03:14,507
+00:03:11,988 --> 00:03:14,369
 Aviso de inmediato si algo sale mal.
 
 35
-00:03:15,207 --> 00:03:16,813
+00:03:15,069 --> 00:03:16,675
 Y vale después de que me vaya.
 
 36
-00:03:18,513 --> 00:03:26,615
+00:03:18,375 --> 00:03:26,477
 Quien trabaja con datos de la universidad lo firma antes de cualquier acceso: personal, contratistas, investigadores, el equipo de datos.
 
 37
-00:03:28,115 --> 00:03:32,404
+00:03:27,977 --> 00:03:32,241
 Se renueva cada año, y Yusuf Demir, de gobernanza de datos, los guarda.
 
 38
-00:03:33,704 --> 00:03:41,733
+00:03:33,541 --> 00:03:41,570
 El acceso llega por grupos, nunca a una persona por nombre, y alguien sigue en un grupo solo mientras su promesa esté firmada y vigente.
 
 39
-00:03:43,433 --> 00:03:50,118
+00:03:43,270 --> 00:03:49,955
 Un agente no firma nada: firma su dueño, que responde por él, como muestra Agentes de IA en el trabajo con datos.
 
 40
-00:03:51,618 --> 00:03:53,487
+00:03:51,455 --> 00:03:53,221
 Anil renovó el suyo en febrero.
 
 41
-00:03:54,787 --> 00:03:59,133
+00:03:54,521 --> 00:03:58,867
 Como en Bletchley, la promesa va antes del secreto, y dura más que el trabajo.
 
 42
-00:04:02,833 --> 00:04:07,497
+00:04:02,567 --> 00:04:07,231
 El segundo es para este uso: un acuerdo para compartir datos, escrito línea por línea.
 
 43
-00:04:08,797 --> 00:04:13,925
+00:04:08,531 --> 00:04:13,659
 Su propósito: cómo avanzan los estudiantes de la Facultad de Salud, y dónde necesitan apoyo.
 
 44
-00:04:15,225 --> 00:04:20,246
+00:04:14,959 --> 00:04:19,980
 De los expedientes de estudiantes del registro: 2,614 estudiantes.
 
 45
-00:04:21,346 --> 00:04:27,024
+00:04:21,080 --> 00:04:26,758
 Puede tener el curso y los resultados de cada estudiante, su año de nacimiento, y un código en lugar de quién es.
 
 46
-00:04:28,524 --> 00:04:32,079
+00:04:28,258 --> 00:04:31,813
 Nunca nada que nombre a un estudiante, y nada sobre su salud.
 
 47
-00:04:33,579 --> 00:04:36,906
+00:04:33,313 --> 00:04:36,640
 Solo el grupo del estudio, cada miembro con una promesa firmada.
 
 48
-00:04:38,206 --> 00:04:42,436
+00:04:37,940 --> 00:04:42,170
 Solo en la plataforma, en el espacio propio del estudio, sin descargar nada.
 
 49
-00:04:43,736 --> 00:04:46,791
+00:04:43,470 --> 00:04:46,525
 Lo que puede salir: totales, con cualquier conteo menor de diez oculto.
 
 50
-00:04:48,091 --> 00:04:54,960
+00:04:47,825 --> 00:04:54,694
 Termina el 30 de junio de 2027; luego se borra la copia del estudio, y los totales se quedan.
 
 51
-00:04:56,660 --> 00:05:03,357
+00:04:56,394 --> 00:05:03,091
 Las oficinas de estadística llaman a estas preguntas los Five Safes: personas, proyecto, entorno, datos y resultados.
 
 52
-00:05:05,257 --> 00:05:11,724
+00:05:04,991 --> 00:05:11,531
 Mei firma como dueña, que responde por los datos, como estableció Quién decide; Anil firma por el estudio.
 
 53
-00:05:13,224 --> 00:05:18,674
+00:05:13,031 --> 00:05:18,481
 Yusuf lo guarda en el registro de acuerdos: qué se acordó, quién lo acordó, y hasta cuándo.
 
 54
-00:05:20,174 --> 00:05:27,713
+00:05:19,981 --> 00:05:27,520
 Como en Bletchley, los datos llegan solo a las personas nombradas, se quedan donde se guardan, y salen solo sin nombrar a nadie.
 
 55
-00:05:31,413 --> 00:05:34,589
+00:05:31,220 --> 00:05:34,396
 Solo ahora llega el acceso, y se hace a partir del acuerdo.
 
 56
-00:05:36,089 --> 00:05:40,551
+00:05:35,896 --> 00:05:40,358
 Sus términos se escriben de nuevo donde la plataforma los lee: el contrato del acuerdo.
 
 57
-00:05:42,051 --> 00:05:50,448
+00:05:41,858 --> 00:05:50,255
 Las columnas: curso, resultados, año de nacimiento, código de estudiante. El grupo: el del estudio. El fin: 30 de junio de 2027.
 
 58
-00:05:52,148 --> 00:05:58,638
+00:05:51,955 --> 00:05:58,445
 El equipo de la plataforma hace el permiso a partir del contrato, nunca a mano, así que no puede dar más de lo que dice el acuerdo.
 
 59
-00:06:00,338 --> 00:06:03,953
+00:06:00,145 --> 00:06:03,760
 Cada permiso nombra su acuerdo. Sin acuerdo, no hay permiso.
 
 60
-00:06:05,653 --> 00:06:11,248
+00:06:05,460 --> 00:06:11,055
 En noviembre, la facultad le pide al estudio los nombres de los estudiantes que necesitan apoyo, para llamarlos.
 
 61
-00:06:12,748 --> 00:06:16,176
+00:06:12,555 --> 00:06:15,983
 Es un propósito nuevo, y el acuerdo del estudio no se estira hasta ahí.
 
 62
-00:06:17,676 --> 00:06:20,543
+00:06:17,483 --> 00:06:20,350
 El equipo de apoyo le pide a Mei un acuerdo propio.
 
 63
-00:06:24,043 --> 00:06:27,097
+00:06:23,850 --> 00:06:26,904
 Miércoles 30 de junio de 2027.
 
 64
-00:06:28,397 --> 00:06:31,824
+00:06:28,204 --> 00:06:31,631
 El permiso termina solo, en la fecha que fijó el acuerdo.
 
 65
-00:06:33,324 --> 00:06:37,960
+00:06:33,131 --> 00:06:37,767
 Se borra la copia del estudio, y Yusuf cierra el acuerdo en el registro.
 
 66
-00:06:39,460 --> 00:06:42,311
+00:06:39,267 --> 00:06:42,118
 Los totales se quedan, con cada conteo menor de diez oculto.
 
 67
-00:06:43,811 --> 00:06:48,320
+00:06:43,618 --> 00:06:48,180
 La promesa de Anil no termina: vale después del trabajo, y después de que se vaya.
 
 68
-00:06:50,020 --> 00:06:54,656
+00:06:49,880 --> 00:06:54,516
 En Bletchley, la promesa fue primero, y el secreto se guardó casi treinta años.
 
 69
-00:06:56,356 --> 00:07:04,848
+00:06:56,216 --> 00:07:04,708
 En la universidad, el estudio aprendió lo que necesitaba de los expedientes de 2,614 estudiantes, y ninguno apareció con su nombre.
 
 70
-00:07:06,548 --> 00:07:09,440
+00:07:06,408 --> 00:07:09,300
 El acceso es el final de un acuerdo, no el comienzo.

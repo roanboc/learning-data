@@ -10,8 +10,8 @@
   "story": ["ahead"],
   "poster": ["ahead", "sipho", 6.2],
   "say": [
-    ["\\bTomás's\\b", "Toh-mahs's"],
-    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
     ["\\bAma\\b", "Ah-mah"],
     ["\\bRavi\\b", "Rah-vee"],
     ["\\bSipho\\b", "See-poh"],

@@ -2210,7 +2210,7 @@ def px_canvas(lg):
     svg = px_edges_svg("px-wide", PX_WIDE, GL, False) + px_edges_svg("px-tall", PX_TALL, GP, True)
     # the pieces: buttons, in the order the keyboard walks them
     sn = lambda k: f'<span class="sr">{E(U["step"].format(n=PX_STORY.index(k) + 1, of=n))}: </span>' if k in PX_STORY else ""
-    badge = lambda k: f'<i class="px-no" aria-hidden="true">{PX_STORY.index(k) + 1}</i>' if k in PX_STORY else ""
+    badge = lambda k: f'<i class="px-num" aria-hidden="true">{PX_STORY.index(k) + 1}</i>' if k in PX_STORY else ""
     nodes = (f'<button type="button" class="px-nd px-qn px-in" data-id="q" data-go="s1" {px_box("q", GL, GP)}>{sn("q")}'
              f'<span class="px-qk">{px_icon("ask")}<span>AQ1 · {E(U["asks"])}</span>{badge("q")}</span>'
              f'<span class="px-qq">{E(U["question"])}</span>'
@@ -2353,7 +2353,7 @@ def px_learner(lg, key):
         rows = [("SIS", "S-20417", ("Student system", "Sistema de estudiantes")), ("LMS", "u-88213", ("Learning platform", "Plataforma de aprendizaje")),
                 ("LMS", "u-88231", ("Learning platform", "Plataforma de aprendizaje")), ("SC", PX_MASKED[0], ("Short-courses system", "Sistema de cursos cortos")),
                 ("SC", PX_MASKED[1], ("Short-courses system", "Sistema de cursos cortos"))]
-        body = "".join(f'<tr><td><code><b>{a}</b>|{b}</code></td><td>{t(*c)}</td></tr>' for a, b, c in rows)
+        body = "".join(f'<tr><td><code><b>{a}</b>|{b.replace("@", "@<wbr>")}</code></td><td>{t(*c)}</td></tr>' for a, b, c in rows)
         return (f'<table class="px-keys"><thead><tr><th scope="col">{t("Key", "Clave")}</th><th scope="col">{t("From", "De")}</th></tr></thead><tbody>{body}</tbody></table>'
                 f'<p class="px-sum">{t("Every key names its system, so keys from two systems never clash. The emails are masked here: they are direct personal data.", "Cada clave nombra su sistema, así que las claves de dos sistemas nunca chocan. Los correos van enmascarados aquí: son datos personales directos.")}</p>')
     if key == "intermediate":
@@ -2380,9 +2380,10 @@ def px_learner(lg, key):
                 f'<span class="px-cg">{t("To go", "Faltan")}: 15</span></p>'
                 f'<p class="px-sum">{t("From the core on, the student ID is masked for anyone not allowed to read it. The third unit counts from July, after census date.", "Desde la capa central, el número de estudiante queda enmascarado para quien no tenga permiso de leerlo. La tercera unidad cuenta desde julio, después del censo.")}</p>')
     if key == "marts":
+        # <wbr> after each "_" (and after "@" in the staging keys): a narrow panel breaks a name between its words, not inside one
         rows = [("award_name", "Graduate Certificate in Data Analytics", None), ("faculty_name", "Faculty of Engineering and IT", None),
                 ("credit_points_required", "60", None), ("credit_points_earned", "45", "40"), ("credit_points_remaining", "15", "20"), ("is_near_award", "true", "false")]
-        kv = "".join(f'<tr{" class=" + chr(34) + "px-alt" + chr(34) if alt else ""}><th scope="row"><code>{a}</code></th><td><code{" data-alt=" + chr(34) + alt + chr(34) if alt else ""}>{b}</code></td></tr>'
+        kv = "".join(f'<tr{" class=" + chr(34) + "px-alt" + chr(34) if alt else ""}><th scope="row"><code>{a.replace("_", "_<wbr>")}</code></th><td><code{" data-alt=" + chr(34) + alt + chr(34) if alt else ""}>{b}</code></td></tr>'
                      for a, b, alt in rows)
         return (f'<p class="px-tn"><code>mart_planning__near_award</code><small>{t("census date: 31 March 2026", "fecha del censo: 31 de marzo de 2026")}</small></p><table class="px-kv">{kv}</table>'
                 f'<p class="px-tog-p"><button type="button" class="px-tog" aria-pressed="false" hidden>{t("Without the email match", "Sin el reconocimiento por correo")}</button></p>'

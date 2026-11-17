@@ -33,12 +33,12 @@ The series follows TOGAF 10 and ArchiMate 4, as *The map before the data* does (
 | Body of knowledge | What the film takes | Where |
 |---|---|---|
 | TOGAF 10: application and technology architecture, and the *application platform* of its Technical Reference Model (the technology that provides the services applications are built on) | An application, and the platform apart from it | *Where it sits*, *The test* |
-| ArchiMate 4: the application and technology layers | The data practice drawn on the map: technology services realised by system software; a data product as one application component, its output port an application interface, its tables artifacts | *The data practice on the map* |
+| ArchiMate 4: the application and technology layers | The data practice drawn on the map: the data platform as one node, composed of the vendors' system software, the data lake, the key vault and a communication network (composition drawn by nesting), realising the technology services; a data product as one application component, its output port an application interface, its tables artifacts | *Two kinds of platform*, *The data practice on the map* |
 | *Team Topologies* (Skelton and Pais, 2019) and the CNCF Platforms White Paper (2023) | A platform as an internal product, with an owner, measured by its users' outcomes | *An owner who answers to all* |
 | Zhamak Dehghani, *Data Mesh* (2022) | Domain ownership, and data products built on a shared, self-serve platform | *Whose logic* |
 | Application suites (common practice) | A system that serves many functions and is still an application, its logic built in by its vendor | *Not every shared system* |
 
-Where the film differs: the published definitions say a platform holds no business logic (Dehghani: the platform is domain-agnostic). The film says where the logic is instead: it runs on the platform, in data products owned by each domain and by the enterprise domain, never in the platform's own components, and never owned by the platform team by default (the author, 11 November 2026). The *enterprise domain*, which owns the measures that cross domains, for performance and analysis, is the author's term; data mesh's nearest idea is an aggregate data product with an owner of its own. No standard defines a platform's owner: the sponsor with a platform product owner, answering to every domain, is drawn from practice and from *Team Topologies*' platform as a product. "Platform" names two things: a vendor's product, many technology components sold as one, and the service an organisation runs for all its domains, built from that product and what's around it; the series keeps "Databricks" for the product and "the data platform" for the service.
+Where the film differs: the published definitions say a platform holds no business logic (Dehghani: the platform is domain-agnostic). The film says where the logic is instead: it runs on the platform, in data products owned by each domain and by the enterprise domain, never in the platform's own components, and never owned by the platform team by default (the author, 11 November 2026). The *enterprise domain*, which owns the measures that cross domains, for performance and analysis, is the author's term; data mesh's nearest idea is an aggregate data product with an owner of its own. No standard defines a platform's owner: the sponsor with a platform product owner, answering to every domain, is drawn from practice and from *Team Topologies*' platform as a product. "Platform" names two things: a vendor's product, many technology components sold as one, and the service an organisation runs for all its domains, built from that product and what's around it; the series keeps "Databricks" and "Fabric" for products and "the data platform" for the service. Most organisations' data platforms are built from more than one vendor's product, and from components outside them, such as the data lake's storage, a key vault and the network (the author, 16 November 2026, issue #416); the film shows the utility's built from two, Databricks and Microsoft Fabric, and draws the data platform as a technology component of its own, one node made of them all, so it has a place on the map. Why so many is rarely a good idea comes in *One platform, or many*.
 
 Practice, from the author's brief: draw the data platform as a platform, not as one more application; when a number on it goes wrong, find the owner of its rule in the business, with the map and the catalogue; the owner asks in a ticket and writes the rule in the glossary; the data team builds it on the platform, with a test, and reviews the pull request; the owner checks the result in test before the ticket closes (AGENTS.md, *Business users ask in tickets*). All of it is said in *A number nobody owns*.
 
@@ -56,8 +56,9 @@ Practice, from the author's brief: draw the data platform as a platform, not as 
 | A hundred and forty small tiles, four of them named | The utility's systems, from *Today, and where it's going* |
 | One box among the applications: *data warehouse* | The data platform, drawn as one more application |
 | A green slab, with blue blocks set down on it, each with a gold tag | The platform's shared capabilities, each domain's logic built on them, and its owner in the business |
-| A product panel with the Databricks logo, its parts inside | A platform product: many components, sold as one |
-| An amber frame round it, with identity, the network, integration, orchestration, reporting tools, what watches it all, a team, its rules and support | Your data platform: the service the utility runs for all its domains |
+| A product panel with the Databricks logo, its parts inside; Microsoft Fabric and Snowflake named beside it | A platform product: many components, sold as one, as other vendors sell theirs |
+| An amber frame with two products in it, Databricks and Microsoft Fabric, the data lake, a key vault and the network outside them, then identity, integration, orchestration, reporting tools, what watches it all, a team, its rules and support | Your data platform: the service the utility runs for all its domains, built from more than one vendor's product |
+| The frame lit as one, with ArchiMate's node glyph: *one component, made of them all* | The data platform as a technology component of its own, made of the vendors' components |
 | Billing's box, its rules inside, its owner and its measure | An application: one purpose, its logic built in |
 | The test, as a card | One purpose with its logic built in, or shared capabilities with many owners' logic |
 | The finance system, a part for each function | An application suite: it serves many functions, and its logic is still inside |
@@ -70,7 +71,7 @@ Practice, from the author's brief: draw the data platform as a platform, not as 
 | A sponsor and a platform product owner, a line up to them from every domain | The platform's business owner, answering to every domain |
 | Four measures: how many build on it, the first data product, reliability, cost | A platform measured by its users' outcomes |
 | The six layers, every domain across them, the platform crossing them all | Why enterprise architecture matters most for a data platform |
-| ArchiMate elements: services, system software, a component, an interface, artifacts | The data practice on Tomás's map |
+| ArchiMate elements: a node, *enterprise data platform*, with system software and a network nested in it; services, a component, an interface, artifacts | The data practice on Tomás's map, the data platform with a place of its own |
 
 ## The look
 
@@ -84,38 +85,38 @@ Japan, 1601: the coast and its domains; Edo and Kyoto named; a traveller's light
 ### 2 · Where it sits · 1:51–2:31
 Tomás's map, its six layers, the bottom two lit for this series; the hundred and forty systems opened out of the application layer, four named; the information layer above them; the one box, *data warehouse*. Ravi asks Tomás to move it: "platform", one word, two meanings.
 
-### 3 · Two kinds of platform · 2:31–3:11
-The product, many components sold as one; your data platform round it: identity, the network, integration, orchestration, reporting tools and what watches it all, then a team, its rules and its support. The two words, as the series uses them.
+### 3 · Two kinds of platform · 2:31–3:36
+The product, many components sold as one, and other vendors that sell theirs as a data platform too, Microsoft Fabric and Snowflake. Your data platform round it: at the utility, two vendors' products, Databricks and Microsoft Fabric, and the components outside them both, the data lake, a key vault and the network; then identity, integration, orchestration, reporting tools and what watches it all; then a team, its rules and its support. The whole frame lit as one technology component, made of them all; whether it needs so many is left for later (*One platform, or many*). The two words, as the series uses them.
 
-### 4 · The test · 3:11–4:03
+### 4 · The test · 3:36–4:28
 Billing: one purpose, its rules inside, its owner, its measure. The data platform beside it: no purpose of its own, five capabilities, and the network, retail, finance and the enterprise domain setting their logic down on it. The test, as a card.
 
-### 5 · Not every shared system · 4:03–4:28
+### 5 · Not every shared system · 4:28–4:53
 The finance system, a part for finance, procurement and people, each with its logic inside: an application suite. The line: logic inside the system, or brought to it by its owners.
 
-### 6 · Whose logic · 4:28–4:58
+### 6 · Whose logic · 4:53–5:24
 The station: a courier runs in and stops, his letter box on his pole; the horses and porters ready; the letter, its sender's. On the platform, each domain's data product; one pushed into the platform's components, and refused; never the platform team by default; why it's hard to see.
 
-### 7 · A number nobody owns · 4:58–6:10
+### 7 · A number nobody owns · 5:24–6:36
 The measure, minutes without power per customer, for the regulator; three systems feed it; March jumps from eight to nineteen. The rule in the storm tool's export, dropped by February's update. Whose rule? Three answers, none of them right. The map and the catalogue find the owner, Ama; her ticket, the glossary, the data team's pull request with its test; Ama checks it in test, and March is back to nine.
 
-### 8 · An owner who answers to all · 6:10–6:50
+### 8 · An owner who answers to all · 6:36–7:16
 The road at dusk: an official riding free, a merchant paying his way, the station's people and the villagers with the loads; "the owner: the shogunate". Then the platform's sponsor and its product owner, a line up to them from every domain; deciding less, answering for how well it serves; its four measures.
 
-### 9 · Why the map matters most here · 6:50–7:10
+### 9 · Why the map matters most here · 7:16–7:35
 The six layers, every domain across them, the platform crossing every layer; one domain in one layer, struck through: it can't be designed from there.
 
-### 10 · The data practice on the map · 7:10–7:49
-The technology layer: storage, compute and the catalogue as services, Databricks realising them as system software. The application layer: the measure's data product, one component, owned by the enterprise domain; its output port, an interface; its tables, artifacts on the platform. No rule in the platform's components; the rule in the product, with its owner.
+### 10 · The data practice on the map · 7:35–8:28
+The technology layer: the data platform's own place, one node, the enterprise data platform, made of the vendors' system software, Databricks and Microsoft Fabric, with the data lake, the key vault and the network; together they realise storage, compute and the catalogue as services. The application layer: the measure's data product, one component, owned by the enterprise domain; its output port, an interface; its tables, artifacts on the platform. No rule in the platform's components; the rule in the product, with its owner.
 
-### 11 · Every domain's road · 7:49–8:19
+### 11 · Every domain's road · 8:28–8:57
 The five roads at night, travellers as lights on every one; the platform with every domain and every owner; "Next: Inside the platform"; the end card.
 
 ## Sound
 
 Chosen in the four series' palettes list on 12 November 2026 and made in `source/tools/score.py`: a continuo, the part that carries every voice in a piece and never plays its tune, first printed in Italy from 1600 to 1602, the years of the road's first order, as the platform carries every domain's logic and owns none of it. The lead is a harpsichord, one eight-foot register, kept brighter and softer in the treble than the site's other harpsichords; the partner a bassoon, low and level, with no vibrato. No film on the site pairs the two, and no film of this topic plays either: every rarer instrument with a sound of its own was already some film's, as the palettes list records, so the film pairs two the site has, and the question is on the author's checklist. The series' mark, *the relay*: the harpsichord plays three notes rising, D, E and A, and lets the A go as the bassoon takes it and carries it down to D, a phrase handed on as a letter from station to station. D major, B minor for what goes wrong, tuned pure from D. Nothing from the opening's place: no instrument, scale or sound of Japan, and no bells, horns or drums of the road; the road is feet on the earth and a runner passing. No chapter is urgent: nothing pulses.
 
-`tools/quiet.py` passes (12 November 2026): after the opening the music sounds 16% of the time, coming in once every 16.2 s; its loud moments at -29.9 dB and its loudest notes at -27.4 dB; 82 effects, at most three starting in one second; 135 held notes kept within 0.2 dB in the room. Against the voice: the music 21.6 dB under it while it speaks and 18.2 dB in the pauses, the effects 30.5 dB under it.
+`tools/quiet.py` passes again on 17 November 2026, with a tick for each product and part the two changed chapters bring in: 95 effects, at most three starting in one second, the music 15% of the time, once every 17.8 s. On 12 November 2026: after the opening the music sounds 16% of the time, coming in once every 16.2 s; its loud moments at -29.9 dB and its loudest notes at -27.4 dB; 82 effects, at most three starting in one second; 135 held notes kept within 0.2 dB in the room. Against the voice: the music 21.6 dB under it while it speaks and 18.2 dB in the pauses, the effects 30.5 dB under it.
 
 ## Pause and think
 
@@ -142,8 +143,9 @@ Checked on 11 and 12 November 2026:
 - The continuo's first printed parts (Peri, Caccini and Cavalieri, 1600 and 1601; Viadana, 1602) are general music history, used only in the score's notes.
 - Leaving major storms out of a reliability measure is common regulatory practice (for example the IEEE 1366 guide's *major event days*); the film names no method, only "the regulator's method".
 - Databricks calls its product the Data Intelligence Platform, and a data and AI platform ([databricks.com](https://www.databricks.com/), checked 12 November 2026); the film says only that it calls its product a data platform. The services the film shows, storage, compute and the catalogue, are generally available that day; the film names no feature's release status, on screen or in its voice.
+- Microsoft Fabric and Snowflake are named only as other vendors whose products are sold as one platform; the film names no feature of theirs, nor any release status. Microsoft Fabric's icon is Microsoft's own, unaltered, from the file *Modern data basics* already uses (`films/data-that-moves/shared/src/logos.js`; NOTICE.md); Snowflake is named, its mark not drawn. That the utility's data platform is built from Databricks and Microsoft Fabric is invented, as the rest of the utility is.
 - The utility, its people and its numbers (the hundred and forty systems, eight minutes, nineteen in March, nine after the fix, February's update) are invented, in *The map before the data*'s world.
 
 ## Pacing report
 
-`tools/pace.py`, 12 November 2026: 8:19.5, 1,097 words, 132 words a minute, the voice 77% of the time; every chapter from 109 to 138 words a minute (*Not every shared system*, *A number nobody owns* and *An owner who answers to all*, at 138, are under the 140 a chapter may reach), the voice at most 81% of any chapter; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter.
+`tools/pace.py`, 17 November 2026, after issue #416 added the vendors' products and the platform's own node: 8:57.5, 1,190 words, 133 words a minute, the voice 78% of the time, every chapter from 109 to 139 words a minute and the voice at most 81% of any chapter, no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter. On 12 November 2026: 8:19.5, 1,097 words, 132 words a minute, the voice 77% of the time; every chapter from 109 to 138 words a minute (*Not every shared system*, *A number nobody owns* and *An owner who answers to all*, at 138, are under the 140 a chapter may reach), the voice at most 81% of any chapter; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter.

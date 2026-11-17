@@ -49,7 +49,7 @@ const NARR={
  {"id":"seatneeds","gap":0.8,"text":"Seating needs each graduate once, their ceremony, and whether they'll be there."},
  {"id":"certneeds","gap":0.8,"text":"A certificate needs the name as printed, the award, and the date it was conferred."},
  {"id":"ask6","gap":0.8,"text":"Then they asked six questions of each. Is it complete? Unique? Valid? Consistent? Accurate? On time?"},
- {"id":"dama","gap":0.8,"text":"These are DAMA's six dimensions of data quality. An ISO standard names fifteen; six are enough to start.","say":"These are Dahmah's six dimensions of data quality. An eye-so standard names fifteen; six are enough to start."},
+ {"id":"dama","gap":0.8,"text":"These are DAMA's six dimensions of data quality. An ISO standard names fifteen; six are enough to start.","say":"These are Dah-ma's six dimensions of data quality. An eye-so standard names fifteen; six are enough to start."},
  {"id":"lean","gap":0.8,"text":"Each use leans on different ones, as Mercator's chart chose angles over sizes."},
  {"id":"seatdim","gap":0.8,"text":"Seating needs the list complete: every graduate who crosses the stage, once."},
  {"id":"certdim","gap":0.8,"text":"A certificate needs it accurate: the name its graduate really has."},

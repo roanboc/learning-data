@@ -1,0 +1,98 @@
+{
+  "kicker": "Wellbeing at work",
+  "kicker_es": "Bienestar en el trabajo",
+  "title_es": "El bienestar está en el trabajo",
+  "h1": "Wellbeing is in the work: fix the work before you ask people to cope",
+  "h1_es": "El bienestar está en el trabajo: arregla el trabajo antes de pedir aguante",
+  "lead": "Fourteen urgent requests wait on Marta Silva, the data team's only analyst, in no order. Helena Novak, her new manager, doesn't ask her to cope. They write her week on one page, agree an order with the people who asked, and then ask the whole team the same five questions in writing.",
+  "lead_es": "Catorce solicitudes urgentes esperan a Marta Silva, la única analista del equipo de datos, sin orden. Helena Novak, su nueva gestora, no le pide aguante. Escriben su semana en una página, acuerdan un orden con quienes pidieron, y luego hacen a todo el equipo las mismas cinco preguntas por escrito.",
+  "description": "A film about wellbeing as something the work itself gives or takes away, the second of People first in the module Leading data people: three things everyone needs from work (a say in it, to be good at it, and to belong: Richard Ryan and Edward Deci's self-determination theory), and what the work asks set beside what helps, on one page (job demands and resources), each named once; Marta Silva, the team's only analyst, with fourteen of the team's 46 open requests, all called urgent, in no order; her week written on one page with Helena Novak, and taken, as evidence and with no blame, to the nine people who asked: two requests dropped, twelve given an order and a date, three in hand at a time; where a manager looks in the work, which Safe Work Australia lists as hazards, the World Health Organization's three signs of burn-out, classed as a matter of work and not as a medical condition, and where a manager's part ends; the same five questions put to all seven in writing, the answers shown as counts and in the words each agreed to share, one thing changed now and a date for the rest. It opens at Quehue, in the Andes of Peru, where four communities make a bridge of grass rope new each year, on a date, before it fails.",
+  "description_es": "Una película sobre el bienestar como algo que el propio trabajo da o quita, la segunda de Las personas primero en el módulo Liderar equipos de datos: tres cosas que todos necesitan del trabajo (tener voz en él, hacerlo bien y pertenecer: la teoría de la autodeterminación de Richard Ryan y Edward Deci), y lo que el trabajo pide junto a lo que ayuda, en una página (demandas y recursos laborales), nombradas una vez; Marta Silva, la única analista del equipo, con catorce de las 46 solicitudes abiertas del equipo, todas llamadas urgentes, sin ningún orden; su semana escrita en una página con Helena Novak, y llevada, como evidencia y sin culpas, a las nueve personas que pidieron: dos solicitudes descartadas, doce con un orden y una fecha, tres a la vez; dónde mira en el trabajo quien dirige, lo que Safe Work Australia cuenta entre los peligros del trabajo, las tres señales de burn-out de la Organización Mundial de la Salud, clasificado como un asunto del trabajo y no como una afección médica, y dónde termina la parte de quien dirige; las mismas cinco preguntas hechas por escrito a los siete, las respuestas mostradas en conteos y en las palabras que cada quien aceptó compartir, una cosa cambiada ahora y una fecha para el resto. Empieza en Quehue, en los Andes del Perú, donde cuatro comunidades hacen nuevo un puente de cuerdas de paja cada año, en una fecha, antes de que falle.",
+  "card": "Fourteen urgent requests wait on Marta, in no order. Helena doesn't ask her to cope: she changes the work, then asks the whole team.",
+  "card_es": "Catorce solicitudes urgentes esperan a Marta, sin orden. Helena no le pide aguante: cambia el trabajo, y luego pregunta a todo el equipo.",
+  "chapters_es": {
+    "bridge": "Antes de que caiga",
+    "fourteen": "Catorce, todas urgentes",
+    "page": "Una semana, en una página",
+    "needs": "Tres cosas que todos necesitan",
+    "order": "Un orden, acordado",
+    "keeper": "Dónde mirar",
+    "signs": "Tres señales, y un límite",
+    "ask": "Preguntar a todos, por escrito",
+    "date": "En una fecha"
+  },
+  "past": [
+    "Quehue, Peru, 2020 and 2021: made new before it fails",
+    "Four communities look after a bridge of grass rope over a gorge in the Andes. Its rope weakens in the sun, the rain and the wind: not renewed in 2020, in the pandemic, the bridge fell in March 2021. So they don't wait: each year, on a date, they make the whole bridge new. Renew the way the work is arranged before it fails, and never the people."
+  ],
+  "past_es": [
+    "Quehue, Perú, 2020 y 2021: hecho nuevo antes de que falle",
+    "Cuatro comunidades cuidan un puente de cuerdas de paja sobre un cañón de los Andes. Su cuerda se debilita con el sol, la lluvia y el viento: sin renovarse en 2020, en la pandemia, el puente cayó en marzo de 2021. Por eso no esperan: cada año, en una fecha, hacen nuevo el puente entero. Renueva la forma de organizar el trabajo antes de que falle, y nunca a las personas."
+  ],
+  "next_h": "You've seen the work changed before anyone was asked to cope. Next: how people differ, by degree, with nobody sorted by it.",
+  "next_h_es": "Viste cambiar el trabajo antes de pedirle aguante a nadie. Después: en qué se diferencian las personas, por grados, sin clasificar a nadie por eso.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The annual renewal of the Q'eswachaka bridge",
+        "title_es": "La renovación anual del puente Q'eswachaka",
+        "line": "UNESCO's page on the knowledge, skills and rituals of the four communities who make the bridge new each year.",
+        "line_es": "La página de la UNESCO sobre los conocimientos, técnicas y rituales de las cuatro comunidades que hacen nuevo el puente cada año.",
+        "href": "https://ich.unesco.org/en/RL/knowledge-skills-and-rituals-related-to-the-annual-renewal-of-the-qeswachaka-bridge-00594",
+        "href_es": "https://ich.unesco.org/es/RL/conocimientos-practicas-y-tecnicas-asociados-a-la-renovacion-anual-del-puente-qeswachaka-00594"
+      },
+      {
+        "title": "Burn-out, an \"occupational phenomenon\"",
+        "title_es": "El burn-out, un \"fenómeno ocupacional\" (en inglés)",
+        "line": "The World Health Organization's note: where burn-out comes from, its three signs, and that it isn't classed as a medical condition.",
+        "line_es": "La nota de la Organización Mundial de la Salud: de dónde viene el burn-out, sus tres señales, y que no se clasifica como afección médica.",
+        "href": "https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases",
+        "href_es": "https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases"
+      },
+      {
+        "title": "Mental health at work",
+        "title_es": "La salud mental en el trabajo",
+        "line": "The World Health Organization on what puts mental health at risk at work, and what it recommends that employers change in the work itself.",
+        "line_es": "La Organización Mundial de la Salud sobre lo que pone en riesgo la salud mental en el trabajo, y lo que recomienda a los empleadores cambiar en el propio trabajo.",
+        "href": "https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work",
+        "href_es": "https://www.who.int/es/news-room/fact-sheets/detail/mental-health-at-work"
+      },
+      {
+        "title": "Psychosocial hazards",
+        "title_es": "Peligros psicosociales (en inglés)",
+        "line": "Safe Work Australia's list of what can harm people in how work is arranged, among them job demands, low job control and poor support.",
+        "line_es": "La lista de Safe Work Australia de lo que puede dañar a la gente en cómo se organiza el trabajo, entre ellos las demandas, el poco control y el poco apoyo.",
+        "href": "https://www.safeworkaustralia.gov.au/safety-topic/managing-health-and-safety/mental-health/psychosocial-hazards",
+        "href_es": "https://www.safeworkaustralia.gov.au/safety-topic/managing-health-and-safety/mental-health/psychosocial-hazards"
+      },
+      {
+        "title": "Self-determination theory",
+        "title_es": "Teoría de la autodeterminación",
+        "line": "Richard Ryan and Edward Deci's three needs, which researchers call autonomy, competence and relatedness: a say, being good at it, and belonging.",
+        "line_es": "Las tres necesidades de Richard Ryan y Edward Deci, que los investigadores llaman autonomía, competencia y relación: tener voz, hacerlo bien y pertenecer.",
+        "href": "https://en.wikipedia.org/wiki/Self-determination_theory",
+        "href_es": "https://es.wikipedia.org/wiki/Teor%C3%ADa_de_la_autodeterminaci%C3%B3n"
+      },
+      {
+        "title": "The job demands-resources model",
+        "title_es": "El modelo de demandas y recursos laborales (en inglés)",
+        "line": "The two sides of Marta's page as researchers study them: what a job asks of people, and what it gives them to meet it.",
+        "line_es": "Los dos lados de la página de Marta como los estudian los investigadores: lo que un trabajo pide a la gente, y lo que le da para responder.",
+        "href": "https://en.wikipedia.org/wiki/Job_demands-resources_model",
+        "href_es": "https://en.wikipedia.org/wiki/Job_demands-resources_model"
+      }
+    ],
+    "more": [
+      {
+        "text": "Gavin Slemp and others, \"Interpersonal supports for basic psychological needs and their relations with motivation, well-being, and performance: a meta-analysis\" (2024): the 881 samples behind \"hundreds of studies\"",
+        "text_es": "Gavin Slemp y otros, \"Interpersonal supports for basic psychological needs and their relations with motivation, well-being, and performance: a meta-analysis\" (2024): las 881 muestras detrás de \"cientos de estudios\" (en inglés)",
+        "href": "https://doi.org/10.1037/pspi0000459",
+        "href_es": "https://doi.org/10.1037/pspi0000459"
+      }
+    ]
+  }
+}

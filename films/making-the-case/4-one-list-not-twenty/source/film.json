@@ -24,7 +24,8 @@
     ["\\bNovak's\\b", "Noh-vak's"],
     ["\\bJun\\b", "Joon"],
     ["\\bNoor\\b", "Nuur"],
-    ["\\bA I\\b", "AI"]
+    ["\\bA I\\b", "AI"],
+    ["\\bAnil\\b", "Unnil"]
   ],
   "story": [
     "flying"

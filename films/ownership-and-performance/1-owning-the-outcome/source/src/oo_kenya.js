@@ -1,300 +1,132 @@
-/* ===== Owning the outcome: the opening, Kenya's central highlands, the 1970s to 2004 =====
-   The film's own places and pictures for its opening story (prefix oo_), in the module's matte, sunlit language, lit from the right as
-   its rooms are, so the light carries across into the university. Nothing here is a likeness of a real place or person, and nothing is
-   borrowed from a culture's own patterns or crafts: rolling hills of red soil, small farms, tea, a timber plantation, a dry stream bed;
-   a tree nursery of seedlings in plastic sleeves under a shade of poles; people in plain clothes of the 1970s.
-     ooHills, ooGreen      the hills of the 1970s, their forests cleared: fields to the ridges, tea, a plantation's straight rows, a few
-                           old trees, stumps and gullies on the near slope, the stream bed dry; and the same hills years later, with trees
-                           along the fields and on the slope, grass over the gullies, water in the stream (one room: AG_ROOMS)
-     ooNursery             a group's tree nursery: a shade of poles and dry grass over packed earth, the hills behind
-     oo_beds(ctx, t, o)    the nursery's two beds of seedlings in their sleeves, growing (o.g, 0 to 1)
-     oo_seedling(ctx, x, y, s, o)   one seedling: o.g how far it has grown (0 to 1), o.dry how far it has died (0 to 1), o.sleeve in a
-                           plastic sleeve, else in the ground with a ring of soil
-     oo_tree(c, x, base, s, o)      a broad-leaved tree, its trunk tapering, its crown in clumps lit from the right
-     oo_run(ctx, t, a)     rain water running down the near slope's gullies, carrying the red soil into the stream bed
-     OO_ROW                where the women plant a row of seedlings on the near slope (and where, years later, trees stand)
-     OO_PEOPLE             Wangari Maathai, a biologist, and three women of the hills, dressed for their time, never likenesses
-   Colour keeps the module's meaning: amber the harm (the streams, the food, the firewood, the soil), green what got better (the trees
-   counted alive, what they give), blue the plan (the movement); the hills, the trees and the people wear none of the five: the leaves
-   are olive, never the green that marks a value. */
-
-const OO_K={sky0:[164,190,212],sky1:[238,228,206],mount:[152,164,178],mountSh:[124,134,152],snow:[240,240,238],
-  far0:[166,174,166],far1:[146,154,136],far2:[132,138,112],
-  soil:[164,96,62],soilDk:[116,64,44],soilHi:[200,138,96],dust:[198,164,116],grass:[160,146,92],grassDk:[118,108,66],
-  stub:[202,170,112],tan:[212,186,142],plough:[150,90,62],maize:[146,146,86],tea:[122,144,72],teaDk:[90,110,56],pine:[62,78,60],pineHi:[96,112,82],
-  leaf:[88,108,62],leafDk:[56,72,46],leafHi:[146,160,98],turf:[124,132,76],turfDk:[92,102,58],bark:[104,84,68],barkDk:[66,52,44],
-  stone:[198,190,176],stoneDk:[150,142,130],sand:[208,192,158],water:[118,148,158],waterHi:[200,216,216],
-  sleeve:[44,42,46],sleeveHi:[110,108,114],thatch:[186,162,114],thatchDk:[136,114,78],pole:[122,98,74],poleDk:[84,66,50],earth:[176,138,104],earthDk:[138,102,76]};
-
-/* ---------------------------------------------------------------- small things */
-const oo_wob=(u,s)=>Math.sin(u*1.7+s*3.1)*0.6+Math.sin(u*3.9+s*1.3)*0.4;
-// a soft blob of light or shade: a radial gradient, cheap to draw
-function oo_blob(c,x,y,rx,ry,col,a){if(a<=0.004||rx<=0)return;c.save();c.translate(x,y);c.scale(1,ry/rx);const g=c.createRadialGradient(0,0,0,0,0,rx);
-  g.addColorStop(0,rgba(col,a));g.addColorStop(0.6,rgba(col,a*0.45));g.addColorStop(1,rgba(col,0));c.fillStyle=g;c.fillRect(-rx,-rx,2*rx,2*rx);c.restore();}
-// a line through points, smoothed: quadratic curves through the midpoints
-function oo_curve(c,P,move){if(move!==false)c.moveTo(P[0][0],P[0][1]);else c.lineTo(P[0][0],P[0][1]);
-  for(let i=1;i<P.length-1;i++){const m=[(P[i][0]+P[i+1][0])/2,(P[i][1]+P[i+1][1])/2];c.quadraticCurveTo(P[i][0],P[i][1],m[0],m[1]);}
-  const L=P[P.length-1];c.lineTo(L[0],L[1]);}
-// a ridge line: its height at x, from a few soft waves (the same seed, the same ridge)
-const oo_ridge=(x,y0,amp,s)=>y0-amp*(0.5+0.32*Math.sin(x/330+s)+0.18*Math.sin(x/127+s*2.3));
-
-/* ---------------------------------------------------------------- the hills: sky, the far mountain, far ridges */
-function oo_sky(c,hz){let g=c.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgba(OO_K.sky0,1));g.addColorStop(0.7,rgba(mix(OO_K.sky0,OO_K.sky1,0.7),1));g.addColorStop(1,rgba(OO_K.sky1,1));
-  c.fillStyle=g;c.fillRect(0,0,W,hz+60);
-  // the sun's warmth from high on the right, and a few soft clouds over the far hills
-  oo_blob(c,1780,30,1000,760,[255,236,196],0.45);
-  for(const [x,y,r] of [[340,190,190],[520,168,130],[660,200,150],[1080,130,130],[1200,108,100],[1700,230,160]]){oo_blob(c,x,y,r,r*0.38,[255,252,246],0.45);oo_blob(c,x-r*0.2,y+r*0.15,r*0.8,r*0.2,[200,204,214],0.16);}}
-// far away to the north-east, low in the haze: a broad mountain, its summit a cluster of rock peaks with a little snow
-function oo_mountain(c){const pk=[[980,472],[1120,446],[1240,414],[1320,384],[1372,360],[1404,344],[1426,326],[1438,330],[1450,306],[1462,318],[1472,296],[1484,312],[1494,302],[1506,322],[1522,330],[1546,344],[1590,360],[1660,384],[1760,414],[1880,446],[1990,470]];
-  const shape=cc=>{cc.moveTo(960,490);for(const p of pk)cc.lineTo(p[0],p[1]);cc.lineTo(1990,490);cc.closePath();};
-  c.save();c.globalAlpha=0.55;ag_shape(c,shape);c.fillStyle=rgba(OO_K.mount,1);c.fill();
-  c.save();ag_shape(c,shape);c.clip();c.fillStyle=rgba(OO_K.mountSh,0.5);c.beginPath();c.moveTo(960,490);for(const p of pk.slice(0,11))c.lineTo(p[0],p[1]);c.lineTo(1468,310);c.lineTo(1440,390);c.lineTo(1380,470);c.lineTo(1320,490);c.closePath();c.fill();
-  // a few ridges down its sunlit side
-  c.strokeStyle="rgba(255,250,240,0.35)";c.lineWidth=2;for(const [x0,y0,x1,y1] of [[1486,312,1560,420],[1506,324,1650,440],[1474,300,1506,410]]){c.beginPath();c.moveTo(x0,y0);c.quadraticCurveTo((x0+x1)/2+10,(y0+y1)/2-6,x1,y1);c.stroke();}c.restore();
-  c.globalAlpha=0.8;c.fillStyle=rgba(OO_K.snow,1);for(const P of [[[1438,330],[1450,306],[1458,320],[1450,330]],[[1466,304],[1472,296],[1482,312],[1474,318]],[[1490,306],[1494,302],[1504,320],[1496,324]]]){c.beginPath();P.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.closePath();c.fill();}
-  c.restore();}
-function oo_far(c){for(const [col,y0,amp,s] of [[OO_K.far0,470,34,1.2],[OO_K.far1,492,28,4.1],[OO_K.far2,512,22,2.6]]){c.fillStyle=rgba(col,1);c.beginPath();c.moveTo(0,H);
-    for(let x=0;x<=W;x+=24)c.lineTo(x,oo_ridge(x,y0,amp,s));c.lineTo(W,H);c.closePath();c.fill();
-    const g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(52,44,52,0.07)");g.addColorStop(1,"rgba(255,236,200,0.08)");c.fillStyle=g;c.fillRect(0,y0-amp,W,amp*2+40);}}
-
-/* ---------------------------------------------------------------- the middle hills, cut into small farms */
-// back to front: the hill on the right, then the one on the left; each crest a curve, the hill's plots in bands that follow it down
-// the slope, wider as they come nearer; haze (0 to 1) how far the air pales it
-const OO_HILLS=[{x0:640,x1:2000,crest:x=>540+Math.pow((x-1560)/620,2)*70+12*Math.sin(x/170),base:700,seed:57,haze:0.22,bands:5,tea:null,pine:[0.56,0.74]},
-                {x0:-60,x1:1320,crest:x=>522+Math.pow((x-430)/640,2)*88+10*Math.sin(x/150+1),base:760,seed:31,haze:0.08,bands:5,tea:[0.6,0.86],pine:null}];
-// a band's edge, k of n bands down the slope at x (with a little wander of its own)
-const oo_band=(h,x,k)=>k<=0?h.crest(x):lerp(h.crest(x),h.base,Math.pow(k/h.bands,1.45))+(k<h.bands?6*oo_wob(x/140,k+h.seed):0);
-// the hill's plots, worked out once: [{xs, k, kind, u}], each between band k and k+1, from xs[0] to xs[1]
-function oo_plots(h){if(h.plots)return h.plots;const R=ag_rnd(h.seed),out=[];
-  for(let k=0;k<h.bands;k++){let x=h.x0-20*R();while(x<h.x1){const w=lerp(110,280,R())*lerp(0.8,1.25,k/h.bands),xa=x,xb=Math.min(h.x1+40,x+w),uu=((xa+xb)/2-h.x0)/(h.x1-h.x0);
-      let kind=["stub","tan","plough","maize","pasture","stub","maize","tan","pasture"][(R()*9)|0];
-      if(h.tea&&uu>h.tea[0]&&uu<h.tea[1]&&k>=1&&k<4)kind="tea";if(h.pine&&uu>h.pine[0]&&uu<h.pine[1]&&k<2)kind="pine";
-      out.push({xs:[xa,xb],k,kind,u:uu,lean:(R()-0.5)*30});x=xb;}}
-  return h.plots=out;}
-// a plot's outline: along its top band edge, down its far side, back along its lower edge
-function oo_plotPath(c,h,p){const [xa,xb]=p.xs,k=p.k,n=6;c.beginPath();for(let i=0;i<=n;i++){const x=lerp(xa,xb,i/n);i?c.lineTo(x,oo_band(h,x,k)):c.moveTo(x,oo_band(h,x,k));}
-  for(let i=n;i>=0;i--){const x=lerp(xa,xb,i/n)+p.lean*(i===0||i===n?1:0)*0;c.lineTo(x+(i===n?p.lean:i===0?p.lean:p.lean),oo_band(h,x+p.lean,k+1));}c.closePath();}
-const OO_FIELD={stub:[206,178,122],tan:[214,194,152],plough:[164,106,74],maize:[152,150,94],pasture:[178,164,108],tea:[126,146,82],pine:[74,90,68]};
-function oo_paintHill(c,h,green){const R=ag_rnd(h.seed+7),plots=oo_plots(h),haze=mix(OO_K.sky1,OO_K.far0,0.3);
-  const body=cc=>{cc.moveTo(h.x0,H);for(let x=h.x0;x<=h.x1;x+=20)cc.lineTo(x,h.crest(x));cc.lineTo(h.x1,h.crest(h.x1));cc.lineTo(h.x1,H);cc.closePath();};
-  ag_shape(c,body);c.fillStyle=rgba(mix(OO_FIELD.pasture,haze,h.haze),1);c.fill();c.save();ag_shape(c,body);c.clip();
-  for(const p of plots){const col=mix(green&&p.kind==="pasture"?mix(OO_FIELD.pasture,OO_K.turf,0.5):OO_FIELD[p.kind],haze,h.haze);c.fillStyle=rgba(col,1);oo_plotPath(c,h,p);c.fill();
-    c.save();oo_plotPath(c,h,p);c.clip();const [xa,xb]=p.xs;
-    // rows along the slope: tea's close hedges, maize's lines, a ploughed field's furrows; a plantation's trees in their straight rows
-    if(p.kind==="tea"||p.kind==="maize"||p.kind==="plough"){const n=p.kind==="tea"?7:p.kind==="maize"?5:4,col2=p.kind==="tea"?mix([96,116,62],haze,h.haze):rgba(ag_dk(col,0.3),1);
-      for(let r=1;r<n;r++){const f=p.k+r/n;c.strokeStyle=p.kind==="tea"?rgba(col2,0.8):rgba(ag_dk(col,0.3),0.3);c.lineWidth=p.kind==="tea"?2.6:1.4;c.beginPath();
-        for(let i=0;i<=8;i++){const x=lerp(xa-10,xb+40,i/8),y=lerp(oo_band(h,x,Math.floor(f)),oo_band(h,x,Math.floor(f)+1),f-Math.floor(f));i?c.lineTo(x,y):c.moveTo(x,y);}c.stroke();}}
-    else if(p.kind==="pine"){for(let r=0;r<6;r++)for(let q=0;q<14;q++){const x=lerp(xa,xb,(q+0.5)/14),y=lerp(oo_band(h,x,p.k),oo_band(h,x,p.k+1),(r+0.8)/6);
-        c.fillStyle=rgba(mix(ag_lt(OO_FIELD.pine,0.2),haze,h.haze),1);c.beginPath();c.moveTo(x,y-9);c.lineTo(x+3.4,y);c.lineTo(x-3.4,y);c.closePath();c.fill();}}
-    c.restore();
-    // the plot's lower edge: a soft line of shade, a hedge in the later years
-    c.strokeStyle="rgba(70,52,40,0.2)";c.lineWidth=1.4;c.beginPath();for(let i=0;i<=6;i++){const x=lerp(xa,xb,i/6)+p.lean;i?c.lineTo(x,oo_band(h,x,p.k+1)):c.moveTo(x,oo_band(h,x,p.k+1));}c.stroke();}
-  // the light: the slope towards the sun warmer, the far side in shade, the crest lit
-  let g=c.createLinearGradient(h.x0,0,h.x1,0);g.addColorStop(0,"rgba(52,44,52,0.18)");g.addColorStop(0.5,"rgba(52,44,52,0.02)");g.addColorStop(1,"rgba(255,232,190,0.12)");c.fillStyle=g;c.fillRect(h.x0,0,h.x1-h.x0,H);
-  g=c.createLinearGradient(0,h.crest((h.x0+h.x1)/2)-30,0,h.base);g.addColorStop(0,"rgba(255,246,226,0.16)");g.addColorStop(0.4,"rgba(255,246,226,0)");g.addColorStop(1,"rgba(52,44,52,0.1)");c.fillStyle=g;c.fillRect(h.x0,0,h.x1-h.x0,H);
-  // trees: a few old ones left standing in the 1970s; years later, lines of them along the fields' edges, and small woods
-  if(green){for(const p of plots){if(p.kind==="pine"||p.kind==="tea")continue;const [xa,xb]=p.xs,n=Math.round((xb-xa)/34);if(R()<0.4)continue;
-      for(let i=0;i<n;i++){if(R()<0.45)continue;const x=lerp(xa,xb,(i+R())/n)+p.lean,y=oo_band(h,x,p.k+1)+1,s=lerp(0.07,0.14,(y-500)/300)*(0.8+R()*0.4);oo_tree(c,x,y,s,{seed:(x*7+y)|0,far:1,haze:h.haze});}
-      if(R()<0.07){const cx=(xa+xb)/2,cy=lerp(oo_band(h,cx,p.k),oo_band(h,cx,p.k+1),0.7);for(let i=0;i<14;i++)oo_tree(c,cx+(R()-0.5)*(xb-xa)*0.7,cy+(R()-0.5)*20,lerp(0.08,0.14,(cy-500)/300),{seed:i*31+p.k,far:1,haze:h.haze});}}}
-  else for(let i=0;i<9;i++){const p=plots[(R()*plots.length)|0];if(p.kind==="pine")continue;const x=lerp(p.xs[0],p.xs[1],R()),y=oo_band(h,x,p.k+1)+1;oo_tree(c,x,y,lerp(0.08,0.15,(y-500)/300),{seed:i*17+h.seed,far:1,haze:h.haze});}
-  c.restore();}
-
-/* ---------------------------------------------------------------- the near slope */
-// its top edge; the gullies the rain has cut (each a smooth curve, narrow at the top); the stumps of the trees that were cut; and the
-// stream bed in the valley beyond, seen between the hills
-const OO_NEAR={top:x=>748+16*Math.sin(x/260+0.8)+9*Math.sin(x/97+2)-(x-960)*0.012,
-  gullies:[[[560,772],[500,830],[470,930],[300,1090],5,70],[[1150,756],[1190,840],[1120,950],[1180,1090],4,56],[[1640,748],[1700,820],[1690,930],[1820,1090],4,64]],
-  stumps:[[250,858,30],[790,812,22],[1340,826,26],[1800,884,34]],
-  stream:[[1300,636],[1318,650],[1306,668],[1334,686],[1378,700],[1394,716],[1450,734]]};
-// where the women plant their row of seedlings, along the slope, and which ones are still alive months later
-const OO_ROW={pts:[[560,826],[700,820],[840,814],[980,810],[1120,810],[1260,814],[1400,820],[1540,828]],alive:[1,1,0,1,1,0,1,0]};
-function oo_stream(c,green){const S=OO_NEAR.stream;c.save();c.lineCap="round";c.lineJoin="round";
-  const path=()=>{c.beginPath();oo_curve(c,S);};
-  path();c.strokeStyle=rgba(green?[96,108,66]:[150,126,92],0.9);c.lineWidth=20;c.stroke();
-  path();c.strokeStyle=rgba(green?OO_K.water:[198,180,146],1);c.lineWidth=11;c.stroke();
-  if(green){path();c.strokeStyle=rgba(OO_K.waterHi,0.6);c.lineWidth=3;c.stroke();
-    // trees along its banks
-    for(let i=0;i<S.length;i++){const [x,y]=S[i];for(const d of [-18,18])oo_tree(c,x+d+((i*13)%7),y+4,0.09+i*0.008,{seed:i*11+d,far:1});}}
-  else{const R=ag_rnd(4);for(let k=0;k<40;k++){const i=1+((R()*(S.length-1))|0),f=R(),x=lerp(S[i-1][0],S[i][0],f)+(R()-0.5)*6,y=lerp(S[i-1][1],S[i][1],f)+(R()-0.5)*5;
-      c.fillStyle=rgba(R()<0.5?OO_K.stone:OO_K.stoneDk,0.9);c.beginPath();c.ellipse(x,y,2+R()*2.5,1.4+R()*1.6,0,0,TAU);c.fill();}}
-  c.restore();}
-// a gully: a channel that wanders down the slope, narrow where it starts and wider and deeper below, with small rills joining it. The
-// sun is on the right, so the channel's left wall, which faces it, is lit, and its right wall is in shade. Grassed over, years later
-function oo_gully(c,G,green,seed){const [p0,p1,p2,p3,w0,w1]=G,R=ag_rnd(60+seed),n=40,Lft=[],Rgt=[],mid=[],bz=[p0[0],p0[1],p1[0],p1[1],p2[0],p2[1],p3[0],p3[1]];
-  for(let i=0;i<=n;i++){const u=i/n,[x,y]=ag_bz(bz,u),[x2,y2]=ag_bz(bz,Math.min(1,u+0.01)),[x1,y1]=ag_bz(bz,Math.max(0,u-0.01)),d=Math.hypot(x2-x1,y2-y1)||1,nx=-(y2-y1)/d,ny=(x2-x1)/d,
-    w=lerp(w0,w1,Math.pow(u,0.8))*(1+0.28*Math.sin(u*17+seed)+0.12*Math.sin(u*41+seed*2)),mx=x+Math.sin(u*9+seed)*w*0.25;mid.push([mx,y,nx,ny,w]);
-    Lft.push([mx-nx*w/2,y-ny*w/2]);Rgt.push([mx+nx*w/2,y+ny*w/2]);}
-  const poly=(A,B)=>{c.beginPath();A.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));for(let i=B.length-1;i>=0;i--)c.lineTo(B[i][0],B[i][1]);c.closePath();};
-  if(green){poly(Lft,Rgt);c.fillStyle=rgba(ag_dk(OO_K.turf,0.14),0.16);c.fill();return;}
-  // the rills that feed it: faint lines in the soil, joining from either side
-  for(let k=0;k<4;k++){const i=8+((R()*(n-14))|0),[mx,y,nx,ny,w]=mid[i],sd=k%2?-1:1,l=40+R()*70;
-    ag_taper(c,[mx+sd*(w/2+l),y-l*0.5],[mx+sd*(w/2+l*0.6),y-l*0.3],[mx+sd*w*0.7,y-l*0.1],[mx+sd*w*0.35,y],1.5,Math.max(2.5,w*0.12),rgba(ag_dk(OO_K.soil,0.2),0.45));}
-  // the channel's rim, the lit left wall, the floor in shade
-  poly(Lft.map(q=>[q[0]-3,q[1]]),Rgt.map(q=>[q[0]+3,q[1]]));c.fillStyle=rgba(ag_dk(OO_K.soil,0.12),0.6);c.fill();
-  poly(Lft,Rgt);c.fillStyle=rgba(mix(OO_K.soilHi,OO_K.soil,0.3),0.95);c.fill();
-  poly(mid.map(([mx,y,nx,ny,w])=>[mx-nx*w*0.1,y-ny*w*0.1]),Rgt);c.fillStyle=rgba(OO_K.soilDk,0.85);c.fill();
-  poly(mid.map(([mx,y,nx,ny,w])=>[mx+nx*w*0.18,y+ny*w*0.18]),Rgt);c.fillStyle=rgba(ag_dk(OO_K.soilDk,0.3),0.6);c.fill();
-  // stones washed into its floor
-  for(let k=0;k<14;k++){const [mx,y,nx,ny,w]=mid[4+((R()*(n-4))|0)];c.fillStyle=rgba(R()<0.5?OO_K.stone:OO_K.stoneDk,0.85);c.beginPath();c.ellipse(mx+nx*w*0.1+(R()-0.5)*w*0.2,y,1.5+w*0.06*R(),1+w*0.04*R(),0,0,TAU);c.fill();}}
-function oo_paintNear(c,green){const R=ag_rnd(91),T=OO_NEAR.top;
-  const top=[];for(let x=-20;x<=W+20;x+=20)top.push([x,T(x)]);
-  const body=cc=>{cc.moveTo(-20,H);for(const p of top)cc.lineTo(p[0],p[1]);cc.lineTo(W+20,H);cc.closePath();};
-  const soil=green?mix(OO_K.turf,[150,150,92],0.4):OO_K.soil,soilDk=green?mix(OO_K.turfDk,OO_K.soilDk,0.2):OO_K.soilDk;
-  let g=c.createLinearGradient(0,730,0,H);g.addColorStop(0,rgba(mix(soil,OO_K.dust,0.3),1));g.addColorStop(0.4,rgba(soil,1));g.addColorStop(1,rgba(soilDk,1));
-  ag_shape(c,body);c.fillStyle=g;c.fill();
-  c.save();ag_shape(c,body);c.clip();
-  g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(52,44,52,0.2)");g.addColorStop(0.5,"rgba(52,44,52,0.03)");g.addColorStop(1,"rgba(255,226,180,0.12)");c.fillStyle=g;c.fillRect(0,600,W,H);
-  // the slope's lie: soft bands across it; grit and small stones
-  for(let k=0;k<8;k++){const y0=790+k*38+R()*10;c.strokeStyle=rgba(k%2?OO_K.soilHi:OO_K.soilDk,green?0.06:0.12);c.lineWidth=4+R()*6;c.beginPath();c.moveTo(-20,y0);for(let x=0;x<=W;x+=80)c.lineTo(x,y0+oo_wob(x/240,k)*7-(x-960)*0.012);c.stroke();}
-  if(!green)for(let k=0;k<700;k++){const x=R()*W,y=T(x)+8+R()*(H-T(x));c.fillStyle=rgba(R()<0.5?OO_K.soilHi:ag_dk(OO_K.soilDk,0.2),0.3+R()*0.3);c.beginPath();c.ellipse(x,y,1+R()*2.4,0.8+R()*1.4,R()*3,0,TAU);c.fill();}
-  // the gullies: a channel in shade, its sunlit wall on the right, narrow where it starts and deeper as it runs down; years later,
-  // grassed over, only a soft dip
-  for(const [gi,G] of OO_NEAR.gullies.entries())oo_gully(c,G,green,gi);
-  // tufts: a little dry grass in patches on the bare soil; thick turf years later
-  const tufts=green?900:520;for(let k=0;k<tufts;k++){let x=R()*W,y=T(x)+6+R()*(H-T(x));if(!green){const cx=[160,640,980,1460,1760][k%5],cy=[800,860,960,840,980][k%5];x=cx+(R()-0.5)*R()*700;y=Math.max(T(x)+6,cy+(R()-0.5)*R()*260);}
-    const s=lerp(0.6,1.7,(y-730)/350),col=green?(R()<0.5?OO_K.turfDk:OO_K.leafHi):(R()<0.6?OO_K.grass:OO_K.dust);
-    c.strokeStyle=rgba(col,green?0.45:0.8);c.lineWidth=1.5*s;for(let b=0;b<3;b++){const an=-Math.PI/2+(b-1)*0.42+(R()-0.5)*0.3,l=(6+R()*8)*s;c.beginPath();c.moveTo(x+b*2*s,y);c.quadraticCurveTo(x+b*2*s+Math.cos(an)*l*0.4,y+Math.sin(an)*l*0.6,x+b*2*s+Math.cos(an)*l,y+Math.sin(an)*l);c.stroke();}}
-  // the stumps of the trees that were cut, the cut face pale with rings
-  if(!green)for(const [x,y,r] of OO_NEAR.stumps){ag_floorShadow(c,x-r*0.9,y+4,r*1.6,r*0.34,0.45);
-    ag_soft(c,cc=>{cc.moveTo(x-r,y);cc.bezierCurveTo(x-r*0.96,y-r*0.4,x-r*0.94,y-r*0.7,x-r*0.9,y-r*0.9);cc.lineTo(x+r*0.9,y-r*0.9);cc.bezierCurveTo(x+r*0.94,y-r*0.7,x+r*0.98,y-r*0.4,x+r*1.06,y);cc.quadraticCurveTo(x,y+r*0.26,x-r,y);cc.closePath();},
-      OO_K.bark,ag_lt(OO_K.bark,0.25),x+r*0.6,y-r*0.6,r*1.4,"rgba(30,20,16,0.5)",8);
-    c.fillStyle=rgba(OO_K.stub,1);c.beginPath();c.ellipse(x,y-r*0.9,r*0.92,r*0.3,0,0,TAU);c.fill();c.strokeStyle=rgba(ag_dk(OO_K.stub,0.3),0.55);c.lineWidth=1.2;
-    for(const f of [0.3,0.55,0.8]){c.beginPath();c.ellipse(x+r*0.04,y-r*0.9,r*0.92*f,r*0.3*f,0,0,TAU);c.stroke();}}
-  // its crest against the hills beyond: a lighter rim where the sun catches it
-  c.strokeStyle=rgba(green?OO_K.leafHi:OO_K.soilHi,0.45);c.lineWidth=3;c.beginPath();top.forEach((p,i)=>i?c.lineTo(p[0],p[1]+2):c.moveTo(p[0],p[1]+2));c.stroke();
-  c.restore();
-  // years later: the row the women planted, grown into trees, and others along the slope
-  if(green){for(const [x,y,s] of [[150,800,0.66],[1760,812,0.7]])oo_tree(c,x,y,s,{seed:x});OO_ROW.pts.forEach(([x,y],i)=>{if(OO_ROW.alive[i])oo_tree(c,x,y,0.5+((i*37)%5)*0.03,{seed:200+i});});}}
-function oo_paintHills(c,green){oo_sky(c,540);oo_mountain(c);oo_far(c);
-  oo_paintHill(c,OO_HILLS[0],green);oo_stream(c,green);oo_paintHill(c,OO_HILLS[1],green);oo_paintNear(c,green);
-  const g=c.createRadialGradient(W*0.55,H*0.42,H*0.38,W*0.55,H*0.42,W*0.78);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,rgba(LP.shade,0.2));c.fillStyle=g;c.fillRect(0,0,W,H);}
-AG_PLACES.ooHills=c=>oo_paintHills(c,false);
-AG_PLACES.ooGreen=c=>oo_paintHills(c,true);
-AG_ROOMS.ooGreen="ooHills";
-
-/* ---------------------------------------------------------------- a tree */
-// a broad-leaved tree of the highlands, its crown spreading wider than it is tall: a trunk that forks into limbs, tapering, and clumps of
-// leaves at the limbs' ends, dark below and on the left, lit from the right; its shadow on the ground to the left. h = 300 s px tall.
-// o.seed; o.far: a small tree far away (a few clumps, no shadow); o.haze: how far the air pales it
-function oo_tree(c,x,base,s,o){o=o||{};const R=ag_rnd(o.seed||1),h=300*s,far=!!o.far,hz=o.haze||0,sky=mix(OO_K.sky1,OO_K.far0,0.3),
-    L=col=>rgba(mix(col,sky,hz),1);
-  if(far){// a far tree: a short trunk and a few soft clumps
-    if(h>44){c.fillStyle=L(OO_K.barkDk);c.fillRect(x-h*0.02,base-h*0.36,Math.max(1.4,h*0.04),h*0.36);}
-    const cy=base-h*(h>44?0.6:0.36),rw=h*0.36,n=3+((R()*2)|0),cl=[];for(let i=0;i<n;i++)cl.push([x+(i/(n-1)-0.5)*rw*1.1+(R()-0.5)*rw*0.3,cy+(R()-0.5)*h*0.12,h*(0.22+R()*0.08)]);
-    for(const [px,py,r] of cl){c.fillStyle=L(OO_K.leafDk);c.beginPath();c.ellipse(px,py+r*0.1,r,r*0.82,0,0,TAU);c.fill();}
-    for(const [px,py,r] of cl){c.fillStyle=L(OO_K.leaf);c.beginPath();c.ellipse(px+r*0.18,py-r*0.1,r*0.72,r*0.56,0,0,TAU);c.fill();}
-    for(const [px,py,r] of cl){c.fillStyle=L(OO_K.leafHi);c.beginPath();c.ellipse(px+r*0.36,py-r*0.26,r*0.34,r*0.26,0,0,TAU);c.fill();}
-    return;}
-  ag_floorShadow(c,x-h*0.4,base+3,h*0.5,h*0.07,0.42);
-  // the crown's masses: one high in the middle, two lower at the sides, one behind; each a cluster of rounded clumps
-  const lean=(R()-0.5)*0.1,fx=x+lean*h*0.3,fy=base-h*0.38,tw=h*0.085,
-    M=[[-0.2,0.56,0.17],[0.03,0.74,0.2],[0.22,0.6,0.16],[-0.04,0.6,0.15]].map(([dx,dy,r])=>[fx+(dx+(R()-0.5)*0.04)*h,base-(dy+(R()-0.5)*0.03)*h,r*h*(0.9+R()*0.2)]);
-  // the trunk, flaring a little at the root, forking at under half its height; a limb up into each mass, so they show between them
-  ag_taper(c,[x,base],[x+lean*h*0.1,base-h*0.14],[fx-lean*h*0.1,fy+h*0.1],[fx,fy],tw,tw*0.66,rgba(OO_K.bark,1));
-  c.fillStyle=rgba(OO_K.bark,1);c.beginPath();c.moveTo(x-tw*0.9,base+1);c.quadraticCurveTo(x-tw*0.4,base-tw*0.3,x-tw*0.36,base-tw*1.4);c.lineTo(x+tw*0.36,base-tw*1.4);c.quadraticCurveTo(x+tw*0.45,base-tw*0.3,x+tw*0.95,base+1);c.closePath();c.fill();
-  for(const [mx,my,r] of M.slice(0,3)){const ex=mx,ey=my+r*0.3;ag_taper(c,[fx,fy],[lerp(fx,ex,0.2),lerp(fy,ey,0.45)],[lerp(fx,ex,0.7),lerp(fy,ey,0.8)],[ex,ey],tw*0.6,tw*0.22,rgba(OO_K.bark,1));}
-  c.fillStyle=rgba(OO_K.barkDk,0.55);c.beginPath();c.moveTo(x-tw*0.5,base);c.bezierCurveTo(x-tw*0.46,base-h*0.14,fx-tw*0.42,fy+h*0.1,fx-tw*0.32,fy);c.lineTo(fx-tw*0.06,fy);c.bezierCurveTo(fx-tw*0.1,fy+h*0.1,x-tw*0.12,base-h*0.14,x-tw*0.1,base);c.closePath();c.fill();
-  // each mass: its clumps' dark undersides, then their bodies, lighter towards the sun, then the light on their tops
-  const order=[3,0,2,1];for(const mi of order){const [mx,my,r]=M[mi],cl=[];for(let i=0;i<8;i++){const an=i/8*TAU+R()*0.5,d=r*(0.45+R()*0.25);cl.push([mx+Math.cos(an)*d*1.15,my+Math.sin(an)*d*0.75,r*(0.42+R()*0.16)]);}
-    cl.push([mx,my,r*0.62]);const back=mi===3?0.18:0;
-    c.fillStyle=rgba(mix(OO_K.leafDk,[40,52,36],back),1);c.beginPath();for(const [px,py,rr] of cl){c.moveTo(px+rr*1.06,py+rr*0.12);c.ellipse(px,py+rr*0.12,rr*1.06,rr*0.9,0,0,TAU);}c.fill();
-    for(const [px,py,rr] of cl){const lit=clamp(0.45+(px-mx)/r*0.4-(py-my)/r*0.45-back*2,0,1);c.fillStyle=rgba(mix(OO_K.leafDk,OO_K.leaf,0.3+lit*0.7),1);c.beginPath();c.ellipse(px+rr*0.08,py-rr*0.06,rr*0.88,rr*0.68,0,0,TAU);c.fill();}
-    for(const [px,py,rr] of cl){const lit=(px-mx)/r*0.7-(py-my)/r*0.8-back*3;if(lit<0.1)continue;c.fillStyle=rgba(OO_K.leafHi,clamp(lit*0.9,0,0.8));c.beginPath();c.ellipse(px+rr*0.26,py-rr*0.28,rr*0.44,rr*0.28,0,0,TAU);c.fill();}}}
-
-/* ---------------------------------------------------------------- a seedling */
-// at (x, y), where it meets the soil; s its size (1: about 120 px tall, grown). o.g how far it has grown (0 to 1); o.dry how far it
-// has died (0 to 1: the leaves brown, drooping, falling); o.sleeve in a plastic sleeve of soil, as in a nursery; o.a
-function oo_seedling(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const g=clamp(o.g==null?1:o.g,0,1),dry=clamp(o.dry||0,0,1),R=ag_rnd(o.seed||7);
-  ctx.save();ctx.globalAlpha*=a;
-  if(o.sleeve){const sw=22*s,sh=34*s;ctx.fillStyle=rgba(OO_K.sleeve,1);ctx.beginPath();ctx.moveTo(x-sw/2,y);ctx.lineTo(x-sw/2+1*s,y+sh);ctx.quadraticCurveTo(x,y+sh+4*s,x+sw/2-1*s,y+sh);ctx.lineTo(x+sw/2,y);ctx.closePath();ctx.fill();
-    ctx.fillStyle=rgba(OO_K.sleeveHi,0.5);ctx.fillRect(x+sw*0.18,y+3*s,2.4*s,sh-6*s);ctx.fillStyle=rgba(OO_K.soilDk,1);ctx.beginPath();ctx.ellipse(x,y,sw/2,4*s,0,0,TAU);ctx.fill();}
-  else{ctx.fillStyle=rgba(ag_dk(OO_K.soil,0.12),1);ctx.beginPath();ctx.ellipse(x,y+2*s,22*s,6*s,0,0,TAU);ctx.fill();ctx.fillStyle=rgba(OO_K.soilHi,0.6);ctx.beginPath();ctx.ellipse(x+4*s,y,14*s,3.4*s,0,0,TAU);ctx.fill();}
-  if(g<=0.01){ctx.restore();return;}
-  const h=(30+90*g)*s,lean=(R()-0.5)*0.12+dry*0.35,tip=[x+lean*h,y-h*(1-dry*0.3)],stem=mix([96,104,62],[132,104,70],dry),lf=mix(OO_K.leaf,[150,116,76],dry),lh=mix(OO_K.leafHi,[184,150,100],dry);
-  ag_taper(ctx,[x,y],[x,y-h*0.4],[x+lean*h*0.5,y-h*0.7],tip,Math.max(1.6,3.4*s*(0.6+g*0.6)),1.2*s,rgba(stem,1));
-  // leaves in pairs up the stem, the top ones small; drooping and falling as it dies
-  const n=o.lite?1+Math.round(g*2):2+Math.round(g*4);for(let i=0;i<n;i++){const f=0.3+0.7*(i+1)/n,px=lerp(x,tip[0],f),py=lerp(y,tip[1],f),l=(14+16*(1-f*0.5))*s*(0.6+g*0.5);
-    for(const sd of [-1,1]){if(dry>0.6&&(i+sd+2)%3===0)continue;const an=-Math.PI/2+sd*(0.9+dry*1.3)+(R()-0.5)*0.3,ex=px+Math.cos(an)*l,ey=py+Math.sin(an)*l,nx=-Math.sin(an),ny=Math.cos(an),w=l*0.32;
-      ctx.fillStyle=rgba(sd>0?lh:lf,1);ctx.beginPath();ctx.moveTo(px,py);ctx.quadraticCurveTo((px+ex)/2+nx*w,(py+ey)/2+ny*w,ex,ey);ctx.quadraticCurveTo((px+ex)/2-nx*w*0.6,(py+ey)/2-ny*w*0.6,px,py);ctx.fill();
-      ctx.strokeStyle=rgba(ag_dk(lf,0.3),0.5);ctx.lineWidth=0.9*s;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo((px+ex*1.6)/2.6,(py+ey*1.6)/2.6);ctx.stroke();}}
-  ctx.restore();}
-
-/* ---------------------------------------------------------------- the near slope in the rain */
-// water running down the gullies, red with the soil it carries, and spreading into the stream bed; a: how much (0 to 1)
-function oo_run(ctx,t,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.lineCap="round";
-  for(const G of OO_NEAR.gullies){for(let i=1;i<G.length;i++){const w=lerp(3,22,i/G.length);ctx.strokeStyle=rgba([150,90,62],0.7);ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(G[i-1][0],G[i-1][1]);ctx.lineTo(G[i][0],G[i][1]);ctx.stroke();}
-    // the flow: light streaks moving down, the water's surface
-    ctx.strokeStyle=rgba([222,176,140],0.55);ctx.setLineDash([18,26]);ctx.lineDashOffset=-t*90;ctx.lineWidth=3;ctx.beginPath();oo_curve(ctx,G);ctx.stroke();ctx.setLineDash([]);}
-  const S=OO_NEAR.stream;ctx.strokeStyle=rgba([152,96,66],0.55*a);for(let i=1;i<S.length;i++){ctx.lineWidth=lerp(6,30,i/S.length);ctx.beginPath();ctx.moveTo(S[i-1][0],S[i-1][1]);ctx.lineTo(S[i][0],S[i][1]);ctx.stroke();}
-  // the rain itself: fine slanted lines, falling from the right, few and soft
-  const Rr=ag_rnd(5);ctx.strokeStyle="rgba(230,232,236,0.32)";ctx.lineWidth=1.6;for(let k=0;k<90;k++){const x0=Rr()*2200,y0=((Rr()*H+t*900)%(H+200))-100;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x0-14,y0+36);ctx.stroke();}
-  ctx.restore();}
-
-/* ---------------------------------------------------------------- the nursery */
-function oo_paintNursery(c){const R=ag_rnd(77);oo_sky(c,560);oo_far(c);
-  // the hill behind, with its farms (the left hill again, set lower)
-  c.save();c.translate(240,60);oo_paintHill(c,OO_HILLS[1],false);c.restore();
-  // the nursery's ground: packed earth, swept
-  let g=c.createLinearGradient(0,700,0,H);g.addColorStop(0,rgba(OO_K.earth,1));g.addColorStop(1,rgba(OO_K.earthDk,1));c.fillStyle=g;c.fillRect(0,700,W,H-700);
-  c.fillStyle="rgba(60,44,34,0.18)";c.fillRect(0,700,W,6);
-  for(let k=0;k<600;k++){const x=R()*W,y=706+R()*(H-706);c.fillStyle=rgba(R()<0.5?ag_lt(OO_K.earth,0.2):OO_K.earthDk,0.4);c.beginPath();c.ellipse(x,y,1+R()*2.4,0.8+R()*1.2,0,0,TAU);c.fill();}
-  g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(52,44,52,0.16)");g.addColorStop(1,"rgba(255,230,190,0.1)");c.fillStyle=g;c.fillRect(0,0,W,H);
-  // the shade over the beds: four poles of rough timber, a beam, and a roof of dry grass laid in bundles; under it, the ground cooler
-  g=c.createLinearGradient(0,700,0,900);g.addColorStop(0,"rgba(60,44,34,0.16)");g.addColorStop(1,"rgba(60,44,34,0)");c.fillStyle=g;c.fillRect(80,700,1780,200);
-  for(let k=0;k<26;k++)oo_blob(c,120+R()*1700,760+R()*110,30+R()*50,8+R()*8,[255,236,200],0.1);
-  for(const x of [150,720,1240,1790]){const w=13+R()*4;ag_soft(c,cc=>{cc.moveTo(x-w,792);cc.bezierCurveTo(x-w+3,600,x-w-2,420,x-w+4,236);cc.lineTo(x+w-3,236);cc.bezierCurveTo(x+w+2,420,x+w-2,600,x+w+1,792);cc.closePath();},OO_K.pole,ag_lt(OO_K.pole,0.32),x+w,400,240,"rgba(40,28,20,0.45)",8);
-    ag_floorShadow(c,x-30,794,34,8,0.42);}
-  ag_soft(c,cc=>{cc.moveTo(96,226);cc.lineTo(1846,222);cc.lineTo(1846,246);cc.lineTo(96,250);cc.closePath();},OO_K.poleDk,ag_lt(OO_K.pole,0.2),1500,226,600,null);
-  // the roof: dry grass laid over thin poles in rows of bundles, its ends hanging a little over the beam; lit along the top, darker below
-  const roof=cc=>{cc.moveTo(30,252);for(let x=30;x<=1910;x+=30)cc.lineTo(x,256+oo_wob(x/60,5)*7);cc.lineTo(1910,176);for(let x=1910;x>=30;x-=50)cc.lineTo(x,168+oo_wob(x/160,3)*8);cc.closePath();};
-  ag_soft(c,roof,OO_K.thatchDk,OO_K.thatch,1500,176,1000,"rgba(60,40,24,0.35)",12);
-  c.save();ag_shape(c,roof);c.clip();
-  for(let row=0;row<4;row++){const y0=164+row*22;for(let k=0;k<420;k++){const x=20+R()*1890,y=y0+R()*14,l=22+R()*26,an=Math.PI/2+0.35+(R()-0.5)*0.3;
-      c.strokeStyle=rgba(R()<0.45?ag_lt(OO_K.thatch,0.12):R()<0.6?OO_K.thatchDk:OO_K.thatch,0.7);c.lineWidth=1.4+R()*1.4;c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.cos(an)*l,y+Math.sin(an)*l);c.stroke();}
-    c.fillStyle="rgba(60,40,24,0.12)";c.fillRect(0,y0+16,W,4);}
-  c.restore();
-  // the grass's ends hanging below its edge
-  for(let k=0;k<520;k++){const x=30+R()*1880,y=250+oo_wob(x/60,5)*6,l=6+R()*16,an=Math.PI/2+0.3+(R()-0.5)*0.4;c.strokeStyle=rgba(R()<0.5?OO_K.thatchDk:OO_K.thatch,0.8);c.lineWidth=1.3+R();
-    c.beginPath();c.moveTo(x,y-4);c.lineTo(x+Math.cos(an)*l,y-4+Math.sin(an)*l);c.stroke();}
-  
-  g=c.createRadialGradient(W*0.55,H*0.42,H*0.38,W*0.55,H*0.42,W*0.78);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,rgba(LP.shade,0.22));c.fillStyle=g;c.fillRect(0,0,W,H);}
-AG_PLACES.ooNursery=c=>oo_paintNursery(c);
-// the two beds: low walls of earth with rows of seedlings in their sleeves; o.g (0 to 1) how far they've grown, o.a; o.cut: where people
-// stand behind them (the beds' back edge, for lp_person's cut)
-const OO_BEDS=[{x0:110,x1:900,y:796},{x0:1020,x1:1810,y:796}];
-function oo_beds(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
-  for(const [bi,B] of OO_BEDS.entries()){const R=ag_rnd(300+bi);
-    ag_floorShadow(ctx,(B.x0+B.x1)/2-30,B.y+76,(B.x1-B.x0)*0.56,18,0.4);
-    // the bed: a shallow trench edged with a low ridge of earth, the sleeves packed in it, row after row
-    ag_soft(ctx,cc=>ag_rect(cc,B.x0-10,B.y-6,B.x1-B.x0+20,78,12),OO_K.earthDk,ag_lt(OO_K.earth,0.1),B.x1-80,B.y,420,"rgba(40,28,20,0.35)",12);
-    for(let r=0;r<5;r++){const y=B.y+4+r*13,s=0.62+r*0.04,step=19*s,n=Math.floor((B.x1-B.x0-24)/step),full=r>=3;
-      for(let i=0;i<n;i++){const x=B.x0+14+i*step+(r%2)*step/2,g=clamp((o.g==null?1:o.g)*(0.82+R()*0.3),0,1);oo_seedling(ctx,x,y,s,{g,sleeve:r===4,seed:bi*97+r*31+i,lite:!full});}}
-    // the ridge along the bed's front
-    ag_soft(ctx,cc=>{cc.moveTo(B.x0-14,B.y+60);cc.quadraticCurveTo((B.x0+B.x1)/2,B.y+52,B.x1+14,B.y+60);cc.lineTo(B.x1+14,B.y+76);cc.quadraticCurveTo((B.x0+B.x1)/2,B.y+84,B.x0-14,B.y+76);cc.closePath();},OO_K.earth,ag_lt(OO_K.earth,0.2),B.x1-100,B.y+58,300,"rgba(40,28,20,0.3)",8);}
-  ctx.restore();}
-
-/* ---------------------------------------------------------------- the people of the hills, for lp_person
-   Wangari Maathai, a biologist at the university in Nairobi in the 1970s, in a plain cardigan, her hair short; three women who farm
-   the hills, in a cardigan or a sweater against the highlands' cool mornings, the hair under a plain headscarf tied at the nape. The
-   scarves and clothes are plain cloth, in colours that mean nothing in these films; no pattern is drawn from any culture's cloth. */
-// a headscarf over the hair, from the brow back over the crown, tied at the nape, the knot's short ends hanging behind the neck: inside
-// the head's picture (figure x 160 to 440, y 250 to 560)
-function oo_scarf(col){return(c,P)=>{const f=cc=>{cc.moveTo(392,354);cc.bezierCurveTo(396,312,370,276,312,268);cc.bezierCurveTo(258,262,206,290,194,348);
-    cc.bezierCurveTo(186,392,196,434,216,458);cc.bezierCurveTo(236,440,248,410,268,394);cc.bezierCurveTo(300,374,348,360,392,354);cc.closePath();};
-  ag_soft(c,f,col,ag_lt(col,0.3),344,290,140,rgba(ag_dk(col,0.7),0.5),14);
-  // the folds, drawn from the knot over the crown, and the hem along the brow
-  c.save();ag_shape(c,f);c.clip();c.strokeStyle=rgba(ag_dk(col,0.45),0.4);c.lineWidth=2.6;c.lineCap="round";
-  for(const [x1,y1] of [[290,280],[340,294],[372,322],[384,346]]){c.beginPath();c.moveTo(208,446);c.quadraticCurveTo((208+x1)/2-16,(446+y1)/2-36,x1,y1);c.stroke();}
-  c.strokeStyle=rgba(ag_lt(col,0.35),0.38);c.lineWidth=2;c.beginPath();c.moveTo(246,292);c.quadraticCurveTo(300,272,352,290);c.stroke();c.restore();
-  c.strokeStyle=rgba(ag_dk(col,0.4),0.65);c.lineWidth=3;c.beginPath();c.moveTo(390,356);c.bezierCurveTo(346,362,300,376,268,396);c.stroke();
-  // the knot at the nape, and its two short ends behind the neck
-  ag_soft(c,cc=>{cc.moveTo(206,456);cc.bezierCurveTo(200,476,192,494,182,508);cc.lineTo(196,512);cc.bezierCurveTo(206,498,216,480,220,460);cc.closePath();},ag_dk(col,0.14),ag_lt(col,0.2),206,476,36,null);
-  ag_soft(c,cc=>{cc.moveTo(214,458);cc.bezierCurveTo(216,478,218,494,216,512);cc.lineTo(230,510);cc.bezierCurveTo(230,492,226,476,222,460);cc.closePath();},col,ag_lt(col,0.25),224,484,36,null);
-  ag_soft(c,cc=>cc.ellipse(210,454,17,13,-0.5,0,TAU),col,ag_lt(col,0.3),216,448,22,rgba(ag_dk(col,0.7),0.4),6);}}
-const OO_PEOPLE={
-  maathai:{name:"Wangari Maathai",role:"A biologist",key:"oo-maathai",skin:[112,72,52],hair:{style:"coily",c:[28,22,20]},earrings:[214,196,160],top:{kind:"cardigan",c:[128,104,86],inner:[232,226,214]},breath:0.27},
-  wan:{name:"A farmer",key:"oo-woman1",skin:[100,64,46],hair:{style:"cropped",c:[26,22,20]},top:{kind:"sweater",c:[98,88,80]},hat:{paint:oo_scarf([178,128,118])},breath:0.3},
-  nya:{name:"A farmer",key:"oo-woman2",skin:[124,82,58],hair:{style:"cropped",c:[28,24,22]},top:{kind:"cardigan",c:[118,66,60],inner:[218,206,186]},hat:{paint:oo_scarf([222,210,190])},breath:0.32},
-  mum:{name:"A farmer",key:"oo-woman3",skin:[90,58,42],hair:{style:"cropped",c:[60,56,54]},top:{kind:"cardigan",c:[132,120,100],inner:[206,196,180]},hat:{paint:oo_scarf([88,74,66])},breath:0.25}
+/* ===== Owning the outcome: Kenya's central highlands, from the 1970s =====
+   The opening's places and people, drawn with the people kit (films/people-first/shared/): the hills with their forests cleared,
+   a group's nursery under a shade of poles, and the same hills years later, with trees. The women wear plain clothes of the 1970s
+   and headscarves in plain colours; Wangari Maathai is a composite, never a likeness; nothing is taken from a culture's own patterns
+   or crafts. Everyone stands on the near slope, sized by one eye line (OO_K.eye), so near and far people belong to one picture. */
+const OO_K={eye:455};
+const oo_h=fl=>PK.hAt(fl,OO_K.eye);
+const OO_CAST={
+  maathai:{key:"maathai",name:"Wangari Maathai",role:"A biologist",skin:[118,76,54],hair:{style:"coily",c:[30,24,22]},earrings:[230,204,150],top:{kind:"jacket",c:[158,122,94],inner:[240,232,216]},bottom:{kind:"long",c:[110,86,70]},shoe:[62,48,42]},
+  elder:{key:"maathai",name:"Wangari Maathai",skin:[118,76,54],hair:{style:"scarf",c:[226,196,120]},earrings:[230,204,150],top:{kind:"jacket",c:[96,128,112],inner:[240,232,216]},bottom:{kind:"long",c:[84,74,96]},shoe:[62,48,42]},
+  wan:{key:"wan",skin:[104,66,48],hair:{style:"scarf",c:[204,124,112]},top:{kind:"sweater",c:[120,110,106]},bottom:{kind:"skirt",c:[154,118,80]},shoe:[74,56,44]},
+  nya:{key:"nya",skin:[128,86,60],hair:{style:"scarf",c:[236,222,198]},top:{kind:"jacket",c:[150,74,70],inner:[228,214,190]},bottom:{kind:"long",c:[82,80,108]},shoe:[56,46,42]},
+  mum:{key:"mum",skin:[94,60,44],hair:{style:"scarf",c:[112,94,88]},top:{kind:"jacket",c:[158,146,118],inner:[216,204,186]},bottom:{kind:"skirt",c:[118,114,80]},shoe:[68,52,42]},
+  boy:{key:"boy",kid:true,skin:[110,70,50],hair:{style:"coily",c:[30,24,22]},top:{kind:"sweater",c:[206,180,126],sleeve:"short"},bottom:{kind:"trousers",c:[112,98,86]},shoe:[96,70,52]},
+  girl:{key:"girl",kid:true,skin:[98,62,46],hair:{style:"coily",c:[28,22,22]},top:{kind:"sweater",c:[178,136,150],sleeve:"short"},bottom:{kind:"skirt",c:[104,116,140]},shoe:[96,70,52]}
 };
-const OO_WOMEN=[OO_PEOPLE.wan,OO_PEOPLE.nya,OO_PEOPLE.mum];
+const OO_PAL={mount:[160,172,196],snow:[252,252,252],ridge:[150,174,166],ridge2:[170,188,152],fields:[[218,190,124],[192,204,130],[152,180,112],[208,132,92],[230,210,154],[124,156,106],[180,154,100]],tea:[98,142,96],
+  soil:[194,96,60],soilDk:[164,74,48],soilLt:[214,122,80],gully:[132,54,40],gullyLt:[226,146,100],stone:[230,212,186],straw:[226,192,116],stump:[126,88,62],stumpTop:[228,200,154],leaf:[104,160,92],
+  grass:[150,176,104],grassDk:[122,152,92],water:[124,176,204],thatch:[206,176,122],pole:[150,112,80],sleeve:[70,66,70],can:[226,190,112],wood:[[142,104,74],[118,86,62],[160,122,88]]};
+const oo_c=(n,i)=>PK.S.tone(i==null?OO_PAL[n]:OO_PAL[n][i]);
+const OO_HILL=[x=>372+16*Math.sin(x/310+1.2)+10*Math.sin(x/130),x=>446+22*Math.sin(x/380+2.4)+9*Math.sin(x/150+1),x=>536+26*Math.sin(x/430+0.3)+12*Math.sin(x/170+2)];
+const oo_slope=x=>690-46*Math.sin((x+260)/640)-14*Math.sin(x/210+1.3);
+function oo_ridge(f,yb,x0,x1,step){const p=[];for(let x=x0;x<=x1;x+=step||60)p.push([x,f(x)]);p.push([x1+40,yb,1],[x0-40,yb,1]);return p;}
+// small farms on a fold of the hills: strips of fields, some of them tea; green: the years after, with more of it grown over
+function oo_fields(ctx,f,yb,seed,far,green){const S=PK.S,U=PK.u,R=U.rnd(seed),bh=(yb-f(900))/2.2;ctx.save();ctx.beginPath();U.spline(ctx,oo_ridge(f,yb,-60,1980));ctx.clip();
+  for(let j=0;j<3;j++){let x=-80-R()*120;while(x<1990){const w=130+R()*190,sl=24+R()*30,d0=j*bh-2,d1=(j+1)*bh+2,ci=(R()*OO_PAL.fields.length)|0,tea=R()<0.22,
+        col=U.mix(tea?oo_c("tea"):U.mix(oo_c("fields",ci),oo_c("ridge2"),far*0.5),oo_c("grassDk"),green?0.45:0);
+      const top=[],bot=[];for(let i=0;i<=3;i++){const xx=x+w*i/3;top.push([xx,f(xx)+d0]);bot.push([xx-sl,f(xx-sl)+d1]);}
+      const pts=top.concat(bot.reverse());top[0][2]=1;top[3][2]=1;pts[4][2]=1;pts[7][2]=1;S.poly(ctx,pts,col,{w:0.5,flat:true,exact:true});
+      if(tea||R()<0.35){ctx.strokeStyle=U.css(U.dk(col,tea?0.22:0.1),0.9);ctx.lineWidth=1.2;ctx.beginPath();const n=Math.round(w/(tea?11:17));
+        for(let i=1;i<n;i++){const xx=x+w*i/n;ctx.moveTo(xx,f(xx)+d0+3);ctx.lineTo(xx-sl,f(xx-sl)+d1-3);}ctx.stroke();}
+      x+=w+3;}}
+  ctx.restore();}
+function oo_tuft(ctx,x,y,k,seed,col){const U=PK.u,R=U.rnd(seed);ctx.fillStyle=U.css(col||U.mix(oo_c("straw"),oo_c("soilLt"),R()*0.3));ctx.beginPath();
+  for(let i=0;i<4;i++){const a=-0.6+i*0.4+R()*0.2,l=(14+R()*12)*k;ctx.moveTo(x-2.5*k,y);ctx.quadraticCurveTo(x+Math.sin(a)*l*0.5,y-l*0.6,x+Math.sin(a)*l,y-Math.cos(a)*l);ctx.quadraticCurveTo(x+Math.sin(a)*l*0.4+2*k,y-l*0.5,x+2.5*k,y);}ctx.fill();}
+function oo_stump(ctx,x,y,k){const S=PK.S,U=PK.u;S.fill(ctx,c=>{U.rrect(c,x-22*k,y-20*k,44*k,26*k,6*k);U.ell(c,x,y+4*k,22*k,7*k);},oo_c("stump"),{});S.fill(ctx,c=>U.ell(c,x,y-20*k,22*k,7*k),oo_c("stumpTop"),{flat:true});
+  S.line(ctx,c=>{c.moveTo(x+8*k,y-20*k);c.arc(x,y-20*k,8*k,0,U.TAU);},U.dk(oo_c("stumpTop"),0.3),0.4);}
+const OO_GULLY=[[[330,668,3],[322,720,6],[300,790,9],[262,880,13],[210,980,18],[160,1090,22]],[[1262,690,3],[1280,740,6],[1300,820,9],[1304,900,12],[1330,990,16],[1350,1090,20]],[[1700,676,3],[1716,740,5],[1750,820,8],[1800,930,12],[1850,1090,16]]];
+function oo_gully(ctx,pts,k){const S=PK.S,U=PK.u,L=[],Rr=[];pts.forEach(([x,y,w],i)=>{const q=pts[Math.min(i+1,pts.length-1)],p=pts[Math.max(i-1,0)],a=Math.atan2(q[1]-p[1],q[0]-p[0]),n=[-Math.sin(a),Math.cos(a)];w*=k||1;L.push([x+n[0]*w,y+n[1]*w]);Rr.push([x-n[0]*w,y-n[1]*w]);});
+  const all=L.concat(Rr.reverse());all[0][2]=1;S.poly(ctx,all,oo_c("gully"),{w:0.6,flat:true,exact:true});
+  ctx.save();ctx.beginPath();U.spline(ctx,all);ctx.clip();ctx.strokeStyle=U.css(oo_c("gullyLt"),0.85);ctx.lineWidth=5;ctx.beginPath();U.spline(ctx,Rr.reverse().map(q=>[q[0]+2,q[1]]),false);ctx.stroke();ctx.restore();}
+// a plant that did not take: a dry stalk with hanging leaves
+function oo_wilted(ctx,x,y,k,seed){const S=PK.S,U=PK.u,R=U.rnd(seed),st=U.mix(oo_c("straw"),oo_c("leaf"),0.35),lf=U.mix(oo_c("straw"),oo_c("leaf"),0.2),bend=(R()-0.3)*14*k,top=[x+bend,y-(58+R()*18)*k];
+  S.fill(ctx,c=>{c.moveTo(x-3*k,y);c.quadraticCurveTo(x-2*k,y-30*k,top[0]-1.5*k,top[1]);c.lineTo(top[0]+1.5*k,top[1]);c.quadraticCurveTo(x+3*k,y-30*k,x+3*k,y);c.closePath();},U.dk(st,0.12),{w:0.5,flat:true});
+  for(const [f,a,l] of [[0.42,-1,30],[0.6,1,34],[0.82,-1,28],[1,1,30]]){const bx=U.lerp(x,top[0],f),by=U.lerp(y,top[1],f),ex=bx+a*l*k*(0.8+R()*0.3),ey=by+(10+R()*16)*k;
+    S.fill(ctx,c=>{c.moveTo(bx,by);c.quadraticCurveTo(bx+a*l*k*0.55,by-16*k,ex,ey);c.quadraticCurveTo(bx+a*l*k*0.5,by-4*k,bx,by+5*k);c.closePath();},a>0?lf:U.lt(lf,0.1),{w:0.5,flat:true});}
+  S.fill(ctx,c=>U.ell(c,x,y+2*k,15*k,4.5*k),oo_c("soilDk"),{w:0.5,flat:true});}
+// the sky, Mount Kenya far off, a ridge and three folds of farmed hills; green: years later, with trees along them
+function oo_far(ctx,green){const S=PK.S,U=PK.u;const g=ctx.createLinearGradient(0,0,0,430);g.addColorStop(0,U.css(PK.col("skyTop")));g.addColorStop(1,U.css(PK.col("skyLow")));ctx.fillStyle=g;ctx.fillRect(0,0,1920,1080);
+  S.begin(ctx,{lw:1.6,far:0.72,sh:3});
+  S.poly(ctx,[[1010,372,1],[1180,318],[1330,236],[1418,168],[1452,132,1],[1476,156],[1500,140,1],[1540,186],[1640,250],[1790,318],[1960,372,1]],oo_c("mount"),{exact:true,flat:true});
+  S.poly(ctx,[[1418,168],[1452,132,1],[1476,156],[1500,140,1],[1530,176],[1508,186],[1484,172],[1462,192],[1440,176],[1424,188]],oo_c("snow"),{w:0.6,flat:true,exact:true});
+  S.line(ctx,c=>{c.moveTo(1452,150);c.lineTo(1380,250);c.moveTo(1500,160);c.lineTo(1580,262);c.moveTo(1470,190);c.lineTo(1450,300);},null,0.5);
+  S.poly(ctx,oo_ridge(x=>338+10*Math.sin(x/260)+6*Math.sin(x/90+1),1080,-60,1980),U.mix(oo_c("ridge"),oo_c("grassDk"),green?0.3:0),{flat:true,exact:true});
+  OO_HILL.forEach((f,i)=>{S.begin(ctx,{lw:1.6+i*0.4,far:0.62-i*0.2,sh:3});S.poly(ctx,oo_ridge(f,1080,-60,1980),U.mix(U.mix(oo_c("ridge2"),oo_c("fields",1),0.3+i*0.2),oo_c("grassDk"),green?0.4:0),{flat:true,exact:true});
+    oo_fields(ctx,f,i<2?OO_HILL[i+1](900)+40:720,31+i*7,0.5-i*0.22,green);S.line(ctx,c=>U.spline(c,oo_ridge(f,1080,-60,1980).slice(0,-2),false),null,0.8);
+    if(green){const R=U.rnd(60+i),col=U.mix(PK.col(i%2?"viewTree":"viewTree2"),oo_c("ridge"),0.3-i*0.1),k=0.5+i*0.28;
+      for(let x=-20;x<1960;x+=(54+R()*90)*k){const y=f(x)+6+R()*(i<2?50:80)*k,r=(15+R()*9)*k;S.fill(ctx,c=>{U.rrect(c,x-2*k,y,4*k,18*k,1);U.ell(c,x,y-2*k,r,r*0.84);U.ell(c,x+r*0.7,y+r*0.2,r*0.6,r*0.5);},col,{w:0.5,flat:true});}}});}
+// the bed of the stream down the last hill: dry stones, or water again
+function oo_bed(ctx,water){const S=PK.S,U=PK.u,bed=[[1560,556,7],[1500,580,9],[1430,592,11],[1380,612,13],[1300,628,15],[1240,654,18],[1150,676,22]],L=[],Rr=[];S.begin(ctx,{lw:2,far:0.3,sh:3});
+  bed.forEach(([x,y,w])=>{L.push([x,y-w*0.6]);Rr.push([x+w*0.5,y+w*0.6]);});S.poly(ctx,L.concat(Rr.reverse()),water?oo_c("water"):U.mix(oo_c("stone"),oo_c("straw"),0.35),{w:0.6,flat:true,exact:true});
+  const R=U.rnd(9);for(let i=0;i<(water?9:26);i++){const b=bed[1+((R()*5)|0)],x=b[0]+(R()-0.5)*60,y=b[1]+(R()-0.5)*b[2];S.fill(ctx,c=>U.ell(c,x,y,3+R()*5,2+R()*3),U.mix(oo_c("stone"),[150,140,130],R()*0.4),{w:0.4,flat:true});}}
+/* the hills of the central highlands in the 1970s, their forests cleared: red soil, gullies where the rain ran, stumps */
+function oo_hillsPlace(ctx){const S=PK.S,U=PK.u;oo_far(ctx,false);oo_bed(ctx,false);S.begin(ctx,{lw:2.6,far:0.12,sh:5});const sl=oo_ridge(oo_slope,1100,-60,1980,80);
+  S.poly(ctx,sl,oo_c("soil"),{grad:[0,640,0,1080,0.2],exact:true});
+  ctx.save();ctx.beginPath();U.spline(ctx,sl);ctx.clip();ctx.strokeStyle=U.css(oo_c("soilDk"),0.55);ctx.lineWidth=1.6;
+  for(let j=0;j<7;j++){ctx.beginPath();for(let x=-40;x<=1960;x+=80){const y=oo_slope(x)+44+j*56+8*Math.sin(x/190+j);x<0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}ctx.restore();
+  OO_GULLY.forEach(g=>oo_gully(ctx,g));for(const [x,y,k] of [[190,760,1.1],[1480,770,1.1],[1640,870,1.3],[820,720,0.8],[1120,742,0.9]])oo_stump(ctx,x,y,k);
+  const Rt=U.rnd(5);for(let i=0;i<70;i++){const x=Rt()*1920,y=oo_slope(x)+30+Rt()*360;oo_tuft(ctx,x,y,0.7+(y-650)/420,i+3);}
+  for(let i=0;i<60;i++){const x=Rt()*1920,y=oo_slope(x)+24+Rt()*380;ctx.fillStyle=U.css(Rt()<0.5?oo_c("soilDk"):oo_c("soilLt"),0.7);ctx.beginPath();ctx.ellipse(x,y,2+Rt()*4,1.4+Rt()*2,0,0,U.TAU);ctx.fill();}}
+/* the same hills, years later: grass on the slope, the gullies closed, water in the stream, trees along the crest */
+const OO_TREES=[[150,742,1.9,3],[520,720,1.55,8],[1010,716,1.75,5],[1420,734,1.6,12],[1800,756,2.0,9]];
+function oo_greenPlace(ctx){const S=PK.S,U=PK.u;oo_far(ctx,true);oo_bed(ctx,true);S.begin(ctx,{lw:2.6,far:0.12,sh:5});const sl=oo_ridge(oo_slope,1100,-60,1980,80),gr=U.mix(oo_c("grass"),oo_c("soil"),0.12);
+  S.poly(ctx,sl,gr,{grad:[0,640,0,1080,0.18],exact:true});
+  ctx.save();ctx.beginPath();U.spline(ctx,sl);ctx.clip();ctx.strokeStyle=U.css(oo_c("grassDk"),0.5);ctx.lineWidth=1.6;
+  for(let j=0;j<7;j++){ctx.beginPath();for(let x=-40;x<=1960;x+=80){const y=oo_slope(x)+44+j*56+8*Math.sin(x/190+j);x<0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
+  ctx.fillStyle=U.css(oo_c("soil"),0.5);for(const [x,y,rx,ry] of [[420,930,150,26],[1240,880,120,20],[1640,1000,170,28]]){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,U.TAU);ctx.fill();}ctx.restore();
+  const Rt=U.rnd(5);for(let i=0;i<90;i++){const x=Rt()*1920,y=oo_slope(x)+30+Rt()*360;oo_tuft(ctx,x,y,0.7+(y-650)/420,i+3,U.mix(oo_c("grassDk"),oo_c("straw"),Rt()*0.4));}
+  S.begin(ctx,{lw:3,far:0.1,sh:5});OO_TREES.forEach(([x,y,k,sd])=>PK.tree(ctx,x,y,k,sd,{}));}
+/* a group's nursery: beds of seedlings in their sleeves, under a shade of poles */
+const OO_BEDS=[[250,760,560,0],[900,744,520,1],[560,880,640,2],[1300,872,500,3]];
+function oo_nurseryPlace(ctx){const S=PK.S,U=PK.u;oo_far(ctx,false);S.begin(ctx,{lw:2.6,far:0.12,sh:5});const yard=[[-40,650],[500,640],[1100,646],[1960,652],[1960,1100,1],[-40,1100,1]];
+  S.poly(ctx,yard,U.mix(oo_c("soil"),oo_c("straw"),0.25),{grad:[0,640,0,1080,0.16],exact:true});
+  const Rt=U.rnd(15);for(let i=0;i<50;i++){const x=Rt()*1920,y=670+Rt()*380;ctx.fillStyle=U.css(Rt()<0.5?oo_c("soilDk"):oo_c("soilLt"),0.6);ctx.beginPath();ctx.ellipse(x,y,2+Rt()*4,1.4+Rt()*2,0,0,U.TAU);ctx.fill();}
+  // the shade: poles at the back, a roof of sticks, its soft shadow on the yard
+  ctx.fillStyle="rgba(90,50,40,0.1)";ctx.beginPath();PK.u.pg(ctx,[[300,700],[1640,700],[1760,1000],[160,1000]]);ctx.fill();
+  S.fill(ctx,c=>{for(const x of [356,960,1560])U.rrect(c,x-9,250,18,440,5);},U.dk(oo_c("pole"),0.1),{});
+  S.poly(ctx,[[250,246,1],[1680,246,1],[1740,206,1],[320,206,1]],oo_c("thatch"),{grad:[0,206,0,246,0.14],exact:true});
+  S.line(ctx,c=>{for(let x=300;x<1700;x+=46){c.moveTo(x,246);c.lineTo(x+52,206);}},U.dk(oo_c("thatch"),0.3),0.5);
+  // the beds: rows of seedlings in dark sleeves
+  S.begin(ctx,{lw:2.4,far:0.1,sh:4});OO_BEDS.forEach(([x,y,w,sd])=>oo_seedBed(ctx,x,y,w,sd));
+  // a drum of water by the last pole
+  S.fill(ctx,c=>U.rrect(c,1660,560,120,150,14),[112,128,138],{grad:[1780,0,1660,0,0.2]});S.fill(ctx,c=>U.ell(c,1720,562,60,14),oo_c("water"),{});
+  S.begin(ctx,{lw:2.8,far:0,sh:5});S.fill(ctx,c=>{for(const x of [300,1620])U.rrect(c,x-12,230,24,620,6);},oo_c("pole"),{grad:[0,230,0,850,0.1]});}
+// a bed of seedlings: three rows of them in their sleeves, on a low frame; g: how grown they are
+function oo_seedBed(ctx,x,y,w,seed,g){const S=PK.S,U=PK.u,R=U.rnd(seed+20);S.fill(ctx,c=>PK.u.pg(c,[[x,y],[x+w,y],[x+w+30,y+58],[x-30,y+58]]),U.dk(oo_c("soilDk"),0.15),{});
+  for(let r=0;r<3;r++){const n=Math.round(w/34),yy=y+10+r*18;for(let i=0;i<n;i++){const xx=x-r*10+10+i*((w+r*20-20)/(n-1)),k=0.62+r*0.07,h=(g==null?0.55+R()*0.45:g);
+      PK.seedling(ctx,xx,yy-9*k,k,h,{bare:true});S.fill(ctx,c=>U.rrect(c,xx-7*k,yy-9*k,14*k,17*k,2),oo_c("sleeve"),{w:0.5,flat:true});}}}
+
+/* ---------------------------------------------------------------- what the women carry, drawn in a hand (PK.person's hold) */
+const oo_firewood=(ctx,h,deg,J)=>{const S=PK.S,U=PK.u,u=J.u,x=h[0]-18*u,y=h[1]-34*u;ctx.save();ctx.translate(x,y);ctx.rotate(-0.1);
+  for(let i=0;i<6;i++){const yy=(i-2.5)*17*u+(i%2?3:-2)*u,x0=-150*u+(i*37%40)*u,x1=150*u-(i*23%44)*u;S.fill(ctx,c=>U.capsule(c,[x0,yy],[x1,yy+(i%2?5:-4)*u],11*u,9*u),oo_c("wood",i%3),{w:0.7});}
+  S.fill(ctx,c=>{U.rrect(c,-70*u,-56*u,12*u,112*u,4*u);U.rrect(c,56*u,-54*u,12*u,108*u,4*u);},S.tone([206,176,128]),{w:0.6,flat:true});ctx.restore();};
+const oo_can=(ctx,h,deg,J)=>{const S=PK.S,U=PK.u,u=J.u,x=h[0],y=h[1]+6*u,col=oo_c("can");
+  S.fill(ctx,c=>{U.rrect(c,x-62*u,y+30*u,124*u,150*u,22*u);U.rrect(c,x+34*u,y+12*u,26*u,22*u,5*u);},col,{grad:[x+50*u,0,x-70*u,0,0.2]});
+  S.line(ctx,c=>{c.moveTo(x-30*u,y+34*u);c.quadraticCurveTo(x,y-22*u,x+30*u,y+34*u);},null,1);};
+// a seedling in its sleeve, held up in a hand; g how grown
+const oo_inHand=g=>(ctx,h,deg,J)=>{const S=PK.S,U=PK.u,k=J.u*2.2,x=h[0]+8*J.u,y=h[1]-6*J.u;PK.seedling(ctx,x,y-16*k,k,g==null?0.8:g,{bare:true});S.fill(ctx,c=>U.rrect(c,x-7*k,y-17*k,14*k,22*k,3*k),oo_c("sleeve"),{w:0.6,flat:true});};
+// a tray of seedlings carried in both arms
+const oo_tray=(ctx,h,deg,J)=>{const S=PK.S,U=PK.u,u=J.u,x=h[0]+10*u,y=h[1]-10*u;for(let i=0;i<5;i++)PK.seedling(ctx,x-88*u+i*44*u,y-18*u,u*1.5,0.7+0.3*((i*7)%3)/2,{bare:true});
+  S.fill(ctx,c=>U.rrect(c,x-116*u,y-22*u,232*u,40*u,8*u),S.tone([176,136,96]),{grad:[0,y-22*u,0,y+18*u,0.14]});};
+// a few coins in an open hand; a (0 to 1): how far they are there, so they pass from one hand to the other over a few frames
+const oo_coins=a=>(ctx,h,deg,J)=>{if(!(a>0.004))return;const u=J.u;ctx.save();ctx.globalAlpha*=Math.min(1,a);for(const [dx,dy] of [[-10,-22],[8,-26],[0,-34]]){ctx.fillStyle=PK.u.css([232,196,104]);ctx.strokeStyle=PK.u.css([150,112,40]);ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(h[0]+dx*u,h[1]+dy*u,13*u,7*u,0,0,PK.u.TAU);ctx.fill();ctx.stroke();}ctx.restore();};
+
+/* ---------------------------------------------------------------- the row of young trees on the slope, planted out: five of seven live */
+const OO_ROW={x:[620,760,900,1040,1180,1320,1460],alive:[1,1,0,1,1,0,1],y:x=>oo_slope(x)+150+0.04*(x-620)};
+// g: how grown the living ones are (0 to 1); dry: how far the others have died; ticks: when the first living one is counted (a
+// time; the others follow), or a function of a tree's place in the row that gives its own time; fresh {i, g}: a new seedling,
+// grown to g, planted where the i-th one died
+function oo_row(ctx,tt,g,dry,ticks,fresh){OO_ROW.x.forEach((x,i)=>{const y=OO_ROW.y(x);PK.S.begin(ctx,{lw:2.4,far:0,sh:4});
+    if(OO_ROW.alive[i])PK.seedling(ctx,x,y,2.2+1.6*g,0.6+0.4*g,{});else if(fresh&&fresh.i===i){if(fresh.g>0.02)PK.seedling(ctx,x,y,2.2,fresh.g,{});}
+    else if(dry>0.5)oo_wilted(ctx,x,y,1.3,i+3);else PK.seedling(ctx,x,y,2.2,0.6,{col:PK.u.mix(oo_c("leaf"),oo_c("straw"),dry*1.6)});
+    if(ticks!=null&&OO_ROW.alive[i]){const n=OO_ROW.alive.slice(0,i).filter(Boolean).length;PK.tick(ctx,x,y-(150+70*g),26,ag_spr(tt,typeof ticks==="function"?ticks(i):ticks+n*0.45,0.5),null);}});}
+// soil sliding down the gullies after rain: a (0 to 1) how much
+function oo_run(ctx,tt,a){if(a<=0.004)return;const U=PK.u;ctx.save();ctx.globalAlpha*=a;OO_GULLY.forEach((g,gi)=>{for(let i=0;i<9;i++){const ph=((tt*0.22+i/9+gi*0.37)%1),f=ph*(g.length-1),j=Math.min(g.length-2,f|0),u=f-j,x=U.lerp(g[j][0],g[j+1][0],u),y=U.lerp(g[j][1],g[j+1][1],u),w=U.lerp(g[j][2],g[j+1][2],u);
+      ctx.fillStyle=U.css(i%2?oo_c("gullyLt"):oo_c("soilLt"),Math.sin(ph*Math.PI));ctx.beginPath();ctx.ellipse(x+Math.sin(i*2.1)*w*0.5,y,w*0.5,w*0.24,0.3,0,U.TAU);ctx.fill();}});ctx.restore();}
+// what every shot of the hills draws over them: the clouds, which drift, and the plot where the food did not take
+const oo_sky=(x,tt)=>{PK.S.begin(x,{lw:1.5,far:0.8,sh:3});PK.cloud(x,380+tt*3,150,1.2);PK.cloud(x,1100+tt*2,96,0.9);};
+const oo_plot=x=>{PK.S.begin(x,{lw:2.4,far:0,sh:4});[[992,892,1.25,3],[1058,902,1.3,5],[930,884,1.15,8],[1124,908,1.3,11]].forEach(([px,py,k,sd])=>oo_wilted(x,px,py,k,sd));};
+AG_PLACES.ooHills=oo_hillsPlace;AG_PLACES.ooNursery=oo_nurseryPlace;AG_PLACES.ooGreen=oo_greenPlace;
+// the hills with nobody on them: what a later moment there passes through
+AG_BARE.ooHills=(x,tt)=>{oo_sky(x,tt);oo_plot(x);};AG_BARE.ooGreen=(x,tt)=>oo_sky(x,tt);AG_BARE.ooNursery=(x,tt)=>oo_sky(x,tt);

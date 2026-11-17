@@ -36,32 +36,22 @@ const NARR={
  {"id":"can","gap":0.8,"text":"Ivy can hold a refresh, change the model with a review, and tell the readers, without asking first."}
 ]},
 "monday":{"name":"A Monday that looked fine","lead":1.0,"tail":1.0,"vo":[
- {"id":"upgrade","gap":0.8,"text":"On Tuesday 17 August, Facilities upgrades the sensors in forty rooms.","say":"On Tuesday the seventeenth of August, Facilities upgrades the sensors in forty rooms."},
- {"id":"quarter","gap":0.8,"text":"The new ones send a count every quarter of an hour, not once an hour. More detail: a real improvement."},
- {"id":"tells","gap":0.8,"text":"Nobody expects it to change the data, so nobody tells the data team."},
  {"id":"ran","gap":0.8,"text":"On Monday 23 August, the refresh runs at seven, as promised. Every check passes.","say":"On Monday the twenty-third of August, the refresh runs at seven, as promised. Every check passes."},
  {"id":"seedling","gap":0.8,"text":"At the Green Belt, a seedling in the ground earned nothing until it lived."},
  {"id":"reads","gap":0.8,"text":"So Ivy reads the numbers, not only the tick."},
- {"id":"drop","gap":0.8,"text":"In forty rooms, from Tuesday the seventeenth, the counts have dropped to about a quarter."},
- {"id":"empty","gap":0.8,"text":"In those rooms, booked hours with nobody in them jump from one in five to more than half."},
+ {"id":"drop","gap":0.8,"text":"In forty rooms, the counts have dropped to about a quarter."},
  {"id":"release","gap":0.8,"text":"If nobody noticed, the timetable team would release rooms that classes really use."},
  {"id":"wait","gap":0.8,"text":"Ivy doesn't wait to be sure, or to be asked."},
- {"id":"writes","gap":0.8,"text":"At ten past eight, she writes to the readers: the counts for forty rooms look wrong; don't use them yet; the right ones by tomorrow."},
+ {"id":"tell","gap":0.8,"text":"She walks over and tells Graham and Mei herself: forty rooms look wrong. Don't use them yet. The right counts come tomorrow."},
  {"id":"first","gap":0.8,"text":"Saying it first, before the fix, is part of owning it."}
 ]},
 "fix":{"name":"Fix it, or raise it","lead":1.0,"tail":1.0,"vo":[
- {"id":"sam","gap":0.8,"text":"With Sam, she opens the feed for one room."},
- {"id":"four","gap":0.8,"text":"Since Tuesday, four counts arrive each hour. The model was built for one."},
- {"id":"step","gap":0.8,"text":"A step meant to drop the odd repeat kept the first count of each hour, and dropped the other three."},
- {"id":"early","gap":0.8,"text":"The first comes as one class leaves and the next arrives, so the rooms looked nearly empty."},
- {"id":"fix","gap":0.8,"text":"The fix is hers: keep the hour's highest count, as the old sensors sent."},
- {"id":"review","gap":0.8,"text":"Jun reviews her pull request, as someone other than its author reviews every change."},
- {"id":"rerun","gap":0.8,"text":"The days since Tuesday are run again, and on Tuesday morning the readers have the right counts, with a short note."},
- {"id":"note","gap":0.8,"text":"What happened, what it touched, what's fixed, and what changes."},
+ {"id":"sam","gap":0.8,"text":"With Sam, she finds the cause."},
+ {"id":"four","gap":0.8,"text":"Facilities had upgraded the sensors: they now send four counts an hour, and her model kept only the first."},
+ {"id":"fix","gap":0.8,"text":"That part is hers to fix. Jun reviews her change, and by Tuesday morning the readers have the right counts."},
  {"id":"mine","gap":0.8,"text":"Some of it isn't hers to fix. The sensors are Facilities'."},
  {"id":"raise","gap":0.8,"text":"So she raises it with Graham. From now on, Facilities tells the data team before a sensor changes."},
- {"id":"check","gap":0.8,"text":"And she adds a check of her own: each room's counts against its own last four weeks."},
- {"id":"holds","gap":0.8,"text":"A drop like this one now holds the refresh, and tells her, before anyone reads it."}
+ {"id":"check","gap":0.8,"text":"And she adds a check of her own: a drop like this one now holds the refresh, before anyone reads it."}
 ]},
 "blame":{"name":"Nobody to blame","lead":1.0,"tail":1.0,"vo":[
  {"id":"nobody","gap":0.8,"text":"Nobody here did anything wrong."},

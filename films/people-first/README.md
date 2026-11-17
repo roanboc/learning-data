@@ -12,6 +12,7 @@ Before the hats and the skills, the people. In February 2027, Helena Novak takes
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [People before roles](https://data.learn-all.org/people-first/people-before-roles/) | Know the people first | 7½ min | 6 | 3 questions | [script](1-people-before-roles/script.md) · [source](1-people-before-roles/source/README.md) |
+| [How, more than who](https://data.learn-all.org/people-first/how-more-than-who/) | How a team works together | 10 min | 8 | 4 questions | [script](4-how-more-than-who/script.md) · [source](4-how-more-than-who/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

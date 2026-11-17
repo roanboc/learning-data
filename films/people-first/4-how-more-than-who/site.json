@@ -1,0 +1,105 @@
+{
+  "kicker": "How a team works together",
+  "kicker_es": "Cómo trabaja junto un equipo",
+  "title_es": "El cómo, más que el quién",
+  "h1": "How, more than who: a turn each, promises kept, and one page",
+  "h1_es": "El cómo, más que el quién: turnos, promesas cumplidas y una página",
+  "lead": "In February 2027, Jun and Tomás of the university's data team find two numbers for the same day, and the argument turns to the person. Two people do all the talking. Helena Novak stops it, gives everyone a turn, and the eight of them write one page on how they work together.",
+  "lead_es": "En febrero de 2027, Jun y Tomás, del equipo de datos de la universidad, encuentran dos cifras para el mismo día, y la discusión se vuelve contra la persona. Solo dos hablan. Helena Novak la detiene, da un turno a cada quien, y los ocho escriben una página sobre cómo trabajan juntos.",
+  "description": "A film about how a team works together, the fourth of People first in the module Leading data people: how a team works together counts for more than who is in it. Google's study of 180 of its own teams, the research on conflict about the work and about the person, Marshall Rosenberg's non-violent communication, Anita Woolley and her colleagues on taking turns to speak, the research on trust, and the team charter, each named once, with how sure it is. At the university, in February 2027: an old report says 18,412 and a new model 19,549 for the same day; the argument between Jun and Tomás turns to the person; Helena Novak stops it, asks each of them for what he saw, what he feels and needs, and what he asks, and gives everyone a turn; the two who hadn't spoken say what each number counts, students and learners, and both are right; the registrar's office, which owns the two words, is asked in a ticket; and the eight write one page, in their own words, on how they meet, ask for help, disagree, decide and say \"I can't make that date\". It opens at Quehue, in the high Andes of Peru, where four communities make a bridge of grass rope in three days with no written plan, and, as the last film of its series, it says what that story didn't achieve.",
+  "description_es": "Una película sobre cómo trabaja junto un equipo, la cuarta de Las personas primero en el módulo Liderar equipos de datos: cómo trabaja junto un equipo cuenta más que quién está en él. El estudio de Google sobre 180 de sus propios equipos, la investigación sobre el conflicto en torno al trabajo y en torno a la persona, la comunicación no violenta de Marshall Rosenberg, Anita Woolley y sus colegas sobre turnarse para hablar, la investigación sobre la confianza y la carta de equipo, nombrados una vez, con lo segura que es cada cosa. En la universidad, en febrero de 2027: un informe antiguo dice 18,412 y un modelo nuevo 19,549 para el mismo día; la discusión entre Jun y Tomás se vuelve contra la persona; Helena Novak la detiene, le pide a cada uno qué vio, qué siente y necesita, y qué pide, y da un turno a cada quien; los dos que no habían hablado dicen qué cuenta cada cifra, estudiantes y aprendices, y las dos están bien; se le pregunta en un ticket a la oficina de registro, dueña de las dos palabras; y los ocho escriben una página, con sus propias palabras, sobre cómo se reúnen, piden ayuda, discrepan, deciden y dicen «no llego a esa fecha». Empieza en Quehue, en lo alto de los Andes del Perú, donde cuatro comunidades hacen un puente de sogas de paja en tres días sin un plan escrito, y, como última película de su serie, dice lo que esa historia no logró.",
+  "card": "Two numbers, and an argument that turns to the person. Helena gives everyone a turn, and the team writes one page on how it works.",
+  "card_es": "Dos cifras, y una discusión que se vuelve contra la persona. Helena da un turno a cada quien, y el equipo escribe una página sobre cómo trabaja.",
+  "chapters_es": {
+    "days": "Tres días de junio",
+    "who": "Menos el quién",
+    "number": "Dos cifras",
+    "three": "Tres cosas",
+    "turn": "Un turno para cada quien",
+    "page": "Una página",
+    "limits": "Hasta dónde llega el puente",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Quehue, Peru, each June: a bridge in three days",
+    "Four communities make a new bridge of grass rope across a gorge: about a thousand people, in three days, with no drawing and no written plan. What they share is how they work: promises kept, and parts that everyone knows. How a team works together counts for more than who is in it."
+  ],
+  "past_es": [
+    "Quehue, Perú, cada junio: un puente en tres días",
+    "Cuatro comunidades hacen un puente nuevo de sogas de paja sobre un cañón: unas mil personas, en tres días, sin un dibujo ni un plan escrito. Lo que comparten es cómo trabajan: promesas cumplidas, y partes que todos conocen. Cómo trabaja junto un equipo cuenta más que quién está en él."
+  ],
+  "next_h": "You've seen a team agree how it works together, and keep it on one page. Next, in The new skills: many hats, and one picture of the whole team.",
+  "next_h_es": "Viste a un equipo acordar cómo trabajar, y dejarlo en una página. Después, en Las nuevas habilidades: muchos roles, y una sola mirada a todo el equipo.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 12 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 12 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The renewal of the Q'eswachaka bridge, at UNESCO",
+        "title_es": "La renovación del puente Q'eswachaka, en la UNESCO",
+        "line": "The page for the bridge on UNESCO's list of living heritage: the four communities, the three days, and the knowledge passed on in families.",
+        "line_es": "La página del puente en la lista del patrimonio vivo de la UNESCO: las cuatro comunidades, los tres días, y el saber que se transmite en las familias.",
+        "href": "https://ich.unesco.org/en/RL/knowledge-skills-and-rituals-related-to-the-annual-renewal-of-the-qeswachaka-bridge-00594",
+        "href_es": "https://ich.unesco.org/es/RL/conocimientos-tecnicas-y-rituales-vinculados-a-la-renovacion-anual-del-puente-q-eswachaka-00594"
+      },
+      {
+        "title": "Building a bridge without a plan",
+        "title_es": "Construir un puente sin un plan (en inglés)",
+        "line": "A magazine story of the three days, from the first cords to the two builders meeting in the middle, and of what is changing around the bridge.",
+        "line_es": "Un reportaje sobre los tres días, desde las primeras soguillas hasta los dos maestros que se encuentran en el medio, y sobre lo que cambia alrededor del puente.",
+        "href": "https://www.neh.gov/humanities/2017/fall/feature/building-bridge-without-plan",
+        "href_es": "https://www.neh.gov/humanities/2017/fall/feature/building-bridge-without-plan"
+      },
+      {
+        "title": "Understand team effectiveness",
+        "title_es": "Entender qué hace eficaz a un equipo (en inglés)",
+        "line": "Google's guide to its study of 180 of its own teams: what it measured, the five things it found in order, and its warning that other places may differ.",
+        "line_es": "La guía de Google sobre el estudio de 180 de sus propios equipos: qué midió, las cinco cosas que encontró, en orden, y su aviso de que en otros lugares puede ser distinto.",
+        "href": "https://rework.withgoogle.com/intl/en/guides/understand-team-effectiveness",
+        "href_es": "https://rework.withgoogle.com/intl/en/guides/understand-team-effectiveness"
+      },
+      {
+        "title": "Non-violent communication",
+        "title_es": "Comunicación no violenta",
+        "line": "Marshall Rosenberg's way of saying something hard: what you observed, what you feel, what you need and what you ask, and what the research on it has and hasn't shown.",
+        "line_es": "La manera de Marshall Rosenberg de decir algo difícil: qué observaste, qué sientes, qué necesitas y qué pides.",
+        "href": "https://en.wikipedia.org/wiki/Nonviolent_Communication",
+        "href_es": "https://es.wikipedia.org/wiki/Comunicaci%C3%B3n_no_violenta"
+      }
+    ],
+    "more": [
+      {
+        "text": "El Q'eswachaka de Canas (2015): the study of the bridge that Peru's Ministry of Culture published, with the three days step by step (a large file, in Spanish)",
+        "text_es": "El Q'eswachaka de Canas (2015): el estudio del puente que publicó el Ministerio de Cultura del Perú, con los tres días paso a paso (un archivo grande)",
+        "href": "https://cdn.www.gob.pe/uploads/document/file/8963/ba_565c7ad9dc8b8.pdf.pdf",
+        "href_es": "https://cdn.www.gob.pe/uploads/document/file/8963/ba_565c7ad9dc8b8.pdf.pdf"
+      },
+      {
+        "text": "Taking turns to speak: the summary of Anita Woolley and her colleagues' study of groups (2010)",
+        "text_es": "Turnarse para hablar: el resumen del estudio de Anita Woolley y sus colegas sobre grupos (2010, en inglés)",
+        "href": "https://pubmed.ncbi.nlm.nih.gov/20929725/",
+        "href_es": "https://pubmed.ncbi.nlm.nih.gov/20929725/"
+      },
+      {
+        "text": "Conflict about the work and about the person: the summary of 116 studies (2012)",
+        "text_es": "El conflicto sobre el trabajo y sobre la persona: el resumen de 116 estudios (2012, en inglés)",
+        "href": "https://pubmed.ncbi.nlm.nih.gov/21842974/",
+        "href_es": "https://pubmed.ncbi.nlm.nih.gov/21842974/"
+      },
+      {
+        "text": "Trust and a team's work: the summary of 112 studies (2016)",
+        "text_es": "La confianza y el trabajo de un equipo: el resumen de 112 estudios (2016, en inglés)",
+        "href": "https://pubmed.ncbi.nlm.nih.gov/27123697/",
+        "href_es": "https://pubmed.ncbi.nlm.nih.gov/27123697/"
+      },
+      {
+        "text": "Team charters: the summary of the study of 32 student teams (2009)",
+        "text_es": "Las cartas de equipo: el resumen del estudio de 32 equipos de estudiantes (2009, en inglés)",
+        "href": "https://pubmed.ncbi.nlm.nih.gov/19186898/",
+        "href_es": "https://pubmed.ncbi.nlm.nih.gov/19186898/"
+      }
+    ]
+  }
+}

@@ -1,12 +1,12 @@
 # No two alike: questions and assumptions
 
-*Leading data people* · *People first*, film 3 of 4 · its pull request is linked from the series' README once it merges
+*Leading data people* · *People first*, film 3 of 4 · PR #421 · [pull request](https://github.com/roanboc/learning-data/pull/421)
 
-[Watch it on the site](https://data.learn-all.org/people-first/no-two-alike/), once merged
+[Watch it on the site](https://data.learn-all.org/people-first/no-two-alike/)
 
 Film 3 of 4 of *People first* (`films/people-first/3-no-two-alike`), made on 12 November 2026 from the series' proposal, which the author confirmed that day ("Yes, start the series as proposed"), and from his decision of the same day on personality: the five broad traits as a reference for understanding, never a tool for assessment. It was made with no script review, as the module's other films were. Each question I would have asked is below, with the assumption I made instead, where it shows, and what changes if it's wrong. A time is where that line starts in the film. The film's reasons and sources are in its [script](../../../../films/people-first/3-no-two-alike/script.md); the series' own questions are in [`0-series.md`](0-series.md).
 
-Written 12 November 2026.
+Written 12 November 2026. Row 21 added on 17 November 2026.
 
 | # | Question | Assumption made | Where it shows | If it's wrong |
 |---|---|---|---|---|
@@ -30,3 +30,4 @@ Written 12 November 2026.
 | 18 | Which Spanish words? | *No hay dos iguales*. A test is *una prueba*, a type *un tipo*, a heading *un encabezado*, the whole range *todo el abanico*; the bridge's grass is *paja*, as its Peruvian study and the series' other films say it. The traits are said of *una persona* (*abierta, organizada, extrovertida, amable, estable*). "Big Five" stays in English in the caption, as on screen. | The Spanish captions and page | Words in the captions and the page |
 | 19 | May the page link to the research council's chapter? | Yes. The page's own words name no test; the chapter it links to does, since it is the review itself. | *Go further*, on the film's page | One link is removed |
 | 20 | Render and review page? | Not made, by your standing rule for this module: the merge is the release, with the Draft label. Its audio release publishes itself. | Nothing to see | Nothing |
+| 21 | The team sits in a row at its table, drawn from the waist up. Should people be drawn whole, in their place, as you asked for the module's films (issue #391)? | Not yet. The module's kit can't draw whole people until its change (PR #409) is on main, and the kit is never changed for one film. The four people of Lu are the film's own drawings, so they are whole, kneeling on their mats. The team's shots are staged again when the module's other films are. | The team at its table: from 2:16, and in *Erin's silence*, *A scale, cut in two* and *For the whole range* | Those shots are staged again and the film is published again, with its sound kept |

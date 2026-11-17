@@ -44,6 +44,8 @@ It lists:
 - a hand that jumps over a page: the hand that writes in a notebook (PK.notes) is HOP px or more from where it was a frame
   before, when it barely moved in the frames before and after. Two of the page's strokes run into each other, or one starts the
   moment another ends, far from it: pace the page's rows (PK.pace(ctx, null, rows));
+- no key ideas written by hand: in the whole film nobody explains at a board (PK.teach) and nobody keeps a page of notes
+  (PK.notes). A film goes between its people and its key ideas: an idea that is a label on a scene is lost in it;
 - one place only: fewer than PLACES places in the film;
 - a hair style that can't turn: a cap with no turn, hair down the back with no backT, or their two rows of unequal length.
 
@@ -191,6 +193,8 @@ const meet=i=>{const g=F[i].P.filter(p=>seen(p)&&!p.screen&&!p.kid&&inView(p)&&!
     if(l.who!==r.who&&l.place===r.place&&r.x-l.x<=1.5*h&&Math.min(l.h,r.h)>=0.7*h&&l.flip<=0.6&&r.flip>=0.4&&r.flip-l.flip>=0.25)return true;}return false;};
 let faces=0,chats=0,calls=0;{let s=-1;for(let i=0;i<=F.length;i++){const h=i<F.length&&meet(i);if(h&&s<0)s=i;if(!h&&s>=0){if(i-s>=o.faceS*30)faces++;s=-1;}}
   const cnt=kind=>{let n=0,on=false;for(const fr of F){const h=fr.K.includes(kind);if(h&&!on)n++;on=h;}return n;};chats=cnt("chat");calls=cnt("call");}
+const span=has=>{let n=0,on=false;for(const fr of F){const h=has(fr);if(h&&!on)n++;on=h;}return n;},boards=span(fr=>fr.TB.length>0),pages=span(fr=>fr.N.length>0);
+if(!boards&&!pages)probs.push({f:-1,s:"the film's key ideas are never written by hand: nobody explains at a board (PK.teach) and nobody keeps a page of notes (PK.notes). A film goes between its people and its key ideas"});
 if(!faces)probs.push({f:-1,s:"nobody meets face to face: in the whole film no two people are in one place, near each other and turned to each other, for "+o.faceS+" s (people also write and call, but they meet in person at least once)"});
 // 5. the film's places, and the kit's hair tables
 const places=typeof AG_PLACES!=="undefined"?Object.keys(AG_PLACES).length:0;
@@ -201,7 +205,7 @@ for(const k in HS){const h=HS[k];
   if(h.back&&!rows(h.backT))probs.push({f:-1,s:"the hair style "+k+" can't turn: it has hair down the back and no backT, or its two rows are of unequal length"});}
 probs.sort((a,b)=>a.f-b.f);
 const names=new Set();for(const t of T)names.add(t.who);
-return{n:F.length,people:names.size,places,faces,chats,calls,share:share.map(([id,v,w])=>id+" "+Math.round(v*100)+"%"+(w<v-0.005?" ("+Math.round(w*100)+"% themselves)":"")).join(", "),probs:probs.map(p=>(p.f>=0?when(p.f)+": ":"")+p.s)};}"""
+return{n:F.length,people:names.size,places,faces,chats,calls,boards,pages,share:share.map(([id,v,w])=>id+" "+Math.round(v*100)+"%"+(w<v-0.005?" ("+Math.round(w*100)+"% themselves)":"")).join(", "),probs:probs.map(p=>(p.f>=0?when(p.f)+": ":"")+p.s)};}"""
 
 
 def watch(pg):
@@ -213,8 +217,10 @@ def check(pg):
     watch(pg)
     r = pg.evaluate(JS, {'row': ROW, 'rowS': ROW_S, 'scale': SCALE, 'air': AIR, 'airS': AIR_S, 'jump': JUMP, 'overS': OVER_S, 'large': LARGE,
                          'still': STILL, 'statue': STATUE, 'share': SHARE, 'whole': WHOLE, 'faceS': FACE_S, 'hideS': HIDE_S, 'late': LATE, 'lag': LAG, 'edge': EDGE, 'hop': HOP, 'places': PLACES})
-    return ('followed %d people through %d moments, in %d places; they meet face to face %d time%s, write in a chat %d and call %d; a person in view: %s'
-            % (r['people'], r['n'], r['places'], r['faces'], '' if r['faces'] == 1 else 's', r['chats'], r['calls'], r['share']), r['probs'])
+    return ('followed %d people through %d moments, in %d places; they meet face to face %d time%s, write in a chat %d and call %d; '
+            'someone explains at a board %d time%s and a page of notes is written %d; a person in view: %s'
+            % (r['people'], r['n'], r['places'], r['faces'], '' if r['faces'] == 1 else 's', r['chats'], r['calls'],
+               r['boards'], '' if r['boards'] == 1 else 's', r['pages'], r['share']), r['probs'])
 
 
 if __name__ == '__main__':

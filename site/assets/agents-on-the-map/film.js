@@ -2451,7 +2451,7 @@ scene("hands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     cx.restore();
     // what the narration names, in screen space so it reads on a phone
     eaYear(cx,80,80,"Babylon · about 620 BCE",ACA,fin(t,0.6,0.8)*(1-fin(t,tR-0.6,0.6)));
-    eaYear(cx,80,80,"605 BCE · about 15 m",ACA,fin(t,w("rose","605"),0.6)*(1-fin(t,tS-0.2,0.6)));
+    eaYear(cx,80,80,"605 BCE · about 15 m",ACA,fin(t,w("rose","six hundred"),0.6)*(1-fin(t,tS-0.2,0.6)));
     bab_tag(cx,960,214,"Etemenanki, the temple-tower of Marduk",fin(t,w("city","Marduk")-0.2,0.7)*(1-fin(t,c("ruin")-0.4,0.6)));
     bab_quote(cx,1040,120,780,"it had become very weak, and had been allowed to collapse","Nabopolassar, in his own words",{a:fin(t,w("ruin","In his own words")-0.2,0.8)*(1-fin(t,tH+0.6,0.7)),size:36});
     bab_tag(cx,1560,560,"Nabopolassar, the new king",fin(t,w("ruin","Nabopolassar"),0.7)*(1-fin(t,w("ruin","In his own words")-0.4,0.6)));
@@ -2713,7 +2713,7 @@ scene("answers",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
       if(i<2)kt_rcross(ctx,x+372,320,20,fin(t,t0+0.5,0.4));else kt_gtick(ctx,x+372,320,20,fin(t,t0+0.5,0.4));},{dy:12});});
   const aA=fin(t,w("owner","answers")-0.2,0.6);if(aA>0.01)withA(ctx,aA,()=>tag(ctx,1600,512,"answers for it",BIZ,{align:"center",size:32}));
   // AI frameworks ask the same: clear roles, and people accountable for each AI system
-  [["NIST AI RMF",w("frames","NIST's")],["ISO/IEC 42001",w("frames","ISO's")]].forEach(([s_,t0],i)=>{if(t<t0-0.2)return;arrive(ctx,860+i*400,630,t,t0-0.2,()=>tag(ctx,860+i*400,630,s_,[170,205,255],{align:"center",size:32}),{dy:10});});
+  [["NIST AI RMF",w("frames","NIST's")],["ISO/IEC 42001",w("frames","I S O's")]].forEach(([s_,t0],i)=>{if(t<t0-0.2)return;arrive(ctx,860+i*400,630,t,t0-0.2,()=>tag(ctx,860+i*400,630,s_,[170,205,255],{align:"center",size:32}),{dy:10});});
   const nA=fin(t,w("frames","clear")-0.2,0.6);if(nA>0.01)withA(ctx,nA,()=>T(ctx,"clear roles, and people accountable for each AI system",1060,712,{w:760,size:32,align:"center"}));
   // and it never approves: approving is a person's job
   const pA=fin(t,tA-0.1,0.6);if(pA>0.01)arrive(ctx,1060,800,t,tA-0.1,()=>{aca_agent(ctx,640,800,20,t,{});kt_rcross(ctx,690,780,16,1);tag(ctx,700,800,"never approves",A1_RED,{size:30});},{dy:10});

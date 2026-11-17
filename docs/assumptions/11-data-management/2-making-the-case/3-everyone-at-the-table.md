@@ -41,3 +41,10 @@ The author saw words run past a card on a phone in another series, and asked: "C
 
 - **Question:** on the calendar of the move, the name *HR's reports* stands over HR's blue block, and the amber band of payroll's busiest weeks lies behind half of it. The check reads the band as the name's box, and the name as 82 px past it. Is that a fault?
 - **Assumption taken:** no. The band is a stretch of the calendar, not a box for the name, and the block is there to show that the two overlap. The film names it as text that is meant to leave a box (`spills` in its `film.json`, with that reason), so the check passes that name and still holds every other piece of text. Nothing is drawn differently, so the player and the poster are as they were. It shows at 7:12 to 7:40.
+
+## 12 November 2026: a moment timed to a word its line doesn't say (thread "Fix early cue words in films")
+
+The build's check of the words that pictures wait for didn't read the way most films write them. Now that it does, it found Jun's moment in *A real constraint* timed to "Jun", which first comes inside "June".
+
+- **Question:** the line is "Wednesday the second of June. Ingrid goes through the move's dates with Jun, who speaks to HR for the team." Jun and his name came in on "June", just before Ingrid. Was he meant to be in the room from the start, or to come in when he is named?
+- **Assumption taken:** when he is named. The scene asks for his own name, with the same lead as Ingrid's (0.6 seconds), and his name tag says what the voice says next ("Speaks to HR for the team"). He now comes in 2.9 seconds later, after Ingrid, at 7:06. Nothing else moves, and the words on screen, the voice and the sound are as they were.

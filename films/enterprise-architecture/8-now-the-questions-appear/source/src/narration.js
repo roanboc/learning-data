@@ -24,6 +24,7 @@ const NARR={
  {"id":"back","gap":0.8,"text":"Each goes back to whoever asked for it, with one question: what would you decide with it?"}]},
 "down":{"name":"Down from a goal","lead":1.0,"tail":1.0,"vo":[
  {"id":"way","gap":0.8,"text":"Now the other way, from the top. A goal implies decisions. A decision needs questions answered. A question needs a measure."},
+ {"id":"gqm","gap":0.8,"text":"It's Goal, Question, Metric, a method from the 1980s, with a decision added.","say":"It's Goal, Question, Metric, a method from the nineteen eighties, with a decision added."},
  {"id":"better","gap":0.8,"text":"Take replacing assets before they fail. Its outcome said only a better network, and nobody could check that."},
  {"id":"measure","gap":0.8,"text":"Its decision is which lines to renew first, and its question is the one the planners asked."},
  {"id":"unit","gap":0.8,"text":"The measure: interruptions per customer, per year, line by line."},

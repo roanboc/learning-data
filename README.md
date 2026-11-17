@@ -92,7 +92,7 @@ A film's page sets its prefix with `data-store` on `section#watch`, and `path.js
 
 ## Contributing
 
-The [portal-to-source catalog](modules/README.md) maps modules and series to their film folders and learning content. [Maintenance and audio storage](docs/maintenance.md) explains scoped checks and the migration of soundtracks out of Git.
+The [portal-to-source catalog](modules/README.md) maps modules and series to their film folders and learning content. [Maintenance and audio storage](docs/maintenance.md) explains scoped checks and the migration of soundtracks out of Git. [Style stats](docs/styles/index.html) shows what each look costs to draw, film by film, as `python site-tools/style_stats.py` measures it.
 
 [CONTRIBUTING.md](CONTRIBUTING.md) is the practical guide: what to install, how to make a change, and how to check it — only the checks a change needs, never the whole site or every film. [PLAYBOOK.md](PLAYBOOK.md) collects what made the films work, from the two-audience promise to pacing, rigour and the labs, with checklists for the script, the render and the release, for the next film or course. [AGENTS.md](AGENTS.md) is the process every film change follows.
 

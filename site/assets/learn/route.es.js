@@ -787,8 +787,8 @@ window.LD_ROUTE = {
      "href": "ownership-and-performance/",
      "poster": "owning-the-outcome-poster.jpg",
      "kicker": "Serie · 4 películas",
-     "len": "32 min",
-     "min": 32.0,
+     "len": "31 min",
+     "min": 31.0,
      "films": [
       "ld-owning-the-outcome",
       "ld-measure-the-work",

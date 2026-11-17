@@ -14,7 +14,7 @@ window.LD_TOUR_STEPS={
   {sel:"#ix-q",title:"Search what the films say",text:"Type a word. The results name the film and the lines that say it, and each line opens the film at that second."},
   {sel:".list-view .ix-group",title:"A row for each topic",text:"Open a row to see who the topic is for, and its films and series."},
   {sel:".px-lenses",title:"Show what attaches where",text:"Each lens lights one kind of context on the pieces it attaches to: owners, personal data, promises, checks, or one learner."},
-  {sel:".px-foot",title:"Follow one question",text:"Press Play, or drag along the eleven steps. The map moves to each piece, and the panel shows the real file behind it."},
+  {sel:".px-foot",title:"Follow one question",text:"Press Play, or drag along the twelve steps. The map moves to each piece, and the panel shows the real file behind it."},
   {sel:".px-expand",title:"Room to read",text:"Opens the details beside the map wider, to read a table or a file in full. Press it again to give the map its room back."},
   {sel:".px-cx-bar",title:"Add the context",text:"Each switch adds one piece of business context. Watch which questions it answers."},
   {sel:".px-stabs",title:"Open standards, line by line",text:"Pick a standard, then a note: it lights the lines of the real file it explains."},

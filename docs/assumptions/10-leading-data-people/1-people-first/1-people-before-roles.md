@@ -1,8 +1,8 @@
 # People before roles: questions and assumptions
 
-*Leading data people* · *People first*, film 1 · open, pull request to come
+*Leading data people* · *People first*, film 1 · merged, PR #418 · [pull request](https://github.com/roanboc/learning-data/pull/418)
 
-On the site once its pull request merges: https://data.learn-all.org/people-first/people-before-roles/
+[Watch it on the site](https://data.learn-all.org/people-first/people-before-roles/)
 
 > Written on 12 November 2026 by the film's thread, in the film's own pull request. The series' own questions are in [`0-series.md`](0-series.md), beside this file.
 

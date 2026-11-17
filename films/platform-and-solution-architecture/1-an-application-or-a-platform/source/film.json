@@ -4,6 +4,7 @@
   "sub": "Platform and solution architecture, a series on the data platform and what is built on it: why a data platform is a platform and not one more application, what the word means for a vendor's product and for the service an organisation runs, whose logic it carries, and who owns it.",
   "howto": "Application blue is an application, with its logic built in; technology green is the platform, shared by every domain; blocks set down on it are each domain's logic, and a gold tag is its owner in the business. Amber, a lantern's colour, is the road every domain shares, in Japan from 1601 and at the utility today.",
   "src": [
+    "../../../../data-that-moves/shared/src/logos.js",
     "../../../shared/src/psa.js",
     "scenes.js"
   ],

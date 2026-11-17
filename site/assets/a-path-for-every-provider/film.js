@@ -2313,7 +2313,7 @@ scene("box",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),
     // the cost of loading, by McLean's own figures
     {at:c.cost-0.3,place:"ppNewark",keys:[[c.cost-0.3,960,540,1.0]],draw:(x,tt)=>{
       pp_ship(x,SX,{place:"ppNewark",kind:"tanker",boxes:8,t:tt});pp_shoreCrane(x,{tip:[1000,240],hook:[1000,300]});
-      const s0=w("cost","figures",-0.2),b0=w("cost","16",-0.2),h0=w("cost","5.83",-0.2);
+      const s0=w("cost","figures",-0.2),b0=w("cost","sixteen",-0.2),h0=w("cost","five dollars",-0.2);
       if(tt>=s0){const a=ag_in(tt,s0,0.35)*(1-ag_in(tt,c.needs-0.4,0.4));if(a>0.004){x.save();x.globalAlpha*=a;ag_about(x,520,330,lerp(0.6,1,ag_spr(tt-s0,0,0.5)));
         lp_sheet(x,110,110,820,420,{light:null,pin:false});lp_T(x,"LOADING A SHIP, PER TON",146,184,{w:800,size:28,ls:3,col:LP.mut});lp_T(x,"McLean's own figures, 1956",146,232,{w:800,size:36});
         const hb=ag_sine(ag_in(tt,h0,0.9)),bb=ag_sine(ag_in(tt,b0,0.9));
@@ -2445,7 +2445,7 @@ scene("gone",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
       pp_compare(x,140,140,{a:ag_in(tt,c.compare-0.1,0.4),k:tt-c.compare+0.1,u:ag_in(tt,c.compare+0.2,1.4),match:ag_in(tt,m0,1.2),gone:ag_in(tt,g0,0.8),light:"late"});
       pp_tag(x,tt,w("compare","night",-0.1),null,960,740,"Every night",{align:"center",col:LP.ink});}},
     // live; and what it found in the first week
-    {at:c.live-0.3,place:"ppLate",later:true,keys:[[c.live-0.3,960,540,1.0]],draw:(x,tt)=>{const f0=w("found","212",-0.3),fa=1-ag_in(tt,sc.dur-1.0,0.7);if(fa<=0.004)return;x.save();x.globalAlpha*=fa;
+    {at:c.live-0.3,place:"ppLate",later:true,keys:[[c.live-0.3,960,540,1.0]],draw:(x,tt)=>{const f0=w("found","two hundred",-0.3),fa=1-ag_in(tt,sc.dur-1.0,0.7);if(fa<=0.004)return;x.save();x.globalAlpha*=fa;
       pp_sheet(x,tt,c.live+0.2,200,160,520,{kick:"The new timetable",title:"Live on Monday 19 July"},{col:LP.orange,light:"late"});
       if(tt>=f0){const a=ag_in(tt,f0,0.35);lp_figure(x,840,160,520,{kick:"Found by Friday 30 July",num:"212",label:"Deleted bookings the changes never mentioned"},{col:LP.green,a,k:tt-f0,light:"late"});}
       lp_screen(x,200,420,520,330,{a:ag_in(tt,c.live+0.6,0.4),draw:(cx,X,Y,Wd,Hd)=>pp_counts(cx,X,Y,Wd,Hd,{u:ag_in(tt,c.live+0.8,1.2),ghost:1-ag_in(tt,w("off","stay",-0.2),1.4)})});
@@ -2469,9 +2469,9 @@ scene("paths",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
         lp_T(x,"PAYROLL'S FILE, NIGHT BY NIGHT",900,222,{w:800,size:28,ls:3,col:LP.orange});
         const cutV=ag_in(tt,cut0,0.8);
         pp_nights(x,900,250,820,420,{u:ag_in(tt,b0+0.2,1.2),cut:cutV,line:ag_in(tt,w("small","smaller",-0.1),0.6)});x.restore();}
-      pp_sheet(x,tt,w("cut","24",-0.2),180,360,600,{kick:"Tuesday 24 August",title:"The file arrives cut short"},{col:LP.amber,light:"day"});
+      pp_sheet(x,tt,w("cut","twenty-fourth",-0.2),180,360,600,{kick:"Tuesday 24 August",title:"The file arrives cut short"},{col:LP.amber,light:"day"});
       pp_pill(x,tt,w("cut","stops",-0.1),null,480,640,"Stopped: asks a person",{col:LP.green,icon:"tick"});
-      pp_tag(x,tt,w("cut","2,400",-0.1),null,480,730,"2,400 staff not marked as gone",{align:"center",col:LP.green});}},
+      pp_tag(x,tt,w("cut","two thousand",-0.1),null,480,730,"2,400 staff not marked as gone",{align:"center",col:LP.green});}},
     // the labs' spreadsheet, moved into a governed table, owned by Anil
     {at:c.anil-0.3,place:"ppJune",keys:[[c.anil-0.3,960,540,1.0]],dis:1.2,draw:(x,tt)=>{const m0=w("anil","moves",-0.2),o0=w("anil","owns",-0.2);
       pp_sheet(x,tt,m0,780,150,520,{kick:"Faculty of Health",title:"Nine clinical labs",sub:"A spreadsheet"},{col:LP.amber,light:"morning",out:o0-0.5});

@@ -2656,7 +2656,7 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 scene("june",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),hr=w("elms","here",-0.4);
   ag_shots(ctx,S,t,sc.dur,[
     // Wednesday 2 June, in HR's office: Ingrid shows Jun payroll's year
-    {at:0,place:"etHR",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const p0=w("wed","Ingrid",-0.6),j0=w("wed","Jun",-0.6),l0=c.july+0.1;
+    {at:0,place:"etHR",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const p0=w("wed","Ingrid",-0.6),j0=w("wed","Jun,",-0.6),l0=c.july+0.1;
       et_sheet(x,tt,c.wed+0.2,560,170,800,{kick:"Wednesday 2 June",title:"Going through the move's dates"},{light:"morning",out:c.july-0.5});
       et_timeline(x,430,150,1060,{hr:ag_in(tt,w("july","July",-0.2),0.6),end:ag_in(tt,w("payroll","thirtieth",-0.3),0.6),band:ag_in(tt,w("payroll","last returns",-0.3),0.8),
         move:ag_in(tt,w("change","August",-0.4),1.4),a:ag_in(tt,l0,0.35),k:tt-l0});

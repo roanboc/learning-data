@@ -2116,7 +2116,7 @@ scene("steps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   // the loop, carried from the last chapter, shrinks to make room for the films once that chapter has faded, and its labels give way to theirs
-  const m=ease(fin(t,0.5,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
+  const m=ease(fin(t,0.5,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","writing"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
   stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7),phases:1-fin(t,0,0.7),phaseSize:30});
   arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"Declare it, then build it",cx,cy+24,{w:800,size:22,align:"center"});});
   arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});

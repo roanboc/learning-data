@@ -2172,7 +2172,7 @@ scene("looking",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const cW=c("way"),cA=c("above"),cB=c("bottom"),qs=[w("why","Why"),w("how","How"),w("runs","what runs")],X=720,Y=150,WD=800;
   const qOn=k=>fin(t,qs[k]-0.1,0.5),hiQ=k=>pulseAt(t,qs[k],3.0);
   const hiL=[hiQ(0),hiQ(0),hiQ(1),hiQ(1),hiQ(2),hiQ(2)],bot=fin(t,w("bottom","every system"),1.2);
-  arrive(ctx,960,90,t,w("way","enterprise")-0.2,()=>withA(ctx,1-fin(t,c("three")-0.2,0.5),()=>T(ctx,"a way of looking, in layers",960,100,{w:800,size:34,align:"center"})),{dy:12});
+  arrive(ctx,960,90,t,w("way","Enterprise")-0.2,()=>withA(ctx,1-fin(t,c("three")-0.2,0.5),()=>T(ctx,"a way of looking, in layers",960,100,{w:800,size:34,align:"center"})),{dy:12});
   const R=layerStack(ctx,X,Y,WD,{p:clamp((t-w("way","layers")+0.3)/2.4,0,1),hi:hiL,br:fin(t,c("three"),0.5),bq:[qOn(0),qOn(1),qOn(2)],fill:[0,0,0,0,bot,bot]});
   // each layer is worked out from the one above
   const dn=fin(t,cA,1.2)*(1-fin(t,cB,0.5));withA(ctx,dn,()=>{arrowTo(ctx,1610,R[0][1]+10,1610,R[5][1]+R[5][3]-10,EAC,1,{p:fin(t,cA,1.2),lw:4,head:16});});

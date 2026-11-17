@@ -8,7 +8,8 @@ python .github/scripts/affected.py --base REF    compare with another branch or 
 A change is what differs from where this branch left REF (git merge-base), counting uncommitted and new files.
 The checks it picks from:
   site       site-tools/check_site.py, the static checks: a few seconds, and they read every page, the Markdown
-             docs, each series' series.json and site.json, and the films' Spanish captions
+             docs, each series' series.json and site.json, the films' Spanish captions, and each film's scenes
+             and score for the words its pictures and sounds wait for
   browser    site-tools/smoke.py, the browser checks: minutes, so only on the pages a change touched. A changed page is
              checked, and so is every page that loads a changed file (a script, a stylesheet, an image, a soundtrack); a
              file no page names counts for the pages that load the files beside it. A change to the browser checks
@@ -26,6 +27,8 @@ The checks it picks from:
 The example dbt project lives in its own repository, roanboc/learning-data-project, with its own checks.
 Changes to the planner and workflow are covered by the tooling regression suite, not every film.
 A change to a film's release.json checks that film. --all remains the explicit full regression run.
+A change to the build's cue-word reading (films/data-governance/shared/tools/cues.py) picks no film: it draws nothing, the
+static checks hold every film to it, and the tooling tests hold the reading itself.
 
 In CI, --github writes site, browser, pages (a JSON list, or "all"), films (a matrix) and count to $GITHUB_OUTPUT, and a table
 to $GITHUB_STEP_SUMMARY.
@@ -44,6 +47,10 @@ def production_tool(path):
     # tested without rechecking every frame. Changed timings or published audio still
     # select their normal film/page checks independently.
     return path == "site-tools/voice_cache.py" or (path.startswith("films/") and path.endswith(("/tools/tts.py", "/tools/audio_es.py")))
+# What a film's build reads its cue words with: it stops the build on a word that isn't in its line, draws nothing and changes no
+# player. site-tools/check_site.py holds every film to it (Cue words), as each build calls it, and tests/test_cues.py holds the
+# reading itself. So a change to it runs those two and picks no film, though every film of six series names it in its paths.
+READS = ["films/data-governance/shared/tools/cues.py"]
 SMOKE = ["site-tools/smoke.py"]  # the browser checks themselves: a change runs them on every page
 PLAYS = "site-tools/smoke"        # a series' play script: its labs and scenarios pages
 USED = ["site-tools/check_site.py", "site-tools/build_series.py"]  # what smoke.py imports: a change starts it, with no page
@@ -51,7 +58,9 @@ WEB = ROOT / "site"
 # what check_site.py reads besides site/ and site-tools/
 SITE_EXTRA = [re.compile(p) for p in [r".*\.md$", r"films/[^/]+/series\.json$", r"films/.*/site\.json$",
                                       r"films/.*/source/src/i18n/es/captions\.js$", r"films/.*/source/film\.json$",
-                                      r"films/.*release\.json$", r"films/.*release-note\.md$", r"films/.*/audio\.json$"]]
+                                      r"films/.*release\.json$", r"films/.*release-note\.md$", r"films/.*/audio\.json$",
+                                      # the words a film's pictures and sounds wait for: its scenes, its series' and its score
+                                      r"films/.*/src/[^/]+\.js$", r"films/.*/tools/score\.py$"]]
 
 
 def films():
@@ -201,7 +210,8 @@ def plan(files, everything, base="HEAD"):
     else:
         pick = []
         for f in fl:
-            source = [p for p in files if not p.endswith((".md", ".rst")) and not production_tool(p) and touches(p, f["paths"] + [f["release"]])]
+            source = [p for p in files if not p.endswith((".md", ".rst")) and not production_tool(p) and p not in READS
+                      and touches(p, f["paths"] + [f["release"]])]
             if source:
                 pick.append(dict(f, checks="full"))
                 reasons[f["key"]] = source
@@ -212,11 +222,12 @@ def plan(files, everything, base="HEAD"):
                 assets_only.append(f)
     keys = None if everything else pages(files, base)  # None: every page
     browser = keys is None or bool(keys) or any(p in USED for p in files)
-    site = browser or any(under(p, ["site", "site-tools", "modules"]) for p in files) or any(r.match(p) for p in files for r in SITE_EXTRA)
+    site = (browser or any(under(p, ["site", "site-tools", "modules"]) or p in READS for p in files)
+            or any(r.match(p) for p in files for r in SITE_EXTRA))
     matrix = [{k: f[k] for k in ("name", "key", "dir", "lang", "player", "site_player", "checks")} for f in pick]
     return dict(site=site, browser=browser, pages=None if keys is None else sorted(keys),
                 films=matrix, assets=assets_only, everything=everything, reasons=reasons,
-                tooling=everything or any(under(p, TOOLING) or production_tool(p) for p in files),
+                tooling=everything or any(under(p, TOOLING) or production_tool(p) or p in READS for p in files),
                 media=everything or "site-tools/media.py" in files or any(p.endswith(("/audio.json", ".mp3")) for p in files))
 
 

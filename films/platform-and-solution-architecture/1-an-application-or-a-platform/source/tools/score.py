@@ -252,7 +252,8 @@ sheet(mw('ask', 'move it', -0.2), 0.004, px(1400))
 hpsi(A3, mw('ask', 'a word', -0.1), 0.45, 2.4)
 
 # 3. A word that means two things: the product comes in, a sheet, its components set in, one line; "sold as one": a tick. The service,
-#    your data platform: the chapter's chord, A major, as it opens; the parts round the product, a tick each; the team, its rules (a
+#    your data platform: the chapter's chord, A major, as it opens; other vendors, a tick each; the two products and the parts outside
+#    them, a tick each; the parts round them all, a tick each; one component of them all, one line; the team, its rules (a
 #    sheet) and its support; the two words, each a tick
 LV[0] = 0.9
 vw = lambda lid, word, off=0: W('words', lid, word, off)
@@ -261,12 +262,17 @@ sheet(S0('words') + 0.4, 0.004, px(500))
 line(vw('vendor', 'many components', -0.2), 1.4, 0.0035, px(500))
 tick(vw('vendor', 'sold as one', -0.1), 0.0035, px(500))
 roll((A2, E3, A3, Cs4), vc('yours', -0.1), 0.5, 0.14, 2.2)
-for word, x in (('identity', 1040), ('network', 1040), ('integration', 1040), ('orchestration', 1690), ('reporting tools', 1690), ('watches', 1690)):
+tick(vw('vendor', 'Microsoft Fabric', -0.2), 0.003, px(340))
+tick(vw('vendor', 'Snowflake', -0.2), 0.003, px(690))
+for word, x in (('Databricks', 1365), ('Microsoft Fabric', 1365), ('data lake', 1025), ('key vault', 1025), ('network', 1025)):
+    tick(vw('two', word, -0.15), 0.003, px(x))
+for word, x in (('identity', 1025), ('integration', 1705), ('orchestration', 1705), ('reporting', 1705), ('watches', 1705)):
     tick(vw('parts', word, -0.15), 0.003, px(x))
+line(vw('whole', 'technology component', -0.3), 1.2, 0.0035, px(1360))
 tick(vw('team', 'team', -0.2), 0.0035, px(1080))
 sheet(vw('team', 'rules', -0.2), 0.0035, px(1350))
 tick(vw('team', 'support', -0.2), 0.0035, px(1620))
-tick(vw('keep', 'product', -0.3), 0.0035, px(528))
+tick(vw('keep', 'products', -0.3), 0.0035, px(500))
 tick(vw('keep', 'service', -0.3), 0.0035, px(1336))
 
 # 4. The test: billing arrives, a sheet; its rules written in, the brush; its owner, a tick. The platform, its capabilities laid out,
@@ -358,16 +364,19 @@ sheet(S0('why') + 0.3, 0.004, px(960))
 roll((A2, E3, A3, Cs4, E4), yw('crosses', 'every layer', -0.2), 0.45, 0.12, 2.2)
 bassoon(B2, yw('inside', 'any one', -0.1), 1.0, 0.45, px(1020) * 0.4)
 
-# 10. The data practice on the map: the two layers laid in, a sheet; the platform's services, a tick each; Databricks under them,
-#     realising them, one line; the data product, a sheet, its owner a tick, its output port and tables, a tick each; no rule in the
+# 10. The data practice on the map: the two layers laid in, a sheet; the enterprise data platform, one node, a sheet; its parts, a tick
+#     each; the services they realise, a tick each, and the realising, one line; the data product, a sheet, its owner a tick, its output port and tables, a tick each; no rule in the
 #     platform's components: the bassoon's low B, then D major as the rule is shown in the product, with its owner
 LV[0] = 0.9
 pw = lambda lid, word, off=0: W('practice', lid, word, off)
 pc = lambda lid, off=0: G('practice', lid, off)
 sheet(S0('practice') + 0.4, 0.004, px(960))
+sheet(pw('tech', 'one node', -0.2), 0.0035, px(710))
+for k, word in enumerate(('Databricks', 'Microsoft Fabric', 'data lake', 'key vault', 'network')):
+    tick(pw('made', word, -0.2), 0.003, px(272 + 218 * k))
 for k, word in enumerate(('storage', 'compute', 'catalogue')):
-    tick(pw('tech', word, -0.2), 0.003, px(480 + 360 * k))
-line(pw('tech', 'realises', -0.2), 1.0, 0.0035, px(860))
+    tick(pw('serves', word, -0.2), 0.003, px(480 + 340 * k))
+line(pw('serves', 'realise', -0.2), 1.0, 0.0035, px(820))
 sheet(pw('app', 'pipeline', -0.2), 0.0035, px(860))
 tick(pw('app', 'owned', -0.2), 0.003, px(860))
 tick(pw('port', 'Where others', -0.2), 0.003, px(1430))

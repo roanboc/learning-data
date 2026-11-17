@@ -159,6 +159,29 @@ class SelectionTests(unittest.TestCase):
         self.assertTrue(p["tooling"])
         self.assertEqual(p["films"], [])
 
+    def test_the_cue_word_reading_is_checked_without_drawing_a_film(self):
+        # every film of six series names it in its paths; the static checks hold every film to it, and the tests the reading
+        cues = "films/data-governance/shared/tools/cues.py"
+        self.assertGreater(sum(affected.touches(cues, f["paths"]) for f in affected.films()), 100)
+        p = self.plan(cues)
+        self.assertEqual(p["films"], [])
+        self.assertTrue(p["site"])
+        self.assertTrue(p["tooling"])
+        self.assertFalse(p["browser"])
+        names = [s[0] for s in affected.steps(p)]
+        self.assertEqual(names, ["Tooling regression tests", "Site, static"])
+        # the file beside it, which the builds also read, still checks the films that name it
+        self.assertGreater(len(self.plan("films/data-governance/shared/tools/names.py")["films"]), 100)
+        # and a film changed along with it is still checked whole
+        p = self.plan(cues, "films/data-governance/1-off-the-shelf/source/src/scenes.js")
+        self.assertEqual([(f["key"], f["checks"]) for f in p["films"]], [("off-the-shelf-en", "full")])
+
+    def test_a_films_cue_words_are_read_when_its_scenes_or_score_change(self):
+        # check_site.py reads them (Cue words); a series whose own build doesn't is held to its words there
+        for path in ("films/enterprise-architecture/1-day-one/source/src/scenes.js", "films/enterprise-architecture/1-day-one/source/src/narration.js",
+                     "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/analytics-engineering/7-who-owns-what/source/tools/score.py"):
+            self.assertTrue(self.plan(path)["site"], path)
+
     def test_nested_dynamic_asset_and_deleted_asset_keep_owner_pages(self):
         for asset in ("places/desk.webp", "places/deleted-picture.webp", "places/places.json"):
             with self.subTest(asset=asset):

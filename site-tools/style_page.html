@@ -1,0 +1,496 @@
+<title>Style stats</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: the style board's, for numbers. One sticky switch (the device) drives every number on the page; one picked look is
+   followed down it; each section answers one question. Chart colours: --s1 and --s2, checked in light and dark. */
+:root{
+  --bg:#edf1f2; --surface:#ffffff; --ink:#2a2230; --muted:#665d6c; --line:#d5dbdf; --chip:#e2e8eb; --wash:rgba(138,58,84,.11);
+  --accent:#8a3a54; --accent-ink:#ffffff; --s1:#8a3a54; --s2:#3d8fd0;
+  --display:"Bricolage Grotesque","Manrope",system-ui,sans-serif; --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:14px; --gap:clamp(16px,2.4vw,28px); --c1:168px; --c3:10.6em;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17141b; --surface:#221e28; --ink:#f2edf3; --muted:#aaa1b1; --line:#3a3342; --chip:#2d2735; --wash:rgba(229,146,171,.13);
+  --accent:#e592ab; --accent-ink:#1c1016; --s1:#c9648a; --s2:#3f97cf; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17141b; --surface:#221e28; --ink:#f2edf3; --muted:#aaa1b1; --line:#3a3342; --chip:#2d2735; --wash:rgba(229,146,171,.13);
+  --accent:#e592ab; --accent-ink:#1c1016; --s1:#c9648a; --s2:#3f97cf; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+img{max-width:100%}
+.wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-0.01em}
+h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.04;font-weight:800}
+h2{font-size:clamp(1.45rem,3vw,2rem);line-height:1.12;font-weight:800}
+h3{font-size:1.05rem;line-height:1.25;font-weight:600}
+section>.head>h3{font-size:clamp(1.2rem,2.2vw,1.45rem);font-weight:800;margin-top:8px}
+p{margin:0;max-width:66ch}
+.eyebrow{font:800 0.74rem/1 var(--body);letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+.small{font-size:0.9rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.hero{padding-block:clamp(28px,5vw,56px) clamp(8px,2vw,16px);display:grid;gap:16px}
+.hero p{font-size:1.1rem}
+.hero .find{font:600 clamp(1.2rem,2.3vw,1.5rem)/1.28 var(--display);max-width:40ch;padding-left:14px;border-left:4px solid var(--accent)}
+section{padding-block:clamp(26px,4.5vw,52px);display:grid;gap:var(--gap)}
+.head{display:grid;gap:10px}
+.k{font:800 0.72rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* the switch: sticks to the top and drives every number */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding-block:10px}
+.lbl{font:800 0.74rem/1 var(--body);letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--chip);color:var(--ink);font:700 0.92rem/1.1 var(--body);cursor:pointer;border:2px solid transparent;user-select:none}
+.seg label:hover{border-color:var(--line)}
+.seg input:checked+label{background:var(--ink);color:var(--bg)}
+.seg input:focus-visible+label{outline:3px solid var(--accent);outline-offset:2px}
+.seg.small label{padding:6px 11px;font-size:0.84rem}
+.pickl{display:inline-flex;align-items:center;gap:8px;margin-left:auto}
+.seg .sm{display:none}
+select,input[type=search]{font:700 0.9rem/1.2 var(--body);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:7px 12px;max-width:100%}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:inherit;color:inherit}
+button.btn{font:700 0.86rem/1 var(--body);padding:9px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button.btn:hover{border-color:var(--muted)}
+
+/* the headline figures */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0}
+.tile{display:grid;gap:4px;align-content:start;padding:14px 16px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);min-width:0}
+.tile .tv{font:800 1.7rem/1.05 var(--body);letter-spacing:-0.02em}
+.tile .tl{font-size:0.86rem;color:var(--muted);line-height:1.35}
+.tiles.sm .tile{padding:11px 13px}
+.tiles.sm .tv{font-size:1.3rem}
+
+/* the looks */
+.looks{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px 16px}
+.lookcard{display:grid;gap:5px;align-content:start;text-align:left;padding:8px 8px 12px;border-radius:var(--r);border:2px solid transparent;background:none;cursor:pointer;min-width:0}
+.lookcard:hover{background:var(--chip)}
+.lookcard[aria-pressed="true"]{background:var(--surface);border-color:var(--ink)}
+.lookcard .pic{display:block;aspect-ratio:16/9;border-radius:9px;overflow:hidden;background:var(--chip);border:1px solid var(--line)}
+.lookcard img{display:block;width:100%;height:100%;object-fit:cover}
+.lookcard .nm{font:600 1.05rem/1.2 var(--display);margin-top:5px}
+.lookcard .md{font-size:0.82rem;color:var(--muted);line-height:1.3}
+.lookcard .stt{font-size:0.88rem;font-variant-numeric:tabular-nums}
+.lookcard .stt b{font-weight:800}
+.detail{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--gap);align-items:start;padding:clamp(14px,2.2vw,22px);border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.detail .frame{border-radius:10px;overflow:hidden;aspect-ratio:16/9;background:var(--chip);border:1px solid var(--line)}
+.detail .frame img{display:block;width:100%;height:100%;object-fit:cover}
+.detail .dt{display:grid;gap:14px;min-width:0}
+.detail .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 22px}
+.detail ul,.detail ol{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:5px;font-size:0.9rem}
+.detail li{display:flex;justify-content:space-between;gap:12px}
+.detail li span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted)}
+
+/* a figure: bars, their legend, and the same numbers as a table */
+.fig{display:grid;gap:12px;margin:0;padding:clamp(14px,2.2vw,22px);border-radius:var(--r);background:var(--surface);border:1px solid var(--line);min-width:0}
+.figtop{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:0.86rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;flex:none}
+.legend i.s1{background:var(--s1)}.legend i.s2{background:var(--s2)}
+.legend i.dot{width:10px;height:10px;border-radius:50%;background:var(--ink)}
+.legend i.rule{width:2px;height:14px;border-radius:0;background:var(--ink)}
+.plot{position:relative;display:grid}
+.axis,.gridl,.barrow{display:grid;grid-template-columns:var(--c1) minmax(0,1fr) var(--c3);column-gap:12px;padding-inline:10px}
+.axis{height:20px;font:700 0.72rem/1 var(--body);color:var(--muted);font-variant-numeric:tabular-nums}
+.axis .ax,.gridl .gl{grid-column:2;position:relative}
+.axis .ax span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.axis .ax span.first{transform:none}
+.axis .ax span.b{color:var(--ink);font-weight:800}
+.gridl{position:absolute;inset:20px 0 0;pointer-events:none}
+.gridl i{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.gridl i.b{width:2px;margin-left:-1px;background:var(--ink)}
+.rows{display:grid;position:relative;z-index:1}
+.barrow{align-items:center;min-height:34px;padding-block:4px;border:0;background:none;border-radius:8px;text-align:left;cursor:pointer;width:100%}
+.barrow:hover{background:color-mix(in srgb,var(--muted) 12%,transparent)}
+.barrow[aria-pressed="true"]{background:var(--wash)}
+.barrow .nm{font-weight:600;font-size:0.94rem;line-height:1.2;min-width:0}
+.barrow[aria-pressed="true"] .nm{font-weight:800}
+.barrow .sub{display:block;font-weight:500;font-size:0.78rem;color:var(--muted)}
+.track{position:relative;display:flex;gap:2px;height:18px;min-width:0}
+.track .b{flex:none;height:100%;min-width:0;transition:width .55s cubic-bezier(.3,.7,.2,1)}
+.track .b.s1{background:var(--s1)}.track .b.s2{background:var(--s2)}
+.track .b.end{border-radius:0 4px 4px 0}
+.track .dot{position:absolute;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px var(--surface);transition:left .55s cubic-bezier(.3,.7,.2,1)}
+
+.track .wh{position:absolute;top:50%;height:1px;background:var(--muted);opacity:.45;transition:left .55s cubic-bezier(.3,.7,.2,1),width .55s cubic-bezier(.3,.7,.2,1)}
+.barrow .v{font:700 0.84rem/1.2 var(--body);font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;white-space:nowrap}
+.barrow .v b{color:var(--ink);font-weight:800}
+.fignote{font-size:0.9rem;color:var(--muted);max-width:76ch}
+.tip{position:fixed;z-index:20;pointer-events:none;min-width:200px;max-width:min(320px,calc(100vw - 24px));padding:11px 13px;border-radius:10px;background:var(--ink);color:var(--bg);font-size:0.84rem;line-height:1.35;box-shadow:0 10px 30px -12px rgba(0,0,0,.5)}
+.tip .tn{font-weight:700;opacity:.8}
+.tip .tb{font:800 1.25rem/1.15 var(--body);margin:1px 0 6px}
+.tip dl{margin:0;display:grid;grid-template-columns:auto auto;gap:2px 14px}
+.tip dt{display:flex;align-items:center;gap:6px;opacity:.82}
+.tip dt i{display:inline-block;width:10px;height:3px;border-radius:2px;background:currentColor}
+.tip dt i.s1{background:var(--s1)}.tip dt i.s2{background:var(--s2)}
+.tip dd{margin:0;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:var(--gap);align-items:start}
+.two .fig{--c1:132px;--c3:6.2em}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.fig .tablewrap{border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:0.9rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+tr:last-child td,tr:last-child th{border-bottom:0}
+thead th{font:800 0.72rem/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);vertical-align:bottom}
+tbody th{font-weight:700}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.on th,tr.on td{background:var(--wash)}
+thead th button{all:unset;cursor:pointer;display:inline-flex;gap:5px;align-items:flex-end;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit}
+thead th button:hover{color:var(--ink)}
+thead th button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+thead th[aria-sort] button{color:var(--ink)}
+thead th[aria-sort="ascending"] button::after{content:"↑"}
+thead th[aria-sort="descending"] button::after{content:"↓"}
+.filmctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.filmctl label{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:0.9rem}
+.filmctl .cnt{margin-left:auto;font-size:0.86rem;color:var(--muted)}
+.ser{display:block;font-size:0.8rem;font-weight:500;color:var(--muted)}
+#film-table{min-width:900px}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px 28px;margin:0;padding:0;list-style:none}
+.rules li{display:grid;gap:4px;align-content:start;padding-top:12px;border-top:2px solid var(--ink)}
+.rules b{font:600 1.02rem/1.25 var(--display)}
+.rules span{font-size:0.92rem;color:var(--muted)}
+.steps{display:grid;gap:12px;margin:0;padding:0;list-style:none;counter-reset:s;max-width:74ch}
+.steps li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);font:800 0.86rem/1 var(--body)}
+code{font:500 0.86em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--chip);padding:1px 5px;border-radius:5px;overflow-wrap:anywhere}
+footer{padding-block:28px 48px;color:var(--muted);font-size:0.86rem}
+@media (max-width:860px){.detail{grid-template-columns:minmax(0,1fr)}.pickl{margin-left:0}}
+@media (max-width:600px){
+  .bar .wrap{gap:6px 8px;padding-block:7px}
+  .bar .lbl,.seg .lg{display:none}
+  .seg .sm{display:inline}
+  .bar .seg{flex-wrap:nowrap}
+  .bar .seg label{padding:7px 10px;font-size:0.82rem;white-space:nowrap}
+  .pickl{flex:1 1 120px;min-width:0}
+  .pickl select{width:100%;padding:6px 10px;font-size:0.82rem}
+  .axis,.gridl,.barrow{grid-template-columns:minmax(0,1fr) var(--c3)}
+  .axis .ax,.gridl .gl{grid-column:1}
+  .barrow .nm{grid-column:1/-1;position:relative;z-index:1;background:var(--surface);box-shadow:0 -4px 0 var(--surface);padding-bottom:3px}
+  .barrow:hover,.barrow[aria-pressed="true"]{background:none}
+  .barrow[aria-pressed="true"] .nm{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px;text-decoration-color:var(--accent)}
+  .gridl{inset:20px 0 0}
+  :root{--c3:7.4em}
+  .barrow .v .x{display:none}
+  .looks{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 8px}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}.track .b,.track .dot,.track .wh{transition:none}}
+</style>
+<!--BODY-->
+<div class="bar"><div class="wrap">
+  <span class="lbl" id="devlbl">Drawn on</span>
+  <div class="seg" role="radiogroup" aria-labelledby="devlbl">
+    <input type="radio" name="dev" id="dev-slow" value="slow" checked><label for="dev-slow"><span class="lg">A slow phone</span><span class="sm">Slow phone</span></label>
+    <input type="radio" name="dev" id="dev-half" value="half"><label for="dev-half"><span class="lg">A slow phone, half size</span><span class="sm">Half size</span></label>
+    <input type="radio" name="dev" id="dev-fast" value="fast"><label for="dev-fast"><span class="lg">A laptop</span><span class="sm">Laptop</span></label>
+  </div>
+  <label class="pickl"><span class="lbl">Look</span><select id="look" aria-label="The look to follow down the page"></select></label>
+</div></div>
+
+<header class="wrap hero">
+  <span class="eyebrow">Learning Data · style stats</span>
+  <h1>What each look costs to draw</h1>
+  <p>The site draws every film live, in the visitor's browser. A look that is heavy to draw is a film that stutters on a phone. So every film was measured the same way: sixteen moments of each, drawn as the site's player draws them. Pick a device in the bar and every number on this page follows.</p>
+  <p class="find" id="hero-find" aria-live="polite"></p>
+  <div class="tiles" id="hero-tiles"></div>
+</header>
+
+<main>
+<section class="wrap" id="looks-s" aria-labelledby="h-looks">
+  <div class="head"><span class="eyebrow">The looks in use</span><h2 id="h-looks"></h2>
+    <p>Each module was drawn in a look of its own. Pick one and it is marked in every chart below.</p></div>
+  <div class="looks" id="looks"></div>
+  <div class="detail" id="detail" aria-live="polite"></div>
+</section>
+
+<section class="wrap" id="frame-s" aria-labelledby="h-frame">
+  <div class="head"><span class="eyebrow">One frame</span><h2 id="h-frame"></h2><p id="p-frame"></p></div>
+  <figure class="fig" id="fig-frame"></figure>
+  <p class="fignote">The browser that measured has no graphics chip, so it paints slowly. A real phone paints faster, and the script's part is what no chip speeds up. Read the bars against each other, not as what one phone will show. <span id="floor-note"></span></p>
+</section>
+
+<section class="wrap" id="people-s" aria-labelledby="h-people">
+  <div class="head"><span class="eyebrow">People</span><h2 id="h-people"></h2>
+    <p>The time one person adds to a frame, with the painting counted. Each bar is one person in a usual moment: the middle of all the look's moments with people.</p></div>
+  <figure class="fig" id="fig-people"></figure>
+  <p class="fignote" id="people-note"></p>
+  <div class="head"><h3 id="h-moment"></h3><p>A usual moment with people, split into its people and everything else on screen: the place, the cards and the words.</p></div>
+  <figure class="fig" id="fig-moment"></figure>
+</section>
+
+<section class="wrap" id="first-s" aria-labelledby="h-first">
+  <div class="head"><span class="eyebrow">The first time</span><h2 id="h-first"></h2>
+    <p>A look that paints its places paints each one once and keeps the picture. While a place is painted the film waits, at its start or in its first seconds. Each bar is the longest such wait in a usual film of the look. Measured on the slow phone at full size.</p></div>
+  <figure class="fig" id="fig-first"></figure>
+  <p class="fignote" id="first-note"></p>
+</section>
+
+<section class="wrap" id="kept-s" aria-labelledby="h-kept">
+  <div class="head"><span class="eyebrow">Kept and sent</span><h2 id="h-kept"></h2>
+    <p>A look that paints a place once has to keep the picture. Memory is what a usual film holds in pictures after its sixteen moments. The download is the film's player as the site sends it, with the pictures sent beside it.</p></div>
+  <div class="two"><figure class="fig" id="fig-kept"></figure><figure class="fig" id="fig-sent"></figure></div>
+  <p class="fignote" id="kept-note"></p>
+</section>
+
+<section class="wrap" id="versions-s" aria-labelledby="h-versions" hidden>
+  <div class="head"><span class="eyebrow">Before and after</span><h2 id="h-versions"></h2><p id="p-versions"></p></div>
+  <figure class="fig" id="fig-versions"></figure>
+  <figure class="fig" id="fig-vpeople"></figure>
+  <p class="fignote" id="versions-note"></p>
+</section>
+
+<section class="wrap" id="films-s" aria-labelledby="h-films">
+  <div class="head"><span class="eyebrow">Every film</span><h2 id="h-films"></h2>
+    <p>Sort by any column to find the films to fix first. The times follow the device picked in the bar.</p></div>
+  <div class="filmctl">
+    <label>Find <input type="search" id="film-q" placeholder="a film or a series" autocomplete="off"></label>
+    <label><input type="checkbox" id="film-only"> <span id="film-only-l">Only the look picked</span></label>
+    <span class="cnt" id="film-cnt"></span>
+  </div>
+  <div class="tablewrap"><table id="film-table"><caption class="sr">Every film measured, with what it costs to draw</caption><thead></thead><tbody></tbody></table></div>
+  <div><button class="btn" id="film-more" type="button"></button></div>
+</section>
+
+<section class="wrap" id="method-s" aria-labelledby="h-method">
+  <div class="head"><span class="eyebrow">How it was measured</span><h2 id="h-method">The same six steps for every film</h2></div>
+  <ol class="steps">
+    <li><div><b>Build the film and open it as the site's player does.</b> The browser has no graphics card, as where the repository's checks run.</div></li>
+    <li><div><b>Take sixteen moments,</b> evenly spaced from the first second to the last.</div></li>
+    <li><div><b>Draw each moment at 1920 × 1080 with the processor slowed four times.</b> The first draw is the first picture. Then the moment is drawn three more times, each followed by reading one pixel back, and the middle time is kept.</div></li>
+    <li><div><b>Split the time in two.</b> The film's script is done when its drawing calls return. The browser paints when the pixel is read.</div></li>
+    <li><div><b>Time every person.</b> The picture is brought up to date before and after each person is drawn, so the person's painting is counted and nobody else's.</div></li>
+    <li><div><b>Do it again at 960 × 540, and at full speed.</b> Then add up the pictures the film still holds, and weigh what the site sends.</div></li>
+  </ol>
+  <ul class="rules">
+    <li><b>Slower than a phone</b><span>Painting without a graphics chip is the slow way. The numbers are for comparing looks, and for seeing a look get lighter or heavier.</span></li>
+    <li><b>Sixteen moments are a sample</b><span>A film's heaviest second can fall between two of them, and the same film measured twice differs by up to a tenth: two looks closer than that are a tie.</span></li>
+    <li><b>The player protects itself</b><span>When frames take more than 40 ms it draws at half size. That is the second device in the bar.</span></li>
+    <li><b>Run it again</b><span><code>python site-tools/style_stats.py --measure</code> measures, and <code>--page</code> makes this page. Add <code>--film</code> to try one film in a new look.</span></li>
+  </ul>
+</section>
+</main>
+<footer class="wrap" id="foot"></footer>
+
+<script>const DATA=__DATA__;</script>
+<script>
+(function(){
+"use strict";
+const D=DATA,B=D.budget,$=id=>document.getElementById(id);
+const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;};
+const L=Object.fromEntries(D.looks.map(l=>[l.id,l]));
+const st={dev:"slow",look:L["ink-line"]?"ink-line":D.looks[0].id,sort:"ms",dir:-1,q:"",only:false,all:false};
+const DEV={
+  slow:{where:"on a slow phone at full size",how:"at 1920 × 1080 with the processor slowed four times, as on a phone."},
+  half:{where:"on a slow phone at half size",how:"at 960 × 540 with the processor slowed four times. The site's player falls back to this size when it can't keep up, so this is what a slow phone really plays."},
+  fast:{where:"on a laptop",how:"at 1920 × 1080 with the processor at full speed, as on a laptop."}};
+const WORDS=["no","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen"];
+const word=n=>WORDS[n]||String(n),cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const ms=v=>v==null?"–":(v<9.95?v.toFixed(1):String(Math.round(v)))+" ms";
+const wait=v=>v==null?"–":v>=995?(v/1000).toFixed(1)+" s":Math.round(v/10)*10+" ms";
+const fps=v=>{const f=Math.min(30,1000/v);return(f>=9.5?Math.round(f):f.toFixed(1))+" a second";};
+const mb=v=>v==null?"–":Math.round(v)+" MB";
+const kb=v=>v==null?"–":v>=1000?(v/1024).toFixed(1)+" MB":Math.round(v)+" KB";
+const clock=t=>Math.floor(t/60)+":"+String(Math.floor(t%60)).padStart(2,"0");
+const times=r=>r>=1.95&&r<2.05?"twice":r>=4.95?Math.round(r)+" times":r.toFixed(1)+" times";
+const pct=v=>Math.round(v*100)+"%";
+/* a look's name inside a sentence, and a list of them (some names hold a comma) */
+const mid=n=>n.replace(/^The /,"the ");
+const list=a=>{a=a.map(mid);const semi=a.some(x=>x.includes(","));return a.length<3?a.join(" and "):a.slice(0,-1).join(semi?"; ":", ")+(semi?"; and ":" and ")+a[a.length-1];};
+const sum=a=>a.reduce((x,y)=>x+y,0);
+
+/* one tooltip for the page: the same words a row gives a screen reader */
+const tip=el("div","tip");tip.hidden=true;tip.setAttribute("role","tooltip");document.body.appendChild(tip);
+function showTip(t,x,y){tip.textContent="";tip.appendChild(el("div","tn",t.name));tip.appendChild(el("div","tb",t.big));
+  const dl=el("dl");for(const [k,v,c] of t.rows){const dt=el("dt");if(c)dt.appendChild(el("i",c));dt.appendChild(document.createTextNode(k));dl.appendChild(dt);dl.appendChild(el("dd",null,v));}
+  tip.appendChild(dl);tip.hidden=false;const r=tip.getBoundingClientRect(),W=innerWidth,H=innerHeight;
+  tip.style.left=Math.max(12,Math.min(W-r.width-12,x+14))+"px";tip.style.top=(y+r.height+26>H?Math.max(12,y-r.height-14):y+18)+"px";}
+const hideTip=()=>{tip.hidden=true;};
+addEventListener("scroll",hideTip,{passive:true});
+
+/* a scale that ends on a round step, with about n lines; a time scale also marks the frame's 33 ms, and drops a line that would sit on it */
+function scale(top,frames,n){
+  const raw=top/(n||5),p=Math.pow(10,Math.floor(Math.log10(raw||1))),s=[1,2,2.5,5,10].map(m=>m*p).find(m=>m>=raw*0.999)||raw,k=Math.max(1,Math.ceil(top/s-0.02)),max=s*k;
+  let ticks=Array.from({length:k+1},(_,i)=>({v:i*s,t:String(+(i*s).toFixed(2))}));
+  if(frames&&B<max*0.9){ticks=ticks.filter(t=>!t.v||Math.abs(t.v-B)/max>0.09);ticks.push({v:B,t:"33",b:true});ticks.sort((x,y)=>x.v-y.v);}
+  return{max,ticks};}
+
+/* a figure: ranked bars with a legend, and a switch to the same numbers as a table. spec.rows(dev) gives
+   [{id,name,sub,parts,dot,label,strong,tip}]; spec.table(dev) gives {cols,rows}; a row with an id of a look picks that look */
+const FIGS=[];
+function figure(id,spec){
+  const host=$(id),top=el("div","figtop"),leg=el("div","legend"),tog=el("div","seg small"),plot=el("div","plot"),axis=el("div","axis"),ax=el("span","ax"),
+    grid=el("div","gridl"),gl=el("span","gl"),rows=el("div","rows"),tw=el("div","tablewrap"),made={};
+  host.setAttribute("aria-label",spec.title);
+  for(const [c,t] of spec.legend)leg.append((()=>{const s=el("span");s.appendChild(el("i",c));s.appendChild(document.createTextNode(t));return s;})());
+  tog.setAttribute("role","radiogroup");tog.setAttribute("aria-label","Show "+spec.title+" as");
+  for(const [v,t] of [["bars","Bars"],["table","Table"]]){const i=el("input");i.type="radio";i.name=id+"-view";i.id=id+"-"+v;i.value=v;i.checked=v==="bars";const l=el("label",null,t);l.htmlFor=i.id;tog.append(i,l);}
+  tog.addEventListener("change",e=>{const t=e.target.value==="table";plot.hidden=t;tw.hidden=!t;leg.style.visibility=t?"hidden":"";});
+  axis.appendChild(ax);grid.appendChild(gl);plot.append(axis,grid,rows);tw.hidden=true;top.append(leg,tog);host.append(top,plot,tw);
+  function row(r){const b=el("button","barrow");b.type="button";const nm=el("span","nm"),tr=el("span","track"),v=el("span","v");tr.setAttribute("aria-hidden","true");b.append(nm,tr,v);
+    const o={b,nm,tr,v,bars:[],dot:null,wh:null,r};
+    b.addEventListener("click",()=>{if(L[o.r.id])pick(o.r.id);});
+    const at=e=>showTip(o.r.tip,e.clientX,e.clientY);b.addEventListener("pointermove",at);b.addEventListener("pointerleave",hideTip);
+    b.addEventListener("focus",()=>{const q=tr.getBoundingClientRect();showTip(o.r.tip,q.left+q.width*0.3,q.bottom-6);});b.addEventListener("blur",hideTip);
+    rows.appendChild(b);return o;}
+  function update(){
+    const data=spec.rows(st.dev),top=Math.max(1e-9,...data.map(r=>Math.max(sum(r.parts),r.dot||0))),sc=scale(top*1.02,spec.frames,spec.n),last=sc.ticks.length-1;
+    ax.textContent="";gl.textContent="";
+    // every line is drawn; a label is written only where it runs into no other: the last and the frame's 33 ms first, then the rest
+    const wd=ax.getBoundingClientRect().width||600,box=(t,i)=>{const w=7*(t.t.length+(i===last||t.b?spec.unit.length+1:0))+10,c=t.v/sc.max*wd;return i===last?[wd-w,wd]:i?[c-w/2,c+w/2]:[0,w];},shown=[];
+    sc.ticks.map((t,i)=>[t,i]).sort((a,b)=>(b[1]===last)-(a[1]===last)||(!!b[0].b)-(!!a[0].b)||a[1]-b[1]).forEach(([t,i])=>{const q=box(t,i);if(shown.every(o=>q[1]<o[0]||q[0]>o[1])){shown.push(q);t.show=true;}});
+    sc.ticks.forEach((t,i)=>{const at=t.v/sc.max,g=el("i",t.b?"b":"");g.style.left=100*at+"%";gl.appendChild(g);if(!t.show)return;
+      const s=el("span",(i?"":"first")+(t.b?" b":""),t.t+(i===last||t.b?" "+spec.unit:""));s.style.left=100*at+"%";if(i===last){s.style.left="auto";s.style.right="0";s.style.transform="none";}ax.appendChild(s);});
+    const seen={};
+    data.forEach((r,i)=>{const o=made[r.id]||(made[r.id]=row(r));o.r=r;seen[r.id]=1;o.b.hidden=false;o.b.style.order=i;
+      o.nm.textContent=r.name;if(r.sub)o.nm.appendChild(el("span","sub",r.sub));
+      while(o.bars.length<r.parts.length){const s=el("span","b s"+(o.bars.length+1));o.tr.insertBefore(s,o.wh||null);o.bars.push(s);}
+      o.bars.forEach((s,k)=>{const w=r.parts[k]||0;s.style.width=100*w/sc.max+"%";s.hidden=!(w>0);s.classList.toggle("end",k===r.parts.length-1||!(sum(r.parts.slice(k+1))>0));});
+      if(r.dot!=null){if(!o.dot){o.wh=el("span","wh");o.dot=el("span","dot");o.tr.append(o.wh,o.dot);}const e=sum(r.parts)/sc.max,at=Math.min(r.dot,sc.max)/sc.max;
+        o.dot.hidden=o.wh.hidden=false;o.dot.style.left=100*at+"%";o.wh.style.left=100*e+"%";o.wh.style.width=100*Math.max(0,at-e)+"%";}else if(o.dot)o.dot.hidden=o.wh.hidden=true;
+      o.v.textContent="";o.v.appendChild(el("b",null,r.strong));if(r.label)o.v.appendChild(el("span","x"," · "+r.label));
+      const on=r.id===st.look;o.b.setAttribute("aria-pressed",L[r.id]?String(on):"false");if(!L[r.id])o.b.removeAttribute("aria-pressed");
+      o.b.setAttribute("aria-label",r.name+": "+r.tip.big+". "+r.tip.rows.map(x=>x[0]+" "+x[1]).join(", "));});
+    for(const k in made)if(!seen[k])made[k].b.hidden=true;
+    const t=spec.table(st.dev),tb=el("table"),th=el("thead"),tr=el("tr"),bd=el("tbody");tb.appendChild(el("caption","sr",spec.title));
+    t.cols.forEach((c,i)=>{const h=el("th",i?"num":"",c);h.scope="col";tr.appendChild(h);});th.appendChild(tr);
+    for(const r of t.rows){const x=el("tr",r.id===st.look?"on":"");r.cells.forEach((c,i)=>{const d=el(i?"td":"th",i?"num":"",c);if(!i)d.scope="row";x.appendChild(d);});bd.appendChild(x);}
+    tb.append(th,bd);tw.textContent="";tw.appendChild(tb);}
+  FIGS.push(update);return update;}
+
+/* the looks: a card each, and the picked one up close */
+const cards={};
+function buildLooks(){const host=$("looks"),sel=$("look");
+  for(const l of D.looks){const b=el("button","lookcard");b.type="button";const pic=el("span","pic");if(l.img){const im=el("img");im.src=l.img;im.alt=l.what;im.loading="lazy";im.decoding="async";pic.appendChild(im);}
+    const stt=el("span","stt");b.append(pic,el("span","nm",l.name),el("span","md",l.module),stt);b.addEventListener("click",()=>pick(l.id));host.appendChild(b);cards[l.id]={b,stt};
+    const o=el("option",null,l.name);o.value=l.id;sel.appendChild(o);}
+  sel.addEventListener("change",()=>pick(sel.value));}
+function tile(v,l){const t=el("div","tile");t.append(el("span","tv",v),el("span","tl",l));return t;}
+function detail(){const l=L[st.look],d=l.d[st.dev],host=$("detail");host.textContent="";
+  const fr=el("div","frame");if(l.img){const im=el("img");im.src=l.img;im.alt=l.what;fr.appendChild(im);}
+  const dt=el("div","dt"),hd=el("div","head");hd.append(el("span","k",l.module),el("h3",null,l.name),el("p","muted small",l.what));
+  const ti=el("div","tiles sm");
+  ti.append(tile(ms(d.ms),"a frame "+DEV[st.dev].where+": "+fps(d.ms)),tile(ms(d.p90),"a heavy moment: nine in ten are quicker"));
+  if(d.person!=null)ti.append(tile(ms(d.person),"one person, with up to "+word(d.most)+" in a moment"));
+  if(l.first)ti.append(tile(wait(l.first.med),"the longest wait for a first picture, in a usual film"));
+  if(l.kept)ti.append(tile(mb(l.kept.med),"kept in pictures by a usual film"));
+  const fns=l.person_fns||[],by=el("p","muted small by");
+  if(fns.length){by.append("Its people are drawn by ");fns.slice(0,4).forEach((f,i)=>{if(i)by.append(i===Math.min(fns.length,4)-1&&fns.length<=4?" and ":", ");by.appendChild(el("code",null,f));});by.append(fns.length>4?" and "+(fns.length-4)+" more of the films' own.":".");}
+  const cols=el("div","cols"),c1=el("div"),c2=el("div"),ul=el("ul"),ol=el("ol");
+  c1.append(el("span","k",l.films===1?"One film":l.films+" films in "+(l.series.length===1?"one series":word(l.series.length)+" series")),ul);
+  for(const s of l.series){const li=el("li");li.append(el("span",null,s.name+(s.films>1?" ("+s.films+")":"")),el("span",null,ms(s.ms[st.dev])));ul.appendChild(li);}
+  c2.append(el("span","k","Its heaviest moments"),ol);
+  for(const h of d.heavy){const li=el("li");li.append(el("span",null,h.film+", at "+clock(h.t)),el("span",null,ms(h.ms)));ol.appendChild(li);}
+  cols.append(c1,c2);dt.append(hd,ti);if(fns.length)dt.appendChild(by);dt.appendChild(cols);host.append(fr,dt);}
+
+/* every film */
+const COLS=[["name","Film",r=>r.name],["look","Look",r=>L[r.look]?L[r.look].name:""],["ms","A frame",r=>r.d[st.dev].ms,ms],["max","Heaviest moment",r=>r.d[st.dev].max,ms],
+  ["person","One person",r=>r.d[st.dev].person,ms],["most","Most people at once",r=>r.d[st.dev].most,v=>v?String(v):"–"],["first","First picture",r=>r.first,wait],["kept","Kept",r=>r.kept,mb],["sent","Sent",r=>r.sent,kb]];
+function films(){const tb=$("film-table"),th=tb.tHead,bd=tb.tBodies[0],c=COLS.find(x=>x[0]===st.sort),q=st.q.trim().toLowerCase();
+  th.textContent="";const tr=el("tr");
+  for(const [k,t,,f] of COLS){const h=el("th",f?"num":"");h.scope="col";const b=el("button",null,t);b.type="button";b.addEventListener("click",()=>{if(st.sort===k)st.dir=-st.dir;else{st.sort=k;st.dir=f?-1:1;}films();});
+    if(st.sort===k)h.setAttribute("aria-sort",st.dir>0?"ascending":"descending");h.appendChild(b);tr.appendChild(h);}
+  th.appendChild(tr);
+  let rows=D.films.filter(r=>r.d[st.dev]&&(!st.only||r.look===st.look)&&(!q||(r.name+" "+r.series).toLowerCase().includes(q)));
+  rows.sort((a,b)=>{const x=c[2](a),y=c[2](b);if(x==null||x==="")return 1;if(y==null||y==="")return -1;return(typeof x==="string"?x.localeCompare(y):x-y)*st.dir;});
+  const total=rows.length,cut=st.all||q||st.only?rows:rows.slice(0,12);bd.textContent="";
+  for(const r of cut){const x=el("tr",r.look===st.look?"on":"");COLS.forEach(([k,,g,f],i)=>{const v=g(r),d=el(i?"td":"th",f?"num":"",f?f(v):v);if(!i){d.scope="row";d.appendChild(el("span","ser",r.series));}x.appendChild(d);});bd.appendChild(x);}
+  $("film-cnt").textContent=cut.length===total?total+(total===1?" film":" films"):"The first "+cut.length+" of "+total;
+  const more=$("film-more");more.hidden=!!(q||st.only)||total<=12;more.textContent=st.all?"Show the first twelve":"Show all "+total+" films";}
+
+function pick(id){st.look=id;$("look").value=id;render();}
+function render(){const dv=st.dev,ls=D.looks,W=DEV[dv];
+  for(const l of ls){const c=cards[l.id];c.b.setAttribute("aria-pressed",String(l.id===st.look));c.stt.textContent="";c.stt.append(el("b",null,ms(l.d[dv].ms)),document.createTextNode(" a frame · "+(l.films===1?"1 film":l.films+" films")));}
+  detail();
+  // the lightest look, or the few within a tenth of it: the same film measured twice differs by about that much
+  const rk=byMs(dv),fz=rk[rk.length-1],tie=rk.filter(l=>l.d[dv].ms<=rk[0].d[dv].ms*1.1),t0=ms(tie[0].d[dv].ms),t1=ms(tie[tie.length-1].d[dv].ms);
+  $("hero-find").textContent=cap(W.where)+", "+(tie.length>1?list(tie.map(l=>l.name))+" are the lightest looks to draw, at ":mid(tie[0].name)+" is the lightest look to draw, at ")
+    +(t0===t1?t0:t0.replace(" ms","")+" to "+t1)+" a frame, and "+mid(fz.name)+" the heaviest, at "+ms(fz.d[dv].ms)+".";
+  const ok=ls.filter(l=>l.d[dv].ms<=B+0.05).length;
+  $("h-frame").textContent=(ok===0?"No look draws":ok===ls.length?"Every look draws":cap(word(ok))+" of "+word(ls.length)+" looks draw")+" a frame in time "+W.where;
+  $("p-frame").textContent="Time to draw one frame "+W.how+" The film plays 30 frames a second, so a frame has 33 thousandths of a second. Each bar is the middle moment of all the look's films.";
+  const pp=ls.filter(l=>l.d[dv].person!=null).map(l=>l.d[dv].person),lo=Math.min(...pp),hi=Math.max(...pp);$("people-s").hidden=!pp.length;
+  $("h-people").textContent="One person costs from "+ms(lo)+" to "+ms(hi)+" "+W.where;
+  const none=ls.filter(l=>l.d[dv].person==null).map(l=>l.name);
+  $("people-note").textContent=(none.length?"No people are drawn in the measured moments of "+list(none)+". ":"")+"A look whose people are painted once and kept as pictures pays for them the first time, not in every frame.";
+  const pk=L[st.look].d[dv];
+  $("h-moment").textContent=pk.pms==null?"No people are drawn in the measured moments of "+mid(L[st.look].name):"In "+mid(L[st.look].name)+", "+folk(pk.people)+" "+(pk.people===1?"is ":"are ")+pct(pk.pshare)+" of a usual moment with people";
+  FIGS.forEach(f=>f());films();
+  $("film-only-l").textContent="Only "+L[st.look].name;}
+
+/* the charts */
+const byMs=dv=>D.looks.slice().sort((a,b)=>a.d[dv].ms-b.d[dv].ms);
+const frameRow=(o,dv,name,sub)=>{const d=o.d[dv],js=d.ms*d.share;return{id:o.id||name,name,sub,parts:[js,d.ms-js],dot:d.p90,strong:ms(d.ms),label:fps(d.ms),
+  tip:{name,big:ms(d.ms)+" a frame, "+fps(d.ms),rows:[["The film's script",ms(js),"s1"],["The browser's painting",ms(d.ms-js),"s2"],["A heavy moment",ms(d.p90)],["The heaviest",ms(d.max.v)],["",d.max.film+", at "+clock(d.max.t)],["Moments drawn in time",Math.round(d.within*100)+"%"],["Measured",d.n+" moments"]]}};};
+const frameTable=(list,dv,first)=>({cols:[first,"A frame","The film's script","The browser's painting","A heavy moment","The heaviest","Frames a second","Moments drawn in time"],
+  rows:list.map(o=>{const d=o.d[dv],js=d.ms*d.share;return{id:o.id,cells:[o.name,ms(d.ms),ms(js),ms(d.ms-js),ms(d.p90),ms(d.max.v),fps(d.ms).replace(" a second",""),Math.round(d.within*100)+"%"]};})});
+const FRAME_LEGEND=[["s1","The film's script"],["s2","The browser's painting"],["dot","A heavy moment: nine in ten are quicker"],["rule","33 ms: one frame at 30 a second"]];
+figure("fig-frame",{title:"Time to draw one frame, by look",unit:"ms",frames:true,legend:FRAME_LEGEND,
+  rows:dv=>byMs(dv).map(l=>frameRow(l,dv,l.name)),table:dv=>frameTable(byMs(dv),dv,"Look")});
+const withPeople=dv=>D.looks.filter(l=>l.d[dv].person!=null).sort((a,b)=>a.d[dv].person-b.d[dv].person);
+figure("fig-people",{title:"Time to draw one person, by look",unit:"ms",legend:[["s1","One person, script and painting"]],
+  rows:dv=>withPeople(dv).map(l=>{const d=l.d[dv];return{id:l.id,name:l.name,parts:[d.person],strong:ms(d.person),label:"up to "+d.most+" at once",
+    tip:{name:l.name,big:ms(d.person)+" a person",rows:[["People in a moment, usually",String(d.people)],["Most at once",String(d.most)],["Moments with people",pct(d.withp)],["The people's part of those moments",pct(d.pshare)],["So the most people cost about",ms(d.person*d.most)]]}};}),
+  table:dv=>({cols:["Look","One person","People in a moment, usually","Most at once","Moments with people","The people's part of those moments"],rows:withPeople(dv).map(l=>{const d=l.d[dv];return{id:l.id,cells:[l.name,ms(d.person),String(d.people),String(d.most),pct(d.withp),pct(d.pshare)]};})})});
+const withMoment=dv=>D.looks.filter(l=>l.d[dv].pms!=null).sort((a,b)=>a.d[dv].pms-b.d[dv].pms),folk=n=>n===1?"1 person":n+" people";
+figure("fig-moment",{title:"A moment with people: its people and everything else, by look",unit:"ms",frames:true,legend:[["s1","The people"],["s2","Everything else"],["rule","33 ms: one frame at 30 a second"]],
+  rows:dv=>withMoment(dv).map(l=>{const d=l.d[dv],pe=d.pms*d.pshare;return{id:l.id,name:l.name,parts:[pe,d.pms-pe],strong:ms(d.pms),label:folk(d.people),
+    tip:{name:l.name,big:ms(d.pms)+" a moment with people",rows:[["The people",ms(pe)+", "+pct(d.pshare),"s1"],["Everything else",ms(d.pms-pe),"s2"],["People in such a moment, usually",String(d.people)],["One person",ms(d.person)]]}};}),
+  table:dv=>({cols:["Look","A moment with people","The people","Everything else","People in such a moment, usually"],rows:withMoment(dv).map(l=>{const d=l.d[dv],pe=d.pms*d.pshare;return{id:l.id,cells:[l.name,ms(d.pms),ms(pe),ms(d.pms-pe),String(d.people)]};})})});
+const byFirst=()=>D.looks.filter(l=>l.first).sort((a,b)=>a.first.med-b.first.med);
+figure("fig-first",{title:"The longest wait for a first picture, by look",unit:"s",legend:[["s1","The longest wait in a usual film"],["dot","The look's worst film"]],
+  rows:()=>byFirst().map(l=>({id:l.id,name:l.name,parts:[l.first.med/1000],dot:l.first.max.v/1000,strong:wait(l.first.med),label:l.pictures&&l.pictures.films?"sent as pictures":"worst "+wait(l.first.max.v),
+    tip:{name:l.name,big:wait(l.first.med)+" in a usual film",rows:[["The worst film",wait(l.first.max.v)],["",l.first.max.film],["Pictures sent with a film",l.pictures&&l.pictures.n?l.pictures.n+" ("+kb(l.pictures.kb)+")":"none"]]}})),
+  table:()=>({cols:["Look","A usual film","The worst film","Which film","Pictures sent with a film"],rows:byFirst().map(l=>({id:l.id,cells:[l.name,wait(l.first.med),wait(l.first.max.v),l.first.max.film,l.pictures&&l.pictures.n?String(l.pictures.n):"none"]}))})});
+const byKept=()=>D.looks.filter(l=>l.kept).sort((a,b)=>a.kept.med-b.kept.med);
+figure("fig-kept",{title:"Memory a film keeps in pictures, by look",unit:"MB",n:4,legend:[["s1","Kept by a usual film"],["dot","The most"]],
+  rows:()=>byKept().map(l=>({id:l.id,name:l.name,parts:[l.kept.med],dot:l.kept.max.v,strong:mb(l.kept.med),
+    tip:{name:l.name,big:mb(l.kept.med)+" kept",rows:[["The most",mb(l.kept.max.v)],["",l.kept.max.film]]}})),
+  table:()=>({cols:["Look","A usual film","The most","Which film"],rows:byKept().map(l=>({id:l.id,cells:[l.name,mb(l.kept.med),mb(l.kept.max.v),l.kept.max.film]}))})});
+const bySent=()=>D.looks.filter(l=>l.player!=null).sort((a,b)=>(a.player+a.pictures.kb)-(b.player+b.pictures.kb));
+figure("fig-sent",{title:"What the site sends for a film, by look",unit:"KB",n:4,legend:[["s1","The player"],["s2","Its pictures"]],
+  rows:()=>bySent().map(l=>({id:l.id,name:l.name,parts:[l.player,l.pictures.kb],strong:kb(l.player+l.pictures.kb),
+    tip:{name:l.name,big:kb(l.player+l.pictures.kb)+" sent",rows:[["The player",kb(l.player),"s1"],["Its pictures",l.pictures.n?kb(l.pictures.kb)+" in "+l.pictures.n:"none","s2"]]}})),
+  table:()=>({cols:["Look","Sent","The player","Its pictures","How many pictures"],rows:bySent().map(l=>({id:l.id,cells:[l.name,kb(l.player+l.pictures.kb),kb(l.player),kb(l.pictures.kb),String(l.pictures.n)]}))})});
+if(D.versions.length){$("versions-s").hidden=false;
+  figure("fig-versions",{title:"One film in each of its versions",unit:"ms",frames:true,legend:FRAME_LEGEND,
+    rows:dv=>D.versions.map(v=>frameRow(v,dv,v.name,v.note)),table:dv=>frameTable(D.versions,dv,"Version")});
+  const vp=dv=>D.versions.filter(v=>v.d[dv].person!=null);
+  figure("fig-vpeople",{title:"One person in each version",unit:"ms",legend:[["s1","One person, script and painting"]],
+    rows:dv=>vp(dv).map(v=>{const d=v.d[dv];return{id:v.name,name:v.name,sub:v.note,parts:[d.person],strong:ms(d.person),label:"up to "+d.most+" at once",
+      tip:{name:v.name,big:ms(d.person)+" a person",rows:[["People in a moment, usually",String(d.people)],["Most at once",String(d.most)],["The people's part of those moments",pct(d.pshare)]]}};}),
+    table:dv=>({cols:["Version","One person","People in a moment, usually","Most at once","The people's part of those moments"],rows:vp(dv).map(v=>{const d=v.d[dv];return{id:v.name,cells:[v.name,ms(d.person),String(d.people),String(d.most),pct(d.pshare)]};})})});
+  FIGS.push(()=>{const v=D.versions,dv=st.dev,A=v[v.length-2],Z=v[v.length-1],a=A.d[dv],b=Z.d[dv],r=a.ms/b.ms,p=a.person&&b.person?a.person/b.person:0,look=mid(L[Z.look]?L[Z.look].name:Z.name);
+    $("h-versions").textContent=Z.film+": a frame "+(r>=1.95&&r<2.05?"twice as quick":r>=1.08?times(r)+" as quick":r<=0.93?times(1/r)+" slower":"as quick")+" in "+look+(p>=1.08?", a person "+(p>=1.95&&p<2.05?"at half the cost":times(p)+" cheaper"):"");
+    $("p-versions").textContent="The same film, measured the same way in each version, "+DEV[dv].where+". The style board timed two moments of a sketch in "+look+", five to nine times quicker than the film of 15 November. The finished film puts "+folk(b.people)+" in a usual moment"+(a.people&&a.people<b.people?" where the version before it had "+word(a.people):"")+", in rooms full of furniture, with speech on screen and a camera that moves.";
+    $("versions-note").textContent="The film's own script takes "+ms(b.ms*b.share)+" of a frame in "+look+", and "+ms(a.ms*a.share)+" in the version before it."+(a.pshare!=null&&b.pshare!=null?" People are "+pct(b.pshare)+" of a moment with people now, and were "+pct(a.pshare)+".":"");});}
+
+$("h-looks").textContent=cap(word(D.count.looks))+" looks across "+D.count.films+" films";
+$("h-films").textContent="All "+D.count.films+" films, heaviest first";
+const fl=D.looks.filter(l=>l.first),fmax=fl.reduce((a,b)=>b.first.med>a.first.med?b:a,fl[0]);
+$("h-first").textContent="Painting a place for the first time can take "+wait(fmax.first.med);
+const pics=D.looks.filter(l=>l.pictures&&l.pictures.films);
+$("first-note").textContent=pics.length?"On the site, "+(pics.length===1?"one look sends":word(pics.length)+" looks send")+" their places as pictures instead: "+pics.map(l=>mid(l.name)+" ("+l.pictures.n+" pictures and "+kb(l.pictures.kb)+" a film)").join("; ")+". A visitor pays that wait as a download.":"";
+const kl=D.looks.filter(l=>l.kept).map(l=>l.kept.med);
+$("h-kept").textContent="A film keeps from "+Math.round(Math.min(...kl))+" to "+Math.round(Math.max(...kl))+" MB of pictures in memory";
+$("kept-note").textContent=pics.length?"Memory counts every place as the film paints it. Where a look sends its places as pictures, the site's player holds a few of them at a time, so it keeps less than this.":"";
+if(D.floor)$("floor-note").textContent="One kept picture drawn under a moving camera, with nothing else, costs "+ms(D.floor.slow)+" here at full size, "+ms(D.floor.half)+" at half size and "+ms(D.floor.fast)+" on the laptop.";
+$("hero-tiles").append(tile(String(D.count.looks),"looks in use"),tile(String(D.count.films),"films, in "+D.count.series+" series"),tile(D.count.moments.toLocaleString("en"),"moments timed"),tile("33 ms","the time one frame has at 30 a second"));
+$("foot").textContent="Measured on "+D.measured+" with the repository's own tool. Every number on this page comes from docs/styles/stats.json.";
+buildLooks();$("look").value=st.look;
+document.addEventListener("change",e=>{if(e.target.name==="dev"){st.dev=e.target.value;render();}});
+$("film-q").addEventListener("input",e=>{st.q=e.target.value;films();});
+$("film-only").addEventListener("change",e=>{st.only=e.target.checked;films();});
+$("film-more").addEventListener("click",()=>{st.all=!st.all;films();});
+render();
+let rz=0;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>FIGS.forEach(f=>f()),150);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>FIGS.forEach(f=>f()));
+})();
+</script>

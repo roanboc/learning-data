@@ -55,6 +55,10 @@ What it checks, page by page (every .html under site/):
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
+- cue words: every word a film's pictures or sounds wait for (wAt, kt_w or a chapter's short name for either in its scenes, W in
+  its tools/score.py) is said, whole, in its line, as films/data-governance/shared/tools/cues.py reads them. A word that isn't
+  there quietly times its moment to the start of the line, so the picture comes early. Some series' builds stop on it; here
+  every film is held to it, whichever series it is in.
 - places: a film drawn in the master data series' watercolour (its film.js declares WC_PLACES) has each place as a picture,
   drawn by tools/publish.py from the player the site plays (site/assets/<key>/places/, listed with that player in places.json),
   and no other film has the folder. The site's player shows those pictures instead of painting the places while the film plays,
@@ -295,6 +299,17 @@ def tool_respellings(source):
                 return [(e.elts[0].value, e.elts[1].value) for e in ast.walk(node.value)
                         if isinstance(e, ast.Tuple) and len(e.elts) == 2 and all(isinstance(x, ast.Constant) and isinstance(x.value, str) for x in e.elts)]
     return []
+
+
+# the words a film's pictures and sounds wait for (films/data-governance/shared/tools/cues.py): every film is held to that file
+# here, since only some series' builds call it. Left as they are, by the film's source folder, each as the check words it:
+CUES_LATER = {
+    # the sound of Who owns what: three soft taps meant for the marts come with the line's first words, about five seconds before
+    # the marts are said and drawn, and the pencil lines a quarter of a second before "group". Only a new mix of the whole soundtrack
+    # moves a sound: when this film's sound next changes, write 'marts' and 'group' in its tools/score.py, as its scenes do
+    "films/analytics-engineering/7-who-owns-what/source": ['score.py: domains/consumers: "their marts" isn\'t in what the voice reads',
+                                                           'score.py: domains/follows: "groups" isn\'t in what the voice reads'],
+}
 
 
 def release_status(text):
@@ -1551,6 +1566,29 @@ def main():
     for f in st_voices:
         s["fails"] += voice_names(f)
     s["notes"].append(f"{len(st_voices)} films' voices, each line as the voice reads it: its \"say\" or its text, after its voice tool's and its own respellings")
+    s = rep.check("Cue words: every word a film's pictures and sounds wait for is said, whole, in its line")
+    sys.path.append(str(ROOT / "films/data-governance/shared/tools"))  # last, so its lang.py and build.py hide nobody's
+    import cues
+    cue_words = cue_sounds = 0
+    for narr in st_voices:
+        source = narr.parents[1]
+        meta, score, rel = source / "film.json", source / "tools" / "score.py", source.relative_to(ROOT).as_posix()
+        # the files the film's build bundles (film.json "src": its own and its series'); the first films have no film.json
+        scenes = [narr.parent / f for f in json.loads(meta.read_text(encoding="utf-8"))["src"]] if meta.exists() else sorted(narr.parent.glob("*.js"))
+        gone = [f for f in scenes if not f.exists()]
+        s["fails"] += [f"{rel}: film.json names {f.name}, which isn't there" for f in gone]
+        scenes = [f for f in scenes if f not in gone]
+        found, known = cues.misplaced(narr, scenes, score), CUES_LATER.get(rel, [])
+        s["fails"] += [f"{rel}: {x}" for x in found if x not in known]
+        s["fails"] += [f"{rel}: this one is right now, so take it off CUES_LATER: {x}" for x in known if x not in found]
+        cue_words += sum(len(cues.moments(f.read_text())) for f in scenes)
+        cue_sounds += len(cues.IN_SCORE.findall(score.read_text())) if score.exists() else 0
+    s["fails"] += [f"CUES_LATER names {k}, which has no src/narration.js" for k in CUES_LATER if not (ROOT / k / "src" / "narration.js").exists()]
+    if s["fails"]:
+        s["notes"].append("a word that isn't in what the voice reads (the line's \"say\", or its text) times its moment to the start of the line, and one "
+                          "that first comes inside a longer word lands there: write the words as the line says them, whole")
+    s["notes"].append(f"{len(st_voices)} films, {cue_words} words their pictures wait for and {cue_sounds} their sounds; "
+                      f"{sum(len(v) for v in CUES_LATER.values())} of those sounds are left as they are until their film's sound is next mixed")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     # every film's pack, and the first film's, whose questions are a block of its pack of labs and scenarios

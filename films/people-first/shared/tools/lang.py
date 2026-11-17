@@ -5,7 +5,7 @@ films/ownership-and-performance/1-owning-the-outcome/source/, which holds film.j
 source files, the words the voice respells, the chapters of its opening story, and the moment its poster shows. The films draw with
 The Inner Life of Data's engine and helpers (core.js, style2.js, ui3.js, engine3.js), A Sharper Sketch's scene() (sketch3.js), the
 agent films' camera, shots and places (films/what-an-agent-is/shared/src/kit.js and finish.js) and the people kit in
-films/people-first/shared/src/ (core.js, people.js, things.js, words.js and places.js; its README says what each holds). Most tools
+films/people-first/shared/src/ (the files in KIT below, in that order; the kit's README says what each holds). Most tools
 are From words to data's, run with this lang.py (see run.py). The films are in English; another language is captions only."""
 import json, os, pathlib, sys
 
@@ -19,7 +19,7 @@ SHARED = FILMS / 'inner-life-of-data' / 'source'
 SKETCH = FILMS / 'a-sharper-sketch' / 'source' / 'src'
 AGS = FILMS / 'what-an-agent-is' / 'shared' / 'src'
 PKS = pathlib.Path(__file__).resolve().parents[1] / 'src'
-KIT = ('core.js', 'people.js', 'things.js', 'words.js', 'places.js')
+KIT = ('core.js', 'people.js', 'things.js', 'words.js', 'places.js', 'kalam.js', 'hand.js', 'concepts.js', 'talk.js')
 META = json.loads((ROOT / 'film.json').read_text())
 LANG = os.environ.get('FILM_LANG', 'en')
 EN = LANG == 'en'

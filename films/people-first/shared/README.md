@@ -2,7 +2,7 @@
 
 The films of *Leading data people* are about people, so they draw people first: whole, in a place where they act, meet or move, with faces that react and hands that rest on things. The author found the module's films disappointing: half-figures lined up in front of a plain wall, a giant bust beside small whole people, cards and charts carrying the story while the people stood by ([issue 391](https://github.com/roanboc/learning-data/issues/391), and 17 November 2026). He asked for "a more cartoon or soft style", easy to draw people in and light to play, and chose **Ink line** among four looks on 17 November 2026: flat colour, with one even dark line round every form.
 
-The kit is that look, a person who can stand, walk, sit, kneel, turn and react, the things people work with, the words on the frame, the university's places, and the tools that build and check a film. *Owning the outcome* was drawn with it before any other film.
+The kit is that look, a person who can stand, walk, sit, kneel, turn and react, the things people work with, the words on the frame, the university's places, a board and a notebook for a film's key ideas, a chat and a call, and the tools that build and check a film. *Owning the outcome* was drawn with it before any other film.
 
 Never change these files for one film. A film's own pictures, places and helpers go in its own `source/src/`, with a prefix of its own (such as `oo_` for *Owning the outcome*); a change every film needs goes in a pull request of its own, and it is a new version of every film whose `release.json` names this folder (AGENTS.md, *A shared drawing/timeline fix is a new version of every consumer*).
 
@@ -23,6 +23,8 @@ Each rule comes from a fault the author named. Where a rule can be measured, `to
 | **People in every chapter, in more than one place.** | | a chapter with a person in view in less than 85% of its frames; a film with one place only |
 
 The film ends on a person, with its last line (`PK.end`).
+
+**Key ideas, and people who talk from where they are (17 November 2026).** The author asked for a film's key ideas apart from its scenes: the ideas it opens with explained by someone at a board, what to remember kept as a person's colourful notes in a book, and people who sometimes write to each other or call, while they still meet in person at least once. `src/hand.js`, `src/concepts.js` and `src/talk.js` hold them, each file's first comment says how to lay one out, and `tools/people.py` checks what can be measured (it lists each fault at its top). *Owning the outcome* was staged with them before any other film. Their rules join the table above once the author has seen it.
 
 ## How a film uses it
 
@@ -91,6 +93,14 @@ Sizes are in the 1920 by 1080 frame. Every word is at least 28 px as seen, and n
 
 **`src/places.js`**: the university's places, each painted once and kept as a picture (the agent films' `AG_PLACES`): `PK.place.team` (the data team's room), `PK.place.corner` (the manager's corner, close enough for faces), `PK.place.campus` and `PK.place.lecture` (a teaching room). A film lists the ones it uses, its opening place first: `AG_PLACES.ooTeam = PK.place.team`. `PK.ROOMS.<place>` holds each place's eye line, its floor lines and where its things are. A place paints only what is behind everyone; what people sit at or stand behind is drawn every frame with them, by the sets: `PK.atDesk` (someone working at a desk), `PK.seated`, `PK.audience` (a teaching room's seats, some taken), `PK.atBoard` (someone writing on a wall board, line by line), `PK.window` and `PK.windowFrame`. A camera closes in to about 1.3 at most on a kept picture; for faces, cut to a place painted closer.
 
+**`src/kalam.js`** and **`fonts/`**: the handwriting font, Kalam, in two weights (400 for a pen, 700 for a heading or a marker), with its licence. A film carries it in its own script, so the video, the site's player and the checks draw the same letters with no network. Never edit `kalam.js`: `tools/font.py` writes it from the two files in `fonts/`.
+
+**`src/hand.js`**: handwriting. `PK.hand` writes words by hand as far as the pen has come, `PK.pen.<mark>` is a pen's mark (a line under, a highlighter's band, a ring, a box, an arrow, a tick, a cross, a star), and `PK.ink(ctx, rows, t, o)` writes a board's or a page's rows, each when its time comes. A row is words or a mark, in the surface's own px, with its colour and the moment the voice says it. The five colours keep their meaning in handwriting.
+
+**`src/concepts.js`**: where the key ideas are written. `PK.place.board` and `PK.teach` are a board with someone who explains at it: they write each row as the voice says it, walk along it, then turn to the room and step clear of what is written. `PK.place.notes` and `PK.notes` are an open notebook seen from above, with the hand that writes in it; `PK.notebook` and `PK.inHand` (a pen, a marker, a notebook) are for the scene that shows who writes. `PK.pace(ctx, who, rows)` gives each row the time whoever writes needs to reach it (a walk at a board, the hand's way across a page), so pace a board's or a page's rows once and hand the result to everything that shows them. `PK.written` gives every stroke's time and place back, for the score.
+
+**`src/talk.js`**: people who talk from where they are. `PK.callout` is a panel that comes out of a screen or a phone someone in the scene is using; `PK.chat` fills it with a chat (each message at its time, mine typed in the field first; `PK.chatSize` gives the panel its words need) and `PK.call` with a video call (a tile for each person, with their face and what they say). `PK.onScreen.chat` and `PK.onScreen.call` are what a small screen in the scene shows meanwhile, `PK.avatar` someone's round picture, and `PK.inHand.phone` a phone in a hand.
+
 **`src/page.html`**: the standalone player page.
 
 **`tools/`**:
@@ -98,7 +108,9 @@ Sizes are in the 1920 by 1080 frame. Every word is at least 28 px as seen, and n
 - `lang.py`: where everything lives.
 - `build.py`: what a film is made of, in order, and its checks: no name declared in two files, no key named twice in one object, every cue word whole in its line, no caption over 140 characters.
 - `check.py`: the film before a long render. It draws every moment, 30 a second, and stops on text under 28 px and on words that name a release status (*From words to data*'s `check.py` and `legible.py`); it times each place, painted from nothing; it finds anything shown twice, and anything that jumps, where the film changes shot or chapter (the governance films' `twice.py` and `jump.py`, which follow the kit's people too); then it runs `people.py`.
-- `people.py`: the rules above, measured. Its limits are named at its top (`ROW`, `SCALE`, `AIR`, `JUMP`, `OVER_S`, `STILL`, `SHARE`, `PLACES`).
+- `people.py`: the rules above, measured. Its limits are named at its top (`ROW`, `SCALE`, `AIR`, `JUMP`, `OVER_S`, `STILL`, `SHARE`, `WHOLE`, `FACE_S`, `PLACES`). It also follows a board, a notebook, a chat and a call: whoever explains standing in front of their own words (`HIDE_S`), a row they can't reach in time (`LATE`) or that is written long after the voice (`LAG`), writing at the edge of a board or a page (`EDGE`), a hand that jumps over a page (`HOP`), and a film where nobody meets face to face.
+- `pens.py`: what a film's hands write, and when, for its score: `pens.written({...})` in `tools/score.py` gives every stroke of a board or a page with the film's own times, so a marker's or a pen's sound falls where the picture writes.
+- `font.py`: writes `src/kalam.js` from the font files in `fonts/`.
 - `quiet.py`: the governance films' sound check, run with this kit's `lang.py`.
 - `run.py`: runs a tool on a film: the kit's own first, then *From words to data*'s (`tts.py`, `audio.py`, `captions.py`, `legible.py`, `pace.py`, `stills.py`, `render.py`, `publish.py`).
 - `sketch.py`: one frame, before a film exists.

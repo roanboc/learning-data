@@ -15,7 +15,7 @@ PKS = HERE.parent / 'src'
 FILMS = HERE.parents[2]
 SS = FILMS / 'inner-life-of-data' / 'source'
 AGS = FILMS / 'what-an-agent-is' / 'shared' / 'src'
-KIT = ('core.js', 'people.js', 'things.js', 'words.js', 'places.js')
+KIT = ('core.js', 'people.js', 'things.js', 'words.js', 'places.js', 'kalam.js', 'hand.js', 'concepts.js', 'talk.js')
 opt = lambda k, d=None: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
 skip = {i + 1 for i, a in enumerate(sys.argv) if a in ('--scale', '--t', '--look')}
 args = [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith('--') and i not in skip]

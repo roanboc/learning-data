@@ -1,0 +1,91 @@
+// No two alike, film 3 of People first, the series that opens Leading data people. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (years and dates in words). The few longer stops are in breath.js.
+const NARR={
+"lu":{"name":"Two answers","lead":3.0,"tail":1.0,"vo":[
+ {"id":"bridge","gap":0.8,"text":"The other films of this series follow a bridge in Peru, woven from grass."},
+ {"id":"aside","gap":0.8,"text":"This one leaves it. One blade of grass is like another, and a person isn't like anyone."},
+ {"id":"where","gap":0.8,"text":"So it begins in Lu, in what is now eastern China, about 2,500 years ago.","say":"So it begins in Lu, in what is now eastern China, about two thousand five hundred years ago."},
+ {"id":"teacher","gap":0.8,"text":"A teacher there, Kong Qiu, whom the West calls Confucius, turns no student away."},
+ {"id":"gift","gap":0.8,"text":"Whoever brings the smallest gift, a bundle of dried meat, is taught. So his students are of every kind."},
+ {"id":"bold","gap":0.8,"text":"Zilu is bold. The teacher tells him he wouldn't take to war a man who fights tigers with his bare hands."},
+ {"id":"holds","gap":0.8,"text":"Ran You holds back. The teacher tells him: it isn't strength you lack. You set your own limit."},
+ {"id":"rule","gap":0.8,"text":"One rule for both would fail one of them."},
+ {"id":"tell","gap":0.8,"text":"Tell both to go ahead, and Zilu fights the tiger. Tell both to wait, and Ran You never starts."},
+ {"id":"need","gap":0.8,"text":"Each of them needs an answer of his own."},
+ {"id":"zilu","gap":0.8,"text":"One day Zilu asks: when I hear something, should I act on it at once?"},
+ {"id":"first","gap":0.8,"text":"The teacher says: your father and elder brothers are alive. How can you act at once?"},
+ {"id":"means","gap":0.8,"text":"He means: ask them first."},
+ {"id":"ranyou","gap":0.8,"text":"Then Ran You asks the very same question. The teacher says: act at once."},
+ {"id":"third","gap":0.8,"text":"A third student, Gongxi Hua, has heard both answers. I'm confused, he says. May I ask?"},
+ {"id":"why","gap":0.8,"text":"The teacher tells him: Ran You holds back, so I urged him on. Zilu has the energy of two, so I held him back."},
+ {"id":"person","gap":0.8,"text":"He has answered the person, as well as the question."},
+ {"id":"fit","gap":0.8,"text":"Each gets the answer he needs."},
+ {"id":"office","gap":0.8,"text":"And asked if the two could serve in government, the teacher says yes to both: one is decisive, the other skilled."},
+ {"id":"count","gap":0.8,"text":"A historian later counts seventy-seven students who mastered what he taught. These two, so unlike, are both among them."},
+ {"id":"team","gap":0.8,"text":"A data team is like that school: no two people work the same way, and one way of working for all leaves someone out."},
+ {"id":"each","gap":0.8,"text":"Find out how each one works, and the team hears what every one of them knows."}
+]},
+"silence":{"name":"Erin's silence","lead":1.0,"tail":1.0,"vo":[
+ {"id":"when","gap":0.8,"text":"At the university, in February 2027, Helena Novak is in her third week as the data manager.","say":"At the university, in February twenty twenty-seven, Helena Novak is in her third week as the data manager."},
+ {"id":"plan","gap":0.8,"text":"On Monday 15 February, she and her team of seven plan the next two weeks.","say":"On Monday the fifteenth of February, she and her team of seven plan the next two weeks."},
+ {"id":"quiet","gap":0.8,"text":"For the whole hour, Erin Walsh, the platform engineer, says nothing."},
+ {"id":"guess","gap":0.8,"text":"Helena reads it as lack of interest. It's her first guess, and it's wrong."},
+ {"id":"note","gap":0.8,"text":"On Tuesday morning, Erin sends her a short note: two things the plan missed."},
+ {"id":"miss","gap":0.8,"text":"One of them: two pieces of platform work can't both be tested in the same week."},
+ {"id":"ask","gap":0.8,"text":"On Wednesday, in Erin's weekly half hour, Helena asks instead of guessing: how do you work best in a meeting like Monday's?"},
+ {"id":"after","gap":0.8,"text":"Erin says: I think after a meeting, not in it. Send me the question the day before, and I'll come with an answer."},
+ {"id":"known","gap":0.8,"text":"The teacher in Lu had known his students for years. Helena has known her team for two weeks."},
+ {"id":"say","gap":0.8,"text":"But a person can say how they work. So she asks."}
+]},
+"degree":{"name":"By degree","lead":1.0,"tail":1.0,"vo":[
+ {"id":"how","gap":0.8,"text":"How do people differ? Most research describes it with five broad traits, often called the Big Five."},
+ {"id":"five","gap":0.8,"text":"How open to new things. How organised. How outgoing. How agreeable. How steady under pressure."},
+ {"id":"scale","gap":0.8,"text":"Each is a scale, not a box: people differ by degree, not by type."},
+ {"id":"days","gap":0.8,"text":"Nobody stays at one point. In one study, over two or three weeks, a typical person showed nearly every level of every trait."},
+ {"id":"usual","gap":0.8,"text":"Each kept a usual level of their own, and moved around it with the situation."},
+ {"id":"years","gap":0.8,"text":"The years move it too: on average, people grow more organised and steadier, most of all between twenty and forty."},
+ {"id":"last","gap":0.8,"text":"And the five aren't the last word: among farmers and foragers in Bolivia, researchers didn't find them."},
+ {"id":"right","gap":0.8,"text":"No place on a scale is the right one, and a team has a use for each."},
+ {"id":"team","gap":0.8,"text":"A team needs the one who rushes ahead and the one who holds back, the one who thinks aloud and the one who thinks afterwards."},
+ {"id":"never","gap":0.8,"text":"So traits are for understanding people, never for assessing them."},
+ {"id":"outcomes","gap":0.8,"text":"How someone is doing shows in the results of their work, and in how the team works together."}
+]},
+"cut":{"name":"A scale, cut in two","lead":1.0,"tail":1.0,"vo":[
+ {"id":"idea","gap":0.8,"text":"On Thursday, at the team's table, Yusuf Demir has an idea."},
+ {"id":"test","gap":0.8,"text":"In an earlier job he took a test that sorts people into types, each with its letters. It gave his team words for their differences."},
+ {"id":"type","gap":0.8,"text":"A type is a scale, cut in two. One side gets one label, and the other side gets another."},
+ {"id":"middle","gap":0.8,"text":"But most people are near the middle, close to the cut."},
+ {"id":"again","gap":0.8,"text":"In 1991 a research council looked at one such test. Of the people who took it twice, typically four in ten got the same type again.","say":"In nineteen ninety-one a research council looked at one such test. Of the people who took it twice, typically four in ten got the same type again."},
+ {"id":"steady","gap":0.8,"text":"The scores held up well enough. But near the cut, a small change in a score is a different label."},
+ {"id":"yes","gap":0.8,"text":"So Helena says yes, as a way to start talking, with four rules."},
+ {"id":"rules1","gap":0.8,"text":"It's each person's choice. Your results are yours, and you share what you choose."},
+ {"id":"rules2","gap":0.8,"text":"They're read as degrees, not boxes. And they're never used to hire, to hand out work or to judge anyone."},
+ {"id":"makers","gap":0.8,"text":"The people behind that test ask for three of the four themselves."},
+ {"id":"start","gap":0.8,"text":"A test can start a conversation. It can't decide anything."}
+]},
+"page":{"name":"How I work","lead":1.0,"tail":1.0,"vo":[
+ {"id":"keep","gap":0.8,"text":"What the team keeps is a page that each person writes in their own words: How I work."},
+ {"id":"heads1","gap":0.8,"text":"It has five headings. When I do my best work. How to ask me for something."},
+ {"id":"heads2","gap":0.8,"text":"How to disagree with me. What wears me out. What I'm getting better at."},
+ {"id":"first","gap":0.8,"text":"Helena writes hers first, and shares it that Thursday."},
+ {"id":"hers","gap":0.8,"text":"Under the last heading she writes: asking, instead of guessing."},
+ {"id":"seven","gap":0.8,"text":"Each of the seven writes one too, and shares what they choose."},
+ {"id":"friday","gap":0.8,"text":"By Friday 26 February, all seven have shared a page. Two left a heading out, and that's theirs to leave.","say":"By Friday the twenty-sixth of February, all seven have shared a page. Two left a heading out, and that's theirs to leave."},
+ {"id":"erin","gap":0.8,"text":"Erin's says: ask me in writing, the day before."},
+ {"id":"nokind","gap":0.8,"text":"No page says what kind of person anyone is. Each says how to work with one person."}
+]},
+"range":{"name":"For the whole range","lead":1.0,"tail":1.0,"vo":[
+ {"id":"change","gap":0.8,"text":"Helena doesn't ask Erin to change. She changes the meeting."},
+ {"id":"ways1","gap":0.8,"text":"From Monday 22 February, in every meeting she runs, the question goes out the working day before.","say":"From Monday the twenty-second of February, in every meeting she runs, the question goes out the working day before."},
+ {"id":"ways2","gap":0.8,"text":"Everyone writes for two minutes before anyone talks. Then each person gets a turn."},
+ {"id":"ways3","gap":0.8,"text":"And anyone can add something until the end of the next day."},
+ {"id":"speaks","gap":0.8,"text":"That Monday, Erin speaks in her turn."},
+ {"id":"both","gap":0.8,"text":"It suits the one who thinks aloud and the one who thinks afterwards. Nobody has to become someone else."},
+ {"id":"leader","gap":0.8,"text":"The teacher held one student back and urged the other on, and a leader changes her way too."},
+ {"id":"asks","gap":0.8,"text":"But he decided what each one needed. Helena asks, and each person says it for themselves."},
+ {"id":"monday","gap":0.8,"text":"So on Monday, don't sort your people: not by a type, a test or a first impression."},
+ {"id":"do","gap":0.8,"text":"Ask each one how they work best. Write your own page first. And build the team's ways for the whole range."},
+ {"id":"next","gap":0.8,"text":"What matters even more is how they work together. That's the next film: How, more than who."},
+ {"id":"take","gap":0.8,"text":"Ask each person how they work. Never sort them."}
+]}
+};

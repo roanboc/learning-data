@@ -2,9 +2,10 @@
   "key": "growing-people",
   "title": "Growing people",
   "sub": "Film 4 of Ownership and performance, the last of Leading data people: how people grow at work. Goals they help set, feedback every week about the work and its effect, never about who they are, and a next step with more to own.",
-  "howto": "The film is drawn in the module's sunlit plaster: a Japanese schoolroom of the 1870s, then the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans (Ivy's goals), orange is data (Teaching space use), green is something done (each goal met), and amber a risk (feedback that turns from the work to the person).",
+  "howto": "The film is drawn in ink line: flat colour with one even dark line, and whole people in the places where they work and meet: a village classroom in Japan in the 1870s, classrooms of today in Japan and the United States, and the university's rooms. Its ideas are written by hand: at a board, where a head teacher explains lesson study and a consultant what research says about feedback, and in notebooks, where Ivy, and once Helena, keep what to remember. Its colours mean the same in every film: blue is plans and rules (Ivy's goals), orange is data (Teaching space use), green is something done or of value (each goal met, feedback that helps), and amber a risk or a cost (feedback that turns from the work to the person). People and their clothes wear none of them.",
   "src": [
-    "gp_school.js",
+    "gp_meiji.js",
+    "gp_today.js",
     "gp_uni.js",
     "gp_scenes.js"
   ],

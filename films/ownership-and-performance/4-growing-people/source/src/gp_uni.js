@@ -231,7 +231,7 @@ const gp_note3=(sc,w)=>[
   {s:"what have you tried?",x:190,y:566,size:66,w:700,at:w("thanks","tried",-0.5),d:0.9,marks:[["hl","green",sc.ends.thanks+0.2,0.4]]}];
 // 4. her half year, looked back on and forward
 const gp_note4=(sc,w)=>[
-  {s:"Half a year",x:70,y:124,size:88,w:700,col:"blue",at:sc.cues.mid-0.2,d:0.7,marks:[["under","blue",null,0.3]]},
+  {s:"Half a year",x:70,y:124,size:88,w:700,col:"blue",at:w("mid","half year",-0.2),d:0.7,marks:[["under","blue",w("mid","and forward",0.05),0.3]]},
   {k:"tick",x:94,y:228,r:18,col:"green",at:w("mid","All three",-0.2),d:0.2},{k:"tick",x:146,y:228,r:18,col:"green",at:w("mid","three",0),d:0.2},{k:"tick",x:198,y:228,r:18,col:"green",at:w("mid","goals",0),d:0.2},
   {s:"all three goals met",x:240,y:246,size:58,col:"green",at:w("mid","met",-0.3),d:0.8},
   {s:"Went well:",x:70,y:366,size:44,col:"mut",at:w("well","went well",-0.2),d:0.5},{s:"Graham's page",x:290,y:366,size:62,w:700,at:w("well","Graham's",-0.1),d:0.7,marks:[["hl","green"]]},

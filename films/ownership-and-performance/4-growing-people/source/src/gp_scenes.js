@@ -256,18 +256,20 @@ scene("goals",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
 /* ---------------------------------------------------------------- 3. Every Tuesday: April and May */
 scene("tuesday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const BA=PK.pace(ctx,"carmen",gp_boardA(sc,w)),BB=PK.pace(ctx,"carmen",gp_boardB(sc,w)),N2=PK.pace(ctx,null,gp_note2(sc,w));
-  const tK=c.kluger-0.6,tZ=w("kluger","Kluger",-1.1),tW=sc.ends.person+0.5,tN=w("sbi","three parts",-0.8),tA=c.april-0.5,tV=w("april","reviewing",-0.3),
-    tT=c.not-0.5,tS=c.scott-0.5,tY=c.may-0.5,tL=w("may","Last week",-0.3),tO=c.works-0.6;
+  const tK=c.kluger-0.6,tZ=w("kluger","more than",-0.6),tW=sc.ends.person+0.5,tN=w("sbi","three parts",-0.8),tA=c.april-0.5,tV=w("april","reviewing",-0.3),
+    tT=c.not-0.5,tS=c.scott-0.5,tY=c.may-0.5,tL=w("may","to yourself",-0.3),tO=c.works-0.6;
   ag_shots(ctx,S,t,sc.dur,[
     // every Tuesday, thirty minutes in Helena's corner: Ivy's time, about her. Ivy talks; Helena listens
     {at:0,place:"gpCorner",keys:[[0,960,540,1.0],[tK-0.4,1000,560,1.08]],d:3,draw:(x,tt,cam)=>{
       gp_corner(x,tt,{t0:0,lean:0.4,
         H:PK.face(tt,{expr:"listen",gaze:[1,0.05]},[[c.meet+1.6,"nod"],[w("meet","about her",0),"smile",2.4],[w("meet","status",0.2),"nod"]]),
         I:PK.face(tt,{expr:"smile",gaze:[1,0]},[[c.meet+0.6,"say",2.4],[w("meet","about her",-0.4),"say",2.0],[w("meet","status",0.6),"smile",2.0]])});}},
-    // the team's room: Carmen Vidal, the consultant, explains at its board what research found about feedback
+    // the team's room: Carmen Vidal, the consultant, explains at its board what research found about feedback; long enough for her
+    // name to be read, and for her first row to be written, before the board comes close
     {at:tK,cut:true,place:"gpTeam",keys:[[tK,960,540,1.0],[tK+0.3,1010,530,1.08]],d:3,draw:(x,tt,cam)=>{
       const R=gp_lesson(x,tt,{clock:9.6,rows:BA,say:[[c.kluger,tZ+0.6]]});
-      PK.nameTag(x,R.carmen.hc[0],R.carmen.hc[1]-150,"Carmen Vidal","Consultant",ag_io(tt,tK+0.4,tZ-0.3,0.4));}},
+      // her tag above her and to her right, over the board's right half, which stays clear until the third line: never over her first row
+      PK.nameTag(x,R.carmen.hc[0]+150,R.carmen.hc[1]-150,"Carmen Vidal","Consultant",ag_io(tt,tK+0.4,tZ-0.3,0.4));}},
     // the board, close enough to read
     {at:tZ,cut:true,place:"gpUniBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[tZ,sc.ends.kluger],[c.third,sc.ends.third],[c.person,sc.ends.person]]});}},
     // the room again: Ivy writes it down, and looks to Helena as the voice says her feedback has three parts
@@ -296,7 +298,7 @@ scene("tuesday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,o
       gp_say(x,R.helena,tt,c.not,w("not","what she did",-0.3),["You're brilliant!"],cam,{think:true,strike:ag_in(tt,w("not","which is",-0.1),0.6)});}},
     // hard feedback works the same way: Carmen's second board, close
     {at:tS,cut:true,place:"gpUniBoard",keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BB,{say:[[c.scott,sc.ends.scott]]});}},
-    // Tuesday 25 May, in the corner
+    // Tuesday 25 May, in the corner: Helena begins to tell her about the week before
     {at:tY,cut:true,place:"gpCorner",keys:[[tY,1000,560,1.08]],d:2,draw:(x,tt,cam)=>{
       gp_corner(x,tt,{t0:tY,lean:0.7,H:PK.face(tt,{expr:"neutral",gaze:[1,0.05]},[[c.may+0.2,"say",tL-c.may+0.4]]),I:PK.face(tt,{expr:"listen",gaze:[1,0.1]},[[c.may+1.0,"nod"]])});}},
     // the week before: four days alone with her change, the clock going round; then Jun has one afternoon to review it, and rushes
@@ -376,7 +378,7 @@ scene("both",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 /* ---------------------------------------------------------------- 5. The next step: July to December */
 const GP_CARRY={lean:2,head:6,aN:[18,96,"grip"],aF:[16,92,"grip"],lN:[-2,-2],lF:[4,3]};
 scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const N4=PK.pace(ctx,null,gp_note4(sc,w)),tB=w("july","Ivy owns",-0.2),tH=c.mid-0.5,tN=w("mid","All three",-0.7),tF=c.forward-0.5,tD=c.dec-0.5;
+  const N4=PK.pace(ctx,null,gp_note4(sc,w)),tB=w("july","Ivy owns",-0.2),tH=c.mid-0.5,tN=w("mid","half year",-0.35),tF=c.forward-0.5,tD=c.dec-0.5;
   ag_shots(ctx,S,t,sc.dur,[
     // Thursday 1 July: Helena brings her a seedling in a pot, as the team does when someone first owns a product. Her screen says
     // what she owns: the counts per room per hour, refreshed every Monday by seven
@@ -396,7 +398,8 @@ scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
     {at:tH,cut:true,place:"gpCorner",keys:[[tH,1000,560,1.08]],d:2,draw:(x,tt,cam)=>{
       gp_corner(x,tt,{t0:tH,ibook:1,mugDown:true,show:ag_in(tt,c.mid+1.4,0.8),lean:0.5,
         H:PK.face(tt,{expr:"smile",gaze:[1,0.4]},[[c.mid+0.4,"say",1.6],[tN-0.6,"nod"]]),I:PK.face(tt,{expr:"glad",gaze:[1,0.5]},[[c.mid+2.0,"say",1.4]])});}},
-    // her notes of it: all three goals met; what went well; what she'd do differently; what she wants next
+    // her notes of it, open as the notebook comes out between them and the voice says "her half year": all three goals met;
+    // what went well; what she'd do differently; what she wants next
     {at:tN,place:"gpNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}},
     // a growth conversation looks forward: Helena asks where she wants to go, and what she needs to get there
     {at:tF,place:"gpCorner",dis:0.6,keys:[[tF,1000,560,1.08],[tF+0.3,1000,540,1.04]],d:1.6,draw:(x,tt,cam)=>{

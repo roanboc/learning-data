@@ -225,7 +225,9 @@ def written(name, hand, g, shown, least=0.28):
     A dot, a tick and an arrow's head are too short to sound"""
     for k in PEN[name]:
         d = k['t1'] - k['t0']
-        if d >= least and any(a <= k['t0'] and k['t1'] <= b + 0.3 for a, b in shown):
+        if not any(a <= k['t0'] and k['t1'] <= b + 0.3 for a, b in shown):
+            print('  %s: "%s" is written at %.1f s, while the film shows something else' % (name, k['s'], k['t0']))
+        elif d >= least:
             hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
 def ring(s, g=0.0022, pan=0.0):
     """a call that comes up on a screen: two soft, round notes, the second a fourth above the first, each gone in a fifth of a second"""
@@ -361,7 +363,7 @@ slide(tw('not', 'which is', -0.1), 0.6, 0.003, px(700))
 written('B', marker, 0.004, [(tS, tY)])
 chord((F2, C3, F3, A3), tw('scott', 'directly', 0.1), 0.42, step=0.14, ring=1.4)
 card(tc('may', 0.1), 0.0035, CL)
-card(tw('may', 'Last week', -0.1), 0.0035, CL)
+card(tw('may', 'to yourself', -0.1), 0.0035, CL)
 pop(tc('rushed', -0.4), 0.0022, px(560))
 chord((G2, D3, Bb3), tw('rushed', 'rushed', 0.1), 0.4, step=0.16, ring=1.2)
 figure((D4, F4), tw('works', 'works', -0.4), 0.42, step=0.22, ring=0.5, last=1.1)
@@ -397,7 +399,7 @@ tap(nw('july', 'Ivy owns', -0.2) + 1.0, 0.0035, px(650))
 chord((F2, C3, F3, A3, C4), nw('july', 'owns', 0.0), 0.45, step=0.12, ring=1.6)
 card(nc('mid', 0.1), 0.0035, CL)
 chord((Bb2, F3, Bb3, D4, F4), nw('mid', 'met', 0.0), 0.45, step=0.12, ring=1.8)
-written('N4', pen, 0.0042, [(nw('mid', 'All three', -0.7), nc('forward', -0.5))])
+written('N4', pen, 0.0042, [(nw('mid', 'half year', -0.35), nc('forward', -0.5))])
 chord((Eb3, G3, Bb3, Eb4), nw('forward', 'forward', 0.0), 0.42, step=0.12, ring=1.4, low=False)
 card(nc('dec', 0.1), 0.0035, CR); lo(Bb1, nc('dec', 0.1), 0.5, None, 1.0)
 for i, (t, m) in enumerate(((nc('steps', -0.1), Bb1), (nw('steps', 'owner', -0.2), F2), (nw('steps', 'coach', -0.2), Bb2))):

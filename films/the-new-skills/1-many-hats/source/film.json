@@ -2,9 +2,9 @@
   "key": "many-hats",
   "title": "Many hats, one picture",
   "sub": "The opening film of The new skills, the first series of Leading data people, for data leaders: everyone in a team wears more than one hat, and what falls between the hats is nobody's job unless the leader sees it. A data manager gives a new analyst a month with every part of the work and one real question; on one page, the analyst finds 14 rooms that no one part could see.",
-  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (Ding Wei's plan, Noor's map, and the decision and question on Ivy's page), orange is data and where it's born, green is something done, matched or owned, and amber a cost or a risk (the three jobs, and the 14 renumbered rooms).",
+  "howto": "The film is drawn in ink line: flat colour with one even dark line, and whole people in the places where they work and meet, in Kaifeng in 1015 and at the university. Its ideas are written by hand: at a board, where a consultant, Noor or Ivy explains them, and in Ivy's and Helena's notebooks. Its colours mean the same in every film: blue is a plan or a rule (the decision and question on Ivy's page), orange is data and where it's born, green is something done, matched or owned, and amber a cost or a risk (the 14 renumbered rooms). People wear none of them.",
   "src": [
-    "mh_kaifeng.js",
+    "mhk_city.js",
     "mh_uni.js",
     "mh_scenes.js"
   ],

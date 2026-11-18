@@ -1,6 +1,6 @@
 # Owning the outcome: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 1 of 4 · merged, PR #254 · [pull request](https://github.com/roanboc/learning-data/pull/254)
+*Leading data people* · *Ownership and performance*, film 1 of 4 · merged, PR #254 · [pull request](https://github.com/roanboc/learning-data/pull/254); its arms put right on 18 November 2026
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/owning-the-outcome/)
 
@@ -83,3 +83,4 @@ You found the ink line version much better in style, and asked for one more chan
 | 53 | Length and pace? | 7:19, 886 words at 121 a minute (the morning's version: 6:56). The writing takes time: six stops of 2.5 seconds or more, each a hand finishing a row or a page, or someone answering. Two chapters fall under 120 words a minute for that reason (111 and 115); the film as a whole doesn't. | The whole film |
 | 54 | The sound? | A marker's soft rub for each row on the board and a pen's for each line of the notebook, where the film writes them; two soft notes as the call comes up, and one as each reader joins; a soft blip for each message. In the pause where she writes "Mine? Fix it. Not mine? Raise it.", two notes are held. `quiet.py` passes. | The score (`tools/score.py`) |
 | 55 | Do the module's other films change now? | No. Once you approve this version, the video guidelines take its rules (the people kit's README, the playbook and AGENTS.md), so each film can be made again from them. | Not in this pull request |
+| 56 | Arms and hands, after the kit's new check? | Put right on 18 November 2026. In Kenya, the women who kneel at the seedlings lean further in, so their hands reach the plants, and Maathai rests her hands on her knees as she bends to listen: their hands had stopped short in the air. In the team's room, the board is written 56 px lower, within Carmen's reach: her arm went straight up at its top rows. The words, the timings and the sound stay. | Chapters 1 and 2 |

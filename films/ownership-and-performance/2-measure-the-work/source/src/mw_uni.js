@@ -19,12 +19,16 @@ const mw_says=(base,tt,t0,t1)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(
    o.show: what Ivy's screen shows; o.behind(x): what stands between the back desks and hers (someone at the board); o.bare: the room
    with nobody in it and nothing going on. Returns {ivy, sam, jun}: their joints. */
 function mw_team(x,tt,o){o=o||{};const r={};PK.clock(x,MW_T.clock[0],MW_T.clock[1],MW_T.clock[2],o.clock===undefined?9:o.clock);
-  r.sam=PK.atDesk(x,o.sam===null?null:"sam",1230,MW_T.back,MW_HB,Object.assign({t:tt,w:0.45*MW_HB},o.sam||{}));
+  if(o.sam===false)mw_deskAlone(x,1230,MW_T.back,MW_HB,0.45*MW_HB);
+  else r.sam=PK.atDesk(x,o.sam===null?null:"sam",1230,MW_T.back,MW_HB,Object.assign({t:tt,w:0.45*MW_HB},o.sam||{}));
   r.jun=PK.atDesk(x,o.jun===null?null:"jun",1808,MW_T.back,MW_HB,Object.assign({t:tt+3,flip:true,w:0.45*MW_HB},o.jun||{}));
   if(o.behind)o.behind(x);
   r.ivy=PK.atDesk(x,o.ivy===null?null:"ivy",MW_IVY.x,MW_IVY.floor,MW_HI,Object.assign({t:tt+1,flip:true,w:0.84*MW_HI,sx:205,screen:"monitor",show:o.bare?null:o.show||mw_scrRows(1),
     on:(c,D)=>{PK.S.begin(c,{lw:2.6,sh:3});PK.mug(c,D.x1+34,D.top,0.7,PK.col("mug"),tt,!o.bare&&o.steam!==false);}},o.ivy||{}));return r;}
 AG_BARE.mwTeam=(x,tt)=>mw_team(x,tt,{sam:null,jun:null,ivy:null,clock:null,bare:true});
+// a desk with its laptop and no chair, as PK.atDesk stands them (px: where its owner sits): Sam's, while his chair is at the board
+function mw_deskAlone(x,px,floor,h,w){const U=PK.u,x0=px+0.1*h,top=floor-0.43*h;PK.S.begin(x,{lw:U.clamp(h*0.0056,1.4,6.5),sh:U.clamp(h*0.0078,1.5,8.5)});
+  PK.desk(x,x0+w/2,top,w,floor,{k:h/600});PK.laptop(x,x0+0.21*h,top,{k:h/660});}
 // what a screen shows, too small for words: rows of a list, k of them filled in
 const mw_scrRows=(k,warn)=>(c,x,y,w,h)=>{const U=PK.u,n=4,rh=h/(n+0.6);warn=warn||0;for(let i=0;i<n;i++){const yy=y+rh*(i+0.55),on=U.clamp(k*n-i,0,1);
     c.fillStyle=U.css([206,208,204]);c.beginPath();U.rrect(c,x+w*0.1,yy-rh*0.16,w*(0.44+0.1*((i*3)%3)),rh*0.32,4);c.fill();
@@ -69,20 +73,26 @@ function mw_evening(x,k){if(k<=0.004)return;const U=PK.u,w=MW_T.win;x.save();x.g
    writes the team's own page there, and what the team finds at its readings. The film cuts between the room, where its board shows
    the rows small, and the board seen close (the place mwBoard), where they are large enough to read: both draw the same rows at the
    same times, so whoever writes is at the same row in both. */
-const MW_RB={x:742,y:206,k:0.35,deco:true,floor:848,rest:1212};
+const MW_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
 // what the caller leaves undefined (say, events, rest) keeps the room's own
 const mw_roomBoard=(cx,tt,rows,who,o)=>{const q=Object.assign({},MW_RB,{h:mw_hT(MW_RB.floor)});for(const k in o||{})if(o[k]!==undefined)q[k]=o[k];return PK.teach(cx,who,tt,rows,q);};
-/* the team turned to the board: Ivy at her desk, turned round; Jun at hers; Sam on a chair he has pulled round; and, when Carmen
+/* the team turned to the board: Ivy at her desk, turned round; Jun at hers; Sam on his chair, pulled out in front of the desks
+   (his desk stands alone: at it, he sat right behind whoever wrote, only his hands and knees showing); and, when Carmen
    explains, Helena standing at the side with her notebook. o.who: who explains ("carmen" or "helena"); o.rows: the board's rows;
    o.say: when they speak ([[t0, t1], …]); o.events: PK.face's, for them; o.ivy, o.sam, o.jun, o.helena: faces (PK.face's result);
    o.note (0 to 1): Helena looks down and writes. Returns {ivy, sam, jun, helena, at}: their joints (at: whoever explains). */
 const MW_NOTE={lean:6,head:14,aN:[34,96,"grip"],aF:[30,92,"grip"],lN:[-2,-2],lF:[5,4]};
+// where Sam sits at a lesson, and where Helena stands with her notebook, a step behind his chair: both clear of where whoever
+// writes walks and rests (the board's rows end at about 1180, and the writer steps clear of them as far as 1320), so nobody is
+// hidden behind the writer
+const MW_SEAT={x:1500,floor:905},MW_SIDE={x:1645,floor:882};
 function mw_lesson(x,tt,o){o=o||{};const who=o.who||"carmen",lis=g=>PK.face(tt,{expr:"listen",gaze:[1,g]},[]);let Jc=null;
-  const R=mw_team(x,tt,{clock:o.clock,sam:Object.assign({turn:1,work:0,pose:"sit"},o.sam||lis(-0.25)),jun:Object.assign({work:0,pose:"sit"},o.jun||lis(-0.2)),show:o.show,
+  const R=mw_team(x,tt,{clock:o.clock,sam:false,jun:Object.assign({work:0,pose:"sit"},o.jun||lis(-0.2)),show:o.show,
     behind:cx=>{if(o.behind)o.behind(cx);Jc=mw_roomBoard(cx,tt,o.rows||[],who,{say:o.say,events:o.events,rest:o.rest});},
     ivy:Object.assign({turn:1,work:0,pose:"sit"},o.ivy||lis(-0.3))});
   if(who!=="helena"&&o.helena!==null){const wr=o.note||0;
-    R.helena=PK.person(x,"helena",1620,930,mw_hT(912),PK.poseMix("clasp",MW_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||lis(-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}
+    R.helena=PK.person(x,"helena",MW_SIDE.x,MW_SIDE.floor,mw_hT(MW_SIDE.floor-18),PK.poseMix("clasp",MW_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||lis(-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}
+  R.sam=PK.seated(x,"sam",MW_SEAT.x,MW_SEAT.floor,mw_hT(MW_SEAT.floor),"sit",Object.assign({t:tt,flip:true},o.sam||lis(-0.25)));
   R.at=Jc;return R;}
 
 /* the boards' rows, as functions of the chapter and the word times (sc, w), in the board's own px (1250 by 524). Each row has the

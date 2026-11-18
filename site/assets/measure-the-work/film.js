@@ -2409,7 +2409,7 @@ function mw_roadBand(ctx,dusk){const S=PK.S,U=PK.u,d=c=>dusk?mw_dusk(c,0.7):c,{f
   const R=U.rnd(33);for(let i=0;i<80;i++){const x=R()*1960,y=edge+16+R()*(1080-edge-16),k=0.5+(y-edge)/380;ctx.fillStyle=U.css(d(U.mix(mw_c("grassDk"),mw_c("grass"),R()*0.6)));
     ctx.beginPath();for(let j=0;j<4;j++){const a=-0.6+j*0.4,l=(10+R()*10)*k;ctx.moveTo(x-2*k,y);ctx.quadraticCurveTo(x+Math.sin(a)*l*0.5,y-l*0.6,x+Math.sin(a)*l,y-Math.cos(a)*l);ctx.quadraticCurveTo(x+Math.sin(a)*l*0.4+2*k,y-l*0.5,x+2*k,y);}ctx.fill();}
   for(let i=0;i<26;i++){const x=R()*1960,y=edge+40+R()*360,k=0.6+(y-edge)/420;ctx.fillStyle=U.css(d(mw_c("flower",i%3)));ctx.beginPath();ctx.arc(x,y,3.4*k,0,U.TAU);ctx.fill();}}
-function mw_roadPlace(ctx,o){o=o||{};mw_sky(ctx,o.dusk);mw_far(ctx,o.dusk);mw_roadBand(ctx,o.dusk);if(o.barrier)mw_barrier(ctx,-60,1980,o.dusk);}
+function mw_roadPlace(ctx,o){o=o||{};mw_sky(ctx,o.dusk);mw_far(ctx,o.dusk);mw_roadBand(ctx,o.dusk);}
 /* the barrier: posts down the middle line, about every 2.5 m, and three steel cables along them, drawn from x0 as far as x1 (the
    posts not yet set aren't there); bent: [x, k] a stretch the cables lean on (k 0 to 1), as where they hold a car */
 function mw_barrier(ctx,x0,x1,dusk,bent){const S=PK.S,U=PK.u,d=c=>dusk?mw_dusk(c,0.6):c,y=MW_R.mid+2,m=mw_m(y),ph=0.78*m,gap=2.5*m,pc=d(mw_c("post")),cc=d(mw_c("cable"));
@@ -2417,8 +2417,10 @@ function mw_barrier(ctx,x0,x1,dusk,bent){const S=PK.S,U=PK.u,d=c=>dusk?mw_dusk(c
   for(let x=Math.ceil((x0+40)/gap)*gap-40;x<=x1;x+=gap){const l=lean(x)*36;S.fill(ctx,c=>{c.moveTo(x-3,y);c.lineTo(x+3,y);c.lineTo(x+3+l,y-ph);c.lineTo(x-3+l,y-ph);c.closePath();},pc,{w:0.5});}
   ctx.save();ctx.lineCap="round";for(const [f,w] of [[0.55,2.6],[0.72,2.6],[0.9,2.6]]){ctx.strokeStyle=U.css(cc);ctx.lineWidth=w;ctx.beginPath();
     for(let x=x0;x<=x1;x+=12){const yy=y-ph*f+lean(x)*20*f;x===x0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}ctx.restore();}
-AG_PLACES.mwRoad=c=>mw_roadPlace(c,{});AG_PLACES.mwRoadB=c=>mw_roadPlace(c,{barrier:true});
-AG_PLACES.mwDusk=c=>mw_roadPlace(c,{dusk:true});AG_PLACES.mwDuskB=c=>mw_roadPlace(c,{dusk:true,barrier:true});
+// the barrier isn't painted into a place: it stands between the lanes, so the film draws it after the far lane's cars and before
+// the near lane's (mw_traffic)
+AG_PLACES.mwRoad=c=>mw_roadPlace(c,{});
+AG_PLACES.mwDusk=c=>mw_roadPlace(c,{dusk:true});
 
 /* ---------------------------------------------------------------- a car, from the side
    x: its middle; y: where its wheels stand (a lane's line); o.flip: it faces left; o.col; o.dusk; o.lights (0 to 1): its lamps
@@ -2427,6 +2429,8 @@ AG_PLACES.mwDusk=c=>mw_roadPlace(c,{dusk:true});AG_PLACES.mwDuskB=c=>mw_roadPlac
    late 1990s, an estate or a saloon, with no maker's mark. */
 function mw_car(ctx,x,y,o){o=o||{};const S=PK.S,U=PK.u,m=mw_m(y),col0=o.col||mw_c("car",0),dk=c=>o.dusk?mw_dusk(c,0.55):c,col=dk(col0),est=o.estate!==false;
   ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.tilt)ctx.rotate(o.tilt);ctx.scale(m,-m);
+  // a car is solid: the people kit's check (people.py) holds any two apart, and what is further away behind what is nearer
+  if(PK.watch)PK.watch({solid:"car",at:[-2.24,0,2.24,1.38],ground:0,ctx});
   const lw=U.clamp(m*0.012,1.0,3.2);S.begin(ctx,{lw:lw/m*1.0,far:o.far||0,sh:3});
   if(o.lights>0.01){ctx.save();ctx.globalAlpha*=0.32*o.lights;ctx.fillStyle=U.css(mw_c("lamp"));ctx.beginPath();ctx.moveTo(2.15,0.62);ctx.lineTo(9,0.05);ctx.lineTo(9,-0.25);ctx.lineTo(2.1,0.5);ctx.closePath();ctx.fill();ctx.restore();}
   // the shadow under it
@@ -2453,9 +2457,13 @@ function mw_car(ctx,x,y,o){o=o||{};const S=PK.S,U=PK.u,m=mw_m(y),col0=o.col||mw_
   for(const wx of [-1.32,1.38]){S.fill(ctx,c=>U.ell(c,wx,0.32,0.32,0.32),dk(mw_c("tyre")),{});S.fill(ctx,c=>U.ell(c,wx,0.32,0.15,0.15),dk(mw_c("hub")),{w:0.6});}
   ctx.restore();}
 /* traffic: cars that pass, each [lane ("near": to the right; "far": to the left), when it enters, how long it takes to cross the
-   picture, colour index, estate]; t the shot's time */
-function mw_traffic(ctx,tt,cars,o){o=o||{};for(const [lane,t0,dur,ci,est] of cars){const u=(tt-t0)/dur;if(u<0||u>1)continue;const near=lane==="near",y=near?MW_R.near-12:MW_R.mid-14,
-    x=near?PK.u.lerp(-420,2340,u):PK.u.lerp(2340,-420,u);mw_car(ctx,x,y,{flip:!near,col:mw_c("car",ci%7),estate:est,dusk:o.dusk,lights:o.dusk?1:0});}}
+   picture, colour index, estate]; t the shot's time. What is further away is drawn first: the far lane's cars, then the barrier
+   down the middle where the road has one (o.barrier), then the near lane's. Drawn in the order they were listed, a far car lay
+   over a near one, and over the barrier, as if they drove through each other (the author, 18 November 2026) */
+function mw_traffic(ctx,tt,cars,o){o=o||{};const on=[];for(const [lane,t0,dur,ci,est] of cars){const u=(tt-t0)/dur;if(u<0||u>1)continue;const near=lane==="near";
+    on.push({near,x:near?PK.u.lerp(-420,2340,u):PK.u.lerp(2340,-420,u),y:near?MW_R.near-12:MW_R.mid-14,ci,est});}
+  const car=c=>mw_car(ctx,c.x,c.y,{flip:!c.near,col:mw_c("car",c.ci%7),estate:c.est,dusk:o.dusk,lights:o.dusk?1:0});
+  on.filter(c=>!c.near).forEach(car);if(o.barrier)mw_barrier(ctx,-60,1980,o.dusk);on.filter(c=>c.near).forEach(car);}
 /* ---------------------------------------------------------------- a family's kitchen, at night
    The window looks out on the dark; the lamp over the table is lit; the clock on the wall says how late it is. The table and the
    chairs are drawn with the people (mw_kitTable), so a seated person's legs go under it. */
@@ -2599,12 +2607,16 @@ const mw_says=(base,tt,t0,t1)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(
    o.show: what Ivy's screen shows; o.behind(x): what stands between the back desks and hers (someone at the board); o.bare: the room
    with nobody in it and nothing going on. Returns {ivy, sam, jun}: their joints. */
 function mw_team(x,tt,o){o=o||{};const r={};PK.clock(x,MW_T.clock[0],MW_T.clock[1],MW_T.clock[2],o.clock===undefined?9:o.clock);
-  r.sam=PK.atDesk(x,o.sam===null?null:"sam",1230,MW_T.back,MW_HB,Object.assign({t:tt,w:0.45*MW_HB},o.sam||{}));
+  if(o.sam===false)mw_deskAlone(x,1230,MW_T.back,MW_HB,0.45*MW_HB);
+  else r.sam=PK.atDesk(x,o.sam===null?null:"sam",1230,MW_T.back,MW_HB,Object.assign({t:tt,w:0.45*MW_HB},o.sam||{}));
   r.jun=PK.atDesk(x,o.jun===null?null:"jun",1808,MW_T.back,MW_HB,Object.assign({t:tt+3,flip:true,w:0.45*MW_HB},o.jun||{}));
   if(o.behind)o.behind(x);
   r.ivy=PK.atDesk(x,o.ivy===null?null:"ivy",MW_IVY.x,MW_IVY.floor,MW_HI,Object.assign({t:tt+1,flip:true,w:0.84*MW_HI,sx:205,screen:"monitor",show:o.bare?null:o.show||mw_scrRows(1),
     on:(c,D)=>{PK.S.begin(c,{lw:2.6,sh:3});PK.mug(c,D.x1+34,D.top,0.7,PK.col("mug"),tt,!o.bare&&o.steam!==false);}},o.ivy||{}));return r;}
 AG_BARE.mwTeam=(x,tt)=>mw_team(x,tt,{sam:null,jun:null,ivy:null,clock:null,bare:true});
+// a desk with its laptop and no chair, as PK.atDesk stands them (px: where its owner sits): Sam's, while his chair is at the board
+function mw_deskAlone(x,px,floor,h,w){const U=PK.u,x0=px+0.1*h,top=floor-0.43*h;PK.S.begin(x,{lw:U.clamp(h*0.0056,1.4,6.5),sh:U.clamp(h*0.0078,1.5,8.5)});
+  PK.desk(x,x0+w/2,top,w,floor,{k:h/600});PK.laptop(x,x0+0.21*h,top,{k:h/660});}
 // what a screen shows, too small for words: rows of a list, k of them filled in
 const mw_scrRows=(k,warn)=>(c,x,y,w,h)=>{const U=PK.u,n=4,rh=h/(n+0.6);warn=warn||0;for(let i=0;i<n;i++){const yy=y+rh*(i+0.55),on=U.clamp(k*n-i,0,1);
     c.fillStyle=U.css([206,208,204]);c.beginPath();U.rrect(c,x+w*0.1,yy-rh*0.16,w*(0.44+0.1*((i*3)%3)),rh*0.32,4);c.fill();
@@ -2649,20 +2661,26 @@ function mw_evening(x,k){if(k<=0.004)return;const U=PK.u,w=MW_T.win;x.save();x.g
    writes the team's own page there, and what the team finds at its readings. The film cuts between the room, where its board shows
    the rows small, and the board seen close (the place mwBoard), where they are large enough to read: both draw the same rows at the
    same times, so whoever writes is at the same row in both. */
-const MW_RB={x:742,y:206,k:0.35,deco:true,floor:848,rest:1212};
+const MW_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
 // what the caller leaves undefined (say, events, rest) keeps the room's own
 const mw_roomBoard=(cx,tt,rows,who,o)=>{const q=Object.assign({},MW_RB,{h:mw_hT(MW_RB.floor)});for(const k in o||{})if(o[k]!==undefined)q[k]=o[k];return PK.teach(cx,who,tt,rows,q);};
-/* the team turned to the board: Ivy at her desk, turned round; Jun at hers; Sam on a chair he has pulled round; and, when Carmen
+/* the team turned to the board: Ivy at her desk, turned round; Jun at hers; Sam on his chair, pulled out in front of the desks
+   (his desk stands alone: at it, he sat right behind whoever wrote, only his hands and knees showing); and, when Carmen
    explains, Helena standing at the side with her notebook. o.who: who explains ("carmen" or "helena"); o.rows: the board's rows;
    o.say: when they speak ([[t0, t1], …]); o.events: PK.face's, for them; o.ivy, o.sam, o.jun, o.helena: faces (PK.face's result);
    o.note (0 to 1): Helena looks down and writes. Returns {ivy, sam, jun, helena, at}: their joints (at: whoever explains). */
 const MW_NOTE={lean:6,head:14,aN:[34,96,"grip"],aF:[30,92,"grip"],lN:[-2,-2],lF:[5,4]};
+// where Sam sits at a lesson, and where Helena stands with her notebook, a step behind his chair: both clear of where whoever
+// writes walks and rests (the board's rows end at about 1180, and the writer steps clear of them as far as 1320), so nobody is
+// hidden behind the writer
+const MW_SEAT={x:1500,floor:905},MW_SIDE={x:1645,floor:882};
 function mw_lesson(x,tt,o){o=o||{};const who=o.who||"carmen",lis=g=>PK.face(tt,{expr:"listen",gaze:[1,g]},[]);let Jc=null;
-  const R=mw_team(x,tt,{clock:o.clock,sam:Object.assign({turn:1,work:0,pose:"sit"},o.sam||lis(-0.25)),jun:Object.assign({work:0,pose:"sit"},o.jun||lis(-0.2)),show:o.show,
+  const R=mw_team(x,tt,{clock:o.clock,sam:false,jun:Object.assign({work:0,pose:"sit"},o.jun||lis(-0.2)),show:o.show,
     behind:cx=>{if(o.behind)o.behind(cx);Jc=mw_roomBoard(cx,tt,o.rows||[],who,{say:o.say,events:o.events,rest:o.rest});},
     ivy:Object.assign({turn:1,work:0,pose:"sit"},o.ivy||lis(-0.3))});
   if(who!=="helena"&&o.helena!==null){const wr=o.note||0;
-    R.helena=PK.person(x,"helena",1620,930,mw_hT(912),PK.poseMix("clasp",MW_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||lis(-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}
+    R.helena=PK.person(x,"helena",MW_SIDE.x,MW_SIDE.floor,mw_hT(MW_SIDE.floor-18),PK.poseMix("clasp",MW_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||lis(-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}
+  R.sam=PK.seated(x,"sam",MW_SEAT.x,MW_SEAT.floor,mw_hT(MW_SEAT.floor),"sit",Object.assign({t:tt,flip:true},o.sam||lis(-0.25)));
   R.at=Jc;return R;}
 
 /* the boards' rows, as functions of the chapter and the word times (sc, w), in the board's own px (1250 by 524). Each row has the
@@ -2827,6 +2845,8 @@ const MW_WRITE={lean:4,head:16,aN:[8,98,"grip"],aF:[2,92,"grip"],lN:[-2,-2],lF:[
 const MW_KNEEL={mode:"kneel",lean:30,head:-6,aN:[52,22,"grip"],aF:[20,34],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
 const MW_OVER={lean:14,head:6,aN:[40,62],aF:[6,14],lN:[-2,-2],lF:[5,4]};
 const MW_CARRY={lean:-2,head:0,aN:[24,70,"grip"],aF:[6,14],lN:[-2,-2],lF:[4,3]};
+// on the phone, the hand at the ear behind the cheek: the kit's own pose (onPhone) brings the phone before the mouth and the nose
+const MW_PHONE={lean:0,head:-2,aN:[-10,164,"grip"],aF:[4,14],lN:[-2,-2],lF:[5,4]};
 // the title card, as the kit's (PK.title, side "right") but with the title on two lines: on one, it's too long for the room beside
 // the picture. Ivy, at her desk on the left, stays in view
 function mw_title(ctx,S,t,t0){const U=PK.u,oA=U.pin(t,t0,0.8),tA=U.pin(t,t0+0.5,0.8);if(oA<=0)return;setScreen(ctx,S);
@@ -2848,10 +2868,12 @@ scene("vision",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
     {at:0,place:"mwRoad",keys:[[0,960,540,1.0],[c.counted-0.6,880,600,1.12]],d:3,draw:(x,tt,cam)=>{
       mw_traffic(x,tt,[["far",0.6,7.5,2,true],["near",3.8,6.2,4,false],["far",8.4,7.2,5,true],["near",12.6,6.4,0,true],["far",16.2,7,3,false]]);
       mw_car(x,1330,768,{col:mw_c("car",1)});
-      const tg=w("answer","fine",-0.7),give=ag_io(tt,tg,tD-0.6,0.5),got=ag_in(tt,tg+0.7,0.25),m=[808,604],wr=ag_io(tt,c.when-0.2,tg-0.1,0.5);
-      const Jo=PK.walk(x,K.officer,tt,{x0:-150,x1:680,t0:0.2,t1:2.8,floor:880,h:mw_h(880),then:PK.poseMix("stand",MW_WRITE,wr)},
+      // the two stand near enough for their hands to meet on the slip (m): further apart, each arm stopped short of the other, and
+      // the slip went from one hand to the other through the air
+      const tg=w("answer","fine",-0.7),give=ag_io(tt,tg,tD-0.6,0.5),got=ag_in(tt,tg+0.7,0.25),m=[818,545],wr=ag_io(tt,c.when-0.2,tg-0.1,0.5);
+      const Jo=PK.walk(x,K.officer,tt,{x0:-150,x1:730,t0:0.2,t1:2.8,floor:880,h:mw_h(880),then:PK.poseMix("stand",MW_WRITE,wr)},
         {underF:mw_pad,hold:give>0.05?mw_slip(1-got):wr>0.2?PK.inHand.pen("ink"):null,holds:true,expr:mw_says("neutral",tt,tg+0.1,tg+2.6),gaze:[1,0.8*wr],reachN:m,reachNk:give});
-      const Jd=PK.person(x,K.driver,950,850,mw_h(850),"clasp",Object.assign({t:tt,flip:true,hold:got>0?mw_slip(got):null,holds:got>0,reachN:[m[0]+22,m[1]+8],reachNk:give},
+      const Jd=PK.person(x,K.driver,915,850,mw_h(850),"clasp",Object.assign({t:tt,flip:true,hold:got>0?mw_slip(got):null,holds:got>0,reachN:[m[0]+22,m[1]+8],reachNk:give},
         PK.face(tt,{expr:"worry",gaze:[1,0.4]},[[2.4,"look",2.0,[1,0.1]],[c.counted+0.8,"look",2.2,[1,0.7]],[tg+0.2,"look",2.6,[1,0.2]]])));
       mw_bub(x,Jo,tt,tg+0.1,tD-0.3,["Here's your fine.","Take more care."],cam);}},
     // that evening: a tired driver drifts over the middle line, and a car comes the other way. The film cuts before they meet
@@ -2869,13 +2891,16 @@ scene("vision",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
     // the road engineers' office: the year's toll. In October, Vision Zero: the decision comes in, and she pins it up by the map
     {at:tC,place:"mwOffice",dis:0.8,keys:[[tC,960,540,1.0],[c.adopt-0.6,1010,520,1.08]],d:3,draw:(x,tt,cam)=>{
       const tG=w("adopt","Vision Zero",-0.5),take=ag_io(tt,tG,tG+1.2,0.4),got=ag_in(tt,tG+0.6,0.25),tP=w("who","answer",-0.6),pin=ag_io(tt,tP,tP+1.5,0.45),pinned=tt>=tP+0.75,
-        PP=[1272,214],give=[1200,560];
-      if(pinned)PK.sheet(x,PP[0]-30,PP[1]-36,74,96,{pin:true,rot:0.04});
+        PP=[1300,356],give=[1260,556],hers=got>=0.5&&!pinned;
+      // her far hand takes the sheet where his holds it out, and pins it by the map's edge at the height of her eyes: the near arm
+      // is drawn over the head, so it lay across her face, and the pin was above her head. The pinned sheet is the one she held
+      if(pinned)PK.sheet(x,PP[0]-47,PP[1]-74,54,74,{pin:true,rot:0.04});
       const rk=Math.max(take,pin),rp=pin>0.004?PP:give;
-      PK.person(x,K.eng,1400,900,mw_hO(900),"stand",Object.assign({t:tt,flip:true,reachN:rp,reachNk:rk,hold:got>0&&!pinned?mw_sheet:null,holds:got>0&&!pinned},
+      PK.person(x,K.eng,1400,900,mw_hO(900),"stand",Object.assign({t:tt,flip:true,reachF:rp,reachFk:rk,underF:hers?mw_sheet:null,holds:hers},
         PK.face(tt,{expr:"think",gaze:[1,-0.2]},[[tG+0.9,"look",2.2,[1,0.5]],[w("adopt","no one",0),"nod"],[tP+1.6,"smile",2.6]])));
-      if(tt>c.adopt-1.4)PK.walk(x,K.inv,tt,{x0:-160,x1:1060,t0:c.adopt-1.4,t1:tG-0.2,floor:930,h:mw_hO(930),arms:{aN:MW_CARRY.aN},then:"stand"},
-        {hold:got<1?mw_sheet:null,holds:got<1,reachN:[give[0]+18,give[1]+6],reachNk:take,expr:"smile",gaze:[1,0.1]});
+      // he stops near enough for the two hands to meet on the sheet: it is in one place as it changes hands, never drawn twice
+      if(tt>c.adopt-1.4)PK.walk(x,K.inv,tt,{x0:-160,x1:1130,t0:c.adopt-1.4,t1:tG-0.2,floor:930,h:mw_hO(930),arms:{aN:MW_CARRY.aN},then:"stand"},
+        {hold:got<0.5?mw_sheet:null,holds:got<0.5,reachN:[give[0]-38,give[1]],reachNk:take,expr:"smile",gaze:[1,0.1]});
       mw_tag(x,tt,w("who","design",-0.2),tS-0.3,1180,112,"Road engineers");}},
     // from 1997: every fatal crash studied, where it happened. He measures the marks a car left; she writes it down
     {at:tS,cut:true,place:"mwRoad",keys:[[tS,960,560,1.04],[tF,1000,580,1.1]],d:3,draw:(x,tt,cam)=>{
@@ -2884,10 +2909,11 @@ scene("vision",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       PK.person(x,K.eng,1270,860,mw_h(860),MW_WRITE,Object.assign({t:tt,flip:true,underF:mw_clip,hold:PK.inHand.pen("ink"),holds:true},PK.face(tt,{expr:"think",gaze:[1,0.8]},[[tS+2.4,"look",1.8,[1,0.3]]])));}},
     // the map: where each fatal crash happened. Most were on the fast roads with two lanes
     {at:tF,cut:true,place:"mwOffice",keys:[[tF,1000,470,1.14]],d:2,draw:(x,tt,cam)=>{
-      const n=34*ag_in(tt,tF+0.3,3.2),lit=ag_in(tt,w("found","two lanes",-0.3),0.7),RD=MW_DOTS.filter(p=>p[0]>1040).slice(0,5),put=ag_io(tt,tF+0.3,tF+3.6,0.4);
+      const n=34*ag_in(tt,tF+0.3,3.2),lit=ag_in(tt,w("found","two lanes",-0.3),0.7),RD=MW_DOTS.filter(p=>p[0]>1070&&p[0]<1230&&p[1]>300).slice(0,5),put=ag_io(tt,tF+0.3,tF+3.6,0.4);
       mw_mapDots(x,n,lit);
       PK.person(x,K.inv,430,930,mw_hO(930),"clasp",Object.assign({t:tt},PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[tF+1.4,"look",2.0,[1,-0.4]],[w("found","two lanes",0.3),"worry",3.0]])));
-      PK.person(x,K.eng,1400,900,mw_hO(900),"stand",Object.assign({t:tt,flip:true,hold:put>0.1?PK.inHand.marker("orange"):null,holds:put>0.1,reachN:PK.among(tt,RD,0.45,tF+0.3),reachNk:put},
+      // the far hand marks the dots it can reach, between her hips and the top of her head (the near arm lay across her throat)
+      PK.person(x,K.eng,1300,900,mw_hO(900),"stand",Object.assign({t:tt,flip:true,underF:put>0.1?PK.inHand.marker("orange"):null,holds:put>0.1,reachF:PK.among(tt,RD,0.45,tF+0.3),reachFk:put},
         PK.face(tt,{expr:"think",gaze:[1,-0.3]},[[w("found","two lanes",0.2),"worry",3.2]])));}},
     // from 1998: workers set the barrier down the middle of such a road, post by post, its cables along them
     {at:tB,place:"mwRoad",dis:0.6,keys:[[tB,640,560,1.12],[tM-0.2,1000,590,1.22]],d:3,draw:(x,tt,cam)=>{
@@ -2901,23 +2927,25 @@ scene("vision",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       PK.walk(x,K.walker,tt,wk,{expr:"smile",reachF:[0,0],reachFk:0});PK.walk(x,K.child,tt,Object.assign({},wk,{x0:660,x1:1390,floor:856,h:mw_h(856)*0.7,phase:0.3}),{expr:"glad"});
       PK.person(x,K.old,1660,900,mw_h(900),"ease",Object.assign({t:tt,flip:true},PK.face(tt,{expr:"neutral",gaze:[1,0.1]},[[tM+3.2,"smile",2.4],[tM+3.6,"nod"]])));}},
     // the roads with a barrier, years on: traffic both ways, held apart; the engineers on the verge
-    {at:tL,place:"mwRoadB",dis:0.6,keys:[[tL,960,540,1.0],[tA-0.4,940,560,1.06]],d:3,draw:(x,tt,cam)=>{
-      mw_traffic(x,tt,[["near",tL-1.0,5.4,0,true],["far",tL+0.4,5.8,2,false],["near",tL+2.6,5.2,5,true],["far",tL+3.8,6,6,true],["near",tL+6.0,5.6,3,false],["far",tL+7.4,5.6,1,true],["near",tL+9.0,5.2,4,true]]);
+    {at:tL,place:"mwRoad",dis:0.6,keys:[[tL,960,540,1.0],[tA-0.4,940,560,1.06]],d:3,draw:(x,tt,cam)=>{
+      mw_traffic(x,tt,[["near",tL-1.0,5.4,0,true],["far",tL+0.4,5.8,2,false],["near",tL+2.6,5.2,5,true],["far",tL+3.8,6,6,true],["near",tL+6.0,5.6,3,false],["far",tL+7.4,5.6,1,true],["near",tL+9.0,5.2,4,true]],{barrier:true});
       PK.person(x,K.eng,560,860,mw_h(860),MW_WRITE,Object.assign({t:tt,underF:mw_clip,hold:PK.inHand.pen("ink"),holds:true},PK.face(tt,{expr:"neutral",gaze:[1,0.6]},[[c.half+0.6,"look",2.4,[1,0.1]],[c.half+1.2,"smile",3.4]])));
       PK.person(x,K.inv,820,880,mw_h(880),"ease",Object.assign({t:tt,flip:true},PK.face(tt,{expr:"smile",gaze:[1,0.1]},[[c.fell+1.6,"nod"],[c.half+1.4,"glad",2.6]])));}},
     // a mistake that no longer costs a life: a car held by the cables, its driver on the verge, unhurt, on the phone
     {at:tA,place:"mwDusk",dis:0.8,keys:[[tA,960,540,1.0],[tE,900,560,1.08]],d:3,draw:(x,tt,cam)=>{
       mw_barrier(x,-60,1980,true,[1330,1]);
       mw_car(x,940,MW_R.mid+8,{dusk:true,lights:0.5,col:mw_c("car",6),tilt:-0.03,hazard:0.15+0.85*Math.pow(0.5+0.5*Math.cos((tt-tA)*U.TAU*0.75),2)});
-      const ts=w("care","But a mistake",-0.3),J=PK.person(x,K.driver2,560,800,mw_h(800),PK.poseMix("stand","onPhone",ag_in(tt,tA+0.6,0.5)),
+      const ts=w("care","But a mistake",-0.3),J=PK.person(x,K.driver2,560,800,mw_h(800),PK.poseMix("stand",MW_PHONE,ag_in(tt,tA+0.6,0.5)),
         {t:tt,expr:mw_says(PK.exprMix("worry","relief",ag_in(tt,ts,0.8)),tt,ts+0.1,tE-0.6),hold:PK.inHand.phone({}),holds:true,gaze:[1,0.1]});
       mw_bub(x,J,tt,ts+0.1,tE-0.3,["I'm all right.","I'm coming home."],cam);}},
     // the map again: the roads they fixed, marked over in green
     {at:tE,place:"mwOffice",dis:0.8,keys:[[tE,1000,480,1.12]],d:2,draw:(x,tt,cam)=>{
-      const g0=w("measured","measured",-0.4),fin=ag_in(tt,g0,2.6),g=[1,1,1,fin],hd=mw_along(4,fin),dr=ag_io(tt,g0-0.4,g0+3.0,0.5);
+      // the last stretch she marks is of the road beside her, which her far hand reaches from end to end (the road at the top of
+      // the map is above her head: the arm went straight up, across her face)
+      const g0=w("measured","measured",-0.4),fin=ag_in(tt,g0,2.6),u2=0.6+0.4*fin,g=[1,u2,1,1],hd=mw_along(2,u2),dr=ag_io(tt,g0-0.4,g0+3.0,0.5);
       mw_mapDots(x,34,0);mw_mapGreen(x,g);
       PK.person(x,K.inv,430,930,mw_hO(930),"clasp",Object.assign({t:tt},PK.face(tt,{expr:"smile",gaze:[1,-0.3]},[[g0+3.0,"nod"]])));
-      PK.person(x,K.eng,1300,900,mw_hO(900),"stand",{t:tt,flip:true,hold:dr>0.1?PK.inHand.marker("green"):null,holds:dr>0.1,reachN:hd,reachNk:dr,expr:PK.exprMix("think","smile",ag_in(tt,g0+2.8,0.8)),gaze:[1,-0.3]});}},
+      PK.person(x,K.eng,1375,900,mw_hO(900),"stand",{t:tt,flip:true,underF:dr>0.1?PK.inHand.marker("green"):null,holds:dr>0.1,reachF:hd,reachFk:dr,expr:PK.exprMix("think","smile",ag_in(tt,g0+2.8,0.8)),gaze:[1,-0.3]});}},
     // the same in data work: at the university, a request's way from start to end, and most of it waiting
     {at:tU,place:"mwTeam",dis:1.0,keys:[[tU,835,590,1.15],[c.fix+0.6,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
       const up=ag_in(tt,c.fix+0.2,1.0),k=ag_in(tt,w("data","flows",-0.4),2.2);
@@ -3157,8 +3185,8 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
   const tH=c.helena-0.4,tK=w("flow","work sent back",-0.3),tN=c.next-0.3,tE=c.breath+0.6,N4=PK.pace(ctx,null,mw_note4(sc,w)),BB=PK.pace(ctx,"helena",mw_boardB(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
     // Sweden: roads that forgive a mistake, their traffic held apart, and the engineers who still measure them
-    {at:0,place:"mwRoadB",keys:[[0,960,540,1.0],[tH,1000,560,1.06]],d:3,draw:(x,tt,cam)=>{
-      mw_traffic(x,tt,[["near",-1.2,5.6,0,true],["far",0.4,6,2,false],["near",2.4,5.4,5,true],["far",4.0,6,6,true],["near",6.2,5.6,3,false],["far",7.4,5.6,1,true]]);
+    {at:0,place:"mwRoad",keys:[[0,960,540,1.0],[tH,1000,560,1.06]],d:3,draw:(x,tt,cam)=>{
+      mw_traffic(x,tt,[["near",-1.2,5.6,0,true],["far",0.4,6,2,false],["near",2.4,5.4,5,true],["far",4.0,6,6,true],["near",6.2,5.6,3,false],["far",7.4,5.6,1,true]],{barrier:true});
       PK.person(x,K.eng,560,860,mw_h(860),MW_WRITE,{t:tt,underF:mw_clip,hold:PK.inHand.pen("ink"),holds:true,expr:"neutral",gaze:[1,0.7]});
       PK.person(x,K.inv,800,880,mw_h(880),"ease",Object.assign({t:tt,flip:true},PK.face(tt,{expr:"smile",gaze:[1,0.1]},[[3.4,"nod"]])));}},
     // the university, December: a reading, and the team smiles at what it fixed

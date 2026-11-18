@@ -1,6 +1,6 @@
 # Rebuilding Less, on purpose
 
-*Less, on purpose*, film 1 of 4 of *Leading a data team*, the third series of the module *Leading data people*, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, the agent films' kit and people, and the module's look and tools in [`../../../the-new-skills/shared/`](../../../the-new-skills/shared/), whose [README](../../../the-new-skills/shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `lo_` or `LO_`:
+*Less, on purpose*, film 1 of 4 of *Leading a data team*, the third series of the module *Leading data people*, is generated from code like every other film here. It is drawn with the people kit, *Ink line* ([`../../../people-first/shared/`](../../../people-first/shared/README.md)): whole people in the places where they live, work and meet, the film's ideas written by hand at a board and in notebooks. It was first drawn in the module's *Sunlit plaster* and made again on 18 November 2026, word for word on the voice. Every name it declares starts with `lo_`, `LO_`, `lop_` or `LOP_`:
 
 | File | What it holds |
 |---|---|
@@ -8,12 +8,12 @@
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The holds after some lines, and two wordless moments: the few sheets kept, as they become the title card, and the last line, as it becomes the end card. |
-| `src/lo_gov.js` | The opening, Britain from 2010 to 2013: the wall of small web pages in a government office, the person at home looking for the right one, the review of October 2010 as a sheet, the archive box, the two old sites read page by page, and the plain page with a green button. No crest, logo or typeface of a real website, and Martha Lane Fox is never drawn. |
-| `src/lo_uni.js` | The university's May and June of 2027, in the team's room: the pile that thins to a few kept sheets, the series' four ideas, the old warehouse's 38 reports (the 17 nobody opened, the notes to their last readers, the switch-off), the week before and the week designed, the 60 alerts sorted into eight kinds, the ten ideas of the study, the team's board, the five hours back, and the 21 reports rebuilt with an owner each. |
-| `src/lo_scenes.js` | The seven chapters, shot by shot. In each room the camera glides from one framing to the next and only what changes fades; a later moment in a room lets what was there leave first; between rooms a shot dissolves. Every moment is timed to a word of a line (`wAt()`), so the pictures stay with the voice. |
+| `src/lop_gov.js` | Britain from 2010 to 2013, in ink line (prefix `lop_`): a government office, a resident's front room, the Government Digital Service's office with its wall of cards and its board, and a gallery of the Design Museum; and the people of the time, nobody's likeness. |
+| `src/lo_uni.js` | The university in 2027, in the kit's places (the team's room, the corner, a teaching room, the board seen close, the notebook): who sits where, a screen's callout, the boards' rows and the notebooks' pages. |
+| `src/lo_scenes.js` | The seven chapters, shot by shot. Every picture has people in it, whole, doing what the line says; the words on screen are where and when, a name, or what someone says, and the ideas are written by hand. Every moment is timed to a line's start or to a word in it (`wAt()`). |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line. |
-| `tools/score.py` | The film's music and sounds: the module's bass drum struck with felt, tuned to C2 and let ring short; and its partner, the same drum with its head pressed by the other palm, a little higher and shorter. The mark: a crowded figure of pressed notes that thins to two, then to the open drum alone. C major, A minor for the problem, tuned pure. Each sound uses the same word and offset as the picture in `src/lo_scenes.js`: change one, change both. |
-| `tools/` | Each other tool runs the module's tool (`../../../the-new-skills/shared/tools/run.py`) on this film. |
+| `tools/score.py` | The film's music and sounds: the module's bass drum struck with felt, tuned to C2 and let ring short; and its partner, the same drum with its head pressed by the other palm, a little higher and shorter. The mark: a crowded figure of pressed notes that thins to two, then to the open drum alone. C major, A minor for the problem, tuned pure. Each sound uses the same word and offset as the picture in `src/lo_scenes.js`: change one, change both. The boards' and the notebooks' sounds come from the film itself, as each row is written (the people kit's `tools/pens.py`). |
+| `tools/` | Each other tool runs the people kit's tool (`../../../people-first/shared/tools/run.py`) on this film. |
 
 ## Setup (once)
 

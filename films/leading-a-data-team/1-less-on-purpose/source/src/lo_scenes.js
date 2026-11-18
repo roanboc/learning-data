@@ -1,292 +1,244 @@
 /* ===== Less, on purpose: the chapters, shot by shot =====
-   Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's recorded
-   again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
-   a room (later:true) lets what was there leave first; between rooms a shot dissolves. Sizes in the 1920 x 1080 frame. */
-
+   The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
+   says, and the words on the frame are where and when, a name, or what someone says; what a screen shows is in a callout from it. The
+   ideas are written by hand: the design principles at the Government Digital Service, Carmen Vidal's and Helena's boards, and Ivy's
+   and Helena's notebooks (lo_uni.js). GOV.UK, 2010 to 2013, is in lop_gov.js. Every time comes from the voice: a line's start
+   (sc.cues) or a word in it (wAt). */
+const lo_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"Less, on purpose",a);}};
+function lo_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
+const lo_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
+const lo_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};
+const lo_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
+const lo_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
+// someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
+const lo_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},base||{});const g=base.gaze[1],ev=[],K=["look","nod","smile"];
+  for(let k=0;k<30;k++){const at=(t0||0)+1.8+i*1.1+k*5.6,kind=K[(k+Math.round(i))%3];ev.push(kind==="look"?[at,"look",2.2,[1,g+((k+Math.round(i))%2?0.45:-0.35)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
+  return PK.face(tt,base,ev);};
+const lo_talk=(base,tt,spans)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,...spans.map(([a,b])=>PK.talk(tt,a,b)*0.75));return e;};
+const lo_sp=(tt,i,spans,base,g)=>lo_alive(tt,{expr:lo_talk(base||"listen",tt,spans),gaze:[1,g==null?-0.2:g]},i);
+const LO_HEV=Array.from({length:40},(_,k)=>k%2?[1.6+k*4.8,"nod"]:[1.6+k*4.8,"look",2.2,[1,0.35]]);
 const LO_LAST="Keep what people use; stop the rest, together.";
-// the film's number and title at the top left, from the second chapter on
-function lo_kick(ctx,S,a,o){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"1","Less, on purpose",Object.assign({a},o||{}));}
-// a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
-function lo_sheet(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return null;
-  return lp_textSheet(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// lines that come in one by one, each at its own time: lp_textSheet's u
-const lo_u=(t,ts)=>ts.reduce((s,t0)=>s+ag_in(t,t0,0.5),0)/ts.length;
-// a tag that comes in at t0 and goes at t1 (null: stays)
-function lo_tag(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_tag(ctx,x,y,text,Object.assign({},o,{a}));}
-// a pill that springs in at t0 (and goes at t1)
-function lo_pill(ctx,t,t0,t1,x,y,text,o){const a=ag_in(t,t0,0.4)*(t1==null?1:1-ag_in(t,t1,0.4));if(a>0.004)lp_pill(ctx,x,y,text,Object.assign({},o,{a,k:t-t0}));}
-// a figure sheet (one number) that springs in at t0 (and goes from o.out)
-function lo_fig(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return;lp_figure(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// a heading in capitals on the wall
-function lo_head(ctx,t,t0,x,y,text,o){o=o||{};const a=ag_in(t,t0,0.5)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a>0.004)lp_label(ctx,x,y,text,{a,col:o.col||LP.mut,align:o.align});}
+// a screen's callout from the monitor at the desk by the window
+const lo_screenCall=(x,R,a,head,rows,hc,o)=>{o=o||{};const D=R&&R.marta&&R.marta.desk;const tip=D?[150,D.top-120]:[150,620];
+  PK.callout(x,o.bx==null?720:o.bx,o.by==null?110:o.by,o.bw||720,o.bh||250,tip,a,(cc,bx,by,bw,bh)=>lo_panel(cc,bx,by,bw,bh,head,rows,o.bars||null,hc));};
+// the team's room with someone at the desk by the window (o.at, default Helena); o.face: their face; o.noor: Noor at Sam's desk
+const lo_atRoom=(x,tt,t0,o)=>{o=o||{};return lo_team(x,tt,{clock:o.clock==null?10:o.clock,deskWho:o.at||"helena",marta:o.at===null?null:Object.assign({work:o.work==null?1:o.work,turn:0},o.face||lo_alive(tt,{expr:"think",gaze:[1,0.3]},3,t0)),
+  samWho:o.noor?"noor":"sam",sam:o.sam===null?null:Object.assign({work:1},o.sam||lo_alive(tt,{},1,t0)),jun:o.jun===null?null:Object.assign({work:1},o.jun||lo_alive(tt,{},2,t0)),show:PK.onScreen.chat(0,{}),people:o.people||[]});};
+// Helena standing in the team's room, her notebook under her arm (fl, x: where)
+const lo_helena=(tt,face,o)=>({fl:(o&&o.fl)||930,draw:cc=>{o=o||{};const J=PK.person(cc,"helena",o.x||1560,o.fl||930,lo_hT(o.fl||930),"clasp",Object.assign({t:tt+4,flip:o.flip!==false,underF:PK.inHand.notebook({}),holds:true},face));if(o.out)o.out.J=J;}});
+// Helena on her phone in the team's room, a chat in a callout from it
+const lo_phone=(x,tt,t0,t1,CH,face,o)=>{o=o||{};let Jh=null;const cs=PK.chatSize(x,CH,{size:28});
+  lo_team(x,tt,{clock:o.clock==null?16:o.clock,marta:null,samWho:o.noor?"noor":"sam",sam:o.sam===null?null:Object.assign({work:1},lo_alive(tt,{},1,t0)),jun:Object.assign({work:1},lo_alive(tt,{},2,t0)),people:[{fl:930,draw:cc=>{
+    Jh=PK.person(cc,"helena",1560,930,lo_hT(930),"phone",Object.assign({t:tt,flip:true,hold:PK.inHand.phone?PK.inHand.phone({back:true}):null,holds:true},face));}}]});
+  if(Jh)PK.callout(x,o.bx==null?560:o.bx,o.by==null?160:o.by,cs.w,cs.h,[Jh.hdN[0]-20,Jh.hdN[1]-30],ag_io(tt,t0+0.3,t1,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH,tt,{size:28}));
+  return Jh;};
+// a desk in the story's rooms with a laptop on it; o.out.D: the desk, for a callout's tail
+const lo_lap=(cc,who,x,fl,face,o)=>{o=o||{};return lop_desk(cc,who,x,fl,Object.assign({t:0,work:o.work==null?1:o.work,flip:!!o.flip,on:(c2,D)=>{if(o.piles)lop_piles(c2,D.x0+D.dir*D.w*0.62,D.top,3,o.piles);else lop_laptop(c2,D,o.flip);if(o.out)o.out.D=D;}},face));};
+const lo_tip=D=>D?[D.x0+D.dir*0.45*D.w,D.top-70]:[960,600];
 
-/* ---------------------------------------------------------------- 1. Do less: Britain, 2010 to 2013 */
-scene("doless",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),pg={light:null,pin:false},home={light:"evening",wall:0.12},grey={light:"grey",wall:0.14};
-  const boxT=w("archive","archive",-0.2),sortT=c.keep-0.2,sortD=Math.max(3.6,c.rules-c.keep-0.8);
+/* ---------------------------------------------------------------- 1. Do less */
+scene("doless",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tN=c.need-0.4,tC=c.cost-0.4,tR=c.review-0.4,tG=c.gds-0.4,tP=c.rules-0.4,tL=c.launch-0.4,tA=c.award-0.4,tD=c.data-0.4;
+  const BO=PK.pace(ctx,LOP_FOLK.gds1,lo_boardO(sc,w)),LE=PK.ROOMS.lecture;
   ag_shots(ctx,S,t,sc.dur,[
-    // Britain, 2010: the wall of the web, its pages coming in from the middle as the camera draws back
-    {at:0,place:"loOffice",keys:[[0,760,430,1.5],[1.0,960,520,1.0]],d:Math.max(3,c.pages+0.6),push:0.02,draw:(x,tt)=>{
-      lo_pages(x,tt,{n:ag_sine(ag_in(tt,0.4,c.pages+1.6)),dim:0.35*ag_in(tt,w("pages","millions",-0.3),0.6)});
-      lo_sheet(x,tt,w("when","Britain",-0.2),130,120,420,{kick:"Britain",title:"2010"},Object.assign({out:c.need-0.6},pg));
-      lo_sheet(x,tt,w("pages","millions",-0.3),640,300,700,{kick:"The government online",title:"Millions of pages, on hundreds of websites",lines:["Most run by one department alone"]},
-        Object.assign({out:c.need-0.6,u:ag_in(tt,w("pages","department",-0.3),0.5)},pg));}},
-    // at home, on an evening: someone who needs a passport renewed, or a tax paid, and which site to trust
-    {at:c.need-0.3,place:"loHome",keys:[[c.need-0.3,960,540,1.0]],dis:1.2,draw:(x,tt)=>{
-      lp_person(x,LO_RESIDENT,880,690,0.95,{t:tt,cut:812,light:home});lp_table(x,560,820,800);lp_laptop(x,1110,806,230,{glow:1});
-      lo_tag(x,tt,w("need","passport",-0.2),c.same-0.5,500,300,"Renew a passport? Pay a tax?",{align:"center",col:LP.ink});
-      lo_tag(x,tt,w("need","part",-0.1),c.same-0.5,1400,330,"Which part of government?",{align:"center",col:LP.ink});
-      lo_tag(x,tt,w("need","trust",-0.2),c.same-0.5,1400,410,"Which site to trust?",{align:"center",col:LP.ink});
-      // the same advice, on two sites, in different words; time lost
-      const s0=w("same","same",-0.2),d0=w("same","different",-0.2);
-      lo_twoPages(x,{a:ag_in(tt,s0,0.4),k:tt-s0,k2:tt-s0-0.5,b:ag_in(tt,s0+0.5,0.4),ring:ag_in(tt,d0,0.4)});
-      lo_tag(x,tt,d0+0.1,c.cost-0.4,960,120,"The same advice, in different words",{align:"center",col:LP.amber});
-      lo_pill(x,tt,w("same","time",-0.2),c.cost-0.4,385,540,"Time lost",{col:LP.amber,icon:"wait"});
-      lo_tag(x,tt,w("same","sure",-0.2),c.cost-0.4,1535,540,"Which page is right?",{align:"center",col:LP.amber});}},
-    // what all those websites cost; something has to change
-    {at:c.cost-0.3,place:"loOffice",keys:[[c.cost-0.3,960,520,1.0]],dis:1.2,draw:(x,tt)=>{
-      lo_pages(x,tt,{dim:0.35+0.3*ag_in(tt,c.change,0.8),same:ag_io(tt,c.cost+0.2,c.change,0.5)});
-      lo_fig(x,tt,w("cost","560",-0.3),580,250,760,{kick:"What the websites cost",num:"£560 million",label:"A year, paid by taxpayers"},{col:LP.amber,light:null,pin:false,out:c.change+0.2});
-      lo_tag(x,tt,c.change+0.3,c.review-0.4,960,470,"One place, and simpler",{align:"center",col:LP.ink});}},
-    // October 2010: the review, and its advice; the old pages archived, not moved
-    {at:c.review-0.3,place:"loOffice",keys:[[c.review-0.3,960,520,1.0],[boxT,1000,540,1.0]],draw:(x,tt)=>{
-      lo_pages(x,tt,{dim:0.65,box:ag_in(tt,boxT,3.0)});
-      lo_box(x,LO_BOX.x,LO_BOX.y,{a:ag_in(tt,boxT-0.6,0.5),fill:ag_in(tt,boxT+0.8,2.4)});
-      lo_letter(x,110,130,{a:ag_in(tt,w("review","Martha",-0.2),0.4),k:tt-w("review","Martha",-0.2),
-        u:lo_u(tt,[w("advice","website",-0.2),w("advice","team",-0.2),w("archive","move",-0.2),w("archive","Write",-0.2)])});}},
-    // the new team, 2011: the two old sites read page by page, and what people searched for; most of it archived, a few needs kept
-    {at:c.gds-0.3,place:"loLondon",keys:[[c.gds-0.3,960,540,1.0]],dis:1.2,draw:(x,tt)=>{
-      lo_sheet(x,tt,w("gds","team",-0.2),110,110,780,{kick:"2011 · Government Digital Service",title:"A new team builds it"},Object.assign({},pg,{out:c.rules-0.6}));
-      lo_stacks(x,{a:ag_in(tt,w("read","Directgov",-0.3),0.5),left:1-0.7*ag_in(tt,sortT,sortD)});
-      lp_person(x,lp_crowd(1),980,790,0.6,{t:tt,light:grey,a:ag_in(tt,w("gds","team",0.2),0.6)});lp_person(x,lp_crowd(4),1240,790,0.6,{t:tt,flip:true,light:grey,a:ag_in(tt,w("gds","team",0.5),0.6)});
-      const q0=w("read","searched",-0.2);lo_head(x,tt,q0,780,388,"What people searched for",{col:LP.orange,out:sortT+0.2});
-      [["renew passport",780,450],["pay car tax",780,520],["find a job",1070,450]].forEach(([s,tx,ty],i)=>lo_tag(x,tt,q0+0.25*i,sortT+0.2,tx,ty,s,{col:LP.orange}));
-      lo_head(x,tt,sortT+0.4,1090,150,"What people need",{col:LP.green});
-      lo_box(x,LO_BOX.x,LO_BOX.y,{a:ag_in(tt,sortT,0.5),fill:ag_in(tt,sortT+1.0,sortD)});lo_sort(x,tt,{u:ag_in(tt,sortT+0.3,sortD)});
-      lo_stackNames(x,{a:ag_in(tt,w("read","Directgov",-0.3),0.5)});}},
-    // 2012: the design principles; the second, do less
-    {at:c.rules-0.3,place:"loLondon",later:true,keys:[[c.rules-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_sheet(x,tt,c.rules+0.2,160,190,760,{kick:"2012 · Design principles",lines:["One: start with user needs","Two: do less"]},
-        Object.assign({},pg,{col:LP.blue,u:lo_u(tt,[w("rules","first",-0.2),w("rules","second",-0.2)])}));
-      lo_sheet(x,tt,c.only-0.1,1000,190,760,{kick:"Do less",title:"Government should only do what only government can do."},Object.assign({},pg,{col:LP.blue}));}},
-    // October 2012 to spring 2013: one site, far fewer pages; what people got
-    {at:c.launch-0.3,place:"loOffice",keys:[[c.launch-0.3,960,520,1.0]],dis:1.2,draw:(x,tt)=>{
-      lo_plain(x,750,150,420,{a:ag_in(tt,c.launch,0.5),k:tt-c.launch});
-      for(let i=0;i<8;i++)lo_page(x,700+i*66,712,58,44,i,{tone:[96,96,100],a:ag_in(tt,w("launch","fewer",-0.2)+i*0.08,0.4)});
-      lo_sheet(x,tt,w("launch","replaces",-0.2),100,140,580,{kick:"October 2012 · GOV.UK",title:"Replaces both sites",lines:["Far fewer pages: about 3,800 pieces of content"]},
-        Object.assign({},pg,{col:LP.green,u:ag_in(tt,w("launch","fewer",-0.2),0.5)}));
-      lo_sheet(x,tt,c.test+0.1,1240,140,580,{kick:"In tests",title:"61 tasks in 100 finished",lines:["Against 46 on Business Link","And a minute faster"]},
-        Object.assign({},pg,{col:LP.green,u:lo_u(tt,[w("test","46",-0.2),w("test","minute",-0.2)])}));
-      lo_sheet(x,tt,c.save+0.1,100,500,580,{kick:"For taxpayers",title:"Up to £70 million a year less"},Object.assign({},pg,{col:LP.green}));
-      lo_sheet(x,tt,c.award+0.1,1240,500,580,{kick:"Spring 2013",title:"Design of the Year",lines:["London's Design Museum"]},Object.assign({},pg,{col:LP.green}));}},
-    // a data team's work piles up the same way; stop what nobody uses, and the time goes back to the work that matters
-    {at:c.data-0.3,place:"lpRoom",keys:[[c.data-0.3,960,540,1.0]],dis:1.4,draw:(x,tt)=>{const ga=1-ag_in(tt,c.breath+0.2,0.8);
-      lo_pile(x,tt,{u:ag_in(tt,c.data+0.2,Math.max(2.4,w("data","reason",0)-c.data)),thin:ag_in(tt,w("back","Stop",-0.1),1.6),keep:ag_in(tt,w("back","time",-0.2),1.2),a:ga});
-      lo_tag(x,tt,w("data","reason",-0.2),c.back-0.3,960,110,"Each added for a good reason, rarely taken away",{align:"center",col:LP.ink});
-      lo_tag(x,tt,w("back","time",0.2),c.breath+0.1,960,600,"The time goes back to the work that matters",{align:"center",col:LP.green});
-      lo_tag(x,tt,w("choose","simpler",-0.2),c.breath+0.1,960,110,"Simpler doesn't just happen: someone chooses it",{align:"center",col:LP.ink});}}
+    // 2010: a government office in London, its desks under printed pages
+    {at:0,place:"lopOffice",keys:[[0,960,540,1.0],[tN-0.2,1000,540,1.05]],d:3,draw:(x,tt,cam)=>{
+      lo_lap(x,"clerk1",900,900,Object.assign({t:tt},lo_alive(tt,{expr:"think",gaze:[1,0.5]},1,0)),{piles:2});
+      lop_person(x,"clerk2",420,980,PK.poseMix("clasp",LO_SHOW,0.6),Object.assign({t:tt,hold:lo_sheet,holds:true},lo_alive(tt,{expr:"neutral",gaze:[1,0.3]},2,0)));}},
+    // to renew a passport: which part of government, and which of its sites?
+    {at:tN,place:"lopHome",dis:0.8,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const O={};let J=null;
+      J=lo_lap(x,"resident",1000,940,Object.assign({t:tt},lo_sp(tt,1,[[c.same+0.3,E.same]],"worry",0.4)),{out:O});
+      PK.callout(x,980,110,760,260,lo_tip(O.D),ag_io(tt,c.need+0.6,tC-0.3,0.4),(cc,bx,by,bw,bh)=>lo_panel(cc,bx,by,bw,bh,"Renew a passport",[["site one · Renewing your passport",PK.C.ink,32],["site two · Passport renewals",PK.C.ink,32],["the same advice, other words",PK.C.amber,32]],null,PK.C.orange));
+      lo_bub(x,J,tt,w("same","sure",-0.6),tC-0.3,["Which page is right?"],cam,{lean:-160});}},
+    // and taxpayers pay for all of them: one place, and simpler
+    {at:tC,place:"lopOffice",dis:0.8,keys:[[tC,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jo=null;
+      lo_lap(x,"clerk1",900,900,Object.assign({t:tt},lo_alive(tt,{expr:"listen",gaze:[1,0.2]},1,tC)),{piles:2});
+      Jo=lop_person(x,"official",1480,960,PK.poseMix("clasp",LO_SHOW,ag_in(tt,c.cost,0.4)),Object.assign({t:tt,flip:true,hold:lo_sheet,holds:true},lo_sp(tt,2,[[c.change+0.2,E.change]],"think",0.2)));
+      PK.callout(x,500,110,700,220,Jo?[Jo.hdN[0]-30,Jo.hdN[1]-60]:[1400,560],ag_io(tt,c.cost+0.4,c.change-0.3,0.4),(cc,bx,by,bw,bh)=>lo_panel(cc,bx,by,bw,bh,"The websites, a year",[["about £560 million",PK.C.amber,36]],null,PK.C.amber));
+      lo_bub(x,Jo,tt,c.change+0.2,tR-0.3,["One place, and simpler."],cam,{lean:-160});}},
+    // October 2010: the digital champion's report on Directgov
+    {at:tR,place:"loLecture",cut:true,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jm=null;
+      PK.seated(x,lop_row("clerk2"),620,950,PK.hAt(950,LE.eye),"sit",Object.assign({t:tt},lo_alive(tt,{expr:"listen",gaze:[1,0.1]},2,tR)));
+      PK.seated(x,lop_row("official"),300,990,PK.hAt(990,LE.eye),"sit",Object.assign({t:tt},lo_alive(tt,{expr:"think",gaze:[1,0.1]},3,tR)));
+      Jm=PK.person(x,lop_row("champion"),1300,930,PK.hAt(930,LE.eye),"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},lo_sp(tt,1,[[c.advice+0.2,E.advice],[c.archive+0.2,E.archive]],"smile",0.1)));
+      lo_name(x,Jm,tt,w("review","Martha Lane Fox",0),c.advice-0.2,"Martha Lane Fox","Digital champion",170);
+      lo_bub(x,Jm,tt,c.advice+0.2,c.archive-0.2,["One website, and one team","that answers for it."],cam,{lean:-180});
+      lo_bub(x,Jm,tt,c.archive+0.2,tG-0.3,["Don't move the old pages.","Archive them."],cam,{lean:-180});}},
+    // the Government Digital Service reads every page, and what people searched for
+    {at:tG,place:"lopGDS",dis:0.8,keys:[[tG,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const O={};let J3=null;
+      J3=lop_person(x,"gds3",620,900,"clasp",Object.assign({t:tt,flip:true},lo_sp(tt,3,[[c.keep+0.2,E.keep]],"think",0.2)));
+      lo_lap(x,"gds2",1180,960,Object.assign({t:tt},lo_alive(tt,{expr:"think",gaze:[1,0.6]},2,tG)),{out:O});
+      PK.callout(x,980,90,760,250,lo_tip(O.D),ag_io(tt,w("read","reads",0),c.keep-0.3,0.4),(cc,bx,by,bw,bh)=>lo_panel(cc,bx,by,bw,bh,"Read, page by page",[["Directgov · Business Link",PK.C.orange,34],["what people searched for",PK.C.orange,34]],null,PK.C.orange));
+      lo_bub(x,J3,tt,c.keep+0.2,tP-0.3,["Keep it only if","someone needs it."],cam,{lean:160});}},
+    // 2012: the design principles, at the board
+    {at:tP,place:"lopGDS",later:true,keys:[[tP,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      lop_person(x,"gds2",330,990,"clasp",Object.assign({t:tt},lo_alive(tt,{expr:"listen",gaze:[1,0.1]},2,tP)));
+      PK.teach(x,LOP_FOLK.gds1,tt,BO,{x:LOP_BD.x,y:LOP_BD.y,k:LOP_BD.k,deco:true,floor:LOP_BD.floor,rest:LOP_BD.rest,h:lop_h(LOP_BD.floor),say:[],events:LO_HEV});}},
+    // October 2012: GOV.UK, and the resident finds it, faster
+    {at:tL,place:"lopHome",dis:0.8,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const O={};let J=null;
+      J=lo_lap(x,"resident",1000,940,Object.assign({t:tt},lo_sp(tt,1,[[c.test+0.3,E.test]],"smile",0.4)),{out:O});
+      PK.callout(x,980,110,760,220,lo_tip(O.D),ag_io(tt,c.launch+0.4,tA-0.3,0.4),(cc,bx,by,bw,bh)=>lo_panel(cc,bx,by,bw,bh,"One site",[["about 3,800 pieces",PK.C.green,34]],null,PK.C.blue));
+      lo_bub(x,J,tt,w("test","faster",-0.2),tA-0.3,["Done. That was quick."],cam,{lean:-160});}},
+    // spring 2013: the Design Museum's award
+    {at:tA,place:"lopMuseum",dis:0.8,keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      lop_person(x,"visitor",1420,880,"clasp",Object.assign({t:tt,flip:true},lo_alive(tt,{expr:"think",gaze:[1,0.4]},3,tA)));
+      lop_person(x,"gds2",620,930,"clasp",Object.assign({t:tt},lo_alive(tt,{expr:"smile",gaze:[1,0.3]},2,tA)));
+      lop_person(x,"gds1",360,990,"clasp",Object.assign({t:tt},lo_alive(tt,{expr:"smile",gaze:[1,0.3]},1,tA)));}},
+    // a data team's work piles up the same way
+    {at:tD,place:"loTeam",dis:1.0,keys:[[tD,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lo_atRoom(x,tt,tD,{at:"helena",face:lo_alive(tt,{expr:"think",gaze:[1,0.3]},3,tD),noor:true});
+      lo_screenCall(x,R,ag_io(tt,w("data","reports",-0.3),c.breath-0.3,0.4),"Our week",[["38 old reports",PK.C.orange,34],["8 hours of meetings each",PK.C.amber,34],["60 alerts a week",PK.C.amber,34]],PK.C.blue,{by:70,bh:270});}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,"Less, on purpose","Simpler doesn't just happen","Leading data people · Leading a data team");
+  lo_card(ctx,S,t,0.4,tN-0.2,{kick:"Britain, 2010",title:"Government on the web"},{y:40,mid:true});
+  lo_card(ctx,S,t,tR+0.3,w("review","Martha Lane Fox",-0.3),{kick:"October 2010",title:"A report on Directgov"},{y:40,mid:true});
+  lo_card(ctx,S,t,tG+0.3,w("read","reads",-0.4),{kick:"2011",title:"The Government Digital Service"},{y:40,mid:true});
+  lo_card(ctx,S,t,tL+0.3,c.launch+0.2,{kick:"October 2012",title:"GOV.UK"},{y:40,mid:true});
+  lo_card(ctx,S,t,tA+0.3,tD-0.3,{kick:"Spring 2013",title:"Design of the Year"},{y:40,mid:true});
+  PK.title(ctx,S,t,c.breath+0.2,"Less, on purpose","Keep what people use; stop the rest, together","Leading data people · Leading a data team",{side:"right",size:52});
 });
 
 /* ---------------------------------------------------------------- 2. Everything on one wall */
-// the team's wall, Tuesday 4 May: the 38 reports, each person's week of meetings, a week's alerts; o: the three zones' u, and cold (the 17)
-// f0, f1, f2: when each zone fills (by default with its header); used: the 21 that people read, outlined in green
-function lo_wall(x,tt,o){o=o||{};const f0=o.f0==null?o.r0:o.f0,f1=o.f1==null?o.m0:o.f1,f2=o.f2==null?o.a0:o.f2;
-  lo_head(x,tt,o.r0,150,232,"38 old reports",{col:LP.orange});lo_reports(x,tt,150,262,{u:ag_in(tt,f0,2.2),cold:ag_in(tt,o.cold,1.6),used:o.used||0});
-  lo_head(x,tt,o.m0,980,232,"Standing meetings",{col:LP.amber});lo_week(x,980,262,400,346,"before",{a:ag_in(tt,f1,0.4),k:tt-f1,u:ag_in(tt,f1+0.2,1.6)});
-  lo_head(x,tt,o.a0,1460,232,"A week's alerts",{col:LP.amber});lo_alerts(x,tt,1462,268,{u:ag_in(tt,f2,2.0)});}
-scene("wall",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"};
-  const r0=w("reports","38",-0.2),m0=w("meetings","eight",-0.4),a0=w("alerts","60",-0.3),cold=w("reports","17",-0.2),f0=w("list","everything",-0.3);
+scene("wall",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tZ=c.series+2.2,tU=c.univ-0.4,tL=c.list-0.4,tS=c.study-0.4,tK=c.ask-0.4;
+  const BA=PK.pace(ctx,"carmen",lo_boardA(sc,w)),BB=PK.pace(ctx,"helena",lo_boardB(sc,w)),N1=PK.pace(ctx,null,lo_note1(sc,w)),JW=Object.assign({work:1,pose:undefined},lo_alive(0,{},2,0));
   ag_shots(ctx,S,t,sc.dur,[
-    // the series' four ideas; this film's is the first
-    {at:0,place:"lpRoom",later:true,keys:[[0,960,520,1.0]],push:0.015,draw:(x,tt)=>{
-      lo_four(x,{u:lo_u(tt,[w("series","minimalism",-0.2),w("series","kaizen",-0.2),w("series","Ubuntu",-0.2),w("series","decentralisation",-0.2)]),first:ag_in(tt,c.first,0.8)});}},
-    // the university, a year from now: Helena and her team of eight
-    {at:c.univ-0.3,place:"lpRoom",later:true,keys:[[c.univ-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_sheet(x,tt,w("univ","Helena",-0.2),1000,200,720,{kick:"The data manager",title:"Helena Novak",lines:["Leads a data team of eight: Noor, Sam, Jun, Yusuf, Ivy and three more"]},
-        {light:"day",u:ag_in(tt,w("univ","eight",-0.2),0.5)});
-      lp_person(x,"helena",560,650,1.0,{t:tt,light:dy});}},
-    // Tuesday 4 May: everything on one wall
-    {at:c.list-0.3,place:"lpRoom",later:true,keys:[[c.list-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_tag(x,tt,w("list","Tuesday",-0.2),null,960,156,"Tuesday 4 May: everything on one wall",{align:"center",col:LP.ink});
-      lo_wall(x,tt,{r0,m0,a0,cold,f0,f1:f0+0.7,f2:f0+1.4});
-      lo_tag(x,tt,cold+0.2,null,150,668,"17 not opened in a year",{col:LP.amber});
-      lo_tag(x,tt,m0+0.6,null,980,668,"About 8 h a week each",{col:LP.amber});
-      lo_tag(x,tt,a0+0.3,null,1790,668,"About 60 a week",{align:"right",col:LP.amber});
-      lo_tag(x,tt,w("alerts","nothing",-0.2),null,1790,742,"Most need nothing",{align:"right",col:LP.amber});
-      // each added for a good reason
-      lo_tag(x,tt,w("reason","request",-0.2),null,330,420,"A request",{align:"center",col:LP.ink});
-      lo_tag(x,tt,w("reason","project",-0.2),null,1180,480,"A project",{align:"center",col:LP.ink});
-      lo_tag(x,tt,w("reason","night",-0.2),null,1790,420,"A night when something broke",{align:"right",col:LP.ink});}},
-    // most people improve by adding; one in ten ideas took something away
-    {at:c.study-0.3,place:"lpRoom",later:true,keys:[[c.study-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_sheet(x,tt,w("study","Nature",-0.3),360,170,1200,{kick:"Adams and colleagues · Nature, 2021",title:"People overlook taking things away",
-        lines:["Asked to make something better, most add to it","A university asked for ideas: about 1 in 10 took something away"]},{light:"day",u:lo_u(tt,[w("study","add",-0.2),c.uni+0.2])});
-      lo_ideas(x,508,600,{u:ag_in(tt,w("uni","ideas",-0.2),1.4),ring:ag_in(tt,w("uni","away",-0.3),0.5)});}},
-    // so the team chooses, together
-    {at:c.ask-0.3,place:"lpRoom",later:true,keys:[[c.ask-0.3,960,540,1.0]],draw:(x,tt)=>{
-      LO_TEAM.forEach(([who,px],i)=>{lp_person(x,who,px,770,0.7,{t:tt,flip:px>960,light:dy});lp_nameTag(x,px,540,who,{align:"center",role:"",a:ag_in(tt,c.ask+0.2+i*0.15,0.4)});});
-      lo_pill(x,tt,w("ask","keep",-0.2),null,760,300,"What to keep",{col:LP.green});
-      lo_pill(x,tt,w("ask","stop",-0.2),null,1160,300,"What to stop",{col:LP.ink});
-      lo_tag(x,tt,w("ask","together",-0.2),null,960,400,"Chosen together, by the team",{align:"center",col:LP.ink});}}
+    // the series' four ideas (Carmen, at the team's board)
+    {at:0,place:"loTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const R=lo_lesson(x,tt,{rows:BA,jun:Object.assign({work:1,pose:undefined},lo_alive(tt,{},2,0)),clock:9,events:LO_HEV});
+      lo_name(x,R.at,tt,0.4,tZ-0.3,"Carmen Vidal","Consultant",160);}},
+    {at:tZ,cut:true,place:"loBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[c.series,E.first]],events:LO_HEV});}},
+    // at the university: Helena leads a team of eight
+    {at:tU,place:"loTeam",dis:0.6,keys:[[tU,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
+      lo_atRoom(x,tt,tU,{at:"ivy",noor:true,people:[lo_helena(tt,lo_alive(tt,{expr:"smile",gaze:[1,0.1]},5,tU),{x:1560,fl:930,out:Hh})]});
+      lo_name(x,Hh.J,tt,w("univ","Helena Novak",0),tL-0.3,"Helena Novak","Data manager",170);}},
+    // Tuesday 4 May: everything on one wall (Helena writes; the team looks on)
+    {at:tL,place:"loTeam",later:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lo_lesson(x,tt,{rows:BB,who:"helena",jun:Object.assign({work:1,pose:undefined},lo_alive(tt,{},2,tL)),helena:lo_sp(tt,5,[[c.reason+0.2,E.reason]],"think",-0.2),sam:lo_alive(tt,{expr:"listen",gaze:[1,-0.25]},4,tL),clock:10,events:LO_HEV});
+      lo_bub(x,R.helena,tt,c.reason+0.2,tS-0.3,["Each one came","from a request."],cam,{lean:-200});}},
+    // we add, and rarely take away (Ivy's notebook)
+    {at:tS,place:"loNotes",dis:0.6,keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N1,{});}},
+    // so Helena asks the team to choose, together
+    {at:tK,place:"loTeam",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
+      lo_atRoom(x,tt,tK,{at:"ivy",noor:true,people:[lo_helena(tt,lo_sp(tt,5,[[c.ask+0.3,E.ask]],"smile",0.1),{x:1560,fl:930,out:Hh})]});
+      lo_bub(x,Hh.J,tt,c.ask+0.3,1e9,["What do we keep,","and what do we stop?"],cam,{lean:-160});}}
   ]);
-  setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,c.univ,c.list+2.2,0.5)});
-  lo_kick(ctx,S,ag_in(t,0.6,0.6));
+  lo_card(ctx,S,t,tL+0.3,w("list","everything",-0.4),{kick:"Tuesday 4 May",title:"Everything on one wall"},{y:40,mid:true});
+  lo_imagined(ctx,S,t,tU+0.4,w("univ","Helena Novak",-0.2),"The university, 2027 · imagined");
+  lo_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lo_apart(t,[[tU,w("univ","Helena Novak",0)],[tL,w("list","everything",0)],[tS,tK]])));
 });
 
 /* ---------------------------------------------------------------- 3. What each thing is for */
-scene("use",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
+scene("use",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tA=c.agree-0.4,tZ=c.agree+2.2,tW=c.week-0.4,BC=PK.pace(ctx,"carmen",lo_boardC(sc,w)),N2=PK.pace(ctx,null,lo_note2(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // who uses it, and for what? For the reports, the logs answer
-    {at:0,place:"lpRoom",later:true,keys:[[0,960,520,1.0]],push:0.015,draw:(x,tt)=>{
-      lo_tag(x,tt,w("who","who",-0.2),null,960,156,"Who uses it, and for what?",{align:"center",col:LP.ink});
-      lo_wall(x,tt,{r0:-9,m0:-9,a0:-9,cold:-9,used:ag_in(tt,w("logs","21",-0.2),1.0)});
-      lo_tag(x,tt,w("logs","260",-0.2),null,150,668,"21 read by about 260 people",{col:LP.green});
-      lo_tag(x,tt,w("logs","nobody",-0.2),null,150,742,"17 by nobody, for a year or more",{col:LP.amber});}},
-    // what each kind of thing is for
-    {at:c.agree-0.3,place:"lpRoom",later:true,keys:[[c.agree-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_tag(x,tt,c.agree+0.2,null,960,230,"What each thing is for",{align:"center",col:LP.blue});
-      lo_sheet(x,tt,c.meeting+0.1,110,310,540,{kick:"A meeting is for",title:"Deciding together, or helping someone",lines:["Not reading out what the board shows"]},{col:LP.blue,u:ag_in(tt,w("meeting","Not",-0.2),0.5)});
-      lo_sheet(x,tt,c.alert+0.1,690,310,540,{kick:"An alert is for",title:"Someone who must act now"},{col:LP.blue});
-      lo_sheet(x,tt,c.report+0.1,1270,310,540,{kick:"A report is for",title:"A decision someone makes"},{col:LP.blue});}},
-    // the week they design: about three hours instead of eight
-    {at:c.week-0.3,place:"lpRoom",later:true,keys:[[c.week-0.3,960,540,1.0]],draw:(x,tt)=>{const d0=w("week","design",-0.2);
-      lo_week(x,110,190,440,460,"before",{a:ag_in(tt,c.week,0.4),k:tt-c.week,title:"Before: about 8 h"});
-      lo_week(x,590,190,440,460,"designed",{a:ag_in(tt,d0,0.4),k:tt-d0,title:"Designed: about 3 h",u:lo_u(tt,[w("week","stand-up",-0.2),w("week","planning",-0.2),w("more","one-to-one",-0.3),w("more","review",-0.2)])});
-      lo_sheet(x,tt,w("week","stand-up",-0.3),1080,190,730,{kick:"The designed week",lines:["Stand-up, 15 minutes each morning","Planning on Monday, 45 minutes","A review with the people who asked, every second Thursday, 1 hour","A one-to-one, 30 minutes"]},
-        {col:LP.blue,u:lo_u(tt,[w("week","stand-up",-0.2),w("week","planning",-0.2),w("more","review",-0.2),w("more","one-to-one",-0.3)])});
-      lo_pill(x,tt,w("hours","three",-0.2),null,570,740,"About 3 h a week each, instead of 8",{col:LP.blue,size:32});}}
+    // who uses it, and for what? The warehouse's logs answer for the reports
+    {at:0,place:"loTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
+      const R=lo_atRoom(x,tt,0,{at:"ivy",noor:true,people:[lo_helena(tt,lo_sp(tt,5,[[c.who+0.2,E.who]],"think",0.1),{x:1560,fl:930,out:Hh})]});
+      lo_bub(x,Hh.J,tt,c.who+0.2,c.logs-0.2,["Who uses it,","and for what?"],cam,{lean:-160});
+      lo_screenCall(x,R,ag_io(tt,c.logs+0.3,tA-0.3,0.4),"The logs · a year",[["21 reports · about 260 readers",PK.C.green,32],["17 reports · nobody",PK.C.amber,32]],PK.C.orange,{bh:230});}},
+    // what each kind of thing is for (Carmen)
+    {at:tA,place:"loTeam",later:true,keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const R=lo_lesson(x,tt,{rows:BC,jun:Object.assign({work:1,pose:undefined},lo_alive(tt,{},2,tA)),clock:11,events:LO_HEV});}},
+    {at:tZ,cut:true,place:"loBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BC,{say:[[c.agree,E.report]],events:LO_HEV});}},
+    // the week they want (Helena's notebook)
+    {at:tW,place:"loNotes",dis:0.6,keys:[[tW,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N2,{});}}
   ]);
-  lo_kick(ctx,S,1);
+  lo_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lo_apart(t,[[tW,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 4. Stopped, openly */
-scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"};
-  const offT=w("off","switched",-0.2),sortT=w("alerts","kind",-0.4),sumT=c.nothing+0.2,actT=w("twelve","12",-0.2);
-  // the 38 reports and the plan: the same in both of their shots
-  const plan=(x,tt)=>{lo_reports(x,tt,150,250,{cold:1,used:1,off:ag_in(tt,offT,2.0)});
-    lo_sheet(x,tt,c.case+0.1,1000,200,780,{kick:"Tuesday 25 May · The data council",title:"The plan, approved",lines:["The 21 reports people read move to the platform","The 17 don't"]},
-      {col:LP.blue,light:"morning",u:lo_u(tt,[w("case","21",-0.2),w("case","17",-0.2)])});};
+scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),LE=PK.ROOMS.lecture;
+  const tW=c.write-0.4,tC=c.case-0.4,tO=c.off-0.4,tG=c.gov-0.4,tA=c.alerts-0.4;
   ag_shots(ctx,S,t,sc.dur,[
-    // from Monday 10 May, the designed week; the round of updates stops, and the board shows it
-    {at:0,place:"loMorning",later:true,keys:[[0,960,520,1.0]],push:0.015,draw:(x,tt)=>{const s0=w("monday","stop",-0.2);
-      lo_week(x,110,200,440,440,"before",{a:ag_in(tt,0.4,0.4)*(1-ag_in(tt,s0+1.6,0.6)),title:"Before",strike:ag_in(tt,s0,1.2),light:"morning"});
-      lo_week(x,590,200,440,440,"designed",{a:ag_in(tt,w("monday","week",-0.2),0.4),k:tt-w("monday","week",-0.2),title:"From Monday 10 May",light:"morning"});
-      lo_board(x,1120,200,{a:ag_in(tt,w("monday","board",-0.3),0.4),k:tt-w("monday","board",-0.3),w:640,h:400,light:"morning"});
-      lo_tag(x,tt,w("monday","round",-0.2),null,1440,680,"The weekly round of updates: the board shows it",{align:"center",col:LP.ink});}},
-    // for each of the 17, a note to its last readers first; most have moved on, one needs last year's figures
-    {at:c.write-0.3,place:"loMorning",later:true,keys:[[c.write-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_reports(x,tt,150,250,{only:"cold",cols:6,s:1.2,cold:1,u:ag_in(tt,c.write,1.0),mail:ag_in(tt,w("write","writes",-0.1),2.4),mailTo:1440,mailY:330});
-      lo_tag(x,tt,w("write","readers",-0.2),null,1440,250,"To its last readers, and whoever asked",{align:"center",col:LP.ink});
-      lo_tag(x,tt,w("reply","Most",-0.1),null,1440,420,"Most have moved on",{align:"center",col:LP.ink});
-      lo_pill(x,tt,w("reply","figures",-0.2),null,1440,540,"Last year's figures: a copy sent",{col:LP.green,icon:"tick"});}},
-    // Tuesday 25 May: the plan; Monday 31 May: the 17 switched off, not deleted, and back on within a day until December
-    {at:c.case-0.3,place:"loMorning",later:true,keys:[[c.case-0.3,960,540,1.0]],draw:(x,tt)=>{plan(x,tt);
-      lo_pill(x,tt,offT+0.2,null,519,720,"Switched off, not deleted",{col:LP.amber,icon:"wait"});
-      lo_tag(x,tt,w("undo","December",-0.3),null,519,810,"Back on within a day, until December",{align:"center",col:LP.ink});}},
-    // GOV.UK did the same with its old pages
-    {at:c.gov-0.3,place:"loOffice",keys:[[c.gov-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lo_box(x,960,770,{w:460,fill:1,a:ag_in(tt,c.gov,0.4)});
-      lo_tag(x,tt,w("gov","pages",-0.2),null,960,250,"GOV.UK's old pages",{align:"center",col:LP.ink});
-      lo_tag(x,tt,w("gov","archived",-0.2),null,960,330,"Archived, where they can still be found",{align:"center",col:LP.ink});}},
-    // the alerts, one kind at a time: when this fires, what do we do? Nothing: a line in the Monday summary. By 7 June, about 12
-    {at:c.alerts-0.3,place:"loMorning",keys:[[c.alerts-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      const nt=[w("alerts","Sam",-0.2),w("alerts","Noor",-0.2),w("alerts","Jun",-0.2)];
-      [["sam",260],["noor",520],["jun",780]].forEach(([who,px],i)=>{lp_person(x,who,px,780,0.7,{t:tt,light:mo});lp_nameTag(x,px,545,who,{align:"center",role:"",a:ag_in(tt,nt[i],0.4)});});
-      lo_alerts(x,tt,1170,236,{sort:ag_in(tt,sortT,1.4),sum:ag_in(tt,sumT,2.0),act:ag_in(tt,actT,1.4),actX:1170,actY:250,sumX:1200,sumY:680});
-      lo_tag(x,tt,w("alerts","fires",-0.3),c.twelve-0.3,1430,150,"When this fires, what do we do?",{align:"center",col:LP.ink});
-      lo_sheet(x,tt,sumT-0.2,1170,650,580,{kick:"Each Monday morning",title:"A summary"},{light:"morning",pin:false});lo_sumLines(x,1480,764,ag_in(tt,sumT+0.6,1.8));
-      lo_tag(x,tt,w("twelve","act",-0.2),null,1430,150,"About 12 a week, each needing action",{align:"center",col:LP.amber});
-      lo_tag(x,tt,w("twelve","note",-0.2),null,1430,598,"Each with a note: what to do",{align:"center",col:LP.blue});}},
-    // the team chooses every cut, and any cut can be undone
-    {at:c.choose-0.3,place:"loMorning",later:true,keys:[[c.choose-0.3,960,540,1.0]],draw:(x,tt)=>{
-      LO_TEAM.forEach(([who,px])=>{lp_person(x,who,px,770,0.7,{t:tt,flip:px>960,light:mo});});
-      lo_pill(x,tt,w("choose","chooses",-0.2),null,960,300,"The team chooses every cut",{col:LP.ink});
-      lo_tag(x,tt,w("choose","undone",-0.3),null,960,400,"Any cut can be undone",{align:"center",col:LP.ink});}}
+    // Monday 10 May: the morning's stand-up, fifteen minutes, everyone standing
+    {at:0,place:"loTeam",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jh=null;
+      lo_team(x,tt,{clock:9,sam:null,jun:null,marta:null,people:[
+        {fl:850,draw:cc=>{PK.person(cc,"ivy",1440,850,lo_hT(850),"clasp",Object.assign({t:tt,flip:true},lo_alive(tt,{expr:"listen",gaze:[1,0.1]},3,0)));}},
+        {fl:900,draw:cc=>{Jh=PK.person(cc,"helena",900,900,lo_hT(900),"clasp",Object.assign({t:tt,underF:PK.inHand.notebook({}),holds:true},lo_sp(tt,1,[[c.monday+0.3,c.monday+3.0]],"smile",0.1)));}},
+        {fl:960,draw:cc=>{PK.person(cc,"noor",360,960,lo_hT(960),"clasp",Object.assign({t:tt},lo_alive(tt,{expr:"listen",gaze:[1,0.1]},4,0)));}},
+        {fl:925,draw:cc=>{PK.person(cc,"sam",1220,925,lo_hT(925),"clasp",Object.assign({t:tt,flip:true},lo_alive(tt,{expr:"smile",gaze:[1,0.1]},2,0)));}},
+        {fl:1000,draw:cc=>{PK.person(cc,"jun",640,1000,lo_hT(1000),"clasp",Object.assign({t:tt},lo_alive(tt,{expr:"listen",gaze:[1,0.1]},5,0)));}}]});}},
+    // they write to each report's last readers first
+    {at:tW,place:"loTeam",later:true,keys:[[tW,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lo_atRoom(x,tt,tW,{at:"ivy",sam:null,face:lo_alive(tt,{expr:"think",gaze:[1,0.6]},3,tW)});const D=R&&R.marta&&R.marta.desk;
+      const CH={title:"Room use, 2019",who:[PK.extra(5)],me:"ivy",msgs:[{who:"ivy",s:"We plan to stop this report. Do you still read it?",at:c.write+1.0,type:1.6},{who:PK.extra(5),s:"Only last year's figures, please.",at:c.reply+1.6,type:1.4}]},cs=PK.chatSize(x,CH,{size:28});
+      PK.callout(x,720,110,cs.w,cs.h,D?[150,D.top-120]:[150,620],ag_io(tt,tW+0.4,tC-0.3,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH,tt,{size:28}));}},
+    // Tuesday 25 May: the data council approves the plan
+    {at:tC,place:"loLecture",dis:0.6,keys:[[tC,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jh=null;PK.audience(x,tt,6,{look:0.6});
+      Jh=PK.person(x,"helena",1500,950,PK.hAt(950,LE.eye),"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},lo_sp(tt,1,[[c.case+0.3,E.case]],"think",0.1)));
+      lo_bub(x,Jh,tt,w("case","approves",0),tO-0.3,["21 move to the platform.","17 don't."],cam,{lean:-180});}},
+    // Monday 31 May: the 17 switched off, not deleted
+    {at:tO,place:"loTeam",dis:0.6,keys:[[tO,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lo_atRoom(x,tt,tO,{at:"jun",jun:null,sam:null,face:lo_alive(tt,{expr:"think",gaze:[1,0.6]},3,tO)});
+      lo_screenCall(x,R,ag_io(tt,c.off+0.4,tG-0.3,0.4),"17 old reports",[["switched off, not deleted",PK.C.amber,34],[ag_in(tt,c.undo,0.4)>0.5?"back on within a day":"",PK.C.green,34]],PK.C.amber,{bh:240});}},
+    // GOV.UK archived its old pages, where they could still be found
+    {at:tG,place:"lopGDS",dis:0.8,keys:[[tG,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const O={};
+      lo_lap(x,"gds2",1180,960,Object.assign({t:tt},lo_alive(tt,{expr:"think",gaze:[1,0.6]},2,tG)),{out:O});
+      lop_person(x,"gds3",620,900,"clasp",Object.assign({t:tt,flip:true},lo_alive(tt,{expr:"listen",gaze:[1,0.2]},3,tG)));
+      PK.callout(x,980,90,760,220,lo_tip(O.D),ag_io(tt,c.gov+0.4,tA-0.3,0.4),(cc,bx,by,bw,bh)=>lo_panel(cc,bx,by,bw,bh,"The old pages",[["archived, still found",PK.C.green,34]],null,PK.C.blue));}},
+    // Sam, with Noor and Jun, goes through the alerts: when this fires, what do we do?
+    {at:tA,place:"loTeam",dis:0.6,keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jn=null,Js=null;
+      const R=lo_team(x,tt,{clock:15,marta:null,jun:null,sam:Object.assign({work:1},lo_sp(tt,1,[[w("alerts","asking",0),E.alerts]],"think",0.2)),people:[
+        {fl:960,draw:cc=>{Jn=PK.person(cc,"noor",820,960,lo_hT(960),"clasp",Object.assign({t:tt},lo_sp(tt,2,[[c.nothing+0.2,E.nothing]],"think",0.2)));}},
+        {fl:940,draw:cc=>{PK.person(cc,"jun",1560,940,lo_hT(940),"clasp",Object.assign({t:tt,flip:true},lo_alive(tt,{expr:"listen",gaze:[1,0.2]},3,tA)));}}]});
+      Js=R.sam;lo_bub(x,Js,tt,w("alerts","asking",0),c.nothing-0.2,["When this fires,","what do we do?"],cam,{lean:-160});
+      lo_bub(x,Jn,tt,c.nothing+0.2,c.twelve-0.2,["Nothing. A line in","Monday's summary."],cam,{lean:-160});
+      PK.callout(x,40,110,600,240,[1150,590],ag_io(tt,c.twelve+0.4,1e9,0.4),(cc,bx,by,bw,bh)=>lo_panel(cc,bx,by,bw,bh,"Alerts to Sam",[["about 12 a week",PK.C.green,34],["each with what to do",PK.C.ink,34]],null,PK.C.blue));}}
   ]);
-  lo_kick(ctx,S,1);
+  lo_card(ctx,S,t,0.3,c.write-0.6,{kick:"From Monday 10 May",title:"Fifteen minutes, standing"},{y:40,mid:true});
+  lo_card(ctx,S,t,tC+0.3,w("case","approves",-0.2),{kick:"Tuesday 25 May",title:"The data council"},{y:40,mid:true});
+  lo_card(ctx,S,t,tO+0.3,c.off+0.2,{kick:"Monday 31 May",title:"Switched off"},{y:40,mid:true});
+  lo_card(ctx,S,t,c.twelve-0.2,c.twelve+0.2,{kick:"Monday 7 June",title:"The alerts that matter"},{y:40,mid:true});
 });
 
 /* ---------------------------------------------------------------- 5. Less, but better */
-scene("roots",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
+scene("roots",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tZ=c.art+2.2,tN=c.never-0.4,tR=c.rams-0.4,BD=PK.pace(ctx,"carmen",lo_boardD(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // minimalism began as a word for art: the United States, the 1960s
-    {at:0,place:"lpRoom",later:true,keys:[[0,960,520,1.0]],push:0.015,draw:(x,tt)=>{
-      lo_art(x,{u:ag_in(tt,w("art","art",-0.2),2.0)});
-      lo_sheet(x,tt,w("art","States",-0.3),1230,200,560,{kick:"Minimalism",title:"The United States, 1960s",lines:["Work pared down to its simplest forms"]},{light:"day",u:ag_in(tt,w("art","simplest",-0.3),0.5)});}},
-    // for a team, two ideas from Japan; and nobody's work is called waste
-    {at:c.japan-0.3,place:"lpRoom",later:true,keys:[[c.japan-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_tag(x,tt,w("japan","ideas",-0.2),null,960,170,"For a team: two ideas from Japan",{align:"center",col:LP.ink});
-      lo_sheet(x,tt,c.kanso+0.1,180,250,700,{kick:"Kanso · Japanese aesthetics",title:"Simplicity: plain, with nothing extra"},{light:"day"});
-      lo_sheet(x,tt,c.lean+0.1,1040,250,700,{kick:"Lean · Muda",title:"Work that adds no value"},{light:"day"});
-      lo_pill(x,tt,w("never","never",-0.2),null,960,540,"Nobody's work is called waste",{col:LP.ink});
-      lo_reports(x,tt,960-lo_repW(0.85,17)/2,620,{only:"cold",cols:17,s:0.85,u:ag_in(tt,w("never","Every",-0.2),1.2)});
-      lo_tag(x,tt,w("never","answered",-0.2),null,960,750,"Every report once answered a real question",{align:"center",col:LP.ink});}},
-    // less, but better
-    {at:c.rams-0.3,place:"lpRoom",later:true,keys:[[c.rams-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_sheet(x,tt,w("rams","Dieter",-0.2),560,150,800,{kick:"Dieter Rams, designer",title:"Less, but better"},{light:"day"});
-      lo_pile(x,tt,{u:1,thin:1,keep:1,a:ag_in(tt,w("better","stays",-0.3),0.6)});
-      lo_pill(x,tt,w("better","Better",-0.2),null,960,600,"Better is the point",{col:LP.green});
-      lo_tag(x,tt,w("better","stays",-0.2),null,960,690,"What stays gets the time",{align:"center",col:LP.green});}}
+    {at:0,place:"loTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{lo_lesson(x,tt,{rows:BD,jun:Object.assign({work:1,pose:undefined},lo_alive(tt,{},2,0)),clock:14,events:LO_HEV});}},
+    {at:tZ,cut:true,place:"loBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BD,{say:[[c.art,E.lean]],events:LO_HEV});}},
+    // but the team never calls anyone's work waste
+    {at:tN,place:"loTeam",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
+      lo_atRoom(x,tt,tN,{at:"ivy",noor:true,people:[lo_helena(tt,lo_sp(tt,5,[[w("never","Every",0),E.never]],"think",0.1),{x:1560,fl:930,out:Hh})]});
+      lo_bub(x,Hh.J,tt,w("never","Every",0),tR-0.3,["Every report once answered","someone's real question."],cam,{lean:-160});}},
+    {at:tR,cut:true,place:"loBoard",keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BD,{say:[[c.rams,E.better]],events:LO_HEV});}}
   ]);
-  lo_kick(ctx,S,1);
+  lo_kick(ctx,S,ag_in(t,0.6,0.6));
 });
 
 /* ---------------------------------------------------------------- 6. The time back */
-scene("time",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),lt={light:"late"};
+scene("time",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tS=c.sam-0.4,tG=c.goes-0.4,tR=c.rule-0.4,N3=PK.pace(ctx,null,lo_note3(sc,w)),BE=PK.pace(ctx,"helena",lo_boardE(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // June: about five hours a week back each; across eight people, one person's whole week
-    {at:0,place:"loLate",later:true,keys:[[0,960,520,1.0]],push:0.015,draw:(x,tt)=>{const h0=w("hours","five",-0.2),e0=w("hours","Across",-0.2);
-      lo_sheet(x,tt,c.june+0.1,150,170,620,{kick:"June · Measured",title:"About 5 h a week back, each"},{light:"late",col:LP.green});
-      lo_back(x,960,430,{u:ag_in(tt,h0,1.4),sum:ag_in(tt,e0,1.6),bw:140});
-      lo_pill(x,tt,w("hours","whole",-0.2),null,960,570,"About one person's whole week, every week",{col:LP.green,size:32});}},
+    {at:0,place:"loNotes",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}},
     // every alert that reaches Sam now matters
-    {at:c.sam-0.3,place:"loLate",later:true,keys:[[c.sam-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lp_person(x,"sam",520,660,1.0,{t:tt,light:lt});
-      lo_alerts(x,tt,1000,250,{act:1,actX:1000,actY:250,sum:1,sort:1});
-      lo_pill(x,tt,w("sam","matters",-0.3),null,1290,620,"Every alert now matters",{col:LP.green,icon:"tick"});}},
-    // the time goes to the work people use: the 21, rebuilt on the platform, each with an owner
-    {at:c.goes-0.3,place:"loLate",later:true,keys:[[c.goes-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_sheet(x,tt,c.goes+0.1,120,200,700,{kick:"Where the time goes",title:"The work people use",lines:["The 21 reports they read, rebuilt on the platform","Each with an owner"]},
-        {light:"late",col:LP.green,u:lo_u(tt,[w("goes","21",-0.2),w("goes","owner",-0.2)])});
-      lo_platform(x,tt,{x:900,y:200,u:ag_in(tt,w("goes","rebuilding",-0.2),2.2),own:ag_in(tt,w("goes","owner",-0.2),1.4),light:"late"});}},
-    // to keep it, one rule; and the wall again at each quarterly review
-    {at:c.rule-0.3,place:"loLate",later:true,keys:[[c.rule-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lo_sheet(x,tt,c.rule+0.1,360,180,1200,{kick:"The team's rule",title:"Anything new needs a reader, a reason and an owner"},{light:"late",col:LP.blue});
-      lo_tag(x,tt,w("review","quarterly",-0.2),null,960,440,"Each quarterly review: 27 July, 26 October",{align:"center",col:LP.ink});
-      lo_miniWall(x,tt,w("review","wall",-0.4),520);
-      lo_tag(x,tt,w("review","wall",-0.2),null,960,800,"Everything back on the wall",{align:"center",col:LP.ink});}}
+    {at:tS,place:"loTeam",dis:0.6,keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lo_atRoom(x,tt,tS,{at:"sam",sam:null,noor:false,face:lo_alive(tt,{expr:"smile",gaze:[1,0.5]},1,tS)});
+      lo_screenCall(x,R,ag_io(tt,c.sam+0.4,tG-0.3,0.4),"This week",[["12 alerts · each needs us",PK.C.green,34]],PK.C.blue,{bh:200});}},
+    // the time goes to the 21 reports people read, rebuilt on the platform
+    {at:tG,place:"loTeam",cut:true,keys:[[tG,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lo_atRoom(x,tt,tG,{at:"ivy",noor:true,face:lo_alive(tt,{expr:"think",gaze:[1,0.5]},3,tG)});
+      lo_screenCall(x,R,ag_io(tt,c.goes+0.4,tR-0.3,0.4),"On the platform",[["21 reports, rebuilt",PK.C.green,34],["each with an owner",PK.C.ink,34]],PK.C.blue,{bh:240});}},
+    // one rule to keep the time (Helena, at the team's board)
+    {at:tR,place:"loTeam",later:true,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{lo_lesson(x,tt,{rows:BE,who:"helena",jun:Object.assign({work:1,pose:undefined},lo_alive(tt,{},2,tR)),clock:16,events:LO_HEV});}}
   ]);
-  lo_kick(ctx,S,1);
+  lo_card(ctx,S,t,0.3,c.june+1.4,{kick:"June",title:"What came back"},{y:40,mid:true});
+  lo_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lo_apart(t,[[0,tS]])));
 });
 
 /* ---------------------------------------------------------------- 7. On Monday */
-scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"},e0=c.breath+0.6;
+scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tH=c.helena-0.4,tN=c.list-0.1,tL=c.next-0.4,tE=c.breath+0.6,BM=PK.pace(ctx,"helena",lo_boardM(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // GOV.UK: what people needed, done well
-    {at:0,place:"loOffice",keys:[[0,960,540,1.0]],push:0.02,draw:(x,tt)=>{
-      lo_plain(x,750,150,420,{a:ag_in(tt,0.7,0.5),k:tt-0.7});
-      lo_pill(x,tt,w("back","found",-0.2),null,380,330,"Found what people needed",{col:LP.blue});
-      lo_pill(x,tt,w("back","less",-0.2),null,1540,330,"Did less, and did it well",{col:LP.green});}},
+    // GOV.UK found what people needed, did less, and did it well
+    {at:0,place:"lopHome",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{lo_lap(x,"resident",1000,940,Object.assign({t:tt},lo_alive(tt,{expr:"smile",gaze:[1,0.4]},1,0)));}},
     // Helena's team did the same
-    {at:c.helena-0.3,place:"loMorning",keys:[[c.helena-0.3,960,540,1.0]],dis:1.2,draw:(x,tt)=>{
-      lp_person(x,"helena",520,650,1.0,{t:tt,light:mo});
-      lo_pill(x,tt,w("helena","kept",-0.2),null,1240,330,"Kept what people use",{col:LP.green,icon:"tick"});
-      lo_pill(x,tt,w("helena","week",-0.2),null,1240,440,"A person's week back, every week",{col:LP.green,icon:"tick"});}},
-    // on Monday: four things to do; the next film; the last line
-    {at:c.list-0.3,place:"loMorning",later:true,keys:[[c.list-0.3,960,540,1.0]],draw:(x,tt)=>{const g=1-ag_in(tt,c.take-0.4,0.6);
-      if(g>0.004){x.save();x.globalAlpha*=g;
-        lo_sheet(x,tt,c.list+0.2,120,140,820,{kick:"One",title:"List everything you run and attend"},{light:"morning"});
-        lo_sheet(x,tt,c.who+0.1,980,140,820,{kick:"Two",title:"Ask who uses each thing, and for what"},{light:"morning"});
-        lo_sheet(x,tt,c.stop+0.1,120,430,820,{kick:"Three",title:"Stop the rest together: switch off, wait, delete"},{col:LP.amber,light:"morning"});
-        lo_sheet(x,tt,c.time+0.1,980,430,820,{kick:"Four",title:"Measure the time back, and protect it"},{col:LP.green,light:"morning"});
-        x.restore();}
-      lo_tag(x,tt,w("next","One",-0.1),c.take-0.4,960,790,"Next: One small change at a time",{align:"center",col:LP.ink});
-      const ta=ag_in(tt,c.take,0.4)*(1-ag_in(tt,e0,0.8));
-      if(ta>0.004){for(const [s,wd,px,col] of [["Keep what people use","Keep",960-300,LP.green],["Stop the rest, together","stop",960+300,LP.ink]])
-        {const t0=w("take",wd,-0.1);lp_pill(x,px,470,s,{col,size:34,a:ta*ag_in(tt,t0,0.4),k:tt-t0});}}}}
+    {at:tH,place:"loTeam",dis:0.8,keys:[[tH,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      lo_atRoom(x,tt,tH,{at:"ivy",noor:true,face:lo_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tH),people:[lo_helena(tt,lo_alive(tt,{expr:"smile",gaze:[1,0.1]},5,tH),{x:1560,fl:930})]});}},
+    {at:tN,place:"loBoard",cut:true,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"helena",tt,BM,{say:[],events:LO_HEV});}},
+    // keep what people use; stop the rest, together
+    {at:tL,place:"loTeam",cut:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      lo_atRoom(x,tt,tL,{at:"ivy",noor:true,face:lo_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tL),people:[lo_helena(tt,lo_alive(tt,{expr:"smile",gaze:[1,0.2]},5,tL),{x:1560,fl:930})]});}}
   ]);
-  lp_end(ctx,S,t,e0,"Less, on purpose",LO_LAST,"Film 1 of 4","Leading a data team");
-  lo_kick(ctx,S,1-ag_in(t,e0,0.8),{light:"morning"});
+  lo_kick(ctx,S,(1-ag_in(t,tE-0.2,0.6)));
+  PK.end(ctx,S,t,tE,"Less, on purpose",LO_LAST,"Film 1 of 4","Leading a data team",{side:"right"});
 });
-ag_cutInto(["wall","use","stop","roots","time"]);
+ag_cutInto(["wall","use","stop","roots","time","monday"]);

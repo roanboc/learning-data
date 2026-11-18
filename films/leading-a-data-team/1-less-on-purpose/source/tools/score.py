@@ -170,7 +170,6 @@ def pen(s, sec=0.7, g=0.005, pan=0.0, n=3):
         _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
 def ticked(s, g=0.0045, pan=0.0):
     """a tick drawn: two quick strokes of a pen"""
-    pen(s, 0.24, g, pan, 2)
 def rustle(s, sec=2.0, g=0.003, pan=0.0):
     """many sheets moving at once, heard as one soft texture of paper that swells in and fades, never a crackle"""
     n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 7); gr = 0.65 + 0.35 * gr / max(1e-9, float(np.abs(gr).max()))
@@ -200,65 +199,29 @@ LV[0] = 0.9
 dw = lambda lid, word, off=0: W('doless', lid, word, off)
 dc = lambda lid, off=0: G('doless', lid, off)
 END = E('doless')
-card(dw('when', 'Britain', -0.2), 0.0035, px(340))
 drum(C2, dw('when', 'Britain', 0.1), 0.8, 0.0, ring=0.8)
-rustle(0.6, dc('pages', 1.4), 0.0026, 0.0)
-card(dw('pages', 'millions', -0.3), 0.0035, px(990))
 strokes((A2, E2, G2, A2, D2, E2), dw('pages', 'websites', 0.0), 0.62, step=0.15)
 # at home, on an evening: a renewal, a tax, which site to trust; the same advice on two pages, in different words
 pressed(A2, dc('need', 0.3), 0.7, 0.0, ring=0.34)
-for lid, word, off, x in (('need', 'passport', -0.2, 500), ('need', 'part', -0.1, 1400), ('need', 'trust', -0.2, 1400)):
-    tap(dw(lid, word, off), 0.003, px(x))
-card(dw('same', 'same', -0.2), 0.0035, px(385)); card(dw('same', 'same', 0.3), 0.0035, px(1535))
 pressed(E2, dw('same', 'different', 0.1), 0.65, 0.0, ring=0.34)
-tap(dw('same', 'time', -0.2), 0.003, px(385)); tap(dw('same', 'sure', -0.2), 0.003, px(1535))
 # what the websites cost; then nothing under "Something has to change"
-card(dw('cost', '560', -0.3), 0.0035, px(960))
 pressed(A2, dw('cost', '560', 0.2), 0.7, 0.0, ring=0.34); pressed(E2, dw('cost', '560', 1.3), 0.6, 0.0, ring=0.34)
-tap(dc('change', 0.3), 0.003, px(960))
 # October 2010: the review, C major, the open drum; her advice; the old pages into the archive box, one texture
-card(dw('review', 'Martha', -0.2), 0.0035, px(400))
 drum(C2, dw('review', 'Martha', 0.3), 0.75, 0.0, ring=0.9)
-tap(dw('advice', 'website', -0.2), 0.0028, px(400)); pressed(E2, dw('advice', 'website', 0.1), 0.6, 0.0)
-tap(dw('advice', 'team', -0.2), 0.0028, px(400)); pressed(G2, dw('advice', 'team', 0.1), 0.6, 0.0)
-tap(dw('archive', 'move', -0.2), 0.0028, px(400)); tap(dw('archive', 'Write', -0.2), 0.0028, px(400))
-box(dw('archive', 'archive', -0.8), 0.004, px(1640))
-rustle(dw('archive', 'archive', -0.2), 3.0, 0.0028, px(1300))
+pressed(E2, dw('advice', 'website', 0.1), 0.6, 0.0)
+pressed(G2, dw('advice', 'team', 0.1), 0.6, 0.0)
 # 2011: the new team; the two old sites, page by page, and what people searched for
-card(dw('gds', 'team', -0.2), 0.0035, px(500))
-stack(dw('read', 'Directgov', -0.3), 0.0035, px(440))
-tap(dw('read', 'searched', -0.2), 0.003, px(780))
-for i, x in enumerate((780, 780, 1070)):
-    tap(dw('read', 'searched', -0.2 + 0.25 * (i + 1)), 0.0026, px(x))
 # the sort: most pages into the box, one texture; the few needs, landing one at a time; a single pressed G under "a real need"
-rustle(dc('keep', 0.1), max(3.6, dc('rules') - dc('keep') - 0.8), 0.0026, px(1200))
 _sort0, _sortD = dc('keep', 0.1), max(3.6, dc('rules') - dc('keep') - 0.8)
-for k in range(8):
-    tap(_sort0 + (k * 5 + 2) / 40 * 0.86 * _sortD + 0.14 * _sortD, 0.0024, px((1150, 1310, 1470, 1630)[k % 4]))
 pressed(G2, dw('keep', 'need', 0.1), 0.55, 0.0)
 # 2012: the principles; "do less", and the open drum alone
-card(dc('rules', 0.2), 0.0035, px(540))
-tap(dw('rules', 'first', -0.2), 0.0028, px(540)); tap(dw('rules', 'second', -0.2), 0.0028, px(540))
 drum(C2, dw('rules', 'less', 0.4), 0.75, 0.0, ring=1.0)
-card(dc('only', -0.1), 0.0035, px(1380))
 # October 2012 to spring 2013: one site, one note; the few pages; the tests, E and G; the award, a small rising figure
-card(dc('launch', 0.0), 0.0035, px(960))
 drum(C2, dc('launch', 0.3), 0.75, 0.0, ring=0.9)
-for i in range(4):
-    tap(dw('launch', 'fewer', -0.2 + i * 0.16), 0.0022, px(700 + i * 132))
-card(dw('launch', 'replaces', -0.2), 0.0035, px(390))
-card(dc('test', 0.1), 0.0035, px(1530))
 pressed(E2, dw('test', '61', 0.1), 0.55, 0.0); pressed(G2, dw('test', 'minute', 0.2), 0.55, 0.0)
-card(dc('save', 0.1), 0.0035, px(390))
-card(dc('award', 0.1), 0.0035, px(1530))
 strokes((C2, E2, G2), dw('award', 'Design', 0.2), 0.6, step=0.36)
 # a data team's work piles up the same way: one texture, and a pressed A; stopped: the pile thins, the kept sheets drawn into a row
-rustle(dc('data', 0.2), max(2.4, dw('data', 'reason', 0) - dc('data')), 0.0024, px(960))
 pressed(A2, dw('data', 'piles', 0.2), 0.6, 0.0)
-tap(dw('data', 'reason', -0.2), 0.003, px(960))
-slide(dw('back', 'time', -0.2), 1.2, 0.0032, px(960))
-tap(dw('back', 'time', 0.2), 0.003, px(960))
-tap(dw('choose', 'simpler', -0.2), 0.003, px(960))
 # the mark, whole, as the six kept sheets become the title card; the open drum's last note is gone before the next chapter
 mark(dc('breath', -1.4), 0.62, until=END)
 
@@ -268,24 +231,8 @@ mark(dc('breath', -1.4), 0.62, until=END)
 LV[0] = 0.9
 ww = lambda lid, word, off=0: W('wall', lid, word, off)
 wc = lambda lid, off=0: G('wall', lid, off)
-for i, word in enumerate(('minimalism', 'kaizen', 'Ubuntu', 'decentralisation')):
-    card(ww('series', word, -0.2), 0.0032, px(340 + i * 415))
 pressed(G2, ww('first', 'minimalism', 0.1), 0.55, px(340))
-card(ww('univ', 'Helena', -0.2), 0.0035, px(1360))
-tap(ww('list', 'Tuesday', -0.2), 0.003, px(960))
-rustle(ww('list', 'everything', -0.3), 3.4, 0.0026, px(960))
-tap(ww('reports', '17', 0.0), 0.003, px(300))
-tap(ww('meetings', 'eight', 0.2), 0.003, px(1150))
-tap(ww('alerts', '60', 0.0), 0.003, px(1650)); tap(ww('alerts', 'nothing', -0.2), 0.003, px(1650))
 pressed(A2, ww('alerts', 'nothing', 0.5), 0.55, 0.0)
-for word, x in (('request', 330), ('project', 1180), ('night', 1610)):
-    tap(ww('reason', word, -0.2), 0.003, px(x))
-card(ww('study', 'Nature', -0.3), 0.0035, px(960))
-for i in range(5):
-    tap(ww('uni', 'ideas', -0.2 + i * 0.28), 0.0022, px(546 + i * 184))
-pen(ww('uni', 'away', -0.3), 0.5, 0.0045, px(1106), 2)
-tap(ww('ask', 'keep', -0.2), 0.003, px(760)); tap(ww('ask', 'stop', -0.2), 0.003, px(1160))
-tap(ww('ask', 'together', -0.2), 0.003, px(960))
 strokes((C2, G2), ww('ask', 'together', 0.3), 0.6, step=0.55, until=E('wall'))
 
 # 3. What each thing is for: the question; the reports people read, outlined; the three agreements, a card each; the week they design:
@@ -293,15 +240,6 @@ strokes((C2, G2), ww('ask', 'together', 0.3), 0.6, step=0.55, until=E('wall'))
 LV[0] = 0.9
 uw = lambda lid, word, off=0: W('use', lid, word, off)
 uc = lambda lid, off=0: G('use', lid, off)
-tap(uw('who', 'who', -0.2), 0.003, px(960))
-slide(uw('logs', '21', -0.2), 1.0, 0.003, px(520))
-tap(uw('logs', '260', -0.2), 0.003, px(330)); tap(uw('logs', 'nobody', -0.2), 0.003, px(380))
-tap(uc('agree', 0.2), 0.003, px(960))
-card(uc('meeting', 0.1), 0.0035, px(380)); card(uc('alert', 0.1), 0.0035, px(960)); card(uc('report', 0.1), 0.0035, px(1540))
-card(uc('week', 0.0), 0.0035, px(330)); card(uw('week', 'design', -0.2), 0.0035, px(810))
-for lid, word, off in (('week', 'stand-up', -0.2), ('week', 'planning', -0.2), ('more', 'review', -0.2), ('more', 'one-to-one', -0.3)):
-    tap(uw(lid, word, off), 0.0026, px(810))
-tap(uw('hours', 'three', -0.2), 0.003, px(570))
 pressed(E2, uw('hours', 'three', 0.0), 0.55, 0.0); drum(C2, uw('hours', 'eight', 0.5), 0.7, 0.0, ring=0.8, until=E('use'))
 
 # 4. Stopped, openly: the week from Monday, the old one struck through; the board; the notes to the last readers, one texture; a copy
@@ -310,32 +248,9 @@ pressed(E2, uw('hours', 'three', 0.0), 0.55, 0.0); drum(C2, uw('hours', 'eight',
 LV[0] = 0.9
 sw = lambda lid, word, off=0: W('stop', lid, word, off)
 sc = lambda lid, off=0: G('stop', lid, off)
-card(S0('stop') + 0.4, 0.0032, px(330))
-card(sw('monday', 'week', -0.2), 0.0035, px(810))
-pen(sw('monday', 'stop', -0.2), 1.0, 0.0045, px(330), 3)
-card(sw('monday', 'board', -0.3), 0.0035, px(1440))
-tap(sw('monday', 'round', -0.2), 0.003, px(1440))
-rustle(sw('write', 'writes', -0.1), 2.4, 0.0024, px(1100))
-tap(sw('write', 'readers', -0.2), 0.003, px(1440))
-tap(sw('reply', 'Most', -0.1), 0.003, px(1440)); ticked(sw('reply', 'figures', -0.2), 0.0045, px(1440))
-card(sc('case', 0.1), 0.0035, px(1390))
-tap(sw('case', '21', -0.2), 0.0028, px(1390)); tap(sw('case', '17', -0.2), 0.0028, px(1390))
-for i in range(4):
-    click(sw('off', 'switched', -0.2 + 0.1 + i * 0.5), 0.0028, px(260 + i * 180))
-tap(sw('off', 'switched', 0.0), 0.003, px(519))
 drum(C2, sw('off', 'deleted', 0.5), 0.7, 0.0, ring=0.9)
-tap(sw('undo', 'December', -0.3), 0.003, px(519))
-box(sc('gov', 0.0), 0.004, px(960))
-tap(sw('gov', 'pages', -0.2), 0.003, px(960)); tap(sw('gov', 'archived', -0.2), 0.003, px(960))
 strokes((G2, C2), sw('gov', 'archived', 0.3), 0.6, step=0.62)
-rustle(sw('alerts', 'kind', -0.4), 1.6, 0.0024, px(1400))
-tap(sw('alerts', 'fires', -0.3), 0.003, px(1430))
-card(sc('nothing', 0.0), 0.0032, px(1460))
-rustle(sc('nothing', 0.2), 2.0, 0.0022, px(1300))
-slide(sw('twelve', '12', -0.2), 1.4, 0.003, px(1400))
 mark(sw('twelve', '12', 0.0), 0.5, crowd=(A2, G2, E2, A2, D2, G2), step=0.14, thin=(G2,), gap=0.9, last=0.9)
-tap(sw('twelve', 'act', -0.2), 0.003, px(1430)); tap(sw('twelve', 'note', -0.2), 0.003, px(1430))
-tap(sw('choose', 'chooses', -0.2), 0.003, px(960)); tap(sw('choose', 'undone', -0.3), 0.003, px(960))
 drum(C2, sw('choose', 'undone', 0.5), 0.65, 0.0, ring=0.8, until=E('stop'))
 
 # 5. Less, but better: the three works, a card each, and one open stroke under "simplest"; the two ideas from Japan, two cards; nobody's
@@ -343,19 +258,8 @@ drum(C2, sw('choose', 'undone', 0.5), 0.65, 0.0, ring=0.8, until=E('stop'))
 LV[0] = 0.9
 rw = lambda lid, word, off=0: W('roots', lid, word, off)
 rc = lambda lid, off=0: G('roots', lid, off)
-for i in range(3):
-    card(rw('art', 'art', -0.2 + i * 0.67), 0.003, px(355 + i * 330))
-card(rw('art', 'States', -0.3), 0.0035, px(1510))
 drum(C2, rw('art', 'simplest', 0.2), 0.65, 0.0, ring=0.9)
-tap(rw('japan', 'ideas', -0.2), 0.003, px(960))
-card(rc('kanso', 0.1), 0.0035, px(530)); card(rc('lean', 0.1), 0.0035, px(1390))
-tap(rw('never', 'never', -0.2), 0.003, px(960))
-rustle(rw('never', 'Every', -0.2), 1.4, 0.0022, px(960))
-tap(rw('never', 'answered', -0.2), 0.003, px(960))
-card(rw('rams', 'Dieter', -0.2), 0.0035, px(960))
 drum(C2, rw('rams', 'better', 0.5), 0.7, 0.0, ring=1.0)
-slide(rw('better', 'stays', -0.3), 0.8, 0.003, px(960))
-tap(rw('better', 'Better', -0.2), 0.003, px(960)); tap(rw('better', 'stays', -0.2), 0.003, px(960))
 
 # 6. The time back: June's card; the eight bars, a tap for every two; their gaps closing, a slide, and C with G under "one person's whole
 #    week"; every alert now matters, a tick; the 21 onto the platform, one texture, their owners a pen; the rule's card and a pressed E; the
@@ -363,32 +267,54 @@ tap(rw('better', 'Better', -0.2), 0.003, px(960)); tap(rw('better', 'stays', -0.
 LV[0] = 0.9
 tw = lambda lid, word, off=0: W('time', lid, word, off)
 tc = lambda lid, off=0: G('time', lid, off)
-card(tc('june', 0.1), 0.0035, px(460))
-for i in range(4):
-    tap(tw('hours', 'five', -0.2 + 0.35 * i), 0.0024, px(400 + i * 336))
-slide(tw('hours', 'Across', -0.2), 1.6, 0.003, px(960))
-tap(tw('hours', 'whole', -0.2), 0.003, px(960))
 strokes((C2, G2), tw('hours', 'whole', 0.2), 0.6, step=0.5)
-ticked(tw('sam', 'matters', -0.3), 0.0045, px(1290))
-card(tc('goes', 0.1), 0.0035, px(470))
-rustle(tw('goes', 'rebuilding', -0.2), 2.2, 0.0024, px(1340))
-pen(tw('goes', 'owner', -0.2), 0.6, 0.0045, px(1340), 2)
-card(tc('rule', 0.1), 0.0035, px(960))
 pressed(E2, tw('rule', 'owner', 0.4), 0.55, 0.0)
-tap(tw('review', 'quarterly', -0.2), 0.003, px(960))
-card(tw('review', 'wall', -0.4), 0.0032, px(960)); tap(tw('review', 'wall', -0.2), 0.003, px(960))
 
 # 7. On Monday: GOV.UK's plain page, and the open drum under "did it well"; Helena's two pills; the four things to do, a card each; the
 #    next film; the last line's two pills; and the mark at the close, its last note the open drum alone as the end card comes
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
-card(S0('monday') + 0.7, 0.0035, px(960))
-tap(mw('back', 'found', -0.2), 0.003, px(380)); tap(mw('back', 'less', -0.2), 0.003, px(1540))
 drum(C2, mw('back', 'well', 0.4), 0.7, 0.0, ring=0.9)
-tap(mw('helena', 'kept', -0.2), 0.003, px(1240)); tap(mw('helena', 'week', -0.2), 0.003, px(1240))
-for lid, x in (('list', 530), ('who', 1390), ('stop', 530), ('time', 1390)):
-    card(mc(lid, 0.15), 0.0032, px(x))
-tap(mw('next', 'One', -0.1), 0.003, px(960))
-tap(mw('take', 'Keep', -0.1), 0.003, px(660)); tap(mw('take', 'stop', -0.1), 0.003, px(1260))
 mark(mw('take', 'together', 0.6), 0.6, crowd=(E2, A2, G2, D2, E2, A2, G2), step=0.13, thin=(G2, E2), tstep=0.62, gap=1.1, last=1.3, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'O': ('doless', 'carmen', 'lo_boardO'), 'A': ('wall', 'carmen', 'lo_boardA'), 'B': ('wall', 'helena', 'lo_boardB'),
+                    'C': ('use', 'carmen', 'lo_boardC'), 'D': ('roots', 'carmen', 'lo_boardD'), 'E': ('time', 'helena', 'lo_boardE'),
+                    'M': ('monday', 'helena', 'lo_boardM'), 'N1': ('wall', None, 'lo_note1'), 'N2': ('use', None, 'lo_note2'),
+                    'N3': ('time', None, 'lo_note3')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+
+for name in ('O', 'A', 'B', 'C', 'D', 'E', 'M'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3'):
+    written(name, scratch, 0.004)
+# the chat: Ivy's message to a report's last reader as it goes, and the answer as it arrives
+pop(G('stop', 'write') + 1.0 + 1.6, 0.0022, px(400), True)
+pop(G('stop', 'reply') + 1.6 + 1.4, 0.0022, px(400), False)

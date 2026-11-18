@@ -1,6 +1,6 @@
 # Measure the work, not the people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360); made again in ink line on 18 November 2026 (PR #433)
+*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360); made again in ink line on 18 November 2026 (PR #433); its cars, arms and seats put right the same day (PR #443)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/measure-the-work/)
 

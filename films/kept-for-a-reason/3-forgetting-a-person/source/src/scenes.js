@@ -246,3 +246,7 @@ scene("reason",(ctx,S,t,sc)=>{const c=sc.cues,T=fp_once(sc,"T",()=>({page:c.page
   ]);
   fp_kick(ctx,S,t,8,sc.name,T.page);
   dp_end(ctx,S,t,c.breath,FP_TITLE,"A person can ask. You must be able to answer.","Film 3 of 5",FP_SERIES);});
+
+// Her request opens on a cut (twice.py, 18 November 2026): its form, "the data you hold about me", came in over the four rights'
+// "hold about me", apart
+ag_cutInto(["her"]);

@@ -396,5 +396,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t,{
   vign(ctx,S);});
 
 // where the chapters meet (joins.js): the model gone stale, the agent's draft, the people who decide and the change end to end are later
-// pictures with the same words, or the agent, in another place, so what was there leaves first, over the bare screen
-const CHAPTER_JOINS={leave:["stale","draft","decide","e2e"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};
+// pictures with the same words, or the agent, in another place, so what was there leaves first, over the bare screen; so is the
+// wrong model, whose "completion rate v3" came in while the people's "completion rate" was still fading (twice.py, 18 November 2026).
+// The end opens on a cut: another place, whose "what a credential is" came in over the last chapter's "a credential"
+const CHAPTER_JOINS={leave:["stale","draft","decide","wrong","e2e"],cut:["end"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};

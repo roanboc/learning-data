@@ -202,11 +202,12 @@ scene("roles",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({three:wAt(sc
       wc_hand(x,"the names vary from one policy to the next",960,640,{p:fin(tt,P.names,1.4),size:36,col:WC_DARK,align:"center"});}},
     // the registrar's office: Mei at her desk; she owns award, and she keeps it right
     {at:P.ow,place:"regClose",keys:[[P.ow,960,540,1],[P.ow+0.2,920,520,1.08]],d:4,push:0.012,draw:(x,tt)=>mei(x,tt,0,fin(tt,P.meid,0.5))},
-    // her desk from above: her log book, of which records are the same learner: decided by her, and why
-    {at:P.log,place:"meiTop",keys:[[P.log,558,557,1.72],[P.why-0.6,566,560,1.74]],d:2.2,push:0.004,draw:(x,tt)=>{wd_decBook(x);
+    // her desk from above: her log book, of which records are the same learner: decided by her, and why. The cards and the
+    // decision book both say "Mei Tanaka", so the changes between them are cuts: a dissolve showed her name twice, apart
+    {cut:true,at:P.log,place:"meiTop",keys:[[P.log,558,557,1.72],[P.why-0.6,566,560,1.74]],d:2.2,push:0.004,draw:(x,tt)=>{wd_decBook(x);
       wd_logBook(x,{lit:[0,fin(tt,P.same,0.5),fin(tt,P.log+0.4,0.5),fin(tt,P.why,0.5)],rows:i=>fin(tt,P.log+0.15+0.12*i,0.4)});}},
     // her desk again: one person, both roles
-    {at:P.both,place:"regClose",keys:[[P.both,920,520,1.08],[P.both+0.1,900,510,1.12]],d:3,push:0.01,draw:(x,tt)=>mei(x,tt,fin(tt,P.bth-0.2,0.9),1)},
+    {cut:true,at:P.both,place:"regClose",keys:[[P.both,920,520,1.08],[P.both+0.1,900,510,1.12]],d:3,push:0.01,draw:(x,tt)=>mei(x,tt,fin(tt,P.bth-0.2,0.9),1)},
     // the platform team: Sam's desk, the platform's tables; he can change any of them, but what award means is Mei's
     {at:P.cu,place:"platClose",keys:[[P.cu,960,540,1],[P.cu+0.2,1000,520,1.08]],d:4,push:0.012,draw:(x,tt)=>{
       gv_behind(x,"sam",GV_PX.seat[0],GV_PX.top,GV_PX.seat[1],{pose:"reach",flip:true,t:tt});x.drawImage(gv_place("platDesk"),0,0,W,H);wd_platScreens(x,fin(tt,P.tab,0.5));

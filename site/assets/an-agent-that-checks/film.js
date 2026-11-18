@@ -3663,10 +3663,12 @@ scene("today",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     // his board, close: every change that nobody else owns, and the Faculty of Health's goes up
     {cut:true,at:P.bd,place:"boardData",keys:[[P.bd,960,480,1.04],[P.bd+0.1,960,470,1]],d:2.4,push:0.02,draw:(x,tt)=>ac_queue(x,tt,clamp((tt-P.owns+0.2)/0.6,0,1))},
     // across the faculty's office, the advisers' desk: the tray for the call list, empty, and an adviser waiting
-    {at:P.adv,place:"advisers",keys:[[P.adv,960,556,1.1],[P.adv+0.1,970,552,1.14]],d:3,draw:(x,tt)=>{
+    // a cut: this shot and the one before both say "call list", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.adv,place:"advisers",keys:[[P.adv,960,556,1.1],[P.adv+0.1,970,552,1.14]],d:3,draw:(x,tt)=>{
       gv_behind(x,"ac_adviser",A.seat[0],A.top,A.seat[1],{pose:"ac_wait",expr:"concerned",t:tt});ac_advisersDesk(x);ac_cradle(x);ac_tray(x,0);}},
     // back at the faculty: Anil waits, the sheet sent back beside his keyboard, and the window's light moves across the desk
-    {at:P.back,place:"faculty",keys:[[P.back,930,520,1.3],[P.back+0.1,920,525,1.32]],d:3,draw:(x,tt)=>{
+    // a cut: this shot and the one before both say "call list", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.back,place:"faculty",keys:[[P.back,930,520,1.3],[P.back+0.1,920,525,1.32]],d:3,draw:(x,tt)=>{
       gv_behind(x,"anil",seat[0],GV_FX.top,seat[1],{pose:"listen",expr:"concerned",flip:true,t:tt});ac_facDesk(x);ac_flatSheet(x,1160,GV_FX.top+8,220,true);
       ac_formSmall(x,tt,AC_LFORM);ac_dayLight(x,clamp((tt-P.back)/2.6,0,1),0.7);}}]);
   wc_year(ctx,56,72,"Today",fin(t,0.3,0.5)*(1-fin(t,P.ls,0.4)));
@@ -3689,7 +3691,8 @@ scene("skill",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     {cut:true,at:P.bc,place:"boardGov",keys:[[P.bc,960,480,1],[P.bc+0.1,1040,480,1.05]],d:4,push:0.02,draw:(x,tt)=>
       ac_boardGov(x,tt,{fresh:clamp((tt-P.as-0.05)/1.2,0,1),lines:clamp((tt-P.steps)/(P.chg+0.4-P.steps),0,1)})},
     // the checklist, printed, on Yusuf's desk: one page, in plain words
-    {at:P.pg,place:"sheet",keys:[[P.pg,960,540,1]],push:0.03,draw:(x,tt)=>ac_checklist(x,tt,{ink:1})},
+    // a cut: this shot and the one before both say "How we review" and "for governance", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.pg,place:"sheet",keys:[[P.pg,960,540,1]],push:0.03,draw:(x,tt)=>ac_checklist(x,tt,{ink:1})},
     // the board again: Jun's page comes off, and copies of the checklist go up in its place, for the data team, for the faculty and
     // for the agent
     {at:P.op,place:"boardGov",keys:[[P.op,1060,480,1.04],[P.op+0.1,1080,480,1.08]],d:3,push:0.02,draw:(x,tt)=>
@@ -3751,12 +3754,14 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
       gv_behind(x,"anil",seat[0],GV_FX.top,seat[1],{pose:"listen",pose2:"write",mix:gv_io(tt,P.conf-0.4,P.conf+1.8,0.3),flip:true,t:tt,expr:typing?null:"smile"});
       ac_facDesk(x);ac_smallReply(x,tt,{a:fin(tt,P.conf-0.3,0.4),typed:clamp((tt-P.conf)/1.6,0,1)});}},
     // the table again: award code identifies no one, with Anil's reason; name stays direct
-    {at:P.cl,place:"screenBig",keys:[[P.cl,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:1,okAt:P.classed-0.2,why:clamp((tt-P.reason+0.2)/0.8,0,1)})},
+    // a cut: this shot and the one before both say "Add the advisers call list", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.cl,place:"screenBig",keys:[[P.cl,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:1,okAt:P.classed-0.2,why:clamp((tt-P.reason+0.2)/0.8,0,1)})},
     // Yusuf's desk: the sign-off sheet, filled from the drafts; the faculty and Yusuf write the meaning first, then Jun's data team approves the change, each in gold; then it's signed
     {at:P.ow,place:"paperDesk",keys:[[P.ow,960,540,1]],push:0.02,draw:(x,tt)=>ac_signed(x,tt,{p:clamp((tt-P.ow-0.1)/0.9,0,1),
       ap:[fin(tt,P.fac-0.2,0.9),fin(tt,P.yusuf-0.2,0.9),fin(tt,P.jun-0.2,0.9)],signed:fin(tt,P.sig,0.6)})},
     // the advisers' desk: the list is in the tray, and an adviser lifts the phone
-    {at:P.calls,place:"advisers",keys:[[P.calls,960,556,1.1],[P.calls+0.1,970,552,1.14]],d:3,draw:(x,tt)=>{const lift=fin(tt,P.calls+1.0,0.7);
+    // a cut: this shot and the one before both say "call list", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.calls,place:"advisers",keys:[[P.calls,960,556,1.1],[P.calls+0.1,970,552,1.14]],d:3,draw:(x,tt)=>{const lift=fin(tt,P.calls+1.0,0.7);
       gv_behind(x,"ac_adviser",A.seat[0],A.top,A.seat[1],{pose:"listen",pose2:"ac_call",mix:lift,expr:"smile",t:tt,carry:lift>0.5?ac_handset:null});
       ac_advisersDesk(x);if(lift<=0.5)ac_cradle(x);ac_tray(x,fin(tt,P.calls+0.1,0.8));}},
     // who decided what: the findings fade back; a gold thread runs from each to the person who decided it
@@ -3784,7 +3789,8 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     {at:P.who,place:"paperDesk",keys:[[P.who,960,540,1]],push:0.02,draw:(x,tt)=>{ac_whoPage(x,tt,{own:fin(tt,P.owners-0.2,0.6)});
       ac_agentCard(x,tt,1260,380,fin(tt,P.cant-0.3,0.5),clamp((tt-P.cant)/0.6,0,1));ac_tagAt(x,tt,P.owns-0.1,null,1540,650,"people only",{size:34,wash:GV.gold,washA:0.35});}},
     // the night we imagined: the agent's note, and the empty signature line, ringed in pencil
-    {at:P.nt,place:"screenNight",keys:[[P.nt,960,540,1]],push:0.02,draw:(x,tt)=>{ac_form(x,tt,{q:1,draft:1,ring:clamp((tt-P.nt-0.6)/1.0,0,1)});ac_note(x,tt,{});}},
+    // a cut: this shot and the one before both say "Faculty of Health", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.nt,place:"screenNight",keys:[[P.nt,960,540,1]],push:0.02,draw:(x,tt)=>{ac_form(x,tt,{q:1,draft:1,ring:clamp((tt-P.nt-0.6)/1.0,0,1)});ac_note(x,tt,{});}},
     // the desk again: the binder's line goes green, and Yusuf writes where it runs
     {at:P.gr,place:"desk26",keys:[[P.gr,960,540,1],[P.gr+0.1,1060,480,1.22]],d:1.8,push:0,draw:(x,tt)=>{
       ac_open26(x,tt,{hi:clamp((tt-P.green+0.2)/0.9,0,1),hw:P.hw.map(s=>clamp((tt-s+0.1)/0.8,0,1))});ac_rulesPage(x,tt,{star:1});}}]);
@@ -3802,7 +3808,8 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
     {at:0,place:"desk12",keys:[[0,1300,500,1.3],[P.pb,960,540,1]],d:1.8,draw:(x,tt)=>{ac_closed12(x);
       ac_checkSheet(x,tt,{read:rowAt(tt,P.follow-0.2,P.pb+0.2),readA:gv_io(tt,P.follow-0.4,P.pb+0.6,0.3)});}},
     // policy 12's page, as Off the shelf left it: its last line struck through, can go; the star reads along it, and finds nothing to check
-    {at:P.pg,place:"page",keys:[[P.pg,960,540,1],[P.staff-0.9,740,777,1.78]],d:1.6,push:0,draw:(x,tt)=>ac_policy12(x,tt,{star:clamp((tt-P.no)/1.0,0,1),
+    // a cut: this shot and the one before both say "Data definitions", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.pg,place:"page",keys:[[P.pg,960,540,1],[P.staff-0.9,740,777,1.78]],d:1.6,push:0,draw:(x,tt)=>ac_policy12(x,tt,{star:clamp((tt-P.no)/1.0,0,1),
       starA:gv_io(tt,P.no-0.2,P.care2+1.0,0.3),q:fin(tt,P.care2,0.5),notesOut:fin(tt,P.staff-1.0,0.5)})},
     // the data team's room: the checklist pinned on their board; Anil and Jun read it
     {at:P.rm,place:"data",keys:[[P.rm,760,520,1.2],[P.rm+0.1,780,515,1.24]],d:3,draw:(x,tt)=>{ac_queueSmall(x,{chk:1});

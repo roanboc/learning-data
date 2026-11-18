@@ -173,7 +173,8 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       cardLit:k=>FROM.includes(k)?gv_io(tt,P.keeps,s5,0.5)*0.7:0})},
     // a product's owner, for one: at home in the data team's repository; the catalogue copies it, from the repository; the platform's page
     // was typed by hand
-    {at:s5,keys:[[s5,960,540,1.0]],push:0.03,draw:(x,tt)=>oh_ownerCopies(x,tt,{home:fin(tt,s5+0.2,0.6),homeLit:gv_io(tt,P.lives,c.copyit,0.5),copies:fin(tt,c.copyit-0.1,0.7),
+    // a cut: this shot and the one before both say "The data team's", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:s5,keys:[[s5,960,540,1.0]],push:0.03,draw:(x,tt)=>oh_ownerCopies(x,tt,{home:fin(tt,s5+0.2,0.6),homeLit:gv_io(tt,P.lives,c.copyit,0.5),copies:fin(tt,c.copyit-0.1,0.7),
       way:clamp((tt-P.copyIt+0.6)/0.8,0,1),tag:fin(tt,P.copyIt+0.1,0.5),hand:fin(tt,P.pf+0.6,0.5),platLit:fin(tt,P.pf+0.6,0.6)})},
     // as with the annals: the sealed chest, and a hand that reaches for it, and stops
     {at:s6,place:"sealRoom",keys:[[s6,960,560,1.0]],push:0.03,draw:(x,tt)=>oh_kingHand(x,clamp((tt-s6-0.2)/1.1,0,1),clamp((tt-P.nobody-0.3)/1.2,0,1))},
@@ -282,7 +283,8 @@ scene("theirs",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,
     {at:s2,place:"ohMap",keys:[[s2,960,514,1.05],[s2+0.1,960,514,1.07]],d:4,draw:(x,tt)=>oh_map(x,{home:1,copy:1,from:1,use:1,flow:1,useEye:fin(tt,P.toRead-0.1,0.5),
       chip:(k,i)=>OH_APP(k).chips[i][1]?{pen:fin(tt,P.toChange-0.2+K(k)*0.08,0.5)}:{eye:fin(tt,P.toRead-0.2+K(k)*0.08,0.5)}})},
     // the planner's next request: the page names Clara now, from the repository, and the request goes straight to her
-    {at:s3,place:"screenFac",keys:[[s3,960,430,1.0],[s3+0.1,880,430,1.2]],d:2,draw:(x,tt)=>oh_tablePage(x,tt,{owner:"Clara Jensen",from:1,press:gv_io(tt,c.next+0.2,c.next+0.6,0.15),
+    // a cut: this shot and the one before both say "from the repository", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:s3,place:"screenFac",keys:[[s3,960,430,1.0],[s3+0.1,880,430,1.2]],d:2,draw:(x,tt)=>oh_tablePage(x,tt,{owner:"Clara Jensen",from:1,press:gv_io(tt,c.next+0.2,c.next+0.6,0.15),
       sent:fin(tt,P.straight-0.2,0.5),sentText:"request · to Clara Jensen",sentCol:GV.gold,sentInk:GV.goldInk})},
     // Planning's room: Clara reads it, and approves it, in a day
     {cut:true,at:s4,place:"planning",keys:[[s4,1100,520,1.25],[s4+0.1,1110,516,1.28]],d:3,draw:(x,tt)=>{oh_productCard(x,600,190,{ring:0});

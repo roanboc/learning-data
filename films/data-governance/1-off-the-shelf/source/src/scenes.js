@@ -359,7 +359,9 @@ scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,
       os_sticky(x,560,380,440,230,-0.04,["where does","it run?"],56,fin(tt,P.where-0.35,0.25),clamp((tt-P.where+0.1)/1.0,0,1));}},
     // the page, close: each line marked as it's sorted, green where it can run in the work, gold where it's a decision someone owns,
     // grey where it can go; what he writes beside it; his key at the top
-    {at:P.b,place:"policy",keys:[[P.b,960,540,1]],push:0.035,draw:(x,tt)=>os_policy(x,k=>fin(tt,P.hi[k]-0.45,k===4?0.8:0.45),k=>fin(tt,P.note[k],0.7),
+    // The desk and the page, close, show the same lines of policy 12 ("Policy 12", "Data definitions", "Business terms are …"), so the page comes in on a cut: a dissolve showed them twice (twice.py,
+    // 18 November 2026)
+    {cut:true,at:P.b,place:"policy",keys:[[P.b,960,540,1]],push:0.035,draw:(x,tt)=>os_policy(x,k=>fin(tt,P.hi[k]-0.45,k===4?0.8:0.45),k=>fin(tt,P.note[k],0.7),
       j=>fin(tt,P.key[j],0.6),fin(tt,P.hi[6]+0.35,0.5))}]);
   wc_paperOver(ctx,S);});
 

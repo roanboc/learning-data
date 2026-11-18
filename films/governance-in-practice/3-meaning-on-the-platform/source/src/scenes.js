@@ -232,7 +232,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({tb:wAt(sc,"s
     {at:P.dy,place:"deskGov",keys:[[P.dy,960,540,1]],push:0.02,draw:(x,tt)=>{gm_reports(x,{day:1,tick:fin(tt,P.both+0.8,0.6),n:1,seal:1,sent:1,lit:[fin(tt,P.wd,0.6),fin(tt,P.wd,0.6)]});
       gm_same(x,{met:fin(tt,P.met,0.8),wd:fin(tt,P.wd,0.8)});}},
     // Yusuf's board, as the film began it: one page, a setting and one count, read by people, reports and agents
-    {at:P.ls,place:"boardGov",keys:[[P.ls,960,500,1]],push:0.02,draw:(x,tt)=>gm_nowBoard(x,tt,{page:1,copy:1,check:1,cat:1,dial:1,book:1,read:[1,1,1],lit:gv_io(tt,P.ls+0.3,P.board,0.5)})},
+    // The desk's reports and the board both show "awards conferred" and "6 credit points", so it comes in on a cut: a dissolve showed them twice
+    // (twice.py, 18 November 2026)
+    {cut:true,at:P.ls,place:"boardGov",keys:[[P.ls,960,500,1]],push:0.02,draw:(x,tt)=>gm_nowBoard(x,tt,{page:1,copy:1,check:1,cat:1,dial:1,book:1,read:[1,1,1],lit:gv_io(tt,P.ls+0.3,P.board,0.5)})},
     // the data team's board: the next film's card lifts
     {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,1],lift:[0,0,0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"Tuesday 24 November 2026",gv_io(t,P.dy+0.3,P.ls-0.2,0.4));

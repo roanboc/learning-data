@@ -2797,6 +2797,11 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Now the questions appear",EAC,"A question matters when someone will act on its answer, in time.","Film 8 of 11");});
 
+// where the chapters meet (From words to data's joins.js; twice.py, 18 November 2026): half the answer and what to build are later
+// pictures on the same screen whose words came in over the same words in the chapter before ("replace assets before they fail",
+// "households falling behind"), so what was there leaves first, over the bare screen
+const CHAPTER_JOINS={leave:["half","build"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};
+
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
 // the voice breathes between sentences: SGAP after a line that ends a sentence, GAP where the sentence runs on into the next line, and GAP after a chapter's last line (its tail follows)

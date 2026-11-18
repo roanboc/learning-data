@@ -3639,7 +3639,8 @@ scene("asking",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({card:c.toda
     {at:P.count,place:"desk",keys:[[P.count,960,540,1]],push:0.02,draw:(x,tt)=>gk_learners(x,tt,{u:clamp((tt-P.ct)/1.8,0,1),near:fin(tt,P.unit,0.6),
       note:clamp((tt-P.unit-0.1)/1.2,0,1)})},
     // in September: no number to write in, and nobody to ask
-    {at:P.sept,place:"faculty",keys:[[P.sept,960,540,1]],push:0.025,draw:(x,tt)=>{gk_anil(x,tt,{anil:{expr:tt>P.nob?"worried":"calm"},draw:q=>gk_placesForm(q,tt,{n:"?"})});
+    // a cut: this shot and the one before both say "Health informatics", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.sept,place:"faculty",keys:[[P.sept,960,540,1]],push:0.025,draw:(x,tt)=>{gk_anil(x,tt,{anil:{expr:tt>P.nob?"worried":"calm"},draw:q=>gk_placesForm(q,tt,{n:"?"})});
       wc_hand(x,"whom to ask?",1250,330,{size:44,w:700,col:WC_PENCIL,align:"center",p:clamp((tt-P.whom)/0.9,0,1)});gk_memory(x,1);}},
     // he asked around: three emails across the campus, and one came back with a copy
     {at:P.around,place:"campus",keys:[[P.around,960,540,1]],push:0.02,draw:(x,tt)=>{gk_mail(x,tt,{out:clamp((tt-P.ask)/1.8,0,1),back:clamp((tt-P.col)/1.8,0,1)});
@@ -3663,7 +3664,8 @@ scene("asking",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({card:c.toda
       draw:q=>gk_reqScreen(q,tt,{yes:clamp((tt-P.sy)/0.8,0,1)})});gu_nameCard(x,1240,96,"Clara Jensen","Planning",gv_io(tt,P.yes+0.5,P.agr-0.4,0.4));
       gk_rise(x,fin(tt,P.jan,0.6),()=>gk_key(x,1220,836,0.1,"until 31 Jan 2027",{flat:1}),10);}},
     // her table agrees with the census report: two
-    {at:P.agr,place:"desk",keys:[[P.agr,960,540,1]],push:0.02,draw:(x,tt)=>gk_agree(x,tt,{agree:0.5+0.5*clamp((tt-P.ag)/1.2,0,1)})},
+    // a cut: this shot and the one before both say "Faculty of Health", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.agr,place:"desk",keys:[[P.agr,960,540,1]],push:0.02,draw:(x,tt)=>gk_agree(x,tt,{agree:0.5+0.5*clamp((tt-P.ag)/1.2,0,1)})},
     // a second place, and the second learner steps forward
     {at:P.sec,place:"desk",keys:[[P.sec,960,540,1]],push:0.02,draw:(x,tt)=>gk_placement(x,tt,{n:1+fin(tt,P.sp,0.6),back:1-clamp((tt-P.nw)/1.4,0,1),fwd:1})},
     // the old copy, deleted
@@ -3790,7 +3792,8 @@ scene("outside",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({sm:c.same,
     // the campus, and far off, a partner university
     {at:0,place:"campus",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_far(x,tt,{far:fin(tt,0.4,1.0),thr:clamp((tt-P.sm-0.4)/1.4,0,1)})},
     // the registrar's office: Mei, and on her screen the partner's request for Awards
-    {at:P.pt,place:"registrar",keys:[[P.pt,960,540,1]],push:0.025,draw:(x,tt)=>{gk_mei(x,tt,{draw:q=>gk_meiScreen(q,tt,{})});
+    // a cut: this shot and the one before both say "a partner university", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.pt,place:"registrar",keys:[[P.pt,960,540,1]],push:0.025,draw:(x,tt)=>{gk_mei(x,tt,{draw:q=>gk_meiScreen(q,tt,{})});
       gu_nameCard(x,1140,190,"Mei Tanaka","registrar's office",gv_io(tt,P.pt+0.5,P.ho-0.4,0.4));}},
     // Awards' contract: each award, its credit points and its faculty; no one's personal data
     {cut:true,at:P.ho,place:"bigReg",keys:[[P.ho,960,540,1]],push:0.02,draw:(x,tt)=>gk_awards(x,tt,{lit:[fin(tt,P.aw,0.5),fin(tt,P.cp,0.5),fin(tt,P.fc,0.5)],
@@ -3823,7 +3826,8 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({of:c.offers-
     // Clara knows who reads her table, why, and until when
     {cut:true,at:P.sn,place:"planClose",keys:[[P.sn,960,540,1]],push:0.025,draw:(x,tt)=>gk_planDesk(x,tt,{clara:{expr:"smile"},draw:q=>gk_readers(q,tt,{lit:fin(tt,P.wr,0.6)})})},
     // finding and getting data: the shop window, every product with its owner
-    {at:P.ls,place:"shop",keys:[[P.ls,960,540,1]],push:0.02,draw:(x,tt)=>gk_shop(x,tt,{own:1})},
+    // a cut: this shot and the one before both say "Learners near an award", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.ls,place:"shop",keys:[[P.ls,960,540,1]],push:0.02,draw:(x,tt)=>gk_shop(x,tt,{own:1})},
     // the data team's board: the series' six cards, each lit in turn
     {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,1,2,3,4,5].map(i=>fin(tt,P.board+0.3+0.3*i,0.6))});}}],
     sc.dur));

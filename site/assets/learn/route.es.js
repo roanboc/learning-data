@@ -726,12 +726,13 @@ window.LD_ROUTE = {
      "title": "Las personas primero",
      "href": "people-first/",
      "poster": "people-before-roles-poster.jpg",
-     "kicker": "Serie · 2 de 4 películas",
-     "len": "17 min",
-     "min": 17.0,
+     "kicker": "Serie · 3 de 4 películas",
+     "len": "26 min",
+     "min": 26.0,
      "films": [
       "ld-people-before-roles",
-      "ld-wellbeing-in-the-work"
+      "ld-wellbeing-in-the-work",
+      "ld-no-two-alike"
      ]
     },
     {

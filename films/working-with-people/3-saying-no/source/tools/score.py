@@ -181,7 +181,6 @@ def pen(s, sec=0.8, g=0.005, pan=0.0, n=3):
         _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
 def ticked(s, g=0.0045, pan=0.0):
     """a tick drawn: two quick strokes of a pen"""
-    pen(s, 0.24, g, pan, 2)
 def wind(s, sec=4.0, g=0.004, pan=0.0):
     """salt and dust blown across the seabed: one soft, low hush that swells in and fades, never a howl"""
     n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 2); gr = 0.8 + 0.2 * gr / max(1e-9, float(np.abs(gr).max()))
@@ -209,68 +208,43 @@ ow = lambda lid, word, off=0: W('aral', lid, word, off)
 oc = lambda lid, off=0: G('aral', lid, off)
 END = E('aral')
 rebec(E4, 0.6, 1.8, 0.6)
-card(ow('sea', 'Aral', -0.3), 0.0035, px(350))
 chord((G3, E4, B4), ow('sea', 'Aral', 0.2), 0.7, step=0.14, ring=0.5)
 rebec(B4, ow('sea', 'fourth', 0.0), 2.2, 0.65)
-tap(ow('rivers', 'cotton', -0.1), 0.0032, px(1600))
 chord((G3, E4, C5), ow('rivers', 'cotton', 0.2), 0.6, step=0.14, ring=0.5)
-tap(ow('rivers', 'families', -0.2), 0.0032, px(1600))
 rebec(C5, ow('rivers', 'families', 0.3), 1.6, 0.55)
 # 1960 to 2004: a step down at a time, as the counter runs
 for i, m in enumerate((B4, A4, G4, Fs4, E4)):
     rebec(m, ow('shrank', 'shrank', 0.2 + 1.7 * i), 1.5, 0.55)
-card(ow('shrank', 'lost', -0.3), 0.0035, px(350))
-for wd, x in (('split', 985), ('north', 1300), ('south', 1300)):
-    tap(ow('split', wd, -0.1), 0.0032, px(x))
 chord((B3, Fs4, D5), ow('split', 'two', 0.1), 0.55, step=0.16, ring=0.5)
 # Aralsk, grey, and the dust
 chord((B3, E4, B4), oc('towns', -0.1), 0.6, step=0.18, ring=0.55)
-card(ow('towns', 'Aralsk', -0.3), 0.0035, px(1480)); card(ow('towns', 'salty', -0.3), 0.0035, px(1480))
 rebec(E4, ow('towns', 'jobs', 0.0), 1.8, 0.5)
-card(ow('dust', 'Storms', -0.2), 0.0035, px(1480))
 wind(ow('dust', 'Storms', 0.0), 4.4, 0.004, px(1100))
 # the whole sea back? The mark climbs, and stops short of the note it can't reach. Then nothing, for "Something had to change"
-card(ow('whole', 'whole', -0.3), 0.0035, px(370))
 mark(ow('whole', 'rivers', -0.1), 0.6, land=False)
 # the choice: it lands, on the open G
-card(ow('chose', 'chose', -0.3), 0.0035, px(370))
 rebec(B3, ow('chose', 'northern', 0.0), 0.36, 0.6); rebec(G3, ow('chose', 'northern', 0.38), 2.0, 0.6)
 chord((G3, D4, B4), ow('chose', 'northern', 0.38), 0.5, step=0.12, ring=0.6)
 # the dam, laid across the strait; finished, and the river let through; the sea rising
-card(ow('dam', 'dam', -0.3), 0.0035, px(1510))
 earth(ow('dam', 'Kok', -0.1), 1.8, 0.0045, px(930))
 chord((C4, E4, C5), ow('dam', 'thirteen', 0.0), 0.55, step=0.14, ring=0.5)
-card(ow('done', 'finished', -0.3), 0.0035, px(390))
-tap(ow('done', 'river', -0.3), 0.0032, px(1420))
 water(ow('done', 'upstream', -0.1), 2.6, 0.0035, px(1400))
 rebec(Fs4, ow('done', 'arrive', 0.1), 1.5, 0.5); rebec(D5, ow('done', 'arrive', 0.1), 1.5, 0.4)
 water(ow('rose', 'rose', -0.2), 3.4, 0.0045, px(1000))
 chord((B3, G4, D5), ow('rose', 'higher', 0.0), 0.6, step=0.15, ring=0.55)
-card(ow('rose', 'faster', -0.3), 0.0035, px(370))
 rebec(B4, ow('rose', 'level', 0.0), 1.8, 0.5)
 # the fish back, the catch, the plants, the shore
-card(ow('fresh', 'salty', -0.4), 0.0035, px(350))
 line((G4, A4, B4), ow('fresh', 'fish', 0.1), 0.26, 0.5, last=0.9)
-card(ow('fresh', 'catch', -0.3), 0.0035, px(1500))
-card(ow('plants', 'plants', -0.3), 0.0035, px(350))
 chord((G3, E4, C5), ow('plants', 'abroad', 0.0), 0.5, step=0.13, ring=0.5)
-slide(oc('shore', 0.3), 1.0, 0.0032, px(1050))
-tap(ow('shore', 'Aralsk', -0.3), 0.0032, px(1250)); tap(ow('shore', 'kilometres', -0.3), 0.0032, px(1300))
 chord((G3, D4, B4), ow('shore', 'towards', 0.1), 0.55, step=0.14, ring=0.55)
 # the south, not saved
-card(ow('south', 'southern', -0.3), 0.0035, px(370))
 wind(ow('south', 'shrinking', -0.3), 3.6, 0.0032, px(1050))
 chord((G3, E4, B4), ow('south', 'dry', 0.1), 0.5, step=0.16, ring=0.5)
 # a no to the whole sea, said plainly, and a yes to the part: the whole mark, landing on "yes"
-tap(ow('no', 'no', -0.1), 0.0032, px(930))
 mark(ow('no', 'whole', -0.2), 0.6, land=ow('no', 'yes', 0.0), last=1.6)
-tap(ow('no', 'yes', -0.1), 0.0032, px(900))
 # data work: two bare notes; the honest no, G major
-card(ow('data', 'asked', -0.3), 0.0035, px(960))
-tap(ow('data', 'bare', -0.1), 0.0032, px(620)); tap(ow('data', 'neither', -0.1), 0.0032, px(1300))
 rebec(E4, ow('data', 'bare', 0.2), 0.8, 0.45)
 rebec(Fs4, ow('data', 'neither', 0.2), 0.8, 0.42)
-tap(ow('instead', 'honest', -0.1), 0.0032, px(960))
 chord((B3, G4, D5), ow('instead', 'need', 0.1), 0.5, step=0.14, ring=0.5)
 # the title: G major, bowed and held, the open G under it, gone before the next chapter
 pizz(G3, oc('breath', 0.3), 0.6, None, 0.5)
@@ -282,16 +256,7 @@ LV[0] = 0.9
 aw = lambda lid, word, off=0: W('asks', lid, word, off)
 ac = lambda lid, off=0: G('asks', lid, off)
 chord((B3, E4, B4), S0('asks') + 0.3, 0.55, step=0.16, ring=0.5)
-card(aw('clara', 'Clara', -0.3), 0.0035, px(580))
-card(aw('same', "registrar's", -0.3), 0.0035, px(960))
-card(aw('list', 'list', -0.3), 0.0035, px(960))
-tap(aw('list', 'module', -0.3), 0.0030, px(960))
-card(ac('both', 0.0), 0.0035, px(660))
-slide(aw('both', 'Jun', -0.3), 1.0, 0.0032, px(560)); slide(aw('both', 'weeks', -0.3), 1.0, 0.0032, px(640))
 rebec(G4, aw('both', 'August', 0.2), 1.2, 0.42); rebec(A4, aw('both', 'August', 0.2), 1.2, 0.38)
-card(aw('yes', 'yes', -0.2), 0.0035, px(470))
-card(aw('bare', 'bare', -0.2), 0.0035, px(470))
-tap(aw('asks', 'asks', -0.2), 0.0030, px(1000))
 rebec(B4, aw('asks', 'asks', 0.3), 1.6, 0.48)
 
 # 3. What's the date for? Fisher and Ury's sheet; the position and the question, a tag each; the meeting: G major, soft; what the date
@@ -299,18 +264,8 @@ rebec(B4, aw('asks', 'asks', 0.3), 1.6, 0.48)
 LV[0] = 0.9
 dw = lambda lid, word, off=0: W('date', lid, word, off)
 dc = lambda lid, off=0: G('date', lid, off)
-card(dw('book', 'Fisher', -0.3), 0.0035, px(540))
-tap(dw('position', 'asks', -0.1), 0.0030, px(1400))
-slide(dw('position', 'why', -0.2), 0.6, 0.0030, px(1400))
-tap(dw('position', 'date', -0.2), 0.0030, px(1400))
 chord((B3, G4, D5), dc('wed', 0.0), 0.5, step=0.16, ring=0.5)
-card(dw('wed', 'Wednesday', -0.2), 0.0035, px(960))
-card(dw('budget', 'budget', -0.3), 0.0035, px(530))
-card(dw('new', 'model', -0.3), 0.0035, px(1390))
-tap(dw('enough', 'current', -0.2), 0.0030, px(530))
 rebec(G4, dw('enough', 'current', 0.2), 1.4, 0.45)
-card(dw('interest', 'position', -0.2), 0.0035, px(470)); card(dw('interest', 'interests', -0.2), 0.0035, px(1390))
-tap(dw('back', 'says', -0.2), 0.0030, px(960))
 chord((G3, D4, B4), dw('back', 'nods', 0.2), 0.48, step=0.15, ring=0.55)
 
 # 4. The trade-off, in the open: the turn: C major; the one list, and Clara and Mei; August's weeks, three bars drawn; the new model past
@@ -320,17 +275,8 @@ LV[0] = 0.9
 pw = lambda lid, word, off=0: W('open', lid, word, off)
 pc = lambda lid, off=0: G('open', lid, off)
 chord((C4, E4, C5), S0('open') + 0.3, 0.5, step=0.15, ring=0.5)
-card(pw('side', 'puts', -0.3), 0.0035, px(960))
-card(pc('weeks', -0.2), 0.0035, px(940))
-slide(pw('weeks', 'rooms', -0.3), 1.0, 0.0032, px(680)); slide(pw('weeks', 'model', -0.3), 1.6, 0.0032, px(900))
-tap(pw('weeks', 'six', 0.2), 0.0030, px(1390))
 chord((G3, E4, B4), pw('weeks', 'test', 0.1), 0.5, step=0.15, ring=0.5)
-slide(pw('refresh', 'Refreshing', -0.2), 0.8, 0.0030, px(1015))
-tap(pw('refresh', 'week', -0.2), 0.0030, px(1015))
 rebec(G4, pw('refresh', 'week', 0.3), 1.2, 0.45)
-card(pw('order', 'order', -0.2), 0.0035, px(530))
-card(pw('fair', 'Fisher', -0.3), 0.0035, px(1390))
-card(pw('options', 'options', -0.3), 0.0035, px(960))
 chord((B3, Fs4, D5), pw('options', 'budget', 0.0), 0.45, step=0.15, ring=0.5)
 chord((B3, G4, D5), pw('options', 'December', 0.3), 0.48, step=0.15, ring=0.55, until=E('open'))
 
@@ -340,22 +286,10 @@ chord((B3, G4, D5), pw('options', 'December', 0.3), 0.48, step=0.15, ring=0.55, 
 LV[0] = 0.9
 fw = lambda lid, word, off=0: W('offer', lid, word, off)
 fc = lambda lid, off=0: G('offer', lid, off)
-card(fw('ury', 'Ury', -0.3), 0.0035, px(960))
-tap(fw('dam', 'Kok', -0.2), 0.0028, px(960))
-tap(fw('dam', 'yes', -0.1), 0.0030, px(960)); tap(fw('dam', 'no', -0.1), 0.0030, px(960))
-tap(fw('yes', 'yes', -0.1), 0.0030, px(960))
 rebec(G4, fw('yes', 'yes', 0.2), 1.0, 0.45)
-tap(fw('no', 'no', -0.1), 0.0030, px(960))
 pizz(E4, fw('no', 'no', 0.2), 0.55, None, 0.4)
-card(fw('refresh', 'offer', -0.2), 0.0035, px(530))
 mark(fw('refresh', 'offer', 0.1), 0.55, land=fw('refresh', 'refreshed', 0.0), last=1.6)
-card(fw('october', 'new', -0.3), 0.0035, px(1390))
-tap(fw('work', 'work', -0.4), 0.0030, px(960))
 rebec(Fs4, fw('work', 'work', 0.2), 1.3, 0.45); rebec(D5, fw('work', 'work', 0.2), 1.3, 0.38)
-card(fw('choose', 'choose', -0.3), 0.0035, px(960))
-pen(fw('agrees', 'dates', -0.2), 1.0, 0.0045, px(1370), 4)
-ticked(fw('agrees', 'writing', -0.1), 0.0045, px(1724))
-tap(fw('agrees', 'not', -0.1), 0.0030, px(960))
 chord((B3, G4, D5), fw('agrees', 'agrees', 0.1), 0.5, step=0.14, ring=0.55)
 
 # 6. Kept, on time: each date ticked green as it's kept, a bowed note each, rising: G, B, D; reviewed, a tag; November, a sheet; what it
@@ -364,11 +298,7 @@ LV[0] = 0.9
 kw = lambda lid, word, off=0: W('kept', lid, word, off)
 kc = lambda lid, off=0: G('kept', lid, off)
 for lid, word, m, x in (('aug', 'refreshed', G4, 480), ('sep', 'budget', B4, 960), ('oct', 'ready', D5, 1440)):
-    ticked(kw(lid, word, 0.5), 0.0045, px(x))
     rebec(m, kw(lid, word, 0.6), 1.2, 0.42)
-tap(kw('oct', 'reviewed', -0.2), 0.0030, px(1440))
-card(kw('next', 'November', -0.2), 0.0035, px(570))
-tap(kw('trust', 'clear', -0.1), 0.0030, px(570)); tap(kw('trust', 'trust', -0.2), 0.0030, px(570))
 chord((G3, E4, C5), kw('trust', 'trust', 0.3), 0.45, step=0.15, ring=0.5)
 chord((G3, D4, B4), kw('trust', 'keep', 0.4), 0.48, step=0.15, ring=0.6, until=E('kept'))
 
@@ -378,17 +308,50 @@ chord((G3, D4, B4), kw('trust', 'keep', 0.4), 0.48, step=0.15, ring=0.6, until=E
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
-tap(mw('back', 'whole', -0.2), 0.0030, px(400))
 mark(mw('back', 'promise', -0.2), 0.5, land=mw('back', 'saved', 0.0), last=1.6, under=False)
-tap(mw('back', 'saved', -0.2), 0.0030, px(400))
 for wd, m in (('asked', E4), ('showed', G4), ('offered', B4), ('kept', G3)):
-    tap(mw('helena', wd, -0.1), 0.0030, px(1220))
     rebec(m, mw('helena', wd, 0.1), 1.3, 0.4)
-card(mc('ask', 0.3), 0.0035, px(530))
-for lid, word, x in (('show', 'Put', 1390), ('offer', 'Say', 530), ('write', 'Let', 1390)):
-    card(mw(lid, word, -0.1), 0.0035, px(x))
-tap(mw('next', 'next', -0.1), 0.0030, px(960))
-tap(mw('take', 'Never', -0.1), 0.0030, px(560)); tap(mw('take', 'say', -0.1), 0.0030, px(1260))
 mark(mw('take', 'when', 0.3), 0.55, last=6.0, until=TOT)
 rebec(D4, mw('take', 'when', 0.3 + 0.9 + 0.7 + 0.45 + 0.38 + 0.3), 5.6, 0.36, until=TOT)
 rebec(B4, mw('take', 'when', 0.3 + 0.9 + 0.7 + 0.45 + 0.38 + 0.6), 5.2, 0.32, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'O': ('aral', 'carmen', 'sn_boardO'), 'A': ('date', 'carmen', 'sn_boardA'), 'B': ('open', 'carmen', 'sn_boardB'),
+                    'C': ('offer', 'carmen', 'sn_boardC'), 'M': ('monday', 'helena', 'sn_boardM'), 'N1': ('asks', None, 'sn_note1'),
+                    'N2': ('date', None, 'sn_note2'), 'N3': ('offer', None, 'sn_note3')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+
+for name in ('O', 'A', 'B', 'C', 'M'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3'):
+    written(name, scratch, 0.004)
+# the chats: Helena's message to Clara as it goes; on 27 August hers, and Clara's answer as it arrives
+pop(W('asks', 'asks', 'asks', 0.2) + 1.6, 0.0022, px(1560), True)
+pop(G('kept', 'aug') + 1.0 + 1.6, 0.0022, px(1560), True)
+pop(G('kept', 'aug') + 3.6 + 1.4, 0.0022, px(1560), False)

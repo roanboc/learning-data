@@ -4021,13 +4021,15 @@ function rr_planScreen(ctx,hiA){const [sx,sy,sw]=GV_PL.screen,k=sw/GV_SC[2];ctx.
 function rr_cellCard(ctx,x,y,u,lines,h){if(u<=0.01)return;h=h||76;const w=Math.round(Math.max(tw(ctx,lines[0],22,600),tw(ctx,lines[1],22,700))+40),k=0.9+0.1*spring(clamp(u,0,1));
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(u*2,0,1),()=>{wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",wash:GV.gold,washA:0.25,seed:w});
     wc_T(ctx,lines[0],-w/2+20,-6,{w:600,size:22,col:WC_DARK});wc_T(ctx,lines[1],-w/2+20,24,{w:700,size:22,col:GV.goldInk});});ctx.restore();}
-scene("scorecard",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:0.9,fill:1.4,
+scene("scorecard",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:wAt(sc,"writes","writes")-0.2,fill:wAt(sc,"writes","writes")+0.3,
     area:wAt(sc,"row","area"),dimW:wAt(sc,"row","dimension"),cell:wAt(sc,"row","in each cell"),under:c.under-0.3,whose:wAt(sc,"under","whose"),door:c.answer-0.3,
     plan:c.census-0.3,acc:wAt(sc,"census","census"),room:c.passed-0.3,nod:wAt(sc,"passed","it passed"),tick:sc.ends.passed+0.1,
     // close: the whole table and the warnings under it, the headings near the top of the frame, the words seen at 28.5 px
     rowCam:[960,528,1.5]}));
   gv_shots(ctx,S,t,sc.dur,[
-    // Yusuf's office, morning: the scorecard on his screen
+    // Yusuf's office, morning: the scorecard on his screen, as the voice says "Now the scorecard"; it stays a second once the engine's
+    // crossfade from the chapter before is over (it came in at 0.9 s, under that crossfade, and was hardly seen), and the scorecard
+    // comes close as it "writes itself"
     {at:0,place:"office",keys:[[0,1000,560,1.25]],d:2,draw:(x,tt)=>{rr_officeScreen(x,"score");gv_deskBook(x);rr_binders(x,{gone9:true});rr_officeChart(x,1);rr_officeQ(x,1);
       person(x,"yusuf",1110,905,0.8,{pose:"listen",t:tt,flip:true});}},
     // the scorecard fills in, wide: a wash in each cell as its count arrives; the rows, the columns and a cell lit as they're named;

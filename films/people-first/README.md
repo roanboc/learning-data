@@ -17,7 +17,7 @@ Before the hats and the skills, the people. In February 2027, Helena Novak takes
 
 ## The look and the sound
 
-- **Sunlit plaster**, the module's look, assumed on 5 November 2026 for the author to review (the module's *Decided* table, in [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md)). The kit is in [`../the-new-skills/shared/`](../the-new-skills/shared/), and this series bundles it as it is. It draws the whole team of seven for the first time.
+- **Ink line**, the look the author chose for the module on 17 November 2026: flat colour with one even dark line, and whole people in the places where they work and meet, drawn with the series' people kit in [`shared/`](shared/README.md). The series' films were first drawn in the module's sunlit plaster, and are made again in Ink line one by one, from *People before roles* on 18 November 2026. It draws the whole team of seven.
 - **Two true stories, in the module's own drawing style.** Three films follow the rope bridge of Q'eswachaka, in Peru, each opening on its own part of it, and the last says what the story didn't achieve. *No two alike* steps aside to a day in Confucius's school. Nothing Andean or Chinese is borrowed for the look or the sound.
 - **Its own sound in each film.** A lead instrument the site doesn't have, reserved for each film. Music under the opening story, then only now and then; nothing loops, trembles or pulses, except an urgent pulse where a story turns to an error or a rush.
 

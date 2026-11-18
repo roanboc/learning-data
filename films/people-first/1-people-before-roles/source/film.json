@@ -2,18 +2,16 @@
   "key": "people-before-roles",
   "title": "People before roles",
   "sub": "The opening film of People first, in Leading data people: a team is people before it is roles. Before you plan anyone's work from a chart or a list, sit down with each person, notice who the others turn to, and say early what won't change yet.",
-  "howto": "The film is drawn in the module's sunlit plaster: a gorge in the Andes and the team's rooms, in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans (the chart of seven boxes), orange is data (the list of requests), green is something done or kept, and amber a risk or something waiting. People and their clothes wear none of them.",
+  "howto": "The film is drawn in ink line: flat colour with one even dark line, and whole people in the places where they work and meet, at the rope bridge in the Andes and at the university. Its ideas are written by hand: at the team's board, where a consultant explains them, and in Helena's notebook, where she keeps what to remember. Its colours mean the same in every film: blue is plans (the chart of seven boxes), orange is data (the list of requests), green is something done or kept, and amber a risk or something waiting (the bridge left to decay, what she never asks). Who turns to whom is drawn in pencil. People and their clothes wear none of them.",
   "src": [
-    "pb_place.js",
-    "pb_bridge.js",
-    "pb_people.js",
+    "pb_gorge.js",
     "pb_uni.js",
     "pb_scenes.js"
   ],
   "poster": [
     "bridge",
-    "plan",
-    2.4
+    "rebuild",
+    1.2
   ],
   "say": [
     [

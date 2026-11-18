@@ -1,285 +1,249 @@
 /* ===== The draft and the decision: the chapters, shot by shot =====
-   Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's recorded
-   again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
-   a room (later:true) lets what was there leave first; between rooms a shot dissolves, or cuts where the two show the same people.
-   Sizes in the 1920 x 1080 frame. */
-
+   The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
+   says, and the words on the frame are where and when, a name, or what someone says; what a screen shows is in a callout from it. The
+   ideas are explained at a board, by Carmen Vidal, a consultant, or by Ivy; what to keep is a page of Ivy's or Helena's notebook
+   (dd_uni.js). The chess is in ddc_chess.js. Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt). */
+const dd_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,2,"The draft and the decision",a);}};
+function dd_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
+const dd_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
+const dd_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};
+const dd_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
+const dd_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
+// someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
+const dd_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},base||{});const g=base.gaze[1],ev=[],K=["look","nod","smile"];
+  for(let k=0;k<30;k++){const at=(t0||0)+1.8+i*1.1+k*5.6,kind=K[(k+Math.round(i))%3];ev.push(kind==="look"?[at,"look",2.2,[1,g+((k+Math.round(i))%2?0.45:-0.35)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
+  return PK.face(tt,base,ev);};
+const dd_talk=(base,tt,spans)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,...spans.map(([a,b])=>PK.talk(tt,a,b)*0.75));return e;};
+const dd_sp=(tt,i,spans,base,g)=>dd_alive(tt,{expr:dd_talk(base||"listen",tt,spans),gaze:[1,g==null?-0.2:g]},i);
+const dd_come=(cc,who,tt,x0,x1,t0,t1,fl,h,o)=>{o=o||{};const flip=o.flip!=null?o.flip:x1<x0;if(tt<t0)return null;if(tt<t1)return PK.walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:o.then||"stand"},Object.assign({flip:x1<x0},o.face||{}));
+  return PK.person(cc,who,x1,fl,h,o.then||"stand",Object.assign({t:tt,flip},o.face||{},o.hold?{hold:o.hold,holds:true}:{}));};
+const dd_static=rows=>rows.map(r=>{const q=Object.assign({},r);delete q.at;delete q.d;return q;});
+const DD_HEV=Array.from({length:40},(_,k)=>k%2?[1.6+k*4.8,"nod"]:[1.6+k*4.8,"look",2.2,[1,0.35]]);
 const DD_LAST="Let the agent draft; you frame, check and decide.";
-// the film's number and title at the top left, from the second chapter on
-function dd_kick(ctx,S,a){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"2","The draft and the decision",{a});}
-// a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
-function dd_sheet(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return null;
-  return lp_textSheet(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// lines that come in one by one, each at its own time: lp_textSheet's u
-const dd_u=(t,ts)=>ts.reduce((s,t0)=>s+ag_in(t,t0,0.5),0)/ts.length;
-// a tag, and a pill, that come in at t0 and go at t1 (null: stays)
-function dd_tag(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_tag(ctx,x,y,text,Object.assign({},o,{a}));}
-function dd_pill(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_pill(ctx,x,y,text,Object.assign({},o,{a,k:t-t0}));}
+const DD_V=PK.C.violet;
+// a screen's callout from Ivy's monitor (Marta's desk by the window, where Ivy works this month)
+const dd_screenCall=(x,R,a,head,rows,hc,o)=>{o=o||{};const D=R&&R.marta&&R.marta.desk;const tip=D?[150,D.top-120]:[150,620];
+  PK.callout(x,o.bx==null?720:o.bx,o.by==null?110:o.by,o.bw||720,o.bh||250,tip,a,(cc,bx,by,bw,bh)=>dd_panel(cc,bx,by,bw,bh,head,rows,null,hc));};
+// the team's room with Ivy at the desk by the window, at her screen; o: Jun's and Sam's moments, o.people, o.ivy (her face)
+const dd_ivyRoom=(x,tt,t0,o)=>{o=o||{};return dd_team(x,tt,{clock:o.clock==null?10:o.clock,deskWho:"ivy",marta:Object.assign({work:o.work==null?1:o.work,turn:0},o.ivy||dd_alive(tt,{expr:"think",gaze:[1,0.3]},3,t0)),
+  sam:o.sam===null?null:Object.assign({work:1},dd_alive(tt,{},1,t0)),jun:o.jun===null?null:Object.assign({work:1},o.junF||dd_alive(tt,{},2,t0)),show:PK.onScreen.chat(0,{}),people:o.people||[]});};
 
-/* ---------------------------------------------------------------- the people and things that stay put in a room
-   Drawn the same in every shot of the room, so the camera glides and only what changes fades. */
-// New York, 1997: the champion at the board, the machine's screen across it, its cabinets behind
-const DD_NY={tx:660,ty:724,tw:790,champ:[890,566,0.95]};
-function dd_nyStage(x,tt){const L={light:"evening",wall:0,warm:0.2},cut=DD_NY.ty-6;
-  dd_cabinets(x,1510,744,{t:tt});
-  lp_person(x,DD_PEOPLE.champ,DD_NY.champ[0],DD_NY.champ[1],DD_NY.champ[2],{t:tt,cut,light:L});
-  lp_table(x,DD_NY.tx,DD_NY.ty,DD_NY.tw,{floor:null});dd_board(x,1100,DD_NY.ty-14,230);dd_crt(x,1322,DD_NY.ty-12,190,{board:1});}
-// León, 1998: the two players, the board between them, a computer at each one's hand
-function dd_leonStage(x,tt){const L={light:"day",wall:0},cut=718;
-  lp_person(x,DD_PEOPLE.champ,770,566,0.95,{t:tt,cut,light:L});lp_person(x,DD_PEOPLE.rival,1370,566,0.95,{t:tt,flip:true,cut,light:L});
-  lp_table(x,450,724,1240,{floor:null});dd_board(x,1070,710,250);dd_crt(x,566,712,176,{board:1});dd_crt(x,1580,712,176,{board:1});}
-// at home, 2005: the two amateurs, three screens between them; o.moves: each screen's move, o.arrow (0 to 1)
-const DD_MOVES={first:[["d4","f5"],["d4","f5"],["d4","b5"]],deep:[["d4","f5"],["d4","f5"],["d4","f5"]]};
-function dd_homeDesk(x,tt,o){o=o||{};const L={light:"evening",wall:0.12},cut=734,mv=o.moves||DD_MOVES.first,ar=o.arrow==null?1:o.arrow;
-  lp_person(x,DD_PEOPLE.am1,470,592,0.9,{t:tt,cut,light:L});lp_person(x,DD_PEOPLE.am2,1450,592,0.9,{t:tt,flip:true,cut,light:L});
-  lp_table(x,260,740,1400,{floor:null});
-  [760,960,1160].forEach((sx,i)=>{const m=mv[i],ch=o.change&&i===2?o.change:0;
-    dd_lcd(x,sx,726,186,{from:m[0],to:ch>0?(ch<0.5?m[1]:DD_MOVES.deep[2][1]):m[1],arrow:ch>0?Math.abs(1-2*ch)*ar:ar});});}
-// the team's room on an April morning: Ivy at her table, her laptop, the team's agent beside her
-const DD_IVY=[1560,604,0.92],DD_TBL=[1250,744,620],DD_AG=[1232,500,62];
-function dd_ivyDesk(x,tt,o){o=o||{};const lt=o.light||"morning",cut=DD_TBL[1]-6;
-  if(o.agent!==false)dd_agent(x,DD_AG[0],DD_AG[1],DD_AG[2],{t:tt,core:o.core,think:o.think,a:o.agentA,floor:DD_TBL[1]-70});
-  lp_person(x,"ivy",DD_IVY[0],DD_IVY[1],DD_IVY[2],{t:tt,flip:true,cut,light:{light:lt}});
-  lp_table(x,DD_TBL[0],DD_TBL[1],DD_TBL[2]);lp_laptop(x,DD_IVY[0]-10,DD_TBL[1]-22,190,{glow:0.5});}
-
-
-/* ---------------------------------------------------------------- 1. Two amateurs, three computers: New York 1997, León 1998, online 2005 */
-scene("chess",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
-  // the room's light lowered while the voice says what many feared; a sheet over a dimmed room stays bright
-  const veil=(x,a)=>{if(a<=0.004)return;x.save();x.fillStyle="rgba(14,12,16,"+(0.44*a)+")";x.fillRect(0,0,W,H);x.restore();};
-  const fr0=w("fear","fear",-0.2),ch0=c.change;
+/* ---------------------------------------------------------------- 1. Two amateurs, three computers */
+scene("chess",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tF=c.fear-0.4,tL=c.leon-0.4,tO=c.free-0.4,tX=w("entrants","supercomputer",-0.5),tW=c.winners-0.4,tK=c.lesson-0.4,tC=c.counts-0.4,tD=c.data-0.4;
+  const fan=(i,base,t0)=>dd_alive(base==null?0:0,base||{},i,t0);
   ag_shots(ctx,S,t,sc.dur,[
-    // New York, May 1997: the champion against a computer built for chess; the computer wins; what many feared
-    {at:0,place:"ddHall",keys:[[0,960,540,1.06],[c.when+0.6,960,540,1.0]],d:3,draw:(x,tt)=>{
-      dd_nyStage(x,tt);veil(x,ag_in(tt,fr0,1.4)*(1-0.5*ag_in(tt,ch0+0.4,1.2)));
-      dd_tag(x,tt,w("when","Kasparov",-0.1),fr0,770,470,"Garry Kasparov",{align:"right"});
-      dd_tag(x,tt,w("when","computer",-0.1),fr0,1690,232,"A computer built for chess",{align:"center"});
-      dd_sheet(x,tt,w("when","May",-0.2),100,120,640,{kick:"New York",title:"May 1997",lines:["Six games: the world champion against a computer"]},{light:null,pin:false,out:c.loses-0.4});
-      dd_sheet(x,tt,c.loses+0.1,100,120,660,{kick:"The match",title:"Computer 3½, champion 2½"},{light:null,pin:false,out:fr0});
-      dd_sheet(x,tt,fr0+0.1,100,120,660,{kick:"Many fear",title:"What it means for people",lines:["Players spend years learning the game","Many earn their living by it","What is their skill worth now?"]},
-        {col:LP.amber,light:null,pin:false,out:ch0+0.1,u:dd_u(tt,[w("players","years",-0.1),w("players","living",-0.1),w("worth","worth",-0.4)])});}},
-    // León, 1998: play with the machine, not against it; each player with a computer at hand
-    {at:c.leon-0.3,place:"ddLeon",cut:true,keys:[[c.leon-0.3,960,540,1.05],[c.leon+0.4,960,540,1.0]],d:2.4,draw:(x,tt)=>{dd_leonStage(x,tt);
-      dd_sheet(x,tt,w("leon","León",-0.1),60,110,580,{kick:"León, Spain · 1998",title:"Advanced chess",sub:"With the machine, not against it"},{light:"day",pin:false});
-      dd_tag(x,tt,w("leon","Kasparov",-0.1),null,650,470,"Garry Kasparov",{align:"right"});
-      dd_tag(x,tt,w("each","Topalov",-0.1),null,1480,440,"Veselin Topalov");
-      dd_tag(x,tt,w("each","choice",-0.3),c.plan-0.2,1070,826,"Each with the chess program of his choice",{align:"center"});
-      dd_tag(x,tt,w("plan","tactic",-0.2),null,1070,826,"Every tactic checked by the machine",{align:"center"});
-      dd_pill(x,tt,w("plan","plan",-0.1),null,1070,250,"The plan: the player's",{col:LP.blue});}},
-    // 2005: an online tournament, open to anyone, in teams, with any computers; three of its entries
-    {at:c.free-0.3,place:"ddHome",dis:1.4,keys:[[c.free-0.3,960,540,1.0]],draw:(x,tt)=>{veil(x,1);
-      dd_bracket(x,{a:ag_in(tt,c.free+0.2,0.4),k:tt-c.free-0.2,field:ag_in(tt,w("free","anyone",-0.2),1.4),u:dd_u(tt,[w("entrants","Grandmasters",-0.1),w("entrants","supercomputer",-0.1),w("winners","amateur",-0.1)])});
-      dd_tag(x,tt,w("free","anyone",-0.1),null,960,790,"Anyone may enter: in teams, with any computers",{align:"center"});}},
-    // two amateurs at home: their own experience, three programs compared, deeper where it matters, then their decision
-    {at:c.how-0.3,place:"ddHome",later:true,keys:[[c.how-0.3,960,540,1.0]],draw:(x,tt)=>{const cp=w("how","compare",-0.1),dp=w("deeper","deeper",-0.1);
-      dd_homeDesk(x,tt,{arrow:ag_in(tt,cp+0.3,0.8),change:clamp((tt-dp-0.3)/1.4,0,1)>=1?0:clamp((tt-dp-0.3)/1.4,0,1),moves:tt>dp+1.7?DD_MOVES.deep:DD_MOVES.first});
-      dd_tag(x,tt,w("how","experience",-0.1),null,960,170,"Their own experience: which moves to look at",{align:"center"});
-      dd_tag(x,tt,cp,null,960,240,"Compare what each program says",{align:"center"});
-      dd_tag(x,tt,dp,null,960,310,"Deeper where it matters",{align:"center"});
-      dd_pill(x,tt,w("deeper","decide",-0.1),null,960,400,"Then they decide",{col:LP.blue});}},
-    // the final, first prize, and the supercomputer out before the last eight
-    {at:c.final-0.3,place:"ddHome",later:true,keys:[[c.final-0.3,960,540,1.0]],draw:(x,tt)=>{veil(x,1);
-      dd_bracket(x,{reach:ag_in(tt,c.final+0.1,1.0),final:ag_in(tt,w("final","beat",-0.1),1.0),win:ag_in(tt,w("final","prize",-0.3),1.0),out:ag_in(tt,w("final","supercomputer",-0.1),0.6)});}},
-    // Kasparov's lesson
-    {at:c.lesson-0.3,place:"ddHome",later:true,keys:[[c.lesson-0.3,960,540,1.0]],draw:(x,tt)=>{veil(x,1);
-      dd_sheet(x,tt,c.lesson+0.2,360,170,1200,{kick:"Kasparov's lesson, 2010",title:"Weak players + machine + a better process",lines:["Beat a strong computer alone","Beat strong players + machine + a worse process"]},
-        {light:null,pin:false,u:dd_u(tt,[w("lesson","computer",-0.2),w("worse","remarkably",-0.1)])});}},
-    // the players' skill still counted; what counted most was how they worked with the machines
-    {at:c.counts-0.3,place:"ddHome",later:true,keys:[[c.counts-0.3,960,540,1.0]],draw:(x,tt)=>{dd_homeDesk(x,tt,{moves:DD_MOVES.deep});
-      dd_tag(x,tt,w("counts","skill",-0.1),null,960,200,"Their skill still counted",{align:"center"});
-      dd_pill(x,tt,w("counts","worked",-0.3),null,960,300,"How they worked with the machines",{col:LP.blue});}},
-    // data work's machine: an agent's first draft in a minute; what's left for the people is the part that decides
-    {at:c.data-0.3,place:"lpRoom",dis:1.4,keys:[[c.data-0.3,960,540,1.0]],push:0,draw:(x,tt)=>{const d0=w("data","draft",-0.1),l0=w("left","decides",-0.3),g=1-ag_in(tt,c.breath+0.2,0.8);
-      if(g<=0.004)return;x.save();x.globalAlpha*=g;
-      dd_agent(x,390,470,90,{t:tt,core:0.7,think:ag_io(tt,w("data","write",-0.2),d0+1.6,0.4)});
-      dd_sheet(x,tt,d0,560,180,580,{kick:"A first draft",title:"A data model",lines:["Written in a minute"]},{col:LP.violet,light:"day"});
-      dd_tag(x,tt,w("ask","leaves",-0.2),l0-0.3,1220,230,"What's left for the people?",{col:LP.amber});
-      dd_sheet(x,tt,l0+0.1,1220,180,600,{kick:"The part that decides",lines:["Saying what's wanted","Checking it against what's true","Choosing"]},
-        {col:LP.blue,light:"day",u:dd_u(tt,[w("left","saying",-0.1),w("left","checking",-0.1),w("left","choosing",-0.1)])});
-      dd_tag(x,tt,w("cheap","cheap",-0.2),null,850,540,"A draft is cheap",{align:"center"});
-      dd_pill(x,tt,w("cheap","Judgement",-0.1),null,1520,540,"Judgement isn't",{col:LP.blue});x.restore();}}
+    // New York, May 1997: the world champion across the board from the operator who makes the computer's moves
+    {at:0,place:"ddcHall",keys:[[0,960,560,1.0],[c.loses,960,580,1.08]],d:3,draw:(x,tt,cam)=>{let Jk=null,Jr=null;
+      const R=ddc_match(x,tt,"kasp","oper",960,{left:Object.assign({},PK.face(tt,{expr:PK.exprMix("think","worry",ag_in(tt,w("loses","wins",0),1.0)),gaze:[1,0.5]},[[c.when+4,"look",2.4,[1,0.2]],[c.loses+2,"nod"]])),
+        right:Object.assign({screen:"monitor",sx:1215,sw:150,sh:110,show:ddc_screen,work:0.6},PK.face(tt,{expr:"neutral",gaze:[1,0.4]},[[c.when+3,"look",2,[1,0.1]],[c.loses+1.4,"nod"]]))});Jk=R.l;
+      Jr=ddc_person(x,PK.extra(6),1700,990,"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},dd_sp(tt,6,[[c.loses+0.3,E.loses]],"glad",0.1)));
+      ddc_person(x,PK.extra(13),230,1000,"clasp",Object.assign({t:tt},dd_alive(tt,{expr:"listen",gaze:[1,0.2]},2,0)));
+      dd_name(x,Jk,tt,w("when","Garry Kasparov",0),c.loses-0.5,"Garry Kasparov","World champion",160);
+      dd_bub(x,Jr,tt,c.loses+0.3,E.loses+0.6,["The machine has won!"],cam,{lean:-160});}},
+    // a chess club: what is a player's skill worth now?
+    {at:tF,place:"ddcClub",dis:0.8,keys:[[tF,960,560,1.0],[c.worth,1000,580,1.06]],d:3,draw:(x,tt,cam)=>{let Jb=null,Ja=null;
+      const A=ddc_match(x,tt,PK.extra(7),PK.extra(11),560,{fl:860,gap:250,left:dd_alive(tt,{expr:"think",gaze:[1,0.5]},1,tF),right:dd_sp(tt,2,[[c.change+0.2,E.change]],"worry",0.3)});Ja=A.r;
+      const B=ddc_match(x,tt,PK.extra(3),PK.extra(14),1340,{fl:990,gap:300,left:dd_sp(tt,3,[[c.worth+0.2,E.worth]],"worry",0.2),right:dd_alive(tt,{expr:"worry",gaze:[1,0.4]},4,tF)});Jb=B.l;
+      dd_bub(x,Jb,tt,c.worth+0.2,c.change-0.3,["If it plays better than the best,","what is our skill worth?"],cam,{lean:-200});
+      dd_bub(x,Ja,tt,c.change+0.2,tL-0.2,["We'll find what it's for."],cam,{lean:160});}},
+    // León, 1998: each player with a computer at hand, beside the board
+    {at:tL,place:"ddcLeon",dis:0.8,keys:[[tL,960,560,1.0],[c.plan,900,580,1.1]],d:3,draw:(x,tt,cam)=>{
+      const R=ddc_match(x,tt,"kasp","topa",960,{left:Object.assign({screen:"laptop",work:ag_in(tt,w("plan","checking",-0.3),0.6)*(1-ag_in(tt,w("plan","plan",-0.4),0.5))},PK.face(tt,{expr:PK.exprMix("think","smile",ag_in(tt,w("plan","plan",0),0.8)),gaze:[1,0.5]},[[c.each+2,"look",2.2,[1,0.1]]])),
+        right:Object.assign({screen:"laptop",work:0.4},dd_alive(tt,{expr:"think",gaze:[1,0.5]},5,tL))});
+      dd_name(x,R.r,tt,w("each","Veselin Topalov",0),c.plan-0.5,"Veselin Topalov","",160);}},
+    // 2005, online: a team of grandmasters, each with a computer
+    {at:tO,place:"ddcLeon",dis:0.8,keys:[[tO,960,560,1.0]],d:2,draw:(x,tt,cam)=>{
+      const h=ddc_h(900);ddc_desk(x,"gm1",640,900,h,Object.assign({t:tt,screen:"monitor",show:ddc_screen,w:0.7*h},dd_alive(tt,{expr:"think",gaze:[1,0.4]},1,tO)));
+      const h2=ddc_h(980);ddc_desk(x,"gm2",1100,980,h2,Object.assign({t:tt+1,screen:"monitor",show:ddc_screen,w:0.7*h2},dd_alive(tt,{expr:"think",gaze:[1,0.4]},3,tO)));}},
+    // a supercomputer, alone
+    {at:tX,place:"ddcRack",dis:0.8,keys:[[tX,960,540,1.0],[tW,1000,520,1.06]],d:3,draw:(x,tt,cam)=>{ddc_lights(x,tt);}},
+    // the winners: two amateurs, three computers, at one desk at night
+    {at:tW,place:"ddcHome",dis:0.8,keys:[[tW,960,560,1.0],[c.how+1,1000,580,1.08]],d:3,draw:(x,tt,cam)=>{let J1=null,J2=null;
+      const h=ddc_h(900);J1=ddc_desk(x,"am1",760,900,h,Object.assign({t:tt,screen:"monitor",sx:1020,show:ddc_screen,w:0.95*h,work:1,
+        on:(cc,D)=>{PK.monitor(cc,1180,D.top,0.3*h,0.22*h,{draw:ddc_screen});PK.monitor(cc,1330,D.top,0.3*h,0.22*h,{draw:ddc_screen});}},
+        dd_sp(tt,1,[[w("deeper","deeper",-0.4),E.deeper]],"think",0.4)));
+      const h2=ddc_h(990);J2=PK.seated(x,ddc_row("am2"),600,990,h2,"sit",Object.assign({t:tt+2},dd_sp(tt,2,[[w("how","worth a look",-0.5),E.how],[c.final+0.4,c.final+1.6]],"smile",0.3)));
+      dd_bub(x,J2,tt,w("how","worth a look",-0.5),E.how+0.4,["This one's worth a look."],cam,{lean:-120});
+      dd_bub(x,J1,tt,w("deeper","deeper",-0.4),E.deeper+0.3,["Let's send it deeper."],cam,{lean:160});
+      dd_bub(x,J2,tt,c.final+0.4,tK-0.3,["First prize!"],cam,{lean:-120});}},
+    // Kasparov writes the lesson down
+    {at:tK,place:"ddcClub",dis:0.8,keys:[[tK,960,560,1.0],[c.worse,900,580,1.08]],d:3,draw:(x,tt,cam)=>{
+      const h=ddc_h(940),J=ddc_desk(x,"kasp",760,940,h,Object.assign({t:tt,screen:null,pose:"sit",workPose:"sitWork",work:1,hold:PK.inHand.pen("blue"),holds:true,
+        on:(cc,D)=>{PK.S.begin(cc,{lw:2.4,sh:3});PK.sheet(cc,D.cx-40,D.top-8,120,12,{});}},PK.face(tt,{expr:"think",gaze:[1,0.8]},[[c.worse+0.4,"look",2.4,[1,0.1]]])));
+      dd_bub(x,J,tt,c.lesson+0.4,c.worse-0.2,["Weak players, a machine and a better process","beat a strong computer alone."],cam,{lean:220});
+      dd_bub(x,J,tt,c.worse+0.1,tC-0.2,["They beat strong players","whose process was worse."],cam,{lean:220});}},
+    // the players' skill still counted: how they worked with the machines counted most
+    {at:tC,place:"ddcHome",dis:0.8,keys:[[tC,1000,580,1.08]],d:2,draw:(x,tt,cam)=>{
+      const h=ddc_h(900);ddc_desk(x,"am1",760,900,h,Object.assign({t:tt,screen:"monitor",sx:1020,show:ddc_screen,w:0.95*h,work:1,
+        on:(cc,D)=>{PK.monitor(cc,1180,D.top,0.3*h,0.22*h,{draw:ddc_screen});PK.monitor(cc,1330,D.top,0.3*h,0.22*h,{draw:ddc_screen});}},dd_alive(tt,{expr:"think",gaze:[1,0.4]},1,tC)));
+      PK.seated(x,ddc_row("am2"),600,990,ddc_h(990),"sit",Object.assign({t:tt+2},dd_alive(tt,{expr:"smile",gaze:[1,0.3]},2,tC)));}},
+    // data work has its machine now too: Ivy at her screen, the agent's draft on it
+    {at:tD,place:"ddTeam",dis:1.0,keys:[[tD,960,540,1.0],[c.left,760,560,1.08]],d:3,draw:(x,tt,cam)=>{
+      const R=dd_ivyRoom(x,tt,tD,{ivy:dd_alive(tt,{expr:"think",gaze:[1,0.3]},3,tD)});
+      dd_screenCall(x,R,ag_io(tt,w("data","agent",-0.2),c.cheap+0.4,0.4),"The agent · a first draft",[["A model, in a minute",PK.C.ink,36]],DD_V);}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,"The draft and the decision","A draft is cheap; judgement isn't","Leading data people · The new skills");
+  dd_card(ctx,S,t,c.when+0.3,c.loses-0.6,{kick:"New York, May 1997",title:"A six-game match"},{y:40,mid:true});
+  dd_card(ctx,S,t,c.leon+0.3,c.each-0.3,{kick:"León, Spain, 1998",title:"With the machine, not against it"},{y:40,mid:true});
+  dd_card(ctx,S,t,c.free+0.3,tX-0.3,{kick:"Online, 2005",title:"Anyone can enter, in teams"},{y:40,mid:true});
+  dd_card(ctx,S,t,c.winners+0.3,c.how-0.3,{kick:"The winners, 2005",title:"Two amateurs, three computers"},{y:40,mid:true});
+  PK.title(ctx,S,t,c.breath+0.2,"The draft and the decision","A draft is cheap; judgement isn't","Leading data people · The new skills",{side:"right",size:64});
 });
 
 /* ---------------------------------------------------------------- 2. A draft in a minute */
-scene("draft",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"};
-  const rooms=lp_sectionRooms(LP_TEACHING).map(r=>r.id);
+scene("draft",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CA=PK.ROOMS.campus;
+  const tI=c.ivy-0.4;
   ag_shots(ctx,S,t,sc.dur,[
-    // the university: its teaching building, cut open, the rooms in use lit
-    {at:0,place:"lpSky",keys:[[0,960,540,1.0]],draw:(x,tt)=>{lp_section(x,LP_TEACHING,{room:(id)=>{const i=rooms.indexOf(id);return{lit:ag_in(tt,0.6+i*0.18,0.6)*((i*7)%5===1?0.25:1)};}});}},
-    // Graham's decision, and his question
-    {at:w("uni","Graham",-0.5),place:"ddGraham",dis:1.2,keys:[[w("uni","Graham",-0.5),960,540,1.0]],draw:(x,tt)=>{
-      dd_sheet(x,tt,w("uni","Graham",-0.1),1000,150,640,{kick:"Director of Facilities",title:"Graham Ellis"},{light:"grey",out:c.q-0.5});
-      dd_sheet(x,tt,w("building","Council",-0.2),1000,410,640,{kick:"For the University Council",title:"A new teaching building?"},{light:"grey",out:c.q-0.5});
-      dd_sheet(x,tt,w("q","question",-0.1),1000,150,600,{kick:"His question",title:"Too few rooms, or too few at some hours?"},{col:LP.blue,light:"grey"});
-      lp_person(x,"graham",560,640,1.0,{t:tt,light:{light:"grey"}});}},
-    // Wednesday 7 April 2027: Ivy, and the first model
-    {at:c.ivy-0.3,place:"ddMorning",dis:1.2,keys:[[c.ivy-0.3,960,540,1.0]],draw:(x,tt)=>{dd_ivyDesk(x,tt,{agent:false});
-      dd_sheet(x,tt,w("ivy","Wednesday",-0.1),140,140,760,{kick:"Wednesday 7 April 2027",title:"Ivy Reyes",sub:"Graduate data analyst",lines:["Her sixth week"]},{light:"morning",out:c.ask-0.8,u:ag_in(tt,w("ivy","sixth",-0.1),0.5)});
-      dd_sheet(x,tt,w("ivy","model",-0.1),140,470,760,{kick:"Her task",title:"The first model",lines:["How much each room is used"]},{light:"morning",out:c.ask-0.8,u:ag_in(tt,w("ivy","used",-0.3),0.5)});}},
-    // she asks the agent; in a minute the draft is there, tidy, tested, sure of itself
-    {at:c.ask-0.3,place:"ddMorning",keys:[[c.ask-0.3,960,540,1.0]],draw:(x,tt)=>{const m0=w("minute","minute",-0.1);
-      dd_ivyDesk(x,tt,{agentA:ag_in(tt,w("ask","agent",-0.3),0.6),core:0.6,think:ag_io(tt,w("ask","draft",0),m0+0.6,0.4)});
-      dd_sheet(x,tt,w("ask","asks",-0.1),140,140,820,{kick:"Ivy asks the agent",title:"A model of room use, for every room and every teaching hour"},{light:"morning",out:m0-0.4});
-      dd_draft(x,140,140,820,{a:ag_in(tt,m0,0.35),k:tt-m0,light:"morning",tick:ag_in(tt,w("tidy","pass",-0.2),0.4)});
-      for(const [i,fx,word,words] of [[0,140,"teaching",{kick:"Rooms used",num:"38%",label:"of the teaching week"}],[1,560,"busiest",{kick:"Busiest hours",num:"93%",label:"used"}]]){const f0=w("figure",word,-0.4);
-        const a=ag_in(tt,f0,0.35);if(a>0.004)lp_figure(x,fx,470,400,words,{col:LP.violet,light:"morning",a,k:tt-f0});}
-      dd_tag(x,tt,w("sure","finished",-0.1),null,990,200,"Looks finished");
-      dd_tag(x,tt,w("sure","sure",-0.1),null,990,270,"Sounds sure");
-      dd_tag(x,tt,w("almost","open",-0.2),null,1560,284,"About to open a pull request",{align:"center"});}}
+    // the question the team has taken up: Graham Ellis, on the campus with Helena, by the teaching building
+    {at:0,place:"ddCampus",keys:[[0,960,540,1.0],[c.q,1000,560,1.06]],d:3,draw:(x,tt,cam)=>{let Jg=null;
+      PK.person(x,"helena",780,960,dd_hC(960),"clasp",Object.assign({t:tt},dd_alive(tt,{expr:"listen",gaze:[1,0.1]},4,0)));
+      Jg=PK.person(x,"graham",1120,CA.near,dd_hC(CA.near),"clasp",Object.assign({t:tt,flip:true},dd_sp(tt,1,[[c.q+0.2,E.q]],"think",0.1)));
+      dd_name(x,Jg,tt,w("uni","Graham Ellis",0),c.building+1.5,"Graham Ellis","Director of Facilities",170);
+      dd_bub(x,Jg,tt,c.q+0.2,tI-0.3,["Too few rooms,","or too few at some hours?"],cam,{lean:-160});}},
+    // Wednesday 7 April: Ivy, in her sixth week, asks the team's agent for a first draft; a minute later, it's there
+    {at:tI,place:"ddTeam",cut:true,keys:[[tI,960,540,1.0],[c.ask,700,560,1.12]],d:3,draw:(x,tt,cam)=>{
+      const R=dd_ivyRoom(x,tt,tI,{ivy:PK.face(tt,{expr:PK.exprMix("think","smile",ag_in(tt,c.tidy,0.6)*(1-ag_in(tt,c.almost,0.6))),gaze:[1,0.3]},[[c.figure+1,"nod"],[c.sure+0.4,"look",2,[1,0.1]]])});
+      dd_screenCall(x,R,ag_io(tt,w("ask","asks",-0.2),c.minute-0.2,0.35),"Ivy, to the agent",[["A first draft: room use",PK.C.ink,36],["every room, every teaching hour",PK.C.ink,32]],PK.C.blue);
+      dd_screenCall(x,R,ag_io(tt,c.minute+0.1,c.figure-0.2,0.35),"The agent · draft",[["the model, every column described",PK.C.ink,32],["4 tests: all pass",PK.C.green,36]],DD_V);
+      dd_screenCall(x,R,ag_io(tt,c.figure+0.1,c.almost+1.4,0.35),"The agent · answer",[["Rooms used 38% of the week",PK.C.orange,36],["93% at the busiest hours",PK.C.orange,36]],DD_V);
+      dd_screenCall(x,R,ag_in(tt,w("almost","notes",-0.4),0.35),"The agent · notes",[["What I assumed …",PK.C.ink,36]],DD_V);}}
   ]);
-  setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,w("uni","university",-0.3),c.ivy,0.5)});
-  dd_kick(ctx,S,ag_in(t,0.6,0.6));
+  dd_imagined(ctx,S,t,0.4,c.building+0.6,"The university, 2027 · imagined");
+  dd_card(ctx,S,t,c.ivy+0.2,w("ivy","Ivy Reyes",-0.2),{kick:"Wednesday 7 April 2027",title:"Ivy's sixth week"},{y:40,mid:true});
+  dd_kick(ctx,S,ag_in(t,0.6,0.6)*(1-dd_apart(t,[[0,c.building+1.5],[c.q,tI],[c.ivy,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 3. What it assumed */
-scene("assumed",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
+scene("assumed",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CO=PK.ROOMS.corner;
+  const tG=c.graham-0.4,tT=c.tests-0.4,tB=w("tests","no room",-1.0),tS=c.sensors-0.4,tN=c.harm-0.4,LE=PK.ROOMS.lecture,hL=fl=>PK.hAt(fl,LE.eye);
+  const BA=PK.pace(ctx,"carmen",dd_boardA(sc,w)),N1=PK.pace(ctx,null,dd_note1(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the agent's notes, read to the end: one line stops her
-    {at:0,place:"ddMorning",keys:[[0,960,540,1.0]],draw:(x,tt)=>{dd_ivyDesk(x,tt);
-      dd_notes(x,140,140,820,{light:"morning",a:ag_in(tt,c.notes+0.3,0.35),k:tt-c.notes-0.3,u:ag_in(tt,c.notes+0.6,1.2),hi:ag_in(tt,w("line","booked",-0.2),0.5)});
-      dd_tag(x,tt,w("line","stops",-0.1),null,160,450,"Booked means used?",{col:LP.amber});}},
-    // what Graham had said used means
-    {at:c.graham-0.3,place:"ddGraham",dis:1.2,keys:[[c.graham-0.3,960,540,1.0]],draw:(x,tt)=>{
-      dd_sheet(x,tt,w("graham","Graham",-0.1),1000,150,640,{kick:"Agreed with Graham, February",title:"Used: people in the room",lines:["Not a booking"]},{col:LP.blue,light:"grey",u:ag_in(tt,w("graham","booking",-0.3),0.5)});
-      lp_person(x,"graham",560,640,1.0,{t:tt,light:{light:"grey"}});}},
-    // the tests pass: they check the data's form, not what Graham means
-    {at:c.tests-0.3,place:"ddMorning",dis:1.2,keys:[[c.tests-0.3,960,540,1.0]],draw:(x,tt)=>{dd_ivyDesk(x,tt);
-      const go=c.sensors-0.8;
-      dd_tests(x,140,140,820,{light:"morning",a:ag_in(tt,c.tests+0.1,0.35)*(1-ag_in(tt,go,0.4)),k:tt-c.tests-0.1,ticks:clamp((tt-w("tests","pass",-0.1))/1.4,0,1)});
-      dd_tag(x,tt,w("tests","form",-0.1),go,140,540,"They check the data's form");
-      dd_tag(x,tt,w("meaning","know",-0.2),go,140,610,"Not what Graham means",{col:LP.amber});}},
-    // checked against the sensors: in one booked hour in five, nobody; the draft calls them all used
-    {at:c.sensors-0.3,place:"ddMorning",keys:[[c.sensors-0.3,960,540,1.0]],draw:(x,tt)=>{const s0=w("sensors","sensors",-0.3);dd_ivyDesk(x,tt);
-      dd_hours(x,110,140,{light:"morning",a:ag_in(tt,s0,0.35),k:tt-s0,u:ag_in(tt,s0+0.2,1.4),seen:ag_in(tt,w("sensors","count",-0.1),2.6),draft:ag_in(tt,w("fifth","draft",-0.1),0.8)});}},
-    // what Graham would have weighed
-    {at:c.harm-0.3,place:"ddGraham",dis:1.2,keys:[[c.harm-0.3,960,540,1.0]],draw:(x,tt)=>{
-      dd_sheet(x,tt,w("harm","weighed",-0.2),1000,150,640,{kick:"Graham would have weighed",title:"A new teaching building",lines:["On bookings, not on rooms people use"]},{col:LP.amber,light:"grey",u:ag_in(tt,w("harm","bookings",-0.2),0.5)});
-      lp_person(x,"graham",560,640,1.0,{t:tt,light:{light:"grey"}});}},
-    // nobody careless: the common meaning, said out loud; what it hadn't been given
-    {at:c.common-0.3,place:"ddMorning",dis:1.2,keys:[[c.common-0.3,960,540,1.0]],draw:(x,tt)=>{const go=c.task-0.8;dd_ivyDesk(x,tt);
-      dd_notes(x,140,140,820,{light:"morning",hi:0.6,a:1-ag_in(tt,go,0.4)});
-      dd_tag(x,tt,w("common","timetabling",-0.2),go,140,470,"In timetabling, use often means booked");
-      dd_tag(x,tt,w("common","said",-0.1),go,140,540,"It said what it assumed");}},
-    {at:c.task-0.3,place:"ddMorning",keys:[[c.task-0.3,960,540,1.0]],draw:(x,tt)=>{dd_ivyDesk(x,tt);
-      dd_sheet(x,tt,c.task+0.1,140,140,820,{kick:"What Ivy asked",title:"A model of room use, for every room and every teaching hour"},{light:"morning"});
-      dd_pill(x,tt,w("task","task",-0.1),null,290,520,"The task",{col:LP.green,icon:"tick"});
-      dd_pill(x,tt,w("task","decision",-0.1),null,560,520,"The decision",{col:LP.amber,icon:"cross"});
-      dd_pill(x,tt,w("task","words",-0.1),null,840,520,"The words",{col:LP.amber,icon:"cross"});}}
+    // at the end of its notes, the agent lists what it assumed; one line stops her
+    {at:0,place:"ddTeam",later:true,keys:[[0,700,560,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=dd_ivyRoom(x,tt,0,{ivy:PK.face(tt,{expr:PK.exprMix("think","worry",ag_in(tt,w("line","booked",-0.2),0.6)),gaze:[1,0.3]},[[c.line+3,"look",2,[1,0.1]]])});
+      dd_screenCall(x,R,1-ag_in(tt,tG-0.6,0.4),"The agent · what I assumed",[["Teaching hours: 8 to 6",PK.C.ink,32],["A booked hour counts as used",PK.C.amber,36]],DD_V);}},
+    // in February, Graham had said what used means
+    {at:tG,place:"ddCorner",cut:true,keys:[[tG,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=dd_corner(x,tt,{t0:tG,who2:"graham",he:"listen",hg:[1,0.3],hf:dd_alive(tt,{expr:"listen",gaze:[1,0.3]},1,tG),iface:dd_sp(tt,2,[[w("graham","people in the room",-0.6),E.graham]],"talk",0.3)});
+      dd_bub(x,R.who2,tt,w("graham","people in the room",-0.6),tT-0.3,["Used means people in the room,","not a booking."],cam,{lean:-140});}},
+    // the tests check the form of the data; no test can know what Graham means (Carmen, at the board)
+    {at:tT,place:"ddTeam",cut:true,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{dd_lesson(x,tt,{rows:BA,clock:11,events:DD_HEV});}},
+    {at:tB,cut:true,place:"ddBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[c.tests,E.tests],[c.meaning,E.meaning]],events:DD_HEV});}},
+    // so Ivy checks the draft against the sensors, with Sam, in a teaching room
+    {at:tS,place:"ddLecture",dis:0.6,keys:[[tS,960,540,1.0],[c.fifth,760,520,1.1]],d:3,draw:(x,tt,cam)=>{
+      dd_room(x,tt,{plate:1,people:[
+        {fl:900,draw:cc=>{PK.person(cc,"sam",360,900,hL(900),"clasp",Object.assign({t:tt},dd_alive(tt,{expr:"listen",gaze:[1,0.2]},1,tS)));}},
+        {fl:960,draw:cc=>{PK.person(cc,"ivy",1000,960,hL(960),"clasp",Object.assign({t:tt,flip:true,hold:PK.inHand.notebook({}),holds:true},PK.face(tt,{expr:PK.exprMix("think","worry",ag_in(tt,c.fifth,0.6)),gaze:[1,0.1]},[[w("sensors","sensors",0.2),"look",2.6,[1,-0.9]],[c.fifth+3,"nod"]])));}}]});
+      PK.callout(x,980,70,560,250,[LE.sensor[0]+30,LE.sensor[1]+10],ag_io(tt,w("fifth","one booked hour",-0.3),tN-0.3,0.4),(cc,bx,by,bw,bh)=>dd_panel(cc,bx,by,bw,bh,"Booked hours",[["1 in 5: nobody counted",PK.C.amber,40],["the draft calls them used"]]));}},
+    {at:tN,place:"ddNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N1,{});}}
   ]);
-  dd_kick(ctx,S,1);
+  dd_card(ctx,S,t,tG+0.3,w("graham","people in the room",-1.0),{kick:"In February",title:"What used means"},{y:40,mid:true});
+  dd_kick(ctx,S,ag_in(t,0.6,0.6)*(1-dd_apart(t,[[0,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 4. Frame it, then ask */
-scene("frame",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
+scene("frame",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CA=PK.ROOMS.campus;
+  const tO=c.owner-0.4,tH=c.three-0.4,tB=c.decision-0.6,tD=c.draft-0.4,tN=w("hand","by hand",-1.4);
+  const BB=PK.pace(ctx,"ivy",dd_boardB(sc,w)),N2=PK.pace(ctx,null,dd_note2(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // first, the word: room use, into the glossary, approved there by its owner
-    {at:0,place:"ddMorning",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const g0=w("word","glossary",-0.3);dd_ivyDesk(x,tt);
-      dd_pill(x,tt,w("frame","frames",-0.1),g0,1560,284,"First, frame the work",{col:LP.blue});
-      dd_glossary(x,140,150,920,560,{a:ag_in(tt,g0,0.4),u:ag_in(tt,w("word","share",-0.2),2.4),owner:ag_in(tt,w("owner","Graham",-0.2),0.4),ok:clamp(tt-w("owner","approves",0.1),0,2)});
-      dd_tag(x,tt,w("owner","starts",-0.3),null,600,770,"Every model, and every draft, starts here",{align:"center",col:LP.blue});}},
-    // then three things, not one: the decision, the words, what counts
-    {at:c.three-0.3,place:"ddMorning",later:true,keys:[[c.three-0.3,960,540,1.0]],draw:(x,tt)=>{const ks=[c.decision,c.words,c.counts].map(t0=>tt-t0-0.1);
-      dd_agent(x,960,660,80,{t:tt,core:0.65,think:ag_io(tt,c.counts+1.2,c.draft,0.4),floor:830});
-      x.save();x.strokeStyle=rgba(LP.blue,1);x.lineWidth=5;x.lineCap="round";
-      ks.forEach((k,i)=>{const u=ag_sine(ag_in(k,0.4,0.8));if(u<=0)return;const sx=120+i*580+270,sy=[370,330,456][i];x.beginPath();x.moveTo(sx,sy);x.lineTo(lerp(sx,960,u),lerp(sy,586,u));x.stroke();});x.restore();
-      dd_ask(x,{ks,light:"morning"});}},
-    // the new draft, and what it assumed this time
-    {at:c.draft-0.3,place:"ddMorning",later:true,keys:[[c.draft-0.3,960,540,1.0]],draw:(x,tt)=>{const go=1-ag_in(tt,c.hand-0.8,0.4);dd_ivyDesk(x,tt);
-      dd_draft(x,140,120,820,{v:2,light:"morning",a:ag_in(tt,c.draft+0.3,0.35)*go,k:tt-c.draft-0.3});
-      dd_notes(x,140,450,820,{lines:DD_NOTES2,light:"morning",a:ag_in(tt,w("draft","says",-0.1),0.35)*go,k:tt-w("draft","says",-0.1)});}},
-    // checked against one room's week, worked out by hand: all fifty hours match
-    {at:c.hand-0.3,place:"ddMorning",keys:[[c.hand-0.3,960,540,1.0]],draw:(x,tt)=>{dd_ivyDesk(x,tt);
-      dd_week(x,130,140,{light:"morning",a:ag_in(tt,c.hand+0.1,0.35),k:tt-c.hand-0.1,u:ag_in(tt,c.hand+0.3,1.4),marks:clamp((tt-w("hand","hand",-0.2))/2.2,0,1),ticks:clamp((tt-c.match)/1.2,0,1)});
-      dd_pill(x,tt,w("match","match",-0.2),null,625,806,"All 50 hours match",{col:LP.green,icon:"tick"});}}
+    // first, the word: Ivy writes room use into the glossary
+    {at:0,place:"ddTeam",keys:[[0,960,540,1.0],[c.word,700,560,1.12]],d:3,draw:(x,tt,cam)=>{
+      const R=dd_ivyRoom(x,tt,0,{ivy:dd_alive(tt,{expr:"think",gaze:[1,0.3]},3,0)});
+      dd_screenCall(x,R,ag_io(tt,w("word","glossary",-0.3),tO-0.3,0.4),"Glossary · room use",[["The share of teaching hours",PK.C.ink,34],["in which the sensors counted",PK.C.ink,34],["at least one person",PK.C.blue,36]],PK.C.blue,{bh:300});}},
+    // Graham approves it there, as its owner
+    {at:tO,place:"ddCampus",cut:true,keys:[[tO,900,570,1.1]],d:2,draw:(x,tt,cam)=>{
+      const CH={title:"Ivy Reyes",who:["ivy"],me:"graham",msgs:[{who:"ivy",s:"Room use, for your approval?",at:-10},{who:"graham",s:"Approved, as its owner.",at:w("owner","approves",0),type:1.2}]},cs=PK.chatSize(x,CH,{size:28});
+      const Jg=PK.person(x,"graham",1060,CA.near,dd_hC(CA.near),"phone",Object.assign({t:tt,flip:true,hold:PK.inHand.phone({back:true}),holds:true},PK.face(tt,{expr:"think",gaze:[1,0.9]},[[w("owner","approves",0.6),"smile",2.0]])));
+      PK.callout(x,240,180,cs.w,cs.h,[Jg.hdN[0]-20,Jg.hdN[1]-30],ag_in(tt,tO+0.3,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH,tt,{size:28}));}},
+    // then she asks again, with three things, not one: she writes them at the team's board
+    {at:tH,place:"ddTeam",cut:true,keys:[[tH,960,540,1.0],[tB,1000,520,1.06]],d:3,draw:(x,tt,cam)=>{
+      dd_team(x,tt,{clock:14,sam:null,jun:Object.assign({work:0,pose:"sit"},dd_alive(tt,{expr:"listen",gaze:[1,-0.2]},2,tH)),
+        marta:Object.assign({turn:1,work:0,pose:"sit"},dd_alive(tt,{expr:"listen",gaze:[1,-0.2]},3,tH)),people:[
+        {fl:DD_RB.floor,draw:cc=>{dd_roomBoard(cc,tt,BB,"ivy",{events:DD_HEV});}},
+        {fl:DD_SAMC.floor,draw:cc=>{PK.seated(cc,"sam",DD_SAMC.x,DD_SAMC.floor,dd_hT(DD_SAMC.floor),"sit",Object.assign({t:tt+2,flip:true},dd_alive(tt,{expr:"listen",gaze:[1,-0.2]},4,tH)));}}]});}},
+    {at:tB,cut:true,place:"ddBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"ivy",tt,BB,{say:[],events:DD_HEV});}},
+    // the new draft keeps the two apart, and says again what it assumed
+    {at:tD,place:"ddTeam",cut:true,keys:[[tD,700,560,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=dd_ivyRoom(x,tt,tD,{ivy:dd_alive(tt,{expr:"think",gaze:[1,0.3]},3,tD)});
+      dd_screenCall(x,R,ag_in(tt,tD+0.3,0.4),"The agent · new draft",[["booked and used, side by side",PK.C.orange,34],["What I assumed …",PK.C.ink,32]],DD_V);}},
+    // she checks it against one room's week, worked out by hand
+    {at:tN,place:"ddNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N2,{});}}
   ]);
-  dd_kick(ctx,S,1);
+  dd_kick(ctx,S,ag_in(t,0.6,0.6)*(1-dd_apart(t,[[w("word","glossary",-0.3),tH],[tD,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 5. Someone else approves */
-scene("review",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"};
+scene("review",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tR=c.reason-0.4,tJ=c.jun-0.4,tU=c.standup-0.4,N3=PK.pace(ctx,null,dd_note3(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // Ivy's pull request: she's its author, and she answers for it; the reasoning kept with it; Jun's review
-    {at:0,place:"lpRoom",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const j0=w("jun","Jun",-0.3);
-      lp_person(x,"ivy",1390,650,0.86,{t:tt,flip:true,cut:738,light:dy});lp_person(x,"jun",1730,650,0.86,{t:tt,flip:true,cut:738,light:dy,a:ag_in(tt,j0,0.6)});
-      lp_table(x,1170,744,730);lp_laptop(x,1384,722,170,{glow:0.5});lp_laptop(x,1724,722,170,{glow:0.5,a:ag_in(tt,j0,0.6)});
-      dd_pr(x,110,150,960,650,{a:ag_in(tt,0.4,0.5),u:dd_u(tt,[w("reason","asked",-0.1),w("reason","assumed",-0.1),w("reason","changed",-0.1),w("reason","checked",-0.1)]),
-        rev:ag_in(tt,w("jun","reviews",-0.1),0.5),q:ag_in(tt,w("asks","asks",-0.1),0.5),ans:ag_in(tt,w("asks","answer",-0.2),0.5),
-        ok:clamp(tt-w("merge","approves",-0.1),0,2),merged:clamp(tt-w("merge","merged",-0.1),0,2)});
-      dd_tag(x,tt,w("pr","author",-0.1),j0,1390,330,"The author answers for it",{align:"center"});
-      dd_sheet(x,tt,w("jun","Nobody",-0.1),1140,110,700,{kick:"Nobody approves their own work",lines:["Not Ivy, the author","Never the agent"]},{light:"day",out:w("merge","told",-0.6),u:dd_u(tt,[w("jun","Ivy",-0.1),w("jun","never",-0.1)])});
-      dd_sheet(x,tt,w("merge","told",-0.2),1140,110,700,{kick:"Graham is told",lines:["What changed: used means people counted","The first answer to his question"]},{light:"day",u:ag_in(tt,w("merge","answer",-0.3),0.5)});}},
-    // the next morning, at stand-up: what she nearly missed, and thanks for saying it
-    {at:c.standup-0.3,place:"ddMorning",cut:true,keys:[[c.standup-0.3,960,540,1.0]],draw:(x,tt)=>{
-      for(const [who,px,fl] of [["helena",300,false],["jun",660,false],["noor",1020,false],["sam",1380,false],["ivy",1720,true]])lp_person(x,who,px,724,0.74,{t:tt,flip:fl,light:{light:"morning"}});
-      dd_sheet(x,tt,c.standup+0.3,140,130,560,{kick:"Thursday 8 April",title:"Stand-up"},{light:"morning",out:w("thanks","asking",-0.8)});
-      dd_sheet(x,tt,w("standup","nearly",-0.2),980,130,820,{kick:"What Ivy nearly missed",lines:["I asked for the task, not the decision or the words"]},{light:"morning"});
-      dd_tag(x,tt,w("thanks","thanks",-0.1),null,300,462,"Thank you for saying it",{align:"center",col:LP.green});
-      dd_sheet(x,tt,w("thanks","asking",-0.3),140,130,560,{kick:"How the team asks an agent",lines:["The decision","The words","What counts"]},{col:LP.blue,light:"morning"});}}
+    // Ivy opens a pull request: she's its author, so she answers for it
+    {at:0,place:"ddTeam",keys:[[0,960,540,1.0],[c.pr+1,700,560,1.12]],d:3,draw:(x,tt,cam)=>{
+      const R=dd_ivyRoom(x,tt,0,{ivy:dd_alive(tt,{expr:"think",gaze:[1,0.3]},3,0)});
+      dd_screenCall(x,R,ag_io(tt,w("pr","pull request",-0.2),tR-0.3,0.4),"Pull request · room use",[["Author: Ivy Reyes",PK.C.ink,36],["She answers for it",PK.C.blue,34]],PK.C.green);}},
+    {at:tR,place:"ddNotes",dis:0.6,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N3,{});}},
+    // Jun reviews it; he asks which room she checked by hand; he approves it, and it's merged
+    {at:tJ,place:"ddTeam",dis:0.6,keys:[[tJ,1250,560,1.12]],d:2,draw:(x,tt,cam)=>{let Ji=null;
+      const R=dd_team(x,tt,{clock:15,marta:null,sam:null,
+        jun:Object.assign({work:PK.u.clamp(1-ag_in(tt,c.asks-0.6,0.5)+ag_in(tt,c.merge,0.5),0,1)},dd_sp(tt,2,[[c.asks,w("asks","The answer",-0.3)]],"listen",0.2)),people:[
+        {fl:930,draw:cc=>{Ji=dd_come(cc,"ivy",tt,850,1100,tJ+0.2,tJ+2.6,930,dd_hT(930),{then:"clasp",flip:false,face:dd_sp(tt,4,[[w("asks","The answer",-0.2),c.merge-0.3]],"listen",0.1)});}}]});
+      const D=R.jun&&R.jun.desk,J=R.jun;
+      dd_bub(x,J,tt,c.asks,w("asks","The answer",-0.3),["Which room did you check by hand?"],cam,{lean:-40,rise:60});
+      dd_bub(x,Ji,tt,w("asks","The answer",-0.2),c.merge-0.3,["B-204. It's in the pull request."],cam,{lean:-200});
+      PK.callout(x,1250,100,600,270,[D?D.cx:1690,690],ag_io(tt,c.merge,tU-0.3,0.4),(cc,bx,by,bw,bh)=>dd_panel(cc,bx,by,bw,bh,"Pull request · room use",[["Approved by Jun",PK.C.green,36],["Merged",PK.C.green,36],["Graham told what it changes",PK.C.ink,32]],null,PK.C.green));}},
+    // next morning, at stand-up: Ivy says what she nearly missed, and Helena thanks her for saying it
+    {at:tU,place:"ddTeam",later:true,keys:[[tU,1250,560,1.12],[tU+1.6,960,540,1.0]],d:3,draw:(x,tt,cam)=>{let Ji=null,Jh=null;
+      dd_team(x,tt,{clock:9,sam:null,jun:null,marta:null,people:[
+        {fl:925,draw:cc=>{PK.person(cc,"jun",1330,925,dd_hT(925),"clasp",Object.assign({t:tt,flip:true},dd_alive(tt,{expr:"listen",gaze:[1,0.1]},2,tU)));}},
+        {fl:970,draw:cc=>{Ji=PK.person(cc,"ivy",1080,970,dd_hT(970),"clasp",Object.assign({t:tt,flip:true},dd_sp(tt,3,[[w("standup","says",-0.2),E.standup]],"think",0.1)));}},
+        {fl:1012,draw:cc=>{Jh=PK.person(cc,"helena",760,1012,dd_hT(1012),"clasp",Object.assign({t:tt},dd_sp(tt,4,[[c.thanks+0.2,c.thanks+1.6]],"smile",0.1)));}},
+        {fl:1058,draw:cc=>{PK.person(cc,"sam",1600,1058,dd_hT(1058),"clasp",Object.assign({t:tt,flip:true},dd_alive(tt,{expr:"listen",gaze:[1,0.1]},1,tU)));}},
+        {fl:880,draw:cc=>{PK.person(cc,"marta",520,880,dd_hT(880),"clasp",Object.assign({t:tt},dd_alive(tt,{expr:"listen",gaze:[1,0.1]},5,tU)));}}]});
+      dd_bub(x,Ji,tt,w("standup","says",-0.2),c.thanks-0.2,["I asked for the task,","not the decision or the words."],cam,{lean:-160});
+      dd_bub(x,Jh,tt,c.thanks+0.2,1e9,["Thank you for saying it."],cam,{lean:160});}}
   ]);
-  dd_kick(ctx,S,1);
+  dd_card(ctx,S,t,tU+0.3,w("standup","says",-0.6),{kick:"Next morning",title:"Stand-up"},{y:40,mid:true});
+  dd_kick(ctx,S,ag_in(t,0.6,0.6)*(1-dd_apart(t,[[w("pr","pull request",-0.2),tR],[tJ,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 6. The skills that grow */
-scene("grows",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
+scene("grows",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tB=c.before-0.6,tW=c.wef-0.4,tN=c.cant-0.4,tF=c.films-0.4;
+  const BC=PK.pace(ctx,"carmen",dd_boardC(sc,w)),BD=PK.pace(ctx,"carmen",dd_boardD(sc,w)),N4=PK.pace(ctx,null,dd_note4(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the work moves to either side of the draft
-    {at:0,place:"lpRoom",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const e0=w("moves","either",-0.2),u=ag_sine(ag_in(tt,e0,0.8));
-      dd_sheet(x,tt,0.8,780,350,340,{kick:"The agent",title:"The draft"},{col:LP.violet,light:"day"});
-      if(u>0){x.save();x.strokeStyle=rgba(LP.ink,0.75);x.fillStyle=rgba(LP.ink,0.75);x.lineWidth=7;x.lineCap="round";
-        for(const [x0,x1] of [[766,lerp(766,706,u)],[1134,lerp(1134,1194,u)]]){x.beginPath();x.moveTo(x0,448);x.lineTo(x1,448);x.stroke();const dir=Math.sign(x1-x0);
-          x.beginPath();x.moveTo(x1+dir*16,448);x.lineTo(x1-dir*8,432);x.lineTo(x1-dir*8,464);x.closePath();x.fill();}x.restore();}
-      dd_sheet(x,tt,w("before","Before",-0.1),100,310,580,{kick:"Before the draft",lines:["Frame the question: its decision, its words, what counts","Say exactly what's wanted"]},
-        {col:LP.blue,light:"day",u:dd_u(tt,[w("before","framing",-0.1),w("before","saying",-0.1)])});
-      dd_sheet(x,tt,w("after","After",-0.1),1220,310,640,{kick:"After the draft",lines:["Check it against what you know is true","Decide","Answer for it"]},
-        {light:"day",u:dd_u(tt,[w("after","checking",-0.1),w("after","deciding",-0.1),w("after","answering",-0.1)])});}},
+    // when an agent drafts, the work moves to either side of the draft (Carmen, at the board)
+    {at:0,place:"ddTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{dd_lesson(x,tt,{rows:BC,clock:10,events:DD_HEV,marta:null});}},
+    {at:tB,cut:true,place:"ddBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BC,{say:[[c.moves,E.moves],[c.before,E.after]],events:DD_HEV});}},
     // employers see it too
-    {at:c.wef-0.3,place:"lpRoom",later:true,keys:[[c.wef-0.3,960,540,1.0]],draw:(x,tt)=>{
-      dd_sheet(x,tt,c.wef+0.2,360,150,1200,{kick:"World Economic Forum · January 2025",title:"Future of Jobs Report 2025",
-        lines:["The core skill employers seek most: analytical thinking","Seven in ten companies call it essential","Rising fastest: AI and big data","Rising too: creative thinking and curiosity"]},
-        {light:"day",u:dd_u(tt,[w("wef","analytical",-0.2),w("seven","Seven",-0.1),w("rising","fastest",-0.4),w("rising","creative",-0.1)])});}},
-    // what an agent can do, and what it can't take
-    {at:c.cant-0.3,place:"lpRoom",later:true,keys:[[c.cant-0.3,960,540,1.0]],draw:(x,tt)=>{
-      dd_agent(x,960,470,100,{t:tt,core:0.7,floor:700});
-      dd_tag(x,tt,w("cant","draft",-0.1),null,780,390,"It drafts",{align:"right",col:LP.violet});
-      dd_tag(x,tt,w("cant","test",-0.1),null,780,460,"It tests its work",{align:"right",col:LP.violet});
-      dd_tag(x,tt,w("cant","say",-0.1),null,780,530,"It says what it assumed",{align:"right",col:LP.violet});
-      dd_pill(x,tt,w("cant","decision",-0.1),null,1420,420,"The decision stays with a person",{col:LP.blue});
-      dd_pill(x,tt,w("cant","responsibility",-0.2),null,1420,500,"And the responsibility",{col:LP.blue});}},
+    {at:tW,place:"ddBoard",later:true,keys:[[tW,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BD,{say:[[c.wef,E.rising]],events:DD_HEV});}},
+    // an agent can draft; it can't take the decision, or the responsibility (Helena's notebook)
+    {at:tN,place:"ddNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N4,{});}},
     // films of their own
-    {at:c.films-0.3,place:"lpRoom",later:true,keys:[[c.films-0.3,960,540,1.0]],draw:(x,tt)=>{
-      dd_sheet(x,tt,c.films+0.1,300,230,620,{kick:"How agents work",title:"What an agent is"},{light:"day"});
-      dd_sheet(x,tt,w("films","govern",-0.1),1000,230,620,{kick:"How teams govern them on data",title:"Agents at work on data"},{light:"day"});
-      dd_tag(x,tt,w("films","films",-0.1),null,960,560,"Films of their own",{align:"center"});}}
+    {at:tF,place:"ddTeam",dis:0.6,keys:[[tF,960,540,1.0]],d:2,draw:(x,tt,cam)=>{dd_ivyRoom(x,tt,tF,{});}}
   ]);
-  dd_kick(ctx,S,1);
+  dd_card(ctx,S,t,c.films+0.2,E.films+0.6,{kick:"Films of their own",title:"What an agent is",sub:"Agents at work on data"},{y:40,mid:true});
+  dd_kick(ctx,S,ag_in(t,0.6,0.6)*(1-dd_apart(t,[[tB,tN],[tF,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 7. On Monday */
-scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),e0=c.breath+0.6;
+scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tI=c.ivy-0.4,tN=c.one-0.4,tL=c.last-0.4,tE=c.breath+0.6,N5=PK.pace(ctx,null,dd_note5(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // back to 2005: two amateurs ahead of grandmasters and a supercomputer, by choosing, comparing and deciding
-    {at:0,place:"ddHome",keys:[[0,960,540,1.0]],draw:(x,tt)=>{dd_homeDesk(x,tt,{moves:DD_MOVES.deep});
-      dd_tag(x,tt,w("back","ahead",-0.1),null,960,170,"Ahead of grandmasters and a supercomputer",{align:"center"});
-      dd_tag(x,tt,w("not","choosing",-0.1),null,960,240,"Choosing what to look at",{align:"center"});
-      dd_tag(x,tt,w("not","comparing",-0.1),null,960,310,"Comparing",{align:"center"});
-      dd_pill(x,tt,w("not","deciding",-0.1),null,960,400,"Deciding",{col:LP.blue});}},
-    // Ivy did the same with data
-    {at:c.ivy-0.3,place:"ddMorning",dis:1.2,keys:[[c.ivy-0.3,960,540,1.0]],draw:(x,tt)=>{dd_ivyDesk(x,tt);
-      dd_tag(x,tt,w("ivy","drafted",-0.1),null,140,200,"The agent drafted in a minute",{col:LP.violet});
-      for(const [px,word,s] of [[300,"framed","Framed"],[560,"checked","Checked"],[820,"decided","Decided"]])dd_pill(x,tt,w("ivy",word,-0.1),null,px,300,s,{col:LP.blue});
-      dd_sheet(x,tt,w("rooms","counts",-0.2),140,420,820,{kick:"Graham's answer",title:"People in the rooms, not bookings"},{col:LP.green,light:"morning"});}},
-    // what to do on Monday; then the agent and Ivy at her table, as the film ends
-    {at:c.one-0.3,place:"ddMorning",later:true,keys:[[c.one-0.3,960,540,1.0]],draw:(x,tt)=>{const g=1-ag_in(tt,c.last-0.2,0.6);dd_ivyDesk(x,tt);
-      if(g>0.004){x.save();x.globalAlpha*=g;
-        dd_sheet(x,tt,c.one+0.3,100,130,500,{kick:"One",title:"Give the decision, the words, what counts"},{col:LP.blue,light:"morning"});
-        dd_sheet(x,tt,c.two+0.1,630,130,500,{kick:"Two",title:"Read what it assumed, to the end"},{light:"morning"});
-        dd_sheet(x,tt,c.three+0.1,100,450,500,{kick:"Three",title:"Check it against what you know is true"},{light:"morning"});
-        dd_sheet(x,tt,c.four+0.1,630,450,500,{kick:"Four",title:"Never approve your own work",lines:["Keep the reasoning with it"]},{light:"morning"});
-        x.restore();}}}
+    // 2005: two amateurs finished ahead of grandmasters and a supercomputer
+    {at:0,place:"ddcHome",keys:[[0,960,560,1.0],[tI-0.2,1000,580,1.06]],d:3,draw:(x,tt,cam)=>{
+      const h=ddc_h(900);ddc_desk(x,"am1",760,900,h,Object.assign({t:tt,screen:"monitor",sx:1020,show:ddc_screen,w:0.95*h,work:1,
+        on:(cc,D)=>{PK.monitor(cc,1180,D.top,0.3*h,0.22*h,{draw:ddc_screen});PK.monitor(cc,1330,D.top,0.3*h,0.22*h,{draw:ddc_screen});}},dd_alive(tt,{expr:"think",gaze:[1,0.4]},1,0)));
+      PK.seated(x,ddc_row("am2"),600,990,ddc_h(990),"sit",Object.assign({t:tt+2},dd_alive(tt,{expr:"smile",gaze:[1,0.3]},2,0)));}},
+    // Ivy did the same with data, and Graham's answer counts people in the rooms
+    {at:tI,place:"ddTeam",dis:1.0,keys:[[tI,960,540,1.0],[c.rooms,760,560,1.08]],d:3,draw:(x,tt,cam)=>{
+      const R=dd_ivyRoom(x,tt,tI,{ivy:dd_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tI)});
+      dd_screenCall(x,R,ag_io(tt,c.rooms,tN-0.3,0.4),"Graham's answer",[["counts people in the rooms",PK.C.blue,36],["not bookings",PK.C.ink,34]],PK.C.blue);}},
+    {at:tN,place:"ddNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N5,{});}},
+    // let the agent draft; you frame, check and decide
+    {at:tL,place:"ddTeam",dis:0.6,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      dd_ivyRoom(x,tt,tL,{people:[{fl:990,draw:cc=>{PK.person(cc,"helena",900,990,dd_hT(990),"clasp",Object.assign({t:tt},dd_alive(tt,{expr:"smile",gaze:[1,0.2]},5,tL)));}}]});}}
   ]);
-  lp_end(ctx,S,t,e0,"The draft and the decision",DD_LAST,"Film 2 of 3","The new skills");
-  dd_kick(ctx,S,ag_in(t,c.ivy-0.3,1.2)*(1-ag_in(t,e0,0.8)));
+  dd_card(ctx,S,t,0.3,tI-0.4,{kick:"Online, 2005",title:"Ahead of grandmasters and a supercomputer"},{y:40,mid:true});
+  dd_kick(ctx,S,(1-ag_in(t,tE-0.2,0.6))*(1-dd_apart(t,[[0,tI],[c.rooms,tN]])));
+  PK.end(ctx,S,t,tE,"The draft and the decision",DD_LAST,"Film 2 of 3","The new skills",{side:"right"});
 });
-ag_cutInto(["assumed","frame","review"]);
+ag_cutInto(["assumed","grows"]);

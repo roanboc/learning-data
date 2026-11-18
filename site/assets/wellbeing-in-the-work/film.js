@@ -2634,7 +2634,7 @@ const ww_note4=(sc,w)=>[
   {s:"Team: one order, 3 at a time, no weekends",x:70,y:262,size:48,at:w("team","The team",-0.3),d:1.4},
   {s:"They: their number, by their date",x:70,y:372,size:48,at:w("they","their number",-0.3),d:1.1},
   {s:"Both: numbers to rely on, on a date",x:70,y:482,size:48,col:"green",at:w("they","Both",-0.3),d:1.1},
-  {s:"Least: an agreed order, a date each",x:70,y:600,size:52,col:"blue",at:w("least","least",-0.3),d:1.2,marks:[["ring","blue",sc.ends.least-0.2]]}];
+  {s:"Least: an agreed order, a date each",x:70,y:600,size:46,col:"blue",at:w("least","least",-0.3),d:1.2,marks:[["ring","blue",sc.ends.least-0.2]]}];
 // 5. where a manager's part ends
 const ww_note5=(sc,w)=>[
   {s:"My part has an end",x:70,y:124,size:80,w:800,col:"blue",at:w("part","part",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},

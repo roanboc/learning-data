@@ -13,12 +13,13 @@ const OX_PIC={
   field:(c,u)=>{c.drawImage(ag_place("oxField"),0,0);ox_team(c,760+u*38,930,0.86,{t:u,walk:0.45,horns:"blunt",man:"worker",lead:"owner"});},
   // the ox calm in the street, chewing, looking at us
   chew:(c,u)=>{c.drawImage(ag_place("oxStreet"),0,0);ox_cattle(c,760,1000,0.95,{t:u,chew:1,head:0.1});},
-  // the owner leading the ox by its rope; at u0 (o) another hand takes it
+  // the owner leading the ox by its rope; at u0 (o) another hand takes it, and the owner stands back to watch (o.back: how much of him
+  // shows there, all of him unless it's given)
   rope:(c,u,o)=>{o=o||{};c.drawImage(ag_place("oxStreet"),0,0);const sw=o.swap==null?0:o.swap,x=420+u*46.7;
     ox_cattle(c,x,1000,0.95,{t:u,walk:0.5,speed:0.55});
     const who=sw>0.5?"stranger":"owner",m=ox_folk(c,x+600,1040,480,who,{t:u,walk:0.5,speed:0.5,near:[-34,-18],gaze:[-3,0]});
     ox_ropeLine(c,[x+262*0.95,1000-334*0.95],[x+470,1000-140],[x+600+m.near.H[0],1040+m.near.H[1]],7);
-    if(sw>0.5)ox_layerA(c,clamp((sw-0.5)*3,0,1),cc=>ox_folk(cc,260,1050,480,"owner",{t:u,flip:true,near:[10,30]}),"oxlayer2");},
+    if(sw>0.5)ox_layerA(c,clamp((sw-0.5)*3,0,1)*(o.back==null?1:o.back),cc=>ox_folk(cc,260,1050,480,"owner",{t:u,flip:true,near:[10,30]}),"oxlayer2");},
   // the elder of the street pointing at the ox's sharp horns, speaking to its owner
   elder:(c,u)=>{c.drawImage(ag_place("oxStreet"),0,0);ox_cattle(c,700,1000,0.95,{t:u,horns:"sharp"});const tip=ox_hornTip(700,1000,0.95,0,false,false);
     const sh=ag_sine(clamp((u-0.6)/0.5,0,1))*(1-ag_sine(clamp((u-2.2)/0.6,0,1)));ox_folk(c,250,1042,470,"owner",{t:u,nearTo:[250+92,1042-230-sh*40],farTo:[250+70,1042-240-sh*40],nod:-0.06*sh});ox_folk(c,1360,1030,480,"elder",{t:u,flip:true,nearTo:[tip[0]+60,tip[1]+20],talk:0.4+0.4*Math.sin(u*9)});},
@@ -42,7 +43,7 @@ function ox_frame(ctx,kind,u,o){o=o||{};const [x,y,w,h]=OX_LAB.pic;ag_picture(ct
 /* ---------------------------------------------------------------- 1 · The ox that gores */
 scene("ox",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({carts:wAt(sc,"heavy","carts"),stab:wAt(sc,"gore","stabbing"),again:wAt(sc,"gore","may gore again"),
     fam:wAt(sc,"kills","his family"),work:wAt(sc,"kills","the work"),pay:wAt(sc,"why","It can't pay"),wronged:wAt(sc,"stone","wronged"),
-    ww:wAt(sc,"warned","warned"),wb:wAt(sc,"warned","blunt"),wt:wAt(sc,"warned","tied up"),thirty:wAt(sc,"pays","thirty"),three:wAt(sc,"wage","three years"),
+    ww:wAt(sc,"warned","warned"),wb:wAt(sc,"warned","blunt"),wt:wAt(sc,"warned","tied up"),owner:wAt(sc,"pays","the owner"),thirty:wAt(sc,"pays","thirty"),three:wAt(sc,"wage","three years"),
     kb:wAt(sc,"knew","blunt"),kt:wAt(sc,"knew","keep it"),ka:wAt(sc,"knew","or answer"),nod:wAt(sc,"family","answer"),
     must:wAt(sc,"same","a person must"),team:wAt(sc,"behind","a team"),stand:wAt(sc,"behind","stand behind")}));
   const tip0=ox_hornTip(700,1000,0.95,0,false,false);
@@ -91,10 +92,10 @@ scene("ox",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({carts:wAt(sc,"h
     // and didn't blunt its horns: the tips, sharp
     {cut:true,at:P.wb-0.2,place:"oxStreet",keys:[[P.wb-0.2,tip0[0]-120,tip0[1]+130,2.1]],push:0.03,draw:(x,tt)=>{ox_cattle(x,700,1000,0.95,{t:tt,horns:"sharp"});
       ox_glint(x,tip0[0],tip0[1],26,ag_io(tt,P.wb+0.2,P.wb+1.0,0.3));const t2=ox_hornTip(700-20*0.95,1000-12*0.95,0.95,0,false,false);ox_glint(x,t2[0]+0,t2[1],18,ag_io(tt,P.wb+0.4,P.wb+1.1,0.3));}},
-    // or keep it tied up: a rope hangs loose from a post, and the ox wanders free
+    // or keep it tied up: a rope hangs loose from a post, and the ox wanders free, while the voice goes on "and it kills a man"
     {cut:true,at:P.wt-0.2,place:"oxStreet",keys:[[P.wt-0.2,960,620,1.08]],draw:(x,tt)=>{ox_cattle(x,1240+(tt-P.wt)*24,900,0.55,{t:tt,walk:0.5});ox_post(x,820,1010,330,{});}},
     // the owner pays thirty shekels of silver: coils of silver go on one pan, a weight like a sleeping duck is on the other, and they settle level
-    {at:c.pays-0.2,place:"oxCourt",keys:[[c.pays-0.2,960,560,1.0]],push:0.02,draw:(x,tt)=>{const n=9,land=i=>ag_in(tt,P.thirty-0.7+i*0.1,0.25);
+    {at:P.owner-0.4,place:"oxCourt",keys:[[P.owner-0.4,960,560,1.0]],push:0.02,draw:(x,tt)=>{const n=9,land=i=>ag_in(tt,P.thirty-0.7+i*0.1,0.25);
       const tilt=1-ag_spr(tt,P.thirty-0.1,0.8);
       ox_balance(x,960,1060,1.7,{tilt,left:(cx,px,py,w)=>{const k=[...Array(n)].filter((_,i)=>land(i)>=1).length;if(k)ox_coils(cx,px,py-4,w,k);
           for(let i=0;i<n;i++){const l=land(i);if(l>0&&l<1){ox_coil(cx,px+(i%3-1)*30,lerp(py-260,py-30,ag_eo(l)),w*0.13,0);}}},
@@ -311,11 +312,13 @@ scene("rope",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({holds:wAt(sc,
     small:wAt(sc,"told","one small"),speed:wAt(sc,"tricked","its speed"),often:wAt(sc,"tricked","often"),shut:wAt(sc,"caught","shut")}));
   const MSG=[100,400,660],KEY=[300,560];
   ag_shots(ctx,S,t,sc.dur,[
-    // an ox pulls for whoever holds its rope: its owner leads it; then a stranger holds the rope, and it follows just the same
-    {at:0,place:null,keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>OX_PIC.rope(x,tt+1,{swap:0})},
-    {at:P.holds+0.2,place:null,keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>OX_PIC.rope(x,tt-P.holds+1.5,{swap:1})},
+    // an ox pulls for whoever holds its rope: its owner leads it; then a stranger holds the rope, and it follows just the same. The ox
+    // walks on through the change, under a still camera, so only the hand on the rope changes; the owner, standing back to watch, comes
+    // in once the stranger has it. The stranger's picture stays until the voice turns to the agent: the point of the line, seen
+    {at:0,place:null,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>OX_PIC.rope(x,tt+1,{swap:0})},
+    {at:P.holds-0.3,place:null,keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>OX_PIC.rope(x,tt+1,{swap:1,back:ag_in(tt,P.holds+0.2,0.4)})},
     // an agent works for whoever gives it words: Jun's note goes into the ring; most days, that's Jun: his name at its foot
-    {at:P.agent-0.3,place:"lab",keys:[[P.agent-0.3,960,540,1]],draw:(x,tt)=>{const go=ox_u(tt,P.words,1.2);
+    {at:P.agent,place:"lab",keys:[[P.agent,960,540,1]],draw:(x,tt)=>{const go=ox_u(tt,P.words,1.2);
       ox_room(x,tt,{jun:1,tools:1,reach:0.5,junO:{gaze:[3,-1]},ring:{core:0.5+0.4*go,lit:go>0.9?Math.floor(tt*1.6)%3:null,think:go*0.4}});
       const na=ag_in(tt,P.agent,0.4)*(1-ag_in(tt,P.words+1.0,0.3));
       // once it's sent, its words have been read: it goes into the ring as a plain card, too small to read

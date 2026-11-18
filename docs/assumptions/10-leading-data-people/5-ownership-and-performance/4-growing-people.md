@@ -1,6 +1,6 @@
 # Growing people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 4 of 4 · merged, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261)
+*Leading data people* · *Ownership and performance*, film 4 of 4 · merged, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261); made again in ink line on 18 November 2026 (PR #435)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/growing-people/)
 

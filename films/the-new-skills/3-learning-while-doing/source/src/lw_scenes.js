@@ -80,7 +80,7 @@ scene("circles",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc
       PK.teach(x,LWA_FOLK.stu2,tt,BO,{x:LWA_BD.x,y:LWA_BD.y,k:LWA_BD.k,deco:true,floor:LWA_BD.floor,rest:LWA_BD.rest,h:lwa_hi(LWA_BD.floor),say:[[c.picture,E.steps]],events:LW_HEV});
       Jl=lw_learner(x,"wash1",1090,980,2,tt,{flip:true,face:lw_sp(tt,2,[[w("picture","picture",0.3),w("picture","belota",-0.3)]],"glad",0.2)});
       lw_learner(x,"farm",520,1040,4,tt,{face:lw_alive(tt,{expr:"listen",gaze:[1,0.2]},4,tC)});
-      lw_bub(x,Jl,tt,w("picture","picture",0.3),w("picture","belota",-0.3),["A hammock, like ours!"],cam,{lean:-140});}},
+      lw_bub(x,Jl,tt,w("picture","picture",0.3),w("picture","belota",-0.9),["A hammock, like ours!"],cam,{lean:-140});}},
     // the fortieth hour: a spring evening, and the windows lit across the town
     {at:tF,place:"lwaDusk",cut:true,keys:[[tF,960,560,1.0],[c.spread,980,560,1.05]],d:3,draw:(x,tt,cam)=>{let J1=null;
       lwa_lit(x,ag_in(tt,tF+0.4,1.2));

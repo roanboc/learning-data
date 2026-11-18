@@ -178,7 +178,6 @@ def pen(s, sec=0.7, g=0.005, pan=0.0, n=3):
         _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
 def ticked(s, g=0.0045, pan=0.0):
     """a tick drawn: two quick strokes of a pen"""
-    pen(s, 0.24, g, pan, 2)
 def rope(s, g=0.005, pan=0.0):
     """a cord drawn taut between its posts: a short, soft rub of rope, and the posts' dull knock"""
     n = int(0.6 * SR); x = np.arange(n) / SR
@@ -214,22 +213,17 @@ ow = lambda lid, word, off=0: W('tower', lid, word, off)
 oc = lambda lid, off=0: G('tower', lid, off)
 END = E('tower')
 cup(F3, 0.6, 3.0, 0.8)
-card(ow('when', 'Pisa', -0.1), 0.0035, px(400))
 tb(C4, ow('when', 'Pisa', 0.3), 1.4, 0.75); tb(A3, ow('when', 'Pisa', 1.9), 1.9, 0.7)
 cup(D3, ow('when', 'soft', -0.3), 2.2, 0.7)
 pair(D3, F3, ow('lean', 'further', -0.2), 2.0, 0.65)
-card(oc('pavia', 0.3), 0.0035, px(1530))
 cup(D3, ow('pavia', 'killing', -0.2), 2.4, 0.7)
 rope(ow('closed', 'closed', -0.1), 0.005, px(960))
-card(max(oc('closed', 1.7), ow('closed', 'closed', -0.1)), 0.003, px(960))
 pair(D3, A3, oc('harm', 0.3), 2.4, 0.6)
 pair(D3, F3, ow('risk', 'down', -0.2), 1.6, 0.55, until=oc('change', -0.3))
 # the committee, that spring: F major; its sheet, and the tower's picture, pinned up
 pair(F3, A3, oc('committee', 0.4), 2.2, 0.6)
-card(oc('committee', 0.2), 0.004, px(400)); card(oc('committee', 0.6), 0.0035, px(1510))
 tb(C4, ow('committee', 'engineers', 0.0), 1.5, 0.55)
 # what saving it would mean: its sheet; the mark, as the blue line half a degree back is drawn; the steadier ground
-card(ow('meant', 'saving', -0.2), 0.004, px(1490))
 mark(C4, F4, ow('meant', 'half', 0.3), 0.7, 2.6, under=A3)
 cup(F3, ow('enough', 'steady', -0.1), 2.0, 0.6)
 # the method: the augers turning in under the north side; the test footing set, and the lead stacked on the north side, ingot by ingot
@@ -242,15 +236,10 @@ for i in range(3):
 soil(ow('soil', 'tower', 0.0), 1.4, 0.0035, px(800))
 pair(Bb3, D4, ow('soil', 'lean', -0.2), 2.6, 0.6)
 # the engineer's note, pinned up once the camera has come back, and signed
-card(oc('note', 1.0), 0.004, px(1540))
-pen(ow('note', 'signed', 0.1), 0.9, 0.0045, px(1400), 3)
 # 45 cm back at the top: A, C and F rising over the muted F; reopened, F and C; the visitors
-card(ow('less', 'forty', -0.3), 0.004, px(400))
 cup(F3, ow('less', 'centimetres', -0.3), 2.4, 0.6); figure((A3, C4, F4), ow('less', 'centimetres', -0.3), 0.6, 0.3, 0.26, 1.8)
-card(ow('reopen', 'reopened', -0.1), 0.0035, px(1440))
 pair(F3, C4, ow('reopen', 'reopened', 0.1), 2.2, 0.55)
 # the university: the request, and the decision it hid, the muted D, low
-card(ow('data', 'request', -0.2), 0.0035, px(1470)); card(ow('data', 'decision', -0.2), 0.0035, px(1470))
 cup(D3, ow('data', 'decision', -0.2), 1.8, 0.65)
 # half an hour of listening found it, and one page agreed in writing: the mark, F settling onto A, as "Agreed in writing" comes
 mark(F4, A4, ow('found', 'writing', -0.45), 0.6, 2.4, under=F3)
@@ -263,12 +252,8 @@ LV[0] = 0.9
 kw = lambda lid, word, off=0: W('ask', lid, word, off)
 kc = lambda lid, off=0: G('ask', lid, off)
 pair(F3, A3, S0('ask') + 0.4, 2.0, 0.55)
-for i, x in enumerate((420, 960, 1500)):
-    card(S0('ask') + 0.8 + 0.4 * i, 0.0035, px(x))
-tap(kc('email', 0.6), 0.0035, px(1310))
 figure((C4, A3), kc('asks', 0.4), 0.55, 0.3, 0.26, 1.2)
 cup(D3, kw('nobody', 'nobody', -0.2), 1.6, 0.6)
-card(kw('helena', 'asks', -0.1), 0.0035, px(650))
 
 # 3. Half an hour, mostly listening: the chapter turns on C and E, an open question. Each question's sheet pinned up as it's asked; the
 #    decision found, F and D; humble inquiry, the muted F alone; active listening: the open trombone's C and E, and the muted one says
@@ -277,17 +262,10 @@ LV[0] = 0.9
 lw = lambda lid, word, off=0: W('listen', lid, word, off)
 lc = lambda lid, off=0: G('listen', lid, off)
 pair(C4, E4, S0('listen') + 0.3, 2.0, 0.5)
-card(S0('listen') + 0.9, 0.0035, px(870))
-for lid in ('decide', 'when', 'who', 'trust', 'mind'):
-    card(lc(lid, -0.05), 0.0035, px(870))
 pair(F3, D4, lw('decide', 'hundred', -0.2), 1.6, 0.55)
-card(lw('schein', 'Schein', -0.3), 0.0035, px(870))
 cup(F3, lw('schein', 'interest', -0.2), 1.8, 0.6)
-card(lw('rogers', 'Rogers', -0.3), 0.0035, px(870))
 figure((C4, E4), lw('rogers', 'saying', -0.2), 0.5, 0.3, 0.26, 0.7)
 figure((C3, E3), lw('rogers', 'saying', 0.9), 0.55, 0.3, 0.26, 0.9, who=cup)
-for i in range(5):
-    tap(lw('whys', 'five', -0.4 + 0.32 * i), 0.0025, px(540 + 210 * i))
 tb(F4, lw('whys', 'what', 0.0), 1.6, 0.45)
 
 # 4. Say it back, write it down: what Helena heard, pinned up, and the muted trombone says back Graham's request, his C and A; Graham
@@ -296,19 +274,9 @@ tb(F4, lw('whys', 'what', 0.0), 1.6, 0.45)
 LV[0] = 0.9
 aw = lambda lid, word, off=0: W('agree', lid, word, off)
 ac = lambda lid, off=0: G('agree', lid, off)
-card(ac('back', 0.4), 0.0035, px(780))
 figure((C4, A3), aw('back', 'heard', 0.1), 0.6, 0.3, 0.26, 1.2, who=cup)
-card(aw('used', 'means', -0.3), 0.0035, px(1460))
 tb(F4, aw('used', 'means', -0.1), 1.4, 0.5)
-card(aw('data', 'bookings', -0.2), 0.0035, px(730)); card(aw('data', 'head', -0.2), 0.0035, px(1190))
-card(aw('pisa', 'Pisa', -0.1), 0.0035, px(650)); card(aw('pisa', 'Here', -0.2), 0.0035, px(1270))
-card(ac('write', 0.5), 0.004, px(620))
-pen(aw('write', 'writes', 0.0), 0.9, 0.0045, px(620), 3)
 mark(C4, F4, aw('question', 'Do', -0.3), 0.6, 2.4, under=A3)
-for word, off in (('decision', -0.1), ('dates', -0.1), ('who', -0.1), ('change', -0.1), ('means', -0.3)):
-    pen(aw('under', word, off), 0.4, 0.0035, px(620), 2)
-slide(aw('words', 'own', -0.1), 0.8, 0.0035, px(450))
-card(aw('reply', 'replies', -0.2), 0.0035, px(1480))
 pair(F3, A3, aw('reply', 'Yes', -0.1), 1.0, 0.55); tb(C4, aw('reply', 'Yes', 0.95), 1.6, 0.55)
 
 # 5. What the question gave: the page waits its turn, the muted D, low; the team starts from the page; across the week, A; at the peak,
@@ -317,18 +285,12 @@ pair(F3, A3, aw('reply', 'Yes', -0.1), 1.0, 0.55); tb(C4, aw('reply', 'Yes', 0.9
 LV[0] = 0.9
 nw = lambda lid, word, off=0: W('answer', lid, word, off)
 nc = lambda lid, off=0: G('answer', lid, off)
-card(nw('wait', 'waits', -0.1), 0.0035, px(1560))
 cup(D3, nw('wait', 'turn', -0.1), 2.2, 0.6)
-card(nc('start', 0.6), 0.0035, px(960))
-card(nw('week', 'booked', -0.2), 0.0035, px(470)); tb(A3, nw('week', 'booked', 0.0), 0.9, 0.45)
-card(nw('peak', 'booked', -0.3), 0.0035, px(1460)); tb(F4, nw('peak', 'booked', -0.1), 1.1, 0.45)
+tb(A3, nw('week', 'booked', 0.0), 0.9, 0.45)
+tb(F4, nw('peak', 'booked', -0.1), 1.1, 0.45)
 cup(D3, nw('empty', 'nobody', -0.2), 1.4, 0.55)
 a0 = nw('so', 'not', -0.2)
-card(a0, 0.0035, px(640)); cup(F3, a0, 2.4, 0.55); figure((A3, C4), a0 + 0.05, 0.55, 0.3, 0.26, 1.8)
-ticked(a0 + 0.6, 0.004, px(1100))
-ticked(nw('both', 'peak', 0.0), 0.004, px(1830)); ticked(nw('both', 'Monday', 0.2), 0.004, px(1850))
-slide(nc('dash', 0.2), 1.2, 0.0035, px(960))
-card(nw('instead', 'answer', -0.1), 0.0035, px(1500))
+cup(F3, a0, 2.4, 0.55); figure((A3, C4), a0 + 0.05, 0.55, 0.3, 0.26, 1.8)
 mark(F4, A4, nw('instead', 'answer', -0.1), 0.55, 2.2, under=F3)
 
 # 6. On Monday: back in Pisa, framed on the wall: what saving it meant, the mark, C settling onto F, as at the start; the engineer's
@@ -337,13 +299,46 @@ mark(F4, A4, nw('instead', 'answer', -0.1), 0.55, 2.2, under=F3)
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
-card(mw('back', 'agreed', -0.2), 0.0035, px(1050))
 mark(C4, F4, mw('back', 'agreed', 0.1), 0.5, 2.2, under=A3)
-card(mw('daily', 'signed', -0.3), 0.0035, px(1600)); pen(mw('daily', 'said', 0.0), 0.9, 0.004, px(1600), 3)
-ticked(mw('same', 'answer', 0.0), 0.004, px(1430))
-tap(mc('form', -0.1), 0.0035, px(960)); slide(mw('form', 'five', -0.3), 1.6, 0.0035, px(960))
-card(mc('monday', 0.3), 0.0035, px(400)); card(mw('who', 'who', -0.1), 0.0035, px(960))
-card(mw('listen', 'Listen', -0.1), 0.0035, px(1520)); card(mw('write', 'write', -0.1), 0.0035, px(960))
 pair(F3, A3, mw('write', 'agree', -0.1), 1.6, 0.45)
 mark(A3, F4, mw('take', 'agree', -0.2), 0.5, 5.2, until=TOT)
 cup(F3, mw('take', 'agree', 0.36), 5.0, 0.45, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'O': ('tower', 'carmen', 'qb_boardO'), 'A': ('ask', 'carmen', 'qb_boardA'), 'B': ('listen', 'carmen', 'qb_boardB'),
+                    'N1': ('listen', None, 'qb_note1'), 'N2': ('agree', None, 'qb_note2'), 'N3': ('answer', None, 'qb_note3'),
+                    'N4': ('monday', None, 'qb_note4'), 'N5': ('tower', None, 'qb_note5')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+for name in ('O', 'A', 'B'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4', 'N5'):
+    written(name, scratch, 0.004)
+# the chat between Helena and Graham: a blip as her message arrives on his phone, and as his reply goes
+pop(W('ask', 'helena', 'asks', -0.2) + 1.4, 0.0022, px(1060), False)
+pop(G('ask', 'helena') + _DUR['ask/helena'] + 0.3 + 0.8, 0.0022, px(1060))

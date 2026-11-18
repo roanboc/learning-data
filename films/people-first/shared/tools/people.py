@@ -47,7 +47,26 @@ It lists:
 - no key ideas written by hand: in the whole film nobody explains at a board (PK.teach) and nobody keeps a page of notes
   (PK.notes). A film goes between its people and its key ideas: an idea that is a label on a scene is lost in it;
 - one place only: fewer than PLACES places in the film;
-- a hair style that can't turn: a cap with no turn, hair down the back with no backT, or their two rows of unequal length.
+- a hair style that can't turn: a cap with no turn, hair down the back with no backT, or their two rows of unequal length;
+- an arm across the face: the near arm, which the kit draws over the head, lies over FACE_N or more of the eyes, the nose and the
+  mouth for ACROSS_S seconds or more. Let the far hand reach there (o.reachF, with what it holds under it, o.underF), or turn
+  the person round;
+- a hand above the head: a hand that reaches for something, or holds it, stays above the top of the head (by HIGH of the person's
+  height or more) for HIGH_S seconds or more, the arm as straight up as it goes. A hand works between the hips and the top of the
+  head: lower what is written on or reached for (a board in a room: its top row no higher than the writer's head);
+- someone hidden: HIDDEN or more of someone's head and back, or most of their face, behind someone drawn after them, for HIDDEN_S
+  seconds or more. Stand them apart, or seat one to the side. Someone nobody names (PK.extra), or someone far smaller, so far
+  off, is the background: whoever is near may stand in front of them;
+- the further one on top: someone whose feet are further up the picture (by DEPTH of their height or more), so further away,
+  drawn over whoever is nearer, for DEPTH_S seconds or more. Draw what is further away first;
+- solid things in one place: a film says what is solid in the thing's own drawing (a car, a cart, a boat), with
+  PK.watch({solid: name, at: [x0, y0, x1, y1], ground: y, ctx}) where PK.watch is set. Listed: one further away drawn over a nearer
+  one, or over a person who is nearer (and a person further away drawn over it), and two that overlap on one ground line.
+
+The last five came on 18 November 2026, when four films were drawn (in Measure the work, not the people, cars drove through each
+other, an arm lay across a face and someone sat hidden behind whoever wrote at the board). What those films had then is in
+site-tools/people_later.json, {film key: [[kind, chapter id], ...]}: it is listed and doesn't stop the check, and each film leaves
+the list with its fix.
 
 Someone on a screen (a tile of a call, PK.call) is followed too, for their face and their pose, but isn't someone in the room: they
 aren't held to its eye line, they make no row, the call's panel may hold their head, and they don't count as a person in view.
@@ -67,6 +86,10 @@ HIDE_S, LATE, LAG = 1.6, 0.2, 1.2
 EDGE = 24
 HOP = 70
 PLACES = 2
+FACE_N, ACROSS_S = 2, 0.5
+HIGH, HIGH_S = 0.02, 1.0
+HIDDEN, HIDDEN_S = 0.5, 1.5
+DEPTH, DEPTH_S = 0.04, 0.3
 
 HOOK = r"""()=>{
 if(window.__PKW)return;const H=window.__PKW={on:false,pend:new Map()};
@@ -77,7 +100,9 @@ if(typeof window.ag_person!=="function")window.ag_person=function(){};
 const ROOMS=typeof AG_ROOMS!=="undefined"?AG_ROOMS:{};H.place="none";
 if(typeof window.ag_shot==="function"){const os=window.ag_shot;window.ag_shot=function(ctx,S_,t,sh){const was=H.place,pl=sh&&(sh.room||sh.place);
   H.place=pl?String(ROOMS[pl]||pl):"own"+(sh&&sh.at!=null?sh.at:"");try{return os.apply(this,arguments);}finally{H.place=was;}};}
-PK.watch=r=>{const c=r.ctx,m=c.getTransform(),k=Math.hypot(m.a,m.b),a=c.globalAlpha*r.a;
+PK.watch=r=>{const c=r.ctx,m=c.getTransform(),k=Math.hypot(m.a,m.b),a=c.globalAlpha*(r.a==null?1:r.a);
+  // something solid a film draws and says so (a car, a cart, a boat): where it is, and the ground it stands on
+  if(r.solid){if(H.on){const p=at(m,r.at[0],r.at[1]),q=at(m,r.at[2],r.at[3]);add(c.canvas,{k:"S",name:String(r.solid),place:H.place,x0:p[0],y0:p[1],x1:q[0],y1:q[1],g:at(m,r.at[0],r.ground==null?r.at[3]:r.ground)[1],a});}return;}
   if(r.box){if(H.on){const p=at(m,r.box[0],r.box[1]),q=at(m,r.box[0]+r.box[2],r.box[1]+r.box[3]);add(c.canvas,{k:"B",x0:p[0],y0:p[1],x1:q[0],y1:q[1],a});}return;}
   // the notes someone is writing (PK.notes), and a chat or a call on show (PK.chat, PK.call): that they are in the picture
   if(r.note||r.talk){if(H.on)add(c.canvas,{k:r.note?"N":"K",who:r.who||r.talk,edge:r.edge,tip:r.tip?at(m,r.tip[0],r.tip[1]):null,a});return;}
@@ -85,8 +110,16 @@ PK.watch=r=>{const c=r.ctx,m=c.getTransform(),k=Math.hypot(m.a,m.b),a=c.globalAl
   if(r.teach){if(H.on)add(c.canvas,{k:"T",who:r.teach,over:r.over,late:r.late,lag:r.lag,edge:r.edge,a});return;}
   if(r.part!=="lower"){c.save();c.globalAlpha=a;window.ag_person(c,r.who,r.x,r.floor,r.h/1000);c.restore();}
   if(H.on){const f=at(m,r.x,r.floor),hc=at(m,r.hc[0],r.hc[1]);
-    add(c.canvas,{k:"P",who:r.who,kid:r.kid,place:H.place,wx:r.x,wf:r.floor,x:f[0],y:f[1],h:r.h*k,hx:hc[0],hy:hc[1],hh:r.hh*k,flip:r.flip,part:r.part,mode:r.mode,pose:r.pose,reach:r.reach,at:r.at,hold:r.hold,
+    add(c.canvas,H.last={k:"P",who:r.who,kid:r.kid,place:H.place,wx:r.x,wf:r.floor,x:f[0],y:f[1],h:r.h*k,hx:hc[0],hy:hc[1],hh:r.hh*k,flip:r.flip,part:r.part,mode:r.mode,pose:r.pose,reach:r.reach,at:r.at,hold:r.hold,
       expr:r.expr,gaze:r.gaze,nod:r.nod,live:r.live,busy:r.busy,screen:!!r.screen,a});}};
+// everyone's joints, as PK.person gives them back, with how thick an arm, a body and a leg are: for the arms, and for who is in
+// front of whom. PK.person is called by name everywhere in the kit (K.person), so this follows a walk, a desk and a board too
+const JN=["hc","sc","hip","shN","eN","wN","hdN","shF","eF","wF","hdF","hN","hF","kN","kF","nN","nF"],op=PK.person;
+PK.person=function(ctx){H.last=null;const J=op.apply(this,arguments),r=H.last;H.last=null;
+  if(r&&J&&J.hc&&J.p){const m=ctx.getTransform(),u=J.u*Math.hypot(m.a,m.b),p=J.p;r.j={};for(const n of JN)r.j[n]=at(m,J[n][0],J[n][1]);
+    r.sg=(J.sgn||1)*(m.a<0?-1:1);r.tk=J.k==null?1:J.k;r.sd=J.side||0;r.ha=J.ha||0;
+    r.g=[p.arm[0]/2,p.arm[1]/2,p.arm[2]/2,p.hand,p.tor[0]/2,p.tor[2]/2,p.leg[0]/2,p.leg[1]/2,p.leg[2]/2].map(v=>v*u);}
+  return J;};
 // a scratch canvas starts again empty
 if(typeof window.ag_buf==="function"){const ob=window.ag_buf;window.ag_buf=function(){const r=ob.apply(this,arguments);if(r&&r[0])H.pend.delete(r[0]);return r;};}
 // a picture laid on another brings who is on it to where it is laid, as faint as it is laid; a whole picture laid over the frame (a
@@ -98,7 +131,10 @@ P2.drawImage=function(img){if(H.on){
     if(n>=9){sx=A[1];sy=A[2];sw=A[3];sh=A[4];dx=A[5];dy=A[6];dw=A[7];dh=A[8];}else if(n>=5){dx=A[1];dy=A[2];dw=A[3];dh=A[4];}else{dx=A[1];dy=A[2];dw=sw;dh=sh;}
     const m=this.getTransform(),kx=dw/sw,ky=dh/sh,k=Math.hypot(m.a,m.b)*Math.abs(kx),map=(x,y)=>at(m,dx+(x-sx)*kx,dy+(y-sy)*ky);
     for(const r of rs){const o=Object.assign({},r,{a:r.a*this.globalAlpha});
-      if(r.k==="B"){[o.x0,o.y0]=map(r.x0,r.y0);[o.x1,o.y1]=map(r.x1,r.y1);}else if(r.k==="P"){[o.x,o.y]=map(r.x,r.y);[o.hx,o.hy]=map(r.hx,r.hy);o.h=r.h*k;o.hh=r.hh*k;}
+      if(r.k==="B"){[o.x0,o.y0]=map(r.x0,r.y0);[o.x1,o.y1]=map(r.x1,r.y1);}
+      else if(r.k==="S"){[o.x0,o.y0]=map(r.x0,r.y0);[o.x1,o.y1]=map(r.x1,r.y1);o.g=map(r.x0,r.g)[1];}
+      else if(r.k==="P"){[o.x,o.y]=map(r.x,r.y);[o.hx,o.hy]=map(r.hx,r.hy);o.h=r.h*k;o.hh=r.hh*k;
+        if(r.j){o.j={};for(const n in r.j)o.j[n]=map(r.j[n][0],r.j[n][1]);o.g=r.g.map(v=>v*k);if(m.a*kx<0)o.sg=-r.sg;}}
       add(this.canvas,o);}}}
   return di.apply(this,arguments);};
 }"""
@@ -110,17 +146,19 @@ const info=filmInfo().scenes,when=f=>{const T=f/30,i=sceneIndex(T);return info[i
 const F=[],EDGES=new Map();
 for(let f=0;f/30<TL.total;f++){H.pend=new Map();H.on=true;mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";mx.clearRect(0,0,192,108);
   try{renderFrame(mx,S,f/30);}catch(e){}
-  H.on=false;const R=H.pend.get(main)||[],P=[],B=[],N=[],K=[],TB=[];let tip=null;
-  for(const r of R){if(r.a<0.05)continue;
+  H.on=false;const R=H.pend.get(main)||[],P=[],B=[],N=[],K=[],TB=[],SO=[];let tip=null,nth=0;
+  for(const r of R){nth++;if(r.a<0.05)continue;
     if(r.a>=0.5)for(const e of r.edge||[]){const key=(r.k==="T"?"board":"page")+"|"+e.s;if(!EDGES.has(key))EDGES.set(key,{f,on:r.k==="T"?"board":"page",s:e.s,room:e.room});}
     if(r.k==="T"){if(r.a>=0.5)TB.push(r);}
     else if(r.k==="N"||r.k==="K"){if(r.a>=0.5)(r.k==="N"?N:K).push(r.who);if(r.k==="N"&&r.tip&&r.a>=0.5)tip=[r.tip[0]/S,r.tip[1]/S];}
     else if(r.k==="B")B.push({x0:Math.min(r.x0,r.x1)/S,y0:Math.min(r.y0,r.y1)/S,x1:Math.max(r.x0,r.x1)/S,y1:Math.max(r.y0,r.y1)/S,a:r.a});
-    else P.push(Object.assign({},r,{x:r.x/S,y:r.y/S,h:r.h/S,hx:r.hx/S,hy:r.hy/S,hh:r.hh/S}));}
+    else if(r.k==="S")SO.push({name:r.name,place:r.place,x0:Math.min(r.x0,r.x1)/S,y0:Math.min(r.y0,r.y1)/S,x1:Math.max(r.x0,r.x1)/S,y1:Math.max(r.y0,r.y1)/S,g:r.g/S,a:r.a,n:nth});
+    else{const j=r.j?{}:null;if(j)for(const n in r.j)j[n]=[r.j[n][0]/S,r.j[n][1]/S];
+      P.push(Object.assign({},r,{x:r.x/S,y:r.y/S,h:r.h/S,hx:r.hx/S,hy:r.hy/S,hh:r.hh/S,j,g:r.g?r.g.map(v=>v/S):null,n:nth}));}}
   // someone drawn in two halves (behind a desk) is one person
   const G=[];for(const p of P){const g=G.find(q=>q.who===p.who&&q.place===p.place&&Math.abs(q.x-p.x)<6&&Math.abs(q.y-p.y)<6&&Math.abs(q.a-p.a)<0.02&&!q.parts.includes(p.part));
     if(g){g.parts.push(p.part);if(p.part!=="lower")Object.assign(g,p,{parts:g.parts});}else G.push(Object.assign({},p,{parts:[p.part]}));}
-  F.push({sc:sceneIndex(f/30),P:G,B,N,K,TB,tip});}
+  F.push({sc:sceneIndex(f/30),P:G,B,N,K,TB,SO,tip});}
 const seen=p=>p.a>=0.5,inView=p=>p.hx>0&&p.hx<1920&&p.hy>0&&p.hy<1080,probs=[];
 const runs=(hit,min,say)=>{let s=-1;for(let i=0;i<=F.length;i++){const h=i<F.length&&hit(i);if(h&&s<0)s=i;if(!h&&s>=0){if(i-s>=min)probs.push(say(s,i-s));s=-1;}}};
 // 2. follow each person from frame to frame, while they stay in one room and move on the picture as a body can (the nearest first):
@@ -132,6 +170,23 @@ for(let i=0;i<F.length;i++){const ps=F[i].P.filter(p=>!p.parts.every(q=>q==="low
   for(const [c,t,p] of pairs){if(t.used===i||done.has(p))continue;t.used=i;done.add(p);t.last=p;t.f.push([i,p]);next.push(t);}
   for(const p of ps)if(!done.has(p)){const t={who:p.who,f:[[i,p]],used:i,last:p};T.push(t);next.push(t);}
   live=next;}
+/* Arms, and who is in front of whom. A body is a few round-ended bars (a head, a back, two arms, two legs), from the joints
+   PK.person gave back; a point of someone is hidden where it lies inside a bar of someone drawn after them. A solid thing a film
+   draws and says so (a car) is its box. Each stands on its own ground line: what is further up the picture is further away. */
+const dseg=(q,a,b)=>{const vx=b[0]-a[0],vy=b[1]-a[1],L=vx*vx+vy*vy,u=L?Math.max(0,Math.min(1,((q[0]-a[0])*vx+(q[1]-a[1])*vy)/L)):0;return[Math.hypot(q[0]-a[0]-vx*u,q[1]-a[1]-vy*u),u];};
+const inBar=(q,c)=>{const [d,u]=dseg(q,c[0],c[1]);return d<=c[2]+(c[3]-c[2])*u;},shown=p=>p.a>=0.9&&!p.screen&&p.j&&inView(p)&&!p.parts.every(q=>q==="lower");
+const armOf=(p,s)=>{const j=p.j,g=p.g;return[[j["sh"+s],j["e"+s],g[0],g[1]],[j["e"+s],j["w"+s],g[1],g[2]],[j["hd"+s],j["hd"+s],g[3]*0.62,g[3]*0.62]];};
+const bodyOf=p=>{const j=p.j,g=p.g,w=1-0.35*(p.sd||0);return[[j.hc,j.hc,p.hh*0.5,p.hh*0.5],[j.sc,j.hip,g[4]*0.9*w,g[5]*w],[j.hN,j.kN,g[6],g[7]],[j.kN,j.nN,g[7],g[8]],[j.hF,j.kF,g[6],g[7]],[j.kF,j.nF,g[7],g[8]]].concat(armOf(p,"N"),armOf(p,"F"));};
+// the face: both eyes, the nose and the mouth, where the head's own table has them, as far round as the head is turned
+const FC=[[0.07,-0.02],[0.29,-0.02],[0.24,0.1],[0.19,0.275]],FF=[[-0.115,-0.02],[0.115,-0.02],[0,0.1],[0,0.275]];
+const faceOf=p=>{const c=Math.cos(p.ha),s=Math.sin(p.ha),k=p.tk==null?1:p.tk;return FC.map((q,i)=>{const x=(FF[i][0]+(q[0]-FF[i][0])*k)*p.hh,y=q[1]*p.hh;return[p.j.hc[0]+p.sg*(x*c-y*s),p.j.hc[1]+x*s+y*c];});};
+const across=p=>{const A=armOf(p,"N");return faceOf(p).filter(q=>A.some(c=>inBar(q,c))).length;};
+// a hand at work (it reaches for something, or holds it) above the top of the head: the arm is as straight up as it goes
+const high=p=>["N","F"].some((s,i)=>(p.reach[i]>=0.5||(p.hold&&Math.abs(p.pose[3+2*i])>o.air))&&p.j["hd"+s][1]<p.j.hc[1]-0.5*p.hh-o.high*p.h);
+// the points of someone that others may hide: seven of the head, fifteen of the back
+const ptsOf=p=>{const j=p.j,r=0.3*p.hh,H=[j.hc],B=[],w=p.g[5]*0.6*(1-0.35*(p.sd||0)),vx=j.hip[0]-j.sc[0],vy=j.hip[1]-j.sc[1],L=Math.hypot(vx,vy)||1;
+  for(let a=0;a<6;a++)H.push([j.hc[0]+r*Math.cos(a*Math.PI/3),j.hc[1]+r*Math.sin(a*Math.PI/3)]);
+  for(const f of [0.1,0.3,0.5,0.7,0.9])for(const d of [-1,0,1])B.push([j.sc[0]+vx*f-vy/L*w*d,j.sc[1]+vy*f+vx/L*w*d]);return{H,B};};
 const rAt=(a,b)=>Math.max(Math.hypot(a.at[0]-b.at[0],a.at[1]-b.at[1])*Math.min(a.reach[0],b.reach[0]),Math.hypot(a.at[2]-b.at[2],a.at[3]-b.at[3])*Math.min(a.reach[1],b.reach[1]));
 // how far two moments of one person are apart, as degrees of a limb (a hand that goes 1.5 px to another place counts as a degree)
 const dPose=(a,b)=>{let d=0;for(let k=0;k<10;k++)d=Math.max(d,Math.abs(a.pose[k]-b.pose[k]));for(let k=0;k<2;k++)d=Math.max(d,Math.abs(a.reach[k]-b.reach[k])*60);return Math.max(d,rAt(a,b)/1.5);};
@@ -146,10 +201,13 @@ for(const t of T){const fr=t.f,d=fr.map((x,j)=>j&&fr[j-1][0]===x[0]-1?dPose(fr[j
   // a hand in the air, falling into a seat, never moving: how long each lasts
   // (a run ends where it stops being true, and where the person is out of the picture for a frame)
   const run=(hit,min,say)=>{let s=-1;for(let j=0;j<=fr.length;j++){const h=j<fr.length&&hit(j),next=h&&s>=0&&fr[j-1][0]===fr[j][0]-1;
-    if(s>=0&&!next){if(j-s>=min)probs.push({f:fr[s][0],s:say(j-s)});s=-1;}
+    if(s>=0&&!next){if(j-s>=min){const m=say(j-s);probs.push(typeof m==="string"?{f:fr[s][0],s:m}:{f:fr[s][0],s:m.s,k:m.k});}s=-1;}
     if(h&&s<0)s=j;}};
   run(j=>seen(fr[j][1])&&air(fr[j][1]),o.airS*30,n=>t.who+" holds a hand in the air for "+(n/30).toFixed(1)+" s, with nothing in it");
   run(j=>seen(fr[j][1])&&fall(fr[j][1]),3,n=>t.who+" falls into a seat with stiff legs (a stand and a sit mixed; use PK.poseSit)");
+  // an arm across their own face: the near arm, which is drawn over the head; and a hand held above the head, at work
+  run(j=>shown(fr[j][1])&&across(fr[j][1])>=o.faceN,o.acrossS*30,n=>({k:"face",s:t.who+"'s arm lies across their own face for "+(n/30).toFixed(1)+" s: the near arm is drawn over the head. Let the far hand reach there (o.reachF), or turn them round"}));
+  run(j=>shown(fr[j][1])&&high(fr[j][1]),o.highS*30,n=>({k:"high",s:t.who+" holds a hand above their head for "+(n/30).toFixed(1)+" s, the arm straight up: a hand works between the hips and the top of the head. Lower what they write on or reach for"}));
   const large=j=>seen(fr[j][1])&&inView(fr[j][1])&&fr[j][1].h>=o.large;
   run(j=>large(j)&&!fr[j][1].live,o.statue*30,n=>t.who+" is a statue for "+(n/30).toFixed(1)+" s: drawn without the time (o.t), so nothing of them moves");
   // staying as they are: from one moment (the anchor) on, nothing staged changes; a slow change adds up, and is a change
@@ -170,6 +228,29 @@ runs(i=>!!row(i),o.rowS*30,(s,n)=>({f:s,s:"a row: "+row(s).map(p=>p.who).join(",
 const over=i=>{const out=[];for(const p of F[i].P){if(!seen(p)||p.screen||p.parts.every(q=>q==="lower")||p.hh<36)continue;const x0=p.hx-0.42*p.hh,x1=p.hx+0.42*p.hh,y0=p.hy-0.62*p.hh,y1=p.hy+0.5*p.hh;
     if(F[i].B.some(b=>b.a>=0.5&&b.x0+4<x1&&b.x1-4>x0&&b.y0+4<y1&&b.y1-4>y0))out.push(p.who);}return out;};
 runs(i=>over(i).length>0,o.overS*30,(s,n)=>({f:s,s:"words and "+[...new Set(over(s))].join(", ")+"'s head are in one place, for "+(n/30).toFixed(1)+" s"}));
+/* who is in front of whom: someone hidden behind someone else; someone, or something solid, further away drawn over what is nearer;
+   and two solid things in one place. Each pair is followed for as long as it lasts */
+{const P2=new Map(),note=(key,i,v)=>{let a=P2.get(key);if(!a)P2.set(key,a=[]);a.push([i,v]);},frac=(pts,in_)=>pts.filter(in_).length/pts.length;
+  F.forEach((fr,i)=>{const ps=fr.P.filter(shown),so=fr.SO.filter(q=>q.a>=0.9),box=q=>pt=>pt[0]>=q.x0&&pt[0]<=q.x1&&pt[1]>=q.y0&&pt[1]<=q.y1;
+    for(const A of ps){const pa=ptsOf(A);
+      for(const Bp of ps){if(Bp===A||Bp.n<A.n||Bp.place!==A.place)continue;
+        // rough first: the two are nowhere near each other
+        if(Math.abs(Bp.x-A.x)>0.6*(A.h+Bp.h)||Math.abs(Bp.y-A.y)>A.h+Bp.h)continue;
+        const bars=bodyOf(Bp),hit=q=>bars.some(c=>inBar(q,c)),fh=frac(pa.H,hit),fb=frac(pa.B,hit),all=(fh*pa.H.length+fb*pa.B.length)/(pa.H.length+pa.B.length);
+        if(Bp.y<A.y-o.depth*Math.max(A.h,Bp.h)&&all>=0.15)note("order|"+Bp.who+"|"+A.who,i,all);
+        // someone nobody names (PK.extra), or someone far smaller, so far off, is the background: whoever is near may pass in front
+        else if((fh>=0.6||all>=o.hidden)&&!/^extra\d+$/.test(A.who)&&A.h>=0.6*Bp.h)note("behind|"+A.who+"|"+Bp.who,i,fh>=0.6?1:0);}
+      for(const q of so){if(q.place!==A.place)continue;const cov=frac(pa.H.concat(pa.B),box(q)),tol=o.depth*Math.max(A.h,q.y1-q.y0);
+        if(q.n>A.n&&q.g<A.y-tol&&cov>=0.3)note("order|a "+q.name+"|"+A.who,i,cov);
+        if(q.n<A.n&&A.y<q.g-tol&&cov>=0.3)note("order|"+A.who+"|a "+q.name,i,cov);}}
+    so.forEach((a,x)=>so.forEach((b,y)=>{if(y<=x||a.place!==b.place)return;const w=Math.min(a.x1,b.x1)-Math.max(a.x0,b.x0),h=Math.min(a.y1,b.y1)-Math.max(a.y0,b.y0);if(w<=0||h<=0)return;
+      const cov=w*h/Math.min((a.x1-a.x0)*(a.y1-a.y0),(b.x1-b.x0)*(b.y1-b.y0)),tol=o.depth*Math.max(a.y1-a.y0,b.y1-b.y0),lo=a.n<b.n?a:b,hi=a.n<b.n?b:a;if(cov<0.1)return;
+      if(Math.abs(a.g-b.g)<=tol)note("one|"+lo.name+"|"+hi.name,i,cov);else if(hi.g<lo.g)note("order|a "+hi.name+"|a "+lo.name,i,cov);}));});
+  for(const [key,a] of P2){const [kind,x,y]=key.split("|"),min=(kind==="behind"?o.hiddenS:o.depthS)*30;let s=0;
+    for(let j=1;j<=a.length;j++)if(j===a.length||a[j][0]!==a[j-1][0]+1){const n=j-s,f=a[s][0];
+      if(n>=min)probs.push({f,k:kind==="one"?"solid":kind,s:kind==="behind"?x+" is hidden behind "+y+" for "+(n/30).toFixed(1)+" s ("+(a.slice(s,j).some(v=>v[1])?"their face":"more than half of them")+"): stand them apart, or seat "+x+" to the side"
+        :kind==="order"?x+" is further away than "+(x===y?"another "+y.slice(2):y)+" but is drawn over "+(y.startsWith("a ")?"it":"them")+", for "+(n/30).toFixed(1)+" s: draw what is further away first"
+        :"two solid things ("+x+", "+y+") are in one place for "+(n/30).toFixed(1)+" s: give each its own ground line, or let one pass before the other comes"});s=j;}}}
 // whoever explains at a board: in front of its words without writing; and the lines that start before they can be there
 const hides=i=>F[i].TB.filter(r=>r.over).map(r=>r.who);
 runs(i=>hides(i).length>0,o.hideS*30,(s,n)=>({f:s,s:[...new Set(hides(s))].join(", ")+" stands in front of the board's words for "+(n/30).toFixed(1)+" s without writing: give them time to step clear, or write the next line to the right of what is there"}));
@@ -205,7 +286,7 @@ for(const k in HS){const h=HS[k];
   if(h.back&&!rows(h.backT))probs.push({f:-1,s:"the hair style "+k+" can't turn: it has hair down the back and no backT, or its two rows are of unequal length"});}
 probs.sort((a,b)=>a.f-b.f);
 const names=new Set();for(const t of T)names.add(t.who);
-return{n:F.length,people:names.size,places,faces,chats,calls,boards,pages,share:share.map(([id,v,w])=>id+" "+Math.round(v*100)+"%"+(w<v-0.005?" ("+Math.round(w*100)+"% themselves)":"")).join(", "),probs:probs.map(p=>(p.f>=0?when(p.f)+": ":"")+p.s)};}"""
+return{n:F.length,people:names.size,places,faces,chats,calls,boards,pages,share:share.map(([id,v,w])=>id+" "+Math.round(v*100)+"%"+(w<v-0.005?" ("+Math.round(w*100)+"% themselves)":"")).join(", "),probs:probs.map(p=>[p.k||"",p.f>=0?info[sceneIndex(p.f/30)].id:"",(p.f>=0?when(p.f)+": ":"")+p.s])};}"""
 
 
 def watch(pg):
@@ -213,14 +294,48 @@ def watch(pg):
     pg.evaluate(HOOK)
 
 
+LATER_KINDS = ('face', 'high', 'behind', 'order', 'solid')
+
+
+def later():
+    """What this film still has to put right: site-tools/people_later.json, {film key: [[kind, chapter id], ...]}, the film's key as
+    its release.json has it. The checks on arms and on who is in front of whom came on 18 November 2026, after four films were
+    drawn: what those films had then is listed there and only reported, and each film leaves the list with its fix. Only those
+    checks' findings (LATER_KINDS) can be put off."""
+    import json
+    try:
+        import lang
+        key = next(e['key'] for e in json.loads((lang.ROOT.parent / 'release.json').read_text(encoding='utf-8')) if e.get('lang', 'en') == 'en')
+        rows = json.loads((lang.REPO / 'site-tools' / 'people_later.json').read_text(encoding='utf-8')).get(key, [])
+        return {(k, c) for k, c in rows if k in LATER_KINDS}
+    except (Exception, SystemExit):  # run outside a film's folder (lang stops there), or with no list: nothing is put off
+        return set()
+
+
+def limits():
+    """The limits above, as the page's part takes them."""
+    return {'row': ROW, 'rowS': ROW_S, 'scale': SCALE, 'air': AIR, 'airS': AIR_S, 'jump': JUMP, 'overS': OVER_S, 'large': LARGE, 'still': STILL,
+            'statue': STATUE, 'share': SHARE, 'whole': WHOLE, 'faceS': FACE_S, 'hideS': HIDE_S, 'late': LATE, 'lag': LAG, 'edge': EDGE, 'hop': HOP,
+            'places': PLACES, 'faceN': FACE_N, 'acrossS': ACROSS_S, 'high': HIGH, 'highS': HIGH_S, 'hidden': HIDDEN, 'hiddenS': HIDDEN_S,
+            'depth': DEPTH, 'depthS': DEPTH_S}
+
+
 def check(pg):
     watch(pg)
-    r = pg.evaluate(JS, {'row': ROW, 'rowS': ROW_S, 'scale': SCALE, 'air': AIR, 'airS': AIR_S, 'jump': JUMP, 'overS': OVER_S, 'large': LARGE,
-                         'still': STILL, 'statue': STATUE, 'share': SHARE, 'whole': WHOLE, 'faceS': FACE_S, 'hideS': HIDE_S, 'late': LATE, 'lag': LAG, 'edge': EDGE, 'hop': HOP, 'places': PLACES})
-    return ('followed %d people through %d moments, in %d places; they meet face to face %d time%s, write in a chat %d and call %d; '
+    r = pg.evaluate(JS, limits())
+    head = ('followed %d people through %d moments, in %d places; they meet face to face %d time%s, write in a chat %d and call %d; '
             'someone explains at a board %d time%s and a page of notes is written %d; a person in view: %s'
             % (r['people'], r['n'], r['places'], r['faces'], '' if r['faces'] == 1 else 's', r['chats'], r['calls'],
-               r['boards'], '' if r['boards'] == 1 else 's', r['pages'], r['share']), r['probs'])
+               r['boards'], '' if r['boards'] == 1 else 's', r['pages'], r['share']))
+    known, off = later(), []
+    now = [l for k, c, l in r['probs'] if (k, c) not in known]
+    old = [l for k, c, l in r['probs'] if (k, c) in known]
+    if old:
+        off.append('  known and still to put right (site-tools/people_later.json), %d:' % len(old))
+        off.extend('    ' + l for l in old)
+    for k, c in sorted(known - {(k, c) for k, c, l in r['probs']}, key=lambda e: (e[1], e[0])):
+        off.append('  (put right now) chapter %s has nothing of the kind "%s" left: take it off this film\'s list in site-tools/people_later.json' % (c, k))
+    return ('\n'.join([head] + off), now)
 
 
 if __name__ == '__main__':

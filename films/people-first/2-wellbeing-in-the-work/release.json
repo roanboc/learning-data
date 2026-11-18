@@ -21,13 +21,13 @@
     "paths": [
       "films/people-first/2-wellbeing-in-the-work/source",
       ":(exclude)films/people-first/2-wellbeing-in-the-work/source/src/i18n/es/captions.js",
-      "films/the-new-skills/shared",
-      "films/what-an-agent-is/shared",
+      "films/people-first/shared",
+      "films/what-an-agent-is/shared/src/kit.js",
+      "films/what-an-agent-is/shared/src/finish.js",
       "films/from-words-to-data/shared/tools",
       "films/data-governance/shared/tools/names.py",
       "films/data-governance/shared/tools/cues.py",
       "films/data-governance/shared/tools/twice.py",
-      "films/data-governance/shared/tools/steady.py",
       "films/data-governance/shared/tools/jump.py",
       "films/data-governance/shared/tools/quiet.py",
       "films/data-governance/shared/tools/held.py",
@@ -39,10 +39,10 @@
       "films/inner-life-of-data/source/fonts"
     ],
     "legibility": {
-      "texts": 301,
+      "texts": 153,
       "under_28": "0%",
       "under_20": 0,
-      "median": 28.0,
+      "median": 40.7,
       "status": "Drawn to the rule"
     }
   }

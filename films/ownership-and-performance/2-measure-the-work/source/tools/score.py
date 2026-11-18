@@ -22,12 +22,19 @@
 #    bed under the voice; a figure never played again soon after itself; the music and the effects no louder than the governance films'.
 #  - Nothing trembles or pulses: each blade steady, its main partials harmonic; each damped before it would ring into the next chapter.
 #    No urgent pulse: nothing in the film is a rush.
-#  - Every sound is an event on screen, at the moment it appears. Each one below uses the same word and offset as the picture in
-#    src/mw_scenes.js, and pans to where it is drawn, so sound and picture stay together when the voice is re-timed.
+#  - Every sound is something a person does or something that comes in on screen, at that moment: a fine handed over, a decision
+#    pinned up, a tape run out, a post set in the ground, a marker on the map or the board, a pen in a notebook, a card that says where
+#    and when, a screen's panel, a call that comes up, a message sent or one that arrives. Each one below uses the same word and offset
+#    as the picture in src/mw_scenes.js, and pans to where it is drawn, so sound and picture stay together when the voice is re-timed.
+#    People's steps and what they say have no sound of their own: the voice carries them. The cars make none either.
+#  - What a hand writes is paced by the film (PK.pace): a row waits until Carmen or Helena has walked to it, and a stroke until the pen
+#    has crossed to it. So the marker's and the pen's sounds ask the film when each row is written (the people kit's tools/pens.py),
+#    and take no word's time: PEN, below.
 # And everything stays low and soft, below about 2.3 kHz; the effects about 12 dB under the music.
 
 import json as _json, pathlib as _pl
 from scipy.signal import fftconvolve
+import pens
 _obj = lambda f: (lambda s: _json.loads(s[s.index('{'):s.rindex('}') + 1]))((_pl.Path('src') / f).read_text())
 _NARR, _DUR = _obj('narration.js'), _obj('vodur.js')
 def W(sid, lid, word, off=0):
@@ -41,6 +48,15 @@ def px(x):
     """where something drawn at x (in the 1920 px frame) sits in the stereo field"""
     return max(-0.85, min(0.85, (x - 960) / 960 * 0.9))
 R1 = np.random.default_rng(1997)  # this film's own randomness: the room, the paper, the pen
+# every stroke of the film's five boards (Carmen's and Helena's) and four pages of notes (Helena's), as the film writes them: the
+# chapter, who writes at the board (None: a page), and the film's function that gives the rows (src/mw_uni.js). On Monday, the
+# team's page is on the board from the start (written before), so it has no strokes
+PEN = pens.written({'A': ('manage', 'carmen', 'mw_boardA'), 'B': ('manage', 'helena', 'mw_boardB'), 'R': ('read', 'helena', 'mw_boardR'),
+                    'C': ('pairs', 'carmen', 'mw_boardC'), 'D': ('target', 'carmen', 'mw_boardD'), 'N1': ('read', None, 'mw_note1'),
+                    'N2': ('pairs', None, 'mw_note2'), 'N3': ('target', None, 'mw_note3'), 'N4': ('monday', None, 'mw_note4')})
+def stroke(name, s, mark=None):
+    """the first stroke of a board or a page whose words (or, with mark, whose mark's kind) are s, as the film writes it"""
+    return next(k for k in PEN[name] if k['s'] == s and (mark is None or k['mark'] == mark))
 
 # ---- tuning: just intonation from F, so a chord's notes are whole-number ratios of each other and nothing beats
 _JI = {0: 1, 1: 16 / 15, 2: 9 / 8, 3: 6 / 5, 4: 5 / 4, 5: 4 / 3, 6: 45 / 32, 7: 3 / 2, 8: 8 / 5, 9: 5 / 3, 10: 9 / 5, 11: 15 / 8}
@@ -169,228 +185,223 @@ def pen(s, sec=0.4, g=0.0045, pan=0.0, n=2):
         d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
         gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
         _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
-def ticked(s, g=0.0045, pan=0.0):
-    """a tick drawn: two quick strokes of a pen"""
-    pen(s, 0.24, g, pan, 2)
+def ticked(s, g=0.0045, pan=0.0, hand=None):
+    """a tick or a cross drawn: two quick strokes of a pen, or of a marker (hand=marker)"""
+    (hand or pen)(s, 0.24, g, pan, 2)
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard or a map, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row of words and each long mark, a word at a
+    time, where the film writes it. A dot, a tick and an arrow's head are too short to sound; a tick or a cross that matters has its own"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
 def post(s, g=0.004, pan=0.0):
     """a barrier's post set in the ground: one dull, low knock"""
     n = int(0.14 * SR)
     _fx(_knock(n, 120, 0.03) + 0.15 * filt(noise(0.16)[:n], 'band', (100, 500)) * np.exp(-np.arange(n) / SR / 0.012), s, g, pan, 800)
-def cable(s, g=0.004, pan=0.0):
-    """the car leaning on the barrier's steel cables: one soft, low give of the cables, a single tone that fades, never a twang"""
-    n = int(0.9 * SR); x = np.arange(n) / SR
-    tone = (np.sin(2 * np.pi * 98 * x) + 0.3 * np.sin(2 * np.pi * 196 * x) * np.exp(-x / 0.15)) * np.exp(-x / 0.28) * np.minimum(1, x / 0.06)
-    _fx(tone + 0.2 * filt(noise(0.92)[:n], 'band', (80, 400)) * _bump(x, 0.35, 1.5) * (x < 0.35), s, g, pan, 600)
 def screen(s, g=0.003, pan=0.0):
-    """a message coming up on the screen on the wall: a soft, low tap of its frame"""
+    """a panel that comes up from a screen, Ivy's or the flow's: a soft, low tap of its frame"""
     n = int(0.1 * SR); x = np.arange(n) / SR
     _fx(0.7 * _knock(n, 170, 0.02) + 0.3 * filt(noise(0.12)[:n], 'band', (200, 800)) * np.exp(-x / 0.008), s, g, pan, 1000)
+def _note(n, f, at, d):
+    """a soft, round note inside a sound n samples long: a sine with a little of its octave, gone in d"""
+    x = np.arange(n) / SR - at; k = np.where(x >= 0, 1.0, 0.0); x = np.maximum(x, 0)
+    return (np.sin(2 * np.pi * f * x) + 0.22 * np.sin(2 * np.pi * 2 * f * x)) * np.minimum(1, x / 0.006) * np.exp(-x / d) * k
+def ring(s, g=0.0022, pan=0.0):
+    """a call that comes up on a screen: two soft, round notes, the second a pure fourth above the first (C, then F), each gone in a
+    fifth of a second"""
+    n = int(0.6 * SR)
+    _fx(_note(n, hz(C4), 0.0, 0.09) + _note(n, hz(F4), 0.17, 0.11), s, g, pan, 1800)
+def joined(s, m, g=0.002, pan=0.0):
+    """someone joins a call: one soft, round note"""
+    n = int(0.4 * SR)
+    _fx(_note(n, hz(m), 0.0, 0.1), s, g, pan, 1800)
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
 
 # =============================================================================================================================
-# 1. Roads, not drivers: the opening. Sweden, 1997: the road, and a low F from the big blade; A4 alone as the 541 are named, then the same
-#    A4 in D minor as most crashes are put down to the driver. Teach, fine, blame: a tap each, and a low A under "blame". The drift: a
-#    blade's E, unsettled, and the low D as the two cars are ringed; the harm, D minor, slow and low; nothing under "Something had to
-#    change". October 1997: B flat major for Vision Zero. Every fatal crash studied: D, F and A, one at a time, as the dots come in; head-on
-#    crashes on fast roads, A minor. From 1998, the barrier: its posts set one by one, and C major as it runs. Roundabouts, slower
-#    streets: a tap each, and one G. The benefits: A4 alone as deaths fall, then in F major; the two bars drawn, and F, C and A falling
-#    gently; the car held by the cables: their low give, and F major. Not who to blame, what to fix; and data work: the wait lit amber,
-#    a low D under it; the three pills, F, A and C; and F major, held, under the title card
+# 1. Roads, not drivers: the opening. Sweden, 1997, by a road: a low F from the big blade as the officer walks up; the card, and
+#    A4 alone as the 541 are named, then the same A4 in D minor as most crashes are put down to the driver; the officer's pen on the
+#    pad as the fine is written, the slip as the driver takes it, and a low A under "blame". That evening, the drift: a blade's E,
+#    unsettled, and the low D as the car crosses the line; at home, the harm: D minor, slow and low, and nothing under "had to
+#    forgive". October 1997: the card, the decision handed over, B flat major for Vision Zero, and pinned up by the map. Every fatal
+#    crash studied: the card, and the tape run out along the marks; on the map the dots come in, D, F and A one at a time, and A
+#    minor as the fast two-lane roads light up. From 1998, the barrier: the card, a post set in the ground, and C major as the cables
+#    run. Where people walk: one G. The benefits: A4 alone as deaths fall, then in F major; the second card, and F, C and A falling
+#    gently; a mistake held by the cables: F major. The roads fixed: the green marker on the map. Data work: the panel from Ivy's
+#    screen, a low D under its wait; F, A and C under the three things to do; and F major, held, under the title card
 LV[0] = 0.85
 vw = lambda lid, word, off=0: W('vision', lid, word, off)
 vc = lambda lid, off=0: G('vision', lid, off)
 END = E('vision')
 low(F2, 0.6, 0.7, 0.0, ring=0.4)
-card(vw('when', 'nineteen', -0.2), 0.004, px(500))
+card(vc('when', -0.2), 0.0035, px(370))
+pen(vc('when', 0.5), 0.8, 0.004, px(700), 3)
 mark(vw('when', 'five', 0.0), 0.7, ring=2.0)
-card(vw('counted', 'crashes', -0.1), 0.0035, px(1490))
 chord((D2, A3, D4, F4, A4), vw('counted', 'mistake', 0.1), 0.6, step=0.15, ring=2.2)
-for wd, x in (('teach', 1280), ('fine', 1495), ('blame', 1706)):
-    tap(vw('answer', wd, -0.1), 0.0032, px(x))
-low(A2, vw('answer', 'blame', 0.15), 0.6, px(1706) * 0.3, ring=0.35)
+pen(vc('counted', 0.6), 0.7, 0.004, px(700), 2)
+card(vw('answer', 'fine', 0.0), 0.003, px(830))            # the slip changes hands (the picture: "fine" -0.7, taken 0.7 s on)
+low(A2, vw('answer', 'blame', 0.15), 0.6, px(830) * 0.3, ring=0.35)
 blade(E4, vw('drift', 'drifts', 0.0), 0.42, px(820) * 0.4, ring=1.2)
 low(D2, vw('drift', 'line', 0.0), 0.6, px(950) * 0.3, ring=0.35)
-tap(vw('harm', 'kill', -0.2), 0.0032, px(950))
-card(vw('harm', 'families', -0.2), 0.0035, px(960))
 chord((D2, F3, A3, D4), vw('harm', 'never', 0.0), 0.5, step=0.32, ring=2.6)
-# October 1997: Vision Zero, a plan: B flat major
-card(vc('adopt', 0.2), 0.0035, px(540))
+# October 1997: Vision Zero, a plan: B flat major, as the decision is handed over; pinned up by the map
+card(vw('adopt', 'October', -0.3), 0.0035, px(370))
+card(vw('adopt', 'Vision', 0.1), 0.003, px(1250))          # taken: "Vision Zero" -0.5, 0.6 s on
 chord((Bb2, F3, Bb3, D4, F4), vw('adopt', 'Vision', 0.1), 0.55, step=0.16, ring=2.6)
-card(vw('who', 'design', -0.2), 0.0035, px(1380))
-# every fatal crash studied: the dots come in, and D, F and A one at a time; the head-on crashes on fast roads, A minor
-card(vw('study', 'Every', -0.1), 0.0035, px(480))
+tap(vw('who', 'answer', 0.15), 0.0032, px(1272))           # pinned: "answer" -0.6, 0.75 s on
+# every fatal crash studied: the tape run out along the marks; on the map, the dots come in, D, F and A one at a time; the head-on
+# crashes on fast roads with two lanes, A minor, as those roads light up
+card(vc('study', 0.1), 0.0035, px(370))
+slide(vc('study', 0.1), 1.6, 0.003, px(1000))              # the tape: the shot's start (study -0.4) and 0.5 s, over 1.6 s
 for i, m in enumerate((D4, F4, A4)):
-    blade(m, vw('study', 'studied', -0.3 + 0.85 * i), 0.4, px(700 + 300 * i) * 0.4, ring=1.0)
-tap(vw('found', 'head', -0.1), 0.0032, px(980))
-chord((A2, E3, A3, C4), vw('found', 'head', 0.1), 0.5, step=0.15, ring=2.0)
-# from 1998: the barrier's posts set one by one as it runs from left to right, and C major
-buildT = vw('barrier', 'barrier', -0.3)
-card(vc('barrier', 0.2), 0.0035, px(530))
-for u in (0.12, 0.32, 0.52, 0.72, 0.9):
-    post(buildT + 0.2 + 3.2 * np.arccos(1 - 2 * u) / np.pi, 0.0035, px(-40 + 2000 * u))
-chord((C3, G3, C4, E4), buildT + 1.3, 0.5, step=0.2, ring=2.4)
-tap(vw('barrier', 'middle', 0.2), 0.0032, px(1500))
-# roundabouts for crossroads, and slower where people walk
-slide(vw('more', 'Roundabouts', -0.1), 1.6, 0.003, px(960))
-tap(vw('more', 'Roundabouts', 0.2), 0.0032, px(540))
-tap(vw('more', 'walk', -0.3), 0.0032, px(1500))
-blade(G4, vw('more', 'walk', 0.0), 0.4, px(1500) * 0.4, ring=1.2)
-# what it gave: A4 alone as deaths fall, then in F major; the two bars, and F, C and A falling gently; traffic grew
-card(vc('fell', 0.2), 0.0035, px(530))
+    blade(m, vc('found', 0.1 + 0.9 * i), 0.4, px(800 + 300 * i) * 0.4, ring=1.0)
+chord((A2, E3, A3, C4), vw('found', 'two lanes', 0.0), 0.5, step=0.15, ring=2.0)
+# from 1998: a post set in the ground, and C major as the cables run down the middle
+card(vw('barrier', 'nineteen', -0.6), 0.0035, px(370))
+post(vc('barrier', 1.7), 0.0035, px(1010))                # set: the shot's start (barrier -0.4) and 1.6 s, over a second
+chord((C3, G3, C4, E4), vw('barrier', 'middle', 0.1), 0.5, step=0.2, ring=2.4)
+blade(G4, vw('more', 'walk', 0.0), 0.4, px(1300) * 0.4, ring=1.2)
+# what it gave: A4 alone as deaths fall, then in F major; the second card, and F, C and A falling gently
+card(vc('fell', 0.2), 0.0035, px(370))
 mark(vw('fell', 'deaths', 0.0), 0.6, ring=1.3)
 chord((F2, F3, C4, F4, A4), vw('fell', 'quarters', 0.1), 0.55, step=0.14, ring=2.4)
-card(vw('half', 'country', -0.2), 0.0035, px(1480))
-slide(vw('half', 'half', -0.6), 0.9, 0.003, px(1480))
+card(vc('half', 0.1), 0.0035, px(370))
 for i, m in enumerate((C5, A4, F4)):
-    blade(m, vw('half', 'half', 0.2 + 0.32 * i), 0.38, px(1480) * 0.3, ring=0.9 if i < 2 else 1.6)
-tap(vw('half', 'traffic', -0.1), 0.0032, px(1480))
-# a mistake held: the car leans on the cables, and they give and hold; F major, the A on top
-catchT = vw('care', 'mistake', -0.9)
-cable(catchT + 0.3, 0.004, px(1250))
-tap(vw('care', 'mistake', -0.1), 0.0032, px(960))
+    blade(m, vw('half', 'half', 0.2 + 0.32 * i), 0.38, px(700) * 0.3, ring=0.9 if i < 2 else 1.6)
+# a mistake held: the car on the cables, its driver unhurt on the phone; F major, the A on top
 chord((F2, C3, A3, C4, F4), vw('care', 'life', 0.2), 0.5, step=0.14, ring=2.2)
-# not who to blame, struck through; what in the road to fix
-tap(vw('measured', 'blame', -0.1), 0.003, px(700))
-pen(vw('measured', 'measured', -0.1), 0.4, 0.004, px(700))
-tap(vw('measured', 'fix', -0.3), 0.003, px(1220))
-# data work: the flow, its wait lit amber and a low D under it; not who did it, struck through; the three pills, F, A and C
-card(vc('data', 0.1), 0.0035, px(960))
-low(D2, vw('data', 'flows', -0.1), 0.55, px(700) * 0.3, ring=0.35)
-blade(A3, vw('data', 'flows', 0.0), 0.38, px(700) * 0.3, ring=1.2)
-tap(vw('data', 'who', -0.1), 0.003, px(960))
-pen(vw('data', 'who', 0.3), 0.4, 0.004, px(960))
-for wd, m, x in (('Measure', F4, 480), ('read', A4, 960), ('find', C5, 1440)):
-    tap(vw('fix', wd, -0.1), 0.0032, px(x))
-    blade(m, vw('fix', wd, 0.0), 0.4, px(x) * 0.4, ring=1.1)
+# not who to blame, what to fix: the roads they fixed, drawn over in green on the map
+marker(vw('measured', 'measured', -0.4), 2.6, 0.0035, px(1200), 5)
+# data work: the panel from Ivy's screen, its wait lit amber and a low D under it; F, A and C under the three things to do
+screen(vw('data', 'slow', -0.4), 0.003, px(320))
+low(D2, vw('data', 'flows', -0.1), 0.55, px(320) * 0.3, ring=0.35)
+blade(A3, vw('data', 'flows', 0.0), 0.38, px(320) * 0.3, ring=1.2)
+for wd, m in (('Measure', F4), ('read', A4), ('find', C5)):
+    blade(m, vw('fix', wd, 0.0), 0.4, None, ring=1.1)
 chord((F2, F3, C4, A4, C5), vc('breath', 0.4), 0.6, step=0.2, ring=4.2, until=END)
 
-# 2. Management, for this work: the university, a year from now. Helena's name: one C; the sheet for management, B flat major, a plan;
-#    the team's page, a tap as each measure comes in; and each pair joined: a blade that rings with a low one that stops
+# 2. Management, for this work: the university, a year from now. Helena comes in: one C. Carmen's marker on the board, a row at a time,
+#    and B flat major, a plan, as she writes the dates and plans a leader keeps; the cross on hours and tickets per person. July: the
+#    card, and Helena's marker as she writes the team's page; each pair joined, a blade that rings with a low one that stops
 LV[0] = 0.9
 gw = lambda lid, word, off=0: W('manage', lid, word, off)
 gc = lambda lid, off=0: G('manage', lid, off)
-card(gw('uni', 'Helena', -0.1), 0.0035, px(510))
 blade(C4, gw('uni', 'Helena', 0.2), 0.42, None, ring=1.4)
-card(gc('sides', 0.1), 0.0035, px(590))
-card(gc('see', 0.1), 0.0035, px(590))
-chord((Bb3, D4, F4), gw('see', 'plans', 0.2), 0.42, step=0.13, ring=1.6)
-card(gc('fit', 0.1), 0.0035, px(590))
-card(gc('page', 0.1), 0.0035, px(660))
-for t0 in (gw('page', 'flows', -0.3), gc('back'), gc('promise'), gc('load')):
-    tap(t0 + 0.1, 0.0028, px(500))
-tap(gw('days', 'forty', -0.2), 0.0028, px(1000))
-pair(C4, F2, gw('pairs', 'speed', 0.0), 0.45, ring=1.4, pan=px(260) * 0.3)
-pair(A3, D2, gw('pairs', 'promises', 0.0), 0.45, ring=1.6, pan=px(260) * 0.3)
+written('A', marker, 0.004)
+chord((Bb3, D4, F4), stroke('A', '+ dates, plans')['t0'] + 0.2, 0.42, step=0.13, ring=1.6)
+k = stroke('A', 'cross', True); ticked(k['t0'], 0.004, px(k['x']) * 0.5, marker)
+card(gc('page', 0.1), 0.0035, px(1550))
+written('B', marker, 0.004)
+for k, (m, b, r) in zip([k for k in PEN['B'] if k['s'] == 'line'], ((C4, F2, 1.4), (A3, D2, 1.6))):
+    pair(m, b, k['t0'], 0.45, ring=r, pan=px(k['x']) * 0.3)
 
-# 3. Read it together: the first reading. The Thursday sheet: a low C and a blade's G; what slowed the work, and who was slow struck through;
-#    Sweden's question again: F major, small. June's days taken apart: the bar drawn; the wait for access lit, a low D and an F; the three
-#    reasons, a tap each; nobody was slow: A minor in the pause. The wait shrinks to a day: F major. The second cause: a low D and an A.
-#    December: the two pills, and F major, the A on top
+# 3. Read it together: the first reading. The card; a low C and a blade's G as the team turns to the board; Helena's marker, a row at a
+#    time, and "who was slow?" struck through; the road in Sweden, and F major, small, as Helena asks the same of the work. June's days
+#    taken apart, the wait for access ringed: a low D and an F; nobody was slow: A minor, as the room eases. Monday 19 July: the card,
+#    and Ivy's screen, the request accepted and its access asked for, a tap each. September: the card, and F major. The second cause:
+#    the card, a low D and an A as Mei brings the report back. Thursday 29 July: the call comes up on Ivy's screen, and a note as Mei
+#    joins. December: the days' panel, and F major, the A on top; then Helena's pen, a page of her notebook
 LV[0] = 0.9
 rw = lambda lid, word, off=0: W('read', lid, word, off)
 rc = lambda lid, off=0: G('read', lid, off)
-card(rc('thurs', 0.2), 0.0035, px(1030))
+card(S0('read') + 0.4, 0.0035, px(1550))
 pair(G4, C3, rc('thurs', 0.4), 0.42, ring=1.2)
-tap(rw('what', 'what', -0.1), 0.003, px(1030))
-tap(rw('what', 'Never', -0.1), 0.003, px(1030)); pen(rw('what', 'Never', 0.3), 0.4, 0.004, px(1030))
-tap(rw('sweden', 'Sweden', -0.1), 0.003, px(1030))
+written('R', marker, 0.004)
+slide(rw('what', 'who was', 0.0), 0.4, 0.003, px(1420))
 chord((C4, F4, A4), rw('sweden', 'same', 0.0), 0.4, step=0.15, ring=1.5)
-card(rc('june', 0.1), 0.0035, px(1030))
-slide(rc('june', 0.5), 1.6, 0.0032, px(1030))
-low(D2, rw('access', 'waiting', 0.0), 0.55, px(840) * 0.3, ring=0.35)
-blade(F3, rw('access', 'waiting', 0.05), 0.4, px(840) * 0.3, ring=1.3)
-for wd, y in (('started', 650), ('dataset', 720), ('five', 790)):
-    tap(rw('why', wd, -0.2), 0.003, px(800))
-tap(rw('nobody', 'Nobody', -0.1), 0.003, px(1030))
-tap(rw('nobody', 'arranged', -0.4), 0.003, px(1030))
+k = stroke('R', 'ring', True)
+low(D2, k['t0'], 0.55, px(k['x']) * 0.3, ring=0.35)
+blade(F3, k['t0'] + 0.05, 0.4, px(k['x']) * 0.3, ring=1.3)
 chord((A2, A3, C4, E4), rw('nobody', 'arranged', 0.5), 0.42, step=0.16, ring=1.8)
-card(rc('early', 0.1), 0.0035, px(1030))
-slide(rw('one', 'September', -0.1), 1.2, 0.003, px(860))
-tap(rw('one', 'September', -0.1), 0.003, px(1030))
+card(rc('early', -0.1), 0.0035, px(1550))
+a1 = rw('early', 'accepted', -0.3)
+screen(a1 - 0.5, 0.003, px(500))
+tap(a1, 0.003, px(500)); tap(a1 + 1.0, 0.003, px(500))
+card(rc('one', 0.1), 0.0035, px(370))
 chord((F2, A3, C4, F4), rw('one', 'one', 0.1), 0.42, step=0.14, ring=1.8)
-card(rc('unclear', 0.1), 0.0035, px(1030))
+card(rw('unclear', 'one piece', -0.3), 0.0035, px(370))
 pair(A3, D3, rw('unclear', 'came', 0.0), 0.4, ring=1.3)
-card(rc('talk', 0.1), 0.0035, px(1030))
-tap(rw('dec', 'December', -0.1), 0.003, px(1030))
-tap(rw('dec', 'halved', -0.2), 0.003, px(1030))
+ring(rc('talk', -0.1), 0.0022, px(250))                     # the call comes up (talk -0.4, 0.3 s on); its card comes with it
+joined(rc('talk', 0.2), F4, 0.002, px(140))                 # Mei's tile
+screen(rc('dec', -0.1), 0.003, px(320))
 chord((F2, C4, F4, A4, C5), rw('dec', 'halved', 0.2), 0.42, step=0.14, ring=1.8)
-tap(rw('most', 'waits', -0.2), 0.003, px(1030))
+written('N1', pen, 0.0045)
 
-# 4. Each measure has a partner: promises met at 82%, and the mark: A4 alone, then in F major, a number to celebrate; the load of nine
-#    against a limit of six, its line drawn, and the same A4 inside D minor. Carrying too much, tired people: a tap each. Finish before
-#    starting: B flat, a rule; not now, a tap. The three extra pieces finished, a tick each; back to six: F major, balanced. Accelerate;
-#    and each pair: a blade that rings with a low one that stops
+# 4. Each measure has a partner: Thursday 12 August, at Ivy's screen: the card; promises met at 82%, and the mark: A4 alone, then F major
+#    as Sam celebrates; the load of nine against a limit of six, and the same A4 inside D minor. That evening and the next morning, the
+#    voice and the people carry it, and finishing before starting is B flat, a rule. Not now: Helena's two messages sent to Graham, and
+#    his answer on the campus. Back to six: the two cards, and F major, balanced. Carmen's marker on the board; and on Helena's page,
+#    each measure alone hides something: a blade that rings with a low one that stops, as each arrow is drawn
 LV[0] = 0.9
 pw = lambda lid, word, off=0: W('pairs', lid, word, off)
 pc = lambda lid, off=0: G('pairs', lid, off)
-card(pw('aug', 'eighty', -0.3), 0.0035, px(780))
-mark(pw('aug', 'eighty', 0.2), 0.55, ring=2.0)
-tap(pw('alone', 'celebrate', -0.4), 0.003, px(1150))
+card(S0('pairs') + 0.4, 0.0035, px(1550))
+screen(pc('aug', 0.4), 0.003, px(320))
+mark(pw('aug', 'eighty-two', 0.2), 0.55, ring=2.0)
 chord((F2, C4, F4, A4), pw('alone', 'celebrate', 0.0), 0.45, step=0.15, ring=1.8)
-card(pw('nine', 'nine', -0.2), 0.0035, px(1010))
-slide(pw('nine', 'limit', -0.2), 0.6, 0.003, px(1050))
+screen(pc('nine', 0.0), 0.003, px(360))
 chord((D2, A3, D4, F4, A4), pw('nine', 'limit', 0.3), 0.45, step=0.15, ring=2.0)
-tap(pw('carry', 'carrying', -0.3), 0.003, px(800))
-tap(pw('last', 'tired', -0.2), 0.003, px(760))
-tap(pw('finish', 'finishes', -0.1), 0.003, px(1010))
-pair(D4, Bb2, pw('finish', 'finishes', 0.1), 0.4, ring=1.2)
-tap(pw('notnow', 'Two', -0.1), 0.003, px(1010))
-sixT = pw('six', 'back', -0.6)
-for i in range(3):
-    ticked(sixT + 0.25 + 0.4 * i, 0.004, px(1050 - 74 * i))
-tap(pw('six', 'back', -0.1), 0.003, px(1010))
+pair(D4, Bb2, pw('finish', 'finishes', 0.1), 0.4, ring=1.2, pan=px(1060) * 0.3)
+f1, f2 = pc('notnow'), pw('notnow', 'reason', 0.2)
+pop(f1 + 1.6, 0.0022, px(1600)); pop(f2 + 1.5, 0.0022, px(1600))   # Helena's two messages, sent
+pop(f2 + 3.7, 0.0022, px(420))                                       # Graham's answer, sent from the campus
+card(pc('six', 0.1), 0.0035, px(1550))
 chord((F2, F3, C4, F4, A4), pw('six', 'six', 0.2), 0.42, step=0.14, ring=1.8)
-tap(pw('six', 'December', -0.4), 0.003, px(1150))
-card(pc('accel', 0.1), 0.0035, px(1010))
-card(pw('honest', 'Speed', -0.2), 0.0035, px(780))
-pair(E4, A2, pw('honest', 'Speed', 0.1), 0.4, ring=1.2, pan=px(780) * 0.3)
-card(pw('honest', 'Promises', -0.2), 0.0035, px(1240))
-pair(F4, Bb2, pw('honest', 'Promises', 0.1), 0.4, ring=1.4, pan=px(1240) * 0.3)
+card(pw('six', 'promises met', -0.2), 0.0035, px(1550))
+written('C', marker, 0.004)
+written('N2', pen, 0.0045)
+for k, (m, b, r) in zip([k for k in PEN['N2'] if k['s'] == 'arrow'], ((E4, A2, 1.2), (F4, Bb2, 1.4))):
+    pair(m, b, k['t0'], 0.4, ring=r, pan=px(k['x']) * 0.3)
 
-# 5. Not a target: the director's message on the screen; a low A and a blade's C. Fair questions: F major, small. Goodhart, then Strathern:
-#    the mark, A4 alone at "target", then inside D minor: a number pushed to move means something else. Deming: A minor, low. Helena's
-#    reply: B flat major, a rule kept; the page to the quarterly review, no one ranked: F major, the A on top
+# 5. Not a target: Monday 13 September: the card, and the director's message arriving on Helena's laptop: a low A and a blade's C.
+#    Fair questions: F major, small. Carmen's marker on the board; Goodhart, then Strathern: the mark, A4 alone at "target", then inside
+#    D minor: a number pushed to move means something else. SPACE: the card, as Jun helps Ivy. Deming: A minor, low. Helena's answer
+#    sent: B flat major, a rule kept; the director's reply arrives: the page goes to the quarterly review, no one ranked, F major, the A
+#    on top. In the pause, Helena's pen: the count crossed out, the team's page ticked, and B flat, low, under the tick
 LV[0] = 0.9
 tw = lambda lid, word, off=0: W('target', lid, word, off)
 tc = lambda lid, off=0: G('target', lid, off)
-screen(tc('mon', 0.1), 0.003, px(640))
-pair(C4, A2, tc('mon', 0.5), 0.4, ring=1.3)
-tap(tw('fair', 'faster', -0.3), 0.003, px(400))
-tap(tw('fair', 'help', -0.3), 0.003, px(360))
-tap(tw('fair', 'fair', -0.1), 0.003, px(820))
+card(S0('target') + 0.6, 0.0035, px(370))
+pop(tc('mon', 1.2), 0.0022, px(1460), up=False)
+pair(C4, A2, tc('mon', 1.4), 0.4, ring=1.3)
 chord((F3, A3, C4), tw('fair', 'fair', 0.1), 0.4, step=0.14, ring=1.4)
-card(tc('goodhart', 0.1), 0.0035, px(630))
-card(tw('strathern', 'Marilyn', -0.2), 0.0035, px(630))
+written('D', marker, 0.004)
 mark(tw('strathern', 'target', 0.0), 0.5, ring=1.4)
 chord((D2, F3, A3, D4, A4), tw('strathern', 'good', 0.5), 0.45, step=0.15, ring=1.9)
-card(tc('split', 0.1), 0.0035, px(630))
-card(tc('space', 0.1), 0.0035, px(630))
-card(tw('deming', 'Deming', -0.3), 0.0035, px(530))
+card(tc('space', 2.6), 0.0035, px(1550))
 chord((A2, C4, E4), tw('deming', 'system', 0.1), 0.42, step=0.16, ring=1.6)
-card(tw('no', 'no', -0.2), 0.0035, px(630))
 chord((Bb2, D4, F4, Bb4), tw('no', 'no', 0.3), 0.42, step=0.14, ring=1.6)
-tap(tw('review', 'quarterly', -0.2), 0.003, px(630))
-tap(tw('review', 'ranked', -0.3), 0.003, px(630))
+pop(tw('no', 'shows', 2.5), 0.0022, px(1460))                        # her answer, typed in, sent
+pop(tw('review', 'takes', -0.2), 0.0022, px(1460), up=False)         # the director's reply
 chord((F2, A3, C4, F4, A4), tw('review', 'ranked', 0.3), 0.42, step=0.14, ring=1.8)
+written('N3', pen, 0.0045)
+for kind in ('cross', 'tick'):
+    k = stroke('N3', kind, True); ticked(k['t0'], 0.0045, px(k['x']) * 0.5)
+chord((Bb2, F3, D4), stroke('N3', 'tick', True)['t0'] + 0.1, 0.4, step=0.16, ring=1.6, until=E('target'))
 
-# 6. On Monday: back in Sweden, the road, measured and fixed: F major, low; Helena's three pills, F, A and C, as in the opening's close; the
-#    four sheets, a card each, and the pair: a blade with its low partner; the next film's tag; the last line's pills; and the close: A4
-#    alone, then F major, held into the end card
+# 6. On Monday: back in Sweden, the barrier road: the card, and F major, low, as the voice says what Sweden fixed. The university,
+#    December: the team smiles at the board, and F, A and C, as in the opening's close. Helena's pen, a page of her notebook: each
+#    measure paired, a blade with its low partner; the next film's card; and the close: A4 alone, then F major, held into the end card
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
-tap(mw('back', 'measured', -0.1), 0.0032, px(960))
-tap(mw('back', 'fixed', -0.1), 0.0032, px(960))
+card(S0('monday') + 1.0, 0.0035, px(370))
 chord((F2, A3, F4), mw('back', 'fixed', 0.3), 0.42, step=0.16, ring=1.8)
 for wd, m in (('measured', F4), ('read', A4), ('fixed', C5)):
-    tap(mw('helena', wd, -0.1), 0.0032, px(1250))
-    blade(m, mw('helena', wd, 0.0), 0.38, px(1250) * 0.4, ring=1.0)
-card(mc('flow', 0.3), 0.0035, px(530))
-card(mw('pair', 'Pair', -0.1), 0.0035, px(1390))
-pair(C4, F2, mw('pair', 'balances', 0.0), 0.4, ring=1.3, pan=px(1390) * 0.3)
-card(mw('read', 'Read', -0.1), 0.0035, px(530))
-card(mw('rank', 'rank', -0.2), 0.0035, px(1390))
-tap(mw('next', 'falls', -0.2), 0.0032, px(960))
-for wd, x in (('Measure', 630), ('Fix', 1290)):
-    tap(mw('end', wd, -0.1), 0.0032, px(x))
+    blade(m, mw('helena', wd, 0.0), 0.38, px(1000) * 0.4, ring=1.0)
+written('N4', pen, 0.0045)
+k = stroke('N4', 'with its partner')
+pair(C4, F2, k['t0'], 0.4, ring=1.3, pan=px(k['x']) * 0.3)
+card(mc('next', 0.4), 0.0035, px(370))
 mark(mw('end', 'together', 0.2), 0.5, ring=1.5)
 chord((F2, F3, C4, F4, A4), mw('end', 'people', 0.3), 0.5, step=0.16, ring=5.0, until=TOT)

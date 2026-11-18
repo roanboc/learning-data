@@ -88,6 +88,17 @@ class SelectionTests(unittest.TestCase):
         self.assertTrue((cwd / "film.json").exists())  # run from the film's source folder, as its own tools are
         self.assertEqual(env["FILM_LANG"], "en")
 
+    def test_a_changed_film_has_every_shot_seen(self):
+        p = self.plan("films/what-an-agent-is/7-ethics-and-accountability/source/src/scenes.js")
+        seen = [s for s in affected.steps(p) if "every shot" in s[0]]
+        self.assertEqual(len(seen), len([f for f in p["films"] if f["checks"] == "full"]))
+        name, cmd, cwd, env = next(s for s in seen if s[0].startswith("Ethics"))
+        self.assertEqual(pathlib.Path(cmd[1]), ROOT / "site-tools/shots.py")
+        self.assertEqual(cwd, ROOT / "films/what-an-agent-is/7-ethics-and-accountability/source")
+        self.assertEqual(env["FILM_LANG"], "en")
+        # a new site tool is a tooling change: it draws no film
+        self.assertEqual(self.plan("site-tools/shots.py")["films"], [])
+
     def test_soundtrack_only_does_not_schedule_film(self):
         p = self.plan("site/assets/off-the-shelf/soundtrack.mp3")
         self.assertEqual(p["films"], [])

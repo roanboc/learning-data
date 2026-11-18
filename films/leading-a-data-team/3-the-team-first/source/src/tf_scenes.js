@@ -1,373 +1,270 @@
 /* ===== The team comes first: the chapters, shot by shot =====
-   Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's recorded
-   again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
-   a room (later:true) lets what was there leave first; between rooms a shot dissolves, or cuts where both show the same people. Sizes
-   in the 1920 x 1080 frame. */
-
+   The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
+   says, and the words on the frame are where and when, a name, or what someone says; what a screen shows is in a callout from it. The
+   ideas are written by hand: Carmen Vidal's and Helena's boards, and the notebooks of a stokvel's member, Helena and Ivy (tf_uni.js).
+   Johannesburg in the 1930s, and today, is in tfp_joburg.js. Every time comes from the voice: a line's start (sc.cues) or a word in it
+   (wAt). */
+const tf_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"The team comes first",a);}};
+function tf_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
+const tf_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
+const tf_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};
+const tf_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
+const tf_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
+// someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
+const tf_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},base||{});const g=base.gaze[1],ev=[],K=["look","nod","smile"];
+  for(let k=0;k<30;k++){const at=(t0||0)+1.8+i*1.1+k*5.6,kind=K[(k+Math.round(i))%3];ev.push(kind==="look"?[at,"look",2.2,[1,g+((k+Math.round(i))%2?0.45:-0.35)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
+  return PK.face(tt,base,ev);};
+const tf_talk=(base,tt,spans)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,...spans.map(([a,b])=>PK.talk(tt,a,b)*0.75));return e;};
+const tf_sp=(tt,i,spans,base,g)=>tf_alive(tt,{expr:tf_talk(base||"listen",tt,spans),gaze:[1,g==null?-0.2:g]},i);
+const TF_HEV=Array.from({length:40},(_,k)=>k%2?[1.6+k*4.8,"nod"]:[1.6+k*4.8,"look",2.2,[1,0.35]]);
 const TF_LAST="Nobody alone, nobody the only one who knows.";
-// the film's number and title at the top left, from the second chapter on; dk, 0 to 1: pale words for a dark room
-function tf_kick(ctx,S,a,dk){if(a<=0.004)return;setScreen(ctx,S);dk=clamp(dk||0,0,1);const x=96,y=100;
-  lp_T(ctx,"3",x,y,{w:800,size:28,col:mix(LP.ink,LP.paper,dk),a});lp_T(ctx,"THE TEAM COMES FIRST",x+lp_tw(ctx,"3",{w:800,size:28})+22,y,{w:800,size:28,ls:3.5,col:mix(LP.mut,[226,216,206],dk),a});}
-// a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
-function tf_sheet(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return null;
-  return lp_textSheet(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// lines that come in one by one, each at its own time: lp_textSheet's u
-const tf_u=(t,ts)=>ts.reduce((s,t0)=>s+ag_in(t,t0,0.5),0)/ts.length;
-// a tag that comes in at t0 and goes at t1 (null: stays); a pill the same way, springing in
-function tf_tag(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_tag(ctx,x,y,text,Object.assign({},o,{a}));}
-function tf_pill(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_pill(ctx,x,y,text,Object.assign({},o,{a,k:t-t0}));}
-// a green tick in a disc, springing in from t0
-function tf_tick(ctx,t,t0,x,y,a){if(t<t0)return;const f=lerp(0.6,1,ag_spr(t-t0,0,0.5));ctx.save();ctx.globalAlpha*=ag_in(t,t0,0.3)*(a==null?1:a);ctx.fillStyle=rgba(LP.green,1);
-  ctx.beginPath();ctx.arc(x,y,24*f,0,TAU);ctx.fill();lp_icon(ctx,"tick",x,y,32*f,[255,255,255]);ctx.restore();}
-// a person fading in at t0 (and out at t1): lp_person's options
-function tf_who(ctx,t,t0,t1,who,x,y,s,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.5);if(a<=0.004)return;lp_person(ctx,who,x,y,s,Object.assign({},o,{t,a}));}
-// a near hand that rises to hold something from t0 (over 0.45 s), the thing coming in with it: o for lp_person
-function tf_holds(t,t0,thing){const m=ag_in(t,t0,0.45);return{pose:"hang",pose2:"hold",mix:m,holdBack:(c,h)=>{if(m<=0.004)return;c.save();c.globalAlpha*=m;thing(c,h);c.restore();}};}
-const tf_n=(n,f)=>{const a=[];for(let i=0;i<n;i++)a.push(f(i));return a;};
+// a screen's callout from the monitor at the desk by the window
+const tf_screenCall=(x,R,a,head,rows,hc,o)=>{o=o||{};const D=R&&R.marta&&R.marta.desk;const tip=D?[150,D.top-120]:[150,620];
+  PK.callout(x,o.bx==null?720:o.bx,o.by==null?110:o.by,o.bw||720,o.bh||250,tip,a,(cc,bx,by,bw,bh)=>tf_panel(cc,bx,by,bw,bh,head,rows,o.bars||null,hc));};
+// the team's room with someone at the desk by the window (o.at, default Helena); o.face: their face; o.noor: Noor at Sam's desk
+const tf_atRoom=(x,tt,t0,o)=>{o=o||{};return tf_team(x,tt,{clock:o.clock==null?10:o.clock,deskWho:o.at||"helena",marta:o.at===null?null:Object.assign({work:o.work==null?1:o.work,turn:0},o.face||tf_alive(tt,{expr:"think",gaze:[1,0.3]},3,t0)),
+  samWho:o.noor?"noor":"sam",sam:o.sam===null?null:Object.assign({work:1},o.sam||tf_alive(tt,{},1,t0)),jun:o.jun===null?null:Object.assign({work:1},o.jun||tf_alive(tt,{},2,t0)),show:PK.onScreen.chat(0,{}),people:o.people||[]});};
+// Helena standing in the team's room, her notebook under her arm (fl, x: where)
+const tf_helena=(tt,face,o)=>({fl:(o&&o.fl)||930,draw:cc=>{o=o||{};const J=PK.person(cc,"helena",o.x||1560,o.fl||930,tf_hT(o.fl||930),"clasp",Object.assign({t:tt+4,flip:o.flip!==false,underF:PK.inHand.notebook({}),holds:true},face));if(o.out)o.out.J=J;}});
+// Helena on her phone in the team's room, a chat in a callout from it
+const tf_phone=(x,tt,t0,t1,CH,face,o)=>{o=o||{};let Jh=null;const cs=PK.chatSize(x,CH,{size:28});
+  tf_team(x,tt,{clock:o.clock==null?16:o.clock,marta:null,samWho:o.noor?"noor":"sam",sam:o.sam===null?null:Object.assign({work:1},tf_alive(tt,{},1,t0)),jun:Object.assign({work:1},tf_alive(tt,{},2,t0)),people:[{fl:930,draw:cc=>{
+    Jh=PK.person(cc,"helena",1560,930,tf_hT(930),"phone",Object.assign({t:tt,flip:true,hold:PK.inHand.phone?PK.inHand.phone({back:true}):null,holds:true},face));}}]});
+  if(Jh)PK.callout(x,o.bx==null?560:o.bx,o.by==null?160:o.by,cs.w,cs.h,[Jh.hdN[0]-20,Jh.hdN[1]-30],ag_io(tt,t0+0.3,t1,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH,tt,{size:28}));
+  return Jh;};
 
-/* ---------------------------------------------------------------- 1. Through other people: Johannesburg, the 1930s */
-scene("stokvel",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),Wm=TF_WOMEN,out={light:"day",wall:0},lt={light:"late",wall:0.12};
-  // the members at their table in the room in the yard, the pot on it: drawn the same in every shot of the room
-  const table=(x,tt)=>{for(const [i,px,fl] of [[0,300,false],[1,510,false],[2,730,true],[3,940,true]])lp_person(x,Wm[i],px,690,0.66,{t:tt,flip:fl,cut:806,light:lt});
-    lp_table(x,160,812,920);tf_pot(x,620,762,0.9,0.5,1);};
-  // the stokvel as a ring, on a sheet on the room's wall; o.words: [{text, a, pill, col}] under it, one at a time
-  const chart=(x,o)=>{const a=o.a==null?1:o.a;if(a<=0.004)return;x.save();x.globalAlpha*=a;if(o.k!=null)ag_about(x,1470,465,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-    lp_sheet(x,1110,140,720,650,{light:"late"});lp_T(x,"A STOKVEL: A SAVINGS GROUP",1146,220,{w:800,size:28,ls:3,col:LP.mut});tf_ring(x,1470,480,150,o.ring);
-    for(const wd of (o.words||[]))if(wd.a>0.004){if(wd.pill)lp_pill(x,1470,736,wd.text,{col:wd.col||LP.green,a:wd.a});else lp_T(x,wd.text,1470,748,{w:700,size:30,align:"center",a:wd.a,col:wd.col||LP.ink});}
-    x.restore();};
-  const rules=(x,tt)=>tf_sheet(x,tt,w("rules","rules",-0.2),150,110,620,{kick:"The group's rules",lines:["How much to pay","How often to meet","Whose turn comes next","What if someone can't pay"]},
-    {col:LP.blue,light:"late",u:tf_u(tt,[w("rules","much",-0.2),w("rules","often",-0.2),w("rules","turn",-0.2),w("rules","happens",-0.2)]),out:c.answer-0.5});
-  const ubuntu=(x,tt)=>tf_sheet(x,tt,w("ubuntu","Ubuntu",-0.2),1150,200,660,{kick:"Ubuntu · Southern Africa",title:"Umuntu ngumuntu ngabantu",sub:"A saying in isiZulu: a person is a person through other people"},{light:"late"});
-  // the team's ring: everyone pays in, everyone holds the work, and the ring holds when one of them steps away
-  const teamRing=(x,tt)=>{const s0=c.team+0.1,p0=w("team","pays",-0.2),h0=w("team","alone",-0.7),a0=w("step","step",-0.3),hd=w("step","holds",-0.1);
-    x.save();x.globalAlpha*=ag_in(tt,s0,0.4);ag_about(x,960,460,lerp(0.6,1,ag_spr(tt-s0,0,0.5)));
-    lp_sheet(x,560,110,800,700,{light:"day"});lp_T(x,"A TEAM",596,190,{w:800,size:28,ls:3,col:LP.mut});
-    tf_ring(x,960,470,190,{n:6,work:1,pay:tf_n(6,i=>clamp((tt-p0-i*0.14)/0.9,0,1)),hold:ag_in(tt,h0,1.4),away:{i:2,u:clamp((tt-a0)/1.8,0,1)}});
-    const ha=ag_in(tt,h0+0.5,0.4)*(1-ag_in(tt,a0-0.5,0.3)),ga=ag_in(tt,hd,0.4);
-    if(ha>0.004)lp_T(x,"Nobody carries the work alone",960,772,{w:700,size:30,align:"center",a:ha});
-    if(ga>0.004)lp_pill(x,960,760,"The group holds",{col:LP.green,a:ga,k:tt-hd});x.restore();};
+// a person who holds a sheet up to show it (who: a row of the story's people or a CAST name)
+const tf_shows=(x,who,px,fl,tt,face,o)=>tfp_person(x,who,px,fl,PK.poseMix("clasp",TF_SHOW,1),Object.assign({t:tt,hold:tf_sheet,holds:true,flip:!!(o&&o.flip)},face));
+// Ivy standing in the team's room (x, fl: where; o.out.J: her joints)
+const tf_stand=(who,tt,face,o)=>{o=o||{};const fl=o.fl||930;return{fl,draw:cc=>{const q=Object.assign({t:tt,flip:o.flip!==false},o.book?{underF:PK.inHand.notebook({}),holds:true}:{},face);const J=PK.person(cc,who,o.x||1560,fl,tf_hT(fl),"clasp",q);if(o.out)o.out.J=J;}};};
+
+// the people at the product's review, seated (PK.audience's seats and order), each with a look, a nod or a smile now and then
+function tf_audience(x,tt,n,look){const seats=PK.seats({}),order=[5,1,9,6,2,8,0,10,4,7,3],taken={};order.slice(0,n).forEach((s,i)=>taken[s]=i);
+  seats.forEach((s,i)=>{const ch=PK.PAL[i%2?"chair2":"chair"];if(taken[i]==null){PK.S.begin(x,{lw:PK.u.clamp(s.h*0.0056,1.4,6.5),sh:4});PK.chair(x,s.x-0.012*s.h,s.fl,s.h,false,{col:ch});return;}
+    PK.seated(x,PK.extra(i+3),s.x,s.fl,s.h,PK.poseMix("sit","sitBack",(i*0.37)%1),Object.assign({t:tt+i*1.7,chair:ch,shade:0},tf_alive(tt,{expr:"listen",gaze:[1,-look]},(i*3)%7*0.7)));});}
+
+
+/* ---------------------------------------------------------------- 1. Through other people */
+scene("stokvel",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tG=c.group-0.4,tB=c.banks-0.4,tC=c.change-0.4,tR=c.rules-0.4,tA=c.answer-0.4,tY=c.burial-0.4,tU=c.ubuntu-0.4,tD=c.decades-0.4,tT=c.team-0.4;
+  const N1=PK.pace(ctx,null,tf_note1(sc,w)),N2=PK.pace(ctx,null,tf_note2(sc,w)),HC=c.carry;
   ag_shots(ctx,S,t,sc.dur,[
-    // Johannesburg, the 1930s: a yard of rooms near the city, and women earning what they can
-    {at:0,place:"tfYard",keys:[[0,1010,540,1.08],[c.when+0.4,960,540,1.0]],d:3,draw:(x,tt)=>{const f=ag_in(tt,w("yard","women",-0.5),0.8);
-      tf_sheet(x,tt,w("when","Johannesburg",-0.2),110,110,600,{kick:"Johannesburg, South Africa",title:"The 1930s"},{light:null,pin:false});
-      if(f>0.004){x.save();x.globalAlpha*=f;
-        lp_person(x,Wm[0],480,700,0.76,Object.assign({t:tt,light:out},tf_holds(tt,w("earn","washing",-0.3),tf_bundle)));
-        lp_person(x,Wm[1],960,700,0.76,Object.assign({t:tt,light:out},tf_holds(tt,w("earn","sewing",-0.3),tf_garment)));
-        lp_person(x,Wm[4],1440,700,0.76,Object.assign({t:tt,flip:true,light:out},tf_holds(tt,w("earn","selling",-0.3),tf_basket)));x.restore();}
-      tf_tag(x,tt,w("earn","washing",-0.1),null,480,352,"Washing",{align:"center"});
-      tf_tag(x,tt,w("earn","sewing",-0.1),null,960,352,"Sewing",{align:"center"});
-      tf_tag(x,tt,w("earn","selling",-0.1),null,1440,352,"Selling",{align:"center"});
-      tf_tag(x,tt,w("earn","irregular",-0.2),null,960,262,"Low and irregular pay",{align:"center",col:LP.amber});}},
-    // eight or ten who trust each other: a stokvel, drawn as a ring
-    {at:c.group-0.3,place:"tfMeet",cut:true,keys:[[c.group-0.3,960,540,1.0]],draw:(x,tt)=>{table(x,tt);const s0=c.group+0.1,e0=w("group","Eight",-0.1);
-      chart(x,{a:ag_in(tt,s0,0.4),k:tt-s0,ring:{n:8,ring:clamp((tt-w("group","trust",-0.3))/1.6,0,1),show:tf_n(8,i=>clamp((tt-e0-i*0.16)/0.4,0,1)),pot:ag_in(tt,w("group","savings",-0.3),0.5),fill:0},
-        words:[{text:"Eight or ten who trust each other",a:ag_in(tt,w("group","trust",0),0.4)}]});}},
-    // each pays the same into one pot, one takes it all, in turn, until every member has had hers
-    {at:c.turn-0.3,place:"tfMeet",keys:[[c.turn-0.3,1070,540,1.15]],d:1.8,draw:(x,tt)=>{table(x,tt);
-      const p1=w("turn","pays",-0.1),T0=w("turn","takes",-0.2),U=w("turn","until",-0.1),pay=tf_n(8,i=>clamp((tt-p1-i*0.12)/0.9,0,1)),inN=pay.filter(v=>v>=1).length;
-      chart(x,{ring:{n:8,pot:1,fill:inN/8*(1-ag_in(tt,T0+0.5,0.25)),pay,take:{i:0,u:clamp((tt-T0)/0.9,0,1)},had:tf_n(8,i=>i===0?ag_in(tt,T0+0.8,0.3):ag_in(tt,U+(i-1)*0.24,0.3))},
-        words:[{text:"Eight or ten who trust each other",a:1-ag_in(tt,p1-0.6,0.3)},{text:"Each pays the same sum",a:ag_io(tt,p1,T0-0.5,0.3)},{text:"One takes it all, in turn",a:ag_in(tt,T0-0.1,0.4)}]});}},
-    // the banks: no account, and no loan
-    {at:c.banks-0.3,place:"tfBank",keys:[[c.banks-0.3,960,540,1.0]],draw:(x,tt)=>{
-      tf_sheet(x,tt,w("banks","bank",-0.4),90,130,560,{kick:"The banks",title:"Few Black South Africans had an account",sub:"Then, or for decades after, under apartheid"},{col:LP.amber,light:null,pin:false});
-      tf_sheet(x,tt,w("lend","lend",-0.3),1270,130,560,{kick:"And no loans",lines:["Their pay was low and irregular","The law kept them from owning property a bank would take as security"]},
-        {col:LP.amber,light:null,pin:false,u:tf_u(tt,[w("lend","irregular",-0.3),w("lend","law",-0.2)])});}},
-    // what one funeral, a term's fees or a lost wage could do
-    {at:c.harm-0.3,place:"tfYardDusk",keys:[[c.harm-0.3,960,540,1.0]],draw:(x,tt)=>{
-      tf_who(x,tt,c.harm+0.1,null,Wm[3],1480,700,0.76,{flip:true,light:{light:"evening",wall:0}});
-      tf_tag(x,tt,w("harm","safe",-0.3),null,620,260,"No safe place to save",{align:"center",col:LP.amber});
-      tf_tag(x,tt,w("harm","borrow",-0.3),null,620,340,"No one to borrow from",{align:"center",col:LP.amber});
-      tf_tag(x,tt,w("harm","funeral",-0.1),null,330,540,"A funeral",{align:"center",col:LP.amber});
-      tf_tag(x,tt,w("harm","fees",-0.3),null,700,540,"A term's school fees",{align:"center",col:LP.amber});
-      tf_tag(x,tt,w("harm","wage",-0.2),null,1070,540,"A lost wage",{align:"center",col:LP.amber});
-      tf_pill(x,tt,w("harm","ruin",-0.1),null,700,660,"Could ruin a family",{col:LP.amber});}},
-    // something had to change: their own way, out of trust, and the rules they agree together
-    {at:c.change-0.3,place:"tfMeet",cut:true,keys:[[c.change-0.3,960,540,1.0]],draw:(x,tt)=>{table(x,tt);
-      tf_sheet(x,tt,w("change","built",-0.3),1150,180,600,{kick:"Out of trust",title:"Their own way"},{col:LP.blue,light:"late",out:c.answer-0.7});rules(x,tt);}},
-    // every member answers to the others; when one falls on hard times, the group carries her; and the idea behind it
-    {at:c.answer-0.3,place:"tfMeet",keys:[[c.answer-0.3,1070,540,1.15]],d:1.8,draw:(x,tt)=>{table(x,tt);rules(x,tt);
-      const a0=w("answer","answers",-0.3),n0=w("answer","nobody",-0.3),pay=tf_n(8,i=>clamp((tt-n0-i*0.1)/0.9,0,1)),inN=pay.filter(v=>v>=1).length;
-      const b0=w("burial","burial",-0.2),bc=w("burial","carries",-0.2),h2=w("carry","hard",-0.3),c2=w("carry","carries",-0.2),one=tt<h2-0.1;
-      chart(x,{a:ag_in(tt,c.answer-0.2,0.4)*(1-ag_in(tt,c.ubuntu-0.3,0.4)),k:tt-c.answer+0.2,ring:{n:8,web:ag_in(tt,a0,1.6),pot:1,fill:inN/8,pay,
-          had:tf_n(8,i=>i===5&&!one?1:0),hard:one?{i:5,u:ag_in(tt,b0,0.6)}:{i:2,u:ag_in(tt,h2,0.6)},carry:one?{i:5,u:clamp((tt-bc)/1.4,0,1)}:{i:2,u:clamp((tt-c2)/1.4,0,1)}},
-        words:[{text:"Every member answers to the others",a:ag_io(tt,a0,n0-0.2,0.3)},{text:"Almost nobody fails to pay",pill:true,col:LP.green,a:ag_io(tt,n0+0.3,c.burial-0.2,0.35)},
-          {text:"A burial society",a:ag_io(tt,b0,c.carry-0.2,0.35)},{text:"The group carries her",pill:true,col:LP.green,a:ag_in(tt,c2+0.2,0.35)}]});
-      ubuntu(x,tt);}},
-    // savings, credit and a safety net, for decades
-    {at:c.decades-0.3,place:"tfMeet",keys:[[c.decades-0.3,960,540,1.0]],d:1.8,draw:(x,tt)=>{table(x,tt);ubuntu(x,tt);
-      tf_tag(x,tt,w("decades","savings",-0.1),null,330,420,"Their savings",{align:"center",col:LP.green});
-      tf_tag(x,tt,w("decades","credit",-0.1),null,620,420,"Their credit",{align:"center",col:LP.green});
-      tf_tag(x,tt,w("decades","safety",-0.1),null,910,420,"Their safety net",{align:"center",col:LP.green});}},
-    // today
-    {at:c.today-0.3,place:"lpRoom",keys:[[c.today-0.3,960,540,1.0]],draw:(x,tt)=>{const m0=w("today","million",-0.6),b0=w("rand","billion",-0.6);
-      if(tt>=m0)lp_figure(x,240,250,660,{kick:"More than",num:"11 million",label:"South Africans in a stokvel"},{col:LP.green,a:ag_in(tt,m0,0.35),k:tt-m0});
-      if(tt>=b0)lp_figure(x,1020,250,660,{kick:"Over",num:"R50 billion",label:"Put in together, every year"},{col:LP.green,a:ag_in(tt,b0,0.35),k:tt-b0});
-      tf_tag(x,tt,w("today","National",-0.2),null,960,640,"By the National Stokvel Association's count",{align:"center"});}},
+    // the 1930s: a yard of rooms near the city, the women at their work
+    {at:0,place:"tfpYard",keys:[[0,960,540,1.0],[tG-0.2,1000,540,1.05]],d:3,draw:(x,tt,cam)=>{
+      tfp_person(x,"m3",1640,880,"clasp",Object.assign({t:tt,flip:true},tf_alive(tt,{expr:"neutral",gaze:[1,0.3]},3,0)));
+      tf_shows(x,"m2",420,940,tt,tf_alive(tt,{expr:"think",gaze:[1,0.3]},2,0));
+      tfp_person(x,"m1",1040,1000,PK.poseMix("clasp",TF_CARRY,1),Object.assign({t:tt,flip:true,hold:tf_sheet,holds:true},tf_alive(tt,{expr:"neutral",gaze:[1,0.2]},1,0)));}},
+    // eight or ten who trust each other: a stokvel, and its pot
+    {at:tG,place:"tfpMeet",cut:true,keys:[[tG,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jt=null;
+      tfp_person(x,"m3",300,890,"clasp",Object.assign({t:tt},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},3,tG)));
+      tfp_table(x,"m4",760,930,Object.assign({t:tt,work:0},tf_alive(tt,{expr:"listen",gaze:[1,0.2]},4,tG)));
+      Jt=tfp_table(x,"m2",1260,960,Object.assign({t:tt,flip:true,work:0,pot:true},tf_sp(tt,2,[[c.turn+0.3,E.turn]],"smile",0.2)));
+      tfp_person(x,"m5",1640,1000,"clasp",Object.assign({t:tt,flip:true},tf_alive(tt,{expr:"listen",gaze:[1,0.2]},5,tG)));
+      tf_bub(x,Jt,tt,w("turn","takes it all",-0.2),tB-0.3,["This month,","the pot is yours."],cam,{lean:-160});}},
+    // the banks: no account, no loan
+    {at:tB,place:"tfpBank",dis:0.8,keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tfp_person(x,"clerk",1460,880,"clasp",Object.assign({t:tt,flip:true},tf_alive(tt,{expr:"neutral",gaze:[1,0.2]},2,tB)));
+      tfp_person(x,"m1",620,980,"clasp",Object.assign({t:tt},tf_alive(tt,{expr:ag_in(tt,c.harm,0.5)>0.5?"worry":"think",gaze:[1,0.3]},1,tB)));}},
+    // they built their own, out of trust: the yard again, at their meeting's table
+    {at:tC,place:"tfpMeet",cut:true,keys:[[tC,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tfp_table(x,"m1",760,930,Object.assign({t:tt,work:0},tf_alive(tt,{expr:"think",gaze:[1,0.2]},1,tC)));
+      tfp_table(x,"m4",1260,960,Object.assign({t:tt,flip:true,work:0,pot:true},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},4,tC)));}},
+    // the rules, agreed together (a member's book)
+    {at:tR,place:"tfNotes",dis:0.6,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,TFP_FOLK.m4,tt,N1,{});}},
+    // everyone answers to the others
+    {at:tA,place:"tfpMeet",dis:0.6,keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tfp_person(x,"m3",300,890,"clasp",Object.assign({t:tt},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},3,tA)));
+      tfp_table(x,"m4",760,930,Object.assign({t:tt,work:0},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},4,tA)));
+      tfp_table(x,"m2",1260,960,Object.assign({t:tt,flip:true,work:0,pot:true},tf_alive(tt,{expr:"listen",gaze:[1,0.2]},2,tA)));
+      tfp_person(x,"m5",1640,1000,"clasp",Object.assign({t:tt,flip:true},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},5,tA)));}},
+    // the burial society; and when one member falls on hard times, the group carries her
+    {at:tY,place:"tfpYard",cut:true,keys:[[tY,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let J2=null;
+      tfp_person(x,"m1",1180,900,"clasp",Object.assign({t:tt,flip:true},tf_alive(tt,{expr:ag_in(tt,HC+1.0,0.6)>0.5?"smile":"worry",gaze:[1,0.2]},1,tY)));
+      J2=tf_shows(x,"m2",720,960,tt,tf_sp(tt,2,[[HC+0.3,E.carry]],"smile",0.2));
+      tfp_person(x,"m5",420,1010,"clasp",Object.assign({t:tt},tf_alive(tt,{expr:"listen",gaze:[1,0.2]},5,tY)));
+      tf_bub(x,J2,tt,HC+0.3,tU-0.3,["We'll carry you","through this."],cam,{lean:160});}},
+    // Ubuntu (the member's book)
+    {at:tU,place:"tfNotes",dis:0.6,keys:[[tU,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,TFP_FOLK.m4,tt,N2,{});}},
+    // for decades, and today: more than 11 million members
+    {at:tD,place:"tfpMeet",dis:0.6,keys:[[tD,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Js=null;
+      tfp_table(x,"t2",760,930,Object.assign({t:tt,work:0},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},2,tD)));
+      tfp_table(x,"t3",1260,960,Object.assign({t:tt,flip:true,work:0,pot:true},tf_alive(tt,{expr:"listen",gaze:[1,0.2]},3,tD)));
+      Js=tf_shows(x,"t1",360,990,tt,tf_alive(tt,{expr:"smile",gaze:[1,0.2]},1,tD));
+      PK.callout(x,560,80,720,220,Js?[Js.hdN[0]+30,Js.hdN[1]-60]:[440,560],ag_io(tt,c.today+1.6,tT-0.3,0.4),(cc,bx,by,bw,bh)=>tf_panel(cc,bx,by,bw,bh,"Stokvels today",[["11 million members",PK.C.green,34],[ag_in(tt,c.rand,0.4)>0.5?"R50 billion a year":"",PK.C.green,34]],null,PK.C.green));}},
     // a team can hold its people the same way
-    {at:c.team-0.3,place:"lpRoom",later:true,keys:[[c.team-0.3,960,540,1.0]],draw:(x,tt)=>teamRing(x,tt)}
+    {at:tT,place:"tfTeam",dis:1.0,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tf_atRoom(x,tt,tT,{at:"ivy",noor:true,face:tf_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tT),people:[tf_helena(tt,tf_alive(tt,{expr:"smile",gaze:[1,0.1]},5,tT),{x:1560,fl:930})]});}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,"The team comes first","A person is a person through other people","Leading data people · Leading a data team");
+  tf_card(ctx,S,t,0.4,c.earn-0.2,{kick:"Johannesburg, the 1930s",title:"A yard of rooms"},{y:40,mid:true});
+  tf_card(ctx,S,t,tD+0.3,c.today+1.4,{kick:"Today",title:"South Africa"},{y:40,mid:true});
+  PK.title(ctx,S,t,c.breath+0.2,"The team comes first","Nobody alone, nobody the only one who knows","Leading data people · Leading a data team",{side:"right",size:52});
 });
 
 /* ---------------------------------------------------------------- 2. The team as a whole */
-scene("whole",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"};
-  const hx=tt=>lerp(1400,1600,ag_sine(ag_in(tt,c.watch-0.6,1.4)));
-  // the team's ring on a sheet on the wall, as Helena reads it: drawn the same in each shot that shows it
-  const ring=(x,tt,o)=>{const a=o.a==null?1:o.a;if(a<=0.004)return;x.save();x.globalAlpha*=a;if(o.k!=null)ag_about(x,1330,470,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-    lp_sheet(x,880,110,900,720,{light:"morning"});lp_T(x,"THE TEAM",916,190,{w:800,size:28,ls:3,col:LP.mut});tf_ring(x,1330,480,210,Object.assign({n:7},o.ring));
-    for(const wd of (o.words||[]))if(wd.a>0.004)lp_pill(x,1330,780,wd.text,{col:wd.col||LP.green,a:wd.a});x.restore();};
-  const i0=ag_shots(ctx,S,t,sc.dur,[
-    // her first day; before she judges anyone, she watches
-    {at:0,place:"tfMorning",keys:[[0,960,540,1.04],[1.4,960,540,1.0]],d:2.6,draw:(x,tt)=>{
-      tf_sheet(x,tt,w("helena","Helena",-0.3),220,180,640,{kick:"Monday 1 February 2027",title:"Helena Novak",sub:"The new data manager"},{light:"morning",out:c.watch-0.7});
-      const ta=ag_in(tt,c.watch-0.4,0.8);if(ta>0.004){x.save();x.globalAlpha*=ta;
-        for(const [who,px,fl] of [["noor",360,false],["sam",610,false],["jun",900,true],[TF_ERIN,1150,true]])lp_person(x,who,px,650,0.72,{t:tt,flip:fl,cut:814,light:mo});
-        lp_table(x,200,820,1110);lp_laptop(x,485,790,170,{glow:0.5});lp_laptop(x,1025,790,170,{glow:0.5});x.restore();}
-      tf_who(x,tt,0.5,null,"helena",hx(tt),640,1.0,{flip:true,light:mo,gaze:[-2,1]});}},
-    // every week, half an hour with each person, about them
-    {at:c.weekly-0.3,place:"tfMorning",later:true,keys:[[c.weekly-0.3,960,540,1.0]],draw:(x,tt)=>{const T0=c.weekly+0.2,step=2.3;
-      tf_sheet(x,tt,c.weekly+0.1,170,150,620,{kick:"Every week",title:"Half an hour with each person",sub:"About them, never a status report"},{light:"morning",u:1});
-      ["noor","jun","sam",TF_ERIN].forEach((who,k)=>tf_who(x,tt,T0+k*step,k<3?T0+(k+1)*step-0.45:null,who,800,690,0.8,{cut:806,light:mo}));
-      lp_person(x,"helena",1150,690,0.8,{t:tt,flip:true,cut:806,light:mo});lp_table(x,620,812,720);
-      tf_tag(x,tt,w("asks","how",-0.2),null,975,250,"How are you?",{align:"center"});
-      tf_tag(x,tt,w("asks","way",-0.2),null,975,330,"What's in your way?",{align:"center"});
-      tf_tag(x,tt,w("asks","proud",-0.2),null,975,410,"What are you proud of?",{align:"center"});}},
-    // the team as a whole, against what this team really does; they might look slow, but
-    {at:c.whole-0.3,place:"tfMorning",later:true,keys:[[c.whole-0.3,960,540,1.0]],draw:(x,tt)=>{const t0=c.whole+0.1,a=ag_in(tt,t0,0.35)*(1-ag_in(tt,c.slow-0.6,0.4));
-      if(a>0.004){x.save();x.globalAlpha*=a;ag_about(x,960,430,lerp(0.6,1,ag_spr(tt-t0,0,0.5)));lp_sheet(x,330,130,1260,620,{light:"morning"});
-        lp_T(x,"READING THE TEAM",366,210,{w:800,size:28,ls:3,col:LP.mut});
-        const tg=w("whole","together",-0.3),g=ag_sine(ag_in(tt,tg,0.9));if(g>0.004){x.fillStyle=rgba(LP.green,1);rr(x,370,250,1180*g,84,10);x.fill();}
-        lp_T(x,"What it achieves together",400,304,{w:800,size:32,color:"#fff",a:ag_in(tt,tg+0.7,0.3)});
-        const e0=w("whole","each",-0.2);[150,120,170,96,140,110,160].forEach((h,i)=>{const u=ag_sine(ag_in(tt,e0+i*0.1,0.6));if(u<=0.004)return;x.fillStyle=rgba(mix(LP.mut,LP.paper,0.35),1);rr(x,370+i*170,580-h*u,130,h*u,8);x.fill();});
-        lp_T(x,"Each person's work, beside it",370,628,{w:700,size:28,col:LP.mut,a:ag_in(tt,e0+0.5,0.4)});
-        const l0=w("really","last",-0.3),r0=w("really","really",-0.3);lp_tag(x,1550,692,"Against what this team really does",{align:"right",col:LP.blue,a:ag_in(tt,r0,0.4)});
-        const la=ag_in(tt,l0,0.4);if(la>0.004){const b=lp_tag(x,370,692,"What her last team did",{col:LP.mut,a:la});x.strokeStyle=rgba(LP.mut,la);x.lineWidth=3;x.beginPath();x.moveTo(b.x+18,692);x.lineTo(b.x+18+(b.w-36)*ag_sine(ag_in(tt,l0+0.3,0.5)),692);x.stroke();}
-        x.restore();}
-      tf_sheet(x,tt,c.slow+0.2,280,170,640,{kick:"Against her last team",title:"They might look slow"},{col:LP.amber,light:"morning",out:c.weighs-0.6});
-      tf_sheet(x,tt,w("eleven","eleven",-0.6),1000,170,640,{kick:"What this team really does",lines:["Takes requests in 11 different ways","Keeps a platform running day and night"]},
-        {light:"morning",out:c.weighs-0.6,u:tf_u(tt,[w("eleven","eleven",-0.3),w("eleven","platform",-0.3)])});}},
-    // managing and leading, and leading weighs a little more: the people first
-    {at:c.weighs-0.3,place:"tfMorning",later:true,keys:[[c.weighs-0.3,960,540,1.0]],draw:(x,tt)=>{const b0=c.weighs+0.1;
-      tf_balance(x,960,300,{left:"Managing",right:"Leading",tilt:0.075*ag_sine(ag_in(tt,w("weighs","weighs",-0.3),1.4)),a:ag_in(tt,b0,0.5)});
-      tf_tag(x,tt,w("first","strength",-0.3),null,960,720,"The people: the team's first strength",{align:"center"});
-      tf_pill(x,tt,w("first","wellbeing",-0.2),null,960,806,"Their wellbeing comes first",{col:LP.green});}},
-    // wellbeing isn't only comfort; then the gap that matters most
-    {at:c.comfort-0.3,place:"tfMorning",later:true,keys:[[c.comfort-0.3,960,540,1.0]],draw:(x,tt)=>{const s0=w("comfort","Sometimes",-0.3),p0=w("comfort","push",-0.2),g0=w("open","gap",-0.3),G=w("gap","gap",-0.3);
-      tf_sheet(x,tt,c.comfort+0.1,150,150,640,{kick:"Wellbeing isn't only comfort",lines:["More support","A better tool","Encouragement","A push"]},
-        {light:"morning",out:c.gap+0.2,u:tf_u(tt,[w("comfort","support",-0.2),w("comfort","tool",-0.2),w("comfort","encouragement",-0.2),p0])});
-      ring(x,tt,{a:ag_in(tt,c.comfort+0.3,0.4),k:tt-c.comfort-0.3,ring:{hard:{i:4,u:ag_in(tt,s0,0.8)},carry:{i:4,u:clamp((tt-p0)/1.4,0,1)},mark:{i:0,a:ag_in(tt,G,0.5)}},
-        words:[{text:"No big gap opens",a:ag_io(tt,g0+0.2,G-0.2,0.35)}]});}},
-    // every alert at night goes to one person
-    {at:c.sam-0.3,place:"tfSam",keys:[[c.sam-0.3,960,540,1.0]],draw:(x,tt)=>{const s0=w("sam","alert",-0.4),x0=w("sixty","sixty",-0.5);
-      const al=ag_io(tt,s0,x0,0.3),flash=0.5+0.5*Math.sin(tt*5.5);
-      lp_person(x,"sam",600,640,0.95,Object.assign({t:tt,light:{light:"evening"}},{pose:"hold",holdBack:tf_phone({lit:1,alert:al*(0.6+0.4*flash)+(1-al)*ag_in(tt,x0,0.4)*0.8})}));
-      tf_glow(x,700,560,320,0.8);
-      [["01:12 · A load ran slowly",0.4],["02:47 · A disk filling up",1.3],["04:05 · A job tried again",2.2]].forEach(([s,d],k)=>tf_pill(x,tt,s0+d,x0,1340,290+k*90,s,{col:LP.amber,size:28}));
-      if(tt>=x0)lp_figure(x,1060,160,620,{kick:"Night alerts",num:"About 60",label:"A week, most needing nothing"},{col:LP.amber,light:"evening",a:ag_in(tt,x0,0.35),k:tt-x0});
-      tf_tag(x,tt,w("sixty","only",-0.2),null,1370,620,"Only Sam knows how to answer them",{align:"center",col:LP.amber});}},
-    // the team leans on one person, and he has nobody to lean on
-    {at:c.leans-0.3,place:"tfMorning",keys:[[c.leans-0.3,960,540,1.0]],draw:(x,tt)=>{const l0=w("leans","leans",-0.3);
-      ring(x,tt,{ring:{mark:{i:0,a:1},lean:{i:0,u:clamp((tt-l0)/1.6,0,1)},names:["Sam"],nameA:ag_in(tt,c.leans,0.4),carry:{i:4,u:1-ag_in(tt,c.leans-0.2,0.9)},had:[0,0,0,0,1-ag_in(tt,c.leans-0.2,0.6)]}});
-      tf_tag(x,tt,w("leans","nobody",-0.2),null,500,440,"Nobody for him to lean on",{align:"center",col:LP.amber});}}
+scene("whole",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tW=c.weekly-0.4,tH=c.whole-0.4,tL=c.weighs-0.4,tZ=c.weighs+2.4,tG=c.gap-0.4;
+  const N3=PK.pace(ctx,null,tf_note3(sc,w)),BA=PK.pace(ctx,"carmen",tf_boardA(sc,w));
+  ag_shots(ctx,S,t,sc.dur,[
+    // Monday 1 February 2027: Helena starts, and watches
+    {at:0,place:"tfTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
+      tf_atRoom(x,tt,0,{at:"ivy",noor:true,face:tf_alive(tt,{expr:"think",gaze:[1,0.3]},3,0),people:[tf_helena(tt,tf_alive(tt,{expr:"think",gaze:[1,0.1]},5,0),{x:1560,fl:930,out:Hh})]});
+      tf_name(x,Hh.J,tt,w("helena","Helena Novak",0),c.watch-0.2,"Helena Novak","Data manager",170);}},
+    // every week, half an hour with each person
+    {at:tW,place:"tfCorner",cut:true,keys:[[tW,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const r=tf_corner(x,tt,{who2:"jun",lean:0.4,t0:tW,hf:tf_sp(tt,5,[[c.asks+0.2,E.asks]],"smile",0.25),iface:tf_alive(tt,{expr:"listen",gaze:[1,0.3]},2,tW)});
+      tf_bub(x,r.helena,tt,c.asks+0.2,tH-0.3,["How are you?","What's in your way?"],cam,{lean:160});}},
+    // the team as a whole (Helena's notebook)
+    {at:tH,place:"tfNotes",dis:0.6,keys:[[tH,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}},
+    // leading weighs a little more (Carmen, at the team's board)
+    {at:tL,place:"tfTeam",dis:0.6,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const R=tf_lesson(x,tt,{rows:BA,jun:Object.assign({work:1,pose:undefined},tf_alive(tt,{},2,tL)),clock:10,events:TF_HEV});
+      tf_name(x,R.at,tt,tL+0.4,tZ-0.3,"Carmen Vidal","Consultant",160);}},
+    {at:tZ,cut:true,place:"tfBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[c.weighs,E.open]],events:TF_HEV});}},
+    // the gap: every night alert goes to Sam
+    {at:tG,place:"tfTeam",cut:true,keys:[[tG,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=tf_atRoom(x,tt,tG,{at:"sam",sam:null,noor:true,clock:18,face:tf_alive(tt,{expr:ag_in(tt,c.leans,0.5)>0.5?"worry":"think",gaze:[1,0.5]},1,tG)});
+      tf_name(x,R.marta,tt,w("sam","Sam Okafor",0),c.sixty-0.2,"Sam Okafor","Platform",170,60);
+      tf_screenCall(x,R,ag_io(tt,c.sixty+0.3,1e9,0.4),"Night alerts · to Sam",[["about 60 a week",PK.C.amber,34],["most need nothing",PK.C.ink,34],[ag_in(tt,w("sixty","only Sam",0),0.4)>0.5?"only Sam knows how":"",PK.C.amber,34]],PK.C.amber,{bh:290});}}
   ]);
-  setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,0.6,c.weekly-0.3,0.5)});
-  tf_kick(ctx,S,ag_in(t,0.6,0.6),ag_io(t,c.sam-0.3,c.leans-0.3,0.5));
+  tf_card(ctx,S,t,0.3,w("helena","Helena Novak",-0.3),{kick:"Monday 1 February 2027",title:"A new data manager"},{y:40,mid:true});
+  tf_card(ctx,S,t,tW+0.3,c.asks-0.2,{kick:"Every week",title:"Half an hour each"},{y:40,mid:true});
+  tf_imagined(ctx,S,t,0.4,w("helena","Helena Novak",-0.2),"The university, 2027 · imagined");
+  tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,w("helena","Helena Novak",0)],[tW,c.asks],[tH,tL]])));
 });
 
 /* ---------------------------------------------------------------- 3. Said out loud */
-scene("aloud",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),lt={light:"late"},mo={light:"morning"};
-  // the stand-up: the team in a row, the next morning
-  const row=[["ivy",330,false],["jun",610,false],["noor",890,false],["sam",1170,true],[TF_ERIN,1450,true],["helena",1710,true]];
-  const standup=(x,tt,a)=>{if(a<=0.004)return;x.save();x.globalAlpha*=a;for(const [who,px,fl] of row)lp_person(x,who,px,770,0.62,{t:tt,flip:fl,light:mo});x.restore();};
-  const glossary=(x,tt)=>tf_sheet(x,tt,w("glossary","glossary",-0.3),1160,140,640,{kick:"Glossary",title:"Used hours",sub:"Hours with people actually in the room"},{col:LP.blue,light:"morning"});
+scene("aloud",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tS=c.standup-0.4,tN=c.name-0.4,tZ=c.name+2.4,tL=c.learn-0.4,BB=PK.pace(ctx,"carmen",tf_boardB(sc,w)),N4=PK.pace(ctx,null,tf_note4(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // April: Ivy reviews the agent's draft, and catches what it counts as used
-    {at:0,place:"tfLate",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const d0=w("april","drafted",-0.6),b0=w("draft","booked",-0.2),u0=w("draft","room",-0.4),k0=w("caught","catches",-0.1);
-      lp_nameTag(x,96,230,"ivy",{role:"Graduate data analyst",a:ag_io(tt,w("april","Ivy",-0.2),c.caught,0.4)});
-      const sh=tf_sheet(x,tt,d0,980,150,780,{kick:"Drafted by the agent",title:"Room use, per hour",lines:["Booked hours, from the timetable","Used hours: the same as booked"]},{col:LP.violet,light:"late"});
-      const hl=ag_in(tt,b0,0.4);if(sh&&hl>0.004){x.strokeStyle=rgba(LP.amber,hl);x.lineWidth=4;rr(x,1004,374,700,48,10);x.stroke();}
-      tf_tag(x,tt,u0,null,1370,560,"Used: people actually in the room",{align:"center",col:LP.blue});
-      tf_pill(x,tt,k0,null,1370,660,"Caught, but only just",{col:LP.amber});
-      lp_person(x,"ivy",520,690,0.85,{t:tt,cut:806,light:lt});lp_table(x,260,812,740);lp_laptop(x,640,790,200,{glow:0.6});}},
-    // the next morning, at stand-up, she says it out loud
-    {at:c.standup-0.3,place:"tfMorning",cut:true,keys:[[c.standup-0.3,960,540,1.0]],draw:(x,tt)=>{
-      tf_sheet(x,tt,c.standup-0.1,160,140,560,{kick:"The next morning",title:"Stand-up"},{light:"morning"});
-      glossary(x,tt);standup(x,tt,1);
-      // what each one says, its tail towards them: Ivy, Jun, Helena (at the row's end, so her words end at the frame's margin), then two more
-      const say=(t0,t1,px,py,text,to,o)=>tf_say(x,px,py,text,to,Object.assign({align:"center"},o,{a:ag_io(tt,t0,t1,0.4)}));
-      say(w("standup","out",-0.1),c.glossary-0.2,330,520,"“I nearly let it through.”",330);
-      say(w("thanks","Jun",-0.1),c.more-0.3,610,450,"“Thank you.”",610,{col:LP.green});
-      say(w("thanks","Helena",-0.1),c.more-0.3,1840,450,"“What would make it easier to catch?”",1710,{align:"right"});
-      say(w("more","two",-0.1),c.name-0.4,890,520,"“A column I hadn't defined.”",890);
-      say(w("more","missed",-0.3),c.name-0.4,1170,450,"“A check that never ran.”",1170);}},
-    // psychological safety; the hospital teams; 51 work teams
-    {at:c.name-0.3,place:"tfMorning",later:true,keys:[[c.name-0.3,960,540,1.0]],draw:(x,tt)=>{const t5=w("teams","teams",-0.4);
-      tf_sheet(x,tt,c.name+0.1,300,140,1320,{kick:"Amy Edmondson, 1999",title:"Psychological safety",sub:"A shared belief that the team is safe for taking risks with each other, like admitting a mistake"},
-        {light:"morning",u:1});
-      tf_sheet(x,tt,w("nurses","nurses",-0.3),300,460,640,{kick:"In some hospital teams",lines:["Nurses talked openly about mistakes with medicines"]},{col:LP.green,light:"morning",out:t5-0.5});
-      tf_sheet(x,tt,w("others","others",-0.3),980,460,640,{kick:"In others",lines:["People kept mistakes to themselves"]},{col:LP.amber,light:"morning",out:t5-0.5});
-      const ca=ag_in(tt,t5,0.35);if(ca>0.004){x.save();x.globalAlpha*=ca;lp_sheet(x,300,460,1320,230,{light:"morning"});lp_T(x,"51 WORK TEAMS",336,540,{w:800,size:28,ls:3,col:LP.mut});
-        tf_chain(x,336,620,[{text:"Felt safer"},{text:"Learned more"},{text:"Did better",pill:true,col:LP.green}],{u:clamp((tt-w("teams","safer",-0.3))/(w("teams","better",0)-w("teams","safer",-0.3)),0,1)});x.restore();}}},
-    // said out loud, and thanked: the whole team learns from it
-    {at:c.learn-0.3,place:"tfMorning",later:true,keys:[[c.learn-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lp_textSheet(x,1160,140,640,{kick:"Glossary",title:"Used hours",sub:"Hours with people actually in the room"},{col:LP.blue,light:"morning"});standup(x,tt,1);
-      tf_pill(x,tt,w("learn","learns",-0.3),null,700,450,"The whole team learns from it",{col:LP.green});}}
+    // April: Ivy reviews the agent's draft, and only just catches it
+    {at:0,place:"tfTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=tf_atRoom(x,tt,0,{at:"ivy",noor:true,face:tf_alive(tt,{expr:ag_in(tt,c.caught,0.5)>0.5?"worry":"think",gaze:[1,0.5]},3,0)});
+      tf_screenCall(x,R,ag_io(tt,c.april+1.0,tS-0.3,0.4),"The agent's draft",[["used hours = booked hours",PK.C.amber,34],[ag_in(tt,c.draft+1.6,0.4)>0.5?"used: people in the room":"",PK.C.green,34]],PK.C.violet||PK.C.blue,{bh:240});}},
+    // the next morning's stand-up: I nearly let it through
+    {at:tS,place:"tfTeam",later:true,keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Ji=null,Jj=null,Jh=null,Jn=null;
+      tf_team(x,tt,{clock:9,sam:null,jun:null,marta:null,people:[
+        {fl:850,draw:cc=>{Jn=PK.person(cc,"noor",1440,850,tf_hT(850),"clasp",Object.assign({t:tt,flip:true},tf_sp(tt,4,[[c.more+0.2,E.more]],"think",0.1)));}},
+        {fl:900,draw:cc=>{Jh=PK.person(cc,"helena",900,900,tf_hT(900),"clasp",Object.assign({t:tt,underF:PK.inHand.notebook({}),holds:true},tf_sp(tt,1,[[w("thanks","Helena asks",0),E.thanks]],"smile",0.1)));}},
+        {fl:960,draw:cc=>{Ji=PK.person(cc,"ivy",360,960,tf_hT(960),"clasp",Object.assign({t:tt},tf_sp(tt,3,[[c.standup+0.2,E.standup],[c.glossary+0.2,E.glossary]],"think",0.1)));}},
+        {fl:925,draw:cc=>{PK.person(cc,"sam",1220,925,tf_hT(925),"clasp",Object.assign({t:tt,flip:true},tf_alive(tt,{expr:"listen",gaze:[1,0.1]},2,tS)));}},
+        {fl:1000,draw:cc=>{Jj=PK.person(cc,"jun",640,1000,tf_hT(1000),"clasp",Object.assign({t:tt},tf_sp(tt,5,[[c.thanks+0.2,w("thanks","Helena asks",-0.2)]],"smile",0.1)));}}]});
+      tf_bub(x,Ji,tt,c.standup+0.2,c.thanks-0.1,["I nearly let it through."],cam,{lean:160});
+      tf_bub(x,Jj,tt,c.thanks+0.2,w("thanks","Helena asks",-0.1),["Thanks, Ivy."],cam,{lean:160});
+      tf_bub(x,Jh,tt,w("thanks","Helena asks",0),c.glossary-0.1,["What would make it","easier to catch?"],cam,{lean:160});
+      tf_bub(x,Ji,tt,c.glossary+0.2,c.more-0.1,["Write what used means","in the glossary."],cam,{lean:160});
+      tf_bub(x,Jn,tt,c.more+0.2,tN-0.3,["I nearly missed","one too."],cam,{lean:-160});}},
+    // psychological safety (Carmen)
+    {at:tN,place:"tfTeam",later:true,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{tf_lesson(x,tt,{rows:BB,jun:Object.assign({work:1,pose:undefined},tf_alive(tt,{},2,tN)),clock:10,events:TF_HEV});}},
+    {at:tZ,cut:true,place:"tfBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BB,{say:[[c.name,E.teams]],events:TF_HEV});}},
+    // said out loud, and thanked (Ivy's notebook)
+    {at:tL,place:"tfNotes",dis:0.6,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}}
   ]);
-  tf_kick(ctx,S,1,0);
+  tf_card(ctx,S,t,0.3,c.april+0.8,{kick:"April",title:"A draft to review"},{y:40,mid:true});
+  tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,c.april+0.8],[tL,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 4. Nobody the only one */
-scene("pairs",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"};
-  const four=[["sam",300,false],["noor",560,false],["jun",820,false],[TF_ERIN,1080,false]];
-  const people=(x,tt)=>{for(const [who,px,fl] of four)lp_person(x,who,px,740,0.68,{t:tt,flip:fl,light:dy});};
-  const runbook=(x,tt,t0)=>tf_runbook(x,410,140,{a:ag_in(tt,t0,0.35),k:tt-t0,light:"day",u:tf_u(tt,[t0+0.3,t0+1.0,t0+1.7,t0+2.4])});
-  const i0=ag_shots(ctx,S,t,sc.dur,[
-    // by June, twelve alerts a week, and every one needs someone
-    {at:0,place:"lpRoom",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const s0=0.4;
-      if(tt>=s0){const a=ag_in(tt,s0,0.35);x.save();x.globalAlpha*=a;ag_about(x,650,450,lerp(0.6,1,ag_spr(tt-s0,0,0.5)));lp_sheet(x,300,150,700,600,{col:LP.amber,light:"day"});
-        lp_T(x,"NIGHT ALERTS A WEEK",336,226,{w:800,size:28,ls:3,col:LP.amber});
-        lp_bars(x,380,250,540,460,[{v:60,label:"February",show:"About 60"},{v:12,label:"June",show:"About 12"}],{max:66,col:LP.amber,u:ag_in(tt,w("june","twelve",-0.8),1.2)});x.restore();}
-      tf_tag(x,tt,w("june","needs",-0.3),null,1400,420,"Every one needs someone",{align:"center",col:LP.amber});}},
-    // the team pairs on the platform, one alert at a time, and writes down how
-    {at:c.pair-0.3,place:"lpRoom",later:true,keys:[[c.pair-0.3,960,540,1.0]],draw:(x,tt)=>{const a0=w("pair","alert",-0.2),r0=w("runbook","runbook",-0.4);
-      tf_sheet(x,tt,c.pair+0.1,150,140,580,{kick:"Through June",title:"Pairing on the platform"},{light:"day",out:r0-0.5});runbook(x,tt,r0);
-      tf_who(x,tt,c.pair+0.1,null,"sam",560,690,0.8,{cut:806,light:dy});
-      tf_who(x,tt,w("pair","Noor",-0.3),null,"noor",800,690,0.8,{cut:806,light:dy});
-      tf_who(x,tt,w("pair","Jun and",-0.3),null,"jun",1120,690,0.8,{flip:true,cut:806,light:dy});
-      tf_who(x,tt,w("pair","Erin",-0.3),null,TF_ERIN,1360,690,0.8,{flip:true,cut:806,light:dy});
-      lp_nameTag(x,1500,330,TF_ERIN,{a:ag_io(tt,w("pair","Erin",-0.1),r0-0.6,0.4)});
-      lp_table(x,400,812,1120);lp_laptop(x,960,790,200,{glow:0.6});
-      tf_pill(x,tt,a0,a0+1.6,960,620,"An alert",{col:LP.amber,size:28});tf_tick(x,tt,a0+1.7,960,620,1-ag_in(tt,r0+3.2,0.4));}},
-    // four people can answer every night alert, not one; and from Monday 5 July, a rota
-    {at:c.four-0.3,place:"lpRoom",later:true,keys:[[c.four-0.3,960,540,1.0]],draw:(x,tt)=>{const f0=w("four","four",-0.2),r0=w("rota","rota",-0.5);
-      people(x,tt);four.forEach(([who,px],k)=>tf_tick(x,tt,f0+k*0.2,px,494));
-      tf_pill(x,tt,w("four","night",-0.2),r0-0.6,1480,300,"Four can answer every night alert",{col:LP.green});
-      tf_rota(x,1200,130,620,{kick:"The night rota",title:"One week in four",rows:[["Sam","from Monday 5 July"],["Noor","from Monday 12 July"],["Jun","from Monday 19 July"],["Erin","from Monday 26 July"]],
-        a:ag_in(tt,r0,0.35),k:tt-r0,u:ag_in(tt,r0+0.3,1.6),light:"day"});}},
-    // Sam had answered alone every night; now, three weeks in four, his phone stays quiet
-    {at:c.quiet-0.3,place:"tfSam",cut:true,keys:[[c.quiet-0.3,960,540,1.0]],draw:(x,tt)=>{const q0=w("quiet","quiet",-0.4);
-      lp_person(x,"sam",600,640,0.95,{t:tt,light:{light:"evening"}});
-      tf_tag(x,tt,w("quiet","alone",-0.3),q0-0.4,1340,360,"Until July: every night, alone",{align:"center",col:LP.amber});
-      tf_pill(x,tt,q0,null,1340,460,"Now three weeks in four are quiet",{col:LP.green});}},
-    // two people for each job that matters most; and Tutu
-    {at:c.two-0.3,place:"lpRoom",keys:[[c.two-0.3,960,540,1.0]],draw:(x,tt)=>{const tu=w("tutu","Desmond",-0.3);
-      tf_sheet(x,tt,c.two+0.1,300,150,1320,{kick:"Two for each job that matters most",lines:["Night alerts: Sam, Noor, Jun and Erin","The platform: Sam and Erin","The models: Jun and Ivy","The map: Noor and Jun"]},
-        {light:"day",out:tu-0.5,u:ag_in(tt,c.two+0.4,1.6)});
-      tf_sheet(x,tt,tu,300,220,1320,{kick:"Desmond Tutu, 1999",title:"“A person with Ubuntu does not feel threatened that others are able and good”"},{light:"day"});}},
-    // Sam taught three people his nights, and lost nothing by it
-    {at:c.lost-0.3,place:"lpRoom",later:true,keys:[[c.lost-0.3,960,540,1.0]],draw:(x,tt)=>{const l0=w("lost","lost",-0.2);
-      people(x,tt);four.forEach(([who,px],k)=>{if(k)tf_tick(x,tt,w("lost","taught",0)+k*0.2,px,494);});
-      tf_pill(x,tt,l0,null,1480,300,"Sam lost nothing by it",{col:LP.green});}}
+scene("pairs",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tP=c.pair-0.4,tF=c.four-0.4,tQ=c.quiet-0.4,tT=c.tutu-0.4,BC=PK.pace(ctx,"helena",tf_boardC(sc,w)),N5=PK.pace(ctx,null,tf_note5(sc,w));
+  ag_shots(ctx,S,t,sc.dur,[
+    // June: about twelve alerts a week, each one needing someone
+    {at:0,place:"tfTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=tf_atRoom(x,tt,0,{at:"sam",sam:null,noor:true,face:tf_alive(tt,{expr:"think",gaze:[1,0.5]},1,0)});
+      tf_screenCall(x,R,ag_io(tt,c.june+0.6,tP-0.3,0.4),"Night alerts",[["about 12 a week",PK.C.green,34],["each needs someone",PK.C.ink,34]],PK.C.blue,{bh:240});}},
+    // the team pairs on the platform, and writes a runbook
+    {at:tP,place:"tfTeam",later:true,keys:[[tP,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Ej={};
+      const R=tf_atRoom(x,tt,tP,{at:"sam",sam:null,noor:true,face:tf_sp(tt,1,[[w("runbook","write down",0),E.runbook]],"think",0.4),people:[tf_stand("erin",tt,tf_alive(tt,{expr:"listen",gaze:[1,0.3]},4,tP),{x:1560,fl:940,flip:true,out:Ej})]});
+      tf_name(x,Ej.J,tt,w("pair","Erin Walsh",0),c.runbook-0.2,"Erin Walsh","Platform engineer",170);
+      tf_screenCall(x,R,ag_io(tt,c.runbook+0.4,tF-0.3,0.4),"Runbook · a night alert",[["1 · read what failed",PK.C.ink,32],["2 · check the night's load",PK.C.ink,32],["3 · run it again, or call",PK.C.ink,32]],PK.C.blue,{bw:700,bh:280});}},
+    // four can answer every night alert; the rota (Helena, at the team's board)
+    {at:tF,place:"tfTeam",later:true,keys:[[tF,960,540,1.0]],d:2,draw:(x,tt,cam)=>{tf_lesson(x,tt,{rows:BC,who:"helena",jun:Object.assign({work:1,pose:undefined},tf_alive(tt,{},2,tF)),clock:15,events:TF_HEV});}},
+    {at:c.rota+0.2,cut:true,place:"tfBoard",keys:[[c.rota+0.2,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"helena",tt,BC,{say:[],events:TF_HEV});}},
+    // three weeks in four, Sam's phone stays quiet; two people for each job that matters most
+    {at:tQ,place:"tfCorner",cut:true,keys:[[tQ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tf_corner(x,tt,{who1:"sam",book:true,t0:tQ,hf:tf_alive(tt,{expr:"smile",gaze:[1,0.4]},1,tQ)});}},
+    // Desmond Tutu (Helena's notebook)
+    {at:tT,place:"tfNotes",dis:0.6,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N5,{});}}
   ]);
-  tf_kick(ctx,S,1,ag_io(t,c.quiet-0.3,c.two-0.3,0.5));
+  tf_card(ctx,S,t,0.3,c.june+0.4,{kick:"June",title:"Twelve a week"},{y:40,mid:true});
+  tf_card(ctx,S,t,tQ+0.3,c.two-0.2,{kick:"From Monday 5 July",title:"One week in four"},{y:40,mid:true});
+  tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,c.june+0.4],[tQ,c.two],[tT,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 5. The rota holds */
-scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"},ev={light:"evening"};
+scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tK=c.week-0.4,tA=c.alerts-0.4,tB=c.back-0.4,tP=c.paid-0.4;
   ag_shots(ctx,S,t,sc.dur,[
-    // Sunday 1 August: his mother taken into hospital, and he calls Helena
-    {at:0,place:"tfSam",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const k0=w("call","calls",-0.3);
-      lp_person(x,"sam",600,640,0.95,Object.assign({t:tt,light:ev},tf_holds(tt,k0-0.3,tf_phone({lit:1,call:ag_in(tt,k0+0.3,0.4)}))));tf_glow(x,700,560,320,0.8*ag_in(tt,k0-0.3,0.5));
-      tf_sheet(x,tt,w("call","August",-0.3),1080,150,660,{kick:"Sunday 1 August",title:"His mother is taken into hospital"},{col:LP.amber,light:"evening"});
-      tf_tag(x,tt,k0,null,1410,470,"He calls Helena",{align:"center",col:LP.ink});}},
-    // she tells him to go, and to switch his phone off
-    {at:c.go-0.3,place:"tfHelena",keys:[[c.go-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lp_person(x,"helena",1250,640,0.95,{t:tt,flip:true,light:ev,pose:"hold",holdBack:tf_phone({lit:1,call:1})});tf_glow(x,1150,560,320,0.8);
-      tf_tag(x,tt,w("go","go",-0.2),null,600,420,"“Go, and switch your phone off.”",{align:"center",col:LP.ink});}},
-    // his week on the rota: Jun and Erin take it; Helena moves his other work, and tells the people who asked
-    {at:c.week-0.3,place:"lpRoom",keys:[[c.week-0.3,960,540,1.0]],draw:(x,tt)=>{const j0=w("week","Jun",-0.2),m0=w("work","moves",-0.3);
-      tf_rota(x,180,140,700,{kick:"The night rota",title:"This week",rows:[["Sam","2 to 8 August"],["Noor","9 to 15 August"]],cover:{i:0,u:clamp((tt-j0)/1.2,0,1),text:"Jun and Erin"},hi:0,
-        a:ag_in(tt,c.week-0.1,0.35),k:tt-c.week+0.1,light:"day"});
-      tf_who(x,tt,j0-0.3,null,"jun",1180,735,0.7,{light:dy});tf_who(x,tt,j0,null,TF_ERIN,1460,735,0.7,{flip:true,light:dy});
-      tf_sheet(x,tt,m0,1060,120,720,{kick:"Moved by Helena",title:"The platform's upgrade",lines:["Two weeks later: Wednesday 25 August","The people who asked are told"]},
-        {col:LP.blue,light:"day",u:tf_u(tt,[w("work","waits",-0.2),w("work","tells",-0.2)])});
-      tf_tick(x,tt,w("work","date",-0.1),1740,388);}},
-    // twice that fortnight an alert comes in the night, and both are answered from the runbooks
-    {at:c.alerts-0.3,place:"tfDark",later:true,keys:[[c.alerts-0.3,960,540,1.0]],draw:(x,tt)=>{const a1=w("alerts","alert",-0.3),b0=w("alerts","answered",-0.3);
-      tf_runbook(x,150,140,{light:"evening",a:ag_in(tt,c.alerts,0.4)});
-      tf_pill(x,tt,a1,b0,1320,480,"Tuesday night: an alert",{col:LP.amber});tf_pill(x,tt,a1+0.6,b0+0.4,1320,580,"Thursday night: an alert",{col:LP.amber});
-      tf_pill(x,tt,b0+0.4,null,1320,480,"Jun: answered from the runbook",{col:LP.green,icon:"tick"});tf_pill(x,tt,b0+0.9,null,1320,580,"Erin: answered from the runbook",{col:LP.green,icon:"tick"});}},
-    // nobody calls him
-    {at:c.nobody-0.3,place:"tfSam",keys:[[c.nobody-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{lp_table(x,700,812,520);
-      // his phone on the table, switched off, face down
-      x.save();x.fillStyle="rgba(40,30,30,0.3)";x.beginPath();x.ellipse(950,800,96,12,0,0,TAU);x.fill();const g=x.createLinearGradient(880,0,1040,0);g.addColorStop(0,"rgb(46,46,50)");g.addColorStop(1,"rgb(96,96,102)");x.fillStyle=g;
-      x.beginPath();x.moveTo(892,778);x.lineTo(1024,778);x.lineTo(1040,796);x.lineTo(876,796);x.closePath();x.fill();x.fillStyle="rgba(255,240,220,0.25)";x.fillRect(900,780,116,2);x.restore();}},
-    // Monday 16 August: her first question is about his mother
-    {at:c.back-0.3,place:"tfMorning",keys:[[c.back-0.3,960,540,1.0]],draw:(x,tt)=>{const q0=w("back","question",-0.3);
-      tf_sheet(x,tt,c.back+0.1,150,140,560,{kick:"Monday 16 August",title:"Sam is back"},{light:"morning"});
-      tf_who(x,tt,c.back+0.2,null,"sam",lerp(560,700,ag_sine(ag_in(tt,c.back+0.2,1.4))),650,0.9,{light:{light:"morning"}});
-      lp_person(x,"helena",1250,650,0.9,{t:tt,flip:true,light:{light:"morning"}});
-      tf_tag(x,tt,q0,null,1250,330,"“How is your mother?”",{align:"center",col:LP.ink});}},
-    // like a stokvel carrying a member, the team carried Sam, because everyone had paid in
-    {at:c.paid-0.3,place:"tfMorning",later:true,keys:[[c.paid-0.3,960,540,1.0]],draw:(x,tt)=>{const s0=w("paid","stokvel",-0.4),k0=w("paid","carried",-0.4),p0=w("paid","paid",-0.3);
-      const sa=ag_in(tt,s0,0.35);if(sa>0.004){x.save();x.globalAlpha*=sa;lp_sheet(x,150,130,780,640,{light:"morning"});lp_T(x,"A STOKVEL",186,210,{w:800,size:28,ls:3,col:LP.mut});
-        tf_ring(x,540,470,160,{n:8,pot:1,fill:0.6,hard:{i:5,u:1},carry:{i:5,u:clamp((tt-s0-0.4)/1.4,0,1)}});x.restore();}
-      const ta=ag_in(tt,k0-0.4,0.35);if(ta>0.004){x.save();x.globalAlpha*=ta;lp_sheet(x,990,130,780,640,{light:"morning"});lp_T(x,"HELENA'S TEAM",1026,210,{w:800,size:28,ls:3,col:LP.mut});
-        tf_ring(x,1380,480,160,{n:8,work:1,names:["Sam"],hard:{i:0,u:1},carry:{i:0,u:clamp((tt-k0)/1.4,0,1)}});x.restore();}
-      tf_pill(x,tt,p0,null,960,830,"Everyone had paid in",{col:LP.green});}}
+    // Sunday 1 August, that evening: Sam calls Helena
+    {at:0,place:"tfTeam",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=tf_atRoom(x,tt,0,{at:"helena",sam:null,jun:null,clock:19,face:tf_sp(tt,1,[[c.go+0.2,E.go]],"listen",0.4)});const D=R&&R.marta&&R.marta.desk;
+      PK.callout(x,720,110,620,330,D?[150,D.top-120]:[150,620],ag_io(tt,c.call+1.0,tK-0.3,0.4),(cc,bx,by,bw,bh)=>PK.call(cc,bx,by,bw,bh,[{who:"sam",face:{expr:"worry"},say:[[c.call+1.4,c.go-0.2]]}],tt,{}));}},
+    // his week on the rota: Jun and Erin take it; the upgrade waits two weeks
+    {at:tK,place:"tfTeam",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=tf_atRoom(x,tt,tK,{at:"helena",sam:null,clock:9,face:tf_alive(tt,{expr:"think",gaze:[1,0.5]},1,tK),people:[tf_stand("erin",tt,tf_alive(tt,{expr:"smile",gaze:[1,0.2]},4,tK),{x:1560,fl:940,flip:true})]});
+      tf_screenCall(x,R,ag_io(tt,c.week+0.4,c.work-0.3,0.4),"Rota · this week",[["Sam · away",PK.C.amber,34],["Jun and Erin",PK.C.green,34]],PK.C.blue,{bh:240});
+      tf_screenCall(x,R,ag_io(tt,c.work+0.4,tA-0.3,0.4),"Platform upgrade",[["two weeks later",PK.C.blue,34],["new date sent",PK.C.ink,34]],PK.C.blue,{bh:240});}},
+    // twice, an alert in the night, answered from the runbooks
+    {at:tA,place:"tfTeam",later:true,keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=tf_atRoom(x,tt,tA,{at:"jun",jun:null,sam:null,clock:2,face:tf_alive(tt,{expr:"think",gaze:[1,0.5]},2,tA)});
+      tf_screenCall(x,R,ag_io(tt,c.alerts+0.4,tB-0.3,0.4),"Two night alerts",[["answered from the runbooks",PK.C.green,34],[ag_in(tt,c.nobody,0.4)>0.5?"nobody calls Sam":"",PK.C.green,34]],PK.C.blue,{bh:240});}},
+    // Monday 16 August: Helena's first question is about his mother
+    {at:tB,place:"tfCorner",cut:true,keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const r=tf_corner(x,tt,{who2:"sam",lean:0.5,t0:tB,hf:tf_sp(tt,5,[[w("back","first question",0),E.back]],"think",0.25),iface:tf_alive(tt,{expr:"listen",gaze:[1,0.3]},1,tB)});
+      tf_bub(x,r.helena,tt,w("back","first question",0),tP-0.3,["How is your mother?"],cam,{lean:160});}},
+    // like a stokvel carrying a member through hard times
+    {at:tP,place:"tfpMeet",dis:0.8,keys:[[tP,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tfp_person(x,"m3",300,890,"clasp",Object.assign({t:tt},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},3,tP)));
+      tfp_table(x,"m1",760,930,Object.assign({t:tt,work:0},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},1,tP)));
+      tfp_table(x,"m2",1260,960,Object.assign({t:tt,flip:true,work:0,pot:true},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},2,tP)));}}
   ]);
-  tf_kick(ctx,S,1,Math.max(ag_io(t,-1,c.week-0.3,0.5),ag_io(t,c.alerts-0.3,c.back-0.3,0.5)));
+  tf_card(ctx,S,t,0.3,c.call+0.8,{kick:"Sunday 1 August",title:"A call in the evening"},{y:40,mid:true});
+  tf_card(ctx,S,t,tB+0.3,w("back","first question",-0.3),{kick:"Monday 16 August",title:"Sam comes back"},{y:40,mid:true});
+  tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,c.call+0.8],[tB,w("back","first question",0)]])));
 });
 
 /* ---------------------------------------------------------------- 6. Each person, every week */
-scene("each",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),lt={light:"late"},gr={light:"grey"};
+scene("each",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),LE=PK.ROOMS.lecture;
+  const tR=c.review-0.4,tE=c.ethic-0.4,tZ=c.ethic+2.4,tC=c.cares-0.4,BD=PK.pace(ctx,"carmen",tf_boardD(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the one-to-ones go on: in September, Jun says he's fine
-    {at:0,place:"tfLate",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const j0=w("jun","September",-0.3),m0=w("moves","moves",-0.3);
-      tf_sheet(x,tt,0.3,150,140,600,{kick:"Every week",title:"The one-to-ones go on"},{light:"late",out:j0-0.5});
-      tf_sheet(x,tt,j0,150,140,600,{kick:"September",title:"Jun says he's fine"},{light:"late",out:m0-0.5});
-      tf_sheet(x,tt,m0,150,140,600,{kick:"Moved to November",lines:["One of his projects","Told the people who asked"]},{col:LP.blue,light:"late",u:tf_u(tt,[m0+0.3,w("moves","tells",-0.2)])});
-      tf_sheet(x,tt,w("jun","teaching",-0.4),1300,120,560,{kick:"Jun's load",lines:["Teaching two people","Building models","His turn on the rota"]},
-        {col:LP.amber,light:"late",u:tf_u(tt,[w("jun","teaching",-0.2),w("jun","building",-0.2),w("jun","rota",-0.3)])});
-      tf_tag(x,tt,w("jun","fine",-0.2),m0,800,400,"“I'm fine.”",{align:"center",col:LP.ink});
-      lp_person(x,"jun",800,690,0.8,{t:tt,cut:806,light:lt});lp_person(x,"helena",1150,690,0.8,{t:tt,flip:true,cut:806,light:lt});lp_table(x,620,812,720);}},
-    // the quarterly review in October: the credit to the team, by name; what slipped, hers to answer for
-    {at:c.review-0.3,place:"tfReview",cut:true,keys:[[c.review-0.3,960,540,1.0]],draw:(x,tt)=>{const r0=w("review","credit",-0.4),n0=w("review","name",-0.2),s0=w("review","slipped",-0.6),o0=c.order;
-      lp_screen(x,200,150,900,500,{draw:(cx,X,Y,Wd,Hd)=>{lp_T(cx,"QUARTERLY REVIEW · OCTOBER",X+44,Y+70,{w:800,size:28,ls:3,col:LP.mut});
-        cx.save();cx.globalAlpha*=ag_in(tt,r0,0.4);cx.fillStyle=rgba(LP.green,1);cx.fillRect(X+44,Y+108,8,120);lp_T(cx,"The credit: the team",X+72,Y+142,{w:800,size:36});
-        lp_T(cx,"Noor · Sam · Jun · Yusuf · Marta · Erin · Tomás · Ivy",X+72,Y+196,{w:600,size:28,a:ag_in(tt,n0,0.5)});cx.restore();
-        cx.save();cx.globalAlpha*=ag_in(tt,s0,0.4);cx.fillStyle=rgba(LP.amber,1);cx.fillRect(X+44,Y+272,8,120);lp_T(cx,"What slipped",X+72,Y+306,{w:800,size:36});
-        lp_T(cx,"Helena answers for it",X+72,Y+360,{w:600,size:28});cx.restore();}});
-      [["1  The team",0],["2  Each person",1],["3  Herself",2]].forEach(([s,k])=>tf_pill(x,tt,w("order",["team","each","herself"][k],-0.2),null,1250,300+k*96,s,{col:LP.ink}));
-      lp_person(x,"helena",1560,650,0.9,{t:tt,flip:true,light:gr});}},
-    // Ubuntu written down as an ethic: Ramose and Metz
-    {at:c.ethic-0.3,place:"lpRoom",keys:[[c.ethic-0.3,960,540,1.0]],draw:(x,tt)=>{
-      tf_sheet(x,tt,c.ethic+0.1,300,170,1320,{kick:"Ubuntu as an ethic",title:"Mogobe Ramose · Thaddeus Metz",lines:["Sharing a life with others","Caring how their lives go"]},
-        {light:"day",u:tf_u(tt,[w("metz","sharing",-0.2),w("metz","caring",-0.2)])});}},
-    // the team shares the work, and cares how each of them is doing
-    {at:c.cares-0.3,place:"lpRoom",later:true,keys:[[c.cares-0.3,960,540,1.0]],draw:(x,tt)=>{
-      for(const [who,px,fl] of [["helena",300,false],["noor",540,false],["sam",780,false],["jun",1140,true],["ivy",1380,true],[TF_ERIN,1620,true]])lp_person(x,who,px,690,0.66,{t:tt,flip:fl,cut:806,light:{light:"day"}});
-      lp_table(x,160,812,1600);lp_laptop(x,960,790,180,{glow:0.4});}}
+    // September: Jun says he's fine
+    {at:0,place:"tfCorner",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const r=tf_corner(x,tt,{who2:"jun",lean:0.4,t0:0,hf:tf_sp(tt,5,[[c.moves+0.2,E.moves]],"think",0.25),iface:tf_sp(tt,2,[[c.jun+0.2,E.jun]],"smile",0.3)});
+      tf_bub(x,r.who2,tt,w("jun","fine",-0.2),c.moves-0.1,["I'm fine. Two to teach,","models, and the rota."],cam,{lean:-160});
+      tf_bub(x,r.helena,tt,c.moves+0.2,tR-0.3,["One project moves","to November."],cam,{lean:160});}},
+    // October: the quarterly review, the credit by name
+    {at:tR,place:"tfLecture",cut:true,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jh=null;tf_audience(x,tt,6,0.6);
+      Jh=PK.person(x,"helena",1500,950,PK.hAt(950,LE.eye),"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},tf_sp(tt,1,[[c.review+0.6,E.review]],"smile",0.1)));
+      tf_bub(x,Jh,tt,w("review","by name",-0.2),w("review","answers herself",-0.1),["Sam, Noor, Jun, Erin","and Ivy did this."],cam,{lean:-180});
+      tf_bub(x,Jh,tt,w("review","answers herself",0),tE-0.3,["What slipped","is mine."],cam,{lean:-180});}},
+    // Ubuntu, written down as an ethic (Carmen)
+    {at:tE,place:"tfTeam",cut:true,keys:[[tE,960,540,1.0]],d:2,draw:(x,tt,cam)=>{tf_lesson(x,tt,{rows:BD,jun:Object.assign({work:1,pose:undefined},tf_alive(tt,{},2,tE)),clock:11,events:TF_HEV});}},
+    {at:tZ,cut:true,place:"tfBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BD,{say:[[c.ethic,E.metz]],events:TF_HEV});}},
+    // the team shares the work, and cares how each is doing
+    {at:tC,place:"tfTeam",cut:true,keys:[[tC,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tf_atRoom(x,tt,tC,{at:"ivy",noor:true,face:tf_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tC),people:[tf_helena(tt,tf_alive(tt,{expr:"smile",gaze:[1,0.1]},5,tC),{x:1560,fl:930})]});}}
   ]);
-  tf_kick(ctx,S,1,0);
+  tf_card(ctx,S,t,0.3,c.jun-0.2,{kick:"September",title:"A one-to-one"},{y:40,mid:true});
+  tf_card(ctx,S,t,tR+0.3,c.review+1.4,{kick:"October",title:"The quarterly review"},{y:40,mid:true});
+  tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,c.jun],[tR,c.review+1.4]])));
 });
 
 /* ---------------------------------------------------------------- 7. On Monday */
-scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"},e0=c.breath+0.6;
+scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off);
+  const tT=c.team-0.4,tN=c.pair-0.1,tL=c.take-0.4,tE=c.breath+0.6,BM=PK.pace(ctx,"helena",tf_boardM(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // back to the stokvel: a print of its room on the team's wall; then Helena's team did the same
-    {at:0,place:"tfMorning",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const t0=c.team-0.3;
-      tf_print(x,560,130,800,{a:ag_in(tt,0.3,0.6),light:"morning"});
-      tf_tag(x,tt,w("back","pays",-0.2),t0,520,646,"Everyone pays in",{align:"center"});
-      tf_tag(x,tt,w("back","turn",-0.2),t0,890,646,"Everyone's turn comes",{align:"center"});
-      tf_tag(x,tt,w("back","carries",-0.3),t0,1260,646,"The group carries her",{align:"center",col:LP.green});
-      tf_sheet(x,tt,w("team","Helena's",-0.1),420,630,880,{kick:"Helena's team did the same",lines:["Four people learned the nights","When Sam had to go, nobody called him"]},
-        {col:LP.green,light:"morning",u:tf_u(tt,[w("team","four",-0.2),w("team","nobody",-0.3)])});
-      lp_person(x,"helena",1640,650,0.9,{t:tt,flip:true,light:mo,a:ag_in(tt,0.6,0.8)});}},
-    // on Monday
-    {at:c.pair-0.3,place:"tfMorning",later:true,keys:[[c.pair-0.3,960,540,1.0]],draw:(x,tt)=>{const g=1-ag_in(tt,c.take-0.5,0.5);
-      if(g>0.004){x.save();x.globalAlpha*=g;
-        tf_sheet(x,tt,c.pair+0.1,120,150,540,{kick:"One",title:"Pair until two can do each job that matters most, and write it down"},{col:LP.blue,light:"morning"});
-        tf_sheet(x,tt,w("leave","Protect",-0.1),690,150,540,{kick:"Two",title:"Protect leave: when someone is away, nobody calls them"},{light:"morning"});
-        tf_sheet(x,tt,w("thank","Thank",-0.1),1260,150,540,{kick:"Three",title:"Thank the person who says: I got it wrong"},{light:"morning"});
-        tf_sheet(x,tt,w("ask","ask",-0.1),405,500,540,{kick:"Four",title:"In one-to-ones, ask how people are, not only what they did"},{light:"morning"});
-        tf_sheet(x,tt,w("new","new",-0.1),975,500,540,{kick:"Five",title:"New? Watch first: the team's shared work before anyone's own"},{col:LP.blue,light:"morning"});x.restore();}
-      // the team's ring, whole: nobody alone
-      const r0=c.take-0.1,ra=ag_in(tt,r0,0.4)*(1-ag_in(tt,e0,0.8));if(ra>0.004){x.save();x.globalAlpha*=ra;ag_about(x,960,480,lerp(0.6,1,ag_spr(tt-r0,0,0.5)));
-        lp_sheet(x,560,140,800,680,{light:"morning"});lp_T(x,"THE TEAM",596,220,{w:800,size:28,ls:3,col:LP.mut});
-        tf_ring(x,960,490,190,{n:8,work:1,hold:ag_in(tt,w("take","alone",-0.2),1.4)});x.restore();}}}
+    // in a stokvel, everyone pays in
+    {at:0,place:"tfpMeet",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tfp_table(x,"m4",760,930,Object.assign({t:tt,work:0},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},4,0)));
+      tfp_table(x,"m2",1260,960,Object.assign({t:tt,flip:true,work:0,pot:true},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},2,0)));
+      tfp_person(x,"m5",1640,1000,"clasp",Object.assign({t:tt,flip:true},tf_alive(tt,{expr:"smile",gaze:[1,0.2]},5,0)));}},
+    // Helena's team did the same
+    {at:tT,place:"tfTeam",dis:0.8,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tf_atRoom(x,tt,tT,{at:"sam",noor:true,sam:null,face:tf_alive(tt,{expr:"smile",gaze:[1,0.3]},1,tT),people:[tf_stand("erin",tt,tf_alive(tt,{expr:"smile",gaze:[1,0.2]},4,tT),{x:1000,fl:960,flip:true})]});}},
+    {at:tN,place:"tfBoard",cut:true,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"helena",tt,BM,{say:[],events:TF_HEV});}},
+    // nobody alone, nobody the only one who knows
+    {at:tL,place:"tfTeam",cut:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      tf_atRoom(x,tt,tL,{at:"ivy",noor:true,face:tf_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tL),people:[tf_helena(tt,tf_alive(tt,{expr:"smile",gaze:[1,0.2]},5,tL),{x:1560,fl:930})]});}}
   ]);
-  lp_end(ctx,S,t,e0,"The team comes first",TF_LAST,"Film 3 of 4","Leading a data team");
-  tf_kick(ctx,S,1-ag_in(t,e0,0.8),0);
+  tf_kick(ctx,S,(1-ag_in(t,tE-0.2,0.6)));
+  PK.end(ctx,S,t,tE,"The team comes first",TF_LAST,"Film 3 of 4","Leading a data team",{side:"right"});
 });
-ag_cutInto(["holds"]);
+ag_cutInto(["whole","aloud","pairs","holds","each","monday"]);

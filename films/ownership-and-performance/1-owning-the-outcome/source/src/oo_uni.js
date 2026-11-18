@@ -141,7 +141,7 @@ function oo_checkCard(c,x,y,w,h,la){const U=PK.u;ag_T(c,"IVY'S NEW CHECK",x+30,y
    large enough to read: both draw the same rows at the same times, so she is at the same line in both. What Ivy keeps from each
    part of the story goes in her notebook (PK.notes, the place ooNotes). Every time comes from the voice: sc is the chapter, w
    a word's time in a line. Colour means what it means in the film: blue a plan or a rule, green done or of value, amber a risk. */
-const OO_RB={x:742,y:206,k:0.35,deco:true,floor:848,rest:1212};
+const OO_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
 // the team's board in a wide shot: the same rows, small; who: "carmen", or null when she has gone and her lines are still up
 const oo_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},OO_RB,{h:oo_hT(OO_RB.floor)},o||{}));
 /* Each row has the time the voice says it; PK.pace then makes a row wait until Carmen can have walked to it. So the boards are

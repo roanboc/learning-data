@@ -1,174 +1,171 @@
-/* ===== Rules that let people decide: the university, 2027 =====
-   The film's own pictures for the data team's spring, September to November (prefix rd_). The module's kit draws the rooms, the people, the sheets and the
-   things in them, and is never changed for this film; what is here is this film's alone:
-     rdMorning, rdLate, rdFaculty, rdEng   the team's room on a morning and late in the afternoon, a faculty's office on a grey day,
-                                           Engineering's office on a morning
-     RD_PEOPLE                             Lucy Tran, Engineering's timetable officer, and the other three faculties' officers (Arts,
-                                           Business, Health), never named in the film
-     rd_hub(ctx, cx, cy, o)                every decision through one place: the data team in the middle, the four faculties round it,
-                                           the arrows turning from inward (every question to the team) to outward (decisions given back)
-     rd_queue(ctx, t, o)                   the faculties' room reports queuing at the team's one front door
-     rd_rule(ctx, x, y, w, n, words, o)    one of the rules, on a card: what it says, and why
-     rd_eleven(ctx, o), rd_drawer(...)     Yusuf's first list, eleven cards on the wall; the drawer the eight go into, until a real
-                                           problem shows
-     rd_template(ctx, X, Y, W, H, o)       the template, on a screen: who decides what, each room by the hour, booked beside counted,
-                                           room use worked out the agreed way, and (later) the date of its data in the corner
-     rd_labs(ctx, X, Y, W, H, o)           Lucy's page: Engineering's twelve teaching labs, booked and counted, mornings, Monday to Friday
-     rd_spread(ctx, o)                     the four faculties, and Lucy's page copied from one to the next
-   Colour keeps the module's meaning: orange the data (the product, the counts, the lab measure), blue plans and designs (the rules,
-   the template's who-decides-what, the faculties' own decisions), green what's done, amber what waits or is at risk (the queue,
-   the empty labs, the old copy); people wear none of them. */
+/* ===== Rules that let people decide: the university, September to November 2027 (imagined) =====
+   The places are the people kit's (films/people-first/shared/src/places.js): the team's room, the corner, the campus and a teaching
+   room; and, apart from the scene, a board seen close and a page of a notebook (concepts.js). This file holds what is this film's own
+   in them: where the team works, the boards' rows Carmen Vidal and Helena write, and the pages Ivy and Helena keep.
+   Every time comes from the voice: sc is the chapter, w a word's time in a line. Colour means what it means in the module: blue a plan
+   or a rule, orange data, green value or something done, amber a cost or something waiting. */
+AG_PLACES.rdTeam=PK.place.team;AG_PLACES.rdCorner=PK.place.corner;AG_PLACES.rdCampus=PK.place.campus;AG_PLACES.rdLecture=PK.place.lecture;
+AG_PLACES.rdBoard=PK.place.board;AG_PLACES.rdNotes=c=>PK.place.notes(c,{});
+const RD_T=PK.ROOMS.team,RD_CA=PK.ROOMS.campus,RD_CO=PK.ROOMS.corner,RD_LE=PK.ROOMS.lecture;
+const rd_hT=fl=>PK.hAt(fl,RD_T.eye),rd_hC=fl=>PK.hAt(fl,RD_CA.eye),rd_hL=fl=>PK.hAt(fl,RD_LE.eye);
+// a face that speaks from t0 to t1, on a base expression
+const rd_says=(base,tt,t0,t1)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,PK.talk(tt,t0,t1)*0.75);return e;};
+const rd_lis=(tt,g)=>PK.face(tt,{expr:"listen",gaze:[1,g==null?-0.2:g]},[]);
+// poses of this film's own: writing in a notebook held in the far hand; holding a sheet out to show it
+const RD_NOTE={lean:6,head:14,aN:[34,96,"grip"],aF:[30,92,"grip"],lN:[-2,-2],lF:[5,4]};
+const RD_SHOW={lean:2,head:6,aN:[44,82,"grip"],aF:[8,16],lN:[-2,-2],lF:[5,4]};
+const RD_CARRY={lean:-2,head:0,aN:[24,70,"grip"],aF:[6,14],lN:[-2,-2],lF:[4,3]};
+const rd_sheet=(c,h)=>{const S=PK.S;S.begin(c,{lw:2.2});PK.sheet(c,h[0]-6,h[1]-58,56,74,{rot:0.06});};
 
-/* ---------------------------------------------------------------- the places */
-AG_PLACES.rdMorning=c=>lp_paintRoom(c,{light:"morning",seed:5});
-AG_PLACES.rdLate=c=>lp_paintRoom(c,{light:"late",seed:9});
-AG_PLACES.rdFaculty=c=>lp_paintRoom(c,{light:"grey",seed:11,base:[220,212,198]});
-AG_PLACES.rdEng=c=>lp_paintRoom(c,{light:"morning",seed:13,base:[216,206,190]});
+// a desk with its screen drawn in o.on, so the person at it is never taken for someone on a screen: o.screen "monitor" or "laptop"
+function rd_desk(x,who,px,fl,h,o){o=Object.assign({},o||{});const kind=o.screen,on2=o.on;
+  o.screen=null;o.on=(cc,D)=>{if(kind==="monitor")PK.monitor(cc,o.sx==null?D.x0+D.dir*D.w*0.6:o.sx,D.top,o.sw||0.36*h,o.sh||0.23*h,{draw:o.show});
+    else if(kind==="laptop")PK.laptop(cc,D.x0+D.dir*0.21*h,D.top,{k:D.k,flip:D.dir<0});if(on2)on2(cc,D);};
+  return PK.atDesk(x,who,px,fl,h,o);}
 
-/* ---------------------------------------------------------------- the people this film adds */
-const RD_PEOPLE={
-  lucy:{name:"Lucy Tran",role:"Timetable officer, Engineering",skin:[224,186,152],hair:{style:"bun",c:[30,26,28]},earrings:[220,204,170],top:{kind:"cardigan",c:[106,110,80],inner:[238,234,224]},breath:0.3},
-  arts:{name:"Arts officer",role:"Timetable officer, Arts",skin:[120,82,60],hair:{style:"coily",c:[34,28,26]},earrings:[220,200,160],top:{kind:"cardigan",c:[150,122,98],inner:[236,232,226]},breath:0.29},
-  business:{name:"Business officer",role:"Timetable officer, Business",skin:[214,174,140],hair:{style:"cropped",c:[52,44,40]},glasses:[54,50,48],top:{kind:"overshirt",c:[112,108,100],inner:[226,228,230]},breath:0.26},
-  health:{name:"Health officer",role:"Timetable officer, Health",skin:[196,146,112],hair:{style:"long",c:[44,34,30]},earrings:[214,196,150],top:{kind:"blazer",c:[96,98,104],inner:[236,236,232]},breath:0.28}
-};
-const RD_FAC=["Arts","Business","Engineering","Health"];
+/* ---------------------------------------------------------------- the team's room
+   Who works where: Sam at the desk at the back, Jun at the desk at the back right, turned the other way, and Marta at the desk by the
+   window. Everything is drawn far to near (by floor), so nobody is drawn over someone nearer: o.people is a list of {fl, draw(x)} for
+   whoever else is in the room (the floor they stand or sit on); o.sam, o.jun, o.marta: what PK.atDesk takes for each (null: the desk
+   stands empty); o.show: what Marta's screen shows, o.showJ Jun's; o.clock: the time on the wall. Returns their joints. */
+const RD_DESK={sam:[1230,RD_T.back],jun:[1808,RD_T.back],marta:[560,RD_T.mid]};
+function rd_team(x,tt,o){o=o||{};const r={},HB=rd_hT(RD_T.back),HM=rd_hT(RD_T.mid);PK.clock(x,RD_T.clock[0],RD_T.clock[1],RD_T.clock[2],o.clock===undefined?9:o.clock);
+  const items=[{fl:RD_T.back,i:0,draw:c=>{r.sam=PK.atDesk(c,o.sam===null?null:(o.samWho||"sam"),RD_DESK.sam[0],RD_T.back,HB,Object.assign({t:tt,w:0.45*HB},o.sam||{}));}},
+    {fl:RD_T.back,i:1,draw:c=>{r.jun=PK.atDesk(c,o.jun===null?null:"jun",RD_DESK.jun[0],RD_T.back,HB,Object.assign({t:tt+3,flip:true,w:0.45*HB,show:o.showJ},o.jun||{}));}},
+    {fl:RD_T.mid,i:2,draw:c=>{r.marta=rd_desk(c,o.marta===null?null:(o.deskWho||"marta"),RD_DESK.marta[0],RD_T.mid,HM,Object.assign({t:tt+1,flip:true,w:0.84*HM,sx:205,screen:"monitor",show:o.show||PK.onScreen.chat(0,{}),
+      on:(cc,D)=>{PK.S.begin(cc,{lw:2.6,sh:3});PK.mug(cc,D.x1+34,D.top,0.7,PK.col("mug"),tt,o.steam!==false);}},o.marta||{}));}}];
+  (o.people||[]).forEach((p,i)=>items.push(Object.assign({i:10+i},p)));
+  items.sort((a,b)=>a.fl-b.fl||a.i-b.i).forEach(it=>it.draw(x));return r;}
+AG_BARE.rdTeam=(x,tt)=>rd_team(x,tt,{sam:null,jun:null,marta:null,clock:null});
 
-/* ---------------------------------------------------------------- small things */
-// a box with words in it, centred on (x, y): o.col (its outline, when the colour means something), o.fill, o.a, o.w (its width)
-function rd_node(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=o.w||Math.max(150,lp_tw(ctx,text,{w:700,size:28})+56),h=o.h||70;
-  ctx.save();ctx.globalAlpha*=a;ctx.save();ctx.shadowColor="rgba(52,36,30,0.2)";ctx.shadowBlur=12;ctx.shadowOffsetX=LP.sdx*0.4;ctx.shadowOffsetY=5;rr(ctx,x-w/2,y-h/2,w,h,16);
-  ctx.fillStyle=o.fill?rgba(o.fill,1):"rgba(250,247,240,0.98)";ctx.fill();ctx.restore();
-  if(o.col){ctx.strokeStyle=rgba(o.col,1);ctx.lineWidth=o.lw||4;rr(ctx,x-w/2+1,y-h/2+1,w-2,h-2,16);ctx.stroke();}
-  lp_T(ctx,text,x,y+10,{w:700,size:28,align:"center",col:o.tc||LP.ink});ctx.restore();}
-// an arrow from (x0, y0) to (x1, y1), drawn on up to part u, with its head
-function rd_arrow(ctx,x0,y0,x1,y1,u,col,a,lw){if(u<=0.004||a<=0.004)return;const x=lerp(x0,x1,u),y=lerp(y0,y1,u),an=Math.atan2(y1-y0,x1-x0);lw=lw||5;
-  ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=lw;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x-Math.cos(an)*lw*2.4,y-Math.sin(an)*lw*2.4);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-Math.cos(an-0.45)*lw*4.4,y-Math.sin(an-0.45)*lw*4.4);ctx.lineTo(x-Math.cos(an+0.45)*lw*4.4,y-Math.sin(an+0.45)*lw*4.4);ctx.closePath();ctx.fill();ctx.restore();}
+/* ---------------------------------------------------------------- the team's board, and Carmen Vidal at it
+   Carmen Vidal, a consultant who works with the team now and then, explains the film's ideas at the team's board (PK.teach). The film
+   cuts between the room, where its board shows the rows small, and the board seen close (naBoard): both draw the same rows at the
+   same times. In the room, Helena stands to the side with her notebook, clear of where Carmen walks and rests, and whoever is at
+   their desk has turned to the board. */
+const RD_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
+const rd_roomBoard=(cx,tt,rows,who,o)=>{const q=Object.assign({},RD_RB,{h:rd_hT(RD_RB.floor)});for(const k in o||{})if(o[k]!==undefined)q[k]=o[k];return PK.teach(cx,who,tt,rows,q);};
+const RD_SIDE={x:1690,floor:900},RD_SAMC={x:1480,floor:905};
+// o.rows, o.say, o.events: the board's; o.note (0 to 1): Helena looks down and writes; o.helena, o.sam, o.jun: faces. Returns joints
+function rd_lesson(x,tt,o){o=o||{};let Jc=null,R2=null,Js=null;const wr=o.note||0,R=rd_team(x,tt,{clock:o.clock,marta:o.marta===undefined?null:o.marta,sam:null,
+    jun:Object.assign({work:0,pose:"sit"},o.jun||rd_lis(tt,-0.2)),people:[
+    {fl:RD_SAMC.floor,draw:c=>{Js=PK.seated(c,"sam",RD_SAMC.x,RD_SAMC.floor,rd_hT(RD_SAMC.floor),"sit",Object.assign({t:tt+2,flip:true},o.sam||rd_lis(tt,-0.25)));}},
+    {fl:RD_RB.floor,draw:c=>{Jc=rd_roomBoard(c,tt,o.rows||[],o.who||"carmen",{say:o.say,events:o.events});}},
+    {fl:RD_SIDE.floor,draw:c=>{R2=PK.person(c,o.side||(o.who==="helena"?"ivy":"helena"),RD_SIDE.x,RD_SIDE.floor,rd_hT(RD_SIDE.floor),PK.poseMix("clasp",RD_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||rd_lis(tt,-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}}]});
+  R.helena=R2;R.at=Jc;R.sam=Js;return R;}
 
-/* ---------------------------------------------------------------- every decision through one place
-   rd_hub(ctx, cx, cy, o): o.u (0 to 1: the nodes and arrows come in), o.flip (0 to 1: the arrows turn from inward to outward), o.a,
-   o.centre (the middle's words), o.wait (0 to 1: the inward arrows' little queue of waiting cards), o.light (the sheet's light) */
-function rd_hub(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u,fl=ag_sine(o.flip||0),dx=520,dy=200;
-  ctx.save();ctx.globalAlpha*=a;lp_sheet(ctx,cx-700,cy-300,1400,600,{light:o.light===undefined?"day":o.light});
-  const P=[[cx-dx,cy-dy],[cx+dx,cy-dy],[cx-dx,cy+dy],[cx+dx,cy+dy]];
-  P.forEach(([x,y],i)=>{const ui=clamp(u*5-i*0.6,0,1);if(ui<=0)return;const sx=lerp(x,cx,0.27),sy=lerp(y,cy,0.27),ex=lerp(x,cx,0.72),ey=lerp(y,cy,0.72);
-    // inward (amber: every question waits on the team) turning outward (blue: the decision given back)
-    if(fl<1)rd_arrow(ctx,sx,sy,ex,ey,ag_sine(ui),LP.amber,1-fl,6);
-    if(fl>0)rd_arrow(ctx,ex,ey,sx,sy,ag_sine(fl),LP.blue,fl,6);
-    rd_node(ctx,x,y,RD_FAC[i],{a:ui,w:250,col:fl>0.5?LP.blue:null,lw:3+2*fl});});
-  const ct=o.centre||"The data team";rd_node(ctx,cx,cy,ct,{a:clamp(u*3,0,1),w:Math.max(300,lp_tw(ctx,ct,{w:700,size:28})+64),h:84,col:fl<0.5?LP.amber:null});
-  ctx.restore();}
+/* ---------------------------------------------------------------- Helena's corner
+   Helena at the round table: alone, with her two sheets (o.sheets), or with someone across from her (o.who2). o.lean (0 to 1): she
+   leans in; o.he, o.ie: their faces; o.write (0 to 1): her pen on the sheet; o.t0: when the shot starts (two people cross the lawn
+   outside once, from then). Returns {helena, who2}: their joints. */
+const RD_SITH={mode:"sit",lean:2,head:0,aN:[24,76],aF:[28,80],lN:[86,3],lF:[82,-5]},RD_SITH2={mode:"sit",lean:13,head:-5,aN:[40,80,"open"],aF:[36,78],lN:[86,5],lF:[82,-6]};
+const RD_SITI={mode:"sit",lean:6,head:6,aN:[26,74,"grip"],aF:[30,78,"grip"],lN:[86,8],lF:[82,-2]};
+function rd_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=RD_CO,lean=o.lean||0,t0=o.t0||0,lw={lw:3.4,far:0,sh:5},r={},wr=o.write||0;
+  x.save();x.beginPath();x.rect(win[0],win[1],win[2],win[3]);x.clip();
+  for(const [i,ts,d,left,dy,h] of [[3,t0+1,22,false,34,92],[9,t0+8,26,true,24,96]]){if(tt<ts||tt>ts+d)continue;
+    PK.walk(x,PK.extra(i),tt,{x0:left?win[0]+win[2]+40:win[0]-40,x1:left?win[0]-40:win[0]+win[2]+40,t0:ts,t1:ts+d,floor:win[1]+win[3]-dy,h},{far:0.55,shade:0});}
+  x.restore();PK.windowFrame(x,win[0],win[1],win[2],win[3],{});
+  const hp=PK.poseMix(RD_SITH,RD_SITH2,Math.max(lean,0.6*wr)),W2=o.who2;
+  S.begin(x,lw);PK.chair(x,hx-10,F,H,false,{});if(W2)PK.chair(x,ix+10,F,H,true,{col:PK.PAL.chair2});
+  const W1=o.who1||"helena";PK.person(x,W1,hx,F,H,hp,{t:tt,part:"lower"});if(W2)PK.person(x,W2,ix,F,H,RD_SITI,{t:tt+1,flip:true,part:"lower"});
+  S.begin(x,lw);PK.table(x,tx,ty,rx,F);
+  S.begin(x,{lw:2.6,far:0,sh:3});PK.mug(x,tx+150,ty+10,0.9,PK.col("mug2"),tt,true);
+  // the two sheets on the table: the chart (its boxes in blue) and the list (its lines in orange)
+  if(o.sheets){S.begin(x,{lw:2.4,sh:3});for(const [sx,col,k] of [[tx-150,PK.C.orange,1],[tx-10,PK.C.blue,0]]){S.poly(x,[[sx-60,ty-4,1],[sx+60,ty-10,1],[sx+84,ty+8,1],[sx-40,ty+16,1]],[250,248,240],{exact:true});
+    S.line(x,c=>{for(let i=0;i<3;i++){c.moveTo(sx-34+i*6,ty+2-i*5);c.lineTo(sx+50+i*6,ty-2-i*5);}},col,0.6);}}
+  if(o.book){S.begin(x,{lw:2.6,far:0,sh:3});PK.notebook(x,tx-200,ty+4,1.1,{});}
+  if(o.laptop){S.begin(x,{lw:2.6,far:0,sh:3});PK.laptop(x,tx-150,ty+6,{k:1.25,glow:true});r.laptop=[tx-150,ty-70];}
+  const pen=[U.lerp(790,tx-130,wr),ty-6];
+  r.helena=r.who1=PK.person(x,W1,hx,F,H,hp,Object.assign({t:tt,part:"upper",expr:o.he,gaze:o.hg||[1,0.25],reachN:o.handN||(wr>0.01?pen:[790,ty-4]),reachF:o.handF||[806,ty-12],hold:o.hold||(wr>0.3?PK.inHand.pen("blue"):null),holds:!!(o.hold||wr>0.3)},o.hf||{}));
+  if(W2)r.who2=PK.person(x,W2,ix,F,H,RD_SITI,Object.assign({t:tt+1,flip:true,part:"upper",expr:o.ie,gaze:o.ig||[1,0.3],reachN:[1150,ty-6],reachF:[1128,ty-2]},o.iface||{}));
+  return r;}
 
-/* ---------------------------------------------------------------- the queue at the front door
-   rd_queue(ctx, t, o): o.t0 (when the first card comes), o.n (how many), o.gap (seconds between cards), o.door [x, y] (where they
-   go), o.a. Each card is a faculty's request, with an amber band: it waits */
-function rd_queue(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const n=o.n||9,[dx,dy]=o.door;
-  // two rows, so every card's faculty can be read; the first to come waits nearest the door; each card fades in at the left
-  // edge, inside the frame, so its words never run off it
-  for(let i=n-1;i>=0;i--){const t0=o.t0+i*(o.gap||0.45);if(t<t0)continue;const u=ag_sine(clamp((t-t0)/1.6,0,1)),slot=[dx-140-Math.floor(i/2)*205,dy+((i%2)?75:-75)],from=[115+(i%3)*25,dy+40-(i%3)*30];
-    const x=lerp(from[0],slot[0],u),y=lerp(from[1],slot[1],u);ctx.save();ctx.globalAlpha*=a*ag_in(t,t0,0.3);
-    lp_sheet(ctx,x-95,y-52,190,104,{col:LP.amber,light:null,pin:false,tilt:((i*37)%7-3)});lp_T(ctx,RD_FAC[i%4],x,y+16,{w:700,size:28,align:"center",col:LP.ink});ctx.restore();}}
 
-/* ---------------------------------------------------------------- a rule, on a card
-   rd_rule(ctx, x, y, w, n, words, o): words {title, what, why}; o as lp_textSheet (a, k, u, light) */
-function rd_rule(ctx,x,y,w,n,words,o){o=o||{};const lines=[];if(words.what)lines.push(words.what);if(words.why)lines.push("Why: "+words.why);
-  return lp_textSheet(ctx,x,y,w,{kick:"Rule "+n,title:words.title,lines},Object.assign({col:LP.blue},o));}
-const RD_RULES=[
-  {title:"Room use means one thing",what:"The share of hours with someone counted",why:"so the faculties' numbers add up"},
-  {title:"The product's promise holds",what:"Counts per room per hour, never a person",why:"so nobody is watched"},
-  {title:"Ask the owner before a new measure",what:"Ivy, who owns Teaching space use",why:"so each new number means one thing, written down first"},
-  {title:"Share the live page, not a copy",what:"A copy shows the date of its data",why:"copies go stale"}];
 
-/* ---------------------------------------------------------------- Yusuf's first list, and the drawer
-   rd_eleven(ctx, o): eleven cards in a row on the wall, each with its lines as decoration; o.u (0 to 1: they come in), o.keep (0 to 1: three
-   take the blue band, the others fade back), o.drop (0 to 1: the eight go down into the drawer at o.drawer [x, y]), o.out (0 to 1: the
-   three leave too), o.light */
-const RD_KEEP=[0,4,8];
-function rd_eleven(ctx,o){const u=o.u==null?1:o.u,keep=ag_sine(o.keep||0),drop=o.drop||0,out=o.out||0,[qx,qy]=o.drawer||[1500,760];
-  for(let i=0;i<11;i++){const ui=clamp(u*6-i*0.45,0,1);if(ui<=0)continue;const kept=RD_KEEP.includes(i),x=520+i*120,y=150;
-    let px=x,py=y,s=0.62,al=ui*(1-(kept?out:0));
-    if(!kept){const k=RD_KEEP.length,j=[...Array(11).keys()].filter(q=>!RD_KEEP.includes(q)).indexOf(i),dd=ag_sine(clamp(drop*1.6-j*0.08,0,1));
-      px=lerp(x,qx-60+j*14,dd);py=lerp(y,qy-40,dd);s=lerp(0.62,0.4,dd);al*=lerp(1-0.45*keep,1,dd)*(1-ag_in(dd,0.8,0.2));}
-    if(al<=0.004)continue;ctx.save();ctx.globalAlpha*=al;ctx.translate(px+46,py+62);ctx.scale(s,s);ctx.translate(-75,-100);
-    lp_sheet(ctx,0,0,150,200,{col:kept&&keep>0.5?LP.blue:null,light:o.light||null,tilt:((i*29)%7-3)*0.8});
-    ctx.fillStyle=rgba(LP.mut,0.35);for(let k=0;k<5;k++)ctx.fillRect(24,52+k*26,k===0?90:102-(k*13)%30,8);ctx.restore();}}
-function rd_drawer(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const h=o.h||120,op=o.open||0;ctx.save();ctx.globalAlpha*=a;
-  // the cabinet, timber, and its drawer pulled out by op
-  const Tb=LP.timber;let g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,rgba(ag_dk(Tb,0.25),1));g.addColorStop(1,rgba(Tb,1));
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.28)";ctx.shadowBlur=18;ctx.shadowOffsetX=LP.sdx;ctx.shadowOffsetY=8;ctx.fillStyle=g;ctx.fillRect(x,y,w,h);ctx.restore();
-  const dy=op*24;ctx.fillStyle=rgba(ag_lt(Tb,0.12),1);ctx.fillRect(x+14,y+14+dy,w-28,h-28);ctx.strokeStyle=rgba(ag_dk(Tb,0.35),0.8);ctx.lineWidth=2;ctx.strokeRect(x+14,y+14+dy,w-28,h-28);
-  ctx.fillStyle=rgba(LP.graphite,1);rr(ctx,x+w/2-50,y+h/2-8+dy,100,16,8);ctx.fill();ctx.restore();}
+/* ---------------------------------------------------------------- a teaching room: the door with its room's name, the sensor above it
+   Ivy and Sam look at the sensor over the door, which counts the people in the room every hour.
+   o.people: [{fl, draw(x)}], drawn far to near; o.plate (0 to 1): the room's name by the door */
+const RD_LE2=PK.ROOMS.lecture;
+function rd_room(x,tt,o){o=o||{};if((o.plate||0)>0.004)PK.tag(x,560,420,"B-204",o.plate,{});
+  (o.people||[]).slice().sort((a,b)=>a.fl-b.fl).forEach(p=>p.draw(x));}
 
-// a small card on the wall, its lines as decoration, not words to read: o.blue (a rule's blue band), o.s (its size), o.tilt, o.light, o.a
-function rd_card(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const s=o.s||1;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.scale(s,s);
-  lp_sheet(ctx,0,0,150,200,{col:o.blue?LP.blue:null,light:o.light||null,tilt:o.tilt||0});
-  ctx.fillStyle=rgba(LP.mut,0.35);for(let k=0;k<5;k++)ctx.fillRect(24,52+k*26,k===0?90:102-(k*13)%30,8);ctx.restore();}
-// the template, small, as a picture: its orange band and the grid of booked and counted hours, without words; seed picks the rooms
-function rd_mini(ctx,X,Y,Wd,Hd,seed){const R=ag_rnd(seed||17);ctx.fillStyle=rgba(LP.paper,1);ctx.fillRect(X,Y,Wd,Hd);ctx.fillStyle=rgba(LP.orange,1);ctx.fillRect(X,Y,Wd,Hd*0.05);
-  const gx=X+Wd*0.08,gy=Y+Hd*0.18,cw=(Wd*0.84)/20,ch=Hd*0.11;
-  for(let i=0;i<6;i++)for(let j=0;j<20;j++){const x=gx+j*cw,y=gy+i*ch,booked=R()<0.7,counted=booked&&R()<0.72;
-    if(booked){ctx.strokeStyle=rgba(LP.mut,0.8);ctx.lineWidth=2;ctx.strokeRect(x+2,y+2,cw-4,ch-4);}
-    if(counted){ctx.fillStyle=rgba(LP.orange,0.85);ctx.fillRect(x+5,y+5,cw-10,ch-10);}}}
+/* ---------------------------------------------------------------- what a screen shows, close: a callout's rows of words, and bars.
+   rows: [text, col, size]; bars: [[label, n, of, col]] */
+function rd_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
+  if(head){ag_T(cc,head.toUpperCase(),bx+30,y,{w:800,size:28,ls:3,color:U.css(hc||PK.C.amber)});y+=52;}
+  for(const [s,col,size] of rows||[]){ag_T(cc,s,bx+30,y,{w:700,size:size||34,color:U.css(col||PK.C.ink)});y+=(size||34)+16;}
+  for(const [lab,n,of,col] of bars||[]){if(!n)continue;const w=(bw-60)*n/of;PK.S.begin(cc,{lw:2});PK.S.fill(cc,c=>c.rect(bx+30,y-10,w,24),col,{w:0.6});
+    ag_T(cc,lab,bx+30,y+50,{w:700,size:30,color:U.css(PK.C.ink)});y+=86;}}
 
-/* ---------------------------------------------------------------- the template, on a screen
-   rd_template(ctx, X, Y, Wd, Hd, o): o.u (0 to 1: the grid fills in), o.who (0 to 1: the who-decides-what box), o.whoU (its lines,
-   one by one), o.use (0 to 1: room use), o.date (0 to 1: the date of its data in the corner), o.title */
-const RD_WEEK=["Mon","Tue","Wed","Thu","Fri"];
-function rd_template(ctx,X,Y,Wd,Hd,o){o=o||{};const u=o.u==null?1:o.u,R=ag_rnd(17);
-  ctx.fillStyle=rgba(LP.paper,1);ctx.fillRect(X,Y,Wd,Hd);ctx.fillStyle=rgba(LP.orange,1);ctx.fillRect(X,Y,Wd,10);
-  lp_T(ctx,o.title||"Teaching space use · template",X+32,Y+58,{w:800,size:30,col:LP.ink});
-  // the grid: rooms down the side, the week across; each hour's booking an outline, its count a fill
-  const gx=X+150,gy=Y+150,cw=(Wd-150-560)/5,ch=56,rooms=["G.04","1.02","1.05","2.01","2.03","3.02"];
-  RD_WEEK.forEach((d,j)=>lp_T(ctx,d,gx+cw*j+cw/2,gy-18,{w:700,size:28,align:"center",col:LP.mut}));
-  rooms.forEach((r,i)=>{const ri=clamp(u*7-i*0.8,0,1);if(ri<=0)return;ctx.save();ctx.globalAlpha*=ri;lp_T(ctx,r,X+40,gy+i*ch+38,{w:700,size:28,col:LP.mut});
-    for(let j=0;j<5;j++)for(let k=0;k<4;k++){const x=gx+cw*j+6+k*(cw-12)/4,y=gy+i*ch+8,w=(cw-12)/4-4,h=ch-16,booked=R()<0.7,counted=booked&&R()<0.72;
-      if(booked){ctx.strokeStyle=rgba(LP.mut,0.8);ctx.lineWidth=2;ctx.strokeRect(x+1,y+1,w-2,h-2);}
-      if(counted){ctx.fillStyle=rgba(LP.orange,0.85);ctx.fillRect(x+4,y+4,w-8,h-8);}}ctx.restore();});
-  // the key, and room use worked out the one agreed way
-  const ky=gy+rooms.length*ch+44;ctx.save();ctx.globalAlpha*=clamp(u*2-1,0,1);ctx.strokeStyle=rgba(LP.mut,0.8);ctx.lineWidth=2;ctx.strokeRect(X+40,ky-24,30,30);lp_T(ctx,"Booked",X+84,ky,{w:600,size:28,col:LP.ink});
-  ctx.fillStyle=rgba(LP.orange,0.85);ctx.fillRect(X+250,ky-24,30,30);lp_T(ctx,"Counted",X+294,ky,{w:600,size:28,col:LP.ink});ctx.restore();
-  if(o.use>0.004){ctx.save();ctx.globalAlpha*=o.use;lp_T(ctx,"Room use: the share of hours with someone counted",X+40,ky+56,{w:700,size:28,col:LP.orange});ctx.restore();}
-  // who decides what, at the top
-  if(o.who>0.004){const bx=X+Wd-540,by=Y+100,bw=500,lines=[["Faculties","their classes"],["Ivy","what the numbers mean"],["The team","the platform"],["Registrar's office","the timetable"]];
-    ctx.save();ctx.globalAlpha*=o.who;ctx.fillStyle="rgba(250,247,240,1)";ctx.fillRect(bx,by,bw,400);ctx.strokeStyle=rgba(LP.blue,1);ctx.lineWidth=4;ctx.strokeRect(bx+2,by+2,bw-4,396);
-    lp_T(ctx,"WHO DECIDES WHAT",bx+28,by+52,{w:800,size:28,ls:3,col:LP.blue});
-    lines.forEach(([who,what],i)=>{const la=o.whoU==null?1:clamp(o.whoU*4-i,0,1);if(la<=0.004)return;ctx.save();ctx.globalAlpha*=ag_sine(la);
-      lp_T(ctx,who,bx+28,by+110+i*76,{w:800,size:28,col:LP.ink});lp_T(ctx,what,bx+28,by+144+i*76,{w:600,size:28,col:LP.mut});ctx.restore();});ctx.restore();}
-  // the date of its data, in the corner
-  if(o.date>0.004){ctx.save();ctx.globalAlpha*=o.date;const t="Data as of Monday 22 November, 07:00",tw=lp_tw(ctx,t,{w:700,size:28})+40;
-    ctx.fillStyle=rgba(LP.orange,1);rr(ctx,X+Wd-tw-24,Y+Hd-74,tw,52,26);ctx.fill();lp_T(ctx,t,X+Wd-tw/2-24,Y+Hd-38,{w:700,size:28,align:"center",color:"#fff"});ctx.restore();}}
 
-/* ---------------------------------------------------------------- Lucy's page: Engineering's twelve labs, mornings
-   rd_labs(ctx, X, Y, Wd, Hd, o): o.u (the grid fills in: bookings first), o.counts (0 to 1: the counts come in beside them), o.mon (0 to 1:
-   Monday's nine empty bookings outlined in amber), o.freed (0 to 1: they're released, the outlines going), o.title */
-const RD_LABS=(()=>{const R=ag_rnd(912),g=[];for(let i=0;i<12;i++){const row=[];for(let d=0;d<5;d++){let booked=R()<0.8,counted=booked&&R()<0.85;
-  if(d===0){booked=i<9||R()<0.3;counted=i>=9&&booked;}row.push({booked,counted});}g.push(row);}return g;})();
-function rd_labs(ctx,X,Y,Wd,Hd,o){o=o||{};const u=o.u==null?1:o.u,cn=o.counts==null?1:o.counts,mon=o.mon||0,fr=o.freed||0;
-  ctx.fillStyle=rgba(LP.paper,1);ctx.fillRect(X,Y,Wd,Hd);ctx.fillStyle=rgba(LP.orange,1);ctx.fillRect(X,Y,Wd,10);
-  lp_T(ctx,o.title||"Engineering's teaching labs · mornings",X+32,Y+58,{w:800,size:30,col:LP.ink});
-  const gx=X+170,gy=Y+130,cw=(Wd-210)/5,ch=(Hd-200)/12;
-  RD_WEEK.forEach((d,j)=>lp_T(ctx,d,gx+cw*j+cw/2,gy-14,{w:700,size:28,align:"center",col:j===0&&mon>0.5?LP.amber:LP.mut}));
-  for(let i=0;i<12;i++){const ri=clamp(u*8-i*0.5,0,1);if(ri<=0)continue;ctx.save();ctx.globalAlpha*=ri;if(i%2===0)lp_T(ctx,"Lab "+(i+1),X+40,gy+i*ch+ch*0.5+10,{w:700,size:28,col:LP.mut});
-    for(let d=0;d<5;d++){const c=RD_LABS[i][d],x=gx+cw*d+10,y=gy+i*ch+4,w=cw-20,h=ch-8,rel=d===0&&!c.counted&&c.booked?fr:0;
-      if(c.booked){ctx.strokeStyle=rgba(LP.mut,0.8*(1-rel));ctx.lineWidth=2;ctx.strokeRect(x+1,y+1,w-2,h-2);}
-      if(c.counted){ctx.fillStyle=rgba(LP.orange,0.85*cn);ctx.fillRect(x+4,y+3,w-8,h-6);}}ctx.restore();}
-  // Monday morning: nine labs booked, and nobody counted in them
-  if(mon>0.004){const x=gx+4,y=gy-2,w=cw-8,h=ch*9+4;ctx.save();ctx.globalAlpha*=mon*(1-fr);ctx.strokeStyle=rgba(LP.amber,1);ctx.lineWidth=6;rr(ctx,x,y,w,h,10);ctx.stroke();ctx.restore();}
-  ctx.save();ctx.globalAlpha*=clamp(u*2-1,0,1);const ky=Y+Hd-34;ctx.strokeStyle=rgba(LP.mut,0.8);ctx.lineWidth=2;ctx.strokeRect(X+40,ky-24,30,30);lp_T(ctx,"Booked",X+84,ky,{w:600,size:28,col:LP.ink});
-  ctx.fillStyle=rgba(LP.orange,0.85*cn);ctx.fillRect(X+250,ky-24,30,30);ctx.globalAlpha*=cn;lp_T(ctx,"Counted",X+294,ky,{w:600,size:28,col:LP.ink});ctx.restore();}
 
-/* ---------------------------------------------------------------- one faculty's page, copied by the next
-   rd_spread(ctx, o): the four faculties as nodes on a sheet; o.u (they come in), o.lucy (0 to 1: Lucy's page at Engineering), o.copies
-   [u for Health, u for Arts] (each copy flying over and landing), o.labels (0 to 1: what each copied it for), o.light */
-function rd_spread(ctx,o){const u=o.u==null?1:o.u,P={Engineering:[700,330],Health:[1280,330],Arts:[700,640],Business:[1280,640]};
-  lp_sheet(ctx,330,150,1260,680,{light:o.light===undefined?"day":o.light});
-  for(const [f,[x,y]] of Object.entries(P)){const ui=clamp(u*3-["Engineering","Health","Arts","Business"].indexOf(f)*0.4,0,1);rd_node(ctx,x,y,f,{a:ui,w:280});}
-  const page=(x,y,a,k)=>{if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.6,1,ag_spr(k,0,0.5)));lp_sheet(ctx,x-46,y-58,92,116,{col:LP.orange,light:null,pin:false});
-    ctx.fillStyle=rgba(LP.orange,0.8);for(let r=0;r<4;r++)for(let c2=0;c2<3;c2++)if((r+c2)%3)ctx.fillRect(x-30+c2*22,y-24+r*18,16,12);ctx.restore();};
-  const L=o.lucy||0;page(860,330,ag_in(L,0,0.3),L*2);
-  const targets=[[1440,330,"Clinical skills rooms",1280,410],[860,640,"Studios",700,720]];
-  (o.copies||[]).forEach((cu,i)=>{if(cu<=0.004)return;const [tx,ty,lab,lx,ly]=targets[i],s=ag_sine(clamp(cu,0,1)),x=lerp(860,tx,s),y=lerp(330,ty,s)-Math.sin(s*Math.PI)*90;
-    if(cu<1){ctx.save();ctx.setLineDash([10,12]);ctx.strokeStyle=rgba(LP.orange,0.6);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(860,330);ctx.quadraticCurveTo((860+tx)/2,(330+ty)/2-120,x,y);ctx.stroke();ctx.restore();}
-    page(x,y,ag_in(cu,0,0.15),cu*3);
-    const la=o.labels==null?ag_in(cu,1,0.4):o.labels[i];if(la>0.004)lp_tag(ctx,lx,ly,lab,{align:"center",a:la,col:LP.mut});});}
+
+
+
+
+
+/* ---------------------------------------------------------------- the people this film adds: the faculties' timetable officers, and
+   Anil, Health's data partner (nobody's likeness; their clothes keep clear of the five colours) */
+const RD_FOLK={
+  lucy:{key:"rdLucy",name:"Lucy Tran",role:"Timetable officer",skin:[224,186,152],hair:{style:"bun",c:[30,26,28]},top:{kind:"sweater",c:[106,110,80]},bottom:{kind:"trousers",c:[70,70,80]},shoe:[54,46,44]},
+  arts:{key:"rdArts",name:"",skin:[120,82,60],hair:{style:"coily",c:[34,28,26]},top:{kind:"sweater",c:[150,122,98]},bottom:{kind:"skirt",c:[90,84,96]},shoe:[58,48,44]},
+  business:{key:"rdBusiness",name:"",skin:[214,174,140],hair:{style:"crop",c:[52,44,40]},glasses:[54,50,48],top:{kind:"jacket",c:[112,108,100],inner:[226,228,230]},bottom:{kind:"trousers",c:[70,72,80]},shoe:[46,40,40]},
+  health:{key:"rdHealth",name:"",skin:[196,146,112],hair:{style:"long",c:[44,34,30]},top:{kind:"jacket",c:[96,98,104],inner:[236,236,232]},bottom:{kind:"trousers",c:[66,66,74]},shoe:[50,44,44]},
+  anil:{key:"rdAnil",name:"Anil",role:"Data partner",skin:[176,124,92],hair:{style:"short",c:[30,26,24]},beard:[40,34,30],top:{kind:"sweater",c:[120,128,140]},bottom:{kind:"trousers",c:[64,66,78]},shoe:[50,44,40]}};
+const rd_row=w=>typeof w==="string"?(RD_FOLK[w]||PK.CAST[w]):w;
+
+/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+// 1. Yusuf's first list, and the question asked of each rule (Yusuf, at the team's board)
+const rd_boardA=(sc,w)=>[
+  {s:"Eleven rules?",x:70,y:120,size:62,col:"blue",at:w("eleven","first list",-0.3),d:0.8},
+  {s:"what goes wrong here, now, without it?",x:110,y:250,size:44,at:w("ask","what goes wrong",-0.3),d:1.6},
+  {s:"three needed now",x:520,y:400,size:56,col:"green",at:w("three","Three",-0.2),d:0.9}];
+// 2. the three rules, each with its reason (Yusuf, at the board seen close)
+const rd_boardB=(sc,w)=>[
+  {s:"1 · room use means one thing",x:70,y:130,size:48,col:"blue",at:w("r1","room use means",-0.3),d:1.3},
+  {s:"2 · per room per hour, never a person",x:110,y:270,size:44,col:"blue",at:w("r2","counts per room",-0.3),d:1.6},
+  {s:"3 · a new measure: ask Ivy first",x:150,y:410,size:46,col:"blue",at:w("r3","new measure",-0.3),d:1.4}];
+// 3. Ostrom (Carmen, at the team's board)
+const rd_boardC=(sc,w)=>[
+  {s:"Elinor Ostrom",x:70,y:120,size:62,col:"blue",at:w("ostrom","Elinor Ostrom",-0.3),d:0.8},
+  {s:"shared for centuries",x:110,y:230,size:50,at:w("ostrom","for centuries",-0.4),d:0.9},
+  {s:"a few clear rules · fitted to the place",x:150,y:340,size:44,col:"green",at:w("lasted","a few clear rules",-0.3),d:1.5},
+  {s:"made by those who live by them",x:300,y:450,size:44,col:"green",at:w("lasted","made and changed",-0.3),d:1.3}];
+// 4. data mesh and Team Topologies (Carmen)
+const rd_boardD=(sc,w)=>[
+  {s:"Data mesh · Team Topologies",x:70,y:130,size:52,col:"blue",at:w("mesh","Data mesh",-0.3),d:1.2},
+  {s:"decisions with who knows the work",x:110,y:280,size:46,col:"green",at:w("mesh","decisions with",-0.3),d:1.4},
+  {s:"a platform that makes it easy",x:300,y:420,size:46,at:w("mesh","a platform",-0.3),d:1.2}];
+// 5. the fourth rule (Helena, at the team's board)
+const rd_boardE=(sc,w)=>[
+  {s:"4 · share the live page, not a copy",x:70,y:130,size:46,col:"blue",at:w("rule4","share the live page",-0.3),d:1.4},
+  {s:"copies go stale",x:400,y:250,size:52,col:"amber",at:w("rule4","copies go stale",-0.3),d:0.8},
+  {s:"the date of its data, in the corner",x:110,y:380,size:44,at:w("date","the date",-0.3),d:1.4}];
+// 6. on Monday (Helena, at the board seen close)
+const rd_boardM=(sc,w)=>[
+  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("m1","On Monday",0),d:0.6},
+  {s:"few rules · each with its reason",x:110,y:205,size:44,col:"blue",at:w("m1","few rules",-0.2),d:1.2},
+  {s:"the right way, the easy way",x:150,y:285,size:44,at:w("m2","right way",-0.2),d:1.1},
+  {s:"say who decides what",x:190,y:365,size:44,col:"blue",at:w("m3","who decides",-0.2),d:0.9},
+  {s:"watch what emerges · learn",x:230,y:445,size:44,col:"green",at:w("m4","Watch",-0.2),d:1.1}];
+
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+// 1. the temples' calendar (a farmer's book)
+const rd_note1=(sc,w)=>[
+  {s:"The temple's calendar",x:70,y:124,size:68,w:760,col:"blue",at:w("temple","calendar",-0.4),d:0.9,marks:[["under","blue",null,0.3]]},
+  {s:"who plants first, who follows",x:110,y:250,size:50,at:w("temple","who plants first",-0.3),d:1.2},
+  {s:"in turns: water shared",x:110,y:360,size:52,col:"green",at:w("turns","in turns",-0.3),d:1.0},
+  {s:"empty together: pests go hungry",x:110,y:470,size:46,col:"green",at:w("rest","empty together",-0.3),d:1.3}];
+// 2. every decision, one door (Helena)
+const rd_note2=(sc,w)=>[
+  {s:"One door",x:70,y:124,size:80,w:760,col:"amber",at:w("helena","saw more",-0.3),d:0.5,marks:[["under","amber",null,0.3]]},
+  {s:"whose rooms first: me",x:110,y:250,size:54,at:w("helena","she chose",-0.3),d:1.0},
+  {s:"every room decision, through us",x:110,y:360,size:48,col:"amber",at:w("centre","Every room decision",-0.3),d:1.3},
+  {s:"those who know the courses wait",x:110,y:470,size:46,at:w("knew","were waiting",-0.6),d:1.3}];
+// 3. Helena's job now
+const rd_note3=(sc,w)=>[
+  {s:"My job now",x:70,y:124,size:80,w:760,col:"blue",at:w("role","job changed",-0.3),d:0.5,marks:[["under","blue",null,0.3]]},
+  {s:"less deciding",x:110,y:250,size:56,at:w("role","less deciding",-0.3),d:0.7},
+  {s:"watch what emerges",x:110,y:360,size:56,col:"green",at:w("role","watching what emerged",-0.3),d:0.9},
+  {s:"ask what it taught",x:110,y:470,size:56,col:"green",at:w("role","asking what it taught",-0.3),d:0.9}];

@@ -1,7 +1,6 @@
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: the hub of arrows turning outward, to the faculties, as it becomes the title card; and the four rules on the
-   wall, as they become the end card. */
+   Two wordless moments: the team's room as the title card comes in, and as the end card comes in. */
 const BREATH={
 "subak":{"hold":{"when":1.0,"years":0.6,"subak":0.8,"temple":1.0,"turns":0.8,"rest":1.0,"push":0.8,"told":0.8,"fed":0.8,"clock":0.8,"hopper":1.0,"dry":0.8,"harm":1.2,"change":1.2,"model":0.8,"showed":1.0,"bank":0.8,"back":1.0,"pests":0.8,"report":1.0,"unesco":1.2,"data":0.8},"breathe":5.6},
 "door":{"hold":{"univ":1.0,"council":1.2,"officers":1.0,"product":1.0,"only":0.8,"asked":1.0,"wait":1.2,"helena":1.0,"centre":1.2,"knew":1.4}},

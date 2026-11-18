@@ -200,12 +200,10 @@ END = E('subak')
 long(D2, 0.4, 0.85, 0.0, dur=3.2)
 water(0.8, 4.2, 0.0045, px(160))
 speeds((D3, A3, D4), ow('when', 'Bali', 0.1), 0.65, step=0.32, last=1.4)
-card(ow('when', 'Bali', -0.2), 0.004, px(400))
 water(ow('years', 'water', -0.3), 2.6, 0.004, px(180))
 tube(Fs4, ow('subak', 'subak', 0.2), 0.55, px(700) * 0.4, 0.5); tube(A4, ow('subak', 'subak', 0.5), 0.55, px(700) * 0.4, 1.2)
 # the water temple: the groups meet and agree a calendar: G major, and the calendar pinned up
 held((G3, D4, B4), oc('temple', 0.1), 0.55, step=0.2, dur=2.2, bass=G2)
-card(ow('temple', 'calendar', -0.2), 0.004, px(430))
 # planting in turns: the water let into the fields, subak by subak; a note for each group, rising, as its fields flood
 water(oc('turns', 0.5), 4.6, 0.0045, px(900))
 for k, m in enumerate((D4, Fs4, A4)):
@@ -213,34 +211,23 @@ for k, m in enumerate((D4, Fs4, A4)):
 # harvested together, resting together: the long tube's A, then D
 long(A2, ow('rest', 'harvested', -0.1), 0.6, None, dur=1.2); long(D2, ow('rest', 'hungry', -0.1), 0.6, None, dur=1.4)
 # the push for more rice: the plan's card, the order's card; every field on its own clock: B minor, low, its notes out of step
-card(ow('push', 'grow', -0.3), 0.004, px(430))
-card(ow('told', 'plant', -0.2), 0.004, px(1510))
 for m, off, d in ((B3, 0.0, 0.5), (Fs4, 0.75, 0.45), (D4, 1.15, 0.5)):
     tube(m, ow('told', 'often', off), 0.42, None, d)
 long(B2, ow('clock', 'clock', -0.1), 0.6, None, dur=1.6)
 tube(Fs4, ow('clock', 'pests', 0.1), 0.4, 0.2, 0.45); tube(D4, ow('clock', 'next', 0.0), 0.4, -0.2, 0.6)
 # the brown planthopper, drawn large; two million tons; the fields it took
-card(ow('hopper', 'planthopper', -0.4), 0.004, px(1410))
-card(ow('hopper', 'million', -0.3), 0.004, px(480))
 long(B2, ow('hopper', 'million', 0.2), 0.55, None, dur=1.8)
 # the dry season: the canal's water thinning; the lost harvest: B minor, held low, gone before "Something had to change"
 water(ow('dry', 'downstream', -0.2), 2.2, 0.003, px(1340))
-card(ow('harm', 'harvest', -0.2), 0.004, px(1490))
 held((B3, D4, Fs4), ow('harm', 'harvest', 0.1), 0.45, step=0.24, dur=2.0, until=oc('change', -0.3), bass=B2)
 # the model: two rivers and their 172 subaks, the cells coming in; the temples' calendar, the groups planting together: the mark
-card(ow('model', 'computer', -0.3), 0.004, px(1580))
-slide(ow('model', 'hundred', -0.2), 1.2, 0.0035, px(690))
 mark(ow('showed', 'calendar', -0.1), 0.6, hold=1.4)
-card(ow('showed', 'calendar', 0.3), 0.004, px(1580))
 # 1988: to the bank; "agreed", A major
-card(oc('bank', 0.1), 0.004, px(1580))
 held((A3, E4, A4, Cs5), ow('bank', 'agreed', -0.1), 0.45, step=0.16, dur=1.6, bass=A2)
 # the temples set the planting again: D major, low; pests under control, less spraying: the long tube's D, and the high D
 held((D3, A3, D4), ow('back', 'temples', -0.1), 0.5, step=0.22, dur=2.0, bass=D2)
 tube(D5, ow('pests', 'control', -0.1), 0.4, 0.15, 1.2)
-card(ow('report', 'report', -0.3), 0.004, px(520))
 # World Heritage: the tube finding its notes again, an octave up, then let go
-card(ow('unesco', 'twenty', -0.4), 0.004, px(1470))
 speeds((D4, A4, D5, Fs5), ow('unesco', 'UNESCO', 0.0), 0.45, step=0.3, last=1.6)
 # a data team: every question comes in to one place: one low B; then given back, the arrows turning outward; the title: the mark, held
 long(B2, oc('data', 0.5), 0.5, None, dur=1.6)
@@ -256,16 +243,9 @@ LV[0] = 0.9
 dw = lambda lid, word, off=0: W('door', lid, word, off)
 dc = lambda lid, off=0: G('door', lid, off)
 held((G3, B3), S0('door') + 0.3, 0.5, step=0.22, dur=1.8, bass=G2)
-card(dw('univ', 'September', -0.3), 0.004, px(1520))
-card(dw('council', 'Council', -0.3), 0.004, px(1490))
 for k, (m, x) in enumerate(((D4, 330), (Fs4, 750), (A4, 1170), (D5, 1590))):
     tube(m, dc('officers', k * 0.25), 0.4, px(x) * 0.4, 0.9 - 0.1 * k)
-card(dw('product', 'Teaching', -0.3), 0.004, px(1240))
-for k in range(0, 9, 2):
-    slide(dw('only', 'question', -0.3 + k * 0.42), 0.9, 0.0028, px(700))
-card(dw('asked', 'twenty', -0.4), 0.004, px(350))
 long(B2, dw('wait', 'weeks', -0.2), 0.55, None, dur=1.6)
-card(dc('helena', 0.3), 0.0035, px(960))
 held((B3, D4), dw('helena', 'chose', -0.1), 0.45, step=0.24, dur=1.5)
 mark(dw('decide', 'stop', -0.2), 0.55, hold=1.2)
 
@@ -277,15 +257,8 @@ LV[0] = 0.9
 rw = lambda lid, word, off=0: W('rules', lid, word, off)
 rc = lambda lid, off=0: G('rules', lid, off)
 long(A2, S0('rules') + 0.3, 0.6, None, dur=1.6)
-card(rw('yusuf', 'drafted', -0.3), 0.004, px(940))
-shuffle(rw('eleven', 'eleven', -0.4), 1.6, 0.0035, px(1100))
 for k, (m, x) in enumerate(((D4, 566), (Fs4, 1046), (A4, 1286))):
     tube(m, rw('three', 'Three', -0.2 + 0.2 * k), 0.45, px(x) * 0.4, 1.0 - 0.15 * k)
-for lid, x in (('r1', 320), ('r2', 790), ('r3', 1260)):
-    card(rc(lid, -0.1), 0.004, px(x))
-slide(rw('drawer', 'drawer', -0.6), 1.0, 0.0035, px(1500)); drawer(rw('drawer', 'drawer', 0.6), 0.005, px(1690))
-card(rc('ostrom', 0.2), 0.004, px(530))
-card(rw('lasted', 'lasted', -0.3), 0.004, px(1390))
 held((G3, B3, D4), rw('lasted', 'few', -0.1), 0.42, step=0.26, dur=1.7)
 held((Fs4, A4, D5), rw('with', 'agreed', 0.3), 0.45, step=0.18, dur=1.8, bass=D2)
 
@@ -296,19 +269,7 @@ LV[0] = 0.9
 tw = lambda lid, word, off=0: W('tools', lid, word, off)
 tc = lambda lid, off=0: G('tools', lid, off)
 speeds((D4, A4), S0('tools') + 0.3, 0.45, step=0.3, last=1.2)
-for k in range(3):
-    card(tw('easy', 'Rules', -0.2 + 0.15 * k), 0.0032, px(485 + 165 * k))
-tap(tw('easy', 'Tools', -0.2), 0.004, px(1280))
-tap(tw('template', 'template', 0.1), 0.0045, px(960))
 held((A3, Cs4), tw('copy', 'afternoon', -0.2), 0.42, step=0.2, dur=1.3)
-card(tw('anil', 'Anil', -0.2), 0.0035, px(760))
-for word in ('faculties', 'Ivy'):
-    pen(tw('whos', word, -0.2), 0.5, 0.0045, px(1180), 2)
-for word in ('team', "registrar's"):
-    pen(tw('keeps', word, -0.2), 0.5, 0.0045, px(1180), 2)
-card(tw('mesh', 'mesh', -0.3), 0.004, px(520)); card(tw('mesh', 'Topologies', -0.3), 0.004, px(1400))
-for k in range(4):
-    tap(tc('start', 0.3 + 0.25 * k), 0.0035, px(330 + 420 * k))
 held((D4, Fs4, A4), tw('start', 'stopped', -0.3), 0.45, step=0.2, dur=2.2, bass=D2)
 
 # 5. Labs on a Monday: the chapter turns on the long tube's D; Lucy's page woken; the counts beside the bookings, slid in; nine labs
@@ -320,18 +281,11 @@ LV[0] = 0.9
 lw = lambda lid, word, off=0: W('labs', lid, word, off)
 lc = lambda lid, off=0: G('labs', lid, off)
 long(D2, S0('labs') + 0.3, 0.55, None, dur=1.8)
-tap(lw('labs', 'labs', -0.4), 0.0045, px(1160))
-slide(lw('side', 'counts', -0.4), 1.0, 0.0035, px(1160))
 held((B3, D4, Fs4), lw('empty', 'nobody', -0.2), 0.42, step=0.22, dur=1.8, bass=B2)
-card(lc('why', 0.3), 0.004, px(1020))
-card(lw('rule3', 'measure', -0.1), 0.004, px(910))
-pen(lw('gloss', 'glossary', 0.0), 0.8, 0.005, px(960), 3)
 speeds((D4, Fs4, A4), lw('freed', 'released', -0.1), 0.42, step=0.28, last=1.2)
-card(lw('freed', 'hold', -0.3), 0.0035, px(1460))
 held((G3, D4), lc('then', 0.2), 0.42, step=0.3, dur=1.4)
-slide(lw('spread', 'Health', -0.3), 1.4, 0.004, px(1150)); tube(A4, lw('spread', 'Health', 1.1), 0.4, px(1440) * 0.4, 0.9)
-slide(lw('spread', 'Arts', -0.3), 1.4, 0.004, px(780)); tube(Cs5, lw('spread', 'Arts', 1.1), 0.36, px(860) * 0.4, 0.9)
-card(lc('model', 0.2), 0.004, px(1580))
+tube(A4, lw('spread', 'Health', 1.1), 0.4, px(1440) * 0.4, 0.9)
+tube(Cs5, lw('spread', 'Arts', 1.1), 0.36, px(860) * 0.4, 0.9)
 mark(lw('emerge', 'appeared', -0.2), 0.55, up=0, hold=2.4, bass=D2)
 
 # 6. Watch what emerges: the chapter turns on the tube's A and E, low, in the late light; the plans for February, a card each; one peak
@@ -341,18 +295,9 @@ LV[0] = 0.9
 ww = lambda lid, word, off=0: W('watch', lid, word, off)
 wc = lambda lid, off=0: G('watch', lid, off)
 speeds((A3, E4), S0('watch') + 0.3, 0.42, step=0.32, last=1.3)
-card(S0('watch') + 0.6, 0.0035, px(420))
-for k in range(4):
-    card(ww('plans', 'four', -0.3 + 0.3 * k), 0.003, px(895 + 270 * k))
 held((D4, Fs4), ww('moved', 'six', -0.2), 0.42, step=0.24, dur=1.5)
-card(ww('none', 'reports', -0.1), 0.0035, px(560)); card(ww('none', 'reports', 0.3), 0.0035, px(1360))
 held((D4, G4, B4), ww('role', 'watching', -0.2), 0.4, step=0.24, dur=1.8, bass=G2)
-card(wc('problem', 0.0), 0.004, px(960))
 long(B2, ww('problem', 'weeks', -0.1), 0.5, None, dur=1.4)
-drawer(ww('rule4', 'drawer', -1.0), 0.005, px(1700)); slide(ww('rule4', 'drawer', 0.2), 1.0, 0.0035, px(1100))
-tap(ww('date', 'date', -0.3), 0.004, px(1400))
-for k in range(4):
-    card(wc('four', 0.1 + 0.25 * k), 0.003, px(285 + 455 * k))
 held((D3, A3, D4, Fs4), ww('four', 'still', -0.1), 0.42, step=0.2, dur=2.2, until=E('watch'), bass=D2)
 
 # 7. On Monday: Bali comes back: the tube finding its notes, low, as it did at the start; the university's four faculties and their
@@ -363,6 +308,43 @@ mc = lambda lid, off=0: G('monday', lid, off)
 long(D2, S0('monday') + 0.3, 0.6, None, dur=2.4)
 speeds((D3, A3, D4, Fs4), mw('bali', 'calendar', -0.2), 0.42, step=0.32, last=1.4)
 held((B3, G4), mc('uni', 0.4), 0.4, step=0.26, dur=1.5)
-for lid, x in (('m1', 380), ('m2', 960), ('m3', 1540), ('m4', 660), ('m5', 1260)):
-    card(mc(lid, 0.3), 0.0035, px(x))
 mark(mw('last', 'trust', 0.2), 0.55, up=0, hold=4.2, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'A': ('rules', 'yusuf', 'rd_boardA'), 'B': ('rules', 'yusuf', 'rd_boardB'), 'C': ('rules', 'carmen', 'rd_boardC'),
+                    'D': ('tools', 'carmen', 'rd_boardD'), 'E': ('watch', 'helena', 'rd_boardE'), 'M': ('monday', 'helena', 'rd_boardM'),
+                    'N1': ('subak', None, 'rd_note1'), 'N2': ('door', None, 'rd_note2'), 'N3': ('watch', None, 'rd_note3')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+
+for name in ('A', 'B', 'C', 'D', 'E', 'M'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3'):
+    written(name, scratch, 0.004)
+pop(G('labs', 'rule3') + 1.4 + 1.6, 0.0022, px(1000), False)
+pop(W('labs', 'gloss', 'glossary', -0.6) + 1.3, 0.0022, px(1000), True)

@@ -239,59 +239,41 @@ oc = lambda lid, off=0: G('circles', lid, off)
 END = E('circles')
 wheel(A2, 0.6, 0.85, 0.0, ring=3.2)
 chord((A3, Cs4, E4, A4), ow('when', 'Angicos', 0.3), 0.7, step=0.17, ring=2.8)
-card(oc('when', 0.2), 0.004, px(450))
-card(oc('adults', 0.2), 0.004, px(450))
 for word, m, x in (('farm', A3, 860), ('builders', Cs4, 1240), ('washerwomen', E4, 1620)):
     spoke(m, ow('adults', word, 0.0), 0.55, px(x) * 0.5, ring=1.0)
 chord((D3, A3, D4, Fs4), oc('guides', 0.2), 0.6, step=0.16, ring=2.4)
-card(ow('guides', 'twenty', -0.2), 0.004, px(1380))
 # three adults in four can't read or write, so they can't vote; the paper the farmer signs, the letter someone reads for the washerwoman
 chord((Fs2, Cs3, Fs3, A3), oc('read', 0.2), 0.6, step=0.18, ring=2.6)
-card(oc('read', 0.1), 0.004, px(490))
-paper(ow('letters', 'sign', 0.25), 0.004, px(1100))
-paper(ow('letters', 'letters', 0.25), 0.0035, px(1500))
 # the children's primers: nothing about their own lives, and many give up; nothing under "Something has to change"
 PRIMER = (Cs4, A3, Fs3)
 figure(PRIMER, ow('primers', 'give', 0.0), 0.55, step=0.3, ring=0.6, last=1.4, until=oc('change', -0.4))
 # the town's own words: the note found, A, alone; written down; a handful chosen, a tap for each word, and B beside A
 spoke(A4, ow('own', 'words', 0.1), 0.6, 0.0, ring=2.2)
-card(oc('own', 0.1), 0.004, px(480))
-pen(ow('listen', 'write', 0.0), 0.7, 0.004, px(1080), 3)
 f0 = ow('listen', 'handful', -0.1)
-for i, x in enumerate((215, 330, 440)):
-    tap(f0 + 0.4 + i * 0.2, 0.003, px(x)); tap(f0 + 1.0 + i * 0.2, 0.003, px(x + 40))
 spoke(B4, ow('listen', 'choose', 0.0), 0.55, 0.05, ring=1.8)
 # the culture circle meets each evening: A major, low; the projector switched on for the picture; one note for its word, belota; its three
 # syllables; and the tune, built from the two notes found, as new words are made from them
 chord((A2, E3, A3, Cs4), oc('circle', 0.0), 0.55, step=0.16, ring=2.4)
-click(ow('picture', 'picture', -0.3), 0.003, px(930))
 spoke(Cs5, ow('picture', 'belota', 0.0), 0.5, px(1360) * 0.4, ring=1.4)
 figure((A4, B4, Cs5), ow('syllables', 'break', 0.1), 0.5, step=0.3, ring=0.5, last=0.9)
 mark(TUNE, ow('syllables', 'new', 0.1), 0.6, step=0.22, ring=0.45, last=1.8)
 # one small step each evening, by doing, together: the hours fill, a note for each step up, to the octave at the fortieth hour
-card(oc('steps', 0.3), 0.0035, px(1360))
 h0, h1 = oc('steps', 0.6), ow('forty', 'fortieth', 0.3)
 for i, m in enumerate((A3, Cs4, E4)):
     spoke(m, h0 + (h1 - h0) * (i + 0.4) / 4, 0.45, px(1360) * 0.4, ring=0.9)
 spoke(A4, h1, 0.5, px(1360) * 0.4, ring=1.2)
-ticked(ow('forty', 'April', -0.2), 0.0045, px(1360))
 # the last class: the president of Brazil comes, and the street is full; A major from both wheels
 pres = ow('forty', 'president', -0.3)
-crowd(pres, 2.8, 0.0035, px(960))
 chord((A2, E3, A3, Cs4, E4), pres + 0.1, 0.6, step=0.14, ring=2.6)
 # the count: about 300, still argued over: C sharp minor, open
-card(ow('count', 'count', -0.1), 0.004, px(450))
 chord((Cs4, E4, Gs4), ow('count', 'argue', 0.1), 0.45, step=0.2, ring=1.6)
 # the method spreads, a national plan: D major rising as the windows light; stopped that April, Freire jailed: the larger wheel's F sharp,
 # stopped short, as the windows go dark, and nothing after it
 s0 = ow('spread', 'spreads', -0.2)
 figure((D4, Fs4, A4, D5), s0 + 0.3, 0.5, step=0.55, ring=0.7, last=1.4)
-card(ow('spread', 'national', -0.2), 0.004, px(470))
 k0 = ow('stop', 'stops', -0.1)
 wheel(Fs2, k0, 0.7, None, ring=0.55, room=0.12); spoke(Cs4, k0 + 0.05, 0.4, None, ring=0.4, room=0.1)
-tap(k0 + 0.4, 0.004, px(470))
 # abroad, the book, laid down: D major, low
-book(oc('book', 0.2), 0.005, px(580))
 chord((D3, Fs3, A3, D4), oc('book', 0.3), 0.5, step=0.15, ring=2.0)
 # learning data work can feel like those primers: their figure once more
 figure(PRIMER, ow('data', 'nothing', 0.0), 0.45, step=0.3, ring=0.6, last=1.2)
@@ -308,27 +290,13 @@ LV[0] = 0.9
 bw = lambda lid, word, off=0: W('beside', lid, word, off)
 bc = lambda lid, off=0: G('beside', lid, off)
 chord((D3, Fs3, A3, D4), S0('beside') + 0.2, 0.55, step=0.16, ring=2.2)
-card(bw('ivy', 'Ivy', -0.1), 0.004, px(1400))
-click(bw('jun', 'opens', -0.3), 0.003, px(1430))
-card(bc('pair', 0.3), 0.0035, px(1630))
-keys(bw('pair', 'types', 0.0), 1.2, 0.003, px(960))
 sw = bw('pair', 'swap', 0.0)
 figure((A4, E4), sw, 0.45, step=0.45, ring=0.6, last=1.2, pans=(px(1160) * 0.5, px(760) * 0.5))
 figure((E3, A3), sw, 0.5, step=0.45, ring=0.6, last=1.2, pans=(px(760) * 0.5, px(1160) * 0.5))
-for (word, off, x) in (('check', -0.2, 370), ('clearer', -0.2, 960), ('better', -0.2, 1550)):
-    card(bw('small', word, off), 0.0035, px(x))
-for (word, off, x) in (('Noor', -0.1, 370), ('Sam', -0.1, 960), ('Sam', 0.5, 1550)):
-    ticked(bw('review', word, off), 0.004, px(x))
-card(bw('fifth', 'fifth', -0.2), 0.0035, px(960))
-tap(bw('fourteen', 'renumbered', -0.1), 0.0035, px(960))
-ticked(bw('fourteen', 'goes', -0.1), 0.0045, px(960))
 chord((A3, Cs4, E4), bw('fourteen', 'goes', 0.0), 0.5, step=0.14, ring=1.4)
 figure((A3, B3, Cs4, E4, Fs4, A4), bw('count', 'twenty-five', -0.3), 0.45, step=0.4, ring=0.45, last=1.0)
-card(bw('own', 'writes', -0.2), 0.0035, px(960))
 mark(TUNE, bw('own', 'writes', 0.0), 0.5, step=0.2, ring=0.4, last=1.2)
-ticked(bw('own', 'reviews', -0.1), 0.004, px(960))
 wheel(A2, bw('own', 'reviews', 0.0), 0.6, None, ring=1.4)
-card(bw('xp', 'extreme', -0.2), 0.0035, px(960))
 chord((A2, E3, A3, Cs4, E4), bw('xp', 'two', 0.0), 0.5, step=0.14, ring=2.2, until=E('beside'))
 
 # 3. Two hours every Thursday: the chapter turns on E major; the tools' docs, a card each; the March weeks stacked, a card each, and F sharp
@@ -339,22 +307,10 @@ LV[0] = 0.9
 tw = lambda lid, word, off=0: W('thursday', lid, word, off)
 tc = lambda lid, off=0: G('thursday', lid, off)
 chord((E3, Gs3, B3, E4), S0('thursday') + 0.2, 0.5, step=0.16, ring=2.0)
-card(tc('tools', 0.1), 0.0035, px(590)); card(tc('tools', 0.4), 0.0035, px(1330))
 q0 = tc('wait', -0.2)
-for i in range(3):
-    card(q0 + 0.3 + i * 0.35, 0.003, px(930 + 60 * i))
 chord((Fs3, A3), tw('wait', 'never', 0.0), 0.45, step=0.2, ring=1.4)
-card(tc('time', -0.2), 0.0035, px(800))
-tap(tw('time', 'two', -0.1), 0.0035, px(1013))
 chord((A3, Cs4, E4, A4), tw('time', 'two', 0.0), 0.5, step=0.13, ring=1.8)
-card(tw('helena', 'meeting', -0.2), 0.0035, px(1013))
-slide(tw('helena', 'offered', -0.2), 1.2, 0.0035, px(1100))
-click(tw('pick', 'Databricks', -0.1), 0.003, px(700))
-slide(tw('try', 'try', -0.1), 1.0, 0.003, px(1300))
-pen(tw('try', 'write', 0.1), 0.8, 0.004, px(960), 3)
-card(tw('ivy', "sensors'", -0.1), 0.004, px(1100))
 spoke(Cs5, tw('ivy', 'number', 0.0), 0.45, px(1100) * 0.4, ring=1.6)
-card(tw('read', 'guide', -0.2), 0.0035, px(1040)); card(tw('read', 'notes', -0.2), 0.0035, px(1540))
 
 # 4. Teach it to keep it: the chapter turns on A major, rising; her card; her page, and a pen for each part she teaches; the two things she
 #    couldn't explain, ticked as she learns them: the note found and the one beside it; the study's card; Freire's words in the circle's
@@ -364,19 +320,11 @@ LV[0] = 0.9
 hw = lambda lid, word, off=0: W('teach', lid, word, off)
 hc = lambda lid, off=0: G('teach', lid, off)
 figure((A3, Cs4, E4), S0('teach') + 0.3, 0.5, step=0.22, ring=0.6, last=1.6)
-card(S0('teach') + 0.7, 0.0035, px(450))
-card(hw('may', 'page', -0.2), 0.004, px(1510))
-for lid, word in (('peak', 'most'), ('gap', 'zero'), ('heads', 'heads')):
-    pen(hw(lid, word, -0.2), 0.7, 0.004, px(1510), 3)
 l0 = hw('ready', 'learned', -0.1)
-ticked(l0, 0.004, px(1240)); ticked(l0 + 0.2, 0.004, px(1200))
 figure((A4, B4), l0 + 0.1, 0.5, step=0.45, ring=0.7, last=1.4)
-card(hc('study', 0.2), 0.0035, px(960))
-card(hc('freire', 0.3), 0.0035, px(960))
 figure((A3, B3, Cs4), hw('freire', 'whoever', 0.0), 0.5, step=0.3, ring=0.6, last=1.0)
 figure((Cs5, B4, A4), hw('freire', 'and', 0.1), 0.45, step=0.3, ring=0.6, last=1.4)
 sa = hw('spread', 'same', -0.2)
-ticked(sa, 0.004, px(960))
 for i, (m, x) in enumerate(zip((A2, E3, A3, Cs4, E4), (260, 610, 960, 1310, 1660))):
     (wheel if m < A3 else spoke)(m, sa + 0.1 + 0.16 * i, 0.5, px(x) * 0.6, ring=2.2 - 0.16 * i, until=E('teach'))
 
@@ -388,13 +336,7 @@ nw = lambda lid, word, off=0: W('two', lid, word, off)
 nc = lambda lid, off=0: G('two', lid, off)
 a0 = nw('absence', 'absence', -0.3)
 wheel(Fs2, a0 + 0.3, 0.6, None, ring=0.7, room=0.12); spoke(Cs4, a0 + 0.35, 0.4, None, ring=0.6, room=0.1)
-card(nc('list', 0.1), 0.004, px(880))
-card(nw('pairs', 'write', -0.2), 0.0035, px(1440))
-pen(nw('pairs', 'step', -0.1), 1.2, 0.004, px(1440), 4)
-tap(nw('june', 'every', -0.1), 0.0035, px(1100))
 figure((A3, B3), nw('june', 'two', 0.0), 0.5, step=0.45, ring=0.7, last=1.4)
-tap(nw('ivy', "Ivy's", -0.1), 0.0035, px(1300))
-ticked(nw('away', 'goes', -0.2), 0.0045, px(1670))
 chord((A2, E3, A3, Cs4, E4), nw('away', 'goes', 0.0), 0.5, step=0.14, ring=2.0, until=E('two'))
 
 # 6. Why it works: the chapter turns on E major; the cards of what's known, one each; the newcomer moving in from the edge of the real
@@ -404,16 +346,11 @@ LV[0] = 0.9
 yw = lambda lid, word, off=0: W('why', lid, word, off)
 yc = lambda lid, off=0: G('why', lid, off)
 chord((E3, B3, E4, Gs4), S0('why') + 0.3, 0.5, step=0.16, ring=2.0)
-card(yc('trades', 0.1), 0.0035, px(960))
-card(yw('lave', 'Jean', -0.1), 0.0035, px(460))
 for word, m in (('edge', E4), ('tasks', A4), ('beside', Cs5)):
     spoke(m, yw('edge', word, 0.0), 0.45, px(1350) * 0.4, ring=1.1)
-card(yw('ericsson', 'Anders', -0.1), 0.0035, px(960))
-card(yc('rule', 0.1), 0.0035, px(960))
 wheel(A2, yw('rule', 'seventy', 0.0), 0.6, px(780) * 0.4, ring=2.6)
 spoke(E4, yw('twenty', 'twenty', 0.0), 0.45, px(1380) * 0.4, ring=1.8)
 spoke(A4, yw('twenty', 'ten', 0.0), 0.45, px(1500) * 0.4, ring=1.6)
-slide(yw('docs', 'work', -0.2), 1.0, 0.003, px(1260))
 
 # 7. On Monday: back in Angicos, the circle's room: the tune on the larger wheel, low, as their own words come back; Ivy's three, a tick
 #    each; the four things to do, a card each; and the close: the tune on both wheels at once, its last note held as A major into the end
@@ -422,12 +359,46 @@ LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
 mark(tuple(m - 24 for m in TUNE), mw('back', 'own', 0.0), 0.6, step=0.26, ring=0.5, last=1.6)
-for word in ('learned', 'taught', 'second'):
-    ticked(mw('ivy', word, -0.1), 0.004, px(1250))
-card(mc('real', 0.3), 0.0035, px(400))
-card(mw('step', 'small', -0.1), 0.0035, px(960))
-card(mw('time', 'calendar', -0.2), 0.0035, px(1520))
-card(mw('teach', 'Write', -0.1), 0.0035, px(960))
 cl = mw('last', 'teach', 0.4)
 mark(TUNE, cl, 0.55, step=0.24, ring=0.5, last=5.0, bass=tuple((m - 24, i, 0.5 if i < 6 else 5.0) for i, m in enumerate(TUNE)), until=TOT)
 chord((Cs4, E4), cl + 0.24 * 6, 0.45, step=0.0, ring=5.0, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'O': ('circles', 'carmen', 'lw_boardO'), 'A': ('teach', 'ivy', 'lw_boardA'), 'B': ('why', 'carmen', 'lw_boardB'),
+                    'N1': ('beside', None, 'lw_note1'), 'N2': ('thursday', None, 'lw_note2'), 'N3': ('teach', None, 'lw_note3'),
+                    'N4': ('two', None, 'lw_note4'), 'N5': ('why', None, 'lw_note5'), 'N6': ('monday', None, 'lw_note6')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+for name in ('O', 'A', 'B'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4', 'N5', 'N6'):
+    written(name, scratch, 0.004)
+# the chat between Graham and Helena: a blip as each message arrives on Graham's phone, or goes from it
+_g = W('thursday', 'helena', 'a meeting', -0.6)
+pop(_g + 0.2, 0.0022, px(1060)); pop(W('thursday', 'helena', 'another time', -0.8), 0.0022, px(1060), False)
+pop(G('thursday', 'helena') + _DUR['thursday/helena'] + 0.2, 0.0022, px(1060))

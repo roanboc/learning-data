@@ -394,7 +394,9 @@ knock(pTags + 0.85, 0.012, P(1230)); hp(57, pTags + 0.9, 0.012, P(1230))
 #    its card. Clara's room: a soft knock as she nods for "it passed" (since 4 November 2026 without the fifth again, six seconds after
 #    the last)
 S = 'scorecard'
-pScr, pFill = L(S, 0.9), L(S, 1.4)
+# the scorecard comes close, and fills in, as the voice says "writes" (since 18 November 2026: Yusuf's office is seen first, for a
+# second after the chapter's crossfade, as the voice says "Now the scorecard"), so the patter and the F come with it
+pScr, pFill = W(S, 'writes', 'writes', -0.2), W(S, 'writes', 'writes', 0.3)
 comes(UNI, pFill + 0.8, 5.6, 0.022)
 for k in range(24):
     tap(pFill + 3.4 * (k + 0.5) / 24 + 0.03 * ((k * 5) % 3), 0.004, P(500 + (k * 137) % 900))

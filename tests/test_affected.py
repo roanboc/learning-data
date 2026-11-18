@@ -72,6 +72,18 @@ class SelectionTests(unittest.TestCase):
         self.assertIn("off-the-shelf-en", keys)
         self.assertNotIn("inner-life-of-data-en", keys)
 
+    def test_a_page_whose_links_only_take_new_versions_is_not_browser_checked(self):
+        # A changed player gives every page that loads it a new ?v=: the player picks those pages itself, so the version alone
+        # must not pick the page (a shared stylesheet's version is on every page of the site).
+        page = "site/when-things-go-wrong/silent-change/index.html"
+        now = (ROOT / page).read_text(encoding="utf-8")
+        with patch.object(affected.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, stdout=now.replace("?v=", "?v=0"), stderr="")):
+            self.assertTrue(affected.versions_only(page, "BASE"))
+            self.assertEqual(affected.pages([page], "BASE"), set())
+        with patch.object(affected.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, stdout=now.replace("<main>", "<main> "), stderr="")):
+            self.assertFalse(affected.versions_only(page, "BASE"))
+            self.assertEqual(affected.pages([page], "BASE"), {"when-things-go-wrong/silent-change/"})
+
     def test_player_only_plan_skips_sound_and_frames_locally(self):
         p = self.plan("site/assets/off-the-shelf/film.js")
         self.assertEqual([(f["key"], f["checks"]) for f in p["films"]], [("off-the-shelf-en", "player")])

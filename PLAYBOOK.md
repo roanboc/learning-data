@@ -403,6 +403,7 @@ What *From words to data*, seven films made together, added.
 - [ ] Captions are generated in every language.
 - [ ] Logos are unaltered and credited, and the licences are stated.
 - [ ] The poster is looked at after `tools/publish.py` draws it: its moment comes after every fade has settled, so no two texts show in one place. *Who is it?*'s first poster caught a date changing into another.
+- [ ] After `tools/publish.py`, `site-tools/build_series.py` runs again, so every page links the new player and poster by their versions: a browser keeps a script or a picture for four hours, and a fix linked by a bare name reaches a phone that saw the page that day only hours after it merged (*Measure the work*, 18 November 2026). `site-tools/check_site.py` fails a link without its file's version.
 - [ ] After any change to the player, the poster is drawn again from it (`tools/publish.py`, with `--keep-sound` when the sound didn't change): `site-tools/check_site.py` fails a poster drawn from another player.
 - [ ] Pause and think packs are written with unquoted keys (`q:`, `opts:`, `why:`), and the film's page counts its questions.
 - [ ] Each Pause and think question has one right answer (`ok:true`) and one near miss (`near:true`), options of like length and detail, and right answers in different places (`check_site.py` checks it); read each as a newcomer: is the near miss wrong for a reason the film gives?

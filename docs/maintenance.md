@@ -84,6 +84,17 @@ Fetch remembers verified local audio in ignored `.cache/audio-state.json`. After
 
 Automatic Pages deployment follows a successful **Checks** run on a push to `main`, and checks out that exact SHA. It restores all audio, validates the assembled site, then uploads the Pages artifact. An explicitly requested deployment also restores and validates the site.
 
+## Every link carries its file's version
+
+The site's host lets a browser keep a script, a stylesheet or a picture for four hours, and a page for ten minutes. A page that linked its film's player by a bare name (`assets/<key>/film.js`) kept playing the player from before a fix for up to four hours after the fix merged: on 18 November 2026, 66 minutes after *Measure the work* was fixed, the cars still drove through each other at 1:24 on a phone that had seen the page that morning.
+
+So every page links the site's own scripts, stylesheets and pictures by a hash of each file: `film.js?v=<first 10 hex of its sha256>`. `site-tools/build_series.py` writes the versions on every page of the site, generated or written by hand (`stamp()` and `site_files()`), and the labs engine that fetches a film's player and words as a lab opens asks for them by the versions the page gives it (`data-films`, `v` and `lv`). A changed file gets a new address, and the page, kept ten minutes at most, fetches it.
+
+- After `tools/publish.py`, or any change to a file under `site/assets/`, run `python site-tools/build_series.py`. `site-tools/check_site.py` fails a page whose link lacks its file's current version (*Versions*), and a page that isn't what `build_series.py` makes.
+- A shared file, such as `site.css`, gives every page a new version. `.github/scripts/affected.py` doesn't browser-check a page whose only change is its versions: the changed file picks the pages that load it.
+- Two branches that change the same shared file clash on its versions in the pages: merge `main` and run `build_series.py` again.
+- Soundtracks keep their bare names for now (`site-tools/smoke.py` reads a page's soundtrack by its bare name, and a change there browser-checks every page), and so do the pictures of places the watercolour player fetches as it plays, and the guided tour's files.
+
 ## Subsequent structural migrations
 
 The next independent changes are extracting shared rendering/check packages from older film folders, then moving one series into its module. After that, move labs and assessments from formatting-sensitive JavaScript packs to schema-validated authored data, generating the current packs for compatibility. Each migration should preserve output and use its own focused checks. The catalog and per-film audio pointers avoid a central list that every film author must edit.

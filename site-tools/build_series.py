@@ -53,7 +53,7 @@ A series or a film its author hasn't reviewed yet is a draft ("draft": true in i
 under their title (DRAFT, is_draft() and draft_note() below).
 Never edit the generated pages by hand: change the words, and run this again. check_site.py and smoke.py read every series
 through SERIES and films() below, so a new film, or a new series, needs no change to them."""
-import hashlib, html, json, math, pathlib, re, sys
+import hashlib, html, json, math, pathlib, posixpath, re, sys
 from media import available as media_available
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -954,13 +954,15 @@ def film_learn_section(lg, f, SL):
 def learn_films(lg, S, series, films_):
     """The films a series' own labs and scenarios cover (data-films, for its engine), by number: on the site, its title (t), key
     (k), page from the labs and scenarios pages (href) and chapters' starts, rounded up as a chapter link needs them (starts);
-    still being made, its title and "coming"."""
+    still being made, its title and "coming". An engine that fetches a film's player and words as a lab opens asks for them by
+    their versions (v, lv: asset_v()), as a page's links do."""
+    vers = lambda k, lg: {n: asset_v(f) for n, f in (("v", f"assets/{k}/film.js"), ("lv", f"assets/{k}/learn.{lg}.js")) if (WEB / f).is_file()}
     by = {x["index"] + 1: x for x in films_}
     coming = {n: t for n, t, _ in series.get(T(lg, "coming", "coming_es"), [])}
     out = {}
     for n in series_learn(S)["films"]:
         x = by.get(n)
-        out[n] = (dict(t=x["title"] if lg == "en" else x["site"]["title_es"], k=x["key"], href=f'../{x["key"]}/', starts={k: math.ceil(v) for k, v in x["starts"].items()})
+        out[n] = (dict(t=x["title"] if lg == "en" else x["site"]["title_es"], k=x["key"], **vers(x["key"], lg), href=f'../{x["key"]}/', starts={k: math.ceil(v) for k, v in x["starts"].items()})
                   if x else dict(t=coming.get(n, ""), coming=1))
     return json.dumps(out, ensure_ascii=False, separators=(",", ":"))
 
@@ -1443,7 +1445,7 @@ def project_box(lg, n, RL):
 # three open standards, line by line; and the check that holds each handoff. Each part is HTML that
 # reads on its own; assets/learn/project.js makes it interactive, and assets/learn/project.css draws it. The files' lines are
 # copied as they are in the project's repository (path, first line, lines): check_site.py compares them with a checkout of it.
-# The page loads the script and the stylesheet by a hash of each (asset_v()): after changing either, run this again.
+# The page loads the script and the stylesheet by a hash of each (stamp(), as every page): after changing either, run this again.
 PROJECT_LANES = {  # the folders: their number, name and what each says
     "in": ("00", ("Initiatives", "Iniciativas"), ("Where a question starts", "Donde empieza una pregunta")),
     "ea": ("10", ("Enterprise architecture", "Arquitectura empresarial"), ("Why, and where", "Por qué y dónde")),
@@ -2612,10 +2614,45 @@ def project_visuals(lg):
 
 
 def asset_v(rel):
-    """A short hash of a file under site/, for the link that loads it: a browser keeps a stylesheet or script for up to four
-    hours, but a page for ten minutes, so a changed file gets a new address and never meets a page it doesn't fit. Windows line
-    endings count as Unix ones, so a Windows checkout builds the same page."""
-    return hashlib.sha256((WEB / rel).read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")).hexdigest()[:10]
+    """A short hash of a file under site/, for the link that loads it: a browser keeps a stylesheet, a script or a picture for up
+    to four hours, but a page for ten minutes, so a changed file gets a new address and never meets a page it doesn't fit (a film's
+    page that played the player before its fix for four hours after the fix merged, 18 November 2026). Windows line endings count
+    as Unix ones in a text file, so a Windows checkout builds the same page. A file this script writes (data()) is hashed as it
+    will be written."""
+    if rel not in _V:
+        global _GEN
+        if _GEN is None:
+            _GEN = {}  # set first: data() makes pages' parts that may ask for a version
+            _GEN.update(data())
+        b = _GEN[rel].encode("utf-8") if rel in _GEN else (WEB / rel).read_bytes()
+        if rel.endswith(STAMP_TEXT):
+            b = b.replace(b"\r\n", b"\n")
+        _V[rel] = hashlib.sha256(b).hexdigest()[:10]
+    return _V[rel]
+
+
+_V, _GEN = {}, None
+STAMP_TEXT = (".js", ".css", ".svg")
+# a page's link to a script, a stylesheet or a picture of the site's own, with the version it carries, if any. A soundtrack keeps its
+# bare name for now: site-tools/smoke.py reads it as it is, and a change there browser-checks every page.
+STAMP = re.compile(r'(\s(?:src|href|poster)=")([^"#?:]+?\.(?:js|css|jpe?g|png|webp|svg|gif))(?:\?v=[0-9a-f]*)?"')
+
+
+def version_of(rel):
+    """The version a page links a file under site/ by (rel, its path there: asset_v()), or None for a file it links as it is."""
+    return asset_v(rel) if rel.startswith("assets/") and (rel in (_GEN or {}) or (WEB / rel).is_file()) else None
+
+
+def stamp(page, text):
+    """A page (its path under site/, its html) with every link to a script, a stylesheet or a picture under site/assets/ carrying
+    that file's version (version_of()): ?v=<hash>. Every page the site has goes through it (site_files()), and check_site.py fails a
+    link without its file's version, so a changed player, engine, stylesheet or poster is fetched again by every browser at once."""
+    here = posixpath.dirname(page)
+
+    def one(m):
+        v = version_of(posixpath.normpath(posixpath.join(here, m.group(2))))
+        return f'{m.group(1)}{m.group(2)}?v={v}"' if v else m.group(0)
+    return STAMP.sub(one, text)
 
 
 def project_page(lg):
@@ -2657,8 +2694,8 @@ def project_page(lg):
             body += '</ul>\n'
         body += '</div>\n'
     body += (f'</section>\n</main>\n<footer>{SOURCE[lg]}<p>{E(P["foot"])} {LOGOS[lg]} {NOTICES[lg]}</p></footer>\n'
-             f'<script src="{R}assets/ambient.js"></script>\n<script src="{R}assets/learn/project.js?v={asset_v("assets/learn/project.js")}" defer></script>\n</body>\n</html>\n')
-    return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n<link rel="stylesheet" href="{R}assets/learn/project.css?v={asset_v("assets/learn/project.css")}">\n</head>\n' + body
+             f'<script src="{R}assets/ambient.js"></script>\n<script src="{R}assets/learn/project.js" defer></script>\n</body>\n</html>\n')
+    return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n<link rel="stylesheet" href="{R}assets/learn/project.css">\n</head>\n' + body
 
 
 # The home page stays a first view: the film, its two other steps, then two ways on: the learning route, and how the films were
@@ -2776,7 +2813,7 @@ def blocks():
     for rel_path in HAND_PAGES:
         src = texts.get(rel_path) or (WEB / rel_path).read_text()
         texts[rel_path] = re.sub(r'<header class="top">.*?</header>', lambda m: hand_header(rel_path), src, count=1)
-    return list(texts.items())
+    return [(rel, stamp(rel, text)) for rel, text in texts.items()]
 
 
 def readme(S=FW):
@@ -2900,7 +2937,16 @@ def pages():
                     if (WEB / "assets" / f["key"] / "learn.en.js").exists():
                         for which in ("labs", "scenarios"):
                             out.append((f'{pre}{S["slug"]}/{f["key"]}/{which}/index.html', moved_page(lg, S, f, which)))
-    return out
+    return [(rel, stamp(rel, text)) for rel, text in out]
+
+
+def site_files():
+    """Every file this script makes or fills under site/: the generated pages, the hand-written pages with their blocks, the
+    generated data, and every other page of the site, as it is but with its links' versions (stamp()). check_site.py holds site/ to it."""
+    made = pages() + blocks() + data()
+    seen = {rel for rel, _ in made}
+    rest = sorted(p.relative_to(WEB).as_posix() for p in WEB.rglob("*.html"))
+    return made + [(rel, stamp(rel, (WEB / rel).read_text())) for rel in rest if rel not in seen]
 
 
 if __name__ == "__main__":
@@ -2915,7 +2961,7 @@ if __name__ == "__main__":
     if sys.argv[1:] == ["--search"]:  # for a local look or a browser check: the file isn't committed
         print(f"wrote the search's words for {write_search()} films"); sys.exit()
     n = 0
-    for rel, text in pages() + blocks() + data():
+    for rel, text in site_files():
         p = WEB / rel
         p.parent.mkdir(parents=True, exist_ok=True)
         if not p.exists() or p.read_text() != text:

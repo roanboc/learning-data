@@ -1,270 +1,293 @@
 /* ===== People before roles: the chapters, shot by shot =====
-   Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's recorded
-   again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
-   a room (later:true) lets what was there leave first; between rooms a shot dissolves. Over the gorge the camera moves, so the words
-   there are laid on the frame itself, not in the place. Sizes in the 1920 x 1080 frame. */
+   The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
+   says, and the words on the frame are where and when, a name, a number, or what someone says. The ideas the story opens with are
+   explained at the team's board by Carmen Vidal, a consultant; what to keep from a chapter is a page of Helena's notebook (pb_uni.js).
+   People also talk from where they are: Erin writes to Jun. And they meet face to face: Helena sits down with each of the seven
+   where they work. Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the
+   voice if it's recorded again; the score (tools/score.py) takes the same words. A shot is one stay in a place: the camera glides
+   between its keys; between places the film cuts where the same people go on, and dissolves where the whole picture changes (the
+   gorge and the university). Sizes are in the 1920 x 1080 frame; people's sizes come from each place's eye line. */
+const PB_LAST="Know the people before you plan the work.";
+const pb_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"People before roles",a);}};
+function pb_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
+const pb_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
+const pb_bub=(x,J,tt,t0,t1,lines,cam,o)=>PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));
+const pb_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
+// while a chapter shows a key idea apart from the scene (a board seen close, a page of the notebook), its kicker steps back
+const pb_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
+// kneeling to twist cord, seen from the side: both hands together in front, the cord running from them to the ground
+const PB_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+function pb_twisting(x,who,px,fl,tt,o){o=o||{};const U=PK.u,J=pbq_person(x,who,px,fl,pbq_h(fl),PB_TWIST,Object.assign({t:tt,holds:true},o,o.nod!=null?{}:pb_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0.7]},px%5)));
+  if(J&&J.hdN){const [hx,hy]=J.hdN,len=o.len||260,col=PK.S.tone(PBQ_PAL.rope),tw=Math.sin(tt*5)*2;x.save();x.lineCap="round";x.strokeStyle=U.css(PK.S.ink);x.lineWidth=6;
+    x.beginPath();x.moveTo(hx,hy+4);x.quadraticCurveTo(hx+len*0.4,fl-6+tw,hx+len,fl-2);x.stroke();x.strokeStyle=U.css(col);x.lineWidth=3.4;x.stroke();x.restore();}return J;}
+// a walker on the bridge from u0 to u1 between t0 and t1 (at rest outside it); returns [u, who, flip, tt] for pbq_bridge, or null
+const pb_on=(tt,who,u0,u1,t0,t1)=>{if(tt<t0-0.2||tt>t1+0.2)return null;const u=PK.u.lerp(u0,u1,PK.u.clamp((tt-t0)/(t1-t0),0,1));return[u,who,u1<u0,tt];};
+// someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
+const pb_alive=(tt,base,i,t0)=>{const ev=[],K=["look","nod","smile"];for(let k=0;k<30;k++){const at=(t0||0)+2.5+i*1.37+k*5.9,kind=K[(k+i)%3];ev.push(kind==="look"?[at,"look",2.2,[1,((k+i)%2?0.35:-0.2)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
+  return PK.face(tt,Object.assign({expr:"neutral",gaze:[1,0]},base||{}),ev);};
+// the bank's people: [who, x, floor, pose, flip, opts]
+function pb_bank(x,tt,list){list.slice().sort((a,b)=>a[2]-b[2]).forEach(([who,px,fl,pose,fl2,o],i)=>{o=o||{};if(pose==="twist")return pb_twisting(x,who,px,fl,tt,o);
+  const f=o.nod!=null?{}:pb_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},px%5);
+  pbq_person(x,who,px,fl,pbq_h(fl),pose||"stand",Object.assign({t:tt+(px%7),flip:!!fl2},o,f));});}
 
-const PB_TITLE="People before roles",PB_LAST="Know the people before you plan the work.";
-// the film's number and title at the top left, from the second chapter on
-function pb_kick(ctx,S,a,o){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"1",PB_TITLE,Object.assign({a},o||{}));}
-// a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
-function pb_sheet(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return null;
-  return lp_textSheet(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// lines that come in one by one, each at its own time: lp_textSheet's u
-const pb_u=(t,ts)=>ts.reduce((s,t0)=>s+ag_in(t,t0,0.5),0)/ts.length;
-// a tag that comes in at t0 and goes at t1 (null: stays)
-function pb_tag(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_tag(ctx,x,y,text,Object.assign({},o,{a}));}
-// a pill that springs in at t0 (and goes at t1)
-function pb_pill(ctx,t,t0,t1,x,y,text,o){const a=ag_in(t,t0,0.4)*(t1==null?1:1-ag_in(t,t1,0.4));if(a>0.004)lp_pill(ctx,x,y,text,Object.assign({},o,{a,k:t-t0}));}
-
-/* ---------------------------------------------------------------- the gorge's people, small, in the wide view */
-// someone walking the bridge from one bank to the other: from t0, over dur seconds; dir 1 from the left bank, -1 from the right.
-// They come along the bank, cross on the floor and go on along the other bank. Drawn between the bridge's far side and its near side
-function pb_walk(cc,tt,t0,dur,dir,who,o){const s=lerp(-0.2,1.2,(tt-t0)/dur);if(s<=-0.2||s>=1.2)return;const u=dir>0?s:1-s,a=clamp((s+0.2)/0.05,0,1)*clamp((1.2-s)/0.05,0,1);let p;
-  if(u<0){const k=(u+0.2)/0.2,d=pb_deck(0,o);p=[lerp(d[0]-196,d[0],k),lerp(PB_BANK.L.y-2,d[1],k)];}
-  else if(u>1){const k=(u-1)/0.2,d=pb_deck(1,o);p=[lerp(d[0],d[0]+196,k),lerp(d[1],PB_BANK.R.y-2,k)];}
-  else p=pb_deck(u,o);
-  pb_fig(cc,p[0],p[1],50,{who,pose:"walk",t:s*26,shadow:u<0||u>1?0.3:0,flip:dir<0,a});}
-// a few people by the stone bases on an ordinary day: nL on the left bank, nR on the right, a(i) each one's opacity
-function pb_few(ctx,nL,nR,a){a=a==null?1:a;const L=PB_BANK.L,R=PB_BANK.R;
-  for(let i=0;i<nL;i++)pb_fig(ctx,L.x0+250+i*38,L.y+2+(i%2)*4,50,{who:[4,1,6][i%3],pose:i===1?"sit":"stand",flip:i%2===0,a});
-  for(let i=0;i<nR;i++)pb_fig(ctx,R.x0+60+i*44,R.y+3+(i%2)*4,50,{who:[3,0,5][i%3],pose:i===2?"sit":"stand",flip:i!==1,a});}
-// the days of the renewal: both banks full, families sitting at their cord, men standing by the bases; a(i) each one's opacity
-const PB_CROWD=(()=>{const R=ag_rnd(1973),P=[];
-  for(let n=0;n<64;n++){const y=372+R()*88,x=24+R()*(y>436?372:446);P.push({x,y,side:0,who:(R()*8)|0,sit:R()<0.38,flip:R()<0.4});}
-  for(let n=0;n<54;n++){const y=376+R()*88,x=1896-R()*(y>440?372:440);P.push({x,y,side:1,who:(R()*8)|0,sit:R()<0.3,flip:R()<0.6});}
-  return P.sort((p,q)=>p.y-q.y);})();
-function pb_crowd(ctx,a){PB_CROWD.forEach((p,i)=>{const al=a(i,p);if(al>0.004)pb_fig(ctx,p.x,p.y,50*pb_near(p.y),{who:p.who,pose:p.sit?"sit":"stand",flip:p.flip,a:al});});}
-
-/* ---------------------------------------------------------------- 1. The bridge they went back to: the Apurímac, 1968 to today */
-scene("bridge",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),sun={wall:0},gr={light:"grey",wall:0};
-  const steelT=w("steel","steel",-0.3),truckT=w("need","cars",-0.5),wornT=c.left+1.4,rebT=c.rebuild,gatherT=c.today-0.1;
-  // the gorge from 1968 to 1970: the steel bridge comes, a truck crosses it, the last walker leaves the rope, and the rope sags and frays
-  const years=(x,tt)=>{const wo=ag_sine((tt-wornT)/3.2),o={age:lerp(0.5,1.3,wo),wear:0.55*wo,extra:{r1:12*wo}},su=ag_in(tt,steelT,2.4);
-    pb_few(x,2,3,1-ag_in(tt,c.need+0.4,1.6));
-    if(su>0.004){x.save();x.beginPath();x.rect(726,300,lerp(0,440,su),70);x.clip();pb_steel(x,{});x.restore();}
-    pb_truck(x,(tt-truckT)/5.2);pb_truck(x,(tt-truckT-7.5)/5.2);
-    pb_bridge(x,Object.assign({mid:cc=>pb_walk(cc,tt,c.steel-9,15,-1,3,o)},o));};
+/* ---------------------------------------------------------------- 1. The bridge they went back to */
+scene("bridge",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tS=c.steel-0.5,tL=c.left-0.6,tK=c.keeper-0.5,tD=c.did-0.6,tT=c.today-0.6,tU=c.turn-0.4,tA=c.data-0.6;
   ag_shots(ctx,S,t,sc.dur,[
-    // the gorge and the river; closer, the bridge of grass and people crossing it; wide again, both banks
-    {at:0,place:"pbGorge",keys:[[0,960,540,1.0],[c.rope-0.6,960,468,1.6],[c.only-0.5,960,540,1.0]],d:3.2,push:0,draw:(x,tt)=>{const o={age:0.3};
-      pb_few(x,2,3);
-      pb_bridge(x,Object.assign({mid:cc=>{pb_walk(cc,tt,c.rope-2.5,17,1,0,o);pb_walk(cc,tt,c.incas-1,17,-1,1,o);pb_walk(cc,tt,c.incas+3.5,17,1,6,o);pb_walk(cc,tt,c.only+0.5,17,-1,3,o);}},o));}},
-    // the bank: the cord a family brings, and the hands that make it new
-    {at:c.wear-0.3,place:"pbBank",keys:[[c.wear-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lp_person(x,PB_PEOPLE.woman,420,650,0.9,{t:tt,pose:"hold",hold:(cc,h)=>pb_coil(cc,h.near[0]+34,h.near[1]+58,92,{}),light:sun});
-      lp_person(x,PB_PEOPLE.builder,960,650,0.9,{t:tt+1.3,flip:true,light:sun});
-      lp_person(x,PB_PEOPLE.woman3,1500,650,0.9,{t:tt+2.1,flip:true,light:sun});}},
-    // 1968: the steel bridge, almost a hundred metres away, and a truck on it
-    {at:c.steel-0.4,place:"pbGorge",keys:[[c.steel-0.4,960,520,1.0],[c.steel+0.3,946,402,1.85]],d:3.0,dis:1.0,push:0,draw:years},
-    // 1970: under a grey sky, the rope bridge left to wear
-    {at:c.left-0.3,place:"pbGorgeGrey",keys:[[c.left-0.3,946,402,1.85],[c.left+0.5,958,452,1.72]],d:3.4,dis:1.6,push:0.02,draw:years},
-    // October 1972: the bank with nobody on it, last year's rope in the grass, and what the keeper said
-    {at:c.keeper-0.3,place:"pbBankGrey",keys:[[c.keeper-0.3,960,540,1.0]],dis:1.2,push:0,draw:(x,tt)=>{
-      pb_rope(x,pb_hang([-30,812],[720,838],16),20,{age:1.5,braid:true});
-      pb_pill(x,tt,w("keeper","October",-0.1),null,250,176,"October 1972",{col:LP.ink});
-      pb_sheet(x,tt,w("sad","My",-0.3),380,236,1160,{kick:"Luis Choqueneira, a keeper of the bridge",title:"“My people feel sad about abandoning the keshwa chaca for a new steel bridge upstream.”"},{light:null,pin:false});
-      pb_sheet(x,tt,rebT-0.2,380,496,1160,{title:"“So we're going to rebuild it when the New Year comes.”"},{col:LP.green,light:null,pin:false});}},
-    // the new year: the same bank in the sun, and the families back on it with their cord
-    {at:c.did-0.4,place:"pbBank",later:true,dis:0.8,keys:[[c.did-0.4,960,540,1.0]],push:0,draw:(x,tt)=>{
-      lp_person(x,PB_PEOPLE.woman,420,650,0.9,{t:tt,pose:"hold",hold:(cc,h)=>pb_coil(cc,h.near[0]+34,h.near[1]+58,92,{}),light:sun,a:ag_in(tt,c.did+0.1,0.6)});
-      lp_person(x,PB_PEOPLE.builder2,960,650,0.9,{t:tt+1.3,flip:true,light:sun,a:ag_in(tt,c.did+0.7,0.6)});
-      lp_person(x,PB_PEOPLE.woman2,1500,650,0.9,{t:tt+2.1,flip:true,light:sun,a:ag_in(tt,w("all","few",-0.2),0.6)});
-      pb_sheet(x,tt,w("all","Only",-0.3),560,150,800,{kick:"An elder of Huinchiri, asked in 2012",title:"“Only now does everyone come.”"},{col:LP.green,light:null,pin:false});}},
-    // today: each June, four communities, about a thousand people; and both bridges, side by side
-    {at:c.today-0.3,place:"pbGorge",keys:[[c.today-0.3,960,540,1.0],[c.unesco-0.4,960,476,1.45],[c.turn-0.5,950,452,1.3]],d:3.2,dis:1.2,push:0,draw:(x,tt)=>{const o={age:0};
-      pb_crowd(x,i=>ag_in(tt,gatherT+i*0.022,0.6));pb_steel(x,{});pb_truck(x,(tt-c.turn+0.6)/5.2);
-      pb_bridge(x,Object.assign({mid:cc=>{pb_walk(cc,tt,c.minka-1,18,1,0,o);pb_walk(cc,tt,c.minka+2,18,-1,5,o);pb_walk(cc,tt,c.unesco+1,18,1,2,o);pb_walk(cc,tt,c.unesco+4,18,-1,7,o);
-        pb_walk(cc,tt,c.died+2,18,1,4,o);pb_walk(cc,tt,c.died+5,18,-1,1,o);pb_walk(cc,tt,c.turn,18,1,3,o);}},o));}},
-    // and a data team: seven boxes with a role in each, or the seven people in them
-    {at:c.data-0.3,place:"pbTeam",keys:[[c.data-0.3,960,540,1.0]],dis:1.2,push:0,draw:(x,tt)=>{const ga=1-ag_in(tt,c.breath+0.2,0.8),pT=w("data","people",-0.5),kT=w("plan","Know",-0.3);
-      x.save();x.globalAlpha*=ga;
-      pb_chart(x,130,{wall:true,light:"day",a:ag_in(tt,c.data+0.1,0.4)*lerp(1,0.42,ag_in(tt,kT,0.8)),k:tt-c.data-0.1,boxes:7*clamp((tt-w("data","roles",-0.6))/1.0,0,1),
-        all:ag_io(tt,w("plan","boxes",-0.3),kT,0.5)});
-      pb_row(x,tt,PB_SEVEN.map((p,i)=>({who:p.who,ph:p.ph,x:PB_X7[i],flip:i>3,a:ag_in(tt,pT+i*0.2,0.6)})),{names:0});
-      x.restore();}}
+    // the gorge, the bridge of grass across it, people crossing; on the near bank, families with their cord
+    {at:0,place:"pbGorge",keys:[[0,960,560,1.0],[c.rope+0.2,960,420,1.3],[c.incas+1.6,960,540,1.0],[c.wear-0.2,420,640,1.25]],d:3,draw:(x,tt,cam)=>{
+      pbq_steel(x,0);pbq_bridge(x,{age:0.05,walkers:[pb_on(tt,"m3",0.04,0.96,0.6,22),pb_on(tt,"w4",0.96,0.04,5,27),pb_on(tt,"m5",0.04,0.7,17,30)].filter(Boolean)});
+      const tw=w("wear","many hands",-0.6);
+      pb_bank(x,tt,[["w1",170,900,"stand",false,{hold:pbq_coil,holds:true,expr:"neutral",gaze:[1,0.1]}],["m1",470,690,"clasp",false,{expr:"neutral",gaze:[1,0]}],
+        ["w2",300,800,"twist",false,{len:200}],["keeper",1700,880,"clasp",true,{expr:"neutral",gaze:[1,0.1]}],["w3",1560,740,"twist",true,{len:180}]]);}},
+    // 1968: a steel bridge, up the gorge; a truck crosses it, and the last walker leaves the rope
+    {at:tS,place:"pbGorge",keys:[[tS,420,640,1.25],[tS+2.2,960,460,1.25],[c.need+1.0,960,500,1.15]],d:3,draw:(x,tt,cam)=>{
+      const a=ag_in(tt,w("steel","steel bridge",-0.3),1.4),tr=U.clamp((tt-w("need","cars",-0.4))/5.5,0,1);pbq_steel(x,a,tt>w("need","cars",-0.4)&&tr<1?tr:null);
+      pbq_bridge(x,{age:0.1,walkers:[pb_on(tt,"m5",0.7,0.99,tS,w("need","few",0.6))].filter(Boolean)});
+      pb_bank(x,tt,[["m1",470,690,"clasp",false,PK.face(tt,{expr:"neutral",gaze:[1,0]},[[w("steel","steel",0.3),"look",3.2,[1,-0.4]]])]]);}},
+    // 1970: under a grey sky, the rope left to decay; a geographer writes it down
+    {at:tL,place:"pbGorgeGrey",later:true,keys:[[tL,960,520,1.12],[c.skill+0.4,960,560,1.0]],d:3,draw:(x,tt,cam)=>{
+      pbq_steel(x,1,null,true);pbq_bridge(x,{age:1,grey:true});
+      const wr=ag_io(tt,w("left","finds",-0.2),c.skill+1.4,0.5);
+      pb_bank(x,tt,[["geo",260,830,PK.poseMix("stand",PB_NOTE,wr),false,{underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("ink"):null,holds:true,expr:"think",gaze:[1,0.1+0.5*wr]}],
+        ["keeper",1720,860,"clasp",true,PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[c.skill+0.4,"look",2.4,[1,0.3]]])]]);}},
+    // October 1972: a keeper of the bridge tells two visitors what his people have decided
+    {at:tK,place:"pbGorgeGrey",later:true,keys:[[tK,960,540,1.0],[c.sad-0.4,560,560,1.1]],d:3,draw:(x,tt,cam)=>{
+      pbq_steel(x,1,null,true);pbq_bridge(x,{age:1,grey:true});
+      const s1=c.sad,s2=c.rebuild;
+      pb_bank(x,tt,[["v2",150,890,"listen",false,PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+1.6,"look",2.2,[1,0.2]],[s1+1.8,"nod"],[s2+0.6,"smile",3.0]])],["v1",225,770,PK.poseMix("listen",PB_NOTE,ag_in(tt,s2,0.5)),false,
+        Object.assign({underF:PK.inHand.notebook({}),hold:tt>s2+0.3?PK.inHand.pen("ink"):null,holds:true},PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+2.4,"nod"],[s1+1.0,"smile",2.0],[s2+0.5,"look",4,[1,0.5]]]))]]);
+      const Jk=pbq_person(x,"keeper",450,840,pbq_h(840),"clasp",{t:tt,flip:true,expr:pb_says(PK.exprMix("worry","smile",ag_in(tt,s2,0.6)),tt,s1+0.1,sc.ends.rebuild),gaze:[1,0]});
+      pb_bub(x,Jk,tt,s1+0.1,s2-0.3,["My people feel sad","about leaving the bridge."],cam,{dx:300});
+      pb_bub(x,Jk,tt,s2,tD-0.3,["We'll rebuild it","when the New Year comes."],cam,{dx:300});}},
+    // the new year: the families come back, each with its cord, and the bridge is made new
+    {at:tD,place:"pbGorge",later:true,keys:[[tD,960,540,1.0],[c.all+0.4,600,600,1.2]],d:3.2,draw:(x,tt,cam)=>{
+      const k=0.25+0.75*ag_in(tt,tD+1.0,6.0),ev=w("all","everyone",-0.3);pbq_steel(x,1);pbq_bridge(x,{age:0,k});
+      const walkIn=(who,x0,x1,t0,fl,flip)=>({fl,draw:cc=>pbq_walk(cc,who,tt,{x0,x1,t0,t1:t0+3.2,floor:fl,h:pbq_h(fl),arms:{aN:PB_CARRY.aN},then:PB_CARRY},{flip,hold:pbq_coil,holds:true,expr:"smile"})});
+      const L=[walkIn("w1",-160,170,tD+0.2,900,false),walkIn("m1",-160,430,tD+1.2,700,false),walkIn("w2",-160,300,ev,790,false),walkIn("m3",2080,1600,tD+0.8,760,true),walkIn("w3",2080,1760,ev+0.4,890,true)];
+      L.push({fl:860,draw:cc=>{const Jk=pbq_person(cc,"keeper",1500,840,pbq_h(840),"clasp",{t:tt,flip:true,expr:pb_says("smile",tt,ev-0.2,ev+1.6),gaze:[1,0]});pb_bub(cc,Jk,tt,ev-0.2,tT-0.3,["Only now","does everyone come."],cam,{dx:-110});}});
+      L.sort((a,b)=>a.fl-b.fl).forEach(i=>i.draw(x));}},
+    // each June, today: both banks full, families with their cord; people cross the new bridge
+    {at:tT,place:"pbGorge",later:true,keys:[[tT,600,600,1.2],[tT+2.4,960,540,1.0],[c.died-0.4,1480,580,1.1]],d:3,draw:(x,tt,cam)=>{
+      pbq_steel(x,1,U.clamp((tt-tT-2)/6,0,1));pbq_bridge(x,{age:0,walkers:[pb_on(tt,"m3",0.05,0.95,tT+0.5,tT+20),pb_on(tt,"w4",0.9,0.1,tT+3,tT+22)].filter(Boolean)});
+      const d1=c.died;
+      pb_bank(x,tt,[["w1",130,900,"stand",false,{hold:pbq_coil,holds:true,expr:"smile",gaze:[1,0.1]}],["w3",330,780,"twist",false,{len:150}],["m1",470,640,"clasp",false,{expr:"smile"}],
+        ["w2",180,620,"stand",false,{hold:pbq_coil,holds:true,expr:"smile"}],["keeper",1250,660,"clasp",true,{expr:"smile",gaze:[1,0.1]}],["w5",1640,780,"twist",true,{len:150}]]);
+      const Jb=pbq_person(x,"m2",1790,940,pbq_h(940),"clasp",Object.assign(pb_alive(tt,{gaze:[1,-0.1]},3,tT),{t:tt,flip:true,expr:pb_says("neutral",tt,d1+0.2,sc.ends.died)}));
+      pb_bub(x,Jb,tt,d1+0.2,tU-0.3,["If we stop preserving it,","it would be like if we died."],cam,{dx:-220});}},
+    // the steel carries a truck across; the rope, two people who meet in the middle and greet each other
+    {at:tU,place:"pbGorge",later:true,keys:[[tU,1480,580,1.1],[w("turn","together",-1.0),960,420,1.3]],d:2,draw:(x,tt,cam)=>{
+      pbq_steel(x,1,U.clamp((tt-tU)/4.5,0,1));const m=w("turn","together",-0.6);
+      pbq_bridge(x,{age:0,walkers:[pb_on(tt,"m1",0.2,0.46,tU-1,m),pb_on(tt,"w2",0.8,0.54,tU-1,m)].filter(Boolean)});}},
+    // a data team, read both ways: the chart of seven boxes on the wall, and the seven people in the room
+    {at:tA,place:"pbTeam",dis:1.0,keys:[[tA,1390,330,1.3],[w("data","people",-0.6),960,540,1.0],[c.breath,700,560,1.12]],d:3,draw:(x,tt,cam)=>{
+      pb_team(x,tt,{clock:9.4,show:PK.onScreen.chat(0.5,{}),marta:{work:1},people:[
+        {fl:846,draw:cc=>PK.person(cc,"noor",930,846,pb_hT(846),"ease",Object.assign({t:tt},pb_alive(tt,{gaze:[1,0.1]},0,tA)))},
+        {fl:880,draw:cc=>PK.person(cc,"yusuf",1520,880,pb_hT(880),"clasp",Object.assign({t:tt+2,flip:true},pb_alive(tt,{expr:"smile"},1,tA)))},
+        {fl:915,draw:cc=>PK.seated(cc,"erin",1060,915,pb_hT(915),"sit",Object.assign({t:tt+3},pb_alive(tt,{},2,tA)))},
+        {fl:950,draw:cc=>PK.person(cc,"tomas",1700,950,pb_hT(950),"ease",Object.assign({t:tt+5,flip:true},pb_alive(tt,{expr:"smile",gaze:[1,0.1]},3,tA)))}]});}}
   ]);
-  setScreen(ctx,S);
-  pb_tag(ctx,t,w("where","Apurímac",-0.3),c.rope-0.7,110,176,"The Apurímac river · Quehue, Cusco, Peru",{col:LP.ink});
-  pb_tag(ctx,t,w("rope","keshwa",-0.3),c.only-0.7,960,826,"Q'eswachaka: a bridge of twisted grass",{align:"center",col:LP.ink});
-  pb_pill(ctx,t,steelT,c.left-0.5,960,166,"1968",{col:LP.ink});
-  pb_tag(ctx,t,w("steel","almost",-0.2),c.left-0.5,960,240,"A steel bridge, almost 100 metres away",{align:"center",col:LP.ink});
-  pb_pill(ctx,t,c.left+0.2,c.keeper-0.6,960,166,"1970",{col:LP.ink});
-  pb_tag(ctx,t,w("left","decaying",-0.2),c.keeper-0.6,960,240,"Found decaying: not raised for a few years",{align:"center",col:LP.amber});
-  const fa=ag_io(t,w("today","thousand",-0.4),c.unesco-0.6,0.4);
-  if(fa>0.004)lp_figure(ctx,700,110,520,{kick:"Each June",num:"≈ 1,000",label:"people of four communities, each family with its own cord"},{col:LP.orange,light:null,pin:false,a:fa,k:t-w("today","thousand",-0.4)});
-  pb_sheet(ctx,t,w("minka","minka",-0.2),1290,110,520,{kick:"Minka",title:"Unpaid work, shared for everyone's benefit"},{light:null,pin:false,out:c.unesco-0.6});
-  pb_sheet(ctx,t,w("unesco","strengthening",-0.5),410,140,1100,{kick:"UNESCO, 2013",title:"“…a means of strengthening their social links and not simply as a transport route”"},{light:null,pin:false,out:c.died-0.5});
-  pb_sheet(ctx,t,w("died","If",-0.4),410,140,1100,{kick:"Victoriano Arizapana, a bridge builder",title:"“If we stop preserving it, it would be like if we died.”",sub:"Interview, October 2014"},{light:null,pin:false,out:c.turn-0.5});
-  pb_tag(ctx,t,w("turn","carry",-0.3),c.data-0.6,948,296,"Steel: a way across",{align:"center",col:LP.ink});
-  pb_tag(ctx,t,w("turn","together",-0.4),c.data-0.6,960,716,"Rope: a way to be together",{align:"center",col:LP.green});
-  lp_title(ctx,S,t,c.breath+0.2,PB_TITLE,"The first question: who is here?","Leading data people · People first");
+  pb_card(ctx,S,t,c.where+0.4,c.incas-0.4,{kick:"Quehue, Cusco, Peru",title:"The Apurímac river",sub:"Q'eswachaka: a bridge of twisted grass"},{y:40,mid:true});
+  pb_card(ctx,S,t,w("steel","steel",-0.2),c.need+2.2,{kick:"1968",title:"A steel bridge",sub:"almost 100 metres away"},{y:40,mid:true});
+  pb_card(ctx,S,t,c.left+0.3,c.skill+1.4,{kick:"1970",title:"Found decaying",sub:"not raised for a few years",col:PK.C.amber},{y:40,mid:true});
+  pb_card(ctx,S,t,c.keeper+0.2,c.sad-0.6,{kick:"October 1972",title:"One of the bridge's keepers"},{y:40,mid:true});
+  pb_card(ctx,S,t,c.today+0.2,c.minka-0.4,{kick:"Each June",title:"About 1,000 people",sub:"four communities, each family with its cord",col:PK.C.orange},{y:40,mid:true});
+  pb_card(ctx,S,t,c.minka+0.1,c.unesco-0.4,{kick:"Minka",title:"Unpaid work, shared",sub:"for everyone's benefit",col:PK.C.blue},{y:40,mid:true});
+  pb_card(ctx,S,t,c.unesco+0.1,c.died-0.5,{kick:"UNESCO",title:"It strengthens their ties",sub:"not simply a way across",col:PK.C.green},{y:40,mid:true});
+  PK.title(ctx,S,t,c.breath+0.2,"People before roles","Know the people first","Leading data people · People first",{side:"right"});
 });
 
 /* ---------------------------------------------------------------- 2. A chart and a list */
-// Helena at her desk, the two sheets lying on it
-function pb_helena(x,tt,light){lp_person(x,"helena",570,676,1.0,{t:tt,cut:806,light});lp_table(x,150,814,840);pb_slivers(x);}
-// her desk from above: the pencil, the list and the chart; ch and li as pb_chart and pb_list take them
-function pb_desk(x,ch,li){pb_pencil(x,236,818,330,-0.17);pb_list(x,li);pb_chart(x,160,ch);}
-// the plan she could make by lunch: a dashed line from the list to each box, drawn as far as u
-function pb_fan(x,u,a){if(a<=0.004||u<=0.004)return;x.save();x.globalAlpha*=a;x.strokeStyle=rgba(LP.amber,1);x.lineWidth=3.4;x.lineCap="round";x.setLineDash([12,11]);
-  for(let i=0;i<7;i++){const k=ag_sine(clamp(u*1.6-(6-i)*0.1,0,1));if(k<=0.004)continue;const a0=[1200+i*88,586],b=[PB_X7[i],456],m=[(a0[0]+b[0])/2,548];x.beginPath();
-    for(let n=0;n<=30;n++){const v=n/30*k,q=1-v,px=q*q*a0[0]+2*q*v*m[0]+v*v*b[0],py=q*q*a0[1]+2*q*v*m[1]+v*v*b[1];n?x.lineTo(px,py):x.moveTo(px,py);}x.stroke();}
-  x.restore();}
-scene("chart",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"},deskT=w("helena","Two",-0.4);
+scene("chart",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tH=c.helena-0.6,tB=c.boxes-0.5,tZ=w("boxes","It doesn't",-0.5),tR=w("iso","value",-1.4),tE=c.before-0.4;
+  const BA=PK.pace(ctx,"carmen",pb_boardA(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // Monday 1 February: Helena at her desk, two sheets lying on it
-    {at:0,place:"pbHelena",keys:[[0,960,540,1.0]],push:0,draw:(x,tt)=>{
-      pb_helena(x,tt,mo);
-      pb_sheet(x,tt,c.mon+0.4,1040,170,720,{kick:"Monday 1 February 2027",title:"Helena Novak",lines:["Starts as the university's data manager"]},{light:"morning",u:ag_in(tt,w("helena","starts",-0.1),0.5)});}},
-    // the two sheets from above: the chart of seven boxes, and the list of 46 open requests
-    {at:deskT,place:"pbDesk",keys:[[deskT,960,540,1.0]],dis:0.9,push:0,draw:(x,tt)=>{const fT=w("tempt","plan",-0.3),sT=w("sort","sort",-0.2),nT=w("sort","changes",-0.3),bT=w("boxes","boxes",-0.3);
-      pb_desk(x,{boxes:7*clamp((tt-w("two","seven",-0.3))/1.1,0,1),roles:ag_in(tt,w("two","role",-0.3),0.6),lines:ag_io(tt,w("boxes","reports",-0.3),w("boxes","doesn't",-0.2),0.5),
-        hi:clamp(Math.floor((tt-bT)/0.22),0,6),hiA:ag_io(tt,bT,bT+7*0.22,0.2)},
-        {num:ag_in(tt,w("two","forty-six",-0.3),0.4),u:ag_in(tt,w("two","forty-six",-0.1),1.4),sorted:(tt-sT)/1.8});
-      pb_fan(x,(tt-fT)/1.6,1-ag_in(tt,nT,0.7));
-      pb_tag(x,tt,w("tempt","lunch",-0.3),nT,470,650,"A plan for everyone, by lunch?",{align:"center",col:LP.amber});
-      pb_pill(x,tt,sT+1.2,null,900,650,"Sorted that day",{col:LP.green,icon:"tick",size:28});
-      pb_tag(x,tt,w("sort","Every",-0.2),null,900,728,"As Every area, one job shows",{align:"center",col:LP.ink});
-      pb_tag(x,tt,nT+0.3,null,470,650,"Nobody's work changed",{align:"center",col:LP.ink});}},
-    // back in her room: the standard on putting people first
-    {at:c.iso-0.3,place:"pbHelena",keys:[[c.iso-0.3,960,540,1.0]],dis:1.0,push:0,draw:(x,tt)=>{
-      pb_helena(x,tt,mo);
-      pb_sheet(x,tt,w("iso","standard",-0.3),1040,170,760,{kick:"ISO 27500:2016",title:"The human-centred organization",lines:["Value people, and make their work meaningful","Individual differences: a strength"]},
-        {light:"morning",u:pb_u(tt,[w("iso","value",-0.2),w("iso","differences",-0.3)]),out:c.before-0.3});
-      const k0=w("before","sits",-0.3),ka=ag_in(tt,k0,0.35);if(ka>0.004)pb_week(x,1040,150,760,{light:"morning",a:ka,k:tt-k0,dots:0});}}
+    // Monday morning: Helena walks up the path to the building
+    {at:0,place:"pbCampus",keys:[[0,960,540,1.0],[tH,1100,560,1.08]],d:3,draw:(x,tt,cam)=>{
+      PK.walk(x,PK.extra(5),tt,{x0:1420,x1:2100,t0:1.0,t1:9,floor:PB_CA.way(1500),h:pb_hC(PB_CA.way(1500))},{far:0.3});
+      PK.walk(x,"helena",tt,{x0:200,x1:1440,t0:0.4,t1:tH+0.6,floor:xx=>PB_CA.way(xx),h:fl=>pb_hC(fl)},{expr:"smile",gaze:[1,0]});}},
+    // at her corner: two sheets wait on the round table
+    {at:tH,place:"pbCorner",cut:true,keys:[[tH,960,540,1.0],[c.two+0.4,900,560,1.08]],d:3,draw:(x,tt,cam)=>{
+      const ch=w("two","chart",-0.3),li=w("two","forty-six",-0.3),pick=ag_io(tt,c.tempt+0.4,w("sort","changes",0),0.5),so=ag_in(tt,w("sort","sort",0),1.6);
+      const J=pb_corner(x,tt,{t0:tH,sheets:true,write:pick,he:PK.exprMix("smile","think",ag_in(tt,ch,0.6)),hg:[1,0.5],hf:PK.face(tt,{expr:"smile",gaze:[1,0.5]},[[tH+1.6,"look",2.4,[1,0.1]],[c.two+1.0,"nod"],[c.tempt-1.2,"look",2.2,[1,0.2]],[w("sort","changes",0.4),"look",3,[1,0.1]]])});
+      pb_name(x,J.helena,tt,c.helena,ch-0.4,"Helena Novak","Data manager",170);
+      PK.callout(x,1070,40,720,300,[950,628],ag_io(tt,ch,c.sort+0.2,0.4),(cc,bx,by,bw,bh)=>pb_chartCard(cc,bx,by,bw,bh,{lit:ag_in(tt,ch+0.3,1.4)}));
+      PK.callout(x,1150,450,600,320,[810,628],ag_io(tt,li,tB-0.3,0.4),(cc,bx,by,bw,bh)=>pb_listCard(cc,bx,by,bw,bh,{sort:so}));}},
+    // that day, Carmen Vidal at the team's board, Helena at the side with her notebook; Sam and Jun turned to listen
+    {at:tB,place:"pbTeam",cut:true,keys:[[tB,960,540,1.0],[tB+0.4,1010,530,1.08]],d:2.6,draw:(x,tt,cam)=>{
+      const R=pb_lesson(x,tt,{clock:11.0,rows:BA,say:[[c.boxes,sc.ends.boxes]]});pb_name(x,R.at,tt,tB+0.4,tZ-0.2,"Carmen Vidal","Consultant");}},
+    // the board, close: what a chart shows, and a standard for putting people first
+    {at:tZ,cut:true,place:"pbBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[tZ,sc.ends.boxes],[c.iso,sc.ends.iso]]});}},
+    // the room again: Helena writes it down, and decides to sit down with each of the seven first
+    {at:tE,cut:true,place:"pbTeam",keys:[[tE,1010,530,1.08],[sc.dur-0.5,1180,560,1.14]],d:2,draw:(x,tt,cam)=>{
+      pb_lesson(x,tt,{clock:11.3,rows:BA,note:ag_in(tt,tE+0.2,0.5),helena:PK.face(tt,{expr:"think",gaze:[1,0.5]},[[c.before+1.8,"nod"]]),
+        sam:PK.face(tt,{expr:"listen",gaze:[1,-0.25]},[[c.before+0.8,"look",2.4,[1,0.2]]]),jun:PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[c.before+1.2,"smile",2.0]])});}}
   ]);
-  setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,0.8,deskT-0.4,0.5)});
-  pb_kick(ctx,S,ag_in(t,0.6,0.6));
+  pb_imagined(ctx,S,t,0.2,tH-0.3,"The university, 2027 · imagined");
+  pb_card(ctx,S,t,c.mon+0.2,tH-0.3,{kick:"Monday 1 February 2027",title:"Helena's first day"});
+  pb_kick(ctx,S,ag_in(t,1.0,0.6)*(1-pb_apart(t,[[tZ,tE]])));
 });
 
 /* ---------------------------------------------------------------- 3. Four questions, seven people */
-// each of the seven where they work: on which side of the frame, the cue for their sheet, and what it says
-const PB_HOURS=[
-  {id:"noor",who:"noor",cue:"proud",words:{kick:"Proud of",title:"Her map of the university's data",lines:["She'd like more people to argue with it"]},line:"She'd"},
-  {id:"sam",who:"sam",cue:"proud",words:{kick:"Proud of",title:"Each morning the data is simply there",lines:["And nobody has to ask"]},line:"nobody"},
-  {id:"jun",who:"jun",cue:"proudest",words:{kick:"Proudest",title:"When someone stops asking him",lines:["Because now they know"]},line:"because"},
-  {id:"yusuf",who:"yusuf",cue:"Ask",words:{kick:"To work well with him",title:"“Ask me at the start, and I can say yes more often.”"}},
-  {id:"marta",who:PB_MARTA,cue:"would",words:{kick:"Would like more of",title:"Hearing what became of a number",lines:["After she sends it"]},line:"after"},
-  {id:"erin",who:PB_ERIN,cue:"started",words:{kick:"What she offers",title:"Started the same week as Marta",lines:["They still have lunch on Thursdays"]},line:"They"},
-  {id:"tomas",who:PB_TOMAS,cue:"can tell",words:{kick:"Can tell you",title:"Who reads each report",lines:["And what they do with it"]},line:"what"}];
-const PB_AHEAD=1.55;
-scene("seven",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"};
-  const shots=[
-    // Helena's week, and the four questions she asks each of the seven
-    {at:0,place:"pbHelena",keys:[[0,960,540,1.0]],push:0,draw:(x,tt)=>{
-      pb_helena(x,tt,mo);
-      pb_week(x,1040,150,760,{light:"morning",dots:2*ag_in(tt,w("hour","Monday",-0.1),0.5)+5*clamp((tt-w("hour","Thursday",-0.6))/1.2,0,1)});
-      pb_sheet(x,tt,c.four+0.1,1040,392,760,{kick:"The same four questions",lines:["What are you proud of here?","What would you like more of?","What gets in your way?","What should I know, to work well with you?"]},
-        {light:"morning",u:pb_u(tt,[w("q12","proud",-0.4),w("q12","more",-0.5),w("q34","way",-0.5),w("q34","know",-0.5)])});
-      pb_tag(x,tt,w("never","never",-0.2),null,1420,780,"Never: health, family, or what isn't offered",{align:"center",col:LP.ink});}}];
-  // one at a time, where each of them works: the afternoon turning late as the week goes on. Each comes in PB_AHEAD seconds before
-  // their line, in the pause after the line before, as the score plays the figure of their name
-  PB_HOURS.forEach((p,i)=>{const left=i%2===0,late=i>=4,lt={light:late?"late":"day"},at=c[p.id]-PB_AHEAD,sx=left?980:140,sT=at+(i?0.6:1.0);
-    shots.push({at,place:late?"pbOfficeLate":"pbOffice",later:i>0,dis:i?0.45:1.0,keys:[[at,960,540,1.0]],push:0.02,draw:(x,tt)=>{
-      lp_person(x,p.who,left?540:1380,640,1.0,{t:tt+i*2.3,flip:!left,light:lt});
-      lp_nameTag(x,sx,196,p.who);
-      pb_sheet(x,tt,sT,sx,278,840,p.words,{light:lt.light,u:p.line?ag_in(tt,w(p.id,p.line,-0.3),0.5):1});}});});
-  // none of it is on the chart
-  shots.push({at:c.none-0.3,place:"pbDesk",keys:[[c.none-0.3,960,540,1.0]],dis:1.0,push:0.03,draw:(x,tt)=>pb_desk(x,{},{sorted:1})});
-  ag_shots(ctx,S,t,sc.dur,shots);
-  pb_kick(ctx,S,1);
+scene("seven",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tF=w("four","four questions",-0.7),tN=c.noor-0.5,tS=c.sam-0.5,tJ=c.jun-0.5,tY=c.yusuf-0.5,tM=c.marta-0.5,tE=c.erin-0.5,tO=c.tomas-0.5,tX=c.none-0.6;
+  const N1=PK.pace(ctx,null,pb_note1(sc,w)),lis=(t0,ev)=>PK.face(0,{expr:"listen"},[]),sit=(fl)=>pb_hT(fl);
+  // Helena on a chair beside someone's desk, her notebook on her knee; o.flip faces left
+  const hSit=(cc,tt,px,fl,flip,ev)=>PK.seated(cc,"helena",px,fl,pb_hT(fl),"sit",Object.assign({t:tt+4,flip},PK.face(tt,{expr:"listen",gaze:[1,-0.1]},ev||[])));
+  ag_shots(ctx,S,t,sc.dur,[
+    // Monday to Thursday: Helena pulls a chair up beside Sam's desk
+    {at:0,place:"pbTeam",later:true,keys:[[0,1180,560,1.14],[2.2,960,540,1.0],[tF,1080,560,1.1]],d:3,draw:(x,tt,cam)=>{
+      pb_team(x,tt,{clock:9.2,marta:null,jun:{work:1},sam:Object.assign({turn:ag_in(tt,2.6,0.5),work:1-ag_in(tt,2.4,0.5)},PK.face(tt,{expr:"neutral",gaze:[1,0]},[[2.6,"smile",3]])),people:[
+        {fl:905,draw:cc=>hSit(cc,tt,1000,905,false,[[0.8,"smile",2.4],[2.8,"look",2.2,[1,0.1]]])}]});}},
+    // what she asks each of them: a page of her notebook
+    {at:tF,place:"pbNotes",dis:0.6,keys:[[tF,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N1,{});}},
+    // Noor, at her map of the university's data on the board
+    {at:tN,place:"pbTeam",dis:0.6,keys:[[tN,960,520,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=pb_team(x,tt,{clock:10,marta:null,sam:null,jun:null,people:[
+        {fl:860,draw:cc=>{PK.person(cc,"noor",900,860,pb_hT(860),PB_SHOW,{t:tt,flip:false,reachN:[1010,430],reachNk:ag_in(tt,tN+0.8,0.5),expr:pb_says("smile",tt,w("noor","She'd",-0.1),sc.ends.noor),gaze:[1,0]});}},
+        {fl:910,draw:cc=>PK.person(cc,"helena",1330,910,pb_hT(910),PB_NOTE,{t:tt,flip:true,underF:PK.inHand.notebook({}),hold:PK.inHand.pen("blue"),holds:true,expr:"listen",gaze:[1,0.1]})}]});}},
+    // Sam, at his desk
+    {at:tS,place:"pbTeam",later:true,keys:[[tS,1120,560,1.15]],d:2,draw:(x,tt,cam)=>{let Jh=null;
+      const R=pb_team(x,tt,{clock:11,marta:null,jun:null,sam:Object.assign({turn:0.6,work:0.4},PK.face(tt,{expr:"smile",gaze:[1,0]},[[w("sam","proud",0),"say",3.0]])),people:[{fl:905,draw:cc=>{Jh=hSit(cc,tt,980,905,false,[[c.sam+3.6,"nod"]]);}}]});
+      pb_name(x,R.sam,tt,tS+0.3,w("sam","proud",-0.4),"Sam Okafor","Data platform");
+      pb_bub(x,R.sam,tt,w("sam","proud",0),tJ-0.3,["Each morning, the data","is simply there."],cam,{dx:-60});}},
+    // Jun, at his
+    {at:tJ,place:"pbTeam",later:true,keys:[[tJ,1450,560,1.2]],d:2,draw:(x,tt,cam)=>{
+      const R=pb_team(x,tt,{clock:14,marta:null,sam:null,jun:Object.assign({turn:0.6,work:0.3},PK.face(tt,{expr:"smile",gaze:[1,0]},[[w("jun","proudest",0),"say",3.0]])),people:[{fl:905,draw:cc=>hSit(cc,tt,1350,905,false,[[c.jun+3.2,"smile",2.4]])}]});
+      pb_name(x,R.jun,tt,tJ+0.3,w("jun","proudest",-0.4),"Jun Park","Analytics engineer",null,-150);
+      pb_bub(x,R.jun,tt,w("jun","proudest",0),tY-0.3,["When they stop asking,","because now they know."],cam,{dx:-200});}},
+    // Yusuf, at Helena's corner
+    {at:tY,place:"pbCorner",cut:true,keys:[[tY,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=pb_corner(x,tt,{t0:tY,who2:"yusuf",book:true,he:"listen",hg:[1,0.25],ie:pb_says("smile",tt,w("yusuf","Ask",-0.1),sc.ends.yusuf),hf:PK.face(tt,{expr:"listen",gaze:[1,0.25]},[[sc.ends.yusuf,"nod"]])});
+      pb_name(x,R.who2,tt,tY+0.3,w("yusuf","Ask",-0.4),"Yusuf Demir","Data governance lead",200);
+      pb_bub(x,R.who2,tt,w("yusuf","Ask",-0.1),tM-0.3,["Ask me at the start,","and I can say yes more often."],cam,{dx:-120});}},
+    // Marta, at her desk by the window
+    {at:tM,place:"pbTeam",cut:true,keys:[[tM,700,560,1.18]],d:2,draw:(x,tt,cam)=>{
+      const R=pb_team(x,tt,{clock:15,sam:null,jun:null,marta:Object.assign({turn:0.5,work:0.3},PK.face(tt,{expr:"neutral",gaze:[1,0]},[[w("marta","would",0),"say",3.0]])),people:[
+        {fl:930,draw:cc=>PK.person(cc,"helena",960,930,pb_hT(930),PB_NOTE,{t:tt,flip:true,underF:PK.inHand.notebook({}),hold:PK.inHand.pen("blue"),holds:true,expr:"listen",gaze:[1,0.2]})}]});
+      pb_name(x,R.marta,tt,tM+0.3,w("marta","would",-0.4),"Marta Silva","Data analyst");
+      pb_bub(x,R.marta,tt,w("marta","would",0),tE-0.3,["What happens to a number","after I send it?"],cam,{dx:-170});}},
+    // Erin and Marta, out for lunch on a Thursday
+    {at:tE,place:"pbCampus",cut:true,keys:[[tE,960,560,1.06]],d:2,draw:(x,tt,cam)=>{
+      const way={t0:tE+0.2,t1:tE+6.4,h:fl=>pb_hC(fl)};
+      const Je=PK.walk(x,"erin",tt,Object.assign({},way,{x0:1420,x1:640,floor:xx=>PB_CA.way(xx)+6}),PK.face(tt,{expr:"smile",gaze:[1,0]},[[tE+2.4,"look",2,[-1,0]]]));
+      const Jm=PK.walk(x,"marta",tt,Object.assign({},way,{x0:1560,x1:800,floor:xx=>PB_CA.way(xx)+22,phase:0.4}),{expr:pb_says("smile",tt,tE+2.4,tE+3.6)});
+      pb_name(x,Je,tt,tE+0.6,c.tomas-0.8,"Erin Walsh","Platform engineer");}},
+    // Tomás, at the back of a teaching room, where a report is on the screen
+    {at:tO,place:"pbLecture",dis:0.6,keys:[[tO,1180,520,1.12]],d:2,draw:(x,tt,cam)=>{
+      const fl=930,Jt=PK.person(x,"tomas",1500,fl,pb_hL(fl),"clasp",{t:tt,flip:true,expr:pb_says("smile",tt,w("tomas","can tell",-0.1),sc.ends.tomas),gaze:[1,-0.1]});
+      PK.person(x,"helena",1240,900,pb_hL(900),PB_NOTE,{t:tt,underF:PK.inHand.notebook({}),hold:PK.inHand.pen("blue"),holds:true,expr:"listen",gaze:[1,0.1]});
+      pb_name(x,Jt,tt,tO+0.3,w("tomas","can tell",-0.4),"Tomás Ortega","Report developer");
+      pb_bub(x,Jt,tt,w("tomas","can tell",-0.1),tX-0.3,["I know who reads each one,","and what they do with it."],cam,{dx:-160});}},
+    // none of it is on the chart: Helena at the chart on the wall
+    {at:tX,place:"pbTeam",cut:true,keys:[[tX,1330,420,1.25],[sc.dur,1330,440,1.28]],d:2,draw:(x,tt,cam)=>{
+      pb_team(x,tt,{clock:17,marta:null,sam:null,jun:null,people:[{fl:880,draw:cc=>PK.person(cc,"helena",1180,880,pb_hT(880),"clasp",{t:tt,flip:false,underF:PK.inHand.notebook({}),holds:true,expr:"think",gaze:[1,-0.5]})}]});}}
+  ]);
+  pb_card(ctx,S,t,c.hour+0.2,tF-0.3,{kick:"Monday to Thursday",title:"About an hour each",sub:"where each of them works"},{right:true,y:76});
+  pb_card(ctx,S,t,tE+1.0,tO-0.3,{kick:"Thursdays",title:"Lunch, since their first week"},{right:true,y:76});
+  pb_kick(ctx,S,ag_in(t,0.6,0.6)*(1-pb_apart(t,[[tF,tN]])));
 });
 
 /* ---------------------------------------------------------------- 4. Who they turn to */
-// five of the seven in the team's room, Jun in the middle; the pencil lines from the four who turn to him, each with what they bring
-const PB_ASK=[{i:1,what:"her map"},{i:2,what:"a number"},{i:4,what:"a model"},{i:5,what:"an odd load"}],PB_X5=[280,620,960,1300,1640],PB_FIVE={s:0.62,y:820,light:{light:"day"}};
-function pb_five(x,tt,T){
-  pb_row(x,tt,[1,2,3,4,5].map(i=>({who:PB_SEVEN[i].who,ph:PB_SEVEN[i].ph,name:PB_SEVEN[i].name,x:PB_X5[i-1],flip:i>3,a:ag_in(tt,T.in[i],0.6)})),PB_FIVE);
-  PB_ASK.forEach((q,n)=>{const bx=PB_X5[q.i-1],left=q.i<3,far=Math.abs(q.i-3)>1,ta=ag_in(tt,T.arc[n]-0.2,0.4);
-    if(ta>0.004)lp_tag(x,bx,540,q.what,{align:"center",col:LP.ink,a:ta});
-    pb_arc(x,[bx+(left?34:-34),508],[960+(left?-1:1)*(far?26:84),572],far?-74:-46,(tt-T.arc[n])/0.9,{seed:n+3,w:4});});}
-scene("turn",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
-  const T={in:{1:w("show","Noor",-0.4),2:w("ask","Marta",-0.4),3:w("ask","Jun",-0.5),4:w("ask","Erin",-0.4),5:w("show","Sam",-0.4)},
-      arc:[w("show","shows",-0.1),w("ask","asks",-0.1),w("ask","So does",0.1),w("show","load",-0.3)]},hT=w("hears","one name",-0.2);
+scene("turn",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tA=c.ask-0.4,tW=c.show-0.4,tB=c.box-0.5,tU=c.ubuntu-0.5,tZ=w("ubuntu","says",-0.2),tR=w("title","Anyone",-1.6),tM=c.room-0.5;
+  const BB=PK.pace(ctx,"carmen",pb_boardB(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // one name, again and again; then who says it, and to whom they turn
-    {at:0,place:"pbTeam",keys:[[0,960,540,1.0]],push:0,draw:(x,tt)=>{
-      PB_ASK.forEach((q,n)=>pb_tag(x,tt,hT+[0.9,0,0.45,1.35][n],c.ask-0.5,PB_X5[q.i-1],540,"“Ask Jun.”",{align:"center",col:LP.ink}));
-      pb_five(x,tt,T);}},
-    // the chart: Jun is one box of seven, with one line, up; then the lines it doesn't have
-    {at:c.box-0.3,place:"pbDesk",keys:[[c.box-0.3,960,540,1.0]],dis:1.0,push:0.03,draw:(x,tt)=>{const aT=w("shows","turn",-0.5);
-      pb_desk(x,{hi:PB_JUN,hiA:ag_in(tt,w("box","one box",-0.3),0.5),up:ag_io(tt,w("box","line",-0.3),c.shows-0.2,0.5),lines:ag_io(tt,w("shows","manages",-0.4),aT,0.5),
-        arcs:[0,1,2,3].map(n=>(tt-aT-[0.5,0,0.25,0.75][n])/0.8)},{sorted:1});}},
-    // the team's room again: an idea from Southern Africa, and what researchers found
-    {at:c.ubuntu-0.3,place:"pbTeam",keys:[[c.ubuntu-0.3,960,540,1.0]],dis:1.0,push:0,draw:(x,tt)=>{
-      pb_five(x,tt,T);
-      pb_sheet(x,tt,w("ubuntu","Ubuntu",-0.1),410,130,1100,{kick:"Ubuntu",title:"“A person is a person through other people”",sub:"A saying in isiZulu · The team comes first"},{light:"day",out:c.shared-0.4});
-      pb_sheet(x,tt,w("shared","shared",-0.3),200,130,900,{kick:"Shared leadership",title:"People in a team leading one another",sub:"Whoever holds the title"},{light:"day",out:c.title-0.4});
-      const f0=w("review","forty-two",-0.4),fa=ag_io(tt,f0,c.title-0.4,0.4);
-      if(fa>0.004)lp_figure(x,1140,130,580,{kick:"Wang and others, 2014",num:"42",label:"samples: teams that share the leading do better"},{col:LP.orange,light:"day",a:fa,k:tt-f0});
-      pb_pill(x,tt,w("title","Anyone",-0.3),c.room-0.4,960,300,"Anyone can lead from where they are",{col:LP.ink,size:36});}},
-    // Helena makes room for it: Jun stays where he is, and she asks him
-    {at:c.room-0.3,place:"pbTeam",keys:[[c.room-0.3,960,540,1.0],[c.room+0.4,1130,640,1.24]],d:2.6,dis:0.8,push:0,draw:(x,tt)=>{
-      pb_row(x,tt,[{who:"jun",ph:PB_SEVEN[PB_JUN].ph,name:"Jun",x:960},{who:"helena",ph:PB_HELENA_PH,name:"Helena",x:1300,flip:true,a:ag_in(tt,w("room","She asks",-0.4),0.7)}],PB_FIVE);
-      pb_tag(x,tt,w("room","March",-0.3),null,1130,516,"From March: beside a newcomer",{align:"center",col:LP.green});}}
+    // Helena at her corner, writing one name, again and again
+    {at:0,place:"pbCorner",keys:[[0,960,540,1.0],[tA,900,560,1.08]],d:3,draw:(x,tt,cam)=>{pb_corner(x,tt,{t0:-4,book:false,sheets:true,write:ag_in(tt,0.6,0.5),he:"think",hg:[1,0.6]});}},
+    // Marta comes to Jun's desk with a number she's stuck on; Erin writes to him
+    {at:tA,place:"pbTeam",dis:0.6,keys:[[tA,1420,560,1.2]],d:2,draw:(x,tt,cam)=>{
+      const m=w("ask","Marta",-0.2),e=w("ask","So does",0),R=pb_team(x,tt,{clock:10.5,marta:null,sam:{work:1},showJ:PK.onScreen.chat(ag_in(tt,e,0.4),{}),
+        jun:Object.assign({turn:ag_in(tt,m+0.6,0.5),work:0.4},PK.face(tt,{expr:"listen",gaze:[1,0]},[[e+0.4,"look",3,[1,0.4]]])),people:[
+        {fl:905,draw:cc=>PK.walk(cc,"marta",tt,{x0:2060,x1:1500,t0:tA-0.6,t1:m+0.9,floor:905,h:pb_hT(905),arms:{aN:PB_CARRY.aN},then:PB_SHOW},{flip:true,hold:pb_sheet,holds:true,expr:pb_says("worry",tt,m+0.4,m+1.6)})}]});
+      PK.callout(x,560,120,660,250,[1660,520],ag_io(tt,e-0.2,tW-0.2,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,pb_chat(e+0.2,e+1.6),tt,{}));}},
+    // Noor brings him her map first; Sam shows him a load that looks odd
+    {at:tW,place:"pbTeam",later:true,keys:[[tW,1300,560,1.18]],d:2,draw:(x,tt,cam)=>{
+      const s=w("show","Sam",-0.3),wk=ag_in(tt,s-0.4,1.6);
+      pb_team(x,tt,{clock:11.5,marta:null,show:null,sam:Object.assign({turn:ag_in(tt,s+0.6,0.4)*0.6,work:1-ag_in(tt,s+0.4,0.5)},PK.face(tt,{expr:"neutral",gaze:[1,0]},[[s+0.8,"say",1.6]])),
+        jun:{turn:0.8,work:0,expr:"listen",gaze:[1,0.1]},people:[
+        {fl:905,draw:cc=>PK.person(cc,"noor",1560,905,pb_hT(905),PB_SHOW,{t:tt,flip:true,hold:pb_sheet,holds:true,a:1-ag_in(tt,s-0.6,0.5),expr:"smile",gaze:[1,0]})}]});}},
+    // the chart: Jun is one box of seven, with one line up, to Helena; it doesn't show who people turn to
+    {at:tB,place:"pbTeam",later:true,keys:[[tB,1330,420,1.25]],d:2,draw:(x,tt,cam)=>{
+      const pr=ag_in(tt,w("shows","turn",-0.6),0.5);
+      pb_team(x,tt,{clock:12,marta:null,sam:null,jun:null,people:[{fl:880,draw:cc=>PK.person(cc,"helena",1250,880,pb_hT(880),PK.poseMix("clasp",PB_SHOW,pr),
+        {t:tt,flip:false,underF:PK.inHand.notebook({}),hold:pr>0.3?PK.inHand.pen("ink"):null,holds:true,reachN:[1330,330],reachNk:pr,expr:"think",gaze:[1,-0.5]})}]});
+      PK.callout(x,860,560,760,300,[1330,400],ag_io(tt,c.box+0.2,tU-0.3,0.4),(cc,bx,by,bw,bh)=>pb_chartCard(cc,bx,by,bw,bh,{jun:ag_in(tt,w("box","one box",-0.2),0.6),
+        up:ag_in(tt,w("box","line",-0.3),1.2),turn:ag_in(tt,w("shows","turn",-0.4),2.0)}));}},
+    // Carmen, at the team's board, on Ubuntu and on shared leadership
+    {at:tU,place:"pbTeam",later:true,keys:[[tU,1330,420,1.25],[tU+2.2,1010,530,1.08]],d:2.6,draw:(x,tt,cam)=>{pb_lesson(x,tt,{clock:15,rows:BB,say:[[c.ubuntu,tZ+0.6]]});}},
+    {at:tZ,cut:true,place:"pbBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BB,{say:[[tZ,sc.ends.ubuntu],[c.shared,sc.ends.shared],[c.review,sc.ends.review],[c.title,sc.ends.title]]});}},
+    {at:tR+3.4,cut:true,place:"pbTeam",keys:[[tR+3.4,1010,530,1.08]],d:2,draw:(x,tt,cam)=>{
+      pb_lesson(x,tt,{clock:15.3,rows:BB,jun:PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[tR+3.8,"smile",2.4]]),helena:PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[tR+4.0,"look",2,[1,0.3]]])});}},
+    // at the corner: Helena asks Jun if he wants this, and makes room for it
+    {at:tM,place:"pbCorner",cut:true,keys:[[tM,960,540,1.0],[c.room+3,940,560,1.06]],d:3,draw:(x,tt,cam)=>{
+      const q=w("room","She asks",0),a=w("room","in March",-0.2);
+      const R=pb_corner(x,tt,{t0:tM,who2:"jun",book:true,lean:ag_in(tt,q,0.6),he:pb_says("smile",tt,q,q+2.4),ie:pb_says(PK.exprMix("listen","glad",ag_in(tt,a,0.6)),tt,a+0.2,a+1.8),
+        iface:PK.face(tt,{expr:"listen",gaze:[1,0.3]},[[a,"nod"]])});
+      pb_bub(x,R.helena,tt,q,a-0.2,["Would you like to be","the one beside our newcomer?"],cam,{dx:140});
+      pb_bub(x,R.who2,tt,a+0.2,sc.dur,["I'd like that."],cam,{dx:-80});}}
   ]);
-  pb_kick(ctx,S,1);
+  pb_card(ctx,S,t,c.room+3.0,sc.dur-0.2,{kick:"In March",title:"Beside a newcomer",col:PK.C.green},{right:true,y:76});
+  pb_kick(ctx,S,ag_in(t,0.6,0.6)*(1-pb_apart(t,[[tZ,tR+3.4]])));
 });
 
 /* ---------------------------------------------------------------- 5. What won't change yet */
-// all eight in the team's room: Helena at the left, the seven turned to her
-const PB_X8=[162,390,618,846,1074,1302,1530,1758];
-// The score plays the seven first names as one phrase, in the row's order (tools/score.py: SING, the same numbers): sing is how long
-// ago it began, and each name lifts a little as it is played; where the two instruments end together (PB_SING_ALL), all eight do
-const PB_SING=[0,0.62,1.10,1.72,2.20,2.82,3.30],PB_SING_ALL=4.0,pb_lift=u=>u<0?0:ag_in(u,0,0.12)*(1-ag_in(u,0.26,0.5));
-function pb_eight(x,tt,a,light,names,sing){const L=i=>sing==null?0:Math.max(i<0?0:pb_lift(sing-PB_SING[i]),pb_lift(sing-PB_SING_ALL));
-  pb_row(x,tt,[{who:"helena",ph:PB_HELENA_PH,name:"Helena",x:PB_X8[0],a:a(0),lift:L(-1)}].concat(PB_SEVEN.map((p,i)=>({who:p.who,ph:p.ph,name:p.name,x:PB_X8[i+1],flip:true,a:a(i+1),lift:L(i)}))),
-    {s:0.46,y:850,light,names});}
-scene("friday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),lt={light:"late"},inT=Math.max(w("fri","brings",-0.4),2.2);
+// the seven and Helena in the team's room, on Friday: Sam, Jun and Marta at their desks, turned round; Noor and Yusuf standing at
+// the back, Erin on a chair, Tomás near; Helena in front of the board. faces: {who: PK.face's result}
+function pb_all(x,tt,faces,o){o=o||{};const f=k=>faces[k]||PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[]);let Jh=null;
+  pb_team(x,tt,{clock:o.clock||16,sam:Object.assign({turn:1,work:0,pose:"sit"},f("sam")),jun:Object.assign({work:0,pose:"sit"},f("jun")),marta:Object.assign({turn:1,work:0,pose:"sit"},f("marta")),people:[
+    {fl:846,draw:cc=>PK.person(cc,"noor",1460,846,pb_hT(846),"clasp",Object.assign({t:tt+2,flip:true},f("noor")))},
+    {fl:870,draw:cc=>{Jh=PK.person(cc,"helena",760,870,pb_hT(870),"ease",Object.assign({t:tt},faces.helena||{expr:"smile"}));}},
+    {fl:940,draw:cc=>PK.person(cc,"yusuf",1040,940,pb_hT(940),"clasp",Object.assign({t:tt+3,flip:true},f("yusuf")))},
+    {fl:915,draw:cc=>PK.seated(cc,"erin",1600,915,pb_hT(915),"sit",Object.assign({t:tt+5,flip:true},f("erin")))},
+    {fl:960,draw:cc=>PK.person(cc,"tomas",300,960,pb_hT(960),"ease",Object.assign({t:tt+6},f("tomas")))}]});return Jh;}
+scene("friday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tK=c.keeper-0.5,tW=c.week-0.4,tN=w("knows","planned",-0.9),N2=PK.pace(ctx,null,pb_note2(sc));
+  const rel=(tt,k)=>PK.face(tt,{expr:"listen",gaze:[1,-0.2]},[[1.4+k*0.6,"smile",2.4],[6+k*0.5,"look",2.6,[1,0.1]],[w("stays","stays",0.2)+k*0.3,"relief",4.0],[w("notall","promise",0)+k*0.4,"nod"],[w("stays","this month",0.2)+k*0.25,"nod"]]);
   ag_shots(ctx,S,t,sc.dur,[
-    // Friday 5 February: all seven in the team's room, and what Helena can promise
-    {at:0,place:"pbTeamFri",later:true,dis:0.6,keys:[[0,1130,640,1.24],[0.2,960,540,1.0]],d:2.2,push:0,draw:(x,tt)=>{
-      pb_eight(x,tt,i=>ag_in(tt,inT+i*0.14,0.6),lt);
-      pb_sheet(x,tt,Math.max(c.fri+0.3,2.5),560,130,800,{kick:"Friday 5 February",title:"All seven, in the team's room"},{light:"late",out:c.fear-0.4});
-      pb_sheet(x,tt,w("fear","change",-0.4),410,130,1100,{kick:"A hazard of work",title:"Poor organisational change management",sub:"Safe Work Australia, psychosocial hazards"},{col:LP.amber,light:"late",out:c.stays-0.4});
-      pb_sheet(x,tt,w("stays","promise",-0.4),410,130,1100,{kick:"What Helena can promise",title:"Who does what stays as it is, this month",lines:["Not promised: that nothing will change","Said: what stays, and for how long"]},
-        {col:LP.green,light:"late",u:pb_u(tt,[w("notall","nothing",-0.3),w("notall","only",-0.3)])});}},
-    // the gorge, October 1972: four years after the steel bridge came
-    {at:c.keeper-0.3,place:"pbGorgeGrey",keys:[[c.keeper-0.3,952,430,1.5]],dis:1.0,push:0.03,draw:(x,tt)=>{pb_steel(x,{});pb_bridge(x,{age:1.3,wear:0.55,extra:{r1:12}});}},
-    // her first week, and what she knows at the end of it
-    {at:c.week-0.3,place:"pbTeamFri",keys:[[c.week-0.3,960,540,1.0]],dis:1.0,push:0,draw:(x,tt)=>{
-      pb_eight(x,tt,()=>1,lt,1,tt-(c.breath-0.5));
-      const k0=c.week,ka=ag_in(tt,k0,0.35);if(ka>0.004)pb_week(x,580,130,760,{light:"late",a:ka,k:tt-k0,fri:ag_in(tt,w("week","first",-0.2),0.5)});
-      pb_pill(x,tt,w("knows","planned",-0.3),null,960,420,"Nobody's work planned yet",{col:LP.ink,size:30});
-      pb_pill(x,tt,w("knows","seven",-0.3),null,960,510,"Seven people, known",{col:LP.green,icon:"tick",size:30});}}
+    {at:0,place:"pbTeam",keys:[[0,1180,540,1.0],[c.stays-0.4,1180,520,1.05]],d:3,draw:(x,tt,cam)=>{
+      const s=c.stays,n=c.notall,F={};["sam","jun","marta","noor","yusuf","erin","tomas"].forEach((k,i)=>F[k]=rel(tt,i));
+      F.helena=PK.face(tt,{expr:"smile",gaze:[1,0]},[[2,"look",2.6,[1,0.2]],[7,"nod"],[w("stays","stays",-0.6),"say",n-0.2-w("stays","stays",-0.6)],[n,"say",tK-0.3-n]]);const Jh=pb_all(x,tt,F,{clock:16});
+      pb_bub(x,Jh,tt,w("stays","stays",-0.6),n-0.2,["Who does what","stays as it is this month."],cam,{dx:60});
+      pb_bub(x,Jh,tt,n,tK-0.3,["I can't promise","that nothing will change."],cam,{dx:60});}},
+    // at the gorge, in 1972, a keeper said what his people would keep
+    {at:tK,place:"pbGorgeGrey",dis:0.8,keys:[[tK,560,560,1.1]],d:2,draw:(x,tt,cam)=>{
+      pbq_steel(x,1,null,true);pbq_bridge(x,{age:1,grey:true});
+      pb_bank(x,tt,[["v2",150,890,"listen",false,{expr:"listen"}],["v1",250,770,"listen",false,{expr:"listen"}]]);
+      const Jk=pbq_person(x,"keeper",450,840,pbq_h(840),"clasp",{t:tt,flip:true,expr:pb_says("smile",tt,w("keeper","keeper",0),w("keeper","would",0.4)),gaze:[1,0]});
+      pb_bub(x,Jk,tt,w("keeper","keeper",0),tW-0.3,["We'll rebuild it."],cam,{dx:300});}},
+    // Helena, in her first week: the team, at ease
+    {at:tW,place:"pbTeam",dis:0.8,keys:[[tW,1100,540,1.06]],d:2,draw:(x,tt,cam)=>{
+      const F={};["sam","jun","marta","noor","yusuf","erin","tomas"].forEach((k,i)=>F[k]=PK.face(tt,{expr:"smile",gaze:[1,-0.2]},[[tW+0.6+i*0.3,"nod"]]));
+      pb_all(x,tt,F,{clock:16.2});}},
+    {at:tN,place:"pbNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N2,{});}}
   ]);
-  setScreen(ctx,S);
-  pb_pill(ctx,t,w("keeper","steel",-0.3),c.week-0.6,952,338,"1968 · the steel bridge",{col:LP.ink,size:28});
-  pb_pill(ctx,t,w("keeper","keeper",-0.3),c.week-0.6,960,770,"1972 · “We're going to rebuild it”",{col:LP.green,size:28});
-  pb_kick(ctx,S,1);
+  pb_card(ctx,S,t,0.6,c.fear-0.2,{kick:"Friday 5 February",title:"All seven, in the team's room"},{y:40,mid:true});
+  pb_kick(ctx,S,ag_in(t,0.6,0.6)*(1-pb_apart(t,[[tN,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 6. On Monday */
-scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"},e0=c.breath+0.6,goT=w("back","went",-0.6);
+scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tS=c.same-0.4,tM=w("m1","On Monday",-0.55),tX=sc.ends.m4+0.7,tE=c.breath+0.6,N3=PK.pace(ctx,null,pb_note3(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the gorge today: steel does the carrying, and people on both banks at the rope
-    {at:0,place:"pbGorge",keys:[[0,946,396,1.8],[goT,960,492,1.32]],d:3.4,push:0,draw:(x,tt)=>{const o={age:0};
-      pb_crowd(x,()=>1);pb_steel(x,{});pb_truck(x,(tt-0.4)/5.2);
-      pb_bridge(x,Object.assign({mid:cc=>{pb_walk(cc,tt,-6,18,1,0,o);pb_walk(cc,tt,-1,18,-1,5,o);pb_walk(cc,tt,3,18,1,2,o);}},o));}},
-    // the two sheets, with the pencil's lines on the chart
-    {at:c.same-0.3,place:"pbDesk",keys:[[c.same-0.3,960,540,1.0]],dis:1.0,push:0.03,draw:(x,tt)=>{
-      pb_desk(x,{arcs:[1,1,1,1]},{sorted:1});
-      pb_pill(x,tt,w("same","who",-0.3),null,620,660,"Who is here?",{col:LP.ink,size:36});}},
-    // the eight of them, and what to do on Monday
-    {at:c.m1-0.3,place:"pbTeam",keys:[[c.m1-0.3,960,540,1.0]],dis:1.0,push:0,draw:(x,tt)=>{const g=1-ag_in(tt,c.take-0.4,0.6);
-      pb_eight(x,tt,()=>1,dy,1-ag_in(tt,e0-0.2,0.6),tt-(c.take+0.3));
-      if(g>0.004){x.save();x.globalAlpha*=g;
-        pb_sheet(x,tt,c.m1+0.2,450,130,1020,{kick:"On Monday",lines:["Before you plan anyone's work, sit down with each person","Ask about them at work: proud of what, held up by what",
-          "Notice who people turn to, and make room for it","Say early what won't change yet"]},{light:"day",u:pb_u(tt,[w("m1","sit",-0.3),w("m2","Ask",-0.2),w("m3","Notice",-0.2),w("m4","say",-0.3)])});
-        x.restore();}
-      pb_tag(x,tt,w("next","Wellbeing",-0.2),c.take-0.4,960,520,"Next: Wellbeing is in the work · What do they need?",{align:"center",col:LP.ink});
-      pb_pill(x,tt,c.take,e0,960,330,"Know the people before you plan the work",{col:LP.ink,size:38});}}
+    // the gorge today: steel carries a truck; on the rope, two people meet
+    {at:0,place:"pbGorge",keys:[[0,960,460,1.2],[tS,960,430,1.28]],d:3,draw:(x,tt,cam)=>{
+      pbq_steel(x,1,U.clamp((tt-0.4)/5,0,1));const m=w("back","each other",-0.4);
+      pbq_bridge(x,{age:0,walkers:[pb_on(tt,"w2",0.15,0.46,0,m),pb_on(tt,"m1",0.85,0.54,0,m)].filter(Boolean)});
+      pb_bank(x,tt,[["w1",380,800,"stand",false,{hold:pbq_coil,holds:true,expr:"smile",gaze:[1,-0.1]}],["keeper",1560,760,"clasp",true,{expr:"smile",gaze:[1,-0.1]}]]);}},
+    // the team's room: the team at work, Helena among them
+    {at:tS,place:"pbTeam",dis:0.8,keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      pb_team(x,tt,{clock:9.3,sam:{work:1},jun:{work:1},marta:{work:0.4,turn:0.3,expr:"smile"},people:[
+        {fl:880,draw:cc=>PK.person(cc,"helena",900,880,pb_hT(880),"ease",{t:tt,flip:true,expr:"smile",gaze:[1,0]})},
+        {fl:860,draw:cc=>PK.person(cc,"noor",1470,860,pb_hT(860),"clasp",{t:tt+2,flip:true,expr:"smile"})}]});}},
+    {at:tM,place:"pbNotes",dis:0.6,keys:[[tM,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}},
+    // at her corner, Helena shuts her notebook and looks out at the campus
+    {at:tX,place:"pbCorner",dis:0.6,keys:[[tX,960,540,1.0],[sc.dur,900,560,1.08]],d:3,draw:(x,tt,cam)=>{
+      pb_corner(x,tt,{t0:tX-6,book:true,hf:PK.face(tt,{expr:"smile",gaze:[1,0.2]},[[tX+2.0,"look",2.2,[1,-0.3]],[tX+5,"nod"]]),handN:[740,632],handF:[770,626]});}}
   ]);
-  setScreen(ctx,S);
-  pb_tag(ctx,t,0.9,goT,948,250,"Steel does the carrying",{align:"center",col:LP.ink});
-  pb_tag(ctx,t,w("back","each other",-0.3),c.same-0.6,960,790,"What they went back for: each other",{align:"center",col:LP.green});
-  lp_end(ctx,S,t,e0,PB_TITLE,PB_LAST,"Film 1 of 4","People first");
-  pb_kick(ctx,S,1-ag_in(t,e0,0.8));
+  pb_card(ctx,S,t,c.next+0.3,c.take-0.4,{kick:"The next film",title:"Wellbeing is in the work"},{right:true});
+  pb_kick(ctx,S,(1-ag_in(t,tE-0.2,0.6))*(1-pb_apart(t,[[tM,tX]])));
+  PK.end(ctx,S,t,tE,"People before roles",PB_LAST,"Film 1 of 4","People first",{side:"right"});
 });
-ag_cutInto(["seven","friday"]);
+// chapters that open in the room the one before ends in: the camera glides on, or the film cuts
+ag_cutInto(["seven","turn","friday"]);

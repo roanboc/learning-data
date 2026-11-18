@@ -1,6 +1,6 @@
 # When someone falls behind: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 3 of 4 · merged, PR #221 · [pull request](https://github.com/roanboc/learning-data/pull/221); made again in ink line on 18 November 2026 (PR #PRNUM)
+*Leading data people* · *Ownership and performance*, film 3 of 4 · merged, PR #221 · [pull request](https://github.com/roanboc/learning-data/pull/221); made again in ink line on 18 November 2026 (PR #436)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/when-someone-falls-behind/)
 
@@ -21,7 +21,7 @@ Film 3 of 4 of *Ownership and performance* (film 14 of *Leading data people*), m
 
 ## Made again in ink line, 18 November 2026
 
-[Pull request #PRNUM](https://github.com/roanboc/learning-data/pull/PRNUM), merged on green with the series' Draft label, as you chose for the series on 17 November.
+[Pull request #436](https://github.com/roanboc/learning-data/pull/436), merged on green with the series' Draft label, as you chose for the series on 17 November.
 
 You approved *Owning the outcome* made again in ink line on 17 November, and asked for the other films of *Ownership and performance* to be made again the same way, the series first and not yet the whole module. This film follows the people kit's README and the rules of that film and of *Measure the work, not the people*. The rows below are the questions I would have asked while making it again, numbered on from the eight above.
 

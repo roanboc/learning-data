@@ -2585,7 +2585,7 @@ const tf_note5=(sc,w)=>[
    ideas are written by hand: Carmen Vidal's and Helena's boards, and the notebooks of a stokvel's member, Helena and Ivy (tf_uni.js).
    Johannesburg in the 1930s, and today, is in tfp_joburg.js. Every time comes from the voice: a line's start (sc.cues) or a word in it
    (wAt). */
-const tf_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"The team comes first",a);}};
+const tf_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,3,"The team comes first",a);}};
 function tf_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
 const tf_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
 const tf_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};

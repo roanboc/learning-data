@@ -2625,7 +2625,7 @@ const ed_boardM=(sc,w)=>[
    ideas are written by hand: Daniels's board in 1952, Carmen Vidal's board, and the designers', Ivy's and Helena's notebooks
    (ed_uni.js). The Air Force of 1950 to 1952 is in edp_air.js. Every time comes from the voice: a line's start (sc.cues) or a word
    in it (wAt). */
-const ed_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"Explaining so people can decide",a);}};
+const ed_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,2,"Explaining so people can decide",a);}};
 function ed_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
 const ed_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
 const ed_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};

@@ -18,8 +18,9 @@ The checks it picks from:
   films      for each film whose source changed (its "paths" in its release.json, shared code included,
              so a change to the first film's engine checks every film that draws with it): build the player, check
              that the site's copy is the one it builds, check that every moment draws (tools/check.py), that every piece
-             of text stays inside its box (site-tools/fits.py), and check the sound (tools/quiet.py), in the films that
-             have that check. A change to only the film's published files
+             of text stays inside its box (site-tools/fits.py), that every shot comes on screen long enough to be seen
+             (site-tools/shots.py), and check the sound (tools/quiet.py), in the films that have that check. A change
+             to only the film's published files
              under site/assets/<key>/ (a soundtrack, a poster, the places' pictures) checks no frame: the site checks
              cover it (every link resolves, and the players check the right soundtrack is selected). A change to only
              the site's copy of the player (site/assets/<key>/film.js) builds the film and compares the two, but draws
@@ -283,6 +284,7 @@ def steps(p):
         if f["checks"] == "full":
             out.append((f"{f['name']}: every moment draws", [py, "tools/check.py"], ROOT / f["dir"], env))
             out.append((f"{f['name']}: text stays in its box", [py, str(ROOT / "site-tools/fits.py")], ROOT / f["dir"], env))
+            out.append((f"{f['name']}: every shot is seen", [py, str(ROOT / "site-tools/shots.py")], ROOT / f["dir"], env))
             if (ROOT / f["dir"] / "tools" / "quiet.py").exists():
                 out.append((f"{f['name']}: the sound", [py, "tools/quiet.py"], ROOT / f["dir"], env))
     return out

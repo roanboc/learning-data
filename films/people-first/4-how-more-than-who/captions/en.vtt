@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:05.139
+Quehue, in the high Andes of Peru.
+
+00:00:07.039 --> 00:00:13.438
+Every June, four communities make a new bridge of grass rope, across a gorge of the Apurímac river.
+
+00:00:15.338 --> 00:00:19.852
+It's twenty-eight metres long. About a thousand people build it, in three days.
+
+00:00:21.552 --> 00:00:26.266
+No family could raise it alone. And there's no drawing of it, and no written plan.
+
+00:00:27.966 --> 00:00:33.478
+Yet it has to hold. For a year, people will cross it, about fifteen metres above the river.
+
+00:00:35.378 --> 00:00:42.261
+Its strength depends on every cord in it. So everyone needs to know their own part, and to trust everyone else's.
+
+00:00:44.161 --> 00:00:46.976
+What they have is a way of working that everyone knows.
+
+00:00:48.476 --> 00:00:56.339
+Each family has promised a cord of twisted grass, forty arm spans long. First, on both banks, every cord is checked in.
+
+00:00:58.239 --> 00:01:03.598
+Each community knows its part: which of the six cables to make, or the mat for the floor.
+
+00:01:05.498 --> 00:01:10.364
+Men twist the cords into ropes, and braid three ropes into each cable of the floor.
+
+00:01:12.064 --> 00:01:15.753
+One man braids until he tires. Then another takes his place.
+
+00:01:17.653 --> 00:01:24.397
+Then many hands pull the cables across the gorge, and tie them to old stone bases, the older guiding the younger.
+
+00:01:26.497 --> 00:01:32.676
+On the last day, two builders weave the sides and the floor, one from each bank, until they meet in the middle.
+
+00:01:35.576 --> 00:01:41.455
+By that afternoon, four communities have a bridge for another year. The next day, they celebrate.
+
+00:01:43.555 --> 00:01:50.164
+Nobody was handed a plan. What they share is how they work: promises kept, and parts that everyone knows.
+
+00:01:52.064 --> 00:01:58.111
+A data team's work is like that. Nobody can do it alone, and every part leans on someone else's.
+
+00:01:59.611 --> 00:02:03.045
+So how a team works together counts for more than who is in it.
+
+00:02:11.745 --> 00:02:17.072
+Google once studied 180 of its own teams, to learn why some worked better than others.
+
+00:02:18.972 --> 00:02:25.154
+What really mattered, it found, was less about who is on the team, and more about how the team worked together.
+
+00:02:27.254 --> 00:02:35.362
+First on its list came psychological safety: people speak up when it's safe to. A later film, The team comes first, is about that.
+
+00:02:37.062 --> 00:02:40.571
+Then came keeping your word, and being clear about who does what.
+
+00:02:42.471 --> 00:02:47.889
+The gorge has both, from custom. In a data team, somebody has to say them out loud.
+
+00:02:51.989 --> 00:03:00.439
+The university, Wednesday the 24th of February, 2027. Helena Novak, the data manager, is in her fourth week.
+
+00:03:02.339 --> 00:03:07.895
+Jun, the analytics engineer, has built a new model, to take over one of the old reports.
+
+00:03:09.395 --> 00:03:15.556
+To check it, he runs both for census day last year, when the university counted its students for the government.
+
+00:03:17.256 --> 00:03:24.311
+The old report says 18,412. The new model says 19,549.
+
+00:03:26.411 --> 00:03:31.992
+Tomás Ortega built that report, years ago. People still ask him what its numbers mean.
+
+00:03:33.492 --> 00:03:39.111
+At the team's table, Jun says: your report is wrong. Tomás answers: your model is new.
+
+00:03:41.011 --> 00:03:45.735
+Two people do all the talking. Erin Walsh and Marta Silva haven't said a word.
+
+00:03:47.435 --> 00:03:56.493
+Across 116 studies, conflict about the person harms a team's work. Disagreement about the work need not, if it stays about the work.
+
+00:03:58.393 --> 00:04:03.133
+So Helena stops it, and says why: we've left the number, and started on each other.
+
+00:04:07.233 --> 00:04:12.657
+She asks each of them for three things: what you saw, what you feel and need, and what you ask.
+
+00:04:14.557 --> 00:04:17.905
+Jun goes first. I saw two numbers for the same thing.
+
+00:04:19.205 --> 00:04:22.529
+I'm worried, because I need people to trust what we publish.
+
+00:04:23.829 --> 00:04:27.531
+I ask that we check them side by side, before either is sent.
+
+00:04:29.431 --> 00:04:34.588
+Then Tomás. I heard my report called wrong, before anyone asked what it counts.
+
+00:04:35.888 --> 00:04:39.782
+That stung, because I need what I built to be read before it's replaced.
+
+00:04:41.082 --> 00:04:42.310
+I ask to be asked.
+
+00:04:44.610 --> 00:04:50.896
+The three things come from non-violent communication, the work of the psychologist Marshall Rosenberg.
+
+00:04:52.596 --> 00:04:59.456
+It rests on practice and small studies, not on large trials. But feelings are in a hard conversation anyway.
+
+00:05:01.156 --> 00:05:05.674
+Once they're named, they can be answered. So Jun asks: what does your report count?
+
+00:05:09.774 --> 00:05:11.789
+Then Helena gives everyone a turn.
+
+00:05:13.289 --> 00:05:19.552
+Erin, the platform engineer, hadn't spoken. The old report, she says, reads only the student system.
+
+00:05:21.252 --> 00:05:26.665
+Marta, the analyst, knows the university's numbers. She says what each of the two counts.
+
+00:05:28.165 --> 00:05:34.692
+The report counts students: people taking the units that make up a degree. That's the number sent to the government.
+
+00:05:36.592 --> 00:05:43.484
+The model counts learners: those students, and 1,137 people on short courses as well.
+
+00:05:45.384 --> 00:05:48.209
+Both numbers are right. They were never the same thing.
+
+00:05:50.509 --> 00:05:58.344
+Anita Woolley and her colleagues gave small groups many kinds of task. What the best groups had, they called collective intelligence.
+
+00:06:00.044 --> 00:06:06.234
+It had little to do with how clever the cleverest member was. It went with taking turns to speak more equally.
+
+00:06:08.334 --> 00:06:14.117
+Which number the university publishes isn't Jun's to decide, or Tomás's, or Helena's.
+
+00:06:15.817 --> 00:06:22.016
+It belongs to the registrar's office, which owns what the two words mean. So Jun asks, in a ticket.
+
+00:06:23.916 --> 00:06:28.684
+And what each word counts goes into the glossary, before a line of the model changes.
+
+00:06:32.784 --> 00:06:38.738
+On Thursday, the eight of them write one page: how we work together. Five lines, in their own words.
+
+00:06:40.838 --> 00:06:44.012
+How we meet: the question the day before, and a turn each.
+
+00:06:46.112 --> 00:06:48.631
+How we ask for help: early, and out loud.
+
+00:06:50.731 --> 00:06:56.568
+How we disagree: about the work, never the person. Say what you saw, what you need, and what you ask.
+
+00:06:58.668 --> 00:07:03.728
+How we decide: whoever owns it decides, after hearing the others, and writes it down.
+
+00:07:05.828 --> 00:07:09.848
+How we say, I can't make that date: as soon as we know, with a new date.
+
+00:07:11.948 --> 00:07:19.398
+That last line is how trust is kept. Across 112 studies, teams whose members trust each other do better work.
+
+00:07:21.298 --> 00:07:30.210
+Researchers call such a page a team charter. In a study of 32 student teams, the work that held up best had a good charter and a good plan.
+
+00:07:32.110 --> 00:07:36.282
+That's one small study. The page comes from practice, not from a trial.
+
+00:07:37.982 --> 00:07:45.294
+At the gorge, the way is passed on by doing it, parents beside children. A team has no such years. So it writes.
+
+00:07:47.594 --> 00:07:49.739
+On Friday, the page is on the wall.
+
+00:07:54.239 --> 00:08:00.193
+At the gorge, that way of working still brings four communities together. It hasn't always kept the bridge.
+
+00:08:02.093 --> 00:08:08.388
+Around 1970, with a steel bridge newly built beside it, the communities let it go for a time.
+
+00:08:10.688 --> 00:08:15.939
+In 2020, the pandemic stopped the work, and in March 2021 the bridge fell.
+
+00:08:19.039 --> 00:08:22.340
+In May 2025, someone cut it down in the night.
+
+00:08:24.640 --> 00:08:26.925
+Each time, the communities wove it again.
+
+00:08:29.225 --> 00:08:34.530
+The weaving itself is taught only inside a builder's own family, as their tradition asks.
+
+00:08:36.430 --> 00:08:39.733
+Fewer of the young speak Quechua, the language of the work.
+
+00:08:41.433 --> 00:08:45.977
+And most people cross on the steel bridge now, so visitors help keep this one going.
+
+00:08:47.877 --> 00:08:54.385
+And custom settles who does which part: who makes the cord, who braids the cables, and who may learn to weave.
+
+00:08:56.285 --> 00:09:02.276
+That's the communities' own way, and it isn't ours to judge. It just isn't a model for a data team.
+
+00:09:04.376 --> 00:09:10.999
+A data team has to ask each person. And it can't leave what it knows with one person, or one line of people.
+
+00:09:12.899 --> 00:09:19.122
+Tomás asked to be asked. And what his report counts is in the glossary now, where anyone can read it.
+
+00:09:23.422 --> 00:09:26.855
+With your own team, write one page together, in your own words.
+
+00:09:28.755 --> 00:09:33.891
+Disagree about the work, in the open. When it turns to the person, stop, and say so.
+
+00:09:35.791 --> 00:09:38.551
+Keep small promises, and say early when you can't.
+
+00:09:40.251 --> 00:09:46.528
+The bridge is made again each June. So read your page again each quarter, and whenever someone joins.
+
+00:09:48.628 --> 00:09:53.997
+On Monday the 1st of March, someone does. Ivy Reyes, a new graduate, opens the door.
+
+00:09:56.497 --> 00:09:59.934
+Her year starts in the next film: Many hats, one picture.
+
+00:10:01.634 --> 00:10:03.935
+Agree how you work together, and keep to it.

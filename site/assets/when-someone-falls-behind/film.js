@@ -2518,9 +2518,9 @@ function fb_lamps(ctx,i,a){if(!(a>0.004))return;const U=PK.u,[bx,by]=FB_H.board,
 const FB_PULLS=[180,620,1060,1500,1900];
 function fb_cord(ctx,pull){const S=PK.S,U=PK.u,y=FB_H.cord;S.begin(ctx,{lw:2.6,sh:3});const col=[226,178,60];
   S.line(ctx,c=>{c.moveTo(-40,y);for(const x of FB_PULLS){const d=pull&&Math.abs(pull[0]-x)<1?pull[1]*26:0;c.lineTo(x,y+d);}c.lineTo(1960,y);},U.dk(col,0.3),3);
-  for(const x of FB_PULLS){const d=pull&&Math.abs(pull[0]-x)<1?pull[1]*26:0;S.line(ctx,c=>{c.moveTo(x,y+d);c.lineTo(x,y+d+36);},U.dk(col,0.3),2.4);S.fill(ctx,c=>U.rrect(c,x-10,y+d+34,20,30,7),col,{w:0.8});}}
+  for(const x of FB_PULLS){const d=pull&&Math.abs(pull[0]-x)<1?pull[1]*26:0;S.line(ctx,c=>{c.moveTo(x,y+d);c.lineTo(x,y+d+86);},U.dk(col,0.3),2.4);S.fill(ctx,c=>U.rrect(c,x-10,y+d+84,20,30,7),col,{w:0.8});}}
 // where a pull's handle is, for the hand that pulls it
-const fb_pullAt=(x,k)=>[x,FB_H.cord+(k||0)*26+50];
+const fb_pullAt=(x,k)=>[x,FB_H.cord+(k||0)*26+100];
 // a station's tool, hanging on its spring from above (for the empty place in 1982: it hangs there, nobody at it)
 function fb_tool(ctx,x,y,sw){const S=PK.S,U=PK.u,a=(sw||0);S.begin(ctx,{lw:2,sh:3});const tip=[x+Math.sin(a)*180,y+Math.cos(a)*180];
   S.line(ctx,c=>{c.moveTo(x,0);c.lineTo(x,y);c.lineTo(tip[0],tip[1]);},[70,70,76],1.2);S.fill(ctx,c=>U.rrect(c,x-14,y-30,28,32,6),[80,84,92],{w:0.6});
@@ -2722,7 +2722,7 @@ function fb_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=
   const bx=U.lerp(tx+150,tx+20,bk);if(o.write!=null||o.book!=null){S.begin(x,{lw:2.4,far:0,sh:3});PK.notebook(x,bx,ty+6,1.5,{open:true,cover:FB_TCOVER});}
   const helena=PK.person(x,"helena",hx,F,H,hp,Object.assign({t:tt,part:"upper",expr:o.he,gaze:o.hg||[1,0.2+0.5*rd]},o.hf||{},{
     reachN:lap>0.004?[U.lerp(790,tx-120,ty_),ty-12]:[U.lerp(790,838,ask),ty-4-40*ask],reachF:lap>0.004?[U.lerp(806,tx-150,ty_),ty-8]:[806,ty-12]}));
-  let tomas=null;if(tom){const pen=wr>0.004||o.pen,hand=[U.lerp(tx+120,bx-20+Math.sin(tt*9)*3*wr,Math.max(wr,0.8*bk)),ty-10];
+  let tomas=null;if(tom){const pen=wr>0.004||o.pen,hand=[Math.max(tx+70,U.lerp(tx+120,bx-20+Math.sin(tt*9)*3*wr,Math.max(wr,0.8*bk))),ty-10];
     tomas=PK.person(x,"tomas",ix,F,H,tp,Object.assign({t:tt+1,flip:true,part:"upper",expr:o.te,gaze:o.tg||[1,U.lerp(U.lerp(1,-0.2,up),0.9,Math.max(wr,rd))]},o.tf||{},{
       reachN:hand,reachNk:1,reachF:[tx+190,ty-10],hold:pen?PK.inHand.pen("blue"):null,holds:!!pen}));}
   return{helena,tomas,laptop:scr};}
@@ -2747,7 +2747,7 @@ function fb_seminarPlace(c){const S=PK.S,P=PK.paint,b=FB_SE.board;P.wall(c,PK.co
   PK.door(c,1560,800,210,500,{col:PK.col("doorCool"),glass:true});
   S.begin(c,{lw:3,far:0.1,sh:5});PK.pot(c,1408,802,92,80);PK.plant(c,1408,722,1.0,6,0);}
 // Carmen's board in the room: the same rows as the board seen close, small
-const FB_SB={x:656,y:216,k:0.35,deco:true,floor:850,rest:1236};
+const FB_SB={x:656,y:272,k:0.35,deco:true,floor:850,rest:1236};
 const fb_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},FB_SB,{h:fb_hS(FB_SB.floor)},o||{}));
 /* the session: two managers at the back, and Helena nearest, her notebook on her knee and a pen in her hand, all turned to the board.
    o.rows: the board's rows; o.say: when Carmen speaks; o.events: PK.face's, for her; o.note (0 to 1): Helena looks down and writes;
@@ -2880,8 +2880,8 @@ const fb_path=(x0,f0,x1,f1)=>x=>PK.u.lerp(f0,f1,PK.u.clamp((x-x0)/(x1-x0),0,1));
 const FB_DEF82={"-1":"gone",0:"odd",1:"gone",2:"odd",3:"gone"};
 const fb_cars82=i=>fb_carOf(i,{doors:FB_DEF82});
 function fb_atCar(cars,sx,tt,dir){const U=PK.u;let m=-1e9;for(const c of cars)m=Math.max(m,470-Math.abs(c.x-sx));
-  const k0=U.clamp(m/90,0,1),k=k0*k0*(3-2*k0),s=Math.sin(tt*2.3+sx*0.01)*10,y=FB_H.line-150+Math.cos(tt*1.7+sx*0.01)*6;
-  return{k,n:[sx+dir*(78+s),y],f:[sx+dir*(124-0.6*s),y+16]};}
+  const k0=U.clamp(m/90,0,1),k=k0*k0*(3-2*k0),s=Math.sin(tt*2.3+sx*0.01)*10,y=FB_H.line-176+Math.cos(tt*1.7+sx*0.01)*6;
+  return{k,n:[sx+dir*(72+0.6*s),y],f:[sx+dir*(116-0.4*s),y+16]};}
 // what a worker's hands do: on the car (fb_atCar), or reaching for something else, w (0 to 1) of the way, at to
 const fb_hands=(W,at,w,atF)=>{const U=PK.u,k=U.clamp(w||0,0,1);return{reachN:k>0.004?[U.lerp(W.n[0],at[0],k),U.lerp(W.n[1],at[1],k)]:W.n,reachNk:Math.max(W.k,k),
   reachF:atF&&k>0.004?[U.lerp(W.f[0],atF[0],k),U.lerp(W.f[1],atF[1],k)]:W.f,reachFk:W.k*(1-k)+(atF?k:0)};};
@@ -2928,13 +2928,13 @@ scene("nummi",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       const Jm=PK.walk(x,K.mgr,tt,{x0:-160,x1:1620,t0:tm,t1:tq,floor:842,h:fb_hH(842),then:"stand"},
         Object.assign({},PK.face(tt,{expr:"think",gaze:[1,0.1]},[[c.blame,"say",1.8],[tq+2.4,"nod"]])));
       const give=ag_io(tt,tg+0.3,tg+1.5,0.4),take=ag_in(tt,tg+0.7,0.4),got=tt>=tg+1.0,read=ag_in(tt,tg+1.4,0.6),put=ag_in(tt,c.cars+0.4,0.6),done=tt>=c.cars+1.0,back=ag_in(tt,c.cars+1.0,0.5),
-        hand=[U.lerp(U.lerp(1636,1720,read),1660,put),U.lerp(U.lerp(612,596,read),574,put)];
-      PK.person(x,K.boss,1800,846,fb_hH(846),"listen",Object.assign({t:tt,flip:true,hold:got&&!done?fb_form:null,reachN:hand,reachNk:take*(1-back)},PK.face(tt,{expr:"neutral",gaze:[1,0.5]},
+        hand=[U.lerp(U.lerp(1672,1720,read),1660,put),U.lerp(U.lerp(604,596,read),574,put)];
+      PK.person(x,K.boss,1800,846,fb_hH(846),"listen",Object.assign({t:tt,flip:true,underF:got&&!done?fb_form:null,holds:got&&!done,reachF:hand,reachFk:take*(1-back)},PK.face(tt,{expr:"neutral",gaze:[1,0.5]},
         [[tg+0.2,"look",1.2,[1,0.15]],[tg+1.6,"think",3.0],[tq+0.2,"look",3.2,[1,-0.05]],[tq+0.8,"nods"]])));
       PK.S.begin(x,{lw:3,sh:4});const Dk=fb_desk(x,1780,880,fb_hH(880),3);if(done)fb_sheet(x,Dk.piles[1],1.2);
       // Joe brings one more complaint, and goes back to the line
-      const j1={x0:-150,x1:1530,t0:c.name+0.4,t1:tg+0.3,floor:912,h:fb_hH(912),then:"stand"},j2={x0:1530,x1:-170,t0:tg+2.6,t1:tg+10.4,floor:912,h:fb_hH(912),before:"stand"};
-      if(tt<j2.t0)PK.walk(x,K.joe,tt,j1,Object.assign({hold:got?null:fb_form,flip:ag_in(tt,tg+2.0,0.5),reachN:[1618,614],reachNk:give},PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[tg+0.3,"say",1.0]])));
+      const j1={x0:-150,x1:1600,t0:c.name+0.4,t1:tg+0.3,floor:912,h:fb_hH(912),then:"stand"},j2={x0:1600,x1:-170,t0:tg+2.6,t1:tg+10.4,floor:912,h:fb_hH(912),before:"stand"};
+      if(tt<j2.t0)PK.walk(x,K.joe,tt,j1,Object.assign({hold:got?null:fb_form,flip:ag_in(tt,tg+2.0,0.5),reachN:[1672,606],reachNk:give},PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[tg+0.3,"say",1.0]])));
       else PK.walk(x,K.joe,tt,j2,{expr:"worry",gaze:[1,0.2]});
       fb_say(x,Jm,tt,c.blame,tG-0.3,["The problem is the workers."],cam);}},
     // what it meant: a family with a car that keeps going wrong; and Ray, at a gate that stays shut
@@ -3081,7 +3081,7 @@ scene("behind",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       if(tt<tTake+0.1){hand=hA;hk=ag_in(tt,3.6,0.4);}else if(tt<tPut-0.5){hand=[U.lerp(hA[0],carry[0],dn1),U.lerp(hA[1],carry[1],dn1)];hk=1;}
       else{hand=[U.lerp(carry[0],hB[0],up2),U.lerp(carry[1],hB[1],up2)];hk=1-ag_in(tt,tPut+0.1,0.4);}
       const rev=w("code","reviewed",0.2),t41=w("days","41",-0.2),t24=w("days","24",0.2),p=ag_in(tt,t41,t24-t41),gk=w("tomas","who reads",-0.2);
-      const G1={x0:2040,x1:860,t0:tG,t1:tG+2.3,floor:905,h:fb_hT,then:"stand"},G2={x0:860,x1:2040,t0:33.0,t1:35.4,floor:905,h:fb_hT,before:"stand"},
+      const G1={x0:2040,x1:828,t0:tG,t1:tG+2.3,floor:905,h:fb_hT,then:"stand"},G2={x0:828,x1:2040,t0:33.0,t1:35.4,floor:905,h:fb_hT,before:"stand"},
         turn=ag_io(tt,tG+2.0,33.2,0.5),wk2=ag_in(tt,c.less+0.2,0.6);
       const R=fb_team(x,tt,{clock:9.1,notes:tt<tPut?0.25:0.375,lift:held?0.5:null,binders:1,show:fb_scrOld,
         sam:Object.assign({work:1-0.5*ag_io(tt,rev+0.3,c.days+3.0,0.5)},PK.face(tt,{expr:"think",gaze:[1,0.2]},[[rev+0.4,"look",2.4,[1,0.05]],[rev+0.6,"smile",2.6],[c.days+0.8,"look",1.8,[-1,-0.1]],[t24,"smile",2.4]])),

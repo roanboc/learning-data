@@ -1,6 +1,6 @@
 # When someone falls behind: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 3 of 4 · merged, PR #221 · [pull request](https://github.com/roanboc/learning-data/pull/221); made again in ink line on 18 November 2026 (PR #436)
+*Leading data people* · *Ownership and performance*, film 3 of 4 · merged, PR #221 · [pull request](https://github.com/roanboc/learning-data/pull/221); made again in ink line on 18 November 2026 (PR #436); its arms put right the same day
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/when-someone-falls-behind/)
 
@@ -42,3 +42,4 @@ You approved *Owning the outcome* made again in ink line on 17 November, and ask
 | 21 | Length and pace? | 7:36, the same 957 words at 126 a minute (the first version 7:18). Each board and page is left time to be written and read, Helena's ask at his desk has a moment of its own, and the October chat a pause of 5.2 seconds, so *Give it time* falls to 114 words a minute; the film as a whole doesn't. | The whole film |
 | 22 | The Spanish? | The captions' words are the same, timed again to the new pictures; the page and Pause and think don't change. | The Spanish captions |
 | 23 | Merge now, or wait for you? | Merged on green, squashed, with the series' Draft label, as you chose for the series' films on 17 November. A review page with the first version beside this one can be made on request. | This pull request |
+| 24 | Arms and hands, after the kit's new check? | Put right on 18 November 2026. On the assembly line the workers' hands rest on the car's body, a little higher, within an arm's length: they stopped short in the air, on and off, nineteen times. The cord's handles hang lower, so Joe reaches the one he pulls. He walks nearer the supervisor's desk, who takes the form in the far hand. Graham stands nearer Tomás's desk; Tomás writes where his hand reaches; and the seminar's board is written 56 px lower, within Carmen's reach. The words, the timings and the sound stay. | Chapters 1 to 6 |

@@ -154,7 +154,7 @@ function fb_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=
   const bx=U.lerp(tx+150,tx+20,bk);if(o.write!=null||o.book!=null){S.begin(x,{lw:2.4,far:0,sh:3});PK.notebook(x,bx,ty+6,1.5,{open:true,cover:FB_TCOVER});}
   const helena=PK.person(x,"helena",hx,F,H,hp,Object.assign({t:tt,part:"upper",expr:o.he,gaze:o.hg||[1,0.2+0.5*rd]},o.hf||{},{
     reachN:lap>0.004?[U.lerp(790,tx-120,ty_),ty-12]:[U.lerp(790,838,ask),ty-4-40*ask],reachF:lap>0.004?[U.lerp(806,tx-150,ty_),ty-8]:[806,ty-12]}));
-  let tomas=null;if(tom){const pen=wr>0.004||o.pen,hand=[U.lerp(tx+120,bx-20+Math.sin(tt*9)*3*wr,Math.max(wr,0.8*bk)),ty-10];
+  let tomas=null;if(tom){const pen=wr>0.004||o.pen,hand=[Math.max(tx+70,U.lerp(tx+120,bx-20+Math.sin(tt*9)*3*wr,Math.max(wr,0.8*bk))),ty-10];
     tomas=PK.person(x,"tomas",ix,F,H,tp,Object.assign({t:tt+1,flip:true,part:"upper",expr:o.te,gaze:o.tg||[1,U.lerp(U.lerp(1,-0.2,up),0.9,Math.max(wr,rd))]},o.tf||{},{
       reachN:hand,reachNk:1,reachF:[tx+190,ty-10],hold:pen?PK.inHand.pen("blue"):null,holds:!!pen}));}
   return{helena,tomas,laptop:scr};}
@@ -179,7 +179,7 @@ function fb_seminarPlace(c){const S=PK.S,P=PK.paint,b=FB_SE.board;P.wall(c,PK.co
   PK.door(c,1560,800,210,500,{col:PK.col("doorCool"),glass:true});
   S.begin(c,{lw:3,far:0.1,sh:5});PK.pot(c,1408,802,92,80);PK.plant(c,1408,722,1.0,6,0);}
 // Carmen's board in the room: the same rows as the board seen close, small
-const FB_SB={x:656,y:216,k:0.35,deco:true,floor:850,rest:1236};
+const FB_SB={x:656,y:272,k:0.35,deco:true,floor:850,rest:1236};
 const fb_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},FB_SB,{h:fb_hS(FB_SB.floor)},o||{}));
 /* the session: two managers at the back, and Helena nearest, her notebook on her knee and a pen in her hand, all turned to the board.
    o.rows: the board's rows; o.say: when Carmen speaks; o.events: PK.face's, for her; o.note (0 to 1): Helena looks down and writes;

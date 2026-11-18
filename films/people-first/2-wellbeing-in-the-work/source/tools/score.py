@@ -289,17 +289,11 @@ sheet(ow('lasts', 'rope', -0.3), 0.0035, px(600)); sheet(ow('lasts', 'account', 
 stopped(B2, ow('lasts', 'account', 0.0), 3.0, 0.6)
 pipe(B4, ow('lasts', 'account', 0.4), 2.5, 0.75)
 # a team's work is arranged too: the desk, and what lands on it
-sheet(ow('team', 'arranged', -0.5), 0.0035, px(470))
-for k in (0, 3, 6, 9, 12):
-    sheet(ow('team', 'arranged', -0.2 + k * 0.2), 0.0026, px(1330))
-tap(ow('team', 'wears', -0.2), 0.003, px(1330), low=True)
 stopped(Gs2, ow('team', 'wears', 0.0), 1.7, 0.7)
 pipe(As4, ow('shows', 'person', -0.2), 1.1, 0.8, wind=0.5, fade=0.7)
 # renewed on a date: the cards take their order, each with a date; and the title card
 REN = ow('look', 'date', -0.3)
-rub(REN + 0.3, 1.7, 0.003, px(1180)); pen(REN + 1.5, 0.3, 0.004, px(1180), 2)
 line(MARK[:3], REN + 0.3, 0.38, 0.8, last=0.9)
-tap(ow('look', 'well', -0.3), 0.003, px(470)); tap(ow('look', 'done', -0.5), 0.003, px(470))
 line(MARK[3:6], after('bridge', 'look', 0.3), 0.4, 0.85, last=0.9)
 TT = oc('breath', 0.25)
 line(MARK[6:], TT, 0.4, 0.85, last=3.4, until=END - 0.4)
@@ -312,20 +306,11 @@ stopped(B2, TT + 0.8, 3.4, 0.7, until=END - 0.4)
 LV[0] = 1.0
 fw = lambda lid, word, off=0: W('fourteen', lid, word, off)
 fc = lambda lid, off=0: G('fourteen', lid, off)
-sheet(fw('helena', 'Helena', -0.3), 0.0035, px(620))
-rustle(fc('marta', -0.2), 0.9, 0.0032, px(880))
 MV = fw('marta', 'wait', -0.2)
-rub(MV, 1.7, 0.003, px(760))
-tap(fc('urgent', 0.3), 0.0032, px(932), low=True)
 HOP = fw('last', 'whoever', -0.1)
-rub(HOP, 1.2, 0.003, px(900)); tap(HOP + 1.15, 0.003, px(560))
-tap(fc('blame', 0.1), 0.003, px(932))
-sheet(fc('cope', 0.2), 0.0035, px(932))
 for (wd, off), m, w in zip((('plan', -0.2), ('push', -0.2), ('day', -0.4)), (Cs5, B4, Gs4), (0.6, 0.48, 0.36)):
     pipe(m, fw('cope', wd, off), 0.5, 0.8, wind=w)
 stopped(Gs2, fw('still', 'still', -0.1), 1.6, 0.7)
-rub(fw('work', 'work', -0.3), 1.2, 0.003, px(932))
-tap(fw('work', 'before', -0.4), 0.003, px(932))
 line((B4, Ds5, Fs5), fw('work', 'before', -0.2), 0.3, 0.8, last=1.2)
 
 # 3. One week, on one page: the sheet; three tags; the page pinned up, and a pen for each line written on it. Nine picked up, none
@@ -335,19 +320,9 @@ line((B4, Ds5, Fs5), fw('work', 'before', -0.2), 0.3, 0.8, last=1.2)
 LV[0] = 1.0
 pw = lambda lid, word, off=0: W('page', lid, word, off)
 pc = lambda lid, off=0: G('page', lid, off)
-sheet(pw('monday', 'Monday', -0.1), 0.0035, px(960))
-for wd, off in (('inbox', -0.3), ('calendar', -0.3)):
-    tap(pw('from', wd, off), 0.0028, px(960))
-sheet(pc('asks', 0.0), 0.0035, px(960))
-for lid, wd, off, x in (('asks', 'asks', -0.5, 610), ('asks', 'fourteen', -0.2, 610), ('asks', 'urgent', -0.2, 610), ('asks', 'order', -0.5, 610),
-                        ('nine', 'nine', -0.2, 610), ('sundays', 'Sundays', -0.5, 610), ('helps', 'helps', -0.5, 1310), ('helps', 'knows', -0.2, 1310),
-                        ('helps', 'Jun', -0.2, 1310)):
-    pen(pw(lid, wd, off), 0.45, 0.004, px(x), 2)
 breathless(pw('nine', 'nine', 0.2), 0.29, 0.8, 0.85, 0.22, fails=True)
 stopped(Gs2, pw('sundays', 'Sundays', -0.3), 1.6, 0.7)
 line((Ds5, Fs5), pw('helps', 'Jun', 0.0), 0.42, 0.8, last=0.9)
-tap(pw('jdr', 'demands', -0.4), 0.0028, px(610)); tap(pw('jdr', 'resources', -0.4), 0.0028, px(1310))
-tap(pw('both', 'arranged', -0.6), 0.003, px(960))
 PB = after('page', 'both', 0.4)
 stopped(Gs2, PB, 0.75, 0.7); stopped(B2, PB + 0.78, 1.9, 0.7, until=E('page') - 0.2)
 
@@ -358,18 +333,9 @@ LV[0] = 1.0
 nw = lambda lid, word, off=0: W('needs', lid, word, off)
 nc = lambda lid, off=0: G('needs', lid, off)
 for wd, m, x in (('say', B4, 390), ('good', Ds5, 960), ('belong', Fs5, 1530)):
-    sheet(nw('three', wd, -0.3), 0.0035, px(x))
     pipe(m, nw('three', wd, -0.2), 0.7, 0.75)
-sheet(nc('marta', -0.5), 0.003, px(960))
-for wd, x in (('say', 390), ('good', 960)):
-    tap(nw('marta', wd, -0.3), 0.0028, px(x))
 stopped(Gs2, nw('marta', 'alone', -0.1), 1.6, 0.7)
-sheet(nc('better', 0.2), 0.0035, px(960))
 line((B4, Ds5, Fs5), nw('care', 'Meet', -0.2), 0.25, 0.8, last=1.0)
-tap(nw('laptop', 'laptop', -0.8), 0.0032, px(710), low=True)
-tap(nw('laptop', 'gives', -0.2), 0.0028, px(1100))
-sheet(nc('about', -0.1), 0.003, px(960))
-tap(nw('about', 'nothing', -0.2), 0.003, px(960)); tap(nw('about', 'All', -0.2), 0.003, px(960))
 NB = after('needs', 'about', 0.3)
 stopped(B2, NB, 2.6, 0.7, until=E('needs') - 0.2)
 line((Fs5, Ds5, B4), NB + 0.25, 0.4, 0.8, last=1.5, until=E('needs') - 0.2)
@@ -381,23 +347,13 @@ line((Fs5, Ds5, B4), NB + 0.25, 0.4, 0.8, last=1.5, until=E('needs') - 0.2)
 LV[0] = 1.0
 rw = lambda lid, word, off=0: W('order', lid, word, off)
 rc = lambda lid, off=0: G('order', lid, off)
-sheet(rw('room', 'Wednesday', -0.1), 0.0035, px(480)); sheet(rw('room', 'page', -0.5), 0.003, px(1120))
-tap(rw('evidence', 'None', -0.2), 0.0028, px(480))
-for lid, wd, off, x in (('team', 'team', -0.3, 530), ('they', 'They', -0.1, 1390), ('they', 'Both', -0.2, 530), ('least', 'least', -0.3, 1390)):
-    sheet(rw(lid, wd, off), 0.0035, px(x))
 line((Ds5, Fs5), rw('they', 'Both', 0.0), 0.42, 0.8, last=0.9)
-rustle(rc('agree', -0.1), 0.6, 0.003, px(780))
 AG = rw('agree', 'agree', -0.4)
 stopped(B2, AG + 0.05, 2.3, 0.7); line((E5, Ds5), AG + 0.3, 0.6, 0.8, last=1.3)
 GONE = rw('agree', 'Two', -0.2)
-pen(GONE, 0.5, 0.0045, px(780), 2)
 ORD = rw('agree', 'twelve', -0.4)
-rub(ORD, 1.2, 0.003, px(780)); pen(ORD + 0.9, 1.0, 0.004, px(780), 4)
-tap(rw('agree', 'date', -0.4), 0.0028, px(780))
 whole(rw('three', 'three', -0.3), 0.36, 0.38, 0.85, last=1.0)
-rub(rw('door', 'new', -0.5), 1.0, 0.003, px(1740))
 PL = rw('door', 'places', -0.3)
-rub(PL, 1.1, 0.0028, px(1000)); tap(PL + 1.15, 0.003, px(405)); pen(PL + 1.0, 0.25, 0.004, px(405), 1)
 stopped(B2, after('order', 'door', 0.5), 2.2, 0.7, until=E('order') - 0.2)
 
 # 6. Where to look: the gorge in 1972: the stopped G sharp; two visitors walking up; gleaming like gold: one high note on thin wind,
@@ -408,19 +364,9 @@ kw = lambda lid, word, off=0: W('keeper', lid, word, off)
 kc = lambda lid, off=0: G('keeper', lid, off)
 stopped(Gs2, S0('keeper') + 0.15, 1.8, 0.7)
 tread(kc('gold', 0.5), 4, 0.0028, px(240), px(330))
-sheet(kw('gold', 'nineteen', -0.3), 0.0035, px(370))
 pipe(Fs5, kw('gold', 'gleaming', -0.1), 1.3, 0.8, wind=0.5, fade=0.8)
-sheet(kw('dying', "Don't", -0.3), 0.0035, px(1350))
 DY = after('keeper', 'dying', 0.15)
 line((Cs5, As4), DY, 0.4, 0.8, (0.42, 0.26), last=0.4, fade=0.2); air(B4, DY + 0.8, 0.45, 0.8)
-tap(kw('knew', 'knew', -0.3), 0.0028, px(1150))
-sheet(kw('where', 'where', -0.4), 0.0035, px(790))
-for lid, wd, off in (('where', 'much', -0.3), ('where', 'decides', -0.3), ('more', 'often', -0.3), ('more', 'alone', -0.4), ('more', 'Nights', -0.2),
-                     ('more', 'unclear', -0.4), ('more', 'thanks', -0.3)):
-    pen(kw(lid, wd, off), 0.4, 0.0035, px(790), 2)
-sheet(kw('hazards', 'Safe', -0.2), 0.0035, px(1520))
-for wd, off in (('demands', -0.3), ('control', -0.5), ('support', -0.5)):
-    tap(kw('hazards', wd, off), 0.003, px(1520))
 
 # 7. Three signs, and a limit: the list, and three notes falling, each on less wind than the last, as the signs are named. The World
 #    Health Organization's sheet and tags. What a manager does: the same three notes rising, on full wind. Where her part ends: a line
@@ -428,21 +374,12 @@ for wd, off in (('demands', -0.3), ('control', -0.5), ('support', -0.5)):
 LV[0] = 1.0
 sw = lambda lid, word, off=0: W('signs', lid, word, off)
 sc_ = lambda lid, off=0: G('signs', lid, off)
-sheet(sw('signs', 'three', -0.3), 0.0035, px(790))
 for wd, m, w in (('worn', Ds5, 0.62), ('distant', B4, 0.46), ('feeling', Gs4, 0.32)):
     pipe(m, sw('signs', wd, -0.3), 0.55, 0.8, wind=w, fade=0.25)
-sheet(sw('who', 'World', -0.3), 0.0035, px(1520))
-tap(sw('notmed', 'matter', -0.4), 0.003, px(1520))
-sheet(sc_('ask', 0.1), 0.0035, px(1520))
 line((Gs4, B4, Ds5), sw('ask', 'asks', -0.3), 0.4, 0.8, last=1.0,
      times=(0.0, sw('ask', 'listens', -0.3) - sw('ask', 'asks', -0.3), sw('ask', 'changes', -0.3) - sw('ask', 'asks', -0.3)))
-sheet(sw('employers', 'recommends', -0.6), 0.0035, px(1520))
 LT = sw('part', 'end', -0.6)
-sheet(sw('part', 'part', -0.3), 0.0032, px(675))
-rub(LT, 0.9, 0.003, px(960)); pipe(B4, LT + 0.05, 0.9, 0.8)
-tap(sw('part', 'clinician', -0.7), 0.0028, px(675))
-sheet(sw('help', 'more', -0.4), 0.0035, px(1370))
-tap(sw('help', 'private', -0.7), 0.0028, px(1370))
+pipe(B4, LT + 0.05, 0.9, 0.8)
 
 # 8. Ask everyone, in writing: the seven, a tap for the first name and the last; the five questions, a step of the scale for each;
 #    in writing: a pen, and the quiet answer and the loud one, the same note on little wind and on full. The answers shown: a rub as
@@ -451,22 +388,10 @@ tap(sw('help', 'private', -0.7), 0.0028, px(1370))
 LV[0] = 1.0
 aw = lambda lid, word, off=0: W('ask', lid, word, off)
 ac = lambda lid, off=0: G('ask', lid, off)
-sheet(aw('wait', 'wait', -0.5), 0.0035, px(960))
-tap(aw('wait', 'seven', -0.5), 0.0028, px(264)); tap(aw('wait', 'seven', 0.0), 0.0028, px(1656))
-sheet(aw('five', 'Friday', -0.2), 0.0035, px(570))
 line((B4, Cs5, Ds5, E5, Fs5), aw('five', 'five', -0.3), 0.3, 0.8, last=0.9)
-sheet(aw('quiet', 'writing', -0.6), 0.0035, px(1450)); pen(aw('quiet', 'writing', -0.2), 0.6, 0.004, px(1450), 3)
 QT = after('ask', 'quiet', 0.1)
 pipe(B4, QT, 0.5, 0.8, wind=0.34); pipe(B4, QT + 0.62, 0.7, 0.8)
-tap(ac('needs', -0.1), 0.0028, px(1300)); tap(aw('needs', 'Two', -0.2), 0.0028, px(1390))
-sheet(aw('show', 'answers', -0.5), 0.0035, px(446))
-for wd in ('Two', 'Three', 'All'):
-    rub(aw('counts', wd, -0.2), 0.8, 0.0028, px(540))
-sheet(ac('wears', 0.1), 0.0035, px(1203))
 stopped(Gs2, ac('wears', 0.2), 1.7, 0.7)
-for wd, off in (('meetings', -0.5), ('requests', -0.3), ('nights', -0.3)):
-    rub(aw('wears', wd, off), 0.8, 0.0028, px(1330))
-tap(aw('changed', 'changed', -0.4), 0.003, px(446)); tap(aw('changed', 'date', -0.5), 0.003, px(1203))
 AB = after('ask', 'changed', 0.3)
 stopped(B2, AB, 2.5, 0.7, until=E('ask') - 0.2); line((E5, Ds5), AB + 0.25, 0.6, 0.8, last=1.4, until=E('ask') - 0.2)
 
@@ -477,23 +402,50 @@ stopped(B2, AB, 2.5, 0.7, until=E('ask') - 0.2); line((E5, Ds5), AB + 0.25, 0.6,
 LV[0] = 1.0
 dw = lambda lid, word, off=0: W('date', lid, word, off)
 dc = lambda lid, off=0: G('date', lid, off)
-sheet(dw('cut', 'Quehue', -0.3), 0.0035, px(410))
 fall(dw('cut', 'holds', 0.2), 0.0036, px(960))
 R0 = dc('renew', 0.1)
 twist(R0 + 0.2, 1.4, 0.0028, px(520)); twist(R0 + 1.7, 1.4, 0.0028, px(1400))
 line(MARK[:3], R0 + 0.2, 0.38, 0.85, last=1.0)
-tap(dw('renew', 'never', -0.3), 0.003, px(960))
 stopped(B2, dw('renew', 'never', -0.2), 2.4, 0.7)
 tread(R0 + 5.2, 4, 0.0028, px(560), px(760))
-sheet(dw('june', 'date', -0.5), 0.0035, px(960))
-rub(dw('june', 'June', -0.9), 1.3, 0.003, px(960)); pen(dw('june', 'June', 0.2), 0.8, 0.004, px(1080), 2)
 line((B4, Cs5, Ds5, E5, Fs5), dw('june', 'five', -0.3), 0.3, 0.8, last=0.9)
-rustle(dc('marta', 0.1), 0.6, 0.003, px(1115))
-pen(dw('marta', 'six', -0.2), 0.75, 0.004, px(1115), 6)
 HT = dw('marta', 'twelve', 0.2)
-tap(HT + 0.2, 0.0028, px(830))
 line((Ds5, Fs5), dw('marta', 'Sunday', -0.4), 0.42, 0.8, last=0.9)
-for lid, wd, off, x in (('week', 'write', -0.3, 530), ('take', 'Take', -0.1, 1390), ('write', 'Ask', -0.1, 530), ('one', 'Change', -0.1, 1390)):
-    sheet(dw(lid, wd, off), 0.0035, px(x))
-tap(dw('next', 'alike', -0.7), 0.0028, px(960))
 whole(after('date', 'end', 0.25), 0.36, 0.38, 0.9, last=3.4, low=B2, until=TOT - 0.15)
+
+
+# ---- what the hands write: Carmen's and Helena's boards and the pages of Helena's notebook. A row waits until whoever writes has
+# walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the people kit's tools/pens.py).
+# And the messages: each one that comes in, a soft blip that falls; each sent, one that rises
+import pens
+PEN = pens.written({'A': ('page', 'carmen', 'ww_boardA'), 'B': ('needs', 'carmen', 'ww_boardB'), 'C': ('order', 'helena', 'ww_boardC'),
+                    'D': ('keeper', 'carmen', 'ww_boardD'), 'E': ('signs', 'carmen', 'ww_boardE'), 'F': ('ask', 'helena', 'ww_boardF'),
+                    'N1': ('fourteen', None, 'ww_note1'), 'N2': ('page', None, 'ww_note2'), 'N3': ('needs', None, 'ww_note3'),
+                    'N4': ('order', None, 'ww_note4'), 'N5': ('signs', None, 'ww_note5'), 'N6': ('date', None, 'ww_note6')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        _fx(_bn(m, 350, 1300) * _bump(x, d, 0.7) * (0.4 + 0.6 * np.abs(_slow(m, 40))), t, g, pan, 1500)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+for name in ('A', 'B', 'D', 'E'):
+    written(name, marker, 0.004)
+for name in ('C', 'F'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4', 'N5', 'N6'):
+    written(name, pen, 0.004)
+# Marta's inbox: two requests come in, each called urgent
+pop(fw('urgent', 'urgent', -0.2), 0.0022, px(1200), up=False); pop(fw('urgent', 'urgent', 0.5), 0.0022, px(1200), up=False)
+# Helena's five questions, sent; Jun's answer, sent back
+pop(aw('five', 'sends', 0.2), 0.0022, px(1000), up=True); pop(ac('needs', 1.0), 0.0022, px(1000), up=False)

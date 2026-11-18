@@ -193,10 +193,8 @@ def pen(s, sec=0.7, g=0.005, pan=0.0, n=3):
         _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
 def ticked(s, g=0.0045, pan=0.0):
     """a tick drawn: two quick strokes of a pen"""
-    pen(s, 0.24, g, pan, 2)
 def struck(s, g=0.0045, pan=0.0):
     """a line drawn through a step: one long stroke of a pen"""
-    pen(s, 0.45, g, pan, 1)
 def box(s, g=0.005, pan=0.0):
     """a box lifted off a shelf and taken away: a short scrape of card on the shelf, and its soft lift"""
     n = int(0.42 * SR); x = np.arange(n) / SR
@@ -223,36 +221,22 @@ oc = lambda lid, off=0: G('wards', lid, off)
 END = E('wards')
 low(Eb2, 0.5, 0.85, 0.0)
 chord((Eb3, Bb3, Eb4, G4), ow('when', 'Colombo', 0.1), 0.65, step=0.17)
-card(ow('when', 'Colombo', -0.2), 0.0035, px(430))
-card(ow('where', 'director', -0.1), 0.0035, px(430))
-card(ow('where', 'Castle', -0.2), 0.0035, px(1360))
 # the infections: the wards outlined in amber, then the operating theatre, then the nursery, each with a note of C minor, low to high
 low(C3, ow('infect', 'mothers', -0.1), 0.7)
 pipe(G3, ow('infect', 'Caesarean', -0.1), 0.6, px(900) * 0.4)
 pipe(Eb4, ow('infect', 'newborn', -0.1), 0.55, px(1300) * 0.4)
-card(oc('infect', 0.2), 0.0035, px(960))
 # close on a ward: what an infection is; C minor under the danger to mother and child
-card(oc('means', 1.2), 0.0035, px(1410))
 chord((C3, G3, C4, Eb4), ow('means', 'danger', -0.1), 0.5, step=0.16)
 # no money for a fix: one low A flat, as the sheet goes up; nothing under "Something has to change"
-card(oc('money', 1.5), 0.0035, px(960))
 low(Ab2, ow('money', 'nothing', 0.0), 0.65, until=oc('change', -0.5))
 # towards the store: five steps, from Japanese factories: B flat major, as the way arrives
-card(ow('fives', 'Japanese', -0.2), 0.0035, px(960))
 chord((Bb2, F3, Bb3, D4), ow('fives', 'five', 0.0), 0.5, step=0.15)
 # the store, close: a pipe on each step as it's named, rising; a box lifted away, things set in order, a cloth along the shelf, labels
-card(oc('steps', -0.2), 0.0035, px(280))
 for word, m in (('Sort', Eb3), ('Set', F3), ('Shine', G3), ('Standardise', Ab3), ('sustain', Bb3)):
     pipe(m, ow('steps', word, 0.05), 0.5, px(560) * 0.4)
-box(ow('steps', 'Sort', 0.3), 0.005, px(700)); box(ow('steps', 'Sort', 1.3), 0.0045, px(420))
-tap(ow('steps', 'Set', 0.4), 0.004, px(560)); tap(ow('steps', 'Set', 1.1), 0.0035, px(700))
-cloth(ow('steps', 'Shine', 0.1), 1.0, 0.004, px(560))
-tap(ow('steps', 'Standardise', 0.2), 0.0035, px(560))
 # costs little, everyone can see it; the staff do it themselves: A flat major, warm
-tap(ow('cheap', 'costs', 0.0), 0.0035, px(280)); tap(ow('cheap', 'everyone', 0.0), 0.0035, px(280))
 chord((Ab2, Eb3, C4, Ab4), ow('own', 'themselves', 0.0), 0.5, step=0.15)
 # kaizen: the mark, short of home, as the staff propose a change and try it; home, as they keep it
-card(oc('kaizen', -0.1), 0.0035, px(290))
 mark(MARK, ow('kaizen', 'small', 0.0), 0.6, step=0.26, bass=((C3, 0),))
 mark(BETTER, ow('kaizen', 'keep', 0.0), 0.6, step=0.26, bass=((Eb2, 0), (Bb2, 3)))
 # back to the whole hospital: the first ward to take it up, then ward by ward, a pipe for each as it lights, rising
@@ -260,25 +244,16 @@ pipe(Eb3, ow('spread', 'first', 0.0), 0.45, px(528) * 0.4)
 for i, m in enumerate((G3, Bb3, Eb4, G4, Bb4, Eb5, G5)):
     pipe(m, ow('spread', 'Ward', -0.1 + 0.42 * i), 0.4, px(400 + 160 * i) * 0.4)
 # in two years, the infections fall by half: E flat major, from low; the bars drawn shorter
-card(oc('fall', -0.1), 0.0035, px(960))
-slide(ow('fall', 'half', -0.2), 1.0, 0.0035, px(900)); slide(ow('fall', 'more', -0.1), 1.0, 0.0035, px(900))
 chord((Eb2, Bb2, G3, Eb4), ow('fall', 'half', 0.0), 0.55, step=0.16)
 # and beyond: other hospitals in Sri Lanka; fifteen African countries: A flat major, the sheet's hospitals set down in two groups
-card(oc('africa', 0.5), 0.0035, px(430))
-card(ow('africa', 'Japan', -0.3), 0.0035, px(1275))
-tap(ow('africa', 'public', 0.0), 0.0035, px(1100)); tap(ow('africa', 'fifteen', 0.0), 0.0035, px(1500))
 chord((Ab2, Ab3, C4, Eb4), ow('africa', 'fifteen', 0.1), 0.5, step=0.14)
 # nobody was told to work harder: A flat, then E flat, as the people who did the work improved it, a small step at a time
-card(oc('blame', 0.2), 0.0035, px(960))
 chord((Ab3, C4, Eb4), oc('blame', 0.3), 0.45, step=0.18)
 chord((Eb3, G3, Bb3, Eb4), ow('blame', 'improved', -0.1), 0.45, step=0.18)
-tap(ow('blame', 'small', -0.1), 0.0035, px(960))
 # data work's chores by hand: C and A flat, low, under the mistakes and the hours
-card(ow('data', 'weekly', -0.2), 0.0035, px(530))
 low(C3, ow('data', 'mistakes', 0.0), 0.55, px(300) * 0.4)
 low(Ab2, ow('data', 'hours', 0.0), 0.55, px(640) * 0.4)
 # one small change at a time: the stair drawn, a pipe for each step, rising to D, the note below home; then home under the title card
-card(oc('same', 0.2), 0.0035, px(1420))
 for i, m in enumerate((Eb4, F4, G4, Ab4, Bb4, C5, D5)):
     pipe(m, ow('same', 'one', -0.1 + 0.6 * i), 0.4, px(1110 + 90 * i) * 0.4)
 chord((Eb2, Bb2, Eb3, G3, Bb3, Eb4), oc('breath', 0.3), 0.65, step=0.2, until=END)
@@ -291,21 +266,11 @@ LV[0] = 0.9
 hw = lambda lid, word, off=0: W('hours', lid, word, off)
 hc = lambda lid, off=0: G('hours', lid, off)
 chord((G2, D3, G3, Bb3), S0('hours') + 0.3, 0.5, step=0.16)
-card(hc('own', 0.3), 0.0035, px(1130))
-card(hw('promise', 'promise', -0.2), 0.0035, px(1130))
-card(hc('job', -0.3), 0.0035, px(1250))
 pipe(Eb4, hw('job', 'six', 0.0), 0.5, px(705) * 0.4)
-slide(hw('hand', 'checking', -0.1), 2.0, 0.0035, px(1200))
 low(C3, hc('risk', -0.1), 0.6)
-tap(hw('risk', 'opens', -0.1), 0.0035, px(1000))
 chord((Ab2, Eb3, Ab3, C4), hc('talk', 0.3), 0.5, step=0.16)
-card(hw('talk', 'mid', -0.2), 0.0035, px(960))
-card(hw('talk', 'asks', -0.1), 0.0035, px(960))
-card(hw('way', 'asks', -0.1), 0.0035, px(960))
 pipe(Bb3, hw('way', 'way', 0.1), 0.5)
-card(hw('time', 'gives', -0.1), 0.0035, px(960))
 chord((Eb3, G3, Bb3, Eb4), hw('time', 'Thursday', 0.0), 0.5, step=0.16)
-card(hc('idea', 0.1), 0.0035, px(960))
 figure((Bb3, Eb4, G4), hw('idea', 'everyone', 0.0), 0.45, step=0.3)
 
 # 3. Measure, then simplify: the cycle drawn, a pipe for each arc as the voice names it; its history pinned up; kaizen, change for the
@@ -315,24 +280,12 @@ figure((Bb3, Eb4, G4), hw('idea', 'everyone', 0.0), 0.45, step=0.3)
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('measure', lid, word, off)
 mc = lambda lid, off=0: G('measure', lid, off)
-card(S0('measure') + 0.5, 0.0035, px(530))
 for word, m in (('plan', Bb3), ('do', D4), ('study', F4), ('act', Bb4)):
     pipe(m, mw('cycle', word, 0.0), 0.45, px(530) * 0.4)
-card(mc('shew', 0.2), 0.0035, px(1430))
-card(mw('imai', 'Imai', -0.4), 0.0035, px(1430))
 chord((Eb3, Bb3, Eb4, G4), mw('imai', 'kaizen', 0.0), 0.45, step=0.15)
-card(mw('measure', 'Monday', -0.3), 0.0035, px(1270))
-slide(mw('measure', 'times', -0.1), 2.4, 0.0035, px(1270))
 low(C3, mw('measure', 'hundred', 0.0), 0.55)
-tap(mw('back', 'who', -0.1), 0.0035, px(330))
-card(mw('test', 'since', -0.2), 0.0035, px(1270))
-ticked(mw('test', 'checked', -0.1), 0.0045, px(1764))
-card(mc('try', 0.1), 0.0035, px(1270))
 mark(MARK, mw('try', 'skips', 0.0), 0.5, step=0.26, down=1, bass=((C3, 0),))
 mark(BETTER, mw('try', 'keeps', 0.0), 0.5, step=0.26, down=1, bass=((Ab2, 0), (Eb2, 3)))
-card(mc('copy', 0.2), 0.0035, px(1270))
-card(mc('ninety', -0.3), 0.0035, px(1270))
-struck(mc('ninety', 0.1), 0.0045, px(1270))
 chord((Bb2, F3, D4, Bb4), mw('ninety', 'ninety', 0.0), 0.45, step=0.15)
 
 # 4. Standardise, then automate: the chapter turns on E flat, from its fifth; the checklist pinned up, each step's what-good-looks-like;
@@ -343,22 +296,12 @@ LV[0] = 0.9
 aw = lambda lid, word, off=0: W('automate', lid, word, off)
 ac = lambda lid, off=0: G('automate', lid, off)
 chord((Bb2, Eb3, G3, Eb4), S0('automate') + 0.3, 0.45, step=0.18)
-card(ac('list', 0.0), 0.0035, px(960))
-tap(aw('same', 'changes', -0.1), 0.0035, px(760)); tap(aw('same', 'anyone', -0.1), 0.0035, px(1180))
-for i in range(4):
-    ticked(aw('jun', 'follows', -0.1 + 0.55 * i), 0.004, px(608))
 chord((G3, Bb3, D4, G4), aw('jun', 'same', 0.0), 0.45, step=0.16)
-card(ac('muddle', 0.1), 0.0035, px(980))
 low(C3, aw('muddle', 'muddle', 0.0), 0.55)
-card(ac('sept', -0.1), 0.0035, px(1010))
 for i, m in enumerate((Eb4, G4, Bb4)):
     pipe(m, aw('sept', 'step', -0.1 + 0.9 * i), 0.45, px(610) * 0.4)
-tap(aw('review', 'reviews', -0.1), 0.0035, px(1640))
-tap(aw('review', 'beside', -0.2), 0.0035, px(330))
 low(Ab2, aw('stop', 'fails', 0.0), 0.6, px(1150) * 0.4)
-card(ac('ten', -0.1), 0.0035, px(1250))
 chord((Eb2, Bb2, G3, Bb3, Eb4), aw('ten', 'ten', 0.0), 0.5, step=0.16)
-tap(aw('safe', 'opens', -0.1), 0.0035, px(1140))
 
 # 5. The leader's part: three cards pinned up, empty, as the voice says there were three things; as each fills in, a pipe, rising
 #    through E flat major; the review: the stair of small changes, as in the opening, rising to its last step; who did the work; none of
@@ -366,18 +309,12 @@ tap(aw('safe', 'opens', -0.1), 0.0035, px(1140))
 LV[0] = 0.9
 lw = lambda lid, word, off=0: W('leader', lid, word, off)
 lc = lambda lid, off=0: G('leader', lid, off)
-for i, xx in enumerate((800, 1230, 1660)):
-    card(lw('none', 'three', -0.2 + 0.2 * i), 0.0035, px(xx))
 pipe(Eb4, lw('ask', 'asked', -0.2), 0.45, px(800) * 0.4)
 pipe(G4, lw('give', 'gave', -0.2), 0.45, px(1230) * 0.4)
 pipe(Bb4, lw('show', 'showed', -0.2), 0.45, px(1660) * 0.4)
-card(lw('show', 'review', 0.0), 0.0035, px(590))
 for i, m in enumerate((Eb3, F3, G3, Ab3, Bb3, C4, Eb4)):
     pipe(m, lw('show', 'chart', -0.1 + 0.3 * i), 0.4, px(590) * 0.4)
-tap(lw('named', 'named', -0.1), 0.0035, px(590))
-card(lc('no', 0.1), 0.0035, px(880)); card(lw('no', 'questions', -0.3), 0.0035, px(1480))
 chord((Bb2, F3, Bb3, D4), lc('habit', 0.2), 0.45, step=0.16)
-tap(lw('others', 'management', -0.2), 0.0035, px(740)); tap(lw('others', 'quality', -0.2), 0.0035, px(1210))
 
 # 6. On Monday: Castle Street comes back, framed on the wall: the long pipe's low E flat, the opening's first sound; their own wards, a
 #    step at a time, the opening's pipes ward by ward, rising; Ivy's Monday, from two hours to ten minutes, the stair once more; each
@@ -387,17 +324,52 @@ LV[0] = 0.9
 ew = lambda lid, word, off=0: W('monday', lid, word, off)
 ec = lambda lid, off=0: G('monday', lid, off)
 low(Eb2, S0('monday') + 0.3, 0.6)
-tap(ew('back', 'step', -0.2), 0.0035, px(1050))
 for i, m in enumerate((Eb3, G3, Bb3, Eb4, G4, Bb4)):
     pipe(m, ew('back', 'step', 0.0 + 0.4 * i), 0.38, px(700 + 120 * i) * 0.4)
-tap(ew('back', 'half', -0.3), 0.0035, px(1050))
-card(ec('ivy', -0.1), 0.0035, px(1220))
 for i, m in enumerate((Bb3, C4, D4, Eb4, F4, G4, Bb4)):
     pipe(m, ew('ivy', 'ten', -0.2 + 0.28 * i), 0.38, px(1220) * 0.4)
-for lid, word, xx in (('one', 'pick', 520), ('two', 'Drop', 1400), ('three', 'Automate', 520), ('four', 'lead', 1400)):
-    card(ew(lid, word, -0.1), 0.0035, px(xx))
-card(ec('take', 0.1), 0.0035, px(960))
 mark(MARK, ew('take', 'Change', 0.0), 0.5, step=0.24, bass=((C3, 0),))
 mark(BETTER, ew('take', 'keep', 0.0), 0.5, step=0.24, bass=((Eb2, 0), (Bb2, 3)), until=TOT)
 chord((Eb3, G3, Bb3), ew('take', 'keep', 0.24 * 3 + 0.5), 0.45, step=0.2, until=TOT)
 chord((Eb2, Bb2, Eb3, G3, Bb3, Eb4), ec('breath', 0.8), 0.5, step=0.24, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'O': ('wards', 'carmen', 'kz_boardO'), 'A': ('hours', 'carmen', 'kz_boardA'), 'B': ('measure', 'carmen', 'kz_boardB'),
+                    'C': ('automate', 'carmen', 'kz_boardC'), 'M': ('monday', 'helena', 'kz_boardM'), 'N1': ('wards', None, 'kz_note1'),
+                    'N2': ('measure', None, 'kz_note2'), 'N3': ('automate', None, 'kz_note3'), 'N4': ('leader', None, 'kz_note4')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+
+
+for name in ('O', 'A', 'B', 'C', 'M'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4'):
+    written(name, scratch, 0.004)
+# the chat: Ivy's question to Facilities as it goes, and the answer as it arrives
+pop(G('measure', 'copy') + 1.6 + 1.4, 0.0022, px(400), True)
+pop(W('measure', 'copy', 'drops', -1.6) + 1.2, 0.0022, px(400), False)

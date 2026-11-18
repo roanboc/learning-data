@@ -2186,7 +2186,8 @@ def main():
                 built, have = tmp / "site" / rel, WEB / rel
                 if not built.exists():
                     continue
-                if not have.exists() or built.read_text() != have.read_text():
+                bare = lambda t: re.sub(r"\?v=[0-9a-f]+", "", t)  # the scratch folder has no assets to version: Versions checks those
+                if not have.exists() or bare(built.read_text()) != bare(have.read_text()):
                     s["fails"].append(f"site/{rel.as_posix()} differs from what build_pages.py makes: run python site-tools/build_pages.py (never hand-edit it)")
             s["notes"].append(f"{len(mds)} Markdown pages rebuilt in a scratch folder")
     except Exception as e:  # noqa: BLE001

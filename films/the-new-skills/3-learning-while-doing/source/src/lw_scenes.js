@@ -1,325 +1,278 @@
 /* ===== Learning while doing: the chapters, shot by shot =====
-   Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's recorded
-   again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
-   a room (later:true) lets what was there leave first; between rooms a shot dissolves, or cuts where both show the same people (the
-   circle's learners in the street, Ivy at the page and then at Sam's desk). Sizes in the 1920 x 1080 frame. */
-
+   The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
+   says, and the words on the frame are where and when, a name, or what someone says; what a screen shows is in a callout from it. The
+   ideas are written by hand: the circle's sheet in Angicos, Ivy's and Carmen Vidal's boards, and Ivy's and Helena's notebooks
+   (lw_uni.js). Angicos is in lwa_town.js. Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt). */
+const lw_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,3,"Learning while doing",a);}};
+function lw_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
+const lw_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
+const lw_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};
+const lw_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
+const lw_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
+// someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
+const lw_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},base||{});const g=base.gaze[1],ev=[],K=["look","nod","smile"];
+  for(let k=0;k<30;k++){const at=(t0||0)+1.8+i*1.1+k*5.6,kind=K[(k+Math.round(i))%3];ev.push(kind==="look"?[at,"look",2.2,[1,g+((k+Math.round(i))%2?0.45:-0.35)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
+  return PK.face(tt,base,ev);};
+const lw_talk=(base,tt,spans)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,...spans.map(([a,b])=>PK.talk(tt,a,b)*0.75));return e;};
+const lw_sp=(tt,i,spans,base,g)=>lw_alive(tt,{expr:lw_talk(base||"listen",tt,spans),gaze:[1,g==null?-0.2:g]},i);
+const lw_come=(cc,who,tt,x0,x1,t0,t1,fl,h,o)=>{o=o||{};const flip=o.flip!=null?o.flip:x1<x0;if(tt<t0)return null;if(tt<t1)return PK.walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:o.then||"stand"},Object.assign({flip:x1<x0},o.face||{}));
+  return PK.person(cc,who,x1,fl,h,o.then||"stand",Object.assign({t:tt,flip},o.face||{},o.hold?{hold:o.hold,holds:true}:{}));};
+const LW_HEV=Array.from({length:40},(_,k)=>k%2?[1.6+k*4.8,"nod"]:[1.6+k*4.8,"look",2.2,[1,0.35]]);
 const LW_LAST="Learn on the real work, beside someone, then teach it.";
-// the light on people out of doors in Angicos, and under a bare bulb at night
-const LW_OUT={light:"day",wall:0},LW_NIGHT={light:"evening",wall:0.12,shade:0.5,warm:0.4};
-// the film's number and title at the top left, from the second chapter on; pale in a room at night (ev, 0 to 1)
-function lw_kick(ctx,S,a,ev){if(a<=0.004)return;setScreen(ctx,S);ev=ev||0;
-  if(ev<1)lp_kicker(ctx,"3","Learning while doing",{a:a*(1-ev)});if(ev>0)lp_kicker(ctx,"3","Learning while doing",{a:a*ev,light:"evening"});}
-// a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
-function lw_sheet(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return null;
-  return lp_textSheet(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// a sheet with one number, the same way
-function lw_fig(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return null;
-  return lp_figure(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// lines that come in one by one, each at its own time: lp_textSheet's u
-const lw_u=(t,ts)=>ts.reduce((s,t0)=>s+ag_in(t,t0,0.5),0)/ts.length;
-// a tag, or a pill, that comes in at t0 and goes at t1 (null: stays)
-function lw_tag(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_tag(ctx,x,y,text,Object.assign({},o,{a}));}
-function lw_pill(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a>0.004)lp_pill(ctx,x,y,text,Object.assign({},o,{a,k:t-t0}));}
-// a row of tags, each coming in at its own time, laid out from their drawn widths
-function lw_tags(ctx,t,words,x,y,t0,step,o){let px=x;words.forEach((s,i)=>{const b=lp_tag(ctx,px,y,s,Object.assign({},o,{a:ag_in(t,t0+i*step,0.4)}));px+=b.w+18;});}
-// a green tick in a disc, springing in from t0
-function lw_tick(ctx,t,t0,x,y){if(t<t0)return;const f=lerp(0.6,1,ag_spr(t-t0,0,0.5));ctx.save();ctx.globalAlpha*=ag_in(t,t0,0.3);ctx.fillStyle=rgba(LP.green,1);
-  ctx.beginPath();ctx.arc(x,y,22*f,0,TAU);ctx.fill();lp_icon(ctx,"tick",x,y,30*f,[255,255,255]);ctx.restore();}
-// a near hand that comes up over 0.45 s from t0 to hold what fn draws (and goes down from t1): lp_person's pose, blended from the one
-// before, and the thing held, faded in as the hand arrives
-function lw_hold(t,t0,t1,fn){const u=ag_in(t,t0,0.45)*(t1==null?1:1-ag_in(t,t1,0.45));if(u<=0)return{};
-  return{pose:"hang",pose2:"hold",mix:u,holdBack:(c,h)=>{const pa=ag_in(u,0.5,0.5);if(pa<=0)return;c.save();c.globalAlpha*=pa;fn(c,h);c.restore();}};}
-// the desk where two pair: someone on the left (Jun) and Ivy on the right behind it, one laptop between them; o.la, o.ra fade either
-function lw_desk(x,tt,o){o=o||{};const L={light:o.light||"day"};
-  lp_person(x,o.left||"jun",760,760,0.76,{t:tt,cut:860,a:o.la==null?1:o.la,light:L});
-  lp_person(x,o.right||"ivy",1160,760,0.76,{t:tt,flip:true,cut:860,a:o.ra==null?1:o.ra,light:L});
-  lp_table(x,440,866,1040,{floor:1040});lp_laptop(x,960,838,200,{glow:0.6});}
-// the culture circle's room at night, drawn the same in every moment of it: four learners behind the table, the projector on it, the
-// coordinator by the wall; o.sl the slide's light, o.slide what it shows (lw_slide), o.hrs the forty hours on a sheet ({a, k, done})
-function lw_circle(x,tt,o){o=o||{};const sl=o.sl||0;lw_slideLight(x,sl);if(o.slide&&sl>0.004)lw_slide(x,Object.assign({},o.slide,{a:sl}));
-  const hr=o.hrs;if(hr&&hr.a>0.004){x.save();x.globalAlpha*=hr.a;if(hr.k!=null)ag_about(x,1360,336,lerp(0.6,1,ag_spr(hr.k,0,0.5)));
-    lp_sheet(x,1100,176,520,320,{light:"evening"});lp_label(x,1140,236,"Forty hours");lw_hours(x,1140,276,{done:hr.done});x.restore();}
-  for(const [k,px] of [["elder",170],["builder",400],["washer",630],["youth",860]])lp_person(x,LW_PEOPLE[k],px,690,0.74,{t:tt,cut:794,light:LW_NIGHT});
-  lp_table(x,40,800,980);lw_projector(x,930,786,1);
-  lp_person(x,LW_PEOPLE.coord,1770,660,0.84,{t:tt,flip:true,light:LW_NIGHT});}
+// a letter held in the hand
+const lw_letter=(c,hd,deg,J)=>{PK.S.begin(c,{lw:2.2});PK.sheet(c,hd[0]-28*J.u,hd[1]-70*J.u,56*J.u,74*J.u,{rot:0.06});};
+// a screen's callout from the monitor at the desk by the window, where Ivy works
+const lw_screenCall=(x,R,a,head,rows,hc,o)=>{o=o||{};const D=R&&R.marta&&R.marta.desk;const tip=D?[150,D.top-120]:[150,620];
+  PK.callout(x,o.bx==null?720:o.bx,o.by==null?110:o.by,o.bw||720,o.bh||250,tip,a,(cc,bx,by,bw,bh)=>lw_panel(cc,bx,by,bw,bh,head,rows,null,hc));};
+// the team's room with Ivy at the desk by the window; o.with: who sits beside her, pairing (o.withF their face); o.people, o.ivy
+const lw_ivyRoom=(x,tt,t0,o)=>{o=o||{};const people=(o.people||[]).slice();
+  if(o.with)people.push({fl:906,draw:cc=>{o.J2=PK.seated(cc,o.with,830,906,lw_hT(906),"sit",Object.assign({t:tt+2,flip:true},o.withF||lw_alive(tt,{expr:"listen",gaze:[1,0.35]},4,t0)));}});
+  const R=lw_team(x,tt,{clock:o.clock==null?10:o.clock,deskWho:o.at||"ivy",marta:Object.assign({work:o.work==null?1:o.work,turn:0},o.ivy||lw_alive(tt,{expr:"think",gaze:[1,0.3]},3,t0)),
+    sam:o.sam===null?null:Object.assign({work:1},o.samF||lw_alive(tt,{},1,t0)),jun:o.jun===null||o.with==="jun"?null:Object.assign({work:1},o.junF||lw_alive(tt,{},2,t0)),show:PK.onScreen.chat(0,{}),people});
+  R.with=o.J2;return R;};
+// Angicos's people, seated on a bench from the side, and standing
+const lw_learner=(x,who,px,fl,i,t0,o)=>lwa_seat(x,who,px,fl,"sit",Object.assign({t:t0+i,flip:!!(o&&o.flip)},(o&&o.face)||lw_alive(t0,{expr:"listen",gaze:[1,0.2]},i,0)));
 
-/* ---------------------------------------------------------------- 1. Their own words: Angicos, 1963 */
-scene("circles",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),P=LW_PEOPLE,out=LW_OUT,nt=LW_NIGHT;
-  // the street on the day the president comes, drawn the same until the town goes dark
-  const crowd=(x,tt)=>{for(const [k,px,fl] of [["farmer",300,false],["washer",620,false],["elder",960,false],["youth",1300,true],["cook",1620,true]])
-    lp_person(x,P[k],px,720,0.74,{t:tt,flip:fl,light:out});};
-  const order=[5,2,8,0,10,3,7,1,9,4,6];          // the order the street's windows light in
-  const h0=c.steps+0.6,h1=w("forty","fortieth",0.3); // the forty hours fill, one by one, until the fortieth
+/* ---------------------------------------------------------------- 1. Their own words */
+scene("circles",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tR=c.read-0.4,tP=c.primers-0.4,tO=c.own-0.4,tC=c.circle-0.4,tF=c.forty-0.4,tS=c.stop-0.4,tB=c.book-0.4,tD=c.data-0.4;
+  const tW=w("picture","belota",-0.4),tZ=w("syllables","syllables",-0.6),tU=c.steps+0.6;
+  const BO=PK.pace(ctx,LWA_FOLK.stu2,lw_boardO(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // Angicos, by day; the evening classes, and who signs up
-    {at:0,place:"lwTown",keys:[[0,1000,560,1.1],[c.when+0.4,960,540,1.0]],d:3,draw:(x,tt)=>{
-      lw_sheet(x,tt,c.when+0.2,150,120,600,{kick:"Angicos, Brazil",title:"January 1963",sub:"A small town in the dry north-east"},{light:null,pin:false,out:c.adults-0.4});
-      lw_sheet(x,tt,c.adults+0.2,150,120,600,{kick:"Evening classes",title:"About 380 adults sign up"},{light:null,pin:false,out:c.guides-0.6});
-      for(const [k,px,fl,word,tag] of [["farmer",860,false,"farm","Farm workers"],["builder",1240,false,"builders","Builders"],["washer",1620,true,"washerwomen","Washerwomen"]]){
-        const t0=w("adults",word,-0.3);lp_person(x,P[k],px,700,0.82,{t:tt,flip:fl,a:ag_in(tt,t0,0.6),light:out});lw_tag(x,tt,t0+0.3,null,px,380,tag,{align:"center"});}}},
-    // some twenty students from the university in Natal run the classes, at night
-    {at:c.guides-0.3,place:"lwCircle",keys:[[c.guides-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lp_person(x,P.student,330,660,0.9,{t:tt,light:nt});lp_person(x,P.coord,690,660,0.9,{t:tt,light:nt});
-      lw_sheet(x,tt,w("guides","twenty",-0.2),1040,200,680,{kick:"From the university in Natal",title:"Some twenty students",lines:["Trained by an educator, Paulo Freire"]},
-        {light:"evening",u:ag_in(tt,w("guides","trained",-0.1),0.5)});}},
-    // the problem: three adults in four can't read or write, so they can't vote; they sign papers they can't read, others read their letters
-    {at:c.read-0.3,place:"lwTown",keys:[[c.read-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lw_sheet(x,tt,c.read+0.1,140,120,700,{kick:"Angicos, 1963",title:"Three adults in four can't read or write",lines:["So they can't vote","They sign papers they can't read","Others read their letters to them"]},
-        {col:LP.amber,light:null,pin:false,u:lw_u(tt,[w("vote","vote",-0.2),w("letters","sign",-0.1),w("letters","letters",-0.1)])});
-      lp_person(x,P.farmer,1100,700,0.82,Object.assign({t:tt,light:out},lw_hold(tt,w("letters","sign",-0.1),null,lw_heldPaper)));
-      lp_person(x,P.washer,1500,700,0.82,Object.assign({t:tt,flip:true,light:out},lw_hold(tt,w("letters","letters",-0.1),null,lw_heldLetter)));}},
-    // the old way: a children's primer, nothing about their lives; many give up; something has to change
-    {at:c.primers-0.3,place:"lwClass",keys:[[c.primers-0.3,960,540,1.0],[c.change-0.2,1000,520,1.06]],dis:1.0,draw:(x,tt)=>{const g0=w("primers","give",-0.2);
-      lw_easel(x,1360,300,600);lw_primer(x,1010,240,700);
-      lp_person(x,P.elder,220,700,0.8,{t:tt,light:nt});
-      lp_person(x,P.youth,490,700,0.8,{t:tt,a:1-ag_in(tt,g0,0.8),light:nt});
-      lp_person(x,P.cook,760,700,0.8,{t:tt,a:1-ag_in(tt,g0+0.3,0.8),light:nt});
-      lw_tag(x,tt,w("primers","Eva",-0.1),null,1360,180,"Eva saw the grape",{align:"center"});
-      lw_tag(x,tt,w("primers","nothing",-0.1),g0-0.1,1360,740,"Nothing about their lives",{align:"center",col:LP.amber});
-      lw_tag(x,tt,g0+0.3,null,1360,740,"Many give up",{align:"center",col:LP.amber});}},
-    // Freire's team listens for the town's own words, writes down about 400, and chooses a handful
-    {at:c.own-0.3,place:"lwTown",keys:[[c.own-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{const f0=w("listen","handful",-0.1);
-      lw_sheet(x,tt,c.own+0.1,140,110,680,{kick:"Freire's team",title:"The town's own words",lines:["Listening to how people talk","About 400 words written down","A handful chosen"]},
-        {light:null,pin:false,u:lw_u(tt,[w("listen","listen",-0.1),w("listen","four",-0.1),f0])});
-      lw_tags(x,tt,["belota","voto","povo"],140,530,f0+0.4,0.2,{col:LP.ink});lw_tags(x,tt,["sapato","milho","feira"],140,610,f0+1.0,0.2,{col:LP.ink});
-      lp_person(x,P.student,1080,700,0.82,Object.assign({t:tt,light:out},lw_hold(tt,w("listen","write",-0.5),null,lw_heldNote)));
-      lp_person(x,P.farmer,1500,700,0.82,{t:tt,flip:true,light:out});}},
-    // a culture circle, each evening: learners, and a coordinator; a picture from their lives, one word, its syllables, new words; one
-    // small step each evening, to the fortieth hour
-    {at:c.circle-0.3,place:"lwCircle",keys:[[c.circle-0.3,960,540,1.0],[w("picture","picture",-0.2),1180,430,1.22],[c.steps-0.3,960,540,1.0]],d:1.6,dis:1.0,draw:(x,tt)=>{
-      const p0=w("picture","picture",-0.3),s0=w("syllables","break",-0.1),sl=ag_in(tt,p0,0.8)*(1-ag_in(tt,c.steps-0.2,0.6));
-      lw_circle(x,tt,{sl,slide:{pic:ag_in(tt,p0+0.3,0.8),word:ag_in(tt,w("picture","belota",-0.1),0.5),syl:ag_in(tt,s0,0.6),fam:ag_in(tt,w("syllables","syllables",0.2),1.2),
-          news:[0,1,2].map(i=>ag_in(tt,w("syllables","new",0.1)+i*0.35,0.5))},
-        hrs:{a:ag_in(tt,c.steps+0.3,0.4),k:tt-c.steps-0.3,done:40*clamp((tt-h0)/(h1-h0),0,1)}});
-      lw_tag(x,tt,w("circle","learners",-0.1),c.picture-0.4,515,390,"Learners",{align:"center"});
-      lw_tag(x,tt,w("circle","coordinator",-0.1),c.picture-0.4,1880,320,"A coordinator, not a teacher",{align:"right"});
-      lw_tag(x,tt,w("picture","tassels",-0.2),s0-0.2,1360,620,"A hammock's tassels",{align:"center"});
-      lw_tag(x,tt,w("steps","knows",-0.3),null,515,390,"What each person knows counts",{align:"center"});
-      lw_pill(x,tt,w("forty","April",-0.2),null,1360,560,"2 April 1963 · the last class",{col:LP.green,icon:"tick"});}},
-    // the fortieth hour: the president comes; the organisers' count, still argued over
-    {at:w("forty","president",-0.3),place:"lwTown",cut:true,keys:[[w("forty","president",-0.3),960,540,1.0]],draw:(x,tt)=>{
-      crowd(x,tt);
-      lw_tag(x,tt,w("forty","president",0.1),c.count-0.3,960,340,"The president of Brazil comes",{align:"center"});
-      lw_fig(x,tt,w("count","count",-0.1),140,110,620,{kick:"The organisers' count",num:"About 300",label:"can now read and write"},{col:LP.green,light:null,pin:false,out:c.spread-0.7});
-      lw_tag(x,tt,w("count","argue",-0.1),c.spread-0.7,1880,340,"Still argued over: how many, and how well",{align:"right"});}},
-    // a year later, at dusk (the street's people gone first): the method spreads, and a national plan; that April it's stopped, and Freire
-    // jailed, then exiled
-    {at:c.spread-0.3,place:"lwTownEve",later:true,keys:[[c.spread-0.3,960,540,1.0]],dis:1.2,draw:(x,tt)=>{const s0=w("spread","spreads",-0.2),k0=w("stop","stops",-0.1);
-      lw_windows(x,LW_WINS.map((_,i)=>ag_in(tt,s0+order.indexOf(i)*0.3,0.8)*(1-ag_in(tt,k0+order.indexOf(i)*0.06,0.5))));
-      lw_sheet(x,tt,w("spread","national",-0.2),140,120,660,{kick:"January 1964",title:"A national plan",lines:["To take the method across Brazil"]},{col:LP.blue,light:null,pin:false});
-      lw_pill(x,tt,k0+0.4,null,470,450,"Stopped, April 1964",{col:LP.amber,icon:"cross"});
-      lw_tag(x,tt,w("stop","jailed",-0.1),null,140,540,"Freire: jailed, then exiled",{col:LP.amber});}},
-    // abroad, the book
-    {at:c.book-0.3,place:"lwAbroad",keys:[[c.book-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{const b0=c.book+0.2;
-      if(tt>=b0)lw_book(x,420,190,320,{a:ag_in(tt,b0,0.4),k:tt-b0});
-      lw_tag(x,tt,w("book","writes",-0.1),null,840,330,"Written in exile, in Chile, 1968");
-      lw_tag(x,tt,w("book","most-cited",-0.2),null,840,430,"One of the most-cited books in the social sciences");}},
+    // Angicos, January 1963: adults sign up for evening classes at the students' table in the street
+    {at:0,place:"lwaStreet",keys:[[0,960,560,1.0],[c.guides,1180,580,1.1]],d:3,draw:(x,tt,cam)=>{let Jt=null,Jf=null,Js=null;
+      const H1=lwa_h(900);
+      lwa_person(x,"wash2",260,880,"clasp",Object.assign({t:tt},lw_alive(tt,{expr:"listen",gaze:[1,0.1]},4,0)));
+      Js=lwa_person(x,"stu2",1680,900,"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},lw_sp(tt,2,[[c.adults+0.4,c.adults+2.2]],"smile",0.1)));
+      Jt=PK.atDesk(x,lwa_row("stu1"),1430,912,lwa_h(912),Object.assign({t:tt,flip:true,screen:null,work:0,pose:"sit"},lw_alive(tt,{expr:"smile",gaze:[1,0.2]},1,0)));
+      lwa_person(x,"wash1",700,960,"clasp",Object.assign({t:tt},lw_alive(tt,{expr:"think",gaze:[1,0.2]},3,0)));
+      Jf=lw_come(x,lwa_row("farm"),tt,-120,1080,c.when+0.4,c.adults+0.2,950,lwa_h(950),{then:"clasp",flip:false,face:lw_sp(tt,5,[[c.adults+2.6,c.guides-0.4]],"glad",0.2)});
+      lw_come(x,lwa_row("build"),tt,2080,1880,c.adults+1.0,c.guides+0.6,1010,lwa_h(1010),{then:"clasp",face:lw_alive(tt,{expr:"listen",gaze:[1,0.1]},6,0)});
+      lw_bub(x,Js,tt,c.adults+0.4,c.adults+2.4,["Evenings, from Monday."],cam,{lean:-200});
+      lw_bub(x,Jf,tt,c.adults+2.6,tR-0.3,["Put my name down."],cam,{lean:-140});}},
+    // three adults in four can't read or write: a neighbour reads a letter out at a door
+    {at:tR,place:"lwaStreet",later:true,keys:[[tR,1180,580,1.1],[tR+1.8,560,600,1.3]],d:2,draw:(x,tt,cam)=>{let Jn=null,Jw=null,Jf=null;
+      Jn=PK.person(x,PK.extra(5),520,930,lwa_h(930),"clasp",Object.assign({t:tt,flip:true,hold:lw_letter,holds:true},lw_sp(tt,1,[[c.letters+0.3,E.letters]],"neutral",0.6)));
+      Jw=lwa_person(x,"wash2",300,900,"clasp",Object.assign({t:tt},lw_alive(tt,{expr:"listen",gaze:[1,0.3]},2,tR)));
+      Jf=lwa_person(x,"farm",790,1000,"clasp",Object.assign({t:tt,flip:true},lw_sp(tt,3,[[c.vote+0.2,E.vote]],"worry",0.1)));
+      lw_bub(x,Jf,tt,c.vote+0.2,c.letters,["And none of us can vote."],cam,{lean:120});
+      lw_bub(x,Jn,tt,c.letters+0.3,tP-0.3,["“Your son writes: he's well.”"],cam,{lean:140});}},
+    // adult classes often use children's primers: many give up
+    {at:tP,place:"lwaClass",cut:true,keys:[[tP,960,560,1.0],[c.change,900,580,1.06]],d:3,draw:(x,tt,cam)=>{let Jt=null;
+      lw_learner(x,"wash1",1000,900,1,tt,{face:lw_alive(tt,{expr:"worry",gaze:[1,0.2]},1,tP)});
+      lw_learner(x,"farm",620,960,2,tt,{face:lw_alive(tt,{expr:"neutral",gaze:[1,0.2]},2,tP)});
+      lw_learner(x,"build",380,1030,3,tt,{face:PK.face(tt,{expr:PK.exprMix("neutral","worry",ag_in(tt,w("primers","give up",-0.6),0.6)),gaze:[1,0.2]},[])});
+      lw_come(x,lwa_row("wash2"),tt,1240,2100,w("primers","give up",-0.8),w("primers","give up",3.8),930,lwa_h(930),{then:"stand"});
+      Jt=lwa_person(x,PK.extra(9),1500,960,"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},lw_sp(tt,4,[[w("primers","Eva saw",-0.2),w("primers","nothing",-0.4)]],"neutral",0.3)));
+      lw_bub(x,Jt,tt,w("primers","Eva saw",-0.2),w("primers","nothing",-0.2),["Eva saw the grape."],cam,{lean:-160});}},
+    // Freire's team starts from the town's own words: they listen, and write them down
+    {at:tO,place:"lwaStreet",cut:true,keys:[[tO,1320,580,1.2]],d:2,draw:(x,tt,cam)=>{let Jf=null;
+      Jf=lwa_person(x,"farm",1060,960,"clasp",Object.assign({t:tt},lw_sp(tt,1,[[c.listen+0.2,c.listen+2.8]],"talk",0.1)));
+      lwa_person(x,"stu1",1430,910,PK.poseMix("clasp",LW_NOTE,ag_in(tt,w("listen","write down",-0.4),0.4)),Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),hold:PK.inHand.pen("blue"),holds:true},lw_alive(tt,{expr:"listen",gaze:[1,0.2]},2,tO),{gaze:[1,0.6*ag_in(tt,w("listen","write down",-0.4),0.4)]}));
+      lwa_person(x,"stu2",1700,1000,"clasp",Object.assign({t:tt,flip:true},lw_alive(tt,{expr:"listen",gaze:[1,0.1]},3,tO)));
+      lw_bub(x,Jf,tt,c.listen+0.2,tC-0.3,["The rain hasn't come this year."],cam,{lean:-140});}},
+    // each evening, a culture circle: a picture from their own lives, one word, its syllables, new words
+    {at:tC,place:"lwaCircle",cut:true,keys:[[tC,960,540,1.0],[tW,960,540,1.0],[tZ,1381,440,1.9],[tU,1381,440,1.9],[tU+1.8,960,540,1.0]],d:3,draw:(x,tt,cam)=>{let Jl=null;
+      lwa_slide(x,ag_in(tt,w("picture","picture",-0.4),0.8));
+      const tl=PK.face(tt,{expr:"listen",gaze:[1,0.2]},[]);
+      lw_learner(x,"wash2",760,890,3,tt,{face:lw_alive(tt,{expr:"smile",gaze:[1,0.2]},3,tC)});
+      lw_learner(x,"build",240,900,1,tt,{face:lw_alive(tt,{expr:"listen",gaze:[1,0.2]},1,tC)});
+      PK.teach(x,LWA_FOLK.stu2,tt,BO,{x:LWA_BD.x,y:LWA_BD.y,k:LWA_BD.k,deco:true,floor:LWA_BD.floor,rest:LWA_BD.rest,h:lwa_hi(LWA_BD.floor),say:[[c.picture,E.steps]],events:LW_HEV});
+      Jl=lw_learner(x,"wash1",1090,980,2,tt,{flip:true,face:lw_sp(tt,2,[[w("picture","picture",0.3),w("picture","belota",-0.3)]],"glad",0.2)});
+      lw_learner(x,"farm",520,1040,4,tt,{face:lw_alive(tt,{expr:"listen",gaze:[1,0.2]},4,tC)});
+      lw_bub(x,Jl,tt,w("picture","picture",0.3),w("picture","belota",-0.3),["A hammock, like ours!"],cam,{lean:-140});}},
+    // the fortieth hour: a spring evening, and the windows lit across the town
+    {at:tF,place:"lwaDusk",cut:true,keys:[[tF,960,560,1.0],[c.spread,980,560,1.05]],d:3,draw:(x,tt,cam)=>{let J1=null;
+      lwa_lit(x,ag_in(tt,tF+0.4,1.2));
+      lwa_person(x,"build",1600,900,"clasp",Object.assign({t:tt,flip:true},lw_alive(tt,{expr:"smile",gaze:[1,0.1]},2,tF)));
+      J1=lw_come(x,lwa_row("wash1"),tt,140,1060,tF+0.2,c.forty+3.6,980,lwa_h(980),{then:"clasp",flip:false,face:lw_sp(tt,1,[[c.forty+3.8,c.forty+6.0]],"glad",0.1),hold:PK.inHand.notebook({})});
+      lwa_person(x,"farm",1320,1040,"clasp",Object.assign({t:tt,flip:true},lw_alive(tt,{expr:"listen",gaze:[1,0.1]},3,tF)));
+      lw_bub(x,J1,tt,c.forty+3.8,c.count+1.6,["I wrote my name!"],cam,{lean:140});}},
+    // April 1964: the plan is stopped
+    {at:tS,place:"lwaCircle",dis:1.0,keys:[[tS,960,540,1.0],[tB,900,560,1.06]],d:3,draw:(x,tt,cam)=>{
+      lwa_person(x,"stu2",1000,960,"clasp",Object.assign({t:tt,underF:PK.inHand.notebook({}),holds:true},PK.face(tt,{expr:"worry",gaze:[1,0.3]},[[tS+2.2,"look",2.6,[1,-0.2]]])));}},
+    // abroad, he writes a book
+    {at:tB,place:"lwaAbroad",dis:1.0,keys:[[tB,960,540,1.0],[tD,960,540,1.08]],d:3,draw:(x,tt,cam)=>{}},
     // learning data work can feel like those primers
-    {at:c.data-0.3,place:"lpRoom",keys:[[c.data-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lp_screen(x,560,190,800,380,{a:ag_in(tt,c.data-0.1,0.5),draw:(cx,X,Y,Wd,Hd)=>lw_tutorial(cx,X,Y,Wd,Hd)});
-      lw_tag(x,tt,w("data","nothing",-0.1),null,960,660,"Nothing about your job",{align:"center",col:LP.amber});}},
-    // skills grow faster on the real work, a small step at a time, beside someone who knows; and what you learn, you can teach
-    {at:c.real-0.3,place:"lpRoom",later:true,keys:[[c.real-0.3,960,540,1.0]],draw:(x,tt)=>{const g=1-ag_in(tt,c.breath+0.2,0.8);
-      if(g>0.004){x.save();x.globalAlpha*=g;lw_desk(x,tt,{light:"day"});x.restore();}
-      lw_tag(x,tt,w("real","real",-0.1),c.breath+0.2,620,210,"On the real work",{align:"center"});
-      lw_tag(x,tt,w("real","small",-0.1),c.breath+0.2,1300,210,"A small step at a time",{align:"center"});
-      lw_tag(x,tt,w("real","beside",-0.1),c.breath+0.2,620,300,"Beside someone who knows",{align:"center"});
-      lw_tag(x,tt,w("real","teach",-0.1),c.breath+0.2,1300,300,"Then teach it",{align:"center",col:LP.green});}}
+    {at:tD,place:"lwTeam",dis:1.0,keys:[[tD,960,540,1.0],[c.real,760,560,1.08]],d:3,draw:(x,tt,cam)=>{
+      const R=lw_ivyRoom(x,tt,tD,{ivy:PK.face(tt,{expr:PK.exprMix("neutral","worry",ag_in(tt,c.data+1,0.6)),gaze:[1,0.3]},[])});
+      lw_screenCall(x,R,ag_io(tt,w("data","tutorials",-0.3),c.real+0.4,0.4),"A tutorial · lesson 1 of 40",[["A shop that sells shoes",PK.C.ink,36]],PK.C.mut);}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,"Learning while doing","Small steps on the real work, beside someone who knows","Leading data people · The new skills");
+  lw_card(ctx,S,t,c.when+0.3,c.adults+0.6,{kick:"Angicos, Brazil",title:"January 1963"},{y:40,mid:true});
+  lw_card(ctx,S,t,w("guides","Paulo Freire",-0.2),tR-0.2,{kick:"Trained by an educator",title:"Paulo Freire"},{y:40,mid:true});
+  lw_card(ctx,S,t,tC+0.4,w("picture","picture",-0.6),{kick:"Each evening",title:"A culture circle"},{y:40,mid:true});
+  lw_card(ctx,S,t,tF+0.4,c.count-0.2,{kick:"2 April 1963",title:"The fortieth hour"},{y:40,mid:true});
+  lw_card(ctx,S,t,c.spread+0.2,tS-0.2,{kick:"January 1964",title:"A national plan"},{y:40,mid:true});
+  lw_card(ctx,S,t,tS+0.4,tB-0.2,{kick:"April 1964",title:"The plan stopped"},{y:40,mid:true});
+  lw_card(ctx,S,t,tB+0.4,tD-0.2,{kick:"Abroad",title:"Pedagogy of the Oppressed"},{y:40,mid:true});
+  PK.title(ctx,S,t,c.breath+0.2,"Learning while doing","Skills grow on the real work","Leading data people · The new skills",{side:"right",size:64});
 });
 
 /* ---------------------------------------------------------------- 2. Beside Jun, an hour a day */
-scene("beside",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"};
-  const o0=w("jun","opens",-0.3);
-  // the small changes, each finished in a day, and who reviewed it
-  const CH=[["check","Tuesday","A check that every room has a name","Noor"],["clearer","Wednesday","A clearer description of a model","Sam"],["better","Thursday","A better name for a column","Noor"]];
-  const rv=[w("review","Noor",-0.1),w("review","Sam",-0.1),w("review","Sam",0.5)];
+scene("beside",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tP=c.pair-0.4,tN=w("small","Each day",-1.0),tF=c.fifth-0.4,tO=c.own-0.4,N1=PK.pace(ctx,null,lw_note1(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // Ivy's first day; Jun opens the team's real project, not a course
-    {at:0,place:"lwMorning",keys:[[0,960,540,1.0]],draw:(x,tt)=>{
-      lw_sheet(x,tt,w("ivy","Ivy",-0.1),1080,170,640,{kick:"Monday 1 March 2027",title:"Ivy Reyes",sub:"Graduate data analyst",lines:["A degree in statistics"]},
-        {light:"morning",out:c.jun-0.6,u:ag_in(tt,w("ivy","statistics",-0.2),0.5)});
-      lp_screen(x,1080,150,700,480,{a:ag_in(tt,o0,0.5),draw:(cx,X,Y,Wd,Hd)=>lw_tree(cx,X,Y,Wd,Hd,{u:ag_in(tt,o0+0.3,1.4)})});
-      lp_person(x,"jun",300,640,1.0,{t:tt,a:ag_in(tt,c.jun-0.5,0.6),light:mo});
-      lp_person(x,"ivy",760,640,1.0,{t:tt,a:ag_in(tt,0.9,0.6),light:mo});}},
-    // an hour a day for six weeks: one types, the other reads, asks and thinks ahead, and they swap; each day one small change, finished,
-    // reviewed by someone else; the fifth week's, from her own page; twenty-five in six weeks; then changes of her own
-    {at:c.pair-0.3,place:"lwMorning",later:true,keys:[[c.pair-0.3,960,540,1.0]],draw:(x,tt)=>{
-      const su=ag_sine(ag_in(tt,w("pair","swap",-0.1),0.9)),tA=ag_in(tt,c.small-0.4,0.4);
-      lw_desk(x,tt,{light:"morning",la:1-ag_in(tt,w("own","own",-0.6),0.8)+ag_in(tt,w("xp","two",-0.6),0.8)});
-      lw_sheet(x,tt,c.pair+0.3,1420,150,420,{kick:"Pairing",title:"An hour a day",sub:"Her first six weeks"},{light:"morning",out:c.small-0.4});
-      // who types and who reads, over their heads; at the swap the two tags change places, one passing over the other
-      const ta=ag_in(tt,w("pair","types",-0.1),0.4)*(1-tA),ra=ag_in(tt,w("pair","reads",-0.1),0.4)*(1-tA);
-      if(ta>0.004)lp_tag(x,lerp(1160,760,su),400-60*Math.sin(Math.PI*su),"Types",{align:"center",a:ta});
-      if(ra>0.004)lp_tag(x,lerp(760,1160,su),400+40*Math.sin(Math.PI*su),"Reads, asks, thinks ahead",{align:"center",a:ra});
-      CH.forEach(([word,day,title,by],i)=>{const t0=w("small",word,-0.2),a=ag_in(tt,t0,0.35)*(1-ag_in(tt,c.fifth-0.4,0.4));
-        lw_change(x,120+i*590,140,500,{kick:day+" · Ivy and Jun",title},{a,k:tt-t0,light:"morning",rev:ag_in(tt,rv[i],0.4),revK:tt-rv[i],by:"Reviewed by "+by});});
-      const f0=w("fifth","fifth",-0.2),g0=w("fourteen","goes",-0.1),fa=ag_in(tt,f0,0.35)*(1-ag_in(tt,c.count-0.4,0.4));
-      const b5=lw_change(x,560,110,800,{kick:"Week 5 · From her own page",title:"The 14 renumbered rooms, matched",lines:["With a check, so no room drops out without a word"]},
-        {a:fa,k:tt-f0,light:"morning",rev:ag_in(tt,g0,0.4),revK:tt-g0,by:"Reviewed by Noor, and in"});
-      if(b5)lw_pill(x,tt,w("fourteen","renumbered",-0.1),g0-0.45,960,b5.y+b5.h+44,"14 renumbered rooms",{col:LP.amber});
-      lw_weeks(x,555,120,{a:ag_in(tt,c.count+0.1,0.4)*(1-ag_in(tt,c.own-0.4,0.4)),n:clamp((tt-w("count","twenty-five",-0.4))/2.4,0,1)*25});
-      const o6=w("own","writes",-0.2),r6=w("own","reviews",-0.1);
-      lw_change(x,660,130,600,{kick:"Week 6",title:"Written by Ivy, on her own"},{a:ag_in(tt,o6,0.35)*(1-ag_in(tt,c.xp-0.4,0.4)),k:tt-o6,light:"morning",rev:ag_in(tt,r6,0.4),revK:tt-r6,by:"Reviewed by Jun"});
-      lw_sheet(x,tt,w("xp","extreme",-0.2),560,130,800,{kick:"Extreme programming",title:"Two people, one keyboard",sub:"A way of making software, from the late 1990s"},{light:"morning"});}}
+    // Monday 1 March 2027: Ivy's first day; Helena meets her, and Jun turns from his desk
+    {at:0,place:"lwTeam",later:true,keys:[[0,960,540,1.0],[c.jun,1200,560,1.08]],d:3,draw:(x,tt,cam)=>{let Ji=null,Jh=null;
+      const R=lw_team(x,tt,{clock:9,marta:null,sam:null,
+        jun:Object.assign({turn:ag_in(tt,c.jun-0.4,0.5),work:0},lw_sp(tt,2,[[c.jun+0.4,E.jun]],"smile",0.1)),people:[
+        {fl:1000,draw:cc=>{Jh=PK.person(cc,"helena",720,1000,lw_hT(1000),"clasp",Object.assign({t:tt},lw_sp(tt,3,[[0.8,2.6]],"smile",0.1)));}},
+        {fl:960,draw:cc=>{Ji=lw_come(cc,"ivy",tt,2060,1020,0.2,3.0,960,lw_hT(960),{then:"clasp",face:lw_alive(tt,{expr:"smile",gaze:[1,0.1]},4,0)});}}]});
+      lw_name(x,Ji,tt,w("ivy","Ivy Reyes",0),c.jun-0.2,"Ivy Reyes","Data analyst, new",170);
+      lw_bub(x,Jh,tt,0.8,c.ivy+2.0,["Welcome, Ivy."],cam,{lean:-120});
+      lw_bub(x,R.jun,tt,c.jun+0.4,tP-0.3,["No course. Let's open the real models."],cam,{lean:-220});}},
+    // they pair for an hour a day: one types, the other reads, asks and thinks ahead, and they swap
+    {at:tP,place:"lwTeam",later:true,keys:[[tP,700,560,1.12]],d:2,draw:(x,tt,cam)=>{
+      const sw=ag_in(tt,w("pair","swap",-0.2),0.5);
+      const R=lw_ivyRoom(x,tt,tP,{with:"jun",withF:lw_sp(tt,4,[[w("pair","asks",-0.4),w("pair","swap",-0.6)]],"think",0.4),
+        ivy:lw_sp(tt,3,[[w("pair","swap",-0.2),w("pair","swap",1.0)]],"think",0.3)});
+      lw_bub(x,R.marta,tt,w("pair","swap",-0.2),tN-0.2,["Your turn."],cam,{lean:120});
+      lw_bub(x,R.with,tt,w("pair","asks",-0.4),w("pair","swap",-0.6),["Why join the rooms here?"],cam,{lean:160});}},
+    // each day, one small change, finished, and someone else reviews it (Ivy's notebook)
+    {at:tN,place:"lwNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N1,{});}},
+    // the fifth week: one her own page found; six weeks, twenty-five small changes
+    {at:tF,place:"lwTeam",dis:0.6,keys:[[tF,700,560,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=lw_ivyRoom(x,tt,tF,{with:"jun",ivy:lw_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tF)});
+      lw_screenCall(x,R,ag_io(tt,c.fourteen,c.count-0.3,0.4),"Rooms renumbered · 14",[["matched to their old numbers",PK.C.ink,32],["a check: no room drops out",PK.C.green,34]],PK.C.orange);
+      lw_screenCall(x,R,ag_io(tt,c.count,tO-0.3,0.4),"Six weeks",[["25 small changes",PK.C.green,38],["each one reviewed",PK.C.ink,34]],PK.C.green);}},
+    // by the sixth week she writes changes on her own, and Jun reviews them
+    {at:tO,place:"lwTeam",later:true,keys:[[tO,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lw_ivyRoom(x,tt,tO,{ivy:lw_alive(tt,{expr:"think",gaze:[1,0.3]},3,tO),junF:lw_sp(tt,2,[[c.own+1.6,c.own+3.2]],"smile",0.1)});
+      lw_bub(x,R.jun,tt,c.own+1.6,E.xp,["Approved. A good check."],cam,{lean:-200});}}
   ]);
-  setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,w("ivy","university",-0.3),c.jun-0.3,0.5)});
-  lw_kick(ctx,S,ag_in(t,0.6,0.6));
+  lw_imagined(ctx,S,t,0.4,c.jun,"The university, 2027 · imagined");
+  lw_card(ctx,S,t,0.4,w("ivy","Ivy Reyes",-0.4),{kick:"Monday 1 March 2027",title:"Ivy's first day"},{y:40,mid:true});
+  lw_card(ctx,S,t,c.xp+0.2,E.xp+0.6,{kick:"Extreme programming",title:"Two people, one keyboard"},{y:40,mid:true});
+  lw_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lw_apart(t,[[0,c.jun],[c.fourteen,tO],[c.xp,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 3. Two hours every Thursday */
-scene("thursday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"},lt={light:"late"};
-  // the week of 1 April on the wall, and where its days and hours are (lw_week's own layout), for the meeting that moves
-  const WK={x:300,y:150,w:1000,h:600},top=WK.y+110,dw=(WK.w-110)/5,hh=(WK.y+WK.h-30-top)/8,X=d=>WK.x+90+d*dw+dw/2,Y=h=>top+(h-9)*hh;
-  // the meetings that fill a March week's gaps: no quiet week ever comes
-  const FULL=[[0,10,2.5],[0,14,0.5],[0,15,1.5],[1,11,1],[1,12.5,2],[1,16,1],[2,9,1],[2,12,1.5],[2,14,2],[2,16,1],[3,11,1.5],[3,13,1.5],[3,15.5,1],[4,11,1.5],[4,14.5,0.5],[4,15,1.5]];
-  const MO=["Updated in January","Updated in February","Updated in March"];
+scene("thursday",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CA=PK.ROOMS.campus;
+  const tT=c.time-0.4,tG=w("helena","a meeting",-0.6),tN=c.pick-0.4,tI=c.ivy-0.4,LE=PK.ROOMS.lecture,hL=fl=>PK.hAt(fl,LE.eye);
+  const N2=PK.pace(ctx,null,lw_note2(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the tools' docs change every month; learning saved for a quiet week never happens
-    {at:0,place:"lpRoom",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const m0=w("tools","every",-0.2),q0=c.wait-0.2;
-      lw_sheet(x,tt,c.tools+0.1,300,170,580,{title:"dbt's docs",lines:MO},{light:"day",out:c.wait-0.5,u:clamp((tt-m0)/1.6,0,1)});
-      lw_sheet(x,tt,c.tools+0.4,1040,170,580,{title:"Databricks' docs",lines:MO},{light:"day",out:c.wait-0.5,u:clamp((tt-m0-0.3)/1.6,0,1)});
-      ["8","15","22"].forEach((d,i)=>{const t0=q0+0.3+i*0.35;if(tt>=t0)lw_week(x,520+i*60,150+i*60,820,470,{a:ag_in(tt,t0,0.35)*(1-ag_in(tt,c.time-0.5,0.4)),k:tt-t0,title:"Week of "+d+" March",full:1,extra:FULL,cover:i>0,back:i<2?ag_in(tt,t0+0.35,0.15):0});});
-      lw_tag(x,tt,w("wait","never",-0.1),c.time-0.5,960,820,"No quiet week",{align:"center",col:LP.amber});}},
-    // two hours every Thursday afternoon, from 1 April, free of meetings; Helena keeps it free, and a meeting asked for then moves
-    {at:c.time-0.3,place:"lpRoom",later:true,keys:[[c.time-0.3,960,540,1.0]],draw:(x,tt)=>{const m0=w("helena","meeting",-0.2),f0=w("helena","offered",-0.2);
-      lw_week(x,WK.x,WK.y,WK.w,WK.h,{title:"From Thursday 1 April",learn:ag_in(tt,w("time","two",-0.1),0.6),skip:6});
-      lw_tag(x,tt,w("time","free",-0.1),null,X(3),810,"Free of meetings",{align:"center",col:LP.blue});
-      lw_ask(x,"A meeting",{a:ag_in(tt,m0,0.35),at:clamp((tt-f0)/1.2,0,1),from:[X(3),Y(13.3)],to:[X(4),Y(15.5)+29]});
-      lp_person(x,"helena",1640,650,0.95,{t:tt,flip:true,a:ag_in(tt,w("helena","Helena",-0.4),0.6),light:dy});
-      lp_nameTag(x,1640,250,"helena",{align:"center",a:ag_in(tt,w("helena","Helena",-0.1),0.5)});}},
-    // each picks one thing the work needs, from the tools' own docs, open beside the work; tries it on the real project, and writes it
-    // down in the team's notes, beside the code
-    {at:c.pick-0.3,place:"lpRoom",later:true,keys:[[c.pick-0.3,960,540,1.0]],draw:(x,tt)=>{const d1=w("pick","Databricks",-0.1),n0=w("try","write",-0.3),v=ag_in(tt,n0+0.3,0.3);
-      lp_screen(x,260,150,1400,620,{draw:(cx,X0,Y0,Wd,Hd)=>{
-        if(v<1){cx.save();cx.globalAlpha*=1-ag_in(tt,n0,0.3);lw_docs(cx,X0,Y0,Wd,Hd,{tab:tt>=d1?1:0,title:tt>=d1?"Time travel on a table":"Testing your models",add:ag_in(tt,w("try","try",-0.1),1.0)});cx.restore();}
-        if(v>0){cx.save();cx.globalAlpha*=v;lw_notes(cx,X0,Y0,Wd,Hd,{u:0.75*ag_in(tt,n0+0.4,1.0)});cx.restore();}}});
-      lw_tag(x,tt,w("pick","one",-0.1),c.try-0.4,960,830,"One thing the work needs",{align:"center"});}},
-    // Ivy picks the sensors' counts: what one number in Sam's feed really means; she reads the guide and Sam's notes, then a week of counts
-    {at:c.ivy-0.3,place:"lwLate",keys:[[c.ivy-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{const g0=w("read","guide",-0.2),n0=w("read","notes",-0.2),k0=w("read","week",-0.3);
-      lp_person(x,"ivy",400,650,0.95,{t:tt,light:lt});
-      lw_fig(x,tt,w("ivy","sensors'",-0.1),820,170,560,{kick:"Sam's feed",num:"31",label:"One hour's count: what does it mean?"},{col:LP.orange,light:"late",out:g0-0.5});
-      lw_sheet(x,tt,g0,820,150,440,{kick:"Reading",title:"The sensors' guide"},{light:"late"});
-      lw_sheet(x,tt,n0,1320,150,440,{kick:"Reading",title:"Sam's notes"},{light:"late"});
-      lp_screen(x,820,410,940,360,{a:ag_in(tt,k0,0.5),draw:(cx,X0,Y0,Wd,Hd)=>lw_counts(cx,X0+30,Y0+20,Wd-60,Hd-30,{u:ag_in(tt,k0+0.2,1.2),scan:clamp((tt-k0-1.4)/3.6,0,1)})});}}
+    // the tools change every month, and so do their docs
+    {at:0,place:"lwTeam",later:true,keys:[[0,700,560,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=lw_ivyRoom(x,tt,0,{ivy:PK.face(tt,{expr:PK.exprMix("think","worry",ag_in(tt,c.wait,0.6)),gaze:[1,0.3]},[])});
+      lw_screenCall(x,R,ag_io(tt,w("tools","every month",-0.4),tT-0.3,0.4),"The docs · what's new",[["This month: 3 pages changed",PK.C.orange,34],["Last month: 5",PK.C.ink,32]],PK.C.blue);}},
+    // Helena keeps two hours every Thursday, for the whole team
+    {at:tT,place:"lwCorner",dis:0.6,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lw_corner(x,tt,{t0:tT,laptop:true,he:"think",hg:[1,0.6],hf:lw_alive(tt,{expr:"think",gaze:[1,0.6]},1,tT),handN:[830,616],handF:[856,606]});
+      lw_name(x,R.helena,tt,w("helena","Helena Novak",0),tG-0.2,"Helena Novak","Data manager",170);
+      PK.callout(x,1080,90,700,260,R.laptop,ag_io(tt,w("time","two hours",-0.3),tG-0.3,0.4),(cc,bx,by,bw,bh)=>lw_panel(cc,bx,by,bw,bh,"Calendar · every Thursday",[["2 to 4 · learning time",PK.C.blue,36],["the whole team · no meetings",PK.C.ink,32]],null,PK.C.blue));}},
+    // a meeting asked for then is offered another time
+    {at:tG,place:"lwCampus",dis:0.6,keys:[[tG,900,570,1.1]],d:2,draw:(x,tt,cam)=>{
+      const CH={title:"Helena Novak",who:["helena"],me:"graham",msgs:[{who:"graham",s:"Thursday at 3, about the rooms?",at:tG+0.2},{who:"helena",s:"That's our learning time. Friday at 10?",at:w("helena","another time",-0.8),type:1.4},{who:"graham",s:"Friday it is.",at:E.helena+0.2,type:0.8}]},cs=PK.chatSize(x,CH,{size:28});
+      const Jg=PK.person(x,"graham",1060,CA.near,lw_hC(CA.near),"phone",Object.assign({t:tt,flip:true,hold:PK.inHand.phone({back:true}),holds:true},PK.face(tt,{expr:"think",gaze:[1,0.9]},[[E.helena+0.4,"smile",2.0]])));
+      PK.callout(x,200,160,cs.w,cs.h,[Jg.hdN[0]-20,Jg.hdN[1]-30],ag_in(tt,tG+0.3,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH,tt,{size:28}));}},
+    // each person picks one thing the work needs, from the official docs, and tries it on the real project (Ivy's notebook)
+    {at:tN,place:"lwNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N2,{});}},
+    // Ivy picks the sensors' counts: she goes through a week of them with Sam, under a sensor
+    {at:tI,place:"lwLecture",dis:0.6,keys:[[tI,960,540,1.0],[c.read,760,520,1.1]],d:3,draw:(x,tt,cam)=>{
+      lw_room(x,tt,{plate:1,people:[
+        {fl:900,draw:cc=>{PK.person(cc,"sam",360,900,hL(900),"clasp",Object.assign({t:tt},lw_alive(tt,{expr:"listen",gaze:[1,0.2]},1,tI)));}},
+        {fl:960,draw:cc=>{PK.person(cc,"ivy",820,960,hL(960),"clasp",Object.assign({t:tt,flip:true,hold:PK.inHand.notebook({}),holds:true},PK.face(tt,{expr:"think",gaze:[1,0.1]},[[w("ivy","sensors'",0.2),"look",2.6,[1,-0.9]],[c.read+3,"nod"]])));}}]});
+      PK.callout(x,1080,70,560,300,[LE.sensor[0]+30,LE.sensor[1]+10],ag_io(tt,w("read","week of counts",-0.4),1e9,0.4),(cc,bx,by,bw,bh)=>lw_panel(cc,bx,by,bw,bh,"B-204 · Tuesday",[["9:00 · 41",PK.C.orange,38],["10:00 · 0",PK.C.green,38],["11:00 · nothing sent",PK.C.amber,36]]));}}
   ]);
-  lw_kick(ctx,S,1);
+  lw_card(ctx,S,t,c.time+0.2,w("time","two hours",-0.6),{kick:"From Thursday 1 April",title:"Two hours, every week"},{y:40,mid:true});
+  lw_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lw_apart(t,[[w("tools","every month",-0.4),tT],[c.time,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 4. Teach it to keep it */
-scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),lt={light:"late"},gy={light:"grey"};
-  const P0=w("may","page",-0.2),R=[w("peak","most",-0.2),w("gap","zero",-0.2),w("heads","heads",-0.2)];
+scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tB=w("peak","count",-1.0),tR=c.ready-0.4,tN=c.study-0.4,tS=c.spread-0.4,BA=PK.pace(ctx,"ivy",lw_boardA(sc,w)),N3=PK.pace(ctx,null,lw_note3(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // 13 May, in the learning time: Ivy teaches the team, one page in twenty minutes; the camera goes down the page, part by part
-    {at:0,place:"lwLate",later:true,keys:[[0,960,540,1.0],[R[0]-0.2,1258,380,1.45],[c.gap-0.2,1258,540,1.45],[c.heads-0.2,1258,690,1.45]],d:1.6,draw:(x,tt)=>{
-      lw_sheet(x,tt,0.7,130,150,640,{kick:"Thursday 13 May",title:"Ivy teaches the team",lines:["In the learning time","One page, twenty minutes"]},
-        {light:"late",out:R[0]-0.5,u:lw_u(tt,[w("may","learning",-0.1),w("may","page",-0.1)])});
-      for(const [who,px] of [["helena",160],["noor",390],["sam",620]])lp_person(x,who,px,740,0.68,{t:tt,cut:844,light:lt});lp_table(x,20,850,800,{floor:1040});
-      if(tt>=P0)lw_page(x,1140,150,740,{a:ag_in(tt,P0,0.35),k:tt-P0,rows:R.map(t0=>ag_in(tt,t0,0.8)),light:"late"});
-      lp_person(x,"ivy",930,640,0.92,{t:tt,flip:true,light:lt});}},
-    // getting ready, she found two things she couldn't explain, and asked Sam
-    {at:c.ready-0.3,place:"lwGrey",cut:true,keys:[[c.ready-0.3,960,540,1.0]],draw:(x,tt)=>{const q0=w("ready","two",-0.1),l0=w("ready","learned",-0.1);
-      lp_person(x,"ivy",600,650,0.92,{t:tt,light:gy});lp_person(x,"sam",1320,650,0.92,{t:tt,flip:true,a:ag_in(tt,w("ready","asked",-0.4),0.6),light:gy});
-      const b1=lp_tag(x,960,230,"31: in the hour, or at once?",{align:"center",a:ag_in(tt,q0,0.4)}),b2=lp_tag(x,960,310,"A gap, or nobody there?",{align:"center",a:ag_in(tt,q0+0.6,0.4)});
-      lw_tick(x,tt,l0,b1.x+b1.w+34,230);lw_tick(x,tt,l0+0.2,b2.x+b2.w+34,310);}},
-    // Fiorella and Mayer: students who prepared to teach, then taught it, remembered more
-    {at:c.study-0.3,place:"lwGrey",later:true,keys:[[c.study-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lw_sheet(x,tt,c.study+0.2,460,220,1000,{kick:"Logan Fiorella and Richard Mayer, 2013",title:"Students who prepared to teach, then taught it",lines:["Remembered more of it later","Than those who only studied it"]},
-        {light:"grey",u:lw_u(tt,[w("taught","remembered",-0.1),w("taught","only",-0.1)])});}},
-    // Freire, years after Angicos, in the circle's room
-    {at:c.freire-0.3,place:"lwCircle",keys:[[c.freire-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lw_sheet(x,tt,c.freire+0.3,460,260,1000,{kick:"Paulo Freire, 1996",title:"“Whoever teaches learns in teaching, and whoever learns teaches in learning.”"},{light:"evening"});}},
-    // now the whole team reads a count the same way, not only Sam
-    {at:c.spread-0.3,place:"lwLate",keys:[[c.spread-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      for(const [who,px,fl] of [["helena",260,false],["noor",610,false],["sam",960,false],["jun",1310,true],["ivy",1660,true]])lp_person(x,who,px,720,0.72,{t:tt,flip:fl,light:lt});
-      lw_pill(x,tt,w("spread","same",-0.2),null,960,400,"The whole team reads a count one way",{col:LP.green,icon:"tick"});}}
+    // Thursday 13 May: Ivy teaches the team what one count means, on one page, in twenty minutes
+    {at:0,place:"lwTeam",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{lw_lesson(x,tt,{who:"ivy",rows:BA,clock:14,events:LW_HEV});}},
+    {at:tB,cut:true,place:"lwBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"ivy",tt,BA,{say:[[c.peak,E.heads]],events:LW_HEV});}},
+    // getting ready, she asked Sam about two things she couldn't explain
+    {at:tR,place:"lwTeam",cut:true,keys:[[tR,1300,540,1.12]],d:2,draw:(x,tt,cam)=>{let Ji=null;
+      const R=lw_team(x,tt,{clock:11,marta:null,jun:null,sam:Object.assign({turn:ag_in(tt,tR+1.0,0.5),work:0},lw_sp(tt,1,[[w("ready","asked Sam",0.4),tN-0.3]],"smile",0.1)),people:[
+        {fl:900,draw:cc=>{Ji=PK.person(cc,"ivy",1620,900,lw_hT(900),"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},lw_sp(tt,2,[[tR+0.4,w("ready","asked Sam",0.2)]],"think",0.1)));}}]});
+      lw_bub(x,Ji,tt,tR+0.4,w("ready","asked Sam",0.2),["Why a gap here, not a zero?"],cam,{lean:-220});
+      lw_bub(x,R.sam,tt,w("ready","asked Sam",0.4),tN-0.3,["It lost its network: it sent nothing."],cam,{lean:-200,rise:150});}},
+    // whoever prepares to teach, then teaches, remembers more (Helena's notebook)
+    {at:tN,place:"lwNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}},
+    // now the whole team reads a count the same way
+    {at:tS,place:"lwTeam",dis:0.6,keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=lw_team(x,tt,{clock:10,sam:Object.assign({work:1},lw_alive(tt,{},1,tS)),jun:Object.assign({turn:1,work:0},lw_alive(tt,{expr:"listen",gaze:[1,-0.2]},2,tS)),
+        marta:Object.assign({turn:1,work:0},lw_sp(tt,3,[[tS+0.8,tS+2.6]],"smile",0.1))});
+      lw_bub(x,R.marta,tt,tS+0.8,1e9,["A gap, so not a zero."],cam,{lean:140});}}
   ]);
-  lw_kick(ctx,S,1-ag_io(t,c.heads-0.5,c.ready-0.3,0.5),ag_io(t,c.freire-0.3,c.spread-0.3,1.0));
+  lw_card(ctx,S,t,0.3,tB-0.3,{kick:"Thursday 13 May",title:"Ivy teaches the team"},{y:40,mid:true});
+  lw_card(ctx,S,t,tR+0.3,w("ready","asked Sam",-0.2),{kick:"The week before",title:"Getting ready"},{y:40,mid:true});
+  lw_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lw_apart(t,[[0,tB],[tB,tN],[tN,tS]])));
 });
 
 /* ---------------------------------------------------------------- 5. Nobody the only one */
-scene("two",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"},lt={light:"late"};
-  const J={x:330,y:120,w:1100};
+scene("two",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tL=c.list-0.4,tF=c.five-0.4,tP=c.pairs-0.4,tJ=c.june-0.4,tV=c.ivy-0.4,tA=c.away-0.4,N4=PK.pace(ctx,null,lw_note4(sc,w));
+  const samPair=(x,tt,t0,o)=>lw_team(x,tt,Object.assign({clock:15,samWho:"ivy",sam:Object.assign({work:1},lw_alive(tt,{expr:"think",gaze:[1,0.3]},3,t0)),
+    jun:Object.assign({work:1},lw_alive(tt,{},2,t0)),marta:Object.assign({work:1},lw_alive(tt,{},5,t0))},o||{}));
   ag_shots(ctx,S,t,sc.dur,[
-    // only one person knows how to run it: one absence away from trouble
-    {at:0,place:"lpRoom",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const a0=w("absence","absence",-0.3);
-      lp_person(x,"sam",840,760,0.76,{t:tt,cut:860,a:1-ag_in(tt,a0,0.9),light:dy});lp_table(x,560,866,800,{floor:1040});lp_laptop(x,1080,838,200,{glow:0.6});
-      lw_tag(x,tt,w("absence","only",-0.1),a0-0.2,960,330,"Only one person knows how",{align:"center",col:LP.amber});
-      lw_tag(x,tt,a0+0.4,null,960,330,"One absence away from trouble",{align:"center",col:LP.amber});}},
-    // the nine jobs that must keep running, and who can run each; five with only one name
-    {at:c.list-0.3,place:"lpRoom",later:true,keys:[[c.list-0.3,960,540,1.0]],draw:(x,tt)=>{const j0=c.list+0.1;
-      lw_jobs(x,J.x,J.y,J.w,{k:tt-j0,a:ag_in(tt,j0,0.35),u:clamp((tt-w("list","nine",-0.2))/2.0,0,1),one:ag_in(tt,w("five","Five",-0.1),0.6),light:"day"});
-      lw_tag(x,tt,w("list","May",-0.1),null,1880,170,"In May",{align:"right"});}},
-    // they pair on those too, a job at a time, and write each one down, step by step
-    {at:c.pairs-0.3,place:"lwLate",keys:[[c.pairs-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{const r0=w("pairs","write",-0.2);
-      lp_person(x,"sam",330,760,0.76,{t:tt,cut:860,light:lt});lp_person(x,"ivy",700,760,0.76,{t:tt,flip:true,cut:860,light:lt});
-      lp_table(x,60,866,920,{floor:1040});lp_laptop(x,515,838,200,{glow:0.6});
-      if(tt>=r0)lw_runbook(x,1060,150,760,{a:ag_in(tt,r0,0.35),k:tt-r0,u:clamp((tt-w("pairs","step",-0.1))/1.6,0,1),light:"late"});}},
-    // by 30 June every job has two names; Ivy's on two of them; anyone can be away, and the work goes on
-    {at:c.june-0.3,place:"lpRoom",keys:[[c.june-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lw_jobs(x,J.x,J.y,J.w,{one:1,second:ag_in(tt,w("june","every",-0.1),1.0),ivy:ag_in(tt,w("ivy","Ivy's",-0.1),0.6),light:"day"});
-      lw_tag(x,tt,w("june","Wednesday",-0.1),null,1880,170,"Wednesday 30 June",{align:"right",col:LP.green});
-      lw_tag(x,tt,w("away","holiday",-0.2),null,1670,420,"On holiday, or ill",{align:"center"});
-      lw_pill(x,tt,w("away","goes",-0.2),null,1670,500,"The work goes on",{col:LP.green,icon:"tick"});}}
+    // one absence away from trouble: Sam is off, and only Sam runs the sensors' feed
+    {at:0,place:"lwTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jh=null;
+      const R=lw_team(x,tt,{clock:9,sam:null,jun:Object.assign({turn:1,work:0},lw_sp(tt,2,[[0.6,2.8]],"worry",0.1)),marta:Object.assign({work:1},lw_alive(tt,{},5,0)),people:[
+        {fl:1000,draw:cc=>{Jh=PK.person(cc,"helena",1000,1000,lw_hT(1000),"clasp",Object.assign({t:tt,flip:true},lw_alive(tt,{expr:"worry",gaze:[1,0.1]},4,0)));}}]});
+      lw_bub(x,R.jun,tt,0.6,tL-0.3,["Sam's off. Who runs the feed?"],cam,{lean:-200});}},
+    // in May, Helena lists the nine jobs that must keep running, in her corner
+    {at:tL,place:"lwCorner",cut:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{lw_corner(x,tt,{t0:tL,book:true,write:ag_in(tt,tL+0.8,0.5),hf:lw_alive(tt,{expr:"think",gaze:[1,0.7]},1,tL)});}},
+    {at:tF,place:"lwNotes",dis:0.6,keys:[[tF,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N4,{});}},
+    // they pair on those too, and write each one down, step by step: Ivy at Sam's desk, Sam beside her
+    {at:tP,place:"lwTeam",dis:0.6,keys:[[tP,1300,540,1.12]],d:2,draw:(x,tt,cam)=>{let Js=null;
+      samPair(x,tt,tP,{people:[{fl:880,draw:cc=>{Js=PK.seated(cc,"sam",930,880,lw_hT(880),"sit",Object.assign({t:tt+2},lw_sp(tt,1,[[tP+0.8,tJ-0.4]],"talk",0.3)));}}]});
+      lw_bub(x,Js,tt,tP+0.8,tJ-0.3,["Step three: check the counts came."],cam,{lean:-140});}},
+    // by 30 June, every job has at least two names: Helena tells the pair
+    {at:tJ,place:"lwTeam",later:true,keys:[[tJ,1300,540,1.12]],d:2,draw:(x,tt,cam)=>{let Jh=null;
+      samPair(x,tt,tJ,{people:[{fl:880,draw:cc=>{PK.seated(cc,"sam",930,880,lw_hT(880),"sit",Object.assign({t:tt+2},lw_alive(tt,{expr:"smile",gaze:[1,0.3]},1,tJ)));}},
+        {fl:990,draw:cc=>{Jh=lw_come(cc,"helena",tt,560,760,tJ+0.1,tJ+1.6,990,lw_hT(990),{then:"clasp",flip:false,face:lw_sp(tt,4,[[tJ+1.8,tV-0.4]],"smile",0.1)});}}]});
+      lw_bub(x,Jh,tt,tJ+1.8,tV-0.3,["Every job has two names now."],cam,{lean:200});}},
+    {at:tV,place:"lwNotes",dis:0.6,keys:[[tV,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N4,{});}},
+    // now anyone can take a holiday, or be ill, and the work goes on
+    {at:tA,place:"lwTeam",dis:0.6,keys:[[tA,1300,540,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=samPair(x,tt,tA,{sam:Object.assign({work:PK.u.clamp(1-ag_in(tt,tA+1.4,0.5),0,1),turn:ag_in(tt,tA+1.4,0.5)},lw_sp(tt,3,[[tA+1.8,tA+3.6]],"smile",0.1))});
+      lw_bub(x,R.sam,tt,tA+1.8,1e9,["The feed's in. Enjoy the beach, Sam."],cam,{lean:-160});}}
   ]);
-  lw_kick(ctx,S,1);
+  lw_card(ctx,S,t,tA+0.3,1e9,{kick:"July",title:"Sam on holiday"},{y:40,mid:true});
+  lw_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lw_apart(t,[[tA,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 6. Why it works */
-scene("why",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
+scene("why",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tB=c.lave-0.6,tN=c.rule-0.4,tD=c.docs-0.4,BB=PK.pace(ctx,"carmen",lw_boardB(sc,w)),N5=PK.pace(ctx,null,lw_note5(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"lpRoom",later:true,keys:[[0,960,540,1.0]],draw:(x,tt)=>{const e0=c.ericsson-0.4,r0=c.rule-0.4,d0=c.docs-0.4;
-      // the same, trade after trade
-      lw_sheet(x,tt,c.trades+0.1,460,200,1000,{kick:"How adults learn at work",title:"The same, trade after trade"},{light:"day",out:c.lave-0.5});
-      // Lave and Wenger: apprentices, from tailors in Liberia to midwives in Mexico; newcomers at the edge of the real work, moving in
-      lw_sheet(x,tt,w("lave","Jean",-0.1),140,150,640,{kick:"Jean Lave and Etienne Wenger, 1991",title:"Apprentices",lines:["Tailors in Liberia","Midwives in Mexico"]},
-        {light:"day",out:e0,u:lw_u(tt,[w("lave","tailors",-0.1),w("lave","midwives",-0.1)])});
-      const ra=ag_in(tt,w("edge","Newcomers",-0.1),0.5)*(1-ag_in(tt,e0,0.4));if(ra>0.004)lw_ring(x,1350,500,290,{a:ra,in:ag_in(tt,w("edge","edge",-0.1),5.0)});
-      lw_tag(x,tt,w("edge","edge",-0.1),e0,140,520,"First at its edge");
-      lw_tag(x,tt,w("edge","tasks",-0.1),e0,140,600,"Small tasks that matter",{col:LP.green});
-      lw_tag(x,tt,w("edge","beside",-0.1),e0,140,680,"Beside people who know");
-      // Ericsson: practice aimed at what you can't do yet, with quick feedback from someone who can, as at Jun and Ivy's desk
-      lw_sheet(x,tt,w("ericsson","Anders",-0.1),460,140,1000,{kick:"Anders Ericsson, 1993",title:"Practice aimed at what you can't do yet",lines:["With quick feedback from someone who can"]},
-        {light:"day",out:r0,u:ag_in(tt,w("ericsson","feedback",-0.2),0.5)});
-      const da=ag_in(tt,c.ericsson,0.8)*(1-ag_in(tt,r0,0.6));if(da>0.004){x.save();x.globalAlpha*=da;lw_desk(x,tt,{light:"day"});x.restore();}
-      // the rule of thumb: about 70, 20 and 10; dashed once it's called a rule of thumb, not a measurement
-      lw_sheet(x,tt,c.rule+0.1,560,150,800,{kick:"A rule of thumb",title:"Where people learn at work"},{light:"day",out:d0});
-      const sa=ag_in(tt,c.rule+0.2,0.4)*(1-ag_in(tt,d0,0.4));
-      if(sa>0.004)lw_split(x,360,420,1200,{a:sa,u:[ag_in(tt,w("rule","seventy",-0.1),0.5),ag_in(tt,w("twenty","twenty",-0.1),0.5),ag_in(tt,w("twenty","ten",-0.1),0.5)],soft:ag_in(tt,w("thumb","rule",-0.1),0.8)});
-      lw_tag(x,tt,w("thumb","measurement",-0.2),d0,960,690,"A rule of thumb, not a measurement",{align:"center"});
-      // courses and docs still count: start from the official docs, then learn it on the work
-      lp_screen(x,360,150,1200,600,{a:ag_in(tt,c.docs-0.1,0.5),draw:(cx,X0,Y0,Wd,Hd)=>lw_docs(cx,X0,Y0,Wd,Hd,{tab:0,title:"Testing your models",add:ag_in(tt,w("docs","work",-0.2),1.0)})});}}
+    // how adults learn at work: Carmen Vidal, at the team's board
+    {at:0,place:"lwTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const R=lw_lesson(x,tt,{rows:BB,clock:14,events:LW_HEV,marta:null});
+      lw_name(x,R.at,tt,0.6,tB-0.3,"Carmen Vidal","Consultant",160);}},
+    {at:tB,cut:true,place:"lwBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BB,{say:[[c.trades,E.ericsson]],events:LW_HEV});}},
+    // seventy, twenty, ten: a rule of thumb (Helena's notebook)
+    {at:tN,place:"lwNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N5,{});}},
+    // courses and docs still count: Ivy, the official docs open beside the work
+    {at:tD,place:"lwTeam",dis:0.6,keys:[[tD,700,560,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=lw_ivyRoom(x,tt,tD,{ivy:lw_alive(tt,{expr:"think",gaze:[1,0.3]},3,tD)});
+      lw_screenCall(x,R,ag_in(tt,tD+0.4,0.4),"The official docs",[["open beside the work",PK.C.blue,36],["then tried on the project",PK.C.green,34]],PK.C.blue);}}
   ]);
-  lw_kick(ctx,S,1);
+  lw_kick(ctx,S,ag_in(t,0.6,0.6)*(1-lw_apart(t,[[tB,tD],[tD,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 7. On Monday */
-scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),mo={light:"morning"},e0=c.breath+0.6;
+scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tI=c.ivy-0.4,tN=c.real-0.1,tL=c.last-0.4,tE=c.breath+0.6,N6=PK.pace(ctx,null,lw_note6(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // back to Angicos: their own words, a small step each evening, in a circle with someone beside them
-    {at:0,place:"lwCircle",keys:[[0,980,520,1.06],[c.back+0.5,960,540,1.0]],d:3,draw:(x,tt)=>{lw_circle(x,tt,{sl:1,slide:{pic:1,word:1}});}},
-    // Ivy did the same with data
-    {at:c.ivy-0.3,place:"lwMorning",keys:[[c.ivy-0.3,960,540,1.0]],dis:1.0,draw:(x,tt)=>{
-      lp_person(x,"ivy",560,640,1.0,{t:tt,light:mo});
-      lw_pill(x,tt,w("ivy","learned",-0.1),null,1250,330,"Learned on the real work",{col:LP.green,icon:"tick"});
-      lw_pill(x,tt,w("ivy","taught",-0.1),null,1250,430,"Taught what she learned",{col:LP.green,icon:"tick"});
-      lw_pill(x,tt,w("ivy","second",-0.1),null,1250,530,"Second name on two jobs",{col:LP.green,icon:"tick"});}},
-    // what to do on Monday
-    {at:c.real-0.3,place:"lwMorning",later:true,keys:[[c.real-0.3,960,540,1.0]],draw:(x,tt)=>{
-      lw_sheet(x,tt,c.real+0.3,140,170,520,{kick:"One",title:"Learn on the real work, beside someone who knows"},{light:"morning"});
-      lw_sheet(x,tt,w("step","small",-0.1),700,170,520,{kick:"Two",title:"One small step at a time, and finish it"},{light:"morning"});
-      lw_sheet(x,tt,w("time","calendar",-0.2),1260,170,520,{kick:"Three",title:"Learning time in the calendar, kept free",lines:["Start from the official docs"]},
-        {col:LP.blue,light:"morning",u:ag_in(tt,w("time","official",-0.1),0.5)});
-      lw_sheet(x,tt,w("teach","Write",-0.1),560,540,800,{kick:"Four",title:"Write down what you learn, and teach it"},{col:LP.green,light:"morning"});}},
-    // learn on the real work, beside someone, then teach it
-    {at:c.last-0.3,place:"lwMorning",later:true,keys:[[c.last-0.3,960,540,1.0]],draw:(x,tt)=>{const g=1-ag_in(tt,e0,0.8);
-      if(g>0.004){x.save();x.globalAlpha*=g;lw_desk(x,tt,{light:"morning"});x.restore();}}}
+    // Angicos: adults learned to read from their own words, a step each evening
+    {at:0,place:"lwaDusk",keys:[[0,960,560,1.0],[tI-0.2,1000,580,1.06]],d:3,draw:(x,tt,cam)=>{lwa_lit(x,1);
+      lw_come(x,lwa_row("wash1"),tt,300,1000,0.2,4.6,980,lwa_h(980),{then:"clasp",flip:false,face:lw_alive(tt,{expr:"smile",gaze:[1,0.1]},1,0),hold:PK.inHand.notebook({})});
+      lwa_person(x,"farm",1340,1030,"clasp",Object.assign({t:tt,flip:true},lw_alive(tt,{expr:"smile",gaze:[1,0.1]},2,0)));}},
+    // Ivy learned the team's work the same way
+    {at:tI,place:"lwTeam",dis:1.0,keys:[[tI,1300,540,1.12]],d:2,draw:(x,tt,cam)=>{
+      lw_team(x,tt,{clock:10,samWho:"ivy",sam:Object.assign({work:1},lw_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tI)),jun:Object.assign({work:1},lw_alive(tt,{},2,tI)),marta:null,people:[
+        {fl:880,draw:cc=>{PK.seated(cc,"sam",930,880,lw_hT(880),"sit",Object.assign({t:tt+2},lw_alive(tt,{expr:"listen",gaze:[1,0.3]},1,tI)));}}]});}},
+    {at:tN,place:"lwNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N6,{});}},
+    // learn on the real work, beside someone, then teach it: Ivy beside Marta now
+    {at:tL,place:"lwTeam",dis:0.6,keys:[[tL,700,560,1.12]],d:2,draw:(x,tt,cam)=>{
+      lw_ivyRoom(x,tt,tL,{at:"marta",with:"ivy",withF:lw_alive(tt,{expr:"smile",gaze:[1,0.35]},4,tL),ivy:lw_alive(tt,{expr:"think",gaze:[1,0.3]},3,tL)});}}
   ]);
-  lp_end(ctx,S,t,e0,"Learning while doing",LW_LAST,"Film 3 of 3","The new skills");
-  lw_kick(ctx,S,1-ag_in(t,e0,0.8),1-ag_in(t,c.ivy-0.3,1.0));
+  lw_kick(ctx,S,(1-ag_in(t,tE-0.2,0.6))*(1-lw_apart(t,[[0,tI],[tN,tL]])));
+  PK.end(ctx,S,t,tE,"Learning while doing",LW_LAST,"Film 3 of 3","The new skills",{side:"right"});
 });
-// thursday ends where teach opens (Ivy's learning time, late in the day), teach ends on the team and two opens on Sam alone, two ends
-// on the nine jobs and why opens in the same room: each opens on what the one before ends on
-ag_cutInto(["teach","two","why"]);
+ag_cutInto(["beside","thursday","teach","two","why"]);

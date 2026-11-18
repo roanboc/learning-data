@@ -71,7 +71,7 @@ function mw_roadBand(ctx,dusk){const S=PK.S,U=PK.u,d=c=>dusk?mw_dusk(c,0.7):c,{f
   const R=U.rnd(33);for(let i=0;i<80;i++){const x=R()*1960,y=edge+16+R()*(1080-edge-16),k=0.5+(y-edge)/380;ctx.fillStyle=U.css(d(U.mix(mw_c("grassDk"),mw_c("grass"),R()*0.6)));
     ctx.beginPath();for(let j=0;j<4;j++){const a=-0.6+j*0.4,l=(10+R()*10)*k;ctx.moveTo(x-2*k,y);ctx.quadraticCurveTo(x+Math.sin(a)*l*0.5,y-l*0.6,x+Math.sin(a)*l,y-Math.cos(a)*l);ctx.quadraticCurveTo(x+Math.sin(a)*l*0.4+2*k,y-l*0.5,x+2*k,y);}ctx.fill();}
   for(let i=0;i<26;i++){const x=R()*1960,y=edge+40+R()*360,k=0.6+(y-edge)/420;ctx.fillStyle=U.css(d(mw_c("flower",i%3)));ctx.beginPath();ctx.arc(x,y,3.4*k,0,U.TAU);ctx.fill();}}
-function mw_roadPlace(ctx,o){o=o||{};mw_sky(ctx,o.dusk);mw_far(ctx,o.dusk);mw_roadBand(ctx,o.dusk);if(o.barrier)mw_barrier(ctx,-60,1980,o.dusk);}
+function mw_roadPlace(ctx,o){o=o||{};mw_sky(ctx,o.dusk);mw_far(ctx,o.dusk);mw_roadBand(ctx,o.dusk);}
 /* the barrier: posts down the middle line, about every 2.5 m, and three steel cables along them, drawn from x0 as far as x1 (the
    posts not yet set aren't there); bent: [x, k] a stretch the cables lean on (k 0 to 1), as where they hold a car */
 function mw_barrier(ctx,x0,x1,dusk,bent){const S=PK.S,U=PK.u,d=c=>dusk?mw_dusk(c,0.6):c,y=MW_R.mid+2,m=mw_m(y),ph=0.78*m,gap=2.5*m,pc=d(mw_c("post")),cc=d(mw_c("cable"));
@@ -79,8 +79,10 @@ function mw_barrier(ctx,x0,x1,dusk,bent){const S=PK.S,U=PK.u,d=c=>dusk?mw_dusk(c
   for(let x=Math.ceil((x0+40)/gap)*gap-40;x<=x1;x+=gap){const l=lean(x)*36;S.fill(ctx,c=>{c.moveTo(x-3,y);c.lineTo(x+3,y);c.lineTo(x+3+l,y-ph);c.lineTo(x-3+l,y-ph);c.closePath();},pc,{w:0.5});}
   ctx.save();ctx.lineCap="round";for(const [f,w] of [[0.55,2.6],[0.72,2.6],[0.9,2.6]]){ctx.strokeStyle=U.css(cc);ctx.lineWidth=w;ctx.beginPath();
     for(let x=x0;x<=x1;x+=12){const yy=y-ph*f+lean(x)*20*f;x===x0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}ctx.restore();}
-AG_PLACES.mwRoad=c=>mw_roadPlace(c,{});AG_PLACES.mwRoadB=c=>mw_roadPlace(c,{barrier:true});
-AG_PLACES.mwDusk=c=>mw_roadPlace(c,{dusk:true});AG_PLACES.mwDuskB=c=>mw_roadPlace(c,{dusk:true,barrier:true});
+// the barrier isn't painted into a place: it stands between the lanes, so the film draws it after the far lane's cars and before
+// the near lane's (mw_traffic)
+AG_PLACES.mwRoad=c=>mw_roadPlace(c,{});
+AG_PLACES.mwDusk=c=>mw_roadPlace(c,{dusk:true});
 
 /* ---------------------------------------------------------------- a car, from the side
    x: its middle; y: where its wheels stand (a lane's line); o.flip: it faces left; o.col; o.dusk; o.lights (0 to 1): its lamps
@@ -89,6 +91,8 @@ AG_PLACES.mwDusk=c=>mw_roadPlace(c,{dusk:true});AG_PLACES.mwDuskB=c=>mw_roadPlac
    late 1990s, an estate or a saloon, with no maker's mark. */
 function mw_car(ctx,x,y,o){o=o||{};const S=PK.S,U=PK.u,m=mw_m(y),col0=o.col||mw_c("car",0),dk=c=>o.dusk?mw_dusk(c,0.55):c,col=dk(col0),est=o.estate!==false;
   ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.tilt)ctx.rotate(o.tilt);ctx.scale(m,-m);
+  // a car is solid: the people kit's check (people.py) holds any two apart, and what is further away behind what is nearer
+  if(PK.watch)PK.watch({solid:"car",at:[-2.24,0,2.24,1.38],ground:0,ctx});
   const lw=U.clamp(m*0.012,1.0,3.2);S.begin(ctx,{lw:lw/m*1.0,far:o.far||0,sh:3});
   if(o.lights>0.01){ctx.save();ctx.globalAlpha*=0.32*o.lights;ctx.fillStyle=U.css(mw_c("lamp"));ctx.beginPath();ctx.moveTo(2.15,0.62);ctx.lineTo(9,0.05);ctx.lineTo(9,-0.25);ctx.lineTo(2.1,0.5);ctx.closePath();ctx.fill();ctx.restore();}
   // the shadow under it
@@ -115,9 +119,13 @@ function mw_car(ctx,x,y,o){o=o||{};const S=PK.S,U=PK.u,m=mw_m(y),col0=o.col||mw_
   for(const wx of [-1.32,1.38]){S.fill(ctx,c=>U.ell(c,wx,0.32,0.32,0.32),dk(mw_c("tyre")),{});S.fill(ctx,c=>U.ell(c,wx,0.32,0.15,0.15),dk(mw_c("hub")),{w:0.6});}
   ctx.restore();}
 /* traffic: cars that pass, each [lane ("near": to the right; "far": to the left), when it enters, how long it takes to cross the
-   picture, colour index, estate]; t the shot's time */
-function mw_traffic(ctx,tt,cars,o){o=o||{};for(const [lane,t0,dur,ci,est] of cars){const u=(tt-t0)/dur;if(u<0||u>1)continue;const near=lane==="near",y=near?MW_R.near-12:MW_R.mid-14,
-    x=near?PK.u.lerp(-420,2340,u):PK.u.lerp(2340,-420,u);mw_car(ctx,x,y,{flip:!near,col:mw_c("car",ci%7),estate:est,dusk:o.dusk,lights:o.dusk?1:0});}}
+   picture, colour index, estate]; t the shot's time. What is further away is drawn first: the far lane's cars, then the barrier
+   down the middle where the road has one (o.barrier), then the near lane's. Drawn in the order they were listed, a far car lay
+   over a near one, and over the barrier, as if they drove through each other (the author, 18 November 2026) */
+function mw_traffic(ctx,tt,cars,o){o=o||{};const on=[];for(const [lane,t0,dur,ci,est] of cars){const u=(tt-t0)/dur;if(u<0||u>1)continue;const near=lane==="near";
+    on.push({near,x:near?PK.u.lerp(-420,2340,u):PK.u.lerp(2340,-420,u),y:near?MW_R.near-12:MW_R.mid-14,ci,est});}
+  const car=c=>mw_car(ctx,c.x,c.y,{flip:!c.near,col:mw_c("car",c.ci%7),estate:c.est,dusk:o.dusk,lights:o.dusk?1:0});
+  on.filter(c=>!c.near).forEach(car);if(o.barrier)mw_barrier(ctx,-60,1980,o.dusk);on.filter(c=>c.near).forEach(car);}
 /* ---------------------------------------------------------------- a family's kitchen, at night
    The window looks out on the dark; the lamp over the table is lit; the clock on the wall says how late it is. The table and the
    chairs are drawn with the people (mw_kitTable), so a seated person's legs go under it. */

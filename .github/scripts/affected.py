@@ -12,7 +12,9 @@ The checks it picks from:
              and score for the words its pictures and sounds wait for
   browser    site-tools/smoke.py, the browser checks: minutes, so only on the pages a change touched. A changed page is
              checked, and so is every page that loads a changed file (a script, a stylesheet, an image, a soundtrack); a
-             file no page names counts for the pages that load the files beside it. A change to the browser checks
+             file no page names counts for the pages that load the files beside it. A page whose only change is the versions
+             its links carry (?v=, site-tools/build_series.py's stamp()) isn't checked for that: the file that changed picks
+             the pages that load it. A change to the browser checks
              themselves checks every page, and one to a series' play script (site-tools/smoke/<series>.js) its labs and
              scenarios pages
   films      for each film whose source changed (its "paths" in its release.json, shared code included,
@@ -160,6 +162,20 @@ def audio_paths(path, files, base):
     return changed
 
 
+# The versions a page links its files by (?v=<hash>, made by site-tools/build_series.py's stamp(), and the labs engine's "v" and "lv"
+# in data-films): a page whose only change is these follows a file that changed, and that file's change picks its pages itself.
+VERSION = re.compile(r'\?v=[0-9a-f]+|&quot;l?v&quot;:&quot;[0-9a-f]+&quot;,')
+
+
+def versions_only(path, base):
+    """True when a page differs from base only in the versions its links carry: a changed player, script, stylesheet, poster or
+    soundtrack gives every page that loads it a new version, so a change to one shared file doesn't browser-check every page."""
+    if not base:
+        return False
+    old = subprocess.run(["git", "show", f"{base}:{path}"], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
+    return old.returncode == 0 and VERSION.sub("", old.stdout) == VERSION.sub("", (ROOT / path).read_text(encoding="utf-8"))
+
+
 def pages(files, base="HEAD"):
     """The pages the browser checks run on: None for every page, else the keys of the pages a change touched."""
     if any(f in SMOKE for f in files):
@@ -185,7 +201,7 @@ def pages(files, base="HEAD"):
             continue
         rel = f[len("site/"):]
         if rel.endswith(".html"):
-            if (WEB / rel).exists():
+            if (WEB / rel).exists() and not versions_only(f, base):
                 out.add(rel[:-len("index.html")] if rel.endswith("index.html") else rel)
             continue
         users = {k for k, got in L.items() if rel in got}

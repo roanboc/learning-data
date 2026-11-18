@@ -222,11 +222,12 @@ def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
 def written(name, hand, g, shown, least=0.28):
     """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row of words and each long mark, a word at a
     time, where the film writes it, while the board or the page is on screen (shown: the spans of the film's seconds when it is).
-    A dot, a tick and an arrow's head are too short to sound"""
+    A dot, a tick and an arrow's head are too short to sound. A row written while another shot is on screen is named, and silent:
+    on Ivy's second page, what she did and what it changed, written as Helena says them in the corner"""
     for k in PEN[name]:
         d = k['t1'] - k['t0']
         if not any(a <= k['t0'] and k['t1'] <= b + 0.3 for a, b in shown):
-            print('  %s: "%s" is written at %.1f s, while the film shows something else' % (name, k['s'], k['t0']))
+            print('  %s: "%s", written at %.1f s while another shot is on screen, makes no sound' % (name, k['s'], k['t0']))
         elif d >= least:
             hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
 def ring(s, g=0.0022, pan=0.0):

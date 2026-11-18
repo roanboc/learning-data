@@ -188,9 +188,9 @@ function fb_lamps(ctx,i,a){if(!(a>0.004))return;const U=PK.u,[bx,by]=FB_H.board,
 const FB_PULLS=[180,620,1060,1500,1900];
 function fb_cord(ctx,pull){const S=PK.S,U=PK.u,y=FB_H.cord;S.begin(ctx,{lw:2.6,sh:3});const col=[226,178,60];
   S.line(ctx,c=>{c.moveTo(-40,y);for(const x of FB_PULLS){const d=pull&&Math.abs(pull[0]-x)<1?pull[1]*26:0;c.lineTo(x,y+d);}c.lineTo(1960,y);},U.dk(col,0.3),3);
-  for(const x of FB_PULLS){const d=pull&&Math.abs(pull[0]-x)<1?pull[1]*26:0;S.line(ctx,c=>{c.moveTo(x,y+d);c.lineTo(x,y+d+36);},U.dk(col,0.3),2.4);S.fill(ctx,c=>U.rrect(c,x-10,y+d+34,20,30,7),col,{w:0.8});}}
+  for(const x of FB_PULLS){const d=pull&&Math.abs(pull[0]-x)<1?pull[1]*26:0;S.line(ctx,c=>{c.moveTo(x,y+d);c.lineTo(x,y+d+86);},U.dk(col,0.3),2.4);S.fill(ctx,c=>U.rrect(c,x-10,y+d+84,20,30,7),col,{w:0.8});}}
 // where a pull's handle is, for the hand that pulls it
-const fb_pullAt=(x,k)=>[x,FB_H.cord+(k||0)*26+50];
+const fb_pullAt=(x,k)=>[x,FB_H.cord+(k||0)*26+100];
 // a station's tool, hanging on its spring from above (for the empty place in 1982: it hangs there, nobody at it)
 function fb_tool(ctx,x,y,sw){const S=PK.S,U=PK.u,a=(sw||0);S.begin(ctx,{lw:2,sh:3});const tip=[x+Math.sin(a)*180,y+Math.cos(a)*180];
   S.line(ctx,c=>{c.moveTo(x,0);c.lineTo(x,y);c.lineTo(tip[0],tip[1]);},[70,70,76],1.2);S.fill(ctx,c=>U.rrect(c,x-14,y-30,28,32,6),[80,84,92],{w:0.6});

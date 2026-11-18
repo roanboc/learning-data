@@ -2574,7 +2574,7 @@ const sn_note3=(sc,w)=>[
    ideas are written by hand: the engineers' board at the Aral, Carmen Vidal's board, and Helena's and Noor's notebooks (sn_uni.js).
    The Aral Sea, from the 1960s to 2014, is in snp_aral.js. Every time comes from the voice: a line's start (sc.cues) or a word in it
    (wAt). */
-const sn_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"Saying no, and what instead",a);}};
+const sn_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,3,"Saying no, and what instead",a);}};
 function sn_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
 const sn_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
 const sn_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};

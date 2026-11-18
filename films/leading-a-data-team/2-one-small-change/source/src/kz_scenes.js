@@ -4,7 +4,7 @@
    ideas are written by hand: the director's board for five S, Carmen Vidal's and Helena's boards, and the ward sister's, Ivy's and
    Helena's notebooks (kz_uni.js). The hospital, 2000 to 2007, is in kzp_hospital.js. Every time comes from the voice: a line's start
    (sc.cues) or a word in it (wAt). */
-const kz_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"One small change at a time",a);}};
+const kz_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,2,"One small change at a time",a);}};
 function kz_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
 const kz_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
 const kz_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};

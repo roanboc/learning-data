@@ -1,4 +1,4 @@
-# Runs the module's build.py (films/the-new-skills/shared/tools/run.py finds it) on this film. Run it from this film's source folder.
+# Runs the people kit's build.py (films/people-first/shared/tools/run.py finds it) on this film. Run it from this film's source folder.
 import pathlib, sys
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[3] / "shared" / "tools"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / "people-first" / "shared" / "tools"))
 import run; run.tool("build.py")

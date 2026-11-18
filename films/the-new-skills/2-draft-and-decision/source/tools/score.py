@@ -212,43 +212,43 @@ cw = lambda lid, word, off=0: W('chess', lid, word, off)
 cc = lambda lid, off=0: G('chess', lid, off)
 CEND = E('chess')
 chord((G3, D4, G4, B4), cw('when', 'York', 0.1), 0.65, step=0.17, ring=2.8)
-sheet(cw('when', 'May', -0.2), 0.0035, px(420))
-sheet(cw('when', 'computer', -0.1), 0.003, px(1690))
+
+
 chord((E3, B3, E4, G4), cw('loses', 'wins', 0.0), 0.6, step=0.16, ring=2.6)
-sheet(cc('loses', 0.1), 0.003, px(430))
+
 chord((E3, B3), cw('fear', 'fear', 0.0), 0.55, step=0.3, ring=2.2)
 chord((B3, D4), cw('worth', 'worth', -0.1), 0.5, step=0.22, ring=1.8, until=cc('change', -0.3))
 # León: with the machine, not against it; each with a computer; the plan, the player's, the first decision
 chord((C4, E4, G4), cw('leon', 'with', 0.0), 0.55, step=0.15, ring=2.2)
-sheet(cw('leon', 'León', -0.1), 0.0035, px(350))
-sheet(cw('each', 'choice', -0.3), 0.003, px(1070))
+
+
 chord((D4, G4, B4), cw('plan', 'plan', -0.1), 0.55, step=0.13, ring=2.2, bass=G2)
 # 2005: anyone may enter; three of the entries; the winners
 chord((D4, Fs4, A4, D5), cw('free', 'anyone', 0.0), 0.5, step=0.2, ring=2.2)
-sheet(cw('free', 'anyone', -0.1), 0.0035, px(960))
+
 for word, lid, x in (('Grandmasters', 'entrants', 420), ('supercomputer', 'entrants', 420), ('amateur', 'winners', 420)):
-    sheet(cw(lid, word, -0.1), 0.003, px(x))
+    pass
 figure((G4, B4, D5), cw('winners', 'three', 0.0), 0.5, step=0.22, ring=0.5, last=1.4)
 # at home: their own experience, three programs compared, deeper where it matters, and then they decide
 chord((G3, B3, D4), cw('how', 'experience', 0.0), 0.5, step=0.14, ring=1.8)
-slide(cw('how', 'compare', 0.2), 0.8, 0.0035, px(960))
+
 chord((Fs4, A4, D5), cw('deeper', 'decide', -0.1), 0.55, step=0.12, ring=2.2, bass=D3)
 # the final: the lines run on; first prize; the supercomputer out before the last eight
-slide(cc('final', 0.1), 1.0, 0.0035, px(700))
-slide(cw('final', 'beat', -0.1), 0.9, 0.0035, px(1250))
+
+
 chord((G3, D4, G4, B4, D5), cw('final', 'prize', -0.2), 0.55, step=0.13, ring=2.4)
 chord((E3, B3), cw('final', 'supercomputer', 0.1), 0.5, step=0.25, ring=1.6)
-sheet(cc('lesson', 0.2), 0.0035, px(960))
+
 chord((C4, G4, E5), cw('lesson', 'better', 0.0), 0.45, step=0.18, ring=2.0)
 chord((B3, D4, G4), cw('counts', 'worked', -0.1), 0.5, step=0.15, ring=2.0)
 # data work's machine: the agent drafts in a minute, and the even phrase; what's left for the people; choosing, the left hand's G
 wake(cw('data', 'write', -0.2), 1.2, 0.0035, px(390))
-sheet(cw('data', 'draft', -0.1), 0.0035, px(850))
+
 draft(EVEN, cw('data', 'minute', 0.1), 0.55)
 chord((G3, B3, E4), cw('ask', 'leaves', 0.0), 0.5, step=0.16, ring=1.8)
-sheet(cw('left', 'decides', -0.2), 0.0035, px(1520))
+
 chord((D4, B4), cw('left', 'choosing', 0.0), 0.5, step=0.2, ring=2.0, bass=G2)
-press(cw('cheap', 'Judgement', -0.1), 0.0035, px(1520))
+
 # the title: the even phrase, as the agent wrote it; then the hand's, one note changed, home, the left hand's G under it, held
 t0 = cc('breath', 0.3)
 draft(EVEN, t0, 0.5, 0.17)
@@ -261,20 +261,20 @@ LV[0] = 0.9
 dw = lambda lid, word, off=0: W('draft', lid, word, off)
 dc = lambda lid, off=0: G('draft', lid, off)
 chord((G3, B3, D4, G4), S0('draft') + 0.3, 0.55, step=0.16, ring=2.2)
-sheet(dw('uni', 'Graham', -0.1), 0.0035, px(1320))
+
 chord((E4, G4, C5), dw('building', 'decide', -0.1), 0.5, step=0.14, ring=2.0, bass=C3)
-sheet(dw('building', 'Council', -0.2), 0.003, px(1320))
-sheet(dw('q', 'question', -0.1), 0.0035, px(1320))
+
+
 chord((B3, D4), dw('q', 'hours', 0.2), 0.5, step=0.24, ring=1.8)
-sheet(dw('ivy', 'Wednesday', -0.1), 0.0035, px(520))
-sheet(dw('ivy', 'model', -0.1), 0.003, px(520))
-sheet(dw('ask', 'asks', -0.1), 0.0035, px(550))
+
+
+
 wake(dw('ask', 'draft', 0.0), 1.4, 0.0035, px(1232))
 draft((G4, B4, D5, E5, D5, B4, A4, G4, B4, D5), dc('minute', 0.2), 0.5, 0.14)
-tick(dw('tidy', 'pass', -0.1), 0.0035, px(904))
-sheet(dw('figure', 'teaching', -0.4), 0.0035, px(340)); sheet(dw('figure', 'busiest', -0.4), 0.0035, px(760))
+
+
 chord((G4, B4, D5), dw('sure', 'sure', 0.0), 0.45, step=0.0, ring=1.4, touch=0.5)
-press(dw('almost', 'open', -0.2), 0.003, px(1560))
+
 
 # 3. What it assumed: the notes laid down; one line stops her: E minor, low; Graham's card in February; the tests ticked; no test can
 #    know what Graham means: E and B, open; the sensors' hours come in, one soft line of them; one in five, nobody: E minor again, higher;
@@ -282,21 +282,21 @@ press(dw('almost', 'open', -0.2), 0.003, px(1560))
 LV[0] = 0.9
 aw = lambda lid, word, off=0: W('assumed', lid, word, off)
 ac = lambda lid, off=0: G('assumed', lid, off)
-sheet(ac('notes', 0.3), 0.0035, px(550))
+
 chord((E3, G3, B3), aw('line', 'stops', 0.0), 0.55, step=0.18, ring=2.2)
-sheet(aw('graham', 'Graham', -0.1), 0.0035, px(1320))
-sheet(ac('tests', 0.1), 0.003, px(550))
+
+
 for i in range(4):
-    tick(aw('tests', 'pass', -0.1) + 0.35 * i + 0.08, 0.0035, px(908))
+    pass
 chord((E3, B3, E4), aw('meaning', 'know', 0.0), 0.5, step=0.22, ring=1.8)
-slide(aw('sensors', 'sensors', -0.1), 1.4, 0.0035, px(600))
+
 chord((B3, E4, G4), aw('fifth', 'nobody', 0.0), 0.5, step=0.16, ring=2.0)
-sheet(aw('harm', 'weighed', -0.2), 0.0035, px(1320))
+
 chord((C4, E4), aw('harm', 'bookings', 0.0), 0.45, step=0.25, ring=1.8)
 chord((G3, D4, G4), aw('common', 'careless', 0.1), 0.5, step=0.15, ring=2.0)
-sheet(ac('task', 0.1), 0.0035, px(550))
+
 for word, x in (('task', 290), ('decision', 560), ('words', 840)):
-    press(aw('task', word, -0.1), 0.0035, px(x))
+    pass
 
 # 4. Frame it, then ask: the chapter turns on D major; the definition typed in, which the voice carries; Graham approves it, as its
 #    owner: the left hand's G under G major; three things, not one, three notes rising; each card laid down and its line drawn to the
@@ -307,18 +307,18 @@ fw = lambda lid, word, off=0: W('frame', lid, word, off)
 fc = lambda lid, off=0: G('frame', lid, off)
 FEND = E('frame')
 chord((D4, Fs4, A4), fw('frame', 'frames', 0.0), 0.5, step=0.16, ring=2.0)
-press(fw('frame', 'frames', -0.1), 0.003, px(1560))
-press(fw('owner', 'approves', 0.1), 0.0035, px(374))
+
+
 chord((B3, D4, G4), fw('owner', 'approves', 0.1), 0.5, step=0.13, ring=2.2, bass=G2)
 figure((D4, G4, B4), fw('three', 'three', 0.0), 0.5, step=0.3, ring=0.6, last=1.4)
 for lid, x in (('decision', 390), ('words', 970), ('counts', 1550)):
-    sheet(fc(lid, 0.1), 0.0035, px(x)); slide(fc(lid, 0.5), 0.8, 0.003, px(x))
+    pass
 wake(fc('counts', 1.2), 1.2, 0.003, px(960))
-sheet(fc('draft', 0.3), 0.0035, px(550))
+
 draft(EVEN, fw('draft', 'apart', 0.0), 0.45, 0.17)
-pen(fw('hand', 'hand', -0.2), 2.2, 0.0045, px(625), 5)
+
 for i in range(5):
-    tick(fc('match', 0.24 * i + 0.06), 0.0035, px(1076))
+    pass
 decide(HAND, fc('match', 1.3), 0.5, 0.2, last=2.2, bass=G2, until=FEND)
 
 # 5. Someone else approves: Ivy opens her pull request: C major, soft; the reasoning, a line at a time, a soft press each; Jun at the
@@ -328,18 +328,18 @@ LV[0] = 0.9
 rw = lambda lid, word, off=0: W('review', lid, word, off)
 rc = lambda lid, off=0: G('review', lid, off)
 chord((C4, E4, G4), rc('pr', 0.2), 0.5, step=0.15, ring=2.0)
-press(rw('pr', 'author', -0.1), 0.003, px(1390))
+
 for word in ('asked', 'assumed', 'changed', 'checked'):
-    press(rw('reason', word, -0.1), 0.0025, px(400))
-sheet(rw('jun', 'Nobody', -0.1), 0.0035, px(1490))
-press(rw('asks', 'asks', -0.1), 0.003, px(560)); press(rw('asks', 'answer', -0.2), 0.003, px(560))
+    pass
+
+
 chord((Fs4, A4, D5), rw('merge', 'approves', -0.1), 0.5, step=0.13, ring=2.0, bass=D3)
-press(rw('merge', 'approves', -0.1), 0.0035, px(980)); press(rw('merge', 'merged', -0.1), 0.0035, px(980))
-sheet(rw('merge', 'told', -0.2), 0.0035, px(1490))
+
+
 chord((G3, B3, D4, G4), rc('standup', -0.2), 0.5, step=0.16, ring=2.0)
-sheet(rc('standup', 0.3), 0.003, px(420)); sheet(rw('standup', 'nearly', -0.2), 0.0035, px(1390))
+
 chord((E4, G4, C5), rw('thanks', 'thanks', 0.0), 0.5, step=0.14, ring=2.0)
-sheet(rw('thanks', 'asking', -0.3), 0.0035, px(420))
+
 
 # 6. The skills that grow: the draft's card, and the work moving to either side of it: a note going down and one going up; before and
 #    after laid down; the World Economic Forum's report laid down, C major, plain; the skills rising: G, A, B, D; what an agent can do,
@@ -347,16 +347,16 @@ sheet(rw('thanks', 'asking', -0.3), 0.0035, px(420))
 LV[0] = 0.9
 gw = lambda lid, word, off=0: W('grows', lid, word, off)
 gc = lambda lid, off=0: G('grows', lid, off)
-sheet(S0('grows') + 0.8, 0.003, px(950))
+
 key(G3, gw('moves', 'either', 0.0), 0.5, px(700), 1.4); key(D5, gw('moves', 'either', 0.25), 0.5, px(1220), 1.4)
-sheet(gw('before', 'Before', -0.1), 0.0035, px(390)); sheet(gw('after', 'After', -0.1), 0.0035, px(1540))
-sheet(gc('wef', 0.2), 0.0035, px(960))
+
+
 chord((C4, G4, C5), gw('wef', 'analytical', 0.0), 0.45, step=0.18, ring=2.0)
 figure((G4, A4, B4, D5), gw('rising', 'fastest', -0.2), 0.45, step=0.2, ring=0.4, last=1.2)
 for word, x in (('draft', 780), ('test', 780), ('say', 780)):
-    press(gw('cant', word, -0.1), 0.003, px(x - 150))
+    pass
 chord((D4, G4, B4), gw('cant', 'decision', -0.1), 0.5, step=0.14, ring=2.2, bass=G2)
-sheet(gc('films', 0.1), 0.0035, px(610)); sheet(gw('films', 'govern', -0.1), 0.0035, px(1310))
+
 
 # 7. On Monday: back to 2005: G major, as at home that evening; deciding: the left hand's E under E minor's turn home (E minor, then
 #    G); Ivy did the same: the left hand's C under C major; Graham's answer laid down; each step laid down; and the close: the even
@@ -367,10 +367,48 @@ mc = lambda lid, off=0: G('monday', lid, off)
 chord((G3, D4, G4, B4), mw('back', 'amateurs', 0.0), 0.5, step=0.17, ring=2.2)
 chord((B3, E4, G4), mw('not', 'deciding', -0.1), 0.5, step=0.14, ring=2.0, bass=E2)
 chord((C4, E4, G4, C5), mw('ivy', 'decided', -0.1), 0.5, step=0.13, ring=2.0, bass=C3)
-sheet(mw('rooms', 'counts', -0.2), 0.0035, px(550))
+
 for lid, off, x in (('one', 0.3, 350), ('two', 0.1, 880), ('three', 0.1, 350), ('four', 0.1, 880)):
-    sheet(mc(lid, off), 0.0035, px(x))
+    pass
 t1 = mw('last', 'decide', 0.4)
 draft(EVEN, t1, 0.45, 0.17)
 decide(HAND, t1 + 2.1, 0.5, 0.22, last=5.0, bass=G2, until=TOT)
 chord((B3, D4), t1 + 2.1 + 0.22 * 6, 0.45, step=0.0, ring=5.0, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chat: a soft blip as Graham's approval arrives
+import pens
+PEN = pens.written({'A': ('assumed', 'carmen', 'dd_boardA'), 'B': ('frame', 'ivy', 'dd_boardB'), 'C': ('grows', 'carmen', 'dd_boardC'),
+                    'D': ('grows', 'carmen', 'dd_boardD'),
+                    'N1': ('assumed', None, 'dd_note1'), 'N2': ('frame', None, 'dd_note2'), 'N3': ('review', None, 'dd_note3'),
+                    'N4': ('grows', None, 'dd_note4'), 'N5': ('monday', None, 'dd_note5')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+for name in ('A', 'B', 'C', 'D'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4', 'N5'):
+    written(name, scratch, 0.004)
+pop(W('frame', 'owner', 'approves', 0.0), 0.0022, px(500), False)

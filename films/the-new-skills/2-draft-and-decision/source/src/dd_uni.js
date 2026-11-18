@@ -1,136 +1,156 @@
-/* ===== The draft and the decision: the university, 2027 =====
-   The film's own pictures for Ivy's Wednesday with the team's agent (prefix dd_). The module's kit draws the rooms, the people, the
-   sheets and the things in them, and is never changed for this film; what is here is this film's alone:
-     ddMorning, ddGraham, ddLate             the team's room on an April morning, Graham's office on a grey day, the room late in the day
-     dd_agent(ctx, x, y, r, o)               the team's agent: the agent films' ceramic sphere with its violet band, and its light on the wall
-     dd_draft(ctx, x, y, w, o)               the agent's draft of the model, on a sheet with a violet band and dbt's mark (o.v 2: the second)
-     dd_notes(ctx, x, y, w, o)               the agent's notes, what it assumed, one line ringed in amber when Ivy reads it (o.hi)
-     dd_tests(ctx, x, y, w, o)               the draft's four tests, each ticked: they check the data's form
-     dd_hours(ctx, x, y, o)                  a hundred booked hours, as the sensors saw them: people counted in 79, nobody in 21
-     dd_week(ctx, x, y, o)                   one room's week, worked out by hand: its booked hours, those nobody came to, and the draft's
-                                             answer for each, ticked
-     dd_glossary(ctx, x, y, w, h, o)         the glossary's entry for room use, in the catalog, with its owner
-     dd_ask(ctx, o)                          the three things Ivy gives the agent: the decision, the words, what counts
-     dd_pr(ctx, x, y, w, h, o)               Ivy's pull request, in GitHub, with GitHub's mark: what changed, why, how she checked, and
-                                             Jun's review
-   Colour keeps the module's meaning: violet only the agent and what it wrote; blue the question, the glossary's word and what Ivy gives
-   the agent; orange the data; green what's done or approved; amber the line the agent assumed and the hours nobody came to. */
+/* ===== The draft and the decision: the university, April 2027 (imagined) =====
+   The places are the people kit's (films/people-first/shared/src/places.js): the team's room, Helena's corner, the campus and a
+   teaching room; and, apart from the scene, a board seen close and a page of Helena's notebook (concepts.js). This file holds what is
+   this film's own in them: where the team works, the boards' rows that Carmen Vidal and Ivy write, and the pages Ivy and Helena keep.
+   Every time comes from the voice: sc is the chapter, w a word's time in a line. Colour means what it means in the module: blue a plan
+   or a rule, orange data, green something done or agreed, amber a risk. */
+AG_PLACES.ddTeam=PK.place.team;AG_PLACES.ddCorner=PK.place.corner;AG_PLACES.ddCampus=PK.place.campus;AG_PLACES.ddLecture=PK.place.lecture;
+AG_PLACES.ddBoard=PK.place.board;AG_PLACES.ddNotes=c=>PK.place.notes(c,{});
+const DD_T=PK.ROOMS.team,DD_CA=PK.ROOMS.campus,DD_CO=PK.ROOMS.corner,DD_LE=PK.ROOMS.lecture;
+const dd_hT=fl=>PK.hAt(fl,DD_T.eye),dd_hC=fl=>PK.hAt(fl,DD_CA.eye),dd_hL=fl=>PK.hAt(fl,DD_LE.eye);
+// a face that speaks from t0 to t1, on a base expression
+const dd_says=(base,tt,t0,t1)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,PK.talk(tt,t0,t1)*0.75);return e;};
+const dd_lis=(tt,g)=>PK.face(tt,{expr:"listen",gaze:[1,g==null?-0.2:g]},[]);
+// poses of this film's own: writing in a notebook held in the far hand; holding a sheet out to show it
+const DD_NOTE={lean:6,head:14,aN:[34,96,"grip"],aF:[30,92,"grip"],lN:[-2,-2],lF:[5,4]};
+const DD_SHOW={lean:2,head:6,aN:[44,82,"grip"],aF:[8,16],lN:[-2,-2],lF:[5,4]};
+const DD_CARRY={lean:-2,head:0,aN:[24,70,"grip"],aF:[6,14],lN:[-2,-2],lF:[4,3]};
+const dd_sheet=(c,h)=>{const S=PK.S;S.begin(c,{lw:2.2});PK.sheet(c,h[0]-6,h[1]-58,56,74,{rot:0.06});};
 
-/* ---------------------------------------------------------------- the places */
-AG_PLACES.ddMorning=c=>lp_paintRoom(c,{light:"morning",seed:5});
-AG_PLACES.ddGraham=c=>lp_paintRoom(c,{light:"grey",seed:7});
-AG_PLACES.ddLate=c=>lp_paintRoom(c,{light:"late",seed:8});
+/* ---------------------------------------------------------------- the team's room
+   Who works where: Sam at the desk at the back, Jun at the desk at the back right, turned the other way, and Marta at the desk by the
+   window. Everything is drawn far to near (by floor), so nobody is drawn over someone nearer: o.people is a list of {fl, draw(x)} for
+   whoever else is in the room (the floor they stand or sit on); o.sam, o.jun, o.marta: what PK.atDesk takes for each (null: the desk
+   stands empty); o.show: what Marta's screen shows, o.showJ Jun's; o.clock: the time on the wall. Returns their joints. */
+const DD_DESK={sam:[1230,DD_T.back],jun:[1808,DD_T.back],marta:[560,DD_T.mid]};
+function dd_team(x,tt,o){o=o||{};const r={},HB=dd_hT(DD_T.back),HM=dd_hT(DD_T.mid);PK.clock(x,DD_T.clock[0],DD_T.clock[1],DD_T.clock[2],o.clock===undefined?9:o.clock);
+  const items=[{fl:DD_T.back,i:0,draw:c=>{r.sam=PK.atDesk(c,o.sam===null?null:"sam",DD_DESK.sam[0],DD_T.back,HB,Object.assign({t:tt,w:0.45*HB},o.sam||{}));}},
+    {fl:DD_T.back,i:1,draw:c=>{r.jun=PK.atDesk(c,o.jun===null?null:"jun",DD_DESK.jun[0],DD_T.back,HB,Object.assign({t:tt+3,flip:true,w:0.45*HB,show:o.showJ},o.jun||{}));}},
+    {fl:DD_T.mid,i:2,draw:c=>{r.marta=ddc_desk(c,o.marta===null?null:(o.deskWho||"marta"),DD_DESK.marta[0],DD_T.mid,HM,Object.assign({t:tt+1,flip:true,w:0.84*HM,sx:205,screen:"monitor",show:o.show||PK.onScreen.chat(0,{}),
+      on:(cc,D)=>{PK.S.begin(cc,{lw:2.6,sh:3});PK.mug(cc,D.x1+34,D.top,0.7,PK.col("mug"),tt,o.steam!==false);}},o.marta||{}));}}];
+  (o.people||[]).forEach((p,i)=>items.push(Object.assign({i:10+i},p)));
+  items.sort((a,b)=>a.fl-b.fl||a.i-b.i).forEach(it=>it.draw(x));return r;}
+AG_BARE.ddTeam=(x,tt)=>dd_team(x,tt,{sam:null,jun:null,marta:null,clock:null});
 
-/* ---------------------------------------------------------------- the agent */
-function dd_agent(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
-  ag_modelLight(ctx,x,y,r,0.8,o.floor);ag_model(ctx,x,y,r,{t:o.t||0,core:o.core==null?0.6:o.core,think:o.think||0,label:o.label});ctx.restore();}
+/* ---------------------------------------------------------------- the team's board, and Carmen Vidal at it
+   Carmen Vidal, a consultant who works with the team now and then, explains the film's ideas at the team's board (PK.teach). The film
+   cuts between the room, where its board shows the rows small, and the board seen close (naBoard): both draw the same rows at the
+   same times. In the room, Helena stands to the side with her notebook, clear of where Carmen walks and rests, and whoever is at
+   their desk has turned to the board. */
+const DD_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
+const dd_roomBoard=(cx,tt,rows,who,o)=>{const q=Object.assign({},DD_RB,{h:dd_hT(DD_RB.floor)});for(const k in o||{})if(o[k]!==undefined)q[k]=o[k];return PK.teach(cx,who,tt,rows,q);};
+const DD_SIDE={x:1690,floor:900},DD_SAMC={x:1480,floor:905};
+// o.rows, o.say, o.events: the board's; o.note (0 to 1): Helena looks down and writes; o.helena, o.sam, o.jun: faces. Returns joints
+function dd_lesson(x,tt,o){o=o||{};let Jc=null,R2=null,Js=null;const wr=o.note||0,R=dd_team(x,tt,{clock:o.clock,marta:o.marta===undefined?null:o.marta,sam:null,
+    jun:Object.assign({work:0,pose:"sit"},o.jun||dd_lis(tt,-0.2)),people:[
+    {fl:DD_SAMC.floor,draw:c=>{Js=PK.seated(c,"sam",DD_SAMC.x,DD_SAMC.floor,dd_hT(DD_SAMC.floor),"sit",Object.assign({t:tt+2,flip:true},o.sam||dd_lis(tt,-0.25)));}},
+    {fl:DD_RB.floor,draw:c=>{Jc=dd_roomBoard(c,tt,o.rows||[],"carmen",{say:o.say,events:o.events});}},
+    {fl:DD_SIDE.floor,draw:c=>{R2=PK.person(c,"helena",DD_SIDE.x,DD_SIDE.floor,dd_hT(DD_SIDE.floor),PK.poseMix("clasp",DD_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||dd_lis(tt,-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}}]});
+  R.helena=R2;R.at=Jc;R.sam=Js;return R;}
 
-/* ---------------------------------------------------------------- where each line of a sheet sits: lp_textSheet's layout, so a ring or a tick
-   can go beside a line. Returns the baselines of each line's first and last row. */
-function dd_lineYs(ctx,y,w,words){const inner=w-LP_PAD*2;let yy=y+LP_PAD+30;if(words.kick)yy+=44;
-  const tl=words.title?lp_wrap(ctx,words.title,inner,{w:800,size:40}):[];yy+=tl.length*50;
-  const sl=words.sub?lp_wrap(ctx,words.sub,inner,{w:600,size:28}):[];yy+=sl.length*38;if(tl.length&&(sl.length||(words.lines||[]).length))yy+=10;
-  return (words.lines||[]).map(l=>{const n=lp_wrap(ctx,l,inner-34,{w:600,size:28}).length,first=yy+38;yy+=n*38+12;return{first,last:first+(n-1)*38};});}
-// a sheet that springs in: everything drawn by f inside the same spring as the sheet
-function dd_spring(ctx,x,y,w,h,o,f){const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));f();ctx.restore();}
-// a small green tick in a disc
-function dd_tickAt(ctx,x,y,r,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.fillStyle=rgba(LP.green,1);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();lp_icon(ctx,"tick",x,y,r*1.3,[255,255,255]);ctx.restore();}
+/* ---------------------------------------------------------------- Helena's corner
+   Helena at the round table: alone, with her two sheets (o.sheets), or with someone across from her (o.who2). o.lean (0 to 1): she
+   leans in; o.he, o.ie: their faces; o.write (0 to 1): her pen on the sheet; o.t0: when the shot starts (two people cross the lawn
+   outside once, from then). Returns {helena, who2}: their joints. */
+const DD_SITH={mode:"sit",lean:2,head:0,aN:[24,76],aF:[28,80],lN:[86,3],lF:[82,-5]},DD_SITH2={mode:"sit",lean:13,head:-5,aN:[40,80,"open"],aF:[36,78],lN:[86,5],lF:[82,-6]};
+const DD_SITI={mode:"sit",lean:6,head:6,aN:[26,74,"grip"],aF:[30,78,"grip"],lN:[86,8],lF:[82,-2]};
+function dd_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=DD_CO,lean=o.lean||0,t0=o.t0||0,lw={lw:3.4,far:0,sh:5},r={},wr=o.write||0;
+  x.save();x.beginPath();x.rect(win[0],win[1],win[2],win[3]);x.clip();
+  for(const [i,ts,d,left,dy,h] of [[3,t0+1,22,false,34,92],[9,t0+8,26,true,24,96]]){if(tt<ts||tt>ts+d)continue;
+    PK.walk(x,PK.extra(i),tt,{x0:left?win[0]+win[2]+40:win[0]-40,x1:left?win[0]-40:win[0]+win[2]+40,t0:ts,t1:ts+d,floor:win[1]+win[3]-dy,h},{far:0.55,shade:0});}
+  x.restore();PK.windowFrame(x,win[0],win[1],win[2],win[3],{});
+  const hp=PK.poseMix(DD_SITH,DD_SITH2,Math.max(lean,0.6*wr)),W2=o.who2;
+  S.begin(x,lw);PK.chair(x,hx-10,F,H,false,{});if(W2)PK.chair(x,ix+10,F,H,true,{col:PK.PAL.chair2});
+  const W1=o.who1||"helena";PK.person(x,W1,hx,F,H,hp,{t:tt,part:"lower"});if(W2)PK.person(x,W2,ix,F,H,DD_SITI,{t:tt+1,flip:true,part:"lower"});
+  S.begin(x,lw);PK.table(x,tx,ty,rx,F);
+  S.begin(x,{lw:2.6,far:0,sh:3});PK.mug(x,tx+150,ty+10,0.9,PK.col("mug2"),tt,true);
+  // the two sheets on the table: the chart (its boxes in blue) and the list (its lines in orange)
+  if(o.sheets){S.begin(x,{lw:2.4,sh:3});for(const [sx,col,k] of [[tx-150,PK.C.orange,1],[tx-10,PK.C.blue,0]]){S.poly(x,[[sx-60,ty-4,1],[sx+60,ty-10,1],[sx+84,ty+8,1],[sx-40,ty+16,1]],[250,248,240],{exact:true});
+    S.line(x,c=>{for(let i=0;i<3;i++){c.moveTo(sx-34+i*6,ty+2-i*5);c.lineTo(sx+50+i*6,ty-2-i*5);}},col,0.6);}}
+  if(o.book){S.begin(x,{lw:2.6,far:0,sh:3});PK.notebook(x,tx-200,ty+4,1.1,{});}
+  if(o.laptop){S.begin(x,{lw:2.6,far:0,sh:3});PK.laptop(x,tx-150,ty+6,{k:1.25,glow:true});r.laptop=[tx-150,ty-70];}
+  const pen=[U.lerp(790,tx-130,wr),ty-6];
+  r.helena=r.who1=PK.person(x,W1,hx,F,H,hp,Object.assign({t:tt,part:"upper",expr:o.he,gaze:o.hg||[1,0.25],reachN:o.handN||(wr>0.01?pen:[790,ty-4]),reachF:o.handF||[806,ty-12],hold:o.hold||(wr>0.3?PK.inHand.pen("blue"):null),holds:!!(o.hold||wr>0.3)},o.hf||{}));
+  if(W2)r.who2=PK.person(x,W2,ix,F,H,DD_SITI,Object.assign({t:tt+1,flip:true,part:"upper",expr:o.ie,gaze:o.ig||[1,0.3],reachN:[1150,ty-6],reachF:[1128,ty-2]},o.iface||{}));
+  return r;}
 
-/* ---------------------------------------------------------------- the agent's draft: a dbt model, its sheet violet as only the agent's work is */
-function dd_draftWords(v){return v===2?{kick:"Draft · dbt model",title:"Room use, booked and used",lines:["Room use, as the glossary defines it","Booked and used, side by side"]}
-  :{kick:"Draft · dbt model",title:"Room use, by room and hour",lines:["Every column described","Four tests, all passing"]};}
-function dd_draft(ctx,x,y,w,o){o=o||{};const words=dd_draftWords(o.v),q=Object.assign({col:LP.violet},o,{a:1,k:null}),b=lp_textSheet(ctx,x,y,w,words,Object.assign({},q,{measure:true}));
-  dd_spring(ctx,x,y,w,b.h,o,()=>{lp_textSheet(ctx,x,y,w,words,q);ctx.save();ctx.globalAlpha*=0.92;logo(ctx,"dbt",x+w-36-64,y+44,30);ctx.restore();
-    if(o.tick!=null){const L=dd_lineYs(ctx,y,w,words);dd_tickAt(ctx,x+w-56,L[L.length-1].first-10,18,o.tick);}});
-  return b;}
-// the agent's notes, what it assumed: o.lines, o.hi (0 to 1: the line o.hiLine ringed in amber), o.u (the lines come in)
-const DD_NOTES1=["Teaching hours: 8:00 to 18:00, Monday to Friday","Rooms: named as in the timetable","A booked hour is a used hour"];
-const DD_NOTES2=["Used: at least one person counted, as in the glossary","Teaching hours: 8:00 to 18:00, Monday to Friday","Booked and used: kept apart"];
-function dd_notes(ctx,x,y,w,o){o=o||{};const words={kick:o.kick||"What I assumed",lines:o.lines||DD_NOTES1},q=Object.assign({col:LP.violet},o,{a:1,k:null}),b=lp_textSheet(ctx,x,y,w,words,Object.assign({},q,{measure:true}));
-  dd_spring(ctx,x,y,w,b.h,o,()=>{lp_textSheet(ctx,x,y,w,words,q);const hi=o.hi||0;if(hi>0.004){const L=dd_lineYs(ctx,y,w,words)[o.hiLine==null?2:o.hiLine];
-      ctx.save();ctx.globalAlpha*=hi;ctx.fillStyle=rgba(LP.amber,0.12);rr(ctx,x+18,L.first-34,w-36,L.last-L.first+50,10);ctx.fill();ctx.strokeStyle=rgba(LP.amber,1);ctx.lineWidth=4;
-      rr(ctx,x+18,L.first-34,w-36,L.last-L.first+50,10);ctx.stroke();ctx.restore();}});
-  return b;}
-// the draft's tests: each ticked in turn (o.ticks 0 to 1)
-const DD_TESTS=["Every room has a name","No room counted twice","No hour left out","Use between 0% and 100%"];
-function dd_tests(ctx,x,y,w,o){o=o||{};const words={kick:"The draft's tests",lines:DD_TESTS},q=Object.assign({},o,{a:1,k:null}),b=lp_textSheet(ctx,x,y,w,words,Object.assign({},q,{measure:true}));
-  dd_spring(ctx,x,y,w,b.h,o,()=>{lp_textSheet(ctx,x,y,w,words,q);const L=dd_lineYs(ctx,y,w,words),tk=o.ticks==null?1:o.ticks;
-    L.forEach((l,i)=>dd_tickAt(ctx,x+w-52,l.first-10,17,ag_in(tk,i/4,0.25)));});
-  return b;}
 
-/* ---------------------------------------------------------------- a hundred booked hours, as the sensors saw them
-   Squares in rows of 20: orange where the sensors counted people, an amber outline where they counted nobody (21 of the 100: one in
-   five, as across the semester). o.u (0 to 1: the squares come in), o.seen (0 to 1: the sensors' counts come in, left to right),
-   o.draft (0 to 1: the draft's answer laid over them: every hour used, the empty ones too), o.light, o.a, o.k */
-const DD_EMPTY=(()=>{const R=ag_rnd(2105),s=new Set();while(s.size<21)s.add((R()*100)|0);return s;})();
-function dd_hours(ctx,x,y,o){o=o||{};const sq=38,gp=9,w=20*(sq+gp)-gp+72,h=5*(sq+gp)-gp+290;
-  dd_spring(ctx,x,y,w,h,o,()=>{lp_sheet(ctx,x,y,w,h,{col:LP.orange,light:o.light==null?null:o.light,pin:false});
-    lp_T(ctx,"100 BOOKED HOURS · AS THE SENSORS SAW THEM",x+36,y+64,{w:800,size:28,ls:3,col:LP.orange});
-    const u=o.u==null?1:o.u,seen=o.seen||0,dr=o.draft||0;
-    for(let i=0;i<100;i++){const c=i%20,r=(i/20)|0,bx=x+36+c*(sq+gp),by=y+100+r*(sq+gp),ia=ag_in(u,c/24,0.2);if(ia<=0.004)continue;const sn=ag_in(seen,c/24,0.2),empty=DD_EMPTY.has(i);
-      ctx.save();ctx.globalAlpha*=ia;
-      if(empty&&sn>0){ctx.fillStyle=rgba(LP.paper,1);ctx.fillRect(bx,by,sq,sq);ctx.strokeStyle=rgba(LP.amber,sn);ctx.lineWidth=5;ctx.strokeRect(bx+2.5,by+2.5,sq-5,sq-5);
-        ctx.globalAlpha*=1-sn;ctx.fillStyle=rgba(mix(LP.orange,LP.paper,0.55),1);ctx.fillRect(bx,by,sq,sq);}
-      else{ctx.fillStyle=rgba(sn>0?mix(mix(LP.orange,LP.paper,0.55),LP.orange,sn):mix(LP.orange,LP.paper,0.55),1);ctx.fillRect(bx,by,sq,sq);}
-      if(dr>0.004){ctx.globalAlpha=ia*dr;ctx.strokeStyle=rgba(LP.violet,1);ctx.lineWidth=3;ctx.strokeRect(bx-3,by-3,sq+6,sq+6);}
-      ctx.restore();}
-    const ly=y+100+5*(sq+gp)+30,la=ag_in(seen,0.7,0.3);
-    if(la>0.004){ctx.save();ctx.globalAlpha*=la;ctx.fillStyle=rgba(LP.orange,1);ctx.fillRect(x+36,ly,30,30);lp_T(ctx,"People counted: 79",x+80,ly+26,{w:700,size:30});
-      ctx.strokeStyle=rgba(LP.amber,1);ctx.lineWidth=5;ctx.strokeRect(x+452,ly+2.5,25,25);lp_T(ctx,"Nobody: 21, one in five",x+496,ly+26,{w:700,size:30,col:LP.amber});ctx.restore();}
-    if(dr>0.004){ctx.save();ctx.globalAlpha*=dr;ctx.strokeStyle=rgba(LP.violet,1);ctx.lineWidth=3;ctx.strokeRect(x+36,ly+59,30,30);lp_T(ctx,"The draft: all used",x+80,ly+86,{w:700,size:30,col:LP.violet});ctx.restore();}});
-  return{w,h};}
 
-/* ---------------------------------------------------------------- one room's week, worked out by hand
-   Room 1.02, one week: the days down the side, the hours across (8:00 to 17:00, each for an hour); booked hours filled orange where
-   people were counted, an amber outline where nobody came; o.u (the hours come in), o.marks (0 to 1: Ivy's hand marks, row by row),
-   o.ticks (0 to 1: the draft's answer for each day, ticked, matching), o.light, o.a, o.k */
-const DD_WEEK=["00001110000","00111111100","00011111111","01011111100","01100001000"].map(r=>r.slice(0,10));
-const DD_WEEK_EMPTY=new Set(["0,4","4,1","2,9","3,1"]);
-function dd_week(ctx,x,y,o){o=o||{};const sq=66,gp=10,w=150+10*(sq+gp)+80,h=110+5*(sq+gp)+116;
-  dd_spring(ctx,x,y,w,h,o,()=>{lp_sheet(ctx,x,y,w,h,{light:o.light==null?null:o.light,pin:false});
-    lp_T(ctx,"ROOM 1.02 · ONE WEEK · BY HAND",x+36,y+64,{w:800,size:28,ls:3,col:LP.mut});
-    for(const [c,s] of [[0,"8:00"],[5,"13:00"],[9,"17:00"]])lp_T(ctx,s,x+150+c*(sq+gp)+sq/2,y+108,{w:600,size:28,align:"center",col:LP.mut});
-    const u=o.u==null?1:o.u,mk=o.marks||0,tk=o.ticks||0;
-    ["Mon","Tue","Wed","Thu","Fri"].forEach((d,r)=>{const ry=y+130+r*(sq+gp);lp_T(ctx,d,x+36,ry+sq/2+10,{w:700,size:30});
-      for(let c=0;c<10;c++){const bx=x+150+c*(sq+gp),ia=ag_in(u,(r*10+c)/60,0.15);if(ia<=0.004)continue;const booked=DD_WEEK[r][c]==="1",empty=DD_WEEK_EMPTY.has(r+","+c),m=ag_in(mk,r/5,0.2);
-        ctx.save();ctx.globalAlpha*=ia;ctx.strokeStyle=rgba(LP.mut,0.35);ctx.lineWidth=2;ctx.strokeRect(bx+1,ry+1,sq-2,sq-2);
-        if(booked){if(empty&&m>0){ctx.strokeStyle=rgba(LP.amber,m);ctx.lineWidth=5;ctx.strokeRect(bx+2.5,ry+2.5,sq-5,sq-5);}
-          else{ctx.fillStyle=rgba(mix(LP.orange,LP.paper,empty?0.55:0.55*(1-m)),1);ctx.fillRect(bx,ry,sq,sq);}}
-        ctx.restore();}
-      dd_tickAt(ctx,x+150+10*(sq+gp)+36,ry+sq/2,20,ag_in(tk,r/5,0.2));});
-    const ly=y+130+5*(sq+gp)+24,la=ag_in(mk,0.15,0.3);
-    if(la>0.004){ctx.save();ctx.globalAlpha*=la;ctx.fillStyle=rgba(LP.orange,1);ctx.fillRect(x+150,ly,30,30);lp_T(ctx,"People counted",x+194,ly+26,{w:700,size:30});
-      ctx.strokeStyle=rgba(LP.amber,1);ctx.lineWidth=5;ctx.strokeRect(x+452,ly+2.5,25,25);lp_T(ctx,"Booked, nobody came",x+496,ly+26,{w:700,size:30,col:LP.amber});ctx.restore();}});
-  return{w,h};}
+/* ---------------------------------------------------------------- a teaching room: the door with its room's name, the sensor above it
+   Ivy and Sam look at the sensor over the door, which counts the people in the room every hour.
+   o.people: [{fl, draw(x)}], drawn far to near; o.plate (0 to 1): the room's name by the door */
+const DD_LE2=PK.ROOMS.lecture;
+function dd_room(x,tt,o){o=o||{};if((o.plate||0)>0.004)PK.tag(x,560,420,"B-204",o.plate,{});
+  (o.people||[]).slice().sort((a,b)=>a.fl-b.fl).forEach(p=>p.draw(x));}
 
-/* ---------------------------------------------------------------- the glossary's entry, in the catalog
-   o.u (0 to 1: the definition is written), o.owner (0 to 1: its owner), o.ok (seconds since its owner approved it, 0 before), o.a */
-const DD_DEF="The share of a room's teaching hours in which the sensors counted at least one person";
-function dd_glossary(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;
-  lp_screen(ctx,x,y,w,h,{a,draw:(c,X,Y,Wd,Hd)=>{c.fillStyle=rgba(LP.blue,1);c.fillRect(X,Y,Wd,12);
-    lp_T(c,"CATALOG · GLOSSARY",X+44,Y+70,{w:800,size:28,ls:3,col:LP.blue});lp_T(c,"Room use",X+44,Y+140,{w:800,size:48});
-    const ls=lp_wrap(c,DD_DEF,Math.min(Wd-88,740),{w:600,size:32}),u=o.u==null?1:o.u;ls.forEach((l,i)=>{const la=clamp(u*ls.length-i,0,1);if(la<=0)return;c.save();c.globalAlpha*=la;lp_T(c,l,X+44,Y+200+i*46,{w:600,size:32});c.restore();});
-    const oy=Y+200+ls.length*46+40,oa=o.owner||0;if(oa>0.004){c.save();c.globalAlpha*=oa;lp_T(c,"Owner: Graham Ellis, Facilities",X+44,oy,{w:700,size:30,col:LP.mut});c.restore();}
-    if((o.ok||0)>0.004)lp_pill(c,X+44+190,oy+70,"Approved by its owner",{col:LP.green,icon:"tick",a:ag_in(o.ok,0,0.4),k:o.ok});}});}
+/* ---------------------------------------------------------------- what a screen shows, close: a callout's rows of words, and bars.
+   rows: [text, col, size]; bars: [[label, n, of, col]] */
+function dd_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
+  if(head){ag_T(cc,head.toUpperCase(),bx+30,y,{w:800,size:28,ls:3,color:U.css(hc||PK.C.amber)});y+=52;}
+  for(const [s,col,size] of rows||[]){ag_T(cc,s,bx+30,y,{w:700,size:size||34,color:U.css(col||PK.C.ink)});y+=(size||34)+16;}
+  for(const [lab,n,of,col] of bars||[]){const w=(bw-60)*n/of;PK.S.begin(cc,{lw:2});PK.S.fill(cc,c=>c.rect(bx+30,y-6,w,30),col,{w:0.6});
+    ag_T(cc,lab,bx+30,y+62,{w:700,size:30,color:U.css(PK.C.ink)});y+=96;}}
 
-/* ---------------------------------------------------------------- the three things Ivy gives the agent the second time
-   o.ks: three times since each card came in (or null: not yet); o.a; the agent sits below them (the scene draws it) */
-const DD_ASK=[{kick:"The decision",lines:["Whether to ask the University Council for a new building"]},{kick:"The words",lines:["Room use, as the glossary defines it"]},
-  {kick:"What counts",lines:["Teaching hours, 8:00 to 18:00, Monday to Friday","Booked and used, side by side"]}];
-function dd_ask(ctx,o){o=o||{};DD_ASK.forEach((wd,i)=>{const k=o.ks?o.ks[i]:null;if(k==null||k<0)return;lp_textSheet(ctx,120+i*580,140,540,wd,{col:LP.blue,light:o.light,a:ag_in(k,0,0.35)*(o.a==null?1:o.a),k});});}
 
-/* ---------------------------------------------------------------- Ivy's pull request, in GitHub
-   o.u (0 to 1: the description's lines come in), o.rev (0 to 1: Jun as reviewer), o.q (0 to 1: his question), o.ans (0 to 1: the answer),
-   o.ok (seconds since Jun approved it, 0 before), o.merged (seconds since it was merged), o.a */
-const DD_PR_LINES=["Asked for: room use, by room and hour","The agent assumed: booked means used","Changed: used means people counted","Checked: room 1.02, one week, by hand"];
-function dd_pr(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;
-  lp_screen(ctx,x,y,w,h,{a,draw:(c,X,Y,Wd,Hd)=>{c.fillStyle="rgb(240,238,234)";c.fillRect(X,Y,Wd,76);logo(c,"github",X+36,Y+18,40);lp_T(c,"Pull request",X+92,Y+50,{w:700,size:30});
-    lp_T(c,"Room use: booked and used",X+36,Y+134,{w:800,size:38});lp_T(c,"Ivy Reyes wants to merge into main",X+36,Y+178,{w:600,size:28,col:LP.mut});
-    const u=o.u==null?1:o.u;DD_PR_LINES.forEach((l,i)=>{const la=clamp(u*4-i,0,1);if(la<=0)return;c.save();c.globalAlpha*=la;c.fillStyle=rgba(LP.mut,1);c.beginPath();c.arc(X+44,Y+236+i*44-10,6,0,TAU);c.fill();
-      lp_T(c,l,X+66,Y+236+i*44,{w:600,size:28});c.restore();});
-    const ry=Y+236+3*44+34;if((o.rev||0)>0.004){c.save();c.globalAlpha*=o.rev;c.strokeStyle=rgba(LP.mut,0.3);c.lineWidth=2;c.beginPath();c.moveTo(X+36,ry);c.lineTo(X+Wd-36,ry);c.stroke();
-      lp_T(c,"Reviewer: Jun Park",X+36,ry+44,{w:700,size:30});c.restore();}
-    if((o.q||0)>0.004){c.save();c.globalAlpha*=o.q;c.fillStyle="rgb(244,242,238)";rr(c,X+36,ry+64,Wd-72,54,10);c.fill();lp_T(c,"Jun: Which room did you check by hand?",X+60,ry+101,{w:600,size:28});c.restore();}
-    if((o.ans||0)>0.004){c.save();c.globalAlpha*=o.ans;c.fillStyle="rgb(244,242,238)";rr(c,X+36,ry+128,Wd-72,54,10);c.fill();lp_T(c,"Ivy: Room 1.02, one week: in the description",X+60,ry+165,{w:600,size:28});c.restore();}
-    if((o.ok||0)>0.004)lp_pill(c,X+Wd-150,Y+124,"Approved",{col:LP.green,icon:"tick",a:ag_in(o.ok,0,0.4),k:o.ok});
-    if((o.merged||0)>0.004)lp_pill(c,X+Wd-150,Y+190,"Merged",{col:LP.green,icon:"tick",a:ag_in(o.merged,0,0.4),k:o.merged});}});}
+/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+// 1. what the tests check (Carmen)
+const dd_boardA=(sc,w)=>[
+  {s:"Tests check the form",x:70,y:110,size:60,col:"blue",at:w("tests","form",-0.3),d:0.9},
+  {s:"no room twice",x:110,y:212,size:50,at:w("tests","no room",-0.2),d:0.7},{s:"· no hour left out",size:50,at:w("tests","no hour",-0.2),d:0.8},
+  {s:"Not what “used” means",x:70,y:330,size:58,col:"amber",at:w("meaning","know",-0.3),d:0.9}];
+// 2. the three things Ivy gives the agent (Ivy, at the team's board)
+const dd_boardB=(sc,w)=>[
+  {s:"Three things, not one",x:70,y:100,size:54,col:"blue",at:w("three","three things",-0.3),d:0.9},
+  {s:"1 · Decision: a new building?",x:70,y:196,size:46,at:w("decision","decision",-0.2),d:1.1},{s:"the Council",size:40,col:"mut",at:w("decision","Council",-0.2),d:0.6},
+  {s:"2 · Words: room use, as the glossary has it",x:70,y:292,size:44,col:"blue",at:w("words","room use",-0.2),d:1.3},
+  {s:"3 · Counts: teaching hours, 8 to 6, Mon to Fri",x:70,y:388,size:42,at:w("counts","teaching hours",-0.2),d:1.4},
+  {s:"booked and used, side by side",x:110,y:466,size:42,col:"orange",at:w("counts","booked",-0.2),d:1.0}];
+// 3. the work moves to either side of the draft (Carmen)
+const dd_boardC=(sc,w)=>[
+  {s:"The draft: an agent's",x:70,y:110,size:56,col:"violet",at:w("moves","either side",-0.3),d:0.9},
+  {s:"Before: decision · words · what counts",x:70,y:226,size:46,col:"blue",at:w("before","Before",-0.2),d:1.4},
+  {s:"After: check · decide · answer for it",x:70,y:340,size:46,col:"green",at:w("after","After",-0.2),d:1.4}];
+// 4. what employers seek (Carmen)
+const dd_boardD=(sc,w)=>[
+  {s:"Future of Jobs 2025 · World Economic Forum",x:70,y:100,size:38,col:"mut",at:w("wef","Future of Jobs",-0.2),d:1.0},
+  {s:"Sought most: analytical thinking",x:70,y:196,size:50,col:"blue",at:w("wef","analytical",-0.3),d:1.0},
+  {s:"7 in 10: essential",x:70,y:286,size:50,col:"green",at:w("seven","Seven",-0.2),d:0.7},
+  {s:"Rising fastest: AI, big data",x:70,y:376,size:46,at:w("rising","fastest",-0.3),d:1.0},
+  {s:"too: creativity, curiosity",x:600,y:462,size:40,at:w("rising","creative",-0.2),d:0.9}];
+
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+// 1. what the agent assumed (Ivy)
+const dd_note1=(sc,w)=>[
+  {s:"What it assumed",x:70,y:124,size:80,w:760,col:"blue",at:w("harm","weighed",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
+  {s:"booked = used",x:110,y:262,size:62,col:"amber",at:w("harm","bookings",-0.3),d:0.7},
+  {s:"1 booked hour in 5: nobody",x:110,y:362,size:52,at:w("harm","rooms people use",-0.3),d:1.0},
+  {s:"It said so. It had the task,",x:110,y:452,size:50,at:w("common","said what",-0.3),d:1.0},
+  {s:"not the decision, or the words",x:110,y:536,size:50,col:"green",at:w("task","not the decision",-0.3),d:1.1}];
+// 2. one room's week, by hand (Ivy)
+const dd_note2=(sc,w)=>[
+  {s:"B-204, by hand",x:70,y:124,size:80,w:760,col:"blue",at:w("hand","by hand",-0.6),d:0.7},
+  {s:"Mon to Fri, 8 to 6",x:110,y:262,size:60,at:w("hand","hour by hour",-0.4),d:0.8},
+  {s:"50 hours, one by one",x:110,y:362,size:56,col:"orange",at:w("hand","hour by hour",0.4),d:0.8},
+  {k:"tick",x:130,y:462,r:30,col:"green",at:w("match","All",-0.3),d:0.3},
+  {s:"All 50 match the draft",x:180,y:478,size:56,col:"green",at:w("match","fifty",-0.1),d:0.8}];
+// 3. what goes with the pull request (Ivy)
+const dd_note3=(sc,w)=>[
+  {s:"With the pull request",x:70,y:124,size:72,w:820,col:"blue",at:w("reason","reasoning",-0.5),d:0.8},
+  {s:"what I asked for",x:110,y:258,size:54,at:w("reason","what she asked",-0.2),d:0.7},
+  {s:"what it assumed",x:110,y:350,size:54,col:"amber",at:w("reason","what the agent assumed",-0.1),d:0.7},
+  {s:"what I changed",x:110,y:442,size:54,at:w("reason","what she changed",-0.1),d:0.7},
+  {s:"how I checked",x:110,y:534,size:54,col:"green",at:w("reason","how she checked",-0.1),d:0.7}];
+// 4. what an agent can, and can't (Helena)
+const dd_note4=(sc,w)=>[
+  {s:"An agent",x:70,y:124,size:84,w:700,col:"violet",at:w("cant","An agent",-0.2),d:0.5,marks:[["under","violet",null,0.3]]},
+  {s:"drafts, tests, says what it assumed",x:110,y:270,size:48,at:w("cant","draft",-0.2),d:1.3},
+  {s:"never takes the decision",x:110,y:380,size:56,col:"amber",at:w("cant","decision",-0.4),d:0.9},
+  {s:"nor the responsibility",x:110,y:480,size:56,col:"amber",at:w("cant","responsibility",-0.4),d:0.9}];
+// 5. on Monday (Helena)
+const dd_note5=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
+  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("one","On Monday",0),d:0.6,marks:[["under","blue",null,0.3]]},
+  dot(252,"blue",w("one","decision",-0.4)),{s:"Decision, words, what counts",x:128,y:252,size:48,at:w("one","decision",-0.1),d:1.1},
+  dot(352,"amber",w("two","Read",-0.3)),{s:"Read what it assumed",x:128,y:352,size:48,at:w("two","Read",0),d:0.9},
+  dot(452,"orange",w("three","Check",-0.3)),{s:"Check it against what's true",x:128,y:452,size:48,at:w("three","Check",0),d:1.0},
+  dot(552,"green",w("four","Never",-0.3)),{s:"Never approve your own",x:128,y:552,size:48,at:w("four","Never",0),d:0.9}];};

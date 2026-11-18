@@ -49,8 +49,8 @@ let FILMS={};try{FILMS=JSON.parse(app&&app.dataset.films||"{}");}catch(e){}
 const me=document.currentScript&&document.currentScript.src||"",BASE=me.replace(/from-words-to-data\/learn\.js(\?.*)?$/,"");
 const loaded={};
 function film(n){if(loaded[n])return loaded[n];const F=FILMS[n];if(!F||!F.k)return Promise.reject(new Error("no film "+n));
-  const text=u=>fetch(BASE+F.k+"/"+u).then(r=>{if(!r.ok)throw new Error(u+": "+r.status);return r.text();});
-  return loaded[n]=Promise.all([text("film.js"),text("learn."+PK.lang+".js")]).then(([code,words])=>{
+  const text=(u,v)=>fetch(BASE+F.k+"/"+u+(v?"?v="+v:"")).then(r=>{if(!r.ok)throw new Error(u+": "+r.status);return r.text();});  // by its version, as a page links it
+  return loaded[n]=Promise.all([text("film.js",F.v),text("learn."+PK.lang+".js",F.lv)]).then(([code,words])=>{
     const W=new Function("window",words+"\n;return window.FW;")({}),was=window.FILM;
     const lib=new Function(code+"\n;return {LV:typeof LV!==\"undefined\"?LV:null,LVS:typeof LVS!==\"undefined\"?LVS:null,prep:typeof prepAssets===\"function\"?prepAssets:null};")();
     window.FILM=was;  // its player never starts here

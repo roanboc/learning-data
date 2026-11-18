@@ -59,6 +59,9 @@ What it checks, page by page (every .html under site/):
   its tools/score.py) is said, whole, in its line, as films/data-governance/shared/tools/cues.py reads them. A word that isn't
   there quietly times its moment to the start of the line, so the picture comes early. Some series' builds stop on it; here
   every film is held to it, whichever series it is in.
+- versions: every page's link to a script, a stylesheet or a picture under site/assets/ carries that file's version (?v=, a hash
+  of the file: build_series.stamp()), so a changed player, engine, stylesheet or poster is fetched again at once, not after the
+  four hours a browser keeps it; and the series' labs engine fetches a film's player and words by theirs.
 - places: a film drawn in the master data series' watercolour (its film.js declares WC_PLACES) has each place as a picture,
   drawn by tools/publish.py from the player the site plays (site/assets/<key>/places/, listed with that player in places.json),
   and no other film has the folder. The site's player shows those pictures instead of painting the places while the film plays,
@@ -78,6 +81,9 @@ import tempfile
 import urllib.parse
 from media import available as media_available
 from collections import Counter, defaultdict
+
+# a page's link to a file of the site's own that a browser keeps for hours, and the version it carries (build_series.stamp())
+VERSIONED = re.compile(r'\s(src|href|poster)="([^"#?:]+?\.(?:js|css|jpe?g|png|webp|svg|gif))(?:\?v=([0-9a-f]*))?"')
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
@@ -2054,10 +2060,23 @@ def main():
 
     # -- generated pages
     s = rep.check("The series: their pages, and their blocks in other pages, are what site-tools/build_series.py makes")
-    for rel, text in build_series.pages() + build_series.blocks() + build_series.data():
+    for rel, text in build_series.site_files():
         f = WEB / rel
         if not f.exists() or f.read_text() != text:
             s["fails"].append(f"site/{rel} is not what build_series.py makes: run python site-tools/build_series.py")
+
+    # A browser keeps a script, a stylesheet or a picture for four hours and a page for ten minutes, so a page that links its player
+    # by a bare name played the player before a fix for hours after the fix merged (Measure the work, 18 November 2026).
+    s = rep.check("Versions: every link to a script, a stylesheet or a picture under assets/ carries that file's version (?v=), on every page")
+    for page in sorted(WEB.rglob("*.html")):
+        rel = page.relative_to(WEB).as_posix(); here = os.path.dirname(rel); bad = []
+        for m in VERSIONED.finditer(page.read_text()):
+            target = os.path.normpath(os.path.join(here, m.group(2))).replace(os.sep, "/")
+            v = build_series.version_of(target)
+            if v and m.group(3) != v:
+                bad.append(f"{target} ({'no version' if m.group(3) is None else 'version ' + m.group(3) + ', not ' + v})")
+        if bad:
+            s["fails"].append(f"site/{rel}: {', '.join(dict.fromkeys(bad))}: run python site-tools/build_series.py")
     for S in build_series.SERIES:
         if build_series.readme(S) != (S["root"] / "README.md").read_text():
             s["fails"].append(f"films/{S['dir']}/README.md: its table of films is not what build_series.py makes")
@@ -2167,7 +2186,8 @@ def main():
                 built, have = tmp / "site" / rel, WEB / rel
                 if not built.exists():
                     continue
-                if not have.exists() or built.read_text() != have.read_text():
+                bare = lambda t: re.sub(r"\?v=[0-9a-f]+", "", t)  # the scratch folder has no assets to version: Versions checks those
+                if not have.exists() or bare(built.read_text()) != bare(have.read_text()):
                     s["fails"].append(f"site/{rel.as_posix()} differs from what build_pages.py makes: run python site-tools/build_pages.py (never hand-edit it)")
             s["notes"].append(f"{len(mds)} Markdown pages rebuilt in a scratch folder")
     except Exception as e:  # noqa: BLE001

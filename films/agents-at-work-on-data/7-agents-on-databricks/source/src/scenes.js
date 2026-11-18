@@ -307,8 +307,9 @@ scene("code",(ctx,S,t,sc)=>{
     {at:T.tJun-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{wide(c,tt,{tree:clamp((tt-T.tDbt+0.2)/1.0,0,1),jun:ag_in(tt,T.tJun,0.5),tools:(tt-T.tReach+0.2)/0.6,dbs:(tt-T.tDbs+0.1)/0.6});
       // skills teach an agent how to work; tool servers let it do the work
       od_statement(c,S,ag_in(tt,T.tTeach-0.2,0.5),"Skills teach an agent how to work;","tool servers let it do the work.",{c1:AG.violet,c2:AG.blue,a2:ag_in(tt,T.tLet-0.2,0.4),k:(tt-T.tTeach+0.2)/0.5});}},
-    // a draft on a branch: its person reviews it, and a second person approves what reaches production
-    {at:T.tDraft-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_glass(c,1260,200,580,640,{label:"Production"});ag_sandbox(c,640,790,940,{});ag_roomLight(c,1);
+    // a draft on a branch: its person reviews it, and a second person approves what reaches production. A later moment in the lab, as
+    // the ones before: "by Genie Code" on the draft came in while the panel's "Genie Code" was still there (twice.py, 18 November 2026)
+    {at:T.tDraft-0.3,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_glass(c,1260,200,580,640,{label:"Production"});ag_sandbox(c,640,790,940,{});ag_roomLight(c,1);
       const mv=ag_sine((tt-T.tProd+0.1)/1.3),app=(tt-T.tSecond-0.3)/0.4;
       [["Genie Code","reviewed · Sam",150,470],["Jun's agent","reviewed · Jun",690,470]].forEach(([who,rev,x,y],i)=>{const m=clamp(mv*1.3-(1-i)*0.3,0,1),e=ag_sine(m);
         od_draft(c,lerp(x,1300,e),lerp(y,300+i*240,e),who,{a:ag_in(tt,T.tDraft-0.2+i*0.2,0.4),rev:[rev,(tt-T.tRev+0.1-i*0.25)/0.4],app});});}}

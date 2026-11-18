@@ -3714,10 +3714,11 @@ scene("path",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
       const [sx,sy,sw,sh]=GV_PX.screens[0];gv_screen(x,sx,sy,sw,sh,"who can read",null,{barH:44,titleSize:28});gv_lines(x,sx+30,sy+90,sw-120,6,34,0.8);
       const [rx,ry,rw,rh]=GV_PX.screens[1];gv_screen(x,rx,ry,rw,rh,"learner table",null,{barH:44,titleSize:28});ws_gridRows(x,rx+30,ry+84,rw-60,6);
       ws_nameCard(x,1000,676,"Sam Okafor","platform team",gv_io(tt,P.plat+0.4,P.list-0.2,0.4));}},
-    // Sam's screen, close: forty-one names, and nine of them gone to other jobs
-    {at:P.list,place:"screenPlat",keys:[[P.list,960,440,1.04],[P.list+0.1,960,430,1.08]],d:4,push:0.01,draw:(x,tt)=>ws_whoList(x,clamp((tt-P.forty+0.3)/1.6,0,1),fin(tt,P.nine+0.3,0.8),0,false)},
+    // Sam's screen, close: forty-one names, and nine of them gone to other jobs. The platform's desk and Sam's screen both say "learner table · who can
+    // read", so the changes between them are cuts: a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.list,place:"screenPlat",keys:[[P.list,960,440,1.04],[P.list+0.1,960,430,1.08]],d:4,push:0.01,draw:(x,tt)=>ws_whoList(x,clamp((tt-P.forty+0.3)/1.6,0,1),fin(tt,P.nine+0.3,0.8),0,false)},
     // back at the desk: nobody did anything wrong; the path just had no end
-    {at:P.back,place:"platform",keys:[[P.back,1040,520,1.06],[P.back+0.1,1060,520,1.1]],d:3,draw:(x,tt)=>{
+    {cut:true,at:P.back,place:"platform",keys:[[P.back,1040,520,1.06],[P.back+0.1,1060,520,1.1]],d:3,draw:(x,tt)=>{
       gv_behind(x,"yusuf",1790,GV_PX.top,1.55,{standing:true,pose:"listen",pose2:"explain",mix:gv_io(tt,P.noend-0.2,P.noend+1.6,0.4),t:tt,flip:true});
       ws_sam(x,tt,{pose:"listen",pose2:"ws_shrugSeat",mix:gv_io(tt,c.nobody+0.2,c.nobody+1.8,0.4)});x.drawImage(gv_place("platformDesk"),0,0,W,H);
       const [sx,sy,sw,sh]=GV_PX.screens[0];gv_screen(x,sx,sy,sw,sh,"who can read",null,{barH:44,titleSize:28});gv_lines(x,sx+30,sy+90,sw-120,6,34,0.8);

@@ -29,10 +29,12 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({cards:wAt(
     {at:P.ty,place:"noorScreen",keys:[[P.ty,960,540,1]],push:0.02,draw:(x,tt)=>{gp_typed(x,tt,{type:clamp((tt-P.hand)/3.2,0,1),wk:1+5*clamp((tt-P.wk)/2.4,0,1),
       miss:fin(tt,P.col,0.6),q:fin(tt,P.gone,0.5)});gp_memory(x,fin(tt,P.ty,0.8));}},
     // on census day, in the Faculty of Health: Anil's report on next semester's places doesn't load
-    {at:P.cen,place:"faculty",keys:[[P.cen,960,540,1]],push:0.02,draw:(x,tt)=>{gp_anil(x,tt,{anil:{expr:tt>P.brk+0.6?"concerned":"calm"},draw:q=>gp_report(q,{err:fin(tt,P.brk,0.6)})});
+    // a cut: this shot and the one before both say "census day", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.cen,place:"faculty",keys:[[P.cen,960,540,1]],push:0.02,draw:(x,tt)=>{gp_anil(x,tt,{anil:{expr:tt>P.brk+0.6?"concerned":"calm"},draw:q=>gp_report(q,{err:fin(tt,P.brk,0.6)})});
       gu_nameCard(x,560,140,"Anil Kurian","Faculty of Health",gv_io(tt,P.cen+0.4,P.fm-0.4,0.4));gp_memory(x,1);}},
     // a new catalogue, its fields its own: the one in use crossed out, and every promise typed again; then it steps back
-    {at:P.fm,place:"noorBig",keys:[[P.fm,960,540,1]],push:0.02,draw:(x,tt)=>{gp_formats(x,tt,{x:fin(tt,P.chg,0.6),re:6*clamp((tt-P.again+0.2)/3.6,0,1)});
+    // a cut: this shot and the one before both say "census day", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.fm,place:"noorBig",keys:[[P.fm,960,540,1]],push:0.02,draw:(x,tt)=>{gp_formats(x,tt,{x:fin(tt,P.chg,0.6),re:6*clamp((tt-P.again+0.2)/3.6,0,1)});
       gp_memory(x,1);gp_veil(x,fin(tt,P.stop,0.8));}},
     // now: the project's folders, and in them the product's file and its table's contract, each in its open standard
     {at:P.now,place:"desk",keys:[[P.now,960,540,1]],push:0.02,draw:(x,tt)=>gp_nowFiles(x,tt,{tree:fin(tt,P.code-0.2,0.6),d:clamp((tt-P.std)/0.9,0,1),
@@ -193,7 +195,8 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({rd:wAt(sc,"m
       draw:q=>gp_dawnScreen(q,tt,{read:fin(tt,P.rd,0.6),plan:fin(tt,P.pl,0.8),time:tt<P.sv?"6:58":"7:00"})});
       gu_nameCard(x,560,140,"Anil Kurian","Faculty of Health",gv_io(tt,0.6,P.ch-0.6,0.4));}},
     // whichever catalogue it is by then: the same promise, read from the same file, in its open standard; the catalogue goes, the file stays
-    {at:P.ch,place:"desk",keys:[[P.ch,960,540,1]],push:0.02,draw:(x,tt)=>gp_frames(x,tt,{swap:fin(tt,P.cc,1.0),file:clamp((tt-P.fi)/1.0,0,1),std:fin(tt,P.of,0.6),
+    // a cut: this shot and the one before both say "census day", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.ch,place:"desk",keys:[[P.ch,960,540,1]],push:0.02,draw:(x,tt)=>gp_frames(x,tt,{swap:fin(tt,P.cc,1.0),file:clamp((tt-P.fi)/1.0,0,1),std:fin(tt,P.of,0.6),
       own:fin(tt,P.kc,0.6),read:clamp((tt-P.any)/1.0,0,1),go:fin(tt,P.ot,1.2)})},
     // the data team's board: the next film's card lifts
     {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,0,0,1],lift:[0,0,0,0,0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));

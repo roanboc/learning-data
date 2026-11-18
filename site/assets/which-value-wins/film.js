@@ -3412,6 +3412,12 @@ scene("home",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   wc_end(ctx,S,t,B+0.8,"Which value wins",KL,"Film 3 of 9");
   if(kl>0.01&&t<B+2.4){setScreen(ctx,S);withA(ctx,kl,()=>wc_T(ctx,KL,960,ky,{w:700,size:48,align:"center",col:WC_DARK}));}});
 
+// where the chapters meet (From words to data's joins.js; twice.py, 18 November 2026): the order hidden in the code is another place,
+// whose comment "one value per attribute: the student system first" came in over the record's "student system" tags, so it opens on a
+// cut; every value with its source is a later picture in the same place, whose "4 contact points" came in over the four contact
+// points, so what was there leaves first, over the bare paper
+const CHAPTER_JOINS={cut:["hidden"],leave:["sources"],bare:(ctx,S,t,sc)=>{m3_open(ctx,S,t,sc,"plain",[[0,960,460,1.1]]);m3_close(ctx,S);}};
+
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
 // the voice breathes between sentences: SGAP after a line that ends a sentence, GAP where the sentence runs on into the next line, and GAP after a chapter's last line (its tail follows)

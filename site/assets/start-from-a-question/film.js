@@ -2349,8 +2349,9 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   ctx.restore();weedsEnd(ctx,S,t,B,"Start from a question",WEED,"Model only what the question touches; name who owns each meaning first.");
   vign(ctx,S);});
 
-// where its chapters meet (joins.js): the camera carries each picture on from the chapter before
-const CHAPTER_JOINS={glide:["slice","yaml","owners","split"]};
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before. What comes next is a later picture
+// with the question's words in another place, so the draft leaves first, over the bare screen (twice.py, 18 November 2026)
+const CHAPTER_JOINS={glide:["slice","yaml","owners","split"],leave:["next"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t,{n:30});vign(ctx,S);}};
 
 /* ===== Made to read on a phone =====
    A phone held sideways shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame is too small to

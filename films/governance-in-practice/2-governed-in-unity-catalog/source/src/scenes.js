@@ -135,8 +135,9 @@ scene("policy",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({masks:wAt(s
     // Planning: Clara reads the learner table on her wall screen
     {at:P.cl,place:"planning",keys:[[P.cl,900,480,1.08]],push:0.02,draw:(x,tt)=>{gc_planScreen(x);person(x,"clara",440,905,0.8,{pose:"point",pose2:"listen",mix:fin(tt,P.cl+1.2,0.6),t:tt});
       gu_nameCard(x,120,560,"Clara Jensen","Planning",gv_io(tt,P.cl+0.3,P.sees+0.4,0.4));}},
-    // her query, close: each learner's status, and stars where the names and emails are
-    {at:P.sees,place:"bigPlan",keys:[[P.sees,960,540,1]],push:0.02,draw:(x,tt)=>gc_query(x,tt,{title:"Clara's query",sub:"Clara Jensen · Planning",rows:clamp((tt-P.sees-0.1)/0.8,0,1),
+    // her query, close: each learner's status, and stars where the names and emails are. It says "Clara Jensen · Planning", as her name
+    // card did, so it comes in on a cut: a dissolve showed her name twice, at two sizes (twice.py, 18 November 2026)
+    {cut:true,at:P.sees,place:"bigPlan",keys:[[P.sees,960,540,1]],push:0.02,draw:(x,tt)=>gc_query(x,tt,{title:"Clara's query",sub:"Clara Jensen · Planning",rows:clamp((tt-P.sees-0.1)/0.8,0,1),
       masked:true,mask:1,lit:[0,fin(tt,P.status,0.5),fin(tt,P.stars,0.5),fin(tt,P.stars+0.2,0.5)]})},
     // the registrar's office sees the values, and so does the build's identity
     {cut:true,at:P.val,place:"bigReg",keys:[[P.val,960,540,1]],push:0.02,draw:(x,tt)=>{gc_query(x,tt,{title:"Mei's query",sub:"Mei Tanaka · registrar's office",lit:[0,0,fin(tt,P.sv,0.5),fin(tt,P.sv+0.2,0.5)]});

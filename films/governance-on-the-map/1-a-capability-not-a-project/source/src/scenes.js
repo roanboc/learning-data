@@ -239,7 +239,8 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
     // a new line in Budget 2027, in pen, on the desk as the page left it
     {at:bd,place:"desk",keys:[[bd,889,580,1.08],[P.aLine-0.4,1250,620,1.35]],d:1.6,push:0,draw:(x,tt)=>cp_budget(x,{write:clamp((tt-P.aLine)/1.6,0,1)})},
     // the planner: the project's card still ends on 30 June; the new line runs on past it, off the planner's edge
-    {at:pl,place:"dvc",keys:[[pl,1160,300,1.55]],push:0.02,draw:(x,tt)=>cp_dvc(x,tt,{david:{pose:"listen",flip:false},plan:{card:1,flag:1,line:clamp((tt-pl-0.3)/1.8,0,1)}})},
+    // a cut: this shot and the one before both say "Data governance" and "every year", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:pl,place:"dvc",keys:[[pl,1160,300,1.55]],push:0.02,draw:(x,tt)=>cp_dvc(x,tt,{david:{pose:"listen",flip:false},plan:{card:1,flag:1,line:clamp((tt-pl-0.3)/1.8,0,1)}})},
     // the money goes to one capability: a gold thread from the budget's line to govern data, and on along the dotted lines to the services
     {cut:true,at:mn,place:"services",keys:[[mn,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_services(x,{serv:()=>1,line:()=>1,budget:fin(tt,mn+0.3,0.5),gold:clamp((tt-mn-0.6)/(P.which+1.0-mn-0.6),0,1)})},
     // next year's new work starts with the red card

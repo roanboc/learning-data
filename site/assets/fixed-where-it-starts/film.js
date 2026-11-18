@@ -3638,8 +3638,9 @@ scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first
     {at:P.reg,place:"register",keys:[[P.reg,960,560,1],[P.reg+0.1,940,580,1.04]],d:3,push:0.01,draw:(x,tt)=>
       fw_register(x,k=>clamp((tt-P.reg-0.3-[0,0.7,1.4,2.0,2.6][k])/0.9,0,1),clamp((tt-P.level+0.2)/1.0,0,1),fin(tt,P.reg+0.1,0.8))},
     // the corridor again, the basin by the first clinic's door: the door opens, and a mother comes out with her baby in her arms and
-    // walks slowly towards the far end
-    {at:P.home,place:"corridor",keys:[[P.home,1060,600,1.15],[P.home+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>fw_goingHome(x,tt,P.home)},
+    // walks slowly towards the far end. This shot and the register before it both say "second clinic", so it comes in on a cut: a
+    // dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.home,place:"corridor",keys:[[P.home,1060,600,1.15],[P.home+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>fw_goingHome(x,tt,P.home)},
     // the first clinic's ward: the fever showed in the beds; the camera goes to the door from the corridor, where a doctor comes in
     // and washes: it started there; then both, wide, for the lesson
     {at:P.ward,place:"ward",keys:[[P.ward,960,540,1],[P.started-0.3,1280,560,1.5],[P.lesson,960,540,1]],d:1.6,push:0,draw:(x,tt)=>{const D=FW_WD,
@@ -3812,8 +3813,9 @@ scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({chk:wAt(sc,"
       fw_tagAt(x,tt,Math.max(P.chk-0.1,2.4),null,1250,770,"a check that should never fail");
       const p=clamp((tt-P.owner+0.3)/0.8,0,1);wc_link(x,jx+30,FW_BK.y-20,1590,712,GV.goldInk,{p,dash:[10,10],lw:3});fw_tagAt(x,tt,P.owner+0.3,null,1740,700,"tells: Learning team",{wash:GV.gold,washA:0.3});}},
     // the scorecard, a Monday after the fix: the learning row's validity cell turns green, and the row's and the page's with it; the
-    // warnings go
-    {at:P.sc,place:"screenGov",keys:[[P.sc,...FW_SKV.row]],d:1.4,push:0,draw:(x,tt,cam)=>
+    // warnings go. This shot and the one before both say "Learning team", so it comes in on a cut: a dissolve showed the words twice
+    // (twice.py, 18 November 2026)
+    {cut:true,at:P.sc,place:"screenGov",keys:[[P.sc,...FW_SKV.row]],d:1.4,push:0,draw:(x,tt,cam)=>
       fw_scorecard(x,cam,{after:FW_SKF,mx:fin(tt,P.turn,1.0),sections:FW_SKW,hi:4,hiA:fin(tt,P.sc+0.3,0.5)})},
     // Yusuf's board: the issue's card, closed because the check passes
     {at:P.bd,place:"boardGov",keys:[[P.bd,960,500,1],[P.bd+0.1,960,490,1.04]],d:3,push:0.01,draw:(x,tt)=>fw_issueGold(x,1,()=>1,fin(tt,P.right,0.4))}]);

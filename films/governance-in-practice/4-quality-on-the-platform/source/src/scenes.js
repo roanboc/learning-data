@@ -98,7 +98,8 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({dbt:wAt(sc,"
       if(f.rows.length>8){wc_hand(x,"warn on one",760,f.rows[7]+12,{size:34,w:700,col:GV.amberInk,p:fin(tt,P.warn+0.2,0.8)});
         wc_hand(x,"stop above five",760,f.rows[8]+12,{size:34,w:700,col:GV.redInk,p:fin(tt,P.stop+0.2,0.8)});}}},
     // the decision log, as a card: who chose it, when, and why
-    {at:P.lg,place:"deskGov",keys:[[P.lg,960,540,1]],push:0.02,draw:(x,tt)=>gq_decision(x,{a:fin(tt,P.lg+0.1,0.6),who:gv_io(tt,P.who,P.why,0.4),why:fin(tt,P.why,0.5)})},
+    // a cut: this shot and the one before both say "stop above five", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.lg,place:"deskGov",keys:[[P.lg,960,540,1]],push:0.02,draw:(x,tt)=>gq_decision(x,{a:fin(tt,P.lg+0.1,0.6),who:gv_io(tt,P.who,P.why,0.4),why:fin(tt,P.why,0.5)})},
     // Jun's pull request: a test with no owner, and the governance check stops it; the line that gives it one; then the check turns green
     {at:P.pr,place:"big",keys:[[P.pr,960,540,1]],push:0.02,draw:(x,tt)=>{const g=tt<P.wo+0.3?"run":tt<P.fx+1.1?"fail":tt<P.fx+1.7?"run":"pass",
         items=GQ_PR.ck.map((n,i)=>({name:n,st:i===1?g:tt>P.pr+0.8+0.35*i?"pass":"run"}));
@@ -207,7 +208,8 @@ scene("card",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ld:wAt(sc,"la
     // the scorecard, the platform's table under the tests'; each table's owner, from the project
     {cut:true,at:P.rd,place:"big",keys:[[P.rd,960,540,1]],push:0.02,draw:(x,tt)=>gq_platCard(x,{on:fin(tt,P.own-0.3,0.8),meta:fin(tt,P.own+0.3,0.9),lit:gv_io(tt,P.rs,P.ib,0.5)})},
     // every result to one owner, not a shared inbox
-    {at:P.ib,place:"boardGov",keys:[[P.ib,960,540,1]],push:0.02,draw:(x,tt)=>gq_toOwners(x,{x:fin(tt,P.sh,0.6),u:[0,1,2].map(i=>fin(tt,P.one+0.25*i,0.9))})},
+    // a cut: this shot and the one before both say "Learning team", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.ib,place:"boardGov",keys:[[P.ib,960,540,1]],push:0.02,draw:(x,tt)=>gq_toOwners(x,{x:fin(tt,P.sh,0.6),u:[0,1,2].map(i=>fin(tt,P.one+0.25*i,0.9))})},
     // measured, not surveyed: last night's totals, the tests' and the platform's
     {at:P.ms,place:"deskGov",keys:[[P.ms,960,540,1]],push:0.02,draw:(x,tt)=>gq_measured(x,{x:fin(tt,P.ns,0.6),tag:fin(tt,P.ns,0.5),tests:fin(tt,P.t160,0.6),plat:fin(tt,P.t22,0.6)})},
     // and the governance check's measures: every test with an owner and a dimension
@@ -223,11 +225,14 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({op:wAt(sc,"o
     // this morning: Clara opens the scorecard before the numbers leave; one amber cell
     {at:0,place:"planClose",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_planDesk(x,tt,{bar:"docs/scorecard.md",draw:gq_cardSmall({lit:fin(tt,P.op+0.8,0.6)})})},
     // the scorecard: learning's completeness amber, and its one row under Not passed
-    {at:P.am,place:"bigPlan",keys:[[P.am,960,540,1]],push:0.02,draw:(x,tt)=>{gq_scorePage(x,{rows:GQ_LAST,lit:[[3,1,fin(tt,P.cell,0.5),GV.amber]]});gq_notPassed(x,738,{lit:fin(tt,P.ne,0.5)});}},
+    // a cut: this shot and the one before both say "Data quality scorecard", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.am,place:"bigPlan",keys:[[P.am,960,540,1]],push:0.02,draw:(x,tt)=>{gq_scorePage(x,{rows:GQ_LAST,lit:[[3,1,fin(tt,P.cell,0.5),GV.amber]]});gq_notPassed(x,738,{lit:fin(tt,P.ne,0.5)});}},
     // the learning team's list to follow up, on Tom's screen
-    {at:P.lt-0.3,place:"tom",keys:[[P.lt-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gq_tomDesk(x,tt,{clock:9.25},q=>gq_tomScreen(q,"follow",{u:fin(tt,P.lt,0.5)}))},
+    // a cut: this shot and the one before both say "Learning team", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.lt-0.3,place:"tom",keys:[[P.lt-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gq_tomDesk(x,tt,{clock:9.25},q=>gq_tomScreen(q,"follow",{u:fin(tt,P.lt,0.5)}))},
     // everything else passed; a gold pin on each domain: every cell has an owner
-    {at:P.el,place:"bigPlan",keys:[[P.el,960,540,1]],push:0.02,draw:(x,tt)=>{gq_scorePage(x,{rows:GQ_LAST,lit:[[3,1,1,GV.amber]],pins:clamp((tt-P.ow)/1.4,0,1)});gq_notPassed(x,738,{});}},
+    // a cut: this shot and the one before both say "Learning team", and a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.el,place:"bigPlan",keys:[[P.el,960,540,1]],push:0.02,draw:(x,tt)=>{gq_scorePage(x,{rows:GQ_LAST,lit:[[3,1,1,GV.amber]],pins:clamp((tt-P.ow)/1.4,0,1)});gq_notPassed(x,738,{});}},
     // Planning: Clara's census numbers ticked, and who answers for each
     {at:P.kn,place:"planClose",keys:[[P.kn,960,540,1]],push:0.02,draw:(x,tt)=>{gq_planDesk(x,tt,{clara:{expr:"smile"},draw:gq_census({tick:[0,1,2,3].map(i=>fin(tt,P.nm+0.25*i,0.5))})});
       gq_tags(x,GQ_WHO,{u:[0,1,2].map(i=>fin(tt,P.who+0.3*i,0.9)),wash:GV.gold});}},

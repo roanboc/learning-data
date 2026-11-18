@@ -231,4 +231,5 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
 // the views, the target, the gaps and the end are later pictures in the same place with some of the same words or Grace elsewhere,
 // so what was there leaves first, over the bare screen or wall
 const D7_SCREEN=(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);},D7_WALL=(ctx,S,t)=>{wallBg(ctx,S,t);vign(ctx,S);};
-const CHAPTER_JOINS={cut:["layers"],leave:["views","target","gaps","end"],bare:{views:D7_SCREEN,target:D7_SCREEN,gaps:D7_SCREEN,end:D7_WALL}};
+// Why it matters opens on a cut to the wall, whose "7 · one outage system" came in over the path's "one outage system" (twice.py, 18 November 2026)
+const CHAPTER_JOINS={cut:["layers","why"],leave:["views","target","gaps","end"],bare:{views:D7_SCREEN,target:D7_SCREEN,gaps:D7_SCREEN,end:D7_WALL}};

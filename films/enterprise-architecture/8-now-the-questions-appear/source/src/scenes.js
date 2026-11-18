@@ -442,3 +442,8 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1500,730,t,w("next","Next"),()=>sticky(ctx,1500,730,420,130,"Where does each rule belong?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Now the questions appear",EAC,"A question matters when someone will act on its answer, in time.","Film 8 of 11");});
+
+// where the chapters meet (From words to data's joins.js; twice.py, 18 November 2026): half the answer and what to build are later
+// pictures on the same screen whose words came in over the same words in the chapter before ("replace assets before they fail",
+// "households falling behind"), so what was there leaves first, over the bare screen
+const CHAPTER_JOINS={leave:["half","build"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

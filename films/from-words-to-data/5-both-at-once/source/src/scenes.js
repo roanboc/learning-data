@@ -298,5 +298,6 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c(
   vign(ctx,S);});
 
 // where the chapters meet (joins.js): data flowing back is a new picture with the same award rows in another place, so what the
-// hybrid doesn't remove leaves first, over the bare screen
-const CHAPTER_JOINS={leave:["back"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};
+// hybrid doesn't remove leaves first, over the bare screen; so does the two engines' picture before the sync, whose "the app writes"
+// showed twice, a little apart, in "the app writes here" (twice.py, 18 November 2026)
+const CHAPTER_JOINS={leave:["sync","back"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};

@@ -2416,6 +2416,10 @@ scene("reason",(ctx,S,t,sc)=>{const c=sc.cues,T=fp_once(sc,"T",()=>({page:c.page
   fp_kick(ctx,S,t,8,sc.name,T.page);
   dp_end(ctx,S,t,c.breath,FP_TITLE,"A person can ask. You must be able to answer.","Film 3 of 5",FP_SERIES);});
 
+// Her request opens on a cut (twice.py, 18 November 2026): its form, "the data you hold about me", came in over the four rights'
+// "hold about me", apart
+ag_cutInto(["her"]);
+
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
 // the voice breathes between sentences: SGAP after a line that ends a sentence, GAP where the sentence runs on into the next line, and GAP after a chapter's last line (its tail follows)

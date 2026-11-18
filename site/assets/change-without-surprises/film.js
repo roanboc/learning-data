@@ -4288,7 +4288,7 @@ const cw_at=(x,P_,fn)=>{x.save();x.translate(P_[0],P_[1]);x.scale(P_[2],P_[2]);c
 scene("board",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{three:w("same","three"),notice:w("award","word")-0.2,mc:w("award","microcredentials"),mei:c.mei-0.2,signed:w("mei","signed")-0.1,
       jun:c.jun-0.2,form:c.jun+1.3,binder:c.binder-0.2,impact:w("binder","impact"),room:c.practice-0.2,cal:w("practice","once")-0.4,month:w("practice","once"),
-      form2:w("practice","and its")-0.2,memory:w("practice","answered"),next:c.next-0.2,draft:w("next","draft"),nobody:c.nobody-0.2,rem:w("nobody","remembers"),
+      form2:w("practice","form")-0.2,memory:w("practice","answered"),next:c.next-0.2,draft:w("next","draft"),nobody:c.nobody-0.2,rem:w("nobody","remembers"),
       told:w("nobody","told"),better:c.better-0.2,q1:c.better+0.3,q2:c.better+1.8};});
   const title=cw_heldTitled(["Change","without","surprises"],cw_bindCol(18));
   cw_shots(ctx,S,t,sc.dur,[
@@ -4322,15 +4322,17 @@ scene("board",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s
     {at:P.impact-0.2,place:"desk",keys:[[P.impact-0.2,1240,420,1.3]],d:2,push:0.012,draw:(x,tt)=>cw_binder19(x,{lit:fin(tt,P.impact,0.8)})},
     // the meeting room, empty: on the wall between the whiteboard and the screen, the change board's calendar
     {at:P.room,place:"meeting",keys:[[P.room,960,540,1],[P.room+0.3,880,400,1.55]],d:1.8,draw:(x,tt)=>{cw_calSmall(x,{});x.drawImage(gv_place("meetingTable"),0,0,W,H);}},
-    // the calendar, close: once a month, the next meeting circled in red
+    // the calendar, close: once a month, the next meeting circled in red; it stays until the ring is drawn, and the form comes in on
+    // "form" (until 18 November 2026 it came in on "and its", before the ring was done, and the close-up was gone in under a second)
     {cut:true,at:P.cal,place:"calWall",keys:[[P.cal,960,470,1.0],[P.cal+0.1,960,460,1.04]],d:2,draw:(x,tt)=>cw_at(x,[CW_CW.x,CW_CW.y,CW_CW.k],q=>cw_calendar(q,{ring:clamp((tt-P.month)/0.7,0,1)}))},
-    // the board's form on the meeting table: what will this change affect? A pencil writes "awards?"
-    {at:P.form2,place:"topMeet",keys:[[P.form2,960,470,1.08]],d:2,push:0.012,draw:(x,tt)=>{const pen=cw_at(x,CW_BFP,q=>cw_boardForm(q,{aw:clamp((tt-P.memory)/0.9,0,1)}));
+    // the board's form on the meeting table: what will this change affect? A pencil writes "awards?". The calendar and the form both
+    // say "Change board" near their tops, so each change between them is a cut: a dissolve showed the words twice, a little apart
+    {cut:true,at:P.form2,place:"topMeet",keys:[[P.form2,960,470,1.08]],d:2,push:0.012,draw:(x,tt)=>{const pen=cw_at(x,CW_BFP,q=>cw_boardForm(q,{aw:clamp((tt-P.memory)/0.9,0,1)}));
       if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.memory,P.memory+0.9),{pencil:1});}},
     // the calendar again: the draft submission's gold card sits on a day before the circled one
-    {at:P.next,place:"calWall",keys:[[P.next,960,470,1.04],[P.draft-0.4,900,430,1.16]],d:2.2,draw:(x,tt)=>cw_at(x,[CW_CW.x,CW_CW.y,CW_CW.k],q=>cw_calendar(q,{ring:1,draft:clamp((tt-P.draft)/0.9,0,1)}))},
+    {cut:true,at:P.next,place:"calWall",keys:[[P.next,960,470,1.04],[P.draft-0.4,900,430,1.16]],d:2.2,draw:(x,tt)=>cw_at(x,[CW_CW.x,CW_CW.y,CW_CW.k],q=>cw_calendar(q,{ring:1,draft:clamp((tt-P.draft)/0.9,0,1)}))},
     // the form, close: under "awards?", one line scribbled too small to read, and three left empty
-    {at:P.nobody,place:"topMeet",keys:[[P.nobody,960,470,1.08],[P.nobody+0.1,900,566,1.34]],d:2,draw:(x,tt)=>{const g=clamp((tt-P.rem+0.2)/1.0,0,1),
+    {cut:true,at:P.nobody,place:"topMeet",keys:[[P.nobody,960,470,1.08],[P.nobody+0.1,900,566,1.34]],d:2,draw:(x,tt)=>{const g=clamp((tt-P.rem+0.2)/1.0,0,1),
       pen=cw_at(x,CW_BFP,q=>cw_boardForm(q,{aw:1,scrib:g,empty:fin(tt,P.told,0.6)}));if(pen&&g<1)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.rem-0.2,P.rem+0.8),{pencil:1});}},
     // the data team's room: Jun, and Yusuf with binder 19
     {at:P.better,place:"data",keys:[[P.better,1240,540,1.18],[P.better+0.1,1260,530,1.22]],d:3,draw:(x,tt)=>{cw_tray(x,CW_TRAY[0],CW_TRAY[1]);

@@ -2828,7 +2828,7 @@ function gp_passer(x,tt,who,t0,o){o=o||{};const U=PK.u,W=GP_WAY,e=GP_CA.eye,d1=(
    (PK.notes, the place gpNotes), and once what Helena keeps goes in hers (gpNotesH). Every time comes from the voice: sc is the
    chapter, w a word's time in a line. Colour means what it means in the film: blue a plan or a rule, green done or of value, amber
    a risk. Laid out for someone who walks, as the kit asks: on from left to right, what comes later at its right. */
-const GP_RB={x:742,y:206,k:0.35,deco:true,floor:848,rest:1212};
+const GP_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
 const gp_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},GP_RB,{h:gp_hT(GP_RB.floor)},o||{}));
 // A. what more than six hundred results on feedback found. Laid out for someone who walks: each finding starts under the end of
 // the row above and goes on along its line, so she never walks back over the board to start a row at its left
@@ -3052,12 +3052,13 @@ scene("lesson",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
     // the 1880s: a head teacher joins a group of teachers; lesson study begins
     {at:tE,place:"gpClass",later:true,keys:[[tE,1214,665,1.36],[tE+2.4,960,540,1.0],[tE+4.8,1040,560,1.08]],d:2.4,draw:(x,tt,cam)=>{
       gp_door(x,ag_io(tt,tE+0.4,tE+4.0,0.8));gp_clock(x,15+(tt-tE)/120);
-      const wk={x0:214,x1:1540,t0:tE+0.8,t1:tE+4.8,floor:xx=>xx<1290?812:U.lerp(812,900,(xx-1290)/250),h:gp_hM,then:"stand"},ta=tE+5.2,back=PK.walkAt(tt,wk).x<1290;
+      const wk={x0:214,x1:1540,t0:tE+0.8,t1:tE+4.8,floor:xx=>xx<1290?812:U.lerp(812,900,(xx-1290)/250),h:gp_hM,then:"stand"},ta=tE+5.2,back=PK.walkAt(tt,wk).x<1290,fo=wk.floor(PK.walkAt(tt,wk).x);
       const ok=()=>gp_walk(x,"okada",tt,wk,{flip:ag_in(tt,wk.t1+0.1,0.6)*0.5,a:U.pin(tt,wk.t0,0.4),expr:gp_says("smile",tt,c.study+0.4,c.study+3.0)});
       let Jo=back?ok():null;GP_SEATS.forEach(([i,sx,fl])=>gp_seat(x,sx,fl,gp_kidH(fl)));
-      [["aoki",1730,884,true,2],["kato",1320,896,false,0],["ueda",1820,950,true,3],["mori",1400,958,false,1]].forEach(([k,gx,fl,fp,i])=>gp_person(x,k,gx,fl,gp_hM(fl),i===1?"clasp":"listen",
-        Object.assign({t:tt+i,flip:fp},PK.face(tt,{expr:"listen",gaze:[1,0.1]},[[ta+0.4+i*0.3,"nod"],[c.study+1.4+i*0.2,"smile",2.6]]))));
-      if(!back)Jo=ok();
+      // the teachers, and Mr Okada among them once he is in front of the desks: whoever stands further back is drawn first
+      [["aoki",1730,884,true,2],["kato",1320,896,false,0],["ueda",1820,950,true,3],["mori",1400,958,false,1]].forEach(([k,gx,fl,fp,i])=>(!back&&!Jo&&fl>fo&&(Jo=ok()),gp_person(x,k,gx,fl,gp_hM(fl),i===1?"clasp":"listen",
+        Object.assign({t:tt+i,flip:fp},PK.face(tt,{expr:"listen",gaze:[1,0.1]},[[ta+0.4+i*0.3,"nod"],[c.study+1.4+i*0.2,"smile",2.6]])))));
+      if(!Jo)Jo=ok();
       PK.nameTag(x,Jo.hc[0],Jo.hc[1]-150,"Mr Okada","Head teacher",ag_io(tt,ta,tF-0.3,0.4));}},
     // the blackboard, close: Mr Okada writes lesson study's four steps
     {at:tF,cut:true,place:"gpBoard",keys:[[tF,960,540,1.0]],d:2,draw:(x,tt,cam)=>{gp_chalkTeach(x,"okada",tt,ST,{say:[[c.cycle,sc.ends.cycle],[c.teach,sc.ends.teach]]});}},
@@ -3096,7 +3097,7 @@ scene("lesson",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       const take=ag_io(tt,tg+0.2,c.grow-0.6,0.5);
       PK.atDesk(x,K.ana,760,930,gp_hM(930),Object.assign({t:tt,screen:"monitor",chair:[90,100,110],show:gp_scrCode(),reachN:[U.lerp(900,988,take),U.lerp(690,640,take)],reachNk:Math.max(take,0.001),hold:gp_form(got),holds:got>0.5},
         PK.face(tt,{expr:PK.exprMix("neutral","think",got),gaze:[1,0.3]},[[tg-0.3,"look",2.8,[1,-0.3]]])));
-      if(tt>=ty){const Jb=PK.walk(x,K.boss,tt,{x0:1760,x1:1170,t0:ty,t1:tg,floor:930,h:gp_hM(930),then:"stand"},{t:tt,flip:true,a:U.pin(tt,ty,0.4),reachN:[1000,644],reachNk:give,hold:gp_form(1-got),expr:gp_says("neutral",tt,tg+0.4,tg+1.8)});
+      if(tt>=ty){const Jb=PK.walk(x,K.boss,tt,{x0:1760,x1:1080,t0:ty,t1:tg,floor:930,h:gp_hM(930),then:"stand"},{t:tt,flip:true,a:U.pin(tt,ty,0.4),reachN:[1000,644],reachNk:give,hold:gp_form(1-got),expr:gp_says("neutral",tt,tg+0.4,tg+1.8)});
         gp_say(x,Jb,tt,tg+0.4,c.grow-0.6,["Meets expectations."],cam);}}},
     // back to the classroom: a better lesson; the girl holds up her slate with the answer
     {at:tL,place:"gpClass",dis:1.0,keys:[[tL,930,570,1.08],[c.breath,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
@@ -3386,7 +3387,7 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       const R=gp_team(x,tt,{clock:9.0,pot:1,book:0,sam:{expr:"smile"},jun:{expr:"smile"},
         ivy:Object.assign({turn:1,work:0,pose:PK.poseSit(1-up,"ease"),reachN:mid,reachNk:sh},PK.face(tt,{expr:"glad",gaze:[1,0]},[[tA+0.4,"say",1.4],[c.take+0.6,"nod"]]))});
       const G=PK.extra(21);
-      PK.walk(x,G,tt,{x0:2060,x1:800,t0:tM+0.2,t1:tA,floor:900,h:gp_hT(900),then:"stand"},Object.assign({reachN:mid,reachNk:sh},PK.face(tt,{expr:"smile",gaze:[1,0]},[[tA+0.6,"nod"],[tA+1.6,"glad",3.0]])));
+      PK.walk(x,G,tt,{x0:2060,x1:780,t0:tM+0.2,t1:tA,floor:900,h:gp_hT(900),then:"stand"},Object.assign({reachF:mid,reachFk:sh},PK.face(tt,{expr:"smile",gaze:[1,0]},[[tA+0.6,"nod"],[tA+1.6,"glad",3.0]])));
       PK.walk(x,"helena",tt,{x0:2140,x1:1060,t0:tM+0.6,t1:tA+0.4,floor:930,h:gp_hT(930),then:"clasp"},PK.face(tt,{expr:"smile",gaze:[1,0.1]},[[tA+1.2,"nod"],[c.take+0.4,"smile",3]]));
       PK.nameTag(x,R.ivy.hc[0],R.ivy.hc[1]-150,"Ivy Reyes","Coach",ag_io(tt,tA+0.2,tE-0.4,0.4));}}
   ]);

@@ -1,6 +1,6 @@
 # Growing people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 4 of 4 · merged, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261); made again in ink line on 18 November 2026 (PR #435)
+*Leading data people* · *Ownership and performance*, film 4 of 4 · merged, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261); made again in ink line on 18 November 2026 (PR #435); its arms and depth put right the same day
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/growing-people/)
 
@@ -54,3 +54,4 @@ Chapters now: *Watching the children* 0:00 · *Goals of her own* 2:29 · *Every 
 | 31 | Length and pace? | 8:08.5, 130 words a minute, the first version's lines and pauses: the new pictures were made to fit them, every page written and left to be read inside the time its lines already had. | The whole film |
 | 32 | The Spanish? | The captions' words are the same, timed again to the voice; the page and Pause and think don't change. | The Spanish captions |
 | 33 | Merge now, or wait for you? | Merged on green, squashed, with the series' Draft label, as you chose for the series' films on 17 November, after films 2 and 3 of the series. A review page with the first version beside this one can be made on request. | This pull request |
+| 34 | Arms and depth, after the kit's new check? | Put right on 18 November 2026. Mr Okada, walking in among the teachers, is drawn behind the one nearer us, not over him. The manager walks nearer Ana's desk to hand over the form, and the next graduate shakes Ivy's hand with the far hand, from within reach: both hands had stopped short. The room's board is written 56 px lower, within Carmen's reach. The words, the timings and the sound stay. | Chapters 1, 3 and 6 |

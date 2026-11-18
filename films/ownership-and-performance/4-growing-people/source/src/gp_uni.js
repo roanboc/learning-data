@@ -152,7 +152,7 @@ function gp_passer(x,tt,who,t0,o){o=o||{};const U=PK.u,W=GP_WAY,e=GP_CA.eye,d1=(
    (PK.notes, the place gpNotes), and once what Helena keeps goes in hers (gpNotesH). Every time comes from the voice: sc is the
    chapter, w a word's time in a line. Colour means what it means in the film: blue a plan or a rule, green done or of value, amber
    a risk. Laid out for someone who walks, as the kit asks: on from left to right, what comes later at its right. */
-const GP_RB={x:742,y:206,k:0.35,deco:true,floor:848,rest:1212};
+const GP_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
 const gp_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},GP_RB,{h:gp_hT(GP_RB.floor)},o||{}));
 // A. what more than six hundred results on feedback found. Laid out for someone who walks: each finding starts under the end of
 // the row above and goes on along its line, so she never walks back over the board to start a row at its left

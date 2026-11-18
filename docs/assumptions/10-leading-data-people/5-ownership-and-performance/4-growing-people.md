@@ -1,6 +1,6 @@
 # Growing people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 4 of 4 · merged, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261)
+*Leading data people* · *Ownership and performance*, film 4 of 4 · merged, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261); made again in ink line on 18 November 2026 (PR #435)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/growing-people/)
 
@@ -25,3 +25,32 @@ Chapters: *Watching the children* 0:00 · *Goals of her own* 2:28 · *Every Tues
 | 13 | Spanish names | The title *Hacer crecer a las personas*, as the Spanish captions of *When someone falls behind* name it; the product *Uso de los espacios docentes*, as the series has it. | Spanish captions and page |
 | 14 | Which working folder? The brief names `13-growing-people/`; the setup thread renumbered the film to `films/ownership-and-performance/4-growing-people`. | `leading-data-people/4-growing-people/`, so the working folder matches the film's. | The film's `decided.md` |
 | 15 | Render, review page and audio | No render or review page (the film merge rule). The MP3 is committed beside its `audio.json`, and main's *Store audio outside Git* workflow publishes its release when the film reaches main. | Its pull request |
+
+## Made again in ink line, 18 November 2026
+
+This pull request merges on green with the series' Draft label, as you chose for the series on 17 November.
+
+You approved *Owning the outcome* made again in ink line on 17 November, and asked for the other films of *Ownership and performance* to be made again the same way, the series first and not yet the whole module. This film follows the people kit's README and that film's rules, as *Measure the work, not the people* did. The rows below are the questions I would have asked while making it again.
+
+Chapters now: *Watching the children* 0:00 · *Goals of her own* 2:29 · *Every Tuesday* 3:41 · *Both ways* 5:17 · *The next step* 6:10 · *On Monday* 7:11.
+
+| # | Question | Assumption made | Where it shows |
+|---|---|---|---|
+| 16 | Which look? | Ink line, as *Owning the outcome*: flat colour, one even dark line, no shading, drawn with the people kit (`films/people-first/shared`). The colours mean what they meant. | The whole film |
+| 17 | Does the narration change? | No. The same words, the opening story's four beats, the references and the takeaway, so Pause and think, the captions' words and the page stay as they are. Only one line is voiced again (row 30). | The whole film |
+| 18 | How is the opening shown? | By people in a classroom, where the first version drew a schoolroom, a wall of twenty schools and a ring of four steps: a village teacher in 1872, his sums and a girl who can't do hers; after school, alone with her slate; three teachers who come in to watch, one bending by her desk; their talk afterwards, in a ring; Mr Okada in the 1880s at the blackboard; a research lesson in Japan today; in the United States, the book passed on, a team with a researcher's fractions materials, a girl with a strip folded in thirds; and a new analyst alone, given her grade. | Chapter 1 |
+| 19 | How was a village classroom of the 1870s set out? | As the new schools were meant to teach a whole class at once: desks, slates, a blackboard, a clock, a sliding door. Many village schools began in temples and houses, with children on the floor, so the room is the new kind, not every school. | Chapters 1, 2 and 4 |
+| 20 | How were they dressed? | The village teacher of the 1870s and two visitors in kimono and hakama; a woman teacher in kimono with a wide obi, her hair up; Mr Okada and one visitor in Western suits, as many teachers wore by the 1880s; the children in plain kimono. The first version put the 1880s teacher in a suit; the 1870s village teacher is now in kimono. A kimono's collar crosses left over right whichever way the person faces. | Chapter 1 |
+| 21 | Who says what in the opening? | Three bubbles, each close to the voice's line and adding no fact: the teacher's "Is that clear?", as the girl can't do her sum; a visitor's "Here, they got stuck.", in the talk afterwards; and the manager's "Meets expectations.", a grade said politely, so nobody is the villain. | Chapter 1 |
+| 22 | Who explains at a board? | Mr Okada, a head teacher of the 1880s whom the film names, for lesson study's four steps, in chalk; and Carmen Vidal, the consultant of *Owning the outcome*, for what research found about feedback and for Kim Scott's hard feedback. Helena never explains at the board: in this film she is the one giving feedback, at her round table. | Chapters 1 and 3 |
+| 23 | Whose notebook? | Ivy's, since the film follows her growing: her goals, feedback in three parts, her half year, and the four things for Monday, now that she coaches too. And one page of Helena's own, for what Ivy told her and what she does from then on: Helena acting on feedback. | Chapters 2 to 6 |
+| 24 | Which moments became a call and a chat? | Graham's question comes in a call to Ivy's desk, with Helena standing by, since the voice says it is Helena's part. Graham's thanks come in a chat from the campus, and Helena reads them to the team from her phone. The rest is face to face, eighteen times in all. | Chapters 2 and 4 |
+| 25 | How is "you're brilliant" shown? | As Helena's thought, struck through as the voice says it's about who she is: never said aloud, so the film never shows the praise it warns against. | Chapter 3 |
+| 26 | A seedling in a pot? | The film's own custom: the team gives one to someone who first owns a product, and Helena gives it to Ivy with "It's yours now."; by the last chapter it has grown on the sill. It marks the step, not a prize over the others, so the team's credit stays the team's. | Chapters 5 and 6 |
+| 27 | How does it end? | On a person, as the kit asks: in March 2028 Helena brings in the next graduate, never named, and Ivy stands up to meet them, her hand out, her tag "Coach"; the end card comes beside them, tagged "The university, 2028 · imagined". | Chapter 6 |
+| 28 | The poster? | From the opening story: the teachers who came to watch, one bent by the girl's desk to see her slate, 5.4 seconds into "A visitor watched the children, not the teacher". The first version's was 2.4 seconds into the same line. | The film's card and page |
+| 29 | The sound? | The same fortepiano, its second player and the mark. The music and every effect are written again for the new pictures, and effects follow what people do: the sliding door, the book handed over, a strip and a form, the call's two notes, a blip for a change and a note sent, the pot in Ivy's hands, the marker on the board and the pens in the notebooks where the film writes them. People's steps and the chalk have no sound. `quiet.py` passes. | The score (`tools/score.py`) |
+| 30 | How is Novak said? | "Noh-vak", the one spelling every film now gives the voice. The line "Helena Novak, the data manager, doesn't hand her a list of goals." was voiced again, 0.02 s longer, and the film leaves the list of films still to voice again (`site-tools/voice_later.json`). | Chapter 2 |
+| 31 | Length and pace? | 8:08.5, 130 words a minute, the first version's lines and pauses: the new pictures were made to fit them, every page written and left to be read inside the time its lines already had. | The whole film |
+| 32 | The Spanish? | The captions' words are the same, timed again to the voice; the page and Pause and think don't change. | The Spanish captions |
+| 33 | Merge now, or wait for you? | Merged on green, squashed, with the series' Draft label, as you chose for the series' films on 17 November, after films 2 and 3 of the series. A review page with the first version beside this one can be made on request. | This pull request |

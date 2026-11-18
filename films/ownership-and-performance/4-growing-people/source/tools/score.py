@@ -19,12 +19,20 @@
 #    bed under the voice; a figure never played again soon after itself; the music and the effects no louder than the governance films'.
 #  - Nothing trembles or pulses: each note steady, its partials harmonic, no detuned unisons; each damped before it would ring into the
 #    next chapter. No urgent pulse: nothing in the film is a rush.
-#  - Every sound is an event on screen, at the moment it appears. Each one below uses the same word and offset as the picture in
-#    src/gp_scenes.js, and pans to where it is drawn, so sound and picture stay together when the voice is re-timed.
+#  - Every sound is something a person does or something that comes in on screen, at that moment: a door slid open or shut, a book
+#    or a sheet passed from hand to hand, the seedling's pot in Ivy's hands, a card that says where and when, a mark on a screen, a
+#    call that comes up and Graham joining it, a change or a message sent, Carmen's marker on her boards and a pen in the notebooks.
+#    Each one below uses the same word and offset as the picture in src/gp_scenes.js, and pans to where it is drawn, so sound and
+#    picture stay together when the voice is re-timed. People's steps and what they say have no sound of their own: the voice carries
+#    them. The chalk on the classroom's blackboard has none either (no school bell or chalk).
+#  - What a hand writes is paced by the film (PK.pace): a row waits until Carmen has walked to it, and a stroke until the pen has
+#    crossed to it. So the marker's and the pen's sounds ask the film when each row is written (the people kit's tools/pens.py),
+#    and take no word's time: PEN, below. A page is heard only while it is on screen.
 # And everything stays soft and below about 2.4 kHz; the effects about 12 dB under the music.
 
 import json as _json, pathlib as _pl
 from scipy.signal import fftconvolve
+import pens
 _obj = lambda f: (lambda s: _json.loads(s[s.index('{'):s.rindex('}') + 1]))((_pl.Path('src') / f).read_text())
 _NARR, _DUR = _obj('narration.js'), _obj('vodur.js')
 def W(sid, lid, word, off=0):
@@ -34,10 +42,18 @@ def W(sid, lid, word, off=0):
     assert (i == 0 or not s[i - 1].isalnum()) and (j == len(s) or not s[j].isalnum()), \
         'the first "%s" in %s/%s is inside a longer word' % (word, sid, lid)
     return G(sid, lid) + _DUR[sid + '/' + lid] * i / len(s) + off
+def E_(sid, lid, off=0):
+    """when a line of the voice ends, as the film's sc.ends has it"""
+    return G(sid, lid) + _DUR[sid + '/' + lid] + off
 def px(x):
     """where something drawn at x (in the 1920 px frame) sits in the stereo field"""
     return max(-0.85, min(0.85, (x - 960) / 960 * 0.9))
-R1 = np.random.default_rng(1872)  # this film's own randomness: the room, the paper, the floor
+R1 = np.random.default_rng(1872)  # this film's own randomness: the room, the paper, the wood
+# every stroke of Carmen's two boards and of the five pages of notes (Ivy's, and once Helena's), as the film writes them: the chapter,
+# who writes at the board (None: a page), and the film's function that gives the rows (src/gp_uni.js)
+PEN = pens.written({'A': ('tuesday', 'carmen', 'gp_boardA'), 'B': ('tuesday', 'carmen', 'gp_boardB'),
+                    'N1': ('goals', None, 'gp_note1'), 'N2': ('tuesday', None, 'gp_note2'), 'N3': ('both', None, 'gp_note3'),
+                    'N4': ('next', None, 'gp_note4'), 'N5': ('monday', None, 'gp_note5')})
 
 # ---- tuning: just intonation from B flat, so a chord's notes are whole-number ratios of each other and nothing beats
 _JI = {0: 1, 1: 16 / 15, 2: 9 / 8, 3: 6 / 5, 4: 5 / 4, 5: 4 / 3, 6: 45 / 32, 7: 3 / 2, 8: 8 / 5, 9: 5 / 3, 10: 9 / 5, 11: 15 / 8}
@@ -159,250 +175,249 @@ def _hump(x, sec, p=2.0):
 def _thud(n, f, d, at=0):
     x = np.arange(n) / SR - at; on = np.where(x >= 0, 1.0, 0.0); x = np.maximum(x, 0)
     return (np.sin(2 * np.pi * f * x) + 0.3 * np.sin(2 * np.pi * f * 2.1 * x) * np.exp(-x / (0.5 * d))) * np.exp(-x / d) * np.minimum(1, x / 0.0015) * on
+def _tone(n, f, at, d):
+    """a soft, round note inside a sound n samples long: a sine with a little of its octave, gone in d"""
+    x = np.arange(n) / SR - at; k = np.where(x >= 0, 1.0, 0.0); x = np.maximum(x, 0)
+    return (np.sin(2 * np.pi * f * x) + 0.22 * np.sin(2 * np.pi * 2 * f * x)) * np.minimum(1, x / 0.006) * np.exp(-x / d) * k
 
-def pin(s, g=0.0045, pan=0.0):
-    """a sheet put up: a soft flap of paper, and the small press of its pin"""
+def card(s, g=0.0035, pan=0.0):
+    """a card that says where and when: a soft flap of paper, and its faint landing"""
     n = int(0.17 * SR); x = np.arange(n) / SR
     fl = filt(noise(0.19)[:n], 'band', (420, 1700)) * _hump(x, 0.06) * (x < 0.06)
     _fx(fl + 0.5 * _thud(n, 180, 0.014, 0.07), s, g, pan, 1800)
-def tag(s, g=0.004, pan=0.0):
-    """a tag or a pill set in place: one soft, short tap"""
+def tap(s, g=0.0035, pan=0.0):
+    """something small set in a hand or marked on a screen: the seedling's pot, a cross or a tick: one soft, short tap"""
     n = int(0.08 * SR); x = np.arange(n) / SR
     _fx(filt(noise(0.1)[:n], 'band', (300, 1100)) * np.exp(-x / 0.006) + 0.6 * _thud(n, 230, 0.011), s, g, pan, 1500)
-def steps(s, n=4, g=0.0035, pan0=0.0, pan1=0.0, gap=0.42):
-    """someone walking in: a few soft footfalls on a wooden floor, each low, with the boards' short ring"""
-    for i in range(n):
-        m = int(0.14 * SR); x = np.arange(m) / SR
-        _fx(_thud(m, 120, 0.024) + 0.25 * filt(noise(0.16)[:m], 'band', (180, 520)) * np.exp(-x / 0.012), s + gap * i, g,
-            pan0 + (pan1 - pan0) * i / max(1, n - 1), 900)
-def pencil(s, sec=0.6, g=0.0045, pan=0.0, n=3):
-    """a pencil on paper, a stroke at a time"""
+def door(s, sec=0.75, g=0.004, pan=0.0):
+    """a wooden door slid along its groove: a low, dry rumble of wood on wood that eases off, and the small knock as it stops"""
+    n = int((sec + 0.12) * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.14)[:n], 'low', 18); gr = 0.7 + 0.3 * gr / max(1e-9, float(np.abs(gr).max()))
+    rub = filt(noise(sec + 0.14)[:n], 'band', (110, 640)) * _hump(x, sec, 0.8) * gr
+    _fx(rub + 0.7 * _thud(n, 150, 0.02, sec - 0.02), s, g, pan, 1100)
+def paper(s, sec=0.3, g=0.0035, pan=0.0):
+    """a sheet or a book lifted, turned or taken from a hand: one soft rustle"""
+    n = int(sec * SR); x = np.arange(n) / SR
+    _fx(filt(noise(sec + 0.02)[:n], 'band', (380, 1500)) * _hump(x, sec, 1.4), s, g, pan, 1700)
+def given(s, g=0.004, pan=0.0):
+    """a book taken from a hand: the soft press of its cover, and a little of its pages"""
+    n = int(0.22 * SR); x = np.arange(n) / SR
+    _fx(_thud(n, 165, 0.02) + 0.35 * filt(noise(0.24)[:n], 'band', (350, 1300)) * _hump(x, 0.12, 1.5), s, g, pan, 1400)
+def slide(s, sec=0.9, g=0.0032, pan=0.0):
+    """something drawn out or moved along: a notebook turned round on a table, a line through words, the route's boxes as they come:
+    a dry, even rub that eases off"""
+    n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 25); gr = 0.75 + 0.25 * gr / max(1e-9, float(np.abs(gr).max()))
+    _fx(filt(noise(sec + 0.02)[:n], 'band', (450, 1600)) * _hump(x, sec, 1.2) * gr, s, g, pan, 1800)
+def pen(s, sec=0.7, g=0.0042, pan=0.0, n=3):
+    """a pen's soft scratch on paper, a stroke at a time"""
     for i in range(n):
         d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
         gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 50)); gr = gr / max(1e-9, float(gr.max()))
-        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1900)) * _hump(x, d, 0.7) * (0.35 + 0.65 * gr), t, g, pan, 2000)
-def tick(s, g=0.0045, pan=0.0):
-    """a tick or a cross drawn: two quick strokes of a pencil"""
-    pencil(s, 0.22, g, pan, 2)
-def book(s, g=0.005, pan=0.0):
-    """a book laid on the table: a dull, soft landing, and its pages settling"""
-    n = int(0.3 * SR); x = np.arange(n) / SR
-    _fx(_thud(n, 105, 0.03) + 0.3 * filt(noise(0.32)[:n], 'band', (300, 1200)) * _hump(x, 0.16, 1.5), s, g, pan, 1300)
-def rows(s, sec=1.4, g=0.003, pan=0.0):
-    """many small things coming in at once (the schools, the teams, the weeks): one soft hush of paper that swells and fades, never a
-    burst of taps"""
-    n = int(sec * SR); x = np.arange(n) / SR
-    _fx(filt(noise(sec + 0.02)[:n], 'band', (300, 1400)) * _hump(x, sec, 1.6), s, g, pan, 1500)
-def rule(s, sec=1.0, g=0.003, pan=0.0):
-    """a line drawn with a pencil and a rule: an even, dry rub that eases off"""
-    n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 25); gr = 0.75 + 0.25 * gr / max(1e-9, float(np.abs(gr).max()))
-    _fx(filt(noise(sec + 0.02)[:n], 'band', (500, 1700)) * _hump(x, sec, 1.2) * gr, s, g, pan, 1800)
-def block(s, g=0.004, pan=0.0):
-    """a wooden block set down on the floor: one round, low knock"""
-    n = int(0.2 * SR)
-    _fx(_thud(n, 140, 0.03) + 0.4 * _thud(n, 310, 0.012), s, g, pan, 1100)
+        _fx(filt(noise(d + 0.02)[:m], 'band', (650, 2000)) * _hump(x, d, 0.7) * (0.35 + 0.65 * gr), t, g, pan, 2100)
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _hump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def written(name, hand, g, shown, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row of words and each long mark, a word at a
+    time, where the film writes it, while the board or the page is on screen (shown: the spans of the film's seconds when it is).
+    A dot, a tick and an arrow's head are too short to sound. A row written while another shot is on screen is named, and silent:
+    on Ivy's second page, what she did and what it changed, written as Helena says them in the corner"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if not any(a <= k['t0'] and k['t1'] <= b + 0.3 for a, b in shown):
+            print('  %s: "%s", written at %.1f s while another shot is on screen, makes no sound' % (name, k['s'], k['t0']))
+        elif d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def ring(s, g=0.0022, pan=0.0):
+    """a call that comes up on a screen: two soft, round notes, the second a fourth above the first, each gone in a fifth of a second"""
+    n = int(0.6 * SR)
+    _fx(_tone(n, hz(F4), 0.0, 0.09) + _tone(n, hz(Bb4), 0.17, 0.11), s, g, pan, 1800)
+def joined(s, m, g=0.002, pan=0.0):
+    """someone joins a call: one soft, round note"""
+    n = int(0.4 * SR)
+    _fx(_tone(n, hz(m), 0.0, 0.1), s, g, pan, 1800)
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a change or a message sent (up), or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+CL, CR = px(290), px(1630)   # where a card sits: on the left, under the series' tag, or on the right
 
 # =============================================================================================================================
-# 1. Watching the children: the opening. Japan, 1872: a low B flat in the empty room, B flat major for the new schools, and the mark, small
-#    and alone in the treble, as the children come in. Teaching, new work: F major. 1877, schools across Japan: G minor under the four in
-#    ten; E flat major under the lesson nobody sees; the mark breaks off before its last note as the lesson loses the children; G minor,
-#    low. Nothing under "Something had to change". Opened: the visitors' footsteps, and B flat major, open; groups: E flat major; the
-#    camera goes in close, and the mark again, with the second player under it; the reflection: F major; lesson study: B flat major in the
-#    middle. The cycle, a note at each step; today: B flat major, fuller; the book: E flat; the trial's fractions, a short figure; the
-#    benefit: the mark, whole. The new analyst alone: G minor; how people grow, three notes; and under the title card, the mark over
-#    B flat major, held, damped before the next chapter
+# 1. Watching the children: the opening. Japan, 1872: a low B flat in the empty room; the sliding door, as the teacher comes in; B flat
+#    major for the new schools, and the mark, small and alone in the treble, as the children look up from their slates. Teaching, new
+#    work: F major. 1877, schools across Japan: G minor under the one teacher; E flat major under the lesson nobody sees; the mark
+#    breaks off before its last note as the lesson loses the children; G minor, low, as nobody learns why. The door slides open again
+#    and the visitors come in: B flat major, open; groups: E flat major; the camera goes in close to the girl, and the mark again, with
+#    the second player under it; the talk afterwards: F major; Mr Okada in at the door, and lesson study: B flat major in the middle.
+#    The cycle, a note on each step as the voice names it; today: B flat major, fuller; the book handed over: E flat; the trial's
+#    fractions, a short figure; the girl's folded strip, and the benefit: the mark, whole. The new analyst alone, and the grade handed
+#    over: G minor; how people grow, three notes; and under the title card, the mark over B flat major, held, damped before the next
+#    chapter. The chalk on the board has no sound
 LV[0] = 0.85
 lw = lambda lid, word, off=0: W('lesson', lid, word, off)
 lc = lambda lid, off=0: G('lesson', lid, off)
 END = E('lesson')
 lo(Bb1, 0.4, 0.8, None, 1.4)
+door(0.42, 0.75, 0.004, px(260)); door(5.22, 0.75, 0.0036, px(260))
 chord((Bb2, F3, Bb3, D4), lw('when', 'Japan', 0.0), 0.6, step=0.15, ring=2.4)
-pin(lw('when', 'Japan', -0.2), 0.004, px(295))
+card(lc('when', -0.2), 0.0035, CL)
 mark(lw('when', 'child', -0.1), 0.5, step=0.2, last=1.4)
-pin(lc('new', 0.1), 0.004, px(295))
 chord((F2, C3, F3, A3), lw('new', 'Teaching', 0.0), 0.5, step=0.14, ring=1.8)
-tag(lw('new', 'subjects', -0.1), 0.003, px(295)); tag(lw('new', 'few', -0.1), 0.003, px(295))
-# 1877: the schools, a hush as they come in; G minor under the single teacher; a tag for each share
-pin(lc('alone', 0.0), 0.004, px(960))
-rows(lc('alone', 0.2), 1.4, 0.003, px(960))
+# 1877: G minor under the single teacher, as the card says how many schools had one
+card(lc('alone', 0.1), 0.0035, CL)
 chord((G2, D3, G3, Bb3), lw('alone', 'teacher', -0.1), 0.5, step=0.16, ring=2.0)
-tag(lw('alone', 'teacher', 0.0), 0.0035, px(960)); tag(lw('alone', 'classroom', 0.0), 0.0035, px(960))
 # the teacher alone: the questions over the children, the second player's low D; nobody sees the lesson: E flat major
 lo(D2, lw('see', 'understood', -0.3), 0.55, None, 0.8)
-tag(lw('see', 'nobody', -0.1), 0.0035, px(280))
 chord((Eb2, Bb2, Eb3, G3), lw('see', 'nobody', 0.1), 0.45, step=0.18, ring=1.6)
 # the lesson loses the children: the mark breaks off before its last note; G minor, low, as nobody learns why
 figure((Bb4, C5, D5), lw('lost', 'loses', 0.0), 0.45, step=0.26, ring=0.4, last=0.5)
-tag(lw('lost', 'behind', -0.2), 0.0035, px(1650)); tag(lw('lost', 'never', -0.2), 0.0035, px(1650))
 chord((G2, D3, G3, Bb3), lw('lost', 'why', 0.2), 0.45, step=0.2, ring=1.5)
-# the classroom opened: the visitors' footsteps from both sides, and B flat major, open
-walkT = lw('open', 'opened', -0.2)
-steps(walkT + 0.1, 4, 0.003, px(40), px(300), 0.42); steps(walkT + 0.5, 4, 0.003, px(1880), px(1620), 0.42)
+# the classroom opened: the door slides open and the visitors come in; B flat major, open; the door shut behind them
+door(lc('open', -0.5), 0.75, 0.004, px(260))
 chord((Bb1, F2, Bb2, D3, F3, Bb3), lw('open', 'opened', 0.1), 0.55, step=0.2, ring=2.6)
-tag(lw('groups', 'watching', -0.3), 0.003, px(300)); tag(lw('groups', 'groups', -0.2), 0.003, px(300))
 chord((Eb2, Bb2, Eb3, G3), lw('groups', 'together', 0.1), 0.45, step=0.14, ring=1.6)
-# the camera goes in close to the children: the mark again, the second player under it; what the visitors look for, a tag each
+door(lc('groups', 0.82), 0.75, 0.0036, px(260))
+# the camera goes in close to the children, and the visitor bends by the girl: the mark again, the second player under it
 mark(lc('watch', 0.3), 0.42, step=0.22, last=1.4, bass=((Bb2, 0, 0.9),))
-for wd in ('answered', 'interested', 'questions'):
-    tag(lw('watch', wd, -0.2), 0.003, px(1290))
-# after the lesson: F major; what the children learned, where they got stuck; lesson study: B flat major in the middle
+# after the lesson, in the empty room: F major; Mr Okada in at the door; lesson study: B flat major in the middle
 chord((F2, C3, F3, A3), lc('after', 0.1), 0.45, step=0.14, ring=1.6)
-tag(lw('after', 'learned', -0.2), 0.0032, px(560)); tag(lw('after', 'stuck', -0.2), 0.0032, px(1360))
-pin(lc('study', 0.1), 0.004, px(960)); tag(lw('study', 'Japanese', -0.6), 0.003, px(960))
+tE = lc('study', -0.5)
+door(tE + 0.42, 0.75, 0.004, px(260)); door(tE + 3.22, 0.75, 0.0036, px(260))
 chord((Bb2, F3, Bb3, D4, F4), lw('study', 'lesson', 0.0), 0.5, step=0.12, ring=2.0)
-# the cycle drawn, and a note of B flat major at each step as it lights: goal, plan, teach, improve
-rule(lc('cycle', 0.0), 2.2, 0.0028, px(960))
+card(lc('study', 2.4), 0.0035, CL)
+# the cycle on the board, and a note of B flat major at each step as the voice names it: goal, plan, teach, improve
 for lid, word, m in (('cycle', 'goal', Bb3), ('cycle', 'plan', D4), ('teach', 'teaches', F4), ('teach', 'improve', Bb4)):
     fp(m, lw(lid, word, -0.1), 0.45, None, 1.0)
 # today: 99 in 100, B flat major, fuller
-pin(lw('spread', 'ninety', -0.3), 0.004, px(305))
+card(lw('spread', 'Today', -0.2), 0.0035, CL)
 chord((Bb1, F2, Bb2, F3, Bb3, D4), lw('spread', 'ninety', 0.0), 0.55, step=0.14, ring=2.2)
-# the book laid down, its sheet; E flat major as it carries lesson study to many countries
-book(lc('world', 0.0), 0.0045, px(635)); pin(lw('world', 'book', -0.2), 0.004, px(1200))
+# the book handed to a colleague; E flat major as it carries lesson study to many countries
+card(lc('world', 0.2), 0.0035, CL)
+given(lw('world', 'book', 0.7), 0.004, px(500))
 chord((Eb3, G3, Bb3, Eb4), lw('world', 'countries', 0.0), 0.45, step=0.12, ring=1.6, low=False)
-# the trial: its sheet, the 39 teams as one hush; some, with research on fractions: the strip's sheet, and a short figure of F major
-pin(lc('trial', 0.0), 0.004, px(620)); rows(lw('trial', 'thirty', -0.2), 1.6, 0.0028, px(1460))
-tag(lw('some', 'Some', -0.1), 0.003, px(620))
-pin(lw('some', 'fractions', -0.2), 0.004, px(1420))
+# the trial: some teams with research on fractions, a short figure of F major
+card(lc('trial', 0.2), 0.0035, CL)
 figure((F4, A4, C5), lw('some', 'fractions', 0.0), 0.4, step=0.16, ring=0.5, last=1.0)
-# their students understood fractions better: the mark, whole, the benefit
-pin(lw('fractions', 'fractions', -0.3), 0.004, px(620)); tag(lw('fractions', 'another', -0.2), 0.003, px(620))
+# their students understood fractions better: the girl holds up her strip, folded in thirds; the mark, whole, the benefit
+card(lc('fractions', 0.4), 0.0035, CL)
+paper(lc('fractions', 0.4), 0.3, 0.0035, px(900))
 mark(lw('fractions', 'better', 0.1), 0.5, step=0.2, last=1.6, bass=((Bb2, 0, 0.6), (F2, 3, 1.0)))
-# at work, alone: G minor; nobody sees her work, a grade once a year
+# at work, alone: G minor; once a year, her manager hands her a grade
 chord((G2, D3, G3, Bb3), lc('data', 0.2), 0.45, step=0.18, ring=1.6)
-tag(lw('data', 'nobody', -0.1), 0.0032, px(960)); tag(lw('data', 'once', -0.1), 0.0032, px(960))
-# how people grow: goals, feedback, a next step, a pill and a note each
+paper(lw('data', 'once a year', -0.8) + 2.8, 0.3, 0.0035, px(990))
+# how people grow: goals, feedback, a next step, a note each
 for word, m in (('goals', Bb3), ('feedback', D4), ('next', F4)):
-    tag(lw('grow', word, -0.2), 0.003, px(960)); fp(m, lw('grow', word, -0.1), 0.42, None, 1.0)
+    fp(m, lw('grow', word, -0.1), 0.42, None, 1.0)
 # the title card: the mark over B flat major, held, damped before the next chapter
 mark(lc('breath', 0.5), 0.5, step=0.22, last=3.4, bass=((Bb1, 0, 3.4), (F2, 0, 3.2)), until=END)
 chord((Bb2, F3, Bb3, D4), lc('breath', 0.5 + 0.66), 0.42, step=0.0, ring=3.0, until=END, low=False)
 
-# 2. Goals of her own: Ivy walks in, and B flat major at the chapter's turn; Helena's footsteps; her goals written, a pencil stroke for
-#    each, and a rising fourth as they're agreed; like the teachers, she chose: the mark, small, in the treble; the first goal met: a tick,
-#    and B flat major
+# 2. Goals of her own: Ivy walks in to her new desk, and B flat major at the chapter's turn; the cards for her first day and for the
+#    Friday; Ivy turns her notebook round for Helena, and a rising fourth as they agree the goals; her pen as she writes each one; the
+#    call that comes up on her screen, and a note as Graham joins it; her pen again as she notes his question; like the teachers, she
+#    chose: the mark, small, in the treble; the first goal met: she holds up the page, the route comes box by box, and B flat major
 LV[0] = 0.9
 gw = lambda lid, word, off=0: W('goals', lid, word, off)
 gc = lambda lid, off=0: G('goals', lid, off)
-steps(S0('goals') + 0.4, 4, 0.003, px(-100), px(480), 0.42)
 chord((Bb2, F3, Bb3, D4), S0('goals') + 0.3, 0.45, step=0.14, ring=1.6)
-pin(gw('join', 'Ivy', -0.2), 0.004, px(1260)); tag(gw('join', 'job', -0.4), 0.003, px(1260)); tag(gw('join', 'statistics', -0.3), 0.003, px(1260))
-steps(gc('helena', -0.3), 4, 0.003, px(1920), px(1420), 0.42)
-tag(gw('helena', 'list', -0.2), 0.0035, px(970))
-pin(gc('write', 0.0), 0.004, px(1280))
-tag(gw('write', 'Friday', -0.2), 0.0035, px(1570))
+card(gw('join', 'Monday', -0.3), 0.0035, CL)
+gF = gw('write', 'On Friday', -0.5)
+card(gF + 0.3, 0.0035, CR)
+slide(gF + 1.2, 0.8, 0.003, px(980))
 figure((F4, Bb4), gw('write', 'Friday', 0.0), 0.42, step=0.2, ring=0.5, last=1.2)
-for lid in ('route', 'pr', 'own'):
-    pencil(gc(lid, 0.0), 0.6, 0.004, px(1280), 3)
-pin(gw('real', 'Graham', -0.3), 0.004, px(590)); tag(gw('real', 'rooms', -0.2), 0.003, px(590))
-pin(gc('hers', 0.0), 0.004, px(560)); pin(gw('hers', 'measures', -0.2), 0.004, px(1360))
-tag(gw('hers', 'targets', -0.3), 0.0035, px(1360))
-tag(gw('teachers', 'teachers', -0.2), 0.0035, px(560))
+gN, gR, gH, gL = gc('route', -0.6), gc('real', -0.5), gc('hers', -0.5), gc('teachers', -0.5)
+written('N1', pen, 0.0042, [(gN, gR), (gH, gL)])
+gG, gq = gw('real', 'question', -0.3), gw('real', 'teaching rooms', -1.0)
+ring(gR + 0.4, 0.0022, px(260))
+joined(gG, Bb4, 0.002, px(260))
+pen(gq + 1.7, 1.1, 0.004, px(475), 3)
 mark(gw('teachers', 'chose', 0.0), 0.42, step=0.2, last=1.2)
-pin(gw('met', 'route', -0.4), 0.004, px(1370))
-rule(gw('met', 'decision', -0.2), max(0.8, gw('met', 'sensors', 0) - gw('met', 'decision', -0.2) + 0.4), 0.0028, px(1370))
-tick(gw('met', 'met', -0.2), 0.0045, px(480))
+card(gw('met', 'Thursday', -0.3), 0.0035, px(1410))
+paper(gc('met', 1.9), 0.3, 0.0035, px(700))
+slide(gw('met', 'whole route', -0.2), 2.8, 0.0028, px(570))
 chord((Bb2, F3, Bb3, D4, F4), gw('met', 'met', 0.0), 0.45, step=0.12, ring=1.8, until=E('goals'))
 
-# 3. Every Tuesday: E flat major at the turn, the one-to-one; the 600 results, the bar drawn, G minor where feedback made the work worse;
-#    the task and the person, the arrow; the three parts; Tuesday 13 April: B flat major on its impact; Radical Candor: F major; Tuesday
-#    25 May: G minor, small, on the rushed review; ask when it works: a rising third; small and often: the weeks, one hush, and B flat major
+# 3. Every Tuesday: E flat major at the turn, the one-to-one; Carmen's marker on her board as she writes what research found, G minor
+#    where feedback made the work worse; Ivy's pen as she keeps the three parts; Tuesday 13 April: the week before, a cross and two
+#    ticks on her screen, and B flat major on its impact; "you're brilliant" struck through; Radical Candor, on Carmen's second board:
+#    F major; Tuesday 25 May: her change sent after four days, and G minor, small, on the rushed review; ask when it works: a rising
+#    third; small and often: her pen, and B flat major
 LV[0] = 0.9
 tw = lambda lid, word, off=0: W('tuesday', lid, word, off)
 tc = lambda lid, off=0: G('tuesday', lid, off)
 chord((Eb2, Bb2, Eb3, G3), S0('tuesday') + 0.2, 0.45, step=0.16, ring=1.6)
-pin(tw('meet', 'Tuesday', -0.2), 0.004, px(960)); tag(tw('meet', 'status', -0.2), 0.0035, px(960))
-pin(tc('kluger', 0.0), 0.004, px(690)); tag(tw('kluger', 'Avraham', 0.0), 0.003, px(690))
-rule(tw('third', 'helped', -0.3), 0.8, 0.0028, px(700)); tag(tw('third', 'helped', 0.0), 0.003, px(480))
+card(tc('meet', 0.3), 0.0035, CL)
+tK, tN, tA = tc('kluger', -0.6), tw('sbi', 'three parts', -0.8), tc('april', -0.5)
+tS, tY, tO = tc('scott', -0.5), tc('may', -0.5), tc('works', -0.6)
+written('A', marker, 0.004, [(tK, tN)])
 chord((G2, D3, G3, Bb3), tw('third', 'third', -0.1), 0.42, step=0.18, ring=1.5)
-tag(tw('third', 'third', 0.05), 0.003, px(1410))
-tag(tc('person', 0.2), 0.0035, px(560))
-rule(tw('person', 'person', -0.3), 0.8, 0.0028, px(950)); tag(tw('person', 'person', 0.25), 0.0035, px(1360))
-pin(tc('sbi', 0.2), 0.004, px(960))
-for wd, x in (('situation', 380), ('behaviour', 940), ('impact', 1500)):
-    pin(tw('sbi', wd, -0.3), 0.0035, px(x))
-tag(tw('sbi', 'Center', -0.2), 0.003, px(960))
-tag(tc('april', 0.0), 0.003, px(960))
-pin(tw('april', 'Wednesday', -0.3), 0.0035, px(380)); pin(tw('april', 'checked', -0.3), 0.0035, px(940)); pin(tw('counts', 'counts', -0.4), 0.0035, px(1500))
+written('N2', pen, 0.0042, [(tN, tA), (tO, E('tuesday'))])
+card(tc('april', 0.1), 0.0035, CL)
+tV = tw('april', 'reviewing', -0.3)
+card(tV + 0.2, 0.0035, CR)
+tap(tV + 0.8, 0.0032, px(360)); tap(tw('april', "Graham's", -0.2), 0.0032, px(360)); tap(tw('counts', 'people', -0.2), 0.0032, px(360))
 chord((Bb2, F3, Bb3, D4), tw('counts', 'counts', 0.0), 0.45, step=0.14, ring=1.6)
-tag(tw('not', 'brilliant', -0.4), 0.0035, px(960)); tag(tw('not', 'brilliant', 0.0), 0.003, px(960))
-tag(tw('not', 'did', -0.2), 0.0032, px(700)); tag(tw('not', 'changed', -0.2), 0.0032, px(1220))
-tag(tc('scott', 0.2), 0.003, px(960)); pin(tw('scott', 'Candor', -0.6), 0.004, px(960))
-tag(tw('scott', 'care', -0.2), 0.0032, px(700)); tag(tw('scott', 'challenge', -0.2), 0.0032, px(1220))
+slide(tw('not', 'which is', -0.1), 0.6, 0.003, px(700))
+written('B', marker, 0.004, [(tS, tY)])
 chord((F2, C3, F3, A3), tw('scott', 'directly', 0.1), 0.42, step=0.14, ring=1.4)
-tag(tc('may', 0.0), 0.003, px(960))
-pin(tw('may', 'Last', -0.3), 0.0035, px(380)); pin(tw('may', 'four', -0.6), 0.0035, px(940)); pin(tw('rushed', 'Jun', -0.3), 0.0035, px(1500))
+card(tc('may', 0.1), 0.0035, CL)
+card(tw('may', 'to yourself', -0.1), 0.0035, CL)
+pop(tc('rushed', -0.4), 0.0022, px(560))
 chord((G2, D3, Bb3), tw('rushed', 'rushed', 0.1), 0.4, step=0.16, ring=1.2)
-tag(tw('works', 'works', -0.6), 0.0035, px(960))
 figure((D4, F4), tw('works', 'works', -0.4), 0.42, step=0.22, ring=0.5, last=1.1)
-rows(tc('fresh', 0.0), 2.0, 0.0028, px(830))
-tag(tw('fresh', 'often', -0.3), 0.003, px(830)); tag(tw('fresh', 'year', -0.8), 0.003, px(1430))
-tick(tw('fresh', 'year', -0.2), 0.0045, px(1500))
 chord((Bb2, F3, Bb3, D4), tw('fresh', 'often', 0.0), 0.42, step=0.1, ring=1.4, until=E('tuesday'))
 
-# 4. Both ways: F major at the turn; Helena asks, Ivy tells her, a sheet each; thank you: a falling sixth that lands; lesson study,
-#    planned together: E flat major; the University Council and Graham's note: B flat major; who did each part: a note of F major for
-#    each name; the team's credit, in public: B flat major, full
+# 4. Both ways: F major at the turn, as Helena asks; Ivy tells her, and Helena's thanks: a falling sixth that lands; her pen in her own
+#    notebook; lesson study, planned together: E flat major; the University Council, and Graham's note sent from his phone: B flat
+#    major; who did each part: a note of F major as each one's tag comes; the team's credit, in public: B flat major, full
 LV[0] = 0.9
 bw = lambda lid, word, off=0: W('both', lid, word, off)
 bc = lambda lid, off=0: G('both', lid, off)
 chord((F2, C3, F3, A3), S0('both') + 0.2, 0.42, step=0.14, ring=1.5)
-pin(bw('asks', 'feedback', -0.4), 0.004, px(960)); pin(bc('june', 0.1), 0.004, px(960))
-tag(bw('thanks', 'thanks', -0.3), 0.0035, px(960))
+card(bc('june', -0.2), 0.0035, CL)
 figure((Bb4, D4), bw('thanks', 'thanks', -0.1), 0.42, step=0.24, ring=0.5, last=1.2)
-pin(bw('thanks', 'tried', -0.8), 0.004, px(960))
-tag(bw('lesson', 'planned', -0.2), 0.0032, px(560)); tag(bw('lesson', 'talk', -0.2), 0.0032, px(1340))
+written('N3', pen, 0.0042, [(bw('thanks', 'From then', -0.6), bc('lesson', -0.5))])
 chord((Eb2, Bb2, Eb3, G3), bw('lesson', 'together', 0.0), 0.42, step=0.14, ring=1.6)
-pin(bc('council', 0.0), 0.004, px(560)); pin(bw('council', 'Graham', -0.2), 0.004, px(1400))
+card(bc('council', 0.7), 0.0035, CR)
+pop(bw('council', 'writes', 0.2) + 1.8, 0.0022, px(575))
 chord((Bb2, F3, Bb3, D4, F4), bw('council', 'thank', 0.0), 0.45, step=0.12, ring=1.8)
-for wd, x, m in (('route', 700, F3), ('models', 1020, A3), ('sensors', 1340, C4), ('bookings', 1660, F4)):
-    tag(bw('parts', wd, -0.2), 0.003, px(x)); fp(m, bw('parts', wd, -0.1), 0.4, px(x) * 0.4, 0.8)
-tag(bw('credit', 'credit', -0.3), 0.0035, px(960))
+for wd, x, m in (("Ivy's", 570, F3), ("Jun's", 1758, A3), ("Sam's", 1230, C4), ("Mei's", 1530, F4)):
+    fp(m, bw('parts', wd, -0.1), 0.4, px(x) * 0.4, 0.8)
 chord((Bb1, F2, Bb2, D3, F3, Bb3), bw('credit', 'public', 0.1), 0.5, step=0.12, ring=2.0, until=E('both'))
 
-# 5. The next step: her data product, F major; her half year, all three goals met: B flat major; looking forward: E flat major; December,
-#    a low B flat in the evening; analyst, owner, coach: a block set down for each step, the second player's note rising under it, and on
-#    "coach" the mark returned, fuller, in the middle
+# 5. The next step: Helena brings her a seedling in a pot, and it is in her hands: F major, her data product; her half year, all
+#    three goals met: B flat major, and her pen as she looks back and forward; a growth conversation looks forward: E flat major;
+#    December, at dusk, a low B flat; analyst, owner, coach: a tap as each step of her tag lights, the second player's note rising
+#    under it, and on "coach" the mark returned, fuller, in the middle
 LV[0] = 0.9
 nw = lambda lid, word, off=0: W('next', lid, word, off)
 nc = lambda lid, off=0: G('next', lid, off)
-pin(nw('july', 'July', -0.2), 0.004, px(1300))
+card(nw('july', 'Thursday', -0.3), 0.0035, px(1456))
+tap(nw('july', 'Ivy owns', -0.2) + 1.0, 0.0035, px(650))
 chord((F2, C3, F3, A3, C4), nw('july', 'owns', 0.0), 0.45, step=0.12, ring=1.6)
-for wd, off in (('counts', -0.2), ('refreshed', -0.2)):
-    tag(nw('july', wd, off), 0.003, px(1300))
-pin(nc('mid', 0.0), 0.004, px(960))
+card(nc('mid', 0.1), 0.0035, CL)
 chord((Bb2, F3, Bb3, D4, F4), nw('mid', 'met', 0.0), 0.45, step=0.12, ring=1.8)
-pin(nw('well', 'well', -0.4), 0.004, px(530)); pin(nw('well', 'differently', -0.4), 0.004, px(1390))
-pin(nw('wants', 'wants', -0.4), 0.004, px(960)); tag(nw('wants', 'teach', -0.2), 0.003, px(960))
-tag(nc('forward', 0.1), 0.003, px(960))
-tag(nw('forward', 'wants', -0.3), 0.0032, px(640)); tag(nw('forward', 'needs', -0.3), 0.0032, px(1280))
+written('N4', pen, 0.0042, [(nw('mid', 'half year', -0.35), nc('forward', -0.5))])
 chord((Eb3, G3, Bb3, Eb4), nw('forward', 'forward', 0.0), 0.42, step=0.12, ring=1.4, low=False)
-pin(nc('dec', 0.0), 0.004, px(960)); lo(Bb1, nc('dec', 0.1), 0.5, None, 1.0)
-pin(nc('coach', 0.15), 0.004, px(960))
-a0 = nw('steps', 'Analyst', -0.3); span = nw('steps', 'coach', 0.0) + 0.3 - a0
-for i, (m, x) in enumerate(((Bb1, 560), (F2, 960), (Bb2, 1360))):
-    block(a0 + span * i / 3 + 0.05, 0.004, px(x)); lo(m, a0 + span * i / 3 + 0.08, 0.6, None, 0.6)
+card(nc('dec', 0.1), 0.0035, CR); lo(Bb1, nc('dec', 0.1), 0.5, None, 1.0)
+for i, (t, m) in enumerate(((nc('steps', -0.1), Bb1), (nw('steps', 'owner', -0.2), F2), (nw('steps', 'coach', -0.2), Bb2))):
+    tap(t + 0.05, 0.003, px(1300)); lo(m, t + 0.08, 0.6, None, 0.6)
 grown(nw('steps', 'coach', 0.25), 0.5, step=0.26, last=2.2, until=E('next'))
 
-# 6. On Monday: back in a classroom of today, the mark, small, over the second player's B flat; the three things the teachers did, a pill
-#    each; Helena's three; the four things to do on Monday, a sheet each, and B flat major on the last; leading the people who do it:
-#    E flat major; the last line's three pills; and the close: the small mark again, then the mark grown, in the middle, its last chord
-#    held into the end card
+# 6. On Monday: back in a classroom of today, the mark, small, over the second player's B flat; what to do on Monday, in Ivy's
+#    notebook: her pen, and B flat major as she marks the page done; leading the people who do it: E flat major; the next graduate's
+#    first day; and the close: the small mark again, then the mark grown, in the middle, its last chord held into the end card
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
 mark(mc('back', 0.3), 0.42, step=0.2, last=1.2, bass=((Bb2, 0, 0.8),))
-for wd in ('goal', 'eyes', 'better'):
-    tag(mw('way', wd, -0.2), 0.003, px(960))
-for wd in ('goals', 'feedback', 'next'):
-    tag(mw('helena', wd, -0.2), 0.003, px(1390))
-pin(mc('goals', 0.2), 0.004, px(530)); pin(mw('feedback', 'feedback', -0.4), 0.004, px(1390))
-pin(mw('ask', 'Ask', -0.2), 0.004, px(530)); pin(mw('forward', 'Look', -0.2), 0.004, px(1390))
-chord((Bb2, F3, Bb3, D4), mw('forward', 'public', 0.1), 0.42, step=0.12, ring=1.6)
-tag(mw('module', 'Leading', -0.3), 0.003, px(960))
+written('N5', pen, 0.0042, [(mc('goals', -0.6), mc('module', -0.5))])
+chord((Bb2, F3, Bb3, D4), next(k['t0'] for k in PEN['N5'] if k['s'] == 'star'), 0.42, step=0.12, ring=1.6)
 chord((Eb2, Bb2, Eb3, G3), mc('module', 0.3), 0.42, step=0.16, ring=1.8)
-for wd, x in (('goals', 420), ('weekly', 960), ('next', 1500)):
-    tag(mw('take', wd, -0.1), 0.003, px(x))
+card(mc('module', -0.1), 0.0035, CL)
 e0 = mc('breath', 0.6)
 mark(e0, 0.42, step=0.22, last=1.0, until=TOT)
 grown(e0 + 1.3, 0.5, step=0.28, last=4.0, until=TOT)

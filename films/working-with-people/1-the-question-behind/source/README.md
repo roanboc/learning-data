@@ -1,6 +1,6 @@
 # Rebuilding The question behind the request
 
-*The question behind the request*, film 1 of 3 of *Working with people*, the second series of the module *Leading data people*, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, the agent films' kit, and the module's look and tools in [`../../../the-new-skills/shared/`](../../../the-new-skills/shared/), whose [README](../../../the-new-skills/shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `qb_` or `QB_`:
+*The question behind the request*, film 1 of 3 of *Working with people*, the second series of the module *Leading data people*, is generated from code like every other film here. It is drawn with the people kit, *Ink line* ([`../../../people-first/shared/`](../../../people-first/shared/README.md)): whole people in the places where they live, work and meet, the film's ideas written by hand at a board and in notebooks. It was first drawn in the module's *Sunlit plaster* and made again on 18 November 2026, word for word on the voice. Every name it declares starts with `qb_`, `QB_`, `qbp_` or `QBP_`:
 
 | File | What it holds |
 |---|---|
@@ -8,12 +8,12 @@
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. A line whose voice differs from its caption says so in `say`. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The holds after some lines, where an idea needs a moment to land, and the film's wordless moments, such as the title card and the end card. |
-| `src/qb_pisa.js` | The opening story's places and pictures, the leaning tower of Pisa and the work that steadied it, checked against the engineers' own published papers (the script's rigour sheet). |
-| `src/qb_uni.js` | The film's own pictures for the data team's year: the rooms, sheets and screens of the request and the question behind it. The module's kit draws the rooms and people, and is never changed for this film. |
-| `src/qb_scenes.js` | The six chapters, shot by shot, on the module's camera and shots. Every moment is timed to a line's start or to a word in it (`wAt()`), so the pictures stay with the voice when it is recorded again. |
+| `src/qbp_pisa.js` | Pisa from 1990 to 2001, in ink line (prefix `qbp_`): the piazza and the leaning tower, Pavia's fallen tower, the committee's room and its sheet, the site with its drill and lead weights, and the people of Pisa, nobody's likeness; checked against the engineers' own published papers (the script's rigour sheet). |
+| `src/qb_uni.js` | The university in 2027, in the kit's places (the team's room, Graham's corner, the campus, the board seen close, the notebook): who sits where, a screen's callout, the boards' rows and the five pages of notes. |
+| `src/qb_scenes.js` | The six chapters, shot by shot. Every picture has people in it, whole, doing what the line says; the words on screen are where and when, a name, or what someone says, and the ideas are written by hand. Every moment is timed to a line's start or to a word in it (`wAt()`). |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line. |
-| `tools/score.py` | The film's music and sounds: an alto trombone, made here, played plain and soft, each note held level. The mark is a note approached from a little away that settles on its pitch once: the question found. Each sound uses the same word and offset as the picture in `src/qb_scenes.js`: change one, change both. |
-| `tools/` | Each other tool runs the module's tool (`../../../the-new-skills/shared/tools/run.py`) on this film. |
+| `tools/score.py` | The film's music and sounds: an alto trombone, made here, played plain and soft, each note held level. The mark is a note approached from a little away that settles on its pitch once: the question found. Each sound uses the same word and offset as the picture in `src/qb_scenes.js`: change one, change both. The boards' and the notebooks' sounds come from the film itself, as each row is written (the people kit's `tools/pens.py`). |
+| `tools/` | Each other tool runs the people kit's tool (`../../../people-first/shared/tools/run.py`) on this film. |
 
 ## Setup (once)
 

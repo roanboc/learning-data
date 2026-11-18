@@ -937,1603 +937,1963 @@ function ag_about(ctx,x,y,k){ctx.translate(x,y);ctx.scale(k,k);ctx.translate(-x,
 function ag_bz(p,u){const m=1-u;return[m*m*m*p[0]+3*m*m*u*p[2]+3*m*u*u*p[4]+u*u*u*p[6],m*m*m*p[1]+3*m*m*u*p[3]+3*m*u*u*p[5]+u*u*u*p[7]];}
 function ag_bzPath(ctx,p,u0,u1,n){n=n||40;ctx.beginPath();for(let k=0;k<=n;k++){const q=ag_bz(p,lerp(u0,u1,k/n));k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}}
 
-/* ===== What an agent is: the people =====
-   Half-figures, seen from the waist or the chest up, in three-quarter view, matte and softly lit from the window on the right, with
-   an adult's proportions (the author, 3 November 2026: "Keep the bodies with good proportions"):
-     - the head 225 px from crown to chin at s = 1; the eyes halfway down it; hairline, brows, the tip of the nose and the chin split
-       the face into thirds; the ear runs from the brow to the nose;
-     - short hair that follows the skull, never a tall quiff or an oversized head;
-     - a real jaw over a neck about half as wide as the head is tall, ending inside the collar;
-     - the shoulders a third of a head below the chin, and with the arms about two heads across;
-     - a chest that narrows to the waist, arms that hang from the shoulders, soft folds, and a soft shadow where the arm meets the body.
-   The shapes are drawn once in figure space (the style prototype's Jun, x 40 to 500, y 270 to 1100, the head from y 300 to 526,
-   facing right, his right shoulder nearer us) and painted once per person into kept pictures; the eyes, the mouth and any arm that
-   moves are drawn live.
+/* ===== The people kit: Leading data people's own look =====
+   The films of Leading data people are about people, so they draw people first: whole, in a place where they act, meet or move,
+   with faces that react and hands that rest on things, in flat colour with one even ink line (the author asked for "a more cartoon
+   or soft style", easy to design people in and quick to draw, and chose the ink line among four looks, 17 November 2026). Everything is drawn with the plain canvas, in the
+   1920 x 1080 frame: nothing is painted per pixel, blurred or filtered, so a frame takes about a fifth of what the module's first
+   look took, and a place is painted once and kept as a picture (the agent films' kit, AG_PLACES).
+   The kit's files, bundled in this order after The Inner Life of Data's engine and helpers (core.js, style2.js, ui3.js),
+   A Sharper Sketch's scene() (sketch3.js) and the agent films' camera and shots (kit.js):
+     core.js    the helpers, and the looks: how a shape, a line of detail and a shadow are painted
+     people.js  the cast, the poses, the faces, the rig, and a person drawn whole; a walk, a turn, a reach
+     things.js  what people sit at, hold and work with: chairs, tables, desks, screens, mugs, plants, a seedling, a tree
+     words.js   words on the frame: a card, a tag, a name, something said, the kicker, the title and end cards
+     places.js  the university's places, painted once: the team's room, Helena's corner, the campus, a teaching room
+   Each file is closed in a function of its own, so the only name the kit adds to a film is PK; a film's own helpers go in its own
+   source with a prefix of its own. Never change these files for one film.
+   The look is one word: PK.use("line") (ink line, the default and the module's look), "tint" (soft line), "soft" (soft shapes) or
+   "paper" (cut paper). Every film is staged once, for any of them. */
+const PK=(()=>{
+const TAU=Math.PI*2,rad=d=>d*Math.PI/180;
+const lerp=(a,b,t)=>a+(b-a)*t,clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const sine=t=>0.5-0.5*Math.cos(Math.PI*clamp(t,0,1));
+const pin=(t,t0,d)=>sine((t-t0)/(d||0.5));                       // 0 before t0, 1 after t0 + d, eased
+const pio=(t,t0,t1,d)=>pin(t,t0,d)*(1-pin(t,t1,d));              // in at t0, out at t1
+const spring=(t,t0,d)=>{const x=(t-t0)/(d||0.6);if(x<=0)return 0;if(x>=1.6)return 1;return 1-Math.exp(-5.2*x)*Math.cos(7.5*x);};
+const mix=(a,b,t)=>[lerp(a[0],b[0],t),lerp(a[1],b[1],t),lerp(a[2],b[2],t)];
+const dk=(c,k)=>mix(c,[38,26,30],k),lt=(c,k)=>mix(c,[255,250,240],k);
+const css=(c,a)=>a==null||a>=0.999?"rgb("+(c[0]|0)+","+(c[1]|0)+","+(c[2]|0)+")":"rgba("+(c[0]|0)+","+(c[1]|0)+","+(c[2]|0)+","+a+")";
+function rnd(seed){let s=(seed*2654435761)>>>0||1;return()=>{s^=s<<13;s>>>=0;s^=s>>>17;s^=s<<5;s>>>=0;return s/4294967296;};}
+const hash=(a,b)=>{let h=(a*374761393+(b||0)*668265263)>>>0;h=((h^(h>>>13))*1274126177)>>>0;return((h^(h>>>16))>>>0)/4294967296;};
+// deg is from straight down, positive the way the person faces
+const polar=(p,deg,len)=>[p[0]+Math.sin(rad(deg))*len,p[1]+Math.cos(rad(deg))*len];
 
-   ag_person(ctx, who, x, y, s, o) draws a person: who is a name in AG_CAST or a spec like those below; (x, y) is where the neck
-   meets the shoulders, s the size (1: a head 225 px tall); o:
-     t       the chapter's time, for breathing and blinking (each person breathes at their own pace)
-     flip    true to face left (people face right by default)
-     pose    "hang" (arms down, the default), "hold" (the near hand in front of the chest, holding o.hold), or {near: [upper arm,
-             forearm, hand], far: ...} for a hand on a wheel, a switch or a dial, angles in degrees from straight down, positive towards
-             the way the person faces; pose2 and mix blend into a second pose. No gestures: any other name stops a render or a check
-     hold    (ctx, hands) => draws what the near hand holds, in figure space, over the near hand (holdBack: under it); hands.near and
-             hands.far are the wrists (far is null while the far arm hangs), hands.nearElbow the near elbow
-     front   the same as hold, but drawn over the head as well: a thing held up before the face, such as a card hiding the mouth
-     nod     a nod, in radians (the head turns about the top of the neck); gaze [dx, dy] moves the eyes a little; blink 0 to 1
-     talk    0 to 1, the mouth opens; smile 0 to 1
-     cut     a height in the frame: the body is hidden below it (draw a desk first and cut at its back edge: the desk hides the
-             hanging arms)
-     covered true when something drawn over the person hides their waist. People end flat under the waist (figure y 1100, 504 s
-             below the neck), so keep y + 504 s at least 1080 or cover it: a render or a check stops with an error where it shows
-   People of other times: who.top.kind can be "robe" (a crossed collar), "tunic" or "apron" (over a shirt), and who.hat.paint(c, P)
-   or who.top.paint(c, P) paints anything else in figure space, over the body or the head. who.hair.style: "side", "cropped",
-   "coily", "bob", "bun", "long", "shaved". */
+/* a smooth closed (or open) curve through points; a point's third value is how sharp a corner it is: 1 a corner, 0 or none a curve */
+const area=pts=>{let a=0;for(let i=0;i<pts.length;i++){const q=pts[(i+1)%pts.length];a+=pts[i][0]*q[1]-q[0]*pts[i][1];}return a/2;};
+const cw=pts=>area(pts)<0?pts.slice().reverse():pts;      // every closed shape runs the same way round, so shapes in one path join
+function pg(ctx,pts){pts=cw(pts);ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.closePath();}
+function spline(ctx,pts,closed,ten){const n=pts.length;if(n<2)return;closed=closed!==false;ten=ten==null?1:ten;if(closed)pts=cw(pts);
+  const P=i=>pts[closed?(i%n+n)%n:clamp(i,0,n-1)];ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=0,m=closed?n:n-1;i<m;i++){const p0=P(i-1),p1=P(i),p2=P(i+1),p3=P(i+2),t1=ten/6*(1-(p1[2]||0)),t2=ten/6*(1-(p2[2]||0));
+    ctx.bezierCurveTo(p1[0]+(p2[0]-p0[0])*t1,p1[1]+(p2[1]-p0[1])*t1,p2[0]-(p3[0]-p1[0])*t2,p2[1]-(p3[1]-p1[1])*t2,p2[0],p2[1]);}
+  if(closed)ctx.closePath();}
+/* a tapering capsule from A (radius ra) to B (radius rb): a limb's segment */
+function capsule(ctx,A,B,ra,rb){const g=Math.atan2(B[1]-A[1],B[0]-A[0]),h=Math.PI/2;
+  ctx.moveTo(A[0]+Math.cos(g+h)*ra,A[1]+Math.sin(g+h)*ra);ctx.arc(A[0],A[1],ra,g+h,g+3*h);
+  ctx.lineTo(B[0]+Math.cos(g-h)*rb,B[1]+Math.sin(g-h)*rb);ctx.arc(B[0],B[1],rb,g-h,g+h);ctx.closePath();}
+function rrect(ctx,x,y,w,h,r){r=Math.min(r,w/2,h/2);ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+const ell=(ctx,x,y,rx,ry,r)=>{ctx.moveTo(x+rx*Math.cos(r||0),y+rx*Math.sin(r||0));ctx.ellipse(x,y,rx,ry,r||0,0,TAU);ctx.closePath();};
 
-/* ---------------------------------------------------------------- figure space: the prototype's Jun, an adult's proportions */
-const AG_F={
-  // the head turned three-quarters to the right: the far side's outline runs from the forehead past the far brow and cheekbone, round the
-  // tip of the nose (the only feature that passes the cheek) and down the cheek to the chin; the jaw runs back from the chin to below the
-  // ear, which sits well behind the near eye. The eyes, the nose, the mouth and the ear inside it are drawn at the same turn (AG_FACE)
-  head(c){c.moveTo(300,300);c.bezierCurveTo(340,298,372,318,382,350);c.bezierCurveTo(387,366,390,382,390,396);
-    c.bezierCurveTo(390,404,387,410,386,415);c.bezierCurveTo(386,424,390,432,391,440);c.bezierCurveTo(394,446,397,451,397,455);
-    c.bezierCurveTo(397,460,393,463,388,464);c.bezierCurveTo(386,470,386,478,385,486);c.bezierCurveTo(384,498,381,508,377,516);
-    c.bezierCurveTo(373,526,364,531,352,531);c.bezierCurveTo(330,531,302,520,284,506);c.bezierCurveTo(274,498,268,492,264,484);
-    c.bezierCurveTo(258,474,248,464,236,458);c.bezierCurveTo(220,448,208,420,208,388);c.bezierCurveTo(208,352,226,320,256,306);
-    c.bezierCurveTo(270,301,284,300,300,300);c.closePath();},
-  ear(c){c.moveTo(266,404);c.bezierCurveTo(254,393,241,396,238,412);c.bezierCurveTo(235,428,239,446,247,456);c.bezierCurveTo(254,463,263,462,266,452);c.bezierCurveTo(269,438,269,420,266,404);c.closePath();},
-  earIn(c){c.moveTo(259,414);c.bezierCurveTo(249,410,245,422,247,434);c.bezierCurveTo(249,444,254,448,260,444);},
-  // the neck: its top tucked up under the skull with a rounded nape, so a head that nods never shows the neck's top edge
-  neck(c){c.moveTo(286,430);c.bezierCurveTo(258,432,236,446,233,468);c.bezierCurveTo(235,500,236,530,234,566);c.bezierCurveTo(254,602,308,620,358,607);c.bezierCurveTo(350,580,343,552,336,524);c.lineTo(300,470);c.closePath();},
-  torso(c){c.moveTo(232,562);c.bezierCurveTo(200,572,166,584,140,598);c.bezierCurveTo(104,616,88,650,92,700);c.lineTo(120,1100);c.lineTo(414,1100);
-    c.bezierCurveTo(412,1010,414,940,418,870);c.bezierCurveTo(422,800,430,740,430,700);c.bezierCurveTo(430,668,420,642,404,628);
-    c.bezierCurveTo(392,618,378,608,362,603);c.closePath();},
-  farArm(c){c.moveTo(372,606);c.bezierCurveTo(404,612,434,626,450,652);c.bezierCurveTo(466,678,472,724,472,780);c.bezierCurveTo(472,850,468,920,464,960);
-    c.bezierCurveTo(460,1000,456,1050,452,1100);c.lineTo(404,1100);c.lineTo(404,640);c.closePath();},
-  arm(c){c.moveTo(152,600);c.bezierCurveTo(116,604,84,626,72,664);c.bezierCurveTo(64,700,64,770,70,830);c.bezierCurveTo(74,876,80,910,90,936);
-    c.bezierCurveTo(108,980,138,1036,170,1100);c.lineTo(274,1100);c.bezierCurveTo(250,1046,224,1004,208,966);c.bezierCurveTo(196,936,190,890,188,830);
-    c.bezierCurveTo(186,780,190,730,196,700);c.bezierCurveTo(198,664,186,624,168,606);c.closePath();},
-  collar(c){c.moveTo(232,560);c.bezierCurveTo(252,596,308,614,360,601);c.lineTo(364,615);c.bezierCurveTo(306,630,244,614,222,576);c.closePath();},
-  // the torso without its near shoulder: where a raised near arm leaves the side of the body
-  side(c){c.moveTo(150,640);c.bezierCurveTo(120,660,104,690,104,730);c.lineTo(124,1100);c.lineTo(200,1100);c.lineTo(200,640);c.closePath();}
+/* ---------------------------------------------------------------- the looks
+   A look paints a shape (S.fill), a line of detail (S.line) and a flat shadow, and holds how a person is proportioned. A shape is
+   a function that adds its outline to the path; the look decides what an outline is.
+     line   ink line (the default): one even dark line round every form, flat colour
+     tint   soft line: each form lined in a darker tone of its own colour, a soft shade on big forms, a blush
+     soft   soft shapes: rounded flat shapes, no outlines, one soft shade, a blush
+     paper  cut paper: every piece casts a small hard shadow on the piece below, its edges a little uneven */
+const INK=[52,40,44];
+const SKINS={
+  tint:{id:"line",key:"tint",name:"Soft line",ink:[112,76,80],self:0.4,lw:1,shade:true,blush:0.3,
+    prop:{head:184,neck:20,torso:300,thigh:218,shin:210,ankle:40,uarm:150,farm:138,hand:48,shW:94,hipW:43,arm:[58,50,40],leg:[84,66,49],tor:[230,188,208],foot:127},
+    tone:c=>c},
+  soft:{id:"soft",key:"soft",name:"Soft shapes",ink:[70,56,62],lw:0,shade:true,blush:0.34,
+    prop:{head:190,neck:18,torso:300,thigh:212,shin:204,ankle:40,uarm:148,farm:136,hand:50,shW:96,hipW:44,arm:[60,52,42],leg:[88,70,52],tor:[236,196,214],foot:128},
+    tone:c=>c},
+  line:{id:"line",key:"line",name:"Ink line",ink:INK,lw:1,blush:0,
+    prop:{head:172,neck:24,torso:304,thigh:226,shin:218,ankle:40,uarm:152,farm:140,hand:46,shW:92,hipW:42,arm:[54,46,36],leg:[80,62,46],tor:[222,180,200],foot:126},
+    tone:c=>c},
+  paper:{id:"paper",key:"paper",name:"Cut paper",ink:[84,64,60],lw:0,blush:0.62,
+    prop:{head:204,neck:14,torso:292,thigh:204,shin:196,ankle:38,uarm:144,farm:130,hand:52,shW:98,hipW:46,arm:[64,56,46],leg:[92,76,58],tor:[244,208,226],foot:132},
+    tone:c=>mix(c,[214,196,176],0.13)}
 };
-const AG_FIG={anchor:[296,596],box:[30,262,500,1108],piv:[282,480],res:1.5,
-  shoulder:{near:[134,660],far:[428,660]},L1:282,L2:262,w:[122,96,74]};   // arm joints, the upper arm's and forearm's lengths, widths at shoulder, elbow, wrist
-// the face, turned three-quarters like the head (AG_F.head), in figure space: the near eye, wide, and the far eye, narrower and close to
-// the far cheek (x, y, half-width, half-height); the mouth's near corner, middle and far corner, the middle off to the far side as the
-// face turns; the ear's middle and the lobe. Films that draw near the face (a sound leaving the mouth, a coil behind the ear) take
-// their places from here
-const AG_FACE={eyeN:[334,418,4.8,5.6],eyeF:[377,417,3.1,5],mouth:[[350,483],[367,487],[380,481]],mid:[367,484],ear:[252,430],lobe:[253,470]};
-// hair, the shapes; each adds its path, the caller fills
-const AG_HAIR={
-  side(c){c.moveTo(391,352);c.bezierCurveTo(395,326,382,300,352,290);c.bezierCurveTo(320,280,270,282,244,298);
-    c.bezierCurveTo(216,314,203,346,204,382);c.bezierCurveTo(205,414,210,440,218,456);c.bezierCurveTo(224,464,234,464,240,456);
-    c.bezierCurveTo(244,444,244,428,247,412);c.bezierCurveTo(252,398,266,394,274,404);c.lineTo(276,429);c.lineTo(283,429);
-    c.bezierCurveTo(283,404,290,384,302,368);c.bezierCurveTo(327,350,352,342,372,342);c.bezierCurveTo(381,342,387,346,391,352);c.closePath();},
-  cropped(c){c.moveTo(386,350);c.bezierCurveTo(386,326,372,304,346,296);c.bezierCurveTo(316,288,272,290,248,304);
-    c.bezierCurveTo(222,320,210,350,211,384);c.bezierCurveTo(212,414,216,438,222,452);c.bezierCurveTo(228,460,236,460,240,452);
-    c.bezierCurveTo(244,440,244,426,247,414);c.bezierCurveTo(252,402,264,398,272,406);c.lineTo(275,426);c.lineTo(281,426);
-    c.bezierCurveTo(281,404,290,386,302,372);c.bezierCurveTo(326,356,352,350,372,350);c.bezierCurveTo(379,350,383,350,386,350);c.closePath();},
-  coily(c){const pts=[[388,352],[392,326],[378,302],[356,290],[328,282],[296,280],[266,284],[240,296],[220,316],[208,342],[203,372],[206,402],[214,430],[226,452]];
-    c.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,nx=-(b[1]-a[1]),ny=b[0]-a[0],l=Math.hypot(nx,ny)||1;
-      c.quadraticCurveTo(mx-nx/l*7,my-ny/l*7,b[0],b[1]);}
-    c.bezierCurveTo(230,462,238,462,242,452);c.bezierCurveTo(246,440,244,426,247,414);c.bezierCurveTo(252,400,264,396,272,404);c.lineTo(276,428);c.lineTo(283,428);
-    c.bezierCurveTo(283,404,292,384,304,370);c.bezierCurveTo(328,354,354,348,374,349);c.closePath();},
-  bob(c){c.moveTo(392,354);c.bezierCurveTo(396,326,382,298,350,288);c.bezierCurveTo(316,278,266,282,240,298);
-    c.bezierCurveTo(210,318,198,352,200,392);c.bezierCurveTo(202,438,214,478,232,506);c.bezierCurveTo(250,528,286,532,310,518);
-    c.bezierCurveTo(300,500,294,470,296,440);c.bezierCurveTo(298,404,306,378,320,362);c.bezierCurveTo(336,348,358,346,378,348);c.bezierCurveTo(385,349,389,351,392,354);c.closePath();},
-  bun(c){AG_HAIR.cropped(c);},
-  knot(c){c.arc(222,318,38,0,TAU);},
-  long(c){AG_HAIR.bob(c);},
-  longBack(c){c.moveTo(212,350);c.bezierCurveTo(192,420,190,500,196,560);c.bezierCurveTo(200,600,190,640,172,676);c.bezierCurveTo(220,700,286,690,330,652);
-    c.bezierCurveTo(320,600,300,540,290,500);c.lineTo(250,420);c.closePath();},
-  shaved(c){}
+// a person's parts as shares of their height: head + neck + torso + thigh + shin + ankle is 1000
+const norm=p=>{const t=p.head+p.neck+p.torso+p.thigh+p.shin+p.ankle,f=1000/t,o={};for(const j in p)o[j]=Array.isArray(p[j])?p[j].map(v=>v*f):p[j]*f;return o;};
+for(const k in SKINS)SKINS[k].prop=norm(SKINS[k].prop);
+
+/* S.begin(ctx, o): start drawing a thing. o.lw: the line's width here, o.sh: how far a piece's shadow falls (paper), in frame px;
+   both follow the thing's size. o.far (0 to 1): how far off it is: its line fades towards its own colour. The paper shadow always
+   falls down and to the right of the frame, however the thing is turned or mirrored. */
+function skinBegin(S,ctx,o){o=o||{};S._lw=o.lw==null?3:o.lw;S._far=o.far||0;
+  if(S.id==="paper"){const m=ctx.getTransform(),det=m.a*m.d-m.b*m.c,k=o.sh==null?4:o.sh,z=Math.sqrt(Math.abs(det))||1,sx=k*0.55*z,sy=k*z;
+    S._sx=(m.d*sx-m.c*sy)/det;S._sy=(-m.b*sx+m.a*sy)/det;S._k=k;}}
+/* S.fill(ctx, fn, col, o): a closed shape. o.line false: no outline; o.grad [x0, y0, x1, y1, k]: a soft shade towards (x1, y1);
+   o.flat: no shadow (paper); o.w: the outline's width, as a share of the thing's line; o.ink: the outline's own colour */
+function skinFill(S,ctx,fn,col,o){o=o||{};const c=css(col);ctx.beginPath();fn(ctx);
+  if(S.id==="line"){if(o.line!==false&&S._lw>0){const ink=o.ink||(S.self?dk(col,S.self):S.ink);ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=2*S._lw*(o.w||1);ctx.strokeStyle=css(S._far?mix(ink,col,S._far):ink);ctx.stroke();}
+    if(S.shade&&o.grad){const g=ctx.createLinearGradient(o.grad[0],o.grad[1],o.grad[2],o.grad[3]);g.addColorStop(0,c);g.addColorStop(1,css(dk(col,o.grad[4]==null?0.16:o.grad[4])));ctx.fillStyle=g;}else ctx.fillStyle=c;
+    ctx.fill();return;}
+  if(S.id==="paper"){if(!o.flat&&S._k>0){ctx.save();ctx.translate(S._sx,S._sy);ctx.beginPath();fn(ctx);ctx.fillStyle="rgba(58,36,30,"+(o.sa||0.3)+")";ctx.fill();ctx.restore();ctx.beginPath();fn(ctx);}
+    ctx.fillStyle=c;ctx.fill();return;}
+  if(o.grad){const g=ctx.createLinearGradient(o.grad[0],o.grad[1],o.grad[2],o.grad[3]);g.addColorStop(0,c);g.addColorStop(1,css(dk(col,o.grad[4]==null?0.16:o.grad[4])));ctx.fillStyle=g;}
+  else ctx.fillStyle=c;
+  ctx.fill();}
+/* S.line(ctx, fn, col, w, o): a line of detail, drawn only by the looks named in o.on ("line" by default: detail is the line's job) */
+function skinLine(S,ctx,fn,col,w,o){o=o||{};if((o.on||"line").indexOf(S.id)<0)return;ctx.beginPath();fn(ctx);ctx.lineCap="round";ctx.lineJoin="round";
+  ctx.lineWidth=S.id==="line"?S._lw*(w||0.7):(w||1)*(o.px||2);ctx.strokeStyle=css(col||(S.id==="line"?(S._far?mix(S.ink,o.over||[200,190,170],S._far):S.ink):S.ink),o.a==null?1:o.a);ctx.stroke();}
+/* paper: scissors don't follow a curve exactly: nudge each point a little, the same way every time */
+function cut(pts,seed,k){let d=0;for(let i=0;i<pts.length;i++){const q=pts[(i+1)%pts.length];d+=Math.hypot(q[0]-pts[i][0],q[1]-pts[i][1]);}
+  const j=Math.min(3.2,d/pts.length*0.035)*k;return pts.map((p,i)=>p[2]?p:[p[0]+(hash(seed,i*2)-0.5)*2*j,p[1]+(hash(seed,i*2+1)-0.5)*2*j]);}
+for(const k in SKINS){const S=SKINS[k];S.begin=(ctx,o)=>skinBegin(S,ctx,o);S.fill=(ctx,fn,col,o)=>skinFill(S,ctx,fn,col,o);S.line=(ctx,fn,col,w,o)=>skinLine(S,ctx,fn,col,w,o);
+  S.poly=(ctx,pts,col,o)=>skinFill(S,ctx,c=>spline(c,S.id==="paper"&&!(o&&o.exact)?cut(pts,(o&&o.seed)||pts.length,(o&&o.cut)||1):pts,true,(o&&o.ten)!=null?o.ten:(S.id==="paper"?0.82:1)),col,o);}
+
+/* ---------------------------------------------------------------- the kit
+   K.S is the look in use; K.use(key) changes it (and forgets the places painted in the look before). K.u holds the helpers the
+   kit's other files and a film's own pictures draw with. */
+const K={SKINS,S:SKINS.line,norm,
+  u:{TAU,rad,lerp,clamp,sine,pin,pio,spring,mix,dk,lt,css,rnd,hash,polar,area,cw,pg,spline,capsule,rrect,ell},
+  use(key){if(!SKINS[key])throw new Error("PK.use: no look "+key);if(K.S!==SKINS[key]&&typeof AG_KEPT!=="undefined")for(const q of Object.keys(AG_KEPT))if(q.indexOf("place:")===0||q.indexOf("pk:")===0)delete AG_KEPT[q];
+    K.S=SKINS[key];return K.S;}};
+/* the colours that mean something in every film of the module, as in its first look: blue is plans and rules, green something done
+   or of value, amber a risk or a cost, orange data, violet only an agent. They are for words and marks. People's clothes are soft,
+   muted colours and never one of the five at this strength. */
+K.C={ink:[52,40,44],mut:[122,106,104],card:[253,249,240],blue:[46,104,162],green:[52,132,92],amber:[186,118,26],orange:[204,104,56],violet:[110,92,196],white:[255,255,255]};
+return K;})();
+
+/* ===== The people kit: people =====
+   A person is a row in a table (skin, hair, top, bottom, shoes, what they wear on the face); a pose is a row of angles; a face is
+   three numbers. PK.person draws any person in any pose, whole, with their feet on the floor, seen three-quarters from the side,
+   facing right (or left: flip). Angles are in degrees from straight down, positive the way the person faces.
+
+   PK.person(ctx, who, x, floor, h, pose, o) -> the joints, in the frame's px (J.hc the head's centre, J.hdN and J.hdF the hands,
+     J.shN the near shoulder, J.hip, J.kN the near knee, J.nN the near ankle).
+     who    a name in PK.CAST, or a row like its rows
+     x      under the hips; floor: where the feet stand (for a sitting person the floor under the seat; kneeling, the ground)
+     h      how tall they stand, in px. In a place with an eye line, PK.hAt(floor, eye) gives the size at each depth
+     pose   a name in PK.POSES, a row like its rows, or PK.poseMix(a, b, t); PK.poseWalk(step) for a stride
+     o.flip     faces left (true), or a number from 0 to 1: a turn from right to left, through the front, as a body turns (half way
+                the person faces us); take about 0.4 s over it
+     o.expr     a face: a name in PK.EXPR or {brow, smile, open}; o.gaze [x, y] moves the eyes; o.nod tilts the head (radians)
+     o.reachN, o.reachF   a point of the frame the near or far hand rests on: the arm follows; o.reachNk, o.reachFk (0 to 1) blend it in
+     o.hold(ctx, hand, deg, J)   draws what the near hand holds, over the hand; o.under and o.underF the same, under a hand
+     o.part     "lower" (the legs, to draw behind a table) or "upper" (the rest, in front of it); both by default
+     o.side     how far the body is seen from the side (0 to 1); by default it follows the pose (PK.side): someone who sits, kneels,
+                crouches or bends forward is drawn from the side, as their legs are
+     o.seat     a seat's height above the floor, px, for a seat that isn't a chair's height (a stool, a log): the feet may hang
+     o.t        the time: breath, blinks, and the small life of someone who stays where they are (a settle, a glance: PK.lifeAt;
+                o.life 0: none). Always give it: someone drawn without it is a statue
+     o.holds    true when the film itself draws what a hand holds (the kit's checks then know the hand isn't empty)
+     o.far (0 to 1) fades the line with distance; o.shade 0: no shadow on the ground
+     o.a        fades the person, as one picture
+   PK.walk(ctx, who, t, w, o) walks a person from w.x0 to w.x1 between w.t0 and w.t1: the stride grows out of w.before (the pose
+     they stand in before they set off) and dies into w.then (the pose they stop in), "stand" where none is given; w.floor a number
+     or a function of x; w.h a number or a function of the floor; w.arms {aN, aF} keeps arms that carry something. o as PK.person's
+     (o.hold and the rest).
+   PK.poseMix(a, b, t), PK.exprMix(a, b, t), PK.talk(t, t0, t1) (a mouth that opens and closes while someone speaks).
+   PK.face(t, base, events): a face through a shot, in one row: a nod, a look, a smile, a line spoken, each at its moment.
+   PK.poseSit(k, stand, sit): sitting down or standing up (k: 0 standing, 1 seated), leaning forward on the way.
+   Someone who stands for a while stands as people do: "ease" (the weight on one leg), "clasp" (hands together in front) or "listen";
+   "stand" is the plain row the others are blended from. Hands hold, carry, give, take, write, rest or greet: nobody waves one about.
+   Every pose a person takes up is blended from the one before (poseMix, or PK.walk), never switched to. */
+(K=>{
+const {TAU,rad,lerp,clamp,sine,pin,pio,mix,dk,lt,css,hash,polar,pg,spline,capsule,rrect,ell}=K.u;
+
+/* ---------------------------------------------------------------- the cast: the university's people, as the module's films know them */
+K.CAST={
+  ivy:{name:"Ivy Reyes",role:"Data analyst",skin:[230,188,156],hair:{style:"bob",c:[40,32,38]},top:{kind:"sweater",c:[104,112,130]},bottom:{kind:"trousers",c:[60,64,86]},shoe:[62,50,56]},
+  helena:{name:"Helena Novak",role:"Data manager",skin:[242,210,186],hair:{style:"long",c:[132,78,50]},glasses:[70,52,50],top:{kind:"jacket",c:[150,70,88],inner:[246,238,226]},bottom:{kind:"trousers",c:[78,62,74]},shoe:[66,46,48]},
+  graham:{name:"Graham Ellis",role:"Facilities",skin:[238,202,178],hair:{style:"short",c:[186,182,180]},glasses:[70,62,60],top:{kind:"jacket",c:[128,114,96],inner:[242,238,230]},bottom:{kind:"trousers",c:[78,84,104]},shoe:[70,54,46]},
+  mei:{name:"Mei Tanaka",role:"Registrar's office",skin:[242,208,178],hair:{style:"bun",c:[38,30,36]},top:{kind:"jacket",c:[128,168,148],inner:[246,240,228]},bottom:{kind:"skirt",c:[70,76,98]},shoe:[56,46,52]},
+  sam:{name:"Sam Okafor",role:"Data platform",skin:[120,80,58],hair:{style:"coily",c:[34,26,26]},glasses:[40,32,32],top:{kind:"jacket",c:[98,128,160],inner:[238,238,234]},bottom:{kind:"trousers",c:[60,62,80]},shoe:[52,42,42]},
+  jun:{name:"Jun Park",role:"Analytics engineer",skin:[238,202,170],hair:{style:"crop",c:[34,28,34]},glasses:[44,36,40],top:{kind:"sweater",c:[66,158,138]},bottom:{kind:"trousers",c:[76,78,96]},shoe:[58,48,48]},
+  noor:{name:"Noor Rahman",role:"Data architect",skin:[184,132,100],hair:{style:"long",c:[30,24,26]},earrings:[226,214,190],top:{kind:"jacket",c:[86,104,124],inner:[234,236,240]},bottom:{kind:"trousers",c:[62,60,72]},shoe:[50,42,44]},
+  yusuf:{name:"Yusuf Demir",role:"Data governance lead",skin:[212,168,132],hair:{style:"short",c:[44,34,32]},beard:[52,40,36],top:{kind:"jacket",c:[168,104,84],inner:[240,234,224]},bottom:{kind:"trousers",c:[74,70,76]},shoe:[60,46,40]},
+  marta:{name:"Marta Silva",role:"Data analyst",skin:[164,114,86],hair:{style:"coily",c:[44,32,28]},earrings:[226,190,128],top:{kind:"jacket",c:[190,168,140],inner:[92,84,88]},bottom:{kind:"trousers",c:[92,76,70]},shoe:[62,48,44]},
+  erin:{name:"Erin Walsh",role:"Platform engineer",skin:[240,204,178],hair:{style:"bun",c:[150,88,54]},top:{kind:"sweater",c:[146,122,110]},bottom:{kind:"trousers",c:[66,70,88]},shoe:[58,48,50]},
+  tomas:{name:"Tomás Ortega",role:"Report developer",skin:[206,158,122],hair:{style:"short",c:[52,40,34]},beard:[64,50,44],top:{kind:"sweater",c:[150,96,90]},bottom:{kind:"trousers",c:[70,72,84]},shoe:[58,46,42]},
+  // who explains a film's concepts at a board (PK.teach): a consultant who works with the team now and then
+  carmen:{name:"Carmen Vidal",role:"Consultant",skin:[176,124,92],hair:{style:"bun",c:[168,164,166]},glasses:[60,44,44],top:{kind:"jacket",c:[236,222,196],inner:[86,112,120]},bottom:{kind:"trousers",c:[98,80,92]},shoe:[70,50,52]}
 };
-const AG_STRANDS={side:[[[262,301],[312,286],[374,306]],[[250,318],[306,302],[386,332]],[[300,296],[352,300],[390,340]],[[226,352],[214,396],[232,448]],[[296,372],[278,352],[244,344]]],
-  cropped:[[[260,306],[310,294],[370,310]],[[230,350],[220,396],[236,442]]],
-  coily:[],bob:[[[262,300],[312,286],[376,310]],[[236,330],[214,400],[236,490]],[[300,300],[350,302],[388,344]],[[300,380],[296,440],[300,506]]],
-  bun:[[[260,306],[310,294],[370,310]],[[236,340],[226,390],[236,440]]],long:null,shaved:[]};
-AG_STRANDS.long=AG_STRANDS.bob;
-// folds in the clothes: the chest by the near arm, across the front, the far side; and the near elbow
-const AG_FOLDS=[[[200,708],[222,722],[238,752]],[[250,884],[290,872],[332,886]],[[316,980],[350,970],[386,982]]],AG_ARMFOLDS=[[[164,950],[186,960],[206,972]]];
+/* people nobody names: students, staff, passers-by. PK.extra(i) is the i-th, of many backgrounds, the same every time */
+const X_SKIN=[[244,212,186],[226,180,146],[198,150,114],[160,112,84],[118,78,56],[92,60,44],[236,196,160]],X_HAIR=[[40,32,36],[92,60,40],[150,104,62],[30,24,24],[196,150,96],[62,44,40]],
+  X_TOP=[[214,170,150],[150,170,160],[226,196,130],[132,140,170],[196,120,110],[120,150,140],[232,220,200],[170,150,190],[110,120,130]],X_BOT=[[70,76,98],[86,78,74],[112,104,96],[60,64,86],[150,128,100]],
+  X_STYLE=["short","bob","long","coily","bun","crop"];
+const X_MEMO={};
+const X_NEAR=(a,b)=>Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1])+Math.abs(a[2]-b[2])<110;   // hair the colour of the skin under it hides the face
+// hair for a skin: never its own colour, and dark hair with a dark skin (fair hair there reads as a cap)
+const X_HAIRFOR=(i,sk)=>{const h=X_HAIR[(i*7+3)%6];return X_NEAR(h,sk)||(sk[0]+sk[1]+sk[2]<400&&h[0]>100)?X_HAIR[i%2?0:3]:h;};
+K.extra=i=>X_MEMO[i]||(X_MEMO[i]={key:"extra"+i,name:"",skin:X_SKIN[(i*3+1)%7],hair:{style:X_STYLE[(i*5+2)%6],c:X_HAIRFOR(i,X_SKIN[(i*3+1)%7])},glasses:i%4===1?[60,50,50]:null,
+    top:{kind:i%3===0?"jacket":"sweater",c:X_TOP[(i*4+1)%9],inner:[244,238,228]},bottom:{kind:i%5===3?"skirt":"trousers",c:X_BOT[(i*3)%5]},shoe:[64,52,52]});
+// a child: a larger head and shorter legs for their height
+K.KID={head:1.34,neck:0.8,torso:0.98,thigh:0.84,shin:0.84,uarm:0.92,farm:0.92,hand:1.12,shW:0.9,hipW:0.92,foot:1.1};
 
-/* ---------------------------------------------------------------- the cast: the university's data team and the people it works with
-   As in the governance films (same names, skin, hair, glasses), redrawn in this module's look; clothes keep clear of the colours
-   that mean something here (a strong blue, violet, orange, green or amber), so a sweater never reads as a check that passed. */
-const AG_CAST={
-  jun:  {name:"Jun Park",role:"Analytics engineer",skin:[226,186,150],hair:{style:"side",c:[24,22,26]},glasses:[40,44,54],top:{kind:"sweater",c:[62,120,112]},breath:0.29},
-  yusuf:{name:"Yusuf Demir",role:"Data governance lead",skin:[204,160,124],hair:{style:"side",c:[38,30,28]},beard:[44,34,30],top:{kind:"blazer",c:[150,92,72],inner:[236,232,222]},breath:0.25},
-  mei:  {name:"Mei Tanaka",role:"Registrar's office",skin:[232,194,164],hair:{style:"bun",c:[26,24,30]},earrings:[226,196,140],top:{kind:"cardigan",c:[116,134,118],inner:[236,236,230]},breath:0.31},
-  noor: {name:"Noor Rahman",role:"Data architect",skin:[176,124,92],hair:{style:"long",c:[24,20,22]},earrings:[208,214,226],top:{kind:"blazer",c:[66,86,100],inner:[226,232,240]},breath:0.27},
-  sam:  {name:"Sam Okafor",role:"Data platform",skin:[112,72,50],hair:{style:"coily",c:[30,24,22]},glasses:[28,30,38],top:{kind:"overshirt",c:[78,98,110],inner:[212,220,232]},lanyard:true,breath:0.24},
-  anil: {name:"Anil Kurian",role:"Faculty of Health",skin:[156,106,78],hair:{style:"cropped",c:[30,26,26]},top:{kind:"cardigan",c:[124,84,98],inner:[232,234,238]},breath:0.28},
-  clara:{name:"Clara Jensen",role:"Planning",skin:[238,204,180],hair:{style:"bob",c:[150,108,66],streak:[200,164,116]},earrings:[226,196,140],top:{kind:"sweater",c:[196,168,128]},breath:0.3},
-  david:{name:"Prof. David Mensah",role:"Deputy Vice-Chancellor",skin:[78,50,36],hair:{style:"cropped",c:[190,190,192]},beard:[196,196,198],top:{kind:"suit",c:[46,54,74],inner:[234,238,244],tie:[96,62,70]},breath:0.23}
+/* ---------------------------------------------------------------- poses and faces
+   a pose: lean (the back, forwards), head (the head's tilt, added to the lean), aN and aF (near and far arm: [upper arm, forearm,
+   hand]; a hand is "rest", "open", "point", "grip" or "flat"), lN and lF (near and far leg: [thigh, shin]), fN and fF (the feet:
+   toe down is positive), mode ("stand"; "sit": the hips on a seat; "kneel": the knees on the ground) */
+K.POSES={
+  stand:{lean:0,head:0,aN:[2,9],aF:[5,12],lN:[-2,-2],lF:[4,3]},
+  listen:{lean:5,head:3,aN:[4,22],aF:[6,16],lN:[-2,-2],lF:[5,4]},
+  ease:{lean:1,head:2,aN:[-7,12],aF:[-3,16],lN:[-3,-3],lF:[9,3]},                      // at ease: the weight on one leg, the elbows a little back
+  clasp:{lean:1,head:2,aN:[4,30],aF:[8,36],lN:[-2,-2],lF:[5,4],clasp:1},              // hands held together in front, as people stand and listen
+  wave:{lean:0,head:-3,aN:[150,196,"open"],aF:[5,12],lN:[-2,-2],lF:[4,3]},
+  armful:{lean:-4,head:2,aN:[16,84,"grip"],aF:[24,92,"grip"],lN:[-2,-2],lF:[4,3]},
+  can:{lean:-2,head:1,aN:[2,4,"grip"],aF:[10,20],lN:[-2,-2],lF:[4,3]},
+  bend:{lean:17,head:9,aN:[10,58],aF:[16,66],lN:[-2,-2],lF:[5,4]},
+  sit:{mode:"sit",lean:3,head:0,aN:[14,62],aF:[2,52],lN:[86,3],lF:[82,-5]},
+  sitBack:{mode:"sit",lean:-6,head:-2,aN:[10,58],aF:[0,50],lN:[86,10],lF:[82,2]},
+  sitWork:{mode:"sit",lean:7,head:4,aN:[30,84,"flat"],aF:[34,88,"flat"],lN:[86,4],lF:[82,-4]},
+  kneel:{mode:"kneel",lean:26,head:-8,aN:[42,24,"grip"],aF:[4,30],lN:[28,-90],lF:[40,-88],fN:70,fF:70},
+  crouch:{mode:"stand",lean:22,head:-10,aN:[40,64],aF:[34,54],lN:[114,-34],lF:[106,-42],fN:0,fF:12}
 };
+K.HAIRS=()=>HAIR;   // the hair styles' tables, for the kit's checks
+K.EXPR={neutral:{brow:0,smile:0.3,open:0},smile:{brow:0.25,smile:0.9,open:0},worry:{brow:-0.9,smile:-0.4,open:0},talk:{brow:0.35,smile:0.25,open:0.7},
+  listen:{brow:0.25,smile:0.15,open:0},relief:{brow:0.5,smile:0.7,open:0.1},think:{brow:-0.35,smile:-0.05,open:0},glad:{brow:0.6,smile:1,open:0.35}};
+const poseOf=p=>typeof p==="string"?K.POSES[p]:p,exprOf=e=>typeof e==="string"?K.EXPR[e]:(e||K.EXPR.neutral);
+K.poseMix=(a,b,t)=>{a=poseOf(a);b=poseOf(b);if(t<=0)return a;if(t>=1)return b;const o={mode:(t<0.5?a:b).mode};
+  for(const k of ["lean","head","fN","fF","clasp"])o[k]=lerp(a[k]||0,b[k]||0,t);
+  for(const k of ["aN","aF","lN","lF"]){o[k]=[lerp(a[k][0],b[k][0],t),lerp(a[k][1],b[k][1],t)];if(k[0]==="a")o[k][2]=(t<0.5?a:b)[k][2];}return o;};
+K.exprMix=(a,b,t)=>{a=exprOf(a);b=exprOf(b);t=clamp(t,0,1);return{brow:lerp(a.brow,b.brow,t),smile:lerp(a.smile,b.smile,t),open:lerp(a.open||0,b.open||0,t)};};
+/* sitting down or standing up (k: 0 standing, 1 seated): the back leans forward on the way, as a body does to keep its balance, and
+   the feet stay under the hips until the seat takes the weight; only then do the legs come forward. Never poseMix a stand and a sit:
+   half way, that is someone falling backwards with stiff legs */
+K.poseSit=(k,stand,sit)=>{k=clamp(k,0,1);const p=K.poseMix(stand||"stand",sit||"sit",k),b=Math.sin(Math.PI*k);
+  return Object.assign({},p,{lean:(p.lean||0)+20*b,head:(p.head||0)-5*b,lN:[p.lN[0],p.lN[1]-50*b],lF:[p.lF[0],p.lF[1]-50*b]});};
+// a mouth that opens and closes while someone speaks, from t0 to t1
+K.talk=(t,t0,t1)=>pio(t,t0,t1,0.18)*(0.35+0.65*Math.abs(Math.sin(t*8.2+Math.sin(t*3.1))));
+/* ---------------------------------------------------------------- life
+   Nobody stands like a statue. Given the time (o.t), someone who stands or sits where they are settles a little now and then: the
+   head lifts or dips a degree or two, the back shifts, the eyes go aside and come back. Everyone has a rhythm of their own (from
+   their name), so no two move together. It is small on purpose: what people do, and how they take what is said, is the film's to
+   stage (a pose, PK.face); this keeps them alive in between. o.life scales it (0: none); a stride has little. */
+const seedOf=P=>{if(P._sd!=null)return P._sd;const s=P.key||P.name||"x";let h=7;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%9973;return P._sd=h;};
+K.lifeAt=(t,P)=>{const sd=seedOf(P),T=4.4+3.2*hash(sd,1),q=t/T+hash(sd,2)+8,n=Math.floor(q),f=(q-n)*T,e=sine(f/0.9),st=i=>[(hash(sd+i*13,3)-0.5)*5.6,(hash(sd+i*13,4)-0.5)*2],a=st(n-1),b=st(n);
+  // a glance aside in one settle in three, half way to the next
+  const gl=hash(sd+n*13,5)<0.34?pio(f,T*0.45,T*0.45+0.9+hash(sd+n*13,6)*0.6,0.22):0,gd=hash(sd+n*13,7)<0.5?-1:1;
+  return{head:lerp(a[0],b[0],e),lean:lerp(a[1],b[1],e),gx:gl*gd*0.7,gy:gl*0.25};};
+const alive=(P,pose,o)=>{if(o.t==null||o.life===0)return pose;const L=K.lifeAt(o.t,P),k=o.life==null?1:clamp(o.life,0,1),g=o.gaze||[0,0];
+  o.gaze=[clamp(g[0]+L.gx*k,-1.3,1.3),clamp(g[1]+L.gy*k,-1.3,1.3)];return Object.assign({},pose,{lean:(pose.lean||0)+L.lean*k,head:(pose.head||0)+L.head*k});};
+/* A face through a shot: what someone's face, eyes and head do while they listen and speak, in one row.
+   PK.face(t, base, events) -> {expr, gaze, nod}, to hand on to PK.person with the rest: Object.assign({t, flip: true}, PK.face(...)).
+   base: {expr, gaze, nod} as they are at rest. events, each [at, what, d, to]:
+     [at, "nod"]              a nod, as someone agrees or takes a thing in ("nods": two)
+     [at, "say", d]           they speak for d seconds: the mouth opens and closes
+     [at, a face, d]          a face in PK.EXPR (or {brow, smile, open}) for d seconds, blended in and out (2.4 s by default;
+                              Infinity: it stays)
+     [at, "look", d, [x, y]]  the eyes go there for d seconds and come back (1.6 s by default; Infinity: they stay)
+   A listener does one of these every few seconds: tools/people.py lists whoever is seen large and stays as they are for too long. */
+K.face=(t,base,ev)=>{base=base||{};let e=K.exprMix(base.expr||"neutral",base.expr||"neutral",0),g=(base.gaze||[0,0]).slice(),nod=base.nod||0,open=0;
+  for(const [at,what,d,to] of ev||[]){
+    if(what==="nod"||what==="nods"){for(let i=0;i<(what==="nods"?2:1);i++){const s=(t-at-i*0.62)/0.62;if(s>0&&s<1)nod+=0.13*Math.sin(Math.PI*Math.pow(s,0.7));}}   // down fast, up slower
+    else if(what==="say")open=Math.max(open,K.talk(t,at,at+(d||2)));
+    else if(what==="look"){const k=d===Infinity?pin(t,at,0.3):pio(t,at,at+(d||1.6),0.3);g=[lerp(g[0],to[0],k),lerp(g[1],to[1],k)];}
+    else{const k=d===Infinity?pin(t,at,0.4):pio(t,at,at+(d||2.4),0.4);if(k>0)e=K.exprMix(e,what,k);}}
+  e.open=Math.max(e.open||0,open*0.75);return{expr:e,gaze:g,nod};};
+/* a hand at work among things (seedlings in a bed, papers on a table): it rests on each of pts in turn for dwell seconds, then moves
+   on to the next, round and round, from t0. -> [x, y], for o.reachN or o.reachF */
+K.among=(t,pts,dwell,t0)=>{dwell=dwell||2.2;const T=dwell+0.6,q=Math.max(0,(t-(t0||0))/T),i=Math.floor(q),a=pts[i%pts.length],b=pts[(i+1)%pts.length],e=sine(((q-i)*T-dwell)/0.6);return[lerp(a[0],b[0],e),lerp(a[1],b[1],e)];};
+/* hands at work on a keyboard: they tap in bursts, each hand to its own beat, and rest between two bursts. -> {n, f}: how far the
+   near and the far hand are from where they rest, [along the keys, above them], in units of the person's height */
+K.typing=(t,P)=>{const sd=seedOf(P),T=3.6+2.2*hash(sd,11),q=t/T+hash(sd,12)+8,n=Math.floor(q),f=(q-n)*T,on=pio(f,0.15,T*(0.5+0.25*hash(sd+n*7,13)),0.25),
+    hand=i=>{const s=t*(4.1+1.1*hash(sd,14+i))+i*1.7,j=Math.floor(s),fr=s-j;return[lerp(hash(sd+j*3,16+i)-0.5,hash(sd+(j+1)*3,16+i)-0.5,sine(fr))*0.012*on,Math.abs(Math.sin(Math.PI*fr))*0.005*on];};
+  return{n:hand(0),f:hand(1),on};};
+/* a stride: where each leg and arm is at this point of it (step: 1 is both feet once), blended in from standing by k.
+   PK.strideOf(h): how far one stride carries a person h tall, so the feet don't slide */
+K.poseWalk=(step,k,amp)=>{k=k==null?1:k;amp=amp||1;const ph=TAU*step,s=Math.sin(ph),c=Math.cos(ph),g=24*amp,ar=20*(0.4+0.6*amp),bend=x=>(7+32*Math.pow(Math.max(0,x),1.5))*amp;
+  const W={lean:4,head:0,aN:[-ar*s,-ar*s+16+6*c],aF:[ar*s,ar*s+16-6*c],lN:[g*s,g*s-bend(c)],lF:[-g*s,-g*s-bend(-c)],fN:(c>0?12*c:-6*s)*amp,fF:(c<0?-12*c:6*s)*amp};
+  return k>=1?W:K.poseMix("stand",W,k);};
+// amp: how long the steps are (1 by default; a long skirt keeps them shorter, PK.ampOf)
+K.strideOf=(h,amp)=>h*0.7*(amp||1);
+K.ampOf=P=>P.bottom&&P.bottom.kind==="long"?0.6:P.kid?0.9:1;
+K.hAt=(floor,eye)=>(floor-eye)/0.91;           // a standing adult's height where their eyes are on the place's eye line
+K.seatOf=h=>{const p=K.S.prop;return(p.shin+p.ankle-p.leg[0]*0.32)*h/1000;};   // a chair's seat, above the floor, for someone h tall
 
-/* ---------------------------------------------------------------- painting a person once */
-const AG_PEOPLE={};   // kept pictures, by person
-const ag_dk=(c,k)=>mix(c,[0,0,0],k),ag_lt=(c,k)=>mix(c,[255,255,255],k);
-function ag_spec(who){return typeof who==="string"?AG_CAST[who]:who;}
-function ag_colours(P){const sk=P.skin,sw=P.top.c;return{
-  skinBase:mix(sk,ag_dk(sk,0.35),0.3),skinHi:mix(sk,[255,240,228],0.42),skinShade:rgba(mix(sk,[40,14,6],0.62),0.42),skin:sk,
-  topBase:ag_dk(sw,0.08),topHi:ag_lt(sw,0.4),topShade:rgba(ag_dk(sw,0.75),0.4),top:sw,
-  hair:P.hair.c,hairHi:mix(P.hair.c,[150,156,180],0.45),
-  brow:rgba(ag_dk(P.hair.c.map((v,i)=>Math.min(v,P.skin[i])),0.3),0.95),lid:rgba(mix(sk,[30,14,10],0.65),0.6),line:rgba(mix(sk,[70,24,14],0.55),0.85),
-  lip:rgba(mix(sk,[150,60,60],0.5),0.9)};}
-// one picture of figure space at the person's resolution: paint(c) draws in figure space
-function ag_layer(paint,box){const R=AG_FIG.res,b=box||AG_FIG.box,cv=mkCanvas(Math.ceil((b[2]-b[0])*R),Math.ceil((b[3]-b[1])*R)),c=cv.getContext("2d");
-  c.scale(R,R);c.translate(-b[0],-b[1]);paint(c);return{cv,box:b};}
-function ag_drawLayer(ctx,L){const b=L.box;ctx.drawImage(L.cv,b[0],b[1],b[2]-b[0],b[3]-b[1]);}
-// the clothes' details: openings, collars, lapels, buttons, a lanyard, and the clothes of other times
-function ag_neckline(c,P,C){const k=P.top.kind,inner=P.top.inner||[236,234,228];
-  const V=(bot,wide)=>{c.moveTo(236,566);c.bezierCurveTo(262,640,292,740,bot[0],bot[1]);c.bezierCurveTo(336,740,350,660,358+wide,606);c.bezierCurveTo(320,622,268,612,236,566);c.closePath();};
-  if(k==="sweater"){ag_soft(c,AG_F.collar,ag_lt(P.top.c,0.14),ag_lt(P.top.c,0.3),330,600,80,rgba(ag_dk(P.top.c,0.7),0.35),8);return;}
-  if(k==="cardigan"||k==="blazer"||k==="suit"||k==="overshirt"){const bot=k==="cardigan"?[318,846]:k==="overshirt"?[312,1100]:[326,880];
-    // the shirt or tee inside the opening, its own neckline, then the opening's edges
-    c.save();ag_shape(c,AG_F.torso);c.clip();ag_soft(c,cc=>V(bot,0),inner,ag_lt(inner,0.5),330,690,160,rgba(ag_dk(inner,0.6),0.3),14);
-    if(k==="blazer"||k==="suit"){ag_soft(c,cc=>{cc.moveTo(238,566);cc.lineTo(270,650);cc.lineTo(298,612);cc.closePath();cc.moveTo(356,604);cc.lineTo(344,654);cc.lineTo(320,614);cc.closePath();},
-        ag_lt(inner,0.2),[255,255,255],300,600,80,rgba(ag_dk(inner,0.6),0.35),6);
-      if(P.top.tie){ag_soft(c,cc=>{cc.moveTo(302,616);cc.lineTo(322,614);cc.lineTo(330,640);cc.lineTo(338,800);cc.lineTo(318,834);cc.lineTo(302,800);cc.lineTo(306,642);cc.closePath();},P.top.tie,ag_lt(P.top.tie,0.3),326,680,90,rgba(ag_dk(P.top.tie,0.7),0.4),8);}
-      // the lapels: a soft fold back on each side of the opening, the near one wider
-      const lap=(cc)=>{cc.moveTo(236,566);cc.bezierCurveTo(250,610,262,650,266,690);cc.lineTo(236,700);cc.bezierCurveTo(258,760,286,820,326,880);cc.bezierCurveTo(288,760,262,660,236,566);cc.closePath();
-        cc.moveTo(358,606);cc.bezierCurveTo(356,640,352,664,350,690);cc.lineTo(372,700);cc.bezierCurveTo(362,780,346,840,326,880);cc.bezierCurveTo(342,780,352,690,358,606);cc.closePath();};
-      ag_soft(c,lap,ag_lt(P.top.c,0.06),ag_lt(P.top.c,0.3),340,700,140,rgba(ag_dk(P.top.c,0.7),0.4),8);}
-    else{ag_soft(c,cc=>{cc.moveTo(250,580);cc.bezierCurveTo(280,604,326,612,352,604);cc.lineTo(354,614);cc.bezierCurveTo(320,626,272,620,246,592);cc.closePath();},ag_dk(inner,0.06),ag_lt(inner,0.4),320,600,60,null);
-      c.strokeStyle=rgba(ag_dk(P.top.c,0.35),0.6);c.lineWidth=3;c.beginPath();V(bot,0);c.stroke();
-      if(k==="cardigan"){for(const u of [0.42,0.62,0.82]){const y=lerp(640,846,u),x=lerp(270,318,u)+4;c.fillStyle=rgba(ag_lt(P.top.c,0.3),1);c.beginPath();c.arc(x+20,y,5.5,0,TAU);c.fill();c.strokeStyle=rgba(ag_dk(P.top.c,0.5),0.6);c.lineWidth=1.4;c.stroke();}}}
-    c.restore();return;}
-  if(k==="shirt"){c.save();ag_shape(c,AG_F.torso);c.clip();c.strokeStyle=rgba(ag_dk(P.top.c,0.3),0.5);c.lineWidth=2.4;c.beginPath();c.moveTo(316,616);c.bezierCurveTo(318,760,322,900,326,1100);c.stroke();
-    for(const y of [700,800,900,1000]){c.fillStyle=rgba(ag_lt(P.top.c,0.5),1);c.beginPath();c.arc(320+(y-616)/484*8,y,4.5,0,TAU);c.fill();}c.restore();
-    ag_soft(c,cc=>{cc.moveTo(236,562);cc.lineTo(276,644);cc.lineTo(304,612);cc.bezierCurveTo(280,606,252,590,236,562);cc.closePath();cc.moveTo(358,602);cc.lineTo(344,656);cc.lineTo(318,614);cc.bezierCurveTo(334,612,348,608,358,602);cc.closePath();},
-      ag_lt(P.top.c,0.1),ag_lt(P.top.c,0.45),300,600,80,rgba(ag_dk(P.top.c,0.6),0.35),6);return;}
-  if(k==="robe"){const band=P.top.band||ag_dk(P.top.c,0.35),inner2=P.top.inner||[232,226,212];
-    c.save();ag_shape(c,AG_F.torso);c.clip();
-    // the crossed collar: the inner robe's edge at the neck, then the outer's wide band from the far side of the neck down under the near arm
-    ag_soft(c,cc=>{cc.moveTo(236,566);cc.bezierCurveTo(270,600,320,616,358,604);cc.lineTo(350,640);cc.bezierCurveTo(300,650,262,628,236,598);cc.closePath();},inner2,ag_lt(inner2,0.5),320,610,70,null);
-    ag_soft(c,cc=>{cc.moveTo(362,600);cc.bezierCurveTo(330,690,240,800,120,880);cc.lineTo(120,940);cc.bezierCurveTo(250,850,350,740,396,624);cc.closePath();},band,ag_lt(band,0.3),330,700,160,rgba(ag_dk(band,0.7),0.4),8);
-    c.restore();return;}
-  if(k==="tunic"){ag_soft(c,AG_F.collar,ag_dk(P.top.c,0.1),ag_lt(P.top.c,0.25),330,600,80,rgba(ag_dk(P.top.c,0.7),0.35),8);
-    c.strokeStyle=rgba(ag_dk(P.top.c,0.45),0.7);c.lineWidth=2.6;c.beginPath();c.moveTo(304,620);c.lineTo(308,690);c.stroke();
-    if(P.top.belt){c.save();ag_shape(c,AG_F.torso);c.clip();ag_soft(c,cc=>{cc.rect(80,986,360,34);},P.top.belt,ag_lt(P.top.belt,0.3),330,996,120,null);c.restore();}return;}
-  if(k==="apron"){const ap=P.top.apron||[150,120,90];ag_soft(c,AG_F.collar,ag_dk(P.top.c,0.06),ag_lt(P.top.c,0.3),330,600,80,rgba(ag_dk(P.top.c,0.6),0.3),8);
-    c.save();ag_shape(c,AG_F.torso);c.clip();
-    c.strokeStyle=rgba(ag_dk(ap,0.15),1);c.lineWidth=12;c.lineCap="round";c.beginPath();c.moveTo(246,590);c.bezierCurveTo(254,640,262,690,270,724);c.moveTo(356,612);c.bezierCurveTo(360,650,364,690,366,724);c.stroke();
-    ag_soft(c,cc=>{cc.moveTo(256,720);cc.lineTo(380,716);cc.bezierCurveTo(386,820,392,940,404,1100);cc.lineTo(196,1100);cc.bezierCurveTo(216,960,240,840,256,720);cc.closePath();},ap,ag_lt(ap,0.3),350,800,240,rgba(ag_dk(ap,0.7),0.4),16);
-    c.restore();return;}}
-function ag_lanyard(c){c.save();ag_shape(c,AG_F.torso);c.clip();c.strokeStyle=rgba(AG.blue,0.85);c.lineWidth=7;c.lineCap="round";
-  c.beginPath();c.moveTo(246,586);c.bezierCurveTo(262,680,290,760,304,806);c.moveTo(352,612);c.bezierCurveTo(342,690,326,760,314,806);c.stroke();
-  ag_soft(c,cc=>ag_rect(cc,280,800,56,74,7),[244,243,240],[255,255,255],300,810,60,"rgba(46,38,28,0.3)",6);c.fillStyle=rgba(AG.blue,0.85);c.fillRect(286,808,44,10);c.restore();}
-// the ear, in three-quarter view: its outer rim and the fold inside
-function ag_ear(c,P,C){ag_soft(c,AG_F.ear,mix(P.skin,ag_dk(P.skin,0.4),0.2),P.skin,246,424,30,C.skinShade,10);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.6);c.lineWidth=2;ag_shape(c,AG_F.earIn);c.stroke();}
-// the head: skin, hair, the ear, then the face's fixed lines; eyes and mouth come live
-function ag_paintHead(c,P,C){const st=P.hair.style;
-  ag_soft(c,AG_F.head,C.skinBase,C.skinHi,362,400,170,C.skinShade,26);
-  c.save();ag_shape(c,AG_F.head);c.clip();let g=c.createRadialGradient(340,458,0,340,458,30);g.addColorStop(0,rgba(mix(P.skin,[230,110,100],0.5),0.24));g.addColorStop(1,rgba([230,120,110],0));
-  c.fillStyle=g;c.fillRect(296,416,100,90);
-  c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.4),0.2);c.lineWidth=2.4;c.lineCap="round";c.beginPath();c.moveTo(274,490);c.quadraticCurveTo(296,510,322,519);c.stroke();c.restore();
-  if(P.beard){const bd=P.beard;c.save();ag_shape(c,AG_F.head);c.clip();
-    const beard=cc=>{cc.moveTo(274,426);cc.bezierCurveTo(270,454,258,480,262,496);cc.bezierCurveTo(272,522,330,540,360,538);cc.bezierCurveTo(378,536,392,520,392,500);
-      cc.bezierCurveTo(386,494,376,491,366,493);cc.bezierCurveTo(356,495,346,490,347,483);cc.bezierCurveTo(354,475,372,471,392,471);cc.lineTo(398,463);
-      cc.bezierCurveTo(382,460,364,462,350,468);cc.bezierCurveTo(338,474,326,466,320,452);cc.bezierCurveTo(314,440,300,430,288,424);cc.closePath();};
-    ag_soft(c,beard,bd,mix(bd,[150,150,160],0.4),360,500,60,"rgba(0,0,0,0.35)",8);c.restore();}
-  if(st==="bun")ag_soft(c,AG_HAIR.knot,P.hair.c,C.hairHi,214,300,50,"rgba(0,0,0,0.5)",12);
-  if(st!=="shaved"){const hf=AG_HAIR[st]||AG_HAIR.side;ag_soft(c,hf,P.hair.c,C.hairHi,336,300,110,"rgba(0,0,0,0.5)",18);
-    c.save();ag_shape(c,hf);c.clip();c.strokeStyle=rgba(ag_lt(P.hair.c,0.55),0.16);c.lineWidth=1.8;c.lineCap="round";
-    for(const s of (AG_STRANDS[st]||[])){c.beginPath();c.moveTo(s[0][0],s[0][1]);c.quadraticCurveTo(s[1][0],s[1][1],s[2][0],s[2][1]);c.stroke();}
-    if(st==="coily"){const R=ag_rnd(41);c.fillStyle=rgba(ag_lt(P.hair.c,0.35),0.22);for(let i=0;i<260;i++){const x=200+R()*200,y=276+R()*190;c.beginPath();c.arc(x,y,1.6+R()*2.2,0,TAU);c.fill();}}
-    // close-cropped hair: short strokes, and the skin showing faintly through at the edges
-    if(st==="cropped"){const R=ag_rnd(43);c.lineWidth=1.6;for(let i=0;i<520;i++){const x=200+R()*196,y=280+R()*180,a=-0.9+R()*0.5;c.strokeStyle=rgba(i%3?ag_dk(P.hair.c,0.3):ag_lt(P.hair.c,0.4),0.28);
-        c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.cos(a)*5,y+Math.sin(a)*5);c.stroke();}
-      ag_inner(c,hf,rgba(P.skin,0.55),14,0,0);}
-    if(st==="bob"){c.strokeStyle=rgba(ag_dk(P.hair.c,0.4),0.3);c.lineWidth=2.4;c.beginPath();c.moveTo(318,300);c.quadraticCurveTo(306,330,300,362);c.moveTo(250,330);c.quadraticCurveTo(222,420,250,512);c.stroke();}
-    if(P.hair.streak){c.strokeStyle=rgba(P.hair.streak,0.5);c.lineWidth=5;c.beginPath();c.moveTo(270,296);c.quadraticCurveTo(320,288,378,316);c.stroke();}
-    c.strokeStyle=rgba(mix(P.skin,[210,170,150],0.5),0.45);c.lineWidth=2.2;if(st==="side"){c.beginPath();c.moveTo(262,301);c.quadraticCurveTo(300,289,344,295);c.stroke();}c.restore();}
-  else{c.save();ag_shape(c,AG_F.head);c.clip();const g2=c.createLinearGradient(0,296,0,380);g2.addColorStop(0,rgba(ag_dk(P.skin,0.25),0.25));g2.addColorStop(1,rgba(ag_dk(P.skin,0.25),0));c.fillStyle=g2;c.fillRect(200,290,200,100);c.restore();}
-  // the ear, over the hair, except where the hair falls over it
-  if(st!=="bob"&&st!=="long"){ag_ear(c,P,C);if(P.earrings){const L=AG_FACE.lobe;ag_soft(c,cc=>cc.arc(L[0],L[1],6,0,TAU),P.earrings,[255,255,255],L[0]-2,L[1]-3,6,null);}}
-  // brows, lids, the nose, the glasses
-  // the brows: the near one long, the far one short, foreshortened as it turns away
-  c.lineCap="round";c.strokeStyle=C.brow;c.lineWidth=5;c.beginPath();c.moveTo(311,402);c.quadraticCurveTo(331,390,355,395);c.stroke();
-  c.lineWidth=4;c.beginPath();c.moveTo(367,397);c.quadraticCurveTo(377,392,387,398);c.stroke();
-  c.strokeStyle=C.lid;c.lineWidth=2.4;c.beginPath();c.moveTo(322,414);c.quadraticCurveTo(333,407,345,412);c.stroke();
-  c.beginPath();c.moveTo(372,412);c.quadraticCurveTo(377,408,383,411);c.stroke();
-  // the nose: its tip on the outline, and inside only one small curve for the near nostril's wing, open towards the tip and fuller as it
-  // turns under, with no shade on it (the author chose this of four drafts: a second curve inside the tip, as there was, read as a squiggle)
-  ag_taper(c,[377,455],[370,455],[368,464],[376,465],1,2.3,C.line);
-  // glasses: the near lens over the near eye, the far lens narrower, its outer rim just past the cheek, the arm back to the ear
-  if(P.glasses){c.strokeStyle=rgba(P.glasses,0.95);c.lineWidth=3.4;rr(c,311,401,45,32,10);c.stroke();rr(c,366,401,22,30,8);c.stroke();
-    c.beginPath();c.moveTo(356,415);c.quadraticCurveTo(361,411,366,414);c.stroke();c.beginPath();c.moveTo(311,413);c.lineTo(268,409);c.stroke();
-    c.strokeStyle="rgba(255,255,255,0.85)";c.lineWidth=2;c.beginPath();c.moveTo(345,406);c.lineTo(352,411);c.stroke();}
-  if(P.hat&&P.hat.paint)P.hat.paint(c,P);}
-// the body: the far arm if it hangs, the torso and its clothes, the near arm if it hangs, the neck; arms that move are drawn live.
-// near, far: true when that arm hangs (and is painted here)
-function ag_paintBody(c,P,C,near,far){const sw=P.top.c;
-  if(P.hair.style==="long")ag_soft(c,AG_HAIR.longBack,ag_dk(P.hair.c,0.1),C.hairHi,250,500,160,"rgba(0,0,0,0.45)",16);
-  if(far)ag_soft(c,AG_F.farArm,ag_dk(sw,0.18),ag_lt(sw,0.28),474,700,140,rgba(ag_dk(sw,0.8),0.42),24);
-  ag_soft(c,AG_F.torso,C.topBase,C.topHi,400,690,300,C.topShade,30);
-  if(near){c.save();ag_shape(c,AG_F.torso);c.clip();c.shadowColor=rgba(ag_dk(sw,0.85),0.35);c.shadowBlur=18;c.shadowOffsetX=10000+10;c.translate(-10000,0);ag_shape(c,AG_F.arm);c.fill();c.restore();}
-  ag_folds(c,AG_F.torso,AG_FOLDS,rgba(ag_dk(sw,0.7),0.2),"rgba(255,255,255,0.16)");
-  ag_neckline(c,P,C);if(P.top.paint)P.top.paint(c,P);
-  if(near){ag_soft(c,AG_F.arm,ag_dk(sw,0.2),ag_lt(sw,0.25),150,660,170,rgba(ag_dk(sw,0.8),0.4),26);
-    ag_folds(c,AG_F.arm,AG_ARMFOLDS,rgba(ag_dk(sw,0.75),0.2),"rgba(255,255,255,0.1)");
-    c.save();ag_shape(c,AG_F.arm);c.clip();const eg=c.createRadialGradient(196,966,0,196,966,46);eg.addColorStop(0,rgba(ag_dk(sw,0.8),0.22));eg.addColorStop(1,rgba(ag_dk(sw,0.8),0));c.fillStyle=eg;c.fillRect(140,910,120,120);c.restore();}
-  if(P.lanyard)ag_lanyard(c);
-  ag_soft(c,AG_F.neck,mix(P.skin,ag_dk(P.skin,0.4),0.22),P.skin,330,548,110,C.skinShade,18);
-  c.save();ag_shape(c,AG_F.neck);c.clip();const ng=c.createLinearGradient(0,512,0,572);ng.addColorStop(0,rgba(mix(P.skin,[60,20,10],0.6),0.5));ng.addColorStop(1,rgba(mix(P.skin,[60,20,10],0.6),0));
-  c.fillStyle=ng;c.fillRect(226,420,150,160);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.16);c.lineWidth=2.2;c.lineCap="round";c.beginPath();c.moveTo(286,512);c.quadraticCurveTo(302,548,318,582);c.stroke();c.restore();
-  // the collar closes over the neck: the neckline again, only its band
-  if(P.top.kind==="sweater")ag_soft(c,AG_F.collar,ag_lt(sw,0.14),ag_lt(sw,0.3),330,600,80,rgba(ag_dk(sw,0.7),0.35),8);
-  else if(P.top.kind==="tunic"||P.top.kind==="apron")ag_soft(c,AG_F.collar,ag_dk(sw,P.top.kind==="tunic"?0.1:0.06),ag_lt(sw,0.25),330,600,80,rgba(ag_dk(sw,0.7),0.35),8);
-  else ag_neckline(c,P,C);}
-// a person's kept pictures: the head; the body with both arms down, with only the far arm down, and with neither
-function ag_fig(who){const P=ag_spec(who),k=P.key||P.name;let F=AG_PEOPLE[k];if(F)return F;const C=ag_colours(P);
-  F=AG_PEOPLE[k]={P,C,head:ag_layer(c=>ag_paintHead(c,P,C),[160,250,440,560]),bodies:{}};return F;}
-function ag_figBody(F,near,far){const k=(near?1:0)+(far?2:0);return F.bodies[k]||(F.bodies[k]=ag_layer(c=>ag_paintBody(c,F.P,F.C,near,far)));}
+/* where every joint is, in frame px, for a person h px tall with their feet (or seat, or knees) placed by the pose */
+const propOf=P=>{const S=K.S;if(!P.build&&!P.kid)return S.prop;const key=S.key+"|"+(P.key||P.name);P._p=P._p||{};if(P._p[key])return P._p[key];
+  const b=Object.assign({},P.kid?K.KID:{},P.build||{}),q={};for(const j in S.prop){const v=S.prop[j],f=b[j]||1;q[j]=Array.isArray(v)?v.map(x=>x*(b.thick||1)):v*f;}return P._p[key]=K.norm(q);};
+/* A standing person is seen three-quarters on: both shoulders show, and the legs stand side by side. Legs that fold (a seat, a
+   kneel, a crouch) and a back that bends forward move in the frame's plane, as seen from the side, so the body turns with them:
+   K.side(pose) is how far (0: three-quarters, 1: from the side). The torso is then drawn as deep as a body is from the side, the
+   shoulders come to its middle, one behind the other, and the legs lie one behind the other. o.side sets it by hand. */
+K.side=pose=>{pose=poseOf(pose);return clamp(Math.max((Math.max(Math.abs(pose.lN[0]-pose.lN[1]),Math.abs(pose.lF[0]-pose.lF[1]))-40)/40,(Math.abs(pose.lean||0)-6)/16),0,1);};
+/* A turn (o.flip between 0 and 1) goes through the front, as a body does: k is how far the person is still seen from the side they
+   face (1: as drawn, 0: from the front; past the front the picture is mirrored). What reaches forwards (a stride, a seated thigh, an
+   arm held out, a lean) is seen shorter by k, while the body and the head keep their width, the shoulders and hips open to their
+   full width, and the feet point at us: so nobody is ever seen edge on, as a sheet of paper would be. */
+const turnOf=o=>{const fl=o.flip===true?1:(o.flip||0),c=Math.cos(Math.PI*fl);return{c,k:Math.abs(c)>0.999?1:Math.abs(c),sg:c<0?-1:1};};
+const scr=(deg,k)=>k>=1?deg:Math.atan2(Math.sin(rad(deg))*k,Math.cos(rad(deg)))*180/Math.PI;   // an angle as it is seen, k of the way round
+function rig(P,pose,x,floor,h,o){const p=propOf(P),u=h/1000,M=pose.mode||"stand",{k,sg}=turnOf(o),L=(q,deg,len,kk)=>[q[0]+Math.sin(rad(deg))*len*u*(kk==null?k:kk),q[1]+Math.cos(rad(deg))*len*u],
+    pr0=o.side!=null?clamp(o.side,0,1):K.side(pose),pr=pr0*k;
+  const hw=p.hipW*u*lerp(1,0.22,pr),hip=[0,0],hN=[-hw,0],hF=[hw,-3*u*k],kN=L(hN,pose.lN[0],p.thigh),kF=L(hF,pose.lF[0],p.thigh),nN=L(kN,pose.lN[1],p.shin),nF=L(kF,pose.lF[1],p.shin);
+  // how far the hips are above the floor: on whatever is lowest, the feet or the knees, so a person who sits down, kneels or stands
+  // up stays on the ground all the way; on a seat of a given height (o.seat), the hips rest on it and the feet go where the legs put them
+  const low=M==="sit"&&o.seat!=null?o.seat+p.leg[0]*u*0.42:Math.max(kN[1]+p.leg[1]*u*0.5,kF[1]+p.leg[1]*u*0.5,nN[1]+p.ankle*u,nF[1]+p.ankle*u);
+  // someone who sits facing us: their knees come towards us, so a little down the frame, and their feet with them
+  if(M==="sit"&&k<1)for(const [kn,an,deg] of [[kN,nN,pose.lN[0]],[kF,nF,pose.lF[0]]]){const d=(1-k)*0.15*p.thigh*u*Math.abs(Math.sin(rad(deg)));kn[1]+=d;an[1]+=d;}
+  const le=rad(scr(pose.lean||0,k)),ax=[Math.cos(le),Math.sin(le)],up=[Math.sin(le),-Math.cos(le)],T=p.torso*u;
+  // the shoulders: one before the other from the side, side by side from the front
+  const sw=p.shW*u,sn=lerp(sw*1.06,sw*lerp(1,0.06,pr0),k),sf=lerp(sw*1.06,sw*0.8*lerp(1,0.16,pr0),k),dN=lerp(32,34,k)*u,dF=lerp(32,30,k)*u;
+  const sc=[up[0]*T,up[1]*T],shN=[sc[0]-ax[0]*sn-up[0]*dN,sc[1]-ax[1]*sn-up[1]*dN],shF=[sc[0]+ax[0]*sf-up[0]*dF,sc[1]+ax[1]*sf-up[1]*dF];
+  const ha=rad(scr((pose.lean||0)*0.55+(pose.head||0),k)),hu=[Math.sin(ha),-Math.cos(ha)],nb=[sc[0]+up[0]*4*u,sc[1]+up[1]*4*u],hc=[nb[0]+hu[0]*(p.neck+p.head*0.5)*u,nb[1]+hu[1]*(p.neck+p.head*0.5)*u];
+  // hands held together in front of the hips (a pose's clasp): each arm goes there, unless it rests on something else; an arm lets
+  // go through a turn, since the hands would meet behind an elbow there
+  const cl=(pose.clasp||0)*clamp(k*2-1,0,1),loc=tg=>[(tg[0]-x)*sg,tg[1]-(floor-low)],tN=o.reachN?loc(o.reachN):cl>0?[28*u,12*u]:null,tF=o.reachF?loc(o.reachF):cl>0?[50*u,20*u]:null,
+    rN=o.reachN?(o.reachNk==null?1:clamp(o.reachNk,0,1)):cl,rF=o.reachF?(o.reachFk==null?1:clamp(o.reachFk,0,1)):cl;
+  const reach=(sh,a,q,rk)=>{if(!q||rk<=0)return a;const g=ik(sh,q,p.uarm*u,(p.farm+p.hand*0.45)*u);return rk>=1?[g[0],g[1],a[2]]:[lerp(a[0],g[0],rk),lerp(a[1],g[1],rk),a[2]];};
+  // an arm that rests on something is in the frame's plane already: it is seen whole, however far round the person is
+  const aN=reach(shN,pose.aN,tN,rN),aF=reach(shF,pose.aF,tF,rF),kaN=lerp(k,1,rN),kaF=lerp(k,1,rF);
+  const eN=L(shN,aN[0],p.uarm,kaN),wN=L(eN,aN[1],p.farm,kaN),eF=L(shF,aF[0],p.uarm,kaF),wF=L(eF,aF[1],p.farm,kaF);
+  const J={hip,hN,hF,kN,kF,nN,nF,sc,shN,shF,nb,hc,eN,wN,eF,wF};for(const j in J)J[j]=[x+J[j][0],floor-low+J[j][1]];
+  // the arms' angles as they are seen: what a hand, a cuff and a held thing are drawn along
+  J.u=u;J.p=p;J.le=le;J.ha=ha;J.mode=M;J.side=pr;J.k=k;J.aN=[scr(aN[0],kaN),scr(aN[1],kaN),aN[2]];J.aF=[scr(aF[0],kaF),scr(aF[1],kaF),aF[2]];
+  J.hdN=polar(J.wN,J.aN[1],p.hand*0.45*u);J.hdF=polar(J.wF,J.aF[1],p.hand*0.45*u);return J;}
+/* where an arm's two bones go for its hand to rest on a point: [upper arm, forearm], the elbow behind */
+function ik(sh,tg,l1,l2){const dx=tg[0]-sh[0],dy=tg[1]-sh[1],d=clamp(Math.hypot(dx,dy),Math.abs(l1-l2)+1,l1+l2-1),base=Math.atan2(dx,dy);
+  const a0=base-Math.acos(clamp((l1*l1+d*d-l2*l2)/(2*l1*d),-1,1)),ex=sh[0]+Math.sin(a0)*l1,ey=sh[1]+Math.cos(a0)*l1,k=d/(Math.hypot(dx,dy)||1);
+  return[a0*180/Math.PI,Math.atan2(sh[0]+dx*k-ex,sh[1]+dy*k-ey)*180/Math.PI];}
 
-/* ---------------------------------------------------------------- arms that move
-   An arm is [upper arm, forearm, hand]: the upper arm's and the forearm's angles in degrees from straight down, positive towards the
-   way the person faces, and the hand: "rest", "hold", "point" or "open". Seen in three-quarter view, an arm reaching the way the
-   person faces also reaches towards us, so its reach across the frame is drawn shorter (AG_FIG.fore).
-   People keep their arms down, painted with the body. A live arm is only for a hand on something the story needs: a thing held
-   ("hold", with o.hold drawing it), a wheel, a switch, a dial. Pointing, an open hand while talking, a hand at the chin and forearms on
-   a desk read as wrong, so the films don't use them: at a desk, the desk hides the hanging arms (o.cut). AG_HANG is the painted arm's
-   own angles, so a hand that rises from it starts where the arm was. */
-const AG_POSES={
-  hold:   {near:[10,128,"hold"]}
+/* ---------------------------------------------------------------- the head: one turn for all of it, from one table of points
+   A head is drawn three-quarters on, facing right: HEAD is its outline, FACE where the eyes, the nose, the mouth, the ears and the
+   cheeks are, HAIR each style's cap (and a bun, a knot, or the hair down the back). Each has its place seen from the front too
+   (HEADF, FACEF, a style's turn: [the cap three-quarters on, with the far side's hair folded away behind the cheek; the same points
+   from the front]). As a person turns round, every point moves from one to the other by the same k, and out again on the other
+   side, mirrored: one turn for the whole head. A new style needs a cap and a turn, both drawn and looked at, at full size. */
+const HEAD=[[0.02,-0.5],[0.3,-0.4],[0.41,-0.12],[0.4,0.12],[0.3,0.36],[0.1,0.5],[-0.14,0.44],[-0.36,0.22],[-0.44,-0.08],[-0.34,-0.36]];
+const HEADF=HEAD.map((q,i)=>{const m=HEAD[(10-i)%10];return[(q[0]-m[0])/2,(q[1]+m[1])/2];});
+const FACE={eyeN:[0.07,-0.02],eyeF:[0.29,-0.02],nose:[0.24,0.1],mouth:[0.19,0.275],ear:[-0.19,0.04],earF:[0.28,0.04],blushN:[0.0,0.17],blushF:[0.33,0.165]};
+const FACEF={eyeN:[-0.115,-0.02],eyeF:[0.115,-0.02],nose:[0,0.1],mouth:[0,0.275],ear:[-0.425,0.04],earF:[0.425,0.04],blushN:[-0.2,0.17],blushF:[0.2,0.17]};
+// the nose, a small curve (five points of two curves): three-quarters on, the tip and the nostril; from the front, the nostrils' line
+const NOSE=[[-0.012,-0.07],[0.05,0.01],[0.022,0.03],[-0.005,0.04],[-0.02,0.025]],NOSEF=[[-0.026,0.006],[-0.024,0.036],[0,0.037],[0.024,0.036],[0.026,0.006]];
+const HAIR={
+  short:{cap:[[0.35,-0.28],[0.3,-0.45],[0.03,-0.56],[-0.35,-0.44],[-0.5,-0.1],[-0.45,0.18],[-0.3,0.16],[-0.27,-0.02],[-0.12,-0.1],[0,-0.23],[0.2,-0.3]],ear:1,
+    turn:[[[0.405,-0.1],[0.35,-0.28],[0.3,-0.45],[0.03,-0.56],[-0.35,-0.44],[-0.5,-0.1],[-0.45,0.18],[-0.3,0.16],[-0.27,-0.02],[-0.12,-0.1],[0,-0.23],[0.2,-0.3],[0.28,-0.295],[0.345,-0.275],[0.385,-0.19],[0.4,-0.1]],
+          [[0.455,0.03],[0.44,-0.25],[0.3,-0.48],[0,-0.565],[-0.3,-0.48],[-0.44,-0.25],[-0.455,0.03],[-0.385,0.04],[-0.37,-0.1],[-0.3,-0.19],[-0.16,-0.28],[0,-0.3],[0.16,-0.28],[0.3,-0.19],[0.37,-0.1],[0.385,0.04]]]},
+  crop:{cap:[[0.4,-0.2],[0.37,-0.44],[0.06,-0.58],[-0.35,-0.45],[-0.5,-0.1],[-0.45,0.16],[-0.3,0.14],[-0.27,-0.02],[-0.12,-0.1],[0.02,-0.2],[0.22,-0.24]],ear:1,
+    turn:[[[0.41,-0.06],[0.4,-0.2],[0.37,-0.44],[0.06,-0.58],[-0.35,-0.45],[-0.5,-0.1],[-0.45,0.16],[-0.3,0.14],[-0.27,-0.02],[-0.12,-0.1],[0.02,-0.2],[0.22,-0.24],[0.3,-0.225],[0.37,-0.2],[0.405,-0.14],[0.405,-0.07]],
+          [[0.455,0.03],[0.45,-0.22],[0.32,-0.49],[0,-0.585],[-0.32,-0.49],[-0.45,-0.22],[-0.455,0.03],[-0.385,0.04],[-0.37,-0.08],[-0.31,-0.16],[-0.17,-0.22],[0,-0.24],[0.17,-0.22],[0.31,-0.16],[0.37,-0.08],[0.385,0.04]]]},
+  bob:{cap:[[0.37,-0.2],[0.34,-0.45],[0.02,-0.575],[-0.38,-0.45],[-0.52,-0.08],[-0.51,0.28],[-0.4,0.45],[-0.16,0.46,1],[-0.08,0.22],[-0.05,-0.02],[0.06,-0.17],[0.23,-0.21]],
+    turn:[[[0.33,0.31],[0.405,0],[0.37,-0.2],[0.34,-0.45],[0.02,-0.575],[-0.38,-0.45],[-0.52,-0.08],[-0.51,0.28],[-0.4,0.45],[-0.16,0.46,1],[-0.08,0.22],[-0.05,-0.02],[0.06,-0.17],[0.23,-0.21],[0.31,-0.205],[0.365,-0.19],[0.4,0],[0.33,0.3,1]],
+          [[0.42,0.46],[0.52,0.22],[0.51,-0.12],[0.36,-0.46],[0,-0.575],[-0.36,-0.46],[-0.51,-0.12],[-0.52,0.22],[-0.42,0.46],[-0.28,0.47,1],[-0.3,0.2],[-0.29,-0.04],[-0.16,-0.2],[0,-0.23],[0.16,-0.2],[0.29,-0.04],[0.3,0.2],[0.28,0.47,1]]]},
+  long:{cap:[[0.36,-0.22],[0.33,-0.45],[0.02,-0.58],[-0.39,-0.45],[-0.54,-0.06],[-0.52,0.3],[-0.3,0.46],[-0.1,0.34],[-0.06,0.1],[-0.04,-0.06],[0.07,-0.19],[0.22,-0.24]],
+        back:[[-0.5,-0.1],[-0.6,0.5],[-0.58,1.0],[-0.36,1.14],[-0.14,1.0],[-0.08,0.4]],
+        backT:[[[-0.5,-0.1],[-0.6,0.5],[-0.58,1.0],[-0.36,1.14],[-0.14,1.0],[-0.08,0.4],[-0.12,0]],[[-0.5,-0.1],[-0.57,0.5],[-0.5,1.0],[0,1.08],[0.5,1.0],[0.57,0.5],[0.5,-0.1]]],
+    turn:[[[0.33,0.31],[0.405,0],[0.36,-0.22],[0.33,-0.45],[0.02,-0.58],[-0.39,-0.45],[-0.54,-0.06],[-0.52,0.3],[-0.3,0.46],[-0.1,0.34],[-0.06,0.1],[-0.04,-0.06],[0.07,-0.19],[0.22,-0.24],[0.3,-0.23],[0.355,-0.21],[0.4,0],[0.33,0.3]],
+          [[0.36,0.48],[0.53,0.26],[0.53,-0.1],[0.37,-0.46],[0,-0.585],[-0.37,-0.46],[-0.53,-0.1],[-0.53,0.26],[-0.36,0.48],[-0.27,0.4],[-0.31,0.12],[-0.3,-0.06],[-0.17,-0.21],[0,-0.25],[0.17,-0.21],[0.3,-0.06],[0.31,0.12],[0.27,0.4]]]},
+  bun:{cap:[[0.35,-0.28],[0.3,-0.45],[0.03,-0.56],[-0.35,-0.44],[-0.5,-0.1],[-0.45,0.2],[-0.3,0.18],[-0.27,-0.02],[-0.12,-0.1],[0,-0.23],[0.2,-0.3]],bun:[-0.43,-0.41,0.175],ear:1,
+    turn:[[[0.405,-0.1],[0.35,-0.28],[0.3,-0.45],[0.03,-0.56],[-0.35,-0.44],[-0.5,-0.1],[-0.45,0.2],[-0.3,0.18],[-0.27,-0.02],[-0.12,-0.1],[0,-0.23],[0.2,-0.3],[0.28,-0.295],[0.345,-0.275],[0.385,-0.19],[0.4,-0.1]],
+          [[0.455,0.03],[0.44,-0.25],[0.3,-0.48],[0,-0.565],[-0.3,-0.48],[-0.44,-0.25],[-0.455,0.03],[-0.385,0.04],[-0.37,-0.1],[-0.3,-0.19],[-0.16,-0.28],[0,-0.3],[0.16,-0.28],[0.3,-0.19],[0.37,-0.1],[0.385,0.04]]]},
+  coily:{cap:null,ear:1},
+  scarf:{cap:[[0.39,-0.25],[0.33,-0.47],[0.03,-0.6],[-0.38,-0.47],[-0.55,-0.1],[-0.5,0.22],[-0.3,0.26],[-0.24,0.06],[-0.1,-0.07],[0.06,-0.17],[0.24,-0.21]],
+         knot:[[-0.5,0.08],[-0.66,0.2],[-0.74,0.44],[-0.62,0.46],[-0.56,0.3],[-0.5,0.52],[-0.4,0.5],[-0.42,0.24]],
+    turn:[[[0.405,-0.08],[0.39,-0.25],[0.33,-0.47],[0.03,-0.6],[-0.38,-0.47],[-0.55,-0.1],[-0.5,0.22],[-0.3,0.26],[-0.24,0.06],[-0.1,-0.07],[0.06,-0.17],[0.24,-0.21],[0.31,-0.215],[0.365,-0.22],[0.4,-0.16],[0.4,-0.09]],
+          [[0.48,0.12],[0.5,-0.2],[0.34,-0.5],[0,-0.605],[-0.34,-0.5],[-0.5,-0.2],[-0.48,0.12],[-0.39,0.13],[-0.36,-0.04],[-0.3,-0.15],[-0.16,-0.21],[0,-0.23],[0.16,-0.21],[0.3,-0.15],[0.36,-0.04],[0.39,0.13]]]}
 };
-const AG_HANG={near:[4,34,"rest"],far:[0,6,"rest"]};
-AG_FIG.fore=0.72;
-const ag_rad=d=>d*Math.PI/180;
-// a pose by its name: in a render or a check, a name that isn't in AG_POSES (a gesture the films no longer draw) stops the film with an
-// error that says so; the player on the site draws the arms down instead
-function ag_namedPose(p){const q=AG_POSES[p];if(!q&&window.__RENDER__)throw new Error('pose "'+p+'" is a gesture these films no longer draw: keep the arms down, or give a hand something to hold (people.js, AG_POSES)');return q;}
-function ag_poseOf(o){const get=p=>p==="hang"?{near:AG_HANG.near}:typeof p==="string"?ag_namedPose(p):p;const a=get(o.pose);if(!a)return null;const b=o.pose2?get(o.pose2):null,m=clamp(o.mix||0,0,1);
-  if(!b||m<=0)return a;if(m>=1)return b;
-  const bl=(k)=>{const x=a[k]||AG_HANG[k],y=b[k]||AG_HANG[k];return[lerp(x[0],y[0],m),lerp(x[1],y[1],m),m<0.5?x[2]:y[2]];};
-  return{near:bl("near"),far:(a.far||b.far)?bl("far"):null};}
-// where an arm's joints are: the shoulder J, the elbow, the wrist
-function ag_joints(J,spec){const f=AG_FIG.fore,a1=ag_rad(spec[0]),a2=ag_rad(spec[1]),E=[J[0]+Math.sin(a1)*AG_FIG.L1*f,J[1]+Math.cos(a1)*AG_FIG.L1],
-  Wr=[E[0]+Math.sin(a2)*AG_FIG.L2*f,E[1]+Math.cos(a2)*AG_FIG.L2];return{J,E,Wr};}
-// a tapered capsule from A (width wa) to B (width wb), as part of a shape
-function ag_capsule(c,A,B,wa,wb){const dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,nx=-uy,ny=ux,ra=wa/2,rb=wb/2,an=Math.atan2(uy,ux);
-  c.moveTo(A[0]+nx*ra,A[1]+ny*ra);c.lineTo(B[0]+nx*rb,B[1]+ny*rb);c.arc(B[0],B[1],rb,an+Math.PI/2,an-Math.PI/2,true);c.lineTo(A[0]-nx*ra,A[1]-ny*ra);c.arc(A[0],A[1],ra,an-Math.PI/2,an-3*Math.PI/2,true);c.closePath();}
-// an arm's outline: the upper arm and the forearm, tapering from the shoulder to the wrist, with a rounded elbow
-function ag_armPath(J,E,Wr,w){const d1=[E[0]-J[0],E[1]-J[1]],d2=[Wr[0]-E[0],Wr[1]-E[1]],l1=Math.hypot(d1[0],d1[1])||1,l2=Math.hypot(d2[0],d2[1])||1;
-  const u1=[d1[0]/l1,d1[1]/l1],u2=[d2[0]/l2,d2[1]/l2],turn=Math.atan2(u1[0]*u2[1]-u1[1]*u2[0],u1[0]*u2[0]+u1[1]*u2[1]),
-    r=w[1]*0.56,k=Math.min(Math.abs(Math.tan(turn/2))*r,l1*0.45,l2*0.45);
-  // the centre line: along the upper arm, round the elbow, along the forearm, with each point's width
-  const pts=[],add=(x,y,wd)=>pts.push([x,y,wd]),n1=10,n2=10,na=8;
-  for(let i=0;i<=n1;i++){const u=i/n1,d=u*(l1-k);add(J[0]+u1[0]*d,J[1]+u1[1]*d,lerp(w[0],w[1],u*0.94));}
-  const A=[E[0]-u1[0]*k,E[1]-u1[1]*k],B=[E[0]+u2[0]*k,E[1]+u2[1]*k];
-  for(let i=1;i<na;i++){const u=i/na,m=1-u,q=[m*m*A[0]+2*m*u*E[0]+u*u*B[0],m*m*A[1]+2*m*u*E[1]+u*u*B[1]];add(q[0],q[1],w[1]);}
-  for(let i=0;i<=n2;i++){const u=i/n2,d=k+u*(l2-k);const bulge=Math.sin(Math.min(1,u*2.2)*Math.PI)*0.05;add(E[0]+u2[0]*d,E[1]+u2[1]*d,lerp(w[1],w[2],u)*(1+bulge));}
-  // each side, offset from the centre line; on the inside of the bend a point that would fold back over the last is left out
-  const L=[],R=[],keep=(S,x,y,tx,ty)=>{const l=S[S.length-1];if(!l||(x-l[0])*tx+(y-l[1])*ty>0.5)S.push([x,y]);};
-  for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[Math.min(pts.length-1,i+1)],o=pts[Math.max(0,i-1)],dx=q[0]-o[0],dy=q[1]-o[1],dl=Math.hypot(dx,dy)||1,tx=dx/dl,ty=dy/dl,nx=-ty,ny=tx;
-    keep(L,p[0]+nx*p[2]/2,p[1]+ny*p[2]/2,tx,ty);keep(R,p[0]-nx*p[2]/2,p[1]-ny*p[2]/2,tx,ty);}
-  return c=>{const e=pts[pts.length-1],an=Math.atan2(u2[1],u2[0]),s0=pts[0],a0=Math.atan2(u1[1],u1[0]);c.moveTo(L[0][0],L[0][1]);
-    for(let i=1;i<L.length;i++){const m=[(L[i-1][0]+L[i][0])/2,(L[i-1][1]+L[i][1])/2];c.quadraticCurveTo(L[i-1][0],L[i-1][1],m[0],m[1]);}c.lineTo(L[L.length-1][0],L[L.length-1][1]);
-    c.arc(e[0],e[1],e[2]/2,an+Math.PI/2,an-Math.PI/2,true);
-    for(let i=R.length-2;i>=0;i--){const m=[(R[i+1][0]+R[i][0])/2,(R[i+1][1]+R[i][1])/2];c.quadraticCurveTo(R[i+1][0],R[i+1][1],m[0],m[1]);}c.lineTo(R[0][0],R[0][1]);
-    c.arc(s0[0],s0[1],s0[2]/2,a0-Math.PI/2,a0-3*Math.PI/2,true);c.closePath();};}
-// a hand at the wrist, pointing along a (radians), in figure space: "rest", "hold", "point" or "open"; up: the thumb's side
-function ag_hand(c,Wr,a,kind,P,C,up){c.save();c.translate(Wr[0],Wr[1]);c.rotate(a);if(up<0)c.scale(1,-1);
-  const sk=P.skin,path=cc=>{if(kind==="open"){cc.moveTo(-4,-28);cc.bezierCurveTo(40,-36,108,-32,150,-16);cc.bezierCurveTo(162,-10,162,4,150,8);cc.bezierCurveTo(108,20,50,30,-4,28);cc.closePath();}
-      else if(kind==="point"){cc.moveTo(-4,-28);cc.bezierCurveTo(30,-34,68,-32,92,-22);cc.lineTo(150,-18);cc.bezierCurveTo(162,-17,162,-4,150,-3);cc.lineTo(100,-1);cc.bezierCurveTo(108,10,104,24,90,28);cc.bezierCurveTo(58,34,24,32,-4,28);cc.closePath();}
-      else{cc.moveTo(-4,-28);cc.bezierCurveTo(34,-36,76,-34,98,-20);cc.bezierCurveTo(116,-8,116,16,98,26);cc.bezierCurveTo(66,36,24,34,-4,28);cc.closePath();}};
-  const thumb=cc=>{if(kind==="open"){cc.moveTo(18,-26);cc.bezierCurveTo(38,-56,66,-66,82,-60);cc.bezierCurveTo(90,-54,80,-44,62,-36);cc.bezierCurveTo(48,-30,38,-28,28,-24);cc.closePath();}
-      else{cc.moveTo(20,-26);cc.bezierCurveTo(44,-44,72,-46,90,-36);cc.bezierCurveTo(98,-30,92,-20,78,-19);cc.bezierCurveTo(60,-18,42,-20,28,-20);cc.closePath();}};
-  ag_soft(c,path,mix(sk,ag_dk(sk,0.4),0.12),mix(sk,[255,240,228],0.4),70,-22,90,C.skinShade,10);ag_soft(c,thumb,mix(sk,ag_dk(sk,0.4),0.08),mix(sk,[255,240,228],0.45),66,-44,46,C.skinShade,6);
-  if(kind==="rest"||kind==="hold"){c.strokeStyle=rgba(mix(sk,[70,24,14],0.5),0.32);c.lineWidth=2;c.lineCap="round";for(const y of [-6,6,17]){c.beginPath();c.moveTo(84,y);c.quadraticCurveTo(98,y+2,106,y+6);c.stroke();}}
-  c.restore();}
-// one arm, matte like the clothes: the sleeve, a crease inside the elbow, the cuff, the hand; returns its joints
-function ag_arm(c,P,C,J,spec,back){const j=ag_joints(J,spec),w=AG_FIG.w,col=back?ag_dk(P.top.c,0.14):P.top.c,
-    hx=lerp(j.J[0],j.E[0],0.3)+30,hy=lerp(j.J[1],j.E[1],0.3)-20,ah=Math.atan2(j.Wr[1]-j.E[1],j.Wr[0]-j.E[0]),u=[Math.cos(ah),Math.sin(ah)],
-    a1=Math.atan2(j.E[1]-j.J[1],j.E[0]-j.J[0]),turn=Math.abs(Math.atan2(Math.sin(ah-a1),Math.cos(ah-a1)));
-  // a gentle bend is one outline; a sharp one (the forearm folding back) is the upper arm, then the forearm over it
-  let fn;if(turn<1.25){fn=ag_armPath(j.J,j.E,j.Wr,w);ag_soft(c,fn,ag_dk(col,0.16),ag_lt(col,0.28),hx,hy,240,rgba(ag_dk(col,0.8),0.42),20);}
-  else{ag_soft(c,cc=>ag_capsule(cc,j.J,j.E,w[0],w[1]),ag_dk(col,0.16),ag_lt(col,0.28),hx,hy,240,rgba(ag_dk(col,0.8),0.42),20);
-    fn=cc=>ag_capsule(cc,j.E,j.Wr,w[1]*0.96,w[2]);ag_soft(c,fn,ag_dk(col,0.1),ag_lt(col,0.3),j.E[0]+u[0]*80+20,j.E[1]+u[1]*80-20,200,rgba(ag_dk(col,0.8),0.42),18);}
-  c.save();ag_shape(c,fn);c.clip();c.strokeStyle=rgba(ag_dk(col,0.75),0.22);c.lineWidth=3;c.lineCap="round";const m=[j.E[0]+u[0]*60,j.E[1]+u[1]*60];
-  c.beginPath();c.moveTo(j.E[0]-u[1]*18,j.E[1]+u[0]*18);c.quadraticCurveTo(j.E[0]+u[0]*20,j.E[1]+u[1]*20,m[0]+u[1]*10,m[1]-u[0]*10);c.stroke();c.restore();
-  // the hand: the thumb on the side away from the body (up when the forearm points forward, towards us when it rises)
-  ag_hand(c,[j.Wr[0]+u[0]*6,j.Wr[1]+u[1]*6],ah+(spec[2]==="open"?-0.3:0),spec[2]||"rest",P,C,u[0]>=0?1:-1);
-  c.save();c.translate(j.Wr[0],j.Wr[1]);c.rotate(ah);c.fillStyle=rgba(ag_dk(col,0.12),1);rr(c,-16,-w[2]/2-3,20,w[2]+6,8);c.fill();c.restore();
-  return j;}
+// short coily hair: a cap with a softly scalloped edge
+HAIR.coily.cap=(()=>{const o=[[0.36,-0.27]];for(let i=0;i<=10;i++){const a=rad(-50-i*15.4),r=0.56+(i%2?0.012:-0.008);o.push([0.01+Math.cos(a)*r*0.86,-0.02+Math.sin(a)*r]);}
+  return o.concat([[-0.4,0.2],[-0.29,0.17],[-0.27,-0.01],[-0.15,-0.11],[-0.02,-0.25],[0.18,-0.32]]);})();
+HAIR.coily.turn=(()=>{const a=[[0.405,-0.1]].concat(HAIR.coily.cap,[[0.27,-0.3],[0.345,-0.28],[0.39,-0.2],[0.4,-0.1]]),b=[[0.42,0.07],[0.455,0.05]];
+  for(let i=0;i<=10;i++){const g=rad(6-i*19.2),r=0.56+(i%2?0.012:-0.008);b.push([Math.cos(g)*r*0.86,-0.02+Math.sin(g)*r]);}
+  return[a,b.concat([[-0.42,0.07],[-0.385,0.06],[-0.37,-0.09],[-0.3,-0.2],[-0.16,-0.29],[0,-0.32],[0.16,-0.29],[0.3,-0.2],[0.37,-0.09],[0.385,0.06]])];})();
+const BEARD=[[-0.27,0.1],[-0.3,0.3],[-0.16,0.47],[0.08,0.545],[0.26,0.45],[0.35,0.3],[0.32,0.2],[0.25,0.215],[0.2,0.2],[0.1,0.215],[0.04,0.32],[-0.1,0.3],[-0.19,0.12]];
+const BEARDF=[[-0.37,0.1],[-0.35,0.3],[-0.2,0.48],[0,0.55],[0.2,0.48],[0.35,0.3],[0.37,0.1],[0.28,0.13],[0.2,0.27],[0.07,0.2],[-0.07,0.2],[-0.2,0.27],[-0.28,0.13]];
+function head(ctx,P,J,o){const S=K.S,hh=J.p.head*J.u,H=HAIR[P.hair.style]||HAIR.short,e=Object.assign({},K.EXPR.neutral,o.expr||{}),sk=S.tone(P.skin),hc=S.tone(P.hair.c),small=hh<26,k=J.k==null?1:J.k,tn=k<1;
+  // a point, or a row of points, k of the way from its place seen from the front (b) to its place three-quarters on (a)
+  const T1=(a,b)=>tn?[lerp(b[0],a[0],k),lerp(b[1],a[1],k)]:a,T2=(a,b)=>tn?a.map((q,i)=>[lerp(b[i][0],q[0],k),lerp(b[i][1],q[1],k),q[2]]):a,far=x=>tn?lerp(1,x,k):x;
+  const Kp=(pts)=>pts.map(q=>[q[0]*hh,q[1]*hh,q[2]]),at=q=>[q[0]*hh,q[1]*hh],F={};for(const j in FACE)F[j]=T1(FACE[j],FACEF[j]);
+  const HD=Kp(T2(HEAD,HEADF)),la=tn?clamp((k-0.35)/0.45,0,1):1;
+  ctx.save();ctx.translate(J.hc[0],J.hc[1]);ctx.rotate(J.ha+(o.nod||0)*k);
+  if(H.bun)S.fill(ctx,c=>ell(c,H.bun[0]*k*hh,H.bun[1]*hh,H.bun[2]*hh,H.bun[2]*hh),hc,{});
+  if(H.knot&&tn)S.poly(ctx,Kp(H.knot.map(q=>[q[0]+0.57*(1-k),q[1]-0.14*(1-k)])),dk(hc,0.06),{seed:13});   // a knot at the back goes behind the head as it turns
+  if(H.ear)for(const q of [at(F.ear),at(F.earF)])S.fill(ctx,c=>ell(c,q[0],q[1],0.065*hh,0.095*hh),dk(sk,0.05),{w:0.8});
+  S.poly(ctx,HD,sk,S.shade?{grad:[0.3*hh,-0.3*hh,-0.4*hh,0.5*hh,0.1]}:{seed:7});
+  if(P.beard)S.poly(ctx,Kp(T2(BEARD,BEARDF)),S.tone(P.beard),{seed:9,w:0.6,flat:true});
+  // the cheeks, the eyes, the brows, the nose, the mouth
+  const gz=o.gaze||[0,0],bl=o.blink||0,ey=q=>[q[0]*hh+gz[0]*k*0.02*hh,q[1]*hh+gz[1]*0.02*hh],eN=ey(F.eyeN),eF=ey(F.eyeF),hard=S.id==="line"&&!S.self,ink=hard?S.ink:mix(S.ink,[30,22,26],S.self?0.62:0.4);
+  if(S.blush&&!small){ctx.fillStyle=css(mix(sk,[232,96,84],0.5),S.blush);ctx.save();ctx.beginPath();spline(ctx,HD);ctx.clip();ctx.beginPath();for(const q of [F.blushN,F.blushF])ell(ctx,q[0]*hh,q[1]*hh,0.085*hh,0.06*hh);ctx.fill();ctx.restore();}
+  const er=(S.id==="line"?0.032:0.037)*hh;ctx.fillStyle=css(ink);
+  for(const [q,f] of [[eN,1],[eF,far(0.86)]]){ctx.beginPath();ctx.ellipse(q[0],q[1],er*f,Math.max(er*0.16,er*1.12*(1-bl)),0,0,TAU);ctx.fill();}
+  ctx.lineCap="round";ctx.lineJoin="round";
+  if(!small){ctx.strokeStyle=css(hard?S.ink:dk(hc,0.25));ctx.lineWidth=(S.id==="line"?0.02:0.024)*hh;
+    const bw=0.062*hh,by=-0.118*hh-e.brow*0.012*hh;
+    for(const [q,f,sg] of [[eN,1,1],[eF,far(0.8),-1]]){const t=e.brow<0?e.brow*0.04*hh*sg:0;ctx.beginPath();ctx.moveTo(q[0]-bw*f,by+q[1]+0.02*hh-t);ctx.quadraticCurveTo(q[0],by+q[1]-0.004*hh-Math.max(0,e.brow)*0.014*hh,q[0]+bw*f,by+q[1]+0.02*hh+t);ctx.stroke();}
+    const n=at(F.nose);
+    if(S.id==="line"){const N=T2(NOSE,NOSEF).map(q=>[n[0]+q[0]*hh,n[1]+q[1]*hh]);ctx.strokeStyle=css(hard?S.ink:dk(mix(sk,[190,90,80],0.45),0.25));ctx.lineWidth=0.018*hh;
+      ctx.beginPath();ctx.moveTo(N[0][0],N[0][1]);ctx.quadraticCurveTo(N[1][0],N[1][1],N[2][0],N[2][1]);ctx.quadraticCurveTo(N[3][0],N[3][1],N[4][0],N[4][1]);ctx.stroke();}
+    else{ctx.fillStyle=css(dk(mix(sk,[214,110,90],0.25),0.1),S.id==="paper"?0.9:0.75);ctx.beginPath();ctx.ellipse(n[0]+0.012*hh*k,n[1],0.03*hh,0.04*hh,-0.3*k,0,TAU);ctx.fill();}
+    const m=at(F.mouth),mw=(0.062+0.014*Math.max(0,e.smile))*hh*lerp(1.12,1,k),mr=far(0.9);ctx.strokeStyle=css(hard?S.ink:(P.beard?lt(S.tone(P.beard),0.5):dk(mix(sk,[170,60,60],0.5),0.3)));ctx.lineWidth=(S.id==="line"?0.02:0.024)*hh;
+    if(e.open>0.05){const d=(0.02+0.05*e.open)*hh,ly=m[1]-e.smile*0.01*hh;ctx.fillStyle=css([104,46,52]);ctx.beginPath();ctx.moveTo(m[0]-mw*0.86,ly);ctx.quadraticCurveTo(m[0],ly+0.012*hh,m[0]+mw*far(0.8/0.86)*0.86,ly-0.004*hh*k);
+      ctx.bezierCurveTo(m[0]+mw*0.7,ly+d*1.25,m[0]-mw*0.7,ly+d*1.3,m[0]-mw*0.86,ly);ctx.closePath();ctx.fill();if(S.id==="line")ctx.stroke();}
+    else{ctx.beginPath();ctx.moveTo(m[0]-mw,m[1]-e.smile*0.012*hh);ctx.quadraticCurveTo(m[0]+0.006*hh*k,m[1]+e.smile*0.046*hh,m[0]+mw*mr,m[1]-e.smile*lerp(0.012,0.016,k)*hh);ctx.stroke();}}
+  // the hair or the scarf, over the head
+  if(H.knot&&!tn)S.poly(ctx,Kp(H.knot),dk(hc,0.06),{seed:13});
+  S.poly(ctx,Kp(tn&&H.turn?T2(H.turn[0],H.turn[1]):H.cap),hc,S.shade?{grad:[0.2*hh,-0.5*hh,-0.5*hh,0.3*hh,0.12],seed:5}:{seed:5});
+  if(!small&&la>0.01){if(P.hair.style==="scarf")S.line(ctx,c=>{c.moveTo(0.3*hh,-0.3*hh);c.quadraticCurveTo(0,-0.42*hh,-0.36*hh,-0.2*hh);c.moveTo(0.16*hh,-0.42*hh);c.quadraticCurveTo(-0.1*hh,-0.46*hh,-0.42*hh,-0.02*hh);},null,0.55,{a:la});
+    else if(P.hair.style!=="coily")S.line(ctx,c=>{c.moveTo(0.12*hh,-0.48*hh);c.quadraticCurveTo(-0.1*hh,-0.4*hh,-0.3*hh,-0.16*hh);},null,0.5,{a:la});}
+  if(P.earrings&&!small){const q=at(T1([-0.185,0.17],[-0.42,0.2])),f=at(T1([0.39,0.17],[0.42,0.2])),rf=tn?clamp((1-k)*2.5,0,1):0;S.fill(ctx,c=>ell(c,q[0],q[1],0.03*hh,0.03*hh),P.earrings,{w:0.6,flat:true});
+    if(rf>0.05)S.fill(ctx,c=>ell(c,f[0],f[1],0.03*hh*rf,0.03*hh*rf),P.earrings,{w:0.6,flat:true});}
+  if(P.glasses&&!small){ctx.strokeStyle=css(hard?S.ink:P.glasses);ctx.lineWidth=(S.id==="line"?0.02:0.026)*hh;ctx.fillStyle="rgba(255,255,255,0.22)";const fk=far(0.82);
+    for(const [q,f] of [[at(F.eyeN),1],[at(F.eyeF),fk]]){ctx.beginPath();ctx.ellipse(q[0],q[1]+0.005*hh,0.098*hh*f,0.092*hh,0,0,TAU);ctx.fill();ctx.stroke();}
+    // the bridge, and the arms back to the ears: the far one comes into view as the head turns
+    const a=at(F.eyeN),b=at(F.eyeF),te=H.ear?0.415:0.3,t0=T1([-0.2,-0.04],[-te,-0.03]),t1=T1([0.29+0.098*0.82,-0.03],[te,-0.03]);   // the arms end at the ears, or where the hair covers themctx.beginPath();ctx.moveTo(a[0]+0.098*hh,a[1]);ctx.lineTo(b[0]-0.098*fk*hh,b[1]);ctx.moveTo(a[0]-0.098*hh,a[1]-0.01*hh);ctx.lineTo(t0[0]*hh,t0[1]*hh);
+    if(tn){ctx.moveTo(b[0]+0.098*fk*hh,b[1]-0.01*hh);ctx.lineTo(t1[0]*hh,t1[1]*hh);}ctx.stroke();}
+  ctx.restore();}
 
-/* ---------------------------------------------------------------- drawing a person */
-function ag_person(ctx,who,x,y,s,o){o=o||{};const F=ag_fig(who),P=F.P,C=F.C,t=o.t||0,pose=o.pose&&(o.pose!=="hang"||(o.pose2&&o.mix>0))?ag_poseOf(o):null,A=AG_FIG.anchor,ph=TAU/(P.breath?1/P.breath:3.6);
-  const br=Math.sin(t*ph)*2.2,blink=o.blink!=null?o.blink:ag_blinkAt(t,P),g=o.gaze||[2,0];
-  if(window.__RENDER__&&o.cut==null&&!o.covered)ag_bottomShows(ctx,ctx.getTransform().translate(x,y).scale(o.flip?-s:s,s).translate(-A[0],-A[1]),who);
-  ctx.save();ctx.translate(x,y);ctx.scale(o.flip?-s:s,s);ctx.translate(-A[0],-A[1]);
-  ctx.save();ctx.translate(0,br);
-  let hands=null;
-  // o.cut: a height in the frame below which the body and hanging arms are hidden (behind a desk drawn first); moving arms still show
-  const body=(L)=>{if(o.cut==null)return ag_drawLayer(ctx,L);ctx.save();ctx.beginPath();ctx.rect(-4000,-4000,9000,4000+A[1]+(o.cut-y)/s-br);ctx.clip();ag_drawLayer(ctx,L);ctx.restore();};
-  if(!pose)body(ag_figBody(F,true,true));
-  else{const J=AG_FIG.shoulder,farMoves=!!pose.far;const fr=farMoves?ag_arm(ctx,P,C,J.far,pose.far,true):null;
-    body(ag_figBody(F,false,!farMoves));
-    const nj=ag_joints(J.near,pose.near||AG_HANG.near);hands={near:nj.Wr,far:fr?fr.Wr:null,nearElbow:nj.E};
-    if(o.holdBack)o.holdBack(ctx,hands);ag_arm(ctx,P,C,J.near,pose.near||AG_HANG.near,false);if(o.hold)o.hold(ctx,hands);}
+/* ---------------------------------------------------------------- the body */
+function hand(ctx,P,J,W,deg,kind,far){const S=K.S,r=J.p.hand*J.u*0.52,c=polar(W,deg,r*0.75),sk=far?dk(S.tone(P.skin),0.07):S.tone(P.skin);
+  if(kind==="open"||kind==="flat"){const tip=polar(c,deg,r*1.25),th=polar(polar(c,deg,-r*0.2),deg+62,r*(kind==="flat"?0.9:1.25));S.fill(ctx,cc=>{capsule(cc,polar(c,deg,-r*0.5),tip,r*0.98,r*0.8);capsule(cc,c,th,r*0.46,r*0.3);},sk,{w:0.8});
+    if(kind==="open")S.line(ctx,cc=>{for(const k of [-0.34,0,0.34]){const a=polar(polar(c,deg,r*0.95),deg+90,r*k*1.5),b=polar(a,deg,r*0.75);cc.moveTo(a[0],a[1]);cc.lineTo(b[0],b[1]);}},null,0.42);return;}
+  // a hand at rest hangs open: a long mitten, the thumb lying along its front (a round hand with the thumb out is a fist)
+  if(kind==="rest"){const m=polar(W,deg,r*0.98),t0=polar(polar(m,deg,-r*0.62),deg+90,r*0.5),t1=polar(t0,deg+24,r*0.95);
+    S.fill(ctx,cc=>{ell(cc,m[0],m[1],r*0.82,r*1.36,-rad(deg));capsule(cc,t0,t1,r*0.4,r*0.28);},sk,{w:0.8});return;}
+  S.fill(ctx,cc=>{ell(cc,c[0],c[1],r*0.92,r*1.16,-rad(deg));
+    if(kind==="point"){const tip=polar(c,deg,r*1.9);capsule(cc,c,tip,r*0.42,r*0.3);}
+    else{const th=polar(c,deg+95,r*(kind==="grip"?0.7:0.95));capsule(cc,c,th,r*0.5,r*0.34);}},sk,{w:0.8});}
+function arm(ctx,P,J,far,o){const S=K.S,p=J.p,u=J.u,sh=far?J.shF:J.shN,e=far?J.eF:J.eN,w=far?J.wF:J.wN,a=far?J.aF:J.aN,top=S.tone(P.top.c),col=far?dk(top,S.id==="line"?0.05:0.1):(S.id==="soft"?lt(top,0.07):top);
+  const short=P.top.sleeve==="short",r=[p.arm[0]*u/2,p.arm[1]*u/2,p.arm[2]*u/2],sk=far?dk(S.tone(P.skin),0.07):S.tone(P.skin);
+  if(o.under)o.under(ctx,far?J.hdF:J.hdN,a[1],J);
+  if(short){S.fill(ctx,c=>{capsule(c,e,w,r[1]*0.9,r[2]*0.92);},sk,{w:0.8});S.fill(ctx,c=>{capsule(c,sh,polar(sh,a[0],p.uarm*u*0.62),r[0],r[1]*1.06);},col,{});}
+  else S.fill(ctx,c=>{capsule(c,sh,e,r[0],r[1]);capsule(c,e,w,r[1],r[2]);},col,{});
+  hand(ctx,P,J,w,a[1],a[2]||"rest",far);
+  if(!short)S.line(ctx,c=>{const q=polar(w,a[1],-4*u),n=[Math.cos(rad(a[1])),-Math.sin(rad(a[1]))];c.moveTo(q[0]-n[0]*r[2],q[1]-n[1]*r[2]);c.lineTo(q[0]+n[0]*r[2],q[1]+n[1]*r[2]);},null,0.6);}
+function shoe(ctx,P,J,A,deg,far){const S=K.S,p=J.p,u=J.u,L=p.foot*u,hgt=p.ankle*u,col=far?dk(S.tone(P.shoe),0.1):S.tone(P.shoe);
+  // a foot that points at us is seen short: its length shrinks about the ankle as the person turns to the front
+  const k=J.k==null?1:J.k,f=lerp(0.46,1,k),X=v=>(v-0.18)*f*L+0.18*L*k;
+  ctx.save();ctx.translate(A[0],A[1]);ctx.rotate(rad(scr(deg||0,k)));
+  S.poly(ctx,[[X(-0.3),-0.2*hgt],[X(-0.34),hgt*0.62],[X(-0.28),hgt,1],[X(0.62),hgt,1],[X(0.7),hgt*0.66],[X(0.5),hgt*0.14],[X(0.18),-0.3*hgt],[X(-0.04),-0.42*hgt]],col,{seed:3,exact:true});
+  ctx.restore();}
+function leg(ctx,P,J,far,o){const S=K.S,p=J.p,u=J.u,h=far?J.hF:J.hN,k=far?J.kF:J.kN,n=far?J.nF:J.nN,b=P.bottom||{kind:"trousers",c:[70,70,84]},skirt=b.kind==="skirt"||b.kind==="long";
+  const r=[p.leg[0]*u/2,p.leg[1]*u/2,p.leg[2]*u/2],col=far?dk(S.tone(b.c),S.id==="line"?0.06:0.11):S.tone(b.c),sk=far?dk(S.tone(P.skin),0.08):S.tone(P.skin);
+  shoe(ctx,P,J,n,far?o.pose.fF:o.pose.fN,far);
+  if(skirt)S.fill(ctx,c=>{capsule(c,k,n,r[1]*0.82,r[2]*0.86);},sk,{w:0.8});
+  else S.fill(ctx,c=>{capsule(c,h,k,r[0],r[1]);capsule(c,k,n,r[1],r[2]*1.06);},col,{});}
+// a skirt: one piece of cloth round both thighs, down to its hem; standing or walking it hangs from the hips and swings with the legs
+function skirt(ctx,P,J,o){const S=K.S,p=J.p,u=J.u,b=P.bottom,long=b.kind==="long",t=long?0.86:0.16,col=S.tone(b.c),r0=p.leg[0]*u*0.56,r1=p.leg[1]*u*(long?0.9:0.78),r2=p.leg[1]*u*(long?1.0:0.86);
+  const hemN=[lerp(J.kN[0],J.nN[0],t),lerp(J.kN[1],J.nN[1],t)],hemF=[lerp(J.kF[0],J.nF[0],t),lerp(J.kF[1],J.nF[1],t)],w=[J.hip[0],J.hip[1]-p.leg[0]*u*0.3],g=S.shade?{grad:[J.hip[0]+60*u,J.hip[1],J.hip[0]-90*u,hemN[1],0.12],seed:17,exact:true}:{seed:17,exact:true};
+  if(J.mode==="stand"&&Math.abs(o.pose.lN[0])<60&&Math.abs(o.pose.lF[0])<60){const hw=p.tor[2]*u/2,y=Math.max(hemN[1],hemF[1])+r2*0.5,kb=Math.min(J.kN[0],J.kF[0]),kf=Math.max(J.kN[0],J.kF[0]),
+      xb=Math.min(hemN[0],hemF[0],kb)-r2*(long?0.85:1.2)-8*u,xf=Math.max(hemN[0],hemF[0],kf)+r2*(long?0.85:1.2)+8*u,y0=J.hip[1]-14*u;
+    S.poly(ctx,[[J.hip[0]-hw*0.98,y0,1],[lerp(J.hip[0]-hw,xb,0.6)-6*u,lerp(y0,y,0.5)],[xb,y,1],[(xb+xf)/2,y+5*u],[xf,y,1],[lerp(J.hip[0]+hw,xf,0.6)+6*u,lerp(y0,y,0.5)],[J.hip[0]+hw,y0,1]],col,g);
+    S.line(ctx,c=>{for(const f of [0.3,0.55,0.78]){const a=[J.hip[0]+lerp(-hw,hw,f),y0+26*u],q=[lerp(xb,xf,f),y-4*u];c.moveTo(a[0],a[1]);c.quadraticCurveTo((a[0]+q[0])/2+5*u,(a[1]+q[1])/2,q[0],q[1]);}},null,0.5);return;}
+  S.fill(ctx,c=>{capsule(c,J.hN,J.kN,r0,r1);capsule(c,J.hF,J.kF,r0,r1);capsule(c,J.kN,hemN,r1,r2);capsule(c,J.kF,hemF,r1,r2);
+    pg(c,[J.hN,J.kN,[hemN[0],hemN[1]+r2*0.6],[hemF[0],hemF[1]+r2*0.6],J.kF,J.hF]);ell(c,w[0],w[1],p.tor[2]*u*0.5*lerp(1,0.78,J.side||0),p.leg[0]*u*0.5);},col,g);}
+function torso(ctx,P,J,o){const S=K.S,p=J.p,u=J.u,T=p.torso*u,pr=J.side||0,sw=p.tor[0]*u/2*lerp(1,0.6,pr),ww=p.tor[1]*u/2*lerp(1,0.72,pr),hw=p.tor[2]*u/2*lerp(1,0.7,pr),nw=p.head*u*0.16,top=S.tone(P.top.c);
+  ctx.save();ctx.translate(J.hip[0],J.hip[1]);ctx.rotate(J.le);   // y up the back is -y here
+  // from the side the chest comes forward a little (ch) and the back is flatter
+  // and the hem's corners are cut off (d), most of all at the back, where someone sits
+  const ch=pr*0.12*sw,d=pr*0.14*T,hem=lerp(0.08,0.05,pr)*T,k=1-pr,pts=[[-hw+d*0.9,hem,k],[-hw,hem-d,k],[-ww,-0.42*T],[-sw+ch*0.5,-0.8*T],[-sw*0.88+ch*0.5,-0.95*T],[-sw*0.5,-1.02*T],[-nw,-1.045*T],[nw*1.3,-1.04*T],[sw*0.5+ch,-1.0*T],[sw*0.84+ch,-0.9*T],[sw*0.96+ch*1.5,-0.7*T],[ww*1.06+ch,-0.4*T],[hw*1.02,hem-d*0.6,k],[hw*1.02-d*0.6,hem,k]];
+  S.poly(ctx,pts,top,S.shade?{grad:[sw,-T,-sw,0.1*T,0.15],seed:11,exact:true}:{seed:11,exact:true});
+  // what is on the front of the top moves to the front edge as the body turns, and stays inside the top
+  const tk=J.k==null?1:J.k,cx=lerp(sw*0.2,sw*0.8,pr)*tk;ctx.save();ctx.beginPath();spline(ctx,pts);ctx.clip();
+  if(P.top.kind==="jacket"){const inn=S.tone(P.top.inner||[240,236,226]);
+    S.fill(ctx,c=>pg(c,[[cx-nw*1.2,-1.04*T],[cx+nw*1.1,-1.04*T],[cx+nw*0.2,-0.66*T]]),inn,{w:0.7,flat:true});
+    S.line(ctx,c=>{c.moveTo(cx+nw*0.2,-0.66*T);c.lineTo(cx+nw*0.1,0.07*T);c.moveTo(cx-nw*1.2,-1.04*T);c.lineTo(cx-nw*1.9,-0.84*T);c.lineTo(cx-nw*0.5,-0.8*T);c.moveTo(cx+nw*1.1,-1.04*T);c.lineTo(cx+nw*1.7,-0.86*T);c.lineTo(cx+nw*0.75,-0.82*T);},null,0.55);
+    if(u>0.2){ctx.fillStyle=css(S.id==="line"?(S.self?dk(top,0.45):S.ink):dk(top,0.35));for(const f of [-0.42,-0.22]){ctx.beginPath();ctx.arc(cx+nw*lerp(0.75,0.5,pr)*tk,f*T,Math.max(1.2,5*u),0,TAU);ctx.fill();}}}
+  else{const band=dk(top,0.12);S.fill(ctx,c=>{c.moveTo(-nw*1.25,-1.035*T);c.quadraticCurveTo(cx*0.6,-0.93*T,nw*1.6,-1.03*T);c.quadraticCurveTo(cx*0.6,-0.985*T,-nw*1.25,-1.035*T);c.closePath();},S.id==="line"?top:band,{w:0.6,flat:true});
+    S.line(ctx,c=>{c.moveTo(-hw*0.96,hem-0.06*T);c.lineTo(hw*0.98,hem-0.06*T);},null,0.5);}
+  ctx.restore();ctx.restore();}
+// where the joints are in the frame, whichever way the person faces
+const facing=(J,x,sg)=>{if(sg<0)for(const j in J)if(Array.isArray(J[j])&&J[j].length===2&&typeof J[j][0]==="number")J[j]=[2*x-J[j][0],J[j][1]];J.sgn=sg;return J;};
+function draw(ctx,P,x,floor,h,pose,o){const S=K.S,t=o.t||0,id=seedOf(P);
+  const br=Math.sin(t*(1.5+0.4*hash(id,9))+id)*0.9;                     // breath: the chest and head rise a little, each to their own time
+  if(o.blink==null){const k=(t*(0.24+0.14*hash(id,8))+hash(id,3))%1;o.blink=k>0.965?1:0;}
+  const tu=turnOf(o),mir=tu.sg<0;o.sgn=tu.sg;
+  ctx.save();if(mir){ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);}
+  const J=rig(P,pose,x,floor,h,o),u=J.u,p=J.p;S.begin(ctx,{lw:clamp(h*0.0056,1.4,6.5),sh:clamp(h*0.0078,1.5,8.5),far:o.far||0});
+  const lower=o.part!=="upper",upper=o.part!=="lower";
+  if(lower&&o.shade!==0&&S.id!=="paper"){const m=J.mode,cx=m==="sit"?J.hip[0]:(J.nN[0]+J.nF[0])/2+(m==="kneel"?-40*u:20*u)*J.k,w=m==="kneel"?230*u:m==="sit"?170*u:150*u;
+    ctx.fillStyle=S.id==="line"?"rgba(60,44,70,0.16)":"rgba(70,48,56,0.14)";ctx.beginPath();ctx.ellipse(cx+(o.sun||30)*u,floor+2*u,w,w*0.16,0,0,TAU);ctx.fill();}
+  const sk=P.bottom&&(P.bottom.kind==="skirt"||P.bottom.kind==="long");
+  J.sc[1]-=br*u;J.shN[1]-=br*u;J.shF[1]-=br*u;J.hc[1]-=br*1.2*u;J.nb[1]-=br*u;
+  if(upper&&HAIR[P.hair.style]&&HAIR[P.hair.style].back){const hh=p.head*u,H=HAIR[P.hair.style],bk=J.k<1&&H.backT?H.backT[0].map((q,i)=>[lerp(H.backT[1][i][0],q[0],J.k),lerp(H.backT[1][i][1],q[1],J.k)]):H.back;
+    ctx.save();ctx.translate(J.hc[0],J.hc[1]);ctx.rotate(J.ha);S.poly(ctx,bk.map(q=>[q[0]*hh,q[1]*hh]),dk(S.tone(P.hair.c),0.08),{seed:21});ctx.restore();}
+  if(upper)arm(ctx,P,J,true,{pose,under:o.underF});
+  if(lower){leg(ctx,P,J,true,o);leg(ctx,P,J,false,o);if(sk)skirt(ctx,P,J,o);}
+  if(upper){
+    // the neck, then the top over it
+    const nk=[J.nb[0]-Math.sin(J.le)*12*u,J.nb[1]+Math.cos(J.le)*12*u],nt=[lerp(J.nb[0],J.hc[0],0.62),lerp(J.nb[1],J.hc[1],0.62)];
+    S.fill(ctx,c=>capsule(c,nk,nt,p.head*u*0.165,p.head*u*0.15),dk(S.tone(P.skin),0.09),{w:0.8,flat:true});
+    torso(ctx,P,J,o);
+    // a thigh that rises past the level of the hips (a crouch) lies along the near side of the body: it is drawn over the top
+    const ov=lower?(o.legOver!=null?o.legOver:J.side*clamp((pose.lN[0]-92)/14,0,1)):0;
+    if(ov>0){ctx.save();ctx.globalAlpha*=ov;if(sk)skirt(ctx,P,J,o);else leg(ctx,P,J,false,o);ctx.restore();}
+    head(ctx,P,J,o);arm(ctx,P,J,false,{pose,under:o.under});
+    if(o.hold)o.hold(ctx,J.hdN,J.aN[1],J);}
   ctx.restore();
-  // the head: breathing a little less than the body, nodding about the top of the neck
-  ctx.save();ctx.translate(AG_FIG.piv[0],AG_FIG.piv[1]+br*0.7);ctx.rotate(o.nod||0);ctx.translate(-AG_FIG.piv[0],-AG_FIG.piv[1]);
-  ag_drawLayer(ctx,F.head);
-  ag_face(ctx,P,C,blink,g,o.talk,o.smile==null?0.3:o.smile);
+  return facing(J,x,tu.sg);}
+K.person=(ctx,who,x,floor,h,pose,o)=>{o=Object.assign({},o||{});const P=typeof who==="string"?K.CAST[who]:who;if(!P)throw new Error("PK.person: nobody called "+who);
+  pose=poseOf(pose||"stand");if(typeof o.expr==="string")o.expr=K.EXPR[o.expr];const given=pose,gz=o.gaze||[0,0];pose=alive(P,pose,o);o.pose=pose;
+  // what the kit's checks follow about everyone a film draws (tools/people.py sets PK.watch): not a small picture of someone (o.icon),
+  // and someone on a screen (o.screen: a tile of a call) is followed as that, not as someone in the room
+  const seen=J=>{if(K.watch&&!o.icon)K.watch({who:typeof who==="string"?who:(P.key||P.name||"someone"),kid:!!P.kid,x,floor,h,flip:o.flip===true?1:(o.flip||0),part:o.part||"whole",mode:pose.mode||"stand",screen:!!o.screen,
+      // the pose, the face and the eyes as the film gives them, before the kit's own life (a settle, a glance): what was staged
+      pose:[given.lean||0,given.head||0,given.aN[0],given.aN[1],given.aF[0],given.aF[1],given.lN[0],given.lN[1],given.lF[0],given.lF[1]],
+      reach:[o.reachN?(o.reachNk==null?1:o.reachNk):pose.clasp||0,o.reachF?(o.reachFk==null?1:o.reachFk):pose.clasp||0],hold:!!(o.hold||o.under||o.underF||o.holds),
+      at:[o.reachN?o.reachN[0]:0,o.reachN?o.reachN[1]:0,o.reachF?o.reachF[0]:0,o.reachF?o.reachF[1]:0],
+      expr:o.expr?[o.expr.brow||0,o.expr.smile||0,o.expr.open||0]:[0,0.3,0],gaze:gz,nod:o.nod||0,live:o.t!=null&&o.life!==0,busy:!!o.busy,a:o.a==null?1:o.a,hc:J.hc,hh:J.p.head*J.u,ctx});return J;};
+  if(o.a!=null&&o.a<0.999){if(o.a<=0.004)return facing(rig(P,pose,x,floor,h,o),x,turnOf(o).sg);
+    const cv=ctx.canvas,[bc,bx]=ag_buf("pkFade",cv.width,cv.height);bx.setTransform(ctx.getTransform());const J=draw(bx,P,x,floor,h,pose,o);
+    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha*=o.a;ctx.drawImage(bc,0,0);ctx.restore();return seen(J);}
+  return seen(draw(ctx,P,x,floor,h,pose,o));};
+K.rig=(who,x,floor,h,pose,o)=>{o=Object.assign({},o||{});const P=typeof who==="string"?K.CAST[who]:who;return facing(rig(P,alive(P,poseOf(pose||"stand"),o),x,floor,h,o),x,turnOf(o).sg);};
+/* a walk from w.x0 to w.x1 between w.t0 and w.t1, the stride dying away as they stop; before it w.before, after it w.then */
+K.walkAt=(t,w)=>{const u=clamp((t-w.t0)/(w.t1-w.t0),0,1),k=0.16,s=u<k?u*u/(2*k*(1-k)):u>1-k?1-(1-u)*(1-u)/(2*k*(1-k)):(u-k/2)/(1-k),x=lerp(w.x0,w.x1,s),
+    fl=typeof w.floor==="function"?w.floor(x):w.floor,h=typeof w.h==="function"?w.h(fl):w.h,go=clamp(Math.min(u/k,(1-u)/k),0,1);
+  return{x,floor:fl,h,go:sine(go),step:Math.abs(x-w.x0)/K.strideOf(h,w.amp)+(w.phase||0),left:w.flip!=null?w.flip:w.x1<w.x0,u};};
+K.walk=(ctx,who,t,w,o)=>{const P=typeof who==="string"?K.CAST[who]:who,amp=w.amp||K.ampOf(P),q=K.walkAt(t,w.amp?w:Object.assign({},w,{amp})),carry=p=>w.arms?Object.assign({},p,{aN:w.arms.aN||p.aN,aF:w.arms.aF||p.aF},w.arms.lean!=null?{lean:w.arms.lean}:{}):p;
+  // the stride grows out of the stance they set off from (w.before) and dies into the one they stop in (w.then): never by way of a
+  // plain stand between two stances, and never switched to
+  const st=carry(K.POSES.stand),pose=K.poseMix(q.u<0.5?(w.before||st):(w.then||st),carry(K.poseWalk(q.step,1,amp)),q.go);
+  const J=K.person(ctx,who,q.x,q.floor,q.h,pose,Object.assign({t,flip:q.left,life:1-0.8*q.go},o||{}));J.at=q;return J;};
+})(PK);
+
+/* ===== The people kit: things =====
+   What people sit at, hold and work with, drawn by the look in use. Sizes in the frame's px; k scales a thing.
+     PK.PAL                          the kit's colours for places and things (PK.col(name, i) is one of them, toned by the look)
+     PK.chair(ctx, x, floor, h, flip, o)   a chair for someone h tall whose hips are at x; flip: they face left, or a number from 0
+                                     to 1: the chair turns round with them, through the front. o.col; o.swivel: an office chair
+                                     on a column and a star of castors, which is the chair that turns
+     PK.table(ctx, x, y, rx, floor)  a round table: its top at y, its foot on the floor
+     PK.desk(ctx, x, y, w, floor, o) a desk seen from its long side: its top at y, w wide. o.col, o.panel (a modesty panel)
+     PK.laptop(ctx, x, y, o)         a laptop on a top at y, seen from the side, open towards o.flip ? left : right; o.k
+     PK.monitor(ctx, x, y, w, h, o)  a screen on a stand, facing us; o.draw(ctx, x, y, w, h) draws what it shows
+     PK.board(ctx, x, y, w, h, o)    a whiteboard on a wall; o.pin: a pinboard instead
+     PK.sheet(ctx, x, y, w, h, o)    a sheet of paper or a note; o.rot, o.col, o.pin
+     PK.mug(ctx, x, y, k, col, t, steam), PK.pot(ctx, x, y, w, h), PK.plant(ctx, x, y, k, seed, t)
+     PK.clock(ctx, x, y, r, hours)   a wall clock showing a time, such as 7.0 or 8.17 (null: its face, without hands)
+     PK.door(ctx, x, y, w, h, o)     a door in a wall, its foot at y; o.open 0 to 1, o.col, o.glass
+     PK.seedling(ctx, x, y, k, g)    a seedling in the ground, grown to g (0 to 1); PK.potted(ctx, x, y, k, g) in a small pot
+     PK.tree(ctx, x, y, k, seed, o)  a tree with a round crown, its foot at (x, y); o.col, o.far
+     PK.cloud(ctx, x, y, k)
+     PK.tick(ctx, x, y, r, a, col)   a round mark with a tick: something done, or still alive */
+(K=>{
+const {TAU,rad,lerp,clamp,mix,dk,lt,css,rnd,hash,polar,pg,spline,capsule,rrect,ell}=K.u;
+K.PAL={skyTop:[168,204,226],skyLow:[250,238,212],cloud:[255,251,242],
+  wall:[240,226,206],wallCool:[226,228,222],floor:[184,132,98],floorDk:[158,108,80],skirting:[250,244,232],
+  wood:[212,166,118],woodDk:[172,128,88],frame:[250,244,232],glass:[200,228,236],
+  viewTree:[132,176,132],viewTree2:[108,154,120],viewBld:[230,206,180],viewRoof:[196,118,92],lawn:[170,196,128],path:[236,220,190],trunk:[134,100,78],
+  rug:[208,126,100],rug2:[236,200,154],plant:[98,152,112],plant2:[128,180,132],pot:[200,114,84],board:[251,247,238],cork:[214,178,134],
+  note:[[246,208,114],[152,198,192],[238,154,124],[192,206,144]],book:[[194,94,84],[74,114,144],[222,184,104],[114,154,124],[154,104,134],[232,222,202]],
+  mug:[234,124,92],mug2:[112,162,172],laptop:[126,134,146],lamp:[242,204,124],chair:[86,120,128],chair2:[176,120,104],screen:[58,62,76],screenLit:[244,246,240],
+  leaf:[104,160,92],soilDk:[164,74,48],brick:[204,132,104],stone:[226,214,196]};
+K.col=(n,i)=>K.S.tone(i==null?K.PAL[n]:K.PAL[n][i]);
+const C=K.col;
+
+/* A chair, seen from the side. Turned (flip between 0 and 1), it goes round through the front as the person on it does: c is the
+   cosine of the turn (1: facing right, 0: facing us, -1: facing left) and k how far it is still seen from the side. The seat keeps
+   its width; the back, behind the sitter, crosses from one side to the other and is seen wide from the front; a plain chair's four
+   legs go round with it, an office chair's column and star stay where they are. */
+K.chair=(ctx,x,floor,h,flip,o)=>{o=o||{};const S=K.S,u=h/1000,seat=K.seatOf(h),y=floor-seat,col=S.tone(o.col||K.PAL.chair),fl=flip===true?1:(flip||0),c=Math.cos(Math.PI*fl),k=Math.abs(c)>0.999?1:Math.abs(c),
+    s=Math.sqrt(Math.max(0,1-c*c)),X=v=>x+v*u*c,dkc=dk(col,0.25);
+  if(o.swivel){const bw=lerp(112,19,k)*u,st=lerp(60,7,k)*u;
+    // the star and its castors, the column, then the back on its stem, then the seat
+    S.fill(ctx,c2=>{for(const q of [-118,0,118])ell(c2,x+q*u,floor-15*u,15*u,15*u);},[70,72,84],{w:0.8});
+    S.fill(ctx,c2=>rrect(c2,x-132*u,floor-52*u,264*u,22*u,11*u),dkc,{});S.fill(ctx,c2=>rrect(c2,x-15*u,y+24*u,30*u,seat-24*u-44*u,6*u),[92,96,108],{w:0.8});
+    S.fill(ctx,c2=>pg(c2,[[X(-128)-st,y+12*u],[X(-128)+st,y+12*u],[X(-142)+st,y-116*u],[X(-142)-st,y-116*u]]),dkc,{w:0.8});
+    S.poly(ctx,[[X(-140)-bw,y-104*u],[X(-141)-bw*1.04,y-220*u],[X(-150)-bw*1.02,y-316*u],[X(-152),y-336*u],[X(-150)+bw*1.02,y-316*u],[X(-141)+bw*1.04,y-220*u],[X(-140)+bw,y-104*u],[X(-140),y-96*u]],col,S.shade?{grad:[x+100*u,0,x-170*u,0,0.14],exact:true}:{exact:true});
+    S.fill(ctx,c2=>rrect(c2,X(-9)-lerp(132,141,k)*u,y-4*u,2*lerp(132,141,k)*u,34*u,15*u),lt(col,0.06),{});return;}
+  if(k>=1){ctx.save();if(c<0){ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);}
+    S.fill(ctx,c2=>{rrect(c2,x-128*u,y+6*u,22*u,seat-6*u,8*u);rrect(c2,x+92*u,y+6*u,22*u,seat-6*u,8*u);},dkc,{});
+    S.fill(ctx,c2=>{c2.moveTo(x-140*u,y-330*u);c2.quadraticCurveTo(x-166*u,y-336*u,x-170*u,y-300*u);c2.lineTo(x-140*u,y+8*u);c2.lineTo(x-104*u,y+8*u);c2.lineTo(x-122*u,y-310*u);c2.quadraticCurveTo(x-124*u,y-330*u,x-140*u,y-330*u);c2.closePath();},col,S.shade?{grad:[x-100*u,0,x-170*u,0,0.14]}:{});
+    S.fill(ctx,c2=>rrect(c2,x-150*u,y-4*u,282*u,34*u,15*u),lt(col,0.06),{});ctx.restore();return;}
+  // turning: the four legs, the far pair first; the back, wide as it faces us; the seat
+  const legs=[[-117,-1],[103,-1],[-117,1],[103,1]].map(([d,e])=>x+d*u*c+e*104*u*s),bb=lerp(118,18,k)*u,bt=lerp(124,24,k)*u,sw=lerp(128,141,k)*u;
+  S.fill(ctx,c2=>{for(const q of legs)rrect(c2,q-11*u,y+6*u,22*u,seat-6*u,8*u);},dkc,{});
+  S.poly(ctx,[[X(-122)-bb,y+8*u,1],[X(-140)-bt,y-300*u],[X(-146)-bt*0.86,y-328*u],[X(-146)+bt*0.86,y-328*u],[X(-140)+bt,y-300*u],[X(-122)+bb,y+8*u,1]],col,S.shade?{grad:[x+100*u,0,x-170*u,0,0.14],exact:true}:{exact:true});
+  S.fill(ctx,c2=>rrect(c2,X(-9)-sw,y-4*u,2*sw,34*u,15*u),lt(col,0.06),{});};
+K.table=(ctx,x,y,rx,floor)=>{const S=K.S,col=C("wood");S.fill(ctx,c=>ell(c,x,floor-24,150,22),dk(col,0.2),{});S.fill(ctx,c=>rrect(c,x-22,y+10,44,floor-y-34,8),dk(col,0.14),S.shade?{grad:[x+22,0,x-22,0,0.14]}:{});
+  S.fill(ctx,c=>{ell(c,x,y+16,rx,34);rrect(c,x-rx,y,rx*2,16,0);},dk(col,0.1),{});S.fill(ctx,c=>ell(c,x,y,rx,34),col,S.shade?{grad:[x-rx,y-20,x+rx,y+30,0.08]}:{flat:true});};
+K.desk=(ctx,x,y,w,floor,o)=>{o=o||{};const S=K.S,col=S.tone(o.col||K.PAL.wood),k=o.k||1,th=18*k,lg=20*k;
+  if(o.panel)S.fill(ctx,c=>rrect(c,x-w/2+34*k,y+th,w-68*k,(floor-y)*0.5,4*k),dk(col,0.2),{flat:true});
+  S.fill(ctx,c=>{rrect(c,x-w/2+16*k,y+th-2,lg,floor-y-th+2,5*k);rrect(c,x+w/2-16*k-lg,y+th-2,lg,floor-y-th+2,5*k);},dk(col,0.16),S.shade?{grad:[x+w/2,0,x-w/2,0,0.1]}:{});
+  S.fill(ctx,c=>rrect(c,x-w/2,y,w,th,7*k),col,S.shade?{grad:[0,y,0,y+th,0.1]}:{});};
+K.laptop=(ctx,x,y,o)=>{o=o||{};const S=K.S,k=o.k||1,c0=C("laptop"),f=o.flip?-1:1;
+  S.fill(ctx,c=>pg(c,[[x-70*k*f,y],[x+62*k*f,y],[x+62*k*f,y-9*k],[x-70*k*f,y-9*k]]),c0,{});
+  S.fill(ctx,c=>pg(c,[[x+56*k*f,y-8*k],[x+66*k*f,y-8*k],[x+104*k*f,y-98*k],[x+94*k*f,y-98*k]]),lt(c0,0.2),{});
+  if(o.glow)S.fill(ctx,c=>pg(c,[[x+52*k*f,y-12*k],[x+56*k*f,y-10*k],[x+92*k*f,y-94*k],[x+88*k*f,y-96*k]]),C("screenLit"),{line:false,flat:true});};
+K.monitor=(ctx,x,y,w,h,o)=>{o=o||{};const S=K.S,c0=C("screen");S.fill(ctx,c=>{rrect(c,x-w*0.16,y-10,w*0.32,10,4);rrect(c,x-9,y-h*0.34,18,h*0.34,3);},dk(c0,0.1),{});
+  S.fill(ctx,c=>rrect(c,x-w/2,y-h-h*0.2,w,h,10),c0,{});S.fill(ctx,c=>rrect(c,x-w/2+9,y-h-h*0.2+9,w-18,h-18,5),o.lit===false?lt(c0,0.12):C("screenLit"),{line:false,flat:true});
+  if(o.draw){ctx.save();ctx.beginPath();ctx.rect(x-w/2+9,y-h-h*0.2+9,w-18,h-18);ctx.clip();o.draw(ctx,x-w/2+9,y-h-h*0.2+9,w-18,h-18);ctx.restore();}};
+K.board=(ctx,x,y,w,h,o)=>{o=o||{};const S=K.S;S.fill(ctx,c=>rrect(c,x-10,y-10,w+20,h+20,8),o.pin?dk(C("wood"),0.05):C("frame"),{});
+  S.fill(ctx,c=>rrect(c,x,y,w,h,3),o.pin?C("cork"):C("board"),{line:false,flat:true});if(!o.pin)S.fill(ctx,c=>rrect(c,x+w*0.3,y+h+6,w*0.4,12,4),dk(C("frame"),0.12),{w:0.6});};
+K.sheet=(ctx,x,y,w,h,o)=>{o=o||{};const S=K.S;ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);S.fill(ctx,c=>rrect(c,-w/2,-h/2,w,h,o.r==null?3:o.r),o.col||C("board"),{w:0.6,sa:0.2});
+  if(o.pin){ctx.fillStyle=css(o.pin);ctx.beginPath();ctx.arc(0,-h/2+10,5,0,TAU);ctx.fill();}ctx.restore();};
+K.mug=(ctx,x,y,k,col,t,steam)=>{const S=K.S;S.fill(ctx,c=>{c.moveTo(x+26*k,y-40*k);c.arc(x+30*k,y-28*k,16*k,-1.3,1.3);c.arc(x+30*k,y-28*k,8*k,1.3,-1.3,true);c.closePath();},col,{w:0.7});
+  S.fill(ctx,c=>rrect(c,x-26*k,y-56*k,54*k,56*k,9*k),col,S.shade?{grad:[x+28*k,0,x-26*k,0,0.16]}:{});
+  if(steam){ctx.save();ctx.strokeStyle="rgba(255,255,255,0.75)";ctx.lineWidth=4*k;ctx.lineCap="round";for(let i=0;i<2;i++){const ph=((t||0)*0.45+i*0.5)%1,xx=x+(i-0.5)*16*k,yy=y-62*k-ph*54*k;ctx.globalAlpha=Math.sin(ph*Math.PI)*0.8;ctx.beginPath();ctx.moveTo(xx,yy);ctx.bezierCurveTo(xx+9*k,yy-10*k,xx-9*k,yy-20*k,xx+2*k,yy-32*k);ctx.stroke();}ctx.restore();}};
+K.pot=(ctx,x,y,w,h,col)=>{const S=K.S,c0=col||C("pot");S.poly(ctx,[[x-w/2,y-h,1],[x+w/2,y-h,1],[x+w*0.36,y,1],[x-w*0.36,y,1]],c0,S.shade?{grad:[x+w/2,0,x-w/2,0,0.18],exact:true}:{exact:true});
+  S.fill(ctx,c=>rrect(c,x-w*0.56,y-h-w*0.11,w*1.12,w*0.2,w*0.06),lt(c0,0.1),{});};
+K.plant=(ctx,x,y,k,seed,t)=>{const S=K.S,R=rnd(seed),sw=Math.sin((t||0)*0.9+seed)*0.02;
+  for(let i=0;i<9;i++){const a=-1.25+i*0.31+(R()-0.5)*0.16+sw*(i-4),l=(120+R()*90)*k,bx=x+(i-4)*3*k,ex=bx+Math.sin(a)*l,ey=y-Math.cos(a)*l*(0.9+0.2*R()),w=(15+R()*9)*k,nx=Math.cos(a)*w,ny=Math.sin(a)*w;
+    S.fill(ctx,c=>{c.moveTo(bx,y);c.quadraticCurveTo((bx+ex)/2-nx,(y+ey)/2-ny,ex,ey);c.quadraticCurveTo((bx+ex)/2+nx,(y+ey)/2+ny,bx,y);c.closePath();},i%2?C("plant"):C("plant2"),{w:0.6,sa:0.16});
+    S.line(ctx,c=>{c.moveTo(bx,y);c.quadraticCurveTo((bx+ex)/2,(y+ey)/2,ex,ey);},null,0.35);}};
+K.clock=(ctx,x,y,r,hours)=>{const S=K.S;S.fill(ctx,c=>ell(c,x,y,r,r),C("frame"),{});S.fill(ctx,c=>ell(c,x,y,r*0.84,r*0.84),lt(C("board"),0.3),{line:false,flat:true});
+  ctx.save();ctx.strokeStyle=css(dk(C("frame"),0.45));ctx.lineCap="round";ctx.lineWidth=Math.max(1.5,r*0.05);ctx.beginPath();for(let i=0;i<12;i++){const a=i*TAU/12;ctx.moveTo(x+Math.sin(a)*r*0.7,y-Math.cos(a)*r*0.7);ctx.lineTo(x+Math.sin(a)*r*0.78,y-Math.cos(a)*r*0.78);}ctx.stroke();
+  if(hours==null||hours!==hours){ctx.restore();return;}
+  const hh=hours%12,ah=hh/12*TAU,am=(hours%1)*TAU;ctx.strokeStyle=css(K.C.ink);ctx.lineWidth=Math.max(2,r*0.09);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.sin(ah)*r*0.42,y-Math.cos(ah)*r*0.42);ctx.stroke();
+  ctx.lineWidth=Math.max(1.6,r*0.06);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.sin(am)*r*0.64,y-Math.cos(am)*r*0.64);ctx.stroke();ctx.restore();};
+K.door=(ctx,x,y,w,h,o)=>{o=o||{};const S=K.S,col=S.tone(o.col||K.PAL.wood),op=clamp(o.open||0,0,1);
+  S.fill(ctx,c=>rrect(c,x-w/2-12,y-h-12,w+24,h+12,4),C("frame"),{});
+  S.fill(ctx,c=>rrect(c,x-w/2,y-h,w,h,2),o.beyond||dk(C("wall"),0.3),{line:false,flat:true});
+  const dw=w*(1-0.72*op);S.fill(ctx,c=>pg(c,[[x-w/2,y-h],[x-w/2+dw,y-h+op*16],[x-w/2+dw,y-op*10],[x-w/2,y]]),col,S.shade?{grad:[x-w/2,0,x-w/2+dw,0,0.1]}:{});
+  if(o.glass)S.fill(ctx,c=>pg(c,[[x-w/2+dw*0.2,y-h*0.86],[x-w/2+dw*0.8,y-h*0.86+op*10],[x-w/2+dw*0.8,y-h*0.5+op*4],[x-w/2+dw*0.2,y-h*0.5]]),C("glass"),{w:0.6,flat:true});
+  ctx.fillStyle=css(dk(col,0.5));ctx.beginPath();ctx.arc(x-w/2+dw*0.86,y-h*0.46,Math.max(3,w*0.035),0,TAU);ctx.fill();};
+K.seedling=(ctx,x,y,k,g,o)=>{o=o||{};g=g==null?1:g;const S=K.S,lf=o.col||C("leaf");
+  S.fill(ctx,c=>{pg(c,[[x-3*k,y],[x+3*k,y],[x+2*k,y-46*k*g],[x-1*k,y-46*k*g]]);},dk(lf,0.2),{w:0.5,flat:true});
+  for(const [dy,a,l] of [[-14,-1,22],[-22,1,24],[-32,-1,20],[-40,1,18],[-46,0,16]]){const bx=x+0.5*k,by=y+dy*k*g,ex=bx+a*l*k*g,ey=by-(a?10:18)*k*g;
+    S.fill(ctx,c=>{c.moveTo(bx,by);c.quadraticCurveTo((bx+ex)/2+a*2*k,by-12*k*g,ex,ey);c.quadraticCurveTo((bx+ex)/2-a*2*k,by+3*k*g,bx,by);c.closePath();},a>0?lf:lt(lf,0.12),{w:0.5,flat:true});}
+  if(!o.bare)S.fill(ctx,c=>ell(c,x,y+2*k,16*k,5*k),o.soil||C("soilDk"),{w:0.5,flat:true});};
+K.potted=(ctx,x,y,k,g,col)=>{K.seedling(ctx,x,y-30*k,k*0.9,g,{bare:true});K.pot(ctx,x,y,40*k,30*k,col);};
+/* a tree: a trunk and a crown of a few rounds; g (0 to 1) is how grown it is */
+K.tree=(ctx,x,y,k,seed,o)=>{o=o||{};const S=K.S,R=rnd(seed||1),g=o.g==null?1:o.g,col=o.col||C(R()<0.5?"viewTree":"viewTree2"),th=(150+R()*50)*k*g,r=(84+R()*26)*k*g,tw=Math.max(2,13*k*Math.sqrt(g));
+  S.fill(ctx,c=>pg(c,[[x-tw*0.75,y],[x+tw*0.75,y],[x+tw*0.45,y-th],[x-tw*0.45,y-th]]),o.trunk||C("trunk"),{w:0.7,flat:true});
+  const cy=y-th-r*0.42;S.fill(ctx,c=>{ell(c,x,cy,r,r*0.84);ell(c,x-r*0.56,cy+r*0.3,r*0.62,r*0.5);ell(c,x+r*0.58,cy+r*0.26,r*0.58,r*0.48);ell(c,x+r*0.1,cy-r*0.46,r*0.6,r*0.46);},col,S.shade?{grad:[x+r,cy-r,x-r,cy+r,0.16],sa:0.14}:{sa:0.14});
+  if(!o.far)S.line(ctx,c=>{c.moveTo(x-r*0.5,cy+r*0.1);c.quadraticCurveTo(x-r*0.3,cy+r*0.34,x-r*0.04,cy+r*0.22);c.moveTo(x+r*0.2,cy-r*0.2);c.quadraticCurveTo(x+r*0.42,cy+r*0.02,x+r*0.66,cy-r*0.08);},dk(col,0.3),0.5);};
+K.cloud=(ctx,x,y,k)=>{K.S.fill(ctx,c=>{ell(c,x,y,70*k,26*k);ell(c,x+52*k,y+6*k,54*k,20*k);ell(c,x-56*k,y+8*k,48*k,17*k);ell(c,x+6*k,y-16*k,40*k,22*k);},C("cloud"),{sa:0.12});};
+K.tick=(ctx,x,y,r,a,col)=>{if(a<=0.004)return;ctx.save();ctx.globalAlpha*=clamp(a,0,1);ctx.fillStyle=css(col||K.C.green);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle="#fff";ctx.lineWidth=r*0.26;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x-r*0.44,y+r*0.02);ctx.lineTo(x-r*0.12,y+r*0.36);ctx.lineTo(x+r*0.46,y-r*0.32);ctx.stroke();ctx.restore();};
+})(PK);
+
+/* ===== The people kit: words on the frame =====
+   People carry these films; words hold a place, a name, something said, or one line to keep. Every piece of text is drawn with the
+   agent films' ag_T (The Inner Life of Data's T), at 28 px or more, and every box is made from its words as they are drawn, so
+   the words can't leave it (site-tools/fits.py). Nothing goes below y 890, where the captions are. a (0 to 1) brings a thing in.
+     PK.card(ctx, x, y, d, a, o)        where and when, or a number: d {kick, title, sub, col (the kick's colour)}; its width
+                                        comes from its words (o.w sets a wider one); o.align "center" or "right" places it by x
+     PK.tag(ctx, x, y, text, a, o)      a few words in a pill, centred on (x, y); o.col its words' colour, o.fill its own
+     PK.nameTag(ctx, x, y, name, role, a)   a person's name and role, centred on (x, y): put it over their head
+     PK.bubble(ctx, x, y, lines, tail, a, o)  something said: lines of words centred on (x, y), a tail towards tail [x, y] (the
+                                        speaker's mouth or head); o.size (34), o.weight, o.ink, o.col, o.strike (a line through it:
+                                        what isn't said), o.think (no tail: three small rounds, for a thought), o.la (how far
+                                        each line has come in, 0 to 1: lines that come one by one in a box that doesn't change)
+     PK.say(ctx, J, lines, a, o)        the same, placed over the head of whoever PK.person returned as J; o.dx, o.dy move it;
+                                        o.cam (the shot's camera, draw's third argument) keeps it inside what the camera sees
+     PK.kicker(ctx, num, title, a)      the film's number and title, top left, from the second chapter on
+     PK.sceneTag(ctx, text, a)          where and when an imagined scene is set, top right ("The university, 2027 · imagined")
+     PK.mark(ctx, cx, cy, r, p, a)      the module's mark: five people in a ring, which draws itself as p goes from 0 to 1
+     PK.title(ctx, S, t, t0, title, sub, line, o)   the title card, over the picture from t0: the picture's right side stays
+                                        clear, so whoever is there stays in view (o.side "right" puts the words there instead)
+     PK.end(ctx, S, t, t0, title, line, n, series, o)   the end card, the same way: the film ends on a person, with its last line
+                                        (on two lines, it breaks evenly, after a comma where one falls near the middle) */
+(K=>{
+const {TAU,lerp,clamp,sine,pin,mix,dk,lt,css,pg,rrect}=K.u;
+const INKC=()=>K.C.ink,tw=(ctx,s,w,size,ls)=>ag_tw(ctx,s,{w,size,ls});
+const tx=(ctx,s,x,y,o)=>ag_T(ctx,s,x,y,Object.assign({},o,{color:css(o.col||K.C.ink)}));
+// a card's body, by the look in use: a soft shadow, a hard one under an ink line, or a cut sheet
+K.box=(ctx,x,y,w,h,r,col,a)=>{const S=K.S;if(K.watch)K.watch({box:[x,y,w,h],a:a==null?1:a,ctx});ctx.save();ctx.globalAlpha*=a==null?1:a;
+  if(S.id==="line"){ctx.fillStyle=css(S.self?dk(S.ink,0.1):S.ink,S.self?0.34:0.9);ctx.beginPath();rrect(ctx,x+4,y+6,w,h,r);ctx.fill();ctx.beginPath();rrect(ctx,x,y,w,h,r);ctx.fillStyle=css(col);ctx.fill();ctx.lineWidth=S.self?2.5:3;ctx.strokeStyle=css(S.ink);ctx.stroke();}
+  else if(S.id==="paper"){ctx.fillStyle="rgba(58,36,30,0.26)";ctx.beginPath();rrect(ctx,x+4,y+6,w,h,r*0.5);ctx.fill();ctx.beginPath();rrect(ctx,x,y,w,h,r*0.5);ctx.fillStyle=css(col);ctx.fill();}
+  else{for(let i=3;i>=1;i--){ctx.fillStyle="rgba(70,44,40,0.05)";ctx.beginPath();rrect(ctx,x-i*2,y+4+i*3,w+i*4,h,r+i*2);ctx.fill();}ctx.beginPath();rrect(ctx,x,y,w,h,r);ctx.fillStyle=css(col);ctx.fill();}
+  ctx.restore();};
+const settle=(ctx,x,y,a)=>{const k=0.94+0.06*a;ctx.translate(x,y);ctx.scale(k,k);ctx.translate(-x,-y);};
+K.card=(ctx,x,y,d,a,o)=>{o=o||{};a=a==null?1:a;const kick=d.kick?String(d.kick).toUpperCase():"",wk=kick?tw(ctx,kick,800,28,3):0,wt=d.title?tw(ctx,d.title,800,d.size||40):0,ws=d.sub?tw(ctx,d.sub,600,30):0,
+    w=Math.max(o.w||0,Math.max(wk,wt,ws)+64),h=28+(kick?44:0)+(d.title?52:0)+(d.sub?44:0)+12,bx=o.align==="center"?x-w/2:o.align==="right"?x-w:x,bb={x:bx,y,w,h};
+  if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;settle(ctx,bx+w/2,y+h/2,a);K.box(ctx,bx,y,w,h,K.S.id==="soft"?22:16,K.col("board"),1);
+  let ty=y+28;if(kick){ty+=24;tx(ctx,kick,bx+32,ty,{w:800,size:28,ls:3,col:d.col||K.C.amber});ty+=20;}
+  if(d.title){ty+=38;tx(ctx,d.title,bx+32,ty,{w:800,size:d.size||40});ty+=14;}
+  if(d.sub){ty+=32;tx(ctx,d.sub,bx+32,ty,{w:600,size:30,col:K.C.mut});}
+  ctx.restore();return bb;};
+K.tag=(ctx,x,y,text,a,o)=>{o=o||{};a=a==null?1:a;const size=o.size||28,w=tw(ctx,text,o.weight||700,size)+48,h=size+26,bx=o.align==="left"?x:o.align==="right"?x-w:x-w/2,bb={x:bx,y:y-h/2,w,h};
+  if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;settle(ctx,bx+w/2,y,a);K.box(ctx,bx,y-h/2,w,h,h/2,o.fill||K.col("board"),1);
+  tx(ctx,text,bx+w/2,y+size*0.35,{w:o.weight||700,size,align:"center",col:o.col||K.C.ink});ctx.restore();return bb;};
+K.nameTag=(ctx,x,y,name,role,a)=>{a=a==null?1:a;const w=Math.max(tw(ctx,name,800,30),role?tw(ctx,role,600,28):0)+52,h=role?96:58,bb={x:x-w/2,y:y-h/2,w,h};
+  if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;settle(ctx,x,y,a);K.box(ctx,x-w/2,y-h/2,w,h,K.S.id==="soft"?20:14,K.col("board"),1);
+  tx(ctx,name,x,role?y-8:y+11,{w:800,size:30,align:"center"});if(role)tx(ctx,role,x,y+29,{w:600,size:28,align:"center",col:dk(K.C.mut,0.2)});ctx.restore();return bb;};
+/* something said. The bubble's body is a box of its own, made from its lines; its tail is drawn first, under it */
+K.bubble=(ctx,x,y,lines,tail,a,o)=>{o=o||{};a=a==null?1:a;const S=K.S,size=o.size||34,wt=o.weight||700,lh=size*1.3,w=Math.max(...lines.map(l=>tw(ctx,l,wt,size)))+56,h=lines.length*lh+32,bx=x-w/2,by=y-h/2,bb={x:bx,y:by,w,h};
+  if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;settle(ctx,tail?tail[0]:x,tail?tail[1]:y,a);
+  const col=o.col||[255,253,247],ink=S.id==="line"?S.ink:null;
+  // a tail to something beside the bubble, level with it (a tile of a call, a screen), comes out of its side
+  if(tail&&(tail[0]<bx-8||tail[0]>bx+w+8)&&tail[1]>by-8&&tail[1]<by+h+8){const left=tail[0]<bx,base=left?bx:bx+w,dir=left?-1:1,tcy=clamp(tail[1],by+34,by+h-34),tip=[lerp(base,tail[0],0.78),lerp(tcy,tail[1],0.85)];
+    ctx.beginPath();pg(ctx,[[base-dir*6,tcy-17],[base-dir*6,tcy+17],tip]);ctx.lineJoin="round";if(ink){ctx.lineWidth=5;ctx.strokeStyle=css(ink);ctx.stroke();}ctx.fillStyle=css(col);ctx.fill();
+    K.box(ctx,bx,by,w,h,26,col,1);ctx.fillStyle=css(col);ctx.beginPath();pg(ctx,[[base-dir*5,tcy-14],[base-dir*5,tcy+14],[base+dir*3,tcy+12],[base+dir*3,tcy-12]]);ctx.fill();}
+  else if(tail){const below=tail[1]>y,base=below?by+h:by,dir=below?1:-1,tcx=clamp(tail[0],bx+44,bx+w-44),tip=[lerp(tcx,tail[0],0.85),lerp(base,tail[1],0.72)];
+    if(o.think){for(const [f,r] of [[0.3,11],[0.62,8],[0.9,5]]){ctx.beginPath();ctx.arc(lerp(tcx,tip[0],f),lerp(base+dir*8,tip[1],f),r,0,TAU);ctx.fillStyle=css(col);ctx.fill();if(ink){ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();}}}
+    else{ctx.beginPath();pg(ctx,[[tcx-18,base-dir*6],[tcx+18,base-dir*6],tip]);ctx.lineJoin="round";if(ink){ctx.lineWidth=5;ctx.strokeStyle=css(ink);ctx.stroke();}
+      else if(S.id==="paper"){ctx.save();ctx.translate(4,6);ctx.fillStyle="rgba(58,36,30,0.26)";ctx.fill();ctx.restore();ctx.beginPath();pg(ctx,[[tcx-18,base-dir*6],[tcx+18,base-dir*6],tip]);}
+      ctx.fillStyle=css(col);ctx.fill();}
+    K.box(ctx,bx,by,w,h,26,col,1);
+    // the join: the body's line doesn't cross the tail's mouth
+    if(!o.think){ctx.fillStyle=css(col);ctx.beginPath();pg(ctx,[[tcx-15,base-dir*5],[tcx+15,base-dir*5],[tcx+13,base+dir*3],[tcx-13,base+dir*3]]);ctx.fill();}}
+  else K.box(ctx,bx,by,w,h,26,col,1);
+  lines.forEach((l,i)=>{const la=o.la?clamp(o.la[i]==null?1:o.la[i],0,1):1;if(la<=0.004)return;ctx.save();ctx.globalAlpha*=la;tx(ctx,l,x,by+16+lh*(i+0.5)+size*0.35,{w:wt,size,align:"center",col:o.ink||K.C.ink});ctx.restore();});
+  if(o.strike){ctx.strokeStyle=css(K.C.amber);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(bx+22,y+3);ctx.lineTo(bx+22+(w-44)*clamp(o.strike===true?1:o.strike,0,1),y-3);ctx.stroke();}
+  ctx.restore();return bb;};
+// over the head of the person who says it (J: what PK.person returned); it leans the way they face, and stays in the frame
+K.say=(ctx,J,lines,a,o)=>{o=o||{};const size=o.size||34,hh=J.p.head*J.u,sg=J.sgn||1,tail=[J.hc[0]+sg*hh*0.42,J.hc[1]-hh*0.56],w=Math.max(...lines.map(l=>tw(ctx,l,o.weight||700,size)))+56,h=lines.length*size*1.3+32;
+  // what the camera sees, when the shot gives it (o.cam): the bubble stays inside that
+  const cm=o.cam,m=cm?40/cm.z:40,vx0=cm?cm.x-960/cm.z:0,vx1=cm?cm.x+960/cm.z:1920,vy0=cm?cm.y-540/cm.z:0;
+  const x=clamp(tail[0]+sg*(o.lean==null?w*0.22:o.lean)+(o.dx||0),vx0+w/2+m,vx1-w/2-m),y=Math.max(vy0+h/2+m,tail[1]-h/2-(o.rise==null?54:o.rise)+(o.dy||0));return K.bubble(ctx,x,y,lines,tail,a,o);};
+K.kicker=(ctx,num,title,a)=>{if(a<=0.004)return;const s=String(title).toUpperCase(),w=tw(ctx,s,800,28,3)+tw(ctx,String(num),800,28)+84,h=56,x=72,y=64;
+  ctx.save();ctx.globalAlpha*=a;K.box(ctx,x,y,w,h,h/2,K.col("board"),1);tx(ctx,String(num),x+28,y+38,{w:800,size:28,col:K.C.amber});tx(ctx,s,x+28+tw(ctx,String(num),800,28)+22,y+38,{w:800,size:28,ls:3,col:K.C.mut});ctx.restore();};
+K.sceneTag=(ctx,text,a)=>K.tag(ctx,1848,92,text||"The university, 2027 · imagined",a,{align:"right",col:K.C.mut});
+// the module's mark: five people in a ring; the ring that joins them draws itself, from the top, clockwise
+K.mark=(ctx,cx,cy,r,p,a)=>{if(a<=0.01)return;p=clamp(p,0,1);ctx.save();ctx.globalAlpha*=a;const ring=sine(p/0.75);ctx.lineCap="round";
+  ctx.strokeStyle=css(K.C.ink);ctx.lineWidth=Math.max(2,r*0.07);ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+TAU*ring);ctx.stroke();
+  const cols=[[150,70,88],[98,128,160],[226,190,112],[66,158,138],[204,124,112]];
+  for(let i=0;i<5;i++){const an=-Math.PI/2+i*TAU/5,f=clamp(p*5-i*0.6,0,1);if(f<=0)continue;const px=cx+Math.cos(an)*r,py=cy+Math.sin(an)*r,r2=r*0.22*sine(f);
+    ctx.fillStyle=css(K.col("board"));ctx.beginPath();ctx.arc(px,py,r2+r*0.07,0,TAU);ctx.fill();ctx.fillStyle=css(cols[i]);ctx.beginPath();ctx.arc(px,py,r2,0,TAU);ctx.fill();ctx.lineWidth=Math.max(1.5,r*0.045);ctx.strokeStyle=css(K.C.ink);ctx.stroke();}
+  ctx.restore();};
+// a sheet of the card's colour over the picture, clear on one side, where the person the film follows stays in view
+const veil=(ctx,S,a,side)=>{if(a<=0)return;setScreen(ctx,S);const c=K.col("board"),g=ctx.createLinearGradient(0,0,1920,0),st=side==="right"?[[0,0],[0.3,0],[0.56,0.94],[1,0.97]]:[[0,0.97],[0.46,0.94],[0.72,0],[1,0]];
+  for(const [o,v] of st)g.addColorStop(o,css(c,v*clamp(a,0,1)));ctx.fillStyle=g;ctx.fillRect(0,0,1920,1080);};
+K.title=(ctx,S,t,t0,title,sub,line,o)=>{o=o||{};const oA=pin(t,t0,0.8),tA=pin(t,t0+0.5,0.8);if(oA<=0)return;veil(ctx,S,oA,o.side);setScreen(ctx,S);const x=o.side==="right"?1060:150;
+  ctx.save();ctx.globalAlpha*=tA;K.mark(ctx,x+64,300,64,(t-t0-0.4)/1.8,1);tx(ctx,title,x,500,{w:800,size:o.size||76});if(sub)tx(ctx,sub,x,572,{w:600,size:36,col:K.C.mut});
+  // the module and the series, in capitals: on one line where it fits the frame, else a line for each part
+  const cap=String(line).toUpperCase(),parts=tw(ctx,cap,800,28,3)<=1920-80-x?[cap]:cap.split(" · ");
+  ctx.globalAlpha*=pin(t,t0+1.2,0.8);parts.forEach((p,i)=>tx(ctx,p,x,660+i*44,{w:800,size:28,ls:3,col:K.C.mut}));ctx.restore();};
+// a line that needs two lines breaks where it reads best: as evenly as it can, and after a comma or a stop where one falls near the middle,
+// never leaving a word or two alone on the second line ("Own what it's for, / not only what you did.")
+const even=(ctx,s,maxW,o)=>{const g=ag_wrap(ctx,s,maxW,o);if(g.length!==2)return g;const ws=String(s).split(" ");let best=g,sc=Infinity;
+  for(let i=1;i<ws.length;i++){const a=ws.slice(0,i).join(" "),b=ws.slice(i).join(" "),wa=ag_tw(ctx,a,o),wb=ag_tw(ctx,b,o);if(wa>maxW||wb>maxW)continue;
+    const v=Math.abs(wa-wb)-(/[,;:.!?]$/.test(a)?maxW*0.25:0);if(v<sc){sc=v;best=[a,b];}}return best;};
+K.end=(ctx,S,t,t0,title,line,n,series,o)=>{o=o||{};const oA=pin(t,t0,1.0),tA=pin(t,t0+0.6,0.9);if(oA<=0)return;veil(ctx,S,oA,o.side);setScreen(ctx,S);const x=o.side==="right"?1060:150;
+  ctx.save();ctx.globalAlpha*=tA;if(line){const ls=even(ctx,line,760,{w:700,size:46});ls.forEach((l,i)=>tx(ctx,l,x,330+i*62-(ls.length-1)*31,{w:700,size:46}));}
+  K.mark(ctx,x+56,490,56,(t-t0-0.7)/1.6,1);tx(ctx,title,x,640,{w:800,size:44});tx(ctx,(n?n+" · ":"")+(series||"Leading data people")+" · Learning Data",x,698,{w:600,size:28,col:K.C.mut});ctx.restore();};
+})(PK);
+
+/* ===== The people kit: places =====
+   Where the university's people work and meet, each painted once and kept as a picture (the agent films' AG_PLACES). A film lists
+   the ones it uses, its opening place first: AG_PLACES.team=PK.place.team. A place paints only what is behind everyone; what people
+   sit at or stand behind is drawn every frame with them, by the sets below, so a person's legs go under a desk and their hands on it.
+   Each place has an eye line (PK.ROOMS.<place>.eye): a standing adult's eyes are on it wherever they stand, so PK.hAt(floor, eye)
+   gives everyone's size, near and far. Never draw two people of one picture at sizes the eye line doesn't give: a large half-figure
+   beside small whole people reads as two pictures pasted together. A camera closes in to about 1.3 at most on a kept picture; for
+   faces, cut to a place painted closer, such as the corner.
+     PK.place.team     the data team's room: a window on the campus, a whiteboard, shelves (PK.ROOMS.team: eye, board, clock, the
+                       floor lines back, mid and front, win, and sill: a place on the window's sill for something small)
+     PK.place.corner   the manager's corner: a round table by a window, close enough for faces (PK.ROOMS.corner: F the floor, H a
+                       person's height there, hx and ix where two people sit, tx, ty, rx the table)
+     PK.place.campus   the campus: the teaching building and its entrance, a lawn, two paths, trees (PK.ROOMS.campus: near, the near
+                       path's floor; way(x), the floor along the path from the entrance, x from 1470 down to 900)
+     PK.place.lecture  a teaching room: a door with the sensor that counts who comes in, windows, a board; its seats are drawn with
+                       the people, so it can be full or empty (PK.ROOMS.lecture: door, sensor, board, rows)
+   Sets, drawn every frame:
+     PK.window(ctx, x, y, w, h, view, o), PK.windowFrame(...)   a window: draw the frame again over people who pass outside
+     PK.atDesk(ctx, who, x, floor, h, o)       someone working at a desk, seen from the side
+     PK.seated(ctx, who, x, floor, h, pose, o) someone on a chair
+     PK.audience(ctx, t, n, o)                 the teaching room's seats, n of them taken
+     PK.atBoard(ctx, who, t, lines, o)         someone writing on a wall board, line by line, stepping along as the words come */
+(K=>{
+const {TAU,lerp,clamp,pin,mix,dk,lt,css,rnd,hash,polar,capsule,pg,rrect,ell}=K.u,C=K.col;
+Object.assign(K.PAL,{carpet:[156,170,176],carpetDk:[140,148,152],doorCool:[146,170,174],sensor:[248,246,240],lawnLt:[188,208,140],stoneBand:[236,226,208],hedge:[112,160,116]});
+const grad=(ctx,x0,y0,x1,y1,a,b,aa,ab)=>{const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,css(a,aa));g.addColorStop(1,css(b,ab));return g;};
+function wall(ctx,col,y1){ctx.fillStyle=K.S.shade?grad(ctx,0,0,0,y1,lt(col,0.25),dk(col,0.07)):css(col);ctx.fillRect(0,0,1920,1080);}
+function floorAt(ctx,y0,col,planks){ctx.fillStyle=K.S.shade?grad(ctx,0,y0,0,1080,col,dk(col,0.14)):css(col);ctx.fillRect(0,y0,1920,1080-y0);
+  ctx.save();ctx.strokeStyle=css(dk(col,0.2),0.5);ctx.lineWidth=2.5;ctx.lineCap="round";ctx.beginPath();
+  for(let i=1;i<6;i++){const y=y0+i*i*9+i*14;ctx.moveTo(0,y);ctx.lineTo(1920,y);}
+  if(planks)for(let i=0;i<14;i++){const x=i*150+((i*53)%60),r=(i%3)*3+1;ctx.moveTo(x,y0+r*23);ctx.lineTo(x-(960-x)*0.03,y0+(r+1)*23+12);}
+  ctx.stroke();ctx.restore();}
+const skirting=(ctx,y)=>K.S.fill(ctx,c=>rrect(c,-10,y,1940,24,0),C("skirting"),{});
+function rug(ctx,x,y,rx,ry){const S=K.S;S.fill(ctx,c=>ell(c,x,y,rx,ry),C("rug"),{sa:0.16});S.fill(ctx,c=>ell(c,x,y,rx*0.875,ry*0.81),C("rug2"),{w:0.5,flat:true});S.fill(ctx,c=>ell(c,x,y,rx*0.73,ry*0.65),C("rug"),{w:0.5,flat:true});}
+// a plank on a wall with books standing on it; o.free: px left clear at its end
+function shelf(ctx,x,y,w,seed,o){o=o||{};const S=K.S,R=rnd(seed);S.fill(ctx,c=>{rrect(c,x+30,y+12,10,26,2);rrect(c,x+w-40,y+12,10,26,2);},dk(C("wood"),0.2),{w:0.6,flat:true});S.fill(ctx,c=>rrect(c,x,y,w,14,4),C("wood"),{});
+  let bx=x+14;const end=x+w-(o.free||0)-34;while(bx<end){const bw=16+R()*18,bh=52+R()*30,ci=(R()*6)|0,tilt=R()<0.12;ctx.save();if(tilt){ctx.translate(bx+bw,y);ctx.rotate(0.22);ctx.translate(-(bx+bw),-y);}
+    S.fill(ctx,c=>rrect(c,bx,y-bh,bw,bh,2),C("book",ci),{w:0.6,sa:0.16});ctx.restore();bx+=bw+(tilt?14:3);if(R()<0.1)bx+=30;}}
+// what is outside a window: the campus, a building (o.bld: where across the window, 0 to 1) and trees
+function campusView(ctx,x,y,w,h,o){o=o||{};const S=K.S,k=w/640;ctx.fillStyle=S.shade?grad(ctx,0,y,0,y+h,C("skyTop"),lt(C("skyLow"),0.2)):css(mix(C("skyTop"),C("skyLow"),0.35));ctx.fillRect(x,y,w,h);
+  S.begin(ctx,{lw:2,far:0.6,sh:3});K.cloud(ctx,x+w*0.24,y+h*0.18,0.8*k);K.cloud(ctx,x+w*0.78,y+h*0.29,0.6*k);
+  const bx=x+w*(o.bld==null?0.52:o.bld),by=y+h*0.47;
+  S.fill(ctx,c=>rrect(c,bx,by,330*k,h,4),C("viewBld"),{flat:true});S.fill(ctx,c=>pg(c,[[bx-20*k,by+4*k],[bx+165*k,by-60*k],[bx+350*k,by+4*k]]),C("viewRoof"),{flat:true});
+  for(let i=0;i<4;i++)for(let j=0;j<2;j++)S.fill(ctx,c=>rrect(c,bx+32*k+i*68*k,by+40*k+j*84*k,36*k,52*k,4),mix(C("glass"),C("viewBld"),0.3),{w:0.5,flat:true});
+  for(const [fx,fy,r,i] of o.trees||[[0.14,0.73,96,0],[0.36,0.8,78,1],[0.94,0.83,70,0],[0.02,0.89,70,1]]){const tx=x+w*fx,ty=y+h*fy,rr=r*k;S.fill(ctx,c=>rrect(c,tx-7*k,ty,14*k,160*k,4),C("trunk"),{w:0.6,flat:true});
+    S.fill(ctx,c=>{ell(c,tx,ty,rr,rr*0.82);ell(c,tx-rr*0.5,ty+rr*0.34,rr*0.6,rr*0.5);ell(c,tx+rr*0.52,ty+rr*0.3,rr*0.56,rr*0.48);},C(i?"viewTree2":"viewTree"),{sa:0.14});}
+  S.fill(ctx,c=>rrect(c,x-10,y+h-60*k,w+20,80*k,0),C("lawn"),{flat:true,line:false});}
+K.view={campus:campusView};
+// what a place is painted with, for the kit's other files (concepts.js) and a film's own places: PK.paint.wall(ctx, col, y1) and the rest
+K.paint={wall,floorAt,skirting,rug,shelf,grad};
+K.windowFrame=(ctx,x,y,w,h,o)=>{o=o||{};const S=K.S,fr=C("frame");S.begin(ctx,{lw:3,far:0.1,sh:5});
+  S.fill(ctx,c=>{rrect(c,x-18,y-18,w+36,18,4);rrect(c,x-18,y+h,w+36,18,4);rrect(c,x-18,y-18,18,h+36,4);rrect(c,x+w,y-18,18,h+36,4);if(o.bar!==false)rrect(c,x+w/2-7,y,14,h,2);},fr,{});
+  S.fill(ctx,c=>rrect(c,x-40,y+h+16,w+80,22,6),lt(fr,0.2),{});};
+K.window=(ctx,x,y,w,h,view,o)=>{o=o||{};ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();(view||campusView)(ctx,x,y,w,h,o);ctx.restore();K.windowFrame(ctx,x,y,w,h,o);
+  if(K.S.shade&&o.light!==false){const fy=o.floor||800;ctx.fillStyle=grad(ctx,x,y+h,x-200,fy+200,[255,246,214],[255,246,214],0.5,0);ctx.beginPath();pg(ctx,[[x,y+h+38],[x+w,y+h+38],[x+w-120,fy],[x-260,fy]]);ctx.fill();}};
+
+K.ROOMS={
+  team:{eye:360,wall:790,win:[150,152,470,450],board:{x:726,y:170,w:470,h:330},clock:[1700,182,42],sill:[352,618],back:838,mid:884,front:930},
+  corner:{eye:198,F:944,H:820,hx:628,ix:1292,tx:960,rx:282,ty:638,win:[640,120,640,450]},
+  campus:{eye:430,near:930,door:[1470,600],way:x=>lerp(600,884,clamp((1470-x)/570,0,1))},
+  lecture:{eye:400,wall:800,door:{x:260,y:290,w:220,h:510},sensor:[260,238],board:{x:1340,y:250,w:460,h:300},rows:[[826,468],[868,514],[912,562]]}
+};
+K.place={};
+/* the data team's room */
+K.place.team=ctx=>{const S=K.S,R=K.ROOMS.team,[wx,wy,ww,wh]=R.win;wall(ctx,C("wall"),800);
+  K.window(ctx,wx,wy,ww,wh,campusView,{bld:0.44});
+  S.begin(ctx,{lw:3,far:0.1,sh:5});K.board(ctx,R.board.x,R.board.y,R.board.w,R.board.h);
+  // the wall behind where people stand is left plain, from their shoulders up: a head reads best against nothing. The shelf is in
+  // the corner, over a desk, where nobody stands
+  shelf(ctx,1730,330,170,41,{free:76});K.pot(ctx,1846,330,60,46);K.plant(ctx,1846,284,0.46,5,0);
+  floorAt(ctx,800,C("floor"),true);skirting(ctx,780);rug(ctx,900,952,600,92);
+  S.begin(ctx,{lw:3,far:0.1,sh:5});K.pot(ctx,672,802,92,80);K.plant(ctx,672,722,1.0,8,0);};
+/* the manager's corner: a round table by the window */
+K.place.corner=ctx=>{const S=K.S,R=K.ROOMS.corner,[wx,wy,ww,wh]=R.win;wall(ctx,C("wall"),800);K.window(ctx,wx,wy,ww,wh,campusView,{});
+  S.begin(ctx,{lw:3,far:0.1,sh:5});const bx=150,by=200,bw=380,bh=270;K.board(ctx,bx,by,bw,bh,{pin:true});
+  [[40,34,0],[112,44,1],[44,112,2],[250,34,3],[312,48,1],[254,116,2],[320,128,0],[150,170,3],[212,96,0]].forEach(([x,y,i],j)=>{ctx.save();ctx.translate(bx+x+26,by+y+26);ctx.rotate((hash(j,5)-0.5)*0.14);S.fill(ctx,c=>rrect(c,-26,-26,52,52,3),C("note",i),{w:0.6,sa:0.2});ctx.restore();});
+  // books, a lamp and a picture on the right
+  const sx=1440,sy=470,sw=380,sh=330;S.fill(ctx,c=>rrect(c,sx,sy,sw,sh,8),C("wood"),S.shade?{grad:[sx,0,sx+sw,0,0.1]}:{});
+  for(let r=0;r<3;r++){const y0=sy+16+r*104;S.fill(ctx,c=>rrect(c,sx+14,y0,sw-28,88,4),dk(C("woodDk"),0.12),{w:0.6,flat:true});
+    const Rn=rnd(40+r);let x=sx+22;while(x<sx+sw-70){const w=16+Rn()*18,h=52+Rn()*30,ci=(Rn()*6)|0,tilt=Rn()<0.12;ctx.save();if(tilt){ctx.translate(x+w,y0+88);ctx.rotate(0.22);ctx.translate(-(x+w),-(y0+88));}S.fill(ctx,c=>rrect(c,x,y0+88-h,w,h,2),C("book",ci),{w:0.6,sa:0.16});ctx.restore();x+=w+(tilt?14:3);if(Rn()<0.1)x+=30;}}
+  K.pot(ctx,sx+70,sy,70,56);K.plant(ctx,sx+70,sy-56,0.62,3,0);
+  S.fill(ctx,c=>{rrect(c,sx+288,sy-14,60,14,4);rrect(c,sx+312,sy-110,12,100,3);},dk(C("lamp"),0.3),{});S.poly(ctx,[[sx+270,sy-96,1],[sx+366,sy-96,1],[sx+346,sy-166,1],[sx+290,sy-166,1]],C("lamp"),{exact:true});
+  S.fill(ctx,c=>rrect(c,1444,166,250,180,6),C("frame"),{});ctx.save();ctx.beginPath();ctx.rect(1460,182,218,148);ctx.clip();ctx.fillStyle=css(C("skyTop"));ctx.fillRect(1460,182,218,148);
+  S.begin(ctx,{lw:1.4,far:0.5,sh:2});S.poly(ctx,[[1444,276],[1514,246],[1594,268],[1684,238],[1704,356,1],[1444,356,1]],C("lawn"),{flat:true,exact:true});S.poly(ctx,[[1444,306],[1534,288],[1624,310],[1704,294],[1704,356,1],[1444,356,1]],C("viewTree2"),{flat:true,exact:true});ctx.restore();
+  S.begin(ctx,{lw:3,far:0.1,sh:5});floorAt(ctx,800,C("floor"),true);skirting(ctx,780);rug(ctx,960,946,640,96);
+  K.pot(ctx,360,800,110,96);K.plant(ctx,360,704,1.25,8,0);};
+/* the campus: the teaching building on the right, the library far off, a lawn, a path from the entrance and one across the front */
+K.place.campus=ctx=>{const S=K.S;ctx.fillStyle=S.shade?grad(ctx,0,0,0,480,C("skyTop"),C("skyLow")):css(mix(C("skyTop"),C("skyLow"),0.3));ctx.fillRect(0,0,1920,1080);
+  S.begin(ctx,{lw:1.5,far:0.8,sh:3});K.cloud(ctx,330,150,1.2);K.cloud(ctx,860,86,0.8);
+  // far trees, the library
+  S.begin(ctx,{lw:1.6,far:0.7,sh:3});const Rn=rnd(12),far=mix(C("viewTree2"),C("skyLow"),0.34);
+  S.fill(ctx,c=>{for(let x=-40;x<1180;x+=58+Rn()*30)ell(c,x,470+Rn()*16,52+Rn()*26,40+Rn()*22);c.rect(-40,480,1260,60);},far,{sa:0.1});
+  S.begin(ctx,{lw:2,far:0.5,sh:3});const lb=mix(C("viewBld"),C("skyLow"),0.2);
+  S.fill(ctx,c=>rrect(c,170,318,400,200,3),lb,S.shade?{grad:[170,0,570,0,0.08]}:{});S.fill(ctx,c=>rrect(c,156,300,428,24,4),mix(C("viewRoof"),C("skyLow"),0.2),{});
+  for(let i=0;i<5;i++)for(let j=0;j<2;j++)S.fill(ctx,c=>rrect(c,200+i*72,346+j*78,40,50,3),mix(C("glass"),lb,0.3),{w:0.5,flat:true});
+  S.fill(ctx,c=>rrect(c,344,446,52,72,3),dk(lb,0.3),{w:0.6,flat:true});
+  // the lawn, mown in stripes, and trees across it
+  S.begin(ctx,{lw:2.4,far:0.3,sh:4});const lawn=[[-40,512],[400,506],[900,514],[1300,508],[1960,520],[1960,1100,1],[-40,1100,1]];
+  S.poly(ctx,lawn,C("lawn"),S.shade?{grad:[0,500,0,1080,0.12],exact:true}:{flat:true,exact:true});
+  ctx.save();ctx.beginPath();K.u.spline(ctx,lawn);ctx.clip();ctx.fillStyle=css(C("lawnLt"),0.5);for(let i=-9;i<12;i+=2){ctx.beginPath();pg(ctx,[[960,410],[960+i*330,1100],[960+(i+1)*330,1100]]);ctx.fill();}ctx.restore();
+  S.begin(ctx,{lw:2.2,far:0.35,sh:4});K.tree(ctx,84,532,1.05,3,{far:1});K.tree(ctx,650,526,0.95,7,{far:1});K.tree(ctx,872,534,1.1,11,{far:1});
+  // the paths: one from the entrance, one across the front
+  S.begin(ctx,{lw:2.4,far:0.2,sh:4});const pth=C("path");
+  S.poly(ctx,[[1404,600,1],[1548,600,1],[1270,884,1],[742,884,1]],pth,{exact:true,flat:true});
+  S.poly(ctx,[[-40,872,1],[1960,872,1],[1960,1004,1],[-40,1004,1]],pth,S.shade?{grad:[0,872,0,1004,0.07],exact:true}:{exact:true,flat:true});
+  // the teaching building: its ground floor and the floor above, the entrance under a canopy
+  S.begin(ctx,{lw:3,far:0.12,sh:5});const bk=C("brick"),sb=C("stoneBand"),gl=mix(C("glass"),[150,190,206],0.3);
+  S.fill(ctx,c=>rrect(c,1040,-30,940,600,0),bk,S.shade?{grad:[1040,0,1960,0,0.1]}:{});
+  S.fill(ctx,c=>{rrect(c,1028,262,960,22,3);rrect(c,1028,538,960,34,3);},sb,{});
+  const win=(x,y,w,h)=>{S.fill(ctx,c=>rrect(c,x-9,y-9,w+18,h+18,5),sb,{w:0.8});S.fill(ctx,c=>rrect(c,x,y,w,h,2),gl,S.shade?{grad:[x,y,x+w,y+h,0.16],line:false}:{line:false,flat:true});
+    S.line(ctx,c=>{c.moveTo(x+w/2,y);c.lineTo(x+w/2,y+h);c.moveTo(x,y+h*0.4);c.lineTo(x+w,y+h*0.4);},dk(sb,0.3),0.7,{on:"line soft paper",px:3});};
+  for(const x of [1090,1236,1656,1802]){win(x,326,96,176);win(x,44,96,176);}win(1422,44,96,176);
+  S.fill(ctx,c=>{rrect(c,1362,360,16,212,3);rrect(c,1562,360,16,212,3);},dk(sb,0.14),{});S.fill(ctx,c=>rrect(c,1334,330,272,30,6),sb,{});
+  S.fill(ctx,c=>rrect(c,1392,384,156,188,3),dk(bk,0.42),{});S.fill(ctx,c=>{rrect(c,1400,392,66,180,2);rrect(c,1474,392,66,180,2);},gl,S.shade?{grad:[1400,392,1540,572,0.2],w:0.6}:{w:0.6,flat:true});
+  S.fill(ctx,c=>{rrect(c,1372,572,196,14,2);rrect(c,1360,586,220,14,2);},lt(sb,0.1),{});
+  S.begin(ctx,{lw:2.4,far:0.2,sh:4});S.fill(ctx,c=>{for(let x=1052;x<1350;x+=44)ell(c,x+22,566,30,20);},C("hedge"),{sa:0.14});S.fill(ctx,c=>{for(let x=1600;x<1960;x+=44)ell(c,x+22,566,30,20);},C("hedge"),{sa:0.14});
+};
+/* a teaching room: the door and its sensor on the left, windows, the board on the right; its seats come with the people */
+K.place.lecture=ctx=>{const S=K.S,R=K.ROOMS.lecture,d=R.door;wall(ctx,C("wallCool"),800);
+  K.window(ctx,560,170,300,400,campusView,{bld:0.3,light:false});K.window(ctx,960,170,300,400,campusView,{bld:-0.3,light:false,trees:[[0.3,0.74,90,0],[0.72,0.8,78,1]]});
+  S.begin(ctx,{lw:3,far:0.1,sh:5});K.board(ctx,R.board.x,R.board.y,R.board.w,R.board.h);
+  floorAt(ctx,800,C("carpet"),false);skirting(ctx,780);
+  K.door(ctx,d.x,800,d.w,d.h,{col:C("doorCool"),glass:true});K.sensor(ctx,R.sensor[0],R.sensor[1],0);};
+// the sensor over a door, which counts who comes in; on (0 to 1): it has just seen someone
+K.sensor=(ctx,x,y,on)=>{const S=K.S;S.begin(ctx,{lw:2.4,far:0,sh:3});S.fill(ctx,c=>rrect(c,x-40,y-20,80,40,12),C("sensor"),{});
+  ctx.fillStyle=css([60,66,78]);ctx.beginPath();ctx.arc(x-14,y,10,0,TAU);ctx.fill();ctx.fillStyle=css(mix([150,156,164],K.C.orange,clamp(on||0,0,1)));ctx.beginPath();ctx.arc(x+18,y,6+2*clamp(on||0,0,1),0,TAU);ctx.fill();};
+
+/* ---------------------------------------------------------------- sets: people with what they sit at
+   PK.atDesk: someone at a desk, seen from the side: the chair, their legs, the desk and what is on it, then the rest of them, their
+   hands on the keys. o.flip: they face left. o.w: the desk's length along the frame (0.62 h by default). o.work (0 to 1, 1 by
+   default): how far their hands are on the keys; o.pose: their pose when they aren't ("sit"), o.workPose when they are; o.reachN,
+   o.reachF: what their hands rest on instead of the keys. o.turn (0 to 1): turned round on the chair, away from the desk. o.screen: "laptop" (the default), "monitor" (it faces us: o.show(ctx, x, y, w, h) draws what it shows;
+   o.sx where it stands, o.sw and o.sh its size; o.keysBack (0 to 1): its keyboard pushed back towards it, to make room for a
+   notebook) or null. o.on(ctx, D) draws what else is on the desk. The rest as PK.person's.
+   Returns the person's joints, with J.desk = D: {x0, x1 (its near and far end), cx, top, floor, dir, w, k}. who null: the desk
+   and its chair stand empty. */
+K.atDesk=(ctx,who,x,floor,h,o)=>{o=Object.assign({},o||{});const S=K.S,dir=o.flip?-1:1,w=o.w||0.62*h,top=floor-0.43*h,x0=x+dir*0.1*h,x1=x0+dir*w,k=h/660,
+    D={x0,x1,cx:(x0+x1)/2,top,floor,dir,w,k},turn=clamp(o.turn||0,0,1),work=(o.work==null?1:o.work)*(1-pin(turn,0,0.3)),pose=K.poseMix(o.pose||"sit",o.workPose||"sitWork",work),
+    fl=dir<0?1-turn:turn,lw={lw:clamp(h*0.0056,1.4,6.5),sh:clamp(h*0.0078,1.5,8.5)},po=Object.assign({},o,{flip:fl});
+  S.begin(ctx,lw);K.chair(ctx,x-Math.cos(Math.PI*fl)*0.012*h,floor,h,fl,{col:o.chair,swivel:o.swivel!==false});
+  if(who)K.person(ctx,who,x,floor,h,pose,Object.assign({},po,{part:"lower",busy:work>=0.5}));
+  S.begin(ctx,lw);K.desk(ctx,D.cx,top,w,floor,{col:o.deskCol,k:h/600});
+  if(o.screen==="monitor"){K.monitor(ctx,o.sx==null?x0+dir*w*0.6:o.sx,top,o.sw||0.36*h,o.sh||0.23*h,{draw:o.show});
+    S.begin(ctx,lw);S.fill(ctx,c=>rrect(c,Math.min(x0+dir*0.1*h,x0+dir*0.27*h)+dir*0.17*h*clamp(o.keysBack||0,0,1),top-0.012*h,0.17*h,0.012*h,3),lt(C("laptop"),0.25),{w:0.7});}
+  else if(o.screen!==null)K.laptop(ctx,x0+dir*0.21*h,top,{k,flip:dir<0,glow:o.glow});
+  if(o.on)o.on(ctx,D);
+  if(!who)return{desk:D};
+  // hands on the keys tap in bursts and rest between them (given the time, o.t; o.life 0: they lie still)
+  const ty=o.t==null||o.life===0?{n:[0,0],f:[0,0]}:K.typing(o.t,typeof who==="string"?K.CAST[who]:who);
+  const J=K.person(ctx,who,x,floor,h,pose,Object.assign({},po,{part:"upper",busy:work>=0.5},o.reachN?{}:{reachN:[x+dir*(0.25+ty.n[0])*h,top-(0.012+ty.n[1])*h],reachNk:work},
+    o.reachF?{}:{reachF:[x+dir*(0.31+ty.f[0])*h,top-(0.018+ty.f[1])*h],reachFk:work}));J.desk=D;return J;};
+// someone on a chair
+K.seated=(ctx,who,x,floor,h,pose,o)=>{o=o||{};const fl=o.flip===true?1:(o.flip||0);K.S.begin(ctx,{lw:clamp(h*0.0056,1.4,6.5),sh:clamp(h*0.0078,1.5,8.5)});
+  K.chair(ctx,x-Math.cos(Math.PI*fl)*0.012*h,floor,h,fl,{col:o.chair,swivel:o.swivel});return K.person(ctx,who,x,floor,h,pose||"sit",o);};
+/* the teaching room's seats, in three rows that face the board: n of the eleven are taken, by people nobody names (PK.extra), in
+   the order o.order gives (seats 0 to 3 are the back row, 4 to 7 the middle, 8 to 10 the front); the others stand empty.
+   o.a (0 to 1) fades the people, so the empty chairs show through; o.who(i) another person for seat i; o.look where they look
+   (0: at their notes, 1: up at the board); o.between(ctx, row) draws what comes after a row, such as someone walking to a seat.
+   PK.seats() gives the seats: {r (the row), x, fl, h}. */
+K.seats=o=>{o=o||{};const R=K.ROOMS.lecture,x0=o.x0==null?470:o.x0,x1=o.x1==null?1180:o.x1,seats=[];
+  R.rows.forEach(([fl,h],r)=>{const m=r===2?3:4;for(let i=0;i<m;i++)seats.push({r,x:lerp(x0,x1,(i+(r%2?0.5:0.12)+(r===2?0.3:0))/m)+r*14,fl,h});});return seats;};
+K.audience=(ctx,t,n,o)=>{o=o||{};const seats=K.seats(o),order=o.order||[5,1,9,6,2,8,0,10,4,7,3],taken={};order.slice(0,clamp(Math.round(n),0,11)).forEach((s,i)=>taken[s]=i);
+  seats.forEach((s,i)=>{const P=taken[i]!=null?(o.who&&o.who(i))||K.extra(i+3):null,ch=K.PAL[i%2?"chair2":"chair"];
+    if(!P||(o.a!=null&&o.a<1)){K.S.begin(ctx,{lw:clamp(s.h*0.0056,1.4,6.5),sh:4});K.chair(ctx,s.x-0.012*s.h,s.fl,s.h,false,{col:ch});}
+    if(P)K.seated(ctx,P,s.x,s.fl,s.h,K.poseMix("sit","sitBack",hash(i,2)),{t:t+i*1.7,chair:ch,a:o.a,expr:"listen",gaze:[1,-(o.look==null?0.4:o.look)],nod:Math.sin(t*0.7+i)*0.02,shade:0});
+    if(o.between&&(i===3||i===7))o.between(ctx,s.r);});
+  return seats;};
+/* PK.atBoard: someone writes on a wall board, standing at it, seen from the side, facing right. lines: [{s, t0, t1, col}]: each
+   line's words and when they are written (from t0 to t1), one under the other from (o.x, o.y: the first baseline), o.lh apart, in
+   o.size px. An arm is only so long, so the writer stands o.back px behind the pen and steps along as the words come; when the
+   next line comes more than o.aside seconds later, and after the last, they step back to o.rest (an x clear of the words), so
+   the words show: keep o.rest within a stride of the lines' ends, so that it is one step back, still facing the board, and
+   a head's width clear of the words' start. o.stand: how they stand when they aren't writing ("ease"). o.floor, o.h: where they stand and how tall; o.a fades the words (not the writer); o.expr, o.gaze as PK.person's.
+   o.down: when they put the marker down on the board's tray, at o.tray [x, y] (within an arm of o.rest): it lies there from then
+   on. who null: only the words, and the marker on the tray: the writer has left. Returns the joints, with J.writing (0 to 1). */
+K.atBoard=(ctx,who,t,lines,o)=>{o=Object.assign({size:30,weight:700,lh:56,back:74,aside:2.2,a:1},o||{});const u=o.h/1000,down=o.down==null||!o.tray?1e9:o.down;
+  const W=lines.map(l=>ag_tw(ctx,l.s,{w:o.weight,size:o.size})),pOf=(i,tt)=>clamp((tt-lines[i].t0)/(lines[i].t1-lines[i].t0),0,1),pen=(i,p)=>[o.x+W[i]*p,o.y+i*o.lh-o.size*0.32];
+  // the words, as far as they are written
+  lines.forEach((l,i)=>{const p=pOf(i,t);if(p<=0||o.a<=0.004)return;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);ctx.beginPath();ctx.rect(o.x-4,o.y+i*o.lh-o.size-6,(W[i]+10)*p,o.size+24);ctx.clip();
+    ag_T(ctx,l.s,o.x,o.y+i*o.lh,{w:o.weight,size:o.size,color:css(l.col||K.C.ink)});ctx.restore();});
+  const P=typeof who==="string"?K.CAST[who]:who,inkOf=l=>(l&&l.col)||K.C.ink,lw={lw:clamp(o.h*0.0056,1.4,6.5),sh:clamp(o.h*0.0078,1.5,8.5)};
+  const marker=(c,a,b,col)=>{const S=K.S;S.fill(c,cc=>capsule(cc,a,b,9*u,8*u),[70,74,90],{w:0.6});S.fill(c,cc=>capsule(cc,[lerp(a[0],b[0],0.82),lerp(a[1],b[1],0.82)],b,8*u,6*u),col,{w:0.6,flat:true});};
+  // the marker on the tray: from the hand that puts it there, it comes to lie flat
+  if(t>=down){const J0=K.rig(P||{},o.rest,o.floor,o.h,"stand",{reachN:[o.tray[0],o.tray[1]-10*u]}),h0=J0.hdN,d0=J0.aN[1],e=pin(t,down,0.3),
+      a=[lerp(polar(h0,d0,-6*u)[0],o.tray[0]-34*u,e),lerp(polar(h0,d0,-6*u)[1],o.tray[1]-9*u,e)],b=[lerp(polar(h0,d0,62*u)[0],o.tray[0]+34*u,e),lerp(polar(h0,d0,62*u)[1],o.tray[1]-9*u,e)];
+    K.S.begin(ctx,lw);marker(ctx,a,b,inkOf(lines[lines.length-1]));}
+  if(!P)return null;
+  const amp=K.ampOf(P),stride=K.strideOf(o.h,amp);
+  // where the writer stands: moves [t0, t1, x0, x1, eased], held between them
+  const mv=[];let px=o.rest,pt=-1e9;const move=(t1,x1)=>{const d=clamp(Math.abs(x1-px)/340,0.45,1.6),t0=Math.max(pt,t1-d);if(Math.abs(x1-px)>0.5)mv.push([t0,Math.max(t1,t0+0.3),px,x1,1]);px=x1;pt=Math.max(t1,t0+0.3);};
+  lines.forEach((l,i)=>{const sx=o.x-o.back,ex=sx+W[i];move(l.t0-0.1,sx);mv.push([l.t0,l.t1,sx,ex,0]);px=ex;pt=l.t1+0.25;
+    if(i===lines.length-1||lines[i+1].t0-l.t1>o.aside)move(pt+clamp(Math.abs(o.rest-ex)/340,0.5,1.6),o.rest);});
+  const xAt=tt=>{let x=o.rest;for(const [t0,t1,x0,x1,e] of mv){if(tt<=t0)break;const k=clamp((tt-t0)/(t1-t0),0,1);x=lerp(x0,x1,e?K.u.sine(k):k);}return x;};
+  // a step or so back from the words is taken as people take it, still facing the board; only to walk back a long way do they turn
+  // round, and face the board's free side again when they stop
+  let turn=0;for(const [t0,t1,x0,x1,e] of mv)if(e&&x0-x1>stride*0.9)turn=Math.max(turn,pin(t,t0-0.1,0.3)*(1-pin(t,t1-0.25,0.3)));
+  let wi=0,wk=0;lines.forEach((l,i)=>{const k=pin(t,l.t0-0.3,0.3)*(1-pin(t,l.t1+0.1,0.3));if(k>wk){wk=k;wi=i;}});
+  const x=xAt(t),v=Math.abs(xAt(t+0.04)-xAt(t-0.04))/0.08,walk=K.poseMix(o.stand||"ease",K.poseWalk(Math.abs(x-o.rest)/stride,1,amp),clamp(v/180,0,1)*0.85),q=pen(wi,pOf(wi,t)),held=t<down;
+  // the hand: on the pen's place while a line is written; to the tray and back as the marker is put down
+  const tr=down<1e8?pin(t,down-0.45,0.4)*(1-pin(t,down+0.15,0.45)):0,rk=tr>0?tr:wk*(1-turn),tg=tr>0?[o.tray[0],o.tray[1]-10*u]:[q[0]+2,q[1]+Math.sin(t*23)*2.5*wk];
+  const pose=Object.assign({},walk,{aN:[walk.aN[0],walk.aN[1],held?"grip":"rest"]}),mk=held?(c,h,deg,J)=>marker(c,polar(h,deg,-6*J.u),polar(h,deg,62*J.u),inkOf(lines[wi])):null;
+  const J=K.person(ctx,who,x,o.floor,o.h,pose,{t:o.t==null?t:o.t,flip:turn,expr:o.expr,gaze:o.gaze||[1,-0.3*wk],nod:o.nod,reachN:tg,reachNk:rk,hold:mk});J.writing=wk;return J;};
+})(PK);
+
+/* ===== The people kit: the handwriting font =====
+   Notes in a book and words on a board are written by hand, so the kit carries a handwriting font of its own: Kalam, by Indian Type
+   Foundry, under the SIL Open Font License 1.1 (fonts/OFL-Kalam.txt), in two weights: 400 for a pen, 700 for a heading or a board's
+   marker. These are its Latin subsets from Google Fonts (version 18, checked 17 November 2026), carried in the film's own script,
+   so the film looks the same in the video, in the site's player and in the checks, with no network. hand.js loads them before the
+   film starts. Never edit this file: python tools/font.py writes it again from the two .woff2 files in fonts/. */
+(K=>{K.KALAM={
+400:"data:font/woff2;base64,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",
+700:"data:font/woff2;base64,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"};
+})(PK);
+
+/* ===== The people kit: handwriting =====
+   A film's key ideas stand apart from its scenes (the author, 17 November 2026: "important information now too merged in the
+   scene"). The ideas a film opens with are explained by someone at a board; what to remember, a remark or a conclusion, is a
+   person's colourful notes in a book. Both are written by hand as the voice says them, in the kit's handwriting font (kalam.js),
+   with a pen's marks round them: a line under a heading, a highlighter's band, a ring, a box, an arrow, a tick. This file holds
+   the writing; concepts.js holds the board and the book.
+
+     PK.hand(ctx, s, x, y, o)   words written by hand, their baseline at (x, y). o.size (48), o.w (400; 700 for a heading or a
+                                marker), o.col, o.p (0 to 1: how far they are written, from the left), o.a, o.align, o.deco
+                                (decoration: too small to read on purpose, as on a board far off). -> {w, x0, x1, pen}
+     PK.handW(ctx, s, size, w)  how wide they are
+     PK.pen.<mark>(…)           a pen's mark, as rows of points: line, under, hl, strike, box, ring, arrow, tick, cross, star
+     PK.strokes(ctx, rows, col, w, p, o)   draws a mark as far as p (0 to 1) -> where the pen is
+     PK.ink(ctx, items, t, o)   a board's or a page's writing, item by item, each when its time comes -> where the pen is
+
+   PK.ink's items are rows, drawn in the order given, in the surface's own px from its top left corner:
+     {s, x, y, at, d, size, w, col, align, marks}   words. at: when the pen starts, in the scene's seconds (none: they are there
+          from the start); d: how long the pen takes (by default from their length). marks: what the pen adds once they are
+          written, each [kind, col, at, d]: "under" (a line under them), "under2" (two), "hl" (a highlighter's band), "strike"
+          (a line through them: what isn't so), "box" or "ring" (round them). A mark comes right after the words, one after
+          the other, unless it has an at of its own. Words with no x go on from the words before them, on their line, a
+          space on (gap): a few words of a line in another colour or weight
+     {k, at, d, col, …}    a mark of its own: k "line" or "arrow" (x, y, x1, y1, bow), "box" (x, y, w, h), "ring" (x, y, rx, ry),
+          "tick", "cross", "star" or "dot" (x, y, r), "hl" or "under" (x, y, w, size)
+     {draw(ctx, p, it), at, d, pen(p)}   a drawing of the film's own, p from 0 to 1 (pen: where its pen is)
+   A colour is one of the kit's names ("ink", "blue", "green", "amber", "orange", "mut") or [r, g, b]. Colour keeps its meaning
+   in handwriting too: ink for the words; blue a plan or a rule, green something done or of value, amber a risk or a cost, orange
+   data, for a heading's line, a highlight or a mark. o: {x, y (the surface's corner in the picture), k (its scale), a, lw (the
+   pen's width: 5; a marker's 7), deco, aside (1.4: between two items no further apart than this, the pen stays over the page)}.
+   -> {pen: [x, y] in the picture, on: 0 to 1 (how far the pen is down on the surface), lift, i (the item), col (its colour)}
+   Handwriting is 40 px or more as it is seen: 44 to 56 for a line, 60 to 84 for a heading. */
+(K=>{
+const {TAU,lerp,clamp,sine,pin,mix,css}=K.u;
+K.FT_HAND="Kalam,'Segoe Print','Bradley Hand','Comic Sans MS',cursive";
+if(typeof FT!=="undefined")FT.hand=K.FT_HAND;
+// the font's two weights, from the film's own script: loading starts here, and the film waits for the page's fonts before it starts
+K.handReady=(()=>{try{if(typeof FontFace==="undefined"||typeof document==="undefined"||!document.fonts||!K.KALAM)return Promise.resolve(false);
+  return Promise.all([400,700].map(w=>{const f=new FontFace("Kalam","url("+K.KALAM[w]+") format('woff2')",{weight:String(w),style:"normal"});document.fonts.add(f);return f.load();})).then(()=>true,()=>false);}
+  catch(e){return Promise.resolve(false);}})();
+// a highlighter's colours: the five meanings, light enough to write over
+K.HL={blue:[160,204,242],green:[164,222,180],amber:[250,214,122],orange:[250,190,152],violet:[204,194,246],mut:[222,216,206],ink:[222,216,206]};
+const colOf=c=>Array.isArray(c)?c:(c&&K.C[c])||K.C.ink,hlOf=c=>Array.isArray(c)?c:(c&&K.HL[c])||K.HL.amber;
+K.inkCol=colOf;
+
+K.handW=(ctx,s,size,w)=>ag_tw(ctx,s,{w:w||400,size:size||48,f:"hand"});
+K.hand=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||48,wt=o.w||400,W=K.handW(ctx,s,size,wt),p=o.p==null?1:clamp(o.p,0,1),x0=o.align==="center"?x-W/2:o.align==="right"?x-W:x;
+  if(p>0&&(o.a==null||o.a>0.004)){ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
+    if(p<1){ctx.beginPath();ctx.rect(x0-8,y-size*1.15,(W+16)*p,size*1.7);ctx.clip();}
+    ag_T(ctx,s,x0,y,{w:wt,size,f:"hand",color:css(colOf(o.col)),deco:o.deco});ctx.restore();}
+  return{w:W,x0,x1:x0+W,pen:[x0+W*p,y-size*0.26]};};
+
+/* ---------------------------------------------------------------- a pen's marks
+   A pen's line isn't ruled: its points sway a little, the same way every time. Each mark is rows of points (a row is one stroke),
+   so it can be drawn as far as the pen has come. */
+const sway=(i,seed,amp)=>(Math.sin(i*0.83+seed*1.7)+0.6*Math.sin(i*2.1+seed*0.9))*amp/1.6;
+const seg=(x0,y0,x1,y1,o)=>{o=o||{};const L=Math.hypot(x1-x0,y1-y0)||1,n=Math.max(2,Math.round(L/10)),nx=-(y1-y0)/L,ny=(x1-x0)/L,amp=o.amp==null?1.5:o.amp,out=[];
+  for(let i=0;i<=n;i++){const u=i/n,d=(o.bow||0)*Math.sin(Math.PI*u)+(i&&i<n?sway(i,o.seed||0,amp):0);out.push([lerp(x0,x1,u)+nx*d,lerp(y0,y1,u)+ny*d]);}return out;};
+K.pen={
+  line:(x0,y0,x1,y1,o)=>[seg(x0,y0,x1,y1,o)],
+  under:(x,y,w,o)=>{o=o||{};const g=o.gap==null?10:o.gap,a=[seg(x-4,y+g,x+w+6,y+g-2,{seed:x+y,bow:-1.5})];if(o.two)a.push(seg(x+w+2,y+g+9,x-2,y+g+10,{seed:x+y+3,bow:1}));return a;},
+  hl:(x,y,w,size)=>[seg(x-8,y-size*0.3,x+w+8,y-size*0.3-1,{seed:x+y,amp:0.8})],          // drawn wide, with a flat end
+  strike:(x,y,w,size)=>[seg(x-8,y-size*0.26,x+w+8,y-size*0.32,{seed:x+y,bow:1.5})],
+  box:(x,y,w,h,o)=>{const s=x+y,j=i=>sway(i,s,2.4),a=[x+j(1),y+j(2)],b=[x+w+j(3),y+j(4)],c=[x+w+j(5),y+h+j(6)],d=[x+j(7),y+h+j(8)];
+    return[[].concat(seg(a[0]+8,a[1],b[0],b[1],{seed:s}),seg(b[0],b[1],c[0],c[1],{seed:s+1}).slice(1),seg(c[0],c[1],d[0],d[1],{seed:s+2}).slice(1),seg(d[0],d[1],a[0]-1,a[1]-2,{seed:s+3}).slice(1),[[a[0]+16,a[1]-3]])];},
+  ring:(cx,cy,rx,ry,o)=>{o=o||{};const n=Math.max(26,Math.round((rx+ry)/5)),a0=o.a0==null?-2.5:o.a0,out=[];
+    for(let i=0;i<=n;i++){const u=i/n,a=a0+u*TAU*1.07,g=1+0.06*(u-0.5)+0.012*Math.sin(u*9+cx);out.push([cx+Math.cos(a)*rx*g,cy+Math.sin(a)*ry*g]);}return[out];},
+  arrow:(x0,y0,x1,y1,o)=>{o=o||{};const b=seg(x0,y0,x1,y1,{bow:o.bow||0,seed:x0+y1,amp:1}),n=b.length,e=b[n-1],q=b[Math.max(0,n-3)],g=Math.atan2(e[1]-q[1],e[0]-q[0]),h=o.head||22;
+    return[b,[[e[0]-Math.cos(g-0.5)*h,e[1]-Math.sin(g-0.5)*h],e,[e[0]-Math.cos(g+0.5)*h,e[1]-Math.sin(g+0.5)*h]]];},
+  tick:(x,y,r)=>[[[x-r*0.58,y-r*0.02],[x-r*0.34,y+r*0.2],[x-r*0.14,y+r*0.44],[x+r*0.06,y+r*0.12],[x+r*0.34,y-r*0.3],[x+r*0.66,y-r*0.66]]],
+  cross:(x,y,r)=>[seg(x-r*0.6,y-r*0.6,x+r*0.6,y+r*0.6,{seed:x,amp:0.8}),seg(x+r*0.6,y-r*0.62,x-r*0.6,y+r*0.58,{seed:y,amp:0.8})],
+  star:(x,y,r)=>{const out=[];for(let i=0;i<=5;i++){const a=-Math.PI/2+i*TAU*0.4;out.push([x+Math.cos(a)*r,y+Math.sin(a)*r]);}return[out];}
+};
+const lenOf=rows=>{let L=0;for(const r of rows)for(let i=1;i<r.length;i++)L+=Math.hypot(r[i][0]-r[i-1][0],r[i][1]-r[i-1][1]);return L;};
+// the box a mark's points lie in: [x0, y0, x1, y1]
+const boxOf=rows=>{const b=[1e9,1e9,-1e9,-1e9];for(const r of rows)for(const q of r){b[0]=Math.min(b[0],q[0]);b[1]=Math.min(b[1],q[1]);b[2]=Math.max(b[2],q[0]);b[3]=Math.max(b[3],q[1]);}return b;};
+K.strokes=(ctx,rows,col,w,p,o)=>{o=o||{};p=p==null?1:clamp(p,0,1);let end=rows[0][0];if(p<=0)return end;
+  let left=lenOf(rows)*p+0.01;ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);ctx.strokeStyle=css(colOf(col));ctx.lineWidth=w||5;ctx.lineCap=o.cap||"round";ctx.lineJoin="round";ctx.beginPath();
+  for(let k=0;k<rows.length&&left>0;k++){const r=rows[k];ctx.moveTo(r[0][0],r[0][1]);end=r[0];
+    for(let i=1;i<r.length&&left>0;i++){const d=Math.hypot(r[i][0]-r[i-1][0],r[i][1]-r[i-1][1]);
+      if(d>left){const u=left/(d||1);end=[lerp(r[i-1][0],r[i][0],u),lerp(r[i-1][1],r[i][1],u)];ctx.lineTo(end[0],end[1]);left=0;}else{ctx.lineTo(r[i][0],r[i][1]);end=r[i];left-=d;}}}
+  ctx.stroke();ctx.restore();return end;};
+// where a mark's pen is at p, without drawing it
+const penOn=(rows,p)=>{let left=lenOf(rows)*clamp(p,0,1),end=rows[0][0];for(const r of rows){end=r[0];for(let i=1;i<r.length;i++){const d=Math.hypot(r[i][0]-r[i-1][0],r[i][1]-r[i-1][1]);
+    if(d>=left)return[lerp(r[i-1][0],r[i][0],left/(d||1)),lerp(r[i-1][1],r[i][1],left/(d||1))];left-=d;end=r[i];}}return end;};
+
+/* ---------------------------------------------------------------- a surface's writing
+   Every stroke of the pen on a board or a page, in the order it is drawn: {i (its item), t0, t1, col, draw(ctx, p), at(p), box
+   ([x0, y0, x1, y1]: where it lies), text (words), line (a line drawn along something: a writer walks along it)} */
+const durOf=s=>clamp(0.3+String(s).length*0.05,0.5,2.6);
+function plan(ctx,items,o){const out=[],lw=o.lw||5;let last=null;
+  items.forEach((it,i)=>{const timed=it.at!=null,t0=timed?it.at:-1e9;
+    if(it.s!=null){const size=it.size||48,wt=it.w||400,W=K.handW(ctx,it.s,size,wt),
+        // words with no x go on from the words before them, on their line, a space on (another colour or weight in one line)
+        ix=it.x!=null?it.x:last?last.x1+(it.gap==null?size*0.3:it.gap):0,iy=it.y!=null?it.y:last?last.y:0,
+        x0=it.align==="center"?ix-W/2:it.align==="right"?ix-W:ix,d=it.d||durOf(it.s),t1=timed?t0+d:-1e9,col=colOf(it.col||o.col);last={x1:x0+W,y:iy};
+      const words={i,t0,t1,own:timed,col,text:true,x0,x1:x0+W,box:[x0,iy-size*0.78,x0+W,iy+size*0.24],draw:(c,p)=>K.hand(c,it.s,x0,iy,{size,w:wt,col,p,deco:o.deco}),at:p=>[x0+W*p,iy-size*0.26]},under=[],over=[];let tm=t1+0.18;
+      (it.marks||[]).forEach((m,mi)=>{const [kind,mc,mat,md]=m,hl=kind==="hl",c2=hl?hlOf(mc):colOf(mc||it.col),dd=md||(hl?0.5:kind==="ring"||kind==="box"?0.6:0.4),a0=!timed?-1e9:mat!=null?mat:tm;if(timed&&mat==null)tm=a0+dd+0.12;
+        const line=kind!=="box"&&kind!=="ring",r0=kind==="hl"?K.pen.hl(x0,iy,W,size):kind==="under"?K.pen.under(x0,iy,W):kind==="under2"?K.pen.under(x0,iy,W,{two:true}):kind==="strike"?K.pen.strike(x0,iy,W,size):
+          kind==="box"?K.pen.box(x0-16,iy-size*0.98,W+32,size*1.36):K.pen.ring(x0+W/2,iy-size*0.3,W/2+36,size*0.86),
+          // a writer who walks along a board (o.walk) draws a line back along the words, from where they stand
+          rows=o.walk&&line?r0.map(r=>r.slice().reverse()):r0;
+        (hl?under:over).push({i,m:mi,t0:a0,t1:timed?a0+dd:-1e9,own:timed&&mat!=null,col:c2,line,box:boxOf(rows),draw:(c,p)=>K.strokes(c,rows,c2,hl?size*0.66:lw*(kind==="strike"?1.1:1),p,hl?{cap:"butt",a:0.78}:{}),at:p=>penOn(rows,p)});});
+      out.push(...under,words,...over);return;}
+    if(it.draw){const d=it.d||0.6,at=p=>it.pen?it.pen(p):[it.x||0,it.y||0];out.push({i,t0,t1:timed?t0+d:-1e9,own:timed,col:colOf(it.col||o.col),box:it.box||boxOf([[at(0),at(0.25),at(0.5),at(0.75),at(1)]]),draw:(c,p)=>it.draw(c,p,it),at});return;}
+    const k=it.k,col=k==="hl"?hlOf(it.col):colOf(it.col||o.col),d=it.d||(k==="dot"?0.2:k==="tick"||k==="cross"?0.35:k==="hl"?0.5:0.55),t1=timed?t0+d:-1e9;
+    if(k==="dot"){out.push({i,t0,t1,own:timed,col,box:[it.x-(it.r||7),it.y-(it.r||7),it.x+(it.r||7),it.y+(it.r||7)],draw:(c,p)=>{c.save();c.fillStyle=css(col);c.beginPath();c.arc(it.x,it.y,(it.r||7)*sine(p),0,TAU);c.fill();c.restore();},at:()=>[it.x,it.y]});return;}
+    const rows=k==="line"?K.pen.line(it.x,it.y,it.x1,it.y1,{bow:it.bow,seed:it.x+it.y}):k==="arrow"?K.pen.arrow(it.x,it.y,it.x1,it.y1,{bow:it.bow,head:it.head}):k==="box"?K.pen.box(it.x,it.y,it.w,it.h):
+      k==="ring"?K.pen.ring(it.x,it.y,it.rx,it.ry):k==="tick"?K.pen.tick(it.x,it.y,it.r||18):k==="cross"?K.pen.cross(it.x,it.y,it.r||18):k==="star"?K.pen.star(it.x,it.y,it.r||18):
+      k==="hl"?K.pen.hl(it.x,it.y,it.w,it.size||48):k==="under"?K.pen.under(it.x,it.y,it.w,{two:it.two}):null;
+    if(!rows)throw new Error("PK.ink: no mark called "+k);
+    out.push({i,t0,t1,own:timed,col,line:k==="line"||k==="arrow"||k==="hl"||k==="under",box:boxOf(rows),draw:(c,p)=>K.strokes(c,rows,col,k==="hl"?(it.size||48)*0.66:(it.lw||lw),p,k==="hl"?{cap:"butt",a:0.78}:{}),at:p=>penOn(rows,p)});});
+  return out;}
+// every timed stroke, in the order the pen draws them: what a writer's hand and feet follow (concepts.js); all: also what is there
+// from the start, in the order given
+K.inkPlan=(ctx,items,o,all)=>{const P=plan(ctx,items,o||{});return all?P:P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);};
+K.ink=(ctx,items,t,o)=>{o=o||{};const k=o.k||1,ox=o.x||0,oy=o.y||0,P=plan(ctx,items,o),aside=o.aside==null?1.4:o.aside,a=o.a==null?1:clamp(o.a,0,1);
+  if(a>0.004){ctx.save();ctx.translate(ox,oy);ctx.scale(k,k);ctx.globalAlpha*=a;for(const s of P){const p=s.t1<=-1e8?1:clamp((t-s.t0)/((s.t1-s.t0)||1),0,1);if(p>0)s.draw(ctx,p);}ctx.restore();}
+  // where the pen is: on the stroke being drawn; between two strokes close in time, on its way from one to the next; else lifted away
+  const T=P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);let cur=null,pv=null,nx=null;
+  for(const s of T){if(t>=s.t0&&t<=s.t1){if(!cur)cur=s;}else if(s.t1<t){if(!pv||s.t1>=pv.t1)pv=s;}else if(!nx||s.t0<nx.t0)nx=s;}
+  const out=q=>[ox+q[0]*k,oy+q[1]*k];
+  if(cur)return{pen:out(cur.at(clamp((t-cur.t0)/((cur.t1-cur.t0)||1),0,1))),on:1,lift:0,i:cur.i,col:cur.col};
+  if(pv&&nx&&nx.t0-pv.t1<=aside){const u=sine((t-pv.t1)/((nx.t0-pv.t1)||1)),A=pv.at(1),B=nx.at(0);return{pen:out([lerp(A[0],B[0],u),lerp(A[1],B[1],u)]),on:1,lift:Math.sin(Math.PI*u),i:u<0.5?pv.i:nx.i,col:u<0.5?pv.col:nx.col};}
+  const kOut=pv?1-pin(t,pv.t1+0.2,0.5):0,kIn=nx?pin(t,nx.t0-0.6,0.5):0;
+  if(kIn>=kOut&&nx)return{pen:out(nx.at(0)),on:kIn,lift:1-kIn,i:nx.i,col:nx.col};
+  if(pv)return{pen:out(pv.at(1)),on:kOut,lift:1-kOut,i:pv.i,col:pv.col};
+  return{pen:null,on:0,lift:1,i:-1,col:K.C.ink};};
+})(PK);
+
+/* ===== The people kit: key ideas, apart from the scene =====
+   A film moves between people and its key ideas (the author, 17 November 2026). Two devices hold the ideas, both written by hand
+   (hand.js), and both keep a person in the picture:
+     a board   the ideas a film opens with, explained by someone at a board: a consultant, a teacher, a colleague. They write
+               each line as the voice says it, then turn to the room.
+     a book    what to remember: a remark, a conclusion, the film's takeaway, as someone's colourful notes in their notebook,
+               seen from above, their hand writing them.
+   A scene shows who writes and where (the consultant at the room's board; Ivy opening her notebook at her desk); then the film
+   cuts or dissolves to the board or the page, close enough to read, and back to the people.
+
+     PK.place.board      a wall with a wide board, close enough to read, and floor enough for whoever explains to stand whole.
+                         PK.ROOMS.board: eye, floor, h (their height), board {x, y, w, h}, rest (where they stand aside),
+                         reach [y0, y1] (the band of the board's own px a hand reaches: keep every line's baseline inside it)
+     PK.teach(ctx, who, t, items, o)   someone explains at a board. items: PK.ink's rows, in the board's own px from its top left
+                         corner. The explainer faces the board to write, standing to the right of the marker so that what they
+                         write stays in view, and walks along as a line grows. Then they turn to the room and step to the right
+                         of all that is written, so nobody has to read round them: at once after the last line, and between
+                         two lines when the next leaves the time to come back. They start at o.rest, beyond the board.
+                         o: x, y (the board's corner), k (the writing's scale), floor, h, rest, face (how far they turn to the
+                         room: 0.66), stand ("clasp"), say ([[t0, t1], …]: when they speak), events (PK.face's), deco, a (fades
+                         the writing). who null: only the writing. -> their joints, with J.pen (PK.ink's result) and J.late
+                         On a board far off (the room's own, in a wide shot) give k and deco: the words are too small to read
+                         there on purpose, since the close view shows them.
+     PK.pace(ctx, who, rows)   the rows, each moved as much later as whoever writes them needs to walk to it. Give each row the
+                         time the voice says it, pace them once, and hand the result to every PK.teach that shows them.
+     Lay a board out for someone who walks (the check, people.py, lists what goes against these):
+       - they walk about 0.95 of their height a second, so a new row costs its walk back: about 0.8 s for a row 500 px long.
+         PK.pace makes the row wait for it, and a row that waits is written after the voice has said it. So write on from left
+         to right: a few words in another colour go on along their line (a row with no x); a short row under a long one starts
+         where the long one ended, not at the left again; what the voice says first is written first;
+       - writing below the top of their head (the board's y 130 and below) is hidden while they stand in front of it. They step
+         clear by themselves (about 1 s for 600 px): leave that, and a second to read, before the film cuts away;
+       - a line drawn back along words (under them, or through them) leaves the writer at the words' start, in front of the
+         rows above. Words in a colour need no walk; a tick or a cross before a row, made before it, needs none either;
+       - what is added later to rows that are there (a letter beside each) goes to their right, never to their left, where the
+         writer would stand on the rows;
+       - a board is written with markers: words in a colour, a line under, a ring, a box, a tick, a cross, an arrow. A
+         highlighter's band belongs to a notebook.
+     PK.place.notes      a desk seen from above, an open notebook on it: PK.ROOMS.notes: page {x, y, w, h} (the page to write
+                         on, in the picture's px), rot (how the book is turned), rest (where the hand waits)
+     PK.notes(ctx, who, t, items, o)   someone's notes: items are PK.ink's rows in the page's own px; who gives the hand its skin
+                         and its sleeve. The hand writes each item, and waits at the page's corner between two that are far
+                         apart. o.a fades the writing; o.hand false: the notes without the hand. -> PK.ink's result
+     PK.penHand(ctx, who, tip, o)      a hand holding a pen, seen from above, the pen's point at tip; o.k its size, o.col the pen's
+                                       colour, o.lift (0 to 1: raised off the page)
+     PK.notebook(ctx, x, y, k, o)      a notebook as a thing, seen from the side: closed on a desk (its near corner at x, y), or
+                                       o.open: held open on a knee or a hand; o.rot, o.cover (its colour)
+     PK.inHand.pen(col), PK.inHand.marker(col), PK.inHand.notebook(o)   what a hand holds, for PK.person's o.hold and o.underF
+   Writing takes a hand: a pen or a marker in it is what the hand holds. Nothing here goes below y 890 but the desk, the floor
+   and the hand: the captions are there. */
+(K=>{
+const {TAU,rad,lerp,clamp,sine,pin,mix,dk,lt,css,hash,polar,capsule,pg,rrect,ell}=K.u,C=K.col;
+Object.assign(K.PAL,{page:[254,251,244],dot:[204,210,220],ring:[96,100,112],cover:[70,120,134],tab:[250,214,122],desk:[214,170,124]});
+
+/* ---------------------------------------------------------------- a board someone explains at */
+K.ROOMS.board={eye:300,floor:960,h:725,board:{x:150,y:118,w:1250,h:524},rest:1640,reach:[96,470]};
+const marker=(c,a,b,col,u)=>{const S=K.S;S.fill(c,cc=>capsule(cc,a,b,9*u,8*u),[70,74,90],{w:0.6});S.fill(c,cc=>capsule(cc,[lerp(a[0],b[0],0.8),lerp(a[1],b[1],0.8)],b,8*u,6*u),col,{w:0.6,flat:true});};
+K.place.board=ctx=>{const S=K.S,R=K.ROOMS.board,b=R.board;K.paint.wall(ctx,C("wall"),900);
+  S.begin(ctx,{lw:4,far:0.05,sh:6});K.board(ctx,b.x,b.y,b.w,b.h);
+  // the markers on its tray, one for each colour the writing uses
+  [K.C.blue,K.C.green,K.C.amber].forEach((c,i)=>marker(ctx,[b.x+b.w*0.5-150+i*112,b.y+b.h+3],[b.x+b.w*0.5-150+i*112+84,b.y+b.h+3],c,1));
+  K.paint.floorAt(ctx,900,C("floor"),true);K.paint.skirting(ctx,878);};
+K.inHand={
+  marker:col=>(c,hd,deg,J)=>marker(c,polar(hd,deg,-8*J.u),polar(hd,deg,60*J.u),K.inkCol(col),J.u),
+  pen:col=>(c,hd,deg,J)=>{const S=K.S,a=polar(hd,deg-150,34*J.u),b=polar(hd,deg+30,30*J.u);S.fill(c,cc=>capsule(cc,a,b,5.5*J.u,4.5*J.u),K.inkCol(col||"blue"),{w:0.6});},
+  notebook:o=>(c,hd,deg,J)=>K.notebook(c,hd[0],hd[1],J.u*1.5,Object.assign({open:true,held:true},o||{}))
+};
+/* whoever writes at a board, as a body that walks: where they stand for each stroke, and how fast they get there */
+/* for the check: the rows written near an edge of their board or page, or past it, each {s, room}: the px left between its ink
+   and the nearest edge (less than nothing: past it), in the surface's own px (w by h) */
+const nearEdge=(ctx,items,w,h)=>{const out=[];for(const s of K.inkPlan(ctx,items,{},true)){if(!s.box)continue;const room=Math.min(s.box[0],w-s.box[2],s.box[1],h-s.box[3]);
+  if(room<60)out.push({s:String(items[s.i].s||items[s.i].k||"a drawing"),room});}return out;};
+const boardOf=o=>{const R=K.ROOMS.board;return Object.assign({x:R.board.x,y:R.board.y,k:1,floor:R.floor,h:R.h,rest:R.rest,face:0.66,stand:"clasp",lw:7},o||{});};
+const walker=(P,o)=>{const h=o.h,u=h/1000,fl=o.floor,J0=K.rig(P,0,fl,h,"stand",{flip:true,life:0}),sdx=J0.shF[0],sy=J0.shF[1],A=(J0.p.uarm+J0.p.farm+J0.p.hand*0.45)*u,near=0.14*h,
+    // where they stand for the marker to be at q: the shoulder as far from it as an arm reaches with ease, and never so near that they hide it
+    standX=q=>q[0]-sdx+Math.max(near+sdx,Math.sqrt(Math.max(0.09*A*A,0.7*A*A-(q[1]-sy)*(q[1]-sy)))),
+    toPic=q=>[o.x+q[0]*o.k,o.y+q[1]*o.k],box=s=>{const a=toPic([s.box[0],s.box[1]]),b=toPic([s.box[2],s.box[3]]);return[a[0],a[1],b[0],b[1]];},
+    // the furthest to the right of q their shoulder can be for the marker to reach it
+    far=q=>q[0]-sdx+Math.sqrt(Math.max(0.04*A*A,0.85*A*A-(q[1]-sy)*(q[1]-sy))),
+    /* where they stand as a stroke starts, coming from px. Words, and a line drawn along something, they walk along, to the right
+       of the marker; a mark of its own (a tick, a ring) they make from one place, to the right of all of it. Where they are
+       already will do, or a hand's width from it, when the marker reaches from there and they don't hide the mark: nobody
+       walks for a tick */
+    stay=(px,lo,hi,best)=>{if(px==null)return best;const c=clamp(px,lo,Math.max(lo,hi));return Math.abs(c-px)<0.06*h?c:best;},
+    from=(s,px)=>{if(s.text||s.line){const q=toPic(s.at(0));return stay(px,q[0]+near,far(q),standX(q));}
+      const b=box(s),m=[(b[0]+b[2])/2,(b[1]+b[3])/2],lo=b[2]+near,hi=Math.max(lo,far([b[0],m[1]]));return stay(px,lo,hi,Math.max(lo,Math.min(standX(m),hi)));};
+  // how long a walk of d px takes at a speed: a step of a hand's width takes no time, since the arm reaches; a real walk has a turn in it
+  return{h,u,fl,sdx,sy,A,near,standX,toPic,box,speed:0.95*h,side:0.9*h,dur:(d,sp)=>Math.abs(d)<0.06*h?0:Math.max(0.3,Math.abs(d)/sp+0.1),
+    // what they could hide: writing that reaches below the top of their head
+    hid:s=>box(s)[3]>fl-0.95*h,from,to:(s,a)=>s.text||s.line?standX(toPic(s.at(1))):a};};
+/* PK.pace(ctx, who, rows, o) -> the rows, each line and mark that has a time moved as much later as whoever writes them needs to
+   walk to it from where the one before ended, and never earlier than its own at. So give each row the time the voice says it,
+   pace the rows once, and hand the result to PK.teach, for the board seen close and for the room's own board alike: both are
+   then at the same line at every moment. It paces for the board seen close (PK.ROOMS.board), where the walks are longest. A row
+   keeps how far its words were moved as lag (seconds): the check lists a row that comes long after the voice.
+   The hand needs time too: between two strokes the pen crosses to the next one's start, and a stroke that began the moment the
+   last one ended, a row below, would throw the arm there in one frame. So a stroke also waits until the hand can have crossed.
+   With who null it paces a page of notes (PK.notes), where only a hand moves: PK.pace(ctx, null, rows). There one stroke also
+   waits for the one before to end, since one pen writes them all. */
+K.pace=(ctx,who,items,o)=>{const P=typeof who==="string"?K.CAST[who]:who,out=items.map(it=>Object.assign({},it,it.marks?{marks:it.marks.map(m=>m.slice())}:{})),moved={};
+  if(P)o=boardOf(o);
+  const G=P?walker(P,o):null,S_=K.inkPlan(ctx,items,P?{x:o.x,y:o.y,k:o.k,lw:o.lw,walk:true}:{}),at=(s,p)=>G?G.toPic(s.at(p)):s.at(p),hand=G?0.7*G.h:1500;
+  let px=P?o.rest:0,pt=-1e9,pq=null;
+  for(const s of S_){const a=G?G.from(s,px):0,t0=s.t0+(s.own?0:moved[s.i]||0),q0=at(s,0),hop=pq?Math.min(0.35,Math.hypot(q0[0]-pq[0],q0[1]-pq[1])/hand):0,
+      t=Math.max(t0,pt+Math.max(G?G.dur(a-px,G.speed)+0.06:0.05,hop)),it=out[s.i];
+    if(s.m==null){if(t>t0+1e-6){it.at=t;it.lag=(it.lag||0)+t-t0;}moved[s.i]=t-s.t0;}
+    else if(s.own||t>t0+1e-6){const m=it.marks[s.m];m[2]=t;if(m[3]==null)m[3]=s.t1-s.t0;}
+    if(G)px=G.to(s,a);pt=t+(s.t1-s.t0);pq=at(s,1);}
+  return out;};
+/* PK.written(ctx, who, rows) -> every stroke of rows as PK.pace gave them, in the order the pen draws them: {s (a row's words, or
+   a mark's kind), mark (true for a pen's mark), t0, t1 (the scene's seconds), x, y (its middle in the picture: on the board seen
+   close, or on the page)}. A film's score asks for it (tools/pens.py), so a marker's or a pen's sound falls where the picture
+   writes: a paced row's moment isn't a word's time plus an offset. who: as for PK.pace (null for a page of notes) */
+K.written=(ctx,who,items)=>{const P=typeof who==="string"?K.CAST[who]:who,o=P?boardOf():null;
+  return K.inkPlan(ctx,items,P?{x:o.x,y:o.y,k:o.k,lw:o.lw,walk:true}:{}).map(s=>{const q=s.at(0.5),p=P?[o.x+q[0]*o.k,o.y+q[1]*o.k]:pageAt(K.ROOMS.notes,q),it=items[s.i];
+    return{s:s.m!=null?String(it.marks[s.m][0]):String(it.s||it.k||"drawing"),mark:s.m!=null||!it.s,t0:s.t0,t1:s.t1,x:p[0],y:p[1]};});};
+K.teach=(ctx,who,t,items,o)=>{o=boardOf(o);
+  const io={x:o.x,y:o.y,k:o.k,lw:o.lw,deco:o.deco,a:o.a,walk:true},pen=K.ink(ctx,items,t,io),P=typeof who==="string"?K.CAST[who]:who;if(!P)return{pen};
+  const G=walker(P,o),{h,u,fl,sdx,sy,A,toPic,box,hid,from,to,speed,side,dur}=G,all=K.inkPlan(ctx,items,io,true),S_=all.filter(s=>s.t1>-1e8).sort((a,b)=>a.t0-b.t0),
+    amp=K.ampOf(P),stride=K.strideOf(h,amp),mv=[],busyAt=[],late=[];
+  /* their feet: moves [t0, t1, x0, x1, eased]; between two, they stay where they are. To write, they walk to the line's start,
+     facing the board, and along it as it grows. Then they turn to the room, and never stay in front of what is written: they step
+     to the right of all of it (right: its right edge, as far as they could hide it) as soon as the next line leaves the time to
+     come back; and when the next is written from beyond the words, they go there at once. A line that starts before their legs
+     can bring them to it is late: PK.pace moves it, and the check lists one that is left (people.py). */
+  let px=o.rest,pt=-1e9,right=-1e9;for(const s of all)if(s.t1<=-1e8&&hid(s))right=Math.max(right,box(s)[2]);
+  const go=(t1,x1,sp,busy)=>{if(Math.abs(x1-px)<=0.5)return Math.max(pt,t1);const d=Math.max(0.12,dur(x1-px,sp)),t0=Math.max(pt,t1-d),te=Math.max(t1,t0+0.72*d);mv.push([t0,te,px,x1,1]);if(busy)busyAt.push([t0,te]);px=x1;pt=te;return te;};
+  S_.forEach((s,j)=>{const a=from(s,px),b=to(s,a),ta=go(s.t0-0.05,a,speed,true);if(ta>s.t0+0.2)late.push({i:s.i,t:s.t0,by:ta-s.t0});
+    if(b!==a&&ta<s.t1-0.05){mv.push([Math.max(s.t0,ta),s.t1,a,b,0]);px=b;}
+    pt=Math.max(pt,s.t1);busyAt.push([s.t0-0.2,s.t1+0.1]);if(hid(s))right=Math.max(right,box(s)[2]);
+    const nx=S_[j+1],clear=Math.max(px,right+0.26*h);if(clear-px<=0.03*h)return;
+    // the hand comes down and they turn, then they go
+    if(!nx){go(pt+0.2+dur(clear-px,side),clear,side,false);return;}
+    const aN=from(nx,px);
+    if(aN>=clear-0.02*h){if(nx.t0-pt>0.5+dur(aN-px,speed))go(pt+0.2+dur(aN-px,speed),aN,speed,false);}
+    else if(aN!==px&&nx.t0-0.05-pt>=0.2+dur(clear-px,side)+0.3+dur(aN-clear,speed))go(pt+0.2+dur(clear-px,side),clear,side,false);});
+  const xAt=tt=>{let x=o.rest;for(const [t0,t1,x0,x1,e] of mv){if(tt<=t0)break;const q=clamp((tt-t0)/(t1-t0),0,1);x=lerp(x0,x1,e?sine(q):q);}return x;};
+  let busy=0;for(const [t0,t1] of busyAt)busy=Math.max(busy,pin(t,t0-0.35,0.4)*(1-pin(t,t1+0.1,0.45)));
+  // off: they walk away from the board, to the right, and face the way they go
+  const x=xAt(t),vs=(xAt(t+0.04)-xAt(t-0.04))/0.08,v=Math.abs(vs),off=clamp(vs/(0.3*h),0,1)*(1-busy),wr=pen.on*busy,q=pen.pen||[x-0.2*h,sy],
+    walk=K.poseMix(K.poseMix(o.stand,"ease",Math.max(busy,off)),K.poseWalk(Math.abs(x-o.rest)/stride,1,amp*lerp(1,0.42,wr)),clamp(v/180,0,1)*0.85),low=clamp((q[1]-sy-0.5*A)/(0.45*A),0,1.3)*wr,
+    pose=Object.assign({},walk,{lean:(walk.lean||0)+14*low,aF:[walk.aF[0],walk.aF[1],"grip"]}),
+    // the hand, so that the marker's point is on the writing: the marker lies along the forearm, which points about where the shoulder does
+    sh=[x+sdx,sy],dl=Math.hypot(q[0]-sh[0],q[1]-sh[1])||1,tg=[q[0]-(q[0]-sh[0])/dl*58*u,q[1]-(q[1]-sh[1])/dl*58*u+Math.sin(t*23)*2.2*(1-pen.lift)*wr],
+    F=K.face(t,{expr:o.expr||"neutral",gaze:[lerp(0.1,1,busy),lerp(0,q[1]<sy?-0.4:0.3,wr)]},(o.events||[]).concat((o.say||[]).map(([a,b])=>[a,"say",b-a])));
+  const J=K.person(ctx,who,x,fl,h,pose,Object.assign({t:o.t==null?t:o.t,flip:lerp(lerp(o.face,0.25,off),1,busy),reachF:tg,reachFk:wr,underF:K.inHand.marker(pen.col)},F));
+  /* for the check: are they in front of words that are written, close enough to read, while they aren't writing; the lines that
+     start before they can be there; and the lines PK.pace moved long after the voice */
+  if(K.watch){const name=i=>String(items[i].s||items[i].k||"a drawing"),
+      over=!o.deco&&busy<0.5&&all.some(s=>{if(!hid(s)||s.t0>t)return false;const b=box(s),x1=s.t1>t&&(s.text||s.line)?toPic(s.at(clamp((t-s.t0)/((s.t1-s.t0)||1),0,1)))[0]:b[2];return b[0]<x+0.1*h&&Math.max(x1,b[0])>x-0.1*h;});
+    K.watch({teach:typeof who==="string"?who:(P.key||P.name||"someone"),over,late:o.deco?[]:late.map(l=>({s:name(l.i),t:l.t,by:l.by})),
+      lag:o.deco?[]:items.map((it,i)=>it.lag?{s:name(i),t:it.at,by:it.lag}:null).filter(Boolean),
+      edge:o.deco?[]:nearEdge(ctx,items,K.ROOMS.board.board.w,K.ROOMS.board.board.h),a:1,ctx});}
+  J.pen=pen;J.writing=wr;J.late=late;return J;};
+
+/* ---------------------------------------------------------------- a notebook someone writes in
+   The desk is seen from straight above; the book lies a little turned, its right page large in the picture, its left page mostly
+   out of it. What is written goes on the right page, in the page's own px. */
+K.ROOMS.notes={rot:-0.03,pivot:[960,540],page:{x:420,y:70,w:1100,h:1160},rest:[1610,960]};
+// the page's own px to the picture's, and back to draw on it
+const pageAt=(R,q)=>{const c=Math.cos(R.rot),s=Math.sin(R.rot),x=R.page.x+q[0]-R.pivot[0],y=R.page.y+q[1]-R.pivot[1];return[R.pivot[0]+x*c-y*s,R.pivot[1]+x*s+y*c];};
+const onBook=(ctx,R)=>{ctx.translate(R.pivot[0],R.pivot[1]);ctx.rotate(R.rot);ctx.translate(-R.pivot[0],-R.pivot[1]);};
+/* o.cover: the book's colour; o.left(ctx, page): what is on the left page (page: its {x, y, w, h}, in the turned book's px; the
+   part of it in the picture is about 330 px wide); o.on(ctx): what else lies on the desk, in the picture's px */
+K.place.notes=(ctx,o)=>{o=o||{};const S=K.S,R=K.ROOMS.notes,p=R.page,desk=C("desk"),cover=S.tone(o.cover||K.PAL.cover),page=C("page"),g=40,lp={x:p.x-g-1000,y:p.y,w:1000,h:p.h};
+  ctx.fillStyle=css(desk);ctx.fillRect(0,0,1920,1080);
+  // the desk's grain: a few long lines
+  ctx.save();ctx.strokeStyle=css(dk(desk,0.16),0.55);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();
+  for(let i=0;i<9;i++){const y=40+i*128+(hash(i,3)-0.5)*40,x0=hash(i,5)*600-100,x1=x0+500+hash(i,7)*900;ctx.moveTo(x0,y);ctx.bezierCurveTo(lerp(x0,x1,0.3),y+7,lerp(x0,x1,0.7),y-7,x1,y+3);}ctx.stroke();ctx.restore();
+  // the highlighters the notes are coloured with, lying beside the book (o.things false: a bare desk)
+  if(o.things!==false){S.begin(ctx,{lw:3.4,sh:6});[["blue",1668,196,82],["green",1752,236,97],["amber",1836,188,88]].forEach(([n,x,y,deg])=>{const c0=mix(K.C[n],[255,255,255],0.3);
+      ctx.save();ctx.translate(x,y);ctx.rotate(rad(deg));ctx.fillStyle="rgba(84,52,36,0.2)";ctx.beginPath();capsule(ctx,[8,10],[212,10],24,24);ctx.fill();
+      S.poly(ctx,[[-30,-9,1],[2,-15,1],[2,15,1],[-30,4,1]],dk(c0,0.42),{exact:true,w:0.8});S.fill(ctx,c=>capsule(c,[0,0],[206,0],23,23),c0,{});S.fill(ctx,c=>capsule(c,[150,0],[208,0],24,24),dk(c0,0.2),{w:0.8});ctx.restore();});}
+  if(o.on)o.on(ctx);
+  ctx.save();onBook(ctx,R);S.begin(ctx,{lw:4,sh:8});
+  // its shadow on the desk, the cover, the pages under the two that show, the two pages
+  ctx.fillStyle="rgba(84,52,36,0.22)";ctx.beginPath();rrect(ctx,lp.x-10,p.y+4,lp.w+g+p.w+44,p.h+30,22);ctx.fill();
+  S.fill(ctx,c=>rrect(c,lp.x-22,p.y-18,lp.w+g+p.w+46,p.h+40,20),cover,{});
+  S.fill(ctx,c=>rrect(c,p.x-6,p.y-4,p.w+18,p.h+12,10),dk(page,0.1),{w:0.7});S.fill(ctx,c=>rrect(c,p.x-6,p.y-4,p.w+10,p.h+8,10),dk(page,0.05),{w:0.7});
+  S.fill(ctx,c=>rrect(c,lp.x,lp.y,lp.w,lp.h,10),dk(page,0.025),{});S.fill(ctx,c=>rrect(c,p.x,p.y,p.w,p.h,10),page,{});
+  // a grid of dots to write on
+  ctx.fillStyle=css(C("dot"));ctx.beginPath();for(const q of [lp,p])for(let y=q.y+52;y<Math.min(q.y+q.h-20,1240);y+=46)for(let x=q.x+(q===p?46:lp.w-22-46*Math.floor((lp.w-40)/46));x<q.x+q.w-24;x+=46){if(x<-40)continue;ctx.moveTo(x+2.4,y);ctx.arc(x,y,2.4,0,TAU);}ctx.fill();
+  if(o.left)o.left(ctx,lp);
+  // a tab that marks the page
+  S.fill(ctx,c=>rrect(c,p.x+p.w-8,p.y+150,40,84,8),C("tab"),{w:0.7});
+  // the rings that hold the pages
+  for(let y=p.y+44;y<1240;y+=62){ctx.fillStyle=css(dk(page,0.4));ctx.beginPath();ell(ctx,p.x-g-14,y,7,7);ell(ctx,p.x+14,y,7,7);ctx.fill();
+    S.fill(ctx,c=>rrect(c,p.x-g-16,y-6.5,g+32,13,6.5),C("ring"),{w:0.7});}
+  ctx.restore();};
+/* a hand holding a pen, from above: the pen's point at tip, the hand behind it, the forearm away to the lower right */
+K.penHand=(ctx,who,tip,o)=>{o=o||{};const S=K.S,P=typeof who==="string"?K.CAST[who]:(who||{}),k=o.k||1.45,sk=S.tone(P.skin||[230,188,156]),sl=S.tone((P.top&&P.top.c)||[104,112,130]),col=K.inkCol(o.col),lift=clamp(o.lift||0,0,1);
+  const a=rad(o.deg==null?54:o.deg),d=[Math.cos(a),Math.sin(a)],n=[-d[1],d[0]],T=[tip[0]+lift*10*k,tip[1]-lift*16*k],at=(u,v)=>[T[0]+(d[0]*u+n[0]*v)*k,T[1]+(d[1]*u+n[1]*v)*k];
+  // a soft shadow on the page, under the hand: nearer the hand when it is down
+  ctx.save();ctx.fillStyle="rgba(84,60,60,0.085)";ctx.beginPath();const s0=at(158,10);ctx.ellipse(s0[0]+(6+lift*14)*k,s0[1]+(10+lift*18)*k,104*k,70*k,a,0,TAU);ctx.fill();ctx.restore();
+  S.begin(ctx,{lw:3.2*k/1.45+0.6,sh:6});
+  // the sleeve and its cuff, the back of the hand, the fingers that curl under it
+  const w0=at(262,-6),fa=rad((o.deg==null?54:o.deg)+9),w1=[w0[0]+Math.cos(fa)*1500,w0[1]+Math.sin(fa)*1500];
+  S.fill(ctx,c=>capsule(c,at(236,-6),w1,62*k,70*k),sl,{});S.fill(ctx,c=>capsule(c,at(232,-52),at(240,42),15*k,15*k),lt(sl,0.12),{w:0.8});
+  S.poly(ctx,[at(84,-58),at(128,-84),at(190,-82),at(236,-56),at(252,-4),at(236,46),at(186,62),at(128,52),at(96,20),at(78,-20)],sk,{exact:true});
+  S.fill(ctx,c=>{capsule(c,at(132,-74),at(92,-70),17*k,15*k);capsule(c,at(112,-52),at(66,-44),18*k,15*k);},dk(sk,0.04),{w:0.8});
+  // the pen, over the hand's web; then the finger and the thumb that hold it
+  S.fill(ctx,c=>capsule(c,at(30,0),at(318,0),8.5*k,8.5*k),lt(col,0.82),{w:0.8});
+  S.fill(ctx,c=>capsule(c,at(292,0),at(318,0),8.5*k,8.5*k),col,{w:0.8});S.fill(ctx,c=>capsule(c,at(26,0),at(84,0),8*k,9*k),col,{w:0.8});
+  S.poly(ctx,[[...at(2,0),1],[...at(28,-7),1],[...at(28,7),1]],dk(col,0.5),{exact:true,w:0.7});
+  S.fill(ctx,c=>capsule(c,at(160,-34),at(56,-13),19*k,14*k),sk,{w:0.8});
+  S.fill(ctx,c=>capsule(c,at(150,44),at(70,16),20*k,15*k),sk,{w:0.8});
+  S.line(ctx,c=>{const p0=at(148,-58),p1=at(186,-50),q0=at(172,30),q1=at(206,14);c.moveTo(p0[0],p0[1]);c.quadraticCurveTo(...at(170,-62),p1[0],p1[1]);c.moveTo(q0[0],q0[1]);c.quadraticCurveTo(...at(192,30),q1[0],q1[1]);},null,0.6);};
+K.notes=(ctx,who,t,items,o)=>{o=o||{};const R=K.ROOMS.notes;ctx.save();onBook(ctx,R);const r=K.ink(ctx,items,t,{x:R.page.x,y:R.page.y,lw:o.lw||5.5,a:o.a,aside:o.aside});ctx.restore();
+  // the pen's point, turned with the book; the hand waits at the page's corner when nothing is written for a while
+  const pic=r.pen?pageAt(R,[r.pen[0]-R.page.x,r.pen[1]-R.page.y]):R.rest,on=r.pen?r.on:0,tip=[lerp(R.rest[0],pic[0],on),lerp(R.rest[1],pic[1],on)];r.tip=tip;
+  // for the check: that notes are in the picture, the rows written near the page's edge, and where the hand is
+  if(K.watch)K.watch({note:true,who:typeof who==="string"?who:"someone",edge:nearEdge(ctx,items,R.page.w,R.page.h),tip:o.hand!==false?tip:null,a:1,ctx});
+  if(o.hand!==false)K.penHand(ctx,who,[tip[0]+(on>0.98?Math.sin(t*21)*1.6*(1-r.lift):0),tip[1]+(on>0.98?Math.cos(t*17)*1.2*(1-r.lift):0)],{col:r.col,lift:Math.max(r.lift*0.8,(1-on)*0.5),k:o.k});
+  return r;};
+
+/* a notebook as a thing, seen from the side: closed, lying flat, its near corner at (x, y); or o.open, held open: (x, y) is then
+   under its middle. k scales it; o.rot turns it; o.cover its colour */
+K.notebook=(ctx,x,y,k,o)=>{o=o||{};const S=K.S,cover=S.tone(o.cover||K.PAL.cover),page=C("page");ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);
+  if(o.open){const w=78*k;S.fill(ctx,c=>pg(c,[[-w,-3*k],[w,-3*k],[w+4*k,7*k],[-w-4*k,7*k]]),cover,{w:0.7});
+    S.fill(ctx,c=>pg(c,[[-w+3*k,-12*k],[0,-8*k],[0,-1*k],[-w+3*k,-3*k]]),page,{w:0.6});S.fill(ctx,c=>pg(c,[[w-3*k,-12*k],[0,-8*k],[0,-1*k],[w-3*k,-3*k]]),dk(page,0.04),{w:0.6});}
+  else{const w=112*k,h=16*k;S.fill(ctx,c=>rrect(c,0,-h,w,h,3*k),cover,{w:0.7});S.fill(ctx,c=>rrect(c,5*k,-h+4*k,w-3*k,h-8*k,2*k),page,{w:0.5,flat:true});
+    S.fill(ctx,c=>rrect(c,w*0.72,-h-1*k,8*k,h+2*k,2*k),C("tab"),{w:0.5,flat:true});}
+  ctx.restore();};
+})(PK);
+
+/* ===== The people kit: people who talk from where they are =====
+   People don't only walk over to each other (the author, 17 November 2026: "show sometimes people communicate with others via
+   chat or call, so not only jumping in personally. But personally always at least once should be shown"). A film shows a chat or
+   a call where the story has people in two places, and still brings people face to face at least once.
+   A chat and a call are panels that come out of a screen or a phone someone in the scene is using: the person stays in the
+   picture, whole, at their desk or on the path, and the panel shows what is on their screen, large enough to read.
+
+     PK.callout(ctx, x, y, w, h, tail, a, draw, o)   a panel that comes out of a screen or a phone at tail [x, y]: a box w by h at
+                              (x, y), with a tail towards it; draw(ctx, x, y, w, h) fills it. o.col
+     PK.chat(ctx, x, y, w, h, d, t, o)   a chat, to draw in a callout (or anywhere): d {title, who: [names] (the others, for the
+                              header), me (whose screen it is), msgs: [{who, s (a line) or lines, at, type}]}. A message comes in
+                              at its time (at). The others' are on the left, with their picture; me's on the right, and for
+                              type seconds before it is sent its words are typed in the field at the foot. The others' typing
+                              shows as three dots for o.dots seconds (0.9) before theirs. Words are 30 px (o.size).
+                              PK.chatSize(ctx, d, o) -> {w, h}: the panel its words need, as they are drawn
+     PK.call(ctx, x, y, w, h, people, t, o)   a video call, to draw in a callout: a tile for each of people: [{who, face
+                              (PK.face's base), events (PK.face's), say ([[t0, t1], …]), pose, hold, bg, flip, name, role, a (0 to 1: they join)}].
+                              Each is drawn whole and cut by their tile, as a camera frames them. Side by side, their first
+                              name is at the tile's foot; o.stack: one above the other, each with their name and what they do
+                              (their role; 26 px: keep the camera at 1.1 or closer) beside them, and whoever speaks can say it
+                              to the panel's side. -> their joints, one for each: PK.say brings what they say out of their tile
+     PK.avatar(ctx, who, x, y, r, a)   someone's picture in a round frame: who they are in a chat
+     PK.onScreen.chat(k, o), PK.onScreen.call(n, stack)   what a small screen in the scene shows meanwhile (PK.atDesk's o.show): no words
+     PK.inHand.phone(o)       a phone in a hand (PK.person's o.hold); PK.POSES.phone: reading it, PK.POSES.onPhone: at the ear
+   Everyone in a tile is on a screen: the kit's checks know (they aren't held to the room's eye line), and still follow their
+   faces. A panel is a box of words: keep it off the heads of the people in the scene. */
+(K=>{
+const {TAU,rad,lerp,clamp,sine,pin,pio,mix,dk,lt,css,hash,polar,capsule,pg,rrect,ell}=K.u,C=K.col;
+const tw=(ctx,s,w,size)=>ag_tw(ctx,s,{w,size}),tx=(ctx,s,x,y,o)=>ag_T(ctx,s,x,y,Object.assign({},o,{color:css(o.col||K.C.ink)}));
+Object.assign(K.PAL,{chatMe:[226,236,230],chatThem:[255,253,247],tile:[[222,230,226],[238,226,212],[226,224,236]],hang:[204,92,78],phone:[60,64,78]});
+Object.assign(K.POSES,{phone:{lean:3,head:9,aN:[22,112,"grip"],aF:[4,14],lN:[-2,-2],lF:[5,4]},onPhone:{lean:0,head:-2,aN:[38,168,"grip"],aF:[4,14],lN:[-2,-2],lF:[5,4]}});
+
+K.callout=(ctx,x,y,w,h,tail,a,draw,o)=>{o=o||{};a=a==null?1:a;if(a<=0.004)return;const S=K.S,col=o.col||C("board"),k=0.94+0.06*a;ctx.save();ctx.globalAlpha*=a;
+  if(tail){ctx.translate(tail[0],tail[1]);ctx.scale(k,k);ctx.translate(-tail[0],-tail[1]);
+    // the tail, from the side of the box that faces the screen
+    const below=tail[1]>y+h,above=tail[1]<y,left=tail[0]<x,pts=below||above?(()=>{const m=clamp(tail[0],x+50,x+w-50),e=below?y+h:y,d=below?1:-1;return{t:[[m-20,e-d*6],[m+20,e-d*6],[lerp(m,tail[0],0.8),lerp(e,tail[1],0.8)]],j:[[m-17,e-d*6],[m+17,e-d*6],[m+15,e+d*3],[m-15,e+d*3]]};})():
+      (()=>{const m=clamp(tail[1],y+50,y+h-50),e=left?x:x+w,d=left?-1:1;return{t:[[e-d*6,m-20],[e-d*6,m+20],[lerp(e,tail[0],0.8),lerp(m,tail[1],0.8)]],j:[[e-d*6,m-17],[e-d*6,m+17],[e+d*3,m+15],[e+d*3,m-15]]};})();
+    ctx.beginPath();pg(ctx,pts.t);ctx.lineJoin="round";ctx.lineWidth=5;ctx.strokeStyle=css(S.ink);if(S.id==="line")ctx.stroke();ctx.fillStyle=css(col);ctx.fill();
+    K.box(ctx,x,y,w,h,18,col,1);ctx.fillStyle=css(col);ctx.beginPath();pg(ctx,pts.j);ctx.fill();}
+  else K.box(ctx,x,y,w,h,18,col,1);
+  if(draw)draw(ctx,x,y,w,h);ctx.restore();};
+
+/* someone's picture in a round frame, painted once for each size: their head and shoulders, facing us a little */
+K.avatar=(ctx,who,x,y,r,a)=>{a=a==null?1:a;if(a<=0.004)return;const P=typeof who==="string"?K.CAST[who]:who,S=K.S,q=3,d=Math.ceil(r*2+8),key="pk:av:"+S.key+":"+(P.key||P.name)+":"+Math.round(r);
+  const pic=ag_kept(key,d*q,d*q,c=>{c.scale(q,q);const cx=d/2,h=r*7.4,J0=K.rig(P,0,0,h,"stand",{life:0,flip:0.3}),bg=lt(S.tone(P.top.c),0.62);
+    c.save();c.beginPath();c.arc(cx,cx,r,0,TAU);c.clip();c.fillStyle=css(bg);c.fillRect(0,0,d,d);
+    K.person(c,P,cx-J0.hc[0]-r*0.06,cx-r*0.08-J0.hc[1],h,"stand",{life:0,flip:0.3,shade:0,part:"upper",expr:"smile",icon:true});c.restore();
+    c.lineWidth=Math.max(2,r*0.1);c.strokeStyle=css(S.ink);c.beginPath();c.arc(cx,cx,r,0,TAU);c.stroke();});
+  ctx.save();ctx.globalAlpha*=a;ctx.drawImage(pic,x-d/2,y-d/2,d,d);ctx.restore();};
+
+/* ---------------------------------------------------------------- a chat */
+const CH={pad:22,head:78,gap:14,size:30,lh:40,bp:[20,13],av:24,field:64};
+const bubbleOf=(ctx,m,size)=>{size=size||CH.size;const lines=m.lines||[m.s],lh=size+10,bw=Math.max(...lines.map(l=>tw(ctx,l,600,size)))+CH.bp[0]*2,bh=lines.length*lh+CH.bp[1]*2-6;return{lines,bw,bh,size,lh};};
+const THEM=CH.av*2+12;
+K.chatSize=(ctx,d,o)=>{const bs=d.msgs.map(m=>[m,bubbleOf(ctx,m,o&&o.size)]),head=CH.av*(1.5*(d.who||[]).length+0.8)+(d.title?tw(ctx,d.title,800,30):0);
+  return{w:Math.ceil(Math.max(head,...bs.map(([m,b])=>b.bw+(m.who===d.me?0:THEM)))+CH.pad*2+4),h:Math.ceil(CH.head+CH.field+CH.pad+bs.reduce((s,[m,b])=>s+b.bh+CH.gap,0)+8)};};
+K.chat=(ctx,x,y,w,h,d,t,o)=>{o=o||{};if(K.watch)K.watch({talk:"chat",a:1,ctx});const S=K.S,me=d.me,ink=S.ink,dots=o.dots==null?0.9:o.dots,body={x:x+CH.pad,y:y+CH.head,w:w-CH.pad*2,h:h-CH.head-CH.field-10};
+  // the header: who the chat is with
+  let hx=x+CH.pad+CH.av;(d.who||[]).forEach((n,i)=>{K.avatar(ctx,n,hx,y+CH.head/2,CH.av);hx+=CH.av*1.5;});
+  if(d.title)tx(ctx,d.title,hx+CH.av*0.3,y+CH.head/2+11,{w:800,size:30});
+  ctx.save();ctx.strokeStyle=css(K.C.mut,0.35);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x+12,y+CH.head);ctx.lineTo(x+w-12,y+CH.head);ctx.stroke();ctx.restore();
+  // the messages that have come, the newest at the foot; when they are more than the panel holds, the oldest go up and out
+  const ms=d.msgs.map((m,i)=>Object.assign({b:bubbleOf(ctx,m,o.size),k:pin(t,m.at,0.28),mine:m.who===me,first:!i||d.msgs[i-1].who!==m.who},m)),shown=ms.filter(m=>m.k>0);
+  let tot=0;for(const m of shown)tot+=(m.b.bh+CH.gap)*m.k;const typing=ms.find(m=>!m.mine&&t>=m.at-dots&&t<m.at),tk=typing?pio(t,typing.at-dots,typing.at,0.15):0;tot+=tk*(46+CH.gap);
+  let yy=body.y+12-Math.max(0,tot+12-body.h);ctx.save();ctx.beginPath();ctx.rect(x+4,body.y+2,w-8,body.h);ctx.clip();
+  const bub=(m,by,k)=>{const b=m.b,bx=m.mine?body.x+body.w-b.bw:body.x+THEM,col=S.tone(K.PAL[m.mine?"chatMe":"chatThem"]);ctx.save();ctx.globalAlpha*=k;const sc=0.9+0.1*k,ax=m.mine?bx+b.bw:bx,ay=by+b.bh;ctx.translate(ax,ay);ctx.scale(sc,sc);ctx.translate(-ax,-ay);
+    if(!m.mine&&m.first)K.avatar(ctx,m.who,body.x+CH.av,by+CH.av+2,CH.av);
+    ctx.beginPath();rrect(ctx,bx,by,b.bw,b.bh,20);ctx.fillStyle=css(col);ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();
+    b.lines.forEach((l,i)=>tx(ctx,l,bx+CH.bp[0],by+CH.bp[1]+b.lh*(i+0.5)+b.size*0.36-3,{w:600,size:b.size}));ctx.restore();};
+  for(const m of shown){bub(m,yy,m.k);yy+=(m.b.bh+CH.gap)*m.k;}
+  if(tk>0){const bx=body.x+THEM;ctx.save();ctx.globalAlpha*=tk;K.avatar(ctx,typing.who,body.x+CH.av,yy+46-CH.av+2,CH.av);ctx.beginPath();rrect(ctx,bx,yy,92,46,20);ctx.fillStyle=css(S.tone(K.PAL.chatThem));ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();
+    ctx.fillStyle=css(K.C.mut);for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(bx+26+i*20,yy+23-Math.max(0,Math.sin(t*7-i*0.9))*6,5,0,TAU);ctx.fill();}ctx.restore();}
   ctx.restore();
-  // o.front: a thing the near hand holds up before the face, over the head (drawn with hold, it would sit behind the face)
-  if(o.front&&hands){ctx.save();ctx.translate(0,br);o.front(ctx,hands);ctx.restore();}
-  ctx.restore();return hands;}
-// the face's live parts, in figure space: the eyes (blink 0 to 1, gaze [dx, dy]) and the mouth (talk 0 to 1, smile 0 to 1)
-function ag_face(ctx,P,C,blink,g,talk,smile){const F=AG_FACE,by=Math.max(0.12,1-(blink||0));g=g||[2,0];ctx.fillStyle="#1a1416";
-  ctx.save();ctx.translate(F.eyeN[0]+g[0],F.eyeN[1]+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,F.eyeN[2],F.eyeN[3],0,0,TAU);ctx.fill();ctx.restore();
-  ctx.save();ctx.translate(F.eyeF[0]+g[0]*0.7,F.eyeF[1]+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,F.eyeF[2],F.eyeF[3],0,0,TAU);ctx.fill();ctx.restore();
-  const tk=clamp(talk||0,0,1),sm=clamp(smile||0,0,1),[a,m,b]=F.mouth;
-  if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(a[0]+1,a[1]-1);ctx.quadraticCurveTo(m[0],m[1]-1-sm*3,b[0],b[1]-1);ctx.quadraticCurveTo(m[0]+2,m[1]+1+tk*10,a[0]+1,a[1]-1);ctx.fill();}
-  else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(a[0],a[1]-sm*1.5);ctx.quadraticCurveTo(m[0],m[1]+sm*3,b[0],b[1]-sm*1.5);ctx.stroke();}}
-// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
-// parts that make them (the far arm, the body, the near arm, the head) each fade on their own, so the body shows through the arm in
-// front of it and the arm behind shows through the body, like a ghost. Only the part of the frame they're drawn in is used (AG_FADE,
-// the size of the canvas, kept); what they hold is drawn with them
-let AG_FADE=null;
-const ag_personWhole=ag_person;
-ag_person=function(ctx,who,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||ctx.globalCompositeOperation!=="source-over")return ag_personWhole.apply(this,arguments);
-  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o&&o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
-  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-900,-500],[1500,-500],[-900,1300],[1500,1300]]){const X=M.a*fx+M.c*fy+M.e,Y=M.b*fx+M.d*fy+M.f;
-    L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
-  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return ag_personWhole.apply(this,arguments);
-  if(!AG_FADE||AG_FADE.width!==cw||AG_FADE.height!==ch)AG_FADE=mkCanvas(cw,ch);const bx=AG_FADE.getContext("2d");
-  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
-  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);let hands;try{hands=ag_personWhole.call(this,bx,who,x,y,s,o);}finally{bx.restore();}
-  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(AG_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();return hands;};
-// people end flat at figure y 1100, under the waist: in a render or a check, a person whose flat bottom shows inside the picture
-// stops the film with an error that says so (move them down or make them bigger, draw a desk or a card over them and say o.cut or
-// o.covered); the player on the site never stops for it
-function ag_bottomShows(ctx,m,who){const c=ctx.canvas,ys=[30,500].map(fx=>m.b*fx+m.d*1103+m.f),xs=[30,500].map(fx=>m.a*fx+m.c*1103+m.e);
-  if(Math.max(...ys)<c.height-0.5&&Math.max(...xs)>0&&Math.min(...xs)<c.width)
-    throw new Error("a person ("+(typeof who==="string"?who:who.name||"?")+") ends at y "+Math.round(Math.max(...ys)/c.height*1080)+" of 1080, inside the picture: put them lower or bigger (y + 504 s at least 1080), or cover their waist and say o.cut or o.covered");}
-// blinks at the person's own moments, every three to six seconds, each about a seventh of a second
-function ag_blinkAt(t,P){const seed=(P.name||"x").length*7.3;const k=Math.floor(t/4.3+seed),ph=t-((k-seed)*4.3+1.6+2.2*hash(k,seed));return ph>0&&ph<0.14?Math.sin(ph/0.14*Math.PI):0;}
-// a talking mouth for a line: open and close with the voice, from the line's cue to its end (sc.cues, sc.ends)
-function ag_talk(sc,id,t){const a=sc.cues[id],b=sc.ends[id];if(t<a||t>b)return 0;return (0.35+0.35*Math.sin(t*17.1)+0.3*Math.sin(t*9.7+1))*sstep(a,a+0.1,t)*(1-sstep(b-0.1,b,t));}
+  // the field at the foot: what me is typing, until it is sent
+  const fy=y+h-CH.field-6,fx=x+CH.pad,fw=w-CH.pad*2-66;ctx.beginPath();rrect(ctx,fx,fy,fw,CH.field-10,(CH.field-10)/2);ctx.fillStyle=css(lt(C("board"),0.5));ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(K.C.mut,0.6);ctx.stroke();
+  const ty=ms.find(m=>m.mine&&m.type&&t>=m.at-m.type&&t<m.at+0.05);
+  if(ty){const s=(ty.lines||[ty.s]).join(" "),p=clamp((t-(ty.at-ty.type))/(ty.type*0.86),0,1),vis=fw-44,typed=s.slice(0,Math.round(s.length*p));let k=0;
+    // a line longer than the field moves on a word at a time: what shows starts at a word, never at a cut letter
+    while(tw(ctx,typed.slice(k),600,28)>vis){const n=typed.indexOf(" ",k);if(n<0)break;k=n+1;}
+    const now=typed.slice(k),W=Math.min(vis,tw(ctx,now,600,28));ctx.save();ctx.beginPath();ctx.rect(fx+20,fy,vis+4,CH.field-10);ctx.clip();tx(ctx,now,fx+22,fy+(CH.field-10)/2+10,{w:600,size:28});ctx.restore();
+    if(Math.sin(t*9)>0){ctx.fillStyle=css(ink);ctx.fillRect(fx+24+Math.min(vis-4,W),fy+12,3,CH.field-34);}}
+  const sx=x+w-CH.pad-25,sy=fy+(CH.field-10)/2,sent=ms.some(m=>m.mine&&Math.abs(t-m.at)<0.18);ctx.beginPath();ctx.arc(sx,sy,25*(sent?0.9:1),0,TAU);ctx.fillStyle=css(K.C.blue);ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(ink);ctx.stroke();
+  ctx.fillStyle="#fff";ctx.beginPath();pg(ctx,[[sx-9,sy-11],[sx+13,sy],[sx-9,sy+11],[sx-4,sy]]);ctx.fill();};
 
-/* ===== What an agent is: the agent =====
-   The model is a matte ceramic sphere with a band of violet light that glows while it thinks; the loop is a bent oak ring with small
-   graphite arrows, its steps (Plan, Act, Check) matte pills on the ring; the hands are pale robot arms with oak joints and graphite
-   grippers, reaching into tools: matte cards that take a blue edge when touched, with a lock when they only read. Data coming back is
-   small orange pellets along an arm; a check that passes is a green pill, one that fails or sends the agent round again an amber one.
-     ag_model(ctx, x, y, r, o)      the sphere: o.core 0 to 1 (how lit the band is), o.think 0 to 1 (the light runs faster), o.t,
-                                    o.label (words under the band, at least 28 px, or below the sphere when it's small), o.a;
-                                    o.only "light" draws the band's light alone, glowing, to draw again over a night pass
-     ag_modelLight(ctx, x, y, r, a) the violet light the sphere throws on the wall behind it, and its soft shadow on the floor (o.floor)
-     ag_ring(ctx, x, y, R, o)       o.p 0 to 1 drawn, from o.from degrees (-120: top left); o.arrows, degrees; o.pulse {deg, a}
-     ag_step(ctx, x, y, label, o)   a step on the ring: o.on (its colour while lit), o.a, o.k (scale); returns its box
-     ag_loop(ctx, x, y, o)          the model in its ring with its steps: o.R (180), o.r (88), o.steps [[label, degrees], ...] (Plan,
-                                    Act, Check), o.p, o.core, o.think, o.lit (the lit step's index), o.col (its colour), o.pulse, o.a, o.t
-     ag_reach(ctx, p, u, o)         a hand along the curve p ([x0,y0, x1,y1, x2,y2, x3,y3]) out to u (0 to 1): o.data 0 to 1 sends
-                                    pellets back along it, o.grip 0 to 1 closes the gripper (it closes by itself near the end)
-     ag_tool(ctx, x, y, w, h, name, o) a tool: o.sub ("read only"), o.icon ("lock", "draft" or null), o.touch 0 to 1, o.a, o.col
-     ag_pellet(ctx, x, y, a)        one pellet of data
-     ag_verdict(ctx, x, y, text, kind, a) centred on (x, y): kind "pass" (green, a tick), "loop" (amber, round again), "fail" (amber, a warning)
-     ag_badge(ctx, x, y, text, o)   a badge on a blue lanyard hanging from (x, y), as a person's would (who the agent is, or is
-                                    taken for): o.t sways it a little, o.drop (90) how far below the hook it hangs, o.a */
+/* ---------------------------------------------------------------- a call */
+K.call=(ctx,x,y,w,h,people,t,o)=>{o=o||{};if(K.watch)K.watch({talk:"call",a:1,ctx});const S=K.S,n=people.length,pad=18,bar=o.bar===false?0:(o.stack?54:64),gap=o.stack?12:14,stack=!!o.stack,
+    tw_=stack?w-pad*2:(w-pad*2-gap*(n-1))/n,th=stack?(h-pad*2-bar-gap*(n-1))/n:h-pad*2-bar,out=[];
+  people.forEach((p,i)=>{const P=typeof p.who==="string"?K.CAST[p.who]:p.who,X=stack?x+pad:x+pad+i*(tw_+gap),Y=stack?y+pad+i*(th+gap):y+pad,pose=p.pose||"stand",
+      fl=p.flip==null?(stack?0.4:n===1?0.42:lerp(0.36,0.64,i/(n-1))):p.flip,hh=p.h||th*(stack?3.5:2.5),
+      J0=K.rig(P,0,0,hh,pose,{life:0,flip:fl}),cx=(stack?X+th*0.5:X+tw_/2)-J0.hc[0],fy=Y+th*(stack?0.48:0.4)-J0.hc[1];
+    ctx.save();ctx.beginPath();rrect(ctx,X,Y,tw_,th,14);ctx.fillStyle=css(S.tone(p.bg||K.PAL.tile[i%3]));ctx.fill();ctx.clip();
+    const F=K.face(t,p.face||{expr:"listen"},(p.events||[]).concat((p.say||[]).map(([a,b])=>[a,"say",b-a])));
+    const pa=p.a==null?1:clamp(p.a,0,1),J=K.person(ctx,P,cx,fy,hh,pose,Object.assign({t:t+i*1.3,flip:fl,shade:0,screen:true,hold:p.hold,holds:!!p.hold,a:pa},F));ctx.restore();
+    ctx.beginPath();rrect(ctx,X,Y,tw_,th,14);ctx.lineWidth=3;ctx.strokeStyle=css(S.ink);ctx.stroke();
+    // a ring round the tile of whoever speaks; their name: beside them in a wide tile, with what they do, or at a tall tile's foot
+    const sp=(p.say||[]).reduce((m,[a,b])=>Math.max(m,pio(t,a,b,0.2)),0);if(sp>0){ctx.save();ctx.globalAlpha*=sp;ctx.beginPath();rrect(ctx,X+5,Y+5,tw_-10,th-10,10);ctx.lineWidth=5;ctx.strokeStyle=css(K.C.green);ctx.stroke();ctx.restore();}
+    ctx.save();ctx.globalAlpha*=pa;if(p.name!==false){if(stack){const nm=p.name||P.name,nx=X+th*1.02,role=p.role===undefined?P.role:p.role;tx(ctx,nm,nx,Y+th/2+(role?-6:11),{w:800,size:30});if(role)tx(ctx,role,nx,Y+th/2+30,{w:600,size:26,col:K.C.mut});}
+      else{const nm=p.name||P.name.split(" ")[0],nw=tw(ctx,nm,700,28)+32;ctx.beginPath();rrect(ctx,X+12,Y+th-56,nw,44,22);ctx.fillStyle=css(C("board"));ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(S.ink);ctx.stroke();tx(ctx,nm,X+28,Y+th-24,{w:700,size:28});}}ctx.restore();
+    J.tile={x:X,y:Y,w:tw_,h:th,panel:{x,y,w,h}};out.push(J);});
+  // the call's own buttons: a microphone, a camera, and the one that ends it
+  if(bar){const by=y+h-pad-bar/2+(stack?8:6),bx=x+w/2;[[-70,C("board")],[0,C("board")],[70,S.tone(K.PAL.hang)]].forEach(([dx,c],i)=>{ctx.beginPath();ctx.arc(bx+dx,by,23,0,TAU);ctx.fillStyle=css(c);ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=css(S.ink);ctx.stroke();
+      ctx.save();ctx.strokeStyle=css(i===2?[255,255,255]:S.ink);ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=3.2;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+      if(i===0){rrect(ctx,bx+dx-4.5,by-12,9,15,4.5);ctx.fill();ctx.beginPath();ctx.arc(bx+dx,by-2,9,0.15,Math.PI-0.15);ctx.moveTo(bx+dx,by+7);ctx.lineTo(bx+dx,by+12);ctx.stroke();}
+      else if(i===1){rrect(ctx,bx+dx-12,by-7,15,14,3);ctx.fill();ctx.beginPath();pg(ctx,[[bx+dx+5,by],[bx+dx+12,by-6],[bx+dx+12,by+6]]);ctx.fill();}
+      else{ctx.lineWidth=5.5;ctx.arc(bx+dx,by+10,13,Math.PI*1.2,Math.PI*1.8);ctx.stroke();}ctx.restore();});}
+  return out;};
 
-function ag_model(ctx,x,y,r,o){o=o||{};const t=o.t||0,core=o.core==null?1:o.core,think=o.think||0,sp=AG.sphere,a=o.a==null?1:o.a;if(a<=0)return;
-  if(o.only==="light")return ag_bandLight(ctx,x,y,r,t,core,think,a);
-  ctx.save();ctx.globalAlpha*=a;
-  let g=ctx.createRadialGradient(x+r*0.34,y-r*0.43,r*0.07,x,y,r*1.05);g.addColorStop(0,sp[0]);g.addColorStop(0.55,sp[1]);g.addColorStop(0.85,sp[2]);g.addColorStop(1,sp[3]);
-  ctx.save();ctx.shadowColor=AG.sphereShadow;ctx.shadowBlur=r*0.45;ctx.shadowOffsetX=AG.sdx*r/88;ctx.shadowOffsetY=r*0.27;ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.restore();
-  ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();
-  ctx.strokeStyle=AG.seam;ctx.lineWidth=Math.max(1,r/58);ctx.beginPath();ctx.ellipse(x,y+r*0.09,r,r*0.28,0,0,Math.PI);ctx.stroke();
-  const bw=r*1.3,bh=r*0.32,by=y-r*0.11;rr(ctx,x-bw/2,by-bh/2,bw,bh,bh/2);ctx.fillStyle=AG.visor;ctx.fill();
-  // the band's light: a soft bright patch that sweeps along it, faster while the model thinks
-  const gl=Math.min(1,0.4+0.6*core+0.3*think),sc=0.5+0.5*Math.sin(t*(1.8+5*think)*TAU/4);
-  g=ctx.createLinearGradient(x-bw/2,0,x+bw/2,0);g.addColorStop(0,rgba(AG.violet,0));g.addColorStop(clamp(sc-0.25,0.001,0.997),rgba(AG.violet,0));
-  g.addColorStop(clamp(sc,0.002,0.998),rgba(AG.visorLight,gl));g.addColorStop(clamp(sc+0.25,0.003,0.999),rgba(AG.violet,0));g.addColorStop(1,rgba(AG.violet,0));
-  const ih=bh-r*0.11;rr(ctx,x-bw/2+r*0.045,by-ih/2,bw-r*0.09,ih,ih/2);ctx.fillStyle=g;ctx.fill();
-  ctx.restore();
-  if(o.label){const big=r>=80;ag_T(ctx,o.label,x,big?y+r*0.6:y+r+44,{w:700,size:28,align:"center",col:AG.label});}
-  ctx.restore();}
-// the band's light alone, glowing: over a night pass (ag_roomLight(ctx, a, {night: true})), so the model's light shines in the dark
-function ag_bandLight(ctx,x,y,r,t,core,think,a){const bw=r*1.3,bh=r*0.32,by=y-r*0.11,ih=bh-r*0.11,sc=0.5+0.5*Math.sin(t*(1.8+5*think)*TAU/4),gl=Math.min(1,0.4+0.6*core+0.3*think);
-  ctx.save();ctx.globalAlpha*=a;ctx.globalCompositeOperation="lighter";ctx.shadowColor=rgba(AG.violet,0.9);ctx.shadowBlur=r*0.5;
-  const g=ctx.createLinearGradient(x-bw/2,0,x+bw/2,0);g.addColorStop(0,rgba(AG.violet,0.25*gl));g.addColorStop(clamp(sc,0.002,0.998),rgba(AG.visorLight,0.9*gl));g.addColorStop(1,rgba(AG.violet,0.25*gl));
-  rr(ctx,x-bw/2+r*0.045,by-ih/2,bw-r*0.09,ih,ih/2);ctx.fillStyle=g;ctx.fill();ctx.restore();}
-function ag_modelLight(ctx,x,y,r,a,floorY){a=a==null?1:a;if(a<=0)return;const g=ctx.createRadialGradient(x,y,r*0.45,x,y,r*6.4);g.addColorStop(0,rgba(AG.wallGlow,0.1*a));g.addColorStop(1,rgba(AG.wallGlow,0));
-  ctx.fillStyle=g;ctx.fillRect(x-r*6.4,y-r*6.4,r*12.8,r*12.8);if(floorY)ag_floorShadow(ctx,x,floorY,r*1.9,r*0.3,0.24*a+0.08);}
+/* something said by someone in a tile of a call (J: one of PK.call's joints; PK.say does this by itself for such a J): the words
+   stand beside the call's panel, on the tile's side of it where there is room (o.side "left" or "right" asks for one), with a
+   tail into the tile. Put whoever speaks in the tile nearest the free side. o.cam, o.dx, o.dy as PK.say's */
+K.sayFrom=(ctx,J,lines,a,o)=>{o=o||{};const T=J.tile,P=T.panel||T,size=o.size||34,w=Math.max(...lines.map(l=>tw(ctx,l,o.weight||700,size)))+56,h=lines.length*size*1.3+32,
+    cm=o.cam,m=cm?40/cm.z:40,vx0=cm?cm.x-960/cm.z:0,vx1=cm?cm.x+960/cm.z:1920,vy0=cm?cm.y-540/cm.z:0;
+  const want=o.side||(T.x+T.w/2>=P.x+P.w/2?"right":"left"),fits=sd=>sd==="right"?P.x+P.w+46+w<=vx1-m:P.x-46-w>=vx0+m,side=fits(want)?want:(want==="right"?"left":"right"),right=side==="right";
+  const x=(right?P.x+P.w+46+w/2:P.x-46-w/2)+(o.dx||0),y=Math.max(vy0+h/2+m,T.y+T.h*0.36+(o.dy||0)),tail=[right?T.x+T.w-10:T.x+10,clamp(T.y+T.h*0.4,y-h/2+12,y+h/2-12)];
+  return K.bubble(ctx,x,y,lines,tail,a,o);};
+const say0=K.say;K.say=(ctx,J,lines,a,o)=>J&&J.tile?K.sayFrom(ctx,J,lines,a,o):say0(ctx,J,lines,a,o);
 
-function ag_ring(ctx,x,y,R,o){o=o||{};const p=o.p==null?1:o.p;if(p<=0)return;const a0=(o.from==null?-120:o.from)*Math.PI/180,a1=a0+p*TAU,k=R/180;
-  ctx.save();if(o.a!=null)ctx.globalAlpha*=o.a;ctx.lineCap="round";
-  // a bent-oak ring: a soft shadow on the wall, the wood, its lit top edge
-  ctx.strokeStyle=rgba(AG.shadow,0.14);ctx.lineWidth=14*k;ctx.save();ctx.translate(AG.sdx*k,10*k);ctx.beginPath();ctx.arc(x,y,R,a0,a1);ctx.stroke();ctx.restore();
-  ctx.strokeStyle=rgba(AG_OAK.dark,1);ctx.lineWidth=13*k;ctx.beginPath();ctx.arc(x,y,R,a0,a1);ctx.stroke();
-  ctx.strokeStyle=rgba(AG_OAK.base,1);ctx.lineWidth=10*k;ctx.beginPath();ctx.arc(x,y,R,a0,a1);ctx.stroke();
-  ctx.strokeStyle=rgba(AG_OAK.hi,0.9);ctx.lineWidth=2.2*k;ctx.beginPath();ctx.arc(x,y,R-3*k,a0,a1);ctx.stroke();
-  ctx.strokeStyle=rgba(AG_OAK.dark,0.35);ctx.lineWidth=1;ctx.beginPath();ctx.arc(x,y,R+1.5*k,a0,a1);ctx.stroke();
-  for(const d of (o.arrows||[-60,60,180])){const da=(d*Math.PI/180-a0+TAU*4)%TAU;if(da/TAU>p)continue;const a=d*Math.PI/180,px=x+Math.cos(a)*R,py=y+Math.sin(a)*R,tx=-Math.sin(a),ty=Math.cos(a);
-    const q=[16*k,9*k,12*k];ctx.save();ctx.shadowColor=rgba(AG.shadow,0.32);ctx.shadowBlur=6*k;ctx.shadowOffsetX=AG.sdx*0.4*k;ctx.shadowOffsetY=3*k;ctx.fillStyle=AG.arrow;
-    ctx.beginPath();ctx.moveTo(px+tx*q[0],py+ty*q[0]);ctx.lineTo(px-tx*q[1]+Math.cos(a)*q[2],py-ty*q[1]+Math.sin(a)*q[2]);ctx.lineTo(px-tx*q[1]-Math.cos(a)*q[2],py-ty*q[1]-Math.sin(a)*q[2]);ctx.closePath();ctx.fill();ctx.restore();}
-  // where the agent is in its loop: a violet light travelling along the ring
-  if(o.pulse&&o.pulse.a>0){const a=o.pulse.deg*Math.PI/180,px=x+Math.cos(a)*R,py=y+Math.sin(a)*R;
-    ctx.strokeStyle=rgba(AG.violet,0.45*o.pulse.a);ctx.lineWidth=8*k;ctx.beginPath();ctx.arc(x,y,R,a-0.55,a);ctx.stroke();
-    ctx.shadowColor=rgba(AG.violet,0.7);ctx.shadowBlur=18*k;ctx.fillStyle=rgba(AG.violet,o.pulse.a);ctx.beginPath();ctx.arc(px,py,11*k,0,TAU);ctx.fill();ctx.shadowBlur=0;
-    ctx.fillStyle="rgba(255,255,255,"+o.pulse.a+")";ctx.beginPath();ctx.arc(px-3*k,py-3*k,3.5*k,0,TAU);ctx.fill();}
-  ctx.restore();}
-
-function ag_step(ctx,x,y,label,o){o=o||{};const w=ag_tw(ctx,label,{w:700,size:30})+54,h=52,b={x:x-w/2,y:y-h/2,w,h,cx:x,cy:y};const a=o.a==null?1:o.a;if(a<=0)return b;
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y,lerp(0.4,1,o.k));
-  ag_box(ctx,b.x,b.y,w,h,h/2,{edge:o.on||null,glow:o.on||null});ag_T(ctx,label,x,y+10,{w:700,size:30,align:"center",col:o.on||AG.ink});ctx.restore();return b;}
-
-const AG_LOOP={R:180,r:88,steps:[["Plan",-120],["Act",0],["Check",120]]};
-function ag_loop(ctx,x,y,o){o=o||{};const R=o.R||AG_LOOP.R,r=o.r||AG_LOOP.r,steps=o.steps||AG_LOOP.steps,a=o.a==null?1:o.a,t=o.t||0;if(a<=0)return[];
-  ctx.save();ctx.globalAlpha*=a;
-  ag_modelLight(ctx,x,y,r,o.core==null?1:o.core,o.floor);
-  ag_ring(ctx,x,y,R,{p:o.p==null?1:o.p,from:steps[0][1],pulse:o.pulse});
-  ag_model(ctx,x,y,r,{t,core:o.core,think:o.think,label:o.label===undefined?"Model":o.label});
-  const boxes=steps.map((s,i)=>{const d=s[1]*Math.PI/180,sa=o.stepA?o.stepA[i]:1;return ag_step(ctx,x+Math.cos(d)*R,y+Math.sin(d)*R,s[0],{on:o.lit===i?(o.col||AG.violet):null,a:sa,k:o.stepK?o.stepK[i]:null});});
-  ctx.restore();return boxes;}
-
-function ag_pellet(ctx,x,y,a){a=a==null?1:a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(AG.orange,0.6);ctx.shadowBlur=10;ctx.fillStyle=rgba(AG.orange,1);rr(ctx,x-8,y-5,16,10,5);ctx.fill();ctx.restore();}
-function ag_reach(ctx,p,u,o){o=o||{};if(u<=0.002)return;const k=o.k||1;
-  ctx.save();if(o.a!=null)ctx.globalAlpha*=o.a;ctx.lineCap="round";ctx.lineJoin="round";
-  // a matte tube with a soft shadow on the wall, a highlight along its top, two oak joints and a graphite gripper
-  ctx.strokeStyle=AG.tube.shadow;ctx.lineWidth=20*k;ctx.save();ctx.translate(AG.sdx*k,14*k);ag_bzPath(ctx,p,0,u);ctx.stroke();ctx.restore();
-  ctx.strokeStyle=AG.tube.edge;ctx.lineWidth=18*k;ag_bzPath(ctx,p,0,u);ctx.stroke();
-  ctx.strokeStyle=AG.tube.fill;ctx.lineWidth=13*k;ag_bzPath(ctx,p,0,u);ctx.stroke();
-  ctx.strokeStyle=AG.tube.hi;ctx.lineWidth=4*k;ctx.save();ctx.translate(0,-3.5*k);ag_bzPath(ctx,p,0,u);ctx.stroke();ctx.restore();
-  for(const j of [0.36,0.7]){if(u<j)continue;const q=ag_bz(p,j);ctx.fillStyle=AG.jointRim;ctx.beginPath();ctx.arc(q[0],q[1],11.5*k,0,TAU);ctx.fill();
-    const jg=ctx.createRadialGradient(q[0]-3*k,q[1]-4*k,1,q[0],q[1],11*k);jg.addColorStop(0,rgba(AG_OAK.hi,1));jg.addColorStop(1,AG.joint);ctx.fillStyle=jg;ctx.beginPath();ctx.arc(q[0],q[1],10*k,0,TAU);ctx.fill();
-    ctx.fillStyle=rgba(AG.violet,0.9);ctx.beginPath();ctx.arc(q[0],q[1],4*k,0,TAU);ctx.fill();}
-  const q=ag_bz(p,u),q0=ag_bz(p,Math.max(0,u-0.02)),ang=Math.atan2(q[1]-q0[1],q[0]-q0[0]),open=lerp(0.62,0.1,Math.max(ag_ss(0.86,1,u),o.grip||0));
-  ctx.save();ctx.translate(q[0],q[1]);ctx.rotate(ang);ctx.scale(k,k);ctx.fillStyle=AG.grip;for(const s of [-1,1]){ctx.save();ctx.rotate(s*open);rr(ctx,-2,-4.5,26,9,4.5);ctx.fill();ctx.restore();}
-  ctx.fillStyle=AG.hub;ctx.beginPath();ctx.arc(0,0,9.5,0,TAU);ctx.fill();ctx.strokeStyle=AG.hubEdge;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
-  const d=o.data||0;if(d>0&&d<1){for(let i=0;i<3;i++){const v=1-clamp(d*1.4-i*0.2,0,1);if(v>=1||v<=0)continue;const r=ag_bz(p,v*u);ag_pellet(ctx,r[0],r[1]);}}
-  ctx.restore();}
-
-function ag_tool(ctx,x,y,w,h,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const on=o.touch||0,col=o.col||AG.blue,sub=o.sub===undefined?"read only":o.sub,icon=o.icon===undefined?"lock":o.icon;
-  ag_box(ctx,x,y,w,h,20,{a,edge:on>0.1?col:null,edgeA:0.9*on,glow:on>0.1?col:null,glowA:on});
-  ctx.save();ctx.globalAlpha*=a;ag_T(ctx,name,x+30,y+(sub?50:h/2+11),{w:700,size:32});
-  if(sub){const ix=x+42,iy=y+88;if(icon==="lock")ag_lock(ctx,ix,iy,28,rgba(col,1));else if(icon==="draft")ag_pen(ctx,ix,iy,28,rgba(col,1));
-    ag_T(ctx,sub,icon?x+66:x+30,y+96,{w:500,size:28,col:AG.mut});}
-  ctx.restore();}
-
-function ag_verdict(ctx,x,y,text,kind,a){if(a<=0)return;const col=kind==="pass"?AG.green:AG.amber,w=ag_tw(ctx,text,{w:700,size:30})+96,h=58,bx=x-w/2,by=y-h/2;
-  ag_box(ctx,bx,by,w,h,29,{a,edge:col});ctx.save();ctx.globalAlpha*=a;
-  if(kind==="pass")ag_tick(ctx,bx+40,y,24,rgba(col,1),4);else if(kind==="loop")ag_loopIcon(ctx,bx+40,y,28,rgba(col,1),3.5);else ag_warn(ctx,bx+40,y,30,rgba(col,1));
-  ag_T(ctx,text,bx+68,y+11,{w:700,size:30,col});ctx.restore();}
-function ag_badge(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const drop=o.drop||90,sw=Math.sin((o.t||0)*1.3)*0.025,w=ag_tw(ctx,text,{w:700,size:28})+48,h=58;
-  ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(sw);
-  ctx.strokeStyle=rgba(AG.blue,0.9);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-26,0);ctx.lineTo(-8,drop-10);ctx.moveTo(26,0);ctx.lineTo(8,drop-10);ctx.stroke();
-  ctx.fillStyle="#9AA0A8";ctx.fillRect(-9,drop-14,18,14);
-  ag_box(ctx,-w/2,drop,w,h,10,{});ctx.fillStyle=rgba(AG.blue,0.85);ctx.fillRect(-w/2+10,drop+4,w-20,5);
-  ag_T(ctx,text,0,drop+h/2+15,{w:700,size:28,align:"center"});ctx.restore();}
-
-/* ===== Leading data people: the module's look =====
-   The films of Leading data people (The new skills, Working with people, Leading a data team, Ownership and performance) and of
-   Data management share one look, chosen by the setup thread on 5 November 2026 from two looks drawn as style frames (a plaster room
-   in daylight; a building cut open), the second kept inside the first as its wide view, for the author to review
-   (films/the-new-skills/decided.md): "Sunlit plaster". The data team's rooms in daylight: a warm limewash wall, the sun through a
-   tall window on the right falling on it as a slanted patch of panes with the soft shadows of leaves outside; one-page sheets of thick
-   paper pinned to the wall, each with a band of colour only when the colour means something; the university's buildings cut open
-   like an architect's section, each room a small lit stage, for the story of its rooms. People are the agent films', in the window's
-   warm light. Calm and spare: few things in a frame, light doing the work. No film grain, no watercolour.
-   The module's files, bundled in this order after The Inner Life of Data's helpers (core.js, style2.js, ui3.js, and its logos.js
-   for a film that names its tools), A Sharper Sketch's scene() (sketch3.js) and the agent films' kit, people and agent
-   (films/what-an-agent-is/shared/src/kit.js, people.js, agent.js: the camera, the shots, pictures painted once, the people, the agent):
-     look.js     the palette and what each colour means, words, the room and its light, and the sun on the wall
-     people.js   the cast this module adds and lp_person, the agent films' people in the room's light
-     cards.js    sheets on the wall (words, a figure, bars), pills and tags, the kicker, the scene's tag, name tags, the module's mark,
-                 and the title and end cards
-     things.js   what stands in a room: a table, a screen on the wall, a laptop, a door, a row of chairs
-     section.js  a building cut open, room by room, drawn live so the camera can go close: the teaching building, and any other
-   Every top-level name starts with lp_ or LP_. A film's own pictures and helpers go in its own source with a prefix of its own; never
-   change these files for one film.
-   Sizes are in the 1920 x 1080 frame. Every word is at least 28 px as seen, and nothing but the captions goes below y 890. */
-
-/* ---------------------------------------------------------------- colours, and what each means in every film of both modules
-   Marks carry meaning (a sheet's band, a pill, a line, a figure); the room, its light and people's clothes carry none, and wear
-   none of these five. */
-const LP={
-  ink:[38,32,30],        // words
-  mut:[86,76,70],        // quieter words, at 4.5:1 or more on the wall and 7:1 on paper
-  paper:[250,247,240],   // a sheet of thick paper
-  blue:[34,94,160],      // design and plans
-  green:[34,118,80],     // done, or value
-  amber:[172,106,10],    // risk, cost, or waiting
-  orange:[204,88,32],    // data
-  violet:[98,82,206],    // only an agent
-  wall:[224,208,186],    // limewash
-  shade:[52,44,52],      // the room's shade: a little cool, against the warm sun
-  sun:[255,214,150],     // the afternoon sun
-  floor:[132,96,70],     // warm timber
-  timber:[196,160,120],  // a table, a door, a frame
-  graphite:[52,50,54],   // a screen's frame, a pin, a chair's legs
-  sdx:-10                // shadows fall down and to the left: the window is on the right
+/* what a small screen in the scene shows meanwhile: the same chat or call, too small for words (PK.atDesk's o.show).
+   chat(k, o): k (0 to 1) how many of its messages have come; o.rows: its messages, each [where it starts, how wide (both a share
+   of the screen's width), 1 for mine], when they aren't two people's in turn. Who it is with, at the top, and the field at the
+   foot are there before any message is, so an empty chat still reads as one, not as a blank screen */
+K.onScreen={
+  chat:(k,o)=>(c,x,y,w,h)=>{const rows=(o&&o.rows)||[[0.12,0.5,0],[0.4,0.48,1],[0.2,0.4,0],[0.5,0.38,1]],n=Math.round(clamp(k==null?1:k,0,1)*rows.length),grey=[214,216,212];c.fillStyle=css(lt(C("board"),0.3));c.fillRect(x,y,w,h);
+    c.fillStyle=css(grey);c.beginPath();c.arc(x+w*0.1,y+h*0.1,h*0.055,0,TAU);c.fill();c.beginPath();rrect(c,x+w*0.18,y+h*0.065,w*0.3,h*0.07,h*0.035);c.fill();c.fillRect(x+w*0.04,y+h*0.185,w*0.92,Math.max(1.5,h*0.012));
+    c.beginPath();rrect(c,x+w*0.06,y+h*0.86,w*0.7,h*0.09,h*0.045);c.fill();c.fillStyle=css(K.C.blue);c.beginPath();c.arc(x+w*0.88,y+h*0.905,h*0.05,0,TAU);c.fill();
+    rows.slice(0,n).forEach(([fx,fw,me],i)=>{c.fillStyle=css(me?mix(K.C.green,[255,255,255],0.62):grey);c.beginPath();rrect(c,x+w*fx,y+h*(0.23+i*0.15),w*fw,h*0.1,h*0.05);c.fill();});},
+  call:(n,stack)=>(c,x,y,w,h)=>{n=n||2;c.fillStyle=css([70,74,90]);c.fillRect(x,y,w,h);const g=w*0.04,tw2=stack?w-g*2:(w-g*(n+1))/n,H=stack?(h*0.78-g*(n+1))/n:h*0.66;
+    for(let i=0;i<n;i++){const X=stack?x+g:x+g+i*(tw2+g),Y=stack?y+g+i*(H+g):y+h*0.1,hx=stack?X+H*0.62:X+tw2/2;c.save();c.beginPath();rrect(c,X,Y,tw2,H,5);c.fillStyle=css(K.S.tone(K.PAL.tile[i%3]));c.fill();c.clip();
+      c.fillStyle=css([120,112,116]);c.beginPath();c.arc(hx,Y+H*0.4,H*0.19,0,TAU);c.fill();c.beginPath();c.ellipse(hx,Y+H*1.02,H*0.36,H*0.36,0,Math.PI,TAU);c.fill();
+      if(stack){c.fillStyle=css([150,146,150]);c.beginPath();rrect(c,X+H*1.3,Y+H*0.3,tw2*0.34,H*0.14,H*0.07);rrect(c,X+H*1.3,Y+H*0.56,tw2*0.24,H*0.12,H*0.06);c.fill();}c.restore();}
+    c.fillStyle=css(K.S.tone(K.PAL.hang));c.beginPath();c.arc(x+w/2,y+h*0.9,h*0.06,0,TAU);c.fill();}
 };
-const LP_MEANS={plan:LP.blue,done:LP.green,value:LP.green,risk:LP.amber,cost:LP.amber,wait:LP.amber,data:LP.orange,agent:LP.violet};
+/* a phone in a hand: its back to us when it is read (o.back), or its lit face */
+K.inHand.phone=o=>(c,hd,deg,J)=>{o=o||{};const S=K.S,u=J.u,a=polar(hd,deg-176,10*u),b=polar(hd,deg+4,o.ear?70*u:86*u),g=Math.atan2(b[1]-a[1],b[0]-a[0]);
+  c.save();c.translate(a[0],a[1]);c.rotate(g);const L=Math.hypot(b[0]-a[0],b[1]-a[1]),w=46*u;S.fill(c,cc=>rrect(cc,0,-w/2,L,w,7*u),S.tone(K.PAL.phone),{w:0.8});
+  if(!o.back)S.fill(c,cc=>rrect(cc,5*u,-w/2+4*u,L-10*u,w-8*u,4*u),C("screenLit"),{line:false,flat:true});c.restore();};
+})(PK);
 
-/* ---------------------------------------------------------------- words
-   lp_T draws with The Inner Life of Data's T (so the legibility check measures it; {deco:1} marks decoration on purpose), in ink
-   unless o.col (a colour) or o.color (a CSS colour) says otherwise; o.ls spaces the letters, in px; o.f "mono" for code. Size 28 by
-   default. lp_tw and lp_wrap measure and wrap as the agent films' ag_tw and ag_wrap do; lp_label is a heading in capitals. */
-function lp_T(ctx,s,x,y,o){o=o||{};const a=o.a==null?1:o.a,col=o.color||rgba(o.col||LP.ink,a),ls=o.ls||0,q=Object.assign({},o,{color:col,size:o.size||28});
-  if(!ls){T(ctx,s,x,y,q);return;}
-  const dx=o.align==="center"?ls/2:(o.align==="right"||o.align==="end")?ls:0;ctx.save();ctx.letterSpacing=ls+"px";T(ctx,s,x+dx,y,q);ctx.restore();}
-const lp_tw=(ctx,s,o)=>ag_tw(ctx,s,o),lp_wrap=(ctx,s,maxW,o)=>ag_wrap(ctx,s,maxW,o);
-function lp_label(ctx,x,y,text,o){o=o||{};lp_T(ctx,String(text).toUpperCase(),x,y,{w:800,size:o.size||28,ls:o.ls==null?3.5:o.ls,align:o.align||"left",col:o.col||LP.mut,a:o.a});}
+/* ===== Explaining so people can decide: the United States Air Force, 1950 to 1952, in ink line =====
+   The opening story's places, people and things (prefix edp_). The people kit draws the people and the rooms' things and is never
+   changed for this film. Checked against the script's Rigour (Daniels, 1952; Daniels and Churchill, 1952; Hertzberg, Daniels and
+   Churchill, 1954).
+     edpLab      the measuring room of 1950: a buff wall, a measuring post with its scale, a bench where flyers wait
+     edpDraw     the designers' drawing office: drawing tables, a window
+     edpDoor     a corridor, its doorway built to the average man's height
+     edpCock     a cockpit's mock-up on the floor of a hangar: a seat on its post, the panel in front, a canopy's frame
+     edpOffice   Daniels's office in 1952: a board on the wall, a desk with a typewriter and the measurement cards, a window
+     edpStreet   a street, and a parked car with its door open
+   Nothing is a likeness or a copy of a photograph. No jet and no radio. Colour keeps the module's meaning: amber what doesn't fit,
+   blue a plan, green what fits; the walls, the floor and the sky carry none. Every name this file declares starts with edp_ or EDP_. */
+const EDP_IE=380,EDP_RF=800,edp_h=fl=>PK.hAt(fl,EDP_IE);
+const EDP_PAL={wall:[226,216,192],wall2:[214,202,176],floor:[170,150,122],wood:[150,112,80],metal:[150,156,160],metal2:[110,116,122],panel:[70,76,82],
+  sky:[206,224,236],sky2:[240,236,222],road:[150,150,150],curb:[200,196,186],house:[226,206,176],roof:[170,110,90],car:[120,146,150],glass:[200,220,226],tyre:[50,50,54]};
+const edp_c=k=>PK.S.tone(EDP_PAL[k]);
+function edp_room(ctx,col){const S=PK.S,U=PK.u;ctx.fillStyle=U.css(edp_c(col||"wall"));ctx.fillRect(0,0,1920,EDP_RF);
+  S.begin(ctx,{lw:2.6,sh:4});S.fill(ctx,c=>c.rect(-20,EDP_RF-60,1960,60),U.dk(edp_c(col||"wall"),0.1),{w:0.6});
+  S.poly(ctx,[[-20,EDP_RF,1],[1940,EDP_RF,1],[1940,1100,1],[-20,1100,1]],edp_c("floor"),{exact:true,grad:[0,EDP_RF,0,1080,0.1]});}
+const edp_sky=(c,x,y,w,h)=>{const g=c.createLinearGradient(0,y,0,y+h);g.addColorStop(0,PK.u.css(edp_c("sky")));g.addColorStop(1,PK.u.css(edp_c("sky2")));c.fillStyle=g;c.fillRect(x,y,w,h);};
 
-/* ---------------------------------------------------------------- noise, grain and a floor in perspective
-   The agent films keep these in room.js, which this module doesn't bundle (its places would be painted in every film): the same
-   seeded value noise, a faint grain from a small tile, and a floor drawn row by row from a flat texture. */
-const LP_NZ=(()=>{const R=ag_rnd(4321),q=[];for(let i=0;i<256;i++)q.push(i);for(let i=255;i>0;i--){const j=(R()*(i+1))|0;const t=q[i];q[i]=q[j];q[j]=t;}
-  const pm=new Uint8Array(512);for(let i=0;i<512;i++)pm[i]=q[i&255];const val=new Float32Array(256);for(let i=0;i<256;i++)val[i]=R();
-  function n2(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,X=xi&255,Y=yi&255;
-    const a=val[pm[X+pm[Y]]],b=val[pm[X+1+pm[Y]]],c=val[pm[X+pm[Y+1]]],d=val[pm[X+1+pm[Y+1]]];
-    const u=xf*xf*xf*(xf*(xf*6-15)+10),v=yf*yf*yf*(yf*(yf*6-15)+10);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v;}
-  function fbm(x,y,o){let s=0,a=0.5,fr=1,n=0;for(let i=0;i<o;i++){s+=a*n2(x*fr+i*17.3,y*fr+i*9.1);n+=a;a*=0.5;fr*=2.03;}return s/n;}
-  return{n2,fbm};})();
-function lp_grain(ctx,x,y,w,h,amp,seed){const tile=ag_kept("lpGrain:"+seed+"|"+amp,256,256,(c)=>{const img=c.createImageData(256,256),d=img.data,R=ag_rnd(seed);
-    for(let i=0;i<d.length;i+=4){const v=(R()-0.5)*2*amp*3;d[i]=d[i+1]=d[i+2]=v>0?255:0;d[i+3]=Math.min(255,Math.abs(v)*1.1);}c.putImageData(img,0,0);});
-  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.fillStyle=ctx.createPattern(tile,"repeat");ctx.globalAlpha=0.5;ctx.fillRect(x,y,w,h);ctx.restore();}
-const LP_EYE={eye:440,vpx:1000,foc:1400};
-function lp_floor(c,tex,hz,ppu,ppv,n){const pat=c.createPattern(tex,"repeat");n=n||6;
-  for(let y=hz+1;y<H;y++)for(let k=0;k<n;k++){const yy=y+(k+0.5)/n,d=yy-LP_EYE.eye,z=LP_EYE.foc/d;
-    pat.setTransform(new DOMMatrix([d/ppu,0,0,1,LP_EYE.vpx,y+0.5-z*ppv]));c.globalAlpha=1/(k+1);c.fillStyle=pat;c.fillRect(0,y,W,1);}
-  c.globalAlpha=1;}
-function lp_floorTex(){return ag_kept("lpFloor",990,1500,(c,tw,th)=>{const pw=110,n=9,img=c.createImageData(tw,th),d=img.data,R=ag_rnd(51),O=LP.floor;
-  const tone=[],joints=[];for(let k=0;k<n;k++){tone.push((R()-0.5)*14);const js=[];let v=R()*700;while(v<th){js.push(v);v+=520+R()*400;}joints.push(js);}
-  for(let y=0;y<th;y++)for(let x=0;x<tw;x++){const k=(x/pw)|0,lx=x-k*pw;let pc=0;for(const jv of joints[k])if(y>jv)pc++;
-    const gr=LP_NZ.fbm(x*0.05+k*7+pc*3.1,y*0.0026+pc*5.3,4),fig=LP_NZ.fbm(x*0.012+k*3+pc*1.7,y*0.0011+pc*2.9,3);
-    let L=tone[k]+(gr-0.5)*16+(fig-0.5)*12;if(lx<1.2)L-=22;else if(lx<2.5)L-=6;for(const jv of joints[k]){if(Math.abs(y-jv)<1.2)L-=18;}
-    const i=(y*tw+x)*4;d[i]=O[0]+L;d[i+1]=O[1]+L*0.9;d[i+2]=O[2]+L*0.8;d[i+3]=255;}c.putImageData(img,0,0);});}
+/* ---------------------------------------------------------------- places */
+// the measuring post: a board on the wall with its scale, its sliding head-rest (at y: the top of the head)
+const EDP_POST={x:640,fl:930};
+function edp_post(ctx,top){const S=PK.S,{x}=EDP_POST;S.begin(ctx,{lw:2.4,sh:3});S.fill(ctx,c=>c.rect(x-70,180,46,EDP_RF-180),edp_c("wood"),{});
+  S.line(ctx,c=>{for(let y=200;y<EDP_RF-10;y+=24){c.moveTo(x-70,y);c.lineTo(x-(y%120===200%120?40:54),y);}},PK.u.dk(edp_c("wood"),0.4),0.5);
+  if(top!=null)S.fill(ctx,c=>c.rect(x-70,top-10,150,14),edp_c("metal2"),{});}
+AG_PLACES.edpLab=ctx=>{edp_room(ctx);const S=PK.S;
+  PK.window(ctx,1180,150,420,330,(c,x,y,w,h)=>{edp_sky(c,x,y,w,h);S.begin(c,{lw:2,far:0.5,sh:2});S.fill(c,cc=>cc.rect(x,y+h*0.62,w,h*0.38),[180,180,160],{w:0.5});},{});
+  edp_post(ctx,null);
+  // the bench at the back, under the window
+  S.begin(ctx,{lw:2.6,sh:3});S.fill(ctx,c=>c.rect(1120,700,620,22),edp_c("wood"),{});S.fill(ctx,c=>{c.rect(1140,722,20,90);c.rect(1700,722,20,90);},PK.u.dk(edp_c("wood"),0.15),{});};
+// the designers' office: two drawing tables (drawn with the people, edp_drawing), a window
+AG_PLACES.edpDraw=ctx=>{edp_room(ctx,"wall2");PK.window(ctx,760,140,420,340,(c,x,y,w,h)=>{edp_sky(c,x,y,w,h);},{});};
+// a drawing table: its board tilted towards whoever stands at it (x: the board's middle, fl: the floor; flip: it faces left)
+function edp_drawing(ctx,x,fl,h,flip){const S=PK.S,u=h/1000,d=flip?-1:1,top=fl-0.62*h;S.begin(ctx,{lw:2.6,sh:4});
+  S.fill(ctx,c=>{c.rect(x-6*u,top,12*u+10,fl-top);c.rect(x-160*u,fl-10,320*u,10);},edp_c("metal2"),{});
+  S.poly(ctx,[[x-d*150*u,top+10*u],[x+d*110*u,top-170*u],[x+d*130*u,top-150*u],[x-d*130*u,top+30*u]],[240,236,226],{exact:true});
+  S.line(ctx,c=>{c.moveTo(x-d*70*u,top-30*u);c.lineTo(x+d*50*u,top-114*u);c.moveTo(x-d*40*u,top-6*u);c.lineTo(x+d*70*u,top-84*u);},PK.C.blue,0.5);}
+// the corridor and its doorway, built to the average man's height (EDP_DOOR: x, width; its top is set by the man who fits)
+const EDP_DOOR={x:960,w:250,fl:930};
+AG_PLACES.edpDoor=ctx=>{edp_room(ctx);const S=PK.S,{x,w,fl}=EDP_DOOR,top=fl-edp_h(fl)+14;
+  S.begin(ctx,{lw:3,sh:4});S.fill(ctx,c=>c.rect(x-w/2-26,top-26,w+52,fl-top+26),edp_c("wood"),{});S.fill(ctx,c=>c.rect(x-w/2,top,w,fl-top),[110,98,84],{flat:true});
+  S.fill(ctx,c=>c.rect(x-w/2,top,w,fl-top),[150,138,120],{grad:[x,top,x,fl,0.2],line:false});};
+// a cockpit's mock-up in a hangar: the seat's post rises by up (px); the panel in front, a switch high on it
+const EDP_CK={x:820,fl:900,px:1240};
+AG_PLACES.edpCock=ctx=>{const S=PK.S,U=PK.u;ctx.fillStyle=U.css([206,208,206]);ctx.fillRect(0,0,1920,EDP_RF);
+  S.begin(ctx,{lw:2.4,far:0.3,sh:2});S.line(ctx,c=>{for(let x=-40;x<1960;x+=240){c.moveTo(x,0);c.lineTo(x+120,EDP_RF);}},[180,184,184],0.8);
+  S.begin(ctx,{lw:2.6,sh:4});S.poly(ctx,[[-20,EDP_RF,1],[1940,EDP_RF,1],[1940,1100,1],[-20,1100,1]],[160,158,150],{exact:true,grad:[0,EDP_RF,0,1080,0.1]});
+  // the mock-up's floor, a low platform
+  S.fill(ctx,c=>c.rect(560,EDP_CK.fl,980,40),edp_c("metal"),{});};
+function edp_cockpit(ctx,up,sw){const S=PK.S,{x,fl,px}=EDP_CK,h=edp_h(fl);S.begin(ctx,{lw:2.8,sh:4});
+  // the seat's post, which rises and falls
+  S.fill(ctx,c=>c.rect(x-40,fl-up-6,80,up+6),edp_c("metal2"),{});
+  // the panel: a box with its dials, and a switch high and far on it (sw: how much the switch is picked out, 0 to 1)
+  const pt=fl-0.78*h;S.fill(ctx,c=>c.rect(px-30,pt,170,fl-pt),edp_c("panel"),{});
+  S.line(ctx,c=>{for(const [dx,dy] of [[20,90],[90,90],[20,190],[90,190],[55,290]]){c.moveTo(px-30+dx+22,pt+dy);c.arc(px-30+dx,pt+dy,22,0,7);}},[230,230,226],0.8);
+  S.fill(ctx,c=>c.rect(px+70,pt-70,30,70),edp_c("metal"),{});
+  if(sw>0.004){ctx.save();ctx.globalAlpha*=sw;S.line(ctx,c=>{c.moveTo(px+120,pt-35);c.arc(px+85,pt-35,40,0,7);},PK.C.amber,1.4);ctx.restore();}
+  // the stick and the pedal
+  S.line(ctx,c=>{c.moveTo(px-160,fl);c.lineTo(px-180,fl-0.24*h);},edp_c("metal2"),1.6);S.fill(ctx,c=>c.rect(px-70,fl-30,60,22),edp_c("metal2"),{});
+  // the canopy's frame, over the seat
+  S.line(ctx,c=>{c.moveTo(x-140,fl);c.lineTo(x-140,fl-0.98*h);c.quadraticCurveTo(x+300,fl-1.18*h,px+140,pt-80);},edp_c("metal2"),1.4);}
+// Daniels's office, 1952: the board where he works out his count, the desk on the right, a window
+const EDP_BD={x:240,y:250,k:0.5,w:1250*0.5,h:524*0.5,floor:930,rest:960};
+AG_PLACES.edpOffice=ctx=>{edp_room(ctx);const S=PK.S;
+  PK.window(ctx,1260,130,420,330,(c,x,y,w,h)=>{edp_sky(c,x,y,w,h);S.begin(c,{lw:2,far:0.5,sh:2});S.fill(c,cc=>cc.rect(x,y+h*0.7,w,h*0.3),[170,176,150],{w:0.5});},{});
+  S.begin(ctx,{lw:2.6,sh:4});PK.board(ctx,EDP_BD.x,EDP_BD.y,EDP_BD.w,EDP_BD.h,{});};
+// on the desk: a typewriter (its sheet up to o.page, 0 to 1), and the cards, in stacks
+function edp_typewriter(ctx,x,y,k,page){const S=PK.S;S.begin(ctx,{lw:2.4,sh:3});
+  if(page>0.004)S.fill(ctx,c=>c.rect(x-48*k,y-(40+80*page)*k,96*k,(40+80*page)*k),[250,248,240],{});
+  S.fill(ctx,c=>{c.moveTo(x-90*k,y);c.lineTo(x-70*k,y-46*k);c.lineTo(x+70*k,y-46*k);c.lineTo(x+90*k,y);c.closePath();},[60,64,70],{});
+  S.fill(ctx,c=>c.rect(x-100*k,y-58*k,200*k,14*k),[80,84,90],{});}
+function edp_cards(ctx,x,y,k){const S=PK.S;S.begin(ctx,{lw:2.2,sh:3});for(let i=0;i<3;i++)S.fill(ctx,c=>c.rect(x+i*44*k,y-(26+i*8)*k,38*k,(26+i*8)*k),[236,226,196],{w:0.5});}
+// the street, and a parked car, its driver's door open (the seat inside slides back by slide, 0 to 1)
+AG_PLACES.edpStreet=ctx=>{const S=PK.S,hz=560;edp_sky(ctx,0,0,1920,hz+4);S.begin(ctx,{lw:2.4,far:0.3,sh:3});
+  for(let i=0;i<7;i++){const x0=-60+i*300,h=200+(i*53)%80;S.fill(ctx,c=>c.rect(x0,hz-h,250,h),edp_c("house"),{w:0.5});
+    S.fill(ctx,c=>{c.moveTo(x0-10,hz-h);c.lineTo(x0+125,hz-h-60);c.lineTo(x0+260,hz-h);c.closePath();},edp_c("roof"),{w:0.5});}
+  S.begin(ctx,{lw:2.6,sh:4});S.fill(ctx,c=>c.rect(-20,hz,1960,70),edp_c("curb"),{});S.poly(ctx,[[-20,hz+70,1],[1940,hz+70,1],[1940,1100,1],[-20,1100,1]],edp_c("road"),{exact:true,grad:[0,hz,0,1080,0.1]});};
+const EDP_CAR={x:980,fl:930};
+function edp_carBack(ctx){const S=PK.S,{x,fl}=EDP_CAR;S.begin(ctx,{lw:3,sh:5});
+  S.fill(ctx,c=>{c.moveTo(x-520,fl-60);c.lineTo(x-520,fl-250);c.quadraticCurveTo(x-380,fl-270,x-300,fl-280);c.lineTo(x-200,fl-470);c.lineTo(x+250,fl-470);c.lineTo(x+380,fl-290);c.quadraticCurveTo(x+560,fl-280,x+600,fl-230);c.lineTo(x+600,fl-60);c.closePath();},edp_c("car"),{grad:[0,fl-470,0,fl,0.12]});
+  S.fill(ctx,c=>c.rect(x-170,fl-440,390,150),edp_c("glass"),{line:false,flat:true});}
+function edp_carFront(ctx){const S=PK.S,{x,fl}=EDP_CAR;S.begin(ctx,{lw:3,sh:5});
+  // the body below the window, in front of the driver's legs, with the opening of the door; the wheels; the door, swung open towards us
+  S.fill(ctx,c=>{c.rect(x-520,fl-250,330,190);c.rect(x+240,fl-280,360,220);},edp_c("car"),{});
+  S.fill(ctx,c=>c.rect(x-190,fl-170,430,110),PK.u.dk(edp_c("car"),0.12),{});
+  for(const wx of [x-330,x+420])S.fill(ctx,c=>c.arc(wx,fl-50,70,0,7),edp_c("tyre"),{});
+  S.poly(ctx,[[x-190,fl-300],[x-330,fl-330],[x-330,fl-90],[x-190,fl-70]],PK.u.dk(edp_c("car"),0.06),{exact:true});}
 
-/* ---------------------------------------------------------------- the wall
-   lp_plaster(c, hz, o) paints limewash from the top of the frame down to hz: big soft clouds of lighter and darker lime, a little
-   warmer and cooler in places, trowel marks along a gentle diagonal, and a fine grain; computed at half size (it's soft anyway).
-   o.base, the lime's colour (LP.wall); o.seed, another wall. */
-function lp_plaster(c,hz,o){o=o||{};const k=0.5,w=Math.ceil(W*k),h=Math.ceil(hz*k),img=c.createImageData(w,h),d=img.data,B=o.base||LP.wall,sd=(o.seed||0)*97;
-  for(let j=0;j<h;j++)for(let i=0;i<w;i++){const X=i/k+sd,Y=j/k;
-    const big=LP_NZ.fbm(X*0.0016+1.3,Y*0.0019+4.1,4)-0.5,mid=LP_NZ.fbm(X*0.006+7,Y*0.0065+2,3)-0.5;
-    const u=X*0.94+Y*0.34,v=-X*0.34+Y*0.94,tr=LP_NZ.fbm(u*0.0045+11,v*0.03+5,3)-0.5;
-    const hue=LP_NZ.fbm(X*0.0011+31,Y*0.0013+17,3)-0.5,L=big*30+mid*12+tr*9,q=(i*4)+(j*w*4);
-    d[q]=B[0]+L+hue*10;d[q+1]=B[1]+L*0.96;d[q+2]=B[2]+L*0.9-hue*12;d[q+3]=255;}
-  const cv=mkCanvas(w,h);cv.getContext("2d").putImageData(img,0,0);c.save();c.imageSmoothingQuality="high";c.drawImage(cv,0,0,w,h,0,0,W,hz);c.restore();
-  lp_grain(c,0,0,W,hz,2.2,41);}
+/* ---------------------------------------------------------------- the people of 1950 to 1952: nobody's likeness
+   Flyers in plain white undershirts, their hair cut short; the measurer, the clerk and the designers in shirts and jackets of the
+   time; Daniels in the Air Force's summer khaki, which reads as beige, never as the module's amber. */
+const EDP_FOLK={
+  flyer1:{key:"edpFlyer1",name:"",skin:[228,192,162],hair:{style:"crop",c:[96,72,50]},top:{kind:"sweater",c:[238,236,230]},bottom:{kind:"trousers",c:[96,100,80]},shoe:[50,44,40]},
+  flyer2:{key:"edpFlyer2",name:"",skin:[200,156,124],hair:{style:"crop",c:[40,32,28]},top:{kind:"sweater",c:[236,234,228]},bottom:{kind:"trousers",c:[96,100,80]},shoe:[50,44,40]},
+  flyer3:{key:"edpFlyer3",name:"",skin:[236,204,176],hair:{style:"short",c:[170,130,80]},top:{kind:"sweater",c:[238,236,230]},bottom:{kind:"trousers",c:[96,100,80]},shoe:[50,44,40]},
+  flyer4:{key:"edpFlyer4",name:"",skin:[150,104,80],hair:{style:"crop",c:[30,26,24]},top:{kind:"sweater",c:[236,234,228]},bottom:{kind:"trousers",c:[96,100,80]},shoe:[50,44,40]},
+  pilot:{key:"edpPilot",name:"",skin:[226,190,160],hair:{style:"short",c:[80,60,44]},top:{kind:"jacket",c:[120,112,84],inner:[200,190,160]},bottom:{kind:"trousers",c:[110,104,80]},shoe:[60,48,40]},
+  pilot2:{key:"edpPilot2",name:"",skin:[214,172,140],hair:{style:"crop",c:[54,42,36]},top:{kind:"jacket",c:[120,112,84],inner:[200,190,160]},bottom:{kind:"trousers",c:[110,104,80]},shoe:[60,48,40]},
+  measurer:{key:"edpMeasurer",name:"",skin:[212,174,144],hair:{style:"short",c:[58,46,40]},glasses:[50,44,40],top:{kind:"jacket",c:[150,150,146],inner:[236,232,222]},bottom:{kind:"trousers",c:[80,80,84]},shoe:[50,44,42]},
+  clerk:{key:"edpClerk",name:"",skin:[236,204,180],hair:{style:"bun",c:[110,74,50]},top:{kind:"jacket",c:[110,130,150],inner:[240,236,226]},bottom:{kind:"skirt",c:[90,96,110]},shoe:[60,48,46]},
+  designer1:{key:"edpDesigner1",name:"",skin:[230,196,170],hair:{style:"short",c:[70,56,44]},top:{kind:"sweater",c:[150,136,110]},bottom:{kind:"trousers",c:[80,80,90]},shoe:[56,46,42]},
+  designer2:{key:"edpDesigner2",name:"",skin:[220,180,150],hair:{style:"long",c:[60,44,36]},top:{kind:"jacket",c:[120,100,96],inner:[240,234,224]},bottom:{kind:"skirt",c:[80,76,90]},shoe:[60,48,46]},
+  daniels:{key:"edpDaniels",name:"Gilbert Daniels",skin:[230,194,166],hair:{style:"short",c:[72,54,42]},glasses:[44,40,38],top:{kind:"jacket",c:[196,184,152],inner:[226,218,194]},bottom:{kind:"trousers",c:[176,164,132]},shoe:[90,70,50]},
+  driver:{key:"edpDriver",name:"",skin:[226,186,156],hair:{style:"bob",c:[90,60,40]},top:{kind:"jacket",c:[90,120,110],inner:[240,236,226]},bottom:{kind:"trousers",c:[70,74,90]},shoe:[60,48,46]}};
+const edp_row=w=>typeof w==="string"?(EDP_FOLK[w]||PK.CAST[w]):w;
+const edp_person=(ctx,who,x,fl,pose,o,h)=>PK.person(ctx,edp_row(who),x,fl,h||edp_h(fl),pose,o);
+const edp_seat=(ctx,who,x,fl,pose,o,h)=>PK.seated(ctx,edp_row(who),x,fl,h||edp_h(fl),pose||"sit",o);
+const edp_desk=(ctx,who,x,fl,o)=>PK.atDesk(ctx,edp_row(who),x,fl,edp_h(fl),Object.assign({screen:null},o||{}));
 
-/* ---------------------------------------------------------------- the sun on the wall
-   The window is out of the frame on the right; its six panes fall on the wall as a slanted patch, the panes' bars as soft lines, and
-   the shadows of two branches outside it as leaves. S: {x, w, top, h, slant, seed}: the patch from x to x + w, its right edge from top
-   to top + h, its left edge slant px lower (the sun is high and to the right); seed, other leaves; leaves: false, none.
-   lp_sunMask(S) is the patch, white, kept once; lp_sun(ctx, S, o) lays the sun on what is drawn (the wall, or a sheet on it, a
-   door, a frame: o.clip(ctx) clips it to that thing), o.a its strength, o.col its colour (LP.sun; LP_LIGHT has others). */
-function lp_leaf(c,x,y,l,an,wd){const ca=Math.cos(an),sa=Math.sin(an),px=-sa,py=ca,w=l*(wd||0.32);
-  c.moveTo(x,y);c.quadraticCurveTo(x+ca*l*0.5+px*w,y+sa*l*0.5+py*w,x+ca*l,y+sa*l);c.quadraticCurveTo(x+ca*l*0.5-px*w,y+sa*l*0.5-py*w,x,y);c.closePath();}
-function lp_sunMask(S){return ag_kept("lpSun:"+[S.x,S.w,S.top,S.h,S.slant,S.seed,S.leaves].join(","),W,H,(big)=>{
-  // drawn at a quarter of the size and scaled up: it's soft anyway, and a blur at full size takes seconds
-  const k=0.25,sm=mkCanvas(W*k,H*k),c=sm.getContext("2d");c.scale(k,k);
-  const P=(u,v)=>[S.x+u*S.w,S.top+v*S.h+(1-u)*S.slant];
-  const pane=(u0,u1,v0,v1)=>{const a=P(u0,v0),b=P(u1,v0),d2=P(u1,v1),e=P(u0,v1);c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.lineTo(d2[0],d2[1]);c.lineTo(e[0],e[1]);c.closePath();};
-  c.filter="blur(1px)";c.fillStyle="#fff";c.beginPath();
-  for(const [u0,u1] of [[0,0.488],[0.512,1]])for(const [v0,v1] of [[0,0.322],[0.339,0.661],[0.678,1]])pane(u0,u1,v0,v1);c.fill();
-  if(S.leaves!==false){const R=ag_rnd(S.seed||5);c.globalCompositeOperation="destination-out";c.fillStyle="#000";c.strokeStyle="#000";c.lineCap="round";
-    // two branches reach in from the top right and one from the top left, leaves along them; nearer leaves sharper, farther softer
-    for(const [b0,b1,b2] of [[P(1.06,-0.04),P(0.78,0.10),P(0.52,0.26)],[P(1.04,0.30),P(0.86,0.36),P(0.70,0.50)],[P(0.40,-0.06),P(0.30,0.06),P(0.16,0.16)]]){
-      c.filter="blur(1px)";c.globalAlpha=0.7;c.lineWidth=7;c.beginPath();c.moveTo(b0[0],b0[1]);c.quadraticCurveTo(b1[0],b1[1],b2[0],b2[1]);c.stroke();
-      for(let n=0;n<22;n++){const u=R(),m=1-u,x=m*m*b0[0]+2*m*u*b1[0]+u*u*b2[0],y=m*m*b0[1]+2*m*u*b1[1]+u*u*b2[1],side=n%2?1:-1,
-          an=Math.atan2(b2[1]-b0[1],b2[0]-b0[0])+side*(0.6+R()*0.7),l=34+R()*40;
-        c.filter="blur("+((3+R()*6)*k).toFixed(2)+"px)";c.globalAlpha=0.55+R()*0.4;c.beginPath();lp_leaf(c,x,y,l,an,0.3);c.fill();}}}
-  big.imageSmoothingQuality="high";big.drawImage(sm,0,0,W,H);});}
-// the patch in the sun's colour, kept once per colour
-function lp_sunCol(S,col){return ag_kept("lpSunCol:"+[S.x,S.w,S.top,S.h,S.slant,S.seed,S.leaves].join(",")+"|"+col.join(","),W,H,(c)=>{c.drawImage(lp_sunMask(S),0,0);
-  c.globalCompositeOperation="source-in";c.fillStyle=rgba(col,1);c.fillRect(0,0,W,H);});}
-function lp_sun(ctx,S,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004||!S)return;const bc=lp_sunCol(S,o.col||LP.sun);
-  ctx.save();if(o.clip)o.clip(ctx);ctx.globalCompositeOperation="soft-light";ctx.globalAlpha=0.95*a;ctx.drawImage(bc,0,0);
-  ctx.globalCompositeOperation="screen";ctx.globalAlpha=0.42*a;ctx.drawImage(bc,0,0);ctx.restore();}
+/* ===== Explaining so people can decide: the university, April to June 2027 (imagined) =====
+   The places are the people kit's (films/people-first/shared/src/places.js): the team's room, Helena's corner, the campus and a
+   teaching room; and, apart from the scene, a board seen close and a page of Helena's notebook (concepts.js). This file holds what is
+   this film's own in them: where the team works, the boards' rows Carmen Vidal writes, and the pages Ivy and Helena keep, and Daniels's count in 1952.
+   Every time comes from the voice: sc is the chapter, w a word's time in a line. Colour means what it means in the module: blue a plan
+   or a rule, orange data, green something done or agreed, amber a risk. */
+AG_PLACES.edTeam=PK.place.team;AG_PLACES.edCorner=PK.place.corner;AG_PLACES.edCampus=PK.place.campus;AG_PLACES.edLecture=PK.place.lecture;
+AG_PLACES.edBoard=PK.place.board;AG_PLACES.edNotes=c=>PK.place.notes(c,{});
+const ED_T=PK.ROOMS.team,ED_CA=PK.ROOMS.campus,ED_CO=PK.ROOMS.corner,ED_LE=PK.ROOMS.lecture;
+const ed_hT=fl=>PK.hAt(fl,ED_T.eye),ed_hC=fl=>PK.hAt(fl,ED_CA.eye),ed_hL=fl=>PK.hAt(fl,ED_LE.eye);
+// a face that speaks from t0 to t1, on a base expression
+const ed_says=(base,tt,t0,t1)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,PK.talk(tt,t0,t1)*0.75);return e;};
+const ed_lis=(tt,g)=>PK.face(tt,{expr:"listen",gaze:[1,g==null?-0.2:g]},[]);
+// poses of this film's own: writing in a notebook held in the far hand; holding a sheet out to show it
+const ED_NOTE={lean:6,head:14,aN:[34,96,"grip"],aF:[30,92,"grip"],lN:[-2,-2],lF:[5,4]};
+const ED_SHOW={lean:2,head:6,aN:[44,82,"grip"],aF:[8,16],lN:[-2,-2],lF:[5,4]};
+const ED_CARRY={lean:-2,head:0,aN:[24,70,"grip"],aF:[6,14],lN:[-2,-2],lF:[4,3]};
+const ed_sheet=(c,h)=>{const S=PK.S;S.begin(c,{lw:2.2});PK.sheet(c,h[0]-6,h[1]-58,56,74,{rot:0.06});};
 
-/* ---------------------------------------------------------------- the room and its light
-   lp_paintRoom(c, o) paints a room of the university on a 1920 x 1080 canvas: the wall down to hz (936: the floor shows only under
-   the captions), a slim skirting, warm timber below, the side away from the window in a cool shade, and the sun's patch on the wall.
-   o: hz; base (the lime's colour); seed (another wall); sun (where the patch falls, as lp_sun's S; false for none); light, one of
-   LP_LIGHT: "day" (the afternoon sun, the default), "morning" (higher, paler, the patch narrower), "late" (low, warm, long), "grey"
-   (an overcast day: no patch, the room even and a little cool) and "evening" (the window dark, a warm lamp's pool on the wall at
-   o.lamp, [x, y], the lamp's place on the wall). Each place a film uses is painted once (AG_PLACES; check.py times it).
-   The module's own place is "lpRoom", the team's room on an afternoon; a film adds others in its own source, with its own prefix:
-     AG_PLACES.hmOffice = c => lp_paintRoom(c, {seed: 2, light: "morning"});
-   lp_roomLight(ctx, a, o) lays the room's light over what is drawn in it (things, not words): the window's warmth on the right, the
-   shade on the left, as o.light says (the place's light). */
-const LP_LIGHT={
-  day:{sun:{x:820,w:760,top:70,h:640,slant:170,seed:5},col:[255,214,150],a:1,shade:0.30,cool:0},
-  morning:{sun:{x:1060,w:560,top:40,h:600,slant:90,seed:8},col:[255,232,196],a:0.85,shade:0.26,cool:0.04},
-  late:{sun:{x:520,w:980,top:250,h:560,slant:260,seed:3},col:[255,184,128],a:1,shade:0.36,cool:0},
-  grey:{sun:false,col:[236,236,240],a:0,shade:0.22,cool:0.08,dim:0.06},
-  evening:{sun:false,col:[255,196,132],a:0,shade:0.5,cool:0,dark:0.42,lamp:[1380,300],dim:0.2}
-};
-function lp_paintRoom(c,o){o=o||{};const hz=o.hz||936,L=LP_LIGHT[o.light||"day"],S=o.sun===false?false:Object.assign({},L.sun||{},o.sun||{});
-  lp_plaster(c,hz,o);
-  // the room's light: the side away from the window and the top corners in a cool shade
-  let g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,rgba(LP.shade,L.shade));g.addColorStop(0.42,rgba(LP.shade,L.shade*0.33));g.addColorStop(1,rgba(LP.shade,L.shade*0.07));c.fillStyle=g;c.fillRect(0,0,W,hz);
-  g=c.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgba(LP.shade,0.16));g.addColorStop(0.3,rgba(LP.shade,0));g.addColorStop(0.8,rgba(LP.shade,0));g.addColorStop(1,rgba(LP.shade,0.14));c.fillStyle=g;c.fillRect(0,0,W,hz);
-  if(L.cool){c.fillStyle=rgba([150,164,196],L.cool);c.fillRect(0,0,W,hz);}
-  if(L.dark){c.save();c.globalCompositeOperation="multiply";c.fillStyle=rgba(mix([255,255,255],[70,62,72],L.dark),1);c.fillRect(0,0,W,hz);c.restore();}
-  lp_floor(c,lp_floorTex(),hz,600,300);
-  g=c.createLinearGradient(0,hz,0,H);g.addColorStop(0,rgba(LP.shade,0.3));g.addColorStop(0.4,rgba(LP.shade,0.1));g.addColorStop(1,rgba(LP.shade,0.26));c.fillStyle=g;c.fillRect(0,hz,W,H-hz);
-  c.fillStyle=rgba(mix(o.base||LP.wall,LP.shade,0.14),1);c.fillRect(0,hz-22,W,22);c.fillStyle="rgba(255,250,240,0.45)";c.fillRect(0,hz-22,W,1.5);c.fillStyle=rgba(LP.shade,0.4);c.fillRect(0,hz,W,2);
-  if(S&&S.w&&L.a>0)lp_sun(c,S,{a:L.a,col:L.col,clip:x=>{x.beginPath();x.rect(0,0,W,hz-22);x.clip();}});
-  if(L.lamp){const lm=o.lamp||L.lamp;c.save();c.globalCompositeOperation="screen";g=c.createRadialGradient(lm[0],lm[1],10,lm[0],lm[1]+80,700);
-    g.addColorStop(0,"rgba(255,206,150,0.7)");g.addColorStop(0.3,"rgba(255,190,130,0.3)");g.addColorStop(1,"rgba(255,190,130,0)");c.fillStyle=g;c.fillRect(0,0,W,H);c.restore();
-    if(L.dark){c.save();c.globalCompositeOperation="multiply";c.fillStyle=rgba(mix([255,255,255],[70,62,72],L.dark*0.5),1);c.fillRect(0,hz,W,H-hz);c.restore();}}
-  g=c.createRadialGradient(W*0.55,H*0.42,H*0.38,W*0.55,H*0.42,W*0.78);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,rgba(LP.shade,0.24));c.fillStyle=g;c.fillRect(0,0,W,H);}
-AG_PLACES.lpRoom=c=>lp_paintRoom(c);
-function lp_roomLight(ctx,a,o){a=a==null?1:a;if(a<=0)return;o=o||{};const L=LP_LIGHT[o.light||"day"];ctx.save();
-  let g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,rgba(LP.shade,L.shade*0.4*a));g.addColorStop(0.45,rgba(LP.shade,0));g.addColorStop(1,rgba(L.col,0.05*a));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-  if(L.dark){ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(mix([255,255,255],[150,138,140],a*L.dark),1);ctx.fillRect(0,0,W,H);}ctx.restore();}
-// a vignette in the frame itself, over a shot (it stays put while the camera moves)
-function lp_vign(ctx,S,a){setScreen(ctx,S);const v=ctx.createRadialGradient(W/2,H/2,H*0.36,W/2,H/2,W*0.72);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,rgba(LP.shade,0.3*(a==null?1:a)));ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
+// a desk with its screen drawn in o.on, so the person at it is never taken for someone on a screen: o.screen "monitor" or "laptop"
+function ed_desk(x,who,px,fl,h,o){o=Object.assign({},o||{});const kind=o.screen,on2=o.on;
+  o.screen=null;o.on=(cc,D)=>{if(kind==="monitor")PK.monitor(cc,o.sx==null?D.x0+D.dir*D.w*0.6:o.sx,D.top,o.sw||0.36*h,o.sh||0.23*h,{draw:o.show});
+    else if(kind==="laptop")PK.laptop(cc,D.x0+D.dir*0.21*h,D.top,{k:D.k,flip:D.dir<0});if(on2)on2(cc,D);};
+  return PK.atDesk(x,who,px,fl,h,o);}
 
-/* ===== Leading data people: the people, in the room's light =====
-   The people are the agent films' (films/what-an-agent-is/shared/src/people.js, bundled as it is): an adult's proportions, one
-   three-quarter head (AG_FACE), arms down, a hand only on the thing the story is about (pose "hold"). Here they stand in a room whose
-   window is on the right of the frame, whichever way they face, so each is drawn whole, then lit: the side towards the window takes a
-   little of the sun's warmth, the side away from it a little of the room's cool shade, and a soft shadow of them falls on the wall
-   behind, down and to the left. Skin keeps its own colour where the light falls.
+/* ---------------------------------------------------------------- the team's room
+   Who works where: Sam at the desk at the back, Jun at the desk at the back right, turned the other way, and Marta at the desk by the
+   window. Everything is drawn far to near (by floor), so nobody is drawn over someone nearer: o.people is a list of {fl, draw(x)} for
+   whoever else is in the room (the floor they stand or sit on); o.sam, o.jun, o.marta: what PK.atDesk takes for each (null: the desk
+   stands empty); o.show: what Marta's screen shows, o.showJ Jun's; o.clock: the time on the wall. Returns their joints. */
+const ED_DESK={sam:[1230,ED_T.back],jun:[1808,ED_T.back],marta:[560,ED_T.mid]};
+function ed_team(x,tt,o){o=o||{};const r={},HB=ed_hT(ED_T.back),HM=ed_hT(ED_T.mid);PK.clock(x,ED_T.clock[0],ED_T.clock[1],ED_T.clock[2],o.clock===undefined?9:o.clock);
+  const items=[{fl:ED_T.back,i:0,draw:c=>{r.sam=PK.atDesk(c,o.sam===null?null:(o.samWho||"sam"),ED_DESK.sam[0],ED_T.back,HB,Object.assign({t:tt,w:0.45*HB},o.sam||{}));}},
+    {fl:ED_T.back,i:1,draw:c=>{r.jun=PK.atDesk(c,o.jun===null?null:"jun",ED_DESK.jun[0],ED_T.back,HB,Object.assign({t:tt+3,flip:true,w:0.45*HB,show:o.showJ},o.jun||{}));}},
+    {fl:ED_T.mid,i:2,draw:c=>{r.marta=ed_desk(c,o.marta===null?null:(o.deskWho||"marta"),ED_DESK.marta[0],ED_T.mid,HM,Object.assign({t:tt+1,flip:true,w:0.84*HM,sx:205,screen:"monitor",show:o.show||PK.onScreen.chat(0,{}),
+      on:(cc,D)=>{PK.S.begin(cc,{lw:2.6,sh:3});PK.mug(cc,D.x1+34,D.top,0.7,PK.col("mug"),tt,o.steam!==false);}},o.marta||{}));}}];
+  (o.people||[]).forEach((p,i)=>items.push(Object.assign({i:10+i},p)));
+  items.sort((a,b)=>a.fl-b.fl||a.i-b.i).forEach(it=>it.draw(x));return r;}
+AG_BARE.edTeam=(x,tt)=>ed_team(x,tt,{sam:null,jun:null,marta:null,clock:null});
 
-   lp_person(ctx, who, x, y, s, o) draws a person as ag_person does (the same who, x, y, s and o: t, flip, pose, hold, front, nod, gaze,
-   talk, smile, cut, covered), and returns the hands as it does. who is a name in LP_CAST (this module's people) or in the agent films'
-   cast ("noor", "sam", "jun", "mei", "yusuf", "clara", "anil", "david"), or a spec of someone else (see people.js there). o.light:
-     light   the place's light, a name in LP_LIGHT ("day" by default), for the warmth and the shade
-     warm    how much of the window's warmth the near side takes, 0 to 1 (0.12)
-     shade   how far the far side sinks into the room's shade, 0 to 1 (0.2)
-     wall    the soft shadow on the wall: its strength, 0 to 1 (0.16; 0 when the person stands far from any wall, or out of doors),
-             and wallDx, wallDy where it falls, in figure units ([-90, 40])
-   o.a fades them (0 to 1), as the canvas's own opacity does: a person fading in or out is drawn whole first and laid on the picture
-   at that opacity, so they never show through themselves.
-   LP_CROWD and lp_crowd(i): eight people for a crowd, such as students in a teaching room of the building in section.
-   lp_nameTag(ctx, x, y, who, o) writes a person's name and the line under it (their role): o.align, o.role, o.a. */
+/* ---------------------------------------------------------------- the team's board, and Carmen Vidal at it
+   Carmen Vidal, a consultant who works with the team now and then, explains the film's ideas at the team's board (PK.teach). The film
+   cuts between the room, where its board shows the rows small, and the board seen close (naBoard): both draw the same rows at the
+   same times. In the room, Helena stands to the side with her notebook, clear of where Carmen walks and rests, and whoever is at
+   their desk has turned to the board. */
+const ED_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
+const ed_roomBoard=(cx,tt,rows,who,o)=>{const q=Object.assign({},ED_RB,{h:ed_hT(ED_RB.floor)});for(const k in o||{})if(o[k]!==undefined)q[k]=o[k];return PK.teach(cx,who,tt,rows,q);};
+const ED_SIDE={x:1690,floor:900},ED_SAMC={x:1480,floor:905};
+// o.rows, o.say, o.events: the board's; o.note (0 to 1): Helena looks down and writes; o.helena, o.sam, o.jun: faces. Returns joints
+function ed_lesson(x,tt,o){o=o||{};let Jc=null,R2=null,Js=null;const wr=o.note||0,R=ed_team(x,tt,{clock:o.clock,marta:o.marta===undefined?null:o.marta,sam:null,
+    jun:Object.assign({work:0,pose:"sit"},o.jun||ed_lis(tt,-0.2)),people:[
+    {fl:ED_SAMC.floor,draw:c=>{Js=PK.seated(c,"sam",ED_SAMC.x,ED_SAMC.floor,ed_hT(ED_SAMC.floor),"sit",Object.assign({t:tt+2,flip:true},o.sam||ed_lis(tt,-0.25)));}},
+    {fl:ED_RB.floor,draw:c=>{Jc=ed_roomBoard(c,tt,o.rows||[],o.who||"carmen",{say:o.say,events:o.events});}},
+    {fl:ED_SIDE.floor,draw:c=>{R2=PK.person(c,"helena",ED_SIDE.x,ED_SIDE.floor,ed_hT(ED_SIDE.floor),PK.poseMix("clasp",ED_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||ed_lis(tt,-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}}]});
+  R.helena=R2;R.at=Jc;R.sam=Js;return R;}
 
-/* ---------------------------------------------------------------- the cast this module adds
-   As the module's numbers set them (/mnt/project-files/leading-data-people/numbers.md): Helena Novak, the data manager, as the data
-   management module drew her; Ivy Reyes, a new graduate data analyst; Graham Ellis, the new Director of Facilities. Noor Rahman, Sam
-   Okafor, Jun Park, Yusuf Demir and the others are the agent films' (AG_CAST). Each was looked at full size, facing both ways, on 5
-   November 2026. Their clothes keep clear of the five colours that mean something. */
-const LP_CAST={
-  helena:{name:"Helena Novak",role:"Data manager",skin:[230,192,164],hair:{style:"long",c:[102,62,44],streak:[150,128,116]},glasses:[58,46,42],earrings:[214,200,170],top:{kind:"blazer",c:[118,64,72],inner:[240,234,228]},breath:0.26},
-  ivy:{name:"Ivy Reyes",role:"Data analyst",skin:[214,170,136],hair:{style:"bob",c:[38,28,26]},earrings:[214,200,170],top:{kind:"sweater",c:[74,72,78]},breath:0.33},
-  graham:{name:"Graham Ellis",role:"Facilities",skin:[226,186,158],hair:{style:"cropped",c:[170,166,162]},glasses:[64,56,50],top:{kind:"blazer",c:[104,90,74],inner:[232,230,224]},breath:0.24}
-};
-/* people in a crowd (students in a teaching room, staff in a corridor), so the cast never stands in for them: eight, of many ages and
-   backgrounds, in plain clothes that mean nothing (each with a key of its own: the agent films keep a painted person by key or name); lp_crowd(i) is the i-th, round and round. Drawn small, but each was looked at full
-   size, facing both ways, on 5 November 2026. */
-const LP_CROWD=[
-  {key:"lpCrowd1",name:"",skin:[238,206,180],hair:{style:"bob",c:[196,150,96]},top:{kind:"sweater",c:[150,140,128]},breath:0.31},
-  {key:"lpCrowd2",name:"",skin:[120,82,60],hair:{style:"coily",c:[26,22,20]},top:{kind:"overshirt",c:[96,92,90],inner:[226,222,214]},breath:0.27},
-  {key:"lpCrowd3",name:"",skin:[214,172,138],hair:{style:"long",c:[30,24,22]},earrings:[214,200,170],top:{kind:"cardigan",c:[176,150,138],inner:[236,232,226]},breath:0.3},
-  {key:"lpCrowd4",name:"",skin:[196,150,112],hair:{style:"cropped",c:[34,28,26]},top:{kind:"sweater",c:[110,104,112]},breath:0.26},
-  {key:"lpCrowd5",name:"",skin:[230,196,170],hair:{style:"side",c:[132,96,62]},glasses:[60,52,46],top:{kind:"overshirt",c:[136,124,104],inner:[232,230,224]},breath:0.28},
-  {key:"lpCrowd6",name:"",skin:[92,62,46],hair:{style:"bun",c:[24,20,20]},top:{kind:"cardigan",c:[164,150,128],inner:[234,230,222]},breath:0.29},
-  {key:"lpCrowd7",name:"",skin:[226,190,160],hair:{style:"shaved",c:[60,48,40]},beard:[70,56,46],top:{kind:"sweater",c:[78,80,88]},breath:0.25},
-  {key:"lpCrowd8",name:"",skin:[204,164,128],hair:{style:"bob",c:[52,36,30]},glasses:[44,40,40],top:{kind:"sweater",c:[188,176,160]},breath:0.32}];
-const lp_crowd=i=>LP_CROWD[((i%LP_CROWD.length)+LP_CROWD.length)%LP_CROWD.length];
-const lp_who=who=>typeof who==="string"&&LP_CAST[who]?LP_CAST[who]:who;
-
-/* ---------------------------------------------------------------- a person in the room */
-function lp_person(ctx,who,x,y,s,o){o=o||{};const a=ctx.globalAlpha*(o.a==null?1:o.a);if(a<0.004)return null;const W0=lp_who(who),
-    L0=Object.assign({light:"day",warm:0.12,shade:0.2,wall:0.16,wallDx:-90,wallDy:40},o.light||{}),Lt=LP_LIGHT[L0.light]||LP_LIGHT.day;
-  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
-  const pt=(fx,fy)=>[M.a*fx+M.c*fy+M.e,M.b*fx+M.d*fy+M.f],k=Math.hypot(M.a,M.b);
-  // the part of the canvas the person (and what the near hand may hold) can reach
-  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-260,120],[820,120],[-260,1160],[820,1160]]){const q=pt(fx,fy);L=Math.min(L,q[0]);R=Math.max(R,q[0]);T0=Math.min(T0,q[1]);B=Math.max(B,q[1]);}
-  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return null;const w=R-L,h=B-T0;
-  // the person, whole, on a canvas of their own
-  const [pc,px]=ag_buf("lpPerson",cw,ch);px.setTransform(m);let hands;try{hands=ag_person(px,W0,x,y,s,Object.assign({},o,{light:undefined,a:undefined}));}finally{px.setTransform(1,0,0,1,0,0);px.globalAlpha=1;}
-  ctx.save();ctx.setTransform(1,0,0,1,0,0);
-  // the soft shadow on the wall: the silhouette made small and dark, laid back larger, down and to the left
-  if(L0.wall>0){const sw=Math.max(2,Math.ceil(w/8)),sh=Math.max(2,Math.ceil(h/8)),[sc,sx]=ag_buf("lpWallShadow",sw,sh);sx.filter="blur(2px)";sx.drawImage(pc,L,T0,w,h,0,0,sw,sh);sx.filter="none";
-    sx.globalCompositeOperation="source-in";sx.fillStyle=rgba(LP.shade,1);sx.fillRect(0,0,sw,sh);
-    const dx=L0.wallDx*k,dy=L0.wallDy*k;ctx.globalAlpha=a*L0.wall*(Lt.a>0?1:0.6);ctx.imageSmoothingQuality="high";ctx.drawImage(sc,0,0,sw,sh,L+dx-w*0.03,T0+dy,w*1.06,h*1.02);}
-  // the light: warm from the window on the right of the frame, the room's shade on the left
-  px.globalCompositeOperation="source-atop";let g=px.createLinearGradient(L,0,R,0);
-  g.addColorStop(0,rgba(LP.shade,L0.shade));g.addColorStop(0.5,rgba(LP.shade,L0.shade*0.25));g.addColorStop(0.62,rgba(Lt.col,0));g.addColorStop(1,rgba(Lt.col,L0.warm*(Lt.a>0?1:0.5)));
-  px.fillStyle=g;px.fillRect(L,T0,w,h);px.globalCompositeOperation="source-over";
-  ctx.globalAlpha=a;ctx.drawImage(pc,L,T0,w,h,L,T0,w,h);ctx.restore();
-  return hands;}
-
-// a person's name, and the line under it (their role)
-function lp_nameTag(ctx,x,y,who,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const P_=typeof who==="string"?(LP_CAST[who]||AG_CAST[who]):who,
-    name=o.name||(P_&&P_.name)||String(who),role=o.role!=null?o.role:(P_&&P_.role)||"",al=o.align||"left";
-  ctx.save();ctx.globalAlpha*=a;lp_T(ctx,name,x,y,{w:800,size:32,align:al});if(role)lp_T(ctx,role,x,y+38,{w:600,size:28,col:LP.mut,align:al});ctx.restore();}
-
-/* ===== Leading data people: sheets on the wall, pills, tags, the kicker, the mark, and the title and end cards =====
-   Words in these films are on sheets of thick, warm paper pinned to the wall: a soft shadow down and to the left (the window is on the
-   right), the sun on them where its patch falls, and a band of colour along the top only when the colour means something (look.js,
-   LP: blue design and plans, green done or value, amber risk, cost or waiting, orange data, violet only an agent). On a sheet: a kicker
-   in capitals, 28 px, in the band's colour; a title, 40 px; lines of 28 px, each with a dot in the band's colour.
-     lp_sheet(ctx, x, y, w, h, o)          a sheet: o.col (the band), o.light (the place's light, so the sun falls on it as on the wall;
-                                           null for none), o.pin (false: no pin), o.tilt (degrees, a little askew), o.a, o.k (springs
-                                           from its centre, 0 to 1); returns {x, y, w, h}
-     lp_textSheet(ctx, x, y, w, words, o)  words {kick, title, lines: [...], sub}: a sheet that fits them; o as lp_sheet, o.measure (only
-                                           measure), o.u (0 to 1: its lines come in one by one); returns {x, y, w, h}
-     lp_figure(ctx, x, y, w, words, o)     a sheet with one number: words {kick, num, label}; the number 96 px in the band's colour
-     lp_bars(ctx, x, y, w, h, bars, o)     bars, drawn on a sheet the film draws first: bars [{v, label (under it), show (its value, over
-                                           it), hi}], o.max (the top, 100 by default), o.col (orange: data), o.hiOnly (only the bars with hi
-                                           in full colour), o.u (0 to 1: they grow), o.line ({v, label, side}: a dashed level across them,
-                                           its label on a slip at the right end, or the left with side "left")
-     lp_pill(ctx, x, y, text, o)           a solid verdict centred on (x, y), white words on its colour: o.col, o.icon ("tick", "cross",
-                                           "wait", "dot"), o.size (30), o.a, o.k
-     lp_tag(ctx, x, y, text, o)            an outlined tag on paper, words in its colour: o.col, o.align ("left", "center", "right"), o.a
-     lp_kicker(ctx, num, title, o)         the film's number and title at the top left (o.light "evening": pale words for a dark room)
-     lp_sceneTag(ctx, text, o)             where and when, at the top right: "The university, 2027 · imagined"
-     lp_mark(ctx, cx, cy, r, p, a)         the module's mark, drawing itself: five people in a ring, joined
-     lp_veil(ctx, S, a)                    the room's warm light laid over the frame, for the title and end cards
-     lp_title(ctx, S, t, t0, title, sub, line, o)        the title card from t0 (line: "Leading data people · The new skills")
-     lp_end(ctx, S, t, t0, title, line, n, series, o)   the end card from t0: the film's last line, the mark, the title, and "Film 1 of
-                                           3 · The new skills · Learning Data". Data management passes o.module and o.mark (its own mark,
-                                           a function (ctx, cx, cy, r, p, a)) to both. */
-
-function lp_sheet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;
-  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));if(o.tilt){ctx.translate(x+w/2,y+h/2);ctx.rotate(o.tilt*Math.PI/180);ctx.translate(-x-w/2,-y-h/2);}
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.3)";ctx.shadowBlur=20;ctx.shadowOffsetX=LP.sdx;ctx.shadowOffsetY=12;ctx.fillStyle=rgba(LP.paper,1);ctx.fillRect(x,y,w,h);ctx.restore();
-  let g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,"rgba(255,255,255,0.3)");g.addColorStop(1,"rgba(120,96,70,0.08)");ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
-  if(o.col){ctx.fillStyle=rgba(o.col,1);ctx.fillRect(x,y,w,12);}
-  const lt=o.light===undefined?"day":o.light,Lt=lt&&LP_LIGHT[lt];if(Lt&&Lt.sun&&Lt.a>0&&!o.tilt)lp_sun(ctx,Lt.sun,{a:Lt.a*0.8,col:Lt.col,clip:c=>{c.beginPath();c.rect(x,y,w,h);c.clip();}});
-  // in low light the paper is dimmer too (the words on it stay dark, so they keep their contrast)
-  if(Lt&&Lt.dim){ctx.fillStyle=rgba(LP.shade,Lt.dim);ctx.fillRect(x,y,w,h);}
-  if(o.pin!==false){const mx=x+w/2,my=y+(o.col?32:22);ctx.save();ctx.shadowColor="rgba(40,28,20,0.4)";ctx.shadowBlur=6;ctx.shadowOffsetX=-3;ctx.shadowOffsetY=3;
-    ctx.fillStyle=rgba(LP.graphite,1);ctx.beginPath();ctx.arc(mx,my,9,0,TAU);ctx.fill();ctx.restore();ctx.fillStyle="rgba(255,255,255,0.35)";ctx.beginPath();ctx.arc(mx+2.5,my-3,3,0,TAU);ctx.fill();}
-  ctx.restore();return bb;}
-const LP_PAD=36;
-function lp_textSheet(ctx,x,y,w,words,o){o=o||{};const inner=w-LP_PAD*2,tl=words.title?lp_wrap(ctx,words.title,inner,{w:800,size:40}):[],sl=words.sub?lp_wrap(ctx,words.sub,inner,{w:600,size:28}):[],
-    ls=(words.lines||[]).map(l=>lp_wrap(ctx,l,inner-34,{w:600,size:28}));
-  const h=LP_PAD+30+(words.kick?44:0)+tl.length*50+sl.length*38+(tl.length&&(sl.length||ls.length)?10:0)+ls.reduce((s,l)=>s+l.length*38+12,0)+LP_PAD-14,bb={x,y,w,h};
-  if(o.measure)return bb;const a=o.a==null?1:o.a;if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;
-  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));if(o.tilt){ctx.translate(x+w/2,y+h/2);ctx.rotate(o.tilt*Math.PI/180);ctx.translate(-x-w/2,-y-h/2);}
-  lp_sheet(ctx,x,y,w,h,Object.assign({},o,{a:1,k:null,tilt:0}));const col=o.col||LP.mut;let yy=y+LP_PAD+30;
-  if(words.kick){lp_T(ctx,String(words.kick).toUpperCase(),x+LP_PAD,yy+14,{w:800,size:28,ls:3,col});yy+=44;}
-  for(const l of tl){yy+=42;lp_T(ctx,l,x+LP_PAD,yy,{w:800,size:40});yy+=8;}
-  for(const l of sl){yy+=38;lp_T(ctx,l,x+LP_PAD,yy,{w:600,size:28,col:LP.mut});}
-  if(tl.length&&(sl.length||ls.length))yy+=10;
-  ls.forEach((l,n)=>{const la=o.u==null?1:clamp(o.u*ls.length-n,0,1);ctx.save();ctx.globalAlpha*=ag_sine(la);
-    l.forEach((s,i)=>{yy+=38;if(i===0){ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x+LP_PAD+8,yy-10,6,0,TAU);ctx.fill();}lp_T(ctx,s,x+LP_PAD+34,yy,{w:600,size:28});});yy+=12;ctx.restore();});
-  ctx.restore();return bb;}
-function lp_figure(ctx,x,y,w,words,o){o=o||{};const col=o.col||LP.orange,ll=words.label?lp_wrap(ctx,words.label,w-LP_PAD*2,{w:600,size:28}):[],h=LP_PAD+16+(words.kick?44:0)+104+ll.length*38+LP_PAD,bb={x,y,w,h};
-  if(o.measure)return bb;const a=o.a==null?1:o.a;if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-  lp_sheet(ctx,x,y,w,h,Object.assign({},o,{a:1,k:null,col}));let yy=y+LP_PAD+30;
-  if(words.kick){lp_T(ctx,String(words.kick).toUpperCase(),x+LP_PAD,yy+14,{w:800,size:28,ls:3,col});yy+=44;}
-  lp_T(ctx,words.num,x+LP_PAD,yy+92,{w:800,size:96,col});yy+=104;for(const l of ll){yy+=38;lp_T(ctx,l,x+LP_PAD,yy,{w:600,size:28});}
-  ctx.restore();return bb;}
-function lp_bars(ctx,x,y,w,h,bars,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const col=o.col||LP.orange,max=o.max||100,n=bars.length,gap=Math.min(28,w/n*0.3),bw=(w-gap*(n-1))/n,base=y+h-48,top=base-y-40;
-  ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(LP.mut,0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,base+1);ctx.lineTo(x+w,base+1);ctx.stroke();
-  const ly=o.line?base-top*o.line.v/max:null,B=bars.map((b,i)=>{const u=o.u==null?1:ag_eo(clamp(o.u*n*0.6-i*0.6+0.6,0,1));return{b,u,bh:top*b.v/max*u,bx:x+i*(bw+gap)};});
-  for(const {b,u,bh,bx} of B){ctx.fillStyle=rgba(b.hi===false||(o.hiOnly&&!b.hi)?mix(col,LP.paper,0.55):col,1);rr(ctx,bx,base-bh,bw,bh,Math.min(6,bw/4));ctx.fill();
-    if(b.label)lp_T(ctx,b.label,bx+bw/2,base+36,{w:600,size:28,align:"center",col:LP.mut});}
-  // a level across the bars, dashed, such as "Half the hours"
-  if(o.line){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(LP.ink,0.7);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x-8,ly);ctx.lineTo(x+w+8,ly);ctx.stroke();ctx.restore();}
-  // each bar's value over it; where the level would cross it, inside the bar's top in white instead (or just over the level, for a
-  // bar too short to hold it)
-  for(const {b,u,bh,bx} of B){if(!b.show||u<=0.98)continue;let vy=base-bh-12,vc=LP.ink;
-    if(ly!=null&&vy-28<ly+6&&vy+6>ly-6){if(bh>=56){vy=base-bh+38;vc=[255,255,255];}else vy=ly-12;}
-    lp_T(ctx,b.show,bx+bw/2,vy,{w:800,size:28,align:"center",col:vc});}
-  // the level's label on a slip of paper at the line's right end (o.line.side "left": its left end), so it reads over a bar too
-  if(o.line&&o.line.label){const tw=lp_tw(ctx,o.line.label,{w:800,size:28}),left=o.line.side==="left",sx=left?x-5:x+w-tw-21;
-    ctx.save();ctx.shadowColor="rgba(52,36,30,0.18)";ctx.shadowBlur=6;ctx.shadowOffsetX=LP.sdx*0.3;ctx.shadowOffsetY=2;ctx.fillStyle=rgba(LP.paper,1);rr(ctx,sx,ly-44,tw+26,38,6);ctx.fill();ctx.restore();
-    lp_T(ctx,o.line.label,sx+13,ly-15,{w:800,size:28});}
-  ctx.restore();}
-
-/* ---------------------------------------------------------------- pills and tags */
-function lp_icon(ctx,kind,x,y,s,col){ctx.save();ctx.translate(x,y);ctx.scale(s/48,s/48);ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=5;ctx.lineCap="round";ctx.lineJoin="round";
-  if(kind==="tick"){ctx.beginPath();ctx.moveTo(-14,1);ctx.lineTo(-4,11);ctx.lineTo(15,-11);ctx.stroke();}
-  else if(kind==="cross"){ctx.beginPath();ctx.moveTo(-12,-12);ctx.lineTo(12,12);ctx.moveTo(12,-12);ctx.lineTo(-12,12);ctx.stroke();}
-  else if(kind==="wait"){ctx.lineWidth=4;ctx.beginPath();ctx.arc(0,0,17,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(0,-9);ctx.lineTo(0,0);ctx.lineTo(7,6);ctx.stroke();}
-  else{ctx.beginPath();ctx.arc(0,0,9,0,TAU);ctx.fill();}ctx.restore();}
-function lp_pill(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a,size=o.size||30,col=o.col||LP.green,icon=o.icon,w=lp_tw(ctx,text,{w:800,size})+(icon?100:60),h=size+30,bx=x-w/2,by=y-h/2;
-  if(a<=0.004)return{x:bx,y:by,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.28)";ctx.shadowBlur=14;ctx.shadowOffsetX=LP.sdx*0.5;ctx.shadowOffsetY=6;rr(ctx,bx,by,w,h,h/2);ctx.fillStyle=rgba(col,1);ctx.fill();ctx.restore();
-  if(icon)lp_icon(ctx,icon,bx+44,y,30,[255,255,255]);lp_T(ctx,text,icon?bx+72:x,y+size*0.36,{w:800,size,align:icon?"left":"center",color:"#fff"});ctx.restore();return{x:bx,y:by,w,h};}
-function lp_tag(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a,col=o.col||LP.mut,w=lp_tw(ctx,text,{w:700,size:28})+52,h=54,bx=o.align==="center"?x-w/2:o.align==="right"?x-w:x,by=y-h/2;
-  if(a<=0.004)return{x:bx,y:by,w,h};ctx.save();ctx.globalAlpha*=a;ctx.save();ctx.shadowColor="rgba(52,36,30,0.22)";ctx.shadowBlur=12;ctx.shadowOffsetX=LP.sdx*0.4;ctx.shadowOffsetY=5;
-  rr(ctx,bx,by,w,h,h/2);ctx.fillStyle="rgba(250,247,240,0.97)";ctx.fill();ctx.restore();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.5;rr(ctx,bx+1,by+1,w-2,h-2,h/2);ctx.stroke();
-  lp_T(ctx,text,bx+w/2,y+10,{w:700,size:28,align:"center",col});ctx.restore();return{x:bx,y:by,w,h};}
-
-/* ---------------------------------------------------------------- the kicker, where and when, the mark, the title and end cards */
-// o.light: the place's light; in a dark room ("evening") the words are pale
-function lp_kicker(ctx,num,title,o){o=o||{};const x=o.x||96,y=o.y||100,a=o.a==null?1:o.a;if(a<=0.004)return;const dk=o.light&&LP_LIGHT[o.light]&&LP_LIGHT[o.light].dark;
-  lp_T(ctx,String(num),x,y,{w:800,size:28,col:dk?LP.paper:LP.ink,a});lp_T(ctx,String(title).toUpperCase(),x+lp_tw(ctx,String(num),{w:800,size:28})+22,y,{w:800,size:28,ls:3.5,col:dk?[226,216,206]:LP.mut,a});}
-function lp_sceneTag(ctx,text,o){o=o||{};const a=o.a==null?1:o.a;lp_tag(ctx,o.x||1824,o.y||91,text||"The university, 2027 · imagined",{align:"right",col:LP.mut,a});}
-// the module's mark: five people in a ring, each a small disc; the ring that joins them draws itself, from the top, clockwise
-function lp_mark(ctx,cx,cy,r,p,a){if(a<=0.01)return;p=clamp(p,0,1);ctx.save();ctx.globalAlpha*=a;const ring=ag_sine(p/0.75);ctx.lineCap="round";
-  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r*1.8);g.addColorStop(0,rgba(LP.sun,0.5*ag_sine(p/0.6)));g.addColorStop(1,rgba(LP.sun,0));ctx.fillStyle=g;ctx.fillRect(cx-r*1.8,cy-r*1.8,r*3.6,r*3.6);
-  ctx.strokeStyle=rgba(LP.ink,1);ctx.lineWidth=Math.max(2,r*0.07);ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+TAU*ring);ctx.stroke();
-  for(let i=0;i<5;i++){const an=-Math.PI/2+i*TAU/5,f=ag_spr(p*5-i*0.6,0,0.5);if(f<=0)continue;const px=cx+Math.cos(an)*r,py=cy+Math.sin(an)*r,rr2=r*0.2*f;
-    ctx.fillStyle=rgba(LP.paper,1);ctx.beginPath();ctx.arc(px,py,rr2+r*0.06,0,TAU);ctx.fill();ctx.fillStyle=rgba(LP.ink,1);ctx.beginPath();ctx.arc(px,py,rr2,0,TAU);ctx.fill();}
-  ctx.restore();}
-function lp_veil(ctx,S,a){if(a<=0)return;setScreen(ctx,S);ctx.fillStyle=rgba(mix(LP.paper,LP.wall,0.35),clamp(a,0,1));ctx.fillRect(0,0,W,H);}
-function lp_title(ctx,S,t,t0,title,sub,line,o){o=o||{};const oA=ag_in(t,t0,0.8),tA=ag_in(t,t0+0.5,0.8);if(oA<=0)return;lp_veil(ctx,S,oA*0.88);setScreen(ctx,S);
-  withA(ctx,tA,()=>{(o.mark||lp_mark)(ctx,960,320,64,(t-t0-0.4)/1.8,1);lp_T(ctx,title,960,520,{w:800,size:84,align:"center"});
-    if(sub)lp_T(ctx,sub,960,598,{w:600,size:36,align:"center",col:LP.mut});withA(ctx,ag_in(t,t0+1.2,0.8),()=>lp_T(ctx,line,960,700,{w:800,size:28,ls:3.5,align:"center",col:LP.mut}));});}
-function lp_end(ctx,S,t,t0,title,line,n,series,o){o=o||{};const oA=ag_in(t,t0,1.0),tA=ag_in(t,t0+0.6,0.9);if(oA<=0)return;lp_veil(ctx,S,oA*0.9);setScreen(ctx,S);
-  withA(ctx,tA,()=>{if(line)lp_T(ctx,line,960,350,{w:700,size:48,align:"center"});(o.mark||lp_mark)(ctx,960,496,56,(t-t0-0.7)/1.6,1);lp_T(ctx,title,960,650,{w:800,size:44,align:"center"});
-    lp_T(ctx,(n?n+" · ":"")+(series||o.module||"Leading data people")+" · Learning Data",960,708,{w:600,size:28,align:"center",col:LP.mut});});}
-
-/* ===== Leading data people: what stands in a room =====
-   Matte things in warm timber and graphite, lit from the window on the right, their soft shadows falling down and to the left.
-     lp_table(ctx, x, y, w, o)        a long timber table: the top of its front edge at (x, y), w wide, its top receding o.depth (64) up
-                                      the frame, its legs down to the floor at o.floor (936, the room's skirting; null for none); o.a. Returns the height to cut people at behind it (y - 6): draw the people first with
-                                      that cut, then the table, which hides their hanging arms
-     lp_screen(ctx, x, y, w, h, o)    a screen on the wall, its glass from (x, y), w by h: o.draw(ctx, x, y, w, h) draws what it shows,
-                                      clipped to the glass, on o.bg (paper white by default); o.a
-     lp_laptop(ctx, x, y, w, o)       an open laptop on a table, seen from behind its lid: the middle of the lid's foot at (x, y), w wide;
-                                      o.glow 0 to 1 (its screen's light on whoever faces it); o.a
-     lp_door(ctx, x, y, w, h, o)      a timber door in the wall, from (x, y), w by h, o.open 0 to 1 (the dark beyond shows); o.a
-     lp_chairs(ctx, x, y, n, o)       a row of n chairs seen from the side, as in a teaching room cut open: the first's foot at (x, y),
-                                      o.gap (46) apart, o.s (1) their size, o.col; o.a */
-function lp_table(ctx,x,y,w,o){o=o||{};const d=o.depth||64,th=o.th||20,a=o.a==null?1:o.a;if(a<=0)return y-6;ctx.save();ctx.globalAlpha*=a;const Tb=LP.timber,fl=o.floor===undefined?936:o.floor;
-  // the legs and their shadows on the floor
-  if(fl!=null&&fl>y+th){for(const lx of [x+26,x+w-46]){ctx.fillStyle=rgba(mix(Tb,LP.shade,0.42),1);ctx.fillRect(lx,y+th,20,fl-y-th+6);}
-    ctx.fillStyle=rgba(LP.shade,0.18);ctx.beginPath();ctx.ellipse(x+w/2+LP.sdx*3,fl+10,w*0.5,14,0,0,TAU);ctx.fill();}
-  let g=ctx.createLinearGradient(0,y-d,0,y);g.addColorStop(0,rgba(mix(Tb,[255,250,240],0.22),1));g.addColorStop(1,rgba(Tb,1));
-  ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x+d*0.4,y-d);ctx.lineTo(x+w-d*0.4,y-d);ctx.lineTo(x+w,y);ctx.lineTo(x,y);ctx.closePath();ctx.fill();
-  // the sun on the table's far right, and the room's shade on its left
-  g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,rgba(LP.shade,0.14));g.addColorStop(0.5,rgba(LP.shade,0));g.addColorStop(1,rgba(LP.sun,0.16));ctx.fillStyle=g;
-  ctx.beginPath();ctx.moveTo(x+d*0.4,y-d);ctx.lineTo(x+w-d*0.4,y-d);ctx.lineTo(x+w,y);ctx.lineTo(x,y);ctx.closePath();ctx.fill();
-  ctx.strokeStyle="rgba(255,248,236,0.75)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.stroke();
-  g=ctx.createLinearGradient(0,y,0,y+th);g.addColorStop(0,rgba(mix(Tb,LP.shade,0.12),1));g.addColorStop(1,rgba(mix(Tb,LP.shade,0.38),1));ctx.fillStyle=g;ctx.fillRect(x,y,w,th);
-  ctx.fillStyle=rgba(LP.shade,0.16);ctx.fillRect(x,y+th,w,8);ctx.restore();return y-6;}
-function lp_screen(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,b=Math.max(10,w*0.022);if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.32)";ctx.shadowBlur=26;ctx.shadowOffsetX=LP.sdx;ctx.shadowOffsetY=14;ctx.fillStyle=rgba(LP.graphite,1);rr(ctx,x-b,y-b,w+2*b,h+2*b,b*0.8);ctx.fill();ctx.restore();
-  ctx.save();rr(ctx,x,y,w,h,4);ctx.clip();ctx.fillStyle=o.bg||"#FBF9F4";ctx.fillRect(x,y,w,h);if(o.draw)o.draw(ctx,x,y,w,h);
-  const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,"rgba(255,255,255,0.1)");g.addColorStop(0.5,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(x,y,w,h);ctx.restore();
-  ctx.restore();}
-function lp_laptop(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const h=w*0.64;ctx.save();ctx.globalAlpha*=a;
-  if(o.glow>0){const g=ctx.createRadialGradient(x,y-h*0.6,0,x,y-h*0.6,w*1.4);g.addColorStop(0,"rgba(236,242,255,"+(0.18*o.glow)+")");g.addColorStop(1,"rgba(236,242,255,0)");ctx.fillStyle=g;ctx.fillRect(x-w*1.4,y-h*2,w*2.8,h*2.6);}
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.3)";ctx.shadowBlur=14;ctx.shadowOffsetX=LP.sdx*0.6;ctx.shadowOffsetY=6;
-  let g=ctx.createLinearGradient(x-w/2,0,x+w/2,0);g.addColorStop(0,"#5A585C");g.addColorStop(1,"#86848A");ctx.fillStyle=g;rr(ctx,x-w/2,y-h,w,h,8);ctx.fill();ctx.restore();
-  ctx.fillStyle="rgba(255,255,255,0.18)";ctx.fillRect(x-w/2+6,y-h+2,w-12,2);ctx.fillStyle="#3E3D42";ctx.fillRect(x-w/2-6,y-4,w+12,8);ctx.restore();}
-function lp_door(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const op=clamp(o.open||0,0,1);ctx.save();ctx.globalAlpha*=a;
-  ctx.fillStyle=rgba(mix(LP.wall,LP.shade,0.3),1);ctx.fillRect(x-14,y-14,w+28,h+14);ctx.fillStyle="rgba(34,28,30,1)";ctx.fillRect(x,y,w,h);
-  const dw=w*(1-op*0.8);let g=ctx.createLinearGradient(x,0,x+dw,0);g.addColorStop(0,rgba(mix(LP.timber,LP.shade,0.2),1));g.addColorStop(1,rgba(LP.timber,1));ctx.fillStyle=g;ctx.fillRect(x,y,dw,h);
-  ctx.strokeStyle=rgba(mix(LP.timber,LP.shade,0.45),1);ctx.lineWidth=2;ctx.strokeRect(x+dw*0.12,y+h*0.06,dw*0.76,h*0.4);ctx.strokeRect(x+dw*0.12,y+h*0.52,dw*0.76,h*0.4);
-  ctx.fillStyle=rgba(LP.graphite,1);ctx.beginPath();ctx.arc(x+dw*0.88,y+h*0.5,7,0,TAU);ctx.fill();ctx.restore();}
-function lp_chairs(ctx,x,y,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const s=o.s||1,gap=(o.gap||46)*s,col=rgba(o.col||mix(LP.timber,LP.shade,0.2),1);ctx.save();ctx.globalAlpha*=a;ctx.fillStyle=col;
-  for(let i=0;i<n;i++){const cx=x+i*gap;ctx.fillRect(cx,y-46*s,30*s,6*s);ctx.fillRect(cx+2*s,y-40*s,4*s,40*s);ctx.fillRect(cx+24*s,y-40*s,4*s,40*s);ctx.fillRect(cx+24*s,y-78*s,5*s,34*s);}ctx.restore();}
-
-/* ===== Leading data people: a building cut open =====
-   The university's buildings drawn as an architect's section: the walls and floors cut through in a dark warm grey, each room a small
-   stage behind them, its back wall in lime with windows on the sky, lit by its own lamp when it's in use. Drawn live, in the place's
-   coordinates, so it stays sharp however close the camera comes; the sky and the ground behind it are the place "lpSky", painted once.
-   It shows what the story of the rooms is about at a glance: which rooms are booked, which are used, which stand empty.
-     LP_TEACHING                        the teaching building: four floors, fourteen rooms (a lecture theatre, a foyer, twelve teaching
-                                        rooms), ids "G.01" to "3.03", for the story of Graham's rooms
-     lp_section(ctx, plan, o)           draws a building: plan as LP_TEACHING ({x0, ground, slab, wall, floors: [{h, rooms: [{id, w,
-                                        kind}]}]}; kinds "teach", "theatre", "foyer", "meet", "office", "team"); o.room(id, box) returns
-                                        how a room looks now: {lit (0 to 1: its lamp), dim (0 to 1: in shadow, not part of the story),
-                                        edge (a colour: a line round it, when the colour means something)}; o.a
-     lp_sectionRooms(plan)              every room's box, {id, kind, x, y, w, h}, the floor at y + h
-     lp_roomBox(plan, id)               one room's box
-     lp_roomCam(plan, id, pad)          a camera key [x, y, zoom] that frames that room, pad (0.12) of its width around it
-     lp_seat(plan, id, u, s)            where a person stands behind the room's table or desk, part u (0 to 1) of the way across:
-                                        {x, y, s, cut}, for lp_person(ctx, who, p.x, p.y, p.s, {cut: p.cut, ...}); s (0.17) their size */
-const LP_SEC={cut:[72,62,60],room:[230,216,196],shade:[60,48,48],sky0:[188,206,222],sky1:[238,228,210],ground:[122,106,90],seat:[146,114,88]};
-const LP_TEACHING={x0:200,ground:900,slab:16,wall:16,floors:[
-  {h:200,rooms:[{id:"G.01",w:560,kind:"theatre"},{id:"G.02",w:420,kind:"foyer"},{id:"G.03",w:540,kind:"teach"}]},
-  {h:170,rooms:[{id:"1.01",w:380,kind:"teach"},{id:"1.02",w:380,kind:"teach"},{id:"1.03",w:380,kind:"teach"},{id:"1.04",w:380,kind:"teach"}]},
-  {h:170,rooms:[{id:"2.01",w:520,kind:"teach"},{id:"2.02",w:500,kind:"teach"},{id:"2.03",w:500,kind:"teach"}]},
-  {h:170,rooms:[{id:"3.01",w:500,kind:"teach"},{id:"3.02",w:520,kind:"teach"},{id:"3.03",w:500,kind:"teach"}]}]};
-function lp_sectionRooms(plan){const out=[];let y=plan.ground;for(const f of plan.floors){y-=f.h+plan.slab;let x=plan.x0+plan.wall;
-  for(const r of f.rooms){out.push({id:r.id,kind:r.kind,x,y:y+plan.slab,w:r.w-plan.wall,h:f.h});x+=r.w;}}return out;}
-function lp_roomBox(plan,id){const r=lp_sectionRooms(plan).find(q=>q.id===id);if(!r)throw new Error("lp_roomBox: no room "+id);return r;}
-function lp_roomCam(plan,id,pad){const r=lp_roomBox(plan,id),p=pad==null?0.12:pad,w=r.w*(1+2*p),h=r.h*(1+2*p);const z=Math.max(1,Math.min(W/w,H/h));return[r.x+r.w/2,r.y+r.h/2,z];}
-function lp_seat(plan,id,u,s){const r=lp_roomBox(plan,id);s=s||0.17;const fy=r.y+r.h,top=fy-(r.kind==="teach"||r.kind==="theatre"?60:66);return{x:r.x+r.w*(0.14+0.72*u),y:top-252*s,s,cut:top+2};}
-function lp_paintSky(c){let g=c.createLinearGradient(0,0,0,LP_TEACHING.ground);g.addColorStop(0,rgba(LP_SEC.sky0,1));g.addColorStop(1,rgba(LP_SEC.sky1,1));c.fillStyle=g;c.fillRect(0,0,W,H);
-  c.save();c.filter="blur(34px)";c.fillStyle="rgba(255,252,246,0.6)";for(const [x,y,rx,ry] of [[240,170,240,42],[1680,120,280,48],[1000,70,320,38]]){c.beginPath();c.ellipse(x,y,rx,ry,0,0,TAU);c.fill();}c.restore();
-  const gy=LP_TEACHING.ground;c.fillStyle=rgba(LP_SEC.ground,1);c.fillRect(0,gy,W,H-gy);g=c.createLinearGradient(0,gy,0,H);g.addColorStop(0,"rgba(40,30,24,0.18)");g.addColorStop(1,"rgba(40,30,24,0.42)");c.fillStyle=g;c.fillRect(0,gy,W,H-gy);
-  // two trees, in a quiet grey-olive that means nothing
-  for(const [x,s] of [[90,1.0],[1840,0.9]]){c.fillStyle="rgb(96,86,74)";c.fillRect(x-7,gy-150*s,14,150*s);c.fillStyle="rgb(138,138,118)";c.beginPath();c.ellipse(x,gy-230*s,90*s,136*s,0,0,TAU);c.fill();
-    c.fillStyle="rgba(170,170,148,0.6)";c.beginPath();c.ellipse(x+22*s,gy-270*s,58*s,78*s,0,0,TAU);c.fill();}
-  c.fillStyle=rgba(LP_SEC.cut,1);c.fillRect(0,gy,W,10);}
-AG_PLACES.lpSky=c=>lp_paintSky(c);
-function lp_section(ctx,plan,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const R=lp_sectionRooms(plan),x1=plan.x0+plan.floors[0].rooms.reduce((s,r)=>s+r.w,0)+plan.wall,
-    top=R.reduce((m,r)=>Math.min(m,r.y),1e9)-plan.slab;ctx.save();ctx.globalAlpha*=a;
-  ctx.fillStyle=rgba(LP_SEC.cut,1);ctx.fillRect(plan.x0,top,x1-plan.x0,plan.ground-top);ctx.fillRect(plan.x0-12,top-14,x1-plan.x0+24,16);
-  for(const r of R){const st=o.room?o.room(r.id,r)||{}:{};lp_secRoom(ctx,r,st);}
-  ctx.restore();}
-function lp_secRoom(ctx,r,st){const lit=st.lit==null?0:st.lit;ctx.save();ctx.beginPath();ctx.rect(r.x,r.y,r.w,r.h);ctx.clip();
-  let g=ctx.createLinearGradient(0,r.y,0,r.y+r.h);g.addColorStop(0,rgba(mix(LP_SEC.room,LP_SEC.shade,0.12),1));g.addColorStop(1,rgba(LP_SEC.room,1));ctx.fillStyle=g;ctx.fillRect(r.x,r.y,r.w,r.h);
-  const nw=Math.max(1,Math.floor(r.w/180)),ww=Math.min(104,r.w/nw-60),wh=r.h*0.44;for(let i=0;i<nw;i++){const wx=r.x+(r.w/nw)*(i+0.5)-ww/2,wy=r.y+r.h*0.16;
-    g=ctx.createLinearGradient(0,wy,0,wy+wh);g.addColorStop(0,rgba(LP_SEC.sky0,1));g.addColorStop(1,rgba(LP_SEC.sky1,1));ctx.fillStyle=g;ctx.fillRect(wx,wy,ww,wh);
-    ctx.strokeStyle="rgba(96,82,74,0.6)";ctx.lineWidth=3;ctx.strokeRect(wx,wy,ww,wh);ctx.beginPath();ctx.moveTo(wx+ww/2,wy);ctx.lineTo(wx+ww/2,wy+wh);ctx.stroke();}
-  if(lit>0){g=ctx.createRadialGradient(r.x+r.w/2,r.y,10,r.x+r.w/2,r.y+r.h*0.3,r.w*0.62);g.addColorStop(0,"rgba(255,224,168,"+(0.5*lit)+")");g.addColorStop(1,"rgba(255,224,168,0)");ctx.fillStyle=g;ctx.fillRect(r.x,r.y,r.w,r.h);
-    ctx.fillStyle="rgba(255,236,200,"+(0.95*lit)+")";ctx.beginPath();ctx.ellipse(r.x+r.w/2,r.y+6,r.w*0.08,5,0,0,TAU);ctx.fill();}
-  const fy=r.y+r.h;ctx.fillStyle=rgba(mix(LP_SEC.ground,[255,255,255],0.28),1);ctx.fillRect(r.x,fy-8,r.w,8);
-  // a teaching room: a long desk across it, the chairs' backs just showing behind it (whoever sits there is drawn over them, cut at
-  // the desk's top); a lecture theatre the same, its back wall stepped like its tiers
-  if(r.kind==="theatre"){for(let k=1;k<4;k++){ctx.fillStyle=rgba(mix(LP_SEC.room,LP_SEC.shade,0.06*k),1);ctx.fillRect(r.x,fy-8-k*26,r.w,26*k>r.h?r.h:4);}}
-  if(r.kind==="teach"||r.kind==="theatre"){const x0=r.x+30,x1=r.x+r.w-30;ctx.fillStyle=rgba(LP_SEC.seat,1);
-    for(let cx=x0+24;cx<x1-30;cx+=46){rr(ctx,cx,fy-86,30,30,6);ctx.fill();}
-    ctx.fillStyle=rgba(LP.timber,1);ctx.fillRect(x0,fy-62,x1-x0,8);ctx.fillStyle=rgba(mix(LP.timber,LP.shade,0.28),1);ctx.fillRect(x0+6,fy-54,x1-x0-12,46);
-    ctx.fillStyle="rgba(255,248,236,0.5)";ctx.fillRect(x0,fy-62,x1-x0,1.5);}
-  g=ctx.createLinearGradient(r.x,0,r.x+r.w,0);g.addColorStop(0,rgba(LP_SEC.shade,0.2));g.addColorStop(0.3,rgba(LP_SEC.shade,0));g.addColorStop(0.75,rgba(LP_SEC.shade,0));g.addColorStop(1,rgba(LP_SEC.shade,0.14));ctx.fillStyle=g;ctx.fillRect(r.x,r.y,r.w,r.h);
-  g=ctx.createLinearGradient(0,r.y,0,r.y+36);g.addColorStop(0,rgba(LP_SEC.shade,0.28));g.addColorStop(1,rgba(LP_SEC.shade,0));ctx.fillStyle=g;ctx.fillRect(r.x,r.y,r.w,36);
-  if(st.dim>0){ctx.fillStyle=rgba(LP_SEC.shade,0.45*st.dim);ctx.fillRect(r.x,r.y,r.w,r.h);}
-  ctx.restore();
-  if(st.edge){ctx.save();ctx.strokeStyle=rgba(st.edge,st.edgeA==null?1:st.edgeA);ctx.lineWidth=6;ctx.strokeRect(r.x+3,r.y+3,r.w-6,r.h-6);ctx.restore();}}
-
-/* ===== Explaining so people can decide: the opening, 1950 to 1952 =====
-   The United States Air Force's survey of 1950, the designers' average man, Gilbert Daniels's count of 1952 and his note, and the
-   cockpits designed for a range. Drawn in the module's matte language, lit from the right like the team's rooms, so the dissolve into the
-   room at the end carries the light across. Nothing is a likeness: the people are of their time, drawn in this film's own style, and
-   the note is typed again, in its own words, not copied as a picture. No jet and no radio, in the picture or the sound.
-   Every top-level name starts with ed_ or ED_ (this film's own); the module's kit is never changed for it. */
-
-/* ---------------------------------------------------------------- the places */
-// the measuring room of 1950: a buff wall, its lower part painted a little darker, a slim rail between
-AG_PLACES.edLab=c=>{lp_paintRoom(c,{light:"day",seed:7,base:[220,210,186]});
-  c.save();c.globalCompositeOperation="multiply";c.fillStyle="rgb(226,218,204)";c.fillRect(0,560,W,354);c.restore();
-  c.fillStyle="rgba(255,250,240,0.4)";c.fillRect(0,556,W,2);c.fillStyle=rgba(LP.shade,0.22);c.fillRect(0,558,W,6);};
-// Daniels's office, 1952, on a morning
-AG_PLACES.edOffice=c=>lp_paintRoom(c,{light:"morning",seed:9,base:[222,212,192]});
-// the designers' drawing office, in the late light
-AG_PLACES.edDraw=c=>lp_paintRoom(c,{light:"late",seed:11,base:[224,214,196]});
-
-/* ---------------------------------------------------------------- the people of 1950 to 1952
-   Of their time: a flyer in a plain white undershirt, his hair cut short; the measurer and Daniels in shirts and ties (Daniels's the
-   Air Force's summer khaki, which reads as beige, never as the module's amber). Each with a key of its own; each looked at full size,
-   facing both ways. */
-function ed_tie(col){return (c,P)=>{ag_soft(c,cc=>{cc.moveTo(305,618);cc.lineTo(320,616);cc.lineTo(327,640);cc.lineTo(336,800);cc.lineTo(318,832);cc.lineTo(303,800);cc.lineTo(308,642);cc.closePath();},
-  col,ag_lt(col,0.28),324,680,90,rgba(ag_dk(col,0.7),0.4),8);
-  // the knot, a little darker, under the collar's points
-  ag_soft(c,cc=>{cc.moveTo(304,616);cc.lineTo(321,614);cc.lineTo(325,636);cc.lineTo(309,640);cc.closePath();},ag_dk(col,0.1),ag_lt(col,0.2),314,624,20,null);};}
-const ED_PEOPLE={
-  flyer:{key:"edFlyer",name:"",skin:[228,192,162],hair:{style:"cropped",c:[96,72,50]},top:{kind:"sweater",c:[238,236,230]},breath:0.28},
-  measurer:{key:"edMeasurer",name:"",skin:[212,174,144],hair:{style:"side",c:[58,46,40]},glasses:[50,44,40],top:{kind:"shirt",c:[196,192,184],paint:ed_tie([84,70,64])},breath:0.25},
-  daniels:{key:"edDaniels",name:"Gilbert Daniels",skin:[230,194,166],hair:{style:"side",c:[72,54,42]},glasses:[44,40,38],top:{kind:"shirt",c:[200,188,156],paint:ed_tie([110,96,70])},breath:0.27}
-};
-// a record card in the hand: the survey's form, its band orange (data)
-function ed_card(c,h){c.save();c.translate(h.near[0]+30,h.near[1]-120);c.rotate(-0.06);
-  c.shadowColor="rgba(52,36,30,0.25)";c.shadowBlur=10;c.shadowOffsetX=-5;c.shadowOffsetY=4;c.fillStyle=rgba(LP.paper,1);rr(c,-10,0,150,104,4);c.fill();c.shadowColor="rgba(0,0,0,0)";
-  c.fillStyle=rgba(LP.orange,1);c.fillRect(-10,0,150,12);c.strokeStyle=rgba(LP.mut,0.45);c.lineWidth=2;for(let i=0;i<5;i++){c.beginPath();c.moveTo(4,30+i*15);c.lineTo(i%2?92:122,30+i*15);c.stroke();}c.restore();}
-
-/* ---------------------------------------------------------------- the measuring board on the wall
-   A timber board with an inch scale, and the head piece that slides down to rest on the flyer's head. */
-function ed_board(ctx,x,top,bot,head,a){a=a==null?1:a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;const w=46;
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.28)";ctx.shadowBlur=16;ctx.shadowOffsetX=LP.sdx;ctx.shadowOffsetY=8;
-  let g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,rgba(mix(LP.timber,LP.shade,0.18),1));g.addColorStop(1,rgba(mix(LP.timber,[255,250,240],0.12),1));ctx.fillStyle=g;ctx.fillRect(x,top,w,bot-top);ctx.restore();
-  ctx.strokeStyle=rgba(mix(LP.timber,LP.shade,0.6),0.8);ctx.lineCap="butt";for(let y=bot-12,i=0;y>top+8;y-=11,i++){ctx.lineWidth=i%12===0?2.4:1.2;ctx.beginPath();ctx.moveTo(x+w,y);ctx.lineTo(x+w-(i%12===0?26:i%6===0?18:10),y);ctx.stroke();}
-  // the head piece: a block on the board and a square arm resting on the head
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.3)";ctx.shadowBlur=10;ctx.shadowOffsetX=LP.sdx*0.6;ctx.shadowOffsetY=6;ctx.fillStyle=rgba(LP.graphite,1);ctx.fillRect(x-6,head-34,w+12,40);
-  g=ctx.createLinearGradient(0,head-12,0,head);g.addColorStop(0,rgba(mix(LP.timber,[255,250,240],0.2),1));g.addColorStop(1,rgba(LP.timber,1));ctx.fillStyle=g;ctx.fillRect(x+w,head-12,190,12);ctx.restore();
-  ctx.restore();}
-
-/* ---------------------------------------------------------------- drawings, in the designers' blue
-   A drawing is blue lines on a sheet of paper (blue: design), its parts outlined like a draughtsman's jointed template. */
-let ED_LW=4;
-// a limb or a body part: a capsule outlined in blue, filled pale
-function ed_limb(c,x0,y0,x1,y1,r,o){o=o||{};const col=o.col||LP.blue;c.save();c.lineCap="round";c.strokeStyle=rgba(col,o.a==null?1:o.a);c.lineWidth=r*2+ED_LW;c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.stroke();
-  c.strokeStyle=o.fill||rgba(mix(LP.paper,col,0.07),1);c.lineWidth=r*2-ED_LW;c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.stroke();c.restore();}
-function ed_disc(c,x,y,r,o){o=o||{};const col=o.col||LP.blue;c.save();c.fillStyle=o.fill||rgba(mix(LP.paper,col,0.07),1);c.strokeStyle=rgba(col,o.a==null?1:o.a);c.lineWidth=ED_LW;c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.restore();}
-// the designers' average man, from the front: a jointed template h px tall, his feet at y
-function ed_manikin(c,cx,y,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const k=h/7.5,top=y-h;c.save();c.globalAlpha*=a;
-  const leg=(s)=>{ed_limb(c,cx+s*0.36*k,top+3.95*k,cx+s*0.42*k,top+5.7*k,0.3*k);ed_limb(c,cx+s*0.42*k,top+5.7*k,cx+s*0.44*k,top+7.25*k,0.24*k);
-    ed_limb(c,cx+s*0.44*k,top+7.32*k,cx+s*0.7*k,top+7.38*k,0.12*k);};
-  const arm=(s)=>{ed_limb(c,cx+s*0.98*k,top+1.62*k,cx+s*1.12*k,top+3.0*k,0.2*k);ed_limb(c,cx+s*1.12*k,top+3.0*k,cx+s*1.2*k,top+4.1*k,0.17*k);
-    ed_disc(c,cx+s*1.22*k,top+4.35*k,0.19*k);};
-  leg(-1);leg(1);
-  // the torso: shoulders, waist and hips in one outline
-  c.save();c.fillStyle=rgba(mix(LP.paper,LP.blue,0.07),1);c.strokeStyle=rgba(LP.blue,1);c.lineWidth=ED_LW;c.lineJoin="round";c.beginPath();
-  c.moveTo(cx-1.02*k,top+1.5*k);c.quadraticCurveTo(cx,top+1.32*k,cx+1.02*k,top+1.5*k);c.quadraticCurveTo(cx+0.82*k,top+2.6*k,cx+0.64*k,top+3.1*k);
-  c.quadraticCurveTo(cx+0.82*k,top+3.6*k,cx+0.76*k,top+4.1*k);c.quadraticCurveTo(cx,top+4.3*k,cx-0.76*k,top+4.1*k);c.quadraticCurveTo(cx-0.82*k,top+3.6*k,cx-0.64*k,top+3.1*k);
-  c.quadraticCurveTo(cx-0.82*k,top+2.6*k,cx-1.02*k,top+1.5*k);c.closePath();c.fill();c.stroke();c.restore();
-  arm(-1);arm(1);ed_limb(c,cx,top+0.95*k,cx,top+1.38*k,0.2*k);
-  c.save();c.fillStyle=rgba(mix(LP.paper,LP.blue,0.07),1);c.strokeStyle=rgba(LP.blue,1);c.lineWidth=ED_LW;c.beginPath();c.ellipse(cx,top+0.5*k,0.38*k,0.5*k,0,0,TAU);c.fill();c.stroke();c.restore();
-  c.restore();}
-// a dimension line: arrows at both ends, its label beside it
-function ed_dim(c,x,y0,y1,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const col=o.col||LP.blue;c.save();c.globalAlpha*=a;c.strokeStyle=rgba(col,1);c.fillStyle=rgba(col,1);c.lineWidth=3;
-  c.beginPath();c.moveTo(x,y0);c.lineTo(x,y1);c.stroke();for(const [yy,d] of [[y0,1],[y1,-1]]){c.beginPath();c.moveTo(x,yy);c.lineTo(x-9,yy+d*18);c.lineTo(x+9,yy+d*18);c.closePath();c.fill();
-    c.beginPath();c.moveTo(x-22,yy);c.lineTo(x+22,yy);c.stroke();}
-  if(label)lp_T(c,label,x+(o.side==="left"?-24:24),(y0+y1)/2+10,{w:700,size:o.size||30,col,align:o.side==="left"?"right":"left"});c.restore();}
-
-/* ---------------------------------------------------------------- people in a row, under a lintel
-   Flyers as plain silhouettes, seen from the front, their heights from the survey's spread: a door built to the average man's height
-   makes those taller than him stoop (amber: the risk); a door built for the range lets nine in ten through. hs: heights in inches;
-   ppi: px per inch; lintel: the door's height in inches; stoop 0 to 1. */
-function ed_glyph(c,x,y,h,o){o=o||{};const col=o.col||[118,104,96],d=(o.duck||0),al=o.a==null?1:o.a;
-  // standing, the head's top is at y - h; ducking d px, the head sinks d, the shoulders hunch 0.7 d and the hips 0.3 d (the knees bend)
-  const top=y-h+d,sh=y-h+0.17*h+0.7*d,hip=y-h+0.52*h+0.3*d;c.save();c.fillStyle=rgba(col,al);c.strokeStyle=rgba(col,al);c.lineCap="round";c.lineJoin="round";
-  c.lineWidth=0.068*h;c.beginPath();for(const sd of [-1,1]){c.moveTo(x+sd*0.042*h,hip);c.lineTo(x+sd*0.048*h,y-0.035*h);}c.stroke();
-  // the body, shoulders to hips, and the arms hanging
-  c.beginPath();c.moveTo(x-0.11*h,sh+0.01*h);c.quadraticCurveTo(x,sh-0.02*h,x+0.11*h,sh+0.01*h);c.quadraticCurveTo(x+0.1*h,(sh+hip)/2,x+0.088*h,hip);
-  c.lineTo(x-0.088*h,hip);c.quadraticCurveTo(x-0.1*h,(sh+hip)/2,x-0.11*h,sh+0.01*h);c.closePath();c.fill();
-  c.lineWidth=0.045*h;c.beginPath();for(const sd of [-1,1]){c.moveTo(x+sd*0.112*h,sh+0.03*h);c.lineTo(x+sd*0.128*h,sh+0.32*h);}c.stroke();
-  // the neck and the head
-  const hy=top+0.068*h;c.lineWidth=0.055*h;c.beginPath();c.moveTo(x,hy+0.05*h);c.lineTo(x,sh+0.005*h);c.stroke();
-  if(o.head)c.fillStyle=rgba(o.head,al);c.beginPath();c.ellipse(x,hy,0.052*h,0.066*h,0,0,TAU);c.fill();c.restore();}
-// heights in inches at the quantiles of the survey's spread: mean 69 (5 ft 9 in), standard deviation 2.4 (the survey's stature, about 6.1 cm)
-function ed_heights(n){const z=p=>{const a=[-39.69683028665376,220.9460984245205,-275.9285104469687,138.3577518672690,-30.66479806614716,2.506628277459239],
-    b=[-54.47609879822406,161.5858368580409,-155.6989798598866,66.80131188771972,-13.28068155288572],q=p-0.5,r=q*q;
-    return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);};
-  const out=[];for(let i=0;i<n;i++)out.push(69+2.4*z((i+0.5)/n));return out;}
-// a row of flyers under a lintel: o.lintel (inches), o.stoop (0 to 1), o.range [lo, hi] (inches: those inside drawn blue), o.order (a shuffle)
-function ed_row(c,x0,x1,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const n=o.n||8,hs=o.hs||ed_heights(n),ppi=o.ppi||4.35,order=o.order||hs.map((_,i)=>i),
-    dx=(x1-x0)/n,ly=y-o.lintel*ppi;c.save();c.globalAlpha*=a;
-  order.forEach((hi,j)=>{const h=hs[hi]*ppi,px=x0+dx*(j+0.5),tall=hs[hi]>o.lintel+0.05,inR=o.range&&hs[hi]>=o.range[0]&&hs[hi]<=o.range[1];
-    const head=tall&&o.risk?mix([118,104,96],LP.amber,clamp(o.risk,0,1)):null,col=o.range?(inR?mix([118,104,96],LP.blue,0.85):[176,166,158]):[118,104,96];
-    ed_glyph(c,px,y,h,{duck:tall?(o.stoop||0)*((hs[hi]-o.lintel)*ppi+8):0,head,col});});
-  // the door's posts and its lintel
-  if(o.lintel){const lu=o.lintelU==null?1:o.lintelU;c.strokeStyle=rgba(LP.blue,1);c.lineWidth=6;c.lineCap="round";c.beginPath();c.moveTo(x0-10,y);c.lineTo(x0-10,ly);c.lineTo(lerp(x0-10,x1+10,lu),ly);if(lu>=1)c.lineTo(x1+10,y);c.stroke();}
-  c.strokeStyle=rgba(LP.mut,0.5);c.lineWidth=3;c.beginPath();c.moveTo(x0-40,y+2);c.lineTo(x1+40,y+2);c.stroke();c.restore();}
-
-/* ---------------------------------------------------------------- a cockpit, cut open like an architect's section
-   Seen from the side, facing right: the seat, the stick, the rudder pedals, the panel and the canopy. A pilot is a jointed template that
-   reaches with two-bone arms and legs: where a hand or a foot can't reach, the limb stretches as far as it goes and the gap is marked
-   in amber. Units are px at s = 1; (x, y) is the seat's reference point. o.pilots: [{k (size), dy (the seat raised, px), pedal (moved
-   forward, px), col, a}]; o.reach: the control the hand reaches for ("stick" or "switch"); o.gaps: show the gaps (0 to 1);
-   o.arrows: the seat's and the pedals' adjustment (0 to 1). */
-const ED_CP={stick:[200,-90],switch:[366,-240],pedal:[540,22],panel:[[356,-336],[388,-84]],eye:-473.4};
-function ed_ik(a,b,l1,l2,bendUp){const dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy),reach=l1+l2-0.5,dd=Math.min(d,reach),an=Math.atan2(dy,dx);
-  const c1=clamp((l1*l1+dd*dd-l2*l2)/(2*l1*dd),-1,1),A=Math.acos(c1)*(bendUp?-1:1),j=[a[0]+Math.cos(an+A)*l1,a[1]+Math.sin(an+A)*l1],
-    e=[a[0]+Math.cos(an)*dd,a[1]+Math.sin(an)*dd];return{j,e,gap:d-dd,reached:d<=reach};}
-function ed_pilot(c,P,o){const k=P.k,col=P.col||LP.blue,a=P.a==null?1:P.a;if(a<=0.004)return null;c.save();c.globalAlpha*=a;const dy=P.dy||0,lean=0.2;
-  const H=[8,-44*k+dy-4],S=[H[0]-Math.sin(lean)*330*k,H[1]-Math.cos(lean)*330*k],hc=[S[0]+16*k,S[1]-96*k],stick=[ED_CP.stick[0],ED_CP.stick[1]],
-    tgt=o.reach==="switch"?ED_CP.switch:stick,ped=[ED_CP.pedal[0]+(P.pedal||0),ED_CP.pedal[1]];
-  const leg=ed_ik(H,[ped[0]-30,ped[1]-14],255*k,262*k,true),arm=ed_ik([S[0]+10*k,S[1]+18*k],tgt,210*k,230*k,false);
-  const fill=rgba(mix(LP.paper,col,0.07),1),q={col,fill};
-  ed_limb(c,H[0],H[1],leg.j[0],leg.j[1],34*k,q);ed_limb(c,leg.j[0],leg.j[1],leg.e[0],leg.e[1],26*k,q);ed_limb(c,leg.e[0],leg.e[1],leg.e[0]+50*k,leg.e[1]-6*k,12*k,q);
-  ed_limb(c,H[0],H[1],S[0],S[1],50*k,q);ed_limb(c,S[0]+4*k,S[1]-20*k,hc[0]-4*k,hc[1]+40*k,16*k,q);ed_disc(c,hc[0],hc[1],58*k,q);
-  ed_limb(c,S[0]+10*k,S[1]+18*k,arm.j[0],arm.j[1],22*k,q);ed_limb(c,arm.j[0],arm.j[1],arm.e[0],arm.e[1],19*k,q);ed_disc(c,arm.e[0],arm.e[1],17*k,q);
-  c.restore();return{arm,leg,tgt,ped:[ped[0]-30,ped[1]-14],eye:[hc[0]+26*k,hc[1]-6*k]};}
-function ed_cockpit(c,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c.save();c.globalAlpha*=a;c.translate(x,y);c.scale(s,s);
-  // o.lw: every line a little heavier, for a cockpit drawn small (the outlines of the pilot too)
-  const lw=o.lw||1,was=ED_LW;ED_LW=4*lw;
-  const B=LP.blue,line=(w,al)=>{c.strokeStyle=rgba(B,al==null?1:al);c.lineWidth=w*lw;c.lineCap="round";c.lineJoin="round";};
-  // the fuselage and the canopy, cut through: the nose to the right, the canopy over the pilot's head
-  const body=()=>{c.beginPath();c.moveTo(-320,150);c.lineTo(640,150);c.quadraticCurveTo(820,140,840,-40);c.quadraticCurveTo(760,-220,430,-330);c.lineTo(250,-560);
-    c.quadraticCurveTo(-20,-720,-250,-480);c.quadraticCurveTo(-320,-420,-320,-300);c.closePath();};
-  c.save();c.fillStyle=rgba(mix(LP.paper,B,0.05),1);body();c.fill();c.restore();
-  line(5);c.beginPath();c.moveTo(-320,150);c.lineTo(640,150);c.quadraticCurveTo(820,140,840,-40);c.quadraticCurveTo(760,-220,430,-330);c.stroke();
-  line(4,0.7);c.beginPath();c.moveTo(430,-330);c.lineTo(250,-560);c.quadraticCurveTo(-20,-720,-250,-480);c.quadraticCurveTo(-320,-420,-320,-300);c.stroke();
-  // the eye line, where every pilot's eyes should be
-  if(o.eye){line(3,0.6*o.eye);c.setLineDash([10,12]);c.beginPath();c.moveTo(-40,ED_CP.eye);c.lineTo(430,ED_CP.eye);c.stroke();c.setLineDash([]);}
-  // the floor, the panel, the stick and its pivot
-  line(4);c.beginPath();c.moveTo(-180,96);c.lineTo(640,96);c.stroke();
-  c.save();c.fillStyle=rgba(mix(LP.paper,B,0.14),1);c.beginPath();c.moveTo(ED_CP.panel[0][0],ED_CP.panel[0][1]);c.lineTo(ED_CP.panel[0][0]+32,ED_CP.panel[0][1]-6);c.lineTo(ED_CP.panel[1][0],ED_CP.panel[1][1]);c.lineTo(ED_CP.panel[1][0]-30,ED_CP.panel[1][1]+6);c.closePath();c.fill();line(4);c.stroke();c.restore();
-  c.save();c.fillStyle=rgba(B,1);c.beginPath();c.arc(ED_CP.switch[0]+4,ED_CP.switch[1],9,0,TAU);c.fill();c.restore();
-  line(9);c.beginPath();c.moveTo(214,96);c.lineTo(ED_CP.stick[0],ED_CP.stick[1]);c.stroke();ed_disc(c,ED_CP.stick[0],ED_CP.stick[1]-6,14);
-  // the seat on its rail: the rail stays, the seat rises and falls with each pilot (o.seats: the raised heights to draw)
-  line(3,0.55);c.setLineDash([12,10]);c.beginPath();c.moveTo(-104,-60);c.lineTo(-190,-420);c.stroke();c.setLineDash([]);
-  for(const sd of (o.seats||[0])){const al=o.seats&&o.seats.length>1?0.45:1;line(7,al);c.beginPath();c.moveTo(-70,-30+sd);c.lineTo(126,-46+sd);c.moveTo(-70,-30+sd);c.lineTo(-136,-352+sd);c.stroke();}
-  line(5,0.8);c.beginPath();c.moveTo(-40,96);c.lineTo(-40,-24+(o.seats?Math.max(...o.seats):0));c.stroke();
-  // the pedals, where each pilot has them
-  for(const pf of (o.pedals||[0])){const al=o.pedals&&o.pedals.length>1?0.45:1;line(8,al);c.beginPath();c.moveTo(ED_CP.pedal[0]+pf,ED_CP.pedal[1]+52);c.lineTo(ED_CP.pedal[0]+pf+20,ED_CP.pedal[1]-30);c.stroke();}
-  // the pilots, then any gap: a hand short of the control, a foot short of the pedal
-  const res=(o.pilots||[]).map(P=>({P,r:ed_pilot(c,P,o)}));
-  if(o.gaps>0)for(const {r} of res){if(!r)continue;c.save();c.globalAlpha*=o.gaps;c.strokeStyle=rgba(LP.amber,1);c.fillStyle=rgba(LP.amber,1);c.lineWidth=6*lw;c.setLineDash([10*lw,10*lw]);c.lineCap="round";
-    for(const [p,q,g] of [[r.arm.e,r.tgt,r.arm.gap],[r.leg.e,r.ped,r.leg.gap]])if(g>6){c.beginPath();c.moveTo(p[0],p[1]);c.lineTo(q[0],q[1]);c.stroke();c.beginPath();c.arc(q[0],q[1],12*lw,0,TAU);c.fill();}c.restore();}
-  // the adjustments: the seat up and down along its rail, the pedals fore and aft
-  if(o.arrows>0){c.save();c.globalAlpha*=clamp(o.arrows,0,1);ed_arrow2(c,-230,-150,-230,-330,B);ed_arrow2(c,500,150-30,660,150-30,B);c.restore();}
-  ED_LW=was;c.restore();return res;}
-// a pilot of size k in a cockpit that adjusts: the seat moved so the eyes meet the eye line, the pedals moved to the feet
-const ed_fit=k=>({k,dy:469.4*(k-1),pedal:560*(k-1)});
-function ed_arrow2(c,x0,y0,x1,y1,col){const an=Math.atan2(y1-y0,x1-x0);c.save();c.strokeStyle=rgba(col,1);c.fillStyle=rgba(col,1);c.lineWidth=7;c.lineCap="round";c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.stroke();
-  for(const [x,y,d] of [[x0,y0,an+Math.PI],[x1,y1,an]]){c.beginPath();c.moveTo(x+Math.cos(d)*14,y+Math.sin(d)*14);c.lineTo(x+Math.cos(d+2.5)*24,y+Math.sin(d+2.5)*24);c.lineTo(x+Math.cos(d-2.5)*24,y+Math.sin(d-2.5)*24);c.closePath();c.fill();}c.restore();}
-
-/* ---------------------------------------------------------------- one measurement's spread, and its middle 30%
-   The curve in orange (data) on a sheet; the band Daniels called average shaded under it (the middle 30%, about 0.39 standard deviations
-   either side of the mean). u draws the curve; b shades the band. */
-function ed_curve(c,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u,b=o.b==null?1:o.b,base=y+h,f=z=>Math.exp(-z*z/2),X=z=>x+w/2+z*w/6.6;c.save();c.globalAlpha*=a;
-  if(b>0){c.save();c.globalAlpha*=b;c.fillStyle=rgba(LP.orange,0.3);c.beginPath();c.moveTo(X(-0.385),base);for(let z=-0.385;z<=0.386;z+=0.02)c.lineTo(X(z),base-f(z)*h*0.86);c.lineTo(X(0.385),base);c.closePath();c.fill();
-    c.strokeStyle=rgba(LP.orange,1);c.lineWidth=3;for(const z of [-0.385,0.385]){c.beginPath();c.moveTo(X(z),base);c.lineTo(X(z),base-f(z)*h*0.86);c.stroke();}c.restore();}
-  c.strokeStyle=rgba(LP.mut,0.6);c.lineWidth=3;c.beginPath();c.moveTo(x,base);c.lineTo(x+w,base);c.stroke();
-  if(u>0){c.strokeStyle=rgba(LP.orange,1);c.lineWidth=6;c.lineCap="round";c.beginPath();const z1=lerp(-3.2,3.2,ag_sine(u));for(let z=-3.2;z<=z1;z+=0.04){const px=X(z),py=base-f(z)*h*0.86;if(z===-3.2)c.moveTo(px,py);else c.lineTo(px,py);}c.stroke();}
-  c.restore();}
-
-// the flyers' heights, in orange, and the range a design should fit shaded blue: 5 ft 5 in to 6 ft 1 in, nine flyers in ten (b, 0 to 1)
-function ed_range(c,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const b=o.b==null?1:o.b,base=y+h,f=z=>Math.exp(-z*z/2),X=z=>x+w/2+z*w/6.6,lo=-1.645,hi=1.645;c.save();c.globalAlpha*=a;
-  if(b>0){c.save();c.globalAlpha*=b;c.fillStyle=rgba(LP.blue,0.22);c.beginPath();c.moveTo(X(lo),base);for(let z=lo;z<=hi+0.001;z+=0.03)c.lineTo(X(z),base-f(z)*h*0.86);c.lineTo(X(hi),base);c.closePath();c.fill();
-    c.strokeStyle=rgba(LP.blue,1);c.lineWidth=4;for(const z of [lo,hi]){c.beginPath();c.moveTo(X(z),base+14);c.lineTo(X(z),base-f(z)*h*0.86-30);c.stroke();}
-    lp_T(c,"5 ft 5 in",X(lo),base+50,{w:700,size:30,align:"center",col:LP.blue});lp_T(c,"6 ft 1 in",X(hi),base+50,{w:700,size:30,align:"center",col:LP.blue});c.restore();}
-  c.strokeStyle=rgba(LP.mut,0.6);c.lineWidth=3;c.beginPath();c.moveTo(x,base);c.lineTo(x+w,base);c.stroke();
-  c.strokeStyle=rgba(LP.orange,1);c.lineWidth=6;c.lineCap="round";c.beginPath();for(let z=-3.2;z<=3.2;z+=0.04){const px=X(z),py=base-f(z)*h*0.86;if(z===-3.2)c.moveTo(px,py);else c.lineTo(px,py);}c.stroke();
-  c.restore();}
-
-/* ---------------------------------------------------------------- Daniels's count
-   4,063 dots, one for each flyer, in orange (data). At each of the ten measurements, those not average on it fade: 1,055 are left,
-   then 302, 143, 73, 28, 12, 6, 3, 2, and none. o.steps: ten values 0 to 1, each measurement applied. Beside them, the table: each
-   measurement and the men still average on everything so far, row by row. */
-const ED_COUNT=[["Height",1055],["Chest",302],["Sleeve",143],["Inside leg",73],["Torso",28],["Hips",12],["Neck",6],["Waist",3],["Thigh",2],["Crotch length",0]];
-const ED_N=4063,ED_RANK=(()=>{const R=ag_rnd(1952),r=[];for(let i=0;i<ED_N;i++)r.push(i);for(let i=ED_N-1;i>0;i--){const j=(R()*(i+1))|0;const t=r[i];r[i]=r[j];r[j]=t;}return r;})();
-function ed_dots(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const st=o.steps||[],cols=o.cols||79,p=o.pitch||9,r=o.r||3.3;c.save();c.globalAlpha*=a;
-  // each dot's last measurement passed: the dot with rank q is average on step k if q < ED_COUNT[k][1]
-  const lastK=q=>{let k=0;while(k<10&&q<ED_COUNT[k][1])k++;return k;};
-  const groups=[];for(let k=0;k<=10;k++)groups.push(new Path2D());
-  for(let i=0;i<ED_N;i++){const q=ED_RANK[i],k=lastK(q),px=x+(i%cols)*p,py=y+Math.floor(i/cols)*p;groups[k].moveTo(px+r,py);groups[k].arc(px,py,r,0,TAU);}
-  // a dot fades as the measurement it fails is applied: group k fails at step k (0-based), and stays faint
-  for(let k=0;k<=10;k++){const gone=k<10?clamp(st[k]||0,0,1):0,al=lerp(1,0.13,gone);c.fillStyle=rgba(k<10?mix(LP.orange,[150,140,132],gone):LP.orange,al);c.fill(groups[k]);}
-  // once only a few are left, a ring round each, so the eye finds them
-  const ring=clamp((st[4]||0)*2,0,1);if(ring>0){c.strokeStyle=rgba(LP.orange,1);c.lineWidth=3;for(let i=0;i<ED_N;i++){const q=ED_RANK[i],k=lastK(q);if(k<5)continue;const gone=k<10?clamp(st[k]||0,0,1):0,al=ring*(1-gone);
-      if(al<=0.01)continue;c.globalAlpha=a*al;c.beginPath();c.arc(x+(i%cols)*p,y+Math.floor(i/cols)*p,r+8,0,TAU);c.stroke();}c.globalAlpha=a;}
-  c.restore();}
-function ed_countTable(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const st=o.steps||[],dz=o.deco?1:0;c.save();c.globalAlpha*=a;
-  lp_T(c,"Average on",x,y,{w:700,size:28,col:LP.mut,deco:dz});lp_T(c,"Men left",x+380,y,{w:700,size:28,col:LP.mut,align:"right",deco:dz});
-  ED_COUNT.forEach(([m,n],i)=>{const u=clamp((st[i]||0)*3,0,1);if(u<=0.004)return;const yy=y+48+i*42;c.save();c.globalAlpha*=u;
-    lp_T(c,m,x,yy,{w:600,size:30,deco:dz});lp_T(c,n.toLocaleString("en-US"),x+380,yy,{w:800,size:30,align:"right",col:n===0?LP.amber:LP.orange,deco:dz});c.restore();});
-  c.restore();}
-
-/* ---------------------------------------------------------------- the note, typed again
-   Technical Note WCRD 53-7, December 1952: its title and the first lines of its introduction, in its own words, typed in mono on a
-   sheet; the second sentence underlined as the voice says it (u, 0 to 1). */
-const ED_NOTE=["The tendency to think in terms of the","“average man” is a pitfall into which","many persons blunder when attempting","to apply human body size data to design","problems. Actually it is virtually","impossible to find an “average man”","in the Air Force population."];
-function ed_note(c,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null;const h=o.h||640,bb=lp_sheet(c,x,y,w,h,{a,k:o.k,light:o.light,pin:o.pin,tilt:o.tilt});
-  c.save();c.globalAlpha*=a;const cx=x+w/2;
-  const dz=o.deco?1:0;lp_T(c,"TECHNICAL NOTE WCRD 53-7",cx,y+76,{w:500,size:28,f:"mono",align:"center",col:LP.mut,deco:dz});
-  lp_T(c,"THE “AVERAGE MAN”?",cx,y+146,{w:600,size:40,f:"mono",align:"center",deco:dz});
-  lp_T(c,"Gilbert S. Daniels · December 1952",cx,y+200,{w:500,size:28,f:"mono",align:"center",col:LP.mut,deco:dz});
-  lp_T(c,"INTRODUCTION",cx,y+270,{w:500,size:28,f:"mono",align:"center",deco:dz});
-  ED_NOTE.forEach((l,i)=>lp_T(c,l,x+60,y+330+i*44,{w:500,size:30,f:"mono",deco:dz}));
-  // the underline under "Actually it is virtually impossible to find an average man in the Air Force population."
-  const u=clamp(o.u||0,0,1);if(u>0){c.strokeStyle=rgba(LP.ink,0.85);c.lineWidth=3.5;c.lineCap="round";const mw=q=>lp_tw(c,q,{w:500,size:30,f:"mono"});
-    const segs=[[4,mw("problems. "),mw(ED_NOTE[4])],[5,0,mw(ED_NOTE[5])],[6,0,mw(ED_NOTE[6])]],tot=segs.reduce((s,q)=>s+(q[2]-q[1]),0);let left=u*tot;
-    for(const [li,f0,f1] of segs){if(left<=0)break;const d=Math.min(f1-f0,left);left-=d;const ly=y+330+li*44+9;c.beginPath();c.moveTo(x+60+f0,ly);c.lineTo(x+60+f0+d,ly);c.stroke();}}
-  c.restore();return bb;}
-
-/* ---------------------------------------------------------------- a car's seat, sliding on its rails (blue: design) */
-function ed_carSeat(c,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const sl=(o.slide||0)*60;c.save();c.globalAlpha*=a;c.translate(x,y);c.scale(s,s);
-  c.strokeStyle=rgba(LP.blue,1);c.lineWidth=6;c.lineCap="round";c.beginPath();c.moveTo(-150,40);c.lineTo(170,40);c.stroke();
-  c.save();c.translate(sl,0);c.fillStyle=rgba(mix(LP.paper,LP.blue,0.08),1);c.lineJoin="round";c.lineWidth=6;
-  c.beginPath();c.moveTo(-90,10);c.quadraticCurveTo(-96,-14,-70,-18);c.lineTo(70,-26);c.quadraticCurveTo(96,-24,92,4);c.lineTo(84,14);c.closePath();c.fill();c.stroke();
-  c.beginPath();c.moveTo(-86,-14);c.lineTo(-130,-196);c.quadraticCurveTo(-130,-222,-104,-222);c.lineTo(-84,-218);c.quadraticCurveTo(-62,-212,-64,-188);c.lineTo(-46,-22);c.closePath();c.fill();c.stroke();
-  c.beginPath();c.moveTo(-60,14);c.lineTo(-60,40);c.moveTo(60,10);c.lineTo(60,40);c.stroke();c.restore();
-  ed_arrow2(c,-40,82,120,82,LP.blue);c.restore();}
-
-/* ===== Explaining so people can decide: the university, May and June 2027 =====
-   The team's rooms, Graham's office, the registrar's office and the University Council's room; Ivy's twelve-page draft, Minto's
-   pyramid, Graham's one page, the week's picture (a heat map of the rooms booked, by day and hour), and the University Council's
-   decision. The numbers are the module's (numbers.md): booked 38% of the week, 93% from 10:00 to 14:00 Tuesday to Thursday, about one
-   hour in five at other times; in one booked hour in five nobody came.
-   Every top-level name starts with ed_ or ED_. */
-
-/* ---------------------------------------------------------------- the places */
-AG_PLACES.edLate=c=>lp_paintRoom(c,{light:"late",seed:4});                       // the team's room, late in the afternoon
-AG_PLACES.edGraham=c=>lp_paintRoom(c,{light:"grey",seed:3});                     // Graham's office, on a grey day
-AG_PLACES.edMei=c=>lp_paintRoom(c,{light:"day",seed:13,base:[218,210,194]});     // the registrar's office
-AG_PLACES.edMorning=c=>lp_paintRoom(c,{light:"morning",seed:5});                 // the team's room, on a Monday morning
-// the University Council's room: a darker lime above timber panelling
-AG_PLACES.edCouncil=c=>{lp_paintRoom(c,{light:"day",seed:12,base:[214,202,184]});const top=520,bot=914;
-  let g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,rgba(mix(LP.timber,LP.shade,0.42),1));g.addColorStop(1,rgba(mix(LP.timber,LP.shade,0.18),1));c.fillStyle=g;c.fillRect(0,top,W,bot-top);
-  for(let x=0;x<W;x+=240){c.fillStyle=rgba(LP.shade,0.16);c.fillRect(x,top,6,bot-top);c.strokeStyle="rgba(255,244,226,0.16)";c.lineWidth=2;c.strokeRect(x+30,top+36,180,bot-top-72);}
-  c.fillStyle=rgba(mix(LP.timber,[255,250,240],0.1),1);c.fillRect(0,top-14,W,16);c.fillStyle=rgba(LP.shade,0.25);c.fillRect(0,top+2,W,8);
-  lp_sun(c,LP_LIGHT.day.sun,{a:0.5,clip:x=>{x.beginPath();x.rect(0,top-14,W,bot-top+14);x.clip();}});};
-
-/* ---------------------------------------------------------------- the week, booked: the numbers behind the picture
-   Ten teaching hours (08:00 to 18:00) by five days, the share of the 186 rooms booked in each, Semester 2 2026's thirteen weeks: the
-   peak, 10:00 to 14:00 Tuesday to Thursday, averages 93%; the other 38 hours average 20.6% (about one in five), low on Monday mornings
-   and Friday afternoons; the whole week averages 38.0% (numbers.md). */
-const ED_DAYS=["Mon","Tue","Wed","Thu","Fri"],ED_HOURS=["08","09","10","11","12","13","14","15","16","17"];
-const ED_WEEK=[[6,16,34,42,40,38,30,22,10,4],[10,32,92,95,93,91,44,28,14,6],[10,32,94,96,93,92,42,26,13,5],[10,30,93,94,92,91,40,24,12,5],[6,20,32,34,28,18,10,6,3,2]];
-const ed_peak=(d,h)=>d>=1&&d<=3&&h>=2&&h<=5;
-// where a peak hour's moved classes go, on the same day: 10:00 to 09:00, 11:00 to 14:00, 12:00 to 15:00, 13:00 to 16:00
-const ED_TO=[1,6,7,8];
-// the heat map: each hour's square as dark as the share of rooms booked (orange: data). o.u fills it in, row by row; o.peak outlines
-// the peak in amber; o.move (0 to 1) moves about one peak class in six to other hours (the peak falls to about 78%), and o.chips (0 to
-// 1) flies them there; o.labels: false to leave the axes off; o.deco: every word is decoration (the picture drawn small, once it has
-// been read at full size)
-function ed_heat(c,x,y,cw,ch,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u,mv=clamp(o.move||0,0,1),dz=o.deco?1:0;c.save();c.globalAlpha*=a;
-  if(o.labels!==false){ED_DAYS.forEach((d,i)=>lp_T(c,d,x-16,y+i*ch+ch/2+10,{w:600,size:28,align:"right",col:LP.mut,deco:dz}));
-    [0,2,4,6,8].forEach(h=>lp_T(c,ED_HOURS[h],x+h*cw,y-16,{w:600,size:28,align:"left",col:LP.mut,deco:dz}));}
-  for(let d=0;d<5;d++)for(let h=0;h<10;h++){const fi=clamp(u*5.5-d-h*0.05,0,1);if(fi<=0)continue;let v=ED_WEEK[d][h]/100;
-    // moving one peak class in six: each peak hour gives a sixth of its bookings to one hour off the peak on the same day (ED_TO)
-    if(mv>0&&d>=1&&d<=3){if(ed_peak(d,h))v=v*(1-mv/6);else if(ED_TO.includes(h))v=Math.min(1,v+mv*0.93/6);}
-    c.fillStyle=rgba(mix(LP.paper,LP.orange,Math.pow(v,0.85)),fi);rr(c,x+h*cw+2,y+d*ch+2,cw-4,ch-4,5);c.fill();}
-  if(o.peak>0){c.save();c.globalAlpha*=o.peak;c.strokeStyle=rgba(LP.amber,1);c.lineWidth=6;rr(c,x+2*cw-4,y+ch-4,4*cw+8,3*ch+8,10);c.stroke();c.restore();}
-  // the moved classes in flight (o.chips, 0 to 1): a chip from each peak hour to its hour off the peak, along a low arc, gone as it lands
-  const fl=o.chips==null?0:o.chips;if(fl>0.004&&fl<0.999){for(let d=1;d<=3;d++)ED_TO.forEach((th,i)=>{const hh=2+i,q=clamp(fl*1.25-(d-1)*0.06-i*0.03,0,1);if(q<=0||q>=1)return;
-      const e=ag_sine(q),cx=x+lerp(hh+0.5,th+0.5,e)*cw,cy=y+(d+0.5)*ch-Math.sin(Math.PI*e)*ch*0.7,al=Math.min(1,q/0.12,(1-q)/0.18),sw=cw*0.46,sh=ch*0.46;
-      c.save();c.globalAlpha*=al;c.shadowColor="rgba(52,36,30,0.25)";c.shadowBlur=6;c.shadowOffsetY=3;c.fillStyle=rgba(LP.orange,1);rr(c,cx-sw/2,cy-sh/2,sw,sh,4);c.fill();
-      c.shadowColor="transparent";c.strokeStyle=rgba(LP.paper,1);c.lineWidth=2;rr(c,cx-sw/2,cy-sh/2,sw,sh,4);c.stroke();c.restore();});}
-  if(o.ring>0){c.save();c.globalAlpha*=o.ring;c.strokeStyle=rgba(LP.mut,0.9);c.lineWidth=4;c.setLineDash([10,8]);rr(c,x-4,y-4,2*cw+8,ch+8,10);c.stroke();rr(c,x+6*cw-4,y+4*ch-4,4*cw+8,ch+8,10);c.stroke();c.restore();}
-  c.restore();}
-
-/* ---------------------------------------------------------------- the page and its picture
-   Graham's one page for the University Council, as Ivy writes it with Helena: the decision first (blue), then the answer to the
-   agreed question in one sentence, then three lines; what isn't known (amber); the words its readers use; who would plan the change;
-   and his name. o.p: how far each part has come in, 0 to 1 ({decision, answer, l1, l2, l3, meets, unknown, holds, words, which, sign});
-   o.booked (0 to 1): the first line in the readers' words ("booked") instead of "utilisation"; o.word (0 to 1): "utilisation" lit
-   amber; o.deco: the page drawn small, its words decoration. Returns the sheet's box. */
-const ED_PAGE_W=900,ED_PAGE_H=752,ED_PAGE_MIN=440,ED_PAGE_GROW=[["answer",96],["l1",80],["l2",44],["l3",80],["meets",40],["unknown",50],["holds",36],["words",50],["which",96]];
-function ed_page(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,P=o.p||{},w=ED_PAGE_W,dz=o.deco?1:0,pv=k=>clamp(P[k]==null?0:P[k],0,1);if(a<=0.004)return null;
-  const h=o.h||Math.max(ED_PAGE_MIN,ED_PAGE_GROW.reduce((s,[k,dh])=>s+dh*pv(k),180));ed_pageH=h;const bb=lp_sheet(ctx,x,y,w,h,{a,k:o.k,light:o.light,pin:o.pin===true,col:LP.blue});ctx.save();ctx.globalAlpha*=a;const L=x+44;
-  const line=(k,fn)=>{const v=pv(k);if(v>0.004){ctx.save();ctx.globalAlpha*=v;fn();ctx.restore();}},T_=(s2,xx,yy,q)=>lp_T(ctx,s2,xx,yy,Object.assign({w:600,size:28,deco:dz},q||{}));
-  const dot=(col,yl)=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(L+8,yl-10,6,0,TAU);ctx.fill();};
-  line("decision",()=>{T_("FOR DECISION \u00B7 THE UNIVERSITY COUNCIL, 24 JUNE",L,y+64,{w:700,ls:2.5,col:LP.blue});T_("A new teaching building now, or not yet?",L,y+114,{w:700,size:40});});
-  line("sign",()=>{T_("From Graham Ellis, Director of Facilities",L,y+154,{col:LP.mut});});
-  line("answer",()=>{T_("Rooms are short only from 10:00 to 14:00,",L,y+210,{w:800,size:32});T_("Tuesday to Thursday.",L,y+250,{w:800,size:32});});
-  line("l1",()=>{dot(LP.orange,y+300);const b=clamp(o.booked||0,0,1),sw=clamp(o.word||0,0,1);
-    // the first line, in "utilisation", then in the readers' words: the old leaves before the new comes, never both at once
-    const oa=clamp(1-b*2,0,1),na=clamp(b*2-1,0,1);
-    if(oa>0){ctx.save();ctx.globalAlpha*=oa;if(sw>0){const tw=lp_tw(ctx,"Utilisation",{w:600,size:28});ctx.fillStyle=rgba(LP.amber,0.3*sw);rr(ctx,L+28,y+270,tw+12,40,6);ctx.fill();}
-      T_("Utilisation at the peak: 93%;",L+34,y+300);ctx.restore();}
-    if(na>0){ctx.save();ctx.globalAlpha*=na;T_("At the peak, 93% of rooms are booked;",L+34,y+300);ctx.restore();}
-    T_("at other hours, about 1 in 5",L+34,y+336);});
-  line("l2",()=>{dot(LP.orange,y+380);T_("In 1 booked hour in 5, nobody came",L+34,y+380);});
-  line("l3",()=>{dot(LP.blue,y+424);T_("Not to build: move about 1 peak class in 6, and release",L+34,y+424);T_("booked rooms nobody uses",L+34,y+460);});
-  line("meets",()=>{T_("That meets Planning's forecast to 2030: 6% more students",L+34,y+500,{w:700,col:LP.green});});
-  line("unknown",()=>{ctx.fillStyle=rgba(LP.amber,1);ctx.fillRect(L,y+522,6,pv("holds")>0?78:38);T_("Not known: how many students there will be by 2030",L+24,y+550,{w:700,col:LP.amber});});
-  line("holds",()=>{T_("Growth twice as fast: the peak is no fuller than today",L+24,y+586);});
-  line("words",()=>{T_("Booked: reserved for a class \u00B7 Used: people in it",L,y+636,{col:LP.mut});});
-  line("which",()=>{T_("The registrar's office would plan which classes move,",L,y+680);T_("with the faculties, from Semester 1 2028",L,y+716);});
-  ctx.restore();return bb;}
-// one part of the page lit for a moment, while the voice says it: a soft band behind the line (col), from y0 to y1 on the page, never
-// past the foot of the page as it was last drawn (ed_pageH: the page grows as it's written)
-let ed_pageH=ED_PAGE_H;
-function ed_pageLight(ctx,x,y,y0,y1,col,a){y1=Math.min(y1,ed_pageH-10);if(a<=0.004||y1<=y0+4)return;ctx.save();ctx.fillStyle=rgba(col,0.13*a);rr(ctx,x+24,y+y0,ED_PAGE_W-48,y1-y0,8);ctx.fill();ctx.restore();}
-// the picture beside the page: the week's heat map on its own sheet, with the peak and what the rest of the week holds
-function ed_picture(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null;const w=o.w||760,h=o.h||560,dz=o.deco?1:0,bb=lp_sheet(ctx,x,y,w,h,{a,k:o.k,light:o.light,pin:o.pin,col:LP.orange});
-  ctx.save();ctx.globalAlpha*=a;lp_T(ctx,"THE WEEK, HOUR BY HOUR",x+40,y+70,{w:700,size:28,ls:2.5,col:LP.orange,deco:dz});lp_T(ctx,"Rooms booked",x+40,y+124,{w:700,size:40,deco:dz});
-  const gx=x+130,gy=y+200,cw=(w-170)/10,ch=Math.min(o.ch||54,(h-300)/5);ed_heat(ctx,gx,gy,cw,ch,{u:o.u,peak:o.peak,move:o.move,chips:o.chips,deco:o.deco,ring:o.ring});
-  const lab=o.labels==null?1:o.labels,av=o.avg==null?lab:o.avg;if(av>0)lp_T(ctx,"Week's average: 38%",x+w-40,y+124,{w:600,size:28,align:"right",col:LP.mut,a:av,deco:dz});
-  if(lab>0){ctx.save();ctx.globalAlpha*=lab;
-    const pk=o.peakLab==null?lab:o.peakLab,ot=o.otherLab==null?lab:o.otherLab;
-    if(pk>0)lp_T(ctx,"93%",gx+4*cw,gy+2.5*ch+15,{w:800,size:44,align:"center",color:"rgba(255,255,255,"+(pk*ctx.globalAlpha)+")",deco:dz});
-    if(ot>0)lp_T(ctx,"Other hours: about 1 in 5",gx,gy+5*ch+52,{w:600,size:28,col:LP.mut,a:ot,deco:dz});ctx.restore();}
-  ctx.restore();return {bb,gx,gy,cw,ch};}
+/* ---------------------------------------------------------------- Helena's corner
+   Helena at the round table: alone, with her two sheets (o.sheets), or with someone across from her (o.who2). o.lean (0 to 1): she
+   leans in; o.he, o.ie: their faces; o.write (0 to 1): her pen on the sheet; o.t0: when the shot starts (two people cross the lawn
+   outside once, from then). Returns {helena, who2}: their joints. */
+const ED_SITH={mode:"sit",lean:2,head:0,aN:[24,76],aF:[28,80],lN:[86,3],lF:[82,-5]},ED_SITH2={mode:"sit",lean:13,head:-5,aN:[40,80,"open"],aF:[36,78],lN:[86,5],lF:[82,-6]};
+const ED_SITI={mode:"sit",lean:6,head:6,aN:[26,74,"grip"],aF:[30,78,"grip"],lN:[86,8],lF:[82,-2]};
+function ed_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=ED_CO,lean=o.lean||0,t0=o.t0||0,lw={lw:3.4,far:0,sh:5},r={},wr=o.write||0;
+  x.save();x.beginPath();x.rect(win[0],win[1],win[2],win[3]);x.clip();
+  for(const [i,ts,d,left,dy,h] of [[3,t0+1,22,false,34,92],[9,t0+8,26,true,24,96]]){if(tt<ts||tt>ts+d)continue;
+    PK.walk(x,PK.extra(i),tt,{x0:left?win[0]+win[2]+40:win[0]-40,x1:left?win[0]-40:win[0]+win[2]+40,t0:ts,t1:ts+d,floor:win[1]+win[3]-dy,h},{far:0.55,shade:0});}
+  x.restore();PK.windowFrame(x,win[0],win[1],win[2],win[3],{});
+  const hp=PK.poseMix(ED_SITH,ED_SITH2,Math.max(lean,0.6*wr)),W2=o.who2;
+  S.begin(x,lw);PK.chair(x,hx-10,F,H,false,{});if(W2)PK.chair(x,ix+10,F,H,true,{col:PK.PAL.chair2});
+  const W1=o.who1||"helena";PK.person(x,W1,hx,F,H,hp,{t:tt,part:"lower"});if(W2)PK.person(x,W2,ix,F,H,ED_SITI,{t:tt+1,flip:true,part:"lower"});
+  S.begin(x,lw);PK.table(x,tx,ty,rx,F);
+  S.begin(x,{lw:2.6,far:0,sh:3});PK.mug(x,tx+150,ty+10,0.9,PK.col("mug2"),tt,true);
+  // the two sheets on the table: the chart (its boxes in blue) and the list (its lines in orange)
+  if(o.sheets){S.begin(x,{lw:2.4,sh:3});for(const [sx,col,k] of [[tx-150,PK.C.orange,1],[tx-10,PK.C.blue,0]]){S.poly(x,[[sx-60,ty-4,1],[sx+60,ty-10,1],[sx+84,ty+8,1],[sx-40,ty+16,1]],[250,248,240],{exact:true});
+    S.line(x,c=>{for(let i=0;i<3;i++){c.moveTo(sx-34+i*6,ty+2-i*5);c.lineTo(sx+50+i*6,ty-2-i*5);}},col,0.6);}}
+  if(o.book){S.begin(x,{lw:2.6,far:0,sh:3});PK.notebook(x,tx-200,ty+4,1.1,{});}
+  if(o.laptop){S.begin(x,{lw:2.6,far:0,sh:3});PK.laptop(x,tx-150,ty+6,{k:1.25,glow:true});r.laptop=[tx-150,ty-70];}
+  const pen=[U.lerp(790,tx-130,wr),ty-6];
+  r.helena=r.who1=PK.person(x,W1,hx,F,H,hp,Object.assign({t:tt,part:"upper",expr:o.he,gaze:o.hg||[1,0.25],reachN:o.handN||(wr>0.01?pen:[790,ty-4]),reachF:o.handF||[806,ty-12],hold:o.hold||(wr>0.3?PK.inHand.pen("blue"):null),holds:!!(o.hold||wr>0.3)},o.hf||{}));
+  if(W2)r.who2=PK.person(x,W2,ix,F,H,ED_SITI,Object.assign({t:tt+1,flip:true,part:"upper",expr:o.ie,gaze:o.ig||[1,0.3],reachN:[1150,ty-6],reachF:[1128,ty-2]},o.iface||{}));
+  return r;}
 
 
-/* ---------------------------------------------------------------- Ivy's first draft: twelve pages, in the order of the work
-   Small pages in a row; the first with the week's average as its chart; the ninth with the answer, lit when the voice says it. o.u
-   spreads them; o.nine (0 to 1) lights page nine. */
-function ed_draft(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u,pw=104,ph=140,gap=20;ctx.save();ctx.globalAlpha*=a;
-  for(let i=11;i>=0;i--){const tx=lerp(x,x+i*(pw+gap),ag_eo(clamp(u*1.4-i*0.035,0,1))),ty=y;const lit=i===8?clamp(o.nine||0,0,1):0;
-    ctx.save();ctx.shadowColor="rgba(52,36,30,0.22)";ctx.shadowBlur=10;ctx.shadowOffsetX=LP.sdx*0.5;ctx.shadowOffsetY=5;ctx.fillStyle=rgba(LP.paper,1);ctx.fillRect(tx,ty,pw,ph);ctx.restore();
-    if(lit>0){ctx.strokeStyle=rgba(LP.blue,lit);ctx.lineWidth=6;ctx.strokeRect(tx-3,ty-3,pw+6,ph+6);}
-    ctx.strokeStyle=rgba(LP.mut,0.35);ctx.lineWidth=3;for(let k=0;k<7;k++){if(i===0&&k>=2&&k<=5)continue;ctx.beginPath();ctx.moveTo(tx+14,ty+22+k*16);ctx.lineTo(tx+(k%3===2?60:90),ty+22+k*16);ctx.stroke();}
-    if(i===0){ctx.fillStyle=rgba(LP.orange,1);ctx.fillRect(tx+30,ty+66,26,40);ctx.fillStyle=rgba(LP.mut,0.4);ctx.fillRect(tx+14,ty+106,76,3);}
-    if(i===8){ctx.fillStyle=rgba(LP.blue,0.85);ctx.fillRect(tx+14,ty+52,76,12);}}
-  ctx.restore();}
 
-/* ---------------------------------------------------------------- the pyramid (after Barbara Minto)
-   The answer at the top, the reasons under it, the evidence under each: boxes in blue (a design for a page). u builds it, top down. */
-function ed_pyramid(ctx,cx,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u;ctx.save();ctx.globalAlpha*=a;
-  const box=(bx,by,bw,bh,txt,al,solid)=>{if(al<=0.004)return;ctx.save();ctx.globalAlpha*=al;ctx.fillStyle=solid?rgba(LP.blue,1):rgba(mix(LP.paper,LP.blue,0.08),1);ctx.strokeStyle=rgba(LP.blue,1);ctx.lineWidth=4;rr(ctx,bx,by,bw,bh,10);ctx.fill();ctx.stroke();
-    if(txt)lp_T(ctx,txt,bx+bw/2,by+bh/2+11,{w:700,size:30,align:"center",col:solid?[255,255,255]:LP.blue});ctx.restore();};
-  const l=(x0,y0,x1,y1,al)=>{if(al<=0.004)return;ctx.save();ctx.globalAlpha*=al;ctx.strokeStyle=rgba(LP.blue,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();ctx.restore();};
-  const a1=clamp(u*3,0,1),a2=clamp(u*3-1,0,1),a3=clamp(u*3-2,0,1);
-  box(cx-170,y,340,72,"The answer",a1,true);
-  [-1,0,1].forEach((k,i)=>{l(cx,y+72,cx+k*240,y+150,a2);box(cx+k*240-100,y+150,200,64,"A reason",a2,false);
-    [-1,1].forEach(s=>{l(cx+k*240,y+214,cx+k*240+s*58,y+282,a3);box(cx+k*240+s*58-46,y+282,92,52,"",a3,false);});});
-  if(a3>0)lp_T(ctx,"The evidence under each",cx,y+390,{w:600,size:28,align:"center",col:LP.mut,a:a3});
-  ctx.restore();}
+/* ---------------------------------------------------------------- a teaching room: the door with its room's name, the sensor above it
+   Ivy and Sam look at the sensor over the door, which counts the people in the room every hour.
+   o.people: [{fl, draw(x)}], drawn far to near; o.plate (0 to 1): the room's name by the door */
+const ED_LE2=PK.ROOMS.lecture;
+function ed_room(x,tt,o){o=o||{};if((o.plate||0)>0.004)PK.tag(x,560,420,"B-204",o.plate,{});
+  (o.people||[]).slice().sort((a,b)=>a.fl-b.fl).forEach(p=>p.draw(x));}
 
-/* ---------------------------------------------------------------- a route on one picture, for anything that crosses teams */
-function ed_route(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u,S=[["The timetable",LP.orange],["The sensors",LP.orange],["The models",LP.orange],["Graham's page",LP.blue]];
-  ctx.save();ctx.globalAlpha*=a;S.forEach(([s,col],i)=>{const al=clamp(u*4-i,0,1);if(al<=0.004)return;const bx=x+i*262,bw=222;ctx.save();ctx.globalAlpha*=al;ctx.fillStyle=rgba(LP.paper,1);ctx.strokeStyle=rgba(col,1);ctx.lineWidth=4;rr(ctx,bx,y,bw,76,10);ctx.fill();ctx.stroke();
-    lp_T(ctx,s,bx+bw/2,y+48,{w:700,size:28,align:"center",col:LP.ink});if(i>0){ctx.strokeStyle=rgba(LP.mut,0.8);ctx.fillStyle=rgba(LP.mut,0.8);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(bx-36,y+38);ctx.lineTo(bx-8,y+38);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(bx-4,y+38);ctx.lineTo(bx-16,y+30);ctx.lineTo(bx-16,y+46);ctx.closePath();ctx.fill();}ctx.restore();});ctx.restore();}
+/* ---------------------------------------------------------------- what a screen shows, close: a callout's rows of words, and bars.
+   rows: [text, col, size]; bars: [[label, n, of, col]] */
+function ed_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
+  if(head){ag_T(cc,head.toUpperCase(),bx+30,y,{w:800,size:28,ls:3,color:U.css(hc||PK.C.amber)});y+=52;}
+  for(const [s,col,size] of rows||[]){ag_T(cc,s,bx+30,y,{w:700,size:size||34,color:U.css(col||PK.C.ink)});y+=(size||34)+16;}
+  for(const [lab,n,of,col] of bars||[]){const w=(bw-60)*n/of;PK.S.begin(cc,{lw:2});PK.S.fill(cc,c=>c.rect(bx+30,y-6,w,30),col,{w:0.6});
+    ag_T(cc,lab,bx+30,y+62,{w:700,size:30,color:U.css(PK.C.ink)});y+=96;}}
 
-/* ---------------------------------------------------------------- five squares, one empty: in one booked hour in five, nobody came */
-function ed_fifth(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const u=o.u==null?1:o.u;ctx.save();ctx.globalAlpha*=a;
-  for(let i=0;i<5;i++){const al=clamp(u*5-i,0,1);if(al<=0.004)continue;ctx.save();ctx.globalAlpha*=al;rr(ctx,x+i*84,y,70,70,8);if(i<4){ctx.fillStyle=rgba(LP.orange,1);ctx.fill();}else{ctx.strokeStyle=rgba(LP.orange,1);ctx.lineWidth=5;ctx.stroke();}ctx.restore();}ctx.restore();}
 
-/* ---------------------------------------------------------------- a long table in the University Council's room, seen from the front */
-function ed_councilTable(ctx,x,y,w,o){return lp_table(ctx,x,y,w,Object.assign({depth:80,floor:1000},o||{}));}
-// a stack of papers on a table, the top one's title showing (o.title), o.n sheets
-function ed_pile(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const n=Math.round(o.n||14),w=o.w||300;ctx.save();ctx.globalAlpha*=a;
-  for(let i=0;i<n;i++){const yy=y-i*7,dx=Math.sin(i*2.1)*6;ctx.fillStyle=rgba(mix(LP.paper,LP.shade,i%2?0.08:0.03),1);ctx.fillRect(x+dx,yy-6,w,7);ctx.fillStyle=rgba(LP.shade,0.12);ctx.fillRect(x+dx,yy,w,1.5);}
-  ctx.restore();}
+
+
+
+/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+// 0. Daniels's count in 1952, on his office's board: how many of the flyers were average, measurement by measurement
+const ed_boardO=(sc,w)=>[
+  {s:"4,063 flyers",x:70,y:110,size:64,col:"orange",at:w("height","men",-0.6),d:0.8},
+  {s:"height · 1,055",x:110,y:220,size:58,at:w("height","height",-0.3),d:0.9},
+  {s:"chest · 302",x:560,y:220,size:58,at:w("chest","chest",-0.3),d:0.8},
+  {s:"143 · 73 · 28 · 12",x:170,y:330,size:58,at:w("fewer","fewer",-0.1),d:1.2},
+  {s:"6 · 3 · 2",x:700,y:330,size:58,at:w("fewer","six",-0.2),d:0.9},
+  {s:"all ten · not one",x:520,y:450,size:64,col:"amber",at:w("none","not one",-0.4),d:0.9,marks:[["under","amber",null,0.3]]}];
+// 1. Minto's pyramid (Carmen, at the team's board)
+const ed_boardA=(sc,w)=>[
+  {s:"The pyramid · Minto",x:70,y:110,size:58,col:"blue",at:w("minto","pyramid",-0.3),d:1.0},
+  {s:"1 · the answer",x:110,y:220,size:58,col:"green",at:w("minto","answer",-0.2),d:0.8},
+  {s:"2 · the reasons",x:330,y:330,size:56,at:w("minto","reasons",-0.2),d:0.8},
+  {s:"3 · the evidence under each",x:540,y:440,size:52,at:w("minto","evidence",-0.2),d:1.1}];
+// 2. show the data, to whom (Carmen)
+const ed_boardB=(sc,w)=>[
+  {s:"Tufte",x:70,y:110,size:56,col:"blue",at:w("tufte","Tufte's",-0.2),d:0.5},
+  {s:"above all else, show the data",x:110,y:210,size:52,at:w("tufte","show the data",-0.6),d:1.2},
+  {s:"Knaflic",x:70,y:320,size:56,col:"green",at:w("knaflic","Knaflic's",-0.2),d:0.6},
+  {s:"know who · the one thing",x:520,y:430,size:52,at:w("knaflic","know who",-0.2),d:1.1}];
+
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+// 1. fit the range (the designers' notebook, 1952 onwards)
+const ed_note1=(sc,w)=>[
+  {s:"Fit the range",x:70,y:124,size:80,w:760,col:"blue",at:w("range","range",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
+  {s:"5 ft 5 to 6 ft 1",x:110,y:262,size:60,col:"orange",at:w("range","five foot five",-0.3),d:1.0},
+  {s:"nine flyers in ten",x:110,y:372,size:60,col:"green",at:w("range","nine flyers",-0.2),d:0.9},
+  {s:"not the average",x:110,y:482,size:60,col:"amber",at:w("fit","not the average",-0.2),d:0.8}];
+// 2. Ivy's page, top first (the decision, the answer, three lines)
+const ed_note2=(sc,w)=>[
+  {s:"Council · 1 June",x:70,y:124,size:72,w:760,col:"blue",at:w("decision","Ivy's page",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
+  {s:"A new building now, or not yet?",x:110,y:240,size:48,col:"blue",at:w("decision","new building",-0.3),d:1.1},
+  {s:"Short only 10 to 2, Tue to Thu",x:110,y:340,size:48,col:"green",at:w("answer","one sentence",-0.2),d:1.1},
+  {s:"the peak · unused bookings",x:150,y:440,size:46,at:w("three","the peak",-0.2),d:1.0},
+  {s:"what not building takes",x:150,y:530,size:46,at:w("three","what it would take",-0.2),d:0.9}];
+// 3. what the average hid (Ivy)
+const ed_note3=(sc,w)=>[
+  {s:"What it turns on",x:70,y:124,size:76,w:760,col:"blue",at:w("hides","hides",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
+  {s:"the week: 38%",x:110,y:250,size:56,col:"mut",at:w("hides","average",-0.2),d:0.8},
+  {s:"10 to 2, Tue to Thu: 93%",x:110,y:350,size:54,col:"orange",at:w("peak","Tuesday",-0.4),d:1.0},
+  {s:"booked, nobody: 1 in 5",x:110,y:450,size:54,col:"amber",at:w("used","nobody",-0.6),d:0.9}];
+// 4. what isn't known, in their words (Ivy)
+const ed_note4=(sc,w)=>[
+  {s:"Not to build",x:70,y:124,size:76,w:760,col:"blue",at:w("take","not to build",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
+  {s:"move 1 peak class in 6",x:110,y:250,size:52,col:"green",at:w("take","move",-0.2),d:0.9},
+  {s:"release rooms nobody uses",x:110,y:340,size:52,col:"green",at:w("take","release",-0.2),d:0.9},
+  {s:"not known: students by 2030",x:110,y:440,size:50,col:"amber",at:w("unknown","isn't known",-0.2),d:1.0},
+  {s:"holds at twice the growth",x:110,y:540,size:50,at:w("holds","twice",-0.4),d:0.9}];
+// 5. on Monday (Helena, at the team's board)
+const ed_boardM=(sc,w)=>[
+  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("one","On Monday",0),d:0.6},
+  {s:"the decision, then the answer",x:110,y:210,size:50,at:w("one","decision",-0.1),d:1.1},
+  {s:"show what it turns on",x:200,y:300,size:50,col:"orange",at:w("two","Show",0),d:0.9},
+  {s:"say what you don't know",x:290,y:390,size:50,col:"amber",at:w("three","don't know",-0.3),d:1.0},
+  {s:"try it on someone new",x:380,y:470,size:50,col:"green",at:w("four","Try it",0),d:0.9}];
 
 /* ===== Explaining so people can decide: the chapters, shot by shot =====
-   Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's recorded
-   again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
-   a room (later:true) lets what was there leave first; between rooms a shot dissolves, or cuts where the two show the same things.
-   Sizes in the 1920 x 1080 frame. */
-
+   The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
+   says, and the words on the frame are where and when, a name, or what someone says; what a screen shows is in a callout from it. The
+   ideas are written by hand: Daniels's board in 1952, Carmen Vidal's board, and the designers', Ivy's and Helena's notebooks
+   (ed_uni.js). The Air Force of 1950 to 1952 is in edp_air.js. Every time comes from the voice: a line's start (sc.cues) or a word
+   in it (wAt). */
+const ed_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,1,"Explaining so people can decide",a);}};
+function ed_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.mid?960:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.mid?"center":o.right?"right":"left"});}
+const ed_imagined=(ctx,S,t,t0,t1,text)=>{const a=ag_io(t,t0,t1,0.5);if(a>0.004){setScreen(ctx,S);PK.sceneTag(ctx,text,a);}};
+const ed_bub=(x,J,tt,t0,t1,lines,cam,o)=>{if(J)PK.say(x,J,lines,ag_io(tt,t0,t1==null?1e9:t1,0.3),Object.assign({cam},o||{}));};
+const ed_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
+const ed_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
+// someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
+const ed_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},base||{});const g=base.gaze[1],ev=[],K=["look","nod","smile"];
+  for(let k=0;k<30;k++){const at=(t0||0)+1.8+i*1.1+k*5.6,kind=K[(k+Math.round(i))%3];ev.push(kind==="look"?[at,"look",2.2,[1,g+((k+Math.round(i))%2?0.45:-0.35)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
+  return PK.face(tt,base,ev);};
+const ed_talk=(base,tt,spans)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,...spans.map(([a,b])=>PK.talk(tt,a,b)*0.75));return e;};
+const ed_sp=(tt,i,spans,base,g)=>ed_alive(tt,{expr:ed_talk(base||"listen",tt,spans),gaze:[1,g==null?-0.2:g]},i);
+const ed_come=(cc,who,tt,x0,x1,t0,t1,fl,h,o)=>{o=o||{};const flip=o.flip!=null?o.flip:x1<x0;if(tt<t0)return null;if(tt<t1)return PK.walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:o.then||"stand"},Object.assign({flip:x1<x0},o.face||{}));
+  return PK.person(cc,who,x1,fl,h,o.then||"stand",Object.assign({t:tt,flip},o.face||{},o.hold?{hold:o.hold,holds:true}:{}));};
+const ED_HEV=Array.from({length:40},(_,k)=>k%2?[1.6+k*4.8,"nod"]:[1.6+k*4.8,"look",2.2,[1,0.35]]);
 const ED_LAST="Lead with the decision; show what it turns on.";
-// the film's number and title at the top left, from the second chapter on
-function ed_kick(ctx,S,a){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"2","Explaining so people can decide",{a});}
-// a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
-function ed_sheet(ctx,t,t0,x,y,w,words,o){o=o||{};const a=ag_in(t,t0,0.35)*(o.out!=null?1-ag_in(t,o.out,0.4):1);if(a<=0.004)return null;
-  return lp_textSheet(ctx,x,y,w,words,Object.assign({},o,{a,k:t-t0}));}
-// lines that come in one by one, each at its own time: lp_textSheet's u
-const ed_u=(t,ts)=>ts.reduce((s,t0)=>s+ag_in(t,t0,0.5),0)/ts.length;
-// a tag that comes in at t0 and goes at t1 (null: stays)
-function ed_tag(ctx,t,t0,t1,x,y,text,o){const a=ag_io(t,t0,t1==null?1e9:t1,0.4);return a>0.004?lp_tag(ctx,x,y,text,Object.assign({},o,{a})):null;}
-// a green tick in a disc, springing in from t0 (and going with a)
-function ed_tick(ctx,t,t0,x,y,a){if(t<t0)return;const f=lerp(0.6,1,ag_spr(t-t0,0,0.5));ctx.save();ctx.globalAlpha*=ag_in(t,t0,0.3)*(a==null?1:a);ctx.fillStyle=rgba(LP.green,1);
-  ctx.beginPath();ctx.arc(x,y,22*f,0,TAU);ctx.fill();lp_icon(ctx,"tick",x,y,30*f,[255,255,255]);ctx.restore();}
-// a tag's width, to set a tick at its end
-const ed_tagW=(ctx,text)=>lp_tw(ctx,text,{w:700,size:28})+52;
-// things that fade together as one picture (a person behind a table): drawn whole on a canvas of their own first, then laid down at a
-function ed_group(ctx,a,fn){if(a<=0.004)return;if(a>=0.996){fn(ctx);return;}const cv=ctx.canvas,[bc,bx]=ag_buf("edGroup",cv.width,cv.height);
-  bx.setTransform(ctx.getTransform());try{fn(bx);}finally{bx.setTransform(1,0,0,1,0,0);}
-  const ga=ctx.globalAlpha;ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ga*a;ctx.drawImage(bc,0,0);ctx.restore();}
-// the page and its picture, where they sit side by side: the page under the kicker on the left, the picture beside it on the right
-const ED_PG={x:96,y:124},ED_PIC={x:1030,y:214,w:760,h:560,ch:54};
-// the page's parts, all in (the University Council's page as Ivy finishes it); o adds or changes some
-const ed_all=o=>Object.assign({decision:1,sign:1,answer:1,l1:1,l2:1,l3:1,meets:1,unknown:1,holds:1,words:1,which:1},o||{});
-// the page drawn small (a copy, a print): its words are decoration there, read at full size before
-function ed_pageSmall(ctx,x,y,s,o){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const bb=ed_page(ctx,0,0,Object.assign({deco:true},o));ctx.restore();return bb;}
-function ed_pictureSmall(ctx,x,y,s,o){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const r=ed_picture(ctx,0,0,Object.assign({deco:true},o));ctx.restore();return r;}
+// a screen's callout from the monitor at the desk by the window
+const ed_screenCall=(x,R,a,head,rows,hc,o)=>{o=o||{};const D=R&&R.marta&&R.marta.desk;const tip=D?[150,D.top-120]:[150,620];
+  PK.callout(x,o.bx==null?720:o.bx,o.by==null?110:o.by,o.bw||720,o.bh||250,tip,a,(cc,bx,by,bw,bh)=>ed_panel(cc,bx,by,bw,bh,head,rows,o.bars||null,hc));};
+// the team's room with someone at the desk by the window (o.at, default Ivy); o.ivy: their face
+const ed_atRoom=(x,tt,t0,o)=>{o=o||{};return ed_team(x,tt,{clock:o.clock==null?10:o.clock,deskWho:o.at||"ivy",marta:Object.assign({work:o.work==null?1:o.work,turn:0},o.ivy||ed_alive(tt,{expr:"think",gaze:[1,0.3]},3,t0)),
+  sam:o.sam===null?null:Object.assign({work:1},ed_alive(tt,{},1,t0)),jun:o.jun===null?null:Object.assign({work:1},ed_alive(tt,{},2,t0)),show:PK.onScreen.chat(0,{}),people:o.people||[]});};
+// the week's heat map, on a screen: the days down the side, the hours from 8 to 6 across, each hour as dark as the share of rooms
+// booked; pk (0 to 1): the peak's hours picked out in amber
+const ED_DAYS=["Mon","Tue","Wed","Thu","Fri"];
+const ed_share=(d,h)=>{if(d>=1&&d<=3&&h>=2&&h<=5)return 0.93;if((d===0&&h<4)||(d===4&&h>=6))return 0.06;return 0.2;};
+function ed_heat(cc,bx,by,bw,bh,pk){const U=PK.u,S=PK.S;ag_T(cc,"ROOMS BOOKED, BY HOUR",bx+30,by+54,{w:800,size:28,ls:3,color:U.css(PK.C.orange)});
+  const x0=bx+130,y0=by+84,cw=(bw-170)/10,ch=(bh-150)/5;
+  for(let d=0;d<5;d++){ag_T(cc,ED_DAYS[d],bx+30,y0+d*ch+ch*0.7,{w:700,size:28,color:U.css(PK.C.ink)});
+    for(let h=0;h<10;h++){const v=ed_share(d,h),col=U.mix([250,246,236],PK.C.orange,v);S.begin(cc,{lw:1.4});S.fill(cc,c=>c.rect(x0+h*cw+2,y0+d*ch+2,cw-4,ch-4),col,{flat:true});
+      if(pk>0.004&&v>0.9){cc.save();cc.globalAlpha*=pk;S.line(cc,c=>c.rect(x0+h*cw+2,y0+d*ch+2,cw-4,ch-4),PK.C.amber,1.0);cc.restore();}}}
+  for(const [h,lab] of [[0,"8"],[2,"10"],[6,"2"],[9,"5"]])ag_T(cc,lab,x0+h*cw+6,y0+5*ch+40,{w:700,size:28,color:U.css(PK.C.mut)});}
+// the team's room with a callout of a heat map from the screen by the window
+const ed_heatCall=(x,R,a,pk)=>{const D=R&&R.marta&&R.marta.desk;PK.callout(x,720,90,760,420,D?[150,D.top-120]:[150,620],a,(cc,bx,by,bw,bh)=>ed_heat(cc,bx,by,bw,bh,pk));};
+// Helena standing by Ivy's desk, her notebook under her arm (fl, x: where)
+const ed_helena=(tt,face,o)=>({fl:(o&&o.fl)||930,draw:cc=>{o=o||{};const J=PK.person(cc,"helena",o.x||1560,o.fl||930,ed_hT(o.fl||930),"clasp",Object.assign({t:tt+4,flip:o.flip!==false,underF:PK.inHand.notebook({}),holds:true},face));if(o.out)o.out.J=J;}});
 
-/* ---------------------------------------------------------------- 1. No average pilot: 1950 to 1952 */
-scene("pilot",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),lab={light:"day"},ofc={light:"morning"};
-  // the drawing office's three sheets, pinned in a row: the average man, a door built to his height, a cockpit
-  const P1={x:70,y:150,w:450,h:700},P2={x:560,y:150,w:620,h:700},P3={x:1220,y:150,w:630,h:700},HS=ed_heights(6),ORD=[2,5,0,3,1,4];
-  // the count's ten steps, each on the word that says it: 1,055, 302, 143, 73, 28, 12, 6, 3, 2, and none
-  const steps=tt=>[w("height","one",-0.1),w("chest","three",-0.1),w("fewer","hundred",-0.1),w("fewer","seventy",-0.1),w("fewer","twenty",-0.1),
-    w("fewer","twelve",-0.1),w("fewer","six",-0.1),w("fewer","six",0.3),w("fewer","two",-0.1),w("none","not",-0.1)].map(t0=>ag_in(tt,t0,0.7));
-  // Daniels at his desk, as one picture, so he can leave whole
-  const daniels=(x,tt,a)=>ed_group(x,a,g=>{lp_person(g,ED_PEOPLE.daniels,400,610,1.0,{t:tt,light:ofc,cut:874});lp_table(g,90,880,640,{depth:90});});
+/* ---------------------------------------------------------------- 1. No average pilot */
+scene("pilot",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tW=c.why-0.4,tD=c.door-0.4,tK=c.cockpit-0.4,tN=c.daniels-0.4,tB=c.height-0.4,tT=c.note-0.4,tR=c.range-0.4,tS=c.seats-0.4,tC=c.car-0.4,tA=c.data-0.4;
+  const BO=PK.pace(ctx,EDP_FOLK.daniels,ed_boardO(sc,w)),N1=PK.pace(ctx,null,ed_note1(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the measuring room, 1950: a flyer at the board, the measurer writing each figure on a card
-    {at:0,place:"edLab",keys:[[0,1010,560,1.1],[0.4,960,540,1.0]],d:3,draw:(x,tt)=>{
-      ed_board(x,632,150,1080,lerp(250,344,ag_in(tt,w("when","measured",-0.4),1.2)),1);
-      lp_person(x,ED_PEOPLE.flyer,860,640,1.0,{t:tt,light:lab});
-      lp_person(x,ED_PEOPLE.measurer,1450,650,1.0,{t:tt,flip:true,pose:"hold",hold:ed_card,light:lab});
-      ed_sheet(x,tt,w("when","nineteen",-0.3),96,150,480,{kick:"1950",title:"The United States Air Force",lines:["More than 4,000 flyers measured","132 measurements each"]},
-        {light:"day",out:c.why-0.4,u:ed_u(tt,[w("when","thousand",-0.2),w("when","hundred",-0.2)])});
-      ed_sheet(x,tt,w("why","designed",-0.2),96,150,480,{kick:"The figures went to",title:"The designers",lines:["Flying suits","Helmets","Cockpits"]},
-        {col:LP.blue,light:"day",u:ed_u(tt,[w("why","suits",-0.2),w("why","helmets",-0.2),w("why","cockpits",-0.2)])});}},
-    // the designers' drawing office: the average man, a door built to his height, and a cockpit
-    {at:c.avg-0.4,place:"edDraw",dis:1.6,keys:[[c.avg-0.4,860,540,1.12],[c.door-0.8,960,540,1.0]],draw:(x,tt)=>{
-      const t1=c.avg+0.1,t2=c.door-0.3,t3=c.cockpit-0.3,a1=ag_in(tt,t1,0.35),a2=ag_in(tt,t2,0.35),a3=ag_in(tt,t3,0.35);
-      if(a1>0.004){lp_sheet(x,P1.x,P1.y,P1.w,P1.h,{a:a1,k:tt-t1,col:LP.blue,light:"late"});x.save();x.globalAlpha*=a1;
-        lp_T(x,"The average man",P1.x+40,P1.y+100,{w:800,size:40});lp_T(x,"About 5 ft 9 in",P1.x+40,P1.y+146,{w:600,size:28,col:LP.mut});
-        ed_manikin(x,P1.x+190,P1.y+670,370,{a:ag_in(tt,w("avg","average",-0.2),0.8)});
-        ed_dim(x,P1.x+360,P1.y+300,P1.y+670,null,{a:ag_in(tt,w("avg","five",-0.2),0.6)});x.restore();
-        ed_tag(x,tt,w("easy","easiest",-0.1),null,P1.x+P1.w/2,P1.y+200,"The easiest to fit?",{align:"center"});
-        ed_tag(x,tt,w("easy","commonest",-0.1),null,P1.x+P1.w/2,P1.y+264,"The commonest?",{align:"center"});}
-      if(a2>0.004){const st=ag_in(tt,w("door","stoop",-0.7),0.9);lp_sheet(x,P2.x,P2.y,P2.w,P2.h,{a:a2,k:tt-t2,col:LP.blue,light:"late"});x.save();x.globalAlpha*=a2;
-        lp_T(x,"A door built to his height",P2.x+40,P2.y+100,{w:800,size:40});
-        ed_row(x,610,1130,820,{n:6,hs:HS,order:ORD,ppi:4.1,lintel:69,lintelU:ag_in(tt,w("door","doorway",-0.2),0.9),stoop:st,risk:st});x.restore();
-        ed_tag(x,tt,w("door","half",-0.1),null,P2.x+P2.w/2,P2.y+200,"About half would stoop",{align:"center",col:LP.amber});}
-      if(a3>0.004){lp_sheet(x,P3.x,P3.y,P3.w,P3.h,{a:a3,k:tt-t3,col:LP.blue,light:"late"});x.save();x.globalAlpha*=a3;
-        lp_T(x,"In a cockpit",P3.x+40,P3.y+100,{w:800,size:40});
-        ed_cockpit(x,1405,760,0.5,{lw:1.7,pilots:[{k:0.88}],reach:"switch",gaps:ag_in(tt,w("cockpit","reach",-0.3),0.6)});x.restore();
-        ed_tag(x,tt,w("cockpit","control",-0.1),null,P3.x+P3.w/2,P3.y+150,"A control just out of reach",{align:"center",col:LP.amber});
-        ed_tag(x,tt,w("cockpit","pedal",-0.1),null,P3.x+P3.w/2,P3.y+212,"A pedal too far away",{align:"center",col:LP.amber});}}},
-    // Daniels's office, 1952: his question, the middle band he called average, his count, his note, and the range
-    {at:c.daniels-0.4,place:"edOffice",dis:1.6,keys:[[c.daniels-0.4,960,540,1.0],[c.height-0.6,1080,520,1.06],[c.note-0.4,960,540,1.0]],draw:(x,tt)=>{
-      const r0=c.range-0.2,slide=ag_sine(ag_in(tt,r0,1.6));
-      daniels(x,tt,1-ag_in(tt,r0,0.8));
-      ed_sheet(x,tt,w("daniels","Lieutenant",-0.2),960,170,780,{kick:"1952",title:"Lieutenant Gilbert Daniels",sub:"A scientist in the Air Force's anthropology section",lines:["How many flyers are average?"]},
-        {light:"morning",out:c.ten-0.5,u:ag_in(tt,w("asked","plain",-0.1),0.5)});
-      // on each measurement, the middle 30% counted as average: a generous band
-      const k0=w("ten","ten",-0.2),cA=ag_in(tt,k0,0.35)*(1-ag_in(tt,c.height-1.0,0.4));
-      if(cA>0.004){lp_sheet(x,960,170,860,620,{a:cA,k:tt-k0,col:LP.orange,light:"morning"});x.save();x.globalAlpha*=cA;
-        lp_T(x,"TEN MEASUREMENTS",1000,240,{w:800,size:28,ls:3,col:LP.orange});lp_T(x,"Average: the middle 30%",1000,296,{w:800,size:40});
-        ed_curve(x,1020,360,740,300,{u:ag_in(tt,k0+0.4,1.6),b:ag_in(tt,w("band","middle",-0.2),0.8)});
-        lp_T(x,"A generous band",1390,724,{w:600,size:28,col:LP.mut,align:"center",a:ag_in(tt,w("band","generous",-0.2),0.5)});x.restore();}
-      // the count: 4,063 flyers, fewer at each measurement, and none at the last
-      const n0=c.height-0.4,nA=ag_in(tt,n0,0.35)*(1-ag_in(tt,c.note-0.7,0.4));
-      if(nA>0.004){const st=steps(tt);lp_sheet(x,700,170,1140,640,{a:nA,k:tt-n0,col:LP.orange,light:"morning"});x.save();x.globalAlpha*=nA;
-        lp_T(x,"DANIELS'S COUNT · 4,063 FLYERS",740,240,{w:800,size:28,ls:3,col:LP.orange});
-        ed_dots(x,744,300,{steps:st,cols:79,pitch:8,r:2.9});ed_countTable(x,1420,300,{steps:st});x.restore();
-        const p0=w("none","not",0.2);lp_pill(x,1060,508,"Average on all ten: not one",{col:LP.amber,a:nA*ag_in(tt,p0,0.4),k:tt-p0});}
-      // his note: its first lines, the second sentence underlined; then it moves aside for the range
-      const e0=c.note-0.2,eA=ag_in(tt,e0,0.35);
-      if(eA>0.004)ed_note(x,lerp(960,100,slide),170,840,{a:eA,k:tt-e0,light:"morning",u:clamp((tt-w("note","virtually",-0.2))/(c.note+7.6-w("note","virtually",-0.2)),0,1)});
-      const g0=w("range","range",-0.2),gA=ag_in(tt,g0,0.35);
-      if(gA>0.004){lp_sheet(x,1000,170,820,600,{a:gA,k:tt-g0,col:LP.blue,light:"morning"});x.save();x.globalAlpha*=gA;
-        lp_T(x,"WHAT A DESIGN TURNS ON",1040,240,{w:800,size:28,ls:3,col:LP.blue});lp_T(x,"The range",1040,296,{w:800,size:40});
-        ed_range(x,1060,340,700,280,{b:ag_in(tt,w("range","five",-0.2),0.8)});x.restore();}
-      const f9=w("range","nine",-0.1);lp_pill(x,1410,830,"Fits 9 flyers in 10",{col:LP.green,a:ag_in(tt,f9,0.4),k:tt-f9});}},
-    // the drawing office again: a cockpit designed for the range, its seat and pedals moving to each pilot; a car's seat, for the same reason
-    {at:c.fit-0.4,place:"edDraw",dis:1.6,keys:[[c.fit-0.4,960,540,1.0]],draw:(x,tt)=>{const f0=c.fit-0.1,a=ag_in(tt,f0,0.35),kk=1+0.1*Math.sin((tt-f0)*1.05),P=ed_fit(kk);
-      lp_sheet(x,200,150,1520,700,{a,k:tt-f0,col:LP.blue,light:"late"});x.save();x.globalAlpha*=a;
-      lp_T(x,"Fit the range, not the average",250,250,{w:800,size:40});
-      ed_cockpit(x,500,740,0.6,{lw:1.4,pilots:[P],reach:"stick",seats:[P.dy],pedals:[P.pedal],eye:ag_in(tt,f0+0.8,0.6),arrows:ag_in(tt,w("adjust","rise",-0.3),0.6)});x.restore();
-      ed_tag(x,tt,w("adjust","rise",-0.1),null,1240,380,"Seats that rise and fall",{col:LP.blue});
-      ed_tag(x,tt,w("adjust","pedals",-0.1),null,1240,450,"Pedals that move",{col:LP.blue});
-      const s9=w("seats","ninety",-0.2);lp_T(x,"By the 1970s",1450,540,{w:600,size:28,col:LP.mut,align:"center",a:ag_in(tt,s9,0.4)});
-      lp_pill(x,1450,592,"The middle 90 in every 100",{col:LP.green,a:ag_in(tt,s9,0.4),k:tt-s9});
-      const c0=w("car","seat",-0.3),cs=ag_in(tt,c0,0.4);if(cs>0.004){ed_carSeat(x,1470,790,0.6,{a:cs,slide:0.5-0.5*Math.cos((tt-c0)*1.6)});
-        lp_T(x,"A car's seat",1300,800,{w:600,size:28,col:LP.mut,align:"right",a:cs});}}},
-    // the team's room: one number that seems to say everything, opening into the week it hides
-    {at:c.data-0.4,place:"edLate",dis:1.6,keys:[[c.data-0.4,960,540,1.0]],draw:(x,tt)=>{const f0=w("data","one",-0.2),s0=w("lead","show",-0.3),sp=ag_in(tt,s0,1.2);
-      lp_figure(x,760,300,400,{kick:"Rooms booked",num:"38%",label:"The week's average"},{a:ag_in(tt,f0,0.35)*(1-sp),k:tt-f0,light:"late"});
-      ed_picture(x,580,220,{a:sp*(1-0.6*ag_in(tt,c.breath,1.0)),k:tt-s0,u:ag_in(tt,s0+0.4,2.0),peak:ag_in(tt,w("lead","turns",-0.1),0.6),labels:ag_in(tt,w("lead","turns",0.3),0.5),light:"late"});}}
+    // 1950: a flyer measured at the post; others wait on the bench; a clerk writes each figure down
+    {at:0,place:"edpLab",keys:[[0,960,540,1.0],[tW-0.2,1000,540,1.05]],d:3,draw:(x,tt,cam)=>{const hf=edp_h(EDP_POST.fl);
+      edp_seat(x,"flyer2",1300,812,"sit",Object.assign({t:tt},ed_alive(tt,{expr:"neutral",gaze:[1,0.1]},1,0)));
+      edp_seat(x,"flyer3",1560,812,"sit",Object.assign({t:tt,flip:true},ed_alive(tt,{expr:"neutral",gaze:[1,0.1]},2,0)));
+      edp_post(x,EDP_POST.fl-hf+4);
+      edp_person(x,"flyer1",EDP_POST.x+50,EDP_POST.fl,"stand",Object.assign({t:tt},PK.face(tt,{expr:"neutral",gaze:[1,0]},[])));
+      edp_person(x,"measurer",1000,960,PK.poseMix("clasp",ED_NOTE,0.8),Object.assign({t:tt+2,flip:true,underF:PK.inHand.notebook({}),hold:PK.inHand.pen("blue"),holds:true},ed_alive(tt,{expr:"think",gaze:[1,0.4]},3,0)));
+      edp_desk(x,"clerk",300,1010,Object.assign({t:tt,work:1,on:(cc,D)=>{edp_cards(cc,D.x0+0.16*edp_h(1010),D.top,1.2);}},ed_alive(tt,{expr:"think",gaze:[1,0.6]},4,0)));}},
+    // the figures go to the designers: suits, helmets, cockpits; they take one figure, the average man
+    {at:tW,place:"edpDraw",dis:0.8,keys:[[tW,960,540,1.0],[c.easy,1000,540,1.06]],d:3,draw:(x,tt,cam)=>{let J1=null,J2=null;const fl=940,h=edp_h(fl);
+      edp_drawing(x,1260,fl,h,true);edp_drawing(x,700,fl,h,false);
+      J1=edp_person(x,"designer1",470,fl,"clasp",Object.assign({t:tt},ed_sp(tt,1,[[c.easy+0.2,E.easy]],"think",0.3)));
+      J2=edp_person(x,"designer2",1500,fl,"clasp",Object.assign({t:tt,flip:true},ed_sp(tt,2,[[c.avg+0.2,E.avg]],"neutral",0.3)));
+      ed_bub(x,J2,tt,c.avg+0.2,c.easy-0.2,["Draw for the average man:","five foot nine."],cam,{lean:-160});
+      ed_bub(x,J1,tt,c.easy+0.2,tD-0.3,["Easiest to fit."],cam,{lean:160});}},
+    // a doorway built to his height: about half the men stoop
+    {at:tD,place:"edpDoor",dis:0.8,keys:[[tD,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const {x:dx,fl}=EDP_DOOR,h=edp_h(fl);
+      edp_person(x,"flyer1",dx+330,fl-40,"stand",Object.assign({t:tt,flip:true},ed_alive(tt,{expr:"neutral",gaze:[1,0.1]},2,tD)));
+      edp_person(x,"flyer3",dx,fl,PK.poseMix("stand","bend",ag_in(tt,c.door+1.2,0.5)),Object.assign({t:tt},PK.face(tt,{expr:"worry",gaze:[1,0.3]},[])));
+      edp_person(x,"flyer4",dx-380,fl+50,"stand",Object.assign({t:tt},ed_alive(tt,{expr:"neutral",gaze:[1,0.2]},3,tD)));}},
+    // in a cockpit, a control just out of reach
+    {at:tK,place:"edpCock",dis:0.8,keys:[[tK,960,540,1.0],[c.change,1000,540,1.05]],d:3,draw:(x,tt,cam)=>{const {x:px,fl}=EDP_CK,h=edp_h(fl);let Jp=null;
+      edp_cockpit(x,0,ag_io(tt,w("cockpit","out of reach",-0.2),tN-0.4,0.4));
+      Jp=edp_seat(x,"pilot",px,fl,"sit",Object.assign({t:tt},ed_sp(tt,1,[[c.change+0.2,E.change]],"worry",0.0)));
+      edp_person(x,"measurer",1700,980,PK.poseMix("clasp",ED_NOTE,0.6),Object.assign({t:tt+2,flip:true,underF:PK.inHand.notebook({}),hold:PK.inHand.pen("blue"),holds:true},ed_alive(tt,{expr:"worry",gaze:[1,0.3]},2,tK)));
+      ed_bub(x,Jp,tt,c.change+0.2,tN-0.3,["I can't reach that switch."],cam,{lean:120});}},
+    // 1952: Gilbert Daniels counts, at his board, how many flyers are average
+    {at:tN,place:"edpOffice",cut:true,keys:[[tN,960,540,1.0],[tB,960,540,1.0],[tB+1.6,600,430,1.5]],d:3,draw:(x,tt,cam)=>{let Jd=null;
+      edp_desk(x,"measurer",1500,960,Object.assign({t:tt,flip:true,work:0,on:(cc,D)=>{edp_cards(cc,D.x0-0.3*edp_h(960),D.top,1.2);}},ed_alive(tt,{expr:"listen",gaze:[1,0.2]},2,tN)));
+      Jd=PK.teach(x,EDP_FOLK.daniels,tt,BO,{x:EDP_BD.x,y:EDP_BD.y,k:EDP_BD.k,deco:true,floor:EDP_BD.floor,rest:EDP_BD.rest,h:edp_h(EDP_BD.floor),say:[[c.asked,E.asked]],events:ED_HEV});
+      ed_name(x,Jd,tt,w("daniels","Gilbert Daniels",0),c.asked-0.2,"Gilbert Daniels","Air Force scientist",170);
+      ed_bub(x,Jd,tt,c.asked+0.1,c.ten-0.2,["How many flyers","are average?"],cam,{lean:180});}},
+    // his note, seven pages, says so in its first lines
+    {at:tT,place:"edpOffice",cut:true,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const fl=960,h=edp_h(fl);let Jd=null;
+      Jd=edp_desk(x,"daniels",1400,fl,Object.assign({t:tt,flip:true,work:1,on:(cc,D)=>{edp_typewriter(cc,D.x0-0.24*h,D.top,1.0,ag_in(tt,tT+0.6,4));edp_cards(cc,D.x0-0.58*h,D.top,1.1);}},ed_alive(tt,{expr:"think",gaze:[1,0.6]},1,tT)));
+      PK.callout(x,240,120,760,260,[1150,560],ag_io(tt,w("note","virtually",-0.4),tR-0.3,0.4),(cc,bx,by,bw,bh)=>ed_panel(cc,bx,by,bw,bh,"His note, page 1",[["“It is virtually impossible",PK.C.ink,34],["to find an average man",PK.C.ink,34],["in the Air Force.”",PK.C.ink,34]],null,PK.C.blue));}},
+    // fit the range, not the average (a designer's notebook)
+    {at:tR,place:"edNotes",dis:0.6,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,EDP_FOLK.designer2,tt,N1,{});}},
+    // by the 1970s: the seat rises and falls, the pedals move
+    {at:tS,place:"edpCock",dis:0.8,keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const {x:px,fl}=EDP_CK,h=edp_h(fl),up=60*ag_in(tt,c.adjust+0.2,1.4);
+      edp_cockpit(x,up,0);
+      edp_seat(x,"pilot2",px,fl-up,"sit",Object.assign({t:tt},ed_alive(tt,{expr:"smile",gaze:[1,0.1]},1,tS)),h*0.94);
+      edp_person(x,"designer1",1700,980,"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},ed_alive(tt,{expr:"smile",gaze:[1,0.3]},2,tS)));}},
+    // a car's seat slides for the same reason
+    {at:tC,place:"edpStreet",dis:0.8,keys:[[tC,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const {x:cx,fl}=EDP_CAR,sl=60*ag_in(tt,c.car+0.6,1.0);
+      edp_carBack(x);edp_person(x,"driver",cx-60-sl,fl-200,"sit",Object.assign({t:tt},ed_alive(tt,{expr:"smile",gaze:[1,0.2]},1,tC)),edp_h(fl)*0.98);edp_carFront(x);}},
+    // data has its average men too: one number that seems to describe everything
+    {at:tA,place:"edTeam",dis:1.0,keys:[[tA,960,540,1.0],[c.lead,760,560,1.08]],d:3,draw:(x,tt,cam)=>{
+      const R=ed_atRoom(x,tt,tA,{at:"ivy",ivy:ed_alive(tt,{expr:"think",gaze:[1,0.3]},3,tA)});
+      ed_screenCall(x,R,ag_io(tt,w("data","average men",-0.3),c.breath-0.3,0.4),"Rooms booked",[],PK.C.orange,{bh:220,bars:[["the whole week · 38%",38,100,PK.C.orange]]});}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,"Explaining so people can decide","The decision first, and the part of the data it turns on","Leading data people · Working with people");
+  ed_card(ctx,S,t,c.when+0.3,tW-0.2,{kick:"1950",title:"The Air Force measures its flyers"},{y:40,mid:true});
+  ed_card(ctx,S,t,tW+0.4,c.avg-0.2,{kick:"The designers",title:"Suits, helmets, cockpits"},{y:40,mid:true});
+  ed_card(ctx,S,t,tN+0.4,w("daniels","Gilbert Daniels",-0.3),{kick:"1952",title:"The anthropology section"},{y:40,mid:true});
+  ed_card(ctx,S,t,tS+0.3,c.adjust-0.2,{kick:"By the 1970s",title:"Cockpits for the middle ninety"},{y:40,mid:true});
+  PK.title(ctx,S,t,c.breath+0.2,"Explaining so people can decide","Lead with the decision; show what it turns on","Leading data people · Working with people",{side:"right",size:52});
 });
 
 /* ---------------------------------------------------------------- 2. One page for the University Council */
-scene("page",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),gr={light:"grey"},dy={light:"day"};
+scene("page",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CA=PK.ROOMS.campus;
+  const tF=c.full-0.4,tQ=c.q-0.4,tI=c.ivy-0.4;
   ag_shots(ctx,S,t,sc.dur,[
-    // Graham's office: the decision he must make, the question agreed with him, the answer, and one page by Tuesday 1 June
-    {at:0,place:"edGraham",keys:[[0,1000,540,1.06],[0.6,960,540,1.0]],d:2.4,draw:(x,tt)=>{
-      ed_sheet(x,tt,w("uni","Graham",-0.1),1000,150,640,{kick:"Director of Facilities",title:"Graham Ellis"},{light:"grey",out:c.q-0.5});
-      ed_sheet(x,tt,w("ask","Council",-0.2),1000,350,640,{kick:"For the University Council",title:"A new teaching building?",lines:["40 rooms","About A$140 million"]},
-        {light:"grey",out:c.q-0.5,u:ed_u(tt,[w("ask","forty",-0.1),w("ask","hundred",-0.2)])});
-      ed_tag(x,tt,w("full","always",-0.3),c.q-0.5,1000,700,"“The rooms are always full”");
-      ed_sheet(x,tt,w("q","agreed",-0.2),1000,150,680,{kick:"Agreed in writing, February",title:"Too few rooms, or too few at some hours?"},{col:LP.blue,light:"grey"});
-      const a0=w("april","answer",-0.1);lp_pill(x,1340,450,"Late April: too few, only at some hours",{col:LP.green,a:ag_in(tt,a0,0.4),k:tt-a0});
-      ed_sheet(x,tt,w("june","one",-0.2),1000,540,640,{kick:"By Tuesday 1 June",title:"One page",sub:"For the University Council"},{col:LP.amber,light:"grey"});
-      lp_person(x,"graham",520,650,1.0,{t:tt,light:gr});}},
-    // the team's room: Ivy and Helena, the first draft in the order of the work, its first chart, and Helena's question
-    {at:c.ivy-0.4,place:"lpRoom",dis:1.6,keys:[[c.ivy-0.4,960,540,1.0]],draw:(x,tt)=>{const d0=w("draft","twelve",-0.2),h0=c.who-0.4;
-      ed_draft(x,216,140,{a:ag_in(tt,c.draft-0.2,0.35),u:ag_in(tt,d0,1.6),nine:ag_in(tt,w("draft","nine",-0.1),0.5)});
-      ed_tag(x,tt,w("draft","data",-0.1),h0,392,320,"The data",{align:"center"});
-      ed_tag(x,tt,w("draft","method",-0.1),h0,774,384,"The method",{align:"center"});
-      ed_tag(x,tt,w("draft","checks",-0.1),h0,1084,384,"The checks",{align:"center"});
-      ed_tag(x,tt,w("draft","answer",-0.1),h0,1260,320,"The answer, on page 9",{align:"center",col:LP.blue});
-      const f0=w("chart","average",-0.3);lp_figure(x,760,440,400,{kick:"Page 1",num:"38%",label:"Rooms booked, the week's average"},{a:ag_io(tt,f0,c.thesis-0.4,0.35),k:tt-f0,light:"day"});
-      ed_tag(x,tt,w("thesis","thesis",-0.2),h0-0.1,960,520,"How a thesis is written",{align:"center"});
-      ed_tag(x,tt,w("thesis","nothing",-0.2),h0-0.1,960,590,"Nothing in it is wrong",{align:"center"});
-      ed_sheet(x,tt,w("who","who",-0.2),770,440,520,{kick:"Helena asks",title:"Who will read it, and what will they decide with it?"},{col:LP.blue,light:"day"});
-      lp_person(x,"ivy",560,700,1.0,{t:tt,light:dy});lp_person(x,"helena",1460,700,1.0,{t:tt,flip:true,light:dy});
-      const n0=w("ivy","Ivy",-0.1),n1=w("ivy","Helena",-0.1),nOut=1-ag_in(tt,c.draft-0.6,0.4);
-      lp_nameTag(x,760,790,"ivy",{a:ag_in(tt,n0,0.4)*nOut});lp_nameTag(x,1250,790,"helena",{align:"right",a:ag_in(tt,n1,0.4)*nOut});}}
+    // Graham, in his office, with the building he must decide whether to ask for
+    {at:0,place:"edCorner",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=ed_corner(x,tt,{t0:0,who1:"graham",laptop:true,hf:ed_alive(tt,{expr:"think",gaze:[1,0.6]},1,0),handN:[830,616],handF:[856,606]});
+      ed_name(x,R.who1,tt,w("uni","Graham Ellis",0),c.ask-0.2,"Graham Ellis","Director of Facilities",170);
+      PK.callout(x,1060,90,720,250,R.laptop,ag_io(tt,c.ask+0.2,tF-0.3,0.4),(cc,bx,by,bw,bh)=>ed_panel(cc,bx,by,bw,bh,"A new teaching building",[["forty rooms",PK.C.ink,34],["about A$140 million",PK.C.ink,34]],null,PK.C.blue));}},
+    // the academics say the rooms are always full
+    {at:tF,place:"edCampus",dis:0.6,keys:[[tF,900,570,1.1]],d:2,draw:(x,tt,cam)=>{let Ja=null;
+      PK.person(x,PK.extra(6),1180,CA.near-20,ed_hC(CA.near-20),"clasp",Object.assign({t:tt,flip:true},ed_alive(tt,{expr:"listen",gaze:[1,0.1]},2,tF)));
+      Ja=PK.person(x,PK.extra(5),860,CA.near,ed_hC(CA.near),"clasp",Object.assign({t:tt,underF:PK.inHand.notebook({}),holds:true},ed_sp(tt,1,[[c.full+0.2,E.full]],"worry",0.1)));
+      ed_bub(x,Ja,tt,c.full+0.2,tQ-0.3,["The rooms are always full."],cam,{lean:-160});}},
+    // the question agreed in February, the answer in April, the page by 1 June; Ivy drafts it with Helena
+    {at:tQ,place:"edTeam",dis:0.6,keys:[[tQ,960,540,1.0],[tI,820,560,1.06]],d:3,draw:(x,tt,cam)=>{const Hh={};
+      const R=ed_atRoom(x,tt,tQ,{at:"ivy",sam:null,ivy:ed_sp(tt,3,[],"think",0.3),people:[ed_helena(tt,ed_sp(tt,5,[[c.who+0.1,E.who]],"listen",0.1),{x:1560,fl:930,out:Hh})]});
+      ed_screenCall(x,R,ag_io(tt,w("q","agreed",-0.3),c.june-0.3,0.4),"The question · 16 Feb",[["Too few rooms,",PK.C.blue,36],["or too few at some hours?",PK.C.blue,36],[ag_in(tt,c.april,0.4)>0.5?"April: too few, at some hours":"",PK.C.green,34]],PK.C.blue,{bh:300});
+      ed_name(x,R.marta,tt,w("ivy","Ivy Reyes",0),w("ivy","Helena Novak",-0.3),"Ivy Reyes","Data analyst",170);
+      ed_name(x,Hh.J,tt,w("ivy","Helena Novak",0),c.draft-0.2,"Helena Novak","Data manager",170);
+      ed_screenCall(x,R,ag_io(tt,c.draft+0.2,c.chart-0.3,0.4),"Draft 1 · 12 pages",[["the data · the method",PK.C.ink,34],["the checks …",PK.C.ink,34],["page 9: the answer",PK.C.amber,34]],PK.C.blue,{bh:300});
+      ed_screenCall(x,R,ag_io(tt,c.chart+0.2,c.who-0.3,0.4),"Chart 1",[],PK.C.orange,{bh:220,bars:[["the week · booked 38%",38,100,PK.C.orange]]});
+      ed_bub(x,Hh.J,tt,c.who+0.1,1e9,["Who will read it, and what","will they decide with it?"],cam,{lean:-160});}}
   ]);
-  setScreen(ctx,S);lp_sceneTag(ctx,"The university, 2027 · imagined",{a:ag_io(t,w("uni","university",-0.3),c.june,0.5)});
-  ed_kick(ctx,S,ag_in(t,0.6,0.6));
+  ed_imagined(ctx,S,t,0.4,c.ask-0.1,"The university, 2027 · imagined");
+  ed_card(ctx,S,t,c.june+0.2,c.ivy-0.2,{kick:"By Tuesday 1 June",title:"One page for the Council"},{y:40,mid:true});
+  ed_kick(ctx,S,ag_in(t,0.6,0.6)*(1-ed_apart(t,[[0,c.ask],[c.june,c.ivy]])));
 });
 
 /* ---------------------------------------------------------------- 3. The decision first */
-scene("first",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off);
-  const PX=510,PY=124;
+scene("first",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tM=c.minto-0.4,tZ=c.minto+2.2,tN=c.decision-0.4,tB=c.back-0.4,BA=PK.pace(ctx,"carmen",ed_boardA(sc,w)),N2=PK.pace(ctx,null,ed_note2(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the University Council's room before a meeting: a pile of papers at each place, a decision on each; the top one starts with its decision
-    {at:0,place:"edCouncil",keys:[[0,960,540,1.0],[c.start-0.6,960,500,1.12]],d:2.2,draw:(x,tt)=>{const p0=w("pile","pile",-0.4);
-      ed_councilTable(x,140,800,1640);
-      [300,620,960,1300,1620].forEach((px,i)=>ed_pile(x,px-110,792,{n:lerp(2,i===2?22:14+i%2*3,ag_sine(ag_in(tt,p0+i*0.25,2.4))),w:220}));
-      ed_tag(x,tt,w("pile","decide",-0.1),c.start-0.4,960,520,"A decision on each",{align:"center"});
-      const l0=w("start","decision",-0.5),u=ag_sine(ag_in(tt,l0,1.4));
-      if(u>0.004){x.save();x.translate(960,lerp(640,400,u));x.scale(lerp(0.3,1,u),lerp(0.3,1,u));ed_page(x,-450,-100,{p:{decision:1},h:200,a:ag_in(tt,l0,0.3),light:"day",pin:false,deco:u<0.985});x.restore();}}},
-    // the team's room, late: Minto's pyramid; then the page, written top down, its method moved to the back
-    {at:c.minto-0.4,place:"edLate",dis:1.6,keys:[[c.minto-0.4,960,540,1.0]],draw:(x,tt)=>{
-      const m0=w("minto","Barbara",-0.2),mA=ag_in(tt,m0,0.35)*(1-ag_in(tt,c.decision-0.7,0.4));
-      if(mA>0.004){lp_sheet(x,560,150,800,640,{a:mA,k:tt-m0,col:LP.blue,light:"late"});x.save();x.globalAlpha*=mA;
-        lp_T(x,"BARBARA MINTO",600,220,{w:800,size:28,ls:3,col:LP.blue});lp_T(x,"The pyramid",600,274,{w:800,size:40});
-        ed_pyramid(x,960,330,{u:ed_u(tt,[w("minto","answer",-0.2),w("minto","reasons",-0.2),w("minto","evidence",-0.2)])});x.restore();}
-      const d0=c.decision-0.2,bx=lerp(PX,140,ag_sine(ag_in(tt,c.back-0.2,1.6))),dw=w("decision","decision",-0.2);
-      ed_page(x,bx,PY,{p:{decision:ag_in(tt,dw,0.6),sign:ag_in(tt,dw+0.8,0.6),answer:ag_in(tt,w("answer","rooms",-0.2),0.6),
-        l1:ag_in(tt,w("three","peak",-0.2),0.5),l2:ag_in(tt,w("three","bookings",-0.2),0.5),l3:ag_in(tt,w("three","take",-0.2),0.5)},a:ag_in(tt,d0,0.4),k:tt-d0,light:"late"});
-      ed_pageLight(x,bx,PY,30,128,LP.blue,ag_io(tt,dw,c.answer-0.3,0.4));
-      ed_pageLight(x,bx,PY,176,264,LP.blue,ag_io(tt,w("answer","rooms",-0.2),c.three-0.3,0.4));
-      ed_pageLight(x,bx,PY,270,474,LP.orange,ag_io(tt,w("three","peak",-0.2),c.back-0.3,0.4));
-      // at the back: the method and the other charts; then the true finding the decision doesn't turn on
-      const b0=w("back","back",-0.3),bA=ag_in(tt,b0,0.4);
-      if(bA>0.004){x.save();x.globalAlpha*=bA;lp_sheet(x,1312,308,460,232,{light:"late",pin:false});lp_sheet(x,1296,294,460,232,{light:"late",pin:false});x.restore();
-        lp_textSheet(x,1280,280,460,{kick:"At the back",lines:["The method","The other charts"]},{a:bA*(1-ag_in(tt,w("holds","doesn't",-0.2),0.45)),k:tt-b0,light:"late",pin:false});}
-      const s0=w("seats","true",-0.2),sv=ag_sine(ag_in(tt,w("holds","doesn't",-0.2),1.4));
-      if(tt>=s0){x.save();lp_textSheet(x,1280,lerp(600,280,sv),460,{kick:"True",lines:["When people came, rooms were about half full"]},{a:ag_in(tt,s0,0.35),k:tt-s0,light:"late",pin:false});x.restore();}
-      ed_tag(x,tt,w("holds","holds",-0.3),null,1510,640,"A half-full room still holds a class",{align:"center"});}}
+    // the University Council's members read a pile of papers before each meeting
+    {at:0,place:"edLecture",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.audience(x,tt,8,{look:0});}},
+    // Minto's pyramid (Carmen, at the team's board)
+    {at:tM,place:"edTeam",dis:0.6,keys:[[tM,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const R=ed_lesson(x,tt,{rows:BA,clock:10,events:ED_HEV});
+      ed_name(x,R.at,tt,tM+0.4,tZ-0.3,"Carmen Vidal","Consultant",160);}},
+    {at:tZ,cut:true,place:"edBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[c.minto,E.minto]],events:ED_HEV});}},
+    // Ivy's page opens with the decision, then the answer, then three lines
+    {at:tN,place:"edNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N2,{});}},
+    // the method and the other charts move to the back; a half-full room still holds a class
+    {at:tB,place:"edTeam",dis:0.6,keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
+      const R=ed_atRoom(x,tt,tB,{at:"ivy",sam:null,ivy:ed_alive(tt,{expr:"think",gaze:[1,0.3]},3,tB),people:[ed_helena(tt,ed_sp(tt,5,[[c.holds+0.1,E.holds]],"listen",0.1),{x:1560,fl:930,out:Hh})]});
+      ed_screenCall(x,R,ag_io(tt,c.back+0.2,c.holds-0.3,0.4),"At the back",[["the method · other charts",PK.C.ink,34],["when people came:",PK.C.ink,34],["rooms about half full",PK.C.ink,34]],PK.C.mut,{bh:300});
+      ed_bub(x,Hh.J,tt,c.holds+0.1,1e9,["A half-full room","still holds a class."],cam,{lean:-160});}}
   ]);
-  ed_kick(ctx,S,ag_in(t,0.6,0.6));
+  ed_card(ctx,S,t,0.3,c.start-0.2,{kick:"Before each meeting",title:"The University Council reads"},{y:40,mid:true});
+  ed_kick(ctx,S,ag_in(t,0.6,0.6)*(1-ed_apart(t,[[0,c.start],[tN,tB]])));
 });
 
 /* ---------------------------------------------------------------- 4. What it turns on */
-scene("turns",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),lt={light:"late"};
-  const G0={x:140,y:150,w:1100,h:690,ch:78};
+scene("turns",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CA=PK.ROOMS.campus;
+  const tR=c.right-0.4,tC=c.corridors-0.4,tN=c.daniels-0.4,tU=c.used-0.4,tB=c.tufte-0.4,tZ=c.tufte+2.0,tG=c.together-0.4,tO=c.route-0.4;
+  const BB=PK.pace(ctx,"carmen",ed_boardB(sc,w)),N3=PK.pace(ctx,null,ed_note3(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the team's room, on from the page: the week's average beside it, then the whole week, drawn big; the advice; the page and its picture together
-    {at:0,place:"edLate",keys:[[0,960,540,1.0]],push:0,draw:(x,tt)=>{
-      const out=ag_sine(ag_in(tt,w("map","whole",-0.4),1.4)),back=ag_sine(ag_in(tt,c.together-0.2,1.8)),px=back>0?lerp(40,ED_PG.x,back):lerp(140,40,out),pa=back>0?back:1-out;
-      if(pa>0.004)ed_page(x,px,ED_PG.y,{a:pa,p:ed_all({meets:0,unknown:0,holds:0,words:0,which:0}),light:"late"});
-      // the week's average, 38%, on its own
-      const f0=w("hides","average",-0.3);lp_figure(x,1300,250,480,{kick:"The week's average",num:"38%",label:"Rooms booked"},{a:ag_in(tt,f0,0.35)*(1-ag_in(tt,w("right","academics",-0.7),0.4)),k:tt-f0,light:"late"});
-      // the whole week, hour by hour: big while it's read, then beside the page
-      const m0=w("map","heat",-0.2),G={x:lerp(G0.x,ED_PIC.x,back),y:lerp(G0.y,ED_PIC.y,back),w:lerp(G0.w,ED_PIC.w,back),h:lerp(G0.h,ED_PIC.h,back),ch:lerp(G0.ch,ED_PIC.ch,back)};
-      const pk=w("peak","ten",-0.2),sw=w("together","shows",-0.2),pulse=ag_io(tt,sw,sw+1.6,0.4)*(0.5+0.5*Math.sin((tt-sw)*7));
-      ed_picture(x,G.x,G.y,{w:G.w,h:G.h,ch:G.ch,a:ag_in(tt,m0,0.4),k:tt-m0,u:ag_in(tt,m0+0.3,2.4),peak:ag_in(tt,pk,0.6)*(1-0.6*pulse),
-        peakLab:ag_in(tt,w("peak","ninety",-0.1),0.5),otherLab:ag_in(tt,w("peak","Most",-0.1),0.5),avg:ag_in(tt,w("right","academics",-0.3),0.5),ring:ag_io(tt,w("corridors","empty",-0.3),c.daniels-0.4,0.5),light:"late"});
-      // the academics were right at the peak; Facilities were right at the other hours
-      const r0=w("right","academics",-0.2),r1=w("corridors","Facilities",-0.2),tOut=c.daniels-0.4,ta="Academics: “always full”",tf="Facilities: “empty corridors”";
-      ed_tag(x,tt,r0,tOut,1300,420,ta);ed_tick(x,tt,w("right","right",-0.1),1300+ed_tagW(x,ta)+34,420,1-ag_in(tt,tOut,0.4));
-      ed_tag(x,tt,r1,tOut,1300,520,tf);ed_tick(x,tt,w("corridors","saw",0.2),1300+ed_tagW(x,tf)+34,520,1-ag_in(tt,tOut,0.4));
-      // like Daniels's count
-      ed_sheet(x,tt,w("daniels","Daniels",-0.3),1300,300,500,{kick:"Daniels's count, 1952",title:"Average on all ten: not one"},{col:LP.orange,light:"late",out:c.used-0.4});
-      // booked isn't used: in one booked hour in five, nobody came
-      const u0=w("used","booked",-0.3),uA=ag_in(tt,u0,0.35)*(1-ag_in(tt,c.tufte-0.4,0.4));
-      if(uA>0.004){lp_sheet(x,1300,300,500,340,{a:uA,k:tt-u0,col:LP.orange,light:"late"});x.save();x.globalAlpha*=uA;
-        lp_T(x,"BOOKED ISN'T USED",1340,370,{w:800,size:28,ls:3,col:LP.orange});ed_fifth(x,1340,410,{u:ag_in(tt,w("used","five",-0.4),1.0)});
-        lp_T(x,"In 1 booked hour in 5,",1340,542,{w:600,size:28});lp_T(x,"the sensors counted nobody",1340,580,{w:600,size:28});x.restore();}
-      // the advice the page and its picture follow
-      ed_sheet(x,tt,w("tufte","Edward",-0.2),1320,170,440,{title:"Above all else, show the data",sub:"Edward Tufte"},{light:"late",out:c.together-0.4});
-      ed_sheet(x,tt,w("knaflic","Cole",-0.2),1320,430,440,{title:"Know who you're showing, and the one thing they need to see",sub:"Cole Nussbaumer Knaflic"},{light:"late",out:c.together-0.4});
-      ed_pageLight(x,ED_PG.x,ED_PG.y,30,128,LP.blue,ag_io(tt,w("together","says",-0.2),w("together","shows",-0.2),0.4));}},
-    // a later moment in the room: Helena, and the same rule for anything that crosses teams
-    {at:c.route-0.4,place:"edLate",later:true,keys:[[c.route-0.4,960,540,1.0]],push:0,draw:(x,tt)=>{const q0=w("route","crosses",-0.3),qA=ag_in(tt,q0,0.35);
-      if(qA>0.004){lp_sheet(x,140,300,1180,360,{a:qA,k:tt-q0,col:LP.blue,light:"late"});x.save();x.globalAlpha*=qA;
-        lp_T(x,"ANYTHING THAT CROSSES TEAMS",190,370,{w:800,size:28,ls:3,col:LP.blue});lp_T(x,"Its route, in one picture",190,428,{w:800,size:40});
-        ed_route(x,190,510,{u:ag_in(tt,w("route","teams",-0.2),2.4)});x.restore();}
-      lp_person(x,"helena",1580,690,1.0,{t:tt,flip:true,light:lt});}}
+    // the week's average, then the whole week as a heat map, its peak picked out
+    {at:0,place:"edTeam",later:true,keys:[[0,960,540,1.0],[c.map,820,560,1.06]],d:3,draw:(x,tt,cam)=>{
+      const R=ed_atRoom(x,tt,0,{at:"ivy",sam:null,ivy:ed_alive(tt,{expr:"think",gaze:[1,0.3]},3,0),people:[ed_helena(tt,ed_alive(tt,{expr:"listen",gaze:[1,0.1]},5,0),{x:1560,fl:930})]});
+      ed_screenCall(x,R,ag_io(tt,0.3,c.map-0.3,0.4),"Rooms booked",[],PK.C.orange,{bh:220,bars:[["the whole week · 38%",38,100,PK.C.orange]]});
+      ed_heatCall(x,R,ag_io(tt,c.map+0.2,tR-0.3,0.4),ag_in(tt,w("peak","booked",-0.4),0.5));}},
+    // the academics were right, at the peak
+    {at:tR,place:"edCampus",dis:0.6,keys:[[tR,900,570,1.1]],d:2,draw:(x,tt,cam)=>{let Ja=null;
+      Ja=PK.person(x,PK.extra(5),860,CA.near,ed_hC(CA.near),"clasp",Object.assign({t:tt,underF:PK.inHand.notebook({}),holds:true},ed_sp(tt,1,[[c.right+0.2,E.right]],"smile",0.1)));
+      PK.person(x,PK.extra(6),1180,CA.near-20,ed_hC(CA.near-20),"clasp",Object.assign({t:tt,flip:true},ed_alive(tt,{expr:"smile",gaze:[1,0.1]},2,tR)));
+      ed_bub(x,Ja,tt,c.right+0.2,tC-0.3,["Tuesdays at eleven: full."],cam,{lean:-160});}},
+    // and Facilities, who saw empty rooms on Monday mornings
+    {at:tC,place:"edLecture",dis:0.6,keys:[[tC,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.audience(x,tt,0,{});
+      const Jg=PK.person(x,"graham",640,940,PK.hAt(940,ED_LE.eye),"clasp",Object.assign({t:tt},ed_sp(tt,1,[[c.corridors+0.3,E.corridors]],"think",0.1)));
+      ed_bub(x,Jg,tt,c.corridors+0.3,tN-0.3,["Monday morning: empty."],cam,{lean:160});}},
+    // one picture shows what the average hid (Ivy's notebook)
+    {at:tN,place:"edNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N3,{});}},
+    // booked isn't used: Ivy and Sam under a room's sensor
+    {at:tU,place:"edLecture",cut:true,keys:[[tU,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      ed_room(x,tt,{plate:1,people:[
+        {fl:900,draw:cc=>{PK.person(cc,"sam",760,900,PK.hAt(900,ED_LE.eye),"clasp",Object.assign({t:tt,flip:true},ed_alive(tt,{expr:"listen",gaze:[1,-0.5]},2,tU)));}},
+        {fl:930,draw:cc=>{PK.person(cc,"ivy",1020,930,PK.hAt(930,ED_LE.eye),"clasp",Object.assign({t:tt,flip:true,underF:PK.inHand.notebook({}),holds:true},ed_alive(tt,{expr:"think",gaze:[1,-0.5]},1,tU)));}}]});}},
+    // Tufte and Knaflic (Carmen, at the team's board)
+    {at:tB,place:"edTeam",cut:true,keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{ed_lesson(x,tt,{rows:BB,clock:14,events:ED_HEV});}},
+    {at:tZ,cut:true,place:"edBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BB,{say:[[c.tufte,E.knaflic]],events:ED_HEV});}},
+    // Ivy draws the picture as she writes the page
+    {at:tG,place:"edTeam",cut:true,keys:[[tG,820,560,1.06]],d:2,draw:(x,tt,cam)=>{const Hh={};
+      const R=ed_atRoom(x,tt,tG,{at:"ivy",sam:null,ivy:ed_alive(tt,{expr:"think",gaze:[1,0.3]},3,tG),people:[ed_helena(tt,ed_sp(tt,5,[[c.route+0.2,E.route]],"listen",0.1),{x:1560,fl:930,out:Hh})]});
+      ed_heatCall(x,R,ag_io(tt,tG+0.4,tO-0.3,0.4),1);
+      ed_bub(x,Hh.J,tt,c.route+0.2,1e9,["Anything across teams:","its route, in one picture."],cam,{lean:-160});}}
   ]);
-  ed_kick(ctx,S,1);
+  ed_kick(ctx,S,ag_in(t,0.6,0.6)*(1-ed_apart(t,[[0,tR],[tN,tU],[tG,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 5. What isn't known, in their words */
-scene("unknown",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),dy={light:"day"};
-  const MX=510,MY=124;
+scene("unknown",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CA=PK.ROOMS.campus;
+  const tF=c.forecast-0.4,tM=c.mei-0.4,tS=c.same-0.4,N4=PK.pace(ctx,null,ed_note4(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the page and its picture again: what it would take not to build, the forecast it meets, what isn't known and how far the answer holds
-    {at:0,place:"edLate",later:true,keys:[[0,960,540,1.0]],push:0,draw:(x,tt)=>{
-      const fly=ag_in(tt,w("take","move",-0.1),2.6),mv=fly*(1-ag_in(tt,c.unknown-0.4,1.2)),m0=w("forecast","meets",-0.2),k0=w("unknown","isn't",-0.2),h0=w("holds","far",-0.2);
-      ed_page(x,ED_PG.x,ED_PG.y,{p:ed_all({meets:ag_in(tt,m0,0.6),unknown:ag_in(tt,k0,0.6),holds:ag_in(tt,h0,0.6),words:0,which:0}),light:"late"});
-      ed_pageLight(x,ED_PG.x,ED_PG.y,392,474,LP.blue,ag_io(tt,c.take,c.forecast-0.3,0.4));
-      ed_pageLight(x,ED_PG.x,ED_PG.y,474,512,LP.green,ag_io(tt,m0,c.unknown-0.3,0.4));
-      ed_pageLight(x,ED_PG.x,ED_PG.y,516,604,LP.amber,ag_io(tt,k0,c.breath-1.0,0.4));
-      ed_picture(x,ED_PIC.x,ED_PIC.y,{w:ED_PIC.w,h:ED_PIC.h,ch:ED_PIC.ch,u:1,peak:1,move:mv,chips:fly,peakLab:1-ag_in(tt,w("take","move",-0.3),0.4)*(1-ag_in(tt,c.unknown+0.4,0.6)),otherLab:1,light:"late"});
-      ed_tag(x,tt,w("take","move",0.3),c.unknown-0.4,ED_PIC.x+ED_PIC.w/2,824,"1 peak class in 6, to other hours",{align:"center",col:LP.blue});}},
-    // the registrar's office: Mei, who wasn't in the work, reads it and says it back; one word means something else to her
-    {at:c.mei-0.4,place:"edMei",cut:true,keys:[[c.mei-0.4,960,540,1.0]],draw:(x,tt)=>{
-      const wd=w("word","utilisation",-0.2),b0=w("words","booked",-0.2),q0=w("which","which",-0.2),a0=w("plan","answers",-0.2),d0=w("words","means",-0.2);
-      ed_page(x,MX,MY,{p:ed_all({words:ag_in(tt,d0,0.6),which:ag_in(tt,a0,0.6)}),booked:ag_in(tt,b0,0.9),word:ag_io(tt,wd,b0+0.2,0.4),light:"day"});
-      ed_pageLight(x,MX,MY,606,652,LP.blue,ag_io(tt,d0,c.which-0.3,0.4));ed_pageLight(x,MX,MY,650,734,LP.blue,ag_io(tt,a0,c.same-0.6,0.4));
-      lp_person(x,"ivy",300,700,1.0,{t:tt,light:dy});lp_person(x,"mei",1640,700,1.0,{t:tt,flip:true,light:dy});
-      const m0=w("mei","Mei",-0.1),s0=w("says","two",-0.2),out0=c.word-0.3;
-      lp_nameTag(x,1640,330,"mei",{align:"center",a:ag_in(tt,m0,0.4)*(1-ag_in(tt,out0,0.4))});
-      ed_tag(x,tt,s0,out0,1640,250,"Said back in 2 minutes",{align:"center",col:LP.green});
-      ed_tag(x,tt,w("word","seats",-0.2),b0-0.3,490,300,"To Mei: seats filled",{align:"right",col:LP.amber});
-      ed_tag(x,tt,w("word","booked",-0.2),b0-0.3,1824,300,"On the page: rooms booked",{align:"right",col:LP.amber});
-      ed_tag(x,tt,q0,c.same-0.6,1824,300,"Which classes would move?",{align:"right"});}},
-    // the team's room: the same page, with the same numbers, for everyone
-    {at:c.same-0.4,place:"edLate",cut:true,keys:[[c.same-0.4,960,540,1.0]],draw:(x,tt)=>{
-      [[158,"Council","The University Council"],[712,"faculties","The faculties"],[1267,"registrar's","The registrar's office"]].forEach(([px,word,label],i)=>{
-        const p0=c.same+0.1+i*0.35;if(tt<p0)return;x.save();x.globalAlpha*=ag_in(tt,p0,0.35);ed_pageSmall(x,px,220,0.55,{p:ed_all(),booked:1,light:"late",k:tt-p0});x.restore();
-        ed_tag(x,tt,w("same",word,-0.2),null,px+247,720,label,{align:"center"});});}}
+    // beside the picture, what it would take not to build (Ivy's notebook)
+    {at:0,place:"edTeam",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      ed_atRoom(x,tt,0,{at:"ivy",sam:null,ivy:ed_alive(tt,{expr:"think",gaze:[1,0.3]},3,0),people:[ed_helena(tt,ed_alive(tt,{expr:"listen",gaze:[1,0.1]},5,0),{x:1560,fl:930})]});}},
+    {at:1.4,place:"edNotes",dis:0.6,keys:[[1.4,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}},
+    // Planning's forecast, what isn't known, and how far the answer holds
+    {at:tF,place:"edTeam",cut:true,keys:[[tF,960,540,1.0],[c.unknown,820,560,1.06]],d:3,draw:(x,tt,cam)=>{const Hh={};
+      const R=ed_atRoom(x,tt,tF,{at:"ivy",sam:null,ivy:ed_alive(tt,{expr:"think",gaze:[1,0.3]},3,tF),people:[ed_helena(tt,ed_alive(tt,{expr:"listen",gaze:[1,0.1]},5,tF),{x:1560,fl:930,out:Hh})]});
+      ed_screenCall(x,R,ag_io(tt,c.forecast+0.2,c.unknown-0.3,0.4),"Planning · to 2030",[["six percent more students",PK.C.ink,34],["the peak still fits",PK.C.green,34]],PK.C.blue,{bh:250});
+      ed_screenCall(x,R,ag_io(tt,c.unknown+0.2,tM-0.3,0.4),"Not known",[["students by 2030",PK.C.amber,34],["at twice the growth:",PK.C.ink,34],["no fuller than today",PK.C.green,34]],PK.C.amber,{bh:300});}},
+    // Ivy tries it on Mei, from the registrar's office, who wasn't in the work
+    {at:tM,place:"edCorner",cut:true,keys:[[tM,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=ed_corner(x,tt,{t0:tM,who1:"ivy",who2:"mei",sheets:true,hf:ed_sp(tt,1,[[c.words+0.2,E.words],[c.plan+0.2,E.plan]],"listen",0.3),
+        iface:ed_sp(tt,2,[[c.says+0.6,E.says],[c.word+0.2,E.word],[c.which+0.1,E.which]],"think",0.3)});
+      ed_name(x,R.who2,tt,w("mei","Mei",0),c.says-0.2,"Mei Tanaka","Registrar's office",170);
+      ed_bub(x,R.who2,tt,c.word+0.2,c.words-0.2,["Utilisation?","To me, that's seats filled."],cam,{lean:-160});
+      ed_bub(x,R.who1,tt,c.words+0.2,c.which-0.2,["Booked, and used:","each in a line."],cam,{lean:160});
+      ed_bub(x,R.who2,tt,c.which+0.1,c.plan-0.2,["Which classes would move?"],cam,{lean:-160});
+      ed_bub(x,R.who1,tt,c.plan+0.2,tS-0.3,["Your office plans it,","from 2028."],cam,{lean:160});}},
+    // everyone gets the same page, with the same numbers
+    {at:tS,place:"edCampus",cut:true,keys:[[tS,900,570,1.1]],d:2,draw:(x,tt,cam)=>{
+      PK.person(x,PK.extra(6),1320,CA.near-110,ed_hC(CA.near-110),ED_SHOW,Object.assign({t:tt,flip:true,hold:ed_sheet,holds:true},ed_alive(tt,{expr:"think",gaze:[1,0.5]},2,tS)));
+      PK.person(x,"mei",1040,CA.near-55,ed_hC(CA.near-55),ED_SHOW,Object.assign({t:tt,flip:true,hold:ed_sheet,holds:true},ed_alive(tt,{expr:"smile",gaze:[1,0.5]},3,tS)));
+      PK.person(x,"graham",700,CA.near,ed_hC(CA.near),ED_SHOW,Object.assign({t:tt,hold:ed_sheet,holds:true},ed_alive(tt,{expr:"smile",gaze:[1,0.5]},1,tS)));}}
   ]);
-  ed_kick(ctx,S,1);
+  ed_kick(ctx,S,ag_in(t,0.6,0.6)*(1-ed_apart(t,[[0,tF],[tM,1e9]])));
 });
 
 /* ---------------------------------------------------------------- 6. They decide */
-scene("decide",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),gr={light:"grey"},dy={light:"day"};
-  const MEM=[260,520,780,1040,1300];
+scene("decide",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,CA=PK.ROOMS.campus;
+  const tM=c.meets-0.4,tD=c.defers-0.4,tA=c.argued-0.4;
   ag_shots(ctx,S,t,sc.dur,[
-    // Graham's office, Tuesday 1 June: the page goes under his name, with the week's picture beside it
-    {at:0,place:"edGraham",keys:[[0,960,540,1.0]],draw:(x,tt)=>{const p0=w("sends","page",-0.4),q0=w("sends","picture",-0.4),n0=w("sends","name",-0.3);
-      if(tt>=p0){x.save();x.globalAlpha*=ag_in(tt,p0,0.35);ed_pageSmall(x,920,230,0.5,{p:ed_all(),booked:1,light:"grey",k:tt-p0});
-        x.translate(920,230);x.scale(0.5,0.5);ed_pageLight(x,0,0,128,168,LP.blue,ag_io(tt,n0,c.meets-0.6,0.4));x.restore();}
-      if(tt>=q0){x.save();x.globalAlpha*=ag_in(tt,q0,0.35);ed_pictureSmall(x,1400,268,0.5,{light:"grey",k:tt-q0});x.restore();}
-      ed_tag(x,tt,w("sends","Tuesday",-0.2),null,1355,680,"Tuesday 1 June",{align:"center"});
-      lp_person(x,"graham",520,650,1.0,{t:tt,light:gr});}},
-    // the University Council's room, Thursday 24 June: its members' two questions, both answered on the page; the decision
-    {at:c.meets-0.4,place:"edCouncil",cut:true,keys:[[c.meets-0.4,960,540,1.0]],draw:(x,tt)=>{const d0=w("defers","defer",-0.3),dA=ag_in(tt,d0,0.35);
-      lp_screen(x,600,170,860,286,{a:1-dA,draw:(cc,X,Y,W2,H2)=>ed_heat(cc,X+90,Y+50,(W2-130)/10,(H2-74)/5,{u:1,peak:1,deco:1})});
-      const cut=794;MEM.forEach((mx,i)=>lp_person(x,lp_crowd(i+1),mx,640,0.62,{t:tt+i*0.7,flip:i>=3,cut,light:dy}));
-      ed_councilTable(x,120,800,1400);
-      lp_person(x,"graham",1700,660,0.95,{t:tt,flip:true,light:dy});
-      const q1="How sure is the growth?",q2="Which classes would move?",b0=w("asks","both",-0.1),qOut=d0-0.2;
-      ed_tag(x,tt,w("asks","sure",-0.3),qOut,100,220,q1);ed_tick(x,tt,b0,100+ed_tagW(x,q1)+34,220,1-ag_in(tt,qOut,0.4));
-      ed_tag(x,tt,w("asks","which",-0.3),qOut,100,290,q2);ed_tick(x,tt,b0+0.3,100+ed_tagW(x,q2)+34,290,1-ag_in(tt,qOut,0.4));
-      ed_sheet(x,tt,d0,600,140,860,{kick:"Thursday 24 June 2027",title:"The building deferred for two years",lines:["The timetable change from Semester 1 2028","A review in June 2029"]},
-        {col:LP.green,light:"day",u:ed_u(tt,[w("defers","timetable",-0.2),w("defers","review",-0.2)])});
-      ed_tag(x,tt,w("argued","choice",-0.3),null,100,380,"The choice, not the numbers");}}
+    // Graham sends the page under his own name, the week's picture beside it
+    {at:0,place:"edCorner",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=ed_corner(x,tt,{t0:0,who1:"graham",laptop:true,hf:ed_alive(tt,{expr:"think",gaze:[1,0.6]},1,0),handN:[830,616],handF:[856,606]});
+      PK.callout(x,1060,90,720,250,R.laptop,ag_io(tt,c.sends+0.4,tM-0.3,0.4),(cc,bx,by,bw,bh)=>ed_panel(cc,bx,by,bw,bh,"To the University Council",[["Room use: one page,",PK.C.ink,34],["and the week's picture",PK.C.ink,34]],null,PK.C.blue));}},
+    // the University Council meets; its members ask how sure the growth is
+    {at:tM,place:"edLecture",cut:true,keys:[[tM,960,540,1.0]],d:2,draw:(x,tt,cam)=>{let Jm=null;PK.audience(x,tt,8,{look:0.6});
+      Jm=PK.seated(x,PK.extra(12),300,970,PK.hAt(970,ED_LE.eye),"sit",Object.assign({t:tt},ed_sp(tt,1,[[c.asks+0.2,E.asks]],"think",-0.2)));
+      PK.person(x,"graham",1500,950,PK.hAt(950,ED_LE.eye),"clasp",Object.assign({t:tt,flip:true},ed_alive(tt,{expr:"listen",gaze:[1,0.1]},2,tM)));
+      ed_bub(x,Jm,tt,c.asks+0.2,tD-0.3,["How sure is the growth?"],cam,{lean:160});}},
+    // they defer the building; Graham writes to Helena
+    {at:tD,place:"edTeam",dis:0.6,keys:[[tD,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const CH={title:"Graham Ellis",who:["graham"],me:"helena",msgs:[{who:"graham",s:"Deferred two years. Timetable change from 2028.",at:c.defers+1.0,type:1.6}]},cs=PK.chatSize(x,CH,{size:28});
+      let Jh=null;ed_team(x,tt,{clock:16,marta:null,sam:null,jun:Object.assign({work:1},ed_alive(tt,{},2,tD)),people:[{fl:930,draw:cc=>{
+        Jh=PK.person(cc,"helena",1560,930,ed_hT(930),"phone",Object.assign({t:tt,flip:true,hold:PK.inHand.phone?PK.inHand.phone({back:true}):null,holds:true},PK.face(tt,{expr:"think",gaze:[1,0.9]},[[c.defers+3.0,"smile",2.0]])));}}]});
+      if(Jh)PK.callout(x,560,160,cs.w,cs.h,[Jh.hdN[0]-20,Jh.hdN[1]-30],ag_io(tt,tD+0.3,tA-0.3,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,CH,tt,{size:28}));}},
+    // afterwards, in person: the meeting argued about the choice, not the numbers
+    {at:tA,place:"edCorner",cut:true,keys:[[tA,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=ed_corner(x,tt,{t0:tA,who1:"graham",who2:"helena",sheets:true,hf:ed_sp(tt,1,[[c.argued+0.3,E.argued]],"smile",0.3),iface:ed_alive(tt,{expr:"smile",gaze:[1,0.3]},2,tA)});
+      ed_bub(x,R.who1,tt,c.argued+0.3,c.see-0.2,["We argued about the choice,","not about the numbers."],cam,{lean:160});}}
   ]);
-  ed_kick(ctx,S,1);
+  ed_card(ctx,S,t,tM+0.3,c.asks-0.2,{kick:"Thursday 24 June",title:"The University Council meets"},{y:40,mid:true});
+  ed_card(ctx,S,t,c.defers+0.2,c.argued-0.6,{kick:"Deferred two years",title:"The timetable changes from 2028"},{y:40,mid:true});
+  ed_kick(ctx,S,ag_in(t,0.6,0.6)*(1-ed_apart(t,[[tM,c.argued]])));
 });
 
 /* ---------------------------------------------------------------- 7. On Monday */
-scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),e0=c.breath;
-  const pair=(x,tt,o)=>{o=o||{};const a=1-0.9*ag_in(tt,e0,1.0);ed_page(x,ED_PG.x,ED_PG.y,{a,p:ed_all(),booked:1,light:"morning"});
-    ed_picture(x,ED_PIC.x,ED_PIC.y,{a,w:ED_PIC.w,h:ED_PIC.h,ch:ED_PIC.ch,u:1,peak:o.peak==null?1:o.peak,light:"morning"});};
+scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
+  const tI=c.ivy-0.4,tN=c.one-0.1,tL=c.take-0.4,tE=c.breath+0.6,N5=PK.pace(ctx,"helena",ed_boardM(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the team's room on a Monday morning: what Daniels did, in three prints
-    {at:0,place:"edMorning",keys:[[0,960,540,1.0]],draw:(x,tt)=>{
-      const pr=(i,t0)=>({a:ag_in(tt,t0,0.35),k:tt-t0}),A=pr(0,0.6),B=pr(1,0.9),C=pr(2,1.2);
-      lp_sheet(x,110,200,520,440,{a:A.a,k:A.k,col:LP.orange,light:"morning"});if(A.a>0.004){x.save();x.globalAlpha*=A.a;x.translate(160,250);x.scale(0.53,0.53);ed_dots(x,0,40,{steps:[],cols:79,pitch:9,r:3.2});x.restore();lp_T(x,"4,063 flyers, 10 measurements",160,600,{w:600,size:28,col:LP.mut,a:A.a});}
-      if(B.a>0.004){x.save();x.globalAlpha*=B.a;x.translate(710,200);x.scale(0.52,0.52);ed_note(x,0,0,1000,{u:1,h:846,k:B.k,light:"morning",deco:true});x.restore();}
-      lp_sheet(x,1290,200,520,440,{a:C.a,k:C.k,col:LP.blue,light:"morning"});if(C.a>0.004){x.save();x.globalAlpha*=C.a;ed_cockpit(x,1450,560,0.36,{lw:2,pilots:[ed_fit(1)],reach:"stick",seats:[0],pedals:[0]});x.restore();}
-      ed_tag(x,tt,w("back","counted",-0.2),null,370,700,"He counted",{align:"center"});
-      ed_tag(x,tt,w("back","plainly",-0.2),null,970,700,"He said what it meant",{align:"center"});
-      ed_tag(x,tt,w("back","left",-0.2),null,1550,700,"He left the design to designers",{align:"center"});}},
-    // a later moment: Ivy's page, which did the same
-    {at:c.ivy-0.4,place:"edMorning",later:true,keys:[[c.ivy-0.4,960,540,1.0]],push:0,draw:(x,tt)=>{
-      const dz=w("ivy","decision",-0.2),pk=w("ivy","peak",-0.2),ch=w("ivy","choice",-0.2),pulse=ag_io(tt,pk,pk+1.6,0.4)*(0.5+0.5*Math.sin((tt-pk)*7));
-      pair(x,tt,{peak:1-0.6*pulse});
-      ed_pageLight(x,ED_PG.x,ED_PG.y,30,128,LP.blue,ag_io(tt,dz,pk-0.2,0.4));ed_pageLight(x,ED_PG.x,ED_PG.y,30,166,LP.blue,ag_io(tt,ch,c.one-0.6,0.4));}},
-    // a later moment: four things to do on Monday
-    {at:c.one-0.4,place:"edMorning",later:true,keys:[[c.one-0.4,960,540,1.0]],push:0,draw:(x,tt)=>{
-      const S4=[["one",140,150,{kick:"One",title:"Start with the decision",lines:["Then the answer, in one sentence"]}],
-        ["two",1000,150,{kick:"Two",title:"Show what it turns on",lines:["The peak and the spread, drawn as you write"]}],
-        ["three",140,500,{kick:"Three",title:"Say what you don't know",lines:["In their words, the same numbers for all"]}],
-        ["four",1000,500,{kick:"Four",title:"Try it on someone new to it",lines:["Then let the people who decide, decide"]}]];
-      S4.forEach(([id,sx,sy,words])=>ed_sheet(x,tt,c[id]-0.1,sx,sy,780,words,{col:LP.blue,light:"morning",u:ag_in(tt,c[id]+1.0,0.6)}));}},
-    // a later moment: the page and its picture, alone, as they become the end card
-    {at:c.take-0.6,place:"edMorning",later:true,keys:[[c.take-0.6,960,540,1.0]],push:0,draw:(x,tt)=>{pair(x,tt);}}
+    // Daniels didn't design a cockpit: he counted, and said plainly what the count meant
+    {at:0,place:"edpOffice",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const fl=960,h=edp_h(fl);
+      edp_desk(x,"daniels",1400,fl,Object.assign({t:tt,flip:true,work:0,on:(cc,D)=>{edp_typewriter(cc,D.x0-0.24*h,D.top,1.0,1);edp_cards(cc,D.x0-0.58*h,D.top,1.1);}},ed_alive(tt,{expr:"smile",gaze:[1,0.2]},1,0)));}},
+    // Ivy's page did the same
+    {at:tI,place:"edTeam",dis:0.8,keys:[[tI,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      const R=ed_atRoom(x,tt,tI,{at:"ivy",ivy:ed_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tI)});
+      ed_screenCall(x,R,ag_io(tt,tI+0.5,tN-0.3,0.4),"The page · 1 June",[["the decision first",PK.C.blue,34],["the peak beside the average",PK.C.orange,34],["the choice left to them",PK.C.green,34]],PK.C.blue,{bh:300});}},
+    {at:tN,place:"edBoard",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"helena",tt,N5,{say:[],events:ED_HEV});}},
+    // lead with the decision; show what it turns on
+    {at:tL,place:"edTeam",cut:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
+      ed_atRoom(x,tt,tL,{at:"ivy",ivy:ed_alive(tt,{expr:"smile",gaze:[1,0.3]},3,tL),people:[ed_helena(tt,ed_alive(tt,{expr:"smile",gaze:[1,0.2]},5,tL),{x:1560,fl:930})]});}}
   ]);
-  lp_end(ctx,S,t,e0,"Explaining so people can decide",ED_LAST,"Film 2 of 3","Working with people");
-  ed_kick(ctx,S,1-ag_in(t,e0,0.6));
+  ed_kick(ctx,S,(1-ag_in(t,tE-0.2,0.6)));
+  PK.end(ctx,S,t,tE,"Explaining so people can decide",ED_LAST,"Film 2 of 3","Working with people",{side:"right"});
 });
-
-ag_cutInto(["turns","unknown","decide"]);
+ag_cutInto(["page","first","turns","unknown","decide","monday"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

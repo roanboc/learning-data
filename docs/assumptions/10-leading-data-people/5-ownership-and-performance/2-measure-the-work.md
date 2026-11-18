@@ -1,6 +1,6 @@
 # Measure the work, not the people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360); made again in ink line on 18 November 2026 (PR #PRNUM)
+*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360); made again in ink line on 18 November 2026 (PR #433)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/measure-the-work/)
 
@@ -41,7 +41,7 @@ He added, from his own practice, that he is trying agents that improve how ticke
 
 ## Made again in ink line, 18 November 2026
 
-[Pull request #PRNUM](https://github.com/roanboc/learning-data/pull/PRNUM), merged on green with the series' Draft label, as you chose for the series on 17 November.
+[Pull request #433](https://github.com/roanboc/learning-data/pull/433), merged on green with the series' Draft label, as you chose for the series on 17 November.
 
 You approved *Owning the outcome* made again in ink line on 17 November, and asked for the other films of *Ownership and performance* to be made again the same way, the series first and not yet the whole module. This film follows the people kit's README and that film's rules. The rows below are the questions I would have asked while making it again.
 

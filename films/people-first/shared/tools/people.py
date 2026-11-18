@@ -54,6 +54,10 @@ It lists:
 - a hand above the head: a hand that reaches for something, or holds it, stays above the top of the head (by HIGH of the person's
   height or more) for HIGH_S seconds or more, the arm as straight up as it goes. A hand works between the hips and the top of the
   head: lower what is written on or reached for (a board in a room: its top row no higher than the writer's head);
+- a hand that stops short: a hand whose reach is complete (o.reachNk or o.reachFk at 1) stays more than SHORT of the person's
+  height from the point it reaches for, for SHORT_S seconds or more. An arm is about a third of a person's height: a point further
+  off leaves the hand in the air, short of the sheet, the pin or the other person's hand. Stand them nearer, or bring what they
+  reach for within the arm's length;
 - someone hidden: HIDDEN or more of someone's head and back, or most of their face, behind someone drawn after them, for HIDDEN_S
   seconds or more. Stand them apart, or seat one to the side. Someone nobody names (PK.extra), or someone far smaller, so far
   off, is the background: whoever is near may stand in front of them;
@@ -63,8 +67,9 @@ It lists:
   PK.watch({solid: name, at: [x0, y0, x1, y1], ground: y, ctx}) where PK.watch is set. Listed: one further away drawn over a nearer
   one, or over a person who is nearer (and a person further away drawn over it), and two that overlap on one ground line.
 
-The last five came on 18 November 2026, when four films were drawn (in Measure the work, not the people, cars drove through each
-other, an arm lay across a face and someone sat hidden behind whoever wrote at the board). What those films had then is in
+The last six came on 18 November 2026, when four films were drawn (in Measure the work, not the people, cars drove through each
+other, an arm lay across a face, someone sat hidden behind whoever wrote at the board, and hands stopped short of the slip, the
+sheet and the pin they reached for). What those films had then is in
 site-tools/people_later.json, {film key: [[kind, chapter id], ...]}: it is listed and doesn't stop the check, and each film leaves
 the list with its fix.
 
@@ -90,6 +95,7 @@ FACE_N, ACROSS_S = 2, 0.5
 HIGH, HIGH_S = 0.02, 1.0
 HIDDEN, HIDDEN_S = 0.5, 1.5
 DEPTH, DEPTH_S = 0.04, 0.3
+SHORT, SHORT_S = 0.07, 0.5
 
 HOOK = r"""()=>{
 if(window.__PKW)return;const H=window.__PKW={on:false,pend:new Map()};
@@ -117,7 +123,7 @@ PK.watch=r=>{const c=r.ctx,m=c.getTransform(),k=Math.hypot(m.a,m.b),a=c.globalAl
 const JN=["hc","sc","hip","shN","eN","wN","hdN","shF","eF","wF","hdF","hN","hF","kN","kF","nN","nF"],op=PK.person;
 PK.person=function(ctx){H.last=null;const J=op.apply(this,arguments),r=H.last;H.last=null;
   if(r&&J&&J.hc&&J.p){const m=ctx.getTransform(),u=J.u*Math.hypot(m.a,m.b),p=J.p;r.j={};for(const n of JN)r.j[n]=at(m,J[n][0],J[n][1]);
-    r.sg=(J.sgn||1)*(m.a<0?-1:1);r.tk=J.k==null?1:J.k;r.sd=J.side||0;r.ha=J.ha||0;
+    r.tg=[at(m,r.at[0],r.at[1]),at(m,r.at[2],r.at[3])];r.sg=(J.sgn||1)*(m.a<0?-1:1);r.tk=J.k==null?1:J.k;r.sd=J.side||0;r.ha=J.ha||0;
     r.g=[p.arm[0]/2,p.arm[1]/2,p.arm[2]/2,p.hand,p.tor[0]/2,p.tor[2]/2,p.leg[0]/2,p.leg[1]/2,p.leg[2]/2].map(v=>v*u);}
   return J;};
 // a scratch canvas starts again empty
@@ -134,7 +140,7 @@ P2.drawImage=function(img){if(H.on){
       if(r.k==="B"){[o.x0,o.y0]=map(r.x0,r.y0);[o.x1,o.y1]=map(r.x1,r.y1);}
       else if(r.k==="S"){[o.x0,o.y0]=map(r.x0,r.y0);[o.x1,o.y1]=map(r.x1,r.y1);o.g=map(r.x0,r.g)[1];}
       else if(r.k==="P"){[o.x,o.y]=map(r.x,r.y);[o.hx,o.hy]=map(r.hx,r.hy);o.h=r.h*k;o.hh=r.hh*k;
-        if(r.j){o.j={};for(const n in r.j)o.j[n]=map(r.j[n][0],r.j[n][1]);o.g=r.g.map(v=>v*k);if(m.a*kx<0)o.sg=-r.sg;}}
+        if(r.j){o.j={};for(const n in r.j)o.j[n]=map(r.j[n][0],r.j[n][1]);o.tg=r.tg.map(q=>map(q[0],q[1]));o.g=r.g.map(v=>v*k);if(m.a*kx<0)o.sg=-r.sg;}}
       add(this.canvas,o);}}}
   return di.apply(this,arguments);};
 }"""
@@ -154,7 +160,7 @@ for(let f=0;f/30<TL.total;f++){H.pend=new Map();H.on=true;mx.setTransform(1,0,0,
     else if(r.k==="B")B.push({x0:Math.min(r.x0,r.x1)/S,y0:Math.min(r.y0,r.y1)/S,x1:Math.max(r.x0,r.x1)/S,y1:Math.max(r.y0,r.y1)/S,a:r.a});
     else if(r.k==="S")SO.push({name:r.name,place:r.place,x0:Math.min(r.x0,r.x1)/S,y0:Math.min(r.y0,r.y1)/S,x1:Math.max(r.x0,r.x1)/S,y1:Math.max(r.y0,r.y1)/S,g:r.g/S,a:r.a,n:nth});
     else{const j=r.j?{}:null;if(j)for(const n in r.j)j[n]=[r.j[n][0]/S,r.j[n][1]/S];
-      P.push(Object.assign({},r,{x:r.x/S,y:r.y/S,h:r.h/S,hx:r.hx/S,hy:r.hy/S,hh:r.hh/S,j,g:r.g?r.g.map(v=>v/S):null,n:nth}));}}
+      P.push(Object.assign({},r,{x:r.x/S,y:r.y/S,h:r.h/S,hx:r.hx/S,hy:r.hy/S,hh:r.hh/S,j,g:r.g?r.g.map(v=>v/S):null,tg:r.tg?r.tg.map(q=>[q[0]/S,q[1]/S]):null,n:nth}));}}
   // someone drawn in two halves (behind a desk) is one person
   const G=[];for(const p of P){const g=G.find(q=>q.who===p.who&&q.place===p.place&&Math.abs(q.x-p.x)<6&&Math.abs(q.y-p.y)<6&&Math.abs(q.a-p.a)<0.02&&!q.parts.includes(p.part));
     if(g){g.parts.push(p.part);if(p.part!=="lower")Object.assign(g,p,{parts:g.parts});}else G.push(Object.assign({},p,{parts:[p.part]}));}
@@ -183,6 +189,8 @@ const faceOf=p=>{const c=Math.cos(p.ha),s=Math.sin(p.ha),k=p.tk==null?1:p.tk;ret
 const across=p=>{const A=armOf(p,"N");return faceOf(p).filter(q=>A.some(c=>inBar(q,c))).length;};
 // a hand at work (it reaches for something, or holds it) above the top of the head: the arm is as straight up as it goes
 const high=p=>["N","F"].some((s,i)=>(p.reach[i]>=0.5||(p.hold&&Math.abs(p.pose[3+2*i])>o.air))&&p.j["hd"+s][1]<p.j.hc[1]-0.5*p.hh-o.high*p.h);
+// a hand that stops short: it reaches for a point of the frame (o.reachN, o.reachF) that is further off than the arm is long
+const short=p=>{let d=0;if(p.tg)["N","F"].forEach((s,i)=>{if(p.reach[i]>=0.95&&(p.at[2*i]||p.at[2*i+1]))d=Math.max(d,Math.hypot(p.j["hd"+s][0]-p.tg[i][0],p.j["hd"+s][1]-p.tg[i][1]));});return d;};
 // the points of someone that others may hide: seven of the head, fifteen of the back
 const ptsOf=p=>{const j=p.j,r=0.3*p.hh,H=[j.hc],B=[],w=p.g[5]*0.6*(1-0.35*(p.sd||0)),vx=j.hip[0]-j.sc[0],vy=j.hip[1]-j.sc[1],L=Math.hypot(vx,vy)||1;
   for(let a=0;a<6;a++)H.push([j.hc[0]+r*Math.cos(a*Math.PI/3),j.hc[1]+r*Math.sin(a*Math.PI/3)]);
@@ -201,13 +209,16 @@ for(const t of T){const fr=t.f,d=fr.map((x,j)=>j&&fr[j-1][0]===x[0]-1?dPose(fr[j
   // a hand in the air, falling into a seat, never moving: how long each lasts
   // (a run ends where it stops being true, and where the person is out of the picture for a frame)
   const run=(hit,min,say)=>{let s=-1;for(let j=0;j<=fr.length;j++){const h=j<fr.length&&hit(j),next=h&&s>=0&&fr[j-1][0]===fr[j][0]-1;
-    if(s>=0&&!next){if(j-s>=min){const m=say(j-s);probs.push(typeof m==="string"?{f:fr[s][0],s:m}:{f:fr[s][0],s:m.s,k:m.k});}s=-1;}
+    if(s>=0&&!next){if(j-s>=min){const m=say(j-s,s);probs.push(typeof m==="string"?{f:fr[s][0],s:m}:{f:fr[s][0],s:m.s,k:m.k});}s=-1;}
     if(h&&s<0)s=j;}};
   run(j=>seen(fr[j][1])&&air(fr[j][1]),o.airS*30,n=>t.who+" holds a hand in the air for "+(n/30).toFixed(1)+" s, with nothing in it");
   run(j=>seen(fr[j][1])&&fall(fr[j][1]),3,n=>t.who+" falls into a seat with stiff legs (a stand and a sit mixed; use PK.poseSit)");
   // an arm across their own face: the near arm, which is drawn over the head; and a hand held above the head, at work
   run(j=>shown(fr[j][1])&&across(fr[j][1])>=o.faceN,o.acrossS*30,n=>({k:"face",s:t.who+"'s arm lies across their own face for "+(n/30).toFixed(1)+" s: the near arm is drawn over the head. Let the far hand reach there (o.reachF), or turn them round"}));
   run(j=>shown(fr[j][1])&&high(fr[j][1]),o.highS*30,n=>({k:"high",s:t.who+" holds a hand above their head for "+(n/30).toFixed(1)+" s, the arm straight up: a hand works between the hips and the top of the head. Lower what they write on or reach for"}));
+  // a hand that stops short of what it reaches for: by how much at most, while it lasts
+  run(j=>shown(fr[j][1])&&short(fr[j][1])>o.short*fr[j][1].h,o.shortS*30,(n,s0)=>{let d=0;for(let q=s0;q<s0+n;q++)d=Math.max(d,short(fr[q][1]));
+    return{k:"short",s:t.who+"'s hand stops "+Math.round(d)+" px short of what it reaches for, for "+(n/30).toFixed(1)+" s: the arm isn't long enough. Stand them nearer, or bring what they reach for within the arm's length"};});
   const large=j=>seen(fr[j][1])&&inView(fr[j][1])&&fr[j][1].h>=o.large;
   run(j=>large(j)&&!fr[j][1].live,o.statue*30,n=>t.who+" is a statue for "+(n/30).toFixed(1)+" s: drawn without the time (o.t), so nothing of them moves");
   // staying as they are: from one moment (the anchor) on, nothing staged changes; a slow change adds up, and is a change
@@ -294,7 +305,7 @@ def watch(pg):
     pg.evaluate(HOOK)
 
 
-LATER_KINDS = ('face', 'high', 'behind', 'order', 'solid')
+LATER_KINDS = ('face', 'high', 'short', 'behind', 'order', 'solid')
 
 
 def later():
@@ -317,7 +328,7 @@ def limits():
     return {'row': ROW, 'rowS': ROW_S, 'scale': SCALE, 'air': AIR, 'airS': AIR_S, 'jump': JUMP, 'overS': OVER_S, 'large': LARGE, 'still': STILL,
             'statue': STATUE, 'share': SHARE, 'whole': WHOLE, 'faceS': FACE_S, 'hideS': HIDE_S, 'late': LATE, 'lag': LAG, 'edge': EDGE, 'hop': HOP,
             'places': PLACES, 'faceN': FACE_N, 'acrossS': ACROSS_S, 'high': HIGH, 'highS': HIGH_S, 'hidden': HIDDEN, 'hiddenS': HIDDEN_S,
-            'depth': DEPTH, 'depthS': DEPTH_S}
+            'depth': DEPTH, 'depthS': DEPTH_S, 'short': SHORT, 'shortS': SHORT_S}
 
 
 def check(pg):

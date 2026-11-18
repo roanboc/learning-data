@@ -1,6 +1,7 @@
 """Arms, and who is in front of whom (films/people-first/shared/tools/people.py), on a made-up film drawn with the kit's own
-people: a near arm across the face, a hand at work above the head, someone hidden behind someone else, someone or something
-further away drawn over what is nearer, and two solid things in one place. And the list of what the films still have to put right."""
+people: a near arm across the face, a hand at work above the head, a hand that stops short of what it reaches for, someone hidden
+behind someone else, someone or something further away drawn over what is nearer, and two solid things in one place. And the
+list of what the films still have to put right."""
 import json
 import pathlib
 import sys
@@ -17,7 +18,7 @@ import films as release_films
 
 # a made-up film: one chapter for each thing the check reads, drawn with the kit's own PK.person
 FILM = """<!doctype html><meta charset="utf-8">%s<script>
-const IDS = ['face', 'far', 'high', 'low', 'behind', 'apart', 'extra', 'order', 'right', 'cars', 'lane', 'pass'];
+const IDS = ['face', 'far', 'high', 'low', 'short', 'reach', 'behind', 'apart', 'extra', 'order', 'right', 'cars', 'lane', 'pass'];
 const SCENES = IDS.map((id, i) => ({id, start: 4 * i, dur: 4})), TL = {total: 4 * IDS.length};
 function filmInfo() { return {scenes: SCENES}; }
 function sceneIndex(T) { return Math.max(0, Math.min(IDS.length - 1, Math.floor(T / 4))); }
@@ -32,6 +33,9 @@ function renderFrame(ctx, S, T) {
   // a hand that writes above the top of the head, and one that writes at the height of the eyes
   if (id === 'high') P('carmen', 700, 900, {reachF: [770, 262]});
   if (id === 'low') P('carmen', 700, 900, {reachF: [800, 372]});
+  // a hand that reaches for a point further off than the arm is long, and for one within its length
+  if (id === 'short') P('ivy', 700, 900, {reachF: [1000, 500]});
+  if (id === 'reach') P('ivy', 700, 900, {reachF: [850, 470]});
   // someone right behind someone else; a step apart; and someone nobody names, far off, behind whoever is near
   if (id === 'behind') { P('sam', 700, 900); P('helena', 712, 906); }
   if (id === 'apart') { P('sam', 700, 900); P('helena', 900, 906); }
@@ -99,6 +103,11 @@ class PageTests(unittest.TestCase):
         self.assertEqual(self.kinds("high"), ["high"])
         self.assertIn("carmen holds a hand above their head", self.got["high"][0][1])
         self.assertEqual(self.kinds("low"), [])
+
+    def test_a_hand_that_stops_short(self):
+        self.assertEqual(self.kinds("short"), ["short"])
+        self.assertRegex(self.got["short"][0][1], r"ivy's hand stops \d+ px short of what it reaches for, for 4\.0 s")
+        self.assertEqual(self.kinds("reach"), [])
 
     def test_someone_hidden_behind_someone_else(self):
         self.assertEqual(self.kinds("behind"), ["behind"])

@@ -1,6 +1,6 @@
 {
-  "owning-the-outcome-en": [["high", "owns"]],
-  "measure-the-work-en": [["face", "vision"], ["high", "manage"], ["high", "read"], ["behind", "read"], ["high", "pairs"], ["high", "target"], ["behind", "monday"]],
-  "when-someone-falls-behind-en": [["high", "cause"]],
-  "growing-people-en": [["order", "lesson"], ["high", "tuesday"]]
+  "owning-the-outcome-en": [["short", "trees"], ["high", "owns"]],
+  "measure-the-work-en": [["face", "vision"], ["short", "vision"], ["high", "manage"], ["high", "read"], ["behind", "read"], ["high", "pairs"], ["high", "target"], ["behind", "monday"]],
+  "when-someone-falls-behind-en": [["short", "nummi"], ["short", "behind"], ["high", "cause"], ["short", "cause"], ["short", "gap"], ["short", "monday"]],
+  "growing-people-en": [["order", "lesson"], ["short", "lesson"], ["high", "tuesday"], ["short", "monday"]]
 }

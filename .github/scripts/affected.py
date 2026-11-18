@@ -30,6 +30,10 @@ Changes to the planner and workflow are covered by the tooling regression suite,
 A change to a film's release.json checks that film. --all remains the explicit full regression run.
 A change to the build's cue-word reading (films/data-governance/shared/tools/cues.py) picks no film: it draws nothing, the
 static checks hold every film to it, and the tooling tests hold the reading itself.
+A change to the check that nothing shows twice where a film changes shot or chapter (films/data-governance/shared/tools/twice.py)
+picks no film either, as a change to site-tools/fits.py or shots.py picks none: it changes no player, the tooling tests hold it on a
+made-up film, and each film runs it again with its own checks whenever the film changes. Before such a change merges, run it on
+every film (twice.py --all, after building them) and list in site-tools/twice_later.json what it newly finds, to fix film by film.
 
 In CI, --github writes site, browser, pages (a JSON list, or "all"), films (a matrix) and count to $GITHUB_OUTPUT, and a table
 to $GITHUB_STEP_SUMMARY.
@@ -52,6 +56,10 @@ def production_tool(path):
 # player. site-tools/check_site.py holds every film to it (Cue words), as each build calls it, and tests/test_cues.py holds the
 # reading itself. So a change to it runs those two and picks no film, though every film of six series names it in its paths.
 READS = ["films/data-governance/shared/tools/cues.py"]
+# The check that nothing shows twice where a film changes shot or chapter: every film's tools/check.py runs it, so every film names it
+# in its paths, but it changes no player. A change to it runs the tooling tests (tests/test_twice.py) and picks no film; it is run on
+# every film before it merges, and what it newly finds waits in site-tools/twice_later.json, as with site-tools/fits.py and shots.py.
+CHECKS = ["films/data-governance/shared/tools/twice.py"]
 SMOKE = ["site-tools/smoke.py"]  # the browser checks themselves: a change runs them on every page
 PLAYS = "site-tools/smoke"        # a series' play script: its labs and scenarios pages
 USED = ["site-tools/check_site.py", "site-tools/build_series.py"]  # what smoke.py imports: a change starts it, with no page
@@ -212,7 +220,7 @@ def plan(files, everything, base="HEAD"):
         pick = []
         for f in fl:
             source = [p for p in files if not p.endswith((".md", ".rst")) and not production_tool(p) and p not in READS
-                      and touches(p, f["paths"] + [f["release"]])]
+                      and p not in CHECKS and touches(p, f["paths"] + [f["release"]])]
             if source:
                 pick.append(dict(f, checks="full"))
                 reasons[f["key"]] = source
@@ -228,7 +236,7 @@ def plan(files, everything, base="HEAD"):
     matrix = [{k: f[k] for k in ("name", "key", "dir", "lang", "player", "site_player", "checks")} for f in pick]
     return dict(site=site, browser=browser, pages=None if keys is None else sorted(keys),
                 films=matrix, assets=assets_only, everything=everything, reasons=reasons,
-                tooling=everything or any(under(p, TOOLING) or production_tool(p) or p in READS for p in files),
+                tooling=everything or any(under(p, TOOLING) or production_tool(p) or p in READS or p in CHECKS for p in files),
                 media=everything or "site-tools/media.py" in files or any(p.endswith(("/audio.json", ".mp3")) for p in files))
 
 

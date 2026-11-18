@@ -187,6 +187,22 @@ class SelectionTests(unittest.TestCase):
         p = self.plan(cues, "films/data-governance/1-off-the-shelf/source/src/scenes.js")
         self.assertEqual([(f["key"], f["checks"]) for f in p["films"]], [("off-the-shelf-en", "full")])
 
+    def test_the_check_for_what_shows_twice_is_held_on_a_made_up_film_not_on_every_film(self):
+        # every film names it in its paths, since every film's tools/check.py runs it; it changes no player, so a change to it runs
+        # the tooling tests (tests/test_twice.py) and draws no film, as a change to site-tools/fits.py or shots.py draws none
+        twice = "films/data-governance/shared/tools/twice.py"
+        self.assertGreater(sum(affected.touches(twice, f["paths"]) for f in affected.films()), 100)
+        p = self.plan(twice)
+        self.assertEqual(p["films"], [])
+        self.assertTrue(p["tooling"])
+        self.assertFalse(p["browser"])
+        self.assertEqual([s[0] for s in affected.steps(p)], ["Tooling regression tests"])
+        # the checks beside it still check the films that name them
+        self.assertGreater(len(self.plan("films/data-governance/shared/tools/jump.py")["films"]), 100)
+        # and a film changed along with it is still checked whole, twice.py included
+        p = self.plan(twice, "films/data-governance/1-off-the-shelf/source/src/scenes.js")
+        self.assertEqual([(f["key"], f["checks"]) for f in p["films"]], [("off-the-shelf-en", "full")])
+
     def test_a_films_cue_words_are_read_when_its_scenes_or_score_change(self):
         # check_site.py reads them (Cue words); a series whose own build doesn't is held to its words there
         for path in ("films/enterprise-architecture/1-day-one/source/src/scenes.js", "films/enterprise-architecture/1-day-one/source/src/narration.js",

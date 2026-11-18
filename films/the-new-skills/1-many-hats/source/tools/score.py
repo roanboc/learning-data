@@ -228,15 +228,15 @@ oc = lambda lid, off=0: G('trench', lid, off)
 END = E('trench')
 low(D2, 0.5, 0.85, 0.0, ring=3.4)
 chord((D3, A3, D4, Fs4), ow('when', 'Kaifeng', 0.2), 0.7, step=0.17, ring=3.0)
-card(ow('when', 'year', -0.2), 0.004, px(420))
+
 chord((B2, Fs3, B3, D4), ow('fire', 'fire'), 0.65, step=0.16, ring=2.6)
 for w, x in (('gates', 612), ('hall', 902), ('treasury', 1180), ('library', 1520)):
-    card(ow('burns', w, 0.1), 0.0035, px(x))
-card(ow('ding', 'Ding', -0.1), 0.004, px(900))
+    pass
+
 chord((G2, D3, G3, B3), ow('ding', 'charge'), 0.55, step=0.15, ring=2.2)
 # the three jobs, each a route across the city with its own figure: the earth from far off, low; the timber from the docks, high; the
 # rubble carted out, in the middle
-card(oc('cost', -0.1), 0.0035, px(1400))
+
 figure(FIG_EARTH, ow('earth', 'dug', 0.1), 0.75, step=0.24, ring=0.55, last=1.2)
 figure(FIG_TIMBER, ow('timber', 'hauled', 0.1), 0.6, step=0.22, ring=0.5, last=1.1)
 figure(FIG_RUBBLE, ow('rubble', 'carted', 0.1), 0.65, step=0.22, ring=0.5, last=1.2)
@@ -255,13 +255,13 @@ raft(ow('boats', 'gate', 0.2), 0.006, px(1420))
 tip(ow('fill', 'rubble', -0.2), 1.2, 0.005, px(960))
 chord((D3, Fs3, A3, D4), ow('fill', 'again', -0.1), 0.6, step=0.15, ring=2.4)
 # Shen Kuo's card and his words; the saving, A major, and D as the city gets its streets back
-card(oc('shen', 0.1), 0.0035, px(500)); card(ow('shen', 'Shen', -0.2), 0.004, px(1430))
+
 chord((A2, E3, A3, Cs4), ow('saving', 'saving'), 0.55, step=0.14, ring=1.8)
-card(ow('saving', 'hundreds', -0.1), 0.0035, px(960))
+
 chord((D3, A3, Fs4, D4), ow('saving', 'streets', -0.1), 0.55, step=0.12, ring=2.2)
 # the diggers, the boatmen and the carters, a card each; Ding Wei saw the three as one: the mark, low, the two hands in octaves
 for w, x in (('diggers', 420), ('boatmen', 960), ('carters', 1500)):
-    card(ow('one', w, 0.05), 0.0035, px(x))
+    pass
 one = ow('one', 'one', -0.2)
 figure((D3, E3, Fs3, A3, G3, B3, Cs4, A3, D4), one, 0.6, 0.22, 0.45, 2.2, tapn)
 figure((D2, Fs2, G2, A2, D3), one, 0.55, 0.44, 0.6, 2.2, low)
@@ -277,18 +277,18 @@ LV[0] = 0.9
 qw = lambda lid, word, off=0: W('question', lid, word, off)
 qc = lambda lid, off=0: G('question', lid, off)
 chord((G2, B2, D3, G3), S0('question') + 0.2, 0.6, step=0.16, ring=2.4)
-card(S0('question') + 1.0, 0.004, px(960))
-card(qw('ivy', 'Ivy', -0.1), 0.004, px(1320))
+
+
 low(D2, qw('depth', 'statistics', -0.1), 0.7, None, ring=2.0)
-card(qc('helena', 0.4), 0.004, px(990))
-card(qw('role', 'managing', -0.2), 0.0035, px(990))
+
+
 low(D2, qw('role', 'one', -0.05), 0.6, None, ring=1.8); tapn(D4, qw('role', 'one', -0.05), 0.45, None, ring=1.8)
-card(G('question', 'hats', 0.2), 0.0035, px(990)); card(qw('month', 'month', -0.1), 0.0035, px(990))
-card(qw('graham', 'Graham', -0.1), 0.004, px(1320)); card(qw('graham', 'Council', -0.2), 0.0035, px(1320))
-card(qw('q', 'question', -0.1), 0.004, px(1320))
+
+
+
 chord((B3, D4), qw('q', 'hours', 0.4), 0.55, step=0.2, ring=1.8)
-pen(qw('goals', 'writes', -0.1), 0.8, 0.005, px(1260), 4)
-tap(qw('goals', 'agrees', -0.1), 0.004, px(1260))
+
+
 figure((A3, D4, Fs4), qw('first', 'route', 0.1), 0.55, step=0.2, ring=0.6, last=1.6, hand=tapn)
 
 # 3. A few days with each: each person's card as Ivy meets them, and one note of D major's chord for each, a string apiece, low to high
@@ -299,11 +299,11 @@ pw = lambda lid, word, off=0: W('parts', lid, word, off)
 pc = lambda lid, off=0: G('parts', lid, off)
 for lid, name, word, m, x in (('mei', 'Mei', 'timetable', D3, 300), ('sam', 'Sam', 'sensor', Fs3, 446), ('yusuf', 'Yusuf', 'never', A3, 920),
                               ('noor', 'Noor', 'map', D4, 960), ('jun', 'Jun', 'trust', Fs4, 1555)):
-    card(pw(lid, name, -0.1), 0.0035, px(x))
+    pass
     (low if m < A3 else tapn)(m, pw(lid, word, 0.1), 0.6, px(x) * 0.4, ring=1.8)
-card(pc('pair', 0.5), 0.0035, px(960))
-card(pw('films', 'moves', -0.2), 0.0035, px(640)); card(pw('films', 'drawn', -0.2), 0.0035, px(1280))
-card(pw('ask', 'who', -0.1), 0.0035, px(960))
+
+
+
 chord((D3, Fs3, A3, D4, Fs4), pw('ask', 'decision', 0.2), 0.55, step=0.13, ring=2.6)
 
 # 4. The whole route, on one page: the chapter turns on D, low; Ivy draws each layer of her page, a pen's strokes each time; the rule's
@@ -314,14 +314,14 @@ LV[0] = 0.9
 gw = lambda lid, word, off=0: W('page', lid, word, off)
 gc = lambda lid, off=0: G('page', lid, off)
 low(D2, S0('page') + 0.2, 0.6, None, ring=2.2)
-pen(gw('draw', 'draws', -0.1), 0.9, 0.005, px(1100), 4)
+
 for lid, word in (('decision', 'decision'), ('question', 'question'), ('data', 'data'), ('born', 'born'), ('keeps', 'keeps')):
-    pen(gw(lid, word, -0.1), 0.6, 0.0045, px(1100), 3)
-tap(gw('keeps', 'rule', -0.1), 0.0035, px(1394))
+    pass
+
 mark(PHRASE, gw('join', 'sees', -0.1), 0.6, step=0.18, ring=0.45, last=2.0, bass=((B2, 0, 1.0), (G2, 3, 1.0), (A2, 6, 0.9), (D3, 8, 2.0)))
-ticked(gw('names', '172', 0.4), 0.0045, px(960))
+
 low(C3, gw('fourteen', '14', 0.1), 0.75, None, ring=0.35, room=0.12)
-card(gw('drop', '172', -0.2), 0.0035, px(960))
+
 chord((G2, D3, G3, B3), gw('nobody', 'side', -0.2), 0.5, step=0.14, ring=1.4)
 chord((D3, Fs3, A3, D4), gw('nobody', 'side', 1.0), 0.5, step=0.14, ring=2.4, until=E('page'))
 
@@ -333,11 +333,11 @@ hw = lambda lid, word, off=0: W('shape', lid, word, off)
 chord((Fs2, Cs3, Fs3, A3), S0('shape') + 0.2, 0.5, step=0.16, ring=2.0)
 low(D2, hw('t', 'deep', 0.0), 0.75, None, ring=2.4)
 chord((A3, D4, Fs4, A4), hw('t', 'wide', -0.1), 0.55, step=0.09, ring=1.8, lowest=False)
-card(hw('t', 'name', -0.3), 0.0035, px(960))
-card(G('shape', 'lists', 0.2), 0.004, px(580)); card(hw('lists', 'DAMA', -0.1), 0.0035, px(1360))
-card(hw('range', 'Range', -0.1), 0.004, px(1350))
+
+
+
 slide(hw('messy', 'messy', -0.2), 1.2, 0.0035, px(540))
-ticked(hw('essential', 'matched', 0.2), 0.0045, px(1124))
+
 chord((A2, Cs3, E3, A3), hw('essential', 'day', 0.0), 0.5, step=0.14, ring=1.8)
 chord((D2, A2, Fs3, D4, A4), hw('across', 'across', 0.0), 0.55, step=0.16, ring=2.6, until=E('shape'))
 
@@ -345,12 +345,12 @@ chord((D2, A2, Fs3, D4, A4), hw('across', 'across', 0.0), 0.55, step=0.16, ring=
 #    high; the catalog draws its lineage, a line slid out; and one D as the decision and the question stay on Ivy's page
 LV[0] = 0.9
 kw = lambda lid, word, off=0: W('kept', lid, word, off)
-ticked(kw('goal', 'met', 0.0), 0.0045, px(340))
+
 figure((D4, Fs4, A4), kw('goal', 'route', 0.1), 0.5, step=0.16, ring=0.7, last=1.6, hand=tapn)
-card(G('kept', 'team', 0.3), 0.0035, px(960)); card(kw('owner', 'owner', -0.1), 0.0035, px(960))
+
 chord((G3, D4, G4, B4), kw('team', '186', 0.1), 0.5, step=0.14, ring=1.8, lowest=False)
 slide(kw('catalog', 'draws', -0.1), 1.6, 0.004, px(670))
-card(kw('cant', 'decision', -0.2), 0.0035, px(1540))
+
 tapn(D4, kw('cant', 'page', 0.1), 0.5, px(1540) * 0.4, ring=2.2)
 
 # 7. On Monday: Kaifeng comes back, framed on the wall: the three figures, each in its register, as the three jobs are named; the mark as
@@ -364,9 +364,49 @@ figure((A4, G4, B4), mw('back', 'float', 0.0), 0.45, step=0.18, ring=0.4, last=0
 figure((Cs5, A4, D5), mw('back', 'cart', 0.0), 0.45, step=0.18, ring=0.4, last=1.4, hand=tapn)
 mark(PHRASE, mw('ivy', 'one', -0.2), 0.55, step=0.17, ring=0.4, last=1.8,
      bass=((D2, 0, 1.0), (Fs2, 2, 0.8), (G2, 4, 0.8), (A2, 6, 0.8), (D3, 8, 1.8)))
-card(mc('depth', 0.3), 0.0035, px(400))
+
 for lid, word, x in (('words', 'learn', 960), ('route', 'route', 1520), ('ask', 'give', 960)):
-    card(mw(lid, word, -0.1), 0.0035, px(x))
+    pass
 mark(tuple(m + 12 for m in PHRASE), mw('take', 'whole', 0.1), 0.5, step=0.24, ring=0.5, last=5.0,
      bass=((D2, 0, 2.0), (A2, 3, 1.2), (D3, 8, 5.0)), until=TOT)
 chord((Fs3, A3, D4), mw('take', 'whole', 0.1 + 0.24 * 8), 0.5, step=0.0, ring=5.0, until=TOT, lowest=False)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'A': ('question', 'carmen', 'mh_boardA'), 'B': ('parts', 'noor', 'mh_boardB'), 'C': ('parts', 'carmen', 'mh_boardC'),
+                    'D': ('page', 'ivy', 'mh_boardD'), 'E': ('shape', 'carmen', 'mh_boardE'), 'F': ('shape', 'carmen', 'mh_boardF'),
+                    'G': ('shape', 'carmen', 'mh_boardG'),
+                    'N1': ('question', None, 'mh_note1'), 'N2': ('parts', None, 'mh_note2'), 'N3': ('shape', None, 'mh_note3'),
+                    'N4': ('kept', None, 'mh_note4'), 'N5': ('monday', None, 'mh_note5')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+for name in ('A', 'B', 'C', 'D', 'E', 'F', 'G'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4', 'N5'):
+    written(name, scratch, 0.004)
+pop(W('question', 'q', 'too few', 0.0), 0.0022, px(1300), False); pop(G('question', 'q') + _DUR['question/q'] + 0.2, 0.0022, px(1300))
+pop(W('parts', 'yusuf', 'counts', 0.0), 0.0022, px(500), False)

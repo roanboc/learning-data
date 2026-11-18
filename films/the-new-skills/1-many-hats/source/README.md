@@ -1,6 +1,6 @@
 # Rebuilding Many hats, one picture
 
-*Many hats, one picture*, film 1 of 3 of *The new skills*, the first series of the module *Leading data people*, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, the agent films' kit and people, and the module's look and tools in [`../../shared/`](../../shared/), whose [README](../../shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `mh_` or `MH_`:
+*Many hats, one picture*, film 1 of 3 of *The new skills*, the first series of the module *Leading data people*, is generated from code like every other film here. It is drawn with the people kit, *Ink line* ([`../../../people-first/shared/`](../../../people-first/shared/README.md)): whole people in the places where they work and meet, the film's ideas written by hand at a board and in notebooks. It was first drawn in the module's *Sunlit plaster* and made again on 18 November 2026, word for word on the voice.
 
 | File | What it holds |
 |---|---|
@@ -8,12 +8,12 @@
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. A line whose voice differs from its caption says so in `say`. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The holds after some lines, where an idea needs a moment to land, and the film's wordless moments, such as the title card and the end card. |
-| `src/mh_kaifeng.js` | The opening story's places and pictures, Kaifeng in 1015, in the module's matte, sunlit language: the halls, the gate, the canal and the clothes drawn from what is known of Song buildings and dress, never as a copy of a painting. |
-| `src/mh_uni.js` | The film's own pictures for the data team's year: the team's room in the morning and late in the day, Graham's office and the registrar's; the five parts of the team's work on the wall; the timetable; Ivy's page with the whole route of Graham's question; the two lists of room names; the T-shape; the catalog's lineage; and the teaching building cut open. |
-| `src/mh_scenes.js` | The seven chapters, shot by shot, on the module's camera and shots. Every moment is timed to a line's start or to a word in it (`wAt()`), so the pictures stay with the voice when it is recorded again. |
+| `src/mhk_city.js` | The opening story, Kaifeng in 1015, in ink line (prefix `mhk_`): the street by day, at night with the fire and burned, dug into a trench, filled with water and rebuilt; the carts, the boats and the rafts, each drawn far to near; the people of Kaifeng with their caps, spades and poles; and Shen Kuo's study. Nothing is a copy of a painting of the time. |
+| `src/mh_uni.js` | The university in 2027, in the kit's places (the team's room, Helena's corner, the campus, the teaching room with its sensor, the board seen close, the notebook): who sits where, the boards' rows (Helena's one role, where data is born, depth, Ivy's route, the T, SFIA and DAMA, *Range*) and the five pages of notes. |
+| `src/mh_scenes.js` | The seven chapters, shot by shot. Every picture has people in it, whole, doing what the line says; the words on screen are where and when, a name, or what someone says, and the ideas are written by hand. Every moment is timed to a line's start or to a word in it (`wAt()`), so the pictures stay with the voice when it is recorded again. |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line. |
-| `tools/score.py` | The film's music and sounds: a harpejji, steel strings tapped with both hands as on a keyboard, and its own low strings under the left hand, made here. The mark is three short figures in three registers that turn out to be one phrase. Each sound uses the same word and offset as the picture in `src/mh_scenes.js`: change one, change both. |
-| `tools/` | Each other tool runs the module's tool (`../../../the-new-skills/shared/tools/run.py`) on this film. |
+| `tools/score.py` | The film's music and sounds: a harpejji, steel strings tapped with both hands as on a keyboard, and its own low strings under the left hand, made here. The mark is three short figures in three registers that turn out to be one phrase. Each sound uses the same word and offset as the picture in `src/mh_scenes.js`: change one, change both. The boards' and the notebooks' sounds come from the film itself, as each row is written (the people kit's `tools/pens.py`). |
+| `tools/` | Each other tool runs the people kit's tool (`../../../people-first/shared/tools/run.py`) on this film. |
 
 ## Setup (once)
 

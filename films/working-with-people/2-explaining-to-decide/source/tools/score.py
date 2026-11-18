@@ -175,7 +175,6 @@ def pencil(s, sec=0.7, g=0.005, pan=0.0, n=3):
         _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1900)) * _bump(x, d, 0.7) * (0.35 + 0.65 * gr), t, g, pan, 2000)
 def ticked(s, g=0.0045, pan=0.0):
     """a tick drawn in pencil: two quick strokes"""
-    pencil(s, 0.22, g, pan, 2)
 def slide(s, sec=0.9, g=0.0045, pan=0.0):
     """a sheet slid along a wall or a desk: a dry, even rub that eases off"""
     n = int(sec * SR); x = np.arange(n) / SR; gr = filt(noise(sec + 0.02)[:n], 'low', 25); gr = 0.7 + 0.3 * gr / max(1e-9, float(np.abs(gr).max()))
@@ -212,47 +211,24 @@ oc = lambda lid, off=0: G('pilot', lid, off)
 END = E('pilot')
 low(Bb1, 0.5, 0.8, 0.0, ring=3.2)
 chord((Bb2, F3, Bb3, D4), ow('when', 'nineteen', 0.2), 0.7, step=0.17, ring=3.0)
-sheet(ow('when', 'nineteen', -0.3), 0.004, px(336))
-board(ow('when', 'measured', -0.4), 1.2, 0.0045, px(632))
-pencil(ow('when', 'hundred', -0.2), 0.8, 0.0045, px(1450), 3)
-sheet(ow('why', 'designed', -0.2), 0.004, px(336))
 chord((Eb3, G3, Bb3, Eb4), ow('why', 'designed', 0.1), 0.6, step=0.15, ring=2.4)
 # the drawing office: the average man, a note alone
-sheet(oc('avg', 0.1), 0.004, px(295))
 alu(F4, ow('avg', 'average', 0.0), 0.7, px(295) * 0.4, ring=2.2)
-tag(ow('easy', 'easiest', -0.1), 0.0035, px(295)); tag(ow('easy', 'commonest', -0.1), 0.0035, px(295))
 # the doorway, and half the men stoop: G minor, low
-sheet(oc('door', -0.3), 0.004, px(870))
 chord((G2, D3, G3, Bb3), ow('door', 'stoop', -0.3), 0.6, step=0.16, ring=2.4)
-tag(ow('door', 'half', -0.1), 0.0035, px(870))
-sheet(oc('cockpit', -0.3), 0.004, px(1535))
-tag(ow('cockpit', 'control', -0.1), 0.0035, px(1535)); tag(ow('cockpit', 'pedal', -0.1), 0.0035, px(1535))
 chord((D3, G3, Bb3, D4), ow('cockpit', 'safely', -0.2), 0.55, step=0.18, ring=2.0, until=oc('change', -0.4))
 # Daniels's office, 1952: his card; his plain question; the middle band shaded
-sheet(ow('daniels', 'Lieutenant', -0.2), 0.004, px(1350))
 alu(F4, ow('asked', 'average', 0.1), 0.55, px(1350) * 0.4, ring=1.6)
-sheet(ow('ten', 'ten', -0.2), 0.004, px(1390))
-slide(ow('band', 'middle', -0.2), 0.9, 0.0035, px(1390))
 # the count: a bell for each measurement that leaves fewer (1,055, 302, 143, 73, 28, 12, 6, 3, 2), each lower and softer; then nothing
-sheet(oc('height', -0.4), 0.004, px(1270))
 for i, (lid, word, off) in enumerate((('height', 'one', -0.1), ('chest', 'three', -0.1), ('fewer', 'hundred', -0.1), ('fewer', 'seventy', -0.1),
                                       ('fewer', 'twenty', -0.1), ('fewer', 'twelve', -0.1), ('fewer', 'six', -0.1), ('fewer', 'six', 0.3), ('fewer', 'two', -0.1))):
     alu((F5, D5, C5, Bb4, A4, F4, D4, C4, Bb3)[i], ow(lid, word, off), 0.62 * 0.9 ** i, px(1270) * 0.4, ring=0.38)
-tag(ow('none', 'not', 0.2), 0.0035, px(1060))
 # his note, its second sentence underlined as the voice reads it
-sheet(oc('note', -0.2), 0.004, px(1380))
-pencil(ow('note', 'virtually', -0.2), 1.8, 0.004, px(1380), 4)
 # the range: F alone, then the chord it belongs to, as nine flyers in ten fit: the mark
-sheet(ow('range', 'range', -0.2), 0.004, px(1410))
 mark(F4, ow('range', 'range', -0.1), (Bb2, F3, Bb3, D4, F4), ow('range', 'nine', -0.1), 0.65, step=0.15, ring=2.6)
-tag(ow('range', 'nine', -0.1), 0.0035, px(1410))
 # the cockpit for the range: its seat and pedals moving to each pilot; by the 1970s, the middle ninety in every hundred; a car's seat
-sheet(oc('fit', -0.1), 0.004, px(960))
 chord((F3, A3, C4, F4), ow('seats', 'ninety', -0.1), 0.55, step=0.15, ring=2.2)
-seat(ow('adjust', 'rise', -0.2), 0.8, 0.004, px(500)); seat(ow('adjust', 'pedals', -0.1), 0.7, 0.0035, px(620))
-seat(ow('car', 'slides', -0.2), 0.9, 0.004, px(1470))
 # data's average: one number, alone; then the week it hides, B flat major built up as the map fills, and the low bell under the peak
-sheet(ow('data', 'one', -0.2), 0.004, px(960))
 alu(F4, ow('data', 'one', 0.0), 0.5, px(960) * 0.4, ring=1.4)
 figure((Bb2, D3, F3, Bb3, D4, F4), ow('lead', 'show', -0.1), 0.6, step=0.3, ring=1.4, last=2.4)
 low(Bb1, ow('lead', 'turns', -0.1), 0.6, None, ring=1.6)
@@ -267,22 +243,9 @@ LV[0] = 0.9
 pw = lambda lid, word, off=0: W('page', lid, word, off)
 pc = lambda lid, off=0: G('page', lid, off)
 chord((Eb3, Bb3, Eb4, G4), S0('page') + 0.3, 0.55, step=0.16, ring=2.2)
-sheet(pw('uni', 'Graham', -0.1), 0.004, px(1320)); sheet(pw('ask', 'Council', -0.2), 0.004, px(1320))
-tag(pw('full', 'always', -0.3), 0.0035, px(1180))
-sheet(pw('q', 'agreed', -0.2), 0.004, px(1340)); pencil(pw('q', 'writing', -0.1), 0.8, 0.0045, px(1340), 3)
-tag(pw('april', 'answer', -0.1), 0.0035, px(1340))
 figure((D4, F4, Bb4), pw('april', 'answer', 0.0), 0.5, step=0.18, ring=0.6, last=1.4)
-sheet(pw('june', 'one', -0.2), 0.004, px(1320))
 low(G2, pw('june', 'one', 0.0), 0.6, None, ring=1.4)
-tag(pw('ivy', 'Ivy', -0.1), 0.003, px(760)); tag(pw('ivy', 'Helena', -0.1), 0.003, px(1250))
-slide(pw('draft', 'twelve', -0.2), 1.6, 0.004, px(900))
-for word, x in (('data', 392), ('method', 774), ('checks', 1084)):
-    tag(pw('draft', word, -0.1), 0.003, px(x))
-tag(pw('draft', 'answer', -0.1), 0.0035, px(1260))
 alu(D5, pw('draft', 'nine', 0.0), 0.45, px(1260) * 0.4, ring=1.6)
-sheet(pw('chart', 'average', -0.3), 0.004, px(960))
-tag(pw('thesis', 'thesis', -0.2), 0.003, px(960)); tag(pw('thesis', 'nothing', -0.2), 0.003, px(960))
-sheet(pw('who', 'who', -0.2), 0.004, px(1030))
 alu(D5, pw('who', 'decide', 0.0), 0.45, px(1030) * 0.4, ring=1.8, until=E('page'))
 
 # 3. The decision first: the University Council's room before a meeting, the papers laid at each place; the page lifted from the pile
@@ -292,22 +255,11 @@ alu(D5, pw('who', 'decide', 0.0), 0.45, px(1030) * 0.4, ring=1.8, until=E('page'
 LV[0] = 0.9
 fw = lambda lid, word, off=0: W('first', lid, word, off)
 fc = lambda lid, off=0: G('first', lid, off)
-rustle(fw('pile', 'pile', -0.4), 2.6, 0.0035, px(960))
-tag(fw('pile', 'decide', -0.1), 0.0035, px(960))
 alu(D5, fw('start', 'decision', -0.2), 0.55, 0.0, ring=2.0)
-sheet(fw('minto', 'Barbara', -0.2), 0.004, px(960))
 alu(Bb4, fw('minto', 'answer', -0.1), 0.5, 0.0, ring=2.6)
 alu(D4, fw('minto', 'reasons', -0.1), 0.5, -0.1, ring=2.0); alu(F4, fw('minto', 'reasons', 0.05), 0.5, 0.1, ring=1.9)
 low(Bb1, fw('minto', 'evidence', -0.1), 0.55, None, ring=1.6)
-sheet(fc('decision', -0.2), 0.004, px(960))
-pencil(fw('answer', 'rooms', -0.2), 0.9, 0.0045, px(900), 4)
-for word in ('peak', 'bookings', 'take'):
-    pencil(fw('three', word, -0.2), 0.5, 0.004, px(900), 2)
 chord((Bb2, D3, F3, Bb3, D4), fw('three', 'take', 0.7), 0.5, step=0.14, ring=2.0)
-slide(fw('back', 'back', -0.3), 1.4, 0.004, px(700)); sheet(fw('back', 'back', -0.1), 0.0035, px(1510))
-sheet(fw('seats', 'true', -0.2), 0.0035, px(1510))
-slide(fw('holds', "doesn't", -0.2), 1.2, 0.0035, px(1510))
-tag(fw('holds', 'holds', -0.3), 0.0035, px(1510))
 
 # 4. What it turns on: the week's average, 38%, laid beside the page, and F alone, the note set apart; the whole week drawn, row by row,
 #    and the chord it belongs to built up with it, slowly: the mark; the low B flat under the peak; the academics and Facilities, each
@@ -317,23 +269,12 @@ tag(fw('holds', 'holds', -0.3), 0.0035, px(1510))
 LV[0] = 0.9
 tw = lambda lid, word, off=0: W('turns', lid, word, off)
 tc = lambda lid, off=0: G('turns', lid, off)
-sheet(tw('hides', 'average', -0.3), 0.004, px(1540))
 alu(F4, tw('hides', 'average', 0.0), 0.55, px(1540) * 0.4, ring=2.2)
-slide(tw('map', 'whole', -0.4), 1.2, 0.0035, px(300))
-sheet(tw('map', 'heat', -0.2), 0.004, px(690))
 figure((Bb2, F3, D4, F4, Bb4), tw('map', 'heat', 0.3), 0.55, step=0.42, ring=1.6, last=2.6)
 low(Bb1, tw('peak', 'ninety', -0.1), 0.6, None, ring=1.6)
-tag(tw('right', 'academics', -0.2), 0.0035, px(1500)); ticked(tw('right', 'right', -0.1), 0.004, px(1790))
-pencil(tw('corridors', 'empty', -0.3), 0.8, 0.0035, px(400), 3)
-tag(tw('corridors', 'Facilities', -0.2), 0.0035, px(1500)); ticked(tw('corridors', 'saw', 0.2), 0.004, px(1830))
-sheet(tw('daniels', 'Daniels', -0.3), 0.004, px(1550))
 figure((D5, C5, Bb4), tw('daniels', 'count', 0.0), 0.45, step=0.3, ring=0.4, last=0.9, fall=0.85)
-sheet(tw('used', 'booked', -0.3), 0.004, px(1550))
 figure((Bb3, D4, F4, Bb4), tw('used', 'five', -0.4), 0.45, step=0.26, ring=0.42, last=0.9)
-sheet(tw('tufte', 'Edward', -0.2), 0.004, px(1540)); sheet(tw('knaflic', 'Cole', -0.2), 0.004, px(1540))
-slide(tc('together', -0.2), 1.6, 0.0035, px(500))
 mark(D5, tw('together', 'says', -0.1), (Bb2, F3, Bb3, D4), tw('together', 'shows', -0.1), 0.5, step=0.15, ring=2.2, alone=1.4)
-sheet(tw('route', 'crosses', -0.3), 0.004, px(730))
 _r0 = tw('route', 'teams', -0.2)
 for i, m in enumerate((F3, A3, C4, F4)):
     alu(m, _r0 + 0.35 + 0.55 * i, 0.45, px(301 + 262 * i) * 0.4, ring=0.5 if i < 3 else 1.0, until=E('turns'))
@@ -345,24 +286,12 @@ for i, m in enumerate((F3, A3, C4, F4)):
 LV[0] = 0.9
 uw = lambda lid, word, off=0: W('unknown', lid, word, off)
 uc = lambda lid, off=0: G('unknown', lid, off)
-drift(uw('take', 'move', -0.1), 2.4, 0.004, px(1410))
 low(F2, uw('take', 'move', 2.2), 0.5, None, ring=1.4); alu(A4, uw('take', 'move', 2.3), 0.4, px(1410) * 0.4, ring=1.2)
 alu(C5, uw('take', 'move', 2.45), 0.38, px(1410) * 0.4, ring=1.0)
-tag(uw('take', 'move', 0.3), 0.0035, px(1410))
-pencil(uw('forecast', 'meets', -0.2), 0.8, 0.004, px(500), 3)
-pencil(uw('unknown', "isn't", -0.2), 0.8, 0.004, px(500), 3)
 chord((G2, D3, G3, Bb3), uw('unknown', 'known', 0.1), 0.5, step=0.18, ring=2.2)
 chord((Bb2, F3, D4, F4), uw('holds', 'today', -0.1), 0.5, step=0.15, ring=2.2)
-tag(uw('mei', 'Mei', -0.1), 0.003, px(1640))
-tag(uw('says', 'two', -0.2), 0.0035, px(1640))
 low(G2, uw('word', 'utilisation', -0.1), 0.5, None, ring=0.5, room=0.12)
-tag(uw('word', 'seats', -0.2), 0.003, px(280)); tag(uw('word', 'booked', -0.2), 0.003, px(1610))
-pencil(uw('words', 'means', -0.2), 0.8, 0.004, px(960), 3)
-tag(uw('which', 'which', -0.2), 0.0035, px(1600))
-pencil(uw('plan', 'answers', -0.2), 0.9, 0.004, px(960), 3)
 chord((Eb3, Bb3, Eb4, G4), uw('plan', 'answers', 0.3), 0.45, step=0.15, ring=1.8)
-for i in range(3):
-    sheet(uc('same', 0.1 + i * 0.35), 0.0035, px((405, 960, 1515)[i]))
 chord((F3, Bb3, D4, F4), uw('same', 'numbers', 0.0), 0.5, step=0.14, ring=2.2, until=E('unknown'))
 
 # 6. They decide: Graham's office: the page slid into its envelope of a day, the picture beside it, his name; the University Council's
@@ -371,15 +300,8 @@ chord((F3, Bb3, D4, F4), uw('same', 'numbers', 0.0), 0.5, step=0.14, ring=2.2, u
 LV[0] = 0.9
 dw = lambda lid, word, off=0: W('decide', lid, word, off)
 dc = lambda lid, off=0: G('decide', lid, off)
-slide(dw('sends', 'page', -0.4), 1.0, 0.0035, px(1145)); sheet(dw('sends', 'picture', -0.4), 0.0035, px(1590))
-pencil(dw('sends', 'name', -0.3), 0.7, 0.004, px(1145), 3)
-tag(dw('sends', 'Tuesday', -0.2), 0.003, px(1355))
 chord((Eb3, G3, Bb3, Eb4), dc('meets', 0.3), 0.55, step=0.16, ring=2.2)
-tag(dw('asks', 'sure', -0.3), 0.0035, px(300)); tag(dw('asks', 'which', -0.3), 0.0035, px(300))
-ticked(dw('asks', 'both', -0.1), 0.004, px(560)); ticked(dw('asks', 'both', 0.2), 0.004, px(580))
-sheet(dw('defers', 'defer', -0.3), 0.004, px(1030))
 mark(D5, dw('defers', 'defer', -0.2), (Bb2, F3, D4, F4, D5), dw('defers', 'timetable', -0.1), 0.55, step=0.16, ring=2.6)
-tag(dw('argued', 'choice', -0.3), 0.0035, px(320))
 chord((D4, F4, Bb4, D5), dw('see', 'see', 0.0), 0.45, step=0.14, ring=2.6, until=E('decide'))
 
 # 7. On Monday: Daniels's three prints, a sheet each; his count, its first steps, falling, as "he counted"; Ivy's page did the same: D
@@ -388,12 +310,45 @@ chord((D4, F4, Bb4, D5), dw('see', 'see', 0.0), 0.45, step=0.14, ring=2.6, until
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
-for i, x in enumerate((370, 970, 1550)):
-    sheet(S0('monday') + 0.6 + 0.3 * i, 0.0035, px(x))
 figure((F5, D5, C5, Bb4), mw('back', 'counted', 0.0), 0.42, step=0.26, ring=0.38, last=0.8, fall=0.85)
-tag(mw('back', 'plainly', -0.2), 0.003, px(970)); tag(mw('back', 'left', -0.2), 0.003, px(1550))
 mark(D5, mw('ivy', 'decision', -0.1), (Bb2, D3, F3, D4), mw('ivy', 'choice', -0.1), 0.5, step=0.15, ring=2.0, alone=1.4)
-for lid, x in (('one', 530), ('two', 1390), ('three', 530), ('four', 1390)):
-    sheet(mc(lid, -0.1), 0.0035, px(x))
 alu(D5, mc('take', 0.05), 0.5, 0.0, ring=1.6)
 chord((Bb1, F2, Bb2, F3, Bb3, D4, F4), mw('take', 'show', -0.1), 0.55, step=0.17, ring=5.6, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'O': ('pilot', 'carmen', 'ed_boardO'), 'A': ('first', 'carmen', 'ed_boardA'), 'B': ('turns', 'carmen', 'ed_boardB'),
+                    'M': ('monday', 'helena', 'ed_boardM'), 'N1': ('pilot', None, 'ed_note1'), 'N2': ('first', None, 'ed_note2'),
+                    'N3': ('turns', None, 'ed_note3'), 'N4': ('unknown', None, 'ed_note4')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+for name in ('O', 'A', 'B', 'M'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4'):
+    written(name, scratch, 0.004)
+# Graham's message to Helena: one blip as it arrives on her phone
+pop(G('decide', 'defers') + 2.6, 0.0022, px(1560), False)

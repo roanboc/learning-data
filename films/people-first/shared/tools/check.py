@@ -4,9 +4,11 @@ drawn smaller than 28 px after the camera's zoom, the smallest that reads on a p
 films: each place the film paints (AG_PLACES), painted again from nothing, leaves the page drawing again within LIMIT seconds,
 since the site's player paints the places one by one while the film plays. Then the governance films' checks that nothing shows
 twice where the film changes shot or chapter (films/data-governance/shared/tools/twice.py) and that nothing jumps there (jump.py),
-which follow the kit's people too (people.watch). Last, the kit's own check on the people (people.py, here): nobody a half-figure,
-out of scale, in a row, waving a hand about, jumping from one pose to the next, under a box of words or frozen."""
-import jump, people, runpy, twice
+which follow the kit's people too (people.watch). Then the kit's own check on the people (people.py, here): nobody a half-figure,
+out of scale, in a row, waving a hand about, jumping from one pose to the next, under a box of words or frozen. Last, what the film
+times but never shows (shown.py, here): a shot that never comes on screen, or comes for less than a second, and a row of a board or
+a page still being written when its chapter ends."""
+import jump, people, runpy, shown, twice
 from lang import *
 from run import FW
 from playwright.sync_api import sync_playwright
@@ -35,6 +37,7 @@ with sync_playwright() as p:
     tw = twice.check(pg)
     jp = jump.check(pg)
     pe = people.check(pg)
+    sh = shown.check(pg)  # each chapter drawn on its own, after the checks that draw the film as it plays
     b.close()
 slow = [(k, s) for k, s in r if s > LIMIT]
 print('painted %d places, each in %s s' % (len(r), ' '.join('%s %.2f' % (k, s) for k, s in r)) if r else 'no places to paint')
@@ -46,7 +49,8 @@ else:
     print('every place paints without holding the page')
 for (head, lines), bad, good in ((tw, '%d changes of shot or chapter show something twice', 'nothing shows twice where the film changes shot or chapter'),
                                  (jp, '%d moments jump where the film changes shot or chapter', 'nothing jumps where the film changes shot or chapter'),
-                                 (pe, '%d things about the people to put right', 'the people stand whole, in scale and at ease; nobody jumps, waves a hand about or stays frozen')):
+                                 (pe, '%d things about the people to put right', 'the people stand whole, in scale and at ease; nobody jumps, waves a hand about or stays frozen'),
+                                 (sh, '%d things timed but never shown', 'every shot comes on screen, and every row is written before its chapter ends')):
     print(head)
     for l in lines:
         print('  ' + l)

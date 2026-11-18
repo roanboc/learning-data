@@ -217,6 +217,36 @@ def cord(s, sec=0.9, g=0.0034, pan=0.0):
 BOX = (240, 480, 720, 960, 1200, 1440, 1680)   # where the chart's seven boxes are drawn (PB_X7)
 OUT = (3, 2, 4, 1, 5, 0, 6)                    # the order they come in: from the middle outwards
 
+
+# ---- what the hands write: the boards (Carmen's) and the pages of Helena's notebook. A row waits until whoever writes has walked to
+# it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the people kit's tools/pens.py)
+import pens
+PEN = pens.written({'A': ('chart', 'carmen', 'pb_boardA'), 'B': ('turn', 'carmen', 'pb_boardB'), 'N1': ('seven', None, 'pb_note1'),
+                    'N2': ('friday', None, 'pb_note2'), 'N3': ('monday', None, 'pb_note3')})
+def pen(s, sec=0.4, g=0.0045, pan=0.0, n=2):
+    """a pen's soft stroke on paper, a stroke at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on the team's whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
 # =============================================================================================================================
 # 1. The bridge they went back to: the opening. The gorge: the bassoon's lowest D flat and, far above it, the cor anglais; the bridge
 #    hanging: one phrase that dips and rises as the rope does, passed from one voice to the other; many hands: single notes that
@@ -231,68 +261,57 @@ ow = lambda lid, word, off=0: W('bridge', lid, word, off)
 oc = lambda lid, off=0: G('bridge', lid, off)
 END = E('bridge')
 bn(Db2, 0.6, 3.4, 0.8); ca(Ab4, 1.5, 2.5, 0.6)
-tap(ow('where', 'Apurímac', -0.3), 0.003, px(380))
 line((('c', Ab4, 0.00, 0.26), ('c', F4, 0.32, 0.26), ('b', Db4, 0.64, 0.26), ('b', Ab3, 0.96, 0.46),
       ('b', Db4, 1.50, 0.26), ('c', F4, 1.82, 0.26), ('c', Ab4, 2.14, 1.30)), ow('rope', 'hangs', -0.2), 0.7)
-tap(ow('rope', 'keshwa', -0.3), 0.003, px(960))
 pair(Db3, F4, ow('incas', 'crossed', -0.2), 2.4, 0.6)
 pair(Gb2, Db5, oc('only', 0.2), 2.2, 0.55)
 # many hands: single notes, each a little sooner than the last, until two sound together
 line((('c', F4, 0.00, 0.40), ('b', Ab3, 0.52, 0.34), ('c', Ab4, 0.94, 0.26), ('b', Db3, 1.24, 1.50), ('c', Db5, 1.44, 1.30)), ow('wear', 'made new', -0.3), 0.65)
-cord(ow('wear', 'made new', -0.6), 0.9, 0.003, px(470))
 # 1968: the steel bridge set across the gorge, and a truck on it
-steelwork(ow('steel', 'steel', -0.3), 2.4, 0.0032, px(950))
-tap(ow('steel', 'steel', -0.3), 0.003, px(960))
 bn(Bb2, ow('steel', 'steel', 0.3), 2.6, 0.7); ca(F4, ow('steel', 'steel', 0.8), 2.1, 0.55)
-tap(ow('steel', 'almost', -0.2), 0.003, px(960))
-truck(ow('need', 'cars', -0.5), 4.8, 0.0034, px(950))
 ca(F4, ow('need', 'few', 0.0), 1.3, 0.55)
 # 1970: left to wear. Single notes, far apart, each alone
-tap(oc('left', 0.2), 0.003, px(960))
 ca(Db5, oc('left', 0.4), 1.1, 0.5)
-tap(ow('left', 'decaying', -0.2), 0.003, px(960))
 bn(F3, oc('left', 3.2), 1.1, 0.55)
-cord(oc('left', 1.6), 1.4, 0.003, px(960))
 ca(Bb4, oc('left', 5.9), 1.2, 0.45)
 bn(Bb1, ow('skill', 'die', -0.5), 2.8, 0.75)
 # October 1972: one note, alone; his words; and what they decided
-tap(ow('keeper', 'October', -0.1), 0.003, px(250))
 ca(Ab4, ow('keeper', 'decided', 0.1), 1.5, 0.5)
-card(ow('sad', 'My', -0.3), 0.0035, px(960))
 pair(Bb2, Db4, ow('sad', 'My', 0.1), 2.6, 0.55)
-card(oc('rebuild', -0.2), 0.0035, px(960))
 pair(Ab2, C5, oc('rebuild', 0.4), 2.0, 0.55)
 pair(Db3, Ab4, ow('did', 'did', -0.1), 2.4, 0.65)
 # few came; only now does everyone come: two notes apart, then both voices in one rising run
 line((('b', F3, 0.00, 0.50), ('c', Ab4, 0.70, 0.60)), ow('all', 'few', -0.2), 0.5)
-card(ow('all', 'Only', -0.3), 0.0035, px(960))
 line((('b', Db3, 0.00, 0.20), ('c', F4, 0.18, 0.20), ('b', Ab3, 0.36, 0.20), ('c', Ab4, 0.54, 0.20), ('b', Db4, 0.72, 1.70), ('c', Db5, 0.90, 1.52)),
      ow('all', 'everyone', -0.2), 0.65)
 # each June: the banks filling, four notes for four communities, about a thousand people
-gathering(oc('today', -0.1), 3.4, 0.0034, 0.0)
 line((('b', Db3, 0.00, 0.30), ('b', F3, 0.36, 0.30), ('c', Ab4, 0.72, 0.30), ('c', Db5, 1.08, 1.20)), ow('today', 'four', -0.1), 0.6)
-card(ow('today', 'thousand', -0.4), 0.0035, px(960))
-card(ow('minka', 'minka', -0.2), 0.0035, px(1550))
 pair(Gb2, Bb4, ow('minka', 'minka', 0.2), 2.4, 0.55)
-card(ow('unesco', 'strengthening', -0.5), 0.0035, px(960))
 pair(Ab2, Eb5, ow('unesco', 'strengthening', -0.1), 2.4, 0.5)
-card(ow('died', 'If', -0.4), 0.0035, px(960))
 pair(Bb2, F4, ow('died', 'If', 0.0), 2.6, 0.55)
 # steel: a way across, one voice; rope: a way to be together, both
-truck(oc('turn', -0.6), 4.8, 0.003, px(950))
-tap(ow('turn', 'carry', -0.3), 0.003, px(948))
 bn(Db3, ow('turn', 'carry', -0.1), 1.2, 0.6)
-tap(ow('turn', 'together', -0.4), 0.003, px(960))
 pair(Db4, F4, ow('turn', 'together', -0.2), 2.2, 0.6)
 # a data team, read both ways: the chart pinned up, seven boxes, all alike; then the seven, a plain note each, from the left
-card(oc('data', 0.1), 0.0035, px(960))
-for j, i in enumerate(OUT):
-    tap(ow('data', 'roles', -0.6) + j * 1.0 / 7, 0.0026, px(BOX[i]), 190)
 for i, (who, m) in enumerate((('b', Db3), ('c', F4), ('b', Gb3), ('c', Ab4), ('b', Bb3), ('c', C5), ('b', Eb4))):
     (ca if who == 'c' else bn)(m, ow('data', 'people', -0.5) + i * 0.2, 0.2 if i < 6 else 0.9, 0.55, px(BOX[i]) * 0.4)
-tap(ow('plan', 'boxes', -0.3), 0.003, px(960), 170)
 pair(Ab2, C5, ow('plan', 'Know', -0.2), 1.8, 0.5)
 pair(Db2, F4, oc('breath', 0.3), 4.4, 0.7, until=END)
+
+# the sounds of the bridge's pictures: each card as it comes; the families' cord, twisted; the steel set across, and the truck on it;
+# the geographer's pen, and the visitor's; the families who come back with their cord, and the banks full each June; the truck again
+for at in (oc('where', 0.4), ow('steel', 'steel', -0.2), oc('left', 0.3), oc('keeper', 0.2), oc('today', 0.2), oc('minka', 0.1), oc('unesco', 0.1)):
+    card(at, 0.0035, 0.0)
+cord(ow('wear', 'made new', -0.6), 0.9, 0.003, px(300))
+steelwork(ow('steel', 'steel bridge', -0.3), 1.6, 0.0032, px(960))
+truck(ow('need', 'cars', -0.4), 5.5, 0.0034, px(960))
+pen(ow('left', 'finds', 0.2), 1.2, 0.004, px(260), 3)
+pen(oc('rebuild', 0.4), 1.0, 0.004, px(250), 3)
+gathering(oc('did', 0.4), 3.4, 0.0034, 0.0)
+gathering(oc('today', -0.1), 3.4, 0.0032, 0.0)
+truck(oc('today', 1.4), 6.0, 0.003, px(960))
+truck(oc('turn', -0.4), 4.5, 0.003, px(960))
+card(oc('breath', 0.2), 0.0035, px(1400))
 
 # 2. A chart and a list: the university, a year from now: D flat, the bassoon and then the cor anglais; Helena's sheet; the two
 #    sheets on her desk; the bar drawn and seven taps as the boxes come; the count, and its lines drawn; the plan she could make by
@@ -302,29 +321,18 @@ LV[0] = 0.9
 aw = lambda lid, word, off=0: W('chart', lid, word, off)
 ac = lambda lid, off=0: G('chart', lid, off)
 line((('b', Db3, 0.00, 1.80), ('c', Ab4, 0.50, 1.30)), S0('chart') + 0.3, 0.6)
-card(ac('mon', 0.4), 0.0035, px(1400))
 deskT = aw('helena', 'Two', -0.4)
-card(deskT + 0.3, 0.0035, px(960)); card(deskT + 0.62, 0.0032, px(1490))
-slide(aw('two', 'seven', -0.3), 1.1, 0.003, px(960))
-for j, i in enumerate(OUT):
-    tap(aw('two', 'seven', -0.3) + j * 1.1 / 7, 0.0026, px(BOX[i]), 190)
-tap(aw('two', 'forty-six', -0.3), 0.003, px(1240))
-pencil(aw('two', 'forty-six', -0.1), 1.4, 0.003, px(1690))
-slide(aw('tempt', 'plan', -0.3), 1.2, 0.003, px(1100))
 line((('b', Bb2, 0.00, 0.16), ('b', Db3, 0.17, 0.16), ('b', F3, 0.34, 0.16), ('c', Bb4, 0.51, 0.70)), aw('tempt', 'plan', -0.2), 0.55)
-tap(aw('tempt', 'lunch', -0.3), 0.003, px(470))
-sheets(aw('sort', 'sort', -0.2), 1.8, 0.0032, px(1620))
-tap(aw('sort', 'sort', 1.0), 0.003, px(900))
-tap(aw('sort', 'Every', -0.2), 0.0028, px(900))
-tap(aw('sort', 'changes', 0.0), 0.003, px(470))
-slide(aw('boxes', 'reports', -0.3), 0.9, 0.003, px(960))
-for i in range(7):
-    tap(aw('boxes', 'boxes', -0.3) + i * 0.22, 0.0026, px(BOX[i]), 190)
-card(aw('iso', 'standard', -0.3), 0.0035, px(1420))
-tap(aw('iso', 'value', -0.2), 0.0028, px(1420))
-tap(aw('iso', 'differences', -0.3), 0.0028, px(1420))
-card(aw('before', 'sits', -0.3), 0.0035, px(1420))
 line((('c', F4, 0.00, 0.40), ('c', Ab4, 0.46, 1.00)), aw('before', 'sits', 0.0), 0.5, until=E('chart'))
+
+# the sounds of the chart's pictures: the day's card; the chart and the list that come out of her sheets; her pen on the list; the
+# list put in order; Carmen's marker on the board, row by row; Helena's pen in her notebook
+card(ac('mon', 0.2), 0.0035, px(300))
+card(aw('two', 'chart', -0.3), 0.0035, px(1400)); card(aw('two', 'forty-six', -0.3), 0.0035, px(1440))
+pen(ac('tempt', 0.6), 0.9, 0.004, px(830), 3)
+sheets(aw('sort', 'sort', 0.0), 1.6, 0.003, px(1440))
+written('A', marker, 0.004)
+pen(ac('before', 0.1), 1.2, 0.004, px(1690), 3)
 
 # 3. Four questions, seven people: the week's dots; the four questions: the two notes that ask, answered low; nothing under what she
 #    never asks. Then each of the seven, one at a time: the figure of their name, in the pause as they come in (AHEAD seconds before
@@ -333,19 +341,13 @@ LV[0] = 0.9
 sw = lambda lid, word, off=0: W('seven', lid, word, off)
 sc_ = lambda lid, off=0: G('seven', lid, off)
 AHEAD = 1.55
-for i in range(2):
-    tap(sw('hour', 'Monday', -0.1) + i * 0.25, 0.0026, px(1160))
-for i in range(5):
-    tap(sw('hour', 'Thursday', -0.6) + i * 0.24, 0.0026, px(1270 + i * 80))
-card(sc_('four', 0.1), 0.0035, px(1420))
 line((('c', F4, 0.00, 0.36), ('c', Ab4, 0.42, 0.60), ('b', Db3, 1.00, 1.20)), sc_('four', 0.3), 0.5)
-for lid, word, off in (('q12', 'proud', -0.4), ('q12', 'more', -0.5), ('q34', 'way', -0.5), ('q34', 'know', -0.5)):
-    pencil(sw(lid, word, off), 0.3, 0.0032, px(1300))
-tap(sw('never', 'never', -0.2), 0.003, px(1420))
 for i, who in enumerate(('noor', 'sam', 'jun', 'yusuf', 'marta', 'erin', 'tomas')):
     at = sc_(who, -AHEAD); side = px(1400 if i % 2 == 0 else 560)
     line(NAME[who], at + 0.1, 0.6, pan=px(540 if i % 2 == 0 else 1380) * 0.4)
-    card(at + (0.6 if i else 1.0), 0.0035, side)
+
+# the sounds of the week's pictures: the four questions, and what she never asks, written in her notebook
+written('N1', pen, 0.004)
 
 # 4. Who they turn to: one name, again and again: Jun's note, four times; Marta's first name, then Jun's note; Erin's; Noor's; Sam's:
 #    each with its pencil line. On the chart: his box, a tap; its one line up; every line up; and the lines the chart doesn't have,
@@ -359,60 +361,54 @@ hT = tw('hears', 'one name', -0.2)
 for n, slot in enumerate((1, 3, 0, 4)):
     ca(Ab4, hT + n * 0.45, 0.24 if n < 3 else 0.7, 0.5, px(X5[slot]) * 0.4)
 aM, aE, aN, aS = tw('ask', 'asks', -0.1), tw('ask', 'So does', 0.1), tw('show', 'shows', -0.1), tw('show', 'load', -0.3)
-line((('b', Gb3, 0.00, 0.30), ('b', F3, 0.34, 0.18), ('c', Ab4, 0.62, 0.70)), aM - 0.1, 0.55); pencil(aM, 0.9, 0.0034, px(790))
-line((('b', Bb3, 0.00, 0.30), ('b', Ab3, 0.34, 0.18), ('c', Ab4, 0.62, 0.70)), aE - 0.1, 0.55); pencil(aE, 0.9, 0.0034, px(1130))
-line((('c', F4, 0.00, 0.40), ('c', Ab4, 0.50, 0.80)), aN - 0.1, 0.55); pencil(aN, 0.9, 0.0034, px(620))
-line((('c', C5, 0.00, 0.40), ('c', Ab4, 0.50, 0.80)), aS - 0.1, 0.55); pencil(aS, 0.9, 0.0034, px(1300))
-tap(tw('box', 'one box', -0.3), 0.003, px(960), 190)
-slide(tw('box', 'line', -0.3), 0.7, 0.003, px(960))
-slide(tw('shows', 'manages', -0.4), 0.9, 0.003, px(960))
-pencil(tw('shows', 'turn', -0.5), 1.5, 0.0034, px(960), 4)
-card(tw('ubuntu', 'Ubuntu', -0.1), 0.0035, px(960))
+line((('b', Gb3, 0.00, 0.30), ('b', F3, 0.34, 0.18), ('c', Ab4, 0.62, 0.70)), aM - 0.1, 0.55)
+line((('b', Bb3, 0.00, 0.30), ('b', Ab3, 0.34, 0.18), ('c', Ab4, 0.62, 0.70)), aE - 0.1, 0.55)
+line((('c', F4, 0.00, 0.40), ('c', Ab4, 0.50, 0.80)), aN - 0.1, 0.55)
+line((('c', C5, 0.00, 0.40), ('c', Ab4, 0.50, 0.80)), aS - 0.1, 0.55)
 pair(Db3, F4, tw('ubuntu', 'person', -0.2), 2.6, 0.55)
-card(tw('shared', 'shared', -0.3), 0.0035, px(650))
-card(tw('review', 'forty-two', -0.4), 0.0035, px(1430))
-tap(tw('title', 'Anyone', -0.3), 0.003, px(960))
 line((('b', Db3, 0.00, 0.30), ('b', Ab3, 0.36, 0.30), ('c', F4, 0.72, 1.20)), tw('title', 'Anyone', -0.1), 0.55)
 line(NAME['jun'], tw('room', 'makes room', -0.2), 0.55)
-tap(tw('room', 'March', -0.3), 0.003, px(1130))
 line((('b', Ab3, 0.00, 0.52), ('b', Db4, 0.62, 1.30)), tw('room', 'newcomer', -0.4), 0.55, until=E('turn'))
+
+# the sounds of the turn's pictures: her pen at her corner; Erin's message to Jun, and his answer; the chart's card, Jun's box ringed,
+# its one line up, and the lines it doesn't have, in pencil; Carmen's marker on the board
+pen(S0('turn') + 0.6, 0.8, 0.004, px(830), 2)
+eA = tw('ask', 'So does', 0.0)
+pop(eA + 0.2, 0.0022, px(1380), up=False); pop(eA + 2.6, 0.0022, px(1380), up=True)
+card(tc('box', 0.2), 0.0035, px(1300))
+pencil(tw('box', 'one box', -0.2), 0.6, 0.0036, px(1240))
+pencil(tw('box', 'line', -0.3), 1.2, 0.0036, px(1240), 2)
+pencil(tw('shows', 'turn', -0.4), 2.0, 0.0036, px(1240), 4)
+written('B', marker, 0.004)
 
 # 5. What won't change yet: all seven in the room, and the day's sheet; a change people can't see: B flat minor; what she can
 #    promise: G flat; its two lines, a tap each. The gorge again: one note, alone, and then the pair it went back to. Her week's
-#    sheet, and Friday's tick; and in the pause, the seven first names as one phrase, each name lifting on screen as it is played
+#    sheet, and Friday's tick; and in the pause, the seven first names as one phrase
 LV[0] = 0.9
 fw = lambda lid, word, off=0: W('friday', lid, word, off)
 fc = lambda lid, off=0: G('friday', lid, off)
-card(max(fc('fri', 0.3), S0('friday') + 2.5), 0.0035, px(960))
-card(fw('fear', 'change', -0.4), 0.0035, px(960))
 pair(Bb2, Db4, fw('fear', 'change', 0.0), 2.2, 0.5)
-card(fw('stays', 'promise', -0.4), 0.0035, px(960))
 pair(Gb2, Bb4, fw('stays', 'stays', -0.2), 2.0, 0.5)
-tap(fw('notall', 'nothing', -0.3), 0.0028, px(960)); tap(fw('notall', 'only', -0.3), 0.0028, px(960))
-tap(fw('keeper', 'steel', -0.3), 0.003, px(952))
 ca(Ab4, fc('keeper', 0.5), 1.2, 0.45)
-tap(fw('keeper', 'keeper', -0.3), 0.003, px(960))
 pair(Db3, Ab4, fw('keeper', 'keeper', 0.2), 2.0, 0.5)
-card(fc('week', 0.0), 0.0035, px(960))
-ticked(fw('week', 'first', -0.2), 0.004, px(1220))
-tap(fw('knows', 'planned', -0.3), 0.003, px(960)); tap(fw('knows', 'seven', -0.3), 0.003, px(960))
 names(fc('breath', -0.5), 0.6, close=1.1, until=E('friday'))
+
+# the sounds of Friday's pictures: the day's card; her week, written in her notebook
+card(S0('friday') + 0.6, 0.0035, 0.0)
+written('N2', pen, 0.004)
 
 # 6. On Monday: the gorge today: the truck on the steel, and what they went back for: a third, close; the two sheets, and the
 #    question: two notes that rise and wait; each piece of advice written; the next film's tag; and at the close, the seven first
-#    names again as the row lifts, name by name, the two voices ending together and held into the end card
+#    names again, the two voices ending together and held into the end card
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('monday', lid, word, off)
 mc = lambda lid, off=0: G('monday', lid, off)
-truck(S0('monday') + 0.4, 4.8, 0.003, px(940))
-tap(S0('monday') + 0.9, 0.003, px(948))
-tap(mw('back', 'each other', -0.3), 0.003, px(960))
 pair(Db4, F4, mw('back', 'each other', -0.1), 2.4, 0.55)
-tap(mw('same', 'who', -0.3), 0.003, px(620))
 line((('c', Ab4, 0.00, 0.40), ('c', C5, 0.46, 1.10)), mw('same', 'who', -0.1), 0.5)
-card(mc('m1', 0.2), 0.0035, px(960))
-for lid, word, off in (('m1', 'sit', -0.3), ('m2', 'Ask', -0.2), ('m3', 'Notice', -0.2), ('m4', 'say', -0.3)):
-    pencil(mw(lid, word, off), 0.3, 0.0032, px(700))
-tap(mw('next', 'Wellbeing', -0.2), 0.003, px(960))
-tap(mc('take', 0.0), 0.003, px(960))
 names(mc('take', 0.3), 0.62, close=5.0, until=TOT)
+# the sounds of Monday's pictures: the truck on the steel; what to keep, written in her notebook, and its last row ringed; the next
+# film's card; the end card
+truck(S0('monday') + 0.4, 5.0, 0.003, px(960))
+written('N3', pen, 0.004)
+card(mc('next', 0.3), 0.0035, px(1400))
+card(mc('breath', 0.6), 0.0035, px(1400))

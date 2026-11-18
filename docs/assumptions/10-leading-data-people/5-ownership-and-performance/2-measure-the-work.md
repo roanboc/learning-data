@@ -1,6 +1,6 @@
 # Measure the work, not the people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360); made again in ink line on 18 November 2026 (PR #433)
+*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250); changed on 12 November 2026 so the voice says Deming's name with its short e (PR #360); made again in ink line on 18 November 2026 (PR #433); its cars, arms and seats put right the same day (PR #443)
 
 [Watch it on the site](https://data.learn-all.org/ownership-and-performance/measure-the-work/)
 
@@ -66,3 +66,9 @@ You approved *Owning the outcome* made again in ink line on 17 November, and ask
 | 32 | Length and pace? | 8:29, the same 1,046 words at 123 a minute (the first version 8:14). Each page of the notebook is finished and left a second to be read, *Not a target*'s page is written in its 7-second closing pause, and Graham reads Helena's chat and answers in a 4.5-second pause, so *Each measure has a partner* falls to 116 words a minute; the film as a whole doesn't. | The whole film |
 | 33 | The Spanish? | The captions' words are the same, timed again to the new pictures; the page and Pause and think don't change. | The Spanish captions |
 | 34 | Merge now, or wait for you? | Merged on green, squashed, with the series' Draft label, as you chose for the series' films on 17 November. A review page with the first version beside this one can be made on request. | This pull request |
+| 35 | The cars near 1:31? | You saw them overlap. On the road with its barrier, the far lane's cars are drawn first, then the cables, then the near lane's, so a car on the far side passes behind the barrier and behind every nearer car. Each car is declared solid, and the kit's check now stops two solid things in one place, in every film drawn with the kit. | Chapters 1 and 6 |
+| 36 | The broken or missing arms? | Three causes, each put right where it was. A near arm lay across its own face at the wall map: the far hand reaches now. An arm went straight up at the top rows of the room's board: the board is written 56 px lower. And hands stopped short of the fine, the decision and its pin: the people stand an arm's length apart, one sheet changes hands, and it is pinned where the hand is. | Chapters 1 to 6 |
+| 37 | Where does Sam sit while someone writes at the board? | In front of his desk, turned to the board. At his desk he sat hidden behind whoever wrote, for about ten seconds, twice, only his hands and knees showing. Helena, listening to Carmen, stands behind his chair. | Chapters 2 to 6 |
+| 38 | The phone at the ear? | The film's own pose holds it at the ear. The kit's pose brings it before the mouth, and the kit's drawing isn't changed for one film: the kit's README says so, for the next film with a phone. | Chapter 1 |
+| 39 | Did the words or the sound change? | No. The words, the timings, the captions and the soundtrack stay, and each row of a board is written at the moment it was, so the marker is still heard on its row. The poster is drawn again. | The whole film |
+| 40 | Merge now, or wait for you? | Merged on green, squashed, with the series' Draft label, as for the series' other films. The kit's new check went in first, in its own pull request, since it reads every film drawn with the kit. | This pull request |

@@ -491,5 +491,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   psaEnd(ctx,S,t,B+0.6,"Where it meets the applications","Each flow on the route that suits it, and every flow on one map.","film 4 of 8");});
 
 /* where the chapters meet: the utility's chapters glide on from one to the next in one room (From words to data's joins.js); what
-   stays stays put, and whoever comes or goes does so after the join */
-const CHAPTER_JOINS={glide:["kinds","route","map","score","together"]};
+   stays stays put, and whoever comes or goes does so after the join. The story's last picture of the utility says "the integration
+   platform", and the first of the unseen work says it again in a longer line, so what was there leaves first, over the bare room
+   (twice.py, 18 November 2026) */
+const CHAPTER_JOINS={glide:["kinds","route","map","score","together"],leave:["unseen"],bare:(ctx,S,t)=>{p4_room(ctx,S,t);vign(ctx,S);}};

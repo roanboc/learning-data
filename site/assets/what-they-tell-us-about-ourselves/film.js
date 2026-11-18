@@ -2995,8 +2995,9 @@ scene("wire",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({w302:wAt(sc,"
     {at:c.exactly-0.4,place:"lab",keys:[[c.exactly-0.4,960,540,1.0]],d:2,push:0.015,draw:(x,tt)=>{
       ag_screen(x,420,170,900,560,{stand:0,draw:(c2,X,Y,w,h)=>tt_rain(c2,X,Y,w,h,tt)});ag_person(x,TT_SEARLE,1500,600,1.0,{t:tt,flip:true,gaze:[3,-0.5]});ag_roomLight(x,1);
       const q=tt_pop(tt,P.rain-0.2);tt_tag(x,870,800,"a simulated rainstorm · nobody gets wet",{a:q.a,k:q.k});}},
-    // the other side comes down to balance it; nobody knows who's right
-    {at:c.others-0.4,place:"tt_labQuiet",keys:[[c.others-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const rIn=ag_in(tt,P.mind-0.3,0.6),
+    // the other side comes down to balance it; nobody knows who's right. Its scales say again what the rainstorm's tag said, so it comes
+    // in on a cut: a dissolve showed the words twice, at two sizes (twice.py, 18 November 2026)
+    {cut:true,at:c.others-0.4,place:"tt_labQuiet",keys:[[c.others-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const rIn=ag_in(tt,P.mind-0.3,0.6),
       tilt=lerp(lerp(-0.16,0.05,ag_sine(tt_on(tt,P.mind,1.2))),0,ag_sine(tt_on(tt,P.nobody,1.6)));
       tt_balance(x,960,230,1100,tilt,{title:"a simulated rainstorm",sub:"nobody gets wet"},{title:"a mind is what a brain does"},{cw:560,post:420,ca:[1,rIn],k:[null,clamp(ag_spr(tt,P.mind-0.3,0.8),0,1.2)]});}},
     tt_closeShot(2,P.end)];

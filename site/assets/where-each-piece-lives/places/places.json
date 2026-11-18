@@ -1,5 +1,5 @@
 {
- "player": "8d6c890da1d3a1d1",
+ "player": "626be863adad620d",
  "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
  "places": {
   "ohHi:court": {
@@ -561,7 +561,7 @@
    "shows": [
     [
      206.75,
-     224.75
+     224.25
     ],
     [
      237.25,
@@ -573,7 +573,7 @@
     ],
     [
      329.5,
-     337.25
+     336.75
     ],
     [
      342.25,

@@ -2551,8 +2551,9 @@ scene("router",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
     forms:c.forms,same:wAt(sc,"forms","did the same"),brought:wAt(sc,"forms","brought each problem"),solve:wAt(sc,"forms","would solve")}));
   const shots=[
     {at:0,place:"lab",keys:[[0,960,540,1.0],[0.1,960,536,1.02]],d:34,push:0.006,draw:(x,tt)=>sw_route(x,tt,P)},
-    // the job no skill fits, done by hand first: Jun, and the next skill, still a draft
-    {at:P.next-0.4,place:"lab",cut:true,keys:[[P.next-0.4,960,540,1.0],[P.next-0.3,970,530,1.02]],d:5,push:0.01,draw:(x,tt)=>{
+    // the job no skill fits, done by hand first: Jun, and the next skill, still a draft. A later moment in the lab: the router's
+    // "Forecast next year's intake" leaves before Jun's card says it again (a cut in one room glides and dissolves; twice.py, 18 November 2026)
+    {at:P.next-0.4,place:"lab",later:true,keys:[[P.next-0.4,960,540,1.0],[P.next-0.3,970,530,1.02]],d:5,push:0.01,draw:(x,tt)=>{
       sw_jun(x,tt,{gaze:[3,0.6],nod:0.05*ag_io(tt,P.hand-0.3,P.hand+1.2,0.4),smile:0.25});ag_roomLight(x,1);
       const p=sw_pop(tt,P.next-0.2,null);ag_textCard(x,860,190,820,{kick:"A job, done by hand first",title:"Forecast next year's intake"},{k:p.k,a:p.a,kickCol:AG.kick});
       const q=sw_pop(tt,P.nextW-0.2,null);if(q.a>0.01){x.save();ag_about(x,1270,520,lerp(0.6,1,q.k));const b=sw_slim(x,970,450,600,"the next skill?","… Use when …",{a:q.a});sw_dash(x,b.x,b.y,b.w,b.h,AG.blue,q.a);x.restore();}}},

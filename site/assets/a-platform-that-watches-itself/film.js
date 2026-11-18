@@ -2500,7 +2500,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({sre:wAt(sc,"
   ],0.6);
   md_end(ctx,S,t,c.breath,"A platform that watches itself","The platform proposes; a person approves.","Film 2 of 2","Data as software");});
 
-ag_cutInto(["watch","close"]);
+// Tuesday morning opens on a cut: Sam's card, "Sam Okafor · runs the platform", came in over his name on the agent's page, apart
+// (twice.py, 18 November 2026)
+ag_cutInto(["watch","approve","close"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

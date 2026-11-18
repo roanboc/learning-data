@@ -216,7 +216,9 @@ scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(
       const [sx,sy,sw,sh]=GV_RX.screen;ow_signNotice(x,sx,sy,sw,sh,{sign:clamp((tt-P.appr-0.1)/0.8,0,1),ok:fin(tt,P.appr+0.95,0.4),glow:[0,1,2].map(i=>fin(tt,P.used+0.3*i,0.4))});
       ow_tagAt(x,tt,P.mei+0.3,null,1420,262,"Tuesday morning",{size:30});}},
     // Jun: a number in the words, kept in one place, as a business rule every report reads
-    {at:P.num,place:"screenData",keys:[[P.num,960,450,1.0],[P.kept-0.4,960,520,1.08]],d:2,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;
+    // This shot and the one before both say "Change notice award", so it comes in on a cut: a dissolve showed the
+    // words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.num,place:"screenData",keys:[[P.num,960,450,1.0],[P.kept-0.4,960,520,1.08]],d:2,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;
       ow_ruleScreen(x,sx,sy,sw,sh,{under:clamp((tt-P.six)/0.6,0,1),note:fin(tt,P.six+0.7,0.5),card:clamp((tt-P.kept-0.1)/0.7,0,1),green:fin(tt,P.sets,0.5),read:fin(tt,P.every,0.45)});}}]);
   setScreen(ctx,S);ow_nameCard(ctx,24,740,"Jun Park","Analytics engineer",gv_io(t,P.num+0.3,P.kept-0.4,0.4));
   ow_pill(ctx,t,[[0,"Qianling county · about 220 BC"]],gv_io(t,P.like+0.2,P.back-0.1,0.35));

@@ -327,8 +327,9 @@ scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s
       const R=rows(p1,p2,gv_io(tt,P.must-0.1,P.wr,0.4)),pen=gv_io(tt,P.wr-0.4,P.wr+2.2,0.3);
       po_changeReq(x,410,270-(1-u)*760,1000,440,{rot:0.012*(1-u)-0.006,name:"the learning team's follow-up list",lines:3,rows:R,after:q=>{gv_stamp(q,700,206,"no product, no owner",clamp((tt-P.stamp)/0.3,0,1),{size:38,col:GV.redInk,rot:-0.07});
         if(pen>0.01){const i=tt<P.wr+1.1?0:1,[vx,ry]=po_crRowAt(q,440,R,i),[px,py]=po_penAt(q,R[i].v,vx,ry,30,i?p2:p1);po_pen(q,px,py,pen);}}});}},
-    // the register again: the follow-up list's row lit, ticked; every table other teams use is in exactly one product
-    {at:P.back,place:"boardData",keys:[[P.back,900,560,1.08],[P.back+0.1,905,556,1.11]],d:3,draw:(x,tt)=>{po_register(x,{lit:()=>1,grey:1,pulse:gv_io(tt,P.back+0.3,P.back+1.9,0.35),tick:clamp((tt-P.back-0.45)/0.4,0,1)});
+    // the register again: the follow-up list's row lit, ticked; every table other teams use is in exactly one product. Tom's form and
+    // the register both say "Short-course follow-ups", so it comes in on a cut: a dissolve showed the words twice (twice.py, 18 November 2026)
+    {cut:true,at:P.back,place:"boardData",keys:[[P.back,900,560,1.08],[P.back+0.1,905,556,1.11]],d:3,draw:(x,tt)=>{po_register(x,{lit:()=>1,grey:1,pulse:gv_io(tt,P.back+0.3,P.back+1.9,0.35),tick:clamp((tt-P.back-0.45)/0.4,0,1)});
       po_rgTags(x,()=>1);po_tagAt(x,tt,P.back+0.6,null,1300,180,"every table other teams use is in exactly one product",{size:30,wash:GV.green,washA:0.3});}},
     // three kinds of product, as each is named: close to one system, joining several, serving one use
     {cut:true,at:P.cards,place:"boardData",keys:[[P.cards,960,540,1.04],[P.cards+0.1,960,540,1.08]],d:6,draw:(x,tt)=>PO_KC.forEach(([cx,n,l,ls],i)=>po_prodCard(x,cx,360,470,360,n,l,ls,clamp((tt-[P.close,P.join,P.serve][i])/0.6,0,1)))}]);

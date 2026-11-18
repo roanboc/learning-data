@@ -1,0 +1,299 @@
+1
+00:00:03,000 --> 00:00:07,467
+Las otras películas de esta serie siguen un puente en Perú, tejido con paja.
+
+2
+00:00:08,967 --> 00:00:14,255
+Esta lo deja. Una brizna de paja es como otra, y una persona no se parece a nadie.
+
+3
+00:00:16,355 --> 00:00:21,830
+Por eso empieza en Lu, en lo que hoy es el este de China, hace unos 2,500 años.
+
+4
+00:00:23,530 --> 00:00:28,692
+Un maestro de allí, Kong Qiu, a quien Occidente llama Confucio, no rechaza a ningún alumno.
+
+5
+00:00:30,192 --> 00:00:36,510
+Quien trae el regalo más pequeño, un atado de carne seca, recibe enseñanza. Así que tiene alumnos de toda clase.
+
+6
+00:00:38,410 --> 00:00:44,615
+Zilu es audaz. El maestro le dice que no llevaría a la guerra a quien pelea con tigres a mano limpia.
+
+7
+00:00:46,315 --> 00:00:51,753
+Ran You se contiene. El maestro le dice: no es fuerza lo que te falta. Tú mismo te pones el límite.
+
+8
+00:00:53,653 --> 00:00:55,942
+Una misma regla para los dos le fallaría a uno de ellos.
+
+9
+00:00:57,442 --> 00:01:03,389
+Diles a los dos que avancen, y Zilu pelea con el tigre. Diles que esperen, y Ran You nunca empieza.
+
+10
+00:01:05,489 --> 00:01:07,790
+Cada uno necesita una respuesta propia.
+
+11
+00:01:09,890 --> 00:01:14,239
+Un día Zilu pregunta: cuando oigo algo, ¿debo actuar de inmediato?
+
+12
+00:01:15,739 --> 00:01:20,640
+El maestro dice: tu padre y tus hermanos mayores viven. ¿Cómo vas a actuar de inmediato?
+
+13
+00:01:22,140 --> 00:01:23,824
+Quiere decir: pregúntales primero.
+
+14
+00:01:25,724 --> 00:01:30,706
+Luego Ran You hace exactamente la misma pregunta. El maestro dice: actúa de inmediato.
+
+15
+00:01:32,806 --> 00:01:38,784
+Un tercer alumno, Gongxi Hua, oyó las dos respuestas. Estoy confundido, dice. ¿Puedo preguntar?
+
+16
+00:01:40,484 --> 00:01:47,686
+El maestro le dice: Ran You se contiene, por eso lo impulsé. Zilu tiene energía por dos, por eso lo frené.
+
+17
+00:01:49,786 --> 00:01:52,605
+Respondió a la persona, además de a la pregunta.
+
+18
+00:01:54,705 --> 00:01:56,427
+Cada uno recibe la respuesta que necesita.
+
+19
+00:01:57,927 --> 00:02:04,651
+Y cuando le preguntan si los dos podrían servir en el gobierno, el maestro dice que sí: uno es decidido, el otro hábil.
+
+20
+00:02:06,351 --> 00:02:13,755
+Un historiador cuenta después setenta y siete alumnos que dominaron lo que enseñaba. Estos dos, tan distintos, están entre ellos.
+
+21
+00:02:15,655 --> 00:02:22,589
+Un equipo de datos es como esa escuela: no hay dos personas que trabajen igual, y una sola forma de trabajar deja a alguien fuera.
+
+22
+00:02:24,289 --> 00:02:28,423
+Averigua cómo trabaja cada persona, y el equipo escucha lo que cada una sabe.
+
+23
+00:02:37,123 --> 00:02:44,080
+En la universidad, en febrero de 2027, Helena Novak está en su tercera semana como gestora de datos.
+
+24
+00:02:45,580 --> 00:02:50,446
+El lunes 15 de febrero, ella y su equipo de siete planean las próximas dos semanas.
+
+25
+00:02:52,146 --> 00:02:56,024
+Durante toda la hora, Erin Walsh, la ingeniera de plataforma, no dice nada.
+
+26
+00:02:58,124 --> 00:03:02,445
+Helena lo toma como falta de interés. Es su primera suposición, y está equivocada.
+
+27
+00:03:04,545 --> 00:03:08,980
+El martes por la mañana, Erin le manda una nota breve: dos cosas que el plan pasó por alto.
+
+28
+00:03:10,480 --> 00:03:15,093
+Una de ellas: dos trabajos de la plataforma no se pueden probar en la misma semana.
+
+29
+00:03:16,993 --> 00:03:24,598
+El miércoles, en la media hora semanal de Erin, Helena pregunta en vez de suponer: ¿cómo trabajas mejor en una reunión como la del lunes?
+
+30
+00:03:26,498 --> 00:03:33,130
+Erin dice: pienso después de una reunión, no durante. Mándame la pregunta el día anterior, y llegaré con una respuesta.
+
+31
+00:03:35,230 --> 00:03:40,938
+El maestro de Lu conocía a sus alumnos desde hacía años. Helena conoce a su equipo desde hace dos semanas.
+
+32
+00:03:42,638 --> 00:03:45,621
+Pero una persona puede decir cómo trabaja. Así que pregunta.
+
+33
+00:03:49,321 --> 00:03:55,581
+¿En qué se diferencian las personas? La mayoría de los estudios lo describe con cinco grandes rasgos, a menudo llamados Big Five.
+
+34
+00:03:57,481 --> 00:04:03,504
+Qué tan abierta a lo nuevo. Qué tan organizada. Qué tan extrovertida. Qué tan amable. Qué tan estable bajo presión.
+
+35
+00:04:05,604 --> 00:04:09,865
+Cada uno es una escala, no una casilla: las personas se diferencian por grado, no por tipo.
+
+36
+00:04:11,965 --> 00:04:19,872
+Nadie se queda en un punto. En un estudio, en dos o tres semanas, una persona típica mostró casi todos los niveles de cada rasgo.
+
+37
+00:04:21,972 --> 00:04:26,326
+Cada una mantuvo un nivel habitual propio, y se movió a su alrededor según la situación.
+
+38
+00:04:28,426 --> 00:04:35,312
+Los años también lo mueven: en promedio, la gente se vuelve más organizada y más estable, sobre todo entre los veinte y los cuarenta.
+
+39
+00:04:37,412 --> 00:04:43,476
+Y los cinco no son la última palabra: entre agricultores y recolectores de Bolivia, los investigadores no los encontraron.
+
+40
+00:04:45,576 --> 00:04:49,581
+Ningún lugar de una escala es el correcto, y a un equipo le sirve cada uno.
+
+41
+00:04:51,481 --> 00:04:58,720
+Un equipo necesita a quien se lanza y a quien se contiene, a quien piensa en voz alta y a quien piensa después.
+
+42
+00:05:00,820 --> 00:05:04,419
+Así que los rasgos sirven para entender a las personas, nunca para evaluarlas.
+
+43
+00:05:06,519 --> 00:05:11,403
+Cómo le va a alguien se ve en los resultados de su trabajo, y en cómo trabaja junto el equipo.
+
+44
+00:05:15,103 --> 00:05:18,897
+El jueves, en la mesa del equipo, Yusuf Demir tiene una idea.
+
+45
+00:05:20,597 --> 00:05:28,427
+En otro trabajo hizo una prueba que clasifica a la gente en tipos, cada uno con sus letras. Dio a su equipo palabras para sus diferencias.
+
+46
+00:05:30,527 --> 00:05:36,331
+Un tipo es una escala cortada en dos. Un lado recibe una etiqueta, y el otro lado recibe otra.
+
+47
+00:05:38,431 --> 00:05:41,093
+Pero la mayoría de las personas está cerca del medio, junto al corte.
+
+48
+00:05:43,193 --> 00:05:52,423
+En 1991 un consejo de investigación revisó una prueba así. Al hacerla dos veces, en general cuatro de cada diez obtuvieron el mismo tipo.
+
+49
+00:05:54,723 --> 00:06:00,350
+Los puntajes se mantuvieron bastante bien. Pero cerca del corte, un pequeño cambio en el puntaje es otra etiqueta.
+
+50
+00:06:02,650 --> 00:06:06,535
+Así que Helena dice que sí, como una forma de empezar a conversar, con cuatro reglas.
+
+51
+00:06:08,235 --> 00:06:12,662
+Cada persona decide si la hace. Tus resultados son tuyos, y compartes lo que tú elijas.
+
+52
+00:06:14,762 --> 00:06:21,193
+Se leen como grados, no como casillas. Y nunca se usan para contratar, repartir el trabajo ni juzgar a nadie.
+
+53
+00:06:23,293 --> 00:06:26,832
+Quienes están detrás de esa prueba piden ellos mismos tres de las cuatro.
+
+54
+00:06:28,932 --> 00:06:32,448
+Una prueba puede iniciar una conversación. No puede decidir nada.
+
+55
+00:06:36,148 --> 00:06:41,010
+Lo que el equipo conserva es una página que cada persona escribe con sus propias palabras: Cómo trabajo.
+
+56
+00:06:42,710 --> 00:06:46,964
+Tiene cinco encabezados. Cuándo hago mi mejor trabajo. Cómo pedirme algo.
+
+57
+00:06:48,864 --> 00:06:52,765
+Cómo discrepar conmigo. Qué me desgasta. En qué estoy mejorando.
+
+58
+00:06:54,665 --> 00:06:57,569
+Helena escribe la suya primero, y la comparte ese jueves.
+
+59
+00:06:59,069 --> 00:07:02,650
+Bajo el último encabezado escribe: preguntar, en vez de suponer.
+
+60
+00:07:04,750 --> 00:07:08,090
+Cada una de las siete personas escribe también la suya, y comparte lo que elige.
+
+61
+00:07:09,790 --> 00:07:16,801
+Para el viernes 26 de febrero, las siete han compartido una página. Dos dejaron un encabezado sin llenar, y están en su derecho.
+
+62
+00:07:18,701 --> 00:07:21,569
+La de Erin dice: pídemelo por escrito, el día anterior.
+
+63
+00:07:23,469 --> 00:07:28,460
+Ninguna página dice qué clase de persona es alguien. Cada una dice cómo trabajar con una persona.
+
+64
+00:07:32,160 --> 00:07:35,787
+Helena no le pide a Erin que cambie. Cambia la reunión.
+
+65
+00:07:37,687 --> 00:07:44,042
+Desde el lunes 22 de febrero, en cada reunión que ella dirige, la pregunta se envía el día hábil anterior.
+
+66
+00:07:45,742 --> 00:07:50,689
+Todos escriben durante dos minutos antes de que alguien hable. Luego cada persona tiene su turno.
+
+67
+00:07:52,589 --> 00:07:55,849
+Y cualquiera puede agregar algo hasta el final del día siguiente.
+
+68
+00:07:57,549 --> 00:07:59,673
+Ese lunes, Erin habla en su turno.
+
+69
+00:08:01,773 --> 00:08:07,753
+Le sirve a quien piensa en voz alta y a quien piensa después. Nadie tiene que volverse otra persona.
+
+70
+00:08:09,853 --> 00:08:15,167
+El maestro frenó a un alumno e impulsó al otro, y quien lidera también cambia su manera.
+
+71
+00:08:16,867 --> 00:08:22,278
+Pero él decidió lo que cada uno necesitaba. Helena pregunta, y cada persona lo dice por sí misma.
+
+72
+00:08:24,378 --> 00:08:29,328
+Así que el lunes, no clasifiques a tu gente: ni por un tipo, ni por una prueba, ni por una primera impresión.
+
+73
+00:08:31,028 --> 00:08:37,407
+Pregúntale a cada persona cómo trabaja mejor. Escribe primero tu propia página. Y arma las formas del equipo para todo el abanico.
+
+74
+00:08:39,307 --> 00:08:44,671
+Lo que importa aún más es cómo trabajan juntas. Esa es la próxima película: El cómo, más que el quién.
+
+75
+00:08:46,371 --> 00:08:49,247
+Pregúntale a cada persona cómo trabaja. Nunca las clasifiques.

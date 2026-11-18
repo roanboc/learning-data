@@ -725,13 +725,14 @@ window.LD_ROUTE = {
      "title": "People first",
      "href": "people-first/",
      "poster": "people-before-roles-poster.jpg",
-     "kicker": "Series · 3 of 4 films",
-     "len": "26 min",
-     "min": 26.0,
+     "kicker": "Series · 4 films",
+     "len": "36 min",
+     "min": 36.0,
      "films": [
       "ld-people-before-roles",
       "ld-wellbeing-in-the-work",
-      "ld-no-two-alike"
+      "ld-no-two-alike",
+      "ld-how-more-than-who"
      ]
     },
     {

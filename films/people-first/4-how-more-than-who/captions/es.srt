@@ -1,0 +1,327 @@
+1
+00:00:03,000 --> 00:00:05,139
+Quehue, en lo alto de los Andes del Perú.
+
+2
+00:00:07,039 --> 00:00:13,438
+Cada junio, cuatro comunidades hacen un puente nuevo de sogas de paja, sobre un cañón del río Apurímac.
+
+3
+00:00:15,338 --> 00:00:19,852
+Mide veintiocho metros. Lo construyen unas mil personas, en tres días.
+
+4
+00:00:21,552 --> 00:00:26,266
+Ninguna familia podría levantarlo sola. Y no hay un dibujo del puente, ni un plan escrito.
+
+5
+00:00:27,966 --> 00:00:33,478
+Pero tiene que resistir. Durante un año, la gente lo cruzará, a unos quince metros sobre el río.
+
+6
+00:00:35,378 --> 00:00:42,261
+Su fuerza depende de cada soguilla. Así que cada quien necesita saber su parte, y confiar en la de los demás.
+
+7
+00:00:44,161 --> 00:00:46,976
+Lo que tienen es una manera de trabajar que todos conocen.
+
+8
+00:00:48,476 --> 00:00:56,339
+Cada familia ha prometido una soguilla de paja torcida, de cuarenta brazadas. Primero, en ambas orillas, se verifica cada entrega.
+
+9
+00:00:58,239 --> 00:01:03,598
+Cada comunidad sabe su parte: cuál de los seis cables hacer, o la estera para el piso.
+
+10
+00:01:05,498 --> 00:01:10,364
+Los hombres tuercen las soguillas en sogas, y trenzan tres sogas en cada cable del piso.
+
+11
+00:01:12,064 --> 00:01:15,753
+Uno trenza hasta que se cansa. Entonces otro toma su lugar.
+
+12
+00:01:17,653 --> 00:01:24,397
+Luego muchas manos pasan los cables sobre el cañón, y los atan a viejas bases de piedra; los mayores guían a los jóvenes.
+
+13
+00:01:26,497 --> 00:01:32,676
+El último día, dos maestros tejen los lados y el piso, uno desde cada orilla, hasta encontrarse en el medio.
+
+14
+00:01:35,576 --> 00:01:41,455
+Esa misma tarde, cuatro comunidades tienen puente para un año más. Al día siguiente, celebran.
+
+15
+00:01:43,555 --> 00:01:50,164
+A nadie le dieron un plan. Lo que comparten es cómo trabajan: promesas cumplidas, y partes que todos conocen.
+
+16
+00:01:52,064 --> 00:01:58,111
+El trabajo de un equipo de datos es así. Nadie puede hacerlo solo, y cada parte se apoya en la de alguien más.
+
+17
+00:01:59,611 --> 00:02:03,045
+Por eso, cómo trabaja junto un equipo cuenta más que quién está en él.
+
+18
+00:02:11,745 --> 00:02:17,072
+Google estudió una vez 180 de sus propios equipos, para saber por qué unos trabajaban mejor que otros.
+
+19
+00:02:18,972 --> 00:02:25,154
+Lo que de verdad importaba, encontró, era menos quién está en el equipo, y más cómo trabajaba junto el equipo.
+
+20
+00:02:27,254 --> 00:02:35,362
+Primero en su lista estaba la seguridad psicológica: la gente habla cuando es seguro. De eso trata otra película, Primero el equipo.
+
+21
+00:02:37,062 --> 00:02:40,571
+Después venían cumplir la palabra, y tener claro quién hace qué.
+
+22
+00:02:42,471 --> 00:02:47,889
+El cañón tiene ambas, por costumbre. En un equipo de datos, alguien tiene que decirlas en voz alta.
+
+23
+00:02:51,989 --> 00:03:00,439
+La universidad, miércoles 24 de febrero de 2027. Helena Novak, la gestora de datos, está en su cuarta semana.
+
+24
+00:03:02,339 --> 00:03:07,895
+Jun, ingeniero de analítica, hizo un modelo nuevo, que reemplazará uno de los informes antiguos.
+
+25
+00:03:09,395 --> 00:03:15,556
+Para comprobarlo, corre ambos para el día del censo del año pasado, cuando la universidad contó a sus estudiantes para el gobierno.
+
+26
+00:03:17,256 --> 00:03:24,311
+El informe antiguo dice 18,412. El modelo nuevo dice 19,549.
+
+27
+00:03:26,411 --> 00:03:31,992
+Tomás Ortega hizo ese informe, hace años. La gente todavía le pregunta qué significan sus cifras.
+
+28
+00:03:33,492 --> 00:03:39,111
+En la mesa del equipo, Jun dice: tu informe está mal. Tomás responde: tu modelo es nuevo.
+
+29
+00:03:41,011 --> 00:03:45,735
+Solo dos personas hablan. Erin Walsh y Marta Silva no han dicho ni una palabra.
+
+30
+00:03:47,435 --> 00:03:56,493
+En 116 estudios, el conflicto sobre la persona daña el trabajo del equipo. El desacuerdo sobre el trabajo no, si se queda en el trabajo.
+
+31
+00:03:58,393 --> 00:04:03,133
+Así que Helena lo detiene, y dice por qué: dejamos la cifra, y empezamos uno contra el otro.
+
+32
+00:04:07,233 --> 00:04:12,657
+A cada uno le pide tres cosas: qué viste, qué sientes y necesitas, y qué pides.
+
+33
+00:04:14,557 --> 00:04:17,905
+Jun va primero. Vi dos cifras para la misma cosa.
+
+34
+00:04:19,205 --> 00:04:22,529
+Me preocupa, porque necesito que la gente confíe en lo que publicamos.
+
+35
+00:04:23,829 --> 00:04:27,531
+Pido que las revisemos lado a lado, antes de enviar ninguna.
+
+36
+00:04:29,431 --> 00:04:34,588
+Luego Tomás. Oí decir que mi informe está mal, antes de que alguien preguntara qué cuenta.
+
+37
+00:04:35,888 --> 00:04:39,782
+Me dolió, porque necesito que lo que hice se lea antes de reemplazarlo.
+
+38
+00:04:41,082 --> 00:04:42,310
+Pido que me pregunten.
+
+39
+00:04:44,610 --> 00:04:50,896
+Las tres cosas vienen de la comunicación no violenta, obra del psicólogo Marshall Rosenberg.
+
+40
+00:04:52,596 --> 00:04:59,456
+Se apoya en práctica y estudios pequeños, no en grandes ensayos. Pero en una conversación difícil los sentimientos ya están.
+
+41
+00:05:01,156 --> 00:05:05,674
+Una vez nombrados, se les puede responder. Y Jun pregunta: ¿qué cuenta tu informe?
+
+42
+00:05:09,774 --> 00:05:11,789
+Entonces Helena le da un turno a cada quien.
+
+43
+00:05:13,289 --> 00:05:19,552
+Erin, la ingeniera de plataforma, no había hablado. El informe antiguo, dice, solo lee el sistema de estudiantes.
+
+44
+00:05:21,252 --> 00:05:26,665
+Marta, la analista, conoce las cifras de la universidad. Dice qué cuenta cada una de las dos.
+
+45
+00:05:28,165 --> 00:05:34,692
+El informe cuenta estudiantes: personas que cursan las materias que forman una carrera. Es la cifra que se envía al gobierno.
+
+46
+00:05:36,592 --> 00:05:43,484
+El modelo cuenta aprendices: esos estudiantes, y además 1,137 personas en cursos cortos.
+
+47
+00:05:45,384 --> 00:05:48,209
+Las dos cifras están bien. Nunca fueron la misma cosa.
+
+48
+00:05:50,509 --> 00:05:58,344
+Anita Woolley y sus colegas dieron muchos tipos de tarea a grupos pequeños. A lo que tenían los mejores lo llamaron inteligencia colectiva.
+
+49
+00:06:00,044 --> 00:06:06,234
+Tenía poco que ver con lo listo que fuera el más listo. Iba con turnarse para hablar de forma más pareja.
+
+50
+00:06:08,334 --> 00:06:14,117
+Qué cifra publica la universidad no lo decide Jun, ni Tomás, ni Helena.
+
+51
+00:06:15,817 --> 00:06:22,016
+Le toca a la oficina de registro, dueña de lo que significan las dos palabras. Así que Jun pregunta, en un ticket.
+
+52
+00:06:23,916 --> 00:06:28,684
+Y lo que cuenta cada palabra entra al glosario, antes de cambiar una sola línea del modelo.
+
+53
+00:06:32,784 --> 00:06:38,738
+El jueves, los ocho escriben una página: cómo trabajamos juntos. Cinco líneas, con sus propias palabras.
+
+54
+00:06:40,838 --> 00:06:44,012
+Cómo nos reunimos: la pregunta un día antes, y un turno cada quien.
+
+55
+00:06:46,112 --> 00:06:48,631
+Cómo pedimos ayuda: pronto, y en voz alta.
+
+56
+00:06:50,731 --> 00:06:56,568
+Cómo discrepamos: sobre el trabajo, nunca la persona. Di qué viste, qué necesitas, y qué pides.
+
+57
+00:06:58,668 --> 00:07:03,728
+Cómo decidimos: decide quien es dueño del tema, tras escuchar a los demás, y lo deja escrito.
+
+58
+00:07:05,828 --> 00:07:09,848
+Cómo decimos, no llego a esa fecha: en cuanto lo sabemos, con una fecha nueva.
+
+59
+00:07:11,948 --> 00:07:19,398
+Esa última línea es cómo se cuida la confianza. En 112 estudios, los equipos cuyos miembros confían entre sí trabajan mejor.
+
+60
+00:07:21,298 --> 00:07:30,210
+Quienes investigan la llaman carta de equipo. En 32 equipos de estudiantes, el trabajo que mejor se sostuvo tenía buena carta y buen plan.
+
+61
+00:07:32,110 --> 00:07:36,282
+Es un solo estudio pequeño. La página viene de la práctica, no de un ensayo.
+
+62
+00:07:37,982 --> 00:07:45,294
+En el cañón, la manera se pasa haciéndola, padres junto a hijos. Un equipo no tiene esos años. Por eso escribe.
+
+63
+00:07:47,594 --> 00:07:49,739
+El viernes, la página está en la pared.
+
+64
+00:07:54,239 --> 00:08:00,193
+En el cañón, esa manera de trabajar todavía reúne a cuatro comunidades. No siempre ha mantenido el puente.
+
+65
+00:08:02,093 --> 00:08:08,388
+Hacia 1970, con un puente de acero recién hecho a su lado, las comunidades lo dejaron por un tiempo.
+
+66
+00:08:10,688 --> 00:08:15,939
+En 2020, la pandemia detuvo el trabajo, y en marzo de 2021 el puente cayó.
+
+67
+00:08:19,039 --> 00:08:22,340
+En mayo de 2025, alguien lo cortó de noche.
+
+68
+00:08:24,640 --> 00:08:26,925
+Cada vez, las comunidades lo volvieron a tejer.
+
+69
+00:08:29,225 --> 00:08:34,530
+El tejido mismo se enseña solo dentro de la familia de cada maestro, como pide su tradición.
+
+70
+00:08:36,430 --> 00:08:39,733
+Menos jóvenes hablan quechua, la lengua del trabajo.
+
+71
+00:08:41,433 --> 00:08:45,977
+Y hoy casi todos cruzan por el puente de acero, así que los visitantes ayudan a mantener este.
+
+72
+00:08:47,877 --> 00:08:54,385
+Y la costumbre fija quién hace qué parte: quién hace la soguilla, quién trenza los cables, y quién puede aprender a tejer.
+
+73
+00:08:56,285 --> 00:09:02,276
+Es la manera propia de las comunidades, y no nos toca juzgarla. Solo que no es un modelo para un equipo de datos.
+
+74
+00:09:04,376 --> 00:09:10,999
+Un equipo de datos tiene que preguntar a cada persona. Y no puede dejar lo que sabe en una sola persona, ni en un solo linaje.
+
+75
+00:09:12,899 --> 00:09:19,122
+Tomás pidió que le preguntaran. Y lo que cuenta su informe ya está en el glosario, donde cualquiera puede leerlo.
+
+76
+00:09:23,422 --> 00:09:26,855
+Con tu propio equipo, escriban juntos una página, con sus propias palabras.
+
+77
+00:09:28,755 --> 00:09:33,891
+Discrepa sobre el trabajo, abiertamente. Cuando se vuelva contra la persona, detente, y dilo.
+
+78
+00:09:35,791 --> 00:09:38,551
+Cumple las promesas pequeñas, y avisa pronto cuando no puedas.
+
+79
+00:09:40,251 --> 00:09:46,528
+El puente se hace de nuevo cada junio. Así que relee tu página cada trimestre, y cada vez que alguien se una.
+
+80
+00:09:48,628 --> 00:09:53,997
+El lunes 1 de marzo, alguien se une. Ivy Reyes, recién graduada, abre la puerta.
+
+81
+00:09:56,497 --> 00:09:59,934
+Su año empieza en la próxima película: Muchos roles, una sola mirada.
+
+82
+00:10:01,634 --> 00:10:03,935
+Acuerda con tu equipo cómo trabajar, y cúmplelo.

@@ -1886,6 +1886,18 @@ def main():
     s["fails"] += faults
     s["notes"].append(f"{n} posters drawn by tools/publish.py")
 
+    # -- the film's number in its kicker (people kit films): PK.kicker(ctx, num, title) shows "num  TITLE" top left, and num is
+    # the film's place in its series, its folder's number. Six films had been written with 1 (18 November 2026)
+    s = rep.check("Kickers: each people-kit film shows its own number in the series top left, its folder's number")
+    n = 0
+    for f in sorted((ROOT / "films").glob("*/[0-9]*-*/source/src/*.js")):
+        for m in re.finditer(r"PK\.kicker\(ctx,\s*(\d+)\s*,", f.read_text(encoding="utf-8")):
+            n += 1
+            want = int(f.parents[2].name.split("-")[0])
+            if int(m.group(1)) != want:
+                s["fails"].append(f"{f.relative_to(ROOT)}: PK.kicker shows {m.group(1)}; the film is number {want} in its series")
+    s["notes"].append(f"{n} kickers read")
+
     # -- places, as pictures
     s = rep.check("Places: each watercolour film's places are pictures drawn from the player the site plays")
     faults, n = places_faults()

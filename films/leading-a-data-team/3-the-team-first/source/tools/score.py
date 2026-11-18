@@ -182,7 +182,6 @@ def pen(s, sec=0.7, g=0.006, pan=0.0, n=3):
         _fx(filt(noise(d + 0.02)[:m], 'band', (700, 2100)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 2200)
 def ticked(s, g=0.005, pan=0.0):
     """a tick drawn: two quick strokes of a pen"""
-    pen(s, 0.24, g, pan, 2)
 def coin(s, g=0.004, pan=0.0):
     """a coin laid in the tin: a small, dull clink, its ring low-passed and gone at once"""
     n = int(0.12 * SR); x = np.arange(n) / SR
@@ -210,7 +209,6 @@ oc = lambda lid, off=0: G('stokvel', lid, off)
 END = E('stokvel')
 low(Ab2, 0.5, 0.85, 0.0, ring=3.2)
 chord((Ab2, Eb3, Ab3, C4), ow('when', 'Johannesburg', 0.2), 0.7, step=0.18, ring=2.8)
-card(ow('when', 'Johannesburg', -0.2), 0.004, px(410))
 # washing, sewing, selling: one tile for each woman's work, where she stands
 for word, m, x in (('washing', C4, 480), ('sewing', Eb4, 960), ('selling', Ab4, 1440)):
     tile(m, ow('earn', word, -0.1), 0.6, px(x) * 0.6, ring=0.9)
@@ -219,40 +217,28 @@ chord((F2, C3, Ab3), ow('earn', 'irregular', -0.1), 0.5, step=0.2, ring=2.2)
 mark(((Ab2, -0.6), (Eb5, 0.6), (C4, -0.3), (Ab4, 0.3)), (Ab2, C4, Eb4, Ab4), ow('group', 'trust', -0.3), (0.55, 0.45, 0.35, 0.3), 0.75, ring=2.6)
 # each pays into the pot: a few coins laid in the tin; the tin tipped out for one; each member's turn, a tile each, rising
 p1 = ow('turn', 'pays', -0.1)
-for k in (0, 3, 6):
-    coin(p1 + k * 0.12 + 0.9, 0.0035, px(1300))
-pour(ow('turn', 'takes', 0.0), 0.9, 0.0045, px(1300))
 notes((Ab3, C4, Eb4, Ab4), ow('turn', 'until', 0.1), 0.55, step=0.42, ring=0.5, last=1.4)
 # the banks: few had an account, and none would lend: F minor, low, and each sheet pinned
-card(ow('banks', 'bank', -0.4), 0.004, px(370))
 chord((F2, C3, F3, Ab3), ow('banks', 'bank', -0.2), 0.6, step=0.2, ring=2.4)
-card(ow('lend', 'lend', -0.3), 0.004, px(1550))
 # what one funeral, a term's fees or a lost wage could do
 chord((F2, C3), ow('harm', 'ruin', -0.1), 0.55, step=0.3, ring=2.2, until=oc('change', -0.4))
 # something had to change, with nothing under it; then their own way, out of trust: D-flat major
-card(ow('change', 'built', -0.3), 0.004, px(1450))
 chord((Db3, F3, Ab3, Db4), ow('change', 'built', 0.0), 0.6, step=0.16, ring=2.2)
-card(ow('rules', 'rules', -0.2), 0.004, px(460))
 # every member answers to the others: the lines of trust drawn, a chord spread slowly; almost nobody fails to pay: coins
 chord((Ab2, Eb3, C4, Eb4, Ab4), ow('answer', 'answers', -0.2), 0.5, step=0.3, ring=2.2)
 n0 = ow('answer', 'nobody', -0.3)
-for k in (1, 5):
-    coin(n0 + k * 0.1 + 0.9, 0.0032, px(1430))
 # the burial society: D flat, low
 chord((Db3, Ab3, F4), ow('burial', 'burial', -0.1), 0.5, step=0.22, ring=1.8)
 # the group carries her: the mark, in D flat, as the green lines from all the others reach her
 mark(((Db3, -0.55), (F5, 0.6), (Ab3, -0.25), (Db4, 0.25)), (Db3, F3, Ab3, Db4), ow('carry', 'carries', -0.2), (0.5, 0.4, 0.32, 0.28), 0.7, ring=2.2)
 # Ubuntu: A-flat major, held, under a person is a person through other people
-card(ow('ubuntu', 'Ubuntu', -0.2), 0.004, px(1480))
 chord((Ab2, Eb3, Ab3, C4, Eb4), ow('ubuntu', 'person', 0.0), 0.6, step=0.2, ring=3.0)
 # their savings, their credit, their safety net: a tile for each
 for word, m, x in (('savings', Eb4, 330), ('credit', Ab4, 620), ('safety', C5, 910)):
     tile(m, ow('decades', word, -0.1), 0.5, px(x) * 0.6, ring=0.8)
 # more than 11 million, over 50 billion rand
-card(ow('today', 'million', -0.6), 0.004, px(570)); card(ow('rand', 'billion', -0.6), 0.004, px(1350))
 chord((Eb3, G3, Eb4), ow('rand', 'billion', -0.3), 0.45, step=0.15, ring=1.6)
 # a team holds its people the same way: a chord as every line reaches the work
-card(oc('team', 0.1), 0.004, px(960))
 chord((Ab2, C4, Eb4, Ab4), ow('team', 'alone', -0.2), 0.5, step=0.22, ring=2.0)
 # one of them steps away, far out of the ring: one high tile; the group holds: the low A flat
 tile(C5, ow('step', 'step', -0.1), 0.45, 0.45, ring=1.0)
@@ -270,20 +256,11 @@ LV[0] = 0.9
 hw = lambda lid, word, off=0: W('whole', lid, word, off)
 hc = lambda lid, off=0: G('whole', lid, off)
 chord((Db3, Ab3, Db4, F4), S0('whole') + 0.3, 0.6, step=0.16, ring=2.2)
-card(hw('helena', 'Helena', -0.3), 0.004, px(540))
-card(hc('weekly', 0.1), 0.004, px(480))
-card(hc('whole', 0.1), 0.004, px(960)); slide(hw('whole', 'together', -0.3), 0.9, 0.0035, px(960))
-pen(hw('really', 'last', 0.0), 0.5, 0.0045, px(560), 2)
-card(hc('slow', 0.2), 0.004, px(600)); card(hw('eleven', 'eleven', -0.6), 0.004, px(1320))
 low(C3, hw('weighs', 'weighs', -0.2), 0.55, 0.0, ring=1.4)
 chord((Ab2, Eb3, C4, Ab4), hw('first', 'wellbeing', -0.1), 0.55, step=0.2, ring=2.2)
-card(hc('comfort', 0.1), 0.004, px(470))
 notes((Eb4, Ab4, C5), hw('open', 'together', -0.1), 0.5, step=0.3, ring=0.5, last=1.2, pans=(0.25, 0.3, 0.35))
 chord((F2, C3), hw('gap', 'gap', -0.3), 0.5, step=0.25, ring=1.8)
 chord((F2, C3, Ab3), hc('sam', -0.1), 0.5, step=0.2, ring=2.0)
-for d in (0.4, 1.3, 2.2):
-    tap(hw('sam', 'alert', -0.4) + d, 0.0035, px(1340))
-card(hw('sixty', 'sixty', -0.5), 0.004, px(1370))
 tile(Ab4, hw('leans', 'nobody', -0.1), 0.45, 0.4, ring=1.6)
 
 # 3. Said out loud: the chapter turns on E-flat major; the agent's draft pinned, and its line marked; caught, but only just: two tiles,
@@ -293,14 +270,8 @@ LV[0] = 0.9
 aw = lambda lid, word, off=0: W('aloud', lid, word, off)
 ac = lambda lid, off=0: G('aloud', lid, off)
 chord((Eb3, G3, Eb4), S0('aloud') + 0.3, 0.55, step=0.16, ring=2.0)
-card(aw('april', 'drafted', -0.6), 0.004, px(1370)); pen(aw('draft', 'booked', -0.2), 0.4, 0.004, px(1350), 2)
 notes((Eb4, C4), aw('caught', 'catches', -0.1), 0.5, step=0.34, ring=0.5, last=1.2, pans=(0.3, 0.3))
-card(ac('standup', -0.1), 0.004, px(440))
 notes((Eb4, Ab4), aw('thanks', 'Jun', -0.1), 0.5, step=0.3, ring=0.5, last=1.4, pans=(-0.35, -0.35))
-card(aw('glossary', 'glossary', -0.3), 0.004, px(1480)); pen(aw('glossary', 'written', 0.0), 0.6, 0.0045, px(1480), 3)
-card(ac('name', 0.1), 0.004, px(960))
-card(aw('nurses', 'nurses', -0.3), 0.004, px(620)); card(aw('others', 'others', -0.3), 0.004, px(1300))
-card(aw('teams', 'teams', -0.4), 0.004, px(960))
 s5 = aw('teams', 'safer', -0.3); b5 = aw('teams', 'better', 0.0)
 notes((Ab3, C4, Eb4), s5, 0.5, step=(b5 - s5) / 2, ring=0.6, last=1.6, pans=(-0.45, -0.1, 0.25))
 low(Ab2, b5, 0.5, 0.25, ring=1.6)
@@ -314,18 +285,11 @@ LV[0] = 0.9
 pw = lambda lid, word, off=0: W('pairs', lid, word, off)
 pc = lambda lid, off=0: G('pairs', lid, off)
 chord((Db3, F3, Ab3, Db4), S0('pairs') + 0.3, 0.55, step=0.16, ring=2.0)
-card(S0('pairs') + 0.4, 0.004, px(650))
-card(pc('pair', 0.1), 0.004, px(440))
-a0 = pw('pair', 'alert', -0.2); ticked(a0 + 1.7, 0.0045, px(960))
-r0 = pw('runbook', 'runbook', -0.4); card(r0, 0.004, px(470))
-for k in range(4):
-    pen(r0 + 0.3 + 0.7 * k, 0.45, 0.004, px(470), 2)
+a0 = pw('pair', 'alert', -0.2)
+r0 = pw('runbook', 'runbook', -0.4)
 # four can answer: a tile for each tick, from far apart, then the four as one chord as the pill comes up
 f0 = pw('four', 'four', -0.2); nt = pw('four', 'night', -0.2)
 mark(((Ab2, px(300)), (Eb5, px(560)), (C4, px(820)), (Ab4, px(1080))), (Ab2, C4, Eb4, Ab4), f0, (0.42, 0.36, 0.3, max(0.3, nt - f0 - 1.08)), 0.7, ring=2.4)
-card(pw('rota', 'rota', -0.5), 0.004, px(1510))
-card(pc('two', 0.1), 0.004, px(960))
-card(pw('tutu', 'Desmond', -0.3), 0.004, px(960))
 chord((Db3, Ab3, F4), pw('tutu', 'able', 0.0), 0.5, step=0.22, ring=2.0)
 chord((Ab2, Eb3, C4, Eb4), pw('lost', 'nothing', -0.1), 0.5, step=0.2, ring=2.2, until=E('pairs'))
 
@@ -337,18 +301,12 @@ LV[0] = 0.9
 kw = lambda lid, word, off=0: W('holds', lid, word, off)
 kc = lambda lid, off=0: G('holds', lid, off)
 chord((F2, C3, F3, Ab3), S0('holds') + 0.3, 0.55, step=0.2, ring=2.4)
-card(kw('call', 'August', -0.3), 0.004, px(1410))
-card(kc('week', -0.1), 0.004, px(530))
-j0 = kw('week', 'Jun', -0.2); pen(j0, 0.5, 0.0045, px(400), 2)
+j0 = kw('week', 'Jun', -0.2)
 notes((C4, Ab4), kw('week', 'Erin', -0.1), 0.45, step=0.32, ring=0.5, last=1.2, pans=(0.25, 0.5))
-card(kw('work', 'moves', -0.3), 0.004, px(1420)); ticked(kw('work', 'date', -0.1), 0.0045, px(1740))
 a1 = kw('alerts', 'alert', -0.3); b0 = kw('alerts', 'answered', -0.3)
-tap(a1, 0.0035, px(1320)); tap(a1 + 0.6, 0.0035, px(1320))
-ticked(b0 + 0.4, 0.0045, px(1320)); ticked(b0 + 0.9, 0.0045, px(1320))
 low(Ab2, kw('nobody', 'him', 0.9), 0.5, 0.0, ring=1.8)
 chord((Db4, F4), kw('back', 'mother', -0.1), 0.45, step=0.25, ring=1.6)
 pk = kw('paid', 'paid', -0.3); s0 = kw('paid', 'stokvel', -0.4)
-card(s0, 0.004, px(540)); card(kw('paid', 'carried', -0.8), 0.004, px(1380))
 mark(((Eb3, px(400)), (C5, px(1500)), (Ab3, px(640)), (Eb4, px(1260))), (Ab2, Eb3, Ab3, C4, Eb4), pk - 1.1, (0.4, 0.3, 0.2, 0.2), 0.7, ring=2.6, until=E('holds'))
 
 # 6. Each person, every week: the chapter turns on A-flat major, its third lowest; each card pinned as the one-to-ones go on; Jun's load
@@ -358,11 +316,7 @@ LV[0] = 0.9
 ew = lambda lid, word, off=0: W('each', lid, word, off)
 ec = lambda lid, off=0: G('each', lid, off)
 chord((C3, Ab3, Eb4), S0('each') + 0.3, 0.55, step=0.18, ring=2.0)
-card(S0('each') + 0.3, 0.004, px(450)); card(ew('jun', 'September', -0.3), 0.004, px(450)); card(ew('jun', 'teaching', -0.4), 0.004, px(1580))
-card(ew('moves', 'moves', -0.3), 0.004, px(450))
-tap(ec('review', -0.3), 0.004, px(650))
 notes((Eb4, C4, Ab3), ew('order', 'team', -0.2), 0.5, step=ew('order', 'each', 0.0) - ew('order', 'team', 0.0), ring=0.6, last=1.4, pans=(0.3, 0.3, 0.3))
-card(ec('ethic', 0.1), 0.004, px(960))
 chord((Db3, Ab3, F4), ew('metz', 'caring', -0.1), 0.5, step=0.2, ring=1.8)
 chord((Ab2, Eb3, Ab3, C4, Eb4), ec('cares', 0.0), 0.55, step=0.2, ring=2.6, until=E('each'))
 
@@ -375,7 +329,42 @@ mc = lambda lid, off=0: G('monday', lid, off)
 low(Ab2, S0('monday') + 0.4, 0.55, 0.0, ring=2.0)
 for word, off, m, x in (('pays', -0.2, C4, 520), ('turn', -0.2, Eb4, 890), ('carries', -0.3, Ab4, 1260)):
     tile(m, mw('back', word, off), 0.5, px(x) * 0.6, ring=0.9)
-card(mw('team', "Helena's", -0.1), 0.004, px(860))
-for lid, word, x in (('pair', None, 390), ('leave', 'Protect', 960), ('thank', 'Thank', 1530), ('ask', 'ask', 675), ('new', 'new', 1245)):
-    card(mc(lid, 0.1) if word is None else mw(lid, word, -0.1), 0.004, px(x))
 t1 = mark(((Ab2, -0.7), (Eb5, 0.7), (C4, -0.35), (Ab4, 0.35)), (Ab2, Eb3, C4, Eb4, Ab4), mw('take', 'Nobody', 0.0), (0.6, 0.5, 0.4, 0.35), 0.6, ring=6.0, until=TOT)
+
+# ---- what the hands write: the boards and the pages of a notebook (the film made again in ink line, 18 November 2026). A row waits
+# until whoever writes has walked to it (PK.pace), so the marker's and the pen's sounds ask the film when each row is written (the
+# people kit's tools/pens.py). And the chats: a soft blip for each message that arrives
+import pens
+PEN = pens.written({'A': ('whole', 'carmen', 'tf_boardA'), 'B': ('aloud', 'carmen', 'tf_boardB'), 'C': ('pairs', 'helena', 'tf_boardC'),
+                    'D': ('each', 'carmen', 'tf_boardD'), 'M': ('monday', 'helena', 'tf_boardM'), 'N1': ('stokvel', None, 'tf_note1'),
+                    'N2': ('stokvel', None, 'tf_note2'), 'N3': ('whole', None, 'tf_note3'), 'N4': ('aloud', None, 'tf_note4'), 'N5': ('pairs', None, 'tf_note5')})
+def marker(s, sec=1.6, g=0.004, pan=0.0, n=3):
+    """a marker on a whiteboard, a word at a time: a soft, low rub, never a squeak"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 40)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (350, 1300)) * _bump(x, d, 0.7) * (0.4 + 0.6 * gr), t, g, pan, 1500)
+def scratch(s, sec=0.7, g=0.004, pan=0.0, n=3):
+    """a pen on a notebook's page, a word at a time"""
+    for i in range(n):
+        d = sec / n * R1.uniform(0.7, 0.9); t = s + sec / n * i; m = int(d * SR); x = np.arange(m) / SR
+        gr = np.abs(filt(noise(d + 0.02)[:m], 'low', 60)); gr = gr / max(1e-9, float(gr.max()))
+        _fx(filt(noise(d + 0.02)[:m], 'band', (600, 1800)) * _bump(x, d, 0.6) * (0.3 + 0.7 * gr), t, g, pan, 1900)
+def written(name, hand, g, least=0.28):
+    """a board's or a page's rows as the hand writes them (PEN): one soft rub for each row and each long mark, a word at a time"""
+    for k in PEN[name]:
+        d = k['t1'] - k['t0']
+        if d >= least:
+            hand(k['t0'], d, g, px(k['x']) * 0.5, max(1, round(d / 0.32)))
+def pop(s, g=0.0022, pan=0.0, up=True):
+    """a message sent (up) or one that arrives: one soft, round blip that rises, or falls, a little"""
+    n = int(0.16 * SR); x = np.arange(n) / SR
+    f = 430 * 2 ** ((0.4 if up else -0.4) * np.clip(x / 0.07, 0, 1))
+    _fx(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.005) * np.exp(-x / 0.04), s, g, pan, 1600)
+
+
+
+for name in ('A', 'B', 'C', 'D', 'M'):
+    written(name, marker, 0.004)
+for name in ('N1', 'N2', 'N3', 'N4', 'N5'):
+    written(name, scratch, 0.004)

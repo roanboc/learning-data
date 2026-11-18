@@ -1,19 +1,19 @@
 # Rebuilding The team comes first
 
-*The team comes first*, film 3 of 4 of *Leading a data team*, the third series of the module *Leading data people*, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, the agent films' kit and people, and the module's look and tools in [`../../../the-new-skills/shared/`](../../../the-new-skills/shared/), whose [README](../../../the-new-skills/shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `tf_` or `TF_`:
+*The team comes first*, film 3 of 4 of *Leading a data team*, the third series of the module *Leading data people*, is generated from code like every other film here. It is drawn with the people kit, *Ink line* ([`../../../people-first/shared/`](../../../people-first/shared/README.md)): whole people in the places where they live, work and meet, the film's ideas written by hand at a board and in notebooks. It was first drawn in the module's *Sunlit plaster* and made again on 18 November 2026, word for word on the voice. Every name it declares starts with `tf_`, `TF_`, `tfp_` or `TFP_`:
 
 | File | What it holds |
 |---|---|
 | `film.json` | The film's key (`the-team-first`), title and subtitle, the page's line on what the colours mean, its own source files in order, the moment its poster shows (chapter `pairs`, at `four`), the words the voice respells (stokvel, Stokvel, apartheid, Mogobe, Ramose, Reyes, Jun, Noor, "A I"), its opening story (`stokvel`) and no chapter where the score may pulse. |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. A line whose voice differs from its caption says so in `say`. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
-| `src/breath.js` | The holds after some lines, where an idea needs a moment to land, and the film's wordless moments, such as the title card and the end card. |
-| `src/tf_joburg.js` | The opening story's places and pictures, near Johannesburg in the 1930s: a yard of single rooms in long rows round beaten earth, limewashed brick and the clothes of the time, drawn from what is known of them, never from a photograph. |
-| `src/tf_uni.js` | The film's own people, places and sheets at the university, in the module's sunlit plaster. |
-| `src/tf_scenes.js` | The seven chapters, shot by shot, on the module's camera and shots. Every moment is timed to a line's start or to a word in it (`wAt()`), so the pictures stay with the voice when it is recorded again. |
+| `src/breath.js` | The holds after some lines, and two wordless moments: the team's room as the title card comes in, and as the end card comes in. |
+| `src/tfp_joburg.js` | Johannesburg in the 1930s, and today, in ink line (prefix `tfp_`): a yard of rooms, the room where a stokvel meets with its table and its pot, and a bank with its doors shut; and the women of one stokvel and the bank's clerk, nobody's likeness. |
+| `src/tf_uni.js` | The university in 2027, in the kit's places (the team's room, the corner, a teaching room, the board seen close, the notebook): who sits where, a screen's callout, the boards' rows and the notebooks' pages. |
+| `src/tf_scenes.js` | The seven chapters, shot by shot. Every picture has people in it, whole, doing what the line says; the words on screen are where and when, a name, or what someone says, and the ideas are written by hand. Every moment is timed to a line's start or to a word in it (`wAt()`). |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line. |
-| `tools/score.py` | The film's music and sounds: tuned ceramic tiles struck softly with felt beaters, made here. The mark is single notes from far apart, in register and across the stereo field, that meet as one chord. Each sound uses the same word and offset as the picture in `src/tf_scenes.js`: change one, change both. |
-| `tools/` | Each other tool runs the module's tool (`../../../the-new-skills/shared/tools/run.py`) on this film. |
+| `tools/score.py` | The film's music and sounds: tuned ceramic tiles struck softly with felt beaters, made here. The mark is single notes from far apart, in register and across the stereo field, that meet as one chord. Each sound uses the same word and offset as the picture in `src/tf_scenes.js`: change one, change both. The boards' and the notebooks' sounds come from the film itself, as each row is written (the people kit's `tools/pens.py`). |
+| `tools/` | Each other tool runs the people kit's tool (`../../../people-first/shared/tools/run.py`) on this film. |
 
 ## Setup (once)
 

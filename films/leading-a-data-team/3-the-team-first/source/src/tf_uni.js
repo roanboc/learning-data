@@ -1,132 +1,168 @@
-/* ===== The team comes first: the university, 2027 =====
-   The film's own people, places and sheets at the university (prefix tf_), in the module's sunlit plaster.
-     TF_ERIN              Erin Walsh, the team's platform engineer: one of the three the module's numbers left unnamed, named here
-     tfMorning, tfLate    the team's room in the morning, and in the late afternoon sun (the module's lpRoom is its afternoon)
-     tfDark               the team's room at night (one room with lpRoom: AG_ROOMS)
-     tfSam, tfHelena      Sam's room at home, and Helena's, in the evening, a lamp lit
-     tfReview             the room of the quarterly review, on a grey October day
-     tf_phone             a phone in the hand, its screen dark, lit, or lit with an alert
-     tf_rota              the night rota on a sheet: a plan, so its band is blue
-     tf_balance           a balance: managing on one side, leading on the other
-     tf_chain             a few words joined by arrows, one leading to the next
-     tf_print             a framed print of the stokvel's room, for the team's wall at the end
-   Colour keeps the module's meaning: blue plans and definitions (the rota, the runbook, the glossary), green done or of value (an alert
-   answered, a mistake thanked, the credit), amber risk or cost (the alerts, one person answering all of them, Jun's load), violet only
-   the agent (its draft). */
+/* ===== The team comes first: the university, February to October 2027 (imagined) =====
+   The places are the people kit's (films/people-first/shared/src/places.js): the team's room, the corner, the campus and a teaching
+   room; and, apart from the scene, a board seen close and a page of a notebook (concepts.js). This file holds what is this film's own
+   in them: where the team works, the boards' rows Carmen Vidal and Helena write, and the pages Ivy and Helena keep.
+   Every time comes from the voice: sc is the chapter, w a word's time in a line. Colour means what it means in the module: blue a plan
+   or a rule, orange data, green value or something done, amber a cost or something waiting. */
+AG_PLACES.tfTeam=PK.place.team;AG_PLACES.tfCorner=PK.place.corner;AG_PLACES.tfCampus=PK.place.campus;AG_PLACES.tfLecture=PK.place.lecture;
+AG_PLACES.tfBoard=PK.place.board;AG_PLACES.tfNotes=c=>PK.place.notes(c,{});
+const TF_T=PK.ROOMS.team,TF_CA=PK.ROOMS.campus,TF_CO=PK.ROOMS.corner,TF_LE=PK.ROOMS.lecture;
+const tf_hT=fl=>PK.hAt(fl,TF_T.eye),tf_hC=fl=>PK.hAt(fl,TF_CA.eye),tf_hL=fl=>PK.hAt(fl,TF_LE.eye);
+// a face that speaks from t0 to t1, on a base expression
+const tf_says=(base,tt,t0,t1)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,PK.talk(tt,t0,t1)*0.75);return e;};
+const tf_lis=(tt,g)=>PK.face(tt,{expr:"listen",gaze:[1,g==null?-0.2:g]},[]);
+// poses of this film's own: writing in a notebook held in the far hand; holding a sheet out to show it
+const TF_NOTE={lean:6,head:14,aN:[34,96,"grip"],aF:[30,92,"grip"],lN:[-2,-2],lF:[5,4]};
+const TF_SHOW={lean:2,head:6,aN:[44,82,"grip"],aF:[8,16],lN:[-2,-2],lF:[5,4]};
+const TF_CARRY={lean:-2,head:0,aN:[24,70,"grip"],aF:[6,14],lN:[-2,-2],lF:[4,3]};
+const tf_sheet=(c,h)=>{const S=PK.S;S.begin(c,{lw:2.2});PK.sheet(c,h[0]-6,h[1]-58,56,74,{rot:0.06});};
 
-/* ---------------------------------------------------------------- Erin Walsh
-   The platform engineer (she/her): the module's numbers name the team's eight, three of them not by name; this film names her, as film
-   14 named the report developer. Looked at full size, facing both ways. Her clothes keep clear of the five colours. */
-const TF_ERIN={name:"Erin Walsh",role:"Platform engineer",key:"tfErin",skin:[232,196,170],hair:{style:"bun",c:[132,76,48]},earrings:[214,200,170],top:{kind:"sweater",c:[126,106,96]},breath:0.28};
+// a desk with its screen drawn in o.on, so the person at it is never taken for someone on a screen: o.screen "monitor" or "laptop"
+function tf_desk(x,who,px,fl,h,o){o=Object.assign({},o||{});const kind=o.screen,on2=o.on;
+  o.screen=null;o.on=(cc,D)=>{if(kind==="monitor")PK.monitor(cc,o.sx==null?D.x0+D.dir*D.w*0.6:o.sx,D.top,o.sw||0.36*h,o.sh||0.23*h,{draw:o.show});
+    else if(kind==="laptop")PK.laptop(cc,D.x0+D.dir*0.21*h,D.top,{k:D.k,flip:D.dir<0});if(on2)on2(cc,D);};
+  return PK.atDesk(x,who,px,fl,h,o);}
 
-/* ---------------------------------------------------------------- places */
-AG_PLACES.tfMorning=c=>lp_paintRoom(c,{light:"morning",seed:4});
-AG_PLACES.tfLate=c=>lp_paintRoom(c,{light:"late",seed:6});
-AG_PLACES.tfDark=c=>{lp_paintRoom(c,{light:"evening"});tf_lamp(c,1380,300);};
-AG_ROOMS.tfDark="lpRoom";
-// a lamp on the wall, lit: its pool of light is the room's (lp_paintRoom's "evening")
-function tf_lamp(c,x,y){c.save();c.fillStyle=rgba(LP.graphite,1);c.fillRect(x-4,y+18,8,40);c.fillRect(x-22,y+56,44,8);
-  const g=c.createLinearGradient(x-46,0,x+46,0);g.addColorStop(0,"rgb(214,190,150)");g.addColorStop(1,"rgb(250,232,196)");c.fillStyle=g;
-  c.beginPath();c.moveTo(x-28,y-30);c.lineTo(x+28,y-30);c.lineTo(x+46,y+22);c.lineTo(x-46,y+22);c.closePath();c.fill();
-  c.globalCompositeOperation="screen";const q=c.createRadialGradient(x,y+24,0,x,y+24,90);q.addColorStop(0,"rgba(255,226,180,0.8)");q.addColorStop(1,"rgba(255,226,180,0)");c.fillStyle=q;c.fillRect(x-90,y-66,180,180);c.restore();}
-// a framed picture on a wall at home: a few soft hills, nothing that means anything
-function tf_frame(c,x,y,w,h,o){o=o||{};c.save();c.shadowColor="rgba(40,28,24,0.4)";c.shadowBlur=14;c.shadowOffsetX=LP.sdx*0.6;c.shadowOffsetY=6;c.fillStyle=rgba(mix(LP.timber,LP.shade,0.25),1);c.fillRect(x-10,y-10,w+20,h+20);c.restore();
-  let g=c.createLinearGradient(0,y,0,y+h);g.addColorStop(0,"rgb(226,218,204)");g.addColorStop(1,"rgb(206,196,180)");c.fillStyle=g;c.fillRect(x,y,w,h);
-  for(const [k,col] of [[0.55,[170,162,150]],[0.7,[146,138,128]],[0.84,[124,116,108]]]){c.fillStyle=rgba(col,1);c.beginPath();c.moveTo(x,y+h);c.lineTo(x,y+h*k);
-    for(let i=0;i<=8;i++)c.lineTo(x+w*i/8,y+h*k-Math.sin(i*1.3+k*7)*h*0.06);c.lineTo(x+w,y+h);c.closePath();c.fill();}
-  if(o.dim){c.fillStyle=rgba(LP.shade,o.dim);c.fillRect(x-10,y-10,w+20,h+20);}}
-AG_PLACES.tfSam=c=>{lp_paintRoom(c,{light:"evening",seed:9,base:[214,202,186]});tf_frame(c,240,190,300,220,{dim:0.3});tf_lamp(c,1380,300);};
-AG_PLACES.tfHelena=c=>{lp_paintRoom(c,{light:"evening",seed:14,base:[222,210,192],lamp:[1460,300]});tf_frame(c,1080,180,240,300,{dim:0.25});tf_lamp(c,1460,300);};
-AG_PLACES.tfReview=c=>lp_paintRoom(c,{light:"grey",seed:21});
+/* ---------------------------------------------------------------- the team's room
+   Who works where: Sam at the desk at the back, Jun at the desk at the back right, turned the other way, and Marta at the desk by the
+   window. Everything is drawn far to near (by floor), so nobody is drawn over someone nearer: o.people is a list of {fl, draw(x)} for
+   whoever else is in the room (the floor they stand or sit on); o.sam, o.jun, o.marta: what PK.atDesk takes for each (null: the desk
+   stands empty); o.show: what Marta's screen shows, o.showJ Jun's; o.clock: the time on the wall. Returns their joints. */
+const TF_DESK={sam:[1230,TF_T.back],jun:[1808,TF_T.back],marta:[560,TF_T.mid]};
+function tf_team(x,tt,o){o=o||{};const r={},HB=tf_hT(TF_T.back),HM=tf_hT(TF_T.mid);PK.clock(x,TF_T.clock[0],TF_T.clock[1],TF_T.clock[2],o.clock===undefined?9:o.clock);
+  const items=[{fl:TF_T.back,i:0,draw:c=>{r.sam=PK.atDesk(c,o.sam===null?null:(o.samWho||"sam"),TF_DESK.sam[0],TF_T.back,HB,Object.assign({t:tt,w:0.45*HB},o.sam||{}));}},
+    {fl:TF_T.back,i:1,draw:c=>{r.jun=PK.atDesk(c,o.jun===null?null:"jun",TF_DESK.jun[0],TF_T.back,HB,Object.assign({t:tt+3,flip:true,w:0.45*HB,show:o.showJ},o.jun||{}));}},
+    {fl:TF_T.mid,i:2,draw:c=>{r.marta=tf_desk(c,o.marta===null?null:(o.deskWho||"marta"),TF_DESK.marta[0],TF_T.mid,HM,Object.assign({t:tt+1,flip:true,w:0.84*HM,sx:205,screen:"monitor",show:o.show||PK.onScreen.chat(0,{}),
+      on:(cc,D)=>{PK.S.begin(cc,{lw:2.6,sh:3});PK.mug(cc,D.x1+34,D.top,0.7,PK.col("mug"),tt,o.steam!==false);}},o.marta||{}));}}];
+  (o.people||[]).forEach((p,i)=>items.push(Object.assign({i:10+i},p)));
+  items.sort((a,b)=>a.fl-b.fl||a.i-b.i).forEach(it=>it.draw(x));return r;}
+AG_BARE.tfTeam=(x,tt)=>tf_team(x,tt,{sam:null,jun:null,marta:null,clock:null});
 
-/* ---------------------------------------------------------------- a phone in the hand
-   tf_phone(o) is a holdBack for lp_person (the hand closes over its foot): o.lit 0 to 1 (its screen on), o.alert 0 to 1 (an alert on it,
-   in amber), o.call 0 to 1 (a call: a green band, the line open). In figure space, at the near hand's grip. */
-function tf_phone(o){o=o||{};return(c,h)=>{const [x,y]=tf_grip(h),lit=o.lit||0;c.save();c.translate(x+8,y-54);c.rotate(-0.1);
-  ag_soft(c,cc=>ag_rect(cc,-36,-68,72,136,13),[38,38,42],[104,104,112],12,-56,70,"rgba(0,0,0,0.45)",8);
-  c.fillStyle="rgb(24,24,28)";rr(c,-30,-60,60,120,8);c.fill();
-  if(lit>0){c.globalAlpha*=lit;const g=c.createLinearGradient(0,-60,0,60);g.addColorStop(0,"rgb(236,238,242)");g.addColorStop(1,"rgb(214,218,226)");c.fillStyle=g;rr(c,-30,-60,60,120,8);c.fill();
-    if(o.alert>0){c.save();c.globalAlpha*=o.alert;c.fillStyle=rgba(LP.amber,1);rr(c,-24,-44,48,26,6);c.fill();c.fillStyle="rgba(255,255,255,0.9)";c.fillRect(-16,-34,32,4);c.fillRect(-16,-26,22,3);c.restore();}
-    if(o.call>0){c.save();c.globalAlpha*=o.call;c.fillStyle=rgba(LP.green,1);rr(c,-24,24,48,22,11);c.fill();c.restore();}
-    c.globalAlpha=1;}
-  c.restore();};}
-// the screen's light on whoever holds the phone, at night: a soft cool glow, laid on the frame over them (x, y: the phone, in the frame)
-function tf_glow(ctx,x,y,r,a){if(a<=0.004)return;ctx.save();ctx.globalCompositeOperation="soft-light";const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,"rgba(226,236,255,"+(0.75*a)+")");g.addColorStop(1,"rgba(226,236,255,0)");
-  ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);ctx.restore();}
+/* ---------------------------------------------------------------- the team's board, and Carmen Vidal at it
+   Carmen Vidal, a consultant who works with the team now and then, explains the film's ideas at the team's board (PK.teach). The film
+   cuts between the room, where its board shows the rows small, and the board seen close (naBoard): both draw the same rows at the
+   same times. In the room, Helena stands to the side with her notebook, clear of where Carmen walks and rests, and whoever is at
+   their desk has turned to the board. */
+const TF_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
+const tf_roomBoard=(cx,tt,rows,who,o)=>{const q=Object.assign({},TF_RB,{h:tf_hT(TF_RB.floor)});for(const k in o||{})if(o[k]!==undefined)q[k]=o[k];return PK.teach(cx,who,tt,rows,q);};
+const TF_SIDE={x:1690,floor:900},TF_SAMC={x:1480,floor:905};
+// o.rows, o.say, o.events: the board's; o.note (0 to 1): Helena looks down and writes; o.helena, o.sam, o.jun: faces. Returns joints
+function tf_lesson(x,tt,o){o=o||{};let Jc=null,R2=null,Js=null;const wr=o.note||0,R=tf_team(x,tt,{clock:o.clock,marta:o.marta===undefined?null:o.marta,sam:null,
+    jun:Object.assign({work:0,pose:"sit"},o.jun||tf_lis(tt,-0.2)),people:[
+    {fl:TF_SAMC.floor,draw:c=>{Js=PK.seated(c,"sam",TF_SAMC.x,TF_SAMC.floor,tf_hT(TF_SAMC.floor),"sit",Object.assign({t:tt+2,flip:true},o.sam||tf_lis(tt,-0.25)));}},
+    {fl:TF_RB.floor,draw:c=>{Jc=tf_roomBoard(c,tt,o.rows||[],o.who||"carmen",{say:o.say,events:o.events});}},
+    {fl:TF_SIDE.floor,draw:c=>{R2=PK.person(c,o.side||(o.who==="helena"?"ivy":"helena"),TF_SIDE.x,TF_SIDE.floor,tf_hT(TF_SIDE.floor),PK.poseMix("clasp",TF_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||tf_lis(tt,-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}}]});
+  R.helena=R2;R.at=Jc;R.sam=Js;return R;}
 
-/* ---------------------------------------------------------------- the night rota
-   tf_rota(ctx, x, y, w, o): a sheet with a blue band, its kicker and title (o.kick, o.title), and a row for each week (o.rows: [[who,
-   when], ...]), coming in one by one (o.u, 0 to 1); o.hi: a row lit, behind its words; o.cover {i, u, text}: that row's name struck
-   through in amber and the names that take it written beside it in green; o.a, o.k, o.light as lp_sheet. Returns its box. */
-function tf_rota(ctx,x,y,w,o){o=o||{};const rows=o.rows||[],rh=58,top=y+LP_PAD+30+44+50+18,h=top-y+rows.length*rh+LP_PAD-10,a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0.004)return bb;
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-  lp_sheet(ctx,x,y,w,h,{col:LP.blue,light:o.light===undefined?"day":o.light,pin:o.pin});let yy=y+LP_PAD+30;
-  lp_T(ctx,String(o.kick||"").toUpperCase(),x+LP_PAD,yy+14,{w:800,size:28,ls:3,col:LP.blue});yy+=44;lp_T(ctx,o.title||"",x+LP_PAD,yy+42,{w:800,size:40});
-  rows.forEach((r,i)=>{const ra=o.u==null?1:clamp(o.u*rows.length-i,0,1),ry=top+i*rh;if(ra<=0)return;ctx.save();ctx.globalAlpha*=ag_sine(ra);
-    if(o.hi===i){ctx.fillStyle=rgba(LP.blue,0.1);ctx.fillRect(x+16,ry-6,w-32,rh-6);}
-    ctx.strokeStyle=rgba(LP.mut,0.3);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+LP_PAD,ry+rh-8);ctx.lineTo(x+w-LP_PAD,ry+rh-8);ctx.stroke();
-    lp_T(ctx,r[0],x+LP_PAD,ry+34,{w:800,size:32});lp_T(ctx,r[1],x+w-LP_PAD,ry+34,{w:600,size:28,col:LP.mut,align:"right"});
-    const cv=o.cover;if(cv&&cv.i===i&&cv.u>0){const tw=lp_tw(ctx,r[0],{w:800,size:32}),su=ag_sine(clamp(cv.u*2,0,1));ctx.strokeStyle=rgba(LP.amber,1);ctx.lineWidth=4;ctx.lineCap="round";
-      ctx.beginPath();ctx.moveTo(x+LP_PAD-4,ry+23);ctx.lineTo(x+LP_PAD-4+(tw+8)*su,ry+23);ctx.stroke();
-      lp_T(ctx,cv.text,x+LP_PAD+tw+24,ry+34,{w:800,size:32,col:LP.green,a:ag_sine(clamp(cv.u*2-1,0,1))});}
-    ctx.restore();});
-  ctx.restore();return bb;}
+/* ---------------------------------------------------------------- Helena's corner
+   Helena at the round table: alone, with her two sheets (o.sheets), or with someone across from her (o.who2). o.lean (0 to 1): she
+   leans in; o.he, o.ie: their faces; o.write (0 to 1): her pen on the sheet; o.t0: when the shot starts (two people cross the lawn
+   outside once, from then). Returns {helena, who2}: their joints. */
+const TF_SITH={mode:"sit",lean:2,head:0,aN:[24,76],aF:[28,80],lN:[86,3],lF:[82,-5]},TF_SITH2={mode:"sit",lean:13,head:-5,aN:[40,80,"open"],aF:[36,78],lN:[86,5],lF:[82,-6]};
+const TF_SITI={mode:"sit",lean:6,head:6,aN:[26,74,"grip"],aF:[30,78,"grip"],lN:[86,8],lF:[82,-2]};
+function tf_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=TF_CO,lean=o.lean||0,t0=o.t0||0,lw={lw:3.4,far:0,sh:5},r={},wr=o.write||0;
+  x.save();x.beginPath();x.rect(win[0],win[1],win[2],win[3]);x.clip();
+  for(const [i,ts,d,left,dy,h] of [[3,t0+1,22,false,34,92],[9,t0+8,26,true,24,96]]){if(tt<ts||tt>ts+d)continue;
+    PK.walk(x,PK.extra(i),tt,{x0:left?win[0]+win[2]+40:win[0]-40,x1:left?win[0]-40:win[0]+win[2]+40,t0:ts,t1:ts+d,floor:win[1]+win[3]-dy,h},{far:0.55,shade:0});}
+  x.restore();PK.windowFrame(x,win[0],win[1],win[2],win[3],{});
+  const hp=PK.poseMix(TF_SITH,TF_SITH2,Math.max(lean,0.6*wr)),W2=o.who2;
+  S.begin(x,lw);PK.chair(x,hx-10,F,H,false,{});if(W2)PK.chair(x,ix+10,F,H,true,{col:PK.PAL.chair2});
+  const W1=o.who1||"helena";PK.person(x,W1,hx,F,H,hp,{t:tt,part:"lower"});if(W2)PK.person(x,W2,ix,F,H,TF_SITI,{t:tt+1,flip:true,part:"lower"});
+  S.begin(x,lw);PK.table(x,tx,ty,rx,F);
+  S.begin(x,{lw:2.6,far:0,sh:3});PK.mug(x,tx+150,ty+10,0.9,PK.col("mug2"),tt,true);
+  // the two sheets on the table: the chart (its boxes in blue) and the list (its lines in orange)
+  if(o.sheets){S.begin(x,{lw:2.4,sh:3});for(const [sx,col,k] of [[tx-150,PK.C.orange,1],[tx-10,PK.C.blue,0]]){S.poly(x,[[sx-60,ty-4,1],[sx+60,ty-10,1],[sx+84,ty+8,1],[sx-40,ty+16,1]],[250,248,240],{exact:true});
+    S.line(x,c=>{for(let i=0;i<3;i++){c.moveTo(sx-34+i*6,ty+2-i*5);c.lineTo(sx+50+i*6,ty-2-i*5);}},col,0.6);}}
+  if(o.book){S.begin(x,{lw:2.6,far:0,sh:3});PK.notebook(x,tx-200,ty+4,1.1,{});}
+  if(o.laptop){S.begin(x,{lw:2.6,far:0,sh:3});PK.laptop(x,tx-150,ty+6,{k:1.25,glow:true});r.laptop=[tx-150,ty-70];}
+  const pen=[U.lerp(790,tx-130,wr),ty-6];
+  r.helena=r.who1=PK.person(x,W1,hx,F,H,hp,Object.assign({t:tt,part:"upper",expr:o.he,gaze:o.hg||[1,0.25],reachN:o.handN||(wr>0.01?pen:[790,ty-4]),reachF:o.handF||[806,ty-12],hold:o.hold||(wr>0.3?PK.inHand.pen("blue"):null),holds:!!(o.hold||wr>0.3)},o.hf||{}));
+  if(W2)r.who2=PK.person(x,W2,ix,F,H,TF_SITI,Object.assign({t:tt+1,flip:true,part:"upper",expr:o.ie,gaze:o.ig||[1,0.3],reachN:[1150,ty-6],reachF:[1128,ty-2]},o.iface||{}));
+  return r;}
 
-/* ---------------------------------------------------------------- a balance
-   tf_balance(ctx, cx, cy, o): a timber beam on a graphite post (its pivot at cx, cy), a pan hanging from each end with its word on it
-   (o.left, o.right); o.tilt, radians, the right side down when positive; o.a. */
-function tf_balance(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const L=380,tl=o.tilt||0,ca=Math.cos(tl),sa=Math.sin(tl);ctx.save();ctx.globalAlpha*=a;
-  ctx.fillStyle=rgba(LP.shade,0.16);ctx.beginPath();ctx.ellipse(cx+LP.sdx*3,cy+330,150,14,0,0,TAU);ctx.fill();
-  ctx.fillStyle=rgba(LP.graphite,1);ctx.fillRect(cx-9,cy,18,320);ctx.fillRect(cx-110,cy+316,220,14);ctx.beginPath();ctx.moveTo(cx-26,cy+10);ctx.lineTo(cx,cy-24);ctx.lineTo(cx+26,cy+10);ctx.closePath();ctx.fill();
-  ctx.save();ctx.translate(cx,cy-24);ctx.rotate(tl);const g=ctx.createLinearGradient(0,-10,0,10);g.addColorStop(0,rgba(mix(LP.timber,[255,250,240],0.25),1));g.addColorStop(1,rgba(mix(LP.timber,LP.shade,0.3),1));
-  ctx.fillStyle=g;rr(ctx,-L-16,-11,2*L+32,22,8);ctx.fill();ctx.restore();
-  for(const [sd,word] of [[-1,o.left],[1,o.right]]){const px=cx+sd*L*ca,py=cy-24+sd*L*sa,pb=py+150;
-    ctx.strokeStyle=rgba(LP.graphite,0.9);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px-110,pb);ctx.moveTo(px,py);ctx.lineTo(px+110,pb);ctx.stroke();
-    ctx.save();ctx.shadowColor="rgba(52,36,30,0.28)";ctx.shadowBlur=14;ctx.shadowOffsetX=LP.sdx*0.5;ctx.shadowOffsetY=6;ctx.fillStyle=rgba(LP.paper,1);
-    ctx.beginPath();ctx.moveTo(px-150,pb);ctx.lineTo(px+150,pb);ctx.bezierCurveTo(px+140,pb+46,px-140,pb+46,px-150,pb);ctx.closePath();ctx.fill();ctx.restore();
-    ctx.fillStyle=rgba(LP.graphite,1);ctx.beginPath();ctx.arc(px,py,7,0,TAU);ctx.fill();
-    lp_T(ctx,word,px,pb-16,{w:800,size:34,align:"center"});}
-  ctx.restore();}
 
-/* ---------------------------------------------------------------- words joined by arrows
-   tf_chain(ctx, x, y, items, o): items [{text, col, pill}] in a row from x, centred on y, gap px apart, each coming in at its own
-   time (o.u, 0 to 1 across them): an outlined tag (or a solid pill, pill: true), then an arrow to the next. o.a. */
-function tf_chain(ctx,x,y,items,o){o=o||{};const a=o.a==null?1:o.a,gap=o.gap||64;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;let xx=x;
-  items.forEach((it,i)=>{const u=o.u==null?1:clamp(o.u*items.length-i,0,1),w=it.pill?lp_tw(ctx,it.text,{w:800,size:30})+60:lp_tw(ctx,it.text,{w:700,size:28})+52;
-    if(i>0&&u>0){const ax0=xx-gap+10,ax1=xx-12,au=ag_sine(clamp(u*2,0,1));ctx.strokeStyle=rgba(LP.ink,0.8);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ax0,y);ctx.lineTo(lerp(ax0,ax1,au),y);ctx.stroke();
-      if(au>0.95){ctx.fillStyle=rgba(LP.ink,0.8);ctx.beginPath();ctx.moveTo(ax1+4,y);ctx.lineTo(ax1-12,y-10);ctx.lineTo(ax1-12,y+10);ctx.closePath();ctx.fill();}}
-    const ua=ag_sine(clamp(u*2-0.6,0,1));if(it.pill)lp_pill(ctx,xx+w/2,y,it.text,{col:it.col||LP.green,a:ua});else lp_tag(ctx,xx,y,it.text,{col:it.col||LP.ink,a:ua});
-    xx+=w+gap;});
-  ctx.restore();}
 
-/* ---------------------------------------------------------------- the runbook
-   tf_runbook(ctx, x, y, o): the platform's runbook as a pinned sheet, its four steps numbered in two columns, so it stays low enough
-   to sit above the people at their table and below the film's title. o.a, o.k (time since it came in, for the spring), o.u (0 to 1:
-   the steps one by one), o.light. Returns its box. */
-const TF_STEPS=["Read what the alert says","Check the load that failed","Run it again, or wait for it","Write down what you did"];
-function tf_runbook(ctx,x,y,o){o=o||{};const w=1100,h=LP_PAD+30+44+2*50+LP_PAD-14,a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0.004)return bb;
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
-  lp_sheet(ctx,x,y,w,h,{col:LP.blue,light:o.light});lp_T(ctx,"RUNBOOK · STEP BY STEP",x+LP_PAD,y+LP_PAD+44,{w:800,size:28,ls:3,col:LP.blue});
-  TF_STEPS.forEach((s,n)=>{const la=o.u==null?1:clamp(o.u*4-n,0,1);if(la<=0.004)return;const sx=x+LP_PAD+(n>>1)*(w/2),sy=y+LP_PAD+30+44+(n&1)*50+38;
-    ctx.save();ctx.globalAlpha*=ag_sine(la);lp_T(ctx,String(n+1),sx+8,sy,{w:800,size:28,align:"center",col:LP.blue});lp_T(ctx,s,sx+34,sy,{w:600,size:28});ctx.restore();});
-  ctx.restore();return bb;}
+/* ---------------------------------------------------------------- a teaching room: the door with its room's name, the sensor above it
+   Ivy and Sam look at the sensor over the door, which counts the people in the room every hour.
+   o.people: [{fl, draw(x)}], drawn far to near; o.plate (0 to 1): the room's name by the door */
+const TF_LE2=PK.ROOMS.lecture;
+function tf_room(x,tt,o){o=o||{};if((o.plate||0)>0.004)PK.tag(x,560,420,"B-204",o.plate,{});
+  (o.people||[]).slice().sort((a,b)=>a.fl-b.fl).forEach(p=>p.draw(x));}
 
-/* ---------------------------------------------------------------- words said aloud
-   tf_say(ctx, x, y, text, to, o): lp_tag's outlined words with a small tail from its lower edge towards the speaker at x = to, so it's
-   clear who says them when several people stand in a row. o.align, o.col, o.a. */
-function tf_say(ctx,x,y,text,to,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const col=o.col||LP.ink,b=lp_tag(ctx,x,y,text,Object.assign({},o,{a}));
-  const bx=clamp(to,b.x+34,b.x+b.w-34),by=b.y+b.h,tx=bx+clamp((to-bx)*0.5,-16,16);ctx.save();ctx.globalAlpha*=a;
-  ctx.fillStyle="rgba(250,247,240,0.97)";ctx.beginPath();ctx.moveTo(bx-13,by-4);ctx.lineTo(tx,by+20);ctx.lineTo(bx+13,by-4);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.5;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(bx-12,by-1);ctx.lineTo(tx,by+20);ctx.lineTo(bx+12,by-1);ctx.stroke();ctx.restore();}
+/* ---------------------------------------------------------------- what a screen shows, close: a callout's rows of words, and bars.
+   rows: [text, col, size]; bars: [[label, n, of, col]] */
+function tf_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
+  if(head){ag_T(cc,head.toUpperCase(),bx+30,y,{w:800,size:28,ls:3,color:U.css(hc||PK.C.amber)});y+=52;}
+  for(const [s,col,size] of rows||[]){ag_T(cc,s,bx+30,y,{w:700,size:size||34,color:U.css(col||PK.C.ink)});y+=(size||34)+16;}
+  for(const [lab,n,of,col] of bars||[]){if(!n)continue;const w=(bw-60)*n/of;PK.S.begin(cc,{lw:2});PK.S.fill(cc,c=>c.rect(bx+30,y-10,w,24),col,{w:0.6});
+    ag_T(cc,lab,bx+30,y+50,{w:700,size:30,color:U.css(PK.C.ink)});y+=86;}}
 
-/* ---------------------------------------------------------------- a print of the stokvel's room, for the team's wall
-   Painted once: the room in the yard where the stokvel meets, its members round the table and the pot on it, in a timber frame. */
-function tf_printPic(){return ag_kept("tfPrint",960,540,(c)=>{c.save();c.scale(0.5,0.5);c.drawImage(ag_place("tfMeet"),0,0,W,H);
-  const lt={light:"late",wall:0.12};for(const [i,px,fl] of [[0,330,false],[1,560,false],[2,790,true],[3,1020,true]])lp_person(c,TF_WOMEN[i],px,690,0.66,{t:0,flip:fl,cut:806,light:lt});
-  lp_table(c,200,812,940);tf_pot(c,680,768,0.9,0.6,1);c.restore();});}
-function tf_print(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const h=w*9/16;ctx.save();ctx.globalAlpha*=a;
-  ctx.save();ctx.shadowColor="rgba(52,36,30,0.34)";ctx.shadowBlur=24;ctx.shadowOffsetX=LP.sdx;ctx.shadowOffsetY=12;ctx.fillStyle=rgba(mix(LP.timber,LP.shade,0.2),1);ctx.fillRect(x-18,y-18,w+36,h+36);ctx.restore();
-  ctx.fillStyle=rgba(LP.paper,1);ctx.fillRect(x-6,y-6,w+12,h+12);ctx.drawImage(tf_printPic(),x,y,w,h);
-  const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,"rgba(255,255,255,0.12)");g.addColorStop(0.5,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
-  if(o.light&&LP_LIGHT[o.light]&&LP_LIGHT[o.light].sun)lp_sun(ctx,LP_LIGHT[o.light].sun,{a:0.6,col:LP_LIGHT[o.light].col,clip:cc=>{cc.beginPath();cc.rect(x-18,y-18,w+36,h+36);cc.clip();}});
-  ctx.restore();}
+
+
+
+
+
+
+
+/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+// 1. leading and managing (Carmen, at the team's board)
+const tf_boardA=(sc,w)=>[
+  {s:"Lead · manage",x:70,y:120,size:62,col:"blue",at:w("weighs","Managing",-0.3),d:0.8},
+  {s:"leading weighs a little more",x:110,y:230,size:50,at:w("weighs","leading weighs",-0.2),d:1.2},
+  {s:"people first · wellbeing first",x:200,y:330,size:50,col:"green",at:w("first","wellbeing",-0.4),d:1.2},
+  {s:"support · a tool · a push",x:290,y:430,size:50,at:w("comfort","more support",-0.3),d:1.1}];
+// 2. psychological safety (Carmen)
+const tf_boardB=(sc,w)=>[
+  {s:"Psychological safety",x:70,y:120,size:60,col:"blue",at:w("name","psychological safety",-0.4),d:1.0},
+  {s:"safe to take a risk",x:110,y:240,size:52,at:w("belief","taking risks",-0.4),d:0.9},
+  {s:"admit a mistake",x:520,y:340,size:52,col:"green",at:w("belief","admitting a mistake",-0.3),d:0.8},
+  {s:"51 teams: safer, learned more",x:200,y:450,size:48,at:w("teams","felt safer",-0.6),d:1.3}];
+// 3. the night rota (Helena, at the team's board)
+const tf_boardC=(sc,w)=>[
+  {s:"Nights",x:70,y:120,size:64,col:"blue",at:w("four","four people",-0.4),d:0.5},
+  {s:"Sam · Noor · Jun · Erin",x:110,y:240,size:52,col:"green",at:w("four","every night alert",-0.4),d:1.2},
+  {s:"one week in four each",x:300,y:360,size:52,col:"blue",at:w("rota","one week in four",-0.3),d:1.1}];
+// 4. Ubuntu as an ethic (Carmen)
+const tf_boardD=(sc,w)=>[
+  {s:"Ubuntu, an ethic",x:70,y:120,size:60,col:"blue",at:w("ethic","Ubuntu",-0.3),d:0.8},
+  {s:"Ramose · Metz",x:110,y:230,size:50,at:w("ethic","Mogobe Ramose",-0.2),d:0.8},
+  {s:"share a life with others",x:200,y:340,size:52,col:"green",at:w("metz","sharing a life",-0.3),d:1.1},
+  {s:"care how their lives go",x:380,y:450,size:52,col:"green",at:w("metz","caring",-0.3),d:1.1}];
+// 5. on Monday (Helena, at the board seen close)
+const tf_boardM=(sc,w)=>[
+  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("pair","On Monday",0),d:0.6},
+  {s:"pair · two for each job",x:110,y:205,size:48,col:"green",at:w("pair","pair until",-0.2),d:1.0},
+  {s:"protect leave",x:200,y:290,size:48,at:w("leave","Protect leave",-0.2),d:0.7},
+  {s:"thank who says: I got it wrong",x:200,y:375,size:46,col:"green",at:w("thank","Thank",-0.2),d:1.2},
+  {s:"ask how people are · new: watch first",x:200,y:460,size:42,col:"blue",at:w("ask","ask how",-0.2),d:1.5}];
+
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+// 1. the stokvel's rules (a member's book)
+const tf_note1=(sc,w)=>[
+  {s:"Our rules",x:70,y:124,size:80,w:760,col:"blue",at:w("rules","agrees its rules",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
+  {s:"how much · how often",x:110,y:250,size:54,at:w("rules","how much",-0.2),d:1.0},
+  {s:"whose turn comes next",x:110,y:360,size:54,col:"green",at:w("rules","whose turn",-0.2),d:1.0},
+  {s:"if someone can't pay",x:110,y:470,size:54,col:"amber",at:w("rules","can't pay",-0.5),d:1.0}];
+// 2. Ubuntu (the same book)
+const tf_note2=(sc,w)=>[
+  {s:"Ubuntu",x:70,y:124,size:84,w:760,col:"blue",at:w("ubuntu","Ubuntu",-0.3),d:0.5,marks:[["under","blue",null,0.3]]},
+  {s:"a person is a person",x:110,y:260,size:56,col:"green",at:w("ubuntu","a person is a person",-0.3),d:1.0},
+  {s:"through other people",x:150,y:370,size:56,col:"green",at:w("ubuntu","through other people",-0.3),d:1.0}];
+// 3. the team as a whole (Helena)
+const tf_note3=(sc,w)=>[
+  {s:"The team, as a whole",x:70,y:124,size:72,w:760,col:"blue",at:w("whole","as a whole",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
+  {s:"what it does together",x:110,y:250,size:52,col:"green",at:w("whole","achieves together",-0.4),d:1.0},
+  {s:"against what it really does",x:110,y:350,size:50,at:w("really","really does",-0.4),d:1.1},
+  {s:"11 ways in · day and night",x:110,y:450,size:50,col:"orange",at:w("eleven","eleven different ways",-0.3),d:1.1}];
+// 4. said out loud (Ivy)
+const tf_note4=(sc,w)=>[
+  {s:"Said out loud",x:70,y:124,size:76,w:760,col:"blue",at:w("learn","said out loud",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
+  {s:"and thanked",x:110,y:250,size:56,col:"green",at:w("learn","thanked",-0.3),d:0.6},
+  {s:"the whole team learns",x:110,y:360,size:56,at:w("learn","whole team learns",-0.3),d:1.0}];
+// 5. Tutu (Helena)
+const tf_note5=(sc,w)=>[
+  {s:"Desmond Tutu",x:70,y:124,size:76,w:760,col:"blue",at:w("tutu","Desmond Tutu",-0.3),d:0.7,marks:[["under","blue",null,0.3]]},
+  {s:"not threatened",x:110,y:250,size:54,at:w("tutu","threatened",-0.3),d:0.8},
+  {s:"that others are able and good",x:110,y:350,size:48,col:"green",at:w("tutu","able and good",-0.6),d:1.2},
+  {s:"Sam taught three · lost nothing",x:110,y:460,size:48,col:"green",at:w("lost","lost nothing",-0.8),d:1.3}];

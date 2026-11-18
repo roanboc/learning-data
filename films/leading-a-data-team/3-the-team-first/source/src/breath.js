@@ -1,7 +1,6 @@
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: the ring of the team, holding as one of them steps away, as it becomes the title card; and the ring again, whole,
-   as it becomes the end card. */
+   Two wordless moments: the team's room as the title card comes in, and as the end card comes in. */
 const BREATH={
 "stokvel":{"hold":{"when":1.2,"earn":0.8,"group":1.0,"turn":1.2,"banks":0.8,"lend":0.8,"harm":1.2,"change":1.0,"rules":1.0,"answer":1.0,"burial":0.8,"carry":1.2,"ubuntu":1.4,"decades":1.0,"rand":1.2,"team":1.0},"breathe":5.6},
 "whole":{"hold":{"helena":1.0,"watch":1.0,"weekly":1.0,"asks":1.2,"really":1.4,"eleven":1.2,"first":1.4,"open":1.4,"gap":1.0,"sam":1.0,"sixty":1.2}},

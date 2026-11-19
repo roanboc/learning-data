@@ -125,6 +125,7 @@ SERIES = [
     dict(id="business-architecture-for-data", dir="business-architecture-for-data", slug="business-architecture-for-data",
          name={"en": "Business architecture for data", "es": "Arquitectura de negocio para datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="data-architecture",
+         learn=dict(dir="business-architecture-for-data", bundle="what-the-business-owns"),
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, BIZBOK of the Business Architecture Guild, APQC and its Process Classification Framework of APQC, and DAMA-DMBOK of DAMA International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, BIZBOK de la Business Architecture Guild, APQC y su Process Classification Framework de APQC, y DAMA-DMBOK de DAMA International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="data-architecture", dir="data-architecture", slug="data-architecture",

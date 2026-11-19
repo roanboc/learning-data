@@ -12,7 +12,7 @@ The intro ends on a promise: *what it means, and who decides, is the rest of the
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [The map behind the sketch](https://data.learn-all.org/model-the-business/the-map-behind-the-sketch/) | The map before the model | 6½ min | 10 | 4 questions | [script](1-the-map-behind-the-sketch/script.md) · [source](1-the-map-behind-the-sketch/source/README.md) |
-| [A Sharper Sketch](https://data.learn-all.org/sketch/) | Reference models | 5½ min | 9 | its own 6 labs and 12 scenarios | [script](../a-sharper-sketch/script.md) · [source](../a-sharper-sketch/source/README.md) |
+| [A Sharper Sketch](https://data.learn-all.org/sketch/) | Reference models | 7½ min | 10 | its own 6 labs and 12 scenarios | [script](../a-sharper-sketch/script.md) · [source](../a-sharper-sketch/source/README.md) |
 
 For the whole series, on the site: [1 lab](https://data.learn-all.org/model-the-business/labs/) and [6 scenarios](https://data.learn-all.org/model-the-business/scenarios/), in English and Spanish, from the words in [site/assets/model-the-business/](../../site/assets/model-the-business/).
 <!-- /films -->

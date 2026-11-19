@@ -455,7 +455,7 @@ HAND = {
                   note={"en": "English and Spanish", "es": "En español e inglés"}),
     "sketch": dict(href="sketch/", source="films/a-sharper-sketch", learning=["site/assets/sketch/sketch.js"],
                    title={"en": "A Sharper Sketch", "es": "A Sharper Sketch"}, title_lang="en",
-                   poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "5½", "es": "5½"}, labs=6, quiz=12, prefix="ld3",
+                   poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "7½", "es": "7½"}, labs=6, quiz=12, prefix="ld3",
                    kicker={"en": "Reference models", "es": "Modelos de referencia"},
                    card={"en": "Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?",
                          "es": "Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?"},
@@ -3012,10 +3012,12 @@ def when(row, p):
 
 
 def decided(folder):
-    """A series' proposal.md with its Decided table made from its decided.md and each film's (films/<series>/<n-film>/decided.md),
-    by date; rows of the same day keep their order, the series' first, then the films' by number."""
-    files = [folder / "decided.md"] + [d / "decided.md" for d in sorted((d for d in folder.iterdir() if re.match(r"\d+-", d.name)),
-                                                                        key=lambda d: int(re.match(r"\d+", d.name).group()))]
+    """A series' proposal.md with its Decided table made from its decided.md and each film's (films/<series>/<n-film>/decided.md,
+    or, for a film whose pages are written by hand (outside()), the decided.md in its own folder), by date; rows of the same day keep
+    their order, the series' first, then the films' by number."""
+    films_ = [(int(re.match(r"\d+", d.name).group()), d / "decided.md") for d in folder.iterdir() if re.match(r"\d+-", d.name)]
+    films_ += [(n, ROOT / h["source"] / "decided.md") for S in SERIES if ROOT / "films" / S["dir"] == folder for n, _, h, _ in outside(S)]
+    files = [folder / "decided.md"] + [f for _, f in sorted(films_, key=lambda x: x[0])]
     rows = [(when(r, p), r) for p in files for r in decided_rows(p)]
     rows.sort(key=lambda x: x[0])
     return fill((folder / "proposal.md").read_text(), DECIDED, ["| Date | Decision |", "|---|---|"] + [r for _, r in rows])

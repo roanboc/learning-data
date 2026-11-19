@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A Sharper Sketch · Modelar el negocio · Learning Data</title>
-<meta name="description" content="Una película de 5½ minutos, en inglés, sobre modelado de datos: cuándo un modelo necesita más precisión y cómo usar un modelo de referencia sin copiarlo.">
-<meta property="og:title" content="A Sharper Sketch · Modelar el negocio · Learning Data"><meta property="og:description" content="Una película de 5½ minutos, en inglés, sobre modelado de datos: cuándo un modelo necesita más precisión y cómo usar un modelo de referencia sin copiarlo."><meta property="og:image" content="https://data.learn-all.org/assets/sketch-poster.jpg"><meta property="og:locale" content="es_419">
+<meta name="description" content="Una película de 7½ minutos, en inglés, sobre modelado de datos: cuándo un modelo necesita más precisión y cómo usar un modelo de referencia sin copiarlo.">
+<meta property="og:title" content="A Sharper Sketch · Modelar el negocio · Learning Data"><meta property="og:description" content="Una película de 7½ minutos, en inglés, sobre modelado de datos: cuándo un modelo necesita más precisión y cómo usar un modelo de referencia sin copiarlo."><meta property="og:image" content="https://data.learn-all.org/assets/sketch-poster.jpg"><meta property="og:locale" content="es_419">
 <link rel="alternate" hreflang="en" href="https://data.learn-all.org/sketch/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/sketch/">
 <link rel="icon" href="../../assets/favicon.svg?v=9c05cdd7f4" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,21 +20,22 @@
 <p class="eyebrow crumbs"><a href="../topics/">Temas</a> › <a href="../topics/#data-modelling">Modelado de datos</a> › <a href="../model-the-business/">Modelar el negocio</a></p>
 <h1>Un boceto más preciso: cuándo un modelo de datos necesita más detalle</h1>
 <p class="lead">Dos cifras confiables no coinciden. Compara el boceto sencillo con un modelo de referencia y hazlo más preciso, una pregunta a la vez.</p>
+<p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
 </section>
 <nav class="course" aria-label="Curso: A Sharper Sketch"><div class="course-in"><p class="course-t"><small>Película 2 de 2 · Modelos de referencia</small>A Sharper Sketch</p><ol class="path" data-store="ld3" data-labs="6" data-quiz="12" data-text='{"watched":"Vista","labs":"{n} de 6 labs explorados","quiz":"{n} de 12 respondidas · {ok} correctas"}'>
-<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 5½ minutos</span></a></li>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 7½ minutos</span></a></li>
 <li><a href="../../sketch/labs/" hreflang="en"><span class="n"><b>2</b></span><b>Afínalo</b><span>Seis labs (en inglés)</span></a></li>
 <li><a href="../../sketch/scenarios/" hreflang="en"><span class="n"><b>3</b></span><b>Tú decides</b><span>Doce situaciones (en inglés)</span></a></li>
 </ol></div></nav>
 <section class="module" id="watch" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Mira la película</h2></div></div>
 <div class="player">
-<audio id="snd" preload="metadata" src="../../assets/film3/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/sketch-poster.jpg?v=e342739dd0" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada explicativa, en inglés: A Sharper Sketch"></canvas>
+<audio id="snd" preload="metadata" src="../../assets/film3/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/sketch-poster.jpg?v=e342739dd0" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 7½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada explicativa, en inglés: A Sharper Sketch"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
 <p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/a-sharper-sketch.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/a-sharper-sketch/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
-<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>El boceto es el modelo conceptual de la universidad, en tinta azul. El modelo de referencia, TCSI, está dibujado en tinta cálida sobre papel de calco. Los alfileres azules marcan lo que el boceto adopta de la referencia; los ámbar, lo que agrega la universidad. La comparación de la esquina se cierra a medida que el modelo gana precisión. La narración es una voz sintética.</p></div></details>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La película empieza en China, en 1391, dibujada en tonos cálidos, sobre papel: las cuatro columnas del registro de un hogar, lo que tenía, lo que entró, lo que salió y lo que tiene ahora. El boceto es el modelo conceptual de la universidad, en tinta azul. El modelo de referencia, TCSI, está dibujado en tinta cálida sobre papel de calco. Los alfileres azules marcan lo que el boceto adopta de la referencia; los ámbar, lo que agrega la universidad. La comparación de la esquina se cierra a medida que el modelo gana precisión. La narración es una voz sintética.</p></div></details>
 <template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Ya viste cómo el boceto gana precisión. Ahora afínalo tú.</h3>
 <div class="next-opts"><a class="btn primary" href="../../sketch/labs/" hreflang="en">Afínalo: 6 labs (en inglés) →</a><a class="btn" href="../when-things-go-wrong/silent-change/">Cambios y contratos de datos · Cambio silencioso</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Ver otra vez</button></div></div></template>
@@ -104,10 +105,10 @@
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. TCSI, HESA Data Futures, CEDS y MCDS se mencionan para describir modelos de referencia reales; este proyecto no está afiliado a sus dueños. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluido el de Databricks, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
 <script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
-<script src="../../assets/film3/captions.es.js?v=fbf0411793"></script>
-<script src="../../assets/film3/film.js?v=a65be372ea"></script>
+<script src="../../assets/film3/captions.es.js?v=103773a197"></script>
+<script src="../../assets/film3/film.js?v=2c1e9819d6"></script>
 <script>/* the film is in English; its chapter buttons use these Spanish names */
-{const N={drawn:"El boceto que dibujamos",two:"Dos cifras",cls:"¿Qué es una clase?",census:"¿La fecha de corte de quién?",courses:"Un estudiante, dos carreras",time:"¿Inscrito cuándo?",levels:"Tres niveles de precisión",fit:"Revisar, adoptar, extender, registrar",end:"Vista completa"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+{const N={cols:"Cuatro columnas",drawn:"El boceto en el mapa",two:"Dos cifras",cls:"¿Qué es una clase?",census:"¿La fecha de corte de quién?",courses:"Un estudiante, dos carreras",time:"¿Inscrito cuándo?",levels:"Tres niveles de precisión",fit:"Revisar, adoptar, extender, registrar",end:"Vista completa"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
 <script src="../../assets/sketch/sketch.js?v=6365fcf953"></script>
 <script src="../../assets/learn/next.js?v=70cde09a7b"></script>
 <script src="../../assets/seek.js?v=29bc096ce4"></script>

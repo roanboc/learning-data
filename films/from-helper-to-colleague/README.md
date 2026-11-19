@@ -18,6 +18,8 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 | [The map, enforced](https://data.learn-all.org/from-helper-to-colleague/the-map-enforced/) | The map in every tool | 8½ min | 6 | 4 questions | [script](5-the-map-enforced/script.md) · [source](5-the-map-enforced/source/README.md) |
 | [Every change through review](https://data.learn-all.org/from-helper-to-colleague/every-change-through-review/) | Review before release | 7½ min | 7 | 4 questions | [script](6-every-change-through-review/script.md) · [source](6-every-change-through-review/source/README.md) |
 | [A mandate, written and enforced](https://data.learn-all.org/from-helper-to-colleague/a-written-mandate/) | Autonomy in writing | 10 min | 6 | 3 questions | [script](7-a-written-mandate/script.md) · [source](7-a-written-mandate/source/README.md) |
+
+For the whole series, on the site: [7 labs](https://data.learn-all.org/from-helper-to-colleague/labs/) and [12 scenarios](https://data.learn-all.org/from-helper-to-colleague/scenarios/), in English and Spanish, from the words in [site/assets/from-helper-to-colleague/](../../site/assets/from-helper-to-colleague/).
 <!-- /films -->
 
 ## The look and the sound

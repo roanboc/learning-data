@@ -114,10 +114,11 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     "es/labs/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
     "es/scenarios/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
     # a page under a topic names it, and links to it on the Topics page: Topics › the topic › the film or series
-    "sketch/": ("Topics › Data modelling", ["topics/", "topics/"]),
-    "es/sketch/": ("Temas › Modelado de datos", ["es/topics/", "es/topics/"]),
-    "sketch/labs/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
-    "sketch/scenarios/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
+    # A Sharper Sketch, film 2 of Model the business, whose pages are written by hand ("outside" in its series.json)
+    "sketch/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
+    "es/sketch/": ("Temas › Modelado de datos › Modelar el negocio", ["es/topics/", "es/topics/", "es/model-the-business/"]),
+    "sketch/labs/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
+    "sketch/scenarios/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
     "when-things-go-wrong/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/"]),
     "es/when-things-go-wrong/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
     "when-things-go-wrong/silent-change/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),

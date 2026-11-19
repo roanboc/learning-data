@@ -1,0 +1,12 @@
+# Decided: Model the business
+
+The series' own decisions. With each film's rows (`<n-film>/decided.md`), they make the *Decided* table in [proposal.md](proposal.md): run `python site-tools/build_series.py` after adding a row. A decision a film's thread makes, even one for the whole series, goes in that film's file, so threads never edit the same lines.
+
+| Date | Decision |
+|---|---|
+| 19 November 2026 | A new series, *Model the business*, opens the topic Data modelling, as the author asked: a new film, *The map behind the sketch*, then *A Sharper Sketch*, which keeps its folder, its page at `sketch/`, its player at `assets/film3/` and its progress. The series takes *A Sharper Sketch*'s place in the topic and in the route's *start with data*. |
+| 19 November 2026 | *The map behind the sketch* follows the intro's last promise (*what it means, and who decides, is the rest of the story*) and reads the university's map for a modeller: capabilities adopted from HERM, data domains each with one owner, systems of record, the glossary and who decides it, crossed to show who creates each thing and who only reads it. It teaches no new concept and points to the topic Enterprise architecture for how such a map is made. It gives the university the context a version of the EA module would have, so issue #405 closes with it (the author, 19 November 2026). |
+| 19 November 2026 | One true story across both films, from the Ming History (*Mingshi*, juan 77): the Yellow Registers (1381) and the fish-scale registers (1387), the warp and the weft. *The map behind the sketch* takes the two registers; *A Sharper Sketch* their four columns, and, last, what the story didn't achieve: the white registers, kept for the real work while the yellow ones became a formality. |
+| 19 November 2026 | The look is *The Inner Life of Data*'s, with *A Sharper Sketch*'s diagrams and *From words to data*'s tools: the past warm, on paper; the present in the films' dark glass; the story's people as plain silhouettes with no faces, lit at the edge, dressed for their time; never the style of Chinese painting or calligraphy, and no borrowed sounds. |
+| 19 November 2026 | One playground for each film, three to five experiments each, and one evaluation for the series, of at most 12 questions, as decided for every series on 18 November 2026. |
+| 19 November 2026 | A draft until the author reviews it: the series' pages say so under their title. The reference (HERM, the site's EA method, DAMA-DMBOK) and the practice behind it are assumptions, asked of the author. |

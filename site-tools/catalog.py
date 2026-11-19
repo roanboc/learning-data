@@ -53,7 +53,7 @@ def catalog():
                     checks=(source / "tools").relative_to(ROOT).as_posix())
 
     series = {s["id"]: s for s in b.SERIES}
-    known = set(series) | set(b.HAND)
+    known = set(series) | (set(b.HAND) - b.outside_ids())  # a series' film written by hand is the series'
     modules = load_modules()
     assigned = {i for m in modules for i in m["items"]}
     if assigned != known:
@@ -70,6 +70,10 @@ def catalog():
                     f = film(folder + "/" + name)
                     f["url"] = b.film_path(s, f["id"])
                     fs.append(f)
+                for n, _, hand, _ in b.outside(s):  # its films whose pages are written by hand, in their own folders
+                    f = film(hand["source"], hand["href"])
+                    f["title"] = hand["title"]["en"]
+                    fs.insert(n - 1, f)
                 learning = sorted(p.relative_to(ROOT).as_posix() for p in
                                   (ROOT / "site/assets" / s.get("learn", {}).get("dir", s["dir"])).glob("learn.*.js"))
                 records.append(dict(id=item, title=s["name"], path=folder, url=s["slug"] + "/", films=fs, learning=learning))

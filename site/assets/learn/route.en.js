@@ -293,15 +293,16 @@ window.LD_ROUTE = {
    "line": "What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system.",
    "items": [
     {
-     "id": "sketch",
-     "kind": "film",
-     "title": "A Sharper Sketch",
-     "href": "sketch/",
-     "poster": "sketch-poster.jpg",
-     "kicker": "One film",
-     "len": "5½ min",
-     "min": 5.5,
+     "id": "model-the-business",
+     "kind": "series",
+     "title": "Model the business",
+     "href": "model-the-business/",
+     "poster": "the-map-behind-the-sketch-poster.jpg",
+     "kicker": "Series · 2 films",
+     "len": "12 min",
+     "min": 12.0,
      "films": [
+      "ld-the-map-behind-the-sketch",
       "ld3"
      ]
     },
@@ -324,7 +325,8 @@ window.LD_ROUTE = {
       "ld-keeping-it-true"
      ]
     }
-   ]
+   ],
+   "proj": 1
   },
   {
    "id": "modern-data-basics",
@@ -820,7 +822,7 @@ window.LD_ROUTE = {
    "stops": [
     "intro",
     "more-than-a-platform",
-    "sketch",
+    "model-the-business",
     "data-that-moves",
     "when-things-go-wrong"
    ]

@@ -1385,6 +1385,7 @@ async def check_a11y(run):
 # A series can also have a play script, site-tools/smoke/<series id>.js: one expression, ({lab: async id => [...], quiz: async
 # () => [...]}), run in the page, that plays a lab (or every scenario) through and returns what went wrong, as text.
 SMOKE_DIR = pathlib.Path(__file__).resolve().parent / "smoke"
+CLASSIC_PLAY = (SMOKE_DIR / "classic.js").read_text()
 LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = app && app.querySelector('[role=tab][aria-selected=true]');
   return {on: on && on.dataset.id, tabs: app ? app.querySelectorAll('[role=tab][data-id]').length : 0,
     watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
@@ -1434,9 +1435,11 @@ async def check_series_learn(run):
                         film = "" if S.get("single") else f"{f['key']}/"  # a film that stands alone has its page where the series' would be
                         want = f"../{film}#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
                         expect(sec, r["watch"] == ([want] if want else []), f"{where}: \"Watch this part\" goes to {r['watch']}, expected {want}")
-                    if play:
+                    # a lab of the classic kinds beside the playgrounds (site/assets/learn/classic.js) is played by smoke/classic.js
+                    lab_play = CLASSIC_PLAY if await pg.evaluate("() => !!document.querySelector('#series-labs .lc-lab')") else play
+                    if lab_play:
                         try:
-                            probs = await pg.evaluate("async id => { const P = (" + play + "); return P.lab ? await P.lab(id) : []; }", x["id"])
+                            probs = await pg.evaluate("async id => { const P = (" + lab_play + "); return P.lab ? await P.lab(id) : []; }", x["id"])
                         except Exception as e:  # noqa: BLE001
                             probs = [f"its play stopped: {str(e).splitlines()[0][:200]}"]
                         for p in probs or []:

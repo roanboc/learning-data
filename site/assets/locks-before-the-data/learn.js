@@ -371,7 +371,7 @@ PLAY.record=(Lb,api)=>{const W=Lb.w,R=W.recs,S={apart:false,bell:false,copy:fals
     box(ctx,o.at.night,S.night==null?K.soft:S.night?K.good:K.bad,W.nightN,S.night==null?W.nightIdle:S.night?W.nightOk:W.nightNo);
     box(ctx,o.at.copy,S.rest==null?K.soft:S.rest?K.good:K.bad,W.copyN,S.rest==null?(S.copy?W.copyOnS:W.copyOffS):S.rest?W.copyOk:W.copyNo);};
   return{S,lay,draw,readouts:[[W.read.ans,()=>S.ans==null?"–":S.apart?"3 / 3":"1 / 3"],[W.read.bells,()=>String((S.bell?1:0)+(S.apart?1:0))]]};};
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"lk-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

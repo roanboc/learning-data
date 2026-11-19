@@ -385,7 +385,7 @@ window.DM_RUNS={lanes:[{start:"wheel",route:"deep",chg:"wk6",tell:true},{start:"
  measures:[{what:"get",sent:true,show:"trend",conf:"asker"}],fridays:[{fri:true,n:"one",drop:"drop",write:"proc"}],habit:[{rev:"cal",move:"both"},{rev:"cal",move:"loud",map:"each"}]};
 
 window.DM_CTL=Object.fromEntries(Object.entries(MODEL).map(([k,m])=>[k,m.ctl]));
-const BUILD={play:labWeeks};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labWeeks});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dm-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

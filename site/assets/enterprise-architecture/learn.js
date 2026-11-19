@@ -476,7 +476,7 @@ PLAY.navigator=(Lb,api)=>{const W=Lb.w,E=W.els,S={ran:false,fixed:false,q:null,t
     if(t<1)api.kick(60);};
   return{S,lay,draw,readouts:[[W.read.fail,()=>S.ran?String(fails()):"–"],[W.read.cited,()=>{if(!S.q)return"–";const a=ansK(S.q);return a==="gen"||a==="codeNo"||a==="useNo"?"–":W.qs.find(x=>x[0]===S.q)[2];}]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"ea-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

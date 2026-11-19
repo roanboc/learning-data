@@ -403,7 +403,7 @@ PLAY.exit=(Lb,api)=>{const W=Lb.w,S={tab:"own",code:"nb",doc:false,run:null,res:
     if(S.run!=null&&t>W.items.length*350+600&&S.res.f&&S.res.c)line1(ctx,W.sameNums,m,o.h-12,o.lw-m*2,13,{w:800,align:"center",color:rgbaS(K.good,1)});};
   return{lay,draw,readouts:[[W.read.lines,()=>S.res?(S.res.c?W.read.few:W.read.all):"–"],[W.read.doc,()=>S.doc?W.read.yes:W.read.no]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"ps-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

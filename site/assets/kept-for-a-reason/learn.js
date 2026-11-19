@@ -272,7 +272,7 @@ PLAY.asks=(Lb,api)=>{const W=Lb.w,P=W.places,S={req:"inbox",day:null,look:"nums"
     const rows=[S.req==="log"?W.proofLog:W.proofNone];if(R)rows.push(R.by==="keys"?W.proofKeys:W.proofTyped);if(S.checked)rows.push(W.proofChecked);if(S.sent)rows.push(S.sent==="ok"?W.proofSent:W.proofNot);
     logBox(ctx,o.log,K.plat,W.proofT,rows);};
   return{S,lay,draw,readouts:[[W.read.found,()=>!S.run?"–":P.filter(p=>!p.code||S.run.look==="codes").length+" / "+P.length],[W.read.due,()=>S.req==="log"?W.read.date:W.read.none]]};};
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"kr-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

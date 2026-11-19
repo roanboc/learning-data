@@ -211,7 +211,7 @@ PLAY.loop=(Lb,api)=>{const W=Lb.w,S={start:"feature",trial:"build",proper:false,
     chip(ctx,o.m,o.bar.y,o.lw-o.m*2,o.bar.h,fill(W.spent,{t:S.time}),run?(S.ok?K.good:K.bad):K.soft,{size:13.5});};
   return{S,lay,draw,readouts:[[W.read.spent,()=>S.time],[W.read.learned,()=>S.learned==="where"?W.read.where:S.learned==="no"?W.read.no:S.run?W.read.nothing:"–"]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dm-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

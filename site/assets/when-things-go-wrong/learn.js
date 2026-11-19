@@ -225,7 +225,7 @@ PLAY.tuesday=(Lb,api)=>{const W=Lb.w,S={level:"none",key:false,fresh:false,ran:n
   return{S,lay,draw,readouts:[[W.read.leak,()=>S.res?String(S.res.filter(x=>x==="leak"||x==="wleak"||x==="stale").length):"–"],
     [W.read.held,()=>S.res?String(S.res.filter(x=>x==="held").length):"–"],[W.read.plat,()=>S.fixed?W.after:W.before]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dq-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

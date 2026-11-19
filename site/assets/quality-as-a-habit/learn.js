@@ -290,7 +290,7 @@ PLAY.week=(Lb,api)=>{const W=Lb.w,S={way:"big",keep:false,year:null,yS:null,chg:
     const last=S.step>0?W.msg[S.chg][S.step-1]:W.turnHint;lines(ctx,last,p.x+12,p.y+92,p.w-24,{size:12.5,max:4,w:600,color:rgbaS(K.ink,0.9)});};
   return{S,lay,draw,readouts:[[W.read.reprints,()=>S.yS?String(curve(S.yS).r):"–"],[W.read.perfect,()=>S.yS?curve(S.yS).p[curve(S.yS).p.length-1]+" / 100":"–"],[W.read.hours,()=>S.yS?fill(W.read.h,{h:curve(S.yS).h}):"–"]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dq-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

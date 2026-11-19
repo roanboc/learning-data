@@ -219,7 +219,7 @@ PLAY.place=(Lb,api)=>{const W=Lb.w,M=W.msg,S={on:new Set(),lt:{},at:"copy",fix:n
     lines(ctx,two?fill(W.cross.two,{n:V.R,p:W.plan}):W.cross.one,c.x+12,c.y+42,c.w-24,{size:12.5,max:3,w:600,color:rgbaS(two?K.ink:K.soft,1)});};
   return{S,lay,draw,readouts:[[W.read.rec,()=>String(S.recFixed?W.n1:W.n0)],[W.read.layers,()=>fill(W.read.of,{n:S.on.size})]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"pg-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

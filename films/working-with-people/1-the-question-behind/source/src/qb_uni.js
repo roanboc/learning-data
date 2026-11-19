@@ -110,52 +110,65 @@ const qb_boardO=(sc,w)=>[
   {s:"too little to see",x:640,y:250,size:56,at:w("meant","too little",-0.2),d:0.9},
   {s:"less strain · steadier ground",x:70,y:370,size:56,at:w("enough","ease",-0.3),d:1.2},
   {s:"soil out, north side",x:520,y:470,size:60,col:"blue",at:w("method","draw",-0.2),d:1.0}];
-// 1. what a request says, and doesn't (Carmen)
-const qb_boardA=(sc,w)=>[
-  {s:"A request names",x:70,y:110,size:60,col:"blue",at:w("clear","sounds clear",-0.3),d:0.8},
-  {s:"a thing · a date",size:56,at:w("clear","a thing",-0.2),d:0.8},
-  {s:"a guess at a solution",x:70,y:230,size:60,col:"amber",at:w("guess","guess",-0.3),d:1.0},
-  {s:"not what it's for",x:560,y:340,size:60,col:"amber",at:w("guess","What it's for",-0.2),d:0.9},
-  {s:"on time, and no help",x:560,y:450,size:56,at:w("nobody","on time",-0.2),d:0.9}];
+// 1. what a request says, and doesn't (Carmen): drawn as a designer would, a graphic recording pinned over the board (PK.sk.drawn),
+// almost done; she rings what the request names, then adds the last words on the right as the voice says them, the last at the edge
+const qb_boardA=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"What a request says");
+    D.panel(c,70,140,500,290,{},(cc,x,y)=>{D.face(cc,"graham",x+56,y+36,34);D.text(cc,"Graham Ellis",x+104,y+34,{size:32,w:700});D.text(cc,"Thursday 11 February",x+104,y+70,{size:28,col:"mut"});
+      D.icon(cc,"mail",x+446,y+36,22,{fill:"blue"});D.text(cc,"Could I have a dashboard",x+30,y+148,{size:36});D.text(cc,"of room use, by Easter?",x+30,y+196,{size:36});});
+    // the request is the tip; what it's for lies under the water
+    D.line(c,[[610,262],[660,256],[710,264],[760,256],[810,264],[860,256],[910,262]],{col:"blue",w:3,seed:3});
+    D.line(c,[[680,262],[716,176],[744,192],[772,150],[816,262]],{close:true,fill:"white",col:"ink",w:3,seed:5});
+    D.line(c,[[648,268],[860,268],[904,330],[870,404],[748,418],[650,394],[618,330]],{close:true,fill:"blue",col:"ink",w:3,seed:7});
+    D.text(c,"?",760,368,{size:76,w:700,align:"center",col:"blue"});}),
+  {k:"ring",x:432,y:290,rx:92,ry:30,col:"blue",at:w("clear","a thing",-0.2),d:0.5},{k:"ring",x:408,y:338,rx:96,ry:30,col:"blue",at:w("clear","a date",-0.2),d:0.5},
+  {s:"someone's guess",x:850,y:196,size:40,w:700,col:"amber",at:w("guess","guess",-0.2),d:0.8},
+  {s:"what it's for",x:930,y:350,size:40,w:700,col:"amber",at:w("guess","What it's for",-0.2),d:0.7},
+  {s:"on time, and no help",x:1180,y:468,size:44,w:700,col:"mut",align:"right",at:w("nobody","on time",-0.2),d:0.9}];
 // 2. how to ask, and how to listen (Carmen)
-const qb_boardB=(sc,w)=>[
-  {s:"Humble inquiry · Schein",x:70,y:110,size:56,col:"blue",at:w("schein","humble inquiry",-0.3),d:1.0},
-  {s:"ask what you don't know",x:110,y:210,size:52,at:w("schein","asking",-0.2),d:1.0},
-  {s:"Active listening · Rogers, Farson",x:70,y:320,size:52,col:"green",at:w("rogers","active listening",-0.3),d:1.2},
-  {s:"hear it all, say it back",x:560,y:420,size:52,at:w("rogers","whole meaning",-0.2),d:1.0}];
+const qb_boardB=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"How to ask, how to listen");
+    D.panel(c,70,140,520,290,{title:"humble inquiry",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"speech",x+70,y+50,36,{fill:"white"});D.text(cc,"?",x+70,y+64,{size:40,w:700,align:"center",col:"blue"});
+      D.text(cc,"real interest",x+130,y+44,{size:34,w:700});D.text(cc,"in the other person",x+130,y+84,{size:30,col:"mut"});D.text(cc,"Edgar Schein",x+260,y+150,{size:28,col:"mut",align:"center"});});
+    D.panel(c,630,140,550,290,{title:"active listening",col:"green",fill:"green"},(cc,x,y)=>{D.face(cc,"helena",x+60,y+50,32);D.face(cc,"graham",x+184,y+50,32);
+      D.arrow(cc,[x+100,y+30],[x+144,y+30],{col:"green",w:3,head:10});D.arrow(cc,[x+144,y+72],[x+100,y+72],{col:"green",w:3,head:10});
+      D.text(cc,"the whole meaning",x+240,y+60,{size:32,w:700});D.text(cc,"Carl Rogers, Richard Farson",x+275,y+150,{size:28,col:"mut",align:"center"});});}),
+  {s:"ask what you don't know",x:90,y:400,size:42,w:700,col:"blue",at:w("schein","asking",-0.2),d:1.0},
+  {s:"hear it all, say it back",x:1170,y:400,size:42,w:700,col:"green",align:"right",at:w("rogers","whole meaning",-0.2),d:1.0}];
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
-// 1. what Graham said (Noor, in his office)
-const qb_note1=(sc,w)=>[
-  {s:"Graham · 16 February",x:70,y:124,size:72,w:820,col:"blue",at:w("decide","What will you",-0.3),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"Decides: a new building?",x:110,y:240,size:50,at:w("decide","new teaching building",-0.4),d:0.9},
-  {s:"By: paper 1 June",x:110,y:330,size:50,at:w("when","paper",-0.2),d:0.8},
-  {s:"Who: the Council; academics read it",x:110,y:420,size:46,at:w("who","University Council",-0.2),d:1.1},
-  {s:"Trusts: his walks",x:110,y:510,size:50,col:"orange",at:w("trust","walks",-0.3),d:0.8},
-  {s:"Mind: short at every hour?",x:110,y:600,size:50,col:"amber",at:w("mind","every hour",-0.3),d:0.9}];
-// 2. the one page, written down with Graham (Noor)
-const qb_note2=(sc,w)=>[
-  {s:"“A dashboard of room use, by Easter”",x:70,y:124,size:44,w:900,col:"mut",at:w("question","rooms",-1.2),d:1.0},
-  {s:"Too few rooms, or too few",x:70,y:236,size:62,col:"blue",at:w("question","too few rooms",-0.2),d:1.0},
-  {s:"at some hours?",x:70,y:322,size:62,col:"blue",at:w("question","some hours",-0.2),d:0.7},
-  {s:"decision · dates · who decides",x:110,y:430,size:48,at:w("under","decision",-0.2),d:1.0},
-  {s:"what would change his mind",x:110,y:516,size:48,at:w("under","change his mind",-0.3),d:0.9},
-  {s:"used = people in the room",x:110,y:602,size:48,col:"green",at:w("under","what “used” means",-0.2),d:0.9}];
-// 3. what the data said (Ivy)
-const qb_note3=(sc,w)=>[
-  {s:"Room use, spring 2027",x:70,y:124,size:72,w:820,col:"blue",at:w("week","whole week",-0.6),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"the week: booked 38%",x:110,y:250,size:54,col:"orange",at:w("week","booked",-0.2),d:0.9},
-  {s:"10 to 2, Tue to Thu: 93%",x:110,y:350,size:54,col:"orange",at:w("peak","Tuesday",-0.4),d:1.0},
-  {s:"1 booked hour in 5: nobody",x:110,y:450,size:54,col:"amber",at:w("empty","nobody",-0.6),d:1.0},
-  {s:"too few at some hours",x:110,y:556,size:60,col:"green",at:w("so","some hours",-0.3),d:0.9}];
-// 4. on Monday (Helena)
-const qb_note4=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("monday","On Monday",0),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(246,"blue",w("monday","decide",-0.4)),{s:"What will you decide, by when?",x:128,y:246,size:46,at:w("monday","decide",-0.1),d:1.1},
-  dot(338,"orange",w("who","who else",-0.3)),{s:"Who else decides? What do you trust?",x:128,y:338,size:42,at:w("who","who else",0),d:1.2},
-  dot(430,"amber",w("who","change their mind",-0.4)),{s:"What would change your mind?",x:128,y:430,size:46,at:w("who","change their mind",-0.1),d:1.0},
-  dot(522,"green",w("listen","Listen",-0.3)),{s:"Listen; say back what you heard",x:128,y:522,size:46,at:w("listen","Listen",0),d:1.1},
-  dot(614,"blue",w("write","write the question",-0.3)),{s:"Write it beside their words",x:128,y:614,size:46,at:w("write","write the question",0),d:1.0}];};
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): drawn as a designer would,
+   a sketched page almost done when it first shows; the pen adds the last marks and words as the voice says them. One pen writes a page. */
+// 1. what Graham said (Noor, in his office): the questions are on the page; his answers go in as he gives them
+const QB_ASK=[["building","decides",["a new building, A$140m",{w:700}]],["cal","by when",["paper by 1 June",{w:700}]],["people","who else"],["eye","trusts"],["scale","changes his mind"]];
+const qb_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Graham · 16 February",86,124,{size:72});D.face(c,"graham",860,96,40);
+    QB_ASK.forEach(([ic,lab,ans],k)=>{const x=110+(k%2)*460,y=180+Math.floor(k/2)*176;D.box(c,x,y,436,152,{fill:k<2?"blue":"paper",col:"ink",w:2.5,r:14});
+      D.icon(c,ic,x+40,y+42,22,{fill:"white"});D.caps(c,lab,x+76,y+52,{size:28,col:"mut"});if(ans)D.text(c,ans[0],x+28,y+118,Object.assign({size:36},ans[1]));});},[60,40,1040,800]),
+  {s:"the Council; academics",x:138,y:474,size:38,w:700,col:"blue",at:w("who","University Council",-0.2),d:1.0},
+  {s:"his walks",x:598,y:474,size:40,w:700,col:"orange",at:w("trust","walks",-0.3),d:0.6},
+  {s:"short at every hour?",x:138,y:650,size:38,w:700,col:"amber",at:w("mind","every hour",-0.3),d:0.9}];
+// 2. the one page, written down with Graham (Noor): his words at the top, the question in his hand, and what goes under it
+const qb_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.face(c,"graham",140,110,32);D.text(c,"“A dashboard of room use, by Easter”",190,124,{size:38,col:"mut"});
+    D.arrow(c,[300,160],[300,214],{col:"mut"});D.box(c,100,226,880,196,{fill:"blue",col:"blue",w:3,r:16,dash:[12,9]});D.caps(c,"the question",128,262,{size:28,col:"blue"});
+    ["decision","dates","who decides","his mind"].reduce((x,s)=>{const W=PK.sk.capsW(c,s,{size:28})+40;D.box(c,x,474,W,46,{fill:"white",col:"ink",w:2.5,r:23});D.caps(c,s,x+20,506,{size:28});return x+W+16;},110);},[60,40,1040,800]),
+  {s:"Too few rooms, or too few",x:130,y:330,size:56,w:700,col:"blue",at:w("question","too few rooms",-0.2),d:1.0},
+  {s:"at some hours?",x:130,y:400,size:56,w:700,col:"blue",at:w("question","some hours",-0.2),d:0.7},
+  {k:"tick",x:960,y:470,r:22,col:"green",at:w("under","change his mind",-0.3),d:0.3},
+  {s:"used = people in the room",x:110,y:620,size:52,w:700,col:"green",at:w("under","what “used” means",-0.2),d:0.9}];
+// 3. what the data said (Ivy): the week, hour by hour, and where it's short
+const qb_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Room use, spring 2027",86,124,{size:72});
+    ["Mon","Tue","Wed","Thu","Fri"].forEach((d,i)=>D.text(c,d,180+i*62,214,{size:28,align:"center",col:"mut"}));[["8",246],["12",370],["6",524]].forEach(([s,y])=>D.text(c,s,124,y,{size:28,col:"mut"}));
+    for(let j=0;j<10;j++)for(let i=0;i<5;i++){const peak=i>=1&&i<=3&&j>=2&&j<=5,k=(i*3+j*5)%7;D.box(c,152+i*62,228+j*30,54,24,{fill:peak?PK.FILL.orange:k<3?"white":"orange",col:"ink",w:1.6,r:3});}
+    [["38%","booked, the whole week","orange"],["93%","10 to 2, Tue to Thu","orange"],["1 in 5","booked hours: nobody","amber"]].forEach(([n,s,col],i)=>{const y=284+i*104;
+      D.text(c,n,520,y,{size:48,w:700,col});D.text(c,s,520,y+38,{size:28,col:"mut"});});},[60,40,1040,800]),
+  {k:"ring",x:276,y:350,rx:118,ry:78,col:"green",at:w("so","some hours",-0.6),d:0.6},
+  {s:"too few at some hours",x:110,y:650,size:58,w:700,col:"green",at:w("so","some hours",-0.3),d:0.9}];
+// 4. on Monday (Helena): the questions to ask, a tick as the voice comes to each; the last two in her hand
+const QB_MON=[["What will you decide, by when?","monday","decide"],["Who else decides? What do you trust?","who","who else"],["What would change your mind?","who","change their mind"]];
+const qb_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,122,{size:88});
+    QB_MON.forEach(([s],i)=>{const y=186+i*96;D.box(c,110,y,800,70,{fill:"blue",col:"ink",w:2.5,r:35});D.line(c,[[150,y+68],[138,y+92],[178,y+70]],{col:"ink",w:2.5,seed:i+2});
+      D.text(c,s,150,y+48,{size:38});});
+    D.icon(c,"pen",130,610,24,{fill:"green"});},[60,40,1040,800]),
+  ...QB_MON.map(([, id,word],i)=>({k:"tick",x:960,y:206+i*96,r:22,col:"green",at:w(id,word,0.4),d:0.3})),
+  {s:"Listen, and say it back",x:110,y:540,size:50,w:700,col:"blue",at:w("listen","Listen",0),d:0.9},
+  {s:"Write it beside their words",x:170,y:626,size:50,w:700,col:"green",at:w("write","write the question",0),d:1.0}];
 // 5. the engineer's note, each day in 1999 to 2001
 const qb_note5=(sc,w)=>[
   {s:"The tower · today",x:70,y:124,size:76,w:760,col:"blue",at:w("note","signed a note",-0.6),d:0.7,marks:[["under","blue",null,0.3]]},

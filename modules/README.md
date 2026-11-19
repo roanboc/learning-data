@@ -91,6 +91,8 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 - [Scripts became software](../films/data-as-software/1-scripts-became-software/) — `scripts-became-software`
 - [A platform that watches itself](../films/data-as-software/2-a-platform-that-watches-itself/) — `a-platform-that-watches-itself`
 
+Labs and assessments: [site/assets/data-as-software/learn.en.js](../site/assets/data-as-software/learn.en.js), [site/assets/data-as-software/learn.es.js](../site/assets/data-as-software/learn.es.js)
+
 ### From tables to decisions
 
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`

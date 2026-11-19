@@ -6,11 +6,13 @@
 The site is organised in big topics (TOPICS below), each holding films and series. Thirty-two series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
-enterprise-architecture/), the four series that follow it in the topic Enterprise architecture, each the next of the one before:
+enterprise-architecture/), the five series that follow it in the topic Enterprise architecture, each the next of the one before:
 Business architecture for data (films/business-architecture-for-data/, at business-architecture-for-data/, which holds what the
 four share), Data architecture (films/data-architecture/, at data-architecture/), Platform and solution architecture
-(films/platform-and-solution-architecture/, at platform-and-solution-architecture/) and AI and continuous architecture
-(films/ai-and-continuous-architecture/, at ai-and-continuous-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
+(films/platform-and-solution-architecture/, at platform-and-solution-architecture/), Continuous architecture
+(films/continuous-architecture/, at continuous-architecture/) and AI architecture (films/ai-and-continuous-architecture/, at
+ai-architecture/; the two were one series, AI and continuous architecture, until 19 November 2026, and its old pages lead to
+theirs: MOVED below), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
 the three series of data governance: Governance principles (films/data-governance/, at data-governance/), Governance on the
 map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
 governance-in-practice/); and the series of the module on AI agents in data work: What an agent is
@@ -136,12 +138,18 @@ SERIES = [
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y TOGAF y ArchiMate de The Open Group, nombradas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="platform-and-solution-architecture", dir="platform-and-solution-architecture", slug="platform-and-solution-architecture",
          name={"en": "Platform and solution architecture", "es": "Arquitectura de plataforma y de soluciones"},
-         place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="ai-and-continuous-architecture",
+         place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="continuous-architecture",
          learn=dict(dir="platform-and-solution-architecture", bundle="built-to-change"),
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, named only to identify those frameworks. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, nombradas solo para identificar esos marcos. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
-    dict(id="ai-and-continuous-architecture", dir="ai-and-continuous-architecture", slug="ai-and-continuous-architecture",
-         name={"en": "AI and continuous architecture", "es": "IA y arquitectura continua"},
+    dict(id="continuous-architecture", dir="continuous-architecture", slug="continuous-architecture",
+         name={"en": "Continuous architecture", "es": "Arquitectura continua"},
+         place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="ai-architecture",
+         learn=dict(dir="continuous-architecture", engine="ai-and-continuous-architecture", bundle="every-change-checked"),
+         marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, named only to identify those frameworks. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
+                "es": "TOGAF y ArchiMate son marcas de The Open Group, nombradas solo para identificar esos marcos. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="ai-architecture", dir="ai-and-continuous-architecture", slug="ai-architecture",
+         name={"en": "AI architecture", "es": "Arquitectura de IA"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
          learn=dict(dir="ai-and-continuous-architecture", bundle="every-change-checked"),
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, named only to identify those frameworks. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
@@ -1050,6 +1058,55 @@ def moved_page(lg, S, f, which):
             f'<!-- made by site-tools/build_series.py: the series has one pack of labs and scenarios for all its films -->\n'
             f'<script>location.replace("{to}");</script><meta http-equiv="refresh" content="0; url={to}"></head>\n'
             f'<body><p>{say}</p></body></html>\n')
+
+
+# A series split in two: its old pages lead to its films' new series, so old links keep working. slug: its old place on the site;
+# name: its old name; was: the ids in SERIES of the series its films are now in, in the order the old series showed them (its film
+# N is the Nth of their films, counted across them); first: the one its own page leads to, which names both.
+MOVED = [dict(slug="ai-and-continuous-architecture", name={"en": "AI and continuous architecture", "es": "IA y arquitectura continua"},
+              was=["ai-architecture", "continuous-architecture"], first="continuous-architecture")]
+
+
+def moved_series_pages():
+    """The old pages of every series in MOVED: (path under site/, html). Each film's page leads to its page in its new series; the
+    series' page to its first new series, naming both; the labs page to the series of the lab its link asks for (#id), and the
+    scenarios page to the series of the film it asks for (#film-N, counted as the old series counted its films)."""
+    out = []
+    for M in MOVED:
+        new = [next(S for S in SERIES if S["id"] == i) for i in M["was"]]
+        old = [(S, f) for S in new for f in films(S)[1]]
+        first = next(S for S in new if S["id"] == M["first"])
+        for lg in ("en", "es"):
+            pre = "" if lg == "en" else "es/"
+            def page(rel, to, say, script=None):
+                go = script or f'location.replace("{to}"+location.search+location.hash);'
+                return (rel, f'<!doctype html><html lang="{lg}"><head><meta charset="utf-8"><title>{E(M["name"][lg])} · Learning Data</title><meta name="robots" content="noindex">\n'
+                             f'<link rel="canonical" href="{BASE}{pre}{to.replace("../", "")}">\n'
+                             f'<!-- made by site-tools/build_series.py: the series was split in two (MOVED) -->\n'
+                             f'<script>{go}</script><meta http-equiv="refresh" content="0; url={to}"></head>\n<body><p>{say}</p></body></html>\n')
+            both = T(lg, " and ", " y ").join(f'<a href="../{S["slug"]}/"><i>{E(S["name"][lg])}</i></a>' for S in new)
+            out.append(page(f'{pre}{M["slug"]}/index.html', f'../{first["slug"]}/',
+                            T(lg, f'<i>{E(M["name"][lg])}</i> is now two series: {both}.', f'<i>{E(M["name"][lg])}</i> es ahora dos series: {both}.')))
+            for S, f in old:
+                name = f["title"] if lg == "en" else f["site"]["title_es"]
+                out.append(page(f'{pre}{M["slug"]}/{f["key"]}/index.html', f'../../{S["slug"]}/{f["key"]}/',
+                                T(lg, f'<i>{E(name)}</i> is now in <a href="../../{S["slug"]}/{f["key"]}/"><i>{E(S["name"][lg])}</i></a>.',
+                                  f'<i>{E(name)}</i> está ahora en <a href="../../{S["slug"]}/{f["key"]}/"><i>{E(S["name"][lg])}</i></a>.')))
+            labs = {x["id"]: S["slug"] for S in new if series_learn(S) for x in series_learn(S)[lg]["labs"]}
+            films_at = {str(i + 1): (S["slug"], f["index"] + 1) for i, (S, f) in enumerate(old)}
+            for which in ("labs", "scenarios"):
+                if which == "labs":
+                    js = (f'var L={json.dumps(labs)},h=location.hash.slice(1),s=L[h]||"{first["slug"]}";'
+                          f'location.replace("../../"+s+"/labs/"+(L[h]?"#"+h:""));')
+                else:
+                    js = (f'var F={json.dumps({k: [s, n] for k, (s, n) in films_at.items()})},m=/^#film-(\\d+)$/.exec(location.hash),f=m&&F[m[1]];'
+                          f'location.replace("../../"+(f?f[0]+"/scenarios/#film-"+f[1]:"{first["slug"]}/scenarios/"));')
+                out.append(page(f'{pre}{M["slug"]}/{which}/index.html', f'../../{first["slug"]}/{which}/',
+                                T(lg, f'<i>{E(M["name"][lg])}</i> is now two series, each with its own labs and scenarios: '
+                                      + " and ".join(f'<a href="../../{S["slug"]}/{which}/"><i>{E(S["name"][lg])}</i></a>' for S in new) + ".",
+                                  f'<i>{E(M["name"][lg])}</i> es ahora dos series, cada una con sus labs y situaciones: '
+                                      + " y ".join(f'<a href="../../{S["slug"]}/{which}/"><i>{E(S["name"][lg])}</i></a>' for S in new) + "."), js))
+    return out
 
 
 # ---------------------------------------------------------------- the topics: their page, and their tiles on other pages
@@ -2952,6 +3009,7 @@ def pages():
                     if (WEB / "assets" / f["key"] / "learn.en.js").exists() or (WEB / S["slug"] / f["key"] / "labs" / "index.html").exists():
                         for which in ("labs", "scenarios"):
                             out.append((f'{pre}{S["slug"]}/{f["key"]}/{which}/index.html', moved_page(lg, S, f, which)))
+    out += moved_series_pages()
     return [(rel, stamp(rel, text)) for rel, text in out]
 
 

@@ -79,7 +79,7 @@ scene("brick",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
         cx.save();cx.strokeStyle=rgba(ACA_INK,0.8);cx.lineWidth=2.4;cx.beginPath();cx.moveTo(1392,348);cx.lineTo(1296,420);cx.stroke();cx.restore();});}),{dy:-14});
     bab_tag(cx,960,214,"it protected the city against the river",fin(t,w("held","protected")-0.2,0.7)*(1-fin(t,tX,0.6)));
   });
-  acaTitle(ctx,S,t,B+1.0,"The AI platform","made once and shared, under every agent","Film 2 of 6 · AI and continuous architecture");});
+  acaTitle(ctx,S,t,B+1.0,"The AI platform","made once and shared, under every agent","Film 2 of 3 · AI architecture");});
 
 /* ---------- 2. Each its own way ---------- */
 // Ravi brings Tomás a note; they follow each agent to its model, and find a different way every time; nobody can say which model
@@ -390,7 +390,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   // the agents on the platform, small, under the notes
   ctx.save();ctx.translate(960,0);ctx.scale(0.62,0.62);ctx.translate(-960,330);a2_six(ctx,t,{a:fin(t,1.0,1.0),p:clamp((t-1.0)/1.6,0,1),roles:0,deco:1,one:clamp((t-1.4)/1.8,0,1),platHi:pulseAt(t,w("answer","share"),2.0)+pulseAt(t,w("next","read"),2.0)});ctx.restore();
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"The AI platform","Agents share one platform; what each is for stays its own.","Film 2 of 6");});
+  acaEnd(ctx,S,t,B,"The AI platform","Agents share one platform; what each is for stays its own.","Film 2 of 3 · AI architecture");});
 
 /* ---------- where the chapters meet ---------- */
 // The gateway's room holds three chapters: The next retirement and Who owns what glide on from where the one before ends.

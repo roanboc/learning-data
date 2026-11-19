@@ -46,7 +46,7 @@ function picture(Lb,state){const f=VIS(Lb.vis),W0=L;if(!f)return null;const st=s
 /* ---------- a film's words and pictures, fetched when one of its labs or situations opens ---------- */
 const app=document.getElementById("series-labs")||document.getElementById("series-quiz");
 let FILMS={};try{FILMS=JSON.parse(app&&app.dataset.films||"{}");}catch(e){}
-const me=document.currentScript&&document.currentScript.src||"",BASE=me.replace(/from-words-to-data\/learn\.js(\?.*)?$/,"");
+const me=document.currentScript&&document.currentScript.src||"",BASE=me.replace(/in-the-weeds\/learn\.js(\?.*)?$/,"");
 const loaded={};
 function film(n){if(loaded[n])return loaded[n];const F=FILMS[n];if(!F||!F.k)return Promise.reject(new Error("no film "+n));
   const text=(u,v)=>fetch(BASE+F.k+"/"+u+(v?"?v="+v:"")).then(r=>{if(!r.ok)throw new Error(u+": "+r.status);return r.text();});  // by its version, as a page links it

@@ -2987,80 +2987,107 @@ function mh_panel(cc,bx,by,bw,bh,head,rows,bars){const U=PK.u;let y=by+54;
   for(const [lab,n,of,col] of bars||[]){const w=(bw-60)*n/of;PK.S.begin(cc,{lw:2});PK.S.fill(cc,c=>c.rect(bx+30,y-6,w,30),col,{w:0.6});
     ag_T(cc,lab,bx+30,y+62,{w:700,size:30,color:U.css(PK.C.ink)});y+=96;}}
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Each is drawn as a designer would, a graphic recording pinned over the board, almost done when it first
+   shows (PK.sk.drawn); whoever explains adds the last words, at the right or the foot, as the voice says them, and steps clear. */
+// what each of them keeps: their hats, as small drawings
+const MH_HATS=[["mei",["cal","door"]],["sam",["db","sensor"]],["jun",["gear","book"]],["noor",["map","pen"]]];
 // 1. one role, two sides (Carmen)
-const mh_boardA=(sc,w)=>[
-  {s:"Managing and leading",x:70,y:110,size:62,col:"blue",at:w("role","managing",-0.2),d:1.0},
-  {s:"two sides of one role",x:70,y:206,size:52,at:w("role","two sides",-0.2),d:0.9},{s:"· not rivals",size:52,col:"amber",at:w("role","not rivals",-0.2),d:0.6},
-  {s:"Plans, dates, measures",x:70,y:310,size:52,at:w("role","plans",-0.2),d:1.0},
-  {s:"serve the people",x:70,y:400,size:56,col:"green",at:w("role","serve the people",-0.2),d:0.9}];
+const mh_boardA=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk,r=D.head(c,"Managing and leading",{sub:["two sides of one role","blue"]});
+    D.caps(c,"· not rivals",110+D.capsW(c,"two sides of one role")+18,r.y1+50,{col:"amber"});
+    D.panel(c,90,190,470,212,{title:"managing",col:"blue",fill:"blue"},(cc,x,y,pw)=>{[["target",x+95],["cal",x+235],["bars",x+375]].forEach(([k,ix])=>D.icon(cc,k,ix,y+44,32,{fill:"white"}));
+      D.text(cc,"plans · dates · measures",x+pw/2,y+124,{size:34,align:"center"});});
+    D.arrow(c,[574,296],[676,296],{col:"blue",bow:-16});
+    D.panel(c,690,190,470,212,{title:"leading",col:"green",fill:"green"},(cc,x,y,pw)=>{D.faces(cc,x+85,y+40,["mei","sam","jun","noor"],{r:28,gap:100});
+      D.text(cc,"the people",x+pw/2,y+124,{size:34,align:"center"});});}),
+  {s:"serve the people",x:1160,y:462,size:52,w:700,col:"green",align:"right",at:w("role","serve the people",-0.2),d:0.9}];
 // 2. where data is born, and where it goes (Noor, at the team's board)
-const mh_boardB=(sc,w)=>[
-  {s:"Where data is born",x:70,y:110,size:58,col:"blue",at:w("noor","born",-0.5),d:0.9},{s:"→ where it goes",size:52,at:w("noor","where it goes",-0.2),d:0.8},
-  {s:"timetable · sensors",x:70,y:206,size:52,col:"orange",at:w("noor","goes",0.8),d:0.9}];
+const mh_boardB=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Where data is born",{sub:["the map, kept by Noor","mut"]});
+    D.card(c,80,200,{icon:"cal",ifill:"orange",lines:[["timetable",{w:700}],["Mei",{col:"mut",size:30}]],size:34,w:290});
+    D.card(c,80,340,{icon:"sensor",ifill:"orange",lines:[["sensors",{w:700}],["Sam",{col:"mut",size:30}]],size:34,w:290});
+    D.arrow(c,[384,250],[456,300],{col:"orange"});D.arrow(c,[384,390],[456,330],{col:"orange"});
+    D.flow(c,466,270,[{s:"platform",icon:"db",ifill:"orange"},{s:"models",icon:"gear",ifill:"orange"},{s:"the page",icon:"bars",ifill:"green"}],{size:32,gap:50,h:92});}),
+  {s:"→ where it goes",x:700,y:112,size:50,w:700,col:"blue",at:w("noor","where it goes",-0.2),d:0.9}];
 // 3. each of them (Carmen)
-const mh_boardC=(sc,w)=>[
-  {s:"Deep in one part",x:70,y:110,size:62,col:"blue",at:w("deep","deep",-0.2),d:0.8},
-  {s:"and right about it",x:70,y:212,size:54,col:"green",at:w("deep","right",-0.3),d:0.8},
-  {s:"More hats than a title says",x:70,y:322,size:52,col:"amber",at:w("deep","more hats",-0.2),d:1.1}];
-// 4. the whole route of Graham's question, from his decision down (Ivy, at the team's board)
-const mh_boardD=(sc,w)=>[
-  {s:"Decision: ask for a building?",x:70,y:100,size:46,col:"blue",at:w("decision","decision",-0.2),d:1.1},{s:"Council, June",size:40,col:"mut",at:w("decision","June",-0.3),d:0.6},
-  {s:"Question: too few rooms, or at some hours?",x:70,y:176,size:42,at:w("question","too few rooms",-0.3),d:1.5},
-  {s:"Data: bookings beside counts",x:70,y:252,size:44,col:"orange",at:w("data","bookings",-0.3),d:1.1},
-  {s:"Born: timetable · sensors",x:70,y:328,size:44,col:"orange",at:w("born","timetable",-0.3),d:1.0},
-  {s:"Kept by: Mei, Sam, Jun, Noor",x:70,y:404,size:44,at:w("keeps","Mei",-0.3),d:1.1},
-  {s:"Rule: counts, never people",x:70,y:470,size:44,col:"blue",at:w("keeps","counts",-0.3),d:1.0}];
+const mh_boardC=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Deep in one part");D.caps(c,"and right about it",700,96,{col:"green"});
+    MH_HATS.forEach(([k,ic],i)=>{const x=80+i*275;D.box(c,x,150,250,256,{fill:"paper",r:16});D.face(c,k,x+125,206,38);
+      D.text(c,PK.CAST[k].name.split(" ")[0],x+125,310,{size:36,w:700,align:"center"});ic.forEach((q,j)=>D.icon(c,q,x+85+j*80,362,26,{fill:"orange"}));});}),
+  {s:"more hats than a title says",x:1160,y:464,size:48,w:700,col:"amber",align:"right",at:w("deep","more hats",-0.2),d:1.1}];
+// 4. the whole route of Graham's question, from his decision down (Ivy, at the team's board); its last row, the rule, is hers to add.
+// A star by the decision and the question comes in a later chapter (mh_route: where each row's end is)
+const MH_ROUTE={x:84,y:164,gap:66,star:880};
+const mh_boardD=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk,R=MH_ROUTE;D.paper(c);D.ribbon(c,"The whole route",110,30,{col:"blue",size:44});
+    D.line(c,[[R.x+16,R.y-12],[R.x+16,R.y+R.gap*4-12]],{col:"mut",w:3,dash:[10,10],seed:4});
+    D.list(c,R.x,R.y,[{icon:"building",s:"Decision: ask for a building?",sub:"Council, June",col:"blue"},{icon:"q",s:"Question: too few rooms, or at some hours?",col:"blue"},
+      {icon:"db",s:"Data: bookings beside counts",col:"orange"},{icon:"sensor",s:"Born: timetable · sensors",col:"orange"},{icon:"people",s:"Kept by: Mei, Sam, Jun, Noor",col:"green"}],{size:34,gap:R.gap,subSize:30});
+    D.panel(c,950,140,236,272,{title:"kept by",col:"green",fill:"green"},(cc,x,y)=>{["mei","sam","jun","noor"].forEach((k,i)=>{const fx=x+66+(i%2)*104,fy=y+44+(i>>1)*104;D.face(cc,k,fx,fy,30);});});}),
+  {s:"Rule: counts, never people",x:1160,y:466,size:46,w:700,col:"blue",align:"right",at:w("keeps","counts",-0.3),d:1.0}];
 // 5. the T (Carmen)
-const mh_boardE=(sc,w)=>[
-  {s:"T-shaped",x:70,y:120,size:66,col:"blue",at:w("t","T-shaped",-0.3),d:0.7},
-  {k:"line",x:760,y:150,x1:760,y1:440,col:"blue",at:w("t","deep stroke",-0.2),d:0.6},
-  {k:"line",x:560,y:150,x1:960,y1:150,col:"green",at:w("t","wide bar",-0.2),d:0.6},
-  {s:"depth",x:790,y:330,size:48,col:"blue",at:w("t","across the top",0.2),d:0.4},
-  {s:"enough of the rest",x:840,y:126,size:42,col:"green",at:w("t","across the top",0.8),d:0.8}];
+const mh_boardE=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"T-shaped");
+    D.face(c,"ivy",250,290,56,{ring:"blue"});D.text(c,"Ivy",250,410,{size:36,w:700,align:"center"});
+    D.box(c,520,190,500,42,{fill:"green",col:"ink",w:3,r:10});D.box(c,738,190,64,262,{fill:"blue",col:"ink",w:3,r:10});
+    [["business",610],["systems",930]].forEach(([s,x])=>D.text(c,s,x,276,{size:30,align:"center",col:"green"}));
+    D.text(c,"depth",830,362,{size:42,w:700,col:"blue"});D.text(c,"statistics",830,406,{size:32,col:"mut"});}),
+  {s:"enough of the rest",x:770,y:170,size:42,w:700,col:"green",align:"center",at:w("t","across the top",0.8),d:0.8}];
 // 6. the maps of the work (Carmen)
-const mh_boardF=(sc,w)=>[
-  {s:"SFIA: over a hundred skills",x:70,y:110,size:52,at:w("lists","SFIA",-0.2),d:1.1},
-  {s:"DAMA: the roles of data work",x:70,y:206,size:52,at:w("lists","DAMA",-0.2),d:1.1},
-  {s:"Nobody holds them all",x:70,y:320,size:56,col:"amber",at:w("nobody","Nobody",-0.2),d:0.9}];
-// 7. range (Carmen)
-const mh_boardG=(sc,w)=>[
-  {s:"Range · David Epstein",x:70,y:100,size:42,col:"mut",at:w("range","Range",-0.2),d:0.8},
-  {s:"Fixed rules: specialists",x:70,y:206,size:54,at:w("range","specialists",-0.2),d:1.0},
-  {s:"Messy problems: range",x:70,y:310,size:54,col:"green",at:w("messy","messy",-0.2),d:1.0}];
+const mh_boardF=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Maps of the work");
+    D.panel(c,80,140,500,262,{title:"SFIA",col:"blue",fill:"blue"},(cc,x,y)=>{D.dots(cc,x+44,y+26,18,6,{gap:23,r:7,on:108,col:"blue"});
+      D.text(cc,"over a hundred skills",x+250,y+186,{size:34,align:"center"});});
+    D.panel(c,660,140,500,262,{title:"DAMA",col:"green",fill:"green"},(cc,x,y)=>{D.donut(cc,x+130,y+92,72,Array.from({length:11},(_,i)=>({v:1,col:["blue","green","orange","amber","violet"][i%5]})));
+      D.lines(cc,["the roles","of data work"],x+250,y+80,{size:34});});}),
+  {s:"Nobody holds them all",x:1160,y:464,size:50,w:700,col:"amber",align:"right",at:w("nobody","Nobody",-0.2),d:0.9}];
+// 7. range (Carmen): a game with fixed rules beside a tangle
+const mh_boardG=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Range",{ref:["David Epstein","Range, 2019"],rsize:32});
+    D.panel(c,80,160,500,252,{title:"fixed rules",col:"blue",fill:"blue"},(cc,x,y)=>{for(let i=0;i<4;i++)for(let j=0;j<4;j++)D.box(cc,x+50+i*40,y+18+j*40,40,40,{fill:(i+j)%2?"white":"ink",col:"ink",w:2,r:2});
+      D.icon(cc,"target",x+360,y+66,40,{fill:"blue"});D.text(cc,"specialists",x+360,y+160,{size:34,w:700,align:"center"});});
+    D.panel(c,660,160,500,252,{title:"messy problems",col:"green",fill:"green"},(cc,x,y)=>{const P=[];for(let i=0;i<14;i++){const a=i*2.4,r=40+(i*29)%60;P.push([x+130+Math.cos(a)*r,y+90+Math.sin(a)*r*0.7]);}
+      D.line(cc,P,{col:"ink",w:3,seed:12});});}),
+  {s:"range",x:1060,y:330,size:64,w:700,col:"green",align:"center",at:w("messy","messy",-0.2),d:0.8}];
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): a sketched page, almost
+   done when it first shows (PK.sk.drawn), and the last words the pen adds as the voice says them. The ink stays above y 800 */
+// the route of a question, five stops along a path, each with a word under it (ticked: done)
+function mh_stops(c,x,y,gap,ticked){const D=PK.sk,S=[["building","decision"],["q","question"],["db","data"],["sensor","born"],["people","kept"]];
+  D.line(c,[[x,y],[x+gap*4,y]],{col:"mut",w:3,dash:[10,10],seed:8});
+  S.forEach(([k,s],i)=>{const cx=x+i*gap;D.disc(c,cx,y,40,{fill:"white",col:"ink",w:3});D.icon(c,k,cx,y,24,{fill:i<2?"blue":i<4?"orange":"green"});
+    D.text(c,s,cx,y+84,{size:32,align:"center",col:"mut"});if(ticked)D.icon(c,"check",cx+34,y-34,16,{fill:"green"});});}
 // 1. Ivy's first goals
-const mh_note1=(sc,w)=>[
-  {s:"My first goals",x:70,y:124,size:84,w:700,col:"blue",at:w("goals","first goals",-0.3),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"By Easter:",x:110,y:290,size:64,at:w("first","By Easter",-0.2),d:0.6},
-  {s:"the whole route",x:110,y:410,size:64,col:"green",at:w("first","whole route",-0.3),d:0.8},
-  {s:"of one question's data",x:110,y:520,size:58,at:w("first","data",-0.6),d:0.9}];
+const mh_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My first goals",86,124);D.icon(c,"flag",930,96,40,{fill:"blue"});
+    D.sticky(c,80,186,880,150,{col:"sun",rot:-0.01,draw:(cc,x,y)=>{D.icon(cc,"building",x+70,y+82,40,{fill:"blue"});
+      D.text(cc,"Graham: too few rooms,",x+140,y+70,{size:40,w:700});D.text(cc,"or too few at some hours?",x+140,y+122,{size:40,w:700});}});
+    mh_stops(c,150,452,180,false);},[60,56,1040,800]),
+  {s:"By Easter: the whole route",x:90,y:672,size:58,w:700,col:"green",at:w("first","By Easter",-0.2),d:1.2},
+  {s:"of one question's data",x:90,y:760,size:54,at:w("first","data",-0.6),d:0.9}];
 // 2. what Ivy takes from each
-const mh_note2=(sc,w)=>[
-  {s:"From each of them",x:70,y:124,size:80,w:800,col:"blue",at:w("learn","enough",-0.3),d:0.8},
-  {s:"their words, their tools",x:110,y:270,size:58,at:w("learn","their words",-0.2),d:1.0},
-  {s:"what worries them",x:110,y:380,size:58,col:"amber",at:w("learn","worries",-0.3),d:0.8},
-  {s:"Who uses this, for which decision?",x:110,y:510,size:50,col:"green",at:w("ask","who uses",-0.2),d:1.3}];
+const mh_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"From each of them",86,124);
+    MH_HATS.forEach(([k],i)=>{const x=150+i*215;D.face(c,k,x,240,40);D.text(c,PK.CAST[k].name.split(" ")[0],x,334,{size:36,w:700,align:"center"});});
+    let x=80;for(const [ic,s,col] of [["chat","their words","blue"],["wrench","their tools","blue"],["warn","what worries them","amber"]])
+      x+=D.card(c,x,394,{icon:ic,ifill:col,lines:[[s,{w:700}]],size:34,h:96}).w+26;},[60,56,1040,800]),
+  {s:"Who uses this, for which decision?",x:90,y:620,size:50,w:700,col:"green",at:w("ask","who uses",-0.2),d:1.3,marks:[["under","green",null,0.4]]}];
 // 3. what Helena needs from Ivy
-const mh_note3=(sc,w)=>[
-  {s:"Ivy",x:70,y:124,size:88,w:700,col:"blue",at:w("needed","Ivy",-0.2),d:0.4,marks:[["under","blue",null,0.3]]},
-  {s:"Keep her depth: statistics",x:110,y:280,size:58,at:w("own","depth",-0.3),d:1.0},
-  {s:"Enough of the rest",x:110,y:400,size:62,at:w("own","business",-0.3),d:0.8},
-  {s:"to join them",x:110,y:520,size:66,col:"green",at:w("own","join",-0.4),d:0.6,marks:[["ring","green",null]]}];
+const mh_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Ivy",86,124,{size:88});D.face(c,"ivy",320,96,44);
+    D.card(c,110,200,{icon:"bars",ifill:"blue",lines:[["keep her depth",{w:700,col:"blue"}],["statistics",{size:36}]],size:42});
+    D.caps(c,"and learn enough of",110,404,{col:"green",size:30});
+    let x=110;const ends=[];[["building","business"],["gear","systems"],["db","data"]].forEach(([ic,s])=>{const b=D.card(c,x,432,{icon:ic,ifill:"green",lines:[[s,{w:700}]],size:34});ends.push(b.x+b.w/2);x=b.x+b.w+24;});
+    // a brace under the three: what the last words are for
+    D.line(c,[[ends[0],552],[ends[0],572],[ends[2],572],[ends[2],552]],{col:"green",w:3,seed:5});D.line(c,[[(ends[0]+ends[2])/2,572],[(ends[0]+ends[2])/2,596]],{col:"green",w:3,seed:6});},[60,40,1040,800]),
+  {s:"to join them",x:460,y:676,size:66,w:700,col:"green",align:"center",at:w("own","join",-0.4),d:0.6,marks:[["ring","green",null]]}];
 // 4. the goal met
-const mh_note4=(sc,w)=>[
-  {s:"25 March",x:70,y:124,size:84,w:700,col:"blue",at:w("goal","Thursday",-0.2),d:0.6},
-  {k:"tick",x:120,y:270,r:30,col:"green",at:w("goal","met",-0.6),d:0.3},
-  {s:"the whole route, known",x:170,y:290,size:60,col:"green",at:w("goal","whole route",-0.3),d:1.0}];
-// 5. on Monday (Helena)
-const mh_note5=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("depth","On Monday",0.6),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(252,"blue",w("depth","hats",-0.4)),{s:"Each one's hats, not the title",x:128,y:252,size:48,at:w("depth","hats",-0.1),d:1.1},
-  dot(352,"green",w("words","time",-0.4)),{s:"Time to learn every part",x:128,y:352,size:48,at:w("words","time",-0.1),d:1.0},
-  dot(452,"blue",w("route","one real question",-0.4)),{s:"One real question, one page",x:128,y:452,size:48,at:w("route","one real question",-0.1),d:1.0},
-  dot(552,"amber",w("ask","owner",-0.5)),{s:"What falls between: an owner",x:128,y:552,size:48,at:w("ask","owner",-0.2),d:1.0}];};
+const mh_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"25 March",86,124);D.icon(c,"cal",500,96,38,{fill:"green"});
+    mh_stops(c,150,300,180,true);D.card(c,620,460,{icon:"bars",ifill:"green",lines:[["Graham's page",{w:700}],["all 186 rooms",{col:"mut",size:32}]],size:36,w:380});},[60,56,1040,800]),
+  {k:"tick",x:120,y:650,r:30,col:"green",at:w("goal","met",-0.6),d:0.3},
+  {s:"the whole route, known",x:170,y:670,size:58,col:"green",w:700,at:w("goal","whole route",-0.3),d:1.0}];
+// 5. on Monday (Helena): what to do is there; a tick as the voice comes to each, and the last row in her hand
+const MH_MON=[["hat","Each one's hats, not the title","blue"],["clock","Time to learn every part","green"],["doc","One real question, one page","blue"]];
+const mh_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,122,{size:88});
+    MH_MON.forEach(([ic,s,col],i)=>{const y=262+i*100;D.disc(c,120,y-16,34,{fill:col,col:"ink",w:3});D.icon(c,ic,120,y-16,22,{fill:"white"});D.text(c,s,180,y,{size:46});});
+    D.disc(c,120,546,34,{fill:"amber",col:"ink",w:3});D.icon(c,"key",120,546,22,{fill:"white"});
+    // what the film leaves: deep in one, enough of the rest, on a sticky note with its T
+    D.sticky(c,150,616,470,176,{col:"sun",rot:-0.02,draw:(cc,x,y,w)=>{D.box(cc,x+28,y+44,110,18,{fill:"green",col:"ink",w:2.5,r:5});D.box(cc,x+71,y+44,24,100,{fill:"blue",col:"ink",w:2.5,r:5});
+      D.text(cc,"deep in one,",x+164,y+90,{size:36,w:700,col:"blue"});D.text(cc,"enough of the rest",x+164,y+138,{size:32,col:"green"});}});},[60,40,1040,800]),
+  {k:"tick",x:860,y:244,r:22,col:"blue",at:w("depth","hats",0.4),d:0.3},{k:"tick",x:860,y:344,r:22,col:"green",at:w("words","time",0.4),d:0.3},
+  {k:"tick",x:860,y:444,r:22,col:"blue",at:w("route","one real question",0.4),d:0.3},
+  {s:"What falls between: an owner",x:180,y:562,size:46,w:700,col:"amber",at:w("ask","owner",-0.2),d:1.0}];
 
 /* ===== Many hats, one picture: the chapters, shot by shot =====
    The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
@@ -3285,7 +3312,7 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
         marta:Object.assign({turn:1,work:0,pose:"sit"},mh_alive(tt,{expr:"listen",gaze:[1,-0.2]},3,0)),people:[
         {fl:MH_RB.floor,draw:cc=>{mh_roomBoard(cc,tt,BD,"ivy",{events:MH_HEV});}},
         {fl:MH_SAMC.floor,draw:cc=>{PK.seated(cc,"helena",MH_SAMC.x,MH_SAMC.floor,mh_hT(MH_SAMC.floor),"sit",Object.assign({t:tt+2,flip:true},mh_alive(tt,{expr:"listen",gaze:[1,-0.2]},4,0)));}}]});}},
-    {at:tB,cut:true,place:"mhBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"ivy",tt,BD,{say:[]});}},
+    {at:tB,cut:true,place:"mhBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"ivy",tt,BD,{say:[],events:MH_HEV});}},
     // where the bookings meet the counts: the two must name each room the same way; for 172 they do, for 14 they don't
     {at:tJ,cut:true,place:"mhTeam",keys:[[tJ,1300,560,1.12]],d:2,draw:(x,tt,cam)=>{let Ji=null;
       const R=mh_team(x,tt,{clock:11,sam:Object.assign({work:1},mh_alive(tt,{},1,tJ)),marta:Object.assign({work:1,turn:0},mh_alive(tt,{},3,tJ)),
@@ -3319,7 +3346,7 @@ scene("shape",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
     {at:0,place:"mhCorner",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{mh_corner(x,tt,{t0:0,book:true,write:ag_io(tt,0.4,tN+0.4,0.5),he:"think",hg:[1,0.6],hf:mh_alive(tt,{expr:"think",gaze:[1,0.6]},1,0)});}},
     {at:tN,place:"mhNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}},
     // that shape has a name; the frameworks that map the work; range (Carmen)
-    {at:tT,place:"mhBoard",dis:0.6,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BE,{say:[[c.t,E.t]]});}},
+    {at:tT,place:"mhBoard",cut:true,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BE,{say:[[c.t,E.t]]});}},
     {at:tL,place:"mhBoard",later:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BF,{say:[[c.lists,E.lists],[c.nobody,E.nobody]]});}},
     {at:tR,place:"mhBoard",later:true,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BG,{say:[[c.range,E.range],[c.messy,E.messy]]});}},
     // the specialists stay essential: Mei and Sam matched the 14 rooms in a day; Helena makes sure someone sees across them
@@ -3337,7 +3364,7 @@ scene("shape",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
 /* ---------------------------------------------------------------- 6. From her page */
 scene("kept",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tN=w("goal","Thursday",-0.6),tT=c.team-0.5,tC=c.catalog-0.5,tK=c.cant-0.5,N4=PK.pace(ctx,null,mh_note4(sc,w));
-  const BD0=mh_static(mh_boardD(sc,w)),BD=PK.pace(ctx,"ivy",BD0),BR=PK.pace(ctx,"ivy",BD0.concat([{k:"star",x:1140,y:86,r:24,col:"green",at:w("cant","decision",-0.2),d:0.4},{k:"star",x:1140,y:162,r:24,col:"green",at:w("cant","question",-0.2),d:0.4}]));
+  const BD0=mh_static(mh_boardD(sc,w)),BD=PK.pace(ctx,"ivy",BD0),BR=PK.pace(ctx,"ivy",BD0.concat([{k:"star",x:MH_ROUTE.star,y:MH_ROUTE.y-10,r:24,col:"green",at:w("cant","decision",-0.2),d:0.4},{k:"star",x:MH_ROUTE.star,y:MH_ROUTE.y+MH_ROUTE.gap-10,r:24,col:"green",at:w("cant","question",-0.2),d:0.4}]));
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"mhNotes",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}},
     // the next week, the team takes up Graham's question from her page; Helena gives the join an owner

@@ -1255,6 +1255,36 @@ async def check_mobile(run):
             ts = await pg.evaluate("() => [...document.querySelectorAll('.topic-tiles > .topic-tile')].map(c => Math.round(c.getBoundingClientRect().left))")
             expect(sec, len(set(ts)) <= 1, f"/{key} @390: the topics' tiles don't stack in one column ({ts})")
             await pg.close()
+        # on a tablet and wider, a card's pictures stay in their own column: a picture sized by the card's height
+        # once spilled over the words beside it (People first on the Topics page, a tablet held upright, 19 Nov 2026)
+        SPILL = """() => { const l = document.getElementById('list'); if (l) { l.hidden = false; l.querySelectorAll('details').forEach(d => { d.open = true; }); }
+              const out = [];
+              for (const c of document.querySelectorAll('.topic-card')) {
+                const body = c.querySelector(':scope > .tc-body'), cr = c.getBoundingClientRect();
+                if (!body || !cr.width) continue;
+                const b = body.getBoundingClientRect();
+                for (const m of c.querySelectorAll(':scope > img, :scope > .sc-media')) {
+                  const r = m.getBoundingClientRect();
+                  if (!r.width) continue;
+                  const side = r.top < b.bottom - 1 && r.bottom > b.top + 1;  // the picture sits beside the words, not above them
+                  if ((side && r.right > b.left + 1) || r.right > cr.right + 1)
+                    out.push(((c.querySelector('h3') || {}).textContent || '?').trim() + ': ' + Math.round(r.right - (side ? b.left : cr.right)) + ' px');
+                }
+              }
+              return out; }"""
+        for width in (720, 1024):
+            keys = grids if width == 720 else [k for k in grids if k in ("topics/", "es/topics/", "")]
+            if not keys:
+                continue
+            c2 = await run.context(width)
+            try:
+                for key in keys:
+                    pg, _ = await run.page(c2, key)
+                    bad = await pg.evaluate(SPILL)
+                    expect(sec, not bad, f"/{key} @{width}: a card's pictures spill over its words: {bad[:4]}")
+                    await pg.close()
+            finally:
+                await c2.close()
         # the whole card is one link, and the buttons inside the wide card still work
         for width in (390, 1280) if run.want("topics/") else ():
             c2 = await run.context(width)

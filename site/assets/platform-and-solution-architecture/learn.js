@@ -287,7 +287,7 @@ PLAY.second=(Lb,api)=>{const W=Lb.w,R=W.reasons,S={r:R[0].k,act:null,res:null,op
   api.toggle(r3,W.fedT,false,v=>{S.fed=v;S.tH=performance.now();api.kick(700);api.say(v?W.msg.fedOn:W.msg.fedOff);});
   api.btn(r3,W.bothB,()=>{S.both=performance.now();S.bothOk=S.open&&S.fed;api.kick(1600);api.say(S.bothOk?W.msg.bothOk:W.msg.bothNo,S.bothOk?"ok":"no");if(S.bothOk)api.reach("less");});
   const gone=()=>S.act!=null&&(S.res==="moved"||S.res==="while");
-  const lay=(lw)=>{const m=12,o={lw,m},g=16,w=(lw-m*2-g)/2,bh=84+W.rules.length*30;o.a={x:m,y:12,w,h:bh};o.b={x:m+w+g,y:12,w,h:bh};o.h=12+bh+14+3*28+10;return o;};
+  const lay=(lw)=>{const m=12,o={lw,m},g=16,w=(lw-m*2-g)/2,bh=84+W.rules.length*30;o.a={x:m,y:12,w,h:bh};o.b={x:m+w+g,y:12,w,h:bh};o.h=12+bh+14+3*28+26;return o;};
   const draw=(ctx,o,now)=>{const col=rgb(Lb.c);ground(ctx,o.lw,o.h,col);const m=o.m,A=o.a,B=o.b,PC=K.lay[5],x=rs(),t=S.act!=null?ago(now,S.act):-1;
     const plat=(b,name,sub,c,al)=>{withA(ctx,al,()=>{card(ctx,b.x,b.y,b.w,b.h,c,null,{glow:6});lines(ctx,name,b.x+12,b.y+22,b.w-24,{size:13.5,max:2,w:800,color:rgbaS(mixC(c,K.ink,0.3),1)});
       lines(ctx,sub,b.x+12,b.y+56,b.w-24,{size:12,max:2,color:rgbaS(K.soft,1)});W.rules.forEach((r,i)=>chip(ctx,b.x+12,b.y+82+i*30,b.w-24,24,r,c,{size:12}));});};
@@ -297,7 +297,7 @@ PLAY.second=(Lb,api)=>{const W=Lb.w,R=W.reasons,S={r:R[0].k,act:null,res:null,op
     if(S.act!=null&&t>700){const ok=S.res!=="law"&&S.res!=="twice";pill(ctx,B.x+B.w/2,B.y+B.h+4,W.res[S.res],ok?K.good:K.bad,{align:"center",size:12.5});}
     // lessening the harm, where one stays
     const y=A.y+A.h+40,ha=into(now,S.tH,500)||1;[[W.openT,S.open],[W.fedT,S.fed]].forEach(([s,on],i)=>{mark(ctx,m+8,y+i*28,on?"ok":"no");line1(ctx,s,m+22,y+i*28+5,o.lw-m*2-30,12.5,{w:700,color:rgbaS(on?K.good:K.soft,ha)});});
-    if(S.both!=null){const u=eo(into(now,S.both,700));line1(ctx,S.bothOk?W.bothOk:W.bothNo,m,y+62,o.lw-m*2,13,{w:800,color:rgbaS(S.bothOk?K.good:K.bad,u)});}};
+    if(S.both!=null){const u=eo(into(now,S.both,700));lines(ctx,S.bothOk?W.bothOk:W.bothNo,m,y+62,o.lw-m*2,{size:13,max:2,w:800,color:rgbaS(S.bothOk?K.good:K.bad,u)});}};
   return{lay,draw,readouts:[[W.read.rules,()=>gone()?W.read.once:W.read.twice],[W.read.reason,()=>rs().t]]};};
 
 /* ---------- 4 · Where it meets the applications: the route for each flow ---------- */

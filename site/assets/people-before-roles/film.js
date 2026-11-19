@@ -3033,53 +3033,116 @@ function pb_lesson(x,tt,o){o=o||{};let Jc=null,R2=null,Js=null;const wr=o.note||
     {fl:PB_SIDE.floor,draw:c=>{R2=PK.person(c,"helena",PB_SIDE.x,PB_SIDE.floor,pb_hT(PB_SIDE.floor),PK.poseMix("clasp",PB_NOTE,wr),Object.assign({t:tt+4,flip:true,underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("blue"):null,holds:true},o.helena||pb_lis(tt,-0.2),wr>0.004?{gaze:[1,0.6*wr]}:{}));}}]});
   R.helena=R2;R.at=Jc;R.sam=Js;return R;}
 
-/* the boards' rows, in the board's own px (1250 by 524), each with the time the voice says it; PK.pace makes a row wait until Carmen
-   can have walked to it, so they are laid out for someone who walks: on from left to right, and nothing drawn back along words */
-// 1. what a chart shows, and a standard for putting people first
-const pb_boardA=(sc,w)=>[
-  {s:"A chart shows",x:70,y:104,size:62,w:700,col:"blue",at:w("boxes","chart shows",-0.2),d:0.9},
-  {s:"who reports to whom",x:70,y:186,size:54,at:w("boxes","reports",-0.4),d:1.1},
-  {s:"not who is in the boxes",x:560,y:268,size:54,col:"amber",at:w("boxes","doesn't",-0.1),d:1.3},
-  {s:"ISO 27500:2016, the human-centred organization",x:70,y:364,size:42,col:"mut",at:w("iso","standard",-0.3),d:1.6},
-  {s:"Value your people,",x:70,y:452,size:56,w:700,col:"blue",at:w("iso","value",-0.2),d:1.0},
-  {s:"differences a strength",size:54,col:"green",at:w("iso","differences",-0.3),d:1.2}];
-// 2. who people turn to: Ubuntu, and shared leadership
-const pb_boardB=(sc,w)=>[
-  {s:"Ubuntu:",x:70,y:104,size:62,w:700,col:"blue",at:w("ubuntu","Ubuntu",-0.1),d:0.6},
-  {s:"a person through other people",size:52,at:w("ubuntu","person is",-0.2),d:1.3},
-  {s:"Shared leadership",x:70,y:200,size:62,w:700,col:"blue",at:w("shared","shared leadership",-0.2),d:1.0},
-  {s:"Wang, Waldman, Zhang, 2014",size:42,col:"mut",at:w("shared","Researchers",-0.2)+2.2,d:1.1},
-  {s:"42 samples: teams do better",x:70,y:290,size:54,col:"green",at:w("review","forty-two",-0.3),d:1.2},
-  {s:"most in how they work together",x:70,y:370,size:52,at:w("review","most of all",-0.2),d:1.3},
-  {s:"Anyone can lead,",x:70,y:452,size:56,w:700,col:"blue",at:w("title","Anyone",-0.2),d:0.9},
-  {s:"no title needed",size:54,at:w("title","from where",-0.2),d:0.8}];
-
+/* the boards, as a graphic recording on a sheet pinned over the team's board, in the board's own px (1250 by 524): drawn already
+   when it first shows (PK.sk.drawn), and Carmen adds the last words as the voice says them. PK.pace makes a row wait until she can
+   have walked to it, so the last words go on from left to right, at the foot or the right, and nothing is drawn back along words */
+const PB_KEYS=["yusuf","noor","marta","jun","erin","sam","tomas"],PB_ROLE={yusuf:"shield",noor:"map",marta:"bars",jun:"gear",erin:"wrench",sam:"db",tomas:"doc"};
+// 1. what a chart shows and doesn't, and a standard for putting people first
+function pb_sheetA(c){const D=PK.sk;
+  D.head(c,"People before roles",{col:"blue",ref:["ISO 27500:2016",["putting people first",{size:30}]],rsize:34,rx:1010});
+  // the chart: Helena's box, one line down to seven boxes, a role drawn in each
+  D.caps(c,"The chart",64,174,{col:"blue",size:30});
+  D.box(c,222,190,160,50,{fill:"blue",col:"blue",w:3.5,r:8});D.text(c,"Helena",302,226,{size:32,w:700,align:"center"});
+  D.line(c,[[302,240],[302,258]],{col:"blue",w:3.5,seed:2});D.line(c,[[86,258],[518,258]],{col:"blue",w:3.5,seed:3});
+  PB_KEYS.forEach((k,i)=>{const x=56+i*72;D.line(c,[[x+30,258],[x+30,270]],{col:"blue",w:3.5,seed:i+5});D.box(c,x,270,60,58,{fill:"paper",col:"blue",w:3,r:8});D.icon(c,PB_ROLE[k],x+30,299,17,{fill:"blue"});});
+  D.text(c,"who reports to whom",60,380,{size:38});
+  // who is in the boxes: the seven, as they are
+  D.arrow(c,[560,300],[640,272],{col:"amber",w:4.5,bow:-10,head:16});
+  [["noor",712,204],["sam",832,204],["jun",952,204],["yusuf",1072,204],["marta",772,300],["erin",892,300],["tomas",1012,300]].forEach(([k,x,y])=>D.face(c,k,x,y,29,{}));
+  // the standard, at the foot: its first principle drawn; Carmen finishes the line
+  D.box(c,56,406,1140,76,{fill:"blue",col:"blue",w:3,r:18});D.icon(c,"people",104,446,24,{fill:"white"});
+  D.text(c,"value your people,",148,458,{size:38,w:700,col:"blue"});}
+const pb_boardA=(sc,w)=>[PK.sk.drawn(pb_sheetA),
+  {s:"not who is in the boxes",x:668,y:388,size:44,w:700,col:"amber",at:w("boxes","doesn't",-0.1),d:1.3},
+  {s:"and their differences, a strength",x:456,y:458,size:38,w:700,col:"green",at:w("iso","differences",-0.6),d:1.4}];
+// 2. who they turn to: Ubuntu, Jun as the four see him, and what research on shared leadership found
+function pb_sheetB(c){const D=PK.sk;
+  D.head(c,"Who they turn to",{col:"green",ref:["Shared leadership",["Wang, Waldman, Zhang, 2014",{size:30}]],rsize:34,rcol:"green",rx:984});
+  // Ubuntu, on the left
+  D.caps(c,"Ubuntu",64,180,{col:"blue",size:32});D.lines(c,["a person is a person","through other people"],64,228,{size:34});
+  D.icon(c,"people",160,336,38,{fill:"blue"});
+  // Jun in the middle, four turning to him with what they bring
+  const P=[["marta",470,184,"a number",-1],["erin",770,184,"a model",1],["noor",470,352,"her map",-1],["sam",770,352,"a load",1]];
+  for(const [k,x,y] of P){const dx=620-x,dy=266-y,L=Math.hypot(dx,dy);D.arrow(c,[x+dx/L*40,y+dy/L*40],[620-dx/L*62,266-dy/L*62],{col:"green",w:4,bow:(k==="marta"||k==="sam")?10:-10,head:14});}
+  D.face(c,"jun",620,262,36,{ring:"green"});
+  for(const [k,x,y,s,side] of P){D.face(c,k,x,y,23,{});if(side)D.text(c,s,x+side*44,y+10,{size:30,col:"mut",align:side<0?"right":"left"});else D.text(c,s,x,y-42,{size:30,col:"mut",align:"center"});}
+  // the research: teams that share the leading do better, most of all in how they work together
+  D.caps(c,"42 samples",930,214,{col:"green",size:30});D.bars(c,930,236,220,116,[{v:3,col:"green",label:"results"},{v:5,col:"green",label:"teamwork"}]);
+  // the foot: a ribbon for the last words
+  D.ribbon(c,"",380,402,{col:"mut",width:770,size:40});}
+const pb_boardB=(sc,w)=>[PK.sk.drawn(pb_sheetB),
+  {k:"star",x:1152,y:250,r:15,col:"green",at:w("review","most of all",-0.3),d:0.5},
+  {s:"No title needed:",x:414,y:440,size:40,w:700,at:w("title","Leading",-0.2),d:1.0},
+  {s:"anyone can lead",size:40,w:700,col:"green",at:w("title","Anyone",-0.2),d:1.0}];
 /* ---------------------------------------------------------------- Helena's notebook: what she keeps (the page's own px)
-   One pen writes a page: each row has the time the voice says it, in the order the pen writes them, and the page is paced once
-   (PK.pace(ctx, null, rows)). Glosses go in one muted column at the right. */
-// 3. the four questions, and what she never asks
-const pb_note1=(sc,w)=>[
-  {s:"Four questions",x:70,y:124,size:88,w:700,col:"blue",at:w("four","four questions",-0.3),d:0.9,marks:[["under","blue",null,0.3]]},
-  {s:"Proud of?",x:130,y:262,size:66,at:w("q12","proud",-0.4),d:0.6},{s:"More of?",x:560,y:262,size:66,at:w("q12","more",-0.4),d:0.6},
-  {s:"In your way?",x:130,y:392,size:66,at:w("q34","way",-0.6),d:0.7},{s:"Know, to work well?",x:560,y:392,size:54,at:w("q34","know",-0.5),d:1.0},
-  {k:"cross",x:100,y:518,r:16,col:"amber",at:w("never","never",-0.3),d:0.25},{s:"Health, family: never",x:140,y:536,size:62,col:"amber",at:w("never","health",-0.3),d:1.1},
-  {s:"only what they offer",x:140,y:640,size:46,col:"mut",at:w("never","offer",-0.4),d:0.8}];
+   Each page is sketched already, a heading on a highlighter's band, boxes with drawings and the people's portraits (PK.sk.drawn);
+   her pen adds the last words and ticks, each as the voice says it, one stroke after the other (PK.pace(ctx, null, rows)). Nothing is
+   below y 826 of the page, where the captions are. */
+const PB_PAGE=[PK.SK.page.x,PK.SK.page.y,PK.SK.page.x+PK.SK.page.w,PK.SK.page.y+PK.SK.page.h];
+// the gorge as she sketches it: two rock walls, the river, the bridge and its handrails, two people on it
+function pb_bridgeSk(c,x,y,w,h){const U=PK.u,INK=PK.C.ink,rock=[176,150,128],riv=[120,170,166],gold=[214,176,92];c.save();c.lineCap="round";c.lineJoin="round";
+  c.fillStyle=U.css(rock,0.55);c.strokeStyle=U.css(INK);c.lineWidth=3.4;
+  for(const sg of[0,1]){const X=u=>sg?x+w*(1-u):x+w*u;c.beginPath();c.moveTo(X(0),y+h*0.25);c.lineTo(X(0.24),y+h*0.25);c.lineTo(X(0.36),y+h*0.62);c.lineTo(X(0.42),y+h);c.lineTo(X(0),y+h);c.closePath();c.fill();c.stroke();}
+  c.fillStyle=U.css(riv,0.8);c.beginPath();c.moveTo(x+w*0.42,y+h);c.lineTo(x+w*0.46,y+h*0.86);c.lineTo(x+w*0.54,y+h*0.86);c.lineTo(x+w*0.58,y+h);c.closePath();c.fill();
+  const L=[x+w*0.2,y+h*0.25],R=[x+w*0.8,y+h*0.25],sag=h*0.22,at=(u,dy)=>[U.lerp(L[0],R[0],u),U.lerp(L[1],R[1],u)+sag*4*u*(1-u)+(dy||0)];
+  const curve=dy=>{c.beginPath();for(let i=0;i<=24;i++){const p=at(i/24,dy);i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]);}};
+  c.strokeStyle=U.css(gold);c.lineWidth=7;curve(0);c.stroke();c.strokeStyle=U.css(INK);c.lineWidth=2.4;curve(4);c.stroke();curve(-4);c.stroke();
+  c.strokeStyle=U.css(gold);c.lineWidth=3;curve(-h*0.13);c.stroke();c.strokeStyle=U.css(U.dk(gold,0.3));c.lineWidth=1.6;c.beginPath();
+  for(let i=1;i<20;i++){const a=at(i/20,-h*0.13),b=at(i/20,-3);c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);}c.stroke();
+  c.fillStyle=U.css([206,196,180]);c.strokeStyle=U.css(INK);c.lineWidth=3;for(const p of[L,R]){c.beginPath();c.rect(p[0]-(p===L?w*0.06:0),p[1]-h*0.05,w*0.06,h*0.07);c.fill();c.stroke();}
+  for(const [u,col] of[[0.38,[150,70,88]],[0.62,[98,128,160]]]){const p=at(u,-4),s=h*0.11;c.fillStyle=U.css(col);c.beginPath();U.rrect(c,p[0]-s*0.32,p[1]-s*1.5,s*0.64,s*1.0,s*0.2);c.fill();c.stroke();
+    c.fillStyle=U.css([196,150,116]);c.beginPath();c.arc(p[0],p[1]-s*1.75,s*0.3,0,U.TAU);c.fill();c.stroke();c.beginPath();c.moveTo(p[0]-s*0.15,p[1]-s*0.5);c.lineTo(p[0]-s*0.18,p[1]);c.moveTo(p[0]+s*0.15,p[1]-s*0.5);c.lineTo(p[0]+s*0.18,p[1]);c.stroke();}
+  c.restore();}
+// 3. the four questions, asked of each of the seven, and what she never asks
+function pb_page1(c){const D=PK.sk;
+  D.title(c,"Four questions",80,132,{size:84,col:"blue"});
+  D.icon(c,"clock",700,104,26,{fill:"amber"});D.lines(c,["an hour with each,",["where they work",{col:"mut"}]],740,98,{size:34});
+  [["star","Proud of?","amber"],["plus","More of?","green"],["rock","In your way?","ink"],["key","Know, to work well?","blue"]].forEach(([ic,s,col],i)=>{const x=74+(i%2)*484,y=186+(i>>1)*140;
+    D.box(c,x,y,466,118,{fill:"paper",col:"ink",w:3,r:14});D.icon(c,ic,x+56,y+59,28,{fill:col});D.text(c,s,x+102,y+74,{size:i===3?40:46});});
+  D.text(c,"with each of the seven",74,510,{size:36,col:"mut"});PB_KEYS.forEach((k,i)=>D.face(c,k,500+i*78,494,25,{}));
+  D.box(c,74,566,950,196,{fill:"amber",col:"amber",w:3.5,r:16});D.icon(c,"heart",132,632,24,{fill:"orange"});D.icon(c,"house",196,634,24,{fill:"amber"});D.icon(c,"speech",944,700,30,{fill:"white"});}
+const pb_note1=(sc,w)=>[PK.sk.drawn(pb_page1,PB_PAGE),
+  {k:"cross",x:164,y:632,r:52,col:"amber",at:w("never","never",-0.3),d:0.4},
+  {s:"Health, family: never",x:262,y:648,size:56,w:700,col:"amber",at:w("never","health",-0.3),d:1.1},
+  {s:"only what they offer",x:262,y:722,size:46,col:"mut",at:w("never","offer",-0.4),d:0.9}];
 // 5. her first week, written in the pause that ends Friday
-const pb_note2=sc=>{const b=sc.cues.breath-1.6,w=(id,word,off)=>wAt(sc,id,word,off);return[
-  {s:"My first week",x:70,y:124,size:88,w:700,col:"blue",at:w("knows","planned",-0.6),d:0.8,marks:[["under","blue",null,0.3]]},
-  {k:"tick",x:100,y:244,r:18,col:"green",at:w("knows","knows seven",-0.4),d:0.25},{s:"An hour with each of the seven",x:140,y:262,size:60,at:w("knows","knows seven",-0.15),d:1.2},
-  {k:"tick",x:100,y:374,r:18,col:"green",at:w("knows","expect",-0.3),d:0.25},{s:"Said what stays, this month",x:140,y:392,size:60,at:w("knows","expect",0),d:1.1},
-  {s:"Jun: room to lead",x:140,y:520,size:60,at:b+0.6,d:0.9},
-  {s:"Nobody's work planned yet",x:140,y:640,size:62,w:700,at:b+2.0,d:1.1,marks:[["hl","green"]]}];};
-// 6. on Monday: the four things to keep; the last, ringed, sums up
-const pb_note3=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("m1","On Monday",-0.3),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(252,"blue",w("m1","sit down",-0.4)),{s:"Sit down with each person",x:128,y:252,size:62,at:w("m1","sit down",-0.2),d:1.1},
-  dot(372,"green",w("m2","Ask",-0.4)),{s:"Ask about them at work",x:128,y:372,size:62,at:w("m2","Ask",-0.2),d:1.1},
-  dot(492,"blue",w("m3","Notice",-0.4)),{s:"Notice who they turn to",x:128,y:492,size:62,at:w("m3","Notice",-0.2),d:1.1},
-  {s:"make room",x:780,y:492,size:44,col:"mut",at:w("m3","make room",-0.2),d:0.6},
-  // the last has no dot: the ring round it would run through one
-  {s:"Say what won't change yet",x:128,y:618,size:62,at:w("m4","say",-0.3),d:1.1,marks:[["ring","blue",sc.ends.m4-0.3]]}];};
+function pb_page2(c){const D=PK.sk;
+  D.title(c,"My first week",80,132,{size:84,col:"blue"});pb_bridgeSk(c,760,52,250,124);
+  [["Mon",["noor","sam"]],["Tue",["jun","yusuf"]],["Wed",["marta","erin"]],["Thu",["tomas"]],["Fri",null]].forEach(([d,who],i)=>{const x=74+i*190,fri=!who;
+    D.box(c,x,196,174,226,{fill:fri?"green":"paper",col:fri?"green":"ink",w:3,r:12});D.text(c,d,x+87,244,{size:40,w:700,align:"center",col:fri?"green":"ink"});
+    if(who)who.forEach((k,j)=>D.face(c,k,x+87,300+j*76,25,{}));else{D.icon(c,"people",x+87,306,34,{fill:"green"});D.text(c,"all seven",x+87,384,{size:34,w:700,align:"center",col:"green"});}});
+  // what she did: two boxes to tick, and the list she sorted on Monday
+  for(const [y,s] of[[506,"an hour with each of the seven"],[578,"said what stays, this month"]]){D.box(c,74,y-30,34,34,{fill:"paper",col:"ink",w:3,r:6});D.text(c,s,126,y,{size:38});}
+  D.icon(c,"cards",92,638,20,{fill:"white"});D.text(c,"46 requests, sorted",126,650,{size:38,col:"mut"});
+  // Jun, and the room she makes for him: beside the newcomer, in March
+  D.box(c,700,462,326,214,{fill:"green",col:"green",w:3.5,r:16});D.text(c,"Jun: room to lead",863,510,{size:36,w:700,col:"green",align:"center"});
+  D.face(c,"jun",782,586,29,{ring:"green"});D.arrow(c,[828,588],[876,588],{col:"green",w:4,head:12});
+  D.disc(c,928,590,34,{col:"ink",w:3,dash:[7,7]});D.text(c,"?",928,604,{size:40,w:700,align:"center",col:"mut"});D.text(c,"in March",928,656,{size:34,align:"center",col:"mut"});
+  // the foot: a ribbon for her last words
+  D.ribbon(c,"",120,718,{col:"green",fill:[190,228,200],width:640,size:42});}
+const pb_note2=sc=>{const w=(id,word,off)=>wAt(sc,id,word,off);return[PK.sk.drawn(pb_page2,PB_PAGE),
+  {s:"Nobody's work planned yet",x:156,y:758,size:46,w:700,at:w("knows","nobody's",-0.1),d:1.3},
+  {k:"tick",x:91,y:488,r:20,col:"green",at:w("knows","knows seven",-0.3),d:0.3},
+  {k:"tick",x:91,y:560,r:20,col:"green",at:w("knows","expect",-0.3),d:0.3}];};
+// 6. on Monday: the four things to keep, a card each with a drawing; the hand ticks three as the voice says them, and writes the last
+function pb_page3(c){const D=PK.sk;
+  D.title(c,"On Monday",80,132,{size:88,col:"blue"});D.icon(c,"cal",600,104,30,{fill:"blue"});
+  D.sticky(c,730,66,286,138,{col:"sun",rot:0.035,draw:(cc,x,y,w,h)=>D.lines(cc,["before you plan","anyone's work"],x+22,y+70,{size:36})});
+  const card=(i,fill,lines,draw)=>{const x=74+(i%2)*486,y=226+(i>>1)*294;D.box(c,x,y,464,276,{fill,col:"ink",w:3,r:16});draw(x,y);
+    if(lines)D.lines(c,lines,x+30,y+158,{size:44});return[x,y];};
+  card(0,"blue",["Sit down with","each person"],(x,y)=>{D.disc(c,x+64,y+66,36,{fill:"white",col:"ink",w:3});D.icon(c,"chair",x+64,y+66,22,{fill:"blue"});
+    D.face(c,"helena",x+250,y+70,24,{});D.face(c,"sam",x+340,y+70,24,{});});
+  card(1,"green",["Ask about them","at work"],(x,y)=>{D.disc(c,x+64,y+66,36,{fill:"white",col:"ink",w:3});D.icon(c,"speech",x+64,y+66,22,{fill:"green"});
+    D.icon(c,"star",x+262,y+66,24,{fill:"amber"});D.icon(c,"rock",x+350,y+70,24,{fill:"ink"});});
+  card(2,"blue",["Notice who","they turn to",["make room",{size:36,col:"mut"}]],(x,y)=>{D.disc(c,x+64,y+66,36,{fill:"white",col:"ink",w:3});D.icon(c,"eye",x+64,y+66,22,{fill:"blue"});
+    D.face(c,"jun",x+330,y+92,24,{ring:"green"});for(const [k,fx,fy] of[["marta",x+222,y+56],["noor",x+430,y+56]]){D.face(c,k,fx,fy,16,{});D.arrow(c,[fx+(fx<x+330?24:-24),fy+10],[x+330+(fx<x+330?-40:40),y+86],{col:"green",w:3.5,head:11,bow:fx<x+330?-6:6});}});
+  card(3,"amber",null,(x,y)=>{D.disc(c,x+64,y+66,36,{fill:"white",col:"ink",w:3});D.icon(c,"anchor",x+64,y+66,22,{fill:"amber"});});}
+const pb_note3=(sc,w)=>[PK.sk.drawn(pb_page3,PB_PAGE),
+  {k:"tick",x:484,y:450,r:20,col:"green",at:w("m1","sit down",-0.2),d:0.3},
+  {k:"tick",x:970,y:450,r:20,col:"green",at:w("m2","Ask",-0.2),d:0.3},
+  {k:"tick",x:484,y:744,r:20,col:"green",at:w("m3","Notice",-0.2),d:0.3},
+  {s:"Say what won't",x:590,y:678,size:46,w:700,col:"blue",at:w("m4","say",-0.3),d:0.9},
+  {s:"change yet",x:590,y:734,size:46,w:700,col:"blue",at:w("m4","change",-0.3),d:0.7}];
 
 /* ---------------------------------------------------------------- Helena's corner
    Helena at the round table: alone, with her two sheets (o.sheets), or with someone across from her (o.who2). o.lean (0 to 1): she

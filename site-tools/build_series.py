@@ -265,6 +265,7 @@ SERIES = [
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds", next="leading-a-data-team"),
     dict(id="leading-a-data-team", dir="leading-a-data-team", slug="leading-a-data-team",
+         learn=dict(dir="leading-a-data-team", engine="leading-data-people", bundle=False),
          name={"en": "Leading a data team", "es": "Liderar un equipo de datos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds", next="ownership-and-performance"),

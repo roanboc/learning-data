@@ -442,6 +442,8 @@ Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/
 - [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
 - [Rules that let people decide](../films/leading-a-data-team/4-rules-to-decide/) — `rules-to-decide`
 
+Labs and assessments: [site/assets/leading-a-data-team/learn.en.js](../site/assets/leading-a-data-team/learn.en.js), [site/assets/leading-a-data-team/learn.es.js](../site/assets/leading-a-data-team/learn.es.js)
+
 ### Ownership and performance
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`

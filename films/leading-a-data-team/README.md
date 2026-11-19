@@ -15,6 +15,8 @@ Four ideas to lead a data team by, one in each film, each taught from its own so
 | [One small change at a time](https://data.learn-all.org/leading-a-data-team/one-small-change/) | Kaizen in a team | 8 min | 6 | 3 questions | [script](2-one-small-change/script.md) · [source](2-one-small-change/source/README.md) |
 | [The team comes first](https://data.learn-all.org/leading-a-data-team/the-team-first/) | A team that holds | 9½ min | 7 | 3 questions | [script](3-the-team-first/script.md) · [source](3-the-team-first/source/README.md) |
 | [Rules that let people decide](https://data.learn-all.org/leading-a-data-team/rules-to-decide/) | Letting people decide | 10 min | 7 | 3 questions | [script](4-rules-to-decide/script.md) · [source](4-rules-to-decide/source/README.md) |
+
+For the whole series, on the site: [4 labs](https://data.learn-all.org/leading-a-data-team/labs/) and [12 scenarios](https://data.learn-all.org/leading-a-data-team/scenarios/), in English and Spanish, from the words in [site/assets/leading-a-data-team/](../../site/assets/leading-a-data-team/).
 <!-- /films -->
 
 ## The look and the sound

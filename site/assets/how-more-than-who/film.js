@@ -2720,106 +2720,258 @@ D.big=(ctx,s,cx,cy,o)=>{o=o||{};const size=o.size||64,W=K.handW(ctx,s,size,700),
   ctx.fillStyle=css(fillOf(o.fill||o.col||"amber"));ctx.fill();pen(ctx,"ink",3);ctx.stroke();ctx.restore();D.text(ctx,s,cx,cy+size*0.34,{size,w:700,align:"center",col:o.col||"ink"});return{x:cx-r,y:cy-r,w:r*2,h:r*2};};
 })(PK);
 
-/* ===== The rope bridge at Quehue, in ink line: the gorge, the bridge and the communities' people =====
-   Drawn once for the films of People first that show the rope bridge of Q'eswachaka, with the people kit (films/people-first/
-   shared/), and copied into each film's own source under its prefix. The facts it rests on are the series' bridge notes (the
-   Ministry of Culture's study, 2015; UNESCO; the photographs looked at for shapes and colours only, nothing traced).
-   The picture: we stand on the left bank of the gorge, upstream of nothing, looking along it. The gorge comes towards us between
-   its two walls of dark rock, the river at its foot; the bridge hangs across it some way off, from a stone base on each bank; far
-   beyond, at a bend, the steel bridge of 1968. Straw-coloured hills of ichu rise to the high peaks. Everyone stands on one eye
-   line (HMQ_E): people on the near bank are large, people on the bridge small, all of one picture. It is a drawing, not a likeness:
-   the gorge is shallower than the real one (about 13 m), so the river fits above the captions. */
-const HMQ_E=330,HMQ_DECK=368,HMQ_RIV=610;                       // the eye line, and where the bridge's floor meets each base
-const hmq_h=fl=>PK.hAt(fl,HMQ_E);
-const HMQ_B={x0:612,x1:1308};                      // the stone bases' inner faces: about 30 m apart
-// the near banks: where people can stand, floor y from HMQ_DECK+10 down to about 960; the rim of the gorge at floor y
-const hmq_rimL=y=>PK.u.lerp(HMQ_B.x0-20,470,PK.u.clamp((y-HMQ_DECK)/(1080-HMQ_DECK),0,1)**0.8);
-const hmq_rimR=y=>PK.u.lerp(HMQ_B.x1+20,1460,PK.u.clamp((y-HMQ_DECK)/(1080-HMQ_DECK),0,1)**0.8);
+/* ===== The rope bridge at Quehue, in ink line: the gorge built once in 3D, seen from wherever the story needs =====
+   The author found the bridge "almost invisible at the back" behind people stood in front of the picture, and asked for the context
+   shown properly, with the people in it (18 November 2026). So the gorge is built once, in metres, and each shot looks at it through
+   a camera of its own: from above with the bridge across the frame, from the rim beside its head, out over the gorge beside it. The
+   people of the story stand in it at their true size for where they are: near, they are large; across the gorge, small; on the
+   bridge, between its handrails. It is a drawing, not a likeness: the gorge is shallower and narrower than the real one, so the
+   river, the walls and the bridge fit one picture. The facts it rests on are the series' bridge notes (the Ministry of Culture's
+   study, 2015; UNESCO; photographs looked at for shapes and colours only, nothing traced).
+
+   The world: x across the gorge (the left bank negative), y up (the banks' ground at 0), z along it (upstream positive); the rope
+   bridge hangs across at z = 0, the steel bridge of 1968 is up the gorge at its first bend (z = 96). A camera {x, y, z, yaw, f, hor}
+   stands at (x, y, z), turned yaw degrees from looking upstream (to the right positive), with a lens of f px and the horizon at hor.
+
+   Each camera's sky, banks, walls and river are painted once, as a place (AG_PLACES): nothing nearer the camera than the bridge
+   or the people ever covers them from these cameras, so they are drawn over it every frame (hmq_scene): the stone bases, the
+   rope bridge, the steel one and the people, the furthest first. Drawn once for People first and copied into each film's own
+   source under its prefix: here hmq_, for How, more than who, with what Wellbeing is in the work added (the bridge that sags with one
+   handrail lower, tilt; that falls in two, fall; or is cut loose at one end, cut; and the rain) and this film's own: the floor cables
+   as many hands pull them across, with more sag until they are taut (slack), the stones of a base's top, and a cable's end tied round
+   a post of a base (hmq_tied). */
+const HMQ_W={half:14,river:-16,rw:5,z0:-160,z1:330,bank:150};
 const HMQ_PAL={straw:[220,196,136],straw2:[204,178,118],straw3:[232,212,160],ichu:[186,156,96],rock:[104,98,104],rock2:[124,116,118],rock3:[86,82,90],
   river:[96,138,134],river2:[78,118,118],foam:[236,240,236],snow:[246,248,250],peak:[170,176,198],peak2:[150,156,182],stone:[198,190,176],stone2:[170,162,150],
   rope:[214,186,110],ropeOld:[176,160,118],ropeDk:[150,124,70],steel:[150,156,166],steelDk:[110,116,128]};
 const hmq_c=n=>PK.S.tone(HMQ_PAL[n]);
 // the grey light of the years the bridge was left: everything duller and cooler
-const hmq_g=(c,grey)=>grey?PK.u.mix(c,[150,154,160],0.32):c;
+const hmq_g=(c,grey)=>grey?PK.u.mix(c,[150,154,160],0.34):c;
+// the gorge bends both ways, out of sight: where its middle is at z
+const hmq_xc=z=>z>40?(z-40)*(z-40)/260:(z<-40?-(z+40)*(z+40)/320:0);
+const hmq_jit=(z,k)=>PK.u.hash(Math.round(z*7)+k*131,k)-0.5;
 
-/* ---------------------------------------------------------------- the place, painted once: sky, peaks, hills, gorge, bases */
-function hmq_place(ctx,o){o=o||{};const S=PK.S,U=PK.u,g=c=>hmq_g(c,o.grey);
-  const sk=ctx.createLinearGradient(0,0,0,HMQ_E+40);sk.addColorStop(0,U.css(o.grey?[160,168,180]:PK.col("skyTop")));sk.addColorStop(1,U.css(o.grey?[214,214,212]:PK.col("skyLow")));
-  ctx.fillStyle=sk;ctx.fillRect(0,0,1920,1080);
-  S.begin(ctx,{lw:1.5,far:0.8});if(!o.grey){PK.cloud(ctx,380,120,1.0);PK.cloud(ctx,1500,90,0.8);}else{PK.cloud(ctx,300,110,1.3);PK.cloud(ctx,900,70,1.5);PK.cloud(ctx,1560,120,1.4);}
-  // the high peaks, far off, with snow
-  S.begin(ctx,{lw:1.4,far:0.75});S.poly(ctx,[[560,HMQ_E,1],[760,210,1],[880,150,1],[960,190,1],[1040,130,1],[1180,220,1],[1400,HMQ_E,1]],g(hmq_c("peak")),{exact:true,flat:true});
-  S.poly(ctx,[[846,172,1],[880,150,1],[918,170,1],[900,182,1],[880,176,1],[862,186,1]],g(hmq_c("snow")),{exact:true,w:0.5,flat:true});
-  S.poly(ctx,[[1008,154,1],[1040,130,1],[1080,158,1],[1056,166,1],[1034,160,1],[1020,170,1]],g(hmq_c("snow")),{exact:true,w:0.5,flat:true});
-  // the hills of ichu on both sides, rounded, the far ones paler
-  S.begin(ctx,{lw:1.6,far:0.55});S.poly(ctx,[[-40,HMQ_E+20,1],[-40,170],[180,120],[460,160],[700,250],[860,HMQ_E-10],[960,HMQ_E+20,1]],g(hmq_c("straw3")),{exact:true,ten:0.6});
-  S.poly(ctx,[[900,HMQ_E+20,1],[1120,HMQ_E-20],[1360,200],[1640,130],[1960,170],[1960,HMQ_E+20,1]],g(hmq_c("straw3")),{exact:true,ten:0.6});
-  S.begin(ctx,{lw:1.8,far:0.4});S.poly(ctx,[[-40,HMQ_E+60,1],[-40,280],[260,250],[520,300],[720,HMQ_E+10],[800,HMQ_E+60,1]],g(hmq_c("straw")),{exact:true,ten:0.6});
-  S.poly(ctx,[[1120,HMQ_E+60,1],[1260,HMQ_E+4],[1520,270],[1760,250],[1960,280],[1960,HMQ_E+60,1]],g(hmq_c("straw")),{exact:true,ten:0.6});
-  // the gorge beyond the bridge, narrowing to a bend: its far walls, and the river coming out of it
-  ctx.fillStyle=U.css(g(hmq_c("rock3")));ctx.beginPath();U.pg(ctx,[[560,356],[1360,356],[1260,720],[660,720]]);ctx.fill();
-  S.begin(ctx,{lw:1.8,far:0.35});
-  S.poly(ctx,[[HMQ_B.x0,HMQ_DECK,1],[880,HMQ_E+14,1],[1040,HMQ_E+14,1],[HMQ_B.x1,HMQ_DECK,1],[1130,HMQ_RIV+12,1],[790,HMQ_RIV+12,1]],g(hmq_c("rock3")),{exact:true});
-  S.poly(ctx,[[905,HMQ_E+16,1],[1015,HMQ_E+16,1],[1000,HMQ_E+44,1],[925,HMQ_E+44,1]],g(U.mix(hmq_c("river"),hmq_c("rock3"),0.3)),{exact:true,w:0.5,flat:true});
-  S.line(ctx,c=>{for(const [a,b,cc,d] of [[860,360,820,470],[1060,360,1100,470],[900,380,880,520],[1020,380,1040,520]]){c.moveTo(a,b);c.lineTo(cc,d);}},null,0.5);
-  // the near banks: straw-coloured ground from the bases to the bottom of the picture
-  S.begin(ctx,{lw:2.2,far:0.15});const rim=(f,y0,y1,n)=>{const p=[];for(let i=0;i<=n;i++){const y=U.lerp(y0,y1,i/n);p.push([f(y),y]);}return p;};
-  S.poly(ctx,[[-40,HMQ_DECK-4,1],[HMQ_B.x0+30,HMQ_DECK-6,1]].concat(rim(hmq_rimL,HMQ_DECK,1100,8)).concat([[-40,1100,1]]),g(hmq_c("straw2")),{exact:true,ten:0.4,grad:[0,HMQ_DECK,0,1080,0.1]});
-  S.poly(ctx,[[1960,HMQ_DECK-4,1],[HMQ_B.x1-30,HMQ_DECK-6,1]].concat(rim(hmq_rimR,HMQ_DECK,1100,8)).concat([[1960,1100,1]]),g(hmq_c("straw2")),{exact:true,ten:0.4,grad:[0,HMQ_DECK,0,1080,0.1]});
-  // the gorge's two walls, from the rim down to the water's edge, coming towards us; the river between them
-  S.begin(ctx,{lw:2.2,far:0.1});const wl=y=>U.lerp(790,880,(y-HMQ_RIV)/(1100-HMQ_RIV)),wr=y=>U.lerp(1130,1040,(y-HMQ_RIV)/(1100-HMQ_RIV));
-  S.poly(ctx,rim(hmq_rimL,HMQ_DECK+2,1100,8).concat([[wl(1100),1100,1],[wl(HMQ_RIV),HMQ_RIV,1]]),g(hmq_c("rock")),{exact:true,ten:0.4});
-  S.poly(ctx,rim(hmq_rimR,HMQ_DECK+2,1100,8).concat([[wr(1100),1100,1],[wr(HMQ_RIV),HMQ_RIV,1]]),g(hmq_c("rock2")),{exact:true,ten:0.4});
-  S.poly(ctx,[[wl(HMQ_RIV),HMQ_RIV,1],[wr(HMQ_RIV),HMQ_RIV,1],[wr(1100),1100,1],[wl(1100),1100,1]],g(hmq_c("river")),{exact:true,grad:[0,HMQ_RIV,0,1080,0.12]});
-  // the rock's faces and the white of the water: lines of detail
-  S.line(ctx,c=>{for(const [a,b,cc,d] of [[620,430,600,560],[680,520,640,700],[740,620,700,800],[600,640,560,820],[800,760,760,960],[660,820,620,1000]]){c.moveTo(a,b);c.lineTo(cc,d);}
-    for(const [a,b,cc,d] of [[1300,430,1320,560],[1240,520,1280,700],[1180,620,1220,800],[1320,640,1360,820],[1120,760,1160,960],[1260,820,1300,1000]]){c.moveTo(a,b);c.lineTo(cc,d);}},null,0.6);
-  ctx.save();ctx.strokeStyle=U.css(g(hmq_c("foam")),0.75);ctx.lineWidth=3;ctx.lineCap="round";const R=U.rnd(5);
-  for(let i=0;i<26;i++){const y=HMQ_RIV+20+R()*420,hw=U.lerp(160,90,U.clamp((y-HMQ_RIV)/470,0,1)),x=962+(R()-0.5)*1.6*hw,l=10+R()*26*(y/700);ctx.beginPath();ctx.moveTo(x-l,y);ctx.quadraticCurveTo(x,y-3,x+l,y);ctx.stroke();}ctx.restore();
-  // tufts of ichu on the banks, larger nearer us
-  const R2=U.rnd(11);for(let i=0;i<120;i++){const y=HMQ_DECK+12+Math.pow(R2(),1.3)*700,left=R2()<0.5,x=left?R2()*(hmq_rimL(y)-30):hmq_rimR(y)+30+R2()*(1920-hmq_rimR(y)-30),k=0.4+(y-HMQ_DECK)/260;
-    ctx.strokeStyle=U.css(g(U.mix(hmq_c("ichu"),hmq_c("straw2"),R2()*0.5)));ctx.lineWidth=1.6*k;ctx.lineCap="round";ctx.beginPath();for(let j=0;j<5;j++){const a=-0.7+j*0.35;ctx.moveTo(x,y);ctx.quadraticCurveTo(x+Math.sin(a)*8*k,y-12*k,x+Math.sin(a)*16*k,y-Math.cos(a)*22*k);}ctx.stroke();}
-  // the two stone bases: a platform of old stone, and two short pillars the handrails go round
-  for(const [bx,d] of [[HMQ_B.x0,-1],[HMQ_B.x1,1]]){S.begin(ctx,{lw:1.6,far:0.2});
-    S.fill(ctx,c=>{c.moveTo(bx,HMQ_DECK+30);c.lineTo(bx+d*70,HMQ_DECK+30);c.lineTo(bx+d*70,HMQ_DECK-6);c.lineTo(bx,HMQ_DECK-6);c.closePath();},g(hmq_c("stone")),{});
-    S.line(ctx,c=>{for(let r=0;r<3;r++){const y=HMQ_DECK-6+r*12;c.moveTo(bx,y);c.lineTo(bx+d*70,y);for(let k=0;k<3;k++){const xx=bx+d*(12+k*22+(r%2)*10);c.moveTo(xx,y);c.lineTo(xx,y+12);}}},null,0.4);
-    for(const px of [bx+d*14,bx+d*52])S.fill(ctx,c=>U.rrect(c,px-7,HMQ_DECK-40,14,36,2),g(hmq_c("stone2")),{});}}
-AG_PLACES.hmGorge=c=>hmq_place(c,{});
-AG_PLACES.hmGorgeGrey=c=>hmq_place(c,{grey:true});
-AG_ROOMS.hmGorge=AG_ROOMS.hmGorgeGrey="hmGorge";
+/* ---------------------------------------------------------------- a camera, and drawing through it */
+function hmq_camera(c){if(c.P)return c;c=Object.assign({},c);const a=c.yaw*Math.PI/180;c.ca=Math.cos(a);c.sa=Math.sin(a);c.N=0.35;
+  c.cs=(X,Y,Z)=>{const dx=X-c.x,dz=Z-c.z;return[dx*c.ca-dz*c.sa,Y-c.y,dx*c.sa+dz*c.ca];};
+  c.P=(X,Y,Z)=>{const q=c.cs(X,Y,Z);return[960+c.f*q[0]/q[2],c.hor-c.f*q[1]/q[2],q[2]];};
+  c.d=(X,Z)=>(X-c.x)*c.sa+(Z-c.z)*c.ca;                                 // how far ahead a point is
+  c.h=(X,Z)=>1.62*c.f/c.d(X,Z);                                          // a standing adult's height there, px
+  return c;}
+// a polygon cut where it passes behind the camera, in the frame's px
+function hmq_clip(c,pts){const q=pts.map(p=>c.cs(p[0],p[1],p[2])),out=[];
+  for(let i=0;i<q.length;i++){const a=q[i],b=q[(i+1)%q.length],ia=a[2]>=c.N,ib=b[2]>=c.N;if(ia)out.push(a);
+    if(ia!==ib){const t=(c.N-a[2])/(b[2]-a[2]);out.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,c.N]);}}
+  return out.map(p=>[960+c.f*p[0]/p[2],c.hor-c.f*p[1]/p[2]]);}
+const hmq_path=(ctx,p)=>{ctx.beginPath();p.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();};
+const hmq_onScreen=p=>p.some(q=>q[0]>-200&&q[0]<2120&&q[1]>-200&&q[1]<1300);
+// distance pales a colour into the haze of the high plain
+const hmq_fog=(c,d,g)=>PK.u.mix(c,g?[178,182,188]:[214,214,206],PK.u.clamp((d-40)/420,0,0.55));
 
-/* ---------------------------------------------------------------- the rope bridge, drawn every frame
-   o.age (0 new and gold, 1 left for years: sagging, grey, its floor gone in places); o.k (0 to 1): how much of it there is (the
-   building, cable by cable: below 0.5 the floor cables only); o.walkers: people on it, [[u, who, flip, t]]: u from 0 (left base)
-   to 1 (right). Returns hmq_deck(u) for anyone drawn on it. */
-const HMQ_SAG=a=>34+70*a;
-function hmq_deck(u,o){o=o||{};const U=PK.u,x=U.lerp(HMQ_B.x0+8,HMQ_B.x1-8,u),y=HMQ_DECK+HMQ_SAG(o.age||0)*4*u*(1-u),f=o.fall||0;if(f<=0)return[x,y];
-  // fallen: each half hangs from its own base down the wall into the gorge
-  const L=u<0.5,v=L?u/0.5:(1-u)/0.5,b=L?HMQ_B.x0+8:HMQ_B.x1-8,hx=b+(L?1:-1)*(40+70*v)*(1-0.5*v),hy=HMQ_DECK+v*230;return[U.lerp(x,hx,f),U.lerp(y,hy,f)];}
-function hmq_bridge(ctx,o){o=o||{};const S=PK.S,U=PK.u,age=o.age||0,k=o.k==null?1:o.k,grey=o.grey,col=hmq_g(U.mix(hmq_c("rope"),hmq_c("ropeOld"),age),grey),dkc=U.dk(col,0.25);
-  const fall=o.fall||0,along=(y0,sag)=>{ctx.beginPath();for(let i=0;i<=40;i++){const u=i/40,[x,y]=hmq_deck(u,{age,fall});const yy=y+(y0-HMQ_DECK)+(sag-HMQ_SAG(age))*4*u*(1-u)*(1-fall);
-    if(fall>0.5&&u>=0.5&&(i-1)/40<0.5){ctx.moveTo(x,yy);continue;}i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);}};
-  const sag=HMQ_SAG(age),hr=30-10*age;ctx.save();ctx.lineCap="round";
-  // the side cords, from each handrail down to the floor: fewer where it has worn
-  if(k>0.6){const n=46,R=U.rnd(3);ctx.strokeStyle=U.css(dkc);ctx.lineWidth=1.3;ctx.beginPath();for(let i=1;i<n;i++){const u=i/n;if(age>0.2&&R()<age*0.55)continue;const [x,y]=hmq_deck(u,{age,fall});if(fall>0.3)continue;ctx.moveTo(x,y-2);ctx.lineTo(x+1,y-hr*U.clamp((k-0.6)/0.4,0,1)+(age*R()*8));}ctx.stroke();}
-  // the four floor cables, as one band seen from the side, and the floor laid on them; holes where the rods are gone
-  if(k>0){const nf=Math.min(4,Math.ceil(k*8));for(let i=0;i<nf;i++){ctx.strokeStyle=U.css(i===nf-1?dkc:col);ctx.lineWidth=4;along(HMQ_DECK+i*2.2,sag,0);ctx.stroke();}
-    ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=1.4;along(HMQ_DECK-2,sag);ctx.stroke();along(HMQ_DECK+8,sag);ctx.stroke();}
-  // the two handrails
-  if(k>0.5){const q=U.clamp((k-0.5)/0.3,0,1);ctx.strokeStyle=U.css(col);ctx.lineWidth=3.2;ctx.globalAlpha*=q;along(HMQ_DECK-hr,sag-6*age);ctx.stroke();
-    ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=1.2;along(HMQ_DECK-hr-1.6,sag-6*age);ctx.stroke();}
-  // o.tilt (0 to 1): the far handrail hangs lower than the near one, as a visitor found it five months after a renewal
-  if(o.tilt&&k>0.5){ctx.strokeStyle=U.css(dkc);ctx.lineWidth=2.6;along(HMQ_DECK-hr+o.tilt*14,sag-6*age+o.tilt*12);ctx.stroke();}
-  ctx.restore();
-  for(const [u,who,fl,tt] of o.walkers||[]){const [x,y]=hmq_deck(u,{age});hmq_person(ctx,who,x,y+2,hmq_h(HMQ_DECK+2),"stand",{t:tt||0,flip:fl===true,far:0.3,shade:0});}}
+/* ---------------------------------------------------------------- the sky, the peaks under snow and the hills of ichu, from the horizon */
+function hmq_sky(ctx,c,g){const U=PK.u,S=PK.S,hor=c.hor,sk=ctx.createLinearGradient(0,Math.min(0,hor-500),0,hor+40);
+  sk.addColorStop(0,U.css(g?[150,160,174]:PK.col("skyTop")));sk.addColorStop(1,U.css(g?[210,210,208]:PK.col("skyLow")));ctx.fillStyle=sk;ctx.fillRect(0,0,1920,1080);
+  S.begin(ctx,{lw:1.5,far:0.8});
+  // c.clouds {fair, grey}: where a view whose horizon is low keeps its clouds (high in the sky, not in the gorge under the bridge);
+  // under a grey sky a cloud is a darker grey, since a white one there reads as a hole in the picture
+  const cl=c.clouds?(g?c.clouds.grey:c.clouds.fair):hor>140?(g?[[300,Math.max(70,hor-240),1.3],[980,Math.max(60,hor-300),1.5],[1620,Math.max(70,hor-220),1.3]]
+    :[[340,Math.max(70,hor-230),1.0],[1460,Math.max(60,hor-280),0.85]]):[];
+  for(const [x,y,k] of cl||[])if(!g)PK.cloud(ctx,x,y,k);
+    else S.fill(ctx,q=>{U.ell(q,x,y,70*k,26*k);U.ell(q,x+52*k,y+6*k,54*k,20*k);U.ell(q,x-56*k,y+8*k,48*k,17*k);U.ell(q,x+6*k,y-16*k,40*k,22*k);},[134,140,152],{sa:0.12});
+  const pk=c.peaks||[[520,1],[760,1.35],[900,1.7],[1010,1.45],[1140,1.9],[1330,1.2]],ph=c.peakH||150,base=hor+6,pts=[[200,base,1]];
+  S.begin(ctx,{lw:1.4,far:0.75});pk.forEach(([x,k])=>pts.push([x,base-ph*k]));pts.push([1700,base,1]);
+  S.poly(ctx,pts.map(p=>[p[0],p[1],1]),hmq_g(hmq_c("peak"),g),{exact:true,flat:true});
+  for(const [x,k] of pk)if(k>1.3){const y=base-ph*k,w=ph*0.32;
+    S.poly(ctx,[[x-w,y+w*0.62,1],[x,y,1],[x+w,y+w*0.62,1],[x+w*0.4,y+w*0.5,1],[x,y+w*0.66,1],[x-w*0.45,y+w*0.48,1]],hmq_g(hmq_c("snow"),g),{exact:true,w:0.5,flat:true});}
+  S.begin(ctx,{lw:1.6,far:0.55});const hh=c.hillH||70;
+  S.poly(ctx,[[-40,hor+40,1],[-40,hor-hh*1.4],[260,hor-hh*1.9],[560,hor-hh*1.2],[820,hor-hh*0.3],[960,hor+40,1]],hmq_g(hmq_c("straw3"),g),{exact:true,ten:0.6});
+  S.poly(ctx,[[860,hor+40,1],[1100,hor-hh*0.5],[1380,hor-hh*1.5],[1680,hor-hh*2.0],[1960,hor-hh*1.6],[1960,hor+40,1]],hmq_g(hmq_c("straw3"),g),{exact:true,ten:0.6});}
 
-/* ---------------------------------------------------------------- the steel bridge of 1968, far up the gorge, at its bend
-   a: how far it is there (0 to 1); truck: where a truck is on it (0 to 1, or null) */
-function hmq_steel(ctx,a,truck,grey){if(a<=0.004)return;const S=PK.S,U=PK.u,x0=870,x1=1050,y=HMQ_E+12,col=hmq_g(hmq_c("steel"),grey);ctx.save();ctx.globalAlpha*=a;
-  S.begin(ctx,{lw:1.0,far:0.4});S.fill(ctx,c=>U.rrect(c,x0,y,x1-x0,5,1),col,{w:0.8});
-  S.line(ctx,c=>{c.moveTo(x0,y);c.lineTo(x0+10,y-12);c.lineTo(x1-10,y-12);c.lineTo(x1,y);for(let i=0;i<=8;i++){const xx=U.lerp(x0+10,x1-10,i/8);c.moveTo(xx,y);c.lineTo(xx+(i%2?-10:10),y-12);}},hmq_g(hmq_c("steelDk"),grey),1.0);
-  if(truck!=null){const tx=U.lerp(x0-10,x1+10,truck);S.fill(ctx,c=>{U.rrect(c,tx-10,y-11,14,9,1);U.rrect(c,tx+4,y-8,6,6,1);},hmq_g([176,118,96],grey),{w:0.5});}
-  ctx.restore();}
+/* ---------------------------------------------------------------- the ground: banks, walls of rock and the river, as drawables */
+function hmq_terrain(c,g){const U=PK.u,D=[],col=hmq_c,ink=()=>PK.S.ink,W=HMQ_W,xc=hmq_xc,step=z=>Math.abs(z)<60?2.5:5;
+  const rimL=z=>xc(z)-W.half,rimR=z=>xc(z)+W.half;
+  for(let z=W.z0;z<W.z1;){const z1=z+step(z),zm=(z+z1)/2;
+    // the banks, in cells across, so the nearer ones cover what they hide
+    for(const side of[-1,1]){const r0=side<0?rimL(z):rimR(z),r1=side<0?rimL(z1):rimR(z1),edges=[0,3,8,16,28,46,70,100,W.bank];
+      for(let i=0;i<edges.length-1;i++){const a=edges[i],b=edges[i+1],pts=[[r0+side*a,0,z],[r1+side*a,0,z1],[r1+side*b,0,z1],[r0+side*b,0,z]];
+        const dm=c.d(r0+side*(a+b)/2,zm);if(dm<-30)continue;
+        D.push({d:dm,draw:ctx=>{const p=hmq_clip(c,pts);if(p.length<3||!hmq_onScreen(p))return;
+          const cc=hmq_fog(hmq_g(U.mix(col("straw2"),col("straw3"),U.clamp((dm-30)/260,0,0.6)),g),dm,g);
+          hmq_path(ctx,p);ctx.fillStyle=U.css(cc);ctx.fill();ctx.strokeStyle=U.css(cc);ctx.lineWidth=1.4;ctx.stroke();
+          // the rim's edge, in the ink
+          if(i===0){const e=hmq_clip(c,[[r0,0,z],[r1,0,z1],[r1,-0.01,z1],[r0,-0.01,z]]);
+            if(e.length>=2){ctx.strokeStyle=U.css(U.mix(ink(),cc,U.clamp(dm/300,0,0.6)));ctx.lineWidth=U.clamp(260/dm,1,3.2);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(e[0][0],e[0][1]);ctx.lineTo(e[1][0],e[1][1]);ctx.stroke();}}
+          // tufts of ichu, larger nearer
+          if(dm<160){const R=U.rnd(Math.round(z*13+i*7+(side+3)*1000)),n=dm<14?8:dm<40?4:2;
+            for(let k=0;k<n;k++){const X=r0+side*(a+R()*(b-a)),Z=z+R()*(z1-z),q=c.P(X,0,Z);if(q[2]<c.N+0.5)continue;const s=U.clamp(c.f*0.5/q[2],0.6,14);
+              if(q[0]<-40||q[0]>1960||q[1]<-40||q[1]>1120)continue;
+              ctx.strokeStyle=U.css(hmq_fog(hmq_g(U.mix(col("ichu"),col("straw2"),R()*0.4),g),dm,g));ctx.lineWidth=Math.max(0.8,s*0.16);ctx.lineCap="round";ctx.beginPath();
+              for(let j=0;j<5;j++){const an=-0.7+j*0.35;ctx.moveTo(q[0],q[1]);ctx.quadraticCurveTo(q[0]+Math.sin(an)*s*0.5,q[1]-s*0.75,q[0]+Math.sin(an)*s,q[1]-Math.cos(an)*s*1.35);}ctx.stroke();}}}});}}
+    // the walls: three faces from the rim down to the river's edge, jittered so they read as rock
+    for(const side of[-1,1]){const lay=[0,-5,-10.5,W.river],ins=[W.half,W.half-2.6,W.half-5.6,W.rw];
+      for(let b=0;b<3;b++){const pt=(zz,j)=>{const jj=j===0||j===3?0:hmq_jit(zz,j+side*5)*1.6;return[xc(zz)+side*(ins[j]+jj),lay[j]+hmq_jit(zz,j*3+side)*0.8*(j>0&&j<3),zz];};
+        const pts=[pt(z,b),pt(z1,b),pt(z1,b+1),pt(z,b+1)],dm=c.d(xc(zm)+side*(ins[b]+ins[b+1])/2,zm);if(dm<-30)continue;
+        const P0=pts[0],e1=[pts[1][0]-P0[0],pts[1][1]-P0[1],pts[1][2]-P0[2]],e2=[pts[3][0]-P0[0],pts[3][1]-P0[1],pts[3][2]-P0[2]],
+          nn=[e1[1]*e2[2]-e1[2]*e2[1],e1[2]*e2[0]-e1[0]*e2[2],e1[0]*e2[1]-e1[1]*e2[0]].map(v=>v*(side<0?1:-1)),
+          seen=(c.x-P0[0])*nn[0]+(c.y-P0[1])*nn[1]+(c.z-P0[2])*nn[2]>0;
+        if(!seen)continue;                                                  // its back: hidden
+        D.push({d:dm-0.4,draw:ctx=>{const p=hmq_clip(c,pts);if(p.length<3||!hmq_onScreen(p))return;
+          const hv=U.hash(Math.round(zm/5),b+side*3),tone=b===0?U.mix(col("straw2"),[150,128,104],0.35+0.25*hv):U.mix([col("rock2"),col("rock"),col("rock3")][(b+Math.floor(hv*2.4))%3],[150,124,100],0.32);
+          const cc=hmq_fog(hmq_g(tone,g),dm,g),lw=U.clamp(200/dm,0.6,2.4);hmq_path(ctx,p);ctx.fillStyle=U.css(cc);ctx.fill();ctx.strokeStyle=U.css(cc);ctx.lineWidth=1.2;ctx.stroke();
+          // a crack or a ledge now and then, in the ink
+          ctx.strokeStyle=U.css(U.mix(ink(),cc,U.clamp(dm/260,0.15,0.7)));ctx.lineWidth=lw;ctx.lineCap="round";ctx.beginPath();
+          if(U.hash(Math.round(zm*3),b+side)<0.45){ctx.moveTo(p[0][0],p[0][1]);ctx.lineTo(p[3][0],p[3][1]);}
+          if(b>0){ctx.moveTo(p[0][0],p[0][1]);ctx.lineTo(p[1][0],p[1][1]);}ctx.stroke();}});}}
+    // the river, with white water
+    {const pts=[[xc(z)-W.rw,W.river,z],[xc(z1)-W.rw,W.river,z1],[xc(z1)+W.rw,W.river,z1],[xc(z)+W.rw,W.river,z]],dm=c.d(xc(zm),zm);
+      if(dm>-30)D.push({d:dm+1,draw:ctx=>{const p=hmq_clip(c,pts);if(p.length<3||!hmq_onScreen(p))return;
+        const cc=hmq_fog(hmq_g(U.mix(col("river"),col("river2"),U.hash(Math.round(z),9)*0.3),g),dm,g);
+        hmq_path(ctx,p);ctx.fillStyle=U.css(cc);ctx.fill();ctx.strokeStyle=U.css(cc);ctx.lineWidth=1.2;ctx.stroke();
+        const R=U.rnd(Math.round(z*17+5));ctx.strokeStyle=U.css(hmq_fog(hmq_g(col("foam"),g),dm,g),0.8);ctx.lineCap="round";
+        for(let k=0;k<2;k++){const X=xc(zm)+(R()-0.5)*2*W.rw*0.8,Z=z+R()*(z1-z),q=c.P(X,W.river,Z);if(q[2]<1)continue;const l=U.clamp(c.f*1.2/q[2],3,60);ctx.lineWidth=U.clamp(c.f*0.08/q[2],1,4);
+          ctx.beginPath();ctx.moveTo(q[0]-l,q[1]);ctx.quadraticCurveTo(q[0],q[1]-l*0.12,q[0]+l,q[1]);ctx.stroke();}}});}
+    z=z1;}
+  return D;}
+
+/* the place a camera sees, painted once: the sky, then the ground, the furthest first. o.grey: the years the bridge was left */
+function hmq_ground(ctx,c,o){o=o||{};const U=PK.u;c=hmq_camera(c);hmq_sky(ctx,c,o.grey);
+  ctx.fillStyle=U.css(hmq_fog(hmq_g(hmq_c("straw3"),o.grey),300,o.grey));ctx.fillRect(0,c.hor+8,1920,1080);
+  const D=hmq_terrain(c,o.grey);D.sort((a,b)=>b.d-a.d);for(const it of D)it.draw(ctx);}
+
+/* ---------------------------------------------------------------- the stone bases, one on each bank: a low platform of old stone at the
+   rim, and the two short posts the handrails go round. Drawn with the people, since someone may
+   stand behind one. Each face shows its courses of stone */
+// a base: its platform from the rim back (x0 to x1, metres from the gorge's middle line, past W.half), its height and half-width, and
+// its two posts (how far back, either side of the middle, how high)
+const HMQ_BASE={x0:0.2,x1:2.0,h:0.32,zh:1.2,post:0.7,pz:0.85,ph:1.0};
+function hmq_bases(c,g){const U=PK.u,D=[],W=HMQ_W,ink=PK.S.ink;
+  const box=(X0,X1,Y0,Y1,Z0,Z1,cc,rows)=>{const v=(X,Y,Z)=>[X,Y,Z],faces=[[v(X0,Y1,Z0),v(X1,Y1,Z0),v(X1,Y1,Z1),v(X0,Y1,Z1)],[v(X0,Y0,Z0),v(X1,Y0,Z0),v(X1,Y1,Z0),v(X0,Y1,Z0)],
+    [v(X0,Y0,Z1),v(X1,Y0,Z1),v(X1,Y1,Z1),v(X0,Y1,Z1)],[v(X0,Y0,Z0),v(X0,Y0,Z1),v(X0,Y1,Z1),v(X0,Y1,Z0)],[v(X1,Y0,Z0),v(X1,Y0,Z1),v(X1,Y1,Z1),v(X1,Y1,Z0)]];
+    const dm=c.d((X0+X1)/2,(Z0+Z1)/2);
+    return{d:dm,draw:ctx=>{const fd=faces.map((f,i)=>[i,c.d((f[0][0]+f[2][0])/2,(f[0][2]+f[2][2])/2)]).sort((a,b)=>b[1]-a[1]),lw=U.clamp(c.f*0.02/dm,0.8,3);   // the back faces first
+      for(const [i] of fd){const p=hmq_clip(c,faces[i]);if(p.length<3)continue;const fc=i===0?U.lt(cc,0.08):i<3?cc:U.dk(cc,0.1);
+        hmq_path(ctx,p);ctx.fillStyle=U.css(fc);ctx.fill();ctx.strokeStyle=U.css(ink);ctx.lineWidth=lw;ctx.lineJoin="round";ctx.stroke();
+        // a platform's top: flagstones, fitted
+        if(i===0&&rows&&Y1-Y0<0.6&&faces[0].every(q=>c.cs(q[0],q[1],q[2])[2]>c.N)){const R=U.rnd(Math.round(X0*7+Z0*3)+40),seg=[];
+          for(let gx=0;gx<4;gx++)for(let gz=0;gz<4;gz++){const ax=U.lerp(X0,X1,(gx+0.08+R()*0.1)/4),bx=U.lerp(X0,X1,(gx+0.92-R()*0.1)/4),az=U.lerp(Z0,Z1,(gz+0.08+R()*0.1)/4),bz=U.lerp(Z0,Z1,(gz+0.92-R()*0.1)/4);
+            seg.push([[ax,Y1,az],[bx,Y1,az+(R()-0.5)*0.08],[bx+(R()-0.5)*0.06,Y1,bz],[ax,Y1,bz+(R()-0.5)*0.08]]);}
+          ctx.strokeStyle=U.css(U.dk(fc,0.22));ctx.lineWidth=lw*0.55;for(const f of seg){const q=f.map(v=>c.P(v[0],v[1],v[2]));ctx.beginPath();q.forEach((v,k)=>k?ctx.lineTo(v[0],v[1]):ctx.moveTo(v[0],v[1]));ctx.closePath();ctx.stroke();}}
+        // its courses of stone: a line along each, and the joints between the stones, staggered
+        if(i>0&&rows&&p.length===4&&faces[i].every(q=>c.cs(q[0],q[1],q[2])[2]>c.N)){const P=faces[i].map(q=>c.P(q[0],q[1],q[2])),L=(a,b,f)=>[U.lerp(a[0],b[0],f),U.lerp(a[1],b[1],f)];
+          ctx.strokeStyle=U.css(U.dk(fc,0.32));ctx.lineWidth=lw*0.6;ctx.beginPath();
+          for(let r=1;r<rows;r++){const a=L(P[0],P[3],r/rows),b=L(P[1],P[2],r/rows);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);}
+          for(let r=0;r<rows;r++)for(let k=1;k<4;k++){const f=(k-(r%2?0.5:0))/3.5;if(f<=0.05||f>=0.95)continue;const a=L(L(P[0],P[1],f),L(P[3],P[2],f),r/rows),b=L(L(P[0],P[1],f),L(P[3],P[2],f),(r+1)/rows);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);}
+          ctx.stroke();}}}};};
+  const st=hmq_g(hmq_c("stone2"),g),st2=hmq_g(U.dk(hmq_c("stone2"),0.08),g);
+  for(const s of[-1,1]){const lo=(a,b)=>[Math.min(s*a,s*b),Math.max(s*a,s*b)];
+    const pf=box(...lo(W.half+HMQ_BASE.x0,W.half+HMQ_BASE.x1),0,HMQ_BASE.h,-HMQ_BASE.zh,HMQ_BASE.zh,st,2);pf.d+=0.4;D.push(pf);
+    for(const zz of[-HMQ_BASE.pz,HMQ_BASE.pz]){const xp=s*(W.half+HMQ_BASE.post),po=box(xp-0.18,xp+0.18,HMQ_BASE.h,HMQ_BASE.ph,zz-0.18,zz+0.18,st2,2);po.d=c.d(xp,zz)+0.1;D.push(po);}}
+  return D;}
+
+/* ---------------------------------------------------------------- the rope bridge, at z = 0, from rim to rim
+   o.age (0 new and gold; 1 left for years: sagging, grey, its floor gone in places), o.k (how much of it there is, as it is made: below
+   0.5 the floor cables only), o.weave (the middle still bare, from u = weave to 1 - weave: the floor cables only), o.grey. Each stretch
+   is two drawables at their depths: its far side and floor, and its near side, so whoever is on it walks between its handrails */
+const HMQ_B={x0:-HMQ_W.half-0.2,x1:HMQ_W.half+0.2,hr:0.95,wd:0.55};
+function hmq_deckAt(u,o){const U=PK.u,age=(o&&o.age)||0,sag=2.4+2.2*age+((o&&o.slack)||0),x=U.lerp(HMQ_B.x0,HMQ_B.x1,u),y=-sag*4*u*(1-u);
+  const f=(o&&o.fall)||0,ct=(o&&o.cut)||0;if(f<=0&&ct<=0)return[x,y];
+  const W=HMQ_W,span=HMQ_B.x1-HMQ_B.x0;let hx,hy;
+  if(f>0){const s=u<0.5?u/0.5:(1-u)/0.5,side=u<0.5?-1:1,len=span*0.52*s;                  // fallen in two: each half hangs down its own wall
+    hx=side*(W.half+0.2-Math.min(len,15.6)*0.45);hy=-Math.min(len,15.6);return[U.lerp(x,hx,U.sine(f)),U.lerp(y,hy,U.sine(f))];}
+  const len=(1-u)*span*1.04;                                                                 // cut loose at the near end: it hangs from the far base
+  hx=len<15.6?W.half+0.2-len*0.45:W.half-6.8-(len-15.6)*0.2;hy=len<15.6?-len:W.river+0.1;
+  return[U.lerp(x,hx,U.sine(ct)),U.lerp(y,hy,U.sine(ct))];}
+// the z of a point of the bridge: once it is down in the river, the water takes it downstream
+const hmq_deckZ=(u,o)=>{const ct=(o&&o.cut)||0;if(ct<=0)return 0;const len=(1-u)*(HMQ_B.x1-HMQ_B.x0)*1.04;return len<15.6?0:-(len-15.6)*0.7*PK.u.sine(ct);};
+// the bank the camera is on hides what is down in the gorge below its rim: from a camera on a bank, the bridge shows only above that
+// rim's line on the picture (none for a camera over the gorge)
+function hmq_rimClip(c){const W=HMQ_W,xm=hmq_xc(c.z),s=c.x<xm-W.half?-1:c.x>xm+W.half?1:0;if(!s)return null;
+  const zs=[-30,-15,0,15,30].filter(z=>c.d(s*W.half,z)>1.5);if(zs.length<2)return null;
+  const A=c.P(s*W.half,0,zs[0]),B=c.P(s*W.half,0,zs[zs.length-1]);if(Math.abs(B[0]-A[0])<1)return null;
+  const m=(B[1]-A[1])/(B[0]-A[0]),y=x=>A[1]+m*(x-A[0]);
+  return ctx=>{ctx.beginPath();ctx.moveTo(-3000,y(-3000));ctx.lineTo(5000,y(5000));ctx.lineTo(5000,-30000);ctx.lineTo(-3000,-30000);ctx.closePath();ctx.clip();};}
+function hmq_bridge(c,o){o=o||{};const U=PK.u,D=[],age=o.age||0,k=o.k==null?1:o.k,g=o.grey,n=40,ink=PK.S.ink;
+  const rope=hmq_g(U.mix(hmq_c("rope"),hmq_c("ropeOld"),age),g),dkc=U.dk(rope,0.28),R=U.rnd(7),nearZ=c.d(0,-1)<c.d(0,1)?-1:1;
+  const tl=(zs,u)=>zs>0?(o.tilt||0)*0.55*4*u*(1-u):0;
+  const rc=hmq_rimClip(c),cl=f=>rc?ctx=>{ctx.save();rc(ctx);f(ctx);ctx.restore();}:f;
+  for(let i=0;i<n;i++){const u0=i/n,u1=(i+1)/n,[x0,y0]=hmq_deckAt(u0,o),[x1,y1]=hmq_deckAt(u1,o),z0=hmq_deckZ(u0,o),z1=hmq_deckZ(u1,o),dm=c.d((x0+x1)/2,(z0+z1)/2);
+    if(o.fall>0&&i===n/2-1&&o.fall>0.02)continue;
+    const holes=age>0.4&&R()<age*0.35,lost=age>0.4&&R()<age*0.22,um=(u0+u1)/2,bare=o.weave!=null&&um>o.weave&&um<1-o.weave;
+    const side=(zs,ctx)=>{const zz=zs*HMQ_B.wd,rl=bare?1:k>0.5?U.clamp((k-0.5)/0.3,0,1):0;
+      // the handrail
+      if(rl>0){const a=c.P(x0,y0+HMQ_B.hr-0.15*age-tl(zs,u0),zz*1.05+z0),b=c.P(x1,y1+HMQ_B.hr-0.15*age-tl(zs,u1),zz*1.05+z1);
+        if(a[2]>c.N&&b[2]>c.N){const lw=U.clamp(c.f*0.07/a[2],1.4,9);ctx.save();ctx.globalAlpha*=rl;ctx.lineCap="round";ctx.strokeStyle=U.css(ink);ctx.lineWidth=lw+2.4;
+          ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();ctx.strokeStyle=U.css(rope);ctx.lineWidth=lw;ctx.stroke();ctx.restore();}}
+      // the side cords, from the handrail down to the floor: fewer where it has worn
+      if(!bare&&k>0.6&&!lost){for(let j=0;j<3;j++){const u=U.lerp(u0,u1,(j+0.5)/3),[xx,yy]=hmq_deckAt(u,o);if(age>0.3&&U.hash(Math.round(u*999),zs+3)<age*0.5)continue;
+        const zq=hmq_deckZ(u,o),a=c.P(xx,yy+HMQ_B.hr*U.clamp((k-0.6)/0.4,0,1)-0.15*age-tl(zs,u),zz+zq),b=c.P(xx+(j%2?0.25:-0.25),yy,zz*0.98+zq);if(a[2]<c.N||b[2]<c.N)continue;
+        ctx.strokeStyle=U.css(dkc);ctx.lineWidth=U.clamp(c.f*0.02/a[2],0.7,3);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}}};
+    // the floor: the floor cables as one woven floor, with sticks laid across. Seen from above, it goes with the far side, under whoever
+    // is on it; seen from below, with the near side, over their feet
+    const floor=ctx=>{if(k<=0)return;
+      if(bare||k<0.5){const zs=bare||k>=0.25?[-1,1]:[nearZ];for(const s of zs){const a=c.P(x0,y0,s*HMQ_B.wd+z0),b=c.P(x1,y1,s*HMQ_B.wd+z1);if(a[2]<c.N||b[2]<c.N)continue;const lw=U.clamp(c.f*0.09/a[2],1.6,10);
+        ctx.lineCap="round";ctx.strokeStyle=U.css(ink);ctx.lineWidth=lw+2.4;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();ctx.strokeStyle=U.css(rope);ctx.lineWidth=lw;ctx.stroke();}return;}
+      const f=[c.P(x0,y0,-HMQ_B.wd+z0),c.P(x1,y1,-HMQ_B.wd+z1),c.P(x1,y1,HMQ_B.wd+z1),c.P(x0,y0,HMQ_B.wd+z0)];if(f.some(q=>q[2]<c.N)||holes)return;
+      const fl=f.map(q=>[q[0],q[1]]),th=U.clamp(c.f*0.16/f[0][2],2,40);
+      ctx.fillStyle=U.css(dkc);ctx.beginPath();ctx.moveTo(fl[0][0],fl[0][1]);ctx.lineTo(fl[1][0],fl[1][1]);ctx.lineTo(fl[2][0],fl[2][1]);ctx.lineTo(fl[2][0],fl[2][1]+th);ctx.lineTo(fl[3][0],fl[3][1]+th);ctx.lineTo(fl[3][0],fl[3][1]);ctx.closePath();ctx.fill();
+      ctx.strokeStyle=U.css(ink);ctx.lineWidth=U.clamp(c.f*0.012/f[0][2],0.8,2.6);ctx.lineJoin="round";ctx.stroke();
+      hmq_path(ctx,fl);ctx.fillStyle=U.css(U.lt(rope,0.08));ctx.fill();ctx.stroke();
+      ctx.strokeStyle=U.css(dkc);ctx.lineWidth=U.clamp(c.f*0.012/f[0][2],0.6,2.2);ctx.beginPath();
+      for(let j=1;j<3;j++){const t=j/3,a=[U.lerp(fl[0][0],fl[1][0],t),U.lerp(fl[0][1],fl[1][1],t)],b=[U.lerp(fl[3][0],fl[2][0],t),U.lerp(fl[3][1],fl[2][1],t)];ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);}ctx.stroke();};
+    const under=c.y<Math.min(y0,y1)-0.1;
+    D.push({d:dm+0.6,draw:cl(ctx=>{side(-nearZ,ctx);if(!under)floor(ctx);})});
+    D.push({d:dm-0.6,draw:cl(ctx=>{if(under)floor(ctx);side(nearZ,ctx);})});}
+  return D;}
+
+/* ---------------------------------------------------------------- a cable's end tied round a post of a base: from the bridge's floor at
+   its head (side -1 the left bank, 1 the right; zs which side of the floor, -1 or 1) to the post, three turns round it, and its tail
+   on to points [X, Y, Z] beyond (whoever holds it while it's tied); k: how far it's tied (0: only laid there, 1: three turns) */
+function hmq_tied(c,side,zs,o){o=o||{};const U=PK.u,W=HMQ_W,ink=PK.S.ink,xp=side*(W.half+HMQ_BASE.post),zp=zs*HMQ_BASE.pz,x0=side>0?HMQ_B.x1:HMQ_B.x0,k=U.clamp(o.k==null?1:o.k,0,1),g=o.grey;
+  const col=hmq_g(U.mix(hmq_c("rope"),hmq_c("ropeOld"),o.age||0),g),dm=c.d(xp,zp),r=0.25,y0=HMQ_BASE.h+0.2,pitch=0.11,th0=side<0?0:Math.PI,T=2.5*2*Math.PI*k;
+  // a point of the turns: a helix round the post, from its side towards the gorge; two and a half turns end on its side towards the land
+  const at=th=>[xp+r*Math.cos(th),y0+pitch*(th-th0)/(2*Math.PI),zp+r*Math.sin(th)];
+  const run=(ctx,pts,lw)=>{const q=pts.map(p=>c.P(p[0],p[1],p[2]));if(q.length<2||q.some(v=>v[2]<c.N))return;ctx.lineCap="round";ctx.lineJoin="round";
+    ctx.beginPath();q.forEach((v,i)=>i?ctx.lineTo(v[0],v[1]):ctx.moveTo(v[0],v[1]));ctx.strokeStyle=U.css(ink);ctx.lineWidth=lw+2.4;ctx.stroke();ctx.strokeStyle=U.css(col);ctx.lineWidth=lw;ctx.stroke();};
+  const lw=()=>U.clamp(c.f*0.07/dm,1.4,9),e=at(th0+T),tail=[e].concat(o.tail||[]);
+  // the cable and its turns, just before the post; its tail, at its own depth, so whoever it passes in front of or behind is right
+  const D=[{d:dm-0.02,draw:ctx=>{const w=lw();
+    // in from the bridge's floor at its head, over the platform's front edge, along its top to the post
+    run(ctx,[[x0,0,zs*HMQ_B.wd],[x0+side*0.03,HMQ_BASE.h+0.03,zs*HMQ_B.wd],[xp-side*r*1.1,HMQ_BASE.h+0.05,zp-(zp-zs*HMQ_B.wd)*0.3],at(th0)],w);
+    // the turns: only their near half shows, the post hides the rest; each turn over the one before
+    const n=Math.max(1,Math.ceil(T/0.18));let cur=[];
+    for(let i=0;i<=n;i++){const p=at(th0+T*i/n);if(c.d(p[0],p[2])<dm-0.02)cur.push(p);else{if(cur.length>1)run(ctx,cur,w);cur=[];}}
+    if(cur.length>1)run(ctx,cur,w);}}];
+  if(tail.length>1){const m=tail[1];D.push({d:o.tailD!=null?o.tailD:Math.min(c.d(m[0],m[2]),dm-0.04),draw:ctx=>run(ctx,tail,lw()*0.9)});}
+  return D;}
+
+/* ---------------------------------------------------------------- the steel bridge of 1968, up the gorge at its first bend (z = 96): a deck
+   for trucks and people, a truss along each side. a: how far it is there (0 to 1); truck: how far a truck is across it (0 to 1), or
+   null. Three drawables at their depths, so whoever crosses on it walks between its sides: the far truss, the deck, the near truss */
+const HMQ_S={z:96,half:2.6,top:2.6,dy:0.3};
+const hmq_steelX=()=>{const xc=hmq_xc(HMQ_S.z);return[xc-HMQ_W.half-3,xc+HMQ_W.half+3];};
+function hmq_steel(c,g,a,truck){if(!(a>0.01))return[];const U=PK.u,S=HMQ_S,z=S.z,[x0,x1]=hmq_steelX(),xm=(x0+x1)/2,ink=PK.S.ink,near=c.z>z?1:-1;
+  const st=hmq_g(hmq_c("steel"),g),sd=hmq_g(hmq_c("steelDk"),g),dmF=c.d(xm,z-near*S.half),dmN=c.d(xm,z+near*S.half),dm=c.d(xm,z);
+  const fade=(ctx,dd,f)=>{ctx.save();ctx.globalAlpha*=a;f(hmq_fog(st,dd,g),hmq_fog(sd,dd,g));ctx.restore();};
+  const truss=(zz,dd)=>ctx=>fade(ctx,dd,(cs,cd)=>{const L=(p,q)=>{const A=c.P(...p),B=c.P(...q);if(A[2]<c.N||B[2]<c.N)return;ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);};
+    const lw=U.clamp(c.f*0.09/Math.max(dd,1),1.2,7),n=12,X=i=>U.lerp(x0+0.6,x1-0.6,i/n);ctx.lineCap="round";ctx.lineJoin="round";
+    for(const [w,col] of[[lw+2.2,ink],[lw,cs]]){ctx.strokeStyle=U.css(col);ctx.lineWidth=w;ctx.beginPath();L([x0+0.6,S.dy,zz],[x0+0.6+1.6,S.top,zz]);L([x0+0.6+1.6,S.top,zz],[x1-0.6-1.6,S.top,zz]);L([x1-0.6-1.6,S.top,zz],[x1-0.6,S.dy,zz]);
+      for(let i=1;i<n;i++){const xx=X(i);if(xx<x0+2.2||xx>x1-2.2)continue;L([xx,S.dy,zz],[xx,S.top,zz]);}
+      for(let i=1;i<n-1;i++){const xa=X(i),xb=X(i+1);if(xa<x0+2.2||xb>x1-2.2)continue;i<n/2?L([xa,S.top,zz],[xb,S.dy,zz]):L([xa,S.dy,zz],[xb,S.top,zz]);}ctx.stroke();}
+    // a handrail of the walkway, low along the inside
+    ctx.strokeStyle=U.css(cd);ctx.lineWidth=Math.max(1,lw*0.6);ctx.beginPath();L([x0+1,S.dy+1.0,zz-Math.sign(zz-z)*0.1],[x1-1,S.dy+1.0,zz-Math.sign(zz-z)*0.1]);ctx.stroke();});
+  const deck=ctx=>fade(ctx,dm,(cs,cd)=>{const zf=z-near*S.half,zn=z+near*S.half,top=[[x0,S.dy,zf],[x1,S.dy,zf],[x1,S.dy,zn],[x0,S.dy,zn]],side=[[x0,S.dy,zn],[x1,S.dy,zn],[x1,S.dy-0.6,zn],[x0,S.dy-0.6,zn]];
+    const lw=U.clamp(c.f*0.02/Math.max(dm,1),0.8,3);for(const [pts,col] of [[side,cd],[top,U.lt(cs,0.06)]]){const q=hmq_clip(c,pts);if(q.length<3)continue;hmq_path(ctx,q);ctx.fillStyle=U.css(col);ctx.fill();ctx.strokeStyle=U.css(ink);ctx.lineWidth=lw;ctx.stroke();}
+    // its abutments of concrete at the rims
+    for(const xe of[x0,x1]){const s=xe<xm?-1:1,q=hmq_clip(c,[[xe-s*0.2,S.dy-0.6,zn],[xe+s*1.4,S.dy-0.6,zn],[xe+s*1.4,-0.2,zn],[xe-s*0.2,-1.6,zn]]);if(q.length<3)continue;hmq_path(ctx,q);ctx.fillStyle=U.css(hmq_g([176,172,164],g));ctx.fill();ctx.strokeStyle=U.css(ink);ctx.lineWidth=lw;ctx.stroke();}
+    if(truck!=null){const tx=U.lerp(x0+1,x1-1,truck),gx=c.P(tx,S.dy,z),s=c.f*1/Math.max(gx[2],1),fw=c.P(tx+1,S.dy,z)[0]>gx[0]?1:-1,go=x1>x0?1:-1;PK.S.begin(ctx,{lw:U.clamp(s*0.04,0.8,2.6)});
+      const X=v=>gx[0]+fw*go*v*s,Y=v=>gx[1]-v*s;
+      PK.S.fill(ctx,q=>{q.moveTo(X(-2.6),Y(0.5));q.lineTo(X(1.2),Y(0.5));q.lineTo(X(1.2),Y(2.7));q.lineTo(X(-2.6),Y(2.7));q.closePath();},hmq_g([176,118,96],g),{});
+      PK.S.fill(ctx,q=>{q.moveTo(X(1.3),Y(0.5));q.lineTo(X(2.7),Y(0.5));q.lineTo(X(2.7),Y(1.5));q.lineTo(X(2.2),Y(2.2));q.lineTo(X(1.3),Y(2.2));q.closePath();},hmq_g([92,120,150],g),{});
+      PK.S.fill(ctx,q=>{q.moveTo(X(1.9),Y(1.5));q.lineTo(X(2.55),Y(1.5));q.lineTo(X(2.2),Y(2.0));q.lineTo(X(1.9),Y(2.0));q.closePath();},[214,226,232],{w:0.6});
+      for(const v of[-1.8,0.4,2.0])PK.S.fill(ctx,q=>U.ell(q,X(v),Y(0.45),s*0.42,s*0.42),[60,58,62],{});}});
+  return[{d:dmF+0.05,draw:truss(z-near*S.half,dmF)},{d:dm+0.4,draw:deck},{d:dmN-0.05,draw:truss(z+near*S.half,dmN)}];}
+// a point on the steel bridge's deck: u along it (0 its left end), s across (-1 to 1)
+const hmq_steelAt=(u,s)=>{const [x0,x1]=hmq_steelX();return[PK.u.lerp(x0+1,x1-1,u),HMQ_S.dy,HMQ_S.z+(s||0)*HMQ_S.half*0.7];};
 
 /* ---------------------------------------------------------------- the communities' people, in plain colours
    Men in pale wool jackets and dark trousers, a felt hat, often over a knitted cap; women in a felt hat, a full skirt and a
@@ -2842,22 +2994,318 @@ const HMQ_FOLK={
   geo:{key:"geo",name:"",skin:[232,198,170],hair:{style:"short",c:[96,80,70]},glasses:[60,50,50],top:{kind:"jacket",c:[128,132,110],inner:[230,226,214]},bottom:{kind:"trousers",c:[104,96,84]},shoe:[80,62,50]}
 };
 // a felt hat, or a knitted cap, over the head's picture: drawn after the person, from the joints PK.person gives back (J.hc, the
-// head's size J.p.head*J.u), and it nods with them. A braid, for a woman, falls behind the near shoulder
+// head's size J.p.head*J.u), and it nods with them
 function hmq_hat(ctx,P,J){if(!P.qhat||!J||!J.hc)return;const S=PK.S,U=PK.u,hh=J.p.head*J.u,[x,y]=J.hc,r=hh*0.5,lw={lw:U.clamp(hh*0.03,0.8,3.4)};S.begin(ctx,lw);
-  if(P.qcap&&P.qhat==="cap"||P.qhat==="cap")S.fill(ctx,c=>{c.moveTo(x-r*1.02,y-r*0.12);c.bezierCurveTo(x-r*1.0,y-r*1.25,x+r*1.0,y-r*1.25,x+r*1.02,y-r*0.12);c.lineTo(x+r*0.96,y+r*0.2);c.lineTo(x-r*0.96,y+r*0.2);c.closePath();},P.qcap||[178,90,80],{});
+  if(P.qhat==="cap")S.fill(ctx,c=>{c.moveTo(x-r*1.02,y-r*0.12);c.bezierCurveTo(x-r*1.0,y-r*1.25,x+r*1.0,y-r*1.25,x+r*1.02,y-r*0.12);c.lineTo(x+r*0.96,y+r*0.2);c.lineTo(x-r*0.96,y+r*0.2);c.closePath();},P.qcap||[178,90,80],{});
   if(P.qhat==="felt"){const hc=S.tone([96,80,70]),top=y-r*0.62;
     S.fill(ctx,c=>U.ell(c,x,top+r*0.02,r*1.42,r*0.26),U.dk(hc,0.06),{});
     S.fill(ctx,c=>{c.moveTo(x-r*0.8,top);c.bezierCurveTo(x-r*0.82,top-r*0.7,x+r*0.82,top-r*0.7,x+r*0.8,top);c.closePath();},hc,{});
     S.line(ctx,c=>{c.moveTo(x-r*0.78,top-r*0.12);c.quadraticCurveTo(x,top-r*0.04,x+r*0.78,top-r*0.12);},[150,74,70],1.4);}}
-const hmq_row=w=>typeof w==="string"?(HMQ_FOLK[w]||PK.CAST[w]):w;
+/* the communities' other people, whom nobody names: hmq_row(i) is the i-th, men and women in turn, the same every time. Like the
+   kit's PK.extra, they are the background: whoever is nearer may stand in front of them */
+const HMQ_MEMO={},HMQ_SKIN=[[176,124,92],[166,112,82],[180,128,94],[160,108,78],[174,120,88],[170,116,86],[164,112,80]],
+  HMQ_TOP=[[222,214,196],[150,70,74],[196,186,164],[84,104,136],[148,112,96],[120,86,104],[178,150,104],[96,120,112],[120,92,76],[170,134,90],[132,96,120],[104,128,96]],
+  HMQ_SKIRT=[[64,72,104],[132,70,76],[78,64,86],[52,64,90],[120,84,60],[96,60,70]],HMQ_TROU=[[60,60,72],[66,62,66],[80,74,72],[58,58,66],[72,66,64]],
+  HMQ_CAP=[[150,74,70],[96,104,140],[178,90,80],[92,120,104],[160,120,70]];
+const hmq_villager=i=>HMQ_MEMO[i]||(HMQ_MEMO[i]=(()=>{const w=i%2===1,k=Math.floor(i/2);
+  return{key:"extra"+(600+i),name:"",skin:HMQ_SKIN[(i*3+1)%7],hair:{style:w?"long":"short",c:[26+(i*7)%20,22+(i*5)%14,24+(i*3)%12]},
+    top:{kind:w||k%3===1?"sweater":"jacket",c:HMQ_TOP[(i*5+2)%12],inner:[214,204,184]},bottom:w?{kind:"skirt",c:HMQ_SKIRT[(k*5+1)%6]}:{kind:"trousers",c:HMQ_TROU[(k*3)%5]},
+    shoe:[54,42,38],qhat:!w&&k%3===2?"cap":"felt",qcap:HMQ_CAP[(i*2)%5],braid:w};})());
+const hmq_row=w=>typeof w==="number"?hmq_villager(w):typeof w==="string"?(HMQ_FOLK[w]||PK.CAST[w]):w;
 const hmq_person=(ctx,who,x,fl,h,pose,o)=>{const P=hmq_row(who),J=PK.person(ctx,P,x,fl,h,pose,o);if(!(o&&o.part==="lower"))hmq_hat(ctx,P,J);return J;};
-const hmq_walk=(ctx,who,t,w,o)=>{const P=hmq_row(who),J=PK.walk(ctx,P,t,w,o);hmq_hat(ctx,P,J);return J;};
-// a coil of cord, for a hand to hold, and cord twisted between two hands
-const hmq_coil=(c,h)=>{const S=PK.S,U=PK.u,[x,y]=h;S.begin(c,{lw:2});S.fill(c,cc=>U.ell(cc,x+4,y+22,26,16),hmq_c("rope"),{});S.fill(c,cc=>U.ell(cc,x+4,y+22,13,7),hmq_c("ropeDk"),{w:0.6});};
-// rain over the gorge (a: 0 to 1): short slanted strokes, in the place's grey, falling; wind leans them further
-function hmq_rain(ctx,tt,a,wind){if(a<=0.004)return;const U=PK.u,R=U.rnd(11),lean=6+(wind||0)*16;ctx.save();ctx.globalAlpha*=0.55*a;ctx.strokeStyle=U.css([120,130,146]);ctx.lineWidth=2;ctx.lineCap="round";ctx.beginPath();
-  for(let i=0;i<220;i++){const x0=R()*2100-90,sp=520+R()*200,y=((R()*1200+tt*sp)%1200)-60,x=x0+((tt*sp)%1200)*lean/40*0;ctx.moveTo(x,y);ctx.lineTo(x-lean,y+26);}ctx.stroke();ctx.restore();}
+// a coil of cord, for a hand to hold
+const hmq_coil=(c,h,deg,J)=>{const S=PK.S,U=PK.u,[x,y]=h,k=J&&J.p?J.p.head*J.u/44:1;S.begin(c,{lw:U.clamp(2*k,0.8,2.4)});S.fill(c,cc=>U.ell(cc,x+4*k,y+22*k,26*k,16*k),hmq_c("rope"),{});S.fill(c,cc=>U.ell(cc,x+4*k,y+22*k,13*k,7*k),hmq_c("ropeDk"),{w:0.6});};
+// kneeling to twist grass into cord, seen from the side: both hands together in front, the cord running from them to the ground
+const HMQ_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
 
+/* ---------------------------------------------------------------- someone of the story in the world, as a drawable
+   hmq_folk(c, who, X, Z, pose, o): standing (or kneeling, sitting) on the bank at (X, Z), or o.Y above the ground (on the bridge);
+   o.t the time (always), o.flip, o.opt PK.person's own options (a face, what a hand holds), o.after(ctx, J) drawn over them,
+   o.len a twisted cord's length (pose HMQ_TWIST). Their size is a standing adult's there (1.62 m), so everyone is of one picture */
+function hmq_folk(c,who,X,Z,pose,o){o=o||{};const U=PK.u,p=c.P(X,o.Y||0,Z),h=c.h(X,Z)*(o.k||1),dm=p[2];
+  return{d:dm-(o.front||0),key:o.key,draw:ctx=>{if(dm<c.N+0.3||h<6)return null;const far=U.clamp((dm-20)/140,0,0.7),twist=pose===HMQ_TWIST;
+    const J=hmq_person(ctx,who,p[0],p[1],h,pose||"stand",Object.assign({t:o.t,flip:o.flip||false,far,shade:h>60?1:0},twist?{holds:true}:{},o.opt||{}));
+    if(twist&&J&&J.hdN){const [hx,hy]=J.hdN,len=(o.len||1.0)*h*(o.flip?-1:1),tw=Math.sin((o.t||0)*5)*h*0.006;ctx.save();ctx.lineCap="round";
+      ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=Math.max(2,h*0.02);ctx.beginPath();ctx.moveTo(hx,hy+2);ctx.quadraticCurveTo(hx+len*0.4,p[1]-3+tw,hx+len,p[1]-1);ctx.stroke();
+      ctx.strokeStyle=U.css(hmq_c("rope"));ctx.lineWidth=Math.max(1,h*0.011);ctx.stroke();ctx.restore();}
+    if(o.after)o.after(ctx,J);return J;}};}
+// someone walking in the world along w.path, points [X, Y, Z] (on the bank Y is 0; hmq_deckAt gives the bridge's floor), between
+// w.t0 and w.t1: the stride grows out of w.before and dies into w.then, as PK.walk's does, and is as long as their legs, so their feet
+// don't slide; w.arms {aN, aF} keeps the arms that carry something; w.k a child's height. They face the way they go on the picture
+function hmq_walker(c,who,t,w,o){o=o||{};const U=PK.u,P=hmq_row(who),amp=PK.ampOf(P),pts=w.path,cum=[0];
+  for(let i=1;i<pts.length;i++)cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1],pts[i][2]-pts[i-1][2]));
+  const L=cum[cum.length-1],at=s=>{s=U.clamp(s,0,L);let i=1;while(i<pts.length-1&&cum[i]<s)i++;const a=pts[i-1],b=pts[i],k=U.clamp((s-cum[i-1])/((cum[i]-cum[i-1])||1),0,1);
+    return[U.lerp(a[0],b[0],k),U.lerp(a[1],b[1],k),U.lerp(a[2],b[2],k)];};
+  const q=PK.walkAt(t,{x0:0,x1:L,t0:w.t0,t1:w.t1,floor:0,h:1.62*(w.k||1),amp}),[X,Y,Z]=at(q.x),p=c.P(X,Y,Z),h=c.h(X,Z)*(w.k||1);
+  // which way they face: the way the path goes on the picture here (where it goes nearly straight in or out, the way it goes overall)
+  const sx=s=>{const r=at(s);return c.P(r[0],r[1],r[2])[0];},s0=Math.min(q.x,L-0.4),dx=sx(s0+0.4)-sx(s0),left=w.flip!=null?w.flip:Math.abs(dx)>1?dx<0:sx(L)<sx(0);
+  const arm=pp=>w.arms?Object.assign({},pp,{aN:w.arms.aN||pp.aN,aF:w.arms.aF||pp.aF}):pp,st=arm(PK.POSES.stand),pose=PK.poseMix(q.u<0.5?(w.before||st):arm(typeof w.then==="string"?PK.POSES[w.then]:(w.then||st)),arm(PK.poseWalk(q.step,1,amp)),q.go);
+  return{d:p[2]-(o.front||0),key:o.key,draw:ctx=>{if(p[2]<c.N+0.3||h<6)return null;
+    const J=hmq_person(ctx,who,p[0],p[1],h,pose,Object.assign({t,flip:left,life:1-0.8*q.go,far:U.clamp((p[2]-20)/140,0,0.7),shade:h>60?1:0},o.opt||{}));
+    if(o.after)o.after(ctx,J);return J;}};}
+
+/* ---------------------------------------------------------------- a frame of the gorge: over its place (hmq_ground, painted once), the
+   stone bases, the rope bridge, the steel bridge and the people, the furthest first.
+   o: the bridge's own (age, k, weave), grey, steel (how far the steel bridge is there, 1 by default), truck. items: drawables */
+function hmq_scene(ctx,c,o,items){o=o||{};c=hmq_camera(c);
+  const D=hmq_bases(c,o.grey).concat(...(o.bridges||[{age:o.age,k:o.k,weave:o.weave,tilt:o.tilt,fall:o.fall,cut:o.cut,slack:o.slack}]).map(b=>hmq_bridge(c,Object.assign({grey:o.grey},b))),hmq_steel(c,o.grey,o.steel==null?1:o.steel,o.truck),(items||[]).filter(Boolean).map(f=>typeof f==="function"?f(c):f));
+  D.sort((a,b)=>b.d-a.d);const out={};for(const it of D){const J=it.draw(ctx);if(it.key)out[it.key]=J;}return out;}
+
+/* ---------------------------------------------------------------- rain, over the whole frame, leaning with the wind (a: how much) */
+function hmq_rain(ctx,tt,a,wind){if(a<=0.004)return;const U=PK.u,R=U.rnd(11),lean=6+(wind||0)*16;ctx.save();ctx.globalAlpha*=0.55*a;ctx.strokeStyle=U.css([120,130,146]);ctx.lineWidth=2;ctx.lineCap="round";ctx.beginPath();
+  for(let i=0;i<220;i++){const x0=R()*2100-90,sp=520+R()*200,y=((R()*1200+tt*sp)%1200)-60,x=x0;ctx.moveTo(x,y);ctx.lineTo(x-lean,y+26);}ctx.stroke();ctx.restore();}
+
+/* ===== Day one at Quehue: every cord checked in, and three ropes braided into each cable =====
+   Day one of the three (the Ministry of Culture's study, 2015, pages 177 to 180): each family has promised one cord of twisted grass,
+   forty arm spans long, and on both banks the community's authorities check one from each family, as the coils are laid out in
+   rows; families still come over the hill with theirs, and women and children twist more cord on the grass. Then men stretch and
+   twist the cords into ropes, and braid three ropes into each cable of the floor: one man braids from one end, with hands and feet,
+   and when he tires another takes his place, while many hands hold the cable along its length. The author chose the check-in as the
+   film's tile (19 November 2026).
+   It is drawn in the gorge's world and ink line (hm_gorge.js): in metres, the people kit's people at their true size where they
+   stand. Away from the gorge, x is simply to the right and z ahead of the camera. What doesn't move is painted once, as a place
+   (AG_PLACES.hmCheck, hmBraid): the sky, the ground, its tufts of ichu, the walls of fieldstone and the coils already checked in.
+   The people are drawn over it every frame, the furthest first (hmv_scene), with the coils that come in as the shot goes on, and the
+   cable as it grows. Nobody drawn is a likeness of anyone. Drawn first for the author's review (18 November 2026), then made the
+   film's own here, from Wellbeing is in the work's home (ww_home.js). */
+const HMV=(()=>{
+const U=PK.u,col=hmq_c,INK=()=>PK.S.ink;
+const C={adobe:[186,142,106],plaster:[214,190,156],door:[96,66,50],thatch:[202,170,104],thatch2:[170,138,80],
+  tin:[168,172,176],tin2:[140,146,152],stone:[178,168,152],stone2:[150,140,126],yard:[204,176,132],path:[196,168,124],wood:[132,96,68]};
+const inPoly=(x,z,p)=>{let a=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const [xi,zi]=p[i],[xj,zj]=p[j];if((zi>z)!==(zj>z)&&x<(xj-xi)*(z-zi)/(zj-zi)+xi)a=!a;}return a;};
+const ink=(cc,dm,k)=>U.mix(INK(),cc,U.clamp(dm/(k||260),0,0.6));
+const lwAt=(c,dm,k,a,b)=>U.clamp(c.f*(k||0.02)/Math.max(dm,0.5),a||0.8,b||3.2);
+
+/* the ground: one sweep of ichu from the horizon to our feet, the far slopes folding down to it, yards and paths of bare earth,
+   and grass spread in the sun to dry (a patch's straw: its straws, each a short stroke lying on the ground) */
+function ground(ctx,c,o){const g=o.grey,hz=c.hor;
+  const gr=ctx.createLinearGradient(0,hz,0,1080);gr.addColorStop(0,U.css(hmq_fog(hmq_g(col("straw3"),g),300,g)));gr.addColorStop(0.25,U.css(hmq_fog(hmq_g(U.mix(col("straw2"),col("straw3"),0.5),g),60,g)));
+  gr.addColorStop(1,U.css(hmq_g(col("straw2"),g)));ctx.fillStyle=gr;ctx.fillRect(0,hz+6,1920,1080-hz);
+  const S=PK.S;S.begin(ctx,{lw:1.6,far:0.5});
+  for(const [a,b,hh] of o.folds||[]){S.poly(ctx,[[a,hz+30,1],[a+(b-a)*0.18,hz-hh*0.5],[a+(b-a)*0.5,hz-hh],[a+(b-a)*0.82,hz-hh*0.55],[b,hz+30,1]],hmq_fog(hmq_g(col("straw"),g),180,g),{exact:true,ten:0.6});}
+  const P=(o.patches||[]).map(p=>({p,dm:c.d(p.pts.reduce((s,q)=>s+q[0],0)/p.pts.length,p.pts.reduce((s,q)=>s+q[1],0)/p.pts.length)})).sort((a,b)=>b.dm-a.dm);
+  for(const {p,dm} of P){const q=hmq_clip(c,p.pts.map(([x,z])=>[x,0,z]));if(q.length<3)continue;const cc=hmq_fog(hmq_g(p.c||C.yard,g),dm,g);
+    hmq_path(ctx,q);ctx.fillStyle=U.css(cc);ctx.fill();ctx.strokeStyle=U.css(U.mix(cc,col("straw2"),0.5));ctx.lineWidth=lwAt(c,dm,0.05,1,6);ctx.lineJoin="round";ctx.stroke();
+    if(p.straw){const xs=p.pts.map(q2=>q2[0]),zs=p.pts.map(q2=>q2[1]),x0=Math.min(...xs),x1=Math.max(...xs),z0=Math.min(...zs),z1=Math.max(...zs),R=U.rnd(17);ctx.lineCap="round";
+      for(let k=0;k<p.straw;k++){const X=U.lerp(x0,x1,R()),Z=U.lerp(z0,z1,R()),a=(R()-0.5)*0.7+(p.dir||0),v=R();if(!inPoly(X,Z,p.pts))continue;const L=(p.L||0.3)*(0.7+R()*0.6),A=c.P(X,0.02,Z),B=c.P(X+Math.cos(a)*L,0.02,Z+Math.sin(a)*L);if(A[2]<c.N||B[2]<c.N)continue;
+        ctx.strokeStyle=U.css(v<0.55?U.mix(cc,[252,240,196],0.3+v*0.6):U.dk(cc,0.06+(v-0.55)*0.3));ctx.lineWidth=lwAt(c,A[2],p.w||0.012,0.6,3);ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.quadraticCurveTo((A[0]+B[0])/2,(A[1]+B[1])/2-lwAt(c,A[2],0.01,0.3,3),B[0],B[1]);ctx.stroke();}}}}
+// tufts of ichu on a grid round the camera, none on bare ground: the near ones on a finer grid, larger
+function tufts(c,o){const D=[],bare=(o.patches||[]).map(p=>p.pts).concat(o.bare||[]);
+  for(const [st,R,d0,d1,dens,salt] of [[0.6,8,1.2,7,(o.tuftDensity||0.42)*0.55,11],[1.4,o.tuftR||46,7,1e9,o.tuftDensity||0.42,0]]){
+  const cx=Math.round(c.x/st),cz=Math.round(c.z/st),n=Math.round(R/st);
+  for(let i=-n;i<=n;i++)for(let j=-n;j<=n;j++){const gx=cx+i,gz=cz+j,hv=U.hash(gx*7919+gz*104729+salt,3);if(hv>dens)continue;
+    const X=(gx+U.hash(gx+salt,gz*3+1))*st,Z=(gz+U.hash(gz+salt,gx*5+2))*st,dm=c.d(X,Z);if(dm<d0||dm>=d1)continue;
+    if(bare.some(p=>inPoly(X,Z,p)))continue;const q=c.P(X,0,Z);if(q[0]<-60||q[0]>1980||q[1]<c.hor||q[1]>1140)continue;
+    const s=U.clamp(c.f*0.42/dm,0.5,26);if(s<1.2)continue;
+    D.push({d:dm,draw:ctx=>{const cc=hmq_fog(hmq_g(U.mix(col("ichu"),col("straw2"),hv*0.8),o.grey),dm,o.grey);ctx.strokeStyle=U.css(cc);ctx.lineWidth=Math.max(0.8,s*0.13);ctx.lineCap="round";ctx.beginPath();
+      for(let k=0;k<6;k++){const an=-0.8+k*0.32+(hv-0.2)*0.3;ctx.moveTo(q[0],q[1]);ctx.quadraticCurveTo(q[0]+Math.sin(an)*s*0.45,q[1]-s*0.8,q[0]+Math.sin(an)*s*1.05,q[1]-Math.cos(an)*s*1.4);}ctx.stroke();
+      if(s>7){ctx.strokeStyle=U.css(ink(cc,dm,120),0.5);ctx.lineWidth=Math.max(0.7,s*0.05);ctx.beginPath();for(let k=0;k<3;k++){const an=-0.5+k*0.5;ctx.moveTo(q[0],q[1]);ctx.quadraticCurveTo(q[0]+Math.sin(an)*s*0.4,q[1]-s*0.7,q[0]+Math.sin(an)*s*0.95,q[1]-Math.cos(an)*s*1.3);}ctx.stroke();}}});}}
+  return D;}
+
+/* a face in the world, filled and inked; seen: whether its outer side (normal n) faces the camera */
+function face(ctx,c,pts,cc,dm,o){o=o||{};const q=hmq_clip(c,pts);if(q.length<3||!hmq_onScreen(q))return null;hmq_path(ctx,q);ctx.fillStyle=U.css(cc);ctx.fill();
+  ctx.strokeStyle=U.css(ink(cc,dm));ctx.lineWidth=o.lw||lwAt(c,dm,0.022,0.8,3.2);ctx.lineJoin="round";ctx.stroke();return q;}
+const seen=(c,P0,n)=>(c.x-P0[0])*n[0]+(c.y-P0[1])*n[1]+(c.z-P0[2])*n[2]>0;
+// lines across a face, in the world: courses of adobe, the ribs of a tin roof, the straws of a thatch
+function lines(ctx,c,segs,cc,w){ctx.strokeStyle=U.css(cc);ctx.lineWidth=w;ctx.lineCap="round";ctx.beginPath();
+  for(const [a,b] of segs){const A=c.cs(...a),B=c.cs(...b);if(A[2]<c.N||B[2]<c.N)continue;const pa=c.P(...a),pb=c.P(...b);ctx.moveTo(pa[0],pa[1]);ctx.lineTo(pb[0],pb[1]);}ctx.stroke();}
+
+/* a house of adobe under a roof of ichu thatch (or, newer, of tin), its ridge along x; doors and windows in its front wall (towards -z) */
+function house(c,o){const {x0,x1,z0,z1}=o,h=o.h||2.3,rg=o.ridge||4.0,ov=o.over||0.45,zm=(z0+z1)/2,g=o.grey,dm=c.d((x0+x1)/2,zm);
+  const wall=hmq_g(o.wall||C.adobe,g),wall2=U.dk(wall,0.1),roofC=hmq_g(o.tin?C.tin:C.thatch,g),roofD=hmq_g(o.tin?C.tin2:C.thatch2,g);
+  return{d:dm,draw:ctx=>{const F=cc=>hmq_fog(cc,dm,g),lw=lwAt(c,dm,0.022,0.8,3.2);
+    // the back first, then the ends, the front, the roof
+    if(c.z>z1)face(ctx,c,[[x0,0,z1],[x1,0,z1],[x1,h,z1],[x0,h,z1]],F(wall2),dm);
+    for(const [xe,s] of [[x0,-1],[x1,1]]){if((c.x-xe)*s<=0)continue;
+      const q=face(ctx,c,[[xe,0,z0],[xe,0,z1],[xe,h,z1],[xe,rg,zm],[xe,h,z0]],F(wall2),dm);
+      if(q&&!o.plain){const segs=[];for(let y=0.42;y<h;y+=0.42)segs.push([[xe,y,z0+0.05],[xe,y,z1-0.05]]);lines(ctx,c,segs,U.css(U.dk(F(wall2),0.12),0.7),Math.max(0.6,lw*0.45));}}
+    if(c.z<z0){face(ctx,c,[[x0,0,z0],[x1,0,z0],[x1,h,z0],[x0,h,z0]],F(wall),dm);
+      // courses of adobe, faint, and a plinth of earth darker at its foot
+      if(!o.plain){const segs=[];for(let y=0.42;y<h-0.1;y+=0.42)segs.push([[x0+0.05,y,z0-0.005],[x1-0.05,y,z0-0.005]]);ctx.save();lines(ctx,c,segs,U.css(U.dk(F(wall),0.12)),Math.max(0.6,lw*0.45));
+        const vs=[];for(let y=0,r=0;y<h-0.42;y+=0.42,r++)for(let x=x0+(r%2?0.35:0.7);x<x1-0.2;x+=0.75)vs.push([[x,y,z0-0.005],[x,y+0.42,z0-0.005]]);ctx.globalAlpha*=0.55;lines(ctx,c,vs,U.css(U.dk(F(wall),0.12)),Math.max(0.5,lw*0.35));ctx.restore();
+        face(ctx,c,[[x0,0,z0-0.01],[x1,0,z0-0.01],[x1,0.32,z0-0.01],[x0,0.32,z0-0.01]],F(U.dk(wall,0.14)),dm,{lw:Math.max(0.6,lw*0.6)});}
+      for(const d of o.doors||[]){face(ctx,c,[[d.x-d.w/2-0.08,0,z0-0.02],[d.x+d.w/2+0.08,0,z0-0.02],[d.x+d.w/2+0.08,d.h+0.08,z0-0.02],[d.x-d.w/2-0.08,d.h+0.08,z0-0.02]],F(hmq_g(C.wood,g)),dm);
+        face(ctx,c,[[d.x-d.w/2,0,z0-0.03],[d.x+d.w/2,0,z0-0.03],[d.x+d.w/2,d.h,z0-0.03],[d.x-d.w/2,d.h,z0-0.03]],F(hmq_g(d.open?[64,50,46]:C.door,g)),dm);
+        if(!d.open)lines(ctx,c,[[[d.x,0.05,z0-0.035],[d.x,d.h-0.05,z0-0.035]]],U.css(U.dk(F(hmq_g(C.door,g)),0.25)),Math.max(0.6,lw*0.5));}
+      for(const w of o.windows||[]){face(ctx,c,[[w.x-w.s/2-0.07,w.y-0.07,z0-0.02],[w.x+w.s/2+0.07,w.y-0.07,z0-0.02],[w.x+w.s/2+0.07,w.y+w.s+0.07,z0-0.02],[w.x-w.s/2-0.07,w.y+w.s+0.07,z0-0.02]],F(hmq_g(C.wood,g)),dm);
+        face(ctx,c,[[w.x-w.s/2,w.y,z0-0.03],[w.x+w.s/2,w.y,z0-0.03],[w.x+w.s/2,w.y+w.s,z0-0.03],[w.x-w.s/2,w.y+w.s,z0-0.03]],F(hmq_g([70,60,60],g)),dm);}}
+    // the roof: the back slope (only from above), then the front one, over the walls' tops; thick at its eaves
+    const ey=h-0.25,front=[[x0-ov,ey,z0-ov],[x1+ov,ey,z0-ov],[x1+ov,rg+0.12,zm],[x0-ov,rg+0.12,zm]],back=[[x0-ov,ey,z1+ov],[x1+ov,ey,z1+ov],[x1+ov,rg+0.12,zm],[x0-ov,rg+0.12,zm]];
+    const nF=[0,(zm-(z0-ov)),-(rg+0.12-ey)],nB=[0,(zm-(z1+ov))*-1,(rg+0.12-ey)];
+    const slope=(pts,n,isFront)=>{if(!seen(c,pts[0],n))return;const q=face(ctx,c,pts,F(isFront?roofC:U.dk(roofC,0.06)),dm);if(!q)return;
+      const zA=pts[0][2],segs=[];
+      if(o.tin){for(let x=x0-ov+0.25;x<x1+ov;x+=0.32)segs.push([[x,ey+0.01,zA],[x,rg+0.11,zm]]);lines(ctx,c,segs,U.css(U.dk(F(roofC),0.16)),Math.max(0.6,lw*0.5));}
+      else{const R=U.rnd(Math.round(x0*31+zA*7));for(let x=x0-ov+0.12;x<x1+ov-0.05;x+=0.16+R()*0.1){const t=0.25+R()*0.6;segs.push([[x,ey+0.01,zA],[x+(R()-0.5)*0.1,U.lerp(ey,rg,t),U.lerp(zA,zm,t)]]);}
+        lines(ctx,c,segs,U.css(U.dk(F(roofC),0.2),0.8),Math.max(0.6,lw*0.42));
+        // the eave's cut edge, thick straw
+        const e0=c.P(x0-ov,ey,zA),e1=c.P(x1+ov,ey,zA),th=U.clamp(c.f*0.22/Math.max(1,c.d(x0,zA)),2,40);if(e0[2]>c.N&&e1[2]>c.N){ctx.fillStyle=U.css(F(roofD));ctx.beginPath();ctx.moveTo(e0[0],e0[1]);ctx.lineTo(e1[0],e1[1]);ctx.lineTo(e1[0]+th*0.1,e1[1]+th);ctx.lineTo(e0[0]-th*0.1,e0[1]+th);ctx.closePath();ctx.fill();ctx.strokeStyle=U.css(ink(F(roofD),dm));ctx.lineWidth=lw;ctx.stroke();
+          ctx.strokeStyle=U.css(U.dk(F(roofD),0.22));ctx.lineWidth=Math.max(0.6,lw*0.5);ctx.beginPath();for(let k=1;k<40;k++){const t=k/40,x=U.lerp(e0[0],e1[0],t),y=U.lerp(e0[1],e1[1],t);ctx.moveTo(x,y+th*0.2);ctx.lineTo(x+(k%3-1)*0.8,y+th*0.95);}ctx.stroke();}}};
+    slope(back,nB,false);slope(front,nF,true);
+    lines(ctx,c,[[[x0-ov,rg+0.12,zm],[x1+ov,rg+0.12,zm]]],U.css(ink(F(roofD),dm)),lw*1.6);}};}
+
+/* a wall of fieldstone, knee to hip high, along a line of points [x, z] */
+function pirca(c,pts,o){o=o||{};const D=[],h=o.h||1.0,t=0.45,g=o.grey;
+  for(let i=0;i<pts.length-1;i++){const [ax,az]=pts[i],[bx,bz]=pts[i+1],L=Math.hypot(bx-ax,bz-az),n=Math.max(1,Math.round(L/2.5));
+    for(let k=0;k<n;k++){const u0=k/n,u1=(k+1)/n,x0=U.lerp(ax,bx,u0),z0=U.lerp(az,bz,u0),x1=U.lerp(ax,bx,u1),z1=U.lerp(az,bz,u1),nx=-(bz-az)/L*t/2,nz=(bx-ax)/L*t/2,dm=c.d((x0+x1)/2,(z0+z1)/2);
+      D.push({d:dm,draw:ctx=>{const cc=hmq_fog(hmq_g(C.stone,g),dm,g),cd=hmq_fog(hmq_g(C.stone2,g),dm,g);
+        const A=[x0+nx,z0+nz],B=[x1+nx,z1+nz],Cc=[x1-nx,z1-nz],Dd=[x0-nx,z0-nz];
+        for(const [p,q] of [[A,B],[B,Cc],[Cc,Dd],[Dd,A]]){const mx=(p[0]+q[0])/2,mz=(p[1]+q[1])/2,nn=[(q[1]-p[1]),0,-(q[0]-p[0])];
+          const cxm=(x0+x1)/2,czm=(z0+z1)/2;if((mx-cxm)*nn[0]+(mz-czm)*nn[2]<0){nn[0]*=-1;nn[2]*=-1;}if(!seen(c,[mx,h/2,mz],nn))continue;
+          const fq=face(ctx,c,[[p[0],0,p[1]],[q[0],0,q[1]],[q[0],h,q[1]],[p[0],h,p[1]]],cd,dm);
+          if(fq){const R=U.rnd(Math.round(mx*13+mz*7));ctx.strokeStyle=U.css(ink(cd,dm,180),0.55);ctx.lineWidth=lwAt(c,dm,0.012,0.5,1.8);ctx.beginPath();
+            for(let r=0;r<3;r++){const y=h*(r+0.5)/3;for(let s=0;s<4;s++){const u=(s+R()*0.6+(r%2)*0.4)/4,X=U.lerp(p[0],q[0],u),Z=U.lerp(p[1],q[1],u),P2=c.P(X,y,Z);if(P2[2]<c.N)continue;const rr=U.clamp(c.f*0.16/P2[2],1,30);
+              ctx.moveTo(P2[0]+rr,P2[1]);ctx.ellipse(P2[0],P2[1],rr,rr*0.62,0,0,Math.PI*2);}}ctx.stroke();}}
+        face(ctx,c,[[A[0],h,A[1]],[B[0],h,B[1]],[Cc[0],h,Cc[1]],[Dd[0],h,Dd[1]]],cc,dm);}});}}
+  return D;}
+
+/* coils of finished cord on the ground, stacked: golden, a hole in the middle, the turns of the cord drawn round it */
+function coils(c,X,Z,n,o){o=o||{};const r=o.r||0.34,th=0.11,dm=c.d(X,Z),g=o.grey;
+  return{d:dm-(o.front||0),draw:ctx=>{const cc=hmq_fog(hmq_g(U.mix(col("rope"),[230,204,130],o.light||0),g),dm,g),cd=hmq_fog(hmq_g(col("ropeDk"),g),dm,g);
+    for(let i=0;i<n;i++){const y=i*th+th,ox=(i%2?0.04:-0.03)+(o.dx||0)*i,P0=c.P(X+ox,y,Z),Px=c.P(X+ox+r,y,Z),Pz=c.P(X+ox,y,Z-r),Pz2=c.P(X+ox,y,Z+r);if(P0[2]<c.N+0.2)return;
+      const rx=Math.abs(Px[0]-P0[0]),ry=Math.max(1.5,Math.abs(Pz[1]-Pz2[1])/2),side=Math.max(1.5,c.f*th/P0[2]),lw=lwAt(c,dm,0.012,0.7,2.6);
+      ctx.fillStyle=U.css(U.dk(cc,0.12));ctx.beginPath();ctx.ellipse(P0[0],P0[1]+side*0.5,rx,ry,0,0,Math.PI);ctx.lineTo(P0[0]-rx,P0[1]-side*0.5);ctx.ellipse(P0[0],P0[1]-side*0.5,rx,ry,0,Math.PI,0,true);ctx.closePath();ctx.fill();
+      ctx.strokeStyle=U.css(ink(cc,dm));ctx.lineWidth=lw;ctx.stroke();
+      ctx.fillStyle=U.css(cc);ctx.beginPath();ctx.ellipse(P0[0],P0[1]-side*0.5,rx,ry,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+      ctx.strokeStyle=U.css(U.dk(cc,0.2));ctx.lineWidth=Math.max(0.6,lw*0.55);ctx.beginPath();for(const k of[0.78,0.6]){ctx.moveTo(P0[0]+rx*k,P0[1]-side*0.5);ctx.ellipse(P0[0],P0[1]-side*0.5,rx*k,ry*k,0,0,Math.PI*2);}ctx.stroke();
+      ctx.fillStyle=U.css(cd);ctx.beginPath();ctx.ellipse(P0[0],P0[1]-side*0.5,rx*0.42,ry*0.42,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle=U.css(ink(cc,dm));ctx.lineWidth=lw;ctx.stroke();}}};}
+
+/* a sheaf of cut grass, tied, standing or leaning (lean, in degrees, to screen right) */
+function sheaf(c,X,Z,o){o=o||{};const dm=c.d(X,Z),g=o.grey,ht=o.ht||1.0;
+  return{d:dm,draw:ctx=>{const p=c.P(X,0,Z);if(p[2]<c.N+0.3)return;const s=c.f/p[2],H=ht*s,W=0.36*s,lean=(o.lean||0)*Math.PI/180,cc=hmq_fog(hmq_g(U.mix(col("ichu"),col("straw"),0.35),g),dm,g);
+    ctx.save();ctx.translate(p[0],p[1]);ctx.rotate(lean);const lw=lwAt(c,dm,0.016,0.7,2.6);
+    ctx.fillStyle=U.css(cc);ctx.beginPath();ctx.moveTo(-W*0.42,0);ctx.quadraticCurveTo(-W*0.18,-H*0.45,-W*0.5,-H);ctx.quadraticCurveTo(0,-H*1.08,W*0.5,-H);ctx.quadraticCurveTo(W*0.18,-H*0.45,W*0.42,0);ctx.closePath();ctx.fill();
+    ctx.strokeStyle=U.css(ink(cc,dm));ctx.lineWidth=lw;ctx.stroke();
+    ctx.strokeStyle=U.css(U.dk(cc,0.22));ctx.lineWidth=Math.max(0.5,lw*0.45);ctx.beginPath();for(let k=-3;k<=3;k++){ctx.moveTo(k*W*0.1,-H*0.05);ctx.quadraticCurveTo(k*W*0.04,-H*0.45,k*W*0.15,-H*0.97);}ctx.stroke();
+    ctx.fillStyle=U.css(hmq_fog(hmq_g(col("ropeDk"),g),dm,g));ctx.beginPath();U.rrect(ctx,-W*0.24,-H*0.5,W*0.48,H*0.06,1);ctx.fill();ctx.strokeStyle=U.css(ink(cc,dm));ctx.lineWidth=lw*0.8;ctx.stroke();ctx.restore();}};}
+
+// an irregular patch of ground, from a centre and radii round it
+const blob=(cx,cz,rx,rz,seed)=>{const p=[];for(let i=0;i<22;i++){const a=i/22*Math.PI*2,k=0.86+0.22*U.hash(i*13+seed,seed);p.push([cx+Math.cos(a)*rx*k,cz+Math.sin(a)*rz*k]);}return p;};
+
+/* the place, painted once: the sky, the ground, and everything on it that doesn't move, the furthest first */
+function paint(ctx,c,things,o){hmq_sky(ctx,c,o.grey);ground(ctx,c,o);const D=tufts(c,o).concat(...things.map(f=>{const r=f(c);return Array.isArray(r)?r:[r];}));
+  D.sort((a,b)=>b.d-a.d);for(const it of D)it.draw(ctx);}
+
+/* a rope or a cable in the world: through points [x, y, z], ink round its colour; w: its thickness in metres. A thick one shows its
+   twist, short strokes across it */
+function rope(c,pts,o){o=o||{};const w=o.w||0.05,g=o.grey,D=[];
+  for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],dm=c.d((a[0]+b[0])/2,(a[2]+b[2])/2);
+    D.push({d:dm-(o.front||0),draw:ctx=>{const A=c.P(...a),B=c.P(...b);if(A[2]<c.N||B[2]<c.N)return;const lw=Math.max(1.2,c.f*w/((A[2]+B[2])/2)),cc=hmq_fog(hmq_g(o.c||col("rope"),g),dm,g);
+      ctx.lineCap="round";ctx.strokeStyle=U.css(ink(cc,dm,200));ctx.lineWidth=lw+2.2;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();ctx.strokeStyle=U.css(cc);ctx.lineWidth=lw;ctx.stroke();
+      if(lw>5&&o.braid!==false){ctx.strokeStyle=U.css(U.dk(cc,0.22));ctx.lineWidth=Math.max(0.8,lw*0.12);ctx.beginPath();const L=Math.hypot(B[0]-A[0],B[1]-A[1])||1,nx=(B[0]-A[0])/L,ny=(B[1]-A[1])/L,st=lw*0.9;
+        for(let s=st*0.5;s<L;s+=st){const x=A[0]+nx*s,y=A[1]+ny*s;ctx.moveTo(x-ny*lw*0.42-nx*lw*0.2,y+nx*lw*0.42-ny*lw*0.2);ctx.lineTo(x+ny*lw*0.42+nx*lw*0.2,y-nx*lw*0.42+ny*lw*0.2);}ctx.stroke();}}});}
+  return D;}
+// a cable that sags between the points where hands hold it: [x, z] of each hand, the height they hold it at
+function sagging(pts,hy,sag){const out=[];for(let i=0;i<pts.length-1;i++){const [ax,az]=pts[i],[bx,bz]=pts[i+1];for(let k=0;k<6;k++){const t=k/6;out.push([U.lerp(ax,bx,t),hy-sag*4*t*(1-t),U.lerp(az,bz,t)]);}}
+  const l=pts[pts.length-1];out.push([l[0],hy,l[1]]);return out;}
+return{C,paint,house,pirca,coils,sheaf,blob,rope,sagging,inPoly};})();
+
+/* ---------------------------------------------------------------- the people of the bank, and what they hold */
+// a girl beside her mother, with her family's cord
+const HMV_KID2={key:"k2",name:"",kid:true,skin:[168,114,84],hair:{style:"long",c:[28,24,26]},top:{kind:"sweater",c:[96,124,110]},bottom:{kind:"skirt",c:[128,72,80]},shoe:[54,42,38],qhat:"felt",braid:true};
+// a boy beside his grandfather, or his father
+const HMV_BOY={key:"k4",name:"",kid:true,skin:[166,112,82],hair:{style:"short",c:[28,24,26]},top:{kind:"sweater",c:[150,96,72]},bottom:{kind:"trousers",c:[66,62,66]},shoe:[54,42,38],qhat:"cap",qcap:[178,90,80]};
+// holding out a coil: both hands under it, in front
+const HMV_GIVE={lean:4,head:8,aN:[30,70,"grip"],aF:[26,76,"grip"],lN:[-2,-2],lF:[5,4]};
+// kneeling at the rows to check a cord: a hand on the coil in front of the knees, the other on the knee
+const HMV_CHECK={mode:"kneel",lean:26,head:16,aN:[34,58,"grip"],aF:[14,40],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+// bent over a cable at the knee's height, both hands on it; holding a cable at the hip, both hands on it
+const HMV_BRAID={lean:38,head:12,aN:[26,30,"grip"],aF:[18,36,"grip"],lN:[-12,-8],lF:[16,10]};
+const HMV_HOLD={lean:8,head:4,aN:[12,46,"grip"],aF:[8,52,"grip"],lN:[-4,-2],lF:[8,4]};
+// a coil of cord held in both hands: drawn at the person's own size (m: pixels in a metre where they are); at(h), where given, places
+// its middle from the near hand's point h (so a cord handed over stays where it is)
+const hmv_coilH=(m,at)=>(c,h)=>{const S=PK.S,U=PK.u,[x,y]=at?at(h):h,rx=0.22*m,ry=0.1*m,th=0.08*m;S.begin(c,{lw:U.clamp(m*0.008,1,3)});
+  S.fill(c,cc=>{cc.ellipse(x,y+th*0.5,rx,ry,0,0,Math.PI);cc.lineTo(x-rx,y-th*0.5);cc.ellipse(x,y-th*0.5,rx,ry,0,Math.PI,0,true);cc.closePath();},U.dk(hmq_c("rope"),0.1),{});
+  S.fill(c,cc=>U.ell(cc,x,y-th*0.5,rx,ry),hmq_c("rope"),{});
+  S.line(c,cc=>{for(const k of[0.8,0.62]){cc.moveTo(x+rx*k,y-th*0.5);cc.ellipse(x,y-th*0.5,rx*k,ry*k,0,0,Math.PI*2);}},U.dk(hmq_c("rope"),0.2),U.clamp(m*0.004,0.7,1.6));
+  S.fill(c,cc=>U.ell(cc,x,y-th*0.5,rx*0.42,ry*0.42),hmq_c("ropeDk"),{w:0.7});};
+/* someone of the bank, as a drawable: hmq_folk with a coil in their hands drawn at their size (o.coil: over the near hand; "under":
+   under it, the hand on its rim; o.coilAt places it, as hmv_coilH's at); o.k a child's height */
+const hmv_folk=(c,who,X,Z,pose,o)=>{o=Object.assign({},o||{});o.opt=Object.assign({},o.opt||{});const m=c.f/c.d(X,Z)*(o.k||1);
+  if(o.coil){o.opt[o.coil==="under"?"under":"hold"]=hmv_coilH(m,o.coilAt);o.opt.holds=true;}return hmq_folk(c,who,X,Z,pose,o);};
+// whoever walks in with their family's cord: along a path of [X, Z], a coil held in front, then stands (o.then) where it ends
+const hmv_bringer=(c,who,tt,path,t0,t1,o)=>{o=o||{};const m=c.f/c.d(path[path.length-1][0],path[path.length-1][1])*(o.k||1);
+  return hmq_walker(c,who,tt,{path:path.map(([X,Z])=>[X,0,Z]),t0,t1,then:o.then||"armful",arms:{aN:PK.POSES.armful.aN,aF:PK.POSES.armful.aF},k:o.k},
+    {key:o.key,opt:Object.assign({hold:hmv_coilH(m),holds:true},o.face||{expr:"neutral",gaze:[1,0]})});};
+// a scene of the bank over its place, the furthest first: items are drawables, or functions of the camera that give one
+function hmv_scene(ctx,c,items){const D=items.filter(Boolean).map(f=>typeof f==="function"?f(c):f).flat();D.sort((a,b)=>b.d-a.d);
+  const out={};for(const it of D){const J=it.draw(ctx);if(it.key)out[it.key]=J;}return out;}
+
+/* ---------------------------------------------------------------- day one: every cord checked in
+   The bank above the gorge, from among the families: the rows of coils already checked in, laid out on bare earth; the path down
+   from the hill, with families still coming along it; on the grass, women twisting the last of their cord */
+const HMV_CK=hmq_camera({x:0,y:1.6,z:0,yaw:0,f:1000,hor:380,peakH:140,hillH:60});
+const HMV_ROWS=[];for(let r=0;r<5;r++)for(let k=0;k<7;k++)HMV_ROWS.push([-4.4+r*1.05+(k%2)*0.12,4.4+k*1.25+(r%2)*0.4,k%3===1?2:1,((r*7+k)%5)*0.05]);
+const HMV_CKG={patches:[{pts:[[1.6,13.4],[3.2,13.6],[-20,44],[-23,44]],c:HMV.C.path},{pts:HMV.blob(-2.0,8.6,4.0,4.9,7),c:[206,184,140]}],folds:[[-100,900,60],[1000,2040,80]],tuftDensity:0.5};
+AG_PLACES.hmCheck=x=>HMV.paint(x,HMV_CK,HMV_ROWS.map(([X,Z,n,l])=>c=>HMV.coils(c,X,Z,n,{light:l})),HMV_CKG);
+/* the people of day one at time tt (t0: the shot's start; give: when the woman hands her cord over). The man who checks stands at
+   the end of the rows; a woman holds out her family's cord, her daughter beside her, and he checks it in her hands; she lets it go
+   to him, he holds it at his chest to look it over, then kneels and lays it down in front of him, a hand left on it as he looks up;
+   others wait their turn; more come down the path from the hill; two women twist the last of their cord. The cord is in one place
+   at a time and drawn one way: its middle at HMV_HP while it is in both their hands, then carried on from there in his, and laid
+   at HMV_LAY */
+const HMV_KP=[1.1,4.9],HMV_WP=[1.9,4.72],HMV_HP=[1.5,1.0,4.8],HMV_LAY=[1.52,0.11,5.0];
+// standing to take a coil from someone's hands; holding it at the chest to look it over, the head bent to it; kneeling to lay it down
+const HMV_TAKE={lean:6,head:8,aN:[30,64,"grip"],aF:[26,70,"grip"],lN:[-2,-2],lF:[5,4]};
+const HMV_LOOKS={lean:2,head:20,aN:[14,88,"grip"],aF:[20,94,"grip"],lN:[-2,-2],lF:[4,3]};
+const HMV_PUT=Object.assign({},HMV_CHECK,{lean:50,head:6}),HMV_REST={mode:"kneel",lean:46,head:-12,aN:[40,30,"grip"],aF:[10,30],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+function hmv_check(x,tt,t0,give){const c=HMV_CK,U=PK.u,m=c.f/c.d(HMV_HP[0],HMV_HP[2]),hp=c.P(...HMV_HP),lay=c.P(...HMV_LAY),rx=0.22*m,ry=0.1*m,th=0.08*m;
+  const io=(a,d)=>U.sine(U.clamp((tt-a)/d,0,1)),down=give+2.3;
+  // where a hand holds the cord whose middle is C: on its rim at the side s (-1 its left, 1 its right), the near hand at the front
+  const rim=(C,s,near)=>near?[C[0]+s*rx*0.62,C[1]+th*0.5+ry*0.35]:[C[0]+s*rx*0.96,C[1]-ry*0.15];
+  // his hands: onto her cord, then it is his, held at his chest; he kneels and lays it down; then the far hand on his knee, the near
+  // hand left on the cord as he looks up at her
+  const on=io(t0+0.6,0.5)*(1-io(give,0.6)),up=io(give,0.6),kn=io(down,0.6),put=io(down+0.2,0.6);
+  const kp=PK.poseMix(PK.poseMix(PK.poseMix("listen",HMV_TAKE,io(t0+0.6,0.5)),HMV_LOOKS,up),PK.poseMix(HMV_PUT,HMV_REST,io(down+1.2,0.6)),kn);
+  const kr=on>0.001?{reachN:rim(hp,-1,true),reachF:rim(hp,-1,false),reachNk:on,reachFk:on}:put>0.001?{reachN:[lay[0]-rx*0.75,lay[1]-th*0.5],reachF:[lay[0]-rx*0.98,lay[1]-th*0.2],reachNk:put,reachFk:put*(1-io(down+1.2,0.6))}:{};
+  // the cord's middle: where it is in both their hands, then where his near hand holds its rim, then where it is laid
+  const at=h=>{const H=[h[0]+rx*0.62,h[1]-th*0.5-ry*0.35],k=up,q=io(down+0.2,0.6);return[U.lerp(U.lerp(hp[0],H[0],k),lay[0],q),U.lerp(U.lerp(hp[1],H[1],k),lay[1],q)];};
+  const wr=1-io(give,0.5);
+  return hmv_scene(x,c,[
+    // he and the cord she brought, under his near hand from the first (laid, it stays where it is)
+    hmv_folk(c,"keeper",HMV_KP[0],HMV_KP[1],kp,{t:tt,flip:false,key:"keeper",coil:"under",coilAt:at,opt:Object.assign({holds:true},kr,PK.face(tt,{expr:"neutral",gaze:[1,0.5]},[[give-1.2,"look",1.6,[1,0.1]],[give+0.8,"nod"],[down+1.4,"smile",2.4]]))}),
+    hmv_folk(c,"w4",HMV_WP[0],HMV_WP[1],PK.poseMix("stand",HMV_GIVE,wr),{t:tt+1,flip:true,opt:Object.assign({holds:wr>0.5,reachN:rim(hp,1,true),reachF:rim(hp,1,false),reachNk:wr,reachFk:wr},PK.face(tt,{expr:"smile",gaze:[1,0.4]},[[t0+1.4,"look",2.0,[1,0.1]],[give+0.5,"nod"]]))}),
+    hmv_folk(c,HMV_KID2,2.85,4.15,"stand",{t:tt+2,flip:true,k:0.7,opt:PK.face(tt,{expr:"smile",gaze:[1,0.2]},[[t0+3,"look",2.2,[1,0.5]]])}),
+    // others wait their turn with their cord
+    hmv_folk(c,"m1",4.7,7.6,"armful",{t:tt+3,flip:true,coil:true,opt:PK.face(tt,{expr:"neutral",gaze:[1,0.2]},[[t0+4.2,"look",2.2,[1,0.4]],[t0+11,"nod"]])}),
+    hmv_folk(c,"w1",5.4,10.8,"armful",{t:tt+4,flip:true,coil:true,opt:PK.face(tt,{expr:"smile",gaze:[1,0.1]},[[t0+7,"look",2.4,[1,0.3]]])}),
+    // families still coming down the path from the hill, each with its cord
+    hmv_bringer(c,"m5",tt,[[-6.2,24],[-1.0,17.5],[1.6,14.2]],t0-6,t0+7,{then:"armful"}),
+    hmv_bringer(c,"w5",tt,[[-10.6,30],[-4.6,22],[-1.4,18.2]],t0-2,t0+9,{then:"armful"}),
+    hmv_bringer(c,4,tt,[[-15.4,36],[-8.6,27]],t0+1,t0+11),hmv_bringer(c,5,tt,[[-21,43],[-13.4,33]],t0+3,t0+14),
+    hmv_folk(c,6,-19,40,"stand",{t:tt+5,flip:false}),
+    // on the grass, two women twist the last of their cord
+    hmv_folk(c,"w2",-6.6,9.5,HMQ_TWIST,{t:tt+6,flip:false,len:0.9}),hmv_folk(c,7,-8.6,11.8,HMQ_TWIST,{t:tt+7,flip:true,len:0.9})]);}
+
+/* ---------------------------------------------------------------- day one, from midday: three ropes braided into each cable
+   On the bank, the cable grows from where three ropes meet: the man who braids it bends over that point, with hands and feet, and
+   three men hold the three ropes; along the cable, many hands hold it up; coils still to be braided lie near, and a woman twists more
+   cord. When he tires, he stands and steps back, and the man who waits beside him kneels in his place */
+const HMV_BR=hmq_camera({x:0,y:1.45,z:0,yaw:0,f:1000,hor:420,peakH:130,hillH:56});
+const HMV_BP=[-1.0,6.5],HMV_BHY=0.66,HMV_BLINE=(()=>{const L=[HMV_BP];for(let k=1;k<8;k++)L.push([HMV_BP[0]+2.6*k,HMV_BP[1]+2.4*k]);return L;})();
+const HMV_BENDS=[[-3.5,5.7],[-3.4,6.6],[-3.1,7.6]];
+AG_PLACES.hmBraid=x=>HMV.paint(x,HMV_BR,[c=>HMV.coils(c,1.7,3.9,3),c=>HMV.coils(c,2.5,4.3,2,{light:0.2}),c=>HMV.coils(c,1.2,4.6,1,{light:0.1})],{folds:[[-120,820,62],[980,2040,84]],tuftDensity:0.5});
+function hmv_braid(x,tt,t0,tire,o){o=o||{};const c=HMV_BR,U=PK.u,B=HMV_BP,hy=HMV_BHY,ts=tire+0.5;
+  const it=[HMV.rope(c,HMV.sagging(HMV_BLINE,hy,0.1),{w:0.12})];
+  for(const e of HMV_BENDS)it.push(HMV.rope(c,[[B[0],hy,B[1]],[U.lerp(B[0],e[0],0.5),hy+0.03,U.lerp(B[1],e[1],0.5)],[e[0]+0.3,hy+0.05,e[1]]],{w:0.05,braid:false}));
+  it.push(hmv_folk(c,"m1",HMV_BENDS[0][0]-0.15,HMV_BENDS[0][1],HMV_HOLD,{t:tt,flip:false}),hmv_folk(c,"m5",HMV_BENDS[1][0]-0.15,HMV_BENDS[1][1],HMV_HOLD,{t:tt+1,flip:false}),
+    hmv_folk(c,8,HMV_BENDS[2][0]-0.15,HMV_BENDS[2][1],HMV_HOLD,{t:tt+2,flip:false}));
+  // the one who braids, until he tires: he straightens, then steps back and aside
+  const up=U.sine(U.clamp((tt-ts)/0.5,0,1));
+  if(tt<ts+0.6)it.push(hmv_folk(c,"keeper",B[0]+0.55,B[1]+0.2,PK.poseMix(HMV_BRAID,"stand",up),{t:tt,flip:true,opt:PK.face(tt,{expr:"neutral",gaze:[1,0.8]},[[ts+0.2,"look",2.6,[1,0.1]]])}));
+  else it.push(hmq_walker(c,"keeper",tt,{path:[[B[0]+0.55,0,B[1]+0.2],[B[0]+1.7,0,B[1]-1.6]],t0:ts+0.6,t1:ts+2.6,then:"stand"},{opt:PK.face(tt,{expr:"smile",gaze:[1,0.2]},[[ts+2.8,"nod"]])}));
+  // the one who takes his place: standing ready beside him, then he steps in and bends to the cable
+  const sw=ts+0.9,dn=U.sine(U.clamp((tt-sw-1.0)/0.5,0,1));
+  if(tt<sw)it.push(hmv_folk(c,"m4",B[0]+1.3,B[1]-0.9,"stand",{t:tt+3,flip:true,opt:PK.face(tt,{expr:"smile",gaze:[1,0.3]},[[t0+2,"look",2.2,[1,0.7]],[ts,"nod"]])}));
+  else if(tt<sw+1.0)it.push(hmq_walker(c,"m4",tt,{path:[[B[0]+1.3,0,B[1]-0.9],[B[0]+0.55,0,B[1]+0.2]],t0:sw,t1:sw+1.0,then:"stand"},{opt:{expr:"neutral",gaze:[1,0.6]}}));
+  else it.push(hmv_folk(c,"m4",B[0]+0.55,B[1]+0.2,PK.poseMix("stand",HMV_BRAID,dn),{t:tt+3,flip:true,opt:{expr:"neutral",gaze:[1,0.8]}}));
+  // many hands along the cable
+  HMV_BLINE.slice(1,7).forEach((p,k)=>it.push(hmv_folk(c,[9,"m2",10,"m3",11,12][k],p[0]+0.2,p[1]+0.45,HMV_HOLD,{t:tt+4+k,flip:true})));
+  // a woman twists more cord beside the coils still to be braided
+  it.push(hmv_folk(c,"w5",2.95,3.9,HMQ_TWIST,{t:tt+11,flip:true,len:0.8,opt:PK.face(tt,{expr:"neutral",gaze:[1,0.7]},[[t0+2.8,"look",2.0,[1,0.2]],[t0+7.6,"smile",2.4],[t0+12.4,"look",2.2,[1,0.3]],[t0+16.8,"nod"]])}));
+  // o.kids: the way passed on by doing it, a daughter twisting beside her mother, a son holding the cable beside his father
+  if(o.kids){it.push(hmv_folk(c,HMV_KID2,3.55,3.5,HMQ_TWIST,{t:tt+12,flip:true,k:0.7,len:0.5,opt:PK.face(tt,{expr:"think",gaze:[1,0.6]},[[t0+2.6,"look",2.0,[1,0.2]],[t0+4.8,"smile",2.4]])}));
+    const p=HMV_BLINE[2];it.push(hmv_folk(c,HMV_BOY,p[0]-0.25,p[1]+0.05,HMV_HOLD,{t:tt+13,flip:true,k:0.72,opt:PK.face(tt,{expr:"smile",gaze:[1,0.3]},[[t0+3.4,"look",2.2,[1,0.1]]])}));}
+  return hmv_scene(x,c,it);}
 
 /* ===== How, more than who: the university, February and March 2027 (imagined) =====
    The places are the people kit's (films/people-first/shared/src/places.js): the team's room, Helena's corner, the campus and a
@@ -2934,106 +3382,238 @@ function hm_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=
   if(W2)r.who2=PK.person(x,W2,ix,F,H,HM_SITI,Object.assign({t:tt+1,flip:true,part:"upper",expr:o.ie,gaze:o.ig||[1,0.3],reachN:[1150,ty-6],reachF:[1128,ty-2]},o.iface||{}));
   return r;}
 
+/* ---------------------------------------------------------------- the boards, as a graphic recording on a sheet pinned over the board
+   In the board's own px (1250 by 524): drawn already when it first shows (PK.sk.drawn), and whoever explains adds the last words, a
+   tick, a ring or a cross as the voice says them. PK.pace makes a row wait until they can have walked to it, so the last words go on
+   from left to right, and nothing is drawn back along words. A board in the team's room (Jun's and Helena's) is the same sheet,
+   seen small. */
+// a drawing in a ring with words after it: (x, y) the words' baseline at their left, the ring before them
+const hm_item=(c,x,y,ic,s,o)=>{const D=PK.sk;o=o||{};const r=o.r||22;D.disc(c,x-r-14,y-11,r,{fill:"white",col:"ink",w:3});D.icon(c,ic,x-r-14,y-11,r*0.64,{fill:o.fill||"blue"});
+  if(s)D.text(c,s,x,y,{size:o.size||34,w:o.w,col:o.col});};
+// 1. what one company's study of its own teams found (Carmen): a balance, who is on a team against how it works, tipped to how; and the
+// top of the study's list, three cards. She writes how many teams, then less and more under the pans, and ticks each card as it is named
+const HM_TOP=[["shield","Psychological safety"],["hand","Keeping your word"],["people","Clear on who does what"]];
+const hmA_y=i=>196+i*94;
+function hm_sheetA(c){const D=PK.sk;
+  D.head(c,"How a team works",{col:"blue",ref:["One company's study",["of its own teams",{size:30}]],rsize:30,rx:1030,ry:84});
+  D.scale(c,330,250,360,{l:"who",r:"how",tilt:-0.7,size:34});
+  D.caps(c,"Top of its list",640,170,{col:"blue",size:30});
+  HM_TOP.forEach(([ic,s],i)=>D.card(c,640,hmA_y(i),{icon:ic,ifill:"blue",lines:[s],fill:"paper",w:470,h:78,size:34}));}
+const hm_boardA=(sc,w)=>{const tick=(i,at)=>({k:"tick",x:1150,y:hmA_y(i)+39,r:16,col:"blue",at,d:0.3});return[PK.sk.drawn(hm_sheetA),
+  {s:"180 teams",x:110,y:178,size:44,w:700,col:"blue",at:w("google","studied",-0.3),d:0.8},
+  {s:"less",x:152,y:384,size:42,w:700,col:"amber",align:"center",at:w("quote","less about who",-0.2),d:0.5},
+  {s:"more",x:508,y:436,size:42,w:700,col:"green",align:"center",at:w("quote","more about how",-0.2),d:0.5},
+  tick(0,w("safe","psychological",-0.3)),tick(1,w("word","keeping",-0.3)),tick(2,w("word","clear",-0.3))];};
+// 2. two numbers for one day (Jun, at the team's board): census day on its calendar; the old report and the new model one over the
+// other, each with who made it; and the two as bars, side by side. He rings the day and writes each one's number as the voice says
+// it, all at the sheet's left, so he never stands in front of Sam's desk
+function hm_sheetB(c){const D=PK.sk;
+  D.head(c,"Census day, last year",{col:"blue",ref:["Wednesday 24 February",["Jun's check",{size:30}]],rsize:30,rx:1010,ry:84});
+  D.icon(c,"cal",96,186,26,{fill:"blue"});D.text(c,"counted for the government",158,198,{size:32,col:"mut"});
+  [[236,"Old report","doc","tomas"],[356,"New model","db","jun"]].forEach(([y,t,ic,who])=>{D.box(c,56,y,660,108,{fill:"paper",col:"ink",w:3,r:14});
+    D.disc(c,108,y+54,34,{fill:"white",col:"ink",w:3});D.icon(c,ic,108,y+54,21,{fill:"orange"});D.text(c,t,160,y+66,{size:34,w:700,col:"blue"});
+    D.face(c,who,656,y+50,30,{});D.line(c,[[396,y+90],[600,y+90]],{col:"mut",w:2.5,dash:[8,10],seed:y});});
+  D.panel(c,760,140,434,332,{fill:"paper",line:"ink",title:"Side by side",col:"blue"},(cc,x,y)=>{
+    D.bars(cc,x+70,y+16,290,170,[{v:18412,col:"orange",label:"report"},{v:19549,col:"orange",label:"model"}],{max:20000});});}
+const hm_boardB=(sc,w)=>[PK.sk.drawn(hm_sheetB),
+  {k:"ring",x:96,y:186,rx:44,ry:40,col:"blue",at:w("check","census day",-0.2),d:0.4},
+  {s:"18,412",x:400,y:318,size:56,w:700,col:"orange",at:w("differ","old report",-0.2),d:0.8},
+  {s:"19,549",x:400,y:438,size:56,w:700,col:"orange",at:w("differ","new model",-0.2),d:0.8}];
+// 3. conflict in a team (Carmen): a pile of studies; about the person, two turned on each other, the work going down; about the work,
+// two over the same page, the work holding up. She writes how many studies, what each does, and the condition
+function hm_sheetC(c){const D=PK.sk;
+  D.head(c,"Conflict in a team",{col:"blue"});
+  for(let i=0;i<3;i++)D.icon(c,"doc",104+i*16,196-i*10,24,{fill:"white"});
+  D.panel(c,56,236,520,236,{fill:"amber",line:"amber",title:"About the person",col:"amber",dash:[10,8]},(cc,x,y)=>{
+    D.face(cc,PK.extra(2),x+70,y+52,32,{});D.icon(cc,"bolt",x+150,y+48,22,{fill:"amber"});D.face(cc,PK.extra(7),x+230,y+52,32,{});
+    D.trend(cc,x+320,y+6,160,84,[[0,0.85],[0.35,0.7],[0.7,0.35],[1,0.1]],{col:"amber"});});
+  D.panel(c,620,132,574,340,{fill:"green",line:"green",title:"About the work",col:"green"},(cc,x,y)=>{
+    D.face(cc,PK.extra(4),x+70,y+56,34,{});D.icon(cc,"doc",x+160,y+50,24,{fill:"green"});D.face(cc,PK.extra(11),x+250,y+56,34,{});
+    D.trend(cc,x+350,y+8,180,92,[[0,0.4],[0.4,0.55],[0.7,0.6],[1,0.8]],{col:"green"});});}
+const hm_boardC=(sc,w)=>[PK.sk.drawn(hm_sheetC),
+  {s:"116 studies",x:184,y:200,size:44,w:700,col:"blue",at:w("study","studies",-0.3),d:0.9},
+  {s:"harms the work",x:84,y:450,size:42,w:700,col:"amber",at:w("study","about the person",-0.2),d:1.0},
+  {s:"need not",x:650,y:378,size:48,w:700,col:"green",at:w("study","Disagreement",-0.2),d:0.7},
+  {s:"if it stays about the work",x:650,y:450,size:38,w:700,at:w("study","if it stays",-0.2),d:1.2}];
+// 4. three things, each of us (Helena, at the team's board): the three as cards joined by arrows, and the eight of the team at the
+// foot; she ticks each card as the voice says it
+const HM_3=[["eye","What you saw"],["heart",["What you feel","and need"]],["speech","What you ask"]];
+const hmD_x=i=>56+i*384;
+function hm_sheetD(c){const D=PK.sk;
+  D.head(c,"Three things",{col:"blue",ref:["Wednesday 24 February",["Jun first, then Tomás",{size:30}]],rsize:30,rx:1010,ry:84});
+  HM_3.forEach(([ic,s],i)=>{const x=hmD_x(i);D.box(c,x,142,334,192,{fill:"blue",col:"blue",w:3,r:16});D.disc(c,x+167,196,36,{fill:"white",col:"ink",w:3});D.icon(c,ic,x+167,196,22,{fill:"blue"});
+    if(Array.isArray(s))D.lines(c,s,x+167,268,{size:34,w:700,align:"center",lh:1.12});else D.text(c,s,x+167,290,{size:34,w:700,align:"center"});
+    if(i<2)D.arrow(c,[x+340,238],[x+378,238],{col:"blue",w:4,head:12});});
+  D.faces(c,110,418,["helena","sam","jun","marta","noor","yusuf","erin","tomas"],{r:26,gap:74});
+  D.caps(c,"A turn each",700,428,{col:"mut",size:30});}
+const hm_boardD=(sc,w)=>{const tick=(i,at)=>({k:"tick",x:hmD_x(i)+296,y:172,r:16,col:"green",at,d:0.3});return[PK.sk.drawn(hm_sheetD),
+  tick(0,w("ask","what you saw",-0.2)),tick(1,w("ask","feel",-0.4)),tick(2,w("ask","what you ask",-0.2))];};
+// 5. where the three things come from (Carmen): the three in rings; what it rests on, three cards, the last struck out. She writes what
+// the rings are, ticks practice and small studies, strikes out large trials, and writes the last words at the foot
+function hm_sheetE(c){const D=PK.sk;
+  D.head(c,"Non-violent communication",{col:"blue",ref:["Marshall Rosenberg",["a psychologist",{size:30}]],rsize:30,rx:1040,ry:84});
+  [["eye","saw"],["heart","feel, need"],["speech","ask"]].forEach(([ic,s],i)=>{const cx=110+i*150;D.disc(c,cx,236,44,{fill:"white",col:"ink",w:3});D.icon(c,ic,cx,236,27,{fill:"blue"});
+    D.text(c,s,cx,320,{size:30,align:"center",col:"mut"});});
+  D.caps(c,"It rests on",560,170,{col:"blue",size:30});
+  D.card(c,560,190,{icon:"hand",ifill:"green",lines:["practice"],fill:"paper",w:400,h:70,size:34});
+  D.card(c,560,272,{icon:"doc",ifill:"green",lines:["small studies"],fill:"paper",w:400,h:70,size:34});
+  D.card(c,560,354,{icon:"bars",ifill:"amber",lines:["large trials"],fill:"paper",col:"amber",dash:[10,8],w:400,h:70,size:34});}
+const hm_boardE=(sc,w)=>[PK.sk.drawn(hm_sheetE),
+  {s:"the three things",x:70,y:400,size:40,w:700,col:"blue",at:w("named","communication",-0.9),d:1.0},
+  {k:"tick",x:1000,y:225,r:16,col:"green",at:w("practice","practice",-0.3),d:0.3},
+  {k:"tick",x:1000,y:307,r:16,col:"green",at:w("practice","small studies",-0.3),d:0.3},
+  {k:"line",x:600,y:394,x1:800,y1:382,col:"amber",at:w("practice","large trials",-0.3),d:0.4},
+  {s:"feelings are there anyway",x:560,y:466,size:38,w:700,col:"green",at:w("practice","feelings",-0.3),d:1.2}];
+// 6. what each number counts (Helena writes as Marta says it): the old report and the new model, what each counts, and the two as
+// rounds, one inside the other; she writes each number, the people on short courses, and that both are right
+function hm_sheetF(c){const D=PK.sk;
+  D.head(c,"What each number counts",{col:"blue",ref:["Census day",["last year",{size:30}]],rsize:30,rx:1060,ry:84});
+  D.panel(c,56,140,410,332,{fill:"paper",line:"ink",title:"Old report",col:"blue"},(cc,x,y)=>{D.icon(cc,"doc",x+56,y+38,24,{fill:"orange"});D.text(cc,"students",x+96,y+50,{size:38,w:700,col:"blue"});
+    hm_item(cc,x+84,y+186,"book","a degree's units",{size:30,r:18});hm_item(cc,x+84,y+240,"building","to the government",{size:30,r:18});});
+  D.panel(c,494,140,410,332,{fill:"paper",line:"ink",title:"New model",col:"blue"},(cc,x,y)=>{D.icon(cc,"db",x+56,y+38,24,{fill:"orange"});D.text(cc,"learners",x+96,y+50,{size:38,w:700,col:"blue"});
+    D.text(cc,"students, and",x+40,y+186,{size:30,col:"mut"});});
+  D.disc(c,1060,262,108,{fill:"blue",col:"ink",w:3});D.disc(c,1036,280,74,{fill:[176,204,236],col:"ink",w:3});
+  D.text(c,"students",1036,290,{size:30,w:700,align:"center"});}
+const hm_boardF=(sc,w)=>[PK.sk.drawn(hm_sheetF),
+  {s:"18,412",x:96,y:326,size:56,w:700,col:"orange",at:w("students","counts students",-0.2),d:0.8},
+  {k:"tick",x:420,y:376,r:16,col:"blue",at:w("students","units",-0.3),d:0.3},
+  {s:"19,549",x:534,y:326,size:56,w:700,col:"orange",at:w("learners","learners",-0.3),d:0.8},
+  {s:"1,137 short courses",x:534,y:442,size:36,w:700,col:"orange",at:w("learners","short courses",-0.6),d:1.2},
+  {s:"Both right",x:1060,y:452,size:44,w:700,col:"green",align:"center",at:w("both","Both",-0.2),d:0.8,marks:[["under","green",null,0.3]]}];
+// 7. what the best groups had (Carmen): small groups, each at many kinds of task; the cleverest member's share, one bar towards the top;
+// turns to speak, the bars even. She rings the best group, strikes out the cleverest, and writes what it went with
+function hm_sheetG(c){const D=PK.sk;
+  D.head(c,"Collective intelligence",{col:"blue",ref:["Anita Woolley",["and colleagues",{size:30}]],rsize:30,rx:1040,ry:84});
+  D.panel(c,56,140,330,332,{fill:"paper",line:"ink",title:"Small groups",col:"blue"},(cc,x,y)=>{
+    ["puzzle","pen","bulb","gear"].forEach((ic,i)=>D.icon(cc,ic,x+62+i*68,y+26,20,{fill:"blue"}));
+    for(let g=0;g<3;g++)for(let k=0;k<3;k++)D.icon(cc,"person",x+70+k*48,y+90+g*58,16,{fill:g===1?"green":"white"});});
+  D.panel(c,412,140,370,332,{fill:"amber",line:"amber",title:"The cleverest",col:"amber",dash:[10,8]},(cc,x,y)=>{
+    D.bars(cc,x+40,y+14,290,170,[{v:0.3,col:"amber"},{v:1,col:"amber"},{v:0.35,col:"amber"},{v:0.4,col:"amber"}],{});});
+  D.panel(c,808,140,386,332,{fill:"green",line:"green",title:"Turns to speak",col:"green"},(cc,x,y)=>{
+    D.bars(cc,x+40,y+14,300,140,[{v:0.8,col:"green"},{v:0.86,col:"green"},{v:0.76,col:"green"},{v:0.82,col:"green"}],{max:1});
+    D.icon(cc,"chat",x+193,y+192,22,{fill:"green"});});}
+const hm_boardG=(sc,w)=>[PK.sk.drawn(hm_sheetG),
+  {k:"ring",x:174,y:346,rx:96,ry:36,col:"green",at:w("groups","best groups",-0.3),d:0.5},
+  {s:"best",x:284,y:358,size:36,w:700,col:"green",at:w("groups","best groups",0.3),d:0.5},
+  {k:"line",x:752,y:212,x1:440,y1:396,col:"amber",at:w("turns","clever",-0.3),d:0.5},
+  {s:"more equal",x:840,y:452,size:44,w:700,col:"green",at:w("turns","taking turns",-0.3),d:0.8}];
+// 8. the team's page (Helena writes what the eight agree): its five lines drawn as strips, each with its drawing and its heading, the
+// eight of them at the top; she writes each line's own words as the voice says them
+const HM_PAGE=[["clock","How we meet"],["hand","Asking for help"],["chat","Disagreeing"],["check","Deciding"],["cal","A date we can't make"]];
+const hmH_y=i=>176+i*62;
+function hm_sheetH(c){const D=PK.sk;
+  D.head(c,"How we work together",{col:"blue",sub:["Five lines, in our own words","mut"]});
+  D.faces(c,756,86,["helena","sam","jun","marta","noor","yusuf","erin","tomas"],{r:20,gap:54});
+  HM_PAGE.forEach(([ic,s],i)=>{const y=hmH_y(i);D.box(c,56,y,1138,56,{fill:"blue",col:"blue",w:2.5,r:12});D.disc(c,90,y+28,20,{fill:"white",col:"ink",w:2.5});
+    D.icon(c,ic,90,y+28,12,{fill:"blue"});D.text(c,s,124,y+40,{size:32,w:700});});}
+const hm_boardH=(sc,w)=>{const r=(i,s,at,d,col)=>({s,x:500,y:hmH_y(i)+40,size:34,w:700,col:col||"blue",at,d});return[PK.sk.drawn(hm_sheetH),
+  r(0,"the question the day before, a turn each",w("meet","question",-0.3),1.6),
+  r(1,"early, and out loud",w("help","early",-0.3),1.0),
+  r(2,"about the work, never the person",w("disagree","about the work",-0.3),1.5),
+  r(3,"whoever owns it, after hearing all",w("decide","whoever owns",-0.3),1.5),
+  r(4,"as soon as we know, with a new date",w("date","as soon",-0.3),1.5,"green")];};
+// 9. what holds the page up (Carmen): trust, from many studies; a team charter, from 32 student teams, the ones whose work held up
+// coloured; and a note of how sure that is. She writes what each found, and how small the last study is
+function hm_sheetI(c){const D=PK.sk;
+  D.head(c,"What holds the page up",{col:"green"});
+  D.panel(c,56,140,340,332,{fill:"green",line:"green",title:"Trust",col:"green"},(cc,x,y)=>{
+    D.bars(cc,x+60,y+12,220,120,[{v:0.45,col:"amber",label:"low"},{v:0.92,col:"green",label:"high"}],{});});
+  D.panel(c,424,140,400,332,{fill:"blue",line:"blue",title:"A team charter",col:"blue"},(cc,x,y)=>{
+    D.icon(cc,"doc",x+64,y+50,30,{fill:"blue"});D.text(cc,"32 student teams",x+112,y+62,{size:30,col:"mut"});
+    D.dots(cc,x+60,y+96,8,4,{gap:34,r:10,on:9,col:"green"});});
+  D.sticky(c,852,150,330,300,{col:"sun",rot:0.03,draw:(cc,x,y)=>{D.caps(cc,"How sure",x+26,y+64,{col:"amber",size:30});D.icon(cc,"q",x+262,y+52,18,{fill:"amber"});}});}
+const hm_boardI=(sc,w)=>[PK.sk.drawn(hm_sheetI),
+  {s:"112 studies",x:84,y:406,size:34,w:700,at:w("trust","studies",-0.3),d:0.8},
+  {s:"better work",x:84,y:458,size:40,w:700,col:"green",at:w("trust","trust each other",-0.3),d:0.9},
+  {s:"+ a good plan",x:452,y:452,size:42,w:700,col:"blue",at:w("charter","held up",-0.6),d:1.0},
+  {s:"one small study",x:880,y:300,size:36,w:700,col:"amber",at:w("small","small study",-0.3),d:1.1},
+  {s:"from practice",x:880,y:380,size:36,w:700,col:"blue",at:w("small","practice",-0.3),d:0.9}];
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524)
-   Each row has the time the voice says it; PK.pace makes a row wait until whoever writes can have walked to it, so they are laid out
-   for someone who walks: on from left to right, a row's parts written along it, and nothing drawn back along words. */
-
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524)
-   Each row has the time the voice says it; PK.pace makes a row wait until whoever writes can have walked to it, so they are laid out
-   for someone who walks: on from left to right, a row's parts written along it, and nothing drawn back along words. */
-// 1. what one study of 180 teams found (Carmen)
-const hm_boardA=(sc,w)=>[
-  {s:"One study of its own teams",x:70,y:104,size:58,col:"blue",at:w("google","studied",-0.3),d:1.0},
-  {s:"Less who is on it",x:70,y:196,size:50,col:"amber",at:w("quote","less about who",-0.2),d:0.8},{s:" · more how it works",size:50,col:"green",at:w("quote","more about how",-0.2),d:1.0},
-  {s:"1 Psychological safety",x:70,y:288,size:48,at:w("safe","psychological",-0.3),d:0.9},
-  {s:"2 Keeping your word",x:70,y:366,size:48,at:w("word","keeping",-0.3),d:0.8},
-  {s:"3 Clear on who does what",x:70,y:444,size:48,at:w("word","clear",-0.3),d:1.0}];
-// 2. two numbers for one day (Jun, at the team's board)
-const hm_boardB=(sc,w)=>[
-  {s:"Census day, last year",x:70,y:104,size:58,col:"blue",at:w("check","census day",-0.2),d:1.0},
-  {s:"Old report: 18,412",x:70,y:204,size:54,col:"orange",at:w("differ","old report",-0.2),d:0.9},
-  {s:"New model: 19,549",x:70,y:300,size:54,col:"orange",at:w("differ","new model",-0.2),d:0.9}];
-// 3. conflict about the person, and about the work (Carmen)
-const hm_boardC=(sc,w)=>[
-  {s:"Conflict in a team: many studies",x:70,y:110,size:54,col:"blue",at:w("study","studies",-0.3),d:1.1},
-  {s:"About the person: harms the work",x:70,y:220,size:52,col:"amber",at:w("study","about the person",-0.2),d:1.2},
-  {s:"About the work: need not",x:70,y:320,size:52,col:"green",at:w("study","Disagreement",-0.2),d:1.0},
-  {s:"if it stays about the work",x:70,y:410,size:46,at:w("study","if it stays",-0.2),d:1.0}];
-// 4. three things, each of us (Helena, at the team's board)
-const hm_boardD=(sc,w)=>[
-  {s:"Three things, each of us",x:70,y:110,size:58,col:"blue",at:w("ask","three things",-0.3),d:1.0},
-  {s:"1 What you saw",x:70,y:206,size:50,at:w("ask","what you saw",-0.2),d:0.7},
-  {s:"2 What you feel and need",x:70,y:292,size:50,at:w("ask","feel",-0.4),d:0.9},
-  {s:"3 What you ask",x:70,y:378,size:50,at:w("ask","what you ask",-0.2),d:0.7}];
-// 5. where the three things come from (Carmen)
-const hm_boardE=(sc,w)=>[
-  {s:"Non-violent communication",x:70,y:110,size:58,col:"blue",at:w("named","communication",-0.9),d:1.1},
-  {s:"Marshall Rosenberg, a psychologist",x:70,y:200,size:46,at:w("named","Marshall",-0.2),d:1.2},
-  {s:"Practice and small studies",x:70,y:296,size:48,col:"amber",at:w("practice","practice",-0.3),d:0.9},{s:" · no large trials",size:48,col:"amber",at:w("practice","large trials",-0.3),d:0.8},
-  {s:"Named, a feeling can be answered",x:70,y:400,size:48,col:"green",at:w("answer","named",-0.3),d:1.2}];
-// 6. what each number counts (Helena writes as Marta says it)
-const hm_boardF=(sc,w)=>[
-  {s:"Students: 18,412",x:70,y:104,size:54,col:"blue",at:w("students","counts students",-0.2),d:0.9},
-  {s:"taking a degree's units · sent to the government",x:70,y:184,size:40,at:w("students","units",-0.3),d:1.6},
-  {s:"Learners: 19,549",x:70,y:282,size:54,col:"blue",at:w("learners","learners",-0.3),d:0.9},
-  {s:"students, and 1,137 on short courses",x:70,y:362,size:44,at:w("learners","short courses",-0.6),d:1.4},
-  {s:"Both right · never the same thing",x:70,y:452,size:48,col:"green",at:w("both","Both",-0.2),d:1.2}];
-// 7. what the best groups had (Carmen)
-const hm_boardG=(sc,w)=>[
-  {s:"Collective intelligence",x:70,y:110,size:58,col:"blue",at:w("groups","collective intelligence",-0.3),d:1.0},
-  {s:"Anita Woolley and colleagues",x:70,y:200,size:46,at:w("groups","Anita Woolley",-0.2),d:1.1},
-  {s:"Not how clever the cleverest is",x:70,y:300,size:48,col:"amber",at:w("turns","clever",-0.3),d:1.2},
-  {s:"Turns to speak, more equal",x:70,y:396,size:50,col:"green",at:w("turns","taking turns",-0.3),d:1.1}];
-// 8. the team's page (Helena writes what the eight agree)
-const hm_boardH=(sc,w)=>[
-  {s:"How we work together",x:70,y:96,size:54,col:"blue",at:w("thu","how we work together",-0.3),d:0.9},
-  {s:"Meet: the question the day before, a turn each",x:70,y:176,size:40,at:w("meet","question",-0.3),d:1.6},
-  {s:"Ask for help: early, out loud",x:70,y:250,size:40,at:w("help","early",-0.3),d:1.0},
-  {s:"Disagree: about the work, never the person",x:70,y:324,size:40,at:w("disagree","about the work",-0.3),d:1.5},
-  {s:"Decide: whoever owns it, after hearing all",x:70,y:398,size:40,at:w("decide","whoever owns",-0.3),d:1.5},
-  {s:"Can't make a date: say so, with a new one",x:70,y:472,size:40,col:"green",at:w("date","as soon",-0.3),d:1.5}];
-// 9. what holds the page up (Carmen)
-const hm_boardI=(sc,w)=>[
-  {s:"Trust: better work",x:70,y:110,size:58,col:"green",at:w("trust","trust each other",-0.3),d:0.9},
-  {s:"A team charter",x:70,y:214,size:54,col:"blue",at:w("charter","team charter",-0.3),d:0.8},
-  {s:"with a good plan: work that held up",x:70,y:304,size:46,at:w("charter","held up",-0.6),d:1.3},
-  {s:"One small study · from practice",x:70,y:404,size:48,col:"amber",at:w("small","small study",-0.3),d:1.2}];
-
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
-// 1. what the gorge shares
-const hm_note1=(sc,w)=>[
-  {s:"At the gorge",x:70,y:124,size:88,w:700,col:"blue",at:w("how","Nobody",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"No plan handed out",x:110,y:280,size:58,col:"amber",at:w("how","plan",-0.4),d:0.9},
-  {s:"Promises kept",x:110,y:400,size:62,col:"green",at:w("how","promises kept",-0.3),d:0.8},
-  {s:"Parts that everyone knows",x:110,y:520,size:58,col:"green",at:w("how","parts",-0.2),d:1.0}];
-// 2. say it out loud
-const hm_note2=(sc,w)=>[
-  {s:"The gorge: custom",x:70,y:124,size:76,w:800,col:"blue",at:w("gorge","custom",-0.5),d:0.7},
-  {s:"A team: say it out loud",x:110,y:280,size:64,col:"green",at:w("gorge","out loud",-0.6),d:1.0,marks:[["under","green",null,0.3]]}];
-// 3. the glossary first
-const hm_note3=(sc,w)=>[
-  {s:"The glossary first",x:70,y:124,size:80,w:800,col:"blue",at:w("glossary","glossary",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"what students counts",x:110,y:280,size:56,at:w("glossary","each word counts",-0.3),d:0.9},
-  {s:"what learners counts",x:110,y:380,size:56,at:w("glossary","each word counts",0.5),d:0.9},
-  {s:"then the model",x:110,y:500,size:60,col:"green",at:w("glossary","model",-0.3),d:0.7}];
-// 4. a team has no such years
-const hm_note4=(sc,w)=>[
-  {s:"The gorge: by doing",x:70,y:124,size:76,w:800,col:"blue",at:w("gorge","by doing",-0.4),d:0.8},
-  {s:"parents beside children",x:110,y:262,size:56,at:w("gorge","parents",-0.2),d:1.0},
-  {s:"A team: no such years",x:110,y:392,size:60,col:"amber",at:w("gorge","no such years",-0.3),d:1.0},
-  {s:"So it writes",x:110,y:522,size:72,col:"green",at:w("gorge","writes",-0.3),d:0.5,marks:[["ring","green",null]]}];
-// 5. what a data team has to do itself
-const hm_note5=(sc,w)=>[
-  {s:"A data team",x:70,y:124,size:88,w:700,col:"blue",at:w("each","data team",-0.3),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"Asks each person",x:110,y:280,size:60,col:"green",at:w("each","ask each person",-0.2),d:0.9},
-  {s:"Never one person, or one line",x:110,y:410,size:56,col:"amber",at:w("each","one person",-0.3),d:1.1}];
-// 6. on Monday
-const hm_note6=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("open","Disagree",-0.9),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(262,"blue",w("open","Disagree",-0.3)),{s:"Disagree about the work, openly",x:128,y:262,size:50,at:w("open","Disagree",0),d:1.2},
-  dot(382,"amber",w("open","stop",-0.3)),{s:"When it turns personal: stop, say so",x:128,y:382,size:48,at:w("open","stop",0),d:1.3},
-  dot(502,"blue",w("keep","small promises",-0.3)),{s:"Keep small promises, say early",x:128,y:502,size:50,at:w("keep","small promises",0),d:1.2}];};
+/* ---------------------------------------------------------------- Helena's notebook: what she keeps (the page's own px)
+   Each page is sketched already, a heading on a highlighter's band, boxes with drawings and the people's portraits (PK.sk.drawn);
+   her pen adds the last words and ticks, each as the voice says it, one stroke after the other (PK.pace(ctx, null, rows)). Nothing is
+   below y 800 of the page, where the captions are. */
+const HM_PAGEBOX=[PK.SK.page.x,PK.SK.page.y,PK.SK.page.x+PK.SK.page.w,PK.SK.page.y+PK.SK.page.h];
+// the gorge and its bridge, sketched in a box (x, y, w, h): the two rock walls, the river below, the bridge between them with its two
+// hand ropes, and a few people on each bank
+const hm_gorgeSk=(c,x,y,w,h,o)=>{const D=PK.sk;o=o||{};const L=x+w*0.3,R=x+w*0.7,top=y+h*0.34,bot=y+h,rock=[214,196,170],rope=[150,110,60];
+  D.line(c,[[x,top],[L,top],[L+w*0.05,y+h*0.66],[L+w*0.02,bot],[x,bot]],{fill:rock,col:"ink",w:3,close:true,seed:3});
+  D.line(c,[[x+w,top],[R,top],[R-w*0.05,y+h*0.62],[R-w*0.02,bot],[x+w,bot]],{fill:rock,col:"ink",w:3,close:true,seed:5});
+  D.line(c,[[L+w*0.04,bot-h*0.08],[x+w*0.43,bot-h*0.12],[x+w*0.5,bot-h*0.06],[x+w*0.57,bot-h*0.11],[R-w*0.04,bot-h*0.08]],{col:"blue",w:4,seed:7});
+  const sag=(u,d)=>top+d+Math.sin(Math.PI*u)*h*0.16,at=(u,d)=>[L+(R-L)*u,sag(u,d)],run=d=>Array.from({length:9},(_,i)=>at(i/8,d));
+  for(let i=1;i<8;i++)D.line(c,[at(i/8,-h*0.13),at(i/8,0)],{col:rope,w:2,seed:13+i});
+  D.line(c,run(0),{col:rope,w:5,seed:9});D.line(c,run(-h*0.13),{col:rope,w:3,seed:11});
+  for(const [px,f] of[[x+w*0.08,"white"],[x+w*0.16,"blue"],[x+w*0.84,"white"],[x+w*0.92,"green"]])D.icon(c,"person",px,top-h*0.1,h*0.07,{fill:f});
+  if(o.houses)for(const [px,f] of[[x+w*0.06,"amber"],[x+w*0.2,"blue"],[x+w*0.8,"green"],[x+w*0.94,"orange"]])D.icon(c,"house",px,y+h*0.1,h*0.08,{fill:f});};
+// 1. what the gorge shares: the bridge and its four communities; no plan, but promises kept and parts that everyone knows
+function hm_page1(c){const D=PK.sk;
+  D.title(c,"At the gorge",80,132,{size:84,col:"blue"});
+  D.panel(c,74,176,926,316,{fill:"paper",line:"ink",title:"Every June, four communities",col:"blue"},(cc,x,y,w,h)=>hm_gorgeSk(cc,x+40,y+4,w-80,h-20,{houses:true}));
+  D.disc(c,124,560,34,{fill:"white",col:"ink",w:3});D.icon(c,"doc",124,560,21,{fill:"amber"});
+  D.box(c,74,622,440,170,{fill:"green",col:"green",w:3,r:16});D.disc(c,140,680,34,{fill:"white",col:"ink",w:3});D.icon(c,"hand",140,680,21,{fill:"green"});
+  D.box(c,560,622,440,170,{fill:"green",col:"green",w:3,r:16});D.disc(c,626,680,34,{fill:"white",col:"ink",w:3});D.icon(c,"people",626,680,21,{fill:"green"});}
+const hm_note1=(sc,w)=>[PK.sk.drawn(hm_page1,HM_PAGEBOX),
+  {k:"cross",x:124,y:560,r:40,col:"amber",at:w("how","Nobody",-0.4),d:0.4},
+  {s:"no plan handed out",x:186,y:576,size:50,w:700,col:"amber",at:w("how","plan",-0.4),d:0.9},
+  {s:"promises kept",x:196,y:696,size:46,w:700,col:"green",at:w("how","promises kept",-0.3),d:0.8},
+  {s:"parts everyone",x:682,y:696,size:44,w:700,col:"green",at:w("how","parts",-0.2),d:0.8},{s:"knows",x:682,y:760,size:44,w:700,col:"green",at:w("how","parts",0.6),d:0.4}];
+// 2. both, from custom, and said out loud: the gorge, where custom keeps them; a data team, where somebody says them
+function hm_page2(c){const D=PK.sk;
+  D.title(c,"Promises and parts",80,132,{size:76,col:"blue"});
+  D.panel(c,74,180,440,420,{fill:"blue",line:"blue",title:"The gorge",col:"blue"},(cc,x,y,w,h)=>hm_gorgeSk(cc,x+30,y+10,w-60,220,{}));
+  D.panel(c,560,180,440,420,{fill:"green",line:"green",title:"A data team",col:"green"},(cc,x,y)=>{
+    D.faces(cc,x+80,y+60,["helena","jun","tomas"],{r:36,gap:110});D.disc(cc,x+220,y+190,34,{fill:"white",col:"ink",w:3});D.icon(cc,"speech",x+220,y+190,21,{fill:"green"});});
+  D.sticky(c,140,640,760,150,{col:"sun",rot:-0.015,draw:(cc,x,y)=>{hm_item(cc,x+96,y+70,"hand","keeping your word",{size:36,r:22});hm_item(cc,x+96,y+124,"people","who does what",{size:36,r:22});}});}
+const hm_note2=(sc,w)=>[PK.sk.drawn(hm_page2,HM_PAGEBOX),
+  {s:"from custom",x:110,y:560,size:52,w:700,col:"blue",at:w("gorge","custom",-0.5),d:0.7},
+  {s:"say it out loud",x:596,y:560,size:52,w:700,col:"green",at:w("gorge","out loud",-0.6),d:1.0,marks:[["under","green",null,0.3]]}];
+// 3. the glossary first: the two words and the owner who says what they mean; the pen writes what each counts, then the model
+function hm_page3(c){const D=PK.sk;
+  D.title(c,"The glossary first",80,132,{size:80,col:"blue"});
+  D.icon(c,"book",860,104,30,{fill:"blue"});
+  D.panel(c,74,176,926,380,{fill:"paper",line:"blue",title:"Glossary",col:"blue"},(cc,x,y)=>{
+    for(const [k,s] of[[0,"students"],[1,"learners"]]){const yy=y+86+k*130;D.text(cc,s,x+50,yy,{size:44,w:700,col:"blue"});D.line(cc,[[x+50,yy+66],[x+860,yy+66]],{col:"mut",w:2.5,dash:[8,10],seed:k+3});}});
+  D.stamp(c,["Registrar's office",["owns what they mean",{size:30}]],816,236,{col:"blue",size:32,rot:0.05});
+  D.arrow(c,[300,586],[300,660],{col:"blue",w:4,head:14});
+  D.card(c,74,676,{icon:"db",ifill:"orange",lines:["the model"],fill:"orange",w:420,h:110,size:44});}
+const hm_note3=(sc,w)=>[PK.sk.drawn(hm_page3,HM_PAGEBOX),
+  {s:"a degree's units",x:126,y:378,size:44,w:700,at:w("glossary","each word counts",-0.3),d:0.9},
+  {s:"students + short courses",x:126,y:508,size:44,w:700,at:w("glossary","each word counts",0.5),d:1.1},
+  {s:"before a line changes",x:520,y:746,size:44,w:700,col:"green",at:w("glossary","before",-0.3),d:1.0,marks:[["under","green",null,0.3]]}];
+// 4. passed on by doing it, at the gorge; a team has no such years, so it writes
+function hm_page4(c){const D=PK.sk;
+  D.title(c,"Passed on",80,132,{size:84,col:"blue"});
+  D.panel(c,74,176,440,420,{fill:"blue",line:"blue",title:"The gorge, by doing",col:"blue"},(cc,x,y)=>{
+    D.face(cc,HMQ_FOLK.m5,x+120,y+70,52,{});D.face(cc,HMV_BOY,x+300,y+90,40,{});D.face(cc,HMQ_FOLK.w2,x+120,y+210,52,{});D.face(cc,HMV_KID2,x+300,y+230,40,{});});
+  D.panel(c,560,176,440,420,{fill:"amber",line:"amber",title:"A team",col:"amber",dash:[10,8]},(cc,x,y)=>{
+    D.faces(cc,x+90,y+80,["jun","marta","noor"],{r:34,gap:120});D.icon(cc,"hourglass",x+220,y+230,34,{fill:"amber"});});
+  D.disc(c,124,700,40,{fill:"white",col:"ink",w:3});D.icon(c,"pen",124,700,25,{fill:"green"});}
+const hm_note4=(sc,w)=>[PK.sk.drawn(hm_page4,HM_PAGEBOX),
+  {s:"parents beside children",x:96,y:572,size:36,w:700,at:w("gorge","parents",-0.2),d:1.1},
+  {s:"no such years",x:600,y:570,size:46,w:700,col:"amber",at:w("gorge","no such years",-0.3),d:0.9},
+  {s:"So it writes",x:190,y:722,size:72,w:700,col:"green",at:w("gorge","writes",-0.3),d:0.6,marks:[["ring","green",null]]}];
+// 5. what a data team has to do itself: ask each person; and never leave what it knows with one person, or one line of people
+function hm_page5(c){const D=PK.sk;
+  D.title(c,"A data team",80,132,{size:88,col:"blue"});
+  D.panel(c,74,176,926,264,{fill:"green",line:"green",title:"Each person",col:"green"},(cc,x,y)=>{
+    D.faces(cc,x+86,y+64,["helena","sam","jun","marta","noor","yusuf","erin","tomas"],{r:34,gap:108});});
+  D.panel(c,74,470,926,330,{fill:"amber",line:"amber",title:"What it knows, never with",col:"amber",dash:[10,8]},(cc,x,y)=>{
+    D.icon(cc,"person",x+110,y+66,30,{fill:"white"});D.icon(cc,"book",x+176,y+80,20,{fill:"amber"});
+    for(let i=0;i<4;i++){D.icon(cc,"person",x+430+i*100,y+66,26,{fill:"white"});if(i<3)D.arrow(cc,[x+462+i*100,y+66],[x+500+i*100,y+66],{col:"ink",w:3,head:10});}});}
+const hm_note5=(sc,w)=>[PK.sk.drawn(hm_page5,HM_PAGEBOX),
+  {s:"asks each one",x:110,y:400,size:50,w:700,col:"green",at:w("each","ask each person",-0.2),d:0.9,marks:[["under","green",null,0.3]]},
+  {k:"cross",x:206,y:600,r:62,col:"amber",at:w("each","one person",-0.3),d:0.4},
+  {k:"line",x:470,y:646,x1:840,y1:548,col:"amber",at:w("each","one line",-0.3),d:0.4},
+  {s:"one person, or one line",x:110,y:760,size:50,w:700,col:"amber",at:w("each","one line",0.3),d:1.1}];
+// 6. on Monday: three cards, each with its drawing and its heading; the pen writes what to do under each
+function hm_page6(c){const D=PK.sk;
+  D.title(c,"On Monday",80,132,{size:88,col:"blue"});D.icon(c,"cal",580,104,30,{fill:"blue"});
+  [[190,"blue","chat","Disagree"],[386,"amber","warn","When it turns to the person"],[582,"green","hand","Small promises"]].forEach(([y,f,ic,s])=>{
+    D.box(c,74,y,926,176,{fill:f,col:f,w:3,r:16});D.disc(c,140,y+58,34,{fill:"white",col:"ink",w:3});D.icon(c,ic,140,y+58,21,{fill:f});D.caps(c,s,196,y+70,{col:f,size:32});});}
+const hm_note6=(sc,w)=>[PK.sk.drawn(hm_page6,HM_PAGEBOX),
+  {s:"about the work, in the open",x:196,y:332,size:50,w:700,at:w("open","Disagree",0),d:1.2},
+  {s:"stop, and say so",x:196,y:528,size:50,w:700,col:"amber",at:w("open","stop",0),d:1.0},
+  {s:"keep them; say early",x:196,y:724,size:50,w:700,col:"green",at:w("keep","small promises",0),d:1.1}];
 
 /* ===== How, more than who: the chapters, shot by shot =====
    The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
@@ -3056,26 +3636,73 @@ const hm_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},b
 const hm_talk=(base,tt,spans)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,...spans.map(([a,b])=>PK.talk(tt,a,b)*0.75));return e;};
 const hm_sp=(tt,i,spans,base,g)=>hm_alive(tt,{expr:hm_talk(base||"listen",tt,spans),gaze:[1,g==null?-0.2:g]},i);
 
-/* ---------------------------------------------------------------- the gorge's people */
-// kneeling to twist or braid cord, seen from the side: both hands together in front, the cord running from them to the ground;
-// o.k (0 to 1): from standing to kneeling
-const HM_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
-function hm_twisting(x,who,px,fl,tt,o){o=o||{};const U=PK.u,k=o.k==null?1:o.k,pose=k>=1?HM_TWIST:PK.poseMix("stand",HM_TWIST,U.sine(U.clamp(k,0,1)));
-  const J=hmq_person(x,who,px,fl,hmq_h(fl),pose,Object.assign({t:tt,holds:true},o,o.nod!=null?{}:hm_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0.7]},px%5)));
-  if(J&&J.hdN&&k>0.7){const [hx,hy]=J.hdN,len=o.len||260,sg=o.flip?-1:1,col=PK.S.tone(HMQ_PAL.rope),tw=Math.sin(tt*5)*2;x.save();x.globalAlpha*=U.clamp((k-0.7)/0.3,0,1);x.lineCap="round";x.strokeStyle=U.css(PK.S.ink);x.lineWidth=6;
-    x.beginPath();x.moveTo(hx,hy+4);x.quadraticCurveTo(hx+sg*len*0.4,fl-6+tw,hx+sg*len,fl-2);x.stroke();x.strokeStyle=U.css(col);x.lineWidth=3.4;x.stroke();x.restore();}return J;}
-// a walker on the bridge from u0 to u1 between t0 and t1; returns [u, who, flip, tt] for hmq_bridge, or null
-const hm_on=(tt,who,u0,u1,t0,t1)=>{if(tt<t0-0.2||tt>t1+0.2)return null;const u=PK.u.lerp(u0,u1,PK.u.clamp((tt-t0)/(t1-t0),0,1));return[u,who,u1<u0,tt];};
-// the bank's people: [who, x, floor, pose, flip, opts]; or {fl, draw(x)} for whoever moves
-function hm_bank(x,tt,list){list.map(p=>Array.isArray(p)?{fl:p[2],p}:p).sort((a,b)=>a.fl-b.fl).forEach(it=>{if(it.draw)return it.draw(x);
-  const [who,px,fl,pose,fl2,o0]=it.p,o=o0||{};if(pose==="twist")return hm_twisting(x,who,px,fl,tt,Object.assign({flip:!!fl2},o));
-  const f=o.nod!=null?{}:hm_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},px%5);
-  hmq_person(x,who,px,fl,hmq_h(fl),pose||"stand",Object.assign({t:tt+(px%7),flip:!!fl2},o,f));});}
-// someone who walks onto the bank with a coil of cord, then stands holding it
-const hm_bringer=(tt,who,x0,x1,t0,fl,flip)=>({fl,draw:cc=>{const d=Math.abs(x1-x0)/190;if(tt<t0+d)return hmq_walk(cc,who,tt,{x0,x1,t0,t1:t0+d,floor:fl,h:hmq_h(fl),arms:{aN:HM_CARRY.aN},then:HM_CARRY},Object.assign({flip,hold:hmq_coil,holds:true},hm_alive(tt,{expr:"smile",gaze:[1,0]},x1%5,t0)));
-  return hmq_person(cc,who,x1,fl,hmq_h(fl),HM_CARRY,Object.assign({t:tt,flip,hold:hmq_coil,holds:true},hm_alive(tt,{expr:"smile",gaze:[1,0.1]},x1%5,t0)));}});
-// coils of cord on the ground, checked in
-function hm_pile(x,n,at){const S=PK.S;S.begin(x,{lw:2,sh:3});at.slice(0,n).forEach(([px,py])=>hmq_coil(x,[px,py-22]));}
+/* ---------------------------------------------------------------- the gorge, through the views this film looks at it from (hm_gorge.js)
+   People before roles looks at the bridge from above and from beside its heads, downstream; Wellbeing is in the work from the river
+   below, from the bank upstream and at home; No two alike from the high plain where the grass is cut. This film looks from high
+   over the bridge's head, across the plain and up the gorge; down on it from the rim; at a stone base as the cables are tied; and
+   from up the gorge, past the steel bridge; and on the bank, at the check-in and the braiding of day one (hm_bank.js): each film
+   shows the story from places of its own (the author, 18 November 2026). */
+const HM_VO=hmq_camera({x:-19.5,y:8.5,z:-7,yaw:66,f:760,hor:250});           // high over the bridge's head: the plain, the gorge, the peaks
+const HM_VH=hmq_camera({x:-17,y:5,z:-4.5,yaw:70,f:900,hor:-40});            // from the rim beside its head, down on it and the river
+const HM_VB=hmq_camera({x:-19.6,y:2.2,z:-5.6,yaw:48,f:1050,hor:480});        // at the left bank's stone base, the gorge beyond it
+const HM_VK=hmq_camera({x:-13.2,y:1.7,z:-4.6,yaw:-8,f:1250,hor:260});        // at the bridge's head, from the rim downstream
+const HM_VS=hmq_camera({x:46,y:10,z:156,yaw:200,f:2000,hor:320});            // up the gorge, past the steel bridge, to the rope bridge
+AG_PLACES.hmOver=x=>hmq_ground(x,HM_VO,{});AG_PLACES.hmHigh=x=>hmq_ground(x,HM_VH,{});AG_PLACES.hmHighGrey=x=>hmq_ground(x,HM_VH,{grey:true});
+AG_PLACES.hmBase=x=>hmq_ground(x,HM_VB,{});AG_PLACES.hmHead=x=>hmq_ground(x,HM_VK,{});AG_PLACES.hmSteel=x=>hmq_ground(x,HM_VS,{});AG_PLACES.hmSteelGrey=x=>hmq_ground(x,HM_VS,{grey:true});
+// a view in the sun and under the grey sky of the years the bridge was left are one room: the camera glides on, what changed fades
+AG_ROOMS.hmHighGrey="hmHigh";AG_ROOMS.hmSteelGrey="hmSteel";
+const HM_COIL={hold:hmq_coil,holds:true};
+// the people of a view, as drawables: [who, X, Z, pose, flip, o]; who a name of HMQ_FOLK, or a number (one of the communities'
+// people nobody names). o.face a face through the shot (PK.face), or o.expr and o.gaze for one that lives on its own; o.opt
+// PK.person's own; o.Y how high they stand (on a stone base); o.k a child's height; o.len a twisted cord's length
+const hm_folks=(cam,tt,list)=>list.map(([who,X,Z,pose,flip,o],i)=>{o=o||{};const f=o.face||hm_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},i%5);
+  return hmq_folk(cam,who,X,Z,pose,{t:tt+i*0.7,flip:!!flip,len:o.len,key:o.key,Y:o.Y,k:o.k,after:o.after,opt:Object.assign({},f,o.opt||{})});});
+// a walk along the floor of a bridge of that age, from u0 to u1 (z across it), and on over the bank to the points after it
+const hm_deck=(u0,u1,z,age,more)=>{const p=[];for(let i=0;i<=24;i++){const [x,y]=hmq_deckAt(PK.u.lerp(u0,u1,i/24),{age});p.push([x,y,z||0]);}return p.concat((more||[]).map(q=>[q[0],0,q[1]]));};
+const hm_walk=(cam,who,tt,path,t0,t1,o)=>{o=o||{};return hmq_walker(cam,who,tt,{path,t0,t1,then:o.then,arms:o.arms,k:o.k},{key:o.key,opt:Object.assign({expr:"neutral",gaze:[1,0]},o.opt)});};
+// someone on the bridge's floor at u (z across it), kneeling or standing
+const hm_onDeck=(cam,who,u,z,pose,o)=>{o=o||{};const [X,Y]=hmq_deckAt(u,o.deck);return hmq_folk(cam,who,X,z,pose,Object.assign({Y},o));};
+// the families at both heads of the bridge, as the view from high over its head sees them
+const HM_OVERF=[["m4",16.0,-3.0,"clasp",true],["w5",16.6,2.4,HMQ_TWIST,true,{len:0.8}],[2,17.4,-0.8,"stand",true],[3,18.2,3.6,"clasp",true],["w3",16.4,5.6,"stand",true,{opt:HM_COIL}],[4,17.0,-5.4,"stand",true],
+  ["w2",-14.6,4.0,HMQ_TWIST,false,{len:0.7}],["m1",-14.8,6.0,"clasp",false],["w1",-14.5,7.6,"stand",false,{opt:HM_COIL}]];
+// pulling on a rope: leaning back from it, both hands on it, feet apart; a heave every so often (k: 0 to 1)
+const HM_PULL={lean:-14,head:-4,aN:[52,30,"grip"],aF:[46,36,"grip"],lN:[-20,-6],lF:[22,8]},HM_HEAVE={lean:-22,head:-8,aN:[58,26,"grip"],aF:[52,32,"grip"],lN:[-24,-8],lF:[26,10]};
+const hm_heave=(tt,i)=>PK.poseMix(HM_PULL,HM_HEAVE,0.5-0.5*Math.cos((tt+i*0.37)*2*Math.PI/2.4));
+
+/* at the bridge's head, made: a builder kneels on its floor, weaving its side, and his grandson kneels at the edge of the stone base
+   behind him, watching his hands, then trying the cords at the bridge's head himself; the gorge and its river beyond them */
+const HM_KID={mode:"kneel",lean:10,head:16,aN:[22,26],aF:[16,32],lN:[28,-90],lF:[40,-88],fN:70,fF:70},HM_KTRY={mode:"kneel",lean:24,head:14,aN:[56,44,"grip"],aF:[50,52,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+function hm_teachKid(x,tt,t0,tq){const c=HM_VK,U=PK.u,tr=U.sine(U.clamp((tt-t0-4.6)/0.5,0,1)),hn=c.P(-14.17,0.82,-0.56),hf=c.P(-14.05,0.78,-0.5);
+  return hmq_scene(x,c,{age:0},[hm_onDeck(c,"keeper",0.05,-0.1,HM_WEAVE,{t:tt,flip:false,deck:{},key:"elder",opt:PK.face(tt,{expr:hm_talk("neutral",tt,[[t0+0.8,t0+2.6],[tq+0.4,tq+2.6]]),gaze:[1,0.6]},[[t0+3.0,"look",2.4,[-1,-0.2]],[t0+6.0,"smile",2.2],[tq+3.2,"look",2.0,[-1,-0.2]]])}),
+    hmq_folk(c,HMV_BOY,-14.42,-0.32,PK.poseMix(HM_KID,HM_KTRY,tr),{t:tt+1,Y:HMQ_BASE.h,flip:false,k:0.72,key:"young",opt:Object.assign({reachN:[hn[0],hn[1]],reachF:[hf[0],hf[1]],reachNk:tr,reachFk:tr,holds:tr>0.5},
+      PK.face(tt,{expr:"think",gaze:[1,0.5]},[[t0+2.0,"look",2.2,[1,0.1]],[t0+6.4,"smile",2.4],[tq+0.6,"nod"]]))})]);}
+
+/* day three, from the rim: the sides and the floor woven from both banks, one builder from each, kneeling on the floor as they go,
+   until they meet in the middle (m: 0 to 1); on the far rim, the families watch */
+const HM_WEAVE={mode:"kneel",lean:22,head:14,aN:[58,48,"grip"],aF:[50,56,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+const HM_FARF=[["m4",16.0,-3.0,"clasp",true],["w5",16.6,2.4,HMQ_TWIST,true,{len:0.8}],[2,17.4,-0.8,"stand",true],[3,18.2,3.6,"clasp",true],["w3",16.4,5.6,"stand",true,{opt:HM_COIL}],[4,17.0,-5.4,"stand",true]];
+function hm_weave(x,tt,m,o){o=o||{};const c=HM_VH,U=PK.u,wv=U.lerp(0.1,0.485,U.sine(U.clamp(m,0,1))),bob=a=>PK.poseMix(HM_WEAVE,Object.assign({},HM_WEAVE,{lean:30,aN:[64,40,"grip"],aF:[56,50,"grip"]}),0.5-0.5*Math.cos(tt*2.6+a));
+  return hmq_scene(x,c,{age:0,weave:wv},hm_folks(c,tt,HM_FARF).concat([hm_onDeck(c,"m3",wv,-0.1,bob(0),{t:tt,flip:false,deck:{},opt:PK.face(tt,{expr:"think",gaze:[1,0.6]},[[o.meet||1e9,"smile",3]])}),
+    hm_onDeck(c,"m5",1-wv,0.1,bob(1.3),{t:tt+1,flip:true,deck:{},opt:PK.face(tt,{expr:"think",gaze:[1,0.6]},[[o.meet||1e9,"smile",3]])})]));}
+
+/* day two at the left bank's stone base: the floor cables pulled taut across the gorge by many hands on both banks (slack, from t0
+   to t1); the near one tied already, and a young man kneeling to wind the far one round its post, while the older one, first on its
+   tail, guides him; the others pull behind them, and across the gorge more pull at the far base */
+const HM_TIE={mode:"kneel",lean:26,head:16,aN:[60,40,"grip"],aF:[54,48,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+const HM_PULLERS=[[-16.3,2.3],[-16.8,3.3],[-17.3,4.3],[-17.8,5.3]],HM_EH=[-15.65,1.0,1.42];
+function hm_tie(x,tt,t0,t1){const c=HM_VB,U=PK.u,p=U.sine(U.clamp((tt-t0-0.4)/(t1-t0-3.4),0,1)),tk=U.sine(U.clamp((tt-t0-2.8)/(t1-t0-3.8),0,1));
+  const tail=[HM_EH].concat(HM_PULLERS.map(q=>[q[0]+0.3,0.95,q[1]-0.55]));
+  // his hands on the turns, going round the post's near side as he winds them, higher with each turn
+  const w=tt*2.4,yh=HMQ_BASE.h+0.24+0.11*2.5*tk,hand=(a,dy)=>c.P(-14.7-0.27*Math.cos(a),yh+dy,0.85-0.27*Math.sin(a));
+  const hN=hand(0.32*Math.sin(w),0.02),hF=hand(0.32*Math.sin(w+1.9)-0.25,-0.03),eN=c.P(HM_EH[0]+0.14,HM_EH[1]-0.01,HM_EH[2]-0.13),eF=c.P(HM_EH[0]-0.14,HM_EH[1]+0.01,HM_EH[2]+0.13);
+  return hmq_scene(x,c,{age:0,k:0.45,slack:4.2*(1-p)+0.2},[...hmq_tied(c,-1,1,{k:tk,tail}),...hmq_tied(c,-1,-1,{k:1}),
+    hmq_folk(c,"m2",-15.17,0.82,HM_TIE,{t:tt,Y:HMQ_BASE.h,flip:false,key:"young",opt:Object.assign({reachN:[hN[0],hN[1]],reachF:[hF[0],hF[1]],holds:true},
+      PK.face(tt,{expr:"think",gaze:[1,0.6]},[[t0+3.6,"look",2.0,[-1,-0.3]],[t0+6.6,"nod"]]))}),
+    hmq_folk(c,"keeper",-15.95,1.2,"stand",{t:tt+1,flip:false,key:"elder",opt:Object.assign({reachN:[eN[0],eN[1]],reachF:[eF[0],eF[1]],holds:true},
+      PK.face(tt,{expr:hm_talk("neutral",tt,[[t0+2.2,t0+4.0],[t0+5.4,t0+6.8]]),gaze:[1,0.4]},[[t0+4.2,"nod"]]))}),
+    // the others on its tail, and across the gorge more pull at the far base
+    ...["m4","m5",6,8].map((who,i)=>hmq_folk(c,who,HM_PULLERS[i][0],HM_PULLERS[i][1],hm_heave(tt,i),{t:tt+2+i,flip:true,opt:Object.assign({holds:true},hm_alive(tt,{expr:"neutral",gaze:[1,0.1]},i,t0))})),
+    ...["m1","m3",10,12].map((who,i)=>hmq_folk(c,who,16.6+i*1.1,-0.85,hm_heave(tt,i+4),{t:tt+3+i,flip:false,opt:{holds:true}}))]);}
 
 // Marta at her desk; someone who walks to a place in a room, then takes up a pose
 const hm_marta=(o)=>Object.assign({work:1,turn:0},o||{});
@@ -3100,45 +3727,29 @@ const HM_LAST="Agree how you work together, and keep to it.";
 
 /* ---------------------------------------------------------------- 1. Three days in June */
 scene("days",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const tC=c.cord-0.5,tT=c.tie-0.5,tV=c.weave-0.5,tD=c.done-0.5,tN=c.how-0.4,tA=c.data-0.5,N1=PK.pace(ctx,null,hm_note1(sc,w));
-  const tI=w("tire","tires",0);
-  const PILE=[[300,712],[346,722],[392,712],[322,700],[370,700],[1560,712],[1606,722],[1650,712],[1584,700]];
+  const tH=c.hold-0.5,tC=c.cord-0.5,tB=c.braid-0.5,tT=c.tie-0.5,tV=c.weave-0.5,tD=c.done-0.5,tN=c.how-0.4,tA=c.data-0.5,N1=PK.pace(ctx,null,hm_note1(sc,w));
+  const tI=w("tire","tires",0),give=w("cord","checked",-0.2),meet=w("weave","meet",0);
   ag_shots(ctx,S,t,sc.dur,[
-    // the gorge, the bridge across it, people crossing; on the banks, the families
-    {at:0,place:"hmGorge",keys:[[0,960,560,1.0],[c.june-0.2,960,470,1.1],[c.hold-0.2,960,500,1.05],[c.need,700,600,1.12]],d:3,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);hmq_bridge(x,{age:0.05,walkers:[hm_on(tt,"m3",0.04,0.96,0.6,24),hm_on(tt,"w4",0.96,0.04,6,30),hm_on(tt,"v1",0.06,0.94,c.hold,c.hold+22)].filter(Boolean)});
-      hm_bank(x,tt,[["w1",170,900,"stand",false,{hold:hmq_coil,holds:true,expr:"smile",gaze:[1,0.1]}],["m1",440,690,"clasp",false,{expr:"neutral"}],
-        ["w2",300,800,"twist",false,{len:160}],["keeper",1700,880,"clasp",true,{expr:"neutral",gaze:[1,0.1]}],["w3",1560,740,"twist",true,{len:150}]]);}},
-    // day one: the bridge of last year is gone; every family's cord is brought and checked in, on both banks; the braiding begins
-    {at:tC,place:"hmGorge",later:true,keys:[[tC,960,520,1.06],[c.part-0.2,960,540,1.05],[c.braid,560,700,1.3],[E.tire,700,640,1.18]],d:3.2,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);const n=Math.round(U.clamp((tt-tC-1.2)/(c.part-tC-1.6),0,1)*PILE.length);hm_pile(x,n,PILE);
-      const L=[hm_bringer(tt,"w1",2080,1760,tC+0.3,1000,true),hm_bringer(tt,"m4",-160,200,tC+1.6,770,false),hm_bringer(tt,"w3",2080,1860,tC+0.8,820,true),hm_bringer(tt,"m5",2080,1660,tC+2.2,740,true),
-        ["keeper",440,810,"clasp",false,hm_alive(tt,{expr:"neutral",gaze:[1,0.5]},0,tC)],
-        ["w5",1480,660,"clasp",true,PK.face(tt,{expr:"neutral",gaze:[1,0.6]},[[tC+3.4,"nod"],[c.cord+5,"look",2.4,[1,0.3]],[c.part+2,"nod"]])],
-        ["w2",1540,880,"twist",true,{len:150,k:ag_in(tt,c.part,0.5)}]];
-      // one braids until he tires; he stands and steps back, and another kneels in his place
-      L.push({fl:960,draw:cc=>{if(tt<tI+0.6)return hm_twisting(cc,"m2",330,960,tt,{len:150,k:ag_in(tt,c.part+0.6,0.5)*(1-ag_in(tt,tI,0.6))});
-        const ts=tI+0.6;if(tt<ts+2.4)return hmq_walk(cc,"m2",tt,{x0:330,x1:-180,t0:ts,t1:ts+2.4,floor:960,h:hmq_h(960),then:"stand"},Object.assign({flip:true},hm_alive(tt,{gaze:[1,0.3]},2,ts)));}});
-      L.push({fl:965,draw:cc=>{const ta=tI+1.2,tb=tI+3.2;if(tt<ta)return;if(tt<tb)return hmq_walk(cc,"m3",tt,{x0:-160,x1:330,t0:ta,t1:tb,floor:965,h:hmq_h(965),then:"stand"},hm_alive(tt,{},3,ta));
-        return hm_twisting(cc,"m3",330,965,tt,{len:150,k:ag_in(tt,tb,0.5)});}});
-      hm_bank(x,tt,L);}},
-    // day two: many hands pull the cables across and tie them to the old stone bases, the older guiding the younger
-    {at:tT,place:"hmGorge",later:true,keys:[[tT,700,640,1.18],[tT+1.6,960,520,1.05],[c.tie+3,960,500,1.08]],d:3,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);hmq_bridge(x,{age:0,k:0.5*U.clamp((tt-c.tie)/(c.weave-c.tie-0.8),0,1)});
-      const pull=(i)=>Object.assign({holds:true},hm_alive(tt,{expr:"neutral",gaze:[1,0.2]},i,tT));
-      hm_bank(x,tt,[["m1",360,700,HM_CARRY,false,pull(1)],["m4",250,780,HM_CARRY,false,pull(2)],["keeper",130,860,"clasp",false,PK.face(tt,{gaze:[1,0.1]},[[c.tie+1.6,"look",2.4,[1,-0.2]],[c.tie+4.2,"nod"],[c.tie+7,"smile",2.4]])],
-        ["m5",1560,700,HM_CARRY,true,pull(3)],["m3",1670,790,HM_CARRY,true,pull(4)],["w3",1800,880,"clasp",true,PK.face(tt,{gaze:[1,0.1]},[[c.tie+2.4,"nod"],[c.tie+5.2,"look",2.4,[1,-0.2]]])]]);}},
-    // day three: two builders weave the sides and the floor, one from each bank, until they meet in the middle
-    {at:tV,place:"hmGorge",later:true,keys:[[tV,960,500,1.06],[c.done-1.2,960,470,1.14]],d:3,draw:(x,tt,cam)=>{
-      const m=U.clamp((tt-c.weave-0.4)/(c.done-c.weave-1.4),0,1);hmq_steel(x,1);
-      hmq_bridge(x,{age:0,k:0.5+0.5*m,walkers:[[U.lerp(0.04,0.47,m),"m3",false,tt*0.4],[U.lerp(0.96,0.53,m),"m5",true,tt*0.4]]});
-      hm_bank(x,tt,[["keeper",440,700,"clasp",false,{expr:"neutral",gaze:[1,0.3]}],["w1",250,820,"stand",false,{expr:"smile",gaze:[1,0.2]}],["w3",1640,760,"clasp",true,{expr:"smile",gaze:[1,0.2]}]]);}},
-    // that afternoon: the bridge done, people crossing; the next day, they celebrate
-    {at:tD,place:"hmGorge",later:true,keys:[[tD,960,500,1.06],[c.how-0.6,960,520,1.0]],d:3,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);hmq_bridge(x,{age:0,walkers:[hm_on(tt,"m3",0.08,0.92,tD+0.6,tD+14),hm_on(tt,"w4",0.94,0.06,tD+2,tD+16)].filter(Boolean)});
-      const cl={hold:hmq_coil,holds:true,expr:"smile"};
-      hm_bank(x,tt,[["w1",170,900,"stand",false,{expr:"smile"}],["m1",430,700,"clasp",false,{expr:"smile"}],["m4",300,790,"stand",false,{expr:"smile"}],["keeper",1700,880,"clasp",true,{expr:"smile"}],
-        ["w3",1560,740,"stand",true,{expr:"smile"}],["m5",1820,800,"stand",true,{expr:"smile"}]]);}},
+    // at the head of the bridge, the families of the four communities; two people cross it, one each way
+    {at:0,place:"hmOver",keys:[[0,960,540,1.0],[c.june,960,555,1.04],[tH,970,580,1.08]],d:4,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VO,{age:0.05},hm_folks(HM_VO,tt,HM_OVERF).concat([hm_walk(HM_VO,"m3",tt,hm_deck(0.02,0.98,-0.15,0.05,[[16.4,-0.6],[18.6,-1.4]]),-4,24),
+        hm_walk(HM_VO,"w4",tt,hm_deck(0.98,0.05,0.15,0.05),2,30)]));}},
+    // from the rim above its head: someone crossing, about fifteen metres above the river; every cord of it holds them
+    {at:tH,place:"hmHigh",cut:true,keys:[[tH,960,540,1.0],[c.need,900,600,1.14],[c.way,960,540,1.0]],d:4,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0.05},hm_folks(HM_VH,tt,HM_FARF).concat([hm_walk(HM_VH,"m5",tt,hm_deck(0.02,0.98,-0.12,0.05,[[16.2,-0.4],[17.6,-1.8]]),tH-2,tH+20),
+        hm_walk(HM_VH,"w4",tt,hm_deck(0.96,0.04,0.12,0.05),tH+3,tH+26)]));}},
+    // day one, on the bank: every family's cord checked in, and laid in rows (hm_bank.js)
+    {at:tC,place:"hmCheck",cut:true,keys:[[tC,960,540,1.0],[give+1.6,1010,560,1.1],[c.part+1.2,900,520,1.04]],d:4,draw:(x,tt,cam)=>{hmv_check(x,tt,tC,give);}},
+    // three ropes braided into each cable; when the one who braids tires, another takes his place
+    {at:tB,place:"hmBraid",cut:true,keys:[[tB,960,540,1.0],[tI-0.6,880,580,1.12]],d:4,draw:(x,tt,cam)=>{hmv_braid(x,tt,tB,tI);}},
+    // day two: many hands pull the cables across the gorge and tie them to the stone bases, the older guiding the younger
+    {at:tT,place:"hmBase",cut:true,keys:[[tT,960,540,1.0],[c.tie+2.4,900,560,1.06],[tV-0.4,920,550,1.04]],d:4,draw:(x,tt,cam)=>{hm_tie(x,tt,tT,tV);}},
+    // day three: woven from both banks, until the two builders meet in the middle
+    {at:tV,place:"hmHigh",cut:true,keys:[[tV,960,540,1.0],[meet,1020,600,1.12]],d:4,draw:(x,tt,cam)=>{hm_weave(x,tt,(tt-c.weave-0.2)/(meet-c.weave-0.2),{meet:meet+0.2});}},
+    // that afternoon: a bridge for another year, people crossing it, the families at its head
+    {at:tD,place:"hmOver",cut:true,keys:[[tD,970,575,1.08],[c.how-0.4,960,540,1.0]],d:4,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VO,{age:0},hm_folks(HM_VO,tt,HM_OVERF.map(r=>[r[0],r[1],r[2],r[3],r[4],Object.assign({expr:"smile"},r[5]||{})])).concat([
+        hm_walk(HM_VO,"m3",tt,hm_deck(0.04,0.98,-0.15,0),tD-3,tD+18),hm_walk(HM_VO,"m5",tt,hm_deck(0.96,0.05,0.15,0),tD-8,tD+14),hm_walk(HM_VO,7,tt,hm_deck(0.98,0.3,-0.1,0),tD+1,tD+30)]));}},
     {at:tN,place:"hmNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N1,{});}},
     // a data team's work is like that: at their desks, each part leaning on someone else's
     {at:tA,place:"hmTeam",dis:1.0,keys:[[tA,960,540,1.0],[c.more,1040,550,1.06]],d:3,draw:(x,tt,cam)=>{
@@ -3151,7 +3762,7 @@ scene("days",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
   hm_card(ctx,S,t,c.hold+0.4,c.need-0.3,{kick:"For a year",title:"About 15 metres above the river",col:PK.C.orange},{y:40,mid:true});
   hm_card(ctx,S,t,tC+0.4,c.part-0.4,{kick:"Day one",title:"Every cord checked in"},{y:40,mid:true});
   hm_card(ctx,S,t,tT+0.4,c.tie+4.4,{kick:"Day two",title:"Cables across the gorge"},{y:40,mid:true});
-  hm_card(ctx,S,t,tV+0.4,c.weave+4.4,{kick:"Day three",title:"Woven from both banks"},{y:40,mid:true});
+  hm_card(ctx,S,t,tV+0.4,c.weave+4.4,{kick:"Day three",title:"Woven from both banks"},{y:40});
   hm_card(ctx,S,t,tD+0.4,c.how-0.8,{kick:"By that afternoon",title:"A bridge for another year",col:PK.C.green},{y:40,mid:true});
   hm_imagined(ctx,S,t,tA+0.6,c.breath,"The university, 2027 · imagined");
   PK.title(ctx,S,t,c.breath+0.2,"How, more than who","How a team works together","Leading data people · People first",{side:"right",size:64});
@@ -3162,9 +3773,8 @@ scene("who",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,
   const tZ=w("google","studied",-1.0),tG=c.gorge-0.5,tK=w("gorge","In a data team",-0.5),BA=PK.pace(ctx,"carmen",hm_boardA(sc,w)),N2=PK.pace(ctx,null,hm_note2(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"hmBoard",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[c.google,E.google],[c.quote,E.quote],[c.safe,E.safe],[c.word,E.word]]});}},
-    // the gorge keeps both, from custom
-    {at:tG,place:"hmGorge",dis:0.8,keys:[[tG,700,620,1.15]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.05});
-      hm_bank(x,tt,[["w2",300,800,"twist",false,{len:160}],["keeper",470,720,"clasp",false,{expr:"neutral",gaze:[1,0.4]}],["m4",200,900,HM_CARRY,false,{hold:hmq_coil,holds:true,expr:"smile"}]]);}},
+    // the gorge has both, from custom: each family's cord, promised and checked in; each community's part, known
+    {at:tG,place:"hmCheck",dis:0.8,keys:[[tG,960,540,1.0],[tK,900,540,1.06]],d:3,draw:(x,tt,cam)=>{hmv_check(x,tt,tG,tG+2.4);}},
     {at:tK,place:"hmNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N2,{});}}
   ]);
   hm_kick(ctx,S,ag_in(t,0.6,0.6)*(1-hm_apart(t,[[tZ,tG],[tK,1e9]])));
@@ -3228,7 +3838,7 @@ scene("turn",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
     // a turn each: Erin, who hadn't spoken; Marta, who knows the university's numbers
     {at:0,place:"hmTeam",later:true,keys:[[0,960,540,1.0],[c.erin-0.2,1300,580,1.1],[c.marta-0.2,820,580,1.08],[tF-0.4,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
       const R=hm_seven(x,tt,{rows:BD,clock:10.8,say:[[c.round,E.round]],faces:{erin:hm_sp(tt,5,[[eS,E.erin]],"neutral",0),marta:hm_sp(tt,2,[[mS,E.marta]],"neutral",0)}});
-      hm_name(x,R.erin,tt,c.erin+0.2,eS-0.2,"Erin Walsh","Platform engineer",150,-160);
+      hm_name(x,R.erin,tt,c.erin+0.2,eS-0.2,"Erin Walsh","Platform engineer",250,-160);
       hm_bub(x,R.erin,tt,eS,E.erin+0.5,["The old report reads","only the student system."],cam,{lean:200,rise:150});
       hm_name(x,R.marta,tt,c.marta+0.2,mS-0.2,"Marta Silva","Data analyst",150);
       hm_bub(x,R.marta,tt,mS,E.marta+0.5,["I can say what","each of them counts."],cam);}},
@@ -3242,7 +3852,8 @@ scene("turn",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
       const ph=R.jun&&R.jun.hc?[R.jun.hc[0]-40,R.jun.hc[1]+60]:[1700,600];
       PK.callout(x,440,36,620,270,ph,ag_io(tt,w("ticket","asks",-0.4),tL-0.3,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,{title:"Ticket · Registrar's office",who:["jun"],me:"jun",
         msgs:[{who:"jun",s:"Census day: students or learners?",at:w("ticket","asks",0)},{who:"jun",s:"Which one do we publish?",at:w("ticket","ticket",0.2)}]},tt,{}));}},
-    {at:tL,place:"hmNotes",dis:0.6,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}}
+    // the notebook's glossary has the two words the board has: cut, so they never show twice
+    {at:tL,place:"hmNotes",cut:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}}
   ]);
   hm_kick(ctx,S,ag_in(t,0.6,0.6)*(1-hm_apart(t,[[tG,tO],[w("ticket","asks",-0.4),1e9]])));
 });
@@ -3256,8 +3867,7 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
     {at:tZ,cut:true,place:"hmBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"helena",tt,BH,{say:[[c.thu,E.thu]]});}},
     {at:tI,place:"hmBoard",later:true,keys:[[tI,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BI,{say:[[c.trust,E.trust],[c.charter,E.charter],[c.small,E.small]]});}},
     // at the gorge, the way is passed on by doing it, parents beside children
-    {at:tY,place:"hmGorge",dis:0.8,keys:[[tY,620,700,1.25]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.1});
-      hm_bank(x,tt,[["w2",250,880,"twist",false,{len:120}],["w5",400,930,"twist",false,{len:80,gaze:[1,0.4]}],["keeper",470,740,"clasp",false,{expr:"smile",gaze:[1,0.5]}]]);}},
+    {at:tY,place:"hmBraid",dis:0.8,keys:[[tY,960,540,1.0],[tK,1060,600,1.12]],d:3,draw:(x,tt,cam)=>{hmv_braid(x,tt,tY,1e9,{kids:true});}},
     {at:tK,place:"hmNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N4,{});}},
     // on Friday, the page is on the wall
     {at:tW,place:"hmTeam",dis:0.8,keys:[[tW,960,540,1.0],[sc.dur,1000,550,1.05]],d:3,draw:(x,tt,cam)=>{hm_seven(x,tt,{rows:BH,clock:9});}}
@@ -3270,32 +3880,32 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
 /* ---------------------------------------------------------------- 7. Where the bridge stops */
 scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tL=c.lapse-0.5,tF=c.fell-0.5,tC=c.cut-0.5,tA=c.again-0.5,tN=c.line-0.5,tS=c.steel-0.5,tU=c.custom-0.5,tE=c.each-0.4,tT=c.tomas-0.4,N5=PK.pace(ctx,null,hm_note5(sc,w));
-  const fF=w("fell","bridge fell",0),fC=w("cut","cut it down",0);
+  const fF=w("fell","bridge fell",0),fC=w("cut","cut it down",0),sw=w("lapse","steel",-0.2);
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"hmGorge",keys:[[0,960,520,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.1,walkers:[hm_on(tt,"m3",0.06,0.94,0.4,14)].filter(Boolean)});
-      hm_bank(x,tt,[["w1",170,900,"stand",false,{expr:"smile"}],["m1",440,700,"clasp",false,{}],["w3",1560,740,"stand",true,{expr:"smile"}],["keeper",1700,880,"clasp",true,{}]]);}},
-    // around 1970, a steel bridge newly beside it: the bridge left for a time
-    {at:tL,place:"hmGorgeGrey",later:true,keys:[[tL,960,500,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,ag_in(tt,w("lapse","steel",-0.2),1.2),null,true);hmq_bridge(x,{age:0.85,grey:true});
-      hm_bank(x,tt,[["keeper",1640,820,"clasp",true,PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[tL+1.4,"look",2.6,[1,0.3]],[E.lapse,"nod"]])]]);}},
-    // 2020: the work stops; March 2021: it falls
-    {at:tF,place:"hmGorgeGrey",later:true,keys:[[tF,960,500,1.05],[fF+0.6,960,520,1.1]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1,null,true);hmq_bridge(x,{age:0.9,grey:true,fall:U.sine(U.clamp((tt-fF)/1.6,0,1))});
-      hm_bank(x,tt,[["m1",440,700,"clasp",false,PK.face(tt,{expr:"worry",gaze:[1,0.2]},[[tF+1,"look",2.4,[1,0.4]],[fF+0.3,"look",3.0,[1,0.6]]])]]);}},
-    // May 2025: cut down in the night
-    {at:tC,place:"hmGorgeGrey",later:true,keys:[[tC,960,500,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1,null,true);hmq_bridge(x,{age:0.15,grey:true,fall:U.sine(U.clamp((tt-fC)/1.4,0,1))});
-      hm_bank(x,tt,[["keeper",1640,820,"clasp",true,PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[fC+0.3,"look",3.0,[1,0.6]],[E.cut+0.4,"nod"]])]]);}},
-    // each time, woven again
-    {at:tA,place:"hmGorge",later:true,keys:[[tA,960,520,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0,k:U.clamp((tt-c.again)/(E.again-c.again+0.4),0,1)});
-      hm_bank(x,tt,[["w2",300,800,"twist",false,{len:160}],["m4",200,900,HM_CARRY,false,{hold:hmq_coil,holds:true,expr:"smile"}],["w3",1560,740,"twist",true,{len:150}],["m5",1760,880,HM_CARRY,true,{hold:hmq_coil,holds:true,expr:"smile"}]]);}},
-    // the weaving taught inside a builder's own family; the language of the work
-    {at:tN,place:"hmGorge",later:true,keys:[[tN,960,520,1.05],[tN+1.8,400,760,1.35]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.05});
-      hm_bank(x,tt,[["m2",190,860,"twist",false,{len:110}],["m5",400,950,"twist",false,{len:70,gaze:[1,0.4]}]]);}},
-    // most people cross on the steel bridge now; visitors on the grass one
-    {at:tS,place:"hmGorge",later:true,keys:[[tS,400,760,1.35],[tS+1.8,960,480,1.1]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1,U.clamp((tt-tS)/8,0,1));
-      hmq_bridge(x,{age:0.1,walkers:[hm_on(tt,"v1",0.06,0.94,tS+0.4,tS+14),hm_on(tt,"v2",0.1,0.94,tS+2.4,tS+16)].filter(Boolean)});
-      hm_bank(x,tt,[["keeper",1700,880,"clasp",true,{expr:"smile",gaze:[1,0.2]}]]);}},
-    // custom settles who does which part
-    {at:tU,place:"hmGorge",later:true,keys:[[tU,960,520,1.05],[c.judge,800,560,1.1]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.05});
-      hm_bank(x,tt,[["w1",170,900,HM_CARRY,false,{hold:hmq_coil,holds:true}],["w2",300,790,"twist",false,{len:150}],["m1",440,700,"clasp",false,{}],["w3",1560,740,"twist",true,{len:150}],["keeper",1700,880,"clasp",true,{}]]);}},
+    // still, each June, four communities at its head, and people crossing it
+    {at:0,place:"hmOver",keys:[[0,980,575,1.06],[tL,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VO,{age:0.1},hm_folks(HM_VO,tt,HM_OVERF).concat([hm_walk(HM_VO,"m3",tt,hm_deck(0.04,0.98,-0.15,0.1),-3,20),hm_walk(HM_VO,"w4",tt,hm_deck(0.96,0.05,0.15,0.1),-8,16)]));}},
+    // around 1970: a steel bridge newly built up the gorge; the bridge of grass, left for a time, sags and greys
+    {at:tL,place:"hmSteelGrey",cut:true,keys:[[tL,960,540,1.0],[c.fell-0.6,920,520,1.08]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VS,{age:0.85,grey:true,steel:ag_in(tt,sw,1.2)},[hm_walk(HM_VS,"m1",tt,[hmq_steelAt(0.12,0.2),hmq_steelAt(0.9,0.2)],sw+1.4,sw+14)]);}},
+    // 2020: the work stops; March 2021: the bridge falls, in two, into the gorge
+    {at:tF,place:"hmHighGrey",cut:true,keys:[[tF,960,540,1.0],[fF+0.6,940,600,1.08]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0.9,grey:true,fall:U.sine(U.clamp((tt-fF)/1.6,0,1))},hm_folks(HM_VH,tt,[["keeper",16.2,-2.2,"clasp",true,{face:PK.face(tt,{expr:"worry",gaze:[1,0.3]},[[fF+0.3,"look",3.0,[1,0.7]]])}],
+        ["m1",16.8,1.8,"stand",true,{face:PK.face(tt,{expr:"worry",gaze:[1,0.3]},[[fF+0.5,"look",3.0,[1,0.6]]])}]]));}},
+    // May 2025: cut loose in the night, it falls to the river
+    {at:tC,place:"hmHighGrey",later:true,keys:[[tC,960,540,1.0],[fC+0.6,960,620,1.06]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0.15,grey:true,cut:U.sine(U.clamp((tt-fC)/1.4,0,1))},[]);}},
+    // each time, woven again, from both banks
+    {at:tA,place:"hmHigh",later:true,keys:[[tA,960,540,1.0],[c.line-0.4,960,560,1.04]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0,k:Math.max(0.04,U.clamp((tt-c.again)/(E.again-c.again+0.6),0,1))},hm_folks(HM_VH,tt,HM_FARF));}},
+    // the weaving is taught inside a builder's own family: at the bridge's head, a grandfather shows a grandson; the language of the work
+    {at:tN,place:"hmHead",cut:true,keys:[[tN,960,540,1.0],[c.quechua,1010,560,1.06]],d:3,draw:(x,tt,cam)=>{hm_teachKid(x,tt,tN,c.quechua);}},
+    // most people cross on the steel bridge now, on foot and by truck; visitors cross the bridge of grass, down the gorge
+    {at:tS,place:"hmSteel",cut:true,keys:[[tS,960,540,1.0],[c.custom-0.6,1000,520,1.08]],d:3,draw:(x,tt,cam)=>{const k=U.clamp((tt-tS)/(c.custom-tS),0,1);
+      hmq_scene(x,HM_VS,{age:0.1,truck:U.lerp(0.95,0.05,k)},[hm_walk(HM_VS,"w3",tt,[hmq_steelAt(0.1,-0.3),hmq_steelAt(0.95,-0.3)],tS-2,tS+16),hm_walk(HM_VS,"m5",tt,[hmq_steelAt(0.85,0.35),hmq_steelAt(0.05,0.35)],tS-4,tS+12),
+        hm_walk(HM_VS,"v1",tt,hm_deck(0.05,0.95,-0.1,0.1),tS-3,tS+16),hm_walk(HM_VS,"v2",tt,hm_deck(0.02,0.92,0.1,0.1),tS-1,tS+18)]);}},
+    // custom settles who does which part: who makes the cord, who braids the cables (hm_bank.js)
+    {at:tU,place:"hmBraid",cut:true,keys:[[tU,960,540,1.0],[c.judge,900,560,1.08]],d:3,draw:(x,tt,cam)=>{hmv_braid(x,tt,tU,1e9);}},
     {at:tE,place:"hmNotes",dis:0.6,keys:[[tE,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N5,{});}},
     // Tomás asked to be asked
     {at:tT,place:"hmTeam",dis:0.8,keys:[[tT,700,600,1.1],[sc.dur,800,580,1.06]],d:3,draw:(x,tt,cam)=>{

@@ -5,13 +5,14 @@
   "howto": "The film is drawn in ink line: a gorge in the Andes, then the team's room in daylight, with whole people at work and the ideas written by hand at a board and in a notebook. Its colours mean the same in every film: blue is plans (the team's page), orange is data (the two numbers), green is something done or agreed, and amber a risk (a disagreement that turns to the person).",
   "src": [
     "hm_gorge.js",
+    "hm_bank.js",
     "hm_uni.js",
     "hm_scenes.js"
   ],
   "poster": [
     "days",
-    "weave",
-    3.0
+    "cord",
+    4.0
   ],
   "say": [
     [

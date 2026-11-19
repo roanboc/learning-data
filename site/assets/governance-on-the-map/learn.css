@@ -114,3 +114,26 @@
 .qdone .mr-close p{margin:0;max-width:68ch}
 .mr-close ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:68ch;color:var(--muted)}
 .mr-close li b,.mr-close .mr-next b{color:var(--fg)}
+
+/* play: a playground's experiments, numbered and ticked as the visitor makes each happen, its rows of controls, and its end */
+.mr-play .mr-info{margin-bottom:8px}
+.mr-goalbox{margin:0 16px 10px;padding:10px 12px 8px;border-radius:12px;background:var(--sheet);border:1.5px solid var(--edge)}
+.mr-gh{margin:0 0 6px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--imuted)}
+.mr-goals{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.mr-goals li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.35}
+.mr-goals li i{flex:0 0 auto;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;border:1.5px solid color-mix(in srgb,var(--c) 70%,var(--ink));transition:background .3s,border-color .3s,transform .3s}
+.mr-goals li.ok i{background:var(--okc);border-color:var(--okc);color:#fff;transform:scale(1.08)}
+.mr-goals li.ok span{color:var(--okc)}
+.mr-ctrl{display:grid;gap:0}
+.mr-prow{padding-top:4px;padding-bottom:6px}
+.mr-prow .mr-lbl{flex:0 0 100%}
+.mr-say.ok{box-shadow:inset 4px 0 0 var(--okc)}.mr-say.no{box-shadow:inset 4px 0 0 var(--noc)}.mr-say.warn{box-shadow:inset 4px 0 0 var(--warnc)}
+.mr-got{color:var(--okc);font-weight:700}
+.mr-stats p.ok{border-color:var(--okc)}.mr-stats p.ok b{color:var(--okc)}
+.mr-endbox:empty{display:none}
+.mr-end{margin:0 16px 12px;padding:12px 14px;border-radius:12px;background:#fff3cf;border:1.5px solid var(--warnc);font-size:15px;line-height:1.45}
+.mr-foot{display:flex;justify-content:flex-end;padding:0 16px 14px}
+@media (prefers-reduced-motion:reduce){.mr-goals li i{transition:none}}
+/* on a phone, a playground's picture keeps a width its words can be read at, and scrolls sideways inside its box */
+.mr-pic{overflow-x:auto;overscroll-behavior-x:contain;border-bottom:1px solid rgba(58,54,66,.16)}
+.mr-pic canvas{min-width:560px;border-bottom:0}

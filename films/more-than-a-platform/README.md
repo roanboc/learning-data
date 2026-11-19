@@ -12,6 +12,8 @@ It introduces the portal directly: why *Learning Data* exists (many courses are 
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [More than a platform](https://data.learn-all.org/more-than-a-platform/) | After the introduction | 6 min | 8 | none | [script](1-more-than-a-platform/script.md) · [source](1-more-than-a-platform/source/README.md) |
+
+For the whole series, on the site: [1 labs](https://data.learn-all.org/more-than-a-platform/labs/) and [4 scenarios](https://data.learn-all.org/more-than-a-platform/scenarios/), in English and Spanish, from the words in [site/assets/more-than-a-platform/](../../site/assets/more-than-a-platform/).
 <!-- /films -->
 
 ## The look and the sound

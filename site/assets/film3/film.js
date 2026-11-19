@@ -408,12 +408,24 @@ function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14
 
 // "gap": the beat after each line, a natural breath between sentences; longer stops are in breath.js
 const NARR={
-"drawn":{"name":"The sketch we drew","lead":3.8,"tail":1.4,"vo":[
- {"id":"recap","gap":0.8,"text":"In The Inner Life of Data, we drew a sketch of the university: a student, a class, an enrolment, a term and a course."},
- {"id":"over","gap":0.8,"text":"It was an oversimplification. Good enough to start, not good enough to count."},
+"cols":{"name":"Four columns","lead":4.2,"tail":1.0,"vo":[
+ {"id":"when","gap":0.8,"text":"China, 1391. Ten years after the first Yellow Registers, the Ming court has them made again, as it will every ten years."},
+ {"id":"change","gap":0.8,"text":"In ten years, a village changes: children are born, parents die, fields are bought and sold."},
+ {"id":"total","gap":0.8,"text":"But a new total can't show what changed. A household with less land might have sold a field, or hidden it under another name."},
+ {"id":"harm","gap":0.8,"text":"And a hidden field's tax falls on the families who can't hide theirs."},
+ {"id":"need","gap":0.8,"text":"The court needed each number to show where it came from."},
+ {"id":"cols","gap":0.8,"text":"So each household's entry has four columns: what it held ten years ago, what came in, what went out, and what it holds now."},
+ {"id":"sum","gap":0.8,"text":"The four must add up: a field that leaves one household's entry arrives in another's."},
+ {"id":"back","gap":0.8,"text":"Each register is checked against the one before, and one that doesn't add up is sent back to be made again."},
+ {"id":"story","gap":0.8,"text":"So each number comes with its story: anyone can see what changed, and why."},
+ {"id":"data","gap":0.8,"text":"A data model has the same need: every number should say what it counts, and on which day."}]},
+"drawn":{"name":"The sketch on the map","lead":0.8,"tail":1.4,"vo":[
+ {"id":"recap","gap":0.8,"text":"Our sketch of the university has a place on its map now: a student, a class, an enrolment, a term and a course."},
+ {"id":"map","gap":0.8,"text":"But the map says where each box lives. It doesn't say the boxes are right."},
+ {"id":"over","gap":0.8,"text":"It's an oversimplification: good enough to start, not good enough to count."},
  {"id":"normal","gap":0.8,"text":"That's normal. Every model starts simple, and gets sharper when a real question needs it."}]},
 "two":{"name":"Two numbers","lead":0.6,"tail":1.2,"vo":[
- {"id":"ask","gap":0.8,"text":"The day after census date, the Head of School asks Genie a simple question."},
+ {"id":"ask","gap":0.8,"text":"A few weeks after census date, the Head of School asks Genie a simple question."},
  {"id":"q","gap":0.8,"text":"How many students were enrolled in Data Science 101 on census date?"},
  {"id":"nums","gap":0.8,"text":"Genie says 131. The certified census report says 118."},
  {"id":"clean","gap":0.8,"text":"Both come from clean data. Every test passed."},
@@ -451,7 +463,8 @@ const NARR={
  {"id":"today","gap":0.8,"text":"Genie counted today. The census report counted on census date."},
  {"id":"change","gap":0.8,"text":"Enrolments change. A student is waitlisted, then enrolled, and later withdraws."},
  {"id":"extend","gap":0.8,"text":"The reference keeps each enrolment's current status. We need its history, so we extend the model."},
- {"id":"snap","gap":0.8,"text":"Each change is kept with its date, and the census count becomes a snapshot of one day."}]},
+ {"id":"snap","gap":0.8,"text":"Each change is kept with its date, and the census count becomes a snapshot of one day."},
+ {"id":"cols","gap":0.8,"text":"Like the four columns: what was there on census date, what came in, what went out, and what's there today."}]},
 "levels":{"name":"Three levels of precision","lead":0.6,"tail":1.2,"vo":[
  {"id":"still","gap":0.8,"text":"The sketch is sharper now. But it's still a sketch."},
  {"id":"concept","gap":0.8,"text":"This is the conceptual model: the things that matter, and how they connect, agreed with the business."},
@@ -472,24 +485,28 @@ const NARR={
  {"id":"answer","gap":0.8,"text":"Then it answers: 118, and shows how it counted."},
  {"id":"version","gap":0.8,"text":"The sketch has a new version, and a note that says why it changed."},
  {"id":"evolve","gap":0.8,"text":"It won't be the last. Models evolve: not often, but always."},
+ {"id":"yellow","gap":0.8,"text":"The Yellow Registers didn't. Made every ten years, for taxes paid every year, they fell behind."},
+ {"id":"white","gap":0.8,"text":"By the late Ming, counties kept white registers, written each year, for the real work. The yellow ones became a formality."},
+ {"id":"side","gap":0.8,"text":"A model that doesn't fit the business ends the same way: kept for show, while side copies do the work."},
  {"id":"tag","gap":0.8,"text":"Check the reference. Fit it to the business."}]}
 };
 
-const VODUR={"drawn/recap": 7.233, "drawn/over": 4.477, "drawn/normal": 5.144, "two/ask": 4.214, "two/q": 4.41, "two/nums": 5.473, "two/clean": 2.856, "two/meaning": 2.697, "two/check": 5.793, "two/industry": 5.339, "two/choose": 4.756, "two/tcsi": 7.985, "two/mcds": 8.139, "two/fit": 6.216, "cls/q": 1.896, "cls/ref": 6.042, "cls/hiding": 2.018, "cls/unit": 3.511, "cls/offering": 6.174, "cls/classes": 4.534, "cls/genie": 3.862, "cls/grain": 3.838, "census/q": 2.165, "census/term": 2.864, "census/ref": 5.895, "census/summer": 6.258, "census/adopt": 4.809, "courses/twice": 2.369, "courses/double": 3.522, "courses/one": 4.71, "courses/admission": 6.21, "courses/once": 5.369, "courses/link": 4.296, "time/q": 1.903, "time/today": 4.148, "time/change": 5.115, "time/extend": 5.576, "time/snap": 5.149, "levels/still": 2.587, "levels/concept": 5.543, "levels/logical": 6.967, "levels/physical": 5.077, "levels/agree": 7.36, "levels/another": 3.044, "fit/lift": 2.935, "fit/check": 3.478, "fit/adopt": 3.69, "fit/extend": 3.599, "fit/record": 6.102, "fit/cage": 5.806, "end/again": 1.39, "end/asks": 5.16, "end/answer": 3.433, "end/version": 3.521, "end/evolve": 3.606, "end/tag": 2.111};
+const VODUR={"cols/when": 8.264, "cols/change": 5.835, "cols/total": 7.189, "cols/harm": 3.721, "cols/need": 2.995, "cols/cols": 7.452, "cols/sum": 5.209, "cols/back": 5.81, "cols/story": 4.363, "cols/data": 5.049, "drawn/recap": 6.819, "drawn/map": 4.252, "drawn/over": 4.282, "drawn/normal": 5.144, "two/ask": 4.498, "two/q": 4.41, "two/nums": 5.473, "two/clean": 2.856, "two/meaning": 2.697, "two/check": 5.793, "two/industry": 5.339, "two/choose": 4.756, "two/tcsi": 7.985, "two/mcds": 8.139, "two/fit": 6.216, "cls/q": 1.896, "cls/ref": 6.042, "cls/hiding": 2.018, "cls/unit": 3.511, "cls/offering": 6.174, "cls/classes": 4.534, "cls/genie": 3.862, "cls/grain": 3.838, "census/q": 2.165, "census/term": 2.864, "census/ref": 5.895, "census/summer": 6.258, "census/adopt": 4.809, "courses/twice": 2.369, "courses/double": 3.522, "courses/one": 4.71, "courses/admission": 6.21, "courses/once": 5.369, "courses/link": 4.296, "time/q": 1.903, "time/today": 4.148, "time/change": 5.115, "time/extend": 5.576, "time/snap": 5.149, "time/cols": 5.877, "levels/still": 2.587, "levels/concept": 5.543, "levels/logical": 6.967, "levels/physical": 5.077, "levels/agree": 7.36, "levels/another": 3.044, "fit/lift": 2.935, "fit/check": 3.478, "fit/adopt": 3.69, "fit/extend": 3.599, "fit/record": 6.102, "fit/cage": 5.806, "end/again": 1.39, "end/asks": 5.16, "end/answer": 3.433, "end/version": 3.521, "end/evolve": 3.606, "end/yellow": 6.012, "end/white": 7.371, "end/side": 6.022, "end/tag": 2.111};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds of silence after a line, while the picture keeps moving. breathe: a wordless end to the chapter, whose picture starts at the scene's "breath" cue.
    pause: extra seconds of silence before a line. The narration itself lives in narration.js. */
 const BREATH={
-"drawn":{"hold":{"over":1}},
+"cols":{"hold":{"when":0.6,"change":0.6,"total":0.5,"harm":0.8,"need":0.6,"cols":1.2,"sum":1.0,"back":0.8,"story":1.0,"data":0.4}},
+"drawn":{"hold":{"recap":0.4,"map":0.8,"over":1}},
 "two":{"hold":{"nums":1.5,"fit":0.8},"breathe":3},
 "cls":{"hold":{"hiding":0.8},"breathe":3},
 "census":{"hold":{"summer":1}},
 "courses":{"hold":{"admission":1.2}},
-"time":{"hold":{"snap":1}},
+"time":{"hold":{"snap":1,"cols":1.2}},
 "levels":{"hold":{"logical":1,"physical":1,"agree":0.8}},
-"fit":{"hold":{"adopt":0.6,"extend":0.6,"record":1}},
-"end":{"hold":{"answer":1.2},"breathe":2.5}
+"fit":{"hold":{"lift":0.4,"check":0.5,"adopt":0.9,"extend":0.9,"record":1.3}},
+"end":{"hold":{"answer":1.2,"evolve":0.6,"yellow":0.8,"white":1.0,"side":0.8},"breathe":2.5}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -704,6 +721,771 @@ function filmStrip(ctx,x,y,frames,a,snap,t){withA(ctx,a,()=>{const fw=176,fh=92,
 function calCard(ctx,x,y,title,date,col,a,hi){withA(ctx,a,()=>{glass(ctx,x,y,300,112,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,30,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+22,300,10);
   T(ctx,title,x+150,y+22,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+80,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+104,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});}
 
+/* When things go wrong: the people. Characters drawn in code, in the first film's design language:
+   rounded forms, soft light from the upper left, a luminous outline, and a few expressive lines for faces.
+   The outline's colour carries meaning, like every colour in the films: cyan for the technical side, gold for the business side.
+   Needs the film's helpers (rgba, mix, clamp, lerp, TAU), from site/assets/film/film.js.
+
+   person(ctx,id,x,y,s,o)      draws a character facing us, feet at (x,y); s=1 is 560 px tall.
+                               o.pose: "stand" | "phone" | "explain" (o.pose2 and o.mix blend towards a second pose); o.expr: "calm" | "concerned" | "relieved"; o.t: seconds, for breathing and blinking.
+   personBack(ctx,id,x,y,s,o)  draws a character from behind, from the waist up, for over-the-shoulder shots. */
+
+const TECH=[120,200,255],BIZ=[255,209,102];
+const PEOPLE={
+  mei:{name:"Mei Tanaka",role:"Registrar's office",side:"Business",does:"produces",edge:BIZ,seed:1,
+    skin:[232,194,164],hair:{style:"bun",c:[26,24,30]},earrings:[255,214,140],
+    top:{kind:"cardigan",c:[98,134,114],inner:[236,236,230]},bottom:{kind:"skirt",c:[44,56,92]},legs:[52,48,60],shoe:[34,32,40],build:{sh:66,hip:58,h:0.95}},
+  ben:{name:"Ben Carter",role:"Student system team",side:"Technical",does:"produces",edge:TECH,seed:2,
+    skin:[238,196,166],hair:{style:"side",c:[128,78,44]},beard:[118,70,40],
+    top:{kind:"shirt",c:[140,172,208],rolled:true},bottom:{c:[98,92,76]},shoe:[70,50,38],build:{sh:80,hip:60,h:1.03}},
+  ana:{name:"Ana Ruiz",role:"Head of School",side:"Business",does:"uses",edge:BIZ,seed:3,
+    skin:[212,158,124],hair:{style:"bob",c:[62,44,36],streak:[178,176,182]},
+    top:{kind:"blazer",c:[164,84,64],inner:[238,230,216]},bottom:{c:[50,52,62]},shoe:[46,32,30],build:{sh:70,hip:60,h:0.97}},
+  sam:{name:"Sam Okafor",role:"Data engineer",side:"Technical",does:"uses",edge:TECH,seed:4,
+    skin:[112,72,50],hair:{style:"coily",c:[30,24,22]},glasses:[28,30,38],lanyard:TECH,
+    top:{kind:"overshirt",c:[60,92,110],inner:[212,220,232]},bottom:{c:[42,50,66]},shoe:[28,30,36],build:{sh:74,hip:58,h:1}},
+  leila:{name:"Leila Haddad",role:"Admissions office",side:"Business",does:"produces",edge:BIZ,seed:5,
+    skin:[198,150,112],hair:{style:"long",c:[46,32,28]},earrings:[255,214,140],
+    top:{kind:"blazer",c:[178,134,52],inner:[236,228,214]},bottom:{c:[36,38,46]},shoe:[32,28,30],build:{sh:68,hip:60,h:0.96}},
+  rosa:{name:"Rosa Díaz",role:"Admissions system team",side:"Technical",does:"produces",edge:TECH,seed:6,
+    skin:[182,130,92],hair:{style:"curly",c:[46,30,24]},
+    top:{kind:"sweater",c:[204,110,92]},bottom:{c:[54,72,98]},shoe:[226,228,232],build:{sh:66,hip:60,h:0.95}},
+  david:{name:"Prof. David Mensah",role:"Deputy Vice-Chancellor",side:"Business",does:"uses",edge:BIZ,seed:7,
+    skin:[78,50,36],hair:{style:"cropped",c:[190,190,192]},beard:[196,196,198],
+    top:{kind:"suit",c:[40,52,78],inner:[234,238,244]},bottom:{c:[38,46,66]},shoe:[26,22,22],build:{sh:80,hip:64,h:1.02}}
+};
+// arm angles are [upper arm, forearm], in radians from pointing straight down; positive points away from the body
+const POSE={
+  stand:  {L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:3,tilt:0.025,turn:0.05,gaze:[0,0],look:0},
+  phone:  {L:[0.11,-0.02],R:[0.07,Math.PI+0.64],hold:"phone",feet:25,shift:-3,tilt:0.05,turn:0.08,gaze:[0.15,1],look:1},
+  explain:{L:[0.1,-0.06],R:[0.98,2.3],hand:"open",feet:36,shift:6,tilt:-0.06,turn:0.28,gaze:[0.25,0],look:0}
+};
+// brows: inner and outer height (negative is up), arch; eyes: how open; mouth: smile (-1 to 1), open, width
+const EXPR={
+  calm:     {bi:0,bo:0,arch:-2.5,eye:1,smile:0.3,open:0,mw:17},
+  concerned:{bi:-4.5,bo:2,arch:-1,knit:2,eye:0.92,smile:-0.4,open:0,mw:14},
+  relieved: {bi:-2,bo:-3.5,arch:-4,eye:0.62,happy:1,smile:1,open:0.8,mw:24}
+};
+
+const lighten=(c,k)=>mix(c,[255,255,255],k),darken=(c,k)=>mix(c,[0,0,0],k);
+function litFill(ctx,c,x0,y0,x1,y1,k){k=k||1;const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,rgba(lighten(c,0.16*k),1));g.addColorStop(0.55,rgba(c,1));g.addColorStop(1,rgba(darken(c,0.3*k),1));ctx.fillStyle=g;ctx.fill();}
+function seam(ctx,c,a,w){ctx.strokeStyle=rgba(darken(c,0.55),a==null?0.45:a);ctx.lineWidth=w||1.6;ctx.stroke();}
+function ell(ctx,x,y,rx,ry,r){ctx.beginPath();ctx.ellipse(x,y,rx,ry,r||0,0,TAU);}
+function limb(ctx,pts,w0,w1,c,box){ // a tapered, rounded limb through points, lit from the upper left
+  const g=ctx.createLinearGradient(box[0],box[1],box[2],box[3]);g.addColorStop(0,rgba(lighten(c,0.14),1));g.addColorStop(1,rgba(darken(c,0.28),1));
+  ctx.lineCap="round";ctx.lineJoin="round";
+  for(let i=0;i<pts.length-1;i++){const w=lerp(w0,w1,i/Math.max(1,pts.length-2));
+    ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(pts[i+1][0],pts[i+1][1]);
+    ctx.strokeStyle=rgba(darken(c,0.55),0.5);ctx.lineWidth=w+2.4;ctx.stroke();}
+  for(let i=0;i<pts.length-1;i++){const w=lerp(w0,w1,i/Math.max(1,pts.length-2));
+    ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(pts[i+1][0],pts[i+1][1]);ctx.strokeStyle=g;ctx.lineWidth=w;ctx.stroke();}}
+
+/* ---- body ---- */
+function legs(ctx,P,po){const f=po.feet,sh=po.shift,b=P.bottom,skirt=b.kind==="skirt";
+  for(const s of [-1,1]){const hip=[s*22+sh*0.6,-282],knee=[s*f*0.8+sh*0.3,-146],ank=[s*f,-26];
+    ell(ctx,s*(f+7),-11,21,11,s*0.12);litFill(ctx,P.shoe,-40,-24,40,0);seam(ctx,P.shoe,0.5);
+    if(skirt)limb(ctx,[[knee[0]*0.9,-170],knee,ank],23,19,P.legs,[-60,-200,60,0]);
+    else limb(ctx,[hip,knee,ank],47,37,b.c,[-80,-300,80,0]);}
+  const hw=P.build.hip;
+  if(skirt){ctx.beginPath();ctx.moveTo(-hw+4,-312);ctx.lineTo(hw-4+sh,-312);ctx.quadraticCurveTo(hw+10+sh,-240,hw+16+sh*0.5,-150);ctx.quadraticCurveTo(0,-140,-hw-16+sh*0.5,-150);ctx.quadraticCurveTo(-hw-10,-240,-hw+4,-312);ctx.closePath();
+    litFill(ctx,b.c,-hw,-312,hw,-150);seam(ctx,b.c,0.5);}
+  else{ctx.beginPath();ctx.moveTo(-hw+2,-312);ctx.lineTo(hw-2+sh,-312);ctx.quadraticCurveTo(hw+2+sh,-272,hw-8+sh*0.6,-252);ctx.lineTo(sh*0.4,-228);ctx.lineTo(-hw+8+sh*0.6,-252);ctx.quadraticCurveTo(-hw-2,-272,-hw+2,-312);ctx.closePath();
+    litFill(ctx,b.c,-hw,-312,hw,-228);}}
+function torsoPath(ctx,P,br,sh){const sw=P.build.sh,hw=P.build.hip,y0=-448+br;ctx.beginPath();ctx.moveTo(-15,y0);
+  ctx.bezierCurveTo(-30,y0+4,-sw+26,y0+10,-sw+12,y0+20);ctx.quadraticCurveTo(-sw-2,y0+28,-sw-2,y0+50);
+  ctx.bezierCurveTo(-sw-2,y0+84,-hw-2,-352,-hw+2,-322);ctx.quadraticCurveTo(-hw-4+sh*0.4,-290,-hw-1+sh*0.6,-256);
+  ctx.quadraticCurveTo(sh*0.6,-248,hw+1+sh*0.6,-256);ctx.quadraticCurveTo(hw+4+sh*0.4,-290,hw-2,-322);
+  ctx.bezierCurveTo(hw+2,-352,sw+2,y0+84,sw+2,y0+50);ctx.quadraticCurveTo(sw+2,y0+28,sw-12,y0+20);ctx.bezierCurveTo(sw-26,y0+10,30,y0+4,15,y0);ctx.closePath();}
+function torso(ctx,P,br,sh){const T=P.top,c=T.c,sw=P.build.sh,y0=-448+br;
+  torsoPath(ctx,P,br,sh);litFill(ctx,c,-sw,y0,sw,-250);seam(ctx,c,0.5);
+  ctx.save();torsoPath(ctx,P,br,sh);ctx.clip();
+  const inner=(pts)=>{ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(const p of pts.slice(1))ctx.lineTo(p[0],p[1]);ctx.closePath();litFill(ctx,T.inner,-20,y0,20,-260,0.6);};
+  if(T.kind==="blazer"||T.kind==="suit"){inner([[-17,y0-2],[17,y0-2],[1+sh*0.3,-352]]);
+    ctx.strokeStyle=rgba(darken(c,0.5),0.7);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(-17,y0);ctx.lineTo(-30,y0+34);ctx.lineTo(-12,y0+42);ctx.lineTo(sh*0.3,-352);ctx.lineTo(sh*0.4,-256);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(17,y0);ctx.lineTo(30,y0+34);ctx.lineTo(12,y0+42);ctx.lineTo(1+sh*0.3,-352);ctx.stroke();
+    ell(ctx,4+sh*0.35,-318,3.2,3.2);ctx.fillStyle=rgba(darken(c,0.45),0.9);ctx.fill();
+    if(T.kind==="suit"){ctx.beginPath();ctx.moveTo(-sw+18,-338);ctx.lineTo(-sw+44,-338);ctx.strokeStyle=rgba(darken(c,0.5),0.6);ctx.stroke();}}
+  else if(T.kind==="cardigan"){inner([[-16,y0-2],[16,y0-2],[9+sh*0.4,-250],[-9+sh*0.4,-250]]);
+    ctx.fillStyle=rgba(lighten(c,0.35),0.9);for(let i=0;i<4;i++){ell(ctx,-12+sh*0.4,-392+i*34,2.6,2.6);ctx.fill();}
+    ctx.strokeStyle=rgba(darken(c,0.4),0.6);ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(-sw+10,-262);ctx.lineTo(sw+sh,-262);ctx.stroke();}
+  else if(T.kind==="overshirt"){inner([[-19,y0-2],[19,y0-2],[13+sh*0.4,-250],[-13+sh*0.4,-250]]);
+    ctx.fillStyle=rgba(darken(c,0.25),1);ctx.beginPath();ctx.moveTo(-19,y0);ctx.lineTo(-34,y0+26);ctx.lineTo(-15,y0+22);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(19,y0);ctx.lineTo(34,y0+26);ctx.lineTo(15,y0+22);ctx.closePath();ctx.fill();
+    ctx.fillStyle=rgba(darken(c,0.3),0.8);for(const s of [-1,1]){ctx.beginPath();rr(ctx,s*40-12,-392,24,20,3);ctx.fill();}}
+  else if(T.kind==="shirt"){ctx.strokeStyle=rgba(darken(c,0.35),0.7);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(sh*0.2,y0+8);ctx.lineTo(sh*0.4,-256);ctx.stroke();
+    ctx.fillStyle=rgba(darken(c,0.4),0.85);for(let i=0;i<5;i++){ell(ctx,3+sh*0.3,-420+i*34,2,2);ctx.fill();}
+    ctx.fillStyle=rgba(lighten(c,0.12),1);for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*4,y0+2);ctx.lineTo(s*22,y0-4);ctx.lineTo(s*20,y0+18);ctx.closePath();ctx.fill();seam(ctx,c,0.4,1.2);}}
+  else if(T.kind==="sweater"){ctx.strokeStyle=rgba(darken(c,0.3),0.8);ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(-18,y0);ctx.quadraticCurveTo(0,y0+18,18,y0);ctx.stroke();
+    ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(-sw,-260);ctx.lineTo(sw+sh,-260);ctx.stroke();
+    ctx.strokeStyle=rgba(darken(c,0.2),0.18);ctx.lineWidth=1;for(let x=-54;x<=54;x+=12){ctx.beginPath();ctx.moveTo(x,-400);ctx.lineTo(x+sh*0.3,-266);ctx.stroke();}}
+  if(P.lanyard){ctx.strokeStyle=rgba(P.lanyard,0.85);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-12,y0+2);ctx.lineTo(-4+sh*0.3,-346);ctx.lineTo(4+sh*0.3,-346);ctx.lineTo(12,y0+2);ctx.stroke();
+    ctx.fillStyle="rgba(236,243,255,0.92)";ctx.beginPath();rr(ctx,-13+sh*0.3,-346,26,34,4);ctx.fill();ctx.fillStyle=rgba(P.lanyard,0.9);ctx.fillRect(-9+sh*0.3,-340,18,6);}
+  ctx.restore();}
+function arm(ctx,P,s,a,br,po){const sw=P.build.sh,T=P.top,sx=s*(sw-12),sy=-416+br,L1=108,L2=100;
+  const e=[sx+s*Math.sin(a[0])*L1,sy+Math.cos(a[0])*L1],w=[e[0]+s*Math.sin(a[1])*L2,e[1]+Math.cos(a[1])*L2];
+  const d=[s*Math.sin(a[1]),Math.cos(a[1])],box=[-sw-60,-450,sw+60,-200];
+  if(T.rolled){limb(ctx,[[sx,sy],e,[e[0]+d[0]*28,e[1]+d[1]*28]],31,28,T.c,box);limb(ctx,[[e[0]+d[0]*26,e[1]+d[1]*26],w],23,21,P.skin,box);
+    ctx.lineCap="butt";ctx.strokeStyle=rgba(darken(T.c,0.5),0.5);ctx.lineWidth=33;ctx.beginPath();ctx.moveTo(e[0]+d[0]*19,e[1]+d[1]*19);ctx.lineTo(e[0]+d[0]*35,e[1]+d[1]*35);ctx.stroke();
+    ctx.strokeStyle=rgba(lighten(T.c,0.12),1);ctx.lineWidth=31;ctx.beginPath();ctx.moveTo(e[0]+d[0]*20,e[1]+d[1]*20);ctx.lineTo(e[0]+d[0]*34,e[1]+d[1]*34);ctx.stroke();}
+  else{limb(ctx,[[sx,sy],e,w],31,26,T.c,box);
+    ctx.lineCap="butt";ctx.strokeStyle=rgba(darken(T.c,0.3),0.9);ctx.lineWidth=27;ctx.beginPath();ctx.moveTo(w[0]-d[0]*10,w[1]-d[1]*10);ctx.lineTo(w[0]-d[0]*4,w[1]-d[1]*4);ctx.stroke();}
+  const h=[w[0]+d[0]*13,w[1]+d[1]*13],ang=Math.atan2(d[1],d[0])-Math.PI/2;
+  if(po.hold==="phone"&&s===1){phoneInHand(ctx,P,h,ang);return;}
+  ctx.save();ctx.translate(h[0],h[1]);ctx.rotate(ang);
+  if(po.hand==="open"&&s===1){ // an open palm, facing us
+    for(let i=0;i<4;i++){ctx.save();ctx.rotate((i-1.5)*0.16);ell(ctx,0,15,4.6,11);litFill(ctx,P.skin,-8,0,8,26);ctx.restore();}
+    ell(ctx,0,2,13,14);litFill(ctx,P.skin,-14,-14,14,14);ell(ctx,-s*13,-2,5,10,s*0.7);litFill(ctx,P.skin,-18,-12,-6,8);}
+  else{ell(ctx,0,2,12,15);litFill(ctx,P.skin,-12,-13,12,17);seam(ctx,P.skin,0.3,1.2);ell(ctx,-s*9,-4,4.5,8,s*0.35);litFill(ctx,P.skin,-14,-12,-4,4);}
+  ctx.restore();}
+function phoneInHand(ctx,P,h,ang){ctx.save();ctx.translate(h[0]-4,h[1]-8);ctx.rotate(-0.22);
+  ell(ctx,0,16,13,15);litFill(ctx,P.skin,-13,0,13,32);
+  ctx.save();ctx.shadowColor=rgba(TECH,0.9);ctx.shadowBlur=16;ctx.beginPath();rr(ctx,-19,-40,38,66,6);ctx.fillStyle="#0c1426";ctx.fill();ctx.restore();
+  ctx.beginPath();rr(ctx,-16,-36,32,58,4);const g=ctx.createLinearGradient(0,-36,0,22);g.addColorStop(0,"rgba(150,210,255,0.95)");g.addColorStop(1,"rgba(60,110,190,0.95)");ctx.fillStyle=g;ctx.fill();
+  ctx.fillStyle="rgba(255,120,100,0.95)";ctx.beginPath();rr(ctx,-12,-30,24,8,2);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.7)";for(let i=0;i<3;i++){ctx.fillRect(-12,-16+i*8,24-i*6,3);}
+  ell(ctx,-15,6,5,9,0.5);litFill(ctx,P.skin,-20,-4,-10,14);ell(ctx,15,2,5,12,-0.2);litFill(ctx,P.skin,10,-10,20,14);
+  ctx.restore();}
+
+/* ---- head ---- */
+function headPath(ctx){ctx.beginPath();ctx.moveTo(0,-56);ctx.bezierCurveTo(27,-56,42,-40,42,-12);ctx.bezierCurveTo(42,12,37,28,25,40);ctx.bezierCurveTo(16,48,8,51,0,51);
+  ctx.bezierCurveTo(-8,51,-16,48,-25,40);ctx.bezierCurveTo(-37,28,-42,12,-42,-12);ctx.bezierCurveTo(-42,-40,-27,-56,0,-56);ctx.closePath();}
+function bumpy(ctx,cx,cy,rx,ry,a0,a1,n,amp,phase){ // an outline with soft bumps, for coily and curly hair
+  for(let i=0;i<=n;i++){const a=lerp(a0,a1,i/n),r=1+amp*Math.sin(i*2.1+phase)*0.5+amp*0.5*Math.abs(Math.sin(i*1.3+phase*2));
+    const x=cx+Math.cos(a)*rx*r,y=cy+Math.sin(a)*ry*r;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}}
+function hairBack(ctx,P){const H=P.hair;if(!H)return;const c=H.c;
+  if(H.style==="bob"){ctx.beginPath();ctx.moveTo(-47,-20);ctx.bezierCurveTo(-54,-72,54,-72,47,-20);ctx.bezierCurveTo(52,10,52,34,44,44);ctx.quadraticCurveTo(30,50,22,40);ctx.lineTo(-22,40);ctx.quadraticCurveTo(-30,50,-44,44);ctx.bezierCurveTo(-52,34,-52,10,-47,-20);ctx.closePath();litFill(ctx,c,-50,-70,50,50);}
+  if(H.style==="bun"){ell(ctx,0,-66,19,16);litFill(ctx,c,-19,-82,19,-50);seam(ctx,c,0.4);}
+  if(H.style==="long"){ctx.beginPath();ctx.moveTo(-46,-20);ctx.bezierCurveTo(-52,-78,52,-78,46,-20);ctx.lineTo(46,40);ctx.lineTo(-46,40);ctx.closePath();litFill(ctx,c,-50,-70,50,40);
+    for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*47,-24);ctx.bezierCurveTo(s*52,20,s*60,70,s*62,124);ctx.quadraticCurveTo(s*48,134,s*30,126);ctx.bezierCurveTo(s*33,90,s*36,54,s*34,24);ctx.closePath();
+      litFill(ctx,c,s*30,-24,s*62,130);ctx.strokeStyle=rgba(lighten(c,0.22),0.35);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(s*44,10);ctx.bezierCurveTo(s*48,50,s*52,90,s*50,120);ctx.stroke();}}
+  if(H.style==="curly"){ctx.beginPath();bumpy(ctx,0,-8,62,70,Math.PI*0.72,Math.PI*2.28,34,0.13,P.seed);ctx.quadraticCurveTo(0,86,-44,54);ctx.closePath();litFill(ctx,c,-60,-80,60,70);
+    ctx.fillStyle=rgba(lighten(c,0.18),0.5);for(let i=0;i<40;i++){const a=hash(i,P.seed)*TAU,r=30+hash(i,9)*30;ell(ctx,Math.cos(a)*r,-8+Math.sin(a)*r*1.1,3,2,a);ctx.fill();}}}
+function hairFront(ctx,P){const H=P.hair;if(!H)return;const c=H.c;
+  if(H.style==="coily"){ctx.beginPath();bumpy(ctx,0,-22,46,38,Math.PI*1.02,Math.PI*1.98,26,0.07,P.seed);ctx.bezierCurveTo(42,-14,36,-30,24,-32);ctx.quadraticCurveTo(0,-38,-24,-32);ctx.bezierCurveTo(-36,-30,-42,-14,-45,-24);ctx.closePath();litFill(ctx,c,-46,-64,46,-20);
+    ctx.save();ctx.clip();ctx.fillStyle=rgba(lighten(c,0.22),0.55);for(let i=0;i<60;i++){ell(ctx,(hash(i,3)-0.5)*90,-62+hash(i,5)*34,1.8,1.5);ctx.fill();}ctx.restore();}
+  if(H.style==="bob"){ctx.beginPath();ctx.moveTo(-44,-14);ctx.bezierCurveTo(-48,-58,-10,-66,8,-58);ctx.bezierCurveTo(34,-54,48,-34,44,-6);ctx.quadraticCurveTo(30,-36,4,-34);ctx.quadraticCurveTo(-22,-30,-32,-20);ctx.quadraticCurveTo(-38,4,-40,24);ctx.closePath();litFill(ctx,c,-46,-64,46,20);
+    ctx.save();ctx.clip();ctx.strokeStyle=rgba(H.streak,0.45);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-4,-60);ctx.quadraticCurveTo(12,-44,30,-34);ctx.stroke();ctx.restore();}
+  if(H.style==="long"){ctx.beginPath();ctx.moveTo(-1,-40);ctx.quadraticCurveTo(-26,-36,-36,-12);ctx.quadraticCurveTo(-40,10,-39,34);ctx.lineTo(-47,34);ctx.lineTo(-47,-18);ctx.bezierCurveTo(-50,-82,50,-82,47,-18);ctx.lineTo(47,34);ctx.lineTo(39,34);ctx.quadraticCurveTo(40,10,36,-12);ctx.quadraticCurveTo(26,-36,1,-40);ctx.closePath();
+    litFill(ctx,c,-47,-66,47,34);ctx.save();ctx.clip();ctx.strokeStyle=rgba(lighten(c,0.25),0.4);ctx.lineWidth=1.4;for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*4,-56);ctx.quadraticCurveTo(s*30,-50,s*42,-10);ctx.stroke();}ctx.restore();}
+  if(H.style==="bun"){ctx.beginPath();ctx.moveTo(-44,-8);ctx.bezierCurveTo(-48,-80,48,-80,44,-8);ctx.quadraticCurveTo(34,-30,2,-38);ctx.lineTo(-2,-38);ctx.quadraticCurveTo(-34,-30,-43,-8);ctx.closePath();litFill(ctx,c,-46,-62,46,-8);
+    ctx.strokeStyle=rgba(lighten(c,0.25),0.5);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(0,-56);ctx.lineTo(0,-38);ctx.stroke();}
+  if(H.style==="side"){ctx.beginPath();ctx.moveTo(-44,-6);ctx.bezierCurveTo(-50,-84,34,-90,47,-30);ctx.lineTo(44,-8);ctx.quadraticCurveTo(38,-30,26,-38);ctx.quadraticCurveTo(-10,-30,-30,-38);ctx.quadraticCurveTo(-40,-26,-43,-6);ctx.closePath();litFill(ctx,c,-46,-66,46,-6);
+    ctx.save();ctx.clip();ctx.strokeStyle=rgba(lighten(c,0.3),0.5);ctx.lineWidth=1.4;for(let i=0;i<5;i++){ctx.beginPath();ctx.moveTo(-26+i*10,-56+i);ctx.quadraticCurveTo(-6+i*10,-60,16+i*8,-44);ctx.stroke();}ctx.restore();}
+  if(H.style==="curly"){ctx.beginPath();bumpy(ctx,0,-24,48,36,Math.PI*1.0,Math.PI*2.0,24,0.16,P.seed+1);ctx.quadraticCurveTo(30,-26,6,-34);ctx.quadraticCurveTo(-24,-30,-48,-24);ctx.closePath();litFill(ctx,c,-50,-66,50,-20);}
+  if(H.style==="cropped"){ctx.beginPath();ctx.moveTo(-43,-16);ctx.bezierCurveTo(-46,-79,46,-79,43,-16);ctx.quadraticCurveTo(38,-36,24,-40);ctx.quadraticCurveTo(0,-46,-24,-40);ctx.quadraticCurveTo(-38,-36,-42,-16);ctx.closePath();
+    ctx.fillStyle=rgba(c,0.9);ctx.fill();ctx.save();ctx.clip();ctx.fillStyle=rgba(darken(c,0.3),0.45);for(let i=0;i<70;i++){const x=(hash(i,4)-0.5)*84,y=-58+hash(i,6)*24;ell(ctx,x,y,1.2,1.2);ctx.fill();}ctx.restore();}}
+function beard(ctx,P){const c=P.beard;ctx.beginPath();ctx.moveTo(-42,0);ctx.bezierCurveTo(-42,22,-34,40,-24,46);ctx.bezierCurveTo(-14,55,14,55,24,46);ctx.bezierCurveTo(34,40,42,22,42,0);
+  ctx.lineTo(36,4);ctx.quadraticCurveTo(28,14,14,16);ctx.quadraticCurveTo(0,13,-14,16);ctx.quadraticCurveTo(-28,14,-36,4);ctx.closePath();ctx.fillStyle=rgba(c,0.94);ctx.fill();
+  ctx.fillStyle=rgba(lighten(c,0.2),0.35);for(let i=0;i<50;i++){const a=hash(i,2)*Math.PI,r=30+hash(i,8)*14;ell(ctx,Math.cos(a)*r*0.9,14+Math.sin(a)*r*0.8,1.2,1.2);ctx.fill();}}
+function face(ctx,P,E,po,t){const fx=po.turn*7,ly=po.look*3,dark=[30,26,34];
+  // blinking: a quick close every few seconds, at a different moment for each person
+  const bt=(t+P.seed*1.37)%4.3,blink=bt<0.14?Math.abs(bt-0.07)/0.07:1,open=E.eye*blink*(po.look?0.78:1);
+  const skinDark=P.skin[0]+P.skin[1]<250;
+  if(!skinDark){ctx.fillStyle="rgba(230,120,110,0.14)";for(const s of [-1,1]){ell(ctx,s*23+fx,12,10,7);ctx.fill();}}
+  for(const s of [-1,1]){const ex=s*15+fx,ey=-5+ly;
+    if(open<0.22||E.happy&&open<0.7){ctx.strokeStyle=rgba(dark,0.9);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.beginPath();
+      if(E.happy){ctx.moveTo(ex-6,ey+1);ctx.quadraticCurveTo(ex,ey-6,ex+6,ey+1);}else{ctx.moveTo(ex-6,ey);ctx.quadraticCurveTo(ex,ey+2,ex+6,ey);}ctx.stroke();}
+    else{ell(ctx,ex+po.gaze[0]*1.5,ey+po.gaze[1]*1.5,4.9,6.4*open);ctx.fillStyle=rgba(dark,1);ctx.fill();
+      ell(ctx,ex+po.gaze[0]*1.5-1.6,ey+po.gaze[1]*1.5-2.2*open,1.5,1.5);ctx.fillStyle="rgba(255,255,255,0.9)";ctx.fill();
+      ctx.strokeStyle=rgba(darken(P.skin,0.45),0.5);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(ex-7,ey-6.5*open-0.5);ctx.quadraticCurveTo(ex,ey-8.8*open-1,ex+7,ey-6.5*open-0.5);ctx.stroke();}
+    // brows
+    const ix=s*(8-(E.knit||0))+fx,ox=s*25+fx,by=-19+ly*0.6;ctx.strokeStyle=rgba(darken(P.hair.c,0.1),0.92);ctx.lineWidth=3.6;ctx.lineCap="round";
+    ctx.beginPath();ctx.moveTo(ix,by+E.bi);ctx.quadraticCurveTo((ix+ox)/2,by+E.arch+Math.min(E.bi,E.bo)*0.5,ox,by+E.bo+1);ctx.stroke();}
+  // nose
+  ctx.strokeStyle=rgba(darken(P.skin,0.4),0.55);ctx.lineWidth=2;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(fx*1.3+1,3+ly);ctx.quadraticCurveTo(fx*1.3+5,12+ly,fx*1.3-2,15+ly);ctx.stroke();
+  if(P.beard)beard(ctx,P);
+  // mouth
+  const mw=E.mw/2,my=27+ly*0.5,mx=fx*1.1;
+  if(E.open>0){ctx.beginPath();ctx.moveTo(mx-mw,my);ctx.quadraticCurveTo(mx,my+E.smile*3,mx+mw,my);ctx.quadraticCurveTo(mx,my+E.smile*6+E.open*14,mx-mw,my);ctx.closePath();ctx.fillStyle="rgba(92,34,40,0.95)";ctx.fill();
+    ctx.save();ctx.clip();ctx.fillStyle="rgba(250,248,244,0.95)";ctx.fillRect(mx-mw,my-2,mw*2,4.5);ctx.restore();}
+  else{ctx.strokeStyle=rgba(darken(P.skin,0.55),0.85);ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(mx-mw,my-E.smile*1.5);ctx.quadraticCurveTo(mx,my+E.smile*6,mx+mw,my-E.smile*1.5);ctx.stroke();}
+  if(P.glasses){ctx.strokeStyle=rgba(P.glasses,0.95);ctx.lineWidth=2.4;for(const s of [-1,1]){ell(ctx,s*15+fx,-4+ly,11.5,10.5);ctx.stroke();}
+    ctx.beginPath();ctx.moveTo(-4+fx,-6+ly);ctx.quadraticCurveTo(fx,-9+ly,4+fx,-6+ly);ctx.stroke();ctx.beginPath();ctx.moveTo(-26+fx,-7+ly);ctx.lineTo(-40,-9);ctx.moveTo(26+fx,-7+ly);ctx.lineTo(40,-9);ctx.stroke();
+    ctx.strokeStyle="rgba(255,255,255,0.3)";ctx.lineWidth=1.6;for(const s of [-1,1]){ctx.beginPath();ctx.arc(s*15+fx,-4+ly,8,-2.6,-1.8);ctx.stroke();}}}
+function head(ctx,P,E,po,t){
+  hairBack(ctx,P);
+  if(!["bob","curly","long"].includes(P.hair.style))for(const s of [-1,1]){ell(ctx,s*42,0,7,11);litFill(ctx,P.skin,-50,-12,50,12);seam(ctx,P.skin,0.25,1.2);}
+  headPath(ctx);litFill(ctx,P.skin,-42,-56,42,51);seam(ctx,P.skin,0.3,1.4);
+  face(ctx,P,E,po,t);
+  if(P.earrings){ctx.fillStyle=rgba(P.earrings,1);for(const s of [-1,1]){ell(ctx,s*43,13,2.8,2.8);ctx.fill();}}
+  hairFront(ctx,P);
+  if(po.hold==="phone"){const g=ctx.createRadialGradient(0,50,4,0,40,90);g.addColorStop(0,"rgba(120,200,255,0.22)");g.addColorStop(1,"rgba(120,200,255,0)");ctx.fillStyle=g;headPath(ctx);ctx.fill();}}
+
+/* ---- a whole person, with a luminous outline ---- */
+const PCV={};
+function pcanvas(k,w,h){const c=PCV[k]||(PCV[k]=document.createElement("canvas"));if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,w,h);return[c,x];}
+function outlined(ctx,draw,x,y,s,edge,box,glowA){ // draws into a spare canvas, then adds a thin glowing outline around the silhouette
+  const [x0,y0,x1,y1]=box,pad=24,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+  const [c,cx]=pcanvas("p",w,h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);
+  const [tc,tx]=pcanvas("t",w,h);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(edge,1);tx.fillRect(0,0,w,h);tx.globalCompositeOperation="source-over";
+  const ox=x+x0*s-pad,oy=y+y0*s-pad,r=Math.max(1,1.25*s),[oc,o]=pcanvas("o",w,h);
+  o.save();o.shadowColor=rgba(edge,glowA==null?0.4:glowA);o.shadowBlur=12*Math.max(0.7,s);o.globalAlpha=0.65;o.drawImage(tc,0,0);o.restore();
+  o.save();o.globalAlpha=0.85;for(let i=0;i<8;i++){const a=i/8*TAU;o.drawImage(tc,Math.cos(a)*r,Math.sin(a)*r);}o.restore();
+  o.drawImage(c,0,0);ctx.drawImage(oc,ox,oy);}
+// a pose between two poses: o.pose2 and o.mix (0 to 1) move the limbs smoothly; what the hand holds switches halfway
+function blendPose(a,b,m){if(!b||!(m>0))return a;if(m>=1)return b;const L=(u,v)=>u+(v-u)*m,out={};
+  Object.keys(Object.assign({},a,b)).forEach(k=>{const u=a[k],v=b[k];out[k]=Array.isArray(u)&&Array.isArray(v)?u.map((q,i)=>L(q,v[i])):typeof u==="number"&&typeof v==="number"?L(u,v):(m<0.5?u:v);});return out;}
+function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h;
+  const br=Math.sin(t*1.7+P.seed)*1.4;
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,100);g.addColorStop(0,"rgba(0,0,0,0.45)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ell(ctx,0,-4,100,16);ctx.fill();ctx.restore();
+  const front=a=>a[1]>Math.PI*0.8;
+  outlined(ctx,cx=>{
+    if(!front(po.L))arm(cx,P,-1,po.L,br,po);if(!front(po.R))arm(cx,P,1,po.R,br,po);
+    legs(cx,P,po);
+    limb(cx,[[0,-470+br],[0,-440+br]],30,30,darken(P.skin,0.12),[-20,-470,20,-440]);
+    torso(cx,P,br,po.shift);
+    cx.save();cx.translate(po.shift*0.2,-452+br);cx.rotate(po.tilt);cx.translate(0,-50+po.look*2);head(cx,P,E,po,t);cx.restore();
+    if(front(po.L))arm(cx,P,-1,po.L,br,po);if(front(po.R))arm(cx,P,1,po.R,br,po);
+  },x,y,k,P.edge,[-250,-650,250,10],o.glow);}
+function personBack(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],k=s*P.build.h,sw=P.build.sh,t=o.t||0,br=Math.sin(t*1.7+P.seed)*1.4;
+  outlined(ctx,cx=>{
+    limb(cx,[[-sw+6,-410],[-sw-6,-300]],32,30,darken(P.top.c,0.2),[-sw,-420,0,-300]);limb(cx,[[sw-6,-410],[sw+4,-300]],32,30,darken(P.top.c,0.2),[0,-420,sw,-300]);
+    torsoPath(cx,P,br,0);litFill(cx,darken(P.top.c,0.15),-sw,-450,sw,-250);seam(cx,P.top.c,0.5);
+    cx.strokeStyle=rgba(darken(P.top.c,0.45),0.6);cx.lineWidth=2;cx.beginPath();cx.moveTo(-24,-446+br);cx.quadraticCurveTo(0,-432+br,24,-446+br);cx.stroke();
+    limb(cx,[[0,-472+br],[0,-446+br]],28,28,darken(P.skin,0.2),[-20,-470,20,-440]);
+    cx.save();cx.translate(0,-502+br);
+    for(const s of [-1,1]){ell(cx,s*41,2,7,11);litFill(cx,darken(P.skin,0.1),-50,-12,50,12);}
+    headPath(cx);litFill(cx,darken(P.skin,0.1),-42,-56,42,51);
+    cx.beginPath();bumpy(cx,0,-8,46,54,Math.PI*0.86,Math.PI*2.14,40,0.06,P.seed);cx.quadraticCurveTo(20,42,0,44);cx.quadraticCurveTo(-20,42,-40,30);cx.closePath();litFill(cx,P.hair.c,-46,-64,46,44);
+    cx.fillStyle=rgba(lighten(P.hair.c,0.22),0.5);for(let i=0;i<70;i++){const a=hash(i,3)*TAU,r=hash(i,5)*40;cx.beginPath();cx.ellipse(Math.cos(a)*r,-10+Math.sin(a)*r,1.8,1.5,0,0,TAU);cx.fill();}
+    if(P.glasses){cx.strokeStyle=rgba(P.glasses,0.9);cx.lineWidth=2.4;cx.beginPath();cx.moveTo(-40,-8);cx.lineTo(-46,-2);cx.moveTo(40,-8);cx.lineTo(46,-2);cx.stroke();}
+    cx.restore();
+  },x,y,k,o.edge||P.edge,[-140,-580,140,-240],o.glow);}
+
+/* ===== When things go wrong · Silent change: this episode's components =====
+   Drawn with the first film's style (glass, luminous edges, one typeface) and the series' characters (people.js). */
+// SCENES, cue(), scene(), the sketch's ink (SK) and the diagram components (entBox, ent, relLine, diagram) come from A Sharper Sketch's sketch3.js
+const fout=(t,a,d)=>1-sstep(a,a+(d||0.6),t);
+const brief=(t,a,d)=>fin(t,a,0.4)*fout(t,a+(d||3));
+const AMBER=[255,190,90],GOLDC=LAYER.gold;
+const mixc=(a,b,f)=>a.map((v,i)=>Math.round(v+(b[i]-v)*clamp(f,0,1)));
+// packets along a lane: small glowing cells, like the cells in the vaults; those that set off after "until" never start, the rest finish their trip
+function packets(ctx,t,pts,every,dur,off,col,size,al,until){const L=mk(pts);spawn(t,every,dur,off,(u,k)=>{if(until!=null&&off+k*every>until)return;const q=at(L,u),a=(al==null?1:al)*sstep(0,0.1,u)*(1-sstep(0.85,1,u));if(a<=0.01)return;
+  withA(ctx,a,()=>{glow(ctx,q.x,q.y,size*1.4,col,0.45);ctx.fillStyle=rgba(col,0.95);rr(ctx,q.x-size/2,q.y-size/2,size,size,4);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.35)";rr(ctx,q.x-size/2+3,q.y-size/2+3,size*0.4,size*0.25,2);ctx.fill();});});}
+function camKeys(ctx,S,keys,t){const cam=camAt(keys,t);setCam(ctx,S,cam);return cam;}
+// the background of the platform world, or of a room at dawn (warm light from a window on the left)
+function world(ctx,S){setScreen(ctx,S);bg2(ctx);}
+function room(ctx,S,t,o){o=o||{};if(o.cam){const q=o.cam;ctx.setTransform(S*q.z,0,0,S*q.z,S*(W/2-q.x*q.z),S*(H/2-q.y*q.z));}else setScreen(ctx,S);
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,o.top||"#0c1428");g.addColorStop(1,"#05080f");ctx.fillStyle=g;ctx.fillRect(-W,-H,3*W,3*H);
+  const wx=o.wx==null?90:o.wx,wy=150,ww=380,wh=470;ctx.save();rr(ctx,wx,wy,ww,wh,10);ctx.clip();
+  const sky=ctx.createLinearGradient(0,wy,0,wy+wh);sky.addColorStop(0,"#16264c");sky.addColorStop(0.55,"#5b4a78");sky.addColorStop(0.85,"#e0876a");sky.addColorStop(1,"#f6c37e");ctx.fillStyle=sky;ctx.fillRect(wx,wy,ww,wh);
+  glow(ctx,wx+ww*0.6,wy+wh*0.95,180+10*Math.sin(t*0.4),[255,190,120],0.5);
+  ctx.fillStyle="#0d1020";[[0,110,70],[60,70,120],[170,140,50],[210,90,80],[300,120,80]].forEach(([x,h2,w2])=>ctx.fillRect(wx+x,wy+wh-h2,w2,h2));
+  ctx.fillStyle="rgba(255,214,150,0.8)";for(let i=0;i<14;i++){const lx=hash(i,1)*ww;if(hash(i,3)>0.5&&(lx<200||lx>330))ctx.fillRect(wx+lx,wy+wh-hash(i,2)*100,4,5);}
+  ctx.restore();ctx.strokeStyle="rgba(20,26,44,0.95)";ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(wx+ww/2,wy);ctx.lineTo(wx+ww/2,wy+wh);ctx.moveTo(wx,wy+wh*0.45);ctx.lineTo(wx+ww,wy+wh*0.45);ctx.stroke();
+  glass(ctx,wx,wy,ww,wh,10,[255,200,150],{glow:24,ga:0.2,fill:"rgba(0,0,0,0)",ea:0.4});
+  const spill=ctx.createRadialGradient(wx+ww*0.6,wy+wh,40,wx+ww*0.6,wy+wh,900);spill.addColorStop(0,"rgba(255,170,110,0.16)");spill.addColorStop(1,"rgba(255,170,110,0)");ctx.fillStyle=spill;ctx.fillRect(-W,-H,3*W,3*H);}
+// a small clock chip, top left
+function clockChip(ctx,S,s,sub,a){setScreen(ctx,S);withA(ctx,a==null?1:a,()=>{const w=28+tw(ctx,s,32,800,"mono")+(sub?18+tw(ctx,sub,20,600):0)+28;glass(ctx,64,52,w,64,18,[170,205,255],{glow:10,ea:0.5,fill:"rgba(8,14,28,0.85)"});
+  T(ctx,s,92,96,{w:800,size:32,f:"mono"});if(sub)T(ctx,sub,92+tw(ctx,s,32,800,"mono")+18,94,{w:600,size:20,color:rgba(SOFT,0.95)});});}
+// a message bubble: who, what, and a colour for the sender's side; typing dots before it appears
+function msg(ctx,x,y,w,who,text,c,a,typing){if(a<=0.01&&!typing)return;const lines=[];ctx.save();ctx.font=font(600,26);let cur="";text.split("\n").forEach(par=>{cur="";par.split(" ").forEach(s=>{const tr=cur?cur+" "+s:s;if(ctx.measureText(tr).width>w-48&&cur){lines.push(cur);cur=s;}else cur=tr;});if(cur)lines.push(cur);});ctx.restore();
+  const h=52+lines.length*36;withA(ctx,Math.max(a,typing?1:0),()=>{glass(ctx,x,y,w,typing&&a<0.5?84:h,20,c,{glow:12,ea:0.65,fill:"rgba(9,15,30,0.92)"});T(ctx,who,x+24,y+32,{w:800,size:18,color:rgba(c,0.95)});
+    if(a<0.5&&typing){for(let i=0;i<3;i++){ctx.fillStyle=rgba(INK,0.4+0.5*Math.max(0,Math.sin(typing*6-i*0.8)));ctx.beginPath();ctx.arc(x+34+i*20,y+60,5,0,TAU);ctx.fill();}}
+    else withA(ctx,a,()=>lines.forEach((l,i)=>T(ctx,l,x+24,y+72+i*36,{w:600,size:26})));});return h;}
+// Ana's dashboard, in the style of a Databricks AI/BI dashboard: a light canvas, a header with the logo, an alert banner when the data is old,
+// a counter (KPI) widget for class fill with its comparison and a capacity bar, and a bar chart of every class. No pie charts.
+const DB={canvas:"#f5f6f8",card:"#ffffff",line:"#d8dee4",text:"#11171c",muted:"#5f7281",blue:"#077a9d",green:"#277c43",greenBg:"#e3f4ea",red:"#c82d4c",warn:"#8a5300",warnBg:"#fcefd9",warnLine:"#f0a33a",track:"#e8ecf0"};
+function dbCard(ctx,x,y,w,h){ctx.save();ctx.shadowColor="rgba(0,0,0,0.18)";ctx.shadowBlur=10;ctx.shadowOffsetY=2;ctx.fillStyle=DB.card;rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();ctx.strokeStyle=DB.line;ctx.lineWidth=1.2;rr(ctx,x,y,w,h,8);ctx.stroke();}
+// a counter widget: title, source table, the value, a comparison, a 14-day trend, a capacity bar and places; s scales the type for small copies.
+// numA fades the value and comparison (so one number can make way for another)
+function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s,shown=(o.shown||Math.round(v))+"%",nA=o.numA==null?1:o.numA,col=o.ghost?DB.red:DB.blue;
+  if(h/s<250){dbCard(ctx,x,y,w,h);const bw=w-2*pad,by=y+h-pad-30*s;T(ctx,o.title||"Data Science 101",x+pad,y+pad+17*s,{w:700,size:18*s,color:DB.text});
+    T(ctx,o.sub||"places filled",x+pad,y+pad+38*s,{w:500,size:15*s,color:DB.muted});withA(ctx,nA,()=>T(ctx,shown,x+pad,y+pad+90*s,{w:700,size:48*s,color:o.ghost?DB.red:DB.text}));
+    ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
+    T(ctx,Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:16*s,color:DB.muted});return;}
+  dbCard(ctx,x,y,w,h);
+  T(ctx,o.title||"Places filled · Data Science 101",x+pad,y+pad+16*s,{w:700,size:19*s,color:DB.text});T(ctx,o.source||"fct_offering_fill",x+pad,y+pad+40*s,{w:500,size:14*s,f:"mono",color:DB.muted});
+  withA(ctx,nA,()=>{T(ctx,shown,x+pad,y+pad+122*s,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
+    if(o.delta)T(ctx,o.delta,x+pad+tw(ctx,shown,78*s,700)+16*s,y+pad+118*s,{w:700,size:17*s,color:o.deltaCol||DB.green});});
+  const by=y+h-pad-44*s,bw=w-2*pad,sy0=y+pad+150*s,sy1=by-30*s;
+  if(sy1-sy0>40*s){const tr=o.trend||[71,74,76,79,81,83,85,86,88,90,91,92,93,v],lo=60,hi=Math.max(100,...tr)+4,px=i=>x+pad+bw*i/(tr.length-1),py=q=>sy1-(sy1-sy0)*(q-lo)/(hi-lo);
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.lineTo(px(tr.length-1),sy1);ctx.lineTo(px(0),sy1);ctx.closePath();ctx.fillStyle=o.ghost?"rgba(200,45,76,0.10)":"rgba(7,122,157,0.10)";ctx.fill();
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=col;ctx.lineWidth=2.5*s;ctx.stroke();
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4*s,0,TAU);ctx.fill();T(ctx,"last 14 days",x+pad,sy0-4*s,{w:500,size:13*s,color:DB.muted});}
+  ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,12*s,6*s);ctx.fill();
+  ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
+  if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
+  ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
+  T(ctx,o.foot||Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted});}
+// a small copy of the counter, for the platform views: the data product the dashboard shows, with a gold edge for the gold layer
+function kpiMini(ctx,x,y,w,h,v,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.shadowColor=rgba(GOLDC,0.7);ctx.shadowBlur=18;ctx.strokeStyle=rgba(GOLDC,0.9);ctx.lineWidth=2.5;rr(ctx,x-4,y-4,w+8,h+8,11);ctx.stroke();ctx.restore();
+  kpiCard(ctx,x,y,w,h,{s:w/300,value:v||94});});}
+// o.num: the value (a number, or text such as "96%"); o.banner and o.ok: the amber note and the green all-clear (0 to 1);
+// o.ghost (0 to 1): the number it would have shown, had the waitlist counted
+function dashboard(ctx,x,y,w,h,o){o=o||{};const num=o.num==null?94:parseFloat(o.num),g=o.ghost||0,gIn=sstep(0.45,1,g);
+  // the screen: a dark bezel around a light dashboard
+  glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);
+  ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,64);ctx.fillStyle=DB.line;ctx.fillRect(x,y+64,w,1.2);const lw=logo(ctx,"databricks",x+20,y+18,28);
+  T(ctx,o.title||"Enrolments · census date tomorrow",x+34+lw,y+41,{w:700,size:21,color:DB.text});T(ctx,o.day||"Tuesday",x+w-22,y+40,{w:500,size:16,align:"right",color:DB.muted});
+  let cy=y+84;const alert=(bg,line,col,icon,text,a)=>withA(ctx,a,()=>{ctx.fillStyle=bg;rr(ctx,x+20,cy,w-40,52,6);ctx.fill();ctx.fillStyle=line;rr(ctx,x+20,cy,6,52,3);ctx.fill();
+    ctx.fillStyle=col;ctx.font=font(800,20);ctx.fillText(icon,x+40,cy+34);T(ctx,text,x+72,cy+33,{w:600,size:19,color:col});});
+  // the note makes room for itself: the cards slide down as it fades in
+  const room=ease(clamp((o.banner||0)+(o.ok||0),0,1));if(o.banner>0)alert(DB.warnBg,DB.warnLine,DB.warn,"⚠","Last good data: yesterday, 23:02 · a test stopped today's refresh",o.banner*(1-(o.ok||0))*sstep(0.3,1,room));
+  if(o.ok>0)alert(DB.greenBg,DB.green,DB.green,"✓",o.okText||"Up to date: today, 08:40",o.ok);
+  cy+=72*room;const gh=y+h-cy-20,kw=w*0.46;
+  kpiCard(ctx,x+20,cy,kw,gh,{value:num,delta:o.delta||("▲ "+(Math.round(num)-92)+" pts vs last week"),foot:o.foot,numA:1-sstep(0,0.5,g)});
+  if(o.flash>0)withA(ctx,o.flash,()=>{ctx.strokeStyle=DB.blue;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();});
+  if(g>0){withA(ctx,g,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();});
+    withA(ctx,gIn,()=>kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"incl. waitlist",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]}));}
+  // a bar chart of every first-year unit: Data Science 101 highlighted
+  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Places filled by unit",bx+20,cy+36,{w:700,size:19,color:DB.text});T(ctx,"first-year units · semester 2",bx+20,cy+60,{w:500,size:14,color:DB.muted});
+  const rows=[["Data Science 101",num],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-190,rh=Math.min(56,(gh-100)/rows.length);
+  const row=(n,v,i,c,vc)=>{const yy=cy+90+i*rh;T(ctx,n,lx,yy+14,{w:i?500:700,size:15,color:DB.text});ctx.fillStyle=DB.track;rr(ctx,lx,yy+22,bw2,14,4);ctx.fill();
+    ctx.fillStyle=c;rr(ctx,lx,yy+22,bw2*Math.min(1,v/100),14,4);ctx.fill();if(v>100){ctx.fillStyle=DB.red;rr(ctx,lx+bw2-3,yy+17,6,24,2);ctx.fill();}T(ctx,Math.round(v)+"%",lx+bw2+14,yy+34,{w:700,size:16,color:vc||DB.text});};
+  rows.forEach(([n,v],i)=>row(n,v,i,i?"#8bcae7":DB.blue));
+  if(gIn>0)withA(ctx,gIn,()=>{ctx.fillStyle=DB.card;ctx.fillRect(lx-4,cy+90,bwid-36,rh-4);row("Data Science 101",108,0,DB.red,DB.red);});
+  ctx.strokeStyle=DB.muted;ctx.setLineDash([4,4]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(lx+bw2,cy+96);ctx.lineTo(lx+bw2,cy+96+rows.length*rh);ctx.stroke();ctx.setLineDash([]);
+  ctx.restore();}
+// a person in a video-call tile: head and shoulders, name and role
+function callTile(ctx,id,x,y,w,h,o){o=o||{};const P=PEOPLE[id];glass(ctx,x,y,w,h,20,P.edge,{glow:o.hi?22:12,ea:o.hi?0.9:0.55,fill:"rgba(14,22,42,0.92)"});
+  ctx.save();rr(ctx,x+3,y+3,w-6,h-6,18);ctx.clip();const s=o.s||h/190,k=s*P.build.h;person(ctx,id,x+w/2,y+h*0.52+505*k,s,{pose:"stand",expr:o.expr||"calm",t:o.t||0,glow:0.3});ctx.restore();
+  withA(ctx,o.label==null?1:o.label,()=>{glass(ctx,x+12,y+h-50,tw(ctx,P.name.replace("Prof. ",""),18,700)+30,38,12,P.edge,{glow:6,ea:0.5,fill:"rgba(6,10,20,0.85)"});T(ctx,P.name.replace("Prof. ",""),x+27,y+h-25,{w:700,size:18});});}
+// the quarantine tray: rows that failed a test, kept aside to be looked at
+function tray(ctx,x,y,w,n,t,a){withA(ctx,a,()=>{glass(ctx,x,y,w,86,16,BAD,{glow:12,ea:0.6,fill:"rgba(40,10,14,0.55)"});T(ctx,"kept aside · "+n+" rows",x+18,y+28,{w:700,size:19,color:"rgba(255,180,170,1)"});
+  for(let i=0;i<Math.min(n,15);i++){const bx=x+18+i*((w-36)/15),by=y+42+Math.sin(t*1.3+i)*2;ctx.fillStyle=rgba(AMBER,0.75);rr(ctx,bx,by,(w-36)/15-6,26,5);ctx.fill();}});}
+// the lineage, as a row of steps: each step can light up as the red thread reaches it
+const LIN=[["exposure","dashboard"],["fct_offering_fill","data product"],["int_offering_enrolments","joins enrolments to units"],["stg_enrolments","staging · tested"],["bronze.enrolments","as it arrived"]];
+function lineage(ctx,x0,y,dx,o){o=o||{};const pts=LIN.map((_,i)=>[x0-i*dx,y]);
+  ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.stroke();
+  // the red thread, moving back along the lineage one step at a time
+  if(o.k>0){const k=Math.min(o.k,pts.length-1),i=Math.floor(k),f=k-i,end=i<pts.length-1?[lerp(pts[i][0],pts[i+1][0],f),y]:pts[i];
+    beam(ctx,[{x:pts[0][0],y},{x:end[0],y}],BAD,[[22,0.08],[9,0.22],[3,0.85],[1.5,1]]);glow(ctx,end[0],y,36,BAD,0.7);}
+  pts.forEach((p,i)=>{const [n,sub]=LIN[i],bad=i===3&&o.bad,on=o.k>=i-0.05,c=bad?BAD:i===4?LAYER.bronze:i===0?GOLDC:[170,205,255];const w=Math.max(tw(ctx,n,22,700,"mono"),tw(ctx,sub,17,500))+44;
+    glass(ctx,p[0]-w/2,y-48,w,96,18,c,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});T(ctx,n,p[0],y-6,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,p[0],y+26,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});
+    if(i===3){const gc=bad?BAD:GOOD;ctx.strokeStyle=rgba(gc,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p[0],y-75);ctx.lineTo(p[0],y-48);ctx.stroke();gate(ctx,p[0],y-110,70,gc,"tests");
+      T(ctx,bad?"test failed":"tests pass",p[0]+42,y-104,{w:700,size:18,color:rgba(gc,1)});}});return pts;}
+// the sharper conceptual model from A Sharper Sketch, drawn with that film's components: enrolment status is its own entity,
+// "Status change", with a date, and it gains the new status. newA reveals "waitlisted"; hi lights the Status change box.
+function sharperSketch(ctx,o){o=o||{};const E={};Object.keys(L3).forEach(k=>{E[k]={x:L3[k][0],y:L3[k][1],name:NAME[k],s:1,a:o.a==null?1:o.a};});
+  E.Offering.sub="census date";E.Unit.sub="Data Science 101";E.Class.sub="Tue 9 am tutorial";E.Status.sub="status · date";
+  E.Status.attrs=[["enrolled",""],["withdrawn",""],["waitlisted",""]];E.Status.attrA=(2+(o.newA||0))/3;E.Status.hi=o.hi||0;E.Status.hiCol=AMBER;
+  const B=diagram(ctx,E,L3R.filter(r=>!(r[0]==="Offering"&&r[1]==="Term")).map(r=>r.concat([{}])));
+  elbowRel(ctx,B.Offering,B.Term,B.Class);
+  const b=B.Status,top=b.y-b.h/2,yy=top+80+28+2*30,lx=b.x-b.w/2;
+  withA(ctx,o.newA||0,()=>{ctx.save();rr(ctx,lx+4,yy-26,b.w-8,34,8);ctx.clip();glow(ctx,lx+90,yy-6,70,AMBER,0.45*(o.glowNew||1));ctx.restore();
+    tag(ctx,lx+b.w+14,yy-6,"new",AMBER,{size:18});});return B;}
+// a one-to-many line drawn with right angles: down from Unit offering, across below it, and down into Teaching period
+function elbowRel(ctx,A,B,below){const x0=A.x+A.w/2-44,y0=A.y+A.h/2,ym=(y0+(below.y-below.h/2))/2,x1=B.x,y1=B.y-B.h/2;
+  ctx.save();ctx.shadowColor=rgba(SK,0.8);ctx.shadowBlur=10;ctx.strokeStyle=rgba(SK,0.95);ctx.lineWidth=2.4;ctx.lineJoin="round";
+  ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x0,ym);ctx.lineTo(x1,ym);ctx.lineTo(x1,y1);ctx.stroke();
+  // many offerings (crow's foot at Unit offering), one teaching period (bar at Teaching period)
+  ctx.beginPath();ctx.moveTo(x0-13,y0);ctx.lineTo(x0,y0+20);ctx.lineTo(x0+13,y0);ctx.moveTo(x1-11,y1-14);ctx.lineTo(x1+11,y1-14);ctx.stroke();ctx.restore();}
+// the data contract for enrolments: what arrives, what's allowed and what it means, how fresh, and an owner in each corner
+function contract(ctx,x,y,w,h,o){o=o||{};const ver=o.ver||"1.0",dA=o.deferred||0;glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
+  T(ctx,"Data contract · enrolments",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v"+ver,o.verFlash||0);
+  const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+196,base="enrolled · withdrawn · waitlisted";
+  const rows=[[136,()=>{key("Fields",y+136);T(ctx,"student, offering, status, date",vx,y+136,{w:600,size:23});}],
+    [192,()=>{key("Statuses",y+192);T(ctx,base,vx,y+192,{w:600,size:22,f:"mono"});if(dA>0)withA(ctx,dA,()=>T(ctx," · deferred",vx+tw(ctx,base,22,600,"mono"),y+192,{w:600,size:22,f:"mono",color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));}],
+    [248,()=>{key("Meaning",y+248);T(ctx,"enrolled = holds a place on census date",vx,y+248,{w:600,size:22});T(ctx,"waitlisted = no place yet · withdrawn = left",vx,y+280,{w:600,size:22});
+      if(dA>0)withA(ctx,dA,()=>T(ctx,"deferred = starts in a later term",vx,y+312,{w:600,size:22,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));}],
+    [364,()=>{key("Freshness",y+364);T(ctx,"by 06:00 every day",vx,y+364,{w:600,size:23});}]];
+  rows.forEach(([,draw],i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),draw));
+  // the owners: one on each side of the change, technical and business, producing and using the data
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+398);ctx.lineTo(x+w-26,y+398);ctx.stroke();
+  const cx1=x+w*0.44,cx2=x+w*0.7;key("Owners",y+432);T(ctx,"business",cx1,y+432,{w:700,size:18,color:rgba(BIZ,0.95)});T(ctx,"technical",cx2,y+432,{w:700,size:18,color:rgba(TECH,0.95)});
+  T(ctx,"produce",vx,y+474,{w:600,size:19,color:rgba(SOFT,0.95)});T(ctx,"use",vx,y+516,{w:600,size:19,color:rgba(SOFT,0.95)});
+  [["mei",cx1,y+474],["ben",cx2,y+474],["ana",cx1,y+516],["sam",cx2,y+516]].forEach(([id,cx,cy],i)=>{const P=PEOPLE[id],a=o.sign?clamp(o.sign*4-i,0,1):0,n=o.notice?o.notice:0;
+    withA(ctx,0.35+0.65*Math.max(a,n),()=>{led(ctx,cx,cy-15,12,12,P.edge);T(ctx,P.name.split(" ")[0],cx+22,cy,{w:700,size:22,color:rgba(P.edge,0.95)});});});}
+function stampV(ctx,x,y,s,flash){const w=tw(ctx,s,22,800,"mono")+26;glass(ctx,x-w,y-22,w,40,12,GOOD,{glow:8+20*flash,ea:0.8,fill:"rgba(10,30,20,0.8)"});T(ctx,s,x-w/2,y+6,{w:800,size:22,f:"mono",align:"center",color:"rgba(200,255,220,1)"});}
+// the platform in one row: the student system, the contract at the door, bronze, the dbt test gate, silver, gold and the data product
+function platformRow(ctx,t,o){o=o||{};const y=o.y||470;
+  sysCard(ctx,70,y-60,290,120,"Student system","events and files",APP.sis.c);
+  const lanes=[[360,y],[520,y]],d=o.door||0;
+  lane(ctx,[{x:360,y},{x:560,y}],APP.sis.c,0.8);
+  if(d>0)withA(ctx,d,()=>{glass(ctx,440,y-92,84,184,16,[236,243,255],{glow:14+8*Math.sin(t*1.5),ea:0.8,fill:"rgba(12,18,34,0.9)"});T(ctx,"contract",482,y+118,{w:700,size:16,align:"center",color:rgba(INK,0.9)});
+    for(let i=0;i<4;i++){ctx.fillStyle=rgba(i%2?TECH:BIZ,0.9);ctx.fillRect(452,y-72+i*38,60,6);}});
+  const cells=(err)=>(r,c)=>{const k=hash(r*13+c,7);return k<0.08&&err?AMBER:k<0.8?APP.sis.c:null;};
+  vault(ctx,560,y-150,240,300,LAYER.bronze,cells(o.err),"Bronze","as it arrived");
+  const g=o.gate||GOOD;lane(ctx,[{x:800,y},{x:900,y}],APP.sis.c,0.6);gate(ctx,900,y,150,g,"tests");chip(ctx,900,y-130,"dbt","tests","",{align:"center",edge:g});
+  const sk=o.skip||0,lit=o.lit||0,dS=sk*(1-sstep(0.22,0.4,lit)),dG=sk*(1-sstep(0.55,0.72,lit));
+  withA(ctx,1-0.65*dS,()=>{lane(ctx,[{x:930,y},{x:1000,y}],[214,228,255],0.6);vault(ctx,1000,y-150,240,300,LAYER.silver,(r,c)=>hash(r*7+c,3)<0.7?[214,228,255]:null,"Silver","consistent");});
+  withA(ctx,1-0.65*dG,()=>{lane(ctx,[{x:1240,y},{x:1300,y}],GOLDC,0.6);vault(ctx,1300,y-150,240,300,LAYER.gold,(r,c)=>hash(r*5+c,2)<0.6?GOLDC:null,"Gold","class fill");lane(ctx,[{x:1540,y},{x:1600,y}],GOLDC,0.6);});
+  kpiMini(ctx,1590,y-95,270,190,parseInt(o.num||"94"));
+  if(dS>0)withA(ctx,dS,()=>tag(ctx,1120,y+182,"skipped",SOFT,{align:"center",size:17}));if(dG>0)withA(ctx,dG,()=>tag(ctx,1420,y+182,"skipped",SOFT,{align:"center",size:17}));
+  if(o.banner>0)withA(ctx,o.banner,()=>tag(ctx,1725,y-150,"last good data · yesterday 23:02",AMBER,{align:"center",size:16}));}
+
+/* ===== From words to data: the series' components =====
+   Seven films, one world: the university and the platform of The Inner Life of Data, drawn with its primitives (glass, T, tag, chip,
+   glow, withA, fin) and A Sharper Sketch's diagrams (ent, relLine, diagram, bubble, numCard, stamp, table). Everything here is shared
+   by the seven films, their labs and their scenarios; each film keeps its own pictures in its own file.
+   The past is drawn warm, like clay and parchment; the present is the films' dark glass. */
+
+/* ---------- colours ---------- */
+// the credential's colour, and the colours of the offices that count credentials
+const TRUST=[255,209,102],CLAY=[222,170,112],PARCH=[238,224,196],WAX=[200,64,54],GRAPH=[64,60,58],KIND=[140,200,255],EDGE_=[255,140,120];
+const OFFICE={reg:{n:"Registrar",c:[255,196,92]},short:{n:"Short courses",c:[255,128,168]},careers:{n:"Careers",c:[186,150,255]},lms:{n:"Learning platform",c:[126,224,140]}};
+
+/* ---------- the series' people: two more, drawn like the others (When things go wrong's character sheet) ---------- */
+// Noor Rahman, the data architect, is the series' guide (technical); Tom Whitfield runs short courses and microcredentials (business)
+PEOPLE.noor={name:"Noor Rahman",role:"Data architect",side:"Technical",does:"produces",edge:TECH,seed:8,
+  skin:[176,124,92],hair:{style:"long",c:[24,20,22]},earrings:[200,220,255],
+  top:{kind:"blazer",c:[52,84,104],inner:[226,232,240]},bottom:{c:[40,44,56]},shoe:[30,30,36],build:{sh:66,hip:58,h:0.96}};
+PEOPLE.tom={name:"Tom Whitfield",role:"Short courses",side:"Business",does:"produces",edge:BIZ,seed:9,
+  skin:[236,200,174],hair:{style:"side",c:[196,160,96]},
+  top:{kind:"sweater",c:[88,112,150]},bottom:{c:[70,64,58]},shoe:[60,44,34],build:{sh:76,hip:60,h:1.02}};
+
+/* ---------- small helpers ---------- */
+const fmtNum=n=>Math.round(n).toLocaleString("en-US");
+const typeOn=(s,p)=>s.slice(0,Math.max(0,Math.min(s.length,Math.round(s.length*clamp(p,0,1)))));
+const pulseAt=(t,t0,d)=>t>t0&&t<t0+(d||1.4)?Math.sin(Math.PI*(t-t0)/(d||1.4)):0;
+function dark(ctx,S,a){if(a<=0)return;setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+clamp(a,0,1)+")";ctx.fillRect(0,0,W,H);}
+function fadeIn(ctx,S,t,d){if(t<(d||1.2)){setScreen(ctx,S);ctx.fillStyle="rgba(0,0,0,"+(1-ease(t/(d||1.2)))+")";ctx.fillRect(0,0,W,H);}}
+function ring(ctx,x,y,r,col,a,lw,dash){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,1);ctx.lineWidth=lw||2;if(dash)ctx.setLineDash(dash);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.stroke();ctx.restore();}
+// a soft boundary: a band of light, for the fuzzy edge of a category
+function fuzzyRing(ctx,x,y,r,col,a,wd){if(a<=0.01)return;wd=wd||60;ctx.save();ctx.globalAlpha*=a;const g=ctx.createRadialGradient(x,y,Math.max(1,r-wd),x,y,r+wd);g.addColorStop(0,rgba(col,0));g.addColorStop(0.5,rgba(col,0.22));g.addColorStop(1,rgba(col,0));ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r+wd,0,TAU);ctx.fill();ctx.restore();}
+function tick_(ctx,x,y,s,col,a){withA(ctx,a,()=>{ctx.strokeStyle=rgba(col,1);ctx.lineWidth=s*0.16;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x-s*0.4,y);ctx.lineTo(x-s*0.1,y+s*0.3);ctx.lineTo(x+s*0.45,y-s*0.35);ctx.stroke();});}
+function cross_(ctx,x,y,s,col,a){withA(ctx,a,()=>{ctx.strokeStyle=rgba(col,1);ctx.lineWidth=s*0.16;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x-s*0.35,y-s*0.35);ctx.lineTo(x+s*0.35,y+s*0.35);ctx.moveTo(x+s*0.35,y-s*0.35);ctx.lineTo(x-s*0.35,y+s*0.35);ctx.stroke();});}
+// an arrow along a gentle curve, drawn up to p (0..1), with a head at its end
+function arrowTo(ctx,x0,y0,x1,y1,col,a,o){o=o||{};const p=o.p==null?1:o.p;if(a<=0.01||p<=0)return;const bend=o.bend||0,mx=(x0+x1)/2-(y1-y0)*bend,my=(y0+y1)/2+(x1-x0)*bend;
+  const pts=[];for(let i=0;i<=24;i++){const u=i/24*p,v=1-u;pts.push([v*v*x0+2*v*u*mx+u*u*x1,v*v*y0+2*v*u*my+u*u*y1]);}
+  ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,1);ctx.lineWidth=o.lw||2.4;ctx.lineCap="round";if(o.dash)ctx.setLineDash(o.dash);ctx.shadowColor=rgba(col,0.6);ctx.shadowBlur=8;
+  ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke();ctx.setLineDash([]);
+  if(p>=0.98&&!o.nohead){const q=pts[pts.length-1],r=pts[pts.length-3],an=Math.atan2(q[1]-r[1],q[0]-r[0]),hs=o.head||14;ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(q[0],q[1]);ctx.lineTo(q[0]-hs*Math.cos(an-0.42),q[1]-hs*Math.sin(an-0.42));ctx.lineTo(q[0]-hs*Math.cos(an+0.42),q[1]-hs*Math.sin(an+0.42));ctx.closePath();ctx.fill();}
+  ctx.restore();}
+// wrapped text: returns the lines it drew, so callers can size a box
+function wrapT(ctx,s,x,y,maxW,o){o=o||{};const sz=o.size||24,lh=o.lh||sz*1.32;ctx.save();ctx.font=font(o.w||600,sz,o.f);const words=s.split(" "),lines=[];let cur="";
+  words.forEach(wd=>{const tr=cur?cur+" "+wd:wd;if(ctx.measureText(tr).width>maxW&&cur){lines.push(cur);cur=wd;}else cur=tr;});if(cur)lines.push(cur);ctx.restore();
+  if(!o.measure)lines.forEach((l,i)=>T(ctx,l,x,y+i*lh,o));return lines;}
+
+/* ---------- the past and the present ---------- */
+// the past: a warm, dark ground, like the inside of a museum case, with dust in the light
+function histBg(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,o.top||"#1a110a");g.addColorStop(1,o.bottom||"#07050a");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  const r=ctx.createRadialGradient(W*0.5,H*0.35,40,W*0.5,H*0.45,W*0.7);r.addColorStop(0,"rgba(255,200,140,"+(o.light==null?0.10:o.light)+")");r.addColorStop(1,"rgba(255,200,140,0)");ctx.fillStyle=r;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<46;i++){const x=(hash(i,3)*W+t*(6+hash(i,4)*10))%W,y=(hash(i,5)*H+Math.sin(t*0.3+i)*20+H)%H,s=1+hash(i,6)*2.2;ctx.fillStyle="rgba(255,220,170,"+(0.05+0.12*hash(i,7))+")";ctx.beginPath();ctx.arc(x,y,s,0,TAU);ctx.fill();}}
+// a label for a moment in the past: a date and a place, in the corner of a history scene
+function yearTag(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:"rgba(26,16,10,0.9)"});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});}
+// the series' mark: four dots at the heights of its four notes (1, 5, 6, 3)
+function motifDots(ctx,x,y,s,col,a,p){if(a<=0.01)return;const hs=[0,7,9,4];withA(ctx,a,()=>{hs.forEach((h,i)=>{const q=clamp((p==null?1:p)*4-i,0,1);if(q<=0)return;const cx=x+(i-1.5)*s*1.4,cy=y-h*s*0.16;glow(ctx,cx,cy,s*1.6,col,0.35*q);ctx.fillStyle=rgba(col,q);ctx.beginPath();ctx.arc(cx,cy,s*0.36*q,0,TAU);ctx.fill();});});}
+// the title card, over whatever the chapter is drawing: fades the picture down, then the title up
+function seriesTitle(ctx,S,t,t0,title,sub,col){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;dark(ctx,S,oA*0.9);setScreen(ctx,S);
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,col,0.08);motifDots(ctx,960,392,22,col,1,(t-t0-0.5)/1.6);T(ctx,"FROM WORDS TO DATA",960,452,{w:800,size:24,align:"center",color:rgba(col,0.95)});
+    T(ctx,title,960,550,{w:800,size:96,align:"center"});if(sub)T(ctx,sub,960,614,{w:600,size:28,align:"center",color:rgba(SOFT,0.95)});});}
+function endCard(ctx,S,t,t0,title,col,line){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;dark(ctx,S,oA*0.94);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)T(ctx,line,960,430,{w:700,size:40,align:"center"});motifDots(ctx,960,540,16,col,0.9,1);T(ctx,title,960,612,{w:800,size:44,align:"center",color:rgba(col,1)});
+    T(ctx,"From words to data · Learning Data",960,660,{w:600,size:22,align:"center",color:rgba(SOFT,0.9)});});}
+
+/* ---------- counting: the offices and their numbers ---------- */
+// one office's answer: its name, its number, and (when known) what it counted
+function officeCard(ctx,x,y,w,k,num,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const of=OFFICE[k],c=of.c,h=o.h||200;
+  withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,w*0.7,c,0.28*o.hi);glass(ctx,x,y,w,h,18,c,{glow:14+10*(o.hi||0),ea:0.75,fill:"rgba(7,12,24,0.93)"});
+    ctx.fillStyle=rgba(c,1);rr(ctx,x+18,y+22,6,30,3);ctx.fill();T(ctx,o.name||of.n,x+36,y+46,{w:700,size:24,color:rgba(SOFT,1)});
+    T(ctx,num,x+24,y+128,{w:800,size:o.big||72,color:rgba(c,1)});
+    if(o.meaning)withA(ctx,o.mA==null?1:o.mA,()=>wrapT(ctx,o.meaning,x+24,y+166,w-44,{w:600,size:18,color:rgba(INK,0.9)}));
+    if(o.ok)withA(ctx,o.ok,()=>{ctx.fillStyle="rgba(7,12,24,0.95)";ctx.beginPath();ctx.arc(x+w-30,y+34,20,0,TAU);ctx.fill();ring(ctx,x+w-30,y+34,20,GOOD,1,2);tick_(ctx,x+w-30,y+35,26,GOOD,1);});});}
+
+/* ---------- the credential: the series' thread ---------- */
+// a wax seal: a disc of wax with a pressed ring and a mark; press (0..1) squashes it into place
+function waxSeal(ctx,x,y,r,col,a,press,mark){if(a<=0.01)return;const c=col||WAX,pr=press==null?1:press;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);const sc=0.6+0.4*ease(pr);ctx.scale(sc,sc);
+  ctx.fillStyle=rgba(mix(c,[0,0,0],0.35),1);ctx.beginPath();for(let i=0;i<=40;i++){const an=i/40*TAU,rr_=r*(1.08+0.06*Math.sin(an*7+1.3)+0.04*Math.sin(an*13));ctx.lineTo(Math.cos(an)*rr_,Math.sin(an)*rr_);}ctx.fill();
+  const g=ctx.createRadialGradient(-r*0.3,-r*0.3,r*0.1,0,0,r);g.addColorStop(0,rgba(mix(c,[255,255,255],0.3),1));g.addColorStop(1,rgba(c,1));ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r*0.86,0,TAU);ctx.fill();
+  ctx.strokeStyle=rgba(mix(c,[0,0,0],0.45),0.9);ctx.lineWidth=r*0.06;ctx.beginPath();ctx.arc(0,0,r*0.66,0,TAU);ctx.stroke();
+  T(ctx,mark||"✦",0,r*0.18,{w:800,size:r*0.62,align:"center",color:rgba(mix(c,[0,0,0],0.5),0.95)});ctx.restore();});}
+/* a credential, as each age made it: o.era is "tablet" (clay), "wax" (a sealed letter), "paper" (a diploma), "transcript", "badge" or "digital".
+   Its parts are the series' model: who issued it, who holds it, what it claims, the evidence, the date.
+   A digital card says "signed" under its seal: o.signed gives that word in another language, or false leaves it out. */
+function credCard(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const era=o.era||"digital",h=o.h||Math.round(w*0.68),hl=o.hl||{};
+  const rowsF=[["issuer",o.issuer],["holder",o.holder],["claim",o.claim],["evidence",o.evidence],["date",o.date]].filter(r=>r[1]);
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.translate(-w/2,-h/2);
+    if(era==="digital"||era==="badge"){glass(ctx,0,0,w,h,18,o.col||TRUST,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.94)"});}
+    else{const base=era==="tablet"?[150,112,78]:era==="wax"?[222,204,168]:[240,232,214];ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=24;ctx.fillStyle=rgba(base,1);rr(ctx,0,0,w,h,era==="tablet"?22:6);ctx.fill();ctx.shadowBlur=0;
+      const g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,"rgba(255,255,255,0.10)");g.addColorStop(1,"rgba(0,0,0,0.16)");ctx.fillStyle=g;rr(ctx,0,0,w,h,era==="tablet"?22:6);ctx.fill();
+      if(era==="paper"){ctx.strokeStyle="rgba(150,120,60,0.5)";ctx.lineWidth=2;rr(ctx,10,10,w-20,h-20,4);ctx.stroke();}}
+    const dk=era==="digital"||era==="badge",ink=dk?rgba(INK,0.95):(era==="tablet"?"rgba(60,36,20,0.9)":"rgba(52,40,30,0.92)"),lab=dk?rgba(SOFT,1):(era==="tablet"?"rgba(70,44,26,0.7)":"rgba(110,86,54,0.9)");
+    let yy=o.title?70:42;if(o.title)T(ctx,o.title,w/2,40,{w:800,size:o.ts||22,align:"center",color:dk?rgba(o.col||TRUST,1):ink});
+    rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,ry=yy+i*(o.rh||34);if(on>0){const top=o.title?Math.max(ry-24,50):ry-24;ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,top,w-24,ry+8-top,8);ctx.fill();}
+      T(ctx,k,24,ry,{f:"mono",w:500,size:17,color:lab});T(ctx,v,120,ry,{w:700,size:18,color:ink});});
+    if(era==="wax"||era==="paper")waxSeal(ctx,w-50,h-46,28,WAX,1,o.press==null?1:o.press);
+    if(era==="digital"){const sx=w-46,sy=h-40;ctx.strokeStyle=rgba(o.col||TRUST,0.9);ctx.lineWidth=2;ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;ctx.lineTo(sx+Math.cos(an)*20,sy+Math.sin(an)*20);}ctx.closePath();ctx.stroke();T(ctx,"✓",sx,sy+7,{w:800,size:20,align:"center",color:rgba(o.col||TRUST,1)});if(o.signed!==false)T(ctx,o.signed||"signed",sx,sy+36,{f:"mono",w:500,size:12,align:"center",color:rgba(SOFT,1)});}
+    if(era==="badge"){const bx=w-60,by=46;ctx.fillStyle=rgba(o.col||TRUST,0.9);ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU;ctx.lineTo(bx+Math.cos(an)*26,by+Math.sin(an)*26);}ctx.closePath();ctx.fill();T(ctx,"★",bx,by+8,{w:800,size:22,align:"center",color:"#0a1020"});}
+    if(era==="tablet"){ctx.fillStyle="rgba(60,36,20,0.35)";for(let i=0;i<18;i++){const px=20+hash(i,2)*(w-40),py=h-30-hash(i,3)*20;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px+10,py+4);ctx.lineTo(px,py+8);ctx.fill();}}
+    ctx.restore();});return h;}
+
+/* ---------- paper and pencil: agreeing, before any system ---------- */
+function sheet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||-0.012);ctx.translate(-w/2,-h/2);
+  ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=34;ctx.shadowOffsetY=10;ctx.fillStyle=o.fill||"#efe8da";ctx.fillRect(0,0,w,h);ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  const g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,"rgba(255,250,235,0.35)");g.addColorStop(1,"rgba(120,100,70,0.12)");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  if(!o.plain){ctx.strokeStyle="rgba(90,130,190,0.16)";ctx.lineWidth=1;for(let yy=70;yy<h-20;yy+=38){ctx.beginPath();ctx.moveTo(24,yy);ctx.lineTo(w-24,yy);ctx.stroke();}ctx.strokeStyle="rgba(200,80,80,0.22)";ctx.beginPath();ctx.moveTo(64,0);ctx.lineTo(64,h);ctx.stroke();}
+  ctx.restore();});}
+// graphite text, written out as p goes from 0 to 1
+function pencilText(ctx,s,x,y,o){o=o||{};const p=o.p==null?1:o.p;if(p<=0)return;T(ctx,typeOn(s,p),x,y,{w:o.w||600,size:o.size||26,align:o.align,color:o.color||"rgba(52,48,46,0.92)"});}
+// a box drawn in pencil: two slightly different strokes, drawn round as p goes from 0 to 1
+function pencilBox(ctx,x,y,w,h,name,p,o){o=o||{};if(p<=0)return;const per=2*(w+h),pts=[[x,y],[x+w,y],[x+w,y+h],[x,y+h],[x,y]];
+  const strokeTo=(jit,al)=>{let left=per*clamp(p,0,1);ctx.beginPath();ctx.moveTo(x+jit,y-jit);for(let i=1;i<5&&left>0;i++){const a0=pts[i-1],a1=pts[i],L=Math.hypot(a1[0]-a0[0],a1[1]-a0[1]),f=Math.min(1,left/L);ctx.lineTo(lerp(a0[0],a1[0],f)+jit*(i%2?1:-1),lerp(a0[1],a1[1],f)+jit*(i%2?-1:1));left-=L;}ctx.strokeStyle="rgba(58,54,52,"+al+")";ctx.stroke();};
+  ctx.save();ctx.lineWidth=2.2;ctx.lineCap="round";strokeTo(0,0.85);ctx.lineWidth=1.2;strokeTo(1.6,0.45);ctx.restore();
+  withA(ctx,fin(p,0.7,0.3),()=>T(ctx,name,x+w/2,y+h/2+(o.sub?-2:9),{w:700,size:o.size||26,align:"center",color:o.color||"rgba(46,42,40,0.95)"}));
+  if(o.sub)withA(ctx,fin(p,0.8,0.2),()=>T(ctx,o.sub,x+w/2,y+h/2+26,{w:600,size:16,align:"center",color:"rgba(90,84,78,0.95)"}));}
+// "is a kind of": a line from the kind to the broader kind, with a hollow triangle at the broader end
+function isa(ctx,x0,y0,x1,y1,p,col,o){o=o||{};if(p<=0)return;const c=col||[58,54,52],a=o.a==null?1:o.a,x=lerp(x0,x1,clamp(p,0,1)),y=lerp(y0,y1,clamp(p,0,1));
+  ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(c,0.9);ctx.lineWidth=o.lw||2.2;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x,y);ctx.stroke();
+  if(p>=0.98){const an=Math.atan2(y1-y0,x1-x0),s=o.s||16;ctx.fillStyle=o.fill||"#efe8da";ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x1-s*Math.cos(an-0.5),y1-s*Math.sin(an-0.5));ctx.lineTo(x1-s*Math.cos(an+0.5),y1-s*Math.sin(an+0.5));ctx.closePath();ctx.fill();ctx.stroke();}ctx.restore();}
+
+/* ---------- the triangle: a word points to an idea, and the idea to things ---------- */
+// o: word, idea (a label under the idea), thing (a function drawing the thing at its corner), and how far each part is drawn
+function trio(ctx,cx,cy,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||KIND,wx=cx-300*s,wy=cy+170*s,ix=cx,iy=cy-190*s,hx=cx+300*s,hy=cy+170*s;
+  withA(ctx,a,()=>{const e1=o.e1==null?1:o.e1,e2=o.e2==null?1:o.e2,e3=o.e3==null?1:o.e3;
+    ctx.save();ctx.lineCap="round";ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3*s;ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=10;
+    if(e1>0){ctx.beginPath();ctx.moveTo(wx,wy);ctx.lineTo(lerp(wx,ix,e1),lerp(wy,iy,e1));ctx.stroke();}
+    if(e2>0){ctx.beginPath();ctx.moveTo(ix,iy);ctx.lineTo(lerp(ix,hx,e2),lerp(iy,hy,e2));ctx.stroke();}
+    if(e3>0){ctx.setLineDash([10*s,12*s]);ctx.strokeStyle=rgba(o.gapCol||EDGE_,0.85*(o.gapA==null?1:o.gapA));ctx.shadowColor=rgba(o.gapCol||EDGE_,0.6);ctx.beginPath();ctx.moveTo(wx+60*s,wy);ctx.lineTo(lerp(wx+60*s,hx-60*s,e3),hy);ctx.stroke();ctx.setLineDash([]);}
+    ctx.restore();
+    withA(ctx,o.ia==null?1:o.ia,()=>{glow(ctx,ix,iy,120*s,col,0.45+0.15*Math.sin((o.t||0)*2));ctx.fillStyle=rgba(mix(col,[255,255,255],0.5),0.95);ctx.beginPath();ctx.arc(ix,iy,30*s,0,TAU);ctx.fill();
+      T(ctx,o.idea||"idea",ix,iy-56*s,{w:800,size:24*s,align:"center",color:rgba(col,1)});});
+    withA(ctx,o.wa==null?1:o.wa,()=>{const ws=o.word||"word",ww=tw(ctx,ws,30*s,800)+40*s;glass(ctx,wx-ww/2,wy-30*s,ww,60*s,14*s,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,ws,wx,wy+10*s,{w:800,size:30*s,align:"center"});T(ctx,o.wordLab||"word",wx,wy+64*s,{w:700,size:20*s,align:"center",color:rgba(SOFT,1)});});
+    withA(ctx,o.ha==null?1:o.ha,()=>{if(o.thing)o.thing(ctx,hx,hy,s);T(ctx,o.thingLab||"thing",hx,hy+(o.thingDy||64)*s,{w:700,size:20*s,align:"center",color:rgba(SOFT,1)});});
+    if(o.gapNote)withA(ctx,o.gapNote,()=>T(ctx,o.gapText||"the word never touches the thing",cx,wy+46*s,{w:700,size:22*s,align:"center",color:rgba(EDGE_,1)}));});}
+
+/* ---------- words through time ---------- */
+// a word, where it came from, and what it meant: shown as a ribbon from the old form to the word we use now
+function etym(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const p=o.p==null?1:o.p,col=o.col||CLAY;
+  withA(ctx,a,()=>{const ow=tw(ctx,o.old,26,700)+40,nw=tw(ctx,o.word,34,800)+44,gap=o.gap||260;
+    glass(ctx,x,y-30,ow,60,30,col,{glow:10,ea:0.6,fill:"rgba(26,16,10,0.9)"});T(ctx,o.old,x+20,y+9,{w:700,size:26,color:rgba(col,1)});if(o.lang)T(ctx,o.lang,x+20,y-42,{f:"mono",w:500,size:16,color:rgba(col,0.85)});
+    arrowTo(ctx,x+ow+14,y,x+ow+gap-14,y,col,0.9,{p:clamp(p*2,0,1),bend:0.12});
+    withA(ctx,fin(p,0.45,0.3),()=>{glass(ctx,x+ow+gap,y-34,nw,68,34,KIND,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,o.word,x+ow+gap+22,y+12,{w:800,size:34});});
+    if(o.gloss)withA(ctx,fin(p,0.25,0.35),()=>T(ctx,o.gloss,x+ow+gap/2,y+50,{w:600,size:20,align:"center",color:rgba(PARCH,0.95)}));});}
+
+/* ---------- a sketch the series keeps: version 3 adds the credential ---------- */
+// the credential and its kinds, as agreed on paper, drawn in pencil (paper=true) or as the films' glass boxes
+const CRED3={cred:[960,330,"Credential"],award:[640,560,"Award"],micro:[960,560,"Microcredential"],badge:[1280,560,"Badge","when assessed"]};
+function credKinds(ctx,o){o=o||{};const p=o.p||{},ox=o.ox||0,oy=o.oy||0,s=o.s||1,P=k=>[ox+CRED3[k][0]*s,oy+CRED3[k][1]*s];
+  if(o.paper){const bw=250*s,bh=76*s,box=(k,q)=>{const[x,y]=P(k);pencilBox(ctx,x-bw/2,y-bh/2,bw,bh,CRED3[k][2],q,{sub:CRED3[k][3],size:26*s});};
+    ["award","micro","badge"].forEach(k=>{const q=p[k]||0;if(q>0){const[x0,y0]=P(k),[x1,y1]=P("cred");isa(ctx,x0,y0-bh/2,x1+(x0-x1)*0.25,y1+bh/2,fin(q,0.6,0.4));}});
+    ["cred","award","micro","badge"].forEach(k=>box(k,p[k]||0));return;}
+  const E={};["cred","award","micro","badge"].forEach(k=>{const[x,y]=P(k);E[k]={x,y,name:CRED3[k][2],sub:CRED3[k][3],col:k==="cred"?TRUST:KIND,a:p[k]==null?1:p[k],s,hi:(o.hi||{})[k]||0};});
+  ["award","micro","badge"].forEach(k=>{if(E[k].a>0.01){const b=entBox(ctx,E[k]),c=entBox(ctx,E.cred);isa(ctx,b.x,b.y-b.h/2,c.x+(b.x-c.x)*0.25,c.y+c.h/2,1,KIND,{a:E[k].a,fill:"#0a1020"});}});
+  Object.values(E).forEach(e=>ent(ctx,e));}
+
+/* ===== Model the business: the series' pictures (shared by its two films) =====
+   One true story across the series: the registers of the Ming, from 1368 (the Ming History, juan 77). The past is warm, as in From
+   words to data: dusk over the fields of the lower Yangzi, the registers as bound books, the fields as plots drawn like the scales of
+   a fish, and the story's people as plain silhouettes with no faces, lit at the edge, dressed for their time. Never in the style of
+   Chinese painting or calligraphy: covers and slips carry no writing, and every word on screen is the film's own, in a pill.
+   Drawn with The Inner Life of Data's primitives (glass, T, tag, glow, withA, fin) and From words to data's (yearTag, wrapT). */
+const RG_PAPER=[238,224,196],RG_INK=[64,46,34],RG_YEL=[232,188,72],RG_EARTH=[200,132,86],RG_RIM=[255,198,146],RG_SIL=[36,27,30],MTB=[245,206,140];
+
+// the moment a word is said in a line (as the voice reads it: the line's say, or its text), plus off
+function wAt(sc,id,word,off){const ln=sc.vo.find(v=>v.id===id);if(!ln)return 0;const s=ln.say||ln.text,i=s.indexOf(word),d=sc.ends[id]-sc.cues[id];return sc.cues[id]+(i<0?0:d*i/s.length)+(off||0);}
+
+/* ---------- shapes for silhouettes ---------- */
+function rg_poly(p,P){let a=0;for(let i=0;i<P.length;i++){const[x0,y0]=P[i],[x1,y1]=P[(i+1)%P.length];a+=x0*y1-x1*y0;}if(a<0)P=P.slice().reverse();p.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++)p.lineTo(P[i][0],P[i][1]);p.closePath();}
+function rg_disc(p,x,y,rx,ry){p.moveTo(x+rx,y);p.ellipse(x,y,rx,ry,0,0,TAU);}
+// a limb through a, b and c (shoulder, elbow, hand; or hip, knee, ankle), tapering from w0 to w1, rounded at its joints
+function rg_limb(p,a,b,c,w0,w1){const P=[a,b,c],L=[],R=[];P.forEach(([x,y],i)=>{const[xa,ya]=P[Math.max(0,i-1)],[xb,yb]=P[Math.min(2,i+1)],d=Math.hypot(xb-xa,yb-ya)||1,w=lerp(w0,w1,i/2);L.push([x-(yb-ya)/d*w,y+(xb-xa)/d*w]);R.push([x+(yb-ya)/d*w,y-(xb-xa)/d*w]);});
+  rg_poly(p,L.concat(R.reverse()));rg_disc(p,a[0],a[1],w0,w0);const wm=(w0+w1)/2;rg_disc(p,b[0],b[1],wm,wm);}
+
+/* ---------- the story's people ----------
+   A plain silhouette, feet at (x, y), about 300 px tall at s=1, lit at its edge from the low sun on the right of the frame.
+   o.dress "tunic" (to the knee, legs below) or "robe" (to the ankle); o.head "wrap", "cap" or none; o.f 1 faces right, -1 left;
+   o.walk, a phase in radians, swings the legs; o.load (0..1) leans the body under a weight. What the near hand holds, o.hold:
+   "pole" (a carrying pole on the shoulder, a basket at each end, o.full heaps them), "rope" (a measuring cord, held forward),
+   "hoe", "brick" (held at the chest) or "book". Arms hang down otherwise. Returns where the near hand is, in the frame. */
+function rg_fig(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return[x,y];const f=o.f||1,dr=o.dress||"tunic",col=o.col||RG_SIL,rim=o.rim||RG_RIM,p=new Path2D(),pr=new Path2D();
+  const ph=o.walk,wk=ph!=null,sw=wk?Math.sin(ph):0,lift=wk?Math.max(0,Math.cos(ph)):0,bob=wk?Math.abs(Math.sin(ph))*4:0,ld=o.load||0;
+  // head, neck and headwear
+  rg_disc(p,4,-270+bob,19,23);rg_poly(p,[[-8,-254+bob],[8,-254+bob],[8,-234+bob],[-8,-234+bob]]);
+  if(o.head==="cap")rg_disc(p,3,-285+bob,21,12);if(o.head==="wrap"){rg_disc(p,4,-284+bob,22,11);rg_disc(p,-15,-280+bob,7,6);}
+  // the body in its dress
+  const R=dr==="robe"?[[9,-240],[24,-236],[38,-228],[42,-214],[39,-190],[35,-165],[31,-135],[33,-110],[37,-70],[41,-35],[45,-8]]:[[9,-240],[24,-236],[38,-228],[42,-214],[39,-190],[35,-165],[31,-135],[34,-112],[38,-92]];
+  rg_poly(p,R.concat(R.slice().reverse().map(([u,v])=>[-u,v])).map(([u,v])=>[u,v+bob]));
+  // legs: below the tunic, they swing as the figure walks; under a robe, only the feet show
+  if(dr==="tunic"){[[-1,-sw],[1,sw]].forEach(([k,q])=>{const hx=k*10,ax=hx+q*24+4,ay=-8-(q>0?lift*10:0);rg_limb(p,[hx,-96+bob],[hx+q*10+8,-52+bob*0.5],[ax,ay],12,8);rg_disc(p,ax+8,ay+2,13,6);});}
+  else{rg_disc(p,-10+(-sw)*14,-4,13,6);rg_disc(p,18+sw*14,-4-lift*3,13,6);}
+  // arms: the far one down; the near one down, or on what it holds
+  rg_limb(p,[-36,-222+bob],[-46,-166+bob],[-50,-114+bob],9,6.5);rg_disc(p,-50,-110+bob,7,8);
+  const hd=o.hold,Hn=hd==="pole"?[40,-238]:hd==="rope"?[62,-150]:hd==="brick"?[46,-176]:hd==="book"?[40,-180]:hd==="hoe"?[52,-140]:[50,-114],S0=[36,-222];
+  const Hb=[Hn[0],Hn[1]+bob],E=[(S0[0]+Hb[0])/2+(hd==="pole"?14:8),(S0[1]+Hb[1])/2+(hd==="pole"?6:5)+bob];rg_limb(p,[S0[0],S0[1]+bob],E,Hb,9,6.5);rg_disc(p,Hb[0],Hb[1]+3,7,8);
+  // what the hand holds, in the same dark as the figure
+  if(hd==="pole"){const by=-232+bob,sway=wk?Math.sin(ph*2)*3:0;pr.rect(-100,by-4,206,7);[[-92,1],[98,-1]].forEach(([bx,k])=>{const cx=bx+sway*k,top=-148+bob,full=o.full||0;
+      pr.moveTo(bx-1,by);pr.lineTo(cx-15,top);pr.lineTo(cx-13,top);pr.lineTo(bx+1,by);pr.lineTo(cx+15,top);pr.lineTo(cx+13,top);pr.closePath();
+      rg_poly(pr,[[cx-26,top],[cx+26,top],[cx+20,top+44],[cx-20,top+44]]);if(full>0)rg_disc(pr,cx,top+2,24,10*full);});}
+  if(hd==="hoe"){pr.moveTo(Hn[0]-14,Hn[1]-24+bob);pr.lineTo(Hn[0]-8,Hn[1]-26+bob);pr.lineTo(118,-12);pr.lineTo(112,-8);pr.closePath();rg_poly(pr,[[104,-20],[134,-26],[136,-4],[110,-4]]);}
+  if(hd==="brick")pr.rect(30,-196+bob,46,26);
+  if(hd==="book")pr.rect(26,-206+bob,30,44);
+  if(hd==="rope")rg_disc(pr,Hn[0]+6,Hn[1]+bob,6,6);
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(f*ld*0.09);ctx.scale(s*f,s);ctx.fillStyle=rgba(col,1);ctx.fill(p);ctx.fill(pr);
+    // the rim of light down the lit side, inside the figure only
+    ctx.save();ctx.clip(p);const rg=ctx.createLinearGradient(f>0?-70:70,0,f>0?70:-70,0);rg.addColorStop(0,rgba(rim,0));rg.addColorStop(0.68,rgba(rim,0));rg.addColorStop(1,rgba(rim,o.rimA==null?0.6:o.rimA));ctx.fillStyle=rg;ctx.fillRect(-160,-330,320,340);ctx.restore();
+    ctx.restore();});
+  const c=Math.cos(f*ld*0.09),sn=Math.sin(f*ld*0.09),hx=Hb[0]*s*f+(hd==="rope"?6*s*f:0),hy=Hb[1]*s;return[x+hx*c-hy*sn,y+hx*sn+hy*c];}
+
+/* ---------- the land at dusk ----------
+   Side on, in the world the camera looks at: the walls of Nanjing and a gate at the left (x up to 380), the road out of the gate,
+   villages of households along it (x 1300 to 2400), fields of rice below it, and a rich estate behind its own walls at the right
+   (x 2700 to 3460). The sky and the hills sit further back and move less as the camera pans. o.dim darkens the land. */
+const RG_HOUSES=[[1340,650,0.9],[1460,660,1.05],[1590,646,0.85],[1720,664,1.0],[1850,652,0.9],[1985,668,1.1],[2120,650,0.88],[2250,664,1.0],[2380,654,0.92]];
+/* the rice fields below the road: rows of plots, taller as they come nearer. The plots of a row share their sides, which lean a
+   little, and two rows share the dike between them, which bends gently along the land (rg_dike). Each plot is water that holds the
+   sky, the far edge brighter than the near; about half have young rice in rows. */
+let RG_PAD=null;const RG_ROWY=[];
+function rg_dike(r,x){return RG_ROWY[r]+Math.sin(x*0.0031+r*1.7)*5*(1+r*0.35)+Math.sin(x*0.011+r)*2*(1+r*0.2);}
+function rg_paddies(){if(RG_PAD)return RG_PAD;let y=742;for(let r=0;r<=7;r++){RG_ROWY[r]=y;y+=Math.round(30*Math.pow(1.3,r));}const P=[];
+  for(let r=0;r<7;r++){let x=380,skL=(hash(r,4)-0.5)*40;
+    while(x<5000){const w=(190+hash(r*31+Math.round(x),5)*230)*(0.85+r*0.07),skR=(hash(r*17+Math.round(x+w),6)-0.5)*(40+r*8);
+      P.push({x,y:RG_ROWY[r],w,h:RG_ROWY[r+1]-RG_ROWY[r],skL,skR,rice:hash(r*13+Math.round(x),7)>0.46,k:hash(r*7+Math.round(x),8),r});x+=w;skL=skR;}}
+  return RG_PAD=P;}
+// a plot's outline: along its far dike, down its right side, back along its near dike
+function rg_padPts(q){if(q.pts)return q.pts;const r=q.r,x0t=q.x+q.skL,x1t=q.x+q.w+q.skR,n=6,P=[];
+  for(let i=0;i<=n;i++){const xx=lerp(x0t,x1t,i/n);P.push([xx,rg_dike(r,xx)]);}for(let i=n;i>=0;i--){const xx=lerp(q.x,q.x+q.w,i/n);P.push([xx,rg_dike(r+1,xx)]);}return q.pts=P;}
+function rg_padPath(ctx,q){const P=rg_padPts(q);ctx.beginPath();P.forEach(([u,v],i)=>i?ctx.lineTo(u,v):ctx.moveTo(u,v));ctx.closePath();}
+// where the road runs at x: a point between its two edges, read from the curves it's drawn with
+let RG_ROAD=null;
+function rg_roadY(x){if(!RG_ROAD){RG_ROAD=[];const b=(u,p0,p1,p2,p3)=>{const m=1-u;return m*m*m*p0+3*m*m*u*p1+3*m*u*u*p2+u*u*u*p3;};for(let i=0;i<=240;i++){const u=i/240,y0=b(u,640,640,690,700),y1=b(u,690,690,730,738);RG_ROAD.push([b(u,190,900,1500,3600),lerp(y0,y1,0.6)]);}}
+  if(x>=3600)return 722.8+(x-3600)*0.002;const i=RG_ROAD.findIndex(p=>p[0]>=x);if(i<=0)return RG_ROAD[i<0?RG_ROAD.length-1:0][1];const a=RG_ROAD[i-1],c=RG_ROAD[i];return lerp(a[1],c[1],(x-a[0])/(c[0]-a[0]));}
+function rg_par(cam,f){return{x:960+(cam.x-960)*f,y:540+(cam.y-540)*f,z:1+(cam.z-1)*f};}
+// the sun's place in the sky, and where its light falls on the water, in the land's own coordinates
+const RG_SUN=[1560,500];
+function rg_glintX(cam){const pc=rg_par(cam,0.12),sx=W/2+(RG_SUN[0]-pc.x)*pc.z;return cam.x+(sx-W/2)/cam.z;}
+function rg_sky(ctx,S,cam,t){setCam(ctx,S,rg_par(cam,0.12));const g=ctx.createLinearGradient(0,-300,0,620);g.addColorStop(0,"#170f22");g.addColorStop(0.38,"#3e2640");g.addColorStop(0.62,"#93525a");g.addColorStop(0.8,"#e2986a");g.addColorStop(0.92,"#f4c68c");g.addColorStop(1,"#f6d8a4");
+  ctx.fillStyle=g;ctx.fillRect(-3000,-1400,9000,3200);
+  // the sun, low behind the far hills
+  const[sx,sy]=RG_SUN;glow(ctx,sx,sy,520,[255,214,160],0.42);glow(ctx,sx,sy,150,[255,236,200],0.7);ctx.fillStyle="rgba(255,240,214,0.95)";ctx.beginPath();ctx.arc(sx,sy,46,0,TAU);ctx.fill();
+  // long thin clouds, dark above and lit from below, warmer as they come down to the sun
+  for(let i=0;i<9;i++){const cy=100+i*42+hash(i,2)*26,cx=((hash(i,3)*4200+t*(2.4+i*0.5))%4800)-1500,w=380+hash(i,4)*720,h=6+hash(i,5)*9,lit=i/8;
+    const dk=mix([62,38,64],[150,84,98],lit),lt=mix([190,112,118],[255,204,164],lit);
+    [[-w*0.16,-h*0.5,0.5,0.8,dk,0.42],[0,0,1,1,dk,0.5],[w*0.06,h*0.7,0.78,0.42,lt,0.62]].forEach(([ox,oy,sw,sh,col,al])=>{const ww=w*sw,x0=cx+ox-ww/2,gr=ctx.createLinearGradient(x0,0,x0+ww,0);
+      gr.addColorStop(0,rgba(col,0));gr.addColorStop(0.28,rgba(col,al));gr.addColorStop(0.72,rgba(col,al));gr.addColorStop(1,rgba(col,0));ctx.fillStyle=gr;ctx.beginPath();ctx.ellipse(cx+ox,cy+oy,ww/2,h*sh,0,0,TAU);ctx.fill();});}}
+// the hills, two ridges; behind the far one, smoke from the war, rising in dark plumes that lean in the wind and thin as smoke (0..1) falls
+function rg_hills(ctx,S,cam,t,smoke){[[0.32,470,"#6e4250",44,0.004,1.3],[0.58,520,"#4e3141",34,0.006,2.1]].forEach(([f,y0,c,amp,fr,ph],n)=>{setCam(ctx,S,rg_par(cam,f));
+  if(n===0&&smoke>0)for(let k=0;k<3;k++){const bx=700+k*780+hash(k,7)*120;for(let i=0;i<12;i++){const u=(t*0.035+i/12+k*0.31)%1,x=bx+u*u*300+Math.sin(u*5+k*2)*24,y=470-u*400,r=26+u*120,al=0.3*smoke*Math.sin(Math.PI*Math.min(1,u*1.4))*(1-u*0.5);
+    if(al<=0.004)continue;const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,"rgba(44,30,40,"+al+")");g.addColorStop(1,"rgba(44,30,40,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);}}
+  ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(-2400,1400);for(let x=-2400;x<=5600;x+=40)ctx.lineTo(x,y0-amp*(0.6+0.4*Math.sin(x*fr+ph))*(0.7+0.3*Math.sin(x*fr*2.7+ph*3)));ctx.lineTo(5600,1400);ctx.closePath();ctx.fill();});}
+// a roof with eaves that lift at the ends, its eave line at y, w wide and h high
+function rg_roof(ctx,cx,y,w,h,col){ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(cx-w/2-24,y+4);ctx.quadraticCurveTo(cx-w/2+10,y+h*0.1,cx-w*0.32,y-h*0.55);ctx.lineTo(cx+w*0.32,y-h*0.55);ctx.quadraticCurveTo(cx+w/2-10,y+h*0.1,cx+w/2+24,y+4);ctx.lineTo(cx+w/2-6,y+14);ctx.lineTo(cx-w/2+6,y+14);ctx.closePath();ctx.fill();}
+function rg_wall(ctx){const Y=640,T0=478,c="#2d2126";ctx.fillStyle=c;ctx.fillRect(-900,T0,1280,Y-T0+40);
+  for(let x=-900;x<380;x+=34)ctx.fillRect(x,T0-16,20,18);
+  // the gate: an arch through the wall, and its tower on top, two roofs
+  ctx.fillStyle="#1a1216";ctx.beginPath();ctx.moveTo(70,Y+40);ctx.lineTo(70,568);ctx.arc(130,568,60,Math.PI,0);ctx.lineTo(190,Y+40);ctx.closePath();ctx.fill();
+  ctx.fillStyle=c;ctx.fillRect(18,404,224,78);rg_roof(ctx,130,404,300,60,c);ctx.fillRect(48,330,164,46);rg_roof(ctx,130,334,240,54,c);
+  // rim light on the wall's top and the tower's right side
+  ctx.fillStyle="rgba(255,190,140,0.32)";ctx.fillRect(-900,T0,1280,3);ctx.fillRect(238,404,4,78);ctx.fillRect(374,T0,6,Y-T0+40);}
+function rg_house(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  ctx.fillStyle="#6a4a3a";ctx.fillRect(-58,-74,116,74);ctx.fillStyle="rgba(255,190,140,0.22)";ctx.fillRect(40,-74,18,74);
+  ctx.fillStyle="#2a1d20";ctx.beginPath();ctx.moveTo(-78,-70);ctx.quadraticCurveTo(-50,-80,-40,-112);ctx.lineTo(40,-112);ctx.quadraticCurveTo(50,-80,78,-70);ctx.lineTo(70,-62);ctx.lineTo(-70,-62);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#22181a";ctx.fillRect(-14,-44,28,44);const lit=o.lit==null?1:o.lit;ctx.fillStyle="rgba(255,"+(196+30*lit)+",120,"+(0.25+0.6*lit)+")";ctx.fillRect(-46,-50,20,18);ctx.fillRect(26,-50,20,18);ctx.restore();
+  if(lit>0.2)glow(ctx,x,y-40*s,70*s,[255,200,120],0.16*lit);}
+// the rich estate: a garden of trees, a hall of two roofs with its windows lit, and its own walls, tiled along the top, with a gate
+function rg_estate(ctx){const D="#211719",Wl="#30232a";
+  [[2752,566,1.05],[2990,560,0.8],[3236,552,0.7],[3418,562,1.15]].forEach(([tx,ty,s])=>{ctx.fillStyle="#291f25";ctx.fillRect(tx-5*s,ty-74*s,10*s,74*s);[[0,-100,48,30],[-32,-80,34,24],[32,-82,36,24],[4,-126,32,22]].forEach(([u,v,rx,ry])=>{ctx.beginPath();ctx.ellipse(tx+u*s,ty+v*s,rx*s,ry*s,0,0,TAU);ctx.fill();});
+    ctx.fillStyle="rgba(255,190,140,0.16)";ctx.beginPath();ctx.ellipse(tx+30*s,ty-104*s,18*s,22*s,0,-1.2,1.2);ctx.fill();});
+  ctx.fillStyle="#3a2a2c";ctx.fillRect(2900,476,380,90);ctx.fillStyle="rgba(255,206,130,0.78)";for(let i=0;i<6;i++)ctx.fillRect(2922+i*60,500,26,26);
+  ctx.fillStyle="#34262a";ctx.fillRect(2966,412,248,48);ctx.fillStyle="rgba(255,206,130,0.6)";for(let i=0;i<4;i++)ctx.fillRect(2990+i*56,424,20,18);
+  rg_roof(ctx,3090,476,440,72,D);rg_roof(ctx,3090,414,300,54,D);
+  ctx.fillStyle=Wl;ctx.fillRect(2700,566,760,104);ctx.fillStyle="rgba(0,0,0,0.18)";ctx.fillRect(2700,640,760,30);
+  ctx.fillStyle=D;ctx.beginPath();ctx.moveTo(2688,570);ctx.lineTo(3472,570);ctx.lineTo(3462,554);ctx.lineTo(2698,554);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#1a1215";ctx.fillRect(3052,604,76,66);rg_roof(ctx,3090,598,116,26,D);
+  ctx.fillStyle="rgba(255,190,140,0.3)";ctx.fillRect(2698,554,764,2.5);ctx.fillRect(3456,570,4,100);}
+// grain owed: a sack, tied at the top
+function rg_sack(ctx,x,y,s,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.fillStyle="#b48a58";ctx.beginPath();ctx.moveTo(-22,0);ctx.quadraticCurveTo(-28,-30,-12,-44);ctx.lineTo(12,-44);ctx.quadraticCurveTo(28,-30,22,0);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(255,226,170,0.35)";ctx.beginPath();ctx.moveTo(10,-40);ctx.quadraticCurveTo(24,-28,20,-2);ctx.lineTo(14,-2);ctx.quadraticCurveTo(16,-26,6,-40);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#7a5a36";ctx.fillRect(-12,-50,24,8);ctx.beginPath();ctx.ellipse(0,-54,10,6,0,0,TAU);ctx.fill();ctx.restore();});}
+// the fields: water that holds the sky, the sun's light on it, young rice in rows, and the dikes between the plots
+function rg_fields(ctx,cam){const P=rg_paddies(),x0=cam.x-W/2/cam.z-240,x1=cam.x+W/2/cam.z+240,gx=rg_glintX(cam),vis=P.filter(q=>q.x+q.w+60>=x0&&q.x-60<=x1);
+  vis.forEach(q=>{const r=q.r,ty=q.y,by=q.y+q.h,c0=mix(mix([240,184,132],[150,86,100],r/6),[255,214,170],0.18*q.k),c1=mix(c0,[44,26,42],0.42+0.05*r);
+    rg_padPath(ctx,q);const g=ctx.createLinearGradient(0,ty-8,0,by+8);g.addColorStop(0,rgba(c0,1));g.addColorStop(1,rgba(c1,1));ctx.fillStyle=g;ctx.fill();});
+  // the low sun on the water: a column of light below it, brightest on the far plots
+  ctx.save();ctx.translate(gx,742);ctx.scale(1,4.2);const sg=ctx.createRadialGradient(0,0,0,0,0,150);sg.addColorStop(0,"rgba(255,232,196,0.62)");sg.addColorStop(0.5,"rgba(255,214,170,0.22)");sg.addColorStop(1,"rgba(255,214,170,0)");ctx.fillStyle=sg;ctx.fillRect(-150,0,300,150);ctx.restore();
+  // young rice, in rows across the plot, each shoot a small fan of leaves
+  vis.forEach(q=>{if(!q.rice)return;const r=q.r,n=Math.max(2,Math.floor(q.h/(6+r*2.6))),sp=10+r*3.6,th=3.2+r*1.7,P2=rg_padPts(q),x0t=P2[0][0],x1t=P2[6][0],x0b=q.x,x1b=q.x+q.w;
+    ctx.strokeStyle=rgba(mix([58,82,44],[96,116,60],q.k),0.9);ctx.lineWidth=1.1+r*0.34;ctx.lineCap="round";ctx.beginPath();
+    for(let j=0;j<n;j++){const v=(j+0.7)/n,xl=lerp(x0t,x0b,v)+sp*0.5,xr=lerp(x1t,x1b,v)-sp*0.3;let m=0;for(let xx=xl+hash(j,r)*sp*0.5;xx<xr;xx+=sp,m++){const yy=lerp(rg_dike(r,xx),rg_dike(r+1,xx),v)-1,hh=th*(0.8+0.4*hash(m*7+j,r+q.k*50)),lean=(hash(m*3+j,r+11)-0.5)*hh*0.3;
+      // three leaves from one root, bending out
+      ctx.moveTo(xx,yy);ctx.quadraticCurveTo(xx-hh*0.08,yy-hh*0.6,xx-hh*0.46+lean,yy-hh*0.92);ctx.moveTo(xx,yy);ctx.quadraticCurveTo(xx+hh*0.1,yy-hh*0.6,xx+hh*0.48+lean,yy-hh*0.86);ctx.moveTo(xx,yy);ctx.quadraticCurveTo(xx+hh*0.02,yy-hh*0.7,xx+hh*0.1+lean,yy-hh*1.16);}}ctx.stroke();});
+  // the dikes: earth between the plots, lit along their tops
+  const wd=r=>2.6+r*1.5;ctx.strokeStyle="#2c1e18";ctx.lineJoin="round";ctx.lineCap="round";
+  const xa=Math.max(380,x0),xb=Math.min(5000,x1);for(let r=0;r<=7;r++){ctx.lineWidth=wd(Math.min(r,6));ctx.beginPath();for(let x=xa;x<=xb+40;x+=40)x===xa?ctx.moveTo(x,rg_dike(r,x)):ctx.lineTo(x,rg_dike(r,x));ctx.stroke();}
+  vis.forEach(q=>{const P2=rg_padPts(q);ctx.lineWidth=wd(q.r)*0.8;ctx.beginPath();ctx.moveTo(P2[0][0],P2[0][1]);ctx.lineTo(P2[13][0],P2[13][1]);ctx.stroke();});
+  ctx.strokeStyle="rgba(255,196,146,0.34)";for(let r=0;r<7;r++){ctx.lineWidth=1.2+r*0.3;ctx.beginPath();for(let x=xa;x<=xb+40;x+=40){const yy=rg_dike(r,x)-wd(r)*0.42;x===xa?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}
+  // a warm haze over the far fields, and the near ones in the evening's shadow
+  const hz=ctx.createLinearGradient(0,742,0,830);hz.addColorStop(0,"rgba(246,196,150,0.24)");hz.addColorStop(1,"rgba(246,196,150,0)");ctx.fillStyle=hz;ctx.fillRect(x0,742,x1-x0,88);
+  const sh=ctx.createLinearGradient(0,960,0,1290);sh.addColorStop(0,"rgba(16,9,16,0)");sh.addColorStop(1,"rgba(16,9,16,0.6)");ctx.fillStyle=sh;ctx.fillRect(x0,960,x1-x0,400);}
+// the land and its villages; the people, sacks and pills are the scene's
+function rg_land(ctx,S,cam,t,o){o=o||{};rg_sky(ctx,S,cam,t);rg_hills(ctx,S,cam,t,o.smoke||0);setCam(ctx,S,cam);
+  const g=ctx.createLinearGradient(0,560,0,1200);g.addColorStop(0,"#6b4d38");g.addColorStop(0.3,"#4b3527");g.addColorStop(1,"#21160f");ctx.fillStyle=g;ctx.fillRect(-2000,560,7600,900);
+  rg_wall(ctx);rg_estate(ctx);RG_HOUSES.forEach(([hx,hy,s],i)=>rg_house(ctx,hx,hy,s,{lit:o.lit?o.lit(i):0.8}));
+  // the road out of the gate, along the villages, worn into two ruts
+  ctx.fillStyle="#a07c5a";ctx.beginPath();ctx.moveTo(190,640);ctx.bezierCurveTo(900,640,1500,690,3600,700);ctx.lineTo(4700,702);ctx.lineTo(4700,740);ctx.lineTo(3600,738);ctx.bezierCurveTo(1500,730,900,690,70,690);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(255,214,160,0.22)";ctx.beginPath();ctx.moveTo(190,640);ctx.bezierCurveTo(900,640,1500,690,3600,700);ctx.lineTo(4700,702);ctx.lineTo(4700,708);ctx.lineTo(3600,706);ctx.bezierCurveTo(1500,696,900,646,190,646);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="rgba(70,48,32,0.32)";ctx.lineWidth=3;[0.4,0.75].forEach(k=>{ctx.beginPath();for(let x=200;x<=4700;x+=60){const yy=lerp(rg_roadY(x)-16,rg_roadY(x)+12,k);x===200?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();});
+  rg_fields(ctx,cam);
+  if(o.dim)dark(ctx,S,o.dim);}
+
+/* ---------- the registers ---------- */
+/* a register: a bound book, sewn along its right edge as the books of the time were, its cover in o.col, a blank paper slip for its
+   title. o.open (0..1) swings the cover open to a spread twice as wide, about the same centre (cx, cy); o.left and o.right then draw
+   on its two pages (ctx, x, y, w, h). w and h are one page. */
+function rg_book(ctx,cx,cy,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const u=clamp(o.open||0,0,1),col=o.col||RG_YEL,L=cx-w/2-u*w/2,Hx=L+w,y=cy-h/2,X=Hx-w*Math.cos(Math.PI*u);
+  withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=30;ctx.shadowOffsetY=12;ctx.fillStyle=rgba(mix(col,[40,26,16],0.45),1);ctx.fillRect(L-6,y-6,(u>0.5?X:Hx)-L+12,h+12);ctx.restore();
+    const page=(px,pw)=>{ctx.fillStyle=rgba(RG_PAPER,1);ctx.fillRect(px,y,pw,h);const g=ctx.createLinearGradient(px,0,px+pw,0);g.addColorStop(0,"rgba(120,90,50,0.10)");g.addColorStop(1,"rgba(120,90,50,0.22)");ctx.fillStyle=g;ctx.fillRect(px,y,pw,h);};
+    if(u>0){page(L,w);if(o.left)withA(ctx,fin(u,0.55,0.45),()=>o.left(ctx,L,y,w,h));}
+    if(u<0.5){const cw=Hx-X,k=cw/w;
+      // the pages, a little proud of the cover at its open edge and at its foot
+      ctx.fillStyle=rgba(mix(RG_PAPER,[150,118,80],0.3),1);ctx.fillRect(X-5*k,y+5,cw,h);ctx.strokeStyle="rgba(110,84,52,0.45)";ctx.lineWidth=1;ctx.beginPath();for(let i=1;i<4;i++){ctx.moveTo(X-5*k+i*1.4*k,y+5+h-1);ctx.lineTo(X-5*k+i*1.4*k,y+8);}ctx.stroke();
+      // the cover: cloth in its colour, finely woven, darker at its edges, with a frame pressed in
+      ctx.fillStyle=rgba(col,1);ctx.fillRect(X,y,cw,h);ctx.save();ctx.beginPath();ctx.rect(X,y,cw,h);ctx.clip();ctx.strokeStyle="rgba(70,40,12,0.09)";ctx.lineWidth=1.4;ctx.beginPath();for(let d=-h;d<cw;d+=6){ctx.moveTo(X+d,y+h);ctx.lineTo(X+d+h,y);}ctx.stroke();ctx.restore();
+      const g=ctx.createLinearGradient(X,y,X+cw,y+h);g.addColorStop(0,"rgba(255,255,255,0.16)");g.addColorStop(0.6,"rgba(255,255,255,0)");g.addColorStop(1,"rgba(60,30,10,0.3)");ctx.fillStyle=g;ctx.fillRect(X,y,cw,h);
+      ctx.strokeStyle=rgba(mix(col,[40,22,8],0.5),0.55);ctx.lineWidth=2;ctx.strokeRect(X+9*k,y+9,cw-18*k-16*k,h-18);
+      // the title slip, top left: plain paper in a thin frame, with nothing written on it
+      ctx.fillStyle=rgba(mix(RG_PAPER,col,0.18),1);ctx.fillRect(X+cw*0.12,y+h*0.07,cw*0.19,h*0.5);ctx.strokeStyle=rgba(mix(col,[40,22,8],0.55),0.7);ctx.lineWidth=1.6;ctx.strokeRect(X+cw*0.12+3*k,y+h*0.07+3,cw*0.19-6*k,h*0.5-6);
+      // the binding: four stitches through holes along the right edge, and the corners wrapped in silk
+      ctx.strokeStyle=rgba(mix(col,[30,18,10],0.6),0.9);ctx.lineWidth=2;for(let i=0;i<4;i++){const sy=y+h*(0.14+i*0.24);ctx.beginPath();ctx.moveTo(Hx-16*k,sy);ctx.lineTo(Hx,sy);ctx.stroke();ctx.beginPath();ctx.arc(Hx-16*k,sy,2.5,0,TAU);ctx.stroke();}
+      ctx.beginPath();ctx.moveTo(Hx-16*k,y);ctx.lineTo(Hx-16*k,y+h);ctx.stroke();ctx.fillStyle=rgba(mix(col,[30,18,10],0.45),1);ctx.fillRect(Hx-8*k,y,8*k,10);ctx.fillRect(Hx-8*k,y+h-10,8*k,10);}
+    else{const cw=X-Hx;page(Hx,cw);if(o.right&&u>0.95)withA(ctx,fin(u,0.95,0.05),()=>o.right(ctx,Hx,y,cw,h));ctx.fillStyle="rgba(80,50,20,0.25)";ctx.fillRect(Hx-3,y,6,h);}});}
+// ink on a register's page: short rows of strokes, like entries written in columns; no real characters
+function rg_entries(ctx,x,y,w,h,n,seed,a){withA(ctx,a==null?1:a,()=>{ctx.strokeStyle=rgba(RG_INK,0.55);ctx.lineCap="round";const cols=n||8,cw=w/(cols+1);
+  for(let c=0;c<cols;c++){const cx=x+w-cw*(c+1);ctx.lineWidth=3;for(let r=0;r<7;r++){const yy=y+h*0.1+r*h*0.115,l=h*0.05*(0.5+hash(c*9+r,seed||1));ctx.beginPath();ctx.moveTo(cx,yy);ctx.lineTo(cx,yy+l);ctx.stroke();}}});}
+/* a village unit of the Yellow Registers: 110 households, the ten heads in a row above (o.head is this year's, lit), and below them
+   ten groups of ten. Drawn in ink on paper, house by house as o.p goes from 0 to 1. s=1 is about 560 px wide. */
+function rg_unit(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==null?1:o.p;if(a<=0.01)return;const hs=(hx,hy,k,lit,big)=>{ctx.save();ctx.translate(hx,hy);ctx.scale(k,k);
+    ctx.fillStyle=lit?rgba(RG_YEL,1):rgba(RG_INK,big?0.9:0.7);ctx.beginPath();ctx.moveTo(-15,-12);ctx.lineTo(0,-24);ctx.lineTo(15,-12);ctx.closePath();ctx.fill();ctx.fillRect(-11,-12,22,16);ctx.restore();};
+  withA(ctx,a,()=>{for(let i=0;i<10;i++){const q=clamp(p*14-i*0.25,0,1);if(q<=0)continue;withA(ctx,q,()=>{const hx=x+(i-4.5)*56*s,lit=o.head===i;if(lit){ctx.fillStyle=rgba(RG_YEL,0.28);rr(ctx,hx-26*s,y-58*s,52*s,70*s,8*s);ctx.fill();}hs(hx,y,1.25*s,lit,1);});}
+    const ln=clamp(p*14-2.3,0,1);if(ln>0){ctx.strokeStyle=rgba(RG_INK,0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-280*s,y+22*s);ctx.lineTo(x-280*s+560*s*ln,y+22*s);ctx.stroke();}
+    for(let g=0;g<10;g++)for(let k=0;k<10;k++){const i=10+g*10+k,q=clamp(p*14-2.5-(g*10+k)*0.1,0,1);if(q<=0)continue;withA(ctx,q,()=>hs(x+(g-4.5)*56*s+((k%2)-0.5)*22*s,y+(58+Math.floor(k/2)*30)*s,0.62*s,o.head===g&&o.jia,0));}});}
+/* the fish-scale register's plots: a valley of fields drawn plot by plot. Each plot is a cell of a grid of hexagons whose corners are
+   moved, and whose sides bow a little, the same way for the two plots that share them, so neighbours fit edge to edge and no two look
+   alike. A river runs through them, and an uneven border holds them. Drawn out from the left as o.p goes from 0 to 1. */
+const RG_SC={};
+function rg_cells(n,seed){const key=n+"_"+seed;if(RG_SC[key])return RG_SC[key];const jit=(v,k)=>(hash(Math.round(v[0]*100),Math.round(v[1]*100)+seed+k)-0.5)*0.4;
+  const C=[];for(let j=0;j<n;j++)for(let i=0;i<n*1.8;i++){const cx=i+(j%2?0.5:0),cy=j*0.866,P=[];for(let k=0;k<6;k++){const an=Math.PI/6+k*Math.PI/3;P.push([cx+Math.cos(an)*0.577,cy+Math.sin(an)*0.577]);}
+    const J=P.map(v=>[v[0]+jit(v,0),v[1]+jit(v,2)]);C.push({P:J,cx,cy,k:hash(i*31+j,seed+5),kind:hash(i*17+j,seed+9)});}
+  C.mx=Math.max(...C.map(c=>c.cx))+0.6;C.my=Math.max(...C.map(c=>c.cy))+0.6;C.sort((a,b)=>a.cx-b.cx||a.cy-b.cy);return RG_SC[key]=C;}
+// a side that bows: its control point moves off the middle the same way whichever plot draws it
+function rg_bow(ctx,ax,ay,bx,by,seed){const s=ax<bx||(ax===bx&&ay<by),x0=s?ax:bx,y0=s?ay:by,x1=s?bx:ax,y1=s?by:ay,d=(hash(Math.round(x0*7+y0*3),Math.round(x1*5+y1*11)+seed)-0.5)*0.22;ctx.quadraticCurveTo((ax+bx)/2-(y1-y0)*d,(ay+by)/2+(x1-x0)*d,bx,by);}
+function rg_scales(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==null?1:o.p;if(a<=0.01)return;const C=rg_cells(o.n||8,o.seed||3),cx0=x+w/2,cy0=y+h/2;
+  const edge=ctx2=>{ctx2.beginPath();for(let i=0;i<=56;i++){const th=i/56*TAU,r=1+0.07*Math.sin(3*th+1)+0.05*Math.sin(5*th+2.3)+0.03*Math.sin(9*th);const px=cx0+Math.cos(th)*w/2*0.96*r,py=cy0+Math.sin(th)*h/2*0.93*r;i?ctx2.lineTo(px,py):ctx2.moveTo(px,py);}ctx2.closePath();};
+  withA(ctx,a,()=>{ctx.save();edge(ctx);ctx.clip();const N=C.length,sx=v=>x+(v[0]+0.3)/C.mx*w,sy=v=>y+(v[1]+0.3)/C.my*h;
+    C.forEach((c,i)=>{const q=clamp(p*N*1.15-i,0,1);if(q<=0)return;
+      withA(ctx,q,()=>{ctx.beginPath();const P=c.P.map(v=>[sx(v),sy(v)]);ctx.moveTo(P[0][0],P[0][1]);for(let k=1;k<=6;k++){const A=P[k-1],B=P[k%6];rg_bow(ctx,A[0],A[1],B[0],B[1],o.seed||3);}ctx.closePath();const hi=o.hi&&o.hi(i);
+        ctx.fillStyle=hi?rgba(RG_EARTH,0.85):c.kind<0.34?rgba(mix([206,204,160],[184,190,140],c.k),0.9):c.kind<0.67?rgba(mix([222,200,154],[200,176,128],c.k),0.9):rgba(mix([228,214,178],[212,192,150],c.k),0.9);ctx.fill();
+        ctx.strokeStyle=rgba(RG_INK,0.85);ctx.lineWidth=2.2;ctx.stroke();
+        // a few strokes in each plot, like its number and its holder's name written in it
+        ctx.strokeStyle=rgba(RG_INK,0.4);ctx.lineWidth=2;const mx=sx([c.cx,c.cy]),my=sy([c.cx,c.cy]);ctx.beginPath();ctx.moveTo(mx-6,my-8);ctx.lineTo(mx-6,my+8);ctx.moveTo(mx+5,my-6);ctx.lineTo(mx+5,my+4);ctx.stroke();});});
+    // the river through the valley, in a pale wash between two lines of ink
+    const rv=fin(p,0.35,0.4);if(rv>0)withA(ctx,rv,()=>{const path=()=>{ctx.beginPath();ctx.moveTo(x-20,y+h*0.66);ctx.bezierCurveTo(x+w*0.3,y+h*0.9,x+w*0.55,y+h*0.28,x+w+20,y+h*0.42);};
+      path();ctx.strokeStyle=rgba(RG_INK,0.75);ctx.lineWidth=20;ctx.stroke();path();ctx.strokeStyle="rgba(168,186,186,1)";ctx.lineWidth=15;ctx.stroke();});
+    ctx.restore();ctx.strokeStyle=rgba(RG_INK,0.65);ctx.lineWidth=3;edge(ctx);ctx.stroke();});}
+/* warp and weft: threads that run two ways and together make a cloth. o.pw and o.pf (0..1) lay the warp (down, in o.wc) and the weft
+   (across, in o.fc); where they cross, each goes over and under in turn */
+function rg_weave(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const nw=o.nw||12,nf=o.nf||8,pw=o.pw==null?1:o.pw,pf=o.pf==null?1:o.pf,wc=o.wc||RG_EARTH,fc=o.fc||RG_YEL,tw_=w/nw*0.66,th=h/nf*0.66;
+  const warp=(i,y0,y1)=>{const cx=x+(i+0.5)*w/nw;ctx.fillStyle=rgba(mix(wc,[40,22,12],0.25),1);ctx.fillRect(cx-tw_/2,y0,tw_,y1-y0);ctx.fillStyle=rgba(wc,1);ctx.fillRect(cx-tw_*0.36,y0,tw_*0.72,y1-y0);ctx.fillStyle="rgba(255,236,200,0.2)";ctx.fillRect(cx-tw_*0.1,y0,tw_*0.16,y1-y0);};
+  const weft=(j,x0,x1)=>{const cy=y+(j+0.5)*h/nf;ctx.fillStyle=rgba(mix(fc,[60,40,10],0.25),1);ctx.fillRect(x0,cy-th/2,x1-x0,th);ctx.fillStyle=rgba(fc,1);ctx.fillRect(x0,cy-th*0.36,x1-x0,th*0.72);ctx.fillStyle="rgba(255,250,220,0.22)";ctx.fillRect(x0,cy-th*0.12,x1-x0,th*0.16);};
+  withA(ctx,a,()=>{for(let i=0;i<nw;i++){const q=clamp(pw*nw*1.3-i*1.0,0,1);if(q>0)warp(i,y,y+h*ease(q));}
+    for(let j=0;j<nf;j++){const q=clamp(pf*nf*1.3-j,0,1);if(q<=0)continue;const xe=x+w*ease(q);weft(j,x,xe);
+      // where the weft goes under, the warp is drawn again on top of it, with a little shadow either side
+      for(let i=0;i<nw;i++){const cx=x+(i+0.5)*w/nw;if(cx>xe||(i+j)%2===0)continue;if(clamp(pw*nw*1.3-i,0,1)<=0)continue;const cy=y+(j+0.5)*h/nf;ctx.fillStyle="rgba(20,10,6,0.28)";ctx.fillRect(cx-tw_/2-3,cy-th/2,tw_+6,th);warp(i,cy-th/2-2,cy+th/2+2);}}});}
+// the series' mark: a knot of two threads each way
+function mtb_knot(ctx,x,y,s,a){withA(ctx,a,()=>rg_weave(ctx,x-s,y-s,2*s,2*s,{nw:3,nf:3,wc:RG_EARTH,fc:MTB}));}
+
+/* ---------- the series' title and its end ---------- */
+function mtb_title(ctx,S,t,t0,t1,title,sub){const oA=fin(t,t0,0.8)*(1-fin(t,t1,0.7)),tA=fin(t,t0+0.4,0.8)*(1-fin(t,t1-0.1,0.6));if(oA<=0)return;setScreen(ctx,S);
+  const g=ctx.createRadialGradient(960,520,80,960,520,900);g.addColorStop(0,"rgba(8,5,10,"+0.62*oA+")");g.addColorStop(1,"rgba(8,5,10,"+0.3*oA+")");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  withA(ctx,tA,()=>{mtb_knot(ctx,960,392,22,1);T(ctx,"MODEL THE BUSINESS",960,462,{w:800,size:28,align:"center",color:rgba(MTB,0.98)});T(ctx,title,960,560,{w:800,size:96,align:"center"});if(sub)T(ctx,sub,960,624,{w:600,size:30,align:"center",color:rgba([236,224,206],0.95)});});}
+function mtb_end(ctx,S,t,t0,title,line){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;dark(ctx,S,oA*0.94);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)T(ctx,line,960,420,{w:700,size:44,align:"center"});mtb_knot(ctx,960,522,18,1);T(ctx,title,960,612,{w:800,size:44,align:"center",color:rgba(MTB,1)});
+    T(ctx,"Model the business · Learning Data",960,664,{w:600,size:28,align:"center",color:rgba(SOFT,0.95)});});}
+// a pill for the past: warm glass, its words in the story's colours
+function rg_pill(ctx,x,y,s,col,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{const sz=phSz(ctx,o.size||30),w=tw(ctx,s,sz,700)+40,h=sz+26,X=o.align==="left"?x:o.align==="right"?x-w:x-w/2;
+  glass(ctx,X,y-h/2,w,h,h/2,col,{glow:12,ea:0.85,fill:"rgba(26,16,12,0.9)"});T(ctx,s,X+20,y+sz*0.36,{w:700,size:sz,color:rgba(col,1)});});}
+// make what the films draw again and again before the film plays: the fish-scale plots
+function rg_prep(){rg_paddies();rg_cells(8,3);}
+
 /* ===== A Sharper Sketch: scenes =====
    The camera stays on the sketch and zooms in. Each chapter asks one question, checks the reference model (TCSI) on tracing paper,
    and changes the sketch: the gap between Genie's number and the census report closes, 131 → 125 → 121 → 119 → 118. */
@@ -714,7 +1496,7 @@ function E3(keys,pos,extra,s){const E={};keys.forEach(k=>{if(!pos[k])return;E[k]
 function lay(pos,k,cx,cy){const o={};Object.keys(pos).forEach(n=>{o[n]=[cx+(pos[n][0]-960)*k,cy+(pos[n][1]-510)*k];});return o;}
 const pulse=(t,t0,d)=>t>t0&&t<t0+(d||2.2)?Math.sin(Math.PI*(t-t0)/(d||2.2)):0;
 // a short-lived tag: visible from t0 for d seconds
-const brief=(t,t0,d)=>fin(t,t0,0.4)*(1-sstep(t0+(d||3),t0+(d||3)+0.5,t));
+const brief3=(t,t0,d)=>fin(t,t0,0.4)*(1-sstep(t0+(d||3),t0+(d||3)+0.5,t));
 function slideIn(t,t0,t1){return (1-ease(clamp((t-t0)/1.2,0,1)))*1900+(t1!=null?ease(clamp((t-t1)/1.1,0,1))*-1900:0);}
 
 // the finished sketch, v2: every box, its line and its pin
@@ -723,29 +1505,173 @@ function sketchV2(ctx,o){o=o||{};const pos=o.pos||L3,s=o.s||1,E=E3(Object.keys(L
   Object.keys(E).forEach(k=>{if(o.pins)Object.assign(E[k],{pin:PINS[k],pinA:o.pinA?o.pinA(k):1,pinP:o.pinP?o.pinP(k):0});if(o.hi)E[k].hi=o.hi(k);if(o.a)E[k].a=o.a(k);if(o.extra&&o.extra[k])Object.assign(E[k],o.extra[k]);});
   return diagram(ctx,E,L3R.map(r=>r.concat([{}])));}
 
-/* ---------- 0. The sketch we drew ---------- */
+/* ---------- the story: China, 1391, the four columns (the series' pictures: films/model-the-business/shared/src/registers.js) ---------- */
+// a person faded as one picture: drawn whole on a spare canvas, then laid on the frame, so no part of them shows through another
+let FC_SCR=null;
+function fc_faded(ctx,a,fn){if(a<=0.01)return;if(a>=0.995){fn(ctx);return;}const cv=ctx.canvas;if(!FC_SCR||FC_SCR.width!==cv.width||FC_SCR.height!==cv.height)FC_SCR=mkCanvas(cv.width,cv.height);const x=FC_SCR.getContext("2d");
+  x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,cv.width,cv.height);x.setTransform(ctx.getTransform());fn(x);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha*=a;ctx.drawImage(FC_SCR,0,0);ctx.restore();}
+// a pill on a point of the land, drawn in the frame at its own size
+function fc_pillAt(ctx,S,cam,wx,wy,s,col,a,o){if(a<=0.01)return;const p=toScreen(cam,wx,wy);ctx.save();setScreen(ctx,S);rg_pill(ctx,p.x,p.y,s,col,a,o);ctx.restore();}
+// keyframes [time, values...], eased from one to the next
+function fc_keys(K,t){if(t<=K[0][0])return K[0].slice(1);for(let i=1;i<K.length;i++){if(t<=K[i][0]){const a=K[i-1],b=K[i],f=easeCam((t-a[0])/((b[0]-a[0])||1));return a.slice(1).map((v,j)=>lerp(v,b[j+1],f));}}return K[K.length-1].slice(1);}
+// the rice field at a point of the land, and its middle
+const fc_pad=(x,y)=>rg_paddies().find(q=>q.x<=x&&q.x+q.w>=x&&q.y<=y&&q.y+q.h>=y)||rg_paddies()[0];
+function fc_mid(q){const P=rg_padPts(q);return[(P[0][0]+P[6][0]+P[7][0]+P[13][0])/4,(P[0][1]+P[13][1])/2];}
+function fc_mark(ctx,q,col,a){if(a<=0.01)return;withA(ctx,a,()=>{rg_padPath(ctx,q);ctx.fillStyle=rgba(col,0.24);ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=4;ctx.stroke();});}
+// a field, as a register draws it: a plot outlined in ink, with a few strokes in it for its number and its holder's name
+function fc_plot(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sd=o.seed||1;
+  withA(ctx,a,()=>{ctx.beginPath();for(let k=0;k<6;k++){const an=Math.PI/6+k*Math.PI/3,j=1+(hash(sd*7+k,3)-0.5)*0.3,px=x+Math.cos(an)*r*j,py=y+Math.sin(an)*r*j*0.84;k?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();
+    ctx.fillStyle=o.col?rgba(o.col,0.92):rgba(mix([206,204,160],[226,206,160],hash(sd,5)),0.95);ctx.fill();ctx.strokeStyle=rgba(RG_INK,0.85);ctx.lineWidth=Math.max(1.6,r*0.085);ctx.stroke();
+    ctx.strokeStyle=rgba(RG_INK,0.42);ctx.lineWidth=Math.max(1.4,r*0.07);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x-r*0.2,y-r*0.3);ctx.lineTo(x-r*0.2,y+r*0.3);ctx.moveTo(x+r*0.18,y-r*0.22);ctx.lineTo(x+r*0.18,y+r*0.14);ctx.stroke();});}
+/* a household's entry in a register, in four columns written right to left, as the registers were: what it held at the last register
+   (i 0), what came in (1), what went out (2), and what it holds now (3). o.n: the fields in each; o.p: how far each column is written
+   (0..1); o.hi: how lit each is; o.skip(i, k) leaves a field out (one on its way elsewhere); o.col(i, k) colours one. */
+function fc_slot(x,y,w,h,i,k){const cw=w/4,top=y+h*0.2,step=Math.min(cw*0.62,h*0.74/5.4);return[x+w-cw*(i+0.5),top+step*(k+0.5)];}
+function fc_entry(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=o.n||[5,1,2,4],cw=w/4,r=Math.min(cw*0.26,h*0.06);
+  withA(ctx,a,()=>{ctx.strokeStyle=rgba(RG_INK,0.3);ctx.lineWidth=2;for(let i=1;i<4;i++){const lx=x+w-cw*i;ctx.beginPath();ctx.moveTo(lx,y+h*0.05);ctx.lineTo(lx,y+h*0.95);ctx.stroke();}
+    for(let i=0;i<4;i++){const cx=x+w-cw*(i+0.5),p=o.p?o.p[i]:1,hd=fin(p,0,0.25);if(hd<=0)continue;const hl=o.hi?o.hi[i]:0;
+      if(hl>0.01){ctx.fillStyle=rgba(o.hiCol||RG_YEL,0.3*hl);ctx.fillRect(cx-cw*0.46,y+h*0.04,cw*0.92,h*0.92);}
+      // the column's heading, two short strokes, like a word written at its top
+      withA(ctx,hd,()=>{ctx.strokeStyle=rgba(RG_INK,0.8);ctx.lineCap="round";ctx.lineWidth=Math.max(2,cw*0.03);ctx.beginPath();ctx.moveTo(cx-cw*0.06,y+h*0.07);ctx.lineTo(cx-cw*0.06,y+h*0.13);ctx.moveTo(cx+cw*0.06,y+h*0.075);ctx.lineTo(cx+cw*0.06,y+h*0.12);ctx.stroke();});
+      for(let k=0;k<n[i];k++){if(o.skip&&o.skip(i,k))continue;const q=clamp(p*(n[i]+1)-k-0.5,0,1);if(q<=0)continue;const[sx,sy]=fc_slot(x,y,w,h,i,k);
+        fc_plot(ctx,sx,sy,r*(0.75+0.25*ease(q)),{a:q,seed:i*11+k+(o.seed||0),col:o.col?o.col(i,k):null});}}});}
+// one register, open, with an entry across its two pages (o.n, o.p, o.hi...) or one on each (o.L and o.R, each o's own)
+function fc_register(ctx,cx,cy,w,h,o){o=o||{};rg_book(ctx,cx,cy,w,h,{col:o.bk||RG_YEL,a:o.a,open:o.open==null?1:o.open,
+  left:o.L?(c2,x,y,w2,h2)=>fc_entry(c2,x+w2*0.05,y,w2*0.9,h2,o.L):null,right:o.R?(c2,x,y,w2,h2)=>fc_entry(c2,x+w2*0.05,y,w2*0.9,h2,o.R):null});
+  if(o.one&&(o.open==null||o.open>0.95))fc_entry(ctx,cx-w+w*0.04,cy-h/2,2*w-w*0.08,h,o.one);}
+// where the k-th field of column i of an entry across a register's two pages sits, in the frame
+const fc_oneSlot=(cx,cy,w,h,i,k)=>fc_slot(cx-w+w*0.04,cy-h/2,2*w-w*0.08,h,i,k);
+const fc_pageSlot=(cx,cy,w,h,side,i,k)=>{const x0=side<0?cx-w:cx;return fc_slot(x0+w*0.05,cy-h/2,w*0.9,h,i,k);};
+
+/* ---------- 0. Four columns ---------- */
+const FC_COLS=["held","came in","went out","holds now"],FC_WRONG=[226,112,92];
+scene("cols",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,wd,o)=>wAt(sc,id,wd,o),cW=c("when"),cC=c("change"),cT=c("total"),cH=c("harm"),cN=c("need"),cO=c("cols"),cS=c("sum"),cB=c("back"),cY=c("story"),cD=c("data");
+  const cam=camAt([[0,1800,620,0.9],[cW,1800,620,0.9],[cC-0.3,1740,636,1.02],[cC+1.7,1680,660,1.3],[cT-0.3,1680,660,1.3],[cT+1.5,1890,700,1.36],[cH-0.4,1890,700,1.36],[cH+1.6,2240,640,1.55],[cN-0.3,2240,640,1.55],[cN+1.8,1880,610,0.8]],t);
+  const dim=0.66*fin(t,cN-0.1,1.3)+0.2*fin(t,cD+0.4,1.4);
+  rg_land(ctx,S,cam,t,{dim});setCam(ctx,S,cam);
+  const H1=RG_HOUSES[1],H2=RG_HOUSES[2],H3=RG_HOUSES[3],H4=RG_HOUSES[4],H7=RG_HOUSES[7],top=h=>[h[0],h[1]-118*h[2]];
+  // the field sold, from the household at the right to the one at the left, and the four that household still holds
+  const qS=fc_pad(1690,792),[sx,sy]=fc_mid(qS),px=sx,py=sy,own=[fc_pad(1880,757),fc_pad(2060,792),fc_pad(1830,840),fc_pad(2010,840)];
+  const land=1-fin(t,cN+0.4,1.0);
+  if(land>0)withA(ctx,land,()=>{
+    // the village head brings the register to be made again: the court's yellow book, carried along the road
+    const wu=ease(clamp((t-cW-0.2)/8,0,1)),wx=lerp(1080,1400,wu),ws=Math.max(1,Math.round(320/45));
+    const hn=rg_fig(ctx,wx,rg_roadY(wx)+4,0.3,{dress:"robe",head:"cap",hold:"book",walk:wu*ws*TAU,a:fin(t,cW-0.4,0.8)*(1-fin(t,cC+1.0,0.8))});
+    withA(ctx,fin(t,cW-0.4,0.8)*(1-fin(t,cC+1.0,0.8)),()=>{ctx.fillStyle=rgba(RG_YEL,1);ctx.fillRect(hn[0]-2,hn[1]-26,11,15);glow(ctx,hn[0]+3,hn[1]-18,26,RG_YEL,0.35);});
+    // a village changes: a child is born in one house; an old parent is gone from another; a field passes from one to another
+    const fam=fin(t,cC+0.6,0.8)*(1-fin(t,cH+0.2,0.8));
+    if(fam>0){fc_faded(ctx,fam,c2=>{rg_fig(c2,H1[0]-46,rg_roadY(H1[0]-46)-14,0.3,{head:"wrap",f:1});rg_fig(c2,H1[0]+40,rg_roadY(H1[0]+40)-12,0.29,{dress:"robe",hold:"book",f:-1});});
+      const bn=fin(t,w("change","born")-0.2,0.6);if(bn>0){const bx=H1[0]+40-38*0.29,by=rg_roadY(H1[0]+40)-12-188*0.29;glow(ctx,bx,by,40,RG_RIM,0.55*bn*fam);glow(ctx,bx,by,14,[255,240,214],0.8*bn*fam);}
+      const gone=fin(t,w("change","die")-0.1,1.6);fc_faded(ctx,fam*(1-gone),c2=>rg_fig(c2,H3[0]-40,rg_roadY(H3[0]-40)-14,0.28,{dress:"robe",head:"cap",f:1,rimA:0.75}));
+      if(gone>0&&gone<1)glow(ctx,H3[0]-40,rg_roadY(H3[0]-40)-58,60,RG_RIM,0.3*Math.sin(Math.PI*gone)*fam);}
+    // the field sold: from the household at the right to the one at the left
+    const fA=fin(t,w("change","fields")-0.2,0.6)*(1-fin(t,cH-0.4,0.6)),mv=fin(t,w("change","sold"),1.2);
+    fc_mark(ctx,qS,RG_EARTH,fA);
+    if(fA>0&&t<cT+0.2){arrowTo(ctx,sx,sy-6,top(H4)[0]-16,top(H4)[1]+20,RG_EARTH,fA*(1-mv),{bend:-0.22,dash:[10,8],lw:3});arrowTo(ctx,sx,sy-6,top(H2)[0]+16,top(H2)[1]+20,RG_EARTH,fA*(1-fin(t,cT-0.3,0.5)),{bend:0.22,dash:[10,8],lw:3,p:mv});}
+    // a new total alone: the household on the right had five fields and has four. Sold, or hidden under another name?
+    const oA=fin(t,cT+0.3,0.7)*(1-fin(t,cH-0.4,0.6));if(oA>0)glow(ctx,H4[0],H4[1]-46,120,RG_YEL,0.3*oA);own.forEach((q,i)=>fc_mark(ctx,q,RG_YEL,oA*fin(t,cT+0.3+i*0.15,0.5)));
+    const sold=fin(t,w("total","sold")-0.1,0.7)*(1-fin(t,cH-0.4,0.6)),hid=fin(t,w("total","hidden")-0.1,0.7)*(1-fin(t,cH-0.4,0.6));
+    arrowTo(ctx,sx,sy-6,top(H2)[0]+16,top(H2)[1]+20,RG_YEL,sold,{bend:0.22,dash:[10,8],lw:3,p:fin(t,w("total","sold")-0.1,1.0)});
+    arrowTo(ctx,sx,sy+4,H7[0]-20,top(H7)[1]+10,RG_YEL,hid,{bend:-0.12,dash:[10,8],lw:3,p:fin(t,w("total","hidden")-0.1,1.4)});
+    // the hidden field's tax falls on the families who can't hide theirs
+    const bA=fin(t,w("harm","falls")-0.2,0.6)*(1-fin(t,cN+0.2,0.8));
+    if(bA>0){[RG_HOUSES[6],RG_HOUSES[7],RG_HOUSES[8]].forEach(([hx,hy],k)=>{[0,1,2].forEach(j=>rg_sack(ctx,hx+56+j*24,hy+8-(j===2?26:0),0.5,bA*fin(t,w("harm","falls")+k*0.3+j*0.15,0.4)));});
+      const u=ease(clamp((t-w("harm","families")+0.3)/7,0,1)),x=lerp(2290,1990,u);rg_fig(ctx,x,rg_roadY(x)+6,0.3,{a:bA,hold:"pole",full:1,load:1,head:"wrap",f:-1,walk:u*Math.round(300/45)*TAU});}
+  });
+  // the words of the story, on the land
+  fc_pillAt(ctx,S,cam,px,py+46,"sold",RG_EARTH,fin(t,w("change","sold"),0.5)*(1-fin(t,cT-0.3,0.5)));
+  fc_pillAt(ctx,S,cam,H4[0],top(H4)[1]-28,"5 fields, now 4",RG_PAPER,fin(t,w("total","total"),0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,H4[0],top(H4)[1]-74,"what changed?",RG_YEL,fin(t,w("total","changed"),0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,(px+top(H2)[0])/2-40,py-110,"sold?",RG_YEL,fin(t,w("total","sold")+0.4,0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,(px+H7[0])/2+60,py+20,"or hidden?",RG_YEL,fin(t,w("total","hidden")+0.6,0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,RG_HOUSES[7][0]+70,top(RG_HOUSES[7])[1]-24,"the burden",RG_EARTH,fin(t,w("harm","falls")+0.4,0.5)*(1-fin(t,cN-0.2,0.5)));
+  setScreen(ctx,S);
+  rg_pill(ctx,960,250,"the registers, made again",RG_YEL,fin(t,w("when","made again"),0.5)*(1-fin(t,cC-0.3,0.5)));
+  rg_pill(ctx,960,330,"every ten years",RG_PAPER,fin(t,w("when","every ten years"),0.5)*(1-fin(t,cC-0.3,0.5)));
+  yearTag(ctx,96,100,"China, 1391",CLAY,fin(t,cW+0.2,0.6)*(1-fin(t,cN-0.4,0.5)));
+  /* the register, its book open: first one household's entry across both pages, then two households, a field going from one to
+     the other, then registers checked against the ones before, then the one entry again, every column lit */
+  const BX=960,BY=545,PW=400,PH=500,bk=fin(t,cN+0.3,0.8),op=ease(fin(t,cO+0.1,1.1)),dq=fin(t,cD+0.2,0.8);
+  const oneA=fin(t,cO+1.0,0.3)*(1-fin(t,cS-0.4,0.35))+fin(t,cY-0.3,0.35),twoA=fin(t,cS+0.05,0.35)*(1-fin(t,cB-0.5,0.35)),bigA=1-fin(t,cB-0.5,0.4)*(1-fin(t,cY-0.6,0.4));
+  // the story: each column lit in turn, then all; the number the entry ends on stays lit for the data that follows
+  const wd=[w("cols","held"),w("cols","came in"),w("cols","went out"),w("cols","holds now")],
+    lit=i=>{if(t<=cY)return 0;const b0=pulse(t,cY+0.4+i*0.55,1.4)*0.9+fin(t,w("story","what changed"),0.6)*0.5;return i===3?Math.max(b0,0.6*dq):b0*(1-dq);};
+  if(bk>0)withA(ctx,bk*bigA,()=>{rg_book(ctx,BX,BY+(1-bk)*120,PW,PH,{col:RG_YEL,open:op});
+    if(op>0.95){fc_entry(ctx,BX-PW+PW*0.04,BY-PH/2,2*PW-PW*0.08,PH,{a:oneA,n:[5,1,2,4],p:wd.map((x,i)=>t>cY?1:clamp((t-x+0.1)/1.0,0,1)),hi:[0,1,2,3].map(lit),seed:3});
+      /* two households: the field is written in the "went out" of the one on the right page, and the same field arrives in the
+         "came in" of the one on the left */
+      const tr=clamp((t-w("sum","leaves"))/((w("sum","arrives")+0.4)-w("sum","leaves")),0,1),fly=tr>0&&tr<1,go=pulse(t,w("sum","leaves")-0.1,1.2);
+      fc_entry(ctx,BX+PW*0.05,BY-PH/2,PW*0.9,PH,{a:twoA,n:[5,0,1,4],seed:7,hi:[0,0,go,0],hiCol:RG_EARTH,col:(i,k)=>i===2?RG_EARTH:null});
+      fc_entry(ctx,BX-PW+PW*0.05,BY-PH/2,PW*0.9,PH,{a:twoA,n:[3,1,0,4],seed:9,hi:[0,pulse(t,w("sum","arrives")+0.3,1.2),0,0],hiCol:RG_EARTH,skip:(i,k)=>i===1&&tr<1,col:(i,k)=>i===1?RG_EARTH:null});
+      if(fly&&twoA>0){const[ax,ay]=fc_slot(BX+PW*0.05,BY-PH/2,PW*0.9,PH,2,0),[zx,zy]=fc_slot(BX-PW+PW*0.05,BY-PH/2,PW*0.9,PH,1,0),e=ease(tr),fx=lerp(ax,zx,e),fy=lerp(ay,zy,e)-Math.sin(Math.PI*e)*150;
+        glow(ctx,fx,fy,50,RG_EARTH,0.4*twoA);fc_plot(ctx,fx,fy,PW*0.9/4*0.26,{a:twoA,seed:7*11+2*11,col:RG_EARTH});}}});
+  // the column's names, over the book; as the data line comes, only the one the entry ends on stays
+  if(bk>0&&op>0.95)FC_COLS.forEach((s,i)=>{const[cx]=fc_oneSlot(BX,BY,PW,PH,i,0);rg_pill(ctx,cx,247,s,i===3?RG_YEL:RG_PAPER,oneA*bk*bigA*fin(t,wd[i]-0.15,0.4)*(i===3?1:1-0.75*dq),{size:28});});
+  rg_pill(ctx,BX-PW/2,247,"3 + 1 − 0 = 4",RG_PAPER,twoA*bk*fin(t,w("sum","add up"),0.5),{size:28});rg_pill(ctx,BX+PW/2,247,"5 + 0 − 1 = 4",RG_PAPER,twoA*bk*fin(t,w("sum","add up")+0.3,0.5),{size:28});
+  rg_pill(ctx,BX+PW/2,838,"went out",RG_EARTH,twoA*bk*fin(t,w("sum","leaves"),0.4)*(1-fin(t,cB-0.9,0.4)),{size:28});rg_pill(ctx,BX-PW/2,838,"came in",RG_EARTH,twoA*bk*fin(t,w("sum","arrives"),0.4)*(1-fin(t,cB-0.9,0.4)),{size:28});
+  // each register checked against the one before: the old one's "holds now" is the new one's "held"; one that doesn't add up goes back
+  const chA=fin(t,cB-0.1,0.5)*(1-fin(t,cY-0.6,0.4));
+  if(chA>0)withA(ctx,chA*bk,()=>{const sw=170,sh=230,Y=560,X0=560,X1=1000,sB=w("back","sent"),away=ease(fin(t,sB,1.1)),X2=lerp(1430,1600,away),Y2=lerp(Y,Y+24,away);
+    fc_register(ctx,X0,Y,sw,sh,{bk:mix(RG_YEL,[120,100,80],0.35),one:{n:[4,2,1,5],seed:5}});fc_register(ctx,X1,Y,sw,sh,{a:fin(t,cB+0.3,0.5),one:{n:[5,1,2,4],seed:3,hi:[pulse(t,w("back","checked")+0.9,1.6),0,0,0]}});
+    const[ox,oy]=fc_oneSlot(X0,Y,sw,sh,3,2),[nx,ny]=fc_oneSlot(X1,Y,sw,sh,0,2),lk=fin(t,w("back","checked")+0.2,1.0);
+    arrowTo(ctx,ox,oy-90,nx,ny-90,RG_YEL,lk,{bend:-0.25,dash:[10,8],lw:3,p:lk});
+    // a third register whose "holds now" doesn't add up: lit red, then sent back, away to the right
+    const wr=fin(t,w("back","doesn't")-0.3,0.5)*(1-fin(t,sB+1.6,0.5));
+    if(wr>0)fc_register(ctx,X2,Y2,sw,sh,{a:wr,one:{n:[4,1,1,3],seed:13,hi:[0,0,0,0.5+0.5*fin(t,w("back","doesn't"),0.4)],hiCol:FC_WRONG}});
+    yearTag(ctx,X0-120,330,"1381",CLAY,fin(t,cB,0.5));yearTag(ctx,X1-120,330,"1391",CLAY,fin(t,cB+0.3,0.5));
+    rg_pill(ctx,(X0+X1)/2,790,"held = what the last one holds",RG_YEL,lk);
+    rg_pill(ctx,X2,790,"sent back",FC_WRONG,wr*fin(t,sB,0.5));});
+  rg_pill(ctx,960,840,"what changed, and why",RG_YEL,bk*fin(t,w("story","what changed"),0.5)*(1-fin(t,cD,0.5)));
+  rg_pill(ctx,960,252,"where did each number come from?",RG_YEL,fin(t,w("need","where"),0.5)*(1-fin(t,cO+0.6,0.5)));
+  /* the same need for data: the number the entry ends on says what it counts (its column's name) and on which day (its register's
+     year), in the sketch's own colour */
+  if(dq>0&&bk>0){const[hx]=fc_oneSlot(BX,BY,PW,PH,3,0),[ox]=fc_oneSlot(BX,BY,PW,PH,0,0),yw=s=>tw(ctx,s,20,500,"mono")+40;
+    yearTag(ctx,hx-yw("1391")/2,766,"1391",CLAY,dq*bk);yearTag(ctx,ox-yw("1381")/2,766,"1381",CLAY,0.55*dq*bk);
+    const aC=fin(t,w("data","what it counts")-0.1,0.5),aD=fin(t,w("data","which day")-0.1,0.5);
+    withA(ctx,aC,()=>tag(ctx,hx,160,"what it counts",SK,{align:"center",size:28}));arrowTo(ctx,hx,184,hx,216,SK,aC,{lw:3,p:aC});
+    withA(ctx,aD,()=>tag(ctx,hx,840,"on which day",SK,{align:"center",size:28}));arrowTo(ctx,hx,816,hx,792,SK,aD,{lw:3,p:aD});}
+  mtb_title(ctx,S,t,0.15,cW-0.25,"A Sharper Sketch","When a data model needs more precision");
+});
+
+/* ---------- 1. The sketch on the map ---------- */
+/* the sketch as the film before this one left it, on the university's map: four pins on each box, in the colours that film gives the
+   map's four parts (what it's for, who answers for it, where it's written, what it means), and an amber "?" on the two still open: the
+   class's meaning and the term's owner (films/model-the-business/1-the-map-behind-the-sketch/source/src/map.js draws the same) */
+const FC_PARTS=[[245,206,140],[255,168,138],[150,226,150],[200,172,255]],FC_Q=[255,176,64];
+function fc_pinAt(ctx,e,i){const b=entBox(ctx,e),up=b.y<540;return[b.x+(i-1.5)*46,up?b.y-b.h/2-30:b.y+b.h/2+30];}
+function fc_pin(ctx,x,y,col,a,q){if(a<=0.01)return;withA(ctx,a,()=>{const r=q?21:15;ctx.fillStyle=q?"rgba(30,18,6,0.95)":rgba(col,1);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle=rgba(q?FC_Q:mix(col,[255,255,255],0.4),1);ctx.lineWidth=2.5;ctx.stroke();if(q){glow(ctx,x,y,46,FC_Q,0.3*q);T(ctx,"?",x,y+10,{w:800,size:28,align:"center",color:rgba(FC_Q,1)});}else glow(ctx,x,y,30,col,0.25);});}
+function fc_pins(ctx,E,pins,Q,hi){Object.keys(E).forEach(k=>{const P=pins[k];if(!P)return;const b=entBox(ctx,E[k]),up=b.y<540,edge=up?b.y-b.h/2:b.y+b.h/2;
+  [0,1,2,3].forEach(i=>{const v=P[i]||0,q=(Q[k]||{})[i]||0;if(v<=0&&q<=0)return;const[x,y]=fc_pinAt(ctx,E[k],i),g=hi?hi[i]||0:0;
+    ctx.save();ctx.strokeStyle=rgba(FC_PARTS[i],0.5*Math.max(v,q));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,edge);ctx.lineTo(x,y+(up?14:-14));ctx.stroke();ctx.restore();
+    if(g>0.01&&v>0)glow(ctx,x,y,60,FC_PARTS[i],0.5*g*v);fc_pin(ctx,x,y,FC_PARTS[i],Math.max(v,q),q);});});}
+// what each pin means, in a row under the board; hi lights one
+function fc_legend(ctx,y,a,hi){if(a<=0.01)return;const sz=phSz(ctx,28),items=["for","owner","home","meaning"],ws=items.map(s=>tw(ctx,s,sz,600)+52),gap=34,tot=ws.reduce((s,w)=>s+w,0)+gap*3;let x=960-tot/2;
+  withA(ctx,a,()=>items.forEach((s,i)=>{const c=FC_PARTS[i],g=hi?hi[i]||0:0;if(g>0.01)glow(ctx,x+15,y,40,c,0.5*g);ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+15,y,12,0,TAU);ctx.fill();T(ctx,s,x+38,y+sz*0.36,{w:600,size:sz,color:rgba(mix(SOFT,c,0.5+0.5*g),1)});x+=ws[i]+gap;}));}
 scene("drawn",(ctx,S,t,sc)=>{
-  const c=id=>cue(sc,id),cR=c("recap"),cO=c("over"),cN=c("normal"),B=c("breath");
+  const c=id=>cue(sc,id),w=(id,wd,o)=>wAt(sc,id,wd,o),cR=c("recap"),cM=c("map"),cO=c("over"),cN=c("normal"),B=c("breath");
   const cam=camAt([[0,960,540,1.08],[cR,960,540,1.08],[cO,960,530,1.0],[sc.dur+2,960,530,0.98]],t);
-  clearTo(ctx,S);const bgA=sstep(3.1,3.9,t);
-  if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);board(ctx,1,"Conceptual model · the sketch we drew");
-    // the recap names each box as it appears: student, class, enrolment, term, course
-    const d=c("over")-cR,order=["Student","Class","Enrolment","Term","Course"],ap=k=>fin(t,cR+0.4+order.indexOf(k)*d*0.16,0.5);
-    const E={};Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k,s:1.25,a:ap(k)};});E.Term.sub="census date";
-    const rf=clamp((t-cR-d*0.8)/1.2,0,1),q=fin(t,cO+0.8);
-    diagram(ctx,E,V1R.map((r,i)=>r.concat([{f:clamp(rf*4-i,0,1),bad:q*(i===3?0.6+0.4*Math.sin(t*3):0)}])));
-    // what the sketch hides: the class, the one census date, the one course
-    withA(ctx,q,()=>{[[1368,413,"what is a class?"],[1368,757,"one date for all?"],[576,535,"only one course?"]].forEach(([x,y,s],i)=>withA(ctx,fin(t,cO+0.8+i*0.5),()=>{glow(ctx,x,y,70,EXT,0.25+0.1*Math.sin(t*3+i));tag(ctx,x+(i===2?0:0),y+(i===0?-70:i===1?0:0),s,EXT,{align:"center",size:18});}));});
-    withA(ctx,fin(t,cO+0.3),()=>{tag(ctx,700,845,"good enough to start",GOOD,{align:"center",size:18});tag(ctx,1220,845,"not good enough to count",BAD,{align:"center",size:18});});
-    stamp(ctx,1790,845,"sketch v1",SK,fin(t,cR+1));
-    // a sweep of light: every model gets sharper when a question needs it
-    if(t>cN+0.5&&t<cN+3.5){const u=(t-cN-0.5)/3;glow(ctx,lerp(150,1800,ease(u)),530,260,SK,0.25*Math.sin(Math.PI*u));}
-    // the breather: new records arrive and find their place in the simple sketch
-    if(sc.breathe&&t>B){for(let k=0;k<5;k++){const t0=B+0.6+k*0.8,u=clamp((t-t0)/1.3,0,1);if(u<=0||u>=1)continue;const q2=at(mk(bez(P(40,250+k*110),P(400,250+k*80),P(800,413),P(972,413),16)),ease(u));dtile(ctx,q2.x,q2.y,lerp(40,26,u),0,{cell:(k*7+3)%24,q:2,app:["sis","lms","sis","hr","sis"][k]},1-sstep(0.85,1,u));}
-      [0,1,2,3,4].forEach(k=>{const t0=B+1.9+k*0.8;if(t>t0&&t<t0+0.8)glow(ctx,972,413,120,SK,0.4*(1-(t-t0)/0.8));});}
-    ctx.restore();}
+  clearTo(ctx,S);bgW(ctx,S,cam);board(ctx,1,"Conceptual model · the sketch, on the map");
+  // the five boxes, each lit as the voice names it
+  const nm={Student:"student",Class:"class",Enrolment:"enrolment",Term:"term",Course:"course"},E={};
+  Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k,s:1.25,a:1,hi:pulse(t,w("recap",nm[k])-0.15,1.3)};});E.Term.sub="census date";
+  const q=fin(t,cO+0.8);
+  diagram(ctx,E,V1R.map((r,i)=>r.concat([{f:1,bad:q*(i===3?0.6+0.4*Math.sin(t*3):0)}])));
+  // its place on the map: four pins on each box, all but two; where each box lives (its home) lit; then the map is left behind
+  const pl=w("recap","place"),pOut=1-fin(t,w("map","right")-0.1,0.9),pins={},home=fin(t,w("map","where")-0.1,0.5)*(1-fin(t,w("map","doesn't"),0.6));
+  ["Student","Enrolment","Course","Class","Term"].forEach((k,i)=>{const v=fin(t,pl+i*0.2,0.5)*pOut;pins[k]=[v,v,v,v];});pins.Class[3]=0;pins.Term[1]=0;
+  const qq=(0.75+0.25*Math.sin(t*3.2))*pOut,Q={Class:{3:qq*fin(t,pl+0.6,0.5)},Term:{1:qq*fin(t,pl+0.8,0.5)}};
+  fc_pins(ctx,E,pins,Q,[0,0,home,0]);fc_legend(ctx,836,fin(t,pl+1.2,0.6)*pOut,[0,0,home,0]);
+  // what the sketch hides: the class, the one census date, the one course
+  withA(ctx,q,()=>{[[1368,343,"what is a class?"],[1368,757,"one date for all?"],[576,535,"only one course?"]].forEach(([x,y,s],i)=>withA(ctx,fin(t,cO+0.8+i*0.5),()=>{glow(ctx,x,y,70,EXT,0.25+0.1*Math.sin(t*3+i));tag(ctx,x,y,s,EXT,{align:"center",size:28});}));});
+  withA(ctx,fin(t,cO+0.3),()=>{tag(ctx,700,836,"good enough to start",GOOD,{align:"center",size:28});tag(ctx,1220,836,"not good enough to count",BAD,{align:"center",size:28});});
+  stamp(ctx,1790,836,"sketch v1",SK,fin(t,cO+0.3));
+  // a sweep of light: every model gets sharper when a question needs it
+  if(t>cN+0.5&&t<cN+3.5){const u=(t-cN-0.5)/3;glow(ctx,lerp(150,1800,ease(u)),530,260,SK,0.25*Math.sin(Math.PI*u));}
+  // the breather: new records arrive and find their place in the simple sketch
+  if(sc.breathe&&t>B){for(let k=0;k<5;k++){const t0=B+0.6+k*0.8,u=clamp((t-t0)/1.3,0,1);if(u<=0||u>=1)continue;const q2=at(mk(bez(P(40,250+k*110),P(400,250+k*80),P(800,413),P(972,413),16)),ease(u));dtile(ctx,q2.x,q2.y,lerp(40,26,u),0,{cell:(k*7+3)%24,q:2,app:["sis","lms","sis","hr","sis"][k]},1-sstep(0.85,1,u));}
+    [0,1,2,3,4].forEach(k=>{const t0=B+1.9+k*0.8;if(t>t0&&t<t0+0.8)glow(ctx,972,413,120,SK,0.4*(1-(t-t0)/0.8));});}
   vign(ctx,S);
-  const tA=sstep(0.3,1.1,t)*(1-sstep(2.7,3.4,t));if(tA>0){setScreen(ctx,S);withA(ctx,tA,()=>{T(ctx,"A Sharper Sketch",W/2,H/2-4,{w:800,size:96,align:"center"});T(ctx,"When a data model needs more precision",W/2,H/2+60,{size:30,w:500,align:"center",color:rgba(SOFT,0.95)});});}
 });
 
 /* ---------- 1. Two numbers ---------- */
@@ -792,9 +1718,9 @@ scene("cls",(ctx,S,t,sc)=>{
   R[0][4].a=1;R[3][4].a=1;R[4][4].a=0;R[9][4].a=0;// student–enrolment and student–course stay, drawn once
   diagram(ctx,E,R);
   // what the pins mean, said once
-  withA(ctx,brief(t,cU+0.9,3),()=>tag(ctx,1720,440,"from the reference",ADOPT,{align:"center",size:16}));
-  withA(ctx,brief(t,cO+0.9,3),()=>tag(ctx,1200,440,"ours",EXT,{align:"center",size:16}));
-  withA(ctx,brief(t,cC+0.9,3),()=>tag(ctx,1200,830,"ours",EXT,{align:"center",size:16}));
+  withA(ctx,brief3(t,cU+0.9,3),()=>tag(ctx,1720,440,"from the reference",ADOPT,{align:"center",size:16}));
+  withA(ctx,brief3(t,cO+0.9,3),()=>tag(ctx,1200,440,"ours",EXT,{align:"center",size:16}));
+  withA(ctx,brief3(t,cC+0.9,3),()=>tag(ctx,1200,830,"ours",EXT,{align:"center",size:16}));
   // Genie counted places in tutorials: one student in two tutorials is counted twice
   withA(ctx,fin(t,cG)*(1-sstep(B+0.2,B+1,t)),()=>{[[1330,"Tue 9 am tutorial"],[1600,"Thu 2 pm tutorial"]].forEach(([x,s],i)=>{glass(ctx,x-125,220,250,130,14,SK,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.9)"});T(ctx,s,x,252,{w:700,size:18,align:"center",color:rgba(SK,1)});
       dtile(ctx,x-40,300,48,0,{cell:7,q:2,app:"sis",hi:true},1);dtile(ctx,x+30,300,48,0,{cell:(i*9+4)%24,q:2,app:"sis"},1);});
@@ -857,22 +1783,36 @@ scene("courses",(ctx,S,t,sc)=>{
 });
 
 /* ---------- 5. Enrolled when? ---------- */
+/* the register's four columns, as a data model keeps them: what was there on one day, what came in, what went out, and what's there
+   on another; written left to right, on the register's paper. p[i]: how far each column is in (0..1) */
+function fc_four(ctx,x,y,w,h,heads,vals,subs,p,a){if(a<=0.01)return;withA(ctx,a,()=>{const cw=w/4;
+  ctx.fillStyle=rgba(RG_PAPER,1);rr(ctx,x,y,w,h,14);ctx.fill();ctx.strokeStyle=rgba(RG_YEL,0.9);ctx.lineWidth=4;rr(ctx,x,y,w,h,14);ctx.stroke();
+  ctx.strokeStyle=rgba(RG_INK,0.3);ctx.lineWidth=2;for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(x+cw*i,y+18);ctx.lineTo(x+cw*i,y+h-18);ctx.stroke();}
+  heads.forEach((hd,i)=>{const cx=x+cw*(i+0.5),q=p[i];rg_pill(ctx,cx,y-38,hd,i===3?RG_YEL:RG_PAPER,q,{size:28});
+    if(q>0.01)withA(ctx,q,()=>{T(ctx,vals[i],cx,y+h*0.5+14,{w:800,size:76,align:"center",color:rgba(i===1||i===2?mix(RG_EARTH,[70,34,12],0.45):RG_INK,1)});
+      if(subs[i])T(ctx,subs[i],cx,y+h-34,{w:600,size:28,align:"center",color:rgba(RG_INK,0.78)});});});});}
 scene("time",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cQ=c("q"),cT=c("today"),cC=c("change"),cX=c("extend"),cS=c("snap"),B=c("breath");
+  // the four columns' card (below) comes over the model: what it covers fades back, so no words show through it
+  const cF=c("cols"),fA=fin(t,cF+0.2,0.6),under=1-0.62*fA;
   bgW(ctx,S,CAM0);board(ctx,1,"Conceptual model");
-  const strip=fin(t,cC-0.2)*(1-sstep(cX+0.6,cX+1.2,t)),sA=fin(t,cX+1.0,0.8),dim=1-0.7*strip;
+  const strip=fin(t,cC-0.2)*(1-sstep(cX+0.6,cX+1.2,t)),sA=fin(t,cX+1.0,0.8),dim=(1-0.7*strip)*under;
   withA(ctx,dim,()=>sketchV2(ctx,{extra:{Enrolment:{sub:t>cX?"current status":null,subCol:REF,subA:fin(t,cX+0.2)}},pins:true,a:k=>k==="Status"?sA:1,pinA:k=>k==="Status"?fin(t,cX+1.8):1,hi:k=>k==="Enrolment"?pulse(t,cQ,2.4):k==="Status"?pulse(t,cS+0.4,2.6):0}));
   withA(ctx,fin(t,cT)*(1-sstep(cC-0.4,cC,t)),()=>{calCard(ctx,1470,180,"Genie counted","26 Apr",CYAN,1,0);calCard(ctx,1470,320,"Census report","31 Mar",LAYER.gold,fin(t,cT+1.2),0);});
   // one enrolment's story, frame by frame; the census count is a snapshot of one day
   const fr=[{s:"waitlisted",d:"3 Mar",col:EXT},{s:"enrolled",d:"10 Mar",col:GOOD},{s:"census date",d:"31 Mar",col:REF},{s:"withdrew",d:"14 Apr",col:BAD}];
   fr.forEach((f,i)=>{f.a=fin(t,cC+0.4+i*0.9);f.hi=i===2?pulse(t,cC+3.2,2):0;});
   filmStrip(ctx,590,330,fr,strip,0,t);
-  withA(ctx,fin(t,cX+1.8),()=>tag(ctx,760,830,"ours: the history of each enrolment",EXT,{align:"center",size:17}));
+  withA(ctx,fin(t,cX+1.8)*under,()=>tag(ctx,760,830,"ours: the history of each enrolment",EXT,{align:"center",size:17}));
   if(t>cS+0.3&&t<cS+1.3){const v=(t-cS-0.3);glow(ctx,760,730,320,C.white,0.6*(1-v));}
-  withA(ctx,fin(t,cS+0.8),()=>tag(ctx,1200,620,"census count: a snapshot on 31 Mar",REF,{align:"center",size:17}));
+  withA(ctx,fin(t,cS+0.8)*under,()=>tag(ctx,1200,620,"census count: a snapshot on 31 Mar",REF,{align:"center",size:17}));
   // the breather: changes keep arriving, and each one is kept with its date
   if(sc.breathe&&t>B){for(let k=0;k<4;k++){const v=clamp((t-B-0.4-k*1.3)/1.1,0,1);if(v<=0||v>=1)continue;glow(ctx,760,lerp(560,700,ease(v)),22,C.white,0.9);glow(ctx,760,lerp(560,700,ease(v)),70,EXT,0.5);}}
-  stamp(ctx,1790,845,"sketch v2 · draft",EXT,1);
+  stamp(ctx,1790,845,"sketch v2 · draft",EXT,under);
+  // like the register's four columns: what was there on census date, what came in, what went out, and what's there today
+  if(fA>0){dark(ctx,S,0.5*fA);setCam(ctx,S,CAM0);const ww=(id,wd)=>wAt(sc,id,wd);
+    fc_four(ctx,470,420,980,270,["census date","came in","went out","today"],["118","+2","−1","119"],["31 Mar","late, approved","withdrew","26 Apr"],
+      [fin(t,ww("cols","census date")-0.1,0.5),fin(t,ww("cols","came in")-0.1,0.5),fin(t,ww("cols","went out")-0.1,0.5),fin(t,ww("cols","today")-0.1,0.5)],fA);}
   hud(ctx,S,1,countTo(t,cS+1.6,119,118),cS+1.6,t);setCam(ctx,S,CAM0);vign(ctx,S);
 });
 
@@ -930,9 +1870,43 @@ scene("fit",(ctx,S,t,sc)=>{
 });
 
 /* ---------- 8. Pull back ---------- */
+/* the end of the story: the Yellow Registers, made every ten years for taxes paid every year, fell behind; the counties' white
+   registers, written each year, did the real work, and the yellow ones became a formality. Eleven years, one mark each, in the frame */
+const FC_YRS=11,fc_yx=i=>420+i*108,FC_WHITE=[238,234,224];
+function fc_years(ctx,t,sc,a){if(a<=0.01)return;const w=(id,wd,o)=>wAt(sc,id,wd,o),cWh=cue(sc,"white"),yL=770;
+  const tx=w("yellow","every year"),ty=w("yellow","every ten years"),fb=fin(t,w("yellow","fell behind")-0.2,0.6)*(1-fin(t,cWh+0.2,0.6)),fm=fin(t,w("white","formality")-0.2,1.0),tw0=w("white","white registers");
+  withA(ctx,a,()=>{ctx.strokeStyle=rgba(RG_PAPER,0.5);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(fc_yx(0)-60,yL);ctx.lineTo(fc_yx(FC_YRS-1)+60,yL);ctx.stroke();
+    for(let i=0;i<FC_YRS;i++){ctx.beginPath();ctx.moveTo(fc_yx(i),yL-9);ctx.lineTo(fc_yx(i),yL+9);ctx.stroke();}
+    // taxes, paid every year: a sack on each year's mark
+    for(let i=0;i<FC_YRS;i++)rg_sack(ctx,fc_yx(i),yL-8,0.9,fin(t,tx-0.2+i*0.11,0.35));
+    // the years between with no register made for them
+    if(fb>0){ctx.fillStyle=rgba(FC_WRONG,0.14*fb);rr(ctx,fc_yx(1)-50,452,fc_yx(FC_YRS-2)-fc_yx(1)+100,136,18);ctx.fill();}
+    // the court's register, made every ten years: at the first mark and the last; greyed, a formality, once the white ones do the work
+    [0,FC_YRS-1].forEach((i,k)=>{const yA=fin(t,ty-0.2+k*0.4,0.5);if(yA>0)rg_book(ctx,fc_yx(i),520,84,116,{col:mix(RG_YEL,[112,100,84],0.6*fm),a:yA*(1-0.35*fm)});});
+    // the counties' white registers, written each year, by each year's taxes
+    for(let i=0;i<FC_YRS;i++){const wa=fin(t,tw0+0.1+i*0.12,0.4);if(wa>0){if(fm<0.01)glow(ctx,fc_yx(i),650,60,FC_WHITE,0.2*wa*pulse(t,tw0+0.1+i*0.12,1.0));rg_book(ctx,fc_yx(i),650,76,104,{col:FC_WHITE,a:wa});}}});
+  rg_pill(ctx,960,420,"every ten years",RG_YEL,a*fin(t,ty+0.2,0.5)*(1-fin(t,cWh,0.6)),{size:28});
+  rg_pill(ctx,960,850,"taxes: every year",RG_EARTH,a*fin(t,tx,0.5)*(1-fin(t,cWh,0.6)),{size:28});
+  rg_pill(ctx,960,520,"fell behind",FC_WRONG,a*fb,{size:28});
+  yearTag(ctx,96,100,"China, the late Ming",CLAY,a*fin(t,w("white","late Ming")-0.2,0.6));
+  rg_pill(ctx,960,850,"white registers: each year, for the real work",FC_WHITE,a*fin(t,w("white","real work")-0.3,0.5),{size:28});
+  rg_pill(ctx,960,520,"the yellow ones: a formality",RG_YEL,a*fm,{size:28});}
+// a side copy: a sheet of rows and columns, lit while it does the work
+function fc_sheet(ctx,x,y,w,h,col,a,on){if(a<=0.01)return;withA(ctx,a,()=>{if(on>0.01)glow(ctx,x+w/2,y+h/2,w*0.8,col,0.28*on);glass(ctx,x,y,w,h,12,col,{glow:8+12*on,ea:0.5+0.4*on,fill:"rgba(7,12,24,0.94)"});
+  ctx.fillStyle=rgba(col,0.45+0.4*on);ctx.fillRect(x+14,y+14,w-28,18);ctx.strokeStyle=rgba(col,0.3+0.4*on);ctx.lineWidth=1.5;
+  for(let r=1;r<5;r++){const yy=y+32+r*(h-46)/5;ctx.beginPath();ctx.moveTo(x+14,yy);ctx.lineTo(x+w-14,yy);ctx.stroke();}
+  for(let k=1;k<4;k++){const xx=x+14+k*(w-28)/4;ctx.beginPath();ctx.moveTo(xx,y+32);ctx.lineTo(xx,y+h-14);ctx.stroke();}});}
+// a model that doesn't fit the business: kept for show, while side copies do the work
+function fc_side(ctx,t,sc,a){if(a<=0.01)return;const w=(id,wd,o)=>wAt(sc,id,wd,o),dn=fin(t,w("side","doesn't")-0.2,0.8),sc2=w("side","side copies"),wk=fin(t,w("side","work")-0.2,0.5);
+  withA(ctx,a,()=>{withA(ctx,1-0.55*dn,()=>{glass(ctx,640,240,640,430,22,SK,{glow:14*(1-dn),ea:0.35,fill:"rgba(10,18,36,0.6)"});phAsDeco(true,()=>sketchV2(ctx,{pos:lay(L3,0.4,960,455),s:0.4}));});
+    withA(ctx,fin(t,w("side","kept for show")-0.2,0.5),()=>tag(ctx,960,720,"kept for show",SOFT,{align:"center",size:28}));
+    [[220,250],[1470,250],[220,520],[1470,520]].forEach(([x,y],i)=>fc_sheet(ctx,x,y,230,160,EXT,fin(t,sc2-0.3+i*0.25,0.5),pulse(t,sc2-0.1+i*0.25,1.4)*0.7+0.6*wk));
+    withA(ctx,wk,()=>tag(ctx,960,830,"side copies do the work",EXT,{align:"center",size:28}));});}
 scene("end",(ctx,S,t,sc)=>{
-  const c=id=>cue(sc,id),cAg=c("again"),cAs=c("asks"),cAn=c("answer"),cV=c("version"),cE=c("evolve"),cTg=c("tag");
-  if(t<cTg-0.25){bgW(ctx,S,CAM0);const q1=1-sstep(cV-0.3,cV+0.5,t);
+  const c=id=>cue(sc,id),cAg=c("again"),cAs=c("asks"),cAn=c("answer"),cV=c("version"),cE=c("evolve"),cYl=c("yellow"),cSd=c("side"),cTg=c("tag");
+  // the room of the present, then the registers' land over it, then the present again: each whole picture dissolves into the next
+  const lA=fin(t,cYl-0.9,1.0),sA=fin(t,cSd-0.9,0.9);
+  if(lA<1){bgW(ctx,S,CAM0);const q1=1-sstep(cV-0.3,cV+0.5,t);
     withA(ctx,q1,()=>{asker(ctx,t,fin(t,0.1),"How many students were enrolled in Data Science 101 on census date?",fin(t,cAg));
       withA(ctx,fin(t,cAs-0.1),()=>{tag(ctx,500,470,"Genie",LAYER.gold,{size:18});bubble(ctx,480,505,660,"Enrolled on census date, in the Semester 1 offering?",LAYER.gold,{size:28});});
       withA(ctx,fin(t,cAn),()=>{numCard(ctx,1220,230,560,"Genie","118","matches the census report",GOOD);
@@ -948,8 +1922,9 @@ scene("end",(ctx,S,t,sc)=>{
       ["added: unit offering,","course admission, status history","why: two numbers disagreed","checked against TCSI"].forEach((s,i)=>T(ctx,s,1486,296+i*38,{w:600,size:18,color:rgba(i<2?INK:SOFT,0.95)}));
       withA(ctx,fin(t,cE+0.4),()=>{glass(ctx,1460,520,400,150,18,EXT,{glow:18+8*Math.sin(t*4),ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"A new question",1486,562,{w:800,size:20,color:rgba(EXT,1)});T(ctx,"How do we count short courses",1486,600,{w:600,size:18});T(ctx,"and microcredentials?",1486,630,{w:600,size:18});});});
     vign(ctx,S);}
-  else{clearTo(ctx,S);withA(ctx,fin(t,cTg-0.25,0.8),()=>T(ctx,"Check the reference. Fit it to the business.",W/2,H/2-6,{w:800,size:72,align:"center"}));
-    withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"A Sharper Sketch",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"Learning Data · Data modelling",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
+  if(lA>0&&sA<1){const land=c2=>rg_land(c2,S,{x:1780+10*(t-cYl),y:610,z:0.92},t,{dim:0.5});if(lA<1)fc_faded(ctx,lA,land);else land(ctx);setScreen(ctx,S);fc_years(ctx,t,sc,lA);}
+  if(sA>0){withA(ctx,sA,()=>bgW(ctx,S,CAM0));setScreen(ctx,S);fc_side(ctx,t,sc,sA);withA(ctx,sA,()=>vign(ctx,S));}
+  mtb_end(ctx,S,t,cTg-0.5,"A Sharper Sketch","Check the reference. Fit it to the business.");
 });
 
 // where the chapters meet (From words to data's joins.js): the reference model shows the levels' words in other places, so the

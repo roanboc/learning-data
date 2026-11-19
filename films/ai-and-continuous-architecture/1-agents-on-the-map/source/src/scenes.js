@@ -72,7 +72,7 @@ scene("hands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     bab_tag(cx,960,214,"people from many lands",fin(t,w("son","many lands"),0.7)*(1-fin(t,w("son","stood"),0.6)));
     bab_tag(cx,960,214,"their god's house, standing again",fin(t,w("son","stood"),0.7)*(1-fin(t,tNow-0.6,0.6)));
   });
-  acaTitle(ctx,S,t,B+1.0,"Agents on the map","each in a role of its own, with someone who answers","Film 1 of 6 · AI and continuous architecture");});
+  acaTitle(ctx,S,t,B+1.0,"Agents on the map","each in a role of its own, with someone who answers","Film 1 of 3 · AI architecture");});
 // the present, in the same chapter: the utility's work, many hands, some of them agents; then one agent, given a task, a role and someone
 // who answers, and the same agent given a whole job
 const A1_GRID=(()=>{const G=[];for(let r=0;r<3;r++)for(let k=0;k<8;k++){const ag=(r*8+k)%5===2;G.push({x:420+k*154+(r%2)*40,y:330+r*150,ag});}return G;})(),A1_ONE=12;
@@ -114,11 +114,9 @@ scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   const dA=fin(t,w("two","proposes")-0.2,0.6)*(1-fin(t,tS-0.9,0.5)),dB=fin(t,w("two","drafts")-0.2,0.6)*(1-fin(t,tS-0.9,0.5));
   if(dA>0.01)withA(ctx,dA,()=>tag(ctx,1400,a1_row(5)+42,"proposes which fault matters most",KT_AI,{align:"center",size:21}));
   if(dB>0.01)withA(ctx,dB,()=>tag(ctx,1716,a1_row(5)+42,"drafts changes",KT_AI,{align:"center",size:21}));
-  // what this series adds round the agents: the platform under them (in the map), AI in the architects' own work, and a map kept alive
-  const sB=fin(t,w("series","architects")-0.2,0.7)*(1-fin(t,tM-0.4,0.6)),sC=fin(t,w("series","kept alive")-0.2,0.7)*(1-fin(t,tM-0.4,0.6));
-  if(sB>0.01)arrive(ctx,400,470,t,w("series","architects")-0.2,()=>withA(ctx,sB,()=>{tag(ctx,400,470,"AI in the architects' own work",KT_AI,{align:"center",size:30});}),{dy:10});
-  if(sC>0.01)arrive(ctx,1290,92,t,w("series","kept alive")-0.2,()=>withA(ctx,sC,()=>{tag(ctx,1290,92,"a map kept alive",LAY6[3][1],{align:"center",size:30});
-    ctx.save();ctx.strokeStyle=rgba(LAY6[3][1],0.8);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.arc(1170,92,16,0.5,TAU-0.3);ctx.stroke();ctx.restore();}),{dy:-10});
+  // what this series adds round the agents: the platform under them (in the map), and what each may read
+  const sB=fin(t,w("series","may read")-0.2,0.7)*(1-fin(t,tM-0.4,0.6));
+  if(sB>0.01)arrive(ctx,400,470,t,w("series","may read")-0.2,()=>withA(ctx,sB,()=>{tag(ctx,400,470,"what each agent may read",KT_AI,{align:"center",size:30});}),{dy:10});
   // how an agent works is another module's; here, the map: where agents work, and who answers for them
   const mA=fin(t,tM-0.1,0.7);if(mA>0.01)arrive(ctx,380,380,t,tM-0.1,()=>{a1_card(ctx,80,316,600,"the AI agents module",["how an agent works"],KT_AI,{size:34});aca_agent(ctx,620,362,18,t,{});},{dy:12});
   const hA=fin(t,w("module","where agents work")-0.2,0.6),wA=fin(t,w("module","who answers")-0.2,0.6);
@@ -431,7 +429,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   a1_map(ctx,t,{p:clamp((t-0.9)/1.8,0,1),deco:true,all:clamp((t-tA-0.2)/2.6,0,1),roleHi:pulseAt(t,w("answer","a role"),1.8),here:pulseAt(t,w("answer","its identity"),1.8),who:pulseAt(t,w("answer","someone who answers"),2.0),
     plat:fin(t,w("next","platform")-0.4,0.8),platHi:pulseAt(t,w("next","platform"),2.0)});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"Agents on the map","An agent works in a role of its own, with someone who answers.","Film 1 of 6");});
+  acaEnd(ctx,S,t,B,"Agents on the map","An agent works in a role of its own, with someone who answers.","Film 1 of 3 · AI architecture");});
 
 /* ---------- where the chapters meet ---------- */
 // The role chapter ends on the process, and How far opens on it, in the same place: the camera carries on from where it was.

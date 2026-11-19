@@ -1,12 +1,17 @@
 import base64,json,re
 from lang import *
 S=ROOT/'src';D=DIST;SS=SHARED/'src'
-# shared components and engine from the first film, then this film's narration, timings, pauses and scenes, then the layer that makes
-# their text read on a phone (From words to data's phone.js); the engine comes last, then where the film's chapters meet (From words to
-# data's joins.js: its CHAPTER_JOINS)
-PHONE=ROOT.parents[1]/'from-words-to-data'/'shared'/'src'/'phone.js';JOINS=ROOT.parents[1]/'from-words-to-data'/'shared'/'src'/'joins.js'
-FILES=[SS/'core.js',SS/'logos.js',SS/'style2.js',S/'narration.js',S/'vodur.js',S/'breath.js',SS/'ui3.js',S/'sketch3.js',S/'scenes.js',PHONE,SS/'engine3.js',JOINS]
-js='\n'.join(f.read_text() for f in FILES if f.exists())
+# shared components and engine from the first film, then this film's narration, timings, pauses and diagrams (sketch3.js); then what
+# its series, Model the business, draws with, as its first film does: the university's people (When things go wrong), Silent change's
+# messages, From words to data's components (words.js) and the series' own pictures (registers.js: the Ming registers); then this
+# film's scenes, then the layer that makes their text read on a phone (From words to data's phone.js); the engine comes last, then
+# where the film's chapters meet (From words to data's joins.js: its CHAPTER_JOINS)
+FILMS=ROOT.parents[1];FW=FILMS/'from-words-to-data'/'shared'/'src';PHONE=FW/'phone.js';JOINS=FW/'joins.js'
+CHARS=FILMS/'when-things-go-wrong'/'characters';EP1=FILMS/'when-things-go-wrong'/'1-silent-change'/'source'/'src';MB=FILMS/'model-the-business'/'shared'/'src'
+FILES=[SS/'core.js',SS/'logos.js',SS/'style2.js',S/'narration.js',S/'vodur.js',S/'breath.js',SS/'ui3.js',S/'sketch3.js',CHARS/'people.js',EP1/'silent.js',FW/'words.js',MB/'registers.js',S/'scenes.js',PHONE,SS/'engine3.js',JOINS]
+missing=[f for f in FILES if not f.exists()]
+if missing:raise SystemExit('missing: '+', '.join(str(f) for f in missing))
+js='\n'.join(f.read_text() for f in FILES)
 GF='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">'
 # the render page carries its own fonts, so renders need no network and look the same on every machine
 FD=SHARED/'fonts'

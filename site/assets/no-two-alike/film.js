@@ -1897,7 +1897,7 @@ K.handW=(ctx,s,size,w)=>ag_tw(ctx,s,{w:w||400,size:size||48,f:"hand"});
 K.hand=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||48,wt=o.w||400,W=K.handW(ctx,s,size,wt),p=o.p==null?1:clamp(o.p,0,1),x0=o.align==="center"?x-W/2:o.align==="right"?x-W:x;
   if(p>0&&(o.a==null||o.a>0.004)){ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
     if(p<1){ctx.beginPath();ctx.rect(x0-8,y-size*1.15,(W+16)*p,size*1.7);ctx.clip();}
-    ag_T(ctx,s,x0,y,{w:wt,size,f:"hand",color:css(colOf(o.col)),deco:o.deco});ctx.restore();}
+    ag_T(ctx,s,x0,y,{w:wt,size,f:"hand",color:css(colOf(o.col)),deco:o.deco||K.inkDeco});ctx.restore();}
   return{w:W,x0,x1:x0+W,pen:[x0+W*p,y-size*0.26]};};
 
 /* ---------------------------------------------------------------- a pen's marks
@@ -1965,7 +1965,8 @@ function plan(ctx,items,o){const out=[],lw=o.lw||5;let last=null;
 // from the start, in the order given
 K.inkPlan=(ctx,items,o,all)=>{const P=plan(ctx,items,o||{});return all?P:P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);};
 K.ink=(ctx,items,t,o)=>{o=o||{};const k=o.k||1,ox=o.x||0,oy=o.y||0,P=plan(ctx,items,o),aside=o.aside==null?1.4:o.aside,a=o.a==null?1:clamp(o.a,0,1);
-  if(a>0.004){ctx.save();ctx.translate(ox,oy);ctx.scale(k,k);ctx.globalAlpha*=a;for(const s of P){const p=s.t1<=-1e8?1:clamp((t-s.t0)/((s.t1-s.t0)||1),0,1);if(p>0)s.draw(ctx,p);}ctx.restore();}
+  // what a row draws of its own (a designed board's or page's drawing, PK.sk) is decoration too where the surface is (PK.inkDeco)
+  if(a>0.004){const d0=K.inkDeco;K.inkDeco=!!o.deco;ctx.save();try{ctx.translate(ox,oy);ctx.scale(k,k);ctx.globalAlpha*=a;for(const s of P){const p=s.t1<=-1e8?1:clamp((t-s.t0)/((s.t1-s.t0)||1),0,1);if(p>0)s.draw(ctx,p);}}finally{ctx.restore();K.inkDeco=d0;}}
   // where the pen is: on the stroke being drawn; between two strokes close in time, on its way from one to the next; else lifted away
   const T=P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);let cur=null,pv=null,nx=null;
   for(const s of T){if(t>=s.t0&&t<=s.t1){if(!cur)cur=s;}else if(s.t1<t){if(!pv||s.t1>=pv.t1)pv=s;}else if(!nx||s.t0<nx.t0)nx=s;}
@@ -2130,7 +2131,10 @@ K.teach=(ctx,who,t,items,o)=>{o=boardOf(o);
       over=!o.deco&&busy<0.5&&all.some(s=>{if(!hid(s)||s.t0>t)return false;const b=box(s),x1=s.t1>t&&(s.text||s.line)?toPic(s.at(clamp((t-s.t0)/((s.t1-s.t0)||1),0,1)))[0]:b[2];return b[0]<x+0.1*h&&Math.max(x1,b[0])>x-0.1*h;});
     K.watch({teach:typeof who==="string"?who:(P.key||P.name||"someone"),over,late:o.deco?[]:late.map(l=>({s:name(l.i),t:l.t,by:l.by})),
       lag:o.deco?[]:items.map((it,i)=>it.lag?{s:name(i),t:it.at,by:it.lag}:null).filter(Boolean),
-      edge:o.deco?[]:nearEdge(ctx,items,K.ROOMS.board.board.w,K.ROOMS.board.board.h),a:1,ctx});}
+      edge:o.deco?[]:nearEdge(ctx,items,K.ROOMS.board.board.w,K.ROOMS.board.board.h),
+      // a board seen close that is only writing: one of the film's people explains at it, and nothing on it is drawn as a designer
+      // would (PK.sk.drawn). A board of a story's own folk (who: a row of theirs) is as plain as its time
+      plain:!o.deco&&typeof who==="string"&&!items.some(it=>it&&it.drawn),a:1,ctx});}
   J.pen=pen;J.writing=wr;J.late=late;return J;};
 
 /* ---------------------------------------------------------------- a notebook someone writes in
@@ -2189,7 +2193,9 @@ K.notes=(ctx,who,t,items,o)=>{o=o||{};const R=K.ROOMS.notes;ctx.save();onBook(ct
   // the pen's point, turned with the book; the hand waits at the page's corner when nothing is written for a while
   const pic=r.pen?pageAt(R,[r.pen[0]-R.page.x,r.pen[1]-R.page.y]):R.rest,on=r.pen?r.on:0,tip=[lerp(R.rest[0],pic[0],on),lerp(R.rest[1],pic[1],on)];r.tip=tip;
   // for the check: that notes are in the picture, the rows written near the page's edge, and where the hand is
-  if(K.watch)K.watch({note:true,who:typeof who==="string"?who:"someone",edge:nearEdge(ctx,items,R.page.w,R.page.h),tip:o.hand!==false?tip:null,a:1,ctx});
+  if(K.watch)K.watch({note:true,who:typeof who==="string"?who:"someone",edge:nearEdge(ctx,items,R.page.w,R.page.h),tip:o.hand!==false?tip:null,
+    // a page of the film's own people that is only writing; a page a story's own folk keep (who: a row of theirs) is as plain as its time
+    plain:typeof who==="string"&&!items.some(it=>it&&it.drawn),a:1,ctx});
   if(o.hand!==false)K.penHand(ctx,who,[tip[0]+(on>0.98?Math.sin(t*21)*1.6*(1-r.lift):0),tip[1]+(on>0.98?Math.cos(t*17)*1.2*(1-r.lift):0)],{col:r.col,lift:Math.max(r.lift*0.8,(1-on)*0.5),k:o.k});
   return r;};
 
@@ -2341,144 +2347,647 @@ K.inHand.phone=o=>(c,hd,deg,J)=>{o=o||{};const S=K.S,u=J.u,a=polar(hd,deg-176,10
   if(!o.back)S.fill(c,cc=>rrect(cc,5*u,-w/2+4*u,L-10*u,w-8*u,4*u),C("screenLit"),{line:false,flat:true});c.restore();};
 })(PK);
 
-/* ===== The rope bridge at Quehue, in ink line: the gorge, the bridge and the communities' people =====
-   Drawn once for the films of People first that show the rope bridge of Q'eswachaka, with the people kit (films/people-first/
-   shared/), and copied into each film's own source under its prefix. The facts it rests on are the series' bridge notes (the
-   Ministry of Culture's study, 2015; UNESCO; the photographs looked at for shapes and colours only, nothing traced).
-   The picture: we stand on the left bank of the gorge, upstream of nothing, looking along it. The gorge comes towards us between
-   its two walls of dark rock, the river at its foot; the bridge hangs across it some way off, from a stone base on each bank; far
-   beyond, at a bend, the steel bridge of 1968. Straw-coloured hills of ichu rise to the high peaks. Everyone stands on one eye
-   line (NAQ_E): people on the near bank are large, people on the bridge small, all of one picture. It is a drawing, not a likeness:
-   the gorge is shallower than the real one (about 13 m), so the river fits above the captions. */
-const NAQ_E=330,NAQ_DECK=368,NAQ_RIV=610;                       // the eye line, and where the bridge's floor meets each base
-const naq_h=fl=>PK.hAt(fl,NAQ_E);
-const NAQ_B={x0:612,x1:1308};                      // the stone bases' inner faces: about 30 m apart
-// the near banks: where people can stand, floor y from NAQ_DECK+10 down to about 960; the rim of the gorge at floor y
-const naq_rimL=y=>PK.u.lerp(NAQ_B.x0-20,470,PK.u.clamp((y-NAQ_DECK)/(1080-NAQ_DECK),0,1)**0.8);
-const naq_rimR=y=>PK.u.lerp(NAQ_B.x1+20,1460,PK.u.clamp((y-NAQ_DECK)/(1080-NAQ_DECK),0,1)**0.8);
-const NAQ_PAL={straw:[220,196,136],straw2:[204,178,118],straw3:[232,212,160],ichu:[186,156,96],rock:[104,98,104],rock2:[124,116,118],rock3:[86,82,90],
-  river:[96,138,134],river2:[78,118,118],foam:[236,240,236],snow:[246,248,250],peak:[170,176,198],peak2:[150,156,182],stone:[198,190,176],stone2:[170,162,150],
-  rope:[214,186,110],ropeOld:[176,160,118],ropeDk:[150,124,70],steel:[150,156,166],steelDk:[110,116,128]};
-const naq_c=n=>PK.S.tone(NAQ_PAL[n]);
-// the grey light of the years the bridge was left: everything duller and cooler
-const naq_g=(c,grey)=>grey?PK.u.mix(c,[150,154,160],0.32):c;
+/* ===== The people kit: boards and pages drawn as a designer would =====
+   The author found the boards and the notebooks too plain, "generally just writing" (18 November 2026). He asked for a designer's
+   board and notebook, "with proper drawings and charts. Still looking written but very polished. It doesn't need to show they are
+   writing and drawing everything, it could be almost done in design and the hand just adds some final words to complete the
+   sketch." Of four looks he picked two: a graphic recording, a sheet of paper pinned over the board (board B), and a sketched page
+   in the notebook (notebook D). This file holds what both are drawn with.
 
-/* ---------------------------------------------------------------- the place, painted once: sky, peaks, hills, gorge, bases */
-function naq_place(ctx,o){o=o||{};const S=PK.S,U=PK.u,g=c=>naq_g(c,o.grey);
-  const sk=ctx.createLinearGradient(0,0,0,NAQ_E+40);sk.addColorStop(0,U.css(o.grey?[160,168,180]:PK.col("skyTop")));sk.addColorStop(1,U.css(o.grey?[214,214,212]:PK.col("skyLow")));
-  ctx.fillStyle=sk;ctx.fillRect(0,0,1920,1080);
-  S.begin(ctx,{lw:1.5,far:0.8});if(!o.grey){PK.cloud(ctx,380,120,1.0);PK.cloud(ctx,1500,90,0.8);}else{PK.cloud(ctx,300,110,1.3);PK.cloud(ctx,900,70,1.5);PK.cloud(ctx,1560,120,1.4);}
-  // the high peaks, far off, with snow
-  S.begin(ctx,{lw:1.4,far:0.75});S.poly(ctx,[[560,NAQ_E,1],[760,210,1],[880,150,1],[960,190,1],[1040,130,1],[1180,220,1],[1400,NAQ_E,1]],g(naq_c("peak")),{exact:true,flat:true});
-  S.poly(ctx,[[846,172,1],[880,150,1],[918,170,1],[900,182,1],[880,176,1],[862,186,1]],g(naq_c("snow")),{exact:true,w:0.5,flat:true});
-  S.poly(ctx,[[1008,154,1],[1040,130,1],[1080,158,1],[1056,166,1],[1034,160,1],[1020,170,1]],g(naq_c("snow")),{exact:true,w:0.5,flat:true});
-  // the hills of ichu on both sides, rounded, the far ones paler
-  S.begin(ctx,{lw:1.6,far:0.55});S.poly(ctx,[[-40,NAQ_E+20,1],[-40,170],[180,120],[460,160],[700,250],[860,NAQ_E-10],[960,NAQ_E+20,1]],g(naq_c("straw3")),{exact:true,ten:0.6});
-  S.poly(ctx,[[900,NAQ_E+20,1],[1120,NAQ_E-20],[1360,200],[1640,130],[1960,170],[1960,NAQ_E+20,1]],g(naq_c("straw3")),{exact:true,ten:0.6});
-  S.begin(ctx,{lw:1.8,far:0.4});S.poly(ctx,[[-40,NAQ_E+60,1],[-40,280],[260,250],[520,300],[720,NAQ_E+10],[800,NAQ_E+60,1]],g(naq_c("straw")),{exact:true,ten:0.6});
-  S.poly(ctx,[[1120,NAQ_E+60,1],[1260,NAQ_E+4],[1520,270],[1760,250],[1960,280],[1960,NAQ_E+60,1]],g(naq_c("straw")),{exact:true,ten:0.6});
-  // the gorge beyond the bridge, narrowing to a bend: its far walls, and the river coming out of it
-  ctx.fillStyle=U.css(g(naq_c("rock3")));ctx.beginPath();U.pg(ctx,[[560,356],[1360,356],[1260,720],[660,720]]);ctx.fill();
-  S.begin(ctx,{lw:1.8,far:0.35});
-  S.poly(ctx,[[NAQ_B.x0,NAQ_DECK,1],[880,NAQ_E+14,1],[1040,NAQ_E+14,1],[NAQ_B.x1,NAQ_DECK,1],[1130,NAQ_RIV+12,1],[790,NAQ_RIV+12,1]],g(naq_c("rock3")),{exact:true});
-  S.poly(ctx,[[905,NAQ_E+16,1],[1015,NAQ_E+16,1],[1000,NAQ_E+44,1],[925,NAQ_E+44,1]],g(U.mix(naq_c("river"),naq_c("rock3"),0.3)),{exact:true,w:0.5,flat:true});
-  S.line(ctx,c=>{for(const [a,b,cc,d] of [[860,360,820,470],[1060,360,1100,470],[900,380,880,520],[1020,380,1040,520]]){c.moveTo(a,b);c.lineTo(cc,d);}},null,0.5);
-  // the near banks: straw-coloured ground from the bases to the bottom of the picture
-  S.begin(ctx,{lw:2.2,far:0.15});const rim=(f,y0,y1,n)=>{const p=[];for(let i=0;i<=n;i++){const y=U.lerp(y0,y1,i/n);p.push([f(y),y]);}return p;};
-  S.poly(ctx,[[-40,NAQ_DECK-4,1],[NAQ_B.x0+30,NAQ_DECK-6,1]].concat(rim(naq_rimL,NAQ_DECK,1100,8)).concat([[-40,1100,1]]),g(naq_c("straw2")),{exact:true,ten:0.4,grad:[0,NAQ_DECK,0,1080,0.1]});
-  S.poly(ctx,[[1960,NAQ_DECK-4,1],[NAQ_B.x1-30,NAQ_DECK-6,1]].concat(rim(naq_rimR,NAQ_DECK,1100,8)).concat([[1960,1100,1]]),g(naq_c("straw2")),{exact:true,ten:0.4,grad:[0,NAQ_DECK,0,1080,0.1]});
-  // the gorge's two walls, from the rim down to the water's edge, coming towards us; the river between them
-  S.begin(ctx,{lw:2.2,far:0.1});const wl=y=>U.lerp(790,880,(y-NAQ_RIV)/(1100-NAQ_RIV)),wr=y=>U.lerp(1130,1040,(y-NAQ_RIV)/(1100-NAQ_RIV));
-  S.poly(ctx,rim(naq_rimL,NAQ_DECK+2,1100,8).concat([[wl(1100),1100,1],[wl(NAQ_RIV),NAQ_RIV,1]]),g(naq_c("rock")),{exact:true,ten:0.4});
-  S.poly(ctx,rim(naq_rimR,NAQ_DECK+2,1100,8).concat([[wr(1100),1100,1],[wr(NAQ_RIV),NAQ_RIV,1]]),g(naq_c("rock2")),{exact:true,ten:0.4});
-  S.poly(ctx,[[wl(NAQ_RIV),NAQ_RIV,1],[wr(NAQ_RIV),NAQ_RIV,1],[wr(1100),1100,1],[wl(1100),1100,1]],g(naq_c("river")),{exact:true,grad:[0,NAQ_RIV,0,1080,0.12]});
-  // the rock's faces and the white of the water: lines of detail
-  S.line(ctx,c=>{for(const [a,b,cc,d] of [[620,430,600,560],[680,520,640,700],[740,620,700,800],[600,640,560,820],[800,760,760,960],[660,820,620,1000]]){c.moveTo(a,b);c.lineTo(cc,d);}
-    for(const [a,b,cc,d] of [[1300,430,1320,560],[1240,520,1280,700],[1180,620,1220,800],[1320,640,1360,820],[1120,760,1160,960],[1260,820,1300,1000]]){c.moveTo(a,b);c.lineTo(cc,d);}},null,0.6);
-  ctx.save();ctx.strokeStyle=U.css(g(naq_c("foam")),0.75);ctx.lineWidth=3;ctx.lineCap="round";const R=U.rnd(5);
-  for(let i=0;i<26;i++){const y=NAQ_RIV+20+R()*420,hw=U.lerp(160,90,U.clamp((y-NAQ_RIV)/470,0,1)),x=962+(R()-0.5)*1.6*hw,l=10+R()*26*(y/700);ctx.beginPath();ctx.moveTo(x-l,y);ctx.quadraticCurveTo(x,y-3,x+l,y);ctx.stroke();}ctx.restore();
-  // tufts of ichu on the banks, larger nearer us
-  const R2=U.rnd(11);for(let i=0;i<120;i++){const y=NAQ_DECK+12+Math.pow(R2(),1.3)*700,left=R2()<0.5,x=left?R2()*(naq_rimL(y)-30):naq_rimR(y)+30+R2()*(1920-naq_rimR(y)-30),k=0.4+(y-NAQ_DECK)/260;
-    ctx.strokeStyle=U.css(g(U.mix(naq_c("ichu"),naq_c("straw2"),R2()*0.5)));ctx.lineWidth=1.6*k;ctx.lineCap="round";ctx.beginPath();for(let j=0;j<5;j++){const a=-0.7+j*0.35;ctx.moveTo(x,y);ctx.quadraticCurveTo(x+Math.sin(a)*8*k,y-12*k,x+Math.sin(a)*16*k,y-Math.cos(a)*22*k);}ctx.stroke();}
-  // the two stone bases: a platform of old stone, and two short pillars the handrails go round
-  for(const [bx,d] of [[NAQ_B.x0,-1],[NAQ_B.x1,1]]){S.begin(ctx,{lw:1.6,far:0.2});
-    S.fill(ctx,c=>{c.moveTo(bx,NAQ_DECK+30);c.lineTo(bx+d*70,NAQ_DECK+30);c.lineTo(bx+d*70,NAQ_DECK-6);c.lineTo(bx,NAQ_DECK-6);c.closePath();},g(naq_c("stone")),{});
-    S.line(ctx,c=>{for(let r=0;r<3;r++){const y=NAQ_DECK-6+r*12;c.moveTo(bx,y);c.lineTo(bx+d*70,y);for(let k=0;k<3;k++){const xx=bx+d*(12+k*22+(r%2)*10);c.moveTo(xx,y);c.lineTo(xx,y+12);}}},null,0.4);
-    for(const px of [bx+d*14,bx+d*52])S.fill(ctx,c=>U.rrect(c,px-7,NAQ_DECK-40,14,36,2),g(naq_c("stone2")),{});}}
-AG_PLACES.naGorge=c=>naq_place(c,{});
-AG_PLACES.naGorgeGrey=c=>naq_place(c,{grey:true});
-AG_ROOMS.naGorge=AG_ROOMS.naGorgeGrey="naGorge";
+   A designed board or page is two kinds of rows of PK.ink (hand.js): what is drawn already when it first shows, a row of its own
+   (PK.sk.drawn), and the last words, written by hand as the voice says them, as any other row: paced once with PK.pace and shown
+   with PK.teach (a board) or PK.notes (a page). The hand may also tick or ring a part of the drawing as the voice comes to it (a
+   mark of PK.ink's: tick, ring, star, under), and it writes nothing else.
 
-/* ---------------------------------------------------------------- the rope bridge, drawn every frame
-   o.age (0 new and gold, 1 left for years: sagging, grey, its floor gone in places); o.k (0 to 1): how much of it there is (the
-   building, cable by cable: below 0.5 the floor cables only); o.walkers: people on it, [[u, who, flip, t]]: u from 0 (left base)
-   to 1 (right). Returns naq_deck(u) for anyone drawn on it. */
-const NAQ_SAG=a=>34+70*a;
-function naq_deck(u,o){o=o||{};const U=PK.u,x=U.lerp(NAQ_B.x0+8,NAQ_B.x1-8,u),y=NAQ_DECK+NAQ_SAG(o.age||0)*4*u*(1-u),f=o.fall||0;if(f<=0)return[x,y];
-  // fallen: each half hangs from its own base down the wall into the gorge
-  const L=u<0.5,v=L?u/0.5:(1-u)/0.5,b=L?NAQ_B.x0+8:NAQ_B.x1-8,hx=b+(L?1:-1)*(40+70*v)*(1-0.5*v),hy=NAQ_DECK+v*230;return[U.lerp(x,hx,f),U.lerp(y,hy,f)];}
-function naq_bridge(ctx,o){o=o||{};const S=PK.S,U=PK.u,age=o.age||0,k=o.k==null?1:o.k,grey=o.grey,col=naq_g(U.mix(naq_c("rope"),naq_c("ropeOld"),age),grey),dkc=U.dk(col,0.25);
-  const fall=o.fall||0,along=(y0,sag)=>{ctx.beginPath();for(let i=0;i<=40;i++){const u=i/40,[x,y]=naq_deck(u,{age,fall});const yy=y+(y0-NAQ_DECK)+(sag-NAQ_SAG(age))*4*u*(1-u)*(1-fall);
-    if(fall>0.5&&u>=0.5&&(i-1)/40<0.5){ctx.moveTo(x,yy);continue;}i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);}};
-  const sag=NAQ_SAG(age),hr=30-10*age;ctx.save();ctx.lineCap="round";
-  // the side cords, from each handrail down to the floor: fewer where it has worn
-  if(k>0.6){const n=46,R=U.rnd(3);ctx.strokeStyle=U.css(dkc);ctx.lineWidth=1.3;ctx.beginPath();for(let i=1;i<n;i++){const u=i/n;if(age>0.2&&R()<age*0.55)continue;const [x,y]=naq_deck(u,{age,fall});if(fall>0.3)continue;ctx.moveTo(x,y-2);ctx.lineTo(x+1,y-hr*U.clamp((k-0.6)/0.4,0,1)+(age*R()*8));}ctx.stroke();}
-  // the four floor cables, as one band seen from the side, and the floor laid on them; holes where the rods are gone
-  if(k>0){const nf=Math.min(4,Math.ceil(k*8));for(let i=0;i<nf;i++){ctx.strokeStyle=U.css(i===nf-1?dkc:col);ctx.lineWidth=4;along(NAQ_DECK+i*2.2,sag,0);ctx.stroke();}
-    ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=1.4;along(NAQ_DECK-2,sag);ctx.stroke();along(NAQ_DECK+8,sag);ctx.stroke();}
-  // the two handrails
-  if(k>0.5){const q=U.clamp((k-0.5)/0.3,0,1);ctx.strokeStyle=U.css(col);ctx.lineWidth=3.2;ctx.globalAlpha*=q;along(NAQ_DECK-hr,sag-6*age);ctx.stroke();
-    ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=1.2;along(NAQ_DECK-hr-1.6,sag-6*age);ctx.stroke();}
-  // o.tilt (0 to 1): the far handrail hangs lower than the near one, as a visitor found it five months after a renewal
-  if(o.tilt&&k>0.5){ctx.strokeStyle=U.css(dkc);ctx.lineWidth=2.6;along(NAQ_DECK-hr+o.tilt*14,sag-6*age+o.tilt*12);ctx.stroke();}
-  ctx.restore();
-  for(const [u,who,fl,tt] of o.walkers||[]){const [x,y]=naq_deck(u,{age});naq_person(ctx,who,x,y+2,naq_h(NAQ_DECK+2),"stand",{t:tt||0,flip:fl===true,far:0.3,shade:0});}}
+     PK.sk.drawn(draw, box)     a row that is drawn already: draw(ctx) in the board's or the page's own px; box [x0, y0, x1, y1] is
+                                where its ink lies: whoever explains steps clear of it, and the check (people.py) holds it 24 px or
+                                more inside the board or the page. On a board far off (PK.teach's deco), its words are decoration
+                                too: everything written here takes the surface's deco by itself (PK.inkDeco).
+     PK.sk.paper(ctx, o)        the graphic recording's sheet, pinned over PK.place.board's board: cream paper, a pin at each
+                                corner. o: x, y, w, h (in the board's px: 14, 16, 1222, 492), col, pins (false: none)
+     PK.SK                      the sheet's box and the page's: SK.board {x, y, w, h} (inside the paper, 24 px from every edge of
+                                the board), SK.page {x, y, w, h} (a page's room above the captions)
 
-/* ---------------------------------------------------------------- the steel bridge of 1968, far up the gorge, at its bend
-   a: how far it is there (0 to 1); truck: where a truck is on it (0 to 1, or null) */
-function naq_steel(ctx,a,truck,grey){if(a<=0.004)return;const S=PK.S,U=PK.u,x0=870,x1=1050,y=NAQ_E+12,col=naq_g(naq_c("steel"),grey);ctx.save();ctx.globalAlpha*=a;
-  S.begin(ctx,{lw:1.0,far:0.4});S.fill(ctx,c=>U.rrect(c,x0,y,x1-x0,5,1),col,{w:0.8});
-  S.line(ctx,c=>{c.moveTo(x0,y);c.lineTo(x0+10,y-12);c.lineTo(x1-10,y-12);c.lineTo(x1,y);for(let i=0;i<=8;i++){const xx=U.lerp(x0+10,x1-10,i/8);c.moveTo(xx,y);c.lineTo(xx+(i%2?-10:10),y-12);}},naq_g(naq_c("steelDk"),grey),1.0);
-  if(truck!=null){const tx=U.lerp(x0-10,x1+10,truck);S.fill(ctx,c=>{U.rrect(c,tx-10,y-11,14,9,1);U.rrect(c,tx+4,y-8,6,6,1);},naq_g([176,118,96],grey),{w:0.5});}
-  ctx.restore();}
+   Words. Each is PK.hand's handwriting (size, w, col, align, a), so a box made from words is made as they are drawn.
+     PK.sk.text(ctx, s, x, y, o)          words, their baseline at (x, y) -> {w, x0, x1}
+     PK.sk.caps(ctx, s, x, y, o)          a small heading in capitals, its letters spaced (o.size 30, o.ls 3, o.col) -> {w}
+     PK.sk.wrap(ctx, s, maxW, o)          the words in lines no wider than maxW, at o.size and o.w -> [line, …]
+     PK.sk.lines(ctx, rows, x, y, o)      lines one under another: rows are strings or [s, o]; o.lh (1.25 of the size) -> {w, h}
+   Marks and shapes, each drawn once with an even dark line round a flat colour. A colour is a kit name ("ink", "mut", "blue",
+   "green", "amber", "orange", "violet") or [r, g, b]; a fill named so is that colour's light tint (PK.TINT).
+     PK.sk.line(ctx, pts, o)              a line drawn by hand through points: o.col, o.w (4), o.dash, o.close, o.fill, o.seed
+     PK.sk.box(ctx, x, y, w, h, o)        a box drawn with a marker: o.fill (its tint, laid a little off the line, as a marker
+                                          does), o.col (the line), o.w (3.5), o.r (12), o.dash
+     PK.sk.disc(ctx, cx, cy, r, o)        a round one: o.fill, o.col, o.w
+     PK.sk.band(ctx, x, y, w, h, col, a)  a highlighter's band
+     PK.sk.arrow(ctx, [x0, y0], [x1, y1], o)   o.col, o.w (4), o.bow (px, to the left of the way it goes), o.head (16), o.dash
+     PK.sk.pin(ctx, x, y, o), PK.sk.tape(ctx, x, y, w, o)   a pin; a strip of tape (o.rot, o.col)
+     PK.sk.sticky(ctx, x, y, w, h, o)     a sticky note: o.col (yellow), o.rot; o.draw(ctx, x, y, w, h) writes on it, turned with it
+     PK.sk.ribbon(ctx, s, x, y, o)        a heading on a ribbon, made from its words: (x, y) its top left (o.align "center": its
+                                          top middle); o.size (44), o.col ("blue"), o.ink (its words' colour), o.width (a ribbon
+                                          for words the hand writes on it later: s "") -> {x0, x1, y0, y1, base, cx (where words
+                                          on it go: their baseline, its middle)}
+     PK.sk.stamp(ctx, lines, cx, cy, o)   a reference stamped in a corner, turned a little: lines of [s, o] or strings (the first
+                                          bold); o.col ("blue"), o.rot (0.06), o.size (32) -> {w, h}
+     PK.sk.face(ctx, who, cx, cy, r, o)   a portrait, head and shoulders, in their own hair, skin and clothes: who a name in
+                                          PK.CAST or a row like its rows; o.ring (a colour round it), o.disc (false: no disc)
+     PK.sk.icon(ctx, kind, cx, cy, r, o)  a small drawing, r its size: o.fill. The kinds are in PK.sk.ICONS
+   A board's and a page's frame:
+     PK.sk.head(ctx, title, o)            a graphic recording's frame: the pinned sheet (o.paper: its o), the heading on a ribbon at
+                                          (o.x 110, o.y 42), o.col ("blue"), o.size (48); o.ref, the stamp's lines, at (o.rx 1060,
+                                          o.ry 98), o.rcol; o.sub, a line in capitals under the ribbon (s, or [s, col]) -> the ribbon's box
+     PK.sk.title(ctx, s, x, y, o)         a page's heading on a highlighter's band: o.size (84), o.col ("blue"), o.band -> {w, x0, x1}
+     PK.sk.panel(ctx, x, y, w, h, o, body)   a box with a heading in capitals (o.title, o.col), o.fill, o.line, o.dash; then
+                                          body(ctx, x, y, w, h): what is inside it, under the heading
+   Pieces made of those, each sized from its words unless a width is given, each returning its box {x, y, w, h}:
+     PK.sk.card(ctx, x, y, o)             a box with an icon at its left and a line or two: o.icon, o.ifill, o.lines ([s, o] or
+                                          strings), o.fill, o.col, o.w (its width), o.size (36), o.pad (18), o.r
+     PK.sk.list(ctx, x, y, items, o)      rows one under another, each {s, icon, num, dot, col, sub, ifill}: an icon, a number in a
+                                          ring or a dot before it, its words, and a gloss in muted ink after them (sub); o.size (38),
+                                          o.gap (the row's height: 1.6 of the size), o.subX (the gloss's column) -> [{x, y, w, h,
+                                          base, mark: [x, y] (where a tick beside it goes)}, …]
+     PK.sk.faces(ctx, x, y, who, o)       portraits in a row, a name or a word under each (o.names: [s, …], or true for their own
+                                          first names): o.r (30), o.gap -> [{cx, cy}, …]
+     PK.sk.flow(ctx, x, y, steps, o)      boxes joined by arrows, to the right (o.down: down): steps [{s, icon, fill, col, sub}, …];
+                                          o.size (34), o.gap (the arrow's length: 60), o.h (each box's height) -> [{x, y, w, h}, …]
+   Charts, sketched:
+     PK.sk.bars(ctx, x, y, w, h, bars, o)        bars on a line: [{v, col, label, top}, …] (top: words over the bar); o.max, o.size
+     PK.sk.trend(ctx, x, y, w, h, pts, o)        a line over time: pts [[0 to 1, 0 to 1], …]; o.col, o.labels ([[u, s], …] under
+                                                 the line's foot), o.dots
+     PK.sk.donut(ctx, cx, cy, r, parts, o)       a ring in parts: [{v, col}, …]; o.label (words in its middle), o.size
+     PK.sk.cycle(ctx, cx, cy, r, steps, o)       steps round a circle, each [s, col] in a pill, arrows from each to the next
+     PK.sk.stairs(ctx, x, y, w, h, steps, o)     steps that climb to the right, [s, …] on each; o.col, o.flag (a flag at the top)
+     PK.sk.matrix(ctx, x, y, w, h, o)            two axes and four corners: o.xs, o.ys (each axis's words), o.q ([top left, top
+                                                 right, bottom left, bottom right]: words or [s, o]), o.on (the corner shaded:
+                                                 0 to 3), o.col
+     PK.sk.pyramid(ctx, cx, y, w, h, layers, o)  layers from the top down: [s, col]
+     PK.sk.timeline(ctx, x, y, w, marks, o)      a line with marks along it: [{u, s, sub, col, up}, …]
+     PK.sk.scale(ctx, cx, cy, w, o)              a balance: o.l, o.r (the words in each pan), o.tilt (-1 to 1: the left pan down),
+                                                 o.lcol, o.rcol
+     PK.sk.venn(ctx, cx, cy, r, o)               two rounds that overlap: o.l, o.r, o.mid (their words), o.lcol, o.rcol
+     PK.sk.dots(ctx, x, y, cols, rows, o)        a field of small rounds: o.gap, o.r, o.on (how many coloured), o.col
+     PK.sk.big(ctx, s, cx, cy, o)                a figure, large, in a round burst: o.size (64), o.col, o.r
 
-/* ---------------------------------------------------------------- the communities' people, in plain colours
-   Men in pale wool jackets and dark trousers, a felt hat, often over a knitted cap; women in a felt hat, a full skirt and a
-   cardigan, long braids. One plain colour each: no pattern is invented and none copied. Nobody drawn is a likeness of anyone. */
-const NAQ_FOLK={
-  keeper:{key:"keeper",name:"",skin:[176,124,92],hair:{style:"short",c:[200,196,190]},top:{kind:"jacket",c:[214,206,188],inner:[150,110,90]},bottom:{kind:"trousers",c:[70,66,70]},shoe:[60,46,40],qhat:"felt",qcap:[150,74,70]},
-  m1:{key:"m1",name:"",skin:[170,116,84],hair:{style:"short",c:[34,28,28]},top:{kind:"jacket",c:[222,214,196],inner:[90,96,120]},bottom:{kind:"trousers",c:[60,60,72]},shoe:[54,42,38],qhat:"felt",qcap:[96,104,140]},
-  m2:{key:"m2",name:"",skin:[160,108,78],hair:{style:"short",c:[30,26,28]},top:{kind:"sweater",c:[148,112,96]},bottom:{kind:"trousers",c:[66,62,66]},shoe:[54,42,38],qhat:"cap",qcap:[178,90,80]},
-  m3:{key:"m3",name:"",skin:[180,128,94],hair:{style:"short",c:[40,32,30]},top:{kind:"jacket",c:[196,186,164],inner:[120,80,70]},bottom:{kind:"trousers",c:[80,74,72]},shoe:[54,42,38],qhat:"felt"},
-  w1:{key:"w1",name:"",skin:[174,120,88],hair:{style:"long",c:[28,24,26]},top:{kind:"sweater",c:[120,86,104]},bottom:{kind:"skirt",c:[64,72,104]},shoe:[54,42,38],qhat:"felt",braid:true},
-  w2:{key:"w2",name:"",skin:[166,112,82],hair:{style:"long",c:[30,24,26]},top:{kind:"sweater",c:[96,120,112]},bottom:{kind:"skirt",c:[132,70,76]},shoe:[54,42,38],qhat:"felt",braid:true},
-  w3:{key:"w3",name:"",skin:[180,126,96],hair:{style:"long",c:[44,34,32]},top:{kind:"sweater",c:[170,134,90]},bottom:{kind:"skirt",c:[78,64,86]},shoe:[54,42,38],qhat:"felt",braid:true},
-  m4:{key:"m4",name:"",skin:[164,112,80],hair:{style:"short",c:[36,30,28]},top:{kind:"jacket",c:[120,92,76],inner:[210,200,180]},bottom:{kind:"trousers",c:[58,58,66]},shoe:[54,42,38],qhat:"cap",qcap:[92,120,104]},
-  m5:{key:"m5",name:"",skin:[176,120,86],hair:{style:"short",c:[30,26,26]},top:{kind:"sweater",c:[178,150,104]},bottom:{kind:"trousers",c:[72,66,64]},shoe:[54,42,38],qhat:"felt"},
-  w4:{key:"w4",name:"",skin:[170,116,86],hair:{style:"long",c:[26,22,24]},top:{kind:"sweater",c:[150,70,74]},bottom:{kind:"skirt",c:[52,64,90]},shoe:[54,42,38],qhat:"felt",braid:true},
-  w5:{key:"w5",name:"",skin:[178,124,92],hair:{style:"long",c:[36,28,28]},top:{kind:"sweater",c:[84,104,136]},bottom:{kind:"skirt",c:[120,84,60]},shoe:[54,42,38],qhat:"felt",braid:true},
-  // two visitors of 1972, and a geographer of 1970: clothes of their time, no hat
-  v1:{key:"v1",name:"",skin:[236,204,180],hair:{style:"short",c:[140,104,70]},beard:[150,112,80],top:{kind:"jacket",c:[150,120,84],inner:[224,214,196]},bottom:{kind:"trousers",c:[92,98,120]},shoe:[90,70,56]},
-  v2:{key:"v2",name:"",skin:[240,210,186],hair:{style:"long",c:[180,140,90]},top:{kind:"sweater",c:[116,134,120]},bottom:{kind:"trousers",c:[110,96,84]},shoe:[90,70,56]},
-  geo:{key:"geo",name:"",skin:[232,198,170],hair:{style:"short",c:[96,80,70]},glasses:[60,50,50],top:{kind:"jacket",c:[128,132,110],inner:[230,226,214]},bottom:{kind:"trousers",c:[104,96,84]},shoe:[80,62,50]}
+   Lay a designed board out as a graphic recording: a ribbon for its heading at the top left, the reference stamped at the top
+   right, two or three parts below, each a drawing (a chart, a few portraits, cards with icons) with a few words, arrows between
+   them, and room left for the last words, at the right or at the foot, so whoever writes them steps clear after. Lay a page out as
+   a sketched page: its heading with a highlighter's band, boxes with icons and portraits, a sticky note, and a ribbon or a line at
+   its foot for the last words. Words are 30 px or more on a board seen close, 34 or more on a page, and none below the board's or
+   the page's room (PK.SK). Colour keeps its meaning (blue a plan or a rule, green something done or of value, amber a risk or a
+   cost, orange data); people's portraits wear their own clothes. Nothing here is a box of words for the check: a board's or a
+   page's drawing is the writing's, not a card over the scene. */
+(K=>{
+const {TAU,lerp,clamp,mix,dk,lt,css,hash,rrect}=K.u;
+const INK=()=>K.C.ink;
+K.TINT={ink:[248,244,236],mut:[238,232,224],blue:[214,228,244],green:[204,234,212],amber:[250,230,196],orange:[250,218,198],violet:[226,218,244],white:[255,255,255],sun:[252,226,140],paper:[250,247,240]};
+K.FILL={ink:[226,220,212],mut:[226,220,212],blue:[176,204,236],green:[178,222,190],amber:[250,212,128],orange:[244,186,154],violet:[206,194,242],white:[255,255,255],sun:[252,226,140],paper:[250,247,240]};
+const colOf=c=>K.inkCol(c),tintOf=c=>c==null?null:Array.isArray(c)?c:(K.TINT[c]||K.TINT.ink),fillOf=c=>c==null?null:Array.isArray(c)?c:(K.FILL[c]||K.FILL.ink);
+// a ribbon's colours: strong enough to carry white words, or light with ink ones (amber)
+const RIB={blue:[[104,146,196],[255,255,255]],green:[[88,146,106],[255,255,255]],amber:[[240,200,104],null],orange:[[214,128,86],[255,255,255]],violet:[[132,116,200],[255,255,255]],ink:[[96,86,98],[255,255,255]],mut:[[226,216,200],null]};
+const nz=(i,k)=>hash(i*7+3,k*13+1)-0.5;
+// the board's px and the page's: where a design's ink may lie
+K.SK={board:{x:40,y:36,w:1170,h:450},page:{x:70,y:56,w:960,h:770},paper:{x:14,y:16,w:1222,h:492}};
+K.sk={};const D=K.sk;
+
+/* ---------------------------------------------------------------- words */
+const deco=o=>o.deco||K.inkDeco;
+D.text=(ctx,s,x,y,o)=>K.hand(ctx,s,x,y,o||{});
+D.caps=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||30,ls=o.ls==null?3:o.ls,S=String(s).toUpperCase(),w=ag_tw(ctx,S,{w:700,size,f:"hand",ls});
+  const x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x;ag_T(ctx,S,x0,y,{w:700,size,f:"hand",ls,color:css(colOf(o.col||"mut")),deco:deco(o),a:o.a});return{w,x0,x1:x0+w};};
+D.capsW=(ctx,s,o)=>{o=o||{};return ag_tw(ctx,String(s).toUpperCase(),{w:700,size:o.size||30,f:"hand",ls:o.ls==null?3:o.ls});};
+D.wrap=(ctx,s,maxW,o)=>{o=o||{};const size=o.size||38,wt=o.w||400,out=[];let cur="";for(const wd of String(s).split(/\s+/)){const t=cur?cur+" "+wd:wd;if(cur&&K.handW(ctx,t,size,wt)>maxW){out.push(cur);cur=wd;}else cur=t;}if(cur)out.push(cur);return out;};
+const rowOf=r=>Array.isArray(r)?[r[0],r[1]||{}]:[r,{}];
+D.lines=(ctx,rows,x,y,o)=>{o=o||{};let yy=y,w=0;rows.forEach((r,i)=>{const [s,ro]=rowOf(r),q=Object.assign({size:o.size||38,w:o.w,col:o.col,align:o.align},ro),lh=(o.lh||1.25)*q.size;
+    if(i)yy+=lh;const m=D.text(ctx,s,x,yy,q);w=Math.max(w,m.w);});return{w,h:yy-y};};
+const widthOf=(ctx,rows,o)=>Math.max(0,...rows.map(r=>{const [s,ro]=rowOf(r);return K.handW(ctx,s,ro.size||o.size||38,ro.w||o.w||400);}));
+
+/* ---------------------------------------------------------------- marks and shapes */
+// a hand-drawn line through points: each stretch bowed a little, the same way every time
+function wob(ctx,pts,o){const amp=o.amp==null?1.6:o.amp,seed=o.seed||1;ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,k=amp*Math.min(1,L/80)*(1+nz(seed,i));
+    ctx.quadraticCurveTo((a[0]+b[0])/2+nx*k*2,(a[1]+b[1])/2+ny*k*2,b[0],b[1]);}
+  if(o.close)ctx.closePath();}
+const pen=(ctx,c,w)=>{ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=css(colOf(c));ctx.lineWidth=w;};
+D.line=(ctx,pts,o)=>{o=o||{};ctx.save();ctx.beginPath();wob(ctx,pts,o);if(o.fill){ctx.fillStyle=css(tintOf(o.fill));ctx.fill();}
+  if(o.col!==false){pen(ctx,o.col||"ink",o.w||4);if(o.dash)ctx.setLineDash(o.dash);ctx.stroke();}ctx.restore();};
+D.box=(ctx,x,y,w,h,o)=>{o=o||{};const r=o.r==null?12:o.r;ctx.save();
+  if(o.fill){ctx.fillStyle=css(tintOf(o.fill));ctx.beginPath();rrect(ctx,x+2,y+3,w,h,r);ctx.fill();}
+  if(o.col!==false){pen(ctx,o.col||"ink",o.w||3.5);if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();rrect(ctx,x,y,w,h,r);ctx.stroke();}ctx.restore();return{x,y,w,h};};
+D.disc=(ctx,cx,cy,r,o)=>{o=o||{};ctx.save();if(o.fill){ctx.fillStyle=css(tintOf(o.fill));ctx.beginPath();ctx.arc(cx+1.5,cy+2,r,0,TAU);ctx.fill();}
+  if(o.col!==false){pen(ctx,o.col||"ink",o.w||3.5);if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();}ctx.restore();};
+D.band=(ctx,x,y,w,h,c,a)=>{ctx.save();ctx.fillStyle=css(Array.isArray(c)?c:(K.HL[c]||K.HL.amber),a==null?0.5:a);ctx.beginPath();ctx.moveTo(x,y+h*0.12);ctx.quadraticCurveTo(x+w*0.5,y-h*0.06,x+w,y+h*0.04);
+  ctx.lineTo(x+w-4,y+h);ctx.quadraticCurveTo(x+w*0.5,y+h*1.06,x+4,y+h*0.94);ctx.closePath();ctx.fill();ctx.restore();};
+D.arrow=(ctx,a,b,o)=>{o=o||{};const bow=o.bow||0,mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,cx=mx-dy/L*bow,cy=my+dx/L*bow;
+  ctx.save();pen(ctx,o.col||"ink",o.w||4);if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.quadraticCurveTo(cx,cy,b[0],b[1]);ctx.stroke();ctx.setLineDash([]);
+  const an=Math.atan2(b[1]-cy,b[0]-cx),hl=o.head||16;ctx.beginPath();ctx.moveTo(b[0]-Math.cos(an-0.45)*hl,b[1]-Math.sin(an-0.45)*hl);ctx.lineTo(b[0],b[1]);ctx.lineTo(b[0]-Math.cos(an+0.45)*hl,b[1]-Math.sin(an+0.45)*hl);ctx.stroke();ctx.restore();};
+D.pin=(ctx,x,y,o)=>{o=o||{};ctx.save();ctx.fillStyle="rgba(60,40,40,0.2)";ctx.beginPath();ctx.arc(x+3,y+4,8,0,TAU);ctx.fill();ctx.fillStyle=css(o.col||[196,70,64]);ctx.beginPath();ctx.arc(x,y,8,0,TAU);ctx.fill();
+  pen(ctx,"ink",2);ctx.stroke();ctx.fillStyle="rgba(255,255,255,0.55)";ctx.beginPath();ctx.arc(x-2.5,y-2.5,2.6,0,TAU);ctx.fill();ctx.restore();};
+D.tape=(ctx,x,y,w,o)=>{o=o||{};const h=o.h||36,c=o.col||[150,196,186];ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);ctx.fillStyle=css(c,0.82);ctx.beginPath();ctx.moveTo(-w/2,-h/2);
+  for(let i=0;i<=6;i++)ctx.lineTo(-w/2+i*w/6,-h/2+(i%2?3:0));ctx.lineTo(w/2,h/2);for(let i=6;i>=0;i--)ctx.lineTo(-w/2+i*w/6,h/2-(i%2?3:0));ctx.closePath();ctx.fill();
+  ctx.strokeStyle=css(lt(c,0.5),0.7);ctx.lineWidth=2;for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(-w/2+i*w/4-8,-h/2);ctx.lineTo(-w/2+i*w/4+8,h/2);ctx.stroke();}ctx.restore();};
+D.sticky=(ctx,x,y,w,h,o)=>{o=o||{};const c=tintOf(o.col||"sun");ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.fillStyle="rgba(60,40,40,0.16)";ctx.fillRect(-w/2+5,-h/2+7,w,h);
+  ctx.fillStyle=css(c);ctx.fillRect(-w/2,-h/2,w,h);ctx.strokeStyle=css(dk(c,0.25));ctx.lineWidth=2;ctx.strokeRect(-w/2,-h/2,w,h);
+  ctx.fillStyle=css(dk(c,0.06));ctx.fillRect(-w/2,-h/2,w,Math.min(26,h*0.18));if(o.draw)o.draw(ctx,-w/2,-h/2,w,h);ctx.restore();return{x,y,w,h};};
+D.ribbon=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||44,wt=o.w||700,W=s?K.handW(ctx,s,size,wt):0,pad=o.pad||size*0.6,w=o.width||W+pad*2,h=Math.round(size*1.32),[f0,i0]=RIB[o.col||"blue"]||[colOf(o.col),[255,255,255]],
+    fill=Array.isArray(o.fill)?o.fill:f0,ink=o.ink||i0||INK(),x0=o.align==="center"?x-w/2:x,d=h*0.45,fd=dk(fill,0.22);
+  ctx.save();ctx.lineJoin="round";ctx.lineWidth=3;ctx.strokeStyle=css(INK());
+  if(o.tails!==false)for(const sg of[-1,1]){const ex=sg<0?x0:x0+w;ctx.fillStyle=css(fd);ctx.beginPath();ctx.moveTo(ex,y+d*0.5);ctx.lineTo(ex+sg*h*0.9,y+d*0.5);ctx.lineTo(ex+sg*h*0.55,y+d*0.5+h*0.5);
+    ctx.lineTo(ex+sg*h*0.9,y+h+d*0.5);ctx.lineTo(ex,y+h+d*0.5);ctx.closePath();ctx.fill();ctx.stroke();}
+  ctx.fillStyle=css(fill);ctx.beginPath();ctx.moveTo(x0,y);ctx.quadraticCurveTo(x0+w/2,y-6,x0+w,y);ctx.lineTo(x0+w,y+h);ctx.quadraticCurveTo(x0+w/2,y+h-6,x0,y+h);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
+  if(s)D.text(ctx,s,x0+w/2,y+h*0.72,{size,w:wt,col:ink,align:"center"});return{x0,x1:x0+w,y0:y,y1:y+h,w,h,base:y+h*0.72,cx:x0+w/2};};
+D.stamp=(ctx,lines,cx,cy,o)=>{o=o||{};const size=o.size||32,rows=lines.map((r,i)=>{const [s,ro]=rowOf(r);return[s,Object.assign({size:i?size*0.88:size,w:i?400:700,col:o.col||"blue",align:"center"},ro)];}),
+    W=Math.max(...rows.map(([s,q])=>K.handW(ctx,s,q.size,q.w))),lh=size*1.12,w=W+size*1.3,h=rows.length*lh+size*0.55;
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(o.rot==null?0.06:o.rot);D.box(ctx,-w/2,-h/2,w,h,{col:o.col||"blue",w:3,r:14,fill:o.fill});
+  if(o.double!==false)D.box(ctx,-w/2+6,-h/2+6,w-12,h-12,{col:o.col||"blue",w:1.6,r:10});
+  rows.forEach(([s,q],i)=>D.text(ctx,s,0,-h/2+size*0.3+lh*(i+0.78),q));ctx.restore();return{w,h};};
+
+/* ---------------------------------------------------------------- a portrait, as a designer sketches one */
+D.face=(ctx,who,cx,cy,r,o)=>{o=o||{};const P=typeof who==="string"?K.CAST[who]:who;if(!P)throw new Error("PK.sk.face: nobody called "+who);
+  const S=K.S,tone=c=>S.tone?S.tone(c):c,sk=tone(P.skin),hair=P.hair||{style:"short",c:[60,48,44]},hc=tone(hair.c||[60,48,44]),top=tone((P.top&&P.top.c)||[150,140,130]),lw=Math.max(2,r*0.085),st=hair.style;
+  ctx.save();ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=lw;ctx.strokeStyle=css(INK());
+  if(o.ring){ctx.fillStyle=css(tintOf(o.ring),0.95);ctx.beginPath();ctx.arc(cx,cy+r*0.15,r*1.42,0,TAU);ctx.fill();}
+  if(o.disc!==false){ctx.fillStyle=css(o.bg?tintOf(o.bg):[248,244,236]);ctx.beginPath();ctx.arc(cx,cy+r*0.15,r*1.25,0,TAU);ctx.fill();ctx.stroke();ctx.save();ctx.beginPath();ctx.arc(cx,cy+r*0.15,r*1.25-lw/2,0,TAU);ctx.clip();}
+  // shoulders, and what shows at the neck
+  ctx.fillStyle=css(top);ctx.beginPath();ctx.moveTo(cx-r*1.15,cy+r*1.6);ctx.quadraticCurveTo(cx-r*1.05,cy+r*0.78,cx-r*0.35,cy+r*0.7);ctx.lineTo(cx+r*0.35,cy+r*0.7);ctx.quadraticCurveTo(cx+r*1.05,cy+r*0.78,cx+r*1.15,cy+r*1.6);ctx.closePath();ctx.fill();ctx.stroke();
+  if(P.top&&P.top.inner){ctx.fillStyle=css(tone(P.top.inner));ctx.beginPath();ctx.moveTo(cx-r*0.28,cy+r*0.7);ctx.lineTo(cx,cy+r*1.12);ctx.lineTo(cx+r*0.28,cy+r*0.7);ctx.closePath();ctx.fill();ctx.stroke();}
+  // hair down the back, a bun, a knot, a scarf round the head
+  ctx.fillStyle=css(hc);
+  if(st==="long"){ctx.beginPath();ctx.moveTo(cx-r*0.78,cy-r*0.2);ctx.quadraticCurveTo(cx-r*0.95,cy+r*0.7,cx-r*0.62,cy+r*0.98);ctx.lineTo(cx+r*0.62,cy+r*0.98);ctx.quadraticCurveTo(cx+r*0.95,cy+r*0.7,cx+r*0.78,cy-r*0.2);ctx.closePath();ctx.fill();ctx.stroke();}
+  if(st==="bun"||st==="knot"){ctx.beginPath();ctx.arc(cx+r*0.05,cy-r*0.98,r*(st==="knot"?0.26:0.32),0,TAU);ctx.fill();ctx.stroke();}
+  const scarf=st==="scarf"||st==="covered";
+  if(scarf){ctx.fillStyle=css(hc);ctx.beginPath();ctx.moveTo(cx-r*0.86,cy+r*0.72);ctx.quadraticCurveTo(cx-r*1.0,cy-r*0.95,cx,cy-r*0.98);ctx.quadraticCurveTo(cx+r*1.0,cy-r*0.95,cx+r*0.86,cy+r*0.72);ctx.closePath();ctx.fill();ctx.stroke();}
+  // the neck and the head
+  ctx.fillStyle=css(sk);ctx.beginPath();rrect(ctx,cx-r*0.2,cy+r*0.35,r*0.4,r*0.45,r*0.1);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.ellipse(cx,cy,r*0.66,r*0.76,0,0,TAU);ctx.fill();ctx.stroke();
+  // hair on top, by its style
+  ctx.fillStyle=css(hc);
+  if(scarf){ctx.beginPath();ctx.moveTo(cx-r*0.66,cy-r*0.05);ctx.quadraticCurveTo(cx-r*0.62,cy-r*0.72,cx,cy-r*0.74);ctx.quadraticCurveTo(cx+r*0.62,cy-r*0.72,cx+r*0.66,cy-r*0.05);ctx.quadraticCurveTo(cx+r*0.7,cy-r*0.92,cx,cy-r*0.92);ctx.quadraticCurveTo(cx-r*0.7,cy-r*0.92,cx-r*0.66,cy-r*0.05);ctx.fill();ctx.stroke();}
+  else if(st==="coily"||st==="curly"){const n=st==="coily"?7:6;ctx.beginPath();for(let i=0;i<n;i++){const a=Math.PI*(1.05+i*0.9/(n-1)),bx=cx+Math.cos(a)*r*0.62,by=cy+Math.sin(a)*r*0.7;ctx.moveTo(bx+r*0.2,by);ctx.arc(bx,by,r*0.2,0,TAU);}ctx.fill();ctx.stroke();
+    ctx.beginPath();ctx.ellipse(cx,cy-r*0.45,r*0.62,r*0.36,0,Math.PI,TAU);ctx.fill();}
+  else if(st!=="none"&&st!=="shaved"){const sh=st==="short"||st==="crop"||st==="cropped"||st==="normal"||st==="side"||st==="knot",y0=cy+(sh?-r*0.1:r*0.2);ctx.beginPath();ctx.moveTo(cx-r*0.7,y0);
+    ctx.quadraticCurveTo(cx-r*0.78,cy-r*0.92,cx,cy-r*0.86);ctx.quadraticCurveTo(cx+r*0.8,cy-r*0.92,cx+r*0.7,y0-(sh?r*0.02:0));
+    ctx.quadraticCurveTo(cx+r*0.42,cy-r*(st==="side"?0.62:0.5),cx-r*0.05,cy-r*0.46);ctx.quadraticCurveTo(cx-r*0.48,cy-r*0.42,cx-r*0.7,y0);ctx.closePath();ctx.fill();ctx.stroke();}
+  if(P.beard){ctx.fillStyle=css(tone(P.beard));ctx.beginPath();ctx.moveTo(cx-r*0.6,cy+r*0.05);ctx.quadraticCurveTo(cx-r*0.5,cy+r*0.86,cx,cy+r*0.8);ctx.quadraticCurveTo(cx+r*0.5,cy+r*0.86,cx+r*0.6,cy+r*0.05);ctx.quadraticCurveTo(cx,cy+r*0.42,cx-r*0.6,cy+r*0.05);ctx.fill();ctx.stroke();}
+  if(P.earrings&&!scarf){ctx.fillStyle=css(tone(P.earrings));for(const sg of[-1,1]){ctx.beginPath();ctx.arc(cx+sg*r*0.68,cy+r*0.22,Math.max(1.6,r*0.07),0,TAU);ctx.fill();}}
+  // eyes, a smile, glasses
+  ctx.fillStyle=css(INK());for(const sg of[-1,1]){ctx.beginPath();ctx.arc(cx+sg*r*0.24,cy+r*0.02,Math.max(1.6,r*0.07),0,TAU);ctx.fill();}
+  ctx.lineWidth=lw*0.8;ctx.beginPath();ctx.arc(cx,cy+r*0.2,r*0.22,0.25*Math.PI,0.75*Math.PI);ctx.stroke();
+  if(P.glasses){ctx.lineWidth=lw*0.7;for(const sg of[-1,1]){ctx.beginPath();ctx.arc(cx+sg*r*0.25,cy+r*0.02,r*0.17,0,TAU);ctx.stroke();}ctx.beginPath();ctx.moveTo(cx-r*0.08,cy);ctx.lineTo(cx+r*0.08,cy);ctx.stroke();}
+  if(o.disc!==false)ctx.restore();ctx.restore();};
+
+/* ---------------------------------------------------------------- small drawings */
+const PAPER=[250,246,236];
+const ICON={
+  star:(c,x,y,r)=>{c.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.45:r;i?c.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr):c.moveTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr);}c.closePath();c.fill();c.stroke();},
+  plus:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.5,y);c.lineTo(x+r*0.5,y);c.moveTo(x,y-r*0.5);c.lineTo(x,y+r*0.5);c.stroke();},
+  minus:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.5,y);c.lineTo(x+r*0.5,y);c.stroke();},
+  check:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.45,y);c.lineTo(x-r*0.1,y+r*0.38);c.lineTo(x+r*0.5,y-r*0.38);c.lineWidth*=1.3;c.stroke();},
+  cross:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.4,y-r*0.4);c.lineTo(x+r*0.4,y+r*0.4);c.moveTo(x+r*0.4,y-r*0.4);c.lineTo(x-r*0.4,y+r*0.4);c.lineWidth*=1.2;c.stroke();},
+  q:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.arc(x,y-r*0.22,r*0.3,-Math.PI*0.95,Math.PI*0.4);c.quadraticCurveTo(x,y,x,y+r*0.22);c.stroke();c.beginPath();c.arc(x,y+r*0.52,r*0.07,0,TAU);c.fillStyle=c.strokeStyle;c.fill();},
+  warn:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r);c.lineTo(x+r*1.05,y+r*0.82);c.lineTo(x-r*1.05,y+r*0.82);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x,y-r*0.38);c.lineTo(x,y+r*0.25);c.stroke();c.beginPath();c.arc(x,y+r*0.52,r*0.07,0,TAU);c.fillStyle=c.strokeStyle;c.fill();},
+  rock:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.7);c.lineTo(x-r*0.7,y-r*0.2);c.lineTo(x-r*0.1,y-r*0.7);c.lineTo(x+r*0.6,y-r*0.4);c.lineTo(x+r,y+r*0.7);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.1,y-r*0.7);c.lineTo(x+r*0.05,y+r*0.1);c.lineTo(x+r*0.6,y-r*0.4);c.stroke();},
+  key:(c,x,y,r)=>{c.beginPath();c.arc(x-r*0.45,y,r*0.45,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x,y);c.lineTo(x+r,y);c.moveTo(x+r*0.7,y);c.lineTo(x+r*0.7,y+r*0.35);c.moveTo(x+r*0.95,y);c.lineTo(x+r*0.95,y+r*0.3);c.stroke();c.fillStyle=css(PAPER);c.beginPath();c.arc(x-r*0.45,y,r*0.16,0,TAU);c.fill();c.stroke();},
+  lock:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.2,r*0.42,Math.PI,TAU);c.lineTo(x+r*0.42,y);c.moveTo(x-r*0.42,y);c.lineTo(x-r*0.42,y-r*0.2);c.stroke();c.beginPath();rrect(c,x-r*0.7,y-r*0.05,r*1.4,r*1.0,r*0.14);c.fill();c.stroke();c.beginPath();c.arc(x,y+r*0.38,r*0.12,0,TAU);c.stroke();},
+  heart:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y+r*0.8);c.bezierCurveTo(x-r*1.3,y-r*0.1,x-r*0.55,y-r*1.0,x,y-r*0.35);c.bezierCurveTo(x+r*0.55,y-r*1.0,x+r*1.3,y-r*0.1,x,y+r*0.8);c.fill();c.stroke();},
+  house:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.8,y+r*0.8);c.lineTo(x-r*0.8,y-r*0.1);c.lineTo(x,y-r*0.85);c.lineTo(x+r*0.8,y-r*0.1);c.lineTo(x+r*0.8,y+r*0.8);c.closePath();c.fill();c.stroke();c.beginPath();c.rect(x-r*0.2,y+r*0.25,r*0.4,r*0.55);c.stroke();},
+  building:(c,x,y,r)=>{c.beginPath();c.rect(x-r*0.7,y-r*0.95,r*1.4,r*1.85);c.fill();c.stroke();c.beginPath();for(let i=0;i<3;i++)for(let j=0;j<2;j++)c.rect(x-r*0.42+j*r*0.52,y-r*0.7+i*r*0.46,r*0.32,r*0.26);c.stroke();c.beginPath();c.moveTo(x-r*1.0,y+r*0.9);c.lineTo(x+r*1.0,y+r*0.9);c.stroke();},
+  door:(c,x,y,r)=>{c.beginPath();c.rect(x-r*0.55,y-r*0.95,r*1.1,r*1.85);c.fill();c.stroke();c.beginPath();c.arc(x+r*0.3,y,r*0.08,0,TAU);c.stroke();c.beginPath();c.moveTo(x-r*0.9,y+r*0.9);c.lineTo(x+r*0.9,y+r*0.9);c.stroke();},
+  clock:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x,y);c.lineTo(x,y-r*0.65);c.moveTo(x,y);c.lineTo(x+r*0.45,y+r*0.2);c.stroke();},
+  hourglass:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.6,y-r);c.lineTo(x+r*0.6,y-r);c.lineTo(x+r*0.08,y);c.lineTo(x+r*0.6,y+r);c.lineTo(x-r*0.6,y+r);c.lineTo(x-r*0.08,y);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.75,y-r);c.lineTo(x+r*0.75,y-r);c.moveTo(x-r*0.75,y+r);c.lineTo(x+r*0.75,y+r);c.stroke();},
+  cal:(c,x,y,r)=>{c.beginPath();c.rect(x-r,y-r*0.75,r*2,r*1.6);c.fill();c.stroke();c.beginPath();c.moveTo(x-r,y-r*0.3);c.lineTo(x+r,y-r*0.3);c.moveTo(x-r*0.5,y-r);c.lineTo(x-r*0.5,y-r*0.55);c.moveTo(x+r*0.5,y-r);c.lineTo(x+r*0.5,y-r*0.55);c.stroke();
+    c.fillStyle=c.strokeStyle;for(let i=0;i<3;i++)for(let j=0;j<2;j++){c.beginPath();c.arc(x-r*0.5+i*r*0.5,y+r*0.1+j*r*0.4,r*0.07,0,TAU);c.fill();}},
+  chat:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y-r*0.7);c.lineTo(x+r,y-r*0.7);c.lineTo(x+r,y+r*0.4);c.lineTo(x-r*0.2,y+r*0.4);c.lineTo(x-r*0.6,y+r*0.9);c.lineTo(x-r*0.55,y+r*0.4);c.lineTo(x-r,y+r*0.4);c.closePath();c.fill();c.stroke();},
+  people:(c,x,y,r)=>{for(const [dx,s] of[[-0.6,0.8],[0.6,0.8],[0,1]]){c.beginPath();c.arc(x+dx*r,y-r*0.25*s,r*0.28*s,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x+dx*r-r*0.45*s,y+r*0.75);c.quadraticCurveTo(x+dx*r,y-r*0.05,x+dx*r+r*0.45*s,y+r*0.75);c.closePath();c.fill();c.stroke();}},
+  person:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.38,r*0.36,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.65,y+r*0.9);c.quadraticCurveTo(x,y-r*0.2,x+r*0.65,y+r*0.9);c.closePath();c.fill();c.stroke();},
+  map:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y-r*0.6);c.lineTo(x-r*0.35,y-r*0.85);c.lineTo(x+r*0.3,y-r*0.6);c.lineTo(x+r,y-r*0.85);c.lineTo(x+r,y+r*0.6);c.lineTo(x+r*0.3,y+r*0.85);c.lineTo(x-r*0.35,y+r*0.6);c.lineTo(x-r,y+r*0.85);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.35,y-r*0.85);c.lineTo(x-r*0.35,y+r*0.6);c.moveTo(x+r*0.3,y-r*0.6);c.lineTo(x+r*0.3,y+r*0.85);c.stroke();},
+  db:(c,x,y,r)=>{const e=r*0.32;c.beginPath();c.moveTo(x-r*0.75,y-r*0.6);c.lineTo(x-r*0.75,y+r*0.6);c.ellipse(x,y+r*0.6,r*0.75,e,0,Math.PI,0,true);c.lineTo(x+r*0.75,y-r*0.6);c.closePath();c.fill();c.stroke();c.beginPath();c.ellipse(x,y-r*0.6,r*0.75,e,0,0,TAU);c.fill();c.stroke();c.beginPath();c.ellipse(x,y,r*0.75,e,0,0,Math.PI);c.stroke();},
+  gear:(c,x,y,r)=>{c.beginPath();for(let i=0;i<16;i++){const a=i*Math.PI/8,rr=i%2?r*0.72:r;i?c.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr):c.moveTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr);}c.closePath();c.fill();c.stroke();c.fillStyle=css(PAPER);c.beginPath();c.arc(x,y,r*0.3,0,TAU);c.fill();c.stroke();},
+  shield:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r);c.quadraticCurveTo(x+r*0.5,y-r*0.72,x+r*0.85,y-r*0.75);c.quadraticCurveTo(x+r*0.9,y+r*0.5,x,y+r);c.quadraticCurveTo(x-r*0.9,y+r*0.5,x-r*0.85,y-r*0.75);c.quadraticCurveTo(x-r*0.5,y-r*0.72,x,y-r);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.35,y);c.lineTo(x-r*0.05,y+r*0.3);c.lineTo(x+r*0.4,y-r*0.3);c.stroke();},
+  bars:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.85);c.lineTo(x+r,y+r*0.85);c.stroke();for(const [dx,hh] of[[-0.62,0.7],[0,1.3],[0.62,0.95]]){c.beginPath();c.rect(x+dx*r-r*0.22,y+r*0.85-hh*r,r*0.44,hh*r);c.fill();c.stroke();}},
+  up:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.8);c.lineTo(x+r,y+r*0.8);c.moveTo(x-r,y+r*0.8);c.lineTo(x-r,y-r);c.stroke();c.beginPath();c.moveTo(x-r*0.8,y+r*0.4);c.lineTo(x-r*0.2,y-r*0.1);c.lineTo(x+r*0.15,y+r*0.15);c.lineTo(x+r*0.8,y-r*0.6);c.stroke();c.beginPath();c.moveTo(x+r*0.4,y-r*0.62);c.lineTo(x+r*0.82,y-r*0.62);c.lineTo(x+r*0.82,y-r*0.22);c.stroke();},
+  down:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.8);c.lineTo(x+r,y+r*0.8);c.moveTo(x-r,y+r*0.8);c.lineTo(x-r,y-r);c.stroke();c.beginPath();c.moveTo(x-r*0.8,y-r*0.6);c.lineTo(x-r*0.2,y-r*0.05);c.lineTo(x+r*0.15,y-r*0.3);c.lineTo(x+r*0.8,y+r*0.4);c.stroke();c.beginPath();c.moveTo(x+r*0.4,y+r*0.42);c.lineTo(x+r*0.82,y+r*0.42);c.lineTo(x+r*0.82,y);c.stroke();},
+  wrench:(c,x,y,r)=>{c.save();c.translate(x,y);c.rotate(-0.8);c.beginPath();c.moveTo(-r*0.16,-r*0.4);c.lineTo(-r*0.16,r*0.95);c.quadraticCurveTo(0,r*1.1,r*0.16,r*0.95);c.lineTo(r*0.16,-r*0.4);c.closePath();c.fill();c.stroke();
+    c.beginPath();c.arc(0,-r*0.62,r*0.42,0,TAU);c.fill();c.stroke();c.fillStyle=css(PAPER);c.beginPath();c.moveTo(-r*0.13,-r*1.06);c.lineTo(-r*0.13,-r*0.68);c.lineTo(r*0.13,-r*0.68);c.lineTo(r*0.13,-r*1.06);c.fill();c.stroke();c.restore();},
+  doc:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.7,y-r);c.lineTo(x+r*0.35,y-r);c.lineTo(x+r*0.7,y-r*0.65);c.lineTo(x+r*0.7,y+r);c.lineTo(x-r*0.7,y+r);c.closePath();c.fill();c.stroke();c.beginPath();for(let i=0;i<3;i++){c.moveTo(x-r*0.4,y-r*0.35+i*r*0.4);c.lineTo(x+r*0.4,y-r*0.35+i*r*0.4);}c.stroke();},
+  cards:(c,x,y,r)=>{for(let i=2;i>=0;i--){c.beginPath();c.rect(x-r*0.8+i*r*0.18,y-r*0.7+i*r*0.18,r*1.3,r*1.1);c.fill();c.stroke();}c.beginPath();for(let i=0;i<3;i++){c.moveTo(x-r*0.25,y-r*0.05+i*r*0.25);c.lineTo(x+r*0.55,y-r*0.05+i*r*0.25);}c.stroke();},
+  book:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r*0.6);c.quadraticCurveTo(x-r*0.5,y-r*0.85,x-r,y-r*0.7);c.lineTo(x-r,y+r*0.7);c.quadraticCurveTo(x-r*0.5,y+r*0.55,x,y+r*0.8);c.quadraticCurveTo(x+r*0.5,y+r*0.55,x+r,y+r*0.7);c.lineTo(x+r,y-r*0.7);c.quadraticCurveTo(x+r*0.5,y-r*0.85,x,y-r*0.6);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x,y-r*0.6);c.lineTo(x,y+r*0.8);c.stroke();},
+  pen:(c,x,y,r)=>{c.save();c.translate(x,y);c.rotate(0.78);c.beginPath();c.rect(-r*0.22,-r,r*0.44,r*1.5);c.fill();c.stroke();c.beginPath();c.moveTo(-r*0.22,r*0.5);c.lineTo(0,r);c.lineTo(r*0.22,r*0.5);c.stroke();c.beginPath();c.moveTo(-r*0.22,-r*0.6);c.lineTo(r*0.22,-r*0.6);c.stroke();c.restore();},
+  bulb:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.2,r*0.62,Math.PI*0.78,Math.PI*0.22);c.lineTo(x+r*0.28,y+r*0.62);c.lineTo(x-r*0.28,y+r*0.62);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.26,y+r*0.8);c.lineTo(x+r*0.26,y+r*0.8);c.moveTo(x-r*0.18,y+r*0.97);c.lineTo(x+r*0.18,y+r*0.97);c.stroke();
+    c.beginPath();for(const a of[-2.4,-1.57,-0.74]){c.moveTo(x+Math.cos(a)*r*0.86,y-r*0.2+Math.sin(a)*r*0.86);c.lineTo(x+Math.cos(a)*r*1.08,y-r*0.2+Math.sin(a)*r*1.08);}c.stroke();},
+  target:(c,x,y,r)=>{for(const k of[1,0.64,0.28]){c.beginPath();c.arc(x,y,r*k,0,TAU);if(k!==0.64)c.fill();c.stroke();}c.beginPath();c.moveTo(x,y);c.lineTo(x+r*0.95,y-r*0.95);c.moveTo(x+r*0.95,y-r*0.95);c.lineTo(x+r*0.62,y-r*0.95);c.moveTo(x+r*0.95,y-r*0.95);c.lineTo(x+r*0.95,y-r*0.62);c.stroke();},
+  flag:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.6,y+r);c.lineTo(x-r*0.6,y-r);c.stroke();c.beginPath();c.moveTo(x-r*0.6,y-r);c.quadraticCurveTo(x,y-r*1.2,x+r*0.8,y-r*0.85);c.lineTo(x+r*0.8,y-r*0.05);c.quadraticCurveTo(x,y-r*0.3,x-r*0.6,y-r*0.15);c.closePath();c.fill();c.stroke();},
+  sprout:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y+r);c.quadraticCurveTo(x+r*0.08,y,x,y-r*0.3);c.stroke();c.beginPath();c.moveTo(x,y-r*0.1);c.quadraticCurveTo(x-r*0.9,y-r*0.2,x-r*0.85,y-r*0.95);c.quadraticCurveTo(x-r*0.15,y-r*0.85,x,y-r*0.1);c.fill();c.stroke();
+    c.beginPath();c.moveTo(x+r*0.02,y-r*0.3);c.quadraticCurveTo(x+r*0.85,y-r*0.45,x+r*0.9,y-r*1.0);c.quadraticCurveTo(x+r*0.2,y-r*1.0,x+r*0.02,y-r*0.3);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.7,y+r);c.lineTo(x+r*0.7,y+r);c.stroke();},
+  tree:(c,x,y,r)=>{c.beginPath();c.rect(x-r*0.12,y+r*0.2,r*0.24,r*0.8);c.fill();c.stroke();c.beginPath();c.arc(x,y-r*0.25,r*0.62,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.8,y+r);c.lineTo(x+r*0.8,y+r);c.stroke();},
+  eye:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y);c.quadraticCurveTo(x,y-r*0.95,x+r,y);c.quadraticCurveTo(x,y+r*0.95,x-r,y);c.closePath();c.fill();c.stroke();c.beginPath();c.arc(x,y,r*0.34,0,TAU);c.stroke();c.fillStyle=c.strokeStyle;c.beginPath();c.arc(x,y,r*0.14,0,TAU);c.fill();},
+  phone:(c,x,y,r)=>{c.beginPath();rrect(c,x-r*0.52,y-r,r*1.04,r*2,r*0.16);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.16,y+r*0.75);c.lineTo(x+r*0.16,y+r*0.75);c.stroke();},
+  laptop:(c,x,y,r)=>{c.beginPath();rrect(c,x-r*0.75,y-r*0.75,r*1.5,r*1.05,r*0.08);c.fill();c.stroke();c.beginPath();c.moveTo(x-r,y+r*0.45);c.lineTo(x+r,y+r*0.45);c.lineTo(x+r*0.85,y+r*0.62);c.lineTo(x-r*0.85,y+r*0.62);c.closePath();c.fill();c.stroke();},
+  mail:(c,x,y,r)=>{c.beginPath();c.rect(x-r,y-r*0.65,r*2,r*1.3);c.fill();c.stroke();c.beginPath();c.moveTo(x-r,y-r*0.65);c.lineTo(x,y+r*0.1);c.lineTo(x+r,y-r*0.65);c.stroke();},
+  sensor:(c,x,y,r)=>{c.beginPath();rrect(c,x-r*0.45,y-r*0.3,r*0.9,r*0.9,r*0.12);c.fill();c.stroke();c.beginPath();c.arc(x,y+r*0.15,r*0.16,0,TAU);c.stroke();c.beginPath();for(const k of[0.6,0.95]){c.moveTo(x-r*k*0.8,y-r*0.45-r*k*0.3);c.quadraticCurveTo(x,y-r*0.45-r*k*0.85,x+r*k*0.8,y-r*0.45-r*k*0.3);}c.stroke();},
+  scale:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r*0.8);c.lineTo(x,y+r*0.85);c.moveTo(x-r*0.45,y+r*0.85);c.lineTo(x+r*0.45,y+r*0.85);c.moveTo(x-r*0.9,y-r*0.55);c.lineTo(x+r*0.9,y-r*0.55);c.stroke();
+    for(const sg of[-1,1]){c.beginPath();c.moveTo(x+sg*r*0.9,y-r*0.55);c.lineTo(x+sg*r*0.9-r*0.32,y+r*0.12);c.moveTo(x+sg*r*0.9,y-r*0.55);c.lineTo(x+sg*r*0.9+r*0.32,y+r*0.12);c.stroke();c.beginPath();c.moveTo(x+sg*r*0.9-r*0.4,y+r*0.12);c.quadraticCurveTo(x+sg*r*0.9,y+r*0.45,x+sg*r*0.9+r*0.4,y+r*0.12);c.closePath();c.fill();c.stroke();}},
+  loop:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r*0.75,-0.3,Math.PI*0.85);c.stroke();c.beginPath();c.arc(x,y,r*0.75,Math.PI-0.3,Math.PI*1.85);c.stroke();
+    for(const a of[Math.PI*0.85,Math.PI*1.85]){const px=x+Math.cos(a)*r*0.75,py=y+Math.sin(a)*r*0.75,tg=a+Math.PI/2;c.beginPath();c.moveTo(px+Math.cos(tg-2.4)*r*0.32,py+Math.sin(tg-2.4)*r*0.32);c.lineTo(px,py);c.lineTo(px+Math.cos(tg+2.4)*r*0.32,py+Math.sin(tg+2.4)*r*0.32);c.stroke();}},
+  bolt:(c,x,y,r)=>{c.beginPath();c.moveTo(x+r*0.15,y-r);c.lineTo(x-r*0.55,y+r*0.12);c.lineTo(x-r*0.02,y+r*0.12);c.lineTo(x-r*0.18,y+r);c.lineTo(x+r*0.55,y-r*0.15);c.lineTo(x+r*0.02,y-r*0.15);c.closePath();c.fill();c.stroke();},
+  anchor:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.72,r*0.2,0,TAU);c.stroke();c.beginPath();c.moveTo(x,y-r*0.52);c.lineTo(x,y+r*0.85);c.moveTo(x-r*0.4,y-r*0.2);c.lineTo(x+r*0.4,y-r*0.2);c.moveTo(x-r*0.8,y+r*0.25);c.quadraticCurveTo(x-r*0.7,y+r*0.9,x,y+r*0.85);c.quadraticCurveTo(x+r*0.7,y+r*0.9,x+r*0.8,y+r*0.25);c.stroke();},
+  hat:(c,x,y,r)=>{c.beginPath();c.ellipse(x,y+r*0.45,r,r*0.3,0,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.55,y+r*0.42);c.lineTo(x-r*0.48,y-r*0.55);c.quadraticCurveTo(x,y-r*0.75,x+r*0.48,y-r*0.55);c.lineTo(x+r*0.55,y+r*0.42);c.quadraticCurveTo(x,y+r*0.58,x-r*0.55,y+r*0.42);c.fill();c.stroke();
+    c.beginPath();c.moveTo(x-r*0.52,y+r*0.05);c.quadraticCurveTo(x,y+r*0.2,x+r*0.52,y+r*0.05);c.stroke();},
+  puzzle:(c,x,y,r)=>{const s=r*0.8;c.beginPath();c.moveTo(x-s,y-s);c.lineTo(x-s*0.25,y-s);c.arc(x,y-s,s*0.25,Math.PI,0);c.lineTo(x+s,y-s);c.lineTo(x+s,y-s*0.25);c.arc(x+s,y,s*0.25,-Math.PI/2,Math.PI/2);c.lineTo(x+s,y+s);c.lineTo(x-s,y+s);c.closePath();c.fill();c.stroke();},
+  coin:(c,x,y,r)=>{for(const k of[0.5,0,-0.5]){c.beginPath();c.ellipse(x,y+k*r*0.62,r*0.82,r*0.36,0,0,TAU);c.fill();c.stroke();}},
+  drop:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r);c.bezierCurveTo(x+r*0.3,y-r*0.5,x+r*0.75,y,x+r*0.75,y+r*0.3);c.arc(x,y+r*0.3,r*0.75,0,Math.PI);c.bezierCurveTo(x-r*0.75,y,x-r*0.3,y-r*0.5,x,y-r);c.fill();c.stroke();},
+  hand:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.5,y+r);c.lineTo(x-r*0.5,y+r*0.15);c.quadraticCurveTo(x-r*0.95,y-r*0.2,x-r*0.75,y-r*0.45);c.lineTo(x-r*0.38,y-r*0.1);c.lineTo(x-r*0.38,y-r*0.8);c.quadraticCurveTo(x-r*0.24,y-r*0.98,x-r*0.1,y-r*0.8);
+    c.lineTo(x-r*0.1,y-r*0.95);c.quadraticCurveTo(x+r*0.04,y-r*1.12,x+r*0.18,y-r*0.95);c.lineTo(x+r*0.18,y-r*0.85);c.quadraticCurveTo(x+r*0.32,y-r*1.0,x+r*0.46,y-r*0.82);c.lineTo(x+r*0.46,y-r*0.6);c.quadraticCurveTo(x+r*0.6,y-r*0.72,x+r*0.72,y-r*0.55);c.lineTo(x+r*0.72,y+r*0.2);c.quadraticCurveTo(x+r*0.7,y+r*0.6,x+r*0.45,y+r*0.75);c.lineTo(x+r*0.45,y+r);c.closePath();c.fill();c.stroke();},
+  road:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.35,y-r);c.lineTo(x-r,y+r);c.lineTo(x+r,y+r);c.lineTo(x+r*0.35,y-r);c.closePath();c.fill();c.stroke();c.beginPath();c.setLineDash([r*0.22,r*0.2]);c.moveTo(x,y-r*0.9);c.lineTo(x,y+r*0.9);c.stroke();c.setLineDash([]);},
+  chair:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.45,y-r);c.lineTo(x-r*0.45,y+r);c.moveTo(x-r*0.45,y+r*0.05);c.lineTo(x+r*0.55,y+r*0.05);c.lineTo(x+r*0.55,y+r);c.stroke();c.beginPath();rrect(c,x-r*0.6,y-r*0.1,r*1.25,r*0.22,r*0.08);c.fill();c.stroke();},
+  speech:(c,x,y,r)=>{c.beginPath();c.ellipse(x,y-r*0.12,r,r*0.7,0,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.45,y+r*0.45);c.lineTo(x-r*0.7,y+r*0.98);c.lineTo(x-r*0.05,y+r*0.56);c.fill();c.stroke();}
 };
-// a felt hat, or a knitted cap, over the head's picture: drawn after the person, from the joints PK.person gives back (J.hc, the
-// head's size J.p.head*J.u), and it nods with them. A braid, for a woman, falls behind the near shoulder
-function naq_hat(ctx,P,J){if(!P.qhat||!J||!J.hc)return;const S=PK.S,U=PK.u,hh=J.p.head*J.u,[x,y]=J.hc,r=hh*0.5,lw={lw:U.clamp(hh*0.03,0.8,3.4)};S.begin(ctx,lw);
-  if(P.qcap&&P.qhat==="cap"||P.qhat==="cap")S.fill(ctx,c=>{c.moveTo(x-r*1.02,y-r*0.12);c.bezierCurveTo(x-r*1.0,y-r*1.25,x+r*1.0,y-r*1.25,x+r*1.02,y-r*0.12);c.lineTo(x+r*0.96,y+r*0.2);c.lineTo(x-r*0.96,y+r*0.2);c.closePath();},P.qcap||[178,90,80],{});
-  if(P.qhat==="felt"){const hc=S.tone([96,80,70]),top=y-r*0.62;
-    S.fill(ctx,c=>U.ell(c,x,top+r*0.02,r*1.42,r*0.26),U.dk(hc,0.06),{});
-    S.fill(ctx,c=>{c.moveTo(x-r*0.8,top);c.bezierCurveTo(x-r*0.82,top-r*0.7,x+r*0.82,top-r*0.7,x+r*0.8,top);c.closePath();},hc,{});
-    S.line(ctx,c=>{c.moveTo(x-r*0.78,top-r*0.12);c.quadraticCurveTo(x,top-r*0.04,x+r*0.78,top-r*0.12);},[150,74,70],1.4);}}
-const naq_row=w=>typeof w==="string"?(NAQ_FOLK[w]||PK.CAST[w]):w;
-const naq_person=(ctx,who,x,fl,h,pose,o)=>{const P=naq_row(who),J=PK.person(ctx,P,x,fl,h,pose,o);if(!(o&&o.part==="lower"))naq_hat(ctx,P,J);return J;};
-const naq_walk=(ctx,who,t,w,o)=>{const P=naq_row(who),J=PK.walk(ctx,P,t,w,o);naq_hat(ctx,P,J);return J;};
-// a coil of cord, for a hand to hold, and cord twisted between two hands
-const naq_coil=(c,h)=>{const S=PK.S,U=PK.u,[x,y]=h;S.begin(c,{lw:2});S.fill(c,cc=>U.ell(cc,x+4,y+22,26,16),naq_c("rope"),{});S.fill(c,cc=>U.ell(cc,x+4,y+22,13,7),naq_c("ropeDk"),{w:0.6});};
-// rain over the gorge (a: 0 to 1): short slanted strokes, in the place's grey, falling; wind leans them further
-function naq_rain(ctx,tt,a,wind){if(a<=0.004)return;const U=PK.u,R=U.rnd(11),lean=6+(wind||0)*16;ctx.save();ctx.globalAlpha*=0.55*a;ctx.strokeStyle=U.css([120,130,146]);ctx.lineWidth=2;ctx.lineCap="round";ctx.beginPath();
-  for(let i=0;i<220;i++){const x0=R()*2100-90,sp=520+R()*200,y=((R()*1200+tt*sp)%1200)-60,x=x0+((tt*sp)%1200)*lean/40*0;ctx.moveTo(x,y);ctx.lineTo(x-lean,y+26);}ctx.stroke();ctx.restore();}
+D.ICONS=Object.keys(ICON);
+D.icon=(ctx,kind,cx,cy,r,o)=>{o=o||{};const f=ICON[kind];if(!f)throw new Error("PK.sk.icon: no icon called "+kind);ctx.save();pen(ctx,o.col||"ink",o.w||clamp(r*0.13,2.4,4.4));ctx.fillStyle=css(fillOf(o.fill||"white"));f(ctx,cx,cy,r);ctx.restore();};
 
+/* ---------------------------------------------------------------- the graphic recording's sheet */
+D.paper=(ctx,o)=>{o=Object.assign({},K.SK.paper,o||{});const {x,y,w,h}=o,c=o.col||[240,229,206];ctx.save();ctx.fillStyle="rgba(60,40,40,0.18)";ctx.fillRect(x+8,y+10,w,h);ctx.fillStyle=css(c);ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle=css(dk(c,0.22));ctx.lineWidth=2;ctx.strokeRect(x,y,w,h);ctx.restore();if(o.pins!==false)for(const [px,py] of[[x+24,y+18],[x+w-24,y+18],[x+24,y+h-18],[x+w-24,y+h-18]])D.pin(ctx,px,py);};
+D.drawn=(draw,box)=>({draw:c=>draw(c),box:box||[K.SK.board.x,K.SK.board.y,K.SK.board.x+K.SK.board.w,K.SK.board.y+K.SK.board.h],d:0.1,drawn:true});
+
+/* ---------------------------------------------------------------- a board's and a page's frame */
+// a page's heading on a highlighter's band: (x, y) its baseline's start; o.size (84), o.col ("blue"), o.band (its colour: o.col)
+D.title=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||84,col=o.col||"blue",W=K.handW(ctx,s,size,700);D.band(ctx,x-14,y-size*0.66,W+28,size*0.8,o.band||col,o.a==null?0.42:o.a);
+  D.text(ctx,s,x,y,{size,w:700,col});return{w:W,x0:x,x1:x+W};};
+// a graphic recording's frame: the pinned sheet, its heading on a ribbon at the top left, where the idea comes from stamped at the
+// top right, and a line in capitals under the ribbon
+D.head=(ctx,title,o)=>{o=o||{};D.paper(ctx,o.paper);const x=o.x||110,r=D.ribbon(ctx,title,x,o.y||42,{col:o.col||"blue",size:o.size||48});
+  if(o.ref)D.stamp(ctx,o.ref,o.rx||1060,o.ry||98,{col:o.rcol||"blue",size:o.rsize||30,rot:o.rot});
+  if(o.sub){const [s,col]=Array.isArray(o.sub)?o.sub:[o.sub,"mut"];D.caps(ctx,s,x,r.y1+50,{col,size:30});}
+  return r;};
+// a part of a board or a page: a box, a heading in capitals at its top, and body(ctx, x, y, w, h) for what is inside, under the heading
+D.panel=(ctx,x,y,w,h,o,body)=>{o=o||{};D.box(ctx,x,y,w,h,{fill:o.fill==null?"paper":o.fill,col:o.line||"ink",w:3,r:o.r==null?16:o.r,dash:o.dash});
+  let top=y+14;if(o.title){D.caps(ctx,o.title,x+w/2,y+46,{align:"center",col:o.col||"ink",size:o.size||30});top=y+60;}
+  if(body)body(ctx,x,top,w,y+h-top);return{x,y,w,h};};
+
+/* ---------------------------------------------------------------- pieces */
+D.card=(ctx,x,y,o)=>{o=o||{};const size=o.size||36,pad=o.pad==null?18:o.pad,rows=(o.lines||[]).map(rowOf),ir=o.icon?(o.ir||size*0.62):0,
+    lh=(o.lh||1.22),hs=rows.map(([,ro])=>(ro.size||size)*lh),th=hs.reduce((a,b)=>a+b,0)-(rows.length?((rows[rows.length-1][1].size||size)*(lh-1)):0),
+    tw=widthOf(ctx,o.lines||[],{size}),ix=o.icon?ir*2+pad*0.7:0,w=o.w||Math.ceil(tw+ix+pad*2),h=o.h||Math.ceil(Math.max(th+pad*1.5,ir*2+pad*1.2));
+  D.box(ctx,x,y,w,h,{fill:o.fill==null?"paper":o.fill,col:o.col||"ink",w:o.lw||3,r:o.r==null?14:o.r,dash:o.dash});
+  if(o.icon)D.icon(ctx,o.icon,x+pad+ir,y+h/2,ir,{fill:o.ifill||o.fill||"white"});
+  let yy=y+(h-th)/2;rows.forEach(([s,ro],i)=>{const sz=ro.size||size;yy+=sz*0.8;D.text(ctx,s,x+pad+ix,yy,Object.assign({size,col:o.ink},ro));yy+=sz*(lh-0.8);});return{x,y,w,h};};
+D.list=(ctx,x,y,items,o)=>{o=o||{};const size=o.size||38,gap=o.gap||size*1.6,out=[];
+  items.forEach((it,i)=>{const base=y+i*gap,mid=base-size*0.3,r=size*0.42,c=it.col||o.col||"blue";let tx=x;
+    if(it.icon){D.icon(ctx,it.icon,x+r*1.2,mid,r*1.2,{fill:it.ifill||c});tx=x+r*2.4+size*0.45;}
+    else if(it.num!=null){D.disc(ctx,x+r,mid,r,{fill:fillOf(c),col:"ink",w:3});D.text(ctx,String(it.num),x+r,mid+size*0.26,{size:size*0.72,w:700,align:"center"});tx=x+r*2+size*0.45;}
+    else if(it.dot){D.disc(ctx,x+r*0.5,mid,r*0.42,{fill:c,col:c,w:2});tx=x+r+size*0.35;}
+    const m=D.text(ctx,it.s,tx,base,Object.assign({size,col:it.ink},it.o||{}));let x1=m.x1;
+    if(it.sub){const sx=o.subX!=null?x+o.subX:m.x1+size*0.45,ms=D.text(ctx,it.sub,sx,base,Object.assign({size:o.subSize||size*0.84,col:"mut"},it.subO||{}));x1=ms.x1;}
+    out.push({x,y:base-size,w:x1-x,h:size*1.3,base,mark:[x1+size*0.7,mid]});});return out;};
+D.faces=(ctx,x,y,who,o)=>{o=o||{};const r=o.r||30,gap=o.gap||r*3.1,out=[];who.forEach((k,i)=>{const cx=x+i*gap;D.face(ctx,k,cx,y,r,o.ring?{ring:o.ring}:{});
+    const nm=o.names===true?(typeof k==="string"&&K.CAST[k]?K.CAST[k].name.split(" ")[0]:""):(o.names||[])[i];if(nm)D.text(ctx,nm,cx,y+r*1.55+(o.size||30)*0.9,{size:o.size||30,w:700,align:"center",col:o.ncol});out.push({cx,cy:y});});return out;};
+D.flow=(ctx,x,y,steps,o)=>{o=o||{};const size=o.size||34,gap=o.gap||60,out=[];let cx=x,cy=y;
+  steps.forEach((st,i)=>{const s=typeof st==="string"?{s:st}:st,b=D.card(ctx,cx,cy,{icon:s.icon,lines:[[s.s,Object.assign({w:s.w||700},s.o||{})]].concat(s.sub?[[s.sub,{size:size*0.86,col:"mut"}]]:[]),size,fill:s.fill||"paper",col:s.col||"ink",h:o.h,w:s.bw||o.bw,ifill:s.ifill});out.push(b);
+    if(i<steps.length-1){if(o.down){D.arrow(ctx,[b.x+b.w/2,b.y+b.h+8],[b.x+b.w/2,b.y+b.h+gap-8],{col:o.acol||"ink",w:3.5,head:14});cy=b.y+b.h+gap;}
+      else{D.arrow(ctx,[b.x+b.w+8,b.y+b.h/2],[b.x+b.w+gap-8,b.y+b.h/2],{col:o.acol||"ink",w:3.5,head:14});cx=b.x+b.w+gap;}}});return out;};
+
+/* ---------------------------------------------------------------- charts */
+D.bars=(ctx,x,y,w,h,bars,o)=>{o=o||{};const n=bars.length,max=o.max||Math.max(...bars.map(b=>b.v)),slot=w/n,bw=o.bw||slot*0.56,size=o.size||30,base=y+h;
+  bars.forEach((b,i)=>{const bh=Math.max(4,h*b.v/max),bx=x+slot*(i+0.5)-bw/2;D.box(ctx,bx,base-bh,bw,bh,{fill:fillOf(b.fill||b.col||"blue"),col:"ink",w:3,r:4});
+    if(b.top)D.text(ctx,b.top,bx+bw/2,base-bh-size*0.4,{size:b.topSize||size,w:700,align:"center",col:b.ink||b.col||"ink"});
+    if(b.label)D.text(ctx,b.label,bx+bw/2,base+size*1.1,{size,align:"center",col:b.lcol||"mut"});});
+  D.line(ctx,[[x-10,base],[x+w+10,base]],{col:"ink",w:3.5,seed:7});return{x,y,w,h};};
+D.trend=(ctx,x,y,w,h,pts,o)=>{o=o||{};const P=pts.map(([u,v])=>[x+u*w,y+h-v*h]);D.line(ctx,[[x,y-6],[x,y+h],[x+w+12,y+h]],{col:"ink",w:3,seed:3});
+  D.line(ctx,P,{col:o.col||"blue",w:o.w||5,seed:11});if(o.dots!==false)for(const q of[P[0],P[P.length-1]])D.disc(ctx,q[0],q[1],8,{fill:fillOf(o.col||"blue"),col:"ink",w:2.5});
+  for(const [u,s] of o.labels||[])D.text(ctx,s,x+u*w,y+h+(o.size||30)*1.1,{size:o.size||30,align:"center",col:"mut"});return{x,y,w,h};};
+D.donut=(ctx,cx,cy,r,parts,o)=>{o=o||{};const tot=parts.reduce((a,p)=>a+p.v,0);let a=-Math.PI/2;ctx.save();pen(ctx,"ink",3);
+  for(const p of parts){const b=a+TAU*p.v/tot;ctx.beginPath();ctx.arc(cx,cy,r,a,b);ctx.arc(cx,cy,r*0.56,b,a,true);ctx.closePath();ctx.fillStyle=css(fillOf(p.col||"blue"));if(p.strong)ctx.fillStyle=css(colOf(p.col));ctx.fill();ctx.stroke();a=b;}ctx.restore();
+  if(o.label)D.text(ctx,o.label,cx,cy+(o.size||40)*0.34,{size:o.size||40,w:700,align:"center",col:o.lcol});return{x:cx-r,y:cy-r,w:r*2,h:r*2};};
+D.cycle=(ctx,cx,cy,r,steps,o)=>{o=o||{};const n=steps.length,size=o.size||32,a0=o.a0==null?-Math.PI/2:o.a0,pos=steps.map((s,i)=>{const a=a0+TAU*i/n;return[cx+Math.cos(a)*r,cy+Math.sin(a)*r*(o.flat||1),a];}),
+    ws=steps.map(st=>{const [s]=rowOf(st);return K.handW(ctx,s,size,700)+size*0.9;});
+  // arrows along the circle, between each pill and the next
+  for(let i=0;i<n;i++){const [x0,y0,a]=pos[i],[x1,y1,b0]=pos[(i+1)%n],b=b0<=a?b0+TAU:b0,m0=a+(b-a)*0.3,m1=a+(b-a)*0.7,rr=r*1.02;
+    D.arrow(ctx,[cx+Math.cos(m0)*rr,cy+Math.sin(m0)*rr*(o.flat||1)],[cx+Math.cos(m1)*rr,cy+Math.sin(m1)*rr*(o.flat||1)],{col:o.acol||"ink",w:3.5,head:14,bow:-(rr*(o.flat||1))*0.12});}
+  steps.forEach((st,i)=>{const [s,ro]=rowOf(st),[px,py]=pos[i],w=ws[i],h=size*1.5;D.box(ctx,px-w/2,py-h/2,w,h,{fill:fillOf(ro.col||o.col||"blue"),col:"ink",w:3,r:h/2});D.text(ctx,s,px,py+size*0.33,{size,w:700,align:"center"});});
+  if(o.mid)D.text(ctx,o.mid,cx,cy+size*0.35,{size:o.midSize||size,w:700,align:"center",col:o.midCol||"mut"});return pos;};
+D.stairs=(ctx,x,y,w,h,steps,o)=>{o=o||{};const n=steps.length,sw=w/n,size=o.size||30;ctx.save();
+  steps.forEach((st,i)=>{const [s,ro]=rowOf(st),sh=h*(i+1)/n,bx=x+i*sw;D.box(ctx,bx,y+h-sh,sw,sh,{fill:fillOf(ro.col||o.col||"blue"),col:"ink",w:3,r:3});D.text(ctx,s,bx+sw/2,y+h-sh-size*0.45,{size,w:700,align:"center"});});
+  if(o.flag)D.icon(ctx,"flag",x+w-sw*0.3,y-size*2.2,size*0.8,{fill:o.flag});ctx.restore();return{x,y,w,h};};
+D.matrix=(ctx,x,y,w,h,o)=>{o=o||{};const size=o.size||30,q=o.q||[];
+  if(o.on!=null){const i=o.on,qx=x+(i%2)*w/2,qy=y+(i>>1)*h/2;D.box(ctx,qx+6,qy+6,w/2-12,h/2-12,{fill:o.col||"green",col:false,r:10});}
+  D.arrow(ctx,[x,y+h],[x,y-8],{col:"ink",w:3.5,head:14});D.arrow(ctx,[x,y+h],[x+w+8,y+h],{col:"ink",w:3.5,head:14});
+  D.line(ctx,[[x+w/2,y+6],[x+w/2,y+h-6]],{col:"mut",w:2.5,dash:[8,8],seed:5});D.line(ctx,[[x+6,y+h/2],[x+w-6,y+h/2]],{col:"mut",w:2.5,dash:[8,8],seed:6});
+  // each corner's words, wrapped to the corner with room on each side
+  q.forEach((r,i)=>{const [s,ro]=rowOf(r),sz=ro.size||size,L=D.wrap(ctx,s,w/2-40,{size:sz,w:700}),lh=sz*1.12,cx=x+(i%2+0.5)*w/2,cy=y+((i>>1)+0.5)*h/2;
+    L.forEach((l,j)=>D.text(ctx,l,cx,cy+(j-(L.length-1)/2)*lh+sz*0.3,Object.assign({size:sz,w:700,align:"center"},ro)));});
+  if(o.xs)D.text(ctx,o.xs,x+w,y+h+size*1.15,{size,align:"right",col:"mut"});if(o.ys)D.text(ctx,o.ys,x+12,y-size*0.5,{size,col:"mut"});return{x,y,w,h};};
+D.pyramid=(ctx,cx,y,w,h,layers,o)=>{o=o||{};const n=layers.length,size=o.size||32,lh=h/n,at=yy=>w*(yy-y)/h;
+  layers.forEach((l,i)=>{const [s,ro]=rowOf(l),t0=i/n,t1=(i+1)/n,y0=y+i*lh,y1=y0+lh;ctx.save();ctx.beginPath();ctx.moveTo(cx-w/2*t0,y0);ctx.lineTo(cx+w/2*t0,y0);ctx.lineTo(cx+w/2*t1,y1);ctx.lineTo(cx-w/2*t1,y1);ctx.closePath();
+    ctx.fillStyle=css(fillOf(ro.col||o.col||"blue"));ctx.fill();pen(ctx,"ink",3);ctx.stroke();ctx.restore();if(!s)return;
+    // the words go in their layer where it is wide enough at their top; else beside it, with a line to it
+    const W=K.handW(ctx,s,size,700),base=y0+lh*(i===0?0.78:0.5)+size*0.34;
+    if(W+24<=at(base-size*0.72))D.text(ctx,s,cx,base,{size,w:700,align:"center"});
+    else{const ym=y0+lh*0.62,ex=cx+at(ym)/2;D.line(ctx,[[ex+6,ym],[ex+48,ym]],{col:"ink",w:2.5,seed:i+3});D.text(ctx,s,ex+58,ym+size*0.32,{size,w:700});}});return{x:cx-w/2,y,w,h};};
+D.timeline=(ctx,x,y,w,marks,o)=>{o=o||{};const size=o.size||30;D.arrow(ctx,[x,y],[x+w,y],{col:"ink",w:3.5,head:16});
+  for(const m of marks){const px=x+m.u*w,up=m.up!=null?m.up:true;D.disc(ctx,px,y,9,{fill:fillOf(m.col||"blue"),col:"ink",w:2.5});
+    if(m.s)D.text(ctx,m.s,px,up?y-size*0.75:y+size*1.35,{size,w:700,align:"center",col:m.ink});if(m.sub)D.text(ctx,m.sub,px,up?y-size*1.95:y+size*2.45,{size:size*0.9,align:"center",col:"mut"});}return{x,y,w};};
+D.scale=(ctx,cx,cy,w,o)=>{o=o||{};const t=clamp(o.tilt||0,-1,1)*0.2,size=o.size||30,hw=w/2,lx=cx-Math.cos(t)*hw,ly=cy+Math.sin(t)*hw,rx=cx+Math.cos(t)*hw,ry=cy-Math.sin(t)*hw;
+  D.line(ctx,[[cx,cy-14],[cx,cy+w*0.42]],{col:"ink",w:4,seed:2});D.line(ctx,[[cx-w*0.16,cy+w*0.42],[cx+w*0.16,cy+w*0.42]],{col:"ink",w:4,seed:3});D.line(ctx,[[lx,ly],[rx,ry]],{col:"ink",w:4.5,seed:4});D.disc(ctx,cx,cy,8,{fill:fillOf("amber"),col:"ink",w:2.5});
+  for(const [px,py,s,c] of[[lx,ly,o.l,o.lcol||"amber"],[rx,ry,o.r,o.rcol||"green"]]){const pw=Math.max(w*0.36,(s?K.handW(ctx,s,size,700):0)+size*0.8),ph=size*1.45;
+    D.line(ctx,[[px,py],[px-pw*0.4,py+w*0.18]],{col:"ink",w:2.5,seed:5});D.line(ctx,[[px,py],[px+pw*0.4,py+w*0.18]],{col:"ink",w:2.5,seed:6});
+    D.box(ctx,px-pw/2,py+w*0.18,pw,ph,{fill:fillOf(c),col:"ink",w:3,r:ph/2});if(s)D.text(ctx,s,px,py+w*0.18+ph*0.5+size*0.33,{size,w:700,align:"center"});}return{x:cx-w/2,y:cy,w};};
+D.venn=(ctx,cx,cy,r,o)=>{o=o||{};const size=o.size||32,d=r*0.62;ctx.save();ctx.globalAlpha*=0.85;for(const [x0,c] of[[cx-d,o.lcol||"blue"],[cx+d,o.rcol||"green"]]){ctx.fillStyle=css(tintOf(c));ctx.beginPath();ctx.arc(x0,cy,r,0,TAU);ctx.fill();}ctx.restore();
+  for(const x0 of[cx-d,cx+d])D.disc(ctx,x0,cy,r,{col:"ink",w:3.5});
+  // each side's words in the middle of what is only its own, the shared words where the two overlap: smaller to fit, never under
+  // 28 px; words that don't fit even so go over their round (a side's) or under the overlap (the shared words)
+  const fit=(s,room,sz)=>{const W=K.handW(ctx,s,sz,700),k=Math.min(1,room/Math.max(1,W));return sz*k>=28?sz*k:0;};
+  for(const [s,sg] of[[o.l,-1],[o.r,1]])if(s){const f=fit(s,2*d-24,size);if(f)D.text(ctx,s,cx+sg*r,cy+f*0.3,{size:f,w:700,align:"center"});else D.text(ctx,s,cx+sg*d,cy-r-size*0.45,{size,w:700,align:"center"});}
+  if(o.mid){const ms=o.midSize||size*0.9,f=fit(o.mid,2*(r-d)-14,ms),col=o.midCol||"ink";if(f)D.text(ctx,o.mid,cx,cy+f*0.3,{size:f,w:700,align:"center",col});
+    else{D.line(ctx,[[cx,cy+r*0.55],[cx,cy+r+12]],{col:"ink",w:2.5,seed:9});D.text(ctx,o.mid,cx,cy+r+12+ms*1.0,{size:ms,w:700,align:"center",col});}}
+  return{x:cx-d-r,y:cy-r,w:2*(d+r),h:2*r};};
+D.dots=(ctx,x,y,cols,rows,o)=>{o=o||{};const g=o.gap||22,r=o.r||7,on=o.on||0;let k=0;ctx.save();pen(ctx,"ink",1.8);
+  for(let j=0;j<rows;j++)for(let i=0;i<cols;i++,k++){ctx.beginPath();ctx.arc(x+i*g,y+j*g,r,0,TAU);ctx.fillStyle=css(k<on?fillOf(o.col||"blue"):tintOf(o.off||"white"));ctx.fill();ctx.stroke();}ctx.restore();return{x,y,w:(cols-1)*g,h:(rows-1)*g};};
+D.big=(ctx,s,cx,cy,o)=>{o=o||{};const size=o.size||64,W=K.handW(ctx,s,size,700),r=o.r||Math.max(size*0.95,W*0.62+size*0.3);ctx.save();ctx.beginPath();
+  for(let i=0;i<=24;i++){const a=i*TAU/24,rr=r*(i%2?0.94:1.06);i?ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);}ctx.closePath();
+  ctx.fillStyle=css(fillOf(o.fill||o.col||"amber"));ctx.fill();pen(ctx,"ink",3);ctx.stroke();ctx.restore();D.text(ctx,s,cx,cy+size*0.34,{size,w:700,align:"center",col:o.col||"ink"});return{x:cx-r,y:cy-r,w:r*2,h:r*2};};
+})(PK);
+
+/* ===== Above Quehue: the grass the bridge is made of, cut on the high plain =====
+   The film's first two lines leave the bridge the series' other films follow: "One blade of grass is like another, and a person
+   isn't like anyone." The author asked each film of the series for a view of the story of its own (18 November 2026), so this one
+   doesn't show the bridge close: it shows where the bridge begins, the grass. The bridge is woven from q'oya (Festuca dolichophylla),
+   a grass of the high, wet puna, of the same family as ichu; people go for it alone, as a family or in groups, and further each year,
+   as it grows scarcer; once cut, it is tied in big bundles and carried home on their backs, to dry in the sun (the Ministry of
+   Culture's study, 2015, page 177). Women cut it with sickles (AFP, 2023). So: three people at work, each their own way, an older
+   woman kneeling at a tussock with her sickle, a younger one crouched at hers, a man tying a bundle; and further off someone carries
+   one away, towards the gorge, where the bridge is a thin line across it, far off (the drawing puts it in sight of the grass, which is
+   cut further up).
+
+   Drawn in the series' world and ink line (People before roles' gorge, Wellbeing is in the work's yard): in metres, the people kit's
+   people at their true size where they are. Away from the gorge, x is simply to the right and z ahead of the camera, which stands at
+   the origin, at a person's eye height. What doesn't move is painted once, as a place (AG_PLACES.naPuna): the sky, the peaks, the
+   folds of the plain with the gorge far off, the ground and its tussocks, the bundles already cut. The tussocks at work, the people
+   and what they hold are drawn over it every frame, the furthest first (nap_scene), so the grass a hand takes stays sharp when the
+   camera comes close. Nobody drawn is a likeness of anyone; the clothes are plain colours, no pattern invented and none copied.
+   Copied from the series' drawing under this film's prefix, nap_. */
+const NAP_PAL={straw:[220,196,136],straw2:[204,178,118],straw3:[232,212,160],ichu:[186,156,96],qoya:[196,176,104],qoya2:[160,150,84],qoyaG:[150,156,92],
+  rock3:[86,82,90],peak:[170,176,198],snow:[246,248,250],stone:[198,190,176],rope:[214,186,110],ropeDk:[150,124,70],wet:[134,150,112],water:[150,184,196],
+  blade:[198,204,210],bladeDk:[120,126,136],wood:[132,96,68]};
+const nap_c=n=>PK.S.tone(NAP_PAL[n]);
+
+/* ---------------------------------------------------------------- a camera, and drawing through it (the series' own) */
+function nap_camera(c){if(c.P)return c;c=Object.assign({},c);const a=c.yaw*Math.PI/180;c.ca=Math.cos(a);c.sa=Math.sin(a);c.N=0.35;
+  c.cs=(X,Y,Z)=>{const dx=X-c.x,dz=Z-c.z;return[dx*c.ca-dz*c.sa,Y-c.y,dx*c.sa+dz*c.ca];};
+  c.P=(X,Y,Z)=>{const q=c.cs(X,Y,Z);return[960+c.f*q[0]/q[2],c.hor-c.f*q[1]/q[2],q[2]];};
+  c.d=(X,Z)=>(X-c.x)*c.sa+(Z-c.z)*c.ca;
+  c.h=(X,Z)=>1.62*c.f/c.d(X,Z);
+  return c;}
+function nap_clip(c,pts){const q=pts.map(p=>c.cs(p[0],p[1],p[2])),out=[];
+  for(let i=0;i<q.length;i++){const a=q[i],b=q[(i+1)%q.length],ia=a[2]>=c.N,ib=b[2]>=c.N;if(ia)out.push(a);
+    if(ia!==ib){const t=(c.N-a[2])/(b[2]-a[2]);out.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,c.N]);}}
+  return out.map(p=>[960+c.f*p[0]/p[2],c.hor-c.f*p[1]/p[2]]);}
+const nap_path=(ctx,p)=>{ctx.beginPath();p.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();};
+const nap_fog=(c,d)=>PK.u.mix(c,[214,214,206],PK.u.clamp((d-40)/420,0,0.55));
+const nap_ink=(cc,dm,k)=>PK.u.mix(PK.S.ink,cc,PK.u.clamp(dm/(k||260),0,0.6));
+const nap_lw=(c,dm,k,a,b)=>PK.u.clamp(c.f*(k||0.02)/Math.max(dm,0.5),a||0.8,b||3.2);
+
+// the camera: on the plain, at a person's eye height, looking along it towards the gorge
+const NAP_CAM=nap_camera({x:0,y:1.5,z:0,yaw:0,f:1040,hor:392});
+// the gorge, far off between two folds of the plain: where its notch is on the picture, and the bridge across it
+const NAP_GORGE={x:1330,y:392,w:170};
+
+/* ---------------------------------------------------------------- the sky, the peaks under snow, the folds of the plain and the gorge
+   far off in one of them, with the bridge a thin line across it: painted from the horizon, as the series' sky is */
+function nap_sky(ctx,c){const U=PK.u,S=PK.S,hor=c.hor,sk=ctx.createLinearGradient(0,0,0,hor+40);
+  sk.addColorStop(0,U.css(PK.col("skyTop")));sk.addColorStop(1,U.css(PK.col("skyLow")));ctx.fillStyle=sk;ctx.fillRect(0,0,1920,1080);
+  S.begin(ctx,{lw:1.5,far:0.8});PK.cloud(ctx,330,120,1.0);PK.cloud(ctx,1180,84,0.8);PK.cloud(ctx,1720,150,0.7);
+  // the peaks, far off, with snow
+  const base=hor+6,pk=[[300,0.8],[520,1.25],[700,1.0],[860,1.6],[1010,1.3]],ph=150,pts=[[120,base,1]];
+  S.begin(ctx,{lw:1.4,far:0.75});pk.forEach(([x,k])=>pts.push([x,base-ph*k]));pts.push([1180,base,1]);
+  S.poly(ctx,pts.map(p=>[p[0],p[1],1]),nap_c("peak"),{exact:true,flat:true});
+  for(const [x,k] of pk)if(k>1.2){const y=base-ph*k,w=ph*0.3;
+    S.poly(ctx,[[x-w,y+w*0.62,1],[x,y,1],[x+w,y+w*0.62,1],[x+w*0.4,y+w*0.5,1],[x,y+w*0.66,1],[x-w*0.45,y+w*0.48,1]],nap_c("snow"),{exact:true,w:0.5,flat:true});}
+  // the folds of the plain: long, low, the far ones paler
+  S.begin(ctx,{lw:1.6,far:0.6});
+  S.poly(ctx,[[-40,hor+40,1],[-40,hor-60],[240,hor-92],[520,hor-50],[760,hor-14],[900,hor+40,1]],nap_fog(nap_c("straw3"),300),{exact:true,ten:0.6});
+  const G=NAP_GORGE;
+  S.poly(ctx,[[760,hor+40,1],[930,hor-30],[1110,hor-58],[G.x-G.w*0.62,hor-40],[G.x-G.w*0.5,hor+40,1]],nap_fog(nap_c("straw3"),300),{exact:true,ten:0.6});
+  S.poly(ctx,[[G.x+G.w*0.5,hor+40,1],[G.x+G.w*0.62,hor-46],[1600,hor-92],[1840,hor-110],[1960,hor-96],[1960,hor+40,1]],nap_fog(nap_c("straw3"),300),{exact:true,ten:0.6});
+  nap_notch(ctx,c);}
+// the gorge far off: its far wall in shadow between the two folds, and the bridge across it, from a stone base on each side
+function nap_notch(ctx,c){const U=PK.u,S=PK.S,{x,y,w}=NAP_GORGE,hz=c=>nap_fog(c,330);
+  S.begin(ctx,{lw:1.4,far:0.45});
+  S.poly(ctx,[[x-w*0.5,y-26,1],[x-w*0.18,y+30,1],[x+w*0.16,y+30,1],[x+w*0.5,y-30,1],[x+w*0.5,y+30,1],[x-w*0.5,y+30,1]],hz(nap_c("rock3")),{exact:true});
+  // the two banks' lips, in the plain's straw, and the bridge: two handrails and the floor, sagging, gold
+  S.poly(ctx,[[x-w*0.62,y-30,1],[x-w*0.5,y-26,1],[x-w*0.3,y+4,1],[x-w*0.62,y+8,1]],hz(nap_c("straw2")),{exact:true});
+  S.poly(ctx,[[x+w*0.62,y-34,1],[x+w*0.5,y-30,1],[x+w*0.32,y+4,1],[x+w*0.62,y+8,1]],hz(nap_c("straw2")),{exact:true});
+  const a=[x-w*0.46,y-22],b=[x+w*0.46,y-26],sag=14,rope=U.css(hz(nap_c("rope"))),dk=U.css(U.dk(hz(nap_c("rope")),0.25));
+  ctx.save();ctx.lineCap="round";
+  for(const [dy,col,lw] of[[-9,dk,1.6],[0,rope,2.6],[-9,rope,1.1]]){ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(a[0],a[1]+dy);ctx.quadraticCurveTo((a[0]+b[0])/2,(a[1]+b[1])/2+sag*2+dy,b[0],b[1]+dy);ctx.stroke();}
+  ctx.strokeStyle=dk;ctx.lineWidth=0.9;ctx.beginPath();for(let i=1;i<12;i++){const u=i/12,px=U.lerp(a[0],b[0],u),py=U.lerp(a[1],b[1],u)+sag*4*u*(1-u);ctx.moveTo(px,py-9+sag*0);ctx.lineTo(px,py);}ctx.stroke();
+  ctx.restore();
+  S.begin(ctx,{lw:1.2,far:0.4});for(const [bx,by] of[[a[0]-4,a[1]],[b[0]+4,b[1]]])S.poly(ctx,[[bx-6,by+4,1],[bx-6,by-6,1],[bx+6,by-6,1],[bx+6,by+4,1]],hz(nap_c("stone")),{exact:true});}
+
+/* ---------------------------------------------------------------- the ground: the plain from the horizon to our feet, a wet hollow where
+   the q'oya grows thickest, and a path worn towards the gorge; then tussocks on a grid round the camera, none where people work */
+const NAP_BARE=[[[-3.6,3.2],[0.4,3.2],[0.4,6.2],[-3.6,6.2]],[[1.0,6.6],[3.8,6.6],[3.8,9.0],[1.0,9.0]],[[-5.8,8.6],[-2.4,8.6],[-2.4,11.2],[-5.8,11.2]]];
+const NAP_WET={pts:(()=>{const p=[],U=PK.u;for(let i=0;i<22;i++){const a=i/22*Math.PI*2,k=0.86+0.22*U.hash(i*13+5,5);p.push([-9+Math.cos(a)*16*k,30+Math.sin(a)*7*k]);}return p;})()};
+// the worn path: its middle at Z, to test that no tussock grows on it
+const NAP_PATH=[[8.9,8],[12.1,16],[11.1,26],[14.1,45],[36.1,120]];
+const nap_onRoad=(X,Z)=>{if(Z<6)return false;let i=1;while(i<NAP_PATH.length-1&&NAP_PATH[i][1]<Z)i++;const [a,b]=[NAP_PATH[i-1],NAP_PATH[i]],k=PK.u.clamp((Z-a[1])/(b[1]-a[1]),0,1);return Math.abs(X-PK.u.lerp(a[0],b[0],k))<1.1;};
+const nap_inPoly=(x,z,p)=>{let a=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const [xi,zi]=p[i],[xj,zj]=p[j];if((zi>z)!==(zj>z)&&x<(xj-xi)*(z-zi)/(zj-zi)+xi)a=!a;}return a;};
+function nap_ground(ctx,c){const U=PK.u,hz=c.hor;
+  const gr=ctx.createLinearGradient(0,hz,0,1080);gr.addColorStop(0,U.css(nap_fog(nap_c("straw3"),300)));gr.addColorStop(0.25,U.css(nap_fog(U.mix(nap_c("straw2"),nap_c("straw3"),0.5),60)));
+  gr.addColorStop(1,U.css(nap_c("straw2")));ctx.fillStyle=gr;ctx.fillRect(0,hz+6,1920,1080-hz);
+  // the wet hollow, greener, with standing water in it
+  {const q=nap_clip(c,NAP_WET.pts.map(([x,z])=>[x,0,z]));const cc=nap_fog(nap_c("wet"),30);nap_path(ctx,q);ctx.fillStyle=U.css(cc);ctx.fill();
+    ctx.strokeStyle=U.css(U.mix(cc,nap_c("straw2"),0.5));ctx.lineWidth=2;ctx.stroke();
+    for(const [x0,z0,rx,rz] of[[-12,31,3.2,1.2],[-5,29.5,2.0,0.7],[-15.5,33,1.6,0.6]]){const pts=[];for(let i=0;i<16;i++){const a=i/16*Math.PI*2;pts.push([x0+Math.cos(a)*rx,0.01,z0+Math.sin(a)*rz]);}
+      const w=nap_clip(c,pts);nap_path(ctx,w);ctx.fillStyle=U.css(nap_fog(nap_c("water"),30));ctx.fill();ctx.strokeStyle=U.css(nap_ink(nap_c("water"),40,120));ctx.lineWidth=1.4;ctx.stroke();}}
+  // the path towards the gorge: bare earth, worn by feet, narrowing into the distance
+  {const pts=[[9.4,0,8],[12.6,0,16],[11.6,0,26],[14.6,0,45],[36.6,0,120],[35.6,0,120],[13.6,0,45],[10.6,0,26],[11.6,0,16],[8.4,0,8]],q=nap_clip(c,pts);nap_path(ctx,q);ctx.fillStyle=U.css(nap_fog([200,176,130],60));ctx.fill();}}
+// the tussocks: on a grid round the camera, none where people work nor on the path. Those within NAP_NEAR m are drawn every frame,
+// with the people, the furthest first, and sway in the wind; the rest are painted with the place
+const NAP_NEAR=7;
+function nap_grid(c,d0,d1){const U=PK.u,out=[];
+  for(const [st,R,salt] of[[0.62,NAP_NEAR+1,11],[1.5,60,0]]){const cx=Math.round(c.x/st),cz=Math.round(c.z/st),n=Math.round(R/st);
+    for(let i=-n;i<=n;i++)for(let j=-n;j<=n;j++){const gx=cx+i,gz=cz+j,hv=U.hash(gx*7919+gz*104729+salt,3),wet=salt?false:null;
+      const X=(gx+U.hash(gx+salt,gz*3+1))*st,Z=(gz+U.hash(gz+salt,gx*5+2))*st,dm=c.d(X,Z);
+      if(st<1?(dm>=NAP_NEAR+0.5||hv>0.38):(dm<NAP_NEAR+0.5||hv>0.55))continue;if(dm<d0||dm>=d1)continue;
+      if(NAP_BARE.some(p=>nap_inPoly(X,Z,p)))continue;if(nap_onRoad(X,Z))continue;
+      const w=nap_inPoly(X,Z,NAP_WET.pts),q=c.P(X,0,Z);if(q[0]<-260||q[0]>2180||q[1]<c.hor||q[1]>1500)continue;
+      const s=c.f*(w?0.62:0.52)*(0.8+0.4*U.hash(gx*31+gz*17,7))/dm;if(s<1.2)continue;out.push({X,Z,dm,q,s,hv,wet:w});}}
+  return out;}
+function nap_tufts(c){return nap_grid(c,1.2,1e9).filter(g=>g.dm>=NAP_NEAR&&!nap_clear(c,g)).map(g=>({d:g.dm,draw:ctx=>nap_tuft(ctx,g.q[0],g.q[1],g.s,g.hv,g.dm,g.wet,0)}));}
+let NAP_NEARS=null;
+const nap_nears=c=>NAP_NEARS||(NAP_NEARS=nap_grid(c,1.2,NAP_NEAR).filter(g=>!nap_clear(c,g)));
+// a tussock of q'oya at (x, y), s px tall about: a fan of long blades from one base, the outer ones arching over; wind leans them.
+// Near, it is a mound of blades: filled, in the ink, with the blades drawn over it and the longest arching out of it
+function nap_tuft(ctx,x,y,s,hv,dm,wet,wind){const U=PK.u,cc=nap_fog(U.mix(wet?nap_c("qoyaG"):nap_c("qoya"),nap_c("straw2"),hv*0.6),dm),w=wind||0,H=(k,n)=>U.hash(k*13+n,Math.round(hv*97)+3);
+  if(s>40){const cx=x,cy=y-s*0.12,N=46,R=th=>s*(1.0-0.3*Math.pow(Math.abs(th)/1.75,2)),pts=[];
+    // the clump's outline: a dome of fine points, wider than it is tall, leaning with the wind
+    for(let i=0;i<=N;i++){const th=-1.75+3.5*(i+(i%2?0.5*(H(i,1)-0.5):0))/N,r=R(th)*(i%2?0.78+0.14*H(i,3):0.94+0.12*H(i,2)),lean=w*(1-Math.abs(th)/1.75)*s*0.9;
+      pts.push([cx+Math.sin(th)*r*0.78+lean,cy-Math.cos(th)*r]);}
+    ctx.beginPath();ctx.moveTo(x-s*0.14,y);ctx.quadraticCurveTo(x-s*0.5,y-s*0.04,pts[0][0],pts[0][1]);for(let i=1;i<=N;i++)ctx.lineTo(pts[i][0],pts[i][1]);
+    ctx.quadraticCurveTo(x+s*0.5,y-s*0.04,x+s*0.14,y);ctx.closePath();ctx.fillStyle=U.css(U.mix(cc,nap_c("qoya2"),0.2));ctx.fill();
+    ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=Math.max(1.6,s*0.01);ctx.lineJoin="round";ctx.stroke();
+    // the blades inside it, from the base up to its points, in a darker straw, and a few lighter ones catching the sun
+    ctx.lineCap="round";ctx.beginPath();for(let k=0;k<16;k++){const i=1+2*Math.floor(H(k,4)*(N/2-1)),[tx,ty]=pts[i],f=(tx-x)/s;
+      ctx.moveTo(x+f*s*0.08,y);ctx.quadraticCurveTo(x+f*s*0.2,y-s*0.6,U.lerp(x,tx,0.92),U.lerp(y,ty,0.92));}
+    ctx.strokeStyle=U.css(U.dk(cc,0.22));ctx.lineWidth=Math.max(0.8,s*0.006);ctx.stroke();
+    ctx.beginPath();for(let k=0;k<8;k++){const i=2*Math.floor(H(k,6)*(N/2)),[tx,ty]=pts[i],f=(tx-x)/s;ctx.moveTo(x+f*s*0.05,y-s*0.06);ctx.quadraticCurveTo(x+f*s*0.18,y-s*0.55,U.lerp(x,tx,0.8),U.lerp(y,ty,0.8));}
+    ctx.strokeStyle=U.css(U.lt(cc,0.28));ctx.lineWidth=Math.max(0.8,s*0.007);ctx.stroke();
+    // the longest blades, arching out over its sides and down
+    ctx.beginPath();for(const [side,k] of[[-1,0],[-1,1],[1,2],[1,3],[1,4]]){const r0=0.55+0.25*H(k,8),ex=x+side*s*(0.95+0.25*H(k,9))+w*s*0.6,ey=y-s*(0.25+0.3*H(k,10));
+      ctx.moveTo(x+side*s*0.06,y-s*0.1);ctx.quadraticCurveTo(x+side*s*r0*0.8+w*s*0.4,y-s*(1.0+0.15*H(k,11)),ex,ey);}
+    ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=Math.max(2.2,s*0.014);ctx.stroke();ctx.strokeStyle=U.css(cc);ctx.lineWidth=Math.max(1,s*0.007);ctx.stroke();return;}
+  ctx.strokeStyle=U.css(cc);ctx.lineWidth=Math.max(0.8,s*0.07);ctx.lineCap="round";ctx.beginPath();const n=s>12?9:6;
+  for(let k=0;k<n;k++){const f=k/(n-1)*2-1,an=f*0.95+(H(k,5)-0.5)*0.3+w*(1-0.5*Math.abs(f)),len=0.8+0.3*H(k,7);
+    ctx.moveTo(x+f*s*0.07,y);ctx.quadraticCurveTo(x+Math.sin(an)*s*0.4*len,y-s*0.95*len,x+Math.sin(an)*s*1.0*len,y-Math.cos(an)*s*1.1*len);}ctx.stroke();
+  if(s>6){ctx.strokeStyle=U.css(nap_ink(cc,dm,120),0.55);ctx.lineWidth=Math.max(0.7,s*0.03);ctx.beginPath();for(let k=0;k<3;k++){const an=-0.45+k*0.45+w;ctx.moveTo(x,y);ctx.quadraticCurveTo(x+Math.sin(an)*s*0.36,y-s*0.85,x+Math.sin(an)*s*0.9,y-Math.cos(an)*s);}ctx.stroke();}}
+// the near tussocks, as drawables: the wind leans them a little, each at its own moment
+const nap_nearTufts=(c,tt)=>nap_nears(c).map(g=>({d:g.dm,draw:ctx=>nap_tuft(ctx,g.q[0],g.q[1],g.s,g.hv,g.dm,g.wet,Math.sin(tt*1.1+g.X*0.7)*0.05+Math.sin(tt*2.3+g.Z)*0.02)}));
+
+/* a bundle of cut q'oya lying on the ground, tied in the middle, its blades fanning out at both ends: from X0 to X1 at Z */
+function nap_bundle(c,X0,X1,Z,o){o=o||{};const dm=c.d((X0+X1)/2,Z);
+  return{d:dm-(o.front||0),draw:ctx=>{const U=PK.u,a=c.P(X0,0,Z),b=c.P(X1,0,Z);if(a[2]<c.N+0.3)return;const m=c.f/a[2],r=(o.r||0.2)*m,cc=nap_fog(U.mix(nap_c("qoya"),nap_c("straw"),0.35),dm),lw=nap_lw(c,dm,0.016,0.8,2.8);
+    const dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);ctx.save();ctx.translate(a[0],a[1]);ctx.rotate(Math.atan2(dy,dx));
+    const shape=()=>{ctx.beginPath();ctx.moveTo(-r*0.15,-r*0.1);ctx.quadraticCurveTo(-r*0.45,-r*1.5,r*0.25,-r*1.85);ctx.quadraticCurveTo(L*0.3,-r*1.35,L*0.5,-r*1.2);
+      ctx.quadraticCurveTo(L*0.7,-r*1.35,L-r*0.25,-r*1.9);ctx.quadraticCurveTo(L+r*0.5,-r*1.5,L+r*0.15,-r*0.1);ctx.quadraticCurveTo(L*0.5,r*0.12,-r*0.15,-r*0.1);ctx.closePath();};
+    shape();ctx.fillStyle=U.css(cc);ctx.fill();ctx.strokeStyle=U.css(nap_ink(cc,dm));ctx.lineWidth=lw;ctx.lineJoin="round";ctx.stroke();
+    // its blades: along it, gathered at the band, and their tips out at both ends
+    ctx.strokeStyle=U.css(U.dk(cc,0.2));ctx.lineWidth=Math.max(0.5,lw*0.5);ctx.lineCap="round";ctx.beginPath();
+    for(let k=0;k<6;k++){const f=(k+0.5)/6;ctx.moveTo(r*0.05,-r*(0.2+f*1.5));ctx.quadraticCurveTo(L*0.3,-r*(0.25+f*1.0),L*0.5,-r*(0.25+f*0.9));ctx.quadraticCurveTo(L*0.7,-r*(0.25+f*1.0),L-r*0.05,-r*(0.2+f*1.55));}
+    for(let k=0;k<5;k++){const f=(k-2)/2;ctx.moveTo(-r*0.1,-r*(0.95+f*0.6));ctx.lineTo(-r*(0.45+0.15*Math.abs(f)),-r*(1.0+f*0.95));ctx.moveTo(L+r*0.1,-r*(0.95+f*0.6));ctx.lineTo(L+r*(0.45+0.15*Math.abs(f)),-r*(1.0+f*0.95));}
+    ctx.stroke();
+    ctx.fillStyle=U.css(nap_fog(nap_c("ropeDk"),dm));ctx.beginPath();U.rrect(ctx,L*0.47,-r*1.26,L*0.06,r*1.3,2);ctx.fill();ctx.strokeStyle=U.css(nap_ink(cc,dm));ctx.lineWidth=lw*0.8;ctx.stroke();ctx.restore();}};}
+/* a big bundle standing, tied round its middle (band: 0 to 1, how tight the cord is drawn; the cord's ends in the hands that pull it) */
+function nap_stook(c,X,Z,o){o=o||{};const dm=c.d(X,Z)+(o.back||0);
+  return{d:dm,draw:ctx=>{const U=PK.u,p=c.P(X,0,Z);if(p[2]<c.N+0.3)return;const m=c.f/p[2],H=(o.ht||1.05)*m,W=0.5*m,cc=U.mix(nap_c("qoya"),nap_c("straw"),0.3),lw=nap_lw(c,dm,0.016,0.8,2.8),
+      pinch=0.1+0.08*(o.band||0),yb=p[1]-H*0.5;
+    ctx.save();ctx.translate(p[0],p[1]);ctx.fillStyle=U.css(cc);ctx.beginPath();ctx.moveTo(-W*0.48,0);ctx.quadraticCurveTo(-W*(0.5-pinch),-H*0.5,-W*0.62,-H*0.98);ctx.quadraticCurveTo(0,-H*1.12,W*0.62,-H*0.98);
+    ctx.quadraticCurveTo(W*(0.5-pinch),-H*0.5,W*0.48,0);ctx.closePath();ctx.fill();ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=lw;ctx.lineJoin="round";ctx.stroke();
+    ctx.strokeStyle=U.css(U.dk(cc,0.22));ctx.lineWidth=Math.max(0.5,lw*0.5);ctx.lineCap="round";ctx.beginPath();for(let k=-4;k<=4;k++){ctx.moveTo(k*W*0.1,-H*0.03);ctx.quadraticCurveTo(k*W*(0.03),-H*0.5,k*W*0.15,-H*0.99);}ctx.stroke();
+    ctx.fillStyle=U.css(nap_c("ropeDk"));ctx.beginPath();U.rrect(ctx,-W*(0.5-pinch)*1.02,-H*0.53,W*(0.5-pinch)*2.04,H*0.05,2);ctx.fill();ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=lw*0.8;ctx.stroke();
+    ctx.restore();}};}
+
+/* the place, painted once: the sky, the ground, the far tussocks and the bundles already cut, the furthest first */
+const NAP_THINGS=[c=>nap_bundle(c,-8.6,-7.0,13.5),c=>nap_bundle(c,-7.8,-6.4,14.4,{r:0.18}),c=>nap_bundle(c,5.2,6.6,15.5),c=>nap_bundle(c,6.9,8.1,16.2,{r:0.18})];
+AG_PLACES.naPuna=ctx=>{const c=NAP_CAM;nap_sky(ctx,c);nap_ground(ctx,c);const D=nap_tufts(c).concat(NAP_THINGS.map(f=>f(c)));D.sort((a,b)=>b.d-a.d);for(const it of D)it.draw(ctx);};
+
+/* ---------------------------------------------------------------- the people at work, in plain colours
+   An older woman and a younger one in a felt hat, a cardigan and a full skirt, long braids; a man in a knitted sweater, dark trousers
+   and a felt hat; and whoever carries a bundle away. One plain colour each. */
+const NAP_FOLK={
+  elder:{key:"elder",name:"",skin:[170,118,88],hair:{style:"long",c:[150,146,144]},top:{kind:"sweater",c:[128,74,82]},bottom:{kind:"skirt",c:[52,58,84]},shoe:[54,42,38],qhat:"felt"},
+  young:{key:"young",name:"",skin:[178,124,92],hair:{style:"long",c:[28,24,26]},top:{kind:"sweater",c:[84,120,110]},bottom:{kind:"skirt",c:[150,72,70]},shoe:[54,42,38],qhat:"felt"},
+  man:{key:"man",name:"",skin:[164,110,80],hair:{style:"short",c:[32,28,28]},top:{kind:"sweater",c:[92,106,124]},bottom:{kind:"trousers",c:[62,60,70]},shoe:[54,42,38],qhat:"felt"},
+  bearer:{key:"bearer",name:"",skin:[172,118,86],hair:{style:"short",c:[34,28,28]},top:{kind:"jacket",c:[150,110,86],inner:[214,204,184]},bottom:{kind:"trousers",c:[70,66,70]},shoe:[54,42,38],qhat:"felt"}};
+// a felt hat over the head's picture, from the joints PK.person gives back: it nods with the head
+function nap_hat(ctx,P,J){if(!P.qhat||!J||!J.hc)return;const S=PK.S,U=PK.u,hh=J.p.head*J.u,[x,y]=J.hc,r=hh*0.5,lw={lw:U.clamp(hh*0.03,0.8,3.4)};S.begin(ctx,lw);
+  const hc=S.tone([96,80,70]),top=y-r*0.62;
+  S.fill(ctx,c=>U.ell(c,x,top+r*0.02,r*1.42,r*0.26),U.dk(hc,0.06),{});
+  S.fill(ctx,c=>{c.moveTo(x-r*0.8,top);c.bezierCurveTo(x-r*0.82,top-r*0.7,x+r*0.82,top-r*0.7,x+r*0.8,top);c.closePath();},hc,{});
+  S.line(ctx,c=>{c.moveTo(x-r*0.78,top-r*0.12);c.quadraticCurveTo(x,top-r*0.04,x+r*0.78,top-r*0.12);},[150,74,70],1.4);}
+const nap_person=(ctx,who,x,fl,h,pose,o)=>{const P=typeof who==="string"?NAP_FOLK[who]:who,J=PK.person(ctx,P,x,fl,h,pose,o);if(!(o&&o.part==="lower"))nap_hat(ctx,P,J);return J;};
+
+/* a sickle in the near hand: a short wooden handle in the fist, and the curved blade from its end, drawn at the person's size
+   (m: px in a metre where they are); deg the hand's angle, flipped for someone who faces left */
+const nap_sickle=(m,left)=>(ctx,h,deg)=>{const S=PK.S,U=PK.u,[x,y]=h,a=(deg||0)*Math.PI/180,L=0.12*m,R=0.13*m;ctx.save();ctx.translate(x,y);ctx.rotate(a);if(left)ctx.scale(-1,1);
+  S.begin(ctx,{lw:U.clamp(m*0.006,0.9,2.6)});
+  S.fill(ctx,c=>U.rrect(c,-L*0.35,-0.016*m,L*1.15,0.032*m,0.012*m),nap_c("wood"),{});
+  S.fill(ctx,c=>{c.moveTo(L*0.78,-0.008*m);c.bezierCurveTo(L*0.95+R*0.4,-R*1.15,L*0.95+R*1.55,-R*0.9,L*0.95+R*1.62,R*0.1);c.bezierCurveTo(L*0.95+R*1.3,-R*0.55,L*0.95+R*0.5,-R*0.7,L*0.8,0.012*m);c.closePath();},nap_c("blade"),{});
+  ctx.restore();};
+// a handful of blades, just cut, in the far hand: drawn under the hand, as the blades were gathered (nap_qoya): their cut ends below
+// the fist, their tips fanning out above it, each blade in ink under its colour; a fades it as it goes onto the pile
+const nap_handful=(m,left,a)=>(ctx,h)=>{const U=PK.u,[x,y]=h,s=left?-1:1;if(a!=null&&a<=0.01)return;const cc=U.mix(nap_c("qoya"),nap_c("straw2"),0.25);
+  ctx.save();if(a!=null)ctx.globalAlpha*=a;ctx.lineCap="round";
+  for(let i=0;i<12;i++){const f=(i-5.5)/5.5,bx=x+f*0.035*m-s*0.02*m,by=y+0.2*m,tx=x+f*0.1*m+s*0.01*m,ty=y-0.22*m+Math.abs(f)*0.05*m;
+    ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=U.clamp(m*0.011,1.4,4.2);ctx.beginPath();ctx.moveTo(bx,by);ctx.quadraticCurveTo(x+f*0.012*m,y,tx,ty);ctx.stroke();
+    ctx.strokeStyle=U.css(i%3?cc:U.dk(cc,0.18));ctx.lineWidth=U.clamp(m*0.0065,0.8,2.6);ctx.stroke();}
+  ctx.restore();};
+
+/* a tussock at work, drawn every frame: its mound, and the handful of blades a hand gathers from it (grip: [x, y] in the frame, k 0 to
+   1: how far the blades are pulled to it), then cut (cut 1: the handful is in the hand, a little stubble left at the base) */
+function nap_qoya(c,X,Z,tt,o){o=o||{};const dm=c.d(X,Z)+(o.back||0.05);
+  return{d:dm,draw:ctx=>{const U=PK.u,p=c.P(X,0,Z);if(p[2]<c.N+0.3)return;const m=c.f/p[2],s=(o.ht||0.5)*m,wind=Math.sin(tt*1.1+X*0.7)*0.05+Math.sin(tt*2.3+Z)*0.02;
+    nap_tuft(ctx,p[0],p[1],s,0.42,dm,false,wind);
+    const g=o.grip,k=g?U.clamp(o.k||0,0,1):0,cc=U.mix(nap_c("qoya"),nap_c("straw2"),0.25),sd=o.side||0;
+    ctx.save();ctx.lineCap="round";
+    if(o.cut){ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=U.clamp(m*0.008,1.2,3);ctx.beginPath();for(let i=0;i<6;i++){const f=(i-2.5)/2.5,x0=p[0]+sd*m*0.1+f*0.05*m;ctx.moveTo(x0,p[1]);ctx.lineTo(x0+f*0.015*m,p[1]-0.05*m);}ctx.stroke();}
+    else if(k>0.01){for(let i=0;i<12;i++){const f=(i-5.5)/5.5,x0=p[0]+sd*m*0.1+f*0.05*m,an=f*0.6+wind,tx0=x0+Math.sin(an)*s*0.9,ty0=p[1]-Math.cos(an)*s*1.05,
+        tx=U.lerp(tx0,g[0]+(tx0-g[0])*0.2+f*0.04*m,k),ty=U.lerp(ty0,g[1]-0.22*m+Math.abs(f)*0.05*m,k),mx=U.lerp((x0+tx0)/2,(x0+g[0])/2,k),my=U.lerp(p[1]-s*0.7,(p[1]+g[1])/2,k);
+        ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=U.clamp(m*0.011,1.4,4.2);ctx.beginPath();ctx.moveTo(x0,p[1]);ctx.quadraticCurveTo(mx,my,tx,ty);ctx.stroke();
+        ctx.strokeStyle=U.css(i%3?cc:U.dk(cc,0.18));ctx.lineWidth=U.clamp(m*0.0065,0.8,2.6);ctx.stroke();}}
+    ctx.restore();}};}
+
+/* the handfuls cut so far, in a low heap beside the tussock: blades lying across each other, their cut ends together */
+function nap_heap(c,X,Z){const dm=c.d(X,Z);
+  return{d:dm,draw:ctx=>{const U=PK.u,p=c.P(X,0,Z);if(p[2]<c.N+0.3)return;const m=c.f/p[2],cc=U.mix(nap_c("qoya"),nap_c("straw"),0.3),R=U.rnd(Math.round(X*41+Z*7));
+    ctx.save();ctx.lineCap="round";
+    for(let i=0;i<16;i++){const y0=p[1]-R()*0.07*m,x0=p[0]-0.14*m+R()*0.06*m,L=(0.3+R()*0.12)*m,an=-0.12+R()*0.24,x1=x0+Math.cos(an)*L,y1=y0+Math.sin(an)*L*0.3-0.04*m*R();
+      ctx.strokeStyle=U.css(PK.S.ink);ctx.lineWidth=U.clamp(m*0.011,1.3,4);ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo((x0+x1)/2,Math.min(y0,y1)-0.03*m,x1,y1);ctx.stroke();
+      ctx.strokeStyle=U.css(i%3?cc:U.dk(cc,0.18));ctx.lineWidth=U.clamp(m*0.0065,0.8,2.6);ctx.stroke();}
+    ctx.restore();}};}
+
+/* ---------------------------------------------------------------- someone at work in the world, as a drawable: at (X, Z), their size a
+   standing adult's there (1.62 m); o.t the time (always), o.flip, o.opt PK.person's own options; o.after(ctx, J) drawn over them */
+function nap_folk(c,who,X,Z,pose,o){o=o||{};const U=PK.u,p=c.P(X,0,Z),h=c.h(X,Z)*(o.k||1),dm=p[2];
+  return{d:dm-(o.front||0),key:o.key,draw:ctx=>{if(dm<c.N+0.3||h<6)return null;const far=U.clamp((dm-20)/140,0,0.7);
+    const J=nap_person(ctx,who,p[0],p[1],h,pose||"stand",Object.assign({t:o.t,flip:o.flip||false,far,shade:h>60?1:0},o.opt||{}));if(o.after)o.after(ctx,J);return J;}};}
+// a frame on the plain: the drawables, the furthest first; returns the joints of those with a key
+function nap_scene(ctx,items){const c=NAP_CAM,D=items.filter(Boolean).map(f=>typeof f==="function"?f(c):f);D.sort((a,b)=>b.d-a.d);
+  const out={};for(const it of D){const J=it.draw(ctx);if(it.key)out[it.key]=J;}return out;}
+
+/* ---------------------------------------------------------------- someone walking on the plain along w.path, points [X, 0, Z], between
+   w.t0 and w.t1: the stride grows out of w.before and dies into w.then, as PK.walk's does; w.arms keeps the arms that carry something;
+   o.back(ctx, x, floor, h, left) draws what they carry on their back, before them, so their body is over it */
+function nap_walker(c,who,t,w,o){o=o||{};const U=PK.u,P=typeof who==="string"?NAP_FOLK[who]:who,amp=PK.ampOf(P),pts=w.path,cum=[0];
+  for(let i=1;i<pts.length;i++)cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][2]-pts[i-1][2]));
+  const L=cum[cum.length-1],at=s=>{s=U.clamp(s,0,L);let i=1;while(i<pts.length-1&&cum[i]<s)i++;const a=pts[i-1],b=pts[i],k=U.clamp((s-cum[i-1])/((cum[i]-cum[i-1])||1),0,1);
+    return[U.lerp(a[0],b[0],k),0,U.lerp(a[2],b[2],k)];};
+  const q=PK.walkAt(t,{x0:0,x1:L,t0:w.t0,t1:w.t1,floor:0,h:1.62,amp}),[X,,Z]=at(q.x),p=c.P(X,0,Z),h=c.h(X,Z);
+  const sx=s=>c.P(...at(s))[0],left=sx(L)<sx(0);
+  const arm=pp=>w.arms?Object.assign({},pp,{aN:w.arms.aN||pp.aN,aF:w.arms.aF||pp.aF}):pp,st=arm(PK.POSES.stand),pose=PK.poseMix(q.u<0.5?(w.before||st):arm(w.then||st),arm(PK.poseWalk(q.step,1,amp)),q.go);
+  return{d:p[2],key:o.key,draw:ctx=>{if(p[2]<c.N+0.3||h<6)return null;if(o.back)o.back(ctx,p[0],p[1],h,left);
+    return nap_person(ctx,who,p[0],p[1],h,pose,Object.assign({t,flip:left,life:1-0.8*q.go,far:U.clamp((p[2]-20)/140,0,0.7),shade:h>60?1:0},o.opt||{}));}};}
+// a big bundle on someone's back, tied across the chest: drawn behind them at their size (h: their height, px)
+function nap_load(ctx,x,fl,h,left){const U=PK.u,S=PK.S,s=left?1:-1,cx=x+s*0.13*h,cy=fl-0.66*h,W=0.2*h,H=0.36*h,cc=U.mix(nap_c("qoya"),nap_c("straw"),0.3);
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(-s*0.12);S.begin(ctx,{lw:U.clamp(h*0.012,0.8,2.6)});
+  S.fill(ctx,c2=>{c2.moveTo(-W,-H*0.9);c2.quadraticCurveTo(0,-H*1.25,W,-H*0.9);c2.quadraticCurveTo(W*1.2,0,W,H*0.9);c2.quadraticCurveTo(0,H*1.1,-W,H*0.9);c2.quadraticCurveTo(-W*1.2,0,-W,-H*0.9);c2.closePath();},cc,{});
+  S.line(ctx,c2=>{for(let k=-2;k<=2;k++){c2.moveTo(k*W*0.3,-H*0.95);c2.quadraticCurveTo(k*W*0.36,0,k*W*0.3,H*0.92);}},U.dk(cc,0.22),U.clamp(h*0.005,0.6,1.4));
+  S.fill(ctx,c2=>U.rrect(c2,-W*1.08,-H*0.1,W*2.16,H*0.12,2),nap_c("ropeDk"),{w:0.7});ctx.restore();}
+
+/* ---------------------------------------------------------------- the three at work, and the one who carries a bundle away
+   Each cuts in a cycle of their own, so no two move together: the far hand gathers a handful of blades, the sickle in the near hand
+   cuts them at the base, and the handful is laid on the pile beside them; the tussock grows back for the next (it is a drawing: a
+   tussock gives several handfuls). The man draws the cord tight round a bundle. Every hand arrives at what it reaches for. */
+const NAP_KNEELCUT={mode:"kneel",lean:56,head:-22,aN:[22,44,"grip"],aF:[30,52,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+const NAP_CROUCHCUT={mode:"stand",lean:38,head:10,aN:[30,50,"grip"],aF:[40,58,"grip"],lN:[114,-34],lF:[106,-42],fN:0,fF:12};
+const NAP_TIE={lean:36,head:12,aN:[30,40,"grip"],aF:[34,44,"grip"],lN:[16,-14],lF:[22,-10]};
+const NAP_BEAR={aN:[18,118,"grip"],aF:[22,122,"grip"]};
+// where each works: [who, X, Z, faces left, pose, the tussock's X, Z, the cycle's length and its start]
+const NAP_AT={elder:[-1.95,4.6,false,NAP_KNEELCUT,-1.56,4.66,4.4,0.3],young:[2.9,7.8,true,NAP_CROUCHCUT,2.42,7.86,3.9,1.7]};
+const NAP_MAN=[-4.35,9.6],NAP_STOOK=[-3.82,9.66],NAP_ROAD=[[12.7,0,16.5],[11.4,0,22],[11.0,0,27]];
+// where nothing near grows in front of someone: [X, Z, half width in m] of each
+const NAP_CLEAR=[[-1.85,4.6,0.75],[2.7,7.8,0.6],[-4.1,9.6,0.7]];
+const nap_clear=(c,g)=>NAP_CLEAR.some(([X,Z,w])=>{const p=c.P(X,0,Z),m=c.f/p[2];if(g.dm>=p[2])return false;
+  return g.q[0]+g.s*0.9>p[0]-w*m&&g.q[0]-g.s*0.9<p[0]+w*m&&g.q[1]>p[1]-1.7*m&&g.q[1]-g.s*1.1<p[1];});
+// one cycle at u (0 to 1): how far the far hand has gathered (k), whether the handful is cut (cut), where the sickle is along the base
+// (s, -1 to 1) and how far the near hand has come to it (n), how far the far hand has gone to the pile (lay), and the handful in it
+// (held: 1 from the cut until it is laid down, then gone, so it never comes back to the hand that returns empty)
+function nap_cycle(u){const U=PK.u,io=(a,b,c,d)=>U.sine(U.clamp((u-a)/(b-a),0,1))*(1-U.sine(U.clamp((u-c)/(d-c),0,1)));
+  return{k:io(0.02,0.24,0.62,0.8),n:io(0.2,0.34,0.56,0.66),s:-1+2*U.sine(U.clamp((u-0.34)/0.2,0,1)),cut:u>0.5&&u<0.94?1:0,lay:io(0.6,0.76,0.84,0.98),
+    held:u<0.5?0:1-U.sine(U.clamp((u-0.7)/0.06,0,1))};}
+function nap_cutter(c,key,tt,T){const U=PK.u,[X,Z,left,pose,Xt,Zt,per,ph]=NAP_AT[key],p=c.P(Xt,0,Zt),m=c.f/p[2],s=left?-1:1,q=nap_cycle(((tt+ph)%per)/per);
+  const grip=[p[0]+s*0.08*m,p[1]-0.36*m],base=[p[0]+q.s*0.05*m,p[1]-0.13*m],pile=[p[0]-s*0.12*m,p[1]-0.16*m];
+  const hF=[U.lerp(grip[0],pile[0],q.lay),U.lerp(grip[1],pile[1],q.lay)];
+  return[nap_qoya(c,Xt,Zt,tt,{grip:[grip[0],grip[1]],k:q.k,cut:q.cut,side:s*0.15,back:0.08}),nap_heap(c,Xt-s*0.2,Zt+0.12),
+    nap_folk(c,key,X,Z,pose,{t:tt,flip:left,key,opt:Object.assign({reachF:hF,reachFk:Math.max(q.k,q.lay),reachN:base,reachNk:q.n*0.9+0.1,
+      hold:nap_sickle(m,left),underF:q.held>0.01?nap_handful(m,left,q.held):null,holds:true},PK.face(tt,{expr:"neutral",gaze:[1,0.8]},T&&T.look&&T.look[key]!=null?[[T.look[key],"look",2.2,[1,-0.1]],[T.look[key]+0.5,"smile",1.8]]:[]))})];}
+function nap_work(ctx,tt,T){const c=NAP_CAM,U=PK.u,ps=c.P(NAP_STOOK[0],0,NAP_STOOK[1]),ms=c.f/ps[2],pull=0.5+0.5*Math.sin(tt*1.6);
+  const lk=T.look||{},ev=k=>lk[k]!=null?[[lk[k],"look",2.2,[1,-0.1]],[lk[k]+0.5,"smile",1.8]]:[];
+  return nap_scene(ctx,[...nap_cutter(c,"elder",tt,T),...nap_cutter(c,"young",tt,T),
+    nap_stook(c,NAP_STOOK[0],NAP_STOOK[1],{band:pull,back:0.05,ht:1.25}),
+    nap_folk(c,"man",NAP_MAN[0],NAP_MAN[1],NAP_TIE,{t:tt,key:"man",opt:Object.assign({reachN:[ps[0]-0.12*ms+0.03*ms*pull,ps[1]-0.64*ms],reachNk:1,reachF:[ps[0]-0.04*ms,ps[1]-0.66*ms],reachFk:1,holds:true},
+      PK.face(tt,{expr:"neutral",gaze:[1,0.7]},ev("man")))}),
+    nap_walker(c,"bearer",tt,{path:NAP_ROAD,t0:(T.t0||0)-1,t1:(T.t0||0)+17,arms:NAP_BEAR},{key:"bearer",opt:{holds:true},back:nap_load}),
+    ...nap_nearTufts(c,tt)]);}
 
 /* ===== No two alike: Lu, about 2,500 years ago, in ink line =====
    A plain hall as the texts leave it: earth walls, timber posts, a beam, a packed-earth floor and woven mats, a doorway onto a small
@@ -2615,95 +3124,192 @@ function na_corner(x,tt,o){o=o||{};const U=PK.u,S=PK.S,{F,H,hx,ix,tx,rx,ty,win}=
   return r;}
 
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524)
-   Each row has the time the voice says it; PK.pace makes a row wait until whoever writes can have walked to it, so they are laid out
-   for someone who walks: on from left to right, a row's parts written along it, and nothing drawn back along words. */
-// 1. the plan for two weeks (Helena, at the team's board, on Monday)
-const na_boardP=(sc,w)=>[
-  {s:"Next two weeks",x:70,y:104,size:62,col:"blue",at:w("plan","next two weeks",-0.3),d:0.8},
-  {s:"Week 1: library numbers · fees",x:70,y:196,size:48,at:w("quiet","whole hour",-0.2),d:1.2},
-  {s:"Week 2: platform upgrade · new login",x:70,y:280,size:48,at:w("guess","reads",-0.2),d:1.4}];
-// 2. five broad traits, each a scale (Carmen)
-const na_boardA=(sc,w)=>[
-  {s:"Five broad traits",x:70,y:104,size:62,col:"blue",at:w("how","five broad traits",-0.2),d:0.8},{s:" · the Big Five",size:48,col:"mut",at:w("how","Big Five",-0.4),d:0.7},
-  {s:"Open to new things",x:70,y:196,size:48,at:w("five","open",-0.3),d:0.7},{s:" · organised",size:48,at:w("five","organised",-0.3),d:0.5},{s:" · outgoing",size:48,at:w("five","outgoing",-0.3),d:0.5},
-  {s:"Agreeable",x:70,y:276,size:48,at:w("five","agreeable",-0.4),d:0.5},{s:" · steady under pressure",size:48,at:w("five","steady",-0.3),d:0.9},
-  {s:"Each a scale, not a box: by degree",x:70,y:380,size:52,col:"green",at:w("scale","scale",-0.3),d:1.2,marks:[["under","green",null,0.3]]}];
-// 3. for understanding, never for assessing (Carmen)
-const na_boardB=(sc,w)=>[
-  {s:"Traits: to understand",x:70,y:120,size:58,col:"green",at:w("never","understanding",-0.4),d:0.9},{s:" · never to assess",size:58,col:"amber",at:w("never","never",-0.3),d:0.8},
-  {s:"How someone is doing:",x:70,y:240,size:52,col:"blue",at:w("outcomes","How someone",-0.2),d:0.9},
-  {s:"the results of their work",x:70,y:330,size:52,at:w("outcomes","results",-0.4),d:0.9},{s:" · how the team works",size:52,at:w("outcomes","team works",-0.4),d:0.9}];
-// 4. a type, and how often it holds (Carmen)
-const na_boardC=(sc,w)=>[
-  {s:"A type: a scale, cut in two",x:70,y:104,size:58,col:"blue",at:w("type","scale",-0.4),d:1.0},
-  {s:"one side, one label · the other, another",x:70,y:188,size:44,at:w("type","One side",-0.2),d:1.3},
-  {s:"Most people: near the middle",x:70,y:272,size:50,col:"amber",at:w("middle","middle",-0.6),d:0.9},
-  {s:"Took it twice: 4 in 10, the same type",x:70,y:356,size:48,at:w("again","twice",-0.3),d:1.3},
-  {s:"Near the cut: a small change, a new label",x:70,y:446,size:46,col:"amber",at:w("steady","near the cut",-0.3),d:1.3}];
-// 5. Helena's yes, and her four rules (at the team's board); the three the test's own makers ask for, lit green
-const na_boardR=(sc,w)=>{const m=w("makers","three",-0.2);return[
-  {s:"Yes, to start talking. Four rules:",x:70,y:104,size:54,col:"blue",at:w("yes","start talking",-0.3),d:1.1},
-  {s:"1 Each person's choice",x:70,y:188,size:48,at:w("rules1","choice",-0.4),d:0.8,marks:[["hl","green",m]]},
-  {s:"2 Your results are yours",x:70,y:266,size:48,at:w("rules1","results",-0.4),d:0.8,marks:[["hl","green",m+0.4]]},
-  {s:"3 Degrees, not boxes",x:70,y:344,size:48,at:w("rules2","degrees",-0.4),d:0.8},
-  {s:"4 Never to hire, hand out work or judge",x:70,y:422,size:46,at:w("rules2","never",-0.3),d:1.3,marks:[["hl","green",m+0.8]]}];};
-// 6. the page, shared (Helena)
-const na_boardS=(sc,w)=>[
-  {s:"How I work: shared, 7 of 7",x:70,y:120,size:58,col:"green",at:w("friday","all seven",-0.3),d:1.0},
-  {s:"2 left a heading out: theirs to leave",x:70,y:220,size:48,at:w("friday","Two left",-0.3),d:1.2}];
-// 7. the meeting's new steps (Helena)
-const na_boardM=(sc,w)=>[
-  {s:"Our meetings, from 22 Feb",x:70,y:104,size:58,col:"blue",at:w("ways1","Monday",-0.3),d:0.9},
-  {s:"1 The question, the working day before",x:70,y:192,size:46,at:w("ways1","question",-0.3),d:1.3},
-  {s:"2 Two minutes writing, before anyone talks",x:70,y:270,size:46,at:w("ways2","two minutes",-0.4),d:1.3},
-  {s:"3 Then a turn each",x:70,y:348,size:46,at:w("ways2","turn",-0.6),d:0.7},
-  {s:"4 Add until the end of the next day",x:70,y:426,size:46,at:w("ways3","add",-0.3),d:1.2}];
+/* ---------------------------------------------------------------- the boards, as a graphic recording on a sheet pinned over the board
+   In the board's own px (1250 by 524): drawn already when it first shows (PK.sk.drawn), and whoever explains adds the last words, a
+   tick, a ring or a cross as the voice says them. PK.pace makes a row wait until they can have walked to it, so the last words go on
+   from left to right, and nothing is drawn back along words. */
+// a drawing in a ring with words after it: (x, y) the words' baseline at their left, the ring before them
+const na_item=(c,x,y,ic,s,o)=>{const D=PK.sk;o=o||{};const r=o.r||22;D.disc(c,x-r-14,y-11,r,{fill:"white",col:"ink",w:3});D.icon(c,ic,x-r-14,y-11,r*0.64,{fill:o.fill||"blue"});
+  if(s)D.text(c,s,x,y,{size:o.size||36,w:o.w,col:o.col});};
+// 1. the plan for two weeks (Helena, at the team's board, on Monday): the two weeks sketched and the eight of the team at its foot;
+// she writes each week's last item as the meeting goes on
+function na_sheetP(c){const D=PK.sk;
+  D.head(c,"Next two weeks",{col:"blue",ref:["Monday 15 February",["the team, all eight",{size:30}]],rsize:32,rx:1030,ry:84});
+  for(const [x,s] of[[56,"Week 1"],[640,"Week 2"]])D.panel(c,x,136,554,232,{fill:"blue",line:"blue",title:s,col:"blue"},()=>{});
+  na_item(c,140,236,"book","library numbers");na_item(c,140,316,"coin",null);
+  na_item(c,724,236,"gear","platform upgrade");na_item(c,724,316,"key",null);
+  D.faces(c,110,434,["helena","sam","jun","marta","noor","yusuf","erin","tomas"],{r:26,gap:78});}
+const na_boardP=(sc,w)=>[PK.sk.drawn(na_sheetP),
+  {s:"fees",x:140,y:316,size:40,w:700,col:"blue",at:w("plan","next two weeks",-0.3),d:0.5},
+  {s:"new login",x:724,y:316,size:40,w:700,col:"blue",at:w("quiet","whole hour",-0.2),d:0.8}];
+// 2. five broad traits (Carmen): each a soft scale from less to more, with nobody's place on it; she ticks each trait as the voice
+// names it, then writes on the ribbon at the foot what they all are
+const NA_TRAIT=[["bulb","open to new things"],["cal","organised"],["people","outgoing"],["heart","agreeable"],["anchor","steady under pressure"]];
+const naA_y=i=>164+i*52;
+function na_sheetA(c){const D=PK.sk;
+  D.head(c,"Five broad traits",{col:"blue",ref:["Most research",["often: the Big Five",{size:30}]],rsize:32,rx:1030,ry:84});
+  NA_TRAIT.forEach(([ic,s],i)=>{const y=naA_y(i);na_item(c,124,y,ic,s,{size:34,r:20});
+    for(const [x0,w0] of[[560,420],[700,280],[840,140]])D.band(c,x0,y-22,w0,22,"blue",0.2);D.line(c,[[560,y-11],[980,y-11]],{col:"blue",w:4,seed:i+2});for(const u of[0,0.5,1])D.line(c,[[560+u*420,y-21],[560+u*420,y-1]],{col:"blue",w:3,seed:i*3+u*7+1});});
+  D.text(c,"less",560,404,{size:30,col:"mut",align:"center"});D.text(c,"more",980,404,{size:30,col:"mut",align:"center"});
+  D.ribbon(c,"",250,424,{col:"green",fill:[190,228,200],width:760,size:40});}
+const na_boardA=(sc,w)=>{const tick=(i,at)=>({k:"tick",x:502,y:naA_y(i)-12,r:15,col:"blue",at,d:0.3});return[PK.sk.drawn(na_sheetA),
+  tick(0,w("five","open",-0.3)),tick(1,w("five","organised",-0.3)),tick(2,w("five","outgoing",-0.3)),tick(3,w("five","agreeable",-0.4)),tick(4,w("five","steady",-0.3)),
+  {s:"a scale, not a box: by degree",x:630,y:462,size:40,w:700,col:"green",align:"center",at:w("scale","scale",-0.3),d:1.2}];};
+// 3. what traits are for, and what shows how someone is doing (Carmen): understanding people, in green; assessing them, in amber,
+// crossed out as the voice says never; and the two places to look, ticked
+function na_sheetB(c){const D=PK.sk;
+  D.head(c,"Traits are for",{col:"blue"});
+  D.panel(c,56,132,540,186,{fill:"green",line:"green",title:"Understanding people",col:"green"},(cc,x,y)=>{
+    D.faces(cc,x+70,y+58,[PK.extra(3),PK.extra(6),PK.extra(9)],{r:28,gap:84});D.icon(cc,"chat",x+350,y+56,26,{fill:"green"});D.icon(cc,"bulb",x+440,y+56,24,{fill:"green"});});
+  D.panel(c,640,132,554,186,{fill:"amber",line:"amber",title:"Assessing them",col:"amber",dash:[10,8]},(cc,x,y)=>{
+    D.icon(cc,"scale",x+84,y+58,30,{fill:"amber"});D.icon(cc,"doc",x+164,y+58,26,{fill:"amber"});D.icon(cc,"cards",x+244,y+58,26,{fill:"amber"});});
+  D.caps(c,"How someone is doing shows in",60,366,{col:"blue",size:30});
+  D.card(c,56,390,{icon:"bars",ifill:"green",lines:["the results of their work"],fill:"paper",w:520,h:84,size:34});
+  D.card(c,610,390,{icon:"people",ifill:"green",lines:["how the team works together"],fill:"paper",w:584,h:84,size:34});}
+const na_boardB=(sc,w)=>[PK.sk.drawn(na_sheetB),
+  {k:"tick",x:556,y:172,r:16,col:"green",at:w("never","understanding",-0.4),d:0.3},
+  {k:"cross",x:804,y:250,r:72,col:"amber",at:w("never","never",-0.3),d:0.4},
+  {s:"never",x:990,y:300,size:48,w:700,col:"amber",at:w("never","assessing",-0.2),d:0.5},
+  {k:"tick",x:540,y:432,r:16,col:"green",at:w("outcomes","results",-0.4),d:0.3},
+  {k:"tick",x:1162,y:432,r:16,col:"green",at:w("outcomes","team works",-0.4),d:0.3}];
+// 4. a type (Carmen): people along one scale, most of them near the middle, and its two labels; she cuts the scale in two as the
+// voice says so, rings the middle, writes what the research council found, and what a small change near the cut does
+const NA_BELL=[1,1,2,3,4,5,6,5,4,3,2,1,1];
+function na_sheetC(c){const D=PK.sk;
+  D.head(c,"A type",{col:"blue",ref:["US National Research Council",["1991",{size:30}]],rsize:30,rx:1000,ry:84});
+  D.line(c,[[70,336],[650,336]],{col:"ink",w:4,seed:2});
+  NA_BELL.forEach((n,i)=>{for(let k=0;k<n;k++)D.disc(c,94+i*44,314-k*24,10,{fill:[236,164,116],col:"ink",w:2.5});});
+  D.box(c,70,362,200,48,{fill:"blue",col:"blue",w:3,r:24});D.text(c,"one label",170,396,{size:30,align:"center"});
+  D.box(c,426,362,224,48,{fill:"green",col:"green",w:3,r:24});D.text(c,"another label",538,396,{size:30,align:"center"});
+  // the research council's ten who took one such test twice, four filled in; and a scale near its cut, one score moving across it
+  D.caps(c,"Took one such test twice",712,176,{col:"blue",size:30});
+  D.dots(c,726,210,10,1,{gap:46,r:14,on:4,col:"green"});
+  D.text(c,"the scores held up well enough",712,322,{size:30,col:"mut"});
+  D.line(c,[[712,382],[1180,382]],{col:"ink",w:4,seed:5});D.line(c,[[946,356],[946,406]],{col:"amber",w:4,seed:6});
+  D.disc(c,918,382,11,{fill:[236,164,116],col:"ink",w:2.5});D.arrow(c,[930,360],[966,360],{col:"ink",w:3,head:10,bow:-6});D.disc(c,976,382,11,{fill:[236,164,116],col:"ink",w:2.5});}
+const na_boardC=(sc,w)=>[PK.sk.drawn(na_sheetC),
+  {k:"line",x:358,y:150,x1:358,y1:352,col:"amber",at:w("type","scale",-0.4),d:0.5},
+  {k:"ring",x:358,y:252,rx:118,ry:92,col:"amber",at:w("middle","middle",-0.6),d:0.6},
+  {s:"4 in 10: same type again",x:712,y:276,size:40,w:700,col:"green",at:w("again","twice",-0.3),d:1.2},
+  {s:"small change, new label",x:712,y:456,size:40,w:700,col:"amber",at:w("steady","near the cut",-0.3),d:1.1}];
+// 5. Helena's yes, and her four rules (at the team's board): a card for each, ticked as the voice says it; then a star on the
+// three the test's makers ask for themselves
+const NA_RULE=[["hand","Each person's choice"],["lock","Your results are yours"],["bars","Degrees, not boxes"],["shield","Never to hire, hand out work or judge"]];
+const naR_y=i=>146+i*80;
+function na_sheetR(c){const D=PK.sk;
+  D.head(c,"Yes, to start talking",{col:"blue",ref:["Thursday 18 February",["four rules",{size:30}]],rsize:32,rx:1040,ry:84});
+  NA_RULE.forEach(([ic,s],i)=>{const y=naR_y(i);D.box(c,56,y,880,66,{fill:"blue",col:"blue",w:3,r:14});D.disc(c,96,y+33,22,{fill:"white",col:"ink",w:3});
+    D.text(c,String(i+1),96,y+44,{size:30,w:700,align:"center"});D.icon(c,ic,152,y+33,18,{fill:"blue"});D.text(c,s,190,y+45,{size:34});});}
+const na_boardR=(sc,w)=>{const m=w("makers","three",-0.2),tick=(i,at)=>({k:"tick",x:984,y:naR_y(i)+33,r:16,col:"blue",at,d:0.3}),star=(i,at)=>({k:"star",x:1064,y:naR_y(i)+33,r:20,col:"green",at,d:0.35});
+  return[PK.sk.drawn(na_sheetR),tick(0,w("rules1","choice",-0.4)),tick(1,w("rules1","results",-0.4)),tick(2,w("rules2","degrees",-0.4)),tick(3,w("rules2","never",-0.3)),
+    star(0,m),star(1,m+0.4),star(3,m+0.8)];};
+// 6. the pages, shared (Helena): seven pages with their writers above them, each page's five headings sketched, two with one left
+// out; she writes how many have shared, rings the two pages and writes whose choice that is
+const naS_x=i=>78+i*156;
+function na_sheetS(c){const D=PK.sk;
+  D.head(c,"Seven pages",{col:"green",ref:["Friday 26 February",["a page each",{size:30}]],rsize:32,rx:1040,ry:84});
+  ["sam","jun","marta","noor","yusuf","erin","tomas"].forEach((k,i)=>{const x=naS_x(i);D.face(c,k,x+54,166,26,{});
+    D.box(c,x,204,108,150,{fill:"white",col:"ink",w:3,r:6});for(let r=0;r<5;r++){if((i===1||i===4)&&r===3)continue;const y=228+r*26;D.line(c,[[x+14,y],[x+(r%2?78:94),y]],{col:"mut",w:3,seed:i*5+r});}});}
+const na_boardS=(sc,w)=>[PK.sk.drawn(na_sheetS),
+  {s:"Shared: 7 of 7",x:78,y:430,size:44,w:700,col:"green",at:w("friday","all seven",-0.3),d:0.9},
+  {k:"ring",x:naS_x(1)+54,y:280,rx:70,ry:94,col:"blue",at:w("friday","Two left",-0.3),d:0.4},{k:"ring",x:naS_x(4)+54,y:280,rx:70,ry:94,col:"blue",at:w("friday","Two left",0.2),d:0.4},
+  {s:"theirs to leave",x:760,y:430,size:44,w:700,col:"blue",at:w("friday","theirs",-0.3),d:0.8}];
+// 7. the meeting's new steps (Helena): four steps sketched, joined by arrows; she writes when each happens under it
+const NA_STEP=[["mail","The question"],["pen","Everyone writes"],["speech","A turn each"],["clock","Anyone adds"]];
+const naM_x=i=>56+i*290;
+function na_sheetM(c){const D=PK.sk;
+  D.head(c,"Our meetings",{col:"blue",ref:["From Monday 22 February",["every meeting she runs",{size:30}]],rsize:32,rx:1010,ry:84});
+  NA_STEP.forEach(([ic,s],i)=>{const x=naM_x(i);D.box(c,x,150,250,180,{fill:"blue",col:"blue",w:3,r:16});D.disc(c,x+125,206,34,{fill:"white",col:"ink",w:3});D.icon(c,ic,x+125,206,21,{fill:"blue"});
+    D.text(c,s,x+125,296,{size:32,w:700,align:"center"});if(i<3)D.arrow(c,[x+256,240],[x+286,240],{col:"blue",w:4,head:12});});}
+const na_boardM=(sc,w)=>{const n=(i,s,at,d)=>({s,x:naM_x(i)+125,y:392,size:34,w:700,col:"blue",align:"center",at,d});return[PK.sk.drawn(na_sheetM),
+  n(0,"the day before",w("ways1","day before",-0.3),0.9),n(1,"2 minutes, first",w("ways2","two minutes",-0.4),0.9),n(2,"then, in turn",w("ways2","turn",-0.6),0.8),n(3,"till next day",w("ways3","add",-0.3),0.9)];};
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
-// 1. a data team, read like the school
-const na_note1=(sc,w)=>[
-  {s:"A data team",x:70,y:124,size:88,w:700,col:"blue",at:w("each","Find",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"Find out how each one works",x:110,y:290,size:58,col:"green",at:w("each","how each",-0.2),d:1.1},
-  {s:"The team hears what each knows",x:110,y:420,size:56,at:w("each","hears",-0.3),d:1.1,marks:[["hl","green"]]}];
-// 2. what Helena can do that the teacher didn't need to
-const na_note2=(sc,w)=>[
-  {s:"Lu: years to know each one",x:70,y:124,size:66,w:900,col:"blue",at:w("known","years",-0.6),d:1.0},
-  {s:"Me: two weeks",x:110,y:262,size:62,col:"amber",at:w("known","two weeks",-0.4),d:0.7},
-  {s:"A person can say how they work",x:110,y:400,size:56,at:w("say","say",-0.4),d:1.1},
-  {s:"So: ask",x:110,y:530,size:72,col:"green",at:w("say","asks",-0.3),d:0.5,marks:[["ring","green",null]]}];
-// 3. people move along their scales
-const na_note3=(sc,w)=>[
-  {s:"People move",x:70,y:124,size:88,w:700,col:"blue",at:w("days","Nobody",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"2 or 3 weeks: nearly every level",x:110,y:262,size:52,at:w("days","two or three weeks",-0.3),d:1.2},
-  {s:"around a usual level of their own",x:110,y:350,size:52,at:w("usual","usual level",-0.3),d:1.2},
-  {s:"Years: more organised, steadier",x:110,y:460,size:52,col:"green",at:w("years","more organised",-0.3),d:1.2},
-  {s:"Not the last word: Bolivia",x:110,y:580,size:52,col:"amber",at:w("last","Bolivia",-0.5),d:1.0}];
-// 4. what a test can do
-const na_note4=(sc,w)=>[
-  {s:"A test",x:70,y:124,size:88,w:600,col:"blue",at:w("start","test",-0.5),d:0.4,marks:[["under","blue",null,0.3]]},
-  {s:"Can start a conversation",x:110,y:290,size:62,col:"green",at:w("start","start",-0.3),d:1.0},
-  {s:"Can't decide anything",x:110,y:420,size:62,col:"amber",at:w("start","can't",-0.3),d:0.9}];
-// 5. How I work: the page's five headings (Helena's own page)
-const na_note5=(sc,w)=>[
-  {s:"How I work",x:70,y:124,size:88,w:700,col:"blue",at:w("keep","How I work",-0.3),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"When I do my best work",x:110,y:252,size:52,at:w("heads1","best work",-0.6),d:0.9},
-  {s:"How to ask me for something",x:110,y:342,size:52,at:w("heads1","ask me",-0.5),d:1.0},
-  {s:"How to disagree with me",x:110,y:432,size:52,at:w("heads2","disagree",-0.5),d:0.9},
-  {s:"What wears me out",x:110,y:522,size:52,at:w("heads2","wears",-0.5),d:0.7},
-  {s:"What I'm getting better at",x:110,y:612,size:52,at:w("heads2","better",-0.5),d:0.9}];
-// 6. Erin's page, in her own words
-const na_noteE=(sc,w)=>[
-  {s:"How I work · Erin",x:70,y:124,size:76,w:800,col:"blue",at:w("erin","Erin's",-0.6),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"How to ask me for something:",x:110,y:280,size:52,at:w("erin","ask me",-0.6),d:0.9},
-  {s:"in writing, the day before",x:110,y:380,size:60,col:"green",at:w("erin","writing",-0.3),d:1.0}];
-// 7. on Monday
-const na_note6=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("monday","Monday",-0.3),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(262,"amber",w("monday","sort",-0.4)),{s:"Don't sort: no type, test or first guess",x:128,y:262,size:48,at:w("monday","sort",-0.2),d:1.4},
-  dot(382,"blue",w("do","Ask",-0.4)),{s:"Ask each how they work best",x:128,y:382,size:52,at:w("do","Ask",-0.2),d:1.1},
-  dot(502,"blue",w("do","Write",-0.4)),{s:"Write your own page first",x:128,y:502,size:52,at:w("do","Write",-0.2),d:1.0},
-  {s:"Ways for the whole range",x:128,y:622,size:52,col:"green",at:w("do","build",-0.3),d:1.0,marks:[["ring","green",null]]}];};
+/* ---------------------------------------------------------------- Helena's notebook: what she keeps (the page's own px)
+   Each page is sketched already, a heading on a highlighter's band, boxes with drawings and the people's portraits (PK.sk.drawn);
+   her pen adds the last words and ticks, each as the voice says it, one stroke after the other (PK.pace(ctx, null, rows)). Nothing is
+   below y 800 of the page, where the captions are. */
+const NA_PAGE=[PK.SK.page.x,PK.SK.page.y,PK.SK.page.x+PK.SK.page.w,PK.SK.page.y+PK.SK.page.h];
+// 1. a data team, read like the school: seven people, no two alike, and one way for all that leaves one out; her pen adds what to do
+function na_page1(c){const D=PK.sk;
+  D.title(c,"A data team",80,132,{size:84,col:"blue"});
+  const team=["sam","jun","marta","noor","yusuf","erin","tomas"],ic=["bulb","chat","clock","pen","people","star","book"],fl=["blue","green","amber","orange","violet","blue","green"];
+  team.forEach((k,i)=>{const x=136+i*126;D.face(c,k,x,258,36,{});D.disc(c,x+32,306,18,{fill:"white",col:"ink",w:2.5});D.icon(c,ic[i],x+32,306,11,{fill:fl[i]});});
+  D.caps(c,"No two work the same way",96,380,{col:"mut",size:30});
+  D.box(c,80,412,540,150,{fill:"amber",col:"amber",w:3,r:16,dash:[10,8]});D.caps(c,"One way for all",104,452,{col:"amber",size:30});
+  for(let i=0;i<6;i++)D.icon(c,"person",136+i*80,514,22,{fill:"white"});
+  D.icon(c,"person",700,514,22,{fill:"amber"});D.arrow(c,[676,496],[630,474],{col:"amber",w:3,head:12});D.text(c,"leaves one out",744,526,{size:34,col:"amber"});}
+const na_note1=(sc,w)=>[PK.sk.drawn(na_page1,NA_PAGE),
+  {s:"Find out how each one works",x:96,y:664,size:56,w:700,col:"green",at:w("each","how each",-0.2),d:1.1},
+  {s:"the team hears what each knows",x:96,y:762,size:50,at:w("each","hears",-0.3),d:1.1,marks:[["hl","green"]]}];
+// 2. what Helena can do that the teacher didn't need to: years against two weeks, and the way round it
+function na_page2(c){const D=PK.sk;
+  D.title(c,"Knowing each one",80,132,{size:76,col:"blue"});
+  D.panel(c,74,180,440,300,{fill:"blue",line:"blue",title:"The teacher in Lu",col:"blue"},(cc,x,y)=>{D.face(cc,NA_LUFOLK.kong,x+96,y+62,50,{});D.icon(cc,"hourglass",x+250,y+62,30,{fill:"blue"});});
+  D.panel(c,560,180,440,300,{fill:"amber",line:"amber",title:"Me",col:"amber"},(cc,x,y)=>{D.face(cc,"helena",x+96,y+62,50,{});D.icon(cc,"cal",x+250,y+62,30,{fill:"amber"});});
+  D.disc(c,124,598,34,{fill:"white",col:"ink",w:3});D.icon(c,"speech",124,598,21,{fill:"green"});
+  D.lines(c,["A person can say","how they work"],180,592,{size:44});}
+const na_note2=(sc,w)=>[PK.sk.drawn(na_page2,NA_PAGE),
+  {s:"years",x:120,y:454,size:56,w:700,col:"blue",at:w("known","years",-0.6),d:0.5},
+  {s:"two weeks",x:606,y:454,size:56,w:700,col:"amber",at:w("known","two weeks",-0.4),d:0.7},
+  {s:"So: ask",x:620,y:650,size:72,w:700,col:"green",at:w("say","asks",-0.3),d:0.5,marks:[["ring","green",null]]}];
+// 3. people move along their scales: one trait over two or three weeks, round a usual level; two traits over the years; and where
+// researchers didn't find the five
+function na_page3(c){const D=PK.sk;
+  D.title(c,"People move",80,132,{size:84,col:"blue"});
+  D.panel(c,74,176,926,272,{fill:"blue",line:"blue",title:"Two or three weeks · one study",col:"blue"},(cc,x,y)=>{
+    D.trend(cc,x+40,y+10,400,150,[[0,0.5],[0.08,0.82],[0.16,0.3],[0.25,0.66],[0.33,0.12],[0.42,0.74],[0.5,0.42],[0.58,0.95],[0.66,0.36],[0.75,0.6],[0.83,0.18],[0.92,0.7],[1,0.48]],{col:"orange"});
+    D.line(cc,[[x+40,y+85],[x+452,y+85]],{col:"blue",w:3,dash:[10,8],seed:4});});
+  D.panel(c,74,474,560,300,{fill:"green",line:"green",title:"The years · many studies",col:"green"},(cc,x,y)=>{
+    D.trend(cc,x+40,y+6,300,114,[[0,0.25],[0.5,0.6],[1,0.82]],{col:"green",labels:[[0,"20"],[1,"40"]]});
+    D.icon(cc,"cal",x+420,y+60,24,{fill:"green"});D.icon(cc,"anchor",x+490,y+60,24,{fill:"green"});});
+  D.sticky(c,664,500,320,190,{col:"sun",rot:0.035,draw:(cc,x,y,w,h)=>D.lines(cc,["Bolivia:","farmers and","foragers"],x+22,y+50,{size:34})});}
+const na_note3=(sc,w)=>[PK.sk.drawn(na_page3,NA_PAGE),
+  {s:"nearly every level",x:580,y:296,size:44,w:700,at:w("days","two or three weeks",-0.3),d:1.0},
+  {s:"round a usual level",x:580,y:376,size:44,w:700,col:"blue",at:w("usual","usual level",-0.3),d:1.0},
+  {s:"more organised, steadier",x:114,y:752,size:42,w:700,col:"green",at:w("years","more organised",-0.3),d:1.1},
+  {s:"not the last word",x:650,y:752,size:40,w:700,col:"amber",at:w("last","Bolivia",-0.5),d:0.9}];
+// 4. what a test can do, and what it can't; and Helena's four rules on a sticky note
+function na_page4(c){const D=PK.sk;
+  D.title(c,"A test",80,132,{size:88,col:"blue"});
+  D.sticky(c,640,60,340,200,{col:"sun",rot:0.03,draw:(cc,x,y,w,h)=>{D.caps(cc,"Four rules",x+22,y+44,{col:"blue",size:30});D.lines(cc,["choice · yours","degrees, not boxes","never to judge"],x+22,y+88,{size:30,lh:1.3});}});
+  D.panel(c,74,290,926,220,{fill:"green",line:"green",title:"Can",col:"green"},(cc,x,y)=>{D.face(cc,PK.extra(4),x+80,y+52,40,{});D.icon(cc,"chat",x+170,y+26,26,{fill:"green"});D.face(cc,PK.extra(11),x+260,y+52,40,{});});
+  D.panel(c,74,540,926,220,{fill:"amber",line:"amber",title:"Can't",col:"amber",dash:[10,8]},(cc,x,y)=>{D.icon(cc,"scale",x+80,y+52,32,{fill:"amber"});D.icon(cc,"doc",x+180,y+52,28,{fill:"amber"});});}
+const na_note4=(sc,w)=>[PK.sk.drawn(na_page4,NA_PAGE),
+  {s:"start a conversation",x:420,y:430,size:56,w:700,col:"green",at:w("start","start",-0.3),d:1.0},
+  {s:"decide anything",x:420,y:680,size:56,w:700,col:"amber",at:w("start","can't",-0.3),d:0.9}];
+// 5. How I work: the page's five headings, each with a drawing and a line for one's own words; the pen ticks each as the voice says it
+const NA_HEADS=[["star","When I do my best work"],["mail","How to ask me for something"],["chat","How to disagree with me"],["hourglass","What wears me out"],["sprout","What I'm getting better at"]];
+const na5_y=i=>240+i*108;
+function na_page5(c){const D=PK.sk;
+  D.title(c,"How I work",80,132,{size:88,col:"blue"});D.icon(c,"doc",560,104,30,{fill:"blue"});
+  NA_HEADS.forEach(([ic,s],i)=>{const y=na5_y(i);D.disc(c,124,y-14,30,{fill:"white",col:"ink",w:3});D.icon(c,ic,124,y-14,18,{fill:"blue"});D.text(c,s,176,y,{size:44,w:700});
+    D.line(c,[[176,y+38],[880,y+38]],{col:"mut",w:2.5,dash:[8,10],seed:i+11});});}
+const na_note5=(sc,w)=>{const tick=(i,at)=>({k:"tick",x:950,y:na5_y(i)-14,r:20,col:"green",at,d:0.3});return[PK.sk.drawn(na_page5,NA_PAGE),
+  tick(0,w("heads1","best work",-0.6)),tick(1,w("heads1","ask me",-0.5)),tick(2,w("heads2","disagree",-0.5)),tick(3,w("heads2","wears",-0.5)),tick(4,w("heads2","better",-0.5))];};
+// 6. Erin's page, in her own notebook: the five headings, and her answers to four of them as lines of her own writing; her pen
+// underlines the heading the story is about and writes her answer under it
+const na_scrib=(c,x,y,w,seed)=>{const pts=[];for(let i=0;i<=Math.round(w/14);i++)pts.push([x+i*14,y+(i%2?-5:4)+Math.sin(i*1.3+seed)*2]);PK.sk.line(c,pts,{col:"mut",w:2.5,seed});};
+const NA_EH=[[236,"When I do my best work"],[340,"How to ask me for something"],[520,"How to disagree with me"],[620,"What wears me out"],[720,"What I'm getting better at"]];
+function na_pageE(c){const D=PK.sk;
+  D.title(c,"How I work",80,132,{size:84,col:"blue"});D.face(c,"erin",900,112,46,{});
+  NA_EH.forEach(([y,s],i)=>{D.text(c,s,110,y,{size:40,w:700,col:"blue"});if(i!==1)na_scrib(c,124,y+40,i===4?460:600,i+3);});}
+const na_noteE=(sc,w)=>[PK.sk.drawn(na_pageE,NA_PAGE),
+  {k:"under",x:110,y:340,w:600,size:40,col:"blue",at:w("erin","ask me",-0.4),d:0.4},
+  {s:"in writing, the day before",x:124,y:440,size:56,w:700,col:"green",at:w("erin","writing",-0.3),d:1.0}];
+// 7. on Monday: don't sort (people put in boxes by a type, a test or a first guess), and three things to do, a card each; the pen
+// strikes the sorting through, ticks two cards and writes the last words of the third
+function na_page6(c){const D=PK.sk;
+  D.title(c,"On Monday",80,132,{size:88,col:"blue"});D.icon(c,"cal",580,104,30,{fill:"blue"});
+  D.panel(c,74,170,926,196,{fill:"amber",line:"amber",title:"Don't sort",col:"amber",dash:[10,8]},(cc,x,y)=>{
+    ["a type","a test","a first guess"].forEach((s,i)=>{const bx=x+30+i*300;D.box(cc,bx,y-2,270,106,{fill:"white",col:"ink",w:3,r:8});D.icon(cc,"person",bx+135,y+28,18,{fill:"white"});
+      D.text(cc,s,bx+135,y+86,{size:32,align:"center"});});});
+  const card=(y,fill,ic,s)=>{D.box(c,74,y,926,120,{fill,col:"ink",w:3,r:16});D.disc(c,134,y+60,34,{fill:"white",col:"ink",w:3});D.icon(c,ic,134,y+60,21,{fill});D.text(c,s,196,y+76,{size:44});};
+  card(392,"blue","chat","Ask each one how they work best");card(532,"blue","doc","Write your own page first");card(672,"green","people","Build the ways");}
+const na_note6=(sc,w)=>[PK.sk.drawn(na_page6,NA_PAGE),
+  {k:"line",x:104,y:340,x1:974,y1:232,col:"amber",at:w("monday","sort",-0.2),d:0.5},
+  {k:"tick",x:950,y:452,r:20,col:"green",at:w("do","Ask",-0.2),d:0.3},
+  {k:"tick",x:950,y:592,r:20,col:"green",at:w("do","Write",-0.2),d:0.3},
+  {s:"for the whole range",x:540,y:748,size:44,w:700,col:"green",at:w("do","build",-0.3),d:1.0,marks:[["ring","green",null]]}];
 
 /* ===== No two alike: the chapters, shot by shot =====
    The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line
@@ -2718,28 +3324,15 @@ const na_bub=(x,J,tt,t0,t1,lines,cam,o)=>PK.say(x,J,lines,ag_io(tt,t0,t1==null?1
 const na_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
 // while a chapter shows a key idea apart from the scene (a board seen close, a page of the notebook), its kicker steps back
 const na_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
-// kneeling to twist cord, seen from the side: both hands together in front, the cord running from them to the ground
-const NA_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
-function na_twisting(x,who,px,fl,tt,o){o=o||{};const U=PK.u,J=naq_person(x,who,px,fl,naq_h(fl),NA_TWIST,Object.assign({t:tt,holds:true},o,o.nod!=null?{}:na_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0.7]},px%5)));
-  if(J&&J.hdN){const [hx,hy]=J.hdN,len=o.len||260,col=PK.S.tone(WWQ_PAL.rope),tw=Math.sin(tt*5)*2;x.save();x.lineCap="round";x.strokeStyle=U.css(PK.S.ink);x.lineWidth=6;
-    x.beginPath();x.moveTo(hx,hy+4);x.quadraticCurveTo(hx+len*0.4,fl-6+tw,hx+len,fl-2);x.stroke();x.strokeStyle=U.css(col);x.lineWidth=3.4;x.stroke();x.restore();}return J;}
-// a walker on the bridge from u0 to u1 between t0 and t1 (at rest outside it); returns [u, who, flip, tt] for naq_bridge, or null
-const na_on=(tt,who,u0,u1,t0,t1)=>{if(tt<t0-0.2||tt>t1+0.2)return null;const u=PK.u.lerp(u0,u1,PK.u.clamp((tt-t0)/(t1-t0),0,1));return[u,who,u1<u0,tt];};
 // someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
 const na_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},base||{});const g=base.gaze[1],ev=[],K=["look","nod","smile"];
   for(let k=0;k<30;k++){const at=(t0||0)+1.8+i*1.1+k*5.6,kind=K[(k+Math.round(i))%3];ev.push(kind==="look"?[at,"look",2.2,[1,g+((k+Math.round(i))%2?0.45:-0.35)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
   return PK.face(tt,base,ev);};
-// the bank's people: [who, x, floor, pose, flip, opts]
-function na_bank(x,tt,list){list.slice().sort((a,b)=>a[2]-b[2]).forEach(([who,px,fl,pose,fl2,o],i)=>{o=o||{};if(pose==="twist")return na_twisting(x,who,px,fl,tt,o);
-  const f=o.nod!=null?{}:na_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},px%5);
-  naq_person(x,who,px,fl,naq_h(fl),pose||"stand",Object.assign({t:tt+(px%7),flip:!!fl2},o,f));});}
 
 
 // Marta at her desk, turned to her screen or to the room; who: more people in the room ({fl, draw})
 const na_marta=(o)=>Object.assign({work:1,turn:0},o||{});
 // someone who comes to a desk: walks in from x0 to x1 between t0 and t1, then stands (pose), flipped to face left when x1 < x0
-const na_qcome=(cc,who,tt,x0,x1,t0,t1,fl,o)=>{o=o||{};const flip=x1<x0,h=naq_h(fl);if(tt<t1)return naq_walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:"stand"},Object.assign({flip},o.face||{}));
-  return naq_person(cc,who,x1,fl,h,"stand",Object.assign({t:tt,flip},o.face||{}));};
 const na_come=(cc,who,tt,x0,x1,t0,t1,fl,h,o)=>{o=o||{};const flip=x1<x0;if(tt<t1)return PK.walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:o.then||"stand"},Object.assign({flip},o.face||{}));
   return PK.person(cc,who,x1,fl,h,o.then||"stand",Object.assign({t:tt,flip},o.face||{}));};
 // a listener's nods and looks, every few seconds, for whoever stands at a board between rows
@@ -2781,11 +3374,10 @@ function na_newcomer(c,tt,t0,t1,tk){const [sx,fl]=NA_SEAT.lu5;
 scene("lu",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,luT=c.where-0.6;
   const N1=PK.pace(ctx,null,na_note1(sc,w)),gW=w("gift","Whoever",-0.6),gA=w("gift","is taught",-0.6),gift=ag_in(t,gA+0.6,0.3);
   ag_shots(ctx,S,t,sc.dur,[
-    // the series' bridge, new, people crossing; the camera closes in as the film says why it leaves
-    {at:0,place:"naGorge",keys:[[0,960,500,1.0],[c.aside,860,540,1.12]],d:3,draw:(x,tt,cam)=>{
-      naq_steel(x,1);naq_bridge(x,{age:0.05,walkers:[na_on(tt,"m3",0.06,0.9,0.4,15),na_on(tt,"w4",0.94,0.2,2,16)].filter(Boolean)});
-      na_bank(x,tt,[["w1",170,900,"stand",false,{hold:naq_coil,holds:true,expr:"smile"}],["m1",470,690,"clasp",false,{expr:"neutral"}],
-        ["keeper",1700,880,"clasp",true,{expr:"neutral",gaze:[1,0.1]}],["w3",1560,740,"stand",true,{expr:"smile"}]]);}},
+    // above Quehue, the grass the bridge is made of: three people cut and tie it, each their own way, and someone carries a bundle
+    // off towards the gorge, where the bridge is a thin line far off. The camera starts towards it, and leaves it for the grass
+    {at:0,place:"naPuna",keys:[[0,1060,500,1.1],[c.aside-0.2,820,600,1.18],[w("aside","One blade",-0.3),700,640,1.3],[w("aside","a person",-0.4),960,560,1.06]],d:2.2,draw:(x,tt,cam)=>{
+      const pw=w("aside","a person",0);nap_work(x,tt,{t0:0,look:{elder:pw+0.2,young:pw+0.9,man:pw+1.5}});}},
     // Lu: the teacher's hall. One room, so the camera only glides; a newcomer brings his gift and kneels
     {at:luT,place:"naLu",dis:1.6,keys:[[luT,960,560,1.0],[c.teacher-0.2,1180,600,1.22],[gW,960,560,1.0],[c.bold-0.2,820,620,1.1],[c.rule-0.2,820,640,1.2],
         [c.zilu-0.3,900,600,1.08],[c.third-0.3,860,580,1.04],[c.person,900,600,1.12],[c.count-0.3,960,560,1.0]],d:3,draw:(x,tt,cam)=>{
@@ -2814,6 +3406,7 @@ scene("lu",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,w
     {at:c.team-0.4,place:"naTeam",dis:1.2,keys:[[c.team-0.4,960,540,1.0]],d:3,draw:(x,tt,cam)=>{na_seven(x,tt,{clock:10});}},
     {at:c.each-0.4,place:"naNotes",dis:0.6,keys:[[c.each-0.4,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N1,{});}}
   ]);
+  na_card(ctx,S,t,0.8,c.aside-0.6,{kick:"Quehue, Cusco, Peru",title:"Q'oya, the grass of the bridge"},{y:40,mid:true});
   na_card(ctx,S,t,c.where+0.3,c.teacher-0.5,{kick:"Lu, now eastern China",title:"About 2,500 years ago"},{y:40,mid:true});
   na_card(ctx,S,t,w("count","counts",0),c.team-0.8,{kick:"A historian, centuries later",title:"77 students mastered what he taught",col:PK.C.green},{y:40,mid:true});
   na_imagined(ctx,S,t,c.team+0.4,c.each-0.6,"The university, 2027 · imagined");

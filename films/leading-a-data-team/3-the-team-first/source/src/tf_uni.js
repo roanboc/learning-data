@@ -104,40 +104,64 @@ function tf_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
 
 
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
-// 1. leading and managing (Carmen, at the team's board)
-const tf_boardA=(sc,w)=>[
-  {s:"Lead · manage",x:70,y:120,size:62,col:"blue",at:w("weighs","Managing",-0.3),d:0.8},
-  {s:"leading weighs a little more",x:110,y:230,size:50,at:w("weighs","leading weighs",-0.2),d:1.2},
-  {s:"people first · wellbeing first",x:200,y:330,size:50,col:"green",at:w("first","wellbeing",-0.4),d:1.2},
-  {s:"support · a tool · a push",x:290,y:430,size:50,at:w("comfort","more support",-0.3),d:1.1}];
-// 2. psychological safety (Carmen)
-const tf_boardB=(sc,w)=>[
-  {s:"Psychological safety",x:70,y:120,size:60,col:"blue",at:w("name","psychological safety",-0.4),d:1.0},
-  {s:"safe to take a risk",x:110,y:240,size:52,at:w("belief","taking risks",-0.4),d:0.9},
-  {s:"admit a mistake",x:520,y:340,size:52,col:"green",at:w("belief","admitting a mistake",-0.3),d:0.8},
-  {s:"51 teams: safer, learned more",x:200,y:450,size:48,at:w("teams","felt safer",-0.6),d:1.3}];
-// 3. the night rota (Helena, at the team's board)
-const tf_boardC=(sc,w)=>[
-  {s:"Nights",x:70,y:120,size:64,col:"blue",at:w("four","four people",-0.4),d:0.5},
-  {s:"Sam · Noor · Jun · Erin",x:110,y:240,size:52,col:"green",at:w("four","every night alert",-0.4),d:1.2},
-  {s:"one week in four each",x:300,y:360,size:52,col:"blue",at:w("rota","one week in four",-0.3),d:1.1}];
-// 4. Ubuntu as an ethic (Carmen)
-const tf_boardD=(sc,w)=>[
-  {s:"Ubuntu, an ethic",x:70,y:120,size:60,col:"blue",at:w("ethic","Ubuntu",-0.3),d:0.8},
-  {s:"Ramose · Metz",x:110,y:230,size:50,at:w("ethic","Mogobe Ramose",-0.2),d:0.8},
-  {s:"share a life with others",x:200,y:340,size:52,col:"green",at:w("metz","sharing a life",-0.3),d:1.1},
-  {s:"care how their lives go",x:380,y:450,size:52,col:"green",at:w("metz","caring",-0.3),d:1.1}];
-// 5. on Monday (Helena, at the board seen close)
-const tf_boardM=(sc,w)=>[
-  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("pair","On Monday",0),d:0.6},
-  {s:"pair · two for each job",x:110,y:205,size:48,col:"green",at:w("pair","pair until",-0.2),d:1.0},
-  {s:"protect leave",x:200,y:290,size:48,at:w("leave","Protect leave",-0.2),d:0.7},
-  {s:"thank who says: I got it wrong",x:200,y:375,size:46,col:"green",at:w("thank","Thank",-0.2),d:1.2},
-  {s:"ask how people are · new: watch first",x:200,y:460,size:42,col:"blue",at:w("ask","ask how",-0.2),d:1.5}];
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Carmen's and Helena's are drawn as a designer would, a graphic recording pinned over the board, almost
+   done when it first shows (PK.sk.drawn): whoever explains adds the last words and marks as the voice says them, on from left to
+   right, and steps clear. */
+// a graphic recording in two drawn parts: its heading, high on the sheet, where nobody standing at the board hides it, and the drawing
+// under it, with the box its ink lies in, so whoever explains steps only as far right as it reaches
+const tf_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// 1. leading and managing (Carmen, at the team's board): both her job, leading the heavier; people first; and what someone may need
+const TF_NEED=[["hand","support","more support"],["wrench","a tool","better tool"],["speech","a word","encouragement"],["up","a push","a push"]];
+const tf_boardA=(sc,w)=>[...tf_rec("Lead and manage",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,360,280,{title:"both her job",col:"blue",fill:"blue"},(cc,x,y)=>D.scale(cc,x+180,y+34,200,{l:"manage",r:"lead",tilt:-0.5,lcol:"blue",rcol:"green",size:30}));
+    D.panel(c,460,150,330,280,{title:"first",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"heart",x+165,y+42,34,{fill:"green"});
+      D.faces(cc,x+85,y+124,["sam","noor","jun"],{r:24,gap:80});});
+    D.panel(c,820,150,360,280,{title:"sometimes",col:"amber",fill:"amber"},(cc,x,y)=>TF_NEED.forEach(([ic,s],i)=>{const cx=x+90+(i%2)*180,cy=y+30+Math.floor(i/2)*100;
+      D.icon(cc,ic,cx,cy,26,{fill:"white"});D.text(cc,s,cx,cy+56,{size:28,align:"center"});}));},[60,150,1190,436]),
+  {s:"a little more",x:100,y:404,size:40,w:700,col:"green",at:w("weighs","a little more",-0.3),d:0.8},
+  {s:"wellbeing",x:625,y:404,size:44,w:700,col:"green",align:"center",at:w("first","wellbeing",-0.3),d:0.7},
+  ...TF_NEED.map(([,,word],i)=>({k:"tick",x:820+90+(i%2)*180+46,y:150+60+30+Math.floor(i/2)*100-16,r:14,col:"green",at:w("comfort",word,0.1),d:0.25})),
+  {s:"no big gap opens",x:1180,y:474,size:40,w:700,col:"blue",align:"right",at:w("open","no big gap",-0.3),d:1.0}];
+// 2. psychological safety (Carmen): what it means, the hospital teams, and the 51 work teams; she writes what each shows
+const tf_boardB=(sc,w)=>[...tf_rec("Psychological safety",{ref:["Amy Edmondson","1999"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,400,300,{title:"a shared belief",col:"blue",fill:"blue"},(cc,x,y)=>{D.faces(cc,x+70,y+52,["ivy","jun","noor"],{r:28,gap:84});D.icon(cc,"shield",x+330,y+52,30,{fill:"blue"});});
+    D.panel(c,500,150,330,300,{title:"hospital teams",col:"orange",fill:"orange"},(cc,x,y)=>{D.icon(cc,"speech",x+50,y+40,24,{fill:"green"});D.text(cc,"talked openly",x+90,y+52,{size:30});
+      D.icon(cc,"lock",x+50,y+110,24,{fill:"amber"});D.text(cc,"kept quiet",x+90,y+122,{size:30,col:"mut"});});
+    D.panel(c,860,150,320,300,{title:"work teams",col:"green",fill:"green"},(cc,x,y)=>{D.text(cc,"fifty-one",x+28,y+48,{size:38,w:700,col:"green"});
+      D.trend(cc,x+206,y+4,86,74,[[0,0.12],[0.5,0.45],[1,0.95]],{col:"green"});});},[60,150,1190,456]),
+  {s:"safe to take risks",x:100,y:380,size:38,w:700,col:"blue",at:w("belief","taking risks",-0.4),d:0.9},
+  {s:"admit a mistake",x:530,y:430,size:38,w:700,col:"green",at:w("belief","admitting a mistake",-0.3),d:0.8},
+  {s:"learned more",x:1160,y:380,size:38,w:700,col:"green",align:"right",at:w("teams","learned more",-0.3),d:0.8},
+  {s:"did better",x:1160,y:432,size:38,w:700,col:"green",align:"right",at:w("teams","did better",-0.3),d:0.7}];
+// 3. the night rota (Helena, at the team's board): who can answer, and the four weeks of the rota; she writes what it comes to
+const TF_ROTA=["sam","noor","jun","erin"];
+const tf_boardC=(sc,w)=>[...tf_rec("Nights",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,420,300,{title:"who can answer",col:"green",fill:"green"},(cc,x,y)=>D.faces(cc,x+75,y+52,TF_ROTA,{r:30,gap:90}));
+    D.panel(c,520,150,660,300,{title:"the rota",col:"blue",fill:"blue"},(cc,x,y)=>TF_ROTA.forEach((k,i)=>{const bx=x+30+i*152;
+      D.box(cc,bx,y+14,132,128,{fill:"white",col:"ink",w:2.5,r:10});D.text(cc,"week "+(i+1),bx+66,y+50,{align:"center",size:30,col:"blue",w:700});D.face(cc,k,bx+66,y+100,26);}));},[60,150,1190,456]),
+  {s:"four, not one",x:100,y:400,size:44,w:700,col:"green",at:w("four","not one",-0.6),d:0.8},
+  {s:"one week in four each",x:1160,y:420,size:40,w:700,col:"blue",align:"right",at:w("rota","one week in four",-0.3),d:1.1}];
+// 4. Ubuntu as an ethic (Carmen): Metz's two things, held together; she writes what each one is
+const tf_boardD=(sc,w)=>[...tf_rec("Ubuntu, an ethic",{ref:["Ramose · Metz","philosophers"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,500,280,{title:"share",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"people",x+190,y+44,34,{fill:"white"});D.icon(cc,"house",x+310,y+44,34,{fill:"white"});});
+    D.icon(c,"plus",625,290,24,{fill:"white"});
+    D.panel(c,680,150,500,280,{title:"care",col:"orange",fill:"orange"},(cc,x,y)=>D.icon(cc,"heart",x+250,y+44,34,{fill:"orange"}));
+    D.caps(c,"held together",625,474,{align:"center",size:30,col:"mut"});},[60,150,1190,480]),
+  {s:"a life with others",x:100,y:400,size:44,w:700,col:"green",at:w("metz","sharing a life",-0.3),d:1.0},
+  {s:"how their lives go",x:710,y:400,size:44,w:700,col:"orange",at:w("metz","caring how",-0.3),d:1.0}];
+// 5. on Monday (Helena, at the board seen close): the team as a ring, nobody alone, and four of the five steps; she ticks each at the
+// board's right edge as the voice comes to it, and writes the fifth
+const TF_MON=[["pair: two for each job","pair","pair until"],["protect leave","leave","Protect leave"],["thank who says: I got it wrong","thank","Thank"],["ask how people are","ask","ask how"]];
+const tf_boardM=(sc,w)=>[...tf_rec("On Monday",{},c=>{const D=PK.sk;
+    D.panel(c,70,140,380,300,{title:"nobody alone",col:"green",fill:"green"},(cc,x,y)=>{const cx=x+190,cy=y+112;D.icon(cc,"heart",cx,cy,22,{fill:"green"});
+      ["sam","noor","jun","erin","ivy"].forEach((k,i)=>{const a=-Math.PI/2+i*Math.PI*2/5;D.face(cc,k,cx+Math.cos(a)*92,cy+Math.sin(a)*80,26);});});
+    TF_MON.forEach(([s],i)=>{const y=180+i*74;D.disc(c,512,y-12,24,{fill:["green","amber","orange","blue"][i],col:"ink",w:3});D.text(c,String(i+1),512,y-1,{size:30,w:700,align:"center"});D.text(c,s,556,y,{size:36});});},[60,140,1080,450]),
+  ...TF_MON.map(([,id,word],i)=>({k:"tick",x:1150,y:166+i*74,r:18,col:"green",at:w(id,word,0.3),d:0.3})),
+  {s:"if you're new, watch first",x:1180,y:470,size:42,w:700,col:"blue",align:"right",at:w("new","watch first",-0.6),d:1.2}];
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page.
+   The stokvel member's book is written plainly; Helena's and Ivy's are sketched pages, almost done, and the pen adds the last words. */
 // 1. the stokvel's rules (a member's book)
 const tf_note1=(sc,w)=>[
   {s:"Our rules",x:70,y:124,size:80,w:760,col:"blue",at:w("rules","agrees its rules",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
@@ -149,20 +173,29 @@ const tf_note2=(sc,w)=>[
   {s:"Ubuntu",x:70,y:124,size:84,w:760,col:"blue",at:w("ubuntu","Ubuntu",-0.3),d:0.5,marks:[["under","blue",null,0.3]]},
   {s:"a person is a person",x:110,y:260,size:56,col:"green",at:w("ubuntu","a person is a person",-0.3),d:1.0},
   {s:"through other people",x:150,y:370,size:56,col:"green",at:w("ubuntu","through other people",-0.3),d:1.0}];
-// 3. the team as a whole (Helena)
-const tf_note3=(sc,w)=>[
-  {s:"The team, as a whole",x:70,y:124,size:72,w:760,col:"blue",at:w("whole","as a whole",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"what it does together",x:110,y:250,size:52,col:"green",at:w("whole","achieves together",-0.4),d:1.0},
-  {s:"against what it really does",x:110,y:350,size:50,at:w("really","really does",-0.4),d:1.1},
-  {s:"11 ways in · day and night",x:110,y:450,size:50,col:"orange",at:w("eleven","eleven different ways",-0.3),d:1.1}];
-// 4. said out loud (Ivy)
-const tf_note4=(sc,w)=>[
-  {s:"Said out loud",x:70,y:124,size:76,w:760,col:"blue",at:w("learn","said out loud",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"and thanked",x:110,y:250,size:56,col:"green",at:w("learn","thanked",-0.3),d:0.6},
-  {s:"the whole team learns",x:110,y:360,size:56,at:w("learn","whole team learns",-0.3),d:1.0}];
-// 5. Tutu (Helena)
-const tf_note5=(sc,w)=>[
-  {s:"Desmond Tutu",x:70,y:124,size:76,w:760,col:"blue",at:w("tutu","Desmond Tutu",-0.3),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"not threatened",x:110,y:250,size:54,at:w("tutu","threatened",-0.3),d:0.8},
-  {s:"that others are able and good",x:110,y:350,size:48,col:"green",at:w("tutu","able and good",-0.6),d:1.2},
-  {s:"Sam taught three · lost nothing",x:110,y:460,size:48,col:"green",at:w("lost","lost nothing",-0.8),d:1.3}];
+// 3. the team as a whole (Helena): the team's faces, what she measures it against, and how this team works; the pen adds what she reads
+const tf_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"The team, as a whole",86,124,{size:72});
+    D.panel(c,100,170,880,230,{title:"together",col:"green",fill:"green"},(cc,x,y)=>D.faces(cc,x+110,y+52,["sam","noor","jun","erin","ivy"],{r:30,gap:110}));
+    D.panel(c,100,430,420,300,{title:"measured against",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"building",x+50,y+40,26,{fill:"white"});D.text(cc,"her last team",x+92,y+52,{size:34,col:"mut"});});
+    D.panel(c,560,430,420,300,{title:"this team",col:"orange",fill:"orange"},(cc,x,y)=>{for(let i=0;i<11;i++)D.icon(cc,"mail",x+50+(i%6)*62,y+34+Math.floor(i/6)*54,16,{fill:"orange"});
+      D.icon(cc,"clock",x+360,y+88,22,{fill:"white"});});},[60,40,1040,800]),
+  {s:"what it does together",x:140,y:370,size:46,w:700,col:"green",at:w("whole","achieves together",-0.4),d:1.0},
+  {s:"what it really does",x:130,y:640,size:40,w:700,col:"blue",at:w("really","really does",-0.4),d:1.0},
+  {k:"line",x:186,y:531,x1:394,y1:527,col:"amber",at:w("really","not what her last team",-0.1),d:0.4},
+  {s:"11 ways in",x:590,y:650,size:42,w:700,col:"orange",at:w("eleven","eleven different ways",-0.3),d:0.7},
+  {s:"day and night",x:590,y:708,size:38,w:700,at:w("eleven","day and night",-0.3),d:0.8}];
+// 4. said out loud (Ivy): what she said, who thanked her, and the team; the pen adds what follows
+const tf_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Said out loud",86,124,{size:76});
+    D.face(c,"ivy",180,270,40);D.box(c,250,224,520,96,{fill:"white",col:"ink",w:3,r:20});D.text(c,"I nearly let it through.",280,286,{size:36});
+    D.arrow(c,[180,326],[180,410],{col:"ink",w:3.5,head:14});D.face(c,"jun",180,466,40);
+    D.arrow(c,[180,522],[180,596],{col:"ink",w:3.5,head:14});D.faces(c,180,652,["sam","noor","helena","erin"],{r:30,gap:96});},[60,40,1040,800]),
+  {s:"and thanked",x:250,y:482,size:50,w:700,col:"green",at:w("learn","thanked",-0.3),d:0.6},
+  {s:"the whole team learns",x:110,y:770,size:52,w:700,at:w("learn","whole team learns",-0.3),d:1.0}];
+// 5. Tutu (Helena): his words, and what Sam's nights came to; the pen adds the words that matter
+const tf_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Desmond Tutu",86,124,{size:76});
+    D.panel(c,100,170,880,250,{title:"a person with Ubuntu",col:"blue",fill:"blue"},(cc,x,y)=>D.text(cc,"\u201c",x+22,y+70,{size:80,w:700,col:"mut"}));
+    D.face(c,"sam",200,580,40);[["noor",500],["jun",580],["erin",660]].forEach(([k,y])=>{D.arrow(c,[250,580],[400,y],{col:"ink",w:3,head:12,bow:y<580?-10:y>580?10:0});D.face(c,k,446,y,30);});
+    D.caps(c,"taught three",520,590,{size:30,col:"mut"});},[60,40,1040,800]),
+  {s:"is not threatened",x:200,y:300,size:48,w:700,at:w("tutu","threatened",-0.3),d:0.9},
+  {s:"that others are able and good",x:200,y:380,size:44,w:700,col:"green",at:w("tutu","able and good",-0.6),d:1.3},
+  {s:"and lost nothing",x:110,y:760,size:52,w:700,col:"green",at:w("lost","lost nothing",-0.5),d:0.9}];

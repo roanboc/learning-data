@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00:04.200 --> 00:00:10.430
+China, 1368. After years of war, a new dynasty, the Ming, rules from Nanjing.
+
+00:00:11.130 --> 00:00:17.979
+Every household owes the state grain from its fields, and work: carrying grain, building walls, mending roads.
+
+00:00:19.179 --> 00:00:23.659
+But the old registers were lost in the war, and no tax had a fixed measure.
+
+00:00:24.359 --> 00:00:30.886
+In the rich province of Zhejiang, landowners wrote their fields under other households' names, to escape the work.
+
+00:00:32.186 --> 00:00:35.422
+So the burden fell on the families who couldn't hide their land.
+
+00:00:36.922 --> 00:00:42.858
+The court didn't need a bigger count. It needed to know whose each field was, and who lived in each house.
+
+00:00:45.358 --> 00:00:52.025
+So, before counting anything, the court decided what it needed to know, and gave each thing a register of its own.
+
+00:00:53.125 --> 00:01:01.389
+From 1381, households went into the Yellow Registers, in village units of a hundred and ten, led by ten of them in turn.
+
+00:01:03.089 --> 00:01:13.778
+From 1387, land went into the fish-scale registers. Students of the Imperial Academy measured every field: its shape, its size, and its owner's name.
+
+00:01:14.978 --> 00:01:18.732
+Drawn plot by plot, the fields looked like the scales of a fish.
+
+00:01:20.832 --> 00:01:27.707
+Each had one job: the land register settled who held a field; the household register, what each family owed.
+
+00:01:29.207 --> 00:01:35.265
+The Ming History calls them the warp and the weft: threads that run two ways, and together make a cloth.
+
+00:01:37.565 --> 00:01:43.155
+By 1393, the court could count its people again: ten and a half million households.
+
+00:01:44.855 --> 00:01:50.474
+And when a field was sold, its tax went with it, so no family paid for land it no longer held.
+
+00:01:53.774 --> 00:01:57.687
+A university has the same need, and so does every data model.
+
+00:01:58.887 --> 00:02:04.937
+The Inner Life of Data ended on a promise: what it means, and who decides, is the rest of the story.
+
+00:02:06.437 --> 00:02:11.624
+On the way, we drew a sketch: a student, a class, an enrolment, a term and a course.
+
+00:02:13.324 --> 00:02:17.978
+Noor, the data architect, is about to make it the university's shared model.
+
+00:02:19.278 --> 00:02:25.214
+But first, each box needs a place: what it's for, who answers for it, where it's written, and what it means.
+
+00:02:27.114 --> 00:02:32.818
+That's the university's map. The enterprise architecture films draw one for an energy company.
+
+00:02:35.718 --> 00:02:39.440
+The map starts with what the university does: its capabilities.
+
+00:02:40.140 --> 00:02:47.918
+Universities share a reference for them, HERM, the Higher Education Reference Models, so nobody starts from a blank page.
+
+00:02:49.018 --> 00:02:55.133
+A capability says what, not how. Systems and teams change; the need to award a degree doesn't.
+
+00:02:56.433 --> 00:03:04.708
+Open learning and teaching, and the sketch's boxes start to belong somewhere: awards and courses, learner records, graduation.
+
+00:03:05.908 --> 00:03:10.746
+Counting students on census date sits elsewhere: in planning, under strategy.
+
+00:03:13.246 --> 00:03:20.580
+Next, what the university needs to know, in data domains: person, student, course, staff, finance, and a few more.
+
+00:03:21.680 --> 00:03:25.426
+Each domain has one owner: the area that answers for its data.
+
+00:03:26.626 --> 00:03:35.590
+Student and course belong to Mei's registrar's office, with the faculties for courses. Staff is HR's. Organisation is Planning's.
+
+00:03:36.890 --> 00:03:43.604
+The student and the enrolment fall into the student domain; the course, the class and the term, into the course domain.
+
+00:03:45.104 --> 00:03:51.072
+An owner doesn't build anything. An owner decides what the words mean, and what good data looks like.
+
+00:03:53.572 --> 00:03:56.913
+Then, where each thing is first written: its system of record.
+
+00:03:58.013 --> 00:04:04.159
+Students, enrolments and courses are written in the student system. HR and Finance keep their own.
+
+00:04:05.459 --> 00:04:11.786
+The data platform holds copies, to read and to count. A copy is useful, but it never decides.
+
+00:04:12.986 --> 00:04:17.522
+When the two disagree, the record wins, and a mistake is fixed where it was written.
+
+00:04:20.622 --> 00:04:27.273
+Last, what each word means: the business glossary. Each term has a definition, and an owner who decides it.
+
+00:04:28.373 --> 00:04:32.725
+A term is decided there first, and the model copies it, word for word.
+
+00:04:33.925 --> 00:04:37.411
+Look up the sketch's words, and two of them aren't the university's.
+
+00:04:38.511 --> 00:04:46.222
+The registrar's office speaks of unit offerings, not classes: a unit taught in a semester, on campus, online or both.
+
+00:04:47.722 --> 00:04:53.009
+And of teaching periods, not terms, whose census date Planning counts by, for government.
+
+00:04:54.309 --> 00:04:59.069
+Owners decide the words, stewards keep them written, and the data team builds from them.
+
+00:05:01.569 --> 00:05:07.052
+Now cross the two maps, like warp and weft: what the university does, and what it needs to know.
+
+00:05:08.352 --> 00:05:16.028
+Each crossing says who creates a thing, and who only reads it: learning and teaching creates enrolments; Planning reads them.
+
+00:05:17.528 --> 00:05:20.829
+One creator for each thing; as many readers as need it.
+
+00:05:21.529 --> 00:05:26.242
+The sketch now hangs on the map. Each box has an owner, a home and a meaning.
+
+00:05:27.742 --> 00:05:33.791
+All but two: the class, whose word isn't the university's, and the term, whose date two areas share.
+
+00:05:38.491 --> 00:05:41.922
+And when a new question comes, the map says where the work starts.
+
+00:05:43.022 --> 00:05:49.931
+A ticket names the question. The map finds its things, their owners and their records. The glossary gives the words.
+
+00:05:51.431 --> 00:05:56.684
+A contract fixes the shape, and only then is the model built, from what already exists.
+
+00:05:59.584 --> 00:06:05.779
+The two registers let the court settle a field and set a tax, because each had one job, and one keeper.
+
+00:06:06.479 --> 00:06:13.038
+The university's map does the same for its data: when a number is wrong, everyone knows whose record to check.
+
+00:06:14.338 --> 00:06:19.949
+The map says where each box lives. It doesn't say the boxes are right. That's the next film.
+
+00:06:21.249 --> 00:06:22.794
+Map it before you model it.

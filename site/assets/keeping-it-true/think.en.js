@@ -11,7 +11,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "watch":{q:"Why is noticing drift a good first job for an AI agent?",
     opts:[{t:"It can decide which definition is right, since it has read all of them."},{t:"It can read every query, definition and new value, tirelessly, and show the evidence.",ok:true},{t:"It can read every query and definition, and fix the ones that drifted the same night.",near:true}],
     why:"Noticing is tedious for people and cheap for machines. Deciding what the business means stays with people."},
-  "decide":{stop:"review",q:"The agent's draft changes the glossary, the model and the tests. Who approves it?",
+  "decide":{stop:"change",q:"The agent's draft changes the glossary, the model and the tests. Who approves it?",
     opts:[{t:"Nobody: if the tests pass, the draft can merge."},{t:"The model's owner, who approves for the glossary and tests too.",near:true},{t:"Mei the meaning, Noor the model, and the data team the code.",ok:true}],
     why:"The agent recommends; people approve; the tests check the result. Mei decides the meaning in the glossary first, Noor approves the model, and the data team reviews the code."},
   "e2e":{q:"Completion rate was redefined this year. What happens to last year's report?",

@@ -109,63 +109,80 @@ const lw_boardO=(sc,w)=>[
   {s:"ba be bi bo bu",x:70,y:300,size:66,col:"blue",at:w("syllables","new words",-1.4),d:1.2},
   {s:"la le li lo lu",x:640,y:300,size:66,col:"blue",at:w("syllables","new words",-0.2),d:1.2},
   {s:"bola · lata · bota",x:240,y:440,size:70,col:"green",at:w("steps","small step",-0.4),d:1.4}];
-// 1. what one count means: Ivy teaches the team, on Thursday 13 May
-const lw_boardA=(sc,w)=>[
-  {s:"An hour's count",x:70,y:110,size:60,col:"orange",at:w("peak","count",-0.3),d:0.9},
-  {s:"= the most at once",size:52,at:w("peak","most people",-0.2),d:0.9},
-  {s:"0 = saw nobody",x:70,y:226,size:54,col:"green",at:w("gap","zero",-0.2),d:0.8},
-  {s:"· gap = sent nothing",size:54,col:"amber",at:w("gap","gap",-0.1),d:0.9},
-  {s:"never the same",x:560,y:330,size:54,col:"amber",at:w("gap","never the same",-0.2),d:0.8},
-  {s:"heads, never whose",x:560,y:436,size:54,col:"blue",at:w("heads","heads",-0.2),d:0.9}];
+// 1. what one count means: Ivy teaches the team, on Thursday 13 May; drawn as a designer would (PK.sk.drawn), almost done, and she
+// adds the last marks and words as the voice says them, on from left to right
+const lw_boardA=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"What one count means",{ref:["Sam's feed","the sensors"],rsize:32});
+    D.panel(c,70,140,380,276,{title:"one hour",col:"orange",fill:"orange"},(cc,x,y)=>{D.icon(cc,"sensor",x+44,y+30,22,{fill:"white"});
+      D.bars(cc,x+90,y+34,260,110,[{v:4},{v:9},{v:12,col:"orange",top:"12"},{v:7},{v:3}],{size:28,max:13});
+      D.text(cc,"the most at once",x+190,y+190,{size:30,align:"center",col:"mut"});});
+    D.panel(c,480,140,370,276,{title:"zero or gap",col:"green",fill:"green"},(cc,x,y)=>{
+      D.box(cc,x+45,y+120,90,8,{fill:"green",col:"ink",w:2.5,r:2});D.text(cc,"0",x+90,y+100,{size:44,w:700,align:"center",col:"green"});D.text(cc,"saw nobody",x+90,y+172,{size:28,align:"center"});
+      D.box(cc,x+225,y+40,90,88,{fill:false,col:"amber",w:3,r:6,dash:[9,8]});D.text(cc,"sent nothing",x+270,y+172,{size:28,align:"center"});});
+    D.panel(c,880,140,300,276,{title:"heads",col:"blue",fill:"blue"},(cc,x,y)=>{for(let i=0;i<5;i++)D.icon(cc,"person",x+50+i*50,y+44+(i%2)*22,20,{fill:"white"});
+      D.text(cc,"counted, not named",x+150,y+172,{size:28,align:"center",col:"mut"});});}),
+  {k:"ring",x:290,y:290,rx:40,ry:68,col:"orange",at:w("peak","most people",-0.2),d:0.6},
+  {s:"never the same",x:665,y:468,size:42,w:700,col:"amber",align:"center",at:w("gap","never the same",-0.2),d:0.8},
+  {s:"never whose",x:1180,y:468,size:46,w:700,col:"blue",align:"right",at:w("heads","heads",-0.2),d:0.8}];
 // 2. how adults learn at work (Carmen Vidal)
-const lw_boardB=(sc,w)=>[
-  {s:"Lave & Wenger · apprentices",x:70,y:106,size:48,col:"mut",at:w("lave","Jean Lave",0),d:1.1},
-  {s:"Start at the edge, on real work",x:70,y:212,size:52,col:"blue",at:w("edge","taking part",-0.3),d:1.2},
-  {s:"Ericsson · just past what you can do",x:70,y:318,size:46,at:w("ericsson","practice",-0.3),d:1.3},
-  {s:"+ quick feedback",x:640,y:424,size:50,col:"green",at:w("ericsson","feedback",-0.3),d:0.8}];
+const lw_boardB=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"How adults learn at work");
+    D.panel(c,70,140,540,290,{title:"Lave & Wenger",col:"green",fill:"green"},(cc,x,y)=>{const cx=x+170,cy=y+106;
+      D.disc(cc,cx,cy,100,{fill:"white",col:"ink",w:3});D.disc(cc,cx,cy,50,{fill:"green",col:"ink",w:3});
+      D.icon(cc,"person",cx-16,cy,18,{fill:"white"});D.icon(cc,"person",cx+18,cy+4,18,{fill:"white"});D.icon(cc,"person",cx+92,cy-50,18,{fill:"amber"});
+      D.arrow(cc,[cx+74,cy-30],[cx+46,cy-14],{col:"amber",w:3,head:10});
+      D.text(cc,"apprentices:",x+300,y+70,{size:30,w:700});D.text(cc,"tailors,",x+300,y+112,{size:30,col:"mut"});D.text(cc,"midwives",x+300,y+150,{size:30,col:"mut"});
+      D.caps(cc,"at the edge",x+300,y+200,{col:"amber",size:28});});
+    D.panel(c,650,140,530,290,{title:"Ericsson",col:"blue",fill:"blue"},(cc,x,y)=>{D.stairs(cc,x+40,y+40,250,150,[["",{col:"blue"}],["",{col:"blue"}],["",{col:"blue"}],["",{col:"green"}]],{});
+      D.icon(cc,"flag",x+266,y+20,20,{fill:"green"});D.text(cc,"just past",x+320,y+96,{size:30,w:700});D.text(cc,"what you can",x+320,y+136,{size:30});D.text(cc,"do yet",x+320,y+174,{size:30});});}),
+  {s:"on the real work",x:340,y:470,size:44,w:700,col:"green",align:"center",at:w("edge","real work",-0.2),d:0.8},
+  {s:"+ quick feedback",x:1180,y:470,size:44,w:700,col:"blue",align:"right",at:w("ericsson","feedback",-0.3),d:0.8}];
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): drawn as a designer would,
+   a sketched page almost done when it first shows; the pen adds the last marks and words as the voice says them. One pen writes a page. */
 // 1. pairing (Ivy)
-const lw_note1=(sc,w)=>[
-  {s:"Pairing, an hour a day",x:70,y:124,size:72,w:840,col:"blue",at:w("small","Each day",-0.4),d:0.9,marks:[["under","blue",null,0.3]]},
-  {s:"one types, one reads and asks",x:110,y:262,size:50,at:w("small","small change",-0.3),d:1.0},
-  {s:"one small change, finished",x:110,y:358,size:52,col:"green",at:w("small","finished",-0.2),d:0.9},
-  {s:"reviewed by someone else",x:110,y:454,size:52,at:w("review","reviews",-0.3),d:0.9},
-  {s:"Noor or Sam",x:110,y:548,size:52,col:"green",at:w("review","Noor",-0.2),d:0.6}];
+const lw_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Pairing, an hour a day",86,124,{size:72});
+    D.face(c,"ivy",190,258,46);D.face(c,"jun",360,258,46);D.icon(c,"laptop",275,330,30,{fill:"blue"});
+    D.text(c,"types",190,350,{size:30,align:"center",col:"mut"});D.text(c,"reads, asks",360,384,{size:30,align:"center",col:"mut"});
+    D.icon(c,"loop",520,262,28,{fill:"blue"});D.text(c,"and they swap",568,274,{size:36});
+    D.flow(c,110,436,[{s:"one small change",icon:"wrench",ifill:"orange"},{s:"finished",icon:"check",ifill:"green"},{s:"reviewed",icon:"eye",ifill:"blue"}],{size:32,gap:40});
+    D.faces(c,790,600,["noor","sam"],{r:30,gap:84});},[60,40,1040,800]),
+  {k:"star",x:560,y:428,r:22,col:"green",at:w("small","finished",-0.2),d:0.4},
+  {s:"by someone else",x:110,y:618,size:52,w:700,col:"green",at:w("review","someone else",-0.2),d:0.9}];
 // 2. the learning time (Ivy)
-const lw_note2=(sc,w)=>[
-  {s:"Thursdays, 2 to 4",x:70,y:124,size:80,w:760,col:"blue",at:w("pick","picks",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"one thing the work needs",x:110,y:262,size:54,at:w("pick","one thing",-0.2),d:0.9},
-  {s:"the official docs first",x:110,y:358,size:54,col:"blue",at:w("pick","own docs",-0.2),d:0.9},
-  {s:"try it on the real project",x:110,y:454,size:54,col:"orange",at:w("try","try it",-0.2),d:0.9},
-  {s:"write it down, beside the code",x:110,y:548,size:50,col:"green",at:w("try","write down",-0.2),d:1.0}];
+const LW_TRY=[["target","one thing the work needs","one thing"],["book","the official docs first","own docs"],["wrench","try it on the real project","try it"]];
+const lw_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Thursdays, 2 to 4",86,124,{size:80});D.icon(c,"cal",820,96,34,{fill:"blue"});
+    D.flow(c,110,196,LW_TRY.map(([icon,s])=>({s,icon,ifill:"blue"})),{size:32,gap:40,down:true,bw:520});
+    D.sticky(c,700,250,280,150,{col:"sun",rot:0.03,draw:(cc,x,y)=>{D.icon(cc,"shield",x+46,y+52,24,{fill:"green"});D.text(cc,"kept free",x+82,y+64,{size:34,w:700});D.text(cc,"by Helena",x+82,y+108,{size:30,col:"mut"});}});},[60,40,1040,800]),
+  ...LW_TRY.map(([, ,word],i)=>({k:"tick",x:672,y:224+i*110,r:22,col:"green",at:w(i<2?"pick":"try",word,-0.2),d:0.3})),
+  {s:"write it down, beside the code",x:110,y:612,size:50,w:700,col:"green",at:w("try","write down",-0.2),d:1.0}];
 // 3. teach it to keep it (Helena)
-const lw_note3=(sc,w)=>[
-  {s:"Teach it to keep it",x:70,y:124,size:80,w:760,col:"blue",at:w("study","found the same",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"Fiorella and Mayer",x:110,y:252,size:50,col:"mut",at:w("study","Logan Fiorella",0),d:0.8},
-  {s:"prepared, then taught:",x:110,y:350,size:54,at:w("taught","prepared",-0.2),d:0.9},
-  {s:"remembered more",x:110,y:446,size:58,col:"green",at:w("taught","remembered more",-0.2),d:0.8},
-  {s:"Freire: teaching, we learn",x:110,y:548,size:52,col:"orange",at:w("freire","whoever teaches",-0.3),d:1.0}];
-// 4. the nine jobs, and who can run each (Helena): the second names come later, at the right of their rows
-const lw_note4=(sc,w)=>[
-  {s:"Nine jobs: who can run each?",x:70,y:118,size:62,w:900,col:"blue",at:sc.cues.five-0.1,d:1.0},
-  {s:"5 with one name",x:110,y:226,size:56,col:"amber",at:w("five","Five",0.9),d:0.8},
-  {s:"sensors' feed: Sam",x:110,y:326,size:52,at:w("five","sensors' feed",-0.2),d:0.9},
-  {s:"room models: Jun",x:110,y:420,size:52,at:w("five","room models",-0.2),d:0.9},
-  {s:"30 June: two names each",x:110,y:540,size:56,col:"green",at:w("june","two names",-0.5),d:1.0},
-  {s:"+ Ivy",x:600,y:326,size:52,col:"green",at:w("ivy","sensors' feed",-0.3),d:0.5},
-  {s:"+ Ivy",x:600,y:420,size:52,col:"green",at:w("ivy","room models",-0.3),d:0.5}];
+const lw_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Teach it to keep it",86,124,{size:80});
+    D.caps(c,"remembered later",140,210,{col:"mut",size:28});D.stamp(c,["Fiorella & Mayer"],820,214,{col:"blue",size:32,rot:-0.05});
+    D.bars(c,140,236,460,236,[{v:0.55,label:"only studied",col:"blue"},{v:0.9,label:"taught it",col:"green"}],{size:30,max:0.95});
+    D.box(c,110,566,820,150,{fill:"orange",col:"orange",w:3,r:16,dash:[12,9]});D.text(c,"“",150,650,{size:96,w:700,col:"orange"});D.text(c,"Freire",900,700,{size:30,align:"right",col:"mut"});},[60,40,1040,800]),
+  {k:"star",x:485,y:236,r:24,col:"green",at:w("taught","remembered more",-0.2),d:0.4},
+  {s:"teaching, we learn",x:210,y:660,size:56,w:700,col:"orange",at:w("freire","whoever teaches",-0.3),d:1.0}];
+// 4. the nine jobs, and who can run each (Helena): five with one name; Ivy's name comes later, on two of them
+const LW_JOBS=[["sensor",["sam"],"sensors' feed"],["cal",["noor","marta"]],["gear",["jun"],"room models"],["map",["noor"]],["db",["sam","jun"]],["lock",["marta"]],
+  ["bars",["jun","marta"]],["mail",["sam"]],["doc",["noor","sam"]]];
+const lw_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Nine jobs: who can run each?",86,118,{size:62});
+    LW_JOBS.forEach(([ic,who,lab],k)=>{const x=110+(k%3)*296,y=168+Math.floor(k/3)*150,one=who.length<2;
+      D.box(c,x,y,270,132,{fill:one?"amber":"green",col:"ink",w:2.5,r:12});D.icon(c,ic,x+40,y+42,24,{fill:"white"});if(lab)D.text(c,lab,x+78,y+52,{size:28,w:700});
+      who.forEach((k2,j)=>D.face(c,k2,x+46+j*58,y+98,20));if(one)D.disc(c,x+104,y+98,20,{fill:false,col:"mut",w:2,dash:[5,5]});});},[60,40,1040,800]),
+  {s:"5 with one name",x:110,y:686,size:52,w:700,col:"amber",at:w("five","Five",0.9),d:0.8},
+  {k:"ring",x:245,y:234,rx:150,ry:84,col:"amber",at:w("five","sensors' feed",-0.2),d:0.6},{k:"ring",x:837,y:234,rx:150,ry:84,col:"amber",at:w("five","room models",-0.2),d:0.6},
+  {s:"30 June: two names each",x:110,y:770,size:52,w:700,col:"green",at:w("june","two names",-0.5),d:1.0},
+  {s:"+ Ivy",x:240,y:278,size:36,w:700,col:"green",at:w("ivy","sensors' feed",-0.3),d:0.5},{s:"+ Ivy",x:832,y:278,size:36,w:700,col:"green",at:w("ivy","room models",-0.3),d:0.5}];
 // 5. seventy, twenty, ten (Helena)
-const lw_note5=(sc,w)=>[
-  {s:"70 · 20 · 10",x:70,y:124,size:84,w:700,col:"orange",at:w("rule","seventy",-0.3),d:0.8,marks:[["under","orange",null,0.3]]},
-  {s:"70 doing the work",x:110,y:256,size:54,at:w("rule","doing",-0.3),d:0.8},
-  {s:"20 other people · 10 courses",x:110,y:352,size:50,at:w("twenty","twenty",-0.2),d:1.1},
-  {s:"a rule of thumb",x:110,y:448,size:54,col:"amber",at:w("thumb","rule of thumb",-0.2),d:0.8},
-  {s:"it points the same way",x:110,y:548,size:54,col:"green",at:w("thumb","points",-0.2),d:0.9}];
-// 6. on Monday (Helena)
-const lw_note6=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("real","On Monday",0),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(252,"orange",w("real","real work",-0.4)),{s:"On the real work, beside someone",x:128,y:252,size:46,at:w("real","real work",-0.1),d:1.2},
-  dot(352,"green",w("step","small step",-0.4)),{s:"One small step, finished",x:128,y:352,size:48,at:w("step","small step",-0.1),d:0.9},
-  dot(452,"blue",w("time","learning time",-0.4)),{s:"Learning time, kept · docs first",x:128,y:452,size:46,at:w("time","learning time",-0.1),d:1.1},
-  dot(552,"green",w("teach","Write down",-0.3)),{s:"Write it down, and teach it",x:128,y:552,size:48,at:w("teach","Write down",0),d:1.0}];};
+const lw_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"70 · 20 · 10",86,124,{size:84,col:"orange"});
+    D.donut(c,290,380,150,[{v:70,col:"orange"},{v:20,col:"blue"},{v:10,col:"green"}]);
+    [["orange","70","doing the work"],["blue","20","other people"],["green","10","courses"]].forEach(([col,n,s],i)=>{const y=310+i*74;
+      D.box(c,500,y-30,36,36,{fill:col,col:"ink",w:2.5,r:6});D.text(c,n,556,y,{size:40,w:700});D.text(c,s,616,y,{size:38});});},[60,40,1040,800]),
+  {s:"a rule of thumb,",x:110,y:640,size:52,w:700,col:"amber",at:w("thumb","rule of thumb",-0.2),d:0.8},
+  {s:"it points the same way",x:110,y:730,size:52,w:700,col:"green",at:w("thumb","points",-0.2),d:0.9}];
+// 6. on Monday (Helena): four tiles; a tick as the voice comes to each, and the last in her hand
+const LW_MON=[["people",["On the real work,","beside someone"],"real","real work"],["up",["One small step,","finished"],"step","small step"],["cal",["Learning time, kept,","docs first"],"time","learning time"]];
+const lw_note6=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,122,{size:88});
+    LW_MON.concat([["pen",[],"",""]]).forEach(([ic,L],k)=>{const x=110+(k%2)*450,y=190+Math.floor(k/2)*250;D.box(c,x,y,420,226,{fill:k<3?"blue":"green",col:"ink",w:2.5,r:14});
+      D.icon(c,ic,x+48,y+50,26,{fill:"white"});L.forEach((s,j)=>D.text(c,s,x+30,y+132+j*46,{size:36,w:j?400:700}));});},[60,40,1040,800]),
+  ...LW_MON.map(([, ,id,word],k)=>({k:"tick",x:110+(k%2)*450+380,y:190+Math.floor(k/2)*250+42,r:22,col:"green",at:w(id,word,0.4),d:0.3})),
+  {s:"Write it down,",x:590,y:572,size:40,w:700,col:"green",at:w("teach","Write down",0),d:0.7},{s:"and teach it",x:590,y:620,size:40,w:700,col:"green",at:w("teach","teach it",-0.1),d:0.6}];

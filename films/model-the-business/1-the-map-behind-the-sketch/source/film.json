@@ -1,0 +1,21 @@
+{
+  "key": "the-map-behind-the-sketch",
+  "title": "The map behind the sketch",
+  "sub": "Model the business: before a data model gets sharper, each box needs a place on the organisation's map.",
+  "howto": "Warm paper is China in the 1380s and its two registers; the films' dark glass is the university. Each part of the university's map has its colour: wheat for what it's for, salmon for who answers for it, green for where it's written, and lilac for what it means. Amber marks a question still open.",
+  "src": [
+    "map.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "cross",
+    "two",
+    6.8
+  ],
+  "say": [],
+  "story": [
+    "lost",
+    "two"
+  ],
+  "urgent": []
+}

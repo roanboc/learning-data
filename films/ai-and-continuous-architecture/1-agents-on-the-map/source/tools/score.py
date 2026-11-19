@@ -205,8 +205,8 @@ mark(G(K, 'breath', 1.2), 0.02)
 
 # 2. On Tomás's map: the chapter's chord, F, as Tomás and his note come in, and paper for the note; a knock for each layer as the map
 #    stacks; a celesta note for each of the two agents on it; a slot for each as it's assigned its role, and paper for its rights;
-#    air as the platform slides in under the map, a knock for the architects' own work, and a pencil for the loop of a map kept
-#    alive; paper and a knock for the AI agents module's card, and a harp note as the map shows who answers
+#    air as the platform slides in under the map, a knock for what each agent may read (and, until 19 November 2026, a pencil for a map kept alive);
+#    paper and a knock for the AI agents module's card, and a harp note as the map shows who answers
 M = 'map'
 turn(NF, S0(M) + 0.6, 0.016, px(400))
 paper(C(M, 'note', -0.3), 0.014, px(380))
@@ -218,7 +218,7 @@ for k in range(2):
     slot(C(M, 'rights', 0.1 + 0.4 * k), 0.01, px(1460 + 210 * k))
 paper(W(M, 'rights', 'rights', -0.2), 0.01, px(1400))
 air(W(M, 'series', 'platform', -0.2), 1.1, 0.01, 0.0)
-knock(W(M, 'series', 'own work', -0.3), 0.01, px(400)); pencil(W(M, 'series', 'kept alive', -0.2), 0.007, px(1290), 0.7)
+knock(W(M, 'series', 'may read', -0.3), 0.01, px(400))
 tMd = C(M, 'module')
 paper(tMd - 0.2, 0.012, px(380)); knock(tMd, 0.01, px(380))
 harp_(69, W(M, 'module', 'who answers', -0.1), 0.014, px(1510))

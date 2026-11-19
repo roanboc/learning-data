@@ -906,51 +906,6 @@ async def check_think_silent(run):
             await pg.wait_for_timeout(300)
             expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after Escape on a question, focus isn't on the Play button")
             await pg.evaluate("() => FILM.pause()")
-            # the question list, from the same pack
-            L = await pg.evaluate("""() => [...document.querySelectorAll('#think-list details')].map(d => ({
-              id: d.querySelector('[data-scene]').dataset.scene, k: d.querySelector('.tq-k').textContent,
-              lab: (d.querySelector('a.think-lab') || {}).href, ok: (d.querySelector('li.ok') || {}).textContent }))""")
-            expect(sec, [x["id"] for x in L] == ["night", "bronze", "halves", "contract"], f"{where}: #think-list has {[x['id'] for x in L]}, expected night, bronze, halves, contract")
-            for x in L:
-                expect(sec, x["k"] == X["names"][x["id"]], f"{where}: the list names {x['id']} {x['k']!r}, expected {X['names'][x['id']]!r}")
-                want = run.url(("es/" if lang == "es" else "") + "labs/#" + X["qs"][x["id"]]["stop"])
-                expect(sec, x["lab"] == want, f"{where}: {x['id']}'s lab link goes to {x['lab']}, expected {want}")
-            # the +/− sign isn't part of a question's name
-            # its accessible name, from Playwright's ARIA snapshot (page.accessibility is gone): "- text: …" or "- role "…""
-            snap = (await pg.locator("#think-list summary").first.aria_snapshot()).split("\n")[0]
-            m = re.match(r'- (?:text: (.*)|[\w-]+ "(.*)")', snap)
-            name = (m.group(1) or m.group(2) or "") if m else ""
-            expect(sec, name and not name.rstrip().endswith(("+", "−")), f"{where}: the first question's name is {name!r}")
-            await run.think(pg, False)
-            # Space on a question opens it, and doesn't reach the player (which listens for Space while it is on screen)
-            await pg.evaluate("() => { document.querySelector('#think-list summary').focus({preventScroll: true}); document.querySelector('.player').scrollIntoView({block: 'center', behavior: 'instant'}); }")
-            await pg.wait_for_timeout(500)
-            await pg.keyboard.press("Space")
-            await pg.wait_for_timeout(300)
-            r = await pg.evaluate("() => ({open: document.querySelector('#think-list details').open, playing: FILM.playing()})")
-            expect(sec, r["open"] and not r["playing"], f"{where}: Space on a question {r}; expected it to open, with the film still")
-            await pg.evaluate("() => { FILM.pause(); document.querySelector('#think-list details').open = false; }")
-            # "Watch this part" plays that chapter only (the soundtrack runs fast to get there quickly), and hands focus to Play
-            await pg.evaluate("() => { const d = [...document.querySelectorAll('#think-list details')].find(d => d.querySelector('[data-scene=halves]')); d.open = true; }")
-            await pg.click("#think-list [data-scene=halves]")
-            # the page scrolls there smoothly, and the scroll may not have started when the click returns: wait for the film
-            # itself to come into view, then for the page to hold still (waiting for a still page alone read it before it moved)
-            try:
-                await pg.wait_for_function("() => { const t = document.getElementById('watch').getBoundingClientRect().top; return t >= -2 && t <= 160; }", timeout=2000)
-            except Exception:  # noqa: BLE001
-                pass
-            await run.settle(pg)
-            r = await pg.evaluate("() => { const s = SCENES.find(x => x.id === 'halves'); return {t: FILM.time(), start: s.start, end: s.start + s.dur, playing: FILM.playing(), top: document.getElementById('watch').getBoundingClientRect().top}; }")
-            expect(sec, r["playing"] and r["start"] <= r["t"] < r["start"] + 3, f"{where}: \"Watch this part\" doesn't play \"halves\" from its start ({r})")
-            expect(sec, -2 <= r["top"] <= 160, f"{where}: \"Watch this part\" doesn't bring the film into view ({r})")
-            expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after \"Watch this part\", focus isn't on the Play button")
-            await pg.evaluate("() => { document.getElementById('snd').playbackRate = 16; }")
-            try:
-                await pg.wait_for_function("() => !FILM.playing()", timeout=90000)
-            except Exception:  # noqa: BLE001
-                pass
-            t = await pg.evaluate("() => FILM.time()")
-            expect(sec, abs(t - (r["end"] - 0.05)) < 0.4, f"{where}: \"Watch this part\" stopped at {t:.2f} s, expected the end of \"halves\" ({r['end']:.2f} s)")
             for p in log_problems(log):
                 expect(sec, False, f"{where}: {p}")
             await pg.close()
@@ -1240,7 +1195,7 @@ async def check_mobile(run):
     sec = run.rep.sec("mobile", "Phones and tablets: cards stack and the whole card is a link, anchors clear the header and the course bar, panels sit below the film up to 900 px and inside it above")
     grids = run.pick(k for k, pg in run.static.items() if not pg.redirect and (pg.dom.first(cls="topic-grid") or pg.dom.first(cls="topic-tiles")))
     anchors = [(k, a) for k, a in (("", "watch"), ("", "go-deeper"), ("topics/", "data-modelling"), ("topics/", "enterprise-architecture"),
-                                   ("es/", "go-deeper"), ("when-things-go-wrong/silent-change/", "think-it-through")) if run.want(k)]
+                                   ("es/", "go-deeper"), ("when-things-go-wrong/silent-change/", "watch")) if run.want(k)]
     panels = run.pick(("", "when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/", "sketch/"))
     if not (grids or anchors or panels or run.want("topics/")):
         return

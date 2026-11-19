@@ -1,7 +1,7 @@
 """Arms, and who is in front of whom (films/people-first/shared/tools/people.py), on a made-up film drawn with the kit's own
 people: a near arm across the face, a hand at work above the head, a hand that stops short of what it reaches for, someone hidden
-behind someone else, someone or something further away drawn over what is nearer, and two solid things in one place. And the
-list of what the films still have to put right."""
+behind someone else, someone or something further away drawn over what is nearer, two solid things in one place, and a board or a
+page that is only writing. And the list of what the films still have to put right."""
 import json
 import pathlib
 import sys
@@ -18,12 +18,16 @@ import films as release_films
 
 # a made-up film: one chapter for each thing the check reads, drawn with the kit's own PK.person
 FILM = """<!doctype html><meta charset="utf-8">%s<script>
-const IDS = ['face', 'far', 'high', 'low', 'short', 'reach', 'behind', 'apart', 'extra', 'order', 'right', 'cars', 'lane', 'pass'];
+const IDS = ['face', 'far', 'high', 'low', 'short', 'reach', 'behind', 'apart', 'extra', 'order', 'right', 'cars', 'lane', 'pass',
+  'plainB', 'plainN', 'drawn'];
 const SCENES = IDS.map((id, i) => ({id, start: 4 * i, dur: 4})), TL = {total: 4 * IDS.length};
 function filmInfo() { return {scenes: SCENES}; }
 function sceneIndex(T) { return Math.max(0, Math.min(IDS.length - 1, Math.floor(T / 4))); }
 // a car: a box on its wheels' line, which the film says is solid
 function car(ctx, x, y) { ctx.fillRect(x - 200, y - 130, 400, 130); if (PK.watch) PK.watch({solid: 'car', at: [x - 200, y - 130, x + 200, y], ground: y, ctx}); }
+// a board someone explains at, and a page of notes, as PK.teach and PK.notes tell the check of them: plain, or drawn as a designer would
+const board = (ctx, plain) => PK.watch && PK.watch({teach: 'carmen', over: false, late: [], lag: [], edge: [], plain, a: 1, ctx});
+const page = (ctx, plain) => PK.watch && PK.watch({note: true, who: 'ivy', edge: [], tip: null, plain, a: 1, ctx});
 function renderFrame(ctx, S, T) {
   const id = IDS[sceneIndex(T)], P = (who, x, floor, o, h) => PK.person(ctx, who, x, floor, h || 600, 'stand', Object.assign({t: T}, o));
   ctx.save(); ctx.scale(S, S);
@@ -47,6 +51,10 @@ function renderFrame(ctx, S, T) {
   if (id === 'cars') { car(ctx, 700, 700); car(ctx, 800, 650); }
   if (id === 'lane') { car(ctx, 700, 700); car(ctx, 900, 700); }
   if (id === 'pass') { car(ctx, 800, 650); car(ctx, 700, 700); }
+  // a board and a page that are only writing; and the two drawn as a designer would (PK.sk.drawn)
+  if (id === 'plainB') board(ctx, true);
+  if (id === 'plainN') page(ctx, true);
+  if (id === 'drawn') { board(ctx, false); page(ctx, false); }
   ctx.restore();
 }
 window.__READY__ = true;
@@ -127,6 +135,14 @@ class PageTests(unittest.TestCase):
         self.assertEqual(self.kinds("lane"), ["solid"])
         self.assertIn("two solid things (car, car) are in one place", self.got["lane"][0][1])
         self.assertEqual(self.kinds("pass"), [])
+
+
+    def test_a_board_or_a_page_that_is_only_writing(self):
+        self.assertEqual(self.kinds("plainB"), ["plain"])
+        self.assertIn("the board carmen explains at is only writing", self.got["plainB"][0][1])
+        self.assertEqual(self.kinds("plainN"), ["plain"])
+        self.assertIn("ivy's page of notes is only writing", self.got["plainN"][0][1])
+        self.assertEqual(self.kinds("drawn"), [])
 
 
 class ListTests(unittest.TestCase):

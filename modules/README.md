@@ -176,6 +176,8 @@ Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/qu
 - [Read by an agent](../films/quality-as-a-habit/3-read-by-an-agent/) — `read-by-an-agent`
 - [Small, every week](../films/quality-as-a-habit/4-small-every-week/) — `small-every-week`
 
+Labs and assessments: [site/assets/quality-as-a-habit/learn.en.js](../site/assets/quality-as-a-habit/learn.en.js), [site/assets/quality-as-a-habit/learn.es.js](../site/assets/quality-as-a-habit/learn.es.js)
+
 ## Enterprise architecture
 
 Module: `enterprise-architecture` · [metadata](enterprise-architecture/module.json)

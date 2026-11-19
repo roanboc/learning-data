@@ -101,8 +101,10 @@ function ed_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
 
 
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Daniels's board in 1952 is written plainly, as his office's was; Carmen's and Helena's are drawn as a
+   designer would, a graphic recording pinned over the board, almost done when it first shows (PK.sk.drawn): whoever explains adds the
+   last marks and words as the voice says them, on from left to right, and steps clear. */
 // 0. Daniels's count in 1952, on his office's board: how many of the flyers were average, measurement by measurement
 const ed_boardO=(sc,w)=>[
   {s:"4,063 flyers",x:70,y:110,size:64,col:"orange",at:w("height","men",-0.6),d:0.8},
@@ -111,18 +113,30 @@ const ed_boardO=(sc,w)=>[
   {s:"143 · 73 · 28 · 12",x:170,y:330,size:58,at:w("fewer","fewer",-0.1),d:1.2},
   {s:"6 · 3 · 2",x:700,y:330,size:58,at:w("fewer","six",-0.2),d:0.9},
   {s:"all ten · not one",x:520,y:450,size:64,col:"amber",at:w("none","not one",-0.4),d:0.9,marks:[["under","amber",null,0.3]]}];
-// 1. Minto's pyramid (Carmen, at the team's board)
-const ed_boardA=(sc,w)=>[
-  {s:"The pyramid · Minto",x:70,y:110,size:58,col:"blue",at:w("minto","pyramid",-0.3),d:1.0},
-  {s:"1 · the answer",x:110,y:220,size:58,col:"green",at:w("minto","answer",-0.2),d:0.8},
-  {s:"2 · the reasons",x:330,y:330,size:56,at:w("minto","reasons",-0.2),d:0.8},
-  {s:"3 · the evidence under each",x:540,y:440,size:52,at:w("minto","evidence",-0.2),d:1.1}];
-// 2. show the data, to whom (Carmen)
-const ed_boardB=(sc,w)=>[
-  {s:"Tufte",x:70,y:110,size:56,col:"blue",at:w("tufte","Tufte's",-0.2),d:0.5},
-  {s:"above all else, show the data",x:110,y:210,size:52,at:w("tufte","show the data",-0.6),d:1.2},
-  {s:"Knaflic",x:70,y:320,size:56,col:"green",at:w("knaflic","Knaflic's",-0.2),d:0.6},
-  {s:"know who · the one thing",x:520,y:430,size:52,at:w("knaflic","know who",-0.2),d:1.1}];
+// 1. Minto's pyramid (Carmen, at the team's board): the boxes are there, joined as a tree; she names each level as the voice comes to it
+const ed_boardA=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"The pyramid",{ref:["Barbara Minto","1978"],rsize:32});
+    // the answer at the top, three reasons under it, the evidence under each
+    const MX=[70,260,450],MW=160;D.box(c,250,146,200,62,{fill:"green",col:"ink",w:3,r:10});D.icon(c,"check",350,177,20,{fill:"white"});
+    MX.forEach((x,i)=>{D.line(c,[[350,208],[x+MW/2,262]],{col:"ink",w:2.5,seed:i+1});D.box(c,x,262,MW,56,{fill:"blue",col:"ink",w:3,r:10});
+      for(let j=0;j<2;j++){const ex=x+8+j*80;D.line(c,[[x+MW/2,318],[ex+32,372]],{col:"ink",w:2,seed:i*2+j+5});D.box(c,ex,372,64,44,{fill:"orange",col:"ink",w:2.5,r:8});}});
+    // a dashed line from each level to where its name goes
+    [[462,178,604],[622,290,664],[614,394,640]].forEach(([x0,y,x1],i)=>D.line(c,[[x0,y],[x1,y]],{col:"mut",w:2.5,dash:[8,10],seed:i+9}));}),
+  {s:"the answer",x:620,y:194,size:48,w:700,col:"green",at:w("minto","answer",-0.2),d:0.7},
+  {s:"the reasons",x:680,y:306,size:48,w:700,col:"blue",at:w("minto","reasons",-0.2),d:0.7},
+  {s:"the evidence under each",x:1180,y:410,size:46,w:700,col:"orange",align:"right",at:w("minto","evidence",-0.2),d:1.0}];
+// 2. show the data, to whom (Carmen): Tufte's chart of the whole week and Knaflic's reader are there; she writes what each says
+const ed_boardB=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Charts for a decision");
+    D.panel(c,70,138,560,326,{title:"Tufte · 1983",col:"blue",fill:"blue"},(cc,x,y)=>{
+      // every day of the week as it is, the peak in it, nothing summed away
+      D.bars(cc,x+30,y+6,280,112,[{v:22,col:"orange"},{v:93,col:"orange"},{v:91,col:"orange"},{v:90,col:"orange"},{v:18,col:"orange"}],{max:100});
+      D.text(cc,"93%",x+352,y+62,{size:46,w:700,col:"orange"});D.text(cc,"at the peak",x+352,y+100,{size:30,col:"mut"});
+      D.text(cc,"above all else,",x+30,y+180,{size:32,col:"mut"});});
+    D.panel(c,670,138,510,326,{title:"Knaflic · 2015",col:"green",fill:"green"},(cc,x,y)=>{
+      D.icon(cc,"people",x+50,y+48,32,{fill:"blue"});D.text(cc,"the Council",x+100,y+104,{size:30,col:"mut"});
+      D.icon(cc,"target",x+50,y+170,32,{fill:"amber"});D.text(cc,"they need to see",x+100,y+226,{size:30,col:"mut"});});}),
+  {s:"show the data",x:100,y:444,size:50,w:700,col:"blue",at:w("tufte","show the data",-0.4),d:0.9},
+  {s:"know who",x:770,y:262,size:48,w:700,col:"green",at:w("knaflic","know who",-0.2),d:0.6},
+  {s:"the one thing",x:1150,y:384,size:48,w:700,col:"green",align:"right",at:w("knaflic","one thing",-0.2),d:0.8}];
 
 /* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
 // 1. fit the range (the designers' notebook, 1952 onwards)
@@ -131,30 +145,45 @@ const ed_note1=(sc,w)=>[
   {s:"5 ft 5 to 6 ft 1",x:110,y:262,size:60,col:"orange",at:w("range","five foot five",-0.3),d:1.0},
   {s:"nine flyers in ten",x:110,y:372,size:60,col:"green",at:w("range","nine flyers",-0.2),d:0.9},
   {s:"not the average",x:110,y:482,size:60,col:"amber",at:w("fit","not the average",-0.2),d:0.8}];
-// 2. Ivy's page, top first (the decision, the answer, three lines)
-const ed_note2=(sc,w)=>[
-  {s:"Council · 1 June",x:70,y:124,size:72,w:760,col:"blue",at:w("decision","Ivy's page",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"A new building now, or not yet?",x:110,y:240,size:48,col:"blue",at:w("decision","new building",-0.3),d:1.1},
-  {s:"Short only 10 to 2, Tue to Thu",x:110,y:340,size:48,col:"green",at:w("answer","one sentence",-0.2),d:1.1},
-  {s:"the peak · unused bookings",x:150,y:440,size:46,at:w("three","the peak",-0.2),d:1.0},
-  {s:"what not building takes",x:150,y:530,size:46,at:w("three","what it would take",-0.2),d:0.9}];
-// 3. what the average hid (Ivy)
-const ed_note3=(sc,w)=>[
-  {s:"What it turns on",x:70,y:124,size:76,w:760,col:"blue",at:w("hides","hides",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"the week: 38%",x:110,y:250,size:56,col:"mut",at:w("hides","average",-0.2),d:0.8},
-  {s:"10 to 2, Tue to Thu: 93%",x:110,y:350,size:54,col:"orange",at:w("peak","Tuesday",-0.4),d:1.0},
-  {s:"booked, nobody: 1 in 5",x:110,y:450,size:54,col:"amber",at:w("used","nobody",-0.6),d:0.9}];
-// 4. what isn't known, in their words (Ivy)
-const ed_note4=(sc,w)=>[
-  {s:"Not to build",x:70,y:124,size:76,w:760,col:"blue",at:w("take","not to build",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"move 1 peak class in 6",x:110,y:250,size:52,col:"green",at:w("take","move",-0.2),d:0.9},
-  {s:"release rooms nobody uses",x:110,y:340,size:52,col:"green",at:w("take","release",-0.2),d:0.9},
-  {s:"not known: students by 2030",x:110,y:440,size:50,col:"amber",at:w("unknown","isn't known",-0.2),d:1.0},
-  {s:"holds at twice the growth",x:110,y:540,size:50,at:w("holds","twice",-0.4),d:0.9}];
-// 5. on Monday (Helena, at the team's board)
-const ed_boardM=(sc,w)=>[
-  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("one","On Monday",0),d:0.6},
-  {s:"the decision, then the answer",x:110,y:210,size:50,at:w("one","decision",-0.1),d:1.1},
-  {s:"show what it turns on",x:200,y:300,size:50,col:"orange",at:w("two","Show",0),d:0.9},
-  {s:"say what you don't know",x:290,y:390,size:50,col:"amber",at:w("three","don't know",-0.3),d:1.0},
-  {s:"try it on someone new",x:380,y:470,size:50,col:"green",at:w("four","Try it",0),d:0.9}];
+// 2. Ivy's page, top first (Ivy): the page's parts are laid out in Minto's order; she writes the decision and the answer as the voice
+// says them, and ticks the three lines under them
+const ED_THREE=[["bars","orange","the peak","peak"],["door","amber","bookings nobody used","nobody"],["building","green","not to build","not to build"]];
+const ed_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Council · 1 June",86,124,{size:72});
+    D.panel(c,100,172,880,150,{title:"the decision",col:"blue",fill:"blue"},(cc,x,y)=>D.icon(cc,"building",x+46,y+40,26,{fill:"white"}));
+    D.panel(c,100,352,880,150,{title:"the answer",col:"green",fill:"green"},(cc,x,y)=>D.icon(cc,"clock",x+46,y+40,26,{fill:"white"}));
+    D.caps(c,"three lines under it",110,566,{size:30,col:"mut"});
+    ED_THREE.forEach(([ic,col,s],i)=>{const y=600+i*64;D.icon(c,ic,136,y+22,22,{fill:col});D.text(c,s,180,y+34,{size:40,w:700});});},[60,40,1040,800]),
+  {s:"A new building now, or not yet?",x:190,y:290,size:46,w:700,col:"blue",at:w("decision","new building",-0.3),d:1.1},
+  {s:"short only 10 to 2, Tue to Thu",x:190,y:470,size:46,w:700,col:"green",at:w("answer","short",-0.3),d:1.1},
+  ...ED_THREE.map(([,,,word],i)=>({k:"tick",x:640,y:622+i*64,r:20,col:"green",at:w("three",word,-0.1),d:0.3}))];
+// 3. what the average hid (Ivy): the week's average and the whole week are there; she rings the peak and writes what the picture shows
+const ed_week=(c,x,y,cw,ch,o)=>{const D=PK.sk;o=o||{};for(let i=0;i<5;i++)for(let j=0;j<10;j++){const peak=i>=1&&i<=3&&j>=2&&j<=5,k=(i*7+j*3)%6;
+    D.box(c,x+j*cw,y+i*ch,cw-6,ch-6,{fill:peak?PK.FILL.orange:k<2?"white":"orange",col:"ink",w:1.6,r:3});}
+  if(o.days)["Mon","Tue","Wed","Thu","Fri"].forEach((d,i)=>D.text(c,d,x-14,y+i*ch+ch*0.62,{size:28,col:"mut",align:"right"}));
+  if(o.hours)[["8",0],["12",4],["6",9]].forEach(([s,j])=>D.text(c,s,x+j*cw+(cw-6)/2,y+5*ch+28,{size:28,col:"mut",align:"center"}));};
+const ed_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"What it turns on",86,124,{size:76});
+    // the week's average: one bar, 38% of its height
+    D.caps(c,"the average",104,214,{size:28,col:"mut"});D.box(c,120,240,110,290,{fill:"white",col:"mut",w:2.5,r:6,dash:[8,8]});
+    D.box(c,120,240+290*0.62,110,290*0.38,{fill:"orange",col:"ink",w:3,r:6});D.text(c,"38%",175,590,{size:48,w:700,col:"orange",align:"center"});
+    // the whole week: the days down the side, the hours across
+    D.caps(c,"the whole week",360,214,{size:28,col:"mut"});ed_week(c,400,240,56,52,{days:true,hours:true});
+    D.text(c,"93%",400,610,{size:48,w:700,col:"orange"});D.text(c,"booked at the peak",524,610,{size:32,col:"mut"});},[60,40,1040,800]),
+  {k:"ring",x:621,y:367,rx:140,ry:100,col:"green",at:w("daniels","one picture",-0.3),d:0.5},
+  {s:"what the average hid",x:110,y:700,size:58,w:700,col:"green",at:w("daniels","what",-0.2),d:0.9}];
+// 4. what it would take not to build (Ivy): the week is there, a peak class moved; she writes the two changes as the voice says them
+const ed_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Not to build",86,124,{size:80});
+    ed_week(c,180,186,64,44,{days:true,hours:true});D.text(c,"93%",856,286,{size:48,w:700,col:"orange"});D.text(c,"at the peak",856,324,{size:30,col:"mut"});
+    // one peak class, moved to an hour with rooms to spare
+    D.arrow(c,[180+3*64+30,186+2*44+20],[180+8*64+24,186+2*44+20],{col:"green",w:4.5,bow:-46,dash:[10,8]});
+    D.panel(c,100,470,880,290,{title:"what it would take",col:"green",fill:"green"},(cc,x)=>
+      [["clock","move",606],["door","release",710]].forEach(([ic,s,y])=>{D.icon(cc,ic,x+50,y-15,26,{fill:"white"});D.text(cc,s,x+96,y,{size:46,w:700});}));},[60,40,1040,800]),
+  {s:"1 peak class in 6",x:390,y:606,size:48,w:700,col:"green",at:w("take","one peak class",-0.3),d:0.9},
+  {s:"rooms nobody uses",x:390,y:710,size:48,w:700,col:"green",at:w("take","release",-0.2),d:0.9}];
+// 5. on Monday (Helena, at the team's board): the four steps are there; she ticks each as the voice comes to it, and adds the last words
+const ED_MON=[["lead","blue","target",["the decision,","then the answer"],"one","decision"],["show","orange","bars",["what it turns on,","in a picture"],"two","Show"],
+  ["say","amber","q",["what you","don't know"],"three","don't know"],["try","green","person",["it on someone","new to it"],"four","Try it"]];
+const ed_boardM=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"On Monday");
+    ED_MON.forEach(([h,col,ic,L],i)=>D.panel(c,70+i*280,140,262,276,{title:(i+1)+" · "+h,col,fill:col},(cc,x,y,pw)=>{D.icon(cc,ic,x+pw/2,y+44,36,{fill:"white"});
+      L.forEach((s,j)=>D.text(cc,s,x+pw/2,y+140+j*42,{size:30,w:j?400:700,align:"center",col:j?"mut":"ink"}));}));}),
+  ...ED_MON.map(([,,,,id,word],i)=>({k:"tick",x:70+i*280+228,y:170,r:18,col:"green",at:w(id,word,0.3),d:0.3})),
+  {s:"then let them decide",x:1180,y:470,size:46,w:700,col:"green",align:"right",at:w("four","Then",0),d:0.9}];

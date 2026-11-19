@@ -8,7 +8,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "ledger":{q:"The journal lists every entry in time order; the ledger holds the same entries, grouped by account. Why keep both?",
     opts:[{t:"Each book checks the other: if the two totals differ, a clerk knows an entry was lost and looks for it in both."},{t:"Each shape makes one job easy: the journal, writing each entry as it happens; the ledger, reading and balancing an account.",ok:true},{t:"The ledger is the true record, and the journal is a draft kept only until each entry has been copied into its account.",near:true}],
     why:"One set of facts, two shapes, two jobs. And because every entry is posted twice, the balance catches a figure copied wrong on one side (though not an entry left out altogether)."},
-  "wrong":{stop:"update",q:"Her name was stored on three award rows, and only two were corrected. What would have prevented the missed copy?",
+  "wrong":{stop:"shape",q:"Her name was stored on three award rows, and only two were corrected. What would have prevented the missed copy?",
     opts:[{t:"Storing the name once, in the learner record, with each award pointing to the learner.",ok:true},{t:"Storing the name on each award, with a nightly check that all of a learner's copies match.",near:true},{t:"Correcting every copy at once in one statement, so none of the three rows is missed."}],
     why:"When a fact lives in one place, there's no copy to miss. That's what normalisation is for, in a shape built to write."},
   "read":{q:"The question is: credit points by kind of credential and by month. Which are the facts, and which the dimensions?",

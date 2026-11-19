@@ -85,7 +85,7 @@ def series_link(lg, RE, sid):
 # if it has them (see series_learn below): dir, the folder under site/assets/ of their engine and words; bundle, the film whose
 # bundle their pages load for its parts (the newest film's if not given); engine, the folder of their engine and its styles, if not
 # dir; lazy, True when the engine fetches each film's own words and bundle only as a visitor opens one of its labs or situations
-# (From words to data's: each lab and situation is its film's own, and the pack in dir names which), so the pages load no bundle;
+# (In the weeds of data crafting's: each lab and situation is its film's own, and the pack in dir names which), so the pages load no bundle;
 # coming, True to count and show those of the films still
 # being made (series.json's "coming") too; next: the id of the series to watch after this one, which its last film's page offers
 # (in Where next? and beside the series' films) once that series has a film on the site;
@@ -109,16 +109,16 @@ SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
          place={"en": "university", "es": "universidad"},
-         learn=dict(dir="from-words-to-data", lazy=True),
+         learn=dict(dir="from-words-to-data", bundle="keeping-it-true"),
          blocks=[("sketch/index.html", "en", "card", "../", "../from-words-to-data/"), ("es/sketch/index.html", "es", "card", "../../", "../from-words-to-data/")]),
     dict(id="in-the-weeds", dir="analytics-engineering", slug="in-the-weeds",
          name={"en": "In the weeds of data crafting", "es": "En las entrañas del oficio de datos"},
          place={"en": "university", "es": "universidad"}, blocks=[],
-         learn=dict(dir="in-the-weeds", engine="from-words-to-data", lazy=True)),
+         learn=dict(dir="in-the-weeds", lazy=True)),
     dict(id="enterprise-architecture", dir="enterprise-architecture", slug="enterprise-architecture",
          name={"en": "The map before the data", "es": "El mapa antes de los datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
-         learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear", coming=True),
+         learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear"),
          next="business-architecture-for-data",
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
@@ -218,11 +218,13 @@ SERIES = [
     dict(id="kept-for-a-reason", dir="kept-for-a-reason", slug="kept-for-a-reason",
          name={"en": "Kept for a reason", "es": "Guardado por una razón"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds"),
+         built="in-the-weeds",
+         learn=dict(dir="kept-for-a-reason", bundle="a-person-asks")),
     dict(id="fit-for-use", dir="fit-for-use", slug="fit-for-use",
          name={"en": "Fit for use", "es": "Apto para su uso"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds", next="quality-as-a-habit"),
+         built="in-the-weeds", next="quality-as-a-habit",
+         learn=dict(dir="fit-for-use", bundle="good-enough-for-what")),
     dict(id="quality-as-a-habit", dir="quality-as-a-habit", slug="quality-as-a-habit",
          name={"en": "Quality as a habit", "es": "La calidad como hábito"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
@@ -265,7 +267,8 @@ SERIES = [
     dict(id="small-steps-measured", dir="small-steps-measured", slug="small-steps-measured",
          name={"en": "Small steps, measured", "es": "Pasos pequeños, medidos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds"),
+         built="in-the-weeds",
+         learn=dict(dir="small-steps-measured", engine="data-management", bundle="strategy-is-a-habit")),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]

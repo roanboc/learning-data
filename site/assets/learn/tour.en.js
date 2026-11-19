@@ -4,6 +4,8 @@ window.LD_TOUR_STEPS={
  text:{name:"How this site works",next:"Next",back:"Back",done:"Done",close:"Close the tour",of:"{n} of {of}"},
  steps:[
   {sel:"header.top nav",title:"Three places",text:"Start here plays the introduction. Topics holds everything else. Making of shows how the films are made."},
+  {sel:".sbar",title:"Where this film sits",text:"Its place in the series. Each step is a film: green once watched. Select one to go to it."},
+  {sel:".seen",title:"Mark watched",text:"Your progress stays in this browser. Watched it on another device? Mark it here."},
   {sel:".player",title:"The film",text:"Press Play. The buttons under the film jump to any chapter."},
   {sel:"#think",title:"Pause and think",text:"When it's on, the film stops at the end of chapters with one question. Turn it off to watch straight through."},
   {sel:"#cc",title:"Captions",text:"Turn the captions on or off. The Spanish pages have them in Spanish."},

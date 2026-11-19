@@ -4,6 +4,8 @@ window.LD_TOUR_STEPS={
  text:{name:"Cómo funciona este sitio",next:"Siguiente",back:"Atrás",done:"Listo",close:"Cerrar la visita",of:"{n} de {of}"},
  steps:[
   {sel:"header.top nav",title:"Tres lugares",text:"Empieza aquí muestra la introducción. Temas reúne todo lo demás. Cómo se hizo cuenta cómo se hacen las películas."},
+  {sel:".sbar",title:"Dónde está esta película",text:"Su lugar en la serie. Cada paso es una película: verde cuando ya la viste. Elige una para ir a ella."},
+  {sel:".seen",title:"Marcar como vista",text:"Tu avance queda en este navegador. ¿La viste en otro dispositivo? Márcala aquí."},
   {sel:".player",title:"La película",text:"Pulsa Reproducir. Los botones bajo la película saltan a cualquier capítulo."},
   {sel:"#think",title:"Pausa para pensar",text:"Si está activa, la película se detiene al final de los capítulos con una pregunta. Desactívala para verla de corrido."},
   {sel:"#cc",title:"Subtítulos",text:"Activa o desactiva los subtítulos. En las páginas en español están en español."},

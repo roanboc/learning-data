@@ -11,15 +11,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/site.css?v=a6bf9735d7">
+<link rel="stylesheet" href="../../assets/learn/pages.css?v=70309c4dda">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a href="../../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/documents-as-data/ideas-that-last/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="How this site works" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
 <main>
 <section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../assets/ideas-that-last-poster.jpg?v=d0e6844b43" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../../topics/#modern-data-basics">Modern data basics</a> › <a href="../">Documents and closing remarks</a></p>
+<div class="spos"><p class="spos-t"><b>Film 2 of 2</b> · <a href="../">Documents and closing remarks</a></p><ol class="sbar" aria-label="The films of the series"><li><a href="../files-as-data-and-context/" data-w="ld-files-as-data-and-context"><span>1 · Files as data and as context</span></a></li><li><a href="../ideas-that-last/" data-w="ld-ideas-that-last" aria-current="page"><span>2 · Ideas that last, features you test</span></a></li></ol></div>
 <h1>Ideas that last, features you test: the module, and how to keep up</h1>
-<p class="lead">Data platforms change every month, so a film of every button would soon be out of date. This one looks back on what the module showed, points to the official docs, and follows Jun's team as they test a new feature on Finance's invoices in two days: investigate, adapt, implement, iterate.</p>
+<p class="lead">What the module showed, why the films stay with ideas, and a two-day loop to test each new feature.</p>
 <p class="note draft"><b>Draft</b> · The author hasn't reviewed it yet, so some details may change.</p>
+<p class="seen-row"><button type="button" class="seen" data-seen="ld-ideas-that-last" data-on="Watched" data-off="Mark watched" aria-pressed="false"><i aria-hidden="true"></i><span>Mark watched</span></button><small>Seen it on another device? Mark it here.</small></p>
 </section>
 <section class="module" id="watch" data-store="ld-ideas-that-last" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p><b>Pause and think</b> is on: the film stops for one question at the end of chapters.</p></div></div>
@@ -30,25 +33,30 @@
 <div class="chapters" id="chapters" aria-label="Chapters"></div>
 <p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/ideas-that-last.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/tree/main/films/documents-as-data/2-ideas-that-last/captions">Caption files</a><a href="https://github.com/roanboc/learning-data/blob/main/films/documents-as-data/2-ideas-that-last/script.md">Read the script</a></p>
 <template id="next-panel"><div class="think-card"><p class="think-k">Where next?</p><h3>That closes Modern data basics. Which new feature would answer a real need of yours, and how would you test it in two days?</h3>
-<div class="next-opts"><a class="btn primary" href="../labs/#loop">Take it apart: Test what's new →</a><a class="btn" href="../scenarios/#film-2">Make the call: 4 situations</a><a class="btn" href="../">The whole series: Documents and closing remarks</a></div>
+<div class="next-opts"><a class="btn primary" href="../labs/#loop">Take it apart: Test what's new →</a><a class="btn" href="../scenarios/#film-2">Make the call: 4 situations</a><a class="btn" href="../../topics/#modern-data-basics">Back to the topic: Modern data basics</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Watch again</button></div></div></template>
 </section>
 
-<section class="module" id="in-the-project" aria-labelledby="project-h">
-<div class="mhead"><div><h2 id="project-h">See it in the project</h2><p>Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself. How it was built, step by step, is told in <a href="../../in-the-weeds/"><i>In the weeds of data crafting</i></a>.</p></div></div>
+<section class="module" id="take-it-apart" aria-labelledby="take-h">
+<div class="mhead"><div><h2 id="take-h">Try it</h2><p>This film's lab, and its situations, among the series' 2 labs and 8 situations. Your progress stays in this browser.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="../labs/#loop">Take it apart: Test what's new →</a><a class="btn" href="../scenarios/#film-2">Make the call: 4 situations</a><a class="btn" href="../labs/">Every lab</a></p>
+</section>
+
+<section class="module fold-sec" id="in-the-project" aria-labelledby="in-the-project-h">
+<details class="fold"><summary><h2 id="in-the-project-h">In the example project</h2><small>1 chapter show its files</small></summary>
+<div class="fold-in">
+<p>Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself. How it was built, step by step, is told in <a href="../../in-the-weeds/"><i>In the weeds of data crafting</i></a>.</p>
 <ul class="repo-list">
 <li><b>Test what's new</b><span><a href="https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/files-as-data/read_invoices.sql"><code>examples/files-as-data/read_invoices.sql</code></a> <a href="https://github.com/roanboc/learning-data-project/blob/main/30-data-project/examples/files-as-data/check_invoices.sql"><code>examples/files-as-data/check_invoices.sql</code></a></span></li>
 </ul>
 <p class="film-links"><a href="https://github.com/roanboc/learning-data-project/tree/main/30-data-project">Explore the whole project</a><a href="https://github.com/roanboc/learning-data-project/blob/main/30-data-project/README.md">How to run it</a></p>
+</div></details>
 </section>
 
-<section class="module" id="take-it-apart" aria-labelledby="take-h">
-<div class="mhead"><div><h2 id="take-h">Take it apart, then make the call</h2><p>This film's lab, and its situations, among the series' 2 labs and 8 situations. Your progress stays in this browser.</p></div></div>
-<p class="stop-nav"><a class="btn primary" href="../labs/#loop">Take it apart: Test what's new →</a><a class="btn" href="../scenarios/#film-2">Make the call: 4 situations</a><a class="btn" href="../labs/">Every lab</a></p>
-</section>
-
-<section class="module" id="elsewhere" aria-labelledby="elsewhere-h">
-<div class="mhead"><div><h2 id="elsewhere-h">For the how: the official sources</h2><p>The films stay with the ideas. Each tool's own documentation and training are kept up to date by the people who build it: start there, then test what's new on a real need.</p></div></div>
+<section class="module fold-sec" id="elsewhere" aria-labelledby="elsewhere-h">
+<details class="fold"><summary><h2 id="elsewhere-h">Go further</h2><small>6 links</small></summary>
+<div class="fold-in">
+<p>The films stay with the ideas. Each tool's own documentation and training are kept up to date by the people who build it: start there, then test what's new on a real need.</p>
 <ul class="repo-list">
 <li><b><a href="https://docs.databricks.com/aws/en/">Databricks documentation</a></b><span>Databricks: what each feature does, what it costs and where it stops.</span></li>
 <li><b><a href="https://docs.databricks.com/aws/en/release-notes/">Databricks release notes</a></b><span>Databricks: what changed this month, to choose what's worth a trial.</span></li>
@@ -57,10 +65,11 @@
 <li><b><a href="https://learn.getdbt.com/">dbt Learn</a></b><span>dbt: free courses, from the first model to tested releases.</span></li>
 <li><b><a href="https://learn.microsoft.com/en-us/fabric/">Microsoft Fabric documentation</a></b><span>Another platform: check what it offers for each idea.</span></li>
 </ul>
+</div></details>
 </section>
 
 <section class="module" id="in-the-series" aria-labelledby="series-h">
-<div class="mhead"><div><h2 id="series-h">In the series: <a href="../">Documents and closing remarks</a></h2><p>Film 2 of 2.</p></div></div>
+<div class="mhead"><div><h2 id="series-h">Previous and next</h2><p>Film 2 of 2 · <a href="../">Documents and closing remarks</a></p></div></div>
 <div class="topic-grid series-pn" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
 <article class="topic-card">
 <img src="../../assets/files-as-data-and-context-poster.jpg?v=5d827a213f" alt="" width="1280" height="720" loading="lazy">
@@ -72,18 +81,21 @@
 <p class="tc-progress" data-progress="ld-files-as-data-and-context" hidden></p>
 </div>
 </article>
+<article class="pn-end">
+<div class="tc-body">
+<p class="kicker">The series is done · Back to the topic →</p>
+<h3><a href="../../topics/#modern-data-basics">Modern data basics</a></h3>
+<p>Choose the next series of this topic, or another topic on the route.</p>
 </div>
-<ol class="series-list" aria-label="Every film of the series">
-<li><a href="../files-as-data-and-context/"><span class="n">1</span>Files as data and as context</a></li>
-<li><a href="../ideas-that-last/" aria-current="page"><span class="n">2</span>Ideas that last, features you test</a></li>
-</ol>
+</article>
+</div>
 </section>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
 <script src="../../assets/ideas-that-last/film.js?v=d04c5cb22a"></script>
 <script src="../../assets/ideas-that-last/think.en.js?v=e594750ab2"></script>
 <script src="../../assets/learn/think.js?v=156ddbb02b"></script>
-<script src="../../assets/learn/path.js?v=12187f81b8"></script>
+<script src="../../assets/learn/path.js?v=f10d4d0861"></script>
 <script src="../../assets/learn/next.js?v=70cde09a7b"></script>
 <script src="../../assets/seek.js?v=29bc096ce4"></script>
 <script src="../../assets/ambient.js?v=e4b9486ecb"></script>

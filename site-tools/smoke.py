@@ -346,7 +346,8 @@ HEADER_WIDTHS = (320, 360, 390, 720, 721, 768, 1280)  # 720 and 721: either side
 
 async def check_header(run):
     sec = run.rep.sec("header", f"Header at {', '.join(map(str, HEADER_WIDTHS))} px, in English and Spanish: every link shown, inside it, not overlapping; "
-                                "one line; on phones the language, tour, theme and icon links in a More menu; the icon links reached and followed by keyboard")
+                                "one line, with the example project's icon; on phones the language, tour, theme and the More options links in a More menu; "
+                                "Making of and the outside links in More options; the icon links reached and followed by keyboard")
     keys = [k for k in ("", "es/") if run.want(k)]
 
     async def one(key, width):
@@ -358,8 +359,8 @@ async def check_header(run):
                 m = await pg.evaluate("""() => {
                   const r = document.querySelector('header.top').getBoundingClientRect();
                   const vis = e => getComputedStyle(e).display !== 'none' && e.getClientRects().length > 0;
-                  const items = [...document.querySelectorAll(innerWidth <= 720 ? 'header.top .brand, header.top nav > a, .more-btn'
-                    : 'header.top .brand, header.top nav > a, .more .lang, .nav-tools > *')];
+                  const items = [...document.querySelectorAll(innerWidth <= 720 ? 'header.top .brand, header.top nav > a, header.top .proj, .more-btn'
+                    : 'header.top .brand, header.top nav > a, header.top .proj, .more .lang, .nav-tools > *')];
                   return {h: r.height, hidden: items.filter(e => !vis(e)).map(e => e.textContent.trim()),
                     shown: items.filter(vis).map(e => { const b = e.getBoundingClientRect(); return {
                       t: e.getAttribute('aria-label') || e.textContent.trim(), y: Math.round(b.top + b.height / 2),
@@ -377,11 +378,11 @@ async def check_header(run):
                 for x in m["shown"]:
                     if not any(abs(x["y"] - y) <= 6 for y in rows):
                         rows.append(x["y"])
-                # one line: phones show the brand, the site's links and "More"; wider, EN/ES, the tour, the theme and the two icon links too
+                # one line: phones show the brand, the site's links, the project's icon and "More"; wider, EN/ES, the tour, the theme and More options
                 phone = width <= 720
-                expect(sec, len(m["shown"]) == (5 if phone else 9) and len(rows) == 1,
+                expect(sec, len(m["shown"]) == (5 if phone else 8) and len(rows) == 1,
                        f"{where}: the header shows {[x['t'] for x in m['shown']]} on {len(rows)} lines; expected the brand, Start here, Topics, "
-                       f"Making of and " + ("More" if phone else "EN/ES, the tour, the theme and the two icon links") + " on one")
+                       f"the project's icon and " + ("More" if phone else "EN/ES, the tour, the theme and More options") + " on one")
                 if phone:
                     # "More" opens by keyboard, and shows EN/ES, the tour, the theme and the two links inside the window
                     await pg.evaluate("() => document.activeElement.blur()")
@@ -391,29 +392,41 @@ async def check_header(run):
                             break
                     await pg.keyboard.press("Enter")
                     menu = await pg.evaluate("""() => { const p = document.querySelector('.more');
-                      return {open: p.matches(':popover-open'), items: [...p.querySelectorAll('.lang, .nav-tools > *')].map(e => {
+                      return {open: p.matches(':popover-open'), items: [...p.querySelectorAll('.lang, .nav-tools > :not(.extra-btn), .extra a')].map(e => {
                         const b = e.getBoundingClientRect(); return b.width > 0 && b.left >= 0 && b.right <= innerWidth && b.bottom <= innerHeight; })}; }""")
-                    expect(sec, menu["open"] and menu["items"] == [True] * 5, f"{where}: \"More\" must open by keyboard and show EN/ES, the tour, the theme and the two links: {menu}")
+                    expect(sec, menu["open"] and menu["items"] == [True] * 6, f"{where}: \"More\" must open by keyboard and show EN/ES, the tour, the theme, Making of and the two links: {menu}")
+                else:
+                    # "More options" opens by keyboard and shows Making of and the two links inside the window
+                    await pg.evaluate("() => document.activeElement.blur()")
+                    for _ in range(12):
+                        await pg.keyboard.press("Tab")
+                        if await pg.evaluate("() => document.activeElement.matches('.extra-btn')"):
+                            break
+                    await pg.keyboard.press("Enter")
+                    menu = await pg.evaluate("""() => { const p = document.querySelector('.extra');
+                      return {open: p.matches(':popover-open'), items: [...p.querySelectorAll('a')].map(e => {
+                        const b = e.getBoundingClientRect(); return b.width >= 44 && b.height >= 44 && b.left >= 0 && b.right <= innerWidth && b.bottom <= innerHeight; })}; }""")
+                    expect(sec, menu["open"] and menu["items"] == [True] * 3, f"{where}: \"More options\" must open by keyboard and show Making of and the two links: {menu}")
+                    await pg.keyboard.press("Escape")
                     await pg.keyboard.press("Escape")
                 if width not in (390, 1280):
                     return
-                tools = pg.locator(".nav-tools a")
+                tools = pg.locator(".extra a:not(.making)")
                 for i in range(await tools.count()):
                     link = tools.nth(i)
-                    if width <= 720:
-                        await pg.evaluate("() => { const p = document.querySelector('.more'); if (!p.matches(':popover-open')) p.showPopover(); }")
+                    await pg.evaluate("w => { const p = document.querySelector(w <= 720 ? '.more' : '.extra'); if (!p.matches(':popover-open')) p.showPopover(); }", width)
                     box = await link.bounding_box()
                     expect(sec, box is not None and box["width"] >= 44 and box["height"] >= 44, f"{where}: icon link needs a 44 px touch target")
                     # reached with the keyboard, not a programmatic focus call
                     await pg.evaluate("() => document.activeElement.blur()")
-                    for _ in range(12):
+                    for _ in range(16):
                         await pg.keyboard.press("Tab")
                         if await link.evaluate("e => e === document.activeElement"):
                             break
                     focus = await link.evaluate("""e => { const s = getComputedStyle(e), hint = getComputedStyle(e, '::after');
                       return e === document.activeElement && e.matches(':focus-visible') && s.outlineStyle !== 'none' &&
-                        parseFloat(s.outlineWidth) >= 2 && hint.opacity === '1'; }""")
-                    expect(sec, focus, f"{where}: icon link needs keyboard focus, a visible outline and an action hint")
+                        parseFloat(s.outlineWidth) >= 2 && (hint.opacity === '1' || e.innerText.trim().length > 0); }""")
+                    expect(sec, focus, f"{where}: icon link needs keyboard focus, a visible outline and an action hint or its name in words")
                     destination = await link.get_attribute("href")
                     # A stub page stands in for the external site, so it is never contacted; then back, for the next link.
                     # (A 204 would leave the page half navigated, and the next link could not be found.)

@@ -549,27 +549,41 @@ def head(lg, path, title, desc, og, img, twin=True):
 
 
 def header(lg, path, R, cur="true", item="topics", other=None, here=None):
-    """The site's header, on every page: the brand, Start here, Topics and Making of, then the EN/ES toggle, the dark mode switch
-    and the links to learn-all.org and to Rodrigo (in a "More" menu on phones). path: the page's folder from its language's root ("" for the home page); R: the way from the
-    page to the site's root. item is marked as the current page (cur="page") or as its section (cur="true"); None marks none.
+    """The site's header, on every page: the brand, Start here and Topics, the example data project's icon, then the EN/ES toggle,
+    the tour, the dark mode switch and "More options", which holds Making of and the links to learn-all.org and to Rodrigo (on phones
+    the language, the tour and the theme fold into one "More" menu too). path: the page's folder from its language's root ("" for the
+    home page); R: the way from the page to the site's root. item is marked as the current page (cur="page") or as its section
+    (cur="true"); None marks none; "journey" marks Making of in the menu. The project's icon marks its own page.
     other: where the toggle leads, for a page without a twin in the other language (then without hreflang); here: the toggle's link to this page, if not "./"
     (then it isn't marked as the current one)."""
     base = R if lg == "en" else R[3:]
     home = base or "./"
     twin = "" if other else f' hreflang="{"es" if lg == "en" else "en"}"'
     other = other or (f"{R}es/{path}" if lg == "en" else f"{R}{path}")
-    names = (("start", "Start here", ""), ("topics", "Topics", "topics/"), ("journey", "Making of", "journey/")) if lg == "en" else \
-            (("start", "Empieza aquí", ""), ("topics", "Temas", "topics/"), ("journey", "Cómo se hizo", "journey/"))
+    names = (("start", "Start here", ""), ("topics", "Topics", "topics/")) if lg == "en" else \
+            (("start", "Empieza aquí", ""), ("topics", "Temas", "topics/"))
     nav = "".join(f'<a href="{base + to or "./"}"' + (f' aria-current="{cur}"' if key == item else "") + f">{name}</a>" for key, name, to in names)
     own = f'<a href="{here}" lang="{lg}">' if here else f'<a href="./" aria-current="true" lang="{lg}">'
     en, es = (f'{own}EN</a>', f'<a href="{other}" lang="es"{twin}>ES</a>') if lg == "en" else \
              (f'<a href="{other}" lang="en"{twin}>EN</a>', f'{own}ES</a>')
-    site, language, more = ("Site", "Language", "More options") if lg == "en" else ("Sitio", "Idioma", "Más opciones")
-    # On phones the language, the theme and the two icon links fold into one "More" menu (a popover), so the header keeps one row.
+    site, language, more, proj, making = (("Site", "Language", "More options", "Example data project", "Making of") if lg == "en" else
+                                          ("Sitio", "Idioma", "Más opciones", "Proyecto de datos de ejemplo", "Cómo se hizo"))
+    mine = ' aria-current="page"' if path == PROJECT_PATH else ""
+    made = f' aria-current="{cur}"' if item == "journey" else ""
+    # The example data project, one tap away: its box icon, as on the learning route, always in the row.
+    pj = (f'<a class="proj" href="{base}{PROJECT_PATH}" aria-label="{proj}"{mine}>'
+          '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.9l7.9 4.55v9.1L12 21.1l-7.9-4.55v-9.1z"/>'
+          '<path d="M4.3 7.55 12 12l7.7-4.45M12 12v8.9"/></svg></a>')
+    dots = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>'
+    # On phones the language, the tour, the theme and the menu's links fold into one "More" menu (a popover), so the header keeps
+    # one row. On wider screens that menu's box is undone and its contents sit in the row, and "More options" there is a second
+    # popover, .extra, with Making of and the two outside links; on phones .extra's box is undone inside the first.
     return (f'<header class="top"><div class="top-in"><a class="brand" href="{home}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a>'
-            f'<nav aria-label="{site}">{nav}</nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="{more}">'
-            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>'
-            f'<div class="more" id="top-more" popover><span class="lang" role="group" aria-label="{language}">{en}{es}</span>{external_nav(lg, R)}</div>'
+            f'<nav aria-label="{site}">{nav}</nav>{pj}<button class="more-btn" type="button" popovertarget="top-more" aria-label="{more}">{dots}</button>'
+            f'<div class="more" id="top-more" popover><span class="lang" role="group" aria-label="{language}">{en}{es}</span>{external_nav(lg, R, more, dots)}'
+            f'<div class="extra" id="top-extra" popover><a class="making" href="{base}journey/"{made}>'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17M8 5l-1.5 4M13 5l-1.5 4M18 5l-1.5 4"/></svg>'
+            f'<span>{making}</span></a>{outside_links(lg)}</div></div>'
             f'<script>{THEME_JS};{TOUR_JS}</script></div></header>')
 
 
@@ -612,19 +626,25 @@ def hand_header(rel):
     return header(lg, path, R, cur="page" if path == "" else "true", item="start" if path in ("", "labs/", "scenarios/") else "topics", other=other)
 
 
-def external_nav(lg, R=""):
-    """The header's tools: the guided tour ("?"), the dark mode switch, and the links to learn-all.org and to Rodrigo. R: the way to
-    the site's root, from which the tour's script, words and styles load when someone asks for it (assets/learn/tour*)."""
-    home, contact, theme, tour = (("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn", "Modo oscuro", "Cómo funciona este sitio") if lg == "es"
-                                  else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn", "Dark mode", "How this site works"))
+def external_nav(lg, R="", more="More options", dots=""):
+    """The header's tools: the guided tour ("?"), the dark mode switch and, on wider screens, "More options" (the menu with Making of
+    and the outside links). R: the way to the site's root, from which the tour's script, words and styles load when someone asks for
+    it (assets/learn/tour*)."""
+    theme, tour = ("Modo oscuro", "Cómo funciona este sitio") if lg == "es" else ("Dark mode", "How this site works")
     return (f'<div class="nav-tools"><button class="help" type="button" aria-label="{tour}" data-tour="{R}assets/learn/">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button>'
             f'<button class="theme" type="button" aria-pressed="false" aria-label="{theme}">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>'
-            f'<a class="parent-site" href="https://learn-all.org" aria-label="{home}">'
+            f'<button class="extra-btn" type="button" popovertarget="top-extra" aria-label="{more}">{dots}</button></div>')
+
+
+def outside_links(lg):
+    """The links to learn-all.org and to Rodrigo, in the header's "More options" menu."""
+    home, contact = ("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn") if lg == "es" else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn")
+    return (f'<a class="parent-site" href="https://learn-all.org" aria-label="{home}">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a>'
-            f'<a href="https://www.linkedin.com/in/roanboc" aria-label="{contact}">'
-            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div>')
+            f'<a class="contact" href="https://www.linkedin.com/in/roanboc" aria-label="{contact}">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>LinkedIn</span></a>')
 
 
 def SN(lg, S):

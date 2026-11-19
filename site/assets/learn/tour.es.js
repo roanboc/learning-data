@@ -3,7 +3,8 @@
 window.LD_TOUR_STEPS={
  text:{name:"Cómo funciona este sitio",next:"Siguiente",back:"Atrás",done:"Listo",close:"Cerrar la visita",of:"{n} de {of}"},
  steps:[
-  {sel:"header.top nav",title:"Tres lugares",text:"Empieza aquí muestra la introducción. Temas reúne todo lo demás. Cómo se hizo cuenta cómo se hacen las películas."},
+  {sel:"header.top nav",title:"Dos lugares",text:"Empieza aquí muestra la introducción. Temas reúne todo lo demás."},
+  {sel:"header.top .proj",title:"El proyecto de datos de ejemplo",text:"La caja abre el proyecto detrás de muchas películas: su mapa, sus archivos y cómo ejecutarlo."},
   {sel:".player",title:"La película",text:"Pulsa Reproducir. Los botones bajo la película saltan a cualquier capítulo."},
   {sel:"#think",title:"Pausa para pensar",text:"Si está activa, la película se detiene al final de los capítulos con una pregunta. Desactívala para verla de corrido."},
   {sel:"#cc",title:"Subtítulos",text:"Activa o desactiva los subtítulos. En las páginas en español están en español."},
@@ -20,5 +21,6 @@ window.LD_TOUR_STEPS={
   {sel:".px-stabs",title:"Estándares abiertos, línea a línea",text:"Elige un estándar y luego una nota: ilumina las líneas del archivo real que explica."},
   {sel:".more .lang",title:"Español o inglés",text:"Cada página tiene ambos. Las películas están en inglés, con subtítulos en español, y algunas tienen sonido en español."},
   {sel:".nav-tools .theme",title:"Oscuro o claro",text:"Cambia el aspecto. Tu elección se recuerda en este dispositivo."},
+  {sel:".nav-tools .extra-btn, .more-btn",title:"Más opciones",text:"Cómo se hizo muestra cómo se hacen las películas. Aquí también: learn-all.org y el autor."},
   {title:"Tu progreso se queda contigo",text:"Lo que ves y respondes se guarda solo en este navegador. No se envía a ningún lado."}
  ]};

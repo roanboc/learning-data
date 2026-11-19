@@ -23,6 +23,10 @@ lab: async (id) => {
     await press(W.fixes[1][1]); await press(W.fixB, 2600);
     await press(W.lookB); await press(W.layers[3][1]); await press(W.lookB, 900);
     await press(W.layers[0][1]); await press(W.creators[1][1], 900); await press(W.creators[0][1]);
+  } else if (id === "sharpen") {
+    await press(W.refB, 500); await press(W.recB);  // the reference first: question marks, and nothing to record yet
+    await press(W.grains[1][1], 900); await press(W.dates[1][1], 900); await press(W.joins[1][1], 900); await press(W.whens[1][1], 1200);
+    await press(W.recB, 900);
   } else out.push("no play written for playground " + id);
   const ticked = qa(".pg-goals li.ok").length;
   if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "

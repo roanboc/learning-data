@@ -219,6 +219,108 @@ PLAY.place=(Lb,api)=>{const W=Lb.w,M=W.msg,S={on:new Set(),lt:{},at:"copy",fix:n
     lines(ctx,two?fill(W.cross.two,{n:V.R,p:W.plan}):W.cross.one,c.x+12,c.y+42,c.w-24,{size:12.5,max:3,w:600,color:rgbaS(two?K.ink:K.soft,1)});};
   return{S,lay,draw,readouts:[[W.read.rec,()=>String(S.recFixed?W.n1:W.n0)],[W.read.layers,()=>fill(W.read.of,{n:S.on.size})]]};};
 
+/* ---------- 2 · A Sharper Sketch: sharpen the sketch ---------- */
+// The intro's sketch on a grid of three by three, as the film sharpens it: the student, the course admission and the course across
+// the top; the enrolment, the class box (which becomes the unit offering) and the unit across the middle; the status change, the
+// class and the term (the teaching period) below. Four switches set what the film sets, in any order: one row per student in an
+// offering (the class box splits into the unit offering, the unit and the class), the census date on each offering (it moves there
+// from the term), enrolments joined to courses through a course admission (a box between them), and the count on census date (a
+// status change under each enrolment, and its history in four columns). Genie's number, beside the census report's 118, closes by
+// what each one fixes: 6 places in second tutorials, 4 enrolments in the summer intensive, 2 double-degree students counted twice,
+// and 1 more today than on census date. Then the reference, laid over the sketch, pins what it has (blue), what the university adds
+// (amber) and what it doesn't have at all (a question mark); and the fit register records the university's own, as the film's does.
+const SH_ERR={grain:6,date:4,join:2,when:1},SH_ON={grain:"offer",date:"offer",join:"adm",when:"census"},SH_MS=620,ADOPT=[120,176,255];
+// a list in words: "a", "a and b", "a, b and c"
+const andList=(L,and)=>L.length<2?L.join(""):L.slice(0,-1).join(", ")+and+L[L.length-1];
+PLAY.sharpen=(Lb,api)=>{const W=Lb.w,M=W.msg,B=W.boxes,S={v:{grain:"place",date:"term",join:"student",when:"now"},t:{},ref:false,refT:null,rec:null,n0:131,n1:131,nT:null};
+  const on=k=>S.v[k]===SH_ON[k],N=()=>118+Object.keys(SH_ERR).reduce((a,k)=>a+(on(k)?0:SH_ERR[k]),0);
+  // how far each switch is on its way (0: the sketch as it was, 1: sharpened); one turned back half-way goes back from where it is
+  const pr=(k,now)=>{const t0=S.t[k];if(t0==null)return on(k)?1:0;const e=eo(since(now,t0)/SH_MS);return on(k)?e:1-e;};
+  const shown=now=>S.nT==null?S.n1:Math.round(lp(S.n0,S.n1,eo(since(now,S.nT)/700)));
+  // what the university adds to the reference, as the film's fit register lists it
+  const exts=()=>[on("grain")?"offer":null,on("grain")?"cls":null,on("date")?"period":null,on("when")?"status":null].filter(Boolean);
+  function set(k,v,words){const now=performance.now();if(S.v[k]===v)return;const p=pr(k,now);S.n0=shown(now);S.v[k]=v;
+    S.t[k]=now-(on(k)?1-Math.cbrt(1-p):1-Math.cbrt(p))*SH_MS;S.n1=N();S.nT=now;S.rec=null;api.kick(1100);
+    const n=N();api.say(fill(words[v],{n})+(n===118?M.match:""),on(k)?"ok":null);
+    if(on(k)&&k!=="when")api.reach({grain:"grain",date:"date",join:"once"}[k]);if(n===118)api.reach("match");}
+  [["grain",W.grainL,W.grains],["date",W.dateL,W.dates],["join",W.joinL,W.joins],["when",W.whenL,W.whens]].forEach(([k,l,items])=>{
+    const r=api.group(l);api.seg(r,items,S.v[k],v=>set(k,v,M[k]),l);});
+  const r5=api.group(W.refL);
+  api.toggle(r5,W.refB,false,v=>{S.ref=v;S.refT=performance.now();if(!v)S.rec=null;api.kick(800);api.say(v?(on("grain")&&on("date")?M.ref.on:M.ref.ask):M.ref.off);});
+  api.btn(r5,W.recB,()=>{if(!S.ref){api.say(M.rec.noRef);return;}const L=exts();if(!L.length){api.say(M.rec.none);return;}
+    S.rec={t0:performance.now(),L};api.kick(900);api.say(fill(M.rec.done,{list:andList(L.map(k=>M.rec[k]),M.rec.and)}),"ok");api.reach("record");});
+  const lay=(lw,ctx)=>{const m=10,W2=lw-m*2,o={lw,m,W2};
+    o.cmp={x:m,y:12,w:W2,h:66};let y=12+66+20;
+    // three columns as wide as the picture allows; a name of up to two lines, and room under it for the census date
+    const g=8,bw=Math.min(150,Math.floor((W2-g*2)/3));o.bw=bw;o.tw=bw-8;o.lh=15;
+    const L1=Math.max(...Object.values(B).map(s=>fitL(ctx,s,o.tw,12.5,2,700)[0].length));
+    o.bh=Math.round(12+(L1+1)*o.lh);
+    const x0=m+(W2-(bw*3+g*2))/2,rg=26;o.col=[0,1,2].map(i=>x0+i*(bw+g));o.row=[0,1,2].map(i=>y+8+i*(o.bh+rg));y=o.row[2]+o.bh+14;
+    // the pins' legend, its room kept so nothing moves when it comes
+    o.legY=y;o.leg=flow(ctx,[W.pins.ref,W.pins.ours,W.pins.none],W2,12.5,12,20);y+=o.leg.h+14;
+    o.four={x:m,y,w:W2,h:96};y+=96+12;
+    o.fit={x:m,y,w:W2,h:40+4*19+6};y+=o.fit.h+12;o.h=y;return o;};
+  const box=(ctx,o,x,y,a,glow)=>{if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,o.bw,o.bh,8,K.plat,{glow:glow==null?6:glow,ea:0.85,fill:"rgba(7,12,24,0.94)"});
+    ctx.fillStyle=rgbaS(K.plat,0.12);rr(ctx,x,y,o.bw,o.bh,8);ctx.fill();});};
+  // a box's name, centred in the box, and above the census date while the date is there (sub, 0 to 1)
+  const name=(ctx,o,x,y,s,a,sub)=>{if(a<=0.01)return;const[ls,z]=fitL(ctx,s,o.tw,12.5,2,700),lh=z*1.2,bot=y+o.bh-(o.lh+2)*sub,y0=(y+bot)/2-ls.length*lh/2+z*0.85;
+    withA(ctx,a,()=>ls.forEach((l,i)=>T(ctx,l,x+o.bw/2,y0+i*lh,{w:700,size:z,align:"center",color:rgbaS(K.ink,0.96)})));};
+  const census=(ctx,o,x,y,a)=>{if(a<=0.01)return;withA(ctx,a,()=>line1(ctx,W.census,x+4,y,o.bw-8,12,{w:700,align:"center",color:rgbaS(K.warm,1)}));};
+  const link=(ctx,x0,y0,x1,y1,a)=>{if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgbaS(K.plat,0.55);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();ctx.restore();};
+  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.plat);const m=o.m,bw=o.bw,bh=o.bh,gr=ei(pr("grain",now)),dt=ei(pr("date",now)),jn=pr("join",now),wh=pr("when",now);
+    // Genie's number beside the census report's, and the gap between them
+    const c=o.cmp,n=shown(now),gap=n-118,xr=c.x+c.w/2+6;glass(ctx,c.x,c.y,c.w,c.h,12,K.plat,{glow:6,ea:0.85,fill:"rgba(7,12,24,0.92)"});
+    line1(ctx,W.cmp.genie,c.x+12,c.y+22,c.w/2-18,12.5,{w:600,color:rgbaS(K.soft,1)});T(ctx,String(n),c.x+12,c.y+52,{w:800,size:26,color:rgbaS(K.hot,1)});
+    line1(ctx,W.cmp.report,xr,c.y+22,c.w/2-18,12.5,{w:600,color:rgbaS(K.soft,1)});T(ctx,"118",xr,c.y+52,{w:800,size:26,color:rgbaS(K.gold,1)});
+    line1(ctx,gap?fill(W.cmp.gap,{n:gap}):W.cmp.match,xr+52,c.y+52,c.x+c.w-12-xr-52,14,{w:800,align:"right",color:rgbaS(gap?K.bad:K.good,1)});
+    // the sketch: its lines under its boxes
+    const X=i=>o.col[i],Y=i=>o.row[i],cx=i=>o.col[i]+bw/2,ux=lp(X(1),X(2),gr),cy=lp(Y(1),Y(2),gr);
+    link(ctx,X(0)+bw,Y(0)+bh/2,X(2),Y(0)+bh/2,1-jn);                                        // student to course
+    link(ctx,X(0)+bw,Y(0)+bh/2,X(1),Y(0)+bh/2,jn);link(ctx,X(1)+bw,Y(0)+bh/2,X(2),Y(0)+bh/2,jn); // through the admission
+    link(ctx,cx(0),Y(0)+bh,cx(0),Y(1),1-jn);                                                // student to enrolment
+    link(ctx,cx(1)-bw*0.25,Y(0)+bh,cx(0)+bw*0.25,Y(1),jn);                                  // admission to enrolment
+    link(ctx,X(0)+bw,Y(1)+bh/2,X(1),Y(1)+bh/2,1);                                           // enrolment to the class box
+    link(ctx,X(1)+bw,Y(1)+bh/2,ux,Y(1)+bh/2,gr);link(ctx,cx(1),Y(1)+bh,cx(1),cy,gr);       // the offering to its unit and its classes
+    link(ctx,X(1)+bw-12,Y(1)+bh,cx(2)-bw*0.2,Y(2),1);                                       // the class box to the term
+    link(ctx,cx(0),Y(1)+bh,cx(0),Y(2),wh);                                                  // enrolment to its status changes
+    // the unit and the class come out from under the class box, which becomes the unit offering
+    box(ctx,o,ux,Y(1),gr,8);name(ctx,o,ux,Y(1),B.unit,gr,0);box(ctx,o,X(1),cy,gr,8);name(ctx,o,X(1),cy,B.split,gr,0);
+    box(ctx,o,X(0),Y(0),1);name(ctx,o,X(0),Y(0),B.student,1,0);box(ctx,o,X(2),Y(0),1);name(ctx,o,X(2),Y(0),B.course,1,0);
+    box(ctx,o,X(1),Y(0),jn,6+6*jn);name(ctx,o,X(1),Y(0),B.adm,jn,0);
+    box(ctx,o,X(0),Y(1),1);name(ctx,o,X(0),Y(1),B.enrol,1-gr,0);name(ctx,o,X(0),Y(1),B.uenrol,gr,0);
+    box(ctx,o,X(1),Y(1),1,6+8*Math.sin(Math.PI*gr));name(ctx,o,X(1),Y(1),B.cls,1-gr,dt);name(ctx,o,X(1),Y(1),B.offer,gr,dt);
+    box(ctx,o,X(2),Y(2),1);name(ctx,o,X(2),Y(2),B.term,1-dt,1-dt);name(ctx,o,X(2),Y(2),B.period,dt,1-dt);
+    box(ctx,o,X(0),Y(2),wh,6+6*wh);name(ctx,o,X(0),Y(2),B.status,wh,0);
+    // the census date: under the term's name, or the offering's, and on its way between them
+    const sy=i=>Y(i)+bh-9;
+    if(dt<=0.002)census(ctx,o,X(2),sy(2),1);else if(dt>=0.998)census(ctx,o,X(1),sy(1),1);
+    else{ctx.save();ctx.shadowColor=rgbaS(K.warm,0.9);ctx.shadowBlur=10;census(ctx,o,lp(X(2),X(1),dt),lp(sy(2),sy(1),dt),1);ctx.restore();}
+    // the reference, laid over the sketch: a pin on each box
+    const ra=S.refT==null?(S.ref?1:0):(S.ref?eo(since(now,S.refT)/400):1-eo(since(now,S.refT)/400));
+    if(ra>0.01){const at=(x,y,k,a)=>pin(ctx,x+bw-3,y+3,k,ra*a);
+      at(X(0),Y(0),"ref",1);at(X(2),Y(0),"ref",1);at(X(1),Y(0),"ref",jn);at(X(0),Y(1),"ref",1);at(ux,Y(1),"ref",gr);
+      at(X(1),cy,"ours",gr);at(X(0),Y(2),"ours",wh);at(X(1),Y(1),"none",1-gr);at(X(1),Y(1),"ours",gr);at(X(2),Y(2),"none",1-dt);at(X(2),Y(2),"ours",dt);
+      withA(ctx,ra,()=>[W.pins.ref,W.pins.ours,W.pins.none].forEach((s,i)=>{const p=o.leg.pos[i];pin(ctx,m+p.x+8,o.legY+p.y+10,["ref","ours","none"][i],1);
+        T(ctx,s,m+p.x+19,o.legY+p.y+14.5,{w:700,size:12.5,color:rgbaS(K.soft,1)});}));}
+    // each enrolment's history, in four columns, once the count is on census date
+    fourCols(ctx,o.four,W.four,wh);
+    // the fit register: what the university adds, recorded
+    const f=o.fit,ra2=S.rec?eo(since(now,S.rec.t0)/500):0;
+    card(ctx,f.x,f.y,f.w,f.h,ra2>0?K.warm:K.soft,W.fit.h,{glow:ra2>0?8:2,dash:ra2<=0,a:ra2>0?1:0.55,size:13.5});
+    if(S.rec)withA(ctx,ra2,()=>S.rec.L.forEach((k,i)=>{const y=f.y+44+i*19;ctx.save();ctx.fillStyle=rgbaS(K.warm,1);ctx.beginPath();ctx.arc(f.x+18,y-4,4,0,TP);ctx.fill();ctx.restore();
+      line1(ctx,W.fit[k]+" · "+W.fit.tag,f.x+30,y,f.w-42,12.5,{w:700,color:rgbaS(K.ink,0.95)});}));};
+  return{S,lay,draw,readouts:[[W.read.genie,()=>String(N())],[W.read.gap,()=>N()===118?W.read.none:String(N()-118)]]};};
+// a pin on a box: blue, from the reference; amber, the university's own; a question mark, not in the reference at all
+function pin(ctx,x,y,k,a){if(a<=0.01)return;const col=k==="ref"?ADOPT:K.warm;ctx.save();ctx.globalAlpha*=a;ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(x,y,7.5,0,TP);ctx.fill();
+  ctx.fillStyle=rgbaS(col,1);ctx.shadowColor=rgbaS(col,0.8);ctx.shadowBlur=6;ctx.beginPath();ctx.arc(x,y,k==="none"?7:5,0,TP);ctx.fill();ctx.restore();
+  if(k==="none")withA(ctx,a,()=>T(ctx,"?",x,y+3.9,{w:800,size:11,align:"center",color:"rgba(20,14,4,0.95)"}));}
+// each enrolment's history in four columns: on census date, came in, went out, today; lit with a, a dashed place before
+function fourCols(ctx,b,F,a){const lit=a>0.01;card(ctx,b.x,b.y,b.w,b.h,lit?K.gold:K.soft,F.h,{glow:lit?4+6*a:2,dash:!lit,a:0.55+0.45*a,size:13.5});
+  if(!lit)return;const cw=b.w/4,cols=[K.gold,K.good,K.bad,K.hot];
+  withA(ctx,a,()=>F.cols.forEach(([h,v],i)=>{const x=b.x+i*cw;lines(ctx,h,x+6,b.y+44,cw-12,{size:12,max:2,w:700,align:"center",color:rgbaS(K.soft,1)});
+    T(ctx,v,x+cw/2,b.y+b.h-12,{w:800,size:22,align:"center",color:rgbaS(cols[i],1)});
+    if(i){ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.25);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,b.y+34);ctx.lineTo(x,b.y+b.h-8);ctx.stroke();ctx.restore();}}));}
+
 const BUILD={play:labPlay};
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
@@ -302,4 +404,33 @@ VIS.rec=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.plat);const m=12,t=GO(S,now),P=P
     if(i<2)arrow(ctx,m+W2*0.5,y+rh+rg-1,m+W2*0.5,y+rh+1,K.soft,0.6,{head:6,dash:[3,3],lw:1.4});});
   line1(ctx,P.ask,m,12+3*(rh+rg)+16,W2,13,{w:700,align:"center",color:rgbaS(t>0?K.gold:K.soft,1)});};
 VIS.rec.h=()=>12+3*(34+12)+28;
+// A Sharper Sketch's situations draw with its playground's words (the lab "sharpen"): Genie's number beside the census report's; the
+// sketch as it was, with the reference's pins; each enrolment's history in four columns; and the sketch's versions
+const SKW=()=>(L.labs.find(x=>x.id==="sharpen")||{w:{}}).w;
+VIS.gap=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.hot);const m=12,t=GO(S,now),W2=o.lw-m*2,Wl=SKW(),cw=(W2-10)/2;
+  [[Wl.cmp.genie,"131",K.hot],[Wl.cmp.report,"118",K.gold]].forEach(([s,n,col],i)=>{const x=m+i*(cw+10);card(ctx,x,14,cw,74,col,s,{glow:8,size:13});
+    T(ctx,n,x+12,14+62,{w:800,size:28,color:rgbaS(col,1)});});
+  line1(ctx,PK.gap.note,m,14+74+26,W2,13,{w:700,align:"center",color:rgbaS(K.good,1)});
+  lines(ctx,PK.gap.ask,m,14+74+54,W2,{size:13,max:2,w:700,align:"center",color:rgbaS(t>0?K.gold:K.soft,1)});};
+VIS.gap.h=()=>14+74+54+30;
+// the sketch as it was, with the reference laid over it: blue pins on what it has, question marks on what it doesn't
+VIS.ref=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,ADOPT);const m=12,t=GO(S,now),Wl=SKW(),Bx=Wl.boxes,W2=o.lw-m*2,g=10,bw=Math.min(132,(W2-g*2)/3),bh=30,x0=m+(W2-(bw*3+g*2))/2,top=24,bot=top+bh+34,x2=x0+2*(bw+g);
+  ctx.save();ctx.strokeStyle=rgbaS(K.plat,0.5);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x0+bw,top+bh/2);ctx.lineTo(x2,top+bh/2);
+  ctx.moveTo(x0+bw/2,top+bh);ctx.lineTo(x0+bw/2,bot);ctx.moveTo(x2+bw/2,top+bh);ctx.lineTo(x2+bw/2,bot);ctx.stroke();ctx.restore();
+  [[x0,top,Bx.student,"ref"],[x0+bw+g,top,Bx.enrol,"ref"],[x2,top,Bx.cls,"none"],[x0,bot,Bx.course,"ref"],[x2,bot,Bx.term,"none"]].forEach(([x,y,s,k])=>{
+    chip(ctx,x,y,bw,bh,s,K.plat,{size:13});pin(ctx,x+bw-3,y+3,k,1);});
+  line1(ctx,Wl.census,x2,bot+bh+17,bw,12,{w:700,align:"center",color:rgbaS(K.warm,1)});
+  lines(ctx,PK.ref.ask,m,bot+bh+44,W2,{size:13,max:2,w:700,align:"center",color:rgbaS(t>0?K.gold:K.soft,1)});};
+VIS.ref.h=()=>24+30+34+30+44+30;
+// each enrolment's history in four columns
+VIS.four=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.gold);const m=12,t=GO(S,now),W2=o.lw-m*2;fourCols(ctx,{x:m,y:14,w:W2,h:96},SKW().four,1);
+  lines(ctx,PK.four.ask,m,14+96+30,W2,{size:13,max:2,w:700,align:"center",color:rgbaS(t>0?K.gold:K.soft,1)});};
+VIS.four.h=()=>14+96+30+30;
+// the sketch's versions, each with a note on why it changed, the last still to come
+VIS.version=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.warm);const m=12,t=GO(S,now),W2=o.lw-m*2,V=PK.version.v,aw=22,pw=(W2-aw*2)/3,y=26,ph=34;
+  V.forEach((s,i)=>{const x=m+i*(pw+aw),last=i===V.length-1;chip(ctx,x,y,pw,ph,s,last?K.soft:K.warm,{size:13,glow:last?2:6,a:last?0.7:1});
+    if(i)arrow(ctx,x-aw+4,y+ph/2,x-4,y+ph/2,K.soft,0.8,{head:6,lw:1.6});});
+  lines(ctx,PK.version.note,m,y+ph+28,W2,{size:12.5,max:2,w:600,align:"center",color:rgbaS(K.soft,1)});
+  lines(ctx,PK.version.ask,m,y+ph+70,W2,{size:13,max:2,w:700,align:"center",color:rgbaS(t>0?K.gold:K.soft,1)});};
+VIS.version.h=()=>26+34+70+30;
 })();

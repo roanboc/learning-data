@@ -100,8 +100,8 @@ TWINS = ["", "labs/", "scenarios/", "journey/", "topics/", "sketch/", "when-thin
          "when-things-go-wrong/silent-change/", "when-things-go-wrong/too-good-to-be-true/",
          "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/",
          "dbt-project/"]
-# English-only pages and where their ES toggle goes
-ES_TOGGLE = {"sketch/labs/": "es/sketch/", "sketch/scenarios/": "es/sketch/"}
+# English-only pages and where their ES toggle goes (A Sharper Sketch's labs and scenarios were, until they became its series', 19 Nov 2026)
+ES_TOGGLE = {}
 NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Temas", "Cómo se hizo"]}
 # the footer holds no second navigation, only the source
 FOOT = {"en": "Source on GitHub", "es": "Código en GitHub"}
@@ -117,8 +117,6 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     # A Sharper Sketch, film 2 of Model the business, whose pages are written by hand ("outside" in its series.json)
     "sketch/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
     "es/sketch/": ("Temas › Modelado de datos › Modelar el negocio", ["es/topics/", "es/topics/", "es/model-the-business/"]),
-    "sketch/labs/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
-    "sketch/scenarios/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
     "when-things-go-wrong/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/"]),
     "es/when-things-go-wrong/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
     "when-things-go-wrong/silent-change/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
@@ -146,8 +144,8 @@ PACKS = {"assets/learn/learn.en.js", "assets/learn/learn.es.js",
 # "Pause and think" packs whose stops are the film's own labs (the rest point to The Inner Life of Data's): the labs page, and the pack that names its labs
 OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.en.js"),
             "assets/too-good-to-be-true/think.es.js": ("es/when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.es.js")}
-# a film's labs and scenarios, as its stepper and topic cards count them (None: it has none)
-COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": (None, None)}
+# a film's labs and scenarios, as its stepper and topic cards count them (None: it has none; A Sharper Sketch's are its series' since 19 Nov 2026)
+COUNTS = {"ld": ("8", "12"), "ld3": (None, None), "ld-silent-change": (None, None), "ld-too-good-to-be-true": (None, None)}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
 # a series numbers its own films, always as "Film 2 of 7" ("Película 2 de 7"): that's allowed; numbering the site's films isn't
 NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)(?!-)|(first|second|third) film|(primera|segunda|tercera) película|"
@@ -1195,7 +1193,6 @@ def main():
     normal = [pg for pg in pages.values() if not pg.redirect]
     release_names = "\n".join(p.read_text() for p in RELEASES)
     intro_stops = re.findall(r'\["(\w+)","\w+",\[', (WEB / "assets/learn/learn.js").read_text())
-    sketch_labs = re.findall(r'\bid:"(\w+)"', (WEB / "assets/sketch/sketch.js").read_text())
 
     # -- markup
     s = rep.check("Markup: tags balanced, ids unique, labels point at real ids, images have alt text")
@@ -1252,8 +1249,6 @@ def main():
             return
         if tp.key in ("labs/", "es/labs/") and re.fullmatch(r"(explore[-/])?(\w+)", frag) and \
                 re.fullmatch(r"(explore[-/])?(\w+)", frag).group(2) in intro_stops:
-            return
-        if tp.key == "sketch/labs/" and frag in sketch_labs:
             return
         if frag in LEARN_IDS.get(tp.key, ()):  # made by the series' learn.js
             return
@@ -1729,7 +1724,6 @@ def main():
 
     s = rep.check("Scenarios and labs: one right option in each choice, right answers spread across the options, sorting cards not box by box, an order's steps mixed")
     learn = {p.parent.name: p for p in sorted(WEB.glob("assets/*/learn.en.js"))}
-    learn["sketch"] = WEB / "assets/sketch/sketch.js"
     for k, words in SPREAD_SHUFFLED.items():
         if words not in (WEB / "assets" / k / "learn.js").read_text():
             s["fails"].append(f"site/assets/{k}/learn.js no longer mixes its options as it shows them ({words}…): take \"{k}\" off SPREAD_SHUFFLED, and spread the right answers of the packs it shows")
@@ -1823,8 +1817,8 @@ def main():
         ls = pg.local_scripts
         if len(pg.bundles) > 1:
             s["fails"].append(f"{pg.file}: {len(pg.bundles)} film bundles ({', '.join(pg.bundles)}); only one can load")
-        order = [x for x in ls if x in BUNDLES or x in PACKS or x in ("assets/learn/think.js", "assets/learn/path.js", "assets/learn/next.js", "assets/sketch/sketch.js")]
-        rank = lambda x: 0 if x in BUNDLES else 1 if x in PACKS else {"assets/learn/think.js": 2, "assets/sketch/sketch.js": 2, "assets/learn/path.js": 3, "assets/learn/next.js": 4}[x]
+        order = [x for x in ls if x in BUNDLES or x in PACKS or x in ("assets/learn/think.js", "assets/learn/path.js", "assets/learn/next.js")]
+        rank = lambda x: 0 if x in BUNDLES else 1 if x in PACKS else {"assets/learn/think.js": 2, "assets/learn/path.js": 3, "assets/learn/next.js": 4}[x]
         if [rank(x) for x in order] != sorted(rank(x) for x in order):
             s["fails"].append(f"{pg.file}: scripts load as {order}; the order is film bundle → pack → think.js → path.js → next.js")
         film = pg.bundles[0] if pg.bundles else None
@@ -1839,11 +1833,8 @@ def main():
                 s["fails"].append(f"{pg.file}: assets/seek.js loads before the film bundle")
         if "assets/learn/think.js" in ls and not any(x in PACKS for x in ls):
             s["fails"].append(f"{pg.file}: think.js without a language pack")
-        if film == "assets/film3/film.js":
-            if "assets/learn/path.js" in ls:
-                s["fails"].append(f"{pg.file}: A Sharper Sketch's pages never load path.js (sketch.js paints the stepper)")
-            if "assets/sketch/sketch.js" not in ls:
-                s["fails"].append(f"{pg.file}: loads A Sharper Sketch without sketch.js")
+        if film == "assets/film3/film.js" and "assets/learn/path.js" not in ls:  # its labs are its series' since 19 Nov 2026, as film 1's are
+            s["fails"].append(f"{pg.file}: loads A Sharper Sketch without path.js, which records it as watched")
         watch = pg.dom.first(id="watch")
         if film and watch is not None and watch.first("canvas", id="film") is not None:
             ds = watch.attrs.get("data-store")

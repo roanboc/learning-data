@@ -171,6 +171,7 @@ STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres mi
               "assets/data-that-moves/learn.en.js": {"5 minutes"}, "assets/data-that-moves/learn.es.js": {"cinco minutos", "5 minutos"},
               "assets/what-an-agent-is/learn.es.js": {"cuatro minutos"},  # the agent's next-March run of the census count
               "assets/agents-at-work-on-data/learn.en.js": {"40 minutes"}, "assets/agents-at-work-on-data/learn.es.js": {"40 minutos"},  # the web search
+              "assets/from-helper-to-colleague/learn.es.js": {"diez minutos"},  # Sam's switch, tried for ten minutes
               }
 # the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
 # lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),

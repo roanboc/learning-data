@@ -179,7 +179,7 @@ SERIES = [
     dict(id="from-helper-to-colleague", dir="from-helper-to-colleague", slug="from-helper-to-colleague",
          name={"en": "From helper to colleague", "es": "De ayudante a colega"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds"),
+         built="in-the-weeds", learn=dict(dir="from-helper-to-colleague", engine="agents-at-work-on-data")),
     dict(id="data-that-moves", dir="data-that-moves", slug="data-that-moves",
          name={"en": "Data that moves", "es": "Datos que se mueven"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",

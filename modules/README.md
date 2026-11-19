@@ -383,6 +383,8 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Every change through review](../films/from-helper-to-colleague/6-every-change-through-review/) — `every-change-through-review`
 - [A mandate, written and enforced](../films/from-helper-to-colleague/7-a-written-mandate/) — `a-written-mandate`
 
+Labs and assessments: [site/assets/from-helper-to-colleague/learn.en.js](../site/assets/from-helper-to-colleague/learn.en.js), [site/assets/from-helper-to-colleague/learn.es.js](../site/assets/from-helper-to-colleague/learn.es.js)
+
 ## Leading data people
 
 Module: `leading-data-people` · [metadata](leading-data-people/module.json)

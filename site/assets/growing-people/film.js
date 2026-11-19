@@ -3196,26 +3196,37 @@ function gp_passer(x,tt,who,t0,o){o=o||{};const U=PK.u,W=GP_WAY,e=GP_CA.eye,d1=(
    a risk. Laid out for someone who walks, as the kit asks: on from left to right, what comes later at its right. */
 const GP_RB={x:742,y:262,k:0.35,deco:true,floor:848,rest:1212};
 const gp_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},GP_RB,{h:gp_hT(GP_RB.floor)},o||{}));
-// A. what more than six hundred results on feedback found. Laid out for someone who walks: each finding starts under the end of
-// the row above and goes on along its line, so she never walks back over the board to start a row at its left
-const gp_boardA=(sc,w)=>[
-  {s:"Kluger and DeNisi, 1996",x:70,y:100,size:42,col:"mut",at:w("kluger","Kluger",-0.1),d:1.2},
-  {s:"600+ results",x:70,y:200,size:68,w:700,col:"blue",at:w("kluger","six hundred",-0.3),d:0.8},
-  {s:"on feedback",size:52,at:w("kluger","feedback",-0.3),d:0.7},
-  {s:"helped, on average",x:470,y:300,size:52,col:"green",at:w("third","average",-0.3),d:1.0},
-  {s:"1 in 3: worse",size:52,w:700,col:"amber",at:w("third","third",-0.4),d:0.8},
-  {s:"least",x:470,y:410,size:52,at:w("person","least",-0.4),d:0.5},
-  {s:"when about the person",size:52,w:700,col:"amber",at:w("person","turned",-0.1),d:1.1}];
-// B. hard feedback, as Kim Scott puts it: care personally, and challenge directly
-// the heading at the left, as the voice says it first; then the source and its two parts in a column at its right, so she never
-// walks back over the heading
-const gp_boardB=(sc,w)=>[
-  {s:"Hard feedback",x:70,y:200,size:76,w:700,col:"blue",at:w("scott","Hard",-0.2),d:0.9},
-  {s:"Kim Scott, Radical Candor, 2017",x:640,y:110,size:42,col:"mut",at:w("scott","Kim",-0.1),d:1.3},
-  {k:"tick",x:666,y:282,r:18,col:"green",at:w("scott","care",-0.35),d:0.25},
-  {s:"Care personally",x:702,y:300,size:56,w:700,col:"green",at:w("scott","care",-0.1),d:0.8},
-  {k:"tick",x:666,y:392,r:18,col:"blue",at:w("scott","challenge",-0.35),d:0.25},
-  {s:"challenge directly",x:702,y:410,size:56,w:700,col:"blue",at:w("scott","challenge",-0.1),d:0.9}];
+// a board's graphic recording: its heading, drawn above where anyone stands, and the rest, drawn already when it first shows
+const gp_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// A. what more than six hundred results on feedback found: the evidence, how often it helped, and when it helped least. Carmen
+// brings the results together, writes their count, names the chart's two parts and says when feedback helps least, on from left
+// to right; her first stroke is at the board's left while the film is still in the room, so she doesn't cross it as it comes close
+const gp_boardA=(sc,w)=>[...gp_rec("What feedback does",{ref:["Kluger and DeNisi","1996"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,330,300,{title:"the evidence",col:"blue",fill:"blue"},(cc,x,y)=>{
+      [[56,26],[104,14],[152,30],[68,84],[118,72],[166,90]].forEach(([dx,dy])=>D.icon(cc,"doc",x+dx,y+dy+24,26,{fill:"white"}));
+      D.icon(cc,"doc",x+282,y+76,34,{fill:"green"});
+      D.text(cc,"results",x+176,y+212,{size:34,col:"mut"});});
+    D.panel(c,430,150,360,300,{title:"on average",col:"green",fill:"green"},(cc,x,y)=>{
+      D.donut(cc,x+120,y+110,72,[{v:62,col:"green",strong:true},{v:38,col:"amber",strong:true}]);});
+    D.panel(c,820,150,360,300,{title:"task or person",col:"amber",fill:"amber"},(cc,x,y)=>{
+      D.disc(cc,x+80,y+60,40,{fill:"green",col:"ink",w:3});D.icon(cc,"wrench",x+80,y+60,22,{fill:"white"});D.text(cc,"the task",x+80,y+136,{size:30,align:"center"});
+      D.arrow(cc,[x+132,y+60],[x+226,y+60],{col:"ink",w:3.5,head:14});
+      D.disc(cc,x+280,y+60,40,{fill:"amber",col:"ink",w:3});D.icon(cc,"person",x+280,y+60,24,{fill:"white"});D.text(cc,"the person",x+280,y+136,{size:30,align:"center"});});},[60,140,1190,458]),
+  {k:"arrow",x:268,y:286,x1:314,y1:286,col:"blue",at:w("kluger","brought",-0.2),d:0.3},
+  {s:"600+",x:100,y:422,size:60,w:700,col:"blue",at:w("kluger","six hundred",-0.3),d:0.6},
+  {s:"helped",x:636,y:312,size:40,w:700,col:"green",at:w("third","helped",-0.3),d:0.5},
+  {s:"over a third: worse",x:450,y:432,size:36,w:700,col:"amber",at:w("third","third",-0.3),d:0.9},
+  {s:"helps least",x:1166,y:432,size:40,w:700,col:"amber",align:"right",at:w("person","least",-0.3),d:0.7}];
+// B. hard feedback, as Kim Scott's Radical Candor puts it: a chart of care against challenge, the best of it where both are high.
+// Carmen talks first, then writes the chart's two sides as the voice says them, on from left to right, and rings where both are high
+const gp_boardB=(sc,w)=>[...gp_rec("Radical Candor",{ref:["Kim Scott","2017"],rsize:32},c=>{const D=PK.sk;
+    D.face(c,"helena",150,330,46);D.face(c,"ivy",330,330,46);D.caps(c,"hard feedback",240,436,{size:30,col:"blue",align:"center"});
+    D.box(c,112,212,76,54,{fill:"white",col:"ink",w:3,r:16});D.line(c,[[132,266],[124,284],[152,266]],{col:"ink",w:3,seed:5});D.icon(c,"warn",150,239,16,{fill:"amber"});
+    D.matrix(c,620,196,500,224,{on:1,col:"green"});D.icon(c,"star",995,252,30,{fill:"amber"});D.icon(c,"heart",745,252,22,{fill:"white"});
+    D.icon(c,"bolt",995,364,22,{fill:"white"});},[60,140,1190,486]),
+  {s:"care personally",x:604,y:236,size:36,w:700,col:"green",align:"right",at:w("scott","care",-0.1),d:0.8},
+  {s:"challenge directly",x:1120,y:466,size:36,w:700,col:"blue",align:"right",at:w("scott","challenge",-0.1),d:0.9},
+  {k:"ring",x:995,y:252,rx:58,ry:46,col:"amber",at:sc.ends.scott-0.4,d:0.35}];
 /* the team's room when Carmen explains at its board: Sam has pulled a chair round, Jun turns from her desk, and Ivy sits turned to
    the board with her notebook open on her knee and a pen in her hand; Helena stands by the wall, listening. o.rows: the board's
    rows; o.say: when Carmen speaks ([[t0, t1], …]); o.events: PK.face's, for her; o.note (0 to 1): Ivy looks down and writes; o.ivy,
@@ -3240,59 +3251,76 @@ const gp_jot=(tt,wr,o)=>{const U=PK.u,top=GP_IVY.floor-0.43*GP_HI;return Object.
    In the page's own px (1,100 wide; nothing written below y 790, which is over the captions). One pen writes a page: the film
    gives each row the time the voice says it, in the order the pen writes them, and paces the page once (PK.pace(ctx, null, rows));
    a page shown twice has its later rows written while the film is elsewhere. */
-// 1. her three goals, by when; then, as the voice says they are hers, the team's measures set apart
-const gp_note1=(sc,w)=>[
-  {s:"My goals",x:70,y:124,size:88,w:700,col:"blue",at:sc.cues.route-0.5,d:0.7,marks:[["under","blue",sc.cues.route+0.22,0.3]]},
-  {s:"1",x:76,y:262,size:60,w:700,col:"blue",at:w("route","One",0.3),d:0.2},{s:"Know one question's whole route",x:136,y:262,size:56,at:w("route","whole",-0.6),d:1.0},
-  {s:"by Easter",x:136,y:330,size:42,col:"mut",at:w("route","Easter",-0.2),d:0.5},
-  {s:"2",x:76,y:432,size:60,w:700,col:"blue",at:w("pr","Two",-0.1),d:0.2},{s:"A pull request merged",x:136,y:432,size:56,at:w("pr","pull",-0.2),d:0.8},
-  {s:"by May",x:136,y:500,size:42,col:"mut",at:w("pr","May",-0.2),d:0.4},
-  {s:"3",x:76,y:602,size:60,w:700,col:"blue",at:w("own","Three",-0.1),d:0.2},{s:"Own a data product",x:136,y:602,size:56,at:w("own","own",-0.1),d:0.8},
-  {s:"by the middle of the year",x:136,y:670,size:42,col:"mut",at:w("own","middle",-0.2),d:0.9},
-  {s:"mine",x:560,y:124,size:64,w:700,col:"green",at:w("hers","own",-0.4),d:0.5,marks:[["ring","green",null,0.4]]},
-  {s:"Team's measures: the team's,",x:70,y:770,size:44,col:"mut",at:w("hers","team's measures",-0.1),d:1.0},
-  {s:"never my targets",size:44,w:700,col:"amber",at:w("hers","never",-0.1),d:0.8}];
-// 2. feedback in three parts, and what Helena told her: ask for a review when it works
-const gp_note2=(sc,w)=>[
-  {s:"Three parts",x:70,y:124,size:88,w:700,col:"blue",at:w("sbi","three parts",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"Center for Creative Leadership",x:70,y:222,size:42,col:"mut",at:w("sbi","Center",-0.1),d:1.2},
-  {s:"Situation",x:70,y:330,size:62,w:700,col:"blue",at:w("sbi","situation",-0.2),d:0.6},
-  {s:"Behaviour",x:410,y:330,size:62,w:700,col:"blue",at:w("sbi","behaviour",-0.2),d:0.6},
-  {s:"Impact",x:756,y:330,size:62,w:700,col:"blue",at:w("sbi","impact",-0.2),d:0.5},
-  {s:"what I did",x:410,y:392,size:42,col:"mut",at:w("not","what she did",-0.1),d:0.6},{s:"what it changed",x:756,y:392,size:42,col:"mut",at:w("not","what it changed",-0.1),d:0.7},
-  {s:"Ask for a review when it works,",x:70,y:520,size:56,at:w("works","Ask",-0.1),d:1.0,marks:[["hl","green",w("works","perfect",0.4),0.4]]},
-  {s:"not when it's perfect",x:70,y:600,size:56,at:w("works","not when",-0.1),d:0.8},
-  {s:"Small and often,",x:70,y:718,size:62,w:700,col:"green",at:w("fresh","Small",-0.1),d:0.8},
-  {s:"while it's fresh",size:52,at:w("fresh","fresh",-0.4),d:0.7}];
-// 3. Helena's own page: what Ivy told her, and what she does from then on
-const gp_note3=(sc,w)=>[
-  {s:"From Ivy",x:70,y:124,size:84,w:700,col:"blue",marks:[["under","blue"]]},
-  {s:"I answer at once,",x:70,y:250,size:58},{s:"and she stops looking",x:70,y:330,size:58,marks:[["hl","amber"]]},
-  {k:"arrow",x:96,y:408,x1:168,y1:452,bow:-16,col:"green",at:w("thanks","From then",-0.2),d:0.3},
-  {s:"First ask:",x:190,y:470,size:66,w:700,col:"green",at:w("thanks","first asks",-0.1),d:0.6},
-  {s:"what have you tried?",x:190,y:566,size:66,w:700,at:w("thanks","tried",-0.5),d:0.9,marks:[["hl","green",sc.ends.thanks+0.2,0.4]]}];
-// 4. her half year, looked back on and forward
-const gp_note4=(sc,w)=>[
-  {s:"Half a year",x:70,y:124,size:88,w:700,col:"blue",at:w("mid","half year",-0.2),d:0.7,marks:[["under","blue",w("mid","and forward",0.05),0.3]]},
-  {k:"tick",x:94,y:228,r:18,col:"green",at:w("mid","All three",-0.2),d:0.2},{k:"tick",x:146,y:228,r:18,col:"green",at:w("mid","three",0),d:0.2},{k:"tick",x:198,y:228,r:18,col:"green",at:w("mid","goals",0),d:0.2},
-  {s:"all three goals met",x:240,y:246,size:58,col:"green",at:w("mid","met",-0.3),d:0.8},
-  {s:"Went well:",x:70,y:366,size:44,col:"mut",at:w("well","went well",-0.2),d:0.5},{s:"Graham's page",x:290,y:366,size:62,w:700,at:w("well","Graham's",-0.1),d:0.7,marks:[["hl","green"]]},
-  {s:"Differently:",x:70,y:476,size:44,col:"mut",at:w("well","differently",-0.3),d:0.5},{s:"ask for review earlier",x:320,y:476,size:58,w:700,col:"amber",at:w("well","ask",-0.1),d:0.9},
-  {s:"Next:",x:70,y:586,size:44,col:"mut",at:w("wants","next",-0.2),d:0.3},{s:"a better Monday refresh",x:190,y:586,size:58,w:700,col:"blue",at:w("wants","Monday",-0.5),d:0.9},
-  {s:"and teach what I learn",x:190,y:676,size:58,w:700,col:"blue",at:w("wants","teach",-0.3),d:0.9},
+// 1. her three goals, each drawn with what it is about; the hand adds by when, as the voice says each. Then, as the voice says they
+// are hers, "mine", and the team's measures, set apart, are never her targets
+const GP_GOALS=[["map","blue",256,"Know one question's whole route"],["doc","green",396,"A pull request merged"],["db","amber",536,"Own a data product"]];
+const gp_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My goals",86,124,{size:76});D.face(c,"ivy",900,112,42);
+    GP_GOALS.forEach(([ic,col,y,s])=>{D.disc(c,108,y-14,32,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-14,19,{fill:"white"});D.text(c,s,160,y,{size:40});
+      D.icon(c,"cal",178,y+50,15,{fill:"white"});});
+    D.box(c,86,630,910,132,{fill:"paper",col:"mut",w:2.5,r:16,dash:[10,8]});D.icon(c,"people",146,686,28,{fill:"white"});D.icon(c,"bars",930,688,26,{fill:"white"});
+    D.text(c,"the team's measures",196,682,{size:38,col:"mut"});},[60,40,1030,772]),
+  {s:"by Easter",x:208,y:318,size:38,col:"blue",at:w("route","Easter",-0.2),d:0.5},
+  {s:"by May",x:208,y:458,size:38,col:"blue",at:w("pr","May",-0.2),d:0.4},
+  {s:"by midyear",x:208,y:598,size:38,col:"blue",at:w("own","middle",-0.2),d:0.6},
+  {s:"mine",x:440,y:122,size:60,w:700,col:"green",at:w("hers","own",-0.4),d:0.5,marks:[["ring","green",null,0.4]]},
+  {s:"never my targets",x:196,y:740,size:40,w:700,col:"amber",at:w("hers","never",-0.1),d:0.8}];
+// 2. feedback in three parts, each a card with its drawing: the hand names each as the voice does, and later what two of them meant
+// in what Helena told her. Under them what she keeps from May: ask for a review when it works; small and often, while it's fresh
+const GP_SBI=[["cal","blue",86],["person","green",396],["up","amber",706]];
+const gp_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Three parts",86,124,{size:76});D.caps(c,"Center for Creative Leadership",86,186,{size:28,col:"mut"});
+    GP_SBI.forEach(([ic,col,x])=>{D.box(c,x,212,290,194,{fill:col,col:"ink",w:3,r:18});D.disc(c,x+145,262,30,{fill:"white",col:"ink",w:3});D.icon(c,ic,x+145,262,18,{fill:col});});
+    D.text(c,"when, where",231,388,{size:30,col:"mut",align:"center"});
+    D.box(c,86,450,440,310,{fill:"paper",col:"ink",w:3,r:18});D.disc(c,140,508,28,{fill:"blue",col:"ink",w:3});D.icon(c,"eye",140,508,17,{fill:"white"});
+    D.caps(c,"Ask for a review",184,520,{size:30,col:"blue"});
+    D.box(c,566,450,440,310,{fill:"paper",col:"ink",w:3,r:18});D.disc(c,620,508,28,{fill:"green",col:"ink",w:3});D.icon(c,"clock",620,508,17,{fill:"white"});
+    D.caps(c,"Small and often",664,520,{size:30,col:"green"});
+    D.line(c,[[600,700],[976,700]],{col:"mut",w:2.5,dash:[8,8],seed:9});
+    for(let i=0;i<6;i++)D.box(c,612+i*62,686,30,28,{fill:"green",col:"ink",w:2.5,r:5});},[60,40,1030,772]),
+  {s:"situation",x:231,y:350,size:44,w:700,align:"center",at:w("sbi","situation",-0.2),d:0.6},
+  {s:"behaviour",x:541,y:350,size:44,w:700,align:"center",at:w("sbi","behaviour",-0.2),d:0.6},
+  {s:"impact",x:851,y:350,size:44,w:700,align:"center",at:w("sbi","impact",-0.2),d:0.5},
+  {s:"what I did",x:541,y:390,size:32,col:"mut",align:"center",at:w("not","what she did",-0.1),d:0.6},
+  {s:"what it changed",x:851,y:390,size:32,col:"mut",align:"center",at:w("not","what it changed",-0.1),d:0.7},
+  {s:"when it works",x:116,y:620,size:46,w:700,at:w("works","when it",-0.1),d:0.7,marks:[["hl","green",w("works","perfect",0.4),0.4]]},
+  {s:"not when it's perfect",x:116,y:690,size:34,col:"mut",at:w("works","not when",-0.1),d:0.8},
+  {s:"while it's fresh",x:596,y:620,size:46,w:700,at:w("fresh","fresh",-0.4),d:0.7}];
+// 3. Helena's own page: what Ivy told her, in Helena's words, and what she does from then on
+const gp_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"From Ivy",86,124,{size:76});D.face(c,"ivy",480,100,40);
+    D.box(c,86,196,600,172,{fill:"white",col:"ink",w:3,r:24});D.disc(c,140,282,28,{fill:"blue",col:"ink",w:3});D.icon(c,"speech",140,284,16,{fill:"white"});
+    D.text(c,"I answer at once,",186,262,{size:40});D.band(c,176,300,330,46,"amber",0.42);D.text(c,"she stops looking",186,334,{size:40});
+    D.box(c,86,470,800,236,{fill:"green",col:"ink",w:3,r:20});D.disc(c,146,540,30,{fill:"white",col:"ink",w:3});D.icon(c,"q",146,540,18,{fill:"green"});},[60,40,1030,720]),
+  {k:"arrow",x:300,y:386,x1:300,y1:456,bow:-12,col:"green",at:w("thanks","From then",-0.2),d:0.3},
+  {s:"First ask:",x:196,y:556,size:52,w:700,col:"green",at:w("thanks","first asks",-0.1),d:0.6},
+  {s:"what have you tried?",x:196,y:646,size:56,w:700,at:w("thanks","tried",-0.5),d:0.9,marks:[["hl","green",sc.ends.thanks+0.2,0.4]]}];
+// 4. her half year, looked back on and forward: her three goals, each ticked; then what went well, what she'd do differently and
+// what she wants next, beside the seedling she was given when she first owned a product
+const GP_HALF=[["map","blue",160,"route"],["doc","green",370,"pull request"],["db","amber",580,"data product"]];
+const gp_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My half year",86,124,{size:76});
+    GP_HALF.forEach(([ic,col,x,s])=>{D.disc(c,x,232,36,{fill:col,col:"ink",w:3});D.icon(c,ic,x,232,22,{fill:"white"});D.text(c,s,x,306,{size:30,col:"mut",align:"center"});});
+    D.line(c,[[86,346],[1000,346]],{col:"mut",w:2.5,dash:[8,10],seed:6});
+    for(const [ic,col,y,s] of [["star","green",392,"Went well"],["loop","amber",492,"Differently"],["flag","blue",592,"Next"]]){D.disc(c,108,y,26,{fill:col,col:"ink",w:3});
+      D.icon(c,ic,108,y,16,{fill:"white"});D.caps(c,s,150,y+10,{size:30,col});}
+    D.line(c,[[866,560],[974,560],[958,650],[882,650]],{col:"ink",w:3,fill:"orange",close:true,seed:8});D.icon(c,"sprout",920,500,60,{fill:"green"});},[60,40,1030,700]),
+  {k:"tick",x:196,y:206,r:18,col:"green",at:w("mid","All three",-0.2),d:0.2},
+  {k:"tick",x:406,y:206,r:18,col:"green",at:w("mid","three",0),d:0.2},
+  {k:"tick",x:616,y:206,r:18,col:"green",at:w("mid","goals",0),d:0.2},
+  {s:"all met",x:720,y:250,size:48,w:700,col:"green",at:w("mid","met",-0.3),d:0.5},
+  {s:"Graham's page",x:370,y:404,size:52,w:700,at:w("well","Graham's",-0.1),d:0.7,marks:[["hl","green",w("well","Council",0),0.4]]},
+  {s:"ask for review earlier",x:390,y:504,size:46,w:700,col:"amber",at:w("well","ask",-0.1),d:0.9},
+  {s:"a better Monday refresh",x:260,y:604,size:46,w:700,col:"blue",at:w("wants","Monday",-0.5),d:0.9},
+  {s:"teach what I learn",x:260,y:684,size:46,w:700,col:"blue",at:w("wants","teach",-0.3),d:0.8},
   {k:"star",x:1000,y:118,r:30,col:"amber",at:sc.ends.wants+0.2,d:0.45}];
-// 5. on Monday: four things to keep, each with what it means under it
-const gp_note5=(sc,w)=>{const c=sc.cues,dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:c.goals-0.45,d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(244,"blue",w("goals","write",-0.4)),{s:"Their own goals",x:128,y:244,size:62,at:w("goals","write",-0.2),d:0.8},
-  {s:"they write them, then you agree",x:128,y:302,size:42,col:"mut",at:w("goals","agree",-0.6),d:1.0},
-  dot(404,"green",w("feedback","every",-0.5)),{s:"Feedback every week",x:128,y:404,size:62,at:w("feedback","every",-0.3),d:0.9,marks:[["hl","green"]]},
-  {s:"the situation, what they did, its effect",x:128,y:462,size:42,col:"mut",at:w("feedback","situation",-0.2),d:1.4},
-  dot(564,"amber",w("ask","Ask",-0.3)),{s:"Ask for feedback on you",x:128,y:564,size:62,at:w("ask","Ask",-0.1),d:0.9},
-  {s:"and act on it",x:128,y:622,size:42,col:"mut",at:w("ask","act",-0.2),d:0.5},
-  {s:"Look forward",x:128,y:724,size:62,at:w("forward","Look",-0.1),d:0.6,marks:[["ring","blue",w("forward","conversations",0.1)]]},
-  {s:"credit the team, in public",x:520,y:724,size:42,col:"mut",at:w("forward","credit",-0.1),d:0.9},
-  {k:"star",x:1010,y:104,r:30,col:"amber",at:sc.ends.forward+0.05,d:0.45}];};
+// 5. on Monday: four things to keep, each with its drawing and, drawn under it, what it means; the hand writes each as the voice says
+// it. Ivy keeps the page: she leads people now too
+const GP_MON=[["target","blue",250,"they write them, then you agree"],["speech","green",390,"the situation, what they did, its effect"],
+  ["loop","amber",530,"and act on it"],["flag","blue",670,"credit the team, in public"]];
+const gp_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});D.face(c,"ivy",880,112,42);
+    GP_MON.forEach(([ic,col,y,s])=>{D.disc(c,108,y-18,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-18,19,{fill:"white"});D.text(c,s,200,y+54,{size:32,col:"mut"});});},[60,40,1030,740]),
+  {s:"Their own goals",x:200,y:250,size:54,w:700,at:w("goals","write",-0.2),d:0.8},
+  {s:"Feedback every week",x:200,y:390,size:54,w:700,at:w("feedback","every",-0.3),d:0.9,marks:[["hl","green"]]},
+  {s:"Ask for feedback on you",x:200,y:530,size:54,w:700,at:w("ask","Ask",-0.1),d:0.9},
+  {s:"Look forward",x:200,y:670,size:54,w:700,at:w("forward","Look",-0.1),d:0.6,marks:[["ring","blue",w("forward","conversations",0.1)]]},
+  {k:"star",x:1000,y:110,r:28,col:"amber",at:sc.ends.forward+0.05,d:0.45}];
 
 /* ---------------------------------------------------------------- what they say to each other from where they are
    Graham's question, in a call from Ivy's desk; and his thanks to Helena, which he writes on his phone on the campus */

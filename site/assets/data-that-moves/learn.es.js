@@ -56,7 +56,7 @@ labs:[
   speeds:[["night","Cada noche"],["five","Cada 5 minutos"],["event","Cada evento"]],tone:{night:"cold",five:"warm",event:"hot"},cost:{night:1,five:6,event:20},
   runB:"Correr el día",hours:["0:00","6:00","12:00","18:00","24:00"],nextDay:"día siguiente",costL:"Costo de operar: {c} al día",costV:"{c} al día",
   alL:"Auto Loader",alModes:[["trig","Disparado"],["cont","Continuo"]],landB:"Llega un archivo",alRunB:"Correr Auto Loader",
-  zone:"Llegada",bronze:"Bronce",alTrig:"espera su turno",alCont:"siempre activo",
+  zone:"Llegada",bronze:"Bronce",alTrig:"en espera",alCont:"siempre activo",
   msg:{set:"{k}: {s}.",running:"Corre el día…",
    spend:{ok:"El gasto estuvo listo a las siete.",over:"El gasto llegó antes, pero nadie mira antes de las siete: esa velocidad cuesta más para nada.",late:"El gasto llegó tarde."},
    contract:{ok:"Los cambios de contrato del lunes llegaron a la app de declaraciones antes del mediodía.",over:"Los cambios del lunes llegaron al instante. Cinco minutos también habrían bastado, por mucho menos.",late:"Los cambios de contrato del lunes llegaron a la app el martes: las declaraciones no alcanzaron el mediodía, y esos tutores esperan dos semanas más su pago."},

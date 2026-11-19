@@ -15,6 +15,8 @@ What it means to own an outcome, how a team should measure its work, what to do 
 | [Measure the work, not the people](https://data.learn-all.org/ownership-and-performance/measure-the-work/) | Measures for learning | 8½ min | 6 | 3 questions | [script](2-measure-the-work/script.md) · [source](2-measure-the-work/source/README.md) |
 | [When someone falls behind](https://data.learn-all.org/ownership-and-performance/when-someone-falls-behind/) | When work falls behind | 7½ min | 6 | 3 questions | [script](3-when-someone-falls-behind/script.md) · [source](3-when-someone-falls-behind/source/README.md) |
 | [Growing people](https://data.learn-all.org/ownership-and-performance/growing-people/) | How people grow at work | 8 min | 6 | 3 questions | [script](4-growing-people/script.md) · [source](4-growing-people/source/README.md) |
+
+For the whole series, on the site: [4 labs](https://data.learn-all.org/ownership-and-performance/labs/) and [12 scenarios](https://data.learn-all.org/ownership-and-performance/scenarios/), in English and Spanish, from the words in [site/assets/ownership-and-performance/](../../site/assets/ownership-and-performance/).
 <!-- /films -->
 
 ## The look and the sound

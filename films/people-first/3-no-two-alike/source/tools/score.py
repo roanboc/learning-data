@@ -227,6 +227,9 @@ luT = oc('where', -0.6)
 bass(Fs1, 0.6, 0.85, 0.0, ring=2.6); clar(Cs3, 1.1, 1.5, 0.75, 0.0, att=0.2)
 bass(B1, ow('aside', 'leaves', 0.0), 0.75, 0.0, ring=2.0); clar(Ds3, ow('aside', 'leaves', 0.45), 1.3, 0.65, 0.0, att=0.16)
 bass(Cs2, ow('aside', 'person', -0.1), 0.75, 0.0, ring=2.0); clar(Es3, ow('aside', 'person', 0.35), 1.5, 0.65, 0.0, att=0.16)
+# the puna, close on the older woman: her sickle draws through the handful of q'oya she holds (src/na_puna.js, her cycle from 0.3 s,
+# 4.4 s long: the stroke from 10.1 s), one soft rub of grass where she is on screen
+rub(10.1, 0.6, 0.003, px(820) * 0.5)
 # Lu: the hall comes in, where and when
 bass(Fs1, luT + 0.3, 0.85, px(700) * 0.4, ring=2.8)
 clar(Fs2, luT + 0.7, 1.15, 0.75, px(1200) * 0.4, att=0.18); clar(Cs3, luT + 1.85, 1.9, 0.75, px(1200) * 0.4, att=0.05, air=0.0)

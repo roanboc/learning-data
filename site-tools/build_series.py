@@ -267,6 +267,7 @@ SERIES = [
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds", next="ownership-and-performance"),
     dict(id="ownership-and-performance", dir="ownership-and-performance", slug="ownership-and-performance",
+         learn=dict(dir="ownership-and-performance", engine="leading-data-people", bundle=False),
          name={"en": "Ownership and performance", "es": "Responsabilidad y desempeño"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),

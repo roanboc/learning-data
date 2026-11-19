@@ -39,33 +39,12 @@ Labs and assessments: [site/assets/sketch/sketch.js](../site/assets/sketch/sketc
 Source: [films/from-words-to-data](../films/from-words-to-data/) · Portal: `/from-words-to-data/`
 
 - [What's in a word](../films/from-words-to-data/1-whats-in-a-word/) — `whats-in-a-word`
-
-  Labs and assessments: [learn.en.js](../site/assets/whats-in-a-word/learn.en.js), [learn.es.js](../site/assets/whats-in-a-word/learn.es.js)
-
 - [Older than the systems](../films/from-words-to-data/2-older-than-the-systems/) — `older-than-the-systems`
-
-  Labs and assessments: [learn.en.js](../site/assets/older-than-the-systems/learn.en.js), [learn.es.js](../site/assets/older-than-the-systems/learn.es.js)
-
 - [Built to write, built to read](../films/from-words-to-data/3-built-to-write-built-to-read/) — `built-to-write-built-to-read`
-
-  Labs and assessments: [learn.en.js](../site/assets/built-to-write-built-to-read/learn.en.js), [learn.es.js](../site/assets/built-to-write-built-to-read/learn.es.js)
-
 - [Many ways to read](../films/from-words-to-data/4-many-ways-to-read/) — `many-ways-to-read`
-
-  Labs and assessments: [learn.en.js](../site/assets/many-ways-to-read/learn.en.js), [learn.es.js](../site/assets/many-ways-to-read/learn.es.js)
-
 - [Both at once](../films/from-words-to-data/5-both-at-once/) — `both-at-once`
-
-  Labs and assessments: [learn.en.js](../site/assets/both-at-once/learn.en.js), [learn.es.js](../site/assets/both-at-once/learn.es.js)
-
 - [Meaning machines can read](../films/from-words-to-data/6-meaning-machines-can-read/) — `meaning-machines-can-read`
-
-  Labs and assessments: [learn.en.js](../site/assets/meaning-machines-can-read/learn.en.js), [learn.es.js](../site/assets/meaning-machines-can-read/learn.es.js)
-
 - [Keeping it true](../films/from-words-to-data/7-keeping-it-true/) — `keeping-it-true`
-
-  Labs and assessments: [learn.en.js](../site/assets/keeping-it-true/learn.en.js), [learn.es.js](../site/assets/keeping-it-true/learn.es.js)
-
 
 Labs and assessments: [site/assets/from-words-to-data/learn.en.js](../site/assets/from-words-to-data/learn.en.js), [site/assets/from-words-to-data/learn.es.js](../site/assets/from-words-to-data/learn.es.js)
 
@@ -121,45 +100,15 @@ Module: `analytics-engineering` · [metadata](analytics-engineering/module.json)
 Source: [films/analytics-engineering](../films/analytics-engineering/) · Portal: `/in-the-weeds/`
 
 - [Declare it, then build it](../films/analytics-engineering/1-declare-it-then-build-it/) — `declare-it-then-build-it`
-
-  Labs and assessments: [learn.en.js](../site/assets/declare-it-then-build-it/learn.en.js), [learn.es.js](../site/assets/declare-it-then-build-it/learn.es.js)
-
 - [Start from a question](../films/analytics-engineering/2-start-from-a-question/) — `start-from-a-question`
-
-  Labs and assessments: [learn.en.js](../site/assets/start-from-a-question/learn.en.js), [learn.es.js](../site/assets/start-from-a-question/learn.es.js)
-
 - [What makes it the same one](../films/analytics-engineering/3-what-makes-it-the-same-one/) — `what-makes-it-the-same-one`
-
-  Labs and assessments: [learn.en.js](../site/assets/what-makes-it-the-same-one/learn.en.js), [learn.es.js](../site/assets/what-makes-it-the-same-one/learn.es.js)
-
 - [One row of what, and when](../films/analytics-engineering/4-one-row-of-what-and-when/) — `one-row-of-what-and-when`
-
-  Labs and assessments: [learn.en.js](../site/assets/one-row-of-what-and-when/learn.en.js), [learn.es.js](../site/assets/one-row-of-what-and-when/learn.es.js)
-
 - [Promises and proofs](../films/analytics-engineering/5-promises-and-proofs/) — `promises-and-proofs`
-
-  Labs and assessments: [learn.en.js](../site/assets/promises-and-proofs/learn.en.js), [learn.es.js](../site/assets/promises-and-proofs/learn.es.js)
-
 - [Built in layers](../films/analytics-engineering/6-built-in-layers/) — `built-in-layers`
-
-  Labs and assessments: [learn.en.js](../site/assets/built-in-layers/learn.en.js), [learn.es.js](../site/assets/built-in-layers/learn.es.js)
-
 - [Who owns what](../films/analytics-engineering/7-who-owns-what/) — `who-owns-what`
-
-  Labs and assessments: [learn.en.js](../site/assets/who-owns-what/learn.en.js), [learn.es.js](../site/assets/who-owns-what/learn.es.js)
-
 - [An agent on the team](../films/analytics-engineering/8-an-agent-on-the-team/) — `an-agent-on-the-team`
-
-  Labs and assessments: [learn.en.js](../site/assets/an-agent-on-the-team/learn.en.js), [learn.es.js](../site/assets/an-agent-on-the-team/learn.es.js)
-
 - [Written once](../films/analytics-engineering/9-written-once/) — `written-once`
-
-  Labs and assessments: [learn.en.js](../site/assets/written-once/learn.en.js), [learn.es.js](../site/assets/written-once/learn.es.js)
-
 - [End to end](../films/analytics-engineering/10-end-to-end/) — `end-to-end`
-
-  Labs and assessments: [learn.en.js](../site/assets/end-to-end/learn.en.js), [learn.es.js](../site/assets/end-to-end/learn.es.js)
-
 
 Labs and assessments: [site/assets/in-the-weeds/learn.en.js](../site/assets/in-the-weeds/learn.en.js), [site/assets/in-the-weeds/learn.es.js](../site/assets/in-the-weeds/learn.es.js)
 
@@ -174,8 +123,7 @@ Source: [films/when-things-go-wrong](../films/when-things-go-wrong/) · Portal: 
 - [Silent change](../films/when-things-go-wrong/1-silent-change/) — `silent-change`
 - [Too good to be true](../films/when-things-go-wrong/2-too-good-to-be-true/) — `too-good-to-be-true`
 
-  Labs and assessments: [learn.en.js](../site/assets/too-good-to-be-true/learn.en.js), [learn.es.js](../site/assets/too-good-to-be-true/learn.es.js)
-
+Labs and assessments: [site/assets/when-things-go-wrong/learn.en.js](../site/assets/when-things-go-wrong/learn.en.js), [site/assets/when-things-go-wrong/learn.es.js](../site/assets/when-things-go-wrong/learn.es.js)
 
 ### Fit for use
 
@@ -186,6 +134,8 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 - [Valid isn't true](../films/fit-for-use/3-valid-isnt-true/) — `valid-isnt-true`
 - [Late is wrong too](../films/fit-for-use/4-late-is-wrong-too/) — `late-is-wrong-too`
 
+Labs and assessments: [site/assets/fit-for-use/learn.en.js](../site/assets/fit-for-use/learn.en.js), [site/assets/fit-for-use/learn.es.js](../site/assets/fit-for-use/learn.es.js)
+
 ### Quality as a habit
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
@@ -194,6 +144,8 @@ Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/qu
 - [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
 - [Read by an agent](../films/quality-as-a-habit/3-read-by-an-agent/) — `read-by-an-agent`
 - [Small, every week](../films/quality-as-a-habit/4-small-every-week/) — `small-every-week`
+
+Labs and assessments: [site/assets/quality-as-a-habit/learn.en.js](../site/assets/quality-as-a-habit/learn.en.js), [site/assets/quality-as-a-habit/learn.es.js](../site/assets/quality-as-a-habit/learn.es.js)
 
 ## Enterprise architecture
 
@@ -380,6 +332,8 @@ Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept
 - [Deleted means deleted](../films/kept-for-a-reason/4-deleted-means-deleted/) — `deleted-means-deleted`
 - [A person asks](../films/kept-for-a-reason/5-a-person-asks/) — `a-person-asks`
 
+Labs and assessments: [site/assets/kept-for-a-reason/learn.en.js](../site/assets/kept-for-a-reason/learn.en.js), [site/assets/kept-for-a-reason/learn.es.js](../site/assets/kept-for-a-reason/learn.es.js)
+
 ## AI agents in data work
 
 Module: `ai-agents` · [metadata](ai-agents/module.json)
@@ -518,6 +472,8 @@ Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: 
 - [Measures that matter](../films/small-steps-measured/2-measures-that-matter/) — `measures-that-matter`
 - [Better every week](../films/small-steps-measured/3-better-every-week/) — `better-every-week`
 - [Strategy is a habit](../films/small-steps-measured/4-strategy-is-a-habit/) — `strategy-is-a-habit`
+
+Labs and assessments: [site/assets/small-steps-measured/learn.en.js](../site/assets/small-steps-measured/learn.en.js), [site/assets/small-steps-measured/learn.es.js](../site/assets/small-steps-measured/learn.es.js)
 
 ## Making of and supplementary films
 

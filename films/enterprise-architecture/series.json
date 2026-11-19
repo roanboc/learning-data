@@ -30,10 +30,10 @@
     ["biz", "Habla por los clientes", "Farah, la defensora de los clientes"],
     ["biz", "Conoce las reglas", "Ama, la responsable regulatoria"]
   ],
-  "learn_p": "{Labs} hands-on labs, one for each film and one on ArchiMate 4, then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs interactivos, uno por película y uno sobre ArchiMate 4, y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} hands-on labs: one for each film, and one on ArchiMate 4, the standard of the later films. Each puts one idea from a film in your hands, and shows you why it matters.",
-  "labs_lead_es": "{Labs} labs interactivos: uno por película, y uno sobre ArchiMate 4, el estándar de las últimas películas. Cada uno pone en tus manos una idea de una película, y te muestra por qué importa.",
-  "quiz_lead": "{quiz} situations an architect or a data team really faces, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: build the map from the top, check a canvas's fit, put a capability map through a restructure, send crews into a storm, walk a change down every layer, and test the map's own agent.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: arma el mapa desde arriba, revisa el encaje de un lienzo, somete un mapa de capacidades a una reestructuración, manda cuadrillas a una tormenta, baja un cambio por cada capa y pon a prueba al agente del mapa.",
+  "quiz_lead": "{quiz} situations an architect or a data team really faces, from every film. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones que de verdad enfrenta un arquitecto o un equipo de datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

@@ -2976,40 +2976,49 @@ const oo_roomBoard=(cx,tt,rows,who,o)=>PK.teach(cx,who,tt,rows,Object.assign({},
    laid out for someone who walks: a row goes on to the right of the one before where it can (words in another colour on the
    same line; the short row under a long one where the long one ended), what is added to rows that are there goes to their
    right, and nothing is underlined or struck back along its words, which would leave her standing on the rows above. */
-// 1. what a data product owner is, and the product's promise
-const oo_boardA=(sc,w)=>[
-  {s:"Zhamak Dehghani, data mesh",x:70,y:92,size:42,col:"mut",at:sc.cues.mesh+0.1,d:1.0},
-  {s:"Data product owner",x:70,y:188,size:76,w:700,col:"blue",at:w("mesh","data product",-0.5),d:1.2},
-  {s:"answers for what the product does",x:70,y:296,size:50,at:w("mesh","answers",-0.1),d:1.5},
-  {s:"for its readers",size:50,w:700,col:"green",at:w("mesh","for its",-0.1),d:0.8},
-  // what comes later, when she has stepped clear, goes at the right: a short walk, and the heading stays in view as she writes it
-  {s:"Its promise:",x:730,y:404,size:52,at:w("promise","promise",-0.3),d:0.8},
-  {s:"every Monday by 7:00",x:730,y:476,size:50,w:700,col:"blue",at:w("promise","every",-0.1),d:1.3}];
-/* 2. many do part of the work, one answers for the outcome: a RACI chart's letters, in a column to the right of the names. An R
-   for each who does part of the work, as the voice names the chart; then the one A, ringed, beside Ivy */
-const oo_boardB=(sc,w)=>{const tr=w("one","Ray-see",-0.15),ta=w("one","A,",-0.3),R=(y,i)=>({s:"R",x:780,y,size:56,w:700,col:"mut",at:tr+i*0.36,d:0.3});return[
-  {s:"Many do the work",x:70,y:104,size:58,at:w("many","Many",-0.1),d:1.2},
-  {s:"Facilities: the sensors",x:120,y:176,size:50,at:w("many","Facilities",0.1),d:1.0},
-  {s:"Sam: the platform",x:120,y:240,size:50,at:w("many","Sam",0.1),d:0.8},
-  {s:"Jun: reviews her changes",x:120,y:304,size:50,at:w("many","Jun",0.1),d:1.1},
-  {s:"Ivy: the outcome",x:120,y:392,size:50,w:700,col:"blue",at:w("one","One",-0.1),d:1.1},
-  R(176,0),R(240,1),R(304,2),
-  {s:"A",x:776,y:392,size:64,w:700,col:"blue",at:ta,d:0.3},{k:"ring",x:797,y:372,rx:44,ry:44,col:"blue",at:ta+0.4,d:0.45},
-  {s:"accountable:",x:880,y:392,size:50,at:w("one","accountable",-0.1),d:0.6},
-  {s:"only one",x:880,y:462,size:54,w:700,col:"blue",at:w("one","only one",-0.1),d:0.6}];};
-/* 3. the review: each part was right (Carmen ticks each as the room hears it), and what failed lies between them; then a just
-   culture's questions: two to ask, and one not to */
-const oo_boardC=(sc,w)=>{const rows=[],tk=[w("each","better",0.4),w("each","count",0.4),w("each","built",0.5)];
-  ["Sensors","Platform","The step"].forEach((s,i)=>rows.push({k:"box",x:70+i*360,y:44,w:300,h:96,col:"ink"},{s,x:96+i*360,y:110,size:54},{k:"tick",x:328+i*360,y:94,r:20,col:"green",at:tk[i]}));
-  return rows.concat([
-    {s:"What failed: how the parts fit",x:236,y:216,size:52,w:700,col:"amber",at:w("fit","What failed",-0.1),d:1.4},
-    // the two joins, ringed from where she stands: the nearer one first
-    {k:"ring",x:760,y:92,rx:38,ry:62,col:"amber",at:w("fit","parts",0.1),d:0.5},{k:"ring",x:400,y:92,rx:38,ry:62,col:"amber",at:w("fit","together",0.1),d:0.5},
-    {s:"Sidney Dekker:",x:70,y:316,size:42,col:"mut",at:sc.cues.dekker+0.1,d:0.9},
-    {s:"a just culture",size:72,w:700,col:"blue",at:w("dekker","just",-0.3),d:1.0},
-    {k:"tick",x:92,y:376,r:18,col:"green",at:w("dekker","what happened",-0.35),d:0.25},{s:"What happened?",x:128,y:394,size:54,at:w("dekker","what happened",-0.1),d:0.8},
-    {k:"tick",x:602,y:376,r:18,col:"green",at:w("dekker","what must",-0.35),d:0.25},{s:"What must change?",x:638,y:394,size:54,at:w("dekker","what must",-0.1),d:0.8},
-    {k:"cross",x:742,y:452,r:15,col:"amber",at:w("dekker","not who",-0.2),d:0.25},{s:"Who is to blame?",x:778,y:470,size:54,col:"mut",at:w("dekker","not who",0.1),d:0.8}]);};
+/* Each board is drawn as a designer would, a graphic recording pinned over the board, almost done when it first shows
+   (PK.sk.drawn): Carmen adds the last words and marks as the voice says them, on from left to right, and steps clear. */
+// a graphic recording in two drawn parts: its heading, high on the sheet, where nobody standing at the board hides it, and the drawing
+// under it, with the box its ink lies in, so Carmen steps only as far right as it reaches
+const oo_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// 1. what a data product owner is (Ivy, and the product she owns), its readers, and the product's promise; she writes what the owner
+// answers for, and for whom, and the promise's hour
+const oo_boardA=(sc,w)=>[...oo_rec("Data product owner",{ref:["Zhamak Dehghani","data mesh"],rsize:32,rx:1030},c=>{const D=PK.sk;
+    D.panel(c,70,150,470,300,{title:"the owner",col:"blue",fill:"blue"},(cc,x,y)=>{D.face(cc,"ivy",x+56,y+46,28);D.arrow(cc,[x+96,y+46],[x+134,y+46],{col:"ink",w:3.5,head:12});
+      D.icon(cc,"db",x+166,y+46,24,{fill:"orange"});D.text(cc,"Teaching space use",x+200,y+56,{size:28,w:700});D.text(cc,"counts per room, per hour",x+30,y+126,{size:28,col:"mut"});});
+    D.panel(c,570,150,300,300,{title:"its readers",col:"green",fill:"green"},(cc,x,y)=>[["graham","Graham",80],["mei","Mei",210]].forEach(([k,s,dx])=>{D.face(cc,k,x+dx,y+44,28);
+      D.text(cc,s,x+dx,y+122,{size:28,align:"center"});}));
+    D.panel(c,900,150,280,300,{title:"its promise",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"cal",x+60,y+44,26,{fill:"white"});D.icon(cc,"clock",x+140,y+44,26,{fill:"white"});
+      D.text(cc,"every Monday",x+30,y+120,{size:30,w:700});});},[60,150,1190,456]),
+  {s:"answers for what it does",x:100,y:430,size:34,w:700,col:"blue",at:w("mesh","answers",-0.1),d:1.3},
+  {s:"for its readers",x:595,y:430,size:36,w:700,col:"green",at:w("mesh","for its",-0.1),d:0.8},
+  {s:"by 7:00",x:1000,y:430,size:48,w:700,col:"blue",at:w("promise","seven",-0.3),d:0.6}];
+/* 2. many do part of the work, one answers for the outcome: who does what, and a RACI chart's letters in a column to the right of
+   them. An R for each who does part of the work, as the voice names the chart; then the one A, ringed, beside Ivy */
+const oo_boardB=(sc,w)=>{const tr=w("one","Ray-see",-0.15),ta=w("one","A,",-0.3),R=(y,i)=>({s:"R",x:760,y,size:40,w:700,col:"mut",at:tr+i*0.36,d:0.3});return[
+  ...oo_rec("Many do the work",{ref:["a RACI chart"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,820,310,{title:"who does what",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"building",x+42,y+20,20,{fill:"white"});D.text(cc,"Facilities: the sensors",x+76,y+32,{size:32});
+      D.face(cc,"sam",x+42,y+74,20);D.text(cc,"Sam: the platform",x+76,y+86,{size:32});D.face(cc,"jun",x+42,y+128,20);D.text(cc,"Jun: reviews her changes",x+76,y+140,{size:32});
+      D.line(cc,[[x+30,y+172],[x+790,y+172]],{col:"mut",w:2.5,dash:[10,10],seed:5});D.face(cc,"ivy",x+42,y+208,22);D.text(cc,"Ivy: the outcome",x+76,y+224,{size:34,w:700,col:"blue"});});
+    D.panel(c,920,150,260,310,{title:"accountable",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"target",x+130,y+46,34,{fill:"white"});D.text(cc,"for the outcome",x+130,y+130,{size:28,col:"mut",align:"center"});});},[60,150,1190,466]),
+  R(242,0),R(296,1),R(350,2),
+  {s:"A",x:758,y:436,size:48,w:700,col:"blue",at:ta,d:0.3},{k:"ring",x:774,y:420,rx:34,ry:34,col:"blue",at:ta+0.4,d:0.45},
+  {s:"only one",x:1050,y:436,size:44,w:700,col:"blue",align:"center",at:w("one","only one",-0.1),d:0.6}];};
+/* 3. the review: each part was right (Carmen ticks each as the room hears it), and what failed lies where they meet; then a just
+   culture's questions: two to ask, ticked, and one not to, crossed and struck */
+const oo_boardC=(sc,w)=>{const tk=[w("each","better",0.4),w("each","count",0.4),w("each","built",0.5)];return[
+  ...oo_rec("A just culture",{ref:["Sidney Dekker"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,620,300,{title:"each part was right",col:"green",fill:"green"},(cc,x,y)=>{[["sensor","sensors"],["db","platform"],["gear","the step"]].forEach(([ic,s],i)=>{const bx=x+30+i*200;
+        D.box(cc,bx,y+4,160,100,{fill:"white",col:"ink",w:2.5,r:10});D.icon(cc,ic,bx+80,y+36,22,{fill:"green"});D.text(cc,s,bx+80,y+88,{size:28,align:"center"});});
+      [x+210,x+410].forEach(qx=>D.icon(cc,"q",qx,y+54,14,{fill:"amber"}));});
+    D.panel(c,720,150,460,300,{title:"ask",col:"blue",fill:"blue"},(cc,x,y)=>{D.text(cc,"what happened?",x+70,y+40,{size:34});D.text(cc,"what must change?",x+70,y+104,{size:34});
+      D.text(cc,"who is to blame?",x+70,y+168,{size:34,col:"mut"});});},[60,150,1190,456]),
+  ...tk.map((at,i)=>({k:"tick",x:238+i*200,y:226,r:16,col:"green",at,d:0.25})),
+  {s:"what failed: how they fit",x:100,y:420,size:38,w:700,col:"amber",at:w("fit","What failed",-0.1),d:1.3},
+  {k:"tick",x:760,y:238,r:18,col:"green",at:w("dekker","what happened",-0.1),d:0.25},
+  {k:"tick",x:760,y:302,r:18,col:"green",at:w("dekker","what must",-0.1),d:0.25},
+  {k:"cross",x:760,y:366,r:15,col:"amber",at:w("dekker","not who",0),d:0.25},
+  {k:"line",x:788,y:366,x1:1046,y1:362,col:"amber",at:w("dekker","not who",0.35),d:0.45}];};
 /* the team's room when Carmen explains at its board: Sam has pulled a chair round, Jun turns from her desk, and Ivy sits turned
    to the board with her notebook open on her knee and a pen in her hand. o.rows: the board's rows; o.say: when Carmen speaks
    ([[t0, t1], …]); o.events: PK.face's, for her; o.note (0 to 1): Ivy looks down and writes; o.ivy, o.sam, o.jun: their faces
@@ -3032,46 +3041,56 @@ const oo_jot=(tt,wr,o)=>{const U=PK.u,top=OO_IVY.floor-0.43*OO_HI;return Object.
    One pen writes a page, so its strokes come one after the other, each with the time to cross to it: the film gives each row the
    time the voice says it, in the order the pen writes them, and paces the page (PK.pace(ctx, null, rows)), which moves a row
    that would start before the one before it has ended. A row is written fast, in under a second: the voice doesn't wait. */
-// what she owns: not Monday's job
-const oo_note1=(sc,w)=>[
-  {s:"What I own",x:70,y:124,size:84,w:700,col:"blue",at:sc.cues.truly-0.3,d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"Monday's job",x:140,y:268,size:68,at:w("truly","Monday's",-0.3),d:0.7,marks:[["strike","amber",w("truly","job",0.3),0.35]]},
-  {k:"cross",x:96,y:246,r:15,col:"amber",at:w("truly","job",0.7),d:0.25},
-  {k:"tick",x:96,y:372,r:18,col:"green",at:w("truly","timetable",-0.1),d:0.25},
-  {s:"The timetable change,",x:140,y:392,size:68,at:w("truly","timetable",0.2),d:0.9},
-  {s:"judged on",x:140,y:490,size:68,at:w("truly","judged",-0.1),d:0.5},
-  {s:"true counts",x:444,y:490,size:68,w:700,at:w("truly","true",-0.1),d:0.7,marks:[["hl","green"]]}];
-// say it first: she goes back to highlight "before the fix" once the page is written
-const oo_note2=(sc,w)=>[
-  {s:"Say it first,",x:70,y:176,size:96,w:700,col:"blue",at:sc.cues.first-0.1,d:0.8},
-  {s:"before the fix.",x:70,y:310,size:84,at:w("first","before",-0.1),d:0.7,marks:[["hl","amber",sc.ends.first+0.3]]},
-  {k:"arrow",x:92,y:404,x1:168,y1:440,bow:-16,col:"blue",at:w("first","is part",-0.2),d:0.3},
-  {s:"that's part of owning it",x:190,y:456,size:60,at:w("first","is part",0.1),d:1.0},
-  {k:"star",x:1000,y:150,r:32,col:"amber",at:sc.ends.first+0.9,d:0.45}];
-// fix it, or raise it: written in the pause that ends the chapter
-const oo_note3=sc=>{const b=sc.cues.breath;return[
-  {s:"Mine?",x:70,y:176,size:84,at:b+0.2,d:0.4},{k:"arrow",x:330,y:150,x1:444,y1:150,col:"green",at:b+0.65,d:0.35},{s:"Fix it.",x:474,y:176,size:84,w:700,at:b+1.05,d:0.5,marks:[["hl","green",null,0.4]]},
-  {s:"Not mine?",x:70,y:330,size:84,at:b+2.3,d:0.55},{k:"arrow",x:474,y:304,x1:588,y1:304,col:"blue",at:b+3.0,d:0.35},{s:"Raise it.",x:618,y:330,size:84,w:700,col:"blue",at:b+3.4,d:0.55,marks:[["under","blue",null,0.3]]}];};
-// being accountable: giving an account
-const oo_note4=(sc,w)=>[
-  {s:"Nobody blamed",x:70,y:112,size:58},{k:"arrow",x:462,y:92,x1:548,y1:92,col:"green"},{s:"safe to say it early",x:574,y:112,size:58,marks:[["hl","green"]]},
-  {s:"Accountable",x:70,y:270,size:92,w:700,col:"blue",at:w("account","accountable",-0.4),d:0.7,marks:[["under","blue",null,0.25]]},
-  {s:"= giving an account",x:70,y:388,size:68,at:w("account","giving",-0.2),d:0.75},
-  {k:"dot",x:100,y:476,r:9,col:"blue",at:w("account","what happened",-0.3),d:0.12},{s:"what happened",x:140,y:494,size:64,at:w("account","what happened",-0.1),d:0.65},
-  {k:"dot",x:100,y:576,r:9,col:"green",at:w("account","how",-0.3),d:0.12},{s:"how next time goes better",x:140,y:594,size:64,at:w("account","how",-0.1),d:1.0,marks:[["hl","green"]]}];
-// on Monday: the four things to keep, and beside each, in one column, what it means (inside the page: 1,100 px wide)
-const oo_note5=(sc,w)=>{const c=sc.cues,dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:c.know-0.45,d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(250,"blue",w("know","know",0)),{s:"Know who uses it",x:128,y:250,size:62,at:w("know","know",0.1),d:0.9},
-  {s:"for which decision?",x:680,y:250,size:42,col:"mut",at:w("know","for which",-0.1),d:0.8},
-  dot(366,"green",w("watch","Watch",-0.3)),{s:"Watch what it's for",x:128,y:366,size:62,at:w("watch","Watch",-0.1),d:1.0,marks:[["hl","green"]]},
-  {s:"not only: did it run?",x:680,y:366,size:42,col:"mut",at:w("watch","not only",0.4),d:0.85},
-  dot(482,"amber",w("say","say so",-0.4)),{s:"Say so first",x:128,y:482,size:62,at:w("say","say so",-0.2),d:0.8,marks:[["hl","amber"]]},
-  {s:"even before the fix",x:680,y:482,size:42,col:"mut",at:w("say","even",0.2),d:0.8},
-  // the last has no dot: the ring round it would run through one
-  {s:"Fix, raise, mend",x:128,y:598,size:62,at:w("mend","Fix",-0.1),d:w("mend","mend",0.6)-w("mend","Fix",-0.1),marks:[["ring","blue",w("mend","mend",0.8)]]},
-  {s:"never blame a person",x:680,y:598,size:42,col:"mut",at:w("mend","never",0),d:0.9},
-  {k:"star",x:1010,y:104,r:30,col:"amber",at:sc.ends.mend+0.05,d:0.45}];};
+/* Her pages are sketched, almost done when they first show (PK.sk.drawn): what she drew while the voice spoke, and the pen adds the
+   last words. */
+// what she owns: not only Monday's job, struck, but the timetable change, judged on true counts
+const oo_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"What I own",86,124,{size:76});
+    D.panel(c,100,170,360,250,{title:"not",col:"amber",fill:"amber"},(cc,x,y)=>{D.icon(cc,"cal",x+80,y+44,32,{fill:"white"});D.icon(cc,"gear",x+180,y+44,26,{fill:"white"});
+      D.icon(cc,"check",x+270,y+44,24,{fill:"green"});D.text(cc,"Monday's job",x+40,y+150,{size:42,w:700});});
+    D.arrow(c,[478,296],[532,296],{col:"ink",w:3.5,head:14});
+    D.panel(c,550,170,430,250,{title:"but",col:"green",fill:"green"},(cc,x,y)=>{for(let j=0;j<3;j++)for(let i=0;i<6;i++)D.box(cc,x+40+i*58,y+14+j*40,48,30,
+        {fill:(i+2*j)%5===1?"green":(i*j)%4===2?"blue":"white",col:"ink",w:2,r:4});
+      D.text(cc,"next year's timetable",x+40,y+170,{size:30,col:"mut"});});},[60,40,1040,800]),
+  {k:"line",x:132,y:366,x1:396,y1:362,col:"amber",at:w("truly","job",0.3),d:0.35},
+  {s:"the timetable change,",x:110,y:540,size:54,at:w("truly","timetable",0.2),d:0.9},
+  {s:"judged on",x:110,y:640,size:58,at:w("truly","judged",-0.1),d:0.5},
+  {s:"true counts",x:410,y:640,size:58,w:700,col:"green",at:w("truly","true",-0.1),d:0.7,marks:[["hl","green"]]}];
+// say it first: what she wrote to Graham and Mei on Monday, the fix on Tuesday; she highlights "before the fix" once the page is written
+const oo_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Say it first",86,124,{size:76});
+    D.face(c,"ivy",170,270,40);D.box(c,240,214,440,110,{fill:"white",col:"ink",w:3,r:20});D.text(c,"40 rooms off",266,262,{size:34});
+    D.text(c,"wait a day",266,304,{size:30,col:"mut"});D.arrow(c,[692,270],[756,270],{col:"ink",w:3.5,head:14});D.faces(c,810,270,["graham","mei"],{r:32,gap:100});
+    D.timeline(c,120,470,820,[{u:0.08,s:"Monday",col:"amber"},{u:0.92,s:"Tuesday",col:"green"}],{size:30});},[60,40,1040,800]),
+  {s:"before the fix",x:110,y:600,size:62,w:700,col:"amber",at:w("first","before",-0.1),d:0.7,marks:[["hl","amber",sc.ends.first+0.3]]},
+  {s:"that's part of owning it",x:110,y:710,size:56,at:w("first","is part",0.1),d:1.0},
+  {k:"star",x:980,y:120,r:32,col:"amber",at:sc.ends.first+0.9,d:0.45}];
+// fix it, or raise it: what is hers and what isn't, drawn; she writes what to do with each in the pause that ends the chapter
+const oo_note3=sc=>{const b=sc.cues.breath;return[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Mine, or not?",86,124,{size:76});
+    D.panel(c,100,180,420,330,{title:"mine",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"wrench",x+70,y+50,30,{fill:"white"});D.text(cc,"my step",x+120,y+62,{size:34,w:700});
+      D.face(cc,"jun",x+90,y+152,30);D.text(cc,"Jun reviews",x+140,y+164,{size:30,col:"mut"});D.text(cc,"and a check of my own",x+40,y+250,{size:28,col:"mut"});});
+    D.panel(c,560,180,420,330,{title:"not mine",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"sensor",x+70,y+50,30,{fill:"white"});D.text(cc,"the sensors",x+120,y+62,{size:34,w:700});
+      D.face(cc,"graham",x+90,y+152,30);D.text(cc,"Graham's team",x+140,y+164,{size:30,col:"mut"});});},[60,40,1040,800]),
+  {s:"Fix it.",x:140,y:640,size:84,w:700,col:"green",at:b+0.4,d:0.55,marks:[["hl","green",null,0.4]]},
+  {s:"Raise it.",x:600,y:640,size:84,w:700,col:"blue",at:b+2.0,d:0.6,marks:[["under","blue",null,0.3]]}];};
+// being accountable: where nobody is blamed, saying it early is safe; she writes what accountable means
+const oo_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Accountable",86,124,{size:76});
+    D.card(c,100,180,{icon:"shield",lines:[["nobody blamed",{w:700}]],size:34,fill:"green"});D.arrow(c,[440,226],[520,226],{col:"ink",w:3.5,head:14});
+    D.card(c,540,180,{icon:"speech",lines:[["safe to say it early",{w:700}]],size:34,fill:"amber"});
+    D.face(c,"ivy",920,520,40);D.icon(c,"speech",990,450,22,{fill:"white"});},[60,40,1040,800]),
+  {s:"= giving an account",x:110,y:400,size:64,w:700,col:"blue",at:w("account","giving",-0.2),d:0.8},
+  {k:"dot",x:120,y:492,r:10,col:"blue",at:w("account","what happened",-0.3),d:0.12},{s:"what happened",x:160,y:510,size:60,at:w("account","what happened",-0.1),d:0.65},
+  {k:"dot",x:120,y:602,r:10,col:"green",at:w("account","how",-0.3),d:0.12},{s:"how next time goes better",x:160,y:620,size:60,at:w("account","how",-0.1),d:1.0,marks:[["hl","green"]]}];
+// on Monday: the four things to keep, each with its icon, and beside each, in one column, what it means; under them the Green Belt's
+// trees, a seedling that became a tree still standing. The pen writes the four
+const OO_MON=[["people","blue",232,"for which decision?"],["eye","green",340,"not only: did it run?"],["speech","amber",448,"even before the fix"],["wrench","blue",556,"never blame a person"]];
+const oo_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});
+    OO_MON.forEach(([ic,col,y,s])=>{D.disc(c,108,y-20,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-20,19,{fill:"white"});D.text(c,s,680,y,{size:40,col:"mut"});});
+    D.icon(c,"sprout",150,690,30,{fill:"green"});D.arrow(c,[196,690],[252,690],{col:"ink",w:3.5,head:14});D.icon(c,"tree",306,680,42,{fill:"green"});
+    D.text(c,"trees still standing, not the planting",372,700,{size:32,col:"mut"});},[60,40,1040,800]),
+  {s:"Know who uses it",x:156,y:232,size:60,at:w("know","know",0.1),d:0.9},
+  {s:"Watch what it's for",x:156,y:340,size:60,at:w("watch","Watch",-0.1),d:1.0,marks:[["hl","green"]]},
+  {s:"Say so first",x:156,y:448,size:60,at:w("say","say so",-0.2),d:0.8,marks:[["hl","amber"]]},
+  {s:"Fix, raise, mend",x:156,y:556,size:60,at:w("mend","Fix",-0.1),d:w("mend","mend",0.6)-w("mend","Fix",-0.1),marks:[["hl","blue"]]},
+  {k:"star",x:1000,y:110,r:30,col:"amber",at:sc.ends.mend+0.05,d:0.45}];
 
 /* ---------------------------------------------------------------- what they write to each other
    Ivy's chat with Graham and Mei, as her screen has it (f1, f2, f3: when the voice says each of her three lines; te: when it

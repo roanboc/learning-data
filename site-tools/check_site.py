@@ -143,10 +143,10 @@ PACKS = {"assets/learn/learn.en.js", "assets/learn/learn.es.js",
          "assets/silent-change/think.en.js", "assets/silent-change/think.es.js",
          "assets/too-good-to-be-true/think.en.js", "assets/too-good-to-be-true/think.es.js"}
 # "Pause and think" packs whose stops are the film's own labs (the rest point to The Inner Life of Data's): the labs page, and the pack that names its labs
-OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/too-good-to-be-true/labs/index.html", "assets/too-good-to-be-true/learn.en.js"),
-            "assets/too-good-to-be-true/think.es.js": ("es/when-things-go-wrong/too-good-to-be-true/labs/index.html", "assets/too-good-to-be-true/learn.es.js")}
+OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.en.js"),
+            "assets/too-good-to-be-true/think.es.js": ("es/when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.es.js")}
 # a film's labs and scenarios, as its stepper and topic cards count them (None: it has none)
-COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": ("3", "10")}
+COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": (None, None)}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
 # a series numbers its own films, always as "Film 2 of 7" ("Película 2 de 7"): that's allowed; numbering the site's films isn't
 NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)(?!-)|(first|second|third) film|(primera|segunda|tercera) película|"
@@ -206,6 +206,17 @@ for _S in build_series.SERIES:
         LEARN_IDS[f"{_pre}{_sl}/labs/"] = {x["id"] for x in _SL[_lg]["labs"]}
         LEARN_IDS[f"{_pre}{_sl}/scenarios/"] = {f"film-{f}" for _, f, _ in _SL[_lg]["qs"]}
         LEARN_STORE[f"{_pre}{_sl}/labs/"] = LEARN_STORE[f"{_pre}{_sl}/scenarios/"] = _SL["prefix"]
+# When things go wrong, whose pages are written by hand, has its own labs and scenarios too (site/assets/when-things-go-wrong/):
+# one playground for each film and twelve scenarios, on two pages of its own, as the series above have
+for _sub in ("labs/", "scenarios/"):
+    TWINS.append(f"when-things-go-wrong/{_sub}")
+    CRUMBS[f"when-things-go-wrong/{_sub}"] = ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"])
+    CRUMBS[f"es/when-things-go-wrong/{_sub}"] = ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"])
+for _lg, _pre in (("en", ""), ("es", "es/")):
+    _w = (WEB / f"assets/when-things-go-wrong/learn.{_lg}.js").read_text()
+    LEARN_IDS[f"{_pre}when-things-go-wrong/labs/"] = set(re.findall(r'\{id:"(\w+)",kind:', _w))
+    LEARN_IDS[f"{_pre}when-things-go-wrong/scenarios/"] = {f"film-{f}" for f in re.findall(r'\{type:"\w+",n:\d+,lab:"\w+",film:(\d+)', _w)}
+    LEARN_STORE[f"{_pre}when-things-go-wrong/labs/"] = LEARN_STORE[f"{_pre}when-things-go-wrong/scenarios/"] = "ld-when-things-go-wrong"
 for _f in SERIES_FILMS:
     _k, _S = _f["key"], _f["series"]; _sl, _nm = _S["slug"], _S["name"]; _tn = build_series.topic_of(_S["id"])["name"]
     for _sub in ("", "labs/", "scenarios/") if _f["labs"] else ("",):  # a film without labs and scenarios has only its Watch page
@@ -844,8 +855,9 @@ def think_faults(path, en=None):
 # think was checked, and in most scenarios the right answer was the second option.
 SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more than this share of the right answers
 # an engine (site/assets/<engine>/learn.js) that mixes the options itself each time it shows them, with the words that do it:
-# the packs of the series it shows aren't read
-SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
+# the packs of the series it shows aren't read (none since 19 November 2026, when The map before the data's engine began showing
+# its options in the order its packs write them)
+SPREAD_SHUFFLED = {}
 # an order scenario's first showing, where its pack gives no start: the one line every engine mixes the steps with, mixed(n, s) for
 # n steps and a number s of the scenario's own, so each scenario is mixed its own way, the same each time. It holds to
 # order_mixed(), which tests/test_spread.py tries on this line itself.

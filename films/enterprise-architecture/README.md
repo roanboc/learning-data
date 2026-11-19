@@ -23,7 +23,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [When strategy moves](https://data.learn-all.org/enterprise-architecture/when-strategy-moves/) | Change, owners and contracts | 7 min | 11 | 3 questions | [script](10-when-strategy-moves/script.md) · [source](10-when-strategy-moves/source/README.md) |
 | [A map people and agents can read](https://data.learn-all.org/enterprise-architecture/a-map-people-and-agents-can-read/) | Keeping the map | 8½ min | 12 | 3 questions | [script](11-a-map-people-and-agents-can-read/script.md) · [source](11-a-map-people-and-agents-can-read/source/README.md) |
 
-For the whole series, on the site: [13 labs](https://data.learn-all.org/enterprise-architecture/labs/) and [26 scenarios](https://data.learn-all.org/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
+For the whole series, on the site: [11 labs](https://data.learn-all.org/enterprise-architecture/labs/) and [12 scenarios](https://data.learn-all.org/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
 <!-- /films -->
 
 ## The look and the sound
@@ -49,7 +49,7 @@ Like the other series, each film is generated from code. The series keeps what's
 
 ## Labs and scenarios
 
-One set for the whole series, on two pages: [*Take it apart*](https://data.learn-all.org/enterprise-architecture/labs/), twelve labs, one for each film and a twelfth on ArchiMate 4, and [*Make the call*](https://data.learn-all.org/enterprise-architecture/scenarios/), 26 scenarios, each naming its film (`scenarios/#film-3` opens on one film's). Each film's Pause and think questions open its own lab, and each lab plays a chapter of its film.
+One set for the whole series, on two pages: [*Take it apart*](https://data.learn-all.org/enterprise-architecture/labs/), eleven playgrounds, one for each film, each with four experiments to make happen, and [*Make the call*](https://data.learn-all.org/enterprise-architecture/scenarios/), the series' evaluation of 12 situations, each naming its playground. ArchiMate 4's changes are played in the rule playground and tested in two situations. Each film's Pause and think questions open its own playground, and each playground plays a chapter of its film.
 
 - **The engine** is `site/assets/enterprise-architecture/learn.js` and `learn.css`. It draws with the series' own components, from *Now the questions appear*'s player (`bundle` in the series' entry in `site-tools/build_series.py`), and has seven kinds of lab: `deal` (deal cards onto a picture: the layers, a canvas, a chain, systems under capabilities, the skipper's test, ArchiMate 4), `change` (survive a restructure), `night` (the storm night's rule and its facts), `gate` (what crosses the wall), `rule` (a rule with a home, and a case that must fail), `walk` (a change walked down the layers) and `navigator` (the map's own checks, then its agent).
 - **The words** are in `learn.en.js` and `learn.es.js`, with the same keys, ids and numbers. Every word a picture draws comes from them. The Spanish follows the films' Spanish captions (capacidad, flujo de valor, impulsor, punto de conexión, electrodependiente, cuadrilla, comercialización, atribuciones), and the map's IDs (`CAP-004`, from *A map people and agents can read*) stay as they are.

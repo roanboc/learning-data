@@ -3152,61 +3152,85 @@ AG_BARE.fbRoom=(x,tt)=>PK.audience(x,tt,0,{});
    cleared, amber what isn't so, orange data.
    The boards are laid out for someone who walks: each question on the left with its answers under it, and what comes later at the
    right; nothing is underlined or struck back along its words. */
-// 1. two old books, and their questions: Mager and Pipe at the left, Gilbert at the right
-const fb_boardA=(sc,w)=>[
-  {s:"Mager and Pipe, 1970",x:60,y:96,size:42,col:"mut",at:sc.cues.mager+0.1,d:1.0},
-  {s:"Could they do it",x:60,y:184,size:52,w:700,col:"blue",at:w("mager","could they",-0.1),d:0.9},
-  {s:"if they had to?",x:60,y:258,size:52,w:700,col:"blue",at:w("mager","if they had",-0.1),d:0.8},
-  {s:"No:",x:60,y:346,size:48,w:700,col:"amber",at:w("mager","If not",-0.1),d:0.25},{s:"a skill to learn",size:48,at:w("mager","a skill",-0.2),d:0.7},
-  {s:"Yes:",x:60,y:430,size:48,w:700,col:"green",at:w("mager","something",-0.6),d:0.25},{s:"something's in the way",size:48,at:w("mager","something",0.2),d:0.9},
-  {s:"Thomas Gilbert, 1978",x:650,y:96,size:42,col:"mut",at:sc.cues.gilbert+0.1,d:1.0},
-  {s:"What surrounds the work?",x:650,y:184,size:46,w:700,col:"blue",at:w("gilbert","what surrounds",-0.1),d:1.2},
-  {s:"information, tools, rewards",x:650,y:270,size:46,at:w("gilbert","information",-0.1),d:1.2},
-  {s:"then, the person",x:650,y:356,size:50,w:700,at:w("gilbert","before you",0),d:0.8}];
-// 2. why people say what's wrong: Amy Edmondson's name for it
-const fb_boardB=(sc,w)=>[
-  {s:"Amy Edmondson, 1999",x:60,y:100,size:42,col:"mut",at:sc.cues.safe+0.1,d:1.0},
-  {s:"Psychological safety",x:60,y:206,size:66,w:700,col:"blue",at:w("safe","psychological",-0.1),d:1.1},
-  {s:"people say what's wrong",x:200,y:318,size:52,at:w("safe","people say",-0.1),d:1.1},
-  {s:"when it's safe to",size:52,w:700,col:"green",at:w("safe","when it's",-0.1),d:0.8}];
-// 3. how far behind: not behind your expectations, behind the team; later, read against its own change, never against a colleague
-const fb_boardC=(sc,w)=>[
-  {s:"How far behind?",x:60,y:118,size:66,w:700,col:"blue",at:w("far","How far",0.05),d:0.9},
-  {k:"cross",x:96,y:220,r:17,col:"amber",at:w("far","Not behind",-0.2),d:0.3},{s:"behind your expectations",x:140,y:238,size:52,col:"mut",at:w("far","Not behind",0.1),d:1.1},
-  {k:"tick",x:96,y:324,r:19,col:"green",at:w("far","behind the team",-0.3),d:0.3},{s:"behind the team",x:140,y:342,size:52,w:700,at:w("far","behind the team",0),d:0.8},
-  {s:"against its own change",size:52,col:"green",at:w("own","against the team's",-0.1),d:1.1},
-  {k:"cross",x:480,y:428,r:17,col:"amber",at:w("own","never",-0.2),d:0.3},{s:"never against a colleague",x:524,y:446,size:52,col:"mut",at:w("own","never",0.1),d:1.2}];
+// a board's graphic recording: its heading, drawn above where anyone stands, and the rest, drawn already when it first shows
+const fb_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// 1. two old books, and their questions: Mager and Pipe at the left, Gilbert at the right. Carmen writes each answer to the first
+// question, ticks what surrounds the work as she names it, and writes who comes after
+const fb_boardA=(sc,w)=>[...fb_rec("Two old books",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,540,300,{title:"Mager and Pipe, 1970",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"speech",x+42,y+42,26,{fill:"white"});
+      D.text(cc,"could they, if they had to?",x+78,y+54,{size:30,w:700});
+      for(const [s,col,yy] of [["no","amber",y+92],["yes","green",y+162]]){D.box(cc,x+26,yy,76,44,{fill:col,col:"ink",w:3,r:22});D.text(cc,s,x+64,yy+32,{size:30,w:700,align:"center"});}});
+    D.panel(c,640,150,540,300,{title:"Thomas Gilbert, 1978",col:"green",fill:"green"},(cc,x,y)=>{
+      [["doc","information"],["wrench","tools"],["coin","rewards"]].forEach(([ic,s],i)=>{const cx=x+80+i*160;D.icon(cc,ic,cx,y+44,26,{fill:"white"});D.text(cc,s,cx,y+104,{size:30,align:"center"});});
+      D.icon(cc,"person",x+186,y+206,26,{fill:"white"});});},[60,140,1190,458]),
+  {s:"a skill to learn",x:192,y:336,size:38,w:700,col:"amber",at:w("mager","a skill",-0.2),d:0.9},
+  {s:"something's in the way",x:192,y:406,size:36,w:700,col:"green",at:w("mager","something",-0.1),d:1.1},
+  ...[["information",752],["tools",912],["rewards",1072]].map(([wd,x])=>({k:"tick",x,y:226,r:18,col:"green",at:w("gilbert",wd,-0.1),d:0.3})),
+  {s:"then, the person",x:1160,y:430,size:40,w:700,col:"blue",align:"right",at:w("gilbert","before you",0),d:0.8}];
+// 2. why people say what's wrong: Amy Edmondson's name for it. A team that speaks up, and the safety it needs; Carmen writes both
+const fb_boardB=(sc,w)=>[...fb_rec("Psychological safety",{ref:["Amy Edmondson","1999"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,680,300,{title:"speaking up",col:"blue",fill:"blue"},(cc,x,y)=>{D.faces(cc,x+80,y+120,["helena","tomas","jun","ivy"],{r:30,gap:120});
+      for(const [bx,ic] of [[x+170,"warn"],[x+410,"q"]]){D.box(cc,bx,y+8,64,46,{fill:"white",col:"ink",w:3,r:14});D.line(cc,[[bx+14,y+54],[bx+6,y+70],[bx+30,y+54]],{col:"ink",w:3,seed:bx});
+        D.icon(cc,ic,bx+32,y+31,15,{fill:ic==="warn"?"amber":"white"});}});
+    D.panel(c,780,150,400,300,{title:"a safe team",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"shield",x+200,y+86,56,{fill:"green"});
+      D.icon(cc,"heart",x+200,y+92,20,{fill:"white"});});},[60,140,1190,458]),
+  {s:"they say what's wrong",x:100,y:430,size:38,w:700,col:"blue",at:w("safe","people say",-0.1),d:1.1},
+  {s:"when it's safe to",x:810,y:430,size:38,w:700,col:"green",at:w("safe","when it's",-0.1),d:0.8}];
+// 3. how far behind: not behind your expectations, behind the team; later, read against its own change, never against a colleague,
+// and kept between the two of them. Carmen crosses and ticks the boxes, then writes against what the gap is read
+// the chart's days, from 20 at its foot to 45 at its top
+const FB_CH={x:580,y:222,w:300,h:130,lo:20,hi:45};
+const fb_chV=d=>(d-FB_CH.lo)/(FB_CH.hi-FB_CH.lo),fb_chY=d=>FB_CH.y+FB_CH.h-FB_CH.h*fb_chV(d);
+const fb_boardC=(sc,w)=>[...fb_rec("How far behind?",{},c=>{const D=PK.sk,G=FB_CH;
+    D.panel(c,70,150,440,300,{title:"behind what?",col:"blue",fill:"blue"},(cc,x,y)=>{
+      D.box(cc,x+26,y+12,40,40,{fill:"white",col:"ink",w:3,r:6});D.face(cc,"helena",x+98,y+28,22);D.text(cc,"Helena's expectations",x+130,y+42,{size:30});
+      D.box(cc,x+26,y+102,40,40,{fill:"white",col:"ink",w:3,r:6});D.faces(cc,x+98,y+120,["ivy","jun","sam"],{r:18,gap:44});D.text(cc,"the team",x+226,y+134,{size:34,w:700});});
+    D.panel(c,540,150,640,300,{title:"his gap",col:"orange",fill:"orange"},()=>{});
+    D.trend(c,G.x,G.y,G.w,G.h,[[0,fb_chV(41)],[1,fb_chV(24)]],{col:"green",labels:[[0,"Feb"],[1,"June"]]});
+    D.line(c,[[G.x,fb_chY(40)],[G.x+G.w,fb_chY(35)]],{col:"orange",w:5,seed:13});D.disc(c,G.x+G.w,fb_chY(35),8,{fill:"orange",col:"ink",w:2.5});
+    D.text(c,"Tomás",G.x+G.w+18,fb_chY(35)+8,{size:28,w:700,col:"orange"});D.text(c,"team",G.x+G.w+18,fb_chY(24)+12,{size:28,w:700,col:"green"});
+    D.icon(c,"lock",1080,250,28,{fill:"white"});D.text(c,"between them",1080,316,{size:28,col:"mut",align:"center"});},[60,140,1190,458]),
+  {k:"cross",x:116,y:242,r:15,col:"amber",at:w("far","Not behind",-0.1),d:0.3},
+  {k:"tick",x:116,y:332,r:17,col:"green",at:w("far","behind the team",-0.2),d:0.3},
+  {s:"the team's change",x:566,y:432,size:34,w:700,col:"green",at:w("own","against the team's",-0.1),d:1.0},
+  {k:"cross",x:884,y:420,r:14,col:"amber",at:w("own","never",-0.2),d:0.3},
+  {s:"not a colleague",x:910,y:432,size:32,col:"mut",at:w("own","never",0.1),d:1.0}];
 
 /* ---------------------------------------------------------------- the notebooks' pages (the page's own px)
-   One pen writes a page, so its strokes come one after the other: the film gives each row the time the voice says it, in the order
-   the pen writes them, and paces the page (PK.pace(ctx, null, rows)). A row is written in about a second. */
-const fb_dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});
-// Tomás's plan, in his hand: what he'll learn, by when, and what he needs
-const fb_plan=(sc,w)=>[
-  {s:"My plan",x:70,y:128,size:92,w:700,col:"blue",at:sc.cues.plan-0.3,d:0.6,marks:[["under","blue",null,0.3]]},
-  fb_dot(262,"blue",w("plan","what he'll",-0.25)),{s:"Learn reports as code",x:128,y:262,size:64,at:w("plan","what he'll",-0.05),d:1.0},
-  {s:"by September",x:780,y:262,size:44,col:"mut",at:w("plan","by when",0),d:0.6},
-  fb_dot(378,"green",w("plan","what he needs",-0.25)),{s:"Pair with Jun",x:128,y:378,size:64,at:w("plan","what he needs",-0.05),d:0.8},
-  {s:"Tue and Fri",x:780,y:378,size:44,col:"mut",at:w("plan","what he needs",0.85),d:0.5},
-  fb_dot(494,"green",w("plan","what he needs",1.45)),{s:"Thursdays kept clear",x:128,y:494,size:64,at:w("plan","what he needs",1.65),d:1.0}];
-// Helena's notebook, in December: give it time, and what stays his
-const fb_note1=(sc,w)=>[
-  {s:"Give it time",x:70,y:128,size:92,w:700,col:"blue",at:sc.cues.years-0.3,d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"months, even years",x:128,y:262,size:64,at:w("years","months",-0.1),d:0.9},
-  {s:"patience is part of the plan",x:128,y:378,size:64,at:w("years","Patience",-0.1),d:1.2,marks:[["hl","green",null,0.45]]},
-  fb_dot(512,"blue",w("private","his measures",-0.3)),{s:"His numbers stay his",x:128,y:512,size:62,at:w("private","his measures",-0.1),d:1.0},
-  fb_dot(628,"blue",w("private","his reasons",-0.3)),{s:"His reasons stay private",x:128,y:628,size:62,at:w("private","his reasons",-0.1),d:1.1},
-  {k:"star",x:1000,y:150,r:30,col:"amber",at:sc.ends.private+0.3,d:0.45}];
-// Helena's notebook, on Monday: three things, and beside each, in one column, what it means. The fourth, the plan read each month,
-// the film shows: Helena and Tomás at her table, over his plan (a chapter stays its people's, kit README)
-const fb_note2=(sc,w)=>{const c=sc.cues;return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:c.team-0.5,d:0.6,marks:[["under","blue",null,0.3]]},
-  fb_dot(250,"blue",w("team","read the team's",-0.3)),{s:"Read the team first",x:128,y:250,size:62,at:w("team","read the team's",-0.1),d:0.9},
-  {s:"then one person",x:700,y:250,size:42,col:"mut",at:w("team","before",0),d:0.8},
-  fb_dot(366,"green",c.cause-0.25),{s:"Ask before you judge",x:128,y:366,size:62,at:c.cause-0.05,d:1.0},
-  {s:"find the cause",x:700,y:366,size:42,col:"mut",at:w("cause","look for",0),d:0.7},
-  fb_dot(482,"amber",c.clear-0.25),{s:"Clear the blockers",x:128,y:482,size:62,at:c.clear-0.05,d:0.9,marks:[["hl","amber"]]},
-  {s:"against the team",x:700,y:482,size:42,col:"mut",at:w("clear","measure",0),d:0.8},
+   Each page is sketched already when it first shows (PK.sk.drawn): its heading, the parts as drawings and a few words. One pen adds
+   the last words, so its strokes come one after the other: the film gives each row the time the voice says it, in the order the
+   pen writes them, and paces the page (PK.pace(ctx, null, rows)). A row is written in about a second. */
+// Tomás's plan, in his hand: a planner's page, ready, and he fills in what he'll learn, by when, and what he needs
+const FB_PLAN=[["book","blue",250,"learn"],["cal","blue",370,"by"],["people","green",490,"with"],["clock","green",610,"time"]];
+const fb_plan=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My plan",86,124,{size:76});D.face(c,"tomas",930,120,42);
+    FB_PLAN.forEach(([ic,col,y,s])=>{D.disc(c,108,y-20,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-20,19,{fill:"white"});D.text(c,s,156,y,{size:36,col:"mut"});
+      D.line(c,[[290,y+14],[860,y+14]],{col:"mut",w:2,dash:[6,8],seed:y});});
+    D.sticky(c,760,214,220,150,{rot:-0.04,draw:(cc,x,y,w,h)=>{D.icon(cc,"laptop",x+70,y+76,36,{fill:"white"});D.icon(cc,"doc",x+156,y+76,28,{fill:"white"});}});},[60,40,1030,640]),
+  {s:"reports as code",x:300,y:250,size:52,col:"blue",at:w("plan","what he'll",-0.05),d:0.9},
+  {s:"September",x:300,y:370,size:52,col:"blue",at:w("plan","by when",0),d:0.6},
+  {s:"Jun, Tue and Fri",x:300,y:490,size:52,col:"green",at:w("plan","what he needs",-0.05),d:0.9},
+  {s:"Thursdays, kept clear",x:300,y:610,size:52,col:"green",at:w("plan","what he needs",0.95),d:1.0}];
+// Helena's notebook, in December: growth takes time, and what stays his
+const fb_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Give it time",86,124,{size:76});
+    D.icon(c,"sprout",130,250,34,{fill:"green"});D.arrow(c,[184,252],[396,252],{col:"ink",w:3.5,head:14,dash:[10,9]});D.icon(c,"tree",460,236,52,{fill:"green"});
+    for(const [x,s] of [[90,"his measures"],[550,"his reasons"]]){D.box(c,x,460,420,110,{fill:"blue",col:"ink",w:3,r:16});D.icon(c,"lock",x+50,515,28,{fill:"white"});
+      D.text(c,s,x+96,528,{size:40,w:700});}},[60,40,1030,590]),
+  {s:"months, even years",x:560,y:262,size:48,col:"green",at:w("years","months",-0.1),d:0.9},
+  {s:"patience is part of the plan",x:110,y:400,size:54,w:700,at:w("years","Patience",-0.1),d:1.2,marks:[["hl","green",null,0.45]]},
+  {s:"his own",x:120,y:660,size:48,col:"blue",at:w("private","his measures",-0.1),d:0.6},
+  {s:"private",x:580,y:660,size:48,col:"blue",at:w("private","his reasons",-0.1),d:0.6},
+  {k:"star",x:1000,y:120,r:30,col:"amber",at:sc.ends.private+0.3,d:0.45}];
+// Helena's notebook, on Monday: three things, each drawn with what it means. The fourth, the plan read each month, the film shows:
+// Helena and Tomás at her table, over his plan (a chapter stays its people's, kit README)
+const fb_note2=(sc,w)=>{const cu=sc.cues;return[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});
+    [["people","blue",250],["speech","green",370],["wrench","amber",490]].forEach(([ic,col,y])=>{D.disc(c,108,y-20,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-20,19,{fill:"white"});});
+    D.text(c,"then one person",712,250,{size:36,col:"mut"});
+    [["book","training",742],["puzzle","fit",858],["heart","home",950]].forEach(([ic,s,x])=>{D.icon(c,ic,x,336,20,{fill:"white"});D.text(c,s,x,384,{size:28,col:"mut",align:"center"});});
+    D.text(c,"against the team",712,490,{size:36,col:"mut"});
+    D.faces(c,140,640,["helena","ivy","jun","sam","tomas"],{r:30,gap:90});},[60,40,1030,700]),
+  {s:"Read the team first",x:156,y:250,size:54,w:700,at:w("team","read the team's",-0.1),d:0.9},
+  {s:"Ask before you judge",x:156,y:370,size:54,w:700,at:cu.cause-0.05,d:1.0},
+  {s:"Clear the blockers",x:156,y:490,size:54,w:700,at:cu.clear-0.05,d:0.9,marks:[["hl","amber"]]},
   {k:"star",x:1010,y:104,r:30,col:"amber",at:sc.ends.clear+0.3,d:0.45}];};
 
 /* ---------------------------------------------------------------- what they write to each other

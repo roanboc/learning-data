@@ -22,7 +22,7 @@ A film's thread writes its questions and assumptions to that film's own file, in
   - [The Inner Life of Data](00-data-platforms/1-inner-life-of-data.md)
   - [More than a platform](00-data-platforms/1-more-than-a-platform/)
 - [Data modelling](01-data-modelling/)
-  - [A Sharper Sketch](01-data-modelling/1-a-sharper-sketch.md)
+  - [Model the business](01-data-modelling/1-model-the-business/)
   - [From words to data](01-data-modelling/2-from-words-to-data/)
 - [Modern data basics](02-modern-data-basics/)
   - [Data that moves](02-modern-data-basics/1-data-that-moves/)

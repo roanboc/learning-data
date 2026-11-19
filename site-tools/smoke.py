@@ -986,7 +986,7 @@ async def check_think_home(run):
             ok = [i for i, o in enumerate(q["opts"]) if o.get("ok")][0]
             await pg.click(f".player .think .think-opt >> nth={ok}")
             r = await pg.evaluate("() => { const a = document.querySelector('.player .think a.think-more'); return a && {href: a.href, text: a.textContent}; }")
-            want = run.url(key + "sketch/")
+            want = run.url(key + q["more"]["href"])  # the next film after the sketch: The map behind the sketch
             expect(sec, r and r["href"] == want, f"{where}: \"Go deeper\" goes to {r and r['href']}, expected {want}")
             expect(sec, r and r["text"] == q["more"]["label"] + " →", f"{where}: \"Go deeper\" reads {r and r['text']!r}")
             for p in log_problems(log):
@@ -1268,8 +1268,11 @@ async def check_mobile(run):
                     await pg.wait_for_timeout(200)
 
                 pg, _ = await run.page(c2, "topics/#data-modelling")  # a topic's link opens its row in the list
-                await tap("#data-modelling .topic-card:not(.series-card) img")
-                expect(sec, run.key(pg.url) == "sketch/", f"/topics/ @{width}: tapping the Sketch card's picture went to /{run.key(pg.url)}")
+                await tap("#data-modelling .series-card .sc-media")  # its first card: Model the business, which holds A Sharper Sketch
+                expect(sec, run.key(pg.url) == "model-the-business/", f"/topics/ @{width}: tapping Model the business's picture went to /{run.key(pg.url)}")
+                await pg.goto(run.url("topics/#data-platforms"), wait_until="load")
+                await tap('#data-platforms .topic-card:not(.series-card) img[src*="more-than-a-platform"]')  # a film's card: its picture is the link
+                expect(sec, run.key(pg.url) == "more-than-a-platform/", f"/topics/ @{width}: tapping More than a platform's picture went to /{run.key(pg.url)}")
                 await pg.goto(run.url("topics/#data-platforms"), wait_until="load")
                 await tap("#data-platforms .topic-card .tc-body > p:not(.kicker)")
                 expect(sec, run.key(pg.url) == "", f"/topics/ @{width}: tapping the intro card's text went to /{run.key(pg.url)}")

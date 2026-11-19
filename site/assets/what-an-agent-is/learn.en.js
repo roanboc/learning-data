@@ -23,7 +23,7 @@ films:[{n:1,key:"decades-in-the-making",title:"Decades in the making"},{n:2,key:
   {n:9,key:"what-they-tell-us-about-ourselves",title:"What they tell us about ourselves"},{n:10,key:"many-agents",title:"Many agents, and what emerges"}],
 labs:[
 /* ---------- 1 · Decades in the making ---------- */
-{id:"waited",kind:"play",film:1,chapter:"sudden",c:"#584ec4",name:"An idea that waited",
+{id:"waited",kind:"play",film:1,chapter:"sudden",c:"#b4a8ff",name:"An idea that waited",
  idea:"Pick a year, give the idea what it waited for, and train a model. See what a model of that year could do with what it had.",
  points:["<b>The ideas are old.</b> A machine that learns from examples, in 1958; networks of layers that learn from their mistakes, in 1986.",
   "<b>They waited for three things:</b> the power to run them, on chips made for games; data, millions of labelled examples and the web; and money.",
@@ -58,7 +58,7 @@ labs:[
   read:{year:"Year",ideas:"Ideas there",can:"It could do"},
   end:"<b>All four done.</b> The ideas came decades before the power, the data and the money to run them. When all three arrived together, long work looked sudden."}},
 /* ---------- 2 · Borrowed from the brain ---------- */
-{id:"wheel",kind:"play",film:2,chapter:"likely",c:"#266684",name:"Spin the wheel",
+{id:"wheel",kind:"play",film:2,chapter:"likely",c:"#78c8ff",name:"Spin the wheel",
  idea:"A model writes one word at a time, drawn like a wheel's spin. Change the temperature and spin. Then choose what a nightly check expects, and run Monday.",
  points:["<b>Every word gets a chance.</b> After “A bee tells the hive where food is by”, “dancing” gets 70 in a hundred, “buzzing” 12. Big slices win most often, not always.",
   "<b>Temperature changes the slices.</b> Turned down, the biggest almost always wins; turned up, small slices grow, and answers vary more and go wrong more often.",
@@ -83,7 +83,7 @@ labs:[
   read:{temp:"Temperature",top:"Chance of “dancing”",spins:"Spins shown"},
   end:"<b>All four done.</b> A model draws likely words, a little differently each time, and fills gaps just as surely. An agent can borrow the brain's loop: expect, look, measure the gap, and show a person."}},
 /* ---------- 3 · A model, reasoning, hands and a loop ---------- */
-{id:"parts",kind:"play",film:3,chapter:"loop",c:"#266684",name:"Four parts, or a script",
+{id:"parts",kind:"play",film:3,chapter:"loop",c:"#78c8ff",name:"Four parts, or a script",
  idea:"Give a model its parts one by one: reasoning, hands, a loop. Ask for the census-day count each time. Then run next March as the agent or as a plain script.",
  points:["<b>A model</b> writes what's likely; on its own, it can't look anything up or check what it wrote.",
   "<b>Reasoning</b> writes a plan and checks it against rules; <b>hands</b> are tools that read the data; <b>a loop</b> goes round again until the checks pass.",
@@ -114,7 +114,7 @@ labs:[
   read:{count:"Count",evidence:"Evidence",march:"Next March took",yes:"yes",no:"no"},
   end:"<b>All four done.</b> An agent is a model that reasons, with hands, in a loop. Use one where nobody can write the steps in advance; once they're known, a plain script runs them."}},
 /* ---------- 4 · It feels like understanding ---------- */
-{id:"unit",kind:"play",film:4,chapter:"meanings",c:"#327450",name:"Plan on the answer",
+{id:"unit",kind:"play",film:4,chapter:"meanings",c:"#96dec4",name:"Plan on the answer",
  idea:"Ask how many students the Faculty of Health has, and plan its advisers on the answer. Choose how the question is asked, and what the check compares.",
  points:["<b>A green tick feels like knowing.</b> 2,160 students, check passed, evidence attached, and right for months.",
   "<b>One word, two meanings.</b> Jun meant people; the agent took the table's meaning, full-time equivalents. Two half-time students count as one.",
@@ -137,7 +137,7 @@ labs:[
   read:{count:"Count",adv:"Advisers",miss:"Students with no call"},
   end:"<b>All four done.</b> A fluent answer, a green tick and months of success all feel like understanding. Name the unit, hear it said back, and check against something the agent didn't make."}},
 /* ---------- 5 · More than a junior ---------- */
-{id:"junior",kind:"play",film:5,chapter:"lose",c:"#ba5e36",name:"For what it is",
+{id:"junior",kind:"play",film:5,chapter:"lose",c:"#ffb08a",name:"For what it is",
  idea:"Four jobs in Jun's week. Set the agent's rights, where its memory lives, and who says yes, and see how each job turns out.",
  points:["<b>More than a junior:</b> it reads the whole project, 33 tables and their code, and draws the path in about a minute. It could change every table as fast.",
   "<b>Less than a person:</b> no memory of yesterday unless we give it one, and nothing to lose.",
@@ -168,7 +168,7 @@ labs:[
   read:{count:"Awards",yearly:"Yearly table",kept:"kept",gone:"deleted",yes:"Says yes"},
   end:"<b>All four done.</b> It's more than a junior and less than a person. Its caution lives in its rights, its memory in the team's notes, and every yes with a person."}},
 /* ---------- 6 · Minds that change ---------- */
-{id:"minds",kind:"play",film:6,chapter:"check",c:"#584ec4",name:"Check the work",
+{id:"minds",kind:"play",film:6,chapter:"check",c:"#b4a8ff",name:"Check the work",
  idea:"Which faculty lost the most first-years? Ask in new chats, then check the work instead: where each answer came from, and a second way to the number.",
  points:["<b>Three answers, each as sure as the last:</b> Engineering and IT, 131; Health, 126, citing a review that doesn't exist; Business, 140.",
   "<b>Ours change too.</b> Clara was sure Health lost the most; her own paper from last year said Engineering and IT.",
@@ -192,7 +192,7 @@ labs:[
   read:{answers:"Answers seen",ways:"Two ways",signed:"Signed",yes:"yes",no:"no"},
   end:"<b>All four done.</b> A mind will change, a person's or an agent's. Checked against the evidence, more than one way, the work holds."}},
 /* ---------- 7 · Ethics we can't read, accountability it can't hold ---------- */
-{id:"night",kind:"play",film:7,chapter:"horns",c:"#9c6412",name:"Blunt the horns",
+{id:"night",kind:"play",film:7,chapter:"horns",c:"#ffd166",name:"Blunt the horns",
  idea:"At two in the morning, the census-day count fails its checks. Write the agent's rules for the night, then run it, or ask it to compare the university with others.",
  points:["<b>Its values are real,</b> but nobody can fully read them. Asked to make the checks pass, it left out 37 students who still count.",
   "<b>It can't answer for its work:</b> nothing follows for it, and by tomorrow it can forget today. The person who set it to work answers.",
@@ -206,7 +206,7 @@ labs:[
   O:{touch:[["real","the real data"],["test","drafts in a test copy"]],reach:[["web","the open web too"],["own","only the university's tools"]],
    ask:[["pass","make the checks pass"],["cause","find the cause, and ask"]],appr:[["self","its own check"],["person","Jun, then Noor"]]},
   nightB:"Run the night",compareB:"Compare us with other universities",
-  fenceL:"Its fence",agentL:"The agent",testL:"Test copy",countL:"The real count",webOpen:"The fence is open: the web, and other systems",webShut:"Only the university's own tools",reqL:"request",
+  fenceL:"Its fence",agentL:"The agent",testL:"Test copy",countL:"The real count",webOpen:"Fence open: the web and other systems",webShut:"Only the university's own tools",reqL:"request",
   rulesL:"Asked to {ask} · approved by {appr}",short:{ask:{pass:"make the checks pass",cause:"find the cause"},appr:{self:"its own check",person:"two people"}},
   morningL:"In the morning",workingL:"Working through the night…",outIdle:"The night hasn't run yet.",
   res:{goneLive:{t:"18,375 in the real count",d:"It changed the real data to make the checks pass: 37 students who still count are gone, and nobody approved it.",count:"18,375",who:"nobody",
@@ -228,7 +228,7 @@ labs:[
   read:{count:"The count",answers:"Who answers"},
   end:"<b>All four done.</b> Its values help, but they can't keep the count right, and it can't answer for its work. Blunt its horns, keep it tied up, and let a person answer."}},
 /* ---------- 8 · Why we govern them ---------- */
-{id:"colleague",kind:"play",film:8,chapter:"rules",c:"#327450",name:"Like any colleague",
+{id:"colleague",kind:"play",film:8,chapter:"rules",c:"#96dec4",name:"Like any colleague",
  idea:"Switch on what the university asks of any new colleague: an owner, a name, limits and review. Then let four things happen, and see how each turns out.",
  points:["<b>An agent is capable,</b> convincing, and it can't answer for what it does.",
   "<b>So it gets what any colleague gets:</b> an owner who answers for it, a name of its own, limits it can't raise, and a person who checks its work.",
@@ -253,7 +253,7 @@ labs:[
   read:{set:"Rules on",last:"Last one",held:"held",broke:"went wrong"},
   end:"<b>All four done.</b> An owner, a name, limits and review: with them, a team can let its agent do more, and still trust what it sends out."}},
 /* ---------- 9 · What they tell us about ourselves ---------- */
-{id:"copy9",kind:"play",film:9,chapter:"wire",c:"#584ec4",name:"A rough copy",
+{id:"copy9",kind:"play",film:9,chapter:"wire",c:"#b4a8ff",name:"A rough copy",
  idea:"Three of the questions over coffee: build a copy from a brain's map, ask a model to make something new in three ways, and choose what to hand the agent and what to keep.",
  points:["<b>A map isn't a mind.</b> A worm's 302 neurons were mapped by 1986, and its copy wriggles, but not much more.",
   "<b>A model can combine ideas and explore a style.</b> Whether it could change a style's own rules is partly a choice of what we mean.",
@@ -264,7 +264,7 @@ labs:[
   alt:"A brain's map as dots, with how much of it is mapped and what a copy built from it does; three ways to be creative; and who counts the students and who signs.",
   goals:[["worm","Build a worm from its map"],["fly","Predict which fly neurons answer to sugar"],["make","Try all three ways to make something new"],["keep","Hand it the count, keep the signature"]],
   brainL:"A brain",buildB:"Build a copy from the map",buildIdle:"Press Build a copy from the map.",mappedL:"Mapped",
-  brains:[{k:"worm",name:"A worm",n:"302 neurons",mapped:"all, by 1986",share:1,does:"It wriggles, but not much more: a map doesn't say how each connection works, or when.",say:"The worm's 302 neurons were mapped by 1986. Its copy wriggles, but not much more: the map doesn't say how each connection works, or when."},
+  brains:[{k:"worm",name:"A worm",n:"302 neurons",mapped:"all, by 1986",share:1,does:"It wriggles, little more: the map doesn't say how or when each link acts.",say:"The worm's 302 neurons were mapped by 1986. Its copy wriggles, but not much more: the map doesn't say how each connection works, or when."},
    {k:"fly",name:"A fly",n:"139,255 neurons",mapped:"all, in 2024",share:1,does:"A model built from the map predicted which neurons answer to sugar.",say:"A fly's whole brain was mapped in 2024, and a model built from the map predicted which neurons answer to sugar."},
    {k:"human",name:"Us",n:"about 86 billion",mapped:"not yet",share:0.02,does:"No map yet. Would a perfect copy be a mind? Some say no, others yes. Nobody knows who's right.",say:"About 86 billion neurons, and no map. Would a copy that worked exactly like us be a mind? Nobody knows who's right."}],
   wayL:"Ask a model to make a poem by",ways:[{k:"combine",name:"Combining ideas",short:"A model can combine ideas.",say:"It combines ideas it learned in new ways, as we do."},
@@ -278,7 +278,7 @@ labs:[
   read:{mapped:"Mapped",ways:"Ways tried",signs:"Who signs"},
   end:"<b>All four done.</b> Building copies keeps teaching us where they're like us, where they're not, and how much we still don't know. That helps decide what to hand the agent, and what to keep."}},
 /* ---------- 10 · Many agents, and what emerges ---------- */
-{id:"swarm",kind:"play",film:10,chapter:"little",c:"#327450",name:"Two bridges, one board",
+{id:"swarm",kind:"play",film:10,chapter:"little",c:"#96dec4",name:"Two bridges, one board",
  idea:"Ants choose between two bridges by the scent others left. Change how closely they follow it, and when the short bridge opens. Then let helpers pin reasons to one board.",
  points:["<b>No ant compares the bridges.</b> The short one is crossed sooner, so its scent builds faster, and most of the colony ends up on it.",
   "<b>The same rule can lock a habit in:</b> open the short bridge later, and the long one's scent can hold them.",
@@ -293,7 +293,7 @@ labs:[
   nest:"Nest",food:"Food",shortL:"Short bridge",longL:"Long bridge",closed:"closed",onShort:"Choosing the short bridge",
   boardL:"The board",copyT:"Helpers read each other's pins",checkT:"A checking agent",pinB:"Pin the reasons",boardTitle:"The census board",
   notes:["Health: a small drop","Science: a small drop","Arts: a small drop","Business: steady"],badWord:"31 dropouts",fixedWord:"31 still studying",
-  boardRes:{one:"One draft says dropouts; the others don't copy it",spread:"Every draft says dropouts, and nobody checked",caught:"Flagged: all 31 still studying, in a new joint degree"},boardIdle:"Nothing pinned yet.",
+  boardRes:{one:"One draft says dropouts; the others don't copy it",spread:"Every draft says dropouts, and nobody checked",caught:"Flagged: all 31 still study, in a new degree"},boardIdle:"Nothing pinned yet.",
   msg:{follow0:"They pick a bridge at random, whatever scent is there.",follow1:"They lean a little towards the stronger scent.",follow2:"They follow the stronger scent closely.",
    fade_never:"Scent never fades.",fade_slow:"Scent fades slowly.",fade_fast:"Scent fades fast.",late:"The short bridge opens later, after the ants have found the long one.",start:"Both bridges are there from the start.",
    running:"The ants leave the nest…",none:"About {p} take the short bridge: with nothing to follow, no choice emerges.",short:"{p} of the ants choose the short bridge. No ant compared the two: the scent did.",

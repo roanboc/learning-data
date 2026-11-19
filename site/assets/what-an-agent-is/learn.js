@@ -85,7 +85,7 @@ function tile(ctx,x,y,w,hh,s,col,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{sheet
 // the paper, with a faint wash of a colour from the top
 function ground(ctx,w,hh,col){ctx.fillStyle=rgbaS(K.paper,1);ctx.fillRect(0,0,w,hh);const g=ctx.createRadialGradient(w*0.5,-hh*0.2,10,w*0.5,hh*0.3,Math.max(w,hh));g.addColorStop(0,rgbaS(col,0.1));g.addColorStop(1,rgbaS(col,0));ctx.fillStyle=g;ctx.fillRect(0,0,w,hh);}
 // a meter: a bar filled to a share, in a colour, with its label and value
-function meter(ctx,x,y,w,label,val,share,col){line1(ctx,label,x,y+12,w*0.6,12.5,{w:700,color:rgbaS(K.soft,1)});line1(ctx,val,x+w*0.6,y+12,w*0.4,12.5,{w:800,align:"right",color:rgbaS(mixC(col,K.ink,0.3),1)});
+function meter(ctx,x,y,w,label,val,share,col){const vw=Math.min(w*0.6,TW(ctx,val,12.5,800)+4);line1(ctx,label,x,y+12,w-vw-8,12.5,{w:700,color:rgbaS(K.soft,1)});line1(ctx,val,x+w-vw,y+12,vw,12.5,{w:800,align:"right",color:rgbaS(mixC(col,K.ink,0.3),1)});
   ctx.save();ctx.fillStyle="rgba(60,50,40,0.1)";rr(ctx,x,y+18,w,8,4);ctx.fill();ctx.fillStyle=rgbaS(col,0.9);rr(ctx,x,y+18,Math.max(8,w*cl(share,0,1)),8,4);ctx.fill();ctx.restore();}
 // a dot that pulses while something works
 function busy(ctx,x,y,col,now,on){if(!on)return;const p=RM()?0.4:(now/700)%1;ctx.save();ctx.strokeStyle=rgbaS(col,0.6*(1-p));ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,6+p*10,0,TP);ctx.stroke();ctx.fillStyle=rgbaS(col,1);ctx.beginPath();ctx.arc(x,y,4,0,TP);ctx.fill();ctx.restore();}
@@ -93,8 +93,10 @@ const since=(now,t0)=>t0==null?-1:RM()?1e9:now-t0;
 // chips in rows across a width, each as wide as its label: where each goes, and the height
 function flow(ctx,labels,w,z,gap,hh){const out=[];let x=0,y=0;labels.forEach(s=>{const cw=Math.min(w,Math.ceil(TW(ctx,s,z))+20);if(x>0&&x+cw>w){x=0;y+=hh+gap;}out.push({x,y,w:cw,h:hh});x+=cw+gap;});return{pos:out,h:labels.length?y+hh:0};}
 // a list of steps done one after another, each with a tick, a cross or a dot: [[label, "ok"|"no"|"warn"|null]]
-function steps(ctx,x,y,w,rows,col,o){o=o||{};const lh=o.lh||24;rows.forEach(([s,m],i)=>{const yy=y+i*lh;ctx.save();ctx.fillStyle=rgbaS(m==="ok"?K.good:m==="no"?K.bad:m==="warn"?K.amber:col,1);ctx.beginPath();ctx.arc(x+6,yy-4,4,0,TP);ctx.fill();ctx.restore();
-  line1(ctx,s,x+18,yy,w-18,o.size||12.5,{w:o.w||600,color:rgbaS(m==="no"?K.bad:K.ink,0.95)});});return rows.length*lh;}
+function steps(ctx,x,y,w,rows,col,o){o=o||{};const lh=o.lh||24;let yy=y;rows.forEach(([s,m])=>{ctx.save();ctx.fillStyle=rgbaS(m==="ok"?K.good:m==="no"?K.bad:m==="warn"?K.amber:col,1);ctx.beginPath();ctx.arc(x+6,yy-4,4,0,TP);ctx.fill();ctx.restore();
+  const hh=lines(ctx,s,x+18,yy,w-18,{size:o.size||12.5,max:2,w:o.w||600,color:rgbaS(m==="no"?K.bad:K.ink,0.95)});yy+=Math.max(lh,hh+6);});return yy-y;}  // a step too long for one line takes two
+// a line that ends at y, on two lines (the first above) when one won't hold it
+function lineUp(ctx,s,x,y,w,z,o){o=o||{};const[ls,k]=fitL(ctx,s,w,z,2,o.w);const lh=k*1.22;ls.forEach((l,i)=>T(ctx,l,o.align==="center"?x+w/2:x,y-(ls.length-1-i)*lh,{w:o.w||700,size:k,align:o.align,color:o.color||rgbaS(K.ink,0.95)}));}
 
 // A picture: a canvas laid out for its width on the page. lay(lw, ctx) gives the layout for a width (lw, its CSS width, from 320 to
 // 640) with its height in .h; draw(ctx, layout, now) paints it. kick(ms) keeps it moving for that long; nothing runs after. It paints
@@ -207,7 +209,7 @@ PLAY.wheel=(Lb,api)=>{const W=Lb.w,Wd=W.words,S={t:1,spins:[],spin0:null,from:0,
   const r4=api.group();api.btn(r4,W.mondayB,()=>{S.ran=S.check;api.kick(900);const c=W.res[S.check];api.say(c.say,c.ok?"ok":"no");if(S.check==="campus")api.reach("expect");});
   const lay=(lw)=>{const m=12,o={lw,m},wide=lw>=460;o.r=wide?Math.min(96,(lw-m*2)*0.2):Math.min(96,(lw-m*2)*0.3);o.wh={y:14,h:wide?o.r*2+72:o.r*2+112+Wd.length*24};  // narrow: the wheel, then its chances and the last spins below
     o.cx=wide?m+12+o.r+4:lw/2;o.cy=o.wh.y+o.r+(wide?58:46);/* below the question, on up to two lines */o.lg={x:wide?o.cx+o.r+24:m+12,y:wide?o.wh.y+70:o.cy+o.r+22,w:wide?lw-m-12-(o.cx+o.r+24):lw-m*2-24};
-    o.ex2=!wide;o.mon={y:o.wh.y+o.wh.h+10,h:wide?150:166};o.h=o.mon.y+o.mon.h+12;return o;};
+    o.ex2=!wide;o.mon={y:o.wh.y+o.wh.h+10,h:wide?166:196};o.h=o.mon.y+o.mon.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.blue);const m=o.m,p=probs(),cols=[K.blue,K.violet,K.orange,K.green,K.amber];
     card(ctx,m,o.wh.y,o.lw-m*2,o.wh.h,K.blue,"",{});lines(ctx,W.stem,m+12,o.wh.y+20,o.lw-m*2-24,{size:13,max:2,w:700,color:rgbaS(K.soft,1)});
     const u=S.spin0==null?1:eo(cl(since(now,S.spin0)/1300,0,1)),ang=lp(S.from,S.to,u)-Math.PI/2;let a=ang;
@@ -221,12 +223,12 @@ PLAY.wheel=(Lb,api)=>{const W=Lb.w,Wd=W.words,S={t:1,spins:[],spin0:null,from:0,
     if(S.spins.length&&u>=1){const sy=L2.y+Wd.length*24+4;lines(ctx,W.lastL+": "+S.spins.slice(0,6).map(i=>Wd[i][0]).join(", "),L2.x,sy,L2.w,{size:12.5,max:o.lw>=460?1:2,w:600,color:rgbaS(K.soft,1)});}
     // Monday night: what each campus sent, against what was expected, and the check's verdict
     const M=o.mon,w=o.lw-m*2;card(ctx,m,M.y,w,M.h,K.orange,W.monL,{size:13});const cw=(w-24-12)/3;
-    W.campus.forEach(([s,ex,got],i)=>{const x=m+12+i*(cw+6),y=M.y+34,hh=o.ex2?88:72,sh=S.ran?got/ex:0;sheet(ctx,x,y,cw,hh,8,null,{blur:0});
+    W.campus.forEach(([s,ex,got],i)=>{const x=m+12+i*(cw+6),y=M.y+34,hh=o.ex2?104:72,sh=S.ran?got/ex:0;sheet(ctx,x,y,cw,hh,8,null,{blur:0});
       const d2=o.ex2?15:0;line1(ctx,s,x+8,y+18,cw-16,12.5,{w:800});lines(ctx,fill(W.expL,{n:ex.toLocaleString("en")}),x+8,y+36,cw-16,{size:12,max:o.ex2?2:1,w:600,color:rgbaS(K.soft,1)});
       ctx.save();ctx.fillStyle="rgba(60,50,40,0.1)";rr(ctx,x+8,y+46+d2,cw-16,8,4);ctx.fill();ctx.fillStyle=rgbaS(sh<0.5&&S.ran?K.bad:K.green,0.9);if(S.ran&&sh>0)rr(ctx,x+8,y+46+d2,(cw-16)*Math.min(1,sh),8,4),ctx.fill();ctx.restore();
-      if(S.ran)line1(ctx,fill(W.gotL,{n:got.toLocaleString("en")}),x+8,y+66+d2,cw-16,12,{w:700,color:rgbaS(got===0?K.bad:K.ink,1)});});
+      if(S.ran)lines(ctx,fill(W.gotL,{n:got.toLocaleString("en")}),x+8,y+66+d2,cw-16,{size:12,max:o.ex2?2:1,w:700,color:rgbaS(got===0?K.bad:K.ink,1)});});
     if(S.ran){const c=W.res[S.ran];pill(ctx,o.lw/2,M.y+M.h-28,c.short,c.ok?K.good:K.bad,{align:"center",size:12,max:w-24});}
-    else line1(ctx,W.monIdle,m+12,M.y+M.h-14,w-24,12.5,{w:600,align:"center",color:rgbaS(K.soft,1)});};
+    else lineUp(ctx,W.monIdle,m+12,M.y+M.h-14,w-24,12.5,{w:600,align:"center",color:rgbaS(K.soft,1)});};
   return{S,lay,draw,readouts:[[W.read.temp,()=>W.temps.find(x=>+x[0]===S.t)[1]],[W.read.top,()=>Math.round(probs()[0]*100)+"%"],[W.read.spins,()=>String(S.spins.length)]]};};
 
 /* ---------- 3 · A model, reasoning, hands and a loop: the four parts, or a plain script ---------- */
@@ -251,7 +253,7 @@ PLAY.parts=(Lb,api)=>{const W=Lb.w,X=W.st,S={reason:false,hands:false,loop:false
   const r3=api.group(W.marchL);api.seg(r3,W.modes,"agent",v=>{S.mode=v;S.march=null;api.say(W.msg["mode_"+v]);api.kick(300);},W.marchL);
   api.btn(r3,W.marchB,()=>{if(S.mode==="script"&&!S.recipe){S.march=null;api.say(W.msg.noRecipe,"warn");return;}S.march=S.mode;S.m0=performance.now();api.kick(1800);
     api.say(S.mode==="script"?W.msg.marchScript:W.msg.marchAgent,S.mode==="script"?"ok":"warn");if(S.mode==="script")api.reach("script");});
-  const lay=(lw,M)=>{const m=12,o={lw,m},nar=lw<460;o.pc=chipCols(M,["model","reason","hands","loop"].map(k=>W.short[k]),lw-48);o.top={y:12,h:46+Math.ceil(4/o.pc)*44};o.st={y:o.top.y+o.top.h+10,h:40+7*22};o.res={y:o.st.y+o.st.h+10,h:nar?92:72};o.mar={y:o.res.y+o.res.h+10,h:74};o.h=o.mar.y+o.mar.h+12;return o;};
+  const lay=(lw,M)=>{const m=12,o={lw,m},nar=lw<460;o.pc=chipCols(M,["model","reason","hands","loop"].map(k=>W.short[k]),lw-48);o.top={y:12,h:46+Math.ceil(4/o.pc)*44};o.st={y:o.top.y+o.top.h+10,h:40+7*22+32};o.res={y:o.st.y+o.st.h+10,h:nar?92:72};o.mar={y:o.res.y+o.res.h+10,h:74};o.h=o.mar.y+o.mar.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.blue);const m=o.m,w=o.lw-m*2;
     card(ctx,m,o.top.y,w,o.top.h,K.blue,W.agentL,{size:13});const ks=["model","reason","hands","loop"];
     ks.forEach((k,i)=>{const on=k==="model"||S[k],[cx,cy,cw]=chipAt(i,o.pc,m+12,o.top.y+34,w-24,38);chip(ctx,cx,cy,cw,38,W.short[k],on?K.blue:K.faint,{size:12.5,on,dash:on?null:[4,4],a:on?1:0.7});});
@@ -266,7 +268,7 @@ PLAY.parts=(Lb,api)=>{const W=Lb.w,X=W.st,S={reason:false,hands:false,loop:false
     // next March
     const Mr=o.mar;card(ctx,m,Mr.y,w,Mr.h,K.green,W.marchL,{size:13,right:150});pill(ctx,o.lw-m-10,Mr.y+8,S.recipe?W.recipeYes:W.recipeNo,S.recipe?K.good:K.faint,{align:"right",size:12});
     if(S.march){const u=cl(since(now,S.m0)/(S.march==="script"?400:1600),0,1);meter(ctx,m+12,Mr.y+32,w-24,S.march==="script"?W.scriptL:W.agentRunL,S.march==="script"?W.scriptV:W.agentV,u,S.march==="script"?K.good:K.amber);if(u<1)api.kick(60);}
-    else line1(ctx,W.marchIdle,m+12,Mr.y+54,w-24,12.5,{w:600,color:rgbaS(K.soft,1)});};
+    else lines(ctx,W.marchIdle,m+12,Mr.y+46,w-24,{size:12.5,max:2,w:600,color:rgbaS(K.soft,1)});};
   return{S,lay,draw,readouts:[[W.read.count,()=>S.run&&W.res[S.run.k].count||"–"],[W.read.evidence,()=>S.run&&S.run.k==="answer"?W.read.yes:S.run?W.read.no:"–"],[W.read.march,()=>S.march?(S.march==="script"?W.scriptV:W.agentV):"–"]]};};
 
 /* ---------- 4 · It feels like understanding: say what you mean, check against what it didn't make ---------- */
@@ -283,11 +285,11 @@ PLAY.unit=(Lb,api)=>{const W=Lb.w,S={unit:"students",back:false,chk:"table",ran:
     if(!pass)bits.push(W.msg.flag);else if(S.ran.miss)bits.push(fill(W.msg.short,{a:adv,m:S.ran.miss}));else bits.push(fill(W.msg.right,{a:adv}));
     api.say(bits.join(" "),!pass?"warn":S.ran.miss?"no":"ok");
     if(pass&&S.ran.miss)api.reach("tick");if(S.ran.back)api.reach("back");if(!pass)api.reach("list");if(pass&&!S.ran.miss)api.reach("twelve");},"go");
-  const lay=(lw)=>{const m=12,o={lw,m};o.q={y:12,h:92};o.a={y:o.q.y+o.q.h+10,h:96};o.p={y:o.a.y+o.a.h+10,h:lw<460?124:108};o.h=o.p.y+o.p.h+12;return o;};
+  const lay=(lw)=>{const m=12,o={lw,m};o.q={y:12,h:108};o.a={y:o.q.y+o.q.h+10,h:96};o.p={y:o.a.y+o.a.h+10,h:lw<460?124:108};o.h=o.p.y+o.p.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.green);const m=o.m,w=o.lw-m*2,R=S.ran,u=R?cl(since(now,S.t0)/1200,0,1):0;
     // Jun's question, and the agent reading it back
     card(ctx,m,o.q.y,w,o.q.h,K.blue,W.qL,{size:13});lines(ctx,S.unit==="people"?W.qPeople:W.qStudents,m+12,o.q.y+42,w-24,{size:13.5,max:2,w:700});
-    if(S.back)line1(ctx,S.unit==="people"?W.backSame:W.backAsk,m+12,o.q.y+o.q.h-10,w-24,12.5,{w:600,color:rgbaS(K.violet,1)});
+    if(S.back)lineUp(ctx,S.unit==="people"?W.backSame:W.backAsk,m+12,o.q.y+o.q.h-10,w-24,12.5,{w:600,color:rgbaS(K.violet,1)});
     // the agent's answer, and its check
     card(ctx,m,o.a.y,w,o.a.h,K.violet,W.aL,{size:13});
     if(R&&u>0.25){T(ctx,R.count.toLocaleString("en"),m+14,o.a.y+62,{w:800,size:28,color:rgbaS(K.ink,1)});const nx=m+14+TW(ctx,R.count.toLocaleString("en"),28,800)+10;line1(ctx,R.people?W.unitPeople:W.unitFte,nx,o.a.y+60,o.lw-m-12-nx,12.5,{w:700,color:rgbaS(K.soft,1)});
@@ -315,7 +317,7 @@ PLAY.junior=(Lb,api)=>{const W=Lb.w,S={rights:"free",mem:"session",yes:"agent",f
     api.say(keep?W.msg.nextKept:W.msg.nextLost,keep?"ok":"no");api.reach(keep?"lasts":"forgets");});
   api.btn(r4,W.speedB,()=>{go("speed");const free=S.rights==="free",self=S.yes==="agent";
     S.tables=free?"gone":self?"self":"kept";api.say(free?W.msg.speedFree:self?W.msg.speedSelf:W.msg.speedKept,S.tables==="kept"?"ok":"no");if(S.tables==="kept")api.reach("yearly");});
-  const lay=(lw,M)=>{const m=12,o={lw,m};o.sc=chipCols(M,[...Object.values(W.short.rights),...Object.values(W.short.mem),...Object.values(W.short.yes)],lw-48,3);o.tc=chipCols(M,W.tables,lw-48);o.ag={y:12,h:(lw<460?70:56)+Math.ceil(3/o.sc)*46};o.cnt={y:o.ag.y+o.ag.h+10,h:84};o.tb={y:o.cnt.y+o.cnt.h+10,h:64+Math.ceil(3/o.tc)*46};o.h=o.tb.y+o.tb.h+12;return o;};
+  const lay=(lw,M)=>{const m=12,o={lw,m};o.sc=chipCols(M,[...Object.values(W.short.rights),...Object.values(W.short.mem),...Object.values(W.short.yes)],lw-48,3);o.tc=chipCols(M,W.tables,lw-48);o.ag={y:12,h:(lw<460?70:56)+Math.ceil(3/o.sc)*46};o.cnt={y:o.ag.y+o.ag.h+10,h:84};o.tb={y:o.cnt.y+o.cnt.h+10,h:80+Math.ceil(3/o.tc)*46};o.h=o.tb.y+o.tb.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.orange);const m=o.m,w=o.lw-m*2,u=S.t0==null?1:cl(since(now,S.t0)/900,0,1);if(u<1)api.kick(60);
     // how it's set up: its rights, its memory, who says yes
     card(ctx,m,o.ag.y,w,o.ag.h,K.orange,W.setL,{size:13});
@@ -330,7 +332,7 @@ PLAY.junior=(Lb,api)=>{const W=Lb.w,S={rights:"free",mem:"session",yes:"agent",f
     card(ctx,m,o.tb.y,w,o.tb.h,K.violet,W.tbL,{size:13});
     W.tables.forEach((s,i)=>{const yearly=i===2,st=S.tables,gone=st==="gone"||st==="self"||(st==="kept"&&!yearly),[x,y,tw_]=chipAt(i,o.tc,m+12,o.tb.y+34,w-24,40);
       chip(ctx,x,y,tw_,40,s,yearly?K.amber:K.violet,{size:12.5,strike:st&&gone&&u>0.5,a:st&&gone&&u>0.5?0.6:1,mark:st&&u>0.5?(yearly?(st==="kept"?"ok":"no"):null):null});});
-    line1(ctx,S.tables?W.tbRes[S.tables]:W.tbIdle,m+12,o.tb.y+o.tb.h-12,w-24,12.5,{w:700,color:rgbaS(S.tables==="kept"?K.good:S.tables?K.bad:K.soft,1)});};
+    lineUp(ctx,S.tables?W.tbRes[S.tables]:W.tbIdle,m+12,o.tb.y+o.tb.h-12,w-24,12.5,{w:700,color:rgbaS(S.tables==="kept"?K.good:S.tables?K.bad:K.soft,1)});};
   return{S,lay,draw,readouts:[[W.read.count,()=>S.count?S.count.toLocaleString("en"):"–"],[W.read.yearly,()=>S.tables==null?"–":S.tables==="kept"?W.read.kept:W.read.gone],[W.read.yes,()=>W.short.yes[S.yes]]]};};
 
 /* ---------- 6 · Minds that change: three answers, or a checked one ---------- */
@@ -351,7 +353,7 @@ PLAY.minds=(Lb,api)=>{const W=Lb.w,A=W.answers,S={cur:null,seen:new Set(),asks:0
     if(S.ev&&S.cur===1)api.reach("source");if(S.two&&S.dup)api.reach("twoways");});
   api.btn(r3,W.fixB,()=>{if(!S.two||S.checked==null){api.say(W.msg.fixFirst,"warn");return;}S.dup=false;S.checked=performance.now();api.kick(1200);api.say(W.msg.fixed,"ok");});
   api.btn(r3,W.signB,()=>{if(!(S.ev&&S.two&&!S.dup&&S.checked!=null)){api.say(W.msg.signNo,"warn");return;}S.signed=true;api.kick(900);api.say(W.msg.signed,"ok");api.reach("signed");});
-  const lay=(lw,M)=>{const m=12,o={lw,m};o.th=A.every(a=>TW(M,a.who+": "+a.t,12.5,700)<=lw-56)?28:40;o.ch={y:12,h:40+A.length*(o.th+6)+6};o.ev={y:o.ch.y+o.ch.h+10,h:138};o.h=o.ev.y+o.ev.h+12;return o;};
+  const lay=(lw,M)=>{const m=12,o={lw,m};o.th=A.every(a=>TW(M,a.who+": "+a.t,12.5,700)<=lw-56)?28:40;o.ch={y:12,h:40+A.length*(o.th+6)+6};o.ev={y:o.ch.y+o.ch.h+10,h:154};o.h=o.ev.y+o.ev.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.violet);const m=o.m,w=o.lw-m*2;
     // the answers each chat gave
     card(ctx,m,o.ch.y,w,o.ch.h,K.violet,W.chatsL,{size:13});
@@ -362,7 +364,7 @@ PLAY.minds=(Lb,api)=>{const W=Lb.w,A=W.answers,S={cur:null,seen:new Set(),asks:0
     const E=o.ev;card(ctx,m,E.y,w,E.h,K.green,W.workL,{size:13,right:110});
     if(S.signed)pill(ctx,o.lw-m-10,E.y+8,W.signedL,K.good,{align:"right",size:12});
     if(S.checked!=null){const u=cl(since(now,S.checked)/800,0,1);if(u<1)api.kick(60);let y=E.y+48;
-      if(S.ev){line1(ctx,S.cur===1?W.evBad:W.evGood,m+12,y,w-24,12.5,{w:700,color:rgbaS(S.cur===1?K.bad:K.ink,1)});y+=22;}
+      if(S.ev){y+=lines(ctx,S.cur===1?W.evBad:W.evGood,m+12,y,w-24,{size:12.5,max:2,w:700,color:rgbaS(S.cur===1?K.bad:K.ink,1)})+6;}
       if(S.two){const a=S.dup?134:131,b=131,bw=w-24-120;[[W.wayA,a],[W.wayB,b]].forEach(([s,n],i)=>{const yy=y+i*24;line1(ctx,s,m+12,yy,110,12.5,{w:600,color:rgbaS(K.soft,1)});
           ctx.save();ctx.fillStyle=rgbaS(a!==b?K.amber:K.green,0.85);rr(ctx,m+12+116,yy-10,bw*(n/140)*u,11,4);ctx.fill();ctx.restore();T(ctx,String(n),m+12+116+bw*(n/140)*u+6,yy,{w:800,size:12.5,color:rgbaS(K.ink,1)});});
         y+=50;line1(ctx,S.dup?W.dupL:W.okL,m+12,y,w-24,12.5,{w:700,color:rgbaS(S.dup?K.amber:K.good,1)});}}
@@ -379,14 +381,14 @@ PLAY.night=(Lb,api)=>{const W=Lb.w,S={touch:"real",reach:"web",ask:"pass",appr:"
     const k=gone?(real?"goneLive":person?"goneCaught":"goneSelf"):(real?"realFix":person?"answers":"selfOk");S.night=k;S.t0=performance.now();api.kick(2600);api.say(W.msg.running);
     api.later(()=>{api.say(W.res[k].say,k==="answers"?"ok":k==="goneCaught"?"warn":"no");if(gone)api.reach("untied");if(!gone&&!real)api.reach("question");if(k==="answers")api.reach("answers");},1800);},"go");
   api.btn(r5,W.compareB,()=>{S.web=S.reach;S.t0=performance.now();api.kick(1600);api.say(S.reach==="web"?W.msg.webOut:W.msg.webIn,S.reach==="web"?"no":"ok");if(S.reach==="own")api.reach("fence");});
-  const lay=(lw)=>{const m=12,o={lw,m},nar=lw<460;o.fl={y:12,h:nar?166:150};o.out={y:o.fl.y+o.fl.h+10,h:nar?124:92};o.h=o.out.y+o.out.h+12;return o;};
+  const lay=(lw)=>{const m=12,o={lw,m},nar=lw<460;o.fl={y:12,h:nar?182:166};o.out={y:o.fl.y+o.fl.h+10,h:nar?124:92};o.h=o.out.y+o.out.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.amber);const m=o.m,w=o.lw-m*2,u=S.t0==null?1:cl(since(now,S.t0)/1800,0,1);if(u<1)api.kick(60);
     // the night: the agent inside its fence, the test copy, the real count, and the web outside
     const F=o.fl;card(ctx,m,F.y,w,F.h,K.amber,W.fenceL,{size:13,dash:S.reach==="own"?null:[6,5]});
     const bw=(w-24-12)/3,y=F.y+40;chip(ctx,m+12,y,bw,40,W.agentL,K.violet,{size:13,on:true});chip(ctx,m+12+bw+6,y,bw,40,W.testL,K.blue,{size:12.5,on:S.touch==="test"});chip(ctx,m+12+2*(bw+6),y,bw,40,W.countL,K.orange,{size:12.5,on:S.touch==="real"});
     arrow(ctx,m+12+bw,y+20,m+12+bw+6,y+20,K.soft,0.6,{head:5});
-    line1(ctx,S.reach==="web"?W.webOpen:W.webShut,m+12,y+64,w-24,12.5,{w:700,color:rgbaS(S.reach==="web"?K.bad:K.good,1)});
-    if(S.web&&u<1){const x=lp(m+12+bw/2,o.lw-m,ei(u));tile(ctx,Math.min(x,o.lw-m-60),y+74,56,20,W.reqL,S.web==="web"?K.bad:K.faint,{size:12,a:S.web==="web"?1:1-u});}
+    const wy=y+64+lines(ctx,S.reach==="web"?W.webOpen:W.webShut,m+12,y+64,w-24,{size:12.5,max:2,w:700,color:rgbaS(S.reach==="web"?K.bad:K.good,1)});
+    if(S.web&&u<1){const x=lp(m+12+bw/2,o.lw-m,ei(u)),rw=TW(ctx,W.reqL,12,700)+16;tile(ctx,Math.min(x,o.lw-m-rw-4),wy-4,rw,20,W.reqL,S.web==="web"?K.bad:K.faint,{size:12,a:S.web==="web"?1:1-u});}
     lines(ctx,fill(W.rulesL,{ask:W.short.ask[S.ask],appr:W.short.appr[S.appr]}),m+12,F.y+F.h-(o.lw<460?26:12),w-24,{size:12,max:o.lw<460?2:1,w:600,color:rgbaS(K.soft,1)});
     // the morning: the count, and who answers for it
     const O=o.out;if(S.night&&u>=1){const r=W.res[S.night],ok=S.night==="answers";result(ctx,m,O.y,w,O.h,ok?K.good:S.night==="goneCaught"?K.amber:K.bad,r.t,r.d,{kicker:W.morningL,glow:10});}
@@ -423,14 +425,14 @@ PLAY.copy9=(Lb,api)=>{const W=Lb.w,S={brain:"worm",built:null,way:"combine",trie
   api.seg(r3,W.who.map(([k,l])=>[k,W.countL+": "+l]),"agent",v=>{S.count=v;S.handed=null;api.kick(300);},W.countL);
   api.seg(r3,W.who.map(([k,l])=>[k,W.signL+": "+l]),"agent",v=>{S.sign=v;S.handed=null;api.kick(300);},W.signL);
   api.btn(r3,W.handB,()=>{const k=S.sign==="agent"?"agentSigns":S.count==="person"?"byHand":"kept";S.handed=k;S.t0=performance.now();api.kick(900);api.say(W.hand[k],k==="kept"?"ok":"warn");if(k==="kept")api.reach("keep");});
-  const lay=(lw,M)=>{const m=12,o={lw,m},nar=lw<460;o.wc=chipCols(M,W.ways.map(x=>x.name),lw-48);o.b={y:12,h:120};o.w={y:o.b.y+o.b.h+10,h:(nar?72:60)+Math.ceil(3/o.wc)*44};o.k={y:o.w.y+o.w.h+10,h:84};o.h=o.k.y+o.k.h+12;return o;};
+  const lay=(lw,M)=>{const m=12,o={lw,m},nar=lw<460;o.wc=chipCols(M,W.ways.map(x=>x.name),lw-48);const tw2=lw-m-12-(m+14+Math.min(150,(lw-m*2)*0.34)+14),nl=Math.max(...W.brains.map(b=>b.does).concat([W.buildIdle]).map(t=>Math.min(6,wrap(M,t,tw2,12.5,600).length)));o.nl=nl;o.b={y:12,h:Math.max(120,76+nl*15+10)};o.w={y:o.b.y+o.b.h+10,h:(nar?72:60)+Math.ceil(3/o.wc)*44};o.k={y:o.w.y+o.w.h+10,h:84};o.h=o.k.y+o.k.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.violet);const m=o.m,w=o.lw-m*2,u=S.t0==null?1:cl(since(now,S.t0)/900,0,1);if(u<1)api.kick(60);
     // a brain's map, and what a copy built from it does
     const B=W.brains.find(x=>x.k===S.brain),Bo=o.b;card(ctx,m,Bo.y,w,Bo.h,K.violet,B.name+" · "+B.n,{size:13});
     const R2=rng(B.k.length*31+3),dots=B.k==="worm"?40:B.k==="fly"?140:260,ax=m+14,aw=Math.min(150,w*0.34);
     for(let i=0;i<dots;i++){const x=ax+R2()*aw,y=Bo.y+36+R2()*(Bo.h-50);ctx.save();ctx.fillStyle=rgbaS(K.violet,B.k==="human"?0.35:0.75);ctx.beginPath();ctx.arc(x,y,B.k==="worm"?2.6:1.7,0,TP);ctx.fill();ctx.restore();}
     const tx=ax+aw+14,tw2=o.lw-m-12-tx;meter(ctx,tx,Bo.y+30,tw2,W.mappedL,B.mapped,B.share,K.violet);
-    lines(ctx,S.built===S.brain&&u>0.3?B.does:W.buildIdle,tx,Bo.y+76,tw2,{size:12.5,max:3,w:600,color:rgbaS(S.built===S.brain?K.ink:K.soft,1)});
+    lines(ctx,S.built===S.brain&&u>0.3?B.does:W.buildIdle,tx,Bo.y+76,tw2,{size:12.5,max:o.nl,w:600,color:rgbaS(S.built===S.brain?K.ink:K.soft,1)});
     // three ways to be creative, and which a model can take
     card(ctx,m,o.w.y,w,o.w.h,K.orange,W.bodenL,{size:13});
     W.ways.forEach((x,i)=>{const tried=S.tried.has(x.k),[cx,cy,cw]=chipAt(i,o.wc,m+12,o.w.y+34,w-24,38);chip(ctx,cx,cy,cw,38,x.name,x.k==="rules"?K.amber:K.orange,{size:12.5,on:S.made===x.k,mark:tried?(x.k==="rules"?"warn":"ok"):null});});
@@ -463,7 +465,7 @@ PLAY.swarm=(Lb,api)=>{const W=Lb.w,S={n:2,fade:"slow",late:false,run:null,share:
   api.toggle(r5,W.copyT,false,v=>{S.copy=v;S.board=null;api.say(v?W.msg.copyOn:W.msg.copyOff);api.kick(300);});
   api.toggle(r5,W.checkT,false,v=>{S.check=v;S.board=null;api.say(v?W.msg.checkOn:W.msg.checkOff);api.kick(300);});
   api.btn(r5,W.pinB,()=>{S.board=S.copy?(S.check?"caught":"spread"):"one";S.b0=performance.now();api.kick(1600);api.say(W.msg.pattern+" "+W.msg["board_"+S.board],S.board==="spread"?"no":"ok");if(S.board==="caught")api.reach("word");});
-  const lay=(lw,M)=>{const m=12,o={lw,m};o.nc=W.notes.every(s=>TW(M,s+" · "+W.fixedWord,12.5,700)<=(lw-54)/2-24&&TW(M,s+" · "+W.badWord,12.5,700)<=(lw-54)/2-24)?2:1;o.br={y:12,h:190};o.bd={y:o.br.y+o.br.h+10,h:66+Math.ceil(W.notes.length/o.nc)*44};o.h=o.bd.y+o.bd.h+12;return o;};
+  const lay=(lw,M)=>{const m=12,o={lw,m};o.nc=W.notes.every(s=>TW(M,s+" · "+W.fixedWord,12.5,700)<=(lw-54)/2-24&&TW(M,s+" · "+W.badWord,12.5,700)<=(lw-54)/2-24)?2:1;o.br={y:12,h:190};o.bd={y:o.br.y+o.br.h+10,h:82+Math.ceil(W.notes.length/o.nc)*44};o.h=o.bd.y+o.bd.h+12;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.green);const m=o.m,w=o.lw-m*2,Bx=o.br;card(ctx,m,Bx.y,w,Bx.h,K.green,"",{});
     const nx=m+40,fx=o.lw-m-40,cy=Bx.y+84,u=S.run==null?0:cl(since(now,S.run)/3600,0,1),hi=S.hist.length?S.hist[Math.min(S.hist.length-1,Math.floor(u*S.hist.length))]:0.5;
     const open=!S.late||(S.run!=null&&u*TICKS>=OPEN);
@@ -472,13 +474,13 @@ PLAY.swarm=(Lb,api)=>{const W=Lb.w,S={n:2,fade:"slow",late:false,run:null,share:
     ctx.strokeStyle=rgbaS(K.faint,0.55);ctx.beginPath();ctx.moveTo(nx,cy);ctx.bezierCurveTo(nx+(fx-nx)*0.2,cy+86,fx-(fx-nx)*0.2,cy+86,fx,cy);ctx.stroke();ctx.restore();
     const pt=(sh,t)=>sh?[lp(nx,fx,t),cy]:(()=>{const q=1-t,x=q*q*q*nx+3*q*q*t*(nx+(fx-nx)*0.2)+3*q*t*t*(fx-(fx-nx)*0.2)+t*t*t*fx,y=q*q*q*cy+3*q*q*t*(cy+86)+3*q*t*t*(cy+86)+t*t*t*cy;return[x,y];})();
     if(S.run!=null){const N=30;for(let i=0;i<N;i++){const sh=(i+0.5)/N<hi,ph=((now/(sh?1600:3200))+i*0.137)%1,t=ph<0.5?ph*2:2-ph*2,[x,y]=pt(sh,t);ctx.save();ctx.fillStyle=rgbaS(K.ink,0.85);ctx.beginPath();ctx.arc(x,y-2,2.6,0,TP);ctx.fill();ctx.restore();}if(u<1||!RM())api.kick(u<1?80:0);}
-    chip(ctx,nx-30,cy-16,60,32,W.nest,K.amber,{size:12.5,on:true});chip(ctx,fx-30,cy-16,60,32,W.food,K.green,{size:12.5,on:true});
+    const cwN=Math.max(60,TW(ctx,W.nest,12.5,700)+20),cwF=Math.max(60,TW(ctx,W.food,12.5,700)+20);chip(ctx,nx-30,cy-16,cwN,32,W.nest,K.amber,{size:12.5,on:true});chip(ctx,fx+30-cwF,cy-16,cwF,32,W.food,K.green,{size:12.5,on:true});
     line1(ctx,open?W.shortL:W.shortL+" · "+W.closed,lp(nx,fx,0.5)-80,cy-14,160,12.5,{w:700,align:"center",color:rgbaS(K.soft,1)});line1(ctx,W.longL,lp(nx,fx,0.5)-80,cy+82,160,12.5,{w:700,align:"center",color:rgbaS(K.soft,1)});
     meter(ctx,m+12,Bx.y+8,w-24,W.onShort,S.run==null?"–":Math.round(hi*100)+"%",S.run==null?0:hi,K.green);
     // the board: what each helper pinned
     const D=o.bd;card(ctx,m,D.y,w,D.h,K.blue,W.boardTitle,{size:13});W.notes.forEach((s,i)=>{const[x,y,nw]=chipAt(i,o.nc,m+12,D.y+34,w-24,38),b=S.board,v=S.b0==null?1:cl((since(now,S.b0)-i*220)/500,0,1),word=b&&b!=="one"?true:i===0&&!!b,bad=word&&b!=="caught";
       if(!b){tile(ctx,x,y,nw,38,"",K.faint,{a:0.35});return;}withA(ctx,v,()=>{tile(ctx,x,y,nw,38,s+(word?" · "+(b==="caught"?W.fixedWord:W.badWord):""),bad?K.bad:K.blue,{size:12.5,mark:b==="caught"&&word?"ok":bad?"no":null});});if(v<1)api.kick(60);});
-    line1(ctx,S.board?W.boardRes[S.board]:W.boardIdle,m+12,D.y+D.h-10,w-24,12.5,{w:700,color:rgbaS(S.board==="spread"?K.bad:S.board?K.good:K.soft,1)});};
+    lineUp(ctx,S.board?W.boardRes[S.board]:W.boardIdle,m+12,D.y+D.h-10,w-24,12.5,{w:700,color:rgbaS(S.board==="spread"?K.bad:S.board?K.good:K.soft,1)});};
   return{S,lay,draw,readouts:[[W.read.short,()=>S.share==null?"–":Math.round(S.share*100)+"%"],[W.read.word,()=>S.board==null?"–":S.board==="spread"?W.read.all:S.board==="caught"?W.read.fixed:W.read.one]]};};
 
 const BUILD={play:labPlay};

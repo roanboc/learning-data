@@ -19,7 +19,7 @@ const NARR={
  {"id":"layers","gap":0.9,"text":"His map shows the whole utility in six layers, from why it exists down to what it runs on."},
  {"id":"two","gap":0.9,"text":"Two of its applications are agents: the outage agent proposes which fault matters most, and the map agent drafts changes."},
  {"id":"rights","gap":0.9,"text":"Each is software in a role, with its rights written down and an owner: Grace for one, Tomás for the other."},
- {"id":"series","gap":0.9,"text":"This series adds what's around them: the AI platform, AI in the architects' own work, and a map kept alive."},
+ {"id":"series","gap":0.9,"text":"This series adds what's around them: the AI platform they run on, and what each may read."},
  {"id":"module","gap":0.9,"text":"How an agent works is the AI agents module's; here, the map shows where agents work, and who answers for them."}]},
 "unseen":{"name":"A plan nobody saw","lead":1.4,"tail":1.0,"vo":[
  {"id":"farah","gap":0.9,"text":"Then Farah brings a household, behind on their bill. They asked the website's chat for more time to pay."},

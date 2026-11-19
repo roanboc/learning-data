@@ -15,66 +15,77 @@ const ww_bub=(x,J,tt,t0,t1,lines,cam,o)=>PK.say(x,J,lines,ag_io(tt,t0,t1==null?1
 const ww_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
 // while a chapter shows a key idea apart from the scene (a board seen close, a page of the notebook), its kicker steps back
 const ww_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
-// kneeling to twist cord, seen from the side: both hands together in front, the cord running from them to the ground
-const WW_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
-function ww_twisting(x,who,px,fl,tt,o){o=o||{};const U=PK.u,J=wwq_person(x,who,px,fl,wwq_h(fl),WW_TWIST,Object.assign({t:tt,holds:true},o,o.nod!=null?{}:ww_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0.7]},px%5)));
-  if(J&&J.hdN){const [hx,hy]=J.hdN,len=o.len||260,col=PK.S.tone(WWQ_PAL.rope),tw=Math.sin(tt*5)*2;x.save();x.lineCap="round";x.strokeStyle=U.css(PK.S.ink);x.lineWidth=6;
-    x.beginPath();x.moveTo(hx,hy+4);x.quadraticCurveTo(hx+len*0.4,fl-6+tw,hx+len,fl-2);x.stroke();x.strokeStyle=U.css(col);x.lineWidth=3.4;x.stroke();x.restore();}return J;}
-// a walker on the bridge from u0 to u1 between t0 and t1 (at rest outside it); returns [u, who, flip, tt] for wwq_bridge, or null
-const ww_on=(tt,who,u0,u1,t0,t1)=>{if(tt<t0-0.2||tt>t1+0.2)return null;const u=PK.u.lerp(u0,u1,PK.u.clamp((tt-t0)/(t1-t0),0,1));return[u,who,u1<u0,tt];};
 // someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
 const ww_alive=(tt,base,i,t0)=>{const ev=[],K=["look","nod","smile"];for(let k=0;k<30;k++){const at=(t0||0)+2.5+i*1.37+k*5.9,kind=K[(k+i)%3];ev.push(kind==="look"?[at,"look",2.2,[1,((k+i)%2?0.35:-0.2)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
   return PK.face(tt,Object.assign({expr:"neutral",gaze:[1,0]},base||{}),ev);};
-// the bank's people: [who, x, floor, pose, flip, opts]
-function ww_bank(x,tt,list){list.slice().sort((a,b)=>a[2]-b[2]).forEach(([who,px,fl,pose,fl2,o],i)=>{o=o||{};if(pose==="twist")return ww_twisting(x,who,px,fl,tt,o);
-  const f=o.nod!=null?{}:ww_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},px%5);
-  wwq_person(x,who,px,fl,wwq_h(fl),pose||"stand",Object.assign({t:tt+(px%7),flip:!!fl2},o,f));});}
 
+/* ---------------------------------------------------------------- the gorge, through the views this film looks at it from (ww_gorge.js)
+   People before roles looks at the bridge from above and from its heads, downstream; this film looks at it from the river below and
+   from the bank upstream, and goes home with a family (ww_home.js), so each film of the series shows the story from places of its own
+   (the author, 18 November 2026). */
+const WW_VR=wwq_camera({x:-1.5,y:-14.6,z:-34,yaw:4,f:900,hor:1010,clouds:{fair:[[640,118,1.1],[1300,66,0.9]],grey:[[520,92,1.6],[1080,58,1.9],[1560,116,1.5]]}});    // from the river, downstream: the bridge high above it
+const WW_VU=wwq_camera({x:-22,y:3.4,z:8,yaw:128,f:1000,hor:330});       // from the left bank, upstream: the bridge's head, and its span
+AG_PLACES.wwGorgeR=x=>wwq_ground(x,WW_VR,{});AG_PLACES.wwGorgeRGrey=x=>wwq_ground(x,WW_VR,{grey:true});AG_PLACES.wwGorgeU=x=>wwq_ground(x,WW_VU,{});
+// the river's view in the sun and under the grey sky of the years it was left are one room: the camera glides on, what changed fades
+AG_ROOMS.wwGorgeRGrey="wwGorgeR";
+const WW_COIL={hold:wwq_coil,holds:true};
+// the people of a view, as drawables: [who, X, Z, pose, flip, o]; who a name of WWQ_FOLK, or a number (one of the communities' people
+// nobody names). o.face a face through the shot (PK.face), or o.expr and o.gaze for one that lives on its own; o.opt PK.person's own;
+// o.Y how high they stand (on a stone base); o.len a twisted cord's length
+const ww_folks=(cam,tt,list)=>list.map(([who,X,Z,pose,flip,o],i)=>{o=o||{};const f=o.face||ww_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},i%5);
+  return wwq_folk(cam,who,X,Z,pose,{t:tt+i*0.7,flip:!!flip,len:o.len,key:o.key,Y:o.Y,after:o.after,opt:Object.assign({},f,o.opt||{})});});
+// a walk along the floor of a bridge of that age, from u0 to u1 (z across it), and on over the bank to the points after it
+const ww_deck=(u0,u1,z,age,more)=>{const p=[];for(let i=0;i<=24;i++){const [x,y]=wwq_deckAt(PK.u.lerp(u0,u1,i/24),{age});p.push([x,y,z||0]);}return p.concat((more||[]).map(q=>[q[0],0,q[1]]));};
+const ww_walk=(cam,who,tt,path,t0,t1,o)=>{o=o||{};return wwq_walker(cam,who,tt,{path,t0,t1,then:o.then,arms:o.arms,k:o.k},{key:o.key,opt:Object.assign({expr:"neutral",gaze:[1,0]},o.opt)});};
+// the families at both heads of the bridge, at the rims' edge, as the river's view sees them
+const WW_RIMR=[["w2",-14.5,-2.6,WWQ_TWIST,false,{len:0.8}],["m1",-14.4,4.0,"clasp"],["w1",-14.3,-5.2,"stand",false,{opt:WW_COIL}],[0,-14.4,8.0,"stand"],[1,-14.5,12.0,WWQ_TWIST],
+  ["m4",14.4,-3.4,"clasp",true],["w5",14.5,6.0,WWQ_TWIST,true,{len:0.8}],[2,14.4,9.6,"stand",true],[3,14.4,13.4,"clasp",true]];
+// the families on the left bank, upstream of the bridge's head, as the view from upstream sees them; two more across the gorge
+const WW_FAMU=[["w2",-15.6,2.6,WWQ_TWIST,true,{len:0.8}],["m1",-17.8,2.2,"clasp",true],["w1",-19.0,0.2,"stand",true,{opt:WW_COIL}],["w3",-17.0,-2.8,"stand",true,{opt:WW_COIL}],
+  [0,-20.6,-2.6,WWQ_TWIST,false,{len:0.7}],["m4",15.6,2.4,"clasp",true],["w5",16.4,-1.8,WWQ_TWIST,true,{len:0.8}]];
+// as the bridge is made: about a thousand people, along both rims (some of them, as the river's view sees them)
+// (seen from below, someone nearer stands higher up the picture: a line along each rim, a step or two apart, nobody over another)
+const WW_CROWD=[["w1",-14.4,-6.0,"stand",false,{opt:WW_COIL}],["w2",-14.5,-1.9,WWQ_TWIST,false,{len:0.8}],["m1",-14.4,2.2,"clasp"],["m4",14.4,-2.8,"clasp",true],["w5",14.5,2.6,WWQ_TWIST,true,{len:0.8}]]
+  .concat([-12.6,-10.4,-8.2,-3.9,4.6,7.0,9.6,12.4].map((z,i)=>[10+i,-14.4,z,i%3===1?WWQ_TWIST:i%3===2?"clasp":"stand",false,i%2?{}:{opt:WW_COIL}]))
+  .concat([-11.6,-9.4,-7.2,-5.0,5.0,7.6,10.2,13.0].map((z,i)=>[20+i,14.4,z,i%3===0?WWQ_TWIST:i%3===1?"stand":"clasp",true,i%2?{opt:WW_COIL}:{}]));
 
 // Marta at her desk, turned to her screen or to the room; who: more people in the room ({fl, draw})
 const ww_marta=(o)=>Object.assign({work:1,turn:0},o||{});
 // someone who comes to a desk: walks in from x0 to x1 between t0 and t1, then stands (pose), flipped to face left when x1 < x0
-const ww_qcome=(cc,who,tt,x0,x1,t0,t1,fl,o)=>{o=o||{};const flip=x1<x0,h=wwq_h(fl);if(tt<t1)return wwq_walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:"stand"},Object.assign({flip},o.face||{}));
-  return wwq_person(cc,who,x1,fl,h,"stand",Object.assign({t:tt,flip},o.face||{}));};
 const ww_come=(cc,who,tt,x0,x1,t0,t1,fl,h,o)=>{o=o||{};const flip=x1<x0;if(tt<t1)return PK.walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:o.then||"stand"},Object.assign({flip},o.face||{}));
   return PK.person(cc,who,x1,fl,h,o.then||"stand",Object.assign({t:tt,flip},o.face||{}));};
 
 /* ---------------------------------------------------------------- 1. Before it falls */
 scene("bridge",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const tW=c.wears-0.5,tG=c.sag-0.5,tM=c.missed-0.5,tN=c.need-0.5,tJ=c.june-0.5,tA=c.team-0.6,tF=w("fell","fell",-0.2);
+  const tU=c.who-0.5,tW=c.wears-0.5,tG=c.sag-0.5,tM=c.missed-0.5,tN=c.custom-0.6,tJ=c.june-0.5,tP=w("june","and people",-0.3),tA=c.team-0.6,tF=w("fell","fell",-0.2);
   ag_shots(ctx,S,t,sc.dur,[
-    // the gorge, the bridge new across it, people crossing; on the banks, the families who look after it
-    {at:0,place:"wwGorge",keys:[[0,960,560,1.0],[c.who-0.2,960,460,1.12],[c.since+0.6,560,600,1.15]],d:3,draw:(x,tt,cam)=>{
-      wwq_steel(x,1);wwq_bridge(x,{age:0.05,walkers:[ww_on(tt,"m3",0.04,0.96,0.6,22),ww_on(tt,"w4",0.96,0.04,5,24)].filter(Boolean)});
-      ww_bank(x,tt,[["w1",170,900,"stand",false,{hold:wwq_coil,holds:true,expr:"smile",gaze:[1,0.1]}],["m1",470,690,"clasp",false,{expr:"neutral"}],
-        ["w2",300,800,"twist",false,{len:200}],["keeper",1700,880,"clasp",true,{expr:"neutral",gaze:[1,0.1]}],["w3",1560,740,"twist",true,{len:180}]]);}},
+    // from the river: the bridge of grass high above it, two people crossing; at its heads, along the rims, the families
+    {at:0,place:"wwGorgeR",keys:[[0,960,600,1.0],[c.where+2.6,960,520,1.14]],d:4,draw:(x,tt,cam)=>{
+      wwq_scene(x,WW_VR,{age:0.05},ww_folks(WW_VR,tt,WW_RIMR).concat([ww_walk(WW_VR,"m3",tt,ww_deck(0.03,0.97,-0.2,0.05),-3,28),ww_walk(WW_VR,"w4",tt,ww_deck(0.97,0.03,0.2,0.05),-1,31)]));}},
+    // from the bank upstream, by the bridge's head: the families who look after it, twisting cord, carrying it; someone crosses
+    {at:tU,place:"wwGorgeU",cut:true,keys:[[tU,960,540,1.0],[c.since+0.4,900,560,1.1]],d:4,draw:(x,tt,cam)=>{
+      wwq_scene(x,WW_VU,{age:0.05},ww_folks(WW_VU,tt,WW_FAMU).concat([ww_walk(WW_VU,"m5",tt,ww_deck(0.95,0.08,0.1,0.05,[[-15.6,0.4],[-17.6,2.4]]),tU-6,c.since+9)]));}},
     // sun, rain and wind, all year: the rope weakens; one man crosses, slowly
-    {at:tW,place:"wwGorgeGrey",later:true,keys:[[tW,560,600,1.15],[tW+2.4,960,500,1.05]],d:3,draw:(x,tt,cam)=>{
-      wwq_steel(x,1,null,true);wwq_bridge(x,{age:0.35,grey:true,walkers:[ww_on(tt,"m3",0.1,0.9,tW+0.4,tG+0.4)].filter(Boolean)});
-      wwq_rain(x,tt,ag_io(tt,w("wears","rain",-0.2),tG-0.3,0.6),ag_in(tt,w("wears","wind",-0.2),0.8));
-      ww_bank(x,tt,[["m1",470,690,"clasp",false,PK.face(tt,{expr:"worry",gaze:[1,-0.3]},[[tW+1.6,"look",2.4,[1,0.1]]])]]);}},
-    // five months after one renewal: a visitor finds it sagging, one handrail lower; someone crosses it all the same
-    {at:tG,place:"wwGorge",later:true,keys:[[tG,960,500,1.05],[c.holds-0.4,820,500,1.12]],d:3,draw:(x,tt,cam)=>{
-      wwq_steel(x,1);const wr=ag_io(tt,w("sag","visitor",0),c.holds+0.4,0.5);
-      wwq_bridge(x,{age:0.55,tilt:ag_in(tt,w("sag","handrail",-0.4),1.0),walkers:[ww_on(tt,"w4",0.92,0.08,c.holds-0.2,c.missed-0.6)].filter(Boolean)});
-      ww_bank(x,tt,[["v1",330,820,PK.poseMix("stand",WW_NOTE,wr),false,Object.assign({underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("ink"):null,holds:true},
-        PK.face(tt,{expr:"think",gaze:[1,0.1+0.5*wr]},[[w("sag","sagging",0),"look",2.6,[1,-0.2]],[w("holds","Wait",0),"look",2.2,[1,0]]]))]]);}},
-    // 2020: not renewed; March 2021, at twenty-one months, it falls; a keeper on the bank
-    {at:tM,place:"wwGorgeGrey",later:true,keys:[[tM,960,500,1.05],[c.fell+1.0,960,520,1.1]],d:3,draw:(x,tt,cam)=>{
-      wwq_steel(x,1,null,true);wwq_bridge(x,{age:0.9,grey:true,fall:U.sine(U.clamp((tt-tF)/1.6,0,1))});
-      ww_bank(x,tt,[["keeper",1640,820,"clasp",true,PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[tM+1.2,"look",2.6,[1,0.3]],[tF+0.3,"look",3.0,[1,0.6]],[c.fell+3.0,"nod"]])]]);}},
-    // people who cross need it renewed before it fails: each year, on a date, the families come with their cord, and a thousand weave it in three days
-    {at:tN,place:"wwGorge",later:true,keys:[[tN,960,520,1.1],[c.three+0.4,700,600,1.15]],d:3.2,draw:(x,tt,cam)=>{
-      const k=U.clamp((tt-c.custom)/(c.june-c.custom-0.6),0,1);wwq_steel(x,1);wwq_bridge(x,{age:0,k});
-      const walkIn=(who,x0,x1,t0,fl,flip)=>({fl,draw:cc=>wwq_walk(cc,who,tt,{x0,x1,t0,t1:t0+3.2,floor:fl,h:wwq_h(fl),arms:{aN:WW_CARRY.aN},then:WW_CARRY},Object.assign({flip,hold:wwq_coil,holds:true},ww_alive(tt,{expr:"smile",gaze:[1,0]},x1%5,t0+2)))});
-      const L=[walkIn("w1",-160,170,tN+0.4,900,false),walkIn("m1",-160,430,tN+1.4,700,false),walkIn("m3",2080,1600,tN+0.9,760,true),walkIn("w3",2080,1760,c.custom,890,true),walkIn("m4",-160,290,c.custom+0.8,780,false)];
-      L.push({fl:820,draw:cc=>ww_twisting(cc,"w2",400,820,tt,{len:160})},{fl:640,draw:cc=>ww_twisting(cc,"w5",1440,640,tt,{len:120,flip:true})});
-      L.sort((a,b)=>a.fl-b.fl).forEach(i=>i.draw(x));}},
-    // June 2021: woven again, with their own means; people cross it on foot
-    {at:tJ,place:"wwGorge",keys:[[tJ,700,600,1.15],[tJ+1.6,960,520,1.1],[c.lasts-0.2,960,460,1.2]],d:3,draw:(x,tt,cam)=>{
-      const bl=ag_in(tt,tJ+1.2,0.45),CS=PK.poseMix(WW_CARRY,"stand",bl),CC=PK.poseMix(WW_CARRY,"clasp",bl),cl={hold:wwq_coil,holds:true,expr:"smile"};wwq_steel(x,1);wwq_bridge(x,{age:0,walkers:[ww_on(tt,"m5",0.05,0.95,tJ+0.6,tJ+16),ww_on(tt,"w4",0.92,0.08,tJ+3,tJ+17)].filter(Boolean)});
-      ww_bank(x,tt,[["w1",170,900,CS,false,cl],["m1",430,700,CC,false,cl],["m4",290,780,CS,false,cl],
-        ["w2",400,820,"twist",false,{len:160}],["m3",1600,760,CC,true,cl],["w3",1760,890,CS,true,cl],["w5",1440,640,"twist",true,{len:120,flip:true}]]);}},
+    {at:tW,place:"wwGorgeRGrey",dis:0.9,keys:[[tW,960,560,1.04],[c.sag-1.0,960,500,1.14]],d:3,draw:(x,tt,cam)=>{
+      wwq_scene(x,WW_VR,{age:0.32,grey:true},[ww_walk(WW_VR,"m3",tt,ww_deck(0.12,0.9,0,0.32),tW-3,tW+24)]);
+      wwq_rain(x,tt,ag_io(tt,w("wears","rain",-0.2),tG-0.3,0.6),ag_in(tt,w("wears","wind",-0.2),0.8));}},
+    // five months after one renewal: a visitor finds it sagging in the middle, one handrail lower; someone crosses it all the same
+    {at:tG,place:"wwGorgeU",dis:0.9,keys:[[tG,960,540,1.0],[w("sag","sagging",-0.2),820,520,1.16]],d:3,draw:(x,tt,cam)=>{
+      const wr=ag_io(tt,w("sag","visitor",0),c.missed,0.5);
+      wwq_scene(x,WW_VU,{age:0.55,tilt:1},ww_folks(WW_VU,tt,[["v1",-18.4,1.8,PK.poseMix("stand",WW_NOTE,wr),true,{face:PK.face(tt,{expr:"think",gaze:[1,0.1+0.5*wr]},[[w("sag","sagging",0),"look",2.6,[1,-0.2]],[w("holds","Wait",0),"look",2.2,[1,0]]]),
+        opt:{underF:ww_openNote({side:-1,lines:Math.round(1+3*U.clamp((tt-w("sag","visitor",0))/6,0,1))}),hold:wr>0.3?PK.inHand.pen("ink"):null,holds:true}}]]).concat([ww_walk(WW_VU,"w4",tt,ww_deck(0.94,0.1,0,0.55,[[-15.6,-0.6],[-16.8,-2.6]]),c.holds-0.6,c.missed+2.4)]));}},
+    // 2020: not renewed; March 2021, at twenty-one months old, it falls into the river; on the rims, people who can't cross now
+    {at:tM,place:"wwGorgeRGrey",dis:0.9,keys:[[tM,960,560,1.0],[c.fell+1.2,960,620,1.04]],d:3,draw:(x,tt,cam)=>{
+      wwq_scene(x,WW_VR,{age:0.9,grey:true,fall:U.sine(U.clamp((tt-tF)/1.6,0,1))},ww_folks(WW_VR,tt,[["keeper",-14.4,-3.4,"clasp",false,{face:PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[tM+1.2,"look",2.6,[1,0.3]],[tF+0.3,"look",3.0,[1,0.6]],[c.fell+3.0,"nod"]])}],
+        ["m1",14.4,-2.8,"clasp",true,{expr:"worry"}],[4,-14.4,4.0,"stand",false,{expr:"worry"}],[5,14.4,5.2,"stand",true]]));}},
+    // so the communities don't wait for that: each year, on a date, they make the whole bridge new; about a thousand weave it in three days
+    {at:tN,place:"wwGorgeR",later:true,keys:[[tN,960,560,1.0],[c.three+0.2,960,520,1.12]],d:3.2,draw:(x,tt,cam)=>{
+      const k=U.clamp((tt-c.custom)/(c.june-c.custom-0.6),0,1);wwq_scene(x,WW_VR,{age:0,k:Math.max(0.04,k)},ww_folks(WW_VR,tt,WW_CROWD));}},
+    // June 2021: at home, a family makes its cord again (ww_home.js)
+    {at:tJ,place:"wwHome",cut:true,keys:[[tJ,960,540,1.0],[tP,930,560,1.06]],d:4,draw:(x,tt,cam)=>{wwv_family(x,tt,tJ);}},
+    // and people cross it on foot today; its rope lasts a year or two, the bridge more than five hundred years
+    {at:tP,place:"wwGorgeR",cut:true,keys:[[tP,960,500,1.16],[c.lasts+1.6,960,600,1.0]],d:4,draw:(x,tt,cam)=>{
+      wwq_scene(x,WW_VR,{age:0},ww_folks(WW_VR,tt,WW_RIMR).concat([ww_walk(WW_VR,"m5",tt,ww_deck(0.03,0.97,-0.2,0),tP-5,tP+26),ww_walk(WW_VR,"w4",tt,ww_deck(0.97,0.03,0.2,0),tP-1,tP+30)]));}},
     // a team's work is arranged too, and people stand on it every day: Marta at her desk, the requests coming in
     {at:tA,place:"wwTeam",dis:1.0,keys:[[tA,960,540,1.0],[c.shows-0.2,700,560,1.16],[c.breath,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
       const wo=ag_in(tt,c.shows,0.6)*(1-ag_in(tt,c.look+0.4,0.8));
@@ -89,7 +100,7 @@ scene("bridge",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
   ww_card(ctx,S,t,c.fell+0.2,c.need-0.6,{kick:"March 2021",title:"Twenty-one months old",col:PK.C.amber},{y:40,mid:true});
   ww_card(ctx,S,t,c.custom+0.4,c.three-0.3,{kick:"Each year",title:"On a date",col:PK.C.blue},{y:40,mid:true});
   ww_card(ctx,S,t,c.three+0.1,c.june-0.6,{kick:"About 1,000 people",title:"Three days",col:PK.C.orange},{y:40,mid:true});
-  ww_card(ctx,S,t,tJ+1.8,c.lasts-0.4,{kick:"June 2021",title:"Woven again, with their own means",col:PK.C.green},{y:40,mid:true});
+  ww_card(ctx,S,t,tJ+1.4,tP-0.3,{kick:"June 2021",title:"At home in Quehue"},{y:40,mid:true});
   ww_card(ctx,S,t,w("lasts","By its",-0.2),c.team-0.8,{kick:"The bridge, by its people's account",title:"More than 500 years"},{y:40,mid:true});
   PK.title(ctx,S,t,c.breath+0.2,"Wellbeing is in the work","Fix the work before you ask people to cope","Leading data people · People first",{side:"right",size:64});
 });
@@ -196,15 +207,13 @@ scene("order",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
 scene("keeper",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tR=c.where-0.6,tZ=w("where","in the work",-0.6),BD=PK.pace(ctx,"carmen",ww_boardD(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // 1972: the bridge left for a time, still hanging, gleaming; its keeper stops two visitors at the edge
-    {at:0,place:"wwGorge",keys:[[0,960,500,1.0],[c.dying-0.4,560,560,1.1]],d:3,draw:(x,tt,cam)=>{
-      wwq_steel(x,1);wwq_bridge(x,{age:0.45});
-      const sp=w("dying","Don't",0),L=[
-        {fl:890,draw:cc=>ww_qcome(cc,"v2",tt,-160,150,1.4,5.0,890,{face:PK.face(tt,{expr:"smile",gaze:[1,-0.1]},[[sp+0.2,"look",3,[1,0.2]],[c.knew,"nod"]])})},
-        {fl:770,draw:cc=>ww_qcome(cc,"v1",tt,-160,280,0.2,4.4,770,{face:PK.face(tt,{expr:"smile",gaze:[1,-0.1]},[[sp+0.4,"look",3,[1,0.3]],[c.knew+0.6,"smile",2]])})},
-        {fl:840,draw:cc=>{const Jk=wwq_person(cc,"keeper",450,840,wwq_h(840),"clasp",Object.assign({t:tt,flip:true},PK.face(tt,{expr:ww_says("worry",tt,sp,sp+2.6),gaze:[1,0]},[[1.6,"look",2.4,[1,0.3]],[c.knew+0.4,"nod"]])));
-          ww_bub(cc,Jk,tt,sp,c.knew+1.0,["Don't cross!","The bridge is dying."],cam,{dx:300});}}];
-      L.sort((a,b)=>a.fl-b.fl).forEach(i=>i.draw(x));}},
+    // 1972: the bridge left for a time, still hanging whole, gleaming; at its head, its keeper stops two visitors
+    {at:0,place:"wwGorgeU",keys:[[0,960,540,1.0],[c.dying-0.6,1150,590,1.26]],d:3.4,draw:(x,tt,cam)=>{
+      const sp=w("dying","Don't",0),R=wwq_scene(x,WW_VU,{age:0.36},[
+        ww_walk(WW_VU,"v1",tt,[[-20.5,0,-3.4],[-17.9,0,1.3]],0.2,4.6,{opt:PK.face(tt,{expr:"smile",gaze:[1,-0.1]},[[sp+0.4,"look",3,[1,0.3]],[c.knew+0.6,"smile",2]])}),
+        ww_walk(WW_VU,"v2",tt,[[-20.8,0,-7.4],[-18.0,0,-2.5]],0.8,5.8,{opt:PK.face(tt,{expr:"smile",gaze:[1,-0.1]},[[sp+0.2,"look",3,[1,0.2]],[c.knew,"nod"]])}),
+        wwq_folk(WW_VU,"keeper",-16.2,2.6,"clasp",{t:tt,key:"k",opt:PK.face(tt,{expr:ww_says("worry",tt,sp,sp+2.6),gaze:[1,0]},[[1.6,"look",2.4,[1,0.3]],[c.knew+0.4,"nod"]])})]);
+      ww_bub(x,R.k,tt,sp,c.knew+1.0,["Don't cross!","The bridge is dying."],cam,{dx:-260});}},
     // where to look in the work: Carmen at the team's board
     {at:tR,place:"wwTeam",dis:0.8,keys:[[tR,960,540,1.0],[tZ,1010,530,1.08]],d:2,draw:(x,tt,cam)=>{ww_lesson(x,tt,{clock:15.0,rows:BD,say:[[c.where,sc.ends.hazards]]});}},
     {at:tZ,cut:true,place:"wwBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BD,{say:[[c.where,sc.ends.where],[c.more,sc.ends.more],[c.hazards,sc.ends.hazards]]});}}
@@ -260,12 +269,11 @@ scene("ask",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),
 scene("date",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tC=w("cut","cut loose",-0.2),tJ=c.june-0.6,tW=c.week-0.6,tX=c.next-0.4,tE=c.breath+0.6,N6=PK.pace(ctx,null,ww_note6(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // at Quehue, the old bridge cut loose while it still holds, and the new one made
-    {at:0,place:"wwGorge",keys:[[0,960,520,1.1],[c.renew+0.4,820,560,1.12]],d:3,draw:(x,tt,cam)=>{
-      const f=U.sine(U.clamp((tt-tC)/1.8,0,1)),k=U.clamp((tt-c.renew)/(tJ-c.renew-0.4),0,1);wwq_steel(x,1);
-      if(f<1)wwq_bridge(x,{age:0.5,fall:f});wwq_bridge(x,{age:0,k:f<1?0:Math.max(0.05,k)});
-      ww_bank(x,tt,[["w1",170,900,"stand",false,{hold:wwq_coil,holds:true,expr:"smile"}],["m1",470,690,"clasp",false,PK.face(tt,{expr:"neutral",gaze:[1,0]},[[tC+0.2,"look",2.6,[1,0.3]],[c.renew+1,"smile",2.4]])],
-        ["w2",300,800,"twist",false,{len:200}],["keeper",1700,880,"clasp",true,PK.face(tt,{expr:"neutral",gaze:[1,0.1]},[[tC+0.4,"look",2.6,[1,0.3]],[c.renew+1.6,"nod"]])],["w3",1560,740,"twist",true,{len:180}]]);}},
+    // at Quehue, the old bridge cut loose while it still holds, once the new floor cables are across: it swings down to the river,
+    // which takes it; the new one made
+    {at:0,place:"wwGorgeR",keys:[[0,960,560,1.0],[c.renew+0.4,960,520,1.12]],d:3,draw:(x,tt,cam)=>{
+      const f=U.sine(U.clamp((tt-tC)/2.4,0,1)),k=U.clamp((tt-c.renew)/(tJ-c.renew-0.4),0,1);
+      wwq_scene(x,WW_VR,{bridges:[{age:0.5,cut:f},{age:0,k:0.3+0.7*k}]},ww_folks(WW_VR,tt,WW_RIMR));}},
     // Helena's team has its date too: Marta's twelve, each on its date
     {at:tJ,place:"wwTeam",dis:1.0,keys:[[tJ,960,540,1.0],[c.marta,760,560,1.1]],d:3,draw:(x,tt,cam)=>{
       ww_team(x,tt,{clock:15.5,show:PK.onScreen.chat(0.3,{}),sam:Object.assign({work:1},ww_alive(tt,{},1,tJ)),jun:Object.assign({work:1},ww_alive(tt,{},2,tJ)),

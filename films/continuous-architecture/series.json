@@ -1,0 +1,81 @@
+{
+  "title": "Continuous architecture",
+  "title_es": "Arquitectura continua",
+  "planned": 3,
+  "lead": "An architecture kept alive as a capability: a first draft instead of a blank page, every change checked against the map, and keeping the map someone's job, with an owner, a budget and a rhythm.",
+  "lead_es": "Una arquitectura mantenida viva como una capacidad: un primer borrador en vez de una página en blanco, cada cambio revisado contra el mapa, y mantener el mapa como el trabajo de alguien, con un responsable, un presupuesto y un ritmo.",
+  "description": "Short films on continuous architecture: a first draft from industry reference models, not a blank page; every change checked against the model; and architecture kept alive as a continuous capability.",
+  "description_es": "Películas cortas sobre arquitectura continua: un primer borrador desde modelos de referencia de la industria, no una página en blanco; cada cambio revisado contra el modelo; y la arquitectura mantenida viva como una capacidad continua.",
+  "card": "A first draft instead of a blank page, every change checked, and the map kept alive by someone whose job it is.",
+  "card_es": "Un primer borrador en vez de una página en blanco, cada cambio revisado, y el mapa mantenido vivo por alguien cuyo trabajo es ese.",
+  "order": "Watch them in order, after The map before the data and Platform and solution architecture: each film builds on the one before. AI architecture follows it.",
+  "order_es": "Míralas en orden, después de El mapa antes de los datos y Arquitectura de plataforma y de soluciones: cada película se apoya en la anterior. Le sigue Arquitectura de IA.",
+  "thread_h": "One thread: a map that stays alive",
+  "thread_h_es": "Un hilo: un mapa que sigue vivo",
+  "thread": "The utility's map has to keep up with the utility. Film by film, Tomás drafts a new service from reference models instead of a blank page, checks every change against the map, and makes keeping the map someone's job.",
+  "thread_es": "El mapa de la empresa tiene que seguirle el paso a la empresa. Película a película, Tomás redacta un nuevo servicio desde modelos de referencia en vez de una página en blanco, revisa cada cambio contra el mapa y hace que mantener el mapa sea el trabajo de alguien.",
+  "past_h": "One story, film by film: the ziggurat of Babylon",
+  "past_h_es": "Una historia, película a película: el zigurat de Babilonia",
+  "people_h": "Who keeps the map",
+  "people_h_es": "Quién mantiene el mapa",
+  "people": [
+    [
+      "tech",
+      "Draws the map",
+      "Tomás Herrera, the enterprise architect, the series' guide"
+    ],
+    [
+      "tech",
+      "Leads the platform",
+      "Ravi Menon, the platform lead"
+    ],
+    [
+      "biz",
+      "Runs the network",
+      "Grace Achieng, who owns network operations"
+    ],
+    [
+      "biz",
+      "Speaks for customers",
+      "Farah Siddiqui, the customer advocate"
+    ],
+    [
+      "biz",
+      "Knows the rules",
+      "Ama Owusu, the regulatory lead"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Tomás Herrera, el arquitecto empresarial, el guía de la serie"
+    ],
+    [
+      "tech",
+      "Lidera la plataforma",
+      "Ravi Menon, el líder de la plataforma"
+    ],
+    [
+      "biz",
+      "Hace funcionar la red",
+      "Grace Achieng, dueña de las operaciones de la red"
+    ],
+    [
+      "biz",
+      "Habla por los clientes",
+      "Farah Siddiqui, la defensora de los clientes"
+    ],
+    [
+      "biz",
+      "Conoce las reglas",
+      "Ama Owusu, la responsable regulatoria"
+    ]
+  ],
+  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} playgrounds, one for each film. Switch, step and press, and watch what happens: confirm a draft, run the map's checks, keep its rhythm.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, avanza y aprieta, y mira qué pasa: confirma un borrador, corre las comprobaciones, lleva el ritmo.",
+  "quiz_lead": "{quiz} situations an architect or a data team really faces, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrenta un arquitecto o un equipo de datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
+}

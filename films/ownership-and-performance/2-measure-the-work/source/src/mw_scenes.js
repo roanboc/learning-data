@@ -373,7 +373,7 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
     // the university, December: a reading, and the team smiles at what it fixed
     {at:tH,place:"mwTeam",dis:1.0,keys:[[tH,960,540,1.0],[tH+0.4,1010,530,1.08]],d:3,draw:(x,tt,cam)=>{
       const wr=ag_in(tt,tK-1.6,0.6);
-      mw_lesson(x,tt,{clock:10.0,who:"helena",rows:BB.map(r=>Object.assign({},r,{at:-60})),rest:1212,events:[[tH+0.8,"smile",4.0]],
+      mw_lesson(x,tt,{clock:10.0,who:"helena",rows:BB.map(r=>r.drawn?r:Object.assign({},r,{at:-60})),rest:1212,events:[[tH+0.8,"smile",4.0]],
         ivy:PK.face(tt,{expr:"smile",gaze:[1,-0.3]},[[tH+1.6,"glad",2.4]]),sam:PK.face(tt,{expr:"smile",gaze:[1,-0.25]},[[tH+1.2,"glad",2.8]]),jun:PK.face(tt,{expr:"smile",gaze:[1,-0.2]},[[tH+2.0,"nod"]])});}},
     // what to keep, on Monday: the four things, in her notebook
     {at:tK,place:"mwNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N4,{});}},

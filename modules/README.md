@@ -221,6 +221,8 @@ Source: [films/business-architecture-for-data](../films/business-architecture-fo
 - [Processes, as deep as data needs](../films/business-architecture-for-data/4-processes-as-deep-as-data-needs/) — `processes-as-deep-as-data-needs`
 - [Rules and expectations the business owns](../films/business-architecture-for-data/5-rules-and-expectations-the-business-owns/) — `rules-and-expectations-the-business-owns`
 
+Labs and assessments: [site/assets/business-architecture-for-data/learn.en.js](../site/assets/business-architecture-for-data/learn.en.js), [site/assets/business-architecture-for-data/learn.es.js](../site/assets/business-architecture-for-data/learn.es.js)
+
 ### Data architecture
 
 Source: [films/data-architecture](../films/data-architecture/) · Portal: `/data-architecture/`

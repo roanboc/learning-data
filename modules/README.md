@@ -502,6 +502,8 @@ Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/)
 - [One map, in the repo](../films/architecture-that-keeps-up/2-one-map-in-the-repo/) — `one-map`
 - [A path for every provider](../films/architecture-that-keeps-up/3-a-path-for-every-provider/) — `a-path-for-every-provider`
 
+Labs and assessments: [site/assets/architecture-that-keeps-up/learn.en.js](../site/assets/architecture-that-keeps-up/learn.en.js), [site/assets/architecture-that-keeps-up/learn.es.js](../site/assets/architecture-that-keeps-up/learn.es.js)
+
 ### Small steps, measured
 
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`

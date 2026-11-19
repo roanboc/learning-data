@@ -447,6 +447,8 @@ Source: [films/ownership-and-performance](../films/ownership-and-performance/) �
 - [When someone falls behind](../films/ownership-and-performance/3-when-someone-falls-behind/) — `when-someone-falls-behind`
 - [Growing people](../films/ownership-and-performance/4-growing-people/) — `growing-people`
 
+Labs and assessments: [site/assets/ownership-and-performance/learn.en.js](../site/assets/ownership-and-performance/learn.en.js), [site/assets/ownership-and-performance/learn.es.js](../site/assets/ownership-and-performance/learn.es.js)
+
 ## Data management
 
 Module: `data-management` · [metadata](data-management/module.json)

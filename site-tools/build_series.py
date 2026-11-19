@@ -3,8 +3,9 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Thirty-two series are built this way:
-From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
+The site is organised in big topics (TOPICS below), each holding films and series. Thirty-three series are built this way:
+From words to data (films/from-words-to-data/, on the site at from-words-to-data/), Model the business (films/model-the-business/,
+at model-the-business/, whose second film, A Sharper Sketch, keeps its own hand-written pages: "outside" below), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), the five series that follow it in the topic Enterprise architecture, each the next of the one before:
 Business architecture for data (films/business-architecture-for-data/, at business-architecture-for-data/, which holds what the
@@ -98,6 +99,10 @@ def series_link(lg, RE, sid):
 # single: True for a film that stands alone, such as More than a platform, which follows the introduction: its folder is a series'
 # (films/<dir>/1-<film>/, with a series.json), but the site shows no series page: the film's page is where the series' page would
 # be (site/<slug>/), its cards and crumbs say nothing of a series, and a block with "next" is its card on the home pages, a row.
+# A series can also count among its films one whose pages are written by hand (HAND below), such as A Sharper Sketch, film 2 of
+# Model the business: "outside" in its series.json, {its number: its id in HAND}. It keeps its pages, player, labs and progress; the
+# series' pages, its film before and the topics show it among the series' films (outside()), and the topics no longer show it alone.
+# A block with "prev" is the card of the film before it, on its page.
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
@@ -113,6 +118,11 @@ SERIES = [
          place={"en": "university", "es": "universidad"},
          learn=dict(dir="from-words-to-data", bundle="keeping-it-true"),
          blocks=[("sketch/index.html", "en", "card", "../", "../from-words-to-data/"), ("es/sketch/index.html", "es", "card", "../../", "../from-words-to-data/")]),
+    dict(id="model-the-business", dir="model-the-business", slug="model-the-business",
+         name={"en": "Model the business", "es": "Modelar el negocio"},
+         place={"en": "university", "es": "universidad"}, project="analytics-engineering", built="in-the-weeds",
+         learn=dict(dir="model-the-business", bundle="the-map-behind-the-sketch"),
+         blocks=[("sketch/index.html", "en", "prev", "../", "../model-the-business/"), ("es/sketch/index.html", "es", "prev", "../../", "../model-the-business/")]),
     dict(id="in-the-weeds", dir="analytics-engineering", slug="in-the-weeds",
          name={"en": "In the weeds of data crafting", "es": "En las entrañas del oficio de datos"},
          place={"en": "university", "es": "universidad"}, blocks=[],
@@ -445,6 +455,7 @@ HAND = {
     "sketch": dict(href="sketch/", source="films/a-sharper-sketch", learning=["site/assets/sketch/sketch.js"],
                    title={"en": "A Sharper Sketch", "es": "A Sharper Sketch"}, title_lang="en",
                    poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "5½", "es": "5½"}, labs=6, quiz=12, prefix="ld3",
+                   kicker={"en": "Reference models", "es": "Modelos de referencia"},
                    card={"en": "Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?",
                          "es": "Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?"},
                    note={"en": "", "es": "En inglés"}),
@@ -456,6 +467,36 @@ HAND = {
                    films=[("silent-change", "ld-silent-change", "when-things-go-wrong/1-silent-change"),
                           ("too-good-to-be-true", "ld-too-good-to-be-true", "when-things-go-wrong/2-too-good-to-be-true")], labs=True),
 }
+
+
+def outside(S):
+    """The films of a series whose pages are written by hand ("outside" in its series.json, {its number: its id in HAND}), such as
+    A Sharper Sketch, film 2 of Model the business: [(number, id, its HAND entry, its length in seconds)], in order."""
+    out = []
+    for n, i in sorted(series_data(S).get("outside", {}).items(), key=lambda x: int(x[0])):
+        if i not in HAND or "films" in HAND[i]:
+            sys.exit(f"films/{S['dir']}/series.json: \"outside\" names {i!r}, which isn't a film in HAND")
+        out.append((int(n), i, HAND[i], length(ROOT / HAND[i]["source"] / "source")))
+    return out
+
+
+def outside_ids():
+    """The films in HAND that a series counts among its own (outside()): the topics show them in the series, not alone."""
+    return {i for S in SERIES for _, i, _, _ in outside(S)}
+
+
+def outside_card(lg, S, n, h, R, kicker=None):
+    """The card of a series' film whose page is written by hand (outside()), as card() draws a film's: its number and topic, unless
+    kicker says otherwise. R: the way from the page to the site's root."""
+    kicker = kicker or f'{num(lg, dict(index=n - 1, series=S))} · {h["kicker"][lg]}'
+    lang = ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
+    meta = f'{h["len"][lg]} min · {h["labs"]} labs · {h["quiz"]} {T(lg, "scenarios", "situaciones")} · {SN(lg, S)}' + T(lg, "", " · En inglés")
+    return (f'<article class="topic-card">\n<img src="{R}assets/{h["poster"][lg]}" alt="" width="1280" height="720" loading="lazy">\n<div class="tc-body">\n'
+            f'<p class="kicker">{E(kicker)}</p>\n<h3{lang}><a href="{R if lg == "en" else R[3:]}{h["href"]}">{E(h["title"][lg])}</a></h3>\n'
+            f'<p>{E(h["card"][lg])}</p>\n<p class="meta">{meta}</p>\n'
+            f'<p class="tc-progress" data-progress="{h["prefix"]}" data-labs="{h["labs"]}" data-quiz="{h["quiz"]}" hidden></p>\n</div>\n</article>')
+
+
 # The big topics, in order: their names, who each is for, what it covers, and what it holds (an id of HAND or SERIES). The Topics
 # page shows them all, each with its cards, as a route and as a list; the home page plays the first and leads to the route.
 from catalog import load_modules
@@ -498,15 +539,17 @@ def entry(lg, item_id):
                     progress=("film", f["prefix"], None, None))
     if S is not None:
         series, films_ = films(S)
-        n, planned = sum(x["index"] >= 0 for x in films_), series.get("planned", len(series["films"]))  # a prologue isn't one of the films
+        out = outside(S)  # its films whose pages are written by hand count too
+        n, planned = sum(x["index"] >= 0 for x in films_) + len(out), series.get("planned", len(series["films"]))  # a prologue isn't one of the films
         many = (T(lg, f"{n} of {planned} films", f"{n} de {planned} películas") if planned > n else
                 T(lg, "1 film", "1 película") if n == 1 else T(lg, f"{n} films", f"{n} películas")) + \
             (T(lg, " and a prologue", " y un prólogo") if any(x["index"] < 0 for x in films_) else "")
         extra = T(lg, "labs and scenarios", "labs y situaciones") if any(x["labs"] for x in films_) or series_learn(S) else T(lg, "Pause and think", "Pausa para pensar")
-        return dict(kind="series", href=S["slug"] + "/", title=SN(lg, S), title_lang=None, posters=[f'{x["key"]}-poster.jpg' for x in films_],
+        by = sorted([(x["index"] + 1, f'{x["key"]}-poster.jpg', x["prefix"]) for x in films_] + [(k, h["poster"][lg], h["prefix"]) for k, _, h, _ in out])
+        return dict(kind="series", href=S["slug"] + "/", title=SN(lg, S), title_lang=None, posters=[p for _, p, _ in by],
                     card=series[T(lg, "card", "card_es")], kicker=T(lg, "Series · ", "Serie · ") + many,
-                    meta=f'{round(sum(x["sec"] for x in films_) / 60)} min · {extra}' + T(lg, "", " · Inglés y español" if any(spanish_audio(x) for x in films_) else " · En inglés"),
-                    progress=("series", [x["prefix"] for x in films_]))
+                    meta=f'{round((sum(x["sec"] for x in films_) + sum(sec for _, _, _, sec in out)) / 60)} min · {extra}' + T(lg, "", " · Inglés y español" if any(spanish_audio(x) for x in films_) else " · En inglés"),
+                    progress=("series", [x for _, _, x in by]))
     h = HAND[item_id]
     if "films" in h:
         secs = [length(ROOT / "films" / d / "source") for _, _, d in h["films"]]
@@ -750,11 +793,16 @@ def series_nav(lg, f, films_, R, rel):
     rel is the path from the page to the series folder."""
     by = {x["index"]: x for x in films_}; prv, nxt = by.get(f["index"] - 1), by.get(f["index"] + 1)
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
-    after = None if nxt else next_series(f)  # the last film: the next series' first film
+    hand = {n - 1: h for n, _, h, _ in outside(f["series"])}  # its films whose pages are written by hand
+    hn = None if nxt else hand.get(f["index"] + 1)
+    after = None if nxt or hn else next_series(f)  # the last film: the next series' first film
     cards = ([card(lg, prv, rel, R, kicker=f'← {T(lg, "Previous", "Anterior")} · {num(lg, prv)}')] if prv else []) + \
             ([card(lg, nxt, rel, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, nxt)} →')] if nxt else []) + \
+            ([outside_card(lg, f["series"], f["index"] + 2, hn, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, dict(index=f["index"] + 1, series=f["series"]))} →')] if hn else []) + \
             ([card(lg, after[1][0], f'{R if lg == "en" else R[3:]}{after[0]["slug"]}/', R, kicker=f'{T(lg, "Next series", "Siguiente serie")} · {SN(lg, after[0])} →')] if after else [])
-    lis = "\n".join(f'<li><a href="{rel}{x["key"]}/"' + (' aria-current="page"' if x is f else "") + f'><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>' for x in films_)
+    lang = lambda h: ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
+    lis = "\n".join(li for _, li in sorted([(x["index"], f'<li><a href="{rel}{x["key"]}/"' + (' aria-current="page"' if x is f else "") + f'><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>') for x in films_]
+                           + [(i, f'<li><a href="{R if lg == "en" else R[3:]}{h["href"]}"><span class="n">{i + 1}</span><span{lang(h)}>{E(h["title"][lg])}</span></a></li>') for i, h in hand.items()]))
     return (f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "In the series", "En la serie")}: <a href="{rel}">{SN(lg, f["series"])}</a></h2>'
             f'<p>{num(lg, f)}.</p></div></div>\n'
             f'<div class="topic-grid series-pn" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(cards) + '\n</div>\n'
@@ -824,8 +872,10 @@ def film_page(lg, f, films_, series):
     es_audio = lg == "es" and spanish_audio(f)
     ntw = NUM[lg][f["think"] - 1] if think else ""  # how many Pause and think questions, in words
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
-    after = None if nxt else next_series(f)  # the last film: the series to watch next, once it's on the site
+    hn = None if nxt else next((h for n, _, h, _ in outside(S) if n == f["index"] + 2), None)  # the next film, if its page is written by hand
+    after = None if nxt or hn else next_series(f)  # the last film: the series to watch next, once it's on the site
     third = (f'<a class="btn" href="../{nxt["key"]}/">{T(lg, "Next in the series", "Sigue en la serie")}: {nm(nxt)}</a>' if nxt else
+             f'<a class="btn" href="{R if lg == "en" else R[3:]}{hn["href"]}">{T(lg, "Next in the series", "Sigue en la serie")}: {E(hn["title"][lg])}</a>' if hn else
              f'<a class="btn" href="{R if lg == "en" else R[3:]}{after[0]["slug"]}/">{T(lg, "Next series", "Siguiente serie")}: {SN(lg, after[0])}</a>' if after else
              f'<a class="btn primary" href="{R if lg == "en" else R[3:]}topics/">{HOME_TEXT[lg][0]}</a>' if alone else
              f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {SN(lg, S)}</a>')
@@ -908,18 +958,22 @@ def series_page(lg, series, films_, S=FW):
     SL = series_learn(S)  # labs and scenarios of its own, for all its films
     learn = any(x["labs"] for x in films_) or bool(SL)
     h, R = head(lg, path, title, series[T(lg, "description", "description_es")], series[T(lg, "lead", "lead_es")], img)
-    posters = [f'<img src="{R}assets/{x["key"]}-poster.jpg" alt="">' for x in films_] * (8 if len(films_) < 4 else 2)
+    out = outside(S)  # its films whose pages are written by hand, among the others by number
+    pics = [p for _, p in sorted([(x["index"], f'{x["key"]}-poster.jpg') for x in films_] + [(n - 1, h["poster"][lg]) for n, _, h, _ in out])]
+    posters = [f'<img src="{R}assets/{p}" alt="">' for p in pics] * (8 if len(pics) < 4 else 2)
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">' + "".join(posters[:8]) + '</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S)}\n'
             f'<h1>{SN(lg, S)}</h1>\n<p class="lead">{E(series[T(lg, "lead", "lead_es")])}</p>\n{draft_note(lg, series.get("draft"))}</section>\n'
             + (series_course(lg, S, SL, series, films_, 0) + "\n" if SL else "") + '\n'
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{T(lg, "The films", "Las películas")}</h2><p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n'
-            f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(card(lg, x, "", R) for x in films_) + '\n</div>\n</section>\n\n')
+            f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n'
+            + "\n".join(c for _, c in sorted([(x["index"], card(lg, x, "", R)) for x in films_] + [(n - 1, outside_card(lg, S, n, h, R)) for n, _, h, _ in out]))
+            + '\n</div>\n</section>\n\n')
     if SL:
         nl, nq = SL["labs"], SL["quiz"]
         body += (f'<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">\n<div class="mhead"><div><h2 id="learn-h">{T(lg, "Take it apart, then make the call", "Desarma, y luego tú decides")}</h2><p>'
                  + E(learn_text(lg, S, series, "learn_p")) + T(lg, " Your progress stays in this browser.", " Tu avance queda en este navegador.")
-                 + f'</p></div></div>\n<p class="stop-nav"><a class="btn primary" href="labs/">{T(lg, "Take it apart", "Desarma")}: {nl} {T(lg, "hands-on labs", "labs interactivos")} →</a>'
+                 + f'</p></div></div>\n<p class="stop-nav"><a class="btn primary" href="labs/">{T(lg, "Take it apart", "Desarma")}: {nl} {T(lg, "hands-on lab" + "s" * (nl != 1), "lab interactivo" if nl == 1 else "labs interactivos")} →</a>'
                  f'<a class="btn" href="scenarios/">{T(lg, "Make the call", "Tú decides")}: {nq} {T(lg, "situations", "situaciones")}</a></p>\n</section>\n\n')
     if "coming" in series:
         out = {x["index"] + 1 for x in films_}  # a film that is out leaves the list by itself
@@ -968,8 +1022,9 @@ def film_learn_section(lg, f, SL):
     mine = (T(lg, f"This film's lab{'s' if many else ''}" + ((", and its situations," if nq > 1 else ", and its situation,") if nq else ","),
               f"{'Los labs' if many else 'El lab'} de esta película" + ((", y sus situaciones," if nq > 1 else ", y su situación,") if nq else ","))
             if labs else T(lg, "This film's situations," if nq > 1 else "This film's situation,", "Las situaciones de esta película," if nq > 1 else "La situación de esta película,"))
-    p = mine + T(lg, f" among the series' {SL['labs']} labs and {SL['quiz']} situations. Your progress stays in this browser.",
-                 f" entre los {SL['labs']} labs y las {SL['quiz']} situaciones de la serie. Tu avance queda en este navegador.")
+    nl = SL["labs"]  # a series with one film made so far has one lab
+    p = mine + T(lg, f" among the series' {nl} lab{'s' * (nl != 1)} and {SL['quiz']} situations. Your progress stays in this browser.",
+                 f" entre {'el único lab' if nl == 1 else f'los {nl} labs'} y las {SL['quiz']} situaciones de la serie. Tu avance queda en este navegador.")
     return (f'<section class="module" id="take-it-apart" aria-labelledby="take-h">\n<div class="mhead"><div><h2 id="take-h">{T(lg, "Take it apart, then make the call", "Desarma, y luego tú decides")}</h2><p>{p}</p></div></div>\n'
             f'<p class="stop-nav">{film_learn(lg, f, SL)}<a class="btn" href="../labs/">{T(lg, "Every lab", "Todos los labs")}</a></p>\n</section>\n\n')
 
@@ -993,19 +1048,20 @@ def learn_films(lg, S, series, films_):
 def series_course(lg, S, SL, series, films_, step):
     """The course bar of a series with its own labs and scenarios: its films (how many were watched: data-series names their
     progress prefixes), its labs and its scenarios. step: 0 on the series' page, 1 on its labs page, 2 on its scenarios page."""
-    n, planned, nl, nq = len(films_), series.get("planned", len(series["films"])), SL["labs"], SL["quiz"]
+    hand = [h["prefix"] for _, _, h, _ in outside(S)]  # its films whose pages are written by hand
+    n, planned, nl, nq = len(films_) + len(hand), series.get("planned", len(series["films"])), SL["labs"], SL["quiz"]
     w = lambda k: say_n(lg, k)
     up = "" if step == 0 else "../"
-    txt = (json.dumps({"watched": "Watched", "films": "{n} of %d films watched" % n, "labs": "{n} of %d labs explored" % nl, "quiz": "{n} of %d answered · {ok} right" % nq}) if lg == "en" else
-           json.dumps({"watched": "Vista", "films": "{n} de %d películas vistas" % n, "labs": "{n} de %d labs explorados" % nl, "quiz": "{n} de %d respondidas · {ok} correctas" % nq}, ensure_ascii=False))
+    txt = (json.dumps({"watched": "Watched", "films": "{n} of %d films watched" % n, "labs": "{n} of %d lab%s explored" % (nl, "s" * (nl != 1)), "quiz": "{n} of %d answered · {ok} right" % nq}) if lg == "en" else
+           json.dumps({"watched": "Vista", "films": "{n} de %d películas vistas" % n, "labs": "{n} de %d %s" % (nl, "lab explorado" if nl == 1 else "labs explorados"), "quiz": "{n} de %d respondidas · {ok} correctas" % nq}, ensure_ascii=False))
     made = (T(lg, "One film", "Una película") if n == 1 else T(lg, f"{w(n).capitalize()} films", f"{w(n).capitalize()} películas")) + \
         (T(lg, f", {w(planned - n)} coming", f", {w(planned - n)} en camino") if planned > n else "")
-    steps = ([("#films", "The films", made), ("labs/", "Take it apart", f"{w(nl).capitalize()} hands-on labs"), ("scenarios/", "Make the call", f"{nq} real situations")] if lg == "en" else
-             [("#films", "Las películas", made), ("labs/", "Desarma", f"{w(nl).capitalize()} labs interactivos"), ("scenarios/", "Tú decides", f"{nq} situaciones reales")])
+    steps = ([("#films", "The films", made), ("labs/", "Take it apart", "One hands-on lab" if nl == 1 else f"{w(nl).capitalize()} hands-on labs"), ("scenarios/", "Make the call", f"{nq} real situations")] if lg == "en" else
+             [("#films", "Las películas", made), ("labs/", "Desarma", "Un lab interactivo" if nl == 1 else f"{w(nl).capitalize()} labs interactivos"), ("scenarios/", "Tú decides", f"{nq} situaciones reales")])
     here = lambda i: ' aria-current="step"' if i == step else ""
     lis = "\n".join(f'<li><a href="{up}{h}"{here(i)}><span class="n"><b>{i + 1}</b></span><b>{a}</b><span>{b}</span></a></li>' for i, (h, a, b) in enumerate(steps))
     return (f'<nav class="course" aria-label="{T(lg, "Course", "Curso")}: {E(SN(lg, S))}"><div class="course-in"><p class="course-t"><small>{T(lg, "Series", "Serie")} · {E(topic_of(S["id"])["name"][lg])}</small>{E(SN(lg, S))}</p>'
-            f'<ol class="path" data-store="{SL["prefix"]}" data-labs="{nl}" data-quiz="{nq}" data-series="{" ".join(x["prefix"] for x in films_)}" data-text=\'{txt}\'>\n{lis}\n</ol></div></nav>')
+            f'<ol class="path" data-store="{SL["prefix"]}" data-labs="{nl}" data-quiz="{nq}" data-series="{" ".join([x["prefix"] for x in films_] + hand)}" data-text=\'{txt}\'>\n{lis}\n</ol></div></nav>')
 
 
 def series_learn_page(lg, S, series, films_, which):
@@ -1030,7 +1086,9 @@ def series_learn_page(lg, S, series, films_, which):
                    f"{nq} situaciones de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata.") + '</p></div></section>\n')
     else:
         nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
-        lis = "\n".join(f'<li><a href="../{x["key"]}/"><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>' for x in films_)
+        lang = lambda h: ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
+        lis = "\n".join(li for _, li in sorted([(x["index"], f'<li><a href="../{x["key"]}/"><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>') for x in films_]
+                                               + [(n - 1, f'<li><a href="{R if lg == "en" else R[3:]}{h["href"]}"><span class="n">{n}</span><span{lang(h)}>{E(h["title"][lg])}</span></a></li>') for n, _, h, _ in outside(S)]))
         mid = (f'<section aria-labelledby="scenarios-h" class="section-gap">\n<h2 class="sr" id="scenarios-h">{T(lg, "Scenarios", "Situaciones")}</h2>\n'
                f'<div id="series-quiz" {app}><noscript><p class="noscript">{T(lg, "The scenarios need JavaScript.", "Las situaciones necesitan JavaScript.")}</p></noscript></div>\n</section>\n\n'
                f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "The films", "Las películas")}: <a href="../">{SN(lg, S)}</a></h2>'
@@ -2816,6 +2874,9 @@ def search_index(lg):
                     out_f.append(dict(t=site.get("title_es", f["title"]) if lg == "es" else f["title"], s=e["title"], m=tn, u=f["path"],
                                       p=f'{f["key"]}-poster.jpg', x=f'{site[T(lg, "kicker", "kicker_es")]}. {site[T(lg, "lead", "lead_es")]}',
                                       c=cues(S["root"] / f["dir"] / "captions" / f"{lg}.vtt")))
+                for _, _, h, _ in outside(S):  # its films whose pages are written by hand
+                    out_f.append(dict(t=h["title"][lg], s=e["title"], m=tn, u=h["href"], p=h["poster"][lg], x=h["card"][lg],
+                                      c=cues(ROOT / h["source"] / "captions" / f"{lg}.vtt")))
                 continue
             h = HAND[i]
             if "films" in h:
@@ -2855,10 +2916,14 @@ HOME = [("index.html", "en", ""), ("es/index.html", "es", "../"), ("scenarios/in
 TILE_MARKS = ('<!-- topics: made by site-tools/build_series.py -->', '<!-- /topics -->')
 
 
-def block(lg, what, R, rel, films_, S=FW):
-    """A series' card on a hand-written page: its first film, with a kicker that names the series."""
+def block(lg, what, R, rel, films_, S=FW, page=""):
+    """A series' card on a hand-written page (page, under site/): its first film, with a kicker that names the series."""
     if not films_:
         return ""
+    if what == "prev":  # on the page of a series' film written by hand (outside()): the film before it
+        n = next(k for k, _, h, _ in outside(S) if page.removeprefix("es/") == h["href"] + "index.html")
+        prv = next((x for x in films_ if x["index"] == n - 2), None)
+        return card(lg, prv, rel, R, kicker=f'← {T(lg, "Previous", "Anterior")} · {num(lg, prv)}') + "\n" if prv else ""
     if what == "next":  # the home page's card for the film to watch after the introduction: a row, as on the Topics page
         return (f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\'>\n' + topic_card(lg, entry(lg, S["id"]), R if lg == "en" else R[3:], R) + '\n</div>\n')
     n = len(series_data(S)["films"])
@@ -2877,7 +2942,7 @@ def blocks():
     for S in SERIES:
         films_ = films(S)[1]; o, c = marks(S)
         for rel_path, lg, what, R, rel in S["blocks"]:
-            fill(rel_path, o, c, block(lg, what, R, rel, films_, S))
+            fill(rel_path, o, c, block(lg, what, R, rel, films_, S, rel_path))
     for rel_path, lg, R in TILES:
         fill(rel_path, *TILE_MARKS, tiles(lg, R))
     for rel_path, lg, R in HOME:
@@ -2898,9 +2963,13 @@ def readme(S=FW):
         rows.append(f"| [{f['title']}]({BASE}{f['path']}) | {f['site']['kicker']} | {f['len']} min | {len(f['chapters'])} | "
                     + (f"{f['labs']} labs, {f['quiz']} scenarios" if learn else f"{f['think']} questions" if f['think'] else "none")
                     + f" | [script]({f['dir']}/script.md) · [source]({f['dir']}/source/README.md) |")
+    for n, _, h, sec in outside(S):  # its films whose pages are written by hand, in their own folders
+        up = posixpath.relpath(h["source"], f"films/{S['dir']}")
+        rows.insert(1 + n, f"| [{h['title']['en']}]({BASE}{h['href']}) | {h['kicker']['en']} | {minutes(sec)} min | {len(timing(ROOT / h['source'] / 'source')[0])} | "
+                           + f"its own {h['labs']} labs and {h['quiz']} scenarios" + f" | [script]({up}/script.md) · [source]({up}/source/README.md) |")
     SL = series_learn(S)
     if SL:  # the series' own, for all its films
-        rows += ["", f"For the whole series, on the site: [{SL['labs']} labs]({BASE}{S['slug']}/labs/) and [{SL['quiz']} scenarios]({BASE}{S['slug']}/scenarios/), "
+        rows += ["", f"For the whole series, on the site: [{SL['labs']} lab{'s' if SL['labs'] != 1 else ''}]({BASE}{S['slug']}/labs/) and [{SL['quiz']} scenarios]({BASE}{S['slug']}/scenarios/), "
                      f"in English and Spanish, from the words in [site/assets/{SL['dir']}/](../../site/assets/{SL['dir']}/)."]
     i, j = src.index(o), src.index(c)
     return src[:i + len(o)] + "\n" + "\n".join(rows) + "\n" + src[j:]

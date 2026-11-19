@@ -293,18 +293,18 @@ window.LD_ROUTE = {
    "line": "Lo que significan las cifras, y las formas que las contienen: primero las palabras y las definiciones, luego los modelos, antes que cualquier sistema.",
    "items": [
     {
-     "id": "sketch",
-     "kind": "film",
-     "title": "A Sharper Sketch",
-     "href": "sketch/",
-     "poster": "sketch-poster.jpg",
-     "kicker": "Una película",
-     "len": "5½ min",
-     "min": 5.5,
+     "id": "model-the-business",
+     "kind": "series",
+     "title": "Modelar el negocio",
+     "href": "model-the-business/",
+     "poster": "the-map-behind-the-sketch-poster.jpg",
+     "kicker": "Serie · 2 películas",
+     "len": "12 min",
+     "min": 12.0,
      "films": [
+      "ld-the-map-behind-the-sketch",
       "ld3"
-     ],
-     "lang": "en"
+     ]
     },
     {
      "id": "from-words-to-data",
@@ -325,7 +325,8 @@ window.LD_ROUTE = {
       "ld-keeping-it-true"
      ]
     }
-   ]
+   ],
+   "proj": 1
   },
   {
    "id": "modern-data-basics",
@@ -821,7 +822,7 @@ window.LD_ROUTE = {
    "stops": [
     "intro",
     "more-than-a-platform",
-    "sketch",
+    "model-the-business",
     "data-that-moves",
     "when-things-go-wrong"
    ]

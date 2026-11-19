@@ -26,13 +26,14 @@ Source: [films/more-than-a-platform](../films/more-than-a-platform/) · Portal: 
 
 Module: `data-modelling` · [metadata](data-modelling/module.json)
 
-### A Sharper Sketch
+### Model the business
 
-Source: [films/a-sharper-sketch](../films/a-sharper-sketch/) · Portal: `/sketch/`
+Source: [films/model-the-business](../films/model-the-business/) · Portal: `/model-the-business/`
 
+- [The map behind the sketch](../films/model-the-business/1-the-map-behind-the-sketch/) — `the-map-behind-the-sketch`
 - [A Sharper Sketch](../films/a-sharper-sketch/) — `a-sharper-sketch`
 
-Labs and assessments: [site/assets/sketch/sketch.js](../site/assets/sketch/sketch.js)
+Labs and assessments: [site/assets/model-the-business/learn.en.js](../site/assets/model-the-business/learn.en.js), [site/assets/model-the-business/learn.es.js](../site/assets/model-the-business/learn.es.js)
 
 ### From words to data
 

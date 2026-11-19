@@ -1,0 +1,5 @@
+# Runs the series' captions.py (films/model-the-business/shared/tools/run.py: its own, or From words to data's) on this film. Run it from this film's source folder.
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[3] / 'shared' / 'tools'))
+import run
+run.tool('captions.py')

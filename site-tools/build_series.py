@@ -222,7 +222,8 @@ SERIES = [
          name={"en": "More than a platform", "es": "Más que una plataforma"},
          place={"en": "university", "es": "universidad"},
          blocks=[("index.html", "en", "next", "", "more-than-a-platform/"), ("es/index.html", "es", "next", "../", "more-than-a-platform/"),
-                 ("scenarios/index.html", "en", "next", "../", "more-than-a-platform/"), ("es/scenarios/index.html", "es", "next", "../../", "more-than-a-platform/")]),
+                 ("scenarios/index.html", "en", "next", "../", "more-than-a-platform/"), ("es/scenarios/index.html", "es", "next", "../../", "more-than-a-platform/")],
+         learn=dict(dir="more-than-a-platform", bundle="more-than-a-platform")),
     dict(id="locks-before-the-data", dir="locks-before-the-data", slug="locks-before-the-data",
          name={"en": "Locks before the data", "es": "Cerraduras antes que los datos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
@@ -881,7 +882,7 @@ def film_page(lg, f, films_, series):
              f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {SN(lg, S)}</a>')
     think_btn = "" if not think else T(lg, f'<button id="think" aria-pressed="true" title="Stop at the end of {ntw} chapters, with one question each">Pause and think</button>',
                                          f'<button id="think" aria-pressed="true" title="Detenerse al final de {ntw} capítulos, con una pregunta cada vez">Pausa para pensar</button>')
-    player = (f'<div class="player" data-labs="{"labs/" if learn else "../labs/" if SL else ""}">\n<audio id="snd" preload="metadata" src="{R}assets/{key}/soundtrack{".es" if es_audio else ""}.mp3"></audio><div class="poster"><img src="{R}assets/{key}-poster.jpg" alt="" width="1280" height="720" data-play>'
+    player = (f'<div class="player" data-labs="{"labs/" if learn or SL and alone else "../labs/" if SL else ""}">\n<audio id="snd" preload="metadata" src="{R}assets/{key}/soundtrack{".es" if es_audio else ""}.mp3"></audio><div class="poster"><img src="{R}assets/{key}-poster.jpg" alt="" width="1280" height="720" data-play>'
               f'<div class="poster-cta"><button type="button" class="play-badge" data-play>{T(lg, "▶ Play the film", "▶ Ver la película")} · {f["len"]} min</button></div></div>'
               f'<canvas id="film" width="1280" height="720" aria-label="{T(lg, "Animated film", "Película animada" if es_audio else "Película animada, en inglés")}: {E(f["title"])}"></canvas>\n'
               + (f'<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span>{think_btn}<button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>' if lg == "en" else
@@ -1005,10 +1006,11 @@ def film_learn(lg, f, SL, panel=False):
     """A film's own lab (or labs) and its situations, among its series' labs and scenarios, as buttons; the "Where next?"
     panel (panel) offers only the first lab."""
     labs, nq = film_mine(lg, f, SL)
-    out = [f'<a class="btn{" primary" if i == 0 else ""}" href="../labs/#{x["id"]}">{T(lg, "Take it apart", "Desarma")}: {E(x["name"])}{" →" if i == 0 else ""}</a>'
+    up = "" if f["series"].get("single") else "../"  # a film that stands alone has its series' labs and scenarios under its own page
+    out = [f'<a class="btn{" primary" if i == 0 else ""}" href="{up}labs/#{x["id"]}">{T(lg, "Take it apart", "Desarma")}: {E(x["name"])}{" →" if i == 0 else ""}</a>'
            for i, x in enumerate(labs[:1] if panel else labs)]
     if nq:
-        out.append(f'<a class="btn" href="../scenarios/#film-{f["index"] + 1}">{T(lg, "Make the call", "Tú decides")}: {nq} '
+        out.append(f'<a class="btn" href="{up}scenarios/#film-{f["index"] + 1}">{T(lg, "Make the call", "Tú decides")}: {nq} '
                    + T(lg, "situations" if nq > 1 else "situation", "situaciones" if nq > 1 else "situación") + '</a>')
     return "".join(out)
 
@@ -1022,11 +1024,14 @@ def film_learn_section(lg, f, SL):
     mine = (T(lg, f"This film's lab{'s' if many else ''}" + ((", and its situations," if nq > 1 else ", and its situation,") if nq else ","),
               f"{'Los labs' if many else 'El lab'} de esta película" + ((", y sus situaciones," if nq > 1 else ", y su situación,") if nq else ","))
             if labs else T(lg, "This film's situations," if nq > 1 else "This film's situation,", "Las situaciones de esta película," if nq > 1 else "La situación de esta película,"))
+    alone = f["series"].get("single")  # a film that stands alone: its labs and situations are the series' own, and "Every lab" says nothing more
     nl = SL["labs"]  # a series with one film made so far has one lab
-    p = mine + T(lg, f" among the series' {nl} lab{'s' * (nl != 1)} and {SL['quiz']} situations. Your progress stays in this browser.",
-                 f" entre {'el único lab' if nl == 1 else f'los {nl} labs'} y las {SL['quiz']} situaciones de la serie. Tu avance queda en este navegador.")
+    p = mine[:-1] + "." if alone else mine + T(lg, f" among the series' {nl} lab{'s' * (nl != 1)} and {SL['quiz']} situations.",
+                                               f" entre {'el único lab' if nl == 1 else f'los {nl} labs'} y las {SL['quiz']} situaciones de la serie.")
+    p += T(lg, " Your progress stays in this browser.", " Tu avance queda en este navegador.")
+    every = "" if alone else f'<a class="btn" href="../labs/">{T(lg, "Every lab", "Todos los labs")}</a>'
     return (f'<section class="module" id="take-it-apart" aria-labelledby="take-h">\n<div class="mhead"><div><h2 id="take-h">{T(lg, "Take it apart, then make the call", "Desarma, y luego tú decides")}</h2><p>{p}</p></div></div>\n'
-            f'<p class="stop-nav">{film_learn(lg, f, SL)}<a class="btn" href="../labs/">{T(lg, "Every lab", "Todos los labs")}</a></p>\n</section>\n\n')
+            f'<p class="stop-nav">{film_learn(lg, f, SL)}{every}</p>\n</section>\n\n')
 
 
 def learn_films(lg, S, series, films_):
@@ -1040,7 +1045,7 @@ def learn_films(lg, S, series, films_):
     out = {}
     for n in series_learn(S)["films"]:
         x = by.get(n)
-        out[n] = (dict(t=x["title"] if lg == "en" else x["site"]["title_es"], k=x["key"], **vers(x["key"], lg), href=f'../{x["key"]}/', starts={k: math.ceil(v) for k, v in x["starts"].items()})
+        out[n] = (dict(t=x["title"] if lg == "en" else x["site"]["title_es"], k=x["key"], **vers(x["key"], lg), href="../" if S.get("single") else f'../{x["key"]}/', starts={k: math.ceil(v) for k, v in x["starts"].items()})
                   if x else dict(t=coming.get(n, ""), coming=1))
     return json.dumps(out, ensure_ascii=False, separators=(",", ":"))
 
@@ -1056,8 +1061,9 @@ def series_course(lg, S, SL, series, films_, step):
            json.dumps({"watched": "Vista", "films": "{n} de %d películas vistas" % n, "labs": "{n} de %d %s" % (nl, "lab explorado" if nl == 1 else "labs explorados"), "quiz": "{n} de %d respondidas · {ok} correctas" % nq}, ensure_ascii=False))
     made = (T(lg, "One film", "Una película") if n == 1 else T(lg, f"{w(n).capitalize()} films", f"{w(n).capitalize()} películas")) + \
         (T(lg, f", {w(planned - n)} coming", f", {w(planned - n)} en camino") if planned > n else "")
-    steps = ([("#films", "The films", made), ("labs/", "Take it apart", "One hands-on lab" if nl == 1 else f"{w(nl).capitalize()} hands-on labs"), ("scenarios/", "Make the call", f"{nq} real situations")] if lg == "en" else
-             [("#films", "Las películas", made), ("labs/", "Desarma", "Un lab interactivo" if nl == 1 else f"{w(nl).capitalize()} labs interactivos"), ("scenarios/", "Tú decides", f"{nq} situaciones reales")])
+    fl = "#watch" if S.get("single") else "#films"  # a film that stands alone: its page, where the series' page would be
+    steps = ([(fl, "The films", made), ("labs/", "Take it apart", "One hands-on lab" if nl == 1 else f"{w(nl).capitalize()} hands-on labs"), ("scenarios/", "Make the call", f"{nq} real situations")] if lg == "en" else
+             [(fl, "Las películas", made), ("labs/", "Desarma", "Un lab interactivo" if nl == 1 else f"{w(nl).capitalize()} labs interactivos"), ("scenarios/", "Tú decides", f"{nq} situaciones reales")])
     here = lambda i: ' aria-current="step"' if i == step else ""
     lis = "\n".join(f'<li><a href="{up}{h}"{here(i)}><span class="n"><b>{i + 1}</b></span><b>{a}</b><span>{b}</span></a></li>' for i, (h, a, b) in enumerate(steps))
     return (f'<nav class="course" aria-label="{T(lg, "Course", "Curso")}: {E(SN(lg, S))}"><div class="course-in"><p class="course-t"><small>{T(lg, "Series", "Serie")} · {E(topic_of(S["id"])["name"][lg])}</small>{E(SN(lg, S))}</p>'
@@ -1087,7 +1093,7 @@ def series_learn_page(lg, S, series, films_, which):
     else:
         nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
         lang = lambda h: ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
-        lis = "\n".join(li for _, li in sorted([(x["index"], f'<li><a href="../{x["key"]}/"><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>') for x in films_]
+        lis = "\n".join(li for _, li in sorted([(x["index"], f'<li><a href="{"../" if S.get("single") else "../" + x["key"] + "/"}"><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>') for x in films_]
                                                + [(n - 1, f'<li><a href="{R if lg == "en" else R[3:]}{h["href"]}"><span class="n">{n}</span><span{lang(h)}>{E(h["title"][lg])}</span></a></li>') for n, _, h, _ in outside(S)]))
         mid = (f'<section aria-labelledby="scenarios-h" class="section-gap">\n<h2 class="sr" id="scenarios-h">{T(lg, "Scenarios", "Situaciones")}</h2>\n'
                f'<div id="series-quiz" {app}><noscript><p class="noscript">{T(lg, "The scenarios need JavaScript.", "Las situaciones necesitan JavaScript.")}</p></noscript></div>\n</section>\n\n'
@@ -3075,7 +3081,7 @@ def pages():
                 for which in ("labs", "scenarios"):
                     out.append((f'{pre}{S["slug"]}/{which}/index.html', series_learn_page(lg, S, series, films_, which)))
                 for f in films_:  # a film that had labs and scenarios of its own: their old pages lead to the series' pack
-                    if (WEB / "assets" / f["key"] / "learn.en.js").exists() or (WEB / S["slug"] / f["key"] / "labs" / "index.html").exists():
+                    if not S.get("single") and ((WEB / "assets" / f["key"] / "learn.en.js").exists() or (WEB / S["slug"] / f["key"] / "labs" / "index.html").exists()):
                         for which in ("labs", "scenarios"):
                             out.append((f'{pre}{S["slug"]}/{f["key"]}/{which}/index.html', moved_page(lg, S, f, which)))
     out += moved_series_pages()

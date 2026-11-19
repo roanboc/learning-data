@@ -1,0 +1,76 @@
+/* Learning Data: More than a platform. The words of its lab (Take it apart) and scenarios (Make the call), in English.
+   Keep the keys in step with learn.es.js. One playground for the film, on the chapter it plays (film, chapter), with four experiments
+   (w.goals) the visitor ticks by making them happen; and four situations, the evaluation, each pointing to the playground. learn.js
+   draws every picture from these words and keeps progress in this browser under "ld-more-than-a-platform": the lab visited, the
+   experiments ticked, and the answers by scenario number (film × 10 + its place). A page shows each situation's options in the order
+   written here: the right answers are spread across the places, and the Spanish pack keeps them in the same places.
+   build_series.py (series_learn) reads the first keys of each lab, in this order: id, kind, film, chapter, c, name; and of each
+   scenario: type, n, lab, film. No other object here starts with id, and no other key is called kind or starts an object with type.
+   The playground follows the series' thread: Data Science 101, 180 seats; the student system counts 176 enrolled, the learning
+   platform 171 and Finance 149. The registrar, who owns enrolment, is the playground's own. */
+window.DM={lang:"en",
+ui:{lab:"Lab",of:"of",watch:"Watch the chapter",next:"Next:",makeCall:"Make the call →",inPractice:"In practice",labsLabel:"The labs",
+  again:"Start again",goals:"Experiments",reached:"done",reachedOne:"Done: {t}.",nOf:"{n} of {of} done",filmN:"Film {n} of {of}",
+  scenario:"Situation",qsLabel:"The situations",score:"Score",answered:"answered",toGo:"to go",good:"Good call.",right:"Right.",notQuite:"Not quite.",
+  explore:"Try it in the lab:",results:"See how you did",nextQ:"Next situation →"},
+labs:[
+/* ---------- More than a platform ---------- */
+{id:"halves",kind:"play",film:1,chapter:"beyond",c:"#9fc4ff",name:"One word, enrolled",
+ idea:"The platform works: data from three systems arrives every night. Still, a meeting about Data Science 101 has two numbers for one class. Add what a platform alone doesn't bring, and see what changes.",
+ points:["<b>A platform carries data;</b> it doesn't say how the organisation works, what each word means, who decides, or who may see what.",
+  "<b>How it works and what words mean</b> come first: which system records what, and a glossary with each meaning under its own name.",
+  "<b>Who decides and who may see</b> are built into the work: an owner for each meaning, and rules kept where the data lives."],
+ real:"When two numbers meet in a meeting, don't ask which is right. Ask which system each comes from, what it counts, and who decides which answers this question. The answer is rarely in the pipeline.",
+ w:{prompt:"Add each half the platform needs, then try the three buttons.",
+  start:"The platform loads all three systems every night, and nothing else is written down.",
+  alt:"Three systems at the top, each with its count for Data Science 101, and below them what the meeting knows: the name of each number, who decides, and what a tutor can see.",
+  goals:[["named","Each number under its own name"],["decide","The meeting gets one answer to its question"],["map","Know which system records what"],["see","A tutor sees only what they may"]],
+  addL:"Beside the platform",adds:{map:"A map of how it works",gloss:"A glossary of meanings",owner:"An owner who decides",access:"Who may see what"},
+  meetB:"The meeting: how many enrolled?",whereB:"Where does each number come from?",tutorB:"A tutor opens the class list",
+  systems:[{t:"Student system",n:"176",name:"signed up"},{t:"Learning platform",n:"171",name:"active in class"},{t:"Finance",n:"149",name:"paid"}],
+  word:"enrolled",seats:"Data Science 101 · 180 seats",record:"record of",platform:"The platform: loaded every night",
+  q:"How many tutors to plan for?",
+  msg:{mapOn:"The map says which system records what, and how they connect.",mapOff:"No map: nobody wrote down which system records what.",
+   glossOn:"The glossary gives each meaning its own name: signed up, active in class, paid.",glossOff:"No glossary: all three are called enrolled.",
+   ownerOn:"The registrar owns enrolment, and decides which meaning answers which question.",ownerOff:"Nobody owns the word.",
+   accessOn:"A rule kept where the data lives: tutors see names and activity, never payments.",accessOff:"No rule on who may see what.",
+   meetNone:"Two offices bring 176 and 149, both called enrolled, and the meeting spends its hour on which is right.",
+   meetNamed:"Three numbers, each named: 176 signed up, 171 active in class, 149 paid. Each is right. But which one plans the tutors?",
+   meetDecide:"The registrar, who owns enrolment, says tutors are planned on those active in class: 171. One answer, to this question.",
+   whereYes:"The map says it: the student system records sign-ups, the learning platform activity, and Finance payments.",
+   whereNo:"Nobody knows which system is the record for what; the platform carries all three, each called enrolled.",
+   tutorYes:"The tutor sees the class list with names and activity, and never who has paid.",
+   tutorNo:"The tutor sees who has paid their fees, which only Finance may see."},
+  read:{numbers:"Numbers called enrolled",answer:"The meeting's answer",none:"none yet"},
+  end:"<b>All four done.</b> The platform was never the problem. What made the numbers useful was everything around it: how the university works, what each word means, who decides, and who may see what."}}],
+qs:[
+{type:"choice",n:11,lab:"halves",film:1,title:"Two numbers for one class",vis:{k:"halves"},
+ sit:"The data platform runs without a fault, yet two offices bring 176 and 149 enrolled for the same class. What should happen first?",
+ opts:[{t:"Find what each office means by enrolled, and give each meaning its own name and owner.",ok:true},
+  {t:"Rebuild the pipelines, since two numbers mean the platform loads one of them wrongly.",why:"Both loads are right: each office counts something different, under one word."},
+  {t:"Use the student system's number, since enrolment starts there, and retire the other.",near:true,why:"It's the record of sign-ups, but the question may need another meaning: the owner decides."}],
+ why:"A platform that works can still carry two numbers for one word. Name each meaning, give it an owner, and let the owner decide which answers each question."},
+{type:"choice",n:12,lab:"halves",film:1,title:"A new team's first weeks",vis:{k:"halves"},
+ sit:"A new data team is asked to build reports for a faculty it doesn't know yet. Where should it start?",
+ opts:[{t:"With the tools, since the right platform will make the rest of the work easier.",why:"Tools show the ideas; they come after the question and its context."},
+  {t:"With models from the source tables, asking the faculty once the first report is out.",near:true,why:"A model can pass every test and still answer the wrong question."},
+  {t:"With how the faculty works: its systems, its words, and who decides what they mean.",ok:true}],
+ why:"Start from how the organisation works: what it does, which systems serve it, and who decides what its words mean. Then the models answer the right questions."},
+{type:"choice",n:13,lab:"halves",film:1,title:"A policy that stayed a policy",vis:{k:"halves"},
+ sit:"A governance policy says personal data is masked for anyone who doesn't need it. Nothing in the platform does it. What should change?",
+ opts:[{t:"Send the policy to every team again, and ask each to confirm they have read it.",why:"It stays a set of words: nothing in the work enforces it."},
+  {t:"Build the rule into the work: in the catalog and the code, checked on every change.",ok:true},
+  {t:"Ask the governance team to review every data pull request for masking by hand.",near:true,why:"Owners and stewards don't review pull requests: build the rule in, and let checks hold it."}],
+ why:"Governance works when it's built into the daily work, from the glossary to the code, and checked on every change, not when it's a document people are asked to read."},
+{type:"choice",n:14,lab:"halves",film:1,title:"Other tools at work",vis:{k:"halves"},
+ sit:"A colleague says the films and the example project use dbt and Databricks, so they're no use on the platform their company has. What would you say?",
+ opts:[{t:"The ideas hold: check what their platform offers for each capability, under its own name.",ok:true},
+  {t:"They should move to the same tools as the films, so every example works as shown.",why:"Choose what answers a real need, not a platform because a film showed it."},
+  {t:"Keep the films' ideas, and skip the project's glossary and contracts, which are tool-specific.",near:true,why:"The glossary, owners and contracts aren't tool-specific: they sit beside the code in any tool."}],
+ why:"The tools show the ideas in a working solution; any tools with the same capabilities would do. What matters is using those capabilities well."}],
+pics:{alt:{halves:"Three systems, each with its own count for one class, and the platform under them."},
+  halves:{sys:["Student system","Learning platform","Finance"],n:["176","171","149"],p:"The platform"}},
+done:[["All four. You see more than the platform.","How the organisation works, what words mean, who decides and who may see: start there."],
+  ["Nearly all of them.","Go back to the playground, and try the one you missed there."],
+  ["A good start.","Each situation names its playground: try it, then come back."],
+  ["Worth another pass.","Try the playground first; each answer is something you can make happen there."]]};

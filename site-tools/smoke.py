@@ -1446,7 +1446,8 @@ async def check_series_learn(run):
                     expect(sec, bool(k) and (int(k[1]), int(k[2])) == (pos, len(ids)), f"{where}: the kicker says {r['kicker']!r}, expected lab {pos} of {len(ids)}")
                     f = on_site.get(x["film"])
                     if f:  # a film still being made has no "Watch this part"
-                        want = f"../{f['key']}/#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
+                        film = "" if S.get("single") else f"{f['key']}/"  # a film that stands alone has its page where the series' would be
+                        want = f"../{film}#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
                         expect(sec, r["watch"] == ([want] if want else []), f"{where}: \"Watch this part\" goes to {r['watch']}, expected {want}")
                     if play:
                         try:
@@ -1484,8 +1485,9 @@ async def check_series_learn(run):
                     for p in (probs or []) + log_problems(log):
                         expect(sec, False, f"/{key}: {p}")
                     await pg.close()
-                # every lab was opened, so the course bar counts them all (and the scenarios answered)
-                key = f"{pre}{S['slug']}/"
+                # every lab was opened, so the course bar counts them all (and the scenarios answered); a film that stands alone has
+                # its page where the series' would be, with no course bar, so its scenarios page shows the bar
+                key = f"{pre}{S['slug']}/" + ("scenarios/" if S.get("single") else "")
                 pg, _ = await run.page(ctx, key)
                 r = await pg.evaluate("""() => [...document.querySelectorAll('nav.course .path li')].map(li => ({done: li.classList.contains('done'),
                   t: li.querySelector('span:last-child').textContent}))""")

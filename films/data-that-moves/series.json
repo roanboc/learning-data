@@ -72,5 +72,11 @@
       "Construye el proyecto de datos",
       "Jun Park, que modela lo que llega y lo prueba contra su contrato"
     ]
-  ]
+  ],
+  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: send contracts to Finance, set how fresh each kind of data arrives, correct a claim, move old pay records to the archive.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: envía contratos a Finanzas, fija cuán frescos llegan los datos, corrige una declaración, pasa registros de pago viejos al archivo.",
+  "quiz_lead": "{quiz} situations from every film, about the decisions that move data. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
+  "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre las decisiones que mueven datos. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

@@ -274,7 +274,7 @@ PLAY.gloss=(Lb,api)=>{const W=Lb.w,G=W.places,S={home:"tool",read:{},check:false
       bits.push(S.monRes.check&&S.home==="plat"?W.msg.notice:W.msg.noNotice);api.say(bits.join(" "),n===1&&S.monRes.check&&S.home==="plat"?"ok":"warn");
       if(n===1&&S.home==="plat")api.reach("agree");if(S.monRes.check&&S.home==="plat")api.reach("notice");api.refresh();},2000);},"go");
   const lay=(lw)=>{const m=12,o={lw,m},nc=lw>=520?2:1,cw=(lw-m*2-(nc-1)*10)/nc;o.home={x:m,y:12,w:lw-m*2,h:96};const ind=nc===1?14:0;o.rail=nc===1;o.cells=G.map((g,i)=>({x:m+ind+(i%nc)*(cw+10),y:140+Math.floor(i/nc)*80,w:cw-ind,h:70}));
-    o.notice={x:m,y:140+Math.ceil(G.length/nc)*80+4,w:lw-m*2,h:92};o.h=o.notice.y+o.notice.h+8;return o;};
+    o.notice={x:m,y:140+Math.ceil(G.length/nc)*80+4,w:lw-m*2,h:nc===1?110:92};o.h=o.notice.y+o.notice.h+8;return o;};
   const col={old:K.plat,new:K.gold,deg:K.bad,micro:K.warm};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.gold);const u=run(now,S.mon,2000);const hm=homeSays();
     node(ctx,o.home.x,o.home.y,o.home.w,o.home.h,K.gold,S.home==="plat"?W.platName:W.toolName,S.home==="plat"?W.platSub:W.toolSub,{glow:12});
@@ -288,7 +288,7 @@ PLAY.gloss=(Lb,api)=>{const W=Lb.w,G=W.places,S={home:"tool",read:{},check:false
       chip(ctx,c.x+10,c.y+32,Math.min(260,c.w-20),26,(S.read[g.key]&&!rd)?W.cant:W.mean[s],(S.read[g.key]&&!rd)?K.bad:col[s],{size:12,mark:S.changed&&u>=1?(stale?"no":"ok"):null});});
     // the change notice: what the word touches, and who owns each part
     const nn=S.monRes&&S.monRes.check&&S.home==="plat"&&u>=1;card(ctx,o.notice.x,o.notice.y,o.notice.w,o.notice.h,nn?K.gold:K.soft,W.noticeName,{glow:nn?10:0,dash:!nn});
-    lines(ctx,nn?W.noticeLine:S.changed&&u>=1?W.noticeNone:W.noticeWait,o.notice.x+12,o.notice.y+42,o.notice.w-24,{size:12.5,max:3,w:600,color:rgbaS(nn?K.ink:K.soft,0.95)});};
+    lines(ctx,nn?W.noticeLine:S.changed&&u>=1?W.noticeNone:W.noticeWait,o.notice.x+12,o.notice.y+42,o.notice.w-24,{size:12.5,max:4,w:600,color:rgbaS(nn?K.ink:K.soft,0.95)});};
   return{S,lay,draw,readouts:[[W.read.meanings,()=>String(meanings())],[W.read.home,()=>S.home==="plat"?W.read.plat:W.read.tool]]};};
 
 /* ---------- 4 · Who may see it: a purpose and a date ---------- */
@@ -353,12 +353,12 @@ PLAY.level=(Lb,api)=>{const W=Lb.w,S={own:false,lv:"any",pl:"warn",night:null,re
     S.res={kind,n,state,cell,pcell,own:S.own};api.kick(1600);api.say(msg,tone);};
   const r4=api.group();
   api.btn(r4,W.n2B,()=>night("email",2),"go");api.btn(r4,W.n6B,()=>night("email",6));api.btn(r4,W.diffB,()=>night("diff",3));
-  const lay=(lw)=>{const m=12,o={lw,m};o.lead=lw>=460?130:84;o.cw=(lw-m*2-24-o.lead)/W.dims.length;o.card={x:m,y:12,w:lw-m*2,h:34+24+W.areas.length*40+6};
+  const lay=(lw)=>{const m=12,o={lw,m};o.stack=lw<460;o.lead=o.stack?0:130;o.rh=o.stack?52:40;o.cw=(lw-m*2-24-o.lead)/W.dims.length;o.card={x:m,y:12,w:lw-m*2,h:34+24+W.areas.length*o.rh+6};
     o.upd={x:m,y:o.card.y+o.card.h+10,w:lw-m*2,h:62};o.iss={x:m,y:o.upd.y+o.upd.h+10,w:lw-m*2,h:44};o.h=o.iss.y+o.iss.h+8;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.warm);const r=S.res,u=run(now,S.night,900);
     card(ctx,o.card.x,o.card.y,o.card.w,o.card.h,K.warm,W.cardName,{glow:4});
     W.dims.forEach((d,j)=>line1(ctx,d,o.card.x+12+o.lead+j*o.cw,o.card.y+50,o.cw-4,12,{w:700,align:"center",color:rgbaS(K.soft,1)}));
-    W.areas.forEach((a,i)=>{const y=o.card.y+58+i*40;line1(ctx,S.own?a.name:W.unknown,o.card.x+12,y+21,o.lead-6,12,{w:700,color:rgbaS(S.own?K.ink:K.soft,0.95)});
+    W.areas.forEach((a,i)=>{const y=o.card.y+58+i*o.rh+(o.stack?16:0);line1(ctx,S.own?a.name:W.unknown,o.card.x+12,o.stack?y-1:y+21,o.stack?o.card.w-24:o.lead-6,12,{w:700,color:rgbaS(S.own?K.ink:K.soft,0.95)});
       W.dims.forEach((d,j)=>{const x=o.card.x+12+o.lead+j*o.cw;let st="pass",lbl=a.cells[j];
         if(r&&u>0.5){if(a.key==="learn"&&j===0)st=r.kind==="email"?r.cell:"pass";if(a.key==="plan"&&j===2)st=r.kind==="diff"?r.pcell:"pass";}
         const cc=st==="fail"?K.bad:st==="warn"?K.warm:K.good;if(!lbl)return;chip(ctx,x+2,y+4,o.cw-4,28,st==="fail"?W.failL:lbl,cc,{size:12,tint:st==="pass"?0.1:0.25,glow:st==="pass"?0:8});});});
@@ -509,7 +509,7 @@ PLAY.agent=(Lb,api)=>{const W=Lb.w,S={who:"jun",list:false,may:"note",own:false,
     if(r&&u>0.6){if(r.who==="jun"){title=W.queueName;rows=W.queue;col=K.warm;}else if(!r.list){title=W.nothingName;rows=W.nothing;col=K.warm;}
       else if(r.may==="fix"){title=W.fixName;rows=W.fixRows;col=K.warm;}else if(r.may==="approve"){title=W.apprName;rows=W.apprRows;col=K.bad;}
       else{title=W.noteName;rows=W.noteRows.map(x=>x[0]==="count"?[x[1],r.own?W.countOwn:W.countValues]:x.slice(1));col=K.gold;}}
-    card(ctx,n.x,n.y,n.w,n.h,col,title,{glow:r?8:0,dash:!r});const lw2=n.w>=460?150:96,a=r?cl((u-0.6)/0.4,0,1):0;
+    card(ctx,n.x,n.y,n.w,n.h,col,title,{glow:r?8:0,dash:!r});const lw2=n.w>=460?150:106,a=r?cl((u-0.6)/0.4,0,1):0;
     withA(ctx,a,()=>rows.forEach((row,i)=>{const yy=n.y+38+i*24;if(Array.isArray(row)){line1(ctx,row[0],n.x+12,yy+14,lw2-16,12.5,{w:700,color:rgbaS(K.soft,1)});line1(ctx,row[1],n.x+lw2,yy+14,n.w-lw2-12,12.5,{w:700,color:rgbaS(row[1]===W.countValues?K.bad:K.ink,0.95)});}
       else line1(ctx,row,n.x+12,yy+14,n.w-24,12.5,{w:700,color:rgbaS(K.ink,0.95)});}));};
   return{S,lay,draw,readouts:[[W.read.waits,()=>!S.res?"–":S.res.who==="agent"&&S.res.list?W.read.nobody:W.read.anil],[W.read.decides,()=>!S.res?"–":S.res.who==="agent"&&S.res.list&&S.res.may!=="note"?W.read.agent:W.read.people],
@@ -541,8 +541,8 @@ PLAY.habit=(Lb,api)=>{const W=Lb.w,N=W.cols,S={why:false,agree:false,page:false,
     later(()=>{if(S.yr!==t0)return;if(S.yres.keep&&S.res.wk[7].c>=0.9){api.say(W.msg.yearKept,"ok");api.reach("lasts");}else api.say(S.yres.keep?W.msg.yearLow:W.msg.yearFade,"no");api.refresh();},1400);});
   const lay=(lw)=>{const m=12,o={lw,m};o.ch={x:m,y:12,w:lw-m*2,h:220};o.h=o.ch.y+o.ch.h+10;return o;};
   const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.gold);const r=S.res,u=run(now,S.go,3200),c=o.ch;card(ctx,c.x,c.y,c.w,c.h,K.gold,W.chartName,{glow:4});
-    const px=c.x+40,pw=c.w-56,py=c.y+58,ph=c.h-98,n=9,bw=pw/n;
-    [0,0.5,1].forEach(f=>{const y=py+ph*(1-f);ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.25);ctx.beginPath();ctx.moveTo(px,y);ctx.lineTo(px+pw,y);ctx.stroke();ctx.restore();line1(ctx,Math.round(f*100)+"%",c.x+6,y+4,32,12,{w:700,align:"right",color:rgbaS(K.soft,1)});});
+    const px=c.x+48,pw=c.w-62,py=c.y+58,ph=c.h-98,n=9,bw=pw/n;
+    [0,0.5,1].forEach(f=>{const y=py+ph*(1-f);ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.25);ctx.beginPath();ctx.moveTo(px,y);ctx.lineTo(px+pw,y);ctx.stroke();ctx.restore();line1(ctx,Math.round(f*100)+"%",c.x+4,y+4,40,12,{w:700,align:"right",color:rgbaS(K.soft,1)});});
     // the first of December
     const dx=px+bw*(W.dateWeek+0.5);ctx.save();ctx.strokeStyle=rgbaS(K.gold,0.9);ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(dx,py-6);ctx.lineTo(dx,py+ph);ctx.stroke();ctx.restore();
     line1(ctx,W.dateL,cl(dx-60,c.x+8,c.x+c.w-128),py-10,120,12,{w:700,align:"center",color:rgbaS(K.gold,1)});

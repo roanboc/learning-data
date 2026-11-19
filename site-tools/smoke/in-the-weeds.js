@@ -1,76 +1,95 @@
-/* From words to data, and In the weeds of data crafting (site-tools/smoke/in-the-weeds.js is the same file): plays the series'
-   one pack of labs and scenarios through, for site-tools/smoke.py's series-learn check, from the pack (window.FW) and each film's
-   own words (window.FW_FILM, from assets/from-words-to-data/learn.js), and only by what a visitor can click. A lab must load its
-   film's words and picture, get every control tried, twice over, say in words what happened, and label its picture. Every
-   scenario must have its picture and take its right answer, and the results must count them all.
-   Each returns what went wrong, as text. */
+/* In the weeds of data crafting: plays the series' playgrounds and its evaluation through, for site-tools/smoke.py's series-learn check, from their
+   words (window.IW) and only by what a visitor can click. A playground is played until every experiment is ticked, and must say in
+   words what happened, draw every word whole (window.IW_MISS, from learn.js), give its picture words, and start again with none
+   ticked. Every scenario must have its picture and take its right answer, and the results must count them all. Each returns what
+   went wrong, as text. */
 ({
 lab: async (id) => {
-  const P = window.FW, app = document.getElementById("series-labs"), wait = ms => new Promise(r => setTimeout(r, ms)), out = [];
-  if (!P.labs.some(x => x.id === id)) return ["no lab " + id + " in the pack"];
-  for (let i = 0; i < 100 && !app.querySelector(".stop .lab"); i++) await wait(100);
-  const lab = app.querySelector(".stop .lab");
-  if (!lab) return ["its lab never drew: " + app.textContent.slice(0, 120)];
-  let said = false;
-  const heard = () => { const s = lab.querySelector(".lab-say"); if (s && s.textContent.trim()) said = true; };
-  const live = () => [...lab.querySelectorAll("button")].filter(b => !b.disabled && b.offsetParent);
-  heard();
-  for (let round = 0; round < 2; round++)
-    for (let i = 0; i < 60; i++) { const b = live()[i]; if (!b) break; b.click(); await wait(15); heard(); }
-  for (const c of [...lab.querySelectorAll("input[type=checkbox]")]) { c.click(); await wait(15); heard(); }
-  await wait(100);
-  if (!lab.querySelector(".lab-say[role=status]")) out.push("nothing on the page says in words what happened");
-  else if (!said) out.push("trying every control, it never said in words what happened");
-  const cv = lab.querySelector("canvas");
-  if (!cv) out.push("it has no picture");
-  else if (!(cv.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
+  const L = window.IW, Lb = L.labs.find(x => x.id === id), W = Lb.w, U = L.ui, panel = document.getElementById("pg-panel");
+  const wait = ms => new Promise(r => setTimeout(r, ms)), q = s => panel.querySelector(s), qa = s => [...panel.querySelectorAll(s)];
+  const out = [];
+  const press = async (t, ms) => {
+    const b = qa("button").find(x => x.textContent.trim() === t);
+    if (!b) { out.push("no button “" + t + "”"); return; }
+    b.click(); await wait(ms || 300);
+  };
+  const seg = async (row, k, ms) => {
+    const g = qa(".pg-row .seg")[row], b = g && g.querySelectorAll("button")[k];
+    if (!b) { out.push("no choice " + (k + 1) + " in group " + (row + 1)); return; }
+    b.click(); await wait(ms || 300);
+  };
+  const cv = q("canvas");
+  if (cv) cv.scrollIntoView({block: "center"});  // a picture plays while it's in view
+  await wait(400);
+  if (Lb.kind !== "play") out.push("no play for a lab of kind " + Lb.kind);
+  else if (id === "blueprint") {
+    await press(W.tools[1].n); await press(W.bugT); await press(W.declT);
+    await press(W.draftB); await press(W.approveB);
+  } else if (id === "scope") {
+    await press(W.terms[2].n); await press(W.terms[3].n); await press(W.terms[4].n); await press(W.terms[4].n);
+    await press(W.kinds[1][1]); await press(W.whos[1][1]);
+  } else if (id === "same") {
+    await press(W.normT); await press(W.r3T); await press(W.r2T); await press(W.apartT);
+    await press(W.hashes[1][1]); await press(W.spaceT);
+  } else if (id === "grain") {
+    await press(W.joins[1][1]); await press(W.joins[0][1]); await press(W.days[1][1]); await press(W.bys[1][1]);
+  } else if (id === "catch") {
+    for (const b of W.bad) await press(b.test, 150);
+    await press(W.txtT); await press(W.enfT); await press(W.walks[1][1]); await press(W.walks[2][1]);
+  } else if (id === "once") {
+    await press(W.matches[1][1]); await press(W.ons[1][1]);
+    await press(W.runB); await press(W.runB); await press(W.ruleT); await press(W.runB); await press(W.fullB, 600);
+  } else if (id === "access") {
+    await press(W.ons[1][1]); await press(W.ons[2][1]); await press(W.grantT); await press(W.hashes[1][1]);
+  } else if (id === "review") {
+    await press(W.does[1][1]); await press(W.does[2][1]); await press(W.queryT); await press(W.diffs[1][1]); await press(W.ases[1][1]);
+  } else if (id === "home") {
+    await press(W.editB); await press(W.kepts[1][1]); await press(W.editB); await press(W.vers[1][1]); await press(W.whoB);
+  } else if (id === "finance") {
+    await press(W.closeB); await press(W.counts[1][1]); await press(W.closeB); await press(W.diffB); await press(W.moveB, 600);
+  } else out.push("no play written for playground " + id);
+  const ticked = qa(".pg-goals li.ok").length;
+  if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "
+    + qa(".pg-goals li:not(.ok)").map(li => "“" + li.textContent.trim() + "”").join(", "));
+  const say = q(".lab-say");
+  if (!say || !say.textContent.trim()) out.push("nothing says in words what happened");
+  const cut = [...(window.IW_MISS || [])];
+  if (cut.length) out.push("its picture cuts words short: " + cut.slice(0, 4).map(s => "“" + s + "”").join(", "));
+  const c2 = q("canvas");
+  if (!c2) out.push("no picture");
+  else if (!(c2.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
+  const again = qa(".pg-again").find(b => b.textContent.trim() === U.again);
+  if (!again) out.push("no way to start again");
+  else {
+    again.click(); await wait(100);
+    const left = document.getElementById("pg-panel").querySelectorAll(".pg-goals li.ok").length;
+    if (left) out.push("starting again leaves " + left + " experiments ticked");
+  }
   return out;
 },
 quiz: async () => {
-  const P = window.FW, app = document.getElementById("series-quiz"), wait = ms => new Promise(r => setTimeout(r, ms)), out = [], seen = new Set();
-  const shown = async () => { for (let i = 0; i < 100; i++) { if (app.querySelector(".qbody h3, .qdone")) return; await wait(100); } };
-  // start from the first scenario, whatever was answered before
-  const again = app.querySelector(".qdone .btn"); if (again) again.click();
-  const one = app.querySelector(".dots button"); if (one) one.click();
-  for (let k = 0; k < P.qs.length + 2; k++) {
-    await shown();
+  const L = window.IW, app = document.getElementById("series-quiz"), wait = ms => new Promise(r => setTimeout(r, ms));
+  const out = [], seen = new Set();
+  for (let k = 0; k < L.qs.length + 2; k++) {
     if (app.querySelector(".qdone")) break;
-    const hq = P.qs[k], t = (app.querySelector(".qbody h3") || {}).textContent;
-    if (!hq) { out.push("more scenarios than in the pack: " + t); break; }
-    const F = await window.FW_FILM(hq.film), q = F.words.qs[hq.q];
-    if (!q) { out.push("scenario " + hq.n + ": no scenario " + hq.q + " in film " + hq.film + "'s words"); break; }
-    if (q.lab !== hq.lab) out.push("scenario " + hq.n + ": its film's words put it on lab " + q.lab + ", the pack on " + hq.lab);
-    if (t !== q.title) { out.push("scenario " + hq.n + " isn't the one shown: " + t); break; }
-    seen.add(hq.n);
-    const cv = app.querySelector(".qvis canvas");
-    if (!cv) out.push("scenario " + hq.n + " has no picture");
-    else if (!(cv.getAttribute("aria-label") || "").trim()) out.push("scenario " + hq.n + ": its picture has no words");
-    if (q.type === "choice") {
-      const b = app.querySelectorAll(".qopts .qopt")[q.opts.findIndex(o => o.ok)];
-      if (!b) { out.push("scenario " + hq.n + ": no right answer to pick"); break; }
-      b.click();
-    } else if (q.type === "order") {
-      for (let p = 0; p < q.items.length; p++) for (let m = 0; m < 20; m++) {
-        const lis = [...app.querySelectorAll(".qorder li")], at = lis.findIndex(li => li.children[1].textContent === q.items[p]);
-        if (at <= p) break;
-        lis[at].querySelector(".mv button").click(); await wait(5);
-      }
-      const chk = app.querySelector(".qbody > .btn.primary");
-      if (!chk) { out.push("scenario " + hq.n + ": no way to check the order"); break; }
-      chk.click();
-    } else { out.push("no play for a scenario of type " + q.type); break; }
-    await wait(30);
+    const t = (app.querySelector(".qbody h3") || {}).textContent, qq = L.qs.find(x => x.title === t);
+    if (!qq) { out.push("a scenario that isn't in the words: " + t); break; }
+    if (seen.has(qq.n)) { out.push("scenario " + qq.n + " came twice"); break; }
+    seen.add(qq.n);
+    if (!app.querySelector(".qvis canvas")) out.push("scenario " + qq.n + " has no picture");
+    const j = qq.opts.findIndex(o => o.ok), b = app.querySelector('.qopt[data-j="' + j + '"]');
+    if (!b) { out.push("scenario " + qq.n + ": no right answer to pick"); break; }
+    b.click(); await wait(30);
     const fb = app.querySelector(".qfeed");
-    if (!fb || !fb.classList.contains("ok")) out.push("scenario " + hq.n + ": its right answer isn't taken as right");
+    if (!fb || !fb.classList.contains("ok")) out.push("scenario " + qq.n + ": its right answer isn't taken as right");
     const nx = app.querySelector(".qfoot .btn.primary");
-    if (!nx) { out.push("scenario " + hq.n + ": no way on"); break; }
+    if (!nx) { out.push("scenario " + qq.n + ": no way on"); break; }
     nx.click(); await wait(30);
   }
-  await shown();
   const ring = app.querySelector(".qdone .ring b");
   if (!ring) out.push("the results never came");
-  else if (ring.textContent !== P.qs.length + "/" + P.qs.length) out.push("the results say " + ring.textContent + ", expected " + P.qs.length + "/" + P.qs.length);
-  if (seen.size !== P.qs.length) out.push(seen.size + " scenarios played, of " + P.qs.length);
+  else if (ring.textContent !== L.qs.length + "/" + L.qs.length) out.push("the results say " + ring.textContent + ", expected " + L.qs.length + "/" + L.qs.length);
+  if (seen.size !== L.qs.length) out.push(seen.size + " scenarios played, of " + L.qs.length);
   return out;
 }
 })

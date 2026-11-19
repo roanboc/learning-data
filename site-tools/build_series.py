@@ -114,7 +114,7 @@ SERIES = [
     dict(id="in-the-weeds", dir="analytics-engineering", slug="in-the-weeds",
          name={"en": "In the weeds of data crafting", "es": "En las entrañas del oficio de datos"},
          place={"en": "university", "es": "universidad"}, blocks=[],
-         learn=dict(dir="in-the-weeds", lazy=True)),
+         learn=dict(dir="in-the-weeds", bundle="end-to-end")),
     dict(id="enterprise-architecture", dir="enterprise-architecture", slug="enterprise-architecture",
          name={"en": "The map before the data", "es": "El mapa antes de los datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
@@ -2948,7 +2948,7 @@ def pages():
                 for which in ("labs", "scenarios"):
                     out.append((f'{pre}{S["slug"]}/{which}/index.html', series_learn_page(lg, S, series, films_, which)))
                 for f in films_:  # a film that had labs and scenarios of its own: their old pages lead to the series' pack
-                    if (WEB / "assets" / f["key"] / "learn.en.js").exists():
+                    if (WEB / "assets" / f["key"] / "learn.en.js").exists() or (WEB / S["slug"] / f["key"] / "labs" / "index.html").exists():
                         for which in ("labs", "scenarios"):
                             out.append((f'{pre}{S["slug"]}/{f["key"]}/{which}/index.html', moved_page(lg, S, f, which)))
     return [(rel, stamp(rel, text)) for rel, text in out]

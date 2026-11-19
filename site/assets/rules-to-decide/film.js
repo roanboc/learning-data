@@ -2890,61 +2890,116 @@ const RD_FOLK={
   anil:{key:"rdAnil",name:"Anil",role:"Data partner",skin:[176,124,92],hair:{style:"short",c:[30,26,24]},beard:[40,34,30],top:{kind:"sweater",c:[120,128,140]},bottom:{kind:"trousers",c:[64,66,78]},shoe:[50,44,40]}};
 const rd_row=w=>typeof w==="string"?(RD_FOLK[w]||PK.CAST[w]):w;
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
-// 1. Yusuf's first list, and the question asked of each rule (Yusuf, at the team's board)
-const rd_boardA=(sc,w)=>[
-  {s:"Eleven rules?",x:70,y:120,size:62,col:"blue",at:w("eleven","first list",-0.3),d:0.8},
-  {s:"what goes wrong here, now, without it?",x:110,y:250,size:44,at:w("ask","what goes wrong",-0.3),d:1.6},
-  {s:"three needed now",x:520,y:400,size:56,col:"green",at:w("three","Three",-0.2),d:0.9}];
-// 2. the three rules, each with its reason (Yusuf, at the board seen close)
-const rd_boardB=(sc,w)=>[
-  {s:"1 · room use means one thing",x:70,y:130,size:48,col:"blue",at:w("r1","room use means",-0.3),d:1.3},
-  {s:"2 · per room per hour, never a person",x:110,y:270,size:44,col:"blue",at:w("r2","counts per room",-0.3),d:1.6},
-  {s:"3 · a new measure: ask Ivy first",x:150,y:410,size:46,col:"blue",at:w("r3","new measure",-0.3),d:1.4}];
-// 3. Ostrom (Carmen, at the team's board)
-const rd_boardC=(sc,w)=>[
-  {s:"Elinor Ostrom",x:70,y:120,size:62,col:"blue",at:w("ostrom","Elinor Ostrom",-0.3),d:0.8},
-  {s:"shared for centuries",x:110,y:230,size:50,at:w("ostrom","for centuries",-0.4),d:0.9},
-  {s:"a few clear rules · fitted to the place",x:150,y:340,size:44,col:"green",at:w("lasted","a few clear rules",-0.3),d:1.5},
-  {s:"made by those who live by them",x:300,y:450,size:44,col:"green",at:w("lasted","made and changed",-0.3),d:1.3}];
-// 4. data mesh and Team Topologies (Carmen)
-const rd_boardD=(sc,w)=>[
-  {s:"Data mesh · Team Topologies",x:70,y:130,size:52,col:"blue",at:w("mesh","Data mesh",-0.3),d:1.2},
-  {s:"decisions with who knows the work",x:110,y:280,size:46,col:"green",at:w("mesh","decisions with",-0.3),d:1.4},
-  {s:"a platform that makes it easy",x:300,y:420,size:46,at:w("mesh","a platform",-0.3),d:1.2}];
-// 5. the fourth rule (Helena, at the team's board)
-const rd_boardE=(sc,w)=>[
-  {s:"4 · share the live page, not a copy",x:70,y:130,size:46,col:"blue",at:w("rule4","share the live page",-0.3),d:1.4},
-  {s:"copies go stale",x:400,y:250,size:52,col:"amber",at:w("rule4","copies go stale",-0.3),d:0.8},
-  {s:"the date of its data, in the corner",x:110,y:380,size:44,at:w("date","the date",-0.3),d:1.4}];
-// 6. on Monday (Helena, at the board seen close)
-const rd_boardM=(sc,w)=>[
-  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("m1","On Monday",0),d:0.6},
-  {s:"few rules · each with its reason",x:110,y:205,size:44,col:"blue",at:w("m1","few rules",-0.2),d:1.2},
-  {s:"the right way, the easy way",x:150,y:285,size:44,at:w("m2","right way",-0.2),d:1.1},
-  {s:"say who decides what",x:190,y:365,size:44,col:"blue",at:w("m3","who decides",-0.2),d:0.9},
-  {s:"watch what emerges · learn",x:230,y:445,size:44,col:"green",at:w("m4","Watch",-0.2),d:1.1}];
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Yusuf's, Carmen's and Helena's are drawn as a designer would, a graphic recording pinned over the
+   board, almost done when it first shows (PK.sk.drawn): whoever explains adds the last words and marks as the voice says them, on
+   from left to right, and steps clear. */
+// a graphic recording in two drawn parts: its heading, high on the sheet, where nobody standing at the board hides it, and the drawing
+// under it, with the box its ink lies in, so whoever explains steps only as far right as it reaches
+const rd_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// a rule's number, a sticker on the top left corner of its panel
+const rd_num=(c,n,x,y)=>{const D=PK.sk;D.disc(c,x+6,y+6,26,{fill:"blue",col:"ink",w:3});D.text(c,String(n),x+6,y+17,{size:32,w:700,align:"center"});};
+// 1. Yusuf's first list (Yusuf, at the team's board): eleven rules, the question asked of each, and the three needed now; he writes
+// the question and how many
+const rd_boardA=(sc,w)=>[...rd_rec("Eleven rules?",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,380,300,{title:"the first list",col:"blue",fill:"blue"},(cc,x,y)=>{for(let i=0;i<11;i++){const bx=x+30+(i%6)*54,by=y+14+Math.floor(i/6)*66;
+        D.box(cc,bx,by,42,52,{fill:"white",col:"ink",w:2.5,r:6});D.line(cc,[[bx+9,by+18],[bx+33,by+18]],{col:"mut",w:2.5,seed:i+1});D.line(cc,[[bx+9,by+33],[bx+27,by+33]],{col:"mut",w:2.5,seed:i+5});}
+      D.text(cc,"against past mistakes",x+30,y+190,{size:28,col:"mut"});});
+    D.panel(c,480,150,380,300,{title:"of each, ask",col:"amber",fill:"amber"},(cc,x,y)=>D.icon(cc,"q",x+56,y+46,30,{fill:"white"}));
+    D.panel(c,890,150,290,300,{title:"needed now",col:"green",fill:"green"},(cc,x,y)=>{for(let i=0;i<3;i++)D.box(cc,x+40+i*76,y+14,56,66,{fill:"white",col:"green",w:3,r:8});});},[60,150,1190,456]),
+  {s:"what goes wrong",x:510,y:340,size:40,w:700,col:"amber",at:w("ask","what goes wrong",-0.3),d:0.9},
+  {s:"here, now, without it?",x:510,y:406,size:32,w:700,at:w("ask","without it",-0.3),d:1.0},
+  {s:"three",x:1035,y:410,size:60,w:700,col:"green",align:"center",at:w("three","Three",-0.2),d:0.6}];
+// 2. the three rules, each with its reason (Yusuf, at the board seen close): one meaning for room use, the product's promise, and a
+// new measure asked of its owner; he writes what each rule holds
+const rd_boardB=(sc,w)=>[...rd_rec("Three rules",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,340,300,{title:"one meaning",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"book",x+50,y+44,28,{fill:"white"});D.text(cc,"room use",x+92,y+56,{size:34,w:700});
+      for(let i=0;i<8;i++)D.box(cc,x+30+i*36,y+86,28,28,{fill:i<5?"orange":"white",col:"ink",w:2.5,r:5});
+      D.text(cc,"share of hours counted",x+30,y+152,{size:28,col:"mut"});});
+    rd_num(c,1,70,150);
+    D.panel(c,440,150,350,300,{title:"the promise",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"door",x+56,y+44,26,{fill:"white"});D.icon(cc,"clock",x+136,y+44,26,{fill:"white"});
+      D.icon(cc,"person",x+276,y+44,28,{fill:"white"});D.line(cc,[[x+250,y+18],[x+302,y+70]],{col:"amber",w:5,seed:3});D.line(cc,[[x+302,y+18],[x+250,y+70]],{col:"amber",w:5,seed:4});
+      D.text(cc,"per room, per hour",x+30,y+124,{size:30});});
+    rd_num(c,2,440,150);
+    D.panel(c,820,150,360,300,{title:"new measures",col:"orange",fill:"orange"},(cc,x,y)=>{D.face(cc,"ivy",x+70,y+46,30);D.text(cc,"its owner",x+124,y+60,{size:30});
+      D.icon(cc,"doc",x+310,y+46,24,{fill:"white"});D.text(cc,"written down first",x+30,y+144,{size:28,col:"mut"});});
+    rd_num(c,3,820,150);},[44,124,1190,456]),
+  {s:"means one thing",x:100,y:430,size:38,w:700,col:"blue",at:w("r1","means one thing",-0.3),d:1.0},
+  {s:"never a person",x:770,y:430,size:38,w:700,col:"green",align:"right",at:w("r2","never a person",-0.3),d:0.9},
+  {s:"ask Ivy first",x:1160,y:430,size:38,w:700,col:"blue",align:"right",at:w("r3","ask its owner",-0.3),d:0.9}];
+// 3. Ostrom (Carmen, at the team's board): the commons people shared for centuries, and what the ones that lasted had; she writes how
+// long, ticks each as the voice comes to it, and writes who made them
+const rd_boardC=(sc,w)=>[...rd_rec("Elinor Ostrom",{ref:["Governing the Commons","1990"],rsize:32,rx:1010},c=>{const D=PK.sk;
+    D.panel(c,70,150,400,300,{title:"commons",col:"green",fill:"green"},(cc,x,y)=>{[["anchor","fish"],["tree","forests"],["drop","water"]].forEach(([ic,s],i)=>{const cx=x+70+i*130;
+        D.icon(cc,ic,cx,y+44,28,{fill:"white"});D.text(cc,s,cx,y+102,{size:28,align:"center"});});
+      D.arrow(cc,[x+30,y+146],[x+370,y+146],{col:"mut",w:3.5,head:14});});
+    D.panel(c,500,150,680,300,{title:"the ones that lasted",col:"blue",fill:"blue"},(cc,x,y)=>[["a few clear rules","blue"],["fitted to the place","orange"],["made and changed by","green"]].forEach(([s,col],i)=>{const by=y+38+i*58;
+        D.disc(cc,x+40,by-11,12,{fill:col,col:"ink",w:2.5});D.text(cc,s,x+66,by,{size:34});}));},[60,150,1190,456]),
+  {s:"shared for centuries",x:100,y:430,size:36,w:700,col:"green",at:w("ostrom","for centuries",-0.4),d:0.9},
+  {k:"tick",x:842,y:237,r:18,col:"green",at:w("lasted","a few clear rules",0.3),d:0.25},
+  {k:"tick",x:866,y:295,r:18,col:"green",at:w("lasted","fitted to the place",0.3),d:0.25},
+  {s:"the people who live by them",x:566,y:426,size:36,w:700,col:"green",at:w("lasted","the people",-0.3),d:1.2}];
+// 4. data mesh and Team Topologies (Carmen): decisions with the people who know the work, on a platform that makes the hard parts easy
+const rd_boardD=(sc,w)=>[...rd_rec("Decisions near the work",{ref:["Data mesh","Team Topologies"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,520,300,{title:"decisions",col:"green",fill:"green"},(cc,x,y)=>{[RD_FOLK.lucy,RD_FOLK.arts,RD_FOLK.business,RD_FOLK.health].forEach((p,i)=>D.face(cc,p,x+75+i*105,y+48,28));
+      D.text(cc,"the faculties decide their classes",x+30,y+150,{size:28,col:"mut"});});
+    D.panel(c,620,150,560,300,{title:"a platform",col:"blue",fill:"blue"},(cc,x,y)=>{[["gear","orange"],["db","orange"],["shield","blue"],["lock","blue"]].forEach(([ic,f],i)=>D.icon(cc,ic,x+90+i*120,y+42,26,{fill:f}));
+      D.box(cc,x+40,y+92,480,34,{fill:"blue",col:"ink",w:3,r:8});D.text(cc,"the team keeps it",x+40,y+166,{size:28,col:"mut"});});},[60,150,1190,456]),
+  {s:"with who knows the work",x:100,y:430,size:40,w:700,col:"green",at:w("mesh","decisions with",-0.3),d:1.4},
+  {s:"makes the hard parts easy",x:1160,y:430,size:40,w:700,col:"blue",align:"right",at:w("mesh","a platform",-0.2),d:1.2}];
+// 5. the fourth rule (Helena, at the team's board): the live page, because copies go stale, and the date in the template's corner
+const rd_boardE=(sc,w)=>[...rd_rec("A fourth rule",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,310,300,{title:"the live page",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"laptop",x+70,y+46,32,{fill:"white"});D.disc(cc,x+132,y+28,9,{fill:"green",col:"ink",w:2});
+      D.text(cc,"on the platform",x+30,y+130,{size:28,col:"mut"});});
+    rd_num(c,4,70,150);
+    D.panel(c,410,150,350,300,{title:"because",col:"amber",fill:"amber"},(cc,x,y)=>{D.icon(cc,"doc",x+56,y+46,28,{fill:"white"});D.text(cc,"three weeks old",x+100,y+58,{size:28});
+      D.text(cc,"two planned from it",x+30,y+130,{size:28,col:"mut"});});
+    D.panel(c,790,150,390,300,{title:"the template",col:"green",fill:"green"},(cc,x,y)=>{D.box(cc,x+40,y+10,170,120,{fill:"white",col:"ink",w:2.5,r:6});
+      for(let i=0;i<3;i++)D.line(cc,[[x+60,y+52+i*26],[x+150-i*20,y+52+i*26]],{col:"mut",w:2.5,seed:i+2});
+      D.box(cc,x+164,y+18,38,24,{fill:"green",col:"green",w:2.5,r:4});D.arrow(cc,[x+300,y+90],[x+214,y+34],{col:"green",w:3.5,head:14,bow:-20});});},[44,124,1190,456]),
+  {s:"not a copy",x:100,y:430,size:38,w:700,col:"blue",at:w("rule4","not a copy",-0.3),d:0.7},
+  {s:"copies go stale",x:440,y:430,size:38,w:700,col:"amber",at:w("rule4","copies go stale",-0.3),d:0.8},
+  {s:"the date, in the corner",x:1160,y:430,size:34,w:700,col:"green",align:"right",at:w("date","the date",-0.3),d:1.0}];
+// 6. on Monday (Helena, at the board seen close): four rules and room to decide, and four of the five steps; she ticks each at the
+// board's right edge as the voice comes to it, and writes the fifth
+const RD_MON=[["few rules, each with its reason","m1","few rules"],["the right way, the easy way","m2","right way"],["say who decides what","m3","who decides"],["watch what emerges, and learn","m4","Watch"]];
+const rd_boardM=(sc,w)=>[...rd_rec("On Monday",{},c=>{const D=PK.sk;
+    D.panel(c,70,140,380,300,{title:"four rules",col:"blue",fill:"blue"},(cc,x,y)=>{for(let i=0;i<4;i++){const cx=x+70+i*80;D.disc(cc,cx,y+30,24,{fill:"blue",col:"ink",w:3});
+        D.text(cc,String(i+1),cx,y+41,{size:30,w:700,align:"center"});D.icon(cc,"building",cx,y+120,24,{fill:"green"});}
+      D.caps(cc,"room to decide",x+190,y+210,{align:"center",size:28,col:"green"});});
+    RD_MON.forEach(([s],i)=>{const y=180+i*74;D.disc(c,512,y-12,24,{fill:["blue","green","orange","amber"][i],col:"ink",w:3});D.text(c,String(i+1),512,y-1,{size:30,w:700,align:"center"});D.text(c,s,556,y,{size:34});});},[60,140,1080,450]),
+  ...RD_MON.map(([,id,word],i)=>({k:"tick",x:1150,y:166+i*74,r:18,col:"green",at:w(id,word,0.3),d:0.3})),
+  {s:"add a rule only for a real problem",x:1180,y:470,size:38,w:700,col:"blue",align:"right",at:w("m5","add a rule",-0.2),d:1.4}];
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page.
+   The farmer's book is written plainly; Helena's are sketched pages, almost done, and the pen adds the last words. */
 // 1. the temples' calendar (a farmer's book)
 const rd_note1=(sc,w)=>[
   {s:"The temple's calendar",x:70,y:124,size:68,w:760,col:"blue",at:w("temple","calendar",-0.4),d:0.9,marks:[["under","blue",null,0.3]]},
   {s:"who plants first, who follows",x:110,y:250,size:50,at:w("temple","who plants first",-0.3),d:1.2},
   {s:"in turns: water shared",x:110,y:360,size:52,col:"green",at:w("turns","in turns",-0.3),d:1.0},
   {s:"empty together: pests go hungry",x:110,y:470,size:46,col:"green",at:w("rest","empty together",-0.3),d:1.3}];
-// 2. every decision, one door (Helena)
-const rd_note2=(sc,w)=>[
-  {s:"One door",x:70,y:124,size:80,w:760,col:"amber",at:w("helena","saw more",-0.3),d:0.5,marks:[["under","amber",null,0.3]]},
-  {s:"whose rooms first: me",x:110,y:250,size:54,at:w("helena","she chose",-0.3),d:1.0},
-  {s:"every room decision, through us",x:110,y:360,size:48,col:"amber",at:w("centre","Every room decision",-0.3),d:1.3},
-  {s:"those who know the courses wait",x:110,y:470,size:46,at:w("knew","were waiting",-0.6),d:1.3}];
-// 3. Helena's job now
-const rd_note3=(sc,w)=>[
-  {s:"My job now",x:70,y:124,size:80,w:760,col:"blue",at:w("role","job changed",-0.3),d:0.5,marks:[["under","blue",null,0.3]]},
-  {s:"less deciding",x:110,y:250,size:56,at:w("role","less deciding",-0.3),d:0.7},
-  {s:"watch what emerges",x:110,y:360,size:56,col:"green",at:w("role","watching what emerged",-0.3),d:0.9},
-  {s:"ask what it taught",x:110,y:470,size:56,col:"green",at:w("role","asking what it taught",-0.3),d:0.9}];
+// 2. every decision, one door (Helena): the four faculties' questions all coming to her door, and the room reports waiting; the pen
+// adds what she saw
+const rd_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"One door",86,124,{size:76,col:"amber"});
+    [150,270,390,510].forEach((x,i)=>{D.icon(c,"building",x,250,30,{fill:"white"});D.arrow(c,[x,292],[310+i*14,394],{col:"ink",w:3,head:12,bow:(i-1.5)*6});});
+    D.icon(c,"door",330,440,40,{fill:"amber"});D.face(c,"helena",440,440,34);
+    D.dots(c,650,236,9,3,{gap:30,r:9,on:27,col:"orange"});D.text(c,"27 room reports",640,344,{size:30,col:"mut"});
+    D.icon(c,"hourglass",660,394,18,{fill:"amber"});D.text(c,"two weeks waiting",690,404,{size:30,col:"mut"});},[60,40,1040,800]),
+  {s:"whose rooms first: me",x:500,y:466,size:36,w:700,at:w("helena","she chose",-0.3),d:1.0},
+  {s:"every room decision, through us",x:110,y:590,size:46,w:700,col:"amber",at:w("centre","Every room decision",-0.3),d:1.3},
+  {s:"those who know the courses wait",x:110,y:700,size:44,w:700,at:w("knew","were waiting",-0.6),d:1.3}];
+// 3. Helena's job now: every decision through her before, the faculties deciding now while she watches, and the room reports made
+// by hand; the pen adds what her job is now
+const rd_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My job now",86,124,{size:76});
+    D.panel(c,100,170,280,290,{title:"before",col:"amber",fill:"amber"},(cc,x,y)=>{D.face(cc,"helena",x+140,y+96,34);
+      [[x+36,y+20],[x+244,y+20],[x+36,y+176],[x+244,y+176]].forEach(([ax,ay])=>D.arrow(cc,[ax,ay],[x+140+(ax<x+140?-50:50),y+96+(ay<y+96?-30:40)],{col:"amber",w:3,head:12}));});
+    D.panel(c,410,170,280,290,{title:"now",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"eye",x+140,y+40,28,{fill:"white"});
+      for(let i=0;i<4;i++){const bx=x+50+i*60;D.icon(cc,"sprout",bx,y+116,16,{fill:"green"});D.icon(cc,"building",bx,y+170,22,{fill:"white"});}});
+    D.panel(c,720,170,260,290,{title:"by hand",col:"orange",fill:"orange"},(cc,x,y)=>D.bars(cc,x+30,y+60,200,126,[{v:27,col:"amber",top:"27",label:"before"},{v:0,col:"green",top:"0",label:"now"}],{size:28}));},[60,40,1040,800]),
+  {s:"less deciding",x:110,y:570,size:52,w:700,at:w("role","less deciding",-0.3),d:0.7},
+  {s:"watch what emerges",x:110,y:660,size:52,w:700,col:"green",at:w("role","watching what emerged",-0.3),d:0.9},
+  {s:"ask what it taught",x:110,y:750,size:52,w:700,col:"green",at:w("role","asking what it taught",-0.3),d:0.9}];
 
 /* ===== Rules that let people decide: the chapters, shot by shot =====
    The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line

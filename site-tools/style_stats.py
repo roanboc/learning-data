@@ -51,7 +51,7 @@ LOOKS = [
      ['fit-for-use', 'quality-as-a-habit']),
     ('paper-glass', 'Paper and glass', 'Enterprise architecture',
      'Paper notes on a wall are drafts, glass in the layers\' colours is the confirmed model; each series has a story in its own light.',
-     ['enterprise-architecture', 'business-architecture-for-data', 'data-architecture', 'platform-and-solution-architecture', 'ai-and-continuous-architecture']),
+     ['enterprise-architecture', 'business-architecture-for-data', 'data-architecture', 'platform-and-solution-architecture', 'continuous-architecture', 'ai-architecture']),
     ('wash', 'Watercolour, pencil and wash', 'Master and reference data',
      'Painted in watercolour, with people in pencil and wash.',
      ['master-and-reference-data']),

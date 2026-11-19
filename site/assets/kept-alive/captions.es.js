@@ -60,7 +60,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "And it has a rhythm. On every change, the map's checks. The day someone leaves, the owner check.":"Y tiene un ritmo. En cada cambio, las comprobaciones del mapa. El día que alguien se va, la de responsables.",
 "Every month, the map agent reads what's running against the map, and drafts a change for each difference, for its owner to confirm.":"Cada mes, el agente del mapa lee lo que está en marcha frente al mapa, y redacta un cambio por cada diferencia, para que lo confirme su responsable.",
 "Every quarter, each agent is tested again. And every year, each owner confirms what they own.":"Cada trimestre, cada agente se prueba de nuevo. Y cada año, cada responsable confirma lo que tiene a su cargo.",
-"This is the last film on enterprise architecture, and each of its five series ends on the same idea.":"Esta es la última película sobre arquitectura empresarial, y cada una de sus cinco series termina con la misma idea.",
+"Five series on enterprise architecture so far, and each ends on the same idea.":"Cinco series sobre arquitectura empresarial hasta aquí, y cada una termina con la misma idea.",
 "The map before the data: a map stays alive while people use it, keep it true, and pass it on.":"El mapa antes de los datos: un mapa sigue vivo mientras la gente lo usa, lo mantiene fiel y lo transmite.",
 "Business architecture for data: rules last only while people keep them, and change them when the world changes.":"Arquitectura de negocio para datos: las reglas duran solo mientras la gente las cuida, y las cambia cuando el mundo cambia.",
 "Data architecture: it's never finished. It matures one change at a time.":"Arquitectura de datos: nunca está terminada. Madura un cambio a la vez.",
@@ -75,5 +75,5 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Every new solar home has had its check, and every agent answers from this month's words.":"Cada nuevo hogar solar tuvo su comprobación, y cada agente responde con las palabras de este mes.",
 "Give the map an owner, a budget and a rhythm, not a project's end date.":"Da al mapa un responsable, un presupuesto y un ritmo, no la fecha de fin de un proyecto.",
 "Check every change, read the map again from what's running, and let agents read the map itself, never a copy.":"Comprueba cada cambio, relee el mapa desde lo que está en marcha, y que los agentes lean el mapa mismo, nunca una copia.",
-"The architecture is kept. Who decides about the data in it is where Data governance begins.":"La arquitectura se mantiene. Quién decide sobre sus datos es donde empieza Gobernanza de datos."
+"The architecture is kept. Next, AI architecture: the agents on the map.":"La arquitectura se mantiene. Luego, Arquitectura de IA: los agentes en el mapa."
 });

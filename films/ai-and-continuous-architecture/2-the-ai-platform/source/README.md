@@ -1,6 +1,6 @@
 # Rebuilding The AI platform
 
-*The AI platform*, film 2 of 6 of *AI and continuous architecture*, is generated from code like *The map before the data*'s films: the same engine, components, voice and tools (run through [`../../../enterprise-architecture/shared/tools/run.py`](../../../enterprise-architecture/shared/tools/run.py)), and the series' own components in [`../../shared/src/aca.js`](../../shared/src/aca.js): its mark and cards (`acaMark`, `acaTitle`, `acaEnd`), Babylon's sky, palms, folk, bricks and boats (`bab_*`) and the agent (`aca_agent`). A change there is a new version of every film of the series. Only what is new lives here:
+*The AI platform*, film 2 of 3 of *AI architecture*, is generated from code like *The map before the data*'s films: the same engine, components, voice and tools (run through [`../../../enterprise-architecture/shared/tools/run.py`](../../../enterprise-architecture/shared/tools/run.py)), and the series' own components in [`../../shared/src/aca.js`](../../shared/src/aca.js): its mark and cards (`acaMark`, `acaTitle`, `acaEnd`), Babylon's sky, palms, folk, bricks and boats (`bab_*`) and the agent (`aca_agent`). A change there is a new version of every film of the series. Only what is new lives here:
 
 | File | What it holds |
 |---|---|

@@ -6,7 +6,8 @@
     "business-architecture-for-data",
     "data-architecture",
     "platform-and-solution-architecture",
-    "ai-and-continuous-architecture"
+    "continuous-architecture",
+    "ai-architecture"
   ],
   "name": {
     "en": "Enterprise architecture",

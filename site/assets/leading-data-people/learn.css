@@ -28,3 +28,7 @@
 @media (prefers-reduced-motion:reduce){.lp-goals li i{transition:none}}
 /* the scenarios: the people in a situation, on the films' paper */
 #series-quiz .qvis{background:#f7f2e7}
+/* The ink colours of the people are darker than the site's tab colours: the tab's number sits on a lighter wash of its lab's colour, so its dark figure keeps AA contrast. */
+.stops button[id^="lp-tab-"] i{background:color-mix(in srgb,var(--c) 60%,#fff)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) #lp-panel .stop-text .kicker b{color:color-mix(in srgb,var(--c) 70%,#fff)}}
+[data-theme=dark] #lp-panel .stop-text .kicker b{color:color-mix(in srgb,var(--c) 70%,#fff)}

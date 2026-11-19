@@ -5,17 +5,13 @@
    series' three films; the page says which films are on the site, or coming (data-films on its root: {number: {t, k, href, starts}
    or {t, coming}}), and only their labs and scenarios show. Its data-store is the progress prefix.
    The engine is the master data series' own (assets/master-and-reference-data/learn.js), copied into this series' folder so each
-   series keeps its own, with the five kinds of lab these films need, each described entirely by its words:
-     sort      place each item in a bucket, then check: every item says why, and what goes wrong where you put it
-     pick      choose one option, and see what it gets right and wrong
-     steps     walk through a sequence, one step at a time
-     compose   build a sentence from parts, such as a service and its promise
-     test      answer the same questions of several things, and see the verdict
-   Pictures are drawn with the films' own components (wc_*, and the map's bands, GV_LAYERS): a lab's or a scenario's "vis" names a
-   function in PIX below, which takes its words from the lab or the scenario. Without the bundle, the labs still work, on plain paper.
+   series keeps its own. Every lab is a playground (kind "play"): a picture the visitor changes with buttons and switches, with three
+   to five experiments ticked as they happen (labPlay and PLAY below). The scenarios are the series' one evaluation.
+   Pictures are drawn with the films' own components (wc_*, and the map's bands, GV_LAYERS): each playground draws its own, and a
+   scenario's "vis" names a function in PIX below, which takes its words from the scenario. Without the bundle, the labs still work, on plain paper.
    The series shows no files, code or tool screens, as its films don't: its labs link to no file in the example project.
-   Progress stays in this browser, under the page's data-store (or MR.store): the labs visited (visited, ids) and the scenarios
-   answered (quiz, keyed by number), as assets/learn/path.js counts them. smoke.py expects every lab's tab on the labs page
+   Progress stays in this browser, under the page's data-store (or MR.store): the labs visited (visited, ids), the experiments done (goals,
+   by lab) and the scenarios answered (quiz, keyed by number), as assets/learn/path.js counts them. smoke.py expects every lab's tab on the labs page
    ([role=tab][data-id]), the open one selected, one "Watch this part" link to its chapter (#t=), and the film shown on the scenarios
    page as data-film on its root.
    The results for all films, and for the last film, end with the series' last words (MR.close), as its last film ends. */
@@ -129,101 +125,6 @@ function noteCard(ctx,x,y,w,hh,head0,ls,o){o=o||{};card(ctx,x,y,w,hh,{kind:"card
 function noteH(ctx,w,head0,ls,o){o=o||{};let hgt=(o.top||50)+28;if(head0)hgt+=(o.headSize||30)+18;
   (ls||[]).forEach(l=>{const L0=typeof l==="string"?{t:l}:l,z=o.size||26;hgt+=Math.min(L0.max||3,wrap(ctx,L0.t,w-48-(L0.mark!=null?44:0),z,L0.b?700:600).length)*z*1.28+(o.gap||10);});return hgt;}
 const PIX={
-  /* Noor's map, a band for each kind of card or each place, and the cards put on it (A capability, not a project; Where each piece lives) */
-  bands(ctx,w,hh,st,Lb,k){const V=Lb.w,B=V.buckets,x0=24,lw=V.lw||270,lh=(hh-36)/B.length;
-    B.forEach(([key,label,hex,sub],i)=>{const y=18+i*lh;card(ctx,x0,y+4,w-48,lh-8,{kind:"sheet",seed:5+i});wash(ctx,x0+12,y+16,lw-20,lh-32,hex||"strategy",0.55,9+i);
-      tx(ctx,label,x0+28,y+lh/2+(sub?-4:10),{size:fit(ctx,label,lw-48,28,800,null,20),w:800,col:WC_DARK});
-      if(sub)tx(ctx,sub,x0+28,y+lh/2+28,{size:fit(ctx,sub,lw-48,22,600,null,17),w:600,col:WC_INK});
-      // the band's cards, in up to two rows; the last one put there drops in
-      const mine=placed(V,st,key),wd=([it])=>{const s=short(it);return Math.min(tw(ctx,s,fit(ctx,s,300,24,700,null,17),700)+40,340)+(st.checked?44:0)+12;},
-        one=mine.reduce((a,m)=>a+wd(m),0)<=w-44-(x0+lw+14),rows=one?[y+lh/2]:[y+lh/2-26,y+lh/2+28];let x=x0+lw+14,row=0,more=0;
-      mine.forEach(([it,j])=>{const s=short(it),z=fit(ctx,s,300,24,700,null,17),ww=Math.min(tw(ctx,s,z,700)+40,340)+(st.checked?44:0);if(x+ww>w-44){if(row){more++;return;}row=1;x=x0+lw+14;}
-        const drop=j===st.last?1-k:0;withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x,rows[row]-drop*24,s,{size:z,maxW:340});if(st.checked)mark(ctx,x+tw0+20,rows[row]-4,26,it.b===key,k);});x+=ww+12;});
-      if(more)tx(ctx,"+"+more,w-40,y+lh/2+10,{size:24,align:"right",col:WC_MUTED});});},
-  /* columns, a heading on each, and what's been put under it */
-  columns(ctx,w,hh,st,Lb,k){const V=Lb.w,cols=V.buckets,cw=(w-48)/cols.length;
-    if(V.title)tx(ctx,V.title,w/2,46,{size:fit(ctx,V.title,w-80,30,800,null,22),w:800,align:"center",col:WC_DARK});const top=V.title?70:18;
-    cols.forEach(([key,label,hex,sub],i)=>{const x=24+i*cw,cx=x+cw/2;card(ctx,x+8,top,cw-16,hh-top-18,{kind:"sheet",seed:3+i});
-      wash(ctx,x+24,top+16,cw-48,sub?96:62,hex||"business",0.5,11+i);tx(ctx,label,cx,top+58,{size:fit(ctx,label,cw-64,30,800,null,20),w:800,align:"center",col:WC_DARK});
-      if(sub)tx(ctx,sub,cx,top+96,{size:fit(ctx,sub,cw-64,22,600,null,17),align:"center",col:WC_INK});
-      const mine=placed(V,st,key);let y=top+(sub?150:116);const cap=Math.max(1,Math.floor((hh-y-30)/50));
-      mine.slice(0,cap).forEach(([it,j])=>{const drop=j===st.last?1-k:0,s=short(it);withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x+26,y-drop*30,s,{size:fit(ctx,s,cw-108,24,700,null,18),maxW:cw-68});
-        if(st.checked)mark(ctx,x+26+tw0+22,y-4,28,it.b===key,k);});y+=50;});
-      if(mine.length>cap)tx(ctx,"+"+(mine.length-cap),cx,y,{size:24,align:"center",col:WC_MUTED});});},
-  /* A capability, not a project: Govern data, its eight capabilities, each washed in the colour its evidence gives it */
-  heat(ctx,w,hh,st,Lb,k){const V=Lb.w,top=V.top||"Govern data",tw0=Math.max(300,tw(ctx,top,30,800)+80);
-    card(ctx,w/2-tw0/2,18,tw0,72,{kind:"card",wash:C("gold"),washA:0.5,seed:70});tx(ctx,top,w/2,64,{size:30,w:800,align:"center",col:WC_DARK});
-    const n=V.items.length,per=Math.ceil(n/2),gap=14,cw=(w-48-(per-1)*gap)/per,ch=(hh-200)/2;
-    V.items.forEach((it,j)=>{const col=j%per,row=Math.floor(j/per),x=24+col*(cw+gap),y=112+row*(ch+gap);if(!row)pencil(ctx,[[w/2,90],[x+cw/2,y]],{a:0.22,lw:1.6,seed:j+2});});
-    V.items.forEach((it,j)=>{const col=j%per,row=Math.floor(j/per),x=24+col*(cw+gap),y=112+row*(ch+gap),b=st.pick&&st.pick[j],B=V.buckets.find(q=>q[0]===b),drop=j===st.last?1-k:0;
-      card(ctx,x,y,cw,ch,{kind:"card",wash:B?C(B[2]):null,washA:0.5*(1-drop*0.7),dashed:!B,seed:80+j});
-      lines(ctx,short(it),x+18,y+40,cw-36-(st.checked?30:0),{size:25,max:4,w:700,col:WC_DARK});
-      if(st.checked&&B)mark(ctx,x+cw-26,y+ch-28,28,it.b===b,k);});
-    // the key: what each colour says
-    const ks=V.buckets.map(([key,label,hex,sub])=>[hex,label+(sub?" · "+sub:"")]),tot=ks.reduce((a,[,s])=>a+tw(ctx,s,22,600)+70,0),sc=Math.min(1,(w-48)/tot);let kx=24;
-    ks.forEach(([hex,s],i)=>{const kw=(tw(ctx,s,22,600)+70)*sc;wash(ctx,kx+6,hh-66,40,40,hex,0.7,90+i);tx(ctx,s,kx+58,hh-37,{size:fit(ctx,s,kw-66,22,600,null,16),w:600,col:WC_INK});kx+=kw;});},
-  /* A capability, not a project: a service, joined to the capability it serves, with its promise on the card */
-  service(ctx,w,hh,st,Lb,k){const V=Lb.w,P=V.pic,pk=st.pick||[],at=i=>pk[i]==null?null:V.slots[i].opts[pk[i]],cx=w/2;
-    tx(ctx,P.strategy,24,58,{size:24,w:700,col:WC_MUTED});tx(ctx,P.business,24,232,{size:24,w:700,col:WC_MUTED});
-    wash(ctx,18,20,w-36,120,"strategy",0.28,3);wash(ctx,18,190,w-36,hh-208,"business",0.24,4);
-    const cap=at(P.cap),capT=cap?(cap.s||cap.t):"…",cw0=Math.min(w-360,Math.max(360,tw(ctx,capT,28,800)+70));
-    card(ctx,cx-cw0/2,40,cw0,80,{kind:"card",dashed:!cap,seed:31});tx(ctx,capT,cx,90,{size:fit(ctx,capT,cw0-40,28,800,null,20),w:800,align:"center",col:WC_DARK});
-    if(cap)mark(ctx,cx+cw0/2+30,80,26,!!cap.ok,k);
-    wc_link(ctx,cx,120,cx,214,WC_PENCIL,{vertical:true,p:cap?1:0.5,a:0.6});
-    const sw=Math.min(w-260,760),sx=cx-sw/2,sy=214,sh=hh-sy-30,nm=at(P.name),nmT=nm?(nm.s||nm.t):"…";
-    card(ctx,sx,sy,sw,sh,{kind:"card",dashed:!nm,seed:32});tx(ctx,nmT,sx+30,sy+54,{size:fit(ctx,nmT,sw-110,30,800,null,22),w:800,col:WC_DARK});
-    if(nm)mark(ctx,sx+sw-36,sy+44,26,!!nm.ok,k);pencil(ctx,[[sx+26,sy+80],[sx+sw-26,sy+80]],{a:0.35,lw:2});
-    tx(ctx,P.promise,sx+30,sy+122,{size:22,w:700,col:WC_MUTED});
-    let y=sy+166;P.lines.forEach(i=>{const o=at(i),s=o?(o.s||o.t):"…";tx(ctx,s,sx+30,y,{size:fit(ctx,s,sw-110,26,600,null,18),w:600,col:o?WC_INK:WC_MUTED});if(o)mark(ctx,sx+sw-36,y-8,24,!!o.ok,k);y+=48;});},
-  /* Who does what, end to end: the six steps of a service, and the one you're on: its role, who fills it, what it reads and writes */
-  flow(ctx,w,hh,st,Lb,k){const V=Lb.w,S=V.steps,n=S.length,gap=12,cw=(w-48-gap*(n-1))/n,cur=st.step||0;
-    S.forEach((s,i)=>{const x=24+i*(cw+gap),on=i===cur,done=i<cur;card(ctx,x,20,cw,70,{kind:"card",wash:on?C("gold"):done?C("green"):null,washA:on?0.55:0.25,dashed:!on&&!done,seed:40+i});
-      tx(ctx,s.s,x+cw/2,66,{size:fit(ctx,s.s,cw-24,28,800,null,18),w:800,align:"center",col:on?WC_DARK:WC_INK});
-      if(i<n-1)arrow(ctx,x+cw+1,55,x+cw+gap-1,55,WC_PENCIL,{head:6,lw:2,a:0.6});});
-    const P=S[cur].pic,x=24,y=116,ww=w-48,h2=hh-y-20;card(ctx,x,y,ww,h2,{kind:"sheet",seed:49});
-    const rh=(h2-30)/P.length;P.forEach(([lab,val],i)=>{const yy=y+30+i*rh+rh/2;tx(ctx,lab,x+30,yy+9,{size:fit(ctx,lab,210,24,700,null,17),w:700,col:WC_MUTED});
-      withA(ctx,0.25+0.75*k,()=>lines(ctx,val,x+260,yy+9-(wrap(ctx,val,ww-300,26,600).length>1?15:0),ww-300,{size:26,max:2,w:600,col:WC_DARK}));
-      if(i)pencil(ctx,[[x+24,y+30+i*rh],[x+ww-24,y+30+i*rh]],{a:0.18,lw:1.4,seed:i+50});});},
-  /* Who does what, end to end: the glossary as a product: its owner and users, the promises you keep, and what you leave out */
-  product(ctx,w,hh,st,Lb,k){const V=Lb.w,P=V.pic,lw=w*0.62,x=24,y=18;card(ctx,x,y,lw-12,hh-36,{kind:"card",seed:60});
-    wash(ctx,x+16,y+16,lw-44,60,"information",0.45,61);tx(ctx,P.title,x+30,y+58,{size:fit(ctx,P.title,lw-80,30,800,null,22),w:800,col:WC_DARK});
-    let yy=y+112;P.lines.forEach(l=>{tx(ctx,l,x+30,yy,{size:fit(ctx,l,lw-80,24,600,null,17),w:600});yy+=40;});
-    tx(ctx,P.promise,x+30,yy+12,{size:24,w:700,col:WC_MUTED});yy+=44;
-    const keep=placed(V,st,V.keep),cap=Math.max(1,Math.floor((hh-yy-24)/48));
-    keep.slice(0,cap).forEach(([it,j])=>{const drop=j===st.last?1-k:0,s=short(it);withA(ctx,1-drop*0.8,()=>{const t0=tag(ctx,x+30,yy+10-drop*24,s,{size:fit(ctx,s,lw-170,24,700,null,17),maxW:lw-120,wash:"information",washA:0.3});
-      if(st.checked)mark(ctx,x+30+t0+22,yy+6,26,it.b===V.keep,k);});yy+=48;});
-    if(keep.length>cap)tx(ctx,"+"+(keep.length-cap),x+lw-50,yy-20,{size:24,align:"right",col:WC_MUTED});
-    const rx=lw+16,rw=w-rx-24;card(ctx,rx,y,rw,hh-36,{kind:"sheet",seed:62});tx(ctx,P.out,rx+rw/2,y+56,{size:fit(ctx,P.out,rw-40,26,800,null,18),w:800,align:"center",col:WC_MUTED});
-    let ry=y+110;const out=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick&&st.pick[j]!=null&&st.pick[j]!==V.keep),rc=Math.max(1,Math.floor((hh-ry-24)/48));
-    out.slice(0,rc).forEach(([it,j])=>{const s=short(it),t0=tag(ctx,rx+20,ry,s,{size:fit(ctx,s,rw-110,22,700,null,16),maxW:rw-70});
-      if(st.checked)mark(ctx,rx+20+t0+18,ry-4,24,it.b!==V.keep,k);ry+=48;});
-    if(out.length>rc)tx(ctx,"+"+(out.length-rc),rx+rw/2,ry,{size:22,align:"center",col:WC_MUTED});},
-  /* Where each piece lives: each flow, from one place to another; green where you've called it one way, red where it flows back */
-  flows(ctx,w,hh,st,Lb,k){const V=Lb.w,n=V.items.length,rh=(hh-36)/n,tw1=(w-200)/2;card(ctx,16,12,w-32,hh-24,{kind:"sheet",seed:70});
-    V.items.forEach((it,j)=>{const y=18+j*rh+rh/2,b=st.pick&&st.pick[j],good=b===V.good,drop=j===st.last?1-k:0;
-      const a=tag(ctx,40,y,it.f,{size:fit(ctx,it.f,tw1-60,24,700,null,16),maxW:tw1-20}),bx=w-40-tw1+20;
-      tag(ctx,bx,y,it.to,{size:fit(ctx,it.to,tw1-60,24,700,null,16),maxW:tw1-20});
-      const col=b==null?WC_MUTED:good?OK:NO;arrow(ctx,40+a+16,y,bx-16,y,col,{p:b==null?1:1-drop*0.6,dash:b==null?[3,10]:null,noHead:b==null,a:b==null?0.5:0.9});
-      if(st.checked&&b!=null)mark(ctx,w-56,y-4,26,it.b===b,k);});},
-  /* Where each piece lives: a piece in its home, and one of its copies, side by side, with what last night's check found */
-  drift(ctx,w,hh,st,Lb,k){const V=Lb.w,it=V.items[st.cur],P=it.pic,done=st.done&&st.done[st.cur],cw=(w-140)/2,y=60,ch=hh-150;
-    tx(ctx,P.piece,w/2,40,{size:fit(ctx,P.piece,w-80,28,800,null,20),w:800,align:"center",col:WC_DARK});
-    [[P.home,V.homeL,24],[P.copy,V.copyL,w-24-cw]].forEach(([c,lab,x],i)=>{card(ctx,x,y+20,cw,ch,{kind:"card",wash:C(i?"application":"gold"),washA:i?0.22:0.32,seed:90+i});
-      tx(ctx,lab,x+26,y+66,{size:22,w:700,col:WC_MUTED});lines(ctx,c.place,x+26,y+104,cw-52,{size:26,max:2,w:800,col:WC_DARK});
-      pencil(ctx,[[x+22,y+170],[x+cw-22,y+170]],{a:0.3,lw:2,seed:i+3});lines(ctx,c.val,x+26,y+214,cw-52,{size:28,max:3,w:600,col:WC_INK});
-      if(c.note)tx(ctx,c.note,x+26,y+ch-6,{size:fit(ctx,c.note,cw-52,22,600,null,16),w:600,col:WC_MUTED});});
-    arrow(ctx,24+cw+14,y+20+ch/2,w-24-cw-14,y+20+ch/2,WC_PENCIL,{a:0.7,head:12});
-    if(done){const drifted=it.verdict==="drifted",s=drifted?V.foundL:V.stepL;if(drifted)wc_ring(ctx,w-24-cw/2,y+214,cw/2-10,46,k,{col:NO});
-      tag(ctx,w/2,hh-32,s,{size:fit(ctx,s,w-120,26,700,null,18),align:"center",wash:drifted?"red":"green",washA:0.35,maxW:w-60});}},
-  /* Where each piece lives: one person, and for each thing, whether it's theirs to change or only to read */
-  whose(ctx,w,hh,st,Lb,k){const V=Lb.w,it=V.items[st.cur],ans=(st.ans&&st.ans[st.cur])||[],done=st.done&&st.done[st.cur],lw=330;
-    card(ctx,24,24,lw,hh-48,{kind:"card",wash:C(it.side==="tech"?"tech":"steward"),washA:0.3,seed:100});
-    lines(ctx,it.t,48,90,lw-48,{size:32,max:2,w:800,col:WC_DARK});lines(ctx,it.role,48,190,lw-48,{size:24,max:4,w:600,col:WC_INK});
-    const x0=lw+50,rh=(hh-40)/V.qs.length;V.qshort.forEach((q,i)=>{const y=20+i*rh+rh/2,a=ans[i],lab=a==null?"…":a?V.yes:V.no;
-      tx(ctx,q,x0,y-6,{size:fit(ctx,q,w-x0-250,24,700,null,17),w:700,col:WC_DARK});
-      tag(ctx,w-40,y-14,lab,{size:22,align:"right",wash:a==null?null:a?"green":"muted",washA:0.35,maxW:220});
-      if(done)mark(ctx,w-60-Math.min(220,tw(ctx,lab,22,700)+40)-10,y-18,24,it.a[i]==null||a===it.a[i],k);
-      pencil(ctx,[[x0,y+22],[w-40,y+22]],{a:0.2,lw:1.4,seed:i+7});});},
   /* the scenarios: a few tags in a row or a column, optionally washed, with a heading */
   tags(ctx,w,hh,st){if(st.title)head(ctx,w/2,64,st.title,st.sub,{align:"center",size:34});const ts=st.tags||[],y0=st.title?(st.sub?190:150):80,gap=(hh-y0-30)/Math.max(1,ts.length);
     ts.forEach((t,i)=>{const o=typeof t==="string"?{t}:t,y=y0+i*gap+gap/2;tag(ctx,w/2,y,o.t,{size:fit(ctx,o.t,w-140,30,700),align:"center",wash:o.c,maxW:w-60});if(o.mark!=null)mark(ctx,w-60,y-4,34,o.mark,1);});},
@@ -240,68 +141,152 @@ const PIX={
 
 /* ---------- the lab's parts ---------- */
 function seg(opts,cur,on,label){const s=h("div",{class:"mr-seg",role:"group","aria-label":label||""});
-  opts.forEach(([k,t,c])=>s.append(h("button",{type:"button","aria-pressed":String(k===cur),"data-k":k,style:c?"--b:"+c:null,
-    onclick:()=>{s.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.k===String(k))));on(k);}},t)));return s;}
-function picture(Lb,state){const f=PIX[Lb.vis];if(!f)return null;const vw=Lb.vw||1200,vh=Lb.vh||620;return stage(vw,vh,(c,k)=>f(c,vw,vh,state(),Lb,k),Lb.alt||Lb.name);}
+  const paintS=()=>s.replaceChildren(...opts.map(([k,t])=>h("button",{type:"button","aria-pressed":String(k===cur),onclick:()=>{cur=k;paintS();on(k);}},t)));paintS();return s;}
 const shell=(Lb,pic,...parts)=>h("div",{class:"mr-lab",style:"--c:"+Lb.c},...(pic?[pic.el]:[]),...parts);
 const info=t=>t?h("p",{class:"mr-info"},t):null;
 const btn=(t,on,cls)=>h("button",{type:"button",class:"mr-btn"+(cls?" "+cls:""),onclick:on},t);
 
-/* ---------- sort: every item in its bucket ---------- */
-function labSort(Lb){const V=Lb.w,say=h("p",{class:"mr-say",role:"status"}),pick={};let checked=false,last=-1;
-  const pic=picture(Lb,()=>({pick,checked,last})),rows=h("div",{class:"mr-rows"});
-  const go=btn(U.check,()=>{checked=true;last=-1;draw();upd(true);},"go"),again=btn(U.again,()=>{for(const k in pick)delete pick[k];checked=false;last=-1;draw();upd();});
-  const bname=k=>(V.buckets.find(b=>b[0]===k)||[,""])[1];
-  function draw(){rows.replaceChildren(...V.items.map((it,i)=>{const ok=checked&&pick[i]===it.b,no=checked&&pick[i]!==it.b;
-    return h("div",{class:"mr-row"+(ok?" ok":no?" no":"")},h("p",{class:"mr-item"},it.t),
-      seg(V.buckets.map(b=>[b[0],b[1],b[2]]),pick[i],k=>{pick[i]=k;last=i;if(checked){checked=false;draw();}upd(true);},it.t),
-      checked?h("p",{class:"mr-why"},h("b",null,ok?U.right:fill(U.belongs,{b:bname(it.b)}))," ",no&&it.no&&it.no[pick[i]]?it.no[pick[i]]+" ":"",it.why):null);}));}
-  function upd(anim){const n=Object.keys(pick).length,right=V.items.filter((it,i)=>pick[i]===it.b).length;go.disabled=n<V.items.length;
-    say.textContent=checked?fill(right===V.items.length?V.sayAll:V.saySome,{n:right,of:V.items.length}):(n<V.items.length?fill(U.placed,{n,of:V.items.length}):U.ready);if(pic)pic.paint(anim);}
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),rows,h("div",{class:"mr-controls"},go,again),say);}
+/* ---------- play: a picture the visitor changes, with experiments ticked as they happen ---------- */
+// Every lab is a playground (kind "play", the site's standard since Data that moves): the visitor picks options, flips switches,
+// presses, and watches the picture change; each playground has three to five experiments (w.goals), each ticked when the visitor makes
+// it happen, and its end once all are ticked. PLAY[id](Lb, api) gives its state, its controls (built with api.group, api.seg,
+// api.toggle and api.btn), its readouts ([[label, () => value, () => "ok" | "no" | ""]]), its picture's height (vh) and its drawing
+// (draw(ctx, w, hh, k), k running 0 to 1 after each change). api.say(text, tone) says what happened; api.reach(key) ticks an
+// experiment. Start again puts everything back as it was, the ticks included. Ticks are kept in this browser, under "goals".
+const PLAY={};
+function labPlay(Lb){const W=Lb.w,G=W.goals,all=get("goals",{})||{};let got=new Set(all[Lb.id]||[]);
+  const box=h("div",{class:"mr-lab mr-play",style:"--c:"+Lb.c});let P=null,pic=null,rd=[],say=null,list=null,end=null;
+  const api={
+    say:(t,tone)=>{say.className="mr-say"+(tone?" "+tone:"");say.textContent=t;},
+    reach:k=>{if(got.has(k)||!G.some(g=>g[0]===k))return;got.add(k);all[Lb.id]=[...got];set("goals",all);paintGoals(k);},
+    paint:anim=>{if(pic)pic.paint(anim!==false);},
+    refresh:()=>{rd.forEach(([el,f,c])=>{el.querySelector("b").textContent=f();el.className=c?c()||"":"";});},
+    group:label=>{const g=h("div",{class:"mr-controls mr-prow"},label?h("span",{class:"mr-lbl"},label):null);ctrl.append(g);return g;},
+    seg:(row,items,cur,fn,lbl)=>{const s=seg(items,cur,k=>{fn(k);api.refresh();api.paint();},lbl);row.append(s);return s;},
+    toggle:(row,label,on,fn)=>{const b=h("button",{type:"button",class:"mr-btn","aria-pressed":String(!!on),onclick:()=>{const v=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(v));fn(v);api.refresh();api.paint();}},label);row.append(b);return b;},
+    btn:(row,label,fn,cls)=>{const b=btn(label,()=>{fn();api.refresh();api.paint();},cls);row.append(b);return b;}};
+  let ctrl=null;
+  function paintGoals(just){list.replaceChildren(...G.map(([k,t],i)=>h("li",{class:got.has(k)?"ok":""},h("i",{"aria-hidden":"true"},got.has(k)?"✓":String(i+1)),h("span",null,t),got.has(k)?h("span",{class:"sr"}," · "+U.reached):null)));
+    const n=got.size,done=n===G.length;end.replaceChildren(...(done?[h("p",{class:"mr-end"},W.end)]:[]));
+    if(just){const g=G.find(x=>x[0]===just);say.append(h("span",{class:"mr-got"}," "+fill(U.reachedOne,{t:g[1]})));if(done)say.append(h("span",{class:"sr"}," "+W.end));}
+    list.setAttribute("aria-label",U.goals+" · "+fill(U.nOf,{n,of:G.length}));}
+  function build(){box.replaceChildren();rd=[];ctrl=h("div",{class:"mr-ctrl"});say=h("p",{class:"mr-say",role:"status"});list=h("ol",{class:"mr-goals"});end=h("div",{class:"mr-endbox"});
+    const stats=h("div",{class:"mr-stats"});P=PLAY[Lb.id](Lb,api);const vw=1200,vh=P.vh||620;
+    pic=stage(vw,vh,(c,k)=>P.draw(c,vw,vh,k),W.alt||Lb.name);
+    (P.readouts||[]).forEach(([label,f,c])=>{const el=h("p",null,h("b",null,"–"),h("span",null,label));stats.append(el);rd.push([el,f,c]);});
+    const again=btn(U.again,()=>{got=new Set();all[Lb.id]=[];set("goals",all);build();api.say(W.start);paintGoals();},"sm mr-again");
+    box.append(h("div",{class:"mr-pic"},pic.el),info(W.prompt),h("div",{class:"mr-goalbox"},h("p",{class:"mr-gh"},U.goals),list),ctrl,stats,say,end,h("div",{class:"mr-foot"},again));
+    api.refresh();ready().then(()=>pic.paint(false));}
+  build();api.say(W.start);paintGoals();return box;}
+// a card with a heading and a value under it, centred, optionally washed, faded, dashed or struck through
+function box2(ctx,x,y,w,hh,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{card(ctx,x,y,w,hh,{kind:"card",wash:o.wash?C(o.wash):null,washA:o.washA||0.4,dashed:o.dashed,seed:o.seed||(x|0)});
+  if(o.label)tx(ctx,o.label,x+w/2,y+(o.t?40:hh/2+9),{size:fit(ctx,o.label,w-36,o.lsize||26,800,null,17),w:800,align:"center",col:WC_DARK});
+  if(o.t)lines(ctx,o.t,x+w/2,y+(o.label?78:hh/2-6),w-30,{size:o.size||22,max:o.max||2,w:600,align:"center",col:o.col||WC_INK});
+  if(o.cross)pencil(ctx,[[x+16,y+hh-14],[x+w-16,y+14]],{col:NO,lw:3,a:0.8,seed:(x|0)+3});});}
+// a small round token, such as a request on its way
+function dot(ctx,x,y,r,col,a){ctx.save();ctx.globalAlpha*=a==null?1:a;ctx.fillStyle="rgb("+col.join(",")+")";ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.restore();}
 
-/* ---------- pick: one option, and what it gets right ---------- */
-function labPick(Lb){const V=Lb.w;let cur=V.opts[0][0];const say=h("p",{class:"mr-say",role:"status"}),list=h("ul",{class:"mr-checks"}),stats=h("div",{class:"mr-stats"});
-  const pic=picture(Lb,()=>({pick:cur}));
-  function upd(anim){const r=V.res[cur];list.replaceChildren(...V.checks.map((t,i)=>h("li",{class:r[i]===1?"ok":r[i]===0.5?"warn":"no"},t)));
-    stats.replaceChildren(...(V.stats&&V.stats[cur]?V.stats[cur].map(([n,t])=>h("p",null,h("b",null,n),h("span",null,t))):[]));say.textContent=V.say[cur];if(pic)pic.paint(anim);}
-  ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),h("div",{class:"mr-controls"},h("span",{class:"mr-lbl"},V.label),seg(V.opts,cur,k=>{cur=k;upd(true);},V.label)),stats,list,say);}
+/* ---------- 1 · A capability, not a project: kept up every year ---------- */
+// Noor's map: a team, a project or Govern data at the top, its eight capabilities below, coloured by their evidence or left blank;
+// June ends the project, a restructure merges the team, and David asks where next year's money goes
+PLAY.kept_up=(Lb,api)=>{const W=Lb.w,M=W.msg,S={top:"team",heat:false,june:false,reorg:false,money:false};
+  const lost=()=>S.june&&S.top!=="cap",broken=()=>lost()||(S.reorg&&S.top==="team");
+  api.seg(api.group(W.topL),W.tops,S.top,k=>{S.top=k;S.money=false;api.say(M[k],k==="cap"?"ok":"warn");},W.topL);
+  api.toggle(api.group(),W.heatT,false,v=>{S.heat=v;S.money=false;api.say(v?M.heatOn:M.heatOff,v?"ok":"warn");if(v)api.reach("heat");});
+  const g=api.group(W.yearL);
+  api.btn(g,W.juneB,()=>{S.june=true;const t=S.top;api.say(t==="cap"?M.juneCap:t==="team"?M.juneTeam:M.juneProject,t==="cap"?"ok":"no");if(t==="cap")api.reach("june");});
+  api.btn(g,W.reorgB,()=>{S.reorg=true;const t=S.top;api.say(t==="cap"?M.reorgCap:t==="team"?M.reorgTeam:M.reorgProject,t==="cap"?"ok":"no");if(t==="cap")api.reach("reorg");});
+  api.btn(g,W.moneyB,()=>{S.money=S.top==="cap"&&S.heat;if(S.top!=="cap"){api.say(M.moneyTop,"warn");return;}if(!S.heat){api.say(M.moneyNo,"no");return;}api.say(M.moneyHeat,"ok");api.reach("money");});
+  const n=W.caps.length,by=c=>W.caps.filter(x=>x.h===c).length;
+  return {vh:640,readouts:[[W.read.after,()=>(S.june&&S.top!=="cap"?0:n)+" / "+n,()=>S.june?(S.top==="cap"?"ok":"no"):""],
+      [W.read.green,()=>S.heat?by("green")+" / "+n:"?"],[W.read.gaps,()=>S.heat?String(n-by("green")):"?",()=>S.money?"ok":""]],
+    draw(ctx,w,hh,k){const top=W.tops.find(t=>t[0]===S.top)[1],bk=broken(),gone=lost();
+      wash(ctx,18,16,w-36,140,"strategy",0.28,3);wash(ctx,18,176,w-36,hh-192,"business",0.22,4);
+      tx(ctx,W.bands.strategy,36,50,{size:22,w:700,col:WC_MUTED});tx(ctx,W.bands.business,36,210,{size:22,w:700,col:WC_MUTED});
+      const tw0=Math.min(w-420,Math.max(380,tw(ctx,top,30,800)+90)),tx0=w/2-tw0/2;
+      box2(ctx,tx0,42,tw0,92,{label:top,lsize:30,wash:S.top==="cap"?"gold":null,washA:0.5,dashed:bk,a:bk?0.55:1,cross:bk,seed:70});
+      if(S.top==="project")tag(ctx,tx0+tw0+20,88,gone?W.gone:W.ended,{size:22,wash:gone?"red":"amber",washA:0.35,maxW:w-tx0-tw0-40});
+      if(S.top==="team"&&S.reorg)tag(ctx,tx0+tw0+20,88,W.redraw,{size:22,wash:"red",washA:0.35,maxW:w-tx0-tw0-40});
+      const per=4,gap=14,cw=(w-48-(per-1)*gap)/per,ch=(hh-250-gap)/2,cy=228;
+      const rank=c=>c.h==="red"?"1":c.h==="amber"?"2":null;
+      const pos=j=>[24+(j%per)*(cw+gap),cy+Math.floor(j/per)*(ch+gap)];
+      W.caps.forEach((c,j)=>{const [x,y]=pos(j);if(y===cy)pencil(ctx,[[w/2,134],[x+cw/2,y]],{a:gone?0.1:S.top==="cap"?0.4:0.18,lw:1.8,seed:j+2});});
+      W.caps.forEach((c,j)=>{const [x,y]=pos(j);
+        withA(ctx,gone?0.35+0.65*(1-k):1,()=>{card(ctx,x,y,cw,ch,{kind:"card",wash:S.heat?C(c.h):null,washA:0.45*(S.heat?k:0)+(S.heat?0.1:0),dashed:gone||!S.heat,seed:80+j});
+          lines(ctx,c.t,x+18,y+38,cw-36-(S.money&&rank(c)?70:0),{size:23,max:2,w:800,col:WC_DARK});
+          if(S.heat)lines(ctx,c.e,x+18,y+ch-44,cw-36,{size:19,max:2,w:600,col:WC_INK});});
+        if(S.money&&rank(c))withA(ctx,k,()=>tag(ctx,x+cw-14,y+30,rank(c),{size:24,align:"right",wash:c.h,washA:0.6}));});
+      if(gone)withA(ctx,k,()=>tag(ctx,w/2,cy+ch+gap/2,W.ended,{size:26,align:"center",wash:"red",washA:0.4,maxW:w-80}));}};};
 
-/* ---------- steps: a sequence, one step at a time ---------- */
-function labSteps(Lb){const V=Lb.w;let cur=0;const say=h("p",{class:"mr-say",role:"status"}),ol=h("ol",{class:"mr-steps"});
-  const pic=picture(Lb,()=>({step:cur}));
-  const prev=btn("← "+U.back,()=>{if(cur>0){cur--;upd(true);}}),next=btn(U.nextStep+" →",()=>{if(cur<V.steps.length-1){cur++;upd(true);}},"go");
-  function upd(anim){ol.replaceChildren(...V.steps.map((s,i)=>h("li",{class:i<cur?"done":i===cur?"on":"",...(i===cur?{"aria-current":"step"}:{})},h("b",null,s.t),i===cur?h("span",null,s.d):null)));
-    prev.disabled=cur===0;next.disabled=cur===V.steps.length-1;say.textContent=cur===V.steps.length-1?V.sayEnd:fill(U.stepOf,{n:cur+1,of:V.steps.length});if(pic)pic.paint(anim);}
-  ready().then(()=>upd());upd();return shell(Lb,pic,info(V.prompt),ol,h("div",{class:"mr-controls"},prev,next),say);}
+/* ---------- 2 · Who does what, end to end: one request ---------- */
+// six steps of Define or change a term, each naming a person or a role and who fills it; the agent's rights; where the decided term
+// is written; Clara's request moves along the steps, and stops where a name on leave holds it
+PLAY.end_to_end=(Lb,api)=>{const W=Lb.w,M=W.msg,S={names:"names",agent:"note",pub:"each",asked:false,leave:false};
+  const stopped=()=>S.leave&&S.names==="names",ran=()=>S.asked&&!stopped(),one=()=>ran()&&S.pub==="map";
+  api.seg(api.group(W.stepsL),W.names,S.names,k=>{S.names=k;S.asked=false;api.say(M[k],k==="roles"?"ok":"warn");},W.stepsL);
+  api.seg(api.group(W.agentL),W.rights,S.agent,k=>{S.agent=k;S.asked=false;api.say(M[k],k==="note"?"ok":"no");},W.agentL);
+  api.seg(api.group(W.pubL),W.pubs,S.pub,k=>{S.pub=k;if(!ran()){api.say(M[k],k==="map"?"ok":"warn");return;}
+    api.say(k==="map"?M.copiesMap:M.copiesEach,k==="map"?"ok":"no");if(k==="map")api.reach("copies");},W.pubL);
+  const g=api.group();
+  api.btn(g,W.askB,()=>{S.asked=true;if(stopped()){api.say(M.runStopped,"no");return;}const good=S.agent==="note";
+    api.say(M.runOk+" "+(good?M.agentOk:M.agentDecides)+" "+(S.pub==="map"?M.copiesMap:M.copiesEach),good&&S.pub==="map"?"ok":good?"warn":"no");
+    if(good){api.reach("decided");api.reach("agent");}if(S.pub==="map")api.reach("copies");if(S.leave&&good)api.reach("leave");},"go");
+  api.btn(g,W.leaveB,()=>{S.leave=true;S.asked=false;const r=S.names==="roles";api.say(r?M.leaveRoles:M.leaveNames,r?"ok":"no");if(r)api.reach("leave");});
+  return {vh:600,readouts:[[W.read.days,()=>!S.asked?"–":stopped()?"> 10":"8",()=>!S.asked?"":stopped()?"no":"ok"],[W.read.counts,()=>one()?"1":"3",()=>one()?"ok":""]],
+    draw(ctx,w,hh,k){const St=W.steps,n=St.length,gap=12,cw=(w-48-gap*(n-1))/n,ch=190,y=24;
+      const at=!S.asked?0:stopped()?1:n-1;
+      St.forEach((s,i)=>{const x=24+i*(cw+gap),away=S.leave&&s.alt,held=away&&S.names==="names",dec=i===3&&S.agent==="decide";
+        let who=away&&S.names==="roles"?s.alt:dec?St[2].who:s.who;
+        const reached=S.asked&&i<=at;card(ctx,x,y,cw,ch,{kind:"card",wash:held&&S.asked?C("red"):reached?C(i===at&&stopped()?"red":"green"):null,washA:0.3,seed:40+i});
+        tx(ctx,s.s,x+cw/2,y+40,{size:fit(ctx,s.s,cw-24,26,800,null,17),w:800,align:"center",col:WC_DARK});
+        if(S.names==="roles")lines(ctx,s.role,x+cw/2,y+80,cw-20,{size:20,max:2,w:600,align:"center",col:WC_MUTED});
+        lines(ctx,who,x+cw/2,y+(S.names==="roles"?140:100),cw-20,{size:21,max:2,w:800,align:"center",col:dec?NO:held?NO:WC_INK});
+        if(dec)cross(ctx,x+cw-24,y+ch-24,22);
+        if(i<n-1)arrow(ctx,x+cw+1,y+ch/2,x+cw+gap-1,y+ch/2,WC_PENCIL,{head:6,lw:2,a:0.6});});
+      // the request, Clara's, on its way along the steps
+      if(S.asked){const cx=i=>24+i*(cw+gap)+cw/2,p=RM?1:k,xx=cx(0)+(cx(at)-cx(0))*p;dot(ctx,xx,y+ch+30,13,C("gold"));
+        const lab=stopped()?W.stopped:fill(W.days,{n:8});tag(ctx,Math.min(w-30,Math.max(30,xx)),y+ch+70,lab,{size:22,align:"center",wash:stopped()?"red":"green",washA:0.3,maxW:300});}
+      // how completion is counted, faculty by faculty
+      const by=y+ch+110,bh=hh-by-20;card(ctx,24,by,w-48,bh,{kind:"sheet",seed:49});
+      tx(ctx,W.read.counts,48,by+44,{size:22,w:700,col:WC_MUTED});
+      if(one())withA(ctx,k,()=>{const t0=tag(ctx,48,by+bh/2+16,W.one,{size:26,wash:"green",washA:0.35,maxW:w-160});tick(ctx,48+t0+30,by+bh/2+12,30,k);});
+      else{let x=48;const mw=(w-120)/3;W.counts.forEach((c,i)=>{x+=tag(ctx,x,by+bh/2+16,c,{size:fit(ctx,c,mw-50,23,700,null,16),wash:"amber",washA:0.3,maxW:mw})+16;});}}};};
 
-/* ---------- compose: a sentence from parts ---------- */
-function labCompose(Lb){const V=Lb.w,pick=V.slots.map(()=>null),say=h("p",{class:"mr-say",role:"status"}),out=h("p",{class:"mr-sentence"}),notes=h("ul",{class:"mr-checks"});
-  const pic=picture(Lb,()=>({pick}));
-  const slots=V.slots.map((sl,i)=>h("div",{class:"mr-controls mr-slot"},h("span",{class:"mr-lbl"},sl.label),seg(sl.opts.map((o,j)=>[String(j),o.t]),null,k=>{pick[i]=+k;upd(true);},sl.label)));
-  function upd(anim){out.replaceChildren(h("b",null,V.head+" "),...V.slots.map((sl,i)=>pick[i]==null?h("span",{class:"gap"},"… "):h("span",{class:sl.opts[pick[i]].ok?"ok":"no"},sl.opts[pick[i]].t+" ")));
-    notes.replaceChildren(...V.slots.map((sl,i)=>pick[i]==null?null:h("li",{class:sl.opts[pick[i]].ok?"ok":"no"},sl.opts[pick[i]].why)).filter(Boolean));
-    const done=pick.every(p=>p!=null),good=done&&pick.every((p,i)=>V.slots[i].opts[p].ok);say.textContent=!done?V.sayStart:good?V.sayGood:V.sayFix;if(pic)pic.paint(anim);}
-  ready().then(()=>upd());upd();return shell(Lb,pic,info(V.prompt),...slots,out,notes,say);}
+/* ---------- 3 · Where each piece lives: one home, every copy ---------- */
+// the owner of Learners near an award, at home in the data team's repository, and its copies on the platform's page and in the
+// catalogue; the page typed by hand or copied from home; a nightly check; Clara becomes the owner, a planner asks, someone types a
+// name into the page, and Sam is asked to fix it
+PLAY.one_home=(Lb,api)=>{const W=Lb.w,M=W.msg,S={page:"typed",check:false,moved:false,asked:false,typed:false,sam:false};
+  const home=()=>S.moved?W.clara:W.jun;
+  const page=()=>{if(S.typed&&!S.check)return W.typo;if(S.typed&&S.check)return home();return S.page==="synced"?home():W.jun;};
+  const drifted=()=>page()!==home(),toJun=()=>page()===W.jun;
+  api.seg(api.group(W.pageL),W.pages,S.page,k=>{S.page=k;S.asked=false;S.sam=false;S.typed=false;api.say(M[k],k==="synced"?"ok":"warn");},W.pageL);
+  api.toggle(api.group(),W.checkT,false,v=>{S.check=v;S.typed=false;api.say(v?M.checkOn:M.checkOff,v?"ok":"warn");});
+  const g=api.group(W.termL);
+  api.btn(g,W.moveB,()=>{S.moved=true;S.asked=false;const t=S.page==="typed";api.say(t?M.moveTyped:M.moveSynced,t?"no":"ok");if(t)api.reach("drift");});
+  api.btn(g,W.askB,()=>{if(!S.moved){api.say(M.askFirst,"warn");return;}S.asked=true;const j=toJun();api.say(j?M.askJun:M.askClara,j?"no":"ok");if(!j)api.reach("request");});
+  api.btn(g,W.typeB,()=>{S.typed=true;S.asked=false;api.say(S.check?M.typeCheck:M.typeNo,S.check?"ok":"no");if(S.check)api.reach("check");});
+  api.btn(g,W.samB,()=>{S.sam=true;const ok=S.page==="synced";api.say(ok?M.samOk:M.samNo,ok?"ok":"no");if(ok)api.reach("whose");});
+  return {vh:600,readouts:[[W.read.shows,()=>page(),()=>drifted()?"no":S.moved?"ok":""],[W.read.wait,()=>!S.asked?"–":toJun()?fill(W.days,{n:9}):W.day,()=>!S.asked?"":toJun()?"no":"ok"]],
+    draw(ctx,w,hh,k){tx(ctx,W.piece,w/2,44,{size:fit(ctx,W.piece,w-80,28,800,null,20),w:800,align:"center",col:WC_DARK});
+      const hx=24,hw=420,hy=86,hh2=hh-130;card(ctx,hx,hy,hw,hh2,{kind:"card",wash:C("gold"),washA:0.32,seed:90});
+      tag(ctx,hx+24,hy+40,W.homeTag,{size:20,wash:"gold",washA:0.5});lines(ctx,W.home,hx+24,hy+100,hw-48,{size:26,max:2,w:800,col:WC_DARK});
+      pencil(ctx,[[hx+20,hy+170],[hx+hw-20,hy+170]],{a:0.3,lw:2,seed:3});
+      withA(ctx,S.moved?0.3+0.7*k:1,()=>tx(ctx,home(),hx+24,hy+226,{size:fit(ctx,home(),hw-48,32,700,null,20),w:700,col:WC_INK}));
+      const cx=hx+hw+150,cw=w-cx-24,ch=(hh2-20)/2;
+      W.copies.forEach((c,i)=>{const y=hy+i*(ch+20),v=i===0?page():home(),synced=i===1||S.page==="synced",bad=i===0&&drifted();
+        card(ctx,cx,y,cw,ch,{kind:"card",wash:C("application"),washA:0.22,seed:91+i});
+        tag(ctx,cx+20,y+34,W.copyTag,{size:18,wash:"application",washA:0.4});tx(ctx,c,cx+20,y+82,{size:fit(ctx,c,cw-40,24,800,null,17),w:800,col:WC_DARK});
+        const z=fit(ctx,v,cw-200,28,700,null,18);tx(ctx,v,cx+20,y+ch-30,{size:z,w:700,col:bad?NO:WC_INK});
+        if(bad){const vw2=tw(ctx,v,z,700);wc_ring(ctx,cx+20+vw2/2,y+ch-40,vw2/2+16,26,k,{col:NO});tag(ctx,cx+cw-16,y+ch-38,W.drifted,{size:20,align:"right",wash:"red",washA:0.35});}
+        else if(i===0&&S.typed&&S.check)withA(ctx,k,()=>tag(ctx,cx+cw-16,y+ch-38,W.putRight,{size:20,align:"right",wash:"green",washA:0.35}));
+        arrow(ctx,hx+hw+10,hy+hh2/2,cx-12,y+ch/2,synced?WC_PENCIL:WC_MUTED,{head:12,a:synced?0.75:0.4,dash:synced?null:[4,10],noHead:!synced});});
+      // the planner's request, on its way to whoever the page names
+      if(S.asked){const j=toJun(),y0=hy+ch/2,x0=cx+cw/2;withA(ctx,k,()=>tag(ctx,x0,hy+ch+10,j?"→ "+W.jun+" · "+fill(W.days,{n:9}):"→ "+W.clara+" · "+W.day,{size:22,align:"center",wash:j?"red":"green",washA:0.35,maxW:cw}));}
+      if(S.sam)withA(ctx,k,()=>{const ok=S.page==="synced",x=ok?hx+hw/2:cx+cw/2,y=ok?hy+hh2-40:hy+ch-90;mark(ctx,x,y,30,ok,k);});}};};
 
-/* ---------- test: the same questions, asked of several things ---------- */
-function labTest(Lb){const V=Lb.w;let cur=0;const ans=V.items.map(()=>V.qs.map(()=>null)),done=V.items.map(()=>false);
-  const say=h("p",{class:"mr-say",role:"status"}),things=h("div",{class:"mr-controls"}),qs=h("div",{class:"mr-rows"}),verdict=h("p",{class:"mr-verdict"});
-  const pic=picture(Lb,()=>({cur,ans,done}));
-  const go=btn(U.check,()=>{done[cur]=true;draw();upd(true);},"go");
-  function drawThings(){things.replaceChildren(h("span",{class:"mr-lbl"},V.label),seg(V.items.map((it,i)=>[String(i),(done[i]?"✓ ":"")+it.t]),String(cur),k=>{cur=+k;draw();upd(true);},V.label));}
-  function draw(){const it=V.items[cur];drawThings();qs.replaceChildren(...V.qs.map((q,i)=>{const a=ans[cur][i],ok=done[cur]&&(it.a[i]==null||a===it.a[i]),no=done[cur]&&!ok;
-      return h("div",{class:"mr-row"+(ok?" ok":no?" no":"")},h("p",{class:"mr-item"},(i+1)+". "+q),
-        seg([["1",V.yes],["0",V.no]],a==null?null:String(a),k=>{ans[cur][i]=+k;if(done[cur]){done[cur]=false;draw();}upd(true);},q),
-        done[cur]?h("p",{class:"mr-why"},h("b",null,ok?U.right:U.wrong)," ",it.why[i]):null);}));
-    verdict.replaceChildren(...(done[cur]?[h("b",null,V.verdicts[it.verdict]+". "),it.say]:[]));}
-  function upd(anim){const n=ans[cur].filter(a=>a!=null).length;go.disabled=n<V.qs.length;const nd=done.filter(Boolean).length;
-    say.textContent=done[cur]?fill(V.sayDone,{n:nd,of:V.items.length}):n<V.qs.length?fill(V.sayAsk,{n,of:V.qs.length}):U.ready;if(pic)pic.paint(anim);}
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),things,qs,h("div",{class:"mr-controls"},go),verdict,say);}
-
-
-const BUILD={sort:labSort,pick:labPick,steps:labSteps,compose:labCompose,test:labTest};
-L.BUILD=BUILD;L.PIX=PIX;L.lib={h,seg,stage,picture,shell,info,btn,fill,num,dec,tx,fit,wrap,lines,tag,card,tick,cross,mark,pencil,wash,head,arrow,noteCard,C,CI,OK,NO};
+const BUILD={play:labPlay};
+L.BUILD=BUILD;L.PIX=PIX;L.lib={h,seg,stage,shell,info,btn,fill,num,dec,tx,fit,wrap,lines,tag,card,tick,cross,mark,pencil,wash,head,arrow,noteCard,C,CI,OK,NO};
 
 /* ---------- the labs page: one rail of every lab of the series, in film order, one lab at a time; no film level ---------- */
 const labsApp=document.getElementById("series-labs");

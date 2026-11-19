@@ -265,7 +265,8 @@ SERIES = [
     dict(id="small-steps-measured", dir="small-steps-measured", slug="small-steps-measured",
          name={"en": "Small steps, measured", "es": "Pasos pequeños, medidos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds"),
+         built="in-the-weeds",
+         learn=dict(dir="small-steps-measured", engine="data-management", bundle="strategy-is-a-habit")),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]

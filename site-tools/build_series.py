@@ -255,6 +255,7 @@ SERIES = [
          built="in-the-weeds", next="the-new-skills",
          learn=dict(dir="people-first", engine="leading-data-people", bundle=False)),
     dict(id="the-new-skills", dir="the-new-skills", slug="the-new-skills",
+         learn=dict(dir="the-new-skills", engine="leading-data-people", bundle=False),
          name={"en": "The new skills", "es": "Las nuevas habilidades"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds", next="working-with-people"),

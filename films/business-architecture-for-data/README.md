@@ -16,6 +16,8 @@ What the business owns about its data: the concepts, their owners, the processes
 | [Who creates it, who owns it](https://data.learn-all.org/business-architecture-for-data/who-creates-it-who-owns-it/) | Owners and stewards | 7 min | 9 | 3 questions | [script](3-who-creates-it-who-owns-it/script.md) · [source](3-who-creates-it-who-owns-it/source/README.md) |
 | [Processes, as deep as data needs](https://data.learn-all.org/business-architecture-for-data/processes-as-deep-as-data-needs/) | Processes and their levels | 7 min | 9 | 3 questions | [script](4-processes-as-deep-as-data-needs/script.md) · [source](4-processes-as-deep-as-data-needs/source/README.md) |
 | [Rules and expectations the business owns](https://data.learn-all.org/business-architecture-for-data/rules-and-expectations-the-business-owns/) | Rules and expectations | 7½ min | 9 | 3 questions | [script](5-rules-and-expectations-the-business-owns/script.md) · [source](5-rules-and-expectations-the-business-owns/source/README.md) |
+
+For the whole series, on the site: [5 labs](https://data.learn-all.org/business-architecture-for-data/labs/) and [12 scenarios](https://data.learn-all.org/business-architecture-for-data/scenarios/), in English and Spanish, from the words in [site/assets/business-architecture-for-data/](../../site/assets/business-architecture-for-data/).
 <!-- /films -->
 
 ## The look and the sound

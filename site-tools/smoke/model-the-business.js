@@ -27,6 +27,27 @@ lab: async (id) => {
     await press(W.refB, 500); await press(W.recB);  // the reference first: question marks, and nothing to record yet
     await press(W.grains[1][1], 900); await press(W.dates[1][1], 900); await press(W.joins[1][1], 900); await press(W.whens[1][1], 1200);
     await press(W.recB, 900);
+  } else if (id === "choose") {
+    await press(W.noteB);  // nothing picked yet: it asks for a pick first
+    for (let i = 0; i < W.sits.length; i++) {  // each situation: a weaker start first, then the best
+      const best = W.cands.find(c => c.k === W.sits[i].best), weak = W.cands.find(c => c.k !== W.sits[i].best);
+      await press(String(i + 1), 400); await press(weak.n, 500); await press(best.n, 600);
+    }
+    await press(W.noteB, 700);
+  } else if (id === "where") {
+    const put = async (d, L) => { await press(d.l, 200); await press(W.levels[L], 900); };
+    const low = W.details.find(d => d.lv === "cls");
+    await put(low, "offer");  // too high: one offering, two tutorials' values
+    for (const d of W.details) if (d.lv !== "cls" || d === low) await put(d, d.lv);  // each where it belongs
+  } else if (id === "time") {
+    const r = q('input[type="range"]');
+    const slide = async (v, ms) => {  // as a visitor drags the slider to a day and lets go
+      r.value = String(v); r.dispatchEvent(new Event("input", {bubbles: true})); r.dispatchEvent(new Event("change", {bubbles: true})); await wait(ms || 400);
+    };
+    if (!r) out.push("no slider to ask about a day");
+    await press(W.cenB, 900);  // only the status now: census date comes out as today
+    await press(W.models[1][1], 900); await press(W.cenB, 900); await press(W.nowB, 900);
+    for (let d = 0; r && d <= +r.max && qa(".pg-goals li.ok").length < W.goals.length; d++) await slide(d, 60);  // a day when 8 were enrolled
   } else out.push("no play written for playground " + id);
   const ticked = qa(".pg-goals li.ok").length;
   if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "

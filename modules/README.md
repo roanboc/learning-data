@@ -411,6 +411,8 @@ Source: [films/people-first](../films/people-first/) · Portal: `/people-first/`
 - [No two alike](../films/people-first/3-no-two-alike/) — `no-two-alike`
 - [How, more than who](../films/people-first/4-how-more-than-who/) — `how-more-than-who`
 
+Labs and assessments: [site/assets/people-first/learn.en.js](../site/assets/people-first/learn.en.js), [site/assets/people-first/learn.es.js](../site/assets/people-first/learn.es.js)
+
 ### The new skills
 
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
@@ -444,6 +446,8 @@ Source: [films/ownership-and-performance](../films/ownership-and-performance/) �
 - [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 - [When someone falls behind](../films/ownership-and-performance/3-when-someone-falls-behind/) — `when-someone-falls-behind`
 - [Growing people](../films/ownership-and-performance/4-growing-people/) — `growing-people`
+
+Labs and assessments: [site/assets/ownership-and-performance/learn.en.js](../site/assets/ownership-and-performance/learn.en.js), [site/assets/ownership-and-performance/learn.es.js](../site/assets/ownership-and-performance/learn.es.js)
 
 ## Data management
 

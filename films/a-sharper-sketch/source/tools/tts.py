@@ -7,13 +7,13 @@ import pathlib,sys
 sys.path.insert(0,str(next(p for p in pathlib.Path(__file__).resolve().parents if (p/'site-tools/voice_cache.py').is_file())/'site-tools'))
 from voice_cache import KokoroVoice
 src=NARR.read_text(encoding='utf-8');N=json.loads(src[src.index('{'):src.rindex('}')+1])
-SAY=[(r'\bTCSI\b','T C S I'),(r'\bMortarCAPS\b','Mortar Caps'),(r'\b9 am\b','nine A M'),(r'\b131\b','a hundred and thirty-one'),(r'\b118\b','a hundred and eighteen'),(r'\b101\b','one oh one')]
+SAY=[(r'\b1391\b','thirteen ninety-one'),(r'\bTCSI\b','T C S I'),(r'\bMortarCAPS\b','Mortar Caps'),(r'\b9 am\b','nine A M'),(r'\b131\b','a hundred and thirty-one'),(r'\b118\b','a hundred and eighteen'),(r'\b101\b','one oh one')]
 V={'voice':'af_heart','lang':'en-us','speed':0.95,'say':SAY} if EN else json.loads((PACK/'voice.json').read_text(encoding='utf-8'))
 voice=KokoroVoice(MODELS,V,__file__);dur={};t0=time.time()
 for sid,sc in N.items():
     for ch in sc['vo']:
         fn=BUILD/'vo'/('%s__%s.wav'%(sid,ch['id']))
-        txt=ch['text']
+        txt=ch.get('say') or ch['text']
         for a,b in V['say']:txt=re.sub(a,b,txt)
         generated=voice.save(txt,fn)
         info=sf.info(str(fn));dur[sid+'/'+ch['id']]=round(info.frames/info.samplerate,3)

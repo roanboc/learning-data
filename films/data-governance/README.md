@@ -4,7 +4,7 @@
 
 Yusuf Demir starts as the university's data governance lead. He inherits a shelf of thirty-four policies, a maturity score of 2.1 out of 5, a chart with half its names still to be confirmed, and a brief: fix governance before the next submission to the government. The same week, two reports disagree on how many awards were conferred. Over ten films, he takes the binder off the shelf, one kind of policy at a time, and asks every line where it runs: who decides, one trusted glossary in place of many, who may see it, rules that run, fixes at the source, change without surprises, products with owners, an agent that checks, and the people who teach it all. Two more series follow: in *Governance on the map* ([`../governance-on-the-map/`](../governance-on-the-map/)), he and Noor, the data architect, design governance as a capability that lasts, with the services it offers, who does what end to end, and where each piece lives; and *Governance you can use* ([`../governance-in-practice/`](../governance-in-practice/)) builds each piece with dbt and Databricks. The plan for all three is in the [proposal](proposal.md).
 
-**Status:** the prologue, *The same problem, everywhere*, and all ten films in the table below are built and [on the site](https://data.learn-all.org/data-governance/), each with Pause and think questions. The prologue tells the real history behind the series: why data management got a body of knowledge, the DMBOK, why governance is at its centre, and why it still matters, with its additions for ethics and AI. Labs and scenarios will come later. On the site, the series sits under the topic *Data governance*, with the two that follow it.
+**Status:** the prologue, *The same problem, everywhere*, and all ten films in the table below are built and [on the site](https://data.learn-all.org/data-governance/), each with Pause and think questions. The prologue tells the real history behind the series: why data management got a body of knowledge, the DMBOK, why governance is at its centre, and why it still matters, with its additions for ethics and AI. Each film has a playground to try its idea, and the series ends in one evaluation of twelve decision scenarios. On the site, the series sits under the topic *Data governance*, with the two that follow it.
 
 ## The films
 
@@ -23,7 +23,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | [An agent that checks](https://data.learn-all.org/data-governance/an-agent-that-checks/) | AI for governance | 6½ min | 8 | 3 questions | [script](9-an-agent-that-checks/script.md) · [source](9-an-agent-that-checks/source/README.md) |
 | [Teachers of data](https://data.learn-all.org/data-governance/teachers-of-data/) | Getting people to take part | 7 min | 8 | 3 questions | [script](10-teachers-of-data/script.md) · [source](10-teachers-of-data/source/README.md) |
 
-For the whole series, on the site: [9 labs](https://data.learn-all.org/data-governance/labs/) and [9 scenarios](https://data.learn-all.org/data-governance/scenarios/), in English and Spanish, from the words in [site/assets/data-governance/](../../site/assets/data-governance/).
+For the whole series, on the site: [11 labs](https://data.learn-all.org/data-governance/labs/) and [12 scenarios](https://data.learn-all.org/data-governance/scenarios/), in English and Spanish, from the words in [site/assets/data-governance/](../../site/assets/data-governance/).
 <!-- /films -->
 
 ## The look and the sound

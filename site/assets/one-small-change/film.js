@@ -2855,64 +2855,101 @@ function kz_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
 
 
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). The director's board at Castle Street is written plainly, as an office's board was; Carmen's and
+   Helena's are drawn as a designer would, a graphic recording pinned over the board, almost done when it first shows (PK.sk.drawn):
+   whoever explains adds the last words and marks as the voice says them, on from left to right, and steps clear. */
 // 0. five S (the director, at his office's board)
 const kz_boardO=(sc,w)=>[
   {s:"Five S",x:70,y:110,size:64,col:"blue",at:w("fives","five S",-0.3),d:0.6},
   {s:"sort · set in order",x:110,y:230,size:54,at:w("steps","Sort",-0.2),d:1.0},
   {s:"shine · standardise",x:300,y:340,size:54,at:w("steps","Shine",-0.2),d:1.0},
   {s:"sustain",x:620,y:450,size:58,col:"green",at:w("steps","sustain",-0.2),d:0.6}];
-// 1. kaizen's first idea (Carmen, at the team's board)
-const kz_boardA=(sc,w)=>[
-  {s:"Kaizen",x:70,y:120,size:64,col:"blue",at:w("idea","first idea",-0.3),d:0.5},
-  {s:"everyone's job · own work",x:110,y:260,size:52,at:w("idea","everyone's job",-0.2),d:1.1},
-  {s:"small steps",x:560,y:400,size:56,col:"green",at:w("idea","small steps",-0.3),d:0.6}];
-// 1b. one cycle for each step (Carmen's board, close)
-const kz_boardB=(sc,w)=>[
-  {s:"Each small step",x:70,y:120,size:60,col:"blue",at:w("cycle","small step",-0.3),d:0.8},
-  {s:"plan · do · study · act",x:200,y:270,size:56,col:"blue",at:w("cycle","plan a change",-0.2),d:1.1},
-  {s:"keep it, or drop it",x:460,y:420,size:54,col:"green",at:w("cycle","keep it",-0.2),d:0.9}];
-// 2. standardise, then automate (Carmen)
-const kz_boardC=(sc,w)=>[
-  {s:"Standardise, then automate",x:70,y:130,size:54,col:"blue",at:w("muddle","automate",-0.5),d:1.1},
-  {s:"a muddle, automated:",x:200,y:270,size:52,at:w("muddle","a muddle",-0.2),d:0.9},
-  {s:"a faster muddle",x:520,y:400,size:56,col:"amber",at:w("muddle","faster muddle",-0.3),d:0.8}];
-// 3. on Monday (Helena, at the board seen close)
-const kz_boardM=(sc,w)=>[
-  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("one","On Monday",0),d:0.6},
-  {s:"one chore · time each step",x:110,y:210,size:48,col:"orange",at:w("one","one chore",-0.2),d:1.1},
-  {s:"drop · write the rest down",x:200,y:300,size:48,at:w("two","Drop",-0.2),d:1.1},
-  {s:"automate a step · check it",x:290,y:390,size:48,col:"green",at:w("three","Automate",-0.2),d:1.1},
-  {s:"lead: ask · give time · show wins",x:300,y:470,size:44,col:"blue",at:w("four","if you lead",-0.2),d:1.3}];
+// a graphic recording in two drawn parts: its heading, high on the sheet, where nobody standing at the board hides it, and the drawing
+// under it, with the box its ink lies in, so whoever explains steps only as far right as it reaches
+const kz_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// 1. kaizen's first idea (Carmen, at the team's board): who improves, on what, and how; she writes each answer as the voice says it
+const kz_boardA=(sc,w)=>[...kz_rec("Kaizen",{},c=>{const D=PK.sk;
+    D.panel(c,70,160,380,300,{title:"who",col:"blue",fill:"blue"},(cc,x,y)=>D.faces(cc,x+58,y+52,["ivy","jun","sam","noor"],{r:28,gap:88}));
+    D.panel(c,480,160,320,300,{title:"on what",col:"orange",fill:"orange"},(cc,x,y,pw)=>D.icon(cc,"laptop",x+pw/2,y+52,34,{fill:"white"}));
+    D.panel(c,830,160,350,300,{title:"how",col:"green",fill:"green"},(cc,x,y)=>D.stairs(cc,x+40,y+10,200,110,["","","",""],{col:"green"}));},[60,150,1190,470]),
+  {s:"everyone's job",x:100,y:420,size:44,w:700,col:"blue",at:w("idea","everyone's job",-0.2),d:0.9},
+  {s:"own work",x:510,y:420,size:44,w:700,col:"orange",at:w("idea","own work",-0.2),d:0.6},
+  {s:"small steps",x:1160,y:420,size:44,w:700,col:"green",align:"right",at:w("idea","small steps",-0.3),d:0.6}];
+// 1b. one cycle for each small step (Carmen's board, close): the step, the cycle it runs through, and what comes out of it, at the
+// right, where she writes the last words
+const kz_boardB=(sc,w)=>[...kz_rec("One cycle",{},c=>{const D=PK.sk;
+    D.panel(c,70,170,320,280,{title:"a step",col:"green",fill:"green"},(cc,x,y)=>D.stairs(cc,x+50,y+12,220,110,["","","",""],{col:"green"}));
+    D.arrow(c,[400,316],[450,316],{col:"ink",w:3.5,head:14});
+    D.cycle(c,620,316,112,[["plan",{col:"blue"}],["do",{col:"orange"}],["study",{col:"violet"}],["act",{col:"green"}]],{a0:Math.PI,size:32});
+    D.arrow(c,[672,436],[850,410],{col:"ink",w:3.5,head:14,bow:-24});},[60,150,860,470]),
+  {s:"each small step",x:92,y:420,size:36,w:700,col:"green",at:w("cycle","small step",-0.3),d:0.9},
+  {s:"keep it",x:1160,y:330,size:48,w:700,col:"green",align:"right",at:w("cycle","keep it",-0.2),d:0.6},
+  {s:"or drop it",x:1160,y:420,size:48,w:700,col:"amber",align:"right",at:w("cycle","drop it",-0.2),d:0.7}];
+// 2. standardise, then automate (Carmen): the checklist automated, and a muddle automated; she names the muddle, and what comes of it
+const kz_scribble=(c,x,y)=>PK.sk.line(c,[[x,y+10],[x+120,y+66],[x+18,y+72],[x+128,y+14],[x+6,y+44],[x+134,y+46],[x+30,y+6],[x+96,y+78]],{col:"ink",w:3,seed:9});
+const kz_boardC=(sc,w)=>[...kz_rec("Standardise, then automate",{},c=>{const D=PK.sk;
+    D.card(c,70,170,{icon:"doc",lines:[["4 steps, in order",{size:32}]],fill:"blue",h:96});
+    D.arrow(c,[424,218],[470,218],{col:"ink",w:3.5,head:14});
+    D.card(c,480,170,{icon:"gear",lines:[["in the job",{size:32}]],fill:"orange",h:96});
+    D.arrow(c,[736,218],[782,218],{col:"ink",w:3.5,head:14});
+    D.text(c,"the same, faster",796,232,{size:40,w:700,col:"green"});
+    D.box(c,70,320,350,96,{fill:"amber",col:"ink",w:3,r:14});kz_scribble(c,88,328);
+    D.arrow(c,[430,368],[470,368],{col:"ink",w:3.5,head:14});
+    D.card(c,480,320,{icon:"gear",lines:[["in the job",{size:32}]],fill:"orange",h:96});
+    D.arrow(c,[736,368],[782,368],{col:"ink",w:3.5,head:14});},[60,160,1090,426]),
+  {s:"a muddle",x:244,y:382,size:38,w:700,col:"amber",at:w("muddle","a muddle",-0.2),d:0.6},
+  {s:"a faster muddle",x:1160,y:382,size:44,w:700,col:"amber",align:"right",at:w("muddle","faster muddle",-0.3),d:0.9}];
+// 3. on Monday (Helena, at the board seen close): Ivy's Monday as a chart, and the four steps; she ticks each at the board's right edge
+// as the voice comes to it, clear of what is written, and adds the last words
+const KZ_MON=[["one chore, each step timed","one","pick"],["drop · write the rest down","two","Drop"],["automate a step, check it","three","Automate"],["if you lead: ask, give time","four","ask what's"]];
+const kz_boardM=(sc,w)=>[...kz_rec("On Monday",{},c=>{const D=PK.sk;
+    D.panel(c,70,140,380,300,{title:"Ivy's Monday",col:"orange",fill:"orange"},(cc,x,y)=>{
+      D.bars(cc,x+40,y+50,300,130,[{v:120,col:"amber",top:"120"},{v:30,col:"orange",top:"30"},{v:10,col:"green",top:"10"}],{size:30});
+      D.text(cc,"minutes, each Monday",x+40,y+218,{size:28,col:"mut"});});
+    KZ_MON.forEach(([s],i)=>{const y=180+i*74;D.disc(c,512,y-12,24,{fill:["orange","amber","green","blue"][i],col:"ink",w:3});D.text(c,String(i+1),512,y-1,{size:30,w:700,align:"center"});D.text(c,s,556,y,{size:36});});},[60,140,1040,450]),
+  ...KZ_MON.map(([,id,word],i)=>({k:"tick",x:1150,y:166+i*74,r:18,col:"green",at:w(id,word,0.3),d:0.3})),
+  {s:"and show the small wins",x:1180,y:470,size:44,w:700,col:"green",align:"right",at:w("four","show the small wins",-0.3),d:1.1}];
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page.
+   The ward sister's is written plainly; Ivy's and Helena's are sketched pages, almost done, and the pen adds the last words. */
 // 1. kaizen (the ward sister's notebook)
 const kz_note1=(sc,w)=>[
   {s:"Kaizen",x:70,y:124,size:80,w:760,col:"blue",at:w("kaizen","kaizen",-0.3),d:0.5,marks:[["under","blue",null,0.3]]},
   {s:"a small change, our own",x:110,y:250,size:54,at:w("kaizen","propose",-0.4),d:1.0},
   {s:"try · check",x:110,y:360,size:56,col:"orange",at:w("kaizen","try",-0.2),d:0.6},
   {s:"keep or drop",x:110,y:470,size:56,col:"green",at:w("kaizen","keep or drop",-0.2),d:0.7}];
-// 2. where the cycle comes from (Ivy)
-const kz_note2=(sc,w)=>[
-  {s:"Where it comes from",x:70,y:124,size:72,w:760,col:"blue",at:w("shew","Shewhart",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"Shewhart · 1939 · a circle",x:110,y:250,size:50,at:w("shew","circle",-0.6),d:1.0},
-  {s:"Deming · Japan, 1950",x:110,y:350,size:50,at:w("deming","Japan",-0.3),d:0.9},
-  {s:"plan, do, study, act",x:150,y:450,size:50,col:"green",at:w("deming","study",-0.4),d:0.9},
-  {s:"Imai · 1986 · kaizen",x:110,y:550,size:50,col:"blue",at:w("imai","book",-0.2),d:0.9}];
-// 3. Ivy's checklist
-const kz_note3=(sc,w)=>[
-  {s:"Monday checklist",x:70,y:124,size:76,w:760,col:"blue",at:w("list","checklist",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"four steps, in order",x:110,y:250,size:54,at:w("list","in order",-0.4),d:0.9},
-  {s:"what good looks like",x:110,y:350,size:54,col:"green",at:w("list","what good",-0.2),d:0.9},
-  {s:"the same each Monday",x:110,y:450,size:54,at:w("same","every Monday",-0.3),d:0.9},
-  {s:"anyone can do it",x:110,y:550,size:54,col:"green",at:w("same","anyone",-0.3),d:0.8}];
-// 4. Helena's part
-const kz_note4=(sc,w)=>[
-  {s:"My part",x:70,y:124,size:80,w:760,col:"blue",at:w("none","three things",-0.4),d:0.5,marks:[["under","blue",null,0.3]]},
-  {s:"ask what's in the way",x:110,y:250,size:54,at:w("ask","in the way",-0.4),d:1.0},
-  {s:"make room · Sam's reviews",x:110,y:360,size:50,col:"orange",at:w("ask","made room",-0.2),d:1.1},
-  {s:"give the time · Thursdays",x:110,y:470,size:50,col:"green",at:w("give","Thursday afternoons",-0.3),d:1.1}];
+// 2. where the cycle comes from (Ivy): a line of years, and what each added; the pen adds the names they gave it
+const kz_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Where it comes from",86,124,{size:76});
+    D.timeline(c,110,250,860,[{u:0.07,s:"1939",sub:"Shewhart",col:"blue",up:false},{u:0.42,s:"1950",sub:"Deming, in Japan",col:"orange",up:false},{u:0.86,s:"1986",sub:"Imai's book",col:"green",up:false}],{size:34});
+    D.icon(c,"loop",170,420,34,{fill:"blue"});D.icon(c,"flag",471,420,34,{fill:"orange"});D.icon(c,"book",850,420,34,{fill:"green"});
+    D.line(c,[[100,620],[980,620]],{col:"mut",w:2.5,dash:[8,10],seed:4});},[60,40,1040,800]),
+  {s:"a circle",x:110,y:530,size:46,w:700,col:"blue",at:w("shew","circle",-0.4),d:0.6},
+  {s:"plan, do, study, act",x:380,y:530,size:46,w:700,col:"orange",at:w("deming","plan, do",-0.3),d:1.2},
+  {s:"kaizen: change for the better",x:110,y:710,size:54,w:700,col:"green",at:w("imai","kaizen",-0.3),d:1.4}];
+// 3. Ivy's checklist (Ivy): her four steps, each with what good looks like; the pen adds what makes it a checklist
+const KZ_STEPS=["bookings in","head counts","totals","the page"];
+const kz_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Monday checklist",86,124,{size:76});
+    D.box(c,100,270,880,330,{fill:"blue",col:"ink",w:3,r:16});D.caps(c,"the steps",140,318,{col:"blue",size:30});
+    KZ_STEPS.forEach((s,i)=>{const by=386+i*54;D.disc(c,150,by-12,20,{fill:"white",col:"ink",w:2.5});D.text(c,String(i+1),150,by-1,{size:28,w:700,align:"center"});
+      D.text(c,s,190,by,{size:36});D.icon(c,"check",900,by-12,16,{fill:"green"});});
+    D.icon(c,"cal",140,640,28,{fill:"white"});D.icon(c,"people",140,730,28,{fill:"white"});},[60,40,1040,800]),
+  {s:"each step, in order",x:110,y:226,size:46,w:700,col:"blue",at:w("list","each step",-0.3),d:1.0},
+  {s:"what good looks like",x:940,y:320,size:36,w:700,col:"green",align:"right",at:w("list","what good",-0.2),d:1.0},
+  {s:"the same each Monday",x:190,y:654,size:46,w:700,at:w("same","every Monday",-0.3),d:1.0},
+  {s:"anyone can do it",x:190,y:744,size:46,w:700,col:"green",at:w("same","anyone",-0.3),d:0.8}];
+// 4. Helena's part (Helena): who changed it, and her three things; the pen adds what she did, as the voice says it
+const kz_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My part",86,124,{size:84});
+    D.panel(c,640,40,360,150,{title:"who changed it",col:"green",fill:"green"},(cc,x,y)=>D.faces(cc,x+80,y+40,["ivy","jun","sam"],{r:28,gap:100}));
+    D.panel(c,100,210,880,190,{title:"1 · ask",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"q",x+50,y+36,28,{fill:"white"});D.face(cc,"sam",x+820,y+70,26);});
+    D.panel(c,100,420,880,170,{title:"2 · give the time",col:"amber",fill:"amber"},(cc,x,y)=>{D.icon(cc,"clock",x+50,y+30,28,{fill:"white"});
+      D.text(cc,"no meeting takes them",x+100,y+92,{size:30,col:"mut"});});
+    D.panel(c,100,610,880,170,{title:"3 · show the small wins",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"bars",x+50,y+40,28,{fill:"white"});
+      D.text(cc,"Ivy's chart",x+100,y+52,{size:30,col:"mut"});
+      D.bars(cc,x+500,y,260,90,[{v:120,col:"amber"},{v:30,col:"orange"},{v:10,col:"green"}],{size:28});});},[60,40,1040,800]),
+  {s:"what's in the way?",x:200,y:318,size:44,w:700,col:"blue",at:w("ask","in the way",-0.4),d:1.0},
+  {s:"room for Sam's reviews",x:200,y:376,size:40,w:700,at:w("ask","made room",-0.2),d:1.1},
+  {s:"Thursday afternoons",x:200,y:530,size:44,w:700,col:"amber",at:w("give","Thursday",-0.3),d:1.0}];
 
 /* ===== One small change at a time: the chapters, shot by shot =====
    The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line

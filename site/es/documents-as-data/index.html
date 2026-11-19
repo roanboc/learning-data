@@ -10,7 +10,7 @@
 <link rel="icon" href="../../assets/favicon.svg?v=9c05cdd7f4" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/site.css?v=601b753224">
+<link rel="stylesheet" href="../../assets/site.css?v=a6bf9735d7">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../documents-as-data/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="Cómo funciona este sitio" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -58,27 +58,6 @@
 <p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 2 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 8 situaciones</a></p>
 </section>
 
-<section class="module" id="thread" aria-labelledby="thread-h">
-<div class="mhead"><div><h2 id="thread-h">Un hilo: una factura, de un archivo a una función probada</h2><p>Finanzas recibe unas 3.860 facturas de proveedores al mes, la mayoría en PDF, y RR. HH. guarda cada contrato que firma su personal, entre ellos el de Linh Nguyen. Archivos como datos y como contexto los lee como datos, con las funciones de la plataforma, a tablas que Finanzas puede revisar, y guarda cada archivo y sus metadatos como contexto que un agente puede citar. Ideas que perduran, funciones que se prueban muestra cómo empezó: el equipo de Rohan pidió algo mejor, y Jun probó las funciones con 200 facturas en dos días antes de construir bien un caso de uso.</p></div></div>
-</section>
-
-<section class="module" id="past" aria-labelledby="past-h">
-<div class="mhead"><div><h2 id="past-h">Cada película empieza en otro lugar, en otra época</h2></div></div>
-<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
-<tr><td>Archivos como datos y como contexto</td><td>Washington, 1842, y Bruselas, 1853</td><td>Las viejas bitácoras de los barcos se leyeron para hacer cartas de vientos y corrientes, y diez naciones acordaron una bitácora para todas las banderas, así que las siguientes no hubo que leerlas.</td></tr>
-<tr><td>Ideas que perduran, funciones que se prueban</td><td>México, desde 1945</td><td>Los fitomejoradores sembraron dos generaciones de trigo al año, en dos lugares, y probaron cada una, así que un trigo nuevo tardó la mitad.</td></tr>
-</tbody></table></div>
-</section>
-
-<section class="module" id="four-sides" aria-labelledby="four-sides-h">
-<div class="mhead"><div><h2 id="four-sides-h">Quiénes están en la mesa</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
-<div class="four">
-<div class="card biz"><h3>Paga las facturas</h3><p>Rohan Desai, de Finanzas, cuyo equipo revisa cada factura de proveedor antes de pagarla</p></div>
-<div class="card biz"><h3>Guarda los contratos</h3><p>Ingrid Holm, de RR. HH., que guarda cada contrato que firma el personal, y decide quién puede leerlos</p></div>
-<div class="card tech"><h3>Dibuja el mapa</h3><p>Noor Rahman, la arquitecta de datos, que decide dónde vive cada archivo y qué se guarda junto a él</p></div>
-<div class="card tech"><h3>Construye el proyecto de datos</h3><p>Jun Park, que convierte lo que extraen las funciones en tablas probadas</p></div>
-</div>
-</section>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
 <script src="../../assets/learn/path.js?v=12187f81b8"></script>

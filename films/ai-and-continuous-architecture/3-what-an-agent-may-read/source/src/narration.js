@@ -75,6 +75,6 @@ const NARR={
 ]},
 "end":{"name":"What an agent may read","lead":0.8,"tail":1.0,"vo":[
  {"id":"answer","gap":1.0,"text":"An agent's context belongs on the map: the products it may read, with contracts and terms, in a place of its own, under its own identity."},
- {"id":"next","gap":1.0,"text":"Next: a first draft, not a blank page."}
+ {"id":"next","gap":1.0,"text":"The agents are on the map. Who decides about the data they read is where Data governance begins."}
 ]}
 };

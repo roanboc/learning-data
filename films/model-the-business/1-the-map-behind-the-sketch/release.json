@@ -1,0 +1,51 @@
+[
+  {
+    "name": "The map behind the sketch",
+    "key": "the-map-behind-the-sketch-en",
+    "dir": "films/model-the-business/1-the-map-behind-the-sketch/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/the-map-behind-the-sketch/film.js",
+    "video": "dist/the-map-behind-the-sketch.mp4",
+    "file": "the-map-behind-the-sketch.mp4",
+    "captions": [
+      [
+        "films/model-the-business/1-the-map-behind-the-sketch/captions/en.srt",
+        "the-map-behind-the-sketch.en.srt"
+      ],
+      [
+        "films/model-the-business/1-the-map-behind-the-sketch/captions/es.srt",
+        "the-map-behind-the-sketch.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/model-the-business/1-the-map-behind-the-sketch/source",
+      ":(exclude)films/model-the-business/1-the-map-behind-the-sketch/source/src/i18n/es/captions.js",
+      "films/model-the-business/shared",
+      "films/from-words-to-data/shared/src/words.js",
+      "films/from-words-to-data/shared/src/phone.js",
+      "films/from-words-to-data/shared/src/joins.js",
+      "films/from-words-to-data/shared/src/page.html",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/when-things-go-wrong/characters/people.js",
+      "films/when-things-go-wrong/1-silent-change/source/src/silent.js",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 245,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

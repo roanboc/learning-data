@@ -19,6 +19,8 @@ Protecting data by what it is. The Faculty of Health asks for learners' records 
 | [One policy for many tables](https://data.learn-all.org/only-what-you-may-see/one-policy-for-many-tables/) | Policies by tag | 8 min | 7 | 4 questions | [script](6-one-policy-for-many-tables/script.md) · [source](6-one-policy-for-many-tables/source/README.md) |
 | [Copies that keep the rules](https://data.learn-all.org/only-what-you-may-see/copies-that-keep-the-rules/) | Copies of people's data | 9 min | 7 | 3 questions | [script](7-copies-that-keep-the-rules/script.md) · [source](7-copies-that-keep-the-rules/source/README.md) |
 | [Proof it held](https://data.learn-all.org/only-what-you-may-see/proof-it-held/) | Proving the protection held | 8½ min | 7 | 4 questions | [script](8-proof-it-held/script.md) · [source](8-proof-it-held/source/README.md) |
+
+For the whole series, on the site: [8 labs](https://data.learn-all.org/only-what-you-may-see/labs/) and [12 scenarios](https://data.learn-all.org/only-what-you-may-see/scenarios/), in English and Spanish, from the words in [site/assets/only-what-you-may-see/](../../site/assets/only-what-you-may-see/).
 <!-- /films -->
 
 ## The look and the sound

@@ -8,13 +8,13 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "model":{q:"A driving licence, a vendor certification and a PhD. What do they have in common?",
     opts:[{t:"The same parts: an issuer, a holder, a claim, evidence and a date, which someone else can check.",ok:true},{t:"The same parts: an issuer, a holder and a date, and each is kept only by the body that issued it.",near:true},{t:"Not much: they come from different places, and each follows its own field's rules and its own format."}],
     why:"The materials and the issuers differ; the parts don't. That's why one conceptual model fits every credential, and outlasts every system that stores one."},
-  "meet":{stop:"fit",q:"Six systems each need to share credentials. Connected in pairs, how many translations could that take? And through one shared model?",
+  "meet":{stop:"source",q:"Six systems each need to share credentials. Connected in pairs, how many translations could that take? And through one shared model?",
     opts:[{t:"Fifteen in pairs, one through a model.",near:true},{t:"Thirty in pairs, six through a model."},{t:"Fifteen in pairs, six through a model.",ok:true}],
     why:"Every pair of six systems is 6 × 5 ÷ 2 = 15 translations. Through a shared model, each system is translated once: six, and the meaning is written in one place."},
   "person":{q:"Aisha's email differs between the learning platform and IT's directory. Which should everyone use?",
     opts:[{t:"Whichever was changed most recently, since it's the newest.",near:true},{t:"The one in the system of record for email: IT's directory.",ok:true},{t:"The learning platform's, because she uses it the most."}],
     why:"Each fact has one system of record, where it's created and corrected. Other systems hold copies, and should take them from there."},
-  "logical":{stop:"fit",q:"The logical model names no database and no product. Why is that an advantage?",
+  "logical":{stop:"source",q:"The logical model names no database and no product. Why is that an advantage?",
     opts:[{t:"It can be held against any system: to choose a package, map its fields, or move to a new one.",ok:true},{t:"It can be built in any database at once, since it doesn't depend on one product's features.",near:true},{t:"It isn't: a model can't be built until it names a database, so it has to be redrawn first."}],
     why:"Because it's precise but not technical, the logical model is a yardstick that outlasts every system held up to it."}
   }}};

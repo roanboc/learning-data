@@ -1,0 +1,14 @@
+{
+  "key": "a-sharper-sketch",
+  "title": "A Sharper Sketch",
+  "sub": "Model the business: when a data model needs more precision, check a reference model, adopt what fits and extend what doesn't.",
+  "src": [
+    "sketch3.js",
+    "scenes.js"
+  ],
+  "say": [],
+  "story": [
+    "cols"
+  ],
+  "urgent": []
+}

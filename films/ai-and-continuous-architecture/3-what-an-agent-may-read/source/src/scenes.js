@@ -82,7 +82,7 @@ scene("tablet",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
           cx.save();cx.strokeStyle=rgba(A3_OK,0.95);cx.lineWidth=4;cx.lineCap="round";cx.beginPath();cx.moveTo(950,y);cx.lineTo(958,y+8);cx.lineTo(974,y-10);cx.stroke();cx.restore();});}
       const qA=fin(t,tWh+0.2,0.8);if(qA>0.01)arrive(cx,960,720,t,tWh+0.2,()=>a3_quote(cx,500,616,920,["May the initiate instruct the initiate.","The uninitiate must not see."],"from the tablet's end · Uruk, 229 BCE",{size:34}),{dy:10,a:qA*kA});}
   });
-  acaTitle(ctx,S,t,B+1.0,"What an agent may read","the original, checked, and only what it's meant to read","Film 3 of 6 · AI and continuous architecture");});
+  acaTitle(ctx,S,t,B+1.0,"What an agent may read","the original, checked, and only what it's meant to read","Film 3 of 3 · AI architecture");});
 
 /* ---------- 2. Whatever it could reach ---------- */
 // Farah brings Tomás two complaints; the chat's first version read whatever it could reach: a copy of a copy of the tariffs, an
@@ -324,7 +324,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     [0,1,2,3].forEach(i=>{const x=A3_SL(i);if(i===3)archEl(ctx,x,A3_SY,A3_SW,A3_SH,A3_PROD[i][0],A3_BUS,"object",{size:28,deco:1});else a3_product(ctx,x,A3_SY,A3_SW,A3_SH,A3_PROD[i][0],{ct:1,size:28,deco:1});});
     aca_agent(ctx,800,650,44,t,{busy:0.4});a3_badge(ctx,A3_BX,630,t,{hi:pulseAt(t,w("answer","own identity"),2.0)});ctx.restore();});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"What an agent may read","The original, checked, and only what it's meant to read.","Film 3 of 6");});
+  acaEnd(ctx,S,t,B,"What an agent may read","The original, checked, and only what it's meant to read.","Film 3 of 3 · AI architecture");});
 
 /* ---------- where the chapters meet ---------- */
 // The map holds two chapters: Only what it's meant to read glides on from where Context from the map ends.

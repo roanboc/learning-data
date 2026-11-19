@@ -44,7 +44,7 @@ labs:[
   yearL:"El año",juneB:"Junio: el proyecto termina",reorgB:"Una reestructuración une el equipo",moneyB:"David pregunta a dónde va el dinero",
   bands:{strategy:"Estrategia",business:"Negocio"},
   caps:[{t:"Definir qué significan las palabras",h:"green",e:"cada copia, revisada cada noche"},{t:"Decidir quién es dueño de qué",h:"green",e:"un cambio sin dueño vuelve"},{t:"Proteger quién ve qué",h:"amber",e:"revisado a mano"},{t:"Mantener los datos aptos",h:"green",e:"los controles llegan a los dueños"},
-   {t:"Cambiar sin sorpresas",h:"amber",e:"quién usa qué, escrito a mano"},{t:"Ofrecer productos de datos",h:"green",e:"cada tabla compartida, en un producto"},{t:"Ayudar a participar",h:"green",e:"cualquiera pregunta, y recibe respuesta"},{t:"Guardar registros solo lo necesario",h:"red",e:"registros guardados para siempre"}],
+   {t:"Cambiar sin sorpresas",h:"amber",e:"quién usa qué, escrito a mano"},{t:"Ofrecer productos de datos",h:"green",e:"cada tabla compartida, en un producto"},{t:"Ayudar a participar",h:"green",e:"cualquiera pregunta, y recibe respuesta"},{t:"Guardar solo lo necesario",h:"red",e:"registros guardados para siempre"}],
   ended:"termina el 30 de junio",gone:"ya no está",redraw:"rehacer",
   msg:{team:"El equipo de gobernanza arriba: un equipo se puede reorganizar mañana.",project:"El proyecto de gobernanza arriba: un proyecto pone cosas en marcha, y luego termina.",cap:"Gobernar los datos arriba: lo que la universidad debe poder hacer, lo haga quien lo haga.",
    heatOn:"Cada capacidad se colorea con evidencia del trabajo: cinco verdes, donde corre cada noche; dos ámbar, aún revisadas a mano; una roja, donde aún no pasa nada.",heatOff:"Sin colores: el estado de cada capacidad es la opinión de alguien.",

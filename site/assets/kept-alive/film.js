@@ -469,7 +469,7 @@ const NARR={
  {"id":"quarter","gap":0.9,"text":"Every quarter, each agent is tested again. And every year, each owner confirms what they own."}
 ]},
 "series":{"name":"Five series, one idea","lead":0.8,"tail":0.9,"vo":[
- {"id":"last","gap":1.0,"text":"This is the last film on enterprise architecture, and each of its five series ends on the same idea."},
+ {"id":"last","gap":1.0,"text":"Five series on enterprise architecture so far, and each ends on the same idea."},
  {"id":"map","gap":0.9,"text":"The map before the data: a map stays alive while people use it, keep it true, and pass it on."},
  {"id":"business","gap":0.9,"text":"Business architecture for data: rules last only while people keep them, and change them when the world changes."},
  {"id":"data","gap":0.9,"text":"Data architecture: it's never finished. It matures one change at a time."},
@@ -488,11 +488,11 @@ const NARR={
 "end":{"name":"Kept alive","lead":0.8,"tail":1.0,"vo":[
  {"id":"answer","gap":0.9,"text":"Give the map an owner, a budget and a rhythm, not a project's end date."},
  {"id":"keep","gap":1.0,"text":"Check every change, read the map again from what's running, and let agents read the map itself, never a copy."},
- {"id":"next","gap":1.0,"text":"The architecture is kept. Who decides about the data in it is where Data governance begins."}
+ {"id":"next","gap":1.0,"text":"The architecture is kept. Next, AI architecture: the agents on the map."}
 ]}
 };
 
-const VODUR={"fall/city": 10.886, "fall/ruin": 7.199, "fall/order": 3.38, "fall/strabo": 5.333, "fall/died": 7.406, "fall/quarry": 8.232, "fall/walls": 5.828, "fall/need": 2.745, "fall/listed": 7.516, "fall/keepers": 6.967, "fall/utility": 4.862, "fall/moves": 5.27, "five/year": 4.91, "five/asks": 4.189, "five/five": 7.719, "five/why": 6.46, "five/copy": 5.974, "five/two": 6.822, "five/grace": 3.726, "moved/read": 6.799, "moved/steps": 4.229, "moved/words": 7.39, "moved/people": 2.974, "moved/agents": 4.793, "moved/passed": 4.087, "moved/never": 5.596, "copy/paste": 5.245, "copy/drift": 5.496, "copy/chat": 5.751, "copy/rule": 7.892, "copy/cite": 3.472, "copy/retest": 8.2, "leaves/lead": 5.491, "leaves/name": 4.593, "leaves/sees": 2.749, "leaves/agent": 6.02, "leaves/now": 8.666, "leaves/confirm": 3.86, "job/whole": 5.277, "job/term": 5.276, "job/product": 5.047, "job/cap": 5.071, "job/owner": 8.063, "job/budget": 5.132, "job/rhythm": 5.481, "job/month": 7.256, "job/quarter": 5.738, "series/last": 6.346, "series/map": 5.663, "series/business": 6.708, "series/data": 4.497, "series/platform": 7.977, "series/here": 4.642, "series/links": 7.719, "back/wall": 9.231, "back/practice": 5.651, "back/babel": 6.862, "back/slowly": 3.749, "back/spring": 7.721, "back/homes": 5.04, "end/answer": 3.889, "end/keep": 6.396, "end/next": 5.378};
+const VODUR={"fall/city": 10.886, "fall/ruin": 7.199, "fall/order": 3.38, "fall/strabo": 5.333, "fall/died": 7.406, "fall/quarry": 8.232, "fall/walls": 5.828, "fall/need": 2.745, "fall/listed": 7.516, "fall/keepers": 6.967, "fall/utility": 4.862, "fall/moves": 5.27, "five/year": 4.91, "five/asks": 4.189, "five/five": 7.719, "five/why": 6.46, "five/copy": 5.974, "five/two": 6.822, "five/grace": 3.702, "moved/read": 6.799, "moved/steps": 4.229, "moved/words": 7.39, "moved/people": 2.974, "moved/agents": 4.793, "moved/passed": 4.087, "moved/never": 5.596, "copy/paste": 5.245, "copy/drift": 5.496, "copy/chat": 5.751, "copy/rule": 7.892, "copy/cite": 3.472, "copy/retest": 8.2, "leaves/lead": 5.491, "leaves/name": 4.593, "leaves/sees": 2.749, "leaves/agent": 6.02, "leaves/now": 8.666, "leaves/confirm": 3.86, "job/whole": 5.277, "job/term": 5.276, "job/product": 5.047, "job/cap": 5.071, "job/owner": 8.032, "job/budget": 5.132, "job/rhythm": 5.481, "job/month": 7.256, "job/quarter": 5.738, "series/last": 5.054, "series/map": 5.663, "series/business": 6.708, "series/data": 4.497, "series/platform": 7.977, "series/here": 4.642, "series/links": 7.719, "back/wall": 9.231, "back/practice": 5.651, "back/babel": 6.862, "back/slowly": 3.749, "back/spring": 7.721, "back/homes": 5.04, "end/answer": 3.889, "end/keep": 6.396, "end/next": 4.875};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2016,7 +2016,7 @@ eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()
   ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
 yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
 
-/* ===== AI and continuous architecture: the series' components =====
+/* ===== Continuous architecture and AI architecture: the two series' shared components =====
    The last series on enterprise architecture, drawn in the look of The map before the data (films/enterprise-architecture/shared/src/:
    the six layers in glass, paper drafts, the same people at the same energy utility), with one true story across its six films: the
    ziggurat of Babylon, Etemenanki, rebuilt from about 620 BCE. This file holds what every film of the series draws:
@@ -2045,14 +2045,16 @@ function acaMark(ctx,x,y,s,a,p){if(a<=0.01)return;p=p==null?1:p;withA(ctx,a,()=>
   const w=s*(4-i)*1.15,h=s*0.62,yy=y-(i+1)*h-i*s*0.14+(1-spring(q*1.4))*s*0.7;
   withA(ctx,clamp(q*2,0,1),()=>{ctx.save();ctx.shadowColor=rgba(ACA,0.6);ctx.shadowBlur=12;rr(ctx,x-w/2,yy,w,h,s*0.08);ctx.fillStyle=rgba(ACA,0.16);ctx.fill();
     ctx.strokeStyle=rgba(ACA,1);ctx.lineWidth=Math.max(1.6,s*0.09);ctx.stroke();ctx.restore();});}});}
-// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series
+// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series.
+// n is "Film 1 of 3 · <the series>" in both cards: the series' name comes from it, as the two series share these components
+const acaSeries=n=>(n||"").split(" · ")[1]||"",acaFilm=n=>(n||"").split(" · ")[0];
 function acaTitle(ctx,S,t,t0,title,sub,n){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
-  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,"AI AND CONTINUOUS ARCHITECTURE",960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,acaSeries(n).toUpperCase(),960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
     T(ctx,title,960,568,{w:800,size:92,align:"center"});if(sub)T(ctx,sub,960,640,{w:600,size:36,align:"center",color:rgba(SOFT,0.95)});
     withA(ctx,fin(t,t0+1.2,0.8),()=>tag(ctx,960,718,n,ACA,{align:"center",size:28}));});}
 function acaEnd(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
   withA(ctx,tA,()=>{if(line)T(ctx,line,960,400,{w:700,size:44,align:"center"});acaMark(ctx,960,560,16,0.95,1);T(ctx,title,960,628,{w:800,size:44,align:"center",color:rgba(ACA,1)});
-    T(ctx,"AI and continuous architecture"+(n?" · "+n:"")+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
+    T(ctx,acaSeries(n)+" · "+acaFilm(n)+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
 
 /* ---------- Babylon: sky, city, river and palms ---------- */
 // The world is drawn in world space, wider than the frame, so the camera (focus) can move over it. o.dawn (0..1) goes from night to
@@ -2706,7 +2708,7 @@ function a6_bars(ctx,x,y,w,h,vals,names,o){o=o||{};const a=o.a==null?1:o.a;if(a<
 /* ---------- five series, one idea ---------- */
 // The topic's five series as a tower of five tiers, the first at its foot, each named; o.p (0..1) raises them; o.on[k] (0..1) lights
 // each as the voice reads its line; returns each tier's box. (cx, by): the middle of its foot
-const A6_SERIES=[["The map before the data",[255,206,140]],["Business architecture for data",[255,234,130]],["Data architecture",[255,186,150]],["Platform and solution architecture",[140,214,255]],["AI and continuous architecture",ACA]];
+const A6_SERIES=[["The map before the data",[255,206,140]],["Business architecture for data",[255,234,130]],["Data architecture",[255,186,150]],["Platform and solution architecture",[140,214,255]],["Continuous architecture",ACA]];
 function a6_series(ctx,cx,by,t,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==null?1:o.p,B=[],th=78,g=12;
   for(let k=0;k<5;k++){const w=900-k*80;B.push([cx-w/2,by-(k+1)*th-k*g,w,th]);}if(a<=0.01)return B;
   withA(ctx,a,()=>{B.forEach(([x,y,w,h],k)=>{const q=clamp(p*5.5-k,0,1);if(q<=0)return;const[nm,col]=A6_SERIES[k],on=clamp(o.on?o.on[k]||0:0,0,1),dy=(1-spring(q*1.4))*30;
@@ -2826,7 +2828,7 @@ scene("fall",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
       bab_tag(cx,960,214,"the tower is never rebuilt",a6_win(t,w("died","and the tower"),tQu-0.7,0.6),{col:ACA_WARN});
       bab_tag(cx,960,214,"with nobody to keep them: a quarry",a6_win(t,tQu-0.1,w("quarry","For centuries")-0.6,0.6));
       bab_tag(cx,960,214,"its bricks carried off to houses nearby",a6_win(t,w("quarry","For centuries"),tWa-0.6,0.6));});
-  acaTitle(ctx,S,t,B+0.8,"Kept alive","an owner, a budget and a rhythm, not an end date","Film 6 of 6 · AI and continuous architecture");});
+  acaTitle(ctx,S,t,B+0.8,"Kept alive","an owner, a budget and a rhythm, not an end date","Film 3 of 3 · Continuous architecture");});
 
 /* ---------- 2. Five steps, not four ---------- */
 // The street, on the right: its line from the pole, a home with new solar panels and two homes without, each with its line down from
@@ -3129,8 +3131,8 @@ scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   ctx.save();drift(ctx,t,sc,{z:0.02,y:480});
   // the topic's five series, as a tower: each lit as its last film's idea is read; all five at once, as they meet in one idea
   a6_series(ctx,560,760,t,{p:clamp((t-tLa-0.2)/2.4,0,1),on:T5.map((t0,k)=>Math.max(a6_win(t,t0-0.3,(T5[k+1]||tLk)-0.9,0.6),all)),dim:T5.map(()=>fin(t,tLk-0.3,0.8))});
-  a6_say(ctx,t,1470,380,"the last film on enterprise architecture",SOFT,w("last","the last film")-0.2,T5[0]-0.9);
-  a6_say(ctx,t,1470,460,"five series, one idea",BIZ,w("last","five series")-0.2,T5[0]-0.9);
+  a6_say(ctx,t,1470,380,"enterprise architecture, so far",SOFT,w("last","Five series")-0.2,T5[0]-0.9);
+  a6_say(ctx,t,1470,460,"five series, one idea",BIZ,w("last","same idea")-0.2,T5[0]-0.9);
   // what each series' last film says, on a card beside it
   T5.forEach((t0,k)=>{const q=a6_win(t,t0-0.3,(T5[k+1]||tLk)-0.9,0.6);if(q>0.01)arrive(ctx,1470,390,t,t0-0.3,()=>a6_card(ctx,1080,300,780,A6_SERIES[k][0],[A6_LINES[k]],A6_SERIES[k][1],{size:34}),{dy:-10,a:q});});
   // how to keep one map: in a tool, or in a repository
@@ -3220,15 +3222,15 @@ scene("back",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
 /* ---------- 9. Kept alive ---------- */
 // Tomás and Inés, and the answer, with the map under it, kept; the next topic; then the end card
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
-  const tA=c("answer"),tN=c("next"),fade=1-fin(t,B,1.0),rl=fin(t,w("next","is kept")-0.3,0.6),tDg=w("next","Data governance");
+  const tA=c("answer"),tN=c("next"),fade=1-fin(t,B,1.0),rl=fin(t,w("next","is kept")-0.3,0.6),tDg=w("next","AI architecture");
   ctx.save();ctx.globalAlpha*=fade;drift(ctx,t,sc,{z:0.02,y:480});
   a6_who(ctx,"tomas",230,fin(t,0.6,0.8),t,{expr:a6_expr("calm","relieved",rl)});a6_who(ctx,"ines",1690,fin(t,0.8,0.8),t,{right:true,expr:a6_expr("calm","relieved",rl)});
   arrive(ctx,960,250,t,tA-0.2,()=>sticky(ctx,960,250,900,300,"Give the map an owner, a budget and a rhythm, not a project's end date. Check every change, read the map again from what's running, and let agents read the map itself, never a copy.",
     {col:NOTEC[3],size:30,rot:0.01,p:clamp((t-tA)/12.0,0,1)}),{dy:-16});
   withA(ctx,fin(t,1.0,1.0),()=>a6_mapTower(ctx,760,700,0.42,t,{hi:fin(t,w("next","is kept")-0.3,0.8)}));
-  const nA=fin(t,tDg-0.3,0.7);if(nA>0.01)arrive(ctx,1230,632,t,tDg-0.3,()=>a6_card(ctx,1000,560,460,"next",["Data governance"],A6_OK,{size:40}),{dy:-10,a:nA});
+  const nA=fin(t,tDg-0.3,0.7);if(nA>0.01)arrive(ctx,1230,632,t,tDg-0.3,()=>a6_card(ctx,1000,560,460,"next",["AI architecture"],A6_OK,{size:40}),{dy:-10,a:nA});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"Kept alive","Give the map an owner, a budget and a rhythm.","Film 6 of 6");});
+  acaEnd(ctx,S,t,B,"Kept alive","Give the map an owner, a budget and a rhythm.","Film 3 of 3 · Continuous architecture");});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

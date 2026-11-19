@@ -10,7 +10,7 @@
 <link rel="icon" href="../../assets/favicon.svg?v=9c05cdd7f4" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/site.css?v=601b753224">
+<link rel="stylesheet" href="../../assets/site.css?v=a6bf9735d7">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../agents-at-work-on-data/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="Cómo funciona este sitio" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -20,6 +20,11 @@
 <h1>Agentes trabajando con datos</h1>
 <p class="lead">La segunda serie sobre agentes de IA en el trabajo con datos. El agente de Jun ya trabaja en el conteo del día del censo, la cifra que la universidad informa al gobierno. Seis películas muestran cómo trabajan bien los agentes, de lo que leen a cómo fallan; tres lo muestran en Databricks, gobernado.</p>
 </section>
+<nav class="course" aria-label="Curso: Agentes trabajando con datos"><div class="course-in"><p class="course-t"><small>Serie · Agentes de IA en el trabajo con datos</small>Agentes trabajando con datos</p><ol class="path" data-store="ld-agents-at-work-on-data" data-labs="9" data-quiz="12" data-series="ld-context-engineering ld-skills-and-workflows ld-tools-are-hands ld-memory-for-the-team ld-plan-check-do-check ld-how-it-goes-wrong ld-agents-on-databricks ld-unity-catalog-and-ai-gateway ld-context-and-memory-governed" data-text='{"watched": "Vista", "films": "{n} de 9 películas vistas", "labs": "{n} de 9 labs explorados", "quiz": "{n} de 12 respondidas · {ok} correctas"}'>
+<li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>Las películas</b><span>Nueve películas</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Nueve labs interactivos</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>12 situaciones reales</span></a></li>
+</ol></div></nav>
 
 <section class="module" id="films" aria-labelledby="films-h">
 <div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden: cada película se apoya en la anterior.</p></div></div>
@@ -117,37 +122,13 @@
 </div>
 </section>
 
-<section class="module" id="thread" aria-labelledby="thread-h">
-<div class="mhead"><div><h2 id="thread-h">Un hilo: el agente de Jun en el conteo del día del censo</h2><p>El agente de Jun trabaja en el conteo del día del censo, la cifra que la universidad informa al gobierno. Película a película, el equipo le da qué leer, habilidades que seguir, manos con los mínimos permisos y una memoria que comparte todo el equipo; decide cómo se comprobará cada resultado antes de que empiece; se prepara para las formas en que falla; y luego lo lleva todo a Databricks, gobernado como cualquier dato, antes de que la siguiente serie le dé al agente un rol propio.</p></div></div>
+<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
+<div class="mhead"><div><h2 id="learn-h">Desarma, y luego tú decides</h2><p>Nueve labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego 12 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 9 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 12 situaciones</a></p>
 </section>
 
-<section class="module" id="past" aria-labelledby="past-h">
-<div class="mhead"><div><h2 id="past-h">Dónde empieza cada película</h2></div></div>
-<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
-<tr><td>Ingeniería de contexto</td><td>Arezzo, Italia, hacia 1025: líneas en la página</td><td>Lo que vivía en la cabeza de cada maestro pasó a la página, y los niños cantaron cantos que nunca habían oído.</td></tr>
-<tr><td>Skills y flujos de trabajo</td><td>Bagdad, hacia el año 820: el libro de al-Juarismi sobre completar y equilibrar</td><td>Resuélvelo una vez, escríbelo, reutilízalo.</td></tr>
-<tr><td>Las herramientas son manos, y cada mano es un permiso</td><td>Oxford, 1602: una biblioteca refundada con una sola regla</td><td>Lee aquí, no te lleves ningún libro, no marques ninguno, no traigas fuego, y cada libro encadenado a su estante. Dale a cada mano de un agente solo lo que su trabajo necesita.</td></tr>
-<tr><td>Memoria: de un chat al equipo</td><td>Virginia y California, 1974 a 1976: un accidente, y un sistema de reportes para cada tripulación</td><td>Una lección que guarda una tripulación no salva a la siguiente. Contada en confianza, leída por una persona y compartida sin nombres, llega a todas.</td></tr>
-<tr><td>Planificar, definir la verificación, hacer, verificar</td><td>Singapur, de 1998 a 2002: agua en la que se puede confiar</td><td>Sus 190 parámetros se escribieron antes de que la planta de prueba hiciera agua, unos expertos la midieron con ellos durante dos años, y luego 60,000 personas levantaron una botella y bebieron.</td></tr>
-<tr><td>Cómo sale mal</td><td>Lisboa, 1755: un terremoto, una ola y el fuego, y una ciudad reconstruida para cada uno</td><td>La ciudad baja se reconstruyó para cada forma en que había fallado. Prevé las formas en que falla un agente, y diseña para cada una.</td></tr>
-<tr><td>Trabajar con agentes en Databricks</td><td>La Facultad de Salud, hoy</td><td>Cuando cada agente lee los mismos datos gobernados con las mismas herramientas, una pregunta tiene una sola respuesta, con su evidencia.</td></tr>
-<tr><td>Por qué Unity Catalog y Unity Gateway los gobiernan</td><td>Hoy, en la universidad: ¿de quién eran esas lecturas?</td><td>Unas mismas reglas para personas y agentes, aplicadas donde viven los datos y los modelos.</td></tr>
-<tr><td>Contexto y memoria, gobernados</td><td>Hoy, en la universidad: una línea que perdió tres palabras</td><td>La memoria ayuda, pero lo gobernado decide, así que una línea errónea no puede cambiar una respuesta.</td></tr>
-</tbody></table></div>
-</section>
-
-<section class="module" id="four-sides" aria-labelledby="four-sides-h">
-<div class="mhead"><div><h2 id="four-sides-h">Quiénes están en la mesa</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
-<div class="four">
-<div class="card tech"><h3>Construye el proyecto de datos</h3><p>Jun Park, cuyo agente trabaja en el conteo del día del censo, y que revisa todo lo que el agente redacta</p></div>
-<div class="card biz"><h3>Es dueña de un significado</h3><p>Mei Tanaka, de la oficina de registro, cuyas definiciones leen tanto las personas como los agentes</p></div>
-<div class="card tech"><h3>Dibuja el mapa</h3><p>Noor Rahman, la arquitecta de datos, que aprueba cada cambio en producción, también los de un agente</p></div>
-<div class="card tech"><h3>Gestiona la plataforma</h3><p>Sam Okafor, que da a cada agente una identidad propia, y solo los permisos que su trabajo necesita</p></div>
-<div class="card biz"><h3>Pide cifras</h3><p>Clara Jensen, de Planificación, cuyas preguntas responden los agentes, con su evidencia</p></div>
-</div>
-</section>
 </main>
-<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
 <script src="../../assets/learn/path.js?v=12187f81b8"></script>
 <script src="../../assets/ambient.js?v=e4b9486ecb"></script>
 </body>

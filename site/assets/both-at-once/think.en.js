@@ -8,7 +8,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "distance":{q:"An award is revoked at 15:00. An employer checks it at 16:00, and the answer comes from last night's copy. What does the employer see?",
     opts:[{t:"Valid: the copy doesn't know yet.",ok:true},{t:"An error: the award isn't in it."},{t:"Revoked: the copy reads the change.",near:true}],
     why:"Last night's copy was made before the revocation. Until the next copy, the reading side says the award is valid: that's the distance hybrid databases shorten."},
-  "sync":{stop:"order",q:"The reading side receives “revoke A-1042” before “issue A-1042”. What does it end up showing?",
+  "sync":{stop:"sync",q:"The reading side receives “revoke A-1042” before “issue A-1042”. What does it end up showing?",
     opts:[{t:"Nothing: both changes are refused."},{t:"Revoked: the last change wins.",near:true},{t:"Issued: the award is back to life.",ok:true}],
     why:"The revocation finds no row, so it changes nothing; then the issue adds the award as issued. Changes must be applied in the order they happened."},
   "doesnt":{q:"The app's awards table is live and exact. Why does counting last year's Science awards from it come out wrong?",

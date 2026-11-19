@@ -72,5 +72,11 @@
       "Lleva la plataforma",
       "Sam Okafor, que lleva a la plataforma los conteos de los sensores de las aulas: conteos, nunca personas"
     ]
-  ]
+  ],
+  "learn_p": "{Labs} decision playgrounds, one for each film, where choices play out week by week and month by month; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs de decisiones, uno por película, donde las decisiones se desarrollan semana a semana y mes a mes; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} decision playgrounds, one for each film. Make a data team's choices, play them out, and watch what follows: a prototype's first weeks, a page of measures, Fridays that improve the work, a strategy's year.",
+  "labs_lead_es": "{Labs} labs de decisiones, uno por película. Toma las decisiones de un equipo de datos, juégalas y mira qué pasa: las primeras semanas de un prototipo, una página de medidas, viernes que mejoran el trabajo, el año de una estrategia.",
+  "quiz_lead": "{quiz} situations from every film, about delivering and improving in small steps. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
+  "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre entregar y mejorar en pasos pequeños. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

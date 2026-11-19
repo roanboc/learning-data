@@ -2897,68 +2897,93 @@ function dd_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
     ag_T(cc,lab,bx+30,y+62,{w:700,size:30,color:U.css(PK.C.ink)});y+=96;}}
 
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
-// 1. what the tests check (Carmen)
-const dd_boardA=(sc,w)=>[
-  {s:"Tests check the form",x:70,y:110,size:60,col:"blue",at:w("tests","form",-0.3),d:0.9},
-  {s:"no room twice",x:110,y:212,size:50,at:w("tests","no room",-0.2),d:0.7},{s:"· no hour left out",size:50,at:w("tests","no hour",-0.2),d:0.8},
-  {s:"Not what “used” means",x:70,y:330,size:58,col:"amber",at:w("meaning","know",-0.3),d:0.9}];
-// 2. the three things Ivy gives the agent (Ivy, at the team's board)
-const dd_boardB=(sc,w)=>[
-  {s:"Three things, not one",x:70,y:100,size:54,col:"blue",at:w("three","three things",-0.3),d:0.9},
-  {s:"1 · Decision: a new building?",x:70,y:196,size:46,at:w("decision","decision",-0.2),d:1.1},{s:"the Council",size:40,col:"mut",at:w("decision","Council",-0.2),d:0.6},
-  {s:"2 · Words: room use, as the glossary has it",x:70,y:292,size:44,col:"blue",at:w("words","room use",-0.2),d:1.3},
-  {s:"3 · Counts: teaching hours, 8 to 6, Mon to Fri",x:70,y:388,size:42,at:w("counts","teaching hours",-0.2),d:1.4},
-  {s:"booked and used, side by side",x:110,y:466,size:42,col:"orange",at:w("counts","booked",-0.2),d:1.0}];
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). Each is drawn as a designer would, a graphic recording pinned over the board, almost done when it first
+   shows (PK.sk.drawn); whoever explains adds the last marks and words as the voice says them, on from left to right, and steps clear. */
+// 1. what the tests check, and what they can't (Carmen)
+const dd_boardA=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"What the tests check",{ref:["4 tests","all pass"],rcol:"green",rsize:32});
+    D.panel(c,70,150,570,262,{title:"the form",col:"green",fill:"green"},(cc,x,y)=>{
+      // the model's grid, rooms down and hours along, every cell counted once
+      for(let j=0;j<4;j++)for(let i=0;i<6;i++)D.box(cc,x+30+i*30,y+16+j*30,24,24,{fill:(i*5+j*3)%4?"green":"white",col:"ink",w:1.6,r:3});
+      D.text(cc,"rooms × hours",x+120,y+170,{size:28,align:"center",col:"mut"});
+      [["no room twice",y+44],["no hour left out",y+122]].forEach(([s,yy])=>{D.box(cc,x+246,yy-30,34,34,{fill:"white",col:"ink",w:2.5,r:6});D.text(cc,s,x+296,yy,{size:32,w:700});});});
+    D.panel(c,680,150,500,262,{title:"the meaning",col:"amber",fill:"amber"},(cc,x,y)=>{D.face(cc,"graham",x+70,y+70,44);
+      D.box(cc,x+136,y+18,352,112,{fill:"paper",col:"ink",w:3,r:16});D.line(cc,[[x+140,y+66],[x+122,y+78],[x+140,y+86]],{col:"ink",w:3,seed:3});
+      D.text(cc,"used: people in the room,",x+158,y+62,{size:28,w:700});D.text(cc,"not a booking",x+158,y+104,{size:28,col:"mut"});
+      D.text(cc,"Graham, in February",x+70,y+166,{size:28,col:"mut"});});}),
+  {k:"tick",x:333,y:240,r:18,col:"green",at:w("tests","no room",-0.2),d:0.3},{k:"tick",x:333,y:318,r:18,col:"green",at:w("tests","no hour",-0.2),d:0.3},
+  {s:"No test can know it",x:1180,y:466,size:48,w:700,col:"amber",align:"right",at:w("meaning","know",-0.3),d:1.0}];
+// 2. the three things Ivy gives the agent (Ivy, at the team's board): a tick as the voice comes to each; the last one's words are hers
+const DD_THREE=[["building","the decision","a new building?","for the Council"],["book","the words","room use","from the glossary"],["clock","what counts","teaching hours","8 to 6 · Mon to Fri"]];
+const dd_boardB=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Three things, not one",{sub:["for the agent, before it drafts","mut"]});
+    DD_THREE.forEach(([ic,h,a,b],i)=>D.panel(c,72+i*372,190,348,214,{title:h,col:"blue",fill:"blue"},(cc,x,y,pw)=>{D.icon(cc,ic,x+46,y+34,26,{fill:"white"});
+      D.text(cc,a,x+86,y+46,{size:32,w:700});D.text(cc,b,x+pw/2,y+116,{size:30,align:"center",col:"mut"});}));}),
+  {k:"tick",x:104,y:222,r:18,col:"green",at:w("decision","decision",-0.2),d:0.3},{k:"tick",x:476,y:222,r:18,col:"green",at:w("words","room use",-0.2),d:0.3},
+  {s:"booked and used, side by side",x:1180,y:466,size:42,w:700,col:"orange",align:"right",at:w("counts","booked",-0.2),d:1.0}];
 // 3. the work moves to either side of the draft (Carmen)
-const dd_boardC=(sc,w)=>[
-  {s:"The draft: an agent's",x:70,y:110,size:56,col:"violet",at:w("moves","either side",-0.3),d:0.9},
-  {s:"Before: decision · words · what counts",x:70,y:226,size:46,col:"blue",at:w("before","Before",-0.2),d:1.4},
-  {s:"After: check · decide · answer for it",x:70,y:340,size:46,col:"green",at:w("after","After",-0.2),d:1.4}];
-// 4. what employers seek (Carmen)
-const dd_boardD=(sc,w)=>[
-  {s:"Future of Jobs 2025 · World Economic Forum",x:70,y:100,size:38,col:"mut",at:w("wef","Future of Jobs",-0.2),d:1.0},
-  {s:"Sought most: analytical thinking",x:70,y:196,size:50,col:"blue",at:w("wef","analytical",-0.3),d:1.0},
-  {s:"7 in 10: essential",x:70,y:286,size:50,col:"green",at:w("seven","Seven",-0.2),d:0.7},
-  {s:"Rising fastest: AI, big data",x:70,y:376,size:46,at:w("rising","fastest",-0.3),d:1.0},
-  {s:"too: creativity, curiosity",x:600,y:462,size:40,at:w("rising","creative",-0.2),d:0.9}];
+const dd_boardC=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Either side of the draft");
+    const side=(x,title,col,rows)=>D.panel(c,x,140,370,262,{title,col,fill:col},(cc,px,py)=>rows.forEach(([ic,s],i)=>{D.icon(cc,ic,px+46,py+26+i*62,22,{fill:"white"});D.text(cc,s,px+86,py+38+i*62,{size:32});}));
+    side(70,"before it","blue",[["target","the decision"],["book","the words"],["bars","what counts"]]);
+    const b=D.card(c,486,212,{icon:"doc",ifill:"violet",lines:[["the draft",{w:700}],["an agent's",{size:30,col:"violet"}]],size:36});
+    D.arrow(c,[448,b.y+b.h/2],[b.x-8,b.y+b.h/2],{col:"mut"});D.arrow(c,[b.x+b.w+8,b.y+b.h/2],[810,b.y+b.h/2],{col:"mut"});
+    side(812,"after it","green",[["check","check it"],["scale","decide"],["hand","answer for it"]]);}),
+  {s:"you frame it",x:255,y:462,size:46,w:700,col:"blue",align:"center",at:w("before","framing",-0.2),d:0.8},
+  {s:"you decide",x:1180,y:462,size:46,w:700,col:"green",align:"right",at:w("after","deciding",-0.2),d:0.7}];
+// 4. what employers seek (Carmen): the World Economic Forum's report, its numbers as the voice gives them
+const dd_boardD=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"What employers seek",{ref:["Future of Jobs","WEF · 2025"],rsize:32});
+    D.panel(c,70,140,560,292,{title:"sought most",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"bulb",x+56,y+36,30,{fill:"amber"});D.text(cc,"analytical thinking",x+104,y+50,{size:40,w:700});
+      for(let i=0;i<10;i++)D.icon(cc,"person",x+50+i*50,y+112,18,{fill:i<7?"blue":"white"});});
+    D.panel(c,670,140,510,292,{title:"rising fastest",col:"green",fill:"green"},(cc,x,y)=>{D.trend(cc,x+30,y+12,150,86,[[0,0.1],[0.4,0.3],[0.7,0.55],[1,0.95]],{col:"green"});
+      D.text(cc,"AI and big data",x+210,y+64,{size:36,w:700});});}),
+  {s:"7 in 10: essential",x:100,y:398,size:44,w:700,col:"green",at:w("seven","Seven",-0.2),d:0.8},
+  {s:"+ creativity, curiosity",x:700,y:398,size:40,w:700,col:"green",at:w("rising","creative",-0.2),d:0.9}];
 
-/* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
+/* ---------------------------------------------------------------- pages of a notebook (the page's own px): drawn as a designer would,
+   a sketched page almost done when it first shows; the pen adds the last marks and words as the voice says them. One pen writes a page. */
 // 1. what the agent assumed (Ivy)
-const dd_note1=(sc,w)=>[
-  {s:"What it assumed",x:70,y:124,size:80,w:760,col:"blue",at:w("harm","weighed",-0.4),d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"booked = used",x:110,y:262,size:62,col:"amber",at:w("harm","bookings",-0.3),d:0.7},
-  {s:"1 booked hour in 5: nobody",x:110,y:362,size:52,at:w("harm","rooms people use",-0.3),d:1.0},
-  {s:"It said so. It had the task,",x:110,y:452,size:50,at:w("common","said what",-0.3),d:1.0},
-  {s:"not the decision, or the words",x:110,y:536,size:50,col:"green",at:w("task","not the decision",-0.3),d:1.1}];
-// 2. one room's week, by hand (Ivy)
-const dd_note2=(sc,w)=>[
-  {s:"B-204, by hand",x:70,y:124,size:80,w:760,col:"blue",at:w("hand","by hand",-0.6),d:0.7},
-  {s:"Mon to Fri, 8 to 6",x:110,y:262,size:60,at:w("hand","hour by hour",-0.4),d:0.8},
-  {s:"50 hours, one by one",x:110,y:362,size:56,col:"orange",at:w("hand","hour by hour",0.4),d:0.8},
-  {k:"tick",x:130,y:462,r:30,col:"green",at:w("match","All",-0.3),d:0.3},
-  {s:"All 50 match the draft",x:180,y:478,size:56,col:"green",at:w("match","fifty",-0.1),d:0.8}];
-// 3. what goes with the pull request (Ivy)
-const dd_note3=(sc,w)=>[
-  {s:"With the pull request",x:70,y:124,size:72,w:820,col:"blue",at:w("reason","reasoning",-0.5),d:0.8},
-  {s:"what I asked for",x:110,y:258,size:54,at:w("reason","what she asked",-0.2),d:0.7},
-  {s:"what it assumed",x:110,y:350,size:54,col:"amber",at:w("reason","what the agent assumed",-0.1),d:0.7},
-  {s:"what I changed",x:110,y:442,size:54,at:w("reason","what she changed",-0.1),d:0.7},
-  {s:"how I checked",x:110,y:534,size:54,col:"green",at:w("reason","how she checked",-0.1),d:0.7}];
+const dd_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"What it assumed",86,124,{size:80});
+    D.card(c,110,196,{icon:"cal",ifill:"amber",lines:[["booked",{w:700}]],size:44,w:250});
+    D.text(c,"=",410,252,{size:64,w:700,align:"center"});
+    D.card(c,460,196,{icon:"people",ifill:"green",lines:[["used",{w:700}]],size:44,w:210});
+    for(let i=0;i<5;i++)D.box(c,110+i*62,372,46,46,{fill:i===4?"white":"orange",col:"ink",w:2.5,r:6});
+    D.text(c,"1 booked hour in 5: nobody there",110,470,{size:38});
+    D.sticky(c,660,330,330,120,{col:"sun",rot:0.03,draw:(cc,x,y)=>{D.text(cc,"it said so,",x+24,y+50,{size:34,w:700});D.text(cc,"in its notes",x+24,y+92,{size:32,col:"mut"});}});
+    D.text(c,"It had the task,",110,590,{size:48});},[60,40,1040,800]),
+  {k:"cross",x:410,y:232,r:30,col:"amber",at:w("harm","bookings",-0.3),d:0.4},
+  {k:"tick",x:950,y:372,r:24,col:"green",at:w("common","said what",-0.2),d:0.3},
+  {s:"not the decision, or the words",x:110,y:680,size:52,w:700,col:"green",at:w("task","not the decision",-0.3),d:1.1}];
+// 2. one room's week, by hand (Ivy): every hour as she worked it out, then what she found
+const dd_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"B-204, by hand",86,124,{size:80});D.icon(c,"pen",700,96,34,{fill:"orange"});
+    ["Mon","Tue","Wed","Thu","Fri"].forEach((d,i)=>D.text(c,d,166+i*70,212,{size:28,align:"center",col:"mut"}));D.text(c,"8",108,248,{size:28,col:"mut"});D.text(c,"6",108,560,{size:28,col:"mut"});
+    // booked and used (green), booked with nobody there (amber), free (white)
+    for(let j=0;j<10;j++)for(let i=0;i<5;i++){const k=(i*3+j*7)%10;D.box(c,138+i*70,226+j*34,56,26,{fill:k<5?"green":k<7?"amber":"white",col:"ink",w:1.8,r:4});}
+    [["green","booked, used"],["amber","booked, nobody"],["white","free"]].forEach(([col,s],i)=>{D.box(c,560,252+i*64,40,28,{fill:col,col:"ink",w:2,r:4});D.text(c,s,618,276+i*64,{size:32});});
+    D.text(c,"50 hours, one by one",560,470,{size:34,w:700,col:"orange"});},[60,40,1040,800]),
+  {k:"tick",x:130,y:648,r:30,col:"green",at:w("match","All",-0.3),d:0.3},
+  {s:"All 50 match the draft",x:180,y:664,size:56,w:700,col:"green",at:w("match","fifty",-0.1),d:0.8}];
+// 3. what goes with the pull request (Ivy): the reasoning, a tick as the voice comes to each
+const DD_WHY=[["what I asked for","what she asked"],["what it assumed","what the agent assumed"],["what I changed","what she changed"],["how I checked","how she checked"]];
+const dd_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"With the pull request",86,124,{size:72});
+    D.card(c,110,180,{icon:"doc",ifill:"green",lines:[["Room use",{w:700}],["pull request · Ivy Reyes",{size:30,col:"mut"}]],size:38});
+    DD_WHY.forEach(([s],i)=>{const y=420+i*84;D.box(c,110,y-36,40,40,{fill:"white",col:"ink",w:2.5,r:6});D.text(c,s,176,y,{size:46});});},[60,40,1040,800]),
+  {s:"keep the reasoning:",x:110,y:350,size:52,w:700,col:"blue",at:w("reason","reasoning",-0.3),d:0.8},
+  ...DD_WHY.map(([,word],i)=>({k:"tick",x:130,y:402+i*84,r:20,col:"green",at:w("reason",word,-0.1),d:0.3}))];
 // 4. what an agent can, and can't (Helena)
-const dd_note4=(sc,w)=>[
-  {s:"An agent",x:70,y:124,size:84,w:700,col:"violet",at:w("cant","An agent",-0.2),d:0.5,marks:[["under","violet",null,0.3]]},
-  {s:"drafts, tests, says what it assumed",x:110,y:270,size:48,at:w("cant","draft",-0.2),d:1.3},
-  {s:"never takes the decision",x:110,y:380,size:56,col:"amber",at:w("cant","decision",-0.4),d:0.9},
-  {s:"nor the responsibility",x:110,y:480,size:56,col:"amber",at:w("cant","responsibility",-0.4),d:0.9}];
-// 5. on Monday (Helena)
-const dd_note5=(sc,w)=>{const dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("one","On Monday",0),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(252,"blue",w("one","decision",-0.4)),{s:"Decision, words, what counts",x:128,y:252,size:48,at:w("one","decision",-0.1),d:1.1},
-  dot(352,"amber",w("two","Read",-0.3)),{s:"Read what it assumed",x:128,y:352,size:48,at:w("two","Read",0),d:0.9},
-  dot(452,"orange",w("three","Check",-0.3)),{s:"Check it against what's true",x:128,y:452,size:48,at:w("three","Check",0),d:1.0},
-  dot(552,"green",w("four","Never",-0.3)),{s:"Never approve your own",x:128,y:552,size:48,at:w("four","Never",0),d:0.9}];};
+const dd_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"An agent",86,124,{size:84,col:"violet"});D.icon(c,"gear",530,96,36,{fill:"violet"});
+    D.panel(c,100,180,880,236,{title:"can",col:"green",fill:"green"},(cc,x,y)=>[["doc","draft"],["check","test its work"],["chat","say what it assumed"]].forEach(([ic,s],i)=>{
+      const cx=x+[130,390,680][i];D.icon(cc,ic,cx,y+44,34,{fill:"white"});D.text(cc,s,cx,y+130,{size:32,w:700,align:"center"});}));
+    D.panel(c,100,450,880,300,{title:"can't take",col:"amber",fill:"amber"},()=>{});},[60,40,1040,800]),
+  {s:"the decision",x:150,y:604,size:56,w:700,col:"amber",at:w("cant","decision",-0.4),d:0.8},
+  {s:"or the responsibility",x:150,y:700,size:56,w:700,col:"amber",at:w("cant","responsibility",-0.4),d:1.0}];
+// 5. on Monday (Helena): what to do is there; a tick as the voice comes to each, and the last in her hand
+const DD_MON=[["The decision, the words, what counts","one","decision"],["Read what it assumed, to the end","two","Read"],["Check it against what's true","three","Check"]];
+const dd_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,122,{size:88});
+    DD_MON.forEach(([s],i)=>{const y=262+i*100;D.disc(c,120,y-16,30,{fill:"blue",col:"ink",w:3});D.text(c,String(i+1),120,y-4,{size:36,w:700,align:"center"});D.text(c,s,170,y,{size:42});});
+    D.disc(c,120,546,30,{fill:"amber",col:"ink",w:3});D.text(c,"4",120,558,{size:36,w:700,align:"center"});
+    D.sticky(c,150,616,500,180,{col:"sun",rot:-0.02,draw:(cc,x,y)=>{D.text(cc,"two amateurs,",x+26,y+52,{size:32,w:700});D.text(cc,"three computers:",x+26,y+96,{size:32,w:700});
+      D.text(cc,"they framed, compared, decided",x+26,y+146,{size:30,col:"blue"});}});},[60,40,1040,800]),
+  ...DD_MON.map(([,id,word],i)=>({k:"tick",x:980,y:244+i*100,r:22,col:"green",at:w(id,word,0.4),d:0.3})),
+  {s:"Never approve your own",x:170,y:562,size:46,w:700,col:"amber",at:w("four","Never",0),d:0.9}];
 
 /* ===== The draft and the decision: the chapters, shot by shot =====
    The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line

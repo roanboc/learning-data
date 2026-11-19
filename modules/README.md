@@ -180,6 +180,8 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 - [Valid isn't true](../films/fit-for-use/3-valid-isnt-true/) — `valid-isnt-true`
 - [Late is wrong too](../films/fit-for-use/4-late-is-wrong-too/) — `late-is-wrong-too`
 
+Labs and assessments: [site/assets/fit-for-use/learn.en.js](../site/assets/fit-for-use/learn.en.js), [site/assets/fit-for-use/learn.es.js](../site/assets/fit-for-use/learn.es.js)
+
 ### Quality as a habit
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
@@ -188,6 +190,8 @@ Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/qu
 - [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
 - [Read by an agent](../films/quality-as-a-habit/3-read-by-an-agent/) — `read-by-an-agent`
 - [Small, every week](../films/quality-as-a-habit/4-small-every-week/) — `small-every-week`
+
+Labs and assessments: [site/assets/quality-as-a-habit/learn.en.js](../site/assets/quality-as-a-habit/learn.en.js), [site/assets/quality-as-a-habit/learn.es.js](../site/assets/quality-as-a-habit/learn.es.js)
 
 ## Enterprise architecture
 

@@ -1,38 +1,69 @@
-/* Data architecture: plays the series' labs and scenarios through, for site-tools/smoke.py's series-learn check, from their words
-   (window.DA) and only by what a visitor can click. A lab gets the right answers, with one wrong pick on its first card, and must
-   reach its end, say what happened in words (its end only once), draw every word whole (window.DA_MISS, from learn.js), and start
-   again. Every scenario must have its picture, the first one too, and get its right answer, and the results must count them all.
-   Each returns what went wrong, as text. */
+/* Data architecture: plays the series' playgrounds and its evaluation through, for site-tools/smoke.py's series-learn check, from
+   their words (window.DA) and only by what a visitor can click. A playground is played until every experiment is ticked, and must
+   say in words what happened, draw every word whole (window.DA_MISS, from learn.js), give its picture words, and start again with
+   none ticked. Every scenario must have its picture and take its right answer, and the results must count them all. Each returns
+   what went wrong, as text. */
 ({
 lab: async (id) => {
   const L = window.DA, Lb = L.labs.find(x => x.id === id), W = Lb.w, U = L.ui, panel = document.getElementById("da-panel");
   const wait = ms => new Promise(r => setTimeout(r, ms)), q = s => panel.querySelector(s), qa = s => [...panel.querySelectorAll(s)];
-  const click = (el, what) => { if (!el) throw new Error("nothing to click: " + what); el.click(); };
-  const byText = (sel, t) => qa(sel).find(b => b.textContent.trim() === t);
   const out = [];
-  if (Lb.kind === "deal") {
-    for (let i = 0; i < W.items.length; i++) {
-      const it = W.items[i], opts = it.opts || W.buckets;
-      if (i === 0) click(q('.da-opts button[data-k="' + opts.find(o => o[0] !== it.b)[0] + '"]'), "a wrong pick");
-      else click(q('.da-opts button[data-k="' + it.b + '"]'), "card " + (i + 1));
-      await wait(20);
-      if (!q(".da-why")) out.push("card " + (i + 1) + " says nothing about why");
-      click(q(".lab-controls .chip-btn.go"), "next, after card " + (i + 1)); await wait(20);
-    }
-  } else out.push("no play for a lab of kind " + Lb.kind);
-  await wait(60);
-  const end = q(".da-end"), say = q(".lab-say");
-  if (!end) out.push("it never reached its end");
-  else if (!end.textContent.includes((W.items.length - 1) + " ")) out.push("its end doesn't count the right first tries: " + end.textContent.slice(0, 80));
+  const press = async (t, ms) => {
+    const b = qa("button").find(x => x.textContent.trim() === t);
+    if (!b) { out.push("no button “" + t + "”"); return; }
+    b.click(); await wait(ms || 250);
+  };
+  const seg = async (row, k, ms) => {
+    const g = qa(".da-row .seg")[row], b = g && g.querySelectorAll("button")[k];
+    if (!b) { out.push("no choice " + (k + 1) + " in group " + (row + 1)); return; }
+    b.click(); await wait(ms || 250);
+  };
+  // a button that steps through states: pressed until it says the state wanted
+  const step = async (label, state) => {
+    const b = qa(".da-cyc").find(x => x.dataset.cycle === label);
+    if (!b) { out.push("no button for “" + label + "”"); return; }
+    for (let i = 0; i < 6 && b.dataset.state !== state; i++) { b.click(); await wait(60); }
+    if (b.dataset.state !== state) out.push("“" + label + "” never reached " + state);
+  };
+  const cv = q("canvas");
+  if (cv) cv.scrollIntoView({block: "center"});  // a picture plays while it's in view
+  await wait(300);
+  if (Lb.kind !== "play") out.push("no play for a lab of kind " + Lb.kind);
+  else if (id === "records") {
+    await press(W.stormB, 400);
+    for (const r of W.recs) await press(r.t, 120);
+    await press(W.ownerT); await seg(0, 1); await press(W.stormB, 600); await press(W.moveB, 600);
+  } else if (id === "chain") {
+    await seg(0, 1); await seg(1, 0, 400); await seg(2, 0); await press(W.decideB, 400); await seg(1, 1, 400);
+  } else if (id === "born") {
+    await seg(0, 1); await press(W.yearB); await press(W.linT); await seg(1, 1); await press(W.fixB); await seg(2, 1); await press(W.stormB, 600);
+  } else if (id === "paths") {
+    for (const p of W.paths.filter(p => !p.on)) await step(p.t, p.k === W.key ? "flow" : "closed");
+    await press(W.ctT); await press(W.chgB, 400); await press(W.listT); await press(W.askB, 400);
+  } else if (id === "owner") {
+    for (const t of W.tables) await step(t.t, t.right === "none" ? "team" : t.right);
+    await press(W.methB); await press(W.regB); await press(W.archT, 400);
+  } else if (id === "names") {
+    await seg(0, 2); await seg(1, 0); await seg(2, 0); await seg(0, 0);
+    await press(W.mapT); await seg(3, 1, 600);
+  } else out.push("no play written for playground " + id);
+  const ticked = qa(".da-goals li.ok").length;
+  if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "
+    + qa(".da-goals li:not(.ok)").map(li => "“" + li.textContent.trim() + "”").join(", "));
+  const say = q(".lab-say");
   if (!say || !say.textContent.trim()) out.push("nothing says in words what happened");
-  else if (end && !say.classList.contains("sr") && say.textContent.includes(end.textContent.trim())) out.push("its end is said twice, under the picture and in its end box");
   const cut = [...(window.DA_MISS || [])];
   if (cut.length) out.push("its picture cuts words short: " + cut.slice(0, 4).map(s => "“" + s + "”").join(", "));
-  const cv = q("canvas");
-  if (cv && !(cv.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
-  const again = byText(".chip-btn", U.again);
+  const c2 = q("canvas");
+  if (!c2) out.push("no picture");
+  else if (!(c2.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
+  const again = qa(".da-again").find(b => b.textContent.trim() === U.again);
   if (!again) out.push("no way to start again");
-  else { again.click(); await wait(60); if (document.getElementById("da-panel").querySelector(".da-end")) out.push("starting again leaves the end on the page"); }
+  else {
+    again.click(); await wait(100);
+    const left = document.getElementById("da-panel").querySelectorAll(".da-goals li.ok").length;
+    if (left) out.push("starting again leaves " + left + " experiments ticked");
+  }
   return out;
 },
 quiz: async () => {
@@ -45,12 +76,9 @@ quiz: async () => {
     if (seen.has(qq.n)) { out.push("scenario " + qq.n + " came twice"); break; }
     seen.add(qq.n);
     if (!app.querySelector(".qvis canvas")) out.push("scenario " + qq.n + " has no picture");
-    if (qq.type === "choice") {
-      const j = qq.opts.findIndex(o => o.ok), b = app.querySelector('.qopt[data-j="' + j + '"]');
-      if (!b) { out.push("scenario " + qq.n + ": no right answer to pick"); break; }
-      b.click();
-    } else { out.push("scenario " + qq.n + ": no play for a scenario of type " + qq.type); break; }
-    await wait(30);
+    const j = qq.opts.findIndex(o => o.ok), b = app.querySelector('.qopt[data-j="' + j + '"]');
+    if (!b) { out.push("scenario " + qq.n + ": no right answer to pick"); break; }
+    b.click(); await wait(30);
     const fb = app.querySelector(".qfeed");
     if (!fb || !fb.classList.contains("ok")) out.push("scenario " + qq.n + ": its right answer isn't taken as right");
     const nx = app.querySelector(".qfoot .btn.primary");

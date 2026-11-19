@@ -189,21 +189,33 @@ window.LD_ROUTE = {
      ]
     },
     {
-     "id": "ai-and-continuous-architecture",
+     "id": "continuous-architecture",
      "kind": "series",
-     "title": "IA y arquitectura continua",
-     "href": "ai-and-continuous-architecture/",
-     "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Serie · 6 películas",
-     "len": "48 min",
-     "min": 48.0,
+     "title": "Arquitectura continua",
+     "href": "continuous-architecture/",
+     "poster": "a-first-draft-not-a-blank-page-poster.jpg",
+     "kicker": "Serie · 3 películas",
+     "len": "24 min",
+     "min": 24.0,
      "films": [
-      "ld-agents-on-the-map",
-      "ld-the-ai-platform",
-      "ld-what-an-agent-may-read",
       "ld-a-first-draft-not-a-blank-page",
       "ld-every-change-checked",
       "ld-kept-alive"
+     ]
+    },
+    {
+     "id": "ai-architecture",
+     "kind": "series",
+     "title": "Arquitectura de IA",
+     "href": "ai-architecture/",
+     "poster": "agents-on-the-map-poster.jpg",
+     "kicker": "Serie · 3 películas",
+     "len": "24 min",
+     "min": 24.0,
+     "films": [
+      "ld-agents-on-the-map",
+      "ld-the-ai-platform",
+      "ld-what-an-agent-may-read"
      ]
     }
    ]

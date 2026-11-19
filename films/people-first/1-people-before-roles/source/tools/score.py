@@ -303,14 +303,14 @@ pair(Db2, F4, oc('breath', 0.3), 4.4, 0.7, until=END)
 for at in (oc('where', 0.4), ow('steel', 'steel', -0.2), oc('left', 0.3), oc('keeper', 0.2), oc('today', 0.2), oc('minka', 0.1), oc('unesco', 0.1)):
     card(at, 0.0035, 0.0)
 cord(ow('wear', 'made new', -0.6), 0.9, 0.003, px(300))
-steelwork(ow('steel', 'steel bridge', -0.3), 1.6, 0.0032, px(960))
+steelwork(ow('steel', 'steel bridge', -0.3), 1.6, 0.0032, px(850))
 truck(ow('need', 'cars', -0.4), 5.5, 0.0034, px(960))
-pen(ow('left', 'finds', 0.2), 1.2, 0.004, px(260), 3)
-pen(oc('rebuild', 0.4), 1.0, 0.004, px(250), 3)
+pen(ow('left', 'finds', 0.2), 1.2, 0.004, px(1450), 3)
+pen(oc('rebuild', 0.4), 1.0, 0.004, px(1730), 3)
 gathering(oc('did', 0.4), 3.4, 0.0034, 0.0)
 gathering(oc('today', -0.1), 3.4, 0.0032, 0.0)
-truck(oc('today', 1.4), 6.0, 0.003, px(960))
-truck(oc('turn', -0.4), 4.5, 0.003, px(960))
+truck(oc('today', 1.4), 6.0, 0.003, px(750))
+truck(oc('turn', -0.4), 4.5, 0.003, px(570))
 card(oc('breath', 0.2), 0.0035, px(1400))
 
 # 2. A chart and a list: the university, a year from now: D flat, the bassoon and then the cor anglais; Helena's sheet; the two
@@ -408,7 +408,7 @@ line((('c', Ab4, 0.00, 0.40), ('c', C5, 0.46, 1.10)), mw('same', 'who', -0.1), 0
 names(mc('take', 0.3), 0.62, close=5.0, until=TOT)
 # the sounds of Monday's pictures: the truck on the steel; what to keep, written in her notebook, and its last row ringed; the next
 # film's card; the end card
-truck(S0('monday') + 0.4, 5.0, 0.003, px(960))
+truck(S0('monday') + 0.4, 5.0, 0.003, px(1040))
 written('N3', pen, 0.004)
 card(mc('next', 0.3), 0.0035, px(1400))
 card(mc('breath', 0.6), 0.0035, px(1400))

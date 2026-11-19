@@ -221,7 +221,7 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
         marta:Object.assign({turn:1,work:0,pose:"sit"},mh_alive(tt,{expr:"listen",gaze:[1,-0.2]},3,0)),people:[
         {fl:MH_RB.floor,draw:cc=>{mh_roomBoard(cc,tt,BD,"ivy",{events:MH_HEV});}},
         {fl:MH_SAMC.floor,draw:cc=>{PK.seated(cc,"helena",MH_SAMC.x,MH_SAMC.floor,mh_hT(MH_SAMC.floor),"sit",Object.assign({t:tt+2,flip:true},mh_alive(tt,{expr:"listen",gaze:[1,-0.2]},4,0)));}}]});}},
-    {at:tB,cut:true,place:"mhBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"ivy",tt,BD,{say:[]});}},
+    {at:tB,cut:true,place:"mhBoard",keys:[[tB,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"ivy",tt,BD,{say:[],events:MH_HEV});}},
     // where the bookings meet the counts: the two must name each room the same way; for 172 they do, for 14 they don't
     {at:tJ,cut:true,place:"mhTeam",keys:[[tJ,1300,560,1.12]],d:2,draw:(x,tt,cam)=>{let Ji=null;
       const R=mh_team(x,tt,{clock:11,sam:Object.assign({work:1},mh_alive(tt,{},1,tJ)),marta:Object.assign({work:1,turn:0},mh_alive(tt,{},3,tJ)),
@@ -255,7 +255,7 @@ scene("shape",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
     {at:0,place:"mhCorner",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{mh_corner(x,tt,{t0:0,book:true,write:ag_io(tt,0.4,tN+0.4,0.5),he:"think",hg:[1,0.6],hf:mh_alive(tt,{expr:"think",gaze:[1,0.6]},1,0)});}},
     {at:tN,place:"mhNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}},
     // that shape has a name; the frameworks that map the work; range (Carmen)
-    {at:tT,place:"mhBoard",dis:0.6,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BE,{say:[[c.t,E.t]]});}},
+    {at:tT,place:"mhBoard",cut:true,keys:[[tT,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BE,{say:[[c.t,E.t]]});}},
     {at:tL,place:"mhBoard",later:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BF,{say:[[c.lists,E.lists],[c.nobody,E.nobody]]});}},
     {at:tR,place:"mhBoard",later:true,keys:[[tR,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BG,{say:[[c.range,E.range],[c.messy,E.messy]]});}},
     // the specialists stay essential: Mei and Sam matched the 14 rooms in a day; Helena makes sure someone sees across them
@@ -273,7 +273,7 @@ scene("shape",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
 /* ---------------------------------------------------------------- 6. From her page */
 scene("kept",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tN=w("goal","Thursday",-0.6),tT=c.team-0.5,tC=c.catalog-0.5,tK=c.cant-0.5,N4=PK.pace(ctx,null,mh_note4(sc,w));
-  const BD0=mh_static(mh_boardD(sc,w)),BD=PK.pace(ctx,"ivy",BD0),BR=PK.pace(ctx,"ivy",BD0.concat([{k:"star",x:1140,y:86,r:24,col:"green",at:w("cant","decision",-0.2),d:0.4},{k:"star",x:1140,y:162,r:24,col:"green",at:w("cant","question",-0.2),d:0.4}]));
+  const BD0=mh_static(mh_boardD(sc,w)),BD=PK.pace(ctx,"ivy",BD0),BR=PK.pace(ctx,"ivy",BD0.concat([{k:"star",x:MH_ROUTE.star,y:MH_ROUTE.y-10,r:24,col:"green",at:w("cant","decision",-0.2),d:0.4},{k:"star",x:MH_ROUTE.star,y:MH_ROUTE.y+MH_ROUTE.gap-10,r:24,col:"green",at:w("cant","question",-0.2),d:0.4}]));
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"mhNotes",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}},
     // the next week, the team takes up Graham's question from her page; Helena gives the join an owner

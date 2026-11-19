@@ -8,7 +8,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   "distance":{q:"Un título se revoca a las 15:00. Un empleador lo verifica a las 16:00, y la respuesta sale de la copia de anoche. ¿Qué ve el empleador?",
     opts:[{t:"Válido: la copia todavía no lo sabe.",ok:true},{t:"Un error: el título no aparece."},{t:"Revocado: la copia lee el cambio.",near:true}],
     why:"La copia de anoche se hizo antes de la revocación. Hasta la próxima copia, el lado de lectura dice que el título es válido: esa es la distancia que acortan las bases de datos híbridas."},
-  "sync":{stop:"order",q:"El lado de lectura recibe «revocar A-1042» antes que «emitir A-1042». ¿Qué termina mostrando?",
+  "sync":{stop:"sync",q:"El lado de lectura recibe «revocar A-1042» antes que «emitir A-1042». ¿Qué termina mostrando?",
     opts:[{t:"Nada: rechaza los dos cambios."},{t:"Revocado: gana el último cambio.",near:true},{t:"Emitido: el título vuelve a la vida.",ok:true}],
     why:"La revocación no encuentra ninguna fila, así que no cambia nada; después, la emisión agrega el título como emitido. Los cambios se deben aplicar en el orden en que ocurrieron."},
   "doesnt":{q:"La tabla de títulos de la app está al día y es exacta. ¿Por qué contar desde ella los títulos de Ciencias del año pasado da un resultado equivocado?",

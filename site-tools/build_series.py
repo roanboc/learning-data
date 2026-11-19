@@ -85,7 +85,7 @@ def series_link(lg, RE, sid):
 # if it has them (see series_learn below): dir, the folder under site/assets/ of their engine and words; bundle, the film whose
 # bundle their pages load for its parts (the newest film's if not given); engine, the folder of their engine and its styles, if not
 # dir; lazy, True when the engine fetches each film's own words and bundle only as a visitor opens one of its labs or situations
-# (From words to data's: each lab and situation is its film's own, and the pack in dir names which), so the pages load no bundle;
+# (In the weeds of data crafting's: each lab and situation is its film's own, and the pack in dir names which), so the pages load no bundle;
 # coming, True to count and show those of the films still
 # being made (series.json's "coming") too; next: the id of the series to watch after this one, which its last film's page offers
 # (in Where next? and beside the series' films) once that series has a film on the site;
@@ -109,22 +109,23 @@ SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
          place={"en": "university", "es": "universidad"},
-         learn=dict(dir="from-words-to-data", lazy=True),
+         learn=dict(dir="from-words-to-data", bundle="keeping-it-true"),
          blocks=[("sketch/index.html", "en", "card", "../", "../from-words-to-data/"), ("es/sketch/index.html", "es", "card", "../../", "../from-words-to-data/")]),
     dict(id="in-the-weeds", dir="analytics-engineering", slug="in-the-weeds",
          name={"en": "In the weeds of data crafting", "es": "En las entrañas del oficio de datos"},
          place={"en": "university", "es": "universidad"}, blocks=[],
-         learn=dict(dir="in-the-weeds", engine="from-words-to-data", lazy=True)),
+         learn=dict(dir="in-the-weeds", bundle="end-to-end")),
     dict(id="enterprise-architecture", dir="enterprise-architecture", slug="enterprise-architecture",
          name={"en": "The map before the data", "es": "El mapa antes de los datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
-         learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear", coming=True),
+         learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear"),
          next="business-architecture-for-data",
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="business-architecture-for-data", dir="business-architecture-for-data", slug="business-architecture-for-data",
          name={"en": "Business architecture for data", "es": "Arquitectura de negocio para datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[], next="data-architecture",
+         learn=dict(dir="business-architecture-for-data", bundle="what-the-business-owns"),
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, BIZBOK of the Business Architecture Guild, APQC and its Process Classification Framework of APQC, and DAMA-DMBOK of DAMA International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, BIZBOK de la Business Architecture Guild, APQC y su Process Classification Framework de APQC, y DAMA-DMBOK de DAMA International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="data-architecture", dir="data-architecture", slug="data-architecture",
@@ -213,19 +214,23 @@ SERIES = [
     dict(id="only-what-you-may-see", dir="only-what-you-may-see", slug="only-what-you-may-see",
          name={"en": "Only what you may see", "es": "Solo lo que puedes ver"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds", next="kept-for-a-reason"),
+         built="in-the-weeds", next="kept-for-a-reason",
+         learn=dict(dir="only-what-you-may-see", bundle="one-policy-for-many-tables")),
     dict(id="kept-for-a-reason", dir="kept-for-a-reason", slug="kept-for-a-reason",
          name={"en": "Kept for a reason", "es": "Guardado por una razón"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds"),
+         built="in-the-weeds",
+         learn=dict(dir="kept-for-a-reason", bundle="a-person-asks")),
     dict(id="fit-for-use", dir="fit-for-use", slug="fit-for-use",
          name={"en": "Fit for use", "es": "Apto para su uso"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds", next="quality-as-a-habit"),
+         built="in-the-weeds", next="quality-as-a-habit",
+         learn=dict(dir="fit-for-use", bundle="good-enough-for-what")),
     dict(id="quality-as-a-habit", dir="quality-as-a-habit", slug="quality-as-a-habit",
          name={"en": "Quality as a habit", "es": "La calidad como hábito"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds"),
+         built="in-the-weeds",
+         learn=dict(dir="quality-as-a-habit", bundle="the-hidden-factory")),
     dict(id="people-first", dir="people-first", slug="people-first",
          name={"en": "People first", "es": "Las personas primero"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
@@ -259,11 +264,13 @@ SERIES = [
     dict(id="architecture-that-keeps-up", dir="architecture-that-keeps-up", slug="architecture-that-keeps-up",
          name={"en": "Architecture that keeps up", "es": "Una arquitectura al día"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds", next="small-steps-measured"),
+         built="in-the-weeds", next="small-steps-measured",
+         learn=dict(dir="architecture-that-keeps-up", engine="data-management", bundle="a-path-for-every-provider")),
     dict(id="small-steps-measured", dir="small-steps-measured", slug="small-steps-measured",
          name={"en": "Small steps, measured", "es": "Pasos pequeños, medidos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds"),
+         built="in-the-weeds",
+         learn=dict(dir="small-steps-measured", engine="data-management", bundle="strategy-is-a-habit")),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -435,6 +442,7 @@ HAND = {
                          "es": "Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?"},
                    note={"en": "", "es": "En inglés"}),
     "when-things-go-wrong": dict(href="when-things-go-wrong/", source="films/when-things-go-wrong",
+                   learning=["site/assets/when-things-go-wrong/learn.en.js", "site/assets/when-things-go-wrong/learn.es.js"],
                    title={"en": "When things go wrong", "es": "Cuando algo sale mal"},
                    card={"en": "Two bad mornings at the university: a change only half of it saw, and a number too good to be true. Each ends with what catches it next time.",
                          "es": "Dos malas mañanas en la universidad: un cambio que solo la mitad vio, y una cifra demasiado buena para ser verdad. Cada una termina con lo que lo detecta la próxima vez."},
@@ -601,8 +609,8 @@ TOUR_JS = ('(function(){var h=document.currentScript.parentNode.querySelector(".
 # The hand-written pages: their header is made by header() too, and written over theirs by blocks() below.
 HAND_PAGES = ["404.html", "index.html", "labs/index.html", "scenarios/index.html", "sketch/index.html", "sketch/labs/index.html",
               "sketch/scenarios/index.html", "when-things-go-wrong/index.html", "when-things-go-wrong/silent-change/index.html",
-              "when-things-go-wrong/too-good-to-be-true/index.html", "when-things-go-wrong/too-good-to-be-true/labs/index.html",
-              "when-things-go-wrong/too-good-to-be-true/scenarios/index.html"]
+              "when-things-go-wrong/too-good-to-be-true/index.html", "when-things-go-wrong/labs/index.html",
+              "when-things-go-wrong/scenarios/index.html"]
 HAND_PAGES += ["es/" + p for p in HAND_PAGES if (WEB / "es" / p).exists()]
 
 
@@ -2947,7 +2955,7 @@ def pages():
                 for which in ("labs", "scenarios"):
                     out.append((f'{pre}{S["slug"]}/{which}/index.html', series_learn_page(lg, S, series, films_, which)))
                 for f in films_:  # a film that had labs and scenarios of its own: their old pages lead to the series' pack
-                    if not S.get("single") and (WEB / "assets" / f["key"] / "learn.en.js").exists():
+                    if not S.get("single") and ((WEB / "assets" / f["key"] / "learn.en.js").exists() or (WEB / S["slug"] / f["key"] / "labs" / "index.html").exists()):
                         for which in ("labs", "scenarios"):
                             out.append((f'{pre}{S["slug"]}/{f["key"]}/{which}/index.html', moved_page(lg, S, f, which)))
     return [(rel, stamp(rel, text)) for rel, text in out]

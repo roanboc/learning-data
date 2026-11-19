@@ -26,7 +26,7 @@
 | [Written once](https://data.learn-all.org/in-the-weeds/written-once/) | Documentation and versions | 5½ min | 8 | 4 questions | [script](9-written-once/script.md) · [source](9-written-once/source/README.md) |
 | [End to end](https://data.learn-all.org/in-the-weeds/end-to-end/) | The whole process | 8½ min | 12 | 4 questions | [script](10-end-to-end/script.md) · [source](10-end-to-end/source/README.md) |
 
-For the whole series, on the site: [9 labs](https://data.learn-all.org/in-the-weeds/labs/) and [9 scenarios](https://data.learn-all.org/in-the-weeds/scenarios/), in English and Spanish, from the words in [site/assets/in-the-weeds/](../../site/assets/in-the-weeds/).
+For the whole series, on the site: [10 labs](https://data.learn-all.org/in-the-weeds/labs/) and [12 scenarios](https://data.learn-all.org/in-the-weeds/scenarios/), in English and Spanish, from the words in [site/assets/in-the-weeds/](../../site/assets/in-the-weeds/).
 <!-- /films -->
 
 **On the site:** [In the weeds of data crafting](https://data.learn-all.org/in-the-weeds/), in Spanish [En las entrañas del oficio de datos](https://data.learn-all.org/es/in-the-weeds/). The films are in English, with English and Spanish captions; their pages, chapters, Pause and think questions, labs and scenarios are in English and Spanish.

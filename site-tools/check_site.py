@@ -2231,6 +2231,21 @@ def main():
         for m in sorted(set(re.findall(SPLIT_BY_FILM, src))):
             s["fails"].append(f"{rel}: its labs or scenarios are split by film again ({m}): show every lab in one rail and every scenario in one list")
 
+    s = rep.check("Lab pictures: a stage's loop holds its frame request while it paints, so a picture that keeps moving never doubles its frames")
+    # The labs engines' loop once cleared st.raf before paint(): a picture calling api.kick while it painted asked for a frame, and
+    # the loop asked for another, so requests doubled every frame and the page froze (19 Nov 2026). Hold it at -1 while painting.
+    old_loop = re.compile(r"function loop\([^)]*\)\{\s*((?:\w+\.)?raf)=0;\s*paint\(\);[^}]*requestAnimationFrame\(loop\)")
+    engines = 0
+    for js in sorted(WEB.glob("assets/*/*.js")):
+        src = js.read_text(errors="replace")
+        if "requestAnimationFrame(loop)" not in src:
+            continue
+        engines += 1
+        if old_loop.search(src):
+            s["fails"].append(f"{js.relative_to(ROOT).as_posix()}: loop() clears its frame request before paint(), so a kick while painting "
+                              "doubles the frames each time: write function loop(){st.raf=-1;paint();st.raf=performance.now()<st.until?requestAnimationFrame(loop):0;}")
+    s["notes"].append(f"{engines} scripts with a drawing loop read")
+
     s = rep.check("Journey pages: the same as site-tools/build_pages.py makes from their Markdown")
     try:
         with tempfile.TemporaryDirectory() as tmp:

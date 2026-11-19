@@ -1,6 +1,6 @@
 # Finding your way around the site
 
-How the Topics page and the home page show the topics, and where to change it.
+How the Topics page and the home page show the topics, and where to change it. What every topic, series, film, labs and evaluation page shows, and in what order, is in [page-templates.md](page-templates.md).
 
 ## Decisions, 11 and 12 November 2026
 
@@ -20,6 +20,7 @@ How the Topics page and the home page show the topics, and where to change it.
 | 12 November 2026 | The tour shows only the steps for what the page in front of the visitor has: the player and Pause and think on a film's page, goals and stations on the route, the search on the list. Each step rings the real control. |
 | 14 November 2026 | The example dbt project is shown on the route (the author). A topic with films that show its files carries the project's icon, readable on a closed station: on the map, a badge on the station's ring, so its name doesn't widen; on the rail and in the list, by its name. The topic opens on a box that links to GitHub and to the project's own page, `dbt-project/`, which says what the project is, how to run it on a laptop or on Databricks, where its main folders are, and, for every film that shows it, which files each chapter shows. A film shows the project when its `site.json` has `repo`, so the marks and the page follow the films by themselves. |
 | 19 November 2026 | Simpler film and series pages (the author). A film's page keeps the player, its chapters, the download, caption and script links, its labs and scenarios, the example project's files and other sites: its Pause and think questions show only in the player, when it pauses, and no longer as a *Think it through* list. A series page keeps its films, its labs and scenarios and the films to come: its thread, the table of where each film opens (*One story, film by film*) and the people at the table are gone, since the films hold them. A film's `past` row in its `site.json` stays, for the opening-story check. |
+| 20 November 2026 | The views come in this order: Topics list, Learning route, Progress. Each topic opens its own page, `/topics/<topic>/`. A chosen route is shared by Learning route and Progress, filters Progress to its results, and can hide the topics not on it; the two views link to each other. The site says "topic", never "module" ([page-templates.md](page-templates.md)). |
 
 ## Where it lives
 

@@ -421,6 +421,8 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 - [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
 - [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
+Labs and assessments: [site/assets/the-new-skills/learn.en.js](../site/assets/the-new-skills/learn.en.js), [site/assets/the-new-skills/learn.es.js](../site/assets/the-new-skills/learn.es.js)
+
 ### Working with people
 
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
@@ -428,6 +430,8 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 - [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
 - [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
 - [Saying no, and what instead](../films/working-with-people/3-saying-no/) — `saying-no`
+
+Labs and assessments: [site/assets/working-with-people/learn.en.js](../site/assets/working-with-people/learn.en.js), [site/assets/working-with-people/learn.es.js](../site/assets/working-with-people/learn.es.js)
 
 ### Leading a data team
 
@@ -438,6 +442,8 @@ Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/
 - [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
 - [Rules that let people decide](../films/leading-a-data-team/4-rules-to-decide/) — `rules-to-decide`
 
+Labs and assessments: [site/assets/leading-a-data-team/learn.en.js](../site/assets/leading-a-data-team/learn.en.js), [site/assets/leading-a-data-team/learn.es.js](../site/assets/leading-a-data-team/learn.es.js)
+
 ### Ownership and performance
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
@@ -446,6 +452,8 @@ Source: [films/ownership-and-performance](../films/ownership-and-performance/) �
 - [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 - [When someone falls behind](../films/ownership-and-performance/3-when-someone-falls-behind/) — `when-someone-falls-behind`
 - [Growing people](../films/ownership-and-performance/4-growing-people/) — `growing-people`
+
+Labs and assessments: [site/assets/ownership-and-performance/learn.en.js](../site/assets/ownership-and-performance/learn.en.js), [site/assets/ownership-and-performance/learn.es.js](../site/assets/ownership-and-performance/learn.es.js)
 
 ## Data management
 

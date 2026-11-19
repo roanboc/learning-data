@@ -411,6 +411,8 @@ Source: [films/people-first](../films/people-first/) · Portal: `/people-first/`
 - [No two alike](../films/people-first/3-no-two-alike/) — `no-two-alike`
 - [How, more than who](../films/people-first/4-how-more-than-who/) — `how-more-than-who`
 
+Labs and assessments: [site/assets/people-first/learn.en.js](../site/assets/people-first/learn.en.js), [site/assets/people-first/learn.es.js](../site/assets/people-first/learn.es.js)
+
 ### The new skills
 
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`

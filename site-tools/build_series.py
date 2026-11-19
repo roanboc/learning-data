@@ -86,7 +86,7 @@ def series_link(lg, RE, sid):
 # "fiction_series");
 # marks: the trademarks its footer names, if not the Databricks and dbt logos; learn: the series' own labs and scenarios, for all its films,
 # if it has them (see series_learn below): dir, the folder under site/assets/ of their engine and words; bundle, the film whose
-# bundle their pages load for its parts (the newest film's if not given); engine, the folder of their engine and its styles, if not
+# bundle their pages load for its parts (the newest film's if not given, none if False: an engine that draws everything itself); engine, the folder of their engine and its styles, if not
 # dir; lazy, True when the engine fetches each film's own words and bundle only as a visitor opens one of its labs or situations
 # (In the weeds of data crafting's: each lab and situation is its film's own, and the pack in dir names which), so the pages load no bundle;
 # coming, True to count and show those of the films still
@@ -252,7 +252,8 @@ SERIES = [
     dict(id="people-first", dir="people-first", slug="people-first",
          name={"en": "People first", "es": "Las personas primero"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
-         built="in-the-weeds", next="the-new-skills"),
+         built="in-the-weeds", next="the-new-skills",
+         learn=dict(dir="people-first", engine="leading-data-people", bundle=False)),
     dict(id="the-new-skills", dir="the-new-skills", slug="the-new-skills",
          name={"en": "The new skills", "es": "Las nuevas habilidades"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
@@ -413,7 +414,7 @@ def series_learn(S):
         return _LEARN[S["id"]]
     series, films_ = films(S)
     shown = {x["index"] + 1 for x in films_} | ({n for n, _, _ in series.get("coming", [])} if L.get("coming") else set())
-    out = dict(dir=L["dir"], engine=L.get("engine", L["dir"]), lazy=bool(L.get("lazy")), prefix="ld-" + S["id"], bundle=L.get("bundle") or (films_[-1]["key"] if films_ else None), films=sorted(shown))
+    out = dict(dir=L["dir"], engine=L.get("engine", L["dir"]), lazy=bool(L.get("lazy")), prefix="ld-" + S["id"], bundle=None if L.get("bundle") is False else L.get("bundle") or (films_[-1]["key"] if films_ else None), films=sorted(shown))
     for lg in ("en", "es"):
         p = WEB / "assets" / L["dir"] / f"learn.{lg}.js"
         words = p.read_text()
@@ -1094,7 +1095,7 @@ def series_learn_page(lg, S, series, films_, which):
                f'<p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n<ol class="series-list" aria-label="{T(lg, "Every film of the series", "Todas las películas de la serie")}">\n{lis}\n</ol>\n</section>\n')
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="page-head cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{img}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S, "../")}\n<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n{draft_note(lg, series.get("draft"))}</section>\n{series_course(lg, S, SL, series, films_, 1 if which == "labs" else 2)}\n{mid}</main>\n{foot(lg, S, True, True)}\n'
-            + ("" if SL["lazy"] else f'<script src="{R}assets/{SL["bundle"]}/film.js"></script>\n')
+            + ("" if SL["lazy"] or not SL["bundle"] else f'<script src="{R}assets/{SL["bundle"]}/film.js"></script>\n')
             + f'<script src="{R}assets/{SL["dir"]}/learn.{lg}.js"></script>\n'
             + (f'<script src="{R}assets/learn/classic.js"></script>\n' if which == "labs" else "")
             + f'<script src="{R}assets/{SL["engine"]}/learn.js"></script>\n'

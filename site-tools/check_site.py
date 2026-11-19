@@ -842,8 +842,9 @@ def think_faults(path, en=None):
 # think was checked, and in most scenarios the right answer was the second option.
 SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more than this share of the right answers
 # an engine (site/assets/<engine>/learn.js) that mixes the options itself each time it shows them, with the words that do it:
-# the packs of the series it shows aren't read
-SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
+# the packs of the series it shows aren't read (none since 19 November 2026, when The map before the data's engine began showing
+# its options in the order its packs write them)
+SPREAD_SHUFFLED = {}
 # an order scenario's first showing, where its pack gives no start: the one line every engine mixes the steps with, mixed(n, s) for
 # n steps and a number s of the scenario's own, so each scenario is mixed its own way, the same each time. It holds to
 # order_mixed(), which tests/test_spread.py tries on this line itself.

@@ -15,70 +15,95 @@ const pb_bub=(x,J,tt,t0,t1,lines,cam,o)=>PK.say(x,J,lines,ag_io(tt,t0,t1==null?1
 const pb_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
 // while a chapter shows a key idea apart from the scene (a board seen close, a page of the notebook), its kicker steps back
 const pb_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
-// kneeling to twist cord, seen from the side: both hands together in front, the cord running from them to the ground
-const PB_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
-function pb_twisting(x,who,px,fl,tt,o){o=o||{};const U=PK.u,J=pbq_person(x,who,px,fl,pbq_h(fl),PB_TWIST,Object.assign({t:tt,holds:true},o,o.nod!=null?{}:pb_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0.7]},px%5)));
-  if(J&&J.hdN){const [hx,hy]=J.hdN,len=o.len||260,col=PK.S.tone(PBQ_PAL.rope),tw=Math.sin(tt*5)*2;x.save();x.lineCap="round";x.strokeStyle=U.css(PK.S.ink);x.lineWidth=6;
-    x.beginPath();x.moveTo(hx,hy+4);x.quadraticCurveTo(hx+len*0.4,fl-6+tw,hx+len,fl-2);x.stroke();x.strokeStyle=U.css(col);x.lineWidth=3.4;x.stroke();x.restore();}return J;}
-// a walker on the bridge from u0 to u1 between t0 and t1 (at rest outside it); returns [u, who, flip, tt] for pbq_bridge, or null
-const pb_on=(tt,who,u0,u1,t0,t1)=>{if(tt<t0-0.2||tt>t1+0.2)return null;const u=PK.u.lerp(u0,u1,PK.u.clamp((tt-t0)/(t1-t0),0,1));return[u,who,u1<u0,tt];};
 // someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
 const pb_alive=(tt,base,i,t0)=>{const ev=[],K=["look","nod","smile"];for(let k=0;k<30;k++){const at=(t0||0)+2.5+i*1.37+k*5.9,kind=K[(k+i)%3];ev.push(kind==="look"?[at,"look",2.2,[1,((k+i)%2?0.35:-0.2)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
   return PK.face(tt,Object.assign({expr:"neutral",gaze:[1,0]},base||{}),ev);};
-// the bank's people: [who, x, floor, pose, flip, opts]
-function pb_bank(x,tt,list){list.slice().sort((a,b)=>a[2]-b[2]).forEach(([who,px,fl,pose,fl2,o],i)=>{o=o||{};if(pose==="twist")return pb_twisting(x,who,px,fl,tt,o);
-  const f=o.nod!=null?{}:pb_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},px%5);
-  pbq_person(x,who,px,fl,pbq_h(fl),pose||"stand",Object.assign({t:tt+(px%7),flip:!!fl2},o,f));});}
+
+/* ---------------------------------------------------------------- the gorge, through the views this film looks at it from (pb_gorge.js) */
+const PB_VA=pbq_camera({x:0,y:5.2,z:-29,yaw:0,f:1420,hor:190});         // from above, downstream: the bridge across the frame
+const PB_VB=pbq_camera({x:-14.9,y:1.47,z:-12,yaw:28,f:820,hor:360});    // on the left rim, beside the bridge's head: June, today
+const PB_VB2=pbq_camera({x:14.9,y:1.47,z:-12,yaw:-28,f:820,hor:360});   // on the right rim, beside its other head: 1972, and after
+const PB_VC=pbq_camera({x:-9.5,y:0.7,z:-8.2,yaw:30,f:900,hor:300});     // out over the gorge, beside the bridge: those who cross, close
+AG_PLACES.pbGorgeA=c=>pbq_ground(c,PB_VA,{});AG_PLACES.pbGorgeAGrey=c=>pbq_ground(c,PB_VA,{grey:true});
+AG_PLACES.pbGorgeB2Grey=c=>pbq_ground(c,PB_VB2,{grey:true});AG_PLACES.pbGorgeB2=c=>pbq_ground(c,PB_VB2,{});
+AG_PLACES.pbGorgeB=c=>pbq_ground(c,PB_VB,{});AG_PLACES.pbGorgeC=c=>pbq_ground(c,PB_VC,{});
+// a view in June and the same view in the years the bridge was left are one room: the camera glides on and only what changed fades.
+// Between two moments there, the bridge stays (AG_BARE): people leave, and the next moment comes in over it
+AG_ROOMS.pbGorgeAGrey="pbGorgeA";AG_ROOMS.pbGorgeB2Grey="pbGorgeB2";
+AG_BARE.pbGorgeA=x=>pbq_scene(x,PB_VA,{age:0.05,steel:0});AG_BARE.pbGorgeAGrey=x=>pbq_scene(x,PB_VA,{age:1,grey:true});
+AG_BARE.pbGorgeB2Grey=x=>pbq_scene(x,PB_VB2,{age:1,grey:true});AG_BARE.pbGorgeB2=x=>pbq_scene(x,PB_VB2,{age:0});
+const PB_TW=PBQ_TWIST,PB_COIL={hold:pbq_coil,holds:true};
+// the people of a view, as drawables: [who, X, Z, pose, flip, o]; who a name of PBQ_FOLK, or a number (one of the communities' people
+// nobody names). o.face a face through the shot (PK.face), or o.expr and o.gaze for one that lives on its own; o.opt PK.person's own
+const pb_folks=(cam,tt,list)=>list.map(([who,X,Z,pose,flip,o],i)=>{o=o||{};const f=o.face||pb_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},i%5);
+  return pbq_folk(cam,who,X,Z,pose,{t:tt+i*0.7,flip:!!flip,len:o.len,key:o.key,after:o.after,opt:Object.assign({},f,o.opt||{})});});
+// a walk along the deck from u0 to u1, and on over the bank to the points after it, between t0 and t1
+const pb_deck=(u0,u1,z,more)=>{const p=[];for(let i=0;i<=24;i++){const [x,y]=pbq_deckAt(PK.u.lerp(u0,u1,i/24),{age:0.05});p.push([x,y,z||0]);}return p.concat((more||[]).map(q=>[q[0],0,q[1]]));};
+const pb_walk=(cam,who,tt,path,t0,t1,o)=>pbq_walker(cam,who,tt,{path,t0,t1,then:o&&o.then,arms:o&&o.arms},{key:o&&o.key,opt:Object.assign({expr:"neutral",gaze:[1,0]},o&&o.opt)});
+// the families along both rims, up the gorge from the bridge, seen from above
+const PB_RIMS=[["w2",-15.6,-2.6,PB_TW,false,{len:0.9}],["w3",-16.8,3.0,PB_TW,false,{len:1.1}],["m1",-19.0,5.5,"clasp",false],[0,-17.0,9,"stand",false,{opt:PB_COIL}],
+  [1,-20.5,12,PB_TW,false],[2,-16.8,15,"clasp",true],[3,-22,19,"stand",false,{opt:PB_COIL}],[4,-18,24,PB_TW,false],[5,-24,29,"clasp",false],[7,-17,34,"stand",false,{opt:PB_COIL}],
+  ["w5",15.6,-2.4,PB_TW,true,{len:0.9}],["m4",17.2,2.6,"clasp",true],["m2",16.4,6.4,"stand",true,{opt:PB_COIL}],[6,19.5,10,PB_TW,true],[8,17,14,"clasp",true],
+  [10,21,18,"stand",true,{opt:PB_COIL}],[9,18,23,PB_TW,true],[11,22.5,28,"clasp",false],[12,17.5,33,"stand",true]];
 
 /* ---------------------------------------------------------------- 1. The bridge they went back to */
 scene("bridge",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tS=c.steel-0.5,tL=c.left-0.6,tK=c.keeper-0.5,tD=c.did-0.6,tT=c.today-0.6,tU=c.turn-0.4,tA=c.data-0.6;
   ag_shots(ctx,S,t,sc.dur,[
-    // the gorge, the bridge of grass across it, people crossing; on the near bank, families with their cord
-    {at:0,place:"pbGorge",keys:[[0,960,560,1.0],[c.rope+0.2,960,420,1.3],[c.incas+1.6,960,540,1.0],[c.wear-0.2,420,640,1.25]],d:3,draw:(x,tt,cam)=>{
-      pbq_steel(x,0);pbq_bridge(x,{age:0.05,walkers:[pb_on(tt,"m3",0.04,0.96,0.6,22),pb_on(tt,"w4",0.96,0.04,5,27),pb_on(tt,"m5",0.04,0.7,17,30)].filter(Boolean)});
-      const tw=w("wear","many hands",-0.6);
-      pb_bank(x,tt,[["w1",170,900,"stand",false,{hold:pbq_coil,holds:true,expr:"neutral",gaze:[1,0.1]}],["m1",470,690,"clasp",false,{expr:"neutral",gaze:[1,0]}],
-        ["w2",300,800,"twist",false,{len:200}],["keeper",1700,880,"clasp",true,{expr:"neutral",gaze:[1,0.1]}],["w3",1560,740,"twist",true,{len:180}]]);}},
-    // 1968: a steel bridge, up the gorge; a truck crosses it, and the last walker leaves the rope
-    {at:tS,place:"pbGorge",keys:[[tS,420,640,1.25],[tS+2.2,960,460,1.25],[c.need+1.0,960,500,1.15]],d:3,draw:(x,tt,cam)=>{
-      const a=ag_in(tt,w("steel","steel bridge",-0.3),1.4),tr=U.clamp((tt-w("need","cars",-0.4))/5.5,0,1);pbq_steel(x,a,tt>w("need","cars",-0.4)&&tr<1?tr:null);
-      pbq_bridge(x,{age:0.1,walkers:[pb_on(tt,"m5",0.7,0.99,tS,w("need","few",0.6))].filter(Boolean)});
-      pb_bank(x,tt,[["m1",470,690,"clasp",false,PK.face(tt,{expr:"neutral",gaze:[1,0]},[[w("steel","steel",0.3),"look",3.2,[1,-0.4]]])]]);}},
-    // 1970: under a grey sky, the rope left to decay; a geographer writes it down
-    {at:tL,place:"pbGorgeGrey",later:true,keys:[[tL,960,520,1.12],[c.skill+0.4,960,560,1.0]],d:3,draw:(x,tt,cam)=>{
-      pbq_steel(x,1,null,true);pbq_bridge(x,{age:1,grey:true});
+    // the gorge from above, the bridge of grass across it, people crossing; along both rims, families twist grass into cord
+    {at:0,place:"pbGorgeA",keys:[[0,960,540,1.0],[c.rope+0.2,960,480,1.26],[c.incas+1.6,960,520,1.08],[c.wear-0.2,760,470,1.3]],d:3,draw:(x,tt,cam)=>{
+      pbq_scene(x,PB_VA,{age:0.05,steel:0},pb_folks(PB_VA,tt,PB_RIMS).concat([
+        pb_walk(PB_VA,"m3",tt,pb_deck(0.04,1,-0.25,[[15.6,-1.9],[17.4,-3.2]]),0.6,24),
+        pb_walk(PB_VA,"w4",tt,[[17.2,0,-3.4],[15.4,0,-1.8]].concat(pb_deck(1,0,0.25,[[-15.4,-1.9],[-17.2,-3.4]])),5,31)]));}},
+    // 1968: the families gone, a steel bridge up the gorge, cars on it; one man still crosses on the rope
+    {at:tS,place:"pbGorgeA",later:true,keys:[[tS,800,470,1.3],[w("steel","steel bridge",-0.6),1120,420,1.3],[c.need+1.6,1000,470,1.16]],d:3,draw:(x,tt,cam)=>{
+      const a=ag_in(tt,w("steel","steel bridge",-0.3),1.4),t0=w("need","cars",-0.4),tr=U.clamp((tt-t0)/5.5,0,1);
+      pbq_scene(x,PB_VA,{age:0.05,steel:a,truck:tt>t0&&tr<1?tr:null},[pb_walk(PB_VA,"m5",tt,[[-17.4,0,-3.0],[-15.4,0,-1.8]].concat(pb_deck(0,1,0,[[15.6,-1.9],[17.6,-3.0]])),tS+0.6,w("need","few",1.2))]);}},
+    // 1970: under a grey sky, the rope left to decay; a geographer writes it down; an old keeper of the bridge looks at it
+    {at:tL,place:"pbGorgeAGrey",later:true,keys:[[tL,1182,470,1.3],[c.skill+0.2,960,540,1.04]],d:3,draw:(x,tt,cam)=>{
       const wr=ag_io(tt,w("left","finds",-0.2),c.skill+1.4,0.5);
-      pb_bank(x,tt,[["geo",260,830,PK.poseMix("stand",PB_NOTE,wr),false,{underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("ink"):null,holds:true,expr:"think",gaze:[1,0.1+0.5*wr]}],
-        ["keeper",1720,860,"clasp",true,PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[c.skill+0.4,"look",2.4,[1,0.3]]])]]);}},
-    // October 1972: a keeper of the bridge tells two visitors what his people have decided
-    {at:tK,place:"pbGorgeGrey",later:true,keys:[[tK,960,540,1.0],[c.sad-0.4,560,560,1.1]],d:3,draw:(x,tt,cam)=>{
-      pbq_steel(x,1,null,true);pbq_bridge(x,{age:1,grey:true});
-      const s1=c.sad,s2=c.rebuild;
-      pb_bank(x,tt,[["v2",150,890,"listen",false,PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+1.6,"look",2.2,[1,0.2]],[s1+1.8,"nod"],[s2+0.6,"smile",3.0]])],["v1",225,770,PK.poseMix("listen",PB_NOTE,ag_in(tt,s2,0.5)),false,
-        Object.assign({underF:PK.inHand.notebook({}),hold:tt>s2+0.3?PK.inHand.pen("ink"):null,holds:true},PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+2.4,"nod"],[s1+1.0,"smile",2.0],[s2+0.5,"look",4,[1,0.5]]]))]]);
-      const Jk=pbq_person(x,"keeper",450,840,pbq_h(840),"clasp",{t:tt,flip:true,expr:pb_says(PK.exprMix("worry","smile",ag_in(tt,s2,0.6)),tt,s1+0.1,sc.ends.rebuild),gaze:[1,0]});
-      pb_bub(x,Jk,tt,s1+0.1,s2-0.3,["My people feel sad","about leaving the bridge."],cam,{dx:300});
-      pb_bub(x,Jk,tt,s2,tD-0.3,["We'll rebuild it","when the New Year comes."],cam,{dx:300});}},
-    // the new year: the families come back, each with its cord, and the bridge is made new
-    {at:tD,place:"pbGorge",later:true,keys:[[tD,960,540,1.0],[c.all+0.4,600,600,1.2]],d:3.2,draw:(x,tt,cam)=>{
-      const k=0.25+0.75*ag_in(tt,tD+1.0,6.0),ev=w("all","everyone",-0.3);pbq_steel(x,1);pbq_bridge(x,{age:0,k});
-      const walkIn=(who,x0,x1,t0,fl,flip)=>({fl,draw:cc=>pbq_walk(cc,who,tt,{x0,x1,t0,t1:t0+3.2,floor:fl,h:pbq_h(fl),arms:{aN:PB_CARRY.aN},then:PB_CARRY},{flip,hold:pbq_coil,holds:true,expr:"smile"})});
-      const L=[walkIn("w1",-160,170,tD+0.2,900,false),walkIn("m1",-160,430,tD+1.2,700,false),walkIn("w2",-160,300,ev,790,false),walkIn("m3",2080,1600,tD+0.8,760,true),walkIn("w3",2080,1760,ev+0.4,890,true)];
-      L.push({fl:860,draw:cc=>{const Jk=pbq_person(cc,"keeper",1500,840,pbq_h(840),"clasp",{t:tt,flip:true,expr:pb_says("smile",tt,ev-0.2,ev+1.6),gaze:[1,0]});pb_bub(cc,Jk,tt,ev-0.2,tT-0.3,["Only now","does everyone come."],cam,{dx:-110});}});
-      L.sort((a,b)=>a.fl-b.fl).forEach(i=>i.draw(x));}},
-    // each June, today: both banks full, families with their cord; people cross the new bridge
-    {at:tT,place:"pbGorge",later:true,keys:[[tT,600,600,1.2],[tT+2.4,960,540,1.0],[c.died-0.4,1480,580,1.1]],d:3,draw:(x,tt,cam)=>{
-      pbq_steel(x,1,U.clamp((tt-tT-2)/6,0,1));pbq_bridge(x,{age:0,walkers:[pb_on(tt,"m3",0.05,0.95,tT+0.5,tT+20),pb_on(tt,"w4",0.9,0.1,tT+3,tT+22)].filter(Boolean)});
-      const d1=c.died;
-      pb_bank(x,tt,[["w1",130,900,"stand",false,{hold:pbq_coil,holds:true,expr:"smile",gaze:[1,0.1]}],["w3",330,780,"twist",false,{len:150}],["m1",470,640,"clasp",false,{expr:"smile"}],
-        ["w2",180,620,"stand",false,{hold:pbq_coil,holds:true,expr:"smile"}],["keeper",1250,660,"clasp",true,{expr:"smile",gaze:[1,0.1]}],["w5",1640,780,"twist",true,{len:150}]]);
-      const Jb=pbq_person(x,"m2",1790,940,pbq_h(940),"clasp",Object.assign(pb_alive(tt,{gaze:[1,-0.1]},3,tT),{t:tt,flip:true,expr:pb_says("neutral",tt,d1+0.2,sc.ends.died)}));
-      pb_bub(x,Jb,tt,d1+0.2,tU-0.3,["If we stop preserving it,","it would be like if we died."],cam,{dx:-220});}},
-    // the steel carries a truck across; the rope, two people who meet in the middle and greet each other
-    {at:tU,place:"pbGorge",later:true,keys:[[tU,1480,580,1.1],[w("turn","together",-1.0),960,420,1.3]],d:2,draw:(x,tt,cam)=>{
-      pbq_steel(x,1,U.clamp((tt-tU)/4.5,0,1));const m=w("turn","together",-0.6);
-      pbq_bridge(x,{age:0,walkers:[pb_on(tt,"m1",0.2,0.46,tU-1,m),pb_on(tt,"w2",0.8,0.54,tU-1,m)].filter(Boolean)});}},
+      pbq_scene(x,PB_VA,{age:1,grey:true},pb_folks(PB_VA,tt,[["geo",15.7,4.6,PK.poseMix("stand",PB_NOTE,wr),true,{face:PK.face(tt,{expr:"think",gaze:[1,0.1+0.5*wr]},[[w("left","writes",0),"nod"]]),
+          opt:{underF:PK.inHand.notebook({}),hold:wr>0.3?PK.inHand.pen("ink"):null,holds:true}}],
+        ["keeper",-16.2,3.4,"clasp",false,{face:PK.face(tt,{expr:"worry",gaze:[1,0.2]},[[c.skill+0.4,"look",2.4,[1,0.4]]])}]]));}},
+    // October 1972, on the other rim: a keeper of the bridge tells two visitors what his people have decided
+    {at:tK,place:"pbGorgeB2Grey",cut:true,keys:[[tK,960,540,1.0],[c.sad-0.4,1180,500,1.12]],d:3,draw:(x,tt,cam)=>{
+      const s1=c.sad,s2=c.rebuild,R=pbq_scene(x,PB_VB2,{age:1,grey:true},pb_folks(PB_VB2,tt,[
+        ["keeper",15.2,-2.0,"clasp",false,{key:"k",face:Object.assign(PK.face(tt,{expr:"worry",gaze:[1,0]},[[s2+0.2,"smile",4]]),{expr:pb_says(PK.exprMix("worry","smile",ag_in(tt,s2,0.6)),tt,s1+0.1,sc.ends.rebuild)})}],
+        ["v2",16.3,-2.8,"listen",true,{face:PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+1.6,"look",2.2,[1,0.2]],[s1+1.8,"nod"],[s2+0.6,"smile",3.0]])}],
+        ["v1",17.3,-3.6,PK.poseMix("listen",PB_NOTE,ag_in(tt,s2,0.5)),true,{face:PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+2.4,"nod"],[s1+1.0,"smile",2.0],[s2+0.5,"look",4,[1,0.5]]]),
+          opt:{underF:PK.inHand.notebook({}),hold:tt>s2+0.3?PK.inHand.pen("ink"):null,holds:true}}]]));
+      pb_bub(x,R.k,tt,s1+0.1,s2-0.3,["My people feel sad","about leaving the bridge."],cam,{dx:-40});
+      pb_bub(x,R.k,tt,s2,tD-0.3,["We'll rebuild it","when the New Year comes."],cam,{dx:-40});}},
+    // the new year, the same rim: the families come back, each with its cord, and the bridge is made new. Two families reach the
+    // keeper; along the far rim, a long line of them walks down from upstream to the bridge's other head, and more come on this side
+    {at:tD,place:"pbGorgeB2",later:true,dis:0.7,keys:[[tD,1180,500,1.12],[c.all+0.4,1000,510,1.04]],d:3.2,draw:(x,tt,cam)=>{
+      const k=0.25+0.75*ag_in(tt,tD+1.2,6.0),ev=w("all","everyone",-0.3),carry={then:"clasp",arms:{aN:PB_CARRY.aN},opt:{hold:pbq_coil,holds:true,expr:"smile"}};
+      const line=(i,x0,z0,x1,z1,v)=>{const L=Math.hypot(x1-x0,z1-z0),s=tD-3;
+        return pb_walk(PB_VB2,i,tt,[[x0,0,z0],[x1,0,z1]],s,s+L/(v||1.3),{then:"clasp",arms:{aN:PB_CARRY.aN},opt:Object.assign(pb_alive(tt,{expr:"smile",gaze:[1,0]},i%5,tD),{hold:pbq_coil,holds:true})});};
+      const R=pbq_scene(x,PB_VB2,{age:0,k},pb_folks(PB_VB2,tt,[["keeper",15.4,-2.6,"clasp",false,{key:"k",face:Object.assign(PK.face(tt,{expr:"smile",gaze:[1,0]},[[tD+1.4,"look",3,[1,0.3]]]),{expr:pb_says("smile",tt,ev-0.2,ev+1.6)})}],
+          [13,-16.4,2.4,PB_TW,false],[14,-17.6,-1.8,"clasp",false],[15,-16.0,5.8,"stand",false,{opt:PB_COIL}],[16,-19.0,8.6,PB_TW,false]]).concat([
+        pb_walk(PB_VB2,"w3",tt,[[25.5,0,2.5],[17.5,0,-0.4]],tD+0.4,tD+7,carry),pb_walk(PB_VB2,"m1",tt,[[27.7,0,5.4],[19.7,0,2.4]],tD+1.4,tD+8.4,carry),
+        line(19,-17.0,12,-17.4,4.0),line(20,-19.5,18,-20.2,6.5),line(21,-16.8,25,-16.6,9.8),line(22,-21.0,31,-22.0,12.0),line(23,-18.4,38,-18.8,14.6),
+        line(24,-16.6,45,-16.4,17.5),line(25,-20.2,52,-20.6,20),line(26,-17.6,59,-17.8,23),line(27,-19.4,66,-19.6,26),line(28,-16.9,73,-17.0,30),
+        line(17,20.5,30,20.5,8.0,1.4),line(18,22.5,40,22.5,12.0,1.4)]));
+      pb_bub(x,R.k,tt,ev-0.2,tT-0.3,["Only now","does everyone come."],cam,{dx:-40});}},
+    // each June, today, on the left rim: families twist their cord beside the bridge's head; across the gorge, the other communities; far up the gorge, a truck on the steel
+    {at:tT,place:"pbGorgeB",cut:true,keys:[[tT,960,540,1.0],[c.minka+0.4,960,540,1.0],[c.died-0.4,700,560,1.12]],d:3,draw:(x,tt,cam)=>{
+      const d1=c.died,R=pbq_scene(x,PB_VB,{age:0,truck:U.clamp((tt-tT-2)/6,0,1)},pb_folks(PB_VB,tt,[
+        ["w2",-16.0,-6.3,PB_TW,false,{len:0.6,expr:"smile",gaze:[1,0.7]}],["m1",-15.4,-3.8,"stand",false,{key:"b",opt:PB_COIL,face:Object.assign(pb_alive(tt,{expr:"smile",gaze:[1,0]},2,tT),{expr:pb_says("smile",tt,d1+0.2,sc.ends.died)})}],
+        ["w1",-18.6,-1.0,"clasp",false,{expr:"smile"}],
+        [0,-17.0,9,"stand",false,{opt:PB_COIL}],[1,-20.5,12,PB_TW,false],[2,-16.8,15,"clasp",true],[3,-22,19,"stand",false,{opt:PB_COIL}],[4,-18,24,PB_TW,false],
+        ["w5",15.6,-2.4,PB_TW,true,{len:0.9}],["m4",17.2,2.6,"clasp",true],["m2",16.4,6.4,"stand",true,{opt:PB_COIL}],[6,19.5,10,PB_TW,true],[8,17,14,"clasp",true],[10,21,18,"stand",true,{opt:PB_COIL}],
+        // about a thousand people: more families along both rims, further off
+        [30,19.6,1.2,"stand",true,{opt:PB_COIL}],[31,23.0,6.0,PB_TW,true],[32,15.4,10.6,"clasp",true],[33,21.6,13.2,"stand",false,{opt:PB_COIL}],[34,26.4,9.6,"clasp",true],[35,17.4,20.5,PB_TW,true],
+        [36,24.6,21.5,"stand",true,{opt:PB_COIL}],[37,31.5,10.5,"clasp",true],[38,15.6,29.0,"stand",true],[39,20.6,27.5,PB_TW,true],[40,27.4,26.0,"clasp",false],[41,33.0,22.0,"stand",true,{opt:PB_COIL}],
+        [42,-27.0,21.0,"stand",false,{opt:PB_COIL}],[43,-31.0,33.0,"clasp",false],[44,-25.5,40.0,PB_TW,false],[46,-15.0,36.0,"clasp",false]]).concat([
+        pb_walk(PB_VB,"m3",tt,pb_deck(0.08,0.92,-0.2,[]),tT+0.5,tT+22),pb_walk(PB_VB,"w4",tt,pb_deck(0.9,0.1,0.2,[]),tT+3,tT+24)]));
+      pb_bub(x,R.b,tt,d1+0.2,tU-0.3,["If we stop preserving it,","it would be like if we died."],cam,{dx:60});}},
+    // out over the gorge, beside the bridge: on the steel, a truck crosses; on the rope, two people meet in the middle and greet each other
+    {at:tU,place:"pbGorgeC",cut:true,keys:[[tU,960,540,1.0],[w("turn","together",-1.0),1100,500,1.22]],d:2,draw:(x,tt,cam)=>{
+      const m=w("turn","together",-0.6),R=pbq_scene(x,PB_VC,{age:0,truck:U.clamp((tt-tU)/4.5,0,1)},pb_folks(PB_VC,tt,PB_RIMS.slice(3,10).concat(PB_RIMS.slice(12))).concat([
+        pb_walk(PB_VC,"m1",tt,pb_deck(0.2,0.45,-0.15,[]),tU-1,m,{then:"clasp",opt:{face:null,expr:"smile"}}),pb_walk(PB_VC,"w2",tt,pb_deck(0.74,0.51,0.15,[]),tU-1,m,{then:"clasp",opt:{expr:"smile"}})]));}},
     // a data team, read both ways: the chart of seven boxes on the wall, and the seven people in the room
     {at:tA,place:"pbTeam",dis:1.0,keys:[[tA,1390,330,1.3],[w("data","people",-0.6),960,540,1.0],[c.breath,700,560,1.12]],d:3,draw:(x,tt,cam)=>{
       pb_team(x,tt,{clock:9.4,show:PK.onScreen.chat(0.5,{}),marta:{work:1},people:[
@@ -250,12 +275,12 @@ scene("friday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       F.helena=PK.face(tt,{expr:"smile",gaze:[1,0]},[[2,"look",2.6,[1,0.2]],[7,"nod"],[w("stays","stays",-0.6),"say",n-0.2-w("stays","stays",-0.6)],[n,"say",tK-0.3-n]]);const Jh=pb_all(x,tt,F,{clock:16});
       pb_bub(x,Jh,tt,w("stays","stays",-0.6),n-0.2,["Who does what","stays as it is this month."],cam,{dx:60});
       pb_bub(x,Jh,tt,n,tK-0.3,["I can't promise","that nothing will change."],cam,{dx:60});}},
-    // at the gorge, in 1972, a keeper said what his people would keep
-    {at:tK,place:"pbGorgeGrey",dis:0.8,keys:[[tK,560,560,1.1]],d:2,draw:(x,tt,cam)=>{
-      pbq_steel(x,1,null,true);pbq_bridge(x,{age:1,grey:true});
-      pb_bank(x,tt,[["v2",150,890,"listen",false,{expr:"listen"}],["v1",250,770,"listen",false,{expr:"listen"}]]);
-      const Jk=pbq_person(x,"keeper",450,840,pbq_h(840),"clasp",{t:tt,flip:true,expr:pb_says("smile",tt,w("keeper","keeper",0),w("keeper","would",0.4)),gaze:[1,0]});
-      pb_bub(x,Jk,tt,w("keeper","keeper",0),tW-0.3,["We'll rebuild it."],cam,{dx:300});}},
+    // at the gorge, in 1972, on the rim beside the bridge left to decay, a keeper said what his people would keep
+    {at:tK,place:"pbGorgeB2Grey",dis:0.8,keys:[[tK,1180,500,1.12]],d:2,draw:(x,tt,cam)=>{
+      const R=pbq_scene(x,PB_VB2,{age:1,grey:true},pb_folks(PB_VB2,tt,[
+        ["keeper",15.2,-2.0,"clasp",false,{key:"k",face:Object.assign(PK.face(tt,{expr:"smile",gaze:[1,0]},[]),{expr:pb_says("smile",tt,w("keeper","keeper",0),w("keeper","would",0.4))})}],
+        ["v2",16.3,-2.8,"listen",true,{face:PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+1.2,"nod"]])}],["v1",17.3,-3.6,"listen",true,{face:PK.face(tt,{expr:"listen",gaze:[1,-0.1]},[[tK+2.0,"smile",2.4]])}]]));
+      pb_bub(x,R.k,tt,w("keeper","keeper",0),tW-0.3,["We'll rebuild it."],cam,{dx:-40});}},
     // Helena, in her first week: the team, at ease
     {at:tW,place:"pbTeam",dis:0.8,keys:[[tW,1100,540,1.06]],d:2,draw:(x,tt,cam)=>{
       const F={};["sam","jun","marta","noor","yusuf","erin","tomas"].forEach((k,i)=>F[k]=PK.face(tt,{expr:"smile",gaze:[1,-0.2]},[[tW+0.6+i*0.3,"nod"]]));
@@ -270,11 +295,11 @@ scene("friday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
 scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tS=c.same-0.4,tM=w("m1","On Monday",-0.55),tX=sc.ends.m4+0.7,tE=c.breath+0.6,N3=PK.pace(ctx,null,pb_note3(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
-    // the gorge today: steel carries a truck; on the rope, two people meet
-    {at:0,place:"pbGorge",keys:[[0,960,460,1.2],[tS,960,430,1.28]],d:3,draw:(x,tt,cam)=>{
-      pbq_steel(x,1,U.clamp((tt-0.4)/5,0,1));const m=w("back","each other",-0.4);
-      pbq_bridge(x,{age:0,walkers:[pb_on(tt,"w2",0.15,0.46,0,m),pb_on(tt,"m1",0.85,0.54,0,m)].filter(Boolean)});
-      pb_bank(x,tt,[["w1",380,800,"stand",false,{hold:pbq_coil,holds:true,expr:"smile",gaze:[1,-0.1]}],["keeper",1560,760,"clasp",true,{expr:"smile",gaze:[1,-0.1]}]]);}},
+    // the gorge today, from above: steel carries a truck; on the rope, two people meet; along the rims, families with their cord
+    {at:0,place:"pbGorgeA",keys:[[0,960,500,1.16],[tS,960,470,1.26]],d:3,draw:(x,tt,cam)=>{
+      const m=w("back","each other",-0.4);
+      pbq_scene(x,PB_VA,{age:0.05,truck:U.clamp((tt-0.4)/5,0,1)},pb_folks(PB_VA,tt,PB_RIMS).concat([
+        pb_walk(PB_VA,"w4",tt,pb_deck(0.15,0.46,-0.15,[]),0,m,{then:"clasp",opt:{expr:"smile"}}),pb_walk(PB_VA,"m3",tt,pb_deck(0.85,0.54,0.15,[]),0,m,{then:"clasp",opt:{expr:"smile"}})]));}},
     // the team's room: the team at work, Helena among them
     {at:tS,place:"pbTeam",dis:0.8,keys:[[tS,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
       pb_team(x,tt,{clock:9.3,sam:{work:1},jun:{work:1},marta:{work:0.4,turn:0.3,expr:"smile"},people:[

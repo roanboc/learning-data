@@ -82,5 +82,11 @@
       "Aprende el oficio",
       "Ivy Reyes, analista de datos recién graduada"
     ]
-  ]
+  ],
+  "learn_p": "{Labs} decision playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs de decisiones, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} decision playgrounds, one for each film. Choose what the leader stops, changes, shares and lets others decide, play the weeks, and watch what it does to the people and the work.",
+  "labs_lead_es": "{Labs} labs de decisiones, uno por película. Elige qué para, cambia, comparte y deja decidir quien lidera, juega las semanas y mira qué les pasa a las personas y al trabajo.",
+  "quiz_lead": "{quiz} situations from every film, about doing less, small changes, the team first and rules that let people decide. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
+  "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre hacer menos, cambios pequeños, el equipo primero y reglas que dejan decidir. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

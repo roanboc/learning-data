@@ -488,6 +488,8 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 - [Everyone at the table](../films/making-the-case/3-everyone-at-the-table/) — `everyone-at-the-table`
 - [One list, not twenty](../films/making-the-case/4-one-list-not-twenty/) — `one-list-not-twenty`
 
+Labs and assessments: [site/assets/making-the-case/learn.en.js](../site/assets/making-the-case/learn.en.js), [site/assets/making-the-case/learn.es.js](../site/assets/making-the-case/learn.es.js)
+
 ### Architecture that keeps up
 
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`

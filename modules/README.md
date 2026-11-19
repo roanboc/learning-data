@@ -431,6 +431,8 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 - [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
 - [Saying no, and what instead](../films/working-with-people/3-saying-no/) — `saying-no`
 
+Labs and assessments: [site/assets/working-with-people/learn.en.js](../site/assets/working-with-people/learn.en.js), [site/assets/working-with-people/learn.es.js](../site/assets/working-with-people/learn.es.js)
+
 ### Leading a data team
 
 Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`

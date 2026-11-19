@@ -18,7 +18,7 @@ Agents and AI services on the map, AI in the architecture practice, and architec
 | [Every change, checked](https://data.learn-all.org/ai-and-continuous-architecture/every-change-checked/) | The map, tested on every change | 7½ min | 8 | 3 questions | [script](5-every-change-checked/script.md) · [source](5-every-change-checked/source/README.md) |
 | [Kept alive](https://data.learn-all.org/ai-and-continuous-architecture/kept-alive/) | Keeping the architecture alive | 8½ min | 9 | 3 questions | [script](6-kept-alive/script.md) · [source](6-kept-alive/source/README.md) |
 
-For the whole series, on the site: [6 labs](https://data.learn-all.org/ai-and-continuous-architecture/labs/) and [18 scenarios](https://data.learn-all.org/ai-and-continuous-architecture/scenarios/), in English and Spanish, from the words in [site/assets/ai-and-continuous-architecture/](../../site/assets/ai-and-continuous-architecture/).
+For the whole series, on the site: [6 labs](https://data.learn-all.org/ai-and-continuous-architecture/labs/) and [12 scenarios](https://data.learn-all.org/ai-and-continuous-architecture/scenarios/), in English and Spanish, from the words in [site/assets/ai-and-continuous-architecture/](../../site/assets/ai-and-continuous-architecture/).
 <!-- /films -->
 
 ## The look and the sound

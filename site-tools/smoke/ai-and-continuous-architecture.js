@@ -1,40 +1,71 @@
-/* AI and continuous architecture: plays the series' labs and scenarios through, for site-tools/smoke.py's series-learn check, from
-   their words (window.ACA) and only by what a visitor can click. A lab gets the right answers, with one wrong pick on its first
-   card, and must reach its end, say what happened in words (its end only once), draw every word whole (window.ACA_MISS, from
-   learn.js), and start again. Every scenario must have its picture, the first one too, and get its right answer, and the results
-   must count them all.
-   Each returns what went wrong, as text. */
+/* AI and continuous architecture: plays the series' playgrounds and its evaluation through, for site-tools/smoke.py's series-learn check,
+   from their words (window.ACA) and only by what a visitor can click. A playground is played until every experiment is ticked, and must
+   say in words what happened, draw every word whole (window.ACA_MISS, from learn.js), give its picture words, and start again with
+   none ticked. Every scenario must have its picture, the first one too, and take its right answer, and the results must count them
+   all. Each returns what went wrong, as text. */
 ({
 lab: async (id) => {
   const L = window.ACA, Lb = L.labs.find(x => x.id === id), W = Lb.w, U = L.ui, panel = document.getElementById("aca-panel");
   const wait = ms => new Promise(r => setTimeout(r, ms)), q = s => panel.querySelector(s), qa = s => [...panel.querySelectorAll(s)];
-  const click = (el, what) => { if (!el) throw new Error("nothing to click: " + what); el.click(); };
-  const byText = (sel, t) => qa(sel).find(b => b.textContent.trim() === t);
   const out = [];
-  if (Lb.kind === "sort") {
-    for (let i = 0; i < W.items.length; i++) {
-      const it = W.items[i];
-      if (i === 0) click(q('.aca-opts button[data-k="' + W.buckets.find(o => o[0] !== it.b)[0] + '"]'), "a wrong pick");
-      else click(q('.aca-opts button[data-k="' + it.b + '"]'), "card " + (i + 1));
-      await wait(20);
-      if (i === 0 && !q(".aca-why")) out.push("a wrong pick doesn't say why");
-      click(q(".lab-controls .chip-btn.go"), "next, after card " + (i + 1)); await wait(20);
-    }
-  } else out.push("no play for a lab of kind " + Lb.kind);
-  await wait(60);
-  const end = q(".aca-end"), say = q(".lab-say");
-  if (!end) out.push("it never reached its end");
-  else if (!end.textContent.includes((W.items.length - 1) + " ")) out.push("its end doesn't count the first tries: " + end.textContent.slice(0, 60));
+  const press = async (t, ms) => {
+    const b = qa("button").find(x => x.textContent.trim() === t);
+    if (!b) { out.push("no button “" + t + "”"); return; }
+    b.click(); await wait(ms || 250);
+  };
+  const seg = async (row, k, ms) => {
+    const g = qa(".aca-row .seg")[row], b = g && g.querySelectorAll("button")[k];
+    if (!b) { out.push("no choice " + (k + 1) + " in group " + (row + 1)); return; }
+    b.click(); await wait(ms || 250);
+  };
+  // a button that steps through states: pressed until it says the state wanted
+  const step = async (label, state) => {
+    const b = qa(".aca-cyc").find(x => x.dataset.cycle === label);
+    if (!b) { out.push("no button for “" + label + "”"); return; }
+    for (let i = 0; i < 6 && b.dataset.state !== state; i++) { b.click(); await wait(60); }
+    if (b.dataset.state !== state) out.push("“" + label + "” never reached " + state);
+  };
+  const cv = q("canvas");
+  if (cv) cv.scrollIntoView({block: "center"});  // a picture plays while it's in view
+  await wait(300);
+  if (Lb.kind !== "play") out.push("no play for a lab of kind " + Lb.kind);
+  else if (id === "far") {
+    const T = k => W.tasks.find(t => t.k === k).s;
+    await step(T("plan"), "draft"); await step(T("time"), "draft"); await step(T("check"), "verify");
+    await press(W.ownT); await press(W.weekB, 600);
+  } else if (id === "platform") {
+    await press(W.gwT); await press(W.shT);
+    for (const e of W.events) await press(e.b, 200);
+  } else if (id === "place") {
+    const want = {tariffs: "place", export: "never", account: "signin", medical: "tool", notes: "never"};
+    for (const x of W.items) await step(x.s, want[x.k]);
+    for (const e of W.events) await press(e.b, 200);
+  } else if (id === "confirm") {
+    await seg(0, 1); await seg(1, 1); await seg(2, 2); await press(W.guessT); await press(W.runB, 600);
+  } else if (id === "checks") {
+    for (const c of W.checks) await press(c.s, 100);
+    for (const c of W.changes) await press(c.b, 300);
+  } else if (id === "keep") {
+    for (const b of W.beats) if (b.k !== "change") await press(b.s, 100);
+    await press(W.runB, 600);
+  } else out.push("no play written for playground " + id);
+  const ticked = qa(".aca-goals li.ok").length;
+  if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "
+    + qa(".aca-goals li:not(.ok)").map(li => "“" + li.textContent.trim() + "”").join(", "));
+  const say = q(".lab-say");
   if (!say || !say.textContent.trim()) out.push("nothing says in words what happened");
-  else if (end && !say.classList.contains("sr") && say.textContent.includes(end.textContent.trim())) out.push("its end is said twice, under the picture and in its end box");
   const cut = [...(window.ACA_MISS || [])];
   if (cut.length) out.push("its picture cuts words short: " + cut.slice(0, 4).map(s => "“" + s + "”").join(", "));
-  const cv = q("canvas");
-  if (!cv) out.push("it has no picture");
-  else if (!(cv.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
-  const again = byText(".chip-btn", U.again);
+  const c2 = q("canvas");
+  if (!c2) out.push("no picture");
+  else if (!(c2.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
+  const again = qa(".aca-again").find(b => b.textContent.trim() === U.again);
   if (!again) out.push("no way to start again");
-  else { again.click(); await wait(60); if (document.getElementById("aca-panel").querySelector(".aca-end")) out.push("starting again leaves the end on the page"); }
+  else {
+    again.click(); await wait(100);
+    const left = document.getElementById("aca-panel").querySelectorAll(".aca-goals li.ok").length;
+    if (left) out.push("starting again leaves " + left + " experiments ticked");
+  }
   return out;
 },
 quiz: async () => {

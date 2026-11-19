@@ -9,27 +9,30 @@ function along(pts,u){return at(mk(pathPts(pts)),clamp(u,0,1));}
 
 /* ===== 1. Capture: events and files ===== */
 LD.LABS.capture=(host,S)=>{const L=S.lab,sh=LD.shell(host,S);
-  const st={ev:[],files:[],rows:[],ckpt:0,down:false,lat:null,reading:0,batch:0,n:0};
+  const st={ev:[],files:[],rows:[],ckpt:0,down:false,lat:null,reading:0,batch:0,n:0,cont:false};
   const LY={
     wide:{cards:{sis:[16,26,282,86],lms:[16,128,282,86],hr:[16,340,282,86],fin:[16,442,282,86]},hub:[440,120],hubR:52,integ:[440,214],zb:[656,120],hotTag:[656,52],zone:[330,346,190,170],al:[656,430],warmTag:[656,360],vault:[800,26,140,470],asTag:[870,522],
       evA:a=>{const y=a==="sis"?69:171;return[[298,y],[340,y],[440,120]];},evB:[[440,120],[800,120],[836,120]],drop:a=>[298,a==="hr"?383:485],readB:[[520,430],[800,430],[836,430]],slot:i=>[356+(i%4)*38,i<4?420:470]},
     narrow:{mini:{sis:[12,14,120,64],lms:[140,14,120,64],hr:[278,14,120,64],fin:[406,14,120,64]},hub:[140,196],hubR:46,integ:[146,282],zb:[140,378],hotTag:[140,440],zone:[296,120,230,170],al:[411,378],warmTag:[411,440],vault:[20,476,500,300],asTag:[270,806],
       evA:a=>{const x=a==="sis"?72:200;return[[x,78],[x,120],[140,196]];},evB:[[140,196],[140,476],[140,510]],drop:a=>[a==="hr"?338:466,78],readB:[[411,290],[411,476],[411,510]],slot:i=>[326+(i%4)*48,i<4?196:250]}};
-  const say=sh.setSay,rLat=sh.readout(L.readLat),rCk=sh.readout(L.readCk),rRows=sh.readout(L.readRows);
-  function readouts(){rLat(st.lat==null?"–":st.lat.toFixed(1)+" s");rCk(fill(L.files,{n:st.ckpt}));rRows(String(st.rows.length));}readouts();
+  const say=sh.setSay,rLat=sh.readout(L.readLat),rCk=sh.readout(L.readCk),rRows=sh.readout(L.readRows),rRun=sh.readout(L.readRun);
+  function readouts(){rRun(st.cont?L.runAlways:L.runWhen);rLat(st.lat==null?"–":st.lat.toFixed(1)+" s");rCk(fill(L.files,{n:st.ckpt}));rRows(String(st.rows.length));}readouts();
   sh.btn(L.enrol,()=>{st.n++;st.ev.push({t0:clock(),app:st.n%3===0?"lms":"sis",k:st.n});say(md(st.down?L.msgSentDown:L.msgSent));},{class:"chip-btn go"});
   sh.btn(L.drop,()=>{const now=clock();let fs=st.files;while(fs.filter(f=>!f.gone).length>6){const r=fs.find(f=>f.read&&!f.gone);if(!r)break;r.gone=true;}
     if(fs.filter(f=>!f.gone).length>6){say(md(L.msgFull));return;}const used=fs.filter(f=>!f.gone).map(f=>f.slot);const free=[0,1,2,3,4,5,6,7].filter(i=>!used.includes(i));
-    st.batch++;["hr","fin"].forEach((a,i)=>fs.push({app:a,t0:now+i*0.25,slot:free[i],night:st.batch}));say(md(L.msgFiles));});
-  sh.btn(L.run,()=>{const now=clock(),fresh=st.files.filter(f=>!f.gone&&!f.read&&f.readAt==null&&now>=f.t0+0.8);
+    st.batch++;["hr","fin"].forEach((a,i)=>fs.push({app:a,t0:now+i*0.25,slot:free[i],night:st.batch}));say(md(st.cont?L.msgFilesCont:L.msgFiles));});
+  const bRun=sh.btn(L.run,()=>{const now=clock(),fresh=st.files.filter(f=>!f.gone&&!f.read&&f.readAt==null&&now>=f.t0+0.8);
     if(st.reading){return;}if(!fresh.length){say(md(st.files.some(f=>!f.gone&&now<f.t0+0.8)?L.msgWait:L.msgNone));return;}
     fresh.forEach((f,i)=>{f.readAt=now+i*0.4;});st.reading=fresh.length;st.readN=fresh.length;say(md(L.msgReading));});
+  /* continuous mode: Auto Loader keeps running and reads each file as it lands, with nothing to press and its compute always on */
+  sh.toggle(L.cont,v=>{st.cont=v;bRun.disabled=v;readouts();say(md(v?L.msgContOn:L.msgContOff));});
   sh.toggle(L.outage,v=>{st.down=v;const now=clock();if(!v)st.ev.forEach(e=>{if(e.held&&e.rel==null)e.rel=now;});say(md(v?L.msgDown:L.msgUp));});
   function update(now){
+    if(st.cont){const fr=st.files.filter(f=>!f.gone&&f.readAt==null&&now>=f.t0+0.8);if(fr.length){if(!st.reading)st.readN=0;fr.forEach((f,i)=>{f.readAt=now+i*0.4;});st.reading+=fr.length;st.readN+=fr.length;}}
     st.ev.forEach(e=>{if(e.done)return;const a=e.t0+0.7;if(now>=a&&!e.atHub){e.atHub=true;if(st.down){e.held=true;say(md(L.msgRetry));}}
       if(e.held&&!st.down&&e.rel==null)e.rel=now;const leave=e.held?(e.rel==null?Infinity:e.rel):a;
       if(now>=leave+1.1){e.done=true;st.rows.push(e.app);st.lat=leave+1.1-e.t0;say(md(fill(e.held?L.msgLandedHeld:L.msgLanded,{s:st.lat.toFixed(1)})));readouts();}});
-    st.files.forEach(f=>{if(f.readAt!=null&&!f.read&&now>=f.readAt+1.2){f.read=true;st.ckpt++;st.rows.push(f.app);st.reading--;readouts();if(!st.reading)say(md(fill(L.msgRead,{n:st.readN,c:st.ckpt})));}});}
+    st.files.forEach(f=>{if(f.readAt!=null&&!f.read&&now>=f.readAt+1.2){f.read=true;st.ckpt++;st.rows.push(f.app);st.reading--;readouts();if(!st.reading)say(md(fill(st.cont?L.msgAutoRead:L.msgRead,{n:st.readN,c:st.ckpt})));}});}
   function draw(c,now,s){update(now);const Y=s.narrow?LY.narrow:LY.wide;
     // lanes
     ["sis","lms"].forEach(a=>lane(c,pathPts(Y.evA(a)),APP[a].c,0.8));lane(c,pathPts(Y.evB),HOT,st.down?0.25:0.9);
@@ -44,8 +47,8 @@ LD.LABS.capture=(host,S)=>{const L=S.lab,sh=LD.shell(host,S);
     tag(c,Y.hotTag[0],Y.hotTag[1],L.hot,HOT,{align:"center",size:14});
     // the warm path
     const z=Y.zone;glass(c,z[0],z[1],z[2],z[3],14,WARM,{glow:10,ea:0.5});T(c,L.zone,z[0]+14,z[1]+26,{w:700,size:17});T(c,L.zoneSub,z[0]+14,z[1]+46,{w:500,size:13,color:rgba(SOFT,0.95)});
-    chip(c,Y.al[0],Y.al[1],"databricks","Auto Loader",fill(L.ckpt,{n:st.ckpt}),Object.assign({align:"center",edge:st.reading?WARM:null},cs));
-    tag(c,Y.warmTag[0],Y.warmTag[1],L.warm,WARM,{align:"center",size:14});
+    chip(c,Y.al[0],Y.al[1],"databricks","Auto Loader",fill(L.ckpt,{n:st.ckpt}),Object.assign({align:"center",edge:st.reading||st.cont?WARM:null},cs));
+    tag(c,Y.warmTag[0],Y.warmTag[1],st.cont?L.warmCont:L.warm,WARM,{align:"center",size:14});
     // bronze
     const v=Y.vault,cols=Math.floor((v[2]-44)/23),rows=st.rows.slice(-cols*Math.floor((v[3]-150)/23));
     vault(c,v[0],v[1],v[2],v[3],LAYER.bronze,(r,k)=>{const i=r*cols+k;return i<rows.length?APP[rows[i]].c:null;},L.bronze,null);

@@ -167,7 +167,8 @@ WHOLE = {"6 min", "8 min", "8 minutos"}
 # (Spanish "diecinueve minutos" ends in "nueve minutos"), and the regulator's answer takes ten minutes
 STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres minutos"},
               "assets/platform-and-solution-architecture/learn.en.js": {"19 minutes"},
-              "assets/platform-and-solution-architecture/learn.es.js": {"nueve minutos", "diez minutos", "19 minutos"}}
+              "assets/platform-and-solution-architecture/learn.es.js": {"nueve minutos", "diez minutos", "19 minutos"},
+              "assets/data-that-moves/learn.en.js": {"5 minutes"}, "assets/data-that-moves/learn.es.js": {"cinco minutos", "5 minutos"}}
 # the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
 # lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),
 # so a new film, or a new series, needs no change here

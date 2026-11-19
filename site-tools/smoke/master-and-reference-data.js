@@ -1,36 +1,55 @@
-/* The same one, everywhere: plays the series' labs and scenarios through, for site-tools/smoke.py's series-learn check, from their
-   words (window.MR) and only by what a visitor can click. A lab gets every control in its picture's panel tried, twice over, then
-   each choice of a list and each end of a slider, and must say in words what happened, label its picture, and draw every word
-   whole (window.MR_MISS, from learn.js). Every scenario, for all films, must have its picture and take its right answer, and the
-   results must count them all and end with the series' last words.
+/* The same one, everywhere: plays the series' playgrounds and its evaluation through, for site-tools/smoke.py's series-learn check,
+   from their words (window.MR) and only by what a visitor can click. A playground is played until every experiment is ticked, and
+   must say in words what happened, label its picture, draw every word whole (window.MR_MISS, from learn.js), and start again with
+   none ticked. Every scenario, for all films, must have its picture and take its right answer, and the results must count them all
+   and end with the series' last words.
    Each returns what went wrong, as text. */
 ({
 lab: async (id) => {
-  const L = window.MR, app = document.getElementById("series-labs"), wait = ms => new Promise(r => setTimeout(r, ms));
+  const L = window.MR, U = L.ui, app = document.getElementById("series-labs"), wait = ms => new Promise(r => setTimeout(r, ms));
   const lab = () => app.querySelector(".mr-lab"), out = [];
-  if (!L.labs.some(x => x.id === id)) return ["no lab " + id + " in the words"];
+  const Lb = L.labs.find(x => x.id === id);
+  if (!Lb) return ["no lab " + id + " in the words"];
   if (!lab()) return ["its lab never drew"];
-  let said = false;
-  const heard = () => { const s = lab().querySelector(".mr-say"); if (s && s.textContent.trim()) said = true; };
-  const live = () => [...lab().querySelectorAll("button")].filter(b => !b.disabled && b.getAttribute("role") !== "tab" && b.offsetParent);
-  heard();
-  for (let round = 0; round < 2; round++)
-    for (let i = 0; i < 60; i++) { const b = live()[i]; if (!b) break; b.click(); await wait(20); heard(); }
-  for (const s of [...lab().querySelectorAll("select")])
-    for (let i = 0; i < s.options.length; i++) { s.selectedIndex = i; s.dispatchEvent(new Event("change", { bubbles: true })); await wait(20); heard(); }
-  for (const r of [...lab().querySelectorAll("input[type=range]")])
-    for (const v of [r.min, r.max, r.min]) {
-      r.value = v; r.dispatchEvent(new Event("input", { bubbles: true })); r.dispatchEvent(new Event("change", { bubbles: true }));
-      await wait(20); heard();
-    }
+  const W = Lb.w;
+  const press = async (t, ms) => {
+    const b = [...lab().querySelectorAll("button")].find(x => x.textContent.trim() === t);
+    if (!b) { out.push("no button “" + t + "”"); return; }
+    b.click(); await wait(ms || 60);
+  };
+  const cv0 = lab().querySelector("canvas");
+  if (cv0) cv0.scrollIntoView({block: "center"});
+  await wait(200);
+  if (Lb.kind !== "play") out.push("no play for a lab of kind " + Lb.kind);
+  else if (id === "five_records") { await press(W.ways[2][1]); for (const [, t] of W.acts) await press(t); }
+  else if (id === "same_person") {
+    await press(W.calls[0][1]); await press(W.undoB);
+    await press(W.pairs[1].t); await press(W.calls[1][1]); await press(W.hrB); await press(W.calls[0][1]);
+    await press(W.pairs[2].t); await press(W.calls[2][1]);
+  } else if (id === "which_value") { await press(W.rules[2][1]); await press(W.resendB); await press(W.dryB); }
+  else if (id === "on_a_date") { await press(W.keeps[1][1]); for (const [, t] of W.dates) await press(t); }
+  else if (id === "map_codes") { await press(W.homes[1][1]); await press(W.mapT); await press(W.countB); await press(W.renameB); await press(W.defB); }
+  else if (id === "may_use") { await press(W.tagsT); await press(W.wishT); await press(W.polT); await press(W.topB); await press(W.appealB); await press(W.colB); await press(W.askB); }
+  else if (id === "search_first") {
+    await press(W.modes[1][1]); await press(W.apps[0].b); await press(W.given[0][1]); await press(W.apps[0].b); await press(W.apps[1].b);
+  } else if (id === "one_review") { for (const t of [W.openB, W.flipT, W.aiB, W.linkB, W.pubB, W.checkB, W.unlinkB]) await press(t); }
+  else if (id === "cleanup_or_entry") {
+    await press(W.opts[1][1]); await press(W.runB); await press(W.opts[2][1]); await press(W.runB); await press(W.measT); await press(W.alertB);
+  } else out.push("no play written for playground " + id);
   await wait(150);
-  if (!lab().querySelector(".mr-say[role=status]")) out.push("nothing on the page says in words what happened");
-  else if (!said) out.push("trying every control, it never said in words what happened");
+  const ticked = lab().querySelectorAll(".mr-goals li.ok").length;
+  if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "
+    + [...lab().querySelectorAll(".mr-goals li:not(.ok)")].map(li => "“" + li.textContent.trim() + "”").join(", "));
+  const say = lab().querySelector(".mr-say[role=status]");
+  if (!say || !say.textContent.trim()) out.push("nothing says in words what happened");
   const cv = lab().querySelector("canvas");
   if (!cv) out.push("it has no picture");
   else if (!(cv.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
   const cut = [...(window.MR_MISS || [])];
   if (cut.length) out.push("its picture cuts words short: " + cut.slice(0, 4).map(s => "“" + s + "”").join(", "));
+  const again = [...lab().querySelectorAll(".mr-again")].find(b => b.textContent.trim() === U.again);
+  if (!again) out.push("no way to start again");
+  else { again.click(); await wait(80); const left = lab().querySelectorAll(".mr-goals li.ok").length; if (left) out.push("starting again leaves " + left + " experiments ticked"); }
   return out;
 },
 quiz: async () => {

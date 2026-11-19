@@ -91,6 +91,8 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 - [Scripts became software](../films/data-as-software/1-scripts-became-software/) — `scripts-became-software`
 - [A platform that watches itself](../films/data-as-software/2-a-platform-that-watches-itself/) — `a-platform-that-watches-itself`
 
+Labs and assessments: [site/assets/data-as-software/learn.en.js](../site/assets/data-as-software/learn.en.js), [site/assets/data-as-software/learn.es.js](../site/assets/data-as-software/learn.es.js)
+
 ### From tables to decisions
 
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
@@ -474,6 +476,8 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 - [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
 - [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 - [From gaps to a roadmap](../films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/) — `from-gaps-to-a-roadmap`
+
+Labs and assessments: [site/assets/a-plan-in-ninety-days/learn.en.js](../site/assets/a-plan-in-ninety-days/learn.en.js), [site/assets/a-plan-in-ninety-days/learn.es.js](../site/assets/a-plan-in-ninety-days/learn.es.js)
 
 ### Making the case
 

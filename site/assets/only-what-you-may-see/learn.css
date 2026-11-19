@@ -1,0 +1,27 @@
+/* Locks before the data: the pieces of the series' playgrounds and scenarios that site.css doesn't have (it has .stops, .stop, .lab,
+   .chip-btn, .seg, .lab-controls, .lab-read, .lab-say, .lab-info, .quiz and the scenario cards). Labs are always dark, like the
+   films; the scenario cards follow the page's theme. learn.js lays each picture out for its own width, so nothing here sizes a
+   canvas but its width. */
+.os-lab canvas{margin:0 0 12px}
+.os-lab :focus-visible{outline-color:#9fc4ff}
+/* the experiments: numbered, each ticked when the visitor makes it happen */
+.os-goalbox{margin:0 16px 12px;padding:10px 12px 8px;border-radius:12px;background:rgba(16,26,50,.7);border:1px solid var(--sline)}
+.os-gh{margin:0 0 6px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--smuted)}
+.os-goals{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.os-goals li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.35;color:var(--sfg)}
+.os-goals li i{flex:0 0 auto;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;border:1.5px solid var(--c,#6aa8ff);color:var(--sfg);transition:background .3s,border-color .3s,transform .3s}
+.os-goals li.ok i{background:#2e8a5c;border-color:#7ff0b4;color:#effff6;transform:scale(1.08)}
+.os-goals li.ok span{color:#c9f7df}
+/* the controls: a row for each group, its label first */
+.os-ctrl{flex-direction:column;align-items:stretch;gap:10px}
+.os-row{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.os-row .lbl{flex:0 0 100%;margin:0}
+.os-row .chip-btn[aria-pressed]{--c:var(--c)}
+.os-endbox:empty{display:none}
+.os-end{margin:0 16px 12px;padding:12px 14px;border-radius:12px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.45);font-size:15px;line-height:1.45;color:var(--sfg)}
+.os-foot{display:flex;justify-content:flex-end;padding:0 16px 14px}
+.lab-say .ok,.lab-say .warn,.lab-say .no{display:inline}
+/* the labs page: which film */
+.stop-text .os-film{margin:2px 0 0;font-weight:700;color:var(--muted)}
+.stop-text .os-film a{color:inherit;text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){.os-goals li i{transition:none}}

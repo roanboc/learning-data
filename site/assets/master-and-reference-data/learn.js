@@ -4,22 +4,14 @@
    window.MR) and this file, and fills #series-labs or #series-quiz. The words cover every film of the series; the page says which
    films are on the site, or coming (data-films on its root: {number: {t, k, href, starts} or {t, coming}}), and only their labs and
    scenarios show. Its data-store is the progress prefix.
-   A lab is one of ten kinds, described entirely by its words:
-     sort      place each item in a bucket, then check: every item says why, and what goes wrong where you put it
-     pick      choose one option, and see what it gets right and wrong
-     steps     walk through a sequence, one step at a time
-     compose   build a sentence from parts, such as a rule
-     test      answer the same questions of several things, and see the verdict (the four questions of One person, many roles)
-     match     compare two records field by field: each comparison adds or takes away weight, and the score lands in a band; or, as a
-               search, see which details find a person
-     bands     set the two thresholds that make three bands, and see what each costs
-     survive   choose a rule for each field, and watch the master record take its values
-     timeline  move a date across dated roles, and see who the person is on that date
-     map       map each system's codes to one list, then run the test that reads it
+   Every lab is a playground (kind "play"), one for each film, as the author set on 18 November 2026: a picture changed by buttons and
+   switches, with three to five experiments (w.goals) the visitor ticks by making them happen. Each playground's own rules are in PLAY
+   below, its words in the pack. The sorting, picking and stepping labs of before became scenarios of the series' evaluation.
    Pictures are drawn with the films' own components (wc_*): a lab's or a scenario's "vis" names a function in PIX below, which takes
    its words from the lab or the scenario. Without the bundle, the labs still work, on plain paper.
    Progress stays in this browser, under the page's data-store (or MR.store): the labs visited (visited, ids) and the scenarios
-   answered (quiz, keyed by number), as assets/learn/path.js counts them. smoke.py expects every lab's tab on the labs page
+   answered (quiz, keyed by number), as assets/learn/path.js counts them, and each playground's ticked experiments (goals).
+   smoke.py expects every lab's tab on the labs page
    ([role=tab][data-id]), the open one selected, one "Watch this part" link to its chapter (#t=), and the film shown on the scenarios
    page as data-film on its root.
    The results for all films, and for the last film, end with the series' last words (MR.close), as its last film ends. */
@@ -418,167 +410,232 @@ const PIX={
 function seg(opts,cur,on,label){const s=h("div",{class:"mr-seg",role:"group","aria-label":label||""});
   opts.forEach(([k,t,c])=>s.append(h("button",{type:"button","aria-pressed":String(k===cur),"data-k":k,style:c?"--b:"+c:null,
     onclick:()=>{s.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.k===String(k))));on(k);}},t)));return s;}
-function picture(Lb,state){const f=PIX[Lb.vis];if(!f)return null;const vw=Lb.vw||1200,vh=Lb.vh||620;return stage(vw,vh,(c,k)=>f(c,vw,vh,state(),Lb,k),Lb.alt||Lb.name);}
 const shell=(Lb,pic,...parts)=>h("div",{class:"mr-lab",style:"--c:"+Lb.c},...(pic?[pic.el]:[]),...parts);
 const info=t=>t?h("p",{class:"mr-info"},t):null;
 const btn=(t,on,cls)=>h("button",{type:"button",class:"mr-btn"+(cls?" "+cls:""),onclick:on},t);
-
-/* ---------- sort: every item in its bucket ---------- */
-function labSort(Lb){const V=Lb.w,say=h("p",{class:"mr-say",role:"status"}),pick={};let checked=false,last=-1;
-  const pic=picture(Lb,()=>({pick,checked,last})),rows=h("div",{class:"mr-rows"});
-  const go=btn(U.check,()=>{checked=true;last=-1;draw();upd(true);},"go"),again=btn(U.again,()=>{for(const k in pick)delete pick[k];checked=false;last=-1;draw();upd();});
-  const bname=k=>(V.buckets.find(b=>b[0]===k)||[,""])[1];
-  function draw(){rows.replaceChildren(...V.items.map((it,i)=>{const ok=checked&&pick[i]===it.b,no=checked&&pick[i]!==it.b;
-    return h("div",{class:"mr-row"+(ok?" ok":no?" no":"")},h("p",{class:"mr-item"},it.t),
-      seg(V.buckets.map(b=>[b[0],b[1],b[2]]),pick[i],k=>{pick[i]=k;last=i;if(checked){checked=false;draw();}upd(true);},it.t),
-      checked?h("p",{class:"mr-why"},h("b",null,ok?U.right:fill(U.belongs,{b:bname(it.b)}))," ",no&&it.no&&it.no[pick[i]]?it.no[pick[i]]+" ":"",it.why):null);}));}
-  function upd(anim){const n=Object.keys(pick).length,right=V.items.filter((it,i)=>pick[i]===it.b).length;go.disabled=n<V.items.length;
-    say.textContent=checked?fill(right===V.items.length?V.sayAll:V.saySome,{n:right,of:V.items.length}):(n<V.items.length?fill(U.placed,{n,of:V.items.length}):U.ready);if(pic)pic.paint(anim);}
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),rows,h("div",{class:"mr-controls"},go,again),say);}
-
-/* ---------- pick: one option, and what it gets right ---------- */
-function labPick(Lb){const V=Lb.w;let cur=V.opts[0][0];const say=h("p",{class:"mr-say",role:"status"}),list=h("ul",{class:"mr-checks"}),stats=h("div",{class:"mr-stats"});
-  const pic=picture(Lb,()=>({pick:cur}));
-  function upd(anim){const r=V.res[cur];list.replaceChildren(...V.checks.map((t,i)=>h("li",{class:r[i]===1?"ok":r[i]===0.5?"warn":"no"},t)));
-    stats.replaceChildren(...(V.stats&&V.stats[cur]?V.stats[cur].map(([n,t])=>h("p",null,h("b",null,n),h("span",null,t))):[]));say.textContent=V.say[cur];if(pic)pic.paint(anim);}
-  ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),h("div",{class:"mr-controls"},h("span",{class:"mr-lbl"},V.label),seg(V.opts,cur,k=>{cur=k;upd(true);},V.label)),stats,list,say);}
-
-/* ---------- steps: a sequence, one step at a time ---------- */
-function labSteps(Lb){const V=Lb.w;let cur=0;const say=h("p",{class:"mr-say",role:"status"}),ol=h("ol",{class:"mr-steps"});
-  const pic=picture(Lb,()=>({step:cur}));
-  const prev=btn("← "+U.back,()=>{if(cur>0){cur--;upd(true);}}),next=btn(U.nextStep+" →",()=>{if(cur<V.steps.length-1){cur++;upd(true);}},"go");
-  function upd(anim){ol.replaceChildren(...V.steps.map((s,i)=>h("li",{class:i<cur?"done":i===cur?"on":"",...(i===cur?{"aria-current":"step"}:{})},h("b",null,s.t),i===cur?h("span",null,s.d):null)));
-    prev.disabled=cur===0;next.disabled=cur===V.steps.length-1;say.textContent=cur===V.steps.length-1?V.sayEnd:fill(U.stepOf,{n:cur+1,of:V.steps.length});if(pic)pic.paint(anim);}
-  ready().then(()=>upd());upd();return shell(Lb,pic,info(V.prompt),ol,h("div",{class:"mr-controls"},prev,next),say);}
-
-/* ---------- compose: a sentence from parts ---------- */
-function labCompose(Lb){const V=Lb.w,pick=V.slots.map(()=>null),say=h("p",{class:"mr-say",role:"status"}),out=h("p",{class:"mr-sentence"}),notes=h("ul",{class:"mr-checks"});
-  const pic=picture(Lb,()=>({pick}));
-  const slots=V.slots.map((sl,i)=>h("div",{class:"mr-controls mr-slot"},h("span",{class:"mr-lbl"},sl.label),seg(sl.opts.map((o,j)=>[String(j),o.t]),null,k=>{pick[i]=+k;upd(true);},sl.label)));
-  function upd(anim){out.replaceChildren(h("b",null,V.head+" "),...V.slots.map((sl,i)=>pick[i]==null?h("span",{class:"gap"},"… "):h("span",{class:sl.opts[pick[i]].ok?"ok":"no"},sl.opts[pick[i]].t+" ")));
-    notes.replaceChildren(...V.slots.map((sl,i)=>pick[i]==null?null:h("li",{class:sl.opts[pick[i]].ok?"ok":"no"},sl.opts[pick[i]].why)).filter(Boolean));
-    const done=pick.every(p=>p!=null),good=done&&pick.every((p,i)=>V.slots[i].opts[p].ok);say.textContent=!done?V.sayStart:good?V.sayGood:V.sayFix;if(pic)pic.paint(anim);}
-  ready().then(()=>upd());upd();return shell(Lb,pic,info(V.prompt),...slots,out,notes,say);}
-
-/* ---------- test: the same questions, asked of several things ---------- */
-function labTest(Lb){const V=Lb.w;let cur=0;const ans=V.items.map(()=>V.qs.map(()=>null)),done=V.items.map(()=>false);
-  const say=h("p",{class:"mr-say",role:"status"}),things=h("div",{class:"mr-controls"}),qs=h("div",{class:"mr-rows"}),verdict=h("p",{class:"mr-verdict"});
-  const pic=picture(Lb,()=>({cur,ans,done}));
-  const go=btn(U.check,()=>{done[cur]=true;draw();upd(true);},"go");
-  function drawThings(){things.replaceChildren(h("span",{class:"mr-lbl"},V.label),seg(V.items.map((it,i)=>[String(i),(done[i]?"✓ ":"")+it.t]),String(cur),k=>{cur=+k;draw();upd(true);},V.label));}
-  function draw(){const it=V.items[cur];drawThings();qs.replaceChildren(...V.qs.map((q,i)=>{const a=ans[cur][i],ok=done[cur]&&(it.a[i]==null||a===it.a[i]),no=done[cur]&&!ok;
-      return h("div",{class:"mr-row"+(ok?" ok":no?" no":"")},h("p",{class:"mr-item"},(i+1)+". "+q),
-        seg([["1",V.yes],["0",V.no]],a==null?null:String(a),k=>{ans[cur][i]=+k;if(done[cur]){done[cur]=false;draw();}upd(true);},q),
-        done[cur]?h("p",{class:"mr-why"},h("b",null,ok?U.right:U.wrong)," ",it.why[i]):null);}));
-    verdict.replaceChildren(...(done[cur]?[h("b",null,V.verdicts[it.verdict]+". "),it.say]:[]));}
-  function upd(anim){const n=ans[cur].filter(a=>a!=null).length;go.disabled=n<V.qs.length;const nd=done.filter(Boolean).length;
-    say.textContent=done[cur]?fill(V.sayDone,{n:nd,of:V.items.length}):n<V.qs.length?fill(V.sayAsk,{n,of:V.qs.length}):U.ready;if(pic)pic.paint(anim);}
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),things,qs,h("div",{class:"mr-controls"},go),verdict,say);}
-
-/* ---------- match: two records compared, field by field; or a search, and what it finds ---------- */
-// the score: the weights added up, on a scale of 0 to 100 (base + scale × total, as the films show it)
-// a pair's score from its total weight: with mid, the weights are log-odds (base 2) that the two are one person, and mid sets the
-// odds before any field is compared (the matcher of Who is it?: 5.69, a prior of one in 52); without it, a straight line, base + scale × total
-const scoreOf=(V,tot)=>Math.max(0,Math.min(100,Math.round(V.mid!=null?100/(1+Math.pow(2,-(tot-V.mid))):(V.base||0)+(V.scale||10)*tot)));
-const bandOf=(V,s)=>s>=V.hi?"link":s>=V.lo?"review":"apart";
-// an email may break before its @, and nowhere else unless it must
-const wb=s=>String(s).split(/(?=@)/).flatMap((p,i)=>i?[h("wbr"),p]:[p]);
-function labMatch(Lb){const V=Lb.w;return V.mode==="search"?labSearch(Lb):labPair(Lb);}
-function labPair(Lb){const V=Lb.w;let cur=0;const alt=V.pairs.map(p=>p.rows.map(()=>false)),call=V.pairs.map(()=>null);
-  const say=h("p",{class:"mr-say",role:"status"}),rows=h("div",{class:"mr-cmp"}),sc=h("p",{class:"mr-score"}),yours=h("div",{class:"mr-controls"}),fb=h("div");
-  const row=(p,i)=>{const r=p.rows[i];return alt[cur][i]&&r.alt?Object.assign({},r,r.alt):r;};
-  const total=()=>V.pairs[cur].rows.reduce((a,r,i)=>a+row(V.pairs[cur],i).w,0);
-  const anyAlt=()=>alt[cur].some(Boolean),now=()=>{const s=scoreOf(V,total());return{s,b:bandOf(V,s)};};
-  const pic=picture(Lb,()=>{const p=V.pairs[cur],{s,b}=now();return{p,rows:p.rows.map((r,i)=>row(p,i)),score:s,band:b,call:call[cur],ok:call[cur]===b};});
-  function draw(){const p=V.pairs[cur];
-    rows.replaceChildren(h("div",{class:"mr-cmp-h"},h("span",null,V.field),h("span",null,p.a.id||p.a.title),h("span",null,p.b.id||p.b.title),h("span",null,V.weight)),
-      ...p.rows.map((r0,i)=>{const r=row(p,i);return h("div",{class:"mr-cmp-r"+(r.w>0?" plus":r.w<0?" minus":"")},h("b",null,r.f),h("span",{class:"v"},wb(r.av)),h("span",{class:"v"},wb(r.bv)),
-        h("span",{class:"w"},h("em",null,r.how),h("b",null,dec(r.w))),
-        r0.alt?h("button",{type:"button",class:"mr-btn sm","aria-pressed":String(alt[cur][i]),onclick:()=>{alt[cur][i]=!alt[cur][i];call[cur]=null;draw();upd(true);}},r0.alt.t):null);}));
-    yours.replaceChildren(h("span",{class:"mr-lbl"},V.your),seg(V.calls,call[cur],k=>{call[cur]=k;draw();upd(true);},V.your));
-    // the right call is the band the score lands in; once a change is tried, the note says where the score is now
-    const c=call[cur],{s,b}=now(),ok=c===b;fb.replaceChildren(...(c?[h("p",{class:"mr-verdict "+(ok?"ok":"no")},h("b",null,(ok?U.right:U.wrong)+" "),anyAlt()?fill(V.altNote,{s,b:V.bands[b]}):p.calls[c])]:[]));}
-  function upd(anim){const t=total(),s=scoreOf(V,t),b=bandOf(V,s);sc.replaceChildren(h("span",null,V.scoreL+" "),h("b",null,String(s)),h("span",{class:"band "+b},V.bands[b]));
-    say.textContent=call[cur]===b&&!anyAlt()?V.pairs[cur].say:fill(V.sayBand[b],{s,lo:V.lo,hi:V.hi});if(pic)pic.paint(anim);}
-  const pairs=V.pairs.length>1?h("div",{class:"mr-controls"},h("span",{class:"mr-lbl"},V.label),seg(V.pairs.map((p,i)=>[String(i),p.t]),"0",k=>{cur=+k;draw();upd(true);},V.label)):null;
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),pairs,rows,sc,yours,fb,say);}
-function labSearch(Lb){const V=Lb.w;let cur=0;const on=V.apps.map(a=>a.given.map(g=>!!g.on));
-  const say=h("p",{class:"mr-say",role:"status"}),given=h("div",{class:"mr-toggles",role:"group","aria-label":V.givenL}),found=h("div",{class:"mr-rows"}),out=h("p",{class:"mr-verdict"});
-  const scores=()=>{const a=V.apps[cur];return a.cands.map(c=>{const t=c.rows.reduce((s,r)=>{const g=a.given.findIndex(x=>x.k===r.need);return s+(g>=0&&on[cur][g]?r.w:0);},0);const s=scoreOf(V,t);return{c,s,b:bandOf(V,s)};});};
-  const outcome=sc=>{const best=sc.slice().sort((x,y)=>y.s-x.s)[0];return best&&best.b==="link"?["add",best]:best&&best.b==="review"?["review",best]:["create",null];};
-  const pic=picture(Lb,()=>{const sc=scores();return{app:V.apps[cur],on:on[cur],sc,out:outcome(sc)};});
-  function draw(){const a=V.apps[cur];given.replaceChildren(...a.given.map((g,i)=>h("label",null,h("input",{type:"checkbox",checked:on[cur][i]||null,onchange:e=>{on[cur][i]=e.target.checked;upd(true);}}),h("span",null,g.t))));}
-  function upd(anim){const sc=scores(),[o,best]=outcome(sc),a=V.apps[cur];
-    found.replaceChildren(...sc.map(({c,s,b})=>h("div",{class:"mr-row mr-found "+b},h("p",{class:"mr-item"},c.title+" · "+c.id),h("p",{class:"mr-why"},c.note),h("p",{class:"mr-score"},h("span",null,V.scoreL+" "),h("b",null,String(s)),h("span",{class:"band "+b},V.bands[b])))));
-    const good=o===a.want;out.className="mr-verdict "+(good?"ok":"no");out.replaceChildren(h("b",null,fill(V.outcomes[o],{who:best?best.c.title+" ("+best.c.id+")":""})+". "),good?a.good:a.bad[o]||"");
-    say.textContent=fill(V.say,{n:on[cur].filter(Boolean).length,of:a.given.length});if(pic)pic.paint(anim);}
-  const apps=V.apps.length>1?h("div",{class:"mr-controls"},h("span",{class:"mr-lbl"},V.label),seg(V.apps.map((a,i)=>[String(i),a.t]),"0",k=>{cur=+k;draw();upd(true);},V.label)):null;
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),apps,h("p",{class:"mr-lbl mr-pad"},V.givenL),given,found,out,say);}
-
-/* ---------- bands: two thresholds, three bands, and what each costs ---------- */
-function labBands(Lb){const V=Lb.w;let lo=V.lo,hi=V.hi;const say=h("p",{class:"mr-say",role:"status"}),stats=h("div",{class:"mr-stats"}),goals=h("ul",{class:"mr-checks"});
-  const count=()=>{const r={auto:0,fm:0,rv:0,apart:0,mm:0};V.pts.forEach(([s,same])=>{if(s>=hi){r.auto++;if(!same)r.fm++;}else if(s>=lo)r.rv++;else{r.apart++;if(same)r.mm++;}});return r;};
-  const pic=picture(Lb,()=>({lo,hi,r:count()}));
-  const slider=(lbl,get,setv)=>{const val=h("output",null,String(get()));const inp=h("input",{type:"range",min:"0",max:"100",step:"1",value:String(get()),"aria-label":lbl,
-      oninput:e=>{setv(+e.target.value);inp.value=String(get());val.textContent=String(get());inp.setAttribute("aria-valuetext",String(get()));upd(true);}});
-    return h("label",{class:"mr-slider"},h("span",null,lbl),inp,val);};
-  const sHi=slider(V.hiL,()=>hi,v=>{hi=Math.max(v,lo);}),sLo=slider(V.loL,()=>lo,v=>{lo=Math.min(v,hi);});
-  function upd(anim){const r=count();stats.replaceChildren(...[["auto",r.auto],["fm",r.fm],["rv",r.rv],["mm",r.mm]].map(([k,n])=>h("p",{class:k==="fm"&&n?"no":k==="mm"&&n?"warn":""},h("b",null,String(n)),h("span",null,V.stat[k]))));
-    const ok=V.goals.map(g=>g.k==="fm"?r.fm<=g.max:g.k==="mm"?r.mm<=g.max:r.rv<=g.max);goals.replaceChildren(...V.goals.map((g,i)=>h("li",{class:ok[i]?"ok":"no"},g.t)));
-    say.textContent=ok.every(Boolean)?fill(V.sayGood,{rv:r.rv}):r.fm?fill(V.sayFm,{n:r.fm}):r.mm>V.goals.find(g=>g.k==="mm").max?fill(V.sayMm,{n:r.mm}):fill(V.sayRv,{n:r.rv});if(pic)pic.paint(anim);}
-  ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),h("div",{class:"mr-sliders"},sHi,sLo),stats,goals,say);}
-
-/* ---------- survive: a rule for each field, and the master record it makes ---------- */
-function labSurvive(Lb){const V=Lb.w,pick=V.fields.map(()=>null);const say=h("p",{class:"mr-say",role:"status"}),box=h("div",{class:"mr-rows"});
-  const pic=picture(Lb,()=>({pick}));
-  function draw(){box.replaceChildren(...V.fields.map((f,i)=>{const r=pick[i]==null?null:f.rules[pick[i]],win=r?r.win:null;
-    return h("div",{class:"mr-row"+(r?r.ok?" ok":" no":"")},h("p",{class:"mr-item"},f.f),
-      h("ul",{class:"mr-vals"},...f.vals.map((v,j)=>h("li",{class:win!=null&&(Array.isArray(win)?win.includes(j):win===j)?"win":"",style:"--b:"+(V.src[v.src]||{}).c},h("span",{class:"v"},v.v),h("span",{class:"src"},(V.src[v.src]||{}).t+(v.when?" · "+v.when:"")+(v.note?" · "+v.note:""))))),
-      h("div",{class:"mr-controls mr-slot"},h("span",{class:"mr-lbl"},V.ruleL),seg(f.rules.map((r,j)=>[String(j),r.t]),pick[i]==null?null:String(pick[i]),k=>{pick[i]=+k;draw();upd(true);},f.f)),
-      r?h("p",{class:"mr-why"},h("b",null,r.ok?U.right:U.wrong)," ",r.why):null);}));}
-  function upd(anim){const n=pick.filter(p=>p!=null).length,good=pick.filter((p,i)=>p!=null&&V.fields[i].rules[p].ok).length;
-    say.textContent=n<V.fields.length?fill(V.sayStart,{n,of:V.fields.length}):good===V.fields.length?V.sayGood:fill(V.sayFix,{n:good,of:V.fields.length});if(pic)pic.paint(anim);}
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),box,say);}
-
-/* ---------- timeline: dated roles, and who the person is on a date ---------- */
 const ymd=s=>{const [y,m,d]=s.split("-").map(Number);return y*372+(m-1)*31+(d||1)-1;};
 // a span runs from the first day of its first month to the last day of its last month; an end of null is still open
 const inSpan=(sp,d)=>ymd(sp[0]+(sp[0].length<8?"-01":""))<=d&&(sp[1]==null||d<=ymd(sp[1]+(sp[1].length<8?"-31":"")));
 function fdate(s){const [y,m,d]=s.split("-").map(Number);return (d?d+" ":"")+U.months[m-1]+" "+y;}
-function labTimeline(Lb){const V=Lb.w,[y0]=V.from.split("-").map(Number),[y1]=V.to.split("-").map(Number),N=(y1-y0)*12;let at=V.start;
-  const say=h("p",{class:"mr-say",role:"status"}),open=h("p",{class:"mr-open"}),asks=h("ul",{class:"mr-checks"});
-  const toIdx=s=>{const [y,m]=s.split("-").map(Number);return (y-y0)*12+m-1;},fromIdx=i=>{const y=y0+Math.floor(i/12),m=i%12+1;return y+"-"+String(m).padStart(2,"0")+"-15";};
-  const opens=()=>{const d=ymd(at);return V.roles.filter(r=>r.spans.some(sp=>inSpan(sp,d))).map(r=>r.k);};
-  const pic=picture(Lb,()=>({at,open:opens()}));
-  const val=h("output",null,fdate(at)),inp=h("input",{type:"range",min:"0",max:String(N-1),step:"1",value:String(toIdx(at)),"aria-label":V.dateL,"aria-valuetext":fdate(at),
-    oninput:e=>{at=fromIdx(+e.target.value);upd(true);}});
-  const presets=h("div",{class:"mr-seg",role:"group","aria-label":V.presetL},...V.presets.map(([d,t])=>h("button",{type:"button",onclick:()=>{at=d;upd(true);}},t)));
-  function upd(anim){const o=opens();inp.value=String(toIdx(at));val.textContent=fdate(at);inp.setAttribute("aria-valuetext",fdate(at));
-    [...presets.children].forEach((b,i)=>b.setAttribute("aria-pressed",String(V.presets[i][0]===at)));
-    open.replaceChildren(h("b",null,V.openL+" "),...(o.length?o.map(k=>{const r=V.roles.find(x=>x.k===k);return h("span",{class:"mr-chip",style:"--b:"+r.c},r.t);}):[h("span",null,V.none)]));
-    const yes=a=>a.any?a.any.some(k=>o.includes(k)):a.all.every(g=>g.some(k=>o.includes(k)));
-    asks.replaceChildren(...V.asks.map(a=>h("li",{class:yes(a)?"ok":"no"},a.q+" ",h("b",null,yes(a)?V.yes:V.no))));
-    const hit=V.presets.find(p=>p[0]===at);say.textContent=hit&&hit[2]?hit[2]:fill(V.say,{d:fdate(at),n:o.length});if(pic)pic.paint(anim);}
-  ready().then(()=>upd());upd();return shell(Lb,pic,info(V.prompt),h("div",{class:"mr-sliders"},h("label",{class:"mr-slider"},h("span",null,V.dateL),inp,val)),
-    h("div",{class:"mr-controls"},h("span",{class:"mr-lbl"},V.presetL),presets),open,asks,say);}
+const score2=(tot,mid)=>Math.round(100/(1+Math.pow(2,-(tot-mid))));
+const bandOf=(s,V)=>s>=V.hi?"link":s>=V.lo?"review":"apart";
 
-/* ---------- map: each system's codes to one list, then the test that reads it ---------- */
-function labMap(Lb){const V=Lb.w;let cur=0;const pick=V.lists.map(l=>l.codes.map(()=>null)),ran=V.lists.map(()=>false);
-  const say=h("p",{class:"mr-say",role:"status"}),rows=h("div",{class:"mr-rows"}),log=h("pre",{class:"mr-log","aria-live":"polite"});
-  const pic=picture(Lb,()=>({cur,pick:pick[cur],ran:ran[cur]}));
-  const run=btn(V.run,()=>{ran[cur]=true;draw();upd(true);},"go");
-  function draw(){const l=V.lists[cur];rows.replaceChildren(...l.codes.map((c,i)=>{const p=pick[cur][i],ok=ran[cur]&&p===c.ok,no=ran[cur]&&p!==c.ok;
-    return h("div",{class:"mr-row"+(ok?" ok":no?" no":"")},h("p",{class:"mr-item"},h("span",{class:"mr-sys",style:"--b:"+(c.c||"#64606f")},c.sys)," ",h("code",null,c.v)),
-      seg(l.rows.map(r=>[r[0],r[0]+" · "+r[1]]).concat([["",V.notList]]),p,k=>{pick[cur][i]=k;if(ran[cur]){ran[cur]=false;draw();}upd(true);},c.sys+" "+c.v),
-      ran[cur]?h("p",{class:"mr-why"},h("b",null,ok?U.right:U.wrong)," ",c.why):null);}));
-    log.replaceChildren(...(ran[cur]?l.codes.map((c,i)=>{const p=pick[cur][i],ok=p===c.ok;return h("span",{class:ok?"pass":"fail"},(ok?"PASS ":"FAIL ")+c.sys+": "+c.v+" → "+(p||"?")+"\n");}):[]));}
-  function upd(anim){const l=V.lists[cur],n=pick[cur].filter(p=>p!=null).length,good=l.codes.filter((c,i)=>pick[cur][i]===c.ok).length;run.disabled=n<l.codes.length;
-    say.textContent=ran[cur]?(good===l.codes.length?l.sayAll:fill(l.saySome,{n:good,of:l.codes.length})):(n<l.codes.length?fill(U.placed,{n,of:l.codes.length}):U.ready);if(pic)pic.paint(anim);}
-  const lists=V.lists.length>1?h("div",{class:"mr-controls"},h("span",{class:"mr-lbl"},V.label),seg(V.lists.map((l,i)=>[String(i),l.name]),"0",k=>{cur=+k;draw();upd(true);},V.label)):null;
-  draw();ready().then(()=>upd());return shell(Lb,pic,info(V.prompt),lists,rows,h("div",{class:"mr-controls"},run),log,say);}
+/* ---------- play: a playground with experiments ---------- */
+// Every lab is a playground (kind "play"), one for each film, as the author set on 18 November 2026: the visitor switches, picks and
+// presses, and watches the picture change; each playground has three to five experiments (w.goals), each ticked when the visitor makes
+// it happen, and its end once all are ticked. PLAY[id](Lb, api) gives its state, its controls (built with api.group, api.seg,
+// api.toggle and api.btn), its readouts ([[label, () => value, () => "ok" | "no" | ""]]), its picture's height (vh) and its drawing
+// (draw(ctx, w, hh, k), k running 0 to 1 after each change). api.say(text, tone) says what happened; api.reach(key) ticks an
+// experiment. Start again puts everything back as it was, the ticks included. Ticks are kept in this browser, under "goals".
+const PLAY={};
+function labPlay(Lb){const W=Lb.w,G=W.goals,all=get("goals",{})||{};let got=new Set(all[Lb.id]||[]);
+  const box=h("div",{class:"mr-lab mr-play",style:"--c:"+Lb.c});let P=null,pic=null,rd=[],say=null,list=null,end=null;
+  const api={
+    say:(t,tone)=>{say.className="mr-say"+(tone?" "+tone:"");say.textContent=t;},
+    reach:k=>{if(got.has(k)||!G.some(g=>g[0]===k))return;got.add(k);all[Lb.id]=[...got];set("goals",all);paintGoals(k);},
+    paint:anim=>{if(pic)pic.paint(anim!==false);},
+    refresh:()=>{rd.forEach(([el,f,c])=>{el.querySelector("b").textContent=f();el.className=c?c()||"":"";});},
+    group:label=>{const g=h("div",{class:"mr-controls mr-prow"},label?h("span",{class:"mr-lbl"},label):null);ctrl.append(g);return g;},
+    seg:(row,items,cur,fn,lbl)=>{const s=seg(items,cur,k=>{fn(k);api.refresh();api.paint();},lbl);row.append(s);return s;},
+    toggle:(row,label,on,fn)=>{const b=h("button",{type:"button",class:"mr-btn","aria-pressed":String(!!on),onclick:()=>{const v=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(v));fn(v);api.refresh();api.paint();}},label);row.append(b);return b;},
+    btn:(row,label,fn,cls)=>{const b=btn(label,()=>{fn();api.refresh();api.paint();},cls);row.append(b);return b;}};
+  let ctrl=null;
+  function paintGoals(just){list.replaceChildren(...G.map(([k,t],i)=>h("li",{class:got.has(k)?"ok":""},h("i",{"aria-hidden":"true"},got.has(k)?"✓":String(i+1)),h("span",null,t),got.has(k)?h("span",{class:"sr"}," · "+U.reached):null)));
+    const n=got.size,done=n===G.length;end.replaceChildren(...(done?[h("p",{class:"mr-end"},W.end)]:[]));
+    if(just){const g=G.find(x=>x[0]===just);say.append(h("span",{class:"mr-got"}," "+fill(U.reachedOne,{t:g[1]})));if(done)say.append(h("span",{class:"sr"}," "+W.end));}
+    list.setAttribute("aria-label",U.goals+" · "+fill(U.nOf,{n,of:G.length}));}
+  function build(){box.replaceChildren();rd=[];ctrl=h("div",{class:"mr-ctrl"});say=h("p",{class:"mr-say",role:"status"});list=h("ol",{class:"mr-goals"});end=h("div",{class:"mr-endbox"});
+    const stats=h("div",{class:"mr-stats"});P=PLAY[Lb.id](Lb,api);const vw=1200,vh=P.vh||620;
+    pic=stage(vw,vh,(c,k)=>P.draw(c,vw,vh,k),W.alt||Lb.name);
+    (P.readouts||[]).forEach(([label,f,c])=>{const el=h("p",null,h("b",null,"–"),h("span",null,label));stats.append(el);rd.push([el,f,c]);});
+    const again=btn(U.again,()=>{got=new Set();all[Lb.id]=[];set("goals",all);build();api.say(W.start);paintGoals();},"sm mr-again");
+    box.append(h("div",{class:"mr-pic"},pic.el),info(W.prompt),h("div",{class:"mr-goalbox"},h("p",{class:"mr-gh"},U.goals),list),ctrl,stats,say,end,h("div",{class:"mr-foot"},again));
+    api.refresh();ready().then(()=>pic.paint(false));}
+  build();api.say(W.start);paintGoals();return box;}
+// a result line under a picture: a tag, washed green or red, with its tick or cross
+function verdict(ctx,x,y,t,good,k,maxW){const ww=tag(ctx,x,y,t,{size:24,wash:good?"ok":"no",washA:0.3,maxW:maxW||900});mark(ctx,x+ww+30,y-2,30,good,k);return ww;}
 
-const BUILD={sort:labSort,pick:labPick,steps:labSteps,compose:labCompose,test:labTest,match:labMatch,bands:labBands,survive:labSurvive,timeline:labTimeline,map:labMap};
-L.BUILD=BUILD;L.PIX=PIX;L.lib={h,seg,stage,picture,shell,info,btn,fill,num,dec,tx,fit,wrap,lines,tag,card,linh,tick,cross,mark,pencil,wash,head,C,CI,OK,NO};
+/* ---------- 1 · One person, many roles: five records, one person ---------- */
+// Linh's five records, kept apart, folded into one system, or each pointed to one person. Each action says what that way does.
+PLAY.five_records=(Lb,api)=>{const W=Lb.w,S={way:"apart",act:null};const okOf=a=>W.ok[a].includes(S.way);
+  api.seg(api.group(W.wayL),W.ways,S.way,k=>{S.way=k;S.act=null;api.say(W.ways.find(x=>x[0]===k)[1]+".");},W.wayL);
+  const r=api.group(W.actL);W.acts.forEach(([a,t])=>api.btn(r,t,()=>{S.act=a;const good=okOf(a);api.say(W.res[a][S.way],good?"ok":"no");if(good)api.reach(a==="apply"?"transcript":a);}));
+  const read=[[W.read.recs,()=>S.way==="one"?"1":"5"],[W.read.people,()=>S.way==="apart"?"5":"1",()=>S.way==="apart"?"no":"ok"],[W.read.roles,()=>(S.way==="one"?"1":"4")+" / 4",()=>S.way==="one"?"no":"ok"]];
+  return {vh:640,readouts:read,draw(ctx,w,hh,k){const fx=210,fy=hh-90,rx=430,rw=w-rx-40,ch=84,gap=12;
+    linh(ctx,fx,fy,0.5,S.way==="apart"?[]:["student","tutor","researcher","alumna"],{a:S.way==="apart"?0.55:1});
+    tx(ctx,W.person,fx,hh-40,{size:24,w:700,align:"center",col:S.way==="apart"?WC_MUTED:WC_DARK});
+    W.recs.forEach((c,i)=>{const y=24+i*(ch+gap),gone=S.way==="one"&&(c.role==="tutor"||c.role==="researcher");
+      withA(ctx,gone?0.4:1,()=>rec(ctx,rx,y,rw,ch,c,{seed:300+i,dashed:gone}));
+      if(gone){pencil(ctx,[[rx+16,y+ch-14],[rx+rw-16,y+14]],{col:NO,lw:3,a:0.8,seed:310+i});tag(ctx,rx+rw-20,y+ch-8,W.folded,{size:18,align:"right",wash:"no",washA:0.25});}
+      if(S.way==="linked")wc_link(ctx,rx-6,y+ch/2,fx+70,fy-200+i*22,C(c.role),{p:k,a:0.75,lw:3});
+      if(S.way==="one"&&!gone)wc_link(ctx,rx-6,y+ch/2,fx+70,fy-150,WC_PENCIL,{p:k,a:0.5,lw:2.4});});
+    if(S.act){const good=okOf(S.act),t=W.acts.find(a=>a[0]===S.act)[2];withA(ctx,k,()=>verdict(ctx,24,40,t,good,k,360));}}};};
+
+/* ---------- 2 · Who is it?: same person? ---------- */
+// three pairs, each with its fields' weights; a what-if per pair; a call for each; HR's check for the second; and one step to unlink
+PLAY.same_person=(Lb,api)=>{const W=Lb.w,M=W.msg,S={i:0,alt:[false,false,false],dec:[null,null,null],asked:false,hr:false};
+  const rows=i=>W.pairs[i].rows.map(r=>S.alt[i]&&r.alt?Object.assign({},r,r.alt):r),tot=i=>rows(i).reduce((a,r)=>a+r.w,0),sc=i=>score2(tot(i),W.mid),bd=i=>bandOf(sc(i),W);
+  const bname=i=>W.bands[bd(i)];
+  const g1=api.group(W.pairL);let altB=null,hrB=null;
+  api.seg(g1,W.pairs.map((p,i)=>[String(i),p.t]),"0",k=>{S.i=+k;altB.textContent=W.pairs[S.i].altT;altB.setAttribute("aria-pressed",String(S.alt[S.i]));hrB.disabled=S.i!==1;api.say(fill(M.pair,{t:W.pairs[S.i].t,s:sc(S.i),b:bname(S.i)}));},W.pairL);
+  const g2=api.group();altB=api.toggle(g2,W.pairs[0].altT,false,v=>{S.alt[S.i]=v;api.say(fill(v?M.alt:M.altOff,{s:sc(S.i),b:bname(S.i)}));});
+  const g3=api.group();W.calls.forEach(([c,t])=>api.btn(g3,t,()=>call(c),c==="link"?"go":""));
+  hrB=api.btn(g3,W.hrB,()=>{if(!S.asked){api.say(M.p1.hrFirst,"warn");return;}S.hr=true;api.say(M.p1.hr,"ok");});hrB.disabled=true;
+  api.btn(g3,W.undoB,()=>{const j=S.dec.findIndex(d=>d==="link");if(j<0){api.say(M.nothing,"warn");return;}S.dec[j]=null;api.say(M.undo,"ok");api.reach("undo");},"sm");
+  function call(c){const i=S.i;S.dec[i]=c;
+    if(i===0){api.say(M.p0[c],c==="apart"?"no":"ok");if(c==="link"&&bd(0)==="link")api.reach("auto");}
+    else if(i===1){if(c==="review"){S.asked=true;api.say(M.p1.review,"ok");}else if(c==="link"){if(S.asked&&S.hr){api.say(M.p1.link,"ok");api.reach("typo");}else api.say(M.p1.guess,"no");}else api.say(M.p1.apart,"no");}
+    else{api.say(M.p2[c],c==="link"?"no":"ok");if(c==="apart")api.reach("aisha");}}
+  return {vh:660,readouts:[[W.read.score,()=>String(sc(S.i))],[W.read.band,()=>bname(S.i)],[W.read.kept,()=>String(S.dec.filter(Boolean).length)]],
+    draw(ctx,w,hh,k){const p=W.pairs[S.i],rs=rows(S.i),s=sc(S.i),d=S.dec[S.i],ok=d==null?null:S.i===0?d!=="apart":S.i===1?(d==="review"||(d==="link"&&S.asked&&S.hr)):d==="apart";
+      PIX.match(ctx,w,hh,{p,rows:rs,score:s,call:d,ok},{w:{lo:W.lo,hi:W.hi,bands:W.bands,calls:W.calls}},k);}};};
+
+/* ---------- 3 · Which value wins ---------- */
+// Linh's master record, field by field: one order for every field, the newest sent, or a rule for each field; HR's resend makes its old
+// values the newest; a dry run lists what a new rule would change
+PLAY.which_value=(Lb,api)=>{const W=Lb.w,M=W.msg,S={rule:"order",resent:false,dry:false};
+  const win=f=>{const v=S.rule==="newest"?f.newest[S.resent?1:0]:f[S.rule];return [].concat(v);};
+  const good=(f,i)=>{const w=win(f);return W.ok[i]==="all"?w.length===f.vals.length:w.length===1&&w[0]===W.ok[i];};
+  const right=()=>W.fields.filter(good).length;
+  const check=()=>{if(S.rule==="field"){api.reach("name");api.reach("emails");if(S.resent)api.reach("resend");}else if(S.rule==="order"&&S.resent)api.reach("resend");};
+  api.seg(api.group(W.ruleL),W.rules,S.rule,k=>{S.rule=k;S.dry=false;api.say(k==="newest"&&S.resent?M.newestAfter:M[k],k==="field"?"ok":k==="order"?"warn":S.resent?"no":"warn");check();},W.ruleL);
+  const g=api.group();
+  api.btn(g,W.resendB,()=>{S.resent=true;S.dry=false;const bad=S.rule==="newest";api.say(M.resend+(bad?M.resendBad:M.resendOk),bad?"no":"ok");check();});
+  api.btn(g,W.dryB,()=>{if(S.rule!=="field"){api.say(M.dryCode,"warn");return;}S.dry=true;api.say(M.dry,"ok");api.reach("dry");});
+  return {vh:620,readouts:[[W.read.right,()=>right()+" / "+W.fields.length,()=>right()===W.fields.length?"ok":"no"],[W.read.where,()=>W.whereV[S.rule]]],
+    draw(ctx,w,hh,k){const F=W.fields;linh(ctx,150,hh-26,0.44,["student","tutor","researcher","alumna"]);
+      const x0=310,cw=w-x0-20;card(ctx,x0,20,cw,hh-40,{kind:"sheet",seed:95});tx(ctx,W.title,x0+30,72,{size:30,w:800,col:WC_DARK});
+      if(S.dry)tag(ctx,x0+cw-30,62,"1,284".replace(",",L.lang==="es"?".":","),{size:24,align:"right",wash:"amber",washA:0.35});
+      const top=96,rh=(hh-top-34)/F.length,vx=x0+240,vmax=cw-240-70;
+      F.forEach((f,i)=>{const y=top+i*rh,mid=y+rh/2,ws=win(f);pencil(ctx,[[x0+20,y],[x0+cw-20,y]],{a:0.22,lw:1.6,seed:i+11});
+        tx(ctx,f.f,x0+30,mid+9,{size:fit(ctx,f.f,196,26,800,null,17),w:800,col:WC_DARK});
+        if(ws.length>1){let x=vx;const mw=(vmax-24)/ws.length;ws.forEach(j=>{const v=f.vals[j],Sx=W.src[v.src]||{};x+=tag(ctx,x,mid,v.v,{size:fit(ctx,v.v,mw-40,21,700,null,15),wash:Sx.c,maxW:mw})+8;});}
+        else{const v=f.vals[ws[0]],Sx=W.src[v.src]||{},z=fit(ctx,v.v,vmax-230,26,700,null,17),vw2=tw(ctx,v.v,z,700)+16,changed=S.resent&&S.rule==="newest"&&v.src==="hr";
+          withA(ctx,changed?Math.max(0.35,k):1,()=>{tx(ctx,v.v,vx,mid+9,{size:z,w:700});const mw=Math.max(120,vmax-vw2);tag(ctx,vx+vw2,mid,Sx.t,{size:fit(ctx,Sx.t,mw-40,21,700,null,15),wash:Sx.c,maxW:mw});});}
+        mark(ctx,x0+cw-40,mid-2,30,good(f,i),k);});}};};
+
+/* ---------- 4 · Roles come and go: who is she on a date? ---------- */
+PLAY.on_a_date=(Lb,api)=>{const W=Lb.w,M=W.msg,S={keep:"status",at:null};
+  const openOn=s=>{const d=ymd(s);return W.roles.filter(r=>r.spans.some(sp=>inSpan(sp,d))).map(r=>r.k);};
+  const open=()=>openOn(S.keep==="status"||!S.at?W.today:S.at);
+  const has=k=>open().includes(k);
+  const look=()=>{if(!S.at)return;if(S.keep==="status"){api.say(fill(M.statusAt,{d:fdate(S.at)})+(S.at<W.today.slice(0,4)+"-01-01"?" "+M.statusLast:""),"no");return;}
+    api.say(M[S.at],"ok");api.reach({"2026-03-31":"census","2025-03-31":"lastyear","2026-01-15":"between","2027-01-15":"ends"}[S.at]);};
+  api.seg(api.group(W.keepL),W.keeps,S.keep,k=>{S.keep=k;if(S.at)look();else api.say(M[k]);},W.keepL);
+  api.seg(api.group(W.dateL),W.dates,null,k=>{S.at=k;look();},W.dateL);
+  const yn=b=>b?W.yes:W.no;
+  return {vh:600,readouts:[[W.read.student,()=>yn(has("student"))],[W.read.works,()=>yn(has("student")&&(has("tutor")||has("researcher")))],[W.read.alum,()=>yn(has("alumna")&&has("student"))]],
+    draw(ctx,w,hh,k){const at=S.keep==="status"||!S.at?W.today:S.at;
+      PIX.timeline(ctx,w,hh,{at,open:open()},{w:{from:W.from,to:W.to,roles:W.roles}},k);
+      if(S.keep==="status"){withA(ctx,0.92,()=>tag(ctx,300,24,W.status+(S.at?" · "+fdate(S.at):""),{size:22,wash:"no",washA:0.28}));}}};};
+
+/* ---------- 5 · Lists everyone uses: one list, every code ---------- */
+PLAY.map_codes=(Lb,api)=>{const W=Lb.w,M=W.msg,S={home:"sheet",map:false,counted:false,renamed:false,def:false,last:null};
+  const homeCheck=()=>{if(S.home==="table"&&S.map)api.reach("home");};
+  api.seg(api.group(W.homeL),W.homes,S.home,k=>{S.home=k;S.renamed=false;S.def=false;api.say(M[k],k==="table"?"ok":"warn");homeCheck();},W.homeL);
+  api.toggle(api.group(),W.mapT,false,v=>{S.map=v;S.counted=false;api.say(v?M.mapOn:M.mapOff,v?"ok":"warn");homeCheck();});
+  const g=api.group();
+  api.btn(g,W.countB,()=>{S.counted=true;S.last="count";api.say(S.map?M.countMap:M.countNo,S.map?"ok":"no");if(S.map)api.reach("once");});
+  api.btn(g,W.renameB,()=>{S.renamed=true;S.last="rename";const ok=S.home==="table";api.say(ok?M.renameTable:M.renameSheet,ok?"ok":"no");if(ok)api.reach("rename");});
+  api.btn(g,W.defB,()=>{S.def=true;S.last="def";const ok=S.home==="table";api.say(ok?M.defTable:M.defSheet,ok?"ok":"no");if(ok)api.reach("def");});
+  return {vh:640,readouts:[[W.read.typed,()=>S.home==="table"?"1":"3",()=>S.home==="table"?"ok":"no"],[W.read.counted,()=>S.map?"1":"3",()=>S.map?"ok":"no"]],
+    draw(ctx,w,hh,k){const lx=w-470,lw=446,top=24,rh=76;
+      W.codes.forEach((c,i)=>{const y=top+30+i*rh;tx(ctx,c.sys,40,y-8,{size:20,w:600,col:WC_MUTED});const t1=tag(ctx,40,y+22,c.v,{size:24,f:"mono",w:500,wash:c.c,washA:0.3,maxW:lx-200});
+        if(S.map)wc_link(ctx,40+t1+6,y+22,lx-6,top+92,OK,{p:k,a:0.75,lw:3});});
+      card(ctx,lx,top,lw,150,{kind:"sheet",seed:140,dashed:S.home!=="table"});tx(ctx,W.list,lx+lw/2,top+44,{size:24,w:800,align:"center",col:WC_DARK});
+      tag(ctx,lx+24,top+96,W.row[0],{size:24,f:"mono",w:500,wash:"amber",washA:0.3});tx(ctx,W.row[1],lx+110,top+104,{size:24,w:700});
+      // the count: one row for Viet Nam, or three
+      const cy=top+4*rh+50;tx(ctx,W.countL,40,cy,{size:22,w:800,col:WC_DARK});
+      if(S.counted){const ns=S.map?["Viet Nam"]:["Vietnam","Viet Nam","VN","VNM"];let x=40;ns.forEach(n=>{x+=tag(ctx,x,cy+44,n+" · 1",{size:22,wash:S.map?"ok":"no",washA:0.3})+10;});mark(ctx,x+24,cy+42,28,S.map,k);}
+      // the role list: the tutor's row, renamed or not
+      const ry=top+180;card(ctx,lx,ry,lw,hh-ry-24,{kind:"sheet",seed:141,dashed:S.home!=="table"});tx(ctx,W.roleList,lx+lw/2,ry+42,{size:22,w:800,align:"center",col:WC_DARK});
+      tag(ctx,lx+24,ry+92,W.roleRow,{size:22,f:"mono",w:500,wash:"tutor",washA:0.3});
+      if(S.renamed&&S.home==="table"){withA(ctx,0.6,()=>tx(ctx,W.oldName+" · "+W.ended,lx+24,ry+150,{size:fit(ctx,W.oldName+" · "+W.ended,lw-48,22,600,null,15),w:600,col:WC_MUTED}));
+        withA(ctx,k,()=>tx(ctx,W.newName+" · "+W.from,lx+24,ry+190,{size:fit(ctx,W.newName+" · "+W.from,lw-48,22,700,null,15),w:700,col:OK}));}
+      else{tx(ctx,S.renamed?W.newName:W.oldName,lx+24,ry+150,{size:22,w:700});if(S.renamed)cross(ctx,lx+lw-44,ry+144,28,k);}
+      if(S.def){const ok=S.home==="table";verdict(ctx,lx+24,hh-64,"DEF",ok,k,200);}}};};
+
+/* ---------- 6 · For this purpose only ---------- */
+PLAY.may_use=(Lb,api)=>{const W=Lb.w,M=W.msg,S={tags:false,wish:false,pol:false,last:null,good:null};
+  const g=api.group(W.setL);
+  api.toggle(g,W.tagsT,false,v=>{S.tags=v;S.last=null;api.say(v?M.tagsOn:M.tagsOff);});
+  api.toggle(g,W.wishT,false,v=>{S.wish=v;S.last=null;api.say(v?M.wishOn:M.wishOff);});
+  api.toggle(g,W.polT,false,v=>{S.pol=v;S.last=null;api.say(v?M.polOn:M.polOff);});
+  const a=api.group(W.actL),go=(key,ok,yes,no,goal)=>{S.last=key;S.good=ok;api.say(ok?yes:no,ok?"ok":"no");if(ok)api.reach(goal);};
+  api.btn(a,W.topB,()=>go("top",S.tags&&S.pol,M.topOk,M.topNo,"results"));
+  api.btn(a,W.appealB,()=>{const ok=S.wish&&S.pol;S.last="appeal";S.good=ok;api.say(ok?M.appealOk:S.wish?M.appealPol:M.appealRec,ok?"ok":"no");if(ok)api.reach("no");});
+  api.btn(a,W.colB,()=>go("col",S.tags,M.colOk,M.colNo,"test"));
+  api.btn(a,W.askB,()=>go("ask",S.tags&&S.wish,M.askOk,M.askNo,"request"));
+  return {vh:620,readouts:[[W.read.policies,()=>S.pol?"2":"0"],[W.read.reached,()=>S.wish&&S.pol?W.no:W.yes,()=>S.wish&&S.pol?"ok":"no"]],
+    draw(ctx,w,hh,k){linh(ctx,170,hh-26,0.44,["student","tutor","researcher","alumna"]);const rx=380,rw=430,ys=[40,240];
+      W.recs.forEach((c,i)=>{rec(ctx,rx,ys[i],rw,110,c,{seed:160+i});if(S.tags)withA(ctx,k,()=>tag(ctx,rx+rw-16,ys[i]+138,W.tagW[i],{size:20,align:"right",wash:"amber",washA:0.3}));});
+      const ax=w-150,ay=230;wc_envelope(ctx,ax,ay,1.2,0);tx(ctx,W.appeal,ax,ay+76,{size:24,w:700,align:"center",col:WC_DARK});
+      const held=S.wish&&S.pol;if(S.last==="appeal"){const tip=wc_link(ctx,ax-80,ay,rx+rw+8,ys[0]+56,C("donor"),{p:held?k*0.55:k,a:0.8,lw:3});if(held&&tip)cross(ctx,tip[0],tip[1],34,k);}
+      const wp=S.wish?[24,66]:[rx,ys[1]+176],ww=tag(ctx,wp[0],wp[1],W.wish,{size:24,wash:"donor",washA:0.35,maxW:S.wish?330:rw});
+      if(S.wish)wc_link(ctx,24+ww/2,wp[1]+26,160,hh-320,C("donor"),{p:k,vertical:true,a:0.6});
+      if(S.pol)tag(ctx,ax,ay-110,W.policy,{size:20,align:"center",wash:"ok",washA:0.3});
+      if(S.last&&S.last!=="appeal"){const t=W[{top:"topB",col:"colB",ask:"askB"}[S.last]];withA(ctx,k,()=>verdict(ctx,rx,hh-50,t,S.good,k,rw+80));}}};};
+
+/* ---------- 7 · One person, many systems: search before you create ---------- */
+PLAY.search_first=(Lb,api)=>{const W=Lb.w,M=W.msg,S={mode:"create",on:{dob:false,email:false,num:false},app:0,ran:false,out:null,nums:2,wait:0};
+  const scores=a=>a.cands.map(c=>{let t=c.w.name;W.given.forEach(([g])=>{if(S.on[g])t+=c.w[g];});const s=Math.max(0,Math.min(99,Math.round(W.base+W.scale*t)));return {c,s,b:bandOf(s,W)};});
+  const decide=a=>{const sc=scores(a),best=sc.reduce((m,x)=>x.s>m.s?x:m,sc[0]),links=sc.filter(x=>x.b==="link");
+    if(links.length===1)return ["add",links[0],sc];if(sc.some(x=>x.b!=="apart"))return ["review",null,sc];return ["create",null,sc];};
+  api.seg(api.group(W.modeL),W.modes,S.mode,k=>{S.mode=k;S.ran=false;api.say(M[k]);},W.modeL);
+  const g=api.group(W.givenL);W.given.forEach(([k2,t])=>api.toggle(g,t,false,v=>{S.on[k2]=v;S.ran=false;const ls=W.given.filter(([x])=>S.on[x]).map(([,y])=>y);api.say(ls.length?fill(M.on,{list:[W.nameL].concat(ls).join(", ")}):M.onlyName);}));
+  const r=api.group();W.apps.forEach((a,i)=>api.btn(r,a.b,()=>{S.app=i;S.ran=true;
+    if(S.mode==="create"){S.out=["create",null,[]];if(a.key==="linh"){S.nums++;api.say(M.linhCreate,"no");}else api.say(M.otherCreateBlind,"warn");return;}
+    const d=decide(a);S.out=d;
+    if(d[0]==="review"){S.wait++;api.say(M.review,"ok");api.reach("wait");}
+    else if(a.key==="linh"){if(d[0]==="add"&&d[1].c.id==="P-10482"){api.say(M.linhAdd,"ok");api.reach("role");}else{S.nums++;api.say(M.linhCreate,"no");}}
+    else{if(d[0]==="create"){api.say(M.otherCreate,"ok");api.reach("other");}else api.say(M.otherAdd,"no");}}));
+  return {vh:620,readouts:[[W.read.numbers,()=>String(S.nums),()=>S.nums>2?"no":""],[W.read.waiting,()=>String(S.wait)]],
+    draw(ctx,w,hh,k){const a=W.apps[S.app],ax=24,aw=430;card(ctx,ax,20,aw,hh-40,{kind:"card",role:"applicant",sw:tw(ctx,a.t,26,800)+36,seed:190});
+      tx(ctx,a.t,ax+30,64,{size:fit(ctx,a.t,aw-60,26,800,null,17),w:800,col:WC_DARK});
+      [["name",W.nameL]].concat(W.given).forEach(([g2,lab],i)=>{const on=g2==="name"||(S.mode==="search"&&S.on[g2]),t=lab+": "+a.given[g2];withA(ctx,on?1:0.38,()=>tag(ctx,ax+24,134+i*76,t,{size:fit(ctx,t,aw-88,21,700,null,15),wash:on?"applicant":null,washA:0.35,maxW:aw-48}));});
+      const cx=500,cw=w-cx-24,ch=130;
+      if(S.mode==="create"){card(ctx,cx,60,cw,ch,{kind:"card",dashed:true,seed:197});tx(ctx,W.outcomes.create,cx+cw/2,60+ch/2+10,{size:28,w:800,align:"center",col:WC_DARK});
+        wc_link(ctx,ax+aw+4,150,cx-6,60+ch/2,WC_PENCIL,{p:k,a:0.7,lw:3});if(S.ran)verdict(ctx,cx,hh-56,W.outcomes.create,a.key!=="linh",k,cw-60);return;}
+      const sc=scores(a);sc.forEach(({c,s,b},i)=>{const y=34+i*(ch+28),col=b==="link"?OK:b==="review"?CI("applicant"):WC_MUTED;card(ctx,cx,y,cw,ch,{kind:"card",seed:195+i});
+        tx(ctx,c.title+" · "+c.id,cx+26,y+46,{size:fit(ctx,c.title+" · "+c.id,cw-190,26,800,null,17),w:800,col:WC_DARK});tx(ctx,c.note,cx+26,y+84,{size:fit(ctx,c.note,cw-260,22,600,null,15),w:600,col:WC_MUTED});
+        tx(ctx,String(s),cx+cw-30,y+62,{size:44,w:800,align:"right",col});tag(ctx,cx+cw-26,y+104,W.bands[b],{size:19,align:"right",wash:b==="link"?"ok":b==="review"?"amber":null,washA:0.3});
+        wc_link(ctx,ax+aw+4,150,cx-6,y+ch/2,b==="link"?OK:WC_PENCIL,{p:k,a:b==="apart"?0.22:0.7,lw:3});});
+      if(S.ran&&S.out){const [o,best]=S.out,good=o===a.want||o==="review",ot=fill(W.outcomes[o],{who:best?best.c.title+" ("+best.c.id+")":""});verdict(ctx,cx,hh-56,ot,good,k,cw-60);}}};};
+
+/* ---------- 8 · A hub at work: Monday at the hub ---------- */
+PLAY.one_review=(Lb,api)=>{const W=Lb.w,M=W.msg,S={step:0,flip:false,ai:false,linked:false,pub:false,fri:false,undone:false,waiting:8};
+  const m=api.group(W.monL);
+  api.btn(m,W.openB,()=>{S.step=Math.max(S.step,1);api.say(M.open);});
+  api.toggle(m,W.flipT,false,v=>{if(!S.step){api.say(M.openFirst,"warn");return;}S.flip=v;S.step=Math.max(S.step,2);api.say(v?M.flipOn:M.flipOff,"ok");if(v)api.reach("flip");});
+  api.btn(m,W.aiB,()=>{if(!S.step){api.say(M.openFirst,"warn");return;}S.ai=true;S.step=3;api.say(M.ai,"ok");});
+  api.btn(m,W.linkB,()=>{if(!S.step){api.say(M.openFirst,"warn");return;}S.linked=true;S.step=4;if(S.waiting===8)S.waiting=7;api.say(S.ai?M.linkAi:M.linkNoAi,"ok");api.reach("reason");if(S.ai)api.reach("ai");},"go");
+  api.btn(m,W.pubB,()=>{if(!S.linked){api.say(M.linkFirst,"warn");return;}S.pub=true;S.step=5;api.say(M.pub,"ok");api.reach("publish");});
+  const f=api.group(W.friL);
+  api.btn(f,W.checkB,()=>{S.fri=true;S.undone=false;api.say(M.check,"warn");});
+  api.btn(f,W.unlinkB,()=>{if(!S.fri){api.say(M.checkFirst,"warn");return;}S.undone=true;api.say(M.unlink,"ok");api.reach("undo");});
+  return {vh:860,readouts:[[W.read.score,()=>S.flip?"93":"74"],[W.read.waiting,()=>String(S.waiting)],[W.read.wrong,()=>S.fri?(S.undone?"0":"1")+" / 50":"–",()=>S.fri?(S.undone?"ok":"no"):""]],
+    draw(ctx,w,hh,k){const hub=700;ctx.save();ctx.beginPath();ctx.rect(0,0,w,hub);ctx.clip();PIX.hub(ctx,w,hub,{step:S.step},{w:{pic:W.pic}},k);ctx.restore();
+      if(S.flip)withA(ctx,k,()=>tag(ctx,450,62,W.pic.flip,{size:22,wash:"ok",washA:0.35,maxW:330}));
+      const fx=24,fy=hub+6,fw=w-48;withA(ctx,S.fri?1:0.35,()=>{card(ctx,fx,fy,fw,hh-fy-20,{kind:"card",wash:S.fri?"steward":null,washA:0.18,seed:290});
+        tx(ctx,S.fri?W.pic.friday:W.friL,fx+30,fy+56,{size:fit(ctx,W.pic.friday,fw-60,28,800,null,18),w:800,col:WC_DARK});
+        tx(ctx,W.pic.limit,fx+30,fy+100,{size:fit(ctx,W.pic.limit,fw/2,22,600,null,15),w:600,col:WC_MUTED});});
+      if(S.undone)verdict(ctx,fx+fw/2+20,fy+92,W.unlinkB,true,k,fw/2-120);}};};
+
+/* ---------- 9 · Kept, not cleaned: clean up, or check at entry? ---------- */
+PLAY.cleanup_or_entry=(Lb,api)=>{const W=Lb.w,M=W.msg,S={pick:"nothing",ran:false,meas:false,alert:false};
+  api.seg(api.group(W.wayL),W.opts,S.pick,k=>{S.pick=k;S.ran=false;api.say(M[k]);},W.wayL);
+  api.toggle(api.group(),W.measT,false,v=>{S.meas=v;S.alert=false;api.say(v?M.measOn:M.measOff,v?"ok":"warn");});
+  const g=api.group();
+  api.btn(g,W.runB,()=>{S.ran=true;const p=S.pick;api.say(M["run"+p[0].toUpperCase()+p.slice(1)],p==="entry"?"ok":"no");if(p==="cleanup")api.reach("back");if(p==="entry"){api.reach("under");api.reach("phd");}},"go");
+  api.btn(g,W.alertB,()=>{S.alert=true;api.say(S.meas?M.alertOn:M.alertOff,S.meas?"ok":"no");if(S.meas)api.reach("alert");});
+  const end=()=>{const l=W.chart.lines[S.pick];return l[l.length-1][1];};
+  return {vh:600,readouts:[[W.read.waiting,()=>S.ran?num(end()):"–",()=>S.ran?(S.pick==="entry"?"ok":"no"):""],[W.read.projects,()=>S.ran?(S.pick==="cleanup"?"2":"0"):"–"]],
+    draw(ctx,w,hh,k){const G=W.chart,pick=S.ran?S.pick:"__";PIX.chart(ctx,w,hh,{pick},{w:{chart:G}},k);
+      if(S.meas){const t=W.measures;withA(ctx,0.95,()=>tag(ctx,w-24,40,t,{size:20,align:"right",wash:S.alert?"ok":"steward",washA:0.3,maxW:520}));}
+      if(S.ran&&S.pick==="entry")withA(ctx,k,()=>tag(ctx,140,70,W.phd,{size:22,wash:"student",washA:0.3,maxW:640}));}};};
+
+const BUILD={play:labPlay};
+L.BUILD=BUILD;L.PIX=PIX;L.lib={h,seg,stage,shell,info,btn,fill,num,dec,tx,fit,wrap,lines,tag,card,linh,tick,cross,mark,pencil,wash,head,C,CI,OK,NO};
 
 /* ---------- the labs page: one rail of every lab of the series, in film order, one lab at a time; no film level ---------- */
 const labsApp=document.getElementById("series-labs");

@@ -110,6 +110,8 @@ Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/docu
 - [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 - [Ideas that last, features you test](../films/documents-as-data/2-ideas-that-last/) — `ideas-that-last`
 
+Labs and assessments: [site/assets/documents-as-data/learn.en.js](../site/assets/documents-as-data/learn.en.js), [site/assets/documents-as-data/learn.es.js](../site/assets/documents-as-data/learn.es.js)
+
 ## Analytics engineering
 
 Module: `analytics-engineering` · [metadata](analytics-engineering/module.json)
@@ -224,6 +226,8 @@ Source: [films/business-architecture-for-data](../films/business-architecture-fo
 - [Who creates it, who owns it](../films/business-architecture-for-data/3-who-creates-it-who-owns-it/) — `who-creates-it-who-owns-it`
 - [Processes, as deep as data needs](../films/business-architecture-for-data/4-processes-as-deep-as-data-needs/) — `processes-as-deep-as-data-needs`
 - [Rules and expectations the business owns](../films/business-architecture-for-data/5-rules-and-expectations-the-business-owns/) — `rules-and-expectations-the-business-owns`
+
+Labs and assessments: [site/assets/business-architecture-for-data/learn.en.js](../site/assets/business-architecture-for-data/learn.en.js), [site/assets/business-architecture-for-data/learn.es.js](../site/assets/business-architecture-for-data/learn.es.js)
 
 ### Data architecture
 
@@ -364,6 +368,8 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Copies that keep the rules](../films/only-what-you-may-see/7-copies-that-keep-the-rules/) — `copies-that-keep-the-rules`
 - [Proof it held](../films/only-what-you-may-see/8-proof-it-held/) — `proof-it-held`
 
+Labs and assessments: [site/assets/only-what-you-may-see/learn.en.js](../site/assets/only-what-you-may-see/learn.en.js), [site/assets/only-what-you-may-see/learn.es.js](../site/assets/only-what-you-may-see/learn.es.js)
+
 ### Kept for a reason
 
 Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept-for-a-reason/`
@@ -492,6 +498,8 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 - [Everyone at the table](../films/making-the-case/3-everyone-at-the-table/) — `everyone-at-the-table`
 - [One list, not twenty](../films/making-the-case/4-one-list-not-twenty/) — `one-list-not-twenty`
 
+Labs and assessments: [site/assets/making-the-case/learn.en.js](../site/assets/making-the-case/learn.en.js), [site/assets/making-the-case/learn.es.js](../site/assets/making-the-case/learn.es.js)
+
 ### Architecture that keeps up
 
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
@@ -499,6 +507,8 @@ Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/)
 - [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
 - [One map, in the repo](../films/architecture-that-keeps-up/2-one-map-in-the-repo/) — `one-map`
 - [A path for every provider](../films/architecture-that-keeps-up/3-a-path-for-every-provider/) — `a-path-for-every-provider`
+
+Labs and assessments: [site/assets/architecture-that-keeps-up/learn.en.js](../site/assets/architecture-that-keeps-up/learn.en.js), [site/assets/architecture-that-keeps-up/learn.es.js](../site/assets/architecture-that-keeps-up/learn.es.js)
 
 ### Small steps, measured
 

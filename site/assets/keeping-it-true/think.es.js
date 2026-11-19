@@ -11,7 +11,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   "watch":{q:"¿Por qué notar la deriva es un buen primer trabajo para un agente de IA?",
     opts:[{t:"Puede decidir qué definición es la correcta, porque las leyó todas."},{t:"Puede leer cada consulta, definición y valor nuevo, sin cansarse, y mostrar la evidencia.",ok:true},{t:"Puede leer cada consulta y definición, y corregir las que derivaron esa misma noche.",near:true}],
     why:"Notar es tedioso para las personas y barato para las máquinas. Decidir qué significa cada cosa para la organización sigue siendo tarea de las personas."},
-  "decide":{stop:"review",q:"El borrador del agente cambia el glosario, el modelo y las pruebas. ¿Quién lo aprueba?",
+  "decide":{stop:"change",q:"El borrador del agente cambia el glosario, el modelo y las pruebas. ¿Quién lo aprueba?",
     opts:[{t:"Nadie: si las pruebas pasan, el borrador se fusiona."},{t:"El responsable del modelo, que aprueba también glosario y pruebas.",near:true},{t:"Mei el significado, Noor el modelo, y el equipo de datos el código.",ok:true}],
     why:"El agente recomienda; las personas aprueban; las pruebas comprueban el resultado. Mei decide primero el significado en el glosario, Noor aprueba el modelo, y el equipo de datos revisa el código."},
   "e2e":{q:"Este año se redefinió la tasa de finalización. ¿Qué pasa con el informe del año pasado?",

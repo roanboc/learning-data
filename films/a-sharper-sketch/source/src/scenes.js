@@ -8,7 +8,7 @@ function E3(keys,pos,extra,s){const E={};keys.forEach(k=>{if(!pos[k])return;E[k]
 function lay(pos,k,cx,cy){const o={};Object.keys(pos).forEach(n=>{o[n]=[cx+(pos[n][0]-960)*k,cy+(pos[n][1]-510)*k];});return o;}
 const pulse=(t,t0,d)=>t>t0&&t<t0+(d||2.2)?Math.sin(Math.PI*(t-t0)/(d||2.2)):0;
 // a short-lived tag: visible from t0 for d seconds
-const brief=(t,t0,d)=>fin(t,t0,0.4)*(1-sstep(t0+(d||3),t0+(d||3)+0.5,t));
+const brief3=(t,t0,d)=>fin(t,t0,0.4)*(1-sstep(t0+(d||3),t0+(d||3)+0.5,t));
 function slideIn(t,t0,t1){return (1-ease(clamp((t-t0)/1.2,0,1)))*1900+(t1!=null?ease(clamp((t-t1)/1.1,0,1))*-1900:0);}
 
 // the finished sketch, v2: every box, its line and its pin
@@ -17,29 +17,173 @@ function sketchV2(ctx,o){o=o||{};const pos=o.pos||L3,s=o.s||1,E=E3(Object.keys(L
   Object.keys(E).forEach(k=>{if(o.pins)Object.assign(E[k],{pin:PINS[k],pinA:o.pinA?o.pinA(k):1,pinP:o.pinP?o.pinP(k):0});if(o.hi)E[k].hi=o.hi(k);if(o.a)E[k].a=o.a(k);if(o.extra&&o.extra[k])Object.assign(E[k],o.extra[k]);});
   return diagram(ctx,E,L3R.map(r=>r.concat([{}])));}
 
-/* ---------- 0. The sketch we drew ---------- */
+/* ---------- the story: China, 1391, the four columns (the series' pictures: films/model-the-business/shared/src/registers.js) ---------- */
+// a person faded as one picture: drawn whole on a spare canvas, then laid on the frame, so no part of them shows through another
+let FC_SCR=null;
+function fc_faded(ctx,a,fn){if(a<=0.01)return;if(a>=0.995){fn(ctx);return;}const cv=ctx.canvas;if(!FC_SCR||FC_SCR.width!==cv.width||FC_SCR.height!==cv.height)FC_SCR=mkCanvas(cv.width,cv.height);const x=FC_SCR.getContext("2d");
+  x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,cv.width,cv.height);x.setTransform(ctx.getTransform());fn(x);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha*=a;ctx.drawImage(FC_SCR,0,0);ctx.restore();}
+// a pill on a point of the land, drawn in the frame at its own size
+function fc_pillAt(ctx,S,cam,wx,wy,s,col,a,o){if(a<=0.01)return;const p=toScreen(cam,wx,wy);ctx.save();setScreen(ctx,S);rg_pill(ctx,p.x,p.y,s,col,a,o);ctx.restore();}
+// keyframes [time, values...], eased from one to the next
+function fc_keys(K,t){if(t<=K[0][0])return K[0].slice(1);for(let i=1;i<K.length;i++){if(t<=K[i][0]){const a=K[i-1],b=K[i],f=easeCam((t-a[0])/((b[0]-a[0])||1));return a.slice(1).map((v,j)=>lerp(v,b[j+1],f));}}return K[K.length-1].slice(1);}
+// the rice field at a point of the land, and its middle
+const fc_pad=(x,y)=>rg_paddies().find(q=>q.x<=x&&q.x+q.w>=x&&q.y<=y&&q.y+q.h>=y)||rg_paddies()[0];
+function fc_mid(q){const P=rg_padPts(q);return[(P[0][0]+P[6][0]+P[7][0]+P[13][0])/4,(P[0][1]+P[13][1])/2];}
+function fc_mark(ctx,q,col,a){if(a<=0.01)return;withA(ctx,a,()=>{rg_padPath(ctx,q);ctx.fillStyle=rgba(col,0.24);ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=4;ctx.stroke();});}
+// a field, as a register draws it: a plot outlined in ink, with a few strokes in it for its number and its holder's name
+function fc_plot(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sd=o.seed||1;
+  withA(ctx,a,()=>{ctx.beginPath();for(let k=0;k<6;k++){const an=Math.PI/6+k*Math.PI/3,j=1+(hash(sd*7+k,3)-0.5)*0.3,px=x+Math.cos(an)*r*j,py=y+Math.sin(an)*r*j*0.84;k?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();
+    ctx.fillStyle=o.col?rgba(o.col,0.92):rgba(mix([206,204,160],[226,206,160],hash(sd,5)),0.95);ctx.fill();ctx.strokeStyle=rgba(RG_INK,0.85);ctx.lineWidth=Math.max(1.6,r*0.085);ctx.stroke();
+    ctx.strokeStyle=rgba(RG_INK,0.42);ctx.lineWidth=Math.max(1.4,r*0.07);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x-r*0.2,y-r*0.3);ctx.lineTo(x-r*0.2,y+r*0.3);ctx.moveTo(x+r*0.18,y-r*0.22);ctx.lineTo(x+r*0.18,y+r*0.14);ctx.stroke();});}
+/* a household's entry in a register, in four columns written right to left, as the registers were: what it held at the last register
+   (i 0), what came in (1), what went out (2), and what it holds now (3). o.n: the fields in each; o.p: how far each column is written
+   (0..1); o.hi: how lit each is; o.skip(i, k) leaves a field out (one on its way elsewhere); o.col(i, k) colours one. */
+function fc_slot(x,y,w,h,i,k){const cw=w/4,top=y+h*0.2,step=Math.min(cw*0.62,h*0.74/5.4);return[x+w-cw*(i+0.5),top+step*(k+0.5)];}
+function fc_entry(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=o.n||[5,1,2,4],cw=w/4,r=Math.min(cw*0.26,h*0.06);
+  withA(ctx,a,()=>{ctx.strokeStyle=rgba(RG_INK,0.3);ctx.lineWidth=2;for(let i=1;i<4;i++){const lx=x+w-cw*i;ctx.beginPath();ctx.moveTo(lx,y+h*0.05);ctx.lineTo(lx,y+h*0.95);ctx.stroke();}
+    for(let i=0;i<4;i++){const cx=x+w-cw*(i+0.5),p=o.p?o.p[i]:1,hd=fin(p,0,0.25);if(hd<=0)continue;const hl=o.hi?o.hi[i]:0;
+      if(hl>0.01){ctx.fillStyle=rgba(o.hiCol||RG_YEL,0.3*hl);ctx.fillRect(cx-cw*0.46,y+h*0.04,cw*0.92,h*0.92);}
+      // the column's heading, two short strokes, like a word written at its top
+      withA(ctx,hd,()=>{ctx.strokeStyle=rgba(RG_INK,0.8);ctx.lineCap="round";ctx.lineWidth=Math.max(2,cw*0.03);ctx.beginPath();ctx.moveTo(cx-cw*0.06,y+h*0.07);ctx.lineTo(cx-cw*0.06,y+h*0.13);ctx.moveTo(cx+cw*0.06,y+h*0.075);ctx.lineTo(cx+cw*0.06,y+h*0.12);ctx.stroke();});
+      for(let k=0;k<n[i];k++){if(o.skip&&o.skip(i,k))continue;const q=clamp(p*(n[i]+1)-k-0.5,0,1);if(q<=0)continue;const[sx,sy]=fc_slot(x,y,w,h,i,k);
+        fc_plot(ctx,sx,sy,r*(0.75+0.25*ease(q)),{a:q,seed:i*11+k+(o.seed||0),col:o.col?o.col(i,k):null});}}});}
+// one register, open, with an entry across its two pages (o.n, o.p, o.hi...) or one on each (o.L and o.R, each o's own)
+function fc_register(ctx,cx,cy,w,h,o){o=o||{};rg_book(ctx,cx,cy,w,h,{col:o.bk||RG_YEL,a:o.a,open:o.open==null?1:o.open,
+  left:o.L?(c2,x,y,w2,h2)=>fc_entry(c2,x+w2*0.05,y,w2*0.9,h2,o.L):null,right:o.R?(c2,x,y,w2,h2)=>fc_entry(c2,x+w2*0.05,y,w2*0.9,h2,o.R):null});
+  if(o.one&&(o.open==null||o.open>0.95))fc_entry(ctx,cx-w+w*0.04,cy-h/2,2*w-w*0.08,h,o.one);}
+// where the k-th field of column i of an entry across a register's two pages sits, in the frame
+const fc_oneSlot=(cx,cy,w,h,i,k)=>fc_slot(cx-w+w*0.04,cy-h/2,2*w-w*0.08,h,i,k);
+const fc_pageSlot=(cx,cy,w,h,side,i,k)=>{const x0=side<0?cx-w:cx;return fc_slot(x0+w*0.05,cy-h/2,w*0.9,h,i,k);};
+
+/* ---------- 0. Four columns ---------- */
+const FC_COLS=["held","came in","went out","holds now"],FC_WRONG=[226,112,92];
+scene("cols",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,wd,o)=>wAt(sc,id,wd,o),cW=c("when"),cC=c("change"),cT=c("total"),cH=c("harm"),cN=c("need"),cO=c("cols"),cS=c("sum"),cB=c("back"),cY=c("story"),cD=c("data");
+  const cam=camAt([[0,1800,620,0.9],[cW,1800,620,0.9],[cC-0.3,1740,636,1.02],[cC+1.7,1680,660,1.3],[cT-0.3,1680,660,1.3],[cT+1.5,1890,700,1.36],[cH-0.4,1890,700,1.36],[cH+1.6,2240,640,1.55],[cN-0.3,2240,640,1.55],[cN+1.8,1880,610,0.8]],t);
+  const dim=0.66*fin(t,cN-0.1,1.3)+0.2*fin(t,cD+0.4,1.4);
+  rg_land(ctx,S,cam,t,{dim});setCam(ctx,S,cam);
+  const H1=RG_HOUSES[1],H2=RG_HOUSES[2],H3=RG_HOUSES[3],H4=RG_HOUSES[4],H7=RG_HOUSES[7],top=h=>[h[0],h[1]-118*h[2]];
+  // the field sold, from the household at the right to the one at the left, and the four that household still holds
+  const qS=fc_pad(1690,792),[sx,sy]=fc_mid(qS),px=sx,py=sy,own=[fc_pad(1880,757),fc_pad(2060,792),fc_pad(1830,840),fc_pad(2010,840)];
+  const land=1-fin(t,cN+0.4,1.0);
+  if(land>0)withA(ctx,land,()=>{
+    // the village head brings the register to be made again: the court's yellow book, carried along the road
+    const wu=ease(clamp((t-cW-0.2)/8,0,1)),wx=lerp(1080,1400,wu),ws=Math.max(1,Math.round(320/45));
+    const hn=rg_fig(ctx,wx,rg_roadY(wx)+4,0.3,{dress:"robe",head:"cap",hold:"book",walk:wu*ws*TAU,a:fin(t,cW-0.4,0.8)*(1-fin(t,cC+1.0,0.8))});
+    withA(ctx,fin(t,cW-0.4,0.8)*(1-fin(t,cC+1.0,0.8)),()=>{ctx.fillStyle=rgba(RG_YEL,1);ctx.fillRect(hn[0]-2,hn[1]-26,11,15);glow(ctx,hn[0]+3,hn[1]-18,26,RG_YEL,0.35);});
+    // a village changes: a child is born in one house; an old parent is gone from another; a field passes from one to another
+    const fam=fin(t,cC+0.6,0.8)*(1-fin(t,cH+0.2,0.8));
+    if(fam>0){fc_faded(ctx,fam,c2=>{rg_fig(c2,H1[0]-46,rg_roadY(H1[0]-46)-14,0.3,{head:"wrap",f:1});rg_fig(c2,H1[0]+40,rg_roadY(H1[0]+40)-12,0.29,{dress:"robe",hold:"book",f:-1});});
+      const bn=fin(t,w("change","born")-0.2,0.6);if(bn>0){const bx=H1[0]+40-38*0.29,by=rg_roadY(H1[0]+40)-12-188*0.29;glow(ctx,bx,by,40,RG_RIM,0.55*bn*fam);glow(ctx,bx,by,14,[255,240,214],0.8*bn*fam);}
+      const gone=fin(t,w("change","die")-0.1,1.6);fc_faded(ctx,fam*(1-gone),c2=>rg_fig(c2,H3[0]-40,rg_roadY(H3[0]-40)-14,0.28,{dress:"robe",head:"cap",f:1,rimA:0.75}));
+      if(gone>0&&gone<1)glow(ctx,H3[0]-40,rg_roadY(H3[0]-40)-58,60,RG_RIM,0.3*Math.sin(Math.PI*gone)*fam);}
+    // the field sold: from the household at the right to the one at the left
+    const fA=fin(t,w("change","fields")-0.2,0.6)*(1-fin(t,cH-0.4,0.6)),mv=fin(t,w("change","sold"),1.2);
+    fc_mark(ctx,qS,RG_EARTH,fA);
+    if(fA>0&&t<cT+0.2){arrowTo(ctx,sx,sy-6,top(H4)[0]-16,top(H4)[1]+20,RG_EARTH,fA*(1-mv),{bend:-0.22,dash:[10,8],lw:3});arrowTo(ctx,sx,sy-6,top(H2)[0]+16,top(H2)[1]+20,RG_EARTH,fA*(1-fin(t,cT-0.3,0.5)),{bend:0.22,dash:[10,8],lw:3,p:mv});}
+    // a new total alone: the household on the right had five fields and has four. Sold, or hidden under another name?
+    const oA=fin(t,cT+0.3,0.7)*(1-fin(t,cH-0.4,0.6));if(oA>0)glow(ctx,H4[0],H4[1]-46,120,RG_YEL,0.3*oA);own.forEach((q,i)=>fc_mark(ctx,q,RG_YEL,oA*fin(t,cT+0.3+i*0.15,0.5)));
+    const sold=fin(t,w("total","sold")-0.1,0.7)*(1-fin(t,cH-0.4,0.6)),hid=fin(t,w("total","hidden")-0.1,0.7)*(1-fin(t,cH-0.4,0.6));
+    arrowTo(ctx,sx,sy-6,top(H2)[0]+16,top(H2)[1]+20,RG_YEL,sold,{bend:0.22,dash:[10,8],lw:3,p:fin(t,w("total","sold")-0.1,1.0)});
+    arrowTo(ctx,sx,sy+4,H7[0]-20,top(H7)[1]+10,RG_YEL,hid,{bend:-0.12,dash:[10,8],lw:3,p:fin(t,w("total","hidden")-0.1,1.4)});
+    // the hidden field's tax falls on the families who can't hide theirs
+    const bA=fin(t,w("harm","falls")-0.2,0.6)*(1-fin(t,cN+0.2,0.8));
+    if(bA>0){[RG_HOUSES[6],RG_HOUSES[7],RG_HOUSES[8]].forEach(([hx,hy],k)=>{[0,1,2].forEach(j=>rg_sack(ctx,hx+56+j*24,hy+8-(j===2?26:0),0.5,bA*fin(t,w("harm","falls")+k*0.3+j*0.15,0.4)));});
+      const u=ease(clamp((t-w("harm","families")+0.3)/7,0,1)),x=lerp(2290,1990,u);rg_fig(ctx,x,rg_roadY(x)+6,0.3,{a:bA,hold:"pole",full:1,load:1,head:"wrap",f:-1,walk:u*Math.round(300/45)*TAU});}
+  });
+  // the words of the story, on the land
+  fc_pillAt(ctx,S,cam,px,py+46,"sold",RG_EARTH,fin(t,w("change","sold"),0.5)*(1-fin(t,cT-0.3,0.5)));
+  fc_pillAt(ctx,S,cam,H4[0],top(H4)[1]-28,"5 fields, now 4",RG_PAPER,fin(t,w("total","total"),0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,H4[0],top(H4)[1]-74,"what changed?",RG_YEL,fin(t,w("total","changed"),0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,(px+top(H2)[0])/2-40,py-110,"sold?",RG_YEL,fin(t,w("total","sold")+0.4,0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,(px+H7[0])/2+60,py+20,"or hidden?",RG_YEL,fin(t,w("total","hidden")+0.6,0.5)*(1-fin(t,cH-0.4,0.5)));
+  fc_pillAt(ctx,S,cam,RG_HOUSES[7][0]+70,top(RG_HOUSES[7])[1]-24,"the burden",RG_EARTH,fin(t,w("harm","falls")+0.4,0.5)*(1-fin(t,cN-0.2,0.5)));
+  setScreen(ctx,S);
+  rg_pill(ctx,960,250,"the registers, made again",RG_YEL,fin(t,w("when","made again"),0.5)*(1-fin(t,cC-0.3,0.5)));
+  rg_pill(ctx,960,330,"every ten years",RG_PAPER,fin(t,w("when","every ten years"),0.5)*(1-fin(t,cC-0.3,0.5)));
+  yearTag(ctx,96,100,"China, 1391",CLAY,fin(t,cW+0.2,0.6)*(1-fin(t,cN-0.4,0.5)));
+  /* the register, its book open: first one household's entry across both pages, then two households, a field going from one to
+     the other, then registers checked against the ones before, then the one entry again, every column lit */
+  const BX=960,BY=545,PW=400,PH=500,bk=fin(t,cN+0.3,0.8),op=ease(fin(t,cO+0.1,1.1)),dq=fin(t,cD+0.2,0.8);
+  const oneA=fin(t,cO+1.0,0.3)*(1-fin(t,cS-0.4,0.35))+fin(t,cY-0.3,0.35),twoA=fin(t,cS+0.05,0.35)*(1-fin(t,cB-0.5,0.35)),bigA=1-fin(t,cB-0.5,0.4)*(1-fin(t,cY-0.6,0.4));
+  // the story: each column lit in turn, then all; the number the entry ends on stays lit for the data that follows
+  const wd=[w("cols","held"),w("cols","came in"),w("cols","went out"),w("cols","holds now")],
+    lit=i=>{if(t<=cY)return 0;const b0=pulse(t,cY+0.4+i*0.55,1.4)*0.9+fin(t,w("story","what changed"),0.6)*0.5;return i===3?Math.max(b0,0.6*dq):b0*(1-dq);};
+  if(bk>0)withA(ctx,bk*bigA,()=>{rg_book(ctx,BX,BY+(1-bk)*120,PW,PH,{col:RG_YEL,open:op});
+    if(op>0.95){fc_entry(ctx,BX-PW+PW*0.04,BY-PH/2,2*PW-PW*0.08,PH,{a:oneA,n:[5,1,2,4],p:wd.map((x,i)=>t>cY?1:clamp((t-x+0.1)/1.0,0,1)),hi:[0,1,2,3].map(lit),seed:3});
+      /* two households: the field is written in the "went out" of the one on the right page, and the same field arrives in the
+         "came in" of the one on the left */
+      const tr=clamp((t-w("sum","leaves"))/((w("sum","arrives")+0.4)-w("sum","leaves")),0,1),fly=tr>0&&tr<1,go=pulse(t,w("sum","leaves")-0.1,1.2);
+      fc_entry(ctx,BX+PW*0.05,BY-PH/2,PW*0.9,PH,{a:twoA,n:[5,0,1,4],seed:7,hi:[0,0,go,0],hiCol:RG_EARTH,col:(i,k)=>i===2?RG_EARTH:null});
+      fc_entry(ctx,BX-PW+PW*0.05,BY-PH/2,PW*0.9,PH,{a:twoA,n:[3,1,0,4],seed:9,hi:[0,pulse(t,w("sum","arrives")+0.3,1.2),0,0],hiCol:RG_EARTH,skip:(i,k)=>i===1&&tr<1,col:(i,k)=>i===1?RG_EARTH:null});
+      if(fly&&twoA>0){const[ax,ay]=fc_slot(BX+PW*0.05,BY-PH/2,PW*0.9,PH,2,0),[zx,zy]=fc_slot(BX-PW+PW*0.05,BY-PH/2,PW*0.9,PH,1,0),e=ease(tr),fx=lerp(ax,zx,e),fy=lerp(ay,zy,e)-Math.sin(Math.PI*e)*150;
+        glow(ctx,fx,fy,50,RG_EARTH,0.4*twoA);fc_plot(ctx,fx,fy,PW*0.9/4*0.26,{a:twoA,seed:7*11+2*11,col:RG_EARTH});}}});
+  // the column's names, over the book; as the data line comes, only the one the entry ends on stays
+  if(bk>0&&op>0.95)FC_COLS.forEach((s,i)=>{const[cx]=fc_oneSlot(BX,BY,PW,PH,i,0);rg_pill(ctx,cx,247,s,i===3?RG_YEL:RG_PAPER,oneA*bk*bigA*fin(t,wd[i]-0.15,0.4)*(i===3?1:1-0.75*dq),{size:28});});
+  rg_pill(ctx,BX-PW/2,247,"3 + 1 − 0 = 4",RG_PAPER,twoA*bk*fin(t,w("sum","add up"),0.5),{size:28});rg_pill(ctx,BX+PW/2,247,"5 + 0 − 1 = 4",RG_PAPER,twoA*bk*fin(t,w("sum","add up")+0.3,0.5),{size:28});
+  rg_pill(ctx,BX+PW/2,838,"went out",RG_EARTH,twoA*bk*fin(t,w("sum","leaves"),0.4)*(1-fin(t,cB-0.9,0.4)),{size:28});rg_pill(ctx,BX-PW/2,838,"came in",RG_EARTH,twoA*bk*fin(t,w("sum","arrives"),0.4)*(1-fin(t,cB-0.9,0.4)),{size:28});
+  // each register checked against the one before: the old one's "holds now" is the new one's "held"; one that doesn't add up goes back
+  const chA=fin(t,cB-0.1,0.5)*(1-fin(t,cY-0.6,0.4));
+  if(chA>0)withA(ctx,chA*bk,()=>{const sw=170,sh=230,Y=560,X0=560,X1=1000,sB=w("back","sent"),away=ease(fin(t,sB,1.1)),X2=lerp(1430,1600,away),Y2=lerp(Y,Y+24,away);
+    fc_register(ctx,X0,Y,sw,sh,{bk:mix(RG_YEL,[120,100,80],0.35),one:{n:[4,2,1,5],seed:5}});fc_register(ctx,X1,Y,sw,sh,{a:fin(t,cB+0.3,0.5),one:{n:[5,1,2,4],seed:3,hi:[pulse(t,w("back","checked")+0.9,1.6),0,0,0]}});
+    const[ox,oy]=fc_oneSlot(X0,Y,sw,sh,3,2),[nx,ny]=fc_oneSlot(X1,Y,sw,sh,0,2),lk=fin(t,w("back","checked")+0.2,1.0);
+    arrowTo(ctx,ox,oy-90,nx,ny-90,RG_YEL,lk,{bend:-0.25,dash:[10,8],lw:3,p:lk});
+    // a third register whose "holds now" doesn't add up: lit red, then sent back, away to the right
+    const wr=fin(t,w("back","doesn't")-0.3,0.5)*(1-fin(t,sB+1.6,0.5));
+    if(wr>0)fc_register(ctx,X2,Y2,sw,sh,{a:wr,one:{n:[4,1,1,3],seed:13,hi:[0,0,0,0.5+0.5*fin(t,w("back","doesn't"),0.4)],hiCol:FC_WRONG}});
+    yearTag(ctx,X0-120,330,"1381",CLAY,fin(t,cB,0.5));yearTag(ctx,X1-120,330,"1391",CLAY,fin(t,cB+0.3,0.5));
+    rg_pill(ctx,(X0+X1)/2,790,"held = what the last one holds",RG_YEL,lk);
+    rg_pill(ctx,X2,790,"sent back",FC_WRONG,wr*fin(t,sB,0.5));});
+  rg_pill(ctx,960,840,"what changed, and why",RG_YEL,bk*fin(t,w("story","what changed"),0.5)*(1-fin(t,cD,0.5)));
+  rg_pill(ctx,960,252,"where did each number come from?",RG_YEL,fin(t,w("need","where"),0.5)*(1-fin(t,cO+0.6,0.5)));
+  /* the same need for data: the number the entry ends on says what it counts (its column's name) and on which day (its register's
+     year), in the sketch's own colour */
+  if(dq>0&&bk>0){const[hx]=fc_oneSlot(BX,BY,PW,PH,3,0),[ox]=fc_oneSlot(BX,BY,PW,PH,0,0),yw=s=>tw(ctx,s,20,500,"mono")+40;
+    yearTag(ctx,hx-yw("1391")/2,766,"1391",CLAY,dq*bk);yearTag(ctx,ox-yw("1381")/2,766,"1381",CLAY,0.55*dq*bk);
+    const aC=fin(t,w("data","what it counts")-0.1,0.5),aD=fin(t,w("data","which day")-0.1,0.5);
+    withA(ctx,aC,()=>tag(ctx,hx,160,"what it counts",SK,{align:"center",size:28}));arrowTo(ctx,hx,184,hx,216,SK,aC,{lw:3,p:aC});
+    withA(ctx,aD,()=>tag(ctx,hx,840,"on which day",SK,{align:"center",size:28}));arrowTo(ctx,hx,816,hx,792,SK,aD,{lw:3,p:aD});}
+  mtb_title(ctx,S,t,0.15,cW-0.25,"A Sharper Sketch","When a data model needs more precision");
+});
+
+/* ---------- 1. The sketch on the map ---------- */
+/* the sketch as the film before this one left it, on the university's map: four pins on each box, in the colours that film gives the
+   map's four parts (what it's for, who answers for it, where it's written, what it means), and an amber "?" on the two still open: the
+   class's meaning and the term's owner (films/model-the-business/1-the-map-behind-the-sketch/source/src/map.js draws the same) */
+const FC_PARTS=[[245,206,140],[255,168,138],[150,226,150],[200,172,255]],FC_Q=[255,176,64];
+function fc_pinAt(ctx,e,i){const b=entBox(ctx,e),up=b.y<540;return[b.x+(i-1.5)*46,up?b.y-b.h/2-30:b.y+b.h/2+30];}
+function fc_pin(ctx,x,y,col,a,q){if(a<=0.01)return;withA(ctx,a,()=>{const r=q?21:15;ctx.fillStyle=q?"rgba(30,18,6,0.95)":rgba(col,1);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle=rgba(q?FC_Q:mix(col,[255,255,255],0.4),1);ctx.lineWidth=2.5;ctx.stroke();if(q){glow(ctx,x,y,46,FC_Q,0.3*q);T(ctx,"?",x,y+10,{w:800,size:28,align:"center",color:rgba(FC_Q,1)});}else glow(ctx,x,y,30,col,0.25);});}
+function fc_pins(ctx,E,pins,Q,hi){Object.keys(E).forEach(k=>{const P=pins[k];if(!P)return;const b=entBox(ctx,E[k]),up=b.y<540,edge=up?b.y-b.h/2:b.y+b.h/2;
+  [0,1,2,3].forEach(i=>{const v=P[i]||0,q=(Q[k]||{})[i]||0;if(v<=0&&q<=0)return;const[x,y]=fc_pinAt(ctx,E[k],i),g=hi?hi[i]||0:0;
+    ctx.save();ctx.strokeStyle=rgba(FC_PARTS[i],0.5*Math.max(v,q));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,edge);ctx.lineTo(x,y+(up?14:-14));ctx.stroke();ctx.restore();
+    if(g>0.01&&v>0)glow(ctx,x,y,60,FC_PARTS[i],0.5*g*v);fc_pin(ctx,x,y,FC_PARTS[i],Math.max(v,q),q);});});}
+// what each pin means, in a row under the board; hi lights one
+function fc_legend(ctx,y,a,hi){if(a<=0.01)return;const sz=phSz(ctx,28),items=["for","owner","home","meaning"],ws=items.map(s=>tw(ctx,s,sz,600)+52),gap=34,tot=ws.reduce((s,w)=>s+w,0)+gap*3;let x=960-tot/2;
+  withA(ctx,a,()=>items.forEach((s,i)=>{const c=FC_PARTS[i],g=hi?hi[i]||0:0;if(g>0.01)glow(ctx,x+15,y,40,c,0.5*g);ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+15,y,12,0,TAU);ctx.fill();T(ctx,s,x+38,y+sz*0.36,{w:600,size:sz,color:rgba(mix(SOFT,c,0.5+0.5*g),1)});x+=ws[i]+gap;}));}
 scene("drawn",(ctx,S,t,sc)=>{
-  const c=id=>cue(sc,id),cR=c("recap"),cO=c("over"),cN=c("normal"),B=c("breath");
+  const c=id=>cue(sc,id),w=(id,wd,o)=>wAt(sc,id,wd,o),cR=c("recap"),cM=c("map"),cO=c("over"),cN=c("normal"),B=c("breath");
   const cam=camAt([[0,960,540,1.08],[cR,960,540,1.08],[cO,960,530,1.0],[sc.dur+2,960,530,0.98]],t);
-  clearTo(ctx,S);const bgA=sstep(3.1,3.9,t);
-  if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);board(ctx,1,"Conceptual model · the sketch we drew");
-    // the recap names each box as it appears: student, class, enrolment, term, course
-    const d=c("over")-cR,order=["Student","Class","Enrolment","Term","Course"],ap=k=>fin(t,cR+0.4+order.indexOf(k)*d*0.16,0.5);
-    const E={};Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k,s:1.25,a:ap(k)};});E.Term.sub="census date";
-    const rf=clamp((t-cR-d*0.8)/1.2,0,1),q=fin(t,cO+0.8);
-    diagram(ctx,E,V1R.map((r,i)=>r.concat([{f:clamp(rf*4-i,0,1),bad:q*(i===3?0.6+0.4*Math.sin(t*3):0)}])));
-    // what the sketch hides: the class, the one census date, the one course
-    withA(ctx,q,()=>{[[1368,413,"what is a class?"],[1368,757,"one date for all?"],[576,535,"only one course?"]].forEach(([x,y,s],i)=>withA(ctx,fin(t,cO+0.8+i*0.5),()=>{glow(ctx,x,y,70,EXT,0.25+0.1*Math.sin(t*3+i));tag(ctx,x+(i===2?0:0),y+(i===0?-70:i===1?0:0),s,EXT,{align:"center",size:18});}));});
-    withA(ctx,fin(t,cO+0.3),()=>{tag(ctx,700,845,"good enough to start",GOOD,{align:"center",size:18});tag(ctx,1220,845,"not good enough to count",BAD,{align:"center",size:18});});
-    stamp(ctx,1790,845,"sketch v1",SK,fin(t,cR+1));
-    // a sweep of light: every model gets sharper when a question needs it
-    if(t>cN+0.5&&t<cN+3.5){const u=(t-cN-0.5)/3;glow(ctx,lerp(150,1800,ease(u)),530,260,SK,0.25*Math.sin(Math.PI*u));}
-    // the breather: new records arrive and find their place in the simple sketch
-    if(sc.breathe&&t>B){for(let k=0;k<5;k++){const t0=B+0.6+k*0.8,u=clamp((t-t0)/1.3,0,1);if(u<=0||u>=1)continue;const q2=at(mk(bez(P(40,250+k*110),P(400,250+k*80),P(800,413),P(972,413),16)),ease(u));dtile(ctx,q2.x,q2.y,lerp(40,26,u),0,{cell:(k*7+3)%24,q:2,app:["sis","lms","sis","hr","sis"][k]},1-sstep(0.85,1,u));}
-      [0,1,2,3,4].forEach(k=>{const t0=B+1.9+k*0.8;if(t>t0&&t<t0+0.8)glow(ctx,972,413,120,SK,0.4*(1-(t-t0)/0.8));});}
-    ctx.restore();}
+  clearTo(ctx,S);bgW(ctx,S,cam);board(ctx,1,"Conceptual model · the sketch, on the map");
+  // the five boxes, each lit as the voice names it
+  const nm={Student:"student",Class:"class",Enrolment:"enrolment",Term:"term",Course:"course"},E={};
+  Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k,s:1.25,a:1,hi:pulse(t,w("recap",nm[k])-0.15,1.3)};});E.Term.sub="census date";
+  const q=fin(t,cO+0.8);
+  diagram(ctx,E,V1R.map((r,i)=>r.concat([{f:1,bad:q*(i===3?0.6+0.4*Math.sin(t*3):0)}])));
+  // its place on the map: four pins on each box, all but two; where each box lives (its home) lit; then the map is left behind
+  const pl=w("recap","place"),pOut=1-fin(t,w("map","right")-0.1,0.9),pins={},home=fin(t,w("map","where")-0.1,0.5)*(1-fin(t,w("map","doesn't"),0.6));
+  ["Student","Enrolment","Course","Class","Term"].forEach((k,i)=>{const v=fin(t,pl+i*0.2,0.5)*pOut;pins[k]=[v,v,v,v];});pins.Class[3]=0;pins.Term[1]=0;
+  const qq=(0.75+0.25*Math.sin(t*3.2))*pOut,Q={Class:{3:qq*fin(t,pl+0.6,0.5)},Term:{1:qq*fin(t,pl+0.8,0.5)}};
+  fc_pins(ctx,E,pins,Q,[0,0,home,0]);fc_legend(ctx,836,fin(t,pl+1.2,0.6)*pOut,[0,0,home,0]);
+  // what the sketch hides: the class, the one census date, the one course
+  withA(ctx,q,()=>{[[1368,343,"what is a class?"],[1368,757,"one date for all?"],[576,535,"only one course?"]].forEach(([x,y,s],i)=>withA(ctx,fin(t,cO+0.8+i*0.5),()=>{glow(ctx,x,y,70,EXT,0.25+0.1*Math.sin(t*3+i));tag(ctx,x,y,s,EXT,{align:"center",size:28});}));});
+  withA(ctx,fin(t,cO+0.3),()=>{tag(ctx,700,836,"good enough to start",GOOD,{align:"center",size:28});tag(ctx,1220,836,"not good enough to count",BAD,{align:"center",size:28});});
+  stamp(ctx,1790,836,"sketch v1",SK,fin(t,cO+0.3));
+  // a sweep of light: every model gets sharper when a question needs it
+  if(t>cN+0.5&&t<cN+3.5){const u=(t-cN-0.5)/3;glow(ctx,lerp(150,1800,ease(u)),530,260,SK,0.25*Math.sin(Math.PI*u));}
+  // the breather: new records arrive and find their place in the simple sketch
+  if(sc.breathe&&t>B){for(let k=0;k<5;k++){const t0=B+0.6+k*0.8,u=clamp((t-t0)/1.3,0,1);if(u<=0||u>=1)continue;const q2=at(mk(bez(P(40,250+k*110),P(400,250+k*80),P(800,413),P(972,413),16)),ease(u));dtile(ctx,q2.x,q2.y,lerp(40,26,u),0,{cell:(k*7+3)%24,q:2,app:["sis","lms","sis","hr","sis"][k]},1-sstep(0.85,1,u));}
+    [0,1,2,3,4].forEach(k=>{const t0=B+1.9+k*0.8;if(t>t0&&t<t0+0.8)glow(ctx,972,413,120,SK,0.4*(1-(t-t0)/0.8));});}
   vign(ctx,S);
-  const tA=sstep(0.3,1.1,t)*(1-sstep(2.7,3.4,t));if(tA>0){setScreen(ctx,S);withA(ctx,tA,()=>{T(ctx,"A Sharper Sketch",W/2,H/2-4,{w:800,size:96,align:"center"});T(ctx,"When a data model needs more precision",W/2,H/2+60,{size:30,w:500,align:"center",color:rgba(SOFT,0.95)});});}
 });
 
 /* ---------- 1. Two numbers ---------- */
@@ -86,9 +230,9 @@ scene("cls",(ctx,S,t,sc)=>{
   R[0][4].a=1;R[3][4].a=1;R[4][4].a=0;R[9][4].a=0;// student–enrolment and student–course stay, drawn once
   diagram(ctx,E,R);
   // what the pins mean, said once
-  withA(ctx,brief(t,cU+0.9,3),()=>tag(ctx,1720,440,"from the reference",ADOPT,{align:"center",size:16}));
-  withA(ctx,brief(t,cO+0.9,3),()=>tag(ctx,1200,440,"ours",EXT,{align:"center",size:16}));
-  withA(ctx,brief(t,cC+0.9,3),()=>tag(ctx,1200,830,"ours",EXT,{align:"center",size:16}));
+  withA(ctx,brief3(t,cU+0.9,3),()=>tag(ctx,1720,440,"from the reference",ADOPT,{align:"center",size:16}));
+  withA(ctx,brief3(t,cO+0.9,3),()=>tag(ctx,1200,440,"ours",EXT,{align:"center",size:16}));
+  withA(ctx,brief3(t,cC+0.9,3),()=>tag(ctx,1200,830,"ours",EXT,{align:"center",size:16}));
   // Genie counted places in tutorials: one student in two tutorials is counted twice
   withA(ctx,fin(t,cG)*(1-sstep(B+0.2,B+1,t)),()=>{[[1330,"Tue 9 am tutorial"],[1600,"Thu 2 pm tutorial"]].forEach(([x,s],i)=>{glass(ctx,x-125,220,250,130,14,SK,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.9)"});T(ctx,s,x,252,{w:700,size:18,align:"center",color:rgba(SK,1)});
       dtile(ctx,x-40,300,48,0,{cell:7,q:2,app:"sis",hi:true},1);dtile(ctx,x+30,300,48,0,{cell:(i*9+4)%24,q:2,app:"sis"},1);});
@@ -151,22 +295,36 @@ scene("courses",(ctx,S,t,sc)=>{
 });
 
 /* ---------- 5. Enrolled when? ---------- */
+/* the register's four columns, as a data model keeps them: what was there on one day, what came in, what went out, and what's there
+   on another; written left to right, on the register's paper. p[i]: how far each column is in (0..1) */
+function fc_four(ctx,x,y,w,h,heads,vals,subs,p,a){if(a<=0.01)return;withA(ctx,a,()=>{const cw=w/4;
+  ctx.fillStyle=rgba(RG_PAPER,1);rr(ctx,x,y,w,h,14);ctx.fill();ctx.strokeStyle=rgba(RG_YEL,0.9);ctx.lineWidth=4;rr(ctx,x,y,w,h,14);ctx.stroke();
+  ctx.strokeStyle=rgba(RG_INK,0.3);ctx.lineWidth=2;for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(x+cw*i,y+18);ctx.lineTo(x+cw*i,y+h-18);ctx.stroke();}
+  heads.forEach((hd,i)=>{const cx=x+cw*(i+0.5),q=p[i];rg_pill(ctx,cx,y-38,hd,i===3?RG_YEL:RG_PAPER,q,{size:28});
+    if(q>0.01)withA(ctx,q,()=>{T(ctx,vals[i],cx,y+h*0.5+14,{w:800,size:76,align:"center",color:rgba(i===1||i===2?mix(RG_EARTH,[70,34,12],0.45):RG_INK,1)});
+      if(subs[i])T(ctx,subs[i],cx,y+h-34,{w:600,size:28,align:"center",color:rgba(RG_INK,0.78)});});});});}
 scene("time",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cQ=c("q"),cT=c("today"),cC=c("change"),cX=c("extend"),cS=c("snap"),B=c("breath");
+  // the four columns' card (below) comes over the model: what it covers fades back, so no words show through it
+  const cF=c("cols"),fA=fin(t,cF+0.2,0.6),under=1-0.62*fA;
   bgW(ctx,S,CAM0);board(ctx,1,"Conceptual model");
-  const strip=fin(t,cC-0.2)*(1-sstep(cX+0.6,cX+1.2,t)),sA=fin(t,cX+1.0,0.8),dim=1-0.7*strip;
+  const strip=fin(t,cC-0.2)*(1-sstep(cX+0.6,cX+1.2,t)),sA=fin(t,cX+1.0,0.8),dim=(1-0.7*strip)*under;
   withA(ctx,dim,()=>sketchV2(ctx,{extra:{Enrolment:{sub:t>cX?"current status":null,subCol:REF,subA:fin(t,cX+0.2)}},pins:true,a:k=>k==="Status"?sA:1,pinA:k=>k==="Status"?fin(t,cX+1.8):1,hi:k=>k==="Enrolment"?pulse(t,cQ,2.4):k==="Status"?pulse(t,cS+0.4,2.6):0}));
   withA(ctx,fin(t,cT)*(1-sstep(cC-0.4,cC,t)),()=>{calCard(ctx,1470,180,"Genie counted","26 Apr",CYAN,1,0);calCard(ctx,1470,320,"Census report","31 Mar",LAYER.gold,fin(t,cT+1.2),0);});
   // one enrolment's story, frame by frame; the census count is a snapshot of one day
   const fr=[{s:"waitlisted",d:"3 Mar",col:EXT},{s:"enrolled",d:"10 Mar",col:GOOD},{s:"census date",d:"31 Mar",col:REF},{s:"withdrew",d:"14 Apr",col:BAD}];
   fr.forEach((f,i)=>{f.a=fin(t,cC+0.4+i*0.9);f.hi=i===2?pulse(t,cC+3.2,2):0;});
   filmStrip(ctx,590,330,fr,strip,0,t);
-  withA(ctx,fin(t,cX+1.8),()=>tag(ctx,760,830,"ours: the history of each enrolment",EXT,{align:"center",size:17}));
+  withA(ctx,fin(t,cX+1.8)*under,()=>tag(ctx,760,830,"ours: the history of each enrolment",EXT,{align:"center",size:17}));
   if(t>cS+0.3&&t<cS+1.3){const v=(t-cS-0.3);glow(ctx,760,730,320,C.white,0.6*(1-v));}
-  withA(ctx,fin(t,cS+0.8),()=>tag(ctx,1200,620,"census count: a snapshot on 31 Mar",REF,{align:"center",size:17}));
+  withA(ctx,fin(t,cS+0.8)*under,()=>tag(ctx,1200,620,"census count: a snapshot on 31 Mar",REF,{align:"center",size:17}));
   // the breather: changes keep arriving, and each one is kept with its date
   if(sc.breathe&&t>B){for(let k=0;k<4;k++){const v=clamp((t-B-0.4-k*1.3)/1.1,0,1);if(v<=0||v>=1)continue;glow(ctx,760,lerp(560,700,ease(v)),22,C.white,0.9);glow(ctx,760,lerp(560,700,ease(v)),70,EXT,0.5);}}
-  stamp(ctx,1790,845,"sketch v2 · draft",EXT,1);
+  stamp(ctx,1790,845,"sketch v2 · draft",EXT,under);
+  // like the register's four columns: what was there on census date, what came in, what went out, and what's there today
+  if(fA>0){dark(ctx,S,0.5*fA);setCam(ctx,S,CAM0);const ww=(id,wd)=>wAt(sc,id,wd);
+    fc_four(ctx,470,420,980,270,["census date","came in","went out","today"],["118","+2","−1","119"],["31 Mar","late, approved","withdrew","26 Apr"],
+      [fin(t,ww("cols","census date")-0.1,0.5),fin(t,ww("cols","came in")-0.1,0.5),fin(t,ww("cols","went out")-0.1,0.5),fin(t,ww("cols","today")-0.1,0.5)],fA);}
   hud(ctx,S,1,countTo(t,cS+1.6,119,118),cS+1.6,t);setCam(ctx,S,CAM0);vign(ctx,S);
 });
 
@@ -224,9 +382,43 @@ scene("fit",(ctx,S,t,sc)=>{
 });
 
 /* ---------- 8. Pull back ---------- */
+/* the end of the story: the Yellow Registers, made every ten years for taxes paid every year, fell behind; the counties' white
+   registers, written each year, did the real work, and the yellow ones became a formality. Eleven years, one mark each, in the frame */
+const FC_YRS=11,fc_yx=i=>420+i*108,FC_WHITE=[238,234,224];
+function fc_years(ctx,t,sc,a){if(a<=0.01)return;const w=(id,wd,o)=>wAt(sc,id,wd,o),cWh=cue(sc,"white"),yL=770;
+  const tx=w("yellow","every year"),ty=w("yellow","every ten years"),fb=fin(t,w("yellow","fell behind")-0.2,0.6)*(1-fin(t,cWh+0.2,0.6)),fm=fin(t,w("white","formality")-0.2,1.0),tw0=w("white","white registers");
+  withA(ctx,a,()=>{ctx.strokeStyle=rgba(RG_PAPER,0.5);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(fc_yx(0)-60,yL);ctx.lineTo(fc_yx(FC_YRS-1)+60,yL);ctx.stroke();
+    for(let i=0;i<FC_YRS;i++){ctx.beginPath();ctx.moveTo(fc_yx(i),yL-9);ctx.lineTo(fc_yx(i),yL+9);ctx.stroke();}
+    // taxes, paid every year: a sack on each year's mark
+    for(let i=0;i<FC_YRS;i++)rg_sack(ctx,fc_yx(i),yL-8,0.9,fin(t,tx-0.2+i*0.11,0.35));
+    // the years between with no register made for them
+    if(fb>0){ctx.fillStyle=rgba(FC_WRONG,0.14*fb);rr(ctx,fc_yx(1)-50,452,fc_yx(FC_YRS-2)-fc_yx(1)+100,136,18);ctx.fill();}
+    // the court's register, made every ten years: at the first mark and the last; greyed, a formality, once the white ones do the work
+    [0,FC_YRS-1].forEach((i,k)=>{const yA=fin(t,ty-0.2+k*0.4,0.5);if(yA>0)rg_book(ctx,fc_yx(i),520,84,116,{col:mix(RG_YEL,[112,100,84],0.6*fm),a:yA*(1-0.35*fm)});});
+    // the counties' white registers, written each year, by each year's taxes
+    for(let i=0;i<FC_YRS;i++){const wa=fin(t,tw0+0.1+i*0.12,0.4);if(wa>0){if(fm<0.01)glow(ctx,fc_yx(i),650,60,FC_WHITE,0.2*wa*pulse(t,tw0+0.1+i*0.12,1.0));rg_book(ctx,fc_yx(i),650,76,104,{col:FC_WHITE,a:wa});}}});
+  rg_pill(ctx,960,420,"every ten years",RG_YEL,a*fin(t,ty+0.2,0.5)*(1-fin(t,cWh,0.6)),{size:28});
+  rg_pill(ctx,960,850,"taxes: every year",RG_EARTH,a*fin(t,tx,0.5)*(1-fin(t,cWh,0.6)),{size:28});
+  rg_pill(ctx,960,520,"fell behind",FC_WRONG,a*fb,{size:28});
+  yearTag(ctx,96,100,"China, the late Ming",CLAY,a*fin(t,w("white","late Ming")-0.2,0.6));
+  rg_pill(ctx,960,850,"white registers: each year, for the real work",FC_WHITE,a*fin(t,w("white","real work")-0.3,0.5),{size:28});
+  rg_pill(ctx,960,520,"the yellow ones: a formality",RG_YEL,a*fm,{size:28});}
+// a side copy: a sheet of rows and columns, lit while it does the work
+function fc_sheet(ctx,x,y,w,h,col,a,on){if(a<=0.01)return;withA(ctx,a,()=>{if(on>0.01)glow(ctx,x+w/2,y+h/2,w*0.8,col,0.28*on);glass(ctx,x,y,w,h,12,col,{glow:8+12*on,ea:0.5+0.4*on,fill:"rgba(7,12,24,0.94)"});
+  ctx.fillStyle=rgba(col,0.45+0.4*on);ctx.fillRect(x+14,y+14,w-28,18);ctx.strokeStyle=rgba(col,0.3+0.4*on);ctx.lineWidth=1.5;
+  for(let r=1;r<5;r++){const yy=y+32+r*(h-46)/5;ctx.beginPath();ctx.moveTo(x+14,yy);ctx.lineTo(x+w-14,yy);ctx.stroke();}
+  for(let k=1;k<4;k++){const xx=x+14+k*(w-28)/4;ctx.beginPath();ctx.moveTo(xx,y+32);ctx.lineTo(xx,y+h-14);ctx.stroke();}});}
+// a model that doesn't fit the business: kept for show, while side copies do the work
+function fc_side(ctx,t,sc,a){if(a<=0.01)return;const w=(id,wd,o)=>wAt(sc,id,wd,o),dn=fin(t,w("side","doesn't")-0.2,0.8),sc2=w("side","side copies"),wk=fin(t,w("side","work")-0.2,0.5);
+  withA(ctx,a,()=>{withA(ctx,1-0.55*dn,()=>{glass(ctx,640,240,640,430,22,SK,{glow:14*(1-dn),ea:0.35,fill:"rgba(10,18,36,0.6)"});phAsDeco(true,()=>sketchV2(ctx,{pos:lay(L3,0.4,960,455),s:0.4}));});
+    withA(ctx,fin(t,w("side","kept for show")-0.2,0.5),()=>tag(ctx,960,720,"kept for show",SOFT,{align:"center",size:28}));
+    [[220,250],[1470,250],[220,520],[1470,520]].forEach(([x,y],i)=>fc_sheet(ctx,x,y,230,160,EXT,fin(t,sc2-0.3+i*0.25,0.5),pulse(t,sc2-0.1+i*0.25,1.4)*0.7+0.6*wk));
+    withA(ctx,wk,()=>tag(ctx,960,830,"side copies do the work",EXT,{align:"center",size:28}));});}
 scene("end",(ctx,S,t,sc)=>{
-  const c=id=>cue(sc,id),cAg=c("again"),cAs=c("asks"),cAn=c("answer"),cV=c("version"),cE=c("evolve"),cTg=c("tag");
-  if(t<cTg-0.25){bgW(ctx,S,CAM0);const q1=1-sstep(cV-0.3,cV+0.5,t);
+  const c=id=>cue(sc,id),cAg=c("again"),cAs=c("asks"),cAn=c("answer"),cV=c("version"),cE=c("evolve"),cYl=c("yellow"),cSd=c("side"),cTg=c("tag");
+  // the room of the present, then the registers' land over it, then the present again: each whole picture dissolves into the next
+  const lA=fin(t,cYl-0.9,1.0),sA=fin(t,cSd-0.9,0.9);
+  if(lA<1){bgW(ctx,S,CAM0);const q1=1-sstep(cV-0.3,cV+0.5,t);
     withA(ctx,q1,()=>{asker(ctx,t,fin(t,0.1),"How many students were enrolled in Data Science 101 on census date?",fin(t,cAg));
       withA(ctx,fin(t,cAs-0.1),()=>{tag(ctx,500,470,"Genie",LAYER.gold,{size:18});bubble(ctx,480,505,660,"Enrolled on census date, in the Semester 1 offering?",LAYER.gold,{size:28});});
       withA(ctx,fin(t,cAn),()=>{numCard(ctx,1220,230,560,"Genie","118","matches the census report",GOOD);
@@ -242,8 +434,9 @@ scene("end",(ctx,S,t,sc)=>{
       ["added: unit offering,","course admission, status history","why: two numbers disagreed","checked against TCSI"].forEach((s,i)=>T(ctx,s,1486,296+i*38,{w:600,size:18,color:rgba(i<2?INK:SOFT,0.95)}));
       withA(ctx,fin(t,cE+0.4),()=>{glass(ctx,1460,520,400,150,18,EXT,{glow:18+8*Math.sin(t*4),ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"A new question",1486,562,{w:800,size:20,color:rgba(EXT,1)});T(ctx,"How do we count short courses",1486,600,{w:600,size:18});T(ctx,"and microcredentials?",1486,630,{w:600,size:18});});});
     vign(ctx,S);}
-  else{clearTo(ctx,S);withA(ctx,fin(t,cTg-0.25,0.8),()=>T(ctx,"Check the reference. Fit it to the business.",W/2,H/2-6,{w:800,size:72,align:"center"}));
-    withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"A Sharper Sketch",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"Learning Data · Data modelling",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
+  if(lA>0&&sA<1){const land=c2=>rg_land(c2,S,{x:1780+10*(t-cYl),y:610,z:0.92},t,{dim:0.5});if(lA<1)fc_faded(ctx,lA,land);else land(ctx);setScreen(ctx,S);fc_years(ctx,t,sc,lA);}
+  if(sA>0){withA(ctx,sA,()=>bgW(ctx,S,CAM0));setScreen(ctx,S);fc_side(ctx,t,sc,sA);withA(ctx,sA,()=>vign(ctx,S));}
+  mtb_end(ctx,S,t,cTg-0.5,"A Sharper Sketch","Check the reference. Fit it to the business.");
 });
 
 // where the chapters meet (From words to data's joins.js): the reference model shows the levels' words in other places, so the

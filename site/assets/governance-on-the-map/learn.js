@@ -213,7 +213,7 @@ PLAY.kept_up=(Lb,api)=>{const W=Lb.w,M=W.msg,S={top:"team",heat:false,june:false
       W.caps.forEach((c,j)=>{const [x,y]=pos(j);if(y===cy)pencil(ctx,[[w/2,134],[x+cw/2,y]],{a:gone?0.1:S.top==="cap"?0.4:0.18,lw:1.8,seed:j+2});});
       W.caps.forEach((c,j)=>{const [x,y]=pos(j);
         withA(ctx,gone?0.35+0.65*(1-k):1,()=>{card(ctx,x,y,cw,ch,{kind:"card",wash:S.heat?C(c.h):null,washA:0.45*(S.heat?k:0)+(S.heat?0.1:0),dashed:gone||!S.heat,seed:80+j});
-          lines(ctx,c.t,x+18,y+38,cw-36-(S.money&&rank(c)?70:0),{size:23,max:2,w:800,col:WC_DARK});
+          lines(ctx,c.t,x+18,y+38,cw-36-(S.money&&rank(c)?56:0),{size:23,max:2,w:800,col:WC_DARK});
           if(S.heat)lines(ctx,c.e,x+18,y+ch-44,cw-36,{size:19,max:2,w:600,col:WC_INK});});
         if(S.money&&rank(c))withA(ctx,k,()=>tag(ctx,x+cw-14,y+30,rank(c),{size:24,align:"right",wash:c.h,washA:0.6}));});
       if(gone)withA(ctx,k,()=>tag(ctx,w/2,cy+ch+gap/2,W.ended,{size:26,align:"center",wash:"red",washA:0.4,maxW:w-80}));}};};

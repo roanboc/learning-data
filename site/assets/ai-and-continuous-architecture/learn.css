@@ -3,23 +3,24 @@
    page's theme. learn.js lays each picture out for its own width, so nothing here sizes a canvas but its width. */
 .aca-lab canvas{margin:0 0 12px}
 .aca-lab :focus-visible{outline-color:#9fc4ff}
-.aca-deal{padding:0 16px}
-.aca-deal+.lab-controls{padding:2px 16px 12px;border-top:0}
-/* a card dealt from the pile */
-.aca-card{margin:0 0 12px;padding:12px 14px;border-radius:14px;background:rgba(16,26,50,.78);border:1px solid var(--sline);border-left:4px solid var(--c,#82e6d7)}
-.aca-card .k{margin:0 0 4px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--smuted)}
-.aca-card .t{margin:0;font-size:17px;font-weight:700;line-height:1.35;color:var(--sfg)}
-/* the boxes: a wrong pick turns red and says why; the right one turns green */
-.aca-opts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
-.aca-opts button{border-radius:12px;border:1px solid rgba(170,200,245,.35);background:rgba(16,26,50,.85);color:var(--sfg);padding:9px 13px;font:inherit;font-weight:700;font-size:14.5px;line-height:1.3;text-align:left;cursor:pointer}
-.aca-opts button:hover:not([disabled]){border-color:rgba(236,243,255,.85)}
-.aca-opts button[disabled]{cursor:default}
-.aca-opts button[disabled]:not(.ok):not(.no){opacity:.5}
-.aca-opts button.ok{border-color:#7ff0b4;background:rgba(36,110,74,.55);color:#effff6}
-.aca-opts button.no{border-color:#ff8f86;background:rgba(130,36,30,.5);color:#fff1ef}
-.aca-why{margin:0 0 12px;font-size:15px;line-height:1.45;color:var(--sfg)}
-.aca-why b.ok{color:#7ff0b4}.aca-why b.no{color:#ff8f86}
-.aca-end{margin:0 0 12px;padding:12px 14px;border-radius:12px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.45);font-size:15px;line-height:1.45;color:var(--sfg)}
+/* the playgrounds (Data that moves' look): the experiments, numbered, each ticked when the visitor makes it happen */
+.aca-goalbox{margin:0 16px 12px;padding:10px 12px 8px;border-radius:12px;background:rgba(16,26,50,.7);border:1px solid var(--sline)}
+.aca-gh{margin:0 0 6px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--smuted)}
+.aca-goals{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.aca-goals li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.35;color:var(--sfg)}
+.aca-goals li i{flex:0 0 auto;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;border:1.5px solid var(--c,#6aa8ff);color:var(--sfg);transition:background .3s,border-color .3s,transform .3s}
+.aca-goals li.ok i{background:#2e8a5c;border-color:#7ff0b4;color:#effff6;transform:scale(1.08)}
+.aca-goals li.ok span{color:#c9f7df}
+/* the controls: a row for each group, its label first */
+.aca-ctrl{flex-direction:column;align-items:stretch;gap:10px}
+.aca-row{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.aca-row .lbl{flex:0 0 100%;margin:0}
+.aca-cyc{text-align:left}
+.aca-endbox:empty{display:none}
+.aca-end{margin:0 16px 12px;padding:12px 14px;border-radius:12px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.45);font-size:15px;line-height:1.45;color:var(--sfg)}
+.aca-foot{display:flex;justify-content:flex-end;padding:0 16px 14px}
+.lab-say .ok,.lab-say .warn,.lab-say .no{display:inline}
+@media (prefers-reduced-motion:reduce){.aca-goals li i{transition:none}}
 /* the labs page: which film, and a film still being made */
 .stop-text .aca-film{margin:2px 0 0;font-weight:700;color:var(--muted)}
 .stop-text .aca-film a{color:inherit;text-underline-offset:3px}

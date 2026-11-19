@@ -3,7 +3,7 @@
   "title": "No two alike",
   "sub": "Film 3 of People first, in Leading data people: how the people in a team differ. By degree, not by type; every mix is of use, and none is for assessing anyone. Ask each person how they work, have each write a page in their own words, and meet in a way that suits the whole range.",
   "howto": "The film is drawn in ink line: flat colour with one even dark line, and whole people in the places where they work and meet, in a teacher's hall in Lu, about 2,500 years ago, and at the university. Its ideas are written by hand: at the team's board, where a consultant explains them, and in Helena's notebook. Its colours mean the same in every film: blue is plans (the plan for two weeks, four rules, a meeting's new steps), green is something done or of value (a use for every trait, a page shared), and amber a risk or a cost (a wrong first guess, a label that changes near the cut). People wear none of them.",
-  "src": ["na_gorge.js","na_lu.js","na_uni.js","na_scenes.js"],
+  "src": ["na_puna.js","na_lu.js","na_uni.js","na_scenes.js"],
   "poster": ["lu", "why", 3.0],
   "say": [
     [

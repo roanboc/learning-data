@@ -2,14 +2,36 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
-"In The Inner Life of Data, we drew a sketch of the university: a student, a class, an enrolment, a term and a course.":
- "En La vida interior de los datos, dibujamos un boceto de la universidad: un estudiante, una clase, una inscripción, un periodo y una carrera.",
-"It was an oversimplification. Good enough to start, not good enough to count.":
- "Era una simplificación excesiva. Bastaba para empezar, no para contar.",
+"China, 1391. Ten years after the first Yellow Registers, the Ming court has them made again, as it will every ten years.":
+ "China, 1391. Diez años después de los primeros Registros Amarillos, la corte Ming los manda hacer de nuevo, como hará cada diez años.",
+"In ten years, a village changes: children are born, parents die, fields are bought and sold.":
+ "En diez años, una aldea cambia: nacen niños, mueren padres, se compran y se venden campos.",
+"But a new total can't show what changed. A household with less land might have sold a field, or hidden it under another name.":
+ "Pero un total nuevo no muestra qué cambió. Un hogar con menos tierra pudo vender un campo, o esconderlo a nombre de otro.",
+"And a hidden field's tax falls on the families who can't hide theirs.":
+ "Y el impuesto del campo escondido cae sobre quienes no pueden esconder los suyos.",
+"The court needed each number to show where it came from.":
+ "La corte necesitaba que cada número mostrara de dónde venía.",
+"So each household's entry has four columns: what it held ten years ago, what came in, what went out, and what it holds now.":
+ "Así que la entrada de cada hogar tiene cuatro columnas: lo que tenía hace diez años, lo que entró, lo que salió y lo que tiene ahora.",
+"The four must add up: a field that leaves one household's entry arrives in another's.":
+ "Las cuatro deben cuadrar: un campo que sale de la entrada de un hogar llega a la de otro.",
+"Each register is checked against the one before, and one that doesn't add up is sent back to be made again.":
+ "Cada registro se coteja con el anterior, y uno que no cuadra se devuelve para hacerlo de nuevo.",
+"So each number comes with its story: anyone can see what changed, and why.":
+ "Así cada número trae su historia: cualquiera puede ver qué cambió, y por qué.",
+"A data model has the same need: every number should say what it counts, and on which day.":
+ "Un modelo de datos tiene la misma necesidad: cada número debe decir qué cuenta, y en qué día.",
+"Our sketch of the university has a place on its map now: a student, a class, an enrolment, a term and a course.":
+ "Nuestro boceto de la universidad ya tiene un lugar en su mapa: un estudiante, una clase, una inscripción, un periodo y una carrera.",
+"But the map says where each box lives. It doesn't say the boxes are right.":
+ "Pero el mapa dice dónde vive cada caja. No dice que las cajas estén bien.",
+"It's an oversimplification: good enough to start, not good enough to count.":
+ "Es una simplificación excesiva: basta para empezar, no para contar.",
 "That's normal. Every model starts simple, and gets sharper when a real question needs it.":
  "Es normal. Todo modelo empieza sencillo, y gana precisión cuando una pregunta real lo necesita.",
-"The day after census date, the Head of School asks Genie a simple question.":
- "Tras la fecha de corte, la dirección de la Escuela le hace a Genie una pregunta simple.",
+"A few weeks after census date, the Head of School asks Genie a simple question.":
+ "Semanas después de la fecha de corte, la dirección de la Escuela le pregunta algo simple a Genie.",
 "How many students were enrolled in Data Science 101 on census date?":
  "¿Cuántos estudiantes estaban inscritos en Data Science 101 a la fecha de corte?",
 "Genie says 131. The certified census report says 118.":
@@ -78,6 +100,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
  "La referencia guarda el estado actual de cada inscripción. Necesitamos su historial, así que extendemos el modelo.",
 "Each change is kept with its date, and the census count becomes a snapshot of one day.":
  "Cada cambio se guarda con su fecha, y el conteo de corte se vuelve una foto de un día.",
+"Like the four columns: what was there on census date, what came in, what went out, and what's there today.":
+ "Como las cuatro columnas: lo que había en la fecha de corte, lo que entró, lo que salió y lo que hay hoy.",
 "The sketch is sharper now. But it's still a sketch.":
  "El boceto es más preciso. Pero sigue siendo un boceto.",
 "This is the conceptual model: the things that matter, and how they connect, agreed with the business.":
@@ -112,6 +136,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
  "El boceto tiene una nueva versión, y una nota que dice por qué cambió.",
 "It won't be the last. Models evolve: not often, but always.":
  "No será la última. Los modelos evolucionan: no a menudo, pero siempre.",
+"The Yellow Registers didn't. Made every ten years, for taxes paid every year, they fell behind.":
+ "Los Registros Amarillos, no. Hechos cada diez años, para impuestos que se pagaban cada año, se quedaron atrás.",
+"By the late Ming, counties kept white registers, written each year, for the real work. The yellow ones became a formality.":
+ "A fines de los Ming, los condados usaban registros blancos, hechos cada año, para el trabajo real. Los amarillos se volvieron un trámite.",
+"A model that doesn't fit the business ends the same way: kept for show, while side copies do the work.":
+ "Un modelo que no se ajusta al negocio termina igual: se guarda para mostrar, mientras copias aparte hacen el trabajo.",
 "Check the reference. Fit it to the business.":
  "Revisa la referencia. Ajústala al negocio."
 });

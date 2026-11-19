@@ -1,11 +1,23 @@
 // "gap": the beat after each line, a natural breath between sentences; longer stops are in breath.js
 const NARR={
-"drawn":{"name":"The sketch we drew","lead":3.8,"tail":1.4,"vo":[
- {"id":"recap","gap":0.8,"text":"In The Inner Life of Data, we drew a sketch of the university: a student, a class, an enrolment, a term and a course."},
- {"id":"over","gap":0.8,"text":"It was an oversimplification. Good enough to start, not good enough to count."},
+"cols":{"name":"Four columns","lead":4.2,"tail":1.0,"vo":[
+ {"id":"when","gap":0.8,"text":"China, 1391. Ten years after the first Yellow Registers, the Ming court has them made again, as it will every ten years."},
+ {"id":"change","gap":0.8,"text":"In ten years, a village changes: children are born, parents die, fields are bought and sold."},
+ {"id":"total","gap":0.8,"text":"But a new total can't show what changed. A household with less land might have sold a field, or hidden it under another name."},
+ {"id":"harm","gap":0.8,"text":"And a hidden field's tax falls on the families who can't hide theirs."},
+ {"id":"need","gap":0.8,"text":"The court needed each number to show where it came from."},
+ {"id":"cols","gap":0.8,"text":"So each household's entry has four columns: what it held ten years ago, what came in, what went out, and what it holds now."},
+ {"id":"sum","gap":0.8,"text":"The four must add up: a field that leaves one household's entry arrives in another's."},
+ {"id":"back","gap":0.8,"text":"Each register is checked against the one before, and one that doesn't add up is sent back to be made again."},
+ {"id":"story","gap":0.8,"text":"So each number comes with its story: anyone can see what changed, and why."},
+ {"id":"data","gap":0.8,"text":"A data model has the same need: every number should say what it counts, and on which day."}]},
+"drawn":{"name":"The sketch on the map","lead":0.8,"tail":1.4,"vo":[
+ {"id":"recap","gap":0.8,"text":"Our sketch of the university has a place on its map now: a student, a class, an enrolment, a term and a course."},
+ {"id":"map","gap":0.8,"text":"But the map says where each box lives. It doesn't say the boxes are right."},
+ {"id":"over","gap":0.8,"text":"It's an oversimplification: good enough to start, not good enough to count."},
  {"id":"normal","gap":0.8,"text":"That's normal. Every model starts simple, and gets sharper when a real question needs it."}]},
 "two":{"name":"Two numbers","lead":0.6,"tail":1.2,"vo":[
- {"id":"ask","gap":0.8,"text":"The day after census date, the Head of School asks Genie a simple question."},
+ {"id":"ask","gap":0.8,"text":"A few weeks after census date, the Head of School asks Genie a simple question."},
  {"id":"q","gap":0.8,"text":"How many students were enrolled in Data Science 101 on census date?"},
  {"id":"nums","gap":0.8,"text":"Genie says 131. The certified census report says 118."},
  {"id":"clean","gap":0.8,"text":"Both come from clean data. Every test passed."},
@@ -43,7 +55,8 @@ const NARR={
  {"id":"today","gap":0.8,"text":"Genie counted today. The census report counted on census date."},
  {"id":"change","gap":0.8,"text":"Enrolments change. A student is waitlisted, then enrolled, and later withdraws."},
  {"id":"extend","gap":0.8,"text":"The reference keeps each enrolment's current status. We need its history, so we extend the model."},
- {"id":"snap","gap":0.8,"text":"Each change is kept with its date, and the census count becomes a snapshot of one day."}]},
+ {"id":"snap","gap":0.8,"text":"Each change is kept with its date, and the census count becomes a snapshot of one day."},
+ {"id":"cols","gap":0.8,"text":"Like the four columns: what was there on census date, what came in, what went out, and what's there today."}]},
 "levels":{"name":"Three levels of precision","lead":0.6,"tail":1.2,"vo":[
  {"id":"still","gap":0.8,"text":"The sketch is sharper now. But it's still a sketch."},
  {"id":"concept","gap":0.8,"text":"This is the conceptual model: the things that matter, and how they connect, agreed with the business."},
@@ -64,5 +77,8 @@ const NARR={
  {"id":"answer","gap":0.8,"text":"Then it answers: 118, and shows how it counted."},
  {"id":"version","gap":0.8,"text":"The sketch has a new version, and a note that says why it changed."},
  {"id":"evolve","gap":0.8,"text":"It won't be the last. Models evolve: not often, but always."},
+ {"id":"yellow","gap":0.8,"text":"The Yellow Registers didn't. Made every ten years, for taxes paid every year, they fell behind."},
+ {"id":"white","gap":0.8,"text":"By the late Ming, counties kept white registers, written each year, for the real work. The yellow ones became a formality."},
+ {"id":"side","gap":0.8,"text":"A model that doesn't fit the business ends the same way: kept for show, while side copies do the work."},
  {"id":"tag","gap":0.8,"text":"Check the reference. Fit it to the business."}]}
 };

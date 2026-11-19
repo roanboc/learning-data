@@ -5,10 +5,11 @@
   "howto": "The film is drawn in ink line: flat colour with one even dark line, and whole people in the places where they work and meet, at a gorge in the Andes and at the university. Its ideas are written by hand: at the team's board, where a consultant explains them, and in Helena's notebook. Its colours mean the same in every film: blue is plans (the order agreed, and its dates), green is something done or something that helps, and amber a cost, a risk or waiting (what the work asks, and what wears people out). People wear none of them.",
   "src": [
     "ww_gorge.js",
+    "ww_home.js",
     "ww_uni.js",
     "ww_scenes.js"
   ],
-  "poster": ["bridge", "june", 3.0],
+  "poster": ["bridge", "june", 0.6],
   "say": [
     [
       "\\bQuehue\\b",

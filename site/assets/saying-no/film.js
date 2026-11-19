@@ -2876,8 +2876,10 @@ function sn_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
 /* ---------------------------------------------------------------- Clara Jensen, in Planning: this film's own, nobody's likeness */
 const SN_CLARA={key:"snClara",name:"Clara Jensen",role:"Planning",skin:[236,200,170],hair:{style:"bob",c:[176,120,70]},top:{kind:"jacket",c:[70,110,130],inner:[244,238,226]},bottom:{kind:"trousers",c:[66,64,80]},shoe:[54,46,48]};
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). The water board's in the 1990s is written plainly, as an office's was; Carmen's and Helena's are drawn
+   as a designer would, a graphic recording pinned over the board, almost done when it first shows (PK.sk.drawn): whoever explains
+   adds the last marks and words as the voice says them, on from left to right, and steps clear. */
 // 0. the engineers at the Aral, on the water board's wall: what the sea lost
 const sn_boardO=(sc,w)=>[
   {s:"The Aral Sea",x:70,y:110,size:64,col:"blue",at:w("shrank","sea shrank",-0.4),d:0.7},
@@ -2885,54 +2887,77 @@ const sn_boardO=(sc,w)=>[
   {s:"level · −20 m",x:560,y:220,size:58,col:"amber",at:w("shrank","twenty metres",-0.6),d:0.8},
   {s:"1990 · two seas",x:300,y:340,size:58,at:w("split","split in two",-0.3),d:0.9},
   {s:"north · south",x:760,y:450,size:58,at:w("split","small sea",-0.2),d:0.8}];
-// 1. position and interest (Carmen, at the team's board)
-const sn_boardA=(sc,w)=>[
-  {s:"Getting to Yes",x:70,y:110,size:60,col:"blue",at:w("book","Getting to Yes",-0.2),d:0.8},
-  {s:"Fisher · Ury",x:600,y:110,size:52,at:w("book","Fisher",-0.2),d:0.6},
-  {s:"position · what is asked",x:110,y:250,size:54,col:"orange",at:w("position","position",-0.2),d:1.1},
-  {s:"interest · what it's for",x:330,y:400,size:54,col:"green",at:w("position","interest",-0.2),d:1.1}];
-// 2. one list, fair criteria (Carmen)
-const sn_boardB=(sc,w)=>[
-  {s:"One list",x:70,y:110,size:60,col:"blue",at:w("order","list",-0.3),d:0.6},
-  {s:"value and effort",x:110,y:220,size:54,col:"green",at:w("order","value and effort",-0.2),d:1.0},
-  {s:"never who asks",x:540,y:220,size:54,col:"amber",at:w("order","who asks",-0.4),d:0.8},
-  {s:"Fair criteria",x:300,y:350,size:58,col:"blue",at:w("fair","fair criteria",-0.3),d:0.8},
-  {s:"what both sides can check",x:420,y:460,size:52,at:w("fair","check",-0.6),d:1.1}];
-// 3. a positive no (Carmen)
-const sn_boardC=(sc,w)=>[
-  {s:"A positive no · Ury",x:70,y:110,size:58,col:"blue",at:w("ury","positive no",-0.3),d:1.0},
-  {s:"1 · yes · what you protect",x:110,y:230,size:52,col:"green",at:w("ury","a yes",-0.2),d:1.1},
-  {s:"2 · no · said plainly",x:330,y:340,size:52,col:"amber",at:w("ury","clear no",-0.2),d:0.9},
-  {s:"3 · an offer",x:560,y:450,size:52,col:"blue",at:w("ury","offer",-0.2),d:0.7}];
-// 4. on Monday (Helena, at the team's board)
-const sn_boardM=(sc,w)=>[
-  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("ask","On Monday",0),d:0.6},
-  {s:"ask what the date is for",x:110,y:210,size:50,at:w("ask","what it's for",-0.3),d:1.1},
-  {s:"show the trade-off",x:200,y:300,size:50,col:"orange",at:w("show","trade-off",-0.3),d:0.9},
-  {s:"no to the date · an offer",x:290,y:390,size:50,col:"amber",at:w("offer","no to the date",-0.2),d:1.0},
-  {s:"they choose · keep your word",x:380,y:470,size:50,col:"green",at:w("write","choose",-0.4),d:1.1}];
+// 1. position and interest (Carmen, at the team's board): what is asked, and why
+const sn_boardA=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Position and interest",{ref:["Getting to Yes","Fisher · Ury · 1981"],rsize:32});
+    D.panel(c,70,150,500,300,{title:"a position",col:"orange",fill:"orange"},(cc,x,y)=>{D.icon(cc,"person",x+56,y+62,32,{fill:"white"});
+      D.box(cc,x+118,y+16,340,90,{fill:"paper",col:"ink",w:3,r:16});D.line(cc,[[x+122,y+56],[x+102,y+68],[x+122,y+78]],{col:"ink",w:3,seed:4});
+      D.text(cc,"By August.",x+152,y+74,{size:38,w:700});});
+    D.arrow(c,[588,306],[652,306],{col:"ink",w:4});D.text(c,"why?",620,284,{size:30,col:"mut",align:"center"});
+    D.panel(c,670,150,510,300,{title:"an interest",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"target",x+56,y+62,32,{fill:"white"});
+      D.text(cc,"why they ask",x+110,y+74,{size:34,col:"mut"});});}),
+  {s:"what is asked",x:110,y:430,size:48,w:700,col:"orange",at:w("position","what someone",-0.2),d:0.8},
+  {s:"what it's for",x:1150,y:430,size:48,w:700,col:"green",align:"right",at:w("position","why",-0.2),d:0.8}];
+// 2. one list, fair criteria (Carmen): the order comes from value and effort, which both sides can check, never from who asks or who
+// pushes harder; she strikes that out last, as the voice says it
+const sn_boardB=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"One list, in order");
+    D.panel(c,70,140,440,324,{title:"ordered by",col:"blue",fill:"blue"},(cc,x,y)=>D.matrix(cc,x+70,y+32,320,132,{ys:"value",xs:"effort",on:0,col:"green",q:[["first",{size:30}],"","",""],size:28}));
+    D.panel(c,540,140,230,324,{title:"never",col:"amber",fill:"amber"},(cc,x,y)=>{D.icon(cc,"person",x+115,y+56,36,{fill:"white"});
+      D.text(cc,"who asks,",x+115,y+150,{size:32,w:700,align:"center"});D.text(cc,"who pushes",x+115,y+192,{size:32,w:700,align:"center"});});
+    D.panel(c,800,140,380,324,{title:"fair criteria",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"scale",x+60,y+56,32,{fill:"white"});
+      D.text(cc,"Fisher · Ury",x+112,y+68,{size:30,col:"mut"});});}),
+  {s:"value and effort",x:100,y:450,size:42,w:700,col:"green",at:w("order","value and effort",-0.2),d:1.0},
+  {s:"both sides can check",x:1160,y:450,size:36,w:700,col:"green",align:"right",at:w("fair","check",-0.8),d:1.1},
+  {k:"line",x:612,y:300,x1:700,y1:216,col:"amber",at:w("fair","not who",-0.1),d:0.4}];
+// 3. a positive no (Carmen): a yes, then a clear no, then an offer
+const SN_NO=[["yes","green","shield","what you protect","a yes"],["no","amber","cross","said plainly","clear no"],["then","blue","hand","an offer","offer"]];
+const sn_boardC=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"A positive no",{ref:["William Ury","2007"],rsize:32});
+    SN_NO.forEach(([h,col,ic],i)=>{D.panel(c,70+i*390,150,330,300,{title:(i+1)+" · "+h,col,fill:col},(cc,x,y,pw)=>D.icon(cc,ic,x+pw/2,y+66,42,{fill:"white"}));
+      if(i<2)D.arrow(c,[408+i*390,300],[452+i*390,300],{col:"ink",w:4});});}),
+  ...SN_NO.map(([,col,,s,word],i)=>({s,x:i<2?235+i*390:1160,y:420,size:40,w:700,col,align:i<2?"center":"right",at:w("ury",word,-0.2),d:0.8}))];
+// 4. on Monday (Helena, at the team's board): the list as it was kept, and the four steps; she ticks each step at the board's right
+// edge as the voice comes to it, clear of what is written, and adds the last words
+const SN_MON=[["ask what the date is for","ask","what it's for"],["put the trade-off on the list","show","trade-off"],["no to the date, and an offer","offer","no to the date"],["let them choose; write it down","write","choose"]];
+const sn_boardM=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"On Monday");
+    D.panel(c,70,140,380,272,{title:"the one list",col:"blue",fill:"blue"},(cc,x,y,pw)=>[["rooms' data","27 Aug"],["the refresh","27 Aug"],["new model","29 Oct"]].forEach(([a,d],i)=>{
+      const yy=y+40+i*62;D.disc(cc,x+30,yy-10,8,{fill:"green",col:"ink",w:2});D.text(cc,a,x+52,yy,{size:30,w:700});D.text(cc,d,x+pw-24,yy,{size:30,col:"mut",align:"right"});}));
+    SN_MON.forEach(([s],i)=>{const y=180+i*74;D.disc(c,512,y-12,24,{fill:["blue","orange","amber","green"][i],col:"ink",w:3});D.text(c,String(i+1),512,y-1,{size:30,w:700,align:"center"});D.text(c,s,556,y,{size:36});});}),
+  ...SN_MON.map(([,id,word],i)=>({k:"tick",x:1150,y:166+i*74,r:18,col:"green",at:w(id,word,0.3),d:0.3})),
+  {s:"keep your word",x:1180,y:470,size:46,w:700,col:"green",align:"right",at:w("write","keep",-0.2),d:0.8}];
 
 /* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
-// 1. Helena's page: yes to both, or a bare no
-const sn_note1=(sc,w)=>[
-  {s:"Both in August?",x:70,y:124,size:76,w:760,col:"blue",at:w("yes","yes to both",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"yes · one done badly",x:110,y:250,size:56,col:"amber",at:w("yes","done badly",-0.4),d:0.9},
-  {s:"bare no · Clara left",x:110,y:360,size:56,col:"amber",at:w("bare","bare no",-0.2),d:0.9},
-  {s:"nothing for the budget",x:150,y:470,size:52,col:"amber",at:w("bare","nothing",-0.3),d:0.9}];
-// 2. Noor's page: what the date is for
-const sn_note2=(sc,w)=>[
-  {s:"What it's for",x:70,y:124,size:76,w:760,col:"blue",at:w("enough","budget need",-0.4),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"budget · current model",x:110,y:250,size:54,col:"orange",at:w("enough","current model",-0.4),d:1.0},
-  {s:"asks · new model by Aug",x:110,y:360,size:52,col:"mut",at:w("interest","position",-0.2),d:1.0},
-  {s:"needs · a number to trust",x:110,y:460,size:52,col:"green",at:w("interest","a number",-0.2),d:1.0},
-  {s:"early warning · Dec",x:110,y:550,size:52,col:"green",at:w("interest","earlier warning",-0.2),d:0.9}];
-// 3. Helena's offer
-const sn_note3=(sc,w)=>[
-  {s:"The offer",x:70,y:124,size:76,w:760,col:"blue",at:w("yes","yes",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"yes · the timetable, done well",x:110,y:250,size:48,col:"green",at:w("yes","timetable",-0.3),d:1.1},
-  {s:"no · a new model by August",x:110,y:350,size:48,col:"amber",at:w("no","no new model",-0.2),d:1.0},
-  {s:"refresh · Fri 27 Aug",x:110,y:450,size:52,col:"blue",at:w("refresh","refreshed",-0.3),d:0.9},
-  {s:"new model · Fri 29 Oct",x:110,y:545,size:52,col:"blue",at:w("october","new model",-0.2),d:0.9}];
+// 1. Helena's page (Helena): two asks for the same four weeks; she writes what a yes to both and a bare no would each leave
+const sn_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Both in August?",86,124,{size:76});
+    D.card(c,100,166,{icon:"bars",ifill:"orange",lines:[["Planning",{w:700}],["a new model",{size:30,col:"mut"}]],size:38,w:360});
+    D.card(c,620,166,{icon:"cal",ifill:"orange",lines:[["Registrar",{w:700}],["the rooms' data",{size:30,col:"mut"}]],size:38,w:360});
+    // August's four weeks, both asks in them, and the two people both need
+    D.caps(c,"August",110,390,{size:28,col:"mut"});for(let i=0;i<4;i++)D.box(c,250+i*104,354,92,50,{fill:"amber",col:"ink",w:2.5,r:8});
+    D.arrow(c,[280,280],[320,344],{col:"ink",w:3});D.arrow(c,[800,280],[620,344],{col:"ink",w:3});
+    D.faces(c,756,378,["jun","noor"],{r:30,names:true,size:28});
+    D.panel(c,100,470,420,290,{title:"yes to both",col:"amber",fill:"amber"},(cc,x,y)=>{D.text(cc,"a model untested,",x+30,y+40,{size:32,col:"mut"});D.text(cc,"or the data late",x+30,y+82,{size:32,col:"mut"});});
+    D.panel(c,560,470,420,290,{title:"a bare no",col:"amber",fill:"amber"},(cc,x,y)=>{D.face(cc,SN_CLARA,x+70,y+56,42);D.text(cc,"Clara",x+130,y+46,{size:34,w:700});D.text(cc,"Planning",x+130,y+86,{size:30,col:"mut"});});},[60,40,1040,800]),
+  {s:"one done badly",x:130,y:720,size:46,w:700,col:"amber",at:w("yes","done badly",-0.4),d:0.9},
+  {s:"left with nothing",x:590,y:720,size:44,w:700,col:"amber",at:w("bare","nothing",-0.4),d:0.9}];
+// 2. Noor's page (Noor): what the budget needs, Clara's position, and her interests as she names them
+const sn_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"What it's for",86,124,{size:76});
+    D.panel(c,100,170,880,160,{title:"the budget needs",col:"orange",fill:"orange"},(cc,x,y)=>D.icon(cc,"coin",x+46,y+40,26,{fill:"white"}));
+    // Clara's position, as she first asked it
+    D.face(c,SN_CLARA,150,420,44);D.box(c,214,372,460,84,{fill:"paper",col:"ink",w:3,r:16});D.line(c,[[218,412],[198,424],[218,432]],{col:"ink",w:3,seed:5});
+    D.text(c,"a new model by August",240,428,{size:36,col:"mut"});D.caps(c,"her position",700,424,{size:28,col:"mut"});
+    D.panel(c,100,500,880,260,{title:"her interests",col:"green",fill:"green"},(cc,x,y)=>
+      [["scale","in the budget",x+40],["warn","for admissions",x+490]].forEach(([ic,s,xx])=>{D.icon(cc,ic,xx+30,y+40,26,{fill:"white"});D.text(cc,s,xx+76,y+104,{size:32,col:"mut"});}));},[60,40,1040,800]),
+  {s:"the current model, this year's figures",x:190,y:290,size:40,w:700,col:"orange",at:w("enough","current model",-0.4),d:1.2},
+  {s:"a number to trust",x:216,y:600,size:42,w:700,col:"green",at:w("interest","a number",-0.2),d:0.9},
+  {s:"earlier warning",x:666,y:600,size:42,w:700,col:"green",at:w("interest","earlier warning",-0.2),d:0.8}];
+// 3. Helena's offer (Helena): the yes and the no, then what instead, with its two dates
+const sn_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"The offer",86,124,{size:80});
+    [["yes","green",212],["no","amber",322]].forEach(([s,col,y])=>{D.box(c,100,y-40,96,54,{fill:col,col:"ink",w:3,r:27});D.text(c,s,148,y-2,{size:34,w:700,align:"center"});});
+    D.panel(c,100,390,880,370,{title:"what instead",col:"blue",fill:"blue"},(cc,x,y)=>{D.line(cc,[[x+60,y+50],[x+60,y+176]],{col:"ink",w:3,seed:6});
+      [["Fri 27 Aug","for the budget",y+56],["Fri 29 Oct","before admissions",y+186]].forEach(([d,g,yy])=>{D.disc(cc,x+60,yy-12,14,{fill:"blue",col:"ink",w:3});
+        D.text(cc,d,x+100,yy,{size:40,w:700});D.text(cc,g,x+370,yy+46,{size:30,col:"mut"});});});},[60,40,1040,800]),
+  {s:"the timetable, done well",x:220,y:212,size:46,w:700,col:"green",at:w("yes","timetable",-0.3),d:1.0},
+  {s:"no new model by August",x:220,y:322,size:46,w:700,col:"amber",at:w("no","no new model",-0.2),d:1.0},
+  {s:"the model, refreshed",x:470,y:506,size:42,w:700,col:"blue",at:w("refresh","refreshed",-0.3),d:0.9},
+  {s:"the new model",x:470,y:636,size:42,w:700,col:"blue",at:w("october","new model",-0.2),d:0.8}];
 
 /* ===== Saying no, and what instead: the chapters, shot by shot =====
    The film moves between people and its key ideas (the author, 17 November 2026). In a scene, people are whole and do what the line

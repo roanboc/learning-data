@@ -19,26 +19,73 @@ const hm_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},b
 const hm_talk=(base,tt,spans)=>{const e=PK.exprMix(base,base,0);e.open=Math.max(e.open||0,...spans.map(([a,b])=>PK.talk(tt,a,b)*0.75));return e;};
 const hm_sp=(tt,i,spans,base,g)=>hm_alive(tt,{expr:hm_talk(base||"listen",tt,spans),gaze:[1,g==null?-0.2:g]},i);
 
-/* ---------------------------------------------------------------- the gorge's people */
-// kneeling to twist or braid cord, seen from the side: both hands together in front, the cord running from them to the ground;
-// o.k (0 to 1): from standing to kneeling
-const HM_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
-function hm_twisting(x,who,px,fl,tt,o){o=o||{};const U=PK.u,k=o.k==null?1:o.k,pose=k>=1?HM_TWIST:PK.poseMix("stand",HM_TWIST,U.sine(U.clamp(k,0,1)));
-  const J=hmq_person(x,who,px,fl,hmq_h(fl),pose,Object.assign({t:tt,holds:true},o,o.nod!=null?{}:hm_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0.7]},px%5)));
-  if(J&&J.hdN&&k>0.7){const [hx,hy]=J.hdN,len=o.len||260,sg=o.flip?-1:1,col=PK.S.tone(HMQ_PAL.rope),tw=Math.sin(tt*5)*2;x.save();x.globalAlpha*=U.clamp((k-0.7)/0.3,0,1);x.lineCap="round";x.strokeStyle=U.css(PK.S.ink);x.lineWidth=6;
-    x.beginPath();x.moveTo(hx,hy+4);x.quadraticCurveTo(hx+sg*len*0.4,fl-6+tw,hx+sg*len,fl-2);x.stroke();x.strokeStyle=U.css(col);x.lineWidth=3.4;x.stroke();x.restore();}return J;}
-// a walker on the bridge from u0 to u1 between t0 and t1; returns [u, who, flip, tt] for hmq_bridge, or null
-const hm_on=(tt,who,u0,u1,t0,t1)=>{if(tt<t0-0.2||tt>t1+0.2)return null;const u=PK.u.lerp(u0,u1,PK.u.clamp((tt-t0)/(t1-t0),0,1));return[u,who,u1<u0,tt];};
-// the bank's people: [who, x, floor, pose, flip, opts]; or {fl, draw(x)} for whoever moves
-function hm_bank(x,tt,list){list.map(p=>Array.isArray(p)?{fl:p[2],p}:p).sort((a,b)=>a.fl-b.fl).forEach(it=>{if(it.draw)return it.draw(x);
-  const [who,px,fl,pose,fl2,o0]=it.p,o=o0||{};if(pose==="twist")return hm_twisting(x,who,px,fl,tt,Object.assign({flip:!!fl2},o));
-  const f=o.nod!=null?{}:hm_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},px%5);
-  hmq_person(x,who,px,fl,hmq_h(fl),pose||"stand",Object.assign({t:tt+(px%7),flip:!!fl2},o,f));});}
-// someone who walks onto the bank with a coil of cord, then stands holding it
-const hm_bringer=(tt,who,x0,x1,t0,fl,flip)=>({fl,draw:cc=>{const d=Math.abs(x1-x0)/190;if(tt<t0+d)return hmq_walk(cc,who,tt,{x0,x1,t0,t1:t0+d,floor:fl,h:hmq_h(fl),arms:{aN:HM_CARRY.aN},then:HM_CARRY},Object.assign({flip,hold:hmq_coil,holds:true},hm_alive(tt,{expr:"smile",gaze:[1,0]},x1%5,t0)));
-  return hmq_person(cc,who,x1,fl,hmq_h(fl),HM_CARRY,Object.assign({t:tt,flip,hold:hmq_coil,holds:true},hm_alive(tt,{expr:"smile",gaze:[1,0.1]},x1%5,t0)));}});
-// coils of cord on the ground, checked in
-function hm_pile(x,n,at){const S=PK.S;S.begin(x,{lw:2,sh:3});at.slice(0,n).forEach(([px,py])=>hmq_coil(x,[px,py-22]));}
+/* ---------------------------------------------------------------- the gorge, through the views this film looks at it from (hm_gorge.js)
+   People before roles looks at the bridge from above and from beside its heads, downstream; Wellbeing is in the work from the river
+   below, from the bank upstream and at home; No two alike from the high plain where the grass is cut. This film looks from high
+   over the bridge's head, across the plain and up the gorge; down on it from the rim; at a stone base as the cables are tied; and
+   from up the gorge, past the steel bridge; and on the bank, at the check-in and the braiding of day one (hm_bank.js): each film
+   shows the story from places of its own (the author, 18 November 2026). */
+const HM_VO=hmq_camera({x:-19.5,y:8.5,z:-7,yaw:66,f:760,hor:250});           // high over the bridge's head: the plain, the gorge, the peaks
+const HM_VH=hmq_camera({x:-17,y:5,z:-4.5,yaw:70,f:900,hor:-40});            // from the rim beside its head, down on it and the river
+const HM_VB=hmq_camera({x:-19.6,y:2.2,z:-5.6,yaw:48,f:1050,hor:480});        // at the left bank's stone base, the gorge beyond it
+const HM_VK=hmq_camera({x:-13.2,y:1.7,z:-4.6,yaw:-8,f:1250,hor:260});        // at the bridge's head, from the rim downstream
+const HM_VS=hmq_camera({x:46,y:10,z:156,yaw:200,f:2000,hor:320});            // up the gorge, past the steel bridge, to the rope bridge
+AG_PLACES.hmOver=x=>hmq_ground(x,HM_VO,{});AG_PLACES.hmHigh=x=>hmq_ground(x,HM_VH,{});AG_PLACES.hmHighGrey=x=>hmq_ground(x,HM_VH,{grey:true});
+AG_PLACES.hmBase=x=>hmq_ground(x,HM_VB,{});AG_PLACES.hmHead=x=>hmq_ground(x,HM_VK,{});AG_PLACES.hmSteel=x=>hmq_ground(x,HM_VS,{});AG_PLACES.hmSteelGrey=x=>hmq_ground(x,HM_VS,{grey:true});
+// a view in the sun and under the grey sky of the years the bridge was left are one room: the camera glides on, what changed fades
+AG_ROOMS.hmHighGrey="hmHigh";AG_ROOMS.hmSteelGrey="hmSteel";
+const HM_COIL={hold:hmq_coil,holds:true};
+// the people of a view, as drawables: [who, X, Z, pose, flip, o]; who a name of HMQ_FOLK, or a number (one of the communities'
+// people nobody names). o.face a face through the shot (PK.face), or o.expr and o.gaze for one that lives on its own; o.opt
+// PK.person's own; o.Y how high they stand (on a stone base); o.k a child's height; o.len a twisted cord's length
+const hm_folks=(cam,tt,list)=>list.map(([who,X,Z,pose,flip,o],i)=>{o=o||{};const f=o.face||hm_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},i%5);
+  return hmq_folk(cam,who,X,Z,pose,{t:tt+i*0.7,flip:!!flip,len:o.len,key:o.key,Y:o.Y,k:o.k,after:o.after,opt:Object.assign({},f,o.opt||{})});});
+// a walk along the floor of a bridge of that age, from u0 to u1 (z across it), and on over the bank to the points after it
+const hm_deck=(u0,u1,z,age,more)=>{const p=[];for(let i=0;i<=24;i++){const [x,y]=hmq_deckAt(PK.u.lerp(u0,u1,i/24),{age});p.push([x,y,z||0]);}return p.concat((more||[]).map(q=>[q[0],0,q[1]]));};
+const hm_walk=(cam,who,tt,path,t0,t1,o)=>{o=o||{};return hmq_walker(cam,who,tt,{path,t0,t1,then:o.then,arms:o.arms,k:o.k},{key:o.key,opt:Object.assign({expr:"neutral",gaze:[1,0]},o.opt)});};
+// someone on the bridge's floor at u (z across it), kneeling or standing
+const hm_onDeck=(cam,who,u,z,pose,o)=>{o=o||{};const [X,Y]=hmq_deckAt(u,o.deck);return hmq_folk(cam,who,X,z,pose,Object.assign({Y},o));};
+// the families at both heads of the bridge, as the view from high over its head sees them
+const HM_OVERF=[["m4",16.0,-3.0,"clasp",true],["w5",16.6,2.4,HMQ_TWIST,true,{len:0.8}],[2,17.4,-0.8,"stand",true],[3,18.2,3.6,"clasp",true],["w3",16.4,5.6,"stand",true,{opt:HM_COIL}],[4,17.0,-5.4,"stand",true],
+  ["w2",-14.6,4.0,HMQ_TWIST,false,{len:0.7}],["m1",-14.8,6.0,"clasp",false],["w1",-14.5,7.6,"stand",false,{opt:HM_COIL}]];
+// pulling on a rope: leaning back from it, both hands on it, feet apart; a heave every so often (k: 0 to 1)
+const HM_PULL={lean:-14,head:-4,aN:[52,30,"grip"],aF:[46,36,"grip"],lN:[-20,-6],lF:[22,8]},HM_HEAVE={lean:-22,head:-8,aN:[58,26,"grip"],aF:[52,32,"grip"],lN:[-24,-8],lF:[26,10]};
+const hm_heave=(tt,i)=>PK.poseMix(HM_PULL,HM_HEAVE,0.5-0.5*Math.cos((tt+i*0.37)*2*Math.PI/2.4));
+
+/* at the bridge's head, made: a builder kneels on its floor, weaving its side, and his grandson kneels at the edge of the stone base
+   behind him, watching his hands, then trying the cords at the bridge's head himself; the gorge and its river beyond them */
+const HM_KID={mode:"kneel",lean:10,head:16,aN:[22,26],aF:[16,32],lN:[28,-90],lF:[40,-88],fN:70,fF:70},HM_KTRY={mode:"kneel",lean:24,head:14,aN:[56,44,"grip"],aF:[50,52,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+function hm_teachKid(x,tt,t0,tq){const c=HM_VK,U=PK.u,tr=U.sine(U.clamp((tt-t0-4.6)/0.5,0,1)),hn=c.P(-14.17,0.82,-0.56),hf=c.P(-14.05,0.78,-0.5);
+  return hmq_scene(x,c,{age:0},[hm_onDeck(c,"keeper",0.05,-0.1,HM_WEAVE,{t:tt,flip:false,deck:{},key:"elder",opt:PK.face(tt,{expr:hm_talk("neutral",tt,[[t0+0.8,t0+2.6],[tq+0.4,tq+2.6]]),gaze:[1,0.6]},[[t0+3.0,"look",2.4,[-1,-0.2]],[t0+6.0,"smile",2.2],[tq+3.2,"look",2.0,[-1,-0.2]]])}),
+    hmq_folk(c,HMV_BOY,-14.42,-0.32,PK.poseMix(HM_KID,HM_KTRY,tr),{t:tt+1,Y:HMQ_BASE.h,flip:false,k:0.72,key:"young",opt:Object.assign({reachN:[hn[0],hn[1]],reachF:[hf[0],hf[1]],reachNk:tr,reachFk:tr,holds:tr>0.5},
+      PK.face(tt,{expr:"think",gaze:[1,0.5]},[[t0+2.0,"look",2.2,[1,0.1]],[t0+6.4,"smile",2.4],[tq+0.6,"nod"]]))})]);}
+
+/* day three, from the rim: the sides and the floor woven from both banks, one builder from each, kneeling on the floor as they go,
+   until they meet in the middle (m: 0 to 1); on the far rim, the families watch */
+const HM_WEAVE={mode:"kneel",lean:22,head:14,aN:[58,48,"grip"],aF:[50,56,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+const HM_FARF=[["m4",16.0,-3.0,"clasp",true],["w5",16.6,2.4,HMQ_TWIST,true,{len:0.8}],[2,17.4,-0.8,"stand",true],[3,18.2,3.6,"clasp",true],["w3",16.4,5.6,"stand",true,{opt:HM_COIL}],[4,17.0,-5.4,"stand",true]];
+function hm_weave(x,tt,m,o){o=o||{};const c=HM_VH,U=PK.u,wv=U.lerp(0.1,0.485,U.sine(U.clamp(m,0,1))),bob=a=>PK.poseMix(HM_WEAVE,Object.assign({},HM_WEAVE,{lean:30,aN:[64,40,"grip"],aF:[56,50,"grip"]}),0.5-0.5*Math.cos(tt*2.6+a));
+  return hmq_scene(x,c,{age:0,weave:wv},hm_folks(c,tt,HM_FARF).concat([hm_onDeck(c,"m3",wv,-0.1,bob(0),{t:tt,flip:false,deck:{},opt:PK.face(tt,{expr:"think",gaze:[1,0.6]},[[o.meet||1e9,"smile",3]])}),
+    hm_onDeck(c,"m5",1-wv,0.1,bob(1.3),{t:tt+1,flip:true,deck:{},opt:PK.face(tt,{expr:"think",gaze:[1,0.6]},[[o.meet||1e9,"smile",3]])})]));}
+
+/* day two at the left bank's stone base: the floor cables pulled taut across the gorge by many hands on both banks (slack, from t0
+   to t1); the near one tied already, and a young man kneeling to wind the far one round its post, while the older one, first on its
+   tail, guides him; the others pull behind them, and across the gorge more pull at the far base */
+const HM_TIE={mode:"kneel",lean:26,head:16,aN:[60,40,"grip"],aF:[54,48,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
+const HM_PULLERS=[[-16.3,2.3],[-16.8,3.3],[-17.3,4.3],[-17.8,5.3]],HM_EH=[-15.65,1.0,1.42];
+function hm_tie(x,tt,t0,t1){const c=HM_VB,U=PK.u,p=U.sine(U.clamp((tt-t0-0.4)/(t1-t0-3.4),0,1)),tk=U.sine(U.clamp((tt-t0-2.8)/(t1-t0-3.8),0,1));
+  const tail=[HM_EH].concat(HM_PULLERS.map(q=>[q[0]+0.3,0.95,q[1]-0.55]));
+  // his hands on the turns, going round the post's near side as he winds them, higher with each turn
+  const w=tt*2.4,yh=HMQ_BASE.h+0.24+0.11*2.5*tk,hand=(a,dy)=>c.P(-14.7-0.27*Math.cos(a),yh+dy,0.85-0.27*Math.sin(a));
+  const hN=hand(0.32*Math.sin(w),0.02),hF=hand(0.32*Math.sin(w+1.9)-0.25,-0.03),eN=c.P(HM_EH[0]+0.14,HM_EH[1]-0.01,HM_EH[2]-0.13),eF=c.P(HM_EH[0]-0.14,HM_EH[1]+0.01,HM_EH[2]+0.13);
+  return hmq_scene(x,c,{age:0,k:0.45,slack:4.2*(1-p)+0.2},[...hmq_tied(c,-1,1,{k:tk,tail}),...hmq_tied(c,-1,-1,{k:1}),
+    hmq_folk(c,"m2",-15.17,0.82,HM_TIE,{t:tt,Y:HMQ_BASE.h,flip:false,key:"young",opt:Object.assign({reachN:[hN[0],hN[1]],reachF:[hF[0],hF[1]],holds:true},
+      PK.face(tt,{expr:"think",gaze:[1,0.6]},[[t0+3.6,"look",2.0,[-1,-0.3]],[t0+6.6,"nod"]]))}),
+    hmq_folk(c,"keeper",-15.95,1.2,"stand",{t:tt+1,flip:false,key:"elder",opt:Object.assign({reachN:[eN[0],eN[1]],reachF:[eF[0],eF[1]],holds:true},
+      PK.face(tt,{expr:hm_talk("neutral",tt,[[t0+2.2,t0+4.0],[t0+5.4,t0+6.8]]),gaze:[1,0.4]},[[t0+4.2,"nod"]]))}),
+    // the others on its tail, and across the gorge more pull at the far base
+    ...["m4","m5",6,8].map((who,i)=>hmq_folk(c,who,HM_PULLERS[i][0],HM_PULLERS[i][1],hm_heave(tt,i),{t:tt+2+i,flip:true,opt:Object.assign({holds:true},hm_alive(tt,{expr:"neutral",gaze:[1,0.1]},i,t0))})),
+    ...["m1","m3",10,12].map((who,i)=>hmq_folk(c,who,16.6+i*1.1,-0.85,hm_heave(tt,i+4),{t:tt+3+i,flip:false,opt:{holds:true}}))]);}
 
 // Marta at her desk; someone who walks to a place in a room, then takes up a pose
 const hm_marta=(o)=>Object.assign({work:1,turn:0},o||{});
@@ -63,45 +110,29 @@ const HM_LAST="Agree how you work together, and keep to it.";
 
 /* ---------------------------------------------------------------- 1. Three days in June */
 scene("days",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const tC=c.cord-0.5,tT=c.tie-0.5,tV=c.weave-0.5,tD=c.done-0.5,tN=c.how-0.4,tA=c.data-0.5,N1=PK.pace(ctx,null,hm_note1(sc,w));
-  const tI=w("tire","tires",0);
-  const PILE=[[300,712],[346,722],[392,712],[322,700],[370,700],[1560,712],[1606,722],[1650,712],[1584,700]];
+  const tH=c.hold-0.5,tC=c.cord-0.5,tB=c.braid-0.5,tT=c.tie-0.5,tV=c.weave-0.5,tD=c.done-0.5,tN=c.how-0.4,tA=c.data-0.5,N1=PK.pace(ctx,null,hm_note1(sc,w));
+  const tI=w("tire","tires",0),give=w("cord","checked",-0.2),meet=w("weave","meet",0);
   ag_shots(ctx,S,t,sc.dur,[
-    // the gorge, the bridge across it, people crossing; on the banks, the families
-    {at:0,place:"hmGorge",keys:[[0,960,560,1.0],[c.june-0.2,960,470,1.1],[c.hold-0.2,960,500,1.05],[c.need,700,600,1.12]],d:3,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);hmq_bridge(x,{age:0.05,walkers:[hm_on(tt,"m3",0.04,0.96,0.6,24),hm_on(tt,"w4",0.96,0.04,6,30),hm_on(tt,"v1",0.06,0.94,c.hold,c.hold+22)].filter(Boolean)});
-      hm_bank(x,tt,[["w1",170,900,"stand",false,{hold:hmq_coil,holds:true,expr:"smile",gaze:[1,0.1]}],["m1",440,690,"clasp",false,{expr:"neutral"}],
-        ["w2",300,800,"twist",false,{len:160}],["keeper",1700,880,"clasp",true,{expr:"neutral",gaze:[1,0.1]}],["w3",1560,740,"twist",true,{len:150}]]);}},
-    // day one: the bridge of last year is gone; every family's cord is brought and checked in, on both banks; the braiding begins
-    {at:tC,place:"hmGorge",later:true,keys:[[tC,960,520,1.06],[c.part-0.2,960,540,1.05],[c.braid,560,700,1.3],[E.tire,700,640,1.18]],d:3.2,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);const n=Math.round(U.clamp((tt-tC-1.2)/(c.part-tC-1.6),0,1)*PILE.length);hm_pile(x,n,PILE);
-      const L=[hm_bringer(tt,"w1",2080,1760,tC+0.3,1000,true),hm_bringer(tt,"m4",-160,200,tC+1.6,770,false),hm_bringer(tt,"w3",2080,1860,tC+0.8,820,true),hm_bringer(tt,"m5",2080,1660,tC+2.2,740,true),
-        ["keeper",440,810,"clasp",false,hm_alive(tt,{expr:"neutral",gaze:[1,0.5]},0,tC)],
-        ["w5",1480,660,"clasp",true,PK.face(tt,{expr:"neutral",gaze:[1,0.6]},[[tC+3.4,"nod"],[c.cord+5,"look",2.4,[1,0.3]],[c.part+2,"nod"]])],
-        ["w2",1540,880,"twist",true,{len:150,k:ag_in(tt,c.part,0.5)}]];
-      // one braids until he tires; he stands and steps back, and another kneels in his place
-      L.push({fl:960,draw:cc=>{if(tt<tI+0.6)return hm_twisting(cc,"m2",330,960,tt,{len:150,k:ag_in(tt,c.part+0.6,0.5)*(1-ag_in(tt,tI,0.6))});
-        const ts=tI+0.6;if(tt<ts+2.4)return hmq_walk(cc,"m2",tt,{x0:330,x1:-180,t0:ts,t1:ts+2.4,floor:960,h:hmq_h(960),then:"stand"},Object.assign({flip:true},hm_alive(tt,{gaze:[1,0.3]},2,ts)));}});
-      L.push({fl:965,draw:cc=>{const ta=tI+1.2,tb=tI+3.2;if(tt<ta)return;if(tt<tb)return hmq_walk(cc,"m3",tt,{x0:-160,x1:330,t0:ta,t1:tb,floor:965,h:hmq_h(965),then:"stand"},hm_alive(tt,{},3,ta));
-        return hm_twisting(cc,"m3",330,965,tt,{len:150,k:ag_in(tt,tb,0.5)});}});
-      hm_bank(x,tt,L);}},
-    // day two: many hands pull the cables across and tie them to the old stone bases, the older guiding the younger
-    {at:tT,place:"hmGorge",later:true,keys:[[tT,700,640,1.18],[tT+1.6,960,520,1.05],[c.tie+3,960,500,1.08]],d:3,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);hmq_bridge(x,{age:0,k:0.5*U.clamp((tt-c.tie)/(c.weave-c.tie-0.8),0,1)});
-      const pull=(i)=>Object.assign({holds:true},hm_alive(tt,{expr:"neutral",gaze:[1,0.2]},i,tT));
-      hm_bank(x,tt,[["m1",360,700,HM_CARRY,false,pull(1)],["m4",250,780,HM_CARRY,false,pull(2)],["keeper",130,860,"clasp",false,PK.face(tt,{gaze:[1,0.1]},[[c.tie+1.6,"look",2.4,[1,-0.2]],[c.tie+4.2,"nod"],[c.tie+7,"smile",2.4]])],
-        ["m5",1560,700,HM_CARRY,true,pull(3)],["m3",1670,790,HM_CARRY,true,pull(4)],["w3",1800,880,"clasp",true,PK.face(tt,{gaze:[1,0.1]},[[c.tie+2.4,"nod"],[c.tie+5.2,"look",2.4,[1,-0.2]]])]]);}},
-    // day three: two builders weave the sides and the floor, one from each bank, until they meet in the middle
-    {at:tV,place:"hmGorge",later:true,keys:[[tV,960,500,1.06],[c.done-1.2,960,470,1.14]],d:3,draw:(x,tt,cam)=>{
-      const m=U.clamp((tt-c.weave-0.4)/(c.done-c.weave-1.4),0,1);hmq_steel(x,1);
-      hmq_bridge(x,{age:0,k:0.5+0.5*m,walkers:[[U.lerp(0.04,0.47,m),"m3",false,tt*0.4],[U.lerp(0.96,0.53,m),"m5",true,tt*0.4]]});
-      hm_bank(x,tt,[["keeper",440,700,"clasp",false,{expr:"neutral",gaze:[1,0.3]}],["w1",250,820,"stand",false,{expr:"smile",gaze:[1,0.2]}],["w3",1640,760,"clasp",true,{expr:"smile",gaze:[1,0.2]}]]);}},
-    // that afternoon: the bridge done, people crossing; the next day, they celebrate
-    {at:tD,place:"hmGorge",later:true,keys:[[tD,960,500,1.06],[c.how-0.6,960,520,1.0]],d:3,draw:(x,tt,cam)=>{
-      hmq_steel(x,1);hmq_bridge(x,{age:0,walkers:[hm_on(tt,"m3",0.08,0.92,tD+0.6,tD+14),hm_on(tt,"w4",0.94,0.06,tD+2,tD+16)].filter(Boolean)});
-      const cl={hold:hmq_coil,holds:true,expr:"smile"};
-      hm_bank(x,tt,[["w1",170,900,"stand",false,{expr:"smile"}],["m1",430,700,"clasp",false,{expr:"smile"}],["m4",300,790,"stand",false,{expr:"smile"}],["keeper",1700,880,"clasp",true,{expr:"smile"}],
-        ["w3",1560,740,"stand",true,{expr:"smile"}],["m5",1820,800,"stand",true,{expr:"smile"}]]);}},
+    // at the head of the bridge, the families of the four communities; two people cross it, one each way
+    {at:0,place:"hmOver",keys:[[0,960,540,1.0],[c.june,960,555,1.04],[tH,970,580,1.08]],d:4,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VO,{age:0.05},hm_folks(HM_VO,tt,HM_OVERF).concat([hm_walk(HM_VO,"m3",tt,hm_deck(0.02,0.98,-0.15,0.05,[[16.4,-0.6],[18.6,-1.4]]),-4,24),
+        hm_walk(HM_VO,"w4",tt,hm_deck(0.98,0.05,0.15,0.05),2,30)]));}},
+    // from the rim above its head: someone crossing, about fifteen metres above the river; every cord of it holds them
+    {at:tH,place:"hmHigh",cut:true,keys:[[tH,960,540,1.0],[c.need,900,600,1.14],[c.way,960,540,1.0]],d:4,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0.05},hm_folks(HM_VH,tt,HM_FARF).concat([hm_walk(HM_VH,"m5",tt,hm_deck(0.02,0.98,-0.12,0.05,[[16.2,-0.4],[17.6,-1.8]]),tH-2,tH+20),
+        hm_walk(HM_VH,"w4",tt,hm_deck(0.96,0.04,0.12,0.05),tH+3,tH+26)]));}},
+    // day one, on the bank: every family's cord checked in, and laid in rows (hm_bank.js)
+    {at:tC,place:"hmCheck",cut:true,keys:[[tC,960,540,1.0],[give+1.6,1010,560,1.1],[c.part+1.2,900,520,1.04]],d:4,draw:(x,tt,cam)=>{hmv_check(x,tt,tC,give);}},
+    // three ropes braided into each cable; when the one who braids tires, another takes his place
+    {at:tB,place:"hmBraid",cut:true,keys:[[tB,960,540,1.0],[tI-0.6,880,580,1.12]],d:4,draw:(x,tt,cam)=>{hmv_braid(x,tt,tB,tI);}},
+    // day two: many hands pull the cables across the gorge and tie them to the stone bases, the older guiding the younger
+    {at:tT,place:"hmBase",cut:true,keys:[[tT,960,540,1.0],[c.tie+2.4,900,560,1.06],[tV-0.4,920,550,1.04]],d:4,draw:(x,tt,cam)=>{hm_tie(x,tt,tT,tV);}},
+    // day three: woven from both banks, until the two builders meet in the middle
+    {at:tV,place:"hmHigh",cut:true,keys:[[tV,960,540,1.0],[meet,1020,600,1.12]],d:4,draw:(x,tt,cam)=>{hm_weave(x,tt,(tt-c.weave-0.2)/(meet-c.weave-0.2),{meet:meet+0.2});}},
+    // that afternoon: a bridge for another year, people crossing it, the families at its head
+    {at:tD,place:"hmOver",cut:true,keys:[[tD,970,575,1.08],[c.how-0.4,960,540,1.0]],d:4,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VO,{age:0},hm_folks(HM_VO,tt,HM_OVERF.map(r=>[r[0],r[1],r[2],r[3],r[4],Object.assign({expr:"smile"},r[5]||{})])).concat([
+        hm_walk(HM_VO,"m3",tt,hm_deck(0.04,0.98,-0.15,0),tD-3,tD+18),hm_walk(HM_VO,"m5",tt,hm_deck(0.96,0.05,0.15,0),tD-8,tD+14),hm_walk(HM_VO,7,tt,hm_deck(0.98,0.3,-0.1,0),tD+1,tD+30)]));}},
     {at:tN,place:"hmNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N1,{});}},
     // a data team's work is like that: at their desks, each part leaning on someone else's
     {at:tA,place:"hmTeam",dis:1.0,keys:[[tA,960,540,1.0],[c.more,1040,550,1.06]],d:3,draw:(x,tt,cam)=>{
@@ -114,7 +145,7 @@ scene("days",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
   hm_card(ctx,S,t,c.hold+0.4,c.need-0.3,{kick:"For a year",title:"About 15 metres above the river",col:PK.C.orange},{y:40,mid:true});
   hm_card(ctx,S,t,tC+0.4,c.part-0.4,{kick:"Day one",title:"Every cord checked in"},{y:40,mid:true});
   hm_card(ctx,S,t,tT+0.4,c.tie+4.4,{kick:"Day two",title:"Cables across the gorge"},{y:40,mid:true});
-  hm_card(ctx,S,t,tV+0.4,c.weave+4.4,{kick:"Day three",title:"Woven from both banks"},{y:40,mid:true});
+  hm_card(ctx,S,t,tV+0.4,c.weave+4.4,{kick:"Day three",title:"Woven from both banks"},{y:40});
   hm_card(ctx,S,t,tD+0.4,c.how-0.8,{kick:"By that afternoon",title:"A bridge for another year",col:PK.C.green},{y:40,mid:true});
   hm_imagined(ctx,S,t,tA+0.6,c.breath,"The university, 2027 · imagined");
   PK.title(ctx,S,t,c.breath+0.2,"How, more than who","How a team works together","Leading data people · People first",{side:"right",size:64});
@@ -125,9 +156,8 @@ scene("who",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,
   const tZ=w("google","studied",-1.0),tG=c.gorge-0.5,tK=w("gorge","In a data team",-0.5),BA=PK.pace(ctx,"carmen",hm_boardA(sc,w)),N2=PK.pace(ctx,null,hm_note2(sc,w));
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"hmBoard",keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BA,{say:[[c.google,E.google],[c.quote,E.quote],[c.safe,E.safe],[c.word,E.word]]});}},
-    // the gorge keeps both, from custom
-    {at:tG,place:"hmGorge",dis:0.8,keys:[[tG,700,620,1.15]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.05});
-      hm_bank(x,tt,[["w2",300,800,"twist",false,{len:160}],["keeper",470,720,"clasp",false,{expr:"neutral",gaze:[1,0.4]}],["m4",200,900,HM_CARRY,false,{hold:hmq_coil,holds:true,expr:"smile"}]]);}},
+    // the gorge has both, from custom: each family's cord, promised and checked in; each community's part, known
+    {at:tG,place:"hmCheck",dis:0.8,keys:[[tG,960,540,1.0],[tK,900,540,1.06]],d:3,draw:(x,tt,cam)=>{hmv_check(x,tt,tG,tG+2.4);}},
     {at:tK,place:"hmNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N2,{});}}
   ]);
   hm_kick(ctx,S,ag_in(t,0.6,0.6)*(1-hm_apart(t,[[tZ,tG],[tK,1e9]])));
@@ -191,7 +221,7 @@ scene("turn",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
     // a turn each: Erin, who hadn't spoken; Marta, who knows the university's numbers
     {at:0,place:"hmTeam",later:true,keys:[[0,960,540,1.0],[c.erin-0.2,1300,580,1.1],[c.marta-0.2,820,580,1.08],[tF-0.4,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
       const R=hm_seven(x,tt,{rows:BD,clock:10.8,say:[[c.round,E.round]],faces:{erin:hm_sp(tt,5,[[eS,E.erin]],"neutral",0),marta:hm_sp(tt,2,[[mS,E.marta]],"neutral",0)}});
-      hm_name(x,R.erin,tt,c.erin+0.2,eS-0.2,"Erin Walsh","Platform engineer",150,-160);
+      hm_name(x,R.erin,tt,c.erin+0.2,eS-0.2,"Erin Walsh","Platform engineer",250,-160);
       hm_bub(x,R.erin,tt,eS,E.erin+0.5,["The old report reads","only the student system."],cam,{lean:200,rise:150});
       hm_name(x,R.marta,tt,c.marta+0.2,mS-0.2,"Marta Silva","Data analyst",150);
       hm_bub(x,R.marta,tt,mS,E.marta+0.5,["I can say what","each of them counts."],cam);}},
@@ -205,7 +235,8 @@ scene("turn",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
       const ph=R.jun&&R.jun.hc?[R.jun.hc[0]-40,R.jun.hc[1]+60]:[1700,600];
       PK.callout(x,440,36,620,270,ph,ag_io(tt,w("ticket","asks",-0.4),tL-0.3,0.4),(cc,bx,by,bw,bh)=>PK.chat(cc,bx,by,bw,bh,{title:"Ticket · Registrar's office",who:["jun"],me:"jun",
         msgs:[{who:"jun",s:"Census day: students or learners?",at:w("ticket","asks",0)},{who:"jun",s:"Which one do we publish?",at:w("ticket","ticket",0.2)}]},tt,{}));}},
-    {at:tL,place:"hmNotes",dis:0.6,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}}
+    // the notebook's glossary has the two words the board has: cut, so they never show twice
+    {at:tL,place:"hmNotes",cut:true,keys:[[tL,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N3,{});}}
   ]);
   hm_kick(ctx,S,ag_in(t,0.6,0.6)*(1-hm_apart(t,[[tG,tO],[w("ticket","asks",-0.4),1e9]])));
 });
@@ -219,8 +250,7 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
     {at:tZ,cut:true,place:"hmBoard",keys:[[tZ,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"helena",tt,BH,{say:[[c.thu,E.thu]]});}},
     {at:tI,place:"hmBoard",later:true,keys:[[tI,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.teach(x,"carmen",tt,BI,{say:[[c.trust,E.trust],[c.charter,E.charter],[c.small,E.small]]});}},
     // at the gorge, the way is passed on by doing it, parents beside children
-    {at:tY,place:"hmGorge",dis:0.8,keys:[[tY,620,700,1.25]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.1});
-      hm_bank(x,tt,[["w2",250,880,"twist",false,{len:120}],["w5",400,930,"twist",false,{len:80,gaze:[1,0.4]}],["keeper",470,740,"clasp",false,{expr:"smile",gaze:[1,0.5]}]]);}},
+    {at:tY,place:"hmBraid",dis:0.8,keys:[[tY,960,540,1.0],[tK,1060,600,1.12]],d:3,draw:(x,tt,cam)=>{hmv_braid(x,tt,tY,1e9,{kids:true});}},
     {at:tK,place:"hmNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N4,{});}},
     // on Friday, the page is on the wall
     {at:tW,place:"hmTeam",dis:0.8,keys:[[tW,960,540,1.0],[sc.dur,1000,550,1.05]],d:3,draw:(x,tt,cam)=>{hm_seven(x,tt,{rows:BH,clock:9});}}
@@ -233,32 +263,32 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id
 /* ---------------------------------------------------------------- 7. Where the bridge stops */
 scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
   const tL=c.lapse-0.5,tF=c.fell-0.5,tC=c.cut-0.5,tA=c.again-0.5,tN=c.line-0.5,tS=c.steel-0.5,tU=c.custom-0.5,tE=c.each-0.4,tT=c.tomas-0.4,N5=PK.pace(ctx,null,hm_note5(sc,w));
-  const fF=w("fell","bridge fell",0),fC=w("cut","cut it down",0);
+  const fF=w("fell","bridge fell",0),fC=w("cut","cut it down",0),sw=w("lapse","steel",-0.2);
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"hmGorge",keys:[[0,960,520,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.1,walkers:[hm_on(tt,"m3",0.06,0.94,0.4,14)].filter(Boolean)});
-      hm_bank(x,tt,[["w1",170,900,"stand",false,{expr:"smile"}],["m1",440,700,"clasp",false,{}],["w3",1560,740,"stand",true,{expr:"smile"}],["keeper",1700,880,"clasp",true,{}]]);}},
-    // around 1970, a steel bridge newly beside it: the bridge left for a time
-    {at:tL,place:"hmGorgeGrey",later:true,keys:[[tL,960,500,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,ag_in(tt,w("lapse","steel",-0.2),1.2),null,true);hmq_bridge(x,{age:0.85,grey:true});
-      hm_bank(x,tt,[["keeper",1640,820,"clasp",true,PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[tL+1.4,"look",2.6,[1,0.3]],[E.lapse,"nod"]])]]);}},
-    // 2020: the work stops; March 2021: it falls
-    {at:tF,place:"hmGorgeGrey",later:true,keys:[[tF,960,500,1.05],[fF+0.6,960,520,1.1]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1,null,true);hmq_bridge(x,{age:0.9,grey:true,fall:U.sine(U.clamp((tt-fF)/1.6,0,1))});
-      hm_bank(x,tt,[["m1",440,700,"clasp",false,PK.face(tt,{expr:"worry",gaze:[1,0.2]},[[tF+1,"look",2.4,[1,0.4]],[fF+0.3,"look",3.0,[1,0.6]]])]]);}},
-    // May 2025: cut down in the night
-    {at:tC,place:"hmGorgeGrey",later:true,keys:[[tC,960,500,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1,null,true);hmq_bridge(x,{age:0.15,grey:true,fall:U.sine(U.clamp((tt-fC)/1.4,0,1))});
-      hm_bank(x,tt,[["keeper",1640,820,"clasp",true,PK.face(tt,{expr:"worry",gaze:[1,0.1]},[[fC+0.3,"look",3.0,[1,0.6]],[E.cut+0.4,"nod"]])]]);}},
-    // each time, woven again
-    {at:tA,place:"hmGorge",later:true,keys:[[tA,960,520,1.05]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0,k:U.clamp((tt-c.again)/(E.again-c.again+0.4),0,1)});
-      hm_bank(x,tt,[["w2",300,800,"twist",false,{len:160}],["m4",200,900,HM_CARRY,false,{hold:hmq_coil,holds:true,expr:"smile"}],["w3",1560,740,"twist",true,{len:150}],["m5",1760,880,HM_CARRY,true,{hold:hmq_coil,holds:true,expr:"smile"}]]);}},
-    // the weaving taught inside a builder's own family; the language of the work
-    {at:tN,place:"hmGorge",later:true,keys:[[tN,960,520,1.05],[tN+1.8,400,760,1.35]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.05});
-      hm_bank(x,tt,[["m2",190,860,"twist",false,{len:110}],["m5",400,950,"twist",false,{len:70,gaze:[1,0.4]}]]);}},
-    // most people cross on the steel bridge now; visitors on the grass one
-    {at:tS,place:"hmGorge",later:true,keys:[[tS,400,760,1.35],[tS+1.8,960,480,1.1]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1,U.clamp((tt-tS)/8,0,1));
-      hmq_bridge(x,{age:0.1,walkers:[hm_on(tt,"v1",0.06,0.94,tS+0.4,tS+14),hm_on(tt,"v2",0.1,0.94,tS+2.4,tS+16)].filter(Boolean)});
-      hm_bank(x,tt,[["keeper",1700,880,"clasp",true,{expr:"smile",gaze:[1,0.2]}]]);}},
-    // custom settles who does which part
-    {at:tU,place:"hmGorge",later:true,keys:[[tU,960,520,1.05],[c.judge,800,560,1.1]],d:3,draw:(x,tt,cam)=>{hmq_steel(x,1);hmq_bridge(x,{age:0.05});
-      hm_bank(x,tt,[["w1",170,900,HM_CARRY,false,{hold:hmq_coil,holds:true}],["w2",300,790,"twist",false,{len:150}],["m1",440,700,"clasp",false,{}],["w3",1560,740,"twist",true,{len:150}],["keeper",1700,880,"clasp",true,{}]]);}},
+    // still, each June, four communities at its head, and people crossing it
+    {at:0,place:"hmOver",keys:[[0,980,575,1.06],[tL,960,540,1.0]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VO,{age:0.1},hm_folks(HM_VO,tt,HM_OVERF).concat([hm_walk(HM_VO,"m3",tt,hm_deck(0.04,0.98,-0.15,0.1),-3,20),hm_walk(HM_VO,"w4",tt,hm_deck(0.96,0.05,0.15,0.1),-8,16)]));}},
+    // around 1970: a steel bridge newly built up the gorge; the bridge of grass, left for a time, sags and greys
+    {at:tL,place:"hmSteelGrey",cut:true,keys:[[tL,960,540,1.0],[c.fell-0.6,920,520,1.08]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VS,{age:0.85,grey:true,steel:ag_in(tt,sw,1.2)},[hm_walk(HM_VS,"m1",tt,[hmq_steelAt(0.12,0.2),hmq_steelAt(0.9,0.2)],sw+1.4,sw+14)]);}},
+    // 2020: the work stops; March 2021: the bridge falls, in two, into the gorge
+    {at:tF,place:"hmHighGrey",cut:true,keys:[[tF,960,540,1.0],[fF+0.6,940,600,1.08]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0.9,grey:true,fall:U.sine(U.clamp((tt-fF)/1.6,0,1))},hm_folks(HM_VH,tt,[["keeper",16.2,-2.2,"clasp",true,{face:PK.face(tt,{expr:"worry",gaze:[1,0.3]},[[fF+0.3,"look",3.0,[1,0.7]]])}],
+        ["m1",16.8,1.8,"stand",true,{face:PK.face(tt,{expr:"worry",gaze:[1,0.3]},[[fF+0.5,"look",3.0,[1,0.6]]])}]]));}},
+    // May 2025: cut loose in the night, it falls to the river
+    {at:tC,place:"hmHighGrey",later:true,keys:[[tC,960,540,1.0],[fC+0.6,960,620,1.06]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0.15,grey:true,cut:U.sine(U.clamp((tt-fC)/1.4,0,1))},[]);}},
+    // each time, woven again, from both banks
+    {at:tA,place:"hmHigh",later:true,keys:[[tA,960,540,1.0],[c.line-0.4,960,560,1.04]],d:3,draw:(x,tt,cam)=>{
+      hmq_scene(x,HM_VH,{age:0,k:Math.max(0.04,U.clamp((tt-c.again)/(E.again-c.again+0.6),0,1))},hm_folks(HM_VH,tt,HM_FARF));}},
+    // the weaving is taught inside a builder's own family: at the bridge's head, a grandfather shows a grandson; the language of the work
+    {at:tN,place:"hmHead",cut:true,keys:[[tN,960,540,1.0],[c.quechua,1010,560,1.06]],d:3,draw:(x,tt,cam)=>{hm_teachKid(x,tt,tN,c.quechua);}},
+    // most people cross on the steel bridge now, on foot and by truck; visitors cross the bridge of grass, down the gorge
+    {at:tS,place:"hmSteel",cut:true,keys:[[tS,960,540,1.0],[c.custom-0.6,1000,520,1.08]],d:3,draw:(x,tt,cam)=>{const k=U.clamp((tt-tS)/(c.custom-tS),0,1);
+      hmq_scene(x,HM_VS,{age:0.1,truck:U.lerp(0.95,0.05,k)},[hm_walk(HM_VS,"w3",tt,[hmq_steelAt(0.1,-0.3),hmq_steelAt(0.95,-0.3)],tS-2,tS+16),hm_walk(HM_VS,"m5",tt,[hmq_steelAt(0.85,0.35),hmq_steelAt(0.05,0.35)],tS-4,tS+12),
+        hm_walk(HM_VS,"v1",tt,hm_deck(0.05,0.95,-0.1,0.1),tS-3,tS+16),hm_walk(HM_VS,"v2",tt,hm_deck(0.02,0.92,0.1,0.1),tS-1,tS+18)]);}},
+    // custom settles who does which part: who makes the cord, who braids the cables (hm_bank.js)
+    {at:tU,place:"hmBraid",cut:true,keys:[[tU,960,540,1.0],[c.judge,900,560,1.08]],d:3,draw:(x,tt,cam)=>{hmv_braid(x,tt,tU,1e9);}},
     {at:tE,place:"hmNotes",dis:0.6,keys:[[tE,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N5,{});}},
     // Tomás asked to be asked
     {at:tT,place:"hmTeam",dis:0.8,keys:[[tT,700,600,1.1],[sc.dur,800,580,1.06]],d:3,draw:(x,tt,cam)=>{

@@ -189,21 +189,33 @@ window.LD_ROUTE = {
      ]
     },
     {
-     "id": "ai-and-continuous-architecture",
+     "id": "continuous-architecture",
      "kind": "series",
-     "title": "IA y arquitectura continua",
-     "href": "ai-and-continuous-architecture/",
-     "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Serie · 6 películas",
-     "len": "48 min",
-     "min": 48.0,
+     "title": "Arquitectura continua",
+     "href": "continuous-architecture/",
+     "poster": "a-first-draft-not-a-blank-page-poster.jpg",
+     "kicker": "Serie · 3 películas",
+     "len": "24 min",
+     "min": 24.0,
      "films": [
-      "ld-agents-on-the-map",
-      "ld-the-ai-platform",
-      "ld-what-an-agent-may-read",
       "ld-a-first-draft-not-a-blank-page",
       "ld-every-change-checked",
       "ld-kept-alive"
+     ]
+    },
+    {
+     "id": "ai-architecture",
+     "kind": "series",
+     "title": "Arquitectura de IA",
+     "href": "ai-architecture/",
+     "poster": "agents-on-the-map-poster.jpg",
+     "kicker": "Serie · 3 películas",
+     "len": "24 min",
+     "min": 24.0,
+     "films": [
+      "ld-agents-on-the-map",
+      "ld-the-ai-platform",
+      "ld-what-an-agent-may-read"
      ]
     }
    ]
@@ -281,18 +293,18 @@ window.LD_ROUTE = {
    "line": "Lo que significan las cifras, y las formas que las contienen: primero las palabras y las definiciones, luego los modelos, antes que cualquier sistema.",
    "items": [
     {
-     "id": "sketch",
-     "kind": "film",
-     "title": "A Sharper Sketch",
-     "href": "sketch/",
-     "poster": "sketch-poster.jpg",
-     "kicker": "Una película",
-     "len": "5½ min",
-     "min": 5.5,
+     "id": "model-the-business",
+     "kind": "series",
+     "title": "Modelar el negocio",
+     "href": "model-the-business/",
+     "poster": "the-map-behind-the-sketch-poster.jpg",
+     "kicker": "Serie · 2 películas",
+     "len": "14 min",
+     "min": 14.0,
      "films": [
+      "ld-the-map-behind-the-sketch",
       "ld3"
-     ],
-     "lang": "en"
+     ]
     },
     {
      "id": "from-words-to-data",
@@ -313,7 +325,8 @@ window.LD_ROUTE = {
       "ld-keeping-it-true"
      ]
     }
-   ]
+   ],
+   "proj": 1
   },
   {
    "id": "modern-data-basics",
@@ -809,7 +822,7 @@ window.LD_ROUTE = {
    "stops": [
     "intro",
     "more-than-a-platform",
-    "sketch",
+    "model-the-business",
     "data-that-moves",
     "when-things-go-wrong"
    ]

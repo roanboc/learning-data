@@ -2008,7 +2008,7 @@ eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()
   ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
 yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
 
-/* ===== AI and continuous architecture: the series' components =====
+/* ===== Continuous architecture and AI architecture: the two series' shared components =====
    The last series on enterprise architecture, drawn in the look of The map before the data (films/enterprise-architecture/shared/src/:
    the six layers in glass, paper drafts, the same people at the same energy utility), with one true story across its six films: the
    ziggurat of Babylon, Etemenanki, rebuilt from about 620 BCE. This file holds what every film of the series draws:
@@ -2037,14 +2037,16 @@ function acaMark(ctx,x,y,s,a,p){if(a<=0.01)return;p=p==null?1:p;withA(ctx,a,()=>
   const w=s*(4-i)*1.15,h=s*0.62,yy=y-(i+1)*h-i*s*0.14+(1-spring(q*1.4))*s*0.7;
   withA(ctx,clamp(q*2,0,1),()=>{ctx.save();ctx.shadowColor=rgba(ACA,0.6);ctx.shadowBlur=12;rr(ctx,x-w/2,yy,w,h,s*0.08);ctx.fillStyle=rgba(ACA,0.16);ctx.fill();
     ctx.strokeStyle=rgba(ACA,1);ctx.lineWidth=Math.max(1.6,s*0.09);ctx.stroke();ctx.restore();});}});}
-// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series
+// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series.
+// n is "Film 1 of 3 · <the series>" in both cards: the series' name comes from it, as the two series share these components
+const acaSeries=n=>(n||"").split(" · ")[1]||"",acaFilm=n=>(n||"").split(" · ")[0];
 function acaTitle(ctx,S,t,t0,title,sub,n){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
-  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,"AI AND CONTINUOUS ARCHITECTURE",960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,acaSeries(n).toUpperCase(),960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
     T(ctx,title,960,568,{w:800,size:92,align:"center"});if(sub)T(ctx,sub,960,640,{w:600,size:36,align:"center",color:rgba(SOFT,0.95)});
     withA(ctx,fin(t,t0+1.2,0.8),()=>tag(ctx,960,718,n,ACA,{align:"center",size:28}));});}
 function acaEnd(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
   withA(ctx,tA,()=>{if(line)T(ctx,line,960,400,{w:700,size:44,align:"center"});acaMark(ctx,960,560,16,0.95,1);T(ctx,title,960,628,{w:800,size:44,align:"center",color:rgba(ACA,1)});
-    T(ctx,"AI and continuous architecture"+(n?" · "+n:"")+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
+    T(ctx,acaSeries(n)+" · "+acaFilm(n)+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
 
 /* ---------- Babylon: sky, city, river and palms ---------- */
 // The world is drawn in world space, wider than the frame, so the camera (focus) can move over it. o.dawn (0..1) goes from night to
@@ -2863,7 +2865,7 @@ scene("brick",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
       bab_tag(cx,960,214,"to keep the river's water out",a5_win(t,w("city","to keep")+0.6,tNe-0.3,0.6));
       bab_tag(cx,960,214,"never done: king after king, on the same line",a5_win(t,tKa-0.3,w("never","for centuries")-0.2,0.6));
       bab_tag(cx,960,214,"repaired for centuries",a5_win(t,w("never","for centuries")+0.3,tLo-0.8,0.6));});
-  acaTitle(ctx,S,t,B+0.8,"Every change, checked","every element owned and sourced; every change tested and walked","Film 5 of 6 · AI and continuous architecture");});
+  acaTitle(ctx,S,t,B+0.8,"Every change, checked","every element owned and sourced; every change tested and walked","Film 2 of 3 · Continuous architecture");});
 
 /* ---------- 2. What will it touch? ---------- */
 // Tomás and the map, changing every day; planned work on a street; last year's move to a new table, and the letters that kept reading
@@ -3248,7 +3250,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   withA(ctx,fin(t,1.0,1.0),()=>{ctx.save();ctx.translate(960,646);ctx.scale(0.42,0.42);ctx.translate(-1115,-400);
     a5_texMap(ctx,t,A5_TM,{deco:true,stamp:1,chk:clamp((t-w("answer","test the map")+0.2)/2.4,0,1),walk:clamp((t-w("walkit","Walk each")+0.2)/2.2,0,1)});ctx.restore();});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"Every change, checked","Give every element an owner and a source. Test every change.","Film 5 of 6");});
+  acaEnd(ctx,S,t,B,"Every change, checked","Give every element an owner and a source. Test every change.","Film 2 of 3 · Continuous architecture");});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

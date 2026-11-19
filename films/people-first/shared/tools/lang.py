@@ -19,7 +19,7 @@ SHARED = FILMS / 'inner-life-of-data' / 'source'
 SKETCH = FILMS / 'a-sharper-sketch' / 'source' / 'src'
 AGS = FILMS / 'what-an-agent-is' / 'shared' / 'src'
 PKS = pathlib.Path(__file__).resolve().parents[1] / 'src'
-KIT = ('core.js', 'people.js', 'things.js', 'words.js', 'places.js', 'kalam.js', 'hand.js', 'concepts.js', 'talk.js')
+KIT = ('core.js', 'people.js', 'things.js', 'words.js', 'places.js', 'kalam.js', 'hand.js', 'concepts.js', 'talk.js', 'sketch.js')
 META = json.loads((ROOT / 'film.json').read_text())
 LANG = os.environ.get('FILM_LANG', 'en')
 EN = LANG == 'en'

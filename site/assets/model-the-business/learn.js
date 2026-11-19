@@ -2,9 +2,10 @@
    copied from From words to data's (site/assets/from-words-to-data/learn.js, itself Data that moves'): the series' labs page and
    scenarios page load a film's bundle (for its parts: glass, T, withA, rr, tw), the words (learn.en.js or learn.es.js, which set
    window.WD), and this file.
-   Every lab is a playground (kind "play"), one for each film, as the author set on 18 November 2026: the visitor switches, picks and
-   presses, and watches what happens; each playground has three to five experiments (w.goals), each ticked when the visitor makes it
-   happen, and its end once all are ticked. Each playground's own rules are in PLAY below, its words in the pack.
+   Every lab is a playground (kind "play"), as the author set on 18 November 2026, and up to four for each film, the most interactive
+   and meaningful, as the author set on 19 November 2026: the visitor switches, picks, slides and presses, and watches what happens;
+   each playground has three to five experiments (w.goals), each ticked when the visitor makes it happen, and its end once all are
+   ticked. Each playground's own rules are in PLAY below, its words in the pack.
    The scenarios are the series' evaluation, every one a choice, its options shown in the order the words give them, where the right
    answers are spread (site-tools/check_site.py reads them).
    Every picture is laid out for its own width on the page, drawn 320 to 640 units wide (a unit is a CSS pixel there), so its words stay
@@ -104,7 +105,7 @@ const info=t=>h("p",{class:"lab-info"},t);
 function focusIn(el){if(!el)return;try{el.focus({preventScroll:true});}catch(e){el.focus();}const r=el.getBoundingClientRect();if(r.bottom>innerHeight-8||r.top<120)el.scrollIntoView({block:"center",behavior:RM()?"auto":"smooth"});}
 
 /* ---------- play: a playground with experiments ---------- */
-// PLAY[id](Lb, api) gives the playground: its state (S), its controls (built with api.seg, api.toggle and api.btn), its readouts
+// PLAY[id](Lb, api) gives the playground: its state (S), its controls (built with api.seg, api.toggle, api.btn and api.range), its readouts
 // ([[label, () => value]]), and its picture (lay, draw). api.say(text, tone) says what just happened; api.reach(key) ticks an
 // experiment; api.kick(ms) keeps the picture moving. Start again puts everything back as it was, the ticks included.
 const PLAY={};
@@ -120,7 +121,12 @@ function labPlay(Lb){const W=Lb.w,G=W.goals,box=h("div",{class:"lab pg-lab",styl
     group:(label)=>{const g=h("div",{class:"pg-row"},label?h("span",{class:"lbl"},label):null);ctrl.append(g);return g;},
     seg:(row,items,cur,fn,lbl)=>{const g=h("div",{class:"seg",role:"group","aria-label":lbl||""});items.forEach(([k,l])=>{const b=h("button",{type:"button","data-k":k,"aria-pressed":k===cur?"true":"false",onclick:()=>{[...g.children].forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));fn(k);api.refresh();}},l);g.append(b);});row.append(g);return g;},
     toggle:(row,label,on,fn)=>{const b=h("button",{type:"button",class:"chip-btn","aria-pressed":on?"true":"false",onclick:()=>{const v=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(v));fn(v);api.refresh();}},label);row.append(b);return b;},
-    btn:(row,label,fn,cls)=>{const b=h("button",{type:"button",class:"chip-btn"+(cls?" "+cls:""),onclick:()=>{fn();api.refresh();}},label);row.append(b);return b;}};
+    btn:(row,label,fn,cls)=>{const b=h("button",{type:"button",class:"chip-btn"+(cls?" "+cls:""),onclick:()=>{fn();api.refresh();}},label);row.append(b);return b;},
+    // a slider: fn(value, done) as it moves (done false) and where it's let go (done true); txt(value) says the value in words
+    range:(row,label,min,max,v,fn,txt)=>{const vt=x=>txt?txt(x):String(x),r=h("input",{type:"range",min:String(min),max:String(max),step:"1",value:String(v),"aria-label":label,"aria-valuetext":vt(v)});
+      const on=done=>{const x=+r.value;r.setAttribute("aria-valuetext",vt(x));fn(x,done);api.refresh();};
+      r.addEventListener("input",()=>on(false));r.addEventListener("change",()=>on(true));
+      r.set=x=>{r.value=String(x);r.setAttribute("aria-valuetext",vt(x));};row.append(r);return r;}};
   function paintGoals(just){list.replaceChildren(...G.map(([k,t],i)=>h("li",{class:got.has(k)?"ok":"","data-k":k},h("i",{"aria-hidden":"true"},got.has(k)?"✓":String(i+1)),h("span",null,t),got.has(k)?h("span",{class:"sr"}," · "+U.reached):null)));
     const n=got.size,done=n===G.length;end.replaceChildren(...(done?[h("p",{class:"pg-end"},...rich(W.end))]:[]));
     if(just){const g=G.find(x=>x[0]===just);say.append(h("span",{class:"ok"}," "+fill(U.reachedOne,{t:g[1]})));if(done)say.append(h("span",{class:"sr"}," "+W.end.replace(/<\/?b>/g,"")));}
@@ -320,6 +326,175 @@ function fourCols(ctx,b,F,a){const lit=a>0.01;card(ctx,b.x,b.y,b.w,b.h,lit?K.gol
   withA(ctx,a,()=>F.cols.forEach(([h,v],i)=>{const x=b.x+i*cw;lines(ctx,h,x+6,b.y+44,cw-12,{size:12,max:2,w:700,align:"center",color:rgbaS(K.soft,1)});
     T(ctx,v,x+cw/2,b.y+b.h-12,{w:800,size:22,align:"center",color:rgbaS(cols[i],1)});
     if(i){ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.25);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,b.y+34);ctx.lineTo(x,b.y+b.h-8);ctx.stroke();ctx.restore();}}));}
+
+/* ---------- 2 · A Sharper Sketch: choose a reference model ---------- */
+// Four reference models for higher education, and four situations. Pick where to start from: the card shows how it fits the
+// situation (where it applies, what it's for, and whether anyone can read it), lit green where it's the best start and amber where
+// another fits better. Then write the choice down, and why, as the film's note does. Each situation's best start, and how each
+// candidate fits it (fit: y, p or n for each of the three), are in the words (w.sits).
+const FIT_MARK={y:"ok",p:"part",n:"bad"};
+// a mark for how well something fits: a tick, a dash for partly, or a cross
+function fitMark(ctx,x,y,k){if(k!=="part"){mark(ctx,x,y,k);return;}ctx.save();ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(x,y,8,0,TP);ctx.fill();
+  ctx.strokeStyle=rgbaS(K.warm,1);ctx.lineWidth=1.6;ctx.stroke();ctx.lineWidth=2.2;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x-3.4,y);ctx.lineTo(x+3.4,y);ctx.stroke();ctx.restore();}
+PLAY.choose=(Lb,api)=>{const W=Lb.w,M=W.msg,C=W.cands,SI=W.sits,S={si:0,pick:SI.map(()=>new Set()),cur:SI.map(()=>null),pT:null,note:SI.map(()=>null)};
+  const cand=k=>C.find(c=>c.k===k),found=()=>SI.filter((s,i)=>S.pick[i].has(s.best)).length;
+  let gC=null;const sync=()=>{if(gC)[...gC.children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===S.cur[S.si]?"true":"false"));};
+  api.seg(api.group(W.sitL),SI.map((s,i)=>[String(i),String(i+1)]),"0",k=>{S.si=+k;sync();api.kick(500);api.say(fill(M.sit,{n:S.si+1,t:SI[S.si].t}));},W.sitL);
+  gC=api.seg(api.group(W.candL),C.map(c=>[c.k,c.n]),null,k=>{const s=SI[S.si],ok=k===s.best;S.pick[S.si].add(k);S.cur[S.si]=k;S.pT=performance.now();api.kick(600);
+    api.say((ok?M.best:M.weak)+" "+s.why[k],ok?"ok":"warn");if(ok)api.reach(s.g);},W.candL);
+  api.btn(api.group(W.noteL),W.noteB,()=>{const k=S.cur[S.si];if(!k){api.say(M.note.none);return;}const ok=k===SI[S.si].best;
+    S.note[S.si]={k,ok,t0:performance.now()};api.kick(700);api.say(fill(ok?M.note.best:M.note.weak,{c:cand(k).n,n:S.si+1}),ok?"ok":"warn");if(ok)api.reach("why");});
+  // the situation; the four cards, two by two, each line of the two cards side by side as many lines as the longer needs at this
+  // width; the situation's note
+  const lay=(lw,ctx)=>{const m=10,W2=lw-m*2,g=8,cw=(W2-g)/2,o={lw,m,W2,cw,lh:17};
+    const sl=Math.max(...SI.map(s=>fitL(ctx,s.t,W2-24,13.5,4,700)[0].length));o.sit={x:m,y:10,w:W2,h:Math.round(32+sl*o.lh+8)};
+    let y=o.sit.y+o.sit.h+12;o.cards=[];
+    for(let r=0;r*2<C.length;r++){const two=C.slice(r*2,r*2+2),rows=["c","p","a"].map(k=>Math.max(...two.map(c=>fitL(ctx,c[k],cw-44,12.5,2,600)[0].length)));
+      const ch=Math.round(30+rows.reduce((a,b)=>a+b,0)*o.lh+8);two.forEach((c,j)=>o.cards.push({x:m+j*(cw+g),y,h:ch,rows}));y+=ch+g;}
+    const nl=Math.max(...SI.flatMap(s=>C.map(c=>fitL(ctx,s.why[c.k],W2-24,12.5,4,600)[0].length)));
+    o.note={x:m,y:y+6,w:W2,h:Math.round(30+20+nl*16+10)};o.h=o.note.y+o.note.h+12;return o;};
+  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.cold);const s=SI[S.si];
+    card(ctx,o.sit.x,o.sit.y,o.sit.w,o.sit.h,K.cold,fill(W.sitH,{n:S.si+1,of:SI.length}),{glow:6,size:13});
+    lines(ctx,s.t,o.sit.x+12,o.sit.y+44,o.sit.w-24,{size:13.5,max:4,w:700});
+    C.forEach((c,i)=>{const p=o.cards[i],picked=S.pick[S.si].has(c.k),cur=S.cur[S.si]===c.k,best=c.k===s.best,col=picked?(best?K.good:K.warm):K.soft;
+      const gl=cur&&S.pT!=null?6+8*(1-eo(since(now,S.pT)/600)):0;
+      glass(ctx,p.x,p.y,o.cw,p.h,10,col,{glow:(picked?(cur?10:5):2)+gl,ea:0.85,fill:"rgba(7,12,24,0.94)"});
+      ctx.fillStyle=rgbaS(col,picked?0.1:0.04);rr(ctx,p.x,p.y,o.cw,p.h,10);ctx.fill();
+      if(cur){ctx.save();ctx.strokeStyle=rgbaS(col,0.95);ctx.lineWidth=2;rr(ctx,p.x+1,p.y+1,o.cw-2,p.h-2,9);ctx.stroke();ctx.restore();}
+      line1(ctx,c.n,p.x+10,p.y+21,o.cw-20,13.5,{w:800,color:rgbaS(picked?mixC(col,K.ink,0.4):K.ink,1)});
+      let y=p.y+30;["c","p","a"].forEach((k,j)=>{const[ls,z]=fitL(ctx,c[k],o.cw-44,12.5,2,600);
+        ls.forEach((l,q)=>T(ctx,l,p.x+10,y+12+q*o.lh,{w:600,size:z,color:rgbaS(K.soft,1)}));
+        if(picked)fitMark(ctx,p.x+o.cw-16,y+8,FIT_MARK[s.fit[c.k][j]]);y+=p.rows[j]*o.lh;});
+      if(picked)fitMark(ctx,p.x+o.cw-2,p.y+2,best?"ok":"part");});
+    // the situation's note: what was chosen, and why
+    const nt=S.note[S.si],na=nt?eo(since(now,nt.t0)/500):0,nc=nt?(nt.ok?K.good:K.warm):K.soft;
+    card(ctx,o.note.x,o.note.y,o.note.w,o.note.h,nc,W.noteH,{glow:nt?8:2,dash:!nt,a:nt?1:0.55,size:13.5});
+    if(nt)withA(ctx,na,()=>{line1(ctx,fill(W.noteT,{n:S.si+1,c:cand(nt.k).n}),o.note.x+12,o.note.y+44,o.note.w-24,13,{w:800,color:rgbaS(mixC(nc,K.ink,0.3),1)});
+      lines(ctx,s.why[nt.k],o.note.x+12,o.note.y+64,o.note.w-24,{size:12.5,max:4,w:600,color:rgbaS(K.ink,0.9)});});};
+  return{S,lay,draw,readouts:[[W.read.found,()=>fill(W.read.of,{n:found(),of:SI.length})]]};};
+
+/* ---------- 2 · A Sharper Sketch: where does it live? ---------- */
+// The sketch's class box held every detail. Here it has come apart: the unit, Data Science 101; its two offerings, Semester 1 and
+// the summer intensive; and their three tutorials, drawn as a tree, one box for each row. Put a detail on a level, and every box there
+// lists it: on the thing it describes, each row has its own value; lower down, the same value is copied into every row under it;
+// higher up, one row needs two values. Each detail's level (lv), and its value in each row (v), are in the words (w.details).
+const WH_LV=["unit","offer","cls"],WH_ROWS={unit:["u"],offer:["s1","su"],cls:["tue","thu","mon"]},WH_UP={s1:"u",su:"u",tue:"s1",thu:"s1",mon:"su"},
+  WH_OF={u:"unit",s1:"offer",su:"offer",tue:"cls",thu:"cls",mon:"cls"},WH_MS=520,WH_COL={own:K.ink,copy:K.warm,clash:K.bad,one:K.soft};
+PLAY.where=(Lb,api)=>{const W=Lb.w,M=W.msg,D=W.details,S={at:{},from:{},t:{},sel:D[0].k};D.forEach(d=>{S.at[d.k]="cls";});
+  const li=k=>WH_LV.indexOf(k),dk=k=>D.find(d=>d.k===k);
+  const anc=(i,lv)=>{let x=i;while(x&&WH_OF[x]!==lv)x=WH_UP[x];return x;},desc=(i,lv)=>WH_ROWS[lv].filter(j=>anc(j,WH_OF[i])===i);
+  // a detail on a level, in one of its rows: its values there, and whether they're the row's own, a copy, or two in one place
+  const cell=(d,L,i)=>{const a=li(L),b=li(d.lv);if(a===b)return{vs:[d.v[i]],st:"own"};if(a>b)return{vs:[d.v[anc(i,d.lv)]],st:"copy"};
+    const vs=[...new Set(desc(i,d.lv).map(j=>d.v[j]))];return{vs,st:vs.length>1?"clash":"one"};};
+  const copies=()=>D.reduce((n,d)=>n+(li(S.at[d.k])>li(d.lv)?WH_ROWS[S.at[d.k]].length-WH_ROWS[d.lv].length:0),0);
+  const clashes=()=>D.reduce((n,d)=>n+WH_ROWS[S.at[d.k]].filter(i=>cell(d,S.at[d.k],i).st==="clash").length,0);
+  const tell=d=>{const L=S.at[d.k],a=li(L),b=li(d.lv);if(a===b)return M.own[d.k];
+    if(a>b)return fill(M.copy,{d:d.l,at:W.the[L],n:WH_ROWS[L].length,one:W.one[L],to:W.the[d.lv]});
+    const i=WH_ROWS[L].find(x=>cell(d,L,x).st==="clash"),vs=cell(d,L,i).vs;
+    return fill(M.clash,{d:d.l,at:W.the[L],row:W.rows[i],vals:andList(vs,W.and),n:vs.length,to:W.the[d.lv]});};
+  const tone=d=>{const a=li(S.at[d.k]),b=li(d.lv);return a===b?"ok":a>b?"warn":"no";};
+  let gPut=null;const sync=()=>{if(gPut)[...gPut.children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===S.at[S.sel]?"true":"false"));};
+  function put(L){const d=dk(S.sel);if(S.at[d.k]===L){api.say(tell(d),tone(d));return;}
+    S.from[d.k]=S.at[d.k];S.at[d.k]=L;S.t[d.k]=performance.now();api.kick(WH_MS+400);
+    const all=D.every(x=>S.at[x.k]===x.lv);api.say(tell(d)+(all?M.all:""),tone(d));
+    if(li(L)<li(d.lv))api.reach("clash");if(S.at.census==="offer")api.reach("census");
+    if(D.filter(x=>x.lv==="unit").every(x=>S.at[x.k]==="unit"))api.reach("unit");if(all)api.reach("all");}
+  api.seg(api.group(W.pickL),D.map(d=>[d.k,d.l]),S.sel,k=>{S.sel=k;sync();api.kick(400);const d=dk(k);api.say(tell(d),tone(d));},W.pickL);
+  gPut=api.seg(api.group(W.putL),WH_LV.map(L=>[L,W.levels[L]]),S.at[S.sel],put,W.putL);
+  // three levels, one under the other, each a panel with a column for each of its rows, each as wide as the rows under it; each
+  // detail a line in the panel of its level, its value in each column. The panels grow and shrink as details move, and the picture
+  // stays the same height: each detail is on one level.
+  const lay=(lw,ctx)=>{const m=10,W2=lw-m*2,cw=W2/3,o={lw,m,W2,kh:52,lh:32,gap:20,top:10};
+    o.x={u:m,s1:m,su:m+2*cw,tue:m,thu:m+cw,mon:m+2*cw};o.w={u:W2,s1:cw*2,su:cw,tue:cw,thu:cw,mon:cw};
+    o.legY=o.top+3*(o.kh+6)+D.length*o.lh+2*o.gap+14;o.leg=flow(ctx,[W.legend.own,W.legend.copy,W.legend.clash],W2,12.5,14,20);
+    o.h=o.legY+o.leg.h+12;return o;};
+  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.arch);const sc=rgb(Lb.c);
+    // how much of each detail is on each level, as it moves from one to the other
+    const wt=D.map(d=>{const t0=S.t[d.k],p=t0==null?1:eo(since(now,t0)/WH_MS),r={};WH_LV.forEach(L=>{r[L]=(S.at[d.k]===L?p:0)+(t0!=null&&S.from[d.k]===L?1-p:0);});return r;});
+    const bh=L=>o.kh+wt.reduce((a,r)=>a+r[L],0)*o.lh+6,Y={};let y=o.top;WH_LV.forEach(L=>{Y[L]=y;y+=bh(L)+o.gap;});
+    // the tree: each row to the rows under it
+    ctx.save();ctx.strokeStyle=rgbaS(K.arch,0.6);ctx.lineWidth=1.6;ctx.beginPath();
+    Object.keys(WH_UP).forEach(i=>{const P=WH_OF[WH_UP[i]],x=o.x[i]+o.w[i]/2;ctx.moveTo(x,Y[P]+bh(P));ctx.lineTo(x,Y[WH_OF[i]]);});ctx.stroke();ctx.restore();
+    WH_LV.forEach(L=>{const x=o.m,w=o.W2,y0=Y[L],hh=bh(L);
+      glass(ctx,x,y0,w,hh,12,K.arch,{glow:5,ea:0.85,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgbaS(K.arch,0.06);rr(ctx,x,y0,w,hh,12);ctx.fill();
+      line1(ctx,W.kick[L],x+10,y0+17,w-20,12,{w:800,color:rgbaS(K.arch,1)});
+      WH_ROWS[L].forEach(i=>chip(ctx,o.x[i]+5,y0+24,o.w[i]-10,22,W.rows[i],K.arch,{size:12.5,glow:4}));
+      let yy=y0+o.kh;D.forEach((d,j)=>{const wj=wt[j][L];if(wj<=0.001)return;const a=cl((wj-0.35)/0.65,0,1);
+        if(a>0.01)withA(ctx,a,()=>{if(d.k===S.sel){ctx.fillStyle=rgbaS(sc,0.16);rr(ctx,x+4,yy+1,w-8,o.lh-2,6);ctx.fill();}
+          line1(ctx,d.l,x+10,yy+13,w-20,12,{w:600,color:rgbaS(K.soft,1)});
+          WH_ROWS[L].forEach(i=>{const c=cell(d,L,i);line1(ctx,c.vs.join(" / "),o.x[i]+10,yy+28,o.w[i]-16,13,{w:800,color:rgbaS(WH_COL[c.st],1)});});});
+        yy+=wj*o.lh;});});
+    [["own",W.legend.own],["copy",W.legend.copy],["clash",W.legend.clash]].forEach(([k,s],j)=>{const p=o.leg.pos[j],x=o.m+p.x,yy=o.legY+p.y;
+      ctx.save();ctx.fillStyle=rgbaS(WH_COL[k],1);ctx.beginPath();ctx.arc(x+5,yy+10,4.5,0,TP);ctx.fill();ctx.restore();
+      T(ctx,s,x+16,yy+14.5,{w:700,size:12.5,color:rgbaS(K.soft,1)});});};
+  return{S,lay,draw,readouts:[[W.read.copies,()=>String(copies())],[W.read.clashes,()=>String(clashes())]]};};
+
+/* ---------- 2 · A Sharper Sketch: enrolled when? ---------- */
+// Nine of DS101's students from 15 February to today, 26 April, each change of status with its day (counted from 15 February).
+// Keep only each student's status now, and every day looks like today; keep each change with its date, and any day can be counted,
+// census date included. The three who changed after census date are the film's: two came in (Isha and Gus), one went out (Dev).
+const TM_D0=Date.UTC(2026,1,15),TM_CEN=44,TM_NOW=70,TM_MS=480,TM_COL={e:K.good,w:K.cold,x:K.bad},
+  TM_WHO=[["Ana",[["e",5]]],["Ben",[["e",6]]],["Chloe",[["e",7]]],["Dev",[["w",16],["e",23],["x",58]]],["Eli",[["e",10],["x",33]]],
+    ["Fatima",[["e",11]]],["Gus",[["w",38],["e",52]]],["Hana",[["e",12]]],["Isha",[["e",46]]]];
+const tmSt=(s,d)=>{let st=null;s[1].forEach(([k,t])=>{if(t<=d)st=k;});return st;},tmN=d=>TM_WHO.filter(s=>tmSt(s,d)==="e").length;
+// a question mark: not so on that day
+function qmark(ctx,x,y){ctx.save();ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(x,y,8,0,TP);ctx.fill();ctx.strokeStyle=rgbaS(K.bad,1);ctx.lineWidth=1.6;ctx.stroke();ctx.restore();
+  T(ctx,"?",x,y+4.3,{w:800,size:12,align:"center",color:rgbaS(K.bad,1)});}
+PLAY.time=(Lb,api)=>{const W=Lb.w,M=W.msg,S={m:"now",mT:null,day:TM_NOW,d0:TM_NOW,dT:null};
+  const date=d=>{const t=new Date(TM_D0+d*864e5);return fill(W.date,{d:t.getUTCDate(),m:W.months[t.getUTCMonth()]});};
+  const said=d=>tmN(S.m==="hist"?d:TM_NOW);  // what the model answers for a day
+  const shownDay=now=>S.dT==null?S.day:lp(S.d0,S.day,eo(since(now,S.dT)/TM_MS));
+  const hp=now=>{const e=S.mT==null?1:eo(since(now,S.mT)/TM_MS);return S.m==="hist"?e:1-e;};
+  // the students the model gets wrong on a day: with only the status now, whoever changed between that day and today
+  const off=d=>S.m==="hist"?[]:TM_WHO.filter(s=>(tmSt(s,d)==="e")!==(tmSt(s,TM_NOW)==="e")).map(s=>s[0]);
+  function told(){const d=S.day,n=tmN(d),D=date(d),o=off(d);
+    if(S.m==="hist")return d===TM_CEN?M.hist.census:d===TM_NOW?M.hist.today:n===8?fill(M.hist.peak,{d:D}):fill(M.hist.day,{n,d:D});
+    if(d===TM_NOW)return M.now.today;if(d===TM_CEN)return M.now.census;
+    const f={d:D,n:said(d),t:n,who:andList(o,W.and)};return !o.length?fill(M.now.same,f):said(d)===n?fill(M.now.swap,f):fill(M.now.day,f);}
+  const tone=()=>{const o=off(S.day);return S.m==="now"?(o.length?(said(S.day)===tmN(S.day)?"warn":"no"):null):(S.day===TM_CEN||S.day===TM_NOW||tmN(S.day)===8?"ok":null);};
+  function check(){if(S.m==="now"&&S.day===TM_CEN)api.reach("wrong");
+    if(S.m==="hist"){if(S.day===TM_CEN)api.reach("census");if(S.day===TM_NOW)api.reach("moves");if(tmN(S.day)===8)api.reach("peak");}}
+  let rng=null;
+  function go(d,jump,done){const now=performance.now();S.d0=shownDay(now);S.day=d;S.dT=jump?now:null;api.kick(jump?TM_MS+200:80);
+    if(rng&&+rng.value!==d)rng.set(d);if(done){api.say(told(),tone());check();}}
+  api.seg(api.group(W.modelL),W.models,S.m,m=>{if(m===S.m){api.say(told(),tone());return;}S.m=m;S.mT=performance.now();api.kick(TM_MS+200);api.say(M.model[m]+" "+told(),tone());check();},W.modelL);
+  const r2=api.group(W.dayL);rng=api.range(r2,W.dayL,0,TM_NOW,S.day,(v,done)=>go(v,false,done),date);
+  api.btn(r2,W.cenB,()=>go(TM_CEN,true,true));api.btn(r2,W.nowB,()=>go(TM_NOW,true,true));
+  // the question and the model's answer at the top; a row for each student, the semester across; census date, today and the day asked
+  // about down the rows; what the colours mean; and each enrolment's history in four columns, which only the dates can give
+  const lay=(lw,ctx)=>{const m=10,W2=lw-m*2,o={lw,m,W2};o.cmp={x:m,y:10,w:W2,h:58};
+    o.nw=Math.ceil(Math.max(...TM_WHO.map(s=>TW(ctx,s[0],12.5))))+14;o.x0=m+o.nw;o.x1=m+W2-10;o.rh=20;
+    o.top=o.cmp.y+o.cmp.h+30;o.rows=o.top+6;o.bot=o.rows+TM_WHO.length*o.rh;
+    o.legY=o.bot+28;o.leg=flow(ctx,[W.legend.e,W.legend.w,W.legend.x,W.legend.q],W2,12.5,14,20);
+    o.four={x:m,y:o.legY+o.leg.h+14,w:W2,h:96};o.h=o.four.y+o.four.h+12;return o;};
+  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.warm);const h1=hp(now),dd=shownDay(now),di=Math.round(dd),X=d=>o.x0+(o.x1-o.x0)*d/TM_NOW,cx=X(dd);
+    const c=o.cmp,n=said(di),t=tmN(di),xr=c.x+c.w/2+6;glass(ctx,c.x,c.y,c.w,c.h,12,K.warm,{glow:6,ea:0.85,fill:"rgba(7,12,24,0.92)"});
+    line1(ctx,W.cmp.day,c.x+12,c.y+21,c.w/2-18,12.5,{w:600,color:rgbaS(K.soft,1)});T(ctx,date(di),c.x+12,c.y+46,{w:800,size:22,color:rgbaS(K.ink,1)});
+    line1(ctx,W.cmp.n,xr,c.y+21,c.x+c.w-12-xr,12.5,{w:600,color:rgbaS(K.soft,1)});T(ctx,String(n),xr,c.y+46,{w:800,size:22,color:rgbaS(n===t?K.good:K.bad,1)});
+    if(n!==t)line1(ctx,fill(W.cmp.really,{t}),xr+34,c.y+46,c.x+c.w-12-xr-34,13,{w:800,align:"right",color:rgbaS(K.bad,1)});
+    TM_WHO.forEach((s,i)=>{const ym=o.rows+i*o.rh+o.rh/2,st=tmSt(s,TM_NOW);
+      T(ctx,s[0],o.x0-10,ym+4.5,{w:700,size:12.5,align:"right",color:rgbaS(K.soft,1)});
+      ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.2);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(o.x0,ym);ctx.lineTo(o.x1,ym);ctx.stroke();ctx.restore();
+      // each change with its date, as the history keeps them; or only the status now, as if it had always been so
+      if(h1>0.01)withA(ctx,h1,()=>s[1].forEach(([k,t0],j)=>{const t1=j<s[1].length-1?s[1][j+1][1]:TM_NOW;
+        ctx.fillStyle=rgbaS(TM_COL[k],k==="x"?0.42:0.82);rr(ctx,X(t0),ym-6,Math.max(4,X(t1)-X(t0)),12,5);ctx.fill();}));
+      if(h1<0.99)withA(ctx,1-h1,()=>{ctx.fillStyle=rgbaS(TM_COL[st],st==="x"?0.22:0.36);rr(ctx,o.x0,ym-6,o.x1-o.x0,12,5);ctx.fill();
+        ctx.save();ctx.setLineDash([4,3]);ctx.strokeStyle=rgbaS(TM_COL[st],0.85);ctx.lineWidth=1.2;rr(ctx,o.x0,ym-6,o.x1-o.x0,12,5);ctx.stroke();ctx.restore();});});
+    const vline=(x,col)=>{ctx.save();ctx.strokeStyle=rgbaS(col,0.9);ctx.lineWidth=1.6;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x,o.top);ctx.lineTo(x,o.bot+3);ctx.stroke();ctx.restore();};
+    vline(X(TM_CEN),K.gold);vline(X(TM_NOW),K.hot);
+    const lc=W.lines.census,lw2=TW(ctx,lc,12);line1(ctx,lc,cl(X(TM_CEN)-lw2/2,o.m,o.x1-lw2),o.bot+18,lw2+2,12,{w:700,color:rgbaS(K.gold,1)});
+    line1(ctx,W.lines.today,o.x0,o.top-14,o.x1-o.x0,12,{w:700,align:"right",color:rgbaS(K.hot,1)});
+    // the day asked about, and the model's answer for each student that day: a dot for enrolled, a question mark where it's wrong
+    ctx.save();ctx.strokeStyle="rgba(255,255,255,0.95)";ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(cx,o.top-2);ctx.lineTo(cx,o.bot+4);ctx.stroke();
+    ctx.fillStyle="#fff";ctx.beginPath();ctx.arc(cx,o.top-2,5,0,TP);ctx.fill();ctx.restore();
+    TM_WHO.forEach((s,i)=>{const ym=o.rows+i*o.rh+o.rh/2,mine=tmSt(s,S.m==="hist"?di:TM_NOW)==="e",real=tmSt(s,di)==="e";
+      if(mine){ctx.save();ctx.fillStyle=rgbaS(K.good,1);ctx.strokeStyle="rgba(7,12,24,0.95)";ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,ym,4.6,0,TP);ctx.fill();ctx.stroke();ctx.restore();}
+      if(mine!==real)qmark(ctx,cx+13>o.x1?cx-13:cx+13,ym);});
+    [["e",W.legend.e],["w",W.legend.w],["x",W.legend.x],["q",W.legend.q]].forEach(([k,s],j)=>{const p=o.leg.pos[j],x=o.m+p.x,yy=o.legY+p.y;
+      if(k==="q")qmark(ctx,x+7,yy+10);else{ctx.fillStyle=rgbaS(TM_COL[k],k==="x"?0.5:0.85);rr(ctx,x,yy+5,14,10,4);ctx.fill();}
+      T(ctx,s,x+20,yy+14.5,{w:700,size:12.5,color:rgbaS(K.soft,1)});});
+    fourCols(ctx,o.four,W.four,h1);if(h1<0.99)withA(ctx,1-h1,()=>line1(ctx,W.fourOff,o.four.x+12,o.four.y+64,o.four.w-24,13,{w:700,align:"center",color:rgbaS(K.soft,1)}));};
+  return{S,lay,draw,readouts:[[W.read.day,()=>date(S.day)],[W.read.n,()=>String(said(S.day))]]};};
 
 const BUILD={play:labPlay};
 

@@ -1103,11 +1103,15 @@ def series_learn_page(lg, S, series, films_, which):
 
 def moved_page(lg, S, f, which, up="../../", name=None):
     """The old labs or scenarios page of a film whose series now has one pack for all its films: it leads to the film's lab in the
-    pack (the labs page), or to its situation (the scenarios page), so old links keep working. up: the way from the page to the
-    series' folder; name: the film's, for a film whose page is written by hand (moved_hand_pages())."""
+    pack (the labs page; a link to one of its labs by name lands on that lab), or to its situation (the scenarios page), so old links
+    keep working. up: the way from the page to the series' folder; name: the film's, for a film whose page is written by hand
+    (moved_hand_pages())."""
     SL = series_learn(S); n = f["index"] + 1
     mine = [x["id"] for x in SL[lg]["labs"] if x["film"] == n]
     to = f'{up}labs/{"#" + mine[0] if mine else ""}' if which == "labs" else f'{up}scenarios/{"#film-%d" % n if any(q[1] == n for q in SL[lg]["qs"]) else ""}'
+    # a film with several labs in the pack: an old link to one of them by its name (#id) lands on it, and any other on the first
+    go = (f'var h=location.hash.slice(1);location.replace("{up}labs/#"+({json.dumps(mine, separators=(",", ":"))}.indexOf(h)<0?"{mine[0]}":h));'
+          if which == "labs" and len(mine) > 1 else f'location.replace("{to}");')
     name = name or (f["title"] if lg == "en" else f["site"]["title_es"])
     what = T(lg, "Take it apart" if which == "labs" else "Make the call", "Desarma" if which == "labs" else "Tú decides")
     say = T(lg, f'The labs and situations of <i>{E(name)}</i> are now part of one pack for the whole series, <i>{E(SN(lg, S))}</i>: they\'re <a href="{to}">here</a>.',
@@ -1115,7 +1119,7 @@ def moved_page(lg, S, f, which, up="../../", name=None):
     return (f'<!doctype html><html lang="{lg}"><head><meta charset="utf-8"><title>{what} · {E(SN(lg, S))} · Learning Data</title><meta name="robots" content="noindex">\n'
             f'<link rel="canonical" href="{BASE}{"es/" if lg == "es" else ""}{S["slug"]}/{which}/">\n'
             f'<!-- made by site-tools/build_series.py: the series has one pack of labs and scenarios for all its films -->\n'
-            f'<script>location.replace("{to}");</script><meta http-equiv="refresh" content="0; url={to}"></head>\n'
+            f'<script>{go}</script><meta http-equiv="refresh" content="0; url={to}"></head>\n'
             f'<body><p>{say}</p></body></html>\n')
 
 

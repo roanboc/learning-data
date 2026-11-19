@@ -544,16 +544,18 @@ async def check_deeplinks(run):
             expect(sec, -2 <= r["top"] <= 160, f"/{key}#t={n}: the film isn't in view (top {r['top']:.0f} px)")
             expect(sec, r["on"] == sc["name"], f"/{key}#t={n}: the highlighted chapter is {r['on']!r}, expected {sc['name']!r}")
             await pg.close()
-        # A Sharper Sketch's old labs and scenarios pages lead to its series' playground and its situations (19 Nov 2026), and the
-        # playground's "Watch this part" goes back to the start of a chapter of the Sketch's page, rounded up
-        pg = await land("sketch/labs/#time", "model-the-business/labs/#sharpen")
-        await pg.wait_for_timeout(300)
-        r = await pg.evaluate("""() => { const on = document.querySelector('#series-labs [role=tab][aria-selected=true]'), F = JSON.parse(document.getElementById('series-labs').dataset.films)[2],
-          Lb = window.WD.labs.find(x => x.id === 'sharpen'), a = [...document.querySelectorAll('#pg-panel a.btn')].find(a => /#t=/.test(a.getAttribute('href')));
-          return {on: on && on.dataset.id, href: a && a.getAttribute('href'), want: F && '../../sketch/#t=' + F.starts[Lb.chapter]}; }""")
-        expect(sec, r["on"] == "sharpen", f"/sketch/labs/#time: the lab open is {r['on']!r}, expected \"sharpen\"")
-        expect(sec, r["href"] == r["want"], f"/sketch/labs/#time: \"Watch this part\" → {r['href']}, expected {r['want']}")
-        await pg.close()
+        # A Sharper Sketch's old labs and scenarios pages lead to its labs and situations in its series' pack (19 Nov 2026): an old
+        # link to a lab the pack kept lands on it, any other on the first, and a lab's "Watch this part" goes back to the start of a
+        # chapter of the Sketch's page, rounded up
+        for old, lab in (("time", "time"), ("fit", "sharpen")):
+            pg = await land(f"sketch/labs/#{old}", f"model-the-business/labs/#{lab}")
+            await pg.wait_for_timeout(300)
+            r = await pg.evaluate("""(id) => { const on = document.querySelector('#series-labs [role=tab][aria-selected=true]'), F = JSON.parse(document.getElementById('series-labs').dataset.films)[2],
+              Lb = window.WD.labs.find(x => x.id === id), a = [...document.querySelectorAll('#pg-panel a.btn')].find(a => /#t=/.test(a.getAttribute('href')));
+              return {on: on && on.dataset.id, href: a && a.getAttribute('href'), want: F && Lb && '../../sketch/#t=' + F.starts[Lb.chapter]}; }""", lab)
+            expect(sec, r["on"] == lab, f"/sketch/labs/#{old}: the lab open is {r['on']!r}, expected {lab!r}")
+            expect(sec, r["href"] == r["want"], f"/sketch/labs/#{old}: \"Watch this part\" → {r['href']}, expected {r['want']}")
+            await pg.close()
         pg = await land("sketch/scenarios/", "model-the-business/scenarios/")
         await pg.wait_for_timeout(300)
         r = await pg.evaluate("() => document.getElementById('series-quiz').dataset.film")

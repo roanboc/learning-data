@@ -17,6 +17,7 @@
 .pg-row{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
 .pg-row .lbl{flex:0 0 100%;margin:0}
 .pg-row .chip-btn[aria-pressed]{--c:var(--c)}
+.pg-row input[type=range]{flex:1 1 200px;min-width:160px;margin:0;accent-color:var(--c,#6aa8ff)}
 .pg-endbox:empty{display:none}
 .pg-end{margin:0 16px 12px;padding:12px 14px;border-radius:12px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.45);font-size:15px;line-height:1.45;color:var(--sfg)}
 .pg-foot{display:flex;justify-content:flex-end;padding:0 16px 14px}

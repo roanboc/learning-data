@@ -21,14 +21,9 @@
 <h1>Demasiado bueno para ser verdad: para qué sirve una prueba sobre una cifra</h1>
 <p class="lead">Las solicitudes suben 38% de un día para otro, y un comité está por planificar 600 vacantes más. Todas las pruebas de filas pasan. ¿Qué debería hacer una prueba sobre el total?</p>
 </section>
-<nav class="course" aria-label="Curso: Demasiado bueno para ser verdad"><div class="course-in"><p class="course-t"><small>Controles de calidad de datos</small>Demasiado bueno para ser verdad</p><ol class="path" data-store="ld-too-good-to-be-true" data-labs="3" data-quiz="10" data-text='{"watched":"Vista","labs":"{n} de 3 labs explorados","quiz":"{n} de 10 respondidas · {ok} correctas"}'>
-<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 6 min</span></a></li>
-<li><a href="./labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Tres labs interactivos</span></a></li>
-<li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>Diez situaciones reales</span></a></li>
-</ol></div></nav>
 <section class="module" id="watch" data-store="ld-too-good-to-be-true" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p><b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.</p></div></div>
-<div class="player" data-labs="labs/">
+<div class="player" data-labs="../labs/">
 <audio id="snd" preload="metadata" src="../../../assets/too-good-to-be-true/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/too-good-to-be-true-poster.jpg?v=15cf0d9225" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 6 min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: Too good to be true"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
 </div>
@@ -37,7 +32,7 @@
 <details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La luz son los datos, como en <i>La vida interior de los datos</i>. El contorno de cada persona muestra su lado: cian para el técnico, dorado para el de negocio. El indicador junto a una cifra es una prueba sobre ella: el ámbar es una advertencia, que deja pasar los datos; el rojo es un error, que detiene la actualización. El lila es el sistema de admisión. La universidad, las personas y las cifras son ficticias. La narración es una voz sintética.</p>
 <p>Los subtítulos en español están activados; puedes quitarlos con Subtítulos. El video que descargas no los tiene en la imagen: reprodúcelo con su archivo de subtítulos, en español o en inglés.</p></div></details>
 <template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste para qué sirve una prueba sobre una cifra. Ahora pruébalo tú.</h3>
-<div class="next-opts"><a class="btn primary" href="labs/">Desarma: 3 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 10 situaciones</a><a class="btn" href="../silent-change/">Cambios y contratos de datos · Cambio silencioso</a></div>
+<div class="next-opts"><a class="btn primary" href="../labs/#tuesday">Desarma: Viejo y marcado →</a><a class="btn" href="../scenarios/#film-2">Tú decides: 6 situaciones</a><a class="btn" href="../silent-change/">Cambios y contratos de datos · Cambio silencioso</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
 </section>
 
@@ -78,7 +73,7 @@
 <script src="../../../assets/too-good-to-be-true/film.js?v=d9676033b6"></script>
 <script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
 {const N={open:"Una versión del martes",limits:"La cifra y sus límites",night:"La noche del lunes",tuesdays:"Tres martes",level:"Elegir el nivel",thread:"Sigue el hilo",reload:"Corregir en el origen",end:"Vista completa"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
-<script src="../../../assets/too-good-to-be-true/think.es.js?v=d9881a445c"></script>
+<script src="../../../assets/too-good-to-be-true/think.es.js?v=b6f3c33979"></script>
 <script src="../../../assets/learn/think.js?v=156ddbb02b"></script>
 <script src="../../../assets/learn/path.js?v=12187f81b8"></script>
 <script src="../../../assets/learn/next.js?v=70cde09a7b"></script>

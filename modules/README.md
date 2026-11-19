@@ -123,8 +123,7 @@ Source: [films/when-things-go-wrong](../films/when-things-go-wrong/) · Portal: 
 - [Silent change](../films/when-things-go-wrong/1-silent-change/) — `silent-change`
 - [Too good to be true](../films/when-things-go-wrong/2-too-good-to-be-true/) — `too-good-to-be-true`
 
-  Labs and assessments: [learn.en.js](../site/assets/too-good-to-be-true/learn.en.js), [learn.es.js](../site/assets/too-good-to-be-true/learn.es.js)
-
+Labs and assessments: [site/assets/when-things-go-wrong/learn.en.js](../site/assets/when-things-go-wrong/learn.en.js), [site/assets/when-things-go-wrong/learn.es.js](../site/assets/when-things-go-wrong/learn.es.js)
 
 ### Fit for use
 

@@ -85,7 +85,7 @@ def series_link(lg, RE, sid):
 # if it has them (see series_learn below): dir, the folder under site/assets/ of their engine and words; bundle, the film whose
 # bundle their pages load for its parts (the newest film's if not given); engine, the folder of their engine and its styles, if not
 # dir; lazy, True when the engine fetches each film's own words and bundle only as a visitor opens one of its labs or situations
-# (From words to data's: each lab and situation is its film's own, and the pack in dir names which), so the pages load no bundle;
+# (In the weeds of data crafting's: each lab and situation is its film's own, and the pack in dir names which), so the pages load no bundle;
 # coming, True to count and show those of the films still
 # being made (series.json's "coming") too; next: the id of the series to watch after this one, which its last film's page offers
 # (in Where next? and beside the series' films) once that series has a film on the site;
@@ -109,12 +109,12 @@ SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
          place={"en": "university", "es": "universidad"},
-         learn=dict(dir="from-words-to-data", lazy=True),
+         learn=dict(dir="from-words-to-data", bundle="keeping-it-true"),
          blocks=[("sketch/index.html", "en", "card", "../", "../from-words-to-data/"), ("es/sketch/index.html", "es", "card", "../../", "../from-words-to-data/")]),
     dict(id="in-the-weeds", dir="analytics-engineering", slug="in-the-weeds",
          name={"en": "In the weeds of data crafting", "es": "En las entrañas del oficio de datos"},
          place={"en": "university", "es": "universidad"}, blocks=[],
-         learn=dict(dir="in-the-weeds", engine="from-words-to-data", lazy=True)),
+         learn=dict(dir="in-the-weeds", lazy=True)),
     dict(id="enterprise-architecture", dir="enterprise-architecture", slug="enterprise-architecture",
          name={"en": "The map before the data", "es": "El mapa antes de los datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],

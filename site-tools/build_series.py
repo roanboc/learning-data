@@ -441,6 +441,7 @@ HAND = {
                          "es": "Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?"},
                    note={"en": "", "es": "En inglés"}),
     "when-things-go-wrong": dict(href="when-things-go-wrong/", source="films/when-things-go-wrong",
+                   learning=["site/assets/when-things-go-wrong/learn.en.js", "site/assets/when-things-go-wrong/learn.es.js"],
                    title={"en": "When things go wrong", "es": "Cuando algo sale mal"},
                    card={"en": "Two bad mornings at the university: a change only half of it saw, and a number too good to be true. Each ends with what catches it next time.",
                          "es": "Dos malas mañanas en la universidad: un cambio que solo la mitad vio, y una cifra demasiado buena para ser verdad. Cada una termina con lo que lo detecta la próxima vez."},
@@ -607,8 +608,8 @@ TOUR_JS = ('(function(){var h=document.currentScript.parentNode.querySelector(".
 # The hand-written pages: their header is made by header() too, and written over theirs by blocks() below.
 HAND_PAGES = ["404.html", "index.html", "labs/index.html", "scenarios/index.html", "sketch/index.html", "sketch/labs/index.html",
               "sketch/scenarios/index.html", "when-things-go-wrong/index.html", "when-things-go-wrong/silent-change/index.html",
-              "when-things-go-wrong/too-good-to-be-true/index.html", "when-things-go-wrong/too-good-to-be-true/labs/index.html",
-              "when-things-go-wrong/too-good-to-be-true/scenarios/index.html"]
+              "when-things-go-wrong/too-good-to-be-true/index.html", "when-things-go-wrong/labs/index.html",
+              "when-things-go-wrong/scenarios/index.html"]
 HAND_PAGES += ["es/" + p for p in HAND_PAGES if (WEB / "es" / p).exists()]
 
 

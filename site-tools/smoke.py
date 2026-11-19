@@ -544,21 +544,22 @@ async def check_deeplinks(run):
             expect(sec, -2 <= r["top"] <= 160, f"/{key}#t={n}: the film isn't in view (top {r['top']:.0f} px)")
             expect(sec, r["on"] == sc["name"], f"/{key}#t={n}: the highlighted chapter is {r['on']!r}, expected {sc['name']!r}")
             await pg.close()
-        # the Sketch labs' "Watch this part" links use the rounded-up starts (sketch.js: Math.ceil)
-        pg, _ = await run.page(ctx, "sketch/labs/#time")
-        await run.ready(pg)
+        # A Sharper Sketch's old labs and scenarios pages lead to its labs and situations in its series' pack (19 Nov 2026): an old
+        # link to a lab the pack kept lands on it, any other on the first, and a lab's "Watch this part" goes back to the start of a
+        # chapter of the Sketch's page, rounded up
+        for old, lab in (("time", "time"), ("fit", "sharpen")):
+            pg = await land(f"sketch/labs/#{old}", f"model-the-business/labs/#{lab}")
+            await pg.wait_for_timeout(300)
+            r = await pg.evaluate("""(id) => { const on = document.querySelector('#series-labs [role=tab][aria-selected=true]'), F = JSON.parse(document.getElementById('series-labs').dataset.films)[2],
+              Lb = window.WD.labs.find(x => x.id === id), a = [...document.querySelectorAll('#pg-panel a.btn')].find(a => /#t=/.test(a.getAttribute('href')));
+              return {on: on && on.dataset.id, href: a && a.getAttribute('href'), want: F && Lb && '../../sketch/#t=' + F.starts[Lb.chapter]}; }""", lab)
+            expect(sec, r["on"] == lab, f"/sketch/labs/#{old}: the lab open is {r['on']!r}, expected {lab!r}")
+            expect(sec, r["href"] == r["want"], f"/sketch/labs/#{old}: \"Watch this part\" → {r['href']}, expected {r['want']}")
+            await pg.close()
+        pg = await land("sketch/scenarios/", "model-the-business/scenarios/")
         await pg.wait_for_timeout(300)
-        r = await pg.evaluate("""() => { const on = document.querySelector('#labs3-app [role=tab][aria-selected=true]');
-          const a = [...document.querySelectorAll('#labs3-app a.btn')].find(a => /#t=/.test(a.getAttribute('href')));
-          const s = SCENES.find(x => x.id === 'time'); return {on: on && on.dataset.id, href: a && a.getAttribute('href'), start: s.start}; }""")
-        expect(sec, r["on"] == "time", f"/sketch/labs/#time: the lab open is {r['on']!r}, expected \"time\"")
-        expect(sec, r["href"] == f"../#t={math.ceil(r['start'])}", f"/sketch/labs/#time: \"Watch this part\" → {r['href']}, expected ../#t={math.ceil(r['start'])}")
-        labs = await pg.evaluate("() => [...document.querySelectorAll('#labs3-app [role=tab]')].map(b => b.dataset.id)")
-        for lab in labs:
-            await pg.click(f"#labs3-app [role=tab][data-id='{lab}']")
-            r = await pg.evaluate("""() => { const a = [...document.querySelectorAll('#labs3-app a.btn')].find(a => /#t=/.test(a.getAttribute('href')));
-              const n = a ? +a.getAttribute('href').split('#t=')[1] : null; return {n, ok: SCENES.some(s => Math.ceil(s.start) === n)}; }""")
-            expect(sec, r["ok"], f"/sketch/labs/#{lab}: \"Watch this part\" goes to #t={r['n']}, not a chapter start")
+        r = await pg.evaluate("() => document.getElementById('series-quiz').dataset.film")
+        expect(sec, r == "2", f"/sketch/scenarios/: the situation open is film {r}'s, expected the Sketch's (2)")
         await pg.close()
     finally:
         await ctx.close()
@@ -954,9 +955,8 @@ async def check_think_home(run):
 # ---------------------------------------------------------------- 9. progress, kept in this browser
 async def check_progress(run):
     sec = run.rep.sec("progress", "Progress: steppers, topic-card chips and series' counts from seeded storage; \"watched\" goes to the right film only")
-    # path.js fills the chips; on A Sharper Sketch's pages, sketch.js does
-    chip_all = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress")
-                and ("assets/learn/path.js" in pg.local_scripts or "assets/sketch/sketch.js" in pg.local_scripts)]
+    # path.js fills the chips (on A Sharper Sketch's pages too, since its labs became its series', 19 Nov 2026)
+    chip_all = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress") and "assets/learn/path.js" in pg.local_scripts]
     stepper = {k: pg for k, pg in run.static.items() if pg.dom.first("ol", cls="path")}
     # the films "watched" is played on, and the other pages the seeds below open
     films = (("", "ld", ["ld3", "ld-silent-change"]), ("sketch/", "ld3", ["ld", "ld-silent-change"]),
@@ -1018,26 +1018,13 @@ async def check_progress(run):
             await pg.close()
     finally:
         await ctx.close()
-    # seed 2: A Sharper Sketch, one lab and two answers
+    # seed 2: A Sharper Sketch's old labs, one lab and two answers: its labs are its series' now, so its chip counts none of them
     ctx = await kept({"ld3:quiz": {"0": {"ok": True}, "5": {"ok": True}}, "ld3:visited": ["grain"]})
     try:
         for key in chip_pages:
             pg, _ = await run.page(ctx, key)
             for c in await chips(pg):
-                if c["p"] == "ld3":
-                    want = " · ".join([fill(c["T"]["labs"], {"n": 1, "of": c["labs"]}), fill(c["T"]["quiz"], {"n": 2, "of": c["quiz"], "ok": 2})])
-                    expect(sec, not c["hidden"] and c["t"] == want, f"/{key} (Sketch seeded): Sketch chip {c['t']!r}, expected {want!r}")
-                else:
-                    expect(sec, c["hidden"], f"/{key} (Sketch seeded): the {c['p']} chip shows {c['t']!r}")
-            await pg.close()
-        got = {}
-        for key in run.pick(("sketch/", "es/sketch/")):
-            pg, _ = await run.page(ctx, key)
-            s = await steps(pg)
-            d = defaults(key)
-            want = [(False, d[0]), (False, fill(s["T"]["labs"], {"n": 1})), (False, fill(s["T"]["quiz"], {"n": 2, "ok": 2}))]
-            got[key] = [(x["done"], x["t"]) for x in s["li"]]
-            expect(sec, got[key] == want, f"/{key} (Sketch seeded): stepper {got[key]}, expected {want}")
+                expect(sec, c["hidden"], f"/{key} (Sketch's old labs seeded): the {c['p']} chip shows {c['t']!r}")
             await pg.close()
     finally:
         await ctx.close()

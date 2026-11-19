@@ -364,6 +364,8 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Copies that keep the rules](../films/only-what-you-may-see/7-copies-that-keep-the-rules/) — `copies-that-keep-the-rules`
 - [Proof it held](../films/only-what-you-may-see/8-proof-it-held/) — `proof-it-held`
 
+Labs and assessments: [site/assets/only-what-you-may-see/learn.en.js](../site/assets/only-what-you-may-see/learn.en.js), [site/assets/only-what-you-may-see/learn.es.js](../site/assets/only-what-you-may-see/learn.es.js)
+
 ### Kept for a reason
 
 Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept-for-a-reason/`

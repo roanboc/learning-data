@@ -101,6 +101,8 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 - [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
 - [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
+Labs and assessments: [site/assets/from-tables-to-decisions/learn.en.js](../site/assets/from-tables-to-decisions/learn.en.js), [site/assets/from-tables-to-decisions/learn.es.js](../site/assets/from-tables-to-decisions/learn.es.js)
+
 ### Documents and closing remarks
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
@@ -346,6 +348,8 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
 - [From a branch to production](../films/locks-before-the-data/8-from-a-branch-to-production/) — `from-a-branch-to-production`
 - [Who did what](../films/locks-before-the-data/9-who-did-what/) — `who-did-what`
+
+Labs and assessments: [site/assets/locks-before-the-data/learn.en.js](../site/assets/locks-before-the-data/learn.en.js), [site/assets/locks-before-the-data/learn.es.js](../site/assets/locks-before-the-data/learn.es.js)
 
 ### Only what you may see
 

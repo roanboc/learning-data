@@ -369,6 +369,8 @@ Source: [films/agents-at-work-on-data](../films/agents-at-work-on-data/) · Port
 - [Why Unity Catalog and Unity Gateway govern them](../films/agents-at-work-on-data/8-unity-catalog-and-ai-gateway/) — `unity-catalog-and-ai-gateway`
 - [Context and memory, governed](../films/agents-at-work-on-data/9-context-and-memory-governed/) — `context-and-memory-governed`
 
+Labs and assessments: [site/assets/agents-at-work-on-data/learn.en.js](../site/assets/agents-at-work-on-data/learn.en.js), [site/assets/agents-at-work-on-data/learn.es.js](../site/assets/agents-at-work-on-data/learn.es.js)
+
 ### From helper to colleague
 
 Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · Portal: `/from-helper-to-colleague/`

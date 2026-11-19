@@ -11,28 +11,15 @@ const na_bub=(x,J,tt,t0,t1,lines,cam,o)=>PK.say(x,J,lines,ag_io(tt,t0,t1==null?1
 const na_name=(x,J,tt,t0,t1,name,role,dy,dx)=>{if(J)PK.nameTag(x,J.hc[0]+(dx||0),J.hc[1]-(dy||150),name,role,ag_io(tt,t0,t1,0.4));};
 // while a chapter shows a key idea apart from the scene (a board seen close, a page of the notebook), its kicker steps back
 const na_apart=(t,spans)=>spans.reduce((m,[a,b])=>Math.max(m,ag_in(t,a-0.4,0.35)*(1-ag_in(t,b,0.35))),0);
-// kneeling to twist cord, seen from the side: both hands together in front, the cord running from them to the ground
-const NA_TWIST={mode:"kneel",lean:16,head:12,aN:[44,56,"grip"],aF:[40,60,"grip"],lN:[28,-90],lF:[40,-88],fN:70,fF:70};
-function na_twisting(x,who,px,fl,tt,o){o=o||{};const U=PK.u,J=naq_person(x,who,px,fl,naq_h(fl),NA_TWIST,Object.assign({t:tt,holds:true},o,o.nod!=null?{}:na_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0.7]},px%5)));
-  if(J&&J.hdN){const [hx,hy]=J.hdN,len=o.len||260,col=PK.S.tone(WWQ_PAL.rope),tw=Math.sin(tt*5)*2;x.save();x.lineCap="round";x.strokeStyle=U.css(PK.S.ink);x.lineWidth=6;
-    x.beginPath();x.moveTo(hx,hy+4);x.quadraticCurveTo(hx+len*0.4,fl-6+tw,hx+len,fl-2);x.stroke();x.strokeStyle=U.css(col);x.lineWidth=3.4;x.stroke();x.restore();}return J;}
-// a walker on the bridge from u0 to u1 between t0 and t1 (at rest outside it); returns [u, who, flip, tt] for naq_bridge, or null
-const na_on=(tt,who,u0,u1,t0,t1)=>{if(tt<t0-0.2||tt>t1+0.2)return null;const u=PK.u.lerp(u0,u1,PK.u.clamp((tt-t0)/(t1-t0),0,1));return[u,who,u1<u0,tt];};
 // someone who stays a while takes in what goes on: a look, a nod, a smile, every few seconds (i: who they are, so no two move together)
 const na_alive=(tt,base,i,t0)=>{base=Object.assign({expr:"neutral",gaze:[1,0]},base||{});const g=base.gaze[1],ev=[],K=["look","nod","smile"];
   for(let k=0;k<30;k++){const at=(t0||0)+1.8+i*1.1+k*5.6,kind=K[(k+Math.round(i))%3];ev.push(kind==="look"?[at,"look",2.2,[1,g+((k+Math.round(i))%2?0.45:-0.35)]]:kind==="smile"?[at,"smile",2.4]:[at,"nod"]);}
   return PK.face(tt,base,ev);};
-// the bank's people: [who, x, floor, pose, flip, opts]
-function na_bank(x,tt,list){list.slice().sort((a,b)=>a[2]-b[2]).forEach(([who,px,fl,pose,fl2,o],i)=>{o=o||{};if(pose==="twist")return na_twisting(x,who,px,fl,tt,o);
-  const f=o.nod!=null?{}:na_alive(tt,{expr:o.expr||"neutral",gaze:o.gaze||[1,0]},px%5);
-  naq_person(x,who,px,fl,naq_h(fl),pose||"stand",Object.assign({t:tt+(px%7),flip:!!fl2},o,f));});}
 
 
 // Marta at her desk, turned to her screen or to the room; who: more people in the room ({fl, draw})
 const na_marta=(o)=>Object.assign({work:1,turn:0},o||{});
 // someone who comes to a desk: walks in from x0 to x1 between t0 and t1, then stands (pose), flipped to face left when x1 < x0
-const na_qcome=(cc,who,tt,x0,x1,t0,t1,fl,o)=>{o=o||{};const flip=x1<x0,h=naq_h(fl);if(tt<t1)return naq_walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:"stand"},Object.assign({flip},o.face||{}));
-  return naq_person(cc,who,x1,fl,h,"stand",Object.assign({t:tt,flip},o.face||{}));};
 const na_come=(cc,who,tt,x0,x1,t0,t1,fl,h,o)=>{o=o||{};const flip=x1<x0;if(tt<t1)return PK.walk(cc,who,tt,{x0,x1,t0,t1,floor:fl,h,then:o.then||"stand"},Object.assign({flip},o.face||{}));
   return PK.person(cc,who,x1,fl,h,o.then||"stand",Object.assign({t:tt,flip},o.face||{}));};
 // a listener's nods and looks, every few seconds, for whoever stands at a board between rows
@@ -74,11 +61,10 @@ function na_newcomer(c,tt,t0,t1,tk){const [sx,fl]=NA_SEAT.lu5;
 scene("lu",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u,luT=c.where-0.6;
   const N1=PK.pace(ctx,null,na_note1(sc,w)),gW=w("gift","Whoever",-0.6),gA=w("gift","is taught",-0.6),gift=ag_in(t,gA+0.6,0.3);
   ag_shots(ctx,S,t,sc.dur,[
-    // the series' bridge, new, people crossing; the camera closes in as the film says why it leaves
-    {at:0,place:"naGorge",keys:[[0,960,500,1.0],[c.aside,860,540,1.12]],d:3,draw:(x,tt,cam)=>{
-      naq_steel(x,1);naq_bridge(x,{age:0.05,walkers:[na_on(tt,"m3",0.06,0.9,0.4,15),na_on(tt,"w4",0.94,0.2,2,16)].filter(Boolean)});
-      na_bank(x,tt,[["w1",170,900,"stand",false,{hold:naq_coil,holds:true,expr:"smile"}],["m1",470,690,"clasp",false,{expr:"neutral"}],
-        ["keeper",1700,880,"clasp",true,{expr:"neutral",gaze:[1,0.1]}],["w3",1560,740,"stand",true,{expr:"smile"}]]);}},
+    // above Quehue, the grass the bridge is made of: three people cut and tie it, each their own way, and someone carries a bundle
+    // off towards the gorge, where the bridge is a thin line far off. The camera starts towards it, and leaves it for the grass
+    {at:0,place:"naPuna",keys:[[0,1060,500,1.1],[c.aside-0.2,820,600,1.18],[w("aside","One blade",-0.3),700,640,1.3],[w("aside","a person",-0.4),960,560,1.06]],d:2.2,draw:(x,tt,cam)=>{
+      const pw=w("aside","a person",0);nap_work(x,tt,{t0:0,look:{elder:pw+0.2,young:pw+0.9,man:pw+1.5}});}},
     // Lu: the teacher's hall. One room, so the camera only glides; a newcomer brings his gift and kneels
     {at:luT,place:"naLu",dis:1.6,keys:[[luT,960,560,1.0],[c.teacher-0.2,1180,600,1.22],[gW,960,560,1.0],[c.bold-0.2,820,620,1.1],[c.rule-0.2,820,640,1.2],
         [c.zilu-0.3,900,600,1.08],[c.third-0.3,860,580,1.04],[c.person,900,600,1.12],[c.count-0.3,960,560,1.0]],d:3,draw:(x,tt,cam)=>{
@@ -107,6 +93,7 @@ scene("lu",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,w
     {at:c.team-0.4,place:"naTeam",dis:1.2,keys:[[c.team-0.4,960,540,1.0]],d:3,draw:(x,tt,cam)=>{na_seven(x,tt,{clock:10});}},
     {at:c.each-0.4,place:"naNotes",dis:0.6,keys:[[c.each-0.4,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N1,{});}}
   ]);
+  na_card(ctx,S,t,0.8,c.aside-0.6,{kick:"Quehue, Cusco, Peru",title:"Q'oya, the grass of the bridge"},{y:40,mid:true});
   na_card(ctx,S,t,c.where+0.3,c.teacher-0.5,{kick:"Lu, now eastern China",title:"About 2,500 years ago"},{y:40,mid:true});
   na_card(ctx,S,t,w("count","counts",0),c.team-0.8,{kick:"A historian, centuries later",title:"77 students mastered what he taught",col:PK.C.green},{y:40,mid:true});
   na_imagined(ctx,S,t,c.team+0.4,c.each-0.6,"The university, 2027 · imagined");

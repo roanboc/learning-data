@@ -10,7 +10,7 @@
 <link rel="icon" href="../../assets/favicon.svg?v=9c05cdd7f4" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/site.css?v=a39de42c6c">
+<link rel="stylesheet" href="../../assets/site.css?v=6c7e05e496">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a></nav><a class="proj" href="../dbt-project/" aria-label="Proyecto de datos de ejemplo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.9l7.9 4.55v9.1L12 21.1l-7.9-4.55v-9.1z"/><path d="M4.3 7.55 12 12l7.7-4.45M12 12v8.9"/></svg></a><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../data-governance/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="Cómo funciona este sitio" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><button class="extra-btn" type="button" popovertarget="top-extra" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div><div class="extra" id="top-extra" popover><a class="making" href="../journey/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17M8 5l-1.5 4M13 5l-1.5 4M18 5l-1.5 4"/></svg><span>Cómo se hizo</span></a><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a class="contact" href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>LinkedIn</span></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -20,10 +20,10 @@
 <h1>Principios de gobernanza</h1>
 <p class="lead">La primera serie sobre gobernanza de datos. Yusuf Demir empieza como líder de gobernanza de datos de la universidad, con un estante de treinta y cuatro políticas, y esa misma semana dos informes no coinciden en un número. Película a película, encuentra lo que vale la pena mantener, y quién decide y actúa.</p>
 </section>
-<nav class="course" aria-label="Curso: Principios de gobernanza"><div class="course-in"><p class="course-t"><small>Serie · Gobernanza de datos</small>Principios de gobernanza</p><ol class="path" data-store="ld-data-governance" data-labs="9" data-quiz="9" data-series="ld-the-same-problem-everywhere ld-off-the-shelf ld-who-decides ld-one-word-one-home ld-who-may-see-it ld-rules-that-run ld-fixed-where-it-starts ld-change-without-surprises ld-a-product-with-an-owner ld-an-agent-that-checks ld-teachers-of-data" data-text='{"watched": "Vista", "films": "{n} de 11 películas vistas", "labs": "{n} de 9 labs explorados", "quiz": "{n} de 9 respondidas · {ok} correctas"}'>
+<nav class="course" aria-label="Curso: Principios de gobernanza"><div class="course-in"><p class="course-t"><small>Serie · Gobernanza de datos</small>Principios de gobernanza</p><ol class="path" data-store="ld-data-governance" data-labs="11" data-quiz="12" data-series="ld-the-same-problem-everywhere ld-off-the-shelf ld-who-decides ld-one-word-one-home ld-who-may-see-it ld-rules-that-run ld-fixed-where-it-starts ld-change-without-surprises ld-a-product-with-an-owner ld-an-agent-that-checks ld-teachers-of-data" data-text='{"watched": "Vista", "films": "{n} de 11 películas vistas", "labs": "{n} de 11 labs explorados", "quiz": "{n} de 12 respondidas · {ok} correctas"}'>
 <li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>Las películas</b><span>Once películas</span></a></li>
-<li><a href="labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Nueve labs interactivos</span></a></li>
-<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>9 situaciones reales</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Once labs interactivos</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>12 situaciones reales</span></a></li>
 </ol></div></nav>
 
 <section class="module" id="films" aria-labelledby="films-h">
@@ -143,41 +143,10 @@
 </section>
 
 <section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
-<div class="mhead"><div><h2 id="learn-h">Desarma, y luego tú decides</h2><p>Nueve labs interactivos para toda la serie, y luego 9 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
-<p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 9 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 9 situaciones</a></p>
+<div class="mhead"><div><h2 id="learn-h">Desarma, y luego tú decides</h2><p>Once labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego 12 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 11 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 12 situaciones</a></p>
 </section>
 
-<section class="module" id="thread" aria-labelledby="thread-h">
-<div class="mhead"><div><h2 id="thread-h">Un hilo: el número que se informa al gobierno</h2><p>Cada año, la universidad informa sus títulos al gobierno. Este año, el informe del censo dice 4,812 y el borrador de la entrega dice 4,867, y esa misma semana cambia el significado de título. Ninguna de las treinta y cuatro políticas lo habría detectado. Película a película, Yusuf pone una pieza de gobernanza donde ocurre el trabajo, para que el número sea confiable el día en que se envía, y muestra lo que queda en el estante.</p></div></div>
-</section>
-
-<section class="module" id="past" aria-labelledby="past-h">
-<div class="mhead"><div><h2 id="past-h">Cada película empieza en otro lugar, en otra época</h2></div></div>
-<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
-<tr><td>El mismo problema, en todas partes</td><td>Un banco en 2008, y luego la historia de la gestión de datos, de los años 70 a la tercera edición del DMBOK</td><td>La pregunta nunca cambió: ¿quién decide sobre estos datos y quién responde por ellos?</td></tr>
-<tr><td>Fuera del estante</td><td>Ocho hospitales en ocho países, 2008: una lista de verificación quirúrgica leída en voz alta</td><td>Una regla funciona cuando está todo junto: una lista acordada, una copia donde se hace el trabajo y alguien que verifica cada paso.</td></tr>
-<tr><td>Quién decide</td><td>Japón, la línea de motores de una automotriz en los años sesenta</td><td>Un derecho a decidir funciona cuando está al alcance del trabajo, y trae enseguida a alguien que puede decidir.</td></tr>
-<tr><td>Una palabra, un solo lugar</td><td>China, de la unificación de Qin en el 221 a. C. a la tabla de reglas de palabras de un escriba de condado</td><td>Un glosario funciona cuando hay uno solo, guardado donde ocurre el trabajo, y el trabajo lo usa.</td></tr>
-<tr><td>Quién puede verlo</td><td>Alemania Occidental, el censo de 1983</td><td>Contar personas es un permiso; saber quiénes son es otro.</td></tr>
-<tr><td>Reglas que se ejecutan</td><td>Fustat, 861: el nilómetro de la isla de Roda</td><td>Una medida funciona cuando se lee cada día frente a un nivel fijado de antemano, y su lectura llega a quienes deciden.</td></tr>
-<tr><td>Arreglado en el origen</td><td>Viena, las clínicas de maternidad de 1847</td><td>Donde un problema se ve no suele ser donde empieza.</td></tr>
-<tr><td>Cambios sin sorpresas</td><td>Suecia, la mañana del 3 de septiembre de 1967</td><td>Un cambio enorme no sorprende a nadie cuando todos saben qué va a cambiar, cuándo y qué hacer.</td></tr>
-<tr><td>Un producto con dueño</td><td>Estambul, el mercado alrededor del bedesten, desde 1461</td><td>Los compradores vuelven cuando alguien responde por la mercancía.</td></tr>
-<tr><td>Un agente que revisa</td><td>Una noche imaginada en la universidad, dentro de unos años</td><td>Las reglas llegan a cada cambio, a toda hora, cuando están escritas con la claridad suficiente para que un agente las verifique, y una persona sigue decidiendo.</td></tr>
-<tr><td>Docentes de datos</td><td>Bogotá, los mimos en los cruces en 1995</td><td>La mayoría cumple una regla porque la entiende, y la multa es para unos pocos.</td></tr>
-</tbody></table></div>
-</section>
-
-<section class="module" id="four-sides" aria-labelledby="four-sides-h">
-<div class="mhead"><div><h2 id="four-sides-h">Quiénes están en la mesa</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
-<div class="four">
-<div class="card biz"><h3>Lidera la gobernanza</h3><p>Yusuf Demir, el nuevo líder de gobernanza de datos de la universidad, que hereda el estante y empieza escuchando</p></div>
-<div class="card biz"><h3>Es dueña de un significado</h3><p>Mei, dueña de lo que significa título, que aprueba las palabras</p></div>
-<div class="card tech"><h3>Construye el modelo</h3><p>Jun, que construye lo que dice el modelo, y recibe las reglas cuando el trabajo ya está hecho</p></div>
-<div class="card tech"><h3>Opera la plataforma</h3><p>Sam, que podría proteger una columna en minutos, si alguien le dijera cuál</p></div>
-<div class="card biz"><h3>Informa el número</h3><p>Clara, de Planificación, que informa lo que recibe, y necesita saber en qué número confiar</p></div>
-</div>
-</section>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La historia del prólogo, sus fechas y sus cifras son reales, con sus fuentes en su guion. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. DAMA y DAMA-DMBOK son marcas de DAMA International, y DCAM de la EDM Association, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
 <script src="../../assets/learn/path.js?v=12187f81b8"></script>

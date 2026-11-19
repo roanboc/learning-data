@@ -82,5 +82,11 @@
       "Lleva la plataforma",
       "Sam Okafor, que ejecuta la actualización de cada noche y guarda los resultados de los controles de cada noche"
     ]
-  ]
+  ],
+  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: count the hidden work, answer a report, describe data for an agent, run a week of small changes.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: cuenta el trabajo oculto, responde un aviso, describe datos para un agente, vive una semana de cambios pequeños.",
+  "quiz_lead": "{quiz} situations from every film, about keeping data good. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
+  "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre cómo mantener buenos los datos. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Continuous architecture · Learning Data</title>
+<meta name="description" content="Short films on continuous architecture: a first draft from industry reference models, not a blank page; every change checked against the model; and architecture kept alive as a continuous capability.">
+<meta property="og:title" content="Continuous architecture · Learning Data"><meta property="og:description" content="An architecture kept alive as a capability: a first draft instead of a blank page, every change checked against the map, and keeping the map someone's job, with an owner, a budget and a rhythm."><meta property="og:image" content="https://data.learn-all.org/assets/a-first-draft-not-a-blank-page-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/continuous-architecture/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/continuous-architecture/">
+<link rel="icon" href="../assets/favicon.svg?v=9c05cdd7f4" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=6c7e05e496">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a></nav><a class="proj" href="../dbt-project/" aria-label="Example data project"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.9l7.9 4.55v9.1L12 21.1l-7.9-4.55v-9.1z"/><path d="M4.3 7.55 12 12l7.7-4.45M12 12v8.9"/></svg></a><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/continuous-architecture/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="How this site works" data-tour="../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><button class="extra-btn" type="button" popovertarget="top-extra" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div><div class="extra" id="top-extra" popover><a class="making" href="../journey/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17M8 5l-1.5 4M13 5l-1.5 4M18 5l-1.5 4"/></svg><span>Making of</span></a><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a class="contact" href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>LinkedIn</span></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/a-first-draft-not-a-blank-page-poster.jpg?v=ace0f097b1" alt=""><img src="../assets/every-change-checked-poster.jpg?v=8ca289ba1b" alt=""><img src="../assets/kept-alive-poster.jpg?v=e86733c99a" alt=""><img src="../assets/a-first-draft-not-a-blank-page-poster.jpg?v=ace0f097b1" alt=""><img src="../assets/every-change-checked-poster.jpg?v=8ca289ba1b" alt=""><img src="../assets/kept-alive-poster.jpg?v=e86733c99a" alt=""><img src="../assets/a-first-draft-not-a-blank-page-poster.jpg?v=ace0f097b1" alt=""><img src="../assets/every-change-checked-poster.jpg?v=8ca289ba1b" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Topics</a> › <a href="../topics/#enterprise-architecture">Enterprise architecture</a> › Continuous architecture</p>
+<h1>Continuous architecture</h1>
+<p class="lead">An architecture kept alive as a capability: a first draft instead of a blank page, every change checked against the map, and keeping the map someone's job, with an owner, a budget and a rhythm.</p>
+</section>
+<nav class="course" aria-label="Course: Continuous architecture"><div class="course-in"><p class="course-t"><small>Series · Enterprise architecture</small>Continuous architecture</p><ol class="path" data-store="ld-continuous-architecture" data-labs="3" data-quiz="6" data-series="ld-a-first-draft-not-a-blank-page ld-every-change-checked ld-kept-alive" data-text='{"watched": "Watched", "films": "{n} of 3 films watched", "labs": "{n} of 3 labs explored", "quiz": "{n} of 6 answered \u00b7 {ok} right"}'>
+<li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>The films</b><span>Three films</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Take it apart</b><span>Three hands-on labs</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Make the call</b><span>6 real situations</span></a></li>
+</ol></div></nav>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">The films</h2><p>Watch them in order, after The map before the data and Platform and solution architecture: each film builds on the one before. AI architecture follows it.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../assets/a-first-draft-not-a-blank-page-poster.jpg?v=ace0f097b1" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 1 of 3 · An agent's first draft</p>
+<h3><a href="a-first-draft-not-a-blank-page/">A first draft, not a blank page</a></h3>
+<p>The last new service stalled on a blank page. This time an agent drafts, every source shown, and only what the owners confirm is kept.</p>
+<p class="meta">7½ min · Pause and think · Continuous architecture</p>
+<p class="tc-progress" data-progress="ld-a-first-draft-not-a-blank-page" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/every-change-checked-poster.jpg?v=8ca289ba1b" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 2 of 3 · The map, tested on every change</p>
+<h3><a href="every-change-checked/">Every change, checked</a></h3>
+<p>Letters once read an old table and households lost power without warning. Now the map is tested on every change, and each change walked before anyone builds.</p>
+<p class="meta">7½ min · Pause and think · Continuous architecture</p>
+<p class="tc-progress" data-progress="ld-every-change-checked" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/kept-alive-poster.jpg?v=e86733c99a" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 3 of 3 · Keeping the architecture alive</p>
+<h3><a href="kept-alive/">Kept alive</a></h3>
+<p>Every check passed, yet the map had drifted. Keeping it becomes a job: an owner, a budget and a rhythm, and agents that read the map, never a copy.</p>
+<p class="meta">8½ min · Pause and think · Continuous architecture</p>
+<p class="tc-progress" data-progress="ld-kept-alive" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
+<div class="mhead"><div><h2 id="learn-h">Take it apart, then make the call</h2><p>Three playgrounds, one for each film, each with experiments to make happen; then 6 situations from every film. Your progress stays in this browser.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Take it apart: 3 hands-on labs →</a><a class="btn" href="scenarios/">Make the call: 6 situations</a></p>
+</section>
+
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The utility, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. TOGAF and ArchiMate are trademarks of The Open Group, named only to identify those frameworks. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/learn/path.js?v=12187f81b8"></script>
+<script src="../assets/ambient.js?v=e4b9486ecb"></script>
+</body>
+</html>

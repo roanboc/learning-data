@@ -1892,7 +1892,7 @@ K.handW=(ctx,s,size,w)=>ag_tw(ctx,s,{w:w||400,size:size||48,f:"hand"});
 K.hand=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||48,wt=o.w||400,W=K.handW(ctx,s,size,wt),p=o.p==null?1:clamp(o.p,0,1),x0=o.align==="center"?x-W/2:o.align==="right"?x-W:x;
   if(p>0&&(o.a==null||o.a>0.004)){ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
     if(p<1){ctx.beginPath();ctx.rect(x0-8,y-size*1.15,(W+16)*p,size*1.7);ctx.clip();}
-    ag_T(ctx,s,x0,y,{w:wt,size,f:"hand",color:css(colOf(o.col)),deco:o.deco});ctx.restore();}
+    ag_T(ctx,s,x0,y,{w:wt,size,f:"hand",color:css(colOf(o.col)),deco:o.deco||K.inkDeco});ctx.restore();}
   return{w:W,x0,x1:x0+W,pen:[x0+W*p,y-size*0.26]};};
 
 /* ---------------------------------------------------------------- a pen's marks
@@ -1960,7 +1960,8 @@ function plan(ctx,items,o){const out=[],lw=o.lw||5;let last=null;
 // from the start, in the order given
 K.inkPlan=(ctx,items,o,all)=>{const P=plan(ctx,items,o||{});return all?P:P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);};
 K.ink=(ctx,items,t,o)=>{o=o||{};const k=o.k||1,ox=o.x||0,oy=o.y||0,P=plan(ctx,items,o),aside=o.aside==null?1.4:o.aside,a=o.a==null?1:clamp(o.a,0,1);
-  if(a>0.004){ctx.save();ctx.translate(ox,oy);ctx.scale(k,k);ctx.globalAlpha*=a;for(const s of P){const p=s.t1<=-1e8?1:clamp((t-s.t0)/((s.t1-s.t0)||1),0,1);if(p>0)s.draw(ctx,p);}ctx.restore();}
+  // what a row draws of its own (a designed board's or page's drawing, PK.sk) is decoration too where the surface is (PK.inkDeco)
+  if(a>0.004){const d0=K.inkDeco;K.inkDeco=!!o.deco;ctx.save();try{ctx.translate(ox,oy);ctx.scale(k,k);ctx.globalAlpha*=a;for(const s of P){const p=s.t1<=-1e8?1:clamp((t-s.t0)/((s.t1-s.t0)||1),0,1);if(p>0)s.draw(ctx,p);}}finally{ctx.restore();K.inkDeco=d0;}}
   // where the pen is: on the stroke being drawn; between two strokes close in time, on its way from one to the next; else lifted away
   const T=P.filter(s=>s.t1>-1e8).sort((x,y)=>x.t0-y.t0);let cur=null,pv=null,nx=null;
   for(const s of T){if(t>=s.t0&&t<=s.t1){if(!cur)cur=s;}else if(s.t1<t){if(!pv||s.t1>=pv.t1)pv=s;}else if(!nx||s.t0<nx.t0)nx=s;}
@@ -2125,7 +2126,10 @@ K.teach=(ctx,who,t,items,o)=>{o=boardOf(o);
       over=!o.deco&&busy<0.5&&all.some(s=>{if(!hid(s)||s.t0>t)return false;const b=box(s),x1=s.t1>t&&(s.text||s.line)?toPic(s.at(clamp((t-s.t0)/((s.t1-s.t0)||1),0,1)))[0]:b[2];return b[0]<x+0.1*h&&Math.max(x1,b[0])>x-0.1*h;});
     K.watch({teach:typeof who==="string"?who:(P.key||P.name||"someone"),over,late:o.deco?[]:late.map(l=>({s:name(l.i),t:l.t,by:l.by})),
       lag:o.deco?[]:items.map((it,i)=>it.lag?{s:name(i),t:it.at,by:it.lag}:null).filter(Boolean),
-      edge:o.deco?[]:nearEdge(ctx,items,K.ROOMS.board.board.w,K.ROOMS.board.board.h),a:1,ctx});}
+      edge:o.deco?[]:nearEdge(ctx,items,K.ROOMS.board.board.w,K.ROOMS.board.board.h),
+      // a board seen close that is only writing: one of the film's people explains at it, and nothing on it is drawn as a designer
+      // would (PK.sk.drawn). A board of a story's own folk (who: a row of theirs) is as plain as its time
+      plain:!o.deco&&typeof who==="string"&&!items.some(it=>it&&it.drawn),a:1,ctx});}
   J.pen=pen;J.writing=wr;J.late=late;return J;};
 
 /* ---------------------------------------------------------------- a notebook someone writes in
@@ -2184,7 +2188,9 @@ K.notes=(ctx,who,t,items,o)=>{o=o||{};const R=K.ROOMS.notes;ctx.save();onBook(ct
   // the pen's point, turned with the book; the hand waits at the page's corner when nothing is written for a while
   const pic=r.pen?pageAt(R,[r.pen[0]-R.page.x,r.pen[1]-R.page.y]):R.rest,on=r.pen?r.on:0,tip=[lerp(R.rest[0],pic[0],on),lerp(R.rest[1],pic[1],on)];r.tip=tip;
   // for the check: that notes are in the picture, the rows written near the page's edge, and where the hand is
-  if(K.watch)K.watch({note:true,who:typeof who==="string"?who:"someone",edge:nearEdge(ctx,items,R.page.w,R.page.h),tip:o.hand!==false?tip:null,a:1,ctx});
+  if(K.watch)K.watch({note:true,who:typeof who==="string"?who:"someone",edge:nearEdge(ctx,items,R.page.w,R.page.h),tip:o.hand!==false?tip:null,
+    // a page of the film's own people that is only writing; a page a story's own folk keep (who: a row of theirs) is as plain as its time
+    plain:typeof who==="string"&&!items.some(it=>it&&it.drawn),a:1,ctx});
   if(o.hand!==false)K.penHand(ctx,who,[tip[0]+(on>0.98?Math.sin(t*21)*1.6*(1-r.lift):0),tip[1]+(on>0.98?Math.cos(t*17)*1.2*(1-r.lift):0)],{col:r.col,lift:Math.max(r.lift*0.8,(1-on)*0.5),k:o.k});
   return r;};
 
@@ -2334,6 +2340,366 @@ K.onScreen={
 K.inHand.phone=o=>(c,hd,deg,J)=>{o=o||{};const S=K.S,u=J.u,a=polar(hd,deg-176,10*u),b=polar(hd,deg+4,o.ear?70*u:86*u),g=Math.atan2(b[1]-a[1],b[0]-a[0]);
   c.save();c.translate(a[0],a[1]);c.rotate(g);const L=Math.hypot(b[0]-a[0],b[1]-a[1]),w=46*u;S.fill(c,cc=>rrect(cc,0,-w/2,L,w,7*u),S.tone(K.PAL.phone),{w:0.8});
   if(!o.back)S.fill(c,cc=>rrect(cc,5*u,-w/2+4*u,L-10*u,w-8*u,4*u),C("screenLit"),{line:false,flat:true});c.restore();};
+})(PK);
+
+/* ===== The people kit: boards and pages drawn as a designer would =====
+   The author found the boards and the notebooks too plain, "generally just writing" (18 November 2026). He asked for a designer's
+   board and notebook, "with proper drawings and charts. Still looking written but very polished. It doesn't need to show they are
+   writing and drawing everything, it could be almost done in design and the hand just adds some final words to complete the
+   sketch." Of four looks he picked two: a graphic recording, a sheet of paper pinned over the board (board B), and a sketched page
+   in the notebook (notebook D). This file holds what both are drawn with.
+
+   A designed board or page is two kinds of rows of PK.ink (hand.js): what is drawn already when it first shows, a row of its own
+   (PK.sk.drawn), and the last words, written by hand as the voice says them, as any other row: paced once with PK.pace and shown
+   with PK.teach (a board) or PK.notes (a page). The hand may also tick or ring a part of the drawing as the voice comes to it (a
+   mark of PK.ink's: tick, ring, star, under), and it writes nothing else.
+
+     PK.sk.drawn(draw, box)     a row that is drawn already: draw(ctx) in the board's or the page's own px; box [x0, y0, x1, y1] is
+                                where its ink lies: whoever explains steps clear of it, and the check (people.py) holds it 24 px or
+                                more inside the board or the page. On a board far off (PK.teach's deco), its words are decoration
+                                too: everything written here takes the surface's deco by itself (PK.inkDeco).
+     PK.sk.paper(ctx, o)        the graphic recording's sheet, pinned over PK.place.board's board: cream paper, a pin at each
+                                corner. o: x, y, w, h (in the board's px: 14, 16, 1222, 492), col, pins (false: none)
+     PK.SK                      the sheet's box and the page's: SK.board {x, y, w, h} (inside the paper, 24 px from every edge of
+                                the board), SK.page {x, y, w, h} (a page's room above the captions)
+
+   Words. Each is PK.hand's handwriting (size, w, col, align, a), so a box made from words is made as they are drawn.
+     PK.sk.text(ctx, s, x, y, o)          words, their baseline at (x, y) -> {w, x0, x1}
+     PK.sk.caps(ctx, s, x, y, o)          a small heading in capitals, its letters spaced (o.size 30, o.ls 3, o.col) -> {w}
+     PK.sk.wrap(ctx, s, maxW, o)          the words in lines no wider than maxW, at o.size and o.w -> [line, …]
+     PK.sk.lines(ctx, rows, x, y, o)      lines one under another: rows are strings or [s, o]; o.lh (1.25 of the size) -> {w, h}
+   Marks and shapes, each drawn once with an even dark line round a flat colour. A colour is a kit name ("ink", "mut", "blue",
+   "green", "amber", "orange", "violet") or [r, g, b]; a fill named so is that colour's light tint (PK.TINT).
+     PK.sk.line(ctx, pts, o)              a line drawn by hand through points: o.col, o.w (4), o.dash, o.close, o.fill, o.seed
+     PK.sk.box(ctx, x, y, w, h, o)        a box drawn with a marker: o.fill (its tint, laid a little off the line, as a marker
+                                          does), o.col (the line), o.w (3.5), o.r (12), o.dash
+     PK.sk.disc(ctx, cx, cy, r, o)        a round one: o.fill, o.col, o.w
+     PK.sk.band(ctx, x, y, w, h, col, a)  a highlighter's band
+     PK.sk.arrow(ctx, [x0, y0], [x1, y1], o)   o.col, o.w (4), o.bow (px, to the left of the way it goes), o.head (16), o.dash
+     PK.sk.pin(ctx, x, y, o), PK.sk.tape(ctx, x, y, w, o)   a pin; a strip of tape (o.rot, o.col)
+     PK.sk.sticky(ctx, x, y, w, h, o)     a sticky note: o.col (yellow), o.rot; o.draw(ctx, x, y, w, h) writes on it, turned with it
+     PK.sk.ribbon(ctx, s, x, y, o)        a heading on a ribbon, made from its words: (x, y) its top left (o.align "center": its
+                                          top middle); o.size (44), o.col ("blue"), o.ink (its words' colour), o.width (a ribbon
+                                          for words the hand writes on it later: s "") -> {x0, x1, y0, y1, base, cx (where words
+                                          on it go: their baseline, its middle)}
+     PK.sk.stamp(ctx, lines, cx, cy, o)   a reference stamped in a corner, turned a little: lines of [s, o] or strings (the first
+                                          bold); o.col ("blue"), o.rot (0.06), o.size (32) -> {w, h}
+     PK.sk.face(ctx, who, cx, cy, r, o)   a portrait, head and shoulders, in their own hair, skin and clothes: who a name in
+                                          PK.CAST or a row like its rows; o.ring (a colour round it), o.disc (false: no disc)
+     PK.sk.icon(ctx, kind, cx, cy, r, o)  a small drawing, r its size: o.fill. The kinds are in PK.sk.ICONS
+   A board's and a page's frame:
+     PK.sk.head(ctx, title, o)            a graphic recording's frame: the pinned sheet (o.paper: its o), the heading on a ribbon at
+                                          (o.x 110, o.y 42), o.col ("blue"), o.size (48); o.ref, the stamp's lines, at (o.rx 1060,
+                                          o.ry 98), o.rcol; o.sub, a line in capitals under the ribbon (s, or [s, col]) -> the ribbon's box
+     PK.sk.title(ctx, s, x, y, o)         a page's heading on a highlighter's band: o.size (84), o.col ("blue"), o.band -> {w, x0, x1}
+     PK.sk.panel(ctx, x, y, w, h, o, body)   a box with a heading in capitals (o.title, o.col), o.fill, o.line, o.dash; then
+                                          body(ctx, x, y, w, h): what is inside it, under the heading
+   Pieces made of those, each sized from its words unless a width is given, each returning its box {x, y, w, h}:
+     PK.sk.card(ctx, x, y, o)             a box with an icon at its left and a line or two: o.icon, o.ifill, o.lines ([s, o] or
+                                          strings), o.fill, o.col, o.w (its width), o.size (36), o.pad (18), o.r
+     PK.sk.list(ctx, x, y, items, o)      rows one under another, each {s, icon, num, dot, col, sub, ifill}: an icon, a number in a
+                                          ring or a dot before it, its words, and a gloss in muted ink after them (sub); o.size (38),
+                                          o.gap (the row's height: 1.6 of the size), o.subX (the gloss's column) -> [{x, y, w, h,
+                                          base, mark: [x, y] (where a tick beside it goes)}, …]
+     PK.sk.faces(ctx, x, y, who, o)       portraits in a row, a name or a word under each (o.names: [s, …], or true for their own
+                                          first names): o.r (30), o.gap -> [{cx, cy}, …]
+     PK.sk.flow(ctx, x, y, steps, o)      boxes joined by arrows, to the right (o.down: down): steps [{s, icon, fill, col, sub}, …];
+                                          o.size (34), o.gap (the arrow's length: 60), o.h (each box's height) -> [{x, y, w, h}, …]
+   Charts, sketched:
+     PK.sk.bars(ctx, x, y, w, h, bars, o)        bars on a line: [{v, col, label, top}, …] (top: words over the bar); o.max, o.size
+     PK.sk.trend(ctx, x, y, w, h, pts, o)        a line over time: pts [[0 to 1, 0 to 1], …]; o.col, o.labels ([[u, s], …] under
+                                                 the line's foot), o.dots
+     PK.sk.donut(ctx, cx, cy, r, parts, o)       a ring in parts: [{v, col}, …]; o.label (words in its middle), o.size
+     PK.sk.cycle(ctx, cx, cy, r, steps, o)       steps round a circle, each [s, col] in a pill, arrows from each to the next
+     PK.sk.stairs(ctx, x, y, w, h, steps, o)     steps that climb to the right, [s, …] on each; o.col, o.flag (a flag at the top)
+     PK.sk.matrix(ctx, x, y, w, h, o)            two axes and four corners: o.xs, o.ys (each axis's words), o.q ([top left, top
+                                                 right, bottom left, bottom right]: words or [s, o]), o.on (the corner shaded:
+                                                 0 to 3), o.col
+     PK.sk.pyramid(ctx, cx, y, w, h, layers, o)  layers from the top down: [s, col]
+     PK.sk.timeline(ctx, x, y, w, marks, o)      a line with marks along it: [{u, s, sub, col, up}, …]
+     PK.sk.scale(ctx, cx, cy, w, o)              a balance: o.l, o.r (the words in each pan), o.tilt (-1 to 1: the left pan down),
+                                                 o.lcol, o.rcol
+     PK.sk.venn(ctx, cx, cy, r, o)               two rounds that overlap: o.l, o.r, o.mid (their words), o.lcol, o.rcol
+     PK.sk.dots(ctx, x, y, cols, rows, o)        a field of small rounds: o.gap, o.r, o.on (how many coloured), o.col
+     PK.sk.big(ctx, s, cx, cy, o)                a figure, large, in a round burst: o.size (64), o.col, o.r
+
+   Lay a designed board out as a graphic recording: a ribbon for its heading at the top left, the reference stamped at the top
+   right, two or three parts below, each a drawing (a chart, a few portraits, cards with icons) with a few words, arrows between
+   them, and room left for the last words, at the right or at the foot, so whoever writes them steps clear after. Lay a page out as
+   a sketched page: its heading with a highlighter's band, boxes with icons and portraits, a sticky note, and a ribbon or a line at
+   its foot for the last words. Words are 30 px or more on a board seen close, 34 or more on a page, and none below the board's or
+   the page's room (PK.SK). Colour keeps its meaning (blue a plan or a rule, green something done or of value, amber a risk or a
+   cost, orange data); people's portraits wear their own clothes. Nothing here is a box of words for the check: a board's or a
+   page's drawing is the writing's, not a card over the scene. */
+(K=>{
+const {TAU,lerp,clamp,mix,dk,lt,css,hash,rrect}=K.u;
+const INK=()=>K.C.ink;
+K.TINT={ink:[248,244,236],mut:[238,232,224],blue:[214,228,244],green:[204,234,212],amber:[250,230,196],orange:[250,218,198],violet:[226,218,244],white:[255,255,255],sun:[252,226,140],paper:[250,247,240]};
+K.FILL={ink:[226,220,212],mut:[226,220,212],blue:[176,204,236],green:[178,222,190],amber:[250,212,128],orange:[244,186,154],violet:[206,194,242],white:[255,255,255],sun:[252,226,140],paper:[250,247,240]};
+const colOf=c=>K.inkCol(c),tintOf=c=>c==null?null:Array.isArray(c)?c:(K.TINT[c]||K.TINT.ink),fillOf=c=>c==null?null:Array.isArray(c)?c:(K.FILL[c]||K.FILL.ink);
+// a ribbon's colours: strong enough to carry white words, or light with ink ones (amber)
+const RIB={blue:[[104,146,196],[255,255,255]],green:[[88,146,106],[255,255,255]],amber:[[240,200,104],null],orange:[[214,128,86],[255,255,255]],violet:[[132,116,200],[255,255,255]],ink:[[96,86,98],[255,255,255]],mut:[[226,216,200],null]};
+const nz=(i,k)=>hash(i*7+3,k*13+1)-0.5;
+// the board's px and the page's: where a design's ink may lie
+K.SK={board:{x:40,y:36,w:1170,h:450},page:{x:70,y:56,w:960,h:770},paper:{x:14,y:16,w:1222,h:492}};
+K.sk={};const D=K.sk;
+
+/* ---------------------------------------------------------------- words */
+const deco=o=>o.deco||K.inkDeco;
+D.text=(ctx,s,x,y,o)=>K.hand(ctx,s,x,y,o||{});
+D.caps=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||30,ls=o.ls==null?3:o.ls,S=String(s).toUpperCase(),w=ag_tw(ctx,S,{w:700,size,f:"hand",ls});
+  const x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x;ag_T(ctx,S,x0,y,{w:700,size,f:"hand",ls,color:css(colOf(o.col||"mut")),deco:deco(o),a:o.a});return{w,x0,x1:x0+w};};
+D.capsW=(ctx,s,o)=>{o=o||{};return ag_tw(ctx,String(s).toUpperCase(),{w:700,size:o.size||30,f:"hand",ls:o.ls==null?3:o.ls});};
+D.wrap=(ctx,s,maxW,o)=>{o=o||{};const size=o.size||38,wt=o.w||400,out=[];let cur="";for(const wd of String(s).split(/\s+/)){const t=cur?cur+" "+wd:wd;if(cur&&K.handW(ctx,t,size,wt)>maxW){out.push(cur);cur=wd;}else cur=t;}if(cur)out.push(cur);return out;};
+const rowOf=r=>Array.isArray(r)?[r[0],r[1]||{}]:[r,{}];
+D.lines=(ctx,rows,x,y,o)=>{o=o||{};let yy=y,w=0;rows.forEach((r,i)=>{const [s,ro]=rowOf(r),q=Object.assign({size:o.size||38,w:o.w,col:o.col,align:o.align},ro),lh=(o.lh||1.25)*q.size;
+    if(i)yy+=lh;const m=D.text(ctx,s,x,yy,q);w=Math.max(w,m.w);});return{w,h:yy-y};};
+const widthOf=(ctx,rows,o)=>Math.max(0,...rows.map(r=>{const [s,ro]=rowOf(r);return K.handW(ctx,s,ro.size||o.size||38,ro.w||o.w||400);}));
+
+/* ---------------------------------------------------------------- marks and shapes */
+// a hand-drawn line through points: each stretch bowed a little, the same way every time
+function wob(ctx,pts,o){const amp=o.amp==null?1.6:o.amp,seed=o.seed||1;ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,k=amp*Math.min(1,L/80)*(1+nz(seed,i));
+    ctx.quadraticCurveTo((a[0]+b[0])/2+nx*k*2,(a[1]+b[1])/2+ny*k*2,b[0],b[1]);}
+  if(o.close)ctx.closePath();}
+const pen=(ctx,c,w)=>{ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=css(colOf(c));ctx.lineWidth=w;};
+D.line=(ctx,pts,o)=>{o=o||{};ctx.save();ctx.beginPath();wob(ctx,pts,o);if(o.fill){ctx.fillStyle=css(tintOf(o.fill));ctx.fill();}
+  if(o.col!==false){pen(ctx,o.col||"ink",o.w||4);if(o.dash)ctx.setLineDash(o.dash);ctx.stroke();}ctx.restore();};
+D.box=(ctx,x,y,w,h,o)=>{o=o||{};const r=o.r==null?12:o.r;ctx.save();
+  if(o.fill){ctx.fillStyle=css(tintOf(o.fill));ctx.beginPath();rrect(ctx,x+2,y+3,w,h,r);ctx.fill();}
+  if(o.col!==false){pen(ctx,o.col||"ink",o.w||3.5);if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();rrect(ctx,x,y,w,h,r);ctx.stroke();}ctx.restore();return{x,y,w,h};};
+D.disc=(ctx,cx,cy,r,o)=>{o=o||{};ctx.save();if(o.fill){ctx.fillStyle=css(tintOf(o.fill));ctx.beginPath();ctx.arc(cx+1.5,cy+2,r,0,TAU);ctx.fill();}
+  if(o.col!==false){pen(ctx,o.col||"ink",o.w||3.5);if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();}ctx.restore();};
+D.band=(ctx,x,y,w,h,c,a)=>{ctx.save();ctx.fillStyle=css(Array.isArray(c)?c:(K.HL[c]||K.HL.amber),a==null?0.5:a);ctx.beginPath();ctx.moveTo(x,y+h*0.12);ctx.quadraticCurveTo(x+w*0.5,y-h*0.06,x+w,y+h*0.04);
+  ctx.lineTo(x+w-4,y+h);ctx.quadraticCurveTo(x+w*0.5,y+h*1.06,x+4,y+h*0.94);ctx.closePath();ctx.fill();ctx.restore();};
+D.arrow=(ctx,a,b,o)=>{o=o||{};const bow=o.bow||0,mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,cx=mx-dy/L*bow,cy=my+dx/L*bow;
+  ctx.save();pen(ctx,o.col||"ink",o.w||4);if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.quadraticCurveTo(cx,cy,b[0],b[1]);ctx.stroke();ctx.setLineDash([]);
+  const an=Math.atan2(b[1]-cy,b[0]-cx),hl=o.head||16;ctx.beginPath();ctx.moveTo(b[0]-Math.cos(an-0.45)*hl,b[1]-Math.sin(an-0.45)*hl);ctx.lineTo(b[0],b[1]);ctx.lineTo(b[0]-Math.cos(an+0.45)*hl,b[1]-Math.sin(an+0.45)*hl);ctx.stroke();ctx.restore();};
+D.pin=(ctx,x,y,o)=>{o=o||{};ctx.save();ctx.fillStyle="rgba(60,40,40,0.2)";ctx.beginPath();ctx.arc(x+3,y+4,8,0,TAU);ctx.fill();ctx.fillStyle=css(o.col||[196,70,64]);ctx.beginPath();ctx.arc(x,y,8,0,TAU);ctx.fill();
+  pen(ctx,"ink",2);ctx.stroke();ctx.fillStyle="rgba(255,255,255,0.55)";ctx.beginPath();ctx.arc(x-2.5,y-2.5,2.6,0,TAU);ctx.fill();ctx.restore();};
+D.tape=(ctx,x,y,w,o)=>{o=o||{};const h=o.h||36,c=o.col||[150,196,186];ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);ctx.fillStyle=css(c,0.82);ctx.beginPath();ctx.moveTo(-w/2,-h/2);
+  for(let i=0;i<=6;i++)ctx.lineTo(-w/2+i*w/6,-h/2+(i%2?3:0));ctx.lineTo(w/2,h/2);for(let i=6;i>=0;i--)ctx.lineTo(-w/2+i*w/6,h/2-(i%2?3:0));ctx.closePath();ctx.fill();
+  ctx.strokeStyle=css(lt(c,0.5),0.7);ctx.lineWidth=2;for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(-w/2+i*w/4-8,-h/2);ctx.lineTo(-w/2+i*w/4+8,h/2);ctx.stroke();}ctx.restore();};
+D.sticky=(ctx,x,y,w,h,o)=>{o=o||{};const c=tintOf(o.col||"sun");ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.fillStyle="rgba(60,40,40,0.16)";ctx.fillRect(-w/2+5,-h/2+7,w,h);
+  ctx.fillStyle=css(c);ctx.fillRect(-w/2,-h/2,w,h);ctx.strokeStyle=css(dk(c,0.25));ctx.lineWidth=2;ctx.strokeRect(-w/2,-h/2,w,h);
+  ctx.fillStyle=css(dk(c,0.06));ctx.fillRect(-w/2,-h/2,w,Math.min(26,h*0.18));if(o.draw)o.draw(ctx,-w/2,-h/2,w,h);ctx.restore();return{x,y,w,h};};
+D.ribbon=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||44,wt=o.w||700,W=s?K.handW(ctx,s,size,wt):0,pad=o.pad||size*0.6,w=o.width||W+pad*2,h=Math.round(size*1.32),[f0,i0]=RIB[o.col||"blue"]||[colOf(o.col),[255,255,255]],
+    fill=Array.isArray(o.fill)?o.fill:f0,ink=o.ink||i0||INK(),x0=o.align==="center"?x-w/2:x,d=h*0.45,fd=dk(fill,0.22);
+  ctx.save();ctx.lineJoin="round";ctx.lineWidth=3;ctx.strokeStyle=css(INK());
+  if(o.tails!==false)for(const sg of[-1,1]){const ex=sg<0?x0:x0+w;ctx.fillStyle=css(fd);ctx.beginPath();ctx.moveTo(ex,y+d*0.5);ctx.lineTo(ex+sg*h*0.9,y+d*0.5);ctx.lineTo(ex+sg*h*0.55,y+d*0.5+h*0.5);
+    ctx.lineTo(ex+sg*h*0.9,y+h+d*0.5);ctx.lineTo(ex,y+h+d*0.5);ctx.closePath();ctx.fill();ctx.stroke();}
+  ctx.fillStyle=css(fill);ctx.beginPath();ctx.moveTo(x0,y);ctx.quadraticCurveTo(x0+w/2,y-6,x0+w,y);ctx.lineTo(x0+w,y+h);ctx.quadraticCurveTo(x0+w/2,y+h-6,x0,y+h);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
+  if(s)D.text(ctx,s,x0+w/2,y+h*0.72,{size,w:wt,col:ink,align:"center"});return{x0,x1:x0+w,y0:y,y1:y+h,w,h,base:y+h*0.72,cx:x0+w/2};};
+D.stamp=(ctx,lines,cx,cy,o)=>{o=o||{};const size=o.size||32,rows=lines.map((r,i)=>{const [s,ro]=rowOf(r);return[s,Object.assign({size:i?size*0.88:size,w:i?400:700,col:o.col||"blue",align:"center"},ro)];}),
+    W=Math.max(...rows.map(([s,q])=>K.handW(ctx,s,q.size,q.w))),lh=size*1.12,w=W+size*1.3,h=rows.length*lh+size*0.55;
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(o.rot==null?0.06:o.rot);D.box(ctx,-w/2,-h/2,w,h,{col:o.col||"blue",w:3,r:14,fill:o.fill});
+  if(o.double!==false)D.box(ctx,-w/2+6,-h/2+6,w-12,h-12,{col:o.col||"blue",w:1.6,r:10});
+  rows.forEach(([s,q],i)=>D.text(ctx,s,0,-h/2+size*0.3+lh*(i+0.78),q));ctx.restore();return{w,h};};
+
+/* ---------------------------------------------------------------- a portrait, as a designer sketches one */
+D.face=(ctx,who,cx,cy,r,o)=>{o=o||{};const P=typeof who==="string"?K.CAST[who]:who;if(!P)throw new Error("PK.sk.face: nobody called "+who);
+  const S=K.S,tone=c=>S.tone?S.tone(c):c,sk=tone(P.skin),hair=P.hair||{style:"short",c:[60,48,44]},hc=tone(hair.c||[60,48,44]),top=tone((P.top&&P.top.c)||[150,140,130]),lw=Math.max(2,r*0.085),st=hair.style;
+  ctx.save();ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=lw;ctx.strokeStyle=css(INK());
+  if(o.ring){ctx.fillStyle=css(tintOf(o.ring),0.95);ctx.beginPath();ctx.arc(cx,cy+r*0.15,r*1.42,0,TAU);ctx.fill();}
+  if(o.disc!==false){ctx.fillStyle=css(o.bg?tintOf(o.bg):[248,244,236]);ctx.beginPath();ctx.arc(cx,cy+r*0.15,r*1.25,0,TAU);ctx.fill();ctx.stroke();ctx.save();ctx.beginPath();ctx.arc(cx,cy+r*0.15,r*1.25-lw/2,0,TAU);ctx.clip();}
+  // shoulders, and what shows at the neck
+  ctx.fillStyle=css(top);ctx.beginPath();ctx.moveTo(cx-r*1.15,cy+r*1.6);ctx.quadraticCurveTo(cx-r*1.05,cy+r*0.78,cx-r*0.35,cy+r*0.7);ctx.lineTo(cx+r*0.35,cy+r*0.7);ctx.quadraticCurveTo(cx+r*1.05,cy+r*0.78,cx+r*1.15,cy+r*1.6);ctx.closePath();ctx.fill();ctx.stroke();
+  if(P.top&&P.top.inner){ctx.fillStyle=css(tone(P.top.inner));ctx.beginPath();ctx.moveTo(cx-r*0.28,cy+r*0.7);ctx.lineTo(cx,cy+r*1.12);ctx.lineTo(cx+r*0.28,cy+r*0.7);ctx.closePath();ctx.fill();ctx.stroke();}
+  // hair down the back, a bun, a knot, a scarf round the head
+  ctx.fillStyle=css(hc);
+  if(st==="long"){ctx.beginPath();ctx.moveTo(cx-r*0.78,cy-r*0.2);ctx.quadraticCurveTo(cx-r*0.95,cy+r*0.7,cx-r*0.62,cy+r*0.98);ctx.lineTo(cx+r*0.62,cy+r*0.98);ctx.quadraticCurveTo(cx+r*0.95,cy+r*0.7,cx+r*0.78,cy-r*0.2);ctx.closePath();ctx.fill();ctx.stroke();}
+  if(st==="bun"||st==="knot"){ctx.beginPath();ctx.arc(cx+r*0.05,cy-r*0.98,r*(st==="knot"?0.26:0.32),0,TAU);ctx.fill();ctx.stroke();}
+  const scarf=st==="scarf"||st==="covered";
+  if(scarf){ctx.fillStyle=css(hc);ctx.beginPath();ctx.moveTo(cx-r*0.86,cy+r*0.72);ctx.quadraticCurveTo(cx-r*1.0,cy-r*0.95,cx,cy-r*0.98);ctx.quadraticCurveTo(cx+r*1.0,cy-r*0.95,cx+r*0.86,cy+r*0.72);ctx.closePath();ctx.fill();ctx.stroke();}
+  // the neck and the head
+  ctx.fillStyle=css(sk);ctx.beginPath();rrect(ctx,cx-r*0.2,cy+r*0.35,r*0.4,r*0.45,r*0.1);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.ellipse(cx,cy,r*0.66,r*0.76,0,0,TAU);ctx.fill();ctx.stroke();
+  // hair on top, by its style
+  ctx.fillStyle=css(hc);
+  if(scarf){ctx.beginPath();ctx.moveTo(cx-r*0.66,cy-r*0.05);ctx.quadraticCurveTo(cx-r*0.62,cy-r*0.72,cx,cy-r*0.74);ctx.quadraticCurveTo(cx+r*0.62,cy-r*0.72,cx+r*0.66,cy-r*0.05);ctx.quadraticCurveTo(cx+r*0.7,cy-r*0.92,cx,cy-r*0.92);ctx.quadraticCurveTo(cx-r*0.7,cy-r*0.92,cx-r*0.66,cy-r*0.05);ctx.fill();ctx.stroke();}
+  else if(st==="coily"||st==="curly"){const n=st==="coily"?7:6;ctx.beginPath();for(let i=0;i<n;i++){const a=Math.PI*(1.05+i*0.9/(n-1)),bx=cx+Math.cos(a)*r*0.62,by=cy+Math.sin(a)*r*0.7;ctx.moveTo(bx+r*0.2,by);ctx.arc(bx,by,r*0.2,0,TAU);}ctx.fill();ctx.stroke();
+    ctx.beginPath();ctx.ellipse(cx,cy-r*0.45,r*0.62,r*0.36,0,Math.PI,TAU);ctx.fill();}
+  else if(st!=="none"&&st!=="shaved"){const sh=st==="short"||st==="crop"||st==="cropped"||st==="normal"||st==="side"||st==="knot",y0=cy+(sh?-r*0.1:r*0.2);ctx.beginPath();ctx.moveTo(cx-r*0.7,y0);
+    ctx.quadraticCurveTo(cx-r*0.78,cy-r*0.92,cx,cy-r*0.86);ctx.quadraticCurveTo(cx+r*0.8,cy-r*0.92,cx+r*0.7,y0-(sh?r*0.02:0));
+    ctx.quadraticCurveTo(cx+r*0.42,cy-r*(st==="side"?0.62:0.5),cx-r*0.05,cy-r*0.46);ctx.quadraticCurveTo(cx-r*0.48,cy-r*0.42,cx-r*0.7,y0);ctx.closePath();ctx.fill();ctx.stroke();}
+  if(P.beard){ctx.fillStyle=css(tone(P.beard));ctx.beginPath();ctx.moveTo(cx-r*0.6,cy+r*0.05);ctx.quadraticCurveTo(cx-r*0.5,cy+r*0.86,cx,cy+r*0.8);ctx.quadraticCurveTo(cx+r*0.5,cy+r*0.86,cx+r*0.6,cy+r*0.05);ctx.quadraticCurveTo(cx,cy+r*0.42,cx-r*0.6,cy+r*0.05);ctx.fill();ctx.stroke();}
+  if(P.earrings&&!scarf){ctx.fillStyle=css(tone(P.earrings));for(const sg of[-1,1]){ctx.beginPath();ctx.arc(cx+sg*r*0.68,cy+r*0.22,Math.max(1.6,r*0.07),0,TAU);ctx.fill();}}
+  // eyes, a smile, glasses
+  ctx.fillStyle=css(INK());for(const sg of[-1,1]){ctx.beginPath();ctx.arc(cx+sg*r*0.24,cy+r*0.02,Math.max(1.6,r*0.07),0,TAU);ctx.fill();}
+  ctx.lineWidth=lw*0.8;ctx.beginPath();ctx.arc(cx,cy+r*0.2,r*0.22,0.25*Math.PI,0.75*Math.PI);ctx.stroke();
+  if(P.glasses){ctx.lineWidth=lw*0.7;for(const sg of[-1,1]){ctx.beginPath();ctx.arc(cx+sg*r*0.25,cy+r*0.02,r*0.17,0,TAU);ctx.stroke();}ctx.beginPath();ctx.moveTo(cx-r*0.08,cy);ctx.lineTo(cx+r*0.08,cy);ctx.stroke();}
+  if(o.disc!==false)ctx.restore();ctx.restore();};
+
+/* ---------------------------------------------------------------- small drawings */
+const PAPER=[250,246,236];
+const ICON={
+  star:(c,x,y,r)=>{c.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.45:r;i?c.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr):c.moveTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr);}c.closePath();c.fill();c.stroke();},
+  plus:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.5,y);c.lineTo(x+r*0.5,y);c.moveTo(x,y-r*0.5);c.lineTo(x,y+r*0.5);c.stroke();},
+  minus:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.5,y);c.lineTo(x+r*0.5,y);c.stroke();},
+  check:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.45,y);c.lineTo(x-r*0.1,y+r*0.38);c.lineTo(x+r*0.5,y-r*0.38);c.lineWidth*=1.3;c.stroke();},
+  cross:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.4,y-r*0.4);c.lineTo(x+r*0.4,y+r*0.4);c.moveTo(x+r*0.4,y-r*0.4);c.lineTo(x-r*0.4,y+r*0.4);c.lineWidth*=1.2;c.stroke();},
+  q:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.arc(x,y-r*0.22,r*0.3,-Math.PI*0.95,Math.PI*0.4);c.quadraticCurveTo(x,y,x,y+r*0.22);c.stroke();c.beginPath();c.arc(x,y+r*0.52,r*0.07,0,TAU);c.fillStyle=c.strokeStyle;c.fill();},
+  warn:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r);c.lineTo(x+r*1.05,y+r*0.82);c.lineTo(x-r*1.05,y+r*0.82);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x,y-r*0.38);c.lineTo(x,y+r*0.25);c.stroke();c.beginPath();c.arc(x,y+r*0.52,r*0.07,0,TAU);c.fillStyle=c.strokeStyle;c.fill();},
+  rock:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.7);c.lineTo(x-r*0.7,y-r*0.2);c.lineTo(x-r*0.1,y-r*0.7);c.lineTo(x+r*0.6,y-r*0.4);c.lineTo(x+r,y+r*0.7);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.1,y-r*0.7);c.lineTo(x+r*0.05,y+r*0.1);c.lineTo(x+r*0.6,y-r*0.4);c.stroke();},
+  key:(c,x,y,r)=>{c.beginPath();c.arc(x-r*0.45,y,r*0.45,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x,y);c.lineTo(x+r,y);c.moveTo(x+r*0.7,y);c.lineTo(x+r*0.7,y+r*0.35);c.moveTo(x+r*0.95,y);c.lineTo(x+r*0.95,y+r*0.3);c.stroke();c.fillStyle=css(PAPER);c.beginPath();c.arc(x-r*0.45,y,r*0.16,0,TAU);c.fill();c.stroke();},
+  lock:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.2,r*0.42,Math.PI,TAU);c.lineTo(x+r*0.42,y);c.moveTo(x-r*0.42,y);c.lineTo(x-r*0.42,y-r*0.2);c.stroke();c.beginPath();rrect(c,x-r*0.7,y-r*0.05,r*1.4,r*1.0,r*0.14);c.fill();c.stroke();c.beginPath();c.arc(x,y+r*0.38,r*0.12,0,TAU);c.stroke();},
+  heart:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y+r*0.8);c.bezierCurveTo(x-r*1.3,y-r*0.1,x-r*0.55,y-r*1.0,x,y-r*0.35);c.bezierCurveTo(x+r*0.55,y-r*1.0,x+r*1.3,y-r*0.1,x,y+r*0.8);c.fill();c.stroke();},
+  house:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.8,y+r*0.8);c.lineTo(x-r*0.8,y-r*0.1);c.lineTo(x,y-r*0.85);c.lineTo(x+r*0.8,y-r*0.1);c.lineTo(x+r*0.8,y+r*0.8);c.closePath();c.fill();c.stroke();c.beginPath();c.rect(x-r*0.2,y+r*0.25,r*0.4,r*0.55);c.stroke();},
+  building:(c,x,y,r)=>{c.beginPath();c.rect(x-r*0.7,y-r*0.95,r*1.4,r*1.85);c.fill();c.stroke();c.beginPath();for(let i=0;i<3;i++)for(let j=0;j<2;j++)c.rect(x-r*0.42+j*r*0.52,y-r*0.7+i*r*0.46,r*0.32,r*0.26);c.stroke();c.beginPath();c.moveTo(x-r*1.0,y+r*0.9);c.lineTo(x+r*1.0,y+r*0.9);c.stroke();},
+  door:(c,x,y,r)=>{c.beginPath();c.rect(x-r*0.55,y-r*0.95,r*1.1,r*1.85);c.fill();c.stroke();c.beginPath();c.arc(x+r*0.3,y,r*0.08,0,TAU);c.stroke();c.beginPath();c.moveTo(x-r*0.9,y+r*0.9);c.lineTo(x+r*0.9,y+r*0.9);c.stroke();},
+  clock:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x,y);c.lineTo(x,y-r*0.65);c.moveTo(x,y);c.lineTo(x+r*0.45,y+r*0.2);c.stroke();},
+  hourglass:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.6,y-r);c.lineTo(x+r*0.6,y-r);c.lineTo(x+r*0.08,y);c.lineTo(x+r*0.6,y+r);c.lineTo(x-r*0.6,y+r);c.lineTo(x-r*0.08,y);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.75,y-r);c.lineTo(x+r*0.75,y-r);c.moveTo(x-r*0.75,y+r);c.lineTo(x+r*0.75,y+r);c.stroke();},
+  cal:(c,x,y,r)=>{c.beginPath();c.rect(x-r,y-r*0.75,r*2,r*1.6);c.fill();c.stroke();c.beginPath();c.moveTo(x-r,y-r*0.3);c.lineTo(x+r,y-r*0.3);c.moveTo(x-r*0.5,y-r);c.lineTo(x-r*0.5,y-r*0.55);c.moveTo(x+r*0.5,y-r);c.lineTo(x+r*0.5,y-r*0.55);c.stroke();
+    c.fillStyle=c.strokeStyle;for(let i=0;i<3;i++)for(let j=0;j<2;j++){c.beginPath();c.arc(x-r*0.5+i*r*0.5,y+r*0.1+j*r*0.4,r*0.07,0,TAU);c.fill();}},
+  chat:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y-r*0.7);c.lineTo(x+r,y-r*0.7);c.lineTo(x+r,y+r*0.4);c.lineTo(x-r*0.2,y+r*0.4);c.lineTo(x-r*0.6,y+r*0.9);c.lineTo(x-r*0.55,y+r*0.4);c.lineTo(x-r,y+r*0.4);c.closePath();c.fill();c.stroke();},
+  people:(c,x,y,r)=>{for(const [dx,s] of[[-0.6,0.8],[0.6,0.8],[0,1]]){c.beginPath();c.arc(x+dx*r,y-r*0.25*s,r*0.28*s,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x+dx*r-r*0.45*s,y+r*0.75);c.quadraticCurveTo(x+dx*r,y-r*0.05,x+dx*r+r*0.45*s,y+r*0.75);c.closePath();c.fill();c.stroke();}},
+  person:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.38,r*0.36,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.65,y+r*0.9);c.quadraticCurveTo(x,y-r*0.2,x+r*0.65,y+r*0.9);c.closePath();c.fill();c.stroke();},
+  map:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y-r*0.6);c.lineTo(x-r*0.35,y-r*0.85);c.lineTo(x+r*0.3,y-r*0.6);c.lineTo(x+r,y-r*0.85);c.lineTo(x+r,y+r*0.6);c.lineTo(x+r*0.3,y+r*0.85);c.lineTo(x-r*0.35,y+r*0.6);c.lineTo(x-r,y+r*0.85);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.35,y-r*0.85);c.lineTo(x-r*0.35,y+r*0.6);c.moveTo(x+r*0.3,y-r*0.6);c.lineTo(x+r*0.3,y+r*0.85);c.stroke();},
+  db:(c,x,y,r)=>{const e=r*0.32;c.beginPath();c.moveTo(x-r*0.75,y-r*0.6);c.lineTo(x-r*0.75,y+r*0.6);c.ellipse(x,y+r*0.6,r*0.75,e,0,Math.PI,0,true);c.lineTo(x+r*0.75,y-r*0.6);c.closePath();c.fill();c.stroke();c.beginPath();c.ellipse(x,y-r*0.6,r*0.75,e,0,0,TAU);c.fill();c.stroke();c.beginPath();c.ellipse(x,y,r*0.75,e,0,0,Math.PI);c.stroke();},
+  gear:(c,x,y,r)=>{c.beginPath();for(let i=0;i<16;i++){const a=i*Math.PI/8,rr=i%2?r*0.72:r;i?c.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr):c.moveTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr);}c.closePath();c.fill();c.stroke();c.fillStyle=css(PAPER);c.beginPath();c.arc(x,y,r*0.3,0,TAU);c.fill();c.stroke();},
+  shield:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r);c.quadraticCurveTo(x+r*0.5,y-r*0.72,x+r*0.85,y-r*0.75);c.quadraticCurveTo(x+r*0.9,y+r*0.5,x,y+r);c.quadraticCurveTo(x-r*0.9,y+r*0.5,x-r*0.85,y-r*0.75);c.quadraticCurveTo(x-r*0.5,y-r*0.72,x,y-r);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.35,y);c.lineTo(x-r*0.05,y+r*0.3);c.lineTo(x+r*0.4,y-r*0.3);c.stroke();},
+  bars:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.85);c.lineTo(x+r,y+r*0.85);c.stroke();for(const [dx,hh] of[[-0.62,0.7],[0,1.3],[0.62,0.95]]){c.beginPath();c.rect(x+dx*r-r*0.22,y+r*0.85-hh*r,r*0.44,hh*r);c.fill();c.stroke();}},
+  up:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.8);c.lineTo(x+r,y+r*0.8);c.moveTo(x-r,y+r*0.8);c.lineTo(x-r,y-r);c.stroke();c.beginPath();c.moveTo(x-r*0.8,y+r*0.4);c.lineTo(x-r*0.2,y-r*0.1);c.lineTo(x+r*0.15,y+r*0.15);c.lineTo(x+r*0.8,y-r*0.6);c.stroke();c.beginPath();c.moveTo(x+r*0.4,y-r*0.62);c.lineTo(x+r*0.82,y-r*0.62);c.lineTo(x+r*0.82,y-r*0.22);c.stroke();},
+  down:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y+r*0.8);c.lineTo(x+r,y+r*0.8);c.moveTo(x-r,y+r*0.8);c.lineTo(x-r,y-r);c.stroke();c.beginPath();c.moveTo(x-r*0.8,y-r*0.6);c.lineTo(x-r*0.2,y-r*0.05);c.lineTo(x+r*0.15,y-r*0.3);c.lineTo(x+r*0.8,y+r*0.4);c.stroke();c.beginPath();c.moveTo(x+r*0.4,y+r*0.42);c.lineTo(x+r*0.82,y+r*0.42);c.lineTo(x+r*0.82,y);c.stroke();},
+  wrench:(c,x,y,r)=>{c.save();c.translate(x,y);c.rotate(-0.8);c.beginPath();c.moveTo(-r*0.16,-r*0.4);c.lineTo(-r*0.16,r*0.95);c.quadraticCurveTo(0,r*1.1,r*0.16,r*0.95);c.lineTo(r*0.16,-r*0.4);c.closePath();c.fill();c.stroke();
+    c.beginPath();c.arc(0,-r*0.62,r*0.42,0,TAU);c.fill();c.stroke();c.fillStyle=css(PAPER);c.beginPath();c.moveTo(-r*0.13,-r*1.06);c.lineTo(-r*0.13,-r*0.68);c.lineTo(r*0.13,-r*0.68);c.lineTo(r*0.13,-r*1.06);c.fill();c.stroke();c.restore();},
+  doc:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.7,y-r);c.lineTo(x+r*0.35,y-r);c.lineTo(x+r*0.7,y-r*0.65);c.lineTo(x+r*0.7,y+r);c.lineTo(x-r*0.7,y+r);c.closePath();c.fill();c.stroke();c.beginPath();for(let i=0;i<3;i++){c.moveTo(x-r*0.4,y-r*0.35+i*r*0.4);c.lineTo(x+r*0.4,y-r*0.35+i*r*0.4);}c.stroke();},
+  cards:(c,x,y,r)=>{for(let i=2;i>=0;i--){c.beginPath();c.rect(x-r*0.8+i*r*0.18,y-r*0.7+i*r*0.18,r*1.3,r*1.1);c.fill();c.stroke();}c.beginPath();for(let i=0;i<3;i++){c.moveTo(x-r*0.25,y-r*0.05+i*r*0.25);c.lineTo(x+r*0.55,y-r*0.05+i*r*0.25);}c.stroke();},
+  book:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r*0.6);c.quadraticCurveTo(x-r*0.5,y-r*0.85,x-r,y-r*0.7);c.lineTo(x-r,y+r*0.7);c.quadraticCurveTo(x-r*0.5,y+r*0.55,x,y+r*0.8);c.quadraticCurveTo(x+r*0.5,y+r*0.55,x+r,y+r*0.7);c.lineTo(x+r,y-r*0.7);c.quadraticCurveTo(x+r*0.5,y-r*0.85,x,y-r*0.6);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x,y-r*0.6);c.lineTo(x,y+r*0.8);c.stroke();},
+  pen:(c,x,y,r)=>{c.save();c.translate(x,y);c.rotate(0.78);c.beginPath();c.rect(-r*0.22,-r,r*0.44,r*1.5);c.fill();c.stroke();c.beginPath();c.moveTo(-r*0.22,r*0.5);c.lineTo(0,r);c.lineTo(r*0.22,r*0.5);c.stroke();c.beginPath();c.moveTo(-r*0.22,-r*0.6);c.lineTo(r*0.22,-r*0.6);c.stroke();c.restore();},
+  bulb:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.2,r*0.62,Math.PI*0.78,Math.PI*0.22);c.lineTo(x+r*0.28,y+r*0.62);c.lineTo(x-r*0.28,y+r*0.62);c.closePath();c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.26,y+r*0.8);c.lineTo(x+r*0.26,y+r*0.8);c.moveTo(x-r*0.18,y+r*0.97);c.lineTo(x+r*0.18,y+r*0.97);c.stroke();
+    c.beginPath();for(const a of[-2.4,-1.57,-0.74]){c.moveTo(x+Math.cos(a)*r*0.86,y-r*0.2+Math.sin(a)*r*0.86);c.lineTo(x+Math.cos(a)*r*1.08,y-r*0.2+Math.sin(a)*r*1.08);}c.stroke();},
+  target:(c,x,y,r)=>{for(const k of[1,0.64,0.28]){c.beginPath();c.arc(x,y,r*k,0,TAU);if(k!==0.64)c.fill();c.stroke();}c.beginPath();c.moveTo(x,y);c.lineTo(x+r*0.95,y-r*0.95);c.moveTo(x+r*0.95,y-r*0.95);c.lineTo(x+r*0.62,y-r*0.95);c.moveTo(x+r*0.95,y-r*0.95);c.lineTo(x+r*0.95,y-r*0.62);c.stroke();},
+  flag:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.6,y+r);c.lineTo(x-r*0.6,y-r);c.stroke();c.beginPath();c.moveTo(x-r*0.6,y-r);c.quadraticCurveTo(x,y-r*1.2,x+r*0.8,y-r*0.85);c.lineTo(x+r*0.8,y-r*0.05);c.quadraticCurveTo(x,y-r*0.3,x-r*0.6,y-r*0.15);c.closePath();c.fill();c.stroke();},
+  sprout:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y+r);c.quadraticCurveTo(x+r*0.08,y,x,y-r*0.3);c.stroke();c.beginPath();c.moveTo(x,y-r*0.1);c.quadraticCurveTo(x-r*0.9,y-r*0.2,x-r*0.85,y-r*0.95);c.quadraticCurveTo(x-r*0.15,y-r*0.85,x,y-r*0.1);c.fill();c.stroke();
+    c.beginPath();c.moveTo(x+r*0.02,y-r*0.3);c.quadraticCurveTo(x+r*0.85,y-r*0.45,x+r*0.9,y-r*1.0);c.quadraticCurveTo(x+r*0.2,y-r*1.0,x+r*0.02,y-r*0.3);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.7,y+r);c.lineTo(x+r*0.7,y+r);c.stroke();},
+  tree:(c,x,y,r)=>{c.beginPath();c.rect(x-r*0.12,y+r*0.2,r*0.24,r*0.8);c.fill();c.stroke();c.beginPath();c.arc(x,y-r*0.25,r*0.62,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.8,y+r);c.lineTo(x+r*0.8,y+r);c.stroke();},
+  eye:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r,y);c.quadraticCurveTo(x,y-r*0.95,x+r,y);c.quadraticCurveTo(x,y+r*0.95,x-r,y);c.closePath();c.fill();c.stroke();c.beginPath();c.arc(x,y,r*0.34,0,TAU);c.stroke();c.fillStyle=c.strokeStyle;c.beginPath();c.arc(x,y,r*0.14,0,TAU);c.fill();},
+  phone:(c,x,y,r)=>{c.beginPath();rrect(c,x-r*0.52,y-r,r*1.04,r*2,r*0.16);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.16,y+r*0.75);c.lineTo(x+r*0.16,y+r*0.75);c.stroke();},
+  laptop:(c,x,y,r)=>{c.beginPath();rrect(c,x-r*0.75,y-r*0.75,r*1.5,r*1.05,r*0.08);c.fill();c.stroke();c.beginPath();c.moveTo(x-r,y+r*0.45);c.lineTo(x+r,y+r*0.45);c.lineTo(x+r*0.85,y+r*0.62);c.lineTo(x-r*0.85,y+r*0.62);c.closePath();c.fill();c.stroke();},
+  mail:(c,x,y,r)=>{c.beginPath();c.rect(x-r,y-r*0.65,r*2,r*1.3);c.fill();c.stroke();c.beginPath();c.moveTo(x-r,y-r*0.65);c.lineTo(x,y+r*0.1);c.lineTo(x+r,y-r*0.65);c.stroke();},
+  sensor:(c,x,y,r)=>{c.beginPath();rrect(c,x-r*0.45,y-r*0.3,r*0.9,r*0.9,r*0.12);c.fill();c.stroke();c.beginPath();c.arc(x,y+r*0.15,r*0.16,0,TAU);c.stroke();c.beginPath();for(const k of[0.6,0.95]){c.moveTo(x-r*k*0.8,y-r*0.45-r*k*0.3);c.quadraticCurveTo(x,y-r*0.45-r*k*0.85,x+r*k*0.8,y-r*0.45-r*k*0.3);}c.stroke();},
+  scale:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r*0.8);c.lineTo(x,y+r*0.85);c.moveTo(x-r*0.45,y+r*0.85);c.lineTo(x+r*0.45,y+r*0.85);c.moveTo(x-r*0.9,y-r*0.55);c.lineTo(x+r*0.9,y-r*0.55);c.stroke();
+    for(const sg of[-1,1]){c.beginPath();c.moveTo(x+sg*r*0.9,y-r*0.55);c.lineTo(x+sg*r*0.9-r*0.32,y+r*0.12);c.moveTo(x+sg*r*0.9,y-r*0.55);c.lineTo(x+sg*r*0.9+r*0.32,y+r*0.12);c.stroke();c.beginPath();c.moveTo(x+sg*r*0.9-r*0.4,y+r*0.12);c.quadraticCurveTo(x+sg*r*0.9,y+r*0.45,x+sg*r*0.9+r*0.4,y+r*0.12);c.closePath();c.fill();c.stroke();}},
+  loop:(c,x,y,r)=>{c.beginPath();c.arc(x,y,r*0.75,-0.3,Math.PI*0.85);c.stroke();c.beginPath();c.arc(x,y,r*0.75,Math.PI-0.3,Math.PI*1.85);c.stroke();
+    for(const a of[Math.PI*0.85,Math.PI*1.85]){const px=x+Math.cos(a)*r*0.75,py=y+Math.sin(a)*r*0.75,tg=a+Math.PI/2;c.beginPath();c.moveTo(px+Math.cos(tg-2.4)*r*0.32,py+Math.sin(tg-2.4)*r*0.32);c.lineTo(px,py);c.lineTo(px+Math.cos(tg+2.4)*r*0.32,py+Math.sin(tg+2.4)*r*0.32);c.stroke();}},
+  bolt:(c,x,y,r)=>{c.beginPath();c.moveTo(x+r*0.15,y-r);c.lineTo(x-r*0.55,y+r*0.12);c.lineTo(x-r*0.02,y+r*0.12);c.lineTo(x-r*0.18,y+r);c.lineTo(x+r*0.55,y-r*0.15);c.lineTo(x+r*0.02,y-r*0.15);c.closePath();c.fill();c.stroke();},
+  anchor:(c,x,y,r)=>{c.beginPath();c.arc(x,y-r*0.72,r*0.2,0,TAU);c.stroke();c.beginPath();c.moveTo(x,y-r*0.52);c.lineTo(x,y+r*0.85);c.moveTo(x-r*0.4,y-r*0.2);c.lineTo(x+r*0.4,y-r*0.2);c.moveTo(x-r*0.8,y+r*0.25);c.quadraticCurveTo(x-r*0.7,y+r*0.9,x,y+r*0.85);c.quadraticCurveTo(x+r*0.7,y+r*0.9,x+r*0.8,y+r*0.25);c.stroke();},
+  hat:(c,x,y,r)=>{c.beginPath();c.ellipse(x,y+r*0.45,r,r*0.3,0,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.55,y+r*0.42);c.lineTo(x-r*0.48,y-r*0.55);c.quadraticCurveTo(x,y-r*0.75,x+r*0.48,y-r*0.55);c.lineTo(x+r*0.55,y+r*0.42);c.quadraticCurveTo(x,y+r*0.58,x-r*0.55,y+r*0.42);c.fill();c.stroke();
+    c.beginPath();c.moveTo(x-r*0.52,y+r*0.05);c.quadraticCurveTo(x,y+r*0.2,x+r*0.52,y+r*0.05);c.stroke();},
+  puzzle:(c,x,y,r)=>{const s=r*0.8;c.beginPath();c.moveTo(x-s,y-s);c.lineTo(x-s*0.25,y-s);c.arc(x,y-s,s*0.25,Math.PI,0);c.lineTo(x+s,y-s);c.lineTo(x+s,y-s*0.25);c.arc(x+s,y,s*0.25,-Math.PI/2,Math.PI/2);c.lineTo(x+s,y+s);c.lineTo(x-s,y+s);c.closePath();c.fill();c.stroke();},
+  coin:(c,x,y,r)=>{for(const k of[0.5,0,-0.5]){c.beginPath();c.ellipse(x,y+k*r*0.62,r*0.82,r*0.36,0,0,TAU);c.fill();c.stroke();}},
+  drop:(c,x,y,r)=>{c.beginPath();c.moveTo(x,y-r);c.bezierCurveTo(x+r*0.3,y-r*0.5,x+r*0.75,y,x+r*0.75,y+r*0.3);c.arc(x,y+r*0.3,r*0.75,0,Math.PI);c.bezierCurveTo(x-r*0.75,y,x-r*0.3,y-r*0.5,x,y-r);c.fill();c.stroke();},
+  hand:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.5,y+r);c.lineTo(x-r*0.5,y+r*0.15);c.quadraticCurveTo(x-r*0.95,y-r*0.2,x-r*0.75,y-r*0.45);c.lineTo(x-r*0.38,y-r*0.1);c.lineTo(x-r*0.38,y-r*0.8);c.quadraticCurveTo(x-r*0.24,y-r*0.98,x-r*0.1,y-r*0.8);
+    c.lineTo(x-r*0.1,y-r*0.95);c.quadraticCurveTo(x+r*0.04,y-r*1.12,x+r*0.18,y-r*0.95);c.lineTo(x+r*0.18,y-r*0.85);c.quadraticCurveTo(x+r*0.32,y-r*1.0,x+r*0.46,y-r*0.82);c.lineTo(x+r*0.46,y-r*0.6);c.quadraticCurveTo(x+r*0.6,y-r*0.72,x+r*0.72,y-r*0.55);c.lineTo(x+r*0.72,y+r*0.2);c.quadraticCurveTo(x+r*0.7,y+r*0.6,x+r*0.45,y+r*0.75);c.lineTo(x+r*0.45,y+r);c.closePath();c.fill();c.stroke();},
+  road:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.35,y-r);c.lineTo(x-r,y+r);c.lineTo(x+r,y+r);c.lineTo(x+r*0.35,y-r);c.closePath();c.fill();c.stroke();c.beginPath();c.setLineDash([r*0.22,r*0.2]);c.moveTo(x,y-r*0.9);c.lineTo(x,y+r*0.9);c.stroke();c.setLineDash([]);},
+  chair:(c,x,y,r)=>{c.beginPath();c.moveTo(x-r*0.45,y-r);c.lineTo(x-r*0.45,y+r);c.moveTo(x-r*0.45,y+r*0.05);c.lineTo(x+r*0.55,y+r*0.05);c.lineTo(x+r*0.55,y+r);c.stroke();c.beginPath();rrect(c,x-r*0.6,y-r*0.1,r*1.25,r*0.22,r*0.08);c.fill();c.stroke();},
+  speech:(c,x,y,r)=>{c.beginPath();c.ellipse(x,y-r*0.12,r,r*0.7,0,0,TAU);c.fill();c.stroke();c.beginPath();c.moveTo(x-r*0.45,y+r*0.45);c.lineTo(x-r*0.7,y+r*0.98);c.lineTo(x-r*0.05,y+r*0.56);c.fill();c.stroke();}
+};
+D.ICONS=Object.keys(ICON);
+D.icon=(ctx,kind,cx,cy,r,o)=>{o=o||{};const f=ICON[kind];if(!f)throw new Error("PK.sk.icon: no icon called "+kind);ctx.save();pen(ctx,o.col||"ink",o.w||clamp(r*0.13,2.4,4.4));ctx.fillStyle=css(fillOf(o.fill||"white"));f(ctx,cx,cy,r);ctx.restore();};
+
+/* ---------------------------------------------------------------- the graphic recording's sheet */
+D.paper=(ctx,o)=>{o=Object.assign({},K.SK.paper,o||{});const {x,y,w,h}=o,c=o.col||[240,229,206];ctx.save();ctx.fillStyle="rgba(60,40,40,0.18)";ctx.fillRect(x+8,y+10,w,h);ctx.fillStyle=css(c);ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle=css(dk(c,0.22));ctx.lineWidth=2;ctx.strokeRect(x,y,w,h);ctx.restore();if(o.pins!==false)for(const [px,py] of[[x+24,y+18],[x+w-24,y+18],[x+24,y+h-18],[x+w-24,y+h-18]])D.pin(ctx,px,py);};
+D.drawn=(draw,box)=>({draw:c=>draw(c),box:box||[K.SK.board.x,K.SK.board.y,K.SK.board.x+K.SK.board.w,K.SK.board.y+K.SK.board.h],d:0.1,drawn:true});
+
+/* ---------------------------------------------------------------- a board's and a page's frame */
+// a page's heading on a highlighter's band: (x, y) its baseline's start; o.size (84), o.col ("blue"), o.band (its colour: o.col)
+D.title=(ctx,s,x,y,o)=>{o=o||{};const size=o.size||84,col=o.col||"blue",W=K.handW(ctx,s,size,700);D.band(ctx,x-14,y-size*0.66,W+28,size*0.8,o.band||col,o.a==null?0.42:o.a);
+  D.text(ctx,s,x,y,{size,w:700,col});return{w:W,x0:x,x1:x+W};};
+// a graphic recording's frame: the pinned sheet, its heading on a ribbon at the top left, where the idea comes from stamped at the
+// top right, and a line in capitals under the ribbon
+D.head=(ctx,title,o)=>{o=o||{};D.paper(ctx,o.paper);const x=o.x||110,r=D.ribbon(ctx,title,x,o.y||42,{col:o.col||"blue",size:o.size||48});
+  if(o.ref)D.stamp(ctx,o.ref,o.rx||1060,o.ry||98,{col:o.rcol||"blue",size:o.rsize||30,rot:o.rot});
+  if(o.sub){const [s,col]=Array.isArray(o.sub)?o.sub:[o.sub,"mut"];D.caps(ctx,s,x,r.y1+50,{col,size:30});}
+  return r;};
+// a part of a board or a page: a box, a heading in capitals at its top, and body(ctx, x, y, w, h) for what is inside, under the heading
+D.panel=(ctx,x,y,w,h,o,body)=>{o=o||{};D.box(ctx,x,y,w,h,{fill:o.fill==null?"paper":o.fill,col:o.line||"ink",w:3,r:o.r==null?16:o.r,dash:o.dash});
+  let top=y+14;if(o.title){D.caps(ctx,o.title,x+w/2,y+46,{align:"center",col:o.col||"ink",size:o.size||30});top=y+60;}
+  if(body)body(ctx,x,top,w,y+h-top);return{x,y,w,h};};
+
+/* ---------------------------------------------------------------- pieces */
+D.card=(ctx,x,y,o)=>{o=o||{};const size=o.size||36,pad=o.pad==null?18:o.pad,rows=(o.lines||[]).map(rowOf),ir=o.icon?(o.ir||size*0.62):0,
+    lh=(o.lh||1.22),hs=rows.map(([,ro])=>(ro.size||size)*lh),th=hs.reduce((a,b)=>a+b,0)-(rows.length?((rows[rows.length-1][1].size||size)*(lh-1)):0),
+    tw=widthOf(ctx,o.lines||[],{size}),ix=o.icon?ir*2+pad*0.7:0,w=o.w||Math.ceil(tw+ix+pad*2),h=o.h||Math.ceil(Math.max(th+pad*1.5,ir*2+pad*1.2));
+  D.box(ctx,x,y,w,h,{fill:o.fill==null?"paper":o.fill,col:o.col||"ink",w:o.lw||3,r:o.r==null?14:o.r,dash:o.dash});
+  if(o.icon)D.icon(ctx,o.icon,x+pad+ir,y+h/2,ir,{fill:o.ifill||o.fill||"white"});
+  let yy=y+(h-th)/2;rows.forEach(([s,ro],i)=>{const sz=ro.size||size;yy+=sz*0.8;D.text(ctx,s,x+pad+ix,yy,Object.assign({size,col:o.ink},ro));yy+=sz*(lh-0.8);});return{x,y,w,h};};
+D.list=(ctx,x,y,items,o)=>{o=o||{};const size=o.size||38,gap=o.gap||size*1.6,out=[];
+  items.forEach((it,i)=>{const base=y+i*gap,mid=base-size*0.3,r=size*0.42,c=it.col||o.col||"blue";let tx=x;
+    if(it.icon){D.icon(ctx,it.icon,x+r*1.2,mid,r*1.2,{fill:it.ifill||c});tx=x+r*2.4+size*0.45;}
+    else if(it.num!=null){D.disc(ctx,x+r,mid,r,{fill:fillOf(c),col:"ink",w:3});D.text(ctx,String(it.num),x+r,mid+size*0.26,{size:size*0.72,w:700,align:"center"});tx=x+r*2+size*0.45;}
+    else if(it.dot){D.disc(ctx,x+r*0.5,mid,r*0.42,{fill:c,col:c,w:2});tx=x+r+size*0.35;}
+    const m=D.text(ctx,it.s,tx,base,Object.assign({size,col:it.ink},it.o||{}));let x1=m.x1;
+    if(it.sub){const sx=o.subX!=null?x+o.subX:m.x1+size*0.45,ms=D.text(ctx,it.sub,sx,base,Object.assign({size:o.subSize||size*0.84,col:"mut"},it.subO||{}));x1=ms.x1;}
+    out.push({x,y:base-size,w:x1-x,h:size*1.3,base,mark:[x1+size*0.7,mid]});});return out;};
+D.faces=(ctx,x,y,who,o)=>{o=o||{};const r=o.r||30,gap=o.gap||r*3.1,out=[];who.forEach((k,i)=>{const cx=x+i*gap;D.face(ctx,k,cx,y,r,o.ring?{ring:o.ring}:{});
+    const nm=o.names===true?(typeof k==="string"&&K.CAST[k]?K.CAST[k].name.split(" ")[0]:""):(o.names||[])[i];if(nm)D.text(ctx,nm,cx,y+r*1.55+(o.size||30)*0.9,{size:o.size||30,w:700,align:"center",col:o.ncol});out.push({cx,cy:y});});return out;};
+D.flow=(ctx,x,y,steps,o)=>{o=o||{};const size=o.size||34,gap=o.gap||60,out=[];let cx=x,cy=y;
+  steps.forEach((st,i)=>{const s=typeof st==="string"?{s:st}:st,b=D.card(ctx,cx,cy,{icon:s.icon,lines:[[s.s,Object.assign({w:s.w||700},s.o||{})]].concat(s.sub?[[s.sub,{size:size*0.86,col:"mut"}]]:[]),size,fill:s.fill||"paper",col:s.col||"ink",h:o.h,w:s.bw||o.bw,ifill:s.ifill});out.push(b);
+    if(i<steps.length-1){if(o.down){D.arrow(ctx,[b.x+b.w/2,b.y+b.h+8],[b.x+b.w/2,b.y+b.h+gap-8],{col:o.acol||"ink",w:3.5,head:14});cy=b.y+b.h+gap;}
+      else{D.arrow(ctx,[b.x+b.w+8,b.y+b.h/2],[b.x+b.w+gap-8,b.y+b.h/2],{col:o.acol||"ink",w:3.5,head:14});cx=b.x+b.w+gap;}}});return out;};
+
+/* ---------------------------------------------------------------- charts */
+D.bars=(ctx,x,y,w,h,bars,o)=>{o=o||{};const n=bars.length,max=o.max||Math.max(...bars.map(b=>b.v)),slot=w/n,bw=o.bw||slot*0.56,size=o.size||30,base=y+h;
+  bars.forEach((b,i)=>{const bh=Math.max(4,h*b.v/max),bx=x+slot*(i+0.5)-bw/2;D.box(ctx,bx,base-bh,bw,bh,{fill:fillOf(b.fill||b.col||"blue"),col:"ink",w:3,r:4});
+    if(b.top)D.text(ctx,b.top,bx+bw/2,base-bh-size*0.4,{size:b.topSize||size,w:700,align:"center",col:b.ink||b.col||"ink"});
+    if(b.label)D.text(ctx,b.label,bx+bw/2,base+size*1.1,{size,align:"center",col:b.lcol||"mut"});});
+  D.line(ctx,[[x-10,base],[x+w+10,base]],{col:"ink",w:3.5,seed:7});return{x,y,w,h};};
+D.trend=(ctx,x,y,w,h,pts,o)=>{o=o||{};const P=pts.map(([u,v])=>[x+u*w,y+h-v*h]);D.line(ctx,[[x,y-6],[x,y+h],[x+w+12,y+h]],{col:"ink",w:3,seed:3});
+  D.line(ctx,P,{col:o.col||"blue",w:o.w||5,seed:11});if(o.dots!==false)for(const q of[P[0],P[P.length-1]])D.disc(ctx,q[0],q[1],8,{fill:fillOf(o.col||"blue"),col:"ink",w:2.5});
+  for(const [u,s] of o.labels||[])D.text(ctx,s,x+u*w,y+h+(o.size||30)*1.1,{size:o.size||30,align:"center",col:"mut"});return{x,y,w,h};};
+D.donut=(ctx,cx,cy,r,parts,o)=>{o=o||{};const tot=parts.reduce((a,p)=>a+p.v,0);let a=-Math.PI/2;ctx.save();pen(ctx,"ink",3);
+  for(const p of parts){const b=a+TAU*p.v/tot;ctx.beginPath();ctx.arc(cx,cy,r,a,b);ctx.arc(cx,cy,r*0.56,b,a,true);ctx.closePath();ctx.fillStyle=css(fillOf(p.col||"blue"));if(p.strong)ctx.fillStyle=css(colOf(p.col));ctx.fill();ctx.stroke();a=b;}ctx.restore();
+  if(o.label)D.text(ctx,o.label,cx,cy+(o.size||40)*0.34,{size:o.size||40,w:700,align:"center",col:o.lcol});return{x:cx-r,y:cy-r,w:r*2,h:r*2};};
+D.cycle=(ctx,cx,cy,r,steps,o)=>{o=o||{};const n=steps.length,size=o.size||32,a0=o.a0==null?-Math.PI/2:o.a0,pos=steps.map((s,i)=>{const a=a0+TAU*i/n;return[cx+Math.cos(a)*r,cy+Math.sin(a)*r*(o.flat||1),a];}),
+    ws=steps.map(st=>{const [s]=rowOf(st);return K.handW(ctx,s,size,700)+size*0.9;});
+  // arrows along the circle, between each pill and the next
+  for(let i=0;i<n;i++){const [x0,y0,a]=pos[i],[x1,y1,b0]=pos[(i+1)%n],b=b0<=a?b0+TAU:b0,m0=a+(b-a)*0.3,m1=a+(b-a)*0.7,rr=r*1.02;
+    D.arrow(ctx,[cx+Math.cos(m0)*rr,cy+Math.sin(m0)*rr*(o.flat||1)],[cx+Math.cos(m1)*rr,cy+Math.sin(m1)*rr*(o.flat||1)],{col:o.acol||"ink",w:3.5,head:14,bow:-(rr*(o.flat||1))*0.12});}
+  steps.forEach((st,i)=>{const [s,ro]=rowOf(st),[px,py]=pos[i],w=ws[i],h=size*1.5;D.box(ctx,px-w/2,py-h/2,w,h,{fill:fillOf(ro.col||o.col||"blue"),col:"ink",w:3,r:h/2});D.text(ctx,s,px,py+size*0.33,{size,w:700,align:"center"});});
+  if(o.mid)D.text(ctx,o.mid,cx,cy+size*0.35,{size:o.midSize||size,w:700,align:"center",col:o.midCol||"mut"});return pos;};
+D.stairs=(ctx,x,y,w,h,steps,o)=>{o=o||{};const n=steps.length,sw=w/n,size=o.size||30;ctx.save();
+  steps.forEach((st,i)=>{const [s,ro]=rowOf(st),sh=h*(i+1)/n,bx=x+i*sw;D.box(ctx,bx,y+h-sh,sw,sh,{fill:fillOf(ro.col||o.col||"blue"),col:"ink",w:3,r:3});D.text(ctx,s,bx+sw/2,y+h-sh-size*0.45,{size,w:700,align:"center"});});
+  if(o.flag)D.icon(ctx,"flag",x+w-sw*0.3,y-size*2.2,size*0.8,{fill:o.flag});ctx.restore();return{x,y,w,h};};
+D.matrix=(ctx,x,y,w,h,o)=>{o=o||{};const size=o.size||30,q=o.q||[];
+  if(o.on!=null){const i=o.on,qx=x+(i%2)*w/2,qy=y+(i>>1)*h/2;D.box(ctx,qx+6,qy+6,w/2-12,h/2-12,{fill:o.col||"green",col:false,r:10});}
+  D.arrow(ctx,[x,y+h],[x,y-8],{col:"ink",w:3.5,head:14});D.arrow(ctx,[x,y+h],[x+w+8,y+h],{col:"ink",w:3.5,head:14});
+  D.line(ctx,[[x+w/2,y+6],[x+w/2,y+h-6]],{col:"mut",w:2.5,dash:[8,8],seed:5});D.line(ctx,[[x+6,y+h/2],[x+w-6,y+h/2]],{col:"mut",w:2.5,dash:[8,8],seed:6});
+  // each corner's words, wrapped to the corner with room on each side
+  q.forEach((r,i)=>{const [s,ro]=rowOf(r),sz=ro.size||size,L=D.wrap(ctx,s,w/2-40,{size:sz,w:700}),lh=sz*1.12,cx=x+(i%2+0.5)*w/2,cy=y+((i>>1)+0.5)*h/2;
+    L.forEach((l,j)=>D.text(ctx,l,cx,cy+(j-(L.length-1)/2)*lh+sz*0.3,Object.assign({size:sz,w:700,align:"center"},ro)));});
+  if(o.xs)D.text(ctx,o.xs,x+w,y+h+size*1.15,{size,align:"right",col:"mut"});if(o.ys)D.text(ctx,o.ys,x+12,y-size*0.5,{size,col:"mut"});return{x,y,w,h};};
+D.pyramid=(ctx,cx,y,w,h,layers,o)=>{o=o||{};const n=layers.length,size=o.size||32,lh=h/n,at=yy=>w*(yy-y)/h;
+  layers.forEach((l,i)=>{const [s,ro]=rowOf(l),t0=i/n,t1=(i+1)/n,y0=y+i*lh,y1=y0+lh;ctx.save();ctx.beginPath();ctx.moveTo(cx-w/2*t0,y0);ctx.lineTo(cx+w/2*t0,y0);ctx.lineTo(cx+w/2*t1,y1);ctx.lineTo(cx-w/2*t1,y1);ctx.closePath();
+    ctx.fillStyle=css(fillOf(ro.col||o.col||"blue"));ctx.fill();pen(ctx,"ink",3);ctx.stroke();ctx.restore();if(!s)return;
+    // the words go in their layer where it is wide enough at their top; else beside it, with a line to it
+    const W=K.handW(ctx,s,size,700),base=y0+lh*(i===0?0.78:0.5)+size*0.34;
+    if(W+24<=at(base-size*0.72))D.text(ctx,s,cx,base,{size,w:700,align:"center"});
+    else{const ym=y0+lh*0.62,ex=cx+at(ym)/2;D.line(ctx,[[ex+6,ym],[ex+48,ym]],{col:"ink",w:2.5,seed:i+3});D.text(ctx,s,ex+58,ym+size*0.32,{size,w:700});}});return{x:cx-w/2,y,w,h};};
+D.timeline=(ctx,x,y,w,marks,o)=>{o=o||{};const size=o.size||30;D.arrow(ctx,[x,y],[x+w,y],{col:"ink",w:3.5,head:16});
+  for(const m of marks){const px=x+m.u*w,up=m.up!=null?m.up:true;D.disc(ctx,px,y,9,{fill:fillOf(m.col||"blue"),col:"ink",w:2.5});
+    if(m.s)D.text(ctx,m.s,px,up?y-size*0.75:y+size*1.35,{size,w:700,align:"center",col:m.ink});if(m.sub)D.text(ctx,m.sub,px,up?y-size*1.95:y+size*2.45,{size:size*0.9,align:"center",col:"mut"});}return{x,y,w};};
+D.scale=(ctx,cx,cy,w,o)=>{o=o||{};const t=clamp(o.tilt||0,-1,1)*0.2,size=o.size||30,hw=w/2,lx=cx-Math.cos(t)*hw,ly=cy+Math.sin(t)*hw,rx=cx+Math.cos(t)*hw,ry=cy-Math.sin(t)*hw;
+  D.line(ctx,[[cx,cy-14],[cx,cy+w*0.42]],{col:"ink",w:4,seed:2});D.line(ctx,[[cx-w*0.16,cy+w*0.42],[cx+w*0.16,cy+w*0.42]],{col:"ink",w:4,seed:3});D.line(ctx,[[lx,ly],[rx,ry]],{col:"ink",w:4.5,seed:4});D.disc(ctx,cx,cy,8,{fill:fillOf("amber"),col:"ink",w:2.5});
+  for(const [px,py,s,c] of[[lx,ly,o.l,o.lcol||"amber"],[rx,ry,o.r,o.rcol||"green"]]){const pw=Math.max(w*0.36,(s?K.handW(ctx,s,size,700):0)+size*0.8),ph=size*1.45;
+    D.line(ctx,[[px,py],[px-pw*0.4,py+w*0.18]],{col:"ink",w:2.5,seed:5});D.line(ctx,[[px,py],[px+pw*0.4,py+w*0.18]],{col:"ink",w:2.5,seed:6});
+    D.box(ctx,px-pw/2,py+w*0.18,pw,ph,{fill:fillOf(c),col:"ink",w:3,r:ph/2});if(s)D.text(ctx,s,px,py+w*0.18+ph*0.5+size*0.33,{size,w:700,align:"center"});}return{x:cx-w/2,y:cy,w};};
+D.venn=(ctx,cx,cy,r,o)=>{o=o||{};const size=o.size||32,d=r*0.62;ctx.save();ctx.globalAlpha*=0.85;for(const [x0,c] of[[cx-d,o.lcol||"blue"],[cx+d,o.rcol||"green"]]){ctx.fillStyle=css(tintOf(c));ctx.beginPath();ctx.arc(x0,cy,r,0,TAU);ctx.fill();}ctx.restore();
+  for(const x0 of[cx-d,cx+d])D.disc(ctx,x0,cy,r,{col:"ink",w:3.5});
+  // each side's words in the middle of what is only its own, the shared words where the two overlap: smaller to fit, never under
+  // 28 px; words that don't fit even so go over their round (a side's) or under the overlap (the shared words)
+  const fit=(s,room,sz)=>{const W=K.handW(ctx,s,sz,700),k=Math.min(1,room/Math.max(1,W));return sz*k>=28?sz*k:0;};
+  for(const [s,sg] of[[o.l,-1],[o.r,1]])if(s){const f=fit(s,2*d-24,size);if(f)D.text(ctx,s,cx+sg*r,cy+f*0.3,{size:f,w:700,align:"center"});else D.text(ctx,s,cx+sg*d,cy-r-size*0.45,{size,w:700,align:"center"});}
+  if(o.mid){const ms=o.midSize||size*0.9,f=fit(o.mid,2*(r-d)-14,ms),col=o.midCol||"ink";if(f)D.text(ctx,o.mid,cx,cy+f*0.3,{size:f,w:700,align:"center",col});
+    else{D.line(ctx,[[cx,cy+r*0.55],[cx,cy+r+12]],{col:"ink",w:2.5,seed:9});D.text(ctx,o.mid,cx,cy+r+12+ms*1.0,{size:ms,w:700,align:"center",col});}}
+  return{x:cx-d-r,y:cy-r,w:2*(d+r),h:2*r};};
+D.dots=(ctx,x,y,cols,rows,o)=>{o=o||{};const g=o.gap||22,r=o.r||7,on=o.on||0;let k=0;ctx.save();pen(ctx,"ink",1.8);
+  for(let j=0;j<rows;j++)for(let i=0;i<cols;i++,k++){ctx.beginPath();ctx.arc(x+i*g,y+j*g,r,0,TAU);ctx.fillStyle=css(k<on?fillOf(o.col||"blue"):tintOf(o.off||"white"));ctx.fill();ctx.stroke();}ctx.restore();return{x,y,w:(cols-1)*g,h:(rows-1)*g};};
+D.big=(ctx,s,cx,cy,o)=>{o=o||{};const size=o.size||64,W=K.handW(ctx,s,size,700),r=o.r||Math.max(size*0.95,W*0.62+size*0.3);ctx.save();ctx.beginPath();
+  for(let i=0;i<=24;i++){const a=i*TAU/24,rr=r*(i%2?0.94:1.06);i?ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);}ctx.closePath();
+  ctx.fillStyle=css(fillOf(o.fill||o.col||"amber"));ctx.fill();pen(ctx,"ink",3);ctx.stroke();ctx.restore();D.text(ctx,s,cx,cy+size*0.34,{size,w:700,align:"center",col:o.col||"ink"});return{x:cx-r,y:cy-r,w:r*2,h:r*2};};
 })(PK);
 
 /* ===== Measure the work, not the people: Sweden, from 1997 =====
@@ -2686,91 +3052,138 @@ function mw_lesson(x,tt,o){o=o||{};const who=o.who||"carmen",lis=g=>PK.face(tt,{
 /* the boards' rows, as functions of the chapter and the word times (sc, w), in the board's own px (1250 by 524). Each row has the
    time the voice says it; PK.pace then makes a row wait until whoever writes can have walked to it. So they are laid out for
    someone who walks: on from left to right, what is added later to the right, and nothing drawn back along words. */
-// 1. management, fitted to the work (Carmen)
-const mw_boardA=(sc,w)=>[
-  {s:"Managing and leading",x:70,y:108,size:68,w:700,col:"blue",at:w("sides","Managing",-0.2),d:1.3},
-  {s:"two sides of one role",x:70,y:194,size:52,at:w("sides","two sides",-0.1),d:1.1},
-  {s:"Hard to see, hard to improve",x:70,y:292,size:52,at:w("see","hard to see",-0.3),d:1.5},
-  {s:"so a leader measures",x:70,y:374,size:56,w:700,col:"blue",at:w("see","leader",-0.3),d:1.1},
-  {s:"+ dates, plans",size:52,at:w("see","dates",-0.1),d:0.8},
-  {s:"fitted to the work:",x:70,y:462,size:52,at:w("fit","fit",-0.3),d:1.0},
-  {k:"cross",x:560,y:444,r:16,col:"amber",at:w("fit","hours",-0.3),d:0.25},
-  {s:"hours, tickets per person",x:596,y:462,size:50,col:"mut",at:w("fit","hours",0),d:1.2}];
-// 2. the team's page: four measures in two pairs (Helena)
-const mw_boardB=(sc,w)=>[
-  {s:"The team's page, from July",x:70,y:100,size:62,w:700,col:"blue",at:w("page","team's page",-0.3),d:1.4},
-  {s:"Days to first use",x:70,y:196,size:52,at:w("days","Days",-0.1),d:1.0},
-  {s:"Feb 41, Jun 24",size:52,w:700,col:"orange",at:w("days","forty-one",-0.1),d:1.0},
-  {s:"Sent back",x:70,y:286,size:52,at:w("back","Sent back",-0.1),d:0.6},
-  {s:"Promises met",x:70,y:376,size:52,at:w("promise","Promises",-0.1),d:0.8},
-  {s:"Load,",x:70,y:466,size:52,at:w("load","load",-0.1),d:0.5},
-  {s:"limit 6",size:52,w:700,col:"blue",at:w("load","load",0.6),d:0.6},
-  {k:"line",x:880,y:176,x1:880,y1:272,bow:-44,col:"green",at:w("pairs","speed",-0.3),d:0.4},{s:"a pair",x:960,y:240,size:50,col:"green",at:w("pairs","speed",0.1),d:0.5},
-  {k:"line",x:880,y:356,x1:880,y1:452,bow:-44,col:"green",at:w("pairs","promises",-0.3),d:0.4},{s:"a pair",x:960,y:420,size:50,col:"green",at:w("pairs","promises",0.1),d:0.5}];
-// 3. the first reading: what slowed June's work (Helena)
-const mw_boardR=(sc,w)=>{const t0=w("june","take",-0.1);return[
-  {s:"What slowed the work?",x:70,y:104,size:66,w:700,col:"blue",at:w("what","what slowed",-0.2),d:1.3},
-  {s:"June: 24 days",x:70,y:214,size:56,w:700,at:w("june","June's",-0.3),d:0.9},
-  {s:"8 queue",x:300,y:318,size:50,at:t0+0.5,d:0.6},{s:"7 access",x:520,y:318,size:50,w:700,col:"amber",at:t0+1.3,d:0.6},
-  {s:"7 build",x:760,y:318,size:50,at:t0+2.1,d:0.6},{s:"2 review",x:960,y:318,size:50,at:t0+2.9,d:0.6},
-  {k:"ring",x:612,y:302,rx:118,ry:48,col:"amber",at:w("access","waiting",-0.3),d:0.6}];};
-// 4. pairs: Accelerate (Carmen)
-const mw_boardC=(sc,w)=>[
-  {s:"Accelerate, 2018",x:70,y:100,size:44,col:"mut",at:sc.cues.accel+0.1,d:0.9},
-  {s:"The best teams:",x:70,y:206,size:58,at:w("accel","best teams",-0.3),d:0.9},
-  {s:"fast",size:66,w:700,col:"green",at:w("accel","fast",-0.1),d:0.4},{s:"and",size:58,at:w("accel","and stable",0),d:0.3},{s:"stable",size:66,w:700,col:"green",at:w("accel","stable",-0.1),d:0.5},
-  {s:"measured side by side",x:70,y:316,size:58,w:700,col:"blue",at:w("accel","measured",-0.1),d:1.1}];
-// 5. not a target: Goodhart and Strathern; a count per person; Deming, at the right (Carmen)
-const mw_boardD=(sc,w)=>[
-  {s:"Goodhart, 1975; Strathern",x:70,y:96,size:44,col:"mut",at:sc.cues.goodhart+0.2,d:1.2},
-  {s:"A measure made a target",x:70,y:178,size:60,w:700,col:"blue",at:w("strathern","when a measure",-0.1),d:1.3},
-  {s:"stops being a good measure",x:70,y:250,size:52,at:w("strathern","ceases",-0.2),d:1.3},
-  {s:"Tickets per person:",x:70,y:340,size:52,at:w("split","Count tickets",-0.1),d:1.0},
-  {s:"work split small,",x:110,y:404,size:48,col:"amber",at:w("split","split",-0.1),d:0.8},{s:"easy picks,",size:48,col:"amber",at:w("split","pick easy",-0.1),d:0.6},
-  {s:"less help, mistakes hidden",x:110,y:462,size:48,col:"amber",at:w("split","stop helping",-0.1),d:1.4},
-  {s:"Deming, 1986:",x:800,y:96,size:44,col:"mut",at:sc.cues.deming+0.2,d:0.7},
-  {s:"94 in 100 problems",x:800,y:178,size:48,w:700,col:"orange",at:w("deming","ninety-four",-0.1),d:1.0},
-  {s:"the system's",x:800,y:250,size:56,w:700,col:"blue",at:w("deming","the system",-0.1),d:0.7}];
+// a board's graphic recording: its heading, drawn above where anyone stands, and the rest, drawn already when it first shows
+const mw_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// 1. management, fitted to the work (Carmen): one role with two sides, what a leader measures, and measures fitted to thinking work.
+// She writes the last words of each part as she comes to it, and crosses out hours and tickets
+const mw_boardA=(sc,w)=>[...mw_rec("Managing and leading",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,340,300,{title:"one role",col:"blue",fill:"blue"},(cc,x,y)=>{D.face(cc,"helena",x+170,y+50,34);
+      D.line(cc,[[x+150,y+98],[x+96,y+118]],{col:"ink",w:3,seed:2});D.line(cc,[[x+190,y+98],[x+244,y+118]],{col:"ink",w:3,seed:3});
+      D.box(cc,x+22,y+116,136,50,{fill:"blue",col:"ink",w:3,r:25});D.text(cc,"manage",x+90,y+152,{size:32,w:700,align:"center"});
+      D.box(cc,x+182,y+116,136,50,{fill:"green",col:"ink",w:3,r:25});D.text(cc,"lead",x+250,y+152,{size:32,w:700,align:"center"});});
+    D.panel(c,440,150,350,300,{title:"hard to see",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"eye",x+50,y+46,28,{fill:"white"});
+      D.bars(cc,x+100,y+4,220,84,[{v:2,col:"green"},{v:3,col:"green"},{v:4,col:"green"},{v:6,col:"green"}]);
+      D.icon(cc,"cal",x+46,y+140,22,{fill:"white"});D.text(cc,"dates",x+76,y+151,{size:30});
+      D.icon(cc,"doc",x+190,y+140,22,{fill:"white"});D.text(cc,"plans",x+220,y+151,{size:30});});
+    D.panel(c,820,150,360,300,{title:"management",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"bulb",x+48,y+44,26,{fill:"white"});
+      D.text(cc,"thinking work",x+86,y+56,{size:32,w:700});D.icon(cc,"clock",x+48,y+122,22,{fill:"white"});
+      D.text(cc,"hours, tickets",x+86,y+120,{size:30,col:"mut"});D.text(cc,"per person",x+86,y+158,{size:30,col:"mut"});});},[60,140,1190,458]),
+  {s:"two sides",x:100,y:432,size:38,w:700,col:"blue",at:w("sides","two sides",-0.1),d:0.9},
+  {s:"a leader measures",x:460,y:432,size:36,w:700,col:"green",at:w("see","leader",-0.3),d:1.1},
+  {s:"fit the work",x:1160,y:432,size:38,w:700,col:"blue",align:"right",at:w("fit","fit",-0.3),d:0.9},
+  {k:"cross",x:1124,y:336,r:18,col:"amber",at:w("fit","hours",-0.1),d:0.3}];
+// 2. the team's page (Helena): four measures, each a part of the page; she writes June's days, what each counts, the limit, and, at
+// the right, the two pairs
+const mw_boardB=(sc,w)=>[...mw_rec("The team's page",{},c=>{const D=PK.sk;
+    D.box(c,70,148,420,162,{fill:"orange",col:"ink",w:3,r:16});D.icon(c,"bolt",108,190,22,{fill:"white"});D.text(c,"speed",140,201,{size:32,w:700});
+    D.text(c,"days to first use",240,201,{size:28,col:"mut"});
+    D.text(c,"Feb",96,254,{size:28,col:"mut"});D.box(c,160,232,246,28,{fill:"orange",col:"ink",w:3,r:6});
+    D.text(c,"Jun",96,294,{size:28,col:"mut"});D.box(c,160,272,144,28,{fill:"orange",col:"ink",w:3,r:6});
+    D.box(c,510,148,420,162,{fill:"amber",col:"ink",w:3,r:16});D.icon(c,"loop",548,190,22,{fill:"white"});D.text(c,"sent back",580,201,{size:32,w:700});
+    D.icon(c,"doc",560,262,24,{fill:"white"});D.arrow(c,[592,252],[664,252],{col:"ink",w:3,head:12});D.icon(c,"person",694,262,24,{fill:"white"});
+    D.arrow(c,[668,284],[594,284],{col:"amber",w:3.5,head:12,bow:-14});
+    D.box(c,70,322,420,162,{fill:"green",col:"ink",w:3,r:16});D.icon(c,"check",108,364,22,{fill:"white"});D.text(c,"promises met",140,375,{size:32,w:700});
+    D.donut(c,128,438,32,[{v:8,col:"green"},{v:2,col:"white"}]);
+    D.box(c,510,322,420,162,{fill:"blue",col:"ink",w:3,r:16});D.icon(c,"cards",548,364,22,{fill:"white"});D.text(c,"load",580,375,{size:32,w:700});
+    for(let i=0;i<6;i++)D.box(c,536+i*40,408,32,32,{fill:"white",col:"ink",w:2.5,r:5});
+    D.line(c,[[786,396],[786,454]],{col:"blue",w:3.5,dash:[8,7],seed:5});},[60,140,1190,488]),
+  {s:"41",x:418,y:256,size:34,w:700,col:"orange",at:w("days","forty-one",-0.1),d:0.4},
+  {s:"24",x:316,y:296,size:34,w:700,col:"orange",at:w("days","twenty-four",-0.1),d:0.4},
+  {s:"how often?",x:736,y:278,size:34,w:700,col:"amber",at:w("back","how often",-0.1),d:0.8},
+  {s:"data products",x:186,y:452,size:34,col:"green",at:w("promise","data products",-0.1),d:0.9},
+  {s:"limit 6",x:798,y:438,size:34,w:700,col:"blue",at:w("load","limit",-0.2),d:0.7},
+  {k:"line",x:1012,y:162,x1:1012,y1:298,bow:-18,col:"green",at:w("pairs","speed",-0.3),d:0.4},{s:"a pair",x:1050,y:244,size:36,w:700,col:"green",at:w("pairs","speed",0.1),d:0.5},
+  {k:"line",x:1012,y:336,x1:1012,y1:472,bow:-18,col:"green",at:w("pairs","promises",-0.3),d:0.4},{s:"a pair",x:1050,y:418,size:36,w:700,col:"green",at:w("pairs","promises",0.1),d:0.5}];
+// 3. the first reading: June's 24 days, taken apart (Helena). The bar is drawn already; she writes how many days each part took, and
+// rings the wait for access
+const MW_PARTS=[["queue",8,"mut"],["access",7,"amber"],["build",7,"blue"],["review",2,"green"]],MW_DAY=1040/24;
+const mw_partX=i=>110+MW_DAY*MW_PARTS.slice(0,i).reduce((a,p)=>a+p[1],0)+MW_DAY*MW_PARTS[i][1]/2;
+const mw_boardR=(sc,w)=>{const t0=w("june","take",-0.1);return[...mw_rec("What slowed the work?",{},c=>{const D=PK.sk;
+    D.icon(c,"cal",120,198,28,{fill:"white"});D.text(c,"June",162,212,{size:40,w:700});D.text(c,"24 days, request to first use",270,212,{size:30,col:"mut"});
+    let x=110;for(const [s,n,col] of MW_PARTS){const wd=MW_DAY*n;D.box(c,x,250,wd,72,{fill:col,col:"ink",w:3,r:6});D.text(c,s,x+wd/2,370,{size:30,col:"mut",align:"center"});x+=wd;}},[96,160,1164,384]),
+  ...MW_PARTS.map(([s,n],i)=>({s:String(n),x:mw_partX(i),y:300,size:40,w:700,align:"center",at:t0+0.5+0.8*i,d:0.35})),
+  {k:"ring",x:mw_partX(1),y:326,rx:118,ry:68,col:"amber",at:w("access","waiting",-0.3),d:0.6}];};
+// 4. pairs: Accelerate (Carmen): speed and stability, each a part, and the two on a balance; she writes the best teams' two words, and
+// how they were measured
+const mw_boardC=(sc,w)=>[...mw_rec("The best teams",{ref:["Accelerate","2018"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,400,300,{title:"speed",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"bolt",x+50,y+44,30,{fill:"white"});
+      D.trend(cc,x+110,y+12,250,110,[[0,0.15],[0.35,0.3],[0.65,0.55],[1,0.9]],{col:"blue"});});
+    D.panel(c,500,150,400,300,{title:"stability",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"shield",x+50,y+44,30,{fill:"white"});
+      D.trend(cc,x+110,y+12,250,110,[[0,0.7],[0.35,0.73],[0.65,0.68],[1,0.72]],{col:"green"});});
+    D.scale(c,1050,236,200,{l:"",r:""});D.icon(c,"bolt",950,293,16,{fill:"white"});D.icon(c,"shield",1150,293,16,{fill:"white"});},[60,140,1192,458]),
+  {s:"fast",x:100,y:432,size:48,w:700,col:"green",at:w("accel","fast",-0.1),d:0.4},
+  {s:"stable",x:530,y:432,size:48,w:700,col:"green",at:w("accel","stable",-0.1),d:0.5},
+  {s:"side by side",x:1166,y:432,size:40,w:700,col:"blue",align:"right",at:w("accel","measured",-0.1),d:1.0}];
+// 5. not a target (Carmen): a measure pushed into a target, what a count per person makes people do, and Deming's hundred problems.
+// She writes what the target does to the measure, the last thing the count does, and Deming's figure and whose they are
+const mw_boardD=(sc,w)=>[...mw_rec("A measure made a target",{ref:["Goodhart, 1975","and Strathern"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,330,300,{title:"a target",col:"amber",fill:"amber"},(cc,x,y)=>{D.icon(cc,"bars",x+50,y+52,28,{fill:"white"});
+      D.arrow(cc,[x+90,y+52],[x+176,y+52],{col:"ink",w:3.5,head:14});D.icon(cc,"target",x+226,y+52,40,{fill:"white"});
+      D.text(cc,"pushed to move",x+30,y+150,{size:30,col:"mut"});});
+    D.panel(c,430,150,420,300,{title:"tickets per person",col:"amber",fill:"amber"},(cc,x,y)=>{
+      [["puzzle","work split small"],["star","easy picks"],["hand","less help"]].forEach(([ic,s],i)=>{D.icon(cc,ic,x+44,y+34+i*54,20,{fill:"white"});D.text(cc,s,x+76,y+45+i*54,{size:30});});});
+    D.panel(c,880,150,300,300,{title:"Deming, 1986",col:"blue",fill:"blue"},(cc,x,y)=>{D.dots(cc,x+20,y+12,10,10,{gap:17,r:6,on:94,col:"blue",off:"orange"});
+      D.disc(cc,x+202,y+140,8,{fill:"orange",col:"ink",w:2.5});D.text(cc,"people",x+216,y+150,{size:28,col:"mut"});});},[60,140,1192,458]),
+  {s:"stops measuring",x:100,y:432,size:36,w:700,col:"amber",at:w("strathern","ceases",-0.2),d:1.1},
+  {s:"mistakes hidden",x:830,y:432,size:36,w:700,col:"amber",align:"right",at:w("split","mistakes",-0.1),d:1.1},
+  {s:"94",x:1072,y:300,size:48,w:700,col:"blue",at:w("deming","ninety-four",-0.1),d:0.5},
+  {s:"the system's",x:900,y:436,size:34,w:700,col:"blue",at:w("deming","the system",-0.1),d:0.8}];
 
 /* ---------------------------------------------------------------- Helena's notebook: what she keeps (the page's own px)
-   One pen writes a page, so its strokes come one after the other, each with the time to cross to it: the film gives each row the
-   time the voice says it, in the order the pen writes them, and paces the page (PK.pace(ctx, null, rows)). Glosses go in one
-   muted column at the right. */
-// 3. what slowed the work: the two waits found, their fixes, and what they gave (the page is 1,100 px wide: glosses at x 720)
-const mw_note1=(sc,w)=>[
-  {s:"What slowed it?",x:70,y:124,size:88,w:700,col:"blue",at:sc.cues.most-0.4,d:0.8,marks:[["under","blue",null,0.3]]},
-  {k:"dot",x:96,y:244,r:9,col:"amber",at:w("most","waits",-0.4),d:0.12},{s:"Access on day one",x:130,y:262,size:62,at:w("most","waits",-0.25),d:0.9},
-  {s:"7 days to 1",x:720,y:262,size:42,col:"mut",at:w("most","found",-0.2),d:0.6},
-  {k:"dot",x:96,y:374,r:9,col:"amber",at:w("most","removed",-0.4),d:0.12},{s:"Fifteen minutes first",x:130,y:392,size:62,at:w("most","removed",-0.25),d:0.9},
-  {s:"sent back halved",x:720,y:392,size:42,col:"mut",at:w("most","one at",0),d:0.7},
-  {s:"Nobody was slow",x:130,y:536,size:66,w:700,at:sc.ends.most+0.3,d:0.8,marks:[["hl","green"]]}];
+   Each page is sketched already when it first shows (PK.sk.drawn): its heading, the parts as drawings and a few words. One pen adds
+   the last words, so its strokes come one after the other, each with the time to cross to it: the film gives each the time the voice
+   says it, in the order the pen writes them, and paces the page (PK.pace(ctx, null, rows)). */
+// 3. what slowed the work: the two waits found, their fixes, and what each gave; and that nobody was slow
+const mw_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"What slowed it?",86,124,{size:76});
+    D.disc(c,120,238,34,{fill:"amber",col:"ink",w:3});D.icon(c,"hourglass",120,238,21,{fill:"white"});
+    D.text(c,"waiting for access",176,234,{size:40,w:700});D.text(c,"asked for on day one now",176,282,{size:34,col:"mut"});
+    D.arrow(c,[604,258],[670,258],{col:"ink",w:3.5,head:14});
+    D.disc(c,120,398,34,{fill:"amber",col:"ink",w:3});D.icon(c,"loop",120,398,21,{fill:"white"});
+    D.text(c,"unclear asks",176,394,{size:40,w:700});D.text(c,"fifteen minutes first",176,442,{size:34,col:"mut"});
+    D.arrow(c,[560,418],[670,418],{col:"ink",w:3.5,head:14});
+    D.faces(c,770,624,["ivy","sam","jun"],{r:32,gap:96});},[60,40,1030,680]),
+  {s:"a week to a day",x:690,y:270,size:44,w:700,col:"green",at:w("most","found",-0.2),d:0.8},
+  {s:"halved",x:690,y:430,size:48,w:700,col:"green",at:w("most","one at",0),d:0.6},
+  {s:"Nobody was slow",x:110,y:640,size:62,w:700,at:sc.ends.most+0.3,d:0.9,marks:[["hl","green"]]}];
 // 4. read in pairs: what each measure hides, alone
-const mw_note2=(sc,w)=>[
-  {s:"Read in pairs",x:70,y:124,size:88,w:700,col:"blue",at:sc.cues.honest-0.3,d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"Speed, alone",x:130,y:262,size:62,at:w("honest","Speed",-0.1),d:0.7},{k:"arrow",x:478,y:242,x1:590,y1:242,col:"amber",at:w("honest","hide",-0.45),d:0.3},
-  {s:"hides rushed work",x:625,y:262,size:50,col:"amber",at:w("honest","rushed",-0.4),d:0.9},
-  {s:"Promises, alone",x:130,y:392,size:62,at:w("honest","Promises",-0.1),d:0.8},{k:"arrow",x:548,y:372,x1:600,y1:372,col:"amber",at:w("honest","tired",-0.6),d:0.25},
-  {s:"hides tired people",x:625,y:392,size:50,col:"amber",at:w("honest","tired",-0.3),d:0.9},
-  {s:"Read them together",x:130,y:536,size:66,w:700,at:sc.ends.honest-0.1,d:0.9,marks:[["hl","green"]]}];
+const mw_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Read in pairs",86,124,{size:76});
+    D.disc(c,120,244,34,{fill:"blue",col:"ink",w:3});D.icon(c,"bolt",120,244,21,{fill:"white"});D.text(c,"speed, alone",176,260,{size:44,w:700});
+    D.arrow(c,[540,246],[594,246],{col:"amber",w:3.5,head:14});
+    D.disc(c,120,384,34,{fill:"green",col:"ink",w:3});D.icon(c,"check",120,384,21,{fill:"white"});D.text(c,"promises, alone",176,400,{size:44,w:700});
+    D.arrow(c,[540,386],[594,386],{col:"amber",w:3.5,head:14});
+    // the two pairs, each a capsule round its two measures
+    [[84,[["blue","bolt"],["amber","loop"]]],[344,[["green","check"],["blue","cards"]]]].forEach(([x0,P])=>{D.box(c,x0,500,192,76,{fill:"white",col:"ink",w:3,r:38});
+      P.forEach(([col,ic],i)=>{const x=x0+40+i*112;D.disc(c,x,538,26,{fill:col,col:"ink",w:3});D.icon(c,ic,x,538,16,{fill:"white"});});
+      D.text(c,"+",x0+96,550,{size:40,w:700,align:"center"});});},[60,40,1030,590]),
+  {s:"hides rushed work",x:610,y:260,size:44,col:"amber",at:w("honest","rushed",-0.4),d:0.9},
+  {s:"hides tired people",x:610,y:400,size:44,col:"amber",at:w("honest","tired",-0.3),d:0.9},
+  {s:"Read them together",x:110,y:680,size:62,w:700,at:sc.ends.honest-0.1,d:0.9,marks:[["hl","green"]]}];
 // 5. not a target: written in the pause that ends the chapter, from just after the last line (mw_N3), each stroke after the one
 // before has ended and the pen has crossed to the next (PK.pace), and done a second before the chapter ends
 const mw_N3=sc=>sc.cues.breath-1.3;
-const mw_note3=sc=>{const b=mw_N3(sc);return[
-  {s:"Not a target",x:70,y:124,size:88,w:700,col:"blue",at:b+0.5,d:0.7,marks:[["under","blue",null,0.3]]},
-  {k:"cross",x:100,y:244,r:15,col:"amber",at:b+1.95,d:0.25},{s:"No count per person",x:140,y:262,size:62,at:b+2.25,d:0.9},
-  {k:"tick",x:100,y:374,r:18,col:"green",at:b+3.5,d:0.25},{s:"The team's page instead",x:140,y:392,size:62,at:b+3.8,d:1.0},
-  {s:"Growth: each one's own goals",x:140,y:536,size:58,at:b+5.15,d:1.1,marks:[["hl","blue"]]}];};
-// 6. on Monday: the four things to keep, and beside three of them, in one column, what each means; the last, ringed, sums up
-const mw_note4=(sc,w)=>{const c=sc.cues,dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("flow","work sent back",0.1),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(252,"orange",w("flow","promises",0)),{s:"Measure the flow",x:128,y:252,size:62,at:w("flow","promises",0.1),d:0.9},
-  {s:"not the people",x:720,y:252,size:42,col:"mut",at:w("flow","load",0.2),d:0.7},
-  dot(372,"green",w("pair","Pair",-0.3)),{s:"Pair each measure",x:128,y:372,size:62,at:w("pair","Pair",-0.1),d:0.9,marks:[["hl","green"]]},
-  {s:"with its partner",x:720,y:372,size:42,col:"mut",at:w("pair","balances",-0.3),d:0.8},
-  dot(492,"blue",w("read","Read",-0.3)),{s:"Read them together",x:128,y:492,size:62,at:w("read","Read",-0.1),d:0.9},
-  {s:"what slowed it?",x:720,y:492,size:42,col:"mut",at:w("read","what slowed",-0.1),d:0.7},
-  // the last has no dot: the ring round it would run through one
-  {s:"Rank people? No: show the flow",x:128,y:618,size:62,at:w("rank","rank",-0.4),d:w("rank","show",0.4)-w("rank","rank",-0.4),marks:[["ring","blue",sc.ends.rank+0.1]]}];};
+const mw_note3=sc=>{const b=mw_N3(sc);return[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Not a target",86,124,{size:76});
+    D.box(c,90,190,400,210,{fill:"amber",col:"ink",w:3,r:16});D.icon(c,"person",160,264,32,{fill:"white"});D.icon(c,"cards",250,264,28,{fill:"white"});
+    D.text(c,"tickets per person",114,362,{size:38,w:700});
+    D.arrow(c,[510,296],[590,296],{col:"ink",w:3.5,head:14});
+    D.box(c,610,190,400,210,{fill:"green",col:"ink",w:3,r:16});D.icon(c,"doc",680,262,32,{fill:"white"});
+    for(let i=0;i<4;i++)D.box(c,740+(i%2)*64,224+(i>>1)*44,54,36,{fill:i===3?"amber":"white",col:"ink",w:2.5,r:6});
+    D.text(c,"the team's page",634,362,{size:38,w:700});
+    D.icon(c,"sprout",124,590,36,{fill:"green"});D.face(c,"ivy",900,580,44);},[60,40,1030,650]),
+  {k:"cross",x:440,y:236,r:24,col:"amber",at:b+1.2,d:0.3},
+  {k:"tick",x:962,y:236,r:24,col:"green",at:b+2.4,d:0.3},
+  {s:"each one's own goals",x:184,y:606,size:56,w:700,at:b+3.6,d:1.2,marks:[["hl","blue"]]}];};
+// 6. on Monday: the three things to do, each drawn with what it means; and, under them, a ranking crossed out and the flow instead
+const MW_MON=[["bars","orange",232,"not the people"],["scale","green",352,"with its partner"],["eye","blue",472,"what slowed it?"]];
+const mw_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});
+    MW_MON.forEach(([ic,col,y,s])=>{D.disc(c,108,y-20,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-20,19,{fill:"white"});D.text(c,s,700,y,{size:36,col:"mut"});});
+    D.text(c,"rank people?",96,560,{size:36,col:"mut"});
+    [[100,58,"person"],[160,88,"person"],[220,40,"person"]].forEach(([x,h,ic])=>{D.box(c,x,710-h,56,h,{fill:"mut",col:"ink",w:3,r:4});D.icon(c,ic,x+28,710-h-22,18,{fill:"white"});});
+    D.arrow(c,[300,660],[372,660],{col:"ink",w:3.5,head:14});},[60,40,1030,720]),
+  {s:"Measure the flow",x:156,y:232,size:56,w:700,at:w("flow","promises",0),d:0.9},
+  {s:"Pair each measure",x:156,y:352,size:56,w:700,at:w("pair","Pair",-0.1),d:0.9,marks:[["hl","green"]]},
+  {s:"Read them together",x:156,y:472,size:56,w:700,at:w("read","Read",-0.1),d:0.9},
+  {k:"cross",x:188,y:646,r:46,col:"amber",at:w("rank","say no",-0.1),d:0.35},
+  {s:"show the flow",x:400,y:680,size:60,w:700,col:"blue",at:w("rank","show",-0.2),d:0.9,marks:[["ring","blue",sc.ends.rank+0.1]]}];
 
 /* ---------------------------------------------------------------- Helena's corner
    Helena at the round table: with Ivy (o.ivy true), or alone at her laptop (o.laptop: its screen faces her). o.lean (0 to 1):
@@ -3192,7 +3605,7 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
     // the university, December: a reading, and the team smiles at what it fixed
     {at:tH,place:"mwTeam",dis:1.0,keys:[[tH,960,540,1.0],[tH+0.4,1010,530,1.08]],d:3,draw:(x,tt,cam)=>{
       const wr=ag_in(tt,tK-1.6,0.6);
-      mw_lesson(x,tt,{clock:10.0,who:"helena",rows:BB.map(r=>Object.assign({},r,{at:-60})),rest:1212,events:[[tH+0.8,"smile",4.0]],
+      mw_lesson(x,tt,{clock:10.0,who:"helena",rows:BB.map(r=>r.drawn?r:Object.assign({},r,{at:-60})),rest:1212,events:[[tH+0.8,"smile",4.0]],
         ivy:PK.face(tt,{expr:"smile",gaze:[1,-0.3]},[[tH+1.6,"glad",2.4]]),sam:PK.face(tt,{expr:"smile",gaze:[1,-0.25]},[[tH+1.2,"glad",2.8]]),jun:PK.face(tt,{expr:"smile",gaze:[1,-0.2]},[[tH+2.0,"nod"]])});}},
     // what to keep, on Monday: the four things, in her notebook
     {at:tK,place:"mwNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"helena",tt,N4,{});}},

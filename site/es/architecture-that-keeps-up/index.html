@@ -10,7 +10,7 @@
 <link rel="icon" href="../../assets/favicon.svg?v=9c05cdd7f4" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/site.css?v=a39de42c6c">
+<link rel="stylesheet" href="../../assets/site.css?v=6c7e05e496">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a></nav><a class="proj" href="../dbt-project/" aria-label="Proyecto de datos de ejemplo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.9l7.9 4.55v9.1L12 21.1l-7.9-4.55v-9.1z"/><path d="M4.3 7.55 12 12l7.7-4.45M12 12v8.9"/></svg></a><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../architecture-that-keeps-up/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="Cómo funciona este sitio" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><button class="extra-btn" type="button" popovertarget="top-extra" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div><div class="extra" id="top-extra" popover><a class="making" href="../journey/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17M8 5l-1.5 4M13 5l-1.5 4M18 5l-1.5 4"/></svg><span>Cómo se hizo</span></a><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a class="contact" href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>LinkedIn</span></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -21,6 +21,11 @@
 <p class="lead">La tercera serie de Gestión de datos. Helena Novak dirige los servicios del equipo como un negocio, guarda la arquitectura en un solo mapa en un repositorio, al día con cada cambio, y da a cada proveedor de datos un camino, incluso a los que no pueden seguir la forma preferida.</p>
 <p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
 </section>
+<nav class="course" aria-label="Curso: Una arquitectura al día"><div class="course-in"><p class="course-t"><small>Serie · Gestión de datos</small>Una arquitectura al día</p><ol class="path" data-store="ld-architecture-that-keeps-up" data-labs="3" data-quiz="9" data-series="ld-services-with-customers ld-one-map ld-a-path-for-every-provider" data-text='{"watched": "Vista", "films": "{n} de 3 películas vistas", "labs": "{n} de 3 labs explorados", "quiz": "{n} de 9 respondidas · {ok} correctas"}'>
+<li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>Las películas</b><span>Tres películas</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Tres labs interactivos</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>9 situaciones reales</span></a></li>
+</ol></div></nav>
 
 <section class="module" id="films" aria-labelledby="films-h">
 <div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden: cada película se apoya en la anterior.</p></div></div>
@@ -58,30 +63,13 @@
 </div>
 </section>
 
-<section class="module" id="thread" aria-labelledby="thread-h">
-<div class="mhead"><div><h2 id="thread-h">Un hilo: de los servicios del equipo a un camino para cada proveedor</h2><p>Tras aprobarse la estrategia de datos, Helena Novak escribe los cuatro servicios del equipo y para quién es cada uno, y recorre uno por todas las capas. En junio el mapa de la arquitectura pasa al repositorio del equipo, donde cada cambio se revisa y de donde sale todo lo demás. Luego el equipo da a cada proveedor de datos un camino: los sensores de las aulas envían eventos, mientras que el horario, comprado como servicio, nunca dice qué se borró, así que el equipo lo averigua cada noche.</p></div></div>
+<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
+<div class="mhead"><div><h2 id="learn-h">Desarma, y luego tú decides</h2><p>Tres labs de decisiones, uno por película, donde las decisiones se desarrollan semana a semana y mes a mes; y luego 9 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 3 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 9 situaciones</a></p>
 </section>
 
-<section class="module" id="past" aria-labelledby="past-h">
-<div class="mhead"><div><h2 id="past-h">Cada película empieza en otro lugar, en otra época</h2></div></div>
-<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
-<tr><td>Servicios con clientes</td><td>Madurai, 1976: la vista, para todos</td><td>Un cirujano oftalmólogo jubilado abrió un hospital de once camas. Primero dijo para qué era y para quién, en grupos según lo que podían pagar, y luego diseñó todo lo de abajo para ellos. Los servicios de un equipo de datos funcionan igual.</td></tr>
-<tr><td>Un solo mapa, en el repositorio</td><td>Gran Bretaña, 2001: un mapa, no cuadros</td><td>Ayuntamientos, compañías de agua y servicios de emergencia unían cada uno sus registros a las líneas de los cuadros de mapa de Ordnance Survey, y no podían estar seguros de que dos registros hablaran del mismo lugar. OS MasterMap lo hizo una sola base de datos, cada elemento con su identificador, una versión y una fecha. La arquitectura de un equipo de datos puede hacer lo mismo.</td></tr>
-<tr><td>Un camino para cada proveedor</td><td>Port Newark, 1957: el barco que trajo sus grúas</td><td>Las cajas alzadas enteras con grúa abarataron la carga de un barco, pero pocos puertos tenían grúa. Un barco reformado llevó dos propias, así que cualquier puerto con muelle podía recibir cajas hasta construir la suya. Un proveedor de datos que no puede seguir la forma preferida recibe su propio camino igual.</td></tr>
-</tbody></table></div>
-</section>
-
-<section class="module" id="four-sides" aria-labelledby="four-sides-h">
-<div class="mhead"><div><h2 id="four-sides-h">Quiénes están en la mesa</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
-<div class="four">
-<div class="card tech"><h3>Lidera el trabajo con datos</h3><p>Helena Novak, la gestora de datos, que dirige los servicios del equipo como un negocio y mantiene la arquitectura al día</p></div>
-<div class="card tech"><h3>Cuida el mapa</h3><p>Noor Rahman, la arquitecta de datos, que revisa cada cambio del mapa con los ingenieros principales del equipo</p></div>
-<div class="card tech"><h3>Lleva la plataforma</h3><p>Sam Okafor, que lleva a la plataforma los datos de cada proveedor por el camino que este puede ofrecer</p></div>
-<div class="card biz"><h3>Decide sobre las aulas</h3><p>Graham Ellis, el director de Instalaciones, cuyos conteos de aulas deben seguir siendo ciertos, envíe lo que envíe cada sistema</p></div>
-</div>
-</section>
 </main>
-<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
 <script src="../../assets/learn/path.js?v=12187f81b8"></script>
 <script src="../../assets/ambient.js?v=e4b9486ecb"></script>
 </body>

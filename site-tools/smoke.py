@@ -50,12 +50,12 @@ THEMES = ["light", "dark"]
 PUBLIC = "https://data.learn-all.org/"
 # film pages: their chapter count, and the Spanish chapter names of the English films on Spanish pages
 FILMS = {
-    "": 11, "es/": 11, "sketch/": 9, "es/sketch/": 9,
+    "": 11, "es/": 11, "sketch/": 10, "es/sketch/": 10,
     "when-things-go-wrong/silent-change/": 11, "es/when-things-go-wrong/silent-change/": 11,
     "when-things-go-wrong/too-good-to-be-true/": 8, "es/when-things-go-wrong/too-good-to-be-true/": 8,
 }
 ES_NAMES = {
-    "es/sketch/": {"drawn": "El boceto que dibujamos", "two": "Dos cifras", "cls": "¿Qué es una clase?",
+    "es/sketch/": {"cols": "Cuatro columnas", "drawn": "El boceto en el mapa", "two": "Dos cifras", "cls": "¿Qué es una clase?",
                    "census": "¿La fecha de corte de quién?", "courses": "Un estudiante, dos carreras",
                    "time": "¿Inscrito cuándo?", "levels": "Tres niveles de precisión",
                    "fit": "Revisar, adoptar, extender, registrar", "end": "Vista completa"},
@@ -919,51 +919,6 @@ async def check_think_silent(run):
             await pg.wait_for_timeout(300)
             expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after Escape on a question, focus isn't on the Play button")
             await pg.evaluate("() => FILM.pause()")
-            # the question list, from the same pack
-            L = await pg.evaluate("""() => [...document.querySelectorAll('#think-list details')].map(d => ({
-              id: d.querySelector('[data-scene]').dataset.scene, k: d.querySelector('.tq-k').textContent,
-              lab: (d.querySelector('a.think-lab') || {}).href, ok: (d.querySelector('li.ok') || {}).textContent }))""")
-            expect(sec, [x["id"] for x in L] == ["night", "bronze", "halves", "contract"], f"{where}: #think-list has {[x['id'] for x in L]}, expected night, bronze, halves, contract")
-            for x in L:
-                expect(sec, x["k"] == X["names"][x["id"]], f"{where}: the list names {x['id']} {x['k']!r}, expected {X['names'][x['id']]!r}")
-                want = run.url(("es/" if lang == "es" else "") + "labs/#" + X["qs"][x["id"]]["stop"])
-                expect(sec, x["lab"] == want, f"{where}: {x['id']}'s lab link goes to {x['lab']}, expected {want}")
-            # the +/− sign isn't part of a question's name
-            # its accessible name, from Playwright's ARIA snapshot (page.accessibility is gone): "- text: …" or "- role "…""
-            snap = (await pg.locator("#think-list summary").first.aria_snapshot()).split("\n")[0]
-            m = re.match(r'- (?:text: (.*)|[\w-]+ "(.*)")', snap)
-            name = (m.group(1) or m.group(2) or "") if m else ""
-            expect(sec, name and not name.rstrip().endswith(("+", "−")), f"{where}: the first question's name is {name!r}")
-            await run.think(pg, False)
-            # Space on a question opens it, and doesn't reach the player (which listens for Space while it is on screen)
-            await pg.evaluate("() => { document.querySelector('#think-list summary').focus({preventScroll: true}); document.querySelector('.player').scrollIntoView({block: 'center', behavior: 'instant'}); }")
-            await pg.wait_for_timeout(500)
-            await pg.keyboard.press("Space")
-            await pg.wait_for_timeout(300)
-            r = await pg.evaluate("() => ({open: document.querySelector('#think-list details').open, playing: FILM.playing()})")
-            expect(sec, r["open"] and not r["playing"], f"{where}: Space on a question {r}; expected it to open, with the film still")
-            await pg.evaluate("() => { FILM.pause(); document.querySelector('#think-list details').open = false; }")
-            # "Watch this part" plays that chapter only (the soundtrack runs fast to get there quickly), and hands focus to Play
-            await pg.evaluate("() => { const d = [...document.querySelectorAll('#think-list details')].find(d => d.querySelector('[data-scene=halves]')); d.open = true; }")
-            await pg.click("#think-list [data-scene=halves]")
-            # the page scrolls there smoothly, and the scroll may not have started when the click returns: wait for the film
-            # itself to come into view, then for the page to hold still (waiting for a still page alone read it before it moved)
-            try:
-                await pg.wait_for_function("() => { const t = document.getElementById('watch').getBoundingClientRect().top; return t >= -2 && t <= 160; }", timeout=2000)
-            except Exception:  # noqa: BLE001
-                pass
-            await run.settle(pg)
-            r = await pg.evaluate("() => { const s = SCENES.find(x => x.id === 'halves'); return {t: FILM.time(), start: s.start, end: s.start + s.dur, playing: FILM.playing(), top: document.getElementById('watch').getBoundingClientRect().top}; }")
-            expect(sec, r["playing"] and r["start"] <= r["t"] < r["start"] + 3, f"{where}: \"Watch this part\" doesn't play \"halves\" from its start ({r})")
-            expect(sec, -2 <= r["top"] <= 160, f"{where}: \"Watch this part\" doesn't bring the film into view ({r})")
-            expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after \"Watch this part\", focus isn't on the Play button")
-            await pg.evaluate("() => { document.getElementById('snd').playbackRate = 16; }")
-            try:
-                await pg.wait_for_function("() => !FILM.playing()", timeout=90000)
-            except Exception:  # noqa: BLE001
-                pass
-            t = await pg.evaluate("() => FILM.time()")
-            expect(sec, abs(t - (r["end"] - 0.05)) < 0.4, f"{where}: \"Watch this part\" stopped at {t:.2f} s, expected the end of \"halves\" ({r['end']:.2f} s)")
             for p in log_problems(log):
                 expect(sec, False, f"{where}: {p}")
             await pg.close()
@@ -999,7 +954,7 @@ async def check_think_home(run):
             ok = [i for i, o in enumerate(q["opts"]) if o.get("ok")][0]
             await pg.click(f".player .think .think-opt >> nth={ok}")
             r = await pg.evaluate("() => { const a = document.querySelector('.player .think a.think-more'); return a && {href: a.href, text: a.textContent}; }")
-            want = run.url(key + "sketch/")
+            want = run.url(key + q["more"]["href"])  # the next film after the sketch: The map behind the sketch
             expect(sec, r and r["href"] == want, f"{where}: \"Go deeper\" goes to {r and r['href']}, expected {want}")
             expect(sec, r and r["text"] == q["more"]["label"] + " →", f"{where}: \"Go deeper\" reads {r and r['text']!r}")
             for p in log_problems(log):
@@ -1253,7 +1208,7 @@ async def check_mobile(run):
     sec = run.rep.sec("mobile", "Phones and tablets: cards stack and the whole card is a link, anchors clear the header and the course bar, panels sit below the film up to 900 px and inside it above")
     grids = run.pick(k for k, pg in run.static.items() if not pg.redirect and (pg.dom.first(cls="topic-grid") or pg.dom.first(cls="topic-tiles")))
     anchors = [(k, a) for k, a in (("", "watch"), ("", "go-deeper"), ("topics/", "data-modelling"), ("topics/", "enterprise-architecture"),
-                                   ("es/", "go-deeper"), ("when-things-go-wrong/silent-change/", "think-it-through")) if run.want(k)]
+                                   ("es/", "go-deeper"), ("when-things-go-wrong/silent-change/", "watch")) if run.want(k)]
     panels = run.pick(("", "when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/", "sketch/"))
     if not (grids or anchors or panels or run.want("topics/")):
         return
@@ -1268,6 +1223,36 @@ async def check_mobile(run):
             ts = await pg.evaluate("() => [...document.querySelectorAll('.topic-tiles > .topic-tile')].map(c => Math.round(c.getBoundingClientRect().left))")
             expect(sec, len(set(ts)) <= 1, f"/{key} @390: the topics' tiles don't stack in one column ({ts})")
             await pg.close()
+        # on a tablet and wider, a card's pictures stay in their own column: a picture sized by the card's height
+        # once spilled over the words beside it (People first on the Topics page, a tablet held upright, 19 Nov 2026)
+        SPILL = """() => { const l = document.getElementById('list'); if (l) { l.hidden = false; l.querySelectorAll('details').forEach(d => { d.open = true; }); }
+              const out = [];
+              for (const c of document.querySelectorAll('.topic-card')) {
+                const body = c.querySelector(':scope > .tc-body'), cr = c.getBoundingClientRect();
+                if (!body || !cr.width) continue;
+                const b = body.getBoundingClientRect();
+                for (const m of c.querySelectorAll(':scope > img, :scope > .sc-media')) {
+                  const r = m.getBoundingClientRect();
+                  if (!r.width) continue;
+                  const side = r.top < b.bottom - 1 && r.bottom > b.top + 1;  // the picture sits beside the words, not above them
+                  if ((side && r.right > b.left + 1) || r.right > cr.right + 1)
+                    out.push(((c.querySelector('h3') || {}).textContent || '?').trim() + ': ' + Math.round(r.right - (side ? b.left : cr.right)) + ' px');
+                }
+              }
+              return out; }"""
+        for width in (720, 1024):
+            keys = grids if width == 720 else [k for k in grids if k in ("topics/", "es/topics/", "")]
+            if not keys:
+                continue
+            c2 = await run.context(width)
+            try:
+                for key in keys:
+                    pg, _ = await run.page(c2, key)
+                    bad = await pg.evaluate(SPILL)
+                    expect(sec, not bad, f"/{key} @{width}: a card's pictures spill over its words: {bad[:4]}")
+                    await pg.close()
+            finally:
+                await c2.close()
         # the whole card is one link, and the buttons inside the wide card still work
         for width in (390, 1280) if run.want("topics/") else ():
             c2 = await run.context(width)
@@ -1281,8 +1266,11 @@ async def check_mobile(run):
                     await pg.wait_for_timeout(200)
 
                 pg, _ = await run.page(c2, "topics/#data-modelling")  # a topic's link opens its row in the list
-                await tap("#data-modelling .topic-card:not(.series-card) img")
-                expect(sec, run.key(pg.url) == "sketch/", f"/topics/ @{width}: tapping the Sketch card's picture went to /{run.key(pg.url)}")
+                await tap("#data-modelling .series-card .sc-media")  # its first card: Model the business, which holds A Sharper Sketch
+                expect(sec, run.key(pg.url) == "model-the-business/", f"/topics/ @{width}: tapping Model the business's picture went to /{run.key(pg.url)}")
+                await pg.goto(run.url("topics/#data-platforms"), wait_until="load")
+                await tap('#data-platforms .topic-card:not(.series-card) img[src*="more-than-a-platform"]')  # a film's card: its picture is the link
+                expect(sec, run.key(pg.url) == "more-than-a-platform/", f"/topics/ @{width}: tapping More than a platform's picture went to /{run.key(pg.url)}")
                 await pg.goto(run.url("topics/#data-platforms"), wait_until="load")
                 await tap("#data-platforms .topic-card .tc-body > p:not(.kicker)")
                 expect(sec, run.key(pg.url) == "", f"/topics/ @{width}: tapping the intro card's text went to /{run.key(pg.url)}")
@@ -1456,7 +1444,8 @@ async def check_series_learn(run):
                     expect(sec, bool(k) and (int(k[1]), int(k[2])) == (pos, len(ids)), f"{where}: the kicker says {r['kicker']!r}, expected lab {pos} of {len(ids)}")
                     f = on_site.get(x["film"])
                     if f:  # a film still being made has no "Watch this part"
-                        want = f"../{f['key']}/#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
+                        film = "" if S.get("single") else f"{f['key']}/"  # a film that stands alone has its page where the series' would be
+                        want = f"../{film}#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
                         expect(sec, r["watch"] == ([want] if want else []), f"{where}: \"Watch this part\" goes to {r['watch']}, expected {want}")
                     if play:
                         try:
@@ -1494,8 +1483,9 @@ async def check_series_learn(run):
                     for p in (probs or []) + log_problems(log):
                         expect(sec, False, f"/{key}: {p}")
                     await pg.close()
-                # every lab was opened, so the course bar counts them all (and the scenarios answered)
-                key = f"{pre}{S['slug']}/"
+                # every lab was opened, so the course bar counts them all (and the scenarios answered); a film that stands alone has
+                # its page where the series' would be, with no course bar, so its scenarios page shows the bar
+                key = f"{pre}{S['slug']}/" + ("scenarios/" if S.get("single") else "")
                 pg, _ = await run.page(ctx, key)
                 r = await pg.evaluate("""() => [...document.querySelectorAll('nav.course .path li')].map(li => ({done: li.classList.contains('done'),
                   t: li.querySelector('span:last-child').textContent}))""")
@@ -1576,7 +1566,7 @@ async def check_drawn(run):
             bad = sorted({t for t in texts if NUM.search(t)})
             expect(sec, not bad, f"/{key}: the film draws {bad}")
             if key == "sketch/":
-                for want in ("Conceptual model · the sketch we drew", "Learning Data · Data modelling"):
+                for want in ("Conceptual model · the sketch, on the map", "Model the business · Learning Data"):
                     expect(sec, want in texts, f"/sketch/: the film never draws {want!r}")
             sec["notes"].append(f"/{key}: {len(texts)} distinct strings drawn")
             await pg.close()

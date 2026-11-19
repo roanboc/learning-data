@@ -1,9 +1,9 @@
 /* Learning Data: AI and continuous architecture. The labs (Take it apart) and the scenarios (Make the call) of the whole series, from
    one engine: the series' labs page and scenarios page load Every change, checked's bundle (for the films' own parts: glass, paper,
    the agent's orb, the stamped brick), the words (learn.en.js or learn.es.js, which set window.ACA), and this file.
-   Every lab is a sort: cards dealt one at a time, each put in its box, and why before the next. Its picture gives each box a row,
-   and each card flies to its row as it's placed, through the wrong row first when the first pick was wrong. Every scenario is a
-   choice, its options in the order the words write them, where the words spread the right ones.
+   Every lab is a playground, one per film (the author, 18 November 2026): the visitor switches, picks and presses, watches what
+   follows in its picture, and ticks four experiments as they happen. The scenarios are the series' evaluation, twelve choices,
+   their options in the order the words write them, where the words spread the right ones.
    Every picture is laid out for its own width on the page, drawn 320 to 640 units wide (a unit is a CSS pixel there), so its
    words stay big enough to read on a phone. Things move with a spring and settle, or jump to where they end when the visitor asks
    for reduced motion, and every change is also said in words (.lab-say), so nobody needs the picture to follow.
@@ -130,15 +130,6 @@ function arrow(ctx,x0,y0,x1,y1,col,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()
 function pill(ctx,x,y,s,col,o){o=o||{};const z=o.size||13,w=TW(ctx,s,z)+20,hh=z+12,X=o.align==="center"?x-w/2:o.align==="right"?x-w:x;glass(ctx,X,y,w,hh,hh/2,col,{fill:"rgba(7,12,24,0.92)",glow:8,ea:0.85});T(ctx,s,X+10,y+hh/2+z*0.36,{w:700,size:z,color:rgbaS(col,1)});return w;}
 // a picture's ground: the films' dark, with a little of the lab's colour from the top
 function ground(ctx,w,hh,col){const g=ctx.createRadialGradient(w*0.5,-hh*0.2,10,w*0.5,hh*0.3,Math.max(w,hh));g.addColorStop(0,rgbaS(col,0.16));g.addColorStop(1,rgbaS(col,0));ctx.fillStyle=g;ctx.fillRect(0,0,w,hh);}
-// a piece of the map moving into place: from where it was dealt straight to its place, with a spring; when the first pick was wrong,
-// to the wrong place first, a shake, then on to the right one. Returns [x, y, scale, still in the wrong place]
-function fly(now,t0,ok,A,B,X){const t=RM()?1e9:now-t0;
-  if(ok||!X){const u=cl(t/600,0,1);return[lp(A[0],B[0],eo(u)),lp(A[1],B[1],sp(u)),lp(0.75,1,eo(u)),false];}
-  if(t<440){const u=eo(t/440);return[lp(A[0],X[0],u),lp(A[1],X[1],u),lp(0.75,1,u),true];}
-  if(t<900){const k=(t-440)/460;return[X[0]+Math.sin(k*Math.PI*5)*5*(1-k),X[1],1,true];}
-  const u=cl((t-900)/620,0,1);return[lp(X[0],B[0],eo(u)),lp(X[1],B[1],sp(u)),1,false];}
-const FLY=[700,1620];
-function scaled(ctx,x,y,w,hh,s,fn){if(Math.abs(s-1)<0.002)return fn();ctx.save();ctx.translate(x+w/2,y+hh/2);ctx.scale(s,s);ctx.translate(-(x+w/2),-(y+hh/2));fn();ctx.restore();}
 const since=(now,t0)=>RM()?1e9:now-(t0||0);
 
 // A picture: a canvas laid out for its width on the page. lay(lw, ctx) gives the layout for a width (lw: its CSS width, from 320
@@ -154,7 +145,7 @@ function stage(lay,draw,label){const cv=h("canvas",{role:"img","aria-label":labe
   st.kick=ms=>{st.until=Math.max(st.until,performance.now()+(RM()?0:ms||0)+40);if(!st.raf)st.raf=requestAnimationFrame(loop);};
   st.paint=()=>st.kick(0);st.relayout=()=>{st.v++;st.kick(0);};
   if("ResizeObserver" in window)new ResizeObserver(()=>st.paint()).observe(cv);
-  ready().then(()=>st.relayout());if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>st.relayout());
+  requestAnimationFrame(()=>st.paint());ready().then(()=>st.relayout());if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>st.relayout());
   STG.set(cv,st);return st;}
 // A web font that comes after a picture was laid out, as on a slow connection, leaves every fit measured with the fallback font
 // wrong, and words cut short that now fit: forget both, and lay out again each picture on the page (STG finds a canvas's picture,
@@ -162,43 +153,205 @@ function stage(lay,draw,label){const cv=h("canvas",{role:"img","aria-label":labe
 const STG=new WeakMap();
 if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener("loadingdone",()=>{FIT.clear();MISS.clear();
   document.querySelectorAll("canvas").forEach(c=>{const s=STG.get(c);if(s)s.relayout();});});
-// a lab's picture, made only when the film's parts are here
-const picOf=(Lb,mk)=>DRAW&&mk?mk():null;
 
 /* ---------- the parts of a lab's page ---------- */
-const say0=()=>h("p",{class:"lab-say",role:"status"});
 const info=t=>h("p",{class:"lab-info"},t);
-const btn=(t,on,cls)=>h("button",{type:"button",class:"chip-btn"+(cls?" "+cls:""),onclick:on},t);
-const why=(ok,txt)=>h("p",{class:"aca-why"},h("b",{class:ok?"ok":"no"},ok?U.right:U.notQuite)," ",txt);
-// what the lab says (.lab-say); at the end, its box on the page says it, so the line keeps it only for a screen reader
-const sayIt=(say,t)=>{say.classList.remove("sr");say.textContent=t;},endSay=(say,t)=>{say.textContent=t;say.classList.add("sr");};
 const lc=s=>s&&!/^[A-Z]{2}/.test(s)?s[0].toLowerCase()+s.slice(1):s;
 function focusIn(el){if(!el)return;try{el.focus({preventScroll:true});}catch(e){el.focus();}const r=el.getBoundingClientRect();if(r.bottom>innerHeight-8||r.top<120)el.scrollIntoView({block:"center",behavior:RM()?"auto":"smooth"});}
 
-/* ---------- sort: cards dealt one at a time, each to its box ---------- */
-// Each lab's picture (PIC[id], made by rows() below) lands each card in the row of its box. S is what has happened so far: the card
-// shown (i), the cards placed (done), each one's first pick (first) and when it was made (t).
-const PIC={};
-function labSort(Lb){const W=Lb.w,its=W.items,n=its.length,S={i:0,done:[],first:{},t:{},fx:{}},box=h("div",{class:"lab aca-lab"}),say=say0();
-  const pic=picOf(Lb,PIC[Lb.id]&&(()=>PIC[Lb.id](Lb,S))),st=pic?stage(pic.lay,pic.draw,(W.pic&&W.pic.alt)||Lb.name):null;
-  const deal=h("div",{class:"aca-deal"}),ctrl=h("div",{class:"lab-controls"}),nameOf=k=>(W.buckets.find(o=>o[0]===k)||[,""])[1];
-  const right=()=>S.done.filter(i=>S.first[i]===its[i].b).length;
-  function status(){if(S.i<n)sayIt(say,fill(U.placed,{n:S.done.length,of:n})+(S.done.length?" · "+right()+" "+U.firstTry:""));else endSay(say,fill(W.end,{n:right(),of:n}));}
-  function show(focus){deal.replaceChildren();ctrl.replaceChildren();if(pic&&pic.show)pic.show(S.i);if(st)st.kick(900);
-    if(S.i>=n)return finish(focus);
-    const i=S.i,it=its[i],id="aca-t-"+Lb.id;
-    // the boxes, in the order the words give them, the same for every card
-    const opts=h("div",{class:"aca-opts",role:"group","aria-labelledby":id},...W.buckets.map(o=>h("button",{type:"button","data-k":o[0],onclick:()=>answer(o[0])},o[1])));
-    deal.append(h("div",{class:"aca-card"},h("p",{class:"k"},fill(U.card,{n:i+1,of:n})),h("p",{class:"t",id},it.t)),opts);
-    function answer(k){if(S.first[i]!=null)return;S.first[i]=k;S.t[i]=performance.now();S.done.push(i);const ok=k===it.b;
-      opts.querySelectorAll("button").forEach(b=>{b.disabled=true;if(b.dataset.k===it.b)b.classList.add("ok");else if(b.dataset.k===k)b.classList.add("no");});
-      deal.append(why(ok,(ok?"":fill(U.belongs,{b:nameOf(it.b)})+" ")+it.why));if(st)st.kick(ok?FLY[0]:FLY[1]);
-      const nx=btn(S.i+1<n?U.go+" →":U.seeAll,()=>{S.i++;show(true);},"go");ctrl.replaceChildren(nx);status();focusIn(nx);}
-    status();if(focus)focusIn(opts.querySelector("button"));}
-  function finish(focus){const again=btn(U.again,()=>{S.i=0;S.done=[];S.first={};S.t={};S.fx={};show(true);},"sm");
-    deal.append(h("p",{class:"aca-end"},fill(W.end,{n:right(),of:n})));ctrl.replaceChildren(again);status();if(focus)focusIn(again);}
-  box.append(...(st?[st.el]:[]),info(W.prompt),deal,ctrl,say);show(false);return box;}
-const BUILD={sort:labSort};
+/* ---------- play: a playground with experiments ---------- */
+// Every lab is a playground, as the author set on 18 November 2026 (Data that moves' engine, assets/data-that-moves/learn.js): the
+// visitor switches, picks and presses, and watches what follows. PLAY[id](Lb, api) gives the playground: its state, its controls
+// (api.group, api.seg, api.toggle, api.cycle, api.btn), its readouts ([[label, () => value]]) and its picture (lay, draw).
+// api.say(text, tone) says what just happened; api.reach(key) ticks an experiment (w.goals); api.kick(ms) keeps the picture moving.
+// Start again puts everything back as it was, the ticks included.
+const PLAY={};
+const in1=(now,t0,ms)=>t0==null?1:cl((RM()?1e9:now-t0)/(ms||600),0,1);
+const ago=(now,t0)=>t0==null?-1:RM()?1e9:now-t0,into=(now,t0,ms)=>t0==null?0:cl(ago(now,t0)/(ms||600),0,1);
+// a box of glass in a colour, its title at the top left
+function card(ctx,x,y,w,hh,col,title,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,hh,o.r||12,col,{glow:o.glow==null?10:o.glow,ea:0.85,fill:"rgba(7,12,24,0.92)"});
+  ctx.fillStyle=rgbaS(col,o.tint==null?0.08:o.tint);rr(ctx,x,y,w,hh,o.r||12);ctx.fill();
+  if(o.dash){ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle=rgbaS(col,0.85);ctx.lineWidth=1.5;rr(ctx,x+3,y+3,w-6,hh-6,(o.r||12)-2);ctx.stroke();ctx.restore();}
+  if(title)line1(ctx,title,x+12,y+20,w-24-(o.right||0),o.size||13.5,{w:800,color:rgbaS(mixC(col,K.ink,0.3),1)});});}
+// a box with two lines: a small label on top (o.sub), and its name, bigger, under it
+function box2(ctx,x,y,w,hh,sub,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,hh,8,col,{glow:o.glow==null?8:o.glow,ea:0.85,fill:"rgba(7,12,24,0.94)"});
+  ctx.fillStyle=rgbaS(col,o.tint==null?0.12:o.tint);rr(ctx,x,y,w,hh,8);ctx.fill();
+  if(o.dash){ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle=rgbaS(o.edge||col,0.95);ctx.lineWidth=1.6;rr(ctx,x+1,y+1,w-2,hh-2,8);ctx.stroke();ctx.restore();}
+  else if(o.edge){ctx.save();ctx.strokeStyle=rgbaS(o.edge,1);ctx.lineWidth=2.2;rr(ctx,x+1,y+1,w-2,hh-2,8);ctx.stroke();ctx.restore();}
+  if(o.wrap){const h1=lines(ctx,sub,x+8,y+16,w-16,{size:12,max:2,color:rgbaS(mixC(col,K.soft,0.4),1)});lines(ctx,name,x+8,y+16+h1+3,w-16,{size:o.size||14,max:2,w:800,color:rgbaS(K.ink,0.97)});}
+  else{line1(ctx,sub,x+8,y+16,w-16,12,{w:700,color:rgbaS(mixC(col,K.soft,0.4),1)});line1(ctx,name,x+8,y+hh-11,w-16,o.size||14,{w:800,color:rgbaS(K.ink,0.97)});}
+  if(o.mark)mark(ctx,x+w-2,y+2,o.mark);});}
+// a dot on its way along a line, u from 0 to 1
+function dot(ctx,x0,y0,x1,y1,u,col,r){if(u<=0||u>=1)return;const x=lp(x0,x1,u),y=lp(y0,y1,u);ctx.save();ctx.shadowColor=rgbaS(col,0.9);ctx.shadowBlur=10;ctx.fillStyle=rgbaS(col,1);ctx.beginPath();ctx.arc(x,y,r||4.5,0,TP);ctx.fill();ctx.restore();}
+function labPlay(Lb){const W=Lb.w,G=W.goals,box=h("div",{class:"lab aca-lab","style":"--c:"+Lb.c}),say=h("p",{class:"lab-say",role:"status"});
+  const all=get("goals",{})||{};let got=new Set(all[Lb.id]||[]);
+  const ctrl=h("div",{class:"lab-controls aca-ctrl"}),read=h("div",{class:"lab-read"}),list=h("ol",{class:"aca-goals","aria-label":U.goals}),end=h("div",{class:"aca-endbox"});
+  let st=null,P=null,rd=[];
+  const api={
+    say:(t,tone)=>{say.replaceChildren(tone?h("span",{class:tone},...rich(t)):h("span",null,...rich(t)));},
+    kick:ms=>{if(st)st.kick(ms);},relayout:()=>{if(st)st.relayout();},
+    reach:k=>{if(got.has(k)||!G.some(g=>g[0]===k))return;got.add(k);all[Lb.id]=[...got];put("goals",all);paintGoals(k);},
+    refresh:()=>{rd.forEach(([v,f])=>{v.textContent=f();});},
+    group:(label)=>{const g=h("div",{class:"aca-row"},label?h("span",{class:"lbl"},label):null);ctrl.append(g);return g;},
+    seg:(row,items,cur,fn,lbl)=>{const g=h("div",{class:"seg",role:"group","aria-label":lbl||""});items.forEach(([k,l])=>{const b=h("button",{type:"button","data-k":k,"aria-pressed":k===cur?"true":"false",onclick:()=>{[...g.children].forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));fn(k);api.refresh();}},l);g.append(b);});row.append(g);return g;},
+    toggle:(row,label,on,fn)=>{const b=h("button",{type:"button",class:"chip-btn","aria-pressed":on?"true":"false",onclick:()=>{const v=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(v));fn(v);api.refresh();}},label);row.append(b);return b;},
+    // a button that steps through states, its label saying which: "name: state"
+    cycle:(row,label,states,cur,fn)=>{let i=Math.max(0,states.findIndex(s=>s[0]===cur));const b=h("button",{type:"button",class:"chip-btn aca-cyc","data-cycle":label});
+      const paint=()=>{b.textContent=label+": "+states[i][1];b.setAttribute("data-state",states[i][0]);};paint();
+      b.addEventListener("click",()=>{i=(i+1)%states.length;paint();fn(states[i][0]);api.refresh();});row.append(b);return b;},
+    btn:(row,label,fn,cls)=>{const b=h("button",{type:"button",class:"chip-btn"+(cls?" "+cls:""),onclick:()=>{fn();api.refresh();}},label);row.append(b);return b;}};
+  function paintGoals(just){list.replaceChildren(...G.map(([k,t],i)=>h("li",{class:got.has(k)?"ok":"","data-k":k},h("i",{"aria-hidden":"true"},got.has(k)?"✓":String(i+1)),h("span",null,t),got.has(k)?h("span",{class:"sr"}," · "+U.reached):null)));
+    const n=got.size,done=n===G.length;end.replaceChildren(...(done?[h("p",{class:"aca-end"},...rich(W.end))]:[]));
+    if(just){const g=G.find(x=>x[0]===just);say.append(h("span",{class:"ok"}," "+fill(U.reachedOne,{t:g[1]})));if(done)say.append(h("span",{class:"sr"}," "+W.end.replace(/<\/?b>/g,"")));}
+    list.setAttribute("aria-label",U.goals+" · "+fill(U.nOf,{n,of:G.length}));}
+  function build(){ctrl.replaceChildren();read.replaceChildren();rd=[];P=PLAY[Lb.id](Lb,api);
+    st=DRAW?stage(P.lay,(ctx,o,now)=>P.draw(ctx,o,now),W.alt||Lb.name):null;
+    (P.readouts||[]).forEach(([label,f])=>{const v=h("b",null,"–");read.append(h("span",null,label+":",v));rd.push([v,f]);});api.refresh();
+    const again=h("button",{type:"button",class:"chip-btn sm aca-again",onclick:()=>{got=new Set();all[Lb.id]=[];put("goals",all);box.replaceChildren();build();api.say(W.start);paintGoals();}},U.again);
+    box.append(...(st?[st.el]:[]),info(W.prompt),h("div",{class:"aca-goalbox"},h("p",{class:"aca-gh"},U.goals),list),ctrl,read,say,end,h("div",{class:"aca-foot"},again));}
+  build();api.say(W.start);paintGoals();return box;}
+
+// a row: its mark at the left (r.ic), its words on up to two lines, its state in a pill on the right, a tick or a cross once judged
+function rowW(ctx,o,r,y,rh){const x=o.m,w=o.lw-o.m*2;card(ctx,x,y,w,rh,r.c,null,{glow:r.hot?16:5,tint:r.hot?0.18:0.07,dash:r.dash,a:r.a});
+  withA(ctx,r.a==null?1:r.a,()=>{let lx=x+10;if(r.ic){r.ic(ctx,x+18,y+rh/2);lx=x+34;}const pw=r.v?TW(ctx,r.v,12)+20:0,lw=w-(lx-x)-pw-(r.v?18:12);
+    const n=fitL(ctx,r.t,lw,13,2,800,true)[0].length;lines(ctx,r.t,lx,y+rh/2+4.5-(n-1)*7.8,lw,{size:13,max:2,w:800,color:rgbaS(K.ink,0.96)});
+    if(r.v)pill(ctx,x+w-8,y+(rh-24)/2,r.v,r.vc||r.c,{align:"right",size:12});if(r.mark)mark(ctx,x+w-2,y+2,r.mark);});return y+rh+6;}
+// a line of words across the picture, in a colour, fading in from t0
+function note(ctx,o,s,y,col,u){lines(ctx,s,o.m,y,o.lw-o.m*2,{size:13,max:2,w:800,align:"center",color:rgbaS(col,u==null?1:u)});}
+
+/* ---------- 1 · Agents on the map: how far, task by task ---------- */
+// The chat's first version ran every task alone. Step each task down, or up, to how far it may go; name who answers for it; run a week.
+PLAY.far=(Lb,api)=>{const W=Lb.w,TK=W.tasks,S={st:{},owner:false,week:null,res:{}};TK.forEach(t=>S.st[t.k]="run");
+  const r1=api.group(W.stepL);TK.forEach(t=>api.cycle(r1,t.s,W.steps,"run",k=>{S.st[t.k]=k;S.week=null;api.kick(500);api.say(fill(W.msg.set,{t:t.s,s:W.steps.find(x=>x[0]===k)[1]}));}));
+  const r2=api.group(W.ownL);api.toggle(r2,W.ownT,false,v=>{S.owner=v;S.week=null;api.kick(500);api.say(v?W.msg.ownOn:W.msg.ownOff);});
+  const r3=api.group();api.btn(r3,W.weekB,()=>{S.week=performance.now();TK.forEach(t=>S.res[t.k]=t.r[S.st[t.k]]);api.kick(1800);
+    const bad=TK.find(t=>S.res[t.k]==="bad"),slow=TK.find(t=>S.res[t.k]==="slow");
+    if(bad)api.say(bad.m.bad,"no");else if(!S.owner)api.say(W.msg.noOwner,"no");else api.say(slow?fill(W.msg.slow,{m:slow.m.slow}):W.msg.allOk,"ok");
+    if(S.res.bill==="ok")api.reach("bill");if(S.st.plan!=="run")api.reach("plan");if(S.res.check==="ok")api.reach("check");if(S.owner&&!bad)api.reach("owner");},"go");
+  const lay=(lw)=>{const m=12,o={lw,m,rh:46};o.y0=58;o.h=o.y0+TK.length*(o.rh+6)+8;return o;};
+  const draw=(ctx,o,now)=>{const col=rgb(Lb.c);ground(ctx,o.lw,o.h,col);const m=o.m,u=into(now,S.week,900);
+    orb(ctx,m+16,28,12,now);line1(ctx,W.agent,m+36,26,o.lw/2-40,14,{w:800,color:rgbaS(K.ai,1)});line1(ctx,W.agentSub,m+36,42,o.lw/2-40,12,{w:700,color:rgbaS(K.soft,1)});
+    pill(ctx,o.lw-m,16,S.owner?W.owner:W.nobody,S.owner?K.biz:K.bad,{align:"right",size:12});
+    let y=o.y0;TK.forEach((t,i)=>{const k=S.st[t.k],lv=W.steps.findIndex(x=>x[0]===k),r=S.week!=null&&u>=(i+1)/(TK.length+1)?S.res[t.k]:null;
+      y=rowW(ctx,o,{t:t.t,v:W.steps[lv][1],c:k==="run"?K.ai:mixC(K.ai,K.biz,0.5-lv*0.12),vc:k==="run"?K.ai:K.biz,ic:(c,x,yy)=>IC.steps(c,x,yy,K.ai,lv),
+        hot:r==="bad",mark:r==="ok"?"ok":r==="bad"?"no":null,dash:r==="slow"},y,o.rh);});};
+  return{lay,draw,readouts:[[W.read.alone,()=>String(TK.filter(t=>S.st[t.k]==="run").length)],[W.read.plans,()=>S.week!=null&&S.st.plan==="run"?"212":"0"]]};};
+
+/* ---------- 2 · The AI platform: shared, or its own ---------- */
+// Six agents, each reaching its model its own way. Put one gateway in front of every model and make search and memory once; keep the
+// chat's hand-off logic its own, or move it onto the platform; then a model retires, an agent loops all night, and finance asks the cost.
+const PLAT_WHO={retire:1,loop:2};
+PLAY.platform=(Lb,api)=>{const W=Lb.w,AG=W.agents,S={gw:false,sh:false,logic:"chat",tG:null,ev:{}};
+  const r1=api.group(W.platL);api.toggle(r1,W.gwT,false,v=>{S.gw=v;S.tG=performance.now();S.ev={};api.kick(800);api.say(v?W.msg.gwOn:W.msg.gwOff);own();});
+  api.toggle(r1,W.shT,false,v=>{S.sh=v;S.tG=performance.now();api.kick(800);api.say(v?W.msg.shOn:W.msg.shOff);own();});
+  const r2=api.group(W.logicL);api.seg(r2,W.logics,S.logic,k=>{S.logic=k;api.kick(700);api.say(W.msg["logic_"+k],k==="platform"?"no":"ok");own();},W.logicL);
+  const r3=api.group(W.evL);W.events.forEach(e=>api.btn(r3,e.b,()=>{S.ev[e.k]={t:performance.now(),ok:S.gw};api.kick(1600);api.say(S.gw?e.ok:e.no,S.gw?"ok":"no");if(S.gw)api.reach(e.k);}));
+  function own(){if(S.gw&&S.sh&&S.logic==="chat")api.reach("own");}
+  const lay=(lw)=>{const m=12,o={lw,m},n=AG.length;o.ax=AG.map((a,i)=>m+(lw-m*2)*(i+0.5)/n);o.ay=30;o.gy=112;o.py=160;o.ph=96;o.h=o.py+o.ph+12;return o;};
+  const draw=(ctx,o,now)=>{const col=rgb(Lb.c);ground(ctx,o.lw,o.h,col);const m=o.m,PC=K.lay[5],g=into(now,S.tG,700),cw=(o.lw-m*2)/AG.length;
+    // each agent, and its line down: to the gateway, or its own way to a model
+    AG.forEach((a,i)=>{const x=o.ax[i],ev=Object.entries(S.ev).find(([k,v])=>PLAT_WHO[k]===i&&ago(now,v.t)<4000);
+      ctx.save();ctx.strokeStyle=rgbaS(S.gw?K.ai:K.soft,0.6);ctx.lineWidth=1.5;if(!S.gw)ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(x,o.ay+30);
+      if(S.gw)ctx.lineTo(x,o.gy);else ctx.lineTo(lp(x,o.lw/2,0.35),o.py+8);ctx.stroke();ctx.restore();
+      if(!S.gw)IC.key(ctx,lp(x,o.lw/2,0.18)+2,lp(o.ay+30,o.py+8,0.5),K.bad);
+      orb(ctx,x,o.ay,9,now);line1(ctx,a,x-cw/2+2,o.ay+24,cw-4,12,{w:700,align:"center",color:rgbaS(K.ink,0.9)});
+      if(ev&&ago(now,ev[1].t)>600)mark(ctx,x+10,o.ay-8,ev[1].ok?"ok":"no");});
+    // the chat's hand-off logic: under the chat, or on the platform
+    const lgOn=S.logic==="platform";chip(ctx,lgOn?o.lw-m-112:m,lgOn?o.py+o.ph-36:o.ay+40,110,26,W.logicChip,lgOn?K.bad:K.ai,{size:12});
+    if(S.gw)withA(ctx,g,()=>{card(ctx,m,o.gy,o.lw-m*2,30,K.ai,null,{glow:12,tint:0.16});line1(ctx,W.gw,m+12,o.gy+20,o.lw-m*2-24,13,{w:800,align:"center",color:rgbaS(K.ink,1)});});
+    else line1(ctx,W.noGw,m,o.gy+20,o.lw-m*2,12.5,{w:700,align:"center",color:rgbaS(K.bad,0.9)});
+    card(ctx,m,o.py,o.lw-m*2,o.ph,PC,W.plat,{glow:6});const pw=(o.lw-m*2-24-18)/4;
+    W.parts.forEach((p,i)=>{const shared=i<2||S.sh;chip(ctx,m+12+i*(pw+6),o.py+30,pw,28,shared?p:p+" ×6",shared?PC:K.bad,{size:12,dash:!shared});});};
+  return{lay,draw,readouts:[[W.read.routes,()=>S.gw?"1":String(AG.length)],[W.read.logic,()=>W.logics.find(x=>x[0]===S.logic)[1]]]};};
+
+/* ---------- 3 · What an agent may read: fill the chat's place ---------- */
+// The chat's first version read everything. Step each thing to where it belongs; then prices change, a caller asks about a neighbour,
+// and a household with medical needs calls.
+// what each event finds, by where each thing is: the first rule that matches, else it goes well; and the row it shows on
+const PLACE_RULES={prices:[["export","place|signin","bad"],["tariffs","signin|tool|never","slow"]],neighbour:[["account","place","bad"],["account","tool|never","slow"]],
+  medical:[["medical","place|signin","bad"],["medical","never","slow"]]},PLACE_ON={prices:"tariffs",neighbour:"account",medical:"medical"};
+PLAY.place=(Lb,api)=>{const W=Lb.w,IT=W.items,S={at:{},ev:{}};const res=(k,at)=>{for(const[x,v,r]of PLACE_RULES[k])if(v.split("|").includes(at[x]))return r;return"ok";};IT.forEach(x=>S.at[x.k]="place");
+  const lvC={place:K.lv.public,signin:K.lv.confidential,tool:K.biz,never:K.lv.restricted};
+  const clean=()=>S.at.notes==="never"&&S.at.export==="never"&&S.at.medical!=="place"&&S.at.medical!=="signin";
+  const r1=api.group(W.atL);IT.forEach(x=>api.cycle(r1,x.s,W.wheres,"place",k=>{S.at[x.k]=k;S.ev={};api.kick(500);api.say(fill(W.msg.set,{t:x.s,w:W.wheres.find(y=>y[0]===k)[1]}));if(clean())api.reach("clean");}));
+  const r2=api.group(W.evL);W.events.forEach(e=>api.btn(r2,e.b,()=>{const r=res(e.k,S.at);S.ev[e.k]={t:performance.now(),r};api.kick(1600);api.say(e.m[r],r==="ok"?"ok":"no");if(r==="ok")api.reach(e.k);}));
+  const lay=(lw)=>{const m=12,o={lw,m,rh:44};o.y0=58;o.h=o.y0+IT.length*(o.rh+6)+8;return o;};
+  const draw=(ctx,o,now)=>{const col=rgb(Lb.c);ground(ctx,o.lw,o.h,col);const m=o.m;
+    orb(ctx,m+16,28,12,now);line1(ctx,W.agent,m+36,26,o.lw-m*2-40,14,{w:800,color:rgbaS(K.ai,1)});line1(ctx,W.agentSub,m+36,42,o.lw-m*2-40,12,{w:700,color:rgbaS(K.soft,1)});
+    let y=o.y0;IT.forEach(x=>{const k=S.at[x.k],ev=W.events.find(e=>PLACE_ON[e.k]===x.k),e=ev&&S.ev[ev.k],d=e&&ago(now,e.t)>500;
+      y=rowW(ctx,o,{t:x.t,v:W.wheres.find(w=>w[0]===k)[1],c:lvC[k],ic:(c,xx,yy)=>IC[k==="signin"?"key":k==="never"?"lock":k](c,xx,yy,lvC[k]),hot:d&&e.r==="bad",mark:d?(e.r==="ok"?"ok":"no"):null},y,o.rh);});};
+  return{lay,draw,readouts:[[W.read.inPlace,()=>String(IT.filter(x=>S.at[x.k]==="place").length)],[W.read.restricted,()=>String(IT.filter(x=>x.lv==="restricted"&&(S.at[x.k]==="place"||S.at[x.k]==="signin")).length)]]};};
+
+/* ---------- 4 · A first draft, not a blank page: draft, ask, confirm ---------- */
+// The battery's design: start from a blank page or the agent's draft, ask whether it's right or what's missing and wrong, mark the
+// guesses, choose who confirms; then run the five weeks, and see the 58 elements come out.
+PLAY.confirm=(Lb,api)=>{const W=Lb.w,S={from:"blank",ask:"right",guess:false,who:"agent",run:null,r:null};
+  const r1=api.group(W.fromL);api.seg(r1,W.froms,S.from,k=>{S.from=k;S.run=null;api.kick(400);api.say(W.msg["from_"+k]);},W.fromL);
+  const r2=api.group(W.askL);api.seg(r2,W.asks,S.ask,k=>{S.ask=k;S.run=null;api.kick(400);api.say(W.msg["ask_"+k]);},W.askL);
+  const r3=api.group(W.whoL);api.seg(r3,W.whos,S.who,k=>{S.who=k;S.run=null;api.kick(400);api.say(W.msg["who_"+k]);},W.whoL);
+  const r4=api.group();api.toggle(r4,W.guessT,false,v=>{S.guess=v;S.run=null;api.kick(400);api.say(v?W.msg.guessOn:W.msg.guessOff);});
+  api.btn(r4,W.runB,()=>{S.run=performance.now();const d=S.from==="draft",f=d&&S.ask==="wrong";S.r={d,f};api.kick(2200);
+    const bad=!d?W.msg.blank:S.ask==="right"?W.msg.nodded:!S.guess?W.msg.guessed:S.who!=="owners"?W.msg["conf_"+S.who]:null;
+    api.say(bad||W.msg.done,bad?"no":"ok");if(d)api.reach("draft");if(f)api.reach("found");if(d&&S.guess)api.reach("guess");if(d&&S.who==="owners")api.reach("owners");},"go");
+  // what each of the 62 squares ends as: 0-40 as drafted, 41-49 corrected (45: the step across the wall; 46: who decides the charging),
+  // 50-57 struck out, 58-61 added (58: switch the battery off before crews work)
+  const end=i=>{const R=S.r;if(!R)return"open";if(!R.d)return i<22?"plain":"none";if(!R.f)return i>=58?"none":i===45?"wrong":i===46&&!S.guess?"wrong":"drafted";
+    if(i===46&&!S.guess)return"wrong";return i<41?"drafted":i<50?"corrected":i<58?"struck":"added";};
+  const C={open:K.soft,plain:K.soft,drafted:K.ai,corrected:K.gold,struck:K.bad,added:K.good,wrong:K.bad};
+  const lay=(lw)=>{const m=12,o={lw,m},cols=Math.min(16,Math.floor((lw-m*2+6)/22));o.cols=cols;o.s=Math.min(18,(lw-m*2-(cols-1)*6)/cols);o.y0=58;
+    o.ly=o.y0+Math.ceil(62/cols)*(o.s+6)+10;o.h=o.ly+Math.ceil(W.keys.length/2)*30+30;return o;};
+  const draw=(ctx,o,now)=>{const col=rgb(Lb.c);ground(ctx,o.lw,o.h,col);const m=o.m,u=into(now,S.run,1600),conf=S.r&&S.r.d&&S.who==="owners";
+    const cb=fill(W.confBy,{w:W.whos.find(x=>x[0]===S.who)[1]});line1(ctx,W.title,m,24,o.lw-m*2,14,{w:800,color:rgbaS(col,1)});
+    line1(ctx,W.sub,m,44,o.lw-m*2,12,{w:700,color:rgbaS(K.soft,1)});line1(ctx,cb,m,o.h-12,o.lw-m*2,13,{w:800,color:rgbaS(S.who==="owners"?K.biz:K.bad,1)});
+    for(let i=0;i<62;i++){const c=i%o.cols,r=Math.floor(i/o.cols),x=m+c*(o.s+6),y=o.y0+r*(o.s+6),k=S.run!=null&&u>=i/62?end(i):"open",cc=C[k];
+      if(k==="none"){ctx.save();ctx.setLineDash([3,3]);ctx.strokeStyle=rgbaS(K.soft,0.35);rr(ctx,x+1,y+1,o.s-2,o.s-2,4);ctx.stroke();ctx.restore();continue;}
+      ctx.save();ctx.fillStyle=rgbaS(cc,k==="open"||k==="plain"?0.18:conf?0.95:0.45);rr(ctx,x,y,o.s,o.s,4);ctx.fill();
+      if(k==="wrong"||(!conf&&k!=="open"&&k!=="plain")){ctx.strokeStyle=rgbaS(k==="wrong"?K.bad:cc,1);ctx.lineWidth=k==="wrong"?2.2:1.2;rr(ctx,x+1,y+1,o.s-2,o.s-2,4);ctx.stroke();}
+      if(k==="struck"){ctx.strokeStyle=rgbaS(K.ink,0.9);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x+4,y+o.s-4);ctx.lineTo(x+o.s-4,y+4);ctx.stroke();}ctx.restore();}
+    const lw2=(o.lw-m*2-8)/2;W.keys.forEach((kk,i)=>{const x=m+(i%2)*(lw2+8),y=o.ly+Math.floor(i/2)*30;ctx.fillStyle=rgbaS(C[kk[0]],0.9);rr(ctx,x,y,14,14,3);ctx.fill();
+      const n=S.r?Array.from({length:62},(_,j)=>end(j)).filter(z=>z===kk[0]).length:0;line1(ctx,kk[1]+(S.run!=null?" · "+n:""),x+20,y+12,lw2-22,12.5,{w:700,color:rgbaS(K.ink,0.9)});});};
+  return{lay,draw,readouts:[[W.read.weeks,()=>S.r?(S.r.d?"5":"5+"):"–"],[W.read.owners,()=>S.r&&S.r.d&&S.who==="owners"?W.read.yes:W.read.no]]};};
+
+/* ---------- 5 · Every change, checked: run the map's checks ---------- */
+// Five checks, each switched on or off; four changes come, one at a time, and fall through the checks to the one that stops them, or
+// onto the map.
+PLAY.checks=(Lb,api)=>{const W=Lb.w,CK=W.checks,S={on:{},cur:null,t:null,stop:-1};
+  const nOn=()=>CK.filter(c=>S.on[c.k]).length;
+  const r1=api.group(W.onL);CK.forEach(c=>api.toggle(r1,c.s,false,v=>{S.on[c.k]=v;api.kick(400);api.say(v?c.on:fill(W.msg.off,{t:c.s}));}));
+  const r2=api.group(W.chL);W.changes.forEach(ch=>api.btn(r2,ch.b,()=>{S.cur=ch;S.t=performance.now();S.stop=ch.by?CK.findIndex(c=>c.k===ch.by&&S.on[c.k]):-1;api.kick(2200);
+    const caught=S.stop>=0;if(!ch.by){const ok=nOn()>=3;api.say(ok?ch.ok:W.msg.fewOn,ok?"ok":null);if(ok)api.reach(ch.k);}
+    else{api.say(caught?ch.ok:ch.no,caught?"ok":"no");if(caught)api.reach(ch.k);}}));
+  const lay=(lw)=>{const m=12,o={lw,m,rh:40};o.cy=10;o.y0=56;o.my=o.y0+CK.length*(o.rh+6)+4;o.h=o.my+42;o.r={m:m+22,lw:lw+22};return o;};
+  const draw=(ctx,o,now)=>{const col=rgb(Lb.c);ground(ctx,o.lw,o.h,col);const m=o.m,ch=S.cur,t=ago(now,S.t),g=m+8,cy=i=>o.y0+i*(o.rh+6)+o.rh/2;
+    ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(g,o.cy+32);ctx.lineTo(g,o.my+17);ctx.stroke();ctx.restore();
+    let y=o.y0;CK.forEach((c,i)=>{const on=!!S.on[c.k],hit=ch&&S.stop===i&&t>1100;y=rowW(ctx,o.r,{t:c.t,v:on?W.on:W.off,c:on?K.brick:K.soft,vc:on?K.brick:K.soft,dash:!on,hot:hit,mark:hit?"ok":null},y,o.rh);});
+    const bad=ch&&ch.by&&S.stop<0&&t>1100,good=ch&&!ch.by&&t>1100;
+    card(ctx,o.r.m,o.my,o.lw-m-o.r.m,34,bad?K.bad:K.good,null,{glow:bad||good?14:4});line1(ctx,bad?W.through:W.map,o.r.m+12,o.my+22,o.lw-m-o.r.m-24,13,{w:800,color:rgbaS(bad?K.bad:K.good,1)});
+    if(ch){const ty=S.stop>=0?cy(S.stop):o.my+17,u=eo(cl(t/1100,0,1));dot(ctx,g,o.cy+32,g,ty,u,K.gold,5);
+      if(u>=1){ctx.fillStyle=rgbaS(bad?K.bad:S.stop>=0?K.brick:K.good,1);ctx.beginPath();ctx.arc(g,ty,5,0,TP);ctx.fill();}
+      chip(ctx,m,o.cy,o.lw-m*2,30,ch.s,K.gold,{size:12.5,glow:10});}
+    else line1(ctx,W.waiting,m,o.cy+20,o.lw-m*2,13,{w:700,align:"center",color:rgbaS(K.soft,1)});};
+  return{lay,draw,readouts:[[W.read.on,()=>fill(W.read.nOf,{n:nOn(),of:CK.length})],[W.read.last,()=>!S.cur?"–":!S.cur.by?W.read.passed:S.stop>=0?W.read.stopped:W.read.through]]};};
+
+/* ---------- 6 · Kept alive: who keeps it, and when ---------- */
+// The map's rhythm: five beats, each on or off. Run a year, and six things that move come by, each caught by its beat, or left to drift.
+PLAY.keep=(Lb,api)=>{const W=Lb.w,BT=W.beats,MV=W.moves,S={on:{change:true},run:null};
+  const r1=api.group(W.onL);BT.forEach(b=>api.toggle(r1,b.s,b.k==="change",v=>{S.on[b.k]=v;S.run=null;api.kick(400);api.say(v?b.on:fill(W.msg.off,{t:b.s}));}));
+  const r2=api.group();api.btn(r2,W.runB,()=>{S.run=performance.now();api.kick(3400);const miss=MV.filter(x=>!S.on[x.by]);
+    api.say(miss.length?fill(W.msg.miss,{n:MV.length-miss.length,of:MV.length,m:miss[0].no}):W.msg.all,miss.length?"no":"ok");
+    BT.forEach(b=>{if(b.k!=="change"&&S.on[b.k]&&MV.some(x=>x.by===b.k))api.reach(b.k);});},"go");
+  const lay=(lw)=>{const m=12,o={lw,m,rh:42};o.ty=34;o.y0=72;o.h=o.y0+MV.length*(o.rh+6)+8;return o;};
+  const draw=(ctx,o,now)=>{const col=rgb(Lb.c);ground(ctx,o.lw,o.h,col);const m=o.m,u=into(now,S.run,2600),x0=m+8,x1=o.lw-m-8;
+    // the year: twelve months, a cursor going along it
+    ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,o.ty);ctx.lineTo(x1,o.ty);ctx.stroke();ctx.restore();
+    W.months.forEach((mo,i)=>{const x=lp(x0,x1,(i+0.5)/12);ctx.fillStyle=rgbaS(K.soft,0.6);ctx.beginPath();ctx.arc(x,o.ty,2,0,TP);ctx.fill();if(o.lw>420||i%2===0)T(ctx,mo,x,o.ty-10,{w:700,size:11.5,align:"center",color:rgbaS(K.soft,1)});});
+    MV.forEach(x=>{const px=lp(x0,x1,(x.mo+0.5)/12),seen=S.run!=null&&u>=(x.mo+0.5)/12;ctx.fillStyle=rgbaS(!seen?K.gold:S.on[x.by]?K.good:K.bad,1);ctx.beginPath();ctx.arc(px,o.ty,5,0,TP);ctx.fill();});
+    if(S.run!=null&&u<1){const cx=lp(x0,x1,u);ctx.strokeStyle=rgbaS(K.ink,0.8);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx,o.ty-6);ctx.lineTo(cx,o.ty+12);ctx.stroke();}
+    let y=o.y0;MV.forEach(x=>{const seen=S.run!=null&&u>=(x.mo+0.5)/12,ok=!!S.on[x.by],b=BT.find(z=>z.k===x.by);
+      y=rowW(ctx,o,{t:x.t,v:seen?(ok?b.s:W.drift):W.months[x.mo],c:seen?(ok?K.good:K.bad):K.soft,vc:seen?(ok?K.good:K.bad):K.soft,hot:seen&&!ok,mark:seen?(ok?"ok":"no"):null},y,o.rh);});};
+  return{lay,draw,readouts:[[W.read.beats,()=>fill(W.read.nOf,{n:BT.filter(b=>S.on[b.k]).length,of:BT.length})],[W.read.caught,()=>S.run==null?"–":fill(W.read.nOf,{n:MV.filter(x=>S.on[x.by]).length,of:MV.length})]]};};
+
+const BUILD={play:labPlay};
 
 /* ---------- the labs' pictures ---------- */
 // the agent, as the films draw one (aca_agent, Keeping it true's glass orb), or a plain teal one if the film's parts lack it
@@ -228,57 +381,6 @@ const IC={
   // a month: a calendar's page, its rings at the top and one day marked
   cal:(ctx,x,y,col)=>{ctx.save();ctx.strokeStyle=rgbaS(col,1);ctx.lineWidth=1.6;rr(ctx,x-7,y-5.5,14,13,2);ctx.stroke();ctx.beginPath();ctx.moveTo(x-7,y-1.5);ctx.lineTo(x+7,y-1.5);
     ctx.moveTo(x-3.5,y-8);ctx.lineTo(x-3.5,y-4);ctx.moveTo(x+3.5,y-8);ctx.lineTo(x+3.5,y-4);ctx.stroke();ctx.fillStyle=rgbaS(col,1);ctx.fillRect(x-4.5,y+1.5,3.4,3.4);ctx.restore();}};
-// a head over the rows: a mark of the lab's own at its left, a title in the lab's colour and a line under it, clear of the pile at the right
-// (L2.hx, L2.hw: where the head's words go; L2.sub: the line under the title, fitted in its layout to one or two lines)
-function head(ctx,L2,now,col,P2,mk){if(mk)mk(ctx,L2.x0+13,26,now);line1(ctx,P2.title,L2.hx,24,L2.hw,15,{w:800,color:rgbaS(col,1)});
-  if(L2.sub)L2.sub[0].forEach((l,i)=>T(ctx,l,L2.hx,42+i*L2.sub[1]*1.2,{w:600,size:L2.sub[1],color:rgbaS(K.soft,1)}));}
-// Every lab's picture: a row for each of its boxes, under a head of its own (its line under the title on two lines, or three on
-// the narrowest phones when two won't hold it). The cards wait in a pile at the top right and fly to
-// their row as they're placed, through the wrong row first when the first pick was wrong; each settles with a tick. o: col(k), each
-// row's colour; icon, each row's mark (IC above, or a function); look(it), "struck" for a card struck out once it's in; mark(ctx, L2,
-// now), the head's own mark. Once every card is in, the words of W.pic.done come in under the rows.
-function rows(Lb,S,o){const W=Lb.w,its=W.items,keys=W.buckets.map(b=>b[0]),P2=W.pic,col=rgb(Lb.c),nameOf=k=>(P2.rows&&P2.rows[k])||W.buckets.find(b=>b[0]===k)[1];
-  const lay=(lw,ctx)=>{const x0=12,cw=lw-x0*2-20,hx=x0+(o.mark?30:2),hw=lw-x0-hx-82,sub=P2.sub?(f=>f.miss?fitL(ctx,P2.sub,hw,12.5,3,600):f)(fitL(ctx,P2.sub,hw,12.5,2,600,1)):null,L2={lw,x0,hx,hw,sub,rows:[],slot:{},row:{}};
-    let y=sub?Math.round(52+sub[0].length*sub[1]*1.2):44;
-    keys.forEach(k=>{const mine=its.map((it,i)=>[it,i]).filter(([it])=>it.b===k),f=flow(ctx,mine.map(([it])=>it.s),cw,13,6),ch=Math.max(34,f.h+12),r={k,y,h:30+ch,c:o.col(k)};
-      L2.rows.push(r);L2.row[k]=r;mine.forEach(([it,i],j)=>{const p=f.pos[j];L2.slot[i]={x:x0+10+p.x,y:y+30+(ch-f.h)/2+p.y,w:p.w,h:p.h};});y+=r.h+6;});
-    const[ls,z]=bal(ctx,P2.done,lw-x0*2-8,13);L2.end={y:y+6,ls,z};L2.h=y+12+ls.length*z*1.25+6;L2.deck=[lw-x0-62,10];return L2;};
-  const draw=(ctx,L2,now)=>{ground(ctx,L2.lw,L2.h,col);const left=its.length-S.done.length;
-    head(ctx,L2,now,col,P2,o.mark);
-    L2.rows.forEach(r=>{const n=its.filter(it=>it.b===r.k).length,got=S.done.filter(i=>its[i].b===r.k&&since(now,S.t[i])>500).length,f=n?got/n:0;
-      glass(ctx,L2.x0,r.y,L2.lw-L2.x0*2,r.h,12,r.c,{glow:4+8*f,ea:0.5+0.3*f,fill:"rgba(7,12,24,0.92)"});ctx.fillStyle=rgbaS(r.c,0.04+0.1*f);rr(ctx,L2.x0,r.y,L2.lw-L2.x0*2,r.h,12);ctx.fill();
-      const ic=typeof o.icon==="function"?o.icon:IC[o.icon];if(ic)ic(ctx,L2.x0+18,r.y+16,r.c,now,r.k);
-      line1(ctx,nameOf(r.k),L2.x0+34,r.y+21,L2.lw-L2.x0*2-44,14,{w:800,color:rgbaS(mixC(r.c,K.ink,0.3),1)});});
-    // the pile still to place, at the top right
-    const[dx,dy]=L2.deck;for(let j=Math.min(left,4)-1;j>=0;j--)glass(ctx,dx+j*3,dy+j*2,56,30,8,K.soft,{fill:"rgba(16,26,50,0.97)",glow:3,ea:0.55});
-    if(left)T(ctx,String(left),dx+(Math.min(left,4)-1)*3+28,dy+(Math.min(left,4)-1)*2+20,{w:800,size:15,align:"center",color:rgbaS(K.ink,0.9)});
-    S.done.forEach(i=>{const it=its[i],B=L2.slot[i],ok=S.first[i]===it.b,wr=L2.row[S.first[i]],X=ok?null:[L2.x0+10,wr.y+34],[x,y,s,bad]=fly(now,S.t[i],ok,[dx,dy],[B.x,B.y],X);
-      const set=!bad&&since(now,S.t[i])>(ok?FLY[0]:FLY[1])-80,c=bad?K.bad:L2.row[it.b].c;
-      scaled(ctx,x,y,B.w,B.h,s,()=>chip(ctx,x,y,B.w,B.h,it.s,c,{size:13,mark:set&&ok?"ok":null,strike:set&&o.look&&o.look(it)==="struck"}));});
-    if(!left){const a=eo(since(now,S.fx.end)/700);withA(ctx,a,()=>L2.end.ls.forEach((l,i)=>T(ctx,l,L2.lw/2,L2.end.y+L2.end.z+i*L2.end.z*1.25,{w:700,size:L2.end.z,align:"center",color:rgbaS(mixC(col,K.ink,0.35),1)})));}};
-  return{lay,draw,show:i=>{if(i<its.length)S.fx.end=0;else if(!S.fx.end)S.fx.end=performance.now();}};}
-
-// 1 · How far, task by task: the four steps, then a person's decisions; the head is the agent
-PIC.far=(Lb,S)=>rows(Lb,S,{col:k=>k==="none"?K.biz:K.ai,icon:(ctx,x,y,c,now,k)=>k==="none"?IC.person(ctx,x,y,c):IC.steps(ctx,x,y,c,["inform","draft","verify","run"].indexOf(k)),
-  mark:(ctx,x,y,now)=>orb(ctx,x,y,8,now)});
-// 2 · Shared, or its own: each agent's own, the platform's, and what has no place any more, struck out; the head is the six agents
-PIC.platform=(Lb,S)=>rows(Lb,S,{col:k=>k==="own"?K.lay[4]:k==="platform"?K.lay[5]:K.red,icon:(ctx,x,y,c,now,k)=>k==="own"?IC.agent(ctx,x,y,c,now):k==="platform"?IC.service(ctx,x,y,c):IC.gone(ctx,x,y,c),
-  look:it=>it.b==="gone"?"struck":"",mark:(ctx,x,y,now)=>{for(let j=0;j<3;j++)orb(ctx,x-7+j*7,y+(j%2?-5:5),4.6,now+j*400);}});
-// 3 · Fill the chat's place: its place, the holder's own sign-in, a small tool's yes or no, and never; each row in its level's colour
-PIC.place=(Lb,S)=>rows(Lb,S,{col:k=>k==="place"?K.lv.public:k==="signin"?K.lv.confidential:k==="tool"?K.biz:K.lv.restricted,
-  icon:(ctx,x,y,c,now,k)=>(k==="place"?IC.place:k==="signin"?IC.key:k==="tool"?IC.tool:IC.lock)(ctx,x,y,c),mark:(ctx,x,y,now)=>orb(ctx,x,y,8,now)});
-// 4 · Draft, ask, confirm: the map agent, Tomás and the owners; the head is a draft on paper
-PIC.confirm=(Lb,S)=>rows(Lb,S,{col:k=>k==="agent"?K.ai:k==="tomas"?K.tech:K.biz,icon:(ctx,x,y,c,now,k)=>k==="agent"?IC.agent(ctx,x,y,c,now):k==="tomas"?IC.person(ctx,x,y,c):IC.tag(ctx,x,y,c),
-  mark:(ctx,x,y)=>paper(ctx,x-11,y-14,22,28,"",K.paper,{rot:-0.06})});
-// 5 · Run the map's checks: each check that stops a change, and what passes; the head is a brick stamped on its edge
-PIC.checks=(Lb,S)=>rows(Lb,S,{col:k=>k==="pass"?K.good:K.brick,icon:(ctx,x,y,c,now,k)=>k==="pass"?IC.ok(ctx,x,y):IC.no(ctx,x,y),
-  mark:(ctx,x,y)=>{if(typeof bab_brick==="function"){ctx.save();ctx.translate(x,y);ctx.scale(0.42,0.42);bab_brick(ctx,0,0,56,{stamp:1});ctx.restore();}else{ctx.fillStyle=rgbaS(K.brick,1);rr(ctx,x-12,y-7,24,14,2);ctx.fill();}}});
-// 6 · Who keeps it, and when: a row for each beat of the map's rhythm, from every change to every year (the checks' tick, a person
-// leaving, a month, an agent tested, an owner's tag); the head is the map as a tower of glass, its tiers its layers
-PIC.keep=(Lb,S)=>rows(Lb,S,{col:k=>k==="change"?K.good:k==="leaves"?K.ret:k==="month"?K.ai:k==="quarter"?K.tech:K.biz,
-  icon:(ctx,x,y,c,now,k)=>k==="change"?IC.ok(ctx,x,y):k==="leaves"?IC.person(ctx,x,y,c):k==="month"?IC.cal(ctx,x,y,c):k==="quarter"?IC.agent(ctx,x,y,c,now):IC.tag(ctx,x,y,c),
-  mark:(ctx,x,y)=>{for(let i=0;i<4;i++){const bw=24-i*5;glass(ctx,x-bw/2,y+6-i*6,bw,5,2,K.lay[5-i],{glow:3,ea:0.85,fill:"rgba(7,12,24,0.94)"});}}});
-
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"aca-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));
   function show(id,focus){const Lb=L.labs.find(x=>x.id===id)||L.labs[0];visited.add(Lb.id);put("visited",[...visited]);

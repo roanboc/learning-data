@@ -98,91 +98,138 @@ function mw_lesson(x,tt,o){o=o||{};const who=o.who||"carmen",lis=g=>PK.face(tt,{
 /* the boards' rows, as functions of the chapter and the word times (sc, w), in the board's own px (1250 by 524). Each row has the
    time the voice says it; PK.pace then makes a row wait until whoever writes can have walked to it. So they are laid out for
    someone who walks: on from left to right, what is added later to the right, and nothing drawn back along words. */
-// 1. management, fitted to the work (Carmen)
-const mw_boardA=(sc,w)=>[
-  {s:"Managing and leading",x:70,y:108,size:68,w:700,col:"blue",at:w("sides","Managing",-0.2),d:1.3},
-  {s:"two sides of one role",x:70,y:194,size:52,at:w("sides","two sides",-0.1),d:1.1},
-  {s:"Hard to see, hard to improve",x:70,y:292,size:52,at:w("see","hard to see",-0.3),d:1.5},
-  {s:"so a leader measures",x:70,y:374,size:56,w:700,col:"blue",at:w("see","leader",-0.3),d:1.1},
-  {s:"+ dates, plans",size:52,at:w("see","dates",-0.1),d:0.8},
-  {s:"fitted to the work:",x:70,y:462,size:52,at:w("fit","fit",-0.3),d:1.0},
-  {k:"cross",x:560,y:444,r:16,col:"amber",at:w("fit","hours",-0.3),d:0.25},
-  {s:"hours, tickets per person",x:596,y:462,size:50,col:"mut",at:w("fit","hours",0),d:1.2}];
-// 2. the team's page: four measures in two pairs (Helena)
-const mw_boardB=(sc,w)=>[
-  {s:"The team's page, from July",x:70,y:100,size:62,w:700,col:"blue",at:w("page","team's page",-0.3),d:1.4},
-  {s:"Days to first use",x:70,y:196,size:52,at:w("days","Days",-0.1),d:1.0},
-  {s:"Feb 41, Jun 24",size:52,w:700,col:"orange",at:w("days","forty-one",-0.1),d:1.0},
-  {s:"Sent back",x:70,y:286,size:52,at:w("back","Sent back",-0.1),d:0.6},
-  {s:"Promises met",x:70,y:376,size:52,at:w("promise","Promises",-0.1),d:0.8},
-  {s:"Load,",x:70,y:466,size:52,at:w("load","load",-0.1),d:0.5},
-  {s:"limit 6",size:52,w:700,col:"blue",at:w("load","load",0.6),d:0.6},
-  {k:"line",x:880,y:176,x1:880,y1:272,bow:-44,col:"green",at:w("pairs","speed",-0.3),d:0.4},{s:"a pair",x:960,y:240,size:50,col:"green",at:w("pairs","speed",0.1),d:0.5},
-  {k:"line",x:880,y:356,x1:880,y1:452,bow:-44,col:"green",at:w("pairs","promises",-0.3),d:0.4},{s:"a pair",x:960,y:420,size:50,col:"green",at:w("pairs","promises",0.1),d:0.5}];
-// 3. the first reading: what slowed June's work (Helena)
-const mw_boardR=(sc,w)=>{const t0=w("june","take",-0.1);return[
-  {s:"What slowed the work?",x:70,y:104,size:66,w:700,col:"blue",at:w("what","what slowed",-0.2),d:1.3},
-  {s:"June: 24 days",x:70,y:214,size:56,w:700,at:w("june","June's",-0.3),d:0.9},
-  {s:"8 queue",x:300,y:318,size:50,at:t0+0.5,d:0.6},{s:"7 access",x:520,y:318,size:50,w:700,col:"amber",at:t0+1.3,d:0.6},
-  {s:"7 build",x:760,y:318,size:50,at:t0+2.1,d:0.6},{s:"2 review",x:960,y:318,size:50,at:t0+2.9,d:0.6},
-  {k:"ring",x:612,y:302,rx:118,ry:48,col:"amber",at:w("access","waiting",-0.3),d:0.6}];};
-// 4. pairs: Accelerate (Carmen)
-const mw_boardC=(sc,w)=>[
-  {s:"Accelerate, 2018",x:70,y:100,size:44,col:"mut",at:sc.cues.accel+0.1,d:0.9},
-  {s:"The best teams:",x:70,y:206,size:58,at:w("accel","best teams",-0.3),d:0.9},
-  {s:"fast",size:66,w:700,col:"green",at:w("accel","fast",-0.1),d:0.4},{s:"and",size:58,at:w("accel","and stable",0),d:0.3},{s:"stable",size:66,w:700,col:"green",at:w("accel","stable",-0.1),d:0.5},
-  {s:"measured side by side",x:70,y:316,size:58,w:700,col:"blue",at:w("accel","measured",-0.1),d:1.1}];
-// 5. not a target: Goodhart and Strathern; a count per person; Deming, at the right (Carmen)
-const mw_boardD=(sc,w)=>[
-  {s:"Goodhart, 1975; Strathern",x:70,y:96,size:44,col:"mut",at:sc.cues.goodhart+0.2,d:1.2},
-  {s:"A measure made a target",x:70,y:178,size:60,w:700,col:"blue",at:w("strathern","when a measure",-0.1),d:1.3},
-  {s:"stops being a good measure",x:70,y:250,size:52,at:w("strathern","ceases",-0.2),d:1.3},
-  {s:"Tickets per person:",x:70,y:340,size:52,at:w("split","Count tickets",-0.1),d:1.0},
-  {s:"work split small,",x:110,y:404,size:48,col:"amber",at:w("split","split",-0.1),d:0.8},{s:"easy picks,",size:48,col:"amber",at:w("split","pick easy",-0.1),d:0.6},
-  {s:"less help, mistakes hidden",x:110,y:462,size:48,col:"amber",at:w("split","stop helping",-0.1),d:1.4},
-  {s:"Deming, 1986:",x:800,y:96,size:44,col:"mut",at:sc.cues.deming+0.2,d:0.7},
-  {s:"94 in 100 problems",x:800,y:178,size:48,w:700,col:"orange",at:w("deming","ninety-four",-0.1),d:1.0},
-  {s:"the system's",x:800,y:250,size:56,w:700,col:"blue",at:w("deming","the system",-0.1),d:0.7}];
+// a board's graphic recording: its heading, drawn above where anyone stands, and the rest, drawn already when it first shows
+const mw_rec=(title,o,draw,box)=>[PK.sk.drawn(c=>PK.sk.head(c,title,o),[40,36,1210,150]),PK.sk.drawn(draw,box)];
+// 1. management, fitted to the work (Carmen): one role with two sides, what a leader measures, and measures fitted to thinking work.
+// She writes the last words of each part as she comes to it, and crosses out hours and tickets
+const mw_boardA=(sc,w)=>[...mw_rec("Managing and leading",{},c=>{const D=PK.sk;
+    D.panel(c,70,150,340,300,{title:"one role",col:"blue",fill:"blue"},(cc,x,y)=>{D.face(cc,"helena",x+170,y+50,34);
+      D.line(cc,[[x+150,y+98],[x+96,y+118]],{col:"ink",w:3,seed:2});D.line(cc,[[x+190,y+98],[x+244,y+118]],{col:"ink",w:3,seed:3});
+      D.box(cc,x+22,y+116,136,50,{fill:"blue",col:"ink",w:3,r:25});D.text(cc,"manage",x+90,y+152,{size:32,w:700,align:"center"});
+      D.box(cc,x+182,y+116,136,50,{fill:"green",col:"ink",w:3,r:25});D.text(cc,"lead",x+250,y+152,{size:32,w:700,align:"center"});});
+    D.panel(c,440,150,350,300,{title:"hard to see",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"eye",x+50,y+46,28,{fill:"white"});
+      D.bars(cc,x+100,y+4,220,84,[{v:2,col:"green"},{v:3,col:"green"},{v:4,col:"green"},{v:6,col:"green"}]);
+      D.icon(cc,"cal",x+46,y+140,22,{fill:"white"});D.text(cc,"dates",x+76,y+151,{size:30});
+      D.icon(cc,"doc",x+190,y+140,22,{fill:"white"});D.text(cc,"plans",x+220,y+151,{size:30});});
+    D.panel(c,820,150,360,300,{title:"management",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"bulb",x+48,y+44,26,{fill:"white"});
+      D.text(cc,"thinking work",x+86,y+56,{size:32,w:700});D.icon(cc,"clock",x+48,y+122,22,{fill:"white"});
+      D.text(cc,"hours, tickets",x+86,y+120,{size:30,col:"mut"});D.text(cc,"per person",x+86,y+158,{size:30,col:"mut"});});},[60,140,1190,458]),
+  {s:"two sides",x:100,y:432,size:38,w:700,col:"blue",at:w("sides","two sides",-0.1),d:0.9},
+  {s:"a leader measures",x:460,y:432,size:36,w:700,col:"green",at:w("see","leader",-0.3),d:1.1},
+  {s:"fit the work",x:1160,y:432,size:38,w:700,col:"blue",align:"right",at:w("fit","fit",-0.3),d:0.9},
+  {k:"cross",x:1124,y:336,r:18,col:"amber",at:w("fit","hours",-0.1),d:0.3}];
+// 2. the team's page (Helena): four measures, each a part of the page; she writes June's days, what each counts, the limit, and, at
+// the right, the two pairs
+const mw_boardB=(sc,w)=>[...mw_rec("The team's page",{},c=>{const D=PK.sk;
+    D.box(c,70,148,420,162,{fill:"orange",col:"ink",w:3,r:16});D.icon(c,"bolt",108,190,22,{fill:"white"});D.text(c,"speed",140,201,{size:32,w:700});
+    D.text(c,"days to first use",240,201,{size:28,col:"mut"});
+    D.text(c,"Feb",96,254,{size:28,col:"mut"});D.box(c,160,232,246,28,{fill:"orange",col:"ink",w:3,r:6});
+    D.text(c,"Jun",96,294,{size:28,col:"mut"});D.box(c,160,272,144,28,{fill:"orange",col:"ink",w:3,r:6});
+    D.box(c,510,148,420,162,{fill:"amber",col:"ink",w:3,r:16});D.icon(c,"loop",548,190,22,{fill:"white"});D.text(c,"sent back",580,201,{size:32,w:700});
+    D.icon(c,"doc",560,262,24,{fill:"white"});D.arrow(c,[592,252],[664,252],{col:"ink",w:3,head:12});D.icon(c,"person",694,262,24,{fill:"white"});
+    D.arrow(c,[668,284],[594,284],{col:"amber",w:3.5,head:12,bow:-14});
+    D.box(c,70,322,420,162,{fill:"green",col:"ink",w:3,r:16});D.icon(c,"check",108,364,22,{fill:"white"});D.text(c,"promises met",140,375,{size:32,w:700});
+    D.donut(c,128,438,32,[{v:8,col:"green"},{v:2,col:"white"}]);
+    D.box(c,510,322,420,162,{fill:"blue",col:"ink",w:3,r:16});D.icon(c,"cards",548,364,22,{fill:"white"});D.text(c,"load",580,375,{size:32,w:700});
+    for(let i=0;i<6;i++)D.box(c,536+i*40,408,32,32,{fill:"white",col:"ink",w:2.5,r:5});
+    D.line(c,[[786,396],[786,454]],{col:"blue",w:3.5,dash:[8,7],seed:5});},[60,140,1190,488]),
+  {s:"41",x:418,y:256,size:34,w:700,col:"orange",at:w("days","forty-one",-0.1),d:0.4},
+  {s:"24",x:316,y:296,size:34,w:700,col:"orange",at:w("days","twenty-four",-0.1),d:0.4},
+  {s:"how often?",x:736,y:278,size:34,w:700,col:"amber",at:w("back","how often",-0.1),d:0.8},
+  {s:"data products",x:186,y:452,size:34,col:"green",at:w("promise","data products",-0.1),d:0.9},
+  {s:"limit 6",x:798,y:438,size:34,w:700,col:"blue",at:w("load","limit",-0.2),d:0.7},
+  {k:"line",x:1012,y:162,x1:1012,y1:298,bow:-18,col:"green",at:w("pairs","speed",-0.3),d:0.4},{s:"a pair",x:1050,y:244,size:36,w:700,col:"green",at:w("pairs","speed",0.1),d:0.5},
+  {k:"line",x:1012,y:336,x1:1012,y1:472,bow:-18,col:"green",at:w("pairs","promises",-0.3),d:0.4},{s:"a pair",x:1050,y:418,size:36,w:700,col:"green",at:w("pairs","promises",0.1),d:0.5}];
+// 3. the first reading: June's 24 days, taken apart (Helena). The bar is drawn already; she writes how many days each part took, and
+// rings the wait for access
+const MW_PARTS=[["queue",8,"mut"],["access",7,"amber"],["build",7,"blue"],["review",2,"green"]],MW_DAY=1040/24;
+const mw_partX=i=>110+MW_DAY*MW_PARTS.slice(0,i).reduce((a,p)=>a+p[1],0)+MW_DAY*MW_PARTS[i][1]/2;
+const mw_boardR=(sc,w)=>{const t0=w("june","take",-0.1);return[...mw_rec("What slowed the work?",{},c=>{const D=PK.sk;
+    D.icon(c,"cal",120,198,28,{fill:"white"});D.text(c,"June",162,212,{size:40,w:700});D.text(c,"24 days, request to first use",270,212,{size:30,col:"mut"});
+    let x=110;for(const [s,n,col] of MW_PARTS){const wd=MW_DAY*n;D.box(c,x,250,wd,72,{fill:col,col:"ink",w:3,r:6});D.text(c,s,x+wd/2,370,{size:30,col:"mut",align:"center"});x+=wd;}},[96,160,1164,384]),
+  ...MW_PARTS.map(([s,n],i)=>({s:String(n),x:mw_partX(i),y:300,size:40,w:700,align:"center",at:t0+0.5+0.8*i,d:0.35})),
+  {k:"ring",x:mw_partX(1),y:326,rx:118,ry:68,col:"amber",at:w("access","waiting",-0.3),d:0.6}];};
+// 4. pairs: Accelerate (Carmen): speed and stability, each a part, and the two on a balance; she writes the best teams' two words, and
+// how they were measured
+const mw_boardC=(sc,w)=>[...mw_rec("The best teams",{ref:["Accelerate","2018"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,400,300,{title:"speed",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"bolt",x+50,y+44,30,{fill:"white"});
+      D.trend(cc,x+110,y+12,250,110,[[0,0.15],[0.35,0.3],[0.65,0.55],[1,0.9]],{col:"blue"});});
+    D.panel(c,500,150,400,300,{title:"stability",col:"green",fill:"green"},(cc,x,y)=>{D.icon(cc,"shield",x+50,y+44,30,{fill:"white"});
+      D.trend(cc,x+110,y+12,250,110,[[0,0.7],[0.35,0.73],[0.65,0.68],[1,0.72]],{col:"green"});});
+    D.scale(c,1050,236,200,{l:"",r:""});D.icon(c,"bolt",950,293,16,{fill:"white"});D.icon(c,"shield",1150,293,16,{fill:"white"});},[60,140,1192,458]),
+  {s:"fast",x:100,y:432,size:48,w:700,col:"green",at:w("accel","fast",-0.1),d:0.4},
+  {s:"stable",x:530,y:432,size:48,w:700,col:"green",at:w("accel","stable",-0.1),d:0.5},
+  {s:"side by side",x:1166,y:432,size:40,w:700,col:"blue",align:"right",at:w("accel","measured",-0.1),d:1.0}];
+// 5. not a target (Carmen): a measure pushed into a target, what a count per person makes people do, and Deming's hundred problems.
+// She writes what the target does to the measure, the last thing the count does, and Deming's figure and whose they are
+const mw_boardD=(sc,w)=>[...mw_rec("A measure made a target",{ref:["Goodhart, 1975","and Strathern"],rsize:32},c=>{const D=PK.sk;
+    D.panel(c,70,150,330,300,{title:"a target",col:"amber",fill:"amber"},(cc,x,y)=>{D.icon(cc,"bars",x+50,y+52,28,{fill:"white"});
+      D.arrow(cc,[x+90,y+52],[x+176,y+52],{col:"ink",w:3.5,head:14});D.icon(cc,"target",x+226,y+52,40,{fill:"white"});
+      D.text(cc,"pushed to move",x+30,y+150,{size:30,col:"mut"});});
+    D.panel(c,430,150,420,300,{title:"tickets per person",col:"amber",fill:"amber"},(cc,x,y)=>{
+      [["puzzle","work split small"],["star","easy picks"],["hand","less help"]].forEach(([ic,s],i)=>{D.icon(cc,ic,x+44,y+34+i*54,20,{fill:"white"});D.text(cc,s,x+76,y+45+i*54,{size:30});});});
+    D.panel(c,880,150,300,300,{title:"Deming, 1986",col:"blue",fill:"blue"},(cc,x,y)=>{D.dots(cc,x+20,y+12,10,10,{gap:17,r:6,on:94,col:"blue",off:"orange"});
+      D.disc(cc,x+202,y+140,8,{fill:"orange",col:"ink",w:2.5});D.text(cc,"people",x+216,y+150,{size:28,col:"mut"});});},[60,140,1192,458]),
+  {s:"stops measuring",x:100,y:432,size:36,w:700,col:"amber",at:w("strathern","ceases",-0.2),d:1.1},
+  {s:"mistakes hidden",x:830,y:432,size:36,w:700,col:"amber",align:"right",at:w("split","mistakes",-0.1),d:1.1},
+  {s:"94",x:1072,y:300,size:48,w:700,col:"blue",at:w("deming","ninety-four",-0.1),d:0.5},
+  {s:"the system's",x:900,y:436,size:34,w:700,col:"blue",at:w("deming","the system",-0.1),d:0.8}];
 
 /* ---------------------------------------------------------------- Helena's notebook: what she keeps (the page's own px)
-   One pen writes a page, so its strokes come one after the other, each with the time to cross to it: the film gives each row the
-   time the voice says it, in the order the pen writes them, and paces the page (PK.pace(ctx, null, rows)). Glosses go in one
-   muted column at the right. */
-// 3. what slowed the work: the two waits found, their fixes, and what they gave (the page is 1,100 px wide: glosses at x 720)
-const mw_note1=(sc,w)=>[
-  {s:"What slowed it?",x:70,y:124,size:88,w:700,col:"blue",at:sc.cues.most-0.4,d:0.8,marks:[["under","blue",null,0.3]]},
-  {k:"dot",x:96,y:244,r:9,col:"amber",at:w("most","waits",-0.4),d:0.12},{s:"Access on day one",x:130,y:262,size:62,at:w("most","waits",-0.25),d:0.9},
-  {s:"7 days to 1",x:720,y:262,size:42,col:"mut",at:w("most","found",-0.2),d:0.6},
-  {k:"dot",x:96,y:374,r:9,col:"amber",at:w("most","removed",-0.4),d:0.12},{s:"Fifteen minutes first",x:130,y:392,size:62,at:w("most","removed",-0.25),d:0.9},
-  {s:"sent back halved",x:720,y:392,size:42,col:"mut",at:w("most","one at",0),d:0.7},
-  {s:"Nobody was slow",x:130,y:536,size:66,w:700,at:sc.ends.most+0.3,d:0.8,marks:[["hl","green"]]}];
+   Each page is sketched already when it first shows (PK.sk.drawn): its heading, the parts as drawings and a few words. One pen adds
+   the last words, so its strokes come one after the other, each with the time to cross to it: the film gives each the time the voice
+   says it, in the order the pen writes them, and paces the page (PK.pace(ctx, null, rows)). */
+// 3. what slowed the work: the two waits found, their fixes, and what each gave; and that nobody was slow
+const mw_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"What slowed it?",86,124,{size:76});
+    D.disc(c,120,238,34,{fill:"amber",col:"ink",w:3});D.icon(c,"hourglass",120,238,21,{fill:"white"});
+    D.text(c,"waiting for access",176,234,{size:40,w:700});D.text(c,"asked for on day one now",176,282,{size:34,col:"mut"});
+    D.arrow(c,[604,258],[670,258],{col:"ink",w:3.5,head:14});
+    D.disc(c,120,398,34,{fill:"amber",col:"ink",w:3});D.icon(c,"loop",120,398,21,{fill:"white"});
+    D.text(c,"unclear asks",176,394,{size:40,w:700});D.text(c,"fifteen minutes first",176,442,{size:34,col:"mut"});
+    D.arrow(c,[560,418],[670,418],{col:"ink",w:3.5,head:14});
+    D.faces(c,770,624,["ivy","sam","jun"],{r:32,gap:96});},[60,40,1030,680]),
+  {s:"a week to a day",x:690,y:270,size:44,w:700,col:"green",at:w("most","found",-0.2),d:0.8},
+  {s:"halved",x:690,y:430,size:48,w:700,col:"green",at:w("most","one at",0),d:0.6},
+  {s:"Nobody was slow",x:110,y:640,size:62,w:700,at:sc.ends.most+0.3,d:0.9,marks:[["hl","green"]]}];
 // 4. read in pairs: what each measure hides, alone
-const mw_note2=(sc,w)=>[
-  {s:"Read in pairs",x:70,y:124,size:88,w:700,col:"blue",at:sc.cues.honest-0.3,d:0.8,marks:[["under","blue",null,0.3]]},
-  {s:"Speed, alone",x:130,y:262,size:62,at:w("honest","Speed",-0.1),d:0.7},{k:"arrow",x:478,y:242,x1:590,y1:242,col:"amber",at:w("honest","hide",-0.45),d:0.3},
-  {s:"hides rushed work",x:625,y:262,size:50,col:"amber",at:w("honest","rushed",-0.4),d:0.9},
-  {s:"Promises, alone",x:130,y:392,size:62,at:w("honest","Promises",-0.1),d:0.8},{k:"arrow",x:548,y:372,x1:600,y1:372,col:"amber",at:w("honest","tired",-0.6),d:0.25},
-  {s:"hides tired people",x:625,y:392,size:50,col:"amber",at:w("honest","tired",-0.3),d:0.9},
-  {s:"Read them together",x:130,y:536,size:66,w:700,at:sc.ends.honest-0.1,d:0.9,marks:[["hl","green"]]}];
+const mw_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Read in pairs",86,124,{size:76});
+    D.disc(c,120,244,34,{fill:"blue",col:"ink",w:3});D.icon(c,"bolt",120,244,21,{fill:"white"});D.text(c,"speed, alone",176,260,{size:44,w:700});
+    D.arrow(c,[540,246],[594,246],{col:"amber",w:3.5,head:14});
+    D.disc(c,120,384,34,{fill:"green",col:"ink",w:3});D.icon(c,"check",120,384,21,{fill:"white"});D.text(c,"promises, alone",176,400,{size:44,w:700});
+    D.arrow(c,[540,386],[594,386],{col:"amber",w:3.5,head:14});
+    // the two pairs, each a capsule round its two measures
+    [[84,[["blue","bolt"],["amber","loop"]]],[344,[["green","check"],["blue","cards"]]]].forEach(([x0,P])=>{D.box(c,x0,500,192,76,{fill:"white",col:"ink",w:3,r:38});
+      P.forEach(([col,ic],i)=>{const x=x0+40+i*112;D.disc(c,x,538,26,{fill:col,col:"ink",w:3});D.icon(c,ic,x,538,16,{fill:"white"});});
+      D.text(c,"+",x0+96,550,{size:40,w:700,align:"center"});});},[60,40,1030,590]),
+  {s:"hides rushed work",x:610,y:260,size:44,col:"amber",at:w("honest","rushed",-0.4),d:0.9},
+  {s:"hides tired people",x:610,y:400,size:44,col:"amber",at:w("honest","tired",-0.3),d:0.9},
+  {s:"Read them together",x:110,y:680,size:62,w:700,at:sc.ends.honest-0.1,d:0.9,marks:[["hl","green"]]}];
 // 5. not a target: written in the pause that ends the chapter, from just after the last line (mw_N3), each stroke after the one
 // before has ended and the pen has crossed to the next (PK.pace), and done a second before the chapter ends
 const mw_N3=sc=>sc.cues.breath-1.3;
-const mw_note3=sc=>{const b=mw_N3(sc);return[
-  {s:"Not a target",x:70,y:124,size:88,w:700,col:"blue",at:b+0.5,d:0.7,marks:[["under","blue",null,0.3]]},
-  {k:"cross",x:100,y:244,r:15,col:"amber",at:b+1.95,d:0.25},{s:"No count per person",x:140,y:262,size:62,at:b+2.25,d:0.9},
-  {k:"tick",x:100,y:374,r:18,col:"green",at:b+3.5,d:0.25},{s:"The team's page instead",x:140,y:392,size:62,at:b+3.8,d:1.0},
-  {s:"Growth: each one's own goals",x:140,y:536,size:58,at:b+5.15,d:1.1,marks:[["hl","blue"]]}];};
-// 6. on Monday: the four things to keep, and beside three of them, in one column, what each means; the last, ringed, sums up
-const mw_note4=(sc,w)=>{const c=sc.cues,dot=(y,col,at)=>({k:"dot",x:92,y:y-18,r:9,col,at,d:0.15});return[
-  {s:"On Monday",x:70,y:122,size:88,w:700,col:"blue",at:w("flow","work sent back",0.1),d:0.6,marks:[["under","blue",null,0.3]]},
-  dot(252,"orange",w("flow","promises",0)),{s:"Measure the flow",x:128,y:252,size:62,at:w("flow","promises",0.1),d:0.9},
-  {s:"not the people",x:720,y:252,size:42,col:"mut",at:w("flow","load",0.2),d:0.7},
-  dot(372,"green",w("pair","Pair",-0.3)),{s:"Pair each measure",x:128,y:372,size:62,at:w("pair","Pair",-0.1),d:0.9,marks:[["hl","green"]]},
-  {s:"with its partner",x:720,y:372,size:42,col:"mut",at:w("pair","balances",-0.3),d:0.8},
-  dot(492,"blue",w("read","Read",-0.3)),{s:"Read them together",x:128,y:492,size:62,at:w("read","Read",-0.1),d:0.9},
-  {s:"what slowed it?",x:720,y:492,size:42,col:"mut",at:w("read","what slowed",-0.1),d:0.7},
-  // the last has no dot: the ring round it would run through one
-  {s:"Rank people? No: show the flow",x:128,y:618,size:62,at:w("rank","rank",-0.4),d:w("rank","show",0.4)-w("rank","rank",-0.4),marks:[["ring","blue",sc.ends.rank+0.1]]}];};
+const mw_note3=sc=>{const b=mw_N3(sc);return[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"Not a target",86,124,{size:76});
+    D.box(c,90,190,400,210,{fill:"amber",col:"ink",w:3,r:16});D.icon(c,"person",160,264,32,{fill:"white"});D.icon(c,"cards",250,264,28,{fill:"white"});
+    D.text(c,"tickets per person",114,362,{size:38,w:700});
+    D.arrow(c,[510,296],[590,296],{col:"ink",w:3.5,head:14});
+    D.box(c,610,190,400,210,{fill:"green",col:"ink",w:3,r:16});D.icon(c,"doc",680,262,32,{fill:"white"});
+    for(let i=0;i<4;i++)D.box(c,740+(i%2)*64,224+(i>>1)*44,54,36,{fill:i===3?"amber":"white",col:"ink",w:2.5,r:6});
+    D.text(c,"the team's page",634,362,{size:38,w:700});
+    D.icon(c,"sprout",124,590,36,{fill:"green"});D.face(c,"ivy",900,580,44);},[60,40,1030,650]),
+  {k:"cross",x:440,y:236,r:24,col:"amber",at:b+1.2,d:0.3},
+  {k:"tick",x:962,y:236,r:24,col:"green",at:b+2.4,d:0.3},
+  {s:"each one's own goals",x:184,y:606,size:56,w:700,at:b+3.6,d:1.2,marks:[["hl","blue"]]}];};
+// 6. on Monday: the three things to do, each drawn with what it means; and, under them, a ranking crossed out and the flow instead
+const MW_MON=[["bars","orange",232,"not the people"],["scale","green",352,"with its partner"],["eye","blue",472,"what slowed it?"]];
+const mw_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});
+    MW_MON.forEach(([ic,col,y,s])=>{D.disc(c,108,y-20,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-20,19,{fill:"white"});D.text(c,s,700,y,{size:36,col:"mut"});});
+    D.text(c,"rank people?",96,560,{size:36,col:"mut"});
+    [[100,58,"person"],[160,88,"person"],[220,40,"person"]].forEach(([x,h,ic])=>{D.box(c,x,710-h,56,h,{fill:"mut",col:"ink",w:3,r:4});D.icon(c,ic,x+28,710-h-22,18,{fill:"white"});});
+    D.arrow(c,[300,660],[372,660],{col:"ink",w:3.5,head:14});},[60,40,1030,720]),
+  {s:"Measure the flow",x:156,y:232,size:56,w:700,at:w("flow","promises",0),d:0.9},
+  {s:"Pair each measure",x:156,y:352,size:56,w:700,at:w("pair","Pair",-0.1),d:0.9,marks:[["hl","green"]]},
+  {s:"Read them together",x:156,y:472,size:56,w:700,at:w("read","Read",-0.1),d:0.9},
+  {k:"cross",x:188,y:646,r:46,col:"amber",at:w("rank","say no",-0.1),d:0.35},
+  {s:"show the flow",x:400,y:680,size:60,w:700,col:"blue",at:w("rank","show",-0.2),d:0.9,marks:[["ring","blue",sc.ends.rank+0.1]]}];
 
 /* ---------------------------------------------------------------- Helena's corner
    Helena at the round table: with Ivy (o.ivy true), or alone at her laptop (o.laptop: its screen faces her). o.lean (0 to 1):

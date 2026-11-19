@@ -12,7 +12,7 @@ What it checks, page by page (every .html under site/):
   https://data.learn-all.org/... map to site/), every #id exists on its target page (except #t=,
   and the lab and old home hashes that scripts read), GitHub blob/tree links name a file in this repo, and
   download links name a file the release workflow publishes. Links inside the "Pause and think" packs count too.
-- header: Start here, Topics, Making of, then EN and ES (in the "More" menu), with the right targets and the right current page;
+- header: Start here, Topics, the project icon, then EN and ES (in the "More" menu), Making of in More options, with the right targets and the right current page;
   and "?", the guided tour, with the same steps in both languages.
 - no leftover labels in the nav (Watch, Take it apart, Sharpen it, All films, Mira, Desarma).
 - hreflang: exactly the pairs of real twins, each pointing back.
@@ -116,10 +116,11 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     "es/labs/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
     "es/scenarios/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
     # a page under a topic names it, and links to it on the Topics page: Topics › the topic › the film or series
-    "sketch/": ("Topics › Data modelling", ["topics/", "topics/"]),
-    "es/sketch/": ("Temas › Modelado de datos", ["es/topics/", "es/topics/"]),
-    "sketch/labs/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
-    "sketch/scenarios/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
+    # A Sharper Sketch, film 2 of Model the business, whose pages are written by hand ("outside" in its series.json)
+    "sketch/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
+    "es/sketch/": ("Temas › Modelado de datos › Modelar el negocio", ["es/topics/", "es/topics/", "es/model-the-business/"]),
+    "sketch/labs/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
+    "sketch/scenarios/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
     "when-things-go-wrong/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/"]),
     "es/when-things-go-wrong/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
     "when-things-go-wrong/silent-change/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
@@ -145,10 +146,10 @@ PACKS = {"assets/learn/learn.en.js", "assets/learn/learn.es.js",
          "assets/silent-change/think.en.js", "assets/silent-change/think.es.js",
          "assets/too-good-to-be-true/think.en.js", "assets/too-good-to-be-true/think.es.js"}
 # "Pause and think" packs whose stops are the film's own labs (the rest point to The Inner Life of Data's): the labs page, and the pack that names its labs
-OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/too-good-to-be-true/labs/index.html", "assets/too-good-to-be-true/learn.en.js"),
-            "assets/too-good-to-be-true/think.es.js": ("es/when-things-go-wrong/too-good-to-be-true/labs/index.html", "assets/too-good-to-be-true/learn.es.js")}
+OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.en.js"),
+            "assets/too-good-to-be-true/think.es.js": ("es/when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.es.js")}
 # a film's labs and scenarios, as its stepper and topic cards count them (None: it has none)
-COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": ("3", "10")}
+COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": (None, None)}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
 # a series numbers its own films, always as "Film 2 of 7" ("Película 2 de 7"): that's allowed; numbering the site's films isn't
 NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)(?!-)|(first|second|third) film|(primera|segunda|tercera) película|"
@@ -170,7 +171,11 @@ WHOLE = {"6 min", "8 min", "8 minutos"}
 STORY_TIME = {"assets/data-architecture/learn.es.js": {"cinco minutos", "tres minutos"},
               "assets/platform-and-solution-architecture/learn.en.js": {"19 minutes"},
               "assets/platform-and-solution-architecture/learn.es.js": {"nueve minutos", "diez minutos", "19 minutos"},
-              "assets/data-that-moves/learn.en.js": {"5 minutes"}, "assets/data-that-moves/learn.es.js": {"cinco minutos", "5 minutos"}}
+              "assets/data-that-moves/learn.en.js": {"5 minutes"}, "assets/data-that-moves/learn.es.js": {"cinco minutos", "5 minutos"},
+              "assets/what-an-agent-is/learn.es.js": {"cuatro minutos"},  # the agent's next-March run of the census count
+              "assets/agents-at-work-on-data/learn.en.js": {"40 minutes"}, "assets/agents-at-work-on-data/learn.es.js": {"40 minutos"},  # the web search
+              "assets/from-helper-to-colleague/learn.es.js": {"diez minutos"},  # Sam's switch, tried for ten minutes
+              }
 # the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
 # lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),
 # so a new film, or a new series, needs no change here
@@ -206,6 +211,17 @@ for _S in build_series.SERIES:
         LEARN_IDS[f"{_pre}{_sl}/labs/"] = {x["id"] for x in _SL[_lg]["labs"]}
         LEARN_IDS[f"{_pre}{_sl}/scenarios/"] = {f"film-{f}" for _, f, _ in _SL[_lg]["qs"]}
         LEARN_STORE[f"{_pre}{_sl}/labs/"] = LEARN_STORE[f"{_pre}{_sl}/scenarios/"] = _SL["prefix"]
+# When things go wrong, whose pages are written by hand, has its own labs and scenarios too (site/assets/when-things-go-wrong/):
+# one playground for each film and twelve scenarios, on two pages of its own, as the series above have
+for _sub in ("labs/", "scenarios/"):
+    TWINS.append(f"when-things-go-wrong/{_sub}")
+    CRUMBS[f"when-things-go-wrong/{_sub}"] = ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"])
+    CRUMBS[f"es/when-things-go-wrong/{_sub}"] = ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"])
+for _lg, _pre in (("en", ""), ("es", "es/")):
+    _w = (WEB / f"assets/when-things-go-wrong/learn.{_lg}.js").read_text()
+    LEARN_IDS[f"{_pre}when-things-go-wrong/labs/"] = set(re.findall(r'\{id:"(\w+)",kind:', _w))
+    LEARN_IDS[f"{_pre}when-things-go-wrong/scenarios/"] = {f"film-{f}" for f in re.findall(r'\{type:"\w+",n:\d+,lab:"\w+",film:(\d+)', _w)}
+    LEARN_STORE[f"{_pre}when-things-go-wrong/labs/"] = LEARN_STORE[f"{_pre}when-things-go-wrong/scenarios/"] = "ld-when-things-go-wrong"
 for _f in SERIES_FILMS:
     _k, _S = _f["key"], _f["series"]; _sl, _nm = _S["slug"], _S["name"]; _tn = build_series.topic_of(_S["id"])["name"]
     for _sub in ("", "labs/", "scenarios/") if _f["labs"] else ("",):  # a film without labs and scenarios has only its Watch page
@@ -844,8 +860,9 @@ def think_faults(path, en=None):
 # think was checked, and in most scenarios the right answer was the second option.
 SPREAD_ONE_PLACE = 0.40  # across the site's scenarios, no position holds more than this share of the right answers
 # an engine (site/assets/<engine>/learn.js) that mixes the options itself each time it shows them, with the words that do it:
-# the packs of the series it shows aren't read
-SPREAD_SHUFFLED = {"enterprise-architecture": "ix=order(O.map("}
+# the packs of the series it shows aren't read (none since 19 November 2026, when The map before the data's engine began showing
+# its options in the order its packs write them)
+SPREAD_SHUFFLED = {}
 # an order scenario's first showing, where its pack gives no start: the one line every engine mixes the steps with, mixed(n, s) for
 # n steps and a number s of the scenario's own, so each scenario is mixed its own way, the same each time. It holds to
 # order_mixed(), which tests/test_spread.py tries on this line itself.

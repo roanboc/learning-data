@@ -1,0 +1,207 @@
+1
+00:00:04,200 --> 00:00:10,430
+China, 1368. Tras años de guerra, una nueva dinastía, los Ming, gobierna desde Nanjing.
+
+2
+00:00:11,130 --> 00:00:17,979
+Cada hogar le debe al Estado grano de sus campos, y trabajo: cargar grano, levantar murallas, arreglar caminos.
+
+3
+00:00:19,179 --> 00:00:23,659
+Pero los viejos registros se perdieron en la guerra, y ningún impuesto tenía una medida fija.
+
+4
+00:00:24,359 --> 00:00:30,886
+En la rica provincia de Zhejiang, los terratenientes anotaban sus campos a nombre de otros hogares, para librarse del trabajo.
+
+5
+00:00:32,186 --> 00:00:35,422
+Así, la carga caía sobre las familias que no podían esconder su tierra.
+
+6
+00:00:36,922 --> 00:00:42,858
+La corte no necesitaba un conteo más grande. Necesitaba saber de quién era cada campo, y quién vivía en cada casa.
+
+7
+00:00:45,358 --> 00:00:52,025
+Así que, antes de contar nada, la corte decidió qué necesitaba saber, y le dio a cada cosa su propio registro.
+
+8
+00:00:53,125 --> 00:01:01,389
+Desde 1381, los hogares entraron en los Registros Amarillos, en unidades de aldea de ciento diez, guiadas por diez de ellos por turnos.
+
+9
+00:01:03,089 --> 00:01:13,778
+Desde 1387, la tierra entró en los registros de escamas de pez. Estudiantes de la Academia Imperial midieron cada campo: su forma, su tamaño y el nombre de su dueño.
+
+10
+00:01:14,978 --> 00:01:18,732
+Dibujados parcela por parcela, los campos parecían las escamas de un pez.
+
+11
+00:01:20,832 --> 00:01:27,707
+Cada uno tenía una sola tarea: el registro de tierras fijaba quién tenía un campo; el de hogares, lo que debía cada familia.
+
+12
+00:01:29,207 --> 00:01:35,265
+La Historia de los Ming los llama la urdimbre y la trama: hilos que corren en dos sentidos, y juntos hacen una tela.
+
+13
+00:01:37,565 --> 00:01:43,155
+Para 1393, la corte podía volver a contar a su gente: diez millones y medio de hogares.
+
+14
+00:01:44,855 --> 00:01:50,474
+Y cuando se vendía un campo, su impuesto se iba con él, así ninguna familia pagaba por tierra que ya no tenía.
+
+15
+00:01:53,774 --> 00:01:57,687
+Una universidad tiene la misma necesidad, y también todo modelo de datos.
+
+16
+00:01:58,887 --> 00:02:04,937
+La vida interior de los datos terminó con una promesa: qué significa, y quién decide, es el resto de la historia.
+
+17
+00:02:06,437 --> 00:02:11,624
+En el camino, dibujamos un boceto: un estudiante, una clase, una inscripción, un periodo y una carrera.
+
+18
+00:02:13,324 --> 00:02:17,978
+Noor, la arquitecta de datos, está por convertirlo en el modelo común de la universidad.
+
+19
+00:02:19,278 --> 00:02:25,214
+Pero antes, cada caja necesita un lugar: para qué sirve, quién responde por ella, dónde se escribe y qué significa.
+
+20
+00:02:27,114 --> 00:02:32,818
+Ese es el mapa de la universidad. Las películas de arquitectura empresarial dibujan uno para una empresa de energía.
+
+21
+00:02:35,718 --> 00:02:39,440
+El mapa empieza por lo que hace la universidad: sus capacidades.
+
+22
+00:02:40,140 --> 00:02:47,918
+Las universidades comparten una referencia para ellas, HERM, los Modelos de Referencia de Educación Superior, y nadie empieza de cero.
+
+23
+00:02:49,018 --> 00:02:55,133
+Una capacidad dice qué, no cómo. Los sistemas y los equipos cambian; la necesidad de otorgar un título, no.
+
+24
+00:02:56,433 --> 00:03:04,708
+Abre aprendizaje y enseñanza, y las cajas del boceto empiezan a tener un lugar: títulos y carreras, legajos de estudiantes, graduación.
+
+25
+00:03:05,908 --> 00:03:10,746
+Contar estudiantes en la fecha de corte está en otro lado: en planificación, bajo estrategia.
+
+26
+00:03:13,246 --> 00:03:20,580
+Luego, lo que la universidad necesita saber, en dominios de datos: persona, estudiante, carrera, personal, finanzas y algunos más.
+
+27
+00:03:21,680 --> 00:03:25,426
+Cada dominio tiene un dueño: el área que responde por sus datos.
+
+28
+00:03:26,626 --> 00:03:35,590
+Estudiante y carrera son de la oficina de registro de Mei, con las facultades para las carreras. Personal, de RR. HH.; Organización, de Planificación.
+
+29
+00:03:36,890 --> 00:03:43,604
+El estudiante y la inscripción caen en el dominio de estudiantes; la carrera, la clase y el periodo, en el de carreras.
+
+30
+00:03:45,104 --> 00:03:51,072
+Un dueño no construye nada. Un dueño decide qué significan las palabras, y cómo se ven los datos buenos.
+
+31
+00:03:53,572 --> 00:03:56,913
+Después, dónde se escribe primero cada cosa: su sistema de registro.
+
+32
+00:03:58,013 --> 00:04:04,159
+Estudiantes, inscripciones y carreras se escriben en el sistema de estudiantes. RR. HH. y Finanzas llevan los suyos.
+
+33
+00:04:05,459 --> 00:04:11,786
+La plataforma de datos guarda copias, para leer y contar. Una copia es útil, pero nunca decide.
+
+34
+00:04:12,986 --> 00:04:17,522
+Cuando no coinciden, gana el registro, y un error se corrige donde se escribió.
+
+35
+00:04:20,622 --> 00:04:27,273
+Por último, qué significa cada palabra: el glosario de negocio. Cada término tiene una definición, y un dueño que la decide.
+
+36
+00:04:28,373 --> 00:04:32,725
+Un término se decide primero allí, y el modelo lo copia, palabra por palabra.
+
+37
+00:04:33,925 --> 00:04:37,411
+Busca las palabras del boceto, y dos de ellas no son de la universidad.
+
+38
+00:04:38,511 --> 00:04:46,222
+La oficina de registro habla de ofertas de unidad, no de clases: una unidad dictada en un semestre, presencial, en línea o ambas.
+
+39
+00:04:47,722 --> 00:04:53,009
+Y de periodos lectivos, no de periodos a secas: Planificación cuenta por su fecha de corte, para el gobierno.
+
+40
+00:04:54,309 --> 00:04:59,069
+Los dueños deciden las palabras, los responsables de datos las escriben, y el equipo de datos construye con ellas.
+
+41
+00:05:01,569 --> 00:05:07,052
+Ahora cruza los dos mapas, como la urdimbre y la trama: lo que hace la universidad, y lo que necesita saber.
+
+42
+00:05:08,352 --> 00:05:16,028
+Cada cruce dice quién crea una cosa, y quién solo la lee: aprendizaje y enseñanza crea las inscripciones; Planificación las lee.
+
+43
+00:05:17,528 --> 00:05:20,829
+Un creador para cada cosa; tantos lectores como la necesiten.
+
+44
+00:05:21,529 --> 00:05:26,242
+Ahora el boceto cuelga del mapa. Cada caja tiene un dueño, una casa y un significado.
+
+45
+00:05:27,742 --> 00:05:33,791
+Todas menos dos: la clase, cuya palabra no es la de la universidad, y el periodo, cuya fecha comparten dos áreas.
+
+46
+00:05:38,491 --> 00:05:41,922
+Y cuando llega una pregunta nueva, el mapa dice dónde empieza el trabajo.
+
+47
+00:05:43,022 --> 00:05:49,931
+Un ticket nombra la pregunta. El mapa encuentra sus cosas, sus dueños y sus registros. El glosario da las palabras.
+
+48
+00:05:51,431 --> 00:05:56,684
+Un contrato fija la forma, y solo entonces se construye el modelo, a partir de lo que ya existe.
+
+49
+00:05:59,584 --> 00:06:05,779
+Con los dos registros, la corte podía asignar un campo y fijar un impuesto, porque cada uno tenía una tarea y un guardián.
+
+50
+00:06:06,479 --> 00:06:13,038
+El mapa de la universidad hace lo mismo con sus datos: cuando un número está mal, todos saben qué registro revisar.
+
+51
+00:06:14,338 --> 00:06:19,949
+El mapa dice dónde vive cada caja. No dice que las cajas estén bien. Eso es la próxima película.
+
+52
+00:06:21,249 --> 00:06:22,794
+Primero el mapa, luego el modelo.

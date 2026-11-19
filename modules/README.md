@@ -382,6 +382,8 @@ Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept
 - [Deleted means deleted](../films/kept-for-a-reason/4-deleted-means-deleted/) — `deleted-means-deleted`
 - [A person asks](../films/kept-for-a-reason/5-a-person-asks/) — `a-person-asks`
 
+Labs and assessments: [site/assets/kept-for-a-reason/learn.en.js](../site/assets/kept-for-a-reason/learn.en.js), [site/assets/kept-for-a-reason/learn.es.js](../site/assets/kept-for-a-reason/learn.es.js)
+
 ## AI agents in data work
 
 Module: `ai-agents` · [metadata](ai-agents/module.json)

@@ -291,14 +291,14 @@ for wd, m in (('Measure', F4), ('read', A4), ('find', C5)):
 chord((F2, F3, C4, A4, C5), vc('breath', 0.4), 0.6, step=0.2, ring=4.2, until=END)
 
 # 2. Management, for this work: the university, a year from now. Helena comes in: one C. Carmen's marker on the board, a row at a time,
-#    and B flat major, a plan, as she writes the dates and plans a leader keeps; the cross on hours and tickets per person. July: the
+#    and B flat major, a plan, as she writes that a leader measures; the cross on hours and tickets per person. July: the
 #    card, and Helena's marker as she writes the team's page; each pair joined, a blade that rings with a low one that stops
 LV[0] = 0.9
 gw = lambda lid, word, off=0: W('manage', lid, word, off)
 gc = lambda lid, off=0: G('manage', lid, off)
 blade(C4, gw('uni', 'Helena', 0.2), 0.42, None, ring=1.4)
 written('A', marker, 0.004)
-chord((Bb3, D4, F4), stroke('A', '+ dates, plans')['t0'] + 0.2, 0.42, step=0.13, ring=1.6)
+chord((Bb3, D4, F4), stroke('A', 'a leader measures')['t0'] + 0.2, 0.42, step=0.13, ring=1.6)
 k = stroke('A', 'cross', True); ticked(k['t0'], 0.004, px(k['x']) * 0.5, marker)
 card(gc('page', 0.1), 0.0035, px(1550))
 written('B', marker, 0.004)
@@ -400,7 +400,7 @@ chord((F2, A3, F4), mw('back', 'fixed', 0.3), 0.42, step=0.16, ring=1.8)
 for wd, m in (('measured', F4), ('read', A4), ('fixed', C5)):
     blade(m, mw('helena', wd, 0.0), 0.38, px(1000) * 0.4, ring=1.0)
 written('N4', pen, 0.0045)
-k = stroke('N4', 'with its partner')
+k = stroke('N4', 'Pair each measure')
 pair(C4, F2, k['t0'], 0.4, ring=1.3, pan=px(k['x']) * 0.3)
 card(mc('next', 0.4), 0.0035, px(370))
 mark(mw('end', 'together', 0.2), 0.5, ring=1.5)

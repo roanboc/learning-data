@@ -299,8 +299,8 @@ window.LD_ROUTE = {
      "href": "model-the-business/",
      "poster": "the-map-behind-the-sketch-poster.jpg",
      "kicker": "Series · 2 films",
-     "len": "12 min",
-     "min": 12.0,
+     "len": "14 min",
+     "min": 14.0,
      "films": [
       "ld-the-map-behind-the-sketch",
       "ld3"

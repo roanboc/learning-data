@@ -46,6 +46,11 @@ It lists:
   moment another ends, far from it: pace the page's rows (PK.pace(ctx, null, rows));
 - no key ideas written by hand: in the whole film nobody explains at a board (PK.teach) and nobody keeps a page of notes
   (PK.notes). A film goes between its people and its key ideas: an idea that is a label on a scene is lost in it;
+- a board or a page that is only writing: one of the film's people explains at a board seen close (PK.teach), or keeps a page of
+  notes (PK.notes), and nothing on it is drawn as a designer would draw it (PK.sk.drawn: a ribbon, portraits, icons, a chart).
+  The author found such boards and pages "too plain, generally just writing" (18 November 2026): draw the board or the page
+  almost done, and let the hand add the last words (the kit's README, Designed boards and pages). A board or a page of a story's
+  own folk, who are rows of their own, not the film's cast, is exempt: it is as plain as its time;
 - one place only: fewer than PLACES places in the film;
 - a hair style that can't turn: a cap with no turn, hair down the back with no backT, or their two rows of unequal length;
 - an arm across the face: the near arm, which the kit draws over the head, lies over FACE_N or more of the eyes, the nose and the
@@ -111,9 +116,9 @@ PK.watch=r=>{const c=r.ctx,m=c.getTransform(),k=Math.hypot(m.a,m.b),a=c.globalAl
   if(r.solid){if(H.on){const p=at(m,r.at[0],r.at[1]),q=at(m,r.at[2],r.at[3]);add(c.canvas,{k:"S",name:String(r.solid),place:H.place,x0:p[0],y0:p[1],x1:q[0],y1:q[1],g:at(m,r.at[0],r.ground==null?r.at[3]:r.ground)[1],a});}return;}
   if(r.box){if(H.on){const p=at(m,r.box[0],r.box[1]),q=at(m,r.box[0]+r.box[2],r.box[1]+r.box[3]);add(c.canvas,{k:"B",x0:p[0],y0:p[1],x1:q[0],y1:q[1],a});}return;}
   // the notes someone is writing (PK.notes), and a chat or a call on show (PK.chat, PK.call): that they are in the picture
-  if(r.note||r.talk){if(H.on)add(c.canvas,{k:r.note?"N":"K",who:r.who||r.talk,edge:r.edge,tip:r.tip?at(m,r.tip[0],r.tip[1]):null,a});return;}
+  if(r.note||r.talk){if(H.on)add(c.canvas,{k:r.note?"N":"K",who:r.who||r.talk,edge:r.edge,tip:r.tip?at(m,r.tip[0],r.tip[1]):null,plain:!!r.plain,a});return;}
   // whoever explains at a board (PK.teach): whether they stand in front of its words, and the lines they can't reach in time
-  if(r.teach){if(H.on)add(c.canvas,{k:"T",who:r.teach,over:r.over,late:r.late,lag:r.lag,edge:r.edge,a});return;}
+  if(r.teach){if(H.on)add(c.canvas,{k:"T",who:r.teach,over:r.over,late:r.late,lag:r.lag,edge:r.edge,plain:!!r.plain,a});return;}
   if(r.part!=="lower"){c.save();c.globalAlpha=a;window.ag_person(c,r.who,r.x,r.floor,r.h/1000);c.restore();}
   if(H.on){const f=at(m,r.x,r.floor),hc=at(m,r.hc[0],r.hc[1]);
     add(c.canvas,H.last={k:"P",who:r.who,kid:r.kid,place:H.place,wx:r.x,wf:r.floor,x:f[0],y:f[1],h:r.h*k,hx:hc[0],hy:hc[1],hh:r.hh*k,flip:r.flip,part:r.part,mode:r.mode,pose:r.pose,reach:r.reach,at:r.at,hold:r.hold,
@@ -152,9 +157,10 @@ const info=filmInfo().scenes,when=f=>{const T=f/30,i=sceneIndex(T);return info[i
 const F=[],EDGES=new Map();
 for(let f=0;f/30<TL.total;f++){H.pend=new Map();H.on=true;mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";mx.clearRect(0,0,192,108);
   try{renderFrame(mx,S,f/30);}catch(e){}
-  H.on=false;const R=H.pend.get(main)||[],P=[],B=[],N=[],K=[],TB=[],SO=[];let tip=null,nth=0;
+  H.on=false;const R=H.pend.get(main)||[],P=[],B=[],N=[],K=[],TB=[],SO=[],PL=[];let tip=null,nth=0;
   for(const r of R){nth++;if(r.a<0.05)continue;
     if(r.a>=0.5)for(const e of r.edge||[]){const key=(r.k==="T"?"board":"page")+"|"+e.s;if(!EDGES.has(key))EDGES.set(key,{f,on:r.k==="T"?"board":"page",s:e.s,room:e.room});}
+    if((r.k==="T"||r.k==="N")&&r.plain&&r.a>=0.5)PL.push((r.k==="T"?"board|":"page|")+r.who);
     if(r.k==="T"){if(r.a>=0.5)TB.push(r);}
     else if(r.k==="N"||r.k==="K"){if(r.a>=0.5)(r.k==="N"?N:K).push(r.who);if(r.k==="N"&&r.tip&&r.a>=0.5)tip=[r.tip[0]/S,r.tip[1]/S];}
     else if(r.k==="B")B.push({x0:Math.min(r.x0,r.x1)/S,y0:Math.min(r.y0,r.y1)/S,x1:Math.max(r.x0,r.x1)/S,y1:Math.max(r.y0,r.y1)/S,a:r.a});
@@ -164,7 +170,7 @@ for(let f=0;f/30<TL.total;f++){H.pend=new Map();H.on=true;mx.setTransform(1,0,0,
   // someone drawn in two halves (behind a desk) is one person
   const G=[];for(const p of P){const g=G.find(q=>q.who===p.who&&q.place===p.place&&Math.abs(q.x-p.x)<6&&Math.abs(q.y-p.y)<6&&Math.abs(q.a-p.a)<0.02&&!q.parts.includes(p.part));
     if(g){g.parts.push(p.part);if(p.part!=="lower")Object.assign(g,p,{parts:g.parts});}else G.push(Object.assign({},p,{parts:[p.part]}));}
-  F.push({sc:sceneIndex(f/30),P:G,B,N,K,TB,SO,tip});}
+  F.push({sc:sceneIndex(f/30),P:G,B,N,K,TB,SO,PL,tip});}
 const seen=p=>p.a>=0.5,inView=p=>p.hx>0&&p.hx<1920&&p.hy>0&&p.hy<1080,probs=[];
 const runs=(hit,min,say)=>{let s=-1;for(let i=0;i<=F.length;i++){const h=i<F.length&&hit(i);if(h&&s<0)s=i;if(!h&&s>=0){if(i-s>=min)probs.push(say(s,i-s));s=-1;}}};
 // 2. follow each person from frame to frame, while they stay in one room and move on the picture as a body can (the nearest first):
@@ -272,6 +278,10 @@ runs(i=>hides(i).length>0,o.hideS*30,(s,n)=>({f:s,s:[...new Set(hides(s))].join(
 // the hand that writes in a notebook: never thrown across the page in one frame
 {const dT=i=>i>0&&i<F.length&&F[i].tip&&F[i-1].tip?Math.hypot(F[i].tip[0]-F[i-1].tip[0],F[i].tip[1]-F[i-1].tip[1]):0;
   for(let i=1;i<F.length;i++){const d=dT(i);if(d>=o.hop&&dT(i-1)<d/3&&dT(i+1)<d/3)probs.push({f:i,s:"the hand over the notebook jumps "+Math.round(d)+" px in one frame: pace the page's rows (PK.pace(ctx, null, rows))"});}}
+// a board or a page that is only writing: once for each chapter, surface and writer
+{const said=new Set();F.forEach((fr,i)=>{for(const e of fr.PL){const key=fr.sc+"|"+e;if(said.has(key))continue;said.add(key);const [on,who]=e.split("|");
+  probs.push({f:i,k:"plain",s:on==="board"?"the board "+who+" explains at is only writing: draw it as a designer would (PK.sk.drawn: a ribbon, portraits, icons, a chart), almost done, and let "+who+" add the last words"
+    :who+"'s page of notes is only writing: sketch it as a designer would (PK.sk.drawn: a heading on a band, boxes with icons and portraits, a sticky note), almost done, and let the hand add the last words"});}});}
 // a board's or a page's rows, each inside it
 for(const e of EDGES.values())if(e.room<o.edge)probs.push({f:e.f,s:"\""+e.s+"\" is written "+(e.room<0?(-e.room).toFixed(0)+" px past the "+e.on+"'s edge":"only "+e.room.toFixed(0)+" px from the "+e.on+"'s edge")+": start it further left, shorten it, or write it smaller"});
 // 4. each chapter: a person in view most of the time, or the notes one of them is writing; and a person themselves for a good part
@@ -305,14 +315,15 @@ def watch(pg):
     pg.evaluate(HOOK)
 
 
-LATER_KINDS = ('face', 'high', 'short', 'behind', 'order', 'solid')
+LATER_KINDS = ('face', 'high', 'short', 'behind', 'order', 'solid', 'plain')
 
 
 def later():
     """What this film still has to put right: site-tools/people_later.json, {film key: [[kind, chapter id], ...]}, the film's key as
     its release.json has it. The checks on arms and on who is in front of whom came on 18 November 2026, after four films were
     drawn: what those films had then is listed there and only reported, and each film leaves the list with its fix. Only those
-    checks' findings (LATER_KINDS) can be put off."""
+    checks' findings (LATER_KINDS) can be put off. The check on boards and pages that are only writing came on 19 November 2026,
+    when every film drawn with the kit had them: its rows name no chapter but "*", the whole film."""
     import json
     try:
         import lang
@@ -339,13 +350,16 @@ def check(pg):
             % (r['people'], r['n'], r['places'], r['faces'], '' if r['faces'] == 1 else 's', r['chats'], r['calls'],
                r['boards'], '' if r['boards'] == 1 else 's', r['pages'], r['share']))
     known, off = later(), []
-    now = [l for k, c, l in r['probs'] if (k, c) not in known]
-    old = [l for k, c, l in r['probs'] if (k, c) in known]
+    put = lambda k, c: (k, c) in known or (k, '*') in known
+    now = [l for k, c, l in r['probs'] if not put(k, c)]
+    old = [l for k, c, l in r['probs'] if put(k, c)]
     if old:
         off.append('  known and still to put right (site-tools/people_later.json), %d:' % len(old))
         off.extend('    ' + l for l in old)
-    for k, c in sorted(known - {(k, c) for k, c, l in r['probs']}, key=lambda e: (e[1], e[0])):
-        off.append('  (put right now) chapter %s has nothing of the kind "%s" left: take it off this film\'s list in site-tools/people_later.json' % (c, k))
+    found = {(k, c) for k, c, l in r['probs']} | {(k, '*') for k, c, l in r['probs']}
+    for k, c in sorted(known - found, key=lambda e: (e[1], e[0])):
+        off.append('  (put right now) %s has nothing of the kind "%s" left: take it off this film\'s list in site-tools/people_later.json'
+                   % ('the film' if c == '*' else 'chapter ' + c, k))
     return ('\n'.join([head] + off), now)
 
 

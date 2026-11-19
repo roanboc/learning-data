@@ -110,6 +110,8 @@ Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/docu
 - [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 - [Ideas that last, features you test](../films/documents-as-data/2-ideas-that-last/) — `ideas-that-last`
 
+Labs and assessments: [site/assets/documents-as-data/learn.en.js](../site/assets/documents-as-data/learn.en.js), [site/assets/documents-as-data/learn.es.js](../site/assets/documents-as-data/learn.es.js)
+
 ## Analytics engineering
 
 Module: `analytics-engineering` · [metadata](analytics-engineering/module.json)

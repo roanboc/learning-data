@@ -62,5 +62,11 @@
       "Construye el proyecto de datos",
       "Jun Park, que convierte lo que extraen las funciones en tablas probadas"
     ]
-  ]
+  ],
+  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: check what an agent reads in documents, and take an idea round the loop until it lasts.",
+  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: revisa lo que un agente lee en documentos, y lleva una idea por el ciclo hasta que dure.",
+  "quiz_lead": "{quiz} situations from both films, about documents as data and ideas that last. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
+  "quiz_lead_es": "{quiz} situaciones de las dos películas, sobre documentos como datos e ideas que duran. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

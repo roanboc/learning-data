@@ -357,6 +357,9 @@ if(app.id==="series-quiz"){app.textContent="";const QS=L.qs,ans=get("quiz",{})||
 
 /* ---------- the scenarios' pictures: one for each film's situations ---------- */
 // Each draws the situation, not its answer; once it's answered (S.done), its key line is drawn in, in gold
+/* ---------- the scenarios' pictures: one for each film's situations ---------- */
+// Each draws the situation, not its answer; once it's answered (S.done), its key line is drawn in, in gold
+const PK=L.pics,GO=(S,now)=>S.done?eo(since(now,S.done)/700):0;
 // one list, and the four uses around it, each with its own level
 VIS.uses=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.brass);const m=12,t=GO(S,now),lw=Math.min(260,o.lw-m*2);chip(ctx,(o.lw-lw)/2,12,lw,36,PK.uses.list,K.cream,{size:13.5,glow:t>0?14:6});
   const n=PK.uses.uses.length,w=(o.lw-m*2-(n-1)*6)/n;PK.uses.uses.forEach((s,i)=>{const x=m+i*(w+6);arrow(ctx,o.lw/2,50,x+w/2,96,t>0?K.gold:K.soft,0.8,{head:6,dash:t>=1?null:[4,4]});chip(ctx,x,100,w,40,s,K.brass,{size:12.5});});

@@ -22,6 +22,11 @@ Source: [films/more-than-a-platform](../films/more-than-a-platform/) · Portal: 
 
 - [More than a platform](../films/more-than-a-platform/1-more-than-a-platform/) — `more-than-a-platform`
 
+  Labs and assessments: [learn.en.js](../site/assets/more-than-a-platform/learn.en.js), [learn.es.js](../site/assets/more-than-a-platform/learn.es.js)
+
+
+Labs and assessments: [site/assets/more-than-a-platform/learn.en.js](../site/assets/more-than-a-platform/learn.en.js), [site/assets/more-than-a-platform/learn.es.js](../site/assets/more-than-a-platform/learn.es.js)
+
 ## Data modelling
 
 Module: `data-modelling` · [metadata](data-modelling/module.json)

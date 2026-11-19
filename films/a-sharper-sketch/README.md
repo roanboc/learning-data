@@ -1,29 +1,30 @@
 # A Sharper Sketch
 
-A 5½-minute film from Learning Data about data modelling. Two trusted numbers disagree about how many students were enrolled in Data Science 101 on census date. To find out why, the film goes back to the sketch from *The Inner Life of Data*, calls it what it was, an oversimplification, and sharpens it one question at a time, checking each change against a reference model. It notes that MortarCAPS (MCDS) is the standard many universities actually use, and checks against TCSI, one of the choices, because it is public. It is written for anyone aged 14 and up, with nothing a data modeller would need to correct, and it is about modelling only: what the model says, not how the pipelines build it.
+A 7½-minute film from Learning Data about data modelling, film 2 of 2 in [Model the business](../model-the-business/README.md), after *The map behind the sketch*. It opens in China in 1391, on the four columns of the Ming household registers: what each household held, what came in, what went out, and what it holds now. Then two trusted numbers disagree about how many students were enrolled in Data Science 101 on census date. To find out why, the film goes back to the sketch from *The Inner Life of Data*, now on the university's map, calls it what it is, an oversimplification, and sharpens it one question at a time, checking each change against a reference model. It notes that MortarCAPS (MCDS) is the standard many universities actually use, and checks against TCSI, one of the choices, because it is public. It is written for anyone aged 14 and up, with nothing a data modeller would need to correct, and it is about modelling only: what the model says, not how the pipelines build it.
 
 - **Watch, with labs and scenarios:** [https://data.learn-all.org/sketch/](https://data.learn-all.org/sketch/)
 - **In Spanish, around the English film:** [https://data.learn-all.org/es/sketch/](https://data.learn-all.org/es/sketch/)
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/a-sharper-sketch.mp4](https://github.com/roanboc/learning-data/releases/latest/download/a-sharper-sketch.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Treatment:** [treatment.md](treatment.md)
-- **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt)
+- **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt), in Spanish [es.vtt](captions/es.vtt), [es.srt](captions/es.srt)
 
 ## Chapters
 
 | Time | Chapter |
 |---|---|
-| 0:00 | The sketch we drew |
-| 0:25 | Two numbers |
-| 1:39 | What is a class? |
-| 2:23 | Whose census date? |
-| 2:51 | One student, two courses |
-| 3:26 | Enrolled when? |
-| 3:54 | Three levels of precision |
-| 4:34 | Check, adopt, extend, record |
-| 5:09 | Pull back |
+| 0:00 | Four columns |
+| 1:16 | The sketch on the map |
+| 1:44 | Two numbers |
+| 2:58 | What is a class? |
+| 3:42 | Whose census date? |
+| 4:11 | One student, two courses |
+| 4:45 | Enrolled when? |
+| 5:22 | Three levels of precision |
+| 6:02 | Check, adopt, extend, record |
+| 6:38 | Pull back |
 
-To link to a chapter, add `#t=` and its start in seconds, rounded up, to the page's address: for example [`/sketch/#t=207`](https://data.learn-all.org/sketch/#t=207) for *Enrolled when?* (it starts at 206.2 s). Rounding down lands on the last frame of the chapter before.
+To link to a chapter, add `#t=` and its start in seconds, rounded up, to the page's address: for example [`/sketch/#t=286`](https://data.learn-all.org/sketch/#t=286) for *Enrolled when?* (it starts at 285.7 s). Rounding down lands on the last frame of the chapter before.
 
 ## What it teaches
 

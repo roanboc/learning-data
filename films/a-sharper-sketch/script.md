@@ -1,16 +1,19 @@
 # A Sharper Sketch: script
 
-*A Learning Data film about data modelling, v1. About 5 minutes 39 seconds. English; the site also has a Spanish page around it. Treatment: [treatment.md](treatment.md).*
+*A Learning Data film about data modelling, v2 (19 November 2026). About 7 minutes 33 seconds. Film 2 of 2 in [Model the business](../model-the-business/proposal.md), after *The map behind the sketch*. English; the site also has a Spanish page around it, with Spanish captions. Treatment: [treatment.md](treatment.md).*
 
 ## The promise
 
-A newcomer understands it, and a data modeller agrees with it. This film is about modelling only: what the model says, not how the pipelines build it. It shows why the sketch from *The Inner Life of Data* was an oversimplification, how to sharpen a model when a real question needs it, and the practice of checking a reference model, adopting it where it fits the business, extending it where it doesn't, and recording every difference.
+A newcomer understands it, and a data modeller agrees with it. This film is about modelling only: what the model says, not how the pipelines build it. It opens on its part of the series' story, the four columns of the Ming household registers, and closes on what that story didn't achieve. It shows why the sketch from *The Inner Life of Data*, placed on the university's map in *The map behind the sketch*, is still an oversimplification, how to sharpen a model when a real question needs it, and the practice of checking a reference model, adopting it where it fits the business, extending it where it doesn't, and recording every difference.
 
 ## What each object stands for
 
 | Object | Stands for |
 |---|---|
+| A household's entry in four columns: held, came in, went out, holds now | A number that keeps its story: what was there, what changed, and what is there now |
+| The white registers | The side copies people keep for the real work when a model doesn't fit the business |
 | Blue boxes and crow's feet | The university's conceptual model, the sketch from *The Inner Life of Data* |
+| Pins on the sketch: for, owner, home, meaning | Where each box sits on the university's map, as *The map behind the sketch* placed it |
 | Warm, dashed boxes on tracing paper | The reference model, TCSI |
 | Blue pin | A concept adopted from the reference |
 | Amber pin | An extension the university adds |
@@ -20,25 +23,47 @@ A newcomer understands it, and a data modeller agrees with it. This film is abou
 | Tables in mono type | The physical model |
 | The fit register | The record of every difference from the reference, and why |
 
+## Opening story
+
+The series follows one true story, the registers of the early Ming (the series' [proposal](../model-the-business/proposal.md), checked against the *Ming History*). *The map behind the sketch* told its first part: one register for each thing. This film tells the second: the household registers, made again every ten years, kept each number's story in four columns. As the last film of a series that follows one story, it closes on what the story didn't achieve.
+
+| Beat | The line that says it |
+|---|---|
+| Scenario | "China, 1391. Ten years after the first Yellow Registers, the Ming court has them made again, as it will every ten years." "In ten years, a village changes: children are born, parents die, fields are bought and sold." |
+| Problem | "But a new total can't show what changed." "A household with less land might have sold a field, or hidden it under another name." "And a hidden field's tax falls on the families who can't hide theirs." "The court needed each number to show where it came from." |
+| Solution | "So each household's entry has four columns: what it held ten years ago, what came in, what went out, and what it holds now." "The four must add up: a field that leaves one household's entry arrives in another's." "Each register is checked against the one before, and one that doesn't add up is sent back to be made again." |
+| Benefits | "So each number comes with its story: anyone can see what changed, and why." Then the same for data: "A data model has the same need: every number should say what it counts, and on which day." |
+| Back to the story | In *Enrolled when?*, the census count gets its four columns: "Like the four columns: what was there on census date, what came in, what went out, and what's there today." And at the end, what the story didn't achieve, and its lesson for data: "The Yellow Registers didn't. Made every ten years, for taxes paid every year, they fell behind." "By the late Ming, counties kept white registers, written each year, for the real work. The yellow ones became a formality." "A model that doesn't fit the business ends the same way: kept for show, while side copies do the work." |
+
+Tested as AGENTS.md asks: from the narration alone, the problem is that a new total hid what changed, so a field sold and a field hidden under another name looked the same, and the hidden field's tax fell on the families who couldn't hide theirs; the fix gave every number its story, so anyone could see what changed and why. The sources give no figure for what the four columns achieved, so the film gives none. It says what the *Ming History* and the studies below say and no more: the white registers are the counties' own, kept for the taxes they collected, and *by the late Ming* doesn't say when the first was written.
+
 ## Script
 
-### Scene 0 · The sketch we drew · 0:00–0:25
+### Scene 0 · Four columns · 0:00–1:16
 
-**Narration.** In The Inner Life of Data, we drew a sketch of the university: a student, a class, an enrolment, a term and a course. It was an oversimplification. Good enough to start, not good enough to count. That's normal. Every model starts simple, and gets sharper when a real question needs it.
+**Narration.** China, 1391. Ten years after the first Yellow Registers, the Ming court has them made again, as it will every ten years. In ten years, a village changes: children are born, parents die, fields are bought and sold. But a new total can't show what changed. A household with less land might have sold a field, or hidden it under another name. And a hidden field's tax falls on the families who can't hide theirs. The court needed each number to show where it came from. So each household's entry has four columns: what it held ten years ago, what came in, what went out, and what it holds now. The four must add up: a field that leaves one household's entry arrives in another's. Each register is checked against the one before, and one that doesn't add up is sent back to be made again. So each number comes with its story: anyone can see what changed, and why. A data model has the same need: every number should say what it counts, and on which day.
 
-**Picture.** Title card: *A Sharper Sketch*, “When a data model needs more precision”. The sketch from *The Inner Life of Data* draws itself, box by box, as the narration names them: Student, Class, Enrolment, Term (census date) and Course. A version stamp reads *sketch v1*. Three amber questions appear on it: what is a class? one date for all? only one course? Below: “good enough to start” in green, “not good enough to count” in red. Breather: new records arrive and settle into the simple sketch.
+**Picture.** The series' title card over a village of the early Ming, drawn warm, on paper: *Model the business*, *A Sharper Sketch*, “When a data model needs more precision”. “China, 1391”: the registers are made again, every ten years. In the village, a field is sold. One household's tally reads “5 fields, now 4”: what changed? Sold, or hidden? “The burden” falls on a poorer house. “Where did each number come from?” A register opens on two households' entries, in four columns: held, came in, went out, holds now. The seller's entry adds up, 5 + 0 − 1 = 4, and the buyer's, 3 + 1 − 0 = 4: the field that went out of one came in to the other. The 1391 register lies beside the one from 1381, and what each household held is what the last one holds; a third register that doesn't add up is sent back. “What changed, and why.” Then the columns gain the data model's two questions: what it counts, and on which day.
 
-**On screen.** Conceptual model · the sketch we drew · sketch v1 · good enough to start · not good enough to count
+**On screen.** Model the business · A Sharper Sketch · When a data model needs more precision · China, 1391 · the registers, made again · every ten years · sold · 5 fields, now 4 · what changed? · sold? · or hidden? · the burden · where did each number come from? · held · came in · went out · holds now · 3 + 1 − 0 = 4 · 5 + 0 − 1 = 4 · 1381 · 1391 · held = what the last one holds · sent back · what changed, and why · what it counts · on which day
 
-### Scene 1 · Two numbers · 0:25–1:39
+### Scene 1 · The sketch on the map · 1:16–1:44
 
-**Narration.** The day after census date, the Head of School asks Genie a simple question. How many students were enrolled in Data Science 101 on census date? Genie says 131. The certified census report says 118. Both come from clean data. Every test passed. The difference isn't in the data. It's in the meaning. So before we change anything, we ask a wider question: how does this kind of business generally work? In many industries, someone has already modelled it, and their model makes a good first template. Often there's more than one to choose from, so which one you pick, and why, matters too. TCSI could be one of the choices: it's public, and it describes the data Australian universities report to government. Many universities actually use MortarCAPS, the sector's own data standard. Here, we'll check our sketch against TCSI. It's a reference to check against, not a model to copy. We'll see where it fits our business, and where it doesn't.
+**Narration.** Our sketch of the university has a place on its map now: a student, a class, an enrolment, a term and a course. But the map says where each box lives. It doesn't say the boxes are right. It's an oversimplification: good enough to start, not good enough to count. That's normal. Every model starts simple, and gets sharper when a real question needs it.
+
+**Picture.** The sketch from *The Inner Life of Data* draws itself, box by box, as the narration names them: Student, Class, Enrolment, Term (census date) and Course. Each box takes the pins *The map behind the sketch* gave it: what it's for, its owner, its home and its meaning; Class and Term keep the two amber question marks that film left open. The pins fade: the map says where each box lives, not that the boxes are right. A version stamp reads *sketch v1*. Three amber questions appear on it: what is a class? one date for all? only one course? Below: “good enough to start” in green, “not good enough to count” in red. Breather: new records arrive and settle into the simple sketch.
+
+**On screen.** Conceptual model · the sketch, on the map · for · owner · home · meaning · sketch v1 · what is a class? · one date for all? · only one course? · good enough to start · not good enough to count
+
+### Scene 2 · Two numbers · 1:44–2:58
+
+**Narration.** A few weeks after census date, the Head of School asks Genie a simple question. How many students were enrolled in Data Science 101 on census date? Genie says 131. The certified census report says 118. Both come from clean data. Every test passed. The difference isn't in the data. It's in the meaning. So before we change anything, we ask a wider question: how does this kind of business generally work? In many industries, someone has already modelled it, and their model makes a good first template. Often there's more than one to choose from, so which one you pick, and why, matters too. TCSI could be one of the choices: it's public, and it describes the data Australian universities report to government. Many universities actually use MortarCAPS, the sector's own data standard. Here, we'll check our sketch against TCSI. It's a reference to check against, not a model to copy. We'll see where it fits our business, and where it doesn't.
 
 **Picture.** The Head of School's question appears in a bubble beside Genie. Two cards: Genie, 131, counted from the lakehouse; Census report, 118, sent to government, certified. Both show “every test passed”. The cards fade and the simple sketch returns, with a question over it: how does this kind of business generally work? A row of published industry models appears, a first template: banking, insurance, retail, health, higher education. Then, for higher education, several candidates: TCSI (Australia), HESA Data Futures (United Kingdom), CEDS (United States) and MCDS (a sector standard): which one, and why? TCSI lights up as one of the choices: public, and what universities report. Then MCDS lights up: widely used by universities. A sheet of tracing paper slides over the sketch: the reference model, TCSI, drawn in warm ink. “A reference to check against, not a model to copy.” A comparison appears in the corner: Genie 131, Census report 118, gap 13. Breather: the reference glows.
 
 **On screen.** Head of School · Genie 131 · Census report 118 · certified · every test passed · same data, different meaning · how does this kind of business generally work? · published industry models: a first template · reference models for higher education: which one, and why? · one of the choices: TCSI, public, and what universities report · widely used by universities: MCDS · here we check against TCSI · Reference model · TCSI · a reference to check against, not a model to copy
 
-### Scene 2 · What is a class? · 1:39–2:23
+### Scene 3 · What is a class? · 2:58–3:42
 
 **Narration.** First question: what is a class? Lay the reference over our sketch, and it has no class at all. It has units of study, and enrolments in them. Our one box was hiding three things. The unit: Data Science 101, the subject itself. The offering: that unit, in one teaching period, at one campus. This is what students enrol in. And the class: the Tuesday 9 am tutorial, a place in the timetable. Genie counted places in tutorials, and some students sit in two. So say exactly what one row stands for. That's called the grain.
 
@@ -46,7 +71,7 @@ A newcomer understands it, and a data modeller agrees with it. This film is abou
 
 **On screen.** Unit · Unit offering · Class · from the reference · ours · one student, counted twice · grain: one row = one student in one unit offering · sketch v2 · draft
 
-### Scene 3 · Whose census date? · 2:23–2:51
+### Scene 4 · Whose census date? · 3:42–4:11
 
 **Narration.** Next: where does the census date live? Our sketch put it on the term: one date for everyone. The reference records it with each unit enrolment, because each unit of study has its own census date. A summer intensive of Data Science 101 has a census date weeks away from the semester's. Put each detail on the thing it truly describes. Here, we adopt the reference.
 
@@ -54,7 +79,7 @@ A newcomer understands it, and a data modeller agrees with it. This film is abou
 
 **On screen.** one date for everyone · census date, with each unit enrolment · 31 Mar · 20 Jan · adopted from the reference
 
-### Scene 4 · One student, two courses · 2:51–3:26
+### Scene 5 · One student, two courses · 4:11–4:45
 
 **Narration.** Now, two students appear twice in the count. Each is studying a double degree: data science, and business. Our sketch said a student belongs to one course. That's not how the university works. The reference already has the answer: a course admission. One student, in one course, from one start date. Each unit enrolment counts towards one course admission, so each student is counted once. When two things connect many to many, the link often deserves its own box.
 
@@ -62,15 +87,15 @@ A newcomer understands it, and a data modeller agrees with it. This film is abou
 
 **On screen.** double degree · one course only? · one student, one course, one start date · each student counted once · the link gets its own box
 
-### Scene 5 · Enrolled when? · 3:26–3:54
+### Scene 6 · Enrolled when? · 4:45–5:22
 
-**Narration.** Last question: enrolled when? Genie counted today. The census report counted on census date. Enrolments change. A student is waitlisted, then enrolled, and later withdraws. The reference keeps each enrolment's current status. We need its history, so we extend the model. Each change is kept with its date, and the census count becomes a snapshot of one day.
+**Narration.** Last question: enrolled when? Genie counted today. The census report counted on census date. Enrolments change. A student is waitlisted, then enrolled, and later withdraws. The reference keeps each enrolment's current status. We need its history, so we extend the model. Each change is kept with its date, and the census count becomes a snapshot of one day. Like the four columns: what was there on census date, what came in, what went out, and what's there today.
 
-**Picture.** Two cards: Genie counted on 26 Apr; the census report on 31 Mar. A strip of film shows one enrolment's story: waitlisted 3 Mar, enrolled 10 Mar, census date 31 Mar, withdrew 14 Apr. Unit enrolment reads “current status”; a Status change box (amber pin) appears beneath it. A flash: the census count is a snapshot on 31 Mar. The count reaches 118: match. Breather: changes keep arriving, each kept with its date.
+**Picture.** Two cards: Genie counted on 26 Apr; the census report on 31 Mar. A strip of film shows one enrolment's story: waitlisted 3 Mar, enrolled 10 Mar, census date 31 Mar, withdrew 14 Apr. Unit enrolment reads “current status”; a Status change box (amber pin) appears beneath it. A flash: the census count is a snapshot on 31 Mar. The count reaches 118: match. Breather: changes keep arriving, each kept with its date. Then, over the dimmed model, the register's four columns again, for one offering: 118 on census date, 31 Mar; 2 came in, late and approved; 1 went out, withdrew; 119 today, 26 Apr.
 
-**On screen.** Genie counted 26 Apr · Census report 31 Mar · waitlisted · enrolled · census date · withdrew · current status · ours: the history of each enrolment · census count: a snapshot on 31 Mar · match
+**On screen.** Genie counted 26 Apr · Census report 31 Mar · waitlisted · enrolled · census date · withdrew · current status · ours: the history of each enrolment · census count: a snapshot on 31 Mar · match · census date · came in · went out · today · 118 · +2 · −1 · 119 · late, approved · withdrew
 
-### Scene 6 · Three levels of precision · 3:54–4:34
+### Scene 7 · Three levels of precision · 5:22–6:02
 
 **Narration.** The sketch is sharper now. But it's still a sketch. This is the conceptual model: the things that matter, and how they connect, agreed with the business. Zoom in, and it becomes the logical model: what identifies each thing, its details, and how many of each. Zoom in again, and it becomes the physical model: the actual tables in the platform. Same meaning, three levels of detail. The business owns the first, engineers own the last, and all three must agree. How to build those tables is a story for another film.
 
@@ -78,7 +103,7 @@ A newcomer understands it, and a data modeller agrees with it. This film is abou
 
 **On screen.** Conceptual model · Logical model · Physical model · same meaning, three levels of detail · owned by the business · shared · owned by engineers · another film
 
-### Scene 7 · Check, adopt, extend, record · 4:34–5:09
+### Scene 8 · Check, adopt, extend, record · 6:02–6:38
 
 **Narration.** Lift the reference away, and you can see the whole fit. Check: before you invent something, look for it in a reference model. Adopt: where it fits the business, use its ideas and its words. Extend: where the business needs more, add it, in the same style. Record: write down every difference and why, so the next person knows what is standard and what is ours. A reference is a starting point, not a cage. Where the business is truly different, the business wins.
 
@@ -86,13 +111,14 @@ A newcomer understands it, and a data modeller agrees with it. This film is abou
 
 **On screen.** 1 Check · 2 Adopt · 3 Extend · 4 Record · Fit register · a starting point, not a cage
 
-### Scene 8 · Pull back · 5:09–5:38
+### Scene 9 · Pull back · 6:38–7:32
 
-**Narration.** The Head of School asks again. This time, Genie asks back: enrolled on census date, in the Semester 1 offering? Then it answers: 118, and shows how it counted. The sketch has a new version, and a note that says why it changed. It won't be the last. Models evolve: not often, but always. Check the reference. Fit it to the business.
+**Narration.** The Head of School asks again. This time, Genie asks back: enrolled on census date, in the Semester 1 offering? Then it answers: 118, and shows how it counted. The sketch has a new version, and a note that says why it changed. It won't be the last. Models evolve: not often, but always. The Yellow Registers didn't. Made every ten years, for taxes paid every year, they fell behind. By the late Ming, counties kept white registers, written each year, for the real work. The yellow ones became a formality. A model that doesn't fit the business ends the same way: kept for show, while side copies do the work. Check the reference. Fit it to the business.
 
-**Picture.** The Head of School asks again. Genie asks back, then answers 118, matching the census report, with how it counted: one row = one student in one unit offering; enrolled on census date, 31 Mar; each student counted once. The sketch returns with its note: sketch v2, what was added, why, and that it was checked against TCSI. A new question arrives: how do we count short courses and microcredentials? The stamp flickers: sketch v3? Black, then the tagline.
+**Picture.** The Head of School asks again. Genie asks back, then answers 118, matching the census report, with how it counted: one row = one student in one unit offering; enrolled on census date, 31 Mar; each student counted once. The sketch returns with its note: sketch v2, what was added, why, and that it was checked against TCSI. A new question arrives: how do we count short courses and microcredentials? The stamp flickers: sketch v3? Then the Ming village again, late in the dynasty: the yellow registers, made every ten years for taxes paid every year, fall behind; beside them, a county's white registers, written each year, do the real work, and the yellow ones are kept for show. Over the series' end card: “Check the reference. Fit it to the business.”
 
-**On screen.** How it counted · sketch v2 · A new question · sketch v3? · Check the reference. Fit it to the business. · A Sharper Sketch · Learning Data · Data modelling
+**On screen.** How it counted · sketch v2 · A new question · sketch v3? · every ten years · taxes: every year · fell behind · China, the late Ming · white registers: each year, for the real work · the yellow ones: a formality · kept for show · side copies do the work · Check the reference. Fit it to the business. · A Sharper Sketch · Model the business · Learning Data
+
 ## Changes from the treatment
 
 - The reference model gets its own introduction in scene 1: first ask how this kind of business generally works, then look for a published industry model as a first template, and check whether it fits. The reference is checked, not adopted automatically.
@@ -102,27 +128,35 @@ A newcomer understands it, and a data modeller agrees with it. This film is abou
 
 - Chapter 7 shows the four steps and the fit register, but not the dictionary of local words or governed code sets: they made the chapter too dense.
 - The film is in English only. On the site, a Spanish page (`site/es/sketch/`) introduces it, with Spanish chapter names and controls. The labs and scenarios proposed in the treatment are built: six labs at `site/sketch/labs/` and twelve scenarios at `site/sketch/scenarios/`, in English.
-- The film carries no number. The recap line names *The Inner Life of Data* ("In The Inner Life of Data, we drew a sketch of the university…"), the board reads "Conceptual model · the sketch we drew", and the end card reads "Learning Data · Data modelling". The line was re-voiced on 27 September 2026, which moved every later chapter by about 0.6 s.
+- The film carries no number. The recap line names *The Inner Life of Data* ("In The Inner Life of Data, we drew a sketch of the university…"), the board reads "Conceptual model · the sketch we drew", and the end card reads "Learning Data · Data modelling". The line was re-voiced on 27 September 2026, which moved every later chapter by about 0.6 s. (So it was until 19 November 2026: see below.)
+- 19 November 2026: the film becomes the second of *Model the business*, after *The map behind the sketch*. A new opening chapter, *Four columns*, tells its part of the series' story; the recap starts from the map *The map behind the sketch* placed the sketch on, and its board reads “Conceptual model · the sketch, on the map”; *Two numbers* starts a few weeks after census date; *Enrolled when?* comes back to the four columns; and the close says what the story didn't achieve. The title and end cards are the series' (*Model the business · Learning Data*). The score is made again to the rules every film now keeps: music under the opening story, then only at a turn, never a bed under the voice, and nothing pulses. The voice keeps every line it had; *Four columns* and *Check, adopt, extend, record* got a little more room, so no chapter is over 140 words a minute.
 
 ## Rigour sheet
 
-Checked on 26 September 2026. The university, people, dates and numbers are fictional.
+Checked on 26 September 2026, and the opening and the close on 19 November 2026. The university, people, dates and numbers are fictional; the Ming registers are history.
 
 | Scene | The real practice | What the picture simplifies |
 |---|---|---|
-| 0 · The sketch we drew | The conceptual model from *The Inner Life of Data*: Student 1–\* Enrolment \*–1 Class \*–1 Term (census date), and Student \*–1 Course. It merges unit, offering and class, puts one census date on the term, and allows one course per student. | The film calls it an oversimplification, and a normal first version. |
-| 1 · Two numbers | Numbers built from the same clean, tested data can disagree when they read the model differently. Several reference models exist for higher education, with different purposes, regions and scopes: TCSI (Australian government reporting), HESA Data Futures (UK regulatory reporting), CEDS (US common education data standards, public domain) and MCDS (MortarCAPS, the sector-owned standard that many universities actually use). The film uses TCSI, one of the choices, because it is public. TCSI is the Australian Government's collection of student data from higher education providers, published at tcsisupport.gov.au. | The 13-student gap is split across four causes for teaching; real gaps have fewer, messier causes. Genie stands for any tool that answers from the data. |
-| 2 · What is a class? | TCSI has units of study and unit enrolments; it has no timetabled class. Enrolment is to a unit in a teaching period; class allocation is a separate, institutional concept. Grain is what one row stands for. | TCSI identifies an offering by unit of study code and census date, rather than naming it; the film names it Unit offering, and records that as an extension. |
-| 3 · Whose census date? | TCSI element E489 is the unit of study census date, and it is part of what identifies each unit enrolment. Different offerings of a unit can have different census dates. | The film moves the census date to the unit offering. The dates 31 Mar and 20 Jan are illustrative. |
-| 4 · One student, two courses | A TCSI course admission is one student, one course and one commencement date (E313, E307, E534). Each unit enrolment links to a course admission and must count towards that course. | Double degrees are modelled differently across universities; some report one combined course. The film shows two. |
-| 5 · Enrolled when? | TCSI records a unit of study status (E355), which is amended, for example when a student withdraws. A history of changes, each with a date, lets the count be taken as a snapshot on census date. | Waitlisting is the university's own status, as in *Silent change*, not a TCSI code. Status change is an extension. |
-| 6 · Three levels of precision | Conceptual (things and relationships, for the business), logical (identifiers, attributes, cardinality) and physical (tables) models describe the same meaning at three levels of detail. | Two tables with a few columns stand for a full physical model. The star and the wide row are named only as shapes, for a later film. The conceptual sketches here carry crow's feet, as many teams draw them. *Meaning machines can read* (*One map, many views*) draws the conceptual model as a view of the architecture map instead, with named relationships and no counts, and leaves cardinality to the logical model; both conventions are common, and what matters is that the counts are decided in one place, and that a business rule's limit (up to four) stays a rule. |
-| 7 · Check, adopt, extend, record | Checking a published reference model, adopting it where it fits the business, extending it where it doesn't, and recording each difference is common practice. | The fit register shows four rows; a real one also records who decided and when. |
-| 8 · Pull back | Genie answering with its definition, and asking a clarifying question, stands for a governed definition used by any tool. | Models change rarely but continually: new questions, business changes and reference updates (TCSI publishes specifications for each reporting year). |
+| 0 · Four columns | The Yellow Registers were first made in 1381 and made again every ten years, so 1391 was the first remaking. The *Ming History* says each household's entry gave four columns: old holdings, new receipts, removals and actual (旧管、新收、开除、实在). A sale was written in both entries, so the tax went with the field. The county checked each register against the earlier ones before sending it on (Zhang 2008, p. 153); the court's officials checked them again for errors each year (*Ming History*); and a register found faulty was rejected and made again (Chinese Wikipedia, *黃冊*: 駁回重造). | The seller's and buyer's entries show fields only, with small round numbers; a real entry also lists the household's people, houses and animals, and the tax on each field. One village stands for the ten households of a *jia*. |
+| 1 · The sketch on the map | The conceptual model from *The Inner Life of Data*: Student 1–\* Enrolment \*–1 Class \*–1 Term (census date), and Student \*–1 Course. It merges unit, offering and class, puts one census date on the term, and allows one course per student. | The film calls it an oversimplification, and a normal first version. |
+| 2 · Two numbers | Numbers built from the same clean, tested data can disagree when they read the model differently. Several reference models exist for higher education, with different purposes, regions and scopes: TCSI (Australian government reporting), HESA Data Futures (UK regulatory reporting), CEDS (US common education data standards, public domain) and MCDS (MortarCAPS, the sector-owned standard that many universities actually use). The film uses TCSI, one of the choices, because it is public. TCSI is the Australian Government's collection of student data from higher education providers, published at tcsisupport.gov.au. | The 13-student gap is split across four causes for teaching; real gaps have fewer, messier causes. Genie stands for any tool that answers from the data. |
+| 3 · What is a class? | TCSI has units of study and unit enrolments; it has no timetabled class. Enrolment is to a unit in a teaching period; class allocation is a separate, institutional concept. Grain is what one row stands for. | TCSI identifies an offering by unit of study code and census date, rather than naming it; the film names it Unit offering, and records that as an extension. |
+| 4 · Whose census date? | TCSI element E489 is the unit of study census date, and it is part of what identifies each unit enrolment. Different offerings of a unit can have different census dates. | The film moves the census date to the unit offering. The dates 31 Mar and 20 Jan are illustrative. |
+| 5 · One student, two courses | A TCSI course admission is one student, one course and one commencement date (E313, E307, E534). Each unit enrolment links to a course admission and must count towards that course. | Double degrees are modelled differently across universities; some report one combined course. The film shows two. |
+| 6 · Enrolled when? | TCSI records a unit of study status (E355), which is amended, for example when a student withdraws. A history of changes, each with a date, lets the count be taken as a snapshot on census date. | Waitlisting is the university's own status, as in *Silent change*, not a TCSI code. Status change is an extension. |
+| 7 · Three levels of precision | Conceptual (things and relationships, for the business), logical (identifiers, attributes, cardinality) and physical (tables) models describe the same meaning at three levels of detail. | Two tables with a few columns stand for a full physical model. The star and the wide row are named only as shapes, for a later film. The conceptual sketches here carry crow's feet, as many teams draw them. *Meaning machines can read* (*One map, many views*) draws the conceptual model as a view of the architecture map instead, with named relationships and no counts, and leaves cardinality to the logical model; both conventions are common, and what matters is that the counts are decided in one place, and that a business rule's limit (up to four) stays a rule. |
+| 8 · Check, adopt, extend, record | Checking a published reference model, adopting it where it fits the business, extending it where it doesn't, and recording each difference is common practice. | The fit register shows four rows; a real one also records who decided and when. |
+| 9 · Pull back | Genie answering with its definition, and asking a clarifying question, stands for a governed definition used by any tool. The *Ming History* says that later the yellow registers were kept only for form, and those who collected taxes and set labour made their own register, the white register (其後黃冊只具文…曰白冊). Remade only every ten years, the yellow registers fell out of step with who held what; the counties' actual-collection registers, also called white registers, recorded each year's taxpayers and what they owed (Yang Guo'an 2018). | Models change rarely but continually: new questions, business changes and reference updates (TCSI publishes specifications for each reporting year). The close compresses two centuries into three lines, and *kept for show* stands for registers that were still made, sent and checked, while the taxes were set from the white ones. |
 
 ## Sources
 
-Checked on 26 September 2026.
+Checked on 26 September 2026; the registers on 19 November 2026.
+
+- *Ming History* (*Mingshi*), juan 77, *Shihuo* 1: the Yellow Registers (1381, made again every ten years), their four columns (舊管、新收、開除、實在), the checking of the registers, and the white register (其後黃冊只具文…曰白冊). Quoted with translations in the series' [proposal](../model-the-business/proposal.md).
+- Wenxian Zhang, “[The Yellow Register Archives of Imperial Ming China](https://muse.jhu.edu/article/237427)”, *Libraries & the Cultural Record* (now *Information & Culture*) 43, no. 2 (2008): 148–175: the archive at Houhu, and the county checking each register against the earlier ones before sending it on (p. 153).
+- Yang Guo'an (杨国安), “[账簿与权力：清代实征册与乡村基层赋税征收](https://www.sinoss.net/c/2018-12-03/527385.shtml)” (Ledgers and power: actual-collection registers and village tax collection in the Qing), *Guangming Daily*, 3 December 2018, p. 14: the yellow registers, remade only every ten years, fell out of step with reality, and the counties' actual-collection registers, also called white registers, did the real work.
+- [Yellow Registers](https://en.wikipedia.org/wiki/Yellow_Registers) (Wikipedia, and the sources it cites).
+- [黃冊](https://zh.wikipedia.org/wiki/%E9%BB%83%E5%86%8A) (Chinese Wikipedia): the four columns, 四柱式, and faulty registers rejected and made again (查到有問題的都會駁回重造).
 
 - [TCSI Support](https://www.tcsisupport.gov.au/)
 - [E489 Unit of study census date](https://www.tcsisupport.gov.au/element/489)

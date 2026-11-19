@@ -50,12 +50,12 @@ THEMES = ["light", "dark"]
 PUBLIC = "https://data.learn-all.org/"
 # film pages: their chapter count, and the Spanish chapter names of the English films on Spanish pages
 FILMS = {
-    "": 11, "es/": 11, "sketch/": 9, "es/sketch/": 9,
+    "": 11, "es/": 11, "sketch/": 10, "es/sketch/": 10,
     "when-things-go-wrong/silent-change/": 11, "es/when-things-go-wrong/silent-change/": 11,
     "when-things-go-wrong/too-good-to-be-true/": 8, "es/when-things-go-wrong/too-good-to-be-true/": 8,
 }
 ES_NAMES = {
-    "es/sketch/": {"drawn": "El boceto que dibujamos", "two": "Dos cifras", "cls": "¿Qué es una clase?",
+    "es/sketch/": {"cols": "Cuatro columnas", "drawn": "El boceto en el mapa", "two": "Dos cifras", "cls": "¿Qué es una clase?",
                    "census": "¿La fecha de corte de quién?", "courses": "Un estudiante, dos carreras",
                    "time": "¿Inscrito cuándo?", "levels": "Tres niveles de precisión",
                    "fit": "Revisar, adoptar, extender, registrar", "end": "Vista completa"},
@@ -1553,7 +1553,7 @@ async def check_drawn(run):
             bad = sorted({t for t in texts if NUM.search(t)})
             expect(sec, not bad, f"/{key}: the film draws {bad}")
             if key == "sketch/":
-                for want in ("Conceptual model · the sketch we drew", "Learning Data · Data modelling"):
+                for want in ("Conceptual model · the sketch, on the map", "Model the business · Learning Data"):
                     expect(sec, want in texts, f"/sketch/: the film never draws {want!r}")
             sec["notes"].append(f"/{key}: {len(texts)} distinct strings drawn")
             await pg.close()

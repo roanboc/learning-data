@@ -82,6 +82,8 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 - [One copy, one platform](../films/data-that-moves/3-one-copy-one-platform/) — `one-copy-one-platform`
 - [Read often, kept close](../films/data-that-moves/4-read-often-kept-close/) — `read-often-kept-close`
 
+Labs and assessments: [site/assets/data-that-moves/learn.en.js](../site/assets/data-that-moves/learn.en.js), [site/assets/data-that-moves/learn.es.js](../site/assets/data-that-moves/learn.es.js)
+
 ### Data as software
 
 Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-as-software/`

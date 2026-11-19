@@ -98,9 +98,8 @@ A designed board or page is two kinds of rows:
 ```js
 const tf_boardB = (sc, w) => [
   PK.sk.drawn(c => {const D = PK.sk;
-    D.paper(c);                                                    // the sheet, pinned at its corners
-    D.ribbon(c, "Psychological safety", 60, 44, {col: "blue"});    // the heading
-    D.stamp(c, ["Amy Edmondson", "1999 · 51 teams"], 1050, 98); // where it comes from
+    // the sheet pinned at its corners, the heading on a ribbon, and where it comes from stamped at the top right
+    D.head(c, "Psychological safety", {ref: ["Amy Edmondson", "1999 · 51 teams"]});
     D.list(c, 80, 200, [{icon: "bolt", s: "take a risk"}, {icon: "warn", s: "admit a mistake"}, {icon: "hand", s: "ask for help"}]);
     D.bars(c, 760, 170, 360, 200, [{v: 3, col: "amber", label: "less safe"}, {v: 8, col: "green", label: "safer"}]);
   }),
@@ -112,7 +111,7 @@ const tf_boardB = (sc, w) => [
 
 | Lay a designed board out so that | Why |
 |---|---|
-| a ribbon holds its heading at the top left, and where the idea comes from is stamped at the top right | the idea's name and its source are read first, and named once |
+| a ribbon holds its heading at the top left, and where the idea comes from is stamped at the top right (`PK.sk.head`) | the idea's name and its source are read first, and named once |
 | two or three parts fill the sheet, each a drawing with a few words: portraits of the people it is about (`PK.sk.face`, in their own clothes), a chart sketched from the film's numbers, cards with icons, a flow, a cycle; arrows join them | the idea is seen, not only read |
 | the last words are one or two rows at the right or the foot, written as the voice says them; a tick or a ring the hand adds goes near them | the writer walks a few steps and steps clear to the right of the sheet, so nothing is hidden for long |
 | words are 30 px or more, 34 or more on a page, and fit their box (`site-tools/fits.py`) | the board is read on a phone |
@@ -120,7 +119,7 @@ const tf_boardB = (sc, w) => [
 
 | Lay a sketched page out so that | Why |
 |---|---|
-| its heading has a highlighter's band (`PK.sk.band`), with a small drawing beside it | it is someone's page, kept with care |
+| its heading has a highlighter's band (`PK.sk.title`), with a small drawing beside it | it is someone's page, kept with care |
 | what to remember is in boxes with icons and portraits, a ticked list, a sticky note | the page is a picture of the lesson, not the narration copied out |
 | the last words go at its foot, on a ribbon or a line, written by the hand as the voice says them | the page ends where the eye ends |
 | the ink ends 24 px or more inside the page and above y 826 of the page (`PK.SK.page`) | the captions are below it |

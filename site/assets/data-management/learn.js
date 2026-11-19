@@ -356,7 +356,7 @@ MODEL.measures={n:10,ctl:[["seg","what","busy"],["toggle","sent",false],["seg","
 // how much it changes at once, what it does with a change that finds nothing, and where a kept change is written.
 MODEL.fridays={n:15,ctl:[["toggle","fri",false],["seg","n","many"],["seg","drop","keep"],["seg","write","head"]],m:[["first",7],["kept",15],["ritual",12]],
  run(S){const ev=[],f=S.fri,one=S.n==="one",away=i=>S.write==="head"&&i>=9&&i<=10;
-  const first=series(15,6,(p,i)=>!f||i<2?6:away(i)?4:one?1:3),kept=series(15,0,(p,i)=>!f||i<2?0:Math.min(15,p+(one?1:0.5)-(i===3&&S.drop==="drop"&&one?1:0)));
+  const first=series(15,6,(p,i)=>!f||i<2?6:away(i)?4:one?1:3),kept=series(15,0,(p,i)=>!f||i<2?0:one?i-1:Math.floor((i-1)/2));
   const ritual=series(15,0,(p,i)=>!f||i<2?0:S.drop==="drop"&&i>=3?0:10);
   if(!f)ev.push([1,"nofri","warn"]);else{ev.push([1,"fri","ok"]);ev.push([2,one?"oneday":"many",one?"ok":"warn"]);ev.push([2,"standup","warn"]);
    ev.push([3,S.drop==="drop"?"dropped":"habit",S.drop==="drop"?"ok":"warn"]);ev.push([9,S.write==="head"?"away":"page",S.write==="head"?"no":"ok"]);}

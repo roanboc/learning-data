@@ -45,152 +45,152 @@ Su mapa muestra toda la empresa en seis capas, desde por qué existe hasta lo qu
 00:01:59.425 --> 00:02:07.181
 Dos de sus aplicaciones son agentes: el agente de cortes propone qué falla importa más, y el agente del mapa redacta cambios.
 
-00:02:08.981 --> 00:02:15.146
+00:02:08.981 --> 00:02:15.171
 Cada uno es software en un rol, con sus permisos por escrito y un responsable: Grace para uno, Tomás para el otro.
 
-00:02:16.946 --> 00:02:24.145
-Esta serie suma lo que los rodea: la plataforma de IA, la IA en el trabajo de los propios arquitectos y un mapa que sigue vivo.
+00:02:16.971 --> 00:02:22.437
+Esta serie suma lo que los rodea: la plataforma de IA en la que funcionan, y qué puede leer cada uno.
 
-00:02:25.745 --> 00:02:32.954
+00:02:24.037 --> 00:02:31.246
 Cómo funciona un agente lo cuenta el módulo de agentes de IA; aquí, el mapa muestra dónde trabajan, y quién responde por ellos.
 
-00:02:36.154 --> 00:02:42.074
+00:02:34.446 --> 00:02:40.366
 Entonces Farah trae el caso de un hogar atrasado con su factura. Le pidió al chat del sitio web más tiempo para pagar.
 
-00:02:43.674 --> 00:02:47.365
+00:02:41.966 --> 00:02:45.657
 El chat dijo que sí: un plan en tres meses, y sin recargo por atraso.
 
-00:02:48.965 --> 00:02:53.972
+00:02:47.257 --> 00:02:52.264
 Dos semanas después, su factura llegó con un recargo por atraso, y un aviso de que podían cortarles la luz.
 
-00:02:56.172 --> 00:03:01.786
+00:02:54.464 --> 00:03:00.078
 El chat es un agente: su proveedor lo activó en una actualización del software del centro de contacto.
 
-00:03:03.386 --> 00:03:09.250
+00:03:01.678 --> 00:03:07.542
 Nadie lo puso en el mapa. Se le dio una actividad entera, las solicitudes de pago, así que acordaba planes.
 
-00:03:10.850 --> 00:03:17.300
+00:03:09.142 --> 00:03:15.592
 Pero acordar un plan lo decide un gestor de facturación, según las reglas del regulador para los hogares que no pueden pagar.
 
-00:03:18.900 --> 00:03:25.928
+00:03:17.192 --> 00:03:24.220
 Escribía cada plan en las notas del centro de contacto, que facturación no lee: 212 planes en seis semanas.
 
-00:03:29.928 --> 00:03:38.092
+00:03:28.220 --> 00:03:36.384
 ¿Cuántos agentes trabajan aquí? La herramienta de gestión de servicios de TI no lo sabe: lista aplicaciones, no lo que está activado dentro de ellas.
 
-00:03:39.292 --> 00:03:48.459
+00:03:37.584 --> 00:03:46.749
 Así que Tomás busca sus rastros: notas de versión y contratos de proveedores, registros de llamadas a modelos de lenguaje, y la respuesta de cada equipo.
 
-00:03:49.859 --> 00:03:57.843
+00:03:48.149 --> 00:03:56.133
 Halla tres más: un planificador de cuadrillas de los analistas de la red, y un agente de medidores que redacta una orden de trabajo si un medidor calla.
 
-00:03:59.443 --> 00:04:03.729
+00:03:57.733 --> 00:04:02.019
 Y el asistente de la app de campo, que contesta las preguntas de las cuadrillas con los manuales.
 
-00:04:04.529 --> 00:04:12.201
+00:04:02.819 --> 00:04:10.491
 Dentro de facturación, un asistente trabaja con el acceso de cada gestor: un ayudante, con los permisos de esa persona, no un agente propio.
 
-00:04:13.601 --> 00:04:16.473
+00:04:11.891 --> 00:04:14.763
 Seis agentes y un ayudante, donde el mapa mostraba dos.
 
-00:04:20.273 --> 00:04:28.489
+00:04:18.563 --> 00:04:26.779
 En el mapa, un agente se dibuja como ArchiMate 4 dibuja el software que trabaja junto a las personas: una aplicación, asignada a un rol.
 
-00:04:30.289 --> 00:04:32.512
+00:04:28.579 --> 00:04:30.802
 Un rol propio, nunca el de una persona.
 
-00:04:34.112 --> 00:04:40.936
+00:04:32.402 --> 00:04:39.226
 En el rol de un gestor de facturación, el chat tendría todos los permisos de un gestor, y nadie podría distinguir su trabajo del de ellos.
 
-00:04:42.936 --> 00:04:49.970
+00:04:41.226 --> 00:04:48.260
 Y cubre tareas, nunca una actividad entera: la actividad, y las decisiones que hay en ella, se quedan con las personas responsables.
 
-00:04:52.770 --> 00:04:58.716
+00:04:51.060 --> 00:04:57.006
 Ayudar a un hogar que no puede pagar es un proceso, por escrito, y su responsable es quien dirige comercialización.
 
-00:05:00.116 --> 00:05:08.921
+00:04:58.406 --> 00:05:07.211
 En cada tarea, su responsable fija hasta dónde llega el agente: informar a una persona, redactar para ella, verificar su trabajo o ejecutarla solo.
 
-00:05:10.721 --> 00:05:14.581
+00:05:09.011 --> 00:05:12.871
 Responder una pregunta sobre una factura: ejecutar. Puede hacerlo solo.
 
-00:05:15.981 --> 00:05:23.576
+00:05:14.271 --> 00:05:21.866
 Recibir un pedido de más plazo: redactar. Escribe la solicitud para un gestor de facturación, y le dice al hogar cuándo tendrá respuesta.
 
-00:05:24.976 --> 00:05:28.939
+00:05:23.266 --> 00:05:27.229
 Decirle al gestor cuánto debe el hogar, y cuánto ha pagado: informar.
 
-00:05:30.339 --> 00:05:33.902
+00:05:28.629 --> 00:05:32.192
 Acordar el plan: nada. Eso se queda con el gestor.
 
-00:05:35.502 --> 00:05:41.509
+00:05:33.792 --> 00:05:39.799
 Comprobar que el plan cumple las reglas para hogares en dificultades: verificar. Comprueba, y el gestor decide.
 
-00:05:42.909 --> 00:05:48.082
+00:05:41.199 --> 00:05:46.372
 Cómo se gana más un agente: Cinco etapas, no un interruptor, del módulo de agentes de IA.
 
-00:05:50.882 --> 00:05:56.143
+00:05:49.172 --> 00:05:54.433
 Trabaja con su propia identidad, nunca la de una persona: una por cada conjunto de permisos que necesita.
 
-00:05:57.543 --> 00:06:01.808
+00:05:55.833 --> 00:06:00.098
 Una puede leer facturas. La otra solo puede escribir solicitudes en la cola de facturación.
 
-00:06:03.408 --> 00:06:07.710
+00:06:01.698 --> 00:06:06.000
 Así, cada registro dice qué agente hizo qué, y se lo puede detener por separado.
 
-00:06:09.510 --> 00:06:12.064
+00:06:07.800 --> 00:06:10.354
 Su rol dice cuándo deriva el caso, y a quién.
 
-00:06:13.264 --> 00:06:20.067
+00:06:11.554 --> 00:06:18.357
 Quien mencione dificultades, una enfermedad o soporte vital pasa a una persona, el mismo día, y el agente se lo dice.
 
-00:06:23.667 --> 00:06:28.259
+00:06:21.957 --> 00:06:26.549
 Farah pregunta lo que el mapa no podía decir: cuando el agente se equivoca, ¿quién responde por él?
 
-00:06:29.059 --> 00:06:35.084
+00:06:27.349 --> 00:06:33.374
 No el proveedor, que responde ante la empresa según su contrato. Ni Tomás, que dibuja el mapa.
 
-00:06:36.484 --> 00:06:42.880
+00:06:34.774 --> 00:06:41.170
 Quien dirige comercialización, a cargo del proceso y de fijar sus tareas, responde por él, como por cualquiera de ese equipo.
 
-00:06:44.680 --> 00:06:52.471
+00:06:42.970 --> 00:06:50.761
 Los marcos de IA, como los del NIST y la ISO, piden lo mismo: roles claros, y personas que rindan cuentas por cada sistema de IA.
 
-00:06:53.271 --> 00:06:56.481
+00:06:51.561 --> 00:06:54.771
 Y nunca aprueba. Aprobar es trabajo de una persona.
 
-00:06:59.881 --> 00:07:07.763
+00:06:58.171 --> 00:07:06.053
 Uno a uno, cada agente va al mapa: su rol, sus tareas y hasta dónde, su identidad, su derivación, y quién responde.
 
-00:07:09.563 --> 00:07:14.860
+00:07:07.853 --> 00:07:13.150
 El planificador de cuadrillas redacta los turnos, un supervisor los aprueba, y Grace responde por él.
 
-00:07:15.660 --> 00:07:20.357
+00:07:13.950 --> 00:07:18.647
 La opción del proveedor que dejaba al chat acordar planes queda desactivada. Ahora los redacta.
 
-00:07:21.757 --> 00:07:29.287
+00:07:20.047 --> 00:07:27.577
 Con cada cambio, corre un control sobre el mapa: ningún agente sin un rol, una identidad, una derivación y una persona que responda.
 
-00:07:30.887 --> 00:07:36.034
+00:07:29.177 --> 00:07:34.324
 El asistente de la app de campo queda marcado: su proveedor no ha dicho qué identidad usa.
 
-00:07:37.434 --> 00:07:44.140
+00:07:35.724 --> 00:07:42.430
 ¿Y los 212 planes? Facturación respeta cada uno, devuelve los recargos y llama a cada hogar.
 
-00:07:47.940 --> 00:07:54.558
+00:07:46.230 --> 00:07:52.848
 Muchos estudiosos creen que la torre de Babilonia pudo inspirar el relato de la Torre de Babel, en el libro del Génesis.
 
-00:07:55.358 --> 00:08:02.019
+00:07:53.648 --> 00:08:00.309
 En el relato, los constructores hablan todos una sola lengua, hasta que ya no se entienden, y dejan de construir.
 
-00:08:03.619 --> 00:08:07.886
+00:08:01.909 --> 00:08:06.176
 Los verdaderos constructores venían de muchas tierras, y hablaban muchas lenguas.
 
-00:08:09.286 --> 00:08:13.909
+00:08:07.576 --> 00:08:12.199
 Lo que compartían era el plan: una tarea para cada uno, y un nombre que respondía por la obra.
 
-00:08:19.309 --> 00:08:27.681
+00:08:17.599 --> 00:08:25.971
 La nota de Tomás tiene su respuesta: cada agente en un rol propio, con sus tareas, su identidad, una derivación y alguien que responde.
 
-00:08:29.481 --> 00:08:31.489
+00:08:27.771 --> 00:08:29.779
 Luego, la plataforma donde todos funcionan.

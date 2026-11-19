@@ -1,0 +1,76 @@
+{
+  "kicker": "The map before the model",
+  "kicker_es": "El mapa antes del modelo",
+  "title_es": "El mapa detrás del boceto",
+  "h1": "The map behind the sketch: where each box of a data model belongs",
+  "h1_es": "El mapa detrás del boceto: dónde va cada caja de un modelo de datos",
+  "lead": "Noor is about to make the intro's sketch the university's shared model. First, each box needs a place on the university's map: what it's for, who answers for it, where it's first written, and what its word means. Three boxes find one. Two don't.",
+  "lead_es": "Noor está por convertir el boceto de la introducción en el modelo común de la universidad. Antes, cada caja necesita un lugar en el mapa: para qué sirve, quién responde por ella, dónde se escribe primero y qué significa su palabra. Tres lo encuentran. Dos, no.",
+  "description": "A film about the enterprise architecture and the data governance a data model stands on, the first of Model the business: in China, from 1381, the Ming court gave households and fields a register each, with one job each, like the warp and the weft of a cloth; at the university, Noor, the data architect, places the sketch from The Inner Life of Data on the university's map: its capabilities, from the sector's shared reference, HERM; its data domains, each with one owner, such as Mei's registrar's office; where each thing is first written, its system of record, with the platform's copies to read and to count; and the business glossary, whose terms the model copies word for word. Crossed, the two maps show who creates each thing and who only reads it. Three boxes find their place. The class and the term don't: the registrar's office speaks of unit offerings and teaching periods, which the next film, A Sharper Sketch, takes up.",
+  "description_es": "Una película sobre la arquitectura empresarial y la gobernanza de datos en las que se apoya un modelo de datos, la primera de Modelar el negocio: en China, desde 1381, la corte Ming le dio a los hogares y a los campos un registro a cada uno, con una sola tarea cada uno, como la urdimbre y la trama de una tela; en la universidad, Noor, la arquitecta de datos, ubica el boceto de La vida interior de los datos en el mapa de la universidad: sus capacidades, desde la referencia que comparte el sector, HERM; sus dominios de datos, cada uno con un dueño, como la oficina de registro de Mei; dónde se escribe primero cada cosa, su sistema de registro, con las copias de la plataforma para leer y contar; y el glosario de negocio, cuyos términos el modelo copia palabra por palabra. Cruzados, los dos mapas muestran quién crea cada cosa y quién solo la lee. Tres cajas encuentran su lugar. La clase y el periodo, no: la oficina de registro habla de ofertas de unidad y de periodos lectivos, que retoma la película siguiente, A Sharper Sketch.",
+  "card": "Five boxes from the intro's sketch, placed on the university's map. Three find an owner, a home and a meaning. Two don't.",
+  "card_es": "Cinco cajas del boceto de la introducción, ubicadas en el mapa de la universidad. Tres encuentran dueño, casa y significado. Dos, no.",
+  "chapters_es": {
+    "lost": "Registros perdidos",
+    "two": "Dos registros",
+    "sketch": "El boceto que dibujamos",
+    "does": "Lo que hace",
+    "knows": "Lo que necesita saber",
+    "kept": "Dónde se escribe",
+    "means": "Lo que significan las palabras",
+    "cross": "Urdimbre y trama",
+    "start": "Dónde empieza el trabajo",
+    "end": "Vista completa"
+  },
+  "past": [
+    "China, 1381 and 1387: the Ming's Yellow Registers and fish-scale registers",
+    "One register for each thing, each with one job: households in one, fields in the other. Together they let the court count its people again, and set a tax that followed the land."
+  ],
+  "past_es": [
+    "China, 1381 y 1387: los Registros Amarillos y los registros de escamas de pez de los Ming",
+    "Un registro para cada cosa, cada uno con una sola tarea: los hogares en uno, los campos en el otro. Juntos, le permitieron a la corte volver a contar a su gente, y fijar un impuesto que seguía a la tierra."
+  ],
+  "next_h": "You've placed the sketch on the university's map. Next: make its boxes right.",
+  "next_h_es": "Ubicaste el boceto en el mapa de la universidad. Después: hacer bien sus cajas.",
+  "repo": {
+    "does": [
+      "../10-enterprise-architecture/architecture/1_strategy/2_capabilities.md"
+    ],
+    "knows": [
+      "../10-enterprise-architecture/architecture/3_information/1_data-domains-and-objects.md"
+    ],
+    "kept": [
+      "../10-enterprise-architecture/architecture/4_application/1_realization-register.md"
+    ],
+    "means": [
+      "governance/1-glossary/business-glossary.yml"
+    ],
+    "start": [
+      "../00-initiatives/analytics-questions.md"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más lejos",
+    "p": "This film reads the university's map; it doesn't draw it. How such a map is made is told in the enterprise architecture films, for an energy company, and the sector's own reference models are public. Checked on 19 November 2026.",
+    "p_es": "Esta película lee el mapa de la universidad; no lo dibuja. Cómo se hace un mapa así lo cuentan las películas de arquitectura empresarial, para una empresa de energía, y los modelos de referencia del sector son públicos. Revisado el 19 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Higher Education Reference Models (HERM)",
+        "title_es": "Los Higher Education Reference Models (HERM, en inglés)",
+        "line": "CAUDIT's models for universities: business capabilities, data, applications and technology, shared by the sector.",
+        "line_es": "Los modelos de CAUDIT para universidades: capacidades de negocio, datos, aplicaciones y tecnología, compartidos por el sector.",
+        "href": "https://www.caudit.edu.au/resources/herm-version-3-1-1-now-available",
+        "href_es": "https://www.caudit.edu.au/resources/herm-version-3-1-1-now-available"
+      },
+      {
+        "title": "DAMA-DMBOK",
+        "title_es": "DAMA-DMBOK (en inglés)",
+        "line": "DAMA International's body of knowledge: data governance, owners and stewards, the glossary and systems of record.",
+        "line_es": "El cuerpo de conocimiento de DAMA International: gobernanza de datos, dueños y responsables, el glosario y los sistemas de registro.",
+        "href": "https://dama.org/learning-resources/dama-data-management-body-of-knowledge-dmbok/",
+        "href_es": "https://dama.org/learning-resources/dama-data-management-body-of-knowledge-dmbok/"
+      }
+    ]
+  }
+}

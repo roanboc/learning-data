@@ -1,0 +1,73 @@
+{
+  "title": "Model the business",
+  "title_es": "Modelar el negocio",
+  "draft": true,
+  "planned": 2,
+  "outside": {
+    "2": "sketch"
+  },
+  "lead": "Two short films on the ground a data model stands on. The first places the sketch from The Inner Life of Data on the university's map: what it does, what it needs to know, who answers for each thing, where it is written and what its words mean. The second makes the sketch sharper, against a reference model.",
+  "lead_es": "Dos películas cortas sobre el terreno en el que se apoya un modelo de datos. La primera ubica el boceto de La vida interior de los datos en el mapa de la universidad: qué hace, qué necesita saber, quién responde por cada cosa, dónde se registra y qué significan sus palabras. La segunda afina el boceto frente a un modelo de referencia.",
+  "description": "Two short films on data modelling's foundations: the university's capabilities, data domains and owners, systems of record and glossary, and then a sharper model, checked against a reference.",
+  "description_es": "Dos películas cortas sobre los cimientos del modelado de datos: las capacidades de la universidad, sus dominios de datos y sus dueños, los sistemas de registro y el glosario, y luego un modelo más preciso, comparado con una referencia.",
+  "card": "Before a model gets sharper, each box needs a place: who answers for it, where it is written, what its word means. Then make it right.",
+  "card_es": "Antes de afinar un modelo, cada caja necesita un lugar: quién responde por ella, dónde se registra, qué significa su palabra. Luego, hacerla bien.",
+  "order": "Watch them in order, after The Inner Life of Data. From words to data comes next.",
+  "order_es": "Míralas en orden, después de La vida interior de los datos. Luego viene De las palabras a los datos.",
+  "learn_p": "A playground for The map behind the sketch, with five experiments to make happen; then {quiz} situations on where each box of a model belongs. A Sharper Sketch keeps its own labs, on its page.",
+  "learn_p_es": "Un lab interactivo para El mapa detrás del boceto, con cinco experimentos que hacer pasar; y luego {quiz} situaciones sobre dónde va cada caja de un modelo. A Sharper Sketch mantiene sus propios labs, en su página.",
+  "labs_lead": "A playground for The map behind the sketch. Put the sketch on the university's map, then find whose record to check, fix a number where it was written, look up its words, and cross the two maps.",
+  "labs_lead_es": "Un lab interactivo para El mapa detrás del boceto. Pon el boceto en el mapa de la universidad, y luego busca qué registro revisar, corrige una cifra donde se escribió, busca sus palabras y cruza los dos mapas.",
+  "quiz_lead": "{quiz} situations about the decisions behind a model: whose a thing is, where it is written, and what its word means. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "{quiz} situaciones sobre las decisiones detrás de un modelo: de quién es algo, dónde se registra y qué significa su palabra. Decide qué harías; cada respuesta explica por qué.",
+  "thread_h": "One story: the registers of the Ming",
+  "thread_h_es": "Una historia: los registros de los Ming",
+  "thread": "In 1381 and 1387, China's new Ming court gave people and land a register each: the Yellow Registers for households, the fish-scale registers for fields. Each had one job, and together they held, like the warp and the weft of a cloth. Each film opens on its part of the story.",
+  "thread_es": "En 1381 y 1387, la nueva corte Ming de China dio a las personas y a la tierra un registro a cada una: los Registros Amarillos para los hogares, los registros de escamas de pez para los campos. Cada uno tenía una sola tarea, y juntos se sostenían, como la urdimbre y la trama de una tela. Cada película empieza con su parte de la historia.",
+  "people_h": "Four sides of every box",
+  "people_h_es": "Cuatro lados de cada caja",
+  "people": [
+    [
+      "tech",
+      "Places the sketch",
+      "Noor, data architect, the series' guide"
+    ],
+    [
+      "biz",
+      "Owns the words",
+      "Mei, registrar's office: student, course, unit offering"
+    ],
+    [
+      "biz",
+      "Counts by census date",
+      "Planning, which reports each teaching period to government"
+    ],
+    [
+      "biz",
+      "Asks the question",
+      "Ana, Head of School: how many students, and when?"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Ubica el boceto",
+      "Noor, arquitecta de datos, la guía de la serie"
+    ],
+    [
+      "biz",
+      "Es dueña de las palabras",
+      "Mei, oficina de registro: estudiante, carrera, oferta de unidad"
+    ],
+    [
+      "biz",
+      "Cuenta por la fecha de corte",
+      "Planificación, que informa cada periodo lectivo al gobierno"
+    ],
+    [
+      "biz",
+      "Hace la pregunta",
+      "Ana, dirección de la Escuela: cuántos estudiantes, y cuándo"
+    ]
+  ]
+}

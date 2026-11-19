@@ -67,5 +67,5 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In the three months since, it has answered 41,000 questions about prices, every one from this year's tariffs.":"En los tres meses desde entonces, ha respondido 41,000 preguntas sobre precios, todas con las tarifas de este año.",
 "And no caller has heard about any household but their own.":"Y nadie que llamó ha sabido de otro hogar que no sea el suyo.",
 "An agent's context belongs on the map: the products it may read, with contracts and terms, in a place of its own, under its own identity.":"El contexto de un agente va en el mapa: los productos que puede leer, con contratos y términos, en un lugar propio, con su propia identidad.",
-"Next: a first draft, not a blank page.":"Luego: un primer borrador, no una página en blanco."
+"The agents are on the map. Who decides about the data they read is where Data governance begins.":"Los agentes están en el mapa. Quién decide sobre los datos que leen es donde empieza Gobernanza de datos."
 });

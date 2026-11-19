@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/agents-on-the-map/soundtrack.mp3",
-      "size": 7271174,
-      "sha256": "613f334052c72e68cf36c83131382e6c9a7e3b522c2711b4c7d585bef8408355",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-agents-on-the-map-a4a50c6bc31bbaffd7f0/613f334052c72e68cf36c83131382e6c9a7e3b522c2711b4c7d585bef8408355.mp3"
+      "size": 7247037,
+      "sha256": "7d5be843467241a2c052f4a35887a50686b1b61cd1003bd998cd7a8dbef7962f",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-agents-on-the-map-3bbab4f08c7ced9d9290/7d5be843467241a2c052f4a35887a50686b1b61cd1003bd998cd7a8dbef7962f.mp3"
     }
   ]
 }

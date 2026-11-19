@@ -10,7 +10,7 @@
 <link rel="icon" href="../../assets/favicon.svg?v=9c05cdd7f4" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/site.css?v=601b753224">
+<link rel="stylesheet" href="../../assets/site.css?v=a6bf9735d7">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../fit-for-use/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="Cómo funciona este sitio" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -21,6 +21,11 @@
 <p class="lead">La primera serie de Calidad de datos. La lista de graduación dice quién se gradúa, en qué ceremonia y el nombre impreso en cada diploma. Pasó todos los controles, y aun así 41 diplomas se imprimieron de nuevo. Así que el equipo pregunta para qué sirve la lista, y qué es lo bastante bueno para cada uso.</p>
 <p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
 </section>
+<nav class="course" aria-label="Curso: Apto para su uso"><div class="course-in"><p class="course-t"><small>Serie · Calidad de datos</small>Apto para su uso</p><ol class="path" data-store="ld-fit-for-use" data-labs="4" data-quiz="12" data-series="ld-good-enough-for-what ld-a-hundred-records ld-valid-isnt-true ld-late-is-wrong-too" data-text='{"watched": "Vista", "films": "{n} de 4 películas vistas", "labs": "{n} de 4 labs explorados", "quiz": "{n} de 12 respondidas · {ok} correctas"}'>
+<li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>Las películas</b><span>Cuatro películas</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Cuatro labs interactivos</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>12 situaciones reales</span></a></li>
+</ol></div></nav>
 
 <section class="module" id="films" aria-labelledby="films-h">
 <div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden: cada película se apoya en la anterior.</p></div></div>
@@ -68,32 +73,13 @@
 </div>
 </section>
 
-<section class="module" id="thread" aria-labelledby="thread-h">
-<div class="mhead"><div><h2 id="thread-h">Un hilo: la lista de graduación, y un nombre en un diploma</h2><p>En diciembre de 2025 hubo que imprimir de nuevo 41 diplomas: nombres que perdieron sus tildes o quedaron cortados, una doble titulación impresa como un solo título, graduados que faltaban en la lista. En los seis meses siguientes, quienes usan la lista, responden por ella y la construyen escriben para qué sirve y qué necesita cada uso, revisan cien de sus registros, comparan sus nombres con los propios graduados y acuerdan cuán fresca debe estar.</p></div></div>
+<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
+<div class="mhead"><div><h2 id="learn-h">Desarma, y luego tú decides</h2><p>Cuatro labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego 12 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 4 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 12 situaciones</a></p>
 </section>
 
-<section class="module" id="past" aria-labelledby="past-h">
-<div class="mhead"><div><h2 id="past-h">Cada película empieza en otro lugar, en otra época</h2></div></div>
-<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
-<tr><td>¿Lo bastante bueno para qué?</td><td>Duisburgo, 1569: una carta del mundo hecha para navegantes</td><td>Mercator estiró su carta para que un rumbo fijo fuera una línea recta: correcta para navegar, incorrecta para comparar países. Una carta, hecha para un uso.</td></tr>
-<tr><td>Cien registros</td><td>Dublín, de 1899 a 1908: el químico de una cervecería y unas pocas pruebas cuidadosas</td><td>Unas pocas pruebas cuidadosas bastaban para decidir, y las tablas de Gosset, publicadas como Student, decían cuándo hacían falta más. Su método aún se usa donde no se puede medir todo.</td></tr>
-<tr><td>Válido no es cierto</td><td>Japón, de 1800 a 1821: un levantamiento comprobado con las estrellas</td><td>Los equipos de Ino Tadataka midieron la costa a pie de día y las estrellas en las noches despejadas, y corrigieron el camino con ellas: un mapa de todo Japón, la base de sus mapas durante décadas.</td></tr>
-<tr><td>Tarde también es un error</td><td>Bangladés, de 1970 a 2007: la última milla de un aviso de ciclón</td><td>En 1970, una señal de gran peligro significó poco en las islas, y casi nadie buscó refugio. Desde 1972, voluntarios de las aldeas llevaron cada aviso la última milla, con banderas que todos podían leer.</td></tr>
-</tbody></table></div>
-</section>
-
-<section class="module" id="four-sides" aria-labelledby="four-sides-h">
-<div class="mhead"><div><h2 id="four-sides-h">Quiénes están en la mesa</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
-<div class="four">
-<div class="card biz"><h3>Usa la lista</h3><p>Malia Fonoti, la responsable de graduaciones, que organiza las ceremonias y envía la lista a la imprenta de diplomas</p></div>
-<div class="card biz"><h3>Responde por nombres y títulos</h3><p>Mei Tanaka, de la oficina de registro académico, que decide qué es correcto para un nombre y fija el nivel que necesita cada uso</p></div>
-<div class="card biz"><h3>La persona de quien hablan los datos</h3><p>Andrés Peñaloza, graduado del Máster en Analítica de Datos, cuyo nombre guarda la lista sin sus tildes</p></div>
-<div class="card tech"><h3>Construye la lista</h3><p>Jun Park, que construye los modelos de la lista y sus controles en el proyecto de datos</p></div>
-<div class="card tech"><h3>Lleva la plataforma</h3><p>Sam Okafor, que ejecuta la actualización de cada noche y vigila cuán fresca está cada fuente</p></div>
-</div>
-</section>
 </main>
-<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
 <script src="../../assets/learn/path.js?v=12187f81b8"></script>
 <script src="../../assets/ambient.js?v=e4b9486ecb"></script>
 </body>

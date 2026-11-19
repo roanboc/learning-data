@@ -1,169 +1,214 @@
 WEBVTT
 
-00:00:03.800 --> 00:00:11.133
-En La vida interior de los datos, dibujamos un boceto de la universidad: un estudiante, una clase, una inscripción, un periodo y una carrera.
+00:00:04.200 --> 00:00:12.564
+China, 1391. Diez años después de los primeros Registros Amarillos, la corte Ming los manda hacer de nuevo, como hará cada diez años.
 
-00:00:11.833 --> 00:00:16.410
-Era una simplificación excesiva. Bastaba para empezar, no para contar.
+00:00:13.864 --> 00:00:19.799
+En diez años, una aldea cambia: nacen niños, mueren padres, se compran y se venden campos.
 
-00:00:18.110 --> 00:00:23.354
+00:00:21.099 --> 00:00:28.388
+Pero un total nuevo no muestra qué cambió. Un hogar con menos tierra pudo vender un campo, o esconderlo a nombre de otro.
+
+00:00:29.588 --> 00:00:33.409
+Y el impuesto del campo escondido cae sobre quienes no pueden esconder los suyos.
+
+00:00:34.909 --> 00:00:38.004
+La corte necesitaba que cada número mostrara de dónde venía.
+
+00:00:39.304 --> 00:00:46.856
+Así que la entrada de cada hogar tiene cuatro columnas: lo que tenía hace diez años, lo que entró, lo que salió y lo que tiene ahora.
+
+00:00:48.756 --> 00:00:54.065
+Las cuatro deben cuadrar: un campo que sale de la entrada de un hogar llega a la de otro.
+
+00:00:55.765 --> 00:01:01.675
+Cada registro se coteja con el anterior, y uno que no cuadra se devuelve para hacerlo de nuevo.
+
+00:01:03.175 --> 00:01:07.638
+Así cada número trae su historia: cualquiera puede ver qué cambió, y por qué.
+
+00:01:08.938 --> 00:01:14.087
+Un modelo de datos tiene la misma necesidad: cada número debe decir qué cuenta, y en qué día.
+
+00:01:16.587 --> 00:01:23.506
+Nuestro boceto de la universidad ya tiene un lugar en su mapa: un estudiante, una clase, una inscripción, un periodo y una carrera.
+
+00:01:24.606 --> 00:01:28.958
+Pero el mapa dice dónde vive cada caja. No dice que las cajas estén bien.
+
+00:01:30.458 --> 00:01:34.840
+Es una simplificación excesiva: basta para empezar, no para contar.
+
+00:01:36.540 --> 00:01:41.784
 Es normal. Todo modelo empieza sencillo, y gana precisión cuando una pregunta real lo necesita.
 
-00:00:26.054 --> 00:00:30.368
-Tras la fecha de corte, la dirección de la Escuela le hace a Genie una pregunta simple.
+00:01:44.484 --> 00:01:49.082
+Semanas después de la fecha de corte, la dirección de la Escuela le pregunta algo simple a Genie.
 
-00:00:31.068 --> 00:00:35.578
+00:01:49.782 --> 00:01:54.292
 ¿Cuántos estudiantes estaban inscritos en Data Science 101 a la fecha de corte?
 
-00:00:36.278 --> 00:00:41.851
+00:01:54.992 --> 00:02:00.565
 Genie dice 131. El reporte certificado de la fecha de corte dice 118.
 
-00:00:44.051 --> 00:00:47.007
+00:02:02.765 --> 00:02:05.721
 Ambas cifras vienen de datos limpios. Todas las pruebas pasaron.
 
-00:00:47.707 --> 00:00:50.504
+00:02:06.421 --> 00:02:09.218
 La diferencia no está en los datos. Está en el significado.
 
-00:00:51.204 --> 00:00:57.097
+00:02:09.918 --> 00:02:15.811
 Así que, antes de cambiar nada, hacemos una pregunta más amplia: ¿cómo funciona, en general, este tipo de negocio?
 
-00:00:57.797 --> 00:01:03.236
+00:02:16.511 --> 00:02:21.950
 En muchas industrias, alguien ya lo modeló, y su modelo es una buena primera plantilla.
 
-00:01:03.936 --> 00:01:08.792
+00:02:22.650 --> 00:02:27.506
 A menudo hay más de uno para elegir, así que también importa cuál eliges, y por qué.
 
-00:01:09.492 --> 00:01:17.577
+00:02:28.206 --> 00:02:36.291
 TCSI podría ser una opción: es público, y describe los datos que las universidades australianas reportan al gobierno.
 
-00:01:18.277 --> 00:01:26.516
+00:02:36.991 --> 00:02:45.230
 En la práctica, muchas universidades usan MortarCAPS, el estándar de datos del propio sector. Aquí, compararemos nuestro boceto con TCSI.
 
-00:01:27.216 --> 00:01:33.532
+00:02:45.930 --> 00:02:52.246
 Es una referencia para comparar, no un modelo para copiar. Veremos dónde encaja con nuestro negocio, y dónde no.
 
-00:01:39.832 --> 00:01:41.828
+00:02:58.546 --> 00:03:00.542
 Primera pregunta: ¿qué es una clase?
 
-00:01:42.528 --> 00:01:48.670
+00:03:01.242 --> 00:03:07.384
 Pon la referencia sobre nuestro boceto: no tiene ninguna clase. Tiene unidades de estudio, e inscripciones en ellas.
 
-00:01:49.370 --> 00:01:51.488
+00:03:08.084 --> 00:03:10.202
 Nuestra única caja escondía tres cosas.
 
-00:01:52.988 --> 00:01:56.599
+00:03:11.702 --> 00:03:15.313
 La unidad: Data Science 101, la materia en sí.
 
-00:01:57.299 --> 00:02:03.573
+00:03:16.013 --> 00:03:22.287
 La oferta: esa unidad, en un periodo lectivo, en un campus. En esto se inscriben los estudiantes.
 
-00:02:04.273 --> 00:02:08.907
+00:03:22.987 --> 00:03:27.621
 Y la clase: la tutoría del martes a las 9, un lugar en el horario.
 
-00:02:09.607 --> 00:02:13.569
+00:03:28.321 --> 00:03:32.283
 Genie contó lugares en tutorías, y algunos estudiantes asisten a dos.
 
-00:02:14.269 --> 00:02:18.207
+00:03:32.983 --> 00:03:36.921
 Así que di exactamente qué representa una fila. Eso se llama granularidad.
 
-00:02:23.707 --> 00:02:25.972
+00:03:42.421 --> 00:03:44.686
 Siguiente: ¿dónde vive la fecha de corte?
 
-00:02:26.672 --> 00:02:29.636
+00:03:45.386 --> 00:03:48.350
 Nuestro boceto la puso en el periodo: una fecha para todos.
 
-00:02:30.336 --> 00:02:36.331
+00:03:49.050 --> 00:03:55.045
 La referencia la registra en cada inscripción a una unidad, porque cada unidad de estudio tiene su propia fecha de corte.
 
-00:02:37.031 --> 00:02:43.389
+00:03:55.745 --> 00:04:02.103
 Un intensivo de verano de Data Science 101 tiene una fecha de corte a semanas de la del semestre.
 
-00:02:45.089 --> 00:02:49.998
+00:04:03.803 --> 00:04:08.712
 Pon cada dato en la cosa que realmente describe. Aquí, adoptamos la referencia.
 
-00:02:52.498 --> 00:02:54.967
+00:04:11.212 --> 00:04:13.681
 Ahora, dos estudiantes se cuentan dos veces.
 
-00:02:55.667 --> 00:02:59.289
+00:04:14.381 --> 00:04:18.003
 Cada uno estudia una doble titulación: ciencia de datos, y negocios.
 
-00:02:59.989 --> 00:03:04.799
+00:04:18.703 --> 00:04:23.513
 Nuestro boceto decía que un estudiante pertenece a una carrera. Así no funciona la universidad.
 
-00:03:05.499 --> 00:03:11.809
+00:04:24.213 --> 00:04:30.523
 La referencia ya tiene la respuesta: una admisión a una carrera. Un estudiante, en una carrera, desde una fecha de inicio.
 
-00:03:13.709 --> 00:03:19.178
+00:04:32.423 --> 00:04:37.892
 Cada inscripción a una unidad cuenta para una admisión a una carrera, así que cada estudiante se cuenta una vez.
 
-00:03:19.878 --> 00:03:24.274
+00:04:38.592 --> 00:04:42.988
 Cuando dos cosas se conectan de muchos a muchos, el vínculo suele merecer su propia caja.
 
-00:03:26.774 --> 00:03:28.777
+00:04:45.488 --> 00:04:47.491
 Última pregunta: ¿inscrito cuándo?
 
-00:03:29.477 --> 00:03:33.725
+00:04:48.191 --> 00:04:52.439
 Genie contó hoy. El reporte de corte contó en la fecha de corte.
 
-00:03:34.425 --> 00:03:39.640
+00:04:53.139 --> 00:04:58.354
 Las inscripciones cambian. Un estudiante queda en lista de espera, luego se inscribe, y después se retira.
 
-00:03:40.340 --> 00:03:46.016
+00:04:59.054 --> 00:05:04.730
 La referencia guarda el estado actual de cada inscripción. Necesitamos su historial, así que extendemos el modelo.
 
-00:03:46.716 --> 00:03:51.965
+00:05:05.430 --> 00:05:10.679
 Cada cambio se guarda con su fecha, y el conteo de corte se vuelve una foto de un día.
 
-00:03:55.465 --> 00:03:58.152
+00:05:12.379 --> 00:05:18.356
+Como las cuatro columnas: lo que había en la fecha de corte, lo que entró, lo que salió y lo que hay hoy.
+
+00:05:22.056 --> 00:05:24.743
 El boceto es más preciso. Pero sigue siendo un boceto.
 
-00:03:58.852 --> 00:04:04.495
+00:05:25.443 --> 00:05:31.086
 Este es el modelo conceptual: las cosas que importan, y cómo se conectan, acordado con el negocio.
 
-00:04:05.195 --> 00:04:12.262
+00:05:31.786 --> 00:05:38.853
 Acércate, y se vuelve el modelo lógico: qué identifica a cada cosa, sus datos, y cuántas hay de cada una.
 
-00:04:13.962 --> 00:04:19.139
+00:05:40.553 --> 00:05:45.730
 Acércate otra vez, y se vuelve el modelo físico: las tablas reales en la plataforma.
 
-00:04:20.839 --> 00:04:28.299
+00:05:47.430 --> 00:05:54.890
 El mismo significado, tres niveles de detalle. El negocio es dueño del primero, los ingenieros del último, y los tres deben coincidir.
 
-00:04:29.799 --> 00:04:32.943
+00:05:56.390 --> 00:05:59.534
 Cómo construir esas tablas es tema de otra película.
 
-00:04:35.443 --> 00:04:38.478
+00:06:02.034 --> 00:06:05.069
 Retira la referencia, y verás cómo encaja todo.
 
-00:04:39.178 --> 00:04:42.756
+00:06:05.769 --> 00:06:09.347
 Revisar: antes de inventar algo, búscalo en un modelo de referencia.
 
-00:04:43.456 --> 00:04:47.246
+00:06:10.047 --> 00:06:13.837
 Adoptar: donde encaja con el negocio, usa sus ideas y sus palabras.
 
-00:04:48.546 --> 00:04:52.245
+00:06:15.137 --> 00:06:18.836
 Extender: donde el negocio necesita más, agrégalo, con el mismo estilo.
 
-00:04:53.545 --> 00:04:59.747
+00:06:20.136 --> 00:06:26.338
 Registrar: anota cada diferencia y su motivo, para que la próxima persona sepa qué es estándar y qué es nuestro.
 
-00:05:01.447 --> 00:05:07.353
+00:06:28.038 --> 00:06:33.944
 Una referencia es un punto de partida, no una jaula. Donde el negocio es realmente distinto, gana el negocio.
 
-00:05:09.853 --> 00:05:11.343
+00:06:36.444 --> 00:06:37.934
 La dirección vuelve a preguntar.
 
-00:05:12.043 --> 00:05:17.303
+00:06:38.634 --> 00:06:43.894
 Esta vez, Genie repregunta: ¿inscritos a la fecha de corte, en la oferta del Semestre 1?
 
-00:05:18.003 --> 00:05:21.536
+00:06:44.594 --> 00:06:48.127
 Luego responde: 118, y muestra cómo contó.
 
-00:05:23.436 --> 00:05:27.057
+00:06:50.027 --> 00:06:53.648
 El boceto tiene una nueva versión, y una nota que dice por qué cambió.
 
-00:05:27.757 --> 00:05:31.463
+00:06:54.348 --> 00:06:58.054
 No será la última. Los modelos evolucionan: no a menudo, pero siempre.
 
-00:05:32.163 --> 00:05:34.374
+00:06:59.354 --> 00:07:05.466
+Los Registros Amarillos, no. Hechos cada diez años, para impuestos que se pagaban cada año, se quedaron atrás.
+
+00:07:06.966 --> 00:07:14.437
+A fines de los Ming, los condados usaban registros blancos, hechos cada año, para el trabajo real. Los amarillos se volvieron un trámite.
+
+00:07:16.137 --> 00:07:22.259
+Un modelo que no se ajusta al negocio termina igual: se guarda para mostrar, mientras copias aparte hacen el trabajo.
+
+00:07:23.759 --> 00:07:25.970
 Revisa la referencia. Ajústala al negocio.

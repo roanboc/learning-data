@@ -24,7 +24,7 @@ import json, pathlib, re, sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 FILMS = ROOT / "films"
 # the order of the release's list and its notes: the folders under films/
-ORDER = ["inner-life-of-data", "a-sharper-sketch", "when-things-go-wrong", "making-of", "from-words-to-data",
+ORDER = ["inner-life-of-data", "model-the-business", "a-sharper-sketch", "when-things-go-wrong", "making-of", "from-words-to-data",
          "analytics-engineering", "enterprise-architecture", "master-and-reference-data", "data-governance"]
 
 

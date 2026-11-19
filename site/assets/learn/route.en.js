@@ -189,21 +189,33 @@ window.LD_ROUTE = {
      ]
     },
     {
-     "id": "ai-and-continuous-architecture",
+     "id": "continuous-architecture",
      "kind": "series",
-     "title": "AI and continuous architecture",
-     "href": "ai-and-continuous-architecture/",
-     "poster": "agents-on-the-map-poster.jpg",
-     "kicker": "Series · 6 films",
-     "len": "48 min",
-     "min": 48.0,
+     "title": "Continuous architecture",
+     "href": "continuous-architecture/",
+     "poster": "a-first-draft-not-a-blank-page-poster.jpg",
+     "kicker": "Series · 3 films",
+     "len": "24 min",
+     "min": 24.0,
      "films": [
-      "ld-agents-on-the-map",
-      "ld-the-ai-platform",
-      "ld-what-an-agent-may-read",
       "ld-a-first-draft-not-a-blank-page",
       "ld-every-change-checked",
       "ld-kept-alive"
+     ]
+    },
+    {
+     "id": "ai-architecture",
+     "kind": "series",
+     "title": "AI architecture",
+     "href": "ai-architecture/",
+     "poster": "agents-on-the-map-poster.jpg",
+     "kicker": "Series · 3 films",
+     "len": "24 min",
+     "min": 24.0,
+     "films": [
+      "ld-agents-on-the-map",
+      "ld-the-ai-platform",
+      "ld-what-an-agent-may-read"
      ]
     }
    ]
@@ -281,15 +293,16 @@ window.LD_ROUTE = {
    "line": "What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system.",
    "items": [
     {
-     "id": "sketch",
-     "kind": "film",
-     "title": "A Sharper Sketch",
-     "href": "sketch/",
-     "poster": "sketch-poster.jpg",
-     "kicker": "One film",
-     "len": "5½ min",
-     "min": 5.5,
+     "id": "model-the-business",
+     "kind": "series",
+     "title": "Model the business",
+     "href": "model-the-business/",
+     "poster": "the-map-behind-the-sketch-poster.jpg",
+     "kicker": "Series · 2 films",
+     "len": "14 min",
+     "min": 14.0,
      "films": [
+      "ld-the-map-behind-the-sketch",
       "ld3"
      ]
     },
@@ -312,7 +325,8 @@ window.LD_ROUTE = {
       "ld-keeping-it-true"
      ]
     }
-   ]
+   ],
+   "proj": 1
   },
   {
    "id": "modern-data-basics",
@@ -808,7 +822,7 @@ window.LD_ROUTE = {
    "stops": [
     "intro",
     "more-than-a-platform",
-    "sketch",
+    "model-the-business",
     "data-that-moves",
     "when-things-go-wrong"
    ]

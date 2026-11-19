@@ -100,45 +100,15 @@ Module: `analytics-engineering` · [metadata](analytics-engineering/module.json)
 Source: [films/analytics-engineering](../films/analytics-engineering/) · Portal: `/in-the-weeds/`
 
 - [Declare it, then build it](../films/analytics-engineering/1-declare-it-then-build-it/) — `declare-it-then-build-it`
-
-  Labs and assessments: [learn.en.js](../site/assets/declare-it-then-build-it/learn.en.js), [learn.es.js](../site/assets/declare-it-then-build-it/learn.es.js)
-
 - [Start from a question](../films/analytics-engineering/2-start-from-a-question/) — `start-from-a-question`
-
-  Labs and assessments: [learn.en.js](../site/assets/start-from-a-question/learn.en.js), [learn.es.js](../site/assets/start-from-a-question/learn.es.js)
-
 - [What makes it the same one](../films/analytics-engineering/3-what-makes-it-the-same-one/) — `what-makes-it-the-same-one`
-
-  Labs and assessments: [learn.en.js](../site/assets/what-makes-it-the-same-one/learn.en.js), [learn.es.js](../site/assets/what-makes-it-the-same-one/learn.es.js)
-
 - [One row of what, and when](../films/analytics-engineering/4-one-row-of-what-and-when/) — `one-row-of-what-and-when`
-
-  Labs and assessments: [learn.en.js](../site/assets/one-row-of-what-and-when/learn.en.js), [learn.es.js](../site/assets/one-row-of-what-and-when/learn.es.js)
-
 - [Promises and proofs](../films/analytics-engineering/5-promises-and-proofs/) — `promises-and-proofs`
-
-  Labs and assessments: [learn.en.js](../site/assets/promises-and-proofs/learn.en.js), [learn.es.js](../site/assets/promises-and-proofs/learn.es.js)
-
 - [Built in layers](../films/analytics-engineering/6-built-in-layers/) — `built-in-layers`
-
-  Labs and assessments: [learn.en.js](../site/assets/built-in-layers/learn.en.js), [learn.es.js](../site/assets/built-in-layers/learn.es.js)
-
 - [Who owns what](../films/analytics-engineering/7-who-owns-what/) — `who-owns-what`
-
-  Labs and assessments: [learn.en.js](../site/assets/who-owns-what/learn.en.js), [learn.es.js](../site/assets/who-owns-what/learn.es.js)
-
 - [An agent on the team](../films/analytics-engineering/8-an-agent-on-the-team/) — `an-agent-on-the-team`
-
-  Labs and assessments: [learn.en.js](../site/assets/an-agent-on-the-team/learn.en.js), [learn.es.js](../site/assets/an-agent-on-the-team/learn.es.js)
-
 - [Written once](../films/analytics-engineering/9-written-once/) — `written-once`
-
-  Labs and assessments: [learn.en.js](../site/assets/written-once/learn.en.js), [learn.es.js](../site/assets/written-once/learn.es.js)
-
 - [End to end](../films/analytics-engineering/10-end-to-end/) — `end-to-end`
-
-  Labs and assessments: [learn.en.js](../site/assets/end-to-end/learn.en.js), [learn.es.js](../site/assets/end-to-end/learn.es.js)
-
 
 Labs and assessments: [site/assets/in-the-weeds/learn.en.js](../site/assets/in-the-weeds/learn.en.js), [site/assets/in-the-weeds/learn.es.js](../site/assets/in-the-weeds/learn.es.js)
 

@@ -102,5 +102,11 @@
       "Construye los informes",
       "Tomás Ortega, desarrollador de informes"
     ]
-  ]
+  ],
+  "learn_p": "{Labs} decision playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs de decisiones, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} decision playgrounds, one for each film. Choose what the leader does, play the weeks, and watch what it does to the people and the work.",
+  "labs_lead_es": "{Labs} labs de decisiones, uno por película. Elige qué hace quien lidera, juega las semanas y mira qué les pasa a las personas y al trabajo.",
+  "quiz_lead": "{quiz} situations from every film, about putting people first. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
+  "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre poner a las personas primero. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

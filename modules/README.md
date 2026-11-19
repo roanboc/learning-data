@@ -477,6 +477,8 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 - [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 - [From gaps to a roadmap](../films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/) — `from-gaps-to-a-roadmap`
 
+Labs and assessments: [site/assets/a-plan-in-ninety-days/learn.en.js](../site/assets/a-plan-in-ninety-days/learn.en.js), [site/assets/a-plan-in-ninety-days/learn.es.js](../site/assets/a-plan-in-ninety-days/learn.es.js)
+
 ### Making the case
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`

@@ -421,6 +421,8 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 - [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
 - [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
+Labs and assessments: [site/assets/the-new-skills/learn.en.js](../site/assets/the-new-skills/learn.en.js), [site/assets/the-new-skills/learn.es.js](../site/assets/the-new-skills/learn.es.js)
+
 ### Working with people
 
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`

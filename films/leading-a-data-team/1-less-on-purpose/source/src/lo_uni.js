@@ -103,72 +103,98 @@ function lo_panel(cc,bx,by,bw,bh,head,rows,bars,hc){const U=PK.u;let y=by+54;
 
 
 
-/* ---------------------------------------------------------------- the boards' rows (the board's own px, 1250 by 524; a hand reaches
-   baselines from 96 to 470). Laid out for someone who walks: on from left to right, a row's parts along it. */
+/* ---------------------------------------------------------------- the boards (the board's own px, 1250 by 524; a hand reaches
+   baselines from 96 to 470). The design principles in 2012 are written plainly, as an office's board was; Carmen's and Helena's are
+   drawn as a designer would, a graphic recording pinned over the board, almost done when it first shows (PK.sk.drawn): whoever
+   explains adds the last marks and words as the voice says them, on from left to right, and steps clear. */
 // 0. the Government Digital Service's design principles, 2012 (a designer, at its office's board)
 const lo_boardO=(sc,w)=>[
   {s:"Design principles",x:70,y:110,size:60,col:"blue",at:w("rules","design principles",-0.3),d:0.9},
   {s:"1 · start with needs",x:110,y:230,size:56,at:w("rules","start with",-0.2),d:1.0},
   {s:"2 · do less",x:560,y:340,size:60,col:"green",at:w("rules","do less",-0.2),d:0.6},
   {s:"only what only government can do",x:300,y:450,size:48,at:w("only","only do",-0.3),d:1.4}];
-// 1. the series' four ideas (Carmen, at the team's board)
-const lo_boardA=(sc,w)=>[
-  {s:"Leading a team",x:70,y:110,size:60,col:"blue",at:w("series","four ideas",-0.3),d:0.8},
-  {s:"minimalism · kaizen",x:110,y:220,size:54,at:w("series","minimalism",-0.2),d:1.0},
-  {s:"Ubuntu · emergence",x:560,y:330,size:54,at:w("series","Ubuntu",-0.2),d:1.0},
-  {s:"keep what does a job, well",x:420,y:450,size:52,col:"green",at:w("first","keeping",-0.2),d:1.2}];
-// 2. everything on one wall (Helena, at the team's board)
-const lo_boardB=(sc,w)=>[
-  {s:"Everything we run",x:70,y:110,size:60,col:"blue",at:w("list","everything",-0.2),d:0.9},
-  {s:"38 reports · 17 unopened",x:110,y:220,size:54,col:"orange",at:w("reports","38",-0.2),d:1.1},
-  {s:"meetings · 8 h a week each",x:300,y:330,size:52,col:"amber",at:w("meetings","eight hours",-0.3),d:1.1},
-  {s:"60 alerts a week",x:420,y:440,size:52,col:"amber",at:w("alerts","60 alerts",-0.2),d:0.8},
-  {s:"most need nothing",x:860,y:440,size:44,at:w("alerts","need nothing",-0.4),d:0.8}];
-// 3. what each thing is for (Carmen)
-const lo_boardC=(sc,w)=>[
-  {s:"What each is for",x:70,y:110,size:60,col:"blue",at:w("agree","what each",-0.3),d:0.8},
-  {s:"meeting · decide or help",x:110,y:220,size:52,at:w("meeting","deciding",-0.2),d:1.1},
-  {s:"not to read out the board",x:560,y:300,size:44,col:"amber",at:w("meeting","reading out",-0.3),d:1.0},
-  {s:"alert · someone acts now",x:250,y:390,size:52,at:w("alert","act now",-0.8),d:1.1},
-  {s:"report · a decision",x:560,y:470,size:52,at:w("report","decision",-0.4),d:0.9}];
-// 4. less, but better (Carmen)
-const lo_boardD=(sc,w)=>[
-  {s:"Minimalism · art, 1960s",x:70,y:110,size:56,col:"blue",at:w("art","minimalism",-0.2),d:1.1},
-  {s:"kanso · simplicity",x:110,y:230,size:54,at:w("kanso","kanso",-0.2),d:0.9},
-  {s:"muda · waste",x:560,y:340,size:54,col:"amber",at:w("lean","muda",-0.2),d:0.7},
-  {s:"less, but better · Rams",x:420,y:460,size:56,col:"green",at:w("rams","less, but better",-0.2),d:1.1}];
-// 5. one rule to keep the time (Helena, at the team's board)
-const lo_boardE=(sc,w)=>[
-  {s:"One rule",x:70,y:110,size:60,col:"blue",at:w("rule","one rule",-0.3),d:0.6},
-  {s:"anything new needs",x:110,y:220,size:54,at:w("rule","anything new",-0.2),d:1.0},
-  {s:"a reader · a reason · an owner",x:300,y:330,size:52,col:"green",at:w("rule","a reader",-0.2),d:1.3},
-  {s:"each quarter: all back on the wall",x:300,y:450,size:46,at:w("review","quarterly",-0.3),d:1.3}];
-// 6. on Monday (Helena, at the board seen close)
-const lo_boardM=(sc,w)=>[
-  {s:"On Monday",x:70,y:110,size:64,col:"blue",at:w("list","On Monday",0),d:0.6},
-  {s:"list everything",x:110,y:210,size:50,at:w("list","list everything",-0.1),d:0.8},
-  {s:"who uses it, for what?",x:200,y:300,size:50,col:"orange",at:w("who","who uses",-0.2),d:1.0},
-  {s:"stop together · off, wait, delete",x:290,y:390,size:46,col:"amber",at:w("stop","Stop the rest",-0.2),d:1.3},
-  {s:"measure the time · protect it",x:380,y:470,size:46,col:"green",at:w("time","Measure",-0.2),d:1.2}];
+// 1. the series' four ideas (Carmen, at the team's board): one film each; she rings the first, and writes what it means
+const LO_IDEAS=[["minimalism","minus","green","Less, on purpose"],["kaizen","up","blue","One small change"],["Ubuntu","people","orange","The team first"],["emergence","sprout","violet","Rules to decide"]];
+const lo_boardA=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Leading a team",{sub:["four ideas, a film each","mut"]});
+    LO_IDEAS.forEach(([h,ic,col,f],i)=>D.panel(c,70+i*280,170,262,236,{title:h,col,fill:col},(cc,x,y,pw)=>{D.icon(cc,ic,x+pw/2,y+50,36,{fill:"white"});
+      D.text(cc,f,x+pw/2,y+140,{size:28,col:"mut",align:"center"});}));}),
+  {k:"ring",x:201,y:210,rx:118,ry:34,col:"green",at:w("first","minimalism",-0.2),d:0.5},
+  {s:"keep what does a job, well",x:1180,y:468,size:46,w:700,col:"green",align:"right",at:w("first","keeping",-0.2),d:1.2}];
+// 2. everything on one wall (Helena, at the team's board): the wall's three kinds of thing, and what the logs say
+const lo_boardB=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Everything we run");
+    D.panel(c,70,150,520,300,{title:"reports",col:"orange",fill:"orange"},(cc,x,y)=>D.dots(cc,x+40,y+30,19,2,{gap:23,r:8,on:17,col:"amber"}));
+    D.panel(c,620,150,260,300,{title:"meetings",col:"amber",fill:"amber"},(cc,x,y,pw)=>D.icon(cc,"clock",x+pw/2,y+50,36,{fill:"white"}));
+    D.panel(c,910,150,270,300,{title:"alerts",col:"amber",fill:"amber"},(cc,x,y,pw)=>D.icon(cc,"bolt",x+pw/2,y+50,36,{fill:"white"}));}),
+  {s:"38 · 17 unopened",x:110,y:400,size:48,w:700,col:"orange",at:w("reports","38",-0.2),d:1.1},
+  {s:"8 h a week",x:750,y:400,size:42,w:700,col:"amber",align:"center",at:w("meetings","eight hours",-0.3),d:0.8},
+  {s:"60 a week",x:1045,y:340,size:42,w:700,col:"amber",align:"center",at:w("alerts","60 alerts",-0.2),d:0.7},
+  {s:"most: nothing",x:1160,y:420,size:36,col:"mut",align:"right",at:w("alerts","need nothing",-0.4),d:0.7}];
+// 3. what each thing is for (Carmen): a meeting, an alert and a report, each with what it's for in her hand
+const lo_boardC=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"What each is for");
+    D.panel(c,70,140,380,320,{title:"a meeting",col:"blue",fill:"blue"},(cc,x,y)=>{D.icon(cc,"people",x+56,y+46,30,{fill:"white"});
+      D.face(cc,"noor",x+214,y+44,24);D.face(cc,"jun",x+270,y+44,24);D.face(cc,"sam",x+326,y+44,24);
+      D.text(cc,"reading out",x+30,y+214,{size:30,col:"mut"});D.text(cc,"the board",x+30,y+252,{size:30,col:"mut"});});
+    D.panel(c,480,140,360,320,{title:"an alert",col:"amber",fill:"amber"},(cc,x,y)=>{D.icon(cc,"bolt",x+56,y+46,30,{fill:"white"});
+      D.icon(cc,"clock",x+236,y+46,26,{fill:"white"});D.icon(cc,"phone",x+300,y+46,26,{fill:"white"});});
+    D.panel(c,870,140,310,320,{title:"a report",col:"orange",fill:"orange"},(cc,x,y)=>{D.icon(cc,"doc",x+56,y+46,30,{fill:"white"});
+      D.bars(cc,x+150,y+6,120,70,[{v:2,col:"orange"},{v:3,col:"orange"},{v:5,col:"green"}],{size:28});});}),
+  {s:"decide or help",x:100,y:330,size:44,w:700,col:"blue",at:w("meeting","deciding",-0.2),d:1.0},
+  {k:"line",x:92,y:416,x1:280,y1:400,col:"amber",at:w("meeting","reading out",-0.3),d:0.4},
+  {s:"someone acts now",x:505,y:330,size:38,w:700,col:"amber",at:w("alert","act now",-0.4),d:1.0},
+  {s:"a decision",x:1160,y:330,size:44,w:700,col:"orange",align:"right",at:w("report","report",0),d:0.8}];
+// 4. less, but better (Carmen): where the word comes from, two ideas from Japan, and Rams's three words, each drawn at the left; she
+// writes what each means in the column at their right, as the voice says it, and strikes out "waste": the team never calls work waste
+const lo_boardD=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"Less, but better");
+    const row=(i,title,col,draw)=>{const y=150+i*80;D.box(c,70,y,96,64,{fill:col,col:"ink",w:3,r:8});draw(118,y+32);D.caps(c,title,190,y+44,{size:28,col});
+      D.line(c,[[450,y+34],[520,y+34]],{col:"mut",w:2.5,dash:[8,10],seed:i+3});};
+    row(0,"art · 1960s","blue",(x,y)=>{D.box(c,x-36,y-14,26,26,{fill:"white",col:"ink",w:2.5,r:2});D.box(c,x-2,y-14,10,26,{fill:"white",col:"ink",w:2.5,r:2});D.disc(c,x+24,y-1,13,{fill:"white",col:"ink",w:2.5});});
+    row(1,"kanso","green",(x,y)=>{D.box(c,x-34,y-14,68,28,{fill:"white",col:"ink",w:2.5,r:4});D.disc(c,x,y,4,{fill:"green",col:"ink",w:1.5});});
+    row(2,"muda · lean","amber",(x,y)=>D.icon(c,"gear",x,y,20,{fill:"white"}));
+    row(3,"Dieter Rams","green",(x,y)=>D.icon(c,"star",x,y,20,{fill:"white"}));}),
+  {s:"simplest forms",x:540,y:196,size:44,w:700,col:"blue",at:w("art","simplest forms",-0.3),d:0.9},
+  {s:"simplicity",x:540,y:276,size:44,w:700,col:"green",at:w("kanso","simplicity",-0.3),d:0.7},
+  {s:"waste",x:540,y:356,size:44,w:700,col:"amber",at:w("lean","waste",-0.2),d:0.5,marks:[["strike","ink",w("never","never",-0.2),0.4]]},
+  {s:"less, but better",x:540,y:436,size:48,w:700,col:"green",at:w("rams","less, but better",-0.2),d:1.0}];
+// 5. one rule to keep the time (Helena, at the team's board): what anything new needs, and the quarter's look back
+const LO_NEEDS=[["eye","a reader"],["q","a reason"],["person","an owner"]];
+const lo_boardE=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"One rule");
+    D.panel(c,70,140,700,320,{title:"anything new needs",col:"green",fill:"green"},(cc,x,y)=>LO_NEEDS.forEach(([ic,s],i)=>{const cx=x+110+i*230;D.icon(cc,ic,cx,y+60,36,{fill:"white"});D.text(cc,s,cx,y+150,{size:36,w:700,align:"center"});}));
+    D.panel(c,800,140,380,320,{title:"each quarter",col:"blue",fill:"blue"},(cc,x,y,pw)=>D.icon(cc,"cal",x+pw/2,y+60,36,{fill:"white"}));}),
+  ...LO_NEEDS.map(([,s],i)=>({k:"tick",x:180+i*230+80,y:236,r:18,col:"green",at:w("rule",s,0.2),d:0.3})),
+  {s:"all back on the wall",x:1160,y:400,size:36,w:700,col:"blue",align:"right",at:w("review","quarterly",-0.3),d:1.0}];
+// 6. on Monday (Helena, at the board seen close): the wall as it was kept, and the four steps; she ticks each at the board's right
+// edge as the voice comes to it, clear of what is written, and adds the last words
+const LO_MON=[["list everything you run","list","list everything"],["ask who uses it, for what","who","who uses"],["stop the rest, openly","stop","Stop the rest"],["measure the time back","time","Measure"]];
+const lo_boardM=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.head(c,"On Monday");
+    D.panel(c,70,140,380,272,{title:"the wall",col:"blue",fill:"blue"},(cc,x,y)=>{for(let i=0;i<10;i++){const kept=[0,2,3,5,8].includes(i),bx=x+34+(i%5)*64,by=y+20+Math.floor(i/5)*84;
+      D.box(cc,bx,by,50,50,{fill:kept?"green":"white",col:kept?"ink":"mut",w:2.5,r:4,dash:kept?null:[6,6]});}
+      D.text(cc,"kept: what people use",x+34,y+192,{size:28,col:"mut"});});
+    LO_MON.forEach(([s],i)=>{const y=180+i*74;D.disc(c,512,y-12,24,{fill:["blue","orange","amber","green"][i],col:"ink",w:3});D.text(c,String(i+1),512,y-1,{size:30,w:700,align:"center"});D.text(c,s,556,y,{size:36});});}),
+  ...LO_MON.map(([,id,word],i)=>({k:"tick",x:1150,y:166+i*74,r:18,col:"green",at:w(id,word,0.3),d:0.3})),
+  {s:"and protect it",x:1180,y:470,size:46,w:700,col:"green",align:"right",at:w("time","protect",-0.2),d:0.8}];
 
 /* ---------------------------------------------------------------- pages of a notebook (the page's own px): one pen writes a page */
-// 1. Ivy's page: we add, rarely take away
-const lo_note1=(sc,w)=>[
-  {s:"We add",x:70,y:124,size:80,w:760,col:"blue",at:w("study","study",-0.4),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"Nature · 2021",x:110,y:250,size:56,col:"mut",at:w("study","Nature",-0.2),d:0.8},
-  {s:"to improve: we add",x:110,y:360,size:56,col:"orange",at:w("study","add",-0.6),d:0.9},
-  {s:"rarely take away",x:110,y:460,size:56,col:"amber",at:w("away","taking",-0.4),d:0.9},
-  {s:"1 in 10 took away",x:110,y:560,size:56,col:"green",at:w("uni","one in ten",-0.2),d:0.9}];
-// 2. Helena's page: the week they want
-const lo_note2=(sc,w)=>[
-  {s:"The week",x:70,y:124,size:80,w:760,col:"blue",at:w("week","design",-0.3),d:0.6,marks:[["under","blue",null,0.3]]},
-  {s:"stand-up 15 min · planning Mon",x:110,y:250,size:46,at:w("week","stand-up",-0.3),d:1.4},
-  {s:"review · every 2nd Thu",x:110,y:350,size:50,at:w("more","review",-0.2),d:1.0},
-  {s:"one-to-one · 30 min",x:110,y:450,size:50,at:w("more","one-to-one",-0.3),d:0.9},
-  {s:"3 h a week, not 8",x:110,y:560,size:58,col:"green",at:w("hours","three hours",-0.2),d:0.9}];
-// 3. Helena's page: the time back
-const lo_note3=(sc,w)=>[
-  {s:"The time back",x:70,y:124,size:80,w:760,col:"blue",at:w("june","measures",-0.3),d:0.7,marks:[["under","blue",null,0.3]]},
-  {s:"5 h a week each",x:110,y:260,size:58,col:"green",at:w("hours","five hours",-0.3),d:0.9},
-  {s:"× 8 people",x:110,y:370,size:58,at:w("hours","eight people",-0.3),d:0.7},
-  {s:"= one person's whole week",x:110,y:480,size:54,col:"green",at:w("hours","whole week",-0.3),d:1.1}];
+// 1. Ivy's page (Ivy): what people do to make something better; the pen adds what the study found, as the voice says it
+const lo_note1=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"We add",86,124,{size:84});
+    D.sticky(c,640,60,300,104,{col:"sun",rot:0.03,draw:(cc,x,y)=>{D.text(cc,"Nature, 2021",x+26,y+48,{size:34,w:700});D.text(cc,"a study",x+26,y+86,{size:30,col:"mut"});}});
+    D.panel(c,100,190,420,260,{title:"to improve: add",col:"orange",fill:"orange"},(cc,x,y)=>{for(let i=0;i<10;i++)D.icon(cc,"plus",x+50+(i%5)*80,y+24+Math.floor(i/5)*58,18,{fill:"orange"});});
+    D.panel(c,560,190,420,260,{title:"or take away",col:"green",fill:"green"},(cc,x,y)=>D.icon(cc,"minus",x+210,y+86,22,{fill:"green"}));
+    for(let i=0;i<10;i++)D.icon(c,"person",140+i*82,560,24,{fill:i===0?"green":"white"});},[60,40,1040,800]),
+  {s:"mostly add",x:130,y:428,size:46,w:700,col:"orange",at:w("study","add",-0.4),d:0.7},
+  {s:"rarely",x:590,y:428,size:46,w:700,col:"amber",at:w("away","rarely",-0.2),d:0.5},
+  {s:"1 in 10 took something away",x:110,y:690,size:48,w:700,col:"green",at:w("uni","one in ten",-0.2),d:1.2}];
+// 2. Helena's page (Helena): the week they want, its meetings in place; she names them as the voice does, and writes the hours
+const lo_note2=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"The week",86,124,{size:84});
+    ["Mon","Tue","Wed","Thu","Fri"].forEach((d,i)=>{const x=150+i*168;D.text(c,d,x+70,212,{size:30,col:"mut",align:"center"});D.box(c,x,228,140,26,{fill:"blue",col:"ink",w:2,r:5});
+      if(i===0)D.box(c,x,266,140,64,{fill:"blue",col:"ink",w:2.5,r:6});if(i===3)D.box(c,x,266,140,64,{fill:"green",col:"ink",w:2.5,r:6});if(i===2)D.box(c,x,266,140,34,{fill:"amber",col:"ink",w:2.5,r:6});});
+    [["blue",410],["green",500]].forEach(([col,y])=>D.box(c,110,y-30,36,30,{fill:col,col:"ink",w:2,r:4}));},[60,40,1040,800]),
+  {s:"stand-up 15 min · planning Mon",x:170,y:410,size:44,w:700,col:"blue",at:w("week","stand-up",-0.3),d:1.3},
+  {s:"review · one-to-one",x:170,y:500,size:44,w:700,col:"green",at:w("more","review",-0.2),d:1.0},
+  {s:"3 h a week, not 8",x:110,y:650,size:62,w:700,col:"green",at:w("hours","three hours",-0.2),d:0.9}];
+// 3. Helena's page (Helena): the team, each with time back, and what it adds up to
+const lo_note3=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"The time back",86,124,{size:80});
+    for(let i=0;i<8;i++){const x=150+i*100;D.icon(c,"person",x,316,26,{fill:"white"});D.icon(c,"clock",x,378,17,{fill:"green"});}
+    D.line(c,[[120,408],[120,428],[900,428],[900,408]],{col:"ink",w:3,seed:3});D.arrow(c,[510,436],[510,498],{col:"ink",w:3.5});
+    D.disc(c,510,562,56,{fill:"green",col:"ink",w:3});D.text(c,"40 h",510,576,{size:38,w:700,align:"center"});},[60,40,1040,800]),
+  {s:"5 h a week back, each",x:110,y:236,size:48,w:700,col:"green",at:w("hours","five hours",-0.3),d:1.0},
+  {s:"= one person's whole week",x:110,y:720,size:54,w:700,col:"green",at:w("hours","whole week",-0.3),d:1.1}];

@@ -515,6 +515,8 @@ Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: 
 - [Better every week](../films/small-steps-measured/3-better-every-week/) — `better-every-week`
 - [Strategy is a habit](../films/small-steps-measured/4-strategy-is-a-habit/) — `strategy-is-a-habit`
 
+Labs and assessments: [site/assets/small-steps-measured/learn.en.js](../site/assets/small-steps-measured/learn.en.js), [site/assets/small-steps-measured/learn.es.js](../site/assets/small-steps-measured/learn.es.js)
+
 ## Making of and supplementary films
 
 - [Data for Films](../films/making-of/1-data-for-films/)

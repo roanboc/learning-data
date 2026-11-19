@@ -427,7 +427,7 @@ const NARR={
  {"id":"layers","gap":0.9,"text":"His map shows the whole utility in six layers, from why it exists down to what it runs on."},
  {"id":"two","gap":0.9,"text":"Two of its applications are agents: the outage agent proposes which fault matters most, and the map agent drafts changes."},
  {"id":"rights","gap":0.9,"text":"Each is software in a role, with its rights written down and an owner: Grace for one, Tomás for the other."},
- {"id":"series","gap":0.9,"text":"This series adds what's around them: the AI platform, AI in the architects' own work, and a map kept alive."},
+ {"id":"series","gap":0.9,"text":"This series adds what's around them: the AI platform they run on, and what each may read."},
  {"id":"module","gap":0.9,"text":"How an agent works is the AI agents module's; here, the map shows where agents work, and who answers for them."}]},
 "unseen":{"name":"A plan nobody saw","lead":1.4,"tail":1.0,"vo":[
  {"id":"farah","gap":0.9,"text":"Then Farah brings a household, behind on their bill. They asked the website's chat for more time to pay."},
@@ -487,7 +487,7 @@ const NARR={
  {"id":"next","gap":0.9,"text":"Next, the platform they all run on."}]}
 };
 
-const VODUR={"hands/city": 8.833, "hands/ruin": 7.86, "hands/harm": 4.461, "hands/must": 6.47, "hands/big": 7.119, "hands/plan": 7.893, "hands/tasks": 8.532, "hands/name": 5.134, "hands/rose": 5.435, "hands/son": 7.132, "hands/now": 4.125, "hands/help": 7.245, "map/note": 3.284, "map/layers": 5.402, "map/two": 7.656, "map/rights": 6.065, "map/series": 7.099, "map/module": 7.109, "unseen/farah": 5.82, "unseen/yes": 3.591, "unseen/fee": 4.907, "unseen/vendor": 5.514, "unseen/whole": 5.764, "unseen/officer": 6.35, "unseen/notes": 6.928, "find/ask": 8.064, "find/look": 9.067, "find/four": 7.884, "find/field": 4.186, "find/helper": 7.572, "find/seven": 2.772, "role/drawn": 8.116, "role/own": 2.123, "role/why": 6.724, "role/tasks": 6.934, "far/process": 5.846, "far/levels": 8.705, "far/run": 3.76, "far/draft": 7.495, "far/inform": 3.863, "far/none": 3.463, "far/verify": 5.907, "far/stages": 5.073, "name/identity": 5.161, "name/pair": 4.165, "name/logs": 4.202, "name/hands": 2.454, "name/person": 6.703, "answers/who": 4.492, "answers/not": 5.925, "answers/owner": 6.296, "answers/frames": 7.691, "answers/approve": 3.11, "all/each": 7.782, "all/crew": 5.197, "all/off": 4.597, "all/check": 7.43, "all/flag": 5.047, "all/plans": 6.606, "babel/story": 6.518, "babel/stop": 6.561, "babel/real": 4.167, "babel/shared": 4.523, "end/answer": 8.272, "end/next": 1.908};
+const VODUR={"hands/city": 8.833, "hands/ruin": 7.86, "hands/harm": 4.461, "hands/must": 6.47, "hands/big": 7.119, "hands/plan": 7.893, "hands/tasks": 8.532, "hands/name": 5.134, "hands/rose": 5.435, "hands/son": 7.132, "hands/now": 4.125, "hands/help": 7.245, "map/note": 3.284, "map/layers": 5.402, "map/two": 7.656, "map/rights": 6.09, "map/series": 5.366, "map/module": 7.109, "unseen/farah": 5.82, "unseen/yes": 3.591, "unseen/fee": 4.907, "unseen/vendor": 5.514, "unseen/whole": 5.764, "unseen/officer": 6.35, "unseen/notes": 6.928, "find/ask": 8.064, "find/look": 9.065, "find/four": 7.884, "find/field": 4.186, "find/helper": 7.572, "find/seven": 2.772, "role/drawn": 8.116, "role/own": 2.123, "role/why": 6.724, "role/tasks": 6.934, "far/process": 5.846, "far/levels": 8.705, "far/run": 3.76, "far/draft": 7.495, "far/inform": 3.863, "far/none": 3.463, "far/verify": 5.907, "far/stages": 5.073, "name/identity": 5.161, "name/pair": 4.165, "name/logs": 4.202, "name/hands": 2.454, "name/person": 6.703, "answers/who": 4.492, "answers/not": 5.925, "answers/owner": 6.296, "answers/frames": 7.691, "answers/approve": 3.11, "all/each": 7.782, "all/crew": 5.197, "all/off": 4.597, "all/check": 7.43, "all/flag": 5.047, "all/plans": 6.606, "babel/story": 6.518, "babel/stop": 6.561, "babel/real": 4.167, "babel/shared": 4.523, "end/answer": 8.272, "end/next": 1.908};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2013,7 +2013,7 @@ eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()
   ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
 yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
 
-/* ===== AI and continuous architecture: the series' components =====
+/* ===== Continuous architecture and AI architecture: the two series' shared components =====
    The last series on enterprise architecture, drawn in the look of The map before the data (films/enterprise-architecture/shared/src/:
    the six layers in glass, paper drafts, the same people at the same energy utility), with one true story across its six films: the
    ziggurat of Babylon, Etemenanki, rebuilt from about 620 BCE. This file holds what every film of the series draws:
@@ -2042,14 +2042,16 @@ function acaMark(ctx,x,y,s,a,p){if(a<=0.01)return;p=p==null?1:p;withA(ctx,a,()=>
   const w=s*(4-i)*1.15,h=s*0.62,yy=y-(i+1)*h-i*s*0.14+(1-spring(q*1.4))*s*0.7;
   withA(ctx,clamp(q*2,0,1),()=>{ctx.save();ctx.shadowColor=rgba(ACA,0.6);ctx.shadowBlur=12;rr(ctx,x-w/2,yy,w,h,s*0.08);ctx.fillStyle=rgba(ACA,0.16);ctx.fill();
     ctx.strokeStyle=rgba(ACA,1);ctx.lineWidth=Math.max(1.6,s*0.09);ctx.stroke();ctx.restore();});}});}
-// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series
+// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series.
+// n is "Film 1 of 3 · <the series>" in both cards: the series' name comes from it, as the two series share these components
+const acaSeries=n=>(n||"").split(" · ")[1]||"",acaFilm=n=>(n||"").split(" · ")[0];
 function acaTitle(ctx,S,t,t0,title,sub,n){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
-  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,"AI AND CONTINUOUS ARCHITECTURE",960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,acaSeries(n).toUpperCase(),960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
     T(ctx,title,960,568,{w:800,size:92,align:"center"});if(sub)T(ctx,sub,960,640,{w:600,size:36,align:"center",color:rgba(SOFT,0.95)});
     withA(ctx,fin(t,t0+1.2,0.8),()=>tag(ctx,960,718,n,ACA,{align:"center",size:28}));});}
 function acaEnd(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
   withA(ctx,tA,()=>{if(line)T(ctx,line,960,400,{w:700,size:44,align:"center"});acaMark(ctx,960,560,16,0.95,1);T(ctx,title,960,628,{w:800,size:44,align:"center",color:rgba(ACA,1)});
-    T(ctx,"AI and continuous architecture"+(n?" · "+n:"")+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
+    T(ctx,acaSeries(n)+" · "+acaFilm(n)+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
 
 /* ---------- Babylon: sky, city, river and palms ---------- */
 // The world is drawn in world space, wider than the frame, so the camera (focus) can move over it. o.dawn (0..1) goes from night to
@@ -2491,7 +2493,7 @@ scene("hands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     bab_tag(cx,960,214,"people from many lands",fin(t,w("son","many lands"),0.7)*(1-fin(t,w("son","stood"),0.6)));
     bab_tag(cx,960,214,"their god's house, standing again",fin(t,w("son","stood"),0.7)*(1-fin(t,tNow-0.6,0.6)));
   });
-  acaTitle(ctx,S,t,B+1.0,"Agents on the map","each in a role of its own, with someone who answers","Film 1 of 6 · AI and continuous architecture");});
+  acaTitle(ctx,S,t,B+1.0,"Agents on the map","each in a role of its own, with someone who answers","Film 1 of 3 · AI architecture");});
 // the present, in the same chapter: the utility's work, many hands, some of them agents; then one agent, given a task, a role and someone
 // who answers, and the same agent given a whole job
 const A1_GRID=(()=>{const G=[];for(let r=0;r<3;r++)for(let k=0;k<8;k++){const ag=(r*8+k)%5===2;G.push({x:420+k*154+(r%2)*40,y:330+r*150,ag});}return G;})(),A1_ONE=12;
@@ -2533,11 +2535,9 @@ scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   const dA=fin(t,w("two","proposes")-0.2,0.6)*(1-fin(t,tS-0.9,0.5)),dB=fin(t,w("two","drafts")-0.2,0.6)*(1-fin(t,tS-0.9,0.5));
   if(dA>0.01)withA(ctx,dA,()=>tag(ctx,1400,a1_row(5)+42,"proposes which fault matters most",KT_AI,{align:"center",size:21}));
   if(dB>0.01)withA(ctx,dB,()=>tag(ctx,1716,a1_row(5)+42,"drafts changes",KT_AI,{align:"center",size:21}));
-  // what this series adds round the agents: the platform under them (in the map), AI in the architects' own work, and a map kept alive
-  const sB=fin(t,w("series","architects")-0.2,0.7)*(1-fin(t,tM-0.4,0.6)),sC=fin(t,w("series","kept alive")-0.2,0.7)*(1-fin(t,tM-0.4,0.6));
-  if(sB>0.01)arrive(ctx,400,470,t,w("series","architects")-0.2,()=>withA(ctx,sB,()=>{tag(ctx,400,470,"AI in the architects' own work",KT_AI,{align:"center",size:30});}),{dy:10});
-  if(sC>0.01)arrive(ctx,1290,92,t,w("series","kept alive")-0.2,()=>withA(ctx,sC,()=>{tag(ctx,1290,92,"a map kept alive",LAY6[3][1],{align:"center",size:30});
-    ctx.save();ctx.strokeStyle=rgba(LAY6[3][1],0.8);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.arc(1170,92,16,0.5,TAU-0.3);ctx.stroke();ctx.restore();}),{dy:-10});
+  // what this series adds round the agents: the platform under them (in the map), and what each may read
+  const sB=fin(t,w("series","may read")-0.2,0.7)*(1-fin(t,tM-0.4,0.6));
+  if(sB>0.01)arrive(ctx,400,470,t,w("series","may read")-0.2,()=>withA(ctx,sB,()=>{tag(ctx,400,470,"what each agent may read",KT_AI,{align:"center",size:30});}),{dy:10});
   // how an agent works is another module's; here, the map: where agents work, and who answers for them
   const mA=fin(t,tM-0.1,0.7);if(mA>0.01)arrive(ctx,380,380,t,tM-0.1,()=>{a1_card(ctx,80,316,600,"the AI agents module",["how an agent works"],KT_AI,{size:34});aca_agent(ctx,620,362,18,t,{});},{dy:12});
   const hA=fin(t,w("module","where agents work")-0.2,0.6),wA=fin(t,w("module","who answers")-0.2,0.6);
@@ -2850,7 +2850,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   a1_map(ctx,t,{p:clamp((t-0.9)/1.8,0,1),deco:true,all:clamp((t-tA-0.2)/2.6,0,1),roleHi:pulseAt(t,w("answer","a role"),1.8),here:pulseAt(t,w("answer","its identity"),1.8),who:pulseAt(t,w("answer","someone who answers"),2.0),
     plat:fin(t,w("next","platform")-0.4,0.8),platHi:pulseAt(t,w("next","platform"),2.0)});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"Agents on the map","An agent works in a role of its own, with someone who answers.","Film 1 of 6");});
+  acaEnd(ctx,S,t,B,"Agents on the map","An agent works in a role of its own, with someone who answers.","Film 1 of 3 · AI architecture");});
 
 /* ---------- where the chapters meet ---------- */
 // The role chapter ends on the process, and How far opens on it, in the same place: the camera carries on from where it was.

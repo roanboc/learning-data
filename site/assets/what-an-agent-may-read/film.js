@@ -483,11 +483,11 @@ const NARR={
 ]},
 "end":{"name":"What an agent may read","lead":0.8,"tail":1.0,"vo":[
  {"id":"answer","gap":1.0,"text":"An agent's context belongs on the map: the products it may read, with contracts and terms, in a place of its own, under its own identity."},
- {"id":"next","gap":1.0,"text":"Next: a first draft, not a blank page."}
+ {"id":"next","gap":1.0,"text":"The agents are on the map. Who decides about the data they read is where Data governance begins."}
 ]}
 };
 
-const VODUR={"tablet/city": 5.385, "tablet/scribe": 7.226, "tablet/from": 3.746, "tablet/slip": 3.28, "tablet/chain": 7.903, "tablet/few": 5.471, "tablet/need": 5.025, "tablet/checked": 4.225, "tablet/writes": 3.951, "tablet/who": 6.059, "tablet/lasted": 4.225, "tablet/base": 9.556, "tablet/now": 7.538, "tablet/reads": 1.779, "tablet/should": 5.512, "reach/farah": 4.366, "reach/price": 3.919, "reach/stranger": 6.144, "reach/reach": 2.684, "reach/export": 6.264, "reach/notes": 4.428, "reach/harm": 9.107, "reach/need": 5.626, "ines/ines": 4.422, "ines/draw": 5.844, "ines/products": 6.842, "ines/contract": 5.628, "ines/terms": 5.985, "ines/only": 5.027, "ines/fresh": 5.174, "level/level": 5.786, "level/may": 2.296, "level/never": 3.746, "level/mask": 4.981, "level/place": 6.091, "level/identity": 3.628, "level/account": 3.451, "level/signin": 6.286, "tool/cut": 4.846, "tool/which": 3.368, "tool/answer": 8.231, "tool/why": 5.168, "tool/today": 3.824, "who/ask": 4.263, "who/owners": 7.61, "who/team": 4.423, "who/ama": 5.45, "dbx/app": 5.013, "dbx/schema": 5.925, "dbx/index": 2.755, "dbx/fn": 8.918, "dbx/advice": 5.823, "back/scribe": 5.228, "back/chat": 7.274, "back/since": 6.88, "back/none": 2.891, "end/answer": 8.658, "end/next": 2.496};
+const VODUR={"tablet/city": 5.385, "tablet/scribe": 7.226, "tablet/from": 3.746, "tablet/slip": 3.28, "tablet/chain": 7.903, "tablet/few": 5.471, "tablet/need": 5.025, "tablet/checked": 4.225, "tablet/writes": 3.951, "tablet/who": 6.059, "tablet/lasted": 4.225, "tablet/base": 9.556, "tablet/now": 7.538, "tablet/reads": 1.779, "tablet/should": 5.512, "reach/farah": 4.329, "reach/price": 3.919, "reach/stranger": 6.144, "reach/reach": 2.684, "reach/export": 6.264, "reach/notes": 4.428, "reach/harm": 9.107, "reach/need": 5.626, "ines/ines": 4.386, "ines/draw": 5.844, "ines/products": 6.842, "ines/contract": 5.628, "ines/terms": 5.985, "ines/only": 5.027, "ines/fresh": 5.174, "level/level": 5.786, "level/may": 2.296, "level/never": 3.746, "level/mask": 4.981, "level/place": 6.091, "level/identity": 3.628, "level/account": 3.451, "level/signin": 6.286, "tool/cut": 4.846, "tool/which": 3.368, "tool/answer": 8.231, "tool/why": 5.168, "tool/today": 3.824, "who/ask": 4.263, "who/owners": 7.61, "who/team": 4.423, "who/ama": 5.45, "dbx/app": 5.013, "dbx/schema": 5.925, "dbx/index": 2.755, "dbx/fn": 8.918, "dbx/advice": 5.823, "back/scribe": 5.228, "back/chat": 7.274, "back/since": 6.88, "back/none": 2.891, "end/answer": 8.658, "end/next": 5.752};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2011,7 +2011,7 @@ eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()
   ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
 yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
 
-/* ===== AI and continuous architecture: the series' components =====
+/* ===== Continuous architecture and AI architecture: the two series' shared components =====
    The last series on enterprise architecture, drawn in the look of The map before the data (films/enterprise-architecture/shared/src/:
    the six layers in glass, paper drafts, the same people at the same energy utility), with one true story across its six films: the
    ziggurat of Babylon, Etemenanki, rebuilt from about 620 BCE. This file holds what every film of the series draws:
@@ -2040,14 +2040,16 @@ function acaMark(ctx,x,y,s,a,p){if(a<=0.01)return;p=p==null?1:p;withA(ctx,a,()=>
   const w=s*(4-i)*1.15,h=s*0.62,yy=y-(i+1)*h-i*s*0.14+(1-spring(q*1.4))*s*0.7;
   withA(ctx,clamp(q*2,0,1),()=>{ctx.save();ctx.shadowColor=rgba(ACA,0.6);ctx.shadowBlur=12;rr(ctx,x-w/2,yy,w,h,s*0.08);ctx.fillStyle=rgba(ACA,0.16);ctx.fill();
     ctx.strokeStyle=rgba(ACA,1);ctx.lineWidth=Math.max(1.6,s*0.09);ctx.stroke();ctx.restore();});}});}
-// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series
+// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series.
+// n is "Film 1 of 3 · <the series>" in both cards: the series' name comes from it, as the two series share these components
+const acaSeries=n=>(n||"").split(" · ")[1]||"",acaFilm=n=>(n||"").split(" · ")[0];
 function acaTitle(ctx,S,t,t0,title,sub,n){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
-  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,"AI AND CONTINUOUS ARCHITECTURE",960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,acaSeries(n).toUpperCase(),960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
     T(ctx,title,960,568,{w:800,size:92,align:"center"});if(sub)T(ctx,sub,960,640,{w:600,size:36,align:"center",color:rgba(SOFT,0.95)});
     withA(ctx,fin(t,t0+1.2,0.8),()=>tag(ctx,960,718,n,ACA,{align:"center",size:28}));});}
 function acaEnd(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
   withA(ctx,tA,()=>{if(line)T(ctx,line,960,400,{w:700,size:44,align:"center"});acaMark(ctx,960,560,16,0.95,1);T(ctx,title,960,628,{w:800,size:44,align:"center",color:rgba(ACA,1)});
-    T(ctx,"AI and continuous architecture"+(n?" · "+n:"")+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
+    T(ctx,acaSeries(n)+" · "+acaFilm(n)+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
 
 /* ---------- Babylon: sky, city, river and palms ---------- */
 // The world is drawn in world space, wider than the frame, so the camera (focus) can move over it. o.dawn (0..1) goes from night to
@@ -2643,7 +2645,7 @@ scene("tablet",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
           cx.save();cx.strokeStyle=rgba(A3_OK,0.95);cx.lineWidth=4;cx.lineCap="round";cx.beginPath();cx.moveTo(950,y);cx.lineTo(958,y+8);cx.lineTo(974,y-10);cx.stroke();cx.restore();});}
       const qA=fin(t,tWh+0.2,0.8);if(qA>0.01)arrive(cx,960,720,t,tWh+0.2,()=>a3_quote(cx,500,616,920,["May the initiate instruct the initiate.","The uninitiate must not see."],"from the tablet's end · Uruk, 229 BCE",{size:34}),{dy:10,a:qA*kA});}
   });
-  acaTitle(ctx,S,t,B+1.0,"What an agent may read","the original, checked, and only what it's meant to read","Film 3 of 6 · AI and continuous architecture");});
+  acaTitle(ctx,S,t,B+1.0,"What an agent may read","the original, checked, and only what it's meant to read","Film 3 of 3 · AI architecture");});
 
 /* ---------- 2. Whatever it could reach ---------- */
 // Farah brings Tomás two complaints; the chat's first version read whatever it could reach: a copy of a copy of the tariffs, an
@@ -2885,7 +2887,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     [0,1,2,3].forEach(i=>{const x=A3_SL(i);if(i===3)archEl(ctx,x,A3_SY,A3_SW,A3_SH,A3_PROD[i][0],A3_BUS,"object",{size:28,deco:1});else a3_product(ctx,x,A3_SY,A3_SW,A3_SH,A3_PROD[i][0],{ct:1,size:28,deco:1});});
     aca_agent(ctx,800,650,44,t,{busy:0.4});a3_badge(ctx,A3_BX,630,t,{hi:pulseAt(t,w("answer","own identity"),2.0)});ctx.restore();});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"What an agent may read","The original, checked, and only what it's meant to read.","Film 3 of 6");});
+  acaEnd(ctx,S,t,B,"What an agent may read","The original, checked, and only what it's meant to read.","Film 3 of 3 · AI architecture");});
 
 /* ---------- where the chapters meet ---------- */
 // The map holds two chapters: Only what it's meant to read glides on from where Context from the map ends.

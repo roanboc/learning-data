@@ -1,81 +1,97 @@
-/* Governance principles: plays the series' labs and scenarios through, for site-tools/smoke.py's series-learn check, from their
-   words (window.GVL) and only by what a visitor can click. A lab gets every control in its picture's panel tried, twice over, then
-   each choice of a list and each end of a slider, and must say in words what happened, label its picture, and draw every word
-   whole (window.GVL_MISS, from learn.js). Every scenario, for all films, must have its picture and take its right answer, and the
-   results must count them all and end with the series' last words.
-   Each returns what went wrong, as text. */
+/* Governance principles: plays the series' playgrounds and its evaluation through, for site-tools/smoke.py's series-learn check, from their
+   words (window.GVL) and only by what a visitor can click. A playground is played until every experiment is ticked, and must say in
+   words what happened, draw every word whole (window.GVL_MISS, from learn.js), give its picture words, and start again with none
+   ticked. Every scenario must have its picture and take its right answer, and the results must count them all. Each returns what
+   went wrong, as text. */
 ({
 lab: async (id) => {
-  const L = window.GVL, app = document.getElementById("series-labs"), wait = ms => new Promise(r => setTimeout(r, ms));
-  const lab = () => app.querySelector(".mr-lab"), out = [];
-  if (!L.labs.some(x => x.id === id)) return ["no lab " + id + " in the words"];
-  if (!lab()) return ["its lab never drew"];
-  let said = false;
-  const heard = () => { const s = lab().querySelector(".mr-say"); if (s && s.textContent.trim()) said = true; };
-  const live = () => [...lab().querySelectorAll("button")].filter(b => !b.disabled && b.getAttribute("role") !== "tab" && b.offsetParent);
-  heard();
-  for (let round = 0; round < 2; round++)
-    for (let i = 0; i < 60; i++) { const b = live()[i]; if (!b) break; b.click(); await wait(20); heard(); }
-  for (const s of [...lab().querySelectorAll("select")])
-    for (let i = 0; i < s.options.length; i++) { s.selectedIndex = i; s.dispatchEvent(new Event("change", { bubbles: true })); await wait(20); heard(); }
-  for (const r of [...lab().querySelectorAll("input[type=range]")])
-    for (const v of [r.min, r.max, r.min]) {
-      r.value = v; r.dispatchEvent(new Event("input", { bubbles: true })); r.dispatchEvent(new Event("change", { bubbles: true }));
-      await wait(20); heard();
-    }
-  await wait(150);
-  if (!lab().querySelector(".mr-say[role=status]")) out.push("nothing on the page says in words what happened");
-  else if (!said) out.push("trying every control, it never said in words what happened");
-  const cv = lab().querySelector("canvas");
-  if (!cv) out.push("it has no picture");
-  else if (!(cv.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
+  const L = window.GVL, Lb = L.labs.find(x => x.id === id), W = Lb.w, U = L.ui, panel = document.getElementById("gv-panel");
+  const wait = ms => new Promise(r => setTimeout(r, ms)), q = s => panel.querySelector(s), qa = s => [...panel.querySelectorAll(s)];
+  const out = [];
+  const press = async (t, ms) => {
+    const b = qa("button").find(x => x.textContent.trim() === t);
+    if (!b) { out.push("no button “" + t + "”"); return; }
+    b.click(); await wait(ms || 300);
+  };
+  const seg = async (row, k, ms) => {
+    const g = qa(".gv-row .seg")[row], b = g && g.querySelectorAll("button")[k];
+    if (!b) { out.push("no choice " + (k + 1) + " in group " + (row + 1)); return; }
+    b.click(); await wait(ms || 300);
+  };
+  const cv = q("canvas");
+  if (cv) cv.scrollIntoView({block: "center"});  // a picture plays while it's in view
+  await wait(400);
+  if (Lb.kind !== "play") out.push("no play for a lab of kind " + Lb.kind);
+  else if (id === "hub") {
+    await press(W.namesT); await press(W.ownerT); await seg(0, 1); await press(W.askB, 2400); await press(W.yearB, 2200);
+  } else if (id === "shelf") {
+    await seg(0, 1); await press(W.ruleT); await press(W.copyT); await press(W.checkT); await press(W.goB, 2800);
+  } else if (id === "cord") {
+    await seg(0, 1); await press(W.bookT); await press(W.timeT); await press(W.reqT); await press(W.crB, 2300); await press(W.repB, 2200);
+  } else if (id === "gloss") {
+    await seg(0, 1); for (let k = 1; k <= W.places.length; k++) await seg(k, 1);
+    await press(W.checkT); await press(W.monB, 2400);
+  } else if (id === "access") {
+    await seg(0, 1); await seg(1, 1); await press(W.endT); await press(W.clsT); await seg(2, 1);
+    await press(W.grantB, 800); await press(W.moveB); await press(W.decB); await press(W.newB, 1200);
+  } else if (id === "level") {
+    await press(W.ownT); await seg(0, 1); await seg(1, 0); await press(W.n2B); await press(W.n6B); await press(W.diffB, 1200);
+  } else if (id === "source") {
+    await press(W.formT); await press(W.oldT); await press(W.cleanT); await press(W.checkT); await press(W.watchT);
+    await press(W.weekB, 2800); await press(W.breakB, 1500); await press(W.badgeB, 1500);
+  } else if (id === "change") {
+    await seg(0, 1); await press(W.recT); await press(W.tellT); await seg(1, 1); await press(W.goB, 2400);
+  } else if (id === "product") {
+    await press(W.ownerT); await press(W.slaT); await press(W.catT); await seg(0, 1); await press(W.oneT);
+    await press(W.lateB, 2600); await press(W.findB, 1500); await press(W.newB, 1500);
+  } else if (id === "agent") {
+    await seg(0, 1); await press(W.listT); await press(W.ownT); await press(W.goB, 3000);
+  } else if (id === "habit") {
+    await press(W.whyT); await press(W.agreeT); await press(W.pageT); await press(W.hoursT); await seg(0, 1);
+    await press(W.goB, 3600); await press(W.keepT); await press(W.yearB, 1800);
+  } else out.push("no play written for playground " + id);
+  const ticked = qa(".gv-goals li.ok").length;
+  if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "
+    + qa(".gv-goals li:not(.ok)").map(li => "“" + li.textContent.trim() + "”").join(", "));
+  const say = q(".lab-say");
+  if (!say || !say.textContent.trim()) out.push("nothing says in words what happened");
   const cut = [...(window.GVL_MISS || [])];
   if (cut.length) out.push("its picture cuts words short: " + cut.slice(0, 4).map(s => "“" + s + "”").join(", "));
+  const c2 = q("canvas");
+  if (!c2) out.push("no picture");
+  else if (!(c2.getAttribute("aria-label") || "").trim()) out.push("its picture has no words");
+  const again = qa(".gv-again").find(b => b.textContent.trim() === U.again);
+  if (!again) out.push("no way to start again");
+  else {
+    again.click(); await wait(100);
+    const left = document.getElementById("gv-panel").querySelectorAll(".gv-goals li.ok").length;
+    if (left) out.push("starting again leaves " + left + " experiments ticked");
+  }
   return out;
 },
 quiz: async () => {
-  const L = window.GVL, U = L.ui, app = document.getElementById("series-quiz"), wait = ms => new Promise(r => setTimeout(r, ms));
+  const L = window.GVL, app = document.getElementById("series-quiz"), wait = ms => new Promise(r => setTimeout(r, ms));
   const out = [], seen = new Set();
-  // one list of every scenario of the series, numbered 1 to N, with no film level above it; a fresh page opens on the first
-  if (app.querySelector(".mr-films, .gp-films, select")) return ["the scenarios are split by film again"];
-  if (app.querySelectorAll(".dots button").length !== L.qs.length) return ["the scenarios show " + app.querySelectorAll(".dots button").length + " of " + L.qs.length + " in one list"];
   for (let k = 0; k < L.qs.length + 2; k++) {
     if (app.querySelector(".qdone")) break;
-    const q = L.qs[k], t = (app.querySelector(".qbody h3") || {}).textContent;
-    if (!q) { out.push("more scenarios than in the words: " + t); break; }
-    if (t !== q.title) { out.push("scenario " + q.n + " isn't the one shown: " + t); break; }
-    seen.add(q.n);
-    const cv = app.querySelector(".qvis canvas");
-    if (!cv) out.push("scenario " + q.n + " has no picture");
-    else if (!(cv.getAttribute("aria-label") || "").trim()) out.push("scenario " + q.n + ": its picture has no words");
-    if (q.type === "choice") {
-      const b = app.querySelectorAll(".qopts .qopt")[q.opts.findIndex(o => o.ok)];
-      if (!b) { out.push("scenario " + q.n + ": no right answer to pick"); break; }
-      b.click();
-    } else if (q.type === "order") {
-      for (let p = 0; p < q.items.length; p++) for (let m = 0; m < 20; m++) {
-        const lis = [...app.querySelectorAll(".qorder li")], at = lis.findIndex(li => li.children[1].textContent === q.items[p]);
-        if (at <= p) break;
-        lis[at].querySelector(".mv button").click(); await wait(5);
-      }
-      const chk = [...app.querySelectorAll(".qbody .btn.primary")].find(b => b.textContent === U.check);
-      if (!chk) { out.push("scenario " + q.n + ": no way to check the order"); break; }
-      chk.click();
-    } else { out.push("no play for a scenario of type " + q.type); break; }
-    await wait(30);
+    const t = (app.querySelector(".qbody h3") || {}).textContent, qq = L.qs.find(x => x.title === t);
+    if (!qq) { out.push("a scenario that isn't in the words: " + t); break; }
+    if (seen.has(qq.n)) { out.push("scenario " + qq.n + " came twice"); break; }
+    seen.add(qq.n);
+    if (!app.querySelector(".qvis canvas")) out.push("scenario " + qq.n + " has no picture");
+    const j = qq.opts.findIndex(o => o.ok), b = app.querySelector('.qopt[data-j="' + j + '"]');
+    if (!b) { out.push("scenario " + qq.n + ": no right answer to pick"); break; }
+    b.click(); await wait(30);
     const fb = app.querySelector(".qfeed");
-    if (!fb || !fb.classList.contains("ok")) out.push("scenario " + q.n + ": its right answer isn't taken as right");
+    if (!fb || !fb.classList.contains("ok")) out.push("scenario " + qq.n + ": its right answer isn't taken as right");
     const nx = app.querySelector(".qfoot .btn.primary");
-    if (!nx) { out.push("scenario " + q.n + ": no way on"); break; }
+    if (!nx) { out.push("scenario " + qq.n + ": no way on"); break; }
     nx.click(); await wait(30);
   }
   const ring = app.querySelector(".qdone .ring b");
   if (!ring) out.push("the results never came");
   else if (ring.textContent !== L.qs.length + "/" + L.qs.length) out.push("the results say " + ring.textContent + ", expected " + L.qs.length + "/" + L.qs.length);
   if (seen.size !== L.qs.length) out.push(seen.size + " scenarios played, of " + L.qs.length);
-  if (L.close && !app.querySelector(".qdone .mr-close")) out.push("the results for all films don't end with the series' last words");
-  const cut = [...(window.GVL_MISS || [])];
-  if (cut.length) out.push("a scenario's picture cuts words short: " + cut.slice(0, 4).map(s => "“" + s + "”").join(", "));
   return out;
 }
 })

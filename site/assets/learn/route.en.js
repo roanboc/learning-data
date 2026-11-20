@@ -587,7 +587,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-quality-as-a-habit",
-      4,
+      8,
       12
      ]
     }

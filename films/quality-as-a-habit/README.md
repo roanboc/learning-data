@@ -16,7 +16,7 @@ Keeping data good, and making it better. Every November, two people spend three 
 | [Read by an agent](https://data.learn-all.org/quality-as-a-habit/read-by-an-agent/) | Descriptions and agents | 8 min | 7 | 3 questions | [script](3-read-by-an-agent/script.md) · [source](3-read-by-an-agent/source/README.md) |
 | [Small, every week](https://data.learn-all.org/quality-as-a-habit/small-every-week/) | Continuous improvement | 9 min | 7 | 4 questions | [script](4-small-every-week/script.md) · [source](4-small-every-week/source/README.md) |
 
-For the whole series, on the site: [4 labs](https://data.learn-all.org/quality-as-a-habit/labs/) and [12 scenarios](https://data.learn-all.org/quality-as-a-habit/scenarios/), in English and Spanish, from the words in [site/assets/quality-as-a-habit/](../../site/assets/quality-as-a-habit/).
+For the whole series, on the site: [8 labs](https://data.learn-all.org/quality-as-a-habit/labs/) and [12 scenarios](https://data.learn-all.org/quality-as-a-habit/scenarios/), in English and Spanish, from the words in [site/assets/quality-as-a-habit/](../../site/assets/quality-as-a-habit/).
 <!-- /films -->
 
 ## The look and the sound

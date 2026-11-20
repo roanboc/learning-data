@@ -1366,12 +1366,12 @@ TOPICS_PAGE = {
 # assets/learn/route.<lang>.js) and the list (every topic a row that opens on its films and series, with a search of every
 # film's words). Without scripts the page is the list. VIEW: the words of the switch, the search and the rows.
 VIEW = {
-    "en": dict(view="View", route="Learning route", list="Topics list", search="Search the films: a word, a tool, an idea", soon="Coming soon",
+    "en": dict(view="View", route="Learning route", list="Topics list", progress="Progress", search="Search the films: a word, a tool, an idea", soon="Coming soon",
                more1="1 more series coming", more="{n} more series coming",
                text=dict(loading="Reading the films…", none="Nothing found for “{q}”. Try a shorter word.", near="No film says “{q}”. Showing “{s}”.",
                          film1="1 film", films="{n} films", topics="Topics and series", said="Said in the film", off="Search isn't available right now.",
                          clear="Clear the search", topic="Topic", series="Series")),
-    "es": dict(view="Vista", route="Ruta de aprendizaje", list="Lista de temas", search="Busca en las películas: una palabra, una herramienta, una idea", soon="Próximamente",
+    "es": dict(view="Vista", route="Ruta de aprendizaje", list="Lista de temas", progress="Avance", search="Busca en las películas: una palabra, una herramienta, una idea", soon="Próximamente",
                more1="1 serie más en camino", more="{n} series más en camino",
                text=dict(loading="Leyendo las películas…", none="No hay nada para «{q}». Prueba con una palabra más corta.", near="Ninguna película dice «{q}». Se muestra «{s}».",
                          film1="1 película", films="{n} películas", topics="Temas y series", said="Se dice en la película", off="La búsqueda no está disponible ahora.",
@@ -1401,10 +1401,13 @@ def topics_page(lg):
     mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (firsts + seconds)[:8])
     body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow">Learning Data</p>\n<h1>{TOPICS_PAGE["h1"][lg]}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg].format(**TW)}</p>\n'
-            f'<div class="view-switch" role="group" aria-label="{V["view"]}" hidden><button type="button" data-view="route" aria-pressed="false">{V["route"]}</button>'
-            f'<button type="button" data-view="list" aria-pressed="true">{V["list"]}</button></div>\n</section>\n'
+            f'<div class="view-switch" role="group" aria-label="{V["view"]}" hidden><button type="button" data-view="list" aria-pressed="true">{V["list"]}</button>'
+            f'<button type="button" data-view="route" aria-pressed="false">{V["route"]}</button>'
+            f'<button type="button" data-view="progress" aria-pressed="false">{V["progress"]}</button></div>\n</section>\n'
             f'\n<section class="route-view" id="route" aria-labelledby="route-h" hidden>\n<h2 class="route-sr" id="route-h">{V["route"]}</h2>\n'
             f'{route_box(lg, R, RL)}\n</section>\n'
+            f'\n<section class="progress-view" id="progress" aria-labelledby="progress-h" hidden>\n<h2 class="route-sr" id="progress-h">{V["progress"]}</h2>\n'
+            f'<div class="prog" data-prog data-root="{R}" data-base="{RL}"></div>\n</section>\n'
             f'\n<div class="list-view" id="list">\n<div class="ix-tools" hidden>\n<label class="ix-search" for="ix-q"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">'
             '<circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>'
             f'<input id="ix-q" type="search" autocomplete="off" placeholder="{E(V["search"])}" aria-label="{E(V["search"])}" data-index="{R}assets/learn/search.{lg}.json" '
@@ -1425,7 +1428,7 @@ def topics_page(lg):
                      + (project_box(lg, PC[t["id"]], RL) + "\n" if PC.get(t["id"]) else "") + '</details>\n</section>\n')
         body += '</div>\n'
     body += (f'</div>\n</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
-             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/route.js"></script>\n<script src="{R}assets/learn/topics.js"></script>\n'
+             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/route.js"></script>\n<script src="{R}assets/learn/progress.js"></script>\n<script src="{R}assets/learn/topics.js"></script>\n'
              f'<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n</head>\n' + body
 
@@ -1457,22 +1460,28 @@ def continue_button(lg, rows):
             f'<span class="fprog" data-series-text=\'{ST[lg]}\'><span data-films="{" ".join(r[0] for r in rows)}" hidden></span></span></p>\n')
 
 
+def practice_of(item_id):
+    """A topic's film or series' practice: (progress prefix, labs, situations), or None when it has none."""
+    S = next((x for x in SERIES if x["id"] == item_id), None)
+    SL = series_learn(S) if S is not None and not S.get("single") else None
+    if SL:
+        return (SL["prefix"], SL["labs"], SL["quiz"])
+    if item_id in HAND and HAND[item_id].get("labs") is True:  # a series whose pages are written by hand, with labs of its own
+        w = (WEB / "assets" / item_id / "learn.en.js").read_text()
+        return (f"ld-{item_id}", w.count('{id:"'), w.count('{type:"'))
+    return None
+
+
 def series_pack(lg, e, item_id, R, RL, i):
     """A series of a topic, packed with its practice: its pictures, number, title and films watched, and beside it three thin bars
     (labs seen, answered, right). The whole card opens the series."""
     S = next((x for x in SERIES if x["id"] == item_id), None)
-    SL = series_learn(S) if S is not None and not S.get("single") else None
     lang = ' lang="en"' if lg == "es" and e["title_lang"] == "en" else ""
     films_txt = (f'<span class="sp-w" data-series-text=\'{ST[lg]}\'><span data-films="{" ".join(e["progress"][1])}" hidden></span></span>' if e["progress"][0] == "series" else
                  f'<span class="sp-w" data-progress-text=\'{PT[lg]}\'><span data-progress="{e["progress"][1]}" hidden></span></span>')
     kind = (T(lg, f"Series {i}", f"Serie {i}") + " · " + e["kicker"].split(" · ", 1)[-1]) if e["kind"] == "series" else e["kicker"]
-    if SL:
-        bars = practice_bars(lg, SL["prefix"], SL["labs"], SL["quiz"])
-    elif item_id in HAND and HAND[item_id].get("labs") is True:  # a series whose pages are written by hand, with labs of its own
-        w = (WEB / "assets" / item_id / "learn.en.js").read_text()
-        bars = practice_bars(lg, f"ld-{item_id}", w.count('{id:"'), w.count('{type:"'))
-    else:
-        bars = ""
+    pr = practice_of(item_id)
+    bars = practice_bars(lg, *pr) if pr else ""
     return (f'<li class="spack"><a href="{RL}{e["href"]}"><span class="sp-media"><img src="{R}assets/{e["posters"][0]}" alt="" width="1280" height="720" loading="lazy"></span>'
             f'<span class="sp-body"><small>{E(kind)}</small><b{lang}>{E(e["title"])}</b><span class="sp-c">{E(e["card"])}</span>{films_txt}</span>'
             f'{bars}</a></li>')
@@ -1631,7 +1640,11 @@ ROUTE_TEXT = {
                map="The learning route: {n} topics. Select a topic to see its films and series.",
                proj="The example dbt project", proj1="1 film here shows its real files, and you can run it yourself.",
                projn="{n} films here show its real files, and you can run it yourself.", projpage="About the project",
-               projmark="Shows the example dbt project"),
+               projmark="Shows the example dbt project",
+               seeprog="See your progress on this route", seeroute="See it on the learning route", hide="Hide topics not on this route",
+               showall="Show all topics", onroute="Progress on this route", alltopics="All topics", notyet="Not started",
+               cont="Continue", fw="Films watched", ls="Labs seen", an="Answered", ok="Right", uses="On this route: {s}",
+               key="Films watched, labs seen, situations answered, right answers"),
     "es": dict(start="Empieza aquí", play="Ver la introducción", open="Abrir el tema", next="Tu próxima parada", soon="Próximamente", route="Ruta sugerida",
                any="Rutas sugeridas, no pasos obligatorios. Abre cualquier tema cuando quieras.", whole="Toda la ruta", want="Quiero", stops="{n} paradas",
                go="Empezar esta ruta", on="Seguir esta ruta", again="Ver de nuevo", watched="Vista", of="{n} de {of} vistas", yours="Tu ruta",
@@ -1639,7 +1652,11 @@ ROUTE_TEXT = {
                map="La ruta de aprendizaje: {n} temas. Elige un tema para ver sus películas y series.",
                proj="El proyecto de dbt de ejemplo", proj1="1 película de aquí muestra sus archivos reales, y puedes ejecutarlo tú.",
                projn="{n} películas de aquí muestran sus archivos reales, y puedes ejecutarlo tú.", projpage="Sobre el proyecto",
-               projmark="Muestra el proyecto de dbt de ejemplo"),
+               projmark="Muestra el proyecto de dbt de ejemplo",
+               seeprog="Ver tu avance en esta ruta", seeroute="Verla en la ruta de aprendizaje", hide="Ocultar los temas fuera de esta ruta",
+               showall="Mostrar todos los temas", onroute="Avance en esta ruta", alltopics="Todos los temas", notyet="Sin empezar",
+               cont="Sigue", fw="Películas vistas", ls="Labs vistos", an="Respondidas", ok="Correctas", uses="En esta ruta: {s}",
+               key="Películas vistas, labs vistos, situaciones respondidas, respuestas correctas"),
 }
 
 
@@ -1658,6 +1675,7 @@ def route_data(lg):
                 e = entry(lg, i)
                 items.append(dict(id=i, kind=e["kind"], title=e["title"], href=e["href"], poster=e["posters"][0], kicker=e["kicker"],
                                   len=e["meta"].split(" · ")[0], min=mins(e), films=watch(e),
+                                  **({"pr": list(practice_of(i))} if practice_of(i) else {}),
                                   **({"lang": "en"} if lg == "es" and e["title_lang"] == "en" else {})))
             items += [dict(id=u["id"], soon=True, title=u["name"][lg], kicker=T(lg, f'Series · {u["films"]} films', f'Serie · {u["films"]} películas'))
                       for u in upcoming(t)]

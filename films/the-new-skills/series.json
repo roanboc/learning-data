@@ -73,10 +73,10 @@
       "Sam Okafor, que opera la plataforma de datos y los datos de los sensores de las aulas"
     ]
   ],
-  "learn_p": "{Labs} decision playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs de decisiones, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} decision playgrounds, one for each film. Choose how the team learns, drafts and works beside its agents, play the weeks, and watch what it does to the people and the work.",
-  "labs_lead_es": "{Labs} labs de decisiones, uno por película. Elige cómo el equipo aprende, redacta y trabaja junto a sus agentes, juega las semanas y mira qué les pasa a las personas y al trabajo.",
-  "quiz_lead": "{quiz} situations from every film, about the skills a data team needs now and how a leader grows them. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
+  "learn_p": "{Labs} labs: a decision playground for each film, with experiments to make happen, and one more beside it to sort, pick or write; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs: uno de decisiones por película, con experimentos que hacer pasar, y otro a su lado para ordenar, elegir o escribir; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} labs, a decision playground for each film and one more beside it. Choose how the team learns, drafts and works beside its agents, play the weeks, and watch what it does to the people and the work.",
+  "labs_lead_es": "{Labs} labs, uno de decisiones por película y otro a su lado. Elige cómo el equipo aprende, redacta y trabaja junto a sus agentes, juega las semanas y mira qué les pasa a las personas y al trabajo.",
+  "quiz_lead": "{quiz} situations from every film, about the skills a data team needs now and how a leader grows them. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
   "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre las habilidades que un equipo de datos necesita hoy y cómo hacerlas crecer. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

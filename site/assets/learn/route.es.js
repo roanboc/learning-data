@@ -193,7 +193,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-architecture",
-      6,
+      12,
       12
      ]
     },

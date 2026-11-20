@@ -26,5 +26,6 @@
     "which": "¿Qué título?"
   },
   "next_h": "You've seen the work ask its owner, by name.",
-  "next_h_es": "Viste cómo el trabajo le pregunta a su dueño, por nombre."
+  "next_h_es": "Viste cómo el trabajo le pregunta a su dueño, por nombre.",
+  "tile": [560, 380, 520]
 }

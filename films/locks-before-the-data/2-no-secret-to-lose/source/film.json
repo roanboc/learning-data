@@ -11,11 +11,7 @@
     "ns_things.js",
     "scenes.js"
   ],
-  "poster": [
-    "ladder",
-    "goal",
-    1.0
-  ],
+  "poster": ["city", "promise", 0.7],
   "say": [
     [
       "\\bOkafor\\b",

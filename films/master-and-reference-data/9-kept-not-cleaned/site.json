@@ -26,5 +26,6 @@
   "next_h": "You've seen why the person is kept, not cleaned, and how the series fits into data governance, which the next series takes up.",
   "next_h_es": "Viste por qué a la persona se la mantiene, no se la limpia, y cómo la serie encaja en la gobernanza de datos, que retoma la próxima serie.",
   "past": ["Dujiangyan, in Sichuan, around 256 BC: a river split without a dam, and dug out to its mark in the dry season, year after year", "What's kept every year lasts. What's cleaned out once decays."],
-  "past_es": ["Dujiangyan, en Sichuan, hacia el 256 a. C.: un río dividido sin represa, y excavado hasta su marca en la estación seca, año tras año", "Lo que se mantiene cada año perdura. Lo que se limpia una vez se deteriora."]
+  "past_es": ["Dujiangyan, en Sichuan, hacia el 256 a. C.: un río dividido sin represa, y excavado hasta su marca en la estación seca, año tras año", "Lo que se mantiene cada año perdura. Lo que se limpia una vez se deteriora."],
+  "tile": [640, 400, 560]
 }

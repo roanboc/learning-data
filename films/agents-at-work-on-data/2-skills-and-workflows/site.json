@@ -29,5 +29,6 @@
     "Resuélvelo una vez, escríbelo, reutilízalo."
   ],
   "next_h": "You've seen how a job solved once by hand becomes a skill every agent reuses, picked by a router and run by a workflow that calls the agent only where thinking is needed. Next: tools are hands, and every hand is a permission.",
-  "next_h_es": "Viste cómo una tarea resuelta una vez a mano se vuelve una skill que todo agente reutiliza, elegida por un router y ejecutada por un flujo de trabajo que llama al agente solo donde hace falta pensar. Después: las herramientas son manos, y cada mano es un permiso."
+  "next_h_es": "Viste cómo una tarea resuelta una vez a mano se vuelve una skill que todo agente reutiliza, elegida por un router y ejecutada por un flujo de trabajo que llama al agente solo donde hace falta pensar. Después: las herramientas son manos, y cada mano es un permiso.",
+  "tile": [960, 330, 440]
 }

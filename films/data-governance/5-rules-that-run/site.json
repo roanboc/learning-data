@@ -32,5 +32,6 @@
     "Una medida funciona cuando se lee cada día frente a un nivel fijado de antemano, y su lectura llega a quienes deciden."
   ],
   "next_h": "You've seen quality rules become checks with owners, read on a scorecard each morning.",
-  "next_h_es": "Viste cómo las reglas de calidad se vuelven controles con dueño, leídos en un tablero cada mañana."
+  "next_h_es": "Viste cómo las reglas de calidad se vuelven controles con dueño, leídos en un tablero cada mañana.",
+  "tile": [760, 260, 520]
 }

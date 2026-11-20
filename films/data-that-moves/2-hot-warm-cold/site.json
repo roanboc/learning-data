@@ -107,5 +107,6 @@
         "href_es": "https://learn.microsoft.com/es-es/azure/databricks/structured-streaming/real-time"
       }
     ]
-  }
+  },
+  "tile": [700, 330, 340]
 }

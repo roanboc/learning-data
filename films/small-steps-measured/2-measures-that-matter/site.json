@@ -84,5 +84,6 @@
         "href_es": "https://data.learn-all.org/es/ownership-and-performance/measure-the-work/"
       }
     ]
-  }
+  },
+  "tile": [700, 330, 440]
 }

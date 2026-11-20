@@ -9,11 +9,7 @@
     "scenes.js"
   ],
   "logos": true,
-  "poster": [
-    "files",
-    "every",
-    1.0
-  ],
+  "poster": ["holes", "frontinus", 2.64],
   "say": [
     [
       "\\bJun\\b",

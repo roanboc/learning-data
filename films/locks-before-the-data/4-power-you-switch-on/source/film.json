@@ -8,11 +8,7 @@
     "pw_hall.js",
     "scenes.js"
   ],
-  "poster": [
-    "morning",
-    "sam",
-    2.4
-  ],
+  "poster": ["taken", "hold", 3.35],
   "say": [
     ["\\bJun\\b", "Joon"],
     ["\\bA I\\b", "AI"],

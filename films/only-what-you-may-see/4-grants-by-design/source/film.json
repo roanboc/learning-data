@@ -10,11 +10,7 @@
     "gd_pages.js",
     "scenes.js"
   ],
-  "poster": [
-    "shelves",
-    "office",
-    7.1
-  ],
+  "poster": ["islands", "flamingos", 1.22],
   "say": [
     [
       "\\bJun\\b",

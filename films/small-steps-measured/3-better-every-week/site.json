@@ -67,5 +67,6 @@
         "href_es": "https://es.wikipedia.org/wiki/C%C3%ADrculo_de_Deming"
       }
     ]
-  }
+  },
+  "tile": [260, 330, 440]
 }

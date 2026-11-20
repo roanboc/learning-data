@@ -42,5 +42,6 @@
     ]
   },
   "next_h": "You've seen how an agent earns its freedom, one kind of task at a time. Next: what a helper borrows when it works on your sign-in.",
-  "next_h_es": "Viste cómo un agente se gana su libertad, un tipo de tarea a la vez. Después: lo que toma prestado un ayudante que trabaja con tu acceso."
+  "next_h_es": "Viste cómo un agente se gana su libertad, un tipo de tarea a la vez. Después: lo que toma prestado un ayudante que trabaja con tu acceso.",
+  "tile": [860, 300, 560]
 }

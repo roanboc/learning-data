@@ -46,5 +46,6 @@
     "building": ["sources/", "models/core/", "models/marts/", "docs/conventions.md"]
   },
   "past": ["York Minster's tracing floor, the 1300s", "The drawings were for the work; the windows are what stayed."],
-  "past_es": ["El piso de trazado de la catedral de York, siglo XIV", "Los dibujos eran para el trabajo; las ventanas son lo que quedó."]
+  "past_es": ["El piso de trazado de la catedral de York, siglo XIV", "Los dibujos eran para el trabajo; las ventanas son lo que quedó."],
+  "tile": [420, 300, 400]
 }

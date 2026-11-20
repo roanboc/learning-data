@@ -8,11 +8,7 @@
     "op_catalog.js",
     "scenes.js"
   ],
-  "poster": [
-    "parts",
-    "rows",
-    5.0
-  ],
+  "poster": ["page", "upwind", 3.19],
   "say": [
     [
       "\\bJun\\b",

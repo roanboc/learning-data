@@ -16,7 +16,7 @@ How data moves between applications today, and what still needs people. Linh Ngu
 | [One copy, one platform](https://data.learn-all.org/data-that-moves/one-copy-one-platform/) | Two engines, one copy | 6 min | 6 | 3 questions | [script](3-one-copy-one-platform/script.md) · [source](3-one-copy-one-platform/source/README.md) |
 | [Read often, kept close](https://data.learn-all.org/data-that-moves/read-often-kept-close/) | Where data is kept | 6 min | 5 | 3 questions | [script](4-read-often-kept-close/script.md) · [source](4-read-often-kept-close/source/README.md) |
 
-For the whole series, on the site: [4 labs](https://data.learn-all.org/data-that-moves/labs/) and [12 scenarios](https://data.learn-all.org/data-that-moves/scenarios/), in English and Spanish, from the words in [site/assets/data-that-moves/](../../site/assets/data-that-moves/).
+For the whole series, on the site: [8 labs](https://data.learn-all.org/data-that-moves/labs/) and [12 scenarios](https://data.learn-all.org/data-that-moves/scenarios/), in English and Spanish, from the words in [site/assets/data-that-moves/](../../site/assets/data-that-moves/).
 <!-- /films -->
 
 ## The look and the sound

@@ -31,5 +31,6 @@
     "Encontrar y obtener datos es parte de la gobernanza de datos."
   ],
   "next_h": "You've seen data governance from its principles to the tools, across all three series. Where you work, find a product, read its promise, and ask its owner, saying why and until when.",
-  "next_h_es": "Viste la gobernanza de datos desde sus principios hasta las herramientas, en las tres series. Donde trabajas, encuentra un producto, lee su promesa y pídeselo a su dueño, diciendo por qué y hasta cuándo."
+  "next_h_es": "Viste la gobernanza de datos desde sus principios hasta las herramientas, en las tres series. Donde trabajas, encuentra un producto, lee su promesa y pídeselo a su dueño, diciendo por qué y hasta cuándo.",
+  "tile": [1000, 380, 480]
 }

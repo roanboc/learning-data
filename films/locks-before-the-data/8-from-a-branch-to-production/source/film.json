@@ -9,11 +9,7 @@
     "bp_path.js",
     "scenes.js"
   ],
-  "poster": [
-    "door",
-    "only",
-    1.0
-  ],
+  "poster": ["principles", "vote", 4.03],
   "say": [
     [
       "\\bOkafor\\b",

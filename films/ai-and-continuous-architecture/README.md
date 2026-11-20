@@ -15,7 +15,7 @@ Agents and AI services on the map: each agent in a role of its own, with someone
 | [The AI platform](https://data.learn-all.org/ai-architecture/the-ai-platform/) | The platform under the agents | 8 min | 11 | 3 questions | [script](2-the-ai-platform/script.md) · [source](2-the-ai-platform/source/README.md) |
 | [What an agent may read](https://data.learn-all.org/ai-architecture/what-an-agent-may-read/) | The context an agent reads | 7½ min | 9 | 3 questions | [script](3-what-an-agent-may-read/script.md) · [source](3-what-an-agent-may-read/source/README.md) |
 
-For the whole series, on the site: [3 labs](https://data.learn-all.org/ai-architecture/labs/) and [6 scenarios](https://data.learn-all.org/ai-architecture/scenarios/), in English and Spanish, from the words in [site/assets/ai-and-continuous-architecture/](../../site/assets/ai-and-continuous-architecture/).
+For the whole series, on the site: [6 labs](https://data.learn-all.org/ai-architecture/labs/) and [6 scenarios](https://data.learn-all.org/ai-architecture/scenarios/), in English and Spanish, from the words in [site/assets/ai-and-continuous-architecture/](../../site/assets/ai-and-continuous-architecture/).
 <!-- /films -->
 
 ## The look and the sound

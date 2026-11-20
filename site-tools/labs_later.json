@@ -7,9 +7,7 @@
   "data-architecture": [1, 2, 3, 4, 5, 6],
   "platform-and-solution-architecture": [1, 2, 3, 4, 5, 6, 7, 8],
   "continuous-architecture": [1, 2, 3],
-  "master-and-reference-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  "data-governance": [0, 3, 4, 5, 6, 7, 10],
-  "governance-in-practice": [3, 4, 5],
+  "ai-architecture": [1, 2, 3],
   "what-an-agent-is": [1, 9],
   "agents-at-work-on-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],
   "from-helper-to-colleague": [1, 2, 3, 4, 5, 6, 7],
@@ -28,9 +26,6 @@
   "working-with-people": [1, 2, 3],
   "leading-a-data-team": [1, 2, 3, 4],
   "ownership-and-performance": [1, 2, 3, 4],
-  "a-plan-in-ninety-days": [1, 2, 3, 4],
-  "making-the-case": [1, 2, 3, 4],
-  "architecture-that-keeps-up": [1, 2, 3],
   "small-steps-measured": [1, 2, 3, 4]
  }
 }

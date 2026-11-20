@@ -1,9 +1,9 @@
-/* Learning Data: the Topics page's two views, and the search of every film's words. The page's words and links are in its
-   HTML, so this file holds none.
-   - The views, in this order: the list (#list), the learning route (section#route, drawn by route.js) and Progress
-     (section#progress, drawn by progress.js). Without this script the page is the list. The switch (.view-switch) picks one and
-     keeps the choice in this browser ("ld-topics:view"); a first visit gets the list. #list, #route and #progress pick a view; a topic's link (#data-governance, as every breadcrumb has it) shows the list with
-     that topic's row open.
+/* Learning Data: the Topics page, one view (the author, 21 November 2026): the railway map (route.js, from 880 px), then the
+   list of topics in the route's groups, with the search, the goal and the filters (progress.js) above it. The page's words and
+   links are in its HTML, so this file holds none.
+   - Old links to the three views it once had (#list, #route, #progress) land on the list, at its tools. A topic's link
+     (#data-governance, as every breadcrumb has it) and a station on the map (the "ld-station" event) open that topic's row
+     and scroll to it.
    - Each row's ring (.ix-ring) shows how many of the topic's films were watched, from the same keys path.js reads.
    - The search (#ix-q) reads assets/learn/search.<lang>.json (data-index) the first time someone types: every film's title,
      series, topic, intro and captions. A result names the film and the lines that say the words, each a link to that second
@@ -11,7 +11,6 @@
      something does ("agentic" finds "agent"), and the page says so. */
 (()=>{"use strict";
 const list=document.getElementById("list");if(!list)return;
-const route=document.getElementById("route"),prog=document.getElementById("progress"),sw=document.querySelector(".view-switch");
 const get=k=>{try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}};
 const set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
 const rows=[...list.querySelectorAll("section.topic")],row=id=>rows.find(r=>r.id===id);
@@ -23,23 +22,18 @@ function rings(){rows.forEach(r=>{let n=0,of=0;
     of+=ps.length;n+=ps.filter(x=>get(x+":watched")===true).length;});
   const ring=r.querySelector(".ix-ring");if(ring)ring.style.setProperty("--f",of?n/of:0);});}
 
-// ---- the two views
-const canRoute=!!(route&&sw&&window.LD_ROUTE);
-function show(view,keep){
-  if(!canRoute)view="list";
-  if(route)route.hidden=view!=="route";if(prog)prog.hidden=view!=="progress";list.hidden=view!=="list";
-  if(sw)sw.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.view===view));
-  if(!keep)set("ld-topics:view",view);}
+// ---- one view: a topic's link or a station opens its row; the old views' links land on the tools
+function open(id,smooth){const r=row(id);if(!r)return false;
+  if(q&&q.value){q.value="";search();}
+  r.hidden=false;r.closest(".ix-group").hidden=false;r.querySelector("details").open=true;
+  r.scrollIntoView({behavior:smooth?"smooth":"auto",block:"start"});return true;}
 function fromHash(){
   let h="";try{h=decodeURIComponent(location.hash.slice(1));}catch(e){}
-  const r=h&&row(h);
-  if(r){if(q&&q.value){q.value="";search();}show("list",true);r.querySelector("details").open=true;r.scrollIntoView();return true;}
-  if(h==="list"||h==="route"||h==="progress"){show(h,true);window.scrollTo({top:(sw||list).getBoundingClientRect().top+scrollY-80});return true;}
-  return false;}
-if(sw){sw.hidden=!canRoute;sw.addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(!b)return;
-  show(b.dataset.view);history.replaceState(null,"",location.pathname+location.search+"#"+b.dataset.view);});}
-if(!fromHash()){const v=get("ld-topics:view");show(v==="route"||v==="progress"?v:"list",true);}
+  if(h&&open(h))return;
+  if(h==="list"||h==="route"||h==="progress")window.scrollTo({top:(tools||list).getBoundingClientRect().top+scrollY-80});}
+fromHash();
 window.addEventListener("hashchange",fromHash);
+window.addEventListener("ld-station",e=>{if(open(e.detail,!matchMedia("(prefers-reduced-motion: reduce)").matches))history.replaceState(null,"",location.pathname+location.search+"#"+e.detail);});
 rings();window.addEventListener("pageshow",e=>{if(e.persisted)rings();});
 
 // ---- the search

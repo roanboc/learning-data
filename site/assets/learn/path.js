@@ -45,7 +45,15 @@ function paint(){
   // Mark watched (a film watched on another device), and the series bar in a film's hero: each film's step filled once watched
   document.querySelectorAll("[data-seen]").forEach(b=>{const on=stats(b.dataset.seen).watched;b.setAttribute("aria-pressed",on);
     const t=b.querySelector("span");if(t)t.textContent=on?b.dataset.on:b.dataset.off;});
-  document.querySelectorAll("[data-w]").forEach(a=>a.classList.toggle("w",stats(a.dataset.w).watched));}
+  document.querySelectorAll("[data-w]").forEach(a=>a.classList.toggle("w",stats(a.dataset.w).watched));
+  // a series' Continue: the earliest film not yet watched (Start before any; Watch again once all are)
+  document.querySelectorAll("[data-continue]").forEach(a=>{const fs=JSON.parse(a.dataset.continue),i=fs.findIndex(f=>!stats(f[0]).watched),
+    any=fs.some(f=>stats(f[0]).watched),f=fs[i<0?0:i];a.href=f[1];a.textContent=(i<0?a.dataset.again:any?a.dataset.go:a.dataset.start)+": "+f[2]+" →";});
+  document.querySelectorAll("[data-film]").forEach(r=>r.classList.toggle("w",stats(r.dataset.film).watched));
+  // a series' practice: labs seen, situations answered, right ones, as thin bars
+  document.querySelectorAll("[data-practice]").forEach(u=>{const st=cap(stats(u.dataset.practice),+u.dataset.labs,+u.dataset.quiz),
+    v={labs:st.labs/(+u.dataset.labs||1),n:st.n/(+u.dataset.quiz||1),ok:st.n?st.ok/st.n:0};
+    u.querySelectorAll("[data-k]").forEach(b=>{b.firstElementChild.style.width=Math.round(100*v[b.dataset.k])+"%";});});}
 document.querySelectorAll("[data-seen]").forEach(b=>b.addEventListener("click",()=>{const s=store(b.dataset.seen);s.set("watched",!s.get("watched",false));paint();}));
 
 paint();window.addEventListener("storage",paint);window.addEventListener("pageshow",paint);

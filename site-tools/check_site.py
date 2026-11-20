@@ -2014,8 +2014,10 @@ def main():
                     s["fails"].append(f"{where}: a series' card links to site/{f}, which plays a film: link to the series' page")
                     continue
                 want = []
-                for c2 in pages[f].dom.all("article", cls="topic-card"):
-                    a2 = c2.first("h3").all("a") if c2.first("h3") else []
+                # a series' page lists its films as rows (ol.frows, docs/page-templates.md); its Up next card is the next series'
+                rows = [r for ol in pages[f].dom.all("ol", cls="frows") for r in ol.all("li", cls="frow")]
+                for c2 in rows or pages[f].dom.all("article", cls="topic-card"):
+                    a2 = (c2.first("span", cls="ft").all("a") if c2.first("span", cls="ft") else []) if rows else c2.first("h3").all("a") if c2.first("h3") else []
                     k2, t2, _ = resolve(pages[f], a2[0].attrs.get("href", "")) if a2 else (None, None, None)
                     f2 = file_of(t2)[0] if k2 == "site" else None
                     if f2 and pages[f2].bundles and BUNDLES[pages[f2].bundles[0]] not in want:

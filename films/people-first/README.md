@@ -16,7 +16,7 @@ Before the hats and the skills, the people. In February 2027, Helena Novak takes
 | [No two alike](https://data.learn-all.org/people-first/no-two-alike/) | How people differ | 9 min | 6 | 3 questions | [script](3-no-two-alike/script.md) · [source](3-no-two-alike/source/README.md) |
 | [How, more than who](https://data.learn-all.org/people-first/how-more-than-who/) | How a team works together | 10 min | 8 | 4 questions | [script](4-how-more-than-who/script.md) · [source](4-how-more-than-who/source/README.md) |
 
-For the whole series, on the site: [4 labs](https://data.learn-all.org/people-first/labs/) and [12 scenarios](https://data.learn-all.org/people-first/scenarios/), in English and Spanish, from the words in [site/assets/people-first/](../../site/assets/people-first/).
+For the whole series, on the site: [8 labs](https://data.learn-all.org/people-first/labs/) and [12 scenarios](https://data.learn-all.org/people-first/scenarios/), in English and Spanish, from the words in [site/assets/people-first/](../../site/assets/people-first/).
 <!-- /films -->
 
 ## The look and the sound

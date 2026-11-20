@@ -5,7 +5,7 @@ window.LD_ROUTE = {
  "text": {
   "start": "Start here",
   "play": "Play introduction",
-  "open": "Open topic",
+  "open": "Open the topic",
   "next": "Your next stop",
   "soon": "Coming soon",
   "route": "Suggested route",

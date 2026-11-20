@@ -12,7 +12,7 @@ What it checks, page by page (every .html under site/):
   https://data.learn-all.org/... map to site/), every #id exists on its target page (except #t=,
   and the lab and old home hashes that scripts read), GitHub blob/tree links name a file in this repo, and
   download links name a file the release workflow publishes. Links inside the "Pause and think" packs count too.
-- header: Start here, Topics, the project icon, then EN and ES (in the "More" menu), Making of in More options, with the right targets and the right current page;
+- header: Start here, Topics, Making of, then EN and ES (in the "More" menu), with the right targets and the right current page;
   and "?", the guided tour, with the same steps in both languages.
 - no leftover labels in the nav (Watch, Take it apart, Sharpen it, All films, Mira, Desarma).
 - hreflang: exactly the pairs of real twins, each pointing back.
@@ -100,11 +100,9 @@ TWINS = ["", "labs/", "scenarios/", "journey/", "topics/", "sketch/", "when-thin
          "when-things-go-wrong/silent-change/", "when-things-go-wrong/too-good-to-be-true/",
          "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/",
          "dbt-project/"]
-# English-only pages and where their ES toggle goes (A Sharper Sketch's labs and scenarios were, until they became its series', 19 Nov 2026)
-ES_TOGGLE = {}
-NAV = {"en": ["Start here", "Topics"], "es": ["Empieza aquí", "Temas"]}
-# Making of sits in the header's "More options" menu (.extra); the example data project has its own icon (.proj)
-MAKING = {"en": "Making of", "es": "Cómo se hizo"}
+# English-only pages and where their ES toggle goes
+ES_TOGGLE = {"sketch/labs/": "es/sketch/", "sketch/scenarios/": "es/sketch/"}
+NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Temas", "Cómo se hizo"]}
 # the footer holds no second navigation, only the source
 FOOT = {"en": "Source on GitHub", "es": "Código en GitHub"}
 OLD_NAV = {"Watch", "Take it apart", "Sharpen it", "All films", "Mira", "Desarma", "Labs", "Scenarios", "Situaciones"}
@@ -119,6 +117,8 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     # A Sharper Sketch, film 2 of Model the business, whose pages are written by hand ("outside" in its series.json)
     "sketch/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
     "es/sketch/": ("Temas › Modelado de datos › Modelar el negocio", ["es/topics/", "es/topics/", "es/model-the-business/"]),
+    "sketch/labs/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
+    "sketch/scenarios/": ("Topics › Data modelling › Model the business", ["topics/", "topics/", "model-the-business/"]),
     "when-things-go-wrong/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/"]),
     "es/when-things-go-wrong/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
     "when-things-go-wrong/silent-change/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
@@ -146,8 +146,8 @@ PACKS = {"assets/learn/learn.en.js", "assets/learn/learn.es.js",
 # "Pause and think" packs whose stops are the film's own labs (the rest point to The Inner Life of Data's): the labs page, and the pack that names its labs
 OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.en.js"),
             "assets/too-good-to-be-true/think.es.js": ("es/when-things-go-wrong/labs/index.html", "assets/when-things-go-wrong/learn.es.js")}
-# a film's labs and scenarios, as its stepper and topic cards count them (None: it has none; A Sharper Sketch's are its series' since 19 Nov 2026)
-COUNTS = {"ld": ("8", "12"), "ld3": (None, None), "ld-silent-change": (None, None), "ld-too-good-to-be-true": (None, None)}
+# a film's labs and scenarios, as its stepper and topic cards count them (None: it has none)
+COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": (None, None)}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
 # a series numbers its own films, always as "Film 2 of 7" ("Película 2 de 7"): that's allowed; numbering the site's films isn't
 NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)(?!-)|(first|second|third) film|(primera|segunda|tercera) película|"
@@ -244,6 +244,16 @@ for _f in SERIES_FILMS:
         HALVES["en"].add(_f["len"]); HALVES["es"].add(_f["len"])
     else:
         WHOLE.add(_f["len"] + " min")
+# every topic has its own page, /topics/<topic>/ (docs/page-templates.md): a breadcrumb names the topic and links to its page
+for _t in build_series.live():
+    TWINS.append(f"topics/{_t['id']}/")
+    CRUMBS[f"topics/{_t['id']}/"] = ("Topics", ["topics/"])
+    CRUMBS[f"es/topics/{_t['id']}/"] = ("Temas", ["es/topics/"])
+_TID = {_t["name"][_lg]: _t["id"] for _t in build_series.TOPICS for _lg in ("en", "es")}
+for _k, (_txt, _links) in CRUMBS.items():
+    _parts = _txt.split(" › ")
+    if len(_links) >= 2 and _links[1] in ("topics/", "es/topics/") and len(_parts) >= 2 and _parts[1] in _TID:
+        _links[1] = f"{_links[1]}{_TID[_parts[1]]}/"
 # the Topics page states each series' length in all, in whole minutes, from the same data
 WHOLE |= build_series.series_totals()
 # and each topic's row its films' length in all ("2 h 3 min", "40½ min")
@@ -1195,6 +1205,7 @@ def main():
     normal = [pg for pg in pages.values() if not pg.redirect]
     release_names = "\n".join(p.read_text() for p in RELEASES)
     intro_stops = re.findall(r'\["(\w+)","\w+",\[', (WEB / "assets/learn/learn.js").read_text())
+    sketch_labs = re.findall(r'\bid:"(\w+)"', (WEB / "assets/sketch/sketch.js").read_text())
 
     # -- markup
     s = rep.check("Markup: tags balanced, ids unique, labels point at real ids, images have alt text")
@@ -1252,6 +1263,8 @@ def main():
         if tp.key in ("labs/", "es/labs/") and re.fullmatch(r"(explore[-/])?(\w+)", frag) and \
                 re.fullmatch(r"(explore[-/])?(\w+)", frag).group(2) in intro_stops:
             return
+        if tp.key == "sketch/labs/" and frag in sketch_labs:
+            return
         if frag in LEARN_IDS.get(tp.key, ()):  # made by the series' learn.js
             return
         if tp.dom.first(cls="path", data_home=True) and re.fullmatch(r"(explore|practise)([-/]\w+)?", frag):
@@ -1304,7 +1317,7 @@ def main():
     s["notes"].append(f"{checked} links on {len(pages)} pages")
 
     # -- header
-    s = rep.check("Header: Start here · Topics · the project icon · EN/ES, Making of in the menu, on every page, with the right current page")
+    s = rep.check("Header: Start here · Topics · Making of · EN/ES on every page, with the right current page")
     for pg in normal:
         lang = "es" if pg.es else "en"
         head = pg.dom.first("header", cls="top")
@@ -1319,23 +1332,12 @@ def main():
         lang_box = [k for k in more[0].elements() if k.tag == "span" and "lang" in k.cls] if len(more) == 1 else []
         labels = [a.text() for a in links]
         want = NAV[lang]
-        if labels != want or [k.tag for k in kids] != ["a"] * 2 or not lang_box:
+        if labels != want or [k.tag for k in kids] != ["a"] * 3 or not lang_box:
             s["fails"].append(f"{pg.file}: nav reads {labels + ['EN/ES' if lang_box else '(no .lang)']}, expected {want + ['EN/ES']}")
             continue
         home = "es/" if pg.es else ""
-        targets = [home, home + "topics/"]
-        extra = head.all(cls="extra")
-        making = extra[0].all("a", cls="making") if len(extra) == 1 else []
-        projs = head.all("a", cls="proj")
-        if len(making) != 1 or making[0].text() != MAKING[lang]:
-            s["fails"].append(f"{pg.file}: one Making of link (a.making) in the header's More options menu (.extra), named in the page's language")
-        else:
-            links.append(making[0]); targets.append(home + "journey/")
-        if len(projs) != 1 or projs[0].attrs.get("aria-label") != {"en": "Example data project", "es": "Proyecto de datos de ejemplo"}[lang]:
-            s["fails"].append(f"{pg.file}: one icon link to the example data project (a.proj), named in the page's language")
-        else:
-            links.append(projs[0]); targets.append(home + "dbt-project/")
-        for a, t in zip(links, targets):
+        targets = [home, home + "topics/", home + "journey/"]
+        for a, t in zip(links[:3], targets):
             kind, target, _ = resolve(pg, a.attrs.get("href", ""))
             f, _ = file_of(target) if kind == "site" else (None, None)
             if f != t + "index.html":
@@ -1377,7 +1379,6 @@ def main():
                     if twin is None and has and not pg.is404:
                         s["fails"].append(f"{pg.file}: {lg.upper()} has hreflang, but this page has no twin")
         # current page
-        links = [a for a in links if "proj" not in a.cls]  # the project's icon marks only its own page, checked above
         cur = [(i, a.attrs.get("aria-current")) for i, a in enumerate(links) if "aria-current" in a.attrs]
         if sum(1 for _, v in cur if v == "page") > 1:
             s["fails"].append(f"{pg.file}: more than one nav link has aria-current=\"page\"")
@@ -1388,13 +1389,13 @@ def main():
         elif base == "topics/":
             exp = (1, "page")
         elif base == "journey/":
-            exp = (2, "page")  # Making of, in the menu
+            exp = (2, "page")
         elif base.startswith(("labs/", "scenarios/")):
             exp = (0, "true")
         elif base == "dbt-project/":
             exp = (1, "true")
-            if len(projs) == 1 and projs[0].attrs.get("aria-current") != "page":
-                s["fails"].append(f"{pg.file}: the project's icon must say it is the current page (aria-current=\"page\")")
+        elif base.startswith("topics/"):  # a topic's own page, under Topics
+            exp = (1, "true")
         elif base.startswith(("sketch/", "when-things-go-wrong/") + tuple(S["slug"] + "/" for S in build_series.SERIES)):
             exp = (1, "true")
         if pg.is404:
@@ -1417,10 +1418,9 @@ def main():
         p.feed(build_series.header(lg, "", "../"))
         head = p.root.first("header", cls="top")
         tools = head.all(cls="nav-tools") if head else []
-        extra = head.all(cls="extra") if head else []
-        links = [a for a in extra[0].all("a") if "making" not in a.cls] if len(extra) == 1 else []
+        links = tools[0].all("a") if len(tools) == 1 else []
         if [a.attrs.get("href") for a in links] != targets or [a.attrs.get("href") for a in head.all("a")].count(targets[0]) != 1:
-            s["fails"].append(f"header({lg}): expected one link to learn-all.org and one to LinkedIn, in the More options menu (.extra)")
+            s["fails"].append(f"header({lg}): expected one link to learn-all.org and one to LinkedIn, in .nav-tools")
         for a, label in zip(links, labels):
             if a.attrs.get("aria-label") != label or "title" in a.attrs:
                 s["fails"].append(f"header({lg}): the link needs one name in the page's language, without a title: {label}")
@@ -1741,6 +1741,7 @@ def main():
 
     s = rep.check("Scenarios and labs: one right option in each choice, right answers spread across the options, sorting cards not box by box, an order's steps mixed")
     learn = {p.parent.name: p for p in sorted(WEB.glob("assets/*/learn.en.js"))}
+    learn["sketch"] = WEB / "assets/sketch/sketch.js"
     for k, words in SPREAD_SHUFFLED.items():
         if words not in (WEB / "assets" / k / "learn.js").read_text():
             s["fails"].append(f"site/assets/{k}/learn.js no longer mixes its options as it shows them ({words}…): take \"{k}\" off SPREAD_SHUFFLED, and spread the right answers of the packs it shows")
@@ -1834,8 +1835,8 @@ def main():
         ls = pg.local_scripts
         if len(pg.bundles) > 1:
             s["fails"].append(f"{pg.file}: {len(pg.bundles)} film bundles ({', '.join(pg.bundles)}); only one can load")
-        order = [x for x in ls if x in BUNDLES or x in PACKS or x in ("assets/learn/think.js", "assets/learn/path.js", "assets/learn/next.js")]
-        rank = lambda x: 0 if x in BUNDLES else 1 if x in PACKS else {"assets/learn/think.js": 2, "assets/learn/path.js": 3, "assets/learn/next.js": 4}[x]
+        order = [x for x in ls if x in BUNDLES or x in PACKS or x in ("assets/learn/think.js", "assets/learn/path.js", "assets/learn/next.js", "assets/sketch/sketch.js")]
+        rank = lambda x: 0 if x in BUNDLES else 1 if x in PACKS else {"assets/learn/think.js": 2, "assets/sketch/sketch.js": 2, "assets/learn/path.js": 3, "assets/learn/next.js": 4}[x]
         if [rank(x) for x in order] != sorted(rank(x) for x in order):
             s["fails"].append(f"{pg.file}: scripts load as {order}; the order is film bundle → pack → think.js → path.js → next.js")
         film = pg.bundles[0] if pg.bundles else None
@@ -1850,8 +1851,11 @@ def main():
                 s["fails"].append(f"{pg.file}: assets/seek.js loads before the film bundle")
         if "assets/learn/think.js" in ls and not any(x in PACKS for x in ls):
             s["fails"].append(f"{pg.file}: think.js without a language pack")
-        if film == "assets/film3/film.js" and "assets/learn/path.js" not in ls:  # its labs are its series' since 19 Nov 2026, as film 1's are
-            s["fails"].append(f"{pg.file}: loads A Sharper Sketch without path.js, which records it as watched")
+        if film == "assets/film3/film.js":
+            if "assets/learn/path.js" in ls:
+                s["fails"].append(f"{pg.file}: A Sharper Sketch's pages never load path.js (sketch.js paints the stepper)")
+            if "assets/sketch/sketch.js" not in ls:
+                s["fails"].append(f"{pg.file}: loads A Sharper Sketch without sketch.js")
         watch = pg.dom.first(id="watch")
         if film and watch is not None and watch.first("canvas", id="film") is not None:
             ds = watch.attrs.get("data-store")

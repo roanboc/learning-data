@@ -55,7 +55,7 @@ function draw(box){
   const base=box.dataset.base||"",root=box.dataset.root||"",topics=box.dataset.topics||"";
   const st={sel:null,goal:null,panel:"station",open:null,w:0};
   const g0=goal(get("ld-route:goal"));if(g0){st.goal=g0.id;st.panel="goal";}
-  const img=p=>root+"assets/"+p,topicHref=t=>topics+"#"+t.id;
+  const img=p=>root+"assets/"+p,topicHref=t=>topics+t.id+"/";
   const label=t=>{const s=stat(t);return t.name+", "+G(t.group).name+(PJ(t)?", "+X.projmark:"")+(s.seen?", "+fill(X.of,{n:s.seen,of:s.films}):"");};
 
   function card(i,extra){
@@ -69,7 +69,7 @@ function draw(box){
     return '<div class="r-about">'+(inRail?'':'<p class="r-kick"><i></i>'+esc(G(t.group).name)+(nx===t?" · "+esc(X.next):"")+'</p><h3>'+esc(t.name)+'</h3>')+
       '<p class="r-who">'+esc(t.who)+'</p><p class="r-line">'+esc(t.line)+'</p>'+
       (inRail?'':'<p class="r-meta">'+esc(counts(t))+(s.seen?" · "+esc(fill(X.of,{n:s.seen,of:s.films})):"")+'</p>'+open)+'</div>'+
-      (inRail?'':'<div class="r-col">')+'<ul class="r-items">'+t.items.map(i=>card(i)).join("")+'</ul>'+pjBox(t,base)+(inRail?open:'</div>');}
+      (inRail?'':'<div class="r-col">')+'<ul class="r-items">'+t.items.map(i=>card(i)).join("")+'</ul>'+pjBox(t,base)+open+(inRail?'':'</div>');}
   function intro(num){
     const w=seen(INTRO)>0;
     return '<a class="r-intro'+(st.panel==="station"&&st.sel===START.id?" sel":"")+'" href="'+esc(base+INTRO.href)+'">'+(num?'<span class="r-n">'+num+'</span>':'')+

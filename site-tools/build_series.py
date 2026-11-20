@@ -746,9 +746,9 @@ def crumbs(lg, R, S, up=None, alone=False):
     RT = R if lg == "en" else R[3:]
     t = topic_of(S["id"])
     if alone:
-        return f'<p class="eyebrow crumbs"><a href="{RT}topics/">{T(lg, "Topics", "Temas")}</a> › <a href="{RT}topics/#{t["id"]}">{t["name"][lg]}</a></p>'
+        return f'<p class="eyebrow crumbs"><a href="{RT}topics/">{T(lg, "Topics", "Temas")}</a> › <a href="{RT}topics/{t["id"]}/">{t["name"][lg]}</a></p>'
     last = f'<a href="{up}">{SN(lg, S)}</a>' if up else SN(lg, S)
-    return f'<p class="eyebrow crumbs"><a href="{RT}topics/">{T(lg, "Topics", "Temas")}</a> › <a href="{RT}topics/#{t["id"]}">{t["name"][lg]}</a> › {last}</p>'
+    return f'<p class="eyebrow crumbs"><a href="{RT}topics/">{T(lg, "Topics", "Temas")}</a> › <a href="{RT}topics/{t["id"]}/">{t["name"][lg]}</a> › {last}</p>'
 
 
 def num(lg, f):
@@ -818,7 +818,7 @@ def seen_button(lg, prefix):
 def topic_href(lg, R, item_id):
     """The page of the topic that holds a film or a series, from a page whose way to the site's root is R."""
     RT = R if lg == "en" else R[3:]
-    return f'{RT}topics/#{topic_of(item_id)["id"]}'
+    return f'{RT}topics/{topic_of(item_id)["id"]}/'
 
 
 def topic_name(lg, item_id):
@@ -1420,7 +1420,7 @@ def topics_page(lg):
                      f'<summary><i class="ix-ring" aria-hidden="true"></i><h2 id="{t["id"]}-h">{E(t["name"][lg])}'
                      + (f'<span class="pj-mark" title="{E(ROUTE_TEXT[lg]["projmark"])}">{PROJECT_ICON}<span class="route-sr">{E(ROUTE_TEXT[lg]["projmark"])}</span></span>' if PC.get(t["id"]) else "")
                      + f'</h2><span class="ix-who">{E(t["who"][lg])}</span><span class="ix-cnt">{topic_counts(lg, es[t["id"]])}{more}</span></summary>\n'
-                     f'<p class="ix-line">{E(t["line"][lg])}</p>\n'
+                     f'<p class="ix-line">{E(t["line"][lg])} <a class="ix-open" href="{t["id"]}/">{T(lg, "Open the topic", "Abre el tema")} →</a></p>\n'
                      + f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n'
                      + (project_box(lg, PC[t["id"]], RL) + "\n" if PC.get(t["id"]) else "") + '</details>\n</section>\n')
         body += '</div>\n'
@@ -1428,6 +1428,97 @@ def topics_page(lg):
              f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/route.js"></script>\n<script src="{R}assets/learn/topics.js"></script>\n'
              f'<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n</head>\n' + body
+
+
+# ---------------------------------------------------------------- a topic's own page (docs/page-templates.md)
+def item_films(lg, item_id, RL):
+    """The films of a topic's film or series, in order, for Continue: (progress prefix, page from the language's root, title)."""
+    S = next((x for x in SERIES if x["id"] == item_id), None)
+    if S is not None:
+        series, films_ = films(S)
+        if S.get("single"):
+            f = films_[0]
+            return [(f["prefix"], RL + f["path"], SN(lg, S))]
+        rows = [(x["index"], x["prefix"], f'{RL}{S["slug"]}/{x["key"]}/', x["title"] if lg == "en" else x["site"]["title_es"]) for x in films_]
+        rows += [(n - 1, h["prefix"], RL + h["href"], h["title"][lg]) for n, _, h, _ in outside(S)]
+        return [(p, u, t) for _, p, u, t in sorted(rows, key=lambda r: r[0])]
+    h = HAND[item_id]
+    if "films" in h:
+        return [(pfx, RL + h["href"], h["title"][lg]) for _, pfx, _ in h["films"]]
+    return [(h["prefix"], RL + h["href"], h["title"][lg])]
+
+
+def continue_button(lg, rows):
+    """Continue: the earliest film of rows not yet watched (path.js), and how many are watched."""
+    if not rows:
+        return ""
+    return (f'<p class="cont"><a class="btn primary" href="{rows[0][1]}" data-continue="{html.escape(json.dumps([list(r) for r in rows], ensure_ascii=False), quote=True)}" '
+            f'data-start="{T(lg, "Start", "Empieza")}" data-go="{T(lg, "Continue", "Sigue")}" data-again="{T(lg, "Watch again", "Ver de nuevo")}">{T(lg, "Start", "Empieza")}: {E(rows[0][2])} →</a>'
+            f'<span class="fprog" data-series-text=\'{ST[lg]}\'><span data-films="{" ".join(r[0] for r in rows)}" hidden></span></span></p>\n')
+
+
+def series_pack(lg, e, item_id, R, RL, i):
+    """A series of a topic, packed with its practice: its pictures, number, title and films watched, and beside it three thin bars
+    (labs seen, answered, right). The whole card opens the series."""
+    S = next((x for x in SERIES if x["id"] == item_id), None)
+    SL = series_learn(S) if S is not None and not S.get("single") else None
+    lang = ' lang="en"' if lg == "es" and e["title_lang"] == "en" else ""
+    films_txt = (f'<span class="sp-w" data-series-text=\'{ST[lg]}\'><span data-films="{" ".join(e["progress"][1])}" hidden></span></span>' if e["progress"][0] == "series" else
+                 f'<span class="sp-w" data-progress-text=\'{PT[lg]}\'><span data-progress="{e["progress"][1]}" hidden></span></span>')
+    kind = (T(lg, f"Series {i}", f"Serie {i}") + " · " + e["kicker"].split(" · ", 1)[-1]) if e["kind"] == "series" else e["kicker"]
+    if SL:
+        bars = practice_bars(lg, SL["prefix"], SL["labs"], SL["quiz"])
+    elif item_id in HAND and HAND[item_id].get("labs") is True:  # a series whose pages are written by hand, with labs of its own
+        w = (WEB / "assets" / item_id / "learn.en.js").read_text()
+        bars = practice_bars(lg, f"ld-{item_id}", w.count('{id:"'), w.count('{type:"'))
+    else:
+        bars = ""
+    return (f'<li class="spack"><a href="{RL}{e["href"]}"><span class="sp-media"><img src="{R}assets/{e["posters"][0]}" alt="" width="1280" height="720" loading="lazy"></span>'
+            f'<span class="sp-body"><small>{E(kind)}</small><b{lang}>{E(e["title"])}</b><span class="sp-c">{E(e["card"])}</span>{films_txt}</span>'
+            f'{bars}</a></li>')
+
+
+def topic_page(lg, tid):
+    """A topic's page, /topics/<topic>/: its series in order, each packed with its practice; the example project, folded; the
+    series still to come; and the previous and next topic on the route."""
+    TL = {t["id"]: t for t in live()}; t = TL[tid]; PC = project_counts()
+    path = f"topics/{tid}/"
+    name = t["name"][lg]
+    h, R = head(lg, path, f'{name} · Learning Data', t["line"][lg], t["line"][lg], "poster.jpg")
+    h += f'<link rel="stylesheet" href="{R}assets/learn/pages.css">\n'
+    RL = R if lg == "en" else R[3:]
+    items = list(shown(t)); es = [entry(lg, i) for i in items]
+    rows = [r for i in items for r in item_films(lg, i, RL)]
+    pics = [p for e in es for p in e["posters"][:2]]
+    mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (pics * 8)[:8])
+    nser = 0; packs = []
+    for i, e in zip(items, es):
+        nser += e["kind"] == "series"
+        packs.append(series_pack(lg, e, i, R, RL, nser))
+    a, b, c = PRACTICE[lg]
+    body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
+            f'<p class="eyebrow crumbs"><a href="{RL}topics/">{T(lg, "Topics", "Temas")}</a></p>\n<h1>{E(name)}</h1>\n<p class="lead">{E(t["line"][lg])}</p>\n'
+            f'<p class="who">{E(t["who"][lg])}</p>\n{continue_button(lg, rows)}</section>\n\n'
+            f'<section class="module" id="series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "The series", "Las series")}</h2>'
+            f'<p>{T(lg, "Watch them in this order; practise each as you go.", "Míralas en este orden; practica cada una sobre la marcha.")}</p></div></div>\n'
+            f'<ol class="spacks">\n' + "\n".join(packs) + '\n</ol>\n</section>\n\n')
+    if PC.get(tid):
+        body += fold(lg, "in-the-project", T(lg, "In the example project", "En el proyecto de ejemplo"), project_box(lg, PC[tid], RL),
+                     T(lg, f"{PC[tid]} film{'s' * (PC[tid] != 1)} show its files", f"{PC[tid]} película{'s' * (PC[tid] != 1)} muestra{'n' * (PC[tid] != 1)} sus archivos"))
+    up = upcoming(t)
+    if up:
+        lis = "\n".join(f'<li><span><b>{E(u["name"][lg])}</b> · {u["films"]} {T(lg, "films", "películas")}</span></li>' for u in up)
+        body += (f'<section class="module" id="coming" aria-labelledby="coming-h">\n<div class="mhead"><div><h2 id="coming-h">{T(lg, "Coming next", "Próximamente")}</h2></div></div>\n'
+                 f'<ul class="series-list coming">\n{lis}\n</ul>\n</section>\n\n')
+    order = [x["id"] for x in route_data(lg)["topics"]]
+    k = order.index(tid)
+    prv, nxt = (order[k - 1] if k > 0 else None), (order[k + 1] if k + 1 < len(order) else None)
+    pn = lambda x, label: (f'<a class="tnav" href="../{x}/"><small>{label}</small><b>{E(TL[x]["name"][lg])}</b></a>' if x else "")
+    body += (f'<section class="module" id="up-next" aria-labelledby="up-next-h">\n<div class="mhead"><div><h2 id="up-next-h">{T(lg, "Up next on the route", "Lo que sigue en la ruta")}</h2></div></div>\n'
+             f'<div class="tnavs">{pn(prv, T(lg, "← Before this", "← Antes de este"))}{pn(nxt, T(lg, "Next on the route →", "Sigue en la ruta →")) or f"""<a class="tnav" href="{RL}topics/"><small>{T(lg, "The end of the route", "El final de la ruta")}</small><b>{T(lg, "All topics", "Todos los temas")}</b></a>"""}</div>\n</section>\n\n')
+    body += (f'</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
+             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
+    return h + "</head>\n" + body
 
 
 def tiles(lg, R):
@@ -1446,7 +1537,7 @@ def tiles(lg, R):
             small = (e["kicker"] if PUBLISH else T(lg, "Series", "Serie")) if e["kind"] == "series" else f'{e["kicker"]} · {e["len"]} min'
             rows.append(f'<li><a href="{RL}{e["href"]}"><img src="{R}assets/{e["posters"][0]}" alt="" width="1280" height="720" loading="lazy">'
                         f'<span><b{lang}>{E(e["title"])}</b><small>{E(small)}</small></span></a></li>')
-        out.append(f'<div class="topic-tile">\n<h3><a href="{RL}topics/#{t["id"]}">{E(t["name"][lg])}</a></h3>\n<p>{E(t["line"][lg])}</p>\n'
+        out.append(f'<div class="topic-tile">\n<h3><a href="{RL}topics/{t["id"]}/">{E(t["name"][lg])}</a></h3>\n<p>{E(t["line"][lg])}</p>\n'
                    f'<ul class="tt-items">\n' + "\n".join(rows) + '\n</ul>\n</div>')
     return '<div class="topic-tiles">\n' + "\n".join(out) + '\n</div>\n'
 
@@ -1533,7 +1624,7 @@ def topic_totals():
 
 
 ROUTE_TEXT = {
-    "en": dict(start="Start here", play="Play introduction", open="Open topic", next="Your next stop", soon="Coming soon", route="Suggested route",
+    "en": dict(start="Start here", play="Play introduction", open="Open the topic", next="Your next stop", soon="Coming soon", route="Suggested route",
                any="Suggested paths, not locked steps. Open any topic at any time.", whole="Whole route", want="I want to", stops="{n} stops",
                go="Start this route", on="Continue this route", again="Watch again", watched="Watched", of="{n} of {of} watched", yours="Your route",
                film1="1 film", films="{n} films", series="{n} series", more1="1 more series coming", more="{n} more series coming",
@@ -2966,7 +3057,7 @@ def project_page(lg):
             f'<details class="px-all"><summary>{E(U["all_h"])}</summary>\n<ul class="repo-list">\n{parts}\n</ul>\n</details>\n</section>\n\n'
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{E(P["films_h"])}</h2><p>{E(P["films_p"].format(n=n))}</p></div></div>\n')
     for t, rows in groups:
-        body += f'<div class="pj-topic">\n<h3>{PROJECT_ICON}<a href="{RL}topics/#{t["id"]}">{E(t["name"][lg])}</a></h3>\n'
+        body += f'<div class="pj-topic">\n<h3>{PROJECT_ICON}<a href="{RL}topics/{t["id"]}/">{E(t["name"][lg])}</a></h3>\n'
         for S, fs in rows:
             body += f'<p class="pj-series">{series_link(lg, RL, S["id"])}</p>\n<ul class="pj-films">\n'
             for f in fs:
@@ -3021,7 +3112,7 @@ def search_index(lg):
     out_f, out_s = [], []
     for t in live():
         tn = t["name"][lg]
-        out_s.append(dict(k="topic", t=tn, u=f'topics/#{t["id"]}', x=f'{t["who"][lg]}. {t["line"][lg]}'))
+        out_s.append(dict(k="topic", t=tn, u=f'topics/{t["id"]}/', x=f'{t["who"][lg]}. {t["line"][lg]}'))
         for i in shown(t):
             e = entry(lg, i)
             if e["kind"] == "series":
@@ -3231,7 +3322,8 @@ def lists():
 
 def pages():
     """Every generated page, of every series, and the Topics page: (path under site/, html)."""
-    out = [("topics/index.html", topics_page("en")), ("es/topics/index.html", topics_page("es")),
+    out = [("topics/index.html", topics_page("en")), ("es/topics/index.html", topics_page("es"))] + \
+          [(f'{pre}topics/{t["id"]}/index.html', topic_page(lg, t["id"])) for t in live() for lg, pre in (("en", ""), ("es", "es/"))] + [
            (f"{PROJECT_PATH}index.html", project_page("en")), (f"es/{PROJECT_PATH}index.html", project_page("es"))]
     for S in SERIES:
         series, films_ = films(S)

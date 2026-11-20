@@ -566,7 +566,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-fit-for-use",
-      4,
+      8,
       12
      ]
     },

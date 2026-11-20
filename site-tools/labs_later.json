@@ -5,7 +5,6 @@
   "locks-before-the-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],
   "only-what-you-may-see": [1, 2, 3, 4, 5, 6, 7, 8],
   "kept-for-a-reason": [1, 2, 3, 4, 5],
-  "quality-as-a-habit": [1, 2, 3, 4],
-  "small-steps-measured": [1, 2, 3, 4]
+  "quality-as-a-habit": [1, 2, 3, 4]
  }
 }

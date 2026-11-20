@@ -16,7 +16,7 @@ Delivering and improving data work in small steps. Facilities asks for a dashboa
 | [Better every week](https://data.learn-all.org/small-steps-measured/better-every-week/) | Improving how the team works | 6½ min | 6 | 3 questions | [script](3-better-every-week/script.md) · [source](3-better-every-week/source/README.md) |
 | [Strategy is a habit](https://data.learn-all.org/small-steps-measured/strategy-is-a-habit/) | Reviewing the strategy | 8½ min | 6 | 3 questions | [script](4-strategy-is-a-habit/script.md) · [source](4-strategy-is-a-habit/source/README.md) |
 
-For the whole series, on the site: [4 labs](https://data.learn-all.org/small-steps-measured/labs/) and [12 scenarios](https://data.learn-all.org/small-steps-measured/scenarios/), in English and Spanish, from the words in [site/assets/small-steps-measured/](../../site/assets/small-steps-measured/).
+For the whole series, on the site: [8 labs](https://data.learn-all.org/small-steps-measured/labs/) and [12 scenarios](https://data.learn-all.org/small-steps-measured/scenarios/), in English and Spanish, from the words in [site/assets/small-steps-measured/](../../site/assets/small-steps-measured/).
 <!-- /films -->
 
 ## The look and the sound

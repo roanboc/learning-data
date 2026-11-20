@@ -247,6 +247,16 @@ for _f in SERIES_FILMS:
         HALVES["en"].add(_f["len"]); HALVES["es"].add(_f["len"])
     else:
         WHOLE.add(_f["len"] + " min")
+# every topic has its own page, /topics/<topic>/ (docs/page-templates.md): a breadcrumb names the topic and links to its page
+for _t in build_series.live():
+    TWINS.append(f"topics/{_t['id']}/")
+    CRUMBS[f"topics/{_t['id']}/"] = ("Topics", ["topics/"])
+    CRUMBS[f"es/topics/{_t['id']}/"] = ("Temas", ["es/topics/"])
+_TID = {_t["name"][_lg]: _t["id"] for _t in build_series.TOPICS for _lg in ("en", "es")}
+for _k, (_txt, _links) in CRUMBS.items():
+    _parts = _txt.split(" › ")
+    if len(_links) >= 2 and _links[1] in ("topics/", "es/topics/") and len(_parts) >= 2 and _parts[1] in _TID:
+        _links[1] = f"{_links[1]}{_TID[_parts[1]]}/"
 # the Topics page states each series' length in all, in whole minutes, from the same data
 WHOLE |= build_series.series_totals()
 # and each topic's row its films' length in all ("2 h 3 min", "40½ min")
@@ -1398,6 +1408,8 @@ def main():
             exp = (1, "true")
             if len(projs) == 1 and projs[0].attrs.get("aria-current") != "page":
                 s["fails"].append(f"{pg.file}: the project's icon must say it is the current page (aria-current=\"page\")")
+        elif base.startswith("topics/"):  # a topic's own page, under Topics
+            exp = (1, "true")
         elif base.startswith(("sketch/", "when-things-go-wrong/") + tuple(S["slug"] + "/" for S in build_series.SERIES)):
             exp = (1, "true")
         if pg.is404:

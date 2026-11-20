@@ -73,10 +73,10 @@
       "Ingrid Holm, de RR. HH., que responde por lo que significan las cifras de nómina"
     ]
   ],
-  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from both films.",
-  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de las dos películas.",
-  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: ship a change that hides a bug, then run the night a job fails.",
-  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: lanza un cambio que esconde un error, y corre la noche en que falla una tarea.",
+  "learn_p": "{Labs} labs: a playground for each film, with experiments to make happen, and more beside it to sort, pick and write; then {quiz} situations from both films.",
+  "learn_p_es": "{Labs} labs: uno interactivo por película, con experimentos que hacer pasar, y más a su lado para clasificar, elegir y escribir; y luego {quiz} situaciones de las dos películas.",
+  "labs_lead": "{Labs} labs, a playground for each film and more beside it. Switch, pick and press, and watch what happens: ship a change that hides a bug, then run the night a job fails.",
+  "labs_lead_es": "{Labs} labs, uno interactivo por película y más a su lado. Cambia, elige y aprieta, y mira qué pasa: lanza un cambio que esconde un error, y corre la noche en que falla una tarea.",
   "quiz_lead": "{quiz} situations from both films, about keeping data work as software. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones de las dos películas, sobre llevar el trabajo con datos como software. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

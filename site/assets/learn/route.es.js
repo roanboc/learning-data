@@ -170,7 +170,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-business-architecture-for-data",
-      5,
+      10,
       12
      ]
     },
@@ -440,7 +440,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-as-software",
-      2,
+      4,
       8
      ]
     },
@@ -460,7 +460,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-from-tables-to-decisions",
-      3,
+      6,
       9
      ]
     },

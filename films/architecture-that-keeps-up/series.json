@@ -63,10 +63,10 @@
       "Graham Ellis, el director de Instalaciones, cuyos conteos de aulas deben seguir siendo ciertos, envíe lo que envíe cada sistema"
     ]
   ],
-  "learn_p": "{Labs} decision playgrounds, one for each film, where choices play out week by week and month by month; then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs de decisiones, uno por película, donde las decisiones se desarrollan semana a semana y mes a mes; y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} decision playgrounds, one for each film. Make a data team's choices, play them out, and watch what follows: a front door's first weeks, a map kept for a year, four providers on four paths.",
-  "labs_lead_es": "{Labs} labs de decisiones, uno por película. Toma las decisiones de un equipo de datos, juégalas y mira qué pasa: las primeras semanas de una puerta de entrada, un mapa llevado un año, cuatro proveedores por cuatro caminos.",
+  "learn_p": "{Labs} labs: a decision playground for each film, where choices play out week by week and month by month, and one more to sort, pick or follow; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs: uno de decisiones por película, donde las decisiones se desarrollan semana a semana y mes a mes, y otro para ordenar, elegir o seguir; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} labs, a decision playground for each film and one more beside it. Make a data team's choices, play them out, and watch what follows: a front door's first weeks, a map kept for a year, four providers on four paths.",
+  "labs_lead_es": "{Labs} labs, uno de decisiones por película y otro a su lado. Toma las decisiones de un equipo de datos, juégalas y mira qué pasa: las primeras semanas de una puerta de entrada, un mapa llevado un año, cuatro proveedores por cuatro caminos.",
   "quiz_lead": "{quiz} situations from every film, about an architecture that keeps up. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre una arquitectura que se mantiene al día. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

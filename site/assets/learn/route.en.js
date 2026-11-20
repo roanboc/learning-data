@@ -440,7 +440,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-as-software",
-      2,
+      4,
       8
      ]
     },

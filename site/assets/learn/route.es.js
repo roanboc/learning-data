@@ -258,7 +258,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-ai-architecture",
-      3,
+      6,
       6
      ]
     }

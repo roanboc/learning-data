@@ -148,7 +148,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-enterprise-architecture",
-      11,
+      22,
       12
      ]
     },
@@ -193,7 +193,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-architecture",
-      6,
+      12,
       12
      ]
     },
@@ -218,7 +218,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-platform-and-solution-architecture",
-      8,
+      16,
       12
      ]
     },
@@ -238,7 +238,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-continuous-architecture",
-      3,
+      6,
       6
      ]
     },
@@ -258,7 +258,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-ai-architecture",
-      3,
+      6,
       6
      ]
     }
@@ -741,7 +741,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-what-an-agent-is",
-      19,
+      21,
       12
      ]
     },
@@ -914,7 +914,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-people-first",
-      4,
+      8,
       12
      ]
     },
@@ -934,7 +934,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-the-new-skills",
-      3,
+      6,
       9
      ]
     },
@@ -954,7 +954,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-working-with-people",
-      3,
+      6,
       9
      ]
     },
@@ -975,7 +975,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-leading-a-data-team",
-      4,
+      8,
       12
      ]
     },
@@ -996,7 +996,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-ownership-and-performance",
-      4,
+      8,
       12
      ]
     }

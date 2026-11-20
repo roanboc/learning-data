@@ -37,8 +37,12 @@ picks no film either, as a change to site-tools/fits.py or shots.py picks none: 
 made-up film, and each film runs it again with its own checks whenever the film changes. Before such a change merges, run it on
 every film (twice.py --all, after building them) and list in site-tools/twice_later.json what it newly finds, to fix film by film.
 
-In CI, --github writes site, browser, pages (a JSON list, or "all"), films (a matrix) and count to $GITHUB_OUTPUT, and a table
-to $GITHUB_STEP_SUMMARY.
+A file most pages load (more than SHARED_OVER of them: site.css, ambient.js, path.js, the film pages' seek.js) checks a sample of
+its pages, a few of each kind (sample()), and so does a change to more than PAGES_OVER pages at once; the nightly run
+(--every-page) checks every page. In CI the browser checks run in parallel jobs of about SHARD_PAGES pages each (shards()).
+
+In CI, --github writes site, browser, pages (a JSON list, or "all"), shards (the browser jobs' matrix), tooling, films (a
+matrix) and count to $GITHUB_OUTPUT, and a table to $GITHUB_STEP_SUMMARY.
 """
 import argparse, html.parser, json, os, pathlib, posixpath, re, subprocess, sys, urllib.parse
 
@@ -66,6 +70,17 @@ SMOKE = ["site-tools/smoke.py"]  # the browser checks themselves: a change runs 
 PLAYS = "site-tools/smoke"        # a series' play script: its labs and scenarios pages
 USED = ["site-tools/check_site.py", "site-tools/build_series.py"]  # what smoke.py imports: a change starts it, with no page
 WEB = ROOT / "site"
+# A file this many pages load is the site's own (site.css, ambient.js, path.js, and the film pages' seek.js, next.js and think.js).
+# A change to it checks a sample of its pages, one or more of each kind (see sample()), not all of them: all ~600 pages took
+# 2.5 hours in one job (19 Nov 2026). The nightly run (checks.yml, schedule) still checks every page.
+SHARED_OVER = 100
+# More changed pages than this, as when a change to build_series.py rewrites every page, are sampled the same way.
+PAGES_OVER = 150
+SAMPLE_EVERY = 15  # one page of a kind for every 15 of it, and at least one
+ALWAYS = ["", "es/", "topics/", "es/topics/"]  # the pages the header, route and tour checks run on
+# The browser checks run in parallel jobs (checks.yml's Browser matrix), about this many pages each, in at most MAX_SHARDS jobs.
+SHARD_PAGES = 40
+MAX_SHARDS = 8
 # what check_site.py reads besides site/ and site-tools/
 SITE_EXTRA = [re.compile(p) for p in [r".*\.md$", r"films/[^/]+/series\.json$", r"films/.*/site\.json$",
                                       r"films/.*/source/src/i18n/es/captions\.js$", r"films/.*/source/film\.json$",
@@ -176,7 +191,46 @@ def versions_only(path, base):
     return old.returncode == 0 and VERSION.sub("", old.stdout) == VERSION.sub("", (ROOT / path).read_text(encoding="utf-8"))
 
 
-def pages(files, base="HEAD"):
+def kinds(L):
+    """Pages grouped by kind: their language, their place (home, a topic or series, a film, labs, scenarios, evaluation, the Topics
+    page) and the shared scripts and stylesheets they load (a labs engine, the film player's seek.js), not a film's own player."""
+    own = {posixpath.dirname(f["site_player"])[len("site/"):] + "/" for f in films()}
+    count = {}
+    for got in L.values():
+        for f in got:
+            count[f] = count.get(f, 0) + 1
+    shared = {f for f, n in count.items() if n >= 5 and f.endswith((".js", ".css")) and not any(f.startswith(d) for d in own)}
+    out = {}
+    for k, got in L.items():
+        parts = [s for s in k.split("/") if s]
+        lang = "es" if parts[:1] == ["es"] else "en"
+        parts = parts[1:] if lang == "es" else parts
+        last = parts[-1] if parts else ""
+        place = last if last in ("labs", "scenarios", "evaluation", "topics") else f"depth {len(parts)}"
+        out.setdefault((lang, place, frozenset(got & shared)), []).append(k)
+    return out
+
+
+def sample(keys, L):
+    """A few pages of each kind among keys, spread through the kind, and the pages in ALWAYS: what a change to a file every page
+    loads is checked on."""
+    keys = set(keys)
+    out = {k for k in ALWAYS if k in keys}
+    for group in kinds({k: L[k] for k in keys if k in L}).values():
+        group = sorted(group)
+        n = max(1, -(-len(group) // SAMPLE_EVERY))
+        out |= {group[round(i * (len(group) - 1) / max(1, n - 1))] for i in range(n)}
+    return out
+
+
+def shards(keys, size=SHARD_PAGES, most=MAX_SHARDS):
+    """Split pages into parallel jobs, dealt in turn so each job gets every kind of page (the checks' cost differs by kind)."""
+    keys = sorted(keys)
+    n = max(1, min(most, -(-len(keys) // size)))
+    return [keys[i::n] for i in range(n) if keys[i::n]]
+
+
+def pages(files, base="HEAD", note=None):
     """The pages the browser checks run on: None for every page, else the keys of the pages a change touched."""
     if any(f in SMOKE for f in files):
         return None
@@ -189,7 +243,7 @@ def pages(files, base="HEAD"):
                 # A removed manifest still has an owner in release.json.
                 files.extend(e["site_player"] for e in films() if e["release"] == f.removesuffix("audio.json") + "release.json")
     L = loads()
-    out = set()
+    out, html, wide = set(), set(), set()
     for f in files:
         if under(f, [PLAYS]):
             series = pathlib.PurePosixPath(f).stem
@@ -202,9 +256,12 @@ def pages(files, base="HEAD"):
         rel = f[len("site/"):]
         if rel.endswith(".html"):
             if (WEB / rel).exists() and not versions_only(f, base):
-                out.add(rel[:-len("index.html")] if rel.endswith("index.html") else rel)
+                html.add(rel[:-len("index.html")] if rel.endswith("index.html") else rel)
             continue
         users = {k for k, got in L.items() if rel in got}
+        if len(users) > SHARED_OVER:  # a file of the whole site's: a sample of its pages
+            wide |= users
+            continue
         if not users and rel.startswith("assets/"):
             # JS loads nested assets (places/*.webp, for example) at runtime. Follow the owning
             # asset bundle, not just files in exactly the same directory. This also works for deletions.
@@ -213,6 +270,15 @@ def pages(files, base="HEAD"):
                 owner = "/".join(parts[:2]) + "/"
                 users = {k for k, got in L.items() if any(x.startswith(owner) for x in got)}
         out |= users  # a file nothing loads, such as a page's Markdown source, checks no page
+    if len(html) > PAGES_OVER:  # a change to every page, as from build_series.py: a sample of them
+        wide |= html
+    else:
+        out |= html
+    if wide:
+        picked = sample(wide - out, L)
+        if note is not None:
+            note["sampled"] = (len(picked), len(wide | out) - len(out))
+        out |= picked
     return out
 
 
@@ -223,7 +289,7 @@ def changed(base):
     return mb, sorted({f for f in files if f})
 
 
-def plan(files, everything, base="HEAD"):
+def plan(files, everything, base="HEAD", every_page=False):
     """What to check. Each picked film carries checks: full (source changed), or player (only the site's
     copy of its player changed: build and compare, draw no frame). A change to only a film's other published
     files, such as a soundtrack or a poster, picks no film job: the site checks cover those files."""
@@ -245,12 +311,18 @@ def plan(files, everything, base="HEAD"):
                 reasons[f["key"]] = [f["site_player"]]
             elif any(touches(p, [posixpath.dirname(f["site_player"])]) for p in files):
                 assets_only.append(f)
-    keys = None if everything else pages(files, base)  # None: every page
+    note = {}
+    keys = None if everything or every_page else pages(files, base, note)  # None: every page
     browser = keys is None or bool(keys) or any(p in USED for p in files)
     site = (browser or any(under(p, ["site", "site-tools", "modules"]) or p in READS for p in files)
             or any(r.match(p) for p in files for r in SITE_EXTRA))
     matrix = [{k: f[k] for k in ("name", "key", "dir", "lang", "player", "site_player", "checks")} for f in pick]
-    return dict(site=site, browser=browser, pages=None if keys is None else sorted(keys),
+    if every_page:  # the nightly run: the site, every page in a browser, and no film
+        pick, matrix, reasons, assets_only, site = [], [], {}, [], True
+    every = sorted(loads()) if keys is None else sorted(keys)
+    split = shards(every) if browser else []
+    return dict(site=site, browser=browser, pages=None if keys is None else sorted(keys), sampled=note.get("sampled"),
+                shards=[{"shard": f"{i + 1} of {len(split)}", "pages": json.dumps(s)} for i, s in enumerate(split)],
                 films=matrix, assets=assets_only, everything=everything, reasons=reasons,
                 tooling=everything or any(under(p, TOOLING) or production_tool(p) or p in READS or p in CHECKS for p in files),
                 media=everything or "site-tools/media.py" in files or any(p.endswith(("/audio.json", ".mp3")) for p in files))
@@ -261,12 +333,18 @@ def where(p):
     if not p["browser"]:
         return "no"
     if p["pages"] is None:
-        return "every page"
+        return "every page" + (f", in {len(p['shards'])} parallel jobs" if len(p.get("shards") or []) > 1 else "")
     n = len(p["pages"])
     if not n:
         return "no page (only that the checks start)"
     shown = ", ".join("/" + k for k in p["pages"][:8])
-    return f"{n} page{'s' if n > 1 else ''}: {shown}" + (f" and {n - 8} more" if n > 8 else "")
+    text = f"{n} page{'s' if n > 1 else ''}: {shown}" + (f" and {n - 8} more" if n > 8 else "")
+    if p.get("sampled"):
+        got, of = p["sampled"]
+        text += f" ({got} of them a sample of the {of} pages that load a file the whole site loads, or that all changed)"
+    if len(p.get("shards") or []) > 1:
+        text += f", in {len(p['shards'])} parallel jobs"
+    return text
 
 
 def summary(p, files, base):
@@ -329,14 +407,15 @@ def main():
     a = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     a.add_argument("--base", default="origin/main", help="the branch or commit to compare with (default origin/main)")
     a.add_argument("--all", action="store_true", help="every check, whatever changed")
+    a.add_argument("--every-page", action="store_true", help="the site's checks on every page, and no film (the nightly run)")
     a.add_argument("--run", action="store_true", help="run the checks here")
     a.add_argument("--github", action="store_true", help="write the plan to $GITHUB_OUTPUT and $GITHUB_STEP_SUMMARY")
     a.add_argument("--json", action="store_true", help="print the machine-readable plan")
     a.add_argument("--film", action="append", help="explicit release key to check; may be repeated")
     a.add_argument("--tier", choices=("full", "player"), default="full", help="checks for --film (CI uses this too)")
     o = a.parse_args()
-    mb, files = (None, []) if o.all or o.film else changed(o.base)
-    p = plan(files, o.all, base=mb)
+    mb, files = (None, []) if o.all or o.film or o.every_page else changed(o.base)
+    p = plan(files, o.all, base=mb, every_page=o.every_page)
     if o.film:
         if o.all:
             a.error("--film and --all are mutually exclusive")
@@ -355,7 +434,8 @@ def main():
         with open(os.environ.get("GITHUB_OUTPUT", os.devnull), "a") as out:
             out.write(f"site={str(p['site']).lower()}\nbrowser={str(p['browser']).lower()}\n"
                       f"pages={'all' if p['pages'] is None else json.dumps(p['pages'])}\n"
-                      f"films={json.dumps(p['films'])}\ncount={len(p['films'])}\n")
+                      f"films={json.dumps(p['films'])}\ncount={len(p['films'])}\n"
+                      f"shards={json.dumps(p['shards'])}\ntooling={str(p['tooling']).lower()}\n")
         with open(os.environ.get("GITHUB_STEP_SUMMARY", os.devnull), "a") as out:
             out.write(text + "\n")
     if o.run:

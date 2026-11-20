@@ -15,16 +15,24 @@ class WorkflowTests(unittest.TestCase):
     def test_required_status_rejects_failed_cancelled_or_unplanned_work(self):
         workflow = (ROOT / ".github/workflows/checks.yml").read_text(encoding="utf-8")
         required = workflow.split("  required:\n", 1)[1]
-        self.assertIn("needs: [plan, site, film]", required)
+        self.assertIn("needs: [plan, tooling, site, browser, film]", required)
         self.assertIn("if: always()", required)
         script = textwrap.dedent(required.split("        run: |\n", 1)[1])
         states = ("success", "skipped", "failure", "cancelled")
-        for plan, site, film in itertools.product(states, repeat=3):
-            with self.subTest(plan=plan, site=site, film=film):
-                result = subprocess.run(["bash", "-c", script], capture_output=True,
-                                        env=dict(os.environ, PLAN=plan, SITE=site, FILM=film))
-                expected = plan == "success" and site in states[:2] and film in states[:2]
+        names = ("PLAN", "TOOLING", "SITE", "BROWSER", "FILM")
+        for combo in itertools.product(states, repeat=len(names)):
+            with self.subTest(**dict(zip(names, combo))):
+                result = subprocess.run(["bash", "-c", script], capture_output=True, env=dict(os.environ, **dict(zip(names, combo))))
+                expected = combo[0] == "success" and all(c in states[:2] for c in combo[1:])
                 self.assertEqual(result.returncode == 0, expected)
+
+    def test_browser_checks_run_in_parallel_jobs_and_every_page_nightly(self):
+        workflow = (ROOT / ".github/workflows/checks.yml").read_text(encoding="utf-8")
+        browser = workflow.split("  browser:\n", 1)[1].split("\n  film:\n", 1)[0]
+        self.assertIn("include: ${{ fromJSON(needs.plan.outputs.shards) }}", browser)
+        self.assertIn('smoke.py --pages "$PAGES"', browser)
+        self.assertRegex(workflow, r"  schedule:\n    - cron: '[0-9*/,-]+( [0-9*/,-]+){4}'")
+        self.assertIn('schedule) args="--every-page"', workflow)
 
     @unittest.skipUnless(shutil.which("bash"), "the Actions step runs in Bash")
     def test_audio_workflow_blank_tag_publishes_every_missing_release(self):
@@ -60,7 +68,7 @@ class WorkflowTests(unittest.TestCase):
         # Cancelling main's Checks runs left Publish site with no passing run to publish (10 Nov).
         checks = (ROOT / ".github/workflows/checks.yml").read_text(encoding="utf-8")
         block = checks.split("\nconcurrency:\n", 1)[1].split("\njobs:\n", 1)[0]
-        self.assertIn("group: checks-${{ github.ref }}\n", block)
+        self.assertIn("group: checks-${{ github.event_name == 'schedule' && 'nightly' || github.ref }}\n", block)
         self.assertIn("cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}\n", block)
         pages = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
         # Only a deployment that will run joins the queue, so a skipped run can't replace a waiting one.

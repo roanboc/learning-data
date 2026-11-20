@@ -148,7 +148,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-enterprise-architecture",
-      11,
+      22,
       12
      ]
     },

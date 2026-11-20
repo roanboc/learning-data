@@ -7,6 +7,7 @@
      A page without it records nothing, so one film's page can never mark another film as watched.
    - Progress on topic cards: [data-progress="<prefix>"] (optional data-labs, data-quiz) inside [data-progress-text]; on a series' card,
      how many of its films were watched: [data-films="<prefix> <prefix>…"] inside [data-series-text].
+   - Mark watched: [data-seen="<prefix>"] toggles that film's "watched" by hand; [data-w="<prefix>"] (the series bar in a film's hero) gets .w once it is watched.
    - A chapter link (#t=89) scrolls to #watch, with or without a stepper.
    - On the home page only (data-home), old one-page links (#explore, #practise) go to their own pages.
    Prefixes: "ld" The Inner Life of Data; "ld3" A Sharper Sketch (a historical name: renaming it would erase visitors' progress);
@@ -40,7 +41,13 @@ function paint(){
     el.textContent=out.join(" · ");el.hidden=!out.length;});
   document.querySelectorAll("[data-films]").forEach(el=>{const box=el.closest("[data-series-text]");if(!box)return;
     const T=JSON.parse(box.dataset.seriesText),ps=el.dataset.films.split(" "),n=ps.filter(p=>stats(p).watched).length;
-    el.textContent=n?fill(T.films,{n:n,of:ps.length}):"";el.hidden=!n;});}
+    el.textContent=n?fill(T.films,{n:n,of:ps.length}):"";el.hidden=!n;});
+  // Mark watched (a film watched on another device), and the series bar in a film's hero: each film's step filled once watched
+  document.querySelectorAll("[data-seen]").forEach(b=>{const on=stats(b.dataset.seen).watched;b.setAttribute("aria-pressed",on);
+    const t=b.querySelector("span");if(t)t.textContent=on?b.dataset.on:b.dataset.off;});
+  document.querySelectorAll("[data-w]").forEach(a=>a.classList.toggle("w",stats(a.dataset.w).watched));}
+document.querySelectorAll("[data-seen]").forEach(b=>b.addEventListener("click",()=>{const s=store(b.dataset.seen);s.set("watched",!s.get("watched",false));paint();}));
+
 paint();window.addEventListener("storage",paint);window.addEventListener("pageshow",paint);
 // the film on this page counts as watched once most of it has played. Each second, the playhead's progress counts
 // only while the film plays, and only up to the time that passed, so a seek or a chapter jump adds nothing

@@ -5,6 +5,8 @@ window.LD_TOUR_STEPS={
  steps:[
   {sel:"header.top nav",title:"Dos lugares",text:"Empieza aquí muestra la introducción. Temas reúne todo lo demás."},
   {sel:"header.top .proj",title:"El proyecto de datos de ejemplo",text:"La caja abre el proyecto detrás de muchas películas: su mapa, sus archivos y cómo ejecutarlo."},
+  {sel:".sbar",title:"Dónde está esta película",text:"Su lugar en la serie. Cada paso es una película: verde cuando ya la viste. Elige una para ir a ella."},
+  {sel:".seen",title:"Marcar como vista",text:"Tu avance queda en este navegador. ¿La viste en otro dispositivo? Márcala aquí."},
   {sel:".player",title:"La película",text:"Pulsa Reproducir. Los botones bajo la película saltan a cualquier capítulo."},
   {sel:"#think",title:"Pausa para pensar",text:"Si está activa, la película se detiene al final de los capítulos con una pregunta. Desactívala para verla de corrido."},
   {sel:"#cc",title:"Subtítulos",text:"Activa o desactiva los subtítulos. En las páginas en español están en español."},

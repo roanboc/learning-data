@@ -803,6 +803,53 @@ def course(lg, f, step):
 
 
 
+# ---------------------------------------------------------------- the page templates (docs/page-templates.md)
+SEEN = {"en": ("Mark watched", "Watched", "Seen it on another device? Mark it here."),
+        "es": ("Marcar como vista", "Vista", "¿La viste en otro dispositivo? Márcala aquí.")}
+
+
+def seen_button(lg, prefix):
+    """Mark watched: progress lives in each browser, so a film watched on another device can be ticked by hand (path.js)."""
+    off, on, why = SEEN[lg]
+    return (f'<p class="seen-row"><button type="button" class="seen" data-seen="{prefix}" data-on="{on}" data-off="{off}" aria-pressed="false">'
+            f'<i aria-hidden="true"></i><span>{off}</span></button><small>{why}</small></p>')
+
+
+def topic_href(lg, R, item_id):
+    """The page of the topic that holds a film or a series, from a page whose way to the site's root is R."""
+    RT = R if lg == "en" else R[3:]
+    return f'{RT}topics/#{topic_of(item_id)["id"]}'
+
+
+def topic_name(lg, item_id):
+    return topic_of(item_id)["name"][lg]
+
+
+def series_bar(lg, f, films_, rel, R):
+    """A film's place in its series, in its hero: "Film 2 of 4 · the series", and a bar of the series' films, each a link,
+    this one marked, the watched ones filled (path.js: data-w). rel: the way from the page to the series folder."""
+    S = f["series"]
+    nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
+    items = [(x["index"], f'<li><a href="{rel}{x["key"]}/" data-w="{x["prefix"]}"' + (' aria-current="page"' if x is f else "")
+              + f'><span>{"" if x["index"] < 0 else str(x["index"] + 1) + " · "}{nm(x)}</span></a></li>') for x in films_]
+    RT = R if lg == "en" else R[3:]
+    items += [(n - 1, f'<li><a href="{RT}{h["href"]}"><span>{n} · {E(h["title"][lg])}</span></a></li>') for n, _, h, _ in outside(S)]
+    ser = series_data(S)
+    shown_n = {i for i, _ in items}
+    for i in range(ser.get("planned", len(ser["films"]))):  # films still being made: a grey step with no link
+        if i not in shown_n:
+            items.append((i, f'<li class="soon"><span>{i + 1}</span></li>'))
+    lis = "".join(li for _, li in sorted(items, key=lambda t: t[0]))
+    return (f'<div class="spos"><p class="spos-t"><b>{num(lg, f)}</b> · <a href="{rel}">{SN(lg, S)}</a></p>'
+            f'<ol class="sbar" aria-label="{T(lg, "The films of the series", "Las películas de la serie")}">{lis}</ol></div>')
+
+
+def fold(lg, sid, title, inner, sub=""):
+    """A section folded under one heading, opened on a tap: the example project's files, Go further (docs/page-templates.md)."""
+    return (f'<section class="module fold-sec" id="{sid}" aria-labelledby="{sid}-h">\n<details class="fold"><summary><h2 id="{sid}-h">{title}</h2>'
+            + (f'<small>{sub}</small>' if sub else "") + f'</summary>\n<div class="fold-in">\n{inner}\n</div></details>\n</section>\n\n')
+
+
 def next_series(f):
     """The series to watch after f's ("next" in SERIES), with its films on the site, if f is the last film its series plans and that
     series has a film on the site; else None."""
@@ -812,6 +859,13 @@ def next_series(f):
     after = next((x for x in SERIES if x["id"] == S["next"]), None)
     shown = films(after)[1] if after else []
     return (after, shown) if shown else None
+
+
+def topic_card_end(lg, f, R):
+    """The last card of a series with no series after it: its topic, where the visitor chooses what comes next."""
+    sid = f["series"]["id"]
+    return (f'<article class="pn-end">\n<div class="tc-body">\n<p class="kicker">{T(lg, "The series is done", "Terminaste la serie")} · {T(lg, "Back to the topic", "Vuelve al tema")} →</p>\n'
+            f'<h3><a href="{topic_href(lg, R, sid)}">{E(topic_name(lg, sid))}</a></h3>\n<p>{T(lg, "Choose the next series of this topic, or another topic on the route.", "Elige la siguiente serie de este tema, u otro tema de la ruta.")}</p>\n</div>\n</article>')
 
 
 def series_nav(lg, f, films_, R, rel):
@@ -825,14 +879,14 @@ def series_nav(lg, f, films_, R, rel):
     cards = ([card(lg, prv, rel, R, kicker=f'← {T(lg, "Previous", "Anterior")} · {num(lg, prv)}')] if prv else []) + \
             ([card(lg, nxt, rel, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, nxt)} →')] if nxt else []) + \
             ([outside_card(lg, f["series"], f["index"] + 2, hn, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, dict(index=f["index"] + 1, series=f["series"]))} →')] if hn else []) + \
-            ([card(lg, after[1][0], f'{R if lg == "en" else R[3:]}{after[0]["slug"]}/', R, kicker=f'{T(lg, "Next series", "Siguiente serie")} · {SN(lg, after[0])} →')] if after else [])
+            ([card(lg, after[1][0], f'{R if lg == "en" else R[3:]}{after[0]["slug"]}/', R, kicker=f'{T(lg, "Next series", "Siguiente serie")} · {SN(lg, after[0])} →')] if after else []) + \
+            ([] if nxt or hn or after else [topic_card_end(lg, f, R)])
     lang = lambda h: ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
     lis = "\n".join(li for _, li in sorted([(x["index"], f'<li><a href="{rel}{x["key"]}/"' + (' aria-current="page"' if x is f else "") + f'><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>') for x in films_]
                            + [(i, f'<li><a href="{R if lg == "en" else R[3:]}{h["href"]}"><span class="n">{i + 1}</span><span{lang(h)}>{E(h["title"][lg])}</span></a></li>') for i, h in hand.items()]))
-    return (f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "In the series", "En la serie")}: <a href="{rel}">{SN(lg, f["series"])}</a></h2>'
-            f'<p>{num(lg, f)}.</p></div></div>\n'
-            f'<div class="topic-grid series-pn" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(cards) + '\n</div>\n'
-            f'<ol class="series-list" aria-label="{T(lg, "Every film of the series", "Todas las películas de la serie")}">\n{lis}\n</ol>\n</section>\n')
+    return (f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "Previous and next", "Anterior y siguiente")}</h2>'
+            f'<p>{num(lg, f)} · <a href="{rel}">{SN(lg, f["series"])}</a></p></div></div>\n'
+            f'<div class="topic-grid series-pn" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(cards) + '\n</div>\n</section>\n')
 
 
 def project_url(f, path):
@@ -855,9 +909,11 @@ def project_section(lg, f):
         if paths:
             links = " ".join(f'<a href="{project_url(f, x)}"><code>{E(proj_shown(x))}</code></a>' for x in paths)
             rows.append(f'<li><b>{E(names[cid])}</b><span>{links}</span></li>')
-    return (f'<section class="module" id="in-the-project" aria-labelledby="project-h">\n<div class="mhead"><div><h2 id="project-h">{T(lg, "See it in the project", "Míralo en el proyecto")}</h2>'
-            f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}{how}</p></div></div>\n'
-            f'<ul class="repo-list">\n' + "\n".join(rows) + f'\n</ul>\n<p class="film-links"><a href="{project_url(f, "")}">{T(lg, "Explore the whole project", "Explora el proyecto entero")}</a><a href="{project_url(f, "README.md")}">{T(lg, "How to run it", "Cómo ejecutarlo")}</a></p>\n</section>\n\n')
+    inner = (f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}{how}</p>\n'
+             f'<ul class="repo-list">\n' + "\n".join(rows) + f'\n</ul>\n<p class="film-links"><a href="{project_url(f, "")}">{T(lg, "Explore the whole project", "Explora el proyecto entero")}</a><a href="{project_url(f, "README.md")}">{T(lg, "How to run it", "Cómo ejecutarlo")}</a></p>')
+    n = len(rows)
+    return fold(lg, "in-the-project", T(lg, "In the example project", "En el proyecto de ejemplo"), inner,
+                T(lg, f"{n} chapter{'s' * (n != 1)} show its files", f"{n} capítulo{'s' * (n != 1)} muestra{'n' * (n != 1)} sus archivos"))
 
 
 def elsewhere_section(lg, f):
@@ -871,9 +927,9 @@ def elsewhere_section(lg, f):
     w = lambda o, k: o[k + "_es"] if lg == "es" else o[k]
     rows = "\n".join(f'<li><b><a href="{E(w(x, "href"))}">{E(w(x, "title"))}</a></b><span>{E(w(x, "line"))}</span></li>' for x in e["links"])
     more = "".join(f'<a href="{E(w(x, "href"))}">{E(w(x, "text"))}</a>' for x in e.get("more", []))
-    return (f'<section class="module" id="elsewhere" aria-labelledby="elsewhere-h">\n<div class="mhead"><div><h2 id="elsewhere-h">{E(w(e, "h"))}</h2>'
-            f'<p>{E(w(e, "p"))}</p></div></div>\n<ul class="repo-list">\n{rows}\n</ul>\n'
-            + (f'<p class="film-links">{more}</p>\n' if more else "") + '</section>\n\n')
+    inner = f'<p>{E(w(e, "p"))}</p>\n<ul class="repo-list">\n{rows}\n</ul>' + (f'\n<p class="film-links">{more}</p>' if more else "")
+    n = len(e["links"])
+    return fold(lg, "elsewhere", T(lg, "Go further", "Para ir más allá"), inner, T(lg, f"{n} link{'s' * (n != 1)}", f"{n} enlace{'s' * (n != 1)}"))
 
 
 def es_scenes(f):
@@ -893,6 +949,7 @@ def film_page(lg, f, films_, series):
     name = f["title"] if lg == "en" else s["title_es"]
     title = f'{name} · Learning Data' if alone else f'{name} · {SN(lg, S)} · Learning Data'
     h, R = head(lg, path, title, s[T(lg, "description", "description_es")], s[T(lg, "card", "card_es")], f"{key}-poster.jpg")
+    h += f'<link rel="stylesheet" href="{R}assets/learn/pages.css">\n'
     nxt = next((x for x in films_ if x["index"] == f["index"] + 1), None)
     script = f'{REPO}/blob/main/films/{S["dir"]}/{f["dir"]}/script.md'; caps = f'{REPO}/tree/main/films/{S["dir"]}/{f["dir"]}/captions'
     es_audio = lg == "es" and spanish_audio(f)
@@ -904,7 +961,7 @@ def film_page(lg, f, films_, series):
              f'<a class="btn" href="{R if lg == "en" else R[3:]}{hn["href"]}">{T(lg, "Next in the series", "Sigue en la serie")}: {E(hn["title"][lg])}</a>' if hn else
              f'<a class="btn" href="{R if lg == "en" else R[3:]}{after[0]["slug"]}/">{T(lg, "Next series", "Siguiente serie")}: {SN(lg, after[0])}</a>' if after else
              f'<a class="btn primary" href="{R if lg == "en" else R[3:]}topics/">{HOME_TEXT[lg][0]}</a>' if alone else
-             f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {SN(lg, S)}</a>')
+             f'<a class="btn" href="{topic_href(lg, R, S["id"])}">{T(lg, "Back to the topic", "Vuelve al tema")}: {E(topic_name(lg, S["id"]))}</a>')
     think_btn = "" if not think else T(lg, f'<button id="think" aria-pressed="true" title="Stop at the end of {ntw} chapters, with one question each">Pause and think</button>',
                                          f'<button id="think" aria-pressed="true" title="Detenerse al final de {ntw} capítulos, con una pregunta cada vez">Pausa para pensar</button>')
     player = (f'<div class="player" data-labs="{"labs/" if learn or SL and alone else "../labs/" if SL else ""}">\n<audio id="snd" preload="metadata" src="{R}assets/{key}/soundtrack{".es" if es_audio else ""}.mp3"></audio><div class="poster"><img src="{R}assets/{key}-poster.jpg" alt="" width="1280" height="720" data-play>'
@@ -924,13 +981,14 @@ def film_page(lg, f, films_, series):
                E(s[T(lg, "watch_p", "watch_p_es")]))  # a film with no questions says, in its site.json, what to do while it plays
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{key}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S, "../", alone)}\n'
-            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "lead", "lead_es")])}</p>\n{draft_note(lg, is_draft(f))}</section>\n'
+            + ("" if alone else series_bar(lg, f, films_, "../", R) + "\n") +
+            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "card", "card_es")])}</p>\n{draft_note(lg, is_draft(f))}{seen_button(lg, f["prefix"])}\n</section>\n'
             + (f'{course(lg, f, 0)}\n' if learn else "") +
             f'<section class="module" id="watch" data-store="{f["prefix"]}" aria-labelledby="watch-h">\n'
             f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{watch_p}</p></div></div>\n'
             f'{player}\n<div class="chapters" id="chapters" aria-label="{T(lg, "Chapters", "Capítulos")}"></div>\n{links}\n{nextp}\n</section>\n\n'
-            + project_section(lg, f)
             + (film_learn_section(lg, f, SL) if SL else "")
+            + project_section(lg, f)
             + elsewhere_section(lg, f)
             + ("" if alone else series_nav(lg, f, films_, R, "../")) + '</main>\n'
             f'{foot(lg, S, learn, own=s.get(T(lg, "fiction", "fiction_es")))}\n'
@@ -1047,7 +1105,7 @@ def film_learn_section(lg, f, SL, up=None):
                                                f" entre {'el único lab' if nl == 1 else f'los {nl} labs'} y las {SL['quiz']} situaciones de la serie.")
     p += T(lg, " Your progress stays in this browser.", " Tu avance queda en este navegador.")
     every = "" if alone else f'<a class="btn" href="{"../" if up is None else up}labs/">{T(lg, "Every lab", "Todos los labs")}</a>'
-    return (f'<section class="module" id="take-it-apart" aria-labelledby="take-h">\n<div class="mhead"><div><h2 id="take-h">{T(lg, "Take it apart, then make the call", "Desarma, y luego tú decides")}</h2><p>{p}</p></div></div>\n'
+    return (f'<section class="module" id="take-it-apart" aria-labelledby="take-h">\n<div class="mhead"><div><h2 id="take-h">{T(lg, "Try it", "Pruébalo")}</h2><p>{p}</p></div></div>\n'
             f'<p class="stop-nav">{film_learn(lg, f, SL, up=up)}{every}</p>\n</section>\n\n')
 
 

@@ -31,5 +31,6 @@
   "quiz_lead": "Ten situations about keeping meaning current: three numbers for one measure, a plausible invented definition, a change that skipped review, last year's report, a new modelling pattern, two credentials that look alike. Decide what you'd do; each answer explains why.",
   "quiz_lead_es": "Diez situaciones sobre mantener el significado al día: tres cifras para una medida, una definición inventada pero plausible, un cambio que se saltó la revisión, el informe del año pasado, un patrón de modelado nuevo, dos credenciales parecidas. Decide qué harías; cada respuesta explica por qué.",
   "past": ["Johnson's dictionary, 1755", "Meaning moves. Someone has to keep up."],
-  "past_es": ["El diccionario de Johnson, 1755", "El significado se mueve. Alguien tiene que seguirle el paso."]
+  "past_es": ["El diccionario de Johnson, 1755", "El significado se mueve. Alguien tiene que seguirle el paso."],
+  "tile": [640, 330, 440]
 }

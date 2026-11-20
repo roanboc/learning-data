@@ -9,11 +9,7 @@
     "ws_pages.js",
     "scenes.js"
   ],
-  "poster": [
-    "asked",
-    "pass",
-    2.6
-  ],
+  "poster": ["copy", "n1995", 3.7],
   "say": [
     ["\\bOkafor\\b", "Oh-kah-for"],
     ["\\bJun\\b", "Joon"],

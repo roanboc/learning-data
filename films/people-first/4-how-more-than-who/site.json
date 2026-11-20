@@ -101,5 +101,6 @@
         "href_es": "https://pubmed.ncbi.nlm.nih.gov/19186898/"
       }
     ]
-  }
+  },
+  "tile": [900, 380, 440]
 }

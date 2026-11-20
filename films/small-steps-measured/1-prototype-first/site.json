@@ -84,5 +84,6 @@
         "href_es": "https://mid.curitiba.pr.gov.br/2012/00118814.pdf"
       }
     ]
-  }
+  },
+  "tile": [440, 360, 480]
 }

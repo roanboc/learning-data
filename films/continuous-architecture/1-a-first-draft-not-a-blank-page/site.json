@@ -61,5 +61,6 @@
         "href_es": "https://www.entsoe.eu/data/cim/role-models/"
       }
     ]
-  }
+  },
+  "tile": [870, 300, 400]
 }

@@ -37,5 +37,6 @@
   },
   "next_h": "You've seen what a helper borrows on your sign-in, and how to narrow it. Next: the place on the map an agent of the team is given.",
   "next_h_es": "Viste lo que toma prestado un ayudante con tu acceso, y cómo acotarlo. Después: el lugar en el mapa que recibe un agente del equipo.",
-  "draft": true
+  "draft": true,
+  "tile": [580, 280, 440]
 }

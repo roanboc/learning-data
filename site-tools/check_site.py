@@ -52,6 +52,8 @@ What it checks, page by page (every .html under site/):
   scenarios, as in Pause and think. Options that only name something (every one under 25 characters) aren't compared, nor the
   scenarios no page shows. A lab's rows of options are held to the same limits: among the rows of the labs a page shows, in each
   pack, in English and Spanish.
+- tiles: each film row's square close-up (site/assets/<key>-tile.jpg) was cut by site-tools/tiles.py from the current poster,
+  at the square its film's site.json names ("tile")
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
@@ -1978,6 +1980,15 @@ def main():
     faults, n = poster_faults()
     s["fails"] += faults
     s["notes"].append(f"{n} posters drawn by tools/publish.py")
+
+    # -- tiles: the square close-ups of the posters on a series' rows of films (Rodrigo, 20 November 2026: the wide posters
+    # shrunk to a row read as thin dark strips on a phone). Each is cut by site-tools/tiles.py from its poster, at the square
+    # its film's site.json names ("tile"), and carries a stamp of both: a poster drawn again leaves its tile out of date
+    s = rep.check("Tiles: each film row's square close-up was cut from its current poster, at the square its site.json names")
+    import tiles
+    for _, _, m in tiles.faults():
+        s["fails"].append(m)
+    s["notes"].append(f"{len(tiles.wanted())} tiles")
 
     # -- the film's number in its kicker (people kit films): PK.kicker(ctx, num, title) shows "num  TITLE" top left, and num is
     # the film's place in its series, its folder's number. Six films had been written with 1 (18 November 2026)

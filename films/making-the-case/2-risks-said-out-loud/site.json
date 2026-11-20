@@ -67,5 +67,6 @@
     "href_es": "https://www.gutenberg.org/ebooks/4229"
    }
   ]
- }
+ },
+  "tile": [900, 410, 360]
 }

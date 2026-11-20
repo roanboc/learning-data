@@ -112,5 +112,6 @@
         "href_es": "https://ossie.apache.org/"
       }
     ]
-  }
+  },
+  "tile": [1060, 380, 440]
 }

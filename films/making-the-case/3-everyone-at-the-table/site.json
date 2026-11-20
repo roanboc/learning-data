@@ -89,5 +89,6 @@
         "href_es": "https://www.gardenvisit.com/book/london_parks_and_gardens_1907/chapter_2_hyde_park/great_exhibition_of_1851_in_hyde_park"
       }
     ]
-  }
+  },
+  "tile": [380, 330, 480]
 }

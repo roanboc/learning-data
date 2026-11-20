@@ -39,8 +39,24 @@ button{font:inherit;color:inherit}
 /* "More": on wide screens its contents sit in the row (the popover's own box undone); on phones they fold into the menu below */
 .more-btn{display:none}
 .more{display:flex;align-items:center;gap:4px;position:static;inset:auto;width:auto;height:auto;margin:0;padding:0;border:0;background:none;color:inherit;overflow:visible}
+/* the example data project, one tap away: its box, always in the row, with its name as a hint */
+.proj{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;margin-left:4px;border:1px solid rgba(255,196,107,.6);border-radius:999px;background:rgba(255,196,107,.1);color:#ffd591;text-decoration:none}
+.proj svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.proj:hover,.proj:focus-visible{background:rgba(255,196,107,.22);color:#fff}
+.proj[aria-current]{background:#ffc46b;border-color:#ffc46b;color:#1a1204}
+.proj::after{content:attr(aria-label);position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);width:max-content;max-width:240px;padding:6px 10px;border:1px solid #566174;border-radius:8px;background:#0e1422;color:#ecf3ff;font-size:12px;font-weight:700;pointer-events:none;opacity:0;transition:opacity .15s}
+.proj:hover::after,.proj:focus-visible::after{opacity:1}
+/* "More options": Making of and the outside links, in a menu that drops from the row */
+.extra:not(:popover-open){display:none}
+.extra:popover-open{position:fixed;inset:calc(var(--top-h) + 6px) max(8px,calc((100vw - 1160px) / 2 + 12px)) auto auto;display:grid;gap:4px;width:min(260px,calc(100vw - 16px));margin:0;padding:8px;border:1px solid rgba(170,200,245,.3);border-radius:14px;background:#0e1422;color:#ecf3ff;box-shadow:0 18px 44px rgba(0,0,0,.45);animation:extra-in .16s ease-out}
+@keyframes extra-in{from{opacity:0;transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.extra:popover-open{animation:none}}
+.extra a{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 14px;border-radius:10px;color:#ecf3ff;text-decoration:none;font-size:15px;font-weight:700}
+.extra a:hover,.extra a:focus-visible{background:rgba(106,168,255,.18);color:#fff}
+.extra a[aria-current]{background:rgba(106,168,255,.18);box-shadow:inset 0 0 0 1px rgba(106,168,255,.45)}
+.extra svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.top-in:has(.making[aria-current]) .extra-btn,.top-in:has(.making[aria-current]) .more-btn{background:rgba(106,168,255,.18);border-color:#6aa8ff}
 @media (max-width:640px){.top-in{padding:0 12px;gap:6px}.top nav{gap:0}.top nav>a{font-size:14px;padding:6px 8px}.lang{margin-left:4px}.lang a{padding:3px 7px}footer{padding:22px 16px 40px}}
-@media (max-width:900px){.nav-tools .parent-site{padding:0;width:44px}.parent-site span{display:none}}
 /* just above the phones' More menu the row is full, most of all in Spanish, since the tour's "?" joined it: closer together */
 @media (min-width:721px) and (max-width:860px){.top-in{padding:0 12px;gap:6px}.top nav{gap:0}.top nav>a{padding:7px 8px}.lang{margin-left:4px}.nav-tools{gap:2px}}
 @supports selector(:popover-open){@media (max-width:720px){
@@ -53,6 +69,9 @@ button{font:inherit;color:inherit}
   .more .nav-tools{display:grid;gap:6px}
   .more .nav-tools :is(a,button),.more .nav-tools .parent-site{width:100%;justify-content:flex-start;gap:12px;padding:0 14px;border-color:transparent;border-radius:10px;font-size:15px}
   .more .nav-tools :is(a,button)::after{position:static;opacity:1;padding:0;border:0;background:none;font-size:15px;color:inherit;max-width:none}
+  .more .extra-btn{display:none}
+  .more .extra{position:static;inset:auto;display:grid;gap:6px;width:auto;margin:0;padding:6px 0 0;border:0;border-top:1px solid rgba(170,200,245,.18);border-radius:0;background:none;box-shadow:none;animation:none}
+  .proj{margin-left:2px}.proj::after{display:none}
 }}
 @media (max-width:440px){.top nav>a{font-size:13.5px;padding:6px 7px}}
 /* the smallest phones keep the logo; its words stay as the link's name for screen readers */

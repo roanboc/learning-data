@@ -11,15 +11,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/site.css?v=a6bf9735d7">
+<link rel="stylesheet" href="../../assets/learn/pages.css?v=70309c4dda">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a href="../../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/locks-before-the-data/network-storage-and-keys/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="How this site works" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
 <main>
 <section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../assets/network-storage-and-keys-poster.jpg?v=729545800e" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../../topics/#data-protection">Data protection and privacy</a> › <a href="../">Locks before the data</a></p>
+<div class="spos"><p class="spos-t"><b>Film 7 of 9</b> · <a href="../">Locks before the data</a></p><ol class="sbar" aria-label="The films of the series"><li><a href="../who-is-it-really/" data-w="ld-who-is-it-really"><span>1 · Who is it, really?</span></a></li><li><a href="../no-secret-to-lose/" data-w="ld-no-secret-to-lose"><span>2 · No secret to lose</span></a></li><li><a href="../walls-doors-and-keys/" data-w="ld-walls-doors-and-keys"><span>3 · Walls, doors and keys</span></a></li><li><a href="../power-you-switch-on/" data-w="ld-power-you-switch-on"><span>4 · Power you switch on</span></a></li><li><a href="../people-and-groups/" data-w="ld-people-and-groups"><span>5 · People and groups</span></a></li><li><a href="../workloads-without-secrets/" data-w="ld-workloads-without-secrets"><span>6 · Workloads without secrets</span></a></li><li><a href="../network-storage-and-keys/" data-w="ld-network-storage-and-keys" aria-current="page"><span>7 · Network, storage and keys</span></a></li><li><a href="../from-a-branch-to-production/" data-w="ld-from-a-branch-to-production"><span>8 · From a branch to production</span></a></li><li><a href="../who-did-what/" data-w="ld-who-did-what"><span>9 · Who did what</span></a></li></ol></div>
 <h1>Network, storage and keys: one door to the data</h1>
-<p class="lead">Production's files sit in Azure storage, and Unity Catalog is meant to be the only way to them. Sam Okafor finds nine ways around it: two account keys, a link signed with one, and six people with a role on the storage. Every door is open to the internet. He shuts all but one.</p>
+<p class="lead">Private doors, a short list out, one identity at the files, and one way around the catalog that you switch on and watch.</p>
 <p class="note draft"><b>Draft</b> · The author hasn't reviewed it yet, so some details may change.</p>
+<p class="seen-row"><button type="button" class="seen" data-seen="ld-network-storage-and-keys" data-on="Watched" data-off="Mark watched" aria-pressed="false"><i aria-hidden="true"></i><span>Mark watched</span></button><small>Seen it on another device? Mark it here.</small></p>
 </section>
 <section class="module" id="watch" data-store="ld-network-storage-and-keys" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p><b>Pause and think</b> is on: the film stops for one question at the end of chapters.</p></div></div>
@@ -35,12 +38,14 @@
 </section>
 
 <section class="module" id="take-it-apart" aria-labelledby="take-h">
-<div class="mhead"><div><h2 id="take-h">Take it apart, then make the call</h2><p>This film's lab, and its situation, among the series' 9 labs and 12 situations. Your progress stays in this browser.</p></div></div>
+<div class="mhead"><div><h2 id="take-h">Try it</h2><p>This film's lab, and its situation, among the series' 9 labs and 12 situations. Your progress stays in this browser.</p></div></div>
 <p class="stop-nav"><a class="btn primary" href="../labs/#tank">Take it apart: One door to the data →</a><a class="btn" href="../scenarios/#film-7">Make the call: 1 situation</a><a class="btn" href="../labs/">Every lab</a></p>
 </section>
 
-<section class="module" id="elsewhere" aria-labelledby="elsewhere-h">
-<div class="mhead"><div><h2 id="elsewhere-h">Read the guidance yourself</h2><p>The film shows Azure Databricks and Azure Storage as their docs did on 5 November 2026. These are the pages it follows, one for each path it closes and for the key; links checked on 10 November 2026.</p></div></div>
+<section class="module fold-sec" id="elsewhere" aria-labelledby="elsewhere-h">
+<details class="fold"><summary><h2 id="elsewhere-h">Go further</h2><small>8 links</small></summary>
+<div class="fold-in">
+<p>The film shows Azure Databricks and Azure Storage as their docs did on 5 November 2026. These are the pages it follows, one for each path it closes and for the key; links checked on 10 November 2026.</p>
 <ul class="repo-list">
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/security/network/concepts/privatelink-concepts">Private Link concepts</a></b><span>The private doors in: from people to the workspace, and from the machines that run the jobs to Databricks.</span></li>
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/security/network/front-end/ip-access-list">Manage IP access lists</a></b><span>Let in only known addresses while a public door remains, and what changes once there's a private one.</span></li>
@@ -51,10 +56,11 @@
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/security/keys/customer-managed-keys">Customer-managed keys for encryption</a></b><span>A key of your own for the workspace's notebooks, queries and disks, and what happens if it's taken back.</span></li>
 <li><b><a href="https://learn.microsoft.com/en-us/azure/storage/common/customer-managed-keys-overview">Customer-managed keys for account encryption</a></b><span>The storage's own key, kept in a vault: the storage uses it, and picks up each new version.</span></li>
 </ul>
+</div></details>
 </section>
 
 <section class="module" id="in-the-series" aria-labelledby="series-h">
-<div class="mhead"><div><h2 id="series-h">In the series: <a href="../">Locks before the data</a></h2><p>Film 7 of 9.</p></div></div>
+<div class="mhead"><div><h2 id="series-h">Previous and next</h2><p>Film 7 of 9 · <a href="../">Locks before the data</a></p></div></div>
 <div class="topic-grid series-pn" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
 <article class="topic-card">
 <img src="../../assets/workloads-without-secrets-poster.jpg?v=aadff7356b" alt="" width="1280" height="720" loading="lazy">
@@ -77,17 +83,6 @@
 </div>
 </article>
 </div>
-<ol class="series-list" aria-label="Every film of the series">
-<li><a href="../who-is-it-really/"><span class="n">1</span>Who is it, really?</a></li>
-<li><a href="../no-secret-to-lose/"><span class="n">2</span>No secret to lose</a></li>
-<li><a href="../walls-doors-and-keys/"><span class="n">3</span>Walls, doors and keys</a></li>
-<li><a href="../power-you-switch-on/"><span class="n">4</span>Power you switch on</a></li>
-<li><a href="../people-and-groups/"><span class="n">5</span>People and groups</a></li>
-<li><a href="../workloads-without-secrets/"><span class="n">6</span>Workloads without secrets</a></li>
-<li><a href="../network-storage-and-keys/" aria-current="page"><span class="n">7</span>Network, storage and keys</a></li>
-<li><a href="../from-a-branch-to-production/"><span class="n">8</span>From a branch to production</a></li>
-<li><a href="../who-did-what/"><span class="n">9</span>Who did what</a></li>
-</ol>
 </section>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>

@@ -218,7 +218,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-platform-and-solution-architecture",
-      8,
+      16,
       12
      ]
     },

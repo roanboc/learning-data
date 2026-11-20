@@ -295,7 +295,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-governance",
-      15,
+      22,
       12
      ]
     },
@@ -822,7 +822,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-a-plan-in-ninety-days",
-      4,
+      8,
       12
      ]
     },

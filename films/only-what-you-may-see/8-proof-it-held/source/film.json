@@ -10,11 +10,7 @@
     "ph_close.js",
     "scenes.js"
   ],
-  "poster": [
-    "held",
-    "hope",
-    -1.0
-  ],
+  "poster": ["square", "sun", 4.98],
   "say": [
     ["\\bJun\\b", "Joon"],
     ["\\bA I\\b", "AI"],

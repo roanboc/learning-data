@@ -11,11 +11,7 @@
     "scenes2.js",
     "scenes3.js"
   ],
-  "poster": [
-    "follows",
-    "goes",
-    1.0
-  ],
+  "poster": ["high", "octagon", 6.7],
   "say": [
     [
       "\\bMei\\b",

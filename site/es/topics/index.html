@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/site.css?v=6c7e05e496">
-<link rel="stylesheet" href="../../assets/learn/route.css?v=7f2215ef35">
+<link rel="stylesheet" href="../../assets/learn/route.css?v=e5dfb0f7bb">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="page">Temas</a></nav><a class="proj" href="../dbt-project/" aria-label="Proyecto de datos de ejemplo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.9l7.9 4.55v9.1L12 21.1l-7.9-4.55v-9.1z"/><path d="M4.3 7.55 12 12l7.7-4.45M12 12v8.9"/></svg></a><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../topics/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="Cómo funciona este sitio" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><button class="extra-btn" type="button" popovertarget="top-extra" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div><div class="extra" id="top-extra" popover><a class="making" href="../journey/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17M8 5l-1.5 4M13 5l-1.5 4M18 5l-1.5 4"/></svg><span>Cómo se hizo</span></a><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a class="contact" href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>LinkedIn</span></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -20,12 +20,17 @@
 <p class="eyebrow">Learning Data</p>
 <h1>Encuentra tu ruta de aprendizaje</h1>
 <p class="lead">Doce temas en una ruta. Empieza por la introducción, construye los fundamentos y luego toma la línea que necesitas. Tu progreso se guarda en este navegador.</p>
-<div class="view-switch" role="group" aria-label="Vista" hidden><button type="button" data-view="route" aria-pressed="false">Ruta de aprendizaje</button><button type="button" data-view="list" aria-pressed="true">Lista de temas</button></div>
+<div class="view-switch" role="group" aria-label="Vista" hidden><button type="button" data-view="list" aria-pressed="true">Lista de temas</button><button type="button" data-view="route" aria-pressed="false">Ruta de aprendizaje</button><button type="button" data-view="progress" aria-pressed="false">Avance</button></div>
 </section>
 
 <section class="route-view" id="route" aria-labelledby="route-h" hidden>
 <h2 class="route-sr" id="route-h">Ruta de aprendizaje</h2>
 <div class="route" data-route data-root="../../" data-base="../" data-topics=""></div>
+</section>
+
+<section class="progress-view" id="progress" aria-labelledby="progress-h" hidden>
+<h2 class="route-sr" id="progress-h">Avance</h2>
+<div class="prog" data-prog data-root="../../" data-base="../"></div>
 </section>
 
 <div class="list-view" id="list">
@@ -40,7 +45,7 @@
 <section class="module topic" id="data-platforms" aria-labelledby="data-platforms-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="data-platforms-h">Plataformas de datos</h2><span class="ix-who">Empieza aquí: para todos</span><span class="ix-cnt">2 películas · 14 min</span></summary>
-<p class="ix-line">Cómo se mueven los datos en una plataforma de datos moderna, desde un toque en el teléfono hasta una decisión.</p>
+<p class="ix-line">Cómo se mueven los datos en una plataforma de datos moderna, desde un toque en el teléfono hasta una decisión. <a class="ix-open" href="data-platforms/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row">
 <img src="../../assets/poster.es.jpg?v=443a593482" alt="" width="1280" height="720" loading="lazy">
@@ -72,7 +77,7 @@
 <section class="module topic" id="enterprise-architecture" aria-labelledby="enterprise-architecture-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="enterprise-architecture-h">Arquitectura empresarial</h2><span class="ix-who">Para arquitectos, y para quien llega nuevo a una organización</span><span class="ix-cnt">6 series · 36 películas · 4 h 20 min</span></summary>
-<p class="ix-line">Cómo funciona una organización, por capas, para diseñar sus datos como parte de ella: arquitectura empresarial de datos.</p>
+<p class="ix-line">Cómo funciona una organización, por capas, para diseñar sus datos como parte de ella: arquitectura empresarial de datos. <a class="ix-open" href="enterprise-architecture/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/day-one-poster.jpg?v=30053f3374" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/who-it-serves-poster.jpg?v=0b327b7532" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/why-it-moves-poster.jpg?v=1c963f061b" alt="" width="1280" height="720" loading="lazy"></div>
@@ -140,7 +145,7 @@
 <section class="module topic" id="data-governance" aria-labelledby="data-governance-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="data-governance-h">Gobernanza de datos</h2><span class="ix-who">Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen</span><span class="ix-cnt">3 series · 20 películas · 2 h 3 min</span></summary>
-<p class="ix-line">Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante.</p>
+<p class="ix-line">Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante. <a class="ix-open" href="data-governance/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/the-same-problem-everywhere-poster.jpg?v=f9be8b92fc" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/off-the-shelf-poster.jpg?v=003761a988" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/who-decides-poster.jpg?v=26e8c4d70f" alt="" width="1280" height="720" loading="lazy"></div>
@@ -182,7 +187,7 @@
 <section class="module topic" id="data-modelling" aria-labelledby="data-modelling-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="data-modelling-h">Modelado de datos<span class="pj-mark" title="Muestra el proyecto de dbt de ejemplo"><svg class="pj-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z"/><path d="M3.6 6.3L10 10l6.4-3.7M10 10v7.4"/></svg><span class="route-sr">Muestra el proyecto de dbt de ejemplo</span></span></h2><span class="ix-who">Para quien diseña modelos, definiciones o reportes</span><span class="ix-cnt">2 series · 9 películas · 49 min</span></summary>
-<p class="ix-line">Lo que significan las cifras, y las formas que las contienen: primero las palabras y las definiciones, luego los modelos, antes que cualquier sistema.</p>
+<p class="ix-line">Lo que significan las cifras, y las formas que las contienen: primero las palabras y las definiciones, luego los modelos, antes que cualquier sistema. <a class="ix-open" href="data-modelling/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/the-map-behind-the-sketch-poster.jpg?v=90cded79ed" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/sketch-poster.jpg?v=e342739dd0" alt="" width="1280" height="720" loading="lazy"></div>
@@ -211,7 +216,7 @@
 <section class="module topic" id="modern-data-basics" aria-labelledby="modern-data-basics-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="modern-data-basics-h">Lo básico de los datos modernos<span class="pj-mark" title="Muestra el proyecto de dbt de ejemplo"><svg class="pj-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z"/><path d="M3.6 6.3L10 10l6.4-3.7M10 10v7.4"/></svg><span class="route-sr">Muestra el proyecto de dbt de ejemplo</span></span></h2><span class="ix-who">Para quien mueve, opera o sirve datos, y para quien elige las herramientas</span><span class="ix-cnt">4 series · 11 películas · 1 h 16 min</span></summary>
-<p class="ix-line">Lo que las herramientas de hoy facilitan: mover datos, operarlos como software, servirlos a personas y agentes, y leer documentos. Solo la arquitectura: la documentación oficial va más allá.</p>
+<p class="ix-line">Lo que las herramientas de hoy facilitan: mover datos, operarlos como software, servirlos a personas y agentes, y leer documentos. Solo la arquitectura: la documentación oficial va más allá. <a class="ix-open" href="modern-data-basics/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/moving-is-easy-poster.jpg?v=0eb8834b17" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/hot-warm-cold-poster.jpg?v=225948a1e4" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/one-copy-one-platform-poster.jpg?v=a47fca4aa4" alt="" width="1280" height="720" loading="lazy"></div>
@@ -260,7 +265,7 @@
 <section class="module topic" id="analytics-engineering" aria-labelledby="analytics-engineering-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="analytics-engineering-h">Ingeniería analítica<span class="pj-mark" title="Muestra el proyecto de dbt de ejemplo"><svg class="pj-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z"/><path d="M3.6 6.3L10 10l6.4-3.7M10 10v7.4"/></svg><span class="route-sr">Muestra el proyecto de dbt de ejemplo</span></span></h2><span class="ix-who">Para analytics engineers</span><span class="ix-cnt">10 películas · 55 min</span></summary>
-<p class="ix-line">Cómo un modelo de datos acordado se convierte en tablas probadas y documentadas, con dbt.</p>
+<p class="ix-line">Cómo un modelo de datos acordado se convierte en tablas probadas y documentadas, con dbt. <a class="ix-open" href="analytics-engineering/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/declare-it-then-build-it-poster.jpg?v=d475ce9652" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/start-from-a-question-poster.jpg?v=1adee188bd" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/what-makes-it-the-same-one-poster.jpg?v=3b92edcea1" alt="" width="1280" height="720" loading="lazy"></div>
@@ -279,7 +284,7 @@
 <section class="module topic" id="data-quality" aria-labelledby="data-quality-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="data-quality-h">Calidad de datos<span class="pj-mark" title="Muestra el proyecto de dbt de ejemplo"><svg class="pj-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z"/><path d="M3.6 6.3L10 10l6.4-3.7M10 10v7.4"/></svg><span class="route-sr">Muestra el proyecto de dbt de ejemplo</span></span></h2><span class="ix-who">Para quien construye pipelines, es responsable de un sistema de origen o de un producto de datos, o depende de que los datos estén bien</span><span class="ix-cnt">3 series · 10 películas · 1 h 20 min</span></summary>
-<p class="ix-line">Qué es lo bastante bueno para los datos, qué sale mal y qué lo detecta: cambios, contratos, controles, y errores arreglados donde empiezan.</p>
+<p class="ix-line">Qué es lo bastante bueno para los datos, qué sale mal y qué lo detecta: cambios, contratos, controles, y errores arreglados donde empiezan. <a class="ix-open" href="data-quality/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/silent-change-poster.jpg?v=5449ff8306" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/too-good-to-be-true-poster.jpg?v=15cf0d9225" alt="" width="1280" height="720" loading="lazy"></div>
@@ -322,7 +327,7 @@
 <section class="module topic" id="master-data" aria-labelledby="master-data-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="master-data-h">Datos maestros y de referencia</h2><span class="ix-who">Para custodios y arquitectos de datos, y para quien tiene sus datos en muchos sistemas</span><span class="ix-cnt">9 películas · 47 min</span></summary>
-<p class="ix-line">Las personas y las cosas de las que trata un negocio, guardadas una vez y compartidas entre sus sistemas, y las listas que las clasifican.</p>
+<p class="ix-line">Las personas y las cosas de las que trata un negocio, guardadas una vez y compartidas entre sus sistemas, y las listas que las clasifican. <a class="ix-open" href="master-data/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/one-person-many-roles-poster.jpg?v=92bff286ce" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/who-is-it-poster.jpg?v=36d7b693ec" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/which-value-wins-poster.jpg?v=c8e8b86cab" alt="" width="1280" height="720" loading="lazy"></div>
@@ -340,7 +345,7 @@
 <section class="module topic" id="data-protection" aria-labelledby="data-protection-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="data-protection-h">Protección de datos y privacidad</h2><span class="ix-who">Para equipos de plataforma, dueños de datos y quien da o recibe acceso a datos</span><span class="ix-cnt">3 series · 22 películas · 3 h 7 min</span></summary>
-<p class="ix-line">Quién y qué puede llegar a los datos, qué puede ver cada persona, y cuánto se guardan los datos personales: cada cerradura hecha a partir de un rol, una frontera o una regla ya decididos.</p>
+<p class="ix-line">Quién y qué puede llegar a los datos, qué puede ver cada persona, y cuánto se guardan los datos personales: cada cerradura hecha a partir de un rol, una frontera o una regla ya decididos. <a class="ix-open" href="data-protection/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/who-is-it-really-poster.jpg?v=612ac7824b" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/no-secret-to-lose-poster.jpg?v=19db539d56" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/walls-doors-and-keys-poster.jpg?v=2f04bac695" alt="" width="1280" height="720" loading="lazy"></div>
@@ -382,7 +387,7 @@
 <section class="module topic" id="ai-agents" aria-labelledby="ai-agents-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="ai-agents-h">Agentes de IA en el trabajo con datos<span class="pj-mark" title="Muestra el proyecto de dbt de ejemplo"><svg class="pj-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.4l6.6 3.8v7.6L10 17.6l-6.6-3.8V6.2z"/><path d="M3.6 6.3L10 10l6.4-3.7M10 10v7.4"/></svg><span class="route-sr">Muestra el proyecto de dbt de ejemplo</span></span></h2><span class="ix-who">Para quien trabaja con datos, y trabajará junto a un agente de IA</span><span class="ix-cnt">3 series · 26 películas · 3 h 30 min</span></summary>
-<p class="ix-line">La ingeniería de datos con agentes desde la base: qué es un agente de IA y cómo llegamos aquí, cómo es trabajar con agentes, y por qué eso significa gobernarlos.</p>
+<p class="ix-line">La ingeniería de datos con agentes desde la base: qué es un agente de IA y cómo llegamos aquí, cómo es trabajar con agentes, y por qué eso significa gobernarlos. <a class="ix-open" href="ai-agents/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/decades-in-the-making-poster.jpg?v=cb2961d99a" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/borrowed-from-the-brain-poster.jpg?v=60916a5399" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/a-model-reasoning-hands-and-a-loop-poster.jpg?v=d7b892b247" alt="" width="1280" height="720" loading="lazy"></div>
@@ -425,7 +430,7 @@
 <section class="module topic" id="data-management" aria-labelledby="data-management-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="data-management-h">Gestión de datos</h2><span class="ix-who">Para gestores de datos, y para quien lidera el trabajo con datos en toda una organización</span><span class="ix-cnt">4 series · 15 películas · 2 h 2 min</span></summary>
-<p class="ix-line">Todo el trabajo de una gestora de datos: todas las áreas en una imagen, un plan por etapas, un caso y sus riesgos, todos en la mesa, y pasos pequeños, medidos.</p>
+<p class="ix-line">Todo el trabajo de una gestora de datos: todas las áreas en una imagen, un plan por etapas, un caso y sus riesgos, todos en la mesa, y pasos pequeños, medidos. <a class="ix-open" href="data-management/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/every-area-one-job-poster.jpg?v=b305953bba" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/listen-first-poster.jpg?v=1d86789ab9" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/design-it-simple-poster.jpg?v=3e76947aaf" alt="" width="1280" height="720" loading="lazy"></div>
@@ -473,7 +478,7 @@
 <section class="module topic" id="leading-data-people" aria-labelledby="leading-data-people-h">
 <details>
 <summary><i class="ix-ring" aria-hidden="true"></i><h2 id="leading-data-people-h">Liderar equipos de datos</h2><span class="ix-who">Para quien trabaja con datos, y para quien lidera a las personas que lo hacen</span><span class="ix-cnt">5 series · 18 películas · 2 h 38 min</span></summary>
-<p class="ix-line">Las personas antes que el trabajo, las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: conocer a tu equipo, ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas.</p>
+<p class="ix-line">Las personas antes que el trabajo, las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: conocer a tu equipo, ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas. <a class="ix-open" href="leading-data-people/">Abre el tema →</a></p>
 <div class="topic-grid rows" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}' data-series-text='{"films":"{n} de {of} películas vistas"}'>
 <article class="topic-card row series-card">
 <div class="sc-media"><img src="../../assets/people-before-roles-poster.jpg?v=371d5fda8e" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/wellbeing-in-the-work-poster.jpg?v=bb8f530c87" alt="" width="1280" height="720" loading="lazy"><img src="../../assets/no-two-alike-poster.jpg?v=f26d51919a" alt="" width="1280" height="720" loading="lazy"></div>
@@ -532,10 +537,11 @@
 </div>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, la empresa de energía, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Películas, guiones, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
-<script src="../../assets/learn/path.js?v=088bc8a288"></script>
-<script src="../../assets/learn/route.es.js?v=fe764b0b01"></script>
-<script src="../../assets/learn/route.js?v=2e81eee128"></script>
-<script src="../../assets/learn/topics.js?v=085e7cbd6b"></script>
+<script src="../../assets/learn/path.js?v=746696fc13"></script>
+<script src="../../assets/learn/route.es.js?v=54d4d2cfb8"></script>
+<script src="../../assets/learn/route.js?v=7c9068a5d9"></script>
+<script src="../../assets/learn/progress.js?v=346ae28c47"></script>
+<script src="../../assets/learn/topics.js?v=62a0969642"></script>
 <script src="../../assets/ambient.js?v=e4b9486ecb"></script>
 </body>
 </html>

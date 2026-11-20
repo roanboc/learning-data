@@ -16,7 +16,7 @@ Winning support for data work, and keeping it. The old warehouse costs A$310,000
 | [Everyone at the table](https://data.learn-all.org/making-the-case/everyone-at-the-table/) | Every stakeholder, one story | 9½ min | 6 | 3 questions | [script](3-everyone-at-the-table/script.md) · [source](3-everyone-at-the-table/source/README.md) |
 | [One list, not twenty](https://data.learn-all.org/making-the-case/one-list-not-twenty/) | One list for all the work | 7½ min | 7 | 3 questions | [script](4-one-list-not-twenty/script.md) · [source](4-one-list-not-twenty/source/README.md) |
 
-For the whole series, on the site: [4 labs](https://data.learn-all.org/making-the-case/labs/) and [12 scenarios](https://data.learn-all.org/making-the-case/scenarios/), in English and Spanish, from the words in [site/assets/making-the-case/](../../site/assets/making-the-case/).
+For the whole series, on the site: [8 labs](https://data.learn-all.org/making-the-case/labs/) and [12 scenarios](https://data.learn-all.org/making-the-case/scenarios/), in English and Spanish, from the words in [site/assets/making-the-case/](../../site/assets/making-the-case/).
 <!-- /films -->
 
 ## The look and the sound

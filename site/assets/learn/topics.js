@@ -1,8 +1,8 @@
 /* Learning Data: the Topics page's two views, and the search of every film's words. The page's words and links are in its
    HTML, so this file holds none.
-   - The views: the learning route (section#route, drawn by route.js) and the list (#list). Without this script the page is the
-     list. The switch (.view-switch) picks one and keeps the choice in this browser ("ld-topics:view"); a first visit gets the
-     route. #route and #list pick a view; a topic's link (#data-governance, as every breadcrumb has it) shows the list with
+   - The views, in this order: the list (#list), the learning route (section#route, drawn by route.js) and Progress
+     (section#progress, drawn by progress.js). Without this script the page is the list. The switch (.view-switch) picks one and
+     keeps the choice in this browser ("ld-topics:view"); a first visit gets the list. #list, #route and #progress pick a view; a topic's link (#data-governance, as every breadcrumb has it) shows the list with
      that topic's row open.
    - Each row's ring (.ix-ring) shows how many of the topic's films were watched, from the same keys path.js reads.
    - The search (#ix-q) reads assets/learn/search.<lang>.json (data-index) the first time someone types: every film's title,
@@ -11,7 +11,7 @@
      something does ("agentic" finds "agent"), and the page says so. */
 (()=>{"use strict";
 const list=document.getElementById("list");if(!list)return;
-const route=document.getElementById("route"),sw=document.querySelector(".view-switch");
+const route=document.getElementById("route"),prog=document.getElementById("progress"),sw=document.querySelector(".view-switch");
 const get=k=>{try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}};
 const set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
 const rows=[...list.querySelectorAll("section.topic")],row=id=>rows.find(r=>r.id===id);
@@ -27,18 +27,18 @@ function rings(){rows.forEach(r=>{let n=0,of=0;
 const canRoute=!!(route&&sw&&window.LD_ROUTE);
 function show(view,keep){
   if(!canRoute)view="list";
-  if(route)route.hidden=view!=="route";list.hidden=view!=="list";
+  if(route)route.hidden=view!=="route";if(prog)prog.hidden=view!=="progress";list.hidden=view!=="list";
   if(sw)sw.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.view===view));
   if(!keep)set("ld-topics:view",view);}
 function fromHash(){
   let h="";try{h=decodeURIComponent(location.hash.slice(1));}catch(e){}
   const r=h&&row(h);
   if(r){if(q&&q.value){q.value="";search();}show("list",true);r.querySelector("details").open=true;r.scrollIntoView();return true;}
-  if(h==="list"||h==="route"){show(h,true);return true;}
+  if(h==="list"||h==="route"||h==="progress"){show(h,true);window.scrollTo({top:(sw||list).getBoundingClientRect().top+scrollY-80});return true;}
   return false;}
 if(sw){sw.hidden=!canRoute;sw.addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(!b)return;
   show(b.dataset.view);history.replaceState(null,"",location.pathname+location.search+"#"+b.dataset.view);});}
-if(!fromHash())show(get("ld-topics:view")==="list"?"list":"route",true);
+if(!fromHash()){const v=get("ld-topics:view");show(v==="route"||v==="progress"?v:"list",true);}
 window.addEventListener("hashchange",fromHash);
 rings();window.addEventListener("pageshow",e=>{if(e.persisted)rings();});
 

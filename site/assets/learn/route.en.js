@@ -5,7 +5,7 @@ window.LD_ROUTE = {
  "text": {
   "start": "Start here",
   "play": "Play introduction",
-  "open": "Open topic",
+  "open": "Open the topic",
   "next": "Your next stop",
   "soon": "Coming soon",
   "route": "Suggested route",
@@ -29,7 +29,21 @@ window.LD_ROUTE = {
   "proj1": "1 film here shows its real files, and you can run it yourself.",
   "projn": "{n} films here show its real files, and you can run it yourself.",
   "projpage": "About the project",
-  "projmark": "Shows the example dbt project"
+  "projmark": "Shows the example dbt project",
+  "seeprog": "See your progress on this route",
+  "seeroute": "See it on the learning route",
+  "hide": "Hide topics not on this route",
+  "showall": "Show all topics",
+  "onroute": "Progress on this route",
+  "alltopics": "All topics",
+  "notyet": "Not started",
+  "cont": "Continue",
+  "fw": "Films watched",
+  "ls": "Labs seen",
+  "an": "Answered",
+  "ok": "Right",
+  "uses": "On this route: {s}",
+  "key": "Films watched, labs seen, situations answered, right answers"
  },
  "groups": [
   {
@@ -131,6 +145,11 @@ window.LD_ROUTE = {
       "ld-rules-with-a-home",
       "ld-when-strategy-moves",
       "ld-a-map-people-and-agents-can-read"
+     ],
+     "pr": [
+      "ld-enterprise-architecture",
+      11,
+      12
      ]
     },
     {
@@ -148,6 +167,11 @@ window.LD_ROUTE = {
       "ld-who-creates-it-who-owns-it",
       "ld-processes-as-deep-as-data-needs",
       "ld-rules-and-expectations-the-business-owns"
+     ],
+     "pr": [
+      "ld-business-architecture-for-data",
+      5,
+      12
      ]
     },
     {
@@ -166,6 +190,11 @@ window.LD_ROUTE = {
       "ld-how-it-travels",
       "ld-who-owns-which-data",
       "ld-one-language-kept"
+     ],
+     "pr": [
+      "ld-data-architecture",
+      6,
+      12
      ]
     },
     {
@@ -186,6 +215,11 @@ window.LD_ROUTE = {
       "ld-one-solution-end-to-end",
       "ld-a-road-people-choose",
       "ld-built-to-change"
+     ],
+     "pr": [
+      "ld-platform-and-solution-architecture",
+      8,
+      12
      ]
     },
     {
@@ -201,6 +235,11 @@ window.LD_ROUTE = {
       "ld-a-first-draft-not-a-blank-page",
       "ld-every-change-checked",
       "ld-kept-alive"
+     ],
+     "pr": [
+      "ld-continuous-architecture",
+      3,
+      6
      ]
     },
     {
@@ -216,6 +255,11 @@ window.LD_ROUTE = {
       "ld-agents-on-the-map",
       "ld-the-ai-platform",
       "ld-what-an-agent-may-read"
+     ],
+     "pr": [
+      "ld-ai-architecture",
+      3,
+      6
      ]
     }
    ]
@@ -248,6 +292,11 @@ window.LD_ROUTE = {
       "ld-a-product-with-an-owner",
       "ld-an-agent-that-checks",
       "ld-teachers-of-data"
+     ],
+     "pr": [
+      "ld-data-governance",
+      22,
+      12
      ]
     },
     {
@@ -263,6 +312,11 @@ window.LD_ROUTE = {
       "ld-a-capability-not-a-project",
       "ld-who-does-what-end-to-end",
       "ld-where-each-piece-lives"
+     ],
+     "pr": [
+      "ld-governance-on-the-map",
+      9,
+      9
      ]
     },
     {
@@ -281,6 +335,11 @@ window.LD_ROUTE = {
       "ld-quality-on-the-platform",
       "ld-products-in-open-formats",
       "ld-the-marketplace"
+     ],
+     "pr": [
+      "ld-governance-in-practice",
+      9,
+      9
      ]
     }
    ]
@@ -304,6 +363,11 @@ window.LD_ROUTE = {
      "films": [
       "ld-the-map-behind-the-sketch",
       "ld3"
+     ],
+     "pr": [
+      "ld-model-the-business",
+      5,
+      12
      ]
     },
     {
@@ -323,6 +387,11 @@ window.LD_ROUTE = {
       "ld-both-at-once",
       "ld-meaning-machines-can-read",
       "ld-keeping-it-true"
+     ],
+     "pr": [
+      "ld-from-words-to-data",
+      27,
+      12
      ]
     }
    ],
@@ -349,6 +418,11 @@ window.LD_ROUTE = {
       "ld-hot-warm-cold",
       "ld-one-copy-one-platform",
       "ld-read-often-kept-close"
+     ],
+     "pr": [
+      "ld-data-that-moves",
+      4,
+      12
      ]
     },
     {
@@ -363,6 +437,11 @@ window.LD_ROUTE = {
      "films": [
       "ld-scripts-became-software",
       "ld-a-platform-that-watches-itself"
+     ],
+     "pr": [
+      "ld-data-as-software",
+      2,
+      8
      ]
     },
     {
@@ -378,6 +457,11 @@ window.LD_ROUTE = {
       "ld-reports-on-demand",
       "ld-define-it-once",
       "ld-more-readers-than-people"
+     ],
+     "pr": [
+      "ld-from-tables-to-decisions",
+      3,
+      9
      ]
     },
     {
@@ -392,6 +476,11 @@ window.LD_ROUTE = {
      "films": [
       "ld-files-as-data-and-context",
       "ld-ideas-that-last"
+     ],
+     "pr": [
+      "ld-documents-as-data",
+      2,
+      8
      ]
     }
    ],
@@ -424,6 +513,11 @@ window.LD_ROUTE = {
       "ld-an-agent-on-the-team",
       "ld-written-once",
       "ld-end-to-end"
+     ],
+     "pr": [
+      "ld-in-the-weeds",
+      38,
+      12
      ]
     }
    ],
@@ -448,6 +542,11 @@ window.LD_ROUTE = {
      "films": [
       "ld-silent-change",
       "ld-too-good-to-be-true"
+     ],
+     "pr": [
+      "ld-when-things-go-wrong",
+      2,
+      12
      ]
     },
     {
@@ -464,6 +563,11 @@ window.LD_ROUTE = {
       "ld-a-hundred-records",
       "ld-valid-isnt-true",
       "ld-late-is-wrong-too"
+     ],
+     "pr": [
+      "ld-fit-for-use",
+      4,
+      12
      ]
     },
     {
@@ -480,6 +584,11 @@ window.LD_ROUTE = {
       "ld-report-fix-tell",
       "ld-read-by-an-agent",
       "ld-small-every-week"
+     ],
+     "pr": [
+      "ld-quality-as-a-habit",
+      4,
+      12
      ]
     }
    ],
@@ -511,6 +620,11 @@ window.LD_ROUTE = {
       "ld-one-person-many-systems",
       "ld-a-hub-at-work",
       "ld-kept-not-cleaned"
+     ],
+     "pr": [
+      "ld-master-and-reference-data",
+      18,
+      12
      ]
     }
    ]
@@ -541,6 +655,11 @@ window.LD_ROUTE = {
       "ld-network-storage-and-keys",
       "ld-from-a-branch-to-production",
       "ld-who-did-what"
+     ],
+     "pr": [
+      "ld-locks-before-the-data",
+      9,
+      12
      ]
     },
     {
@@ -561,6 +680,11 @@ window.LD_ROUTE = {
       "ld-one-policy-for-many-tables",
       "ld-copies-that-keep-the-rules",
       "ld-proof-it-held"
+     ],
+     "pr": [
+      "ld-only-what-you-may-see",
+      8,
+      12
      ]
     },
     {
@@ -578,6 +702,11 @@ window.LD_ROUTE = {
       "ld-forgetting-a-person",
       "ld-deleted-means-deleted",
       "ld-a-person-asks"
+     ],
+     "pr": [
+      "ld-kept-for-a-reason",
+      5,
+      12
      ]
     }
    ]
@@ -609,6 +738,11 @@ window.LD_ROUTE = {
       "ld-why-we-govern-them",
       "ld-what-they-tell-us-about-ourselves",
       "ld-many-agents"
+     ],
+     "pr": [
+      "ld-what-an-agent-is",
+      19,
+      12
      ]
     },
     {
@@ -630,6 +764,11 @@ window.LD_ROUTE = {
       "ld-agents-on-databricks",
       "ld-unity-catalog-and-ai-gateway",
       "ld-context-and-memory-governed"
+     ],
+     "pr": [
+      "ld-agents-at-work-on-data",
+      9,
+      12
      ]
     },
     {
@@ -649,6 +788,11 @@ window.LD_ROUTE = {
       "ld-the-map-enforced",
       "ld-every-change-through-review",
       "ld-a-written-mandate"
+     ],
+     "pr": [
+      "ld-from-helper-to-colleague",
+      7,
+      12
      ]
     }
    ],
@@ -675,6 +819,11 @@ window.LD_ROUTE = {
       "ld-listen-first",
       "ld-design-it-simple",
       "ld-from-gaps-to-a-roadmap"
+     ],
+     "pr": [
+      "ld-a-plan-in-ninety-days",
+      8,
+      12
      ]
     },
     {
@@ -691,6 +840,11 @@ window.LD_ROUTE = {
       "ld-risks-said-out-loud",
       "ld-everyone-at-the-table",
       "ld-one-list-not-twenty"
+     ],
+     "pr": [
+      "ld-making-the-case",
+      8,
+      12
      ]
     },
     {
@@ -706,6 +860,11 @@ window.LD_ROUTE = {
       "ld-services-with-customers",
       "ld-one-map",
       "ld-a-path-for-every-provider"
+     ],
+     "pr": [
+      "ld-architecture-that-keeps-up",
+      6,
+      9
      ]
     },
     {
@@ -722,6 +881,11 @@ window.LD_ROUTE = {
       "ld-measures-that-matter",
       "ld-better-every-week",
       "ld-strategy-is-a-habit"
+     ],
+     "pr": [
+      "ld-small-steps-measured",
+      4,
+      12
      ]
     }
    ]
@@ -747,6 +911,11 @@ window.LD_ROUTE = {
       "ld-wellbeing-in-the-work",
       "ld-no-two-alike",
       "ld-how-more-than-who"
+     ],
+     "pr": [
+      "ld-people-first",
+      4,
+      12
      ]
     },
     {
@@ -762,6 +931,11 @@ window.LD_ROUTE = {
       "ld-many-hats",
       "ld-draft-and-decision",
       "ld-learning-while-doing"
+     ],
+     "pr": [
+      "ld-the-new-skills",
+      3,
+      9
      ]
     },
     {
@@ -777,6 +951,11 @@ window.LD_ROUTE = {
       "ld-the-question-behind",
       "ld-explaining-to-decide",
       "ld-saying-no"
+     ],
+     "pr": [
+      "ld-working-with-people",
+      3,
+      9
      ]
     },
     {
@@ -793,6 +972,11 @@ window.LD_ROUTE = {
       "ld-one-small-change",
       "ld-the-team-first",
       "ld-rules-to-decide"
+     ],
+     "pr": [
+      "ld-leading-a-data-team",
+      4,
+      12
      ]
     },
     {
@@ -809,6 +993,11 @@ window.LD_ROUTE = {
       "ld-measure-the-work",
       "ld-when-someone-falls-behind",
       "ld-growing-people"
+     ],
+     "pr": [
+      "ld-ownership-and-performance",
+      4,
+      12
      ]
     }
    ]

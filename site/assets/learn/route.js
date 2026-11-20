@@ -8,7 +8,8 @@
    - A station is a button: selecting it shows its films and series below the map. Its ring shows how many of its films were
      watched, from the same keys path.js reads ("<prefix>:watched"), in this browser only.
    - A goal ("I want to…") lights up the stops of its route and numbers them; the map itself never changes. The goal is kept in
-     this browser ("ld-route:goal").
+     this browser ("ld-route:goal"), shared with the Progress view (progress.js, the "ld-route" event). With a goal, the topics
+     it doesn't pass through can be hidden ("ld-route:hide"), and a link leads to the Progress view (#progress).
    - A topic with films that show the example dbt project (D.project) carries the project's icon: on the map, a badge on its
      station's ring, which doesn't widen its name; on the rail, by its name. It reads on a closed station, and opens on a box, after the topic's films and series, that links to the project's page (which links to GitHub).
    data-base: the way to the language's home, for the films' links; data-root: the way to the site's root, for the posters;
@@ -55,7 +56,8 @@ function draw(box){
   const base=box.dataset.base||"",root=box.dataset.root||"",topics=box.dataset.topics||"";
   const st={sel:null,goal:null,panel:"station",open:null,w:0};
   const g0=goal(get("ld-route:goal"));if(g0){st.goal=g0.id;st.panel="goal";}
-  const img=p=>root+"assets/"+p,topicHref=t=>topics+"#"+t.id;
+  st.hide=get("ld-route:hide")===true;
+  const img=p=>root+"assets/"+p,topicHref=t=>topics+t.id+"/";
   const label=t=>{const s=stat(t);return t.name+", "+G(t.group).name+(PJ(t)?", "+X.projmark:"")+(s.seen?", "+fill(X.of,{n:s.seen,of:s.films}):"");};
 
   function card(i,extra){
@@ -69,7 +71,7 @@ function draw(box){
     return '<div class="r-about">'+(inRail?'':'<p class="r-kick"><i></i>'+esc(G(t.group).name)+(nx===t?" · "+esc(X.next):"")+'</p><h3>'+esc(t.name)+'</h3>')+
       '<p class="r-who">'+esc(t.who)+'</p><p class="r-line">'+esc(t.line)+'</p>'+
       (inRail?'':'<p class="r-meta">'+esc(counts(t))+(s.seen?" · "+esc(fill(X.of,{n:s.seen,of:s.films})):"")+'</p>'+open)+'</div>'+
-      (inRail?'':'<div class="r-col">')+'<ul class="r-items">'+t.items.map(i=>card(i)).join("")+'</ul>'+pjBox(t,base)+(inRail?open:'</div>');}
+      (inRail?'':'<div class="r-col">')+'<ul class="r-items">'+t.items.map(i=>card(i)).join("")+'</ul>'+pjBox(t,base)+open+(inRail?'':'</div>');}
   function intro(num){
     const w=seen(INTRO)>0;
     return '<a class="r-intro'+(st.panel==="station"&&st.sel===START.id?" sel":"")+'" href="'+esc(base+INTRO.href)+'">'+(num?'<span class="r-n">'+num+'</span>':'')+
@@ -78,7 +80,9 @@ function draw(box){
   function goals(){
     return '<div class="r-goals" role="group" aria-label="'+esc(X.want)+'"><span class="r-lab">'+esc(X.want)+'</span>'+
       D.goals.map(g=>'<button type="button" class="r-chip" data-goal="'+g.id+'" data-k="g-'+g.id+'" aria-pressed="'+(st.goal===g.id)+'">'+esc(g.name)+'</button>').join("")+
-      '<button type="button" class="r-chip" data-goal="" data-k="g-" aria-pressed="'+(!st.goal)+'">'+esc(X.whole)+'</button></div>';}
+      '<button type="button" class="r-chip" data-goal="" data-k="g-" aria-pressed="'+(!st.goal)+'">'+esc(X.whole)+'</button></div>'+
+      '<p class="r-links"><a href="#progress" data-k="g-prog">'+esc(X.seeprog)+' →</a>'+
+      (st.goal?'<label class="r-hide-b"><input type="checkbox" data-hide data-k="g-hide"'+(st.hide?' checked':'')+'> '+esc(X.hide)+'</label>':'')+'</p>';}
   function goalHead(g,gi){
     const first=gi.st.find(i=>seen(i)<i.films.length)||gi.st[0],any=gi.st.some(i=>seen(i)>0),all=gi.st.every(i=>seen(i)>=i.films.length);
     return '<p class="r-kick">'+esc(X.yours)+'</p><h3>'+esc(cap(g.name))+'</h3><p class="r-line">'+esc(g.line)+'</p><p class="r-meta">'+esc(fill(X.stops,{n:gi.st.length}))+" · "+esc(dur(gi.min))+'</p>'+
@@ -133,14 +137,18 @@ function draw(box){
     const w=box.clientWidth;st.w=w;if(!w)return;
     if(!st.sel||!T(st.sel))st.sel=(nextStop()||MAIN[0]).id;
     const a=document.activeElement,k=a&&box.contains(a)&&a.dataset?a.dataset.k:null;
-    box.classList.add("drawn");
+    box.classList.add("drawn");box.classList.toggle("r-hide",!!(st.hide&&st.goal));
     box.innerHTML=w>=880?wide(w>=1040?"side":"top",w):rail();
     if(k){const e=box.querySelector('[data-k="'+k+'"]');if(e)e.focus({preventScroll:true});}}
   box.addEventListener("click",e=>{
     const s=e.target.closest("[data-st]"),r=e.target.closest("[data-rs]"),g=e.target.closest("[data-goal]");
     if(s){st.sel=s.dataset.st;st.panel="station";render();}
     else if(r){st.open=st.open===r.dataset.rs?null:r.dataset.rs;render();}
-    else if(g){st.goal=g.dataset.goal||null;st.panel=st.goal?"goal":"station";set("ld-route:goal",st.goal);render();}});
+    else if(g){st.goal=g.dataset.goal||null;st.panel=st.goal?"goal":"station";set("ld-route:goal",st.goal);render();
+      window.dispatchEvent(new CustomEvent("ld-route",{detail:"route"}));}});
+  box.addEventListener("change",e=>{if(e.target.matches("[data-hide]")){st.hide=e.target.checked;set("ld-route:hide",st.hide||null);render();}});
+  // the Progress view shares the chosen route: follow it when it changes there
+  window.addEventListener("ld-route",e=>{if(e.detail==="route")return;const g=goal(get("ld-route:goal"));st.goal=g?g.id:null;st.panel=g?"goal":"station";render();});
   if(window.ResizeObserver)new ResizeObserver(()=>{if(box.clientWidth!==st.w)render();}).observe(box);
   else window.addEventListener("resize",render);
   window.addEventListener("pageshow",e=>{if(e.persisted)render();});

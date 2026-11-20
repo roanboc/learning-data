@@ -57,5 +57,6 @@
     ]
   },
   "next_h": "You've seen how every change reaches production: an agent proposes, a person releases. Next: what an agent may do alone, written in a mandate its owner signs.",
-  "next_h_es": "Viste cómo llega cada cambio a producción: un agente propone, una persona libera. Después: lo que un agente puede hacer solo, escrito en un mandato que firma su dueño."
+  "next_h_es": "Viste cómo llega cada cambio a producción: un agente propone, una persona libera. Después: lo que un agente puede hacer solo, escrito en un mandato que firma su dueño.",
+  "tile": [520, 300, 420]
 }

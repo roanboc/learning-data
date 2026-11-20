@@ -138,5 +138,6 @@
         "href_es": "https://docs.getdbt.com/docs/build/exposures"
       }
     ]
-  }
+  },
+  "tile": [640, 330, 440]
 }

@@ -29,5 +29,6 @@
   "past_es": [
     "Cifras desde la propia fábrica, Chile, 1972",
     "Cada fábrica enviaba sus propias cifras por télex, una vez al día, y Santiago leía una copia el mismo día, cuando las estadísticas tardaban seis meses."
-  ]
+  ],
+  "tile": [630, 250, 480]
 }

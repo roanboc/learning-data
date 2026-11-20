@@ -20,5 +20,6 @@
   "quiz_lead": "Eight situations about systems and meaning: a vendor's standard model, a sixth system, two emails, a platform that says customer, a revoked credential still counted. Decide what you'd do; each answer explains why.",
   "quiz_lead_es": "Ocho situaciones sobre sistemas y significado: el modelo estándar de un proveedor, un sexto sistema, dos correos, una plataforma que dice cliente, una credencial revocada que todavía se cuenta. Decide qué harías; cada respuesta explica por qué.",
   "past": ["A guild's masterpiece, a sealed licence to teach", "Someone trusted makes a claim about someone, in a way others can check."],
-  "past_es": ["La obra maestra de un gremio, una licencia para enseñar con sello", "Alguien de confianza afirma algo sobre alguien, de un modo que otros pueden comprobar."]
+  "past_es": ["La obra maestra de un gremio, una licencia para enseñar con sello", "Alguien de confianza afirma algo sobre alguien, de un modo que otros pueden comprobar."],
+  "tile": [560, 330, 420]
 }

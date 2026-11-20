@@ -94,5 +94,6 @@
         "href_es": "https://docs.getdbt.com/docs/build/unit-tests"
       }
     ]
-  }
+  },
+  "tile": [820, 250, 500]
 }

@@ -33,5 +33,6 @@
   "past_es": [
     "Un banco en 2008, y luego la historia de la gestión de datos, de los años 70 a la tercera edición del DMBOK",
     "La pregunta nunca cambió: ¿quién decide sobre estos datos y quién responde por ellos?"
-  ]
+  ],
+  "tile": [640, 220, 420]
 }

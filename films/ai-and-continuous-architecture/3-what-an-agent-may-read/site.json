@@ -62,5 +62,6 @@
         "href_es": "https://docs.databricks.com/aws/en/udf/unity-catalog"
       }
     ]
-  }
+  },
+  "tile": [520, 440, 420]
 }

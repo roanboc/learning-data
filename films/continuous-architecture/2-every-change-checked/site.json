@@ -61,5 +61,6 @@
         "href_es": "https://www.opengroup.org/archimate-forum/archimate-overview"
       }
     ]
-  }
+  },
+  "tile": [420, 420, 420]
 }

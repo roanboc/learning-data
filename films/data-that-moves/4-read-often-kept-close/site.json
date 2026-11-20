@@ -66,5 +66,6 @@
         "href_es": "https://learn.microsoft.com/es-es/azure/storage/blobs/access-tiers-overview"
       }
     ]
-  }
+  },
+  "tile": [260, 470, 400]
 }

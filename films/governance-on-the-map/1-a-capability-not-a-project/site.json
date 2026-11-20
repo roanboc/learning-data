@@ -30,5 +30,6 @@
     "Un dique nunca está terminado: quien depende de él lo mantiene, cada año."
   ],
   "next_h": "You've seen governance drawn as a capability, coloured by evidence, with services people can ask for. Next: who does what, end to end.",
-  "next_h_es": "Viste la gobernanza dibujada como una capacidad, coloreada según la evidencia, con servicios que la gente puede pedir. Después: quién hace qué, de principio a fin."
+  "next_h_es": "Viste la gobernanza dibujada como una capacidad, coloreada según la evidencia, con servicios que la gente puede pedir. Después: quién hace qué, de principio a fin.",
+  "tile": [700, 300, 560]
 }

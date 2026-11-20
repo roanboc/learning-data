@@ -95,5 +95,6 @@
         "href_es": "https://www.cshw.health.gov.lk/hisotry/"
       }
     ]
-  }
+  },
+  "tile": [380, 300, 560]
 }

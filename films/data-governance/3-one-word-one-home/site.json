@@ -24,5 +24,6 @@
     "home": "Una palabra, un solo lugar"
   },
   "next_h": "You've seen one word get one home.",
-  "next_h_es": "Viste cómo una palabra encuentra un solo lugar."
+  "next_h_es": "Viste cómo una palabra encuentra un solo lugar.",
+  "tile": [420, 280, 440]
 }

@@ -29,5 +29,6 @@
     "La ciudad baja se reconstruyó para cada forma en que había fallado. Prevé las formas en que falla un agente, y diseña para cada una."
   ],
   "next_h": "You've seen six ways an agent goes wrong, and the design the team builds for each. Next: working with agents on Databricks.",
-  "next_h_es": "Viste seis formas en que falla un agente, y el diseño que el equipo construye para cada una. Después: trabajar con agentes en Databricks."
+  "next_h_es": "Viste seis formas en que falla un agente, y el diseño que el equipo construye para cada una. Después: trabajar con agentes en Databricks.",
+  "tile": [640, 380, 480]
 }

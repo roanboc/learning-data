@@ -23,5 +23,6 @@
   "past": ["Japan's first high-speed line, 1964", "The limits were built into the line because the trains were fast, not because they were bad."],
   "past_es": ["La primera línea de alta velocidad de Japón, 1964", "Los límites se pusieron en la vía porque los trenes eran rápidos, no porque fueran malos."],
   "next_h": "You've seen why every agent needs an owner, a name of its own, limits it can't raise and a person who checks its work. Next: what agents tell us about ourselves.",
-  "next_h_es": "Viste por qué todo agente necesita un dueño, un nombre propio, límites que no puede subir y una persona que revise su trabajo. Después: qué nos dicen de nosotros los agentes."
+  "next_h_es": "Viste por qué todo agente necesita un dueño, un nombre propio, límites que no puede subir y una persona que revise su trabajo. Después: qué nos dicen de nosotros los agentes.",
+  "tile": [520, 400, 640]
 }

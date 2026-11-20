@@ -102,5 +102,6 @@
         "href_es": "https://owasp.org/www-project-top-10-ci-cd-security-risks/"
       }
     ]
-  }
+  },
+  "tile": [860, 400, 440]
 }

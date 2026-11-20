@@ -88,5 +88,6 @@
         "href_es": "https://learn.microsoft.com/en-us/fabric/"
       }
     ]
-  }
+  },
+  "tile": [1040, 400, 480]
 }

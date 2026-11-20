@@ -69,5 +69,6 @@
         "href_es": "https://www.inventionandtech.com/content/evolution-box-1"
       }
     ]
-  }
+  },
+  "tile": [820, 240, 400]
 }

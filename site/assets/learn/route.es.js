@@ -479,7 +479,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-documents-as-data",
-      2,
+      4,
       8
      ]
     }

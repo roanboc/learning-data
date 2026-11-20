@@ -1651,11 +1651,12 @@ async def check_tour(run):
                 await pg.close()
         finally:
             await ctx.close()
-    # what a page shows decides its steps: the Topics page's two views have different ones
+    # what a page shows decides its steps: the Topics page's views have different ones
     for key in run.pick(("topics/",)):
         ctx = await run.context(1280)
         try:
             pg, _ = await run.page(ctx, key)
+            await pg.click('.view-switch [data-view="route"]')
             await pg.wait_for_selector(".route.drawn", timeout=5000)
 
             async def steps():
@@ -1715,9 +1716,12 @@ async def check_route(run):
             for key in tkeys:
                 d = D[lang(key)]; n = len(d["topics"]) - 1; at = f"/{key} @{width} {theme}"
                 pg, log = await run.page(ctx, key)
+                f = await pg.evaluate(FACTS)
+                if key == tkeys[0]:  # the pages share this browser's storage: only the first one is a first visit
+                    expect(sec, f["list"] and not f["route"] and f["pressed"] == ["list"], f"{at}: a first visit shows the list, the first view ({f['route']}, {f['list']}, {f['pressed']})")
+                await pg.click('.view-switch [data-view="route"]')
                 await pg.wait_for_selector(".route.drawn", timeout=5000)
                 f = await pg.evaluate(FACTS)
-                expect(sec, f["route"] and not f["list"] and f["pressed"] == ["route"], f"{at}: a first visit shows the route, not the list ({f['route']}, {f['list']}, {f['pressed']})")
                 expect(sec, (f["map"], f["rail"]) == ((n, 0) if width >= 900 else (0, n + 1)), f"{at}: {f['map']} stations on the map and {f['rail']} on the rail, for {n} topics after the start (and the start, first on the rail)")
                 expect(sec, f["intro"] == 1, f"{at}: {f['intro']} introduction cards, the route's first station")
                 expect(sec, f["goals"] == len(d["goals"]) + 1, f"{at}: {f['goals']} goal buttons, for {len(d['goals'])} goals and the whole route")
@@ -1737,21 +1741,21 @@ async def check_route(run):
                         expect(sec, await pg.locator(f'[data-rs="{t["id"]}"][aria-expanded=true] + .r-rd .r-items li').count() == len(t["items"]),
                                f"{at}: opening {t['id']} on the rail doesn't list its {len(t['items'])} films and series")
                     goal = d["goals"][1]
-                    await pg.focus(f'[data-goal="{goal["id"]}"]')
+                    await pg.focus(f'.route [data-goal="{goal["id"]}"]')
                     await pg.keyboard.press("Enter")
                     g = await pg.evaluate(FACTS)
                     expect(sec, g["dim"] > 0 and g["stops"] == len(goal["stops"]), f"{at}: the goal {goal['id']} dims {g['dim']} stops and lists {g['stops']} of its {len(goal['stops'])}")
                     expect(sec, await pg.evaluate("() => (document.activeElement.dataset || {}).goal") == goal["id"], f"{at}: choosing a goal by keyboard loses the focus")
                     await pg.reload(wait_until="load")
                     await pg.wait_for_selector(".route.drawn", timeout=5000)
-                    expect(sec, await pg.locator(f'[data-goal="{goal["id"]}"][aria-pressed=true]').count() == 1, f"{at}: the goal isn't kept after a reload")
-                    await pg.click('[data-goal=""]')
+                    expect(sec, await pg.locator(f'.route [data-goal="{goal["id"]}"][aria-pressed=true]').count() == 1, f"{at}: the goal isn't kept after a reload")
+                    await pg.click('.route [data-goal=""]')
                 await pg.close()
         finally:
             await ctx.close()
 
     # the home page stays a first view: after the film's two other steps, the route and the Making of, and no map or list of
-    # topics; on a phone nothing scrolls sideways, and the first button lands on the Topics page's route
+    # topics; on a phone nothing scrolls sideways, and the first button lands on the Topics page
     for width in (1280, 390):
         ctx = await seeded(width, "dark", {})
         try:
@@ -1767,8 +1771,7 @@ async def check_route(run):
                 if width == 390:
                     await pg.click('.home-next a.primary')
                     await pg.wait_for_load_state("load")
-                    await pg.wait_for_selector(".route.drawn", timeout=5000)
-                    expect(sec, run.key(pg.url) == pre + "topics/" and await pg.locator("#route").is_visible(), f"/{key}: its first button doesn't land on the Topics page's route ({pg.url})")
+                    expect(sec, run.key(pg.url) == pre + "topics/" and await pg.locator("#list").is_visible(), f"/{key}: its first button doesn't land on the Topics page, on its first view, the list ({pg.url})")
                 expect(sec, not log["console"] and not log["errors"], f"/{key} @{width}: {(log['console'] + log['errors'])[:2]}")
                 await pg.close()
         finally:
@@ -1781,6 +1784,7 @@ async def check_route(run):
         ctx = await seeded(1280, "dark", {"ld-whats-in-a-word:watched": True, "ld-keeping-it-true:watched": True})
         try:
             pg, log = await run.page(ctx, key)
+            await pg.click('.view-switch [data-view="route"]')
             await pg.wait_for_selector(".route.drawn", timeout=5000)
             arcs = await pg.locator('[data-st="data-modelling"] .d-arc').count()
             expect(sec, arcs == 1, f"/{key}: two films of Data modelling watched, but its station's ring shows no progress")
@@ -1793,6 +1797,22 @@ async def check_route(run):
             await pg.reload(wait_until="load")
             f = await pg.evaluate(FACTS)
             expect(sec, f["list"] and not f["route"], f"/{key}: the list isn't kept after a reload")
+            # Progress: a tile for every topic, the route chosen there is the learning route's too, and it shows only its topics
+            await pg.click('.view-switch [data-view="progress"]')
+            tiles = await pg.locator('.prog .pg-tile').count()
+            expect(sec, tiles == len(d["topics"]), f"/{key}: Progress shows {tiles} topic tiles, for {len(d['topics'])} topics")
+            done = await pg.locator('.prog .pg-tile:has(a[href$="topics/data-modelling/"]) .d-arc').count()
+            expect(sec, done == 1, f"/{key}: two films of Data modelling watched, but its Progress tile's ring shows no progress")
+            goal = d["goals"][1]
+            await pg.click(f'.prog [data-goal="{goal["id"]}"]')
+            tiles = await pg.locator('.prog .pg-tile').count()
+            want = len({next(x["id"] for x in d["topics"] if any(i["id"] == s for i in x["items"])) for s in goal["stops"]})
+            expect(sec, tiles == want, f"/{key}: with the goal {goal['id']}, Progress shows {tiles} tiles, for the {want} topics on its route")
+            await pg.click('.prog .pg-links a')
+            await pg.wait_for_selector(".route.drawn", timeout=5000)
+            expect(sec, await pg.locator(f'.route [data-goal="{goal["id"]}"][aria-pressed=true]').count() == 1, f"/{key}: the goal chosen on Progress isn't the learning route's")
+            await pg.click('.route [data-goal=""]')
+            await pg.click('.view-switch [data-view="list"]')
             # a row opens by keyboard, and shows its cards
             await pg.focus(f'#{t["id"]} summary')
             await pg.keyboard.press("Enter")

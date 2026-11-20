@@ -16,7 +16,7 @@ What "good" means for data, and how to measure it. The graduation list says who 
 | [Valid isn't true](https://data.learn-all.org/fit-for-use/valid-isnt-true/) | Accuracy and references | 9 min | 7 | 4 questions | [script](3-valid-isnt-true/script.md) · [source](3-valid-isnt-true/source/README.md) |
 | [Late is wrong too](https://data.learn-all.org/fit-for-use/late-is-wrong-too/) | Timeliness | 8½ min | 7 | 4 questions | [script](4-late-is-wrong-too/script.md) · [source](4-late-is-wrong-too/source/README.md) |
 
-For the whole series, on the site: [4 labs](https://data.learn-all.org/fit-for-use/labs/) and [12 scenarios](https://data.learn-all.org/fit-for-use/scenarios/), in English and Spanish, from the words in [site/assets/fit-for-use/](../../site/assets/fit-for-use/).
+For the whole series, on the site: [8 labs](https://data.learn-all.org/fit-for-use/labs/) and [12 scenarios](https://data.learn-all.org/fit-for-use/scenarios/), in English and Spanish, from the words in [site/assets/fit-for-use/](../../site/assets/fit-for-use/).
 <!-- /films -->
 
 ## The look and the sound

@@ -338,7 +338,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-governance-in-practice",
-      9,
+      12,
       9
      ]
     }

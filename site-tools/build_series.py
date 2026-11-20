@@ -1231,6 +1231,8 @@ def series_learn_page(lg, S, series, films_, which):
         lead = learn_text(lg, S, series, "quiz_lead") + T(lg, " Your answers stay in this browser.", " Tus respuestas quedan en este navegador.")
     h, R = head(lg, path, f'{h1} · {SN(lg, S)} · Learning Data', lead, lead, f"{img}-poster.jpg")
     h += f'<link rel="stylesheet" href="{R}assets/{SL["engine"]}/learn.css">\n'
+    if which == "labs":  # the classic kinds a film's labs beside its playground may take (site/assets/learn/classic.js)
+        h += f'<link rel="stylesheet" href="{R}assets/learn/classic.css">\n'
     app = f'data-store="{SL["prefix"]}" data-films="{E(learn_films(lg, S, series, films_))}"'
     if which == "labs":
         mid = (f'<section aria-labelledby="labs-h">\n<h2 class="sr" id="labs-h">Labs</h2>\n<div id="series-labs" {app}><noscript><p class="noscript">{T(lg, "The labs need JavaScript.", "Los labs necesitan JavaScript.")}</p></noscript></div>\n</section>\n\n'
@@ -1250,7 +1252,9 @@ def series_learn_page(lg, S, series, films_, which):
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="page-head cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{img}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S, "../")}\n<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n{draft_note(lg, series.get("draft"))}</section>\n{series_course(lg, S, SL, series, films_, 1 if which == "labs" else 2)}\n{mid}</main>\n{foot(lg, S, True, True)}\n'
             + ("" if SL["lazy"] or not SL["bundle"] else f'<script src="{R}assets/{SL["bundle"]}/film.js"></script>\n')
-            + f'<script src="{R}assets/{SL["dir"]}/learn.{lg}.js"></script>\n<script src="{R}assets/{SL["engine"]}/learn.js"></script>\n'
+            + f'<script src="{R}assets/{SL["dir"]}/learn.{lg}.js"></script>\n'
+            + (f'<script src="{R}assets/learn/classic.js"></script>\n' if which == "labs" else "")
+            + f'<script src="{R}assets/{SL["engine"]}/learn.js"></script>\n'
             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
 

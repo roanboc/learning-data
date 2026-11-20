@@ -634,7 +634,7 @@ PLAY.cleanup_or_entry=(Lb,api)=>{const W=Lb.w,M=W.msg,S={pick:"nothing",ran:fals
       if(S.meas){const t=W.measures;withA(ctx,0.95,()=>tag(ctx,w-24,40,t,{size:20,align:"right",wash:S.alert?"ok":"steward",washA:0.3,maxW:520}));}
       if(S.ran&&S.pick==="entry")withA(ctx,k,()=>tag(ctx,140,70,W.phd,{size:22,wash:"student",washA:0.3,maxW:640}));}};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 L.BUILD=BUILD;L.PIX=PIX;L.lib={h,seg,stage,shell,info,btn,fill,num,dec,tx,fit,wrap,lines,tag,card,linh,tick,cross,mark,pencil,wash,head,C,CI,OK,NO};
 
 /* ---------- the labs page: one rail of every lab of the series, in film order, one lab at a time; no film level ---------- */

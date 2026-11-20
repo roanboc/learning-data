@@ -483,7 +483,7 @@ PLAY.swarm=(Lb,api)=>{const W=Lb.w,S={n:2,fade:"slow",late:false,run:null,share:
     lineUp(ctx,S.board?W.boardRes[S.board]:W.boardIdle,m+12,D.y+D.h-10,w-24,12.5,{w:700,color:rgbaS(S.board==="spread"?K.bad:S.board?K.good:K.soft,1)});};
   return{S,lay,draw,readouts:[[W.read.short,()=>S.share==null?"–":Math.round(S.share*100)+"%"],[W.read.word,()=>S.board==null?"–":S.board==="spread"?W.read.all:S.board==="caught"?W.read.fixed:W.read.one]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"ag-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

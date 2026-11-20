@@ -167,7 +167,7 @@ PLAY.halves=(Lb,api)=>{const W=Lb.w,SY=W.systems,S={map:false,gloss:false,owner:
       cols.forEach((s,i)=>{const x=o.m+12+i*(cw+6),[ls,z]=fitL(ctx,s,cw-12,12.5,2,700);chip(ctx,x,C.y+12,cw,42,"",i===2?K.bad:K.plat);lines(ctx,s,x+6,C.y+33-(ls.length-1)*z*0.61+z*0.36,cw-12,{size:12.5,max:2,align:"center"});});});}};
   return{S,lay,draw,readouts:[[W.read.numbers,()=>S.gloss?"0":"3"],[W.read.answer,()=>S.meetK==="decide"?"171":W.read.none]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dm-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

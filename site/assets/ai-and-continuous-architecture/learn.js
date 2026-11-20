@@ -351,7 +351,7 @@ PLAY.keep=(Lb,api)=>{const W=Lb.w,BT=W.beats,MV=W.moves,S={on:{change:true},run:
       y=rowW(ctx,o,{t:x.t,v:seen?(ok?b.s:W.drift):W.months[x.mo],c:seen?(ok?K.good:K.bad):K.soft,vc:seen?(ok?K.good:K.bad):K.soft,hot:seen&&!ok,mark:seen?(ok?"ok":"no"):null},y,o.rh);});};
   return{lay,draw,readouts:[[W.read.beats,()=>fill(W.read.nOf,{n:BT.filter(b=>S.on[b.k]).length,of:BT.length})],[W.read.caught,()=>S.run==null?"–":fill(W.read.nOf,{n:MV.filter(x=>S.on[x.by]).length,of:MV.length})]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs' pictures ---------- */
 // the agent, as the films draw one (aca_agent, Keeping it true's glass orb), or a plain teal one if the film's parts lack it

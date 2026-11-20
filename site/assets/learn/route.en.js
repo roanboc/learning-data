@@ -295,7 +295,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-governance",
-      11,
+      15,
       12
      ]
     },
@@ -390,7 +390,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-from-words-to-data",
-      7,
+      27,
       12
      ]
     }
@@ -516,7 +516,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-in-the-weeds",
-      10,
+      38,
       12
      ]
     }
@@ -741,7 +741,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-what-an-agent-is",
-      10,
+      19,
       12
      ]
     },

@@ -195,6 +195,9 @@ for _S in build_series.SERIES:
 # film, or a rail of labs for each film
 SPLIT_BY_FILM = r'U\.(?:filmsLabel|allFilms|filter)\b|h\("select"|-films"|"data-film":'
 SERIES_LEARN, LEARN_IDS, LEARN_STORE = {}, {}, {}
+# up to four labs a film and an evaluation of at most twelve situations a series (the author, 19 November 2026); The Inner Life of
+# Data keeps its own eight labs and thirteen scenarios, which aren't a series' pack. The kinds site/assets/learn/classic.js draws:
+LABS_MIN, LABS_PER_FILM, QUIZ_PER_SERIES, CLASSIC_KINDS = 2, 4, 12, {"count", "compose", "pick", "sort", "steps"}
 for _S in build_series.SERIES:
     _SL = build_series.series_learn(_S) if build_series.films(_S)[1] else None
     if not _SL:
@@ -2210,7 +2213,38 @@ def main():
         for n, f in on.items():
             if not f["labs"] and not any(x["film"] == n for x in en["labs"]) and not any(q[1] == n for q in en["qs"]):
                 s["notes"].append(f"{f['title']}: no lab or scenario among the series' own")
+        # up to four labs a film, its playground and the most interactive and meaningful of its first labs, and one evaluation of
+        # at most twelve situations for the series (the author, 18 and 19 November 2026); the classic kinds come from
+        # site/assets/learn/classic.js, which the engine must take
+        for f, c in Counter(x["film"] for x in en["labs"]).items():
+            if c > LABS_PER_FILM:
+                s["fails"].append(f"{words}.en.js: film {f} has {c} labs; a film has up to {LABS_PER_FILM}, the most interactive and meaningful")
+        if SL["quiz"] > QUIZ_PER_SERIES:
+            s["fails"].append(f"{words}.en.js: {SL['quiz']} scenarios; a series' evaluation has at most {QUIZ_PER_SERIES}")
+        kinds = set(re.findall(r'\{id:"\w+",kind:"(\w+)"', (WEB / "assets" / SL["dir"] / "learn.en.js").read_text(encoding="utf-8")))
+        eng = (WEB / "assets" / SL["engine"] / "learn.js").read_text(encoding="utf-8")
+        bl = (re.search(r"const BUILD=.*", eng) or [""])[0]
+        classic = {k for k in kinds & CLASSIC_KINDS if not re.search(rf"\b{k}:", bl)}
+        if classic and "LD_CLASSIC" not in bl:
+            s["fails"].append(f"site/assets/{SL['engine']}/learn.js: its pack has labs of the classic kinds ({', '.join(sorted(classic))}), but the engine doesn't take window.LD_CLASSIC")
         s["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, for films {', '.join(map(str, SL['films']))}")
+    # at least two labs a film, in every series (the author, 19 November 2026): the films still short are listed in
+    # site-tools/labs_later.json, by series id and film number, and each leaves the list with its second lab
+    later = json.loads((ROOT / "site-tools" / "labs_later.json").read_text(encoding="utf-8"))["films"]
+    for S in build_series.SERIES:
+        fs = build_series.films(S)[1]
+        if not fs:
+            continue
+        SL = SERIES_LEARN.get(S["id"], (None, None))[1]
+        c = Counter(x["film"] for x in SL["en"]["labs"]) if SL else Counter()
+        held = set(later.get(S["id"], []))
+        for f in fs:
+            n = f["index"] + 1
+            if c[n] < LABS_MIN and n not in held:
+                s["fails"].append(f"{S['name']['en']}, film {n} ({f['title']}): {c[n]} lab(s); a film has at least {LABS_MIN}")
+            if c[n] >= LABS_MIN and n in held:
+                s["fails"].append(f"site-tools/labs_later.json: {S['id']} film {n} now has {c[n]} labs; take it off the list")
+    s["notes"].append(f"{sum(map(len, later.values()))} films still to get a second lab (site-tools/labs_later.json)")
     # one level: an engine shows every lab of its series in one rail and every scenario in one list, numbered 1 to N, never a
     # film's buttons, a film's own rail of labs or a choice of film above them (the author, 11 and 16 Nov 2026); smoke.py's
     # series-learn checks the pages as drawn

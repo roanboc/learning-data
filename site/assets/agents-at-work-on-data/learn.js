@@ -309,7 +309,7 @@ RULE.mandate=(S,run)=>{const page=S.page==="signed",held=S.held==="tools",prod=S
   if(run==="meaning")return{k:"asksHR"};
   if(run==="loop")return{k:held?"stopsAtLimit":"runsOn"};};
 ["context","skill","hands","memory","check","wrong","place","gate","order","stages","borrow","checkin","drawer","enforce","review","mandate"].forEach(id=>{PLAY[id]=(Lb,api)=>machine(Lb,api);});
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"ag-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

@@ -22,7 +22,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 | [What they tell us about ourselves](https://data.learn-all.org/what-an-agent-is/what-they-tell-us-about-ourselves/) | Agents and the mind | 9½ min | 8 | 3 questions | [script](9-what-they-tell-us-about-ourselves/script.md) · [source](9-what-they-tell-us-about-ourselves/source/README.md) |
 | [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 8 min | 7 | 4 questions | [script](10-many-agents/script.md) · [source](10-many-agents/source/README.md) |
 
-For the whole series, on the site: [10 labs](https://data.learn-all.org/what-an-agent-is/labs/) and [12 scenarios](https://data.learn-all.org/what-an-agent-is/scenarios/), in English and Spanish, from the words in [site/assets/what-an-agent-is/](../../site/assets/what-an-agent-is/).
+For the whole series, on the site: [19 labs](https://data.learn-all.org/what-an-agent-is/labs/) and [12 scenarios](https://data.learn-all.org/what-an-agent-is/scenarios/), in English and Spanish, from the words in [site/assets/what-an-agent-is/](../../site/assets/what-an-agent-is/).
 <!-- /films -->
 
 ## The look and the sound

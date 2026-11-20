@@ -326,7 +326,7 @@ PLAY.proof=(Lb,api)=>{const W=Lb.w,S={rev:null,elena:true,gap:null,classed:false
     ["who","never","where","ends"].forEach(k=>{const s=st[k],col=s==="ok"?K.good:s==="gap"?K.bad:s==="half"?K.gold:K.soft;
       box(ctx,o.at[k],col,W.prom[k],W.stat[k][s],{a:s==="open"?0.7:1,max:3,mark:s==="ok"?"ok":s==="gap"?"no":null});});};
   return{S,lay,draw,readouts:[[W.read.proved,()=>String([S.rev&&!S.elena,S.classed,S.reads,S.checked].filter(Boolean).length)+" / 4"],[W.read.group,()=>S.ended?"0":S.elena?"2":"1"]]};};
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"os-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

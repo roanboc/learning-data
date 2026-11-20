@@ -148,7 +148,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-enterprise-architecture",
-      11,
+      22,
       12
      ]
     },
@@ -218,7 +218,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-platform-and-solution-architecture",
-      8,
+      16,
       12
      ]
     },
@@ -238,7 +238,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-continuous-architecture",
-      3,
+      6,
       6
      ]
     },

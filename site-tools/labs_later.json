@@ -2,10 +2,8 @@
  "about": "Films with fewer than two labs, the least the author asked for on 19 November 2026 (at most four). site-tools/check_site.py fails a film under two that isn't listed here, and a listed film that has two: each leaves the list with its second lab.",
  "films": {
   "model-the-business": [1],
-  "enterprise-architecture": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
   "business-architecture-for-data": [1, 2, 3, 4, 5],
-  "platform-and-solution-architecture": [1, 2, 3, 4, 5, 6, 7, 8],
-  "continuous-architecture": [1, 2, 3],
+  "ai-architecture": [1, 2, 3],
   "agents-at-work-on-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],
   "from-helper-to-colleague": [1, 2, 3, 4, 5, 6, 7],
   "data-that-moves": [1, 2, 3, 4],

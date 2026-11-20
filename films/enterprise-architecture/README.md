@@ -23,7 +23,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [When strategy moves](https://data.learn-all.org/enterprise-architecture/when-strategy-moves/) | Change, owners and contracts | 7 min | 11 | 3 questions | [script](10-when-strategy-moves/script.md) · [source](10-when-strategy-moves/source/README.md) |
 | [A map people and agents can read](https://data.learn-all.org/enterprise-architecture/a-map-people-and-agents-can-read/) | Keeping the map | 8½ min | 12 | 3 questions | [script](11-a-map-people-and-agents-can-read/script.md) · [source](11-a-map-people-and-agents-can-read/source/README.md) |
 
-For the whole series, on the site: [11 labs](https://data.learn-all.org/enterprise-architecture/labs/) and [12 scenarios](https://data.learn-all.org/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
+For the whole series, on the site: [22 labs](https://data.learn-all.org/enterprise-architecture/labs/) and [12 scenarios](https://data.learn-all.org/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
 <!-- /films -->
 
 ## The look and the sound

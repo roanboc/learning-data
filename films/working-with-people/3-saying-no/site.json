@@ -90,5 +90,6 @@
         "href_es": "https://en.wikipedia.org/wiki/Dike_Kokaral"
       }
     ]
-  }
+  },
+  "tile": [500, 380, 560]
 }

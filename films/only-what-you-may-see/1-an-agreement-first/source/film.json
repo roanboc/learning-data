@@ -9,11 +9,7 @@
     "af_hall.js",
     "scenes.js"
   ],
-  "poster": [
-    "agreement",
-    "register",
-    -0.5
-  ],
+  "poster": ["first", "run", 2.9],
   "say": [
     [
       "\\bJun\\b",

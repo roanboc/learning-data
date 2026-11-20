@@ -31,5 +31,6 @@
   "past_es": [
     "El puesto de control de Hakone, Japón, hacia 1619",
     "Una mujer que salía de Edo mostraba un salvoconducto que la describía, cotejado con ella en la puerta; nadie podía rodearlo, y el camino seguía abierto para los demás."
-  ]
+  ],
+  "tile": [800, 300, 440]
 }

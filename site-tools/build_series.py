@@ -460,7 +460,7 @@ HAND = {
                   note={"en": "English and Spanish", "es": "En español e inglés"}),
     "sketch": dict(href="sketch/", source="films/a-sharper-sketch",
                    title={"en": "A Sharper Sketch", "es": "A Sharper Sketch"}, title_lang="en",
-                   poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "7½", "es": "7½"}, prefix="ld3",
+                   poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "7½", "es": "7½"}, prefix="ld3", tile=[660, 420, 400],
                    moved=("labs", "scenarios"),  # its own labs and scenarios, now its series': their old pages lead there (moved_hand_page())
                    kicker={"en": "Reference models", "es": "Modelos de referencia"},
                    card={"en": "Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?",
@@ -851,13 +851,14 @@ def fold(lg, sid, title, inner, sub=""):
 
 
 def film_row(lg, f, rel, R):
-    """A film of a series as a compact row on the series' page: its number, poster, title, minutes, and Mark watched."""
+    """A film of a series as a compact row on the series' page: its number, tile (a square close-up of its poster, site-tools/tiles.py),
+    title, minutes, and Mark watched."""
     alone = f["series"].get("single")
     href = f'{rel}{"" if alone else f["key"] + "/"}'
     nm = E(f["title"] if lg == "en" else f["site"]["title_es"])
     off, on, _ = SEEN[lg]
     return (f'<li class="frow" data-film="{f["prefix"]}"><span class="fn">{"" if f["index"] < 0 else f["index"] + 1}</span>'
-            f'<img src="{R}assets/{f["key"]}-poster.jpg" alt="" width="1280" height="720" loading="lazy">'
+            f'<img src="{R}assets/{f["key"]}-tile.jpg" alt="" width="360" height="360" loading="lazy">'
             f'<span class="ft"><a href="{href}">{nm}</a><small>{f["len"]} min · {E(f["site"][T(lg, "card", "card_es")])}</small></span>'
             f'<button type="button" class="seen sm" data-seen="{f["prefix"]}" data-on="{on}" data-off="{off}" aria-pressed="false" aria-label="{off}: {nm}"><i aria-hidden="true"></i><span>{off}</span></button></li>')
 
@@ -866,7 +867,7 @@ def outside_row(lg, S, n, h, R):
     """A film whose page is written by hand, as a compact row (film_row)."""
     lang = ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
     off, on, _ = SEEN[lg]
-    return (f'<li class="frow" data-film="{h["prefix"]}"><span class="fn">{n}</span><img src="{R}assets/{h["poster"][lg]}" alt="" width="1280" height="720" loading="lazy">'
+    return (f'<li class="frow" data-film="{h["prefix"]}"><span class="fn">{n}</span><img src="{R}assets/{h["poster"][lg].replace("-poster.jpg", "-tile.jpg")}" alt="" width="360" height="360" loading="lazy">'
             f'<span class="ft"><a href="{R if lg == "en" else R[3:]}{h["href"]}"{lang}>{E(h["title"][lg])}</a><small>{h["len"][lg]} min · {E(h["card"][lg])}</small></span>'
             f'<button type="button" class="seen sm" data-seen="{h["prefix"]}" data-on="{on}" data-off="{off}" aria-pressed="false" aria-label="{off}: {E(h["title"][lg])}"><i aria-hidden="true"></i><span>{off}</span></button></li>')
 

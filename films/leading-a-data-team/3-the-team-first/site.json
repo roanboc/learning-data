@@ -76,5 +76,6 @@
         "href_es": "https://nasasa.co.za/"
       }
     ]
-  }
+  },
+  "tile": [680, 360, 300]
 }

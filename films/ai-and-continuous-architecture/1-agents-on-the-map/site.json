@@ -80,5 +80,6 @@
         "href_es": "https://www.iso.org/standard/42001"
       }
     ]
-  }
+  },
+  "tile": [600, 290, 520]
 }

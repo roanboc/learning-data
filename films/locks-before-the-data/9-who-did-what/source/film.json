@@ -8,11 +8,7 @@
     "wd_pieces.js",
     "scenes.js"
   ],
-  "poster": [
-    "seen",
-    "production",
-    4.2
-  ],
+  "poster": ["box", "again", 1.18],
   "say": [
     [
       "\\bJun\\b",

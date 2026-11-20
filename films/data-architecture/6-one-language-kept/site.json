@@ -29,5 +29,6 @@
   "past_es": [
     "Las mismas palabras, Chile, 1972",
     "En el diseño de Cybersyn, el modelo de cada fábrica mediría el malestar social de una sola forma, la parte de los trabajadores de su nómina ausentes ese día, y la sala de operaciones mostraría cada fábrica con los mismos íconos, para que cualquiera pudiera leerlos."
-  ]
+  ],
+  "tile": [680, 360, 520]
 }

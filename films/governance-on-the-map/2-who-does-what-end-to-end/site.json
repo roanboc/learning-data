@@ -29,5 +29,6 @@
     "Cuando cualquiera puede pedir una palabra, y cada paso tiene a alguien que lo haga, todos pueden usar las mismas palabras."
   ],
   "next_h": "You've seen one service followed end to end, its roles filled by people and an agent, and the glossary run as a product. Next: where each piece lives.",
-  "next_h_es": "Viste un servicio seguido de principio a fin, sus roles ocupados por personas y un agente, y el glosario gestionado como un producto. Después: dónde vive cada pieza."
+  "next_h_es": "Viste un servicio seguido de principio a fin, sus roles ocupados por personas y un agente, y el glosario gestionado como un producto. Después: dónde vive cada pieza.",
+  "tile": [760, 380, 420]
 }

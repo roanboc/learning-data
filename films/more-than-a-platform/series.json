@@ -40,10 +40,10 @@
       "Lleva 149: quienes ya pagaron"
     ]
   ],
-  "learn_p": "One playground for the film, with experiments to make happen; then {quiz} situations.",
-  "learn_p_es": "Un lab interactivo para la película, con experimentos que hacer pasar; y luego {quiz} situaciones.",
-  "labs_lead": "One playground for the film. Switch and press, and watch what happens: add what a platform alone doesn't bring, and see one word become three numbers with names and an owner.",
-  "labs_lead_es": "Un lab interactivo para la película. Cambia y aprieta, y mira qué pasa: suma lo que una plataforma sola no trae, y mira una palabra volverse tres cifras con nombre y dueño.",
+  "learn_p": "Two labs: a playground for the film, with experiments to make happen, and one to sort; then {quiz} situations.",
+  "learn_p_es": "Dos labs: uno interactivo para la película, con experimentos que hacer pasar, y uno para clasificar; y luego {quiz} situaciones.",
+  "labs_lead": "Two labs: a playground for the film, and one to sort. Switch and press, and watch what happens: add what a platform alone doesn't bring, and see one word become three numbers with names and an owner.",
+  "labs_lead_es": "Dos labs: uno interactivo para la película, y uno para clasificar. Cambia y aprieta, y mira qué pasa: suma lo que una plataforma sola no trae, y mira una palabra volverse tres cifras con nombre y dueño.",
   "quiz_lead": "{quiz} situations about what a data platform needs around it. Decide what you'd do; each answer explains why, and points back to the playground.",
   "quiz_lead_es": "{quiz} situaciones sobre lo que una plataforma de datos necesita a su alrededor. Decide qué harías; cada respuesta explica por qué, y te lleva al lab."
 }

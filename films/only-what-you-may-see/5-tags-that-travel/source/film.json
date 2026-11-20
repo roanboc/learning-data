@@ -9,11 +9,7 @@
     "tt_pages.js",
     "scenes.js"
   ],
-  "poster": [
-    "follows",
-    "arrive",
-    2.4
-  ],
+  "poster": ["forest", "cut", 0.69],
   "say": [
     [
       "\\bJun\\b",

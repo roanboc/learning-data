@@ -4,7 +4,8 @@
      and the other way round (the "ld-route" event). With no route chosen, every topic counts.
    - Progress on the route, in two lines of bars: films watched and labs seen; then situations answered and right ones. Each
      counts only the route's films and series. Continue goes to the route's next stop.
-   - One tile per topic on the route, grouped by the route's stages, with a ring and the same two lines. A route shows only its
+   - One tile per topic on the route, grouped by the route's stages, with a ring and one row of small counts (a count with
+     nothing to count, such as right answers before any answer, is left out). A route shows only its
      topics; "Show all topics" brings the rest back. The next stop is marked.
    - The counts come from path.js (window.LD_STATS), with the keys every page uses. */
 (()=>{"use strict";
@@ -28,7 +29,12 @@ function bar(k,n,of,label){const f=of?n/of:0;
   return '<span class="pg-b'+(k==="ok"?" ok":"")+'" title="'+esc(label)+'">'+icon(k)+'<span class="pg-t"><i style="width:'+Math.round(100*Math.min(f,1))+'%"></i></span>'+
     '<small><span class="route-sr">'+esc(label)+': </span>'+n+'/'+of+'</small></span>';}
 const lines=o=>'<div class="pg-l">'+bar("fw",o.f,o.fn,X.fw)+(o.ln?bar("ls",o.l,o.ln,X.ls):"")+'</div>'+
-  (o.q?'<div class="pg-l">'+bar("an",o.n,o.q,X.an)+bar("ok",o.ok,o.n,X.ok)+'</div>':"");
+  (o.q?'<div class="pg-l">'+bar("an",o.n,o.q,X.an)+(o.n?bar("ok",o.ok,o.n,X.ok):"")+'</div>':"");
+// a topic's tile: one row of small counts, each with a thin bar under it; a count with nothing to count is left out
+function chip(k,n,of,label){return '<li class="pg-c'+(k==="ok"?" ok":"")+'" title="'+esc(label)+'">'+icon(k)+
+  '<span><span class="route-sr">'+esc(label)+': </span>'+n+'/'+of+'</span><i style="width:'+Math.round(100*Math.min(of?n/of:0,1))+'%"></i></li>';}
+const counts=o=>'<ul class="pg-cs">'+(o.fn?chip("fw",o.f,o.fn,X.fw):"")+(o.ln?chip("ls",o.l,o.ln,X.ls):"")+
+  (o.q?chip("an",o.n,o.q,X.an):"")+(o.n?chip("ok",o.ok,o.n,X.ok):"")+'</ul>';
 function ring(f){const r=15,c=2*Math.PI*r;
   return '<svg class="pg-ring" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="'+r+'" class="d-track"/>'+
     (f>0?'<circle cx="20" cy="20" r="'+r+'" class="d-arc" stroke-dasharray="'+(c*Math.min(f,1)).toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 20 20)"/>':'')+
@@ -54,7 +60,7 @@ function render(){
       return '<li class="pg-tile'+(t.id===nxt?" next":"")+(off?" off":"")+'"><a href="'+esc(base+"topics/"+t.id+"/")+'">'+ring(o.fn?o.f/o.fn:0)+
         '<span class="pg-tb"><b>'+esc(t.name)+'</b>'+(t.id===nxt?'<span class="r-pill">'+esc(X.next)+'</span>':'')+
         (g&&!off?'<small>'+esc(fill(X.uses,{s:its.map(i=>i.title).join(", ")}))+'</small>':'')+
-        (started?lines(o):'<small class="pg-ns">'+esc(X.notyet)+'</small>')+'</span></a></li>';}).join("")+'</ul></div>';});
+        (started?counts(o):'<small class="pg-ns">'+esc(X.notyet)+'</small>')+'</span></a></li>';}).join("")+'</ul></div>';});
   const more=g?'<p class="pg-more"><button type="button" class="btn" data-all aria-pressed="'+all+'">'+esc(all?X.hide:X.showall)+'</button></p>':'';
   box.innerHTML=head+sumBox+key+tiles+more;}
 box.addEventListener("click",e=>{const c=e.target.closest("[data-goal]"),a=e.target.closest("[data-all]");

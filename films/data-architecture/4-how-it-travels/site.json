@@ -29,5 +29,6 @@
   "past_es": [
     "Las mismas líneas, Chile, 1972",
     "En la huelga de octubre, las líneas de télex que llevaban las cifras de cada fábrica a Santiago una vez al día llevaron mensajes nuevos muchas veces al día, en ambos sentidos, y unos 200 camiones que aún circulaban fueron adonde faltaban bienes."
-  ]
+  ],
+  "tile": [900, 420, 440]
 }

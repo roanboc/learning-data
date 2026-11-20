@@ -75,5 +75,6 @@
       }
     ]
   },
-  "draft": true
+  "draft": true,
+  "tile": [600, 370, 420]
 }

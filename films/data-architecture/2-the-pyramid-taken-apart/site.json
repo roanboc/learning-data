@@ -29,5 +29,6 @@
   "past_es": [
     "Los primeros resultados de Cyberstride, Chile, 1972",
     "El software de Cybersyn calculaba lo normal de cada fábrica a partir de su propia historia, y pasaba solo lo que había cambiado."
-  ]
+  ],
+  "tile": [500, 330, 520]
 }

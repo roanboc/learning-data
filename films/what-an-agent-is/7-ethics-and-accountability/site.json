@@ -30,5 +30,6 @@
     "Un buey no puede responder por lo que hace, así que responde su dueño."
   ],
   "next_h": "You've seen why a person answers for every agent. Next: why we govern them, because they're capable, not because they're bad.",
-  "next_h_es": "Viste por qué una persona responde por cada agente. Sigue: por qué los gobernamos, porque son capaces, no porque sean malos."
+  "next_h_es": "Viste por qué una persona responde por cada agente. Sigue: por qué los gobernamos, porque son capaces, no porque sean malos.",
+  "tile": [600, 460, 480]
 }

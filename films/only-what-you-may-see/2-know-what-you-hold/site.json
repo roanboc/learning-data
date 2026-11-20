@@ -70,5 +70,6 @@
         "href_es": "https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/disclosurecontrol"
       }
     ]
-  }
+  },
+  "tile": [580, 400, 520]
 }

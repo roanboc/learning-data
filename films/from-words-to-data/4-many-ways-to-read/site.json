@@ -20,5 +20,6 @@
   "quiz_lead": "Eight situations about shapes for reading: an audit, two stars that don't match, a measure defined twice, a new source every month. Decide what you'd do; each answer explains why.",
   "quiz_lead_es": "Ocho situaciones sobre formas para leer: una auditoría, dos estrellas que no coinciden, una medida definida dos veces, una fuente nueva cada mes. Decide qué harías; cada respuesta explica por qué.",
   "past": ["A library's card catalogue", "The same thing, reached many ways."],
-  "past_es": ["El fichero de una biblioteca", "La misma cosa, alcanzada de muchas maneras."]
+  "past_es": ["El fichero de una biblioteca", "La misma cosa, alcanzada de muchas maneras."],
+  "tile": [220, 320, 420]
 }

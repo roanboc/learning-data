@@ -31,5 +31,6 @@
   "past_es": [
     "Las barreras de peaje de Japón, 1462 a 1635",
     "Cada dueño de un tramo de río o de camino podía cobrar un peaje; unas mismas reglas para los caminos dejaron a los viajeros pagar solo lo que usaban."
-  ]
+  ],
+  "tile": [680, 300, 520]
 }

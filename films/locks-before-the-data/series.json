@@ -72,10 +72,10 @@
       "Yusuf Demir, que lleva el registro de quién es dueño de qué y los acuerdos firmados"
     ]
   ],
-  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: give a job its own name, climb the ladder of sign-ins, walk an attacker's path, switch admin power on for a task.",
-  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: da a un proceso su propio nombre, sube la escalera de accesos, sigue el camino de un atacante, enciende el poder de administrador para una tarea.",
+  "learn_p": "{Labs} labs: a playground for each film, with experiments to make happen, and one more to sort, pick or write; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs: uno interactivo por película, con experimentos que hacer pasar, y otro para ordenar, elegir o escribir; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} labs, a playground for each film and one more beside it. Switch, pick and press, and watch what happens: give a job its own name, climb the ladder of sign-ins, walk an attacker's path, switch admin power on for a task.",
+  "labs_lead_es": "{Labs} labs, uno interactivo por película y otro a su lado. Cambia, elige y aprieta, y mira qué pasa: da a un proceso su propio nombre, sube la escalera de accesos, sigue el camino de un atacante, enciende el poder de administrador para una tarea.",
   "quiz_lead": "{quiz} situations from every film, about who and what may reach the platform. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre quién y qué puede llegar a la plataforma. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

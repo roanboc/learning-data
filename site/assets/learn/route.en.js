@@ -767,7 +767,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-agents-at-work-on-data",
-      9,
+      18,
       12
      ]
     },
@@ -791,7 +791,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-from-helper-to-colleague",
-      7,
+      14,
       12
      ]
     }

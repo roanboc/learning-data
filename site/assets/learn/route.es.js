@@ -218,7 +218,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-platform-and-solution-architecture",
-      8,
+      16,
       12
      ]
     },
@@ -238,7 +238,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-continuous-architecture",
-      3,
+      6,
       6
      ]
     },
@@ -258,7 +258,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-ai-architecture",
-      3,
+      6,
       6
      ]
     }
@@ -421,7 +421,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-that-moves",
-      4,
+      8,
       12
      ]
     },

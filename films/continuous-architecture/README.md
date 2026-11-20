@@ -15,7 +15,7 @@ An architecture kept alive as a continuous capability: a first draft instead of 
 | [Every change, checked](https://data.learn-all.org/continuous-architecture/every-change-checked/) | The map, tested on every change | 7½ min | 8 | 3 questions | [script](2-every-change-checked/script.md) · [source](2-every-change-checked/source/README.md) |
 | [Kept alive](https://data.learn-all.org/continuous-architecture/kept-alive/) | Keeping the architecture alive | 8½ min | 9 | 3 questions | [script](3-kept-alive/script.md) · [source](3-kept-alive/source/README.md) |
 
-For the whole series, on the site: [3 labs](https://data.learn-all.org/continuous-architecture/labs/) and [6 scenarios](https://data.learn-all.org/continuous-architecture/scenarios/), in English and Spanish, from the words in [site/assets/continuous-architecture/](../../site/assets/continuous-architecture/).
+For the whole series, on the site: [6 labs](https://data.learn-all.org/continuous-architecture/labs/) and [6 scenarios](https://data.learn-all.org/continuous-architecture/scenarios/), in English and Spanish, from the words in [site/assets/continuous-architecture/](../../site/assets/continuous-architecture/).
 <!-- /films -->
 
 ## The look and the sound

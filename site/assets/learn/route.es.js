@@ -338,7 +338,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-governance-in-practice",
-      9,
+      12,
       9
      ]
     }
@@ -566,7 +566,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-fit-for-use",
-      4,
+      8,
       12
      ]
     },
@@ -914,7 +914,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-people-first",
-      4,
+      8,
       12
      ]
     },
@@ -934,7 +934,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-the-new-skills",
-      3,
+      6,
       9
      ]
     },
@@ -954,7 +954,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-working-with-people",
-      3,
+      6,
       9
      ]
     },
@@ -975,7 +975,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-leading-a-data-team",
-      4,
+      8,
       12
      ]
     },
@@ -996,7 +996,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-ownership-and-performance",
-      4,
+      8,
       12
      ]
     }

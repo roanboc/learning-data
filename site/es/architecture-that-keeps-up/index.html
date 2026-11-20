@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/site.css?v=6c7e05e496">
+<link rel="stylesheet" href="../../assets/learn/pages.css?v=8bb9e30f49">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a></nav><a class="proj" href="../dbt-project/" aria-label="Proyecto de datos de ejemplo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.9l7.9 4.55v9.1L12 21.1l-7.9-4.55v-9.1z"/><path d="M4.3 7.55 12 12l7.7-4.45M12 12v8.9"/></svg></a><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../architecture-that-keeps-up/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="Cómo funciona este sitio" data-tour="../../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><button class="extra-btn" type="button" popovertarget="top-extra" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div><div class="extra" id="top-extra" popover><a class="making" href="../journey/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17M8 5l-1.5 4M13 5l-1.5 4M18 5l-1.5 4"/></svg><span>Cómo se hizo</span></a><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a class="contact" href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>LinkedIn</span></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -18,8 +19,9 @@
 <section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../assets/services-with-customers-poster.jpg?v=7732892d6b" alt=""><img src="../../assets/one-map-poster.jpg?v=c535f03a9c" alt=""><img src="../../assets/a-path-for-every-provider-poster.jpg?v=e4e2d237ce" alt=""><img src="../../assets/services-with-customers-poster.jpg?v=7732892d6b" alt=""><img src="../../assets/one-map-poster.jpg?v=c535f03a9c" alt=""><img src="../../assets/a-path-for-every-provider-poster.jpg?v=e4e2d237ce" alt=""><img src="../../assets/services-with-customers-poster.jpg?v=7732892d6b" alt=""><img src="../../assets/one-map-poster.jpg?v=c535f03a9c" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../topics/">Temas</a> › <a href="../topics/#data-management">Gestión de datos</a> › Una arquitectura al día</p>
 <h1>Una arquitectura al día</h1>
-<p class="lead">La tercera serie de Gestión de datos. Helena Novak dirige los servicios del equipo como un negocio, guarda la arquitectura en un solo mapa en un repositorio, al día con cada cambio, y da a cada proveedor de datos un camino, incluso a los que no pueden seguir la forma preferida.</p>
+<p class="lead">Servicios con clientes, un solo mapa en el repositorio siempre al día y un camino para cada proveedor.</p>
 <p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
+<p class="cont"><a class="btn primary" href="services-with-customers/" data-continue="[[&quot;ld-services-with-customers&quot;, &quot;services-with-customers/&quot;, &quot;Servicios con clientes&quot;], [&quot;ld-one-map&quot;, &quot;one-map/&quot;, &quot;Un solo mapa, en el repositorio&quot;], [&quot;ld-a-path-for-every-provider&quot;, &quot;a-path-for-every-provider/&quot;, &quot;Un camino para cada proveedor&quot;]]" data-start="Empieza" data-go="Sigue" data-again="Ver de nuevo">Empieza: Servicios con clientes →</a><span class="fprog" data-series-text='{"films":"{n} de {of} películas vistas"}'><span data-films="ld-services-with-customers ld-one-map ld-a-path-for-every-provider" hidden></span></span></p>
 </section>
 <nav class="course" aria-label="Curso: Una arquitectura al día"><div class="course-in"><p class="course-t"><small>Serie · Gestión de datos</small>Una arquitectura al día</p><ol class="path" data-store="ld-architecture-that-keeps-up" data-labs="3" data-quiz="9" data-series="ld-services-with-customers ld-one-map ld-a-path-for-every-provider" data-text='{"watched": "Vista", "films": "{n} de 3 películas vistas", "labs": "{n} de 3 labs explorados", "quiz": "{n} de 9 respondidas · {ok} correctas"}'>
 <li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>Las películas</b><span>Tres películas</span></a></li>
@@ -29,48 +31,38 @@
 
 <section class="module" id="films" aria-labelledby="films-h">
 <div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden: cada película se apoya en la anterior.</p></div></div>
-<div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
-<article class="topic-card">
-<img src="../../assets/services-with-customers-poster.jpg?v=7732892d6b" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Película 1 de 3 · Servicios y clientes</p>
-<h3><a href="services-with-customers/">Servicios con clientes</a></h3>
-<p>Helena escribe los servicios de su equipo y para quién es cada uno, y recorre un servicio por cada capa, de la estrategia a la tecnología.</p>
-<p class="meta">7½ min · Pausa para pensar · Una arquitectura al día · En inglés</p>
-<p class="tc-progress" data-progress="ld-services-with-customers" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../../assets/one-map-poster.jpg?v=c535f03a9c" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Película 2 de 3 · Una sola fuente de verdad</p>
-<h3><a href="one-map/">Un solo mapa, en el repositorio</a></h3>
-<p>La imagen objetivo de Helena existe tres veces. El equipo pasa un solo mapa a su repositorio y saca de él cada otra imagen.</p>
-<p class="meta">7½ min · Pausa para pensar · Una arquitectura al día · En inglés</p>
-<p class="tc-progress" data-progress="ld-one-map" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../../assets/a-path-for-every-provider-poster.jpg?v=e4e2d237ce" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Película 3 de 3 · Datos de cada proveedor</p>
-<h3><a href="a-path-for-every-provider/">Un camino para cada proveedor</a></h3>
-<p>El equipo escribe una forma preferida de recibir datos, y un árbol de decisión que da a cada proveedor un camino, para que los datos lleguen ya al negocio.</p>
-<p class="meta">8 min · Pausa para pensar · Una arquitectura al día · En inglés</p>
-<p class="tc-progress" data-progress="ld-a-path-for-every-provider" hidden></p>
-</div>
-</article>
-</div>
+<ol class="frows">
+<li class="frow" data-film="ld-services-with-customers"><span class="fn">1</span><img src="../../assets/services-with-customers-poster.jpg?v=7732892d6b" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="services-with-customers/">Servicios con clientes</a><small>7½ min · Helena escribe los servicios de su equipo y para quién es cada uno, y recorre un servicio por cada capa, de la estrategia a la tecnología.</small></span><button type="button" class="seen sm" data-seen="ld-services-with-customers" data-on="Vista" data-off="Marcar como vista" aria-pressed="false" aria-label="Marcar como vista: Servicios con clientes"><i aria-hidden="true"></i><span>Marcar como vista</span></button></li>
+<li class="frow" data-film="ld-one-map"><span class="fn">2</span><img src="../../assets/one-map-poster.jpg?v=c535f03a9c" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="one-map/">Un solo mapa, en el repositorio</a><small>7½ min · La imagen objetivo de Helena existe tres veces. El equipo pasa un solo mapa a su repositorio y saca de él cada otra imagen.</small></span><button type="button" class="seen sm" data-seen="ld-one-map" data-on="Vista" data-off="Marcar como vista" aria-pressed="false" aria-label="Marcar como vista: Un solo mapa, en el repositorio"><i aria-hidden="true"></i><span>Marcar como vista</span></button></li>
+<li class="frow" data-film="ld-a-path-for-every-provider"><span class="fn">3</span><img src="../../assets/a-path-for-every-provider-poster.jpg?v=e4e2d237ce" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="a-path-for-every-provider/">Un camino para cada proveedor</a><small>8 min · El equipo escribe una forma preferida de recibir datos, y un árbol de decisión que da a cada proveedor un camino, para que los datos lleguen ya al negocio.</small></span><button type="button" class="seen sm" data-seen="ld-a-path-for-every-provider" data-on="Vista" data-off="Marcar como vista" aria-pressed="false" aria-label="Marcar como vista: Un camino para cada proveedor"><i aria-hidden="true"></i><span>Marcar como vista</span></button></li>
+</ol>
 </section>
 
 <section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
-<div class="mhead"><div><h2 id="learn-h">Desarma, y luego tú decides</h2><p>Tres labs de decisiones, uno por película, donde las decisiones se desarrollan semana a semana y mes a mes; y luego 9 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
+<div class="mhead"><div><h2 id="learn-h">Practica</h2><p>Tres labs de decisiones, uno por película, donde las decisiones se desarrollan semana a semana y mes a mes; y luego 9 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
+<ul class="pbars" data-practice="ld-architecture-that-keeps-up" data-labs="3" data-quiz="9"><li><span>Labs vistos</span><span class="pbar" data-k="labs"><i></i></span></li><li><span>Respondidas</span><span class="pbar" data-k="n"><i></i></span></li><li><span>Correctas</span><span class="pbar ok" data-k="ok"><i></i></span></li></ul>
 <p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 3 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 9 situaciones</a></p>
+</section>
+
+<section class="module" id="up-next" aria-labelledby="up-next-h">
+<div class="mhead"><div><h2 id="up-next-h">Lo que sigue</h2></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../assets/prototype-first-poster.jpg?v=d33e0f78c7" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Siguiente serie · Pasos pequeños, medidos →</p>
+<h3><a href="../small-steps-measured/prototype-first/">Primero, un prototipo</a></h3>
+<p>Graham pide un tablero. El equipo le pone algo real delante en dos semanas, y tres rondas cortas resuelven una pregunta de A$140 millones.</p>
+<p class="meta">7½ min · Pausa para pensar · Pasos pequeños, medidos · En inglés</p>
+<p class="tc-progress" data-progress="ld-prototype-first" hidden></p>
+</div>
+</article>
+</div>
 </section>
 
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
-<script src="../../assets/learn/path.js?v=f10d4d0861"></script>
+<script src="../../assets/learn/path.js?v=088bc8a288"></script>
 <script src="../../assets/ambient.js?v=e4b9486ecb"></script>
 </body>
 </html>

@@ -850,6 +850,66 @@ def fold(lg, sid, title, inner, sub=""):
             + (f'<small>{sub}</small>' if sub else "") + f'</summary>\n<div class="fold-in">\n{inner}\n</div></details>\n</section>\n\n')
 
 
+def film_row(lg, f, rel, R):
+    """A film of a series as a compact row on the series' page: its number, poster, title, minutes, and Mark watched."""
+    alone = f["series"].get("single")
+    href = f'{rel}{"" if alone else f["key"] + "/"}'
+    nm = E(f["title"] if lg == "en" else f["site"]["title_es"])
+    off, on, _ = SEEN[lg]
+    return (f'<li class="frow" data-film="{f["prefix"]}"><span class="fn">{"" if f["index"] < 0 else f["index"] + 1}</span>'
+            f'<img src="{R}assets/{f["key"]}-poster.jpg" alt="" width="1280" height="720" loading="lazy">'
+            f'<span class="ft"><a href="{href}">{nm}</a><small>{f["len"]} min · {E(f["site"][T(lg, "card", "card_es")])}</small></span>'
+            f'<button type="button" class="seen sm" data-seen="{f["prefix"]}" data-on="{on}" data-off="{off}" aria-pressed="false" aria-label="{off}: {nm}"><i aria-hidden="true"></i><span>{off}</span></button></li>')
+
+
+def outside_row(lg, S, n, h, R):
+    """A film whose page is written by hand, as a compact row (film_row)."""
+    lang = ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
+    off, on, _ = SEEN[lg]
+    return (f'<li class="frow" data-film="{h["prefix"]}"><span class="fn">{n}</span><img src="{R}assets/{h["poster"][lg]}" alt="" width="1280" height="720" loading="lazy">'
+            f'<span class="ft"><a href="{R if lg == "en" else R[3:]}{h["href"]}"{lang}>{E(h["title"][lg])}</a><small>{h["len"][lg]} min · {E(h["card"][lg])}</small></span>'
+            f'<button type="button" class="seen sm" data-seen="{h["prefix"]}" data-on="{on}" data-off="{off}" aria-pressed="false" aria-label="{off}: {E(h["title"][lg])}"><i aria-hidden="true"></i><span>{off}</span></button></li>')
+
+
+PRACTICE = {"en": ("Labs seen", "Answered", "Right"), "es": ("Labs vistos", "Respondidas", "Correctas")}
+
+
+def practice_bars(lg, prefix, nl, nq):
+    """Three thin bars for a series' practice: labs seen, situations answered, right ones (path.js fills them from the store)."""
+    a, b, c = PRACTICE[lg]
+    bar = lambda k, t: f'<li><span>{t}</span><span class="pbar{" ok" if k == "ok" else ""}" data-k="{k}"><i></i></span></li>'
+    return (f'<ul class="pbars" data-practice="{prefix}" data-labs="{nl}" data-quiz="{nq}">'
+            + bar("labs", a) + bar("n", b) + bar("ok", c) + '</ul>')
+
+
+def up_next(lg, S, R):
+    """The last section of a series' page: the next series, or its topic when the topic ends there."""
+    after = next((x for x in SERIES if x["id"] == S.get("next")), None)
+    shown_ = films(after)[1] if after else []
+    if shown_:
+        RT = R if lg == "en" else R[3:]
+        c = card(lg, shown_[0], f'{RT}{after["slug"]}/', R, kicker=f'{T(lg, "Next series", "Siguiente serie")} · {SN(lg, after)} →')
+    else:
+        c = topic_card_end(lg, dict(series=S), R)
+    return (f'<section class="module" id="up-next" aria-labelledby="up-next-h">\n<div class="mhead"><div><h2 id="up-next-h">{T(lg, "Up next", "Lo que sigue")}</h2></div></div>\n'
+            f'<div class="topic-grid series-pn" data-progress-text=\'{PT[lg]}\'>\n{c}\n</div>\n</section>\n\n')
+
+
+def series_project(lg, films_):
+    """In the example project, folded: the films of the series that show its files, each linked to that list on its page."""
+    shows = [x for x in films_ if x["site"].get("repo")]
+    if not shows:
+        return ""
+    nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
+    rows = "\n".join(f'<li><b><a href="{x["key"]}/#in-the-project">{nm(x)}</a></b><span>{len(x["site"]["repo"])} {T(lg, "chapters", "capítulos")}</span></li>' for x in shows)
+    RT = "../" * 1
+    inner = (f'<p>{T(lg, "These films show real files from the example dbt project. Each film lists the files its chapters show.", "Estas películas muestran archivos reales del proyecto de dbt de ejemplo. Cada película lista los archivos que muestran sus capítulos.")}</p>\n'
+             f'<ul class="repo-list">\n{rows}\n</ul>')
+    n = len(shows)
+    return fold(lg, "in-the-project", T(lg, "In the example project", "En el proyecto de ejemplo"), inner,
+                T(lg, f"{n} film{'s' * (n != 1)} show its files", f"{n} película{'s' * (n != 1)} muestra{'n' * (n != 1)} sus archivos"))
+
+
 def next_series(f):
     """The series to watch after f's ("next" in SERIES), with its films on the site, if f is the last film its series plans and that
     series has a film on the site; else None."""
@@ -1043,20 +1103,30 @@ def series_page(lg, series, films_, S=FW):
     out = outside(S)  # its films whose pages are written by hand, among the others by number
     pics = [p for _, p in sorted([(x["index"], f'{x["key"]}-poster.jpg') for x in films_] + [(n - 1, h["poster"][lg]) for n, _, h, _ in out])]
     posters = [f'<img src="{R}assets/{p}" alt="">' for p in pics] * (8 if len(pics) < 4 else 2)
+    h += f'<link rel="stylesheet" href="{R}assets/learn/pages.css">\n'
+    order = sorted([(x["index"], x["prefix"], f'{x["key"]}/', x["title"] if lg == "en" else x["site"]["title_es"]) for x in films_]
+                   + [(n - 1, hh["prefix"], (R if lg == "en" else R[3:]) + hh["href"], hh["title"][lg]) for n, _, hh, _ in out], key=lambda t: t[0])
+    cont = ("" if not order else
+            f'<p class="cont"><a class="btn primary" href="{order[0][2]}" data-continue="{html.escape(json.dumps([[p, u, t] for _, p, u, t in order], ensure_ascii=False), quote=True)}" '
+            f'data-start="{T(lg, "Start", "Empieza")}" data-go="{T(lg, "Continue", "Sigue")}" data-again="{T(lg, "Watch again", "Ver de nuevo")}">{T(lg, "Start", "Empieza")}: {E(order[0][3])} →</a>'
+            f'<span class="fprog" data-series-text=\'{ST[lg]}\'><span data-films="{" ".join(p for _, p, _, _ in order)}" hidden></span></span></p>\n')
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">' + "".join(posters[:8]) + '</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S)}\n'
-            f'<h1>{SN(lg, S)}</h1>\n<p class="lead">{E(series[T(lg, "lead", "lead_es")])}</p>\n{draft_note(lg, series.get("draft"))}</section>\n'
+            f'<h1>{SN(lg, S)}</h1>\n<p class="lead">{E(series[T(lg, "card", "card_es")])}</p>\n{draft_note(lg, series.get("draft"))}'
+            + cont
+            + '</section>\n'
             + (series_course(lg, S, SL, series, films_, 0) + "\n" if SL else "") + '\n'
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{T(lg, "The films", "Las películas")}</h2><p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n'
-            f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n'
-            + "\n".join(c for _, c in sorted([(x["index"], card(lg, x, "", R)) for x in films_] + [(n - 1, outside_card(lg, S, n, h, R)) for n, _, h, _ in out]))
-            + '\n</div>\n</section>\n\n')
+            f'<ol class="frows">\n'
+            + "\n".join(c for _, c in sorted([(x["index"], film_row(lg, x, "", R)) for x in films_] + [(n - 1, outside_row(lg, S, n, h, R)) for n, _, h, _ in out], key=lambda t: t[0]))
+            + '\n</ol>\n</section>\n\n')
     if SL:
         nl, nq = SL["labs"], SL["quiz"]
-        body += (f'<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">\n<div class="mhead"><div><h2 id="learn-h">{T(lg, "Take it apart, then make the call", "Desarma, y luego tú decides")}</h2><p>'
+        body += (f'<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">\n<div class="mhead"><div><h2 id="learn-h">{T(lg, "Practise", "Practica")}</h2><p>'
                  + E(learn_text(lg, S, series, "learn_p")) + T(lg, " Your progress stays in this browser.", " Tu avance queda en este navegador.")
-                 + f'</p></div></div>\n<p class="stop-nav"><a class="btn primary" href="labs/">{T(lg, "Take it apart", "Desarma")}: {nl} {T(lg, "hands-on lab" + "s" * (nl != 1), "lab interactivo" if nl == 1 else "labs interactivos")} →</a>'
+                 + f'</p></div></div>\n{practice_bars(lg, SL["prefix"], nl, nq)}\n<p class="stop-nav"><a class="btn primary" href="labs/">{T(lg, "Take it apart", "Desarma")}: {nl} {T(lg, "hands-on lab" + "s" * (nl != 1), "lab interactivo" if nl == 1 else "labs interactivos")} →</a>'
                  f'<a class="btn" href="scenarios/">{T(lg, "Make the call", "Tú decides")}: {nq} {T(lg, "situations", "situaciones")}</a></p>\n</section>\n\n')
+    body += series_project(lg, films_)
     if "coming" in series:
         out = {x["index"] + 1 for x in films_}  # a film that is out leaves the list by itself
         rows = "\n".join(f'<li><span class="n">{i}</span><span><b>{E(t)}</b> · {E(d)}</span></li>' for i, t, d in series[T(lg, "coming", "coming_es")] if i not in out)
@@ -1064,6 +1134,7 @@ def series_page(lg, series, films_, S=FW):
                  f'<ol class="series-list coming">\n{rows}\n</ol>\n</section>\n\n')
     # a series page keeps its films, its labs and scenarios and the films to come: the recaps it once had (its thread, the
     # table of what each film opens with, the people at the table) are in the films themselves (Rodrigo, 19 November 2026)
+    body += up_next(lg, S, R)
     body += ('</main>\n'
              f'{foot(lg, S, learn, bool(SL), also=" ".join(x["site"][T(lg, "fiction_series", "fiction_series_es")] for x in films_ if "fiction_series" in x["site"]))}\n<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body

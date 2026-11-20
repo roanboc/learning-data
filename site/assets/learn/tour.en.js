@@ -5,6 +5,8 @@ window.LD_TOUR_STEPS={
  steps:[
   {sel:"header.top nav",title:"Two places",text:"Start here plays the introduction. Topics holds everything else."},
   {sel:"header.top .proj",title:"The example data project",text:"The box opens the project behind many films: its map, its files and how to run it."},
+  {sel:".sbar",title:"Where this film sits",text:"Its place in the series. Each step is a film: green once watched. Select one to go to it."},
+  {sel:".seen",title:"Mark watched",text:"Your progress stays in this browser. Watched it on another device? Mark it here."},
   {sel:".player",title:"The film",text:"Press Play. The buttons under the film jump to any chapter."},
   {sel:"#think",title:"Pause and think",text:"When it's on, the film stops at the end of chapters with one question. Turn it off to watch straight through."},
   {sel:"#cc",title:"Captions",text:"Turn the captions on or off. The Spanish pages have them in Spanish."},

@@ -73,10 +73,10 @@
       "Yusuf Demir, responsable de gobernanza de datos, que es dueño de los riesgos para los datos personales en el traslado"
     ]
   ],
-  "learn_p": "{Labs} decision playgrounds, one for each film, where choices play out quarter by quarter and month by month; then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs de decisiones, uno por película, donde las decisiones se desarrollan trimestre a trimestre y mes a mes; y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} decision playgrounds, one for each film. Make a data manager's choices, play them out, and watch what follows: a case over five years, the risks of a year, the people at the table, one list of work.",
-  "labs_lead_es": "{Labs} labs de decisiones, uno por película. Toma las decisiones de una gestora de datos, juégalas y mira qué pasa: un caso a cinco años, los riesgos de un año, las personas en la mesa, una sola lista de trabajo.",
+  "learn_p": "{Labs} labs: a decision playground for each film, where choices play out quarter by quarter and month by month, and one more to sort, pick or write; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs: uno de decisiones por película, donde las decisiones se desarrollan trimestre a trimestre y mes a mes, y otro para ordenar, elegir o escribir; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} labs, a decision playground for each film and one more beside it. Make a data manager's choices, play them out, and watch what follows: a case over five years, the risks of a year, the people at the table, one list of work.",
+  "labs_lead_es": "{Labs} labs, uno de decisiones por película y otro a su lado. Toma las decisiones de una gestora de datos, juégalas y mira qué pasa: un caso a cinco años, los riesgos de un año, las personas en la mesa, una sola lista de trabajo.",
   "quiz_lead": "{quiz} situations from every film, about making the case for data work. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre cómo construir el caso del trabajo con datos. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

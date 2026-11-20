@@ -1,9 +1,9 @@
-/* Learning Data: the learning route (route.js) and the Topics page's two views (topics.js): the route and the list.
+/* Learning Data: the learning route (route.js) and the Topics page's three views (topics.js): the list, the route and Progress (progress.js).
    Loaded only by the pages that show them, so the films' pages don't carry it. Colours come from site.css's tokens, so
    both views follow the visitor's theme; a line's colour is --c: the suggested route (the accent), and the two loops. */
-.route,.list-view{--r-main:var(--accent);--r-share:#8a5600;--r-agents:#6a4fcf}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .route,:root:not([data-theme=light]) .list-view{--r-share:#ffc860;--r-agents:#b9a2ff}}
-[data-theme=dark] .route,[data-theme=dark] .list-view{--r-share:#ffc860;--r-agents:#b9a2ff}
+.route,.list-view,.prog{--r-main:var(--accent);--r-share:#8a5600;--r-agents:#6a4fcf}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .route,:root:not([data-theme=light]) .list-view,:root:not([data-theme=light]) .prog{--r-share:#ffc860;--r-agents:#b9a2ff}}
+[data-theme=dark] .route,[data-theme=dark] .list-view,[data-theme=dark] .prog{--r-share:#ffc860;--r-agents:#b9a2ff}
 .ln-main{--c:var(--r-main)}.ln-share{--c:var(--r-share)}.ln-agents{--c:var(--r-agents)}
 .route-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
@@ -205,3 +205,47 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 .pj-films summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;padding:12px 0;cursor:pointer;min-height:24px}
 .pj-ft{font-weight:800;font-size:16px}.pj-films summary small{color:var(--muted);font-size:13.5px}
 .pj-films details[open]{padding-bottom:12px}.pj-films .film-links{margin-top:0}
+
+/* the learning route: the link to Progress, and hiding the topics a chosen route doesn't pass through */
+.r-links{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin:-6px 0 18px;font-size:15px}
+.r-links a{font-weight:700}
+.r-hide-b{display:inline-flex;gap:8px;align-items:center;color:var(--muted);cursor:pointer}
+.r-hide-b input{width:18px;height:18px;accent-color:var(--accent)}
+.r-hide .r-st.dim,.r-hide .r-gl.dim,.r-hide .r-loop.dim{visibility:hidden}
+.r-hide .r-rs.dim{display:none}
+.r-narrow .r-links{margin:12px 0 0}
+
+/* Progress: the chosen route, progress on it in two lines of bars, and a tile for each of its topics */
+.progress-view{margin-top:28px}
+.prog{display:grid;gap:22px}
+.pg-head h3{margin:4px 0 12px;font-size:26px}
+.pg-head .r-goals{margin:0 0 10px}
+.pg-links{margin:0;font-size:15px}.pg-links a{font-weight:700}
+.pg-sum{display:grid;gap:12px;padding:20px 22px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.pg-sum .btn{justify-self:start;margin-top:4px}
+.pg-l{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+.pg-b{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;min-width:0}
+.pg-b small{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.pg-t{height:6px;border-radius:3px;background:color-mix(in srgb,var(--fg) 12%,transparent);overflow:hidden}
+.pg-t i{display:block;height:100%;border-radius:3px;background:var(--accent)}
+.pg-b.ok .pg-t i{background:var(--good,#2f9e5b)}
+.pg-ic{width:20px;height:20px;fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pg-ic .f{fill:var(--muted);stroke:none}
+.pg-key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0;font-size:13.5px;color:var(--muted)}
+.pg-key span{display:inline-flex;gap:6px;align-items:center}
+.pg-g .ix-gh{margin:0 0 10px}
+.pg-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.pg-tile a{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;height:100%;box-sizing:border-box;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--fg);text-decoration:none}
+.pg-tile a:hover{border-color:var(--c)}
+.pg-tile.next a{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset}
+.pg-tile.off{opacity:.55}
+.pg-tb{display:grid;gap:8px;min-width:0}
+.pg-tb b{font-size:17px}
+.pg-tb small{color:var(--muted);font-size:13.5px}
+.pg-tb .pg-l{grid-template-columns:1fr;gap:6px}
+.pg-ring .d-track{fill:none;stroke:var(--c);stroke-width:3.5;opacity:.3}
+.pg-ring .d-arc{fill:none;stroke:var(--c);stroke-width:3.5;stroke-linecap:round}
+.pg-ring .d-check{fill:none;stroke:var(--c);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.pg-more{margin:0}
+@media (max-width:640px){.pg-l{grid-template-columns:1fr}.pg-tiles{grid-template-columns:1fr}}
+.pg-tb .r-pill{justify-self:start}

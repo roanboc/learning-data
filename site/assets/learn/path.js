@@ -8,6 +8,7 @@
    - Progress on topic cards: [data-progress="<prefix>"] (optional data-labs, data-quiz) inside [data-progress-text]; on a series' card,
      how many of its films were watched: [data-films="<prefix> <prefix>…"] inside [data-series-text].
    - Mark watched: [data-seen="<prefix>"] toggles that film's "watched" by hand; [data-w="<prefix>"] (the series bar in a film's hero) gets .w once it is watched.
+   - window.LD_STATS(prefix, labs, situations) gives the counts to progress.js, the Topics page's Progress view.
    - A chapter link (#t=89) scrolls to #watch, with or without a stepper.
    - On the home page only (data-home), old one-page links (#explore, #practise) go to their own pages.
    Prefixes: "ld" The Inner Life of Data; "ld3" A Sharper Sketch (a historical name: renaming it would erase visitors' progress);
@@ -21,6 +22,8 @@ const stats=p=>{const s=store(p),q=s.get("quiz",{})||{},a=q.ans||q,ans=Object.ke
   return{watched:!!s.get("watched",false),labs:Array.isArray(v)?v.length:0,n:ans.length,ok:ans.filter(x=>x.ok).length};};
 // a visitor may hold progress on labs and scenarios that were since removed: never count more than there are
 const cap=(st,nl,nq)=>{st.labs=Math.min(st.labs,nl);st.n=Math.min(st.n,nq);st.ok=Math.min(st.ok,st.n);return st;};
+// the Topics page's Progress view (progress.js) counts with the same keys
+window.LD_STATS=(p,nl,nq)=>cap(stats(p),nl,nq);
 const path=document.querySelector(".path[data-text]");
 // the home page used to hold the labs (#explore, #explore-refine) and the scenarios (#practise)
 const old=location.hash.match(/^#(explore|practise)(?:[-/](\w+))?$/);

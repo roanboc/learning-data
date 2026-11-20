@@ -21,7 +21,7 @@ Jun Park's agent now works on the census-day count, the number the university re
 | [Why Unity Catalog and Unity Gateway govern them](https://data.learn-all.org/agents-at-work-on-data/unity-catalog-and-ai-gateway/) | Agents under the same rules | 8½ min | 8 | 3 questions | [script](8-unity-catalog-and-ai-gateway/script.md) · [source](8-unity-catalog-and-ai-gateway/source/README.md) |
 | [Context and memory, governed](https://data.learn-all.org/agents-at-work-on-data/context-and-memory-governed/) | Governed first, memory second | 8½ min | 6 | 3 questions | [script](9-context-and-memory-governed/script.md) · [source](9-context-and-memory-governed/source/README.md) |
 
-For the whole series, on the site: [9 labs](https://data.learn-all.org/agents-at-work-on-data/labs/) and [12 scenarios](https://data.learn-all.org/agents-at-work-on-data/scenarios/), in English and Spanish, from the words in [site/assets/agents-at-work-on-data/](../../site/assets/agents-at-work-on-data/).
+For the whole series, on the site: [18 labs](https://data.learn-all.org/agents-at-work-on-data/labs/) and [12 scenarios](https://data.learn-all.org/agents-at-work-on-data/scenarios/), in English and Spanish, from the words in [site/assets/agents-at-work-on-data/](../../site/assets/agents-at-work-on-data/).
 <!-- /films -->
 
 ## The look and the sound

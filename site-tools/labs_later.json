@@ -3,7 +3,6 @@
  "films": {
   "model-the-business": [1],
   "business-architecture-for-data": [1, 2, 3, 4, 5],
-  "platform-and-solution-architecture": [1, 2, 3, 4, 5, 6, 7, 8],
   "continuous-architecture": [1, 2, 3],
   "ai-architecture": [1, 2, 3],
   "agents-at-work-on-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],

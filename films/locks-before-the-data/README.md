@@ -21,7 +21,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 | [From a branch to production](https://data.learn-all.org/locks-before-the-data/from-a-branch-to-production/) | A reviewed path to production | 9 min | 8 | 3 questions | [script](8-from-a-branch-to-production/script.md) · [source](8-from-a-branch-to-production/source/README.md) |
 | [Who did what](https://data.learn-all.org/locks-before-the-data/who-did-what/) | Seeing who did what | 9 min | 10 | 3 questions | [script](9-who-did-what/script.md) · [source](9-who-did-what/source/README.md) |
 
-For the whole series, on the site: [9 labs](https://data.learn-all.org/locks-before-the-data/labs/) and [12 scenarios](https://data.learn-all.org/locks-before-the-data/scenarios/), in English and Spanish, from the words in [site/assets/locks-before-the-data/](../../site/assets/locks-before-the-data/).
+For the whole series, on the site: [18 labs](https://data.learn-all.org/locks-before-the-data/labs/) and [12 scenarios](https://data.learn-all.org/locks-before-the-data/scenarios/), in English and Spanish, from the words in [site/assets/locks-before-the-data/](../../site/assets/locks-before-the-data/).
 <!-- /films -->
 
 ## The look and the sound

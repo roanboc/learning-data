@@ -460,7 +460,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-from-tables-to-decisions",
-      3,
+      6,
       9
      ]
     },

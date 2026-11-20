@@ -4,10 +4,9 @@
   "model-the-business": [1],
   "enterprise-architecture": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
   "business-architecture-for-data": [1, 2, 3, 4, 5],
-  "data-architecture": [1, 2, 3, 4, 5, 6],
   "platform-and-solution-architecture": [1, 2, 3, 4, 5, 6, 7, 8],
   "continuous-architecture": [1, 2, 3],
-  "what-an-agent-is": [1, 9],
+  "ai-architecture": [1, 2, 3],
   "agents-at-work-on-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],
   "from-helper-to-colleague": [1, 2, 3, 4, 5, 6, 7],
   "data-that-moves": [1, 2, 3, 4],
@@ -18,13 +17,7 @@
   "locks-before-the-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],
   "only-what-you-may-see": [1, 2, 3, 4, 5, 6, 7, 8],
   "kept-for-a-reason": [1, 2, 3, 4, 5],
-  "fit-for-use": [1, 2, 3, 4],
   "quality-as-a-habit": [1, 2, 3, 4],
-  "people-first": [1, 2, 3, 4],
-  "the-new-skills": [1, 2, 3],
-  "working-with-people": [1, 2, 3],
-  "leading-a-data-team": [1, 2, 3, 4],
-  "ownership-and-performance": [1, 2, 3, 4],
   "small-steps-measured": [1, 2, 3, 4]
  }
 }

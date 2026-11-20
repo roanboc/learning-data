@@ -8,11 +8,7 @@
     "wd_hall.js",
     "scenes.js"
   ],
-  "poster": [
-    "again",
-    "walks",
-    1.4
-  ],
+  "poster": ["gates", "gates", 5.11],
   "say": [
     [
       "\\bOkafor\\b",

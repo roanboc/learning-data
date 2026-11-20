@@ -29,5 +29,6 @@
   "past_es": [
     "Comienza el Proyecto Cybersyn, Chile, 1971",
     "Antes de cualquier computadora, los ingenieros dibujaron cómo funcionaba cada fábrica, y solo entonces eligieron qué medir."
-  ]
+  ],
+  "tile": [250, 500, 440]
 }

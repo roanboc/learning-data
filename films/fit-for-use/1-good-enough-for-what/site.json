@@ -98,5 +98,6 @@
         "href_es": "https://www.dama.org/cpages/body-of-knowledge"
       }
     ]
-  }
+  },
+  "tile": [440, 360, 480]
 }

@@ -88,5 +88,6 @@
         "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/"
       }
     ]
-  }
+  },
+  "tile": [220, 380, 440]
 }

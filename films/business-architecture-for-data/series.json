@@ -62,10 +62,10 @@
       "Ama Owusu, la responsable regulatoria"
     ]
   ],
-  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: settle what a count means, draft concepts from a reference model, fix a matrix, draw processes to the right depth, and run a billing day.",
-  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: decide qué cuenta un número, esboza conceptos desde un modelo de referencia, arregla una matriz, dibuja procesos a la profundidad justa y corre un día de facturación.",
+  "learn_p": "{Labs} labs: a playground for each film, with experiments to make happen, and more beside it to sort, pick and write; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs: uno interactivo por película, con experimentos que hacer pasar, y más a su lado para clasificar, elegir y escribir; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} labs, a playground for each film and more beside it. Switch, pick and press, and watch what happens: settle what a count means, draft concepts from a reference model, fix a matrix, draw processes to the right depth, and run a billing day.",
+  "labs_lead_es": "{Labs} labs, uno interactivo por película y más a su lado. Cambia, elige y aprieta, y mira qué pasa: decide qué cuenta un número, esboza conceptos desde un modelo de referencia, arregla una matriz, dibuja procesos a la profundidad justa y corre un día de facturación.",
   "quiz_lead": "{quiz} situations from every film, about what the business owns in its data. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre lo que pertenece al negocio en sus datos. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

@@ -29,5 +29,6 @@
     "Sus 190 parámetros se escribieron antes de que la planta de prueba hiciera agua, unos expertos la midieron con ellos durante dos años, y luego 60,000 personas levantaron una botella y bebieron."
   ],
   "next_h": "You've seen why the check comes before the agent starts. Next: the ways an agent goes wrong, and a design for each.",
-  "next_h_es": "Viste por qué la verificación va antes de que el agente empiece. Después: las formas en que falla un agente, y un diseño para cada una."
+  "next_h_es": "Viste por qué la verificación va antes de que el agente empiece. Después: las formas en que falla un agente, y un diseño para cada una.",
+  "tile": [380, 520, 380]
 }

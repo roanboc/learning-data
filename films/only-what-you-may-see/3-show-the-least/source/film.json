@@ -8,11 +8,7 @@
     "sl_cards.js",
     "scenes.js"
   ],
-  "poster": [
-    "least",
-    "end",
-    1.0
-  ],
+  "poster": ["ballot", "roll", 5.16],
   "say": [
     [
       "\\bJun\\b",

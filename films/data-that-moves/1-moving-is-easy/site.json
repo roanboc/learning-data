@@ -101,5 +101,6 @@
         "href_es": "https://docs.getdbt.com/docs/build/data-tests"
       }
     ]
-  }
+  },
+  "tile": [420, 320, 480]
 }

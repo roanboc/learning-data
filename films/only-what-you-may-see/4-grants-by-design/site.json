@@ -87,5 +87,6 @@
         "href_es": "https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners"
       }
     ]
-  }
+  },
+  "tile": [800, 400, 640]
 }

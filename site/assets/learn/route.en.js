@@ -238,7 +238,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-continuous-architecture",
-      3,
+      6,
       6
      ]
     },

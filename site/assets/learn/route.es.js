@@ -170,7 +170,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-business-architecture-for-data",
-      5,
+      10,
       12
      ]
     },
@@ -421,7 +421,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-data-that-moves",
-      4,
+      8,
       12
      ]
     },

@@ -863,7 +863,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-architecture-that-keeps-up",
-      3,
+      6,
       9
      ]
     },

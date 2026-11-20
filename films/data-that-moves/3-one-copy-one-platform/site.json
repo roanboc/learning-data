@@ -68,5 +68,6 @@
         "href_es": "https://docs.databricks.com/aws/en/oltp/projects/sync-tables"
       }
     ]
-  }
+  },
+  "tile": [400, 300, 480]
 }

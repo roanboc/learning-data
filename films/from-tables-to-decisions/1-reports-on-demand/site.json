@@ -110,5 +110,6 @@
         "href_es": "https://learn.microsoft.com/es-es/azure/databricks/uc-semantics/metric-views/"
       }
     ]
-  }
+  },
+  "tile": [520, 330, 520]
 }

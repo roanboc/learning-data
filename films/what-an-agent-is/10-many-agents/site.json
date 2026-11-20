@@ -74,5 +74,6 @@
         "href_es": "https://systems.learn-all.org/labs/?lang=es"
       }
     ]
-  }
+  },
+  "tile": [520, 300, 440]
 }

@@ -76,5 +76,6 @@
         "href_es": "https://teamtopologies.com/key-concepts"
       }
     ]
-  }
+  },
+  "tile": [760, 320, 640]
 }

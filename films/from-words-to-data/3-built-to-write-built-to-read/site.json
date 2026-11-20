@@ -20,5 +20,6 @@
   "quiz_lead": "Eight situations about writing and reading: a copy that was missed, half an award, a report on the busiest morning, history overwritten. Decide what you'd do; each answer explains why.",
   "quiz_lead_es": "Ocho situaciones sobre escribir y leer: una copia que se pasó por alto, medio título, un informe en la mañana más ocupada, la historia sobrescrita. Decide qué harías; cada respuesta explica por qué.",
   "past": ["Pacioli's journal and ledger, 1494", "One set of facts: a shape for writing, a shape for reading."],
-  "past_es": ["El diario y el libro mayor de Pacioli, 1494", "Un conjunto de hechos: una forma para escribir, una forma para leer."]
+  "past_es": ["El diario y el libro mayor de Pacioli, 1494", "Un conjunto de hechos: una forma para escribir, una forma para leer."],
+  "tile": [1000, 330, 440]
 }

@@ -25,5 +25,6 @@
   "next_h": "You've given every role a start, an end and an owner.",
   "next_h_es": "Le diste a cada rol un inicio, un fin y un responsable.",
   "past": ["Rome, 204 to 184 BC: Cato's ladder of offices, each held for a year, and the census", "Each role has its start and its end, and the person outlives them all."],
-  "past_es": ["Roma, del 204 al 184 a. C.: la escalera de cargos de Catón, cada uno por un año, y el censo", "Cada rol tiene su inicio y su fin, y la persona los sobrevive a todos."]
+  "past_es": ["Roma, del 204 al 184 a. C.: la escalera de cargos de Catón, cada uno por un año, y el censo", "Cada rol tiene su inicio y su fin, y la persona los sobrevive a todos."],
+  "tile": [380, 380, 640]
 }

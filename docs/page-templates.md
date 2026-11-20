@@ -56,7 +56,7 @@ The numbers match the numbered blocks in each HTML template.
 ### Series page
 
 1. **Hero.** Breadcrumb, the title, one line, progress, and *Continue* to the next film not yet watched.
-2. **The films.** Numbered compact rows: poster, title, minutes, and *Mark watched*.
+2. **The films.** Numbered compact rows: tile, title, minutes, and *Mark watched*. The tile is a square close-up of the film's poster, on one thing the film is about, and no two tiles of a page look alike (`site-tools/tiles.py`).
 3. **Practise.** The same strip as the topic page (labs seen, answered, right) with one button. Under it, links to all labs and to the evaluation.
 4. **In the example project,** folded. Only when its films show project files.
 5. **Films to come.** Only while the series is being made.

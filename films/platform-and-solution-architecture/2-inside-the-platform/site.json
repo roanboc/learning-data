@@ -31,5 +31,6 @@
   "past_es": [
     "La posta de Hakone, Japón, 1618",
     "El tramo más duro del camino necesitaba una posta propia, mantenida por el dueño del camino para todo viajero."
-  ]
+  ],
+  "tile": [600, 330, 380]
 }

@@ -38,5 +38,6 @@
     "once": ["macros/planning/near_award.sql", "dbt_project.yml", "models/marts/planning/_planning__semantic.yml"]
   },
   "past": ["Escoffier's kitchen brigade, the 1890s", "Each station has one job, and every plate is checked at the pass."],
-  "past_es": ["La brigada de cocina de Escoffier, década de 1890", "Cada estación tiene una tarea, y cada plato se revisa en el pase."]
+  "past_es": ["La brigada de cocina de Escoffier, década de 1890", "Cada estación tiene una tarea, y cada plato se revisa en el pase."],
+  "tile": [510, 300, 420]
 }

@@ -75,5 +75,6 @@
         "href_es": "https://www.geocasehistoriesjournal.org/issues/volume-1-3/leaning-tower-of-pisa-behaviour-after-stabilization-operations"
       }
     ]
-  }
+  },
+  "tile": [760, 300, 480]
 }

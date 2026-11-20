@@ -77,5 +77,6 @@
         "href_es": "https://www.strc.ch/2005/Huerlimann.pdf"
       }
     ]
-  }
+  },
+  "tile": [300, 470, 420]
 }

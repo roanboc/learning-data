@@ -55,5 +55,6 @@
         "href_es": "https://www.ncsc.gov.uk/guidance/principles-for-ransomware-resistant-cloud-backups"
       }
     ]
-  }
+  },
+  "tile": [900, 220, 440]
 }

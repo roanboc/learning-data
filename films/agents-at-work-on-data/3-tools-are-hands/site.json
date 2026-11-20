@@ -29,5 +29,6 @@
     "Lee aquí, no te lleves ningún libro, no marques ninguno, no traigas fuego, y cada libro encadenado a su estante. Dale a cada mano de un agente solo lo que su trabajo necesita."
   ],
   "next_h": "You've seen why every tool is a permission, and how to give each the fewest rights. Next: memory, from one chat to the whole team.",
-  "next_h_es": "Viste por qué cada herramienta es un permiso, y cómo darle a cada una los mínimos permisos. Después: la memoria, de un chat a todo el equipo."
+  "next_h_es": "Viste por qué cada herramienta es un permiso, y cómo darle a cada una los mínimos permisos. Después: la memoria, de un chat a todo el equipo.",
+  "tile": [560, 380, 520]
 }

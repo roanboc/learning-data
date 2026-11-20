@@ -72,10 +72,10 @@
       "Sam Okafor, que fija cuánto tiempo se quedan las versiones antiguas"
     ]
   ],
-  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: give every piece its reason, an end date to every record, find a person, delete every copy.",
-  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: da a cada dato su razón, una fecha de fin a cada registro, encuentra a una persona, borra cada copia.",
+  "learn_p": "{Labs} labs: a playground for each film, with experiments to make happen, and one more to sort, pick or write; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs: uno interactivo por película, con experimentos que hacer pasar, y otro para ordenar, elegir o escribir; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} labs, a playground for each film and one more beside it. Switch, pick and press, and watch what happens: give every piece its reason, an end date to every record, find a person, delete every copy.",
+  "labs_lead_es": "{Labs} labs, uno interactivo por película y otro a su lado. Cambia, elige y aprieta, y mira qué pasa: da a cada dato su razón, una fecha de fin a cada registro, encuentra a una persona, borra cada copia.",
   "quiz_lead": "{quiz} situations from every film, about why data is kept, for how long, and how a person's request is answered. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones de todas las películas, sobre por qué se guardan los datos, cuánto tiempo, y cómo se responde el pedido de una persona. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

@@ -730,7 +730,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-kept-for-a-reason",
-      5,
+      10,
       12
      ]
     }

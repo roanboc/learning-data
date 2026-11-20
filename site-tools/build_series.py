@@ -417,7 +417,7 @@ def series_learn(S):
     if S["id"] in _LEARN:
         return _LEARN[S["id"]]
     series, films_ = films(S)
-    shown = {x["index"] + 1 for x in films_} | ({n for n, _, _ in series.get("coming", [])} if L.get("coming") else set())
+    shown = {x["index"] + 1 for x in films_} | {n for n, _, _, _ in outside(S)} | ({n for n, _, _ in series.get("coming", [])} if L.get("coming") else set())
     out = dict(dir=L["dir"], engine=L.get("engine", L["dir"]), lazy=bool(L.get("lazy")), prefix="ld-" + S["id"], bundle=None if L.get("bundle") is False else L.get("bundle") or (films_[-1]["key"] if films_ else None), films=sorted(shown))
     for lg in ("en", "es"):
         p = WEB / "assets" / L["dir"] / f"learn.{lg}.js"
@@ -458,9 +458,10 @@ HAND = {
                   card={"en": "Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.",
                         "es": "Sigue una inscripción desde un toque en el teléfono hasta una decisión, pasando por Databricks y dbt."},
                   note={"en": "English and Spanish", "es": "En español e inglés"}),
-    "sketch": dict(href="sketch/", source="films/a-sharper-sketch", learning=["site/assets/sketch/sketch.js"],
+    "sketch": dict(href="sketch/", source="films/a-sharper-sketch",
                    title={"en": "A Sharper Sketch", "es": "A Sharper Sketch"}, title_lang="en",
-                   poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "7½", "es": "7½"}, labs=6, quiz=12, prefix="ld3",
+                   poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "7½", "es": "7½"}, prefix="ld3",
+                   moved=("labs", "scenarios"),  # its own labs and scenarios, now its series': their old pages lead there (moved_hand_page())
                    kicker={"en": "Reference models", "es": "Modelos de referencia"},
                    card={"en": "Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?",
                          "es": "Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?"},
@@ -493,14 +494,15 @@ def outside_ids():
 
 def outside_card(lg, S, n, h, R, kicker=None):
     """The card of a series' film whose page is written by hand (outside()), as card() draws a film's: its number and topic, unless
-    kicker says otherwise. R: the way from the page to the site's root."""
+    kicker says otherwise. R: the way from the page to the site's root. Its labs and scenarios are its series' own, so, like a film
+    of a series with one pack, its card counts none of its own."""
     kicker = kicker or f'{num(lg, dict(index=n - 1, series=S))} · {h["kicker"][lg]}'
     lang = ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
-    meta = f'{h["len"][lg]} min · {h["labs"]} labs · {h["quiz"]} {T(lg, "scenarios", "situaciones")} · {SN(lg, S)}' + T(lg, "", " · En inglés")
+    meta = f'{h["len"][lg]} min · {SN(lg, S)}' + T(lg, "", " · En inglés")
     return (f'<article class="topic-card">\n<img src="{R}assets/{h["poster"][lg]}" alt="" width="1280" height="720" loading="lazy">\n<div class="tc-body">\n'
             f'<p class="kicker">{E(kicker)}</p>\n<h3{lang}><a href="{R if lg == "en" else R[3:]}{h["href"]}">{E(h["title"][lg])}</a></h3>\n'
             f'<p>{E(h["card"][lg])}</p>\n<p class="meta">{meta}</p>\n'
-            f'<p class="tc-progress" data-progress="{h["prefix"]}" data-labs="{h["labs"]}" data-quiz="{h["quiz"]}" hidden></p>\n</div>\n</article>')
+            f'<p class="tc-progress" data-progress="{h["prefix"]}" hidden></p>\n</div>\n</article>')
 
 
 # The big topics, in order: their names, who each is for, what it covers, and what it holds (an id of HAND or SERIES). The Topics
@@ -677,8 +679,8 @@ TOUR_JS = ('(function(){var h=document.currentScript.parentNode.querySelector(".
 
 
 # The hand-written pages: their header is made by header() too, and written over theirs by blocks() below.
-HAND_PAGES = ["404.html", "index.html", "labs/index.html", "scenarios/index.html", "sketch/index.html", "sketch/labs/index.html",
-              "sketch/scenarios/index.html", "when-things-go-wrong/index.html", "when-things-go-wrong/silent-change/index.html",
+HAND_PAGES = ["404.html", "index.html", "labs/index.html", "scenarios/index.html", "sketch/index.html",
+              "when-things-go-wrong/index.html", "when-things-go-wrong/silent-change/index.html",
               "when-things-go-wrong/too-good-to-be-true/index.html", "when-things-go-wrong/labs/index.html",
               "when-things-go-wrong/scenarios/index.html"]
 HAND_PAGES += ["es/" + p for p in HAND_PAGES if (WEB / "es" / p).exists()]
@@ -686,15 +688,13 @@ HAND_PAGES += ["es/" + p for p in HAND_PAGES if (WEB / "es" / p).exists()]
 
 def hand_header(rel):
     """The header of a hand-written page (its path under site/). The home page and the intro's labs and scenarios belong to
-    Start here, the rest to Topics; A Sharper Sketch's labs and scenarios, in English only, toggle to es/sketch/; the 404 page,
-    served at any address, links from the root."""
+    Start here, the rest to Topics; the 404 page, served at any address, links from the root."""
     if rel == "404.html":
         return header("en", "", "/", item=None, here="/")
     lg = "es" if rel.startswith("es/") else "en"
     path = rel[3 if lg == "es" else 0:].removesuffix("index.html")
     R = "../" * rel.count("/")
-    other = f"{R}es/sketch/" if path in ("sketch/labs/", "sketch/scenarios/") else None
-    return header(lg, path, R, cur="page" if path == "" else "true", item="start" if path in ("", "labs/", "scenarios/") else "topics", other=other)
+    return header(lg, path, R, cur="page" if path == "" else "true", item="start" if path in ("", "labs/", "scenarios/") else "topics")
 
 
 def external_nav(lg, R="", more="More options", dots=""):
@@ -1018,11 +1018,12 @@ def film_mine(lg, f, SL):
     return [x for x in SL[lg]["labs"] if x["film"] == n], sum(1 for q in SL[lg]["qs"] if q[1] == n)
 
 
-def film_learn(lg, f, SL, panel=False):
+def film_learn(lg, f, SL, panel=False, up=None):
     """A film's own lab (or labs) and its situations, among its series' labs and scenarios, as buttons; the "Where next?"
-    panel (panel) offers only the first lab."""
+    panel (panel) offers only the first lab. up: the way from the page to the series' folder, for a page outside it (outside())."""
     labs, nq = film_mine(lg, f, SL)
-    up = "" if f["series"].get("single") else "../"  # a film that stands alone has its series' labs and scenarios under its own page
+    if up is None:
+        up = "" if f["series"].get("single") else "../"  # a film that stands alone has its series' labs and scenarios under its own page
     out = [f'<a class="btn{" primary" if i == 0 else ""}" href="{up}labs/#{x["id"]}">{T(lg, "Take it apart", "Desarma")}: {E(x["name"])}{" →" if i == 0 else ""}</a>'
            for i, x in enumerate(labs[:1] if panel else labs)]
     if nq:
@@ -1031,8 +1032,8 @@ def film_learn(lg, f, SL, panel=False):
     return "".join(out)
 
 
-def film_learn_section(lg, f, SL):
-    """On a film's page: its lab and its situations, among its series' own."""
+def film_learn_section(lg, f, SL, up=None):
+    """On a film's page: its lab and its situations, among its series' own. up: as film_learn() takes it."""
     labs, nq = film_mine(lg, f, SL)
     if not labs and not nq:
         return ""
@@ -1045,9 +1046,9 @@ def film_learn_section(lg, f, SL):
     p = mine[:-1] + "." if alone else mine + T(lg, f" among the series' {nl} lab{'s' * (nl != 1)} and {SL['quiz']} situations.",
                                                f" entre {'el único lab' if nl == 1 else f'los {nl} labs'} y las {SL['quiz']} situaciones de la serie.")
     p += T(lg, " Your progress stays in this browser.", " Tu avance queda en este navegador.")
-    every = "" if alone else f'<a class="btn" href="../labs/">{T(lg, "Every lab", "Todos los labs")}</a>'
+    every = "" if alone else f'<a class="btn" href="{"../" if up is None else up}labs/">{T(lg, "Every lab", "Todos los labs")}</a>'
     return (f'<section class="module" id="take-it-apart" aria-labelledby="take-h">\n<div class="mhead"><div><h2 id="take-h">{T(lg, "Take it apart, then make the call", "Desarma, y luego tú decides")}</h2><p>{p}</p></div></div>\n'
-            f'<p class="stop-nav">{film_learn(lg, f, SL)}{every}</p>\n</section>\n\n')
+            f'<p class="stop-nav">{film_learn(lg, f, SL, up=up)}{every}</p>\n</section>\n\n')
 
 
 def learn_films(lg, S, series, films_):
@@ -1057,12 +1058,14 @@ def learn_films(lg, S, series, films_):
     their versions (v, lv: asset_v()), as a page's links do."""
     vers = lambda k, lg: {n: asset_v(f) for n, f in (("v", f"assets/{k}/film.js"), ("lv", f"assets/{k}/learn.{lg}.js")) if (WEB / f).is_file()}
     by = {x["index"] + 1: x for x in films_}
+    hand = {n: h for n, _, h, _ in outside(S)}  # its films whose pages are written by hand: their page, from the labs and scenarios pages
     coming = {n: t for n, t, _ in series.get(T(lg, "coming", "coming_es"), [])}
     out = {}
     for n in series_learn(S)["films"]:
-        x = by.get(n)
+        x, h = by.get(n), hand.get(n)
         out[n] = (dict(t=x["title"] if lg == "en" else x["site"]["title_es"], k=x["key"], **vers(x["key"], lg), href="../" if S.get("single") else f'../{x["key"]}/', starts={k: math.ceil(v) for k, v in x["starts"].items()})
-                  if x else dict(t=coming.get(n, ""), coming=1))
+                  if x else dict(t=h["title"][lg], href=f'../../{h["href"]}', starts={k: math.ceil(v) for k, v in timing(ROOT / h["source"] / "source")[0].items()})
+                  if h else dict(t=coming.get(n, ""), coming=1))
     return json.dumps(out, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -1123,20 +1126,25 @@ def series_learn_page(lg, S, series, films_, which):
     return h + "</head>\n" + body
 
 
-def moved_page(lg, S, f, which):
+def moved_page(lg, S, f, which, up="../../", name=None):
     """The old labs or scenarios page of a film whose series now has one pack for all its films: it leads to the film's lab in the
-    pack (the labs page), or to its situation (the scenarios page), so old links keep working."""
+    pack (the labs page; a link to one of its labs by name lands on that lab), or to its situation (the scenarios page), so old links
+    keep working. up: the way from the page to the series' folder; name: the film's, for a film whose page is written by hand
+    (moved_hand_pages())."""
     SL = series_learn(S); n = f["index"] + 1
     mine = [x["id"] for x in SL[lg]["labs"] if x["film"] == n]
-    to = f'../../labs/{"#" + mine[0] if mine else ""}' if which == "labs" else f'../../scenarios/{"#film-%d" % n if any(q[1] == n for q in SL[lg]["qs"]) else ""}'
-    name = f["title"] if lg == "en" else f["site"]["title_es"]
+    to = f'{up}labs/{"#" + mine[0] if mine else ""}' if which == "labs" else f'{up}scenarios/{"#film-%d" % n if any(q[1] == n for q in SL[lg]["qs"]) else ""}'
+    # a film with several labs in the pack: an old link to one of them by its name (#id) lands on it, and any other on the first
+    go = (f'var h=location.hash.slice(1);location.replace("{up}labs/#"+({json.dumps(mine, separators=(",", ":"))}.indexOf(h)<0?"{mine[0]}":h));'
+          if which == "labs" and len(mine) > 1 else f'location.replace("{to}");')
+    name = name or (f["title"] if lg == "en" else f["site"]["title_es"])
     what = T(lg, "Take it apart" if which == "labs" else "Make the call", "Desarma" if which == "labs" else "Tú decides")
     say = T(lg, f'The labs and situations of <i>{E(name)}</i> are now part of one pack for the whole series, <i>{E(SN(lg, S))}</i>: they\'re <a href="{to}">here</a>.',
             f'Los labs y las situaciones de <i>{E(name)}</i> son ahora parte de un solo paquete para toda la serie, <i>{E(SN(lg, S))}</i>: están <a href="{to}">aquí</a>.')
     return (f'<!doctype html><html lang="{lg}"><head><meta charset="utf-8"><title>{what} · {E(SN(lg, S))} · Learning Data</title><meta name="robots" content="noindex">\n'
             f'<link rel="canonical" href="{BASE}{"es/" if lg == "es" else ""}{S["slug"]}/{which}/">\n'
             f'<!-- made by site-tools/build_series.py: the series has one pack of labs and scenarios for all its films -->\n'
-            f'<script>location.replace("{to}");</script><meta http-equiv="refresh" content="0; url={to}"></head>\n'
+            f'<script>{go}</script><meta http-equiv="refresh" content="0; url={to}"></head>\n'
             f'<body><p>{say}</p></body></html>\n')
 
 
@@ -2953,6 +2961,12 @@ def block(lg, what, R, rel, films_, S=FW, page=""):
     return card(lg, films_[0], rel, R, kicker=kicker) + "\n"
 
 
+def learn_marks(S, part):
+    """The marks around a block of a series with one pack, on the page of its film written by hand (outside()): the film's lab and
+    situations, as buttons in its "Where next?" panel (part "next"), or as their own section (part "labs")."""
+    return f"<!-- {S['id']} {part}: made by site-tools/build_series.py -->", f"<!-- /{S['id']} {part} -->"
+
+
 def blocks():
     """The hand-written pages, with every series' blocks, the topics' tiles and their header filled in: (path under site/, html).
     A page with several blocks is listed once, with all of them filled."""
@@ -2965,6 +2979,13 @@ def blocks():
         films_ = films(S)[1]; o, c = marks(S)
         for rel_path, lg, what, R, rel in S["blocks"]:
             fill(rel_path, o, c, block(lg, what, R, rel, films_, S, rel_path))
+        SL = series_learn(S)
+        for n, _, h, _ in outside(S) if SL else ():  # a film written by hand, in a series with one pack: its lab and its situations,
+            f, up = dict(index=n - 1, series=S), "../" * h["href"].count("/") + S["slug"] + "/"  # in its "Where next?" panel and in their own section
+            for lg in ("en", "es"):
+                rel_path = ("" if lg == "en" else "es/") + h["href"] + "index.html"
+                fill(rel_path, *learn_marks(S, "next"), film_learn(lg, f, SL, True, up))
+                fill(rel_path, *learn_marks(S, "labs"), film_learn_section(lg, f, SL, up).rstrip("\n") + "\n")
     for rel_path, lg, R in TILES:
         fill(rel_path, *TILE_MARKS, tiles(lg, R))
     for rel_path, lg, R in HOME:
@@ -2988,7 +3009,8 @@ def readme(S=FW):
     for n, _, h, sec in outside(S):  # its films whose pages are written by hand, in their own folders
         up = posixpath.relpath(h["source"], f"films/{S['dir']}")
         rows.insert(1 + n, f"| [{h['title']['en']}]({BASE}{h['href']}) | {h['kicker']['en']} | {minutes(sec)} min | {len(timing(ROOT / h['source'] / 'source')[0])} | "
-                           + f"its own {h['labs']} labs and {h['quiz']} scenarios" + f" | [script]({up}/script.md) · [source]({up}/source/README.md) |")
+                           + (f"its own {h['labs']} labs and {h['quiz']} scenarios" if h.get("labs") else "none")  # a film without its own: the series' pack, below
+                           + f" | [script]({up}/script.md) · [source]({up}/source/README.md) |")
     SL = series_learn(S)
     if SL:  # the series' own, for all its films
         rows += ["", f"For the whole series, on the site: [{SL['labs']} lab{'s' if SL['labs'] != 1 else ''}]({BASE}{S['slug']}/labs/) and [{SL['quiz']} scenarios]({BASE}{S['slug']}/scenarios/), "
@@ -3102,6 +3124,10 @@ def pages():
                     if not S.get("single") and ((WEB / "assets" / f["key"] / "learn.en.js").exists() or (WEB / S["slug"] / f["key"] / "labs" / "index.html").exists()):
                         for which in ("labs", "scenarios"):
                             out.append((f'{pre}{S["slug"]}/{f["key"]}/{which}/index.html', moved_page(lg, S, f, which)))
+                for n, _, hf, _ in outside(S) if lg == "en" else ():  # a film written by hand whose own, in English only, became the series'
+                    for which in hf.get("moved", ()):
+                        out.append((f'{hf["href"]}{which}/index.html',
+                                    moved_page(lg, S, dict(index=n - 1), which, "../" * (hf["href"].count("/") + 1) + S["slug"] + "/", hf["title"][lg])))
     out += moved_series_pages()
     return [(rel, stamp(rel, text)) for rel, text in out]
 

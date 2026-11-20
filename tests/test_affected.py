@@ -31,6 +31,35 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(p["films"], [])
         self.assertTrue(p["site"])
 
+    def test_a_file_every_page_loads_checks_a_sample_of_each_kind(self):
+        p = self.plan("site/assets/site.css")
+        every = affected.loads()
+        self.assertGreater(sum("assets/site.css" in got for got in every.values()), affected.SHARED_OVER)
+        self.assertLess(len(p["pages"]), len(every) / 4)
+        self.assertTrue(set(affected.ALWAYS) <= set(p["pages"]))
+        kinds = affected.kinds({k: every[k] for k in every if "assets/site.css" in every[k]})
+        for group in kinds.values():  # every kind of page is in the sample
+            self.assertTrue(set(group) & set(p["pages"]), group[:3])
+        self.assertTrue(p["sampled"])
+
+    def test_a_series_engine_still_checks_all_its_pages(self):
+        engine = "assets/leading-data-people/learn.js"
+        users = {k for k, got in affected.loads().items() if engine in got}
+        self.assertTrue(0 < len(users) <= affected.SHARED_OVER)
+        self.assertEqual(set(self.plan("site/" + engine)["pages"]), users)
+
+    def test_shards_cover_every_page_once(self):
+        keys = sorted(affected.loads())
+        parts = affected.shards(keys)
+        self.assertLessEqual(len(parts), affected.MAX_SHARDS)
+        self.assertEqual(sorted(k for part in parts for k in part), keys)
+        self.assertEqual(affected.shards(["", "topics/"]), [["", "topics/"]])
+        p = affected.plan([], False, every_page=True)
+        self.assertIsNone(p["pages"])
+        self.assertEqual(p["films"], [])
+        self.assertTrue(p["site"] and p["browser"])
+        self.assertEqual(sorted(k for s in p["shards"] for k in json.loads(s["pages"])), keys)
+
     def test_planner_changes_do_not_schedule_all_films(self):
         p = self.plan(".github/scripts/affected.py", ".github/workflows/checks.yml")
         self.assertTrue(p["tooling"])

@@ -319,7 +319,7 @@ PLAY.expect=(Lb,api)=>{const W=Lb.w,S={level:"guess",src:false,plat:false,run:nu
     if(ran&&u<1)api.kick(60);};
   return{S,lay,draw,readouts:[[W.read.level,()=>S.level==="set"?W.read.set:W.read.guess],[W.read.est,()=>S.res?(S.res.est?W.nums.held:"0"):"–"],[W.read.heard,()=>S.res?(S.res.heard?W.read.lead:W.read.nobody):"–"]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"ba-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

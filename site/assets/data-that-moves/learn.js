@@ -315,7 +315,7 @@ PLAY.tiers=(Lb,api)=>{const W=Lb.w,NOW=W.now,YEARS=[];for(let y=NOW-10;y<=NOW;y+
       if(t<1)api.kick(60);});};
   return{S,lay,draw,readouts:[[W.read.bill,()=>fill(W.billV,{b:bill()})],[W.read.past,()=>String(past())],[W.read.read,()=>S.ask==null?"–":S.askOk?(where(S.askYear)==="hot"?W.read.secs:W.read.hours):W.read.gone]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dm-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

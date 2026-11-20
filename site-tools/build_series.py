@@ -924,13 +924,13 @@ def next_series(f):
 def topic_card_end(lg, f, R):
     """The last card of a series with no series after it: its topic, where the visitor chooses what comes next."""
     sid = f["series"]["id"]
-    return (f'<article class="pn-end">\n<div class="tc-body">\n<p class="kicker">{T(lg, "The series is done", "Terminaste la serie")} · {T(lg, "Back to the topic", "Vuelve al tema")} →</p>\n'
+    return (f'<article class="pn-end">\n<div class="tc-body">\n<p class="kicker">{T(lg, "The film is done", "Terminaste la película") if f["series"].get("single") else T(lg, "The series is done", "Terminaste la serie")} · {T(lg, "Back to the topic", "Vuelve al tema")} →</p>\n'
             f'<h3><a href="{topic_href(lg, R, sid)}">{E(topic_name(lg, sid))}</a></h3>\n<p>{T(lg, "Choose the next series of this topic, or another topic on the route.", "Elige la siguiente serie de este tema, u otro tema de la ruta.")}</p>\n</div>\n</article>')
 
 
 def series_nav(lg, f, films_, R, rel):
-    """In the series: the previous and the next film, as cards, and every film of the series, numbered, with this one marked.
-    rel is the path from the page to the series folder."""
+    """Previous and next: the previous and the next film, as cards; after a series' last film, the next series, or its topic.
+    rel is the path from the page to the series folder ("" for a film that stands alone, whose page is its series')."""
     by = {x["index"]: x for x in films_}; prv, nxt = by.get(f["index"] - 1), by.get(f["index"] + 1)
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
     hand = {n - 1: h for n, _, h, _ in outside(f["series"])}  # its films whose pages are written by hand
@@ -945,7 +945,7 @@ def series_nav(lg, f, films_, R, rel):
     lis = "\n".join(li for _, li in sorted([(x["index"], f'<li><a href="{rel}{x["key"]}/"' + (' aria-current="page"' if x is f else "") + f'><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>') for x in films_]
                            + [(i, f'<li><a href="{R if lg == "en" else R[3:]}{h["href"]}"><span class="n">{i + 1}</span><span{lang(h)}>{E(h["title"][lg])}</span></a></li>') for i, h in hand.items()]))
     return (f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "Previous and next", "Anterior y siguiente")}</h2>'
-            f'<p>{num(lg, f)} · <a href="{rel}">{SN(lg, f["series"])}</a></p></div></div>\n'
+            + ("" if f["series"].get("single") else f'<p>{num(lg, f)} · <a href="{rel}">{SN(lg, f["series"])}</a></p>') + '</div></div>\n'
             f'<div class="topic-grid series-pn" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(cards) + '\n</div>\n</section>\n')
 
 
@@ -1050,7 +1050,7 @@ def film_page(lg, f, films_, series):
             + (film_learn_section(lg, f, SL) if SL else "")
             + project_section(lg, f)
             + elsewhere_section(lg, f)
-            + ("" if alone else series_nav(lg, f, films_, R, "../")) + '</main>\n'
+            + series_nav(lg, f, films_, R, "" if alone else "../") + '</main>\n'
             f'{foot(lg, S, learn, own=s.get(T(lg, "fiction", "fiction_es")))}\n'
             + ('' if lg == "en" else '<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>\n')
             + ('' if lg == "en" else f'<script src="{R}assets/{key}/captions.es.js"></script>\n')

@@ -545,7 +545,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-when-things-go-wrong",
-      2,
+      4,
       12
      ]
     },

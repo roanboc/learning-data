@@ -15,7 +15,7 @@ The skills that help most when someone asks for data have little to do with tool
 | [Explaining so people can decide](https://data.learn-all.org/working-with-people/explaining-to-decide/) | Explaining for a decision | 9½ min | 7 | 3 questions | [script](2-explaining-to-decide/script.md) · [source](2-explaining-to-decide/source/README.md) |
 | [Saying no, and what instead](https://data.learn-all.org/working-with-people/saying-no/) | When too much is asked | 8½ min | 7 | 3 questions | [script](3-saying-no/script.md) · [source](3-saying-no/source/README.md) |
 
-For the whole series, on the site: [3 labs](https://data.learn-all.org/working-with-people/labs/) and [9 scenarios](https://data.learn-all.org/working-with-people/scenarios/), in English and Spanish, from the words in [site/assets/working-with-people/](../../site/assets/working-with-people/).
+For the whole series, on the site: [6 labs](https://data.learn-all.org/working-with-people/labs/) and [9 scenarios](https://data.learn-all.org/working-with-people/scenarios/), in English and Spanish, from the words in [site/assets/working-with-people/](../../site/assets/working-with-people/).
 <!-- /films -->
 
 ## The look and the sound

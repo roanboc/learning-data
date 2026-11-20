@@ -198,7 +198,7 @@ function labWeeks(Lb){const W=Lb.w,G=W.goals,N=W.weeks,box=h("div",{class:"lab l
       line1(ctx,U.evFirst,o.m+12,o.evY+o.evH/2+4.5,o.lw-o.m*2-24,13,{w:600,color:rgbaS(K.soft,1)});}}
   build();sayIt(W.start);paintGoals();return box;}
 
-const BUILD={weeks:labWeeks};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{weeks:labWeeks});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */

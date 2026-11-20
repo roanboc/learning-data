@@ -19,7 +19,7 @@ The series starts before technology, with how minds turn the world into words, a
 | [Meaning machines can read](https://data.learn-all.org/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 5½ min | 9 | 5 questions | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
 | [Keeping it true](https://data.learn-all.org/from-words-to-data/keeping-it-true/) | Keeping meaning current | 5 min | 10 | 5 questions | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
 
-For the whole series, on the site: [7 labs](https://data.learn-all.org/from-words-to-data/labs/) and [12 scenarios](https://data.learn-all.org/from-words-to-data/scenarios/), in English and Spanish, from the words in [site/assets/from-words-to-data/](../../site/assets/from-words-to-data/).
+For the whole series, on the site: [27 labs](https://data.learn-all.org/from-words-to-data/labs/) and [12 scenarios](https://data.learn-all.org/from-words-to-data/scenarios/), in English and Spanish, from the words in [site/assets/from-words-to-data/](../../site/assets/from-words-to-data/).
 <!-- /films -->
 
 The [proposal](proposal.md) records how the series was planned and the decisions taken on 28 September 2026: seven films, the title, the credential as the thread, and an opening film that starts before writing.

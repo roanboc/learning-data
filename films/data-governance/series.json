@@ -32,10 +32,10 @@
     ["tech", "Opera la plataforma", "Sam, que podría proteger una columna en minutos, si alguien le dijera cuál"],
     ["biz", "Informa el número", "Clara, de Planificación, que informa lo que recibe, y necesita saber en qué número confiar"]
   ],
-  "learn_p": "{Labs} playgrounds, one for each film, each with experiments to make happen; then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs interactivos, uno por película, cada uno con experimentos que hacer pasar; y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} playgrounds, one for each film. Switch, pick and press, and watch what happens: send a change to its owner, give access with an end date, set a check's level, bring in a rule before the fine.",
-  "labs_lead_es": "{Labs} labs interactivos, uno por película. Cambia, elige y aprieta, y mira qué pasa: envía un cambio a su dueña, da acceso con fecha de fin, fija el nivel de un control, trae una regla antes de la multa.",
+  "learn_p": "{Labs} labs: a playground for each film, with experiments to make happen, and more beside it to sort, pick and write; then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs: uno interactivo por película, con experimentos que hacer pasar, y más a su lado para ordenar, elegir y escribir; y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} labs, a playground for each film and more beside it. Switch, pick and press, and watch what happens: send a change to its owner, give access with an end date, set a check's level, bring in a rule before the fine.",
+  "labs_lead_es": "{Labs} labs, uno interactivo por película y más a su lado. Cambia, elige y aprieta, y mira qué pasa: envía un cambio a su dueña, da acceso con fecha de fin, fija el nivel de un control, trae una regla antes de la multa.",
   "quiz_lead": "{quiz} situations that the people who govern data really face, from every film. Decide what you'd do; each answer explains why, and points back to the playground that covers it.",
   "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes gobiernan los datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

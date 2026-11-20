@@ -212,7 +212,7 @@ PLAY.watch=(Lb,api)=>{const W=Lb.w,E=W.ev,S={contract:false,watch:"off",line:fal
   return{S,lay,draw,readouts:[[W.read.reach,()=>S.out==null?"–":S.out.reach],[W.read.pay,()=>S.out==null?"–":S.out.end==="late"?W.read.late:W.read.onTime],
     [W.read.prod,()=>S.out==null?"–":W.read.nothing]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dm-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

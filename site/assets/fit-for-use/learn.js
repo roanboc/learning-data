@@ -292,7 +292,7 @@ PLAY.clock=(Lb,api)=>{const W=Lb.w,S={miss:true,level:"week",mode:"warn",age:fal
   return{S,lay,draw,readouts:[[W.read.printer,()=>!S.end||S.run==null?"–":S.end.sent==="held"?W.read.waits:S.end.sent?fill(W.read.n,{n:S.end.n}):W.read.none],
     [W.read.missing,()=>!S.end||S.run==null?"–":S.end.sent==="missing"?String(W.nAll-W.nOld):"0"],[W.read.age,()=>S.age?W.read.shown:W.read.hidden]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"dq-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

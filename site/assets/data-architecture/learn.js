@@ -395,7 +395,7 @@ PLAY.names=(Lb,api)=>{const W=Lb.w,S={th:null,ab:null,kd:null,t:null,map:false,t
     else lines(ctx,W.cimQ,o.lw-m-rw,o.cy+17,rw,{size:12.5,max:2,w:700,align:"center",color:rgbaS(K.soft,1)});};
   return{lay,draw,readouts:[[W.read.name,()=>name()],[W.read.review,()=>{const v=verdict();return v==null?"–":v==="ok"?W.read.pass:W.read.back;}]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"da-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

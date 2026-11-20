@@ -496,7 +496,7 @@ PLAY.time=(Lb,api)=>{const W=Lb.w,M=W.msg,S={m:"now",mT:null,day:TM_NOW,d0:TM_NO
     fourCols(ctx,o.four,W.four,h1);if(h1<0.99)withA(ctx,1-h1,()=>line1(ctx,W.fourOff,o.four.x+12,o.four.y+64,o.four.w-24,13,{w:700,align:"center",color:rgbaS(K.soft,1)}));};
   return{S,lay,draw,readouts:[[W.read.day,()=>date(S.day)],[W.read.n,()=>String(said(S.day))]]};};
 
-const BUILD={play:labPlay};
+const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
 /* ---------- the labs page: a rail of stops, one lab at a time ---------- */
 if(app.id==="series-labs"){app.textContent="";const rail=h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel}),panel=h("div",{id:"pg-panel",role:"tabpanel"});const visited=new Set(get("visited",[]));

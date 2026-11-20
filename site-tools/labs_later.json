@@ -1,7 +1,6 @@
 {
  "about": "Films with fewer than two labs, the least the author asked for on 19 November 2026 (at most four). site-tools/check_site.py fails a film under two that isn't listed here, and a listed film that has two: each leaves the list with its second lab.",
  "films": {
-  "locks-before-the-data": [1, 2, 3, 4, 5, 6, 7, 8, 9],
   "only-what-you-may-see": [1, 2, 3, 4, 5, 6, 7, 8],
   "kept-for-a-reason": [1, 2, 3, 4, 5],
   "quality-as-a-habit": [1, 2, 3, 4]

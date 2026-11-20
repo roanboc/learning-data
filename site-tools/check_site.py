@@ -1553,6 +1553,58 @@ def main():
         if hero is not None and [e for e in hero.all("p", cls="eyebrow") if "crumbs" not in e.cls]:
             s["fails"].append(f"{pg.file}: an eyebrow next to the breadcrumb; the breadcrumb replaces it")
 
+    # -- page templates (docs/page-templates.md): each page type's sections, in order, under their fixed headings
+    s = rep.check("Page templates: film, series and topic pages have the template's sections in its order, under its fixed headings, extras folded, and end by leading on")
+    T_HEAD = {  # a section's heading id: its words in English and Spanish
+        "watch-h": ("Watch the film", "Mira la película"), "take-h": ("Try it", "Pruébalo"),
+        "in-the-project-h": ("In the example project", "En el proyecto de ejemplo"), "elsewhere-h": ("Go further", "Para ir más allá"),
+        "series-h": None, "films-h": ("The films", "Las películas"), "learn-h": ("Practise", "Practica"),
+        "coming-h": None, "up-next-h": None}
+    T_ORDER = {  # each page type's sections, in order; the last is required, and so are those marked
+        "film": (["watch-h", "take-h", "in-the-project-h", "elsewhere-h", "series-h"], {"watch-h", "series-h"}),
+        "series": (["films-h", "learn-h", "in-the-project-h", "coming-h", "up-next-h"], {"films-h", "up-next-h"}),
+        "topic": (["series-h", "in-the-project-h", "coming-h", "up-next-h"], {"series-h", "up-next-h"})}
+    T_LAST = {"film": ("Previous and next", "Anterior y siguiente"), "series": ("Up next", "Lo que sigue"),
+              "topic": ("Up next on the route", "Lo que sigue en la ruta"), "series-h": ("The series", "Las series")}
+    FOLDED = {"in-the-project-h", "elsewhere-h"}
+    T_SLUG = {S["slug"]: S for S in build_series.SERIES}
+    T_TOPICS = {t["id"] for t in build_series.live()}
+    counted = Counter()
+    for pg in normal:
+        parts = (pg.key[3:] if pg.es else pg.key).split("/")[:-1]
+        S = T_SLUG.get(parts[0]) if parts else None
+        if len(parts) == 2 and parts[0] == "topics" and parts[1] in T_TOPICS:
+            kind = "topic"
+        elif S is not None and len(parts) == 1:
+            kind = "film" if S.get("single") else "series"
+        elif S is not None and len(parts) == 2 and parts[1] not in ("labs", "scenarios"):
+            kind = "film"
+        else:
+            continue
+        counted[kind] += 1
+        order, need = T_ORDER[kind]
+        heads = [h for h in pg.dom.all("h2") if h.attrs.get("id")]
+        ids = [h.attrs["id"] for h in heads]
+        if any(i not in order for i in ids) or ids != sorted(ids, key=order.index):
+            s["fails"].append(f"{pg.file}: sections {ids}, expected in this order: {order}")
+            continue
+        if not need <= set(ids) or ids[-1] != order[-1]:
+            s["fails"].append(f"{pg.file}: sections {ids} lack {sorted(need - set(ids)) or [order[-1]]}: every {kind} page has them, and ends by leading on")
+            continue
+        li = 1 if pg.es else 0
+        for h in heads:
+            i = h.attrs["id"]
+            want = T_LAST[kind] if i == order[-1] else T_LAST["series-h"] if (kind, i) == ("topic", "series-h") else T_HEAD[i]
+            if want and not h.text().startswith(want[li]):
+                s["fails"].append(f"{pg.file}: the heading {i} reads \"{h.text()}\", expected \"{want[li]}\"")
+            if i in FOLDED and h.up(lambda n: n.tag == "details") is None:
+                s["fails"].append(f"{pg.file}: \"{h.text()}\" is shown open; it is folded, in a <details>")
+        if kind == "film" and not S.get("single") and not (pg.dom.first("ol", cls="sbar") and pg.dom.first(None, cls="seen")):
+            s["fails"].append(f"{pg.file}: a film's hero shows its place in the series (ol.sbar) and Mark watched (.seen)")
+        if kind in ("series", "topic") and not pg.dom.first("p", cls="cont"):
+            s["fails"].append(f"{pg.file}: a {kind} page's hero has its one main button, Continue (p.cont)")
+    s["notes"].append(", ".join(f"{n} {k} pages" for k, n in sorted(counted.items())))
+
     # -- numbering and lengths
     s = rep.check("No film numbering anywhere on the site (only allowlisted code comments)")
     t = rep.check("No stale film lengths (7½, 8, 5½, 5½ and 6 min; the journey says \"short film\")")

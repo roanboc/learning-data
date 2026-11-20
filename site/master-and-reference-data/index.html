@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css?v=6c7e05e496">
+<link rel="stylesheet" href="../assets/learn/pages.css?v=8bb9e30f49">
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg?v=9c05cdd7f4" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a></nav><a class="proj" href="../dbt-project/" aria-label="Example data project"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.9l7.9 4.55v9.1L12 21.1l-7.9-4.55v-9.1z"/><path d="M4.3 7.55 12 12l7.7-4.45M12 12v8.9"/></svg></a><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/master-and-reference-data/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="help" type="button" aria-label="How this site works" data-tour="../assets/learn/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.2 9.3a2.9 2.9 0 1 1 4.6 2.3c-1 .7-1.8 1.4-1.8 2.8"/><path d="M12 17.7v.1"/></svg></button><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><button class="extra-btn" type="button" popovertarget="top-extra" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div><div class="extra" id="top-extra" popover><a class="making" href="../journey/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17M8 5l-1.5 4M13 5l-1.5 4M18 5l-1.5 4"/></svg><span>Making of</span></a><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a class="contact" href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>LinkedIn</span></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})();(function(){var h=document.currentScript.parentNode.querySelector(".help");if(!h)return;h.addEventListener("click",function(){var m=document.getElementById("top-more");try{if(m&&m.matches(":popover-open"))m.hidePopover()}catch(e){}if(window.LD_TOUR){window.LD_TOUR.start(h);return}var p=h.getAttribute("data-tour"),l=document.documentElement.lang=="es"?"es":"en";function add(t,a,f){var e=document.createElement(t);for(var k in a)e[k]=a[k];if(f)e.onload=f;document.head.appendChild(e)}add("link",{rel:"stylesheet",href:p+"tour.css"});add("script",{src:p+"tour."+l+".js"},function(){add("script",{src:p+"tour.js"},function(){window.LD_TOUR.start(h)})})})})()</script></div></header>
@@ -18,7 +19,8 @@
 <section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/one-person-many-roles-poster.jpg?v=92bff286ce" alt=""><img src="../assets/who-is-it-poster.jpg?v=36d7b693ec" alt=""><img src="../assets/which-value-wins-poster.jpg?v=c8e8b86cab" alt=""><img src="../assets/roles-come-and-go-poster.jpg?v=100c9bd93a" alt=""><img src="../assets/lists-everyone-uses-poster.jpg?v=f0b05b1603" alt=""><img src="../assets/for-this-purpose-only-poster.jpg?v=9be2526c92" alt=""><img src="../assets/one-person-many-systems-poster.jpg?v=d4d26aa108" alt=""><img src="../assets/a-hub-at-work-poster.jpg?v=1e2e089ccd" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../topics/">Topics</a> › <a href="../topics/#master-data">Master and reference data</a> › The same one, everywhere</p>
 <h1>The same one, everywhere</h1>
-<p class="lead">A series on master and reference data. Linh graduated from the university, and now studies, tutors and does research there. She is five records in four systems, and nobody sees they are one person. Film by film, the university learns to know her as one person, keep her data right, and use it only for its purpose.</p>
+<p class="lead">One person, four systems, five records. A series on master and reference data, from the person behind the role to a hub at work.</p>
+<p class="cont"><a class="btn primary" href="one-person-many-roles/" data-continue="[[&quot;ld-one-person-many-roles&quot;, &quot;one-person-many-roles/&quot;, &quot;One person, many roles&quot;], [&quot;ld-who-is-it&quot;, &quot;who-is-it/&quot;, &quot;Who is it?&quot;], [&quot;ld-which-value-wins&quot;, &quot;which-value-wins/&quot;, &quot;Which value wins&quot;], [&quot;ld-roles-come-and-go&quot;, &quot;roles-come-and-go/&quot;, &quot;Roles come and go&quot;], [&quot;ld-lists-everyone-uses&quot;, &quot;lists-everyone-uses/&quot;, &quot;Lists everyone uses&quot;], [&quot;ld-for-this-purpose-only&quot;, &quot;for-this-purpose-only/&quot;, &quot;For this purpose only&quot;], [&quot;ld-one-person-many-systems&quot;, &quot;one-person-many-systems/&quot;, &quot;One person, many systems&quot;], [&quot;ld-a-hub-at-work&quot;, &quot;a-hub-at-work/&quot;, &quot;A hub at work&quot;], [&quot;ld-kept-not-cleaned&quot;, &quot;kept-not-cleaned/&quot;, &quot;Kept, not cleaned&quot;]]" data-start="Start" data-go="Continue" data-again="Watch again">Start: One person, many roles →</a><span class="fprog" data-series-text='{"films":"{n} of {of} films watched"}'><span data-films="ld-one-person-many-roles ld-who-is-it ld-which-value-wins ld-roles-come-and-go ld-lists-everyone-uses ld-for-this-purpose-only ld-one-person-many-systems ld-a-hub-at-work ld-kept-not-cleaned" hidden></span></span></p>
 </section>
 <nav class="course" aria-label="Course: The same one, everywhere"><div class="course-in"><p class="course-t"><small>Series · Master and reference data</small>The same one, everywhere</p><ol class="path" data-store="ld-master-and-reference-data" data-labs="9" data-quiz="12" data-series="ld-one-person-many-roles ld-who-is-it ld-which-value-wins ld-roles-come-and-go ld-lists-everyone-uses ld-for-this-purpose-only ld-one-person-many-systems ld-a-hub-at-work ld-kept-not-cleaned" data-text='{"watched": "Watched", "films": "{n} of 9 films watched", "labs": "{n} of 9 labs explored", "quiz": "{n} of 12 answered \u00b7 {ok} right"}'>
 <li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>The films</b><span>Nine films</span></a></li>
@@ -28,108 +30,44 @@
 
 <section class="module" id="films" aria-labelledby="films-h">
 <div class="mhead"><div><h2 id="films-h">The films</h2><p>Watch them in order: each film builds on the one before.</p></div></div>
-<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
-<article class="topic-card">
-<img src="../assets/one-person-many-roles-poster.jpg?v=92bff286ce" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 1 of 9 · The person behind the role</p>
-<h3><a href="one-person-many-roles/">One person, many roles</a></h3>
-<p>One person, four systems, five records. Keep the person apart from the roles, and ask four questions to know what needs mastering.</p>
-<p class="meta">6 min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-one-person-many-roles" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/who-is-it-poster.jpg?v=36d7b693ec" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 2 of 9 · Matching and the golden record</p>
-<h3><a href="who-is-it/">Who is it?</a></h3>
-<p>Two records, one person? A check proposes pairs, weights make a score, and a steward decides the hard ones once, with a reason.</p>
-<p class="meta">5½ min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-who-is-it" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/which-value-wins-poster.jpg?v=c8e8b86cab" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 3 of 9 · Survivorship</p>
-<h3><a href="which-value-wins/">Which value wins</a></h3>
-<p>Five linked records, and the values still disagree. Declare a rule for each field, not one order hidden in the code.</p>
-<p class="meta">6 min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-which-value-wins" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/roles-come-and-go-poster.jpg?v=100c9bd93a" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 4 of 9 · Roles with dates</p>
-<h3><a href="roles-come-and-go/">Roles come and go</a></h3>
-<p>A status is true for a day. Give every role a start, an end and an owner, and ask any question as at a date.</p>
-<p class="meta">5½ min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-roles-come-and-go" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/lists-everyone-uses-poster.jpg?v=f0b05b1603" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 5 of 9 · Reference data</p>
-<h3><a href="lists-everyone-uses/">Lists everyone uses</a></h3>
-<p>Three names for one role, and a country counted three times. Give each list an owner, a date and one home.</p>
-<p class="meta">4½ min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-lists-everyone-uses" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/for-this-purpose-only-poster.jpg?v=9be2526c92" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 6 of 9 · Purpose and consent</p>
-<h3><a href="for-this-purpose-only/">For this purpose only</a></h3>
-<p>Data given for one role isn't free for every role. Write each role's purposes beside its data, and keep the person's wishes with her.</p>
-<p class="meta">5 min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-for-this-purpose-only" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/one-person-many-systems-poster.jpg?v=d4d26aa108" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 7 of 9 · Sharing master data</p>
-<h3><a href="one-person-many-systems/">One person, many systems</a></h3>
-<p>Four ways to give many systems one person. Search before you create, and choose the lightest way that solves the problem.</p>
-<p class="meta">4½ min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-one-person-many-systems" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/a-hub-at-work-poster.jpg?v=1e2e089ccd" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 8 of 9 · A master data hub</p>
-<h3><a href="a-hub-at-work/">A hub at work</a></h3>
-<p>Rules act, AI suggests, people decide: a week in a master data hub, and five questions to ask any hub.</p>
-<p class="meta">4½ min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-a-hub-at-work" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/kept-not-cleaned-poster.jpg?v=17208482a7" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 9 of 9 · Keeping master data</p>
-<h3><a href="kept-not-cleaned/">Kept, not cleaned</a></h3>
-<p>A clean-up merged two thousand duplicates, and a year later there were eleven hundred new ones. Check at entry, measure every day, and keep it.</p>
-<p class="meta">5½ min · Pause and think · The same one, everywhere</p>
-<p class="tc-progress" data-progress="ld-kept-not-cleaned" hidden></p>
-</div>
-</article>
-</div>
+<ol class="frows">
+<li class="frow" data-film="ld-one-person-many-roles"><span class="fn">1</span><img src="../assets/one-person-many-roles-poster.jpg?v=92bff286ce" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="one-person-many-roles/">One person, many roles</a><small>6 min · One person, four systems, five records. Keep the person apart from the roles, and ask four questions to know what needs mastering.</small></span><button type="button" class="seen sm" data-seen="ld-one-person-many-roles" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: One person, many roles"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-who-is-it"><span class="fn">2</span><img src="../assets/who-is-it-poster.jpg?v=36d7b693ec" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="who-is-it/">Who is it?</a><small>5½ min · Two records, one person? A check proposes pairs, weights make a score, and a steward decides the hard ones once, with a reason.</small></span><button type="button" class="seen sm" data-seen="ld-who-is-it" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: Who is it?"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-which-value-wins"><span class="fn">3</span><img src="../assets/which-value-wins-poster.jpg?v=c8e8b86cab" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="which-value-wins/">Which value wins</a><small>6 min · Five linked records, and the values still disagree. Declare a rule for each field, not one order hidden in the code.</small></span><button type="button" class="seen sm" data-seen="ld-which-value-wins" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: Which value wins"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-roles-come-and-go"><span class="fn">4</span><img src="../assets/roles-come-and-go-poster.jpg?v=100c9bd93a" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="roles-come-and-go/">Roles come and go</a><small>5½ min · A status is true for a day. Give every role a start, an end and an owner, and ask any question as at a date.</small></span><button type="button" class="seen sm" data-seen="ld-roles-come-and-go" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: Roles come and go"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-lists-everyone-uses"><span class="fn">5</span><img src="../assets/lists-everyone-uses-poster.jpg?v=f0b05b1603" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="lists-everyone-uses/">Lists everyone uses</a><small>4½ min · Three names for one role, and a country counted three times. Give each list an owner, a date and one home.</small></span><button type="button" class="seen sm" data-seen="ld-lists-everyone-uses" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: Lists everyone uses"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-for-this-purpose-only"><span class="fn">6</span><img src="../assets/for-this-purpose-only-poster.jpg?v=9be2526c92" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="for-this-purpose-only/">For this purpose only</a><small>5 min · Data given for one role isn't free for every role. Write each role's purposes beside its data, and keep the person's wishes with her.</small></span><button type="button" class="seen sm" data-seen="ld-for-this-purpose-only" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: For this purpose only"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-one-person-many-systems"><span class="fn">7</span><img src="../assets/one-person-many-systems-poster.jpg?v=d4d26aa108" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="one-person-many-systems/">One person, many systems</a><small>4½ min · Four ways to give many systems one person. Search before you create, and choose the lightest way that solves the problem.</small></span><button type="button" class="seen sm" data-seen="ld-one-person-many-systems" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: One person, many systems"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-a-hub-at-work"><span class="fn">8</span><img src="../assets/a-hub-at-work-poster.jpg?v=1e2e089ccd" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="a-hub-at-work/">A hub at work</a><small>4½ min · Rules act, AI suggests, people decide: a week in a master data hub, and five questions to ask any hub.</small></span><button type="button" class="seen sm" data-seen="ld-a-hub-at-work" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: A hub at work"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+<li class="frow" data-film="ld-kept-not-cleaned"><span class="fn">9</span><img src="../assets/kept-not-cleaned-poster.jpg?v=17208482a7" alt="" width="1280" height="720" loading="lazy"><span class="ft"><a href="kept-not-cleaned/">Kept, not cleaned</a><small>5½ min · A clean-up merged two thousand duplicates, and a year later there were eleven hundred new ones. Check at entry, measure every day, and keep it.</small></span><button type="button" class="seen sm" data-seen="ld-kept-not-cleaned" data-on="Watched" data-off="Mark watched" aria-pressed="false" aria-label="Mark watched: Kept, not cleaned"><i aria-hidden="true"></i><span>Mark watched</span></button></li>
+</ol>
 </section>
 
 <section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
-<div class="mhead"><div><h2 id="learn-h">Take it apart, then make the call</h2><p>Nine playgrounds, one for each film, each with experiments to make happen; then 12 situations from every film. Your progress stays in this browser.</p></div></div>
+<div class="mhead"><div><h2 id="learn-h">Practise</h2><p>Nine playgrounds, one for each film, each with experiments to make happen; then 12 situations from every film. Your progress stays in this browser.</p></div></div>
+<ul class="pbars" data-practice="ld-master-and-reference-data" data-labs="9" data-quiz="12"><li><span>Labs seen</span><span class="pbar" data-k="labs"><i></i></span></li><li><span>Answered</span><span class="pbar" data-k="n"><i></i></span></li><li><span>Right</span><span class="pbar ok" data-k="ok"><i></i></span></li></ul>
 <p class="stop-nav"><a class="btn primary" href="labs/">Take it apart: 9 hands-on labs →</a><a class="btn" href="scenarios/">Make the call: 12 situations</a></p>
+</section>
+
+<section class="module" id="up-next" aria-labelledby="up-next-h">
+<div class="mhead"><div><h2 id="up-next-h">Up next</h2></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../assets/the-same-problem-everywhere-poster.jpg?v=f9be8b92fc" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Next series · Governance principles →</p>
+<h3><a href="../data-governance/the-same-problem-everywhere/">The same problem, everywhere</a></h3>
+<p>In 2008, a bank couldn't add up its risks. People had met over the same problem since 1980. Why is governance still at the centre?</p>
+<p class="meta">5 min · Pause and think · Governance principles</p>
+<p class="tc-progress" data-progress="ld-the-same-problem-everywhere" hidden></p>
+</div>
+</article>
+</div>
 </section>
 
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. This project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
-<script src="../assets/learn/path.js?v=f10d4d0861"></script>
+<script src="../assets/learn/path.js?v=088bc8a288"></script>
 <script src="../assets/ambient.js?v=e4b9486ecb"></script>
 </body>
 </html>

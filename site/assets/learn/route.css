@@ -249,3 +249,9 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 .pg-more{margin:0}
 @media (max-width:640px){.pg-l{grid-template-columns:1fr}.pg-tiles{grid-template-columns:1fr}}
 .pg-tb .r-pill{justify-self:start}
+.pg-cs{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 10px}
+.pg-c{position:relative;display:inline-flex;align-items:center;gap:5px;padding-bottom:5px;font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pg-c .pg-ic{width:16px;height:16px}
+.pg-c::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:2px;background:color-mix(in srgb,var(--fg) 12%,transparent)}
+.pg-c i{position:absolute;left:0;bottom:0;height:3px;border-radius:2px;background:var(--accent);z-index:1}
+.pg-c.ok i{background:var(--good,#2f9e5b)}

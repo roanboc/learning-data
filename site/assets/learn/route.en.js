@@ -884,7 +884,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-small-steps-measured",
-      4,
+      8,
       12
      ]
     }

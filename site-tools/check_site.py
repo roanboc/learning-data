@@ -12,7 +12,7 @@ What it checks, page by page (every .html under site/):
   https://data.learn-all.org/... map to site/), every #id exists on its target page (except #t=,
   and the lab and old home hashes that scripts read), GitHub blob/tree links name a file in this repo, and
   download links name a file the release workflow publishes. Links inside the "Pause and think" packs count too.
-- header: Start here, Topics, Making of, then EN and ES (in the "More" menu), with the right targets and the right current page;
+- header: Start here, Topics, the project icon, then EN and ES (in the "More" menu), Making of in More options, with the right targets and the right current page;
   and "?", the guided tour, with the same steps in both languages.
 - no leftover labels in the nav (Watch, Take it apart, Sharpen it, All films, Mira, Desarma).
 - hreflang: exactly the pairs of real twins, each pointing back.
@@ -102,7 +102,9 @@ TWINS = ["", "labs/", "scenarios/", "journey/", "topics/", "sketch/", "when-thin
          "dbt-project/"]
 # English-only pages and where their ES toggle goes (A Sharper Sketch's labs and scenarios were, until they became its series', 19 Nov 2026)
 ES_TOGGLE = {}
-NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Temas", "Cómo se hizo"]}
+NAV = {"en": ["Start here", "Topics"], "es": ["Empieza aquí", "Temas"]}
+# Making of sits in the header's "More options" menu (.extra); the example data project has its own icon (.proj)
+MAKING = {"en": "Making of", "es": "Cómo se hizo"}
 # the footer holds no second navigation, only the source
 FOOT = {"en": "Source on GitHub", "es": "Código en GitHub"}
 OLD_NAV = {"Watch", "Take it apart", "Sharpen it", "All films", "Mira", "Desarma", "Labs", "Scenarios", "Situaciones"}
@@ -1302,7 +1304,7 @@ def main():
     s["notes"].append(f"{checked} links on {len(pages)} pages")
 
     # -- header
-    s = rep.check("Header: Start here · Topics · Making of · EN/ES on every page, with the right current page")
+    s = rep.check("Header: Start here · Topics · the project icon · EN/ES, Making of in the menu, on every page, with the right current page")
     for pg in normal:
         lang = "es" if pg.es else "en"
         head = pg.dom.first("header", cls="top")
@@ -1317,12 +1319,23 @@ def main():
         lang_box = [k for k in more[0].elements() if k.tag == "span" and "lang" in k.cls] if len(more) == 1 else []
         labels = [a.text() for a in links]
         want = NAV[lang]
-        if labels != want or [k.tag for k in kids] != ["a"] * 3 or not lang_box:
+        if labels != want or [k.tag for k in kids] != ["a"] * 2 or not lang_box:
             s["fails"].append(f"{pg.file}: nav reads {labels + ['EN/ES' if lang_box else '(no .lang)']}, expected {want + ['EN/ES']}")
             continue
         home = "es/" if pg.es else ""
-        targets = [home, home + "topics/", home + "journey/"]
-        for a, t in zip(links[:3], targets):
+        targets = [home, home + "topics/"]
+        extra = head.all(cls="extra")
+        making = extra[0].all("a", cls="making") if len(extra) == 1 else []
+        projs = head.all("a", cls="proj")
+        if len(making) != 1 or making[0].text() != MAKING[lang]:
+            s["fails"].append(f"{pg.file}: one Making of link (a.making) in the header's More options menu (.extra), named in the page's language")
+        else:
+            links.append(making[0]); targets.append(home + "journey/")
+        if len(projs) != 1 or projs[0].attrs.get("aria-label") != {"en": "Example data project", "es": "Proyecto de datos de ejemplo"}[lang]:
+            s["fails"].append(f"{pg.file}: one icon link to the example data project (a.proj), named in the page's language")
+        else:
+            links.append(projs[0]); targets.append(home + "dbt-project/")
+        for a, t in zip(links, targets):
             kind, target, _ = resolve(pg, a.attrs.get("href", ""))
             f, _ = file_of(target) if kind == "site" else (None, None)
             if f != t + "index.html":
@@ -1364,6 +1377,7 @@ def main():
                     if twin is None and has and not pg.is404:
                         s["fails"].append(f"{pg.file}: {lg.upper()} has hreflang, but this page has no twin")
         # current page
+        links = [a for a in links if "proj" not in a.cls]  # the project's icon marks only its own page, checked above
         cur = [(i, a.attrs.get("aria-current")) for i, a in enumerate(links) if "aria-current" in a.attrs]
         if sum(1 for _, v in cur if v == "page") > 1:
             s["fails"].append(f"{pg.file}: more than one nav link has aria-current=\"page\"")
@@ -1374,11 +1388,13 @@ def main():
         elif base == "topics/":
             exp = (1, "page")
         elif base == "journey/":
-            exp = (2, "page")
+            exp = (2, "page")  # Making of, in the menu
         elif base.startswith(("labs/", "scenarios/")):
             exp = (0, "true")
         elif base == "dbt-project/":
             exp = (1, "true")
+            if len(projs) == 1 and projs[0].attrs.get("aria-current") != "page":
+                s["fails"].append(f"{pg.file}: the project's icon must say it is the current page (aria-current=\"page\")")
         elif base.startswith(("sketch/", "when-things-go-wrong/") + tuple(S["slug"] + "/" for S in build_series.SERIES)):
             exp = (1, "true")
         if pg.is404:
@@ -1401,9 +1417,10 @@ def main():
         p.feed(build_series.header(lg, "", "../"))
         head = p.root.first("header", cls="top")
         tools = head.all(cls="nav-tools") if head else []
-        links = tools[0].all("a") if len(tools) == 1 else []
+        extra = head.all(cls="extra") if head else []
+        links = [a for a in extra[0].all("a") if "making" not in a.cls] if len(extra) == 1 else []
         if [a.attrs.get("href") for a in links] != targets or [a.attrs.get("href") for a in head.all("a")].count(targets[0]) != 1:
-            s["fails"].append(f"header({lg}): expected one link to learn-all.org and one to LinkedIn, in .nav-tools")
+            s["fails"].append(f"header({lg}): expected one link to learn-all.org and one to LinkedIn, in the More options menu (.extra)")
         for a, label in zip(links, labels):
             if a.attrs.get("aria-label") != label or "title" in a.attrs:
                 s["fails"].append(f"header({lg}): the link needs one name in the page's language, without a title: {label}")

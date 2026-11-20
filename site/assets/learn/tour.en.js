@@ -3,7 +3,8 @@
 window.LD_TOUR_STEPS={
  text:{name:"How this site works",next:"Next",back:"Back",done:"Done",close:"Close the tour",of:"{n} of {of}"},
  steps:[
-  {sel:"header.top nav",title:"Three places",text:"Start here plays the introduction. Topics holds everything else. Making of shows how the films are made."},
+  {sel:"header.top nav",title:"Two places",text:"Start here plays the introduction. Topics holds everything else."},
+  {sel:"header.top .proj",title:"The example data project",text:"The box opens the project behind many films: its map, its files and how to run it."},
   {sel:".sbar",title:"Where this film sits",text:"Its place in the series. Each step is a film: green once watched. Select one to go to it."},
   {sel:".seen",title:"Mark watched",text:"Your progress stays in this browser. Watched it on another device? Mark it here."},
   {sel:".player",title:"The film",text:"Press Play. The buttons under the film jump to any chapter."},
@@ -22,5 +23,6 @@ window.LD_TOUR_STEPS={
   {sel:".px-stabs",title:"Open standards, line by line",text:"Pick a standard, then a note: it lights the lines of the real file it explains."},
   {sel:".more .lang",title:"English or Spanish",text:"Every page has both. The films are in English, with Spanish captions, and some have Spanish sound."},
   {sel:".nav-tools .theme",title:"Dark or light",text:"Switch the look. Your choice is remembered on this device."},
+  {sel:".nav-tools .extra-btn, .more-btn",title:"More options",text:"Making of shows how the films are made. Here too: learn-all.org and the author."},
   {title:"Your progress stays with you",text:"What you watch and answer is kept in this browser only. Nothing is sent anywhere."}
  ]};

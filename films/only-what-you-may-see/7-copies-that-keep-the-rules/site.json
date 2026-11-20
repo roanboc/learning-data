@@ -101,5 +101,6 @@
       }
     ]
   },
-  "draft": true
+  "draft": true,
+  "tile": [640, 300, 520]
 }

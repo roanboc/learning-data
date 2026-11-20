@@ -24,5 +24,6 @@
   "past": ["West Germany, the census of 1983", "Counting people is one permission; knowing who they are is another."],
   "past_es": ["Alemania Occidental, el censo de 1983", "Contar personas es un permiso; saber quiénes son es otro."],
   "next_h": "You've seen a class written once, at the column, protect it everywhere.",
-  "next_h_es": "Viste cómo una clase escrita una vez, en la columna, la protege en todas partes."
+  "next_h_es": "Viste cómo una clase escrita una vez, en la columna, la protege en todas partes.",
+  "tile": [560, 240, 440]
 }

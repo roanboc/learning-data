@@ -69,5 +69,6 @@
         "href_es": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
       }
     ]
-  }
+  },
+  "tile": [320, 330, 440]
 }

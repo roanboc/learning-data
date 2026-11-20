@@ -67,5 +67,6 @@
         "href_es": "https://es.wikipedia.org/wiki/Accidente_de_la_mina_San_Jos%C3%A9"
       }
     ]
-  }
+  },
+  "tile": [560, 290, 460]
 }

@@ -97,5 +97,6 @@
         "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/service-level-agreement/"
       }
     ]
-  }
+  },
+  "tile": [1000, 300, 420]
 }

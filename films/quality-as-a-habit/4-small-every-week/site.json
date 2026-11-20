@@ -94,5 +94,6 @@
         "href_es": "https://data.learn-all.org/es/data-governance/teachers-of-data/"
       }
     ]
-  }
+  },
+  "tile": [880, 420, 480]
 }

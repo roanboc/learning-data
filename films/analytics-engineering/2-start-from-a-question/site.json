@@ -37,5 +37,6 @@
     "draft": ["skills/draft-the-conceptual-model/SKILL.md", "models/core/student/_student__conceptual.yml", "models/core/student/_student__decisions.yml"]
   },
   "past": ["John Snow's cholera map, Soho, 1854", "Show only what the question needs."],
-  "past_es": ["El mapa del cólera de John Snow, Soho, 1854", "Muestra solo lo que la pregunta necesita."]
+  "past_es": ["El mapa del cólera de John Snow, Soho, 1854", "Muestra solo lo que la pregunta necesita."],
+  "tile": [620, 330, 420]
 }

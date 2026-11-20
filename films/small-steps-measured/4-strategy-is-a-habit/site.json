@@ -75,5 +75,6 @@
         "href_es": "https://www.opengroup.org/togaf"
       }
     ]
-  }
+  },
+  "tile": [420, 300, 440]
 }

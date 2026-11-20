@@ -89,5 +89,6 @@
         "href_es": "https://es.wikipedia.org/wiki/Movimiento_Cintur%C3%B3n_Verde"
       }
     ]
-  }
+  },
+  "tile": [560, 440, 440]
 }

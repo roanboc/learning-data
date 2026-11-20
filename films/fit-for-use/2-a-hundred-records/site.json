@@ -97,5 +97,6 @@
         "href_es": "https://www.york.ac.uk/depts/maths/histstat/student.pdf"
       }
     ]
-  }
+  },
+  "tile": [720, 280, 480]
 }

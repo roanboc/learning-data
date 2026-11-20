@@ -76,5 +76,6 @@
         "href_es": "https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions"
       }
     ]
-  }
+  },
+  "tile": [800, 290, 520]
 }

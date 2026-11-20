@@ -38,5 +38,6 @@
     "split": ["models/_shared/_shared__decisions.yml", "models/marts/planning/", "exposures/planning/", "seeds/expected/planning/", "models/marts/planning/_planning__decisions.yml"]
   },
   "past": ["The Torrens title, South Australia, 1858", "The register is the title: its owner changes it, and everyone relies on it."],
-  "past_es": ["El título Torrens, Australia del Sur, 1858", "El registro es el título: su dueño lo cambia, y todos confían en él."]
+  "past_es": ["El título Torrens, Australia del Sur, 1858", "El registro es el título: su dueño lo cambia, y todos confían en él."],
+  "tile": [440, 290, 420]
 }

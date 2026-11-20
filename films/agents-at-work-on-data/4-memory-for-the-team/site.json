@@ -28,5 +28,6 @@
     "Una lección que guarda una tripulación no salva a la siguiente. Contada en confianza, leída por una persona y compartida sin nombres, llega a todas."
   ],
   "next_h": "You've seen how what one chat learns can reach every agent: reviewed by a person, kept without names, corrected when it's wrong. Next: plan, define the check, do, check.",
-  "next_h_es": "Viste cómo lo que aprende un chat puede llegar a todos los agentes: revisado por una persona, guardado sin nombres, corregido cuando se equivoca. Después: planificar, definir la comprobación, hacer, comprobar."
+  "next_h_es": "Viste cómo lo que aprende un chat puede llegar a todos los agentes: revisado por una persona, guardado sin nombres, corregido cuando se equivoca. Después: planificar, definir la comprobación, hacer, comprobar.",
+  "tile": [800, 380, 500]
 }

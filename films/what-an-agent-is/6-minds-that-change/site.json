@@ -27,5 +27,6 @@
     "No confíes a ciegas en ninguna mente: revisa el trabajo, igual para personas y agentes."
   ],
   "next_h": "You've seen why an agent's answers change, and ours do too, and how evidence and checks, not blame, keep the work right. Next: ethics we can't read, and accountability it can't hold.",
-  "next_h_es": "Viste por qué cambian las respuestas de un agente, y también las nuestras, y cómo la evidencia y las verificaciones, no la culpa, mantienen bien el trabajo. Después: una ética que no podemos leer, y una responsabilidad que no puede asumir."
+  "next_h_es": "Viste por qué cambian las respuestas de un agente, y también las nuestras, y cómo la evidencia y las verificaciones, no la culpa, mantienen bien el trabajo. Después: una ética que no podemos leer, y una responsabilidad que no puede asumir.",
+  "tile": [520, 460, 520]
 }

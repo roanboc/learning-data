@@ -72,5 +72,6 @@
         "href_es": "https://dama.org/learning-resources/dama-data-management-body-of-knowledge-dmbok/"
       }
     ]
-  }
+  },
+  "tile": [880, 250, 440]
 }

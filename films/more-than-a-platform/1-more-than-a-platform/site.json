@@ -23,5 +23,6 @@
   "watch_p": "A short film, with no questions to stop it. Captions are on, and the chapters are under the film.",
   "watch_p_es": "Una película corta, sin preguntas que la detengan. Los subtítulos están activados, y los capítulos están debajo.",
   "next_h": "You've seen the route. Start with the foundations: how the organisation works, and who decides.",
-  "next_h_es": "Ya viste la ruta. Empieza por los fundamentos: cómo trabaja la organización, y quién decide."
+  "next_h_es": "Ya viste la ruta. Empieza por los fundamentos: cómo trabaja la organización, y quién decide.",
+  "tile": [640, 300, 600]
 }

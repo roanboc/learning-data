@@ -43,7 +43,27 @@ window.LD_ROUTE = {
   "an": "Respondidas",
   "ok": "Correctas",
   "uses": "En esta ruta: {s}",
-  "key": "Películas vistas, labs vistos, situaciones respondidas, respuestas correctas"
+  "key": "Películas vistas, labs vistos, situaciones respondidas, respuestas correctas",
+  "you": "Tu avance",
+  "show": "Mostrar",
+  "show_all": "Todos",
+  "show_on": "En curso",
+  "show_new": "Sin empezar",
+  "show_done": "Terminados",
+  "gall": "ver todos los temas",
+  "gall_line": "Toda la ruta, cada tema.",
+  "gline_all": "Cada tema, en el orden de la ruta. Elige una meta para ver su camino.",
+  "gline": "{s} en {t}.",
+  "stop1": "1 parada",
+  "topic1": "1 tema",
+  "topicn": "{n} temas",
+  "step": "Paso {n} de {of}",
+  "right": "{n} correctas",
+  "st_start": "Empieza",
+  "st_cont": "Sigue",
+  "st_again": "Vista · repasa",
+  "none": "Aún no hay temas aquí. Prueba otro filtro.",
+  "icons": "Películas vistas, labs vistos, respondidas, correctas"
  },
  "groups": [
   {
@@ -100,6 +120,11 @@ window.LD_ROUTE = {
      "min": 8.0,
      "films": [
       "ld"
+     ],
+     "pr": [
+      "ld",
+      8,
+      12
      ]
     },
     {

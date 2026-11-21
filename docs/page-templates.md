@@ -11,7 +11,7 @@ The templates are being applied one page type at a time. Until a type's pull req
 | Film | [film.html](page-templates/film.html) | `/<series>/<film>/` |
 | Labs | [labs.html](page-templates/labs.html) | `/<series>/labs/` |
 | Evaluation | [evaluation.html](page-templates/evaluation.html) | `/<series>/scenarios/` |
-| Topics page, Progress view | [progress.html](page-templates/progress.html) | `/topics/#progress` |
+| Topics page (one view; the old Progress view, for reference) | [progress.html](page-templates/progress.html) | `/topics/` |
 
 Every Spanish page under `/es/` follows the same template as its English twin, with the same sections in the same order.
 
@@ -89,11 +89,12 @@ The numbers match the numbered blocks in each HTML template.
 
 ### Topics page
 
-The Topics page has three views, in this order: **Topics list**, **Learning route**, **Progress** (`/topics/#progress`). The list and the route keep their look ([navigation.md](navigation.md)); each topic in them opens its topic page.
+The Topics page is one view (the author, 21 November 2026): the list of topics, the learning route's paths and progress in one place, with no view switch. Old links to `#list`, `#route` and `#progress` land on it.
 
-- **One chosen route.** A route picked on Learning route (a goal, such as *build a report people trust*) is also the route on Progress, and changing it on either view changes it on both. The choice is kept in the visitor's browser. *All topics* is the choice when no route is picked.
-- **Learning route and Progress lead to each other.** Learning route has *See your progress on this route*. Progress has *See it on the learning route*.
-- **Hide what is not on the route.** Learning route can hide the topics a chosen route doesn't pass through. Progress shows only them, with *Show all topics* to bring the rest back.
+- **Progress first.** The hero holds *Your progress*: one line of four icons (films watched, labs seen, situations answered, right answers), never bars, and *Continue* to the next film not watched. A chosen goal narrows it to that goal's films.
+- **The railway map, from 880 px.** The route as a line map, starting at the start's station (*Data platforms*) on the line, with no separate introduction card. A station's ring fills as films are watched; the next stop is circled; hovering or focusing names it. Selecting a station opens its topic's row below and scrolls to it; a topic's own page opens from *Open the topic* in its row. On a phone the list itself is the rail.
+- **One bar of tools.** Search, *I want to…* as a drop-down of the goals (each with its one line, and *see all topics*), and *Show*: all, in progress, not started, done. The goal is kept in the visitor's browser and shared with the map. A goal numbers its films and series (*Step 2 of 5*), opens its topics, and dims the rest, here and on the map.
+- **Rows and tiles.** Each topic is a row in the route's groups, with its ring, counts and line of icons; it opens on its films and series as big tiles, as the list always had, each with its own line of icons and *Start*, *Continue* or *Watched · review*.
 
 Progress shows:
 

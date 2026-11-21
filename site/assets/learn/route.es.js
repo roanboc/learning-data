@@ -570,7 +570,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-when-things-go-wrong",
-      2,
+      4,
       12
      ]
     },
@@ -612,7 +612,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-quality-as-a-habit",
-      4,
+      8,
       12
      ]
     }
@@ -683,7 +683,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-locks-before-the-data",
-      9,
+      18,
       12
      ]
     },

@@ -1404,36 +1404,37 @@ def topics_page(lg):
     firsts = [e["posters"][0] for t in order for e in es[t["id"]]]
     seconds = [p for t in order for e in es[t["id"]] for p in e["posters"][1:2]]
     mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (firsts + seconds)[:8])
-    body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
+    RT = ROUTE_TEXT[lg]
+    show = "".join(f'<button type="button" data-show="{k}" aria-pressed="{str(k == "all").lower()}">{E(RT["show_" + k])}</button>' for k in ("all", "on", "new", "done"))
+    body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main class="tp">\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow">Learning Data</p>\n<h1>{TOPICS_PAGE["h1"][lg]}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg].format(**TW)}</p>\n'
-            f'<div class="view-switch" role="group" aria-label="{V["view"]}" hidden><button type="button" data-view="list" aria-pressed="true">{V["list"]}</button>'
-            f'<button type="button" data-view="route" aria-pressed="false">{V["route"]}</button>'
-            f'<button type="button" data-view="progress" aria-pressed="false">{V["progress"]}</button></div>\n</section>\n'
-            f'\n<section class="route-view" id="route" aria-labelledby="route-h" hidden>\n<h2 class="route-sr" id="route-h">{V["route"]}</h2>\n'
-            f'{route_box(lg, R, RL)}\n</section>\n'
-            f'\n<section class="progress-view" id="progress" aria-labelledby="progress-h" hidden>\n<h2 class="route-sr" id="progress-h">{V["progress"]}</h2>\n'
-            f'<div class="prog" data-prog data-root="{R}" data-base="{RL}"></div>\n</section>\n'
-            f'\n<div class="list-view" id="list">\n<div class="ix-tools" hidden>\n<label class="ix-search" for="ix-q"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">'
+            f'<div class="tp-you" data-you data-base="{RL}" hidden></div>\n</section>\n'
+            f'\n<div class="list-view" id="list">\n<h2 class="route-sr" id="route-h">{V["route"]}</h2>\n{route_box(lg, R, RL)}\n'
+            f'<div class="ix-tools" hidden>\n<label class="ix-search" for="ix-q"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">'
             '<circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>'
             f'<input id="ix-q" type="search" autocomplete="off" placeholder="{E(V["search"])}" aria-label="{E(V["search"])}" data-index="{R}assets/learn/search.{lg}.json" '
             f'data-base="{RL}" data-root="{R}" data-text="{E(json.dumps(V["text"], ensure_ascii=False))}"></label>\n'
+            f'<div class="tp-goal" data-goalpick></div>\n'
+            f'<div class="tp-show" role="group" aria-label="{E(RT["show"])}">{show}</div>\n'
+            '<p class="tp-gline" data-gline aria-live="polite"></p>\n'
             '<p class="ix-count" id="ix-count" role="status" hidden></p>\n</div>\n<div class="ix-results" id="ix-results" hidden></div>\n')
     for g in D["groups"]:
         body += f'\n<div class="ix-group ln-{g["line"]}">\n<p class="step ix-gh"><i></i>{E(g["name"])}</p>\n'
         for t in (TL[x["id"]] for x in D["topics"] if x["group"] == g["id"]):
             up = upcoming(t)
-            cards = "\n".join([topic_card(lg, e, RL, R) for e in es[t["id"]]] + [soon_card(lg, u) for u in up])
+            cards = "\n".join([topic_card(lg, e, RL, R).replace('<article class="', f'<article data-item="{i}" class="', 1) for i, e in zip(shown(t), es[t["id"]])]
+                              + [soon_card(lg, u) for u in up])
             more = f' · {V["more1"] if len(up) == 1 else V["more"].format(n=len(up))}' if up else ""
             body += (f'<section class="module topic" id="{t["id"]}" aria-labelledby="{t["id"]}-h">\n<details>\n'
                      f'<summary><i class="ix-ring" aria-hidden="true"></i><h2 id="{t["id"]}-h">{E(t["name"][lg])}'
                      + (f'<span class="pj-mark" title="{E(ROUTE_TEXT[lg]["projmark"])}">{PROJECT_ICON}<span class="route-sr">{E(ROUTE_TEXT[lg]["projmark"])}</span></span>' if PC.get(t["id"]) else "")
-                     + f'</h2><span class="ix-who">{E(t["who"][lg])}</span><span class="ix-cnt">{topic_counts(lg, es[t["id"]])}{more}</span></summary>\n'
+                     + f'</h2><span class="ix-who">{E(t["who"][lg])}</span><span class="ix-cnt">{topic_counts(lg, es[t["id"]])}{more}</span><span class="tp-mx" data-tmx></span></summary>\n'
                      f'<p class="ix-line">{E(t["line"][lg])} <a class="ix-open" href="{t["id"]}/">{T(lg, "Open the topic", "Abre el tema")} →</a></p>\n'
                      + f'<div class="topic-grid rows" data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n'
                      + (project_box(lg, PC[t["id"]], RL) + "\n" if PC.get(t["id"]) else "") + '</details>\n</section>\n')
         body += '</div>\n'
     body += (f'</div>\n</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
-             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/route.js"></script>\n<script src="{R}assets/learn/progress.js"></script>\n<script src="{R}assets/learn/topics.js"></script>\n'
+             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/route.js"></script>\n<script src="{R}assets/learn/topics.js"></script>\n<script src="{R}assets/learn/progress.js"></script>\n'
              f'<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + f'<link rel="stylesheet" href="{R}assets/learn/route.css">\n</head>\n' + body
 
@@ -1649,7 +1650,12 @@ ROUTE_TEXT = {
                seeprog="See your progress on this route", seeroute="See it on the learning route", hide="Hide topics not on this route",
                showall="Show all topics", onroute="Progress on this route", alltopics="All topics", notyet="Not started",
                cont="Continue", fw="Films watched", ls="Labs seen", an="Answered", ok="Right", uses="On this route: {s}",
-               key="Films watched, labs seen, situations answered, right answers"),
+               key="Films watched, labs seen, situations answered, right answers",
+               you="Your progress", show="Show", show_all="All", show_on="In progress", show_new="Not started", show_done="Done",
+               gall="see all topics", gall_line="The whole route, every topic.", gline_all="Every topic, in route order. Pick a goal to see its path.",
+               gline="{s} in {t}.", stop1="1 stop", topic1="1 topic", topicn="{n} topics", step="Step {n} of {of}", right="{n} right",
+               st_start="Start", st_cont="Continue", st_again="Watched · review", none="No topic here yet. Try another filter.",
+               icons="Films watched, labs seen, answered, right"),
     "es": dict(start="Empieza aquí", play="Ver la introducción", open="Abrir el tema", next="Tu próxima parada", soon="Próximamente", route="Ruta sugerida",
                any="Rutas sugeridas, no pasos obligatorios. Abre cualquier tema cuando quieras.", whole="Toda la ruta", want="Quiero", stops="{n} paradas",
                go="Empezar esta ruta", on="Seguir esta ruta", again="Ver de nuevo", watched="Vista", of="{n} de {of} vistas", yours="Tu ruta",
@@ -1661,7 +1667,12 @@ ROUTE_TEXT = {
                seeprog="Ver tu avance en esta ruta", seeroute="Verla en la ruta de aprendizaje", hide="Ocultar los temas fuera de esta ruta",
                showall="Mostrar todos los temas", onroute="Avance en esta ruta", alltopics="Todos los temas", notyet="Sin empezar",
                cont="Sigue", fw="Películas vistas", ls="Labs vistos", an="Respondidas", ok="Correctas", uses="En esta ruta: {s}",
-               key="Películas vistas, labs vistos, situaciones respondidas, respuestas correctas"),
+               key="Películas vistas, labs vistos, situaciones respondidas, respuestas correctas",
+               you="Tu avance", show="Mostrar", show_all="Todos", show_on="En curso", show_new="Sin empezar", show_done="Terminados",
+               gall="ver todos los temas", gall_line="Toda la ruta, cada tema.", gline_all="Cada tema, en el orden de la ruta. Elige una meta para ver su camino.",
+               gline="{s} en {t}.", stop1="1 parada", topic1="1 tema", topicn="{n} temas", step="Paso {n} de {of}", right="{n} correctas",
+               st_start="Empieza", st_cont="Sigue", st_again="Vista · repasa", none="Aún no hay temas aquí. Prueba otro filtro.",
+               icons="Películas vistas, labs vistos, respondidas, correctas"),
 }
 
 
@@ -1680,7 +1691,9 @@ def route_data(lg):
                 e = entry(lg, i)
                 items.append(dict(id=i, kind=e["kind"], title=e["title"], href=e["href"], poster=e["posters"][0], kicker=e["kicker"],
                                   len=e["meta"].split(" · ")[0], min=mins(e), films=watch(e),
-                                  **({"pr": list(practice_of(i))} if practice_of(i) else {}),
+                                  **({"pr": list(practice_of(i))} if practice_of(i) else
+                                     # a film with labs and scenarios of its own, such as the introduction
+                                     {"pr": list(e["progress"][1:])} if e["progress"][0] == "film" and e["progress"][2] else {}),
                                   **({"lang": "en"} if lg == "es" and e["title_lang"] == "en" else {})))
             items += [dict(id=u["id"], soon=True, title=u["name"][lg], kicker=T(lg, f'Series · {u["films"]} films', f'Serie · {u["films"]} películas'))
                       for u in upcoming(t)]
@@ -1700,7 +1713,7 @@ def route_js(lg):
 
 def route_box(lg, R, RL):
     """Where assets/learn/route.js draws the route, on the Topics page."""
-    return f'<div class="route" data-route data-root="{R}" data-base="{RL}" data-topics=""></div>'
+    return f'<div class="route" data-route data-mode="map" data-root="{R}" data-base="{RL}" data-topics=""></div>'
 
 
 # ---------------------------------------------------------------- the example dbt project

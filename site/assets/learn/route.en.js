@@ -43,7 +43,27 @@ window.LD_ROUTE = {
   "an": "Answered",
   "ok": "Right",
   "uses": "On this route: {s}",
-  "key": "Films watched, labs seen, situations answered, right answers"
+  "key": "Films watched, labs seen, situations answered, right answers",
+  "you": "Your progress",
+  "show": "Show",
+  "show_all": "All",
+  "show_on": "In progress",
+  "show_new": "Not started",
+  "show_done": "Done",
+  "gall": "see all topics",
+  "gall_line": "The whole route, every topic.",
+  "gline_all": "Every topic, in route order. Pick a goal to see its path.",
+  "gline": "{s} in {t}.",
+  "stop1": "1 stop",
+  "topic1": "1 topic",
+  "topicn": "{n} topics",
+  "step": "Step {n} of {of}",
+  "right": "{n} right",
+  "st_start": "Start",
+  "st_cont": "Continue",
+  "st_again": "Watched · review",
+  "none": "No topic here yet. Try another filter.",
+  "icons": "Films watched, labs seen, answered, right"
  },
  "groups": [
   {
@@ -100,6 +120,11 @@ window.LD_ROUTE = {
      "min": 7.5,
      "films": [
       "ld"
+     ],
+     "pr": [
+      "ld",
+      8,
+      12
      ]
     },
     {
@@ -545,7 +570,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-when-things-go-wrong",
-      2,
+      4,
       12
      ]
     },
@@ -587,7 +612,7 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-quality-as-a-habit",
-      4,
+      8,
       12
      ]
     }

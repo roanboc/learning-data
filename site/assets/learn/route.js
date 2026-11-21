@@ -12,6 +12,10 @@
      it doesn't pass through can be hidden ("ld-route:hide"), and a link leads to the Progress view (#progress).
    - A topic with films that show the example dbt project (D.project) carries the project's icon: on the map, a badge on its
      station's ring, which doesn't widen its name; on the rail, by its name. It reads on a closed station, and opens on a box, after the topic's films and series, that links to the project's page (which links to GitHub).
+   - data-mode="map" (the Topics page, 21 November 2026): the map only, from 880 px, with the start as its first station, on
+     the line: no introduction card, no goals and no panel. The page's own list is the rail on a phone, and holds the goal
+     (progress.js); a station opens its topic's row in that list (the "ld-station" event, topics.js). Under 880 px it draws nothing.
+     The next stop to watch is circled; hovering or focusing a station names it and how many of its films were watched.
    data-base: the way to the language's home, for the films' links; data-root: the way to the site's root, for the posters;
    data-topics: the way to the Topics page ("" on that page itself, where a topic's link opens its row in the list). */
 (()=>{"use strict";
@@ -33,7 +37,7 @@ const nFilms=n=>n===1?X.film1:fill(X.films,{n:n});
 const counts=t=>{const s=stat(t),p=[];if(s.series>1)p.push(fill(X.series,{n:s.series}));p.push(nFilms(s.films),dur(s.min));
   if(s.soon)p.push(s.soon===1?X.more1:fill(X.more,{n:s.soon}));return p.join(" · ");};
 const lineOf=t=>G(t.group).line;
-const MAIN=D.topics.filter(t=>t!==START&&lineOf(t)==="main"),LOOPS=D.groups.filter(g=>g.line!=="main");
+const MAINS=D.topics.filter(t=>t!==START&&lineOf(t)==="main"),MAIN=MAINS,LOOPS=D.groups.filter(g=>g.line!=="main");
 const order=()=>MAIN.concat(LOOPS.flatMap(g=>D.topics.filter(t=>t.group===g.id)));
 const nextStop=()=>(frac(START)<1?START:order().find(t=>frac(t)<1))||null;
 const goal=id=>D.goals.find(g=>g.id===id)||null;
@@ -89,32 +93,38 @@ function draw(box){
       '<a class="btn primary" href="'+esc(base+first.href)+'">'+esc(all?X.again:any?X.on:X.go)+'</a>';}
   const goalStops=gi=>'<ol class="r-stops">'+gi.st.map(i=>card(i,T(i.topic).name)).join("")+'</ol>';
 
+  const MAP=box.dataset.mode==="map";
   function wide(mode,W){
+    const MAIN=MAP?[START].concat(MAINS):MAINS;
     const side=mode==="side",mw=W-(side?248:0),n=MAIN.length,padL=side?66:52,padR=58;
     const yT=84,yM=222,yB=358,H=430,s=22,g=goal(st.goal),gi=g?stopsOf(g):null;
     const numOf=id=>gi?gi.order.indexOf(id)+1:0,dim=id=>!!gi&&!gi.order.includes(id);
-    const first=G(MAIN[0].group).id,last=G(MAIN[n-1].group).id;
-    const nF=MAIN.filter(t=>t.group===first).length,nL=first===last?0:MAIN.filter(t=>t.group===last).length;
+    const first=G(MAINS[0].group).id,last=G(MAIN[n-1].group).id;
+    const nF=MAIN.filter(t=>t.group===first).length+(MAP?1:0),nL=first===last?0:MAIN.filter(t=>t.group===last).length;
     // the loops leave and join the line between two stations: those two gaps are wider (by J), so no name sits under a curve
     const J=nL?28:14,col=(mw-padL-padR-(nL?2:1)*J)/(n-1),Xp=i=>padL+i*col+(i>=nF?J:0)+(nL&&i>=n-nL?J:0);
     const xa=(Xp(nF-1)+Xp(nF))/2,xb=nL?(Xp(n-nL-1)+Xp(n-nL))/2:Xp(n-1);
     const path=y=>"M"+(xa-s)+","+yM+" C"+(xa+s*.3)+","+yM+" "+(xa-s*.3)+","+y+" "+(xa+s)+","+y+" L"+(xb-s)+","+y+" C"+(xb+s*.3)+","+y+" "+(xb-s*.3)+","+yM+" "+(xb+s)+","+yM;
     let svg="",html="";
-    function station(t,x,y,up,w){const sel=st.panel==="station"&&st.sel===t.id;
-      return '<button type="button" class="r-st ln-'+lineOf(t)+(up?" up":"")+(sel?" sel":"")+(dim(t.id)?" dim":"")+'" data-st="'+t.id+'" data-k="s-'+t.id+'" aria-pressed="'+sel+'" aria-label="'+esc(label(t))+
+    const nx=MAP?nextStop():null;
+    function station(t,x,y,up,w){const sel=st.panel==="station"&&st.sel===t.id,s0=stat(t);
+      return '<button type="button" class="r-st ln-'+lineOf(t)+(up?" up":"")+(sel?" sel":"")+(t===nx?" next":"")+(MAP&&x>W-150?" tip-r":MAP&&x<150?" tip-l":"")+(dim(t.id)?" dim":"")+'" data-st="'+t.id+'" data-k="s-'+t.id+'" aria-pressed="'+sel+'" aria-label="'+esc(label(t))+
+        (MAP?'" data-tip="'+esc(t.name+" · "+fill(X.of,{n:s0.seen,of:s0.films})):'')+
         '" style="left:'+x.toFixed(1)+'px;top:'+(up?y+16:y-16)+'px;max-width:'+w.toFixed(0)+'px"><span class="r-sd">'+dot(frac(t),numOf(t.id))+(PJ(t)?'<span class="pj-badge">'+P.icon+'</span>':'')+'</span><span class="r-sl">'+esc(t.name)+'</span></button>';}
     LOOPS.slice(0,2).forEach((gr,k)=>{const up=k===0,y=up?yT:yB,ts=D.topics.filter(t=>t.group===gr.id),off=ts.every(t=>dim(t.id));
       svg+='<path class="r-loop ln-'+gr.line+(off?" dim":"")+'" d="'+path(y)+'"/>';
       html+='<span class="r-gl loop ln-'+gr.line+(off?" dim":"")+'" style="left:'+(xa+s+14)+'px;top:'+(up?y+22:y-38)+'px">'+esc(gr.name)+'</span>';
       const gap=(xb-xa-2*s)/ts.length;ts.forEach((t,j)=>{html+=station(t,xa+s+gap*(j+.5),y,up,Math.min(190,Math.max(84,gap-8)));});});
     svg+='<path class="r-trunk" d="M'+(side?-2:14)+","+yM+" L"+Xp(n-1)+","+yM+'"/>'+(side?'':'<circle class="r-cap" cx="14" cy="'+yM+'" r="6"/>');
-    D.groups.filter(gr=>gr.line==="main"&&gr.id!==START.group).forEach(gr=>{const ix=MAIN.map((t,i)=>t.group===gr.id?i:-1).filter(i=>i>=0);if(!ix.length)return;
-      const x1=Xp(ix[0])-24,x2=Xp(ix[ix.length-1])+24,y=yM-34;
+    D.groups.filter(gr=>gr.line==="main"&&(MAP||gr.id!==START.group)).forEach(gr=>{const ix=MAIN.map((t,i)=>t.group===gr.id?i:-1).filter(i=>i>=0);if(!ix.length)return;
+      const x1=Xp(ix[0])-(ix.length>1?24:30),x2=Xp(ix[ix.length-1])+(ix.length>1?24:30),y=yM-34;
       svg+='<path class="r-brk" d="M'+x1+","+y+" v-4 q0,-6 6,-6 H"+(x2-6)+" q6,0 6,6 v4"+'"/>';
       html+='<span class="r-gl" style="left:'+((x1+x2)/2)+'px;top:'+(y-34)+'px">'+esc(gr.name)+'</span>';});
     MAIN.forEach((t,i)=>{html+=station(t,Xp(i),yM,false,Math.max(84,col-6));});
-    const panel=st.panel==="goal"&&g?'<div class="r-panel goal" aria-live="polite"><div class="r-about">'+goalHead(g,gi)+'</div>'+goalStops(gi)+'</div>':
+    const panel=MAP?"":st.panel==="goal"&&g?'<div class="r-panel goal" aria-live="polite"><div class="r-about">'+goalHead(g,gi)+'</div>'+goalStops(gi)+'</div>':
       '<div class="r-panel ln-'+lineOf(T(st.sel))+'" aria-live="polite">'+detail(T(st.sel),false)+'</div>';
+    if(MAP)return '<div class="r-wide m-map"><div class="r-map" style="height:'+H+'px" role="group" aria-label="'+esc(fill(X.map,{n:D.topics.length}))+'"><svg class="r-lines" aria-hidden="true" focusable="false">'+svg+'</svg>'+html+'</div></div>'+
+      '<p class="r-legend"><span><i class="ln-main"></i>'+esc(X.route)+'</span>'+pjLegend()+'<span>'+esc(X.any)+'</span></p>';
     const ic=intro(gi&&gi.order.includes(START.id)?numOf(START.id):0);
     return goals()+'<div class="r-wide m-'+mode+'">'+(side?'<div class="r-side" style="margin-top:'+(yM-150)+'px">'+ic+'</div>':ic)+
       '<div class="r-map" style="height:'+H+'px" role="group" aria-label="'+esc(fill(X.map,{n:D.topics.length}))+'"><svg class="r-lines" aria-hidden="true" focusable="false">'+svg+'</svg>'+html+'</div></div>'+
@@ -135,20 +145,23 @@ function draw(box){
       '<ol class="r-rail">'+rows+'</ol><p class="r-legend">'+pjLegend()+'<span>'+esc(X.any)+'</span></p></div>';}
   function render(){
     const w=box.clientWidth;st.w=w;if(!w)return;
-    if(!st.sel||!T(st.sel))st.sel=(nextStop()||MAIN[0]).id;
+    if(MAP){box.classList.toggle("r-off",w<880);if(w<880){box.innerHTML="";return;}}
+    else if(!st.sel||!T(st.sel))st.sel=(nextStop()||MAIN[0]).id;
     const a=document.activeElement,k=a&&box.contains(a)&&a.dataset?a.dataset.k:null;
     box.classList.add("drawn");box.classList.toggle("r-hide",!!(st.hide&&st.goal));
-    box.innerHTML=w>=880?wide(w>=1040?"side":"top",w):rail();
+    box.innerHTML=MAP?wide("top",w):w>=880?wide(w>=1040?"side":"top",w):rail();
     if(k){const e=box.querySelector('[data-k="'+k+'"]');if(e)e.focus({preventScroll:true});}}
   box.addEventListener("click",e=>{
     const s=e.target.closest("[data-st]"),r=e.target.closest("[data-rs]"),g=e.target.closest("[data-goal]");
-    if(s){st.sel=s.dataset.st;st.panel="station";render();}
+    if(s){st.sel=s.dataset.st;st.panel="station";render();
+      if(MAP)window.dispatchEvent(new CustomEvent("ld-station",{detail:s.dataset.st}));}
     else if(r){st.open=st.open===r.dataset.rs?null:r.dataset.rs;render();}
     else if(g){st.goal=g.dataset.goal||null;st.panel=st.goal?"goal":"station";set("ld-route:goal",st.goal);render();
       window.dispatchEvent(new CustomEvent("ld-route",{detail:"route"}));}});
   box.addEventListener("change",e=>{if(e.target.matches("[data-hide]")){st.hide=e.target.checked;set("ld-route:hide",st.hide||null);render();}});
   // the Progress view shares the chosen route: follow it when it changes there
-  window.addEventListener("ld-route",e=>{if(e.detail==="route")return;const g=goal(get("ld-route:goal"));st.goal=g?g.id:null;st.panel=g?"goal":"station";render();});
+  window.addEventListener("ld-route",e=>{if(e.detail==="route")return;const g=goal(get("ld-route:goal"));st.goal=g?g.id:null;st.panel=g&&!MAP?"goal":"station";render();});
+  if(MAP){st.panel="station";window.addEventListener("storage",render);}
   if(window.ResizeObserver)new ResizeObserver(()=>{if(box.clientWidth!==st.w)render();}).observe(box);
   else window.addEventListener("resize",render);
   window.addEventListener("pageshow",e=>{if(e.persisted)render();});

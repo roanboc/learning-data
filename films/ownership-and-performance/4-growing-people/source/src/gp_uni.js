@@ -270,7 +270,7 @@ const gp_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My half year",8
   {k:"star",x:1000,y:118,r:30,col:"amber",at:sc.ends.wants+0.2,d:0.45}];
 // 5. on Monday: four things to keep, each with its drawing and, drawn under it, what it means; the hand writes each as the voice says
 // it. Ivy keeps the page: she leads people now too
-const GP_MON=[["target","blue",250,"they write them, then you agree"],["speech","green",390,"weekly to monthly: agree it together"],
+const GP_MON=[["target","blue",250,"they write them, then you agree"],["speech","green",390,"more when new or changing, less when stable"],
   ["loop","amber",530,"and act on it"],["flag","blue",670,"credit the team, in public"]];
 const gp_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});D.face(c,"ivy",880,112,42);
     GP_MON.forEach(([ic,col,y,s])=>{D.disc(c,108,y-18,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-18,19,{fill:"white"});D.text(c,s,200,y+54,{size:32,col:"mut"});});},[60,40,1030,740]),

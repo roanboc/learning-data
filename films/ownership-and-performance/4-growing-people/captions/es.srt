@@ -219,65 +219,69 @@ Lo que salió bien: la página de Graham para el Consejo Universitario. Lo que h
 Y lo que quiere ahora: mejorar su actualización de los lunes, y enseñar lo que aprende.
 
 56
-00:06:45,210 --> 00:06:51,993
-Su trabajo va bien y el equipo se reúne cada semana, así que Ivy pide verse con Helena una vez al mes. Helena acepta.
+00:06:45,210 --> 00:06:52,559
+Su trabajo va bien y ve al equipo en cada reunión diaria, así que Helena propone verse una vez al mes. Ivy acepta.
 
 57
-00:06:53,693 --> 00:06:58,557
+00:06:54,259 --> 00:06:59,123
 Una conversación de crecimiento mira hacia adelante: adónde quiere ir, y qué necesita para llegar.
 
 58
-00:07:00,457 --> 00:07:05,670
+00:07:01,023 --> 00:07:06,236
 El martes 14 de diciembre, lleva casi seis meses a cargo de Uso de los espacios docentes.
 
 59
-00:07:07,170 --> 00:07:12,075
+00:07:07,736 --> 00:07:12,641
 Su siguiente objetivo lo eligió ella: ser mentora del próximo recién graduado, en 2028.
 
 60
-00:07:13,975 --> 00:07:17,550
+00:07:14,541 --> 00:07:18,116
 Analista, luego dueña, luego mentora: en cada paso, más de qué hacerse cargo.
 
 61
-00:07:21,050 --> 00:07:25,108
+00:07:21,616 --> 00:07:25,674
 En las escuelas de Japón, los maestros han crecido así durante siglo y medio.
 
 62
-00:07:26,208 --> 00:07:30,876
+00:07:26,774 --> 00:07:31,442
 Un objetivo que eligieron, la mirada en lo que aprenden los niños, y una clase mejor la próxima vez.
 
 63
-00:07:32,776 --> 00:07:38,556
+00:07:33,342 --> 00:07:39,122
 Helena hizo lo mismo con Ivy: objetivos propios, comentarios regulares sobre el trabajo, y el siguiente paso.
 
 64
-00:07:40,456 --> 00:07:43,685
+00:07:41,022 --> 00:07:44,251
 El lunes, deja que cada quien escriba sus objetivos, y luego acuérdalos.
 
 65
-00:07:45,185 --> 00:07:49,391
+00:07:45,751 --> 00:07:49,957
 Da comentarios a menudo: la situación, lo que hizo, y su efecto.
 
 66
-00:07:50,891 --> 00:07:55,018
-Acuerda con cada persona cada cuánto os reunís, desde cada semana hasta una vez al mes.
+00:07:51,457 --> 00:07:55,656
+Reúnete más a menudo cuando alguien es nuevo, o cuando cambian el trabajo o el equipo.
 
 67
-00:07:56,518 --> 00:08:00,452
-Cuanto menos trabajáis juntos en el día a día, más importa una charla semanal.
+00:07:57,156 --> 00:08:00,930
+Cuando todo va bien, propón reuniros menos a menudo, y deja que acepten.
 
 68
-00:08:02,152 --> 00:08:04,568
-Pide comentarios sobre ti, y actúa con ellos.
+00:08:02,430 --> 00:08:06,334
+Las reuniones diarias, la planificación, las revisiones y las retrospectivas del equipo van primero.
 
 69
-00:08:06,068 --> 00:08:10,518
-Mira adelante en las conversaciones de crecimiento, y dale el mérito al equipo, en público.
+00:08:08,034 --> 00:08:10,450
+Pide comentarios sobre ti, y actúa con ellos.
 
 70
-00:08:12,018 --> 00:08:16,326
-El trabajo con datos pide habilidades nuevas. Liderar a quienes lo hacen también es una habilidad.
+00:08:11,950 --> 00:08:16,400
+Mira adelante en las conversaciones de crecimiento, y dale el mérito al equipo, en público.
 
 71
-00:08:18,226 --> 00:08:21,606
+00:08:17,900 --> 00:08:22,208
+El trabajo con datos pide habilidades nuevas. Liderar a quienes lo hacen también es una habilidad.
+
+72
+00:08:24,108 --> 00:08:27,488
 Sus objetivos, comentarios regulares sobre el trabajo, el siguiente paso.

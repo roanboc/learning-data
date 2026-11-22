@@ -25,7 +25,7 @@ const NARR={
 "whole":{"name":"The team as a whole","lead":1.0,"tail":1.0,"vo":[
  {"id":"helena","gap":0.8,"text":"At a university, a year from now, Helena Novak starts as the data manager on Monday 1 February 2027.","say":"At a university, a year from now, Helena Novak starts as the data manager on Monday the first of February, twenty twenty-seven."},
  {"id":"watch","gap":0.8,"text":"Before she judges anyone, she watches."},
- {"id":"weekly","gap":0.8,"text":"Every week, she has half an hour with each person: about them, never a status report."},
+ {"id":"weekly","gap":0.8,"text":"In her first months, she has half an hour with each person every week: about them, never a status report."},
  {"id":"asks","gap":0.8,"text":"She asks how they are, what's in their way, and what they're proud of."},
  {"id":"whole","gap":0.8,"text":"Then she reads the team as a whole: what it achieves together, and each person's work beside it."},
  {"id":"really","gap":0.8,"text":"She measures it all against what this team really does, not what her last team did."},
@@ -76,8 +76,8 @@ const NARR={
  {"id":"back","gap":0.8,"text":"When Sam comes back on Monday 16 August, Helena's first question is about his mother, not the platform.","say":"When Sam comes back on Monday the sixteenth of August, Helena's first question is about his mother, not the platform."},
  {"id":"paid","gap":0.8,"text":"Like a stokvel carrying a member through hard times, the team carried Sam, because everyone had paid in."}
 ]},
-"each":{"name":"Each person, every week","lead":1.0,"tail":1.0,"vo":[
- {"id":"weekly","gap":0.8,"text":"Every week, the one-to-ones go on, about each person, not their tasks."},
+"each":{"name":"Each person, as they need","lead":1.0,"tail":1.0,"vo":[
+ {"id":"weekly","gap":0.8,"text":"The one-to-ones go on, more often for whoever needs it: about each person, not their tasks."},
  {"id":"jun","gap":0.8,"text":"In September, Jun says he's fine, but he's teaching two people, building models and taking his turn on the rota."},
  {"id":"moves","gap":0.8,"text":"Helena moves one of his projects to November, and tells the people who asked, before the load can wear him down."},
  {"id":"review","gap":0.8,"text":"At the quarterly review in October, she gives the team the credit, by name, and answers herself for what slipped."},
@@ -92,7 +92,7 @@ const NARR={
  {"id":"pair","gap":0.8,"text":"On Monday, pair until two people can do each job that matters most, and write down how."},
  {"id":"leave","gap":0.8,"text":"Protect leave: when someone is away, nobody calls them."},
  {"id":"thank","gap":0.8,"text":"Thank the person who says: I got it wrong."},
- {"id":"ask","gap":0.8,"text":"In one-to-ones, ask how people are, not only what they did."},
+ {"id":"ask","gap":0.8,"text":"In one-to-ones, as often as each person needs, ask how they are, not only what they did."},
  {"id":"new","gap":0.8,"text":"And if you're new, watch first: judge the team's shared work before anyone's own."},
  {"id":"take","gap":0.8,"text":"Nobody alone, nobody the only one who knows."}
 ]}

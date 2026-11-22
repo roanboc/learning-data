@@ -42,6 +42,22 @@ class SelectionTests(unittest.TestCase):
             self.assertTrue(set(group) & set(p["pages"]), group[:3])
         self.assertTrue(p["sampled"])
 
+    def test_a_change_to_the_browser_checks_samples_every_kind(self):
+        # Every page took 2.5 hours in CI (#559): the checks themselves are sampled like site.css, and checked nightly on every page.
+        p = self.plan("site-tools/smoke.py")
+        every = affected.loads()
+        self.assertIsNotNone(p["pages"])
+        self.assertLess(len(p["pages"]), len(every) / 4)
+        self.assertTrue(set(affected.ALWAYS) <= set(p["pages"]))
+        for group in affected.kinds(every).values():
+            self.assertTrue(set(group) & set(p["pages"]), group[:3])
+
+    def test_a_file_a_shared_script_loads_is_sampled_too(self):
+        # The tour's words are loaded by path.js, which nearly every page loads: a sample, not every page.
+        p = self.plan("site/assets/learn/tour.en.js")
+        self.assertLess(len(p["pages"]), len(affected.loads()) / 4)
+        self.assertTrue(p["sampled"])
+
     def test_a_series_engine_still_checks_all_its_pages(self):
         engine = "assets/leading-data-people/learn.js"
         users = {k for k, got in affected.loads().items() if engine in got}

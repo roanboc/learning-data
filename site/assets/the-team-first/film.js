@@ -429,7 +429,7 @@ const NARR={
 "whole":{"name":"The team as a whole","lead":1.0,"tail":1.0,"vo":[
  {"id":"helena","gap":0.8,"text":"At a university, a year from now, Helena Novak starts as the data manager on Monday 1 February 2027.","say":"At a university, a year from now, Helena Novak starts as the data manager on Monday the first of February, twenty twenty-seven."},
  {"id":"watch","gap":0.8,"text":"Before she judges anyone, she watches."},
- {"id":"weekly","gap":0.8,"text":"Every week, she has half an hour with each person: about them, never a status report."},
+ {"id":"weekly","gap":0.8,"text":"In her first months, she has half an hour with each person every week: about them, never a status report."},
  {"id":"asks","gap":0.8,"text":"She asks how they are, what's in their way, and what they're proud of."},
  {"id":"whole","gap":0.8,"text":"Then she reads the team as a whole: what it achieves together, and each person's work beside it."},
  {"id":"really","gap":0.8,"text":"She measures it all against what this team really does, not what her last team did."},
@@ -480,8 +480,8 @@ const NARR={
  {"id":"back","gap":0.8,"text":"When Sam comes back on Monday 16 August, Helena's first question is about his mother, not the platform.","say":"When Sam comes back on Monday the sixteenth of August, Helena's first question is about his mother, not the platform."},
  {"id":"paid","gap":0.8,"text":"Like a stokvel carrying a member through hard times, the team carried Sam, because everyone had paid in."}
 ]},
-"each":{"name":"Each person, every week","lead":1.0,"tail":1.0,"vo":[
- {"id":"weekly","gap":0.8,"text":"Every week, the one-to-ones go on, about each person, not their tasks."},
+"each":{"name":"Each person, as they need","lead":1.0,"tail":1.0,"vo":[
+ {"id":"weekly","gap":0.8,"text":"The one-to-ones go on, more often for whoever needs it: about each person, not their tasks."},
  {"id":"jun","gap":0.8,"text":"In September, Jun says he's fine, but he's teaching two people, building models and taking his turn on the rota."},
  {"id":"moves","gap":0.8,"text":"Helena moves one of his projects to November, and tells the people who asked, before the load can wear him down."},
  {"id":"review","gap":0.8,"text":"At the quarterly review in October, she gives the team the credit, by name, and answers herself for what slipped."},
@@ -496,13 +496,13 @@ const NARR={
  {"id":"pair","gap":0.8,"text":"On Monday, pair until two people can do each job that matters most, and write down how."},
  {"id":"leave","gap":0.8,"text":"Protect leave: when someone is away, nobody calls them."},
  {"id":"thank","gap":0.8,"text":"Thank the person who says: I got it wrong."},
- {"id":"ask","gap":0.8,"text":"In one-to-ones, ask how people are, not only what they did."},
+ {"id":"ask","gap":0.8,"text":"In one-to-ones, as often as each person needs, ask how they are, not only what they did."},
  {"id":"new","gap":0.8,"text":"And if you're new, watch first: judge the team's shared work before anyone's own."},
  {"id":"take","gap":0.8,"text":"Nobody alone, nobody the only one who knows."}
 ]}
 };
 
-const VODUR={"stokvel/when": 2.918, "stokvel/yard": 4.892, "stokvel/earn": 4.498, "stokvel/group": 4.835, "stokvel/turn": 7.736, "stokvel/banks": 5.355, "stokvel/lend": 7.975, "stokvel/harm": 8.14, "stokvel/change": 5.993, "stokvel/rules": 8.375, "stokvel/answer": 6.95, "stokvel/burial": 4.97, "stokvel/carry": 3.275, "stokvel/ubuntu": 8.108, "stokvel/decades": 5.011, "stokvel/today": 6.534, "stokvel/rand": 2.857, "stokvel/team": 5.732, "stokvel/step": 2.851, "whole/helena": 8.332, "whole/watch": 2.199, "whole/weekly": 4.966, "whole/asks": 3.312, "whole/whole": 5.378, "whole/really": 4.423, "whole/slow": 2.678, "whole/eleven": 5.01, "whole/weighs": 5.863, "whole/first": 3.566, "whole/comfort": 7.221, "whole/open": 3.627, "whole/gap": 3.09, "whole/sam": 4.76, "whole/sixty": 4.785, "whole/leans": 5.88, "aloud/april": 6.465, "aloud/draft": 4.656, "aloud/caught": 1.733, "aloud/standup": 4.066, "aloud/thanks": 5.591, "aloud/glossary": 5.082, "aloud/more": 2.546, "aloud/name": 3.817, "aloud/belief": 5.797, "aloud/nurses": 6.745, "aloud/others": 2.221, "aloud/teams": 5.88, "aloud/learn": 4.123, "pairs/june": 5.102, "pairs/pair": 8.789, "pairs/runbook": 6.887, "pairs/four": 4.026, "pairs/rota": 4.893, "pairs/quiet": 5.942, "pairs/two": 4.067, "pairs/tutu": 6.09, "pairs/lost": 3.367, "holds/call": 6.012, "holds/go": 2.613, "holds/week": 3.694, "holds/work": 6.949, "holds/alerts": 4.91, "holds/nobody": 1.085, "holds/back": 6.74, "holds/paid": 5.829, "each/weekly": 4.104, "each/jun": 6.75, "each/moves": 6.471, "each/review": 6.135, "each/order": 2.642, "each/ethic": 7.786, "each/metz": 5.797, "each/cares": 3.697, "monday/back": 7.211, "monday/team": 6.121, "monday/pair": 5.334, "monday/leave": 3.206, "monday/thank": 2.301, "monday/ask": 3.296, "monday/new": 4.407, "monday/take": 2.831};
+const VODUR={"stokvel/when": 2.918, "stokvel/yard": 4.892, "stokvel/earn": 4.498, "stokvel/group": 4.835, "stokvel/turn": 7.736, "stokvel/banks": 5.355, "stokvel/lend": 7.975, "stokvel/harm": 8.14, "stokvel/change": 5.993, "stokvel/rules": 8.375, "stokvel/answer": 6.95, "stokvel/burial": 4.97, "stokvel/carry": 3.275, "stokvel/ubuntu": 8.108, "stokvel/decades": 5.011, "stokvel/today": 6.534, "stokvel/rand": 2.857, "stokvel/team": 5.732, "stokvel/step": 2.851, "whole/helena": 8.332, "whole/watch": 2.199, "whole/weekly": 6.228, "whole/asks": 3.312, "whole/whole": 5.378, "whole/really": 4.423, "whole/slow": 2.678, "whole/eleven": 5.01, "whole/weighs": 5.863, "whole/first": 3.566, "whole/comfort": 7.221, "whole/open": 3.627, "whole/gap": 3.09, "whole/sam": 4.76, "whole/sixty": 4.785, "whole/leans": 5.88, "aloud/april": 6.465, "aloud/draft": 4.656, "aloud/caught": 1.733, "aloud/standup": 4.066, "aloud/thanks": 5.591, "aloud/glossary": 5.082, "aloud/more": 2.546, "aloud/name": 3.817, "aloud/belief": 5.797, "aloud/nurses": 6.745, "aloud/others": 2.221, "aloud/teams": 5.88, "aloud/learn": 4.123, "pairs/june": 5.102, "pairs/pair": 8.789, "pairs/runbook": 6.887, "pairs/four": 4.026, "pairs/rota": 4.893, "pairs/quiet": 5.942, "pairs/two": 4.067, "pairs/tutu": 6.09, "pairs/lost": 3.367, "holds/call": 6.012, "holds/go": 2.613, "holds/week": 3.694, "holds/work": 6.949, "holds/alerts": 4.91, "holds/nobody": 1.085, "holds/back": 6.74, "holds/paid": 5.829, "each/weekly": 5.545, "each/jun": 6.75, "each/moves": 6.471, "each/review": 6.135, "each/order": 2.642, "each/ethic": 7.786, "each/metz": 5.797, "each/cares": 3.697, "monday/back": 7.211, "monday/team": 6.121, "monday/pair": 5.334, "monday/leave": 3.206, "monday/thank": 2.301, "monday/ask": 5.303, "monday/new": 4.407, "monday/take": 2.831};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -3089,7 +3089,7 @@ scene("whole",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
     {at:0,place:"tfTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
       tf_atRoom(x,tt,0,{at:"ivy",noor:true,face:tf_alive(tt,{expr:"think",gaze:[1,0.3]},3,0),people:[tf_helena(tt,tf_alive(tt,{expr:"think",gaze:[1,0.1]},5,0),{x:1560,fl:930,out:Hh})]});
       tf_name(x,Hh.J,tt,w("helena","Helena Novak",0),c.watch-0.2,"Helena Novak","Data manager",170);}},
-    // every week, half an hour with each person
+    // in her first months, half an hour a week with each person
     {at:tW,place:"tfCorner",cut:true,keys:[[tW,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
       const r=tf_corner(x,tt,{who2:"jun",lean:0.4,t0:tW,hf:tf_sp(tt,5,[[c.asks+0.2,E.asks]],"smile",0.25),iface:tf_alive(tt,{expr:"listen",gaze:[1,0.3]},2,tW)});
       tf_bub(x,r.helena,tt,c.asks+0.2,tH-0.3,["How are you?","What's in your way?"],cam,{lean:160});}},
@@ -3106,7 +3106,7 @@ scene("whole",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
       tf_screenCall(x,R,ag_io(tt,c.sixty+0.3,1e9,0.4),"Night alerts · to Sam",[["about 60 a week",PK.C.amber,34],["most need nothing",PK.C.ink,34],[ag_in(tt,w("sixty","only Sam",0),0.4)>0.5?"only Sam knows how":"",PK.C.amber,34]],PK.C.amber,{bh:290});}}
   ]);
   tf_card(ctx,S,t,0.3,w("helena","Helena Novak",-0.3),{kick:"Monday 1 February 2027",title:"A new data manager"},{y:40,mid:true});
-  tf_card(ctx,S,t,tW+0.3,c.asks-0.2,{kick:"Every week",title:"Half an hour each"},{y:40,mid:true});
+  tf_card(ctx,S,t,tW+0.3,c.asks-0.2,{kick:"Her first months",title:"Half an hour each"},{y:40,mid:true});
   tf_imagined(ctx,S,t,0.4,w("helena","Helena Novak",-0.2),"The university, 2027 · imagined");
   tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,w("helena","Helena Novak",0)],[tW,c.asks],[tH,tL]])));
 });
@@ -3201,7 +3201,7 @@ scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
   tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,c.call+0.8],[tB,w("back","first question",0)]])));
 });
 
-/* ---------------------------------------------------------------- 6. Each person, every week */
+/* ---------------------------------------------------------------- 6. Each person, as they need */
 scene("each",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),LE=PK.ROOMS.lecture;
   const tR=c.review-0.4,tE=c.ethic-0.4,tZ=c.ethic+2.4,tC=c.cares-0.4,BD=PK.pace(ctx,"carmen",tf_boardD(sc,w));
   ag_shots(ctx,S,t,sc.dur,[

@@ -161,7 +161,7 @@ labs:[
  points:["<b>Cada persona escribe sus metas,</b> acordadas contigo, sobre trabajo real para crecer. Las medidas del equipo nunca son sus metas.",
   "<b>Retroalimentación sobre el trabajo, a menudo:</b> la situación, qué hizo y su efecto. Elogiar a la persona ayuda menos.",
   "<b>Pide retroalimentación sobre ti,</b> y miren juntos hacia un siguiente paso con más a cargo."],
- real:"Acuerda metas que la persona escriba, sobre trabajo real. Da retroalimentación a menudo, breve y sobre el trabajo: cuándo, qué hizo y qué cambió. Reúnete cada semana mientras la persona es nueva o trabaja lejos de ti, y hasta una vez al mes cuando el trabajo va bien; acuerda con ella cada cuánto. Pregunta qué podrías hacer mejor, y en la charla de medio año mira tanto adelante como atrás.",
+ real:"Acuerda metas que la persona escriba, sobre trabajo real. Da retroalimentación a menudo, breve y sobre el trabajo: cuándo, qué hizo y qué cambió. Reúnete más a menudo mientras la persona es nueva, o mientras cambian el trabajo o el equipo; cuando todo va bien, propón reuniros menos, hasta una vez al mes, y deja que acepte. Las reuniones diarias, la planificación, las revisiones y las retrospectivas del equipo van primero. Pregunta qué podrías hacer mejor, y en la charla de medio año mira tanto adelante como atrás.",
  w:{weeks:8,mood:"grow",prompt:"Elige cómo nacen las metas de Ivy, la retroalimentación de Helena y si la pide de vuelta, y juega ocho semanas.",
   start:"La primera semana de Ivy. Elige qué hace Helena y juega las semanas.",
   alt:"Ivy, Helena y Graham, con caras que muestran cómo van las semanas, y un gráfico del crecimiento de Ivy y de cuánto tiene a su cargo, semana a semana, con lo que pasó marcado en su semana.",

@@ -118,8 +118,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Lo que salió bien: la página de Graham para el Consejo Universitario. Lo que haría distinto: pedir revisión antes.",
 "And what she wants next: to make her Monday refresh better, and to teach what she learns.":
 "Y lo que quiere ahora: mejorar su actualización de los lunes, y enseñar lo que aprende.",
-"Her work runs well, and the team meets every week, so Ivy asks to meet Helena once a month. Helena agrees.":
-"Su trabajo va bien y el equipo se reúne cada semana, así que Ivy pide verse con Helena una vez al mes. Helena acepta.",
+"Her work runs well, and she sees the team at every stand-up, so Helena suggests meeting once a month. Ivy agrees.":
+"Su trabajo va bien y ve al equipo en cada reunión diaria, así que Helena propone verse una vez al mes. Ivy acepta.",
 "A growth conversation looks forward: where she wants to go, and what she needs to get there.":
 "Una conversación de crecimiento mira hacia adelante: adónde quiere ir, y qué necesita para llegar.",
 "On Tuesday 14 December, she has owned Teaching space use for nearly six months.":
@@ -138,10 +138,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El lunes, deja que cada quien escriba sus objetivos, y luego acuérdalos.",
 "Give feedback often: the situation, what they did, and its effect.":
 "Da comentarios a menudo: la situación, lo que hizo, y su efecto.",
-"Agree with each person how often you meet, from every week to once a month.":
-"Acuerda con cada persona cada cuánto os reunís, desde cada semana hasta una vez al mes.",
-"The less you work together day to day, the more a weekly catch-up matters.":
-"Cuanto menos trabajáis juntos en el día a día, más importa una charla semanal.",
+"Meet more often when someone is new, or when the work or the team is changing.":
+"Reúnete más a menudo cuando alguien es nuevo, o cuando cambian el trabajo o el equipo.",
+"When all runs well, suggest meeting less often, and let them agree.":
+"Cuando todo va bien, propón reuniros menos a menudo, y deja que acepten.",
+"The team's stand-ups, planning, reviews and retros come first.":
+"Las reuniones diarias, la planificación, las revisiones y las retrospectivas del equipo van primero.",
 "Ask for feedback on yourself, and act on it.":
 "Pide comentarios sobre ti, y actúa con ellos.",
 "Look forward in growth conversations, and give the team the credit, in public.":

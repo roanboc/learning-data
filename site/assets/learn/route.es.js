@@ -45,11 +45,7 @@ window.LD_ROUTE = {
   "uses": "En esta ruta: {s}",
   "key": "Películas vistas, labs vistos, situaciones respondidas, respuestas correctas",
   "you": "Tu avance",
-  "show": "Mostrar",
-  "show_all": "Todos",
-  "show_on": "En curso",
-  "show_new": "Sin empezar",
-  "show_done": "Terminados",
+  "hidep": "Ocultar lo que no está en esta ruta",
   "gall": "ver todos los temas",
   "gall_line": "Toda la ruta, cada tema.",
   "gline_all": "Cada tema, en el orden de la ruta. Elige una meta para ver su camino.",
@@ -62,7 +58,7 @@ window.LD_ROUTE = {
   "st_start": "Empieza",
   "st_cont": "Sigue",
   "st_again": "Vista · repasa",
-  "none": "Aún no hay temas aquí. Prueba otro filtro.",
+  "none": "Aún no hay nada en esta ruta.",
   "icons": "Películas vistas, labs vistos, respondidas, correctas"
  },
  "groups": [

@@ -1,9 +1,9 @@
 /* Learning Data: the learning route (route.js) and the Topics page (topics.js, progress.js): one view, the map, then the list with its goal, filters and progress.
    Loaded only by the pages that show them, so the films' pages don't carry it. Colours come from site.css's tokens, so
    both views follow the visitor's theme; a line's colour is --c: the suggested route (the accent), and the two loops. */
-.route,.list-view,.tp-you{--r-main:var(--accent);--r-share:#8a5600;--r-agents:#6a4fcf}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .route,:root:not([data-theme=light]) .list-view,:root:not([data-theme=light]) .tp-you{--r-share:#ffc860;--r-agents:#b9a2ff}}
-[data-theme=dark] .route,[data-theme=dark] .list-view,[data-theme=dark] .tp-you{--r-share:#ffc860;--r-agents:#b9a2ff}
+.route,.list-view,.tp-you,.tp-cards{--r-main:var(--accent);--r-share:#8a5600;--r-agents:#6a4fcf}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .route,:root:not([data-theme=light]) .list-view,:root:not([data-theme=light]) .tp-you,:root:not([data-theme=light]) .tp-cards{--r-share:#ffc860;--r-agents:#b9a2ff}}
+[data-theme=dark] .route,[data-theme=dark] .list-view,[data-theme=dark] .tp-you,[data-theme=dark] .tp-cards{--r-share:#ffc860;--r-agents:#b9a2ff}
 .ln-main{--c:var(--r-main)}.ln-share{--c:var(--r-share)}.ln-agents{--c:var(--r-agents)}
 .route-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
@@ -242,9 +242,11 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 .tp-menu li b{display:block;font-size:15px}.tp-menu li span{display:block;color:var(--muted);font-size:13.5px;line-height:1.4}
 .tp-menu li:hover,.tp-menu li.act{background:color-mix(in srgb,var(--accent) 12%,transparent)}
 .tp-menu li[aria-selected=true] b::after{content:" ✓";color:var(--accent)}
-.tp-show{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
-.tp-show button{border:0;background:none;color:var(--muted);font:700 14px/1.2 inherit;font-family:inherit;padding:10px 13px;min-height:44px;cursor:pointer;white-space:nowrap}
-.tp-show button[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--fg)}
+.tp-hide{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;color:var(--fg);font-weight:700;font-size:14.5px;cursor:pointer;white-space:nowrap}
+.tp-hide[hidden]{display:none}
+.tp-hide input{width:20px;height:20px;margin:0;accent-color:var(--accent);cursor:pointer}
+/* a topic's own page: the same tiles; its total in the hero, beside Continue */
+.tpage .tp-you .cont{margin:0}
 .tp-gline{margin:0;color:var(--muted);font-size:14.5px}.tp-gline b{color:var(--fg)}
 .tp-none{color:var(--muted);margin:14px 0 0}
 .ix-group.tp-empty{display:none}
@@ -254,7 +256,7 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 .topic summary .tp-mx:empty{display:none}
 .list-view .module.topic.off>details>summary,.list-view .module.topic.off .ix-line{opacity:.42}
 /* the cards of a row: big tiles, as many as fit, with their progress and what to do next */
-.tp .topic details .topic-grid.rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:14px}
+.tp .topic details .topic-grid.rows,.tp .tp-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:14px}
 .tp .topic-card.row{display:flex;flex-direction:column}
 .tp .topic-card.row>img,.tp .topic-card.row>.sc-media{width:100%;height:auto;min-height:0;aspect-ratio:16/8}
 .tp .topic-card.row .tc-body{padding:12px 14px 14px}
@@ -276,7 +278,7 @@ a.r-sc:hover{border-color:var(--accent)}a.r-sc:hover b{text-decoration:underline
 @media (max-width:879px){
   .tp .ix-tools{grid-template-columns:minmax(0,1fr);position:static}
   .tp section.topic{scroll-margin-top:calc(var(--top-h) + 12px)}
-  .tp-show{justify-self:start;max-width:100%;overflow-x:auto}
+  .tp-hide{justify-self:start;white-space:normal}
   .tp .ix-group{position:relative}
   .tp .ix-group::before{content:"";position:absolute;left:14.5px;top:30px;bottom:-20px;width:3px;border-radius:2px;background:var(--c);opacity:.5}
   .tp .ix-group:last-of-type::before{bottom:30px}

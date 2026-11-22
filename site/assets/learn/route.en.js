@@ -45,11 +45,7 @@ window.LD_ROUTE = {
   "uses": "On this route: {s}",
   "key": "Films watched, labs seen, situations answered, right answers",
   "you": "Your progress",
-  "show": "Show",
-  "show_all": "All",
-  "show_on": "In progress",
-  "show_new": "Not started",
-  "show_done": "Done",
+  "hidep": "Hide what isn't on this path",
   "gall": "see all topics",
   "gall_line": "The whole route, every topic.",
   "gline_all": "Every topic, in route order. Pick a goal to see its path.",
@@ -62,7 +58,7 @@ window.LD_ROUTE = {
   "st_start": "Start",
   "st_cont": "Continue",
   "st_again": "Watched · review",
-  "none": "No topic here yet. Try another filter.",
+  "none": "Nothing on this path yet.",
   "icons": "Films watched, labs seen, answered, right"
  },
  "groups": [

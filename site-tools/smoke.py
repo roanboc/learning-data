@@ -1676,15 +1676,15 @@ async def check_tour(run):
             finally:
                 await ctx.close()
         a, b = out[1280], out[390]
-        expect(sec, all(t in a for t in ("Your progress", "The route", "Search what the films say", "Pick a goal", "Show only some")) and "The route" not in b and "Pick a goal" in b,
-               f"/{key}: the tour is {a} on a laptop and {b} on a phone; the map's step shows only where the map is drawn")
+        expect(sec, all(t in a for t in ("Your progress", "The route", "Search what the films say", "Pick a goal")) and "Only this path" not in a and "The route" not in b and "Pick a goal" in b,
+               f"/{key}: the tour is {a} on a laptop and {b} on a phone; the map's step shows only where the map is drawn, the toggle's only with a goal")
 
 
 # ---------------------------------------------------------------- the learning route
 async def check_route(run):
-    sec = run.rep.sec("route", "The Topics page, one view: the map from 880 px, the list with its goal, filters, progress icons and search; the home page's ways on; readable in dark mode")
-    tkeys, hkeys = run.pick(("topics/", "es/topics/")), run.pick(("", "es/"))
-    if not (tkeys or hkeys):
+    sec = run.rep.sec("route", "The Topics page, one view: the map from 880 px, the list with its goal, its one toggle, progress icons and search; a topic's page with the same tiles; the home page's ways on; readable in dark mode")
+    tkeys, hkeys, pkeys = run.pick(("topics/", "es/topics/")), run.pick(("", "es/")), run.pick(("topics/data-modelling/", "es/topics/data-modelling/"))
+    if not (tkeys or hkeys or pkeys):
         return
     import build_series
     D = {lg: build_series.route_data(lg) for lg in ("en", "es")}
@@ -1701,7 +1701,9 @@ async def check_route(run):
                 over, faint, small: q('.route .r-sl, .route .r-gl').filter(e => parseFloat(getComputedStyle(e).fontSize) < 12).length,
                 wide: document.documentElement.scrollWidth <= innerWidth, dim: q('.route .r-st.dim').length, off: q('#list section.topic.off').length,
                 steps: q('#list .tp-step').length, you: !!document.querySelector('.tp-you:not([hidden]) .mx'), goal: (document.querySelector('.tp-gb b') || {}).textContent || '',
-                rows: q('#list section.topic').filter(r => !r.hidden).length, cards: q('#list [data-item] .tp-cm .mx').length}; }"""
+                rows: q('#list section.topic').filter(r => !r.hidden).length, cards: q('#list [data-item] .tp-cm .mx').length,
+                shown: q('#list [data-item]').filter(c => !c.hidden && !c.closest('[hidden]')).length, toggle: !!(document.querySelector('.tp-hide') || {}).offsetParent,
+                filters: q('[data-show], .tp-show').length, hid: !!document.querySelector('.route.r-hide')}; }"""
 
     async def seeded(width, theme, seed):
         ctx = await run.context(width, theme)
@@ -1754,11 +1756,42 @@ async def check_route(run):
                     await pg.reload(wait_until="load")
                     g = await pg.evaluate(FACTS)
                     expect(sec, g["goal"] == goal["name"], f"{at}: the goal isn't kept after a reload ({g['goal']!r})")
+                    # the one toggle (the author, 22 November 2026): with a goal, it hides what isn't on its path, here and on the map
+                    on_t = len({next(t["id"] for t in d["topics"] if any(i["id"] == x for i in t["items"])) for x in goal["stops"]})
+                    expect(sec, g["toggle"], f"{at}: with a goal, the toggle that hides what isn't on its path doesn't show")
+                    await pg.click(".tp-hide input")
+                    h = await pg.evaluate(FACTS)
+                    expect(sec, h["rows"] == on_t and h["shown"] == stops and (width < 900 or h["hid"]),
+                           f"{at}: hiding what isn't on the path leaves {h['rows']} rows and {h['shown']} cards, for {on_t} topics and {stops} stops (map hides its stations: {h['hid']})")
+                    await pg.click(".tp-hide input")
                     await pg.click(".tp-gb")
                     await pg.click('.tp-menu [data-goal=""]')
                 await pg.close()
         finally:
             await ctx.close()
+
+    # a topic's page shows its series as the Topics page does (the author, 22 November 2026): the same tiles, each with its line
+    # of icons and what to do next, and the topic's own total beside Continue; no bars; breadcrumb back to Topics
+    for key in pkeys:
+        d = D[lang(key)]; t = next(x for x in d["topics"] if x["id"] == "data-modelling")
+        for width in (1280, 390):
+            ctx = await seeded(width, "dark", {"ld-whats-in-a-word:watched": True, "ld-keeping-it-true:watched": True})
+            try:
+                pg, log = await run.page(ctx, key)
+                r = await pg.evaluate("""() => { const q = s => [...document.querySelectorAll(s)];
+                    return {cards: q('.tp-cards [data-item]').length, lines: q('.tp-cards [data-item] .tp-cm .mx').length, st: q('.tp-cards .tp-st').length,
+                            you: (document.querySelector('.tp-you [data-yb] .mx-fw b') || {}).textContent || '', cont: !!document.querySelector('.tp-you .cont a.btn'),
+                            bars: q('.pbars, .spack, .pbar').length, crumb: (document.querySelector('.crumbs a') || {}).getAttribute?.('href') || '',
+                            cols: new Set(q('.tp-cards [data-item]').map(c => Math.round(c.getBoundingClientRect().left))).size,
+                            wide: document.documentElement.scrollWidth <= innerWidth}; }""")
+                live_ = len([i for i in t["items"] if not i.get("soon")])
+                expect(sec, r["cards"] == live_ and r["lines"] == live_ and r["st"] == live_, f"/{key} @{width}: {r['cards']} tiles with {r['lines']} lines of icons and {r['st']} next steps, for {live_} series")
+                expect(sec, r["you"] == "2" and r["cont"] and not r["bars"], f"/{key} @{width}: the hero's icons say {r['you']!r} films watched, for 2; Continue {r['cont']}; old bars {r['bars']}")
+                expect(sec, r["crumb"].endswith("topics/") and r["wide"] and (width < 700 or r["cols"] > 1), f"/{key} @{width}: breadcrumb {r['crumb']!r}, scrolls sideways {not r['wide']}, tiles in {r['cols']} columns")
+                expect(sec, not log["console"] and not log["errors"], f"/{key} @{width}: {(log['console'] + log['errors'])[:2]}")
+                await pg.close()
+            finally:
+                await ctx.close()
 
     # the home page stays a first view: after the film's two other steps, the route and the Making of, and no map or list of
     # topics; on a phone nothing scrolls sideways, and the first button lands on the Topics page
@@ -1797,13 +1830,10 @@ async def check_route(run):
             expect(sec, 0 < ring < 1, f"/{key}: the Data modelling row's ring is {ring}, with two of its films watched")
             fw = await pg.evaluate("() => (document.querySelector('#data-modelling [data-tmx] .mx-fw b') || {}).textContent")
             expect(sec, fw == "2", f"/{key}: the Data modelling row's line of icons says {fw!r} films watched, for 2")
-            # Show: in progress keeps only the topic begun; all brings every row back
-            await pg.click('[data-show="on"]')
+            # no filter but the goal's toggle, and that only with a goal (the author, 22 November 2026)
             f = await pg.evaluate(FACTS)
-            expect(sec, f["rows"] == 1, f"/{key}: Show in progress leaves {f['rows']} rows, for the one topic begun")
-            await pg.click('[data-show="all"]')
-            f = await pg.evaluate(FACTS)
-            expect(sec, f["rows"] == len(d["topics"]), f"/{key}: Show all brings back {f['rows']} rows, for {len(d['topics'])} topics")
+            expect(sec, not f["filters"] and not f["toggle"] and f["rows"] == len(d["topics"]),
+                   f"/{key}: without a goal, {f['rows']} rows show, for {len(d['topics'])} topics; other filters ({f['filters']}) or the toggle ({f['toggle']}) show")
             # a row opens by keyboard, and shows its cards
             await pg.focus(f'#{t["id"]} summary')
             await pg.keyboard.press("Enter")

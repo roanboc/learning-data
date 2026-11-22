@@ -53,10 +53,9 @@ function paint(){
   document.querySelectorAll("[data-continue]").forEach(a=>{const fs=JSON.parse(a.dataset.continue),i=fs.findIndex(f=>!stats(f[0]).watched),
     any=fs.some(f=>stats(f[0]).watched),f=fs[i<0?0:i];a.href=f[1];a.textContent=(i<0?a.dataset.again:any?a.dataset.go:a.dataset.start)+": "+f[2]+" →";});
   document.querySelectorAll("[data-film]").forEach(r=>r.classList.toggle("w",stats(r.dataset.film).watched));
-  // a series' practice: labs seen, situations answered, right ones, as thin bars
-  document.querySelectorAll("[data-practice]").forEach(u=>{const st=cap(stats(u.dataset.practice),+u.dataset.labs,+u.dataset.quiz),
-    v={labs:st.labs/(+u.dataset.labs||1),n:st.n/(+u.dataset.quiz||1),ok:st.n?st.ok/st.n:0};
-    u.querySelectorAll("[data-k]").forEach(b=>{b.firstElementChild.style.width=Math.round(100*v[b.dataset.k])+"%";});});}
+  // a series' practice: labs seen, situations answered, right ones, as one line of icons (the Topics page's)
+  document.querySelectorAll("[data-practice]").forEach(u=>{const st=cap(stats(u.dataset.practice),+u.dataset.labs,+u.dataset.quiz);
+    u.querySelectorAll("[data-k]").forEach(b=>{b.textContent=st[b.dataset.k];});});}
 document.querySelectorAll("[data-seen]").forEach(b=>b.addEventListener("click",()=>{const s=store(b.dataset.seen);s.set("watched",!s.get("watched",false));paint();}));
 
 paint();window.addEventListener("storage",paint);window.addEventListener("pageshow",paint);

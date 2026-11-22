@@ -15,7 +15,7 @@ The checks it picks from:
              file no page names counts for the pages that load the files beside it. A page whose only change is the versions
              its links carry (?v=, site-tools/build_series.py's stamp()) isn't checked for that: the file that changed picks
              the pages that load it. A change to the browser checks
-             themselves checks every page, and one to a series' play script (site-tools/smoke/<series>.js) its labs and
+             themselves checks a sample of every kind of page, and one to a series' play script (site-tools/smoke/<series>.js) its labs and
              scenarios pages
   films      for each film whose source changed (its "paths" in its release.json, shared code included,
              so a change to the first film's engine checks every film that draws with it): build the player, check
@@ -66,7 +66,9 @@ READS = ["films/data-governance/shared/tools/cues.py"]
 # in its paths, but it changes no player. A change to it runs the tooling tests (tests/test_twice.py) and picks no film; it is run on
 # every film before it merges, and what it newly finds waits in site-tools/twice_later.json, as with site-tools/fits.py and shots.py.
 CHECKS = ["films/data-governance/shared/tools/twice.py"]
-SMOKE = ["site-tools/smoke.py"]  # the browser checks themselves: a change runs them on every page
+# The browser checks themselves: a change runs them on a sample of every kind of page, as a stylesheet every page loads does.
+# Every page took 2.5 hours (#559, 22 Nov 2026); the nightly run still checks every page.
+SMOKE = ["site-tools/smoke.py"]
 PLAYS = "site-tools/smoke"        # a series' play script: its labs and scenarios pages
 USED = ["site-tools/check_site.py", "site-tools/build_series.py"]  # what smoke.py imports: a change starts it, with no page
 WEB = ROOT / "site"
@@ -232,8 +234,10 @@ def shards(keys, size=SHARD_PAGES, most=MAX_SHARDS):
 
 def pages(files, base="HEAD", note=None):
     """The pages the browser checks run on: None for every page, else the keys of the pages a change touched."""
-    if any(f in SMOKE for f in files):
-        return None
+    L = loads()
+    out, html, wide = set(), set(), set()
+    if any(f in SMOKE for f in files):  # the checks changed: a sample of every kind of page, as for site.css
+        wide |= set(L)
     # Compare pointer contents, so bookkeeping alone doesn't retest unchanged audio.
     files = list(files)
     for f in list(files):
@@ -242,8 +246,6 @@ def pages(files, base="HEAD", note=None):
             if not (ROOT / f).is_file() and not base:
                 # A removed manifest still has an owner in release.json.
                 files.extend(e["site_player"] for e in films() if e["release"] == f.removesuffix("audio.json") + "release.json")
-    L = loads()
-    out, html, wide = set(), set(), set()
     for f in files:
         if under(f, [PLAYS]):
             series = pathlib.PurePosixPath(f).stem
@@ -259,9 +261,6 @@ def pages(files, base="HEAD", note=None):
                 html.add(rel[:-len("index.html")] if rel.endswith("index.html") else rel)
             continue
         users = {k for k, got in L.items() if rel in got}
-        if len(users) > SHARED_OVER:  # a file of the whole site's: a sample of its pages
-            wide |= users
-            continue
         if not users and rel.startswith("assets/"):
             # JS loads nested assets (places/*.webp, for example) at runtime. Follow the owning
             # asset bundle, not just files in exactly the same directory. This also works for deletions.
@@ -269,6 +268,9 @@ def pages(files, base="HEAD", note=None):
             if len(parts) >= 3:
                 owner = "/".join(parts[:2]) + "/"
                 users = {k for k, got in L.items() if any(x.startswith(owner) for x in got)}
+        if len(users) > SHARED_OVER:  # a file of the whole site's, or one its scripts load (the tour): a sample of its pages
+            wide |= users
+            continue
         out |= users  # a file nothing loads, such as a page's Markdown source, checks no page
     if len(html) > PAGES_OVER:  # a change to every page, as from build_series.py: a sample of them
         wide |= html

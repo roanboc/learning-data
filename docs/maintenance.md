@@ -93,7 +93,7 @@ So every page links the site's own scripts, stylesheets and pictures by a hash o
 - After `tools/publish.py`, or any change to a file under `site/assets/`, run `python site-tools/build_series.py`. `site-tools/check_site.py` fails a page whose link lacks its file's current version (*Versions*), and a page that isn't what `build_series.py` makes.
 - A shared file, such as `site.css`, gives every page a new version. `.github/scripts/affected.py` doesn't browser-check a page whose only change is its versions: the changed file picks the pages that load it. A file more than 100 pages load (`site.css`, `ambient.js`, `path.js`, the film pages' `seek.js`) picks a sample of them, a few pages of each kind (`sample()`), and so does a change to more than 150 pages at once; the nightly Checks run browser-checks every page. In CI the browser checks run in parallel jobs of about 40 pages each, at most 8 (`shards()`): all ~600 pages in one job took 2.5 hours (19 Nov 2026).
 - Two branches that change the same shared file clash on its versions in the pages: merge `main` and run `build_series.py` again.
-- Soundtracks keep their bare names for now (`site-tools/smoke.py` reads a page's soundtrack by its bare name, and a change there browser-checks every page), and so do the pictures of places the watercolour player fetches as it plays, and the guided tour's files.
+- Soundtracks keep their bare names for now (`site-tools/smoke.py` reads a page's soundtrack by its bare name, and a change there browser-checks a sample of each kind of page), and so do the pictures of places the watercolour player fetches as it plays, and the guided tour's files.
 
 ## Subsequent structural migrations
 

@@ -336,8 +336,8 @@ window.LD_ROUTE = {
      ],
      "pr": [
       "ld-governance-on-the-map",
-      9,
-      9
+      6,
+      12
      ]
     },
     {

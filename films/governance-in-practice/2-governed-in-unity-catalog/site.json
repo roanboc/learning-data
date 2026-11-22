@@ -1,5 +1,5 @@
 {
-  "draft": true,
+  "draft": false,
   "kicker": "Access, masks and audit",
   "kicker_es": "Acceso, máscaras y auditoría",
   "title_es": "Gobernanza en Unity Catalog",

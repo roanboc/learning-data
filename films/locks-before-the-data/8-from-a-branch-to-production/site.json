@@ -1,5 +1,5 @@
 {
-  "draft": true,
+  "draft": false,
   "kicker": "A reviewed path to production",
   "kicker_es": "Un camino revisado a producción",
   "title_es": "De una rama a producción",

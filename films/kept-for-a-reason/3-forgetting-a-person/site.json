@@ -34,6 +34,6 @@
   "fiction_es": "La universidad, su gente y sus cifras son inventadas, y también las dos personas que lo buscan en 2009; la historia, sus fechas y cifras son reales, con sus fuentes en el guion.",
   "fiction_series": "In Forgetting a person, the opening's history, its dates and figures are real, with their sources in its script.",
   "fiction_series_es": "En Olvidar a una persona, la historia del inicio, sus fechas y cifras son reales, con sus fuentes en su guion.",
-  "draft": true,
+  "draft": false,
   "tile": [520, 360, 640]
 }

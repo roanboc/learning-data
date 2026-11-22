@@ -174,7 +174,7 @@ labs:[
  points:["<b>People write their own goals,</b> agreed with you, on real work to grow on. The team's measures never become their targets.",
   "<b>Feedback about the work, often:</b> the situation, what they did, and its effect. Praise about the person helps least.",
   "<b>Ask for feedback on yourself,</b> and look forward together to a next step with more to own."],
- real:"Agree goals that the person writes, on real work. Give feedback often, short and about the work: when, what they did, and what it changed. Meet every week while someone is new or works apart from you, and as little as once a month when the work runs well; agree how often with them. Ask what you could do better, and in the half-year conversation look forward as much as back.",
+ real:"Agree goals that the person writes, on real work. Give feedback often, short and about the work: when, what they did, and what it changed. Meet more often while someone is new, or while the work or the team is changing; when all runs well, suggest meeting less often, as little as once a month, and let them agree. The team's stand-ups, planning, reviews and retros come first. Ask what you could do better, and in the half-year conversation look forward as much as back.",
  w:{weeks:8,mood:"grow",prompt:"Pick how Ivy's goals come about, Helena's feedback, and whether she asks for it back, then play eight weeks.",
   start:"Ivy's first week. Choose what Helena does, then play the weeks.",
   alt:"Ivy, Helena and Graham, their faces showing how the weeks go, and a chart of Ivy's growth and of how much she owns, week by week, with what happened pinned to its week.",

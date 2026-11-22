@@ -9,7 +9,7 @@
      watched, from the same keys path.js reads ("<prefix>:watched"), in this browser only.
    - A goal ("I want to…") lights up the stops of its route and numbers them; the map itself never changes. The goal is kept in
      this browser ("ld-route:goal"), shared with the Progress view (progress.js, the "ld-route" event). With a goal, the topics
-     it doesn't pass through can be hidden ("ld-route:hide"), and a link leads to the Progress view (#progress).
+     it doesn't pass through can be hidden ("ld-route:hide", the Topics page's toggle in map mode).
    - A topic with films that show the example dbt project (D.project) carries the project's icon: on the map, a badge on its
      station's ring, which doesn't widen its name; on the rail, by its name. It reads on a closed station, and opens on a box, after the topic's films and series, that links to the project's page (which links to GitHub).
    - data-mode="map" (the Topics page, 21 November 2026): the map only, from 880 px, with the start as its first station, on
@@ -160,7 +160,7 @@ function draw(box){
       window.dispatchEvent(new CustomEvent("ld-route",{detail:"route"}));}});
   box.addEventListener("change",e=>{if(e.target.matches("[data-hide]")){st.hide=e.target.checked;set("ld-route:hide",st.hide||null);render();}});
   // the Progress view shares the chosen route: follow it when it changes there
-  window.addEventListener("ld-route",e=>{if(e.detail==="route")return;const g=goal(get("ld-route:goal"));st.goal=g?g.id:null;st.panel=g&&!MAP?"goal":"station";render();});
+  window.addEventListener("ld-route",e=>{if(e.detail==="route")return;const g=goal(get("ld-route:goal"));st.goal=g?g.id:null;st.hide=get("ld-route:hide")===true;st.panel=g&&!MAP?"goal":"station";render();});
   if(MAP){st.panel="station";window.addEventListener("storage",render);}
   if(window.ResizeObserver)new ResizeObserver(()=>{if(box.clientWidth!==st.w)render();}).observe(box);
   else window.addEventListener("resize",render);

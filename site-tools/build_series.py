@@ -875,12 +875,20 @@ def outside_row(lg, S, n, h, R):
 PRACTICE = {"en": ("Labs seen", "Answered", "Right"), "es": ("Labs vistos", "Respondidas", "Correctas")}
 
 
+# the icons of the progress line, the same as the Topics page's (assets/learn/progress.js): labs seen, answered, right
+MX_ICON = {"ls": '<path d="M8 3h4M9 3v5l-4.5 7.2A1.2 1.2 0 0 0 5.5 17h9a1.2 1.2 0 0 0 1-1.8L11 8V3"/><path d="M6.6 12.5h6.8"/>',
+           "an": '<path d="M4 5.5A2 2 0 0 1 6 3.5h8a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2H9l-3.6 3v-3H6a2 2 0 0 1-2-2z"/>',
+           "ok": '<circle cx="10" cy="10" r="6.8"/><path d="M7 10.2l2.1 2.1 4-4.3"/>'}
+
+
 def practice_bars(lg, prefix, nl, nq):
-    """Three thin bars for a series' practice: labs seen, situations answered, right ones (path.js fills them from the store)."""
+    """A series' practice as one line of icons, as on the Topics page: labs seen, situations answered, right ones (path.js fills
+    the counts from the store)."""
     a, b, c = PRACTICE[lg]
-    bar = lambda k, t: f'<li><span>{t}</span><span class="pbar{" ok" if k == "ok" else ""}" data-k="{k}"><i></i></span></li>'
-    return (f'<ul class="pbars" data-practice="{prefix}" data-labs="{nl}" data-quiz="{nq}">'
-            + bar("labs", a) + bar("n", b) + bar("ok", c) + '</ul>')
+    li = lambda k, ic, t, of: (f'<li class="mx-{ic}" title="{t}"><svg class="mx-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false">{MX_ICON[ic]}</svg>'
+                               f'<span class="sr">{t}: </span><b data-k="{k}">0</b><small>{of}</small></li>')
+    return (f'<ul class="mx pmx" data-practice="{prefix}" data-labs="{nl}" data-quiz="{nq}">'
+            + li("labs", "ls", a, f"/{nl}") + li("n", "an", b, f"/{nq}") + li("ok", "ok", c, " " + ROUTE_TEXT[lg]["right"].format(n="").strip()) + '</ul>')
 
 
 def up_next(lg, S, R):
@@ -1405,7 +1413,6 @@ def topics_page(lg):
     seconds = [p for t in order for e in es[t["id"]] for p in e["posters"][1:2]]
     mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (firsts + seconds)[:8])
     RT = ROUTE_TEXT[lg]
-    show = "".join(f'<button type="button" data-show="{k}" aria-pressed="{str(k == "all").lower()}">{E(RT["show_" + k])}</button>' for k in ("all", "on", "new", "done"))
     body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main class="tp">\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow">Learning Data</p>\n<h1>{TOPICS_PAGE["h1"][lg]}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg].format(**TW)}</p>\n'
             f'<div class="tp-you" data-you data-base="{RL}" hidden></div>\n</section>\n'
@@ -1415,7 +1422,7 @@ def topics_page(lg):
             f'<input id="ix-q" type="search" autocomplete="off" placeholder="{E(V["search"])}" aria-label="{E(V["search"])}" data-index="{R}assets/learn/search.{lg}.json" '
             f'data-base="{RL}" data-root="{R}" data-text="{E(json.dumps(V["text"], ensure_ascii=False))}"></label>\n'
             f'<div class="tp-goal" data-goalpick></div>\n'
-            f'<div class="tp-show" role="group" aria-label="{E(RT["show"])}">{show}</div>\n'
+            f'<label class="tp-hide" hidden><input type="checkbox" data-tphide> {E(RT["hidep"])}</label>\n'
             '<p class="tp-gline" data-gline aria-live="polite"></p>\n'
             '<p class="ix-count" id="ix-count" role="status" hidden></p>\n</div>\n<div class="ix-results" id="ix-results" hidden></div>\n')
     for g in D["groups"]:
@@ -1478,45 +1485,27 @@ def practice_of(item_id):
     return None
 
 
-def series_pack(lg, e, item_id, R, RL, i):
-    """A series of a topic, packed with its practice: its pictures, number, title and films watched, and beside it three thin bars
-    (labs seen, answered, right). The whole card opens the series."""
-    S = next((x for x in SERIES if x["id"] == item_id), None)
-    lang = ' lang="en"' if lg == "es" and e["title_lang"] == "en" else ""
-    films_txt = (f'<span class="sp-w" data-series-text=\'{ST[lg]}\'><span data-films="{" ".join(e["progress"][1])}" hidden></span></span>' if e["progress"][0] == "series" else
-                 f'<span class="sp-w" data-progress-text=\'{PT[lg]}\'><span data-progress="{e["progress"][1]}" hidden></span></span>')
-    kind = (T(lg, f"Series {i}", f"Serie {i}") + " · " + e["kicker"].split(" · ", 1)[-1]) if e["kind"] == "series" else e["kicker"]
-    pr = practice_of(item_id)
-    bars = practice_bars(lg, *pr) if pr else ""
-    return (f'<li class="spack"><a href="{RL}{e["href"]}"><span class="sp-media"><img src="{R}assets/{e["posters"][0]}" alt="" width="1280" height="720" loading="lazy"></span>'
-            f'<span class="sp-body"><small>{E(kind)}</small><b{lang}>{E(e["title"])}</b><span class="sp-c">{E(e["card"])}</span>{films_txt}</span>'
-            f'{bars}</a></li>')
-
-
 def topic_page(lg, tid):
-    """A topic's page, /topics/<topic>/: its series in order, each packed with its practice; the example project, folded; the
-    series still to come; and the previous and next topic on the route."""
+    """A topic's page, /topics/<topic>/: its series in order, as the same big tiles as on the Topics page, each with its line of
+    progress icons and what to do next (progress.js); the example project, folded; the series still to come; and the previous
+    and next topic on the route."""
     TL = {t["id"]: t for t in live()}; t = TL[tid]; PC = project_counts()
     path = f"topics/{tid}/"
     name = t["name"][lg]
     h, R = head(lg, path, f'{name} · Learning Data', t["line"][lg], t["line"][lg], "poster.jpg")
-    h += f'<link rel="stylesheet" href="{R}assets/learn/pages.css">\n'
+    h += f'<link rel="stylesheet" href="{R}assets/learn/pages.css">\n<link rel="stylesheet" href="{R}assets/learn/route.css">\n'
     RL = R if lg == "en" else R[3:]
     items = list(shown(t)); es = [entry(lg, i) for i in items]
     rows = [r for i in items for r in item_films(lg, i, RL)]
     pics = [p for e in es for p in e["posters"][:2]]
     mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (pics * 8)[:8])
-    nser = 0; packs = []
-    for i, e in zip(items, es):
-        nser += e["kind"] == "series"
-        packs.append(series_pack(lg, e, i, R, RL, nser))
-    a, b, c = PRACTICE[lg]
-    body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
+    cards = "\n".join(topic_card(lg, e, RL, R).replace('<article class="', f'<article data-item="{i}" class="', 1) for i, e in zip(items, es))
+    body = (f'<body>\n{header(lg, path, R)}\n<main class="tp tpage">\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow crumbs"><a href="{RL}topics/">{T(lg, "Topics", "Temas")}</a></p>\n<h1>{E(name)}</h1>\n<p class="lead">{E(t["line"][lg])}</p>\n'
-            f'<p class="who">{E(t["who"][lg])}</p>\n{continue_button(lg, rows)}</section>\n\n'
+            f'<p class="who">{E(t["who"][lg])}</p>\n<div class="tp-you" data-you data-scope="{tid}" data-base="{RL}"><div class="tp-yb" data-yb></div>\n{continue_button(lg, rows)}</div>\n</section>\n\n'
             f'<section class="module" id="series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "The series", "Las series")}</h2>'
             f'<p>{T(lg, "Watch them in this order; practise each as you go.", "Míralas en este orden; practica cada una sobre la marcha.")}</p></div></div>\n'
-            f'<ol class="spacks">\n' + "\n".join(packs) + '\n</ol>\n</section>\n\n')
+            f'<div class="topic-grid rows tp-cards" data-items data-progress-text=\'{PT[lg]}\' data-series-text=\'{ST[lg]}\'>\n{cards}\n</div>\n</section>\n\n')
     if PC.get(tid):
         body += fold(lg, "in-the-project", T(lg, "In the example project", "En el proyecto de ejemplo"), project_box(lg, PC[tid], RL),
                      T(lg, f"{PC[tid]} film{'s' * (PC[tid] != 1)} show its files", f"{PC[tid]} película{'s' * (PC[tid] != 1)} muestra{'n' * (PC[tid] != 1)} sus archivos"))
@@ -1532,7 +1521,8 @@ def topic_page(lg, tid):
     body += (f'<section class="module" id="up-next" aria-labelledby="up-next-h">\n<div class="mhead"><div><h2 id="up-next-h">{T(lg, "Up next on the route", "Lo que sigue en la ruta")}</h2></div></div>\n'
              f'<div class="tnavs">{pn(prv, T(lg, "← Before this", "← Antes de este"))}{pn(nxt, T(lg, "Next on the route →", "Sigue en la ruta →")) or f"""<a class="tnav" href="{RL}topics/"><small>{T(lg, "The end of the route", "El final de la ruta")}</small><b>{T(lg, "All topics", "Todos los temas")}</b></a>"""}</div>\n</section>\n\n')
     body += (f'</main>\n<footer>{SOURCE[lg]}<p>{TOPICS_PAGE["foot"][lg]} {NOTICES[lg]}</p></footer>\n'
-             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
+             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/route.{lg}.js"></script>\n<script src="{R}assets/learn/progress.js"></script>\n'
+             f'<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
 
 
@@ -1651,10 +1641,10 @@ ROUTE_TEXT = {
                showall="Show all topics", onroute="Progress on this route", alltopics="All topics", notyet="Not started",
                cont="Continue", fw="Films watched", ls="Labs seen", an="Answered", ok="Right", uses="On this route: {s}",
                key="Films watched, labs seen, situations answered, right answers",
-               you="Your progress", show="Show", show_all="All", show_on="In progress", show_new="Not started", show_done="Done",
+               you="Your progress", hidep="Hide what isn't on this path",
                gall="see all topics", gall_line="The whole route, every topic.", gline_all="Every topic, in route order. Pick a goal to see its path.",
                gline="{s} in {t}.", stop1="1 stop", topic1="1 topic", topicn="{n} topics", step="Step {n} of {of}", right="{n} right",
-               st_start="Start", st_cont="Continue", st_again="Watched · review", none="No topic here yet. Try another filter.",
+               st_start="Start", st_cont="Continue", st_again="Watched · review", none="Nothing on this path yet.",
                icons="Films watched, labs seen, answered, right"),
     "es": dict(start="Empieza aquí", play="Ver la introducción", open="Abrir el tema", next="Tu próxima parada", soon="Próximamente", route="Ruta sugerida",
                any="Rutas sugeridas, no pasos obligatorios. Abre cualquier tema cuando quieras.", whole="Toda la ruta", want="Quiero", stops="{n} paradas",
@@ -1668,10 +1658,10 @@ ROUTE_TEXT = {
                showall="Mostrar todos los temas", onroute="Avance en esta ruta", alltopics="Todos los temas", notyet="Sin empezar",
                cont="Sigue", fw="Películas vistas", ls="Labs vistos", an="Respondidas", ok="Correctas", uses="En esta ruta: {s}",
                key="Películas vistas, labs vistos, situaciones respondidas, respuestas correctas",
-               you="Tu avance", show="Mostrar", show_all="Todos", show_on="En curso", show_new="Sin empezar", show_done="Terminados",
+               you="Tu avance", hidep="Ocultar lo que no está en esta ruta",
                gall="ver todos los temas", gall_line="Toda la ruta, cada tema.", gline_all="Cada tema, en el orden de la ruta. Elige una meta para ver su camino.",
                gline="{s} en {t}.", stop1="1 parada", topic1="1 tema", topicn="{n} temas", step="Paso {n} de {of}", right="{n} correctas",
-               st_start="Empieza", st_cont="Sigue", st_again="Vista · repasa", none="Aún no hay temas aquí. Prueba otro filtro.",
+               st_start="Empieza", st_cont="Sigue", st_again="Vista · repasa", none="Aún no hay nada en esta ruta.",
                icons="Películas vistas, labs vistos, respondidas, correctas"),
 }
 

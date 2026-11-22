@@ -1,5 +1,5 @@
 {
-  "draft": true,
+  "draft": false,
   "kicker": "Data quality rules",
   "kicker_es": "Reglas de calidad de datos",
   "title_es": "Reglas que se ejecutan",

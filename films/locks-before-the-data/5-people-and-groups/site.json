@@ -78,6 +78,6 @@
       }
     ]
   },
-  "draft": true,
+  "draft": false,
   "tile": [560, 330, 480]
 }

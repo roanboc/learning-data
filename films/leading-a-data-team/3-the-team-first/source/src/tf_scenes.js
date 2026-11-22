@@ -109,7 +109,7 @@ scene("whole",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
     {at:0,place:"tfTeam",later:true,keys:[[0,960,540,1.0]],d:2,draw:(x,tt,cam)=>{const Hh={};
       tf_atRoom(x,tt,0,{at:"ivy",noor:true,face:tf_alive(tt,{expr:"think",gaze:[1,0.3]},3,0),people:[tf_helena(tt,tf_alive(tt,{expr:"think",gaze:[1,0.1]},5,0),{x:1560,fl:930,out:Hh})]});
       tf_name(x,Hh.J,tt,w("helena","Helena Novak",0),c.watch-0.2,"Helena Novak","Data manager",170);}},
-    // every week, half an hour with each person
+    // in her first months, half an hour a week with each person
     {at:tW,place:"tfCorner",cut:true,keys:[[tW,960,540,1.0]],d:2,draw:(x,tt,cam)=>{
       const r=tf_corner(x,tt,{who2:"jun",lean:0.4,t0:tW,hf:tf_sp(tt,5,[[c.asks+0.2,E.asks]],"smile",0.25),iface:tf_alive(tt,{expr:"listen",gaze:[1,0.3]},2,tW)});
       tf_bub(x,r.helena,tt,c.asks+0.2,tH-0.3,["How are you?","What's in your way?"],cam,{lean:160});}},
@@ -126,7 +126,7 @@ scene("whole",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
       tf_screenCall(x,R,ag_io(tt,c.sixty+0.3,1e9,0.4),"Night alerts · to Sam",[["about 60 a week",PK.C.amber,34],["most need nothing",PK.C.ink,34],[ag_in(tt,w("sixty","only Sam",0),0.4)>0.5?"only Sam knows how":"",PK.C.amber,34]],PK.C.amber,{bh:290});}}
   ]);
   tf_card(ctx,S,t,0.3,w("helena","Helena Novak",-0.3),{kick:"Monday 1 February 2027",title:"A new data manager"},{y:40,mid:true});
-  tf_card(ctx,S,t,tW+0.3,c.asks-0.2,{kick:"Every week",title:"Half an hour each"},{y:40,mid:true});
+  tf_card(ctx,S,t,tW+0.3,c.asks-0.2,{kick:"Her first months",title:"Half an hour each"},{y:40,mid:true});
   tf_imagined(ctx,S,t,0.4,w("helena","Helena Novak",-0.2),"The university, 2027 · imagined");
   tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,w("helena","Helena Novak",0)],[tW,c.asks],[tH,tL]])));
 });
@@ -221,7 +221,7 @@ scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,i
   tf_kick(ctx,S,ag_in(t,0.6,0.6)*(1-tf_apart(t,[[0,c.call+0.8],[tB,w("back","first question",0)]])));
 });
 
-/* ---------------------------------------------------------------- 6. Each person, every week */
+/* ---------------------------------------------------------------- 6. Each person, as they need */
 scene("each",(ctx,S,t,sc)=>{const c=sc.cues,E=sc.ends,w=(id,word,off)=>wAt(sc,id,word,off),LE=PK.ROOMS.lecture;
   const tR=c.review-0.4,tE=c.ethic-0.4,tZ=c.ethic+2.4,tC=c.cares-0.4,BD=PK.pace(ctx,"carmen",tf_boardD(sc,w));
   ag_shots(ctx,S,t,sc.dur,[

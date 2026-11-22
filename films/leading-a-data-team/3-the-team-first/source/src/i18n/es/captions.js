@@ -30,7 +30,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "And when one of them has to step away, the group holds.": "Y cuando alguien tiene que apartarse, el grupo se sostiene.",
 "At a university, a year from now, Helena Novak starts as the data manager on Monday 1 February 2027.": "En una universidad, dentro de un año, Helena Novak empieza como gestora de datos el lunes 1 de febrero de 2027.",
 "Before she judges anyone, she watches.": "Antes de juzgar a nadie, observa.",
-"Every week, she has half an hour with each person: about them, never a status report.": "Cada semana pasa media hora con cada persona: sobre ella, nunca un reporte de estado.",
+"In her first months, she has half an hour with each person every week: about them, never a status report.": "En sus primeros meses pasa media hora cada semana con cada persona: sobre ella, nunca un reporte de estado.",
 "She asks how they are, what's in their way, and what they're proud of.": "Le pregunta cómo está, qué le estorba y de qué está orgullosa o orgulloso.",
 "Then she reads the team as a whole: what it achieves together, and each person's work beside it.": "Luego lee al equipo como un todo: lo que logra en conjunto, y el trabajo de cada persona a su lado.",
 "She measures it all against what this team really does, not what her last team did.": "Lo mide todo con lo que este equipo hace de verdad, no con lo que hacía su equipo anterior.",
@@ -74,7 +74,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nobody calls him.": "Nadie lo llama.",
 "When Sam comes back on Monday 16 August, Helena's first question is about his mother, not the platform.": "Cuando Sam vuelve el lunes 16 de agosto, la primera pregunta de Helena es por su madre, no por la plataforma.",
 "Like a stokvel carrying a member through hard times, the team carried Sam, because everyone had paid in.": "Como un stokvel que sostiene a una socia en tiempos difíciles, el equipo sostuvo a Sam, porque todos habían aportado.",
-"Every week, the one-to-ones go on, about each person, not their tasks.": "Cada semana siguen las reuniones uno a uno, sobre cada persona, no sobre sus tareas.",
+"The one-to-ones go on, more often for whoever needs it: about each person, not their tasks.": "Las reuniones uno a uno siguen, más a menudo con quien lo necesita: sobre cada persona, no sobre sus tareas.",
 "In September, Jun says he's fine, but he's teaching two people, building models and taking his turn on the rota.": "En septiembre, Jun dice que está bien, pero enseña a dos personas, construye modelos y cubre su turno.",
 "Helena moves one of his projects to November, and tells the people who asked, before the load can wear him down.": "Helena pasa uno de sus proyectos a noviembre, y avisa a quienes lo pidieron, antes de que la carga lo desgaste.",
 "At the quarterly review in October, she gives the team the credit, by name, and answers herself for what slipped.": "En la revisión trimestral de octubre, da el mérito al equipo, con nombres, y responde ella por lo que se retrasó.",
@@ -87,7 +87,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "On Monday, pair until two people can do each job that matters most, and write down how.": "El lunes, trabaja en parejas hasta que dos personas puedan hacer cada trabajo que más importa, y anota cómo.",
 "Protect leave: when someone is away, nobody calls them.": "Protege las licencias: cuando alguien no está, nadie lo llama.",
 "Thank the person who says: I got it wrong.": "Agradece a quien dice: me equivoqué.",
-"In one-to-ones, ask how people are, not only what they did.": "En las reuniones uno a uno, pregunta cómo están, no solo qué hicieron.",
+"In one-to-ones, as often as each person needs, ask how they are, not only what they did.": "En las reuniones uno a uno, tan a menudo como cada persona lo necesite, pregunta cómo están, no solo qué hicieron.",
 "And if you're new, watch first: judge the team's shared work before anyone's own.": "Y si recién llegas, observa primero: juzga el trabajo compartido del equipo antes que el de nadie.",
 "Nobody alone, nobody the only one who knows.": "Nadie solo, nadie el único que sabe."
 });

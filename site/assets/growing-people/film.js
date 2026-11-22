@@ -425,7 +425,7 @@ const NARR={
  {"id":"some","gap":0.8,"text":"Some used it for about three months, with research on how children learn fractions."},
  {"id":"fractions","gap":0.8,"text":"Their students understood fractions better than those of teams who trained another way."},
  {"id":"data","gap":0.8,"text":"At work, a new analyst can be alone too: nobody sees her work until it's done, and she hears how she's doing once a year, as a grade."},
- {"id":"grow","gap":0.8,"text":"People grow as those teachers did: with goals they help set, feedback every week about the work and its effect, and a next step."}
+ {"id":"grow","gap":0.8,"text":"People grow as those teachers did: with goals they help set, regular feedback about the work and its effect, and a next step."}
 ]},
 "goals":{"name":"Goals of her own","lead":1.0,"tail":1.0,"vo":[
  {"id":"join","gap":0.8,"text":"At the university, a year from now, Ivy Reyes joins the data team on Monday 1 March. It's her first job, after a degree in statistics.","say":"At the university, a year from now, Ivy Reyes joins the data team on Monday the first of March. It's her first job, after a degree in statistics."},
@@ -440,7 +440,7 @@ const NARR={
  {"id":"met","gap":0.8,"text":"On Thursday 25 March, the first goal is met: the whole route of Graham's question, from his decision back to the sensors, on one page.","say":"On Thursday the twenty-fifth of March, the first goal is met: the whole route of Graham's question, from his decision back to the sensors, on one page."}
 ]},
 "tuesday":{"name":"Every Tuesday","lead":1.0,"tail":1.0,"vo":[
- {"id":"meet","gap":0.8,"text":"Every Tuesday, Ivy and Helena meet for thirty minutes. It's Ivy's time, about her, and never a status report."},
+ {"id":"meet","gap":0.8,"text":"While Ivy is new, she and Helena meet every Tuesday for thirty minutes. It's her time, about her, never a status report."},
  {"id":"kluger","gap":0.8,"text":"In 1996, Avraham Kluger and Angelo DeNisi brought together more than six hundred results on feedback.","say":"In nineteen ninety-six, Avraham Kluger and Angelo DeNisi brought together more than six hundred results on feedback."},
  {"id":"third","gap":0.8,"text":"On average, feedback helped. But more than a third of the time, it made the work worse."},
  {"id":"person","gap":0.8,"text":"It helped least when it turned attention from the task to the person."},
@@ -469,6 +469,7 @@ const NARR={
  {"id":"mid","gap":0.8,"text":"On Tuesday 20 July, they look back at her half year, and forward. All three goals are met.","say":"On Tuesday the twentieth of July, they look back at her half year, and forward. All three goals are met."},
  {"id":"well","gap":0.8,"text":"What went well: Graham's page for the University Council. What she'd do differently: ask for review earlier."},
  {"id":"wants","gap":0.8,"text":"And what she wants next: to make her Monday refresh better, and to teach what she learns."},
+ {"id":"monthly","gap":0.8,"text":"Her work runs well, and the team meets every week, so Ivy asks to meet Helena once a month. Helena agrees."},
  {"id":"forward","gap":0.8,"text":"A growth conversation looks forward: where she wants to go, and what she needs to get there."},
  {"id":"dec","gap":0.8,"text":"On Tuesday 14 December, she has owned Teaching space use for nearly six months.","say":"On Tuesday the fourteenth of December, she has owned Teaching space use for nearly six months."},
  {"id":"coach","gap":0.8,"text":"Her next goal is one she chose: to coach the next graduate, in 2028.","say":"Her next goal is one she chose: to coach the next graduate, in twenty twenty-eight."},
@@ -477,17 +478,19 @@ const NARR={
 "monday":{"name":"On Monday","lead":1.0,"tail":1.0,"vo":[
  {"id":"back","gap":0.8,"text":"In Japan's schools, teachers have grown this way for a century and a half."},
  {"id":"way","gap":0.8,"text":"A goal they chose, eyes on the children's learning, and a better lesson next time."},
- {"id":"helena","gap":0.8,"text":"Helena did the same for Ivy: goals of her own, feedback every week about the work, and the next step."},
+ {"id":"helena","gap":0.8,"text":"Helena did the same for Ivy: goals of her own, regular feedback about the work, and the next step."},
  {"id":"goals","gap":0.8,"text":"On Monday, let people write their own goals, then agree them."},
- {"id":"feedback","gap":0.8,"text":"Give feedback every week: the situation, what they did, and its effect."},
+ {"id":"feedback","gap":0.8,"text":"Give feedback often: the situation, what they did, and its effect."},
+ {"id":"agree","gap":0.8,"text":"Agree with each person how often you meet, from every week to once a month."},
+ {"id":"apart","gap":0.8,"text":"The less you work together day to day, the more a weekly catch-up matters."},
  {"id":"ask","gap":0.8,"text":"Ask for feedback on yourself, and act on it."},
  {"id":"forward","gap":0.8,"text":"Look forward in growth conversations, and give the team the credit, in public."},
  {"id":"module","gap":0.8,"text":"Data work needs new skills. Leading the people who do it is a skill too."},
- {"id":"take","gap":0.8,"text":"Their goals, weekly feedback about the work, the next step."}
+ {"id":"take","gap":0.8,"text":"Their goals, regular feedback about the work, the next step."}
 ]}
 };
 
-const VODUR={"lesson/when": 5.33, "lesson/new": 5.149, "lesson/alone": 7.114, "lesson/see": 6.101, "lesson/lost": 4.993, "lesson/change": 2.261, "lesson/open": 2.288, "lesson/groups": 5.841, "lesson/watch": 7.194, "lesson/after": 5.759, "lesson/study": 4.954, "lesson/cycle": 2.639, "lesson/teach": 5.034, "lesson/spread": 8.762, "lesson/world": 3.938, "lesson/trial": 4.783, "lesson/some": 4.561, "lesson/fractions": 4.63, "lesson/data": 8.157, "lesson/grow": 7.439, "goals/join": 9.714, "goals/helena": 3.908, "goals/write": 5.91, "goals/route": 3.668, "goals/pr": 2.424, "goals/own": 3.084, "goals/real": 7.805, "goals/hers": 5.093, "goals/teachers": 3.358, "goals/met": 8.868, "tuesday/meet": 7.07, "tuesday/kluger": 7.262, "tuesday/third": 4.753, "tuesday/person": 3.465, "tuesday/sbi": 7.548, "tuesday/april": 7.589, "tuesday/counts": 2.941, "tuesday/not": 4.514, "tuesday/scott": 8.715, "tuesday/may": 6.468, "tuesday/rushed": 3.432, "tuesday/works": 2.763, "tuesday/fresh": 4.662, "both/asks": 3.852, "both/june": 5.442, "both/thanks": 3.875, "both/lesson": 6.787, "both/council": 7.418, "both/names": 2.669, "both/parts": 5.513, "both/credit": 1.927, "next/july": 9.916, "next/mid": 5.61, "next/well": 6.422, "next/wants": 4.809, "next/forward": 4.764, "next/dec": 5.113, "next/coach": 4.805, "next/steps": 3.475, "monday/back": 3.958, "monday/way": 4.568, "monday/helena": 5.809, "monday/goals": 3.129, "monday/feedback": 4.23, "monday/ask": 2.316, "monday/forward": 4.35, "monday/module": 4.208, "monday/take": 3.181};
+const VODUR={"lesson/when": 5.33, "lesson/new": 5.149, "lesson/alone": 7.114, "lesson/see": 6.101, "lesson/lost": 4.993, "lesson/change": 2.261, "lesson/open": 2.288, "lesson/groups": 5.841, "lesson/watch": 7.194, "lesson/after": 5.759, "lesson/study": 4.954, "lesson/cycle": 2.639, "lesson/teach": 5.034, "lesson/spread": 8.762, "lesson/world": 3.938, "lesson/trial": 4.783, "lesson/some": 4.561, "lesson/fractions": 4.63, "lesson/data": 8.157, "lesson/grow": 7.264, "goals/join": 9.714, "goals/helena": 3.908, "goals/write": 5.91, "goals/route": 3.668, "goals/pr": 2.424, "goals/own": 3.084, "goals/real": 7.805, "goals/hers": 5.093, "goals/teachers": 3.358, "goals/met": 8.868, "tuesday/meet": 7.474, "tuesday/kluger": 7.262, "tuesday/third": 4.753, "tuesday/person": 3.465, "tuesday/sbi": 7.548, "tuesday/april": 7.589, "tuesday/counts": 2.941, "tuesday/not": 4.514, "tuesday/scott": 8.715, "tuesday/may": 6.468, "tuesday/rushed": 3.432, "tuesday/works": 2.763, "tuesday/fresh": 4.662, "both/asks": 3.852, "both/june": 5.442, "both/thanks": 3.875, "both/lesson": 6.787, "both/council": 7.418, "both/names": 2.669, "both/parts": 5.513, "both/credit": 1.927, "next/july": 9.916, "next/mid": 5.61, "next/well": 6.422, "next/wants": 4.809, "next/monthly": 6.683, "next/forward": 4.764, "next/dec": 5.113, "next/coach": 4.805, "next/steps": 3.475, "monday/back": 3.958, "monday/way": 4.568, "monday/helena": 5.68, "monday/goals": 3.129, "monday/feedback": 4.106, "monday/agree": 4.027, "monday/apart": 3.834, "monday/ask": 2.316, "monday/forward": 4.35, "monday/module": 4.208, "monday/take": 3.28};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -498,8 +501,8 @@ const BREATH={
 "goals":{"hold":{"join":0.8,"helena":0.6,"write":0.8,"route":0.6,"pr":0.6,"own":1.0,"real":0.8,"hers":1.0,"teachers":0.8,"met":1.2}},
 "tuesday":{"hold":{"meet":1.0,"kluger":0.6,"third":1.0,"person":1.4,"sbi":0.8,"april":0.4,"counts":1.4,"not":1.2,"scott":1.0,"may":0.4,"rushed":1.2,"works":1.2,"fresh":0.6}},
 "both":{"hold":{"asks":0.8,"june":1.0,"thanks":1.2,"lesson":1.0,"council":0.8,"names":0.4,"parts":1.0,"credit":0.6}},
-"next":{"hold":{"july":1.0,"mid":0.8,"well":1.0,"wants":1.0,"forward":1.2,"dec":0.8,"coach":1.2,"steps":0.8}},
-"monday":{"hold":{"back":0.4,"way":1.2,"helena":1.2,"goals":0.8,"feedback":0.8,"ask":0.8,"forward":0.8,"module":1.2},"breathe":5.0}
+"next":{"hold":{"july":1.0,"mid":0.8,"well":1.0,"wants":1.0,"monthly":1.0,"forward":1.2,"dec":0.8,"coach":1.2,"steps":0.8}},
+"monday":{"hold":{"back":0.4,"way":1.2,"helena":1.2,"goals":0.8,"feedback":0.8,"agree":0.8,"apart":1.0,"ask":0.8,"forward":0.8,"module":1.2},"breathe":5.0}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -3312,12 +3315,12 @@ const gp_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My half year",8
   {k:"star",x:1000,y:118,r:30,col:"amber",at:sc.ends.wants+0.2,d:0.45}];
 // 5. on Monday: four things to keep, each with its drawing and, drawn under it, what it means; the hand writes each as the voice says
 // it. Ivy keeps the page: she leads people now too
-const GP_MON=[["target","blue",250,"they write them, then you agree"],["speech","green",390,"the situation, what they did, its effect"],
+const GP_MON=[["target","blue",250,"they write them, then you agree"],["speech","green",390,"weekly to monthly: agree it together"],
   ["loop","amber",530,"and act on it"],["flag","blue",670,"credit the team, in public"]];
 const gp_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});D.face(c,"ivy",880,112,42);
     GP_MON.forEach(([ic,col,y,s])=>{D.disc(c,108,y-18,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-18,19,{fill:"white"});D.text(c,s,200,y+54,{size:32,col:"mut"});});},[60,40,1030,740]),
   {s:"Their own goals",x:200,y:250,size:54,w:700,at:w("goals","write",-0.2),d:0.8},
-  {s:"Feedback every week",x:200,y:390,size:54,w:700,at:w("feedback","every",-0.3),d:0.9,marks:[["hl","green"]]},
+  {s:"Feedback, often",x:200,y:390,size:54,w:700,at:w("feedback","often",-0.3),d:0.9,marks:[["hl","green"]]},
   {s:"Ask for feedback on you",x:200,y:530,size:54,w:700,at:w("ask","Ask",-0.1),d:0.9},
   {s:"Look forward",x:200,y:670,size:54,w:700,at:w("forward","Look",-0.1),d:0.6,marks:[["ring","blue",w("forward","conversations",0.1)]]},
   {k:"star",x:1000,y:110,r:28,col:"amber",at:sc.ends.forward+0.05,d:0.45}];
@@ -3341,7 +3344,7 @@ function gp_steps(x,px,py,tt,a,at){const U=PK.u,R=["Data analyst","Data product 
    everyone in it moves as one function of time, so nothing jumps; between places the film cuts, or dissolves where the whole
    picture changes. Sizes are in the 1920 x 1080 frame; people's sizes come from each place's eye line (gp_hM in the opening's
    rooms, gp_hT in the team's room). */
-const GP_LAST="Their goals, weekly feedback about the work, the next step.";
+const GP_LAST="Their goals, regular feedback about the work, the next step.";
 const gp_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,4,"Growing people",a);}};
 // a card in the frame's own space, so it stays put while the camera glides: in at t0, out at t1; o.right: at the top right
 function gp_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.x!=null?o.x:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.right?"right":"left"});}
@@ -3515,7 +3518,7 @@ scene("lesson",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
   gp_card(ctx,S,t,c.trial+0.2,c.some+2.2,{kick:"A trial in the United States",title:"39 teams of teachers",sub:"split at random"},{y:84});
   gp_card(ctx,S,t,c.fractions+0.4,tK-0.3,{kick:"Their students",title:"Understood fractions better",col:PK.C.green},{y:84});
   gp_imagined(ctx,S,t,tK+0.6,c.grow-0.8,"Today · imagined");
-  PK.title(ctx,S,t,c.breath+0.2,"Growing people","Their goals, weekly feedback, the next step","Leading data people · Ownership and performance",{side:"right"});
+  PK.title(ctx,S,t,c.breath+0.2,"Growing people","Their goals, regular feedback, the next step","Leading data people · Ownership and performance",{side:"right"});
 });
 
 /* ---------------------------------------------------------------- 2. Goals of her own: March 2027 */
@@ -3711,7 +3714,7 @@ scene("both",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 /* ---------------------------------------------------------------- 5. The next step: July to December */
 const GP_CARRY={lean:2,head:6,aN:[18,96,"grip"],aF:[16,92,"grip"],lN:[-2,-2],lF:[4,3]};
 scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const N4=PK.pace(ctx,null,gp_note4(sc,w)),tB=w("july","Ivy owns",-0.2),tH=c.mid-0.5,tN=w("mid","half year",-0.35),tF=c.forward-0.5,tD=c.dec-0.5;
+  const N4=PK.pace(ctx,null,gp_note4(sc,w)),tB=w("july","Ivy owns",-0.2),tH=c.mid-0.5,tN=w("mid","half year",-0.35),tF=c.monthly-0.5,tD=c.dec-0.5;
   ag_shots(ctx,S,t,sc.dur,[
     // Thursday 1 July: Helena brings her a seedling in a pot, as the team does when someone first owns a product. Her screen says
     // what she owns: the counts per room per hour, refreshed every Monday by seven
@@ -3734,11 +3737,13 @@ scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
     // her notes of it, open as the notebook comes out between them and the voice says "her half year": all three goals met;
     // what went well; what she'd do differently; what she wants next
     {at:tN,place:"gpNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}},
-    // a growth conversation looks forward: Helena asks where she wants to go, and what she needs to get there
+    // her work runs well and the team meets every week: Ivy asks to meet once a month, and Helena agrees. Then a growth conversation
+    // looks forward: Helena asks where she wants to go, and what she needs to get there
     {at:tF,place:"gpCorner",dis:0.6,keys:[[tF,1000,560,1.08],[tF+0.3,1000,540,1.04]],d:1.6,draw:(x,tt,cam)=>{
-      const q1=w("forward","where",-0.2),q2=w("forward","what she needs",-0.2);
-      const R=gp_corner(x,tt,{t0:tF,lean:0.7,H:PK.face(tt,{expr:"smile",gaze:[1,0.05]},[[q1,"say",1.4],[q2,"say",1.6]]),
-        I:PK.face(tt,{expr:"listen",gaze:[1,0]},[[q1+1.0,"think",1.6],[q2+1.4,"smile",2.4],[q2+1.8,"nod"]])});
+      const q1=w("forward","where",-0.2),q2=w("forward","what she needs",-0.2),qa=w("monthly","so Ivy",-0.1),qy=w("monthly","Helena agrees",-0.1);
+      const R=gp_corner(x,tt,{t0:tF,lean:0.7,H:PK.face(tt,{expr:"listen",gaze:[1,0.05]},[[qy,"smile",1.8],[qy+0.2,"nod"],[q1,"say",1.4],[q2,"say",1.6]]),
+        I:PK.face(tt,{expr:"glad",gaze:[1,0]},[[qa,"say",2.0],[qy+0.4,"smile",1.6],[q1+1.0,"think",1.6],[q2+1.4,"smile",2.4],[q2+1.8,"nod"]])});
+      gp_say(x,R.ivy,tt,qa,q1-0.5,["Could we meet once a month now?"],cam);
       gp_say(x,R.helena,tt,q1,tD-0.4,["Where do you want to go?","What do you need to get there?"],cam,{la:[1,ag_in(tt,q2,0.3)]});}},
     // Tuesday 14 December, at dusk: nearly six months an owner. Her next goal is one she chose: to coach the next graduate
     // the same framing and the same two people as the shot before: the light goes from July to a December dusk round them
@@ -3757,7 +3762,7 @@ scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 
 /* ---------------------------------------------------------------- 6. On Monday */
 scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const N5=PK.pace(ctx,null,gp_note5(sc,w)),tH=c.helena-0.5,tN=c.goals-0.6,tM=c.module-0.5,tE=c.breath+0.6;
+  const N5=PK.pace(ctx,null,gp_note5(sc,w)),tH=c.helena-0.5,tN=c.goals-0.6,tA=c.agree-0.5,tK=c.ask-0.6,tM=c.module-0.5,tE=c.breath+0.6;
   ag_shots(ctx,S,t,sc.dur,[
     // Japan's schools today: a research lesson, many teachers watching the children
     {at:0,place:"gpJapan",keys:[[0,960,540,1.0],[tH-0.4,900,560,1.08]],d:3,draw:(x,tt,cam)=>{
@@ -3775,6 +3780,13 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       PK.person(x,"helena",820,916,gp_hT(916),"clasp",Object.assign({t:tt,flip:true},PK.face(tt,{expr:"smile",gaze:[1,0.3]},[[c.helena+0.6,"say",1.4],[w("helena","feedback",0),"nod"],[w("helena","next step",0.4),"smile",2.0]])));}},
     // what to do on Monday, in Ivy's notebook: she leads people now too
     {at:tN,place:"gpNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N5,{});}},
+    // how often to meet is agreed with each person: Ivy and Helena, in the corner, settle on theirs
+    {at:tA,place:"gpCorner",dis:0.6,keys:[[tA,1000,560,1.08],[tA+0.3,1000,540,1.04]],d:1.6,draw:(x,tt,cam)=>{
+      const qh=w("agree","how often",-0.2),qi=w("agree","from every",-0.1);
+      const R=gp_corner(x,tt,{t0:tA,lean:0.6,H:PK.face(tt,{expr:"smile",gaze:[1,0.05]},[[qh,"say",1.6],[qi+1.4,"nod"]]),
+        I:PK.face(tt,{expr:"listen",gaze:[1,0]},[[qi,"think",1.2],[qi+1.2,"glad",2.0]])});
+      gp_say(x,R.helena,tt,qh,tK-0.4,["How often shall we meet?"],cam);}},
+    {at:tK,place:"gpNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N5,{});}},
     // March 2028: the next graduate's first day. Helena brings them in; Ivy stands up to meet them, her hand out
     {at:tM,place:"gpTeam",dis:0.6,keys:[[tM,960,540,1.0],[c.take,940,550,1.03]],d:2.6,draw:(x,tt,cam)=>{
       const tA=tM+3.4,up=ag_in(tt,tA-0.8,0.8),sh=ag_io(tt,tA+0.4,tA+2.6,0.5),bob=Math.sin((tt-tA)*9)*6*sh,mid=[700,640+bob];

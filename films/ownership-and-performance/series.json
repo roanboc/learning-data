@@ -5,8 +5,8 @@
   "planned": 4,
   "lead": "The last series of Leading data people. From July 2027 Ivy Reyes owns her first data product, Teaching space use, which Facilities and the faculties read every Monday. What does it mean to own an outcome, how should a team measure its work, and how do people grow, or catch up?",
   "lead_es": "La última serie de Liderar equipos de datos. Desde julio de 2027 Ivy Reyes es dueña de su primer producto de datos, Uso de los espacios docentes, que Instalaciones y las facultades leen cada lunes. ¿Qué es responder por un resultado, cómo medir el trabajo en equipo y cómo crecen las personas, o se ponen al día?",
-  "description": "Four films on ownership and performance: owning what your work is for, not only what you did; measuring how the work flows, together, to fix the system rather than rank people; helping someone who falls behind, by finding the cause, clearing the way and giving it time; and growing people with goals they help set, weekly feedback about the work, and a next step with more to own.",
-  "description_es": "Cuatro películas sobre responsabilidad y desempeño: responder por aquello para lo que sirve tu trabajo, no solo por lo que hiciste; medir cómo fluye el trabajo, en equipo, para arreglar el sistema y no para clasificar personas; ayudar a quien se queda atrás, buscando la causa, despejando el camino y dándole tiempo; y hacer crecer a las personas con metas que ayudan a fijar, comentarios semanales sobre el trabajo y un siguiente paso con más a su cargo.",
+  "description": "Four films on ownership and performance: owning what your work is for, not only what you did; measuring how the work flows, together, to fix the system rather than rank people; helping someone who falls behind, by finding the cause, clearing the way and giving it time; and growing people with goals they help set, regular feedback about the work, and a next step with more to own.",
+  "description_es": "Cuatro películas sobre responsabilidad y desempeño: responder por aquello para lo que sirve tu trabajo, no solo por lo que hiciste; medir cómo fluye el trabajo, en equipo, para arreglar el sistema y no para clasificar personas; ayudar a quien se queda atrás, buscando la causa, despejando el camino y dándole tiempo; y hacer crecer a las personas con metas que ayudan a fijar, comentarios regulares sobre el trabajo y un siguiente paso con más a su cargo.",
   "card": "Own the outcome, measure the work together, help whoever falls behind, and grow people with goals and feedback.",
   "card_es": "Responde por el resultado, mide el trabajo en equipo, ayuda a quien se queda atrás, y haz crecer con metas y comentarios.",
   "order": "Watch them in order: each film builds on the one before.",
@@ -33,7 +33,7 @@
     [
       "tech",
       "Leads the team",
-      "Helena Novak, the data manager, who holds weekly one-to-ones"
+      "Helena Novak, the data manager, who meets each person weekly or monthly, as they agree"
     ],
     [
       "tech",
@@ -60,7 +60,7 @@
     [
       "tech",
       "Dirige el equipo",
-      "Helena Novak, la gestora de datos, que tiene reuniones uno a uno cada semana"
+      "Helena Novak, la gestora de datos, que se reúne con cada persona cada semana o cada mes, según acuerdan"
     ],
     [
       "tech",

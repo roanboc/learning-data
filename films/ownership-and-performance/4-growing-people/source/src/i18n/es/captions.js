@@ -46,8 +46,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sus alumnos entendieron mejor las fracciones que los de los equipos que se formaron de otra manera.",
 "At work, a new analyst can be alone too: nobody sees her work until it's done, and she hears how she's doing once a year, as a grade.":
 "En el trabajo, una analista nueva también puede estar sola: nadie ve su trabajo hasta el final, y sabe cómo va una vez al año, con una nota.",
-"People grow as those teachers did: with goals they help set, feedback every week about the work and its effect, and a next step.":
-"La gente crece como esos maestros: con objetivos que ayuda a fijar, comentarios semanales sobre el trabajo y su efecto, y un siguiente paso.",
+"People grow as those teachers did: with goals they help set, regular feedback about the work and its effect, and a next step.":
+"La gente crece como esos maestros: con objetivos que ayuda a fijar, comentarios regulares sobre el trabajo y su efecto, y un siguiente paso.",
 "At the university, a year from now, Ivy Reyes joins the data team on Monday 1 March. It's her first job, after a degree in statistics.":
 "En la universidad, dentro de un año, Ivy Reyes entra al equipo de datos el lunes 1 de marzo. Es su primer empleo, tras estudiar estadística.",
 "Helena Novak, the data manager, doesn't hand her a list of goals.":
@@ -68,8 +68,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Como los maestros al elegir su objetivo, ella eligió en qué crecer.",
 "On Thursday 25 March, the first goal is met: the whole route of Graham's question, from his decision back to the sensors, on one page.":
 "El jueves 25 de marzo cumple el primer objetivo: todo el recorrido de la pregunta de Graham, de su decisión a los sensores, en una página.",
-"Every Tuesday, Ivy and Helena meet for thirty minutes. It's Ivy's time, about her, and never a status report.":
-"Cada martes, Ivy y Helena se reúnen treinta minutos. Es el tiempo de Ivy, sobre ella, y nunca un informe de avance.",
+"While Ivy is new, she and Helena meet every Tuesday for thirty minutes. It's her time, about her, never a status report.":
+"Mientras Ivy es nueva, ella y Helena se reúnen cada martes treinta minutos. Es su tiempo, sobre ella, nunca un informe de avance.",
 "In 1996, Avraham Kluger and Angelo DeNisi brought together more than six hundred results on feedback.":
 "En 1996, Avraham Kluger y Angelo DeNisi reunieron más de seiscientos resultados sobre la retroalimentación.",
 "On average, feedback helped. But more than a third of the time, it made the work worse.":
@@ -118,6 +118,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Lo que salió bien: la página de Graham para el Consejo Universitario. Lo que haría distinto: pedir revisión antes.",
 "And what she wants next: to make her Monday refresh better, and to teach what she learns.":
 "Y lo que quiere ahora: mejorar su actualización de los lunes, y enseñar lo que aprende.",
+"Her work runs well, and the team meets every week, so Ivy asks to meet Helena once a month. Helena agrees.":
+"Su trabajo va bien y el equipo se reúne cada semana, así que Ivy pide verse con Helena una vez al mes. Helena acepta.",
 "A growth conversation looks forward: where she wants to go, and what she needs to get there.":
 "Una conversación de crecimiento mira hacia adelante: adónde quiere ir, y qué necesita para llegar.",
 "On Tuesday 14 December, she has owned Teaching space use for nearly six months.":
@@ -130,18 +132,22 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En las escuelas de Japón, los maestros han crecido así durante siglo y medio.",
 "A goal they chose, eyes on the children's learning, and a better lesson next time.":
 "Un objetivo que eligieron, la mirada en lo que aprenden los niños, y una clase mejor la próxima vez.",
-"Helena did the same for Ivy: goals of her own, feedback every week about the work, and the next step.":
-"Helena hizo lo mismo con Ivy: objetivos propios, comentarios cada semana sobre el trabajo, y el siguiente paso.",
+"Helena did the same for Ivy: goals of her own, regular feedback about the work, and the next step.":
+"Helena hizo lo mismo con Ivy: objetivos propios, comentarios regulares sobre el trabajo, y el siguiente paso.",
 "On Monday, let people write their own goals, then agree them.":
 "El lunes, deja que cada quien escriba sus objetivos, y luego acuérdalos.",
-"Give feedback every week: the situation, what they did, and its effect.":
-"Da comentarios cada semana: la situación, lo que hizo, y su efecto.",
+"Give feedback often: the situation, what they did, and its effect.":
+"Da comentarios a menudo: la situación, lo que hizo, y su efecto.",
+"Agree with each person how often you meet, from every week to once a month.":
+"Acuerda con cada persona cada cuánto os reunís, desde cada semana hasta una vez al mes.",
+"The less you work together day to day, the more a weekly catch-up matters.":
+"Cuanto menos trabajáis juntos en el día a día, más importa una charla semanal.",
 "Ask for feedback on yourself, and act on it.":
 "Pide comentarios sobre ti, y actúa con ellos.",
 "Look forward in growth conversations, and give the team the credit, in public.":
 "Mira adelante en las conversaciones de crecimiento, y dale el mérito al equipo, en público.",
 "Data work needs new skills. Leading the people who do it is a skill too.":
 "El trabajo con datos pide habilidades nuevas. Liderar a quienes lo hacen también es una habilidad.",
-"Their goals, weekly feedback about the work, the next step.":
-"Sus objetivos, comentarios semanales sobre el trabajo, el siguiente paso."
+"Their goals, regular feedback about the work, the next step.":
+"Sus objetivos, comentarios regulares sobre el trabajo, el siguiente paso."
 });

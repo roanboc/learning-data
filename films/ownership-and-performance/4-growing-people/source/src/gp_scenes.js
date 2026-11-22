@@ -9,7 +9,7 @@
    everyone in it moves as one function of time, so nothing jumps; between places the film cuts, or dissolves where the whole
    picture changes. Sizes are in the 1920 x 1080 frame; people's sizes come from each place's eye line (gp_hM in the opening's
    rooms, gp_hT in the team's room). */
-const GP_LAST="Their goals, weekly feedback about the work, the next step.";
+const GP_LAST="Their goals, regular feedback about the work, the next step.";
 const gp_kick=(ctx,S,a)=>{if(a>0.004){setScreen(ctx,S);PK.kicker(ctx,4,"Growing people",a);}};
 // a card in the frame's own space, so it stays put while the camera glides: in at t0, out at t1; o.right: at the top right
 function gp_card(ctx,S,t,t0,t1,d,o){o=o||{};const a=ag_io(t,t0,t1==null?1e9:t1,0.4);if(a<=0.004)return;setScreen(ctx,S);PK.card(ctx,o.x!=null?o.x:o.right?1848:72,o.y==null?146:o.y,d,a,{align:o.right?"right":"left"});}
@@ -183,7 +183,7 @@ scene("lesson",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
   gp_card(ctx,S,t,c.trial+0.2,c.some+2.2,{kick:"A trial in the United States",title:"39 teams of teachers",sub:"split at random"},{y:84});
   gp_card(ctx,S,t,c.fractions+0.4,tK-0.3,{kick:"Their students",title:"Understood fractions better",col:PK.C.green},{y:84});
   gp_imagined(ctx,S,t,tK+0.6,c.grow-0.8,"Today · imagined");
-  PK.title(ctx,S,t,c.breath+0.2,"Growing people","Their goals, weekly feedback, the next step","Leading data people · Ownership and performance",{side:"right"});
+  PK.title(ctx,S,t,c.breath+0.2,"Growing people","Their goals, regular feedback, the next step","Leading data people · Ownership and performance",{side:"right"});
 });
 
 /* ---------------------------------------------------------------- 2. Goals of her own: March 2027 */
@@ -379,7 +379,7 @@ scene("both",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 /* ---------------------------------------------------------------- 5. The next step: July to December */
 const GP_CARRY={lean:2,head:6,aN:[18,96,"grip"],aF:[16,92,"grip"],lN:[-2,-2],lF:[4,3]};
 scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const N4=PK.pace(ctx,null,gp_note4(sc,w)),tB=w("july","Ivy owns",-0.2),tH=c.mid-0.5,tN=w("mid","half year",-0.35),tF=c.forward-0.5,tD=c.dec-0.5;
+  const N4=PK.pace(ctx,null,gp_note4(sc,w)),tB=w("july","Ivy owns",-0.2),tH=c.mid-0.5,tN=w("mid","half year",-0.35),tF=c.monthly-0.5,tD=c.dec-0.5;
   ag_shots(ctx,S,t,sc.dur,[
     // Thursday 1 July: Helena brings her a seedling in a pot, as the team does when someone first owns a product. Her screen says
     // what she owns: the counts per room per hour, refreshed every Monday by seven
@@ -402,11 +402,13 @@ scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
     // her notes of it, open as the notebook comes out between them and the voice says "her half year": all three goals met;
     // what went well; what she'd do differently; what she wants next
     {at:tN,place:"gpNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N4,{});}},
-    // a growth conversation looks forward: Helena asks where she wants to go, and what she needs to get there
+    // her work runs well and the team meets every week: Ivy asks to meet once a month, and Helena agrees. Then a growth conversation
+    // looks forward: Helena asks where she wants to go, and what she needs to get there
     {at:tF,place:"gpCorner",dis:0.6,keys:[[tF,1000,560,1.08],[tF+0.3,1000,540,1.04]],d:1.6,draw:(x,tt,cam)=>{
-      const q1=w("forward","where",-0.2),q2=w("forward","what she needs",-0.2);
-      const R=gp_corner(x,tt,{t0:tF,lean:0.7,H:PK.face(tt,{expr:"smile",gaze:[1,0.05]},[[q1,"say",1.4],[q2,"say",1.6]]),
-        I:PK.face(tt,{expr:"listen",gaze:[1,0]},[[q1+1.0,"think",1.6],[q2+1.4,"smile",2.4],[q2+1.8,"nod"]])});
+      const q1=w("forward","where",-0.2),q2=w("forward","what she needs",-0.2),qa=w("monthly","so Ivy",-0.1),qy=w("monthly","Helena agrees",-0.1);
+      const R=gp_corner(x,tt,{t0:tF,lean:0.7,H:PK.face(tt,{expr:"listen",gaze:[1,0.05]},[[qy,"smile",1.8],[qy+0.2,"nod"],[q1,"say",1.4],[q2,"say",1.6]]),
+        I:PK.face(tt,{expr:"glad",gaze:[1,0]},[[qa,"say",2.0],[qy+0.4,"smile",1.6],[q1+1.0,"think",1.6],[q2+1.4,"smile",2.4],[q2+1.8,"nod"]])});
+      gp_say(x,R.ivy,tt,qa,q1-0.5,["Could we meet once a month now?"],cam);
       gp_say(x,R.helena,tt,q1,tD-0.4,["Where do you want to go?","What do you need to get there?"],cam,{la:[1,ag_in(tt,q2,0.3)]});}},
     // Tuesday 14 December, at dusk: nearly six months an owner. Her next goal is one she chose: to coach the next graduate
     // the same framing and the same two people as the shot before: the light goes from July to a December dusk round them
@@ -425,7 +427,7 @@ scene("next",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off)
 
 /* ---------------------------------------------------------------- 6. On Monday */
 scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off),U=PK.u;
-  const N5=PK.pace(ctx,null,gp_note5(sc,w)),tH=c.helena-0.5,tN=c.goals-0.6,tM=c.module-0.5,tE=c.breath+0.6;
+  const N5=PK.pace(ctx,null,gp_note5(sc,w)),tH=c.helena-0.5,tN=c.goals-0.6,tA=c.agree-0.5,tK=c.ask-0.6,tM=c.module-0.5,tE=c.breath+0.6;
   ag_shots(ctx,S,t,sc.dur,[
     // Japan's schools today: a research lesson, many teachers watching the children
     {at:0,place:"gpJapan",keys:[[0,960,540,1.0],[tH-0.4,900,560,1.08]],d:3,draw:(x,tt,cam)=>{
@@ -443,6 +445,13 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
       PK.person(x,"helena",820,916,gp_hT(916),"clasp",Object.assign({t:tt,flip:true},PK.face(tt,{expr:"smile",gaze:[1,0.3]},[[c.helena+0.6,"say",1.4],[w("helena","feedback",0),"nod"],[w("helena","next step",0.4),"smile",2.0]])));}},
     // what to do on Monday, in Ivy's notebook: she leads people now too
     {at:tN,place:"gpNotes",dis:0.6,keys:[[tN,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N5,{});}},
+    // how often to meet is agreed with each person: Ivy and Helena, in the corner, settle on theirs
+    {at:tA,place:"gpCorner",dis:0.6,keys:[[tA,1000,560,1.08],[tA+0.3,1000,540,1.04]],d:1.6,draw:(x,tt,cam)=>{
+      const qh=w("agree","how often",-0.2),qi=w("agree","from every",-0.1);
+      const R=gp_corner(x,tt,{t0:tA,lean:0.6,H:PK.face(tt,{expr:"smile",gaze:[1,0.05]},[[qh,"say",1.6],[qi+1.4,"nod"]]),
+        I:PK.face(tt,{expr:"listen",gaze:[1,0]},[[qi,"think",1.2],[qi+1.2,"glad",2.0]])});
+      gp_say(x,R.helena,tt,qh,tK-0.4,["How often shall we meet?"],cam);}},
+    {at:tK,place:"gpNotes",dis:0.6,keys:[[tK,960,540,1.0]],d:2,draw:(x,tt,cam)=>{PK.notes(x,"ivy",tt,N5,{});}},
     // March 2028: the next graduate's first day. Helena brings them in; Ivy stands up to meet them, her hand out
     {at:tM,place:"gpTeam",dis:0.6,keys:[[tM,960,540,1.0],[c.take,940,550,1.03]],d:2.6,draw:(x,tt,cam)=>{
       const tA=tM+3.4,up=ag_in(tt,tA-0.8,0.8),sh=ag_io(tt,tA+0.4,tA+2.6,0.5),bob=Math.sin((tt-tA)*9)*6*sh,mid=[700,640+bob];

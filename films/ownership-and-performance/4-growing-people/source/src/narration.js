@@ -21,7 +21,7 @@ const NARR={
  {"id":"some","gap":0.8,"text":"Some used it for about three months, with research on how children learn fractions."},
  {"id":"fractions","gap":0.8,"text":"Their students understood fractions better than those of teams who trained another way."},
  {"id":"data","gap":0.8,"text":"At work, a new analyst can be alone too: nobody sees her work until it's done, and she hears how she's doing once a year, as a grade."},
- {"id":"grow","gap":0.8,"text":"People grow as those teachers did: with goals they help set, feedback every week about the work and its effect, and a next step."}
+ {"id":"grow","gap":0.8,"text":"People grow as those teachers did: with goals they help set, regular feedback about the work and its effect, and a next step."}
 ]},
 "goals":{"name":"Goals of her own","lead":1.0,"tail":1.0,"vo":[
  {"id":"join","gap":0.8,"text":"At the university, a year from now, Ivy Reyes joins the data team on Monday 1 March. It's her first job, after a degree in statistics.","say":"At the university, a year from now, Ivy Reyes joins the data team on Monday the first of March. It's her first job, after a degree in statistics."},
@@ -36,7 +36,7 @@ const NARR={
  {"id":"met","gap":0.8,"text":"On Thursday 25 March, the first goal is met: the whole route of Graham's question, from his decision back to the sensors, on one page.","say":"On Thursday the twenty-fifth of March, the first goal is met: the whole route of Graham's question, from his decision back to the sensors, on one page."}
 ]},
 "tuesday":{"name":"Every Tuesday","lead":1.0,"tail":1.0,"vo":[
- {"id":"meet","gap":0.8,"text":"Every Tuesday, Ivy and Helena meet for thirty minutes. It's Ivy's time, about her, and never a status report."},
+ {"id":"meet","gap":0.8,"text":"While Ivy is new, she and Helena meet every Tuesday for thirty minutes. It's her time, about her, never a status report."},
  {"id":"kluger","gap":0.8,"text":"In 1996, Avraham Kluger and Angelo DeNisi brought together more than six hundred results on feedback.","say":"In nineteen ninety-six, Avraham Kluger and Angelo DeNisi brought together more than six hundred results on feedback."},
  {"id":"third","gap":0.8,"text":"On average, feedback helped. But more than a third of the time, it made the work worse."},
  {"id":"person","gap":0.8,"text":"It helped least when it turned attention from the task to the person."},
@@ -65,6 +65,7 @@ const NARR={
  {"id":"mid","gap":0.8,"text":"On Tuesday 20 July, they look back at her half year, and forward. All three goals are met.","say":"On Tuesday the twentieth of July, they look back at her half year, and forward. All three goals are met."},
  {"id":"well","gap":0.8,"text":"What went well: Graham's page for the University Council. What she'd do differently: ask for review earlier."},
  {"id":"wants","gap":0.8,"text":"And what she wants next: to make her Monday refresh better, and to teach what she learns."},
+ {"id":"monthly","gap":0.8,"text":"Her work runs well, and the team meets every week, so Ivy asks to meet Helena once a month. Helena agrees."},
  {"id":"forward","gap":0.8,"text":"A growth conversation looks forward: where she wants to go, and what she needs to get there."},
  {"id":"dec","gap":0.8,"text":"On Tuesday 14 December, she has owned Teaching space use for nearly six months.","say":"On Tuesday the fourteenth of December, she has owned Teaching space use for nearly six months."},
  {"id":"coach","gap":0.8,"text":"Her next goal is one she chose: to coach the next graduate, in 2028.","say":"Her next goal is one she chose: to coach the next graduate, in twenty twenty-eight."},
@@ -73,12 +74,14 @@ const NARR={
 "monday":{"name":"On Monday","lead":1.0,"tail":1.0,"vo":[
  {"id":"back","gap":0.8,"text":"In Japan's schools, teachers have grown this way for a century and a half."},
  {"id":"way","gap":0.8,"text":"A goal they chose, eyes on the children's learning, and a better lesson next time."},
- {"id":"helena","gap":0.8,"text":"Helena did the same for Ivy: goals of her own, feedback every week about the work, and the next step."},
+ {"id":"helena","gap":0.8,"text":"Helena did the same for Ivy: goals of her own, regular feedback about the work, and the next step."},
  {"id":"goals","gap":0.8,"text":"On Monday, let people write their own goals, then agree them."},
- {"id":"feedback","gap":0.8,"text":"Give feedback every week: the situation, what they did, and its effect."},
+ {"id":"feedback","gap":0.8,"text":"Give feedback often: the situation, what they did, and its effect."},
+ {"id":"agree","gap":0.8,"text":"Agree with each person how often you meet, from every week to once a month."},
+ {"id":"apart","gap":0.8,"text":"The less you work together day to day, the more a weekly catch-up matters."},
  {"id":"ask","gap":0.8,"text":"Ask for feedback on yourself, and act on it."},
  {"id":"forward","gap":0.8,"text":"Look forward in growth conversations, and give the team the credit, in public."},
  {"id":"module","gap":0.8,"text":"Data work needs new skills. Leading the people who do it is a skill too."},
- {"id":"take","gap":0.8,"text":"Their goals, weekly feedback about the work, the next step."}
+ {"id":"take","gap":0.8,"text":"Their goals, regular feedback about the work, the next step."}
 ]}
 };

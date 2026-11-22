@@ -270,12 +270,12 @@ const gp_note4=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"My half year",8
   {k:"star",x:1000,y:118,r:30,col:"amber",at:sc.ends.wants+0.2,d:0.45}];
 // 5. on Monday: four things to keep, each with its drawing and, drawn under it, what it means; the hand writes each as the voice says
 // it. Ivy keeps the page: she leads people now too
-const GP_MON=[["target","blue",250,"they write them, then you agree"],["speech","green",390,"the situation, what they did, its effect"],
+const GP_MON=[["target","blue",250,"they write them, then you agree"],["speech","green",390,"weekly to monthly: agree it together"],
   ["loop","amber",530,"and act on it"],["flag","blue",670,"credit the team, in public"]];
 const gp_note5=(sc,w)=>[PK.sk.drawn(c=>{const D=PK.sk;D.title(c,"On Monday",86,124,{size:76});D.face(c,"ivy",880,112,42);
     GP_MON.forEach(([ic,col,y,s])=>{D.disc(c,108,y-18,30,{fill:col,col:"ink",w:3});D.icon(c,ic,108,y-18,19,{fill:"white"});D.text(c,s,200,y+54,{size:32,col:"mut"});});},[60,40,1030,740]),
   {s:"Their own goals",x:200,y:250,size:54,w:700,at:w("goals","write",-0.2),d:0.8},
-  {s:"Feedback every week",x:200,y:390,size:54,w:700,at:w("feedback","every",-0.3),d:0.9,marks:[["hl","green"]]},
+  {s:"Feedback, often",x:200,y:390,size:54,w:700,at:w("feedback","often",-0.3),d:0.9,marks:[["hl","green"]]},
   {s:"Ask for feedback on you",x:200,y:530,size:54,w:700,at:w("ask","Ask",-0.1),d:0.9},
   {s:"Look forward",x:200,y:670,size:54,w:700,at:w("forward","Look",-0.1),d:0.6,marks:[["ring","blue",w("forward","conversations",0.1)]]},
   {k:"star",x:1000,y:110,r:28,col:"amber",at:sc.ends.forward+0.05,d:0.45}];

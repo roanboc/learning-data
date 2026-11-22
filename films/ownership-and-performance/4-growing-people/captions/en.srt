@@ -75,197 +75,209 @@ Their students understood fractions better than those of teams who trained anoth
 At work, a new analyst can be alone too: nobody sees her work until it's done, and she hears how she's doing once a year, as a grade.
 
 20
-00:02:14,488 --> 00:02:22,027
-People grow as those teachers did: with goals they help set, feedback every week about the work and its effect, and a next step.
+00:02:14,488 --> 00:02:21,852
+People grow as those teachers did: with goals they help set, regular feedback about the work and its effect, and a next step.
 
 21
-00:02:30,727 --> 00:02:40,541
+00:02:30,552 --> 00:02:40,366
 At the university, a year from now, Ivy Reyes joins the data team on Monday 1 March. It's her first job, after a degree in statistics.
 
 22
-00:02:42,041 --> 00:02:46,049
+00:02:41,866 --> 00:02:45,874
 Helena Novak, the data manager, doesn't hand her a list of goals.
 
 23
-00:02:47,349 --> 00:02:53,359
+00:02:47,174 --> 00:02:53,184
 She asks Ivy to write three of her own, in her first week. On Friday 5 March, they agree them.
 
 24
-00:02:54,859 --> 00:02:58,627
+00:02:54,684 --> 00:02:58,452
 One: to know the whole route of one question's data, by Easter.
 
 25
-00:02:59,927 --> 00:03:02,451
+00:02:59,752 --> 00:03:02,276
 Two: to have a pull request merged, by May.
 
 26
-00:03:03,751 --> 00:03:06,935
+00:03:03,576 --> 00:03:06,760
 Three: to own a data product, by the middle of the year.
 
 27
-00:03:08,635 --> 00:03:16,540
+00:03:08,460 --> 00:03:16,365
 Helena's part is real work to grow on: a question from Graham Ellis, the Director of Facilities, about the teaching rooms.
 
 28
-00:03:18,040 --> 00:03:23,233
+00:03:17,865 --> 00:03:23,058
 Her goals are her own. The team's measures stay the team's, and never become her targets.
 
 29
-00:03:24,933 --> 00:03:28,391
+00:03:24,758 --> 00:03:28,216
 Like the teachers choosing their goal, she chose what to grow in.
 
 30
-00:03:29,891 --> 00:03:38,859
+00:03:29,716 --> 00:03:38,684
 On Thursday 25 March, the first goal is met: the whole route of Graham's question, from his decision back to the sensors, on one page.
 
 31
-00:03:42,759 --> 00:03:49,929
-Every Tuesday, Ivy and Helena meet for thirty minutes. It's Ivy's time, about her, and never a status report.
+00:03:42,584 --> 00:03:50,158
+While Ivy is new, she and Helena meet every Tuesday for thirty minutes. It's her time, about her, never a status report.
 
 32
-00:03:51,629 --> 00:03:58,991
+00:03:51,858 --> 00:03:59,220
 In 1996, Avraham Kluger and Angelo DeNisi brought together more than six hundred results on feedback.
 
 33
-00:04:00,291 --> 00:04:05,144
+00:04:00,520 --> 00:04:05,373
 On average, feedback helped. But more than a third of the time, it made the work worse.
 
 34
-00:04:06,844 --> 00:04:10,409
+00:04:07,073 --> 00:04:10,638
 It helped least when it turned attention from the task to the person.
 
 35
-00:04:12,509 --> 00:04:20,157
+00:04:12,738 --> 00:04:20,386
 So Helena's feedback has three parts. The Center for Creative Leadership calls them situation, behaviour and impact.
 
 36
-00:04:21,657 --> 00:04:29,346
+00:04:21,886 --> 00:04:29,575
 Tuesday 13 April. Last Wednesday, reviewing the agent's draft, you checked it against Graham's own word for “used”.
 
 37
-00:04:30,446 --> 00:04:33,487
+00:04:30,675 --> 00:04:33,716
 So his answer counts people in rooms, not bookings.
 
 38
-00:04:35,587 --> 00:04:40,201
+00:04:35,816 --> 00:04:40,430
 Not “you're brilliant”, which is about who she is: what she did, and what it changed.
 
 39
-00:04:42,101 --> 00:04:50,916
+00:04:42,330 --> 00:04:51,145
 Hard feedback works the same way. Kim Scott's Radical Candor, in 2017, puts it as: care personally, and challenge directly.
 
 40
-00:04:52,616 --> 00:04:59,184
+00:04:52,845 --> 00:04:59,413
 Tuesday 25 May. Last week, you kept your change to yourself for four days, to make it perfect.
 
 41
-00:05:00,284 --> 00:05:03,816
+00:05:00,513 --> 00:05:04,045
 Jun had one afternoon to review it, so the review was rushed.
 
 42
-00:05:05,716 --> 00:05:08,579
+00:05:05,945 --> 00:05:08,808
 Ask for a review when it works, not when it's perfect.
 
 43
-00:05:10,479 --> 00:05:15,241
+00:05:10,708 --> 00:05:15,470
 Small and often, while the work is fresh. Nothing waits for a review once a year.
 
 44
-00:05:18,541 --> 00:05:22,493
+00:05:18,770 --> 00:05:22,722
 Helena asks for feedback on herself too: what should I do differently?
 
 45
-00:05:23,993 --> 00:05:29,535
+00:05:24,222 --> 00:05:29,764
 In June, Ivy tells her: when I bring you a question, you answer it at once, and I stop looking.
 
 46
-00:05:31,235 --> 00:05:35,210
+00:05:31,464 --> 00:05:35,439
 Helena thanks her. From then on, she first asks what Ivy has tried.
 
 47
-00:05:37,110 --> 00:05:43,997
+00:05:37,339 --> 00:05:44,226
 In lesson study, the group planned the lesson together, so the talk afterwards is about the lesson and the children's learning.
 
 48
-00:05:45,697 --> 00:05:53,215
+00:05:45,926 --> 00:05:53,444
 On Thursday 24 June, the University Council puts off the new teaching building, and Graham writes to thank Helena.
 
 49
-00:05:54,715 --> 00:05:57,484
+00:05:54,944 --> 00:05:57,713
 At the next review, she reads his note to the team.
 
 50
-00:05:58,584 --> 00:06:04,197
+00:05:58,813 --> 00:06:04,426
 She says who did each part: Ivy's route, Jun's models, Sam's sensors, and Mei's bookings.
 
 51
-00:06:05,897 --> 00:06:07,924
+00:06:06,126 --> 00:06:08,153
 The credit is the team's, in public.
 
 52
-00:06:11,224 --> 00:06:21,240
+00:06:11,453 --> 00:06:21,469
 From Thursday 1 July, Ivy owns her first data product: Teaching space use, the counts per room per hour, refreshed every Monday by seven.
 
 53
-00:06:22,940 --> 00:06:28,650
+00:06:23,169 --> 00:06:28,879
 On Tuesday 20 July, they look back at her half year, and forward. All three goals are met.
 
 54
-00:06:30,150 --> 00:06:36,672
+00:06:30,379 --> 00:06:36,901
 What went well: Graham's page for the University Council. What she'd do differently: ask for review earlier.
 
 55
-00:06:38,372 --> 00:06:43,281
+00:06:38,601 --> 00:06:43,510
 And what she wants next: to make her Monday refresh better, and to teach what she learns.
 
 56
-00:06:44,981 --> 00:06:49,845
-A growth conversation looks forward: where she wants to go, and what she needs to get there.
+00:06:45,210 --> 00:06:51,993
+Her work runs well, and the team meets every week, so Ivy asks to meet Helena once a month. Helena agrees.
 
 57
-00:06:51,745 --> 00:06:56,958
-On Tuesday 14 December, she has owned Teaching space use for nearly six months.
+00:06:53,693 --> 00:06:58,557
+A growth conversation looks forward: where she wants to go, and what she needs to get there.
 
 58
-00:06:58,458 --> 00:07:03,363
-Her next goal is one she chose: to coach the next graduate, in 2028.
+00:07:00,457 --> 00:07:05,670
+On Tuesday 14 December, she has owned Teaching space use for nearly six months.
 
 59
-00:07:05,263 --> 00:07:08,838
-Analyst, then owner, then coach: each step with more to own.
+00:07:07,170 --> 00:07:12,075
+Her next goal is one she chose: to coach the next graduate, in 2028.
 
 60
-00:07:12,338 --> 00:07:16,396
-In Japan's schools, teachers have grown this way for a century and a half.
+00:07:13,975 --> 00:07:17,550
+Analyst, then owner, then coach: each step with more to own.
 
 61
-00:07:17,496 --> 00:07:22,164
-A goal they chose, eyes on the children's learning, and a better lesson next time.
+00:07:21,050 --> 00:07:25,108
+In Japan's schools, teachers have grown this way for a century and a half.
 
 62
-00:07:24,064 --> 00:07:29,973
-Helena did the same for Ivy: goals of her own, feedback every week about the work, and the next step.
+00:07:26,208 --> 00:07:30,876
+A goal they chose, eyes on the children's learning, and a better lesson next time.
 
 63
-00:07:31,873 --> 00:07:35,102
-On Monday, let people write their own goals, then agree them.
+00:07:32,776 --> 00:07:38,556
+Helena did the same for Ivy: goals of her own, regular feedback about the work, and the next step.
 
 64
-00:07:36,602 --> 00:07:40,932
-Give feedback every week: the situation, what they did, and its effect.
+00:07:40,456 --> 00:07:43,685
+On Monday, let people write their own goals, then agree them.
 
 65
-00:07:42,432 --> 00:07:44,848
-Ask for feedback on yourself, and act on it.
+00:07:45,185 --> 00:07:49,391
+Give feedback often: the situation, what they did, and its effect.
 
 66
-00:07:46,348 --> 00:07:50,798
-Look forward in growth conversations, and give the team the credit, in public.
+00:07:50,891 --> 00:07:55,018
+Agree with each person how often you meet, from every week to once a month.
 
 67
-00:07:52,298 --> 00:07:56,606
-Data work needs new skills. Leading the people who do it is a skill too.
+00:07:56,518 --> 00:08:00,452
+The less you work together day to day, the more a weekly catch-up matters.
 
 68
-00:07:58,506 --> 00:08:01,787
-Their goals, weekly feedback about the work, the next step.
+00:08:02,152 --> 00:08:04,568
+Ask for feedback on yourself, and act on it.
+
+69
+00:08:06,068 --> 00:08:10,518
+Look forward in growth conversations, and give the team the credit, in public.
+
+70
+00:08:12,018 --> 00:08:16,326
+Data work needs new skills. Leading the people who do it is a skill too.
+
+71
+00:08:18,226 --> 00:08:21,606
+Their goals, regular feedback about the work, the next step.

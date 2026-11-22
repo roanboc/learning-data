@@ -55,3 +55,13 @@ Chapters now: *Watching the children* 0:00 · *Goals of her own* 2:29 · *Every 
 | 32 | The Spanish? | The captions' words are the same, timed again to the voice; the page and Pause and think don't change. | The Spanish captions |
 | 33 | Merge now, or wait for you? | Merged on green, squashed, with the series' Draft label, as you chose for the series' films on 17 November, after films 2 and 3 of the series. A review page with the first version beside this one can be made on request. | This pull request |
 | 34 | Arms and depth, after the kit's new check? | Put right on 18 November 2026. Mr Okada, walking in among the teachers, is drawn behind the one nearer us, not over him. The manager walks nearer Ana's desk to hand over the form, and the next graduate shakes Ivy's hand with the far hand, from within reach: both hands had stopped short. The room's board is written 56 px lower, within Carmen's reach. The words, the timings and the sound stay. | Chapters 1, 3 and 6 |
+
+## How often to meet, 22 November 2026
+
+Chapters now: *Watching the children* 0:00 · *Goals of her own* 2:29 · *Every Tuesday* 3:41 · *Both ways* 5:17 · *The next step* 6:10 · *On Monday* 7:20.
+
+| # | Question | Assumption | Where it shows |
+|---|---|---|---|
+| 35 | How often should a manager meet each person? | Not weekly by default, as you said on 22 November 2026: from every week to once a month, as closely as you work together, as the person prefers and as mature the team is. Monthly when the team works well, the process is mature and nobody raises collaboration issues; the less you work with someone day to day, the more a weekly catch-up matters; let people help choose, knowing the team meets too. The film now says *regular feedback*, and *On Monday* says: *Agree with each person how often you meet, from every week to once a month. The less you work together day to day, the more a weekly catch-up matters.* | *Watching the children*, 2:21; *On Monday*, 7:31 to 7:44; the page, the series' text and the playground *Ivy's first year* |
+| 36 | How does Ivy's story show it? | She meets Helena every Tuesday while she is new. In July, with her own product, her work running well and the team meeting every week, she asks to meet once a month, and Helena agrees. The chapter keeps its name, *Every Tuesday*, since that is her first months. | *Every Tuesday*, 3:42; *The next step*, about 6:45 |
+

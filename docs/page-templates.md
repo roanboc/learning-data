@@ -48,7 +48,7 @@ The numbers match the numbered blocks in each HTML template.
 ### Topic page
 
 1. **Hero.** Breadcrumb (*Topics*), the topic's name, who it is for in one line, progress, and *Continue*.
-2. **The series, each with its practice.** One card per series, in route order: poster, title and films watched. Beside the card, a short list of three thin bars (labs seen, answered, right), with no numbers. The whole card opens the series.
+2. **The series.** The same big tiles as the Topics page's rows, in route order: pictures, title, one line, and the line of icons with *Start*, *Continue* or *Watched · review* (the author, 22 November 2026). The hero's progress is the same line of icons, for the topic's films, beside *Continue*.
 3. **In the example project,** folded. Only when the project covers this topic.
 4. **Coming next.** Only while series are being made.
 5. **Up next on the route.** The previous and next topic.
@@ -57,7 +57,7 @@ The numbers match the numbered blocks in each HTML template.
 
 1. **Hero.** Breadcrumb, the title, one line, progress, and *Continue* to the next film not yet watched.
 2. **The films.** Numbered compact rows: tile, title, minutes, and *Mark watched*. The tile is a square close-up of the film's poster, on one thing the film is about, and no two tiles of a page look alike (`site-tools/tiles.py`).
-3. **Practise.** The same strip as the topic page (labs seen, answered, right) with one button. Under it, links to all labs and to the evaluation.
+3. **Practise.** The practice as one line of icons (labs seen, answered, right) with one button. Under it, links to all labs and to the evaluation.
 4. **In the example project,** folded. Only when its films show project files.
 5. **Films to come.** Only while the series is being made.
 6. **Up next.** The next series, or the topic page at the topic's end.
@@ -93,16 +93,8 @@ The Topics page is one view (the author, 21 November 2026): the list of topics, 
 
 - **Progress first.** The hero holds *Your progress*: one line of four icons (films watched, labs seen, situations answered, right answers), never bars, and *Continue* to the next film not watched. A chosen goal narrows it to that goal's films.
 - **The railway map, from 880 px.** The route as a line map, starting at the start's station (*Data platforms*) on the line, with no separate introduction card. A station's ring fills as films are watched; the next stop is circled; hovering or focusing names it. Selecting a station opens its topic's row below and scrolls to it; a topic's own page opens from *Open the topic* in its row. On a phone the list itself is the rail.
-- **One bar of tools.** Search, *I want to…* as a drop-down of the goals (each with its one line, and *see all topics*), and *Show*: all, in progress, not started, done. The goal is kept in the visitor's browser and shared with the map. A goal numbers its films and series (*Step 2 of 5*), opens its topics, and dims the rest, here and on the map.
+- **One bar of tools.** Search, *I want to…* as a drop-down of the goals (each with its one line, and *see all topics*), and, once a goal is chosen, one toggle: *Hide what isn't on this path*, which hides the topics, films and series off it, here and on the map. No other filter (the author, 22 November 2026). The goal and the toggle are kept in the visitor's browser and shared with the map. A goal numbers its films and series (*Step 2 of 5*), opens its topics, and dims the rest.
 - **Rows and tiles.** Each topic is a row in the route's groups, with its ring, counts and line of icons; it opens on its films and series as big tiles, as the list always had, each with its own line of icons and *Start*, *Continue* or *Watched · review*.
-
-Progress shows:
-
-1. the hero and the view switch;
-2. **your route**: the chosen route, a switch to change it, and the link to Learning route;
-3. **progress on this route** in two lines (films watched and labs seen; then answered and right), counting only the route's films, labs and situations, with *Continue* to its next stop;
-4. one tile per topic on the route, grouped by route stage. Each tile names the series the route uses there and has a ring and the same two lines of bars ("Not started" before you start);
-5. the route's next stop, marked.
 
 ## The header
 
@@ -129,6 +121,7 @@ No page adds its own links to the header.
 | 19 November 2026 | One template for each page type: topic, series, film, labs and evaluation (the author). It follows an audit of main at 29540656, which found 10 film layouts, 5 series layouts, 11 end-of-film menus, project files shown in 4 ways, 10 series whose last film led nowhere, and *Go further* under 7 headings. |
 | 20 November 2026 | Pages are lighter: one line under each title, one main button, extras folded. A film shows its place in the series in its hero (the author). |
 | 20 November 2026 | Topics get their own page. Series cards there carry their practice as three thin bars, with no numbers. Every film can be marked watched by hand (the author). |
+| 22 November 2026 | Topic pages show their series as the Topics page's tiles, with the same line of icons; a series' practice is a line of icons too, never bars. The Topics page keeps one filter: with a goal, a toggle that hides what isn't on its path (the author). |
 | 20 November 2026 | Labs are circles grouped by film that fill as experiments are done. The playground comes first. The evaluation puts the question first (the author). |
 | 20 November 2026 | The four progress icons are used on every page. Progress is the Topics page's third view. The Learning route and Topics list stay as they are (the author). |
 | 20 November 2026 | "Topic", never "module", on the site (the author). |

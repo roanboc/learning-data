@@ -1559,16 +1559,17 @@ def main():
     s = rep.check("Page templates: film, series and topic pages have the template's sections in its order, under its fixed headings, extras folded, and end by leading on")
     T_HEAD = {  # a section's heading id: its words in English and Spanish
         "watch-h": ("Watch the film", "Mira la película"), "take-h": ("Try it", "Pruébalo"),
+        "seen-before-h": ("Seen before", "Visto antes"),
         "in-the-project-h": ("In the example project", "En el proyecto de ejemplo"), "elsewhere-h": ("Go further", "Para ir más allá"),
         "series-h": None, "films-h": ("The films", "Las películas"), "learn-h": ("Practise", "Practica"),
         "coming-h": None, "up-next-h": None}
     T_ORDER = {  # each page type's sections, in order; the last is required, and so are those marked
-        "film": (["watch-h", "take-h", "in-the-project-h", "elsewhere-h", "series-h"], {"watch-h", "series-h"}),
+        "film": (["watch-h", "take-h", "seen-before-h", "in-the-project-h", "elsewhere-h", "series-h"], {"watch-h", "series-h"}),
         "series": (["films-h", "learn-h", "in-the-project-h", "coming-h", "up-next-h"], {"films-h", "up-next-h"}),
         "topic": (["series-h", "in-the-project-h", "coming-h", "up-next-h"], {"series-h", "up-next-h"})}
     T_LAST = {"film": ("Previous and next", "Anterior y siguiente"), "series": ("Up next", "Lo que sigue"),
               "topic": ("Up next on the route", "Lo que sigue en la ruta"), "series-h": ("The series", "Las series")}
-    FOLDED = {"in-the-project-h", "elsewhere-h"}
+    FOLDED = {"seen-before-h", "in-the-project-h", "elsewhere-h"}
     T_SLUG = {S["slug"]: S for S in build_series.SERIES}
     T_TOPICS = {t["id"] for t in build_series.live()}
     counted = Counter()

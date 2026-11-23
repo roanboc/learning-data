@@ -1,0 +1,48 @@
+# The guards Claude Code runs as hooks (.github/hooks/guard.py, rules in .github/hooks/local.py), run here on every change,
+# whoever pushes: no secrets, the fast file checks on every changed file (page text limits, release status, "topic" not
+# "module"...), and no Claude author or trailer in main's history (a warning on a pull request, whose squash message must
+# leave them out; a failure on main). Takes seconds. The same file is in roanboc/learning-data-project.
+name: Guards
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: guards-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  guards:
+    name: Guards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          filter: blob:none
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Test the guards
+        run: python -m unittest discover -s .github/hooks -p 'test_*.py' -v
+
+      - name: Guard the change
+        env:
+          EVENT: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT" = pull_request ]; then
+            python .github/hooks/guard.py ci --base "$PR_BASE"
+          elif git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            python .github/hooks/guard.py ci --base "$BEFORE" --main
+          else
+            python .github/hooks/guard.py ci --base HEAD~1 --main
+          fi

@@ -470,7 +470,7 @@ const NARR={
 ]},
 "series":{"name":"Five series, one idea","lead":0.8,"tail":0.9,"vo":[
  {"id":"last","gap":1.0,"text":"Five series on enterprise architecture so far, and each ends on the same idea."},
- {"id":"map","gap":0.9,"text":"The map before the data: a map stays alive while people use it, keep it true, and pass it on."},
+ {"id":"map","gap":0.9,"text":"The map before the data: a map that's used every week goes stale, unless people keep it true."},
  {"id":"business","gap":0.9,"text":"Business architecture for data: rules last only while people keep them, and change them when the world changes."},
  {"id":"data","gap":0.9,"text":"Data architecture: it's never finished. It matures one change at a time."},
  {"id":"platform","gap":0.9,"text":"Platform and solution architecture: a practice isn't built once. It's kept, every part with a stage, a date and a way out."},
@@ -492,7 +492,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"fall/city": 10.886, "fall/ruin": 7.199, "fall/order": 3.38, "fall/strabo": 5.333, "fall/died": 7.406, "fall/quarry": 8.232, "fall/walls": 5.828, "fall/need": 2.745, "fall/listed": 7.516, "fall/keepers": 6.967, "fall/utility": 4.862, "fall/moves": 5.27, "five/year": 4.91, "five/asks": 4.189, "five/five": 7.719, "five/why": 6.46, "five/copy": 5.974, "five/two": 6.822, "five/grace": 3.702, "moved/read": 6.799, "moved/steps": 4.229, "moved/words": 7.39, "moved/people": 2.974, "moved/agents": 4.793, "moved/passed": 4.087, "moved/never": 5.596, "copy/paste": 5.245, "copy/drift": 5.496, "copy/chat": 5.751, "copy/rule": 7.892, "copy/cite": 3.472, "copy/retest": 8.2, "leaves/lead": 5.491, "leaves/name": 4.593, "leaves/sees": 2.749, "leaves/agent": 6.02, "leaves/now": 8.666, "leaves/confirm": 3.86, "job/whole": 5.277, "job/term": 5.276, "job/product": 5.047, "job/cap": 5.071, "job/owner": 8.032, "job/budget": 5.132, "job/rhythm": 5.481, "job/month": 7.256, "job/quarter": 5.738, "series/last": 5.054, "series/map": 5.663, "series/business": 6.708, "series/data": 4.497, "series/platform": 7.977, "series/here": 4.642, "series/links": 7.719, "back/wall": 9.231, "back/practice": 5.651, "back/babel": 6.862, "back/slowly": 3.749, "back/spring": 7.721, "back/homes": 5.04, "end/answer": 3.889, "end/keep": 6.396, "end/next": 4.875};
+const VODUR={"fall/city": 10.886, "fall/ruin": 7.199, "fall/order": 3.38, "fall/strabo": 5.333, "fall/died": 7.406, "fall/quarry": 8.232, "fall/walls": 5.828, "fall/need": 2.745, "fall/listed": 7.516, "fall/keepers": 6.967, "fall/utility": 4.862, "fall/moves": 5.27, "five/year": 4.91, "five/asks": 4.189, "five/five": 7.719, "five/why": 6.46, "five/copy": 5.974, "five/two": 6.822, "five/grace": 3.702, "moved/read": 6.799, "moved/steps": 4.229, "moved/words": 7.39, "moved/people": 2.974, "moved/agents": 4.793, "moved/passed": 4.087, "moved/never": 5.596, "copy/paste": 5.245, "copy/drift": 5.496, "copy/chat": 5.751, "copy/rule": 7.892, "copy/cite": 3.472, "copy/retest": 8.2, "leaves/lead": 5.491, "leaves/name": 4.593, "leaves/sees": 2.749, "leaves/agent": 6.02, "leaves/now": 8.666, "leaves/confirm": 3.86, "job/whole": 5.277, "job/term": 5.276, "job/product": 5.047, "job/cap": 5.071, "job/owner": 8.032, "job/budget": 5.132, "job/rhythm": 5.481, "job/month": 7.256, "job/quarter": 5.738, "series/last": 5.054, "series/map": 5.397, "series/business": 6.708, "series/data": 4.497, "series/platform": 7.977, "series/here": 4.642, "series/links": 7.719, "back/wall": 9.231, "back/practice": 5.651, "back/babel": 6.862, "back/slowly": 3.749, "back/spring": 7.721, "back/homes": 5.04, "end/answer": 3.889, "end/keep": 6.396, "end/next": 4.875};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2828,7 +2828,7 @@ scene("fall",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
       bab_tag(cx,960,214,"the tower is never rebuilt",a6_win(t,w("died","and the tower"),tQu-0.7,0.6),{col:ACA_WARN});
       bab_tag(cx,960,214,"with nobody to keep them: a quarry",a6_win(t,tQu-0.1,w("quarry","For centuries")-0.6,0.6));
       bab_tag(cx,960,214,"its bricks carried off to houses nearby",a6_win(t,w("quarry","For centuries"),tWa-0.6,0.6));});
-  acaTitle(ctx,S,t,B+0.8,"Kept alive","an owner, a budget and a rhythm, not an end date","Film 3 of 3 · Continuous architecture");});
+  acaTitle(ctx,S,t,B+0.8,"Kept alive","an owner, a budget and a rhythm, not an end date","Film 4 of 4 · Continuous architecture");});
 
 /* ---------- 2. Five steps, not four ---------- */
 // The street, on the right: its line from the pole, a home with new solar panels and two homes without, each with its line down from
@@ -3124,7 +3124,7 @@ scene("job",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. Five series, one idea ---------- */
-const A6_LINES=["A map stays alive while people use it, keep it true, and pass it on.","Rules last only while people keep them, and change them when the world changes.","It's never finished. It matures one change at a time.",
+const A6_LINES=["A map that's used every week goes stale, unless people keep it true.","Rules last only while people keep them, and change them when the world changes.","It's never finished. It matures one change at a time.",
   "A practice isn't built once. It's kept, every part with a stage, a date and a way out.","An architecture stays true only while keeping it is someone's job."];
 scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tLa=c("last"),tLk=c("links"),T5=[c("map"),c("business"),c("data"),c("platform"),c("here")],all=fin(t,w("here","someone's job")+0.4,0.8)*(1-fin(t,tLk-0.3,0.6));
@@ -3230,7 +3230,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   withA(ctx,fin(t,1.0,1.0),()=>a6_mapTower(ctx,760,700,0.42,t,{hi:fin(t,w("next","is kept")-0.3,0.8)}));
   const nA=fin(t,tDg-0.3,0.7);if(nA>0.01)arrive(ctx,1230,632,t,tDg-0.3,()=>a6_card(ctx,1000,560,460,"next",["AI architecture"],A6_OK,{size:40}),{dy:-10,a:nA});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"Kept alive","Give the map an owner, a budget and a rhythm.","Film 3 of 3 · Continuous architecture");});
+  acaEnd(ctx,S,t,B,"Kept alive","Give the map an owner, a budget and a rhythm.","Film 4 of 4 · Continuous architecture");});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

@@ -1,0 +1,62 @@
+{
+  "kicker": "Keeping the map",
+  "kicker_es": "Mantener el mapa",
+  "title_es": "Un mapa que personas y agentes pueden leer",
+  "h1": "A map people and agents can read: kept in one tool",
+  "h1_es": "Un mapa que personas y agentes pueden leer: en una herramienta",
+  "lead": "Tomás's map is used every week and goes stale in slides. He moves it into one tool that brings in what other systems hold, keeps each element once with an owner, reviews every change and generates every view from it. An agent reads it too: it drafts, and people confirm.",
+  "lead_es": "El mapa de Tomás se usa cada semana y se desactualiza en diapositivas. Lo lleva a una herramienta que trae lo que guardan otros sistemas, guarda cada elemento una vez con un responsable, revisa cada cambio y genera cada vista. Un agente también lo lee: redacta, y las personas confirman.",
+  "description": "A film about keeping an enterprise architecture map alive: moving it from slides into an enterprise architecture tool that brings in what documents, the project management tool and the IT service management tool already keep, each record with its source's ID; keeping each element once, with a stable ID, an owner, its evidence with a date, and whether its owner has confirmed it, with text files in a repository as the simplest approach; reviewing every change, with checks on the map itself; generating every view one way, from the ArchiMate views and the glossary to dbt and Databricks; and letting agents read it to find decisions, owners and rules, and draft changes that people confirm.",
+  "description_es": "Una película sobre cómo mantener vivo un mapa de arquitectura empresarial: pasarlo de diapositivas a una herramienta de arquitectura empresarial que trae lo que ya guardan los documentos, la herramienta de gestión de proyectos y la de gestión de servicios de TI, cada registro con el ID de su fuente; guardar cada elemento una vez, con un ID estable, un responsable, su evidencia con fecha y si su responsable lo confirmó, con archivos de texto en un repositorio como el enfoque más simple; revisar cada cambio, con controles sobre el propio mapa; generar cada vista en un solo sentido, desde las vistas de ArchiMate y el glosario hasta dbt y Databricks; y dejar que los agentes lo lean para encontrar decisiones, responsables y reglas, y redacten cambios que las personas confirman.",
+  "card": "A map kept in one tool, fed by other systems, reviewed and versioned. Agents draft; people confirm.",
+  "card_es": "Un mapa en una herramienta, alimentado por otros sistemas, revisado y versionado. Los agentes redactan; las personas confirman.",
+  "chapters_es": {
+    "watch": "La observación",
+    "risk": "Útil, y por eso en riesgo",
+    "sources": "Un mapa, muchas fuentes",
+    "text": "Cada elemento, una vez",
+    "review": "Revisado y versionado",
+    "views": "Un mapa, muchas vistas",
+    "reads": "Un agente lo lee",
+    "rights": "Un agente en el mapa",
+    "confirm": "Las personas confirman",
+    "again": "El primer día, otra vez",
+    "back": "De vuelta a la observación",
+    "end": "Un mapa que personas y agentes pueden leer"
+  },
+  "next_h": "Every element kept once, every change confirmed by its owner. Next, a first draft, not a blank page.",
+  "next_h_es": "Cada elemento guardado una vez, cada cambio confirmado por su responsable. Luego, un primer borrador, no una página en blanco.",
+  "past": [
+    "Babylon, from 652 BCE",
+    "Each night a scholar watched the sky and wrote down what he saw, always in the same order; the next watcher carried on from the last, for nearly six hundred years, and astronomers still read their eclipse records."
+  ],
+  "past_es": [
+    "Babilonia, desde el 652 a. C.",
+    "Cada noche un erudito observaba el cielo y anotaba lo que veía, siempre en el mismo orden; el siguiente observador seguía desde el anterior, durante casi seiscientos años, y los astrónomos aún leen sus registros de eclipses."
+  ],
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 23 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 23 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The astronomical diaries",
+        "title_es": "Los diarios astronómicos (en inglés)",
+        "line": "Livius' introduction to the diaries Babylon's scholars kept from 652 to 61 BCE: what each tablet records, night by night and month by month, with translated examples.",
+        "line_es": "La introducción de Livius a los diarios que los eruditos de Babilonia llevaron del 652 al 61 a. C.: lo que registra cada tablilla, noche a noche y mes a mes, con ejemplos traducidos.",
+        "href": "https://www.livius.org/articles/concept/astronomical-diaries/",
+        "href_es": "https://www.livius.org/articles/concept/astronomical-diaries/"
+      },
+      {
+        "title": "The day, growing longer",
+        "title_es": "El día, cada vez más largo (en inglés)",
+        "line": "Stephenson, Morrison and Hohenkerk (2016), open to read: how records of eclipses, Babylon's among them, measure the Earth's rotation since 720 BC.",
+        "line_es": "Stephenson, Morrison y Hohenkerk (2016), de lectura libre: cómo los registros de eclipses, entre ellos los de Babilonia, miden la rotación de la Tierra desde el 720 a. C.",
+        "href": "https://royalsocietypublishing.org/doi/10.1098/rspa.2016.0404",
+        "href_es": "https://royalsocietypublishing.org/doi/10.1098/rspa.2016.0404"
+      }
+    ]
+  },
+  "tile": [770, 470, 320]
+}

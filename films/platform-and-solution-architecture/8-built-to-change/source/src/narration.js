@@ -96,6 +96,6 @@ const NARR={
  {"id":"kept","gap":0.8,"text":"A data practice isn't built once either: products end, needs grow, and people move on."},
  {"id":"each","gap":0.8,"text":"So it's kept: every part with a stage and a date, a way out tested each year, and the map changed with every change."},
  {"id":"data","gap":0.8,"text":"At the utility, the next end is planned, not forced, and what's the utility's own goes with it."},
- {"id":"next","gap":0.4,"text":"Next, the last series on enterprise architecture: AI and continuous architecture."}
+ {"id":"next","gap":0.4,"text":"Next, Continuous architecture: a map people and agents can read, and kept alive."}
 ]}
 };

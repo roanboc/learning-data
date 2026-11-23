@@ -40,6 +40,8 @@ lab: async (id) => {
     const want = {tariffs: "place", export: "never", account: "signin", medical: "tool", notes: "never"};
     for (const x of W.items) await step(x.s, want[x.k]);
     for (const e of W.events) await press(e.b, 200);
+  } else if (id === "watcher") {
+    await seg(0, 3); await press(W.fixB); await press(W.runB); await seg(0, 2); await press(W.fixB); await seg(0, 0, 600);
   } else if (id === "confirm") {
     await seg(0, 1); await seg(1, 1); await seg(2, 2); await press(W.guessT); await press(W.runB, 600);
   } else if (id === "checks") {

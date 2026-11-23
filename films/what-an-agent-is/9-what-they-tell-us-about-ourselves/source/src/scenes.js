@@ -179,7 +179,7 @@ scene("five",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({counted:wAt(s
 
 scene("taught",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({rough:wAt(sc,"perceptron","rough copy"),sense:wAt(sc,"senses","senses"),rem:wAt(sc,"senses","remembers"),
     act:wAt(sc,"senses","acts"),guess:wAt(sc,"descend","guessing"),predict:wAt(sc,"friston","predict"),errors:wAt(sc,"friston","errors"),ten:wAt(sc,"rods","ten rough signals"),
-    voices:wAt(sc,"rods","voices"),next:wAt(sc,"levels","the next word"),story:wAt(sc,"levels","where the story"),five:wAt(sc,"cell","five to eight"),nk:wAt(sc,"nobody","nobody knows"),
+    voices:wAt(sc,"rods","voices"),next:wAt(sc,"levels","the next word"),story:wAt(sc,"levels","where the story"),nk:wAt(sc,"nobody","nobody knows"),
     end:sc.dur-2.8}));
   const words=["Once","upon","a","time,","in","a","town","by","the","sea,","there","lived","a","girl","who","kept","a","lighthouse,","and","every","night","she"];
   const lt0=c.y2022+0.9,rodE=tt_ear(1250,700,0.85,true);
@@ -213,10 +213,6 @@ scene("taught",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({rough:wAt(s
     {at:c.stops-0.4,place:"tt_labQuiet",keys:[[c.stops-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
       ag_person(x,TT_LISTEN,560,640,1.05,{t:tt,covered:true,gaze:[3,0]});tt_headGuess(x,590,410,140,0.5+0.3*Math.sin(tt*3));
       tt_levels(x,860,330,tt,{rows:[ag_in(tt,P.next-0.2,0.5),ag_in(tt,P.next+0.9,0.5),ag_in(tt,P.story-0.2,0.5)]});}},
-    // one kind of brain cell, and the network it took to imitate it
-    {at:c.cell-0.4,place:"tt_labQuiet",keys:[[c.cell-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
-      tt_neuron(x,600,440,0.95,{grow:tt_on(tt,c.cell,1.6)});tt_layers(x,1090,430,5+3*tt_on(tt,P.five+0.4,1.8),{a:ag_in(tt,P.five-0.4,0.5)});
-      const q=tt_pop(tt,P.five+0.6);tt_tag(x,960,820,"1 brain cell · a network 5 to 8 layers deep",{a:q.a,k:q.k});}},
     // how a brain learns from its errors: the loop's way back turns to a dotted line, and a question mark
     {at:c.nobody-0.4,place:"tt_labQuiet",keys:[[c.nobody-0.4,960,540,1.0]],d:2,push:0.015,draw:(x,tt)=>tt_miniLoop(x,960,460,190,{p:1,dotted:tt_on(tt,P.nk-0.4,1.2)})},
     tt_closeShot(0,P.end)];

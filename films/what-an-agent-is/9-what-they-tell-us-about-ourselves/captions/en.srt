@@ -159,261 +159,257 @@ But the copy stops somewhere.
 A brain guesses at many levels at once, from the next word to where the story is going.
 
 41
-00:03:36,022 --> 00:03:41,329
-To imitate one kind of brain cell, researchers needed a network five to eight layers deep.
-
-42
-00:03:42,629 --> 00:03:45,843
+00:03:36,022 --> 00:03:39,236
 And how a brain learns from its errors, nobody knows yet.
 
-43
-00:03:51,143 --> 00:03:55,688
+42
+00:03:44,536 --> 00:03:49,081
 Second: when a model writes a poem, is it creating, or mixing what it learned?
 
-44
-00:03:56,988 --> 00:04:00,198
+43
+00:03:50,381 --> 00:03:53,591
 We learn from others too, and mix what we learned in new ways.
 
-45
-00:04:02,098 --> 00:04:10,333
+44
+00:03:55,491 --> 00:04:03,726
 In 1843, Ada Lovelace wrote that the first design for a computer could do only ‘whatever we know how to order it to perform’.
 
-46
-00:04:11,833 --> 00:04:17,021
+45
+00:04:05,226 --> 00:04:10,414
 In 1990, the philosopher Margaret Boden described three ways to be creative:
 
-47
-00:04:17,221 --> 00:04:21,771
+46
+00:04:10,614 --> 00:04:15,164
 combining ideas, exploring a style, and changing the style's own rules.
 
-48
-00:04:23,271 --> 00:04:26,263
+47
+00:04:16,664 --> 00:04:19,656
 A model can combine ideas and explore a style.
 
-49
-00:04:27,563 --> 00:04:32,759
+48
+00:04:20,956 --> 00:04:26,152
 But a person brings what a mix may not: a life, an intention, a reason to make it.
 
-50
-00:04:34,259 --> 00:04:36,000
+49
+00:04:27,652 --> 00:04:29,393
 Clark's reason was his father.
 
-51
-00:04:37,900 --> 00:04:43,904
+50
+00:04:31,293 --> 00:04:37,297
 Boden said that whether a computer could ever really be creative is not for science alone to settle.
 
-52
-00:04:45,004 --> 00:04:48,607
+51
+00:04:38,397 --> 00:04:42,000
 It's partly about what we mean, and partly a choice we'll have to make.
 
-53
-00:04:53,507 --> 00:04:57,448
+52
+00:04:46,900 --> 00:04:50,841
 Third: if we copied a brain, wire by wire, would we get a mind?
 
-54
-00:04:58,748 --> 00:05:04,545
+53
+00:04:52,141 --> 00:04:57,938
 By 1986, the wiring of a tiny worm's 302 neurons had been mapped.
 
-55
-00:05:05,845 --> 00:05:11,675
+54
+00:04:59,238 --> 00:05:05,068
 Since 2011, an open project, OpenWorm, has worked on a copy of it on a computer.
 
-56
-00:05:12,375 --> 00:05:17,422
+55
+00:05:05,768 --> 00:05:10,815
 It wriggles, but not much more: a map doesn't say how each connection works, or when.
 
-57
-00:05:18,722 --> 00:05:26,521
+56
+00:05:12,115 --> 00:05:19,914
 In 2024, a fly's whole brain was mapped, 139,255 neurons,
 
-58
-00:05:26,721 --> 00:05:30,533
+57
+00:05:20,114 --> 00:05:23,926
 and a model built from the map predicted which ones answer to sugar.
 
-59
-00:05:32,033 --> 00:05:33,770
+58
+00:05:25,426 --> 00:05:27,163
 We have about 86 billion.
 
-60
-00:05:35,270 --> 00:05:37,908
+59
+00:05:28,663 --> 00:05:31,301
 And a copy can act like us without working like us.
 
-61
-00:05:39,008 --> 00:05:42,997
+60
+00:05:32,401 --> 00:05:36,390
 Rod's implant did part of an ear's work, but not as an ear does:
 
-62
-00:05:43,197 --> 00:05:48,066
+61
+00:05:36,590 --> 00:05:41,459
 it was made for speech, and to many people with implants, music still sounds poor.
 
-63
-00:05:49,566 --> 00:05:52,251
+62
+00:05:42,959 --> 00:05:45,644
 Would a copy that worked exactly like us be a mind?
 
-64
-00:05:53,551 --> 00:06:00,221
+63
+00:05:46,944 --> 00:05:53,614
 The philosopher John Searle wrote that no one supposes a simulated rainstorm ‘will leave us all drenched’.
 
-65
-00:06:01,521 --> 00:06:05,602
+64
+00:05:54,914 --> 00:05:58,995
 Others say a mind is what a brain does, so a perfect copy would be one.
 
-66
-00:06:06,702 --> 00:06:08,188
+65
+00:06:00,095 --> 00:06:01,581
 Nobody knows who's right.
 
-67
-00:06:13,088 --> 00:06:16,615
+66
+00:06:06,481 --> 00:06:10,008
 Fourth, and hardest: why does it feel like anything to be us?
 
-68
-00:06:18,015 --> 00:06:20,202
+67
+00:06:11,408 --> 00:06:13,595
 The implant turned sound into pulses.
 
-69
-00:06:21,302 --> 00:06:22,499
+68
+00:06:14,695 --> 00:06:15,892
 It didn't hear anything.
 
-70
-00:06:24,399 --> 00:06:25,250
+69
+00:06:17,792 --> 00:06:18,643
 Rod did.
 
-71
-00:06:27,550 --> 00:06:32,384
+70
+00:06:20,943 --> 00:06:25,777
 In 1995, the philosopher David Chalmers called this the hard problem:
 
-72
-00:06:32,584 --> 00:06:36,597
+71
+00:06:25,977 --> 00:06:29,990
 ‘Why should physical processing give rise to a rich inner life at all?’
 
-73
-00:06:37,797 --> 00:06:39,248
+72
+00:06:31,190 --> 00:06:32,641
 Scientists have theories.
 
-74
-00:06:39,848 --> 00:06:43,951
+73
+00:06:33,241 --> 00:06:37,344
 One says experience comes from how tightly a system's parts work as one.
 
-75
-00:06:44,951 --> 00:06:48,231
+74
+00:06:38,344 --> 00:06:41,624
 Another, from news shared across the whole brain at once.
 
-76
-00:06:49,331 --> 00:06:59,140
+75
+00:06:42,724 --> 00:06:52,533
 In 2025, a test of both, with 256 people and rules both sides had agreed beforehand, challenged key parts of each.
 
-77
-00:07:00,240 --> 00:07:01,676
+76
+00:06:53,633 --> 00:06:55,069
 Science doesn't know yet.
 
-78
-00:07:04,976 --> 00:07:06,348
+77
+00:06:58,369 --> 00:06:59,741
 Could a machine feel, then?
 
-79
-00:07:07,648 --> 00:07:15,364
+78
+00:07:01,041 --> 00:07:08,757
 The neuroscientist Rodolfo Llinás, from Colombia, found that awake and dreaming, the brain hums about forty times a second.
 
-80
-00:07:16,864 --> 00:07:20,148
+79
+00:07:10,257 --> 00:07:13,541
 He thought this rhythm ties what we sense into one moment.
 
-81
-00:07:21,148 --> 00:07:22,593
+80
+00:07:14,541 --> 00:07:15,986
 In deep sleep, it fades.
 
-82
-00:07:24,093 --> 00:07:31,948
+81
+00:07:17,486 --> 00:07:25,341
 Roger Penrose and Stuart Hameroff look deeper, to quantum effects in microtubules, tiny tubes inside our neurons.
 
-83
-00:07:33,448 --> 00:07:38,222
+82
+00:07:26,841 --> 00:07:31,615
 Critics say a warm, wet brain would wipe out such effects far too fast to matter.
 
-84
-00:07:39,222 --> 00:07:42,421
+83
+00:07:32,615 --> 00:07:35,814
 Penrose and Hameroff disagree, and the tests go on.
 
-85
-00:07:43,721 --> 00:07:48,689
+84
+00:07:37,114 --> 00:07:42,082
 In 2001, Llinás wrote that he sincerely doubted the quantum idea.
 
-86
-00:07:49,689 --> 00:07:54,511
+85
+00:07:43,082 --> 00:07:47,904
 Yet in 2007, he said he didn't know what in our cells produces feeling.
 
-87
-00:07:54,911 --> 00:07:57,884
+86
+00:07:48,304 --> 00:07:51,277
 ‘Filaments? Microtubules? Quantum mechanics?’
 
-88
-00:07:59,584 --> 00:08:07,496
+87
+00:07:52,977 --> 00:08:00,889
 In 2023, nineteen researchers checked today's AI for fourteen signs of consciousness, drawn from the leading theories.
 
-89
-00:08:08,496 --> 00:08:14,363
+88
+00:08:01,889 --> 00:08:07,756
 None of the systems seemed conscious, but nothing obvious stops us building ones that show the signs.
 
-90
-00:08:15,863 --> 00:08:19,071
+89
+00:08:09,256 --> 00:08:12,464
 Whether showing them means feeling anything, nobody knows.
 
-91
-00:08:24,171 --> 00:08:26,022
+90
+00:08:17,564 --> 00:08:19,415
 Last: what makes us human, then?
 
-92
-00:08:27,322 --> 00:08:33,748
+91
+00:08:20,715 --> 00:08:27,141
 In 1637, René Descartes wrote that a machine could never arrange its words in different ways,
 
-93
-00:08:33,948 --> 00:08:37,806
+92
+00:08:27,341 --> 00:08:31,199
 to answer whatever is said to it, as even the dullest people can.
 
-94
-00:08:39,106 --> 00:08:40,445
+93
+00:08:32,499 --> 00:08:33,838
 Today, machines do.
 
-95
-00:08:41,945 --> 00:08:43,564
+94
+00:08:35,338 --> 00:08:36,957
 If not language, then what?
 
-96
-00:08:44,564 --> 00:08:45,924
+95
+00:08:37,957 --> 00:08:39,317
 A body that can be hurt?
 
-97
-00:08:46,624 --> 00:08:48,043
+96
+00:08:40,017 --> 00:08:41,436
 A life lived with others?
 
-98
-00:08:48,743 --> 00:08:49,516
+97
+00:08:42,136 --> 00:08:42,909
 Feelings?
 
-99
-00:08:50,216 --> 00:08:52,520
+98
+00:08:43,609 --> 00:08:45,913
 Choosing what matters, and answering for it?
 
-100
-00:08:53,820 --> 00:08:55,155
+99
+00:08:47,213 --> 00:08:48,548
 Nobody has settled it.
 
-101
-00:08:56,655 --> 00:09:01,281
+100
+00:08:50,048 --> 00:08:54,674
 Rod heard Margaret's voice again, through ten electrodes and a brain that learned.
 
-102
-00:09:03,581 --> 00:09:10,418
+101
+00:08:56,974 --> 00:09:03,811
 Building copies keeps teaching us about ourselves: where they're like us, where they're not, and how much we still don't know.
 
-103
-00:09:11,718 --> 00:09:16,096
+102
+00:09:05,111 --> 00:09:09,489
 Seeing that helps Jun's team decide what to hand the agent, and what to keep.
 
-104
-00:09:17,396 --> 00:09:18,944
+103
+00:09:10,789 --> 00:09:12,337
 We don't have the answers yet.
 
-105
-00:09:19,944 --> 00:09:20,906
+104
+00:09:13,337 --> 00:09:14,299
 Keep wondering.

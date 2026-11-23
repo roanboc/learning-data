@@ -43,3 +43,12 @@ The author saw words run past a card on a phone in another series, and asked: "C
 - **Assumption taken:** widen. The card is 720 px wide, 40 more, and the card beside it, *ISO/IEC 42001 · managing AI*, is 560, 40 fewer, so the pair ends where it did. *watch it* is kept together, so the card's lines break where they did. No word changed. It shows at 7:34 to 7:50.
 - **Question:** a film that names a law now also says that a law is the least to do, and this film adds that sentence when its line about Europe's AI law next changes. Does a wider card count as that change?
 - **Assumption taken:** no. No word changed, in the voice or on screen, so the sentence waits for a change to the line itself.
+
+## 23 November 2026: the rules point to Why we govern them (thread "Remove repetition from AI agents films")
+
+The author asked to remove repetition from the AI agents films without losing fundamental content, and chose line-level trims with *Seen before* links.
+
+- **Question:** *What never changes* told again, in three lines, the rules *Why we govern them* teaches in full. Cut them, or point to that film?
+- **Assumption taken:** point. The three lines become one that names the film: "The rules of Why we govern them hold: a person owns the agent and stays in every critical loop; another person approves every change to production; and agents never approve." The card keeps its five rows, each now timed to its words in that line. Lost: "answers for its work" (the card still shows it) and "an agent's review is only for reference" (taught in full in *Every change through review*). The line about an agent never approving its own change, weakening a check or granting itself rights stays, since no other film says all three. The page links *Why we govern them* under *Seen before*.
+- **Question:** does this count as the change to the Europe's AI law line that brings in "a law is the least to do"?
+- **Assumption taken:** no. That line is unchanged.

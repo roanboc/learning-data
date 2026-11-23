@@ -251,61 +251,57 @@ Un paso abajo en una tarea, no un interruptor apagado: el equipo conservó su ay
 Bajo cada etapa, algunas cosas nunca cambian.
 
 64
-00:06:54,515 --> 00:06:59,470
-Una persona es dueña del agente, responde por su trabajo, y está en cada ciclo crítico.
+00:06:54,515 --> 00:07:00,604
+Las reglas de Por qué los gobernamos se mantienen: una persona es dueña del agente y está en cada ciclo crítico;
 
 65
-00:07:00,170 --> 00:07:06,084
-Cada cambio en producción lo aprueba una persona que no lo hizo, para agentes como para personas.
+00:07:00,804 --> 00:07:05,462
+otra persona aprueba cada cambio en producción; y los agentes nunca aprueban.
 
 66
-00:07:07,384 --> 00:07:11,452
-Los agentes nunca aprueban: la revisión de un agente es solo de referencia.
-
-67
-00:07:12,152 --> 00:07:18,649
+00:07:06,962 --> 00:07:13,459
 Y un agente nunca aprueba su propio cambio, nunca debilita una verificación para pasarla, y nunca se da permisos a sí mismo.
 
-68
-00:07:20,149 --> 00:07:26,461
+67
+00:07:14,959 --> 00:07:21,271
 Unos investigadores describen cinco niveles de autonomía según lo que hace la persona, de operador a observador.
 
-69
-00:07:27,161 --> 00:07:32,339
+68
+00:07:21,971 --> 00:07:27,149
 Aquí, una persona siempre aprueba producción, así que ninguna etapa deja a las personas solo mirando.
 
-70
-00:07:33,839 --> 00:07:39,767
+69
+00:07:28,649 --> 00:07:34,577
 La ley de IA de Europa pide personas que puedan entender un sistema de alto riesgo, vigilarlo, y detenerlo;
 
-71
-00:07:39,967 --> 00:07:47,693
+70
+00:07:34,777 --> 00:07:42,503
 y la ISO/IEC 42001, la norma para gestionar la IA, pregunta quién es responsable de qué.
 
-72
-00:07:51,293 --> 00:07:56,808
+71
+00:07:46,103 --> 00:07:51,618
 En Nueva Zelanda, la libertad en la carretera llegó por etapas, con lo más riesgoso al final.
 
-73
-00:07:58,308 --> 00:08:05,806
+72
+00:07:53,118 --> 00:08:00,616
 Un agente se gana su libertad igual: cada tipo de tarea por sus propias puertas, y una etapa abajo cuando algo sale mal.
 
-74
-00:08:07,106 --> 00:08:11,390
+73
+00:08:01,916 --> 00:08:06,200
 Cada etapa está escrita en el mapa de la universidad, junto a su tipo de tarea.
 
-75
-00:08:12,890 --> 00:08:20,630
+74
+00:08:07,700 --> 00:08:15,440
 El 2 de noviembre, los encargos de Planificación pasaron del ayudante de Jun, con su acceso, al agente de Planificación, con nombre propio.
 
-76
-00:08:21,930 --> 00:08:24,454
+75
+00:08:16,740 --> 00:08:19,264
 Las películas que siguen lo llevan por ese camino.
 
-77
-00:08:25,154 --> 00:08:29,836
+76
+00:08:19,964 --> 00:08:24,646
 Los agentes hacen más a medida que se lo ganan, y el equipo sigue respaldando cada cifra.
 
-78
-00:08:31,136 --> 00:08:33,911
+77
+00:08:25,946 --> 00:08:28,721
 La autonomía se gana un tipo de tarea a la vez.

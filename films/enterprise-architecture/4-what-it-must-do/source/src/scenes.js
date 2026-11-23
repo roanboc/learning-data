@@ -60,7 +60,7 @@ scene("runners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,1300,170,t,tRb,()=>withA(ctx,1-fin(t,tL-0.4,0.4),()=>tag(ctx,1300,170,"roads rebuilt",PARCH,{align:"center",size:30})),{dy:12});
   arrive(ctx,960,170,t,tL,()=>withA(ctx,1-relit,()=>tag(ctx,960,170,t>w("lasted","whoever")-0.1?"what stayed: moving a message, whoever carried it":"what stayed: moving a message",[255,214,150],{align:"center",size:32})),{dy:12});
   fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"What it must be able to do","the things that stay, whoever does them",EAC,"Film 4 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"What it must be able to do","the things that stay, whoever does them",EAC,"Film 4 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. A familiar map ---------- */
 scene("orgchart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
@@ -242,7 +242,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1600,400,t,cA,()=>sticky(ctx,1600,400,440,250,"Eight capabilities, seven owners, and one that hurts: connecting solar.",{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/2.2,0,1),rot:0.015}),{dy:-30,from:1.06});
   arrive(ctx,1500,690,t,w("next","power cut"),()=>sticky(ctx,1500,690,400,140,"How does value reach people?",{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"What it must be able to do",EAC,"Know what it must be able to do, whoever does it.","Film 4 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"What it must be able to do",EAC,"Know what it must be able to do, whoever does it.","Film 4 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the pictures that carry on from the chapter before keep its camera; the
 // team's note and the owners' grid are new pictures on the wall with the same words elsewhere, so what was there leaves first, over

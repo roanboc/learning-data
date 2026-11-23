@@ -11,7 +11,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   "looking":{stop:"pile",q:"¿Por dónde debería empezar un mapa de la organización?",
     opts:[{t:"Por lo que hace, sus capacidades: cada capa de arriba se deduce de las de abajo.",near:true},{t:"Por los sistemas, porque son lo más fácil de listar y todo lo demás corre en ellos."},{t:"Por qué existe, y para quién: cada capa de abajo se deduce de la de arriba.",ok:true}],
     why:"Si empiezas por abajo, puedes describir cada sistema a la perfección y aun así no saber para qué sirve ninguno. La mayoría de los traspasos empiezan por la lista de sistemas: ¿qué sale mal cuando se empieza ahí?"},
-  "data":{stop:"rule",q:"«Una lectura estimada del medidor vale solo hasta la siguiente lectura real». ¿Qué le da el mapa a esta regla?",
+  "data":{q:"«Una lectura estimada del medidor vale solo hasta la siguiente lectura real». ¿Qué le da el mapa a esta regla?",
     opts:[{t:"Una prueba que corre cada noche y marca las lecturas que duran demasiado."},{t:"Un lugar: el proceso que crea el dato, su dueño y la meta a la que sirve.",ok:true},{t:"Un lugar: el sistema que guarda la lectura, y el equipo que lo opera.",near:true}],
     why:"Cada regla de datos afirma algo sobre la organización. Sin el mapa, una regla es una suposición, y cuando falla, nadie sabe quién debería corregirla. Elige una regla de datos que conozcas: ¿podrías nombrar su proceso, su dueño y su meta?"}
   }}};

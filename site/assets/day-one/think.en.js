@@ -11,7 +11,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "looking":{stop:"pile",q:"Where should a map of the organisation start?",
     opts:[{t:"With what it does, its capabilities: each layer above is worked out from the ones below.",near:true},{t:"With the systems, since they're the easiest to list and everything else runs on them."},{t:"With why it exists, and for whom: each layer below is worked out from the one above.",ok:true}],
     why:"Start from the bottom, and you can describe every system perfectly and still not know what any of them is for. Most handovers start with the system list: what goes wrong when you start there?"},
-  "data":{stop:"rule",q:"“An estimated meter reading stands only until the next actual reading.” What does the map give this rule?",
+  "data":{q:"“An estimated meter reading stands only until the next actual reading.” What does the map give this rule?",
     opts:[{t:"A test that runs every night and flags readings that stand too long."},{t:"A home: the process that creates the data, its owner, and the goal it serves.",ok:true},{t:"A home: the system that stores the reading, and the team that runs it.",near:true}],
     why:"Every data rule is a claim about the organisation. Without the map, a rule is a guess, and when it's wrong, nobody knows who should fix it. Pick a data rule you know: could you name its process, its owner and its goal?"}
   }}};

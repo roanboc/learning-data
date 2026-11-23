@@ -102,7 +102,7 @@ scene("water",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     ctx.restore();
     b1_turn(ctx,fin(t,w("shares","shares of time")-0.3,0.6)*(1-fin(t,tM-0.6,0.6)),{days:clamp((t-w("shares","shares of time")+0.2)/1.2,0,1),open:clamp((t-w("town","In one town")+0.2)/1.2,0,1),share:5,lit:fin(t,w("town","ninety-six")-0.2,0.5)});});
   vign(ctx,S);
-  baTitle(ctx,S,t,B+0.6,"What the business owns","and what the data team keeps for it","Film 1 of 5");});
+  baTitle(ctx,S,t,B+0.6,"What the business owns","and what the data team keeps for it","Film 1 of 7");});
 
 /* ---------- 2. Tomás's map ---------- */
 // what each of the three layers this series covers holds, inside its slab
@@ -306,7 +306,7 @@ scene("practice",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   arrive(ctx,500,120,t,c("itself")-0.1,()=>{T(ctx,"the data practice, on the map",120,128,{w:800,size:38});tag(ctx,1800-tw(ctx,"business layer",28,700)-26,116,"business layer",BA_BUS,{size:28});},{dy:-10});
   const fl=fin(t,c("fills")-0.2,0.6);
   baPractice(ctx,t,{film:1,at:{team:tAc,requests:tSe,tickets:tTi,account:tOb,cp:tCp},pre:fin(t,w("itself","the data practice")-0.2,0.8),owners:true,ownersA:fin(t,tOw,0.6),hi:{requests:pulseAt(t,w("actor","answering")-0.1,1.4),tickets:pulseAt(t,w("tickets","its interface")-0.1,1.4)},
-    ghost:fl,ghostAt:{2:w("fills","glossary")-0.3,3:w("fills","owners")-0.3,4:w("fills","processes")-0.3,5:w("fills","products")-0.3}});
+    ghost:fl,ghostAt:{2:w("fills","glossary")-0.3,3:w("fills","owners")-0.3,4:w("fills","processes")-0.3,7:w("fills","products")-0.3}});
   baPracticeLine(ctx,"team","tickets",clamp((t-tTi-0.3)/0.6,0,1),BA_BUS);baPracticeLine(ctx,"tickets","requests",clamp((t-tTi-0.6)/0.6,0,1),BA_BUS);
   baPracticeAccess(ctx,"requests","cp",clamp((t-tOb-0.4)/0.9,0,1));baPracticeAccess(ctx,"requests","account",clamp((t-tOb-0.6)/1.1,0,1),{lift:330});
   withA(ctx,fin(t,w("objects","stays with")-0.2,0.5)*(1-fl),()=>tag(ctx,1449,560,"what they mean stays with their owners",TRUST,{align:"center",size:28}));
@@ -330,7 +330,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     arrive(ctx,860,420,t,tN-0.2,()=>sticky(ctx,860,420,560,150,"What does the business "+ba_nb("need to know?"),{col:NOTEC[0],size:36,rot:-0.02}),{dy:-16});
     baPersonR(ctx,"tomas",1700,1040,0.8,{t,expr:"calm"});ctx.restore();});
   vign(ctx,S);
-  baEnd(ctx,S,t,B+0.8,"What the business owns","The business owns what its data means. "+ba_nb("The data team keeps the channel."),"Film 1 of 5");});
+  baEnd(ctx,S,t,B+0.8,"What the business owns","The business owns what its data means. "+ba_nb("The data team keeps the channel."),"Film 1 of 7");});
 
 // where the chapters meet (From words to data's joins.js): Whose meaning? opens on the ticket and the three counts as Three answers
 // leaves them, so its camera carries on from there and nothing shows twice

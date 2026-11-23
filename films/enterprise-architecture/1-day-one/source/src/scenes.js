@@ -24,7 +24,7 @@ scene("govern",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   withA(ctx,fin(t,w("book","Domesday")+0.3,0.6),()=>{glow(ctx,960,460,380,TRUST,0.06+0.05*Math.sin(t*1.3));T(ctx,"the Domesday Book",960,740,{w:800,size:30,align:"center",color:rgba(PARCH,1)});});
   arrive(ctx,960,800,t,w("know","know what it is"),()=>tag(ctx,960,810,"know the place first",TRUST,{align:"center",size:32}),{dy:16});
   ctx.restore();fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"Day one","a way of looking, before the questions",EAC,"Film 1 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"Day one","a way of looking, before the questions",EAC,"Film 1 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. Day one ---------- */
 scene("dayone",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
@@ -185,25 +185,34 @@ scene("data",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 9. The series ---------- */
-const D1_FILMS=["Day one","Who it serves, and how it pays","Why it moves","What it must be able to do","How value reaches people","Who does it, and where meaning changes","Today, and where it's going","Now the questions appear","Rules with a home","When strategy moves","A map people and agents can read"];
+const D1_FILMS=["Day one","Who it serves, and how it pays","Why it moves","What it must be able to do","How value reaches people","Who does it, and where meaning changes","Today, and where it's going","When strategy moves"];
 // the layers each film adds to the map
-const D1_ADDS=[[],[0],[0],[1],[2],[2,3],[4,5],[0,1],[3],[0,1,2,3,4,5],[3]];
+const D1_ADDS=[[],[0],[0],[1],[2],[2,3],[4,5],[0,1,2,3,4,5]];
+// after the series, a series for each layer: the words that name it, and the layers it takes further (the business: strategy,
+// business and information; its data: information and application; the platforms: application and technology)
+const D1_NEXT=[["the business",[1,2,3]],["its data",[3,4]],["the platforms",[4,5]]];
 scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
-  const W7=["who it serves","why it moves","what it must be able","how value","who does what","what runs it"],W4=["the questions","rules with","a change","a map that"];
-  const lit=D1_FILMS.map((_,i)=>i===0?fin(t,w("eleven","builds the map"),0.5):i<7?fin(t,w("seven",W7[i-1])-0.1,0.5):fin(t,w("four",W4[i-7])-0.1,0.5));
+  const W7=["who it serves","why it moves","what it must be able","how value","who does what","what runs it"];
+  const lit=D1_FILMS.map((_,i)=>i===0?fin(t,w("eight","builds the map"),0.5):i<7?fin(t,w("seven",W7[i-1])-0.1,0.5):fin(t,w("then","a change")-0.1,0.5));
   const fill=[0,0,0,0,0,0],hi=[0,0,0,0,0,0];D1_ADDS.forEach((ls,i)=>ls.forEach(l=>{fill[l]=Math.max(fill[l],lit[i]*(i<7?1:0.6));}));
-  lit.forEach((v,i)=>{const p_=i===0?0:pulseAt(t,i<7?w("seven",W7[i-1]):w("four",W4[i-7]),2.0);D1_ADDS[i].forEach(l=>{hi[l]=Math.max(hi[l],p_);});});
+  lit.forEach((v,i)=>{const p_=i===0?0:pulseAt(t,i<7?w("seven",W7[i-1]):w("then","a change"),2.0);D1_ADDS[i].forEach(l=>{hi[l]=Math.max(hi[l],p_);});});
+  D1_NEXT.forEach(([k,ls])=>{const p_=pulseAt(t,w("after",k),2.0);ls.forEach(l=>{hi[l]=Math.max(hi[l],p_);});});
   arrive(ctx,470,130,t,0.3,()=>T(ctx,"the map, one layer at a time",470,134,{w:800,size:32,align:"center",color:rgba(SOFT,1)}),{dy:10});
   layerStack(ctx,150,190,600,{sh:66,gap:20,fill,hi,p:clamp((t-0.2)/1.6,0,1)});
-  // one column of films: the seven that understand the utility, then the four for data
-  const card=(i,x,y)=>{const v=lit[i],col=i<7?EAC:[170,205,255];withA(ctx,0.35+0.65*v,()=>{glass(ctx,x,y,770,54,14,col,{glow:8+14*v,ea:0.5+0.4*v,fill:"rgba(7,12,24,0.94)"});
-    T(ctx,(i+1)+"",x+26,y+38,{f:"mono",w:500,size:28,color:rgba(col,1)});T(ctx,D1_FILMS[i],x+76,y+38,{w:700,size:28,color:rgba(INK,0.6+0.4*v)});});};
-  const Y=i=>i<7?118+i*62:620+(i-7)*62;
+  // one column of films: the seven that understand the utility, then the one on a change in strategy; under them, the series that
+  // take each layer further
+  const card=(i,x,y)=>{const v=lit[i];withA(ctx,0.35+0.65*v,()=>{glass(ctx,x,y,770,54,14,EAC,{glow:8+14*v,ea:0.5+0.4*v,fill:"rgba(7,12,24,0.94)"});
+    T(ctx,(i+1)+"",x+26,y+38,{f:"mono",w:500,size:28,color:rgba(EAC,1)});T(ctx,D1_FILMS[i],x+76,y+38,{w:700,size:28,color:rgba(INK,0.6+0.4*v)});});};
+  const Y=i=>118+i*62+(i===7?22:0);
   arrive(ctx,1100,96,t,0.6,()=>T(ctx,"understand the utility",1050,100,{w:800,size:28,color:rgba(EAC,1)}),{dy:10});
   for(let i=0;i<7;i++)arrive(ctx,1440,Y(i)+27,t,0.6+i*0.1,()=>card(i,1050,Y(i)),{dy:16});
-  withA(ctx,fin(t,c("four")-0.3,0.6),()=>T(ctx,"for data",1050,602,{w:800,size:28,color:"rgba(170,205,255,1)"}));
-  for(let i=7;i<11;i++)arrive(ctx,1440,Y(i)+27,t,c("four")-0.2+(i-7)*0.1,()=>card(i,1050,Y(i)),{dy:16});
+  arrive(ctx,1440,Y(7)+27,t,c("then")-0.2,()=>card(7,1050,Y(7)),{dy:16});
+  const NC=[170,205,255],tAf=c("after");
+  withA(ctx,fin(t,tAf-0.3,0.6),()=>T(ctx,"then, a series for each layer",1050,716,{w:800,size:28,color:rgba(NC,1)}));
+  let px=1050;D1_NEXT.forEach(([k],j)=>{const pw=Math.ceil(tw(ctx,k,28,700))+48,x=px,v=fin(t,w("after",k)-0.1,0.5);px+=pw+18;
+    arrive(ctx,x+pw/2,768,t,tAf+0.1+j*0.12,()=>withA(ctx,0.35+0.65*v,()=>{glass(ctx,x,740,pw,56,28,NC,{glow:6+14*v,ea:0.5+0.4*v,fill:"rgba(7,12,24,0.94)"});
+      T(ctx,k,x+pw/2,778,{w:700,size:28,align:"center",color:rgba(INK,0.6+0.4*v)});}),{dy:16});});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 10. The first note ---------- */
@@ -215,7 +224,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   person(ctx,"tomas",1560,1030,0.9,{t,pose:t>cN-0.3&&t<cN+1.8?"explain":"stand"});
   arrive(ctx,1220,300,t,cN,()=>sticky(ctx,1220,300,280,180,"Why does it exist?",{col:NOTEC[0],size:30,p:clamp((t-cN-0.3)/1.2,0,1),st:fin(t,cN+1.4,0.4)>0?0:null,rot:-0.03}),{dy:-40,from:1.08});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"Day one",EAC,"Learn the place before you ask the questions.","Film 1 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"Day one",EAC,"Learn the place before you ask the questions.","Film 1 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the methods carry on from the map, so the camera carries on; the series'
 // map is a new picture with the layers elsewhere, so the rule leaves first, over the bare screen

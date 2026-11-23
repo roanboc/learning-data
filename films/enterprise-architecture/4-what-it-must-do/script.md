@@ -1,6 +1,6 @@
 # The map before the data · What it must be able to do: script
 
-*The script of What it must be able to do, film 4 of 11 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:27, in ten chapters, in English, 8 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone from the start: on-screen text is at least 28 px in the frame, the capability cards are drawn large enough to read without the camera, and the camera moves in on one relay post in chapter 1.*
+*The script of What it must be able to do, film 4 of 8 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:27, in ten chapters, in English, 8 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone from the start: on-screen text is at least 28 px in the frame, the capability cards are drawn large enough to read without the camera, and the camera moves in on one relay post in chapter 1.*
 
 ## The promise
 
@@ -44,7 +44,7 @@ In the Andes, in the 1400s, the Inca sent messages across their empire by relay:
 
 **Picture.** "1400s · the Andes". Dusk over three ridges, the first stars. A pale road draws itself across the slopes. Small stone posts with thatched roofs appear along it, and a runner waits at each. The camera moves in on one post: "a post", then "a chasqui", as a runner arrives with a faint light in his hand and the next one takes it on. A panel opens with a khipu, its cords falling one by one: "khipu: knotted cords". The camera pulls back; relay by relay the light runs the length of the road, leaving a trail: "200+ km in a day". The runners at the posts are replaced by others ("runners changed"), and stones are laid along one stretch ("roads rebuilt"). The whole road lights as one line, messages running along it: "what stayed: moving a message, whoever carried it". Wordless breather: the lights keep running, then the title card.
 
-**On screen.** 1400s · the Andes · a post · a chasqui · khipu: knotted cords · 200+ km in a day · runners changed · roads rebuilt · what stayed: moving a message · what stayed: moving a message, whoever carried it · What it must be able to do · the things that stay, whoever does them · Film 4 of 11
+**On screen.** 1400s · the Andes · a post · a chasqui · khipu: knotted cords · 200+ km in a day · runners changed · roads rebuilt · what stayed: moving a message · what stayed: moving a message, whoever carried it · What it must be able to do · the things that stay, whoever does them · Film 4 of 8
 
 ### 2 · A familiar map · 0:46–1:12
 
@@ -116,7 +116,7 @@ In the Andes, in the 1400s, the Inca sent messages across their empire by relay:
 
 **Picture.** The wall: the eight capabilities, small, connect customers still edged in red. As each owner confirms, their cards turn from paper to amber glass and their status dots fill: "confirmed by their owners", with a gold tick. Generate power stays paper, dashed: "generate power: a draft, until its owner is found". Grace in the middle; Tomás on the right. His note "What must it be able to do?", and beside it an answer, written out: "Eight capabilities, seven owners, and one that hurts: connecting solar." A new note goes up: "How does value reach people?". The end card.
 
-**On screen.** the eight capabilities · confirmed by their owners · generate power: a draft, until its owner is found · What must it be able to do? · Eight capabilities, seven owners, and one that hurts: connecting solar. · How does value reach people? · Know what it must be able to do, whoever does it. · What it must be able to do · Film 4 of 11
+**On screen.** the eight capabilities · confirmed by their owners · generate power: a draft, until its owner is found · What must it be able to do? · Eight capabilities, seven owners, and one that hurts: connecting solar. · How does value reach people? · Know what it must be able to do, whoever does it. · What it must be able to do · Film 4 of 8
 
 ## Pause and think
 

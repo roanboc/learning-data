@@ -44,7 +44,7 @@ scene("morning",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,430,170,t,tT+0.2,()=>tag(ctx,430,170,"today",APL,{align:"center",size:32}),{dy:8});
   arrive(ctx,1460,170,t,tT+0.6,()=>tag(ctx,1460,170,"where it's going",MIG,{align:"center",size:32}),{dy:8});
   fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"Today, and where it's going","applications, technology, and the path to a target",EAC,"Film 7 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"Today, and where it's going","applications, technology, and the path to a target",EAC,"Film 7 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. A hundred and forty systems ---------- */
 // a no-break space keeps "the network" and "network control" on one line in their boxes
@@ -223,9 +223,9 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   d7_personR(ctx,"tomas",1820,1030,0.78,{t,pose:t>cA&&t<cA+2.2?"explain":"stand"});
   arrive(ctx,1560,140,t,0.4,()=>sticky(ctx,1560,140,500,120,D7_Q,{col:NOTEC[0],size:30,st:fin(t,cA+1.4,0.5)*0.5,rot:-0.03}),{dy:-20});
   arrive(ctx,1570,420,t,cA,()=>sticky(ctx,1570,420,580,260,D7_A,{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/2.8,0,1),rot:0.015}),{dy:-30,from:1.06});
-  arrive(ctx,1500,730,t,w("next","backlog"),()=>sticky(ctx,1500,730,420,130,"Which questions matter?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
+  arrive(ctx,1500,730,t,w("next","a change"),()=>sticky(ctx,1500,730,480,150,"What does a change in strategy mean for the data?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"Today, and where it's going",EAC,"Today, a target, and the path between: three drawings.","Film 7 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"Today, and where it's going",EAC,"Today, a target, and the path between: three drawings.","Film 7 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the layers move the list from the wall to the screen, so they open on a cut;
 // the views, the target, the gaps and the end are later pictures in the same place with some of the same words or Grace elsewhere,

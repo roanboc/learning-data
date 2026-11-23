@@ -131,7 +131,7 @@ SERIES = [
     dict(id="enterprise-architecture", dir="enterprise-architecture", slug="enterprise-architecture",
          name={"en": "The map before the data", "es": "El mapa antes de los datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
-         learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear"),
+         learn=dict(dir="enterprise-architecture", bundle="when-strategy-moves"),
          next="business-architecture-for-data",
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
@@ -1371,7 +1371,9 @@ def moved_series_pages():
 # kept under it, stay; its old page leads to its page in its new series, so old links keep working. key: the film's; was: the id in
 # SERIES of the series it left. Its labs and situations moved with it: the old series' pack says where (moved), and the new one
 # carries the answers over (renum).
-FILM_MOVED = [dict(key="a-map-people-and-agents-can-read", was="enterprise-architecture")]
+FILM_MOVED = [dict(key="a-map-people-and-agents-can-read", was="enterprise-architecture"),
+              dict(key="now-the-questions-appear", was="enterprise-architecture"),
+              dict(key="rules-with-a-home", was="enterprise-architecture")]
 
 
 def moved_film_pages():

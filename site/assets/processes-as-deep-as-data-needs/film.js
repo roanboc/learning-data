@@ -472,10 +472,10 @@ const NARR={
 "end":{"name":"As deep as it needs","lead":1.0,"tail":1.0,"vo":[
  {"id":"village","gap":0.8,"text":"On a qanat, the cycle went down to the minute only where a share was split, and every owner knew when their water would come."},
  {"id":"utility","gap":0.8,"text":"At the utility, every process is drawn to level two, and only the branch that hurt goes deeper, to where an estimate is born."},
- {"id":"next","gap":0.8,"text":"Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be."}]}
+ {"id":"next","gap":0.8,"text":"Tomás's next note goes back to the backlog from day one, and asks which questions matter."}]}
 };
 
-const VODUR={"turns/edge": 8.533, "turns/cycle": 6.286, "turns/complex": 7.351, "turns/missed": 4.886, "turns/lots": 6.732, "turns/last": 2.212, "turns/needed": 3.856, "turns/levels": 6.619, "turns/minutes": 4.373, "turns/clock": 7.136, "turns/sank": 3.424, "turns/knew": 6.064, "turns/deep": 3.429, "turns/link": 7.369, "note/note": 5.663, "note/matrix": 7.265, "note/process": 1.822, "bands/map": 8.283, "bands/sort": 3.223, "bands/ops": 6.855, "bands/empty": 6.211, "bands/one": 6.133, "levels/two": 7.453, "levels/three": 5.942, "levels/apqc": 5.592, "levels/breadth": 2.463, "levels/pain": 4.323, "levels/says": 4.135, "levels/mahan": 4.999, "cash/m2c": 4.526, "cash/five": 7.498, "cash/sipoc": 6.409, "cash/objects": 4.738, "cash/born": 6.579, "cash/missing": 4.284, "pain/one": 1.638, "pain/farah": 6.78, "pain/nightly": 7.059, "pain/weeks": 7.511, "pain/deeper": 8.042, "flow/gather": 5.132, "flow/pass": 1.739, "flow/fail": 6.756, "flow/sees": 6.636, "flow/same": 5.776, "flow/grace": 6.242, "flow/retail": 7.82, "flow/farah": 4.024, "practice/joins": 8.677, "practice/same": 6.642, "practice/none": 2.105, "end/village": 6.861, "end/utility": 7.62, "end/next": 6.749};
+const VODUR={"turns/edge": 8.533, "turns/cycle": 6.286, "turns/complex": 7.351, "turns/missed": 4.886, "turns/lots": 6.732, "turns/last": 2.212, "turns/needed": 3.856, "turns/levels": 6.619, "turns/minutes": 4.373, "turns/clock": 7.136, "turns/sank": 3.424, "turns/knew": 6.064, "turns/deep": 3.429, "turns/link": 7.369, "note/note": 5.663, "note/matrix": 7.265, "note/process": 1.822, "bands/map": 8.283, "bands/sort": 3.223, "bands/ops": 6.855, "bands/empty": 6.211, "bands/one": 6.133, "levels/two": 7.453, "levels/three": 5.942, "levels/apqc": 5.592, "levels/breadth": 2.463, "levels/pain": 4.323, "levels/says": 4.135, "levels/mahan": 4.999, "cash/m2c": 4.526, "cash/five": 7.498, "cash/sipoc": 6.409, "cash/objects": 4.738, "cash/born": 6.579, "cash/missing": 4.284, "pain/one": 1.638, "pain/farah": 6.78, "pain/nightly": 7.059, "pain/weeks": 7.511, "pain/deeper": 8.042, "flow/gather": 5.132, "flow/pass": 1.739, "flow/fail": 6.756, "flow/sees": 6.636, "flow/same": 5.776, "flow/grace": 6.242, "flow/retail": 7.82, "flow/farah": 4.024, "practice/joins": 8.677, "practice/same": 6.642, "practice/none": 2.105, "end/village": 6.861, "end/utility": 7.62, "end/next": 5.202};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2017,8 +2017,9 @@ const BAC=[84,212,240];
 const BA_STR=LAY6[1][1],BA_BUS=LAY6[2][1],BA_INF=LAY6[3][1],BA_APP=LAY6[4][1];
 const BA_NET=[132,176,255],BA_RET=[255,150,186],BA_RED=[232,96,84],BA_OK=[132,226,160];
 const BA_SAND=[222,178,120],BA_EARTH=[120,82,56],BA_WATER=[70,204,246],BA_GREEN=[96,196,92],BA_DRY=[176,132,84];
-// the series' five films, in order
-const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Rules and expectations the business owns"];
+// the series' seven films, in order (five until 23 November 2026, when Now the questions appear and Rules with a home joined from The
+// map before the data, as films 5 and 6)
+const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Now the questions appear","Rules with a home","Rules and expectations the business owns"];
 // no-break spaces: words a label should keep on one line
 const ba_nb=s=>s.replace(/ /g," ");
 // someone standing at the right of the frame, drawn facing the other way
@@ -2288,18 +2289,19 @@ function baEl(ctx,x,y,w,h,name,col,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<
   if(o.owner)withA(ctx,o.ownerA==null?1:o.ownerA,()=>tag(ctx,x+w/2,y+h+30,o.owner,TRUST,{align:"center",size:28}));});}
 // The data practice's part of the business layer, drawn the same way in every film of the series: who does the work and how it's
 // reached on the left, its processes and products in the middle, the business objects and their domains on the right, with the roles
-// that own them above. Each film adds its own (o.film, 1 to 5); a film shows the ones before it as they were, and brings in its own.
+// that own them above. Each film adds its own (o.film, 1 to 7; films 5 and 6, which joined from The map before the data, add none);
+// a film shows the ones before it as they were, and brings in its own.
 // Each element: [id, kind, name, film, x, y, w, h, colour]
 const BA_PRACTICE=[
   ["team","actor","data team",1,120,214,400,96,BA_BUS],
   ["tickets","interface","tickets",1,120,350,400,84,BA_BUS],
   ["requests","service","answer data requests",1,120,474,400,96,BA_BUS],
-  ["products","service","provide data products",5,120,610,400,96,BA_BUS],
+  ["products","service","provide data products",7,120,610,400,96,BA_BUS],
   ["p_request","process","answer a data request",4,600,214,400,96,BA_BUS],
   ["p_build","process","build a data product",4,600,342,400,96,BA_BUS],
   ["p_source","process","take on a source",4,600,470,400,96,BA_BUS],
-  ["product","product","Meter readings",5,600,610,400,96,BA_BUS],
-  ["contract","contract","its contract",5,600,742,400,84,BA_BUS],
+  ["product","product","Meter readings",7,600,610,400,96,BA_BUS],
+  ["contract","contract","its contract",7,600,742,400,84,BA_BUS],
   ["owner","role","data owner",3,1080,170,330,84,BA_BUS],
   ["steward","role","data steward",3,1470,170,330,84,BA_BUS],
   ["net","group","network",2,1080,300,330,470,BA_NET],
@@ -2624,7 +2626,7 @@ scene("turns",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
       if(t>w("link","its processes drawn in levels")-0.2)arrive(ctx,960,500,t,w("link","its processes drawn in levels")-0.2,()=>tag(ctx,960,500,"its processes, drawn in levels",BA_BUS,{align:"center",size:32}),{dy:10});
       if(t>w("link","only as deep")-0.2)arrive(ctx,960,590,t,w("link","only as deep")-0.2,()=>tag(ctx,960,590,"only as deep as each one needs",BAC,{align:"center",size:32}),{dy:10});});});});
   vign(ctx,S);
-  baTitle(ctx,S,t,B+0.6,"Processes, as deep as data needs","in levels, and only as deep as each one needs","Film 4 of 5");});
+  baTitle(ctx,S,t,B+0.6,"Processes, as deep as data needs","in levels, and only as deep as each one needs","Film 4 of 7");});
 
 /* ---------- 2. Where it's born ---------- */
 // Tomás's CRUD matrix, as Who creates it, who owns it leaves it: the eight capabilities down the left, five of the concepts across the
@@ -3036,10 +3038,10 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
       B4_PMAP.forEach(([g],k)=>T(ctx,g,B4_T1(B4_BANDX[k][0])[0],182,{f:"mono",w:600,size:28,color:rgba(BA_BUS,0.95)}));
       withA(ctx,fin(t,tHu+0.2,0.5),()=>tag(ctx,1252,612,"check readings",mix(BA_BUS,BA_RED,0.4),{size:28}));
       withA(ctx,fin(t,tEs,0.5),()=>tag(ctx,1252,670,"where an estimate is born",AMBER,{size:28}));});
-    arrive(ctx,860,470,t,tN-0.2,()=>sticky(ctx,860,470,640,170,"What does the business expect of it? "+ba_nb("The rules on it,")+" "+ba_nb("how good it must be?"),{col:NOTEC[0],size:34,rot:-0.02}),{dy:-16});
+    arrive(ctx,860,470,t,tN-0.2,()=>sticky(ctx,860,470,640,170,"Which questions matter?",{col:NOTEC[0],size:34,rot:-0.02}),{dy:-16});
     arrive(ctx,1780,760,t,tN-0.4,()=>baPersonR(ctx,"tomas",1790,1040,0.74,{t,expr:"calm"}),{dy:20});ctx.restore();});});
   vign(ctx,S);
-  baEnd(ctx,S,t,B+1.4,"Processes, as deep as data needs","Every process drawn to level two, "+ba_nb("deeper only where it hurts."),"Film 4 of 5");});
+  baEnd(ctx,S,t,B+1.4,"Processes, as deep as data needs","Every process drawn to level two, "+ba_nb("deeper only where it hurts."),"Film 4 of 7");});
 
 // where the chapters meet (From words to data's joins.js): Four bands to Level three all happen on the wall, each opening on what the
 // chapter before leaves there, so each camera carries on from there and nothing shows twice. Where the whole picture changes, what

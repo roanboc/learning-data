@@ -209,7 +209,7 @@ scene("turns",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
       if(t>w("link","its processes drawn in levels")-0.2)arrive(ctx,960,500,t,w("link","its processes drawn in levels")-0.2,()=>tag(ctx,960,500,"its processes, drawn in levels",BA_BUS,{align:"center",size:32}),{dy:10});
       if(t>w("link","only as deep")-0.2)arrive(ctx,960,590,t,w("link","only as deep")-0.2,()=>tag(ctx,960,590,"only as deep as each one needs",BAC,{align:"center",size:32}),{dy:10});});});});
   vign(ctx,S);
-  baTitle(ctx,S,t,B+0.6,"Processes, as deep as data needs","in levels, and only as deep as each one needs","Film 4 of 5");});
+  baTitle(ctx,S,t,B+0.6,"Processes, as deep as data needs","in levels, and only as deep as each one needs","Film 4 of 7");});
 
 /* ---------- 2. Where it's born ---------- */
 // Tomás's CRUD matrix, as Who creates it, who owns it leaves it: the eight capabilities down the left, five of the concepts across the
@@ -621,10 +621,10 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
       B4_PMAP.forEach(([g],k)=>T(ctx,g,B4_T1(B4_BANDX[k][0])[0],182,{f:"mono",w:600,size:28,color:rgba(BA_BUS,0.95)}));
       withA(ctx,fin(t,tHu+0.2,0.5),()=>tag(ctx,1252,612,"check readings",mix(BA_BUS,BA_RED,0.4),{size:28}));
       withA(ctx,fin(t,tEs,0.5),()=>tag(ctx,1252,670,"where an estimate is born",AMBER,{size:28}));});
-    arrive(ctx,860,470,t,tN-0.2,()=>sticky(ctx,860,470,640,170,"What does the business expect of it? "+ba_nb("The rules on it,")+" "+ba_nb("how good it must be?"),{col:NOTEC[0],size:34,rot:-0.02}),{dy:-16});
+    arrive(ctx,860,470,t,tN-0.2,()=>sticky(ctx,860,470,640,170,"Which questions matter?",{col:NOTEC[0],size:34,rot:-0.02}),{dy:-16});
     arrive(ctx,1780,760,t,tN-0.4,()=>baPersonR(ctx,"tomas",1790,1040,0.74,{t,expr:"calm"}),{dy:20});ctx.restore();});});
   vign(ctx,S);
-  baEnd(ctx,S,t,B+1.4,"Processes, as deep as data needs","Every process drawn to level two, "+ba_nb("deeper only where it hurts."),"Film 4 of 5");});
+  baEnd(ctx,S,t,B+1.4,"Processes, as deep as data needs","Every process drawn to level two, "+ba_nb("deeper only where it hurts."),"Film 4 of 7");});
 
 // where the chapters meet (From words to data's joins.js): Four bands to Level three all happen on the wall, each opening on what the
 // chapter before leaves there, so each camera carries on from there and nothing shows twice. Where the whole picture changes, what

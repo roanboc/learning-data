@@ -2021,8 +2021,9 @@ const BAC=[84,212,240];
 const BA_STR=LAY6[1][1],BA_BUS=LAY6[2][1],BA_INF=LAY6[3][1],BA_APP=LAY6[4][1];
 const BA_NET=[132,176,255],BA_RET=[255,150,186],BA_RED=[232,96,84],BA_OK=[132,226,160];
 const BA_SAND=[222,178,120],BA_EARTH=[120,82,56],BA_WATER=[70,204,246],BA_GREEN=[96,196,92],BA_DRY=[176,132,84];
-// the series' five films, in order
-const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Rules and expectations the business owns"];
+// the series' seven films, in order (five until 23 November 2026, when Now the questions appear and Rules with a home joined from The
+// map before the data, as films 5 and 6)
+const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Now the questions appear","Rules with a home","Rules and expectations the business owns"];
 // no-break spaces: words a label should keep on one line
 const ba_nb=s=>s.replace(/ /g," ");
 // someone standing at the right of the frame, drawn facing the other way
@@ -2292,18 +2293,19 @@ function baEl(ctx,x,y,w,h,name,col,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<
   if(o.owner)withA(ctx,o.ownerA==null?1:o.ownerA,()=>tag(ctx,x+w/2,y+h+30,o.owner,TRUST,{align:"center",size:28}));});}
 // The data practice's part of the business layer, drawn the same way in every film of the series: who does the work and how it's
 // reached on the left, its processes and products in the middle, the business objects and their domains on the right, with the roles
-// that own them above. Each film adds its own (o.film, 1 to 5); a film shows the ones before it as they were, and brings in its own.
+// that own them above. Each film adds its own (o.film, 1 to 7; films 5 and 6, which joined from The map before the data, add none);
+// a film shows the ones before it as they were, and brings in its own.
 // Each element: [id, kind, name, film, x, y, w, h, colour]
 const BA_PRACTICE=[
   ["team","actor","data team",1,120,214,400,96,BA_BUS],
   ["tickets","interface","tickets",1,120,350,400,84,BA_BUS],
   ["requests","service","answer data requests",1,120,474,400,96,BA_BUS],
-  ["products","service","provide data products",5,120,610,400,96,BA_BUS],
+  ["products","service","provide data products",7,120,610,400,96,BA_BUS],
   ["p_request","process","answer a data request",4,600,214,400,96,BA_BUS],
   ["p_build","process","build a data product",4,600,342,400,96,BA_BUS],
   ["p_source","process","take on a source",4,600,470,400,96,BA_BUS],
-  ["product","product","Meter readings",5,600,610,400,96,BA_BUS],
-  ["contract","contract","its contract",5,600,742,400,84,BA_BUS],
+  ["product","product","Meter readings",7,600,610,400,96,BA_BUS],
+  ["contract","contract","its contract",7,600,742,400,84,BA_BUS],
   ["owner","role","data owner",3,1080,170,330,84,BA_BUS],
   ["steward","role","data steward",3,1470,170,330,84,BA_BUS],
   ["net","group","network",2,1080,300,330,470,BA_NET],
@@ -2521,7 +2523,7 @@ scene("water",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     ctx.restore();
     b1_turn(ctx,fin(t,w("shares","shares of time")-0.3,0.6)*(1-fin(t,tM-0.6,0.6)),{days:clamp((t-w("shares","shares of time")+0.2)/1.2,0,1),open:clamp((t-w("town","In one town")+0.2)/1.2,0,1),share:5,lit:fin(t,w("town","ninety-six")-0.2,0.5)});});
   vign(ctx,S);
-  baTitle(ctx,S,t,B+0.6,"What the business owns","and what the data team keeps for it","Film 1 of 5");});
+  baTitle(ctx,S,t,B+0.6,"What the business owns","and what the data team keeps for it","Film 1 of 7");});
 
 /* ---------- 2. Tomás's map ---------- */
 // what each of the three layers this series covers holds, inside its slab
@@ -2725,7 +2727,7 @@ scene("practice",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   arrive(ctx,500,120,t,c("itself")-0.1,()=>{T(ctx,"the data practice, on the map",120,128,{w:800,size:38});tag(ctx,1800-tw(ctx,"business layer",28,700)-26,116,"business layer",BA_BUS,{size:28});},{dy:-10});
   const fl=fin(t,c("fills")-0.2,0.6);
   baPractice(ctx,t,{film:1,at:{team:tAc,requests:tSe,tickets:tTi,account:tOb,cp:tCp},pre:fin(t,w("itself","the data practice")-0.2,0.8),owners:true,ownersA:fin(t,tOw,0.6),hi:{requests:pulseAt(t,w("actor","answering")-0.1,1.4),tickets:pulseAt(t,w("tickets","its interface")-0.1,1.4)},
-    ghost:fl,ghostAt:{2:w("fills","glossary")-0.3,3:w("fills","owners")-0.3,4:w("fills","processes")-0.3,5:w("fills","products")-0.3}});
+    ghost:fl,ghostAt:{2:w("fills","glossary")-0.3,3:w("fills","owners")-0.3,4:w("fills","processes")-0.3,7:w("fills","products")-0.3}});
   baPracticeLine(ctx,"team","tickets",clamp((t-tTi-0.3)/0.6,0,1),BA_BUS);baPracticeLine(ctx,"tickets","requests",clamp((t-tTi-0.6)/0.6,0,1),BA_BUS);
   baPracticeAccess(ctx,"requests","cp",clamp((t-tOb-0.4)/0.9,0,1));baPracticeAccess(ctx,"requests","account",clamp((t-tOb-0.6)/1.1,0,1),{lift:330});
   withA(ctx,fin(t,w("objects","stays with")-0.2,0.5)*(1-fl),()=>tag(ctx,1449,560,"what they mean stays with their owners",TRUST,{align:"center",size:28}));
@@ -2749,7 +2751,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     arrive(ctx,860,420,t,tN-0.2,()=>sticky(ctx,860,420,560,150,"What does the business "+ba_nb("need to know?"),{col:NOTEC[0],size:36,rot:-0.02}),{dy:-16});
     baPersonR(ctx,"tomas",1700,1040,0.8,{t,expr:"calm"});ctx.restore();});
   vign(ctx,S);
-  baEnd(ctx,S,t,B+0.8,"What the business owns","The business owns what its data means. "+ba_nb("The data team keeps the channel."),"Film 1 of 5");});
+  baEnd(ctx,S,t,B+0.8,"What the business owns","The business owns what its data means. "+ba_nb("The data team keeps the channel."),"Film 1 of 7");});
 
 // where the chapters meet (From words to data's joins.js): Whose meaning? opens on the ticket and the three counts as Three answers
 // leaves them, so its camera carries on from there and nothing shows twice

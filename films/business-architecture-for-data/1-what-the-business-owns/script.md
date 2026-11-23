@@ -1,6 +1,6 @@
 # Business architecture for data · What the business owns: script
 
-*The script of *What the business owns*, film 1 of 5 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 11 and 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: BIZBOK's parts, who owns what, the qanats' shareholders and diggers, and a request for "all customers" that gets three answers.*
+*The script of *What the business owns*, film 1 of 7 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 11 and 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: BIZBOK's parts, who owns what, the qanats' shareholders and diggers, and a request for "all customers" that gets three answers.*
 
 ## The promise
 
@@ -157,7 +157,7 @@ In the village, the diggers keep the channel, and the shareholders decide whose 
 At the utility, the data team keeps the channel. What flows in it, and what it means, is the business's.
 Tomás's next note asks what the business needs to know.
 
-*On screen:* the village from above again: "the diggers: keep the channel", "the shareholders: whose water it is"; then the utility: "the data team: keeps the channel", "the business: what flows in it, and what it means". Tomás's next note on the wall: "What does the business need to know?". The end card: "The business owns what its data means. The data team keeps the channel." Film 1 of 5.
+*On screen:* the village from above again: "the diggers: keep the channel", "the shareholders: whose water it is"; then the utility: "the data team: keeps the channel", "the business: what flows in it, and what it means". Tomás's next note on the wall: "What does the business need to know?". The end card: "The business owns what its data means. The data team keeps the channel." Film 1 of 7.
 
 ## Sound
 

@@ -1,6 +1,6 @@
 # Rebuilding Who does it, and where meaning changes
 
-*Who does it, and where meaning changes*, film 6 of 11 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: ArchiMate's glyphs for an actor (a stick figure) and a contract (`archGlyph` in `ea.js`). Only what is new lives here:
+*Who does it, and where meaning changes*, film 6 of 8 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: ArchiMate's glyphs for an actor (a stick figure) and a contract (`archGlyph` in `ea.js`). Only what is new lives here:
 
 | File | What it holds |
 |---|---|

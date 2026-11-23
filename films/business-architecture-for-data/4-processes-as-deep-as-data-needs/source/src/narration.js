@@ -64,5 +64,5 @@ const NARR={
 "end":{"name":"As deep as it needs","lead":1.0,"tail":1.0,"vo":[
  {"id":"village","gap":0.8,"text":"On a qanat, the cycle went down to the minute only where a share was split, and every owner knew when their water would come."},
  {"id":"utility","gap":0.8,"text":"At the utility, every process is drawn to level two, and only the branch that hurt goes deeper, to where an estimate is born."},
- {"id":"next","gap":0.8,"text":"Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be."}]}
+ {"id":"next","gap":0.8,"text":"Tomás's next note goes back to the backlog from day one, and asks which questions matter."}]}
 };

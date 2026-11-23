@@ -61,5 +61,5 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "None goes deeper until something hurts.":"Ninguno baja más hasta que algo duela.",
 "On a qanat, the cycle went down to the minute only where a share was split, and every owner knew when their water would come.":"En un qanat, el ciclo bajaba hasta el minuto solo donde una parte estaba dividida, y cada dueño sabía cuándo llegaría su agua.",
 "At the utility, every process is drawn to level two, and only the branch that hurt goes deeper, to where an estimate is born.":"En la empresa, cada proceso se dibuja hasta el nivel dos, y solo la rama que dolía baja más, hasta donde nace una estimación.",
-"Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be.":"La siguiente nota de Tomás pregunta qué espera el negocio de cada concepto: sus reglas, y qué tan bueno debe ser."
+"Tomás's next note goes back to the backlog from day one, and asks which questions matter.":"La siguiente nota de Tomás vuelve a la lista de pedidos del primer día, y pregunta qué preguntas importan."
 });

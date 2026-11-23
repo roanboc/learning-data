@@ -151,9 +151,9 @@ window.LD_ROUTE = {
      "title": "The map before the data",
      "href": "enterprise-architecture/",
      "poster": "day-one-poster.jpg",
-     "kicker": "Series · 11 films",
-     "len": "67 min",
-     "min": 67.0,
+     "kicker": "Series · 10 films",
+     "len": "58 min",
+     "min": 58.0,
      "films": [
       "ld-day-one",
       "ld-who-it-serves",
@@ -164,13 +164,12 @@ window.LD_ROUTE = {
       "ld-today-and-where-its-going",
       "ld-now-the-questions-appear",
       "ld-rules-with-a-home",
-      "ld-when-strategy-moves",
-      "ld-a-map-people-and-agents-can-read"
+      "ld-when-strategy-moves"
      ],
      "pr": [
       "ld-enterprise-architecture",
-      22,
-      12
+      20,
+      10
      ]
     },
     {
@@ -248,19 +247,20 @@ window.LD_ROUTE = {
      "kind": "series",
      "title": "Continuous architecture",
      "href": "continuous-architecture/",
-     "poster": "a-first-draft-not-a-blank-page-poster.jpg",
-     "kicker": "Series · 3 films",
-     "len": "24 min",
-     "min": 24.0,
+     "poster": "a-map-people-and-agents-can-read-poster.jpg",
+     "kicker": "Series · 4 films",
+     "len": "33 min",
+     "min": 33.0,
      "films": [
+      "ld-a-map-people-and-agents-can-read",
       "ld-a-first-draft-not-a-blank-page",
       "ld-every-change-checked",
       "ld-kept-alive"
      ],
      "pr": [
       "ld-continuous-architecture",
-      6,
-      6
+      8,
+      8
      ]
     },
     {

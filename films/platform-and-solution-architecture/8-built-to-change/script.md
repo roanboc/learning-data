@@ -1,6 +1,6 @@
 # Platform and solution architecture · Built to change: script
 
-*The script of *Built to change*, film 8 of 8 of *Platform and solution architecture*, the fourth series of the topic *Enterprise architecture*, and the series' last, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 12 November 2026 from the author's brief of 11 November 2026 and the series' plan (`../proposal.md`), which the author confirmed that day. Made while the author was away; this film's questions and assumptions are in `docs/assumptions/05-enterprise-architecture/4-platform-and-solution-architecture/8-built-to-change.md`. It carries no draft label (the four series' shared *Decided* table). The narration is in `source/src/narration.js`; this file gives its reasons.*
+*The script of *Built to change*, film 8 of 8 of *Platform and solution architecture*, the fourth series of the topic *Enterprise architecture*, and the series' last, in nine chapters, in English, drawn in the look of *The map before the data*. On 23 November 2026 its last line changed, with the tag on screen: it named *AI and continuous architecture*, which became two series on 19 November, and now leads on to *Continuous architecture*, whose first film became *A map people and agents can read* that day. Written on 12 November 2026 from the author's brief of 11 November 2026 and the series' plan (`../proposal.md`), which the author confirmed that day. Made while the author was away; this film's questions and assumptions are in `docs/assumptions/05-enterprise-architecture/4-platform-and-solution-architecture/8-built-to-change.md`. It carries no draft label (the four series' shared *Decided* table). The narration is in `source/src/narration.js`; this file gives its reasons.*
 
 ## The promise
 
@@ -104,7 +104,7 @@ Practice, from the author's brief and the series' plan: build or buy, lock-in, o
 | A railway laid along the hills' foot beyond the station, a train going by without stopping, the station's lantern and the villages' lights going down; *when the railway came, many station towns declined* | The towns declined |
 | The utility: Ravi and Tomás, the platform with hosting capacity and the storm history on it; *a data practice isn't built once either*: *products end*, *needs grow*, *people move on* | Never finished |
 | *so it's kept*: *every part: a stage and a date*, *a way out, tested each year*, *the map, changed with every change*, each ticked | Kept |
-| *the next end: planned, not forced*, *and what's the utility's own goes with it*, the seam and the utility's files lit; *Next: AI and continuous architecture*; the end card, *Built to change*, *Every part with a date and a way out, and what's yours goes with you.* | The benefit for data, and the next series |
+| *the next end: planned, not forced*, *and what's the utility's own goes with it*, the seam and the utility's files lit; *Next: Continuous architecture*; the end card, *Built to change*, *Every part with a date and a way out, and what's yours goes with you.* | The benefit for data, and the next series |
 
 ## The look
 
@@ -137,7 +137,7 @@ Grace asks, in a ticket, for the storm history to be kept. The maker brings all 
 Tomás's map, one data product from its owner to its files: Grace in the data owner's role; hosting capacity, a product, with its service and its contract; what it means, a business object in the glossary; the data object that realises it; its pipeline and models, one application component owned by network, with its output port, where the website reads it; the platform's services, realised by Databricks; and its artifacts, the tables as open-format files and the models as code, the utility's own. The seam runs between those files and the product that reads them. Ask what breaks if a table changes, and the lines lead up to Grace. *Business architecture for data* drew the top, *Data architecture* the middle, and this series the foundations.
 
 ### 9 · Kept, never finished · 8:30–9:29
-The road at dusk: the Gokaidō lasted more than 250 years because it was kept, but it never changed who carried the cost, and when the railway came, many station towns declined. The utility: a data practice isn't built once either; so it's kept, every part with a stage and a date, a way out tested each year, the map changed with every change. The next end is planned, not forced, and what's the utility's own goes with it. "Next, the last series on enterprise architecture: AI and continuous architecture." The end card.
+The road at dusk: the Gokaidō lasted more than 250 years because it was kept, but it never changed who carried the cost, and when the railway came, many station towns declined. The utility: a data practice isn't built once either; so it's kept, every part with a stage and a date, a way out tested each year, the map changed with every change. The next end is planned, not forced, and what's the utility's own goes with it. "Next, Continuous architecture: a map people and agents can read, and kept alive." The end card.
 
 ## Sound
 

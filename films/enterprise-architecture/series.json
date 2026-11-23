@@ -1,7 +1,7 @@
 {
   "title": "The map before the data",
   "title_es": "El mapa antes de los datos",
-  "planned": 11,
+  "planned": 10,
   "lead": "A series on enterprise architecture, and why it matters for data. Tomás, a new enterprise architect at a publicly owned energy utility, learns how the place works before he asks what its data should answer: who it serves, why it must change, what it must be able to do, how value reaches people, who does the work, and what runs it.",
   "lead_es": "Una serie sobre arquitectura empresarial, y por qué importa para los datos. Tomás, arquitecto empresarial recién llegado a una empresa pública de energía, aprende cómo funciona antes de preguntar qué deberían responder sus datos: a quién sirve, por qué tiene que cambiar, qué tiene que ser capaz de hacer, cómo llega el valor a la gente, quién hace el trabajo y qué la hace funcionar.",
   "description": "Short films on enterprise architecture for data: an organisation in layers, its customers and offerings, why it must change, its capabilities, its value streams and processes, who does the work and where meaning changes, what runs it today and where it's going, which questions matter, why every data rule needs a home on the map, and what a change in strategy means for the data.",

@@ -1,0 +1,311 @@
+1
+00:00:01,400 --> 00:00:09,724
+Babylon, 652 BCE. Each night, one of the city's scholars watches the sky, and writes down what he sees.
+
+2
+00:00:11,324 --> 00:00:17,929
+For Babylon's king and its temples, the sky sent signs. An eclipse of the moon could warn of the king's death.
+
+3
+00:00:19,529 --> 00:00:27,246
+But the sky repeats itself slowly: some planets only every seventy or eighty years, longer than any watcher's working life.
+
+4
+00:00:28,646 --> 00:00:35,932
+What one watcher knew was lost when he stopped. They needed a record that outlived him: one the next could read, and carry on.
+
+5
+00:00:37,532 --> 00:00:45,901
+So the scholars kept a diary of the sky, night after night, always in the same order: the moon, the planets among the stars, the weather.
+
+6
+00:00:47,501 --> 00:00:54,346
+At each month's end, the river's level, the prices of six goods from barley to wool, and what had happened in the city.
+
+7
+00:00:55,946 --> 00:00:59,979
+When clouds hid the sky, the watcher wrote that too: I did not watch.
+
+8
+00:01:01,679 --> 00:01:06,030
+Half a year went on each tablet, and the next watcher carried on from the last.
+
+9
+00:01:07,430 --> 00:01:17,391
+They kept it for nearly six hundred years, under Babylonian, Persian, Greek and Parthian kings. The youngest diary we have is from 61 BCE.
+
+10
+00:01:18,991 --> 00:01:27,817
+From it, later scholars used the sky's cycles, eight years for Venus, eighty-three for Jupiter, to predict the coming year's planets and eclipses.
+
+11
+00:01:29,217 --> 00:01:38,583
+Today, astronomers still read Babylon's eclipse records. They show the day growing longer, by about 1.8 thousandths of a second a century.
+
+12
+00:01:40,183 --> 00:01:46,520
+At the utility, Tomás's map has the same weakness: if only he can keep it, it stops when he does.
+
+13
+00:01:47,820 --> 00:01:51,238
+Kept one way, by everyone, it could outlive anyone's job.
+
+14
+00:01:52,438 --> 00:01:55,672
+The watcher's test: could the next one read it, and carry on?
+
+15
+00:02:02,472 --> 00:02:05,342
+Tomás's note asks how to keep the map alive.
+
+16
+00:02:06,842 --> 00:02:12,225
+It's used every week now: to sort requests, to give rules a home, and to answer the minister.
+
+17
+00:02:13,925 --> 00:02:15,408
+That's when a map goes stale.
+
+18
+00:02:16,608 --> 00:02:20,674
+It lives in slides, and in a modelling tool only Tomás edits.
+
+19
+00:02:21,974 --> 00:02:28,441
+Its applications were typed in by hand from the IT service management tool, and many have changed since.
+
+20
+00:02:29,941 --> 00:02:36,159
+Its views are copied into decks, and the copies drift. The glossary and the catalogue keep their own words.
+
+21
+00:02:37,859 --> 00:02:41,095
+A stale map is worse than none, because people trust it.
+
+22
+00:02:42,795 --> 00:02:47,861
+If Tomás left tomorrow, nobody could carry it on. It fails the watcher's test.
+
+23
+00:02:50,561 --> 00:02:57,267
+So he moves the map into an enterprise architecture tool that everyone can reach, with a database and a graph.
+
+24
+00:02:58,967 --> 00:03:01,633
+Much of what it holds is already kept somewhere else.
+
+25
+00:03:02,933 --> 00:03:11,966
+Strategy in documents, goals and initiatives in the project management tool, applications and servers in the IT service management tool.
+
+26
+00:03:13,866 --> 00:03:19,599
+The tool brings each one in with its source's ID, and keeps it in step, so nobody retypes it.
+
+27
+00:03:21,299 --> 00:03:27,758
+The rest is written in the map itself: capabilities, rules, decisions, and the links between everything.
+
+28
+00:03:29,458 --> 00:03:35,465
+Even the business glossary fits: each term is a business object, defined once by the business.
+
+29
+00:03:37,065 --> 00:03:41,849
+So keeping a map true is a data integration job, as well as a modelling one.
+
+30
+00:03:45,349 --> 00:03:51,812
+Each element is kept once: a capability, a step, a domain, a business object, a rule, a measure.
+
+31
+00:03:53,412 --> 00:03:59,412
+Each has a stable ID. Names change, but IDs don't, so everything else points to the ID.
+
+32
+00:04:01,012 --> 00:04:07,164
+Then its name, its definition, its owner, and its relationships, named as ArchiMate names them.
+
+33
+00:04:08,664 --> 00:04:15,551
+And his two rules from day one, on every element: its evidence, with a date, and whether its owner has confirmed it.
+
+34
+00:04:17,151 --> 00:04:19,599
+Decisions are kept too, each saying why.
+
+35
+00:04:20,899 --> 00:04:26,440
+A small map could keep all this as text files in a repository: the simplest approach.
+
+36
+00:04:28,040 --> 00:04:34,969
+With many sources, and many people in their roles, the utility needs the tool. Either way, the ideas are the same.
+
+37
+00:04:40,869 --> 00:04:44,496
+Every version of the map is kept, with who changed what, and when.
+
+38
+00:04:45,796 --> 00:04:50,377
+A change is proposed as a draft, and nothing changes until it's approved.
+
+39
+00:04:51,877 --> 00:04:57,237
+The owner of that part approves it: Grace for the network's, Ama for the obligations.
+
+40
+00:04:58,737 --> 00:05:01,364
+Checks run on the map itself, on every change.
+
+41
+00:05:02,064 --> 00:05:07,724
+Every element has an owner. Every rule, a reason and a home. Every measure, a definition.
+
+42
+00:05:09,324 --> 00:05:13,700
+Generating power still has no owner, and the check says so, every time.
+
+43
+00:05:16,400 --> 00:05:19,971
+Everything people read is generated from the map, one way.
+
+44
+00:05:21,471 --> 00:05:28,421
+The ArchiMate views, the glossary, the conceptual model, the ontology, the tests and tracking tables, and the heat map.
+
+45
+00:05:30,121 --> 00:05:33,089
+Each one answers the questions of the people who read it.
+
+46
+00:05:34,389 --> 00:05:40,257
+In dbt, each model carries its owner, its domain and the IDs of its rules.
+
+47
+00:05:41,757 --> 00:05:47,660
+In Databricks, each table shows its owner, its tags and its description, beside its lineage.
+
+48
+00:05:49,160 --> 00:05:53,399
+Nobody edits a view. A fix goes to the map, and every view follows.
+
+49
+00:05:56,099 --> 00:05:57,841
+Now an agent can read the map.
+
+50
+00:05:59,141 --> 00:06:06,911
+Given a request, it asks who will decide what with the answer, then finds the decision, the capability and the owner, or nothing.
+
+51
+00:06:08,811 --> 00:06:15,812
+Given a change, it walks the layers, as Tomás did for the social tariff, and lists the owners who must agree.
+
+52
+00:06:17,812 --> 00:06:23,464
+Given a column in the catalogue, it finds the rule behind it, with its owner and its reason.
+
+53
+00:06:25,264 --> 00:06:29,303
+Every answer cites IDs and evidence, so a person can check it.
+
+54
+00:06:32,603 --> 00:06:39,417
+The agent is on the map itself: software, filling a role, with its rights written down, like the outage agent's.
+
+55
+00:06:40,917 --> 00:06:44,911
+It may read everything, and draft changes. It may not confirm one.
+
+56
+00:06:46,411 --> 00:06:50,229
+Where two sources disagree, it doesn't choose. It asks the owner.
+
+57
+00:06:51,729 --> 00:06:53,165
+Its owner is Tomás.
+
+58
+00:06:54,265 --> 00:07:01,297
+Agents draft, people confirm, every version is kept: the rule that keeps data models true, applied to the map.
+
+59
+00:07:03,997 --> 00:07:09,365
+Then the regulator changes the retail code, the rules every energy retailer must follow.
+
+60
+00:07:10,865 --> 00:07:17,616
+When an actual reading replaces an estimate, the bill must be corrected within ten working days, not on the next one.
+
+61
+00:07:19,516 --> 00:07:25,036
+The agent finds the one rule whose reason is that clause: retail's half of day one's rule.
+
+62
+00:07:26,936 --> 00:07:33,215
+It drafts the rule's new words, and lists what they touch: the billing team's tracking table, and two views.
+
+63
+00:07:35,115 --> 00:07:38,029
+The head of retail, who owns the rule, confirms it.
+
+64
+00:07:39,729 --> 00:07:45,123
+From the next morning, the tracking table shows each bill not corrected within ten working days.
+
+65
+00:07:48,223 --> 00:07:51,236
+Next spring, Zofia starts as a data engineer.
+
+66
+00:07:52,536 --> 00:07:58,026
+Her first day, like Tomás's, brings a badge, a page of acronyms and a list of systems.
+
+67
+00:07:59,626 --> 00:08:01,409
+This time, there's also a map.
+
+68
+00:08:02,709 --> 00:08:06,990
+She asks the agent who owns the readings data, and which rules it keeps.
+
+69
+00:08:08,290 --> 00:08:13,225
+Back come an owner, Grace, and two rules, each with its reason, and links to check them.
+
+70
+00:08:14,825 --> 00:08:19,274
+By the afternoon, she has drafted her first change, for Grace to confirm.
+
+71
+00:08:21,974 --> 00:08:27,931
+In Babylon, no one kept the diary alone. Each watcher read the last tablet, and carried on.
+
+72
+00:08:29,531 --> 00:08:34,425
+Written one way, it outlived every watcher who kept it, and every king they served.
+
+73
+00:08:36,225 --> 00:08:41,485
+At the utility, Grace confirms Zofia's change. The map passes the watcher's test.
+
+74
+00:08:43,085 --> 00:08:48,344
+By the summer, thirty people keep their parts of the map, and their owners confirm each change.
+
+75
+00:08:49,744 --> 00:08:52,610
+If Tomás left tomorrow, the map would carry on.
+
+76
+00:08:55,210 --> 00:09:01,408
+Keep each element once, in one tool, with an ID, an owner and its evidence, and make every view from it.
+
+77
+00:09:03,108 --> 00:09:07,737
+Review every change, let agents read and draft, and let the owners confirm.
+
+78
+00:09:09,437 --> 00:09:12,033
+Next: a first draft, not a blank page.

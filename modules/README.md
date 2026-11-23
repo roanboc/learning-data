@@ -171,7 +171,6 @@ Source: [films/enterprise-architecture](../films/enterprise-architecture/) · Po
 - [Now the questions appear](../films/enterprise-architecture/8-now-the-questions-appear/) — `now-the-questions-appear`
 - [Rules with a home](../films/enterprise-architecture/9-rules-with-a-home/) — `rules-with-a-home`
 - [When strategy moves](../films/enterprise-architecture/10-when-strategy-moves/) — `when-strategy-moves`
-- [A map people and agents can read](../films/enterprise-architecture/11-a-map-people-and-agents-can-read/) — `a-map-people-and-agents-can-read`
 
 Labs and assessments: [site/assets/enterprise-architecture/learn.en.js](../site/assets/enterprise-architecture/learn.en.js), [site/assets/enterprise-architecture/learn.es.js](../site/assets/enterprise-architecture/learn.es.js)
 
@@ -219,9 +218,10 @@ Labs and assessments: [site/assets/platform-and-solution-architecture/learn.en.j
 
 Source: [films/continuous-architecture](../films/continuous-architecture/) · Portal: `/continuous-architecture/`
 
-- [A first draft, not a blank page](../films/continuous-architecture/1-a-first-draft-not-a-blank-page/) — `a-first-draft-not-a-blank-page`
-- [Every change, checked](../films/continuous-architecture/2-every-change-checked/) — `every-change-checked`
-- [Kept alive](../films/continuous-architecture/3-kept-alive/) — `kept-alive`
+- [A map people and agents can read](../films/continuous-architecture/1-a-map-people-and-agents-can-read/) — `a-map-people-and-agents-can-read`
+- [A first draft, not a blank page](../films/continuous-architecture/2-a-first-draft-not-a-blank-page/) — `a-first-draft-not-a-blank-page`
+- [Every change, checked](../films/continuous-architecture/3-every-change-checked/) — `every-change-checked`
+- [Kept alive](../films/continuous-architecture/4-kept-alive/) — `kept-alive`
 
 Labs and assessments: [site/assets/continuous-architecture/learn.en.js](../site/assets/continuous-architecture/learn.en.js), [site/assets/continuous-architecture/learn.es.js](../site/assets/continuous-architecture/learn.es.js)
 

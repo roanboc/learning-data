@@ -406,27 +406,33 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// The map before the data · A map people and agents can read. One line per id; the film re-times itself to the voice.
+// Continuous architecture · A map people and agents can read. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
-"stars":{"name":"By the stars","lead":1.4,"tail":1.0,"vo":[
- {"id":"coast","gap":0.8,"text":"May 1976. The double-hulled canoe Hōkūleʻa leaves Maui for Tahiti, more than four thousand kilometres south, with no compass and no charts.","say":"May, nineteen seventy-six. The double-hulled canoe Hōkūleʻa leaves Maui for Tahiti, more than four thousand kilometres south, with no compass and no charts."},
- {"id":"mau","gap":0.8,"text":"Its navigator, Mau Piailug, from Satawal in Micronesia, finds his way by the stars, the swells and the birds."},
- {"id":"ring","gap":0.8,"text":"His map is in his memory: a star compass, the points on the horizon where the stars rise and set."},
- {"id":"land","gap":0.8,"text":"After thirty-one days, the crew sights Mataiva. Three days later, in Papeʻete, more than seventeen thousand people are waiting."},
- {"id":"few","gap":0.8,"text":"Few still held this knowledge. It passed only from navigator to apprentice."},
- {"id":"teach","gap":0.8,"text":"Mau chose to teach it beyond his own island, so it wouldn't be lost. A young Hawaiian, Nainoa Thompson, learned it from him, and taught others."},
- {"id":"link","gap":0.8,"text":"Any map lives only while people use it, keep it true, and teach it to the next navigator."},
- {"id":"test","gap":0.8,"text":"The navigator's test: could someone else sail by it?"}]},
+"watch":{"name":"The watch","lead":1.4,"tail":1.0,"vo":[
+ {"id":"city","gap":0.9,"text":"Babylon, 652 BCE. Each night, one of the city's scholars watches the sky, and writes down what he sees.","say":"Babylon, six hundred and fifty-two BCE. Each night, one of the city's scholars watches the sky, and writes down what he sees."},
+ {"id":"signs","gap":0.9,"text":"For Babylon's king and its temples, the sky sent signs. An eclipse of the moon could warn of the king's death."},
+ {"id":"slow","gap":0.9,"text":"But the sky repeats itself slowly: some planets only every seventy or eighty years, longer than any watcher's working life."},
+ {"id":"need","gap":0.9,"text":"What one watcher knew was lost when he stopped. They needed a record that outlived him: one the next could read, and carry on."},
+ {"id":"diary","gap":0.9,"text":"So the scholars kept a diary of the sky, night after night, always in the same order: the moon, the planets among the stars, the weather."},
+ {"id":"month","gap":0.9,"text":"At each month's end, the river's level, the prices of six goods from barley to wool, and what had happened in the city."},
+ {"id":"clouds","gap":0.9,"text":"When clouds hid the sky, the watcher wrote that too: I did not watch."},
+ {"id":"tablet","gap":0.9,"text":"Half a year went on each tablet, and the next watcher carried on from the last."},
+ {"id":"years","gap":0.9,"text":"They kept it for nearly six hundred years, under Babylonian, Persian, Greek and Parthian kings. The youngest diary we have is from 61 BCE.","say":"They kept it for nearly six hundred years, under Babylonian, Persian, Greek and Parthian kings. The youngest diary we have is from sixty-one BCE."},
+ {"id":"cycles","gap":0.9,"text":"From it, later scholars used the sky's cycles, eight years for Venus, eighty-three for Jupiter, to predict the coming year's planets and eclipses."},
+ {"id":"today","gap":0.9,"text":"Today, astronomers still read Babylon's eclipse records. They show the day growing longer, by about 1.8 thousandths of a second a century.","say":"Today, astronomers still read Babylon's eclipse records. They show the day growing longer, by about one point eight thousandths of a second a century."},
+ {"id":"utility","gap":0.9,"text":"At the utility, Tomás's map has the same weakness: if only he can keep it, it stops when he does."},
+ {"id":"outlive","gap":0.9,"text":"Kept one way, by everyone, it could outlive anyone's job."},
+ {"id":"test","gap":0.9,"text":"The watcher's test: could the next one read it, and carry on?"}]},
 "risk":{"name":"Useful, so at risk","lead":1.0,"tail":1.0,"vo":[
- {"id":"note","gap":0.8,"text":"Tomás's last note asks how to keep the map alive."},
- {"id":"used","gap":0.8,"text":"It's used every week now: for the skipper's test, to give rules a home, and to answer the minister."},
+ {"id":"note","gap":0.8,"text":"Tomás's note asks how to keep the map alive."},
+ {"id":"used","gap":0.8,"text":"It's used every week now: to sort requests, to give rules a home, and to answer the minister."},
  {"id":"stale","gap":0.8,"text":"That's when a map goes stale."},
  {"id":"slides","gap":0.8,"text":"It lives in slides, and in a modelling tool only Tomás edits."},
  {"id":"typed","gap":0.8,"text":"Its applications were typed in by hand from the IT service management tool, and many have changed since."},
  {"id":"copies","gap":0.8,"text":"Its views are copied into decks, and the copies drift. The glossary and the catalogue keep their own words."},
  {"id":"worse","gap":0.8,"text":"A stale map is worse than none, because people trust it."},
- {"id":"fails","gap":0.8,"text":"If Tomás left tomorrow, nobody could sail by it. It fails the navigator's test."}]},
+ {"id":"fails","gap":0.8,"text":"If Tomás left tomorrow, nobody could carry it on. It fails the watcher's test."}]},
 "sources":{"name":"One map, many sources","lead":1.0,"tail":1.0,"vo":[
  {"id":"move","gap":0.8,"text":"So he moves the map into an enterprise architecture tool that everyone can reach, with a database and a graph."},
  {"id":"kept","gap":0.8,"text":"Much of what it holds is already kept somewhere else."},
@@ -459,7 +465,7 @@ const NARR={
  {"id":"nobody","gap":0.8,"text":"Nobody edits a view. A fix goes to the map, and every view follows."}]},
 "reads":{"name":"An agent reads it","lead":1.0,"tail":1.0,"vo":[
  {"id":"now","gap":0.8,"text":"Now an agent can read the map."},
- {"id":"request","gap":0.8,"text":"Given a request, it applies the skipper's test, and finds the decision, the capability and the owner, or nothing."},
+ {"id":"request","gap":0.8,"text":"Given a request, it asks who will decide what with the answer, then finds the decision, the capability and the owner, or nothing."},
  {"id":"change","gap":0.8,"text":"Given a change, it walks the layers, as Tomás did for the social tariff, and lists the owners who must agree."},
  {"id":"column","gap":0.8,"text":"Given a column in the catalogue, it finds the rule behind it, with its owner and its reason."},
  {"id":"cites","gap":0.8,"text":"Every answer cites IDs and evidence, so a person can check it."}]},
@@ -483,26 +489,26 @@ const NARR={
  {"id":"asks","gap":0.8,"text":"She asks the agent who owns the readings data, and which rules it keeps."},
  {"id":"gets","gap":0.8,"text":"Back come an owner, Grace, and two rules, each with its reason, and links to check them."},
  {"id":"first","gap":0.8,"text":"By the afternoon, she has drafted her first change, for Grace to confirm."}]},
-"sailing":{"name":"Still sailing","lead":1.0,"tail":1.0,"vo":[
- {"id":"pwo","gap":0.8,"text":"In 2007, on Satawal, Mau made five Hawaiians master navigators. Nainoa was one of them."},
- {"id":"died","gap":0.8,"text":"Mau died in 2010. What he taught lives on."},
- {"id":"now","gap":0.8,"text":"Fifty years after that first voyage, Hōkūleʻa is still sailing, navigated by people Mau taught, and by people they taught."}]},
-"end":{"name":"The map before the data","lead":1.0,"tail":1.0,"vo":[
- {"id":"confirm","gap":0.8,"text":"Grace confirms Zofia's change. The map passes the navigator's test."},
- {"id":"answer","gap":0.8,"text":"Tomás's last note has an answer: a map stays alive while people use it, keep it true, and can pass it on."},
- {"id":"layers","gap":0.8,"text":"Layer by layer: who it serves, why it moves, what it must do, how value reaches people, who does the work, and what runs it."},
- {"id":"data","gap":0.8,"text":"Then, for data: the questions that matter, rules with a home, and a change walked down every layer."},
- {"id":"over","gap":0.8,"text":"The map holds what the organisation means. Turning that meaning into data is where From words to data begins."}]}
+"back":{"name":"Back to the watch","lead":1.0,"tail":1.0,"vo":[
+ {"id":"each","gap":0.9,"text":"In Babylon, no one kept the diary alone. Each watcher read the last tablet, and carried on."},
+ {"id":"kings","gap":0.9,"text":"Written one way, it outlived every watcher who kept it, and every king they served."},
+ {"id":"confirm","gap":0.9,"text":"At the utility, Grace confirms Zofia's change. The map passes the watcher's test."},
+ {"id":"summer","gap":0.9,"text":"By the summer, thirty people keep their parts of the map, and their owners confirm each change."},
+ {"id":"left","gap":0.9,"text":"If Tomás left tomorrow, the map would carry on."}]},
+"end":{"name":"A map people and agents can read","lead":0.8,"tail":1.0,"vo":[
+ {"id":"answer","gap":0.9,"text":"Keep each element once, in one tool, with an ID, an owner and its evidence, and make every view from it."},
+ {"id":"keep","gap":1.0,"text":"Review every change, let agents read and draft, and let the owners confirm."},
+ {"id":"next","gap":1.0,"text":"Next: a first draft, not a blank page."}]}
 };
 
-const VODUR={"stars/coast": 10.583, "stars/mau": 7.198, "stars/ring": 6.25, "stars/land": 7.801, "stars/few": 4.441, "stars/teach": 8.389, "stars/link": 5.322, "stars/test": 2.812, "risk/note": 2.964, "risk/used": 5.388, "risk/stale": 1.383, "risk/slides": 3.966, "risk/typed": 6.367, "risk/copies": 6.118, "risk/worse": 3.136, "risk/fails": 5.241, "sources/move": 6.606, "sources/kept": 2.566, "sources/where": 8.933, "sources/in": 5.633, "sources/rest": 6.359, "sources/terms": 5.907, "sources/job": 4.684, "text/once": 6.363, "text/id": 5.9, "text/fields": 6.052, "text/rules": 6.787, "text/decisions": 2.348, "text/files": 5.441, "text/scale": 6.829, "review/repo": 3.527, "review/pr": 4.481, "review/owner": 5.26, "review/checks": 2.527, "review/list": 5.56, "review/power": 4.276, "views/gen": 3.471, "views/list": 6.85, "views/readers": 2.868, "views/dbt": 5.768, "views/dbx": 5.803, "views/nobody": 4.139, "reads/now": 1.642, "reads/request": 6.478, "reads/change": 6.904, "reads/column": 5.552, "reads/cites": 3.939, "rights/on": 6.714, "rights/may": 3.894, "rights/asks": 3.718, "rights/owner": 1.354, "rights/same": 6.932, "confirm/code": 5.268, "confirm/clause": 6.651, "confirm/finds": 5.42, "confirm/drafts": 6.179, "confirm/confirms": 2.814, "confirm/track": 5.294, "again/spring": 2.913, "again/day": 5.344, "again/map": 1.683, "again/asks": 4.181, "again/gets": 4.835, "again/first": 4.349, "sailing/pwo": 7.134, "sailing/died": 3.173, "sailing/now": 7.81, "end/confirm": 4.389, "end/answer": 6.811, "end/layers": 7.205, "end/data": 5.996, "end/over": 6.609};
+const VODUR={"watch/city": 8.224, "watch/signs": 6.505, "watch/slow": 7.617, "watch/need": 7.186, "watch/diary": 8.269, "watch/month": 6.745, "watch/clouds": 3.933, "watch/tablet": 4.251, "watch/years": 9.861, "watch/cycles": 8.726, "watch/today": 9.266, "watch/utility": 6.237, "watch/outlive": 3.318, "watch/test": 3.134, "risk/note": 2.77, "risk/used": 5.283, "risk/stale": 1.383, "risk/slides": 3.966, "risk/typed": 6.367, "risk/copies": 6.118, "risk/worse": 3.136, "risk/fails": 4.966, "sources/move": 6.606, "sources/kept": 2.566, "sources/where": 8.933, "sources/in": 5.633, "sources/rest": 6.359, "sources/terms": 5.907, "sources/job": 4.684, "text/once": 6.363, "text/id": 5.9, "text/fields": 6.052, "text/rules": 6.787, "text/decisions": 2.348, "text/files": 5.441, "text/scale": 6.829, "review/repo": 3.527, "review/pr": 4.481, "review/owner": 5.26, "review/checks": 2.527, "review/list": 5.56, "review/power": 4.276, "views/gen": 3.471, "views/list": 6.85, "views/readers": 2.868, "views/dbt": 5.768, "views/dbx": 5.803, "views/nobody": 4.139, "reads/now": 1.642, "reads/request": 7.67, "reads/change": 6.901, "reads/column": 5.552, "reads/cites": 3.939, "rights/on": 6.714, "rights/may": 3.894, "rights/asks": 3.718, "rights/owner": 1.336, "rights/same": 6.932, "confirm/code": 5.268, "confirm/clause": 6.651, "confirm/finds": 5.42, "confirm/drafts": 6.179, "confirm/confirms": 2.814, "confirm/track": 5.294, "again/spring": 2.913, "again/day": 5.39, "again/map": 1.683, "again/asks": 4.181, "again/gets": 4.835, "again/first": 4.349, "back/each": 5.857, "back/kings": 4.794, "back/confirm": 5.16, "back/summer": 5.159, "back/left": 2.766, "end/answer": 6.098, "end/keep": 4.529, "end/next": 2.496};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: Hōkūleʻa sailing on into the night, then the title; the elements going into the map; and
-   the map, full, handing its meaning over to From words to data, then the end card. */
+   Three wordless moments: Babylon's night going on over the roof, the diary's tablets on their shelf, then the title; the elements
+   going into the map; and the answer, then the end card. */
 const BREATH={
-"stars":{"hold":{"coast":0.8,"mau":0.8,"ring":1.0,"land":1.0,"few":0.6,"teach":0.8,"link":0.6},"breathe":4.4},
+"watch":{"hold":{"city":0.8,"signs":0.8,"slow":0.6,"need":0.8,"diary":0.8,"month":0.8,"clouds":0.9,"tablet":0.6,"years":0.8,"cycles":0.6,"today":0.8,"utility":0.5,"outlive":0.4},"breathe":4.0},
 "risk":{"hold":{"note":0.8,"used":1.0,"stale":0.5,"slides":0.6,"typed":0.8,"copies":1.0,"worse":1.0}},
 "sources":{"hold":{"move":1.0,"kept":0.6,"where":1.2,"in":1.0,"rest":1.0,"terms":0.9,"job":0.8}},
 "text":{"hold":{"once":0.9,"id":0.9,"fields":0.8,"rules":0.9,"decisions":0.6,"files":0.9,"scale":0.6},"breathe":2.6},
@@ -512,8 +518,8 @@ const BREATH={
 "rights":{"hold":{"on":0.8,"may":0.8,"asks":0.8,"owner":0.4}},
 "confirm":{"hold":{"code":0.8,"clause":1.2,"finds":1.2,"drafts":1.2,"confirms":1.0,"track":0.4}},
 "again":{"hold":{"spring":0.6,"day":0.9,"map":0.6,"asks":0.6,"gets":0.9}},
-"sailing":{"hold":{"pwo":0.8,"died":1.0}},
-"end":{"hold":{"confirm":0.7,"answer":0.9,"layers":1.0,"data":0.8},"breathe":5.0}
+"back":{"hold":{"each":0.8,"kings":1.0,"confirm":0.8,"summer":0.6}},
+"end":{"hold":{"answer":0.9,"keep":0.8},"breathe":3.2}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -2022,25 +2028,291 @@ eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()
   ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
 yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
 
+/* ===== Continuous architecture and AI architecture: the two series' shared components =====
+   The last series on enterprise architecture, drawn in the look of The map before the data (films/enterprise-architecture/shared/src/:
+   the six layers in glass, paper drafts, the same people at the same energy utility), with one true story across its six films: the
+   ziggurat of Babylon, Etemenanki, rebuilt from about 620 BCE. This file holds what every film of the series draws:
+   - the series' mark, four tiers rising like a tower's, and its title and end cards;
+   - Babylon: its sky at dawn, the city's skyline, the Euphrates and its date palms, the tower in ruins, rising or standing, the people
+     who built it as silhouettes in their own clothes, and their bricks, baskets, moulds, kilns, boats, rods and ropes; and a quote on
+     clay, for what the kings' own inscriptions say (no script is imitated: a stamp's lines are plain rules, its words are in English);
+   - the present: an agent as these films draw one (Keeping it true's glass orb), one nobody put on the map or one that's flagged, and
+     the four steps of how far an agent may go on a task: inform, draft, verify, run (the author's method), rising like the tower.
+   Each film keeps its own pictures in its own source. A change here is a new version of every film that draws with it: rebuild each
+   one and publish it again (tools/publish.py --keep-sound). */
+
+/* ---------- colours ---------- */
+// the series' colour, fired brick; Babylon's clay, brick, mud brick and bitumen, its river and its dawn
+const ACA=[255,150,98];
+const BAB_CLAY=[236,196,146],BAB_BRICK=[200,104,60],BAB_MUD=[156,112,80],BAB_BIT=[30,28,40],BAB_RIV=[70,160,220],BAB_SUN=[255,196,132],BAB_ROPE=[226,204,160];
+const ACA_WARN=[255,186,92],ACA_INK=[64,40,26];
+// the horizon in the wide shot, and the tower's seven stages as the Esagila tablet gives them: [width, height] in metres, about 91
+// metres square at its base and about as tall
+const BAB_HZ=700,BAB_T=[[91.5,33],[78,18],[60,6],[51,6],[42,6],[33,6],[24,15]],BAB_TH=90;
+
+/* ---------- the mark, the title and the end ---------- */
+// four tiers rising, drawn from the bottom as p goes from 0 to 1: the series' mark, as its music's mark is four notes rising.
+// (x, y): the middle of its base; s: its size
+function acaMark(ctx,x,y,s,a,p){if(a<=0.01)return;p=p==null?1:p;withA(ctx,a,()=>{for(let i=0;i<4;i++){const q=clamp(p*4-i,0,1);if(q<=0)continue;
+  const w=s*(4-i)*1.15,h=s*0.62,yy=y-(i+1)*h-i*s*0.14+(1-spring(q*1.4))*s*0.7;
+  withA(ctx,clamp(q*2,0,1),()=>{ctx.save();ctx.shadowColor=rgba(ACA,0.6);ctx.shadowBlur=12;rr(ctx,x-w/2,yy,w,h,s*0.08);ctx.fillStyle=rgba(ACA,0.16);ctx.fill();
+    ctx.strokeStyle=rgba(ACA,1);ctx.lineWidth=Math.max(1.6,s*0.09);ctx.stroke();ctx.restore();});}});}
+// the title card, over whatever the chapter is drawing: the series, the film's title, a line under it and where it sits in the series.
+// n is "Film 1 of 3 · <the series>" in both cards: the series' name comes from it, as the two series share these components
+const acaSeries=n=>(n||"").split(" · ")[1]||"",acaFilm=n=>(n||"").split(" · ")[0];
+function acaTitle(ctx,S,t,t0,title,sub,n){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,ACA,0.08);acaMark(ctx,960,416,24,1,(t-t0-0.5)/1.4);T(ctx,acaSeries(n).toUpperCase(),960,470,{w:800,size:30,align:"center",color:rgba(ACA,0.95)});
+    T(ctx,title,960,568,{w:800,size:92,align:"center"});if(sub)T(ctx,sub,960,640,{w:600,size:36,align:"center",color:rgba(SOFT,0.95)});
+    withA(ctx,fin(t,t0+1.2,0.8),()=>tag(ctx,960,718,n,ACA,{align:"center",size:28}));});}
+function acaEnd(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)T(ctx,line,960,400,{w:700,size:44,align:"center"});acaMark(ctx,960,560,16,0.95,1);T(ctx,title,960,628,{w:800,size:44,align:"center",color:rgba(ACA,1)});
+    T(ctx,acaSeries(n)+" · "+acaFilm(n)+" · Learning Data",960,684,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
+
+/* ---------- Babylon: sky, city, river and palms ---------- */
+// The world is drawn in world space, wider than the frame, so the camera (focus) can move over it. o.dawn (0..1) goes from night to
+// the moment before sunrise; o.day (0..1) on to a hazy morning. The sun comes up in the east, to the right.
+const BAB_STARS=(()=>{const S=[];for(let i=0;i<240;i++)S.push({x:hash(i,601)*5100-1600,y:hash(i,602)*1900-1400,m:Math.pow(hash(i,603),3),ph:hash(i,604)*TAU});return S;})();
+function bab_light(o){o=o||{};return[clamp(o.dawn==null?0.6:o.dawn,0,1),clamp(o.day||0,0,1)];}
+function bab_sky(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),X0=-1600,X1=3500,Y0=-1400;
+  const top=mix(mix([6,10,38],[20,46,124],dw),[64,140,220],dy),mid=mix(mix([12,16,52],[118,84,160],dw),[160,196,226],dy),low=mix(mix([22,22,50],[252,144,96],dw),[252,220,170],dy);
+  const g=ctx.createLinearGradient(0,hz-900,0,hz);g.addColorStop(0,rgba(top,1));g.addColorStop(0.55,rgba(mix(top,mid,0.5),1));g.addColorStop(0.85,rgba(mid,1));g.addColorStop(1,rgba(low,1));
+  ctx.fillStyle=rgba(top,1);ctx.fillRect(X0,Y0,X1-X0,hz-900-Y0+2);ctx.fillStyle=g;ctx.fillRect(X0,hz-900,X1-X0,902);
+  const sx=o.sunX==null?1560:o.sunX,sg=ctx.createRadialGradient(sx,hz,10,sx,hz,1000);sg.addColorStop(0,rgba(BAB_SUN,0.5*dw+0.3*dy));sg.addColorStop(0.3,rgba(BAB_SUN,0.14*dw+0.1*dy));sg.addColorStop(1,rgba(BAB_SUN,0));
+  ctx.fillStyle=sg;ctx.fillRect(X0,hz-1000,X1-X0,1000);
+  const ma=clamp(1-dw*1.1,0,1)*(1-dy);if(ma>0.02&&o.moon!==false){const mx=o.moonX||360,my=hz-520;glow(ctx,mx,my,90,[236,226,200],0.12*ma);ctx.fillStyle=rgba([244,236,214],0.9*ma);ctx.beginPath();ctx.arc(mx,my,22,-0.5*Math.PI,0.5*Math.PI,false);ctx.arc(mx+9,my,19,0.5*Math.PI,-0.5*Math.PI,true);ctx.closePath();ctx.fill();}
+  const sa=(1-dw*0.8)*(1-dy);if(sa>0.02)BAB_STARS.forEach(s=>{if(s.y>hz-80)return;const a=sa*(0.25+0.75*s.m)*(0.8+0.2*Math.sin(t*0.5+s.ph))*clamp((hz-80-s.y)/420,0,1);if(a<0.02)return;
+    ctx.fillStyle=rgba([236,236,255],a);ctx.beginPath();ctx.arc(s.x,s.y,0.8+1.6*s.m,0,TAU);ctx.fill();});}
+// the city on the horizon: low houses with flat roofs, the walls' towers, and palms, in the haze; the sacred precinct round the tower is open
+const BAB_SKY=(()=>{const R=[];let x=-1600;let i=0;while(x<3500){const w=30+hash(i,611)*70,tower=hash(i,612)>0.86;R.push([x,w,tower?42+hash(i,613)*24:8+hash(i,614)*26,tower]);x+=w+(hash(i,615)>0.7?18:2);i++;}return R;})();
+function bab_city(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),col=mix(mix([12,14,38],[52,40,94],dw),[116,128,160],dy),gap=o.gap||[700,1220];
+  ctx.save();ctx.fillStyle=rgba(col,1);BAB_SKY.forEach(([x,w,h,tw_])=>{if(x+w>gap[0]&&x<gap[1])h*=0.35;ctx.fillRect(x,hz-h,w,h+2);if(tw_){for(let k=0;k<3;k++)ctx.fillRect(x+k*w/3+2,hz-h-6,w/3-6,6);}});ctx.restore();
+  for(let i=0;i<9;i++){const x=-900+i*560+hash(i,617)*200;if(x>gap[0]-60&&x<gap[1]+60)continue;bab_palm(ctx,x,hz+2,70+hash(i,618)*36,t,{col,lean:(hash(i,619)-0.5)*0.3,rim:0.12*dw});}}
+// a date palm: a trunk that tapers and leans a little, a crown of feathery fronds that arch and droop, moving slowly in the air, and a
+// few old fronds hanging under it; (x,y) its foot, h its height. o.col: its colour; o.rim: the dawn along its trunk
+function bab_palm(ctx,x,y,h,t,o){o=o||{};const col=o.col||[16,16,34],lean=o.lean||0,tx=x+lean*h,ty=y-h,sw=Math.sin(t*0.45+x*0.013)*0.035,sd=Math.round(x*7)%997;
+  ctx.save();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(x-h*0.03,y);ctx.quadraticCurveTo(x+lean*h*0.45-h*0.026,y-h*0.55,tx-h*0.014,ty);ctx.lineTo(tx+h*0.014,ty);ctx.quadraticCurveTo(x+lean*h*0.45+h*0.026,y-h*0.55,x+h*0.03,y);ctx.closePath();ctx.fill();
+  if(o.rim>0.01){ctx.strokeStyle=rgba(BAB_SUN,o.rim);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+h*0.03,y);ctx.quadraticCurveTo(x+lean*h*0.45+h*0.026,y-h*0.55,tx+h*0.014,ty);ctx.stroke();}
+  ctx.strokeStyle=rgba(col,1);ctx.lineCap="round";
+  // the old fronds, hanging
+  ctx.lineWidth=Math.max(0.8,h*0.008);ctx.beginPath();for(let k=0;k<6;k++){const dx=(k/5-0.5)*h*0.16;ctx.moveTo(tx,ty+h*0.02);ctx.quadraticCurveTo(tx+dx*1.6,ty+h*0.06,tx+dx*1.2,ty+h*0.16+hash(k,sd)*h*0.04);}ctx.stroke();
+  // the crown: each frond a spine with leaflets along it, longer in its middle
+  const N=13;for(let k=0;k<N;k++){const an=-Math.PI/2+(k/(N-1)-0.5)*Math.PI*1.65+sw*(1+k%3)+(hash(k,sd+1)-0.5)*0.18,L=h*(0.34+0.12*hash(k,sd+2)),up=Math.sin(an)<0?1:0.4;
+    const ex=tx+Math.cos(an)*L,ey=ty+Math.sin(an)*L*0.5+L*(0.5-0.3*up)*Math.abs(Math.cos(an))+L*0.12,mx=tx+Math.cos(an)*L*0.5,my=ty+Math.sin(an)*L*0.6-L*0.1*up;
+    ctx.lineWidth=Math.max(0.8,h*0.009);ctx.beginPath();ctx.moveTo(tx,ty);ctx.quadraticCurveTo(mx,my,ex,ey);ctx.stroke();
+    ctx.lineWidth=Math.max(0.5,h*0.0042);ctx.beginPath();for(let j=2;j<12;j++){const u=j/12,v=1-u,px=v*v*tx+2*v*u*mx+u*u*ex,py=v*v*ty+2*v*u*my+u*u*ey,dx=2*v*(mx-tx)+2*u*(ex-mx),dy=2*v*(my-ty)+2*u*(ey-my),dl=Math.hypot(dx,dy)||1,nx=-dy/dl,ny=dx/dl,ll=L*0.2*Math.sin(Math.PI*Math.min(1,u*1.15));
+      ctx.moveTo(px,py);ctx.lineTo(px+(nx*0.9+dx/dl*0.5)*ll,py+(ny*0.9+dy/dl*0.5)*ll+ll*0.35);ctx.moveTo(px,py);ctx.lineTo(px+(-nx*0.9+dx/dl*0.5)*ll,py+(-ny*0.9+dy/dl*0.5)*ll+ll*0.35);}ctx.stroke();}
+  ctx.restore();}
+// the ground: the beaten earth of the precinct round the tower, its enclosure wall behind it, the plain, and the Euphrates on the right,
+// between banks of reeds, catching the light; haze lies along the horizon as the sun comes
+function bab_ground(ctx,t,o){o=o||{};const hz=o.hz||BAB_HZ,[dw,dy]=bab_light(o),X0=-1600,X1=3500,Y1=2600;
+  const far=mix(mix([18,18,38],[90,58,98],dw),[184,148,108],dy),near=mix(mix([7,8,18],[28,24,58],dw),[100,80,70],dy),sil=mix(mix([12,12,30],[42,32,76],dw),[108,100,112],dy);
+  const g=ctx.createLinearGradient(0,hz,0,hz+420);g.addColorStop(0,rgba(far,1));g.addColorStop(1,rgba(near,1));ctx.fillStyle=g;ctx.fillRect(X0,hz,X1-X0,Y1-hz);
+  // the precinct: a broad, paler court round the tower
+  ctx.save();const cg=ctx.createRadialGradient(960,hz+70,30,960,hz+70,640);cg.addColorStop(0,rgba(mix(far,BAB_SUN,0.16+0.12*dy),0.75));cg.addColorStop(1,rgba(far,0));ctx.translate(960,hz+70);ctx.scale(1,0.2);ctx.translate(-960,-(hz+70));ctx.fillStyle=cg;ctx.fillRect(200,hz-700,1520,1540);ctx.restore();
+  // the enclosure wall behind the tower, with its towers and gates
+  if(o.wall!==false){ctx.fillStyle=rgba(sil,1);ctx.fillRect(560,hz+6,800,12);for(let x=562;x<1358;x+=9)ctx.fillRect(x,hz+3,5,3);for(let i=0;i<=8;i++){const x=560+i*100;ctx.fillRect(x-8,hz-4,16,22);for(let k=-1;k<=1;k++)ctx.fillRect(x+k*6-2,hz-7,4,3);}
+    ctx.fillStyle=rgba(mix(sil,BAB_SUN,0.5),0.3*dw+0.2*dy);ctx.fillRect(560,hz+6,800,1.2);}
+  // haze along the horizon as the light comes
+  const hg=ctx.createLinearGradient(0,hz-40,0,hz+60);hg.addColorStop(0,rgba(BAB_SUN,0));hg.addColorStop(0.5,rgba(mix(BAB_SUN,[255,255,255],0.2),0.1*dw+0.12*dy));hg.addColorStop(1,rgba(BAB_SUN,0));ctx.fillStyle=hg;ctx.fillRect(X0,hz-40,X1-X0,100);
+  // the river, from the haze on the right to the foreground, with the sky in it, between reeds
+  if(o.river!==false){const rv=mix(mix([8,20,52],[28,88,156],dw),[48,150,206],dy),bank=mix(mix([6,10,18],[16,32,44],dw),[48,96,58],dy);
+    const RB=u=>[lerp(1700,1500,u)+Math.sin(u*3)*30,hz+2+u*u*700],LB=u=>[lerp(1760,2600,u)-Math.sin(u*2.4)*40,hz+2+u*u*700];
+    ctx.save();ctx.beginPath();for(let i=0;i<=20;i++){const[x,y]=RB(i/20);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}for(let i=20;i>=0;i--){const[x,y]=LB(i/20);ctx.lineTo(x,y);}ctx.closePath();
+    const rg=ctx.createLinearGradient(0,hz,0,hz+600);rg.addColorStop(0,rgba(mix(rv,BAB_SUN,0.32*dw+0.12*dy),1));rg.addColorStop(1,rgba(rv,1));ctx.fillStyle=rg;ctx.fill();ctx.clip();
+    ctx.fillStyle=rgba(mix(BAB_SUN,[255,255,255],0.3),0.04+0.1*dw);for(let i=0;i<28;i++){const u=i/28,[lx]=RB(u),[rx]=LB(u),yy=hz+4+u*u*680,ww=(rx-lx)*(0.2+0.3*hash(i,633)),xx=lx+(rx-lx)*(0.2+0.5*hash(i,634))+Math.sin(t*0.5+i*1.7)*8;ctx.fillRect(xx,yy,ww,1.2+u*2.4);}ctx.restore();
+    // the near bank's reeds, a little at a time along it
+    ctx.strokeStyle=rgba(bank,1);ctx.lineCap="round";ctx.beginPath();for(let i=0;i<70;i++){const u=hash(i,635)*0.95,[bx,by]=RB(u),hh=(10+hash(i,636)*26)*(0.4+u*1.4),lw=Math.sin(t*0.7+i)*0.06;ctx.moveTo(bx-6+hash(i,637)*10,by+3);ctx.quadraticCurveTo(bx,by-hh*0.6,bx+(hash(i,638)-0.5)*hh*0.5+lw*hh,by-hh);}ctx.lineWidth=1.6;ctx.stroke();
+    for(let i=0;i<3;i++){const u=0.05+i*0.11,[px,py]=RB(u);bab_palm(ctx,px-24-u*60,py+6,110+u*150,t,{col:bank,lean:-0.1+hash(i,631)*0.2,rim:0.18*dw});}}
+  // the near ground, darker, framing the picture
+  const ng=ctx.createLinearGradient(0,hz+120,0,hz+330);ng.addColorStop(0,"rgba(0,0,0,0)");ng.addColorStop(1,"rgba(0,0,0,0.35)");ctx.fillStyle=ng;ctx.fillRect(X0,hz+120,X1-X0,Y1);}
+
+/* ---------- the tower ---------- */
+// Etemenanki, seen from the south: seven stages of brick, the great stair up its middle and the temple on top. cx: its middle; by: the
+// ground it stands on; s: pixels to a metre. o.m: how many metres of it stand (BAB_TH, about 90, when it's whole); o.ruin (0..1): the
+// mound of fallen brick the kings found; o.ghost (0..1): the whole tower, outlined, as it was to be; o.dawn, o.day: the light, from the
+// east (the right); o.hi (0..1): a warm glow along its top, as the sun reaches it.
+function bab_stageBox(i,cx,by,s){let y=by;for(let k=0;k<i;k++)y-=BAB_T[k][1]*s;const[w,h]=BAB_T[i];return[cx-w*s/2,y-h*s,w*s,h*s];}
+function bab_tower(ctx,cx,by,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const[dw,dy]=bab_light(o),m=clamp(o.m==null?BAB_TH:o.m,0,BAB_TH),ru=clamp(o.ruin||0,0,1);
+  const lit=mix(mix([76,46,40],[216,126,82],dw),[230,170,114],dy),shade=mix(mix([18,18,34],[72,44,92],dw),[118,96,118],dy);
+  withA(ctx,a,()=>{
+    if(ru>0.01)withA(ctx,ru,()=>bab_mound(ctx,cx,by,s,lit,shade));
+    if(m>0.05){ctx.save();ctx.beginPath();ctx.rect(cx-200*s,by-m*s,400*s,m*s+2);ctx.clip();
+      for(let i=0;i<7;i++){const[x,y,w,h]=bab_stageBox(i,cx,by,s);if(by-(y+h)>m*s+1)break;
+        const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,rgba(shade,1));g.addColorStop(0.55,rgba(mix(shade,lit,0.55),1));g.addColorStop(1,rgba(lit,1));ctx.fillStyle=g;ctx.fillRect(x,y,w,h+0.5);
+        // the walls' buttresses and recesses, and the courses of brick
+        const bw=5.5*s;let bk=0;for(let bx=x+bw*0.6;bx<x+w-bw*0.5;bx+=bw){ctx.fillStyle="rgba(0,0,0,"+(0.05+0.04*hash(bk++,i*31+5))+")";ctx.fillRect(bx,y+2,Math.max(1,s*1.2),h-2);}
+        ctx.strokeStyle="rgba(0,0,0,0.12)";ctx.lineWidth=Math.max(0.6,s*0.18);ctx.beginPath();for(let yy=y+h-1.6*s;yy>y+1;yy-=1.6*s){ctx.moveTo(x,yy);ctx.lineTo(x+w,yy);}ctx.stroke();
+        // the terrace on top, catching the light
+        if(i<6){const[nx,,nw]=bab_stageBox(i+1,cx,by,s);ctx.fillStyle=rgba(mix(lit,BAB_SUN,0.35),0.55);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.lineTo(nx+nw+s*2,y-s*1.4);ctx.lineTo(nx-s*2,y-s*1.4);ctx.closePath();ctx.fill();}
+        if(i===6){ctx.fillStyle="rgba(10,6,6,0.75)";const dw_=4*s,dh=8*s;ctx.beginPath();ctx.moveTo(cx-dw_/2,y+h);ctx.lineTo(cx-dw_/2,y+h-dh+dw_/2);ctx.arc(cx,y+h-dh+dw_/2,dw_/2,Math.PI,0);ctx.lineTo(cx+dw_/2,y+h);ctx.closePath();ctx.fill();
+          ctx.fillStyle=rgba(mix(lit,[255,240,210],0.25),0.5);ctx.fillRect(x,y,w,s*1.2);}}
+      // the great stair, up the middle of the south face to the second stage
+      const sw=9*s,st=(BAB_T[0][1]+BAB_T[1][1])*s;ctx.fillStyle=rgba(mix(shade,lit,0.7),1);ctx.fillRect(cx-sw/2,by-st,sw,st);ctx.strokeStyle="rgba(0,0,0,0.22)";ctx.lineWidth=Math.max(0.6,s*0.2);
+      ctx.beginPath();for(let yy=by-0.9*s;yy>by-st;yy-=0.9*s){ctx.moveTo(cx-sw/2,yy);ctx.lineTo(cx+sw/2,yy);}ctx.stroke();ctx.fillStyle="rgba(0,0,0,0.25)";ctx.fillRect(cx-sw/2-s*0.8,by-st,s*0.8,st);ctx.fillRect(cx+sw/2,by-st,s*0.8,st);
+      // where the work has reached: a rough top course, if the tower isn't finished
+      if(m<BAB_TH-0.5){ctx.fillStyle=rgba(mix(lit,BAB_SUN,0.3),0.7);let i=0;while(i<6&&by-bab_stageBox(i,cx,by,s)[1]<m*s)i++;const[x,,w]=bab_stageBox(i,cx,by,s);for(let k=0;k<24;k++){const bx=x+(k+0.5)*w/24,bh=s*(0.6+hash(k,641)*1.4);ctx.fillRect(bx-w/60,by-m*s,w/30,bh);}}
+      ctx.restore();
+      if(o.hi>0.01){const gy=by-m*s;withA(ctx,o.hi,()=>glow(ctx,cx,gy,140*s/6,BAB_SUN,0.35));}}
+    if((o.ghost||0)>0.01)withA(ctx,o.ghost,()=>{ctx.save();ctx.setLineDash([10,9]);ctx.strokeStyle=rgba(ACA,0.95);ctx.lineWidth=2.4;ctx.shadowColor=rgba(ACA,0.8);ctx.shadowBlur=14;ctx.beginPath();
+      const L=[],R=[];for(let i=0;i<7;i++){const[x,y,w,h]=bab_stageBox(i,cx,by,s);L.push([x,y+h],[x,y]);R.unshift([x+w,y],[x+w,y+h]);}ctx.moveTo(L[0][0],L[0][1]);L.concat(R).forEach(p=>ctx.lineTo(p[0],p[1]));ctx.stroke();ctx.restore();});});}
+// the mound the tower had become: its core still standing a little, its brick fallen round it, and broken walls along its edges
+function bab_mound(ctx,cx,by,s,lit,shade){const w=104*s,h=19*s;ctx.save();ctx.beginPath();ctx.moveTo(cx-w/2,by);
+  for(let k=0;k<=24;k++){const u=k/24,x=cx-w/2+u*w,b=Math.sin(Math.PI*u),y=by-h*Math.pow(b,0.7)*(0.85+0.3*hash(k,651))-(Math.abs(u-0.5)<0.18?h*0.35*hash(k,652):0);ctx.lineTo(x,y);}
+  ctx.lineTo(cx+w/2,by);ctx.closePath();const g=ctx.createLinearGradient(cx-w/2,0,cx+w/2,0);g.addColorStop(0,rgba(shade,1));g.addColorStop(1,rgba(mix(shade,lit,0.85),1));ctx.fillStyle=g;ctx.fill();
+  ctx.clip();ctx.fillStyle="rgba(0,0,0,0.18)";for(let k=0;k<40;k++){const x=cx+(hash(k,653)-0.5)*w*0.9,y=by-hash(k,654)*h*0.9;ctx.fillRect(x,y,s*(1.2+hash(k,655)*2.2),s*0.9);}
+  ctx.fillStyle=rgba(mix(lit,BAB_SUN,0.2),0.28);for(let k=0;k<9;k++){const x=cx+(hash(k,657)-0.5)*w*0.7,hh=h*(0.3+0.5*hash(k,656));ctx.save();ctx.translate(x,by-hh);ctx.rotate((hash(k,658)-0.5)*0.6);ctx.fillRect(-s*1.1,-s*0.4,s*2.2,s*0.8);ctx.restore();}ctx.restore();}
+
+/* ---------- the people of Babylon ---------- */
+// a tapering limb along pts, w0 wide at its start and w1 at its end: arms and legs drawn with weight, not as sticks (added to the path)
+function bab_limb(ctx,pts,w0,w1){for(let i=1;i<pts.length;i++){const[x0,y0]=pts[i-1],[x1,y1]=pts[i],u0=(i-1)/(pts.length-1),u1=i/(pts.length-1),a=lerp(w0,w1,u0)/2,b=lerp(w0,w1,u1)/2,an=Math.atan2(y1-y0,x1-x0),nx=-Math.sin(an),ny=Math.cos(an);
+  ctx.moveTo(x0+nx*a,y0+ny*a);ctx.lineTo(x1+nx*b,y1+ny*b);ctx.arc(x1,y1,b,an+Math.PI/2,an-Math.PI/2,true);ctx.lineTo(x0-nx*a,y0-ny*a);ctx.arc(x0,y0,a,an-Math.PI/2,an+Math.PI/2,true);ctx.closePath();}}
+// a leg from the hip, walking with phase ph (or standing), its foot pointing forward; added to the path
+function bab_leg(ctx,hx,hy,ang,bend){const kx=hx+Math.sin(ang)*24,ky=hy+Math.cos(ang)*24,sa=ang-bend,fx=kx+Math.sin(sa)*25,fy=ky+Math.cos(sa)*25;bab_limb(ctx,[[hx,hy],[kx,ky],[fx,fy]],10,5.6);
+  ctx.moveTo(fx-2,fy-2.6);ctx.quadraticCurveTo(fx+7,fy-3.4,fx+9.5,fy+0.4);ctx.lineTo(fx-2.4,fy+0.8);ctx.closePath();}
+// an arm from the shoulder (sx,sy) through the elbow to the hand, with a small hand at its end; added to the path
+function bab_arm(ctx,sx,sy,ex,ey,hx,hy){bab_limb(ctx,[[sx,sy],[ex,ey],[hx,hy]],7.4,4.8);ctx.moveTo(hx+3,hy);ctx.ellipse(hx,hy,3,3.6,0,0,TAU);}
+// a person of Babylon, in profile, as a silhouette against the dawn, lit along their edge from the east (the right): feet at (x,y), h
+// pixels tall, facing o.dir (1: right, -1: left). kind: "walk"; "stand"; "carry" (a basket of bricks on the head, steadied with one
+// hand); "mould" (kneeling at a brick mould); "rod" (a measuring rod held upright); "rope" (a rope held out in front, low); "pole"
+// (pushing a boat along). Men wear a tunic to the knee, a beard and their hair to the neck; o.veil: a woman's shawl over her head; o.king:
+// the king's tall rounded cap and a robe to the ankle. o.step: the walk's phase, so they walk while it changes. The whole figure is one
+// silhouette, filled once, so no limb shows through another; its rim is the same shape, a little towards the light. Returns where the
+// hand on what they hold is, in the frame, for a rope to start from.
+function bab_folk(ctx,x,y,h,kind,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const k=h/100,dir=o.dir||1,ph=o.step||0,col=o.col||[16,16,34],rim=o.rim==null?0.55:o.rim;
+  const walk=kind==="walk"||kind==="carry",sw=walk?Math.sin(ph):0,hand=[];
+  const path=()=>{ctx.beginPath();
+    if(kind==="mould"){// kneeling on one knee, bent over the mould on the ground in front
+      bab_limb(ctx,[[-4,-34],[10,-14],[12,0]],10,6);ctx.moveTo(10,-2.6);ctx.quadraticCurveTo(18,-3.4,20.5,0.4);ctx.lineTo(9.6,0.8);ctx.closePath();
+      bab_limb(ctx,[[-6,-32],[-14,-2],[-30,-2]],10,6);
+      ctx.moveTo(-12,-30);ctx.quadraticCurveTo(-14,-52,4,-68);ctx.quadraticCurveTo(12,-72,16,-66);ctx.quadraticCurveTo(14,-50,4,-36);ctx.quadraticCurveTo(10,-30,12,-24);ctx.lineTo(-14,-22);ctx.closePath();
+      ctx.moveTo(25.6,-74);ctx.ellipse(19.6,-75,6,6.8,0.5,0,TAU);if(!o.veil){ctx.moveTo(18,-68);ctx.lineTo(25,-66);ctx.lineTo(22,-60);ctx.lineTo(16,-63);ctx.closePath();}
+      bab_arm(ctx,8,-62,20,-44,30,-24);bab_arm(ctx,10,-64,26,-46,38,-24);hand.push([38,-24]);
+      ctx.moveTo(26,-10);ctx.lineTo(54,-10);ctx.lineTo(54,0);ctx.lineTo(26,0);ctx.closePath();}
+    else{const hem=o.king?-5:-25;
+      bab_leg(ctx,0,-50,0.42*sw,sw>0?0.32*sw:0.06);bab_leg(ctx,0,-50,-0.42*sw,sw<0?-0.32*sw:0.06);
+      // the tunic, belted, to the knee (the king's robe to the ankle)
+      const fl=o.king?10.5:11.5;ctx.moveTo(-6,-81);ctx.quadraticCurveTo(-8.5,-66,-6.5,-56);ctx.quadraticCurveTo(-9,-40,-fl,hem);ctx.lineTo(fl+1,hem);ctx.quadraticCurveTo(9,-40,6.5,-56);ctx.quadraticCurveTo(8.5,-68,6,-81);ctx.quadraticCurveTo(0,-84,-6,-81);ctx.closePath();
+      ctx.moveTo(-2.6,-87);ctx.lineTo(3.6,-87);ctx.lineTo(3.4,-79);ctx.lineTo(-2.8,-79);ctx.closePath();
+      ctx.moveTo(7.7,-92.5);ctx.ellipse(1.5,-92.5,6.2,7,0,0,TAU);ctx.moveTo(7.2,-94.4);ctx.lineTo(9,-91.4);ctx.lineTo(7.2,-90.2);ctx.closePath();
+      if(o.veil){ctx.moveTo(1,-100.6);ctx.quadraticCurveTo(-8,-100,-9.5,-86);ctx.quadraticCurveTo(-11,-72,-9,-58);ctx.lineTo(-5,-60);ctx.quadraticCurveTo(-5,-80,1,-86);ctx.closePath();}
+      else{ctx.moveTo(-4.4,-97.5);ctx.quadraticCurveTo(-7.4,-90,-6.4,-83);ctx.lineTo(-1,-84);ctx.closePath();ctx.moveTo(1.4,-88.6);ctx.lineTo(7.6,-88.2);ctx.quadraticCurveTo(8.2,-82,6.4,-79);ctx.lineTo(1,-79.4);ctx.closePath();}
+      if(o.king&&kind!=="carry"){ctx.moveTo(-5.6,-97);ctx.lineTo(-4.8,-111);ctx.quadraticCurveTo(1.2,-116.5,7,-111);ctx.lineTo(7.6,-97);ctx.closePath();}
+      const sx=0,sy=-79;
+      if(kind==="carry"){bab_arm(ctx,sx,sy,8,-89,5,-101);hand.push([5,-101]);bab_arm(ctx,sx,sy,-4*sw-1,-63,-6*sw-1,-49);
+        // the basket on the head, and the bricks in it
+        ctx.moveTo(-11,-103);ctx.lineTo(15,-103);ctx.lineTo(11,-98);ctx.lineTo(-7,-98);ctx.closePath();if(o.load==null||o.load>0){ctx.rect(-9,-109,7,6);ctx.rect(-1,-110,7,7);ctx.rect(7,-108.5,6,5.5);}}
+      else if(kind==="rod"){bab_arm(ctx,sx,sy,5,-64,13,-71);hand.push([13,-71]);bab_arm(ctx,sx,sy,-1,-63,-1,-49);ctx.rect(12,-120,2.4,120);}
+      else if(kind==="rope"){bab_arm(ctx,sx,sy,7,-64,17,-58);bab_arm(ctx,sx,sy,4,-63,14,-55);hand.push([17,-58]);}
+      else if(kind==="pole"){bab_arm(ctx,sx,sy,9,-74,13,-84);bab_arm(ctx,sx,sy,9,-66,18,-66);hand.push([13,-84]);}
+      else{const sa=walk?0.36*sw:0.05;bab_arm(ctx,sx,sy,Math.sin(-sa)*17,sy+Math.cos(sa)*17,Math.sin(-sa*1.4)*33+1,sy+Math.cos(sa*1.4)*32);}}};
+  const draw=(fill,ox,oy)=>{ctx.save();ctx.translate(x+ox,y+oy);ctx.scale(k*dir,k);path();ctx.fillStyle=fill;ctx.fill("nonzero");ctx.restore();};
+  withA(ctx,a,()=>{if(rim>0.01)draw(rgba(mix(col,BAB_SUN,0.85),rim),Math.max(1.2,h*0.012),-Math.max(0.4,h*0.004));draw(rgba(col,1),0,0);});
+  return hand.length?[x+hand[0][0]*k*dir,y+hand[0][1]*k]:null;}
+// a basket of woven reed, centred on (cx, its foot cy), w wide, as a picture on a card: o.load, the bricks in it
+function bab_basket(ctx,cx,cy,w,o){o=o||{};const h=w*0.42,b=[mix(ACA_INK,BAB_ROPE,0.55),mix(ACA_INK,BAB_ROPE,0.3)];
+  if((o.load||0)>0.01){ctx.fillStyle=rgba(BAB_BRICK,1);for(let i=0;i<3;i++){const bw=w*0.3;ctx.fillRect(cx-w*0.42+i*bw*1.05,cy-h-bw*0.5*o.load,bw,bw*0.5);}}
+  ctx.beginPath();ctx.moveTo(cx-w/2,cy-h);ctx.lineTo(cx+w/2,cy-h);ctx.lineTo(cx+w*0.36,cy);ctx.lineTo(cx-w*0.36,cy);ctx.closePath();ctx.fillStyle=rgba(b[1],1);ctx.fill();
+  ctx.strokeStyle=rgba(b[0],0.9);ctx.lineWidth=Math.max(0.8,w*0.03);ctx.beginPath();for(let i=1;i<4;i++){const yy=cy-h*i/4;ctx.moveTo(cx-w*(0.36+0.14*i/4),yy);ctx.lineTo(cx+w*(0.36+0.14*i/4),yy);}ctx.stroke();
+  ctx.fillStyle=rgba(b[0],1);ctx.fillRect(cx-w/2-1,cy-h-w*0.04,w+2,w*0.06);}
+
+/* ---------- bricks, kilns, boats, ropes and rods ---------- */
+// a brick, square as Babylon's were (about 33 cm a side), centred at (cx,cy), w pixels across; fired unless o.mud. o.stamp (0..1): a
+// stamp pressed into its face, its lines drawn as plain rules (the films don't imitate the script; they say in English what it said)
+function bab_brick(ctx,cx,cy,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const base=o.mud?BAB_MUD:BAB_BRICK,r=w*0.04;
+  withA(ctx,a,()=>{ctx.save();ctx.translate(cx,cy);ctx.rotate(o.rot||0);ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=w*0.08;ctx.shadowOffsetY=w*0.03;
+    const g=ctx.createLinearGradient(-w/2,-w/2,w/2,w/2);g.addColorStop(0,rgba(mix(base,[255,230,190],0.18),1));g.addColorStop(1,rgba(mix(base,[0,0,0],0.25),1));rr(ctx,-w/2,-w/2,w,w,r);ctx.fillStyle=g;ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+    ctx.fillStyle="rgba(0,0,0,0.12)";for(let i=0;i<60;i++){const px=(hash(i,661)-0.5)*w*0.92,py=(hash(i,662)-0.5)*w*0.92;ctx.fillRect(px,py,w*0.012+hash(i,663)*w*0.01,w*0.01);}
+    ctx.strokeStyle="rgba(255,236,200,0.18)";ctx.lineWidth=Math.max(1,w*0.012);rr(ctx,-w/2+w*0.02,-w/2+w*0.02,w-w*0.04,w-w*0.04,r);ctx.stroke();
+    const sp=clamp(o.stamp||0,0,1);if(sp>0.01){const sw=w*0.56,sh=w*0.36;withA(ctx,sp,()=>{ctx.fillStyle="rgba(0,0,0,0.22)";rr(ctx,-sw/2,-sh/2,sw,sh,w*0.015);ctx.fill();ctx.strokeStyle="rgba(0,0,0,0.32)";ctx.lineWidth=Math.max(1,w*0.012);ctx.stroke();
+      ctx.strokeStyle="rgba(255,236,200,0.16)";for(let i=1;i<6;i++){const yy=-sh/2+i*sh/6;ctx.beginPath();ctx.moveTo(-sw/2+w*0.04,yy);ctx.lineTo(sw/2-w*0.04-(i%2)*w*0.06,yy);ctx.stroke();}});}
+    ctx.restore();});}
+// a kiln of mud brick, a beehive with courses of brick, its mouth glowing on the ground in front; smoke rises from its top slowly.
+// (x,y): the middle of its foot; s: its scale (1 is 130 px tall). o.col: its silhouette
+function bab_kiln(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[20,20,38],fire=o.fire==null?1:o.fire;
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+    for(let i=0;i<5;i++){const u=((t*0.06+i*0.2)%1),sx=Math.sin(t*0.35+i*2)*16*u+u*30,sy=-128-u*240;ctx.fillStyle=`rgba(130,118,116,${0.1*(1-u)*fire})`;ctx.beginPath();ctx.ellipse(sx,sy,18+u*60,10+u*28,0,0,TAU);ctx.fill();}
+    ctx.beginPath();ctx.moveTo(-84,0);ctx.bezierCurveTo(-92,-70,-46,-130,0,-130);ctx.bezierCurveTo(46,-130,92,-70,84,0);ctx.closePath();ctx.fillStyle=rgba(col,1);ctx.fill();
+    ctx.save();ctx.clip();ctx.strokeStyle=rgba(mix(col,BAB_SUN,0.25),0.5);ctx.lineWidth=1.2;ctx.beginPath();for(let yy=-12;yy>-128;yy-=12){ctx.moveTo(-90,yy);ctx.lineTo(90,yy);}ctx.stroke();
+    const rg=ctx.createLinearGradient(-90,0,90,0);rg.addColorStop(0,"rgba(255,196,132,0)");rg.addColorStop(1,"rgba(255,196,132,0.22)");ctx.fillStyle=rg;ctx.fillRect(-90,-130,180,130);ctx.restore();
+    ctx.fillStyle=rgba(col,1);ctx.fillRect(-14,-142,28,14);
+    if(fire>0.01){const fl=0.88+0.12*Math.sin(t*2.6)*Math.sin(t*1.7+1);glow(ctx,0,-14,110,[255,140,60],0.32*fire*fl);ctx.fillStyle=`rgba(255,${150+18*Math.sin(t*2.2)|0},70,${0.92*fire})`;
+      ctx.beginPath();ctx.moveTo(-20,0);ctx.lineTo(-20,-24);ctx.arc(0,-24,20,Math.PI,0);ctx.lineTo(20,0);ctx.closePath();ctx.fill();ctx.fillStyle=`rgba(255,226,170,${0.7*fire*fl})`;ctx.beginPath();ctx.ellipse(0,-6,12,8,0,Math.PI,0);ctx.fill();}
+    ctx.restore();});}
+// a river boat with its cargo of bitumen in baskets, and its boatman with a pole, moving on the water. (x,y): the waterline's middle;
+// s: its scale (1 is about 300 px long)
+function bab_boat(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[16,16,34],bob=Math.sin(t*1.1+x*0.01)*2.4;
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x,y+bob);ctx.scale(s,s);
+    ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(-160,-46);ctx.quadraticCurveTo(-140,-6,-90,0);ctx.lineTo(90,0);ctx.quadraticCurveTo(140,-6,160,-46);ctx.quadraticCurveTo(130,-22,90,-20);ctx.lineTo(-90,-20);ctx.quadraticCurveTo(-130,-22,-160,-46);ctx.closePath();ctx.fill();
+    for(let i=0;i<4;i++){ctx.fillStyle=rgba(BAB_BIT,1);ctx.beginPath();ctx.ellipse(-60+i*34,-28,16,11,0,0,TAU);ctx.fill();ctx.strokeStyle=rgba(mix(col,BAB_ROPE,0.4),0.9);ctx.lineWidth=1.6;ctx.stroke();}
+    ctx.restore();const hd=bab_folk(ctx,x+96*s,y+bob-20*s,100*s,"pole",t,{col,dir:-1,rim:o.rim});
+    if(hd){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.6,2.8*s);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(hd[0]+18*s,hd[1]-30*s);ctx.lineTo(hd[0]-60*s,y+40*s);ctx.stroke();ctx.restore();}
+    ctx.save();ctx.strokeStyle=rgba(BAB_SUN,0.25);ctx.lineWidth=1.4;for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(x-150*s-i*30,y+4+i*5);ctx.lineTo(x+150*s+i*30,y+4+i*5);ctx.stroke();}ctx.restore();});}
+// a rope stretched along pts, drawn as far as p (0..1), sagging a little between its pegs
+function bab_rope(ctx,pts,p,o){o=o||{};if(p<=0)return;const segs=[];let L=0;for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);segs.push(d);L+=d;}let left=L*clamp(p,0,1);
+  ctx.save();ctx.strokeStyle=rgba(o.col||BAB_ROPE,o.a==null?0.9:o.a);ctx.lineWidth=o.lw||2.4;ctx.lineCap="round";ctx.shadowColor=rgba(BAB_SUN,0.4);ctx.shadowBlur=6;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length&&left>0;i++){const f=Math.min(1,left/segs[i-1]),[x0,y0]=pts[i-1],[x1,y1]=pts[i],ex=lerp(x0,x1,f),ey=lerp(y0,y1,f),sag=Math.min(10,segs[i-1]*0.02)*f;ctx.quadraticCurveTo((x0+ex)/2,(y0+ey)/2+sag,ex,ey);left-=segs[i-1];}ctx.stroke();
+  ctx.shadowBlur=0;ctx.fillStyle=rgba(mix(BAB_BIT,BAB_ROPE,0.3),1);let acc=0;pts.forEach((q,i)=>{if(i>0)acc+=segs[i-1];if(acc<=L*p+0.5){ctx.fillRect(q[0]-2,q[1]-12,4,14);}});ctx.restore();}
+// a measuring rod of reed, from (x0,y0) to (x1,y1), with its marks
+function bab_rod(ctx,x0,y0,x1,y1,o){o=o||{};ctx.save();ctx.strokeStyle=rgba(o.col||mix([20,15,14],BAB_ROPE,0.5),1);ctx.lineWidth=o.lw||3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();
+  const n=o.n||6,an=Math.atan2(y1-y0,x1-x0),nx=-Math.sin(an)*5,ny=Math.cos(an)*5;ctx.lineWidth=1.6;ctx.beginPath();for(let i=1;i<n;i++){const u=i/n,x=lerp(x0,x1,u),y=lerp(y0,y1,u);ctx.moveTo(x-nx,y-ny);ctx.lineTo(x+nx,y+ny);}ctx.stroke();ctx.restore();}
+
+/* ---------- clay: what the kings wrote ---------- */
+// a tablet of clay, for a quote from an inscription: warm, its edges soft and a little uneven, pressed with a few marks of the hand
+function bab_clay(ctx,x,y,w,h,o){o=o||{};ctx.save();ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=22;ctx.shadowOffsetY=8;ctx.beginPath();const R=Math.min(28,h*0.25),n=28;
+  for(let i=0;i<=n;i++){const u=i/n,j=(hash(i,671)-0.5)*3;ctx.lineTo(x+R+u*(w-2*R),y+j);}ctx.quadraticCurveTo(x+w,y,x+w,y+R);for(let i=0;i<=n/2;i++){const u=i/(n/2);ctx.lineTo(x+w+(hash(i,672)-0.5)*3,y+R+u*(h-2*R));}
+  ctx.quadraticCurveTo(x+w,y+h,x+w-R,y+h);for(let i=0;i<=n;i++){const u=i/n;ctx.lineTo(x+w-R-u*(w-2*R),y+h+(hash(i,673)-0.5)*3);}ctx.quadraticCurveTo(x,y+h,x,y+h-R);for(let i=0;i<=n/2;i++){const u=i/(n/2);ctx.lineTo(x+(hash(i,674)-0.5)*3,y+h-R-u*(h-2*R));}
+  ctx.quadraticCurveTo(x,y,x+R,y);ctx.closePath();const g=ctx.createLinearGradient(x,y,x+w*0.3,y+h);g.addColorStop(0,rgba(mix(BAB_CLAY,[255,240,214],0.15),1));g.addColorStop(1,rgba(mix(BAB_CLAY,[120,80,50],0.35),1));ctx.fillStyle=g;ctx.fill();
+  ctx.shadowBlur=0;ctx.shadowOffsetY=0;ctx.clip();ctx.fillStyle="rgba(90,56,30,0.10)";for(let i=0;i<90;i++){ctx.beginPath();ctx.arc(x+hash(i,675)*w,y+hash(i,676)*h,0.8+hash(i,677)*1.6,0,TAU);ctx.fill();}
+  const ig=ctx.createLinearGradient(0,y,0,y+h);ig.addColorStop(0,"rgba(255,246,226,0.18)");ig.addColorStop(0.1,"rgba(255,246,226,0)");ig.addColorStop(0.9,"rgba(60,30,10,0)");ig.addColorStop(1,"rgba(60,30,10,0.2)");ctx.fillStyle=ig;ctx.fillRect(x,y,w,h);ctx.restore();}
+// a quote on clay: the words, in English, and where they come from; returns its height
+function bab_quote(ctx,x,y,w,q,src,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||36,ls=wrapT(ctx,q,0,0,w-80,{size:sz,w:700,measure:true}),lh=sz*1.24,h=84+ls.length*lh+(src?44:0);if(a<=0.01)return h;
+  withA(ctx,a,()=>{bab_clay(ctx,x,y,w,h);ls.forEach((l,i)=>T(ctx,(i===0?"“":"")+l+(i===ls.length-1?"”":""),x+40-(i===0?sz*0.42:0),y+58+i*lh,{w:700,size:sz,color:rgba(ACA_INK,0.96)}));
+    if(src)T(ctx,src,x+40,y+h-34,{f:"mono",w:500,size:28,color:rgba(mix(ACA_INK,BAB_BRICK,0.5),1)});});return h;}
+// a label for Babylon: a tag in clay's colours, readable on a phone
+function bab_tag(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>tag(ctx,x,y,s,o.col||BAB_CLAY,{align:o.align||"center",size:o.size||30}));}
+
+/* ---------- the present: agents and how far they may go ---------- */
+// an agent, as these films draw one (Keeping it true's glass orb, kt_agent): o.ghost (0..1) one nobody put on the map, faint, in a
+// dashed ring; o.warn (0..1) one flagged, in an amber ring; o.name: its name under it; o.busy: how hard it's working
+function aca_agent(ctx,x,y,r,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const gh=clamp(o.ghost||0,0,1);
+  withA(ctx,a*(1-0.55*gh),()=>kt_agent(ctx,x,y,r,t,{busy:o.busy||0,spin:o.spin||x*0.01}));
+  if(gh>0.01)withA(ctx,a*gh,()=>{ctx.save();ctx.setLineDash([8,8]);ctx.lineDashOffset=-t*6;ctx.strokeStyle=rgba(KT_AI,0.8);ctx.lineWidth=2.2;ctx.beginPath();ctx.arc(x,y,r*1.95,0,TAU);ctx.stroke();ctx.restore();});
+  if((o.warn||0)>0.01)withA(ctx,a*o.warn,()=>{ctx.save();ctx.strokeStyle=rgba(ACA_WARN,1);ctx.lineWidth=3.2;ctx.shadowColor=rgba(ACA_WARN,0.7);ctx.shadowBlur=12;ctx.beginPath();ctx.arc(x,y,r*1.95,0,TAU);ctx.stroke();ctx.restore();});
+  if(o.name)withA(ctx,a*(o.nameA==null?1:o.nameA),()=>T(ctx,o.name,x,y+r*1.95+(o.size||28)+10,{w:700,size:o.size||28,align:"center",color:rgba(o.ncol||KT_AI,1)}));}
+// how far an agent may go on a task, as four steps rising like the tower's tiers: inform, draft, verify, run. The owner of a process
+// sets one step for each of its tasks; an agent earns a higher one over time (the AI agents module's Five stages), never by a switch.
+const ACA_STEPS=["inform","draft","verify","run"];
+// the four steps, from their foot at (x,y), w wide: o.p (0..1) draws them; o.on: the step that's set (0 to 3), or -1 for none; o.hi
+// (0..1) lights it; o.size: the words' size. Returns each step's box [x, y, w, h].
+function aca_steps(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==null?1:o.p,on=o.on==null?-1:o.on,sh=o.sh||70,gap=o.gap||10,sw=(w-gap*3)/4,B=[];
+  for(let i=0;i<4;i++)B.push([x+i*(sw+gap),y-(i+1)*sh,sw,(i+1)*sh]);if(a<=0.01)return B;
+  withA(ctx,a,()=>{B.forEach(([bx,by,bw,bh],i)=>{const q=clamp(p*4-i,0,1);if(q<=0)return;const lit=i===on?(o.hi==null?1:o.hi):0,col=mix(KT_AI,[255,255,255],0.1*lit),dy=(1-spring(q*1.4))*30;
+    withA(ctx,clamp(q*2,0,1),()=>{glass(ctx,bx,by+dy,bw,bh,10,col,{glow:8+16*lit,ea:0.8,fill:"rgba(6,14,20,0.92)"});ctx.fillStyle=rgba(col,0.08+0.3*lit);rr(ctx,bx,by+dy,bw,bh,10);ctx.fill();
+      T(ctx,ACA_STEPS[i],bx+bw/2,by+dy+bh-22,{w:800,size:o.size||30,align:"center",color:rgba(mix(INK,KT_AI,0.35+0.5*lit),1)});});});});return B;}
+// a task's step, as a pill: four small bars, lit as high as the step, and its name. k: 0 to 3, or -1 for "a person": not at all
+function aca_stepPill(ctx,x,y,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const sz=o.size||28,s=k<0?(o.none||"a person"):ACA_STEPS[k],col=k<0?BIZ:KT_AI,w=tw(ctx,s,sz,800)+80,h=sz+22,X=o.align==="right"?x-w:o.align==="center"?x-w/2:x;
+  withA(ctx,a,()=>{glass(ctx,X,y-h/2,w,h,h/2,col,{glow:10+12*(o.hi||0),ea:0.85,fill:"rgba(7,12,24,0.92)"});
+    for(let i=0;i<4;i++){const bh=5+i*4,bx=X+16+i*9;ctx.fillStyle=rgba(col,k>=i?1:0.22);ctx.fillRect(bx,y+9-bh,6,bh);}
+    T(ctx,s,X+60,y+sz*0.36,{w:800,size:sz,color:rgba(col,1)});});return w;}
+
 /* ===== A map people and agents can read: the film's own pictures (prefixed d11_) =====
-   The Pacific, May 1976: a night sky that turns slowly, the sea's long swells, and Hōkūleʻa, a double-hulled voyaging canoe with
-   two crab-claw sails, drawn as a dark shape against the stars with the starlight on its edges; its navigator, a figure at the stern;
-   the star compass he holds in memory, as a ring on the sea around the canoe with a point wherever a star rises or sets; dawn, the
-   atoll of Mataiva on the horizon, and Papeʻete's crowd on the shore; and a chart of the Pacific with a light for each person who
-   holds the knowledge, passed on. Then, on the films' dark glass and on the wall: the map kept in an enterprise architecture tool
-   (its window, its layers and a graph, fed by the systems that already keep many of its elements), each element once, with its ID,
-   owner, evidence and status, and once as a text file, the simplest approach; its versions, a change proposed as a draft, the
-   checks on the map, the views generated from it one way (with dbt's YAML and Databricks' catalogue), the map's agent and its
-   rights, the retail code changing, and a newcomer's first day.
-   The Pacific is drawn in the series' own style, not in the style of Pacific art: the canoe and the people aboard are silhouettes,
-   and the real people of the story (Mau Piailug, Nainoa Thompson) are never given a face. The star compass is a diagram, not a
-   copy of anyone's teaching chart: its points are where fifteen bright stars rise and set at Satawal's latitude, unnamed. */
+   Babylon at night, 652 BCE, in the look of the series' shared components (../../../../ai-and-continuous-architecture/shared/src/aca.js):
+   its sky, with this film's own full moon (dark and copper-red in an eclipse) and planets that don't twinkle; the city's roofs; the
+   roof a scholar watches from, and the scholar himself, a silhouette lit along its edge by the moon, holding a tablet and a stylus as
+   the Assyrian reliefs show scribes writing; a planet's path over many nights, with its loop; the diary as one tablet of clay, its
+   words in English (no script is imitated), in the order the diaries keep; and the six hundred years it was kept, under four lines of
+   kings, along one line of years that widens to reach today. Then, on the films' dark glass and on the wall: the map kept in an
+   enterprise architecture tool (its window, its layers and a graph, fed by the systems that already keep many of its elements), each
+   element once, with its ID, owner, evidence and status, and once as a text file, the simplest approach; its versions, a change
+   proposed as a draft, the checks on the map, the views generated from it one way (with dbt's YAML and Databricks' catalogue), the
+   map's agent and its rights, the retail code changing, and a newcomer's first day.
+   The diaries' real watchers are never given a face: they are silhouettes, as all of Babylon's people are in this series. */
 
 const MOT=LAY6[0][1],STR=LAY6[1][1],BUS=LAY6[2][1],INF=LAY6[3][1],APL=LAY6[4][1],TEC=LAY6[5][1];
 // the two sides of the wall, as in Who does it: the network in blue, retail in rose; red, for what fails; green, for a check that passes
 const D11_NET=[132,176,255],D11_RET=[255,150,186],D11_RED=[232,96,84],D11_OK=[132,226,160];
-// a data rule, as this series draws one (ruleCard), and the warm light of a navigator's knowledge, passed on
-const D11_RULE=[170,205,255],D11_KNOW=[255,232,196];
+// a data rule, as this series draws one (ruleCard)
+const D11_RULE=[170,205,255];
 // someone standing at the right of the frame, drawn facing the other way: the "explain" gesture then points at what they explain
 function d11_personR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
 // no-break spaces: words a label should keep on one line
@@ -2052,174 +2324,128 @@ PEOPLE.zofia={name:"Zofia Nowak",role:"Data engineer",side:"Technical",does:"use
   skin:[230,192,160],hair:{style:"bob",c:[122,72,44],streak:[168,112,74]},lanyard:TECH,
   top:{kind:"sweater",c:[176,120,74]},bottom:{c:[48,56,74]},shoe:[44,38,40],build:{sh:66,hip:58,h:0.95}};
 
-/* ---------- the Pacific at night: sky, sea and stars ---------- */
-const D11_HOR=560;
-// the stars: fixed, seeded; a few bright ones; a faint band of the Milky Way across the sky
-const D11_STARS=(()=>{const S=[];for(let i=0;i<420;i++){const m=Math.pow(hash(i,401),3.2);S.push({x:hash(i,402)*2400-240,y:hash(i,403)*900-260,m,ph:hash(i,404)*TAU,f:0.6+hash(i,405)*1.8});}
-  for(let i=0;i<520;i++){const u=hash(i,411),v=(hash(i,412)+hash(i,413)+hash(i,414))/3-0.5;S.push({x:-200+u*2300,y:420-u*720+v*260,m:Math.pow(hash(i,415),5)*0.35,ph:hash(i,416)*TAU,f:1+hash(i,417),mw:1});}return S;})();
-// the night sky over the horizon at hy; dawn (0..1) warms it from the horizon up; the sky turns slowly (turn, in radians) about a
-// point far below the frame, as it does through a night
-function d11_sky(ctx,S,t,o){o=o||{};const hy=o.hy==null?D11_HOR:o.hy,dw=o.dawn||0,day=o.day||0,X0=-1600,X1=3500,Y0=-1400;
-  const g=ctx.createLinearGradient(0,0,0,hy);g.addColorStop(0,rgba(mix(mix([4,8,22],[70,110,160],day),[30,40,86],dw*0.5),1));g.addColorStop(0.62,rgba(mix(mix([10,16,40],[130,160,190],day),[86,74,120],dw*0.7),1));g.addColorStop(1,rgba(mix(mix([22,30,62],[210,200,186],day),[255,170,118],dw),1));
-  ctx.fillStyle=g;ctx.fillRect(X0,Y0,X1-X0,hy+2-Y0);
-  const sa=(o.stars==null?1:o.stars)*(1-dw*0.85)*(1-sstep(0,0.35,day));
-  if(sa>0.01){ctx.save();ctx.beginPath();ctx.rect(X0,Y0,X1-X0,hy-2-Y0);ctx.clip();
-    // the Milky Way: a soft glow along the band
-    withA(ctx,sa*0.5,()=>{for(let k=0;k<15;k++){const u=k/14,x=-200+u*2300+(hash(k,418)-0.5)*120,y=420-u*720+(hash(k,419)-0.5)*90;glow(ctx,x,y,200+120*hash(k,420),[160,170,220],0.07+0.05*hash(k,421));}});
-    const tr=o.turn||0,px=960,py=2600,c=Math.cos(tr),s=Math.sin(tr);
-    D11_STARS.forEach((st,i)=>{const dx=st.x-px,dy=st.y-py,x=px+dx*c-dy*s,y=py+dx*s+dy*c;if(y>hy)return;
-      const tw_=0.72+0.28*Math.sin(t*st.f+st.ph),fade=clamp((hy-y)/60,0,1),a=sa*(0.25+0.75*st.m)*tw_*fade;if(a<0.02)return;
-      const r=st.mw?0.9:0.8+st.m*2.2;ctx.fillStyle=rgba([220,232,255],a);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
-      if(st.m>0.55&&!st.mw)glow(ctx,x,y,8+st.m*12,[200,220,255],a*0.5);});
-    ctx.restore();}
-  // the horizon: a thin line of light
-  ctx.save();const hl=ctx.createLinearGradient(0,hy-14,0,hy+6);hl.addColorStop(0,rgba(mix([60,80,140],[255,190,140],dw),0));hl.addColorStop(0.7,rgba(mix([90,120,190],[255,200,150],dw),0.22+0.3*dw));hl.addColorStop(1,rgba([0,0,0],0));ctx.fillStyle=hl;ctx.fillRect(X0,hy-14,X1-X0,20);ctx.restore();}
-// the sea below the horizon: dark, with rows of long swells that move as the night goes on; dawn and day light it from the sky.
-// Like the sky, it's drawn in the camera's world, wider and deeper than the frame.
-function d11_sea(ctx,t,o){o=o||{};const hy=o.hy==null?D11_HOR:o.hy,dw=o.dawn||0,day=o.day||0,X0=-1600,X1=3500,Y1=2400,g=ctx.createLinearGradient(0,hy,0,H+200);
-  g.addColorStop(0,rgba(mix(mix([14,22,46],[96,120,146],day),[120,90,96],dw),1));g.addColorStop(0.25,rgba(mix([7,13,30],[46,74,104],day),1));g.addColorStop(1,rgba(mix([2,5,13],[18,40,66],day),1));ctx.fillStyle=g;ctx.fillRect(X0,hy,X1-X0,Y1-hy);
-  // the sky's light, laid on the water near the horizon
-  const rl=ctx.createLinearGradient(0,hy,0,hy+140);rl.addColorStop(0,rgba(mix([80,100,160],[255,180,130],dw),0.10+0.18*dw));rl.addColorStop(1,rgba([0,0,0],0));ctx.fillStyle=rl;ctx.fillRect(X0,hy,X1-X0,140);
-  const N=18,sp=o.speed==null?1:o.speed;ctx.save();ctx.lineCap="round";
-  for(let i=1;i<=N;i++){const u=i/N,y=hy+(H+160-hy)*Math.pow(u,1.75),amp=1+u*u*10,k=0.0045/(0.35+u),ph=hash(i,431)*TAU+t*0.55*sp*(0.6+u),al=(0.035+0.2*u*u)*(1+dw*0.6)*(1+(o.hi||0)*1.6);
-    ctx.strokeStyle=rgba(mix(mix([110,150,210],[255,220,190],Math.max(dw*0.6,day*0.5)),[190,220,255],(o.hi||0)*0.5),al);ctx.lineWidth=(0.8+u*1.8)*(1+(o.hi||0)*0.4);ctx.beginPath();
-    for(let x=-700;x<=2620;x+=24){const yy=y+Math.sin(x*k+ph)*amp+Math.sin(x*k*2.3+ph*1.3)*amp*0.35;x===-700?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}
-  ctx.restore();}
-// a swell's height under a point of the sea, for the canoe to ride on
-const d11_swell=(x,t)=>Math.sin(x*0.004+t*0.9)*5+Math.sin(x*0.009+t*1.4+1)*2;
+/* ---------- fading as one picture ---------- */
+// a group (a person with their lit edge, or a picture), drawn whole into a spare canvas and faded as one, so nothing shows through
+// itself: Continuous 2's a4_fade, in this film's own source
+const D11_BUFS=[];let D11_DEPTH=0;
+function d11_fade(ctx,a,fn){const ga=ctx.globalAlpha*a;if(ga<=0.002)return null;if(ga>=0.998){ctx.save();const r=fn(ctx);ctx.restore();return r;}const cv=ctx.canvas,d=D11_DEPTH;
+  let b=D11_BUFS[d];if(!b||b.width!==cv.width||b.height!==cv.height)b=D11_BUFS[d]=mkCanvas(cv.width,cv.height);const o=b.getContext("2d");
+  o.setTransform(1,0,0,1,0,0);o.globalAlpha=1;o.clearRect(0,0,cv.width,cv.height);o.save();o.setTransform(ctx.getTransform());D11_DEPTH++;let r=null;try{r=fn(o);}finally{D11_DEPTH--;}o.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ga;ctx.drawImage(b,0,0);ctx.restore();return r;}
 
-/* ---------- Hōkūleʻa ---------- */
-// One hull of a double-hulled voyaging canoe, side on, bow to the right, waterline at y = 0: slender, its ends sweeping up to a point.
-function d11_hullPath(ctx){ctx.beginPath();ctx.moveTo(-352,-92);ctx.quadraticCurveTo(-336,-44,-298,-36);ctx.lineTo(298,-36);ctx.quadraticCurveTo(336,-44,352,-92);
-  ctx.quadraticCurveTo(360,-42,322,0);ctx.lineTo(-322,0);ctx.quadraticCurveTo(-360,-42,-352,-92);ctx.closePath();}
-// a crab-claw sail: two spars from one foot (the mast leaning forward, the boom leaning aft) and the cloth between them, its top
-// edge curving in; lit faintly along its forward edge by the stars, or the dawn
-function d11_sail(ctx,fx,fy,h,lean,lit,col){const mx=fx+h*0.1,my=fy-h,bx=fx-h*0.42,by=fy-h*0.8,cx=fx-h*0.1,cy=fy-h*0.5;
-  ctx.beginPath();ctx.moveTo(fx,fy);ctx.quadraticCurveTo(fx+h*0.09,fy-h*0.5,mx,my);ctx.quadraticCurveTo(cx,cy,bx,by);ctx.quadraticCurveTo(fx-h*0.24,fy-h*0.36,fx,fy);ctx.closePath();
-  const g=ctx.createLinearGradient(bx,by,mx,fy-h*0.3);g.addColorStop(0,rgba(mix([12,14,22],col,0.03),1));g.addColorStop(1,rgba(mix([22,26,38],col,0.08+0.14*lit),1));ctx.fillStyle=g;ctx.fill();
-  // the cloth's panels, sewn from the foot
-  ctx.save();ctx.clip();ctx.strokeStyle=rgba(mix([40,46,64],col,0.15),0.4);ctx.lineWidth=1.3;for(let k=1;k<6;k++){const u=k/6;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(lerp(mx,bx,u),lerp(my,by,u)+Math.sin(u*Math.PI)*h*0.3);ctx.stroke();}ctx.restore();
-  ctx.lineCap="round";ctx.strokeStyle="rgba(10,12,18,1)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(fx,fy);ctx.quadraticCurveTo(fx+h*0.09,fy-h*0.5,mx,my);ctx.stroke();ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(fx,fy);ctx.quadraticCurveTo(fx-h*0.24,fy-h*0.36,bx,by);ctx.stroke();
-  // the light on the forward edge and along the top of the cloth
-  ctx.strokeStyle=rgba(col,0.16+0.42*lit);ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(fx+2,fy-6);ctx.quadraticCurveTo(fx+h*0.09+2,fy-h*0.5,mx+2,my);ctx.stroke();
-  ctx.strokeStyle=rgba(col,0.08+0.25*lit);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(mx,my+3);ctx.quadraticCurveTo(cx,cy+3,bx,by+3);ctx.stroke();}
-// someone aboard, as a small dark figure: sitting (sit 1) or standing, facing the bow; lit (0..1) catches the light on the edges
-function d11_crew(ctx,x,y,s,sit,lit,col){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const h=sit?46:84,hr=8.4;ctx.fillStyle="rgba(8,10,16,1)";
-  ctx.beginPath();ctx.moveTo(-8,0);ctx.quadraticCurveTo(-10,-h*0.45,-12,-h*0.84);ctx.quadraticCurveTo(-12,-h,-4,-h);ctx.lineTo(6,-h);ctx.quadraticCurveTo(14,-h,14,-h*0.84);ctx.quadraticCurveTo(12,-h*0.45,10,0);ctx.closePath();ctx.fill();
-  ctx.fillRect(-2,-h-4,6,6);
-  if(sit){ctx.beginPath();ctx.moveTo(4,-8);ctx.quadraticCurveTo(24,-12,28,0);ctx.lineTo(8,0);ctx.closePath();ctx.fill();}
-  ctx.beginPath();ctx.arc(1,-h-hr-2,hr,0,TAU);ctx.fill();
-  if(lit>0.01){ctx.strokeStyle=rgba(col,0.65*lit);ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(1,-h-hr-2,hr,-Math.PI*0.95,-Math.PI*0.05);ctx.stroke();ctx.beginPath();ctx.moveTo(-4,-h);ctx.quadraticCurveTo(-12,-h,-12,-h*0.84);ctx.quadraticCurveTo(-10,-h*0.45,-8,0);ctx.stroke();}
-  ctx.restore();}
-// The canoe at (x, y) on the water, scale s, riding the swells at time t. o.lit: the light on its edges (starlight, or warmer at
-// dawn: o.col); o.nav (0..1) picks out the navigator at the stern, and o.app (0..1) the one learning beside them; o.crew: how many
-// sail with them; o.refl: its reflection on the water.
-function d11_canoe(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[170,200,240],lit=o.lit==null?0.5:o.lit,nav=o.nav||0;
-  const bob=d11_swell(x,t)*0.8,roll=Math.sin(t*0.7+x*0.002)*0.012;
-  withA(ctx,a,()=>{ctx.save();ctx.translate(x,y+bob);ctx.scale(s,s);
-    // its reflection: the sails, faint and broken by the swells
-    if(o.refl!==0)withA(ctx,0.07,()=>{ctx.save();ctx.scale(1,-0.55);ctx.translate(0,10);[[-90,330],[120,380]].forEach(([fx,h])=>{d11_sail(ctx,fx,-48,h,0,0,col);});ctx.restore();});
-    ctx.rotate(roll);
-    // the far hull, a little higher and darker, then the platform between the hulls, the masts and sails, the crew, the near hull
-    ctx.save();ctx.translate(22,-16);d11_hullPath(ctx);ctx.fillStyle="rgba(6,8,13,1)";ctx.fill();ctx.restore();
-    ctx.fillStyle="rgba(9,11,17,1)";ctx.fillRect(-262,-56,504,16);for(let k=0;k<9;k++){ctx.fillRect(-240+k*58,-62,10,12);}
-    ctx.strokeStyle="rgba(10,12,18,1)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-250,-80);ctx.lineTo(236,-80);ctx.stroke();for(let k=0;k<7;k++){ctx.beginPath();ctx.moveTo(-232+k*76,-56);ctx.lineTo(-232+k*76,-80);ctx.stroke();}
-    d11_sail(ctx,-90,-56,330,0,lit,col);d11_sail(ctx,120,-56,380,0,lit,col);
-    // the steering paddle at the stern
-    ctx.strokeStyle="rgba(8,10,16,1)";ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-250,-104);ctx.lineTo(-352,22);ctx.stroke();
-    const cr=o.crew==null?3:o.crew,pos=[[-196,-60,1],[-6,-60,0],[54,-60,1],[196,-60,0],[-130,-60,1],[260,-60,1]];
-    for(let k=0;k<cr&&k<pos.length;k++){const[px,py,sit]=pos[k],ap=k===0?(o.app||0):0;if(ap>0.01)glow(ctx,px+2,py-54,84,D11_KNOW,0.5*ap);d11_crew(ctx,px,py,1.2,sit,Math.max(lit*0.6,ap),mix(col,[255,236,200],ap*0.5));}
-    // the navigator, at the stern, sitting where he can see the whole horizon
-    if(nav>0.01)glow(ctx,-282,-118,92,D11_KNOW,0.55*nav);d11_crew(ctx,-282,-66,1.25,1,Math.max(lit*0.6,nav),mix(col,[255,236,200],nav*0.5));
-    d11_hullPath(ctx);const hg=ctx.createLinearGradient(0,-92,0,0);hg.addColorStop(0,"rgba(14,16,24,1)");hg.addColorStop(1,"rgba(4,6,10,1)");ctx.fillStyle=hg;ctx.fill();
-    ctx.strokeStyle=rgba(col,0.22+0.45*lit);ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(-352,-92);ctx.quadraticCurveTo(-336,-44,-298,-36);ctx.lineTo(298,-36);ctx.quadraticCurveTo(336,-44,352,-92);ctx.stroke();
-    ctx.restore();
-    // the water at the hulls: a little foam where they meet the sea
-    ctx.save();ctx.strokeStyle=rgba(mix([150,180,230],col,0.4),0.22+0.2*lit);ctx.lineWidth=2;for(let k=0;k<5;k++){const xx=x+(-300+k*150+Math.sin(t*1.3+k)*14)*s;ctx.beginPath();ctx.moveTo(xx-36*s,y+bob+2);ctx.quadraticCurveTo(xx,y+bob-3,xx+36*s,y+bob+2);ctx.stroke();}ctx.restore();});}
-// a seabird (a tern), flapping: wings as two curves from the body, at (x, y), size s, heading right (dir 1) or left (dir -1)
-function d11_bird(ctx,x,y,s,t,dir,a){if(a<=0.01)return;const f=Math.sin(t*9+x*0.01),lift=f*0.6;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s*(dir||1),s);ctx.strokeStyle="rgba(200,214,236,0.85)";ctx.lineWidth=2.4;ctx.lineCap="round";
-  ctx.beginPath();ctx.moveTo(-22,-6-lift*10);ctx.quadraticCurveTo(-10,-10-lift*12,0,0);ctx.quadraticCurveTo(10,-10-lift*12,22,-6-lift*10);ctx.stroke();ctx.fillStyle="rgba(200,214,236,0.9)";ctx.beginPath();ctx.ellipse(1,1,4,2,0,0,TAU);ctx.fill();ctx.restore();});}
+/* ---------- Babylon at night, 652 BCE: the watch ---------- */
+// The city's roofs under the night sky, drawn in the series' look (aca.js: Babylon's sky, its skyline, its people as silhouettes),
+// lit by the moon from above and to the right instead of the dawn. World space is wider than the frame, so the camera can move.
+const D11_MOONLIT=[150,172,226],D11_NIGHT=[10,12,28],D11_ROOF=830,D11_WALL=772;
+// the moon, full, at (x, y), r across: soft seas on its face; o.ecl (0..1) the Earth's shadow crossing it from the left, until the
+// whole moon is dark and copper-red, as it is in an eclipse; o.a its opacity
+function d11_moon(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const e=clamp(o.ecl||0,0,1);
+  withA(ctx,a,()=>{glow(ctx,x,y,r*5,[200,214,250],0.16*(1-0.85*e));
+    ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();
+    const g=ctx.createRadialGradient(x-r*0.3,y-r*0.3,r*0.1,x,y,r);g.addColorStop(0,"rgba(250,246,232,1)");g.addColorStop(1,"rgba(214,210,200,1)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);
+    [[-0.28,-0.18,0.32],[0.2,-0.3,0.2],[0.12,0.12,0.26],[-0.18,0.32,0.18],[0.38,0.2,0.14]].forEach(([u,v,s])=>{ctx.fillStyle="rgba(150,148,150,0.28)";ctx.beginPath();ctx.ellipse(x+u*r,y+v*r,s*r,s*r*0.8,0.4,0,TAU);ctx.fill();});
+    if(e>0.001){const R=r*2.4,cx=x-r-R+e*(r+R);// the shadow's edge moves across, from the left
+      ctx.fillStyle="rgba(150,56,38,0.86)";ctx.beginPath();ctx.arc(cx,y,R,0,TAU);ctx.fill();
+      ctx.fillStyle="rgba(40,16,14,"+(0.35*e)+")";ctx.beginPath();ctx.arc(cx,y,R*0.92,0,TAU);ctx.fill();
+      const pg=ctx.createRadialGradient(cx,y,R,cx,y,R*1.25);pg.addColorStop(0,"rgba(30,20,30,0.45)");pg.addColorStop(1,"rgba(30,20,30,0)");ctx.fillStyle=pg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+    ctx.restore();if(e>0.6)glow(ctx,x,y,r*2.2,[200,90,60],0.22*(e-0.6)/0.4);});}
+// a planet among the stars: a steady point that doesn't twinkle, with its own colour
+function d11_planet(ctx,x,y,r,col,a){if(a<=0.01)return;withA(ctx,a,()=>{glow(ctx,x,y,r*6,col,0.4);ctx.fillStyle=rgba(mix(col,[255,255,255],0.55),1);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();});}
+// the night sky over the city: Babylon's sky before dawn, its stars, without the kit's crescent (this film draws its own moon)
+function d11_night(ctx,t,o){o=o||{};bab_sky(ctx,t,{dawn:0,day:0,moon:false});ctx.fillStyle="rgb(14,15,32)";ctx.fillRect(-1600,BAB_HZ,5100,1500);
+  // a few slow clouds, where the narration says they hid the sky; o.cloud (0..1)
+  const cl=clamp(o.cloud||0,0,1);if(cl>0.01)for(let i=0;i<7;i++){const cx=-400+((t*14+i*420)%2600),cy=180+hash(i,721)*260,w=420+hash(i,722)*360;
+    withA(ctx,cl*(0.5+0.4*hash(i,723)),()=>{const g=ctx.createRadialGradient(cx,cy,10,cx,cy,w*0.5);g.addColorStop(0,"rgba(58,62,92,0.95)");g.addColorStop(1,"rgba(58,62,92,0)");ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(cx,cy,w*0.5,w*0.16,0,0,TAU);ctx.fill();});}}
+// the city below the roof: the skyline on the horizon (aca.js), then nearer roofs, flat, of mud brick, with their parapets and
+// stairs, a few palms, their tops touched by the moon; nothing lit, everyone asleep
+const D11_HOUSES=(()=>{const R=[];let x=-1500;let i=0;while(x<3400){const w=120+hash(i,731)*200,h=50+hash(i,732)*70,y=BAB_HZ+20+hash(i,733)*46;R.push([x,y,w,h]);x+=w*(0.7+0.4*hash(i,734));i++;}return R;})();
+function d11_city(ctx,t,o){o=o||{};bab_city(ctx,t,{dawn:0,day:0,gap:[-99999,-99998]});
+  const col=[14,15,32],top=rgba(mix(col,D11_MOONLIT,0.32),1);
+  D11_HOUSES.forEach(([x,y,w,h],i)=>{ctx.fillStyle=rgba(mix(col,[22,22,46],hash(i,735)),1);ctx.fillRect(x,y,w,h+200);ctx.fillStyle=top;ctx.fillRect(x,y,w,2);
+    if(hash(i,736)>0.6){ctx.fillStyle=rgba(col,1);ctx.fillRect(x+w*0.15,y-12,w*0.22,12);ctx.fillStyle=top;ctx.fillRect(x+w*0.15,y-12,w*0.22,1.6);}
+    if(hash(i,737)>0.82)bab_palm(ctx,x+w*0.6,y+4,90+hash(i,738)*50,t,{col:[12,13,30],lean:(hash(i,739)-0.5)*0.3,rim:0});});}
+// the roof the scholar watches from: its packed-earth floor, and the low parapet of mud brick along its edge, its top lit by the moon
+function d11_roof(ctx,t,o){o=o||{};const X0=-1600,X1=3500;
+  const g=ctx.createLinearGradient(0,D11_ROOF,0,D11_ROOF+400);g.addColorStop(0,"rgba(30,30,52,1)");g.addColorStop(1,"rgba(12,12,24,1)");ctx.fillStyle=g;ctx.fillRect(X0,D11_ROOF,X1-X0,900);
+  ctx.fillStyle="rgba(20,20,40,1)";ctx.fillRect(X0,D11_WALL,X1-X0,D11_ROOF-D11_WALL+2);
+  ctx.strokeStyle="rgba(60,62,96,0.5)";ctx.lineWidth=1.2;ctx.beginPath();for(let y=D11_WALL+14;y<D11_ROOF;y+=14){ctx.moveTo(X0,y);ctx.lineTo(X1,y);}
+  for(let k=0;k<4;k++){const y=D11_WALL+k*14;for(let x=X0+(k%2)*30;x<X1;x+=60){ctx.moveTo(x,y);ctx.lineTo(x,y+14);}}ctx.stroke();
+  ctx.fillStyle=rgba(mix([20,20,40],D11_MOONLIT,0.5),1);ctx.fillRect(X0,D11_WALL-3,X1-X0,4);
+  ctx.fillStyle="rgba(0,0,0,0.35)";ctx.fillRect(X0,D11_ROOF,X1-X0,10);}
+// a small tablet of clay, at (x, y), w wide, as it rests on the parapet or in a hand: lit faintly by the moon; o.glow (0..1)
+function d11_tab(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=w*0.68;withA(ctx,a,()=>{if(o.glow>0.01)glow(ctx,x,y,w*1.8,BAB_CLAY,0.35*o.glow);
+  ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);rr(ctx,-w/2,-h/2,w,h,w*0.14);ctx.fillStyle=rgba(mix([60,48,40],BAB_CLAY,0.35+0.4*(o.glow||0)),1);ctx.fill();
+  ctx.strokeStyle=rgba(mix([30,24,20],BAB_CLAY,0.3),0.9);ctx.lineWidth=Math.max(0.8,w*0.04);for(let i=1;i<4;i++){const yy=-h/2+i*h/4;ctx.beginPath();ctx.moveTo(-w*0.36,yy);ctx.lineTo(w*(0.36-0.12*(i%2)),yy);ctx.stroke();}ctx.restore();});}
+// a scholar of Babylon on the roof, in profile, as a silhouette lit along the edge by the moon (aca.js draws the city's people this
+// way, against the dawn): a tunic to the knee, a belt, a beard and hair to the neck. Feet at (x, y), h tall, facing o.dir. He holds
+// a tablet in his far hand and a stylus in his near one, as the Assyrian reliefs show scribes writing: o.up (0..1) lifts his face to
+// the sky, and lowers the tablet to his waist; at 0 he looks down at it and writes (o.write, 0..1, moves the stylus). o.step: a walk's
+// phase, so he walks while it changes; o.tab (0..1): the tablet in his hand. The whole figure is one silhouette, filled once.
+// Returns where the tablet is, in the frame.
+function d11_scribe(ctx,x,y,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const k=h/100,dir=o.dir||1,up=clamp(o.up==null?1:o.up,0,1),wr=clamp(o.write||0,0,1),col=o.col||D11_NIGHT,rim=o.rim==null?0.6:o.rim;
+  const walk=o.step!=null,sw=walk?Math.sin(o.step):0,tab=o.tab==null?1:o.tab,scr=wr*Math.sin(t*9)*1.2;
+  // the hands: by the waist as he looks up; at the chest as he writes
+  const hT=[lerp(17,14,up),lerp(-66,-55,up)],hS=[lerp(21+scr,12,up),lerp(-70,-53,up)];
+  const path=()=>{ctx.beginPath();
+    bab_leg(ctx,0,-50,0.42*sw,sw>0?0.32*sw:0.06);bab_leg(ctx,0,-50,-0.42*sw,sw<0?-0.32*sw:0.06);
+    ctx.moveTo(-6,-81);ctx.quadraticCurveTo(-8.5,-66,-6.5,-56);ctx.quadraticCurveTo(-9,-40,-11.5,-25);ctx.lineTo(12.5,-25);ctx.quadraticCurveTo(9,-40,6.5,-56);ctx.quadraticCurveTo(8.5,-68,6,-81);ctx.quadraticCurveTo(0,-84,-6,-81);ctx.closePath();
+    ctx.moveTo(-2.6,-87);ctx.lineTo(3.6,-87);ctx.lineTo(3.4,-79);ctx.lineTo(-2.8,-79);ctx.closePath();
+    bab_arm(ctx,0,-79,lerp(6,4,up),lerp(-60,-62,up),hT[0],hT[1]);bab_arm(ctx,0,-79,lerp(9,3,up),lerp(-62,-63,up),hS[0],hS[1]);
+    // the head turns as one, about the neck: up to the sky, or down to the tablet
+    ctx.save();ctx.translate(1.5,-86);ctx.rotate(lerp(0.26,-0.42,up));ctx.translate(-1.5,86);
+    ctx.moveTo(7.7,-92.5);ctx.ellipse(1.5,-92.5,6.2,7,0,0,TAU);ctx.moveTo(7.2,-94.4);ctx.lineTo(9,-91.4);ctx.lineTo(7.2,-90.2);ctx.closePath();
+    ctx.moveTo(-4.4,-97.5);ctx.quadraticCurveTo(-7.4,-90,-6.4,-83);ctx.lineTo(-1,-84);ctx.closePath();ctx.moveTo(1.4,-88.6);ctx.lineTo(7.6,-88.2);ctx.quadraticCurveTo(8.2,-82,6.4,-79);ctx.lineTo(1,-79.4);ctx.closePath();
+    ctx.restore();};
+  const draw=(fill,ox,oy)=>{ctx.save();ctx.translate(x+ox,y+oy);ctx.scale(k*dir,k);path();ctx.fillStyle=fill;ctx.fill("nonzero");ctx.restore();};
+  let at=null;
+  withA(ctx,a,()=>{draw(rgba(mix(col,D11_MOONLIT,0.8),rim),Math.max(1.2,h*0.011)*dir,-Math.max(1,h*0.008));draw(rgba(col,1),0,0);
+    // the tablet in his far hand, its face to the sky, and the stylus in the near one
+    if(tab>0.01){const tx=x+(hT[0]+3)*k*dir,ty=y+(hT[1]-2)*k;at=[tx,ty];withA(ctx,tab,()=>d11_tab(ctx,tx,ty,13*k,{rot:dir*lerp(-0.5,-0.15,up),glow:o.glow||0}));
+      ctx.save();ctx.strokeStyle=rgba(mix(col,D11_MOONLIT,0.4),1);ctx.lineWidth=Math.max(1,1.1*k);ctx.lineCap="round";ctx.beginPath();const sx=x+hS[0]*k*dir,sy=y+hS[1]*k;ctx.moveTo(sx,sy);ctx.lineTo(sx+dir*5*k,sy-lerp(5,1,up)*k);ctx.stroke();ctx.restore();}});
+  return at;}
+// a planet's path across the stars over many nights, with the loop it makes when it seems to go back for a while; u (0..1) along it
+function d11_pathAt(u){const w=Math.exp(-Math.pow((u-0.52)/0.12,2));return[300+1320*u+66*Math.sin(2*Math.PI*3*u+1.0)*w,190-70*Math.sin(Math.PI*u)+30*Math.cos(2*Math.PI*3*u+1.0)*w];}
 
-/* ---------- the star compass ---------- */
-// The Carolinian star compass is a ring of points on the horizon, named for where stars rise and set: uneven, because the stars
-// are. Here, the points are where fifteen bright stars rise (and, opposite, set) at Satawal's latitude, about 7° north, with the
-// pole star in the north and the Southern Cross upright in the south: 32 in all. Their declinations, in degrees (unnamed on screen):
-// Kochab, Dubhe, Schedar, Capella, Vega, Arcturus, the Pleiades, Aldebaran, Altair, Orion's belt, Gienah in Corvus, Antares, Shaula,
-// Gacrux and Acrux. The Hawaiian star compass that Nainoa Thompson made from it has 32 equal houses instead (o.equal).
-const D11_DEC=[74.2,61.8,56.5,46.0,38.8,19.2,24.1,16.5,8.9,-0.3,-17.5,-26.4,-37.1,-57.1,-63.1];
-const D11_AZ=(()=>{const cl=Math.cos(7.4*Math.PI/180),A=[0,180];D11_DEC.forEach(d=>{const r=Math.acos(clamp(Math.sin(d*Math.PI/180)/cl,-1,1))*180/Math.PI;A.push(r,360-r);});return A.sort((p,q)=>p-q);})();
-const D11_AZEQ=Array.from({length:32},(_,i)=>i*11.25);
-// The ring lies on the sea around the canoe at (cx, cy): seen from the side, an ellipse rx by ry. The camera looks east, so north is
-// to the left, east (where stars rise) is the far side, south is to the right, and west (where they set) is the near side.
-// Draw the far half (o.half "back") before the canoe and the near half ("front") after it. o.p draws the ring round from the
-// north; o.pts shows its points; o.rise lifts a star above each far point, as if rising.
-function d11_ringXY(cx,cy,rx,ry,az){const r=az*Math.PI/180;return[cx-rx*Math.cos(r),cy-ry*Math.sin(r)];}
-function d11_compass(ctx,cx,cy,rx,ry,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||D11_KNOW,p=o.p==null?1:o.p,back=o.half==="back",AZ=o.equal?D11_AZEQ:D11_AZ;
-  withA(ctx,a,()=>{ctx.save();ctx.lineCap="round";
-    // the ring itself, drawn round from the north (az 0) as p goes from 0 to 1, on its half
-    const n=120,a1=360*p;ctx.strokeStyle=rgba(col,0.55);ctx.lineWidth=2.2;ctx.shadowColor=rgba(col,0.6);ctx.shadowBlur=10;ctx.beginPath();let on=false;
-    for(let k=0;k<=n;k++){const az=a1*k/n,isBack=az%360<180;if(isBack!==back){on=false;continue;}const[x,y]=d11_ringXY(cx,cy,rx,ry,az);on?ctx.lineTo(x,y):ctx.moveTo(x,y);on=true;}ctx.stroke();ctx.shadowBlur=0;
-    const pa=o.pts==null?1:o.pts,ri=o.rise||0;
-    if(pa>0.01)AZ.forEach((az,i)=>{if(az>a1+0.01)return;const far=az>0&&az<180,side=az===0||az===180;if(back?!(far||side):!(az>180))return;
-      const[x,y]=d11_ringXY(cx,cy,rx,ry,az),depth=(y-(cy-ry))/(2*ry),r=2.6+depth*2.4,q=clamp(pa*AZ.length*0.5-i*0.5,0,1);if(q<=0)return;
-      withA(ctx,q,()=>{glow(ctx,x,y,14+depth*10,col,0.5);ctx.fillStyle=rgba(mix(col,[255,255,255],0.4),1);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
-        ctx.strokeStyle=rgba(col,0.6);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x,y-6-depth*4);ctx.lineTo(x,y-16-depth*10);ctx.stroke();});
-      // a star rising above its point, on the far side, where the stars rise
-      if(far&&ri>0.01){const cyc=(t*3+hash(i,452)*40)%40,sx=x+cyc*0.08,sy=y-26-cyc*1.6;withA(ctx,ri*q*(1-cyc/40),()=>{glow(ctx,sx,sy,12,[220,232,255],0.6);ctx.fillStyle="rgba(235,242,255,0.95)";ctx.beginPath();ctx.arc(sx,sy,2.2,0,TAU);ctx.fill();});}});
-    ctx.restore();});}
+/* ---------- the diary, on clay ---------- */
+// The diary as one tablet of clay, drawn large: its words in English (no script is imitated), in the order the diaries keep. Each
+// night has a row in the same order (the moon, the planets among the stars, the weather); at the month's end, the river's level, the
+// prices of six goods and what happened in the city. A night of clouds says so. o.rows[i] (0..1) writes night i; o.cols (0..1) lights
+// the headings in turn; o.month (0..1) writes the month's end; o.cloud (0..1) the cloudy night; o.hi (0..1) a column, lit.
+const D11_NIGHTS=[["1","Venus, in the west","clear",0.1],["2","Jupiter, near a star","clear",0.18],["3","Mars, moving back","windy",0.27],["4","Saturn, near a star","clear",0.36]];
+const D11_GOODS=["barley","dates","mustard","cress","sesame","wool"];
+// the moon as the diary notes it: a crescent that widens night by night (ph 0..0.5: new to half)
+function d11_crescent(ctx,x,y,r,ph,col){ctx.save();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,y,r,-Math.PI/2,Math.PI/2,false);const k=Math.cos(ph*2*Math.PI);ctx.ellipse(x,y,Math.abs(k)*r,r,0,Math.PI/2,-Math.PI/2,k>0);ctx.closePath();ctx.fill();ctx.restore();}
+// a small cloud, as the diary's night of clouds draws it
+function d11_cloudIcon(ctx,x,y,s,col){ctx.save();ctx.fillStyle=rgba(col,1);[[-0.5,0.1,0.42],[0,-0.15,0.55],[0.55,0.08,0.4]].forEach(([u,v,r])=>{ctx.beginPath();ctx.arc(x+u*s,y+v*s,r*s,0,TAU);ctx.fill();});ctx.fillRect(x-0.9*s,y+0.1*s,1.8*s,0.4*s);ctx.restore();}
+function d11_diary(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ink=ACA_INK,inkA=rgba(ink,0.96),soft=rgba(mix(ink,BAB_BRICK,0.5),1),rows=o.rows||[];
+  const TA=o.textA==null?1:clamp(o.textA,0,1),Tt=(s,X_,Y_,op)=>T(ctx,s,X_,Y_,o.deco?Object.assign({deco:1},op):op);
+  withA(ctx,a,()=>{bab_clay(ctx,x,y,w,h);
+    // as the words fade, lines of writing stay, as texture
+    if(TA<0.999){ctx.save();ctx.strokeStyle=rgba(ink,0.5*(1-TA));ctx.lineWidth=6;for(let i=0;i<9;i++){const yy=y+120+i*66;ctx.beginPath();ctx.moveTo(x+60,yy);ctx.lineTo(x+w-60-hash(i,744)*260,yy);ctx.stroke();}ctx.restore();}
+    if(TA>0.002)withA(ctx,TA,()=>{
+    Tt("a diary of the sky",x+50,y+68,{w:800,size:34,color:inkA});Tt("Babylon · 652 BCE",x+w-50,y+68,{f:"mono",w:500,size:28,align:"right",color:soft});
+    const C=[x+60,x+200,x+330,x+w-260],H_=["night","moon","planets","weather"],hy=y+138;
+    H_.forEach((s,i)=>{const lit=o.cols?clamp(o.cols*4-i,0,1):1,hi=o.hi===i?1:0;withA(ctx,0.45+0.55*lit,()=>{if(hi)glow(ctx,C[i]+60,hy-10,90,BAB_SUN,0.3);Tt(s,C[i],hy,{f:"mono",w:500,size:28,color:soft});});});
+    ctx.fillStyle=rgba(ink,0.25);ctx.fillRect(x+40,hy+18,w-80,2);
+    D11_NIGHTS.forEach(([n,pl,we,ph],i)=>{const p=clamp(rows[i]||0,0,1);if(p<=0.01)return;const ry=hy+66+i*58;withA(ctx,p,()=>{
+      Tt(n,C[0]+10,ry,{w:800,size:30,color:inkA});d11_crescent(ctx,C[1]+20,ry-10,15,ph,mix(ink,BAB_CLAY,0.15));
+      Tt(typeOn(pl,clamp(p*1.6-0.3,0,1)),C[2],ry,{w:700,size:30,color:inkA});Tt(we,C[3],ry,{w:700,size:30,color:inkA});});});
+    // the night the clouds hid the sky
+    const cl=clamp(o.cloud||0,0,1);if(cl>0.01){const ry=hy+66+4*58;withA(ctx,cl,()=>{if(o.cloudHi>0.01){ctx.fillStyle=rgba(BAB_SUN,0.22*o.cloudHi);rr(ctx,x+40,ry-38,w-80,52,10);ctx.fill();}
+      Tt("5",C[0]+10,ry,{w:800,size:30,color:inkA});d11_cloudIcon(ctx,C[1]+20,ry-12,18,mix(ink,BAB_CLAY,0.2));Tt(typeOn("I did not watch",clamp(cl*1.5-0.2,0,1)),C[2],ry,{w:800,size:30,color:inkA});Tt("clouds",C[3],ry,{w:700,size:30,color:inkA});});}
+    // the month's end
+    const m=clamp(o.month||0,0,1);if(m>0.01){const my=hy+66+5*58+24;withA(ctx,m,()=>{ctx.fillStyle=rgba(ink,0.25);ctx.fillRect(x+40,my-34,w-80,2);
+      Tt("at the month's end",x+60,my+4,{f:"mono",w:500,size:28,color:soft});});
+      const it=(i,fn)=>{const q=clamp(m*3-i,0,1);if(q>0.01)withA(ctx,q,fn);};
+      it(0,()=>{const ix=x+70,iy=my+58;ctx.save();ctx.strokeStyle=rgba(ink,0.85);ctx.lineWidth=3;ctx.beginPath();for(let k=0;k<3;k++){ctx.moveTo(ix,iy+k*10);for(let u=0;u<=40;u+=4)ctx.lineTo(ix+u,iy+k*10+Math.sin(u*0.3)*3);}ctx.stroke();ctx.restore();Tt("the river's level",ix+58,iy+20,{w:700,size:30,color:inkA});});
+      it(1,()=>{const gx=x+410,gy=my+56;Tt("prices:",gx,gy+16,{w:800,size:30,color:inkA});D11_GOODS.forEach((g,j)=>{const q=clamp(m*3-1-j*0.1,0,1);withA(ctx,q,()=>Tt(g,gx+120+(j%3)*150,gy+16+Math.floor(j/3)*44,{w:700,size:28,color:inkA}));});});
+      it(2,()=>{const cx=x+w-280,cy=my+58;ctx.save();ctx.fillStyle=rgba(ink,0.8);ctx.fillRect(cx,cy-4,14,22);ctx.fillRect(cx+18,cy-12,16,30);ctx.fillRect(cx+38,cy,12,18);ctx.restore();Tt("in the city",cx+64,cy+16,{w:700,size:30,color:inkA});});}});});}
 
-/* ---------- landfall ---------- */
-// Mataiva, an atoll: a low line of land and trees on the horizon at (x, hy), w wide
-function d11_atoll(ctx,x,hy,w,a,dw){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba(mix([10,14,24],[60,40,50],dw||0),1);ctx.beginPath();ctx.moveTo(x,hy+1);
-  for(let k=0;k<=24;k++){const u=k/24,xx=x+u*w,h=(3+Math.sin(u*Math.PI)*7)*(0.7+0.6*hash(k,461));ctx.lineTo(xx,hy-h);}ctx.lineTo(x+w,hy+1);ctx.closePath();ctx.fill();ctx.restore();});}
-// Tahiti from the sea at Papeʻete: steep peaks behind a low shore, tapering into the sea on the left, and the waterfront lined with
-// people, thousands of them, in rows, some waving; o.p fills the waterfront from the harbour outwards
-function d11_harbour(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const hy=o.hy==null?D11_HOR:o.hy;withA(ctx,a,()=>{ctx.save();
-  const pk=[[620,hy+4],[760,hy-40],[900,hy-150],[1010,hy-120],[1120,hy-300],[1210,hy-250],[1290,hy-390],[1380,hy-310],[1470,hy-350],[1580,hy-210],[1700,hy-230],[1820,hy-120],[2000,hy-90],[2300,hy-60]];
-  ctx.beginPath();ctx.moveTo(560,hy+40);pk.forEach(([x,y],i)=>{const px=i?pk[i-1][0]:560;ctx.quadraticCurveTo((px+x)/2,y+30*hash(i,471),x,y);});ctx.lineTo(2300,hy+40);ctx.closePath();
-  const pg=ctx.createLinearGradient(0,hy-390,0,hy+40);pg.addColorStop(0,"rgba(62,86,92,1)");pg.addColorStop(1,"rgba(24,38,44,1)");ctx.fillStyle=pg;ctx.fill();
-  // the waterfront, nearer than the peaks
-  const qy=hy+56;ctx.fillStyle="rgba(28,34,40,1)";ctx.fillRect(700,qy-6,1700,40);ctx.fillStyle="rgba(60,66,70,1)";ctx.fillRect(700,qy-8,1700,4);
-  const p=o.p==null?1:o.p,n=1500;for(let i=0;i<n;i++){const u=hash(i,481),row=Math.floor(hash(i,482)*5),sc=0.7+row*0.16,x=760+u*1600,y=qy-4-(4-row)*6.5+hash(i,483)*3;if(u>p*1.02)continue;
-    const sw=Math.sin(t*2+i)*0.8,c=mix([34,30,36],[[214,120,96],[226,190,120],[120,160,200],[236,226,210]][i%4],0.35+0.25*hash(i,484));ctx.fillStyle=rgba(c,1);
-    ctx.beginPath();ctx.arc(x+sw,y-13*sc,3.6*sc,0,TAU);ctx.fill();rr(ctx,x-4.6*sc+sw,y-9*sc,9.2*sc,11*sc,3*sc);ctx.fill();
-    if(hash(i,485)<0.07){ctx.strokeStyle=rgba(c,1);ctx.lineWidth=2.2*sc;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+3*sc,y-8*sc);ctx.lineTo(x+(7+Math.sin(t*6+i)*3)*sc,y-22*sc);ctx.stroke();}}
-  ctx.restore();});}
-
-/* ---------- the chart: the Pacific, with the people who hold the knowledge ---------- */
-// An equirectangular sketch from about 138° E to 148° W and 23° N to 19° S, 18 px to a degree: only the islands the story
-// passes, as small dots, and no coastlines. D11_PAC[name] = [longitude east, latitude]
-const D11_PAC={"Satawal":[147.03,7.35],"Puluwat":[149.18,7.36],"Pulap":[149.43,7.62],"Lamotrek":[146.37,7.48],"Woleai":[143.9,7.37],"Pulusuk":[149.32,6.69],
-  "Kauaʻi":[200.5,22.05],"Oʻahu":[202.0,21.47],"Molokaʻi":[203.0,21.13],"Maui":[203.74,20.8],"Hawaiʻi":[204.5,19.6],
-  "Tahiti":[210.57,-17.65],"Moʻorea":[210.17,-17.53],"Mataiva":[211.3,-14.88],"Rangiroa":[212.4,-15.12],"Nuku Hiva":[219.9,-8.86],"Rarotonga":[200.23,-21.23],
-  "Upolu":[188.3,-13.9],"Tongatapu":[184.8,-21.17],"Viti Levu":[178.0,-17.8],"Majuro":[171.2,7.1],"Pohnpei":[158.2,6.88],"Chuuk":[151.8,7.4],"Guam":[144.8,13.44],"Yap":[138.1,9.5]};
-// the other islands on the chart, unnamed, as smaller dots: [longitude east, latitude]
-const D11_ISL=[[144.45,7.25],[143.05,6.68],[146.17,7.5],[144.5,8.6],[147.65,8.1],[146.7,8.08],[146.0,9.2],[149.4,8.7],[139.7,10.0],[140.5,9.77],[140.4,8.13],
-  [152.6,5.5],[155.0,3.85],[154.8,1.07],[163.0,5.3],[167.7,9.2],[169.6,5.9],[173.0,1.4],[179.2,-8.5],[166.9,-0.5],[187.6,-13.6],[190.1,-19.05],[200.2,-18.85],
-  [208.6,-16.8],[208.25,-16.5],[208.95,-16.75],[214.4,-16.3],[216.4,-16.6],[214.5,-17.35],[219.1,-18.1],[221.0,-9.8],[202.6,1.9],[200.6,3.86],[199.85,21.9],
-  [203.07,20.83],[203.4,20.55],[184.2,-15.9],[181.4,-16.6],[176.2,-13.3],[145.7,15.2],[145.75,14.15],[188.3,-14.3],[195.0,-21.2],[192.2,-11.05],[210.0,-23.4]];
-function d11_pac(name){const[lo,la]=D11_PAC[name];return[200+(lo-138)*18,80+(23-la)*18];}
-// the chart's ground: a dark sea (in screen space); then, in the camera's world, a faint graticule, the equator dashed, and the
-// islands; o.labM, o.labH and o.labT (0..1) name Micronesia, Hawaiʻi and Tahiti, at the same size on screen whatever the zoom (o.z)
-function d11_chartBg(ctx,S){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#050a18");g.addColorStop(1,"#02050c");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
-function d11_chart(ctx,t,o){o=o||{};const z=o.z||1;ctx.save();ctx.strokeStyle="rgba(120,160,230,0.07)";ctx.lineWidth=1/z;for(let lo=110;lo<=250;lo+=10){const x=200+(lo-138)*18;ctx.beginPath();ctx.moveTo(x,-800);ctx.lineTo(x,1900);ctx.stroke();}
-  for(let la=50;la>=-60;la-=10){const y=80+(23-la)*18;ctx.beginPath();ctx.moveTo(-800,y);ctx.lineTo(2800,y);ctx.stroke();}
-  const ey=80+23*18;ctx.setLineDash([6/z,10/z]);ctx.strokeStyle="rgba(150,180,230,0.18)";ctx.beginPath();ctx.moveTo(-800,ey);ctx.lineTo(2800,ey);ctx.stroke();ctx.setLineDash([]);
-  D11_ISL.forEach(([lo,la])=>{ctx.fillStyle="rgba(170,190,225,0.34)";ctx.beginPath();ctx.arc(200+(lo-138)*18,80+(23-la)*18,2.2/Math.sqrt(z),0,TAU);ctx.fill();});
-  Object.keys(D11_PAC).forEach(k=>{const[x,y]=d11_pac(k);ctx.fillStyle="rgba(190,210,240,0.55)";ctx.beginPath();ctx.arc(x,y,(k==="Hawaiʻi"?4.5:2.8)/Math.sqrt(z),0,TAU);ctx.fill();});
-  const[sx,sy]=d11_pac("Satawal"),[mx,my]=d11_pac("Maui"),[tx,ty]=d11_pac("Tahiti"),L={size:30/z,w:700,color:"rgba(200,214,236,0.85)"};
-  d11_name(ctx,"Micronesia",sx-6,sy+96/z,"center",o.labM||0,L);d11_name(ctx,"Hawaiʻi",mx+56/z,my+18/z,"left",o.labH||0,L);d11_name(ctx,"Tahiti",tx+34/z,ty+12/z,"left",o.labT||0,L);
-  ctx.restore();}
-// a person who holds the knowledge, as a warm light at (x, y); o.k (0..1) kindles it; o.dim (0..1) lets it fade to a ring that stays
-function d11_light(ctx,x,y,r,t,o){o=o||{};const k=o.k==null?1:o.k;if(k<=0.01)return;const col=o.col||D11_KNOW,dim=o.dim||0,br=0.85+0.15*Math.sin(t*1.3+x*0.01);
-  const v=k*(1-0.8*dim);glow(ctx,x,y,r*4.2*(0.6+0.4*k),col,0.5*v*br);ctx.fillStyle=rgba(mix(col,[255,255,255],0.5),0.95*v);ctx.beginPath();ctx.arc(x,y,r*(0.6+0.4*k),0,TAU);ctx.fill();
-  if(dim>0.01)ring(ctx,x,y,r*2.2,col,0.55*dim*k,1.6);}
-// knowledge passed on, along an arc from (x0, y0) to (x1, y1): p carries a small light along it, and leaves a faint trail
-function d11_pass(ctx,x0,y0,x1,y1,p,col,o){o=o||{};if(p<=0)return;const bend=o.bend==null?0.25:o.bend,mx=(x0+x1)/2-(y1-y0)*bend,my=(y0+y1)/2+(x1-x0)*bend,q=ease(clamp(p,0,1)),at_=u=>[(1-u)*(1-u)*x0+2*(1-u)*u*mx+u*u*x1,(1-u)*(1-u)*y0+2*(1-u)*u*my+u*u*y1];
-  ctx.save();ctx.strokeStyle=rgba(col||D11_KNOW,(o.trail==null?0.35:o.trail));ctx.lineWidth=o.lw||1.8;ctx.setLineDash([4,7]);ctx.beginPath();for(let k=0;k<=40;k++){const[x,y]=at_(q*k/40);k?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();ctx.restore();
-  if(p<1){const[x,y]=at_(q);glow(ctx,x,y,20,col||D11_KNOW,0.8);ctx.fillStyle="rgba(255,250,236,1)";ctx.beginPath();ctx.arc(x,y,3.5,0,TAU);ctx.fill();}}
-// a name on the chart or the sea, with a dark halo so it reads over anything
-function d11_name(ctx,s,x,y,al,a,o){if(a<=0.01)return;o=o||{};withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.95)";ctx.shadowBlur=10;T(ctx,s,x,y,{w:o.w||800,size:o.size||30,align:al,color:o.color||"rgba(255,244,226,0.98)"});ctx.restore();});}
+/* ---------- six hundred years, and what they gave ---------- */
+// a year as a place on the line: the diaries' years (652 to 61 BCE) along the line first; o.u (0..1) widens it to reach today
+function d11_yx(yr,u){const A=lerp(-652,-760,u),B=lerp(-61,2026,u);return 200+(yr-A)/(B-A)*1520;}
+// the kings the diaries were kept under, as bands along the line: [name, from, to] (years BCE as negative numbers)
+const D11_KINGS=[["Babylonian",-652,-539,[214,150,92]],["Persian",-539,-331,[150,170,214]],["Greek",-331,-141,[200,176,120]],["Parthian",-141,-61,[176,140,180]]];
 
 /* ---------- the map, as the wall knows it ---------- */
 // The map as a small picture: six rows in the layers' colours, each with a few elements and the lines between them. It's texture
@@ -2639,83 +2865,136 @@ function d11_chat(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
     if(u>0.01){ctx.fillStyle=rgba(KT_AI,0.9);ctx.fillRect(lx,yy+51,sw*u,2.2);withA(ctx,u,()=>{ctx.save();ctx.strokeStyle=rgba(KT_AI,1);ctx.lineWidth=2.4;ctx.lineCap="round";const ex=lx+sw+22,ey=yy+32;ctx.beginPath();ctx.moveTo(ex-8,ey+8);ctx.lineTo(ex+6,ey-6);ctx.moveTo(ex-3,ey-6);ctx.lineTo(ex+6,ey-6);ctx.lineTo(ex+6,ey+3);ctx.stroke();ctx.restore();});}});});});}
 
 /* ===== A map people and agents can read: scenes =====
-   Twelve chapters, as in ../script.md. The Pacific in May 1976: Hōkūleʻa sails for Tahiti with no compass and no charts, its
-   navigator holding a star compass in memory; landfall, and a knowledge few still held, passed on; the navigator's test. Then
-   Tomás's map, used every week and going stale; moved into an enterprise architecture tool, which brings in what other systems
+   Twelve chapters, as in ../script.md. Babylon in 652 BCE: each night a scholar watches the sky and writes down what he sees; an
+   eclipse of the moon warns of the king's death; the sky repeats itself more slowly than a working life; what one watcher knew is
+   lost when he stops, so they keep a diary, in the same order each night, half a year to a tablet, for six hundred years, under four
+   lines of kings, whose cycles let later scholars predict the sky, and whose eclipses astronomers still read; the watcher's test.
+   Then Tomás's map, used every week and going stale; moved into an enterprise architecture tool, which brings in what other systems
    already keep, with each one's ID; each element once, and once as a text file, the simplest approach; reviewed and versioned,
-   with checks on the map itself; one map and many views, generated one way, down to dbt and Databricks; an agent that reads it, and is on it,
-   with its rights; the retail code changing, the agent drafting and the head of retail confirming; a newcomer's first day, with a
-   map; Hōkūleʻa still sailing, fifty years on; and the series, layer by layer, handing over to From words to data.
+   with checks on the map itself; one map and many views, generated one way, down to dbt and Databricks; an agent that reads it, and
+   is on it, with its rights; the retail code changing, the agent drafting and the head of retail confirming; a newcomer's first day,
+   with a map; back to the watch, and the map kept by thirty people; and the answer.
    Made to read on a phone (tools/legible.py): text is at least 28 px in the frame; what's drawn small is texture. Motion: every
    shot drifts slowly and things arrive with a spring. Sound: every effect in tools/score.py fires at the same moment as the thing it
    belongs to here, so keep the two in step. */
 
-/* ---------- 1. By the stars ---------- */
-// the route on a small chart, Maui to Tahiti, drawn and then taken away: they sailed without one
-function d11_inset(ctx,x,y,w,h,p,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,[170,200,240],{glow:12,ea:0.6,fill:"rgba(6,10,22,0.9)"});
-  const k=8.6,mx=x+w*0.42,my=y+70,tah=[mx+(210.57-203.74)*k,my+(20.8+17.65)*k];
-  ctx.save();ctx.setLineDash([6,8]);ctx.strokeStyle="rgba(150,180,230,0.25)";ctx.lineWidth=1.2;const ey=my+20.8*k;ctx.beginPath();ctx.moveTo(x+16,ey);ctx.lineTo(x+w-16,ey);ctx.stroke();ctx.restore();
-  [["Kauaʻi"],["Oʻahu"],["Molokaʻi"],["Maui"],["Hawaiʻi"],["Mataiva"],["Tahiti"]].forEach(([n])=>{const[lo,la]=D11_PAC[n],xx=mx+(lo-203.74)*k,yy=my+(20.8-la)*k;ctx.fillStyle="rgba(200,214,236,0.8)";ctx.beginPath();ctx.arc(xx,yy,n==="Hawaiʻi"?4:3,0,TAU);ctx.fill();});
-  d11_pass(ctx,mx,my,tah[0],tah[1],p,D11_KNOW,{bend:-0.12,trail:0.85,lw:2.4});
-  T(ctx,"Maui",mx+20,my-14,{w:700,size:30,color:rgba(INK,0.95)});T(ctx,"Tahiti",tah[0]+18,tah[1]+10,{w:700,size:30,color:rgba(INK,0.95)});
-  // the distance, in two lines left of the route and under the equator, so it stays inside the chart
-  withA(ctx,fin(p,0.5,0.4),()=>{const lx=(mx+tah[0])/2-26;T(ctx,"more than",lx,ey+62,{w:700,size:28,align:"right",color:rgba(D11_KNOW,1)});T(ctx,"4,000 km",lx,ey+98,{w:700,size:28,align:"right",color:rgba(D11_KNOW,1)});});
-  T(ctx,"equator",x+w-22,ey-10,{w:600,size:28,align:"right",color:rgba(SOFT,0.8)});});}
-// the navigator's test, as a card over the night sky
-function d11_testCard(ctx,cx,y,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{const q=o.q||"Could someone else sail by it?",w=Math.max(tw(ctx,q,44,700)+90,560);
-  glass(ctx,cx-w/2,y,w,150,22,EAC,{glow:16+10*(o.hi||0),ea:0.85,fill:"rgba(6,12,22,0.92)"});T(ctx,"the navigator's test",cx,y+52,{f:"mono",w:500,size:28,align:"center",color:rgba(EAC,1)});
+/* ---------- 1. The watch ---------- */
+// the watcher's test, as a card over the night sky or the map
+function d11_testCard(ctx,cx,y,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{const q=o.q||"Could the next one read it, and carry on?",w=Math.max(tw(ctx,q,44,700)+110,560),col=o.col||ACA;
+  glass(ctx,cx-w/2,y,w,150,22,col,{glow:16+10*(o.hi||0),ea:0.85,fill:"rgba(6,12,22,0.92)"});T(ctx,"the watcher's test",cx,y+52,{f:"mono",w:500,size:28,align:"center",color:rgba(col,1)});
   T(ctx,q,cx,y+112,{w:700,size:44,align:"center"});
-  if(o.mark>0.01){const mx=cx+w/2-36,my=y+36;if(o.pass)kt_gtick(ctx,mx,my,20,o.mark);else kt_rcross(ctx,mx,my,20,o.mark);}});}
-scene("stars",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tF=c("few"),tL=c("link"),tR=c("ring"),tLa=c("land"),chartA=fin(t,tF-0.7,1.0)*(1-fin(t,tL-0.8,1.0)),seaA=1-chartA;
-  // night, then dawn as they sight land, then a day in harbour; it stays day until the chart has covered it, then night again
-  const tH=w("land","Three days"),dawn=fin(t,tLa-0.4,2.6)*(1-fin(t,tH,1.4)),day=fin(t,tH,1.6)*(1-fin(t,tF+0.35,0.3))*0.55;
-  // the canoe sails on to the right (south), a little each second; the camera goes in to its navigator, then out to see the ring
-  const cxN=600+t*5,cyN=700,sN=1.0,stern=cxN-282*sN;
-  if(seaA>0.01){setScreen(ctx,S);ctx.save();
-    focus(ctx,t,[[0,960,540,1.0],[w("mau","Its navigator")-0.2,stern+170,560,1.45],[tR+0.2,cxN+40,600,0.94],[tLa+0.4,cxN+220,560,1.0],[tH+0.3,cxN+470,590,1.38],[tL-0.8,cxN+40,560,0.94]],1.8);
-    d11_sky(ctx,S,t,{dawn,day,turn:t*0.0016});
-    d11_sea(ctx,t,{dawn,day,hi:pulseAt(t,w("mau","swells"),1.8)*0.8});
-    // Mataiva on the horizon, then Papeʻete's shore
-    d11_atoll(ctx,1500,D11_HOR,260,fin(t,w("land","Mataiva")-0.3,1.0)*(1-fin(t,tH,0.8)),dawn);
-    d11_harbour(ctx,t,{a:fin(t,tH-0.2,1.2)*(1-fin(t,tF+0.35,0.3)),p:clamp((t-tH)/2.4,0,1)});
-    // stars rising at the horizon ahead, in the east, as the navigator reads them
-    const tS=w("mau","stars"),rs=fin(t,tS-0.2,0.8)*(1-fin(t,tR+0.4,0.8));if(rs>0.01)[[1120,0],[1340,1],[880,2]].forEach(([x,k])=>{const u=((t-tS)*0.08+k*0.3)%1,y=D11_HOR-6-u*120;withA(ctx,rs*(1-u),()=>{glow(ctx,x+u*8,y,16,[220,232,255],0.7);ctx.fillStyle="rgba(240,246,255,1)";ctx.beginPath();ctx.arc(x+u*8,y,2.6,0,TAU);ctx.fill();});});
-    // the star compass, in memory: a ring round the canoe, its points where the stars rise and set
-    const back=t>tL-0.8,RA=Math.max(fin(t,tR,0.6)*(1-fin(t,tLa+0.8,1.4)),fin(t,tL-0.7,1.0)),rp=back?1:clamp((t-tR-0.1)/2.2,0,1),pts=back?1:clamp((t-tR-0.6)/2.4,0,1);
-    d11_compass(ctx,cxN,cyN+10,820,124,t,{a:RA,half:"back",p:rp,pts,rise:back?0.7:fin(t,w("ring","rise"),1.0)});
-    d11_canoe(ctx,cxN,cyN,sN,t,{lit:0.45+0.4*dawn+0.3*day,col:mix([170,200,240],[255,196,150],Math.max(dawn,day)),nav:fin(t,w("mau","Mau")-0.2,0.8)*(1-fin(t,tR+1.6,1.0)),crew:4});
-    d11_compass(ctx,cxN,cyN+10,820,124,t,{a:RA,half:"front",p:rp,pts});
-    // the birds, which the navigator reads too: at dusk they fly home, to land
-    const tB=w("mau","birds"),bA=fin(t,tB-0.3,0.5)*(1-fin(t,tB+4.2,0.8));if(bA>0.01)[[0,300,0.9],[1,250,0.7],[2,340,0.8]].forEach(([k,y,s])=>{const u=(t-tB+0.3)*120;d11_bird(ctx,1500-u-k*90,y+Math.sin(u*0.01+k)*10,s,t+k,-1,bA);});
-    ctx.restore();
-    // where and when; then how long they had been at sea
-    eaYear(ctx,80,80,"Maui · May 1976",CLAY,fin(t,0.5,0.8)*(1-fin(t,tLa-0.6,0.6)));
-    eaYear(ctx,80,80,"day 31 · Mataiva",CLAY,fin(t,tLa,0.6)*(1-fin(t,tH-0.3,0.6)));
-    eaYear(ctx,80,80,"Papeʻete · 4 June",CLAY,fin(t,tH,0.6)*(1-fin(t,tF-0.8,0.6)));
-    const tK=w("land","seventeen");if(t>tK-0.4&&t<tF)withA(ctx,fin(t,tK-0.3,0.6)*(1-fin(t,tF-0.9,0.5)),()=>tag(ctx,1340,400,"more than 17,000 people waiting",D11_KNOW,{align:"center",size:30}));
-    d11_inset(ctx,1250,70,580,470,clamp((t-w("coast","leaves")+0.3)/2.4,0,1),fin(t,w("coast","leaves")-0.6,0.8)*(1-fin(t,w("coast","no charts")+0.2,1.0)));
-    // what a map lives by, over the ring; then the test
-    [["use it",520],["keep it true",960],["teach it",1400]].forEach(([s_,x])=>{const t0=w("link",s_)-0.1,a_=fin(t,t0,0.6)*(1-fin(t,c("test")-0.2,0.6));if(a_>0.01)arrive(ctx,x,206,t,t0,()=>tag(ctx,x,206,s_,D11_KNOW,{align:"center",size:34}),{dy:-14,a:a_});});
-    d11_testCard(ctx,960,92,fin(t,c("test")-0.1,0.6)*(1-fin(t,B+0.6,0.6)),{hi:pulseAt(t,w("test","could"),1.6)});}
-  // the chart: the few who still held the knowledge, and how it passed on
-  if(chartA>0.01)withA(ctx,chartA,()=>{d11_chartBg(ctx,S);ctx.save();
-    const tB=w("teach","beyond"),tN=w("teach","Nainoa"),tO=w("teach","taught others");
-    const CK=[[0,372,380,2.6],[tB-0.3,880,500,1.0],[tO-0.4,1310,200,1.7]],z=focusZ(t,CK,2.0);focus(ctx,t,CK,2.0);
-    d11_chart(ctx,t,{z,labM:fin(t,tF-0.2,0.8)*(1-fin(t,tO-0.4,0.6)),labH:fin(t,tB,0.8),labT:fin(t,tB,0.8)*(1-fin(t,tO-0.8,0.5))});
-    // the few who still held it, in the central Carolines; each passing it to an apprentice
-    const MIC=["Satawal","Puluwat","Lamotrek","Woleai","Pulusuk","Pulap"],tP=w("few","passed");
-    MIC.forEach((n,i)=>{const[x,y]=d11_pac(n),k=fin(t,tF+0.2+i*0.18,0.6);d11_light(ctx,x,y,5,t,{k});
-      if(i<4){const ax=x+[-14,16,-18,14][i],ay=y-[30,24,34,26][i],p=clamp((t-tP-i*0.35)/1.1,0,1);d11_pass(ctx,x,y,ax,ay,p,D11_KNOW,{bend:0.4,trail:0.5});d11_light(ctx,ax,ay,4,t,{k:fin(t,tP+i*0.35+1.0,0.5)});}});
-    // beyond his own island: to Hawaiʻi, where Nainoa Thompson learned it, and taught others (Micronesia's names fade as the camera leaves)
-    const[sx,sy]=d11_pac("Satawal"),[ox,oy]=d11_pac("Oʻahu");
-    d11_name(ctx,"Satawal",sx,sy+50/z,"center",fin(t,c("teach")-0.2,0.6)*(1-fin(t,tO-0.4,0.6)),{size:32/z});
-    d11_pass(ctx,sx,sy,ox,oy,clamp((t-tB+0.2)/2.2,0,1),D11_KNOW,{bend:-0.18,trail:0.55,lw:2.2});
-    d11_light(ctx,ox,oy,6,t,{k:fin(t,tN,0.6)});d11_name(ctx,"Nainoa Thompson",ox-22/z,oy-24/z,"right",fin(t,tN+0.1,0.6),{size:32/z});
-    [["Kauaʻi",0],["Maui",1],["Hawaiʻi",2],["Molokaʻi",3]].forEach(([n,i])=>{const[x,y]=d11_pac(n),dx=(i-1.5)*14,p=clamp((t-tO-i*0.22)/0.9,0,1);d11_pass(ctx,ox,oy,x+dx,y+12+i*6,p,D11_KNOW,{bend:0.5,trail:0.45});d11_light(ctx,x+dx,y+12+i*6,4,t,{k:fin(t,tO+i*0.22+0.8,0.5)});});
-    ctx.restore();});
-  vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"A map people and agents can read","kept in one tool, read by people and agents",EAC,"Film 11 of 11 · enterprise architecture, for data");});
+  if(o.mark>0.01){const mx=cx+w/2-40,my=y+40;if(o.pass)kt_gtick(ctx,mx,my,20,o.mark);else kt_rcross(ctx,mx,my,20,o.mark);}});}
+// Babylon's roof at night, as both ends of the opening show it: the sky, the moon, the city and the roof; o.ecl: the eclipse
+function d11_babylon(ctx,t,o){o=o||{};d11_night(ctx,t,{cloud:o.cloud});d11_moon(ctx,1330,250,34,{ecl:o.ecl||0});
+  // the planets out tonight: steady points among the stars
+  [[520,300,3.2,[255,236,200]],[1720,170,2.6,[255,200,170]],[300,140,2.4,[240,232,214]]].forEach(([x,y,r,col])=>d11_planet(ctx,x,y,r,col,o.planets==null?1:o.planets));
+  d11_city(ctx,t);d11_roof(ctx,t);}
+// the six hundred years, on one line: the tablets kept, half a year to each, as a band above it (p: how far they reach, 0..1); the
+// kings below it, each lit as it's named (k[i]); its two ends; u (0..1) widens the line to reach today
+function d11_years(ctx,t,o){o=o||{};const u=o.u||0,X=yr=>d11_yx(yr,u),Y=600,p=clamp(o.p==null?1:o.p,0,1),a=o.a==null?1:o.a;if(a<=0.01)return;
+  withA(ctx,a,()=>{const x0=X(-652),x1=X(-61),xp=lerp(x0,x1,p);
+    ctx.save();ctx.strokeStyle=rgba(BAB_CLAY,0.55);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(x0-20,Y);ctx.lineTo(u>0.01?X(2026)+10:x1+20,Y);ctx.stroke();ctx.restore();
+    // the tablets: one sliver for each half year, in clay, a little uneven, as far as they've reached
+    if(xp>x0+1){ctx.save();const n=Math.round(1182*p),sw=(x1-x0)/1182;for(let i=0;i<n;i++){const x=x0+i*sw,h=30+hash(i,741)*12;ctx.fillStyle=rgba(mix(BAB_CLAY,BAB_MUD,0.25+0.5*hash(i,742)),0.75+0.25*hash(i,743));ctx.fillRect(x,Y-6-h,Math.max(0.9,sw*0.8),h);}ctx.restore();
+      const g=ctx.createLinearGradient(0,Y-60,0,Y);g.addColorStop(0,rgba(BAB_SUN,0));g.addColorStop(1,rgba(BAB_SUN,0.1));ctx.fillStyle=g;ctx.fillRect(x0,Y-60,xp-x0,56);}
+    // the kings they were kept under
+    D11_KINGS.forEach(([nm,a0,a1,col],i)=>{const k=clamp((o.k||[])[i]||0,0,1);if(k<=0.01)return;const bx=X(a0),bw=X(a1)-bx;withA(ctx,k,()=>{ctx.fillStyle=rgba(col,0.22);rr(ctx,bx+2,Y+18,bw-4,46,10);ctx.fill();ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2;rr(ctx,bx+2,Y+18,bw-4,46,10);ctx.stroke();
+      const s=bw-20>tw(ctx,nm,28,700)?nm:"";if(s)T(ctx,s,bx+bw/2,Y+51,{w:700,size:28,align:"center",color:rgba(mix(col,[255,255,255],0.45),1)});});});
+    const e=o.ends||0;if(e>0.01)withA(ctx,e,()=>{T(ctx,"652 BCE",x0,Y+114,{f:"mono",w:500,size:28,color:rgba(BAB_CLAY,1)});T(ctx,"61 BCE",x1,Y+114,{f:"mono",w:500,size:28,align:u>0.5?"left":"right",color:rgba(BAB_CLAY,1)});});
+    const b=o.span||0;if(b>0.01)withA(ctx,b,()=>{ctx.save();ctx.strokeStyle=rgba(BAB_SUN,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(x0,Y-70);ctx.lineTo(x0,Y-84);ctx.lineTo(x1,Y-84);ctx.lineTo(x1,Y-70);ctx.stroke();ctx.restore();
+      T(ctx,"nearly 600 years",(x0+x1)/2,Y-104,{w:800,size:34,align:"center",color:rgba(BAB_SUN,1)});});});}
+// a cycle of the sky over the line of years: an arc for each return, from year a, every n years, k times, its height h; p (0..1)
+function d11_cycle(ctx,a0,n,k,h,col,p,u){if(p<=0.01)return;ctx.save();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.6;ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=10;
+  for(let i=0;i<k;i++){const q=clamp(p*k-i,0,1);if(q<=0)break;const xa=d11_yx(a0+i*n,u),xb=d11_yx(a0+(i+1)*n,u),mx=(xa+xb)/2;ctx.beginPath();for(let s=0;s<=24*q;s++){const v=s/24,x=lerp(xa,xb,v),y=548-Math.sin(Math.PI*v)*h;s?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();
+    if(q>=1){ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(xb,548,4,0,TAU);ctx.fill();}}ctx.restore();}
+scene("watch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
+  const tSi=c("signs"),tSl=c("slow"),tNe=c("need"),tDi=c("diary"),tMo=c("month"),tCl=c("clouds"),tTa=c("tablet"),tYe=c("years"),tCy=c("cycles"),tTo=c("today"),tUt=c("utility"),tOu=c("outlive"),tTe=c("test");
+  // the shots: Babylon's roof at night until the diary; the diary and its six hundred years, in one room; the utility; the roof again
+  const A1=1-fin(t,tDi-0.7,1.0),A2=fin(t,tDi-0.7,1.0)*(1-fin(t,tUt-0.7,1.0)),A3=fin(t,tUt-0.7,1.0)*(1-fin(t,tTe-0.5,1.0)),A4=fin(t,tTe-0.5,1.0);
+  // 1. the roof at night: a scholar watches the sky and writes; the moon, eclipsed; a planet's slow path; he stops, and the next carries on
+  const night1=cx=>{setScreen(cx,S);cx.save();
+    const tW=w("city","watches"),tWr=w("city","writes down"),tE=w("signs","eclipse"),tP=w("slow","some planets"),tL=w("need","lost"),tR=w("need","a record"),tN=w("need","the next"),tRd=w("need","read"),tC=w("need","carry on");
+    focus(cx,t,[[0,960,560,1.0],[tW-0.6,860,600,1.2],[tSi-0.3,1120,480,1.08],[tSl-0.3,960,440,1.0],[tL-0.6,1000,610,1.16]],1.8);
+    const ecl=clamp((t-tE+0.2)/2.2,0,1)*(1-fin(t,tSl-0.2,1.4));
+    d11_babylon(cx,t,{ecl});
+    // one planet's path over many nights, with its loop, and the planet moving along it
+    const pp=clamp((t-tP+0.2)/5.6,0,1),pa=fin(t,tP-0.4,0.8)*(1-fin(t,tL-0.1,1.0));
+    if(pa>0.01&&pp>0)withA(cx,pa,()=>{cx.save();cx.fillStyle=rgba([255,226,180],0.8);for(let s=0;s<=Math.floor(pp*90);s++){const[x,y]=d11_pathAt(s/90);cx.beginPath();cx.arc(x,y,2.2,0,TAU);cx.fill();}cx.restore();const[x,y]=d11_pathAt(pp);d11_planet(cx,x,y,4.4,[255,226,180],1);});
+    // the scholar: he watches; writes down what he sees; looks up at the eclipse and the planet; then he stops, and is gone
+    const up=1-fin(t,tWr-0.1,0.5)*(1-fin(t,tSi-0.4,0.6)),gone=1-fin(t,tL-0.1,1.1);
+    d11_fade(cx,gone*fin(t,0.2,0.8),c2=>d11_scribe(c2,760,952,330,t,{dir:1,up,write:fin(t,tWr,0.4)*(1-fin(t,tSi-0.4,0.4))}));
+    // the record left on the parapet; the next watcher comes up, takes it, reads it, and carries on
+    const tabA=fin(t,tR-0.2,0.8),walk=clamp((t-tN+0.6)/2.2,0,1),nx=lerp(1700,1150,easeCam(walk)),take=easeCam(clamp((t-tRd+0.2)/0.6,0,1));
+    const tabX=lerp(1010,nx-20*3.1,take),tabY=lerp(D11_WALL-10,952-68*3.1,take);
+    if(tabA>0.01&&take<1)d11_tab(cx,tabX,tabY,46,{a:tabA,glow:0.6+0.4*pulseAt(t,tR,1.6)});
+    const nA=fin(t,tN-0.6,0.8);if(nA>0.01)d11_fade(cx,nA,c2=>d11_scribe(c2,nx,952,310,t,{dir:-1,up:fin(t,tC-0.2,0.8),step:walk<1?t*5.2:null,tab:take>=1?1:0,glow:0.4*(1-fin(t,tC,1.0))}));
+    cx.restore();
+    // what the narration names, in screen space so it reads on a phone
+    eaYear(cx,80,80,"Babylon · 652 BCE",ACA,fin(t,0.6,0.8)*(1-fin(t,tSi-0.6,0.6)));
+    bab_tag(cx,760,214,"he watches the sky, and writes down what he sees",fin(t,tW-0.2,0.7)*(1-fin(t,tSi-0.5,0.6)));
+    bab_tag(cx,960,214,"signs, for the king and the temples",fin(t,tSi+0.6,0.7)*(1-fin(t,tE-0.4,0.5)));
+    bab_tag(cx,960,214,"an eclipse of the moon: a warning of the king's death",fin(t,tE-0.1,0.7)*(1-fin(t,tSl-0.5,0.6)),{col:ACA_WARN});
+    // how long the sky takes to repeat itself, beside one watcher's working life
+    const bA=fin(t,w("slow","seventy")-0.4,0.6)*(1-fin(t,tL-0.3,0.6));if(bA>0.01)withA(cx,bA,()=>{glass(cx,420,430,1080,210,22,ACA,{glow:10,ea:0.6,fill:"rgba(8,8,22,0.9)"});
+      const f1=easeCam(clamp((t-w("slow","seventy")+0.2)/1.8,0,1)),f2=easeCam(clamp((t-w("slow","working life")+0.4)/1.4,0,1));
+      T(cx,"a planet comes back: 70 to 80 years",464,482,{w:700,size:30,color:rgba([255,226,180],1)});cx.fillStyle=rgba([255,226,180],0.85);rr(cx,464,500,992*f1,20,10);cx.fill();
+      withA(cx,fin(t,w("slow","working life")-0.5,0.5),()=>{T(cx,"one watcher's working life",464,572,{w:700,size:30,color:rgba(D11_MOONLIT,1)});cx.fillStyle=rgba(D11_MOONLIT,0.85);rr(cx,464,590,496*f2,20,10);cx.fill();});});
+    bab_tag(cx,960,214,"what he knew, lost when he stopped",fin(t,tL-0.2,0.7)*(1-fin(t,tR-0.4,0.5)),{col:ACA_WARN});
+    bab_tag(cx,960,214,"a record that outlives him",fin(t,tR-0.1,0.7)*(1-fin(t,tN-0.4,0.5)));
+    bab_tag(cx,960,214,"the next can read it, and carry on",fin(t,tN-0.1,0.7)*(1-fin(t,tDi-0.9,0.5)));};
+  // 2. the diary on clay, then half a year to each tablet, then six hundred years of them, the cycles they gave, and today
+  const clay=cx=>{setScreen(cx,S);bab_sky(cx,t,{dawn:0,day:0,moon:false,hz:1300});cx.fillStyle="rgba(10,8,14,0.62)";cx.fillRect(0,0,W,H);
+    const tN=w("diary","night after night"),tO=w("diary","same order"),tMn=w("diary","the moon"),tPl=w("diary","the planets"),tWe=w("diary","the weather");
+    const rows=D11_NIGHTS.map((_,i)=>clamp((t-(tN-0.3+i*0.42))/0.7,0,1)),hi=t>tWe-0.2?3:t>tPl-0.2?2:t>tMn-0.2?1:-1,hiOn=t<tMo-0.3?hi:-1;
+    const month=(fin(t,w("month","river")-0.2,0.5)+fin(t,w("month","prices")-0.2,0.5)+fin(t,w("month","what had happened")-0.2,0.5))/3;
+    // half a year on each tablet: the tablet draws back, a second one comes beside it; then both go to the start of the line of years
+    const sh=easeCam(clamp((t-(tTa-0.3))/1.5,0,1)),toLine=easeCam(clamp((t-(tYe-0.3))/1.4,0,1)),txtA=1-fin(t,tTa-0.4,0.35);
+    const s1=lerp(lerp(1,0.26,sh),0.03,toLine),cxA=lerp(lerp(960,600,sh),206,toLine),cyA=lerp(lerp(480,470,sh),570,toLine);
+    const bigA=1-fin(t,tYe+0.9,0.4);
+    if(bigA>0.01)withA(cx,bigA,()=>{cx.save();cx.translate(cxA,cyA);cx.scale(s1,s1);cx.translate(-960,-480);
+      d11_diary(cx,330,110,1260,740,t,{rows,cols:clamp((t-tO+0.2)/1.4,0,1),hi:hiOn,month,cloud:fin(t,tCl-0.1,1.0),cloudHi:pulseAt(t,w("clouds","I did not watch")-0.2,2.0),textA:txtA,deco:s1<0.98});cx.restore();});
+    const s2=lerp(0.26,0.03,toLine),cxB=lerp(1040,224,toLine),cyB=lerp(470,570,toLine),bA=fin(t,w("tablet","the next watcher")-0.4,0.7)*bigA;
+    if(bA>0.01)arrive(cx,cxB,cyB,t,w("tablet","the next watcher")-0.4,()=>withA(cx,bA,()=>{cx.save();cx.translate(cxB,cyB);cx.scale(s2,s2);cx.translate(-960,-480);d11_diary(cx,330,110,1260,740,t,{rows:[1,0.6,0,0],textA:0,deco:true});cx.restore();}),{dy:-12});
+    const lA=fin(t,w("tablet","Half a year")-0.1,0.6)*(1-fin(t,tYe-0.4,0.5));if(lA>0.01)withA(cx,lA,()=>{T(cx,"half a year",600,700,{w:800,size:32,align:"center",color:rgba(BAB_CLAY,1)});
+      const cA=fin(t,w("tablet","carried on")-0.3,0.6);if(cA>0.01)withA(cx,cA,()=>{arrowTo(cx,780,470,850,470,BAB_SUN,0.9,{p:clamp((t-w("tablet","carried on")+0.3)/0.6,0,1),lw:3,head:12});T(cx,"the next half year",1040,700,{w:800,size:32,align:"center",color:rgba(BAB_CLAY,1)});});});
+    // the line of years: the tablets reach from 652 to 61 BCE, under four lines of kings
+    const yA=fin(t,tYe-0.3,0.8);if(yA>0.01){const tK=["Babylonian","Persian","Greek","Parthian"].map(k=>w("years",k)),p=clamp((t-w("years","nearly six hundred")+0.4)/4.4,0,1),u=easeCam(clamp((t-(w("today","astronomers")-0.4))/1.8,0,1));
+      d11_years(cx,t,{a:yA,p:toLine>0.99?Math.max(p,0.004):0.004,u,k:tK.map(x=>fin(t,x-0.2,0.6)),ends:fin(t,w("years","youngest")-0.3,0.6),span:fin(t,w("years","nearly six hundred")-0.2,0.6)*(1-fin(t,tCy-0.4,0.6))});
+      // the cycles later scholars used: Venus every 8 years, Jupiter every 83; and the coming year, predicted
+      const cyA=1-fin(t,tTo-0.3,0.7);
+      if(cyA>0.01)withA(cx,cyA,()=>{const pV=clamp((t-w("cycles","eight years")+0.3)/1.6,0,1),pJ=clamp((t-w("cycles","eighty-three")+0.3)/1.6,0,1);
+        d11_cycle(cx,-261,8,12,26,[255,226,170],pV,u);d11_cycle(cx,-250,83,1,150,[255,190,150],pJ,u);
+        withA(cx,fin(t,w("cycles","eight years")-0.2,0.5),()=>T(cx,"Venus: every 8 years",d11_yx(-261,u)-18,532,{w:800,size:30,align:"right",color:rgba([255,226,170],1)}));
+        withA(cx,fin(t,w("cycles","eighty-three")-0.2,0.5),()=>T(cx,"Jupiter: every 83 years",d11_yx(-208,u),370,{w:800,size:30,align:"center",color:rgba([255,190,150],1)}));
+        const tPr=w("cycles","to predict");if(t>tPr-0.3)arrive(cx,1700,258,t,tPr-0.3,()=>{bab_clay(cx,1530,190,340,136);T(cx,"the coming year",1556,246,{f:"mono",w:500,size:28,color:rgba(mix(ACA_INK,BAB_BRICK,0.5),1)});T(cx,"planets, eclipses",1556,298,{w:800,size:30,color:rgba(ACA_INK,0.96)});},{dy:-12});});
+      // today: the line reaches the present, and the eclipse records show the day growing longer
+      const tdA=fin(t,w("today","eclipse records")-0.3,0.8);if(tdA>0.01)withA(cx,tdA,()=>{const X=yr=>d11_yx(yr,u),Ly=yr=>500-(yr+720)/2746*200;
+        T(cx,"today",X(2026),714,{f:"mono",w:500,size:28,align:"right",color:rgba(INK,0.9)});
+        const lp=clamp((t-w("today","the day")+0.3)/2.4,0,1);cx.save();cx.strokeStyle=rgba(D11_MOONLIT,0.95);cx.lineWidth=3;cx.shadowColor=rgba(D11_MOONLIT,0.7);cx.shadowBlur=10;cx.beginPath();
+        for(let s=0;s<=60*lp;s++){const yr=-720+s/60*2746;s?cx.lineTo(X(yr),Ly(yr)):cx.moveTo(X(yr),Ly(yr));}cx.stroke();cx.restore();
+        for(let i=0;i<14;i++){const yr=-720+i*48+hash(i,751)*20,q=fin(t,w("today","eclipse records")+i*0.06,0.4);if(q>0.01)withA(cx,q,()=>{glow(cx,X(yr),Ly(yr)+(hash(i,752)-0.5)*14,10,BAB_SUN,0.5);cx.fillStyle=rgba(BAB_SUN,1);cx.beginPath();cx.arc(X(yr),Ly(yr)+(hash(i,752)-0.5)*14,4,0,TAU);cx.fill();});}
+        withA(cx,fin(t,w("today","eclipse records"),0.6),()=>T(cx,"Babylon's eclipse records",X(-560),420,{w:800,size:30,align:"left",color:rgba(BAB_SUN,1)}));
+        withA(cx,fin(t,w("today","longer")-0.2,0.6),()=>{T(cx,"the day grows longer:",1720,190,{w:800,size:32,align:"right",color:rgba(D11_MOONLIT,1)});T(cx,"about 1.8 thousandths of a second a century",1720,236,{w:700,size:30,align:"right",color:rgba(INK,0.95)});});});}
+  };
+  // 3. the utility: Tomás's map, kept by him alone; without him it stops; kept one way, by everyone, it outlives anyone's job
+  const now=cx=>{setScreen(cx,S);bg2(cx);motes(cx,t);cx.save();drift(cx,t-tUt,{dur:tTe-tUt+2},{z:0.02,y:440});
+    const tO=w("utility","only he"),tS=w("utility","stops"),tK=w("outlive","one way"),tE=w("outlive","everyone"),gone=fin(t,tS-0.1,1.0)*(1-fin(t,tK-0.4,0.8)),back=fin(t,tE-0.5,0.8);
+    const PEO=[["grace",300,0],["ama",540,1],["farah",1380,2]],st=gone;
+    d11_mapCard(cx,690,150,540,400,{stale:st,hi:[0,1,2,3,4,5].map(i=>back*pulseAt(t,tE+i*0.18,1.6)),glow:back*0.6});
+    if(t<tK+0.4){const lA=fin(t,tO-0.2,0.5)*(1-fin(t,tK-0.6,0.5));if(lA>0.01)withA(cx,lA,()=>{kt_lock(cx,1200,560,1.0,[200,200,210],1,0);tag(cx,960,620,"only Tomás can change it",[200,210,230],{align:"center",size:30});});}
+    d11_fade(cx,(1-gone)*fin(t,tUt-0.4,0.8),c2=>d11_personR(c2,"tomas",1600,1060,0.8,{t,pose:"stand",expr:t>tO?"concerned":"calm"}));
+    if(gone>0.01)withA(cx,gone*(1-back),()=>tag(cx,960,620,"it stops when he does",ACA_WARN,{align:"center",size:30}));
+    PEO.forEach(([id,x,i])=>{const a=fin(t,tE-0.5+i*0.2,0.8);if(a<=0.01)return;d11_fade(cx,a,c2=>{if(x>960)d11_personR(c2,id,x,1060,0.78,{t});else person(c2,id,x,1060,0.78,{t});});
+      d11_thread(cx,x<960?x+60:x-60,520,x<960?690:1230,230+i*90,clamp((t-tE-i*0.2)/0.8,0,1),LAY6[[2,0,4][i]][1],{a:0.6*a});});
+    withA(cx,back,()=>tag(cx,960,620,"kept one way, by everyone",ACA,{align:"center",size:30}));
+    cx.restore();vign(cx,S);};
+  // 4. Babylon again: the next watcher on the roof, and the test
+  const night2=cx=>{setScreen(cx,S);cx.save();focus(cx,t,[[tTe-0.6,980,560,1.04],[B,960,540,1.0]],4.0);d11_babylon(cx,t,{});
+    d11_scribe(cx,1000,952,320,t,{dir:1,up:1-0.8*pulseAt(t,tTe+2.2,2.4),write:pulseAt(t,tTe+2.4,2.0)});cx.restore();
+    d11_testCard(cx,960,300,fin(t,tTe-0.1,0.6)*(1-fin(t,B+0.6,0.6)),{hi:pulseAt(t,w("test","could"),1.6)});vign(cx,S);};
+  let first=true;[[A1,night1],[A2,clay],[A3,now],[A4,night2]].forEach(([a,fn])=>{if(a<=0.002)return;if(first){fn(ctx);first=false;}else d11_fade(ctx,a,fn);});
+  if(A1>0.002||A2>0.002)vign(ctx,S);
+  acaTitle(ctx,S,t,B+1.0,"A map people and agents can read","kept in one tool, read by people and agents","Film 1 of 4 · Continuous architecture");});
 
 /* ---------- 2. Useful, so at risk ---------- */
 const D11_NOTE="How do we keep the map alive?";
@@ -2723,12 +3002,12 @@ scene("risk",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
   ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
   const tU=c("used"),tSt=c("stale"),tS=c("slides"),tC=c("copies"),tG=w("copies","glossary"),tW=c("worse"),tT=w("worse","trust"),tF=c("fails"),tN=w("fails","nobody"),tX=w("fails","fails");
   const st=fin(t,tSt,1.4),wv=fin(t,tW-0.1,0.7)*(1-fin(t,tF,0.6)),dim=fin(t,tN-0.4,0.8);
-  // Tomás's note, from the end of When strategy moves: the question this film answers
+  // Tomás's note: the question this film answers
   arrive(ctx,330,180,t,0.3,()=>sticky(ctx,330,180,500,128,D11_NOTE,{col:NOTEC[0],size:32,st:0,rot:-0.025}),{dy:-20});
   // the map, used every week: three uses pinned round it
-  const pu=k=>pulseAt(t,w("used",k),1.4),uses=[["requests, read with the skipper's test",330,460,"skipper's test",NOTEC[2],-0.02],["rules, each given a home",1590,210,"rules",NOTEC[3],0.02],["one page for the minister",1590,430,"minister",NOTEC[1],-0.015]];
+  const pu=k=>pulseAt(t,w("used",k),1.4),uses=[["requests, each tied to a decision",330,460,"requests",NOTEC[2],-0.02],["rules, each given a home",1590,210,"rules",NOTEC[3],0.02],["one page for the minister",1590,430,"minister",NOTEC[1],-0.015]];
   const hiA=fin(t,w("typed","applications")-0.3,0.5)*(1-fin(t,c("copies")-0.3,0.5));
-  arrive(ctx,960,330,t,0.6,()=>d11_mapCard(ctx,680,110,560,440,{stale:st,glow:Math.max(pu("skipper's test"),pu("rules"),pu("minister")),hi:[0,0,0,0,hiA,0]}),{dy:-16});
+  arrive(ctx,960,330,t,0.6,()=>d11_mapCard(ctx,680,110,560,440,{stale:st,glow:Math.max(pu("requests"),pu("rules"),pu("minister")),hi:[0,0,0,0,hiA,0]}),{dy:-16});
   const uOut=1-fin(t,tS-0.4,0.6);
   uses.forEach(([s_,x,y,k,col,rot])=>{const t0=w("used",k)-0.2;if(t<t0)return;const q=fin(t,t0,0.6)*uOut;if(q<=0.01)return;
     const ex=x<960?680:1240,ey=clamp(y,170,520);arrowTo(ctx,x<960?x+220:x-220,y,ex,ey,[90,80,64],0.7*q,{p:fin(t,t0+0.2,0.6),lw:3,head:12});
@@ -2775,7 +3054,7 @@ scene("risk",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
       const e=D11_MAP.R[2][0],ex=cx_+(-120+e.u*240)*sc_,ey=cy_+(-34+18*2.5)*sc_,ro=fin(t,tT+0.4,0.5);if(ro>0.01)withA(ctx,ro,()=>{ring(ctx,ex,ey,30*sc_/1.4,D11_RED,0.95,3.5);tag(ctx,ex+40,ey+sc_*100-20,"out of date",D11_RED,{size:30});});});}
   // Tomás, the only one who edits it; then, if he left
   const tL=c("fails"),gone=fin(t,tL+0.3,1.2);
-  withA(ctx,1-gone,()=>d11_personR(ctx,"tomas",1730,1060,0.78,{t,pose:t>c("note")&&t<c("note")+2.4?"explain":"stand",expr:t>tSt?"concerned":"calm"}));
+  withA(ctx,1-gone,()=>d11_personR(ctx,"tomas",1730,1060,0.78,{t,pose:"stand",expr:t>tSt?"concerned":"calm"}));
   if(gone>0.01)withA(ctx,gone*(1-dim*0.5),()=>{ctx.save();ctx.setLineDash([9,9]);ctx.strokeStyle=rgba(TECH,0.55);ctx.lineWidth=2.4;ctx.beginPath();ctx.ellipse(1730,612,40,50,0,0,TAU);ctx.moveTo(1650,1000);ctx.quadraticCurveTo(1660,700,1730,690);ctx.quadraticCurveTo(1800,700,1810,1000);ctx.stroke();ctx.restore();});
   ctx.restore();
   if(dim>0.01){setScreen(ctx,S);ctx.fillStyle=rgba([8,6,4],0.6*dim);ctx.fillRect(0,0,W,H);}
@@ -2960,7 +3239,7 @@ scene("reads",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const RY=i=>270+i*56;// the middle of each row in the side panel
   // the agent walks the layers for the change, then goes to the rules for the column
   const walk0=w("change","walks")-0.3,wp=clamp((t-walk0)/2.8,0,1),toTop=ease(clamp((t-(tCh-0.2))/0.8,0,1)),toRule=ease(clamp((t-(tK+0.2))/0.9,0,1));
-  const AY=t<tK?lerp(lerp(420,RY(0),toTop),RY(5),ease(wp)):lerp(RY(5),RY(0),toRule),busy=fin(t,w("request","applies")-0.2,0.4)*(1-fin(t,w("request","decision"),0.5))+fin(t,walk0,0.3)*(1-fin(t,walk0+2.9,0.4))+fin(t,tK+0.2,0.3)*(1-fin(t,w("column","rule")+0.5,0.5));
+  const AY=t<tK?lerp(lerp(420,RY(0),toTop),RY(5),ease(wp)):lerp(RY(5),RY(0),toRule),busy=fin(t,w("request","asks")-0.2,0.4)*(1-fin(t,w("request","decision"),0.5))+fin(t,walk0,0.3)*(1-fin(t,walk0+2.9,0.4))+fin(t,tK+0.2,0.3)*(1-fin(t,w("column","rule")+0.5,0.5));
   const hiRow=D11_TREE.map((_,i)=>{const pass=t>=walk0&&t<walk0+3.2&&i<6?clamp(1-Math.abs(AY-RY(i))/56,0,1):0;return Math.max(pass,i===0?fin(t,w("column","rule")-0.3,0.4)*(1-fin(t,tI+1.0,0.6)):0);});
   d11_tree(ctx,80,150,440,{p:1,hi:hiRow});
   // the agent arrives, and reads the map
@@ -2968,10 +3247,10 @@ scene("reads",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     kt_scan(ctx,570,AY,300,one?AY:400,Math.max(sw,busy*0.9)*ag,t,{w:one?24:230});
     arrive(ctx,600,AY,t,tA-0.3,()=>kt_agent(ctx,600,AY,30,t,{busy}),{dy:0,from:0.6});
     withA(ctx,fin(t,tA+0.2,0.5)*(1-fin(t,tQ-0.2,0.4)),()=>T(ctx,"an agent",600,AY+80,{w:700,size:28,align:"center",color:rgba(KT_AI,1)}));}
-  // a request: the skipper's test, then the decision, the capability and the owner, or nothing
+  // a request: who will decide what with the answer, then the decision, the capability and the owner, or nothing
   const q1=fin(t,tQ-0.1,0.5)*(1-fin(t,tCh-0.7,0.5));if(q1>0.01){
     arrive(ctx,1270,182,t,tQ-0.1,()=>d11_ask(ctx,700,120,1140,"a request","Which streets can take more solar?",{a:q1}),{dy:-14});
-    withA(ctx,q1*fin(t,w("request","skipper's")-0.2,0.5),()=>{T(ctx,"the skipper's test",720,292,{f:"mono",w:500,size:28,color:rgba(KT_AI,1)});T(ctx,"who will decide what with the answer, and when?",720+tw(ctx,"the skipper's test",28,500,"mono")+22,292,{w:700,size:28,color:rgba(INK,0.92)});});
+    withA(ctx,q1*fin(t,w("request","asks")-0.2,0.5),()=>{T(ctx,"it asks",720,292,{f:"mono",w:500,size:28,color:rgba(KT_AI,1)});T(ctx,"who will decide what with the answer?",720+tw(ctx,"it asks",28,500,"mono")+22,292,{w:700,size:28,color:rgba(INK,0.92)});});
     const TR=[["decision","decision","approve a solar connection",D11_KIND.decision[1]],["capability","capability","assess network capacity",STR],["actor","owner","Grace Achieng",TRUST]];
     if(t>w("request","decision")-0.4)arrive(ctx,1270,450,t,w("request","decision")-0.4,()=>d11_trace(ctx,700,320,1140,TR,{a:q1,rows:[fin(t,w("request","decision")-0.1,0.4),fin(t,w("request","capability")-0.1,0.4),fin(t,w("request","owner")-0.1,0.4)]}),{dy:-12});
     const nA=fin(t,w("request","nothing")-1.0,0.5);if(nA>0.01){arrive(ctx,1270,682,t,w("request","nothing")-1.0,()=>d11_ask(ctx,700,620,1140,"a request","A live outage dashboard for the lobby",{a:q1*nA,size:32}),{dy:-12});
@@ -3064,7 +3343,7 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();focus(ctx,t,[[0,1540,640,1.35],[w("day","badge")-1.4,960,540,1.0]],1.8);
   // her desk, as Tomás's was: a badge, a page of acronyms, a list of systems; and this time, the map
   const desk=fin(t,0.2,1.0),dk=1-fin(t,tA-0.7,0.6);
-  const ex=t>tG+0.6?"relieved":t>w("day","list")&&t<tM+0.4?"concerned":"calm",pose=t>tF+0.4&&t<tF+3.0?"explain":"stand";
+  const ex=t>tG+0.6?"relieved":t>w("day","list")&&t<tM+0.4?"concerned":"calm",pose="stand";
   withA(ctx,desk,()=>{arrive(ctx,1560,700,t,tSp-0.2,()=>d11_personR(ctx,"zofia",1560,1010,0.95,{t,expr:ex,pose}),{dy:20});
     const g=ctx.createLinearGradient(0,790,0,H);g.addColorStop(0,"rgba(30,38,58,0.99)");g.addColorStop(1,"rgba(10,14,24,1)");ctx.fillStyle=g;ctx.fillRect(-400,790,W+800,320);ctx.fillStyle="rgba(150,180,230,0.25)";ctx.fillRect(-400,790,W+800,2);});
   if(dk>0.01)withA(ctx,dk,()=>{
@@ -3081,111 +3360,62 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     arrive(ctx,820,400,t,tF-0.3,()=>d11_pr(ctx,360,260,920,"OBJ-003 reading: a 30-minute interval","information/OBJ-003.yml",{a:pA,kicker:"drafted by Zofia Nowak",diff:[["+","interval: 30 minutes"],["+","evidence: DEC-018 · time-of-use · Mar 2028"]],rows:[fin(t,w("first","drafted")-0.1,0.6),fin(t,w("first","drafted")+0.4,0.6)],state:"waiting for Grace Achieng",stateCol:AMBER,glow:pulseAt(t,w("first","Grace")+0.3,1.4)}),{dy:-14});}
   ctx.restore();eaYear(ctx,80,80,"spring 2028",EAC,fin(t,tSp,0.6)*(1-fin(t,tA-0.6,0.6)));vign(ctx,S);});
 
-/* ---------- 11. Still sailing ---------- */
-// 2007: five Hawaiian navigators sail to Satawal, and Mau makes them master navigators, with eleven more round him. Each Hawaiian
-// light starts by an island ([island, dx, dy]; Nainoa's, the middle one, from Oʻahu) and takes its place in an arc above Mau's.
-const D11_PWO=[[-62,-24],[-32,-44],[0,-52],[32,-44],[62,-24]],D11_FROM=[["Hawaiʻi",-10,-14],["Maui",10,-16],["Oʻahu",-4,-14],["Molokaʻi",4,16],["Hawaiʻi",18,14]];
-// the Hawaiian navigators who stay at home in 2007
-const D11_STAY=[["Kauaʻi",-10,10],["Oʻahu",-18,12],["Maui",-6,20]];
-// the people the five taught, two each, and some of the people those taught: [x, y, teacher's x, y, generation, delay], from the five's homes
-const D11_GEN=(()=>{const G=[],F=D11_FROM.map(([n,dx,dy])=>{const[x,y]=d11_pac(n);return[x+dx,y+dy];});
-  F.forEach(([x,y],i)=>[0,1].forEach(j=>{const an=hash(i*2+j,601)*TAU,r=30+16*hash(i*2+j,602),sx=x+Math.cos(an)*r,sy=y+Math.sin(an)*r*0.75;G.push([sx,sy,x,y,1,i*0.22+j*0.3]);
-    if(hash(i*2+j,603)<0.7){const a2=an+(hash(i*2+j,604)-0.5)*1.6,r2=22+10*hash(i*2+j,605);G.push([sx+Math.cos(a2)*r2,sy+Math.sin(a2)*r2*0.75,sx,sy,2,1.1+i*0.18+j*0.25]);}}));return G;})();
-scene("sailing",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tD=c("died"),tN=c("now"),tMa=w("pwo","master"),tDi=w("died","died"),tL=w("died","What he"),tF=w("now","first voyage"),tH=w("now","Hōkūleʻa");
-  const sea=fin(t,tH-0.4,1.0);
-  // the chart: Satawal in 2007 and in 2010; then the five go home, and what Mau taught passes on
-  if(sea<0.99){d11_chartBg(ctx,S);ctx.save();
-    const CK=[[0,860,260,1.25],[w("pwo","Mau made")-0.5,362,350,2.3],[tL,860,250,1.15],[tL+1.6,1365,140,2.6]],z=focusZ(t,CK,1.9);focus(ctx,t,CK,1.9);
-    d11_chart(ctx,t,{z,labH:fin(t,0.4,0.6)*(1-fin(t,w("pwo","Mau made")-0.6,0.5))});
-    const[sx,sy]=d11_pac("Satawal"),isl=(n,dx,dy)=>{const[x,y]=d11_pac(n);return[x+dx,y+dy];};
-    // Mau, on Satawal; in 2010 his light fades to a ring, which stays
-    d11_light(ctx,sx,sy,5.5,t,{k:fin(t,0.2,0.8),dim:fin(t,tDi-0.1,1.6)});
-    d11_name(ctx,"Mau Piailug",sx,sy+20+52/z,"center",fin(t,w("pwo","Mau")-0.1,0.6)*(1-fin(t,tL,0.6)),{size:32/z});
-    // the pwo: light rings out from Mau as they become master navigators; eleven more round him, who stay on Satawal
-    const pw=clamp((t-tMa+0.1)/1.6,0,1);if(pw>0&&pw<1)ring(ctx,sx,sy,8+pw*80,D11_KNOW,0.75*(1-pw),2.4/z);
-    for(let i=0;i<11;i++){const an=-Math.PI/2+(i+0.5)*TAU/11;d11_light(ctx,sx+Math.cos(an)*24,sy+Math.sin(an)*20,2.6,t,{k:fin(t,tMa+0.2+i*0.05,0.5)});}
-    // the Hawaiians who stay at home; the five who sail to Satawal, and home again
-    D11_STAY.forEach(([n,dx,dy],i)=>{const[x,y]=isl(n,dx,dy);d11_light(ctx,x,y,4,t,{k:fin(t,0.3+i*0.1,0.6)});});
-    let back=0;D11_FROM.forEach(([n,dx,dy],i)=>{const[hx,hy]=isl(n,dx,dy),px=sx+D11_PWO[i][0],py=sy+D11_PWO[i][1],t1=0.7+i*0.16,p1=(t-t1)/2.3,t2=tL+0.3+i*0.12,p2=(t-t2)/2.1,mst=fin(t,tMa+0.1+i*0.08,0.6);back=Math.max(back,t2+2.1);
-      if(p1<=0)d11_light(ctx,hx,hy,4,t,{k:fin(t,0.4+i*0.1,0.6)});
-      else{const tr=1-fin(t,t1+2.3,1.0);if(tr>0.01)withA(ctx,tr,()=>d11_pass(ctx,hx,hy,px,py,Math.min(p1,1),D11_KNOW,{bend:-0.14,trail:0.3}));}
-      if(p1>=1&&p2<=0)d11_light(ctx,px,py,4.4,t,{k:fin(t,t1+2.2,0.4)*lerp(0.6,1,mst)});
-      if(p2>0){const tr=1-fin(t,t2+2.1,1.0);if(tr>0.01)withA(ctx,tr,()=>d11_pass(ctx,px,py,hx,hy,Math.min(p2,1),D11_KNOW,{bend:0.14,trail:0.3}));if(p2>=1)d11_light(ctx,hx,hy,4.4,t,{k:1});}});
-    d11_name(ctx,"Nainoa Thompson",sx,sy-52-30/z,"center",fin(t,w("pwo","Nainoa")-0.1,0.6)*(1-fin(t,tL-0.2,0.6)),{size:32/z});
-    // home, each teaches others, and they teach others in turn
-    D11_GEN.forEach(([x,y,x0,y0,g,dt])=>{const t0=back-0.3+dt,p=(t-t0)/0.9;if(p<=0)return;withA(ctx,1-fin(t,t0+0.9,1.2),()=>d11_pass(ctx,x0,y0,x,y,Math.min(p,1),D11_KNOW,{bend:0.35,trail:0.4}));d11_light(ctx,x,y,g===1?3.8:3.2,t,{k:fin(t,t0+0.8,0.4)});});
-    d11_name(ctx,"Hawaiʻi",1290,124,"right",fin(t,back-0.2,0.6),{size:32/z});
-    // that first voyage, from Maui towards Tahiti, fifty years ago
-    const[mx,my]=d11_pac("Maui"),[tx,ty]=d11_pac("Tahiti"),pR=clamp((t-(tF-0.6))/3.0,0,1);if(pR>0){d11_pass(ctx,mx,my,tx,ty,pR,CLAY,{bend:-0.12,trail:0.8,lw:2.4/z});
-      d11_name(ctx,"1976",mx+40/z,my+210/z,"left",fin(t,tF-0.2,0.5),{size:32/z,color:rgba(mix(CLAY,INK,0.3),1)});}
-    ctx.restore();}
-  // fifty years on: Hōkūleʻa at sea at dawn, navigated by people Mau taught, and by people they taught
-  if(sea>0.01)withA(ctx,sea,()=>{setScreen(ctx,S);ctx.save();
-    const t0=tH-0.4,cxN=640+(t-t0)*6,cyN=700,stern=cxN-282,tM=w("now","people Mau"),tT=w("now","people they");
-    focus(ctx,t,[[0,cxN+80,560,1.0],[tM-0.7,stern+240,600,1.3],[tT+0.9,cxN+80,560,1.0]],1.8);
-    const dawn=0.3+0.5*fin(t,t0,5.0);
-    d11_sky(ctx,S,t,{dawn,turn:t*0.0016});d11_sea(ctx,t,{dawn});
-    // the star compass round the canoe, as Nainoa Thompson teaches it: thirty-two equal houses
-    const RA=0.85*fin(t,tH+0.2,1.0),rp=clamp((t-tH-0.2)/2.4,0,1);
-    d11_compass(ctx,cxN,cyN+10,820,124,t,{a:RA,half:"back",p:rp,pts:rp,equal:true});
-    d11_canoe(ctx,cxN,cyN,1.0,t,{lit:0.5+0.4*dawn,col:mix([170,200,240],[255,196,150],dawn),nav:fin(t,tM-0.2,0.8),app:fin(t,tT-0.2,0.8),crew:6});
-    d11_compass(ctx,cxN,cyN+10,820,124,t,{a:RA,half:"front",p:rp,pts:rp,equal:true});
-    ctx.restore();});
-  // where and when
-  setScreen(ctx,S);eaYear(ctx,80,80,"Satawal · 2007",CLAY,fin(t,0.4,0.6)*(1-fin(t,tD-0.6,0.5)));
-  eaYear(ctx,80,80,"Satawal · 2010",CLAY,fin(t,tD-0.1,0.6)*(1-fin(t,tN-0.6,0.5)));
-  eaYear(ctx,80,80,"Hōkūleʻa · 2026",CLAY,fin(t,tH-0.1,0.6));
-  vign(ctx,S);});
+/* ---------- 11. Back to the watch ---------- */
+// Babylon: watcher after watcher on the same roof, each reading the last tablet and carrying on, the tablets piling up on the
+// parapet; the six hundred years again, every king along them. Then the utility: Grace confirms Zofia's change, and the map passes
+// the watcher's test; by the summer, thirty people keep their parts of it; and if Tomás left tomorrow, it would carry on.
+const D11_RELAY=[[820,1,0.92],[1010,1,1.0],[900,-1,0.95],[1060,1,0.97]];
+scene("back",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
+  const tK=c("kings"),tC=c("confirm"),tSu=c("summer"),tL=c("left");
+  const A1=1-fin(t,tK-0.6,1.0),A2=fin(t,tK-0.6,1.0)*(1-fin(t,tC-0.6,1.0)),A3=fin(t,tC-0.6,1.0);
+  const roof=cx=>{setScreen(cx,S);cx.save();focus(cx,t,[[0,980,600,1.12],[tK-1.6,980,560,1.04]],1.8);d11_babylon(cx,t,{});
+    // the watchers, one after another, each faded in and out as one picture; each leaves a tablet on the pile
+    const T0=i=>0.5+i*1.75;let done=0;
+    D11_RELAY.forEach(([x,dir,s],i)=>{const t0=T0(i),last=i===D11_RELAY.length-1,a=fin(t,t0,0.6)*(last?1:1-fin(t,t0+1.9,0.6));if(t>t0+2.1)done=i+1;if(a<=0.01)return;
+      d11_fade(cx,a,c2=>d11_scribe(c2,x,952,320*s,t,{dir,up:fin(t,t0+0.9,0.6),write:pulseAt(t,t0+0.2,0.9)}));});
+    for(let i=0;i<done;i++)d11_tab(cx,1290+(i%2)*10,D11_WALL-12-i*16,48,{rot:(hash(i,761)-0.5)*0.12,glow:0.25,a:fin(t,T0(i)+2.1,0.5)});
+    cx.restore();
+    bab_tag(cx,760,214,"no one kept it alone",fin(t,w("each","no one")-0.2,0.7)*(1-fin(t,w("each","Each watcher")-0.4,0.5)));
+    bab_tag(cx,760,214,"each read the last tablet, and carried on",fin(t,w("each","Each watcher")-0.1,0.7)*(1-fin(t,tK-0.8,0.5)));};
+  const years=cx=>{setScreen(cx,S);bab_sky(cx,t,{dawn:0,day:0,moon:false,hz:1300});cx.fillStyle="rgba(10,8,14,0.62)";cx.fillRect(0,0,W,H);
+    const tKi=w("kings","every king");d11_years(cx,t,{p:1,k:D11_KINGS.map((_,i)=>0.55+0.45*fin(t,tKi+i*0.25,0.5)),ends:1});
+    bab_tag(cx,960,300,"written one way",fin(t,tK-0.2,0.7));
+    bab_tag(cx,700,400,"it outlived every watcher who kept it",fin(t,w("kings","every watcher")-0.2,0.7));
+    bab_tag(cx,1220,780,"and every king they served",fin(t,tKi-0.2,0.7));vign(cx,S);};
+  const utility=cx=>{setScreen(cx,S);bg2(cx);motes(cx,t);cx.save();drift(cx,t-tC,{dur:sc.dur-tC},{z:0.02,y:440});
+    const tOk=w("confirm","confirms"),tPs=w("confirm","passes"),ok=t>tOk+0.5,prA=1-fin(t,tSu-0.6,0.6),gone=fin(t,w("left","left")-0.1,1.2);
+    // Grace confirms Zofia's change, and a new version of the map goes out; the watcher's test, passed
+    if(prA>0.01){arrive(cx,600,385,t,tC-0.4,()=>d11_pr(cx,130,190,940,"OBJ-003 reading: a 30-minute interval","information/OBJ-003.yml",{a:prA,kicker:"drafted by Zofia Nowak",diff:[["+","interval: 30 minutes"],["+","evidence: DEC-018 · time-of-use · Mar 2028"]],rev:[["Grace Achieng","network",fin(t,tOk+0.1,0.5),fin(t,tOk-0.3,0.5)]],okWord:"confirmed",state:ok?"confirmed · v3.5":"waiting for Grace Achieng",stateCol:ok?TRUST:AMBER,glow:pulseAt(t,tOk+0.5,1.4)}),{dy:-14});
+      d11_testCard(cx,600,640,fin(t,tPs-0.6,0.6)*prA,{mark:fin(t,tPs,0.5),pass:true,hi:pulseAt(t,tPs+0.2,1.6)});}
+    // by the summer: thirty people keep their parts of the map, and each change is confirmed by its owner
+    const mA=fin(t,tSu-0.4,0.8);if(mA>0.01){arrive(cx,610,390,t,tSu-0.4,()=>d11_mapCard(cx,300,170,620,440,{title:"the map · v4.2",glow:0.4+0.6*pulseAt(t,w("summer","thirty")+1.2,1.6),hi:[0,1,2,3,4,5].map(i=>0.6*pulseAt(t,w("summer","owners")+i*0.3,1.2))}),{dy:-14});
+      for(let i=0;i<30;i++){const an=Math.PI*(0.95+1.1*i/29),x=610+Math.cos(an)*430,y=390+Math.sin(an)*300,q=fin(t,w("summer","thirty")-0.2+i*0.05,0.4)*mA;if(q<=0.01)continue;
+        withA(cx,q,()=>{const col=i%3?BIZ:TECH;glow(cx,x,y,18,col,0.35);cx.fillStyle=rgba(mix(col,[255,255,255],0.2),1);cx.beginPath();cx.arc(x,y-8,7,0,TAU);cx.fill();rr(cx,x-9,y+2,18,12,6);cx.fill();});}
+      [0,1,2].forEach(i=>{const t0=w("summer","confirm")+i*0.6;kt_gtick(cx,420+i*190,300+i*90,13,fin(t,t0,0.4)*mA);});
+      withA(cx,fin(t,w("summer","thirty")-0.1,0.6)*mA,()=>tag(cx,610,770,"30 people keep their parts",BIZ,{align:"center",size:30}));
+      // a change confirmed after Tomás has gone: the map carries on
+      kt_gtick(cx,820,520,14,fin(t,tL+1.6,0.4));withA(cx,fin(t,tL+1.4,0.6),()=>tag(cx,1300,214,"the map carries on",TRUST,{align:"center",size:30}));}
+    // the people who keep it true: Grace, Zofia and Tomás, who leaves
+    arrive(cx,1270,700,t,tC-0.3,()=>d11_personR(cx,"grace",1270,1030,0.8,{t,pose:"stand"}),{dy:20});
+    arrive(cx,1540,700,t,tC-0.1,()=>d11_personR(cx,"zofia",1540,1030,0.84,{t,expr:ok?"relieved":"calm"}),{dy:20});
+    d11_fade(cx,fin(t,tC,0.8)*(1-gone),c2=>d11_personR(c2,"tomas",1800,1030,0.8,{t}));
+    cx.restore();vign(cx,S);};
+  let first=true;[[A1,roof],[A2,years],[A3,utility]].forEach(([a,fn])=>{if(a<=0.002)return;if(first){fn(ctx);first=false;}else d11_fade(ctx,a,fn);});
+  if(A1>0.002)vign(ctx,S);});
 
-/* ---------- 12. The map before the data ---------- */
-const D11_FILMS=["Day one","Who it serves, and how it pays","Why it moves","What it must be able to do","How value reaches people","Who does it, and where meaning changes","Today, and where it's going","Now the questions appear","Rules with a home","When strategy moves","A map people and agents can read"];
-// the layers each film adds to the map, as Day one showed them
-const D11_ADDS=[[],[0],[0],[1],[2],[2,3],[4,5],[0,1],[3],[0,1,2,3,4,5],[3]];
-const D11_ANS="A map stays alive while people use it, keep it true, and can pass it on.";
-scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tC=w("confirm","confirms"),tT=w("confirm","The map"),tPs=w("confirm","passes"),tA=c("answer"),tLy=c("layers"),tDa=c("data"),tO=c("over"),tIn=w("over","into");
-  const wall=1-fin(t,tLy-0.8,1.0);setScreen(ctx,S);bg2(ctx);motes(ctx,t);if(wall>0.01)withA(ctx,wall,()=>wallBg(ctx,S,t));
-  ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
-  if(wall>0.01)withA(ctx,wall,()=>{
-    // Grace confirms Zofia's change, and a new version of the map goes out
-    const ok=t>tC+0.5,pA=1-fin(t,tA-0.7,0.6);
-    if(pA>0.01)arrive(ctx,600,385,t,0.1,()=>d11_pr(ctx,130,190,940,"OBJ-003 reading: a 30-minute interval","information/OBJ-003.yml",{a:pA,kicker:"drafted by Zofia Nowak",diff:[["+","interval: 30 minutes"],["+","evidence: DEC-018 · time-of-use · Mar 2028"]],rev:[["Grace Achieng","network",fin(t,tC+0.1,0.5),fin(t,c("confirm")-0.3,0.5)]],okWord:"confirmed",state:ok?"confirmed · v3.5":"waiting for Grace Achieng",stateCol:ok?TRUST:AMBER,glow:pulseAt(t,tC+0.5,1.4)}),{dy:-14});
-    // the navigator's test, passed: someone else can sail by it
-    d11_testCard(ctx,600,650,fin(t,tT-0.3,0.6)*pA,{mark:fin(t,tPs,0.5),pass:true,hi:pulseAt(t,tPs+0.2,1.6)});
-    // Tomás's last note, from When strategy moves, and its answer, written out
-    const tW=w("answer","answer:"),wr=clamp((t-w("answer","a map"))/4.4,0,1);
-    arrive(ctx,660,240,t,tA-0.2,()=>sticky(ctx,660,240,660,150,D11_NOTE,{col:NOTEC[0],size:38,st:wr,rot:-0.025}),{dy:-20});
-    arrive(ctx,700,540,t,tW-0.2,()=>sticky(ctx,700,540,800,290,D11_ANS,{col:NOTEC[0],size:42,p:wr,rot:0.012}),{dy:-24,from:1.06});
-    // the people who keep it true
-    arrive(ctx,1270,700,t,0.1,()=>d11_personR(ctx,"grace",1270,1030,0.8,{t,pose:t>tC-0.4&&t<tC+1.9?"explain":"stand"}),{dy:20});
-    arrive(ctx,1540,700,t,0.3,()=>d11_personR(ctx,"zofia",1540,1030,0.84,{t,expr:ok?"relieved":"calm"}),{dy:20});
-    arrive(ctx,1800,700,t,tA-0.7,()=>d11_personR(ctx,"tomas",1800,1030,0.8,{t,pose:t>tA&&t<tA+2.6?"explain":"stand"}),{dy:20});});
-  // the map, layer by layer, as Day one promised it: the films that drew each layer, and the map now full
-  const sA=fin(t,tLy-0.7,0.9);if(sA>0.01)withA(ctx,sA,()=>{
-    const W7=["who it serves","why it moves","what it must","how value","who does the work","what runs"],W3=["the questions","rules with","a change"];
-    const at_=i=>i===0?w("layers","Layer"):i<7?w("layers",W7[i-1]):i<10?w("data",W3[i-7]):tO;
-    const lit=D11_FILMS.map((_,i)=>fin(t,at_(i)-0.1,0.5)),fill=[0,0,0,0,0,0],hi=[0,0,0,0,0,0];
-    D11_ADDS.forEach((ls,i)=>ls.forEach(l=>{fill[l]=Math.max(fill[l],lit[i]);hi[l]=Math.max(hi[l],i?pulseAt(t,at_(i),2.0):0);}));
-    // a change walked down every layer: a light goes down the map; then the whole map glows, holding what the organisation means
-    const tWk=w("data","walked");for(let l=0;l<6;l++)hi[l]=Math.max(hi[l],pulseAt(t,tWk+l*0.22,0.9),0.6*pulseAt(t,w("over","holds"),2.6));
-    arrive(ctx,470,130,t,tLy-0.4,()=>T(ctx,"the map, layer by layer",470,134,{w:800,size:32,align:"center",color:rgba(SOFT,1)}),{dy:10});
-    const R=layerStack(ctx,150,190,600,{sh:66,gap:20,fill,hi,p:clamp((t-tLy+0.5)/1.6,0,1)});
-    // the eleven films: seven to understand the utility, then four for data
-    const cA=1-fin(t,w("over","Turning")-0.4,0.8),Y=i=>i<7?118+i*62:620+(i-7)*62;
-    const card=(i,x,y)=>{const v=lit[i],col=i<7?EAC:D11_RULE;withA(ctx,(0.35+0.65*v)*cA,()=>{glass(ctx,x,y,770,54,14,col,{glow:8+14*v,ea:0.5+0.4*v,fill:"rgba(7,12,24,0.94)"});
-      T(ctx,(i+1)+"",x+26,y+38,{f:"mono",w:500,size:28,color:rgba(col,1)});T(ctx,D11_FILMS[i],x+76,y+38,{w:700,size:28,color:rgba(INK,0.6+0.4*v)});});};
-    if(cA>0.01){arrive(ctx,1100,96,t,tLy-0.3,()=>withA(ctx,cA,()=>T(ctx,"understand the utility",1050,100,{w:800,size:28,color:rgba(EAC,1)})),{dy:10});
-      for(let i=0;i<7;i++)arrive(ctx,1440,Y(i)+27,t,tLy-0.3+i*0.08,()=>card(i,1050,Y(i)),{dy:16});
-      withA(ctx,fin(t,tDa-0.3,0.6)*cA,()=>T(ctx,"for data",1050,602,{w:800,size:28,color:rgba(D11_RULE,1)}));
-      for(let i=7;i<11;i++)arrive(ctx,1440,Y(i)+27,t,tDa-0.3+(i-7)*0.1,()=>card(i,1050,Y(i)),{dy:16});}
-    // over to From words to data: the meaning the map holds, carried one way into the data
-    const t0=tIn-0.5;if(t>t0){const HX=1100,HY=380,HW=700,HH=220,gl=pulseAt(t,w("over","From"),2.0);
-      R.forEach(([x,y,w_,h],l)=>{const pu=(t-(t0+0.6+l*0.1))/1.0;d11_thread(ctx,x+w_+30,y+h/2,HX-10,HY+40+l*28,clamp((t-t0-l*0.08)/1.0,0,1),LAY6[l][1],{a:0.5,pulse:pu>0&&pu<1?pu:null});});
-      arrive(ctx,HX+HW/2,HY+HH/2,t,t0,()=>{glass(ctx,HX,HY,HW,HH,20,D11_RULE,{glow:14+16*gl,ea:0.85,fill:"rgba(6,10,20,0.96)"});
-        T(ctx,"seven films on data modelling",HX+34,HY+64,{f:"mono",w:500,size:28,color:rgba(D11_RULE,1)});T(ctx,"From words to data",HX+34,HY+152,{w:800,size:60});},{dy:-16});}});
+/* ---------- 12. A map people and agents can read ---------- */
+// the answer, in six cards: how the map is kept, and how it changes; then what's next, and the end card
+const D11_ANS=[["answer","once","each element once, in one tool",EAC],["answer","ID","an ID, an owner and its evidence",TRUST],["answer","every view","every view made from it",[150,190,255]],
+  ["keep","Review","every change reviewed",EAC],["keep","agents","agents read and draft",KT_AI],["keep","owners confirm","the owners confirm",BIZ]];
+scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
+  ctx.save();drift(ctx,t,sc,{z:0.02,y:480});
+  D11_ANS.forEach(([id,word,s,col],i)=>{const t0=w(id,word)-0.2,x=i<3?190:1010,y=230+(i%3)*150;if(t<t0)return;
+    arrive(ctx,x+360,y+48,t,t0,()=>{glass(ctx,x,y,720,96,18,col,{glow:12+10*pulseAt(t,t0+0.2,1.4),ea:0.85,fill:"rgba(7,12,24,0.95)"});ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x+44,y+48,9,0,TAU);ctx.fill();T(ctx,s,x+76,y+60,{w:800,size:34});},{dy:-12});});
+  withA(ctx,fin(t,w("answer","Keep")-0.2,0.6),()=>T(ctx,"how the map is kept",550,190,{f:"mono",w:500,size:28,align:"center",color:rgba(SOFT,1)}));
+  withA(ctx,fin(t,c("keep")-0.2,0.6),()=>T(ctx,"how it changes",1370,190,{f:"mono",w:500,size:28,align:"center",color:rgba(SOFT,1)}));
+  const nA=fin(t,c("next")-0.2,0.6);if(nA>0.01)arrive(ctx,960,760,t,c("next")-0.2,()=>tag(ctx,960,760,"next: a first draft, not a blank page",ACA,{align:"center",size:32}),{dy:10,a:nA});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"A map people and agents can read",EAC,"A map lives while people use it, keep it true, and can pass it on.","Film 11 of 11");});
+  acaEnd(ctx,S,t,B+0.8,"A map people and agents can read","Kept one way, by everyone, a map outlives any one keeper.","Film 1 of 4 · Continuous architecture");});
 
 // where the chapters meet (From words to data's joins.js): the tool's window shows the map's name where the slides showed it, a little
 // way off, so the wall's slides and copies leave first, over the bare wall, and then the window comes in

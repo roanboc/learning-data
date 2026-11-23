@@ -1304,7 +1304,9 @@ def moved_series_pages():
     out = []
     for M in MOVED:
         new = [next(S for S in SERIES if S["id"] == i) for i in M["was"]]
-        old = [(S, f) for S in new for f in films(S)[1]]
+        # the films the old series had: not one that joined a new series later (FILM_MOVED), which has its own way from its old page
+        later = {m["key"] for m in FILM_MOVED}
+        old = [(S, f) for S in new for f in films(S)[1] if f["key"] not in later]
         first = next(S for S in new if S["id"] == M["first"])
         for lg in ("en", "es"):
             pre = "" if lg == "en" else "es/"
@@ -1336,6 +1338,34 @@ def moved_series_pages():
                                       + " and ".join(f'<a href="../../{S["slug"]}/{which}/"><i>{E(S["name"][lg])}</i></a>' for S in new) + ".",
                                   f'<i>{E(M["name"][lg])}</i> es ahora dos series, cada una con sus labs y situaciones: '
                                       + " y ".join(f'<a href="../../{S["slug"]}/{which}/"><i>{E(S["name"][lg])}</i></a>' for S in new) + "."), js))
+    return out
+
+
+# A film that moved to another series, as the portal was consolidated (the author, 23 November 2026): its key, and the progress
+# kept under it, stay; its old page leads to its page in its new series, so old links keep working. key: the film's; was: the id in
+# SERIES of the series it left. Its labs and situations moved with it: the old series' pack says where (moved), and the new one
+# carries the answers over (renum).
+FILM_MOVED = [dict(key="a-map-people-and-agents-can-read", was="enterprise-architecture")]
+
+
+def moved_film_pages():
+    """The old page of every film in FILM_MOVED, in each language: (path under site/, html), leading to its page in its new series."""
+    out = []
+    for M in FILM_MOVED:
+        old = next(S for S in SERIES if S["id"] == M["was"])
+        S, f = next((S, f) for S in SERIES for f in films(S)[1] if f["key"] == M["key"])
+        for lg in ("en", "es"):
+            pre = "" if lg == "en" else "es/"
+            to = f'../../{f["path"]}'
+            name = f["title"] if lg == "en" else f["site"]["title_es"]
+            say = T(lg, f'<i>{E(name)}</i> is now in <a href="{to}"><i>{E(S["name"][lg])}</i></a>.',
+                    f'<i>{E(name)}</i> está ahora en <a href="{to}"><i>{E(S["name"][lg])}</i></a>.')
+            out.append((f'{pre}{old["slug"]}/{M["key"]}/index.html',
+                        f'<!doctype html><html lang="{lg}"><head><meta charset="utf-8"><title>{E(name)} · Learning Data</title><meta name="robots" content="noindex">\n'
+                        f'<link rel="canonical" href="{BASE}{pre}{f["path"]}">\n'
+                        f'<!-- made by site-tools/build_series.py: the film moved to another series (FILM_MOVED) -->\n'
+                        f'<script>location.replace("{to}"+location.search+location.hash);</script><meta http-equiv="refresh" content="0; url={to}"></head>\n'
+                        f'<body><p>{say}</p></body></html>\n'))
     return out
 
 
@@ -3376,6 +3406,7 @@ def pages():
                         out.append((f'{hf["href"]}{which}/index.html',
                                     moved_page(lg, S, dict(index=n - 1), which, "../" * (hf["href"].count("/") + 1) + S["slug"] + "/", hf["title"][lg])))
     out += moved_series_pages()
+    out += moved_film_pages()
     return [(rel, stamp(rel, text)) for rel, text in out]
 
 

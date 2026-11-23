@@ -2865,7 +2865,7 @@ scene("brick",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
       bab_tag(cx,960,214,"to keep the river's water out",a5_win(t,w("city","to keep")+0.6,tNe-0.3,0.6));
       bab_tag(cx,960,214,"never done: king after king, on the same line",a5_win(t,tKa-0.3,w("never","for centuries")-0.2,0.6));
       bab_tag(cx,960,214,"repaired for centuries",a5_win(t,w("never","for centuries")+0.3,tLo-0.8,0.6));});
-  acaTitle(ctx,S,t,B+0.8,"Every change, checked","every element owned and sourced; every change tested and walked","Film 2 of 3 · Continuous architecture");});
+  acaTitle(ctx,S,t,B+0.8,"Every change, checked","every element owned and sourced; every change tested and walked","Film 3 of 4 · Continuous architecture");});
 
 /* ---------- 2. What will it touch? ---------- */
 // Tomás and the map, changing every day; planned work on a street; last year's move to a new table, and the letters that kept reading
@@ -3250,7 +3250,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   withA(ctx,fin(t,1.0,1.0),()=>{ctx.save();ctx.translate(960,646);ctx.scale(0.42,0.42);ctx.translate(-1115,-400);
     a5_texMap(ctx,t,A5_TM,{deco:true,stamp:1,chk:clamp((t-w("answer","test the map")+0.2)/2.4,0,1),walk:clamp((t-w("walkit","Walk each")+0.2)/2.2,0,1)});ctx.restore();});
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"Every change, checked","Give every element an owner and a source. Test every change.","Film 2 of 3 · Continuous architecture");});
+  acaEnd(ctx,S,t,B,"Every change, checked","Give every element an owner and a source. Test every change.","Film 3 of 4 · Continuous architecture");});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

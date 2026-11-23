@@ -85,5 +85,5 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A data practice isn't built once either: products end, needs grow, and people move on.":"Una práctica de datos tampoco se hace de una vez: los productos acaban, las necesidades crecen, la gente se va.",
 "So it's kept: every part with a stage and a date, a way out tested each year, and the map changed with every change.":"Así que se mantiene: cada pieza con una etapa y una fecha, una salida probada cada año, y el mapa cambiado con cada cambio.",
 "At the utility, the next end is planned, not forced, and what's the utility's own goes with it.":"En la empresa de energía, el próximo final se planea, no se impone, y lo que es propio de la empresa se va con ella.",
-"Next, the last series on enterprise architecture: AI and continuous architecture.":"Sigue la última serie de arquitectura empresarial: IA y arquitectura continua."
+"Next, Continuous architecture: a map people and agents can read, and kept alive.":"Sigue Arquitectura continua: un mapa que personas y agentes pueden leer, y que se mantiene vivo."
 });

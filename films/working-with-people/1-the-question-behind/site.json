@@ -76,5 +76,9 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "one-list-not-twenty", "line": "One front door for every request, with five questions, and one list ordered in the open", "line_es": "Una sola puerta para cada pedido, con cinco preguntas, y una lista ordenada a la vista"},
+    {"key": "prototype-first", "line": "How the team found the answer in three weekly rounds, with something real in front of Graham", "line_es": "Cómo el equipo encontró la respuesta en tres rondas semanales, con algo real frente a Graham"}
+  ],
   "tile": [760, 300, 480]
 }

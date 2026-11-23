@@ -25,5 +25,8 @@
   "next_h_es": "Lo que sigue: los conceptos detrás de cada capacidad, en palabras del negocio.",
   "past": ["The qanats of Iran: shareholders and diggers", "The shareholders own the water and its rules; the diggers keep the channel."],
   "past_es": ["Los qanats de Irán: accionistas y excavadores", "Los accionistas son dueños del agua y de sus reglas; los excavadores mantienen el canal."],
+  "seen_before": [
+    {"key": "who-does-it", "line": "Retail counts accounts and the network connection points: customer means two things, with a wall between them", "line_es": "Comercialización cuenta cuentas y la red puntos de conexión: cliente significa dos cosas, con un muro entre ellas"}
+  ],
   "tile": [600, 360, 440]
 }

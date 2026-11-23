@@ -88,5 +88,10 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "no-secret-to-lose", "line": "A ladder of ways to sign in, with nothing to keep secret at the top", "line_es": "Una escalera de formas de entrar, sin nada que guardar en secreto en lo más alto"},
+    {"key": "who-is-it-really", "line": "Rights from a group that holds what a role's work needs, never from a person", "line_es": "Permisos de un grupo con lo que necesita el trabajo de un rol, nunca de una persona"},
+    {"key": "people-and-groups", "line": "Personal tokens switched off, and every key that ends with the stay", "line_es": "Tokens personales apagados, y cada llave que termina con la estancia"}
+  ],
   "tile": [640, 420, 480]
 }

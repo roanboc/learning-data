@@ -83,5 +83,8 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "measures-that-matter", "line": "How the page of measures was chosen: few, in groups, each with a baseline and the decision it serves", "line_es": "Cómo se eligió la página de medidas: pocas, en grupos, cada una con su línea base y la decisión a la que sirve"}
+  ],
   "tile": [720, 420, 520]
 }

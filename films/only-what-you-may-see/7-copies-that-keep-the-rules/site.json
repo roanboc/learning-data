@@ -102,5 +102,11 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "an-agreement-first", "line": "An agreement for each use: where the study may work, what may leave it, and when it ends", "line_es": "Un acuerdo para cada uso: dónde puede trabajar el estudio, qué puede salir y cuándo termina"},
+    {"key": "show-the-least", "line": "Each column hidden its own way, and totals with small counts hidden", "line_es": "Cada columna oculta a su manera, y totales con las cifras pequeñas ocultas"},
+    {"key": "one-policy-for-many-tables", "line": "One policy that hides each class, by its tag, wherever the records are read", "line_es": "Una política que oculta cada clase, por su etiqueta, dondequiera que se lean los registros"},
+    {"key": "the-marketplace", "line": "A table shared through OpenSharing with another organisation, on any platform", "line_es": "Una tabla compartida por OpenSharing con otra organización, en cualquier plataforma"}
+  ],
   "tile": [640, 300, 520]
 }

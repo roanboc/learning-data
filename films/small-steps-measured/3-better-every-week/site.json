@@ -65,6 +65,22 @@
         "line_es": "El ciclo de probar un cambio, estudiar el resultado frente a lo esperado, y conservarlo o descartarlo. Wikipedia cuenta su historia con el nombre que muchos usan, ciclo de Deming o PHVA.",
         "href": "https://en.wikipedia.org/wiki/PDCA",
         "href_es": "https://es.wikipedia.org/wiki/C%C3%ADrculo_de_Deming"
+      },
+      {
+        "title": "Measure the work, not the people",
+        "title_es": "Mide el trabajo, no a las personas",
+        "line": "The leading data people film where reading the measures together finds two waits, and takes them out.",
+        "line_es": "La película de Liderar equipos de datos donde leer juntos las medidas encuentra dos esperas, y las quita.",
+        "href": "https://data.learn-all.org/ownership-and-performance/measure-the-work/",
+        "href_es": "https://data.learn-all.org/es/ownership-and-performance/measure-the-work/"
+      },
+      {
+        "title": "One small change at a time",
+        "title_es": "Un cambio pequeño cada vez",
+        "line": "The leading data people film where one person's weekly chore gets better a step at a time, and the leader gives the time.",
+        "line_es": "La película de Liderar equipos de datos donde la tarea semanal de una persona mejora paso a paso, y quien lidera da el tiempo.",
+        "href": "https://data.learn-all.org/leading-a-data-team/one-small-change/",
+        "href_es": "https://data.learn-all.org/es/leading-a-data-team/one-small-change/"
       }
     ]
   },

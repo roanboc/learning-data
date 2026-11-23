@@ -70,5 +70,8 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "a-reason-to-keep-it", "line": "A reason you can say for each piece of personal data, or it goes", "line_es": "Una razón que se pueda decir para cada dato personal, o se va"}
+  ],
   "tile": [320, 330, 440]
 }

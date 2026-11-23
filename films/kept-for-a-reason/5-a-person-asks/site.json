@@ -87,5 +87,10 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "know-what-you-hold", "line": "A class for every column, so each one that names a person, or holds a code for one, is known", "line_es": "Una clase para cada columna, para saber cuáles nombran a una persona o guardan un código suyo"},
+    {"key": "a-reason-to-keep-it", "line": "A plain reason for each piece of personal data kept", "line_es": "Una razón clara para cada dato personal que se guarda"},
+    {"key": "deleted-means-deleted", "line": "Every copy found and deleted on its date, old versions and locked copies included", "line_es": "Cada copia encontrada y borrada en su fecha, versiones antiguas y copias bloqueadas incluidas"}
+  ],
   "tile": [450, 360, 420]
 }

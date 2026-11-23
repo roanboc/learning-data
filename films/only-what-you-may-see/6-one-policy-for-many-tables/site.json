@@ -86,5 +86,11 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "tags-that-travel", "line": "Classes made tags, carried by every table made from the data", "line_es": "Clases convertidas en etiquetas, que lleva cada tabla hecha con los datos"},
+    {"key": "show-the-least", "line": "How to hide each column: a name masked whole, a date of birth cut to its year", "line_es": "Cómo ocultar cada columna: un nombre enmascarado entero, una fecha de nacimiento reducida al año"},
+    {"key": "grants-by-design", "line": "Grants made once, by area and role, so a new table has its readers from its first minute", "line_es": "Permisos dados una vez, por área y rol, para que una tabla nueva tenga lectores desde su primer minuto"},
+    {"key": "governed-in-unity-catalog", "line": "A first policy that masks every column tagged direct, in the whole catalog", "line_es": "Una primera política que enmascara cada columna etiquetada directa, en todo el catálogo"}
+  ],
   "tile": [372, 230, 300]
 }

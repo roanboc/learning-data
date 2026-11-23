@@ -61,5 +61,10 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "who-may-see-it", "line": "Every access given a purpose and an end date", "line_es": "Cada acceso con un propósito y una fecha de fin"},
+    {"key": "the-marketplace", "line": "One place to find data and ask for it", "line_es": "Un solo lugar para encontrar datos y pedirlos"},
+    {"key": "who-decides", "line": "The owner, who answers for the data, beside stewards and custodians", "line_es": "La dueña o el dueño, que responde por los datos, junto a responsables de datos y custodios"}
+  ],
   "tile": [340, 370, 400]
 }

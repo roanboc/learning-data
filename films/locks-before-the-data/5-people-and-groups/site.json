@@ -79,5 +79,9 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "governed-in-unity-catalog", "line": "Rights given to groups in the university's directory, so access follows a person's job", "line_es": "Permisos dados a grupos del directorio de la universidad, para que el acceso siga el puesto de cada persona"},
+    {"key": "who-is-it-really", "line": "A confidentiality agreement each person signs, and a group's rights kept only while it's current", "line_es": "Un acuerdo de confidencialidad que firma cada persona, y los permisos de un grupo solo mientras esté vigente"}
+  ],
   "tile": [560, 330, 480]
 }

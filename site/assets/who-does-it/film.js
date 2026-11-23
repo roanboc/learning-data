@@ -2223,7 +2223,7 @@ scene("two",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,960,160,t,w("edge","same word"),()=>tag(ctx,960,160,"one word, a different meaning on each side",PARCH,{align:"center",size:32}),{dy:10});
   arrive(ctx,960,232,t,w("edge","translated"),()=>tag(ctx,960,232,"translated at the edge, where it can fail",[220,230,255],{align:"center",size:30}),{dy:10});
   fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"Who does it, and where meaning changes","roles, actors, and the edges between domains",EAC,"Film 6 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"Who does it, and where meaning changes","roles, actors, and the edges between domains",EAC,"Film 6 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. A name on each step ---------- */
 const D6_STEPS=["take the call","find the fault","decide who goes first","send the crew","repair","switch back on","confirm"];
@@ -2428,7 +2428,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1580,420,t,cA,()=>sticky(ctx,1580,420,500,320,"Roles do the work; people, partners and agents fill them. Customer: two meanings, a wall, a translation at the edge.",{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/3.2,0,1),rot:0.015}),{dy:-30,from:1.06});
   arrive(ctx,1500,720,t,w("next","opens"),()=>sticky(ctx,1500,720,440,140,"What runs it today, "+d6_nb("and where is it going?"),{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"Who does it, and where meaning changes",EAC,"Know who does the work. Translate at the edges.","Film 6 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"Who does it, and where meaning changes",EAC,"Know who does the work. Translate at the edges.","Film 6 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the wall between network and retail, and the end back at the team's wall,
 // are other places that show the same two names elsewhere, so both open on a cut

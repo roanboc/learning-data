@@ -1,7 +1,7 @@
 /* Learning Data: Business architecture for data. The words of the series' labs (Take it apart) and scenarios (Make the call), in
    English. Keep the keys in step with learn.es.js. One playground for each film, each on the chapter it plays (film, chapter), with
-   four experiments (w.goals) the visitor ticks by making them happen; and twelve situations from every film, the series' evaluation,
-   each pointing to its playground. learn.js draws every picture from these words and keeps progress in this browser under
+   four experiments (w.goals) the visitor ticks by making them happen, and a lab in the shared classic kinds (site/assets/learn/classic.js);
+   and twelve situations from every film, the series' evaluation, each pointing to its playground. learn.js draws every picture from these words and keeps progress in this browser under
    "ld-business-architecture-for-data": the labs visited, the experiments ticked, and the answers by scenario number (film × 10 + its
    place). A page shows each situation's options in the order written here: the right answers are spread across the places, and the
    Spanish pack keeps them in the same places.
@@ -9,8 +9,15 @@
    scenario: type, n, lab, film. No other object here starts with id, and no other key is called kind or starts an object with type.
    Names and numbers follow the films' narration: Tomás, Grace, the head of retail, Ama, Farah; 310,000 accounts, 540,000 connection
    points, 352,000 in the merged table; 1,200 new homes and 340 families with two first bills; 34 working days to connect new solar;
-   2,600 meters held back until nine, billing at six, then at ten. */
+   2,600 meters held back until nine, billing at six, then at ten; four requests and the regulator's measure, minutes without power.
+   Films 5 and 6, Now the questions appear and Rules with a home, came from The map before the data on 23 November 2026, with their
+   labs and one situation each (81 and 94 there); the skipper's playground became Climb the ladder (ladder), with the trial well's test,
+   and Rules and expectations the business owns became film 7. So the evaluation keeps to twelve, Whose word? (22) and Owner or steward?
+   (32) left it: the series' labs still teach both. renum carries a visitor's progress over once: the series' own old numbers to the new
+   ones, then, from The map before the data's store, the two situations, the playgrounds' experiments, the labs visited and the classic
+   labs' ticks (learn.js). */
 window.BA={lang:"en",
+renum:{v:1,quiz:{"22":null,"32":null,"51":71,"52":72},from:[{store:"ld-enterprise-architecture",before:1,quiz:{"81":51,"94":61},labs:{skipper:"ladder",backlog:"backlog",rule:"rule",retailrule:"retailrule"},classic:"enterprise-architecture"}]},
 ui:{lab:"Lab",of:"of",watch:"Watch the chapter",next:"Next:",makeCall:"Make the call →",inPractice:"In practice",labsLabel:"The labs",
   again:"Start again",goals:"Experiments",reached:"done",reachedOne:"Done: {t}.",nOf:"{n} of {of} done",filmN:"Film {n} of {of}",
   scenario:"Situation",qsLabel:"The situations",score:"Score",answered:"answered",toGo:"to go",good:"Good call.",right:"Right.",notQuite:"Not quite.",
@@ -142,8 +149,71 @@ labs:[
   read:{boxes:"Boxes drawn",est:"Estimates Farah can see",none:"none",all:"all, marked"},
   end:"<b>All four done.</b> Breadth first, depth only on pain: every process at level two, and one branch at level three, where an estimate turned out to be born."}},
 {id:"depth",kind:"sort",film:4,chapter:"levels",c:"#8cd6ff",name:"Which level is it?",idea:"Processes are drawn in levels: macro processes at the top, processes with a trigger, an output and one person accountable, then their activities as a flow. Tasks stay out of the model.",points:["<b>Level one:</b> a macro process, eight to fifteen for a whole organisation, such as meter to cash.","<b>Level two:</b> a process, with a trigger, an output and one person accountable, such as check readings.","<b>Level three:</b> an activity in a flow, drawn only where it hurts. A click on a screen is a task, and stays out."],real:"When someone hands you a box, ask three questions: what starts it, what comes out, and who answers for it. If it has all three, it's a process. If it's one person's step inside one, it's an activity, and if it's a click, it's a task.",w:{prompt:"Seven boxes from the drawing of meter to cash. Which level is each one?",buckets:[["l1","level one: a macro process"],["l2","level two: a process"],["l3","level three: an activity"],["task","a task: it stays out"]],items:[{t:"Check readings: starts when the night's readings arrive, ends with readings ready for billing",b:"l2",why:"A trigger, an output and one person accountable: a level two process."},{t:"Meter to cash",b:"l1",why:"One of the thirteen macro processes: everything from a meter's reading to the money in the bank."},{t:"Estimate a missing reading",b:"l3",why:"An activity inside checking readings: the place an estimate is born, which level three can show."},{t:"Click approve on the exception screen",b:"task",why:"A click is a task. Months of tasks are boxes nobody reads."},{t:"Flag a reading that's out of its usual range",b:"l3",why:"Another activity in the flow of checking readings."},{t:"Bill customers: starts on billing day, ends with bills sent",b:"l2",why:"A process with its trigger and its output, under meter to cash."},{t:"Copy the exceptions into a spreadsheet",b:"task",why:"One person's way of doing a step. It stays out of the model."}],sayAll:"All {of} in the right place. Levels one and two everywhere, level three only where someone can name what hurts, and tasks never.",saySome:"{n} of {of} in the right place. Read why under the ones in red."}},
-/* ---------- 5 · Rules and expectations the business owns ---------- */
-{id:"expect",kind:"play",film:5,chapter:"late",c:"#e8a0ff",name:"Late, for whom?",
+/* ---------- 5 · Now the questions appear ---------- */
+{id:"ladder",kind:"play",film:5,chapter:"up",c:"#ffea82",name:"Climb the ladder",
+ idea:"A request matters when someone will act on its answer, in time. Ask each request what it would decide, and climb it to a goal or send it back; then grow a measure into its tree, and find the branch nobody asked about.",
+ points:["<b>A request matters when someone will act on its answer,</b> in time. Live data is not what makes it matter.",
+  "<b>Down from a goal:</b> a goal implies decisions, a decision needs questions answered, and a question needs a measure. It's Goal, Question, Metric, from the 1980s, with a decision added.",
+  "<b>A metric tree</b> breaks a measure into the measures that make it: a solid line is a formula, a dotted line a driver, a guess to test. A branch nobody asked about is a question to offer its owner."],
+ real:"Give every request its trial well: who will decide what with the answer, and when? Grow each tree from the measures your sector already publishes, and offer the branches nobody asked about, in a ticket, to build only on a yes.",
+ w:{prompt:"Pick a request and give it its trial well. Then grow the regulator's measure into a tree.",
+  start:"Four requests from the backlog, and a ladder: decision, capability, goal.",
+  alt:"A ladder from a request up to a decision, a capability and a goal, a tray for requests sent back, and the regulator's measure grown into a tree.",
+  goals:[["reach","A request climbs to a goal"],["back","A request goes back, and nobody misses it"],["tree","Grow a measure into its tree"],["offer","Offer the branch nobody asked about"]],
+  reqL:"Request",reqs:[["arrears","Households behind on bills, monthly",["whom to offer help","serve customers","keep bills affordable"]],
+   ["export","Every customer, exported monthly",null],["wait","Days each connection waits on capacity",["approve a new connection","connect customers","connect renewable power"]],["wall","A wall of live meters",null]],
+  askB:"Ask: what would you decide with it?",treeT:"Grow the measure into a tree",offerB:"Offer the branch nobody asked about",
+  rungs:["decision","capability","goal"],tray:"sent back",
+  tree:{root:"minutes without power, per customer, per year",often:"interruptions per customer, per year",long:"minutes per interruption",trees:"trees near the lines",
+   who:{root:"the regulator",often:"request #02",long:"nobody asked"},times:"×",solid:"formula",dotted:"driver, to test",offer:"Which lines stay off longest? To Grace"},
+  msg:{pick:"{r}.",
+   arrears:"Retail decides with it, each month: whom to offer help. That serves customers, and reaches a goal that had no measure for the people who pay: keep bills affordable.",
+   export:"An export nobody can explain. It goes back with one question: what would you decide with it? Nobody misses it.",
+   wait:"The connections team decides with it at every application: approve a new connection. It reaches the top: the reason connecting solar takes 34 working days.",
+   wall:"A dashboard nobody acts on. It goes back with the question; if someone would decide with it, they can say so. Nobody does.",
+   treeOn:"The regulator's measure, as a tree: minutes without power = interruptions per customer × minutes per interruption. Solid lines are formulas; trees near the lines hang on a dotted line, a driver to test.",
+   treeOff:"The tree folds back into one number.",
+   offerNo:"Grow the tree first: the branch nobody asked about only shows in it.",
+   offer:"Nobody asked how long each interruption lasts. The data team offers it to Grace, who owns operating the network, as a question with its decision. If she says yes, it's built."},
+  read:{climbed:"Climbed to a goal",back:"Sent back"},
+  end:"<b>All four done.</b> Requests that reach a decision climb to a goal; the rest go back with one question. And the measure's tree showed a branch nobody had asked about, offered to its owner, to build on a yes."}},
+{id:"backlog",kind:"sort",film:5,chapter:"up",c:"#ffea82",name:"Who decides with it?",idea:"The builders' question mattered because they would act on the answer, by choosing whether to dig. Put eight requests from the backlog to the same test: who will decide what with the answer, and when?",points:["<b>A request matters when someone will act on its answer,</b> in time. Live data is not what makes it matter.","<b>Traced up,</b> a request reaches a decision, the capability it belongs to, and a goal. Some get there through an obligation.","<b>A request that reaches nothing</b> goes back to whoever asked, with one question: what would you decide with it?"],real:"Put the test to every request before anyone builds anything. Half of a backlog often reaches nothing, and saying so, with the question, is kinder than building a report nobody acts on.",w:{prompt:"Eight requests from the reporting team's backlog. Does someone decide anything with each one?",buckets:[["yes","someone decides with it, in time"],["none","no one decides anything with it"]],items:[{t:"#02 · Which lines fail most often?",b:"yes",why:"Grace's planners, each spring: which lines to renew first. It reaches the top: a decision, the capability it belongs to, and a goal."},{t:"#01 · A dashboard of every outage, refreshed every minute, for the lobby",b:"none",why:"It's never out of date, and nobody decides anything with it. It goes back with one question."},{t:"#03 · Export every customer",b:"none",why:"An export nobody can explain. It goes back with one question: what would you decide with it?"},{t:"How many households are falling behind on their bills?",b:"yes",why:"Retail, each month: whom to offer help, before they fall too far behind. It reaches a goal that had no measure for the people who pay: keep bills affordable."},{t:"How much solar can each street take?",b:"yes",why:"The connections team, at each application: approve it, or not. It reaches the top, and it's the number nobody has yet: the reason connecting solar takes 34 working days."},{t:"#13 · Website visits, live",b:"none",why:"A dashboard nobody acts on. If someone would decide with it, they can say so when it goes back."},{t:"#36 · A report for a meeting in 2022",b:"none",why:"A report someone needed once. It goes back, and nobody misses it."},{t:"Hours customers were without power, each year, for the regulator",b:"yes",why:"The regulator, at each review: what the network may earn. Some requests reach the top through an obligation: the regulator decides with them."}],sayAll:"All {of} in the right place. Four requests have someone who decides with the answer, in time; they climb to a goal. The other four go back with one question: what would you decide with it?",saySome:"{n} of {of} in the right place. Read why under the ones in red."}},
+/* ---------- 6 · Rules with a home ---------- */
+{id:"rule",kind:"play",film:6,chapter:"split",c:"#96dec4",name:"Give the rule a home",
+ idea:"Day one's rule lives on the wall between the network and retail, so nobody owns it. Give it a home, draw it in ArchiMate 4, and see what happens when billing moves and a bill isn't corrected.",
+ points:["<b>A rule is a claim about how the organisation works,</b> written in the business's words, about the things it governs.",
+  "<b>Its home is the map:</b> attached to the step where it applies, with an owner who can change it and a reason that says why. A rule that crosses a domain's edge is two rules, joined by what crosses.",
+  "<b>In ArchiMate 4, a rule is a requirement,</b> one of the motivation elements. Its reason influences it, its step realises it, and its owner is associated with it. Version 4 has no constraint element and no rule element."],
+ real:"Start with the rules that already hurt: a complaint, an incident, an audit finding. Write each in the business's words, have its owner confirm it, and generate its tests or tracking table from the rule, never the rule from them.",
+ w:{prompt:"Day one's rule is written five ways, in five places, and lives on the wall. Choose its home, how it's drawn and where failures go; then move billing and plant a failure.",
+  start:"“An estimated reading stands only until the next actual reading”: on the wall, written five ways, owned by nobody.",
+  alt:"The network and retail with a wall between them; the rule on the wall, or split into two rules, one on each side, each with its owner and how it's drawn; and below, the tracking table and where its list goes.",
+  goals:[["split","Two rules, one on each side, joined by what crosses"],["move","Billing moves, and the rule keeps working"],["caught","A planted failure reaches its owner's team"],["req","Each rule drawn as ArchiMate 4 draws it"]],
+  ownL:"Who owns it",owns:[["script","The nightly script"],["grace","Grace, who owns the network"],["two","Two rules, one each side"]],
+  drawL:"In ArchiMate 4, draw each as",draws:[["constraint","A constraint"],["req","A requirement"],["brule","A business rule element"]],
+  failL:"When it isn't kept, the list goes to",fails:[["mail","A shared mailbox"],["queue","The owner's team, each morning"]],
+  moveB:"Move billing to a new system",plantB:"Plant a bill that isn't corrected",
+  wallRule:"estimate stands until the next actual",homeless:"no home",net:"network",ret:"retail",
+  netRule:"replace the estimate, send it on",retRule:"correct the next bill",crosses:"the replaced reading",
+  ownerNet:"Grace",ownerRet:"head of retail",billing:"billing",billing2:"new billing",track:"tracking table",to:{mail:"shared mailbox",queue:"billing team, each morning"},
+  glyph:{constraint:"constraint",req:"requirement",brule:"rule element"},none:"not drawn yet",listed:"1 bill, not corrected",
+  msg:{script:"The nightly script keeps it, on the wall: written five ways, and nobody can change it.",
+   grace:"Grace owns the network's half: replacing the estimate. Correcting a bill is retail's, so half the rule still has no owner.",
+   two:"Two rules, one on each side. Grace's: an estimate is replaced when the actual reading arrives, and sent to the retailer. The head of retail's: a bill based on a replaced estimate is corrected on the next bill. The replaced reading crosses, on the agreed list.",
+   constraint:"Version 4 has no constraint element: a constraint is now a kind of requirement, one that says what can't be done. These rules say what must be done.",
+   req:"A requirement, one of the motivation elements: its reason influences it, its step realises it, and its owner is associated with it.",
+   brule:"ArchiMate has no element called a rule. The map makes data rules and business rules two kinds of requirement.",
+   mail:"The list goes to a shared mailbox.",queue:"The list goes to the owner's team, each morning, with the rule and its owner on each row.",
+   moveOk:"Billing moved. The tracking table is generated again from the rule, one way, and keeps working.",
+   moveNo:"Billing moved, and the script that lived on the wall stopped. Nobody noticed for months.",
+   plantNoHome:"Nobody owns the bill's half: nothing lists it, and the wrong bill is paid.",
+   plantMail:"The tracking table lists it, and the list goes to a shared mailbox nobody reads.",
+   plantOk:"The tracking table lists it: a bill based on a replaced estimate, not corrected. The billing team sees it the next morning, with the rule and its owner."},
+  read:{owners:"Owners",home:"Home"},
+  end:"<b>All four done.</b> Two rules, one on each side, joined by what crosses. Each is a requirement with its owner, its reason and its step, and its tracking table is generated from it: ArchiMate says where a rule sits, not how it's checked."}},
+{id:"retailrule",kind:"compose",film:6,chapter:"split",c:"#96dec4",name:"Write retail's half",idea:"Day one's rule lives on the wall between the network and retail, so nobody owns it. Split it where it crosses, write each half once, and watch a tracking table come from each.",points:["<b>A rule is a claim about how the organisation works,</b> written in the business's words, about the things it governs.","<b>Its home is the map:</b> attached to the step where it applies, with an owner who can change it and a reason that says why.","<b>A rule that crosses a domain's edge is two rules,</b> joined by what crosses. A rule about the data gets tests; a rule about what the business does gets a tracking table. Both are generated from the rule, one way.","<b>In ArchiMate 4, a rule is a requirement,</b> one of the motivation elements. Its reason, a driver, influences it; the step where it applies realises it; its owner and the data objects it's about are associated with it. ArchiMate has no element called a rule, so data rules and business rules are two kinds of requirement."],real:"Start with the rules that already hurt: a complaint, an incident, an audit finding. Write each in the business's words, have its owner confirm it, and generate its tests or tracking table from the rule, never the rule from them.",w:{prompt:"The rule crosses the wall, so it's two rules. Write retail's half: “a bill based on a replaced estimate is corrected on the next bill”.",head:"Retail's rule:",slots:[{label:"about",opts:[{t:"a bill and a replaced estimate,",ok:true,why:"Written in the business's words."},{t:"the billing team's notes and macros,",ok:false,why:"The notes are one of the five places it was written. None of them is its home."}]},{label:"owner",opts:[{t:"owned by the complaints team,",ok:false,why:"The complaints team hears about it when it fails. It can't change the rule."},{t:"owned by the head of retail,",ok:true,why:"The person who owns billing, who can change it."}]},{label:"reason",opts:[{t:"because the regulator's retail code says so,",ok:true,why:"Every rule traces to a reason, here a regulation."},{t:"because customers keep complaining about it,",ok:false,why:"Complaints are how the problem showed up, not why the rule exists."}]},{label:"its step",opts:[{t:"applied when bills are paid.",ok:false,why:"By then the wrong bill has been paid."},{t:"applied where bills are made.",ok:true,why:"It applies at the bill step, in meter to cash."}]},{label:"in ArchiMate 4",opts:[{t:"In ArchiMate 4, a business rule element.",ok:false,why:"ArchiMate has no element called a rule. The map makes data rules and business rules two kinds of requirement."},{t:"In ArchiMate 4, a requirement.",ok:true,why:"The retail code influences it, billing realises it, and the head of retail is associated with it."}]}],sayStart:"Choose each part of the rule.",sayGood:"That's retail's half: in the business's words, with a person who owns it, a reason, and the step where it applies.",sayFix:"Not yet: read the notes under the parts in red."}},
+/* ---------- 7 · Rules and expectations the business owns ---------- */
+{id:"expect",kind:"play",film:7,chapter:"late",c:"#e8a0ff",name:"Late, for whom?",
  idea:"In January, a fault holds back 2,600 meters' readings until nine. Write down what billing needs, choose where the checks run, and run billing day.",
  points:["<b>A rule starts in a policy,</b> is made checkable as data rules and business rules, carried out by processes and procedures, and shown by records.",
   "<b>A reading is late only against the step that needs it,</b> and that step's service level, written down by the step's owner.",
@@ -172,7 +242,7 @@ labs:[
    worseNoCheck:"Nothing checked against billing's need: nobody heard until the bills went out."},
   read:{est:"Estimated bills",heard:"Who heard",nobody:"nobody",lead:"the metering lead",level:"Billing's level",guess:"a guess",set:"by ten, ≤ 1 in 100"},
   end:"<b>All four done.</b> A reading is late only against the step that needs it. Its owner writes what that step needs, the source checks first, and the platform checks only what the source can't."}},
-{id:"chainrule",kind:"sort",film:5,chapter:"late",c:"#e8a0ff",name:"Policy, rule, process or record?",idea:"A rule starts in a policy, is made checkable as data rules and business rules, is carried out by processes and procedures, and is shown by records.",points:["<b>A policy</b> says what the business wants, in general.","<b>A rule</b> makes it checkable: what must be true, by when, set by the owner of the step that needs it.","<b>A process or a procedure</b> carries it out; <b>a record</b> shows it was done."],real:"When a policy isn't being kept, look for the missing link. Usually nobody made it checkable: there's a policy, and a process, and no rule that says what must be true and by when.",w:{prompt:"Seven pieces of how billing gets its readings. What is each one?",buckets:[["policy","a policy"],["rule","a rule you can check"],["process","a process or procedure"],["record","a record that shows it"]],items:[{t:"Billing needs yesterday's readings by six in the morning, as its owner wrote down",b:"rule",why:"Checkable, and set by the owner of the step that reads the data: a reading is late only against it."},{t:"Customers are billed on actual readings wherever possible",b:"policy",why:"What the business wants, in general. Nothing can be checked against it until a rule says what and by when."},{t:"The night's log: 2,600 readings arrived at nine",b:"record",why:"It shows what happened, and, against billing's rule, that they were three hours late for billing."},{t:"Check the readings each night, before billing runs",b:"process",why:"A process that carries the rule out, starting with the source: the meter system answers for its readings."},{t:"An estimate is replaced by the next actual reading",b:"rule",why:"A data rule, checkable on every reading."},{t:"Billing day's run report, with the readings it used",b:"record",why:"A record that shows which readings each bill was based on."},{t:"When readings are missing, call the meter system's team before six",b:"process",why:"A procedure: how a person carries out the rule when something goes wrong."}],sayAll:"All {of} in the right place. A policy, made checkable as rules, carried out by processes and procedures, and shown by records.",saySome:"{n} of {of} in the right place. Read why under the ones in red."}}],
+{id:"chainrule",kind:"sort",film:7,chapter:"late",c:"#e8a0ff",name:"Policy, rule, process or record?",idea:"A rule starts in a policy, is made checkable as data rules and business rules, is carried out by processes and procedures, and is shown by records.",points:["<b>A policy</b> says what the business wants, in general.","<b>A rule</b> makes it checkable: what must be true, by when, set by the owner of the step that needs it.","<b>A process or a procedure</b> carries it out; <b>a record</b> shows it was done."],real:"When a policy isn't being kept, look for the missing link. Usually nobody made it checkable: there's a policy, and a process, and no rule that says what must be true and by when.",w:{prompt:"Seven pieces of how billing gets its readings. What is each one?",buckets:[["policy","a policy"],["rule","a rule you can check"],["process","a process or procedure"],["record","a record that shows it"]],items:[{t:"Billing needs yesterday's readings by six in the morning, as its owner wrote down",b:"rule",why:"Checkable, and set by the owner of the step that reads the data: a reading is late only against it."},{t:"Customers are billed on actual readings wherever possible",b:"policy",why:"What the business wants, in general. Nothing can be checked against it until a rule says what and by when."},{t:"The night's log: 2,600 readings arrived at nine",b:"record",why:"It shows what happened, and, against billing's rule, that they were three hours late for billing."},{t:"Check the readings each night, before billing runs",b:"process",why:"A process that carries the rule out, starting with the source: the meter system answers for its readings."},{t:"An estimate is replaced by the next actual reading",b:"rule",why:"A data rule, checkable on every reading."},{t:"Billing day's run report, with the readings it used",b:"record",why:"A record that shows which readings each bill was based on."},{t:"When readings are missing, call the meter system's team before six",b:"process",why:"A procedure: how a person carries out the rule when something goes wrong."}],sayAll:"All {of} in the right place. A policy, made checkable as rules, carried out by processes and procedures, and shown by records.",saySome:"{n} of {of} in the right place. Read why under the ones in red."}}],
 qs:[
 /* ---------- 1 · What the business owns ---------- */
 {type:"choice",n:11,lab:"own",film:1,title:"Three answers",vis:{k:"own"},
@@ -194,12 +264,6 @@ qs:[
   {t:"From the systems' tables, which already hold everything the business uses.",why:"Tables show what was built, in the systems' words, not what the business needs to know."},
   {t:"From the reference model, adopted whole, since experts in the industry wrote it.",near:true,why:"A model isn't the utility's own until its people confirm it, in their own words."}],
  why:"A reference model is never a blank page and never the answer: it's a first draft. The people who run each capability confirm, rename and add to it."},
-{type:"choice",n:22,lab:"draft",film:2,title:"Whose word?",vis:{k:"draft"},
- sit:"The reference model calls it a usage point. The network's people, their forms and their customers say connection point. What goes on the map?",
- opts:[{t:"Usage point, so the map matches the standard used to exchange data.",near:true,why:"Exchanges keep that word beside it. The map speaks the business's language."},
-  {t:"Both, as two concepts, one for each source that uses its own name.",why:"One thing with two names isn't two concepts: two definitions would drift apart."},
-  {t:"Connection point, with the model's word kept beside it for exchanges.",ok:true}],
- why:"The map uses the business's own words, one definition in each domain, and keeps the reference model's word beside it, for when data is exchanged."},
 {type:"choice",n:23,lab:"draft",film:2,title:"A number nobody holds",vis:{k:"draft"},
  sit:"Connecting new solar takes 34 working days, waiting on how much solar each street can take. No system holds that number. What comes first?",
  opts:[{t:"The data team builds it from the network model, then asks who owns it.",near:true,why:"Built before anyone says what it means, it would mean whatever the builder guessed."},
@@ -213,12 +277,6 @@ qs:[
   {t:"The data team, by keeping one account per address in its tables.",near:true,why:"That hides the duplicates in a report; families still get two bills from the source."},
   {t:"The two capabilities' owners, together, with the decision on the map.",ok:true}],
  why:"Each concept should have one creator, decided by the business. The decision goes on the map with its date, so nobody has to settle it again."},
-{type:"choice",n:32,lab:"matrix",film:3,title:"Owner or steward?",vis:{k:"matrix"},
- sit:"The head of retail owns accounts, all 310,000 of them. Someone has to answer questions about the definition and follow up when something's wrong, every day. Who?",
- opts:[{t:"A steward the owner names, such as retail's billing lead.",ok:true},
-  {t:"The data team, since it runs the tables that hold every account.",near:true,why:"It keeps the channel and owns none of it. A steward works with the concept in the business."},
-  {t:"The head of retail, since owning accounts means looking after each.",why:"An owner decides. The day-to-day care goes to a steward they name."}],
- why:"An owner decides what a concept means, the rules on it and how good it must be; a steward looks after it every day, for its owner."},
 {type:"choice",n:33,lab:"matrix",film:3,title:"A table nobody owns",vis:{k:"matrix"},
  sit:"A 2019 outage table feeds the regulator's yearly report. Whoever built it has left. How do you find its owner?",
  opts:[{t:"Ask the platform team which system loads the table each night.",why:"A system says where the data lives, not who decides what it means."},
@@ -238,14 +296,28 @@ qs:[
   {t:"The meters send estimates under the same code as actual readings.",near:true,why:"Meters send readings. Estimates are made in the check, which the tables never read."},
   {t:"Each estimate is deleted once the next actual reading arrives.",why:"The rule replaces it on the next bill; it doesn't erase its history."}],
  why:"A concept is born in the process that first writes it. Level three of checking readings showed a second kind of reading born there, so the tables now take readings from the check."},
-/* ---------- 5 · Rules and expectations the business owns ---------- */
-{type:"choice",n:51,lab:"expect",film:5,title:"Late, for whom?",vis:{k:"expect"},
+/* ---------- 5 · Now the questions appear ---------- */
+{type:"choice",n:51,lab:"ladder",film:5,title:"A wall of live meters",vis:{k:"ladder"},
+ sit:"The board asks for a live map of every smart meter, on a big screen in the board room, refreshed every minute. What do you do first?",
+ opts:[{t:"Give it its trial well first: who will decide what with it, and when?",ok:true},
+  {t:"Build it: live data is always useful, and the board is asking.",why:"Live isn't what makes a question matter. The lobby's outage dashboard was never out of date either, and reached nothing."},
+  {t:"Build a simpler version first, refreshed once a day instead.",near:true,why:"Slower doesn't help if nobody decides anything with it either."}],
+ why:"A question matters when someone will act on its answer, in time: a decision, a capability and a goal above it."},
+/* ---------- 6 · Rules with a home ---------- */
+{type:"choice",n:61,lab:"rule",film:6,title:"A rule on the map",vis:{k:"rule"},
+ sit:"Tomás puts the retail rule on the map: a bill based on a replaced estimate is corrected on the next bill. The retail code is its reason, billing applies it, and the head of retail owns it. How does ArchiMate 4 draw it?",
+ opts:[{t:"As a constraint, joined to the billing process that applies it.",near:true,why:"Version 4 has no constraint element: a constraint is now a kind of requirement. And the rule needs its reason and owner on the map, not only its step."},
+  {t:"As a requirement, linked to its reason, its step and its owner.",ok:true},
+  {t:"As a business rule element, drawn inside the billing process.",why:"ArchiMate has no element called a rule: the map makes data rules and business rules two kinds of requirement."}],
+ why:"ArchiMate says where a rule sits: a requirement. The retail code influences it, billing realises it, and its owner and the bill are associated with it. It doesn't say how it's checked: the tracking table is generated from the rule."},
+/* ---------- 7 · Rules and expectations the business owns ---------- */
+{type:"choice",n:71,lab:"expect",film:7,title:"Late, for whom?",vis:{k:"expect"},
  sit:"Readings from 2,600 meters arrive at nine. Billing ran at six; planning reads them a week later. The check says all is well. Were they late?",
  opts:[{t:"Late for everyone, as they missed the night they were taken.",why:"Planning reads them a week later, well in time."},
   {t:"Late for billing, by three hours, and on time for planning.",ok:true},
   {t:"Not late, since each arrived within the day the check allows.",near:true,why:"The check's day was a guess. Billing's need had never been written down."}],
  why:"A reading is late only against the step that needs it, and that step's service level, written down by the step's owner."},
-{type:"choice",n:52,lab:"expect",film:5,title:"Who sets the bar?",vis:{k:"expect"},
+{type:"choice",n:72,lab:"expect",film:7,title:"Who sets the bar?",vis:{k:"expect"},
  sit:"The data team wants a freshness check on meter readings. Whom should it ask first, and what?",
  opts:[{t:"The meter system's team: how fast it usually delivers each night's readings.",near:true,why:"That's what the source can do, not what the step that reads it needs."},
   {t:"Nobody: a reading within a day is the usual standard for every source.",why:"A guess, as in January: lateness is only against a step that needs the data."},
@@ -255,13 +327,16 @@ pics:{alt:{own:"Three counts of customers, and the business and the data team, e
    draft:"Capabilities at the top, and the concepts each one needs, drafted from a reference model.",
    matrix:"A matrix of capabilities and concepts, with a letter for create or read in each square.",
    levels:"Meter to cash at level one, its five processes at level two, and one of them at level three.",
+   ladder:"A ladder from a request up to a decision, a capability and a goal.",rule:"A rule, with its reason, its step and its owner around it.",
    expect:"A billing day's clock, when the readings arrive, and when billing runs."},
   own:{t:"Who owns what",rows:["Billing: 310,000 accounts","Network: 540,000 connection points","Data team: 352,000 customers"],key:"the business owns the meaning"},
   draft:{t:"What the business needs to know",rows:["Capability","Concepts it needs","Glossary, with owners"],key:"in the business's words"},
   matrix:{t:"Creates, reads, updates, deletes",rows:["Connection point: Connect creates","Account: one creator?","Outage: Operate creates"],key:"one creator, one owner"},
   levels:{t:"Meter to cash",rows:["Level 1: one macro process","Level 2: five processes","Level 3: only check readings"],key:"as deep as it hurts"},
+  ladder:{t:"A trial well for every request",rows:["A decision, in time","A capability","A goal"],key:"who will decide what with it, and when?"},
+  rule:{t:"A rule on the map",rows:["Reason: the retail code","Step: billing","Owner: the head of retail"],key:"a requirement, in ArchiMate 4"},
   expect:{t:"Billing day",rows:["Readings arrive: 9:00","Billing runs: 6:00","Planning reads: a week later"],key:"late only for the step that needs it"}},
-done:[["All twelve. You can draw what the business owns.","Meanings and rules with their owners, concepts in the business's words, one creator for each, processes as deep as they hurt, and expectations set by the step that needs them."],
+done:[["All twelve. You can draw what the business owns.","Meanings and rules with their owners, concepts in the business's words, one creator for each, processes as deep as they hurt, questions someone will act on, each rule written once, and expectations set by the step that needs them."],
   ["Nearly all of them.","Go back to the playground of the one you missed, and try it there."],
   ["A good start.","Each situation names its playground: try the ones you missed, then come back."],
-  ["Worth another pass.","Try the five playgrounds first; each answer is something you can make happen there."]]};
+  ["Worth another pass.","Try the seven playgrounds first; each answer is something you can make happen there."]]};

@@ -1,6 +1,6 @@
 # Processes, as deep as data needs: questions and assumptions
 
-*Enterprise architecture* · *Business architecture for data*, film 4 of 5 · PR #369 · [pull request](https://github.com/roanboc/learning-data/pull/369)
+*Enterprise architecture* · *Business architecture for data*, film 4 of 7 · PR #369 · [pull request](https://github.com/roanboc/learning-data/pull/369)
 
 [Watch it on the site](https://data.learn-all.org/business-architecture-for-data/processes-as-deep-as-data-needs/)
 
@@ -28,3 +28,11 @@
 | 18 | Labs for the series? | None yet, as in the series' other films: the series' lab comes with the platform series' last film, as the proposal plans, so the Pause and think questions link to no lab | `site/assets/processes-as-deep-as-data-needs/think.en.js` |
 | 19 | Spanish captions: which words? | Latin American Spanish, as the series' other films: la empresa, comercialización and quien dirige comercialización (never given a gender), equipo de datos, dueño, ticket; una parte (a share) and una porción (its sixteen-minute part), el mirab, partidores (the dividers); the process words of *The map before the data*: mapa de procesos, estratégicos, operativos, de apoyo, de evaluación, restablecer el suministro, del medidor al cobro; franjas (bands), macroproceso, disparador and resultado (trigger and output), and la persona que rinde cuentas (the one person accountable), never responsable, which is the steward's word. Two very short lines run outside the usual length: "Those near the end of it usually got none" (a little longer in Spanish) and "If it passes, it goes to billing" (a little shorter), each still a few words | `source/src/i18n/es/captions.js` |
 | 20 | *Rules with a home* already marks every reading actual or estimated (RUL-020), and *A map people and agents can read* shows its column, read_type. What was missing, then? | Where the data team took its readings from. The estimate is born in the check, after the meter, so tables loaded from the meters held no estimate at all, and the rows of a meter that stopped sending were simply missing. The film's table names the column read_type, every row "actual", until the data team takes its readings from the check and the estimates fill the empty rows. The column is there before the fix, as those two films have it; only where the rows come from changes | Chapter 7; `script.md`, *Rigour* |
+
+## Its last line, for the film after it (23 November 2026)
+
+When the portal was consolidated, *Now the questions appear* moved to this series as film 5, and *Rules and expectations the business owns* became film 7. Each line: the question I would have asked, what I did instead, and where it shows.
+
+| # | Question | Assumption taken | Where it shows |
+|---|---|---|---|
+| 21 | The last line led to *Rules and expectations the business owns*, now film 7. What does it say now? | "Tomás's next note goes back to the backlog from day one, and asks which questions matter", the question *Now the questions appear* opens on; the note beside him says "Which questions matter?". The note's sound moved to the new words. | 6:57 |

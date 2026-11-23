@@ -1,0 +1,66 @@
+{
+  "key": "rules-with-a-home",
+  "title": "Rules with a home",
+  "sub": "Business architecture for data, the second series on enterprise architecture: one rule found in five places and none of them its home; split at the wall into the network's rule and retail's, joined by what crosses; each with an owner and a reason; written in the business's words, about data objects in the domains that own them; attached to the step whose service level sets what to expect of the data; in ArchiMate 4, the standard the map follows, a requirement, with its reason, its step, its owner and its data linked to it; with tests generated, one way, from a rule about the data, and a tracking table from a rule about what the business does; and, written this way, generally an ontology.",
+  "howto": "Paper on a wall is a draft, or a rule found somewhere; glass in the layers' colours is the confirmed model. Purple is motivation, where reasons and rules live; amber is strategy, where meter to cash and its stages are; yellow is the business layer, the work inside a stage; peach is information, where the data objects live. Blue is the network's side of the wall, rose is retail's. Cyan outlines the technical side, gold the business side. In Khorasan, blue is the water, and the people of the story are silhouettes.",
+  "src": [
+    "../../../shared/src/ba.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "book",
+    "home",
+    2.8
+  ],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahss's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahss"
+    ],
+    [
+      "\\bFarah\\b",
+      "Fah-rah"
+    ],
+    [
+      "\\bAma\\b",
+      "Ah-mah"
+    ],
+    [
+      "\\bqanats\\b",
+      "kah-nahts"
+    ],
+    [
+      "\\bqanat\\b",
+      "kah-naht"
+    ],
+    [
+      "\\bKhorasan\\b",
+      "Khoh-rah-sahn"
+    ],
+    [
+      "\\bNishapur\\b",
+      "Nee-shah-poor"
+    ],
+    [
+      "\\bAbdallah\\b",
+      "Ab-dahl-lah"
+    ],
+    [
+      "\\bTahir\\b",
+      "Tah-heer"
+    ],
+    [
+      "\\bKitab-i Qani\\b",
+      "Kee-tahb-ee Kah-nee"
+    ],
+    [
+      "\\bArchiMate\\b",
+      "Arky-mate"
+    ]
+  ]
+}

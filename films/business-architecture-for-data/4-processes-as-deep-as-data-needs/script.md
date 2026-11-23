@@ -1,6 +1,6 @@
 # Business architecture for data · Processes, as deep as data needs: script
 
-*The script of *Processes, as deep as data needs*, film 4 of 5 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: the four bands, APQC's levels, breadth first and depth on pain, a SIPOC for each level-2 process naming its business objects, where data is born; ArchiMate for the map and BPMN from level 3; meter to cash, with what each step reads and writes, and only one branch reaching level 3, where the complaints are.*
+*The script of *Processes, as deep as data needs*, film 4 of 7 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: the four bands, APQC's levels, breadth first and depth on pain, a SIPOC for each level-2 process naming its business objects, where data is born; ArchiMate for the map and BPMN from level 3; meter to cash, with what each step reads and writes, and only one branch reaching level 3, where the complaints are. On 23 November 2026, when *Now the questions appear* became film 5, its last line was voiced again to lead there.*
 
 ## The promise
 
@@ -130,7 +130,7 @@ So check readings goes to level three, drawn in BPMN, the notation for steps, th
 
 *On screen:* the concepts leave; check readings stays lit and the rest dim. Farah comes in: "×2, complaints about bills, last winter"; "2 in 3, about estimated bills, Farah, reading them". "every night": five meters send their readings up to read meters; one sends "none", one "fails", and "an estimate" in amber goes to make bills. "one household's bills": November to February, three marked E, "no readings, for weeks", "then one that caught up". Check readings: "level 3, in BPMN"; BPMN's shapes come in as they're named: a step, their order, a choice.
 
-### 7 · Level three · 5:08–6:14
+### 7 · Level three · 5:08–6:15
 
 On each billing day, every reading is checked: is it in range, and no lower than the last?
 If it passes, it goes to billing.
@@ -143,7 +143,7 @@ Now Farah can see which households have had estimates, and for how long.
 
 *On screen:* check readings moves up to head the flow, "level 3 · BPMN". The flow is drawn in, in order: "billing day"; "check each reading", "in range?", "no lower than the last?"; "passes?"; "send to billing"; then "no, or none came": "estimate from the same month last year", "in its place", and its estimate joins the flow to billing. The estimate task glows amber, and a data object comes out of it, "estimated reading": "born here, not at the meter". The flow leaves, and the data team's table comes in, "table · meter readings", with meter, day, kWh and read_type: every row "actual", and the rows of the meter that stopped sending empty, "from the meters: no estimates"; beside it, "which households are getting estimates?". The glossary's entry, "business glossary · meter reading", gains Grace's line, "a reading: what the check sends on, read from the meter, or estimated", and "owner: Grace", ticked. A January bill, "head of retail", is stamped "estimated"; a ticket, "ticket · data team", "take readings from the check", "from: Grace and the head of retail"; the empty rows fill with the estimates, "estimated" in amber. Then Farah's count, held in the pause: "this winter", "4,120 households with estimates", "380 of them for four weeks or more".
 
-### 8 · The data practice · 6:14–6:38
+### 8 · The data practice · 6:15–6:38
 
 On the data practice's map, the data team's own processes join: answering a data request, building a data product, taking on a source.
 Each is drawn like the utility's, at level two, with its trigger, its output, its owner, and what it reads and writes.
@@ -151,13 +151,13 @@ None goes deeper until something hurts.
 
 *On screen:* the flow and its people leave first; "the data practice, on the map", "business layer": the data team, tickets and service of the films before, the glossary's domains and their owners. Three processes join, each as it's named: answering a data request, building a data product, taking on a source. They glow in turn, "at level two"; a card for the first, "answer a data request": "trigger: a ticket", "output: an answer", "owner: data team lead"; each draws a short access line to what it reads. "level 3: not drawn".
 
-### 9 · As deep as it needs · 6:38–7:11
+### 9 · As deep as it needs · 6:38–7:10
 
 On a qanat, the cycle went down to the minute only where a share was split, and every owner knew when their water would come.
 At the utility, every process is drawn to level two, and only the branch that hurt goes deeper, to where an estimate is born.
-Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be.
+Tomás's next note goes back to the backlog from day one, and asks which questions matter.
 
-*On screen:* the levels of the cycle again, the split part opened to its minutes, "to the minute, only where a share was split"; an owner's water runs along the minutes, "every owner: when it comes". Then the utility's wall: the tree, every macro process's processes drawn, "drawn to level two"; the one branch under check readings drawn deeper, "check readings", "where an estimate is born", the rest dashed. Tomás's next note: "What does the business expect of it? The rules on it, how good it must be?". The end card: "Every process drawn to level two, deeper only where it hurts." Film 4 of 5.
+*On screen:* the levels of the cycle again, the split part opened to its minutes, "to the minute, only where a share was split"; an owner's water runs along the minutes, "every owner: when it comes". Then the utility's wall: the tree, every macro process's processes drawn, "drawn to level two"; the one branch under check readings drawn deeper, "check readings", "where an estimate is born", the rest dashed. Tomás's next note: "Which questions matter?". The end card: "Every process drawn to level two, deeper only where it hurts." Film 4 of 7.
 
 ## Sound
 
@@ -210,18 +210,18 @@ No feature's release status is said or shown.
 
 ## Pacing report
 
-`tools/pace.py`, 12 November 2026: 7:11 in nine chapters, 938 words, 131 words a minute, the voice 71% of the time.
+`tools/pace.py`, 23 November 2026, after its last line was voiced again: 7:10 in nine chapters, 933 words, 130 words a minute, the voice 71% of the time.
 
 | Chapter | Length | Words a minute | Voice | Longest quiet |
 |---|---|---|---|---|
 | A cycle of turns | 1:55 | 135 | 68% | 7.8 s |
 | Where it's born | 0:20 | 130 | 72% | 1.6 s |
 | Four bands | 0:39 | 117 | 79% | 1.6 s |
-| Levels, and how deep | 0:48 | 128 | 72% | 2.6 s |
+| Levels, and how deep | 0:48 | 127 | 73% | 2.6 s |
 | Meter to cash | 0:46 | 134 | 74% | 2.4 s |
 | Where it hurts | 0:40 | 131 | 78% | 1.8 s |
 | Level three | 1:06 | 133 | 67% | 4.8 s |
 | The data practice | 0:23 | 132 | 75% | 1.8 s |
-| As deep as it needs | 0:34 | 125 | 63% | 7.8 s |
+| As deep as it needs | 0:32 | 122 | 61% | 7.8 s |
 
-Every sentence has at least 0.5 s after it, and no chapter stops for 2.5 s or more inside it. *Four bands* runs at 117 words a minute, under 120, to give Grace's map time to be drawn band by band; the film as a whole runs at 131. The longest quiets are the opening's title, Farah's count at the end of *Level three*, and the end card, without words.
+Every sentence has at least 0.5 s after it, and no chapter stops for 2.5 s or more inside it. *Four bands* runs at 117 words a minute, under 120, to give Grace's map time to be drawn band by band; the film as a whole runs at 130. The longest quiets are the opening's title, Farah's count at the end of *Level three*, and the end card, without words.

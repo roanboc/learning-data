@@ -1,6 +1,6 @@
 # The map before the data · Why it moves: script
 
-*The script of Why it moves, film 3 of 11 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 4:43, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone from the start: on-screen text is at least 28 px in the frame, the motivation layer's cards are drawn large enough to read without the camera, and the camera moves in where a picture is small.*
+*The script of Why it moves, film 3 of 8 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 4:43, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone from the start: on-screen text is at least 28 px in the frame, the motivation layer's cards are drawn large enough to read without the camera, and the camera moves in where a picture is small.*
 
 ## The promise
 
@@ -40,7 +40,7 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 **Picture.** Parchment warmth, "9 November 1965 · Niagara Falls". The camera starts close on a night map of a grid (a sketch, not a real map), its cities warm points of light, and on a relay in a circle beside Niagara Falls: its lever swings open. The camera pulls back as the dark spreads from Niagara outwards, city by city. "30 million people". Each utility's area is outlined in its own colour: "each saw only its own wires". The map dims and a rulebook with one seal arrives: "rules for all of them to keep". Four tags, in order: a shock · what it revealed · what had to become true · a rule to hold to. Wordless breather: the map relit, then the title card.
 
-**On screen.** 9 November 1965 · Niagara Falls · a relay · 30 million people · each saw only its own wires · rules for all of them to keep · a shock · what it revealed · what had to become true · a rule to hold to · Why it moves · what pushes, and what holds · Film 3 of 11
+**On screen.** 9 November 1965 · Niagara Falls · a relay · 30 million people · each saw only its own wires · rules for all of them to keep · a shock · what it revealed · what had to become true · a rule to hold to · Why it moves · what pushes, and what holds · Film 3 of 8
 
 ### 2 · Three letters · 0:39–1:10
 
@@ -112,7 +112,7 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 **Picture.** The wall: the drivers and the assessments, short now (decarbonisation · affordability · ageing assets · rooftop solar; bills up 18% · old poles · one-way flow), turn from paper to purple glass, their status dots fill, and a gold tick says "confirmed". Below, the goals and outcomes stay paper, half-filled: affordable bills · assets renewed · renewables connected; charge flat, 2030 · solar in 10 days: "to the board, as drafts". Ama in the middle; Tomás on the right. His note "Why must it change?", and beside it an answer, written out: "Four drivers, three goals, three principles to check every choice against." A new note goes up: "What must it be able to do?". The end card.
 
-**On screen.** decarbonisation · affordability · ageing assets · rooftop solar · bills up 18% · old poles · one-way flow · confirmed · affordable bills · assets renewed · renewables connected · charge flat, 2030 · solar in 10 days · to the board, as drafts · Why must it change? · Four drivers, three goals, three principles to check every choice against. · What must it be able to do? · Know why it must change, and what it will be checked against. · Why it moves · Film 3 of 11
+**On screen.** decarbonisation · affordability · ageing assets · rooftop solar · bills up 18% · old poles · one-way flow · confirmed · affordable bills · assets renewed · renewables connected · charge flat, 2030 · solar in 10 days · to the board, as drafts · Why must it change? · Four drivers, three goals, three principles to check every choice against. · What must it be able to do? · Know why it must change, and what it will be checked against. · Why it moves · Film 3 of 8
 
 ## Pause and think
 

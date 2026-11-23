@@ -1,6 +1,6 @@
 # Enterprise architecture, for data · Day one: script
 
-*The script of the opening film of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:07, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
+*The script of the opening film of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:07, in ten chapters, in English, 7 October 2026; chapter 9 voiced again on 23 November 2026, when the series became eight films and three of its films moved to the series that take each layer further. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
 
 ## The promise
 
@@ -8,7 +8,7 @@ Every line passes two tests: anyone who has joined a new organisation can follow
 
 ## The story in one paragraph
 
-Nineteen years after conquering England, William the Conqueror still didn't know exactly what he ruled, so he sent surveyors to find out: who holds the land, what is on it, and what it's worth, then and now. Today, Tomás starts as an enterprise architect at a publicly owned energy utility. By lunchtime he has a badge, an org chart, a list of 140 systems and an invitation to a meeting about "the transition program". Everyone asks what he thinks, and he doesn't yet know what to ask. Everything he's given is true, and none of it explains the place. Enterprise architecture offers a way of looking: layers held by three questions. Why does it exist, and for whom? How does it work? What runs it? Many methods describe those layers. The series takes what they agree on, and starts rough, with sticky notes on a canvas. Tomás sets himself two rules: every note names its source, and every note stays a draft until its owner confirms it. Why would a data architect care? Because every data rule is a claim about the organisation, and without the map it has no home. Over eleven films, Tomás builds the map. He writes the first note.
+Nineteen years after conquering England, William the Conqueror still didn't know exactly what he ruled, so he sent surveyors to find out: who holds the land, what is on it, and what it's worth, then and now. Today, Tomás starts as an enterprise architect at a publicly owned energy utility. By lunchtime he has a badge, an org chart, a list of 140 systems and an invitation to a meeting about "the transition program". Everyone asks what he thinks, and he doesn't yet know what to ask. Everything he's given is true, and none of it explains the place. Enterprise architecture offers a way of looking: layers held by three questions. Why does it exist, and for whom? How does it work? What runs it? Many methods describe those layers. The series takes what they agree on, and starts rough, with sticky notes on a canvas. Tomás sets himself two rules: every note names its source, and every note stays a draft until its owner confirms it. Why would a data architect care? Because every data rule is a claim about the organisation, and without the map it has no home. Over eight films, Tomás builds the map, and then a series takes each layer further. He writes the first note.
 
 ## What each object stands for
 
@@ -31,7 +31,7 @@ Nineteen years after conquering England, William the Conqueror still didn't know
 | Grace, outlined in gold, and her gold tick | The person who owns that part of the business, confirming a note |
 | A data rule card, floating, then tied to a process, an owner and a goal | A rule with a home |
 | A bill flagged "wrong" | What a rule without a home costs a customer |
-| Eleven film cards along the layers | The series |
+| Eight film cards along the layers, then three pills | The series, and the series that take each layer further |
 
 ## The look
 
@@ -47,7 +47,7 @@ Nineteen years after conquering England, William the Conqueror still didn't know
 
 **Picture.** Parchment and ink, "1085" in the corner. A map of England draws itself in ink on parchment, and the counties wash in as they're surveyed; the far north and Wales stay blank ("not surveyed"). A quill writes an entry: "Ralph holds Estone from the king. Land for 4 ploughs. 2 ploughs there now. 1 mill. 6 acres of meadow. Woodland, 40 pigs. Worth then 40 shillings; now 60." Each question lights its line. The pages gather and a cover closes: DOMESDAY · 1086. "know the place first". Wordless breather: the book, then the title card, *Day one*.
 
-**On screen.** 1085 · England · not surveyed · who holds it? · what is on it? · what is it worth? · then · 40 · now · 60 · the Domesday Book · know the place first · Day one · a way of looking, before the questions · Film 1 of 11
+**On screen.** 1085 · England · not surveyed · who holds it? · what is on it? · what is it worth? · then · 40 · now · 60 · the Domesday Book · know the place first · Day one · a way of looking, before the questions · Film 1 of 8
 
 ### 2 · Day one · 0:33–1:09
 
@@ -109,25 +109,25 @@ Nineteen years after conquering England, William the Conqueror still didn't know
 
 **On screen.** why would a data architect care? · every data rule is a claim about the organisation · data rule · which process? · who owns it? · which goal? · wrong · who should fix it? · read meters · owner · metering · fair, accurate bills · a rule with a home
 
-### 9 · The series · 4:19–4:49
+### 9 · The series · 4:19–4:50
 
-**Narration.** Over eleven films, Tomás builds the map, one layer at a time. Seven films to understand the utility: who it serves, why it moves, what it must be able to do, how value reaches people, who does what, and what runs it. Then four on what it means for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read.
+**Narration.** Over eight films, Tomás builds the map, one layer at a time. Seven films to understand the utility: who it serves, why it moves, what it must be able to do, how value reaches people, who does what, and what runs it. Then one on a change in strategy, walked down the map. After it, a series takes each layer further: the business, its data, and the platforms that run it.
 
-**Picture.** The map on the left ("the map, one layer at a time"); the eleven films in one column on the right, under "understand the utility" (1 to 7) and "for data" (8 to 11). Each card lights as it's named, and the layers it adds light with it.
+**Picture.** The map on the left ("the map, one layer at a time"); the eight films in one column on the right, under "understand the utility" (1 to 7), with the eighth a little apart. Each card lights as it's named, and the layers it adds light with it; the eighth lights every layer. Below them, "then, a series for each layer": three pills, the business, its data and the platforms, each lighting as it's named, with the layers that series takes further.
 
-**On screen.** Day one · Who it serves, and how it pays · Why it moves · What it must be able to do · How value reaches people · Who does it, and where meaning changes · Today, and where it's going · Now the questions appear · Rules with a home · When strategy moves · A map people and agents can read
+**On screen.** Day one · Who it serves, and how it pays · Why it moves · What it must be able to do · How value reaches people · Who does it, and where meaning changes · Today, and where it's going · When strategy moves · then, a series for each layer · the business · its data · the platforms
 
-### 10 · The first note · 4:49–5:07
+### 10 · The first note · 4:50–5:07
 
 **Narration.** The surveyors' first questions still work. What is this place? Who holds it? What is it worth? Tomás writes the first note.
 
-**Picture.** The Domesday entry on the wall, with its three questions under it as they're asked. Tomás puts up a sticky note and writes "Why does it exist?"; its circle is hollow. The end card: "Learn the place before you ask the questions." *Day one*, The map before the data · Film 1 of 11.
+**Picture.** The Domesday entry on the wall, with its three questions under it as they're asked. Tomás puts up a sticky note and writes "Why does it exist?"; its circle is hollow. The end card: "Learn the place before you ask the questions." *Day one*, The map before the data · Film 1 of 8.
 
-**On screen.** What is this place? · Who holds it? · What is it worth? · Why does it exist? · Learn the place before you ask the questions. · Day one · Film 1 of 11
+**On screen.** What is this place? · Who holds it? · What is it worth? · Why does it exist? · Learn the place before you ask the questions. · Day one · Film 1 of 8
 
 ## Pause and think
 
-The film can stop at the end of three chapters, with one question each (`site/assets/day-one/think.en.js` and `think.es.js`). The series has no labs yet, so the questions link to none; most answers end with a question to take back to your own organisation, for a class or a team.
+The film can stop at the end of three chapters, with one question each (`site/assets/day-one/think.en.js` and `think.es.js`). The first two open the series' lab *Bottom up, or top down*. The third opened *Give the rule a home*, which moved with *Rules with a home* to *Business architecture for data* on 23 November 2026, so it now links to none. Most answers end with a question to take back to your own organisation, for a class or a team.
 
 | After | Question | Answer |
 |---|---|---|
@@ -153,4 +153,4 @@ The film can stop at the end of three chapters, with one question each (`site/as
 
 ## Pacing report
 
-From `source/tools/pace.py`, as built: 5:07, 648 words, 127 words a minute, the voice speaking 68% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter. *The series* is the densest chapter, at 142 words a minute: it's a list, and each film card lights as it's named. Three wordless moments: the Domesday Book and the title, the wall half paper and half glass, and the end card.
+From `source/tools/pace.py`, as built: 5:07, 648 words, 126 words a minute, the voice speaking 68% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter. *The series* is the densest chapter, at 138 words a minute: it's a list, and each film card lights as it's named. Three wordless moments: the Domesday Book and the title, the wall half paper and half glass, and the end card.

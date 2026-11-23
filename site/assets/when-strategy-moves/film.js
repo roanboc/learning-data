@@ -436,7 +436,7 @@ const NARR={
  {"id":"runs","gap":0.8,"text":"And in what runs it: the billing system, the customer system, and a secure exchange with the agency."},
  {"id":"owners","gap":0.8,"text":"Every element it touches has an owner. So the walk is also the list of who must agree."}]},
 "once":{"name":"Ask once","lead":1.0,"tail":1.0,"vo":[
- {"id":"knows","gap":0.8,"text":"The agency already knows who is eligible. Once only, as in Tartu: don't make a household prove what the government already knows."},
+ {"id":"knows","gap":0.8,"text":"The agency already knows who is eligible. Once only, a principle many governments follow: don't make a household prove what the government already knows."},
  {"id":"least","gap":0.8,"text":"So the agreement asks for the least. The utility sends its account holders' matching details. The agency answers only: eligible, from this date."},
  {"id":"never","gap":0.8,"text":"Never which support a household gets."},
  {"id":"first","gap":0.8,"text":"And the agreement starts today: agreeing it will take longer than changing the systems."}]},
@@ -471,10 +471,10 @@ const NARR={
  {"id":"measure","gap":0.8,"text":"And the head of retail confirms the measure Farah has asked for since 2024: households falling behind. Now the goal can be steered."},
  {"id":"kenya","gap":0.8,"text":"In Kenya, within a few years, most households had someone using M-Pesa, and money sent home arrived in minutes."},
  {"id":"answer","gap":0.8,"text":"Tomás's note has an answer: a change in strategy lands in every layer, and walked down the map, it's a list of owners, rules and contracts, in order."},
- {"id":"next","gap":0.8,"text":"But a map that's used every week goes stale. Next: a map people and agents can read."}]}
+ {"id":"next","gap":0.8,"text":"But a map that's used every week goes stale, unless people keep it true. Next, business architecture for data: what the business owns about its data."}]}
 };
 
-const VODUR={"kenya/home": 6.966, "kenya/cash": 3.981, "kenya/strategy": 4.523, "kenya/launch": 5.557, "kenya/idea": 3.842, "kenya/bank": 4.173, "kenya/agents": 5.037, "kenya/menu": 5.394, "kenya/link": 4.933, "direction/note": 4.099, "direction/letter": 3.714, "direction/tariff": 8.229, "direction/agency": 6.365, "direction/ask": 3.049, "walk/easy": 2.923, "walk/walk": 2.599, "walk/mot": 6.735, "walk/out": 3.425, "walk/str": 5.948, "walk/bus": 5.908, "walk/inf": 4.386, "walk/runs": 6.115, "walk/owners": 5.048, "once/knows": 8.386, "once/least": 9.546, "once/never": 1.905, "once/first": 4.777, "wall/draft": 6.004, "wall/check": 5.811, "wall/cross": 2.626, "wall/decide": 6.277, "wall/same": 4.561, "rules/new": 4.577, "rules/r1": 5.82, "rules/r2": 4.41, "rules/r3": 6.042, "counter/down": 6.081, "counter/miss": 7.777, "counter/route": 5.445, "lands/line": 8.994, "lands/version": 9.99, "lands/lineage": 9.233, "lands/exchange": 6.085, "path/plateaus": 4.092, "path/dates": 8.32, "page/page": 7.575, "page/day": 4.824, "july/bills": 7.397, "july/measure": 8.68, "july/kenya": 6.926, "july/answer": 9.678, "july/next": 5.292};
+const VODUR={"kenya/home": 6.966, "kenya/cash": 3.981, "kenya/strategy": 4.523, "kenya/launch": 5.557, "kenya/idea": 3.842, "kenya/bank": 4.173, "kenya/agents": 5.037, "kenya/menu": 5.394, "kenya/link": 4.933, "direction/note": 4.099, "direction/letter": 3.714, "direction/tariff": 8.229, "direction/agency": 6.365, "direction/ask": 3.049, "walk/easy": 2.923, "walk/walk": 2.599, "walk/mot": 6.735, "walk/out": 3.425, "walk/str": 5.948, "walk/bus": 5.908, "walk/inf": 4.386, "walk/runs": 6.115, "walk/owners": 5.048, "once/knows": 9.412, "once/least": 9.546, "once/never": 1.905, "once/first": 4.777, "wall/draft": 6.004, "wall/check": 5.861, "wall/cross": 2.626, "wall/decide": 6.277, "wall/same": 4.561, "rules/new": 4.577, "rules/r1": 5.82, "rules/r2": 4.41, "rules/r3": 6.042, "counter/down": 6.081, "counter/miss": 7.95, "counter/route": 5.445, "lands/line": 8.994, "lands/version": 9.99, "lands/lineage": 9.233, "lands/exchange": 6.085, "path/plateaus": 4.092, "path/dates": 8.32, "page/page": 7.575, "page/day": 4.824, "july/bills": 7.397, "july/measure": 8.905, "july/kenya": 6.926, "july/answer": 9.678, "july/next": 9.121};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2638,7 +2638,7 @@ scene("kenya",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   eaYear(ctx,90,90,"Kenya · 2007",CLAY,fin(t,0.6,0.6)*(1-fin(t,tL-0.3,0.4)));eaYear(ctx,90,90,"March 2007",CLAY,fin(t,tL,0.4)*(1-fin(t,tI-0.3,0.4)));
   eaYear(ctx,90,90,"2007",CLAY,fin(t,tI,0.4)*(1-fin(t,B-0.4,0.6)));
   fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"When strategy moves","one change, down every layer",EAC,"Film 10 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"When strategy moves","one change, down every layer",EAC,"Film 8 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. A direction ---------- */
 // Tomás's note; the government's direction, as a letter, each phrase marked as it's read; who knows which households are eligible
@@ -2775,9 +2775,9 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,1595,485,t,tK-0.1,()=>d10_org(ctx,1350,320,490,360,"the social services agency",BUS,{lit:ten.map(i=>D10_ELIG.includes(i)?1:0),hi:pulseAt(t,tGo+1.4,1.2)+pulseAt(t,tNo+0.9,1.0),say:"knows who is eligible"}),{dy:-14});
   arrive(ctx,325,485,t,tK+0.2,()=>d10_org(ctx,80,320,490,360,"the utility",D10_RET,{q:1-back,lit:ten.map(i=>D10_ELIG.includes(i)?fin(t,tBack+1.3+i*0.06,0.4):0),hi:pulseAt(t,tBack+1.4,1.2),
     say:back<0.5?"doesn't know which":"knows which, not why",sayA:Math.abs(1-2*back)}),{dy:-14});
-  // the principle: once only, as in Tartu
+  // the principle: once only, which many governments follow
   arrive(ctx,960,170,t,tO,()=>{d10_principle(ctx,560,60,800,"once only","don't make a household prove what the government already knows",{p:fin(t,w("knows","don't make")-0.2,0.6),hi:pulseAt(t,tO+0.3,1.4)});
-    withA(ctx,fin(t,w("knows","as in Tartu")-0.1,0.4),()=>d10_tag(ctx,1336,112,"as in Tartu",MOT,{align:"right",size:28}));},{dy:-20});
+    withA(ctx,fin(t,w("knows","a principle")-0.1,0.4),()=>d10_tag(ctx,1336,112,"many governments follow it",MOT,{align:"right",size:28}));},{dy:-20});
   // the household, and the form it would have filled in, crossed out
   const hA=fin(t,w("knows","a household")-0.3,0.5)*(1-fin(t,tL-0.4,0.5));
   if(hA>0.01)withA(ctx,hA,()=>{d10_house(ctx,850,640,140,1,{});[[650,664,58],[700,666,64],[744,666,44]].forEach(([x,y,s_])=>d10_icon(ctx,x,y,s_,[255,236,206],1));
@@ -3143,11 +3143,11 @@ scene("july",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     // the note, its answer, and the next note
     arrive(ctx,620,200,t,tA-0.6,()=>sticky(ctx,620,200,480,150,"What does a change in strategy mean for the data?",{col:NOTEC[0],size:32,st:0.5*fin(t,tA+1.4,0.5),rot:-0.025}),{dy:-20});
     arrive(ctx,620,490,t,w("answer","has an answer")-0.1,()=>sticky(ctx,620,490,500,260,D10_ANS,{col:NOTEC[0],size:32,p:clamp((t-w("answer","an answer"))/(tIo+0.6-w("answer","an answer")),0,1),rot:0.015}),{dy:-30,from:1.06});
-    arrive(ctx,640,780,t,w("next","Next")-0.1,()=>sticky(ctx,640,780,440,120,"How do we keep the map alive?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
+    arrive(ctx,640,780,t,w("next","Next")-0.1,()=>sticky(ctx,640,780,480,130,"What does the business own about its data?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
     const dn=pulseAt(t,B+0.2,1.6);if(dn>0)glow(ctx,620,490,300,EAC,0.2*dn);
     ctx.restore();});
   vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"When strategy moves",EAC,"A change in strategy lands in every layer: walk it down, in order.","Film 10 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"When strategy moves",EAC,"A change in strategy lands in every layer: walk it down, in order.","Film 8 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the bill carries on from the counter, so the camera carries on and the bill
 // stays put while the counter fades; the rules are a new picture with some of the same words elsewhere, so the wall leaves first

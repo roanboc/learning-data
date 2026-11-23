@@ -2401,7 +2401,7 @@ scene("lunch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   // what the customer sees: three stages
   d5_stream(ctx,t,180,110,560,100,["lunch leaves home","lunch arrives","the tin comes back"],{t0:[w("customer","lunch leaves"),w("customer","lunch arrives"),w("customer","the tin")],size:32,glyph:true,hi:[0,0,0]});
   fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"How value reaches people","the customer's view, and detail only where it matters",EAC,"Film 5 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"How value reaches people","the customer's view, and detail only where it matters",EAC,"Film 5 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. The lights go out ---------- */
 scene("storm",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
@@ -2592,7 +2592,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     arrive(ctx,1600,400,t,cA,()=>sticky(ctx,1600,400,440,260,"A few stages, from the customer's side. Detail at one step: who goes first.",{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/2.2,0,1),rot:0.015}),{dy:-30,from:1.06});
     arrive(ctx,1480,700,t,w("next","who does"),()=>sticky(ctx,1480,700,430,150,"Who does it, and where does meaning change?",{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
     ctx.restore();vign(ctx,S);});
-  eaEnd(ctx,S,t,B+0.8,"How value reaches people",EAC,"See it from the customer's side. Go deep only where it matters.","Film 5 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"How value reaches people",EAC,"See it from the customer's side. Go deep only where it matters.","Film 5 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the value stream carries on from one chapter to the next, so the camera
 // carries on

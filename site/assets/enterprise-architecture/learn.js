@@ -1,8 +1,8 @@
 /* Learning Data: The map before the data. The labs (Take it apart) and the scenarios (Make the call) of the whole series, from
    one engine, copied from Data that moves' (site/assets/data-that-moves/learn.js): the series' labs page and scenarios page load a
    film's bundle (for its parts: glass, T, withA, rr, tw), the words (learn.en.js or learn.es.js, which set window.EA), and this file.
-   Every lab is a playground (kind "play"), one for each film, as the author set on 18 November 2026: the visitor switches, picks and
-   presses, and watches what happens; each playground has four experiments (w.goals), each ticked when the visitor makes it happen,
+   Each film has a playground (kind "play"), as the author set on 18 November 2026, and a lab in the shared classic kinds
+   (site/assets/learn/classic.js): the visitor switches, picks and presses, and watches what happens; each playground has four experiments (w.goals), each ticked when the visitor makes it happen,
    and its end once all are ticked. Each playground's own rules are in PLAY below, its words in the pack.
    The scenarios are the series' evaluation, every one a choice, its options shown in the order the words give them, where the right
    answers are spread (site-tools/check_site.py reads them).
@@ -14,8 +14,8 @@
    and "quiz" (answers by scenario number); path.js paints the course bar. */
 (()=>{"use strict";
 const L=window.EA,app=document.getElementById("series-labs")||document.getElementById("series-quiz");if(!L||!app)return;
-// A film that moved to another series took its labs and situations with it (L.moved: film 11, 23 November 2026): an old link to
-// them goes on to their new page
+// A film that moved to another series took its labs and situations with it (L.moved, 23 November 2026: film 11 to Continuous
+// architecture, films 8 and 9 to Business architecture for data): an old link to them goes on to their new page
 if(L.moved){const hs=(location.hash||"").slice(1),fm=hs.match(/^film-(\d+)$/),to=app.id==="series-labs"?(L.moved.labs||{})[hs]:fm&&(L.moved.films||{})[fm[1]];
   if(to){location.replace(to);return;}}
 const U=L.ui,P=app.dataset.store||"ld-enterprise-architecture";
@@ -23,6 +23,11 @@ let FILMS={};try{FILMS=JSON.parse(app.dataset.films||"{}");}catch(e){}
 const get=(k,d)=>{try{const v=localStorage.getItem(P+":"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}};
 const put=(k,v)=>{try{localStorage.setItem(P+":"+k,JSON.stringify(v));}catch(e){}
   try{window.dispatchEvent(new StorageEvent("storage",{key:P+":"+k}));}catch(e){}};
+// When films leave (L.renum, 23 November 2026: films 8 and 9 to Business architecture for data, film 10 now film 8), a visitor's
+// answers move once to the situations' new numbers (null: the situation left), and the answers as they were are kept aside, under
+// "quiz-before-<v>", where the series that took the situations finds them, whichever page the visitor opens first
+if(L.renum&&get("renum",0)<L.renum.v){const R=L.renum,q=get("quiz",{})||{},nq={};if(get("quiz-before-"+R.v,null)==null)put("quiz-before-"+R.v,q);
+  Object.keys(q).forEach(k=>{const t=R.quiz&&k in R.quiz?R.quiz[k]:k;if(t!=null)nq[t]=q[k];});put("quiz",nq);put("renum",R.v);}
 function h(tag,attrs,...kids){const e=document.createElement(tag);for(const k in attrs||{}){const v=attrs[k];if(v==null||v===false)continue;if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v===true?"":v);}
   kids.flat().forEach(c=>{if(c!=null&&c!==false)e.append(c.nodeType?c:document.createTextNode(c));});return e;}
 const fill=(s,o)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:m);
@@ -351,77 +356,7 @@ PLAY.place=(Lb,api)=>{const W=Lb.w,SY=W.systems,CP=W.caps,S={view:"list",off:{},
     if(t<1)api.kick(60);};
   return{S,lay,draw,readouts:[[W.read.off,()=>String(SY.filter(s=>S.off[s[0]]).length)],[W.read.lost,()=>S.view==="map"?String(nLost()):"?"]]};};
 
-/* ---------- 8 · Now the questions appear: climb the ladder ---------- */
-// Four requests from the backlog. Asked what it would decide, a request climbs the ladder, decision, capability, goal, or goes back
-// to the tray. Below, the regulator's measure grows into its tree, and the branch nobody asked about is offered to its owner.
-PLAY.skipper=(Lb,api)=>{const W=Lb.w,R=W.reqs,TR=W.tree,S={req:null,res:{},tree:false,offered:false,t:-1e5,tt:-1e5};
-  const req=k=>R.find(r=>r[0]===k);
-  const r1=api.group(W.reqL);api.seg(r1,R.map(r=>[r[0],r[1]]),null,k=>{S.req=k;S.t=performance.now();api.kick(500);api.say(fill(W.msg.pick,{r:req(k)[1]}));},W.reqL);
-  const r2=api.group();api.btn(r2,W.askB,()=>{const k=S.req;if(!k){api.say(W.prompt);return;}const up=!!req(k)[2];S.res[k]=up?"up":"back";S.t=performance.now();api.kick(1500);
-    api.say(W.msg[k],up?"ok":"warn");api.reach(up?"reach":"back");},"go");
-  const r3=api.group();api.toggle(r3,W.treeT,false,v=>{S.tree=v;S.tt=performance.now();api.kick(900);api.say(v?W.msg.treeOn:W.msg.treeOff,v?"ok":null);if(v)api.reach("tree");});
-  api.btn(r3,W.offerB,()=>{if(!S.tree){api.say(W.msg.offerNo,"warn");return;}S.offered=true;S.tt=performance.now();api.kick(900);api.say(W.msg.offer,"ok");api.reach("offer");});
-  const lay=lw=>{const m=12,o={lw,m};o.qy=10;o.ly=o.qy+52;o.rh=52;o.ty=o.ly+3*(o.rh+8);o.th=28+2*30;o.gy=o.ty+o.th+14;
-    o.gh=50+16+66+12+40+30+46;o.h=o.gy+o.gh+8;return o;};
-  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.tec);const m=o.m,W2=o.lw-m*2,k=S.req,r=k?req(k):null,res=k?S.res[k]:null,u=since(now,S.t);
-    chip2(ctx,m,o.qy,W2,44,r?r[1]:W.reqL,r?K.paper:K.soft,{a:r?1:0.5,glow:res==="back"?10:4,size:13,mark:res?(res==="up"?"ok":"no"):null});
-    for(let i=0;i<3;i++){const j=2-i,y=o.ly+i*(o.rh+8),on=res==="up"&&u>j*350,a=on?eo((u-j*350)/400):0;
-      card(ctx,m,y,W2,o.rh,on?[K.bus,K.str,K.mot][j]:K.soft,W.rungs[j],{a:on?1:0.5,glow:on?8:1,size:12.5,dash:!on});
-      if(on)line1(ctx,r[2][j],m+12,y+40,W2-24,13,{w:700,color:rgbaS(K.ink,0.4+0.6*a)});
-      if(i<2)arrow(ctx,m+20,y+o.rh+8,m+20,y+o.rh,on||res==="up"?K.gold:K.soft,0.7,{head:5});}
-    const back=R.filter(x=>S.res[x[0]]==="back");card(ctx,m,o.ty,W2,o.th,K.soft,W.tray,{glow:2,size:12.5});
-    back.forEach((x,i)=>tile(ctx,m+12,o.ty+28+i*30,W2-24,26,x[1],K.bad,{size:12.5,a:0.85}));
-    // the tree
-    const tv=eo(since(now,S.tt)/700),y0=o.gy,cw=(W2-30)/2;
-    chip2(ctx,m,y0,W2,50,TR.root,K.gold,{glow:6,size:13});
-    line1(ctx,TR.who.root,m+12,y0+64,W2-24,12,{w:600,color:rgbaS(K.soft,1)});
-    if(S.tree){const a=tv,cy=y0+76;withA(ctx,a,()=>{
-      arrow(ctx,m+W2*0.3,y0+50,m+cw/2,cy,K.ink,0.8,{head:5});arrow(ctx,m+W2*0.7,y0+50,m+cw+30+cw/2,cy,K.ink,0.8,{head:5});
-      chip2(ctx,m,cy,cw,50,TR.often,K.net,{size:12.5,glow:4});line1(ctx,TR.times,m+cw,cy+31,30,16,{w:800,align:"center",color:rgbaS(K.ink,1)});
-      chip2(ctx,m+cw+30,cy,cw,50,TR.long,S.offered?K.good:K.bad,{size:12.5,glow:S.offered?12:6,dash:!S.offered});
-      line1(ctx,TR.who.often,m+4,cy+64,cw,12,{w:600,color:rgbaS(K.soft,1)});line1(ctx,S.offered?"✓":TR.who.long,m+cw+34,cy+64,cw,12,{w:700,color:rgbaS(S.offered?K.good:K.bad,1)});
-      const ty=cy+78;arrow(ctx,m+cw/2,ty,m+cw/2,cy+50,K.soft,0.9,{head:5,dash:[3,4]});chip2(ctx,m,ty,cw,40,TR.trees,K.tec,{size:12.5,dash:true,glow:2});
-      line1(ctx,"— "+TR.solid+"   ┄ "+TR.dotted,m,ty+58,W2,12,{w:600,color:rgbaS(K.soft,1)});
-      if(S.offered)chip2(ctx,m,ty+70,W2,40,TR.offer,K.good,{size:12.5,glow:10,mark:"ok"});});}
-    if(u<1600||tv<1)api.kick(60);};
-  return{S,lay,draw,readouts:[[W.read.climbed,()=>String(R.filter(x=>S.res[x[0]]==="up").length)],[W.read.back,()=>String(R.filter(x=>S.res[x[0]]==="back").length)]]};};
-
-/* ---------- 9 · Rules with a home: give the rule a home ---------- */
-// Day one's rule on the wall between the network and retail. Choose who owns it (the nightly script, Grace, or two rules, one on each
-// side, joined by what crosses), how ArchiMate 4 draws it, and where its tracking table's list goes; then move billing, and plant a
-// bill that isn't corrected.
-PLAY.rule=(Lb,api)=>{const W=Lb.w,S={own:"script",draw:null,fail:"mail",moved:false,plant:false,t:-1e5};
-  const r1=api.group(W.ownL);api.seg(r1,W.owns,"script",k=>{S.own=k;S.moved=false;S.plant=false;S.t=performance.now();api.kick(800);api.say(W.msg[k],k==="two"?"ok":"warn");if(k==="two")api.reach("split");},W.ownL);
-  const r2=api.group(W.drawL);api.seg(r2,W.draws,null,k=>{S.draw=k;api.kick(400);api.say(W.msg[k],k==="req"?"ok":"warn");if(k==="req")api.reach("req");},W.drawL);
-  const r3=api.group(W.failL);api.seg(r3,W.fails,"mail",k=>{S.fail=k;S.plant=false;api.kick(400);api.say(W.msg[k],k==="queue"?"ok":null);},W.failL);
-  const r4=api.group();api.btn(r4,W.moveB,()=>{S.moved=true;S.t=performance.now();api.kick(900);if(S.own==="two"){api.say(W.msg.moveOk,"ok");api.reach("move");}else api.say(W.msg.moveNo,"warn");});
-  api.btn(r4,W.plantB,()=>{S.plant=true;S.t=performance.now();api.kick(900);if(S.own!=="two")api.say(W.msg.plantNoHome,"warn");
-    else if(S.fail!=="queue")api.say(W.msg.plantMail,"warn");else{api.say(W.msg.plantOk,"ok");api.reach("caught");}},"go");
-  const lay=lw=>{const m=12,o={lw,m};o.cw=(lw-m*2-24)/2;o.hy=10;o.ry=34;o.rh=96;o.by=o.ry+o.rh+30;o.h=o.by+3*44+8;return o;};
-  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.mot);const m=o.m,W2=o.lw-m*2,cx=m+o.cw+12,t=eo(since(now,S.t)/700),two=S.own==="two";
-    line1(ctx,W.net,m,o.hy+12,o.cw,13,{w:800,align:"center",color:rgbaS(K.net,1)});line1(ctx,W.ret,cx+12,o.hy+12,o.cw,13,{w:800,align:"center",color:rgbaS(K.ret,1)});
-    ctx.save();ctx.strokeStyle=rgbaS(K.paper,0.6);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx,o.ry-6);ctx.lineTo(cx,o.ry+o.rh+8);ctx.stroke();ctx.restore();
-    const gl=S.draw?W.glyph[S.draw]:W.none,glc=S.draw==="req"?K.good:S.draw?K.bad:K.soft;
-    if(!two){const w=Math.min(W2,300),x=m+(W2-w)/2,dead=S.moved;
-      card(ctx,x,o.ry+6,w,o.rh-12,dead?K.soft:K.gold,null,{glow:dead?2:8,a:dead?0.5:1});
-      lines(ctx,W.wallRule,x+12,o.ry+28,w-24,{size:13,max:2});
-      line1(ctx,S.own==="grace"?W.ownerNet+" · ½":W.homeless,x+12,o.ry+o.rh-34,w-24,12.5,{w:700,color:rgbaS(S.own==="grace"?K.net:K.bad,1)});
-      line1(ctx,gl,x+12,o.ry+o.rh-16,w-24,12.5,{w:600,color:rgbaS(glc,1)});}
-    else{[[m,W.netRule,W.ownerNet,K.net],[cx+12,W.retRule,W.ownerRet,K.ret]].forEach(([x,rt,ow,c],i)=>{withA(ctx,0.3+0.7*t,()=>{
-        card(ctx,x,o.ry,o.cw,o.rh,c,null,{glow:6});lines(ctx,rt,x+10,o.ry+20,o.cw-20,{size:13,max:2});
-        line1(ctx,ow,x+10,o.ry+o.rh-30,o.cw-20,12.5,{w:700,color:rgbaS(K.good,1)});line1(ctx,gl,x+10,o.ry+o.rh-12,o.cw-20,12.5,{w:600,color:rgbaS(glc,1)});});});
-      arrow(ctx,cx-30,o.ry+o.rh+16,cx+30,o.ry+o.rh+16,K.gold,t,{head:6});
-      line1(ctx,W.crosses,m,o.ry+o.rh+28,W2,12,{w:700,align:"center",color:rgbaS(K.gold,t)});}
-    const bw=Math.min(150,W2*0.42),by=o.by;
-    chip2(ctx,m,by,bw,36,S.moved?W.billing2:W.billing,S.moved?K.app:K.soft,{size:12.5,glow:S.moved?8:3});
-    const live=two||!S.moved;chip2(ctx,m+bw+18,by,W2-bw-18,36,W.track,live?K.str:K.soft,{size:12.5,a:live?1:0.4,glow:live?6:1,mark:S.moved?(live?"ok":"no"):null});
-    arrow(ctx,m+bw+2,by+18,m+bw+16,by+18,K.soft,0.8,{head:5});
-    const listed=S.plant&&two;chip2(ctx,m+bw+18,by+44,W2-bw-18,36,listed?W.listed:"–",listed?K.bad:K.soft,{size:12.5,a:listed?1:0.4,glow:listed?10:1});
-    const to=W.to[S.fail],ok=S.fail==="queue";chip2(ctx,m+bw+18,by+88,W2-bw-18,36,"→ "+to,ok?K.good:K.soft,{size:12.5,glow:listed?(ok?14:2):3,a:listed&&!ok?0.5:1,mark:listed?(ok?"ok":"no"):null});
-    if(t<1)api.kick(60);};
-  return{S,lay,draw,readouts:[[W.read.owners,()=>S.own==="two"?"2":S.own==="grace"?"1":"0"],[W.read.home,()=>S.own==="two"?W.net+" · "+W.ret:W.homeless]]};};
-
-/* ---------- 10 · When strategy moves: walk it down ---------- */
+/* ---------- 8 · When strategy moves: walk it down ---------- */
 // The social tariff lands at the top of the six layers and is walked down a layer at a time, with what it touches and who owns each.
 // What to ask the agency for, whether the list crosses the wall, and when the agreement starts decide whether it's ready by 1 July.
 PLAY.walk=(Lb,api)=>{const W=Lb.w,N=W.layers.length,S={d:0,ask:null,wall:false,start:null,t:-1e5};
@@ -455,30 +390,6 @@ PLAY.walk=(Lb,api)=>{const W=Lb.w,N=W.layers.length,S={d:0,ask:null,wall:false,s
     if(t<1)api.kick(60);};
   return{S,lay,draw,readouts:[[W.read.layer,()=>S.d?W.layers[S.d-1]:"–"],[W.read.owners,()=>String(new Set(W.owners.slice(0,S.d).flat()).size)],
     [W.read.ready,()=>S.d===N&&S.ask&&S.start?(ready()?W.read.yes:W.read.no):"–"]]};};
-
-/* ---------- 11 · A map people and agents can read: the navigator's test ---------- */
-// Six elements of the map, each with its ID, name and owner. The map's checks mark what's missing; fixing confirms what has an owner,
-// and CAP-009 stays flagged. The map's agent answers four questions, citing the element it read, or saying what it can't know.
-PLAY.navigator=(Lb,api)=>{const W=Lb.w,E=W.els,S={ran:false,fixed:false,q:null,t:-1e5};
-  const miss=e=>!e[3]?null:(S.fixed&&e[3]!=="owner")?null:e[3],fails=()=>S.ran?E.filter(miss).length:null;
-  const r1=api.group();api.btn(r1,W.runB,()=>{S.ran=true;S.t=performance.now();api.kick(900);api.say(S.fixed?W.msg.fixed:W.msg.ran,S.fixed?"ok":"warn");api.reach("checks");},"go");
-  api.btn(r1,W.fixB,()=>{if(!S.ran){api.say(W.msg.fixNo,"warn");return;}S.fixed=true;S.t=performance.now();api.kick(900);api.say(W.msg.fixed,"ok");api.reach("fixed");});
-  const ansK=k=>k==="code"&&!S.fixed?"codeNo":k==="use"&&!S.fixed?"useNo":k;
-  const r2=api.group(W.askL);api.seg(r2,W.qs.map(q=>[q[0],q[1]]),null,k=>{S.q=k;S.t=performance.now();api.kick(900);const a=ansK(k),honest=a==="gen"||a==="codeNo"||a==="useNo";
-    api.say(W.ans[a],honest?null:"ok");api.reach(honest?"honest":"cite");},W.askL);
-  const lay=lw=>{const m=12,o={lw,m};o.ey=10;o.rh=76;o.ay=o.ey+E.length*(o.rh+6)+8;o.h=o.ay+88+8;return o;};
-  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.net);const m=o.m,W2=o.lw-m*2,t=eo(since(now,S.t)/700),q=S.q?W.qs.find(x=>x[0]===S.q):null,cited=q?q[2]:null;
-    E.forEach((e,i)=>{const y=o.ey+i*(o.rh+6),ms=S.ran?miss(e):null,hot=cited===e[0],col=ms?K.bad:hot?K.gold:S.ran?K.good:K.app;
-      card(ctx,m,y,W2,o.rh,col,null,{glow:hot?14:ms?8:3});const pw=pill(ctx,m+10,y+8,e[0],col,{size:12.5});
-      const tg=ms?fill(W.missing,{m:W.mtypes[ms]}):"",tw2=ms?TW(ctx,tg,12.5,800)+4:0;
-      if(ms)line1(ctx,tg,m+W2-18-tw2,y+23,tw2,12.5,{w:800,align:"right",color:rgbaS(K.bad,1)});
-      line1(ctx,e[1],m+12,y+46,W2-24,13,{w:700});line1(ctx,W.ownerL+": "+e[2],m+12,y+66,W2-24,12.5,{w:600,color:rgbaS(K.soft,1)});
-      if(S.ran)mark(ctx,m+W2-4,y+4,ms?"no":"ok");});
-    card(ctx,m,o.ay,W2,88,K.mot,W.agent,{glow:q?10:3,size:12.5});
-    lines(ctx,q?q[1]:"–",m+12,o.ay+42,W2-24,{size:13,max:2,color:rgbaS(K.ink,q?0.4+0.6*t:0.5)});
-    if(q){const a=ansK(q[0]),hon=a==="gen"||a==="codeNo"||a==="useNo";line1(ctx,(hon?"? ":"→ ")+(hon?"":cited),m+12,o.ay+78,W2-24,12.5,{w:800,color:rgbaS(hon?K.gold:K.good,t)});}
-    if(t<1)api.kick(60);};
-  return{S,lay,draw,readouts:[[W.read.fail,()=>S.ran?String(fails()):"–"],[W.read.cited,()=>{if(!S.q)return"–";const a=ansK(S.q);return a==="gen"||a==="codeNo"||a==="useNo"?"–":W.qs.find(x=>x[0]===S.q)[2];}]]};};
 
 const BUILD=Object.assign({},window.LD_CLASSIC&&window.LD_CLASSIC.kinds,{play:labPlay});  // up to three more labs a film, in the classic kinds (site/assets/learn/classic.js)
 
@@ -548,7 +459,7 @@ if(app.id==="series-quiz"){app.textContent="";const QS=L.qs,ans=get("quiz",{})||
 const PK=L.pics,GO=(S,now)=>S.done?eo(since(now,S.done)/700):0;
 // One picture for each film's situations, from its words (pics): a title, and its three rows on the way down, each joined to the
 // next, then the film's key line, drawn in gold once the situation is answered (S.done).
-const VCOL={pile:K.mot,fit:K.ret,chain:K.mot,survive:K.str,first:K.bus,cross:K.inf,place:K.app,skipper:K.tec,rule:K.mot,walk:K.net,navigator:K.net};
+const VCOL={pile:K.mot,fit:K.ret,chain:K.mot,survive:K.str,first:K.bus,cross:K.inf,place:K.app,walk:K.net};
 const vrows=(ctx,o,now,q,S)=>{const p=PK[q.vis.k],c=VCOL[q.vis.k]||K.app,m=12,t=GO(S,now),W2=o.lw-m*2;ground(ctx,o.lw,o.h,c);
   pill(ctx,m,10,p.t,c,{size:13,max:W2});p.rows.forEach((r,i)=>{const y=46+i*42;card(ctx,m+i*10,y,W2-i*10,34,c,r,{glow:4,size:13});if(i)arrow(ctx,m+8+(i-1)*10,y-7,m+8+i*10,y,K.soft,0.7,{head:5});});
   const ky=46+p.rows.length*42;line1(ctx,p.key,m,ky+16,W2,13.5,{w:800,color:rgbaS(t>0?K.gold:K.soft,t>0?0.4+0.6*t:0.85)});if(t>0&&t<1&&S.vis)S.vis.kick(60);};

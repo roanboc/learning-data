@@ -141,7 +141,7 @@ scene("shares",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     withA(ctx,fin(t,tLi-0.2,0.6),()=>tag(ctx,960,104,"Mahan: one share, one meaning",BIZ,{align:"center",size:30}));
     withA(ctx,fin(t,w("link","each thing")-0.2,0.6),()=>tag(ctx,960,168,"the utility: each thing it counts, defined once",BAC,{align:"center",size:30}));});
   vign(ctx,S);
-  baTitle(ctx,S,t,B+0.6,"What the business needs to know","each thing it counts, defined once","Film 2 of 5");});
+  baTitle(ctx,S,t,B+0.6,"What the business needs to know","each thing it counts, defined once","Film 2 of 7");});
 
 /* ---------- the wall: Tomás's map, its capabilities and the concepts they need ---------- */
 // The capabilities across the top, in the strategy layer; the concepts below them, in the information layer, under the three
@@ -489,7 +489,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     arrive(ctx,860,470,t,tN-0.2,()=>sticky(ctx,860,470,560,150,"Who creates it? "+ba_nb("Who owns it?"),{col:NOTEC[0],size:36,rot:-0.02}),{dy:-16});
     arrive(ctx,1780,760,t,tN-0.4,()=>baPersonR(ctx,"tomas",1790,1040,0.74,{t,expr:"calm"}),{dy:20});ctx.restore();});
   vign(ctx,S);
-  baEnd(ctx,S,t,B+0.8,"What the business needs to know","Each concept, defined once in its domain, "+ba_nb("in the business's own words."),"Film 2 of 5");});
+  baEnd(ctx,S,t,B+0.8,"What the business needs to know","Each concept, defined once in its domain, "+ba_nb("in the business's own words."),"Film 2 of 7");});
 
 // where the chapters meet (From words to data's joins.js): What each capability needs opens on the wall as Never a blank page leaves it,
 // In the business's words on the wall as What each capability needs leaves it, and A concept nobody holds on the wall as In the

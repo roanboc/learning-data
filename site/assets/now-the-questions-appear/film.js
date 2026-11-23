@@ -406,26 +406,31 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// The map before the data · Now the questions appear. One line per id; the film re-times itself to the voice.
+// Business architecture for data · Now the questions appear. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
-"kerala":{"name":"Where to land","lead":1.4,"tail":1.0,"vo":[
- {"id":"coast","gap":0.8,"text":"Kerala, on India's south-west coast, a January morning in 1997."},
- {"id":"markets","gap":0.8,"text":"Sardine boats head for the beach markets with their catch. The markets close by eight, and a boat can reach only one."},
- {"id":"blind","gap":0.8,"text":"Each skipper must choose one while still at sea, without knowing what the markets will pay."},
- {"id":"dump","gap":0.8,"text":"At Badagara, eleven crews find no buyers, and their catch goes back into the sea. Within fifteen kilometres, twenty-seven buyers leave with no fish."},
- {"id":"phones","gap":0.8,"text":"Within weeks, mobile phones reach the coast. At sea, a skipper calls buyers in several markets, agrees a price, and only then chooses where to land."},
- {"id":"act","gap":0.8,"text":"The question was always the same: what will each market pay? It mattered because the skipper would act on the answer, by choosing where to land."},
- {"id":"time","gap":0.8,"text":"The phones brought that answer in time."}]},
+"trial":{"name":"A trial well","lead":1.4,"tail":1.0,"vo":[
+ {"id":"edge","gap":0.8,"text":"Iran, in the 1960s. New qanats are still being dug, tunnels that bring water from under the mountains."},
+ {"id":"survey","gap":0.8,"text":"An expert walks the slopes in autumn, looking for a damp patch, or greener plants, where water might be."},
+ {"id":"cost","gap":0.8,"text":"A qanat ten kilometres long costs $13,500 to $34,000 to build.","say":"A qanat ten kilometres long costs thirteen and a half to thirty-four thousand dollars to build."},
+ {"id":"sure","gap":0.8,"text":"And until it's finished, no one can be sure it will flow all year."},
+ {"id":"need","gap":0.8,"text":"Dug to a trickle, it would leave the fields dry, and the money gone."},
+ {"id":"know","gap":0.8,"text":"Before they pay, the builders need to know: is there water enough here?"},
+ {"id":"trial","gap":0.8,"text":"So two diggers, the muqannis, sink a trial well, and the earth comes up in leather buckets."},
+ {"id":"dip","gap":0.8,"text":"At damp ground, they scoop out a hollow, and for the next few days, dip the buckets in, to measure how fast the water gathers."},
+ {"id":"trickle","gap":0.8,"text":"More than a trickle means real groundwater. Only then is the tunnel dug."},
+ {"id":"act","gap":0.8,"text":"The question was how fast the water comes. It mattered because the builders would act on the answer, by choosing whether to dig."},
+ {"id":"time","gap":0.8,"text":"The trial well brought that answer in time."},
+ {"id":"repaid","gap":0.8,"text":"Their money went where the water was, and a qanat repaid them well: ten to twenty-five percent, in crops and water sold."}]},
 "backlog":{"name":"The backlog, read again","lead":1.0,"tail":1.0,"vo":[
  {"id":"note","gap":0.8,"text":"Tomás's note asks which questions matter."},
  {"id":"pile","gap":0.8,"text":"On day one, the reporting team handed him their backlog: forty-two requests for reports, dashboards and extracts, most of them marked urgent."},
- {"id":"test","gap":0.8,"text":"Then, he couldn't tell which mattered. Now there's a map, and the skipper's test for every request: who will decide what with the answer, and when?"}]},
+ {"id":"test","gap":0.8,"text":"Then, he couldn't tell which mattered. Now there's a map, and a trial well for every request, before anything is built: who will decide what with the answer, and when?"}]},
 "up":{"name":"Up from a request","lead":1.0,"tail":1.0,"vo":[
  {"id":"first","gap":0.8,"text":"The first asks which lines fail most often. Grace's planners need it every spring, to decide which lines to renew first."},
  {"id":"climb","gap":0.8,"text":"That decision belongs to maintaining assets, and it serves a goal: replace assets before they fail. The request reaches the top."},
  {"id":"lobby","gap":0.8,"text":"The next asks for a dashboard of every outage, refreshed every minute, for the screen in the lobby."},
- {"id":"live","gap":0.8,"text":"It's as live as the skipper's call, but who decides what with it? No one. It reaches nothing."}]},
+ {"id":"live","gap":0.8,"text":"It's never out of date, but who decides what with it? No one. It reaches nothing."}]},
 "half":{"name":"Half of them","lead":1.0,"tail":1.0,"vo":[
  {"id":"all","gap":0.8,"text":"He traces all forty-two. Twenty-one reach a decision and a goal. Some get there through an obligation: the regulator decides with them."},
  {"id":"none","gap":0.8,"text":"The other twenty-one reach nothing: a report someone needed once, a dashboard nobody acts on, an export nobody can explain."},
@@ -457,24 +462,25 @@ const NARR={
  {"id":"reports","gap":0.8,"text":"Now, what to build. Twenty-one requests could become twenty-one reports, each kept by someone different."},
  {"id":"group","gap":0.8,"text":"Grouped by capability, and by the domain they belong to, they need four data products: three on the network's side of the wall, one on retail's."},
  {"id":"each","gap":0.8,"text":"Each answers many questions, has one owner, and stays on its own side of the wall."}]},
-"coast":{"name":"Back on the coast","lead":1.0,"tail":1.0,"vo":[
- {"id":"spread","gap":0.8,"text":"Back on the coast of Kerala, the phones spread, district by district."},
- {"id":"knew","gap":0.8,"text":"On boat after boat, the skipper now knew what each market would pay before choosing where to land."},
- {"id":"gain","gap":0.8,"text":"The waste stopped, and prices along the coast evened out. Crews earned eight percent more, and fish cost four percent less."}]},
+"well":{"name":"Back at the trial well","lead":1.0,"tail":1.0,"vo":[
+ {"id":"back","gap":0.8,"text":"Back at the trial well, the builders' question traces the same way."},
+ {"id":"goal","gap":0.8,"text":"A goal: water for the fields, all year. A decision: whether to dig the tunnel here, made by the builders before they pay."},
+ {"id":"measure","gap":0.8,"text":"A question: how fast does the water come? And a measure: how fast the hollow fills, day by day."},
+ {"id":"reach","gap":0.8,"text":"Every part was there, so the answer reached the people who would act on it, in time."}]},
 "end":{"name":"Questions that matter","lead":1.0,"tail":1.0,"vo":[
  {"id":"confirm","gap":0.8,"text":"Grace confirms her measures and their definitions. The third goes to the head of retail, as a draft."},
  {"id":"answer","gap":0.8,"text":"Tomás's note has an answer: the questions that matter are the ones someone will act on, in time, traced to a goal, with a measure and an owner."},
  {"id":"next","gap":0.8,"text":"But a measure is only as true as the data beneath it, and the rules that data must keep. Next: where each rule belongs."}]}
 };
 
-const VODUR={"kerala/coast": 5.59, "kerala/markets": 6.796, "kerala/blind": 4.607, "kerala/dump": 9.393, "kerala/phones": 9.74, "kerala/act": 8.029, "kerala/time": 1.823, "backlog/note": 2.557, "backlog/pile": 8.843, "backlog/test": 8.011, "up/first": 7.71, "up/climb": 8.073, "up/lobby": 5.617, "up/live": 5.43, "half/all": 8.823, "half/none": 8.002, "half/back": 4.629, "down/way": 7.779, "down/gqm": 4.917, "down/better": 6.393, "down/measure": 5.526, "down/unit": 3.68, "down/meet": 5.108, "missing/afford": 5.287, "missing/behind": 7.747, "missing/register": 3.342, "missing/farah": 6.605, "count/two": 5.526, "count/disagree": 3.916, "count/clock": 5.126, "count/define": 8.898, "count/same": 2.458, "home/home": 4.002, "home/homes": 9.004, "home/owner": 5.76, "home/means": 3.102, "build/reports": 6.346, "build/group": 8.809, "build/each": 4.636, "coast/spread": 3.909, "coast/knew": 5.216, "coast/gain": 7.479, "end/confirm": 6.092, "end/answer": 8.913, "end/next": 7.488};
+const VODUR={"trial/edge": 7.311, "trial/survey": 5.955, "trial/cost": 5.63, "trial/sure": 3.31, "trial/need": 3.667, "trial/know": 3.646, "trial/trial": 5.265, "trial/dip": 7.143, "trial/trickle": 4.212, "trial/act": 7.377, "trial/time": 2.045, "trial/repaid": 7.359, "backlog/note": 2.557, "backlog/pile": 8.843, "backlog/test": 9.462, "up/first": 7.71, "up/climb": 8.073, "up/lobby": 5.617, "up/live": 4.609, "half/all": 8.823, "half/none": 8.002, "half/back": 4.629, "down/way": 7.779, "down/gqm": 4.917, "down/better": 6.393, "down/measure": 5.526, "down/unit": 3.68, "down/meet": 5.108, "missing/afford": 5.287, "missing/behind": 7.747, "missing/register": 3.342, "missing/farah": 6.605, "count/two": 5.526, "count/disagree": 3.916, "count/clock": 5.126, "count/define": 8.898, "count/same": 2.458, "home/home": 4.002, "home/homes": 9.004, "home/owner": 5.76, "home/means": 3.102, "build/reports": 6.346, "build/group": 8.809, "build/each": 4.636, "well/back": 3.61, "well/goal": 7.179, "well/measure": 5.663, "well/reach": 4.31, "end/confirm": 6.092, "end/answer": 8.913, "end/next": 7.488};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: the skipper's boat in at Chombala, where buyers wait, then the title; the goal's line and the request's
+   Three wordless moments: the water running out of the new qanat to the fields, then the title; the goal's line and the request's
    line meeting at one decision; and the ending. */
 const BREATH={
-"kerala":{"hold":{"coast":0.6,"markets":0.8,"blind":0.6,"dump":1.0,"phones":0.9,"act":0.6},"breathe":4.4},
+"trial":{"hold":{"edge":0.6,"survey":0.9,"cost":0.4,"sure":0.6,"need":1.2,"know":0.6,"trial":0.9,"dip":1.2,"trickle":1.4,"act":0.6,"time":1.6},"breathe":4.4},
 "backlog":{"hold":{"note":0.7,"pile":0.9}},
 "up":{"hold":{"first":0.8,"climb":1.0,"lobby":0.9}},
 "half":{"hold":{"all":0.8,"none":0.9}},
@@ -483,7 +489,7 @@ const BREATH={
 "count":{"hold":{"disagree":0.9,"clock":0.9,"define":0.9}},
 "home":{"hold":{"homes":1.0}},
 "build":{"hold":{"reports":0.8,"group":1.0}},
-"coast":{"hold":{"spread":0.8,"knew":1.0}},
+"well":{"hold":{"back":1.0,"goal":1.6,"measure":1.6,"reach":0.6}},
 "end":{"hold":{"confirm":0.7,"answer":0.9},"breathe":5.0}
 };
 
@@ -1993,275 +1999,552 @@ eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()
   ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
 yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
 
-/* ===== Now the questions appear: the film's own pictures (prefixed d8_) =====
-   Kerala, January 1997: a sketch map of India's south and of the northern Kerala coast, with the fifteen beach markets of Jensen's
-   survey placed by their distances along the coast; sardine boats coming in at dawn, their skippers not knowing what the markets
-   will pay; the beach at Badagara, where crews pour their catch back into the sea while buyers a few kilometres away leave with
-   nothing; the phone towers that reached the coast district by district; a skipper's phone at sea, close up and as a small icon; and
-   one morning as a line, with the price arriving too late or in time. On the wall and on the films' dark
-   glass: the reporting team's backlog as index cards; requests traced up to a decision, a capability and a goal; goals traced down
-   to decisions, questions and measures; a measure's definition, its home on the map and its owner; households falling behind; and
-   data products on each side of the wall between the network and retail.
-   Kerala is drawn in the series' own style, not in the style of Kerala's art, and no borders are drawn (PLAYBOOK §2). On the map,
-   people are icons, as on any map; up close, the story is told by the boat, the catch, the birds and a hand holding a phone. */
+/* ===== Business architecture for data: the series' components =====
+   The second series on enterprise architecture, after The map before the data, in its look (films/enterprise-architecture/shared/src/ea.js:
+   paper drafts on a wall, the confirmed model in glass, the six layers in their colours) and its world: the publicly owned energy
+   utility, Tomás and the owners. Each film opens on its part of one true story, the qanats of Iran, drawn here in the series' own style,
+   never in the style of Persian art: the desert from above, with its chain of shafts; the qanat cut away, with its tunnel, shafts and
+   water; the village's fields; and the people of the story as plain silhouettes with no faces, lit at the edge (the shareholders, the
+   water master and the diggers). Then the data practice on the map, the piece that closes every film: the data team's part of the
+   business layer, drawn element by element as ArchiMate draws them, building up film by film, to the series' last.
+   Everything here is shared by the series' films (each bundles it, from film.json's src); a film keeps its own pictures in its own
+   source. Names start with ba (BA for constants). */
+
+/* ---------- colours ---------- */
+// the series' colour (water), the layers it works in, the two sides of the utility's wall (the network in blue, retail in rose),
+// red for what fails, green for a check that passes; the desert's sand, earth and the water underground
+const BAC=[84,212,240];
+const BA_STR=LAY6[1][1],BA_BUS=LAY6[2][1],BA_INF=LAY6[3][1],BA_APP=LAY6[4][1];
+const BA_NET=[132,176,255],BA_RET=[255,150,186],BA_RED=[232,96,84],BA_OK=[132,226,160];
+const BA_SAND=[222,178,120],BA_EARTH=[120,82,56],BA_WATER=[70,204,246],BA_GREEN=[96,196,92],BA_DRY=[176,132,84];
+// the series' seven films, in order (five until 23 November 2026, when Now the questions appear and Rules with a home joined from The
+// map before the data, as films 5 and 6)
+const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Now the questions appear","Rules with a home","Rules and expectations the business owns"];
+// no-break spaces: words a label should keep on one line
+const ba_nb=s=>s.replace(/ /g," ");
+// someone standing at the right of the frame, drawn facing the other way
+function baPersonR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
+// a tag on something in a scene the camera moves through: placed where (wx, wy) is now on screen, and drawn at the screen's own
+// size, so it reads the same however far the camera has zoomed (o.dy moves it up or down on screen)
+function baTagAt(ctx,S,wx,wy,s,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const p=ctx.getTransform().transformPoint(new DOMPoint(wx,wy));
+  ctx.save();ctx.setTransform(S,0,0,S,0,0);withA(ctx,a,()=>tag(ctx,p.x/S,p.y/S+(o.dy||0),s,col,{align:o.align||"center",size:o.size||30}));ctx.restore();}
+
+/* ---------- titles ---------- */
+// the series' mark: three layers of the map, seen from above, the business layer between the other two lit and filled
+function baMark(ctx,x,y,s,a,p){if(a<=0.01)return;p=p==null?1:p;withA(ctx,a,()=>{[[1,0.35],[2,1],[3,0.35]].forEach(([li,lit],i)=>{const q=clamp(p*3-i,0,1);if(q<=0)return;const col=LAY6[li][1],cy=y-s*1.1+i*s*0.62+(1-spring(q*1.4))*-s*0.5;
+  withA(ctx,clamp(q*2,0,1),()=>{ctx.save();ctx.shadowColor=rgba(col,0.6*lit);ctx.shadowBlur=14*lit;rhomb(ctx,x,cy,s*2.6,s*0.95);ctx.fillStyle=rgba(col,0.06+0.26*lit);ctx.fill();ctx.strokeStyle=rgba(col,0.45+0.55*lit);ctx.lineWidth=s*0.09;ctx.stroke();ctx.restore();});});});}
+// the title card, over whatever the chapter is drawing: the series, the film's title, and where it sits in the series. Its words come
+// in once the picture under them has gone dark, so no words show through each other (the same for the end card)
+function baTitle(ctx,S,t,t0,title,sub,n){const col=BAC,oA=fin(t,t0,0.8),tA=fin(t,t0+0.8,0.8);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,col,0.08);baMark(ctx,960,392,30,1,(t-t0-0.5)/1.4);T(ctx,"BUSINESS ARCHITECTURE FOR DATA",960,458,{w:800,size:30,align:"center",color:rgba(col,0.95)});
+    T(ctx,title,960,560,{w:800,size:88,align:"center"});if(sub)T(ctx,sub,960,632,{w:600,size:36,align:"center",color:rgba(SOFT,0.95)});
+    withA(ctx,fin(t,t0+1.2,0.8),()=>tag(ctx,960,712,n||"enterprise architecture, for data",col,{align:"center",size:28}));});}
+function baEnd(ctx,S,t,t0,title,line,n){const col=BAC,oA=fin(t,t0,1.0),tA=fin(t,t0+1.0,0.9);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)wrapT(ctx,line,960,388,1300,{w:700,size:44,align:"center",lh:58});baMark(ctx,960,540,20,0.95,1);T(ctx,title,960,622,{w:800,size:44,align:"center",color:rgba(col,1)});
+    T(ctx,"Business architecture for data"+(n?" · "+n:"")+" · Learning Data",960,680,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
+
+/* ---------- the desert, from above ---------- */
+// The desert seen from high above, in the camera's world (wider than the frame): sand with long ripples, the mountains at the top left,
+// the qanat's chain of shafts running down from their foot to the village, each shaft ringed by the earth dug out of it, and at its end
+// the water coming to light, an open channel, the village's flat roofs and domes, its trees, and its fields in a grid, each green
+// when watered and dry when not. o.flow (0..1) carries the water along the channel; o.wet[i] (0..1) waters field i; o.lit (0..1)
+// lights the chain of shafts; o.warm (0..1) is the low sun of morning or evening.
+const BA_CHAIN=(()=>{const P=[];for(let i=0;i<=19;i++){const u=i/19;P.push([lerp(430,1236,u)+Math.sin(u*Math.PI)*-38,lerp(318,640,u)+Math.sin(u*Math.PI*1.2)*22]);}return P;})();
+const BA_OUT=[1262,652];
+// the fields: a grid of plots beside the village, each [x, y, w, h]; the channel runs along the top and down between them
+const BA_FIELDS=(()=>{const F=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++)F.push([1330+c*124,700+r*92,112,80]);return F;})();
+const BA_HOUSES=[[1386,520,62,46],[1458,508,54,52],[1528,530,70,40],[1610,512,58,48],[1676,536,64,42],[1420,584,58,40],[1500,592,66,38],[1580,586,52,44],[1650,598,60,36],[1736,560,52,46]];
+const BA_DOMES=[[1478,560,20],[1630,566,18],[1712,500,16]];
+function ba_aerial(ctx,t,o){o=o||{};const X0=-1400,X1=3300,Y0=-900,Y1=2000,wm=o.warm||0;
+  // sand: warm, with long low ripples and a few darker patches of gravel
+  const g=ctx.createLinearGradient(0,-200,0,1300);g.addColorStop(0,rgba(mix([180,136,88],[200,144,92],wm),1));g.addColorStop(0.5,rgba(mix([214,170,114],[226,170,112],wm),1));g.addColorStop(1,rgba(mix([164,120,80],[178,118,80],wm),1));
+  ctx.fillStyle=g;ctx.fillRect(X0,Y0,X1-X0,Y1-Y0);
+  ctx.save();ctx.strokeStyle="rgba(255,236,200,0.05)";ctx.lineWidth=10;for(let i=0;i<34;i++){const y=-260+i*52;ctx.beginPath();for(let x=-400;x<=2400;x+=80){const yy=y+Math.sin(x*0.004+i*0.7)*18+x*0.08;x===-400?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}ctx.restore();
+  for(let i=0;i<22;i++){const x=hash(i,601)*2200-140,y=hash(i,602)*1200-60,r=60+hash(i,603)*160,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(80,60,120,"+(0.07+0.06*hash(i,604))+")");gg.addColorStop(1,"rgba(80,60,120,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  // the mountains, top left, seen from high above: a dark mass, its ridges lit on the side towards the sun and in shadow on the
+  // other, each spine with spurs running down to the plain
+  const mg=ctx.createRadialGradient(-260,-280,80,-260,-280,1000);mg.addColorStop(0,rgba(mix([82,62,104],[104,72,96],wm),0.95));mg.addColorStop(0.55,rgba(mix([130,96,112],[150,100,100],wm),0.62));mg.addColorStop(1,"rgba(150,110,76,0)");
+  ctx.fillStyle=mg;ctx.fillRect(-1400,-900,2400,2000);
+  const ridge=(P,w0)=>{for(let i=1;i<P.length;i++){const[x0,y0]=P[i-1],[x1,y1]=P[i],w=w0*(1-0.55*i/P.length);
+      ctx.strokeStyle="rgba(46,34,90,0.45)";ctx.lineWidth=w*1.7;ctx.beginPath();ctx.moveTo(x0+w*0.55,y0+w*0.65);ctx.lineTo(x1+w*0.55,y1+w*0.65);ctx.stroke();
+      ctx.strokeStyle=rgba(mix([218,174,128],[238,184,130],wm),0.5);ctx.lineWidth=w*0.6;ctx.beginPath();ctx.moveTo(x0-w*0.3,y0-w*0.3);ctx.lineTo(x1-w*0.3,y1-w*0.3);ctx.stroke();}};
+  ctx.save();ctx.lineCap="round";ctx.lineJoin="round";
+  [[[-760,-520],[-520,-360],[-300,-220],[-80,-90],[140,10],[300,96]],[[-300,-660],[-120,-430],[40,-270],[200,-150],[380,-60]],[[-940,-120],[-660,-40],[-430,46],[-220,156]]].forEach((sp,j)=>{
+    for(let i=1;i<sp.length;i++){const[x0,y0]=sp[i-1],[x1,y1]=sp[i],dx=x1-x0,dy=y1-y0,d=Math.hypot(dx,dy),ux=dx/d,uy=dy/d,nx=-uy,ny=ux;
+      for(let k=0;k<3;k++){const u=(k+0.5)/3,bx=lerp(x0,x1,u),by=lerp(y0,y1,u);[-1,1].forEach(sd=>{const L=(80+80*hash(i*7+k+j*31,sd+5))*(1-0.1*i);
+        ridge([[bx,by],[bx+nx*sd*L*0.55+ux*L*0.3,by+ny*sd*L*0.55+uy*L*0.3],[bx+nx*sd*L+ux*L*0.55,by+ny*sd*L+uy*L*0.55]],11);});}}
+    ridge(sp,24);});
+  ctx.restore();
+  // the chain of shafts: each one a ring of dug earth with a dark mouth, its shadow to the lower right; lit as the narration names it
+  const lit=o.lit||0;BA_CHAIN.forEach(([x,y],i)=>{const r=i===0?17:13-4*i/19;ctx.fillStyle="rgba(60,40,26,0.28)";ctx.beginPath();ctx.ellipse(x+4,y+5,r*1.15,r,0,0,TAU);ctx.fill();
+    const rg=ctx.createRadialGradient(x-r*0.3,y-r*0.3,1,x,y,r*1.1);rg.addColorStop(0,"rgba(236,204,160,1)");rg.addColorStop(1,"rgba(184,140,98,1)");ctx.fillStyle=rg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
+    ctx.fillStyle="rgba(34,22,16,0.92)";ctx.beginPath();ctx.arc(x,y,r*0.34,0,TAU);ctx.fill();
+    if(lit>0.01){const v=lit*clamp(((o.litP==null?1:o.litP)*20-i),0,1);if(v>0.01)glow(ctx,x,y,r*2.6,BAC,0.34*v);}});
+  // the water comes to light, and runs in an open channel past the village to the fields
+  const fl=o.flow==null?1:o.flow,CH=[BA_OUT,[1300,676],[1330,690],[1820,690]];
+  ctx.save();ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="rgba(96,64,40,0.6)";ctx.lineWidth=14;ctx.beginPath();CH.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();
+  if(fl>0.01){const L=[0];for(let i=1;i<CH.length;i++)L.push(L[i-1]+Math.hypot(CH[i][0]-CH[i-1][0],CH[i][1]-CH[i-1][1]));let left=L[L.length-1]*fl;
+    ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=8;ctx.shadowColor=rgba(BA_WATER,0.6);ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(CH[0][0],CH[0][1]);
+    for(let i=1;i<CH.length&&left>0;i++){const d=L[i]-L[i-1],f=Math.min(1,left/d);ctx.lineTo(lerp(CH[i-1][0],CH[i][0],f),lerp(CH[i-1][1],CH[i][1],f));left-=d;}ctx.stroke();ctx.shadowBlur=0;
+    // light on the water, moving along it
+    for(let k=0;k<10;k++){const u=((t*0.06+k/10)%1)*fl,x=lerp(1330,1820,u),y=690;ctx.fillStyle="rgba(230,248,255,0.5)";ctx.beginPath();ctx.ellipse(x,y,7,2,0,0,TAU);ctx.fill();}}
+  ctx.restore();
+  // the fields, each fed by a small gate from the channel above it, or from the field before it in its column
+  BA_FIELDS.forEach(([x,y,w,h],i)=>{const wt=clamp(o.wet?o.wet[i]||0:(o.green==null?0.7:o.green),0,1),c=mix(BA_DRY,BA_GREEN,wt);
+    ctx.fillStyle="rgba(60,40,26,0.3)";ctx.fillRect(x+4,y+5,w,h);ctx.fillStyle=rgba(c,1);ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle=rgba(mix(c,[40,30,20],0.4),0.7);ctx.lineWidth=2;for(let k=1;k<5;k++){ctx.beginPath();ctx.moveTo(x+6,y+k*h/5);ctx.lineTo(x+w-6,y+k*h/5);ctx.stroke();}
+    const fw=o.fill?o.fill[i]||0:0;if(fw>0.01){ctx.fillStyle=rgba(BA_WATER,0.5*fw);ctx.fillRect(x,y,w,h*clamp(fw*1.4,0,1));glow(ctx,x+w/2,y+h/2,70,BA_WATER,0.25*fw);}
+    ctx.strokeStyle="rgba(70,48,30,0.6)";ctx.lineWidth=3;ctx.strokeRect(x,y,w,h);});
+  // trees along the channel and the village's edge: round canopies, dark at the bottom, lit at the top, with their shadows
+  [[1296,640,26],[1340,628,22],[1372,650,20],[1800,650,24],[1840,610,20],[1360,470,24],[1760,470,22],[1300,560,22],[1822,540,20],[1700,640,18]].forEach(([x,y,r],i)=>{ctx.fillStyle="rgba(40,30,20,0.32)";ctx.beginPath();ctx.ellipse(x+r*0.4,y+r*0.5,r,r*0.86,0,0,TAU);ctx.fill();
+    const tg=ctx.createRadialGradient(x-r*0.35,y-r*0.4,2,x,y,r);tg.addColorStop(0,"rgba(140,214,100,1)");tg.addColorStop(1,"rgba(36,110,62,1)");ctx.fillStyle=tg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();});
+  // the village: flat roofs of earth brick, each with its shadow; a few domes
+  BA_HOUSES.forEach(([x,y,w,h],i)=>{ctx.fillStyle="rgba(50,34,22,0.34)";ctx.fillRect(x+6,y+7,w,h);const hg=ctx.createLinearGradient(x,y,x+w,y+h);hg.addColorStop(0,"rgba(232,196,150,1)");hg.addColorStop(1,"rgba(196,154,110,1)");ctx.fillStyle=hg;ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle="rgba(120,86,58,0.6)";ctx.lineWidth=2;ctx.strokeRect(x+3,y+3,w-6,h-6);});
+  BA_DOMES.forEach(([x,y,r])=>{ctx.fillStyle="rgba(50,34,22,0.34)";ctx.beginPath();ctx.arc(x+5,y+6,r,0,TAU);ctx.fill();const dg=ctx.createRadialGradient(x-r*0.4,y-r*0.4,1,x,y,r);dg.addColorStop(0,"rgba(246,220,180,1)");dg.addColorStop(1,"rgba(186,144,104,1)");ctx.fillStyle=dg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();});}
+
+/* ---------- the qanat, cut away ---------- */
+// The ground cut open from the mountain's foot to the village: the surface falls faster than the tunnel does, so the tunnel, sloping
+// gently, meets the surface at the outlet. Under the mountain, the groundwater; the tunnel's upper reach runs through it, and water
+// seeps in. A shaft rises from the tunnel to the surface every so often, each with its ring of dug earth; the deepest, the first, is the
+// mother well. ba_ys(x) is the surface, ba_yt(x) the tunnel's floor, ba_yw(x) the top of the groundwater; BA_SH the shafts.
+const BA_SURF=[[-900,-260],[-500,-60],[-250,110],[0,290],[150,404],[260,452],[600,560],[1000,680],[1300,768],[1440,800],[1700,814],[2600,834]];
+function ba_lin(P,x){if(x<=P[0][0])return P[0][1];for(let i=1;i<P.length;i++)if(x<=P[i][0]){const u=(x-P[i-1][0])/(P[i][0]-P[i-1][0]);return lerp(P[i-1][1],P[i][1],u);}return P[P.length-1][1];}
+const ba_ys=x=>ba_lin(BA_SURF,x),ba_yt=x=>770+(x-250)*0.0255,ba_yw=x=>x<250?640-(250-x)*0.25:640+(x-250)*0.35;
+const BA_TH=34,BA_XM=250,BA_XO=1440,BA_SH=(()=>{const S=[];for(let x=BA_XM;x<BA_XO-60;x+=100)S.push(x);return S;})();
+// the sky and the far ridges over the section; o.warm (0..1) warms it, o.dusk (0..1) darkens it towards evening
+function ba_secSky(ctx,o){o=o||{};const wm=o.warm||0,dk=o.dusk||0,X0=-1400,X1=3300,g=ctx.createLinearGradient(0,-600,0,840);
+  g.addColorStop(0,rgba(mix([28,92,184],[20,36,100],dk),1));g.addColorStop(0.45,rgba(mix(mix([96,164,226],[110,86,160],dk),[140,170,220],wm*0.3),1));
+  g.addColorStop(0.66,rgba(mix(mix([160,210,236],[160,104,140],dk),[236,214,196],wm*0.4),1));g.addColorStop(0.8,rgba(mix(mix([226,214,200],[200,132,108],dk),[250,206,162],wm),1));g.addColorStop(1,rgba(mix(mix([246,228,200],[216,150,110],dk),[255,216,170],wm),1));
+  ctx.fillStyle=g;ctx.fillRect(X0,-900,X1-X0,1900);
+  // the low sun's light over the plain, to the right
+  glow(ctx,2400,620,760,mix([255,216,166],[255,160,110],dk),0.32);
+  // two ranges far off, pale with distance; they reach down behind the ground, so no sky shows under them
+  [[0.5,[134,170,208],-70,0],[0.72,[104,138,184],50,1]].forEach(([k,c,dy,i])=>{ctx.fillStyle=rgba(mix(mix(c,[226,170,140],wm*0.35),[64,60,124],dk*0.5),k);ctx.beginPath();ctx.moveTo(X0,1400);
+    for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,440+dy+Math.sin(x*0.0019+i*2.1)*44+Math.sin(x*0.0061+i*0.7)*15+Math.max(0,(300-x)*0.22));ctx.lineTo(X1,1400);ctx.closePath();ctx.fill();});}
+// the cut-away ground, the groundwater, the tunnel and its shafts. o.flow (0..1): how far the water has run down the tunnel; or
+// o.water, the stretches of tunnel that hold water, as [[x0, x1], ...] (a cave-in stops it, and what's below drains away);
+// o.block: x of a cave-in (null for none), o.blockA (0..1) how far it has fallen; o.wet (0..1): the groundwater's light;
+// o.hiSh (0..1): the shafts lit; o.hiT: the tunnel lit; t moves the water
+function ba_section(ctx,t,o){o=o||{};const X0=-1400,X1=3300;
+  // the ground in cut: a warm, dark earth, with strata
+  ctx.save();ctx.beginPath();ctx.moveTo(X0,ba_ys(X0));for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x));ctx.lineTo(X1,1900);ctx.lineTo(X0,1900);ctx.closePath();
+  const eg=ctx.createLinearGradient(0,300,0,1300);eg.addColorStop(0,"rgba(152,100,62,1)");eg.addColorStop(0.35,"rgba(104,66,46,1)");eg.addColorStop(1,"rgba(28,30,56,1)");ctx.fillStyle=eg;ctx.fill();ctx.clip();
+  // a sandy band along the surface, then layers of earth and gravel that follow the ground's slope, with stones in them
+  ctx.beginPath();ctx.moveTo(X0,ba_ys(X0)-4);for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x)-4);for(let x=X1;x>=X0;x-=40)ctx.lineTo(x,ba_ys(x)+30);ctx.closePath();ctx.fillStyle="rgba(196,150,100,0.42)";ctx.fill();
+  for(let i=0;i<18;i++){const d=58+i*40+hash(i,716)*14,k=hash(i,717);ctx.strokeStyle="rgba(255,226,180,"+(0.025+0.04*k)+")";ctx.lineWidth=2+k*5;ctx.beginPath();
+    for(let x=X0;x<=X1;x+=40){const y=lerp(ba_ys(x)+d,560+d*0.9,0.35)+Math.sin(x*0.004+i*1.7)*8;x===X0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
+  for(let i=0;i<170;i++){const x=hash(i,711)*3200-600,y=ba_ys(x)+26+hash(i,712)*760,r=2+hash(i,713)*6;ctx.fillStyle="rgba("+(hash(i,714)>0.5?"58,38,26,":"176,134,98,")+(0.22+0.3*hash(i,715))+")";ctx.beginPath();ctx.ellipse(x,y,r*1.4,r,hash(i,719)*3,0,TAU);ctx.fill();}
+  // the groundwater: earth soaked with it, from the mountain down to where its top passes under the tunnel
+  const wl=o.wet==null?1:o.wet;ctx.beginPath();ctx.moveTo(X0,ba_yw(X0));for(let x=X0;x<=1500;x+=30)ctx.lineTo(x,ba_yw(x));ctx.lineTo(1500,1900);ctx.lineTo(X0,1900);ctx.closePath();
+  const wg=ctx.createLinearGradient(0,600,0,1100);wg.addColorStop(0,rgba(BA_WATER,0.30*wl+0.06));wg.addColorStop(1,rgba([20,96,180],0.5*wl+0.1));ctx.fillStyle=wg;ctx.fill();
+  ctx.fillStyle=rgba([170,220,255],0.22*wl);for(let i=0;i<120;i++){const x=hash(i,721)*1900-400,y=ba_yw(x)+14+hash(i,722)*360;ctx.beginPath();ctx.arc(x,y,1.6+hash(i,723)*1.6,0,TAU);ctx.fill();}
+  ctx.strokeStyle=rgba(BA_WATER,0.55*wl+0.15);ctx.lineWidth=2.5;ctx.setLineDash([12,10]);ctx.beginPath();for(let x=X0;x<=1500;x+=30)x===X0?ctx.moveTo(x,ba_yw(x)):ctx.lineTo(x,ba_yw(x));ctx.stroke();ctx.setLineDash([]);
+  // the shafts: from the tunnel up to the surface; the mother well a little wider
+  BA_SH.forEach((x,i)=>{const w=i===0?12:8,ys=ba_ys(x),yt=ba_yt(x);ctx.fillStyle="rgba(14,12,24,0.96)";ctx.fillRect(x-w/2,ys,w,yt-ys);
+    if(o.hiSh>0.01){ctx.fillStyle=rgba(BAC,0.35*o.hiSh);ctx.fillRect(x-w/2-2,ys,w+4,yt-ys);}});
+  // the tunnel: a dark channel, BA_TH high (a stooping digger's height at the village's scale), sloping gently to the outlet
+  ctx.fillStyle="rgba(16,14,28,0.97)";ctx.beginPath();ctx.moveTo(BA_XM-8,ba_yt(BA_XM)-BA_TH);ctx.lineTo(BA_XO,ba_yt(BA_XO)-BA_TH);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+2);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+8);ctx.lineTo(BA_XO,ba_yt(BA_XO)+3);ctx.lineTo(BA_XM-8,ba_yt(BA_XM)+3);ctx.closePath();ctx.fill();
+  if(o.hiT>0.01){ctx.strokeStyle=rgba(BAC,0.7*o.hiT);ctx.lineWidth=2.5;ctx.stroke();}
+  // the water in it: seeping in along the wet reach, then running on its floor towards the outlet, in each stretch that holds it
+  const fl=o.flow==null?1:o.flow,xb=o.block==null?BA_XO+40:o.block,WS=o.water||[[BA_XM,lerp(BA_XM,BA_XO+30,fl)]];
+  WS.forEach(([x0,x1])=>{x0=Math.max(BA_XM,x0);x1=Math.min(BA_XO+30,x1);if(x1-x0<2)return;
+    ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=5;ctx.shadowColor=rgba(BA_WATER,0.7);ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(x0,ba_yt(x0));ctx.lineTo(x1,ba_yt(x1));ctx.stroke();ctx.shadowBlur=0;
+    for(let k=0;k<26;k++){const u=(t*0.05+k/26)%1,x=lerp(BA_XM,BA_XO,u);if(x<x0||x>x1)continue;ctx.fillStyle="rgba(230,248,255,0.65)";ctx.beginPath();ctx.ellipse(x,ba_yt(x)-1,6,1.6,0.03,0,TAU);ctx.fill();}});
+  // drops seeping in from the groundwater, in the wet reach
+  if(WS.length&&WS[0][1]>BA_XM+20)for(let k=0;k<8;k++){const x=BA_XM+20+k*42,ph=(t*0.7+hash(k,731))%1;if(ba_yw(x)>ba_yt(x)-BA_TH)continue;ctx.fillStyle=rgba([200,236,255],0.7*(1-ph));ctx.beginPath();ctx.arc(x,ba_yt(x)-BA_TH+ph*(BA_TH-2),1.8,0,TAU);ctx.fill();}
+  // a cave-in: earth fallen into the tunnel, and the water pooled behind it
+  if(o.block!=null&&(o.blockA||0)>0.01){const b=o.blockA,yt=ba_yt(xb);ctx.fillStyle=rgba([120,84,58],1);ctx.beginPath();ctx.moveTo(xb-34,yt+3);ctx.quadraticCurveTo(xb-10,yt-(BA_TH+6)*b,xb+4,yt-(BA_TH+2)*b);ctx.quadraticCurveTo(xb+20,yt-(BA_TH-6)*b,xb+36,yt+3);ctx.closePath();ctx.fill();
+    for(let k=0;k<7;k++){const x=xb-26+k*9,y=yt-4-hash(k,741)*(BA_TH-6)*b;ctx.fillStyle="rgba(90,60,40,1)";ctx.beginPath();ctx.arc(x,y,3+hash(k,742)*3,0,TAU);ctx.fill();}
+    ctx.fillStyle=rgba(BA_WATER,0.5*b);ctx.fillRect(xb-150,yt-8*b,116,8*b+3);}
+  ctx.restore();
+  // the surface: a crisp line of light along the ground, and each shaft's ring of dug earth, seen side on as two low humps
+  ctx.save();ctx.strokeStyle="rgba(255,226,180,0.55)";ctx.lineWidth=2.5;ctx.beginPath();for(let x=X0;x<=X1;x+=40)x===X0?ctx.moveTo(x,ba_ys(x)):ctx.lineTo(x,ba_ys(x));ctx.stroke();
+  BA_SH.forEach((x,i)=>{const ys=ba_ys(x),r=i===0?34:26,h=i===0?16:12;[-1,1].forEach(sd=>{const cx=x+sd*(r*0.55+3);ctx.fillStyle="rgba(176,132,92,1)";ctx.beginPath();ctx.moveTo(cx-r*0.5,ys+1);ctx.quadraticCurveTo(cx,ys-h*2,cx+r*0.5,ys+1);ctx.closePath();ctx.fill();
+    ctx.strokeStyle="rgba(255,226,180,0.4)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx-r*0.5,ys+1);ctx.quadraticCurveTo(cx,ys-h*2,cx+r*0.5,ys+1);ctx.stroke();});});
+  ctx.restore();}
+// the water at the outlet, out in the open: a channel along the surface from the outlet towards the village's fields, to x1, holding
+// water from a to b (0..1 along it: from 0 to fl as it fills; from a to 1 as it drains)
+function ba_channel(ctx,t,x1,fl,o){o=o||{};const x0=BA_XO+28,a=o.from||0,b=fl;
+  ctx.save();ctx.strokeStyle="rgba(96,64,40,0.8)";ctx.lineWidth=9;ctx.lineCap="round";ctx.beginPath();for(let x=x0;x<=x1;x+=20)x===x0?ctx.moveTo(x,ba_ys(x)+4):ctx.lineTo(x,ba_ys(x)+4);ctx.stroke();
+  if(b-a>0.005){const xa=lerp(x0,x1,clamp(a,0,1)),xe=lerp(x0,x1,clamp(b,0,1));ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=6;ctx.shadowColor=rgba(BA_WATER,0.7);ctx.shadowBlur=12;
+    ctx.beginPath();for(let x=xa;x<=xe;x+=20)x===xa?ctx.moveTo(x,ba_ys(x)+3):ctx.lineTo(x,ba_ys(x)+3);ctx.lineTo(xe,ba_ys(xe)+3);ctx.stroke();ctx.shadowBlur=0;
+    for(let k=0;k<12;k++){const u=(t*0.08+k/12)%1,x=lerp(x0,x1,u);if(x<xa||x>xe)continue;ctx.fillStyle="rgba(235,250,255,0.6)";ctx.beginPath();ctx.ellipse(x,ba_ys(x)+2,6,1.5,0,0,TAU);ctx.fill();}}ctx.restore();}
+// a small wooden gate in the channel, where the water turns into a field: o (0..1) is how far it's lifted
+function ba_gate(ctx,x,o,a){if(a<=0.01)return;const ys=ba_ys(x);withA(ctx,a,()=>{ctx.save();ctx.fillStyle="rgba(70,48,32,1)";ctx.fillRect(x-14,ys-26,4,30);ctx.fillRect(x+10,ys-26,4,30);
+  const lift=clamp(o,0,1)*16;ctx.fillStyle="rgba(132,94,60,1)";ctx.fillRect(x-10,ys-14-lift,20,18);ctx.strokeStyle="rgba(255,220,170,0.4)";ctx.lineWidth=1.5;ctx.strokeRect(x-10,ys-14-lift,20,18);ctx.restore();});}
+// The village beside the fields, side on. Behind the fields, its houses of earth brick (flat roofs, a few domes), a little paler with
+// the distance, and its trees: date palms and broad fruit trees. In front, the fields: a low bank at each end and rows of crop, green
+// and tall when watered (o.wet[i], 0..1), dry and short when not, with the water spread over the field in its turn (o.fill[i]).
+const BA_VFIELDS=[[1560,150],[1730,150],[1900,150],[2070,150]];
+const BA_VHOUSES=[[1462,96,70],[1556,120,58,1],[1688,86,92],[1782,124,66],[1916,100,78,1],[2026,128,60],[2166,92,88],[2268,132,68,1],[2410,110,80]];
+// a date palm: a tall trunk, leaning a little and ringed, and a crown of fronds that droop from it
+function ba_palm(ctx,x,ys,s,t){ctx.save();ctx.translate(x,ys);ctx.scale(s,s);
+  ctx.fillStyle="rgba(98,72,50,1)";ctx.beginPath();ctx.moveTo(-7,0);ctx.quadraticCurveTo(-4,-90,6,-180);ctx.lineTo(12,-180);ctx.quadraticCurveTo(4,-90,7,0);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="rgba(58,40,28,0.7)";ctx.lineWidth=1.6;for(let k=1;k<18;k++){const u=k/18,yy=-180*u,xx=9*u*u;ctx.beginPath();ctx.moveTo(xx-6,yy);ctx.lineTo(xx+6,yy+2);ctx.stroke();}
+  const sw=Math.sin((t||0)*0.8)*0.03;for(let k=0;k<10;k++){const an=-Math.PI*0.98+k*Math.PI*0.98/9+sw,L=66+16*hash(k,881),mx=9+Math.cos(an)*L*0.5,my=-182+Math.sin(an)*L*0.55,ex=9+Math.cos(an)*L,ey=-180+Math.sin(an)*L*0.55+L*0.36;
+    ctx.fillStyle=rgba(mix([56,96,50],[112,150,80],hash(k,882)),1);ctx.beginPath();ctx.moveTo(9,-183);ctx.quadraticCurveTo(mx,my-15,ex,ey);ctx.quadraticCurveTo(mx,my-1,9,-177);ctx.closePath();ctx.fill();}
+  ctx.restore();}
+// a broad fruit tree: a short trunk, forked, and a canopy of rounded masses, lit at the top
+function ba_tree(ctx,x,ys,s){ctx.save();ctx.translate(x,ys);ctx.scale(s,s);ctx.fillStyle="rgba(86,60,42,1)";ctx.beginPath();ctx.moveTo(-8,0);ctx.quadraticCurveTo(-5,-40,-16,-72);ctx.lineTo(-7,-74);ctx.quadraticCurveTo(0,-52,3,-76);ctx.lineTo(12,-72);ctx.quadraticCurveTo(5,-40,8,0);ctx.closePath();ctx.fill();
+  [[-34,-92,34],[34,-90,32],[0,-114,40],[-14,-80,28],[18,-78,28]].forEach(([cx,cy,r])=>{const g=ctx.createRadialGradient(cx-r*0.4,cy-r*0.5,2,cx,cy,r);g.addColorStop(0,"rgba(156,190,104,1)");g.addColorStop(1,"rgba(50,82,46,1)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fill();});
+  ctx.restore();}
+function ba_village(ctx,t,o){o=o||{};
+  // the houses, behind the fields
+  BA_VHOUSES.forEach(([x,w,h,dome],i)=>{const yb=ba_ys(x+w/2)-14,hg=ctx.createLinearGradient(x,yb-h,x+w,yb);hg.addColorStop(0,"rgba(230,198,158,1)");hg.addColorStop(1,"rgba(184,146,106,1)");
+    if(dome){const dg=ctx.createRadialGradient(x+w*0.4,yb-h-w*0.2,2,x+w/2,yb-h,w*0.34);dg.addColorStop(0,"rgba(236,210,172,1)");dg.addColorStop(1,"rgba(176,138,100,1)");ctx.fillStyle=dg;ctx.beginPath();ctx.ellipse(x+w/2,yb-h+2,w*0.32,w*0.3,0,Math.PI,0);ctx.fill();}
+    ctx.fillStyle=hg;ctx.fillRect(x,yb-h,w,h+16);ctx.fillStyle="rgba(150,112,80,0.7)";ctx.fillRect(x-2,yb-h-4,w+4,5);
+    ctx.fillStyle="rgba(62,42,30,0.85)";ctx.fillRect(x+w*0.18+((i*37)%3)*w*0.12,yb-h*0.48,w*0.16,h*0.48+14);if(h>64)ctx.fillRect(x+w*0.62,yb-h*0.78,w*0.12,h*0.16);});
+  // the trees: broad fruit trees, and date palms in front of the houses
+  [[1610,0.62],[1990,0.7],[2330,0.6]].forEach(([x,s])=>ba_tree(ctx,x,ba_ys(x)-8,s));
+  [[1512,0.62],[1868,0.7],[2236,0.66],[2392,0.58]].forEach(([x,s])=>ba_palm(ctx,x,ba_ys(x)-6,s,t+x));
+  // the fields
+  BA_VFIELDS.forEach(([x,w],i)=>{const wt=clamp(o.wet?o.wet[i]||0:0.8,0,1),fw=o.fill?o.fill[i]||0:0,ys=ba_ys(x+w/2),c=mix([200,164,98],[98,152,70],wt),c2=mix([176,136,82],[72,122,56],wt);
+    ctx.fillStyle=rgba(mix([152,114,78],[92,64,46],Math.max(wt*0.6,fw)),1);ctx.fillRect(x,ys-3,w,7);
+    [x-2,x+w+2].forEach(bx=>{ctx.fillStyle="rgba(152,112,76,1)";ctx.beginPath();ctx.ellipse(bx,ys,8,6,0,Math.PI,0);ctx.fill();});
+    for(let k=0;k<26;k++){const xx=x+5+k*(w-10)/25,hh=(10+22*wt)*(0.82+0.36*hash(k+i*26,751)),sw=Math.sin(t*1.3+k*0.7)*1.5*wt;ctx.strokeStyle=rgba(k%2?c:c2,1);ctx.lineWidth=2.4;ctx.lineCap="round";
+      ctx.beginPath();ctx.moveTo(xx,ys-2);ctx.quadraticCurveTo(xx+sw*0.4,ys-hh*0.6,xx+sw,ys-hh);ctx.stroke();ctx.fillStyle=rgba(mix(c,[228,202,124],0.35),1);ctx.beginPath();ctx.ellipse(xx+sw,ys-hh-3,2.2,4.5,sw*0.05,0,TAU);ctx.fill();}
+    if(fw>0.01){ctx.fillStyle=rgba(BA_WATER,0.9*fw);ctx.fillRect(x,ys-3,w,6);for(let k=0;k<5;k++){const u=(t*0.2+k/5)%1;ctx.fillStyle="rgba(235,250,255,"+(0.6*fw)+")";ctx.beginPath();ctx.ellipse(x+8+u*(w-16),ys,6,1.2,0,0,TAU);ctx.fill();}glow(ctx,x+w/2,ys-8,96,BA_WATER,0.42*fw);}});}
+
+/* ---------- the people of the story ---------- */
+// The story's people as plain silhouettes, never given a face: one path (head, body, both arms, the feet), every part wound the same
+// way and filled once, so a figure fades as one picture, with a warm rim of light down its lit side. Standing, seen from the front with
+// the head turned a little towards f (1 right, -1 left); o.kind "stoop": seen side on, bent over the work in the tunnel.
+// o.dress: "robe" (long, to the ankles), "tunic" (to the knee, over trousers) or "chador" (a cloak from the head to the feet);
+// o.head: "cap" or "turban". Arms hang down; the near hand is only ever on the thing the story is about: o.hold "lamp" or "pick"
+// (stooping) draws it in the hand, and o.reach [x, y], a point in the scene (a gate's board, a windlass's handle), puts the hand there.
+// s: scale (1 is about 300 px tall).
+function ba_poly(p,P){let a=0;for(let i=0;i<P.length;i++){const[x0,y0]=P[i],[x1,y1]=P[(i+1)%P.length];a+=x0*y1-x1*y0;}if(a<0)P=P.slice().reverse();p.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++)p.lineTo(P[i][0],P[i][1]);p.closePath();}
+function ba_disc(p,x,y,rx,ry){p.moveTo(x+rx,y);p.ellipse(x,y,rx,ry,0,0,TAU);}
+// a limb through a, b and c (shoulder, elbow, hand; or hip, knee, ankle), tapering from w0 to w1, rounded at its joints
+function ba_limb(p,a,b,c,w0,w1){const P=[a,b,c],L=[],R=[];P.forEach(([x,y],i)=>{const[xa,ya]=P[Math.max(0,i-1)],[xb,yb]=P[Math.min(2,i+1)],d=Math.hypot(xb-xa,yb-ya)||1,w=lerp(w0,w1,i/2);L.push([x-(yb-ya)/d*w,y+(xb-xa)/d*w]);R.push([x+(yb-ya)/d*w,y-(xb-xa)/d*w]);});
+  ba_poly(p,L.concat(R.reverse()));ba_disc(p,a[0],a[1],w0,w0);const wm=(w0+w1)/2;ba_disc(p,b[0],b[1],wm,wm);}
+function ba_fig(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const f=o.f||1,dr=o.dress||"robe",col=o.col||[40,32,34],rim=o.rim||[255,200,150],p=new Path2D();
+  const hand=o.reach?[(o.reach[0]-x)/(s*f),(o.reach[1]-y)/s]:null;let lamp=null,pick=null;
+  if(o.kind==="stoop"){
+    // bent over the work: legs bent, the back arched forward, the head low, both hands forward on the pick or the lamp
+    ba_limb(p,[-14,-106],[-2,-58],[-20,-10],13,8);ba_limb(p,[4,-108],[30,-64],[22,-10],13,8);ba_disc(p,-14,-5,13,6);ba_disc(p,28,-5,13,6);
+    ba_limb(p,[-6,-112],[14,-162],[46,-190],25,20);ba_limb(p,[44,-190],[54,-194],[62,-196],9,8);ba_disc(p,74,-198,18,21);
+    if(o.head==="cap")ba_disc(p,77,-210,19,11);
+    const H=o.hold==="lamp"?[98,-112]:[94,-128];ba_limb(p,[40,-190],[60,-150],[H[0]-8,H[1]+2],8,6);ba_limb(p,[50,-186],[72,-152],H,8,6);ba_disc(p,H[0],H[1],7,8);
+    if(o.hold==="lamp")lamp=[H[0]+4,H[1]+20];if(o.hold==="pick")pick=H;}
+  else{
+    // standing: head and neck, the body in its dress, both arms down, the near one on what it holds
+    if(dr!=="chador"){ba_disc(p,4,-270,19,23);ba_poly(p,[[-8,-254],[8,-254],[8,-234],[-8,-234]]);
+      if(o.head==="cap")ba_disc(p,4,-284,21,12);if(o.head==="turban"){ba_disc(p,4,-286,26,14);ba_disc(p,4,-277,23,9);}}
+    const R=dr==="chador"?[[0,-298],[14,-294],[25,-278],[28,-254],[44,-222],[48,-190],[46,-150],[48,-100],[52,-42],[56,-4]]
+      :dr==="tunic"?[[9,-240],[24,-236],[38,-228],[42,-214],[39,-190],[35,-165],[31,-135],[34,-112],[38,-92],[28,-90],[24,-50],[21,-8],[5,-8],[3,-72],[0,-80]]
+      :[[9,-240],[24,-236],[38,-228],[42,-214],[39,-190],[35,-165],[31,-135],[33,-110],[37,-70],[41,-35],[45,-6]];
+    ba_poly(p,R.concat(R.slice().reverse().map(([u,v])=>[-u,v])));
+    if(dr==="tunic"){ba_disc(p,-10,-4,13,5);ba_disc(p,18,-4,13,5);}else if(dr==="robe"){ba_disc(p,-12,-3,12,5);ba_disc(p,18,-3,12,5);}
+    const S=[38,-222],H=hand||(o.hold==="lamp"?[58,-148]:[52,-114]),E=[(S[0]+H[0])/2+8,(S[1]+H[1])/2+5];
+    if(dr!=="chador"||hand){ba_limb(p,S,E,H,9,6.5);ba_disc(p,H[0],H[1]+3,7,8);}
+    if(dr!=="chador"){ba_limb(p,[-38,-222],[-47,-166],[-52,-114],9,6.5);ba_disc(p,-52,-111,7,8);}
+    if(o.hold==="lamp")lamp=[H[0]+4,H[1]+30];}
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s*f,s);ctx.fillStyle=rgba(col,1);ctx.fill(p);
+    // the rim of light down the lit side, inside the figure only
+    ctx.save();ctx.clip(p);const rg=ctx.createLinearGradient(-70,0,o.kind==="stoop"?110:70,0);rg.addColorStop(0,rgba(rim,0));rg.addColorStop(0.7,rgba(rim,0));rg.addColorStop(1,rgba(rim,o.rimA==null?0.55:o.rimA));ctx.fillStyle=rg;ctx.fillRect(-140,-320,300,330);ctx.restore();
+    // what the hand holds
+    if(lamp){const[lx,ly]=lamp;ctx.strokeStyle="rgba(40,30,24,1)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(lx-4,ly-24);ctx.lineTo(lx,ly-6);ctx.stroke();ctx.fillStyle="rgba(150,104,60,1)";ctx.beginPath();ctx.ellipse(lx,ly,14,7,0,0,TAU);ctx.fill();
+      const fl=0.85+0.15*Math.sin((o.t||0)*9);ctx.fillStyle="rgba(255,214,140,1)";ctx.beginPath();ctx.ellipse(lx+12,ly-8,4,9*fl,0.3,0,TAU);ctx.fill();}
+    if(pick){const[hx,hy]=pick,ex=hx+46,ey=hy+40;ctx.lineCap="round";ctx.strokeStyle="rgba(84,62,42,1)";ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(hx-14,hy-10);ctx.lineTo(ex,ey);ctx.stroke();
+      ctx.strokeStyle="rgba(120,120,126,1)";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(ex-20,ey-26);ctx.quadraticCurveTo(ex+6,ey-4,ex+14,ey+30);ctx.stroke();}
+    ctx.restore();
+    if(lamp){const gx=x+(lamp[0]+12)*s*f,gy=y+(lamp[1]-8)*s;glow(ctx,gx,gy,160*s,[255,200,120],0.55);glow(ctx,gx,gy,44*s,[255,230,170],0.75);}});}
+// the windlass over a shaft: two posts, a drum with its handle (on the left with o.f -1), the rope down the shaft and a bucket of earth
+// rising; p (0..1) is the bucket's way up, from depth to the top; t turns the handle, and ba_crank says where the handle is
+function ba_crank(x,ys,s,t,f){const an=(t||0)*2.4;return[x+(f||1)*s*(62+Math.cos(an)*20),ys+s*(-119+Math.sin(an)*20)];}
+function ba_windlass(ctx,x,ys,s,p,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,ys);ctx.scale(s*(o.f||1),s);
+  ctx.strokeStyle="rgba(70,48,32,1)";ctx.lineWidth=9;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-64,-8);ctx.lineTo(-52,-118);ctx.moveTo(64,-8);ctx.lineTo(52,-118);ctx.stroke();
+  ctx.fillStyle="rgba(120,84,52,1)";rr(ctx,-56,-132,112,26,10);ctx.fill();ctx.strokeStyle="rgba(255,220,170,0.35)";ctx.lineWidth=2;rr(ctx,-56,-132,112,26,10);ctx.stroke();
+  const an=(t||0)*2.4,hx=62+Math.cos(an)*20,hy=-119+Math.sin(an)*20;ctx.strokeStyle="rgba(90,62,40,1)";ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(56,-119);ctx.lineTo(hx,hy);ctx.stroke();
+  const depth=o.depth||260,by=lerp(depth,-60,clamp(p,0,1));ctx.strokeStyle="rgba(196,170,130,0.9)";ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(0,-106);ctx.lineTo(0,by-22);ctx.stroke();
+  ctx.fillStyle="rgba(96,66,44,1)";ctx.beginPath();ctx.moveTo(-18,by-22);ctx.lineTo(18,by-22);ctx.lineTo(13,by+6);ctx.lineTo(-13,by+6);ctx.closePath();ctx.fill();ctx.fillStyle="rgba(150,112,78,1)";ctx.beginPath();ctx.ellipse(0,by-22,18,5,0,0,TAU);ctx.fill();
+  ctx.restore();});}
+
+/* ---------- shares of time ---------- */
+// one rotation of the water, as a bar of days, divided into its owners' shares; o.n shares, o.days, o.hi the share lit (index),
+// o.p draws it, o.lab its label; returns where share i starts and ends, so a scene can point at it
+function ba_shares(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,n=o.n||15,h=o.h||56,p=o.p==null?1:o.p,R=[];for(let i=0;i<n;i++)R.push([x+w*i/n,x+w*(i+1)/n]);if(a<=0.01)return R;
+  withA(ctx,a,()=>{glass(ctx,x-16,y-16,w+32,h+32,18,BAC,{glow:12,ea:0.7,fill:"rgba(8,14,24,0.9)"});
+    R.forEach(([x0,x1],i)=>{const q=clamp(p*n-i,0,1);if(q<=0)return;const hi=o.hi===i?1:0,c=hi?BA_WATER:mix(BA_SAND,[255,255,255],0.12*(i%2));
+      ctx.fillStyle=rgba(c,(0.28+0.5*hi)*q);ctx.fillRect(x0+2,y,(x1-x0-4)*q,h);if(hi){ctx.strokeStyle=rgba(BA_WATER,1);ctx.lineWidth=3;ctx.strokeRect(x0+1,y-2,x1-x0-2,h+4);glow(ctx,(x0+x1)/2,y+h/2,80,BA_WATER,0.35);}});
+    if(o.lab)T(ctx,o.lab,x,y-36,{w:700,size:30,color:rgba(INK,0.95)});});return R;}
+
+/* ---------- the data practice on the map ---------- */
+// ArchiMate's glyphs for what ea.js's archGlyph doesn't draw: a service (a rounded bar), an interface (a ring on a stalk), a product
+// (a box with a tab at its top left), and a group (a dashed box with its tab)
+function baGlyph(ctx,kind,x,y,s,col){if(kind==="service"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);rr(ctx,x-s*0.85,y-s*0.42,s*1.7,s*0.84,s*0.42);ctx.stroke();ctx.restore();}
+  else if(kind==="interface"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);ctx.beginPath();ctx.arc(x+s*0.3,y,s*0.38,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.85,y);ctx.lineTo(x-s*0.08,y);ctx.stroke();ctx.restore();}
+  else if(kind==="product"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);ctx.strokeRect(x-s*0.8,y-s*0.55,s*1.6,s*1.1);ctx.strokeRect(x-s*0.8,y-s*0.55,s*0.7,s*0.32);ctx.restore();}
+  else if(kind==="group"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);ctx.setLineDash([s*0.25,s*0.18]);ctx.strokeRect(x-s*0.8,y-s*0.4,s*1.6,s*0.95);ctx.setLineDash([]);ctx.strokeRect(x-s*0.8,y-s*0.62,s*0.7,s*0.22);ctx.restore();}
+  else archGlyph(ctx,kind,x,y,s,col);}
+// an element of the model, as archEl draws one, with the glyphs above; o.dash: a dashed red outline (no owner); o.owner: a gold tag
+// below it with the owner's name; o.src: a tag above it
+function baEl(ctx,x,y,w,h,name,col,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const r=kind==="service"?h/2:kind==="process"||kind==="capability"?16:6;
+  glass(ctx,x,y,w,h,r,col,{glow:12+14*(o.hi||0),ea:0.85,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.14+0.12*(o.hi||0));rr(ctx,x,y,w,h,r);ctx.fill();
+  if(o.dash){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BA_RED,0.95);ctx.lineWidth=3;rr(ctx,x-5,y-5,w+10,h+10,r+4);ctx.stroke();ctx.restore();}
+  const gs=o.gs||13;baGlyph(ctx,kind,x+w-gs-14-(kind==="service"?h*0.2:0),y+gs+10,gs,col);const sz=o.size||28,ls=wrapT(ctx,name,0,0,w-70,{size:sz,w:700,measure:true});
+  wrapT(ctx,name,x+w/2-10,y+h/2+sz*0.36-(ls.length-1)*sz*0.58,w-70,{size:sz,w:700,align:"center",color:rgba(INK,0.96),lh:sz*1.15,deco:o.deco});
+  if(o.owner)withA(ctx,o.ownerA==null?1:o.ownerA,()=>tag(ctx,x+w/2,y+h+30,o.owner,TRUST,{align:"center",size:28}));});}
+// The data practice's part of the business layer, drawn the same way in every film of the series: who does the work and how it's
+// reached on the left, its processes and products in the middle, the business objects and their domains on the right, with the roles
+// that own them above. Each film adds its own (o.film, 1 to 7; films 5 and 6, which joined from The map before the data, add none);
+// a film shows the ones before it as they were, and brings in its own.
+// Each element: [id, kind, name, film, x, y, w, h, colour]
+const BA_PRACTICE=[
+  ["team","actor","data team",1,120,214,400,96,BA_BUS],
+  ["tickets","interface","tickets",1,120,350,400,84,BA_BUS],
+  ["requests","service","answer data requests",1,120,474,400,96,BA_BUS],
+  ["products","service","provide data products",7,120,610,400,96,BA_BUS],
+  ["p_request","process","answer a data request",4,600,214,400,96,BA_BUS],
+  ["p_build","process","build a data product",4,600,342,400,96,BA_BUS],
+  ["p_source","process","take on a source",4,600,470,400,96,BA_BUS],
+  ["product","product","Meter readings",7,600,610,400,96,BA_BUS],
+  ["contract","contract","its contract",7,600,742,400,84,BA_BUS],
+  ["owner","role","data owner",3,1080,170,330,84,BA_BUS],
+  ["steward","role","data steward",3,1470,170,330,84,BA_BUS],
+  ["net","group","network",2,1080,300,330,470,BA_NET],
+  ["ret","group","retail",2,1470,300,330,330,BA_RET],
+  ["shared","group","shared",2,1470,650,330,190,BAC],
+  ["cp","object","connection point",1,1100,352,290,84,BA_INF],
+  ["reading","object","meter reading",2,1100,466,290,84,BA_INF],
+  ["solar","object","hosting capacity",2,1100,580,290,84,BA_INF],
+  ["account","object","account",1,1490,352,290,84,BA_INF],
+  ["bill","object","bill",2,1490,466,290,84,BA_INF],
+  ["location","object","location",2,1490,690,290,70,BA_INF]];
+// o.film: the film showing it; o.at[id]: when a new element arrives (default: at once); o.hi[id] (0..1): one lit;
+// o.owners: the owners' tags (o.ownersA, 0..1): in film 1 under each business object, from film 2 one for each domain, at the foot of its
+// group, below its last object; o.a: the whole panel; o.deco: names as texture (seen from afar);
+// o.ghost (0..1): the later films' elements, as empty dashed outlines still to fill (o.ghostAt[film]: when each film's arrive);
+// o.pre (0..1): this film's new elements, as the same outlines, until each arrives
+function ba_ghostBox(ctx,kind,x,y,w,h,col){ctx.save();ctx.setLineDash([10,9]);ctx.strokeStyle=rgba(col,0.6);ctx.lineWidth=2.4;rr(ctx,x,y,w,h,kind==="service"?h/2:kind==="process"?16:kind==="group"?14:6);ctx.stroke();ctx.restore();}
+function baPractice(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const F=o.film||1,at=o.at||{},hi=o.hi||{},OWN={cp:"Grace",account:"head of retail",reading:"Grace",solar:"Grace",bill:"head of retail",location:"Grace"},GOWN={net:"Grace",ret:"head of retail",shared:"Grace"};
+  withA(ctx,a,()=>{const gh=o.ghost||0,pre=o.pre||0;if(gh>0.01)BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f<=F)return;const ga=gh*(o.ghostAt&&o.ghostAt[f]!=null?fin(t,o.ghostAt[f],0.6):1);if(ga<=0.01)return;
+      withA(ctx,ga,()=>ba_ghostBox(ctx,kind,x,y,w,h,col));});
+    // this film's own elements, as outlines where each will be drawn, before each arrives
+    if(pre>0.01)BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f!==F||at[id]==null)return;const pa=pre*(1-fin(t,at[id],0.6));if(pa>0.01)withA(ctx,pa,()=>ba_ghostBox(ctx,kind,x,y,w,h,col));});
+    BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f>F)return;const t0=at[id],v=t0==null?1:fin(t,t0,0.6);if(v<=0.01)return;
+      if(kind==="group"){withA(ctx,v,()=>{ctx.save();ctx.setLineDash([12,9]);ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2.5;rr(ctx,x,y,w,h,14);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=rgba(col,0.05);rr(ctx,x,y,w,h,14);ctx.fill();ctx.restore();
+        T(ctx,name,x+18,y+38,{w:800,size:28,color:rgba(col,1),deco:o.deco});});
+        if(F>=2&&o.owners&&GOWN[id]){const foot=BA_PRACTICE.reduce((m,e)=>e[1]==="object"&&e[3]<=F&&e[4]>=x&&e[4]<x+w&&e[5]>=y&&e[5]<y+h?Math.max(m,e[5]+e[7]):m,y+52);
+          withA(ctx,v*(o.ownersA==null?1:o.ownersA),()=>tag(ctx,x+w/2,(foot+y+h)/2,GOWN[id],TRUST,{align:"center",size:28}));}
+        return;}
+      const k=t0==null?1:spring((t-t0)/0.75),dy=(1-k)*-14;
+      ctx.save();ctx.translate(0,dy);baEl(ctx,x,y,w,h,name,col,kind,{a:v,hi:hi[id]||0,deco:o.deco,owner:F<2&&o.owners&&OWN[id]?OWN[id]:null,ownerA:o.ownersA==null?1:o.ownersA});ctx.restore();});});}
+// a line between two of the panel's elements, by id: from the right edge of the first to the left edge of the second, or straight
+// down; p draws it
+function baPracticeLine(ctx,ida,idb,p,col,o){o=o||{};if(p<=0.01)return;const A=BA_PRACTICE.find(e=>e[0]===ida),B=BA_PRACTICE.find(e=>e[0]===idb);if(!A||!B)return;
+  const down=Math.abs(A[4]-B[4])<40,x0=down?A[4]+A[6]/2:A[4]+A[6],y0=down?A[5]+A[7]:A[5]+A[7]/2,x1=down?B[4]+B[6]/2:B[4],y1=down?B[5]:B[5]+B[7]/2;
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;ctx.strokeStyle=rgba(col||SOFT,0.8);ctx.lineWidth=2.5;if(o.dash)ctx.setLineDash([8,7]);ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,clamp(p,0,1)),lerp(y0,y1,clamp(p,0,1)));ctx.stroke();ctx.restore();}
+
+// ArchiMate's access line, from a behaviour (a service, a process) to the business object it reads or writes: dashed, from the right
+// edge of the first to the left edge of the second, as a curve that o.lift raises over what lies between; p draws it along the curve
+function baPracticeAccess(ctx,ida,idb,p,o){o=o||{};if(p<=0.01)return;const A=BA_PRACTICE.find(e=>e[0]===ida),B=BA_PRACTICE.find(e=>e[0]===idb);if(!A||!B)return;
+  const P=[[A[4]+A[6],A[5]+A[7]/2],null,null,[B[4],B[5]+B[7]/2]],lift=o.lift||0;P[1]=[P[0][0]+300,P[0][1]];P[2]=[P[3][0]-300,P[3][1]-lift];
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;ctx.setLineDash([9,8]);ctx.strokeStyle=rgba(o.col||BA_INF,0.7);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(P[0][0],P[0][1]);
+  const n=48,m=Math.round(n*clamp(p,0,1));for(let i=1;i<=m;i++){const u=i/n,v=1-u,x=v*v*v*P[0][0]+3*v*v*u*P[1][0]+3*v*u*u*P[2][0]+u*u*u*P[3][0],y=v*v*v*P[0][1]+3*v*v*u*P[1][1]+3*v*u*u*P[2][1]+u*u*u*P[3][1];ctx.lineTo(x,y);}
+  ctx.stroke();ctx.restore();}
+
+/* ---------- the utility's paper and cards ---------- */
+// a ticket, as the data team receives it: a kicker with its number, who asked, what for, and its state
+function baTicket(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const col=o.col||BA_BUS,ls=wrapT(ctx,o.ask||"",0,0,w-56,{size:36,w:700,measure:true}),h=150+ls.length*44+(o.from?50:0);
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,col,{glow:14+12*(o.hi||0),ea:0.85,fill:"rgba(8,12,22,0.95)"});T(ctx,o.kicker||"ticket",x+28,y+48,{f:"mono",w:500,size:28,color:rgba(col,1)});
+    ls.forEach((l,i)=>T(ctx,l,x+28,y+104+i*44,{w:700,size:36}));if(o.from)T(ctx,o.from,x+28,y+110+ls.length*44+8,{w:600,size:28,color:rgba(SOFT,1)});
+    if(o.state)withA(ctx,o.stateA==null?1:o.stateA,()=>tag(ctx,x+28,y+h-36,o.state,o.stateCol||AMBER,{size:28}));});return h;}
+// a count from one source: the number, what it counts, and where it came from
+function baCount(ctx,x,y,w,h,num,what,src,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,col,{glow:12+16*(o.hi||0),ea:0.85,fill:"rgba(8,12,22,0.95)"});
+  T(ctx,src,x+26,y+46,{f:"mono",w:500,size:28,color:rgba(col,1)});T(ctx,num,x+26,y+124,{w:800,size:64});T(ctx,what,x+26,y+172,{w:700,size:30,color:rgba(INK,0.9)});
+  if(o.dash){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BA_RED,0.95);ctx.lineWidth=3;rr(ctx,x-6,y-6,w+12,h+12,22);ctx.stroke();ctx.restore();}
+  if(o.mark>0.01){if(o.ok)kt_gtick(ctx,x+w-34,y+34,18,o.mark);else kt_rcross(ctx,x+w-34,y+34,18,o.mark);}});}
+
+/* ---------- the utility's capabilities ---------- */
+// the eight capabilities of the utility at level 1, as *What it must be able to do* confirmed them on Tomás's map, with their owners
+// (generating power has none yet)
+const BA_CAPS=[["plan the network","Grace"],["operate the network","Grace"],["maintain assets","Grace"],["connect customers","Grace"],
+  ["generate power",null],["sell energy","head of retail"],["serve customers","head of retail"],["meet obligations","Ama"]];
+// a capability, as the map draws one: glass in the strategy layer's colour, ArchiMate's glyph in its corner, its name in the middle;
+// o.hi (0..1) lights it; o.heat, a colour, tints it by how well it works today (o.heatA, 0..1); o.dim (0..1) sets it back
+function baCap(ctx,x,y,w,h,name,o){o=o||{};const a=(o.a==null?1:o.a)*(1-0.6*(o.dim||0));if(a<=0.01)return;const hA=o.heatA==null?(o.heat?1:0):o.heatA,col=o.heat?mix(BA_STR,o.heat,hA):BA_STR;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,col,{glow:12+18*(o.hi||0)+10*hA,ea:0.85,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.13+0.14*(o.hi||0)+0.1*hA);rr(ctx,x,y,w,h,16);ctx.fill();
+    archGlyph(ctx,"capability",x+w-20,y+20,9,col);const sz=o.size||28,ls=wrapT(ctx,name,0,0,w-44,{size:sz,w:700,measure:true});
+    wrapT(ctx,name,x+w/2,y+h/2+sz*0.36-(ls.length-1)*sz*0.58+4,w-44,{size:sz,w:700,align:"center",color:rgba(INK,0.96),lh:sz*1.15,deco:o.deco});});}
+
+/* ---------- the day of water ---------- */
+// One day of a qanat's water as a dial: the day's ring, cut into shares of time from the top, clockwise (o.n shares, each 24/n
+// hours). o.p draws the ring of shares round; o.cols[i] colours share i, an owner's (o.col for all); o.hi (index) lights one, by
+// o.hiA (0..1); o.full (0..1) lights the whole ring, as the shares add up to the day; o.split (0..1) cuts every share into o.k
+// slivers, each its own owner's; o.sliver [share, sliver] and o.slA (0..1) light one sliver; o.mid, o.sub: the words in the middle
+function ba_day(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=o.n||15,p=clamp(o.p==null?1:o.p,0,1),r0=r*0.64,k=o.k||5,sp=clamp(o.split||0,0,1);
+  const ang=u=>-Math.PI/2+u*TAU,seg=(u0,u1,c,al)=>{ctx.fillStyle=rgba(c,al);ctx.beginPath();ctx.arc(x,y,r,ang(u0),ang(u1));ctx.arc(x,y,r0,ang(u1),ang(u0),true);ctx.closePath();ctx.fill();};
+  const OWN=[[222,178,120],[196,150,108],[176,170,118],[214,156,132],[168,150,128],[226,196,150],[190,132,100]];
+  withA(ctx,a,()=>{ctx.save();ctx.shadowColor=rgba(BAC,0.35);ctx.shadowBlur=30;ctx.fillStyle="rgba(10,14,22,0.92)";ctx.beginPath();ctx.arc(x,y,r+16,0,TAU);ctx.fill();ctx.restore();
+    ctx.strokeStyle=rgba(BAC,0.35);ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r+16,0,TAU);ctx.stroke();
+    const gp=0.006;for(let i=0;i<n;i++){const u0=i/n,u1=(i+1)/n,q=clamp(p*n-i,0,1);if(q<=0)break;const c=o.cols?o.cols[i]:(o.col||BA_SAND);
+      if(sp>0.01){for(let j=0;j<k;j++){const v0=u0+(u1-u0)*j/k,v1=u0+(u1-u0)*(j+1)/k;if(v0>u0+(u1-u0)*q)break;const cj=OWN[Math.floor(hash(i*k+j,977)*OWN.length)];
+          seg(v0+gp*0.5,Math.min(v1,u0+(u1-u0)*q)-gp*0.5,mix(c,cj,sp),0.62);}}
+      else seg(u0+gp,u0+(u1-u0)*q-gp,c,0.6);
+      const hi=o.hi===i?(o.hiA==null?1:o.hiA):0;if(hi>0.01){seg(u0+gp,u1-gp,BA_WATER,0.85*hi);const am=ang((u0+u1)/2);glow(ctx,x+Math.cos(am)*(r+r0)/2,y+Math.sin(am)*(r+r0)/2,r*0.36,BA_WATER,0.4*hi);}}
+    if(o.sliver&&(o.slA||0)>0.01){const[i,j]=o.sliver,v0=(i+j/k)/n,v1=(i+(j+1)/k)/n;seg(v0,v1,BA_WATER,o.slA);ctx.save();ctx.strokeStyle=rgba([235,250,255],o.slA);ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.arc(x,y,r+3,ang(v0),ang(v1));ctx.arc(x,y,r0-3,ang(v1),ang(v0),true);ctx.closePath();ctx.stroke();ctx.restore();}
+    // the ring closes: the shares make the whole day
+    const fl=o.full||0;if(fl>0.01){ctx.save();ctx.strokeStyle=rgba(BA_OK,0.9*fl);ctx.lineWidth=5;ctx.shadowColor=rgba(BA_OK,0.7*fl);ctx.shadowBlur=18;ctx.beginPath();ctx.arc(x,y,r+8,0,TAU);ctx.stroke();ctx.restore();}
+    // the hours of the day round the outside, as ticks, and the top of the day marked
+    ctx.strokeStyle=rgba(INK,0.4);ctx.lineWidth=2;for(let h=0;h<24;h++){const an=ang(h/24),l=h%6?6:12;ctx.beginPath();ctx.moveTo(x+Math.cos(an)*(r+16),y+Math.sin(an)*(r+16));ctx.lineTo(x+Math.cos(an)*(r+16+l),y+Math.sin(an)*(r+16+l));ctx.stroke();}
+    if(o.mid)T(ctx,o.mid,x,y+(o.sub?-2:14),{w:800,size:o.midSize||40,align:"center",color:rgba(INK,0.96)});if(o.sub)T(ctx,o.sub,x,y+42,{w:600,size:28,align:"center",color:rgba(SOFT,1)});});}
+// where a share's middle sits on the dial, to point a tag at it
+function ba_dayAt(x,y,r,n,i,f){const an=-Math.PI/2+(i+0.5)/n*TAU,rr_=r*(f==null?0.82:f);return[x+Math.cos(an)*rr_,y+Math.sin(an)*rr_];}
+
+/* ---------- the glossary ---------- */
+// The business glossary as a plain table, drawn from the business objects on the map: a row for each term, with its definition, its
+// domain and its owner, grouped by domain (each row's domain colour runs down its left edge). rows: [term, definition, domain, owner,
+// colour]; o.rowA[i] (0..1): row i, as it arrives; o.col (index) and o.colA (0..1): a column lit; o.hiRow[i] (0..1): a row lit;
+// o.w: the columns' widths. Returns the table's height and each row's top, so a scene can point at one
+const BA_GLOSS_COLS=["term","definition","domain","owner"];
+function baGlossary(ctx,x,y,rows,o){o=o||{};const a=o.a==null?1:o.a,Wc=o.w||[300,700,200,260],rh=o.rh||66,hh=70,wd=Wc.reduce((s,v)=>s+v,0)+40,ht=hh+rows.length*rh+16,top=rows.map((_,i)=>y+hh+i*rh);
+  if(a<=0.01)return{h:ht,top,w:wd};
+  withA(ctx,a,()=>{glass(ctx,x,y,wd,ht,18,BA_INF,{glow:12,ea:0.8,fill:"rgba(12,9,12,0.95)"});
+    let cx=x+24;const cl=o.colA||0;BA_GLOSS_COLS.forEach((c,j)=>{const lit=o.col===j?cl:0,cc=j===3?TRUST:BA_INF;if(lit>0.01){ctx.fillStyle=rgba(cc,0.13*lit);rr(ctx,cx-12,y+12,Wc[j],ht-24,10);ctx.fill();}
+      T(ctx,c,cx,y+46,{f:"mono",w:500,size:28,color:rgba(cc,0.8+0.2*lit)});cx+=Wc[j];});
+    ctx.strokeStyle=rgba(BA_INF,0.35);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+16,y+hh-6);ctx.lineTo(x+wd-16,y+hh-6);ctx.stroke();
+    rows.forEach(([term,def,dom,own,col],i)=>{const ra=o.rowA?o.rowA[i]==null?1:o.rowA[i]:1;if(ra<=0.01)return;const ry=top[i],hr=o.hiRow?o.hiRow[i]||0:0;
+      withA(ctx,ra,()=>{if(hr>0.01){ctx.fillStyle=rgba(col,0.14*hr);rr(ctx,x+12,ry+4,wd-24,rh-8,10);ctx.fill();}
+        ctx.fillStyle=rgba(col,0.95);rr(ctx,x+12,ry+10,6,rh-20,3);ctx.fill();
+        let xx=x+24;const yb=ry+rh/2+10;T(ctx,term,xx,yb,{w:700,size:30});xx+=Wc[0];T(ctx,def,xx,yb,{w:600,size:28,color:rgba(INK,0.88)});xx+=Wc[1];
+        T(ctx,dom,xx,yb,{w:700,size:28,color:rgba(col,1)});xx+=Wc[2];T(ctx,own,xx,yb,{w:700,size:28,color:rgba(TRUST,1)});
+        if(i<rows.length-1){ctx.strokeStyle="rgba(255,255,255,0.07)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+24,ry+rh);ctx.lineTo(x+wd-24,ry+rh);ctx.stroke();}});});});
+  return{h:ht,top,w:wd};}
+
+/* ===== Now the questions appear: the film's own pictures (prefixed d8_, from when it was film 8 of The map before the data) =====
+   Iran, in the 1960s: the slope at the mountains' foot cut away, as the series draws a qanat (shared/src/ba.js), before its qanat is
+   dug: the ground, its strata and its groundwater; a damp patch and greener plants where an expert looks for water; the trial well,
+   sunk by two muqannis, its earth brought up in leather buckets by a windlass, and the hollow scooped at its foot, where the water
+   gathers and the buckets are dipped for a few days; how fast the hollow fills, day by day; the tunnel, dug only then, from the foot of
+   the slope up to the well, its shafts sunk as it goes; and when an answer comes, as a line through the work: the trial well, the
+   choice whether to dig, the tunnel. On the wall and on the films' dark glass: the reporting team's backlog as index cards; requests
+   traced up to a decision, a capability and a goal; goals traced down to decisions, questions and measures; a measure's definition,
+   its home on the map and its owner; households falling behind; and data products on each side of the wall between the network and
+   retail. The desert is drawn in the series' own style, not in the style of Persian art (PLAYBOOK §2), and its people are silhouettes
+   (Wulff, "The Qanats of Iran", Scientific American, April 1968, is the source for the trial well; see ../../script.md). */
 
 const MOT=LAY6[0][1],STR=LAY6[1][1],BUS=LAY6[2][1],INF=LAY6[3][1],APL=LAY6[4][1];
-// the two sides of the wall, as in Who does it: the network in blue, retail in rose; red, for what reaches nothing; and the phones' signal
-const D8_NET=[132,176,255],D8_RET=[255,150,186],D8_RED=[232,96,84],D8_SIG=[150,222,255],D8_SAND=[236,214,170];
+// the two sides of the wall, as in Who does it: the network in blue, retail in rose; and red, for what reaches nothing
+const D8_NET=[132,176,255],D8_RET=[255,150,186],D8_RED=[232,96,84];
 // someone standing at the right of the frame, drawn facing the other way: the "explain" gesture then points at what they explain
 function d8_personR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
 // no-break spaces: words a note should keep on one line
-const d8_nb=s=>s.replace(/ /g," ");
+const d8_nb=s=>s.replace(/ /g," ");
+// a tag that ends at x (its right edge) instead of starting there
+const d8_tagR=(ctx,x,y,s,col)=>tag(ctx,x-(tw(ctx,s,28,700)+26),y,s,col,{size:28});
 
-/* ---------- Kerala, from above ---------- */
-// Longitude and latitude, projected simply (a sketch, not a survey): 600 px to a degree of latitude, about 5.4 px to a kilometre.
-const D8_SY=600,D8_SX=D8_SY*Math.cos(12*Math.PI/180);
-const d8_pr=([lo,la])=>[1060+(lo-75.35)*D8_SX,540-(la-11.94)*D8_SY];
-// north Kerala's coast, north to south, from Ullal to Chaliyam: finer than the rest, because the camera comes close
-const D8_NK=[[74.85,12.80],[74.88,12.72],[74.90,12.67],[74.93,12.60],[74.96,12.54],[74.99,12.49],[75.02,12.43],[75.04,12.38],[75.07,12.32],[75.10,12.26],[75.13,12.19],[75.16,12.12],[75.19,12.07],
-  [75.185,12.045],[75.20,12.02],[75.235,11.99],[75.28,11.95],[75.32,11.92],[75.355,11.87],[75.38,11.83],[75.43,11.79],[75.48,11.75],[75.52,11.71],[75.545,11.665],[75.57,11.60],[75.60,11.55],[75.63,11.50],
-  [75.67,11.46],[75.69,11.44],[75.72,11.38],[75.75,11.32],[75.77,11.25],[75.79,11.20],[75.80,11.16]];
-// the rest of India's south, coarser: the west coast from Mumbai down to Ullal, then from Chaliyam to Kanyakumari, and up the east coast
-const D8_WN=[[72.80,19.90],[72.78,19.20],[72.82,18.95],[72.87,18.64],[72.95,18.30],[73.03,18.02],[73.15,17.62],[73.30,17.00],[73.33,16.56],[73.47,16.06],[73.63,15.86],[73.81,15.50],[73.90,15.25],
-  [74.03,15.01],[74.12,14.81],[74.31,14.55],[74.44,14.28],[74.55,13.97],[74.67,13.62],[74.70,13.35],[74.78,13.09],[74.81,12.87]];
-const D8_WS=[[75.86,11.00],[75.92,10.77],[76.02,10.53],[76.15,10.22],[76.24,9.96],[76.32,9.49],[76.42,9.15],[76.58,8.88],[76.70,8.73],[76.92,8.48],[77.00,8.38],[77.25,8.17],[77.55,8.08]];
-const D8_EC=[[77.80,8.20],[78.12,8.50],[78.15,8.80],[78.40,9.08],[78.95,9.27],[79.32,9.20],[79.20,9.32],[79.02,9.74],[79.30,10.05],[79.86,10.30],[79.85,10.77],[79.85,10.92],[79.77,11.75],[79.83,11.93],
-  [80.19,12.62],[80.29,13.08],[80.32,13.42],[80.15,14.00],[80.12,14.25],[80.05,14.90],[80.25,15.50],[80.60,15.80],[80.95,15.75],[81.14,16.18],[81.70,16.30],[82.30,16.60],[82.25,16.95],[82.60,17.30],
-  [83.30,17.69],[83.90,18.10],[84.10,18.25],[84.91,19.26],[85.60,19.70],[86.40,20.30],[86.60,21.40],[86.60,23.00],[72.60,23.00],[72.60,21.40]];
-const D8_INDIA=D8_WN.concat(D8_NK,D8_WS,D8_EC).map(d8_pr);
-const D8_LANKA=[[79.95,9.80],[80.25,9.83],[80.60,9.45],[80.90,9.00],[81.23,8.57],[81.45,8.10],[81.70,7.72],[81.88,7.00],[81.80,6.60],[81.40,6.25],[81.12,6.12],[80.59,5.92],[80.22,6.03],[80.00,6.60],
-  [79.85,6.93],[79.84,7.20],[79.80,8.03],[79.90,8.50],[79.92,8.98],[80.05,9.40]].map(d8_pr);
-// Kerala, to light it: its coast, and inland along the hills (a highlight, not a border; drawn smooth, with d8_smooth)
-const D8_KERALA=D8_NK.slice(1).concat(D8_WS.slice(0,11),[[77.08,8.32],[77.20,8.60],[77.25,9.00],[77.25,9.50],[77.15,9.90],[77.25,10.25],[76.85,10.55],[76.75,10.85],[76.45,11.25],[76.45,11.65],[76.10,11.95],
-  [75.80,12.05],[75.55,12.30],[75.30,12.55],[75.05,12.76]]).map(d8_pr);
-
-// Along the coast: the survey gives each market's distance from Hosabethe, the northernmost, and Chaliyam's is 180 km. The drawn coast
-// is a little longer, so a survey kilometre is D8_SK px along it, and the same scale serves for distances out to sea and phone range.
-const D8_CL=(()=>{const P_=D8_NK.map(d8_pr),L=[0];for(let i=1;i<P_.length;i++)L.push(L[i-1]+Math.hypot(P_[i][0]-P_[i-1][0],P_[i][1]-P_[i-1][1]));return{P:P_,L};})();
-const D8_SK=(D8_CL.L[D8_CL.L.length-1]-D8_CL.L[1])/180;
-// a point on the coast, km from Hosabethe, with the direction out to sea (n) and along the coast, southwards (d)
-function d8_coastAt(km){const{P:P_,L}=D8_CL,s=L[1]+km*D8_SK;let i=1;while(i<L.length-1&&L[i]<s)i++;const a=P_[i-1],b=P_[i],u=clamp((s-L[i-1])/((L[i]-L[i-1])||1),0,1),dx=b[0]-a[0],dy=b[1]-a[1],n=Math.hypot(dx,dy)||1;
-  return{x:lerp(a[0],b[0],u),y:lerp(a[1],b[1],u),nx:-dy/n,ny:dx/n,dx:dx/n,dy:dy/n};}
-// the fifteen markets of the survey, north to south, with their district (0 Kozhikode, 1 Kannur, 2 Kasaragod): phones reached the
-// districts in 1997, 1998 and 2000
-const D8_MK=[["Hosabethe",0,2],["Aarikkadi",12,2],["Kasaba",26,2],["Kanhangad",41,2],["Thaikadappuram",56,2],["Puthiangadi",80,1],["Neerkkadavu",95,1],["Ayikkara",101,1],["Thalassery",115,1],
-  ["New Mahe",124,1],["Chombala",132,0],["Badagara",139,0],["Quilandi",154,0],["Puthiyangadi",164,0],["Chaliyam",180,0]].map(([n,km,r])=>Object.assign({n,km,r},d8_coastAt(km)));
-const D8_CH=10,D8_BA=11,D8_QU=12,D8_YEARS=["1997","1998","2000"],D8_DIST=["Kozhikode","Kannur","Kasaragod"];
-// a phone tower's range, about 25 km, and the towers: two a district, a few kilometres inland (where each district's stood isn't
-// recorded in the study; these stand where they'd reach its markets, km along the coast and km inland)
-const D8_RANGE=25*D8_SK;
-const D8_TW=[[150,0,4],[170,0,5],[90,1,5],[116,1,5],[13,2,5],[44,2,5]].map(([km,r,inl])=>{const c=d8_coastAt(km);return{x:c.x-c.nx*inl*D8_SK,y:c.y-c.ny*inl*D8_SK,r};});
-// rivers, from the hills to the sea (drawn, not surveyed): where each meets the coast, how far inland it rises, and its bend
-const D8_RIV=[[27,52,1],[57,40,2],[66,46,3],[73,30,4],[92,58,5],[110,44,6],[121,40,7],[147,62,8],[168,46,9],[179,70,10]].map(([km,len,sd])=>{const c=d8_coastAt(km),pts=[];
-  for(let i=0;i<=24;i++){const u=i/24,off=Math.sin(u*7+sd)*6*D8_SK*u+Math.sin(u*17+sd*3)*1.5*D8_SK*u;pts.push([c.x-c.nx*len*D8_SK*u+c.dx*off,c.y-c.ny*len*D8_SK*u+c.dy*off]);}return pts;});
-// the Western Ghats, inland: their ridge, about 55 km in, and lines of relief either side of it (drawn, not surveyed); north and south of
-// the survey's coast they run on along its line
-const d8_ridgeLine=(o,j)=>{const P_=[];for(let km=-70;km<=270;km+=4){const c=d8_coastAt(clamp(km,0,180)),ex=(km<0?km:km>180?km-180:0)*D8_SK,
-  inl=(56+8*Math.sin(km*0.041+0.7)+4*Math.sin(km*0.13+2)+o*(1+0.15*Math.sin(km*0.09+j*1.3)))*D8_SK;P_.push([c.x-c.nx*inl+c.dx*ex,c.y-c.ny*inl+c.dy*ex]);}return P_;};
-const D8_RIDGE=d8_ridgeLine(0,0),D8_CONT=[-21,-12,-4,5,14].map((o,j)=>d8_ridgeLine(o,j+1));
-
-// the camera over the map: keys are [time, x, y, zoom, seconds]. Zoom glides at an even pace (in log space), and the centre follows
-// the zoom, so a long move in keeps what it's moving towards in view
-function d8_camAt(t,keys){let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const k=keys[i],u=easeCam(clamp((t-k[0])/(k[4]||1.6),0,1));if(u<=0)break;
-    const z1=Math.exp(lerp(Math.log(z),Math.log(k[3]),u)),w=Math.abs(k[3]-z)<1e-3?u:(1/z-1/z1)/(1/z-1/k[3]);x=lerp(x,k[1],w);y=lerp(y,k[2],w);z=z1;}return{x,y,z};}
-const d8_camApply=(ctx,c)=>{ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);};
-const d8_toS=(c,x,y)=>[960+(x-c.x)*c.z,540+(y-c.y)*c.z];
-// a closed outline through the midpoints of L's sides, curving at its corners
-function d8_smooth(ctx,L){const n=L.length,m=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2],p=m(L[n-1],L[0]);ctx.beginPath();ctx.moveTo(p[0],p[1]);
-  for(let i=0;i<n;i++){const q=m(L[i],L[(i+1)%n]);ctx.quadraticCurveTo(L[i][0],L[i][1],q[0],q[1]);}ctx.closePath();}
-
-// The map, in the camera's transform (c, from d8_camAt; lines keep their width on screen). o.sun (0..1): night to dawn; o.ker: Kerala
-// lit; o.mk: the markets; o.hot: one market lit (its index); o.tw[d]: each district's phone range (0..1); o.labs: India's names;
-// o.sea: the coast's names
-function d8_map(ctx,t,c,o){o=o||{};const z=c.z,k=1/z,sun=o.sun||0,sy=Math.pow(z,-0.5);ctx.save();
-  // the sea: lines of swell, moving, in the part of the sea in view
-  const x0=c.x-960*k-40*k,x1=c.x+960*k+40*k,y0=c.y-540*k-40*k,y1=c.y+540*k+40*k,gap=34*k;
-  ctx.strokeStyle="rgba("+(160+60*sun|0)+","+(200+30*sun|0)+",240,"+(0.05+0.04*sun)+")";ctx.lineWidth=1.6*k;
-  for(let yy=Math.floor(y0/gap)*gap;yy<=y1;yy+=gap){ctx.beginPath();for(let xx=x0;xx<=x1;xx+=40*k){const w_=yy+Math.sin(xx*0.012*z+yy*0.05+t*0.5)*4*k;xx===x0?ctx.moveTo(xx,w_):ctx.lineTo(xx,w_);}ctx.stroke();}
-  // the land: India's south and Sri Lanka, warmed from the east as the sun comes up behind the hills
-  const shape=(L)=>{ctx.beginPath();L.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();};
-  [D8_INDIA,D8_LANKA].forEach(L=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=20;shape(L);const lg=ctx.createLinearGradient(c.x-700*k,0,c.x+900*k,0);
-    lg.addColorStop(0,rgba(mix([30,50,46],[54,104,72],sun),1));lg.addColorStop(0.68,rgba(mix([36,50,48],[70,108,70],sun),1));lg.addColorStop(1,rgba(mix([44,50,50],[146,116,66],sun),1));ctx.fillStyle=lg;ctx.fill();ctx.restore();});
-  // Kerala, lit
-  const kr=o.ker||0;if(kr>0.01){ctx.save();d8_smooth(ctx,D8_KERALA);ctx.fillStyle=rgba(EAC,0.3*kr);ctx.shadowColor=rgba(EAC,0.9);ctx.shadowBlur=30*kr;ctx.fill();ctx.restore();}
-  // the coastal plain, green with coconut palms, and the hills: a soft band of forest along the ridge, with lines of relief that catch
-  // the light as the sun comes up behind them
-  if(z>0.3){const ha=clamp((z-0.3)/0.4,0,1),line=L=>{ctx.beginPath();L.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));};ctx.save();shape(D8_INDIA);ctx.clip();ctx.lineCap="round";ctx.lineJoin="round";
-    for(let i=0;i<5;i++){ctx.strokeStyle=rgba(mix([34,62,44],[62,104,60],sun),0.05*ha);ctx.lineWidth=(34-i*6)*D8_SK;shape(D8_INDIA);ctx.stroke();}
-    for(let i=0;i<8;i++){ctx.strokeStyle=rgba(mix([12,22,16],[22,36,24],sun),0.055*ha);ctx.lineWidth=(72-i*8)*D8_SK;line(D8_RIDGE);ctx.stroke();}
-    D8_CONT.forEach((L,j)=>{ctx.strokeStyle=rgba(mix([110,124,104],[226,200,152],sun),(0.08+0.06*sun)*ha*(j===2?1.3:1));ctx.lineWidth=(j===2?1.8:1.3)*k;line(L);ctx.stroke();});ctx.restore();}
-  // rivers
-  if(z>0.45){const ra=clamp((z-0.45)/0.4,0,1);ctx.save();ctx.strokeStyle=rgba(mix([90,130,160],[150,200,230],sun),0.45*ra);ctx.lineWidth=1.6*k;ctx.lineCap="round";ctx.lineJoin="round";
-    D8_RIV.forEach(pts=>{ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();});ctx.restore();}
-  // the coast: a line of beach
-  [D8_INDIA,D8_LANKA].forEach(L=>{shape(L);ctx.strokeStyle=rgba(D8_SAND,0.16+0.1*sun);ctx.lineWidth=7*k;ctx.lineJoin="round";ctx.stroke();ctx.strokeStyle=rgba(mix([200,190,170],D8_SAND,sun),0.75);ctx.lineWidth=2*k;ctx.stroke();});
-  // phone range, district by district: rings out to sea from each tower, and a pulse that travels out along them
-  (o.tw||[]).forEach((p,d)=>{if(p<=0.01)return;D8_TW.filter(w=>w.r===d).forEach((w,j)=>{const R=D8_RANGE*ease(clamp(p*1.3-j*0.2,0,1));if(R<=1)return;
-    ctx.save();const g=ctx.createRadialGradient(w.x,w.y,R*0.2,w.x,w.y,R);g.addColorStop(0,rgba(D8_SIG,0.0));g.addColorStop(0.85,rgba(D8_SIG,0.08*p));g.addColorStop(1,rgba(D8_SIG,0.16*p));ctx.fillStyle=g;ctx.beginPath();ctx.arc(w.x,w.y,R,0,TAU);ctx.fill();
-    ctx.setLineDash([10*k,8*k]);ctx.strokeStyle=rgba(D8_SIG,0.55*p);ctx.lineWidth=2*k;ctx.beginPath();ctx.arc(w.x,w.y,R,0,TAU);ctx.stroke();ctx.restore();
-    const pu=((t*0.35+j*0.5)%1);withA(ctx,p*(1-pu)*0.6,()=>{ctx.strokeStyle=rgba(D8_SIG,1);ctx.lineWidth=1.6*k;ctx.beginPath();ctx.arc(w.x,w.y,R*pu,0,TAU);ctx.stroke();});
-    d8_tower(ctx,w.x,w.y,22*sy,clamp(p*2,0,1),t);});});
-  // the markets
-  const mk=o.mk||0;if(mk>0.01)D8_MK.forEach((m,i)=>{const a=clamp(mk*2.2-i*0.08,0,1);if(a<=0)return;const hot=o.hot===i?1:0,r=5*sy;withA(ctx,a,()=>{if(o.lit&&o.lit[i])glow(ctx,m.x,m.y,26*sy,o.litCol||TRUST,0.6*o.lit[i]);
-    glow(ctx,m.x,m.y,14*sy,[255,230,190],0.35+0.3*sun);ctx.fillStyle=rgba([255,240,214],0.95);ctx.beginPath();ctx.arc(m.x,m.y,r,0,TAU);ctx.fill();ctx.strokeStyle="rgba(30,34,40,0.9)";ctx.lineWidth=1.8*k;ctx.stroke();
-    if(hot)ring(ctx,m.x,m.y,r*2.2,TRUST,0.9,2*k);});});
-  // names: India's, from afar; the sea's and Kerala's, near
-  const la=(o.labs||0)*(1-clamp((z-0.3)/0.25,0,1));if(la>0.01)withA(ctx,la,()=>{[["India",[77.9,14.2],38],["Arabian Sea",[70.6,13.4],32],["Bay of Bengal",[85.2,13.0],32],["Sri Lanka",[80.8,7.9],28]].forEach(([s_,q,sz])=>{const[x,y]=d8_pr(q);
-    T(ctx,s_,x,y,{w:700,size:sz*k,align:"center",color:rgba(s_==="India"?[236,224,200]:[170,206,236],0.9)});});});
-  const ln=(o.sea||0)*clamp((z-0.55)/0.3,0,1);if(ln>0.01)withA(ctx,ln,()=>{const[ax,ay]=d8_pr([74.42,11.70]),[kx,ky]=d8_pr([75.86,12.20]);T(ctx,"Arabian Sea",ax,ay,{w:700,size:32*k,align:"center",color:rgba([176,210,236],0.85)});
-    T(ctx,"Kerala",kx,ky,{w:800,size:34*k,align:"center",color:rgba([236,224,200],0.9)});});
+/* ---------- the slope, before the qanat, and as it's dug ---------- */
+// the trial well's foot, just into the damp ground (the groundwater's top is at ba_yw(BA_XM), 640), and how wide the well is: about
+// three feet, at the scale of the series' people (B1_S, 0.14, in What the business owns)
+const D8_WB=652,D8_WW=12;
+// The slope cut away (the series' section: the same ground, strata, stones and groundwater as ba_section, drawn the same way), before
+// the qanat and as it's dug. o.shaft (0..1): the trial well at the head (BA_XM), dug from the surface down to the damp ground; o.cav
+// (0..1): the hollow scooped at its foot; o.lvl (0..1): the water gathered in it; o.ghost (0..1): the tunnel not yet dug, as a
+// dashed outline from the well to the outlet, and o.trickle (0..1), the thin water it might bring; o.dug (0..1): the tunnel, dug from
+// the outlet up the slope to the well, each shaft sunk as it reaches it; o.deep (0..1): the well taken down to the tunnel's head once
+// the tunnel reaches it; o.flow (0..1): the water then run down the tunnel; o.wet (0..1): the groundwater's light; o.damp (0..1): a
+// damp patch on the slope over the well; o.green (0..1): greener plants there; o.hiW (0..1): the trial well lit; t moves the water
+function d8_ground(ctx,t,o){o=o||{};const X0=-1400,X1=3300,dug=clamp(o.dug||0,0,1),xf=lerp(BA_XO,BA_XM,dug),sh=clamp(o.shaft||0,0,1),deep=clamp(o.deep||0,0,1);
+  // the ground in cut: a warm, dark earth, with strata
+  ctx.save();ctx.beginPath();ctx.moveTo(X0,ba_ys(X0));for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x));ctx.lineTo(X1,1900);ctx.lineTo(X0,1900);ctx.closePath();
+  const eg=ctx.createLinearGradient(0,300,0,1300);eg.addColorStop(0,"rgba(152,100,62,1)");eg.addColorStop(0.35,"rgba(104,66,46,1)");eg.addColorStop(1,"rgba(28,30,56,1)");ctx.fillStyle=eg;ctx.fill();ctx.clip();
+  // a sandy band along the surface, then layers of earth and gravel that follow the ground's slope, with stones in them
+  ctx.beginPath();ctx.moveTo(X0,ba_ys(X0)-4);for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x)-4);for(let x=X1;x>=X0;x-=40)ctx.lineTo(x,ba_ys(x)+30);ctx.closePath();ctx.fillStyle="rgba(196,150,100,0.42)";ctx.fill();
+  for(let i=0;i<18;i++){const d=58+i*40+hash(i,716)*14,k=hash(i,717);ctx.strokeStyle="rgba(255,226,180,"+(0.025+0.04*k)+")";ctx.lineWidth=2+k*5;ctx.beginPath();
+    for(let x=X0;x<=X1;x+=40){const y=lerp(ba_ys(x)+d,560+d*0.9,0.35)+Math.sin(x*0.004+i*1.7)*8;x===X0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
+  for(let i=0;i<170;i++){const x=hash(i,711)*3200-600,y=ba_ys(x)+26+hash(i,712)*760,r=2+hash(i,713)*6;ctx.fillStyle="rgba("+(hash(i,714)>0.5?"58,38,26,":"176,134,98,")+(0.22+0.3*hash(i,715))+")";ctx.beginPath();ctx.ellipse(x,y,r*1.4,r,hash(i,719)*3,0,TAU);ctx.fill();}
+  // the groundwater: earth soaked with it, from the mountain down to where its top passes under the tunnel
+  // (here to the section's far end, not to 1500 as ba_section, whose camera never shows the plain this far down)
+  const wl=o.wet==null?1:o.wet;ctx.beginPath();ctx.moveTo(X0,ba_yw(X0));for(let x=X0;x<=X1;x+=30)ctx.lineTo(x,ba_yw(x));ctx.lineTo(X1,1900);ctx.lineTo(X0,1900);ctx.closePath();
+  const wg=ctx.createLinearGradient(0,600,0,1100);wg.addColorStop(0,rgba(BA_WATER,0.30*wl+0.06));wg.addColorStop(1,rgba([20,96,180],0.5*wl+0.1));ctx.fillStyle=wg;ctx.fill();
+  ctx.fillStyle=rgba([170,220,255],0.22*wl);for(let i=0;i<120;i++){const x=hash(i,721)*1900-400,y=ba_yw(x)+14+hash(i,722)*360;ctx.beginPath();ctx.arc(x,y,1.6+hash(i,723)*1.6,0,TAU);ctx.fill();}
+  ctx.strokeStyle=rgba(BA_WATER,0.55*wl+0.15);ctx.lineWidth=2.5;ctx.setLineDash([12,10]);ctx.beginPath();for(let x=X0;x<=X1;x+=30)x===X0?ctx.moveTo(x,ba_yw(x)):ctx.lineTo(x,ba_yw(x));ctx.stroke();ctx.setLineDash([]);
+  // a damp patch just under the surface over the well: the earth a little darker there
+  if((o.damp||0)>0.01){const g=ctx.createRadialGradient(BA_XM+4,ba_ys(BA_XM+4)+6,2,BA_XM+4,ba_ys(BA_XM+4)+6,46);g.addColorStop(0,rgba([58,40,34],0.62*o.damp));g.addColorStop(1,rgba([58,40,34],0));
+    ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(BA_XM+4,ba_ys(BA_XM+4)+8,48,16,Math.atan(0.44),0,TAU);ctx.fill();}
+  // the tunnel not yet dug: its outline, dashed, from the well down to the outlet, and the trickle it might bring
+  // (its head well and its shafts dashed too, so it reads as a qanat: a chain of shafts down to a tunnel)
+  const gh=o.ghost||0;if(gh>0.01){ctx.save();ctx.fillStyle=rgba([16,14,28],0.22*gh);ctx.beginPath();ctx.moveTo(BA_XM,ba_yt(BA_XM)-BA_TH);ctx.lineTo(BA_XO,ba_yt(BA_XO)-BA_TH);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+2);
+    ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+8);ctx.lineTo(BA_XO,ba_yt(BA_XO)+3);ctx.lineTo(BA_XM,ba_yt(BA_XM)+3);ctx.closePath();ctx.fill();
+    ctx.setLineDash([12,10]);ctx.strokeStyle=rgba([255,226,180],0.78*gh);ctx.lineWidth=3.5;ctx.beginPath();
+    ctx.moveTo(BA_XM,ba_yt(BA_XM)-BA_TH);ctx.lineTo(BA_XO,ba_yt(BA_XO)-BA_TH);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+2);ctx.moveTo(BA_XM,ba_yt(BA_XM)+3);ctx.lineTo(BA_XO,ba_yt(BA_XO)+3);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+8);ctx.stroke();
+    ctx.lineWidth=2.5;ctx.strokeStyle=rgba([255,226,180],0.5*gh);ctx.beginPath();BA_SH.forEach(x=>{ctx.moveTo(x,ba_ys(x)+4);ctx.lineTo(x,ba_yt(x)-BA_TH);});ctx.stroke();
+    const tr=o.trickle||0;if(tr>0.01){ctx.setLineDash([3,11]);ctx.lineDashOffset=-t*14;ctx.strokeStyle=rgba(BA_WATER,0.85*tr*gh);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(BA_XM+40,ba_yt(BA_XM+40)-1);ctx.lineTo(BA_XO+28,ba_yt(BA_XO)-1);ctx.stroke();}
+    ctx.restore();}
+  // the shafts the tunnel has reached, as it's dug up the slope from the outlet (the trial well, at the head, is drawn below)
+  BA_SH.forEach((x,i)=>{if(i===0||dug<=0.001||x<xf-8)return;const ys=ba_ys(x),yt=ba_yt(x);ctx.fillStyle="rgba(14,12,24,0.96)";ctx.fillRect(x-4,ys,8,yt-ys);});
+  // the tunnel: a dark channel, BA_TH high, sloping gently to the outlet, dug from the outlet up to xf
+  if(dug>0.001){ctx.fillStyle="rgba(16,14,28,0.97)";ctx.beginPath();ctx.moveTo(xf,ba_yt(xf)-BA_TH);ctx.lineTo(BA_XO,ba_yt(BA_XO)-BA_TH);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+2);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+8);ctx.lineTo(BA_XO,ba_yt(BA_XO)+3);ctx.lineTo(xf,ba_yt(xf)+3);ctx.closePath();ctx.fill();}
+  // the trial well: from the surface down as it's dug, then down to the tunnel's head once the tunnel reaches it
+  const ysW=ba_ys(BA_XM),yb=lerp(lerp(ysW,D8_WB,sh),ba_yt(BA_XM),deep);
+  if(sh>0.001){ctx.fillStyle="rgba(14,12,24,0.96)";ctx.fillRect(BA_XM-D8_WW/2,ysW,D8_WW,yb-ysW);
+    if((o.hiW||0)>0.01){ctx.fillStyle=rgba(BAC,0.35*o.hiW);ctx.fillRect(BA_XM-D8_WW/2-2,ysW,D8_WW+4,yb-ysW);}}
+  // the hollow scooped at its foot, and the water gathering in it, with drops seeping in from the damp ground
+  const cv=clamp(o.cav||0,0,1)*(1-deep);if(cv>0.01){const cy=D8_WB+4,rx=26*cv,ry=14*cv;ctx.fillStyle="rgba(14,12,24,0.96)";ctx.beginPath();ctx.ellipse(BA_XM,cy,rx,ry,0,0,TAU);ctx.fill();
+    const lv=clamp(o.lvl||0,0,1);if(lv>0.01){ctx.save();ctx.beginPath();ctx.ellipse(BA_XM,cy,rx,ry,0,0,TAU);ctx.clip();const top=cy+ry-2*ry*lv;ctx.fillStyle=rgba(BA_WATER,0.92);ctx.fillRect(BA_XM-rx,top,2*rx,cy+ry-top);
+      ctx.fillStyle="rgba(230,248,255,0.75)";ctx.fillRect(BA_XM-rx,top,2*rx,1.6);ctx.restore();glow(ctx,BA_XM,cy,30,BA_WATER,0.25*lv);}
+    for(let k=0;k<5;k++){const ph=(t*0.6+hash(k,751))%1,x=BA_XM+(k-2)*9;ctx.fillStyle=rgba([200,236,255],0.7*(1-ph)*cv);ctx.beginPath();ctx.arc(x,cy-ry+ph*ry*1.2,1.6,0,TAU);ctx.fill();}}
+  // the water in the tunnel, once the well is reached: seeping in along the wet reach, then running on its floor towards the outlet
+  const fl=clamp(o.flow||0,0,1);if(dug>=0.999&&fl>0.005){const x1=lerp(BA_XM,BA_XO+30,fl);
+    ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=5;ctx.shadowColor=rgba(BA_WATER,0.7);ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(BA_XM,ba_yt(BA_XM));ctx.lineTo(x1,ba_yt(x1));ctx.stroke();ctx.shadowBlur=0;
+    for(let k=0;k<26;k++){const u=(t*0.05+k/26)%1,x=lerp(BA_XM,BA_XO,u);if(x>x1)continue;ctx.fillStyle="rgba(230,248,255,0.65)";ctx.beginPath();ctx.ellipse(x,ba_yt(x)-1,6,1.6,0.03,0,TAU);ctx.fill();}
+    for(let k=0;k<8;k++){const x=BA_XM+20+k*42,ph=(t*0.7+hash(k,731))%1;if(ba_yw(x)>ba_yt(x)-BA_TH||x>x1)continue;ctx.fillStyle=rgba([200,236,255],0.7*(1-ph));ctx.beginPath();ctx.arc(x,ba_yt(x)-BA_TH+ph*(BA_TH-2),1.8,0,TAU);ctx.fill();}}
+  ctx.restore();
+  // the surface: a crisp line of light along the ground; greener plants over the well; and each shaft's ring of dug earth, seen side on
+  // as two low humps, the trial well's growing as it's dug, the others' as the tunnel reaches them
+  ctx.save();ctx.strokeStyle="rgba(255,226,180,0.55)";ctx.lineWidth=2.5;ctx.beginPath();for(let x=X0;x<=X1;x+=40)x===X0?ctx.moveTo(x,ba_ys(x)):ctx.lineTo(x,ba_ys(x));ctx.stroke();
+  const gr=o.green||0;if(gr>0.01){ctx.lineCap="round";[[208,9],[222,12],[236,8],[270,11],[284,13],[298,9],[312,7]].forEach(([x,h],k)=>{const ys=ba_ys(x);ctx.strokeStyle=rgba(mix([118,150,70],BA_GREEN,0.6),0.95*clamp(gr*3-k*0.3,0,1));ctx.lineWidth=2;
+      for(let j=-2;j<=2;j++){ctx.beginPath();ctx.moveTo(x+j*1.5,ys+1);ctx.quadraticCurveTo(x+j*2.5,ys-h*0.6,x+j*4+Math.sin(t*0.9+k+j)*0.8,ys-h*(1-Math.abs(j)*0.14));ctx.stroke();}});}
+  BA_SH.forEach((x,i)=>{const k=i===0?Math.max(sh,dug>=0.999?1:0):(dug>0.001&&x>=xf-8?1:0);if(k<=0.01)return;const ys=ba_ys(x),r=(i===0?34:26)*Math.sqrt(k),h=(i===0?16:12)*k;
+    [-1,1].forEach(sd=>{const cx=x+sd*(r*0.55+3);ctx.fillStyle="rgba(176,132,92,1)";ctx.beginPath();ctx.moveTo(cx-r*0.5,ys+1);ctx.quadraticCurveTo(cx,ys-h*2,cx+r*0.5,ys+1);ctx.closePath();ctx.fill();
+      ctx.strokeStyle="rgba(255,226,180,0.4)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx-r*0.5,ys+1);ctx.quadraticCurveTo(cx,ys-h*2,cx+r*0.5,ys+1);ctx.stroke();});});
   ctx.restore();}
-// a phone tower: a lattice mast with its aerials, on the map (s: its height)
-function d8_tower(ctx,x,y,s,a,t){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);glow(ctx,0,-s*0.9,s*0.9,D8_SIG,0.45);ctx.strokeStyle=rgba([228,240,255],0.95);ctx.lineWidth=s*0.07;ctx.lineJoin="round";
-  ctx.beginPath();ctx.moveTo(-s*0.3,0);ctx.lineTo(0,-s);ctx.lineTo(s*0.3,0);ctx.moveTo(-s*0.2,-s*0.33);ctx.lineTo(s*0.2,-s*0.33);ctx.moveTo(-s*0.1,-s*0.66);ctx.lineTo(s*0.1,-s*0.66);ctx.moveTo(-s*0.3,0);ctx.lineTo(s*0.2,-s*0.33);ctx.lineTo(-s*0.1,-s*0.66);ctx.stroke();
-  ctx.fillStyle=rgba(D8_SIG,1);ctx.fillRect(-s*0.16,-s*0.98,s*0.08,s*0.2);ctx.fillRect(s*0.08,-s*0.98,s*0.08,s*0.2);ctx.restore();});}
-// a fishing boat from above: a long hull with a pointed bow, its crew's thwarts, a lamp while it's dark, and a wake while it moves.
-// an: its heading; s: its length
-function d8_boat(ctx,x,y,an,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);
-  const lamp=o.lamp||0;if(lamp>0.01)glow(ctx,0,0,s*1.15,[255,210,140],0.45*lamp);ctx.rotate(an);
-  const wk=o.wake||0;if(wk>0.01){ctx.save();ctx.lineCap="round";const L=s*(0.5+1.0*wk);ctx.strokeStyle="rgba(225,242,255,"+(0.26*wk)+")";ctx.lineWidth=Math.max(0.8,s*0.06);
-    ctx.beginPath();ctx.moveTo(-s*0.4,-s*0.09);ctx.quadraticCurveTo(-s*0.4-L*0.5,-s*0.12,-s*0.4-L,-s*0.1-L*0.32);ctx.moveTo(-s*0.4,s*0.09);ctx.quadraticCurveTo(-s*0.4-L*0.5,s*0.12,-s*0.4-L,s*0.1+L*0.32);ctx.stroke();
-    ctx.strokeStyle="rgba(235,248,255,"+(0.16*wk)+")";ctx.lineWidth=Math.max(1,s*0.12);ctx.beginPath();ctx.moveTo(-s*0.46,0);ctx.lineTo(-s*0.46-L*0.7,0);ctx.stroke();ctx.restore();}
-  const hull=()=>{ctx.beginPath();ctx.moveTo(s*0.55,0);ctx.bezierCurveTo(s*0.35,-s*0.15,-s*0.2,-s*0.15,-s*0.46,-s*0.11);ctx.quadraticCurveTo(-s*0.5,0,-s*0.46,s*0.11);ctx.bezierCurveTo(-s*0.2,s*0.15,s*0.35,s*0.15,s*0.55,0);ctx.closePath();};
-  ctx.save();ctx.shadowColor="rgba(0,0,0,0.45)";ctx.shadowBlur=s*0.3;hull();const g=ctx.createLinearGradient(0,-s*0.15,0,s*0.15);g.addColorStop(0,"#d9c5a2");g.addColorStop(1,"#8a6a4a");ctx.fillStyle=g;ctx.fill();ctx.restore();
-  ctx.strokeStyle="rgba(50,34,22,0.9)";ctx.lineWidth=Math.max(0.8,s*0.04);hull();ctx.stroke();
-  ctx.save();ctx.scale(0.78,0.62);hull();ctx.fillStyle="rgba(60,40,26,0.85)";ctx.fill();ctx.restore();
-  ctx.strokeStyle="rgba(214,190,150,0.9)";ctx.lineWidth=Math.max(0.7,s*0.035);ctx.beginPath();[-0.22,0.02,0.24].forEach(u=>{ctx.moveTo(s*u,-s*0.085);ctx.lineTo(s*u,s*0.085);});ctx.stroke();
-  ctx.fillStyle="rgba(40,44,50,0.95)";ctx.fillRect(-s*0.52,-s*0.04,s*0.08,s*0.08);
-  ctx.restore();});}
-// a buyer waiting at a market, drawn as a map draws people: a head and shoulders (s: its height)
-function d8_buyer(ctx,x,y,s,col,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,y-s*0.72,s*0.22,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(x-s*0.36,y);ctx.quadraticCurveTo(x-s*0.36,y-s*0.44,x,y-s*0.46);ctx.quadraticCurveTo(x+s*0.36,y-s*0.44,x+s*0.36,y);ctx.closePath();ctx.fill();});}
-// silver in the shallows: a catch poured back into the sea, seen from above
-function d8_spill(ctx,x,y,r,t,a){if(a<=0.01)return;withA(ctx,a,()=>{for(let i=0;i<26;i++){const an=hash(i,820)*TAU,d=r*Math.sqrt(hash(i,821)),xx=x+Math.cos(an)*d,yy=y+Math.sin(an)*d*0.6,tw_=0.5+0.5*Math.sin(t*5+i*1.7);
-  ctx.fillStyle="rgba(220,232,240,"+(0.5+0.4*tw_)+")";ctx.beginPath();ctx.ellipse(xx,yy,r*0.07,r*0.025,an,0,TAU);ctx.fill();}glow(ctx,x,y,r*1.2,[200,220,235],0.25);});}
+// the windlass over the trial well (the series' ba_windlass), its leather bucket full of earth, or of water as it comes up from the
+// hollow (o.water, 0..1); p (0..1) is the bucket's way up, from the well's foot to the top
+function d8_windlass(ctx,x,ys,s,p,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;ba_windlass(ctx,x,ys,s,p,t,o);
+  const wv=o.water||0;if(wv>0.01){const by=lerp(o.depth||260,-60,clamp(p,0,1)),yt=ys+s*(by-22);withA(ctx,a*wv,()=>{ctx.fillStyle=rgba(BA_WATER,1);ctx.beginPath();ctx.ellipse(x,yt+s*1.5,s*16,s*4.5,0,0,TAU);ctx.fill();
+    ctx.fillStyle="rgba(230,248,255,0.8)";ctx.beginPath();ctx.ellipse(x-s*4,yt+s*0.5,s*6,s*1.4,0,0,TAU);ctx.fill();});}}
+// an oil lamp set down in the well, lighting the digger beside it (as in What the business owns)
+function d8_lamp(ctx,x,y,s,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle="rgba(150,104,60,1)";ctx.beginPath();ctx.ellipse(x,y-3*s,9*s,4*s,0,0,TAU);ctx.fill();
+  const fl=0.85+0.15*Math.sin(t*9);ctx.fillStyle="rgba(255,214,140,1)";ctx.beginPath();ctx.ellipse(x+6*s,y-9*s,2.6*s,6*s*fl,0.3,0,TAU);ctx.fill();
+  glow(ctx,x+6*s,y-9*s,64*s,[255,200,120],0.42);glow(ctx,x+6*s,y-9*s,18*s,[255,230,170],0.6);});}
 
-/* ---------- up close: the beach, the phone, the prices ---------- */
-// a sardine, side on: a slim body tapering to a forked tail, silver, darker along the back (an: its angle; s: its length)
-function d8_fish(ctx,x,y,an,s,gl){ctx.save();ctx.translate(x,y);ctx.rotate(an);const g=ctx.createLinearGradient(0,-s*0.14,0,s*0.12);g.addColorStop(0,"#4b6a86");g.addColorStop(0.45,"#c9d6df");g.addColorStop(1,"#eef3f6");ctx.fillStyle=g;
-  ctx.beginPath();ctx.moveTo(s*0.5,0);ctx.bezierCurveTo(s*0.38,-s*0.15,-s*0.18,-s*0.14,-s*0.36,-s*0.03);ctx.lineTo(-s*0.5,-s*0.13);ctx.lineTo(-s*0.44,0);ctx.lineTo(-s*0.5,s*0.13);ctx.lineTo(-s*0.36,s*0.03);ctx.bezierCurveTo(-s*0.18,s*0.12,s*0.38,s*0.13,s*0.5,0);ctx.closePath();ctx.fill();
-  ctx.fillStyle="rgba(20,26,34,0.85)";ctx.beginPath();ctx.arc(s*0.38,-s*0.02,s*0.025,0,TAU);ctx.fill();if(gl>0.01){ctx.fillStyle="rgba(255,255,255,"+(0.7*gl)+")";ctx.beginPath();ctx.ellipse(s*0.08,-s*0.04,s*0.16,s*0.018,0,0,TAU);ctx.fill();}ctx.restore();}
-// a crow: standing and pecking (fly 0), or flying with its wings beating (fly 1); facing right unless dir is -1
-function d8_crow(ctx,x,y,s,t,fly,dir){ctx.save();ctx.translate(x,y);ctx.scale(dir||1,1);ctx.fillStyle="#16171c";
-  if(fly){const fl=Math.sin(t*9);ctx.beginPath();ctx.ellipse(0,0,s*0.34,s*0.12,0,0,TAU);ctx.fill();ctx.beginPath();ctx.arc(s*0.34,-s*0.04,s*0.1,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(s*0.42,-s*0.06);ctx.lineTo(s*0.56,-s*0.02);ctx.lineTo(s*0.42,0);ctx.fill();
-    ctx.beginPath();ctx.moveTo(-s*0.3,0);ctx.lineTo(-s*0.56,-s*0.08);ctx.lineTo(-s*0.56,s*0.08);ctx.closePath();ctx.fill();
-    [-1,1].forEach(k=>{ctx.beginPath();ctx.moveTo(-s*0.08,0);ctx.quadraticCurveTo(-s*0.1,-s*0.5*fl*k,-s*0.34,-s*0.62*fl*k-s*0.05);ctx.quadraticCurveTo(s*0.06,-s*0.3*fl*k,s*0.12,0);ctx.closePath();ctx.fill();});}
-  else{const pk=Math.max(0,Math.sin(t*2.6))*0.5;ctx.beginPath();ctx.ellipse(0,-s*0.32,s*0.3,s*0.18,-0.25,0,TAU);ctx.fill();ctx.save();ctx.translate(s*0.24,-s*0.44);ctx.rotate(pk);ctx.beginPath();ctx.arc(0,0,s*0.11,0,TAU);ctx.fill();
-    ctx.beginPath();ctx.moveTo(s*0.08,-s*0.03);ctx.lineTo(s*0.25,s*0.02);ctx.lineTo(s*0.08,s*0.04);ctx.fill();ctx.restore();ctx.beginPath();ctx.moveTo(-s*0.26,-s*0.28);ctx.lineTo(-s*0.56,-s*0.18);ctx.lineTo(-s*0.5,-s*0.3);ctx.closePath();ctx.fill();
-    ctx.strokeStyle="#16171c";ctx.lineWidth=s*0.04;ctx.beginPath();ctx.moveTo(-s*0.02,-s*0.16);ctx.lineTo(-s*0.04,0);ctx.moveTo(s*0.08,-s*0.16);ctx.lineTo(s*0.1,0);ctx.stroke();ctx.fillStyle="rgba(120,140,170,0.25)";ctx.beginPath();ctx.ellipse(-s*0.02,-s*0.36,s*0.14,s*0.05,-0.25,0,TAU);ctx.fill();}
-  ctx.restore();}
-// a coconut palm, leaning: a tapering, ringed trunk and fronds that move a little in the wind (x, y: its foot; s: its height)
-function d8_palm(ctx,x,y,s,t,lean,col){ctx.save();ctx.translate(x,y);const sw=Math.sin(t*0.8)*0.02,tx=s*lean,ty=-s;ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(-s*0.035,0);ctx.quadraticCurveTo(tx*0.3-s*0.03,-s*0.55,tx-s*0.015,ty);ctx.lineTo(tx+s*0.015,ty);
-  ctx.quadraticCurveTo(tx*0.3+s*0.03,-s*0.55,s*0.035,0);ctx.closePath();ctx.fill();
-  for(let k=0;k<9;k++){const an=-Math.PI*0.95+k*Math.PI*0.21+sw*(1+k%3)+(k%2?0.05:-0.05),L=s*(0.32+0.1*hash(k,830)),droop=0.55+0.25*hash(k,831);ctx.save();ctx.translate(tx,ty);ctx.rotate(an);
-    ctx.strokeStyle=col;ctx.lineWidth=s*0.012;ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(L*0.5,-L*0.12,L,L*droop*0.5);ctx.stroke();
-    for(let j=1;j<12;j++){const u=j/12,px=L*u,py=-L*0.12*4*u*(1-u)*0.5+L*droop*0.5*u*u,lf=L*0.2*(1-u*0.6);ctx.lineWidth=s*0.008;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px+lf*0.4,py+lf);ctx.moveTo(px,py);ctx.lineTo(px+lf*0.5,py-lf*0.3);ctx.stroke();}ctx.restore();}
-  ctx.fillStyle=col;[[-0.02,0.01],[0.025,0.03],[0.0,0.045]].forEach(([dx,dy])=>{ctx.beginPath();ctx.arc(tx+dx*s,ty+dy*s,s*0.022,0,TAU);ctx.fill();});ctx.restore();}
-// a woven basket on its side, its mouth towards the sea (s: its size)
-function d8_basket(ctx,x,y,s,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot);const g=ctx.createLinearGradient(0,-s*0.5,0,s*0.5);g.addColorStop(0,"#c7a067");g.addColorStop(1,"#6e5131");ctx.fillStyle=g;
-  ctx.beginPath();ctx.moveTo(-s*0.55,-s*0.38);ctx.quadraticCurveTo(-s*0.75,0,-s*0.55,s*0.38);ctx.lineTo(s*0.4,s*0.46);ctx.quadraticCurveTo(s*0.62,0,s*0.4,-s*0.46);ctx.closePath();ctx.fill();
-  ctx.save();ctx.clip();ctx.strokeStyle="rgba(70,48,24,0.5)";ctx.lineWidth=s*0.03;for(let i=-6;i<=6;i++){ctx.beginPath();ctx.moveTo(-s+i*s*0.14,-s);ctx.lineTo(i*s*0.14+s*0.2,s);ctx.stroke();ctx.beginPath();ctx.moveTo(-s,i*s*0.12);ctx.lineTo(s,i*s*0.12+s*0.08);ctx.stroke();}ctx.restore();
-  ctx.fillStyle="#3a2a1a";ctx.beginPath();ctx.ellipse(s*0.46,0,s*0.13,s*0.44,0,0,TAU);ctx.fill();ctx.strokeStyle="#d8b47a";ctx.lineWidth=s*0.05;ctx.beginPath();ctx.ellipse(s*0.46,0,s*0.13,s*0.44,0,0,TAU);ctx.stroke();ctx.restore();}
-// The beach at Badagara, at a quarter to eight, close up: the sea rolling in, the swash sliding up the sand and back, a plank-built boat
-// pulled up on the beach with its outboard motor, baskets tipped at the water's edge and the catch carried off by the sea, crows
-// waiting, and a palm. The sun is coming up behind the beach, over the hills, so shadows fall towards the sea. pour (0..1): the catch
-// going into the water; o.lab: the place and time
-function d8_beach(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const pour=clamp(o.pour==null?1:o.pour,0,1);withA(ctx,a,()=>{
-  glass(ctx,x-8,y-8,w+16,h+16,22,[255,206,170],{glow:18,ea:0.75,fill:"rgba(8,12,24,0.95)"});ctx.save();rr(ctx,x,y,w,h,16);ctx.clip();ctx.translate(x,y);
-  const hz=h*0.33,sh=h*0.58,sw=Math.sin(t*0.85),sy=sh+12+sw*12;
-  let g=ctx.createLinearGradient(0,0,0,hz);g.addColorStop(0,"#5a6d9a");g.addColorStop(0.62,"#c49fb2");g.addColorStop(1,"#f1c6a6");ctx.fillStyle=g;ctx.fillRect(0,0,w,hz+2);
-  for(let i=0;i<4;i++){const cx=w*(0.12+0.26*i)+Math.sin(t*0.05+i)*10,cy=hz*(0.3+0.16*hash(i,840));ctx.fillStyle="rgba(255,226,206,0.32)";ctx.beginPath();ctx.ellipse(cx,cy,w*0.1,h*0.016,0,0,TAU);ctx.fill();}
-  g=ctx.createLinearGradient(0,hz,0,sh+24);g.addColorStop(0,"#5b7593");g.addColorStop(0.45,"#3f7488");g.addColorStop(1,"#5a9a99");ctx.fillStyle=g;ctx.fillRect(0,hz,w,sh-hz+40);
-  ctx.fillStyle="rgba(255,214,190,0.14)";ctx.fillRect(0,hz,w,6);
-  // swell, moving in
-  for(let i=0;i<10;i++){const u=((i/10)+t*0.04)%1,yy=hz+(sh-hz)*Math.pow(u,1.7);ctx.strokeStyle="rgba(232,242,246,"+(0.06+0.2*u)+")";ctx.lineWidth=0.8+2.4*u;ctx.beginPath();
-    for(let xx=0;xx<=w;xx+=14){const y2=yy+Math.sin(xx*0.018+i*1.7+t*0.6)*(0.6+3*u);xx?ctx.lineTo(xx,y2):ctx.moveTo(xx,y2);}ctx.stroke();}
-  // the sand: wet below the swash, dry above it, with the morning's long shadows
-  g=ctx.createLinearGradient(0,sh,0,h);g.addColorStop(0,"#7a6656");g.addColorStop(0.3,"#a88d70");g.addColorStop(1,"#d3b58c");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(0,h);
-  for(let xx=0;xx<=w;xx+=16)ctx.lineTo(xx,sh+Math.sin(xx*0.012+1.3)*5);ctx.lineTo(w,h);ctx.closePath();ctx.fill();
-  for(let i=0;i<120;i++){const xx=hash(i,841)*w,yy=sh+16+hash(i,842)*(h-sh-16);ctx.fillStyle="rgba(90,70,50,"+(0.1+0.14*hash(i,843))+")";ctx.fillRect(xx,yy,1.6,1.2);}
-  // the swash: a thin sheet of sea that slides up the sand and back, with foam on its edge
-  ctx.fillStyle="rgba(120,180,184,0.5)";ctx.beginPath();ctx.moveTo(0,sh-6);for(let xx=0;xx<=w;xx+=12)ctx.lineTo(xx,sy+Math.sin(xx*0.03+t*0.7)*4+Math.sin(xx*0.011)*6);ctx.lineTo(w,sh-6);ctx.closePath();ctx.fill();
-  ctx.strokeStyle="rgba(250,252,250,0.75)";ctx.lineWidth=2.4;ctx.beginPath();for(let xx=0;xx<=w;xx+=12){const yy=sy+Math.sin(xx*0.03+t*0.7)*4+Math.sin(xx*0.011)*6;xx?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.stroke();
-  const br=sh-14+Math.sin(t*0.85+1.4)*6;ctx.strokeStyle="rgba(250,252,250,0.55)";ctx.lineWidth=5;ctx.beginPath();for(let xx=0;xx<=w;xx+=12){const yy=br+Math.sin(xx*0.025+t*1.1)*3;xx?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.stroke();
-  // a palm at the edge of the beach
-  d8_palm(ctx,w*0.06,h+10,h*0.95,t,0.22,"rgba(22,26,30,0.92)");
-  // the boat, pulled up on the sand: plank-built, a faded blue band along its sheer, its outboard motor tilted up, nets in it
-  const bx=w*0.7,by=h*0.86,bl=w*0.5;ctx.save();ctx.translate(bx,by);ctx.rotate(-0.06);
-  ctx.fillStyle="rgba(60,40,24,0.22)";ctx.beginPath();ctx.ellipse(-bl*0.02,-bl*0.06,bl*0.52,bl*0.07,-0.05,0,TAU);ctx.fill();
-  [-0.28,0.24].forEach(u=>{ctx.fillStyle="#5b4330";rr(ctx,bl*u-8,4,16,12,4);ctx.fill();});
-  const hullP=()=>{ctx.beginPath();ctx.moveTo(-bl*0.52,-bl*0.13);ctx.quadraticCurveTo(-bl*0.46,bl*0.02,-bl*0.3,bl*0.03);ctx.lineTo(bl*0.32,bl*0.03);ctx.quadraticCurveTo(bl*0.5,bl*0.02,bl*0.55,-bl*0.16);ctx.quadraticCurveTo(bl*0.1,-bl*0.08,-bl*0.52,-bl*0.13);ctx.closePath();};
-  hullP();g=ctx.createLinearGradient(0,-bl*0.14,0,bl*0.04);g.addColorStop(0,"#6a4a30");g.addColorStop(0.55,"#4b3220");g.addColorStop(1,"#2e1f15");ctx.fillStyle=g;ctx.fill();
-  ctx.save();hullP();ctx.clip();ctx.fillStyle="#46708d";ctx.beginPath();ctx.moveTo(-bl*0.52,-bl*0.13);ctx.quadraticCurveTo(bl*0.1,-bl*0.08,bl*0.55,-bl*0.16);ctx.lineTo(bl*0.55,-bl*0.11);ctx.quadraticCurveTo(bl*0.1,-bl*0.035,-bl*0.52,-bl*0.085);ctx.closePath();ctx.fill();
-  ctx.strokeStyle="rgba(20,12,8,0.45)";ctx.lineWidth=1.2;for(let k=1;k<4;k++){ctx.beginPath();ctx.moveTo(-bl*0.5,-bl*0.085+k*bl*0.03);ctx.quadraticCurveTo(0,-bl*0.03+k*bl*0.03,bl*0.53,-bl*0.11+k*bl*0.03);ctx.stroke();}
-  ctx.fillStyle="rgba(255,226,180,0.16)";ctx.fillRect(-bl*0.6,-bl*0.2,bl*1.2,bl*0.05);ctx.restore();
-  ctx.strokeStyle="#2a1c12";ctx.lineWidth=2;hullP();ctx.stroke();
-  ctx.fillStyle="rgba(40,64,52,0.95)";ctx.beginPath();ctx.moveTo(-bl*0.22,-bl*0.1);ctx.quadraticCurveTo(-bl*0.05,-bl*0.2,bl*0.12,-bl*0.1);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(140,180,150,0.35)";ctx.lineWidth=1;
-  for(let k=0;k<8;k++){ctx.beginPath();ctx.moveTo(-bl*0.2+k*bl*0.04,-bl*0.1);ctx.lineTo(-bl*0.16+k*bl*0.04,-bl*0.16);ctx.stroke();}
-  ctx.save();ctx.translate(-bl*0.54,-bl*0.14);ctx.rotate(-0.5);ctx.fillStyle="#2b2e34";rr(ctx,-10,-26,26,30,5);ctx.fill();ctx.fillStyle="#c8cdd4";ctx.fillRect(-6,-22,12,4);ctx.fillStyle="#3a3e46";ctx.fillRect(-2,4,6,bl*0.16);ctx.restore();
-  ctx.restore();
-  // the catch: baskets tipped at the water's edge, and sardines spilling into the swash; the sea takes them out
-  const kx=w*0.3,ky=sh+30;d8_basket(ctx,kx,ky+8,40,-0.35);d8_basket(ctx,kx+70,ky+16,34,-0.15);
-  for(let i=0;i<46;i++){const ph=hash(i,850),u=clamp(pour*1.4-ph*0.4,0,1);if(u<=0)continue;const dr=(t*0.05+ph)%1,out=u*(0.3+0.7*dr),fx=kx-30+hash(i,851)*190-out*40,fy=lerp(ky+6,sh-6,out)+Math.sin(t*0.85+fx*0.03)*6*(1-out);
-    withA(ctx,(1-sstep(0.75,1,out))*clamp(u*3,0,1),()=>d8_fish(ctx,fx,fy,(hash(i,852)-0.5)*1.4+Math.sin(t*2+i)*0.1,15+5*hash(i,853),0.5+0.5*Math.sin(t*3+i)));}
-  for(let i=0;i<10;i++)d8_fish(ctx,kx+18+hash(i,854)*40,ky+16+hash(i,855)*14,(hash(i,856)-0.5)*0.8,16,0.3);
-  // crows, waiting for it
-  d8_crow(ctx,kx+150,ky+40,26,t,0,-1);d8_crow(ctx,kx-70,ky+44,24,t+1.3,0,1);d8_crow(ctx,w*0.52+Math.sin(t*0.5)*60,hz+30+Math.sin(t*0.9)*8,24,t,1,1);
-  // the morning light, from behind
-  g=ctx.createLinearGradient(0,h,0,0);g.addColorStop(0,"rgba(255,200,140,0.12)");g.addColorStop(1,"rgba(255,200,140,0)");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
-  ctx.restore();
-  if(o.lab)tag(ctx,x+18,y+h-34,o.lab,[255,214,170],{size:28});});}
-// a skipper's phone at sea, close up: a hand holding a mobile phone of the time, its small green screen showing two lines (o.l1, o.l2),
-// and its signal bars (o.bars, 0..4); the sea behind, from the boat
-function d8_phone(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-8,y-8,w+16,h+16,22,D8_SIG,{glow:18,ea:0.75,fill:"rgba(8,12,24,0.95)"});
-  ctx.save();rr(ctx,x,y,w,h,16);ctx.clip();ctx.translate(x,y);const roll=Math.sin(t*0.9)*0.025,hz=h*0.36+Math.sin(t*0.9)*8;
-  ctx.save();ctx.translate(w/2,h/2);ctx.rotate(roll);ctx.translate(-w/2,-h/2);
-  let g=ctx.createLinearGradient(0,-40,0,hz);g.addColorStop(0,"#4e628f");g.addColorStop(1,"#e6b59e");ctx.fillStyle=g;ctx.fillRect(-60,-60,w+120,hz+60);
-  g=ctx.createLinearGradient(0,hz,0,h);g.addColorStop(0,"#56708e");g.addColorStop(1,"#22404f");ctx.fillStyle=g;ctx.fillRect(-60,hz,w+120,h-hz+60);
-  for(let i=0;i<12;i++){const u=((i/12)+t*0.05)%1,yy=hz+(h-hz)*Math.pow(u,1.5);ctx.strokeStyle="rgba(220,236,246,"+(0.05+0.14*u)+")";ctx.lineWidth=1+2*u;ctx.beginPath();for(let xx=-60;xx<=w+60;xx+=16){const y2=yy+Math.sin(xx*0.02+i*2+t*0.7)*(1+4*u);xx===-60?ctx.moveTo(xx,y2):ctx.lineTo(xx,y2);}ctx.stroke();}
-  for(let i=0;i<3;i++){const bx=w*(0.12+0.3*i)+Math.sin(t*0.2+i)*12,by=hz+6+i*3;ctx.fillStyle="rgba(30,36,46,0.7)";ctx.beginPath();ctx.ellipse(bx,by,14,3,0,0,TAU);ctx.fill();}
-  ctx.restore();
-  // the boat's gunwale, in the foreground
-  ctx.fillStyle="#3e2a1b";ctx.beginPath();ctx.moveTo(0,h);ctx.lineTo(0,h*0.86);ctx.quadraticCurveTo(w*0.5,h*0.8+Math.sin(t*0.9)*4,w,h*0.88);ctx.lineTo(w,h);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(230,190,140,0.35)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,h*0.86);ctx.quadraticCurveTo(w*0.5,h*0.8+Math.sin(t*0.9)*4,w,h*0.88);ctx.stroke();
-  // the hand and the phone
-  const pw=228,ph=440,px=w*0.5,py=h*0.5+Math.sin(t*1.1)*3;ctx.save();ctx.translate(px,py);ctx.rotate(-0.07+Math.sin(t*0.7)*0.01);
-  const skin=[146,98,68],skL=[186,132,96],skD=[104,66,44];
-  g=ctx.createLinearGradient(-pw*0.7,0,pw*0.7,0);g.addColorStop(0,rgba(skL,1));g.addColorStop(1,rgba(skD,1));ctx.fillStyle=g;
-  ctx.beginPath();ctx.moveTo(-pw*0.55,ph*0.75);ctx.bezierCurveTo(-pw*0.62,ph*0.35,-pw*0.6,ph*0.12,-pw*0.42,ph*0.06);ctx.lineTo(pw*0.48,ph*0.1);ctx.bezierCurveTo(pw*0.64,ph*0.2,pw*0.62,ph*0.45,pw*0.5,ph*0.75);ctx.closePath();ctx.fill();
-  ctx.fillRect(-pw*0.5,ph*0.6,pw*0.95,ph*0.4);
-  ctx.save();ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=18;ctx.shadowOffsetX=6;ctx.shadowOffsetY=8;g=ctx.createLinearGradient(-pw/2,0,pw/2,0);g.addColorStop(0,"#4a4f58");g.addColorStop(0.5,"#30343b");g.addColorStop(1,"#1d2026");ctx.fillStyle=g;
-  rr(ctx,-pw/2,-ph/2,pw,ph,40);ctx.fill();ctx.restore();ctx.fillStyle="#30343b";rr(ctx,pw*0.18,-ph/2-62,30,74,12);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.12)";ctx.fillRect(pw*0.18+6,-ph/2-56,5,60);
-  ctx.strokeStyle="rgba(255,255,255,0.14)";ctx.lineWidth=2;rr(ctx,-pw/2+3,-ph/2+3,pw-6,ph-6,38);ctx.stroke();
-  ctx.fillStyle="rgba(10,10,12,0.8)";for(let k=0;k<5;k++)rr(ctx,-24+k*11,-ph/2+26,6,3,1.5),ctx.fill();
-  // the screen: green, lit, with black text
-  const sx=-pw*0.41,sy=-ph*0.4,sw_=pw*0.82,shh=ph*0.29;ctx.fillStyle="#141619";rr(ctx,sx-6,sy-6,sw_+12,shh+12,10);ctx.fill();g=ctx.createLinearGradient(0,sy,0,sy+shh);g.addColorStop(0,"#b9d07c");g.addColorStop(1,"#97b462");ctx.fillStyle=g;rr(ctx,sx,sy,sw_,shh,6);ctx.fill();
-  glow(ctx,0,sy+shh/2,sw_*0.6,[190,230,120],0.25);const bars=o.bars||0;for(let k=0;k<4;k++){ctx.fillStyle=k<bars?"rgba(22,30,14,0.95)":"rgba(22,30,14,0.18)";ctx.fillRect(sx+10,sy+shh-18-k*12,6+k*3,7);}
-  ctx.fillStyle="rgba(22,30,14,0.95)";ctx.fillRect(sx+sw_-30,sy+10,20,10);ctx.fillRect(sx+sw_-10,sy+13,3,4);
-  if(o.l1)T(ctx,o.l1,sx+sw_/2+8,sy+shh*0.42,{f:"mono",w:500,size:28,align:"center",color:"rgba(18,26,12,0.95)"});if(o.l2)T(ctx,o.l2,sx+sw_/2+8,sy+shh*0.42+36,{f:"mono",w:500,size:28,align:"center",color:"rgba(18,26,12,0.95)"});
-  // keys
-  ctx.fillStyle="#9aa0a8";rr(ctx,-pw*0.36,-ph*0.06,pw*0.24,20,8);ctx.fill();rr(ctx,pw*0.12,-ph*0.06,pw*0.24,20,8);ctx.fill();ctx.fillStyle="#c9ced6";rr(ctx,-24,-ph*0.075,48,30,12);ctx.fill();
-  for(let r=0;r<4;r++)for(let c=0;c<3;c++){const kx=-pw*0.3+c*pw*0.3,ky=ph*0.06+r*ph*0.085;ctx.fillStyle="#b7bcc4";rr(ctx,kx-24,ky-12,48,26,10);ctx.fill();T(ctx,["1","2","3","4","5","6","7","8","9","*","0","#"][r*3+c],kx,ky+6,{w:700,size:15,align:"center",color:"rgba(40,44,52,0.85)",deco:1});}
-  // the thumb, in front, along the left side; three fingertips round the right
-  g=ctx.createLinearGradient(-pw*0.7,0,-pw*0.2,0);g.addColorStop(0,rgba(skL,1));g.addColorStop(1,rgba(skin,1));ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(-pw*0.62,ph*0.42);ctx.bezierCurveTo(-pw*0.66,ph*0.22,-pw*0.6,ph*0.1,-pw*0.44,ph*0.02);
-  ctx.bezierCurveTo(-pw*0.36,-ph*0.01,-pw*0.3,ph*0.04,-pw*0.34,ph*0.1);ctx.bezierCurveTo(-pw*0.4,ph*0.18,-pw*0.42,ph*0.3,-pw*0.36,ph*0.44);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(skD,0.6);ctx.lineWidth=1.5;ctx.stroke();
-  ctx.fillStyle=rgba(mix(skL,[255,255,255],0.25),0.6);ctx.beginPath();ctx.ellipse(-pw*0.39,ph*0.05,9,5,-0.8,0,TAU);ctx.fill();
-  [[0.12,0],[0.24,1],[0.36,2]].forEach(([fy,k])=>{const yy=ph*fy;g=ctx.createLinearGradient(pw*0.4,0,pw*0.62,0);g.addColorStop(0,rgba(skin,1));g.addColorStop(1,rgba(skD,1));ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(pw*0.62,yy-26);
-    ctx.bezierCurveTo(pw*0.5,yy-28,pw*0.42,yy-20,pw*0.42,yy-8);ctx.bezierCurveTo(pw*0.42,yy+6,pw*0.5,yy+14,pw*0.62,yy+12);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(skD,0.7);ctx.lineWidth=1.4;ctx.stroke();
-    ctx.fillStyle=rgba(mix(skL,[255,240,230],0.35),0.55);ctx.beginPath();ctx.ellipse(pw*0.47,yy-8,5,8,0.2,0,TAU);ctx.fill();});
-  ctx.restore();ctx.restore();
-  if(o.lab)tag(ctx,x+18,y+h-34,o.lab,D8_SIG,{size:28});});}
-// the skipper's phone, as a small round icon: where the calls go out from, and what a live dashboard is compared with (r: its radius)
-function d8_phoneIcon(ctx,x,y,r,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-r,y-r,2*r,2*r,r,D8_SIG,{glow:14,ea:0.9,fill:"rgba(8,12,24,0.94)"});const k=r/24;ctx.save();ctx.translate(x,y);ctx.scale(k,k);
-  ctx.strokeStyle=rgba(D8_SIG,1);ctx.fillStyle=rgba(D8_SIG,1);ctx.lineWidth=2.2;ctx.lineCap="round";rr(ctx,-7,-8,14,21,3);ctx.stroke();ctx.fillRect(-4,-5,8,6);ctx.beginPath();ctx.moveTo(4,-8);ctx.lineTo(4,-15);ctx.stroke();ctx.restore();});}
-// a skipper at sea who doesn't know what the markets will pay: a small question, as a bubble over the boat
-function d8_qmark(ctx,x,y,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-20,y-16,40,32,14,INF,{glow:8,ea:0.85,fill:"rgba(16,10,8,0.94)"});d8_glyph(ctx,"question",x,y-1,9,INF);});}
-// When the answer arrives, in one morning: at sea, then the choice of where to land, then at the market. u (0..1) moves the answer
-// (a price) from after the choice, where it's too late, to before it, where it can still be acted on; o.hi lights the choice
+/* ---------- up close: how fast the water gathers, and when the answer comes ---------- */
+// How fast the hollow fills, day by day, in the films' dark glass: a bar for each day, drawn as o.days[i] (0..1) says, the line a
+// trickle would reach, and its name; 600 by 330, at x, y
+const D8_DAYS=[0.66,0.72,0.69],D8_TRICKLE=0.16;
+function d8_tally(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const w=600,h=330,days=o.days||[0,0,0],bx=x+150,bw=410;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,22,BA_WATER,{glow:12+10*(o.hi||0),ea:0.75,fill:"rgba(8,14,24,0.95)"});
+    T(ctx,"how fast the hollow fills",x+30,y+58,{w:700,size:30,color:rgba(INK,0.96)});
+    days.forEach((p,i)=>{const yy=y+122+i*58;T(ctx,"day "+(i+1),x+30,yy+10,{w:600,size:28,color:rgba(SOFT,1)});
+      ctx.fillStyle="rgba(255,255,255,0.07)";rr(ctx,bx,yy-15,bw,30,10);ctx.fill();const q=ease(clamp(p,0,1));
+      if(q>0.005){ctx.fillStyle=rgba(BA_WATER,0.9);rr(ctx,bx,yy-15,Math.max(20,bw*D8_DAYS[i]*q),30,10);ctx.fill();}});
+    // where a trickle would reach
+    const xt=bx+bw*D8_TRICKLE;ctx.save();ctx.setLineDash([7,7]);ctx.strokeStyle=rgba([255,226,180],0.8);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(xt,y+92);ctx.lineTo(xt,y+272);ctx.stroke();ctx.restore();
+    T(ctx,"a trickle",xt,y+306,{w:600,size:28,align:"center",color:rgba([255,226,180],1)});});}
+// a trial well, as a small sign: the ring of dug earth, the shaft, the windlass over it and a bucket on its rope; s is its height
+function d8_wellIcon(ctx,x,y,s,a){a=a==null?1:a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);const k=s/80;ctx.scale(k,k);ctx.lineCap="round";ctx.lineJoin="round";
+  ctx.fillStyle="rgba(196,150,104,1)";[-1,1].forEach(sd=>{ctx.beginPath();ctx.moveTo(sd*9,4);ctx.quadraticCurveTo(sd*21,-14,sd*34,4);ctx.closePath();ctx.fill();});
+  ctx.strokeStyle="rgba(255,226,180,0.95)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-8,4);ctx.lineTo(-8,40);ctx.moveTo(8,4);ctx.lineTo(8,40);ctx.stroke();
+  ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(-24,2);ctx.lineTo(-19,-40);ctx.moveTo(24,2);ctx.lineTo(19,-40);ctx.stroke();
+  ctx.fillStyle="rgba(214,164,110,1)";rr(ctx,-22,-48,44,12,5);ctx.fill();
+  ctx.strokeStyle=rgba(BA_WATER,1);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(0,-38);ctx.lineTo(0,22);ctx.stroke();
+  ctx.fillStyle=rgba(BA_WATER,1);ctx.beginPath();ctx.moveTo(-6,22);ctx.lineTo(6,22);ctx.lineTo(5,32);ctx.lineTo(-5,32);ctx.closePath();ctx.fill();ctx.restore();});}
+// When the answer comes, in the work: the trial well, then the choice whether to dig, then the tunnel. u (0..1) moves the answer from
+// after the tunnel, where it's too late, to before the choice, where it can still be acted on; o.hi lights the choice
 function d8_when(ctx,x,y,w,u,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=250;withA(ctx,a,()=>{glass(ctx,x,y,w,h,22,[220,230,255],{glow:12,ea:0.6,fill:"rgba(8,12,24,0.95)"});
-  const ly=y+150,xa=x+90,xb=x+w*0.5,xc=x+w-110,e=ease(clamp(u,0,1));ctx.save();ctx.strokeStyle="rgba(220,230,255,0.55)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(xa,ly);ctx.lineTo(xc,ly);ctx.stroke();ctx.restore();
-  d8_boat(ctx,xa,ly,0,46,{});ctx.save();ctx.fillStyle=rgba([255,240,214],1);ctx.beginPath();ctx.arc(xc,ly,9,0,TAU);ctx.fill();ctx.restore();
+  const ly=y+150,xa=x+140,xb=x+w*0.5,xc=x+w-120,e=ease(clamp(u,0,1));ctx.save();ctx.strokeStyle="rgba(220,230,255,0.55)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(xa,ly);ctx.lineTo(xc,ly);ctx.stroke();ctx.restore();
+  ctx.save();ctx.fillStyle="rgba(8,12,24,1)";ctx.beginPath();ctx.arc(xa,ly,26,0,TAU);ctx.fill();ctx.restore();d8_wellIcon(ctx,xa,ly+4,44);
+  // the tunnel: a short stretch of it, dark, edged in the light of the earth it's cut through
+  ctx.save();ctx.fillStyle="rgba(16,14,28,1)";ctx.strokeStyle="rgba(255,226,180,0.9)";ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(xc-34,ly-14);ctx.lineTo(xc+34,ly-8);ctx.lineTo(xc+34,ly+8);ctx.lineTo(xc-34,ly+2);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle=rgba(BA_WATER,0.9);ctx.fillRect(xc-30,ly-1,60,3);ctx.restore();
   if(o.hi>0.01)glow(ctx,xb,ly,64,BUS,0.55*o.hi);ctx.save();ctx.translate(xb,ly);ctx.fillStyle="rgba(8,12,24,1)";ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(22,0);ctx.lineTo(0,22);ctx.lineTo(-22,0);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(BUS,1);ctx.lineWidth=3;ctx.stroke();ctx.restore();
-  T(ctx,"at sea",xa,ly+62,{w:700,size:28,align:"center",color:rgba(SOFT,1)});T(ctx,"choose where to land",xb,ly+62,{w:700,size:28,align:"center",color:rgba(BUS,1)});T(ctx,"at the market",xc,ly+62,{w:700,size:28,align:"center",color:rgba(SOFT,1)});
-  const ax=lerp(xc,lerp(xa,xb,0.55),e),col=mix(D8_RED,TRUST,e);tag(ctx,ax,ly-58,"the price",col,{align:"center",size:28});ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(ax,ly-36);ctx.lineTo(ax,ly-12);ctx.stroke();ctx.restore();
+  T(ctx,"the trial well",xa,ly+62,{w:700,size:28,align:"center",color:rgba(SOFT,1)});T(ctx,"choose whether to dig",xb,ly+62,{w:700,size:28,align:"center",color:rgba(BUS,1)});T(ctx,"the tunnel",xc,ly+62,{w:700,size:28,align:"center",color:rgba(SOFT,1)});
+  const ax=lerp(xc,lerp(xa,xb,0.5),e),col=mix(D8_RED,TRUST,e);tag(ctx,ax,ly-58,"the answer",col,{align:"center",size:28});ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(ax,ly-36);ctx.lineTo(ax,ly-12);ctx.stroke();ctx.restore();
   withA(ctx,1-sstep(0.3,0.5,u),()=>T(ctx,"too late",x+w-30,y+52,{w:800,size:30,align:"right",color:rgba(D8_RED,1)}));withA(ctx,sstep(0.6,0.85,u),()=>T(ctx,"in time",x+30,y+52,{w:800,size:30,color:rgba(TRUST,1)}));});}
 
 /* ---------- the wall and the glass: requests, decisions, questions, measures ---------- */
@@ -2353,111 +2636,101 @@ function d8_wall(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const 
   ctx.fillStyle=rgba(col,0.12+0.1*(o.hi||0));ctx.fillRect(948,y0,24,y1-y0);ctx.shadowBlur=0;ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.5;ctx.beginPath();[948,972].forEach(x=>{ctx.moveTo(x,y0);ctx.lineTo(x,y1);});ctx.stroke();ctx.restore();});}
 
 /* ===== Now the questions appear: scenes =====
-   Eleven chapters, as in ../script.md. Kerala in 1997: boats that could reach only one market, skippers who had to choose one at sea
-   without knowing what it would pay, a catch poured back into the sea while buyers nearby went without, and the phones that brought a
-   skipper the answer in time; then Tomás's backlog of forty-two requests, read again with the skipper's test; a request traced up to
-   a decision, a capability and a goal, and one, as live as the skipper's call, that reaches nothing; all forty-two, half of which
-   reach nothing; a goal traced down to a decision, a question and a measure, meeting the request at one decision; a goal with no
-   measure; two reports that count one measure differently, and one definition; each measure's home and owner; four data products
-   instead of twenty-one reports; back on the coast, the phones spread and the skipper's question traced the same way, with what
-   changed; and Grace's measures confirmed.
+   Eleven chapters, as in ../script.md. Iran in the 1960s: an expert looks for water on a slope at the mountains' foot; a qanat ten
+   kilometres long costs its builders a fortune, and until it's finished no one can be sure it will flow all year; so before they pay,
+   two muqannis sink a trial well, and for a few days the buckets are dipped into the hollow at its foot, to measure how fast the water
+   gathers; only then is the tunnel dug, and the water reaches the fields. Then Tomás's backlog of forty-two requests, read again with a
+   trial well for every request; a request traced up to a decision, a capability and a goal, and one, never out of date, that reaches
+   nothing; all forty-two, half of which reach nothing; a goal traced down to a decision, a question and a measure, meeting the request
+   at one decision; a goal with no measure; two reports that count one measure differently, and one definition; each measure's home
+   and owner; four data products instead of twenty-one reports; back at the trial well, the builders' question traced the same way;
+   and Grace's measures confirmed.
    Made to read on a phone (tools/legible.py): text is at least 28 px in the frame; cards and names drawn small are texture. Motion:
    every shot drifts slowly and things arrive with a spring. Sound: every effect in tools/score.py fires at the same moment as the
    thing it belongs to here, so keep the two in step. */
 
-/* ---------- 1. Where to land ---------- */
-// The boats of two mornings. On the first, before the phones, each skipper chooses a market while still at sea and comes in to it,
-// and eleven crews land at Badagara; on the second, after them, the boats wait at sea, and one of them (the skipper's) calls the
-// markets before it chooses. Back on the coast (chapter 10), the same boats spread along the coast, each to a market within reach
-// of where it fished.
-const D8_BOATS=(()=>{const first=[2,3,3,2,3,3,2,3,3,2,3,11,2,3,3],B=[];first.forEach((n,m)=>{for(let j=0;j<n;j++)B.push({m1:m,k1:j,n1:n});});
-  B.forEach((b,i)=>{b.m2=Math.min(14,Math.floor(i*15/B.length));b.out=12+hash(i,900)*16;b.al=(hash(i,901)-0.5)*12;b.go=hash(i,902);});
-  const n2=Array(15).fill(0);B.forEach(b=>{b.k2=n2[b.m2]++;});B.forEach(b=>{b.n2=n2[b.m2];});return B;})();
-const D8_HERO=D8_BOATS.findIndex(b=>b.m1===D8_BA&&b.m2===D8_CH);
-Object.assign(D8_BOATS[D8_HERO],{out:12.5,al:0.5});
-// the boats that wonder, out at sea, what the markets will pay: a few along the whole coast, and two of Badagara's eleven
-const D8_WONDER=D8_BOATS.map((b,i)=>i).filter(i=>i!==D8_HERO&&(hash(i,903)<0.2||(D8_BOATS[i].m1===D8_BA&&D8_BOATS[i].k1%5===1)));
-// where a boat is: out at sea (u = 0), coming in to market m along a curve, and pulled up on its beach beside the others (u = 1);
-// it heads where it's going, rocks a little while it waits, and lies bow up the sand once it's in
-function d8_boatAt(b,m,u,mor,t,i){const S_=D8_MK[b.m1],M=D8_MK[m],k=mor===1?b.k1:b.k2,n=mor===1?b.n1:b.n2,sp=n>6?1.05:1.5,al=(k-(n-1)/2)*sp;
-  const sx=S_.x+S_.nx*b.out*D8_SK+S_.dx*b.al*D8_SK,sy=S_.y+S_.ny*b.out*D8_SK+S_.dy*b.al*D8_SK,ex=M.x+M.nx*0.5*D8_SK+M.dx*al*D8_SK,ey=M.y+M.ny*0.5*D8_SK+M.dy*al*D8_SK;
-  const cx=M.x+M.nx*6*D8_SK+M.dx*al*0.6*D8_SK,cy=M.y+M.ny*6*D8_SK+M.dy*al*0.6*D8_SK,e=ease(clamp(u,0,1)),q=1-e;
-  const x=q*q*sx+2*q*e*cx+e*e*ex,y=q*q*sy+2*q*e*cy+e*e*ey,dx=2*q*(cx-sx)+2*e*(ex-cx),dy=2*q*(cy-sy)+2*e*(ey-cy);
-  const an=u>=1?Math.atan2(-M.ny,-M.nx):Math.atan2(dy,dx)+(u<=0?Math.sin(t*1.1+i*1.7)*0.08:0);return{x,y,an};}
-// buyers waiting at a market, drawn as a map draws people, in rows inland of it; gone (0..1) walks them away inland, and near (0..1)
-// brings them down to the beach
-function d8_buyers(ctx,mi,n,a,gone,near){const M=D8_MK[mi],cols=Math.ceil(n/3);for(let k=0;k<n;k++){const row=k%3,col=Math.floor(k/3),inl=1.7+row*1.1+ease(gone||0)*(3+hash(k,905)*2)-ease(near||0)*1.1,al=(col-(cols-1)/2)*1.05+(row%2)*0.4;
-  d8_buyer(ctx,M.x-M.nx*inl*D8_SK+M.dx*al*D8_SK,M.y-M.ny*inl*D8_SK+M.dy*al*D8_SK,5.6,[255,226,180],a*(1-sstep(0.4,1,gone||0)));}}
-// a name on the map, with a dark halo so it reads over land and sea
-function d8_name(ctx,s,x,y,al,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.95)";ctx.shadowBlur=10;T(ctx,s,x,y,{w:800,size:30,align:al,color:"rgba(255,244,226,0.98)"});ctx.restore();});}
-// a tag that ends at x (its right edge) instead of starting there
-const d8_tagR=(ctx,x,y,s,col)=>tag(ctx,x-(tw(ctx,s,28,700)+26),y,s,col,{size:28});
-// the sea, from night (sun 0) towards day (sun 1)
-function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([8,20,52],[26,84,138],sun),1));g.addColorStop(1,rgba(mix([5,12,34],[16,62,108],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
-scene("kerala",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tM=c("markets"),tBl=c("blind"),tD=c("dump"),tP=c("phones"),tA=c("act"),sun=clamp((t-1)/46,0,1);
-  d8_sky(ctx,S,sun);
-  // the camera: India's south; the north Kerala coast; then Badagara, close, for the rest of the chapter
-  const BA=D8_MK[D8_BA],CH=D8_MK[D8_CH],QU=D8_MK[D8_QU],cam=d8_camAt(t,[[0,2439,2000,0.15],[3.4,1000,545,1,4.2],[tD-0.3,BA.x-108,BA.y+15,2.6,2.2]]);cam.z*=1+0.025*ease(t/sc.dur);
-  const twK=fin(t,tP+0.2,1.6),near=fin(t,tD+1.6,0.6)*(1-fin(t,B-0.4,0.6));
-  ctx.save();d8_camApply(ctx,cam);
-  d8_map(ctx,t,cam,{sun,ker:fin(t,1.8,1.2)*(1-fin(t,6.2,1.4)),labs:fin(t,0.3,1.0)*(1-fin(t,3.4,1.0)),sea:fin(t,6.6,1.0)*(1-fin(t,tD-0.3,0.8)),mk:fin(t,w("markets","beach markets")-0.4,1.4),tw:[twK,0,0]});
-  // fifteen kilometres round Badagara
-  const rg=fin(t,w("dump","Within fifteen")-0.2,0.8)*(1-fin(t,tP-0.2,0.6));if(rg>0.01)withA(ctx,rg,()=>{ctx.save();ctx.setLineDash([10/cam.z,8/cam.z]);ctx.strokeStyle=rgba(TRUST,0.85);ctx.lineWidth=2.4/cam.z;ctx.beginPath();ctx.arc(BA.x,BA.y,15*D8_SK*ease(rg),0,TAU);ctx.stroke();ctx.restore();});
-  // the catch, going back into the sea at Badagara
-  d8_spill(ctx,BA.x+BA.nx*1.6*D8_SK,BA.y+BA.ny*1.6*D8_SK,3*D8_SK,t,fin(t,w("dump","goes back"),1.0)*(1-fin(t,tP,0.8)));
-  // buyers with no fish, fifteen at Chombala and twelve at Quilandi, who leave; and, the morning the skipper calls, buyers at
-  // Chombala, who come down to the beach as his boat comes in
-  const bIn=fin(t,w("dump","Within fifteen")-0.4,0.6),bOut=clamp((t-w("dump","leave with"))/2.2,0,1),tAg=w("phones","agrees"),tOn=w("phones","only then");
-  d8_buyers(ctx,D8_CH,15,bIn,bOut,0);d8_buyers(ctx,D8_QU,12,bIn,bOut,0);d8_buyers(ctx,D8_CH,7,fin(t,tAg-0.2,0.6),0,clamp((t-tOn-2.2)/1.4,0,1));
-  // the boats: the first morning's come in from the sea to where they fished, wait there, and once each skipper has chosen, go on to
-  // that market; the second morning's wait at sea, and the skipper's, a little bigger and lit while the phone is on screen, comes in
-  // to Chombala once the price is agreed
-  const bs=15*Math.pow(cam.z,-0.4),lamp=1-sstep(0.3,0.65,sun),fade1=fin(t,tP-0.1,0.9),in2=fin(t,tP-0.2,0.9),bAp=fin(t,5.4,1.6),cnt=w("dump","eleven crews"),tCh=w("blind","must choose"),tWo=w("blind","without knowing");
-  const ph=fin(t,w("phones","At sea")-0.3,0.6)*(1-fin(t,tA-0.4,0.5));
-  // how far a first-morning boat has come: in from the sea to where it fished (0.3); then, its skipper having chosen without knowing
-  // what the markets will pay, on to that market
-  const u1=b=>{const p1=ease(clamp((t-(tM+0.2+b.go*1.6))/3.2,0,1)),p2=clamp((t-(tWo+b.go*1.0))/2.8,0,1);return[0.3*p1+0.7*p2,(p1>0&&p1<1)||(p2>0&&p2<1)];};
-  D8_BOATS.forEach((b,i)=>{
-    if(fade1<1){const[u,mv]=u1(b),q=d8_boatAt(b,b.m1,u,1,t,i),hi=b.m1===D8_BA?pulseAt(t,cnt+b.k1*0.09,0.8):0;
-      if(hi>0.01)glow(ctx,q.x,q.y,bs*1.4,TRUST,0.8*hi);d8_boat(ctx,q.x,q.y,q.an,bs,{a:bAp*(1-fade1),wake:mv?1:0,lamp});}
-    if(in2>0){const hero=i===D8_HERO,u=hero?clamp((t-tOn)/3.2,0,1):0,q=d8_boatAt(b,hero?D8_CH:b.m2,u,2,t,i);
-      if(hero&&ph>0.01)glow(ctx,q.x,q.y,bs*2.4,D8_SIG,0.6*ph);d8_boat(ctx,q.x,q.y,q.an,hero?bs*1.4:bs,{a:in2*(hero?1:0.8),wake:u>0&&u<1?1:0,lamp:lamp*0.6});}});
-  const hq=d8_boatAt(D8_BOATS[D8_HERO],D8_CH,clamp((t-tOn)/3.2,0,1),2,t,D8_HERO);
-  const wq=D8_WONDER.map(i=>{const b=D8_BOATS[i],q=d8_boatAt(b,b.m1,u1(b)[0],1,t,i);return d8_toS(cam,q.x,q.y);});
+/* ---------- 1. A trial well ---------- */
+// The slope at the mountains' foot, cut away as the series draws a qanat, one autumn in the 1960s: the expert walks up it looking for
+// water, and finds a damp patch and greener plants; the tunnel the builders would pay for, not yet dug, dashed from the spot down to
+// the village's dry fields; the trial well sunk there, its earth wound up in leather buckets; the hollow at its foot, the water
+// gathering in it, dipped once a day for three days, and how fast it fills; then the tunnel, dug from the foot of the slope up to the
+// well, and the water run out to the fields. The people, at the series' scale (B1_S in What the business owns): the expert, the two
+// builders, the worker at the windlass's handle, the one who empties the bucket, and the digger in the well, with his lamp
+const D8_S=0.14,D8_EX=300,D8_BLD=[[346,-1,{dress:"robe",head:"turban"}],[378,-1,{dress:"robe",head:"cap"}]],D8_DAY=2.6;
+// the bucket's way up the well (0 at its foot, 1 at the top), turned from the top every per seconds from t0
+const d8_wind=(t,t0,per)=>t<t0?1:0.5+0.5*Math.cos(TAU*(t-t0)/per);
+// the people and the windlass at the well, as st says: the windlass's bucket (p, its way up; foot, the depth it goes down to; water),
+// the worker at the handle and the one who empties the bucket (at), the digger in the well (dig) or out of it (out), the expert (ex:
+// where he stands, and how far he has come), the builders (bld)
+function d8_atWell(ctx,t,st){const ys=ba_ys(BA_XM),a=st.at||0,p=st.p==null?1:st.p,depth=Math.max(0,(st.foot-ys)/0.2-14);
+  if(a>0.01){d8_windlass(ctx,BA_XM,ys,0.2,p,p*4,{f:-1,depth,a,water:st.water||0});
+    ba_fig(ctx,224,ba_ys(224),D8_S,{dress:"tunic",head:"cap",f:1,reach:ba_crank(BA_XM,ys,0.2,p*4,-1),a,t,rimA:0.6});
+    // the one who empties the bucket: his hand on it while it's at the top
+    const top=sstep(0.9,0.99,p);ba_fig(ctx,268,ba_ys(268),D8_S,{dress:"tunic",f:-1,reach:top>0.5?[255,ys+0.2*(-60-14)]:null,a,t,rimA:0.6});}
+  if((st.dig||0)>0.01){const yb=st.foot;d8_lamp(ctx,BA_XM+3,yb,0.7,t,st.dig);ba_fig(ctx,BA_XM-5,yb,0.12,{kind:"stoop",hold:"pick",head:"cap",f:1,a:st.dig,rimA:0.85,rim:[255,206,140],col:[52,40,34],t});}
+  if((st.out||0)>0.01)ba_fig(ctx,292,ba_ys(292),D8_S,{dress:"tunic",head:"cap",f:-1,a:st.out,t,rimA:0.6});
+  if((st.exA||0)>0.01){const x=st.ex,bob=st.walk?Math.abs(Math.sin(t*5.2))*1.4:0;ba_fig(ctx,x,ba_ys(x)-bob,D8_S,{dress:"robe",head:"turban",f:-1,a:st.exA,t,rimA:0.7});}
+  D8_BLD.forEach(([x,f,o],i)=>{const bA=st.bld?st.bld[i]||0:0;if(bA>0.01)ba_fig(ctx,x,ba_ys(x),D8_S,Object.assign({f,a:bA,t,rimA:0.6},o));});}
+scene("trial",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
+  const tSv=c("survey"),tCo=c("cost"),tNe=c("need"),tKn=c("know"),tTr=c("trial"),tDi=c("dip"),tTk=c("trickle"),tAc=c("act"),tRe=c("repaid");
+  // what's dug, and when: the well, as the diggers sink it, down to the damp ground; the hollow at its foot, and the water in it; the
+  // tunnel, from the outlet up to the well once the trial is passed; then the well down to it, and the water run out to the fields
+  const tSink=w("trial","sink")-0.2,tDamp=w("dip","damp ground"),shaft=ease(clamp((t-tSink)/Math.max(1,tDamp-tSink),0,1)),tHol=w("dip","hollow"),cav=fin(t,tHol-0.2,0.8);
+  const tDays=w("dip","next few days")-0.2,tDig=w("trickle","Only then"),dug=clamp((t-tDig-0.4)/Math.max(1,tRe-tDig-0.4),0,1),deep=fin(t,tRe-0.2,1.0),flow=clamp((t-tRe+0.2)/2.6,0,1);
+  const lvl=cav*(0.25+0.5*clamp((t-tHol)/5,0,1)),ysW=ba_ys(BA_XM),yb=lerp(ysW+4,D8_WB,shaft);
+  // the bucket: up and down with earth while the well is sunk; then, for three days, down to the hollow once a day and up with water
+  const dipping=t>=tDays&&t<tDays+3*D8_DAY,p=t<tDamp+0.6?d8_wind(t,tSink+0.5,2.4):dipping?d8_wind(t,tDays,D8_DAY):1,water=dipping&&((t-tDays)%D8_DAY)>D8_DAY*0.5?1:0;
+  const days=[0,1,2].map(i=>fin(t,tDays+(i+1)*D8_DAY-0.35,0.6));
+  // the camera: the slope and the plain; the expert on the slope; back to the plain for the tunnel; the builders; the well, close;
+  // a little back, beside how fast it fills; the plain again as the tunnel is dug; the outlet and the fields as the water runs out
+  setScreen(ctx,S);ctx.save();
+  focus(ctx,t,[[0,1000,600,0.78],[tSv-0.4,340,470,1.9],[tCo-0.3,1000,640,0.78],[tKn-0.3,330,480,1.8],[tTr-0.2,262,540,2.3],[tDays-0.6,300,560,2.0],[tDig-0.3,1000,640,0.78],[tRe-0.2,1220,640,0.8]],1.8);
+  ba_secSky(ctx,{warm:0.55});
+  const tWet=w("edge","under the mountains")-0.3,hiG=pulseAt(t,tWet,2.2),tGh=w("edge","tunnels")-0.2,ghost=fin(t,tGh,0.8)*(1-fin(t,tDig-0.2,0.6));
+  d8_ground(ctx,t,{shaft,cav,lvl,dug,deep,flow,wet:0.7+0.3*hiG,ghost:ghost*(0.7+0.3*pulseAt(t,tCo+0.2,2.0)),trickle:fin(t,w("need","trickle")-0.2,0.6)*(1-fin(t,tKn-0.2,0.6)),
+    damp:fin(t,w("survey","damp patch")-0.3,0.8),green:fin(t,w("survey","greener")-0.3,1.0),hiW:pulseAt(t,w("trial","trial well")-0.1,1.6)});
+  // the village and its fields: dry until the water reaches them, then green, one after another
+  const wet=[0,1,2,3].map(i=>lerp(0.12,0.92,fin(t,tRe+2.4+i*0.7,1.4)));
+  ba_village(ctx,t,{wet,fill:[0,1,2,3].map(i=>fin(t,tRe+2.2+i*0.7,0.4)*(1-fin(t,tRe+3.4+i*0.7,0.6)))});ba_channel(ctx,t,2230,clamp((t-tRe-2.0)/2.6,0,1));
+  // the damp ground lit as the well reaches it
+  if(t>tDamp-0.4)glow(ctx,BA_XM,D8_WB,60,BA_WATER,0.4*pulseAt(t,tDamp,1.6));
+  // the people: the expert, who walks up the slope to the spot; the builders; the windlass and its two workers, and the digger in the
+  // well, who climbs out once the hollow is scooped
+  const tWk=w("survey","walks")-0.2,ex=lerp(480,D8_EX,ease(clamp((t-tWk)/3.0,0,1)));
+  d8_atWell(ctx,t,{at:fin(t,tSink-0.5,0.6),p,foot:dipping?D8_WB+4:yb,water,dig:fin(t,tSink+0.2,0.5)*(1-fin(t,tHol+1.0,0.6)),out:fin(t,tHol+1.4,0.6),
+    ex,walk:t>tWk&&t<tWk+3.0,exA:fin(t,tWk-0.4,0.6),bld:[0,1].map(i=>fin(t,w("know","the builders")-0.3+i*0.2,0.6))});
+  // what the narration names, where it is
+  const tg=(s_,x,y,col,a,o)=>baTagAt(ctx,S,x,y,s_,col,Object.assign({a},o||{}));
+  tg("a tunnel from under the mountains",760,ba_yt(760)-BA_TH,[226,206,176],fin(t,tGh+0.3,0.5)*(1-fin(t,tSv-0.6,0.5)),{dy:-46});
+  tg("groundwater",120,ba_yw(120),BA_WATER,fin(t,tWet,0.5)*(1-fin(t,tSv-0.6,0.5)),{dy:56});
+  tg("a damp patch",222,ba_ys(222),[226,206,176],fin(t,w("survey","damp patch")-0.1,0.5)*(1-fin(t,tCo-0.6,0.5)),{dy:62});
+  tg("greener plants",D8_EX,ba_ys(D8_EX),[180,226,140],fin(t,w("survey","greener")-0.1,0.5)*(1-fin(t,tCo-0.6,0.5)),{dy:-118});
+  const tMo=w("need","the money gone")-0.2;
+  tg("10 km · $13,500 to $34,000",845,ba_yt(845)-BA_TH,CLAY,fin(t,w("cost","thirteen")-0.2,0.5)*(1-fin(t,tMo,0.4)),{dy:-50});
+  tg("the money gone",845,ba_yt(845)-BA_TH,BA_RED,fin(t,tMo+0.2,0.5)*(1-fin(t,tKn-0.4,0.5)),{dy:-50});
+  tg("all year, or only in spring?",1440,ba_ys(1440),BA_WATER,fin(t,w("sure","flow all year")-0.3,0.5)*(1-fin(t,tNe+0.4,0.5)),{dy:-64});
+  tg("a trickle",1250,ba_yt(1250),BA_WATER,fin(t,w("need","trickle"),0.5)*(1-fin(t,tKn-0.4,0.5)),{dy:52});
+  tg("the fields dry",1810,ba_ys(1810),BA_RED,fin(t,w("need","fields dry")-0.1,0.5)*(1-fin(t,tKn-0.4,0.5)),{dy:-74});
+  tg("is there water enough here?",362,ba_ys(362),BIZ,fin(t,w("know","is there")-0.2,0.5)*(1-fin(t,tTr-0.4,0.5)),{dy:-110});
+  tg("a trial well",BA_XM,ysW,CLAY,fin(t,w("trial","trial well")-0.1,0.5)*(1-fin(t,tDi-0.4,0.5)),{dy:-96});
+  tg("two muqannis: diggers",BA_XM,D8_WB,TECH,fin(t,w("trial","muqannis")-0.2,0.5)*(1-fin(t,tDi-0.4,0.5)),{dy:70});
+  tg("leather buckets of earth",BA_XM+150,ysW+70,[226,206,176],fin(t,w("trial","leather")-0.2,0.5)*(1-fin(t,tDi-0.4,0.5)),{dy:0});
+  tg("damp ground",BA_XM+92,D8_WB,BA_WATER,fin(t,tDamp-0.1,0.5)*(1-fin(t,tDays+0.4,0.5)),{dy:6});
+  tg("the tunnel, dug up from the foot of the slope",1150,ba_yt(1150),[226,206,176],fin(t,tDig+0.6,0.5)*(1-fin(t,tAc-0.4,0.5)),{dy:60});
+  tg("a return of 10 to 25%",1940,ba_ys(1940),TRUST,fin(t,w("repaid","ten to")-0.2,0.5)*(1-fin(t,B+0.3,0.5)),{dy:-130});
+  tg("in crops and water sold",1940,ba_ys(1940),TRUST,fin(t,w("repaid","crops")-0.2,0.5)*(1-fin(t,B+0.3,0.5)),{dy:-74});
   ctx.restore();
-  // out at sea, nobody knows what the markets will pay, and they go in not knowing
-  wq.forEach(([x,y],j)=>d8_qmark(ctx,x,y-30,fin(t,tCh-0.1+j*0.08,0.4)*(1-fin(t,tD-0.6,0.5))));
-  // the coast, close: the three markets' names, and what each had that morning
-  const[cx_,cy_]=d8_toS(cam,CH.x,CH.y),[bx_,by_]=d8_toS(cam,BA.x,BA.y),[qx_,qy_]=d8_toS(cam,QU.x,QU.y);
-  // Badagara's name is on the sea side while its boats are on the beach, and moves inland when the phone's calls come in from the sea
-  d8_name(ctx,"Chombala",cx_+96,cy_+10,"left",near);d8_name(ctx,"Badagara",bx_-30,by_+10,"right",near*(1-fin(t,tP-0.4,0.5)));d8_name(ctx,"Badagara",bx_+96,by_+10,"left",near*fin(t,tP,0.5));
-  d8_name(ctx,"Quilandi",qx_+96,qy_+10,"left",near);
-  const dT=1-fin(t,tP-0.3,0.5);
-  arrive(ctx,bx_-130,by_+56,t,w("dump","eleven crews")+0.2,()=>withA(ctx,dT,()=>d8_tagR(ctx,bx_-30,by_+56,"11 crews, no buyers",[255,176,150])),{dy:8});
-  [[cx_,cy_,"15 buyers, no fish",0],[qx_,qy_,"12 buyers, no fish",0.3]].forEach(([x,y,s_,d])=>arrive(ctx,x+200,y+56,t,w("dump","twenty-seven")+d,()=>withA(ctx,dT,()=>tag(ctx,x+96,y+56,s_,[255,226,180],{size:28})),{dy:8}));
-  arrive(ctx,bx_,by_-268,t,w("dump","Within fifteen")+0.4,()=>withA(ctx,dT,()=>tag(ctx,bx_,by_-268,"within 15 km",TRUST,{align:"center",size:28})),{dy:8});
-  arrive(ctx,1500,170,t,w("dump","leave with"),()=>withA(ctx,dT,()=>tag(ctx,1500,170,"27 buyers leave with no fish",[255,176,150],{align:"center",size:30})),{dy:8});
-  d8_beach(ctx,60,140,620,380,t,{a:fin(t,w("dump","their catch")-0.5,0.7)*(1-fin(t,tP-0.3,0.6)),pour:clamp((t-w("dump","goes back"))/2.4,0,1),lab:"Badagara, 7:45 a.m."});
-  // the phones: the skipper at sea calls three markets in turn, agrees a price with one, and only then turns for it. The calls go out
-  // from the phone over the boat and end at each market; each price comes back beside its name
-  const tC=w("phones","calls buyers"),[hx,hy]=d8_toS(cam,hq.x,hq.y),px_=hx,py_=hy-58;
-  const CALLS=[[bx_,by_,"Rs 6",tC-0.1,"BADAGARA"],[qx_,qy_,"Rs 8",tC+0.55,"QUILANDI"],[cx_,cy_,"Rs 9.5",tC+1.2,"CHOMBALA"]];
-  if(ph>0.01)withA(ctx,ph,()=>{CALLS.forEach(([mx,my,pr,t0],k)=>{const q=clamp((t-t0)/0.5,0,1);if(q<=0)return;const won=k===2?fin(t,tAg,0.4):0,lose=k<2?fin(t,tAg,0.4)*0.6:0,col=mix(D8_SIG,TRUST,won),
-        dx=mx-px_,dy=my-py_,dl=Math.hypot(dx,dy)||1,s_=pr+" a kg",cw=tw(ctx,s_,28,700)+26;
-      arrowTo(ctx,px_,py_,mx-dx/dl*16,my-dy/dl*16,col,0.9*(1-lose),{p:q,lw:3,head:12,dash:won>0.5?null:[9,7],bend:k===1?-0.12:0.12});
-      if(q>=1)arrive(ctx,mx+96+cw/2,my-40,t,t0+0.5,()=>{withA(ctx,1-lose,()=>tag(ctx,mx+96,my-40,s_,col,{size:28}));if(k===2&&won>0.01)kt_gtick(ctx,mx+96+cw+26,my-40,16,won);},{dy:6});});
-    ctx.save();ctx.strokeStyle=rgba(D8_SIG,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(hx,hy-14);ctx.lineTo(px_,py_+24);ctx.stroke();ctx.restore();d8_phoneIcon(ctx,px_,py_,24,1);});
-  const scr=t<tC-0.1?["",""]:t<tAg?["CALLING",CALLS[Math.min(2,Math.floor((t-tC+0.1)/0.65))][4]]:["AGREED","RS 9.5"];
-  d8_phone(ctx,60,130,560,560,t,{a:ph,bars:Math.floor(4*clamp((t-w("phones","At sea")-0.1)/0.8,0,1)+0.01),l1:scr[0],l2:scr[1],lab:"a skipper, at sea"});
-  // the question was always the same, and it mattered because the skipper would act on its answer; what the phones changed is when
-  // the answer arrived: no longer at the market, after the choice, but at sea, before it
-  const ov=1-fin(t,B-0.4,0.7);
-  arrive(ctx,430,300,t,w("act","what will")-0.3,()=>withA(ctx,ov,()=>sticky(ctx,430,300,620,150,"What will each market pay?",{col:NOTEC[0],size:42,rot:-0.02})),{dy:-24,from:1.06});
-  d8_when(ctx,60,480,780,clamp((t-w("time","brought"))/1.8,0,1),{a:fin(t,w("act","It mattered")-0.3,0.6)*ov,hi:pulseAt(t,w("act","choosing")-0.1,1.6)});
-  eaYear(ctx,90,90,"January 1997 · Kerala",CLAY,fin(t,0.6,0.6)*(1-fin(t,tP-0.2,0.4)));eaYear(ctx,90,90,"February 1997",CLAY,fin(t,tP,0.4)*(1-fin(t,B-0.4,0.6)));
+  // how fast the hollow fills, day by day, and the line a trickle would reach; more than a trickle is real groundwater
+  const tM=w("trickle","More than"),tA=fin(t,tDays-0.2,0.6)*(1-fin(t,tDig+0.2,0.6));
+  arrive(ctx,1540,300,t,tDays-0.2,()=>d8_tally(ctx,1240,136,{a:tA,days,hi:pulseAt(t,tM,1.6)}),{dy:-14});
+  arrive(ctx,1540,520,t,tM,()=>withA(ctx,1-fin(t,tDig+0.2,0.6),()=>{tag(ctx,1540,520,"more than a trickle: real groundwater",BA_WATER,{align:"center",size:28});}),{dy:8});
+  // the question, and why it mattered: the builders would act on its answer; and when the answer comes, before the tunnel, in time
+  const ov=1-fin(t,tRe-0.5,0.6);
+  arrive(ctx,1450,176,t,w("act","how fast")-0.3,()=>withA(ctx,ov,()=>sticky(ctx,1450,176,620,150,"How fast does the water come?",{col:NOTEC[0],size:40,rot:-0.02})),{dy:-24,from:1.06});
+  d8_when(ctx,1040,300,820,clamp((t-w("time","brought"))/1.8,0,1),{a:fin(t,w("act","It mattered")-0.3,0.6)*ov,hi:pulseAt(t,w("act","choosing")-0.1,1.6)});
+  eaYear(ctx,90,90,"Iran · the 1960s",CLAY,fin(t,0.6,0.6)*(1-fin(t,tTr-0.4,0.5)));eaYear(ctx,90,170,"autumn",CLAY,fin(t,tSv,0.5)*(1-fin(t,tCo-0.4,0.5)));
   fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"Now the questions appear","decisions, questions and measures",EAC,"Film 8 of 11 · enterprise architecture, for data");});
+  baTitle(ctx,S,t,B+1.0,"Now the questions appear","decisions, questions and measures","Film 5 of 7");});
 
 /* ---------- 2. The backlog, read again ---------- */
 // The reporting team's backlog: forty-two requests, in seven columns of six, each column under the decision its live requests serve
@@ -2478,7 +2751,7 @@ const d8_urgent=n=>hash(n,875)<0.72;
 scene("backlog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
   const tPl=c("pile"),tT=c("test"),tMap=w("test","Now there's"),nt=ease(fin(t,tPl-0.4,0.8)),mv=ease(fin(t,tMap-0.5,1.1));
-  person(ctx,"tomas",230,1030,0.78,{t,pose:(t>0.6&&t<c("note")+2.6)||(t>w("test","skipper's test")&&t<w("test","skipper's test")+2.4)?"explain":"stand",expr:t>tT-0.2&&t<tMap?"concerned":"calm"});
+  person(ctx,"tomas",230,1030,0.78,{t,pose:(t>0.6&&t<c("note")+2.6)||(t>w("test","trial well")&&t<w("test","trial well")+2.4)?"explain":"stand",expr:t>tT-0.2&&t<tMap?"concerned":"calm"});
   // the note: which questions matter?
   arrive(ctx,960,360,t,0.3,()=>{ctx.save();ctx.translate(lerp(960,1560,nt),lerp(360,120,nt));ctx.scale(lerp(1,0.55,nt),lerp(1,0.55,nt));sticky(ctx,0,0,760,210,"Which questions matter?",{col:NOTEC[0],size:50,st:0,rot:-0.02});ctx.restore();},{dy:-30});
   // the backlog: a stack of cards, dealt into a grid; then, once there's a map, moved aside to be read against it
@@ -2491,10 +2764,10 @@ scene("backlog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   [[2,"which lines fail most often?","reports",560],[1,"a dashboard of every outage, refreshed every minute, for the lobby","dashboards",1040],[3,"export every customer","extracts",1520]].forEach(([n,s_,word,x])=>{const t0=w("pile",word),a=fin(t,t0-0.1,0.4)*(1-fin(t,tUrg-0.3,0.5));
     if(a>0.01)arrive(ctx,x,560,t,t0-0.1,()=>withA(ctx,a,()=>d8_card(ctx,x,560,420,180,n,s_,{size:30,rot:(hash(n,882)-0.5)*0.04,hi:0.5})),{dy:-14});});
   arrive(ctx,lerp(1037,618,mv),lerp(185,255,mv),t,w("pile","forty-two"),()=>tag(ctx,lerp(1037,618,mv),lerp(185,255,mv),"42 requests",[255,176,150],{align:"center",size:30}),{dy:8});
-  // the map, and the skipper's test for every request, with his boat on the card
+  // the map, and a trial well for every request, before anything is built: the well's sign on the card
   arrive(ctx,1500,380,t,tMap+0.3,()=>layerStack(ctx,1180,190,640,{p:clamp((t-tMap-0.3)/1.2,0,1),sh:54,gap:10,size:28}),{dy:-12});
-  arrive(ctx,1500,720,t,w("test","skipper's test")-0.1,()=>{ruleCard(ctx,1150,640,700,"Who will decide what with the answer, and when?",{kicker:"the skipper's test",col:TRUST,size:34,hi:pulseAt(t,w("test","who will"),2.4)});
-    d8_boat(ctx,1786,682,-0.12,52,{lamp:0.5});},{dy:-14});
+  arrive(ctx,1500,720,t,w("test","trial well")-0.1,()=>{ruleCard(ctx,1150,640,700,"Who will decide what with the answer, and when?",{kicker:"a trial well for every request",col:TRUST,size:34,hi:pulseAt(t,w("test","who will"),2.4)});
+    d8_wellIcon(ctx,1806,668,44);},{dy:-14});
   ctx.restore();
   eaYear(ctx,90,90,"day one",CLAY,fin(t,w("pile","day one")-0.2,0.5)*(1-fin(t,tT-0.3,0.5)));
   vign(ctx,S);});
@@ -2519,10 +2792,10 @@ scene("up",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);set
   if(t>top)kt_gtick(ctx,x+340,140,20,fin(t,top,0.4));
   arrive(ctx,x,96,t,top,()=>tag(ctx,x,96,"the request reaches the top",TRUST,{align:"center",size:30}),{dy:8});
   // the next: a dashboard for the lobby, which finds no decision, and fades
-  const X=1400,tW=w("live","who decides"),tN=w("live","No one"),tR=w("live","reaches nothing"),dead=fin(t,tR,0.8),tLv=w("live","as live");
+  const X=1400,tW=w("live","who decides"),tN=w("live","No one"),tR=w("live","reaches nothing"),dead=fin(t,tR,0.8),tLv=w("live","never out of date");
   arrive(ctx,X,760,t,tL+0.1,()=>d8_card(ctx,X,760,560,170,1,"a dashboard of every outage, refreshed every minute, for the lobby",{size:30,rot:0.01,dead:dead*0.7}),{dy:-14});
-  // it's as live as the skipper's call: the phone from Kerala beside it
-  arrive(ctx,1446,640,t,tLv-0.1,()=>{d8_phoneIcon(ctx,1446,640,22,1);tag(ctx,1476,640,"as live as the skipper's call",D8_SIG,{size:28});},{dy:8});
+  // it's never out of date: a clock beside it, its hand going round
+  arrive(ctx,1446,640,t,tLv-0.1,()=>{d8_clock(ctx,1446,640,22,APL,1,t*4);tag(ctx,1484,640,"never out of date",APL,{size:28});},{dy:8});
   withA(ctx,1-dead*0.7,()=>d8_trace(ctx,[[X,674],[X,612]],clamp((t-tW)/0.7,0,1),mix(TRUST,D8_RED,fin(t,tN,0.5)),{lw:3.5,dash:t>tN?[8,8]:null}));
   arrive(ctx,X,560,t,tW+0.4,()=>d8_slot(ctx,X-290,512,580,96,BUS,1),{dy:-12});
   arrive(ctx,X,440,t,tW,()=>withA(ctx,1-fin(t,tR,0.4),()=>tag(ctx,X,440,"who decides what with it?",BUS,{align:"center",size:30})),{dy:8});
@@ -2734,49 +3007,42 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,960,128,t,four,()=>tag(ctx,960,128,"scoped by capability and domain, not by request",PARCH,{align:"center",size:30}),{dy:8});
   vign(ctx,S);});
 
-/* ---------- 10. Back on the coast ---------- */
-// The coast from 1997 to 2001: the phones spread, district by district, and on boat after boat the skipper calls, learns what each
-// market will pay, and only then comes in, so the boats spread along the coast instead of crowding one beach. On the open sea beside
-// the map, the skipper's question is traced as the film traces a request: a measure, a question, a decision (who decides, and when)
-// and the goal it serves; then what changed. The rows: [kind, colour, name, y, height]
-const D8_KC=[["goal",MOT,"sell the whole catch",150,88],["decision",BUS,"where to land",290,124],["question",INF,"what will each market pay?",470,88],["measure",INF,"rupees a kilo, "+d8_nb("market by market"),614,88]];
-scene("coast",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);d8_sky(ctx,S,1);
-  // the camera: Badagara, close, where the opening left it; then back to the whole north coast, with the open sea on the left
-  const BA=D8_MK[D8_BA],CH=D8_MK[D8_CH],QU=D8_MK[D8_QU],cam=d8_camAt(t,[[0,BA.x-108,BA.y+15,2.6],[1.4,700,545,1,3.4]]);cam.z*=1+0.02*ease(clamp((t-4.8)/(sc.dur-4.8),0,1));
-  const tDi=w("spread","district by"),tDl=w("spread","district."),tB=w("knew","boat after");
-  ctx.save();d8_camApply(ctx,cam);
-  d8_map(ctx,t,cam,{sun:1,mk:1,tw:[1,fin(t,tDi-0.2,1.4),fin(t,tDl-0.1,1.4)]});
-  // the buyers at Chombala, as the opening left them
-  d8_buyers(ctx,D8_CH,7,1,0,1);
-  // the boats: the skipper's is in at Chombala; the rest wait at sea until, one after another, each skipper calls (a light on the
-  // boat), learns what each market will pay, and only then comes in. By 2001 more than 60% of the boats had a phone, so about two in
-  // three call; the rest come in too, to a coast where prices no longer swing
-  const bs=15*Math.pow(cam.z,-0.4);
-  D8_BOATS.forEach((b,i)=>{const hero=i===D8_HERO,tc=tB-0.4+b.go*1.8,u=hero?1:clamp((t-tc-0.6)/3.2,0,1),q=d8_boatAt(b,hero?D8_CH:b.m2,u,2,t,i),call=hero||hash(i,906)>0.66?0:fin(t,tc,0.3)*(1-fin(t,tc+2.6,0.8));
-    if(call>0.01)glow(ctx,q.x,q.y,bs*2.2,D8_SIG,0.7*call);d8_boat(ctx,q.x,q.y,q.an,hero?bs*1.4:bs,{a:hero?1:0.8+0.2*fin(t,tc,0.3),wake:u>0&&u<1?1:0});});
+/* ---------- 10. Back at the trial well ---------- */
+// The slope again, as it was during the trial: the well, the hollow at its foot with the water gathering, the bucket coming up with
+// water, the builders beside it, and the tunnel not yet dug, dashed, down the slope. On the left, over the mountains, a dark panel,
+// and on it the builders' question traced as the film traces a request, from the top: the goal, the decision (who decides, and when),
+// the question and the measure; then the answer climbs from the measure to the goal, and reaches the builders before the tunnel.
+// The rows: [kind, colour, name, y, height]
+const D8_KC=[["goal",MOT,"water for the fields, all year",150,88],["decision",BUS,"dig the tunnel here, or not",290,124],["question",INF,"how fast does the water come?",470,88],["measure",INF,"how fast the hollow fills, "+d8_nb("day by day"),614,88]];
+scene("well",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
+  const tG=c("goal"),tM=c("measure"),tR=c("reach"),tDec=w("goal","A decision"),tBy=w("goal","by the builders");
+  // the camera: close on the well, where the opening's trial was; then back, the well on the right of the frame, the mountains on the left
+  setScreen(ctx,S);ctx.save();focus(ctx,t,[[0,262,560,2.1],[1.4,30,600,1.3]],2.2);
+  ba_secSky(ctx,{warm:0.45,dusk:0.15});
+  // the bucket comes up with water every few seconds, and the hollow keeps filling
+  const p=d8_wind(t,0.6,D8_DAY),water=((t-0.6)%D8_DAY)>D8_DAY*0.5&&t>0.6?1:0;
+  d8_ground(ctx,t,{shaft:1,cav:1,lvl:0.62+0.1*clamp(t/sc.dur,0,1),ghost:0.75,wet:0.85,hiW:pulseAt(t,w("back","trial well")-0.1,1.6)});
+  ba_village(ctx,t,{wet:[0.12,0.12,0.12,0.12]});
+  // the builders lit as the decision is named theirs
+  if(t>tBy-0.4)D8_BLD.forEach(([x])=>glow(ctx,x,ba_ys(x)-22,40,TRUST,0.45*pulseAt(t,tBy,2.0)));
+  d8_atWell(ctx,t,{at:1,p,foot:D8_WB+4,water,out:1,bld:[1,1]});
   ctx.restore();
-  // the three markets' names, while the camera is close
-  const near=clamp((cam.z-1.5)/0.7,0,1),[cx_,cy_]=d8_toS(cam,CH.x,CH.y),[bx_,by_]=d8_toS(cam,BA.x,BA.y),[qx_,qy_]=d8_toS(cam,QU.x,QU.y);
-  d8_name(ctx,"Chombala",cx_+96,cy_+10,"left",near);d8_name(ctx,"Badagara",bx_+96,by_+10,"left",near);d8_name(ctx,"Quilandi",qx_+96,qy_+10,"left",near);
-  // the phones, district by district
-  [[0,"Kozhikode · 1997",w("spread","phones spread")],[1,"Kannur · 1998",tDi],[2,"Kasaragod · 2000",tDl]].forEach(([d,s_,t0])=>{const T0=D8_TW.find(q=>q.r===d),[x,y]=d8_toS(cam,T0.x,T0.y);
-    arrive(ctx,x+70,y-30,t,t0,()=>tag(ctx,x+70,y-30,s_,D8_SIG,{size:28}),{dy:8});});
-  // the skipper's question, traced up from the measure to the goal it serves, in gold, as the film traces a request
-  const X0=230,BW=560,XC=X0+BW/2,tWs=w("gain","The waste"),tEv=w("gain","evened out"),steady=fin(t,tEv-0.6,1.4);
-  const T_=[sc.ends.knew+0.3,w("knew","before choosing")-0.1,w("knew","what each"),w("knew","knew what")-0.3];
-  D8_KC.forEach(([kind,col,name,y,h],r)=>{const t0=T_[r],hi=pulseAt(t,t0+0.2,1.2)+(r===0?pulseAt(t,tWs+0.1,1.6):0)+(r===3?pulseAt(t,tEv,1.6):0);
+  // the panel, over the mountains, and on it the chain, from the goal down to the measure, as the narration names them
+  withA(ctx,fin(t,tG-0.5,0.6),()=>glass(ctx,30,92,800,792,26,[220,230,255],{glow:10,ea:0.5,fill:"rgba(8,12,24,0.93)"}));
+  const X0=230,BW=560,XC=X0+BW/2,T_=[tG+0.1,tDec-0.1,tM+0.1,w("measure","And a measure")-0.1],tUp=w("reach","reached")-0.6,met=fin(t,tUp+1.0,0.4);
+  D8_KC.forEach(([kind,col,name,y,h],r)=>{const t0=T_[r],hi=pulseAt(t,t0+0.2,1.2)+(r===0?pulseAt(t,tUp+1.0,1.6):0)+(r===1?pulseAt(t,tBy,1.6):0);
     withA(ctx,fin(t,t0,0.4),()=>T(ctx,kind,60,y+h/2+10,{f:"mono",w:600,size:28,color:rgba(col,0.85)}));
-    arrive(ctx,XC,y+h/2,t,t0,()=>{if(kind!=="decision")return d8_el(ctx,X0,y,BW,h,name,col,kind,{size:r===0?32:30,gs:14,hi,v:0.5+0.32*Math.sin(t*2.1)*Math.sin(t*0.63+1)*(1-steady)});
-      d8_el(ctx,X0,y,BW,h,"",col,kind,{gs:14,hi});T(ctx,name,XC,y+50,{w:700,size:32,align:"center",color:rgba(INK,0.96)});T(ctx,"the skipper · at sea, before eight",XC,y+98,{w:700,size:28,align:"center",color:rgba(BUS,1)});},{dy:-12});});
-  [[614,558,T_[2]],[470,414,T_[1]],[290,238,T_[0]]].forEach(([y0,y1,t0])=>d8_trace(ctx,[[XC,y0],[XC,y1]],clamp((t-t0+0.4)/0.5,0,1),TRUST,{lw:3.5}));
-  // the answer, in time, serves the goal: a light climbs the chain to it, and the goal is met
-  const u_=clamp((t-tWs+0.9)/1.0,0,1);if(u_>0&&u_<1)glow(ctx,XC,lerp(658,194,ease(u_)),70,TRUST,0.8*Math.sin(Math.PI*u_));
-  if(t>tWs)kt_gtick(ctx,X0+BW+20,150,20,fin(t,tWs+0.1,0.4));
-  // what changed: the outcomes, in a row of their own under the chain
-  withA(ctx,fin(t,tWs+0.2,0.4),()=>T(ctx,"outcomes",60,802,{f:"mono",w:600,size:28,color:rgba(MOT,0.85)}));
-  [["the waste stopped",X0,762,tWs+0.2],["prices evened out",603,762,tEv-0.3],["crews earned 8% more",X0,822,w("gain","Crews earned")],["fish cost 4% less",603,822,w("gain","fish cost")]].forEach(([s_,x,y,t0])=>
-    arrive(ctx,x,y,t,t0,()=>tag(ctx,x,y,s_,TRUST,{size:30}),{dy:8}));
-  eaYear(ctx,90,90,"Kerala · 1997 to 2001",CLAY,fin(t,0.8,0.6));
+    arrive(ctx,XC,y+h/2,t,t0,()=>{if(kind!=="decision")return d8_el(ctx,X0,y,BW,h,name,col,kind,{size:r===0?30:28,gs:14,hi});
+      d8_el(ctx,X0,y,BW,h,"",col,kind,{gs:14,hi});T(ctx,name,XC,y+50,{w:700,size:30,align:"center",color:rgba(INK,0.96)});
+      withA(ctx,fin(t,tBy-0.2,0.5),()=>T(ctx,"the builders · before they pay",XC,y+98,{w:700,size:28,align:"center",color:rgba(BUS,1)}));},{dy:-12});});
+  [[238,290,T_[1]],[414,470,T_[2]],[558,614,T_[3]]].forEach(([y0,y1,t0])=>d8_trace(ctx,[[XC,y0],[XC,y1]],clamp((t-t0+0.3)/0.5,0,1),[220,230,255],{lw:3,a:0.6,nohead:1}));
+  // the measure's line to the hollow it's read from
+  const lk=fin(t,T_[3]+0.4,0.6);if(lk>0.01)withA(ctx,lk,()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(BA_WATER,0.8);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(X0+BW,658);ctx.lineTo(1212,614);ctx.stroke();ctx.restore();});
+  // the answer, in time, climbs the chain to the goal, and the goal is met
+  const u_=clamp((t-tUp)/1.0,0,1);if(u_>0&&u_<1)glow(ctx,XC,lerp(658,194,ease(u_)),70,TRUST,0.8*Math.sin(Math.PI*u_));
+  if(met>0)kt_gtick(ctx,X0+BW+20,150,20,met);
+  arrive(ctx,XC,830,t,w("reach","in time")-0.2,()=>tag(ctx,XC,830,"in time: before the tunnel",TRUST,{align:"center",size:30}),{dy:8});
+  eaYear(ctx,880,90,"Iran · the 1960s",CLAY,fin(t,0.8,0.6));
   vign(ctx,S);});
 
 /* ---------- 11. Questions that matter ---------- */
@@ -2788,14 +3054,14 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     if(g>0)withA(ctx,g,()=>{kt_gtick(ctx,130,y+86,18,1);T(ctx,"confirmed · Grace",160,y+96,{w:700,size:28,color:rgba(TRUST,1)});});});
   arrive(ctx,430,620,t,0.7,()=>sticky(ctx,430,620,640,110,"households falling behind",{col:NOTEC[0],size:30,rot:0.012,st:0.5}),{dy:-14});
   if(dr>0)withA(ctx,dr,()=>tag(ctx,430,730,"to the head of retail, as a draft",INF,{align:"center",size:28}));
-  if(dn>0)[220,420,620].forEach(y=>glow(ctx,430,y,240,EAC,0.18*dn));
+  if(dn>0)[220,420,620].forEach(y=>glow(ctx,430,y,240,BAC,0.18*dn));
   person(ctx,"grace",1020,1030,0.74,{t,pose:t>w("confirm","Grace")&&t<w("confirm","Grace")+2.2?"explain":"stand"});
   d8_personR(ctx,"tomas",1820,1030,0.78,{t,pose:t>cA&&t<cA+2.4?"explain":"stand"});
   arrive(ctx,1560,140,t,0.4,()=>sticky(ctx,1560,140,500,120,D8_Q,{col:NOTEC[0],size:32,st:fin(t,cA+1.6,0.5)*0.5,rot:-0.03}),{dy:-20});
   arrive(ctx,1570,420,t,cA,()=>sticky(ctx,1570,420,580,270,D8_A,{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/3.2,0,1),rot:0.015}),{dy:-30,from:1.06});
   arrive(ctx,1500,730,t,w("next","Next"),()=>sticky(ctx,1500,730,420,130,"Where does each rule belong?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"Now the questions appear",EAC,"A question matters when someone will act on its answer, in time.","Film 8 of 11");});
+  baEnd(ctx,S,t,B+0.8,"Now the questions appear","A question matters when someone will act on its answer, "+d8_nb("in time."),"Film 5 of 7");});
 
 // where the chapters meet (From words to data's joins.js; twice.py, 18 November 2026): half the answer and what to build are later
 // pictures on the same screen whose words came in over the same words in the chapter before ("replace assets before they fail",

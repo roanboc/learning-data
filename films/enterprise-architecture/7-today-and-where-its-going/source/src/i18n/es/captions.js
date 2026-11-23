@@ -36,5 +36,5 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Grace confirms the network's systems as they stand today. The target and the path go to the board, as drafts.":"Grace confirma los sistemas de la red tal como están hoy. El objetivo y el camino van al directorio, como borradores.",
 "Tomás's note has an answer: today, placed on the map; a target, drawn as carefully; and a path between them, with reasons.":"La nota de Tomás tiene una respuesta: hoy, ubicado en el mapa; un objetivo, dibujado con el mismo cuidado; y un camino entre los dos, con sus razones.",
 "The map of how the utility works is drawn, for now.":"El mapa de cómo funciona la empresa está dibujado, por ahora.",
-"Now, at last, he can open the backlog from day one, and ask which questions matter.":"Ahora, por fin, puede abrir la lista de pedidos del primer día, y preguntar qué preguntas importan."
+"Tomás's next note asks what a change in strategy means for the data.":"La siguiente nota de Tomás pregunta qué implica para los datos un cambio de estrategia."
 });

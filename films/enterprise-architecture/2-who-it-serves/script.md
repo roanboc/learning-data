@@ -1,6 +1,6 @@
 # The map before the data · Who it serves, and how it pays: script
 
-*The script of Who it serves, and how it pays, film 2 of 11 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 4:58, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
+*The script of Who it serves, and how it pays, film 2 of 8 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 4:58, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
 
 ## The promise
 
@@ -40,7 +40,7 @@ In 1882, Edison's customers on Pearl Street didn't want electricity; they wanted
 
 **Picture.** Parchment warmth, "1882 · Pearl Street, New York". A street of brick buildings at dusk; overhead wires; windows light one by one with a steady light. "light, not electricity". A panel opens on a gas lamp (flickering, smoking: hot · smoky · fire risk), then an electric bulb beside it (steady · clean), and "priced to compete with gas". The lamps give way to Edison's chemical meter: two zinc plates in a jar; one is lifted onto a balance and weighed. Three tags: who he served · what they were trying to do · how it would pay. Wordless breather: the street fully lit, then the title card.
 
-**On screen.** 1882 · Pearl Street, New York · light, not electricity · hot · smoky · fire risk · steady · clean · priced to compete with gas · Edison's meter: zinc plates, weighed · who he served · what they were trying to do · how it would pay · Who it serves, and how it pays · two canvases, before anything else · Film 2 of 11
+**On screen.** 1882 · Pearl Street, New York · light, not electricity · hot · smoky · fire risk · steady · clean · priced to compete with gas · Edison's meter: zinc plates, weighed · who he served · what they were trying to do · how it would pay · Who it serves, and how it pays · two canvases, before anything else · Film 2 of 8
 
 ### 2 · Who is it for? · 0:34–1:00
 
@@ -112,7 +112,7 @@ In 1882, Edison's customers on Pearl Street didn't want electricity; they wanted
 
 **Picture.** The wall. The households' canvas, its status full and a gold tick from Farah; three blue notes for the other segments, half-filled: "drafts, for now". Tomás's first note, "Why does it exist?", and under it an answer, written out: "To keep the region's homes and businesses powered, affordably and fairly." A new note goes up: "Why must it change?". The end card.
 
-**On screen.** value proposition canvas · households · businesses · households in hardship · homes with solar · drafts, for now · Why does it exist? · To keep the region's homes and businesses powered, affordably and fairly. · Why must it change? · Know who it serves, and how it pays, before anything else. · Who it serves, and how it pays · Film 2 of 11
+**On screen.** value proposition canvas · households · businesses · households in hardship · homes with solar · drafts, for now · Why does it exist? · To keep the region's homes and businesses powered, affordably and fairly. · Why must it change? · Know who it serves, and how it pays, before anything else. · Who it serves, and how it pays · Film 2 of 8
 
 ## Pause and think
 

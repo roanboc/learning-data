@@ -2099,7 +2099,7 @@ scene("blackout",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   arrive(ctx,960,520,t,w("council","wrote")-0.1,()=>withA(ctx,1-relit,()=>{d3_book(ctx,800,330,320,400,1);tag(ctx,960,790,"rules for all of them to keep",TRUST,{align:"center",size:32});}),{dy:24,from:0.94});
   [["a shock","A shock",300],["what it revealed","what it revealed",720],["what had to become true","what had to become",1180],["a rule to hold to","a rule to hold",1630]].forEach(([s_,k,x])=>arrive(ctx,x,200,t,w("chain",k),()=>withA(ctx,1-relit,()=>tag(ctx,x,200,s_,TRUST,{align:"center",size:30})),{dy:12}));
   fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"Why it moves","what pushes, and what holds",EAC,"Film 3 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"Why it moves","what pushes, and what holds",EAC,"Film 3 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. Three letters ---------- */
 // each letter: x, heading, lines, the words that bring each line up, the line that brings it
@@ -2254,7 +2254,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1610,420,t,cA,()=>sticky(ctx,1610,420,440,250,"Four drivers, three goals, three principles to check every choice against.",{col:NOTEC[0],size:32,p:clamp((t-cA-0.2)/2.2,0,1),rot:0.015}),{dy:-30,from:1.06});
   arrive(ctx,1500,700,t,w("next","what"),()=>sticky(ctx,1500,700,380,140,"What must it be able to do?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"Why it moves",EAC,"Know why it must change, and what it will be checked against.","Film 3 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"Why it moves",EAC,"Know why it must change, and what it will be checked against.","Film 3 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the drivers carry on from the chapter before, so the camera carries on
 const CHAPTER_JOINS={glide:["means"]};

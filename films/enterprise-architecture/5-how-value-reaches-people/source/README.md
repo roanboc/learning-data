@@ -1,6 +1,6 @@
 # Rebuilding How value reaches people
 
-*How value reaches people*, film 5 of 11 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: ArchiMate's glyph for a value stream, a chevron (`archGlyph` in `ea.js`), and a `deco` option on `archEl`, for a map drawn too small to read, as texture. Only what is new lives here:
+*How value reaches people*, film 5 of 8 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: ArchiMate's glyph for a value stream, a chevron (`archGlyph` in `ea.js`), and a `deco` option on `archEl`, for a map drawn too small to read, as texture. Only what is new lives here:
 
 | File | What it holds |
 |---|---|

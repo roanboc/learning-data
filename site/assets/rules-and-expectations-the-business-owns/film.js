@@ -2024,8 +2024,9 @@ const BAC=[84,212,240];
 const BA_STR=LAY6[1][1],BA_BUS=LAY6[2][1],BA_INF=LAY6[3][1],BA_APP=LAY6[4][1];
 const BA_NET=[132,176,255],BA_RET=[255,150,186],BA_RED=[232,96,84],BA_OK=[132,226,160];
 const BA_SAND=[222,178,120],BA_EARTH=[120,82,56],BA_WATER=[70,204,246],BA_GREEN=[96,196,92],BA_DRY=[176,132,84];
-// the series' five films, in order
-const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Rules and expectations the business owns"];
+// the series' seven films, in order (five until 23 November 2026, when Now the questions appear and Rules with a home joined from The
+// map before the data, as films 5 and 6)
+const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Now the questions appear","Rules with a home","Rules and expectations the business owns"];
 // no-break spaces: words a label should keep on one line
 const ba_nb=s=>s.replace(/ /g," ");
 // someone standing at the right of the frame, drawn facing the other way
@@ -2295,18 +2296,19 @@ function baEl(ctx,x,y,w,h,name,col,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<
   if(o.owner)withA(ctx,o.ownerA==null?1:o.ownerA,()=>tag(ctx,x+w/2,y+h+30,o.owner,TRUST,{align:"center",size:28}));});}
 // The data practice's part of the business layer, drawn the same way in every film of the series: who does the work and how it's
 // reached on the left, its processes and products in the middle, the business objects and their domains on the right, with the roles
-// that own them above. Each film adds its own (o.film, 1 to 5); a film shows the ones before it as they were, and brings in its own.
+// that own them above. Each film adds its own (o.film, 1 to 7; films 5 and 6, which joined from The map before the data, add none);
+// a film shows the ones before it as they were, and brings in its own.
 // Each element: [id, kind, name, film, x, y, w, h, colour]
 const BA_PRACTICE=[
   ["team","actor","data team",1,120,214,400,96,BA_BUS],
   ["tickets","interface","tickets",1,120,350,400,84,BA_BUS],
   ["requests","service","answer data requests",1,120,474,400,96,BA_BUS],
-  ["products","service","provide data products",5,120,610,400,96,BA_BUS],
+  ["products","service","provide data products",7,120,610,400,96,BA_BUS],
   ["p_request","process","answer a data request",4,600,214,400,96,BA_BUS],
   ["p_build","process","build a data product",4,600,342,400,96,BA_BUS],
   ["p_source","process","take on a source",4,600,470,400,96,BA_BUS],
-  ["product","product","Meter readings",5,600,610,400,96,BA_BUS],
-  ["contract","contract","its contract",5,600,742,400,84,BA_BUS],
+  ["product","product","Meter readings",7,600,610,400,96,BA_BUS],
+  ["contract","contract","its contract",7,600,742,400,84,BA_BUS],
   ["owner","role","data owner",3,1080,170,330,84,BA_BUS],
   ["steward","role","data steward",3,1470,170,330,84,BA_BUS],
   ["net","group","network",2,1080,300,330,470,BA_NET],
@@ -2643,7 +2645,7 @@ scene("outlets",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
       if(t>tWr)arrive(ctx,960,566,t,tWr,()=>tag(ctx,960,566,"written down by its owners",TRUST,{align:"center",size:32}),{dy:10});
       if(t>tCh)arrive(ctx,960,652,t,tCh,()=>tag(ctx,960,652,"and checked",TECH,{align:"center",size:32}),{dy:10});});});
   vign(ctx,S);
-  baTitle(ctx,S,t,B+0.6,"Rules and expectations the business owns","what each step expects, written down by its owners","Film 5 of 5");});
+  baTitle(ctx,S,t,B+0.6,"Rules and expectations the business owns","what each step expects, written down by its owners","Film 7 of 7");});
 
 /* ---------- 2. What the business expects ---------- */
 // Rules with a home's three rules, on cards: its data rule and its two business rules, each with a home, an owner and a reason
@@ -2909,7 +2911,7 @@ scene("practice",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the lines of the films before, drawn first, so the elements lie over them
   baPracticeAccess(ctx,"requests","cp",1,{a:0.75});baPracticeAccess(ctx,"requests","account",1,{lift:330,a:0.75});
   ["product","products","contract"].forEach(id=>{const e=BA_PRACTICE.find(r=>r[0]===id),v=fin(t,at[id],0.6);if(e&&v>0.01)withA(ctx,v,()=>{ctx.fillStyle="rgb(6,9,18)";rr(ctx,e[4]+2,e[5]+2,e[6]-4,e[7]-4,14);ctx.fill();});});
-  baPractice(ctx,t,{film:5,at,pre:fin(t,0.4,0.8),owners:true,ownersA:1,hi:{product:pulseAt(t,w("bundle","ArchiMate product")-0.2,1.6),contract:pulseAt(t,w("contract","Its contract")-0.2,1.8)}});
+  baPractice(ctx,t,{film:7,at,pre:fin(t,0.4,0.8),owners:true,ownersA:1,hi:{product:pulseAt(t,w("bundle","ArchiMate product")-0.2,1.6),contract:pulseAt(t,w("contract","Its contract")-0.2,1.8)}});
   baPracticeLine(ctx,"team","tickets",1,BA_BUS);baPracticeLine(ctx,"tickets","requests",1,BA_BUS);
   ["p_request","p_build","p_source"].forEach((id,k)=>{const e=BA_PRACTICE.find(r=>r[0]===id);if(e)b5_pacc(ctx,e[4]+e[6],e[5]+e[7]/2,1100,490+k*18,1);});
   // the product bundles the service that provides it and its contract: ArchiMate's aggregation, from the product to each
@@ -2972,7 +2974,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     arrive(ctx,1760,760,t,tNx-0.6,()=>baPersonR(ctx,"tomas",1760,1040,0.8,{t,expr:"calm"}),{dy:20});
     ctx.restore();});});
   vign(ctx,S);
-  baEnd(ctx,S,t,B+1.4,"Rules and expectations the business owns","The business writes down what it expects, "+ba_nb("and the check follows."),"Film 5 of 5");});
+  baEnd(ctx,S,t,B+1.4,"Rules and expectations the business owns","The business writes down what it expects, "+ba_nb("and the check follows."),"Film 7 of 7");});
 
 // where the chapters meet (From words to data's joins.js): Written down by its owners carries Late, for whom?'s billing day on, so its
 // camera carries on from there and the day stays put while billing moves to ten. Where the whole picture changes, what was there

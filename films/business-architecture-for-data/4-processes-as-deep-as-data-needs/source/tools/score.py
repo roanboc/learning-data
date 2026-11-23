@@ -514,6 +514,6 @@ tL2e, tHu, tEe = ew('utility', 'drawn to level two', -0.3), ew('utility', 'the b
 mspread((A4, Cs5, E5), tL2e, 0.62)
 slide(tHu, 0.6, 0.0026, px(1060)); tap(tHu + 0.2, 0.003, px(1340)); tap(tEe, 0.003, px(1380))
 card(tN - 0.2, 0.0045, px(860))
-tQ = ew('next', 'what the business expects', -0.1)
+tQ = ew('next', 'which questions matter', -0.1)
 cello(B3, tQ, 0.9, 0.6); cello(A3, tQ + 1.05, 1.6, 0.6)
 mark(tB9 + 1.7, 0.85, step=0.6, last=E(K) - tB9 - 3.6)

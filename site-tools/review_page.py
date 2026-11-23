@@ -17,7 +17,7 @@ FF = imageio_ffmpeg.get_ffmpeg_exe()
 LANGS = {'en': 'English', 'es': 'Español'}  # each button in its own language
 NAMES = {'en': 'English', 'es': 'Spanish'}  # the page's own words are English
 ap = argparse.ArgumentParser(description=__doc__)
-ap.add_argument('film', help='the film folder, such as films/enterprise-architecture/8-now-the-questions-appear')
+ap.add_argument('film', help='the film folder, such as films/business-architecture-for-data/5-now-the-questions-appear')
 ap.add_argument('--video', help='the rendered film (default: source/dist/<key>.mp4)')
 ap.add_argument('--pr', type=int, help='the pull request the author approves')
 ap.add_argument('--note', action='append', default=[], help='one line on what changed in this version (repeat for more)')

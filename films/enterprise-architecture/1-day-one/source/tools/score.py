@@ -151,12 +151,14 @@ for j in range(3):
     knock(C('data', 'home', 0.3 + j * 0.35), 0.03, [-0.6, 0.6, 0.0][j])
 # 9. The series: one nylon note as each film lights, rising through the scale
 bed('series', [AMAJ9, DMAJ9, EADD, AMAJ9])
-nylon(57, W('series', 'eleven', 'builds the map'), 0.03)
-SC = [57, 59, 61, 62, 64, 66, 68, 69, 71, 73, 74]
+nylon(57, W('series', 'eight', 'builds the map'), 0.03)
+SC = [57, 59, 61, 62, 64, 66, 68, 69]
 for i, word in enumerate(['who it serves', 'why it moves', 'what it must be able', 'how value', 'who does what', 'what runs it']):
     nylon(SC[i + 1], W('series', 'seven', word, -0.1), 0.026, -0.4 + i * 0.12)
-for i, word in enumerate(['the questions', 'rules with', 'a change', 'a map that']):
-    nylon(SC[i + 7], W('series', 'four', word, -0.1), 0.026, 0.2 + i * 0.1)
+nylon(SC[7], W('series', 'then', 'a change', -0.1), 0.026, 0.3)
+# after it, a series for each layer: the three, a step apart, from the A above
+for i, word in enumerate(['the business', 'its data', 'the platforms']):
+    nylon([71, 73, 76][i], W('series', 'after', word, -0.1), 0.024, 0.2 + i * 0.15)
 # 10. The first note: the lute once more for the surveyors' questions; paper as the note goes up; the mark under the end card
 bed('end', [DMAJ9, AMAJ9], 0, cq('end', 'breath'))
 for k, word in enumerate(['What is this', 'Who holds', 'worth']):

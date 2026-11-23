@@ -188,7 +188,7 @@ scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     if(t>tLk)arrive(ctx,1300,575,t,tLk,()=>tag(ctx,1120,575,"someone to look after it, every day",B3_STW,{size:30}),{dy:10});
     ctx.restore();eaYear(ctx,80,80,"generations later",CLAY,fin(t,tCe,0.6)*(1-fin(t,tLi-0.6,0.6)));});});
   vign(ctx,S);
-  baTitle(ctx,S,t,B+0.6,"Who creates it, who owns it","an owner who decides, someone who looks after it","Film 3 of 5");});
+  baTitle(ctx,S,t,B+0.6,"Who creates it, who owns it","an owner who decides, someone who looks after it","Film 3 of 7");});
 
 /* ---------- the wall: Tomás's map, as What the business needs to know leaves it ---------- */
 // The capabilities across the top, in the strategy layer; the concepts below them, in the information layer, each confirmed in its
@@ -534,7 +534,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     arrive(ctx,860,470,t,tN-0.2,()=>sticky(ctx,860,470,620,170,"Where is it born? "+ba_nb("In which process,")+" "+ba_nb("at which step?"),{col:NOTEC[0],size:36,rot:-0.02}),{dy:-16});
     arrive(ctx,1780,760,t,tN-0.4,()=>baPersonR(ctx,"tomas",1790,1040,0.74,{t,expr:"calm"}),{dy:20});ctx.restore();});});
   vign(ctx,S);
-  baEnd(ctx,S,t,B+1.4,"Who creates it, who owns it","Each concept: one capability creates it, an owner decides, "+ba_nb("a steward looks after it."),"Film 3 of 5");});
+  baEnd(ctx,S,t,B+1.4,"Who creates it, who owns it","Each concept: one capability creates it, an owner decides, "+ba_nb("a steward looks after it."),"Film 3 of 7");});
 
 // where the chapters meet (From words to data's joins.js): Creates, reads, updates, deletes opens on the wall as Tomás's next note
 // leaves it, and Two that create and The business decides on the matrix as the chapter before leaves it, so each camera carries on

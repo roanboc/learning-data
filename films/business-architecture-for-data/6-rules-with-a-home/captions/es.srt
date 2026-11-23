@@ -1,0 +1,275 @@
+1
+00:00:01,400 --> 00:00:09,238
+Jorasán, en el siglo IX. Sus pueblos y sus campos bebían de qanats, túneles que traían agua desde debajo de las montañas.
+
+2
+00:00:10,738 --> 00:00:16,130
+Un túnel nuevo cavado demasiado cerca de uno viejo podía quitarle el agua y dejar secos los campos de una aldea.
+
+3
+00:00:18,630 --> 00:00:25,073
+En Nishapur, la gente acudía una y otra vez al gobernador, Abdallah ibn Tahir, con disputas por qanats.
+
+4
+00:00:26,373 --> 00:00:32,048
+Pero los libros de derecho no decían nada de los qanats, así que cada disputa se discutía sin una regla que la resolviera.
+
+5
+00:00:33,548 --> 00:00:37,982
+La gente necesitaba conocer las reglas antes de cavar, no después de que un campo se secara.
+
+6
+00:00:39,682 --> 00:00:47,522
+Así que Abdallah reunió a los juristas de Jorasán, y a algunos de Irak, para escribir las reglas de los qanats en un solo libro.
+
+7
+00:00:49,022 --> 00:00:52,259
+Se llamó Kitab-i Qani, el libro de los qanats.
+
+8
+00:00:53,959 --> 00:00:56,657
+Desde entonces, las disputas se juzgaron por lo que decía.
+
+9
+00:00:57,957 --> 00:01:02,875
+Doscientos años después, un historiador escribió que los qanats aún se juzgaban por ese libro.
+
+10
+00:01:04,375 --> 00:01:09,124
+Las reglas tenían un solo hogar, escritas una vez, y todo el que las necesitaba sabía dónde buscar.
+
+11
+00:01:16,824 --> 00:01:26,176
+La nota de Tomás pregunta dónde va cada regla. El primer día le mostraron una: una lectura estimada vale solo hasta la siguiente lectura real.
+
+12
+00:01:27,576 --> 00:01:29,609
+Al lado, una factura marcada como errónea.
+
+13
+00:01:31,109 --> 00:01:38,967
+Farah trae a la familia detrás de esa factura. En junio estuvieron fuera tres semanas, y su medidor inteligente dejó de enviar lecturas.
+
+14
+00:01:39,667 --> 00:01:44,612
+La factura estimó esas semanas a partir del año pasado: cuatrocientos doce dólares con ochenta.
+
+15
+00:01:46,012 --> 00:01:50,888
+Cuando el medidor volvió, envió las lecturas que había guardado. Casi no habían consumido nada.
+
+16
+00:01:51,588 --> 00:01:55,024
+Las lecturas reales llegaron. La factura nunca se corrigió.
+
+17
+00:01:58,724 --> 00:02:04,861
+La regla existía. Hace años, un analista de medición escribió un script nocturno, como solución temporal.
+
+18
+00:02:05,561 --> 00:02:10,399
+Buscaba estimaciones que ya tenían una lectura real detrás, y ponía sus facturas en cola para corregirlas.
+
+19
+00:02:11,699 --> 00:02:18,268
+En marzo, la facturación pasó a un sistema nuevo. El script siguió escribiendo en la cola vieja, que ya nada lee.
+
+20
+00:02:19,668 --> 00:02:25,932
+Corrió cada noche, no reportó ningún error y no corrigió nada: unas mil novecientas facturas desde marzo.
+
+21
+00:02:27,632 --> 00:02:32,098
+Vivía en el muro entre la red y comercialización, y no pertenecía a ningún lado.
+
+22
+00:02:35,598 --> 00:02:38,232
+Tomás encuentra la regla escrita de otras cuatro maneras.
+
+23
+00:02:38,932 --> 00:02:45,834
+En el código de comercialización del regulador, la configuración del sistema de medidores, las notas de facturación y la hoja de cálculo de reclamos.
+
+24
+00:02:47,334 --> 00:02:53,645
+El código del regulador dice por qué. Los demás dicen cómo, cada uno un poco distinto. Ninguno es su hogar.
+
+25
+00:02:55,245 --> 00:03:00,216
+Quiere para las reglas lo que Jorasán tuvo: un solo hogar, escritas una vez.
+
+26
+00:03:02,916 --> 00:03:06,708
+La regla del primer día son en realidad dos reglas, una a cada lado del muro.
+
+27
+00:03:08,208 --> 00:03:16,254
+La de la red: una estimación se reemplaza cuando llega la lectura real, y el reemplazo se envía a la comercializadora. Su responsable es Grace.
+
+28
+00:03:17,654 --> 00:03:24,162
+La de comercialización: una factura basada en una estimación reemplazada se corrige en la siguiente. Responde quien dirige comercialización.
+
+29
+00:03:25,562 --> 00:03:32,218
+Entre ambas, la lectura reemplazada cruza el muro en la lista acordada, por donde antes el script pasaba sin que nadie lo viera.
+
+30
+00:03:37,918 --> 00:03:43,997
+Cada regla tiene una razón: una norma, un principio o el nivel de servicio del paso al que sirve.
+
+31
+00:03:44,697 --> 00:03:49,748
+La de Grace viene de las reglas de medición; la de comercialización, del código del regulador.
+
+32
+00:03:51,048 --> 00:03:56,170
+Una regla sin razón no se puede cambiar con seguridad. Una sin responsable no se puede arreglar.
+
+33
+00:03:57,770 --> 00:04:06,905
+Ama también corrige el borrador del primer día. Facturas justas y exactas nunca fue una meta de la empresa. Es una obligación, en el código del regulador.
+
+34
+00:04:10,405 --> 00:04:13,310
+Una regla se apoya en hechos, y los hechos, en conceptos.
+
+35
+00:04:14,010 --> 00:04:20,486
+Por eso se escribe con las palabras del negocio, sobre lo que rige: una lectura, una estimación, una factura, un punto de conexión.
+
+36
+00:04:21,886 --> 00:04:30,087
+Cada uno se vuelve un objeto de datos, en el dominio que lo tiene a cargo: lecturas y puntos de conexión en la red; facturas, en comercialización.
+
+37
+00:04:31,587 --> 00:04:36,542
+El modelo de la industria da las palabras de partida, como «usage point» para un punto de conexión.
+
+38
+00:04:37,242 --> 00:04:39,933
+El mapa guarda a su lado las palabras propias de la empresa.
+
+39
+00:04:43,333 --> 00:04:49,007
+Cada regla se adjunta a su paso en «del medidor al cobro»: la de la red, a la lectura; la de comercialización, a la facturación.
+
+40
+00:04:49,707 --> 00:04:52,853
+Adjunta, no adentro: una regla no es el proceso.
+
+41
+00:04:54,453 --> 00:05:02,487
+El paso también dice qué esperar de los datos. Oportunidad, de su nivel de servicio: una estimación reemplazada en dos días hábiles.
+
+42
+00:05:03,887 --> 00:05:13,187
+Completitud, de sus pasos: toda estimación reemplazada, o explicada. Validez, de otra regla: toda lectura marcada como real o estimada.
+
+43
+00:05:16,687 --> 00:05:23,152
+En ArchiMate 4, el estándar que sigue el mapa, una regla es un requisito, uno de los elementos de motivación.
+
+44
+00:05:24,452 --> 00:05:28,155
+El paralelogramo de cada tarjeta de regla es el símbolo del requisito.
+
+45
+00:05:29,655 --> 00:05:36,338
+ArchiMate no tiene un elemento llamado regla. El mapa hace de las reglas de datos y de negocio dos tipos de requisito.
+
+46
+00:05:38,038 --> 00:05:44,169
+Su razón es un impulsor, unido por una influencia: para la regla de comercialización, el código del regulador.
+
+47
+00:05:45,469 --> 00:05:51,311
+Su hogar es el paso que la aplica, unido por una realización: la facturación, en «del medidor al cobro».
+
+48
+00:05:52,611 --> 00:05:57,293
+Su responsable, y los objetos de datos a los que se aplica, se unen por una asociación.
+
+49
+00:05:58,793 --> 00:06:03,707
+ArchiMate dice dónde va una regla, no cómo se controla. Los controles salen de la regla.
+
+50
+00:06:07,507 --> 00:06:15,910
+Escrita en una forma fija, una regla dice a qué se aplica, qué debe cumplirse, su responsable, su razón, su hogar y qué pasa cuando falla.
+
+51
+00:06:17,410 --> 00:06:24,572
+Una regla sobre los datos, como toda lectura marcada como real o estimada, recibe pruebas: comprueban que los datos estén bien.
+
+52
+00:06:25,872 --> 00:06:32,933
+Se generan de ella, en un solo sentido: prueba dbt, regla de calidad de un contrato de datos, forma para datos enlazados.
+
+53
+00:06:34,433 --> 00:06:36,252
+Nadie edita un control a mano.
+
+54
+00:06:37,552 --> 00:06:43,699
+La regla de comercialización es sobre lo que hace el negocio: los datos pueden estar bien y una factura, sin corregir.
+
+55
+00:06:45,499 --> 00:06:51,365
+Así que de ella se genera una tabla de seguimiento, con cada factura que no se corrigió en la siguiente.
+
+56
+00:06:52,965 --> 00:06:56,329
+Sigue lo que la regla promete, no si un proceso corrió.
+
+57
+00:06:57,629 --> 00:07:01,651
+La primera factura sin corregir habría estado en la lista la mañana después del cambio.
+
+58
+00:07:03,251 --> 00:07:07,278
+Cada mañana, la lista va al equipo del responsable, no a un buzón compartido.
+
+59
+00:07:10,778 --> 00:07:16,878
+Escritos así, los conceptos, cómo se relacionan y las reglas sobre ellos son, en general, una ontología.
+
+60
+00:07:17,578 --> 00:07:21,275
+Está lista para OWL, un lenguaje con el que razonan las máquinas.
+
+61
+00:07:22,875 --> 00:07:30,575
+Como muestra la película Significado que las máquinas pueden leer, el glosario, los modelos, la ontología y los controles son vistas de ese único mapa.
+
+62
+00:07:32,075 --> 00:07:38,747
+Pero OWL razona solo a partir de lo que se dice. Para OWL, una corrección que nunca ocurrió es simplemente desconocida.
+
+63
+00:07:39,447 --> 00:07:43,204
+Encontrar la factura sin corregir le toca a la tabla de seguimiento.
+
+64
+00:07:46,904 --> 00:07:53,345
+La familia recibe de vuelta ciento cuarenta y cuatro dólares con cuarenta, y las mil novecientas facturas se encuentran y se corrigen.
+
+65
+00:07:54,045 --> 00:07:56,846
+Grace y quien dirige comercialización confirman sus reglas.
+
+66
+00:07:58,246 --> 00:08:02,700
+En Jorasán, quien necesitaba las reglas de los qanats las buscaba en un solo libro.
+
+67
+00:08:04,300 --> 00:08:10,529
+La nota de Tomás tiene una respuesta: cada regla va en el mapa, escrita una vez, en el paso donde se aplica.
+
+68
+00:08:11,229 --> 00:08:15,158
+Cada una tiene un responsable y una razón, y sus controles se generan a partir de ella.
+
+69
+00:08:16,758 --> 00:08:21,421
+Después: lo que el negocio espera de sus datos, escrito por quienes son sus responsables.

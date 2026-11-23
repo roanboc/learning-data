@@ -34,6 +34,12 @@ lab: async (id) => {
     await seg(0, 1); await press(W.tellT); await seg(1, 1); await seg(2, 0); await seg(2, 1, 600);
   } else if (id === "levels") {
     await press(W.bornB); await seg(0, 1); await press(W.painT); await press(W.bornB); await seg(1, 1, 600); await seg(0, 2, 600);
+  } else if (id === "ladder") {
+    await seg(0, 0); await press(W.askB, 1600); await seg(0, 1); await press(W.askB); await press(W.offerB);
+    await press(W.treeT); await press(W.offerB, 900);
+  } else if (id === "rule") {
+    await press(W.plantB); await seg(0, 1); await seg(0, 2); await seg(1, 0); await seg(1, 1); await press(W.plantB);
+    await seg(2, 1); await press(W.moveB); await press(W.plantB, 900);
   } else if (id === "expect") {
     await press(W.janB, 2200); await seg(0, 1); await press(W.srcT); await press(W.platT);
     await press(W.janB, 2200); await press(W.worseB, 2200);

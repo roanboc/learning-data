@@ -92,12 +92,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sin el mapa, una regla es una suposición, y cuando falla, nadie sabe quién debe corregirla.",
 "With the map, the rule has a home.":
 "Con el mapa, la regla tiene un hogar.",
-"Over eleven films, Tomás builds the map, one layer at a time.":
-"En once películas, Tomás construye el mapa, capa por capa.",
+"Over eight films, Tomás builds the map, one layer at a time.":
+"En ocho películas, Tomás construye el mapa, capa por capa.",
 "Seven films to understand the utility: who it serves, why it moves, what it must be able to do, how value reaches people, who does what, and what runs it.":
 "Siete películas para entender la empresa: a quién sirve, qué la mueve, qué tiene que ser capaz de hacer, cómo llega el valor a la gente, quién hace qué y qué la hace funcionar.",
-"Then four on what it means for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read.":
-"Luego cuatro sobre lo que significa para los datos: las preguntas que importan, reglas con un hogar, un cambio de estrategia y un mapa que pueden leer personas y agentes.",
+"Then one on a change in strategy, walked down the map.":
+"Luego una sobre un cambio de estrategia, seguido mapa abajo.",
+"After it, a series takes each layer further: the business, its data, and the platforms that run it.":
+"Después, una serie lleva cada capa más lejos: el negocio, sus datos y las plataformas que los hacen funcionar.",
 "The surveyors' first questions still work.":
 "Las primeras preguntas de los inspectores siguen sirviendo.",
 "What is this place? Who holds it? What is it worth?":

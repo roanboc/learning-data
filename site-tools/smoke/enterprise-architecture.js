@@ -43,12 +43,6 @@ lab: async (id) => {
   } else if (id === "place") {
     await press(W.systems[0][1]); await press(W.systems[0][1]); await seg(0, 1);
     for (const k of ["sheet", "fleet", "billing"]) await press(W.systems.find(x => x[0] === k)[1], 400);
-  } else if (id === "skipper") {
-    await seg(0, 0); await press(W.askB, 1600); await seg(0, 1); await press(W.askB); await press(W.offerB);
-    await press(W.treeT); await press(W.offerB, 900);
-  } else if (id === "rule") {
-    await press(W.plantB); await seg(0, 1); await seg(0, 2); await seg(1, 0); await seg(1, 1); await press(W.plantB);
-    await seg(2, 1); await press(W.moveB); await press(W.plantB, 900);
   } else if (id === "walk") {
     await seg(0, 0); await seg(0, 1); await seg(1, 1); for (let i = 0; i < 6; i++) await press(W.downB, 400);
   } else out.push("no play written for playground " + id);

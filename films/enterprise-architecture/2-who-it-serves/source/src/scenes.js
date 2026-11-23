@@ -49,7 +49,7 @@ scene("edison",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // what he knew
   [["who he served","who he served"],["what they were trying to do","what they were"],["how it would pay","how it would pay"]].forEach(([s_,k],i)=>arrive(ctx,[480,960,1440][i],220,t,w("knew",k),()=>tag(ctx,[480,960,1440][i],220,s_,TRUST,{align:"center",size:32}),{dy:14}));
   ctx.restore();fadeIn(ctx,S,t);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"Who it serves, and how it pays","two canvases, before anything else",EAC,"Film 2 of 11 · enterprise architecture, for data");});
+  eaTitle(ctx,S,t,B+1.0,"Who it serves, and how it pays","two canvases, before anything else",EAC,"Film 2 of 8 · enterprise architecture, for data");});
 
 /* ---------- 2. Who is it for? ---------- */
 scene("recap",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
@@ -186,7 +186,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1450,400,t,cA,()=>sticky(ctx,1450,400,480,230,"To keep the region's homes and businesses powered, affordably and fairly.",{col:NOTEC[0],size:32,p:clamp((t-cA-0.2)/2.2,0,1),rot:0.015}),{dy:-30,from:1.06});
   arrive(ctx,960,650,t,w("next","why"),()=>sticky(ctx,960,650,320,140,"Why must it change?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"Who it serves, and how it pays",EAC,"Know who it serves, and how it pays, before anything else.","Film 2 of 11");});
+  eaEnd(ctx,S,t,B+0.8,"Who it serves, and how it pays",EAC,"Know who it serves, and how it pays, before anything else.","Film 2 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the map moves from the wall to the screen and back, with the canvases'
 // words in another place and size, so both chapters open on a cut

@@ -10,6 +10,6 @@ const BREATH={
 "rough":{"hold":{"canvas":0.5,"argue":0.5,"later":0.6,"earned":0.6}},
 "evidence":{"hold":{"source":0.8,"draft":0.6},"breathe":3.4},
 "data":{"hold":{"claim":0.6,"rule":0.8,"qs":0.8,"guess":0.6}},
-"series":{"hold":{"eleven":0.8,"seven":1.2}},
+"series":{"hold":{"eight":0.8,"seven":1.2,"then":0.6}},
 "end":{"hold":{"still":0.5,"qs":0.8},"breathe":5.0}
 };

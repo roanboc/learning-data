@@ -2,12 +2,16 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
-"Tartu, Estonia, today. A baby is born, and the birth is entered once, in the population register.":"Tartu, Estonia, hoy. Nace un bebé, y el nacimiento se registra una vez, en el registro de población.",
-"Days later, the parents get an email from the Social Insurance Board. A family benefit is theirs, if they accept it.":"Días después, los padres reciben un correo de la Junta de Seguro Social. Una prestación familiar es suya, si la aceptan.",
-"They never applied.":"Nunca la solicitaron.",
-"No office asks the parents again. Each one asks the population register, over X-Road, the exchange Estonia's public offices share.":"Ninguna oficina vuelve a preguntar a los padres. Cada una consulta el registro de población por X-Road, el intercambio de las oficinas públicas de Estonia.",
-"By law, no office may build a second database of the same data, and every database is listed, with the office that owns it.":"Por ley, ninguna oficina puede crear una segunda base con los mismos datos, y cada base figura en una lista, con la oficina responsable.",
-"Each fact has one home and one owner. It's asked for once, and everyone who needs it asks there: once only.":"Cada hecho tiene un solo hogar y un solo responsable. Se pide una vez, y todo el que lo necesita lo pide ahí: solo una vez.",
+"Khorasan, in the ninth century. Its towns and fields drank from qanats, tunnels that brought water from under the mountains.":"Jorasán, en el siglo IX. Sus pueblos y sus campos bebían de qanats, túneles que traían agua desde debajo de las montañas.",
+"A new tunnel dug too close to an old one could take its water, and leave a village's fields dry.":"Un túnel nuevo cavado demasiado cerca de uno viejo podía quitarle el agua y dejar secos los campos de una aldea.",
+"In Nishapur, people kept coming to the governor, Abdallah ibn Tahir, with disputes over qanats.":"En Nishapur, la gente acudía una y otra vez al gobernador, Abdallah ibn Tahir, con disputas por qanats.",
+"But the law books said nothing about qanats, so each dispute was argued with no rule to settle it.":"Pero los libros de derecho no decían nada de los qanats, así que cada disputa se discutía sin una regla que la resolviera.",
+"People needed to know the rules before they dug, not after a field went dry.":"La gente necesitaba conocer las reglas antes de cavar, no después de que un campo se secara.",
+"So Abdallah gathered the legal scholars of Khorasan, and some from Iraq, to write the rules for qanats in one book.":"Así que Abdallah reunió a los juristas de Jorasán, y a algunos de Irak, para escribir las reglas de los qanats en un solo libro.",
+"It was called the Kitab-i Qani, the book on qanats.":"Se llamó Kitab-i Qani, el libro de los qanats.",
+"From then on, disputes were judged by what it said.":"Desde entonces, las disputas se juzgaron por lo que decía.",
+"Two hundred years later, a historian wrote that qanats were still judged by that book.":"Doscientos años después, un historiador escribió que los qanats aún se juzgaban por ese libro.",
+"The rules had one home, written once, and everyone who needed them knew where to look.":"Las reglas tenían un solo hogar, escritas una vez, y todo el que las necesitaba sabía dónde buscar.",
 "Tomás's note asks where each rule belongs. On day one, he was shown one: an estimated reading stands only until the next actual reading.":"La nota de Tomás pregunta dónde va cada regla. El primer día le mostraron una: una lectura estimada vale solo hasta la siguiente lectura real.",
 "Beside it was a bill, flagged wrong.":"Al lado, una factura marcada como errónea.",
 "Farah brings the household behind that bill. In June, they were away for three weeks, and their smart meter stopped sending readings.":"Farah trae a la familia detrás de esa factura. En junio estuvieron fuera tres semanas, y su medidor inteligente dejó de enviar lecturas.",
@@ -22,7 +26,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Tomás finds the rule written four more ways.":"Tomás encuentra la regla escrita de otras cuatro maneras.",
 "In the regulator's retail code, the meter system's settings, the billing team's notes and the complaints team's spreadsheet.":"En el código de comercialización del regulador, la configuración del sistema de medidores, las notas de facturación y la hoja de cálculo de reclamos.",
 "The regulator's code says why. The others each say how, a little differently. None of them is its home.":"El código del regulador dice por qué. Los demás dicen cómo, cada uno un poco distinto. Ninguno es su hogar.",
-"He wants for rules what Tartu has for a birth: once only.":"Quiere para las reglas lo que Tartu tiene para un nacimiento: solo una vez.",
+"He wants for rules what Khorasan had for qanats: one home, written once.":"Quiere para las reglas lo que Jorasán tuvo: un solo hogar, escritas una vez.",
 "Day one's rule is really two rules, one on each side of the wall.":"La regla del primer día son en realidad dos reglas, una a cada lado del muro.",
 "The network's: an estimate is replaced when the actual reading arrives, and the replacement is sent to the retailer. Grace owns it.":"La de la red: una estimación se reemplaza cuando llega la lectura real, y el reemplazo se envía a la comercializadora. Su responsable es Grace.",
 "Retail's: a bill based on a replaced estimate is corrected on the next bill. The head of retail owns it.":"La de comercialización: una factura basada en una estimación reemplazada se corrige en la siguiente. Responde quien dirige comercialización.",
@@ -63,8 +67,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Finding the uncorrected bill stays the tracking table's job.":"Encontrar la factura sin corregir le toca a la tabla de seguimiento.",
 "The household gets a hundred and forty-four dollars forty back, and the nineteen hundred bills are found and corrected.":"La familia recibe de vuelta ciento cuarenta y cuatro dólares con cuarenta, y las mil novecientas facturas se encuentran y se corrigen.",
 "Grace and the head of retail confirm their rules.":"Grace y quien dirige comercialización confirman sus reglas.",
-"In Tartu, the benefit is paid, and nobody was asked twice.":"En Tartu, la prestación se paga, y a nadie se le preguntó dos veces.",
+"In Khorasan, whoever needed the rules on qanats looked in one book.":"En Jorasán, quien necesitaba las reglas de los qanats las buscaba en un solo libro.",
 "Tomás's note has an answer: each rule belongs in the map, written once, at the step where it applies.":"La nota de Tomás tiene una respuesta: cada regla va en el mapa, escrita una vez, en el paso donde se aplica.",
 "Each has an owner and a reason, and its checks are generated from it.":"Cada una tiene un responsable y una razón, y sus controles se generan a partir de ella.",
-"Rules hold while the organisation holds still. Next: when strategy moves.":"Las reglas valen mientras la organización está quieta. Después: cuando la estrategia se mueve."
+"Next: what the business expects of its data, written down by the people who own it.":"Después: lo que el negocio espera de sus datos, escrito por quienes son sus responsables."
 });

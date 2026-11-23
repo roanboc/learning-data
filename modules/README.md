@@ -168,9 +168,7 @@ Source: [films/enterprise-architecture](../films/enterprise-architecture/) · Po
 - [How value reaches people](../films/enterprise-architecture/5-how-value-reaches-people/) — `how-value-reaches-people`
 - [Who does it, and where meaning changes](../films/enterprise-architecture/6-who-does-it/) — `who-does-it`
 - [Today, and where it's going](../films/enterprise-architecture/7-today-and-where-its-going/) — `today-and-where-its-going`
-- [Now the questions appear](../films/enterprise-architecture/8-now-the-questions-appear/) — `now-the-questions-appear`
-- [Rules with a home](../films/enterprise-architecture/9-rules-with-a-home/) — `rules-with-a-home`
-- [When strategy moves](../films/enterprise-architecture/10-when-strategy-moves/) — `when-strategy-moves`
+- [When strategy moves](../films/enterprise-architecture/8-when-strategy-moves/) — `when-strategy-moves`
 
 Labs and assessments: [site/assets/enterprise-architecture/learn.en.js](../site/assets/enterprise-architecture/learn.en.js), [site/assets/enterprise-architecture/learn.es.js](../site/assets/enterprise-architecture/learn.es.js)
 
@@ -182,7 +180,9 @@ Source: [films/business-architecture-for-data](../films/business-architecture-fo
 - [What the business needs to know](../films/business-architecture-for-data/2-what-the-business-needs-to-know/) — `what-the-business-needs-to-know`
 - [Who creates it, who owns it](../films/business-architecture-for-data/3-who-creates-it-who-owns-it/) — `who-creates-it-who-owns-it`
 - [Processes, as deep as data needs](../films/business-architecture-for-data/4-processes-as-deep-as-data-needs/) — `processes-as-deep-as-data-needs`
-- [Rules and expectations the business owns](../films/business-architecture-for-data/5-rules-and-expectations-the-business-owns/) — `rules-and-expectations-the-business-owns`
+- [Now the questions appear](../films/business-architecture-for-data/5-now-the-questions-appear/) — `now-the-questions-appear`
+- [Rules with a home](../films/business-architecture-for-data/6-rules-with-a-home/) — `rules-with-a-home`
+- [Rules and expectations the business owns](../films/business-architecture-for-data/7-rules-and-expectations-the-business-owns/) — `rules-and-expectations-the-business-owns`
 
 Labs and assessments: [site/assets/business-architecture-for-data/learn.en.js](../site/assets/business-architecture-for-data/learn.en.js), [site/assets/business-architecture-for-data/learn.es.js](../site/assets/business-architecture-for-data/learn.es.js)
 

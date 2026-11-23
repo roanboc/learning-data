@@ -87,8 +87,6 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pero la copia se detiene en algún punto.",
 "A brain guesses at many levels at once, from the next word to where the story is going.":
 "Un cerebro adivina en muchos niveles a la vez, desde la siguiente palabra hasta adónde va la historia.",
-"To imitate one kind of brain cell, researchers needed a network five to eight layers deep.":
-"Para imitar un tipo de célula cerebral, los investigadores necesitaron una red de cinco a ocho capas.",
 "And how a brain learns from its errors, nobody knows yet.":
 "Y cómo aprende un cerebro de sus errores, nadie lo sabe todavía.",
 "Second: when a model writes a poem, is it creating, or mixing what it learned?":

@@ -226,7 +226,7 @@ scene("down",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({alone:wAt(sc,
   ],0.6);});
 
 /* ---------------------------------------------------------------- 5 · What never changes */
-scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({never:wAt(sc,"under","never change"),loop:wAt(sc,"owner","every critical loop"),
+scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({never:wAt(sc,"under","never change"),loop:wAt(sc,"rules","every critical loop"),own:wAt(sc,"rules","a person owns"),apr:wAt(sc,"rules2","another person"),nev:wAt(sc,"rules2","agents never approve"),
     op:wAt(sc,"levels","from operator"),obs:wAt(sc,"levels","to observer"),always:wAt(sc,"here","always approves"),watching:wAt(sc,"here","only watching"),
     stop:wAt(sc,"law","stop it"),resp:wAt(sc,"iso","who is responsible")}));
   const lay=tt=>fs_layout(1-clamp((tt-0.9)/1.8,0,1));
@@ -236,8 +236,8 @@ scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({never:wAt(sc
       const R=fs_stages(x,L.x,L.y,L.w,{short:1-ag_in(tt,1.9,0.8),gates:[0,0,0,0,go],passed:[0,0,0,0,1],
         lit:[0,1,2,3,4].map(i=>ag_io(tt,P.never+0.12*i,P.never+1.4+0.12*i,0.4)),col:[null,null,null,null,ag_in(tt,P.always,0.5)>0.5?AG.green:null]});
       fs_agent(x,tt,{a:go});fs_tasks(x,R.stages,{all:go});
-      fs_list(x,150,128,660,"What never changes",[{t:"A person owns the agent, and answers for it",a:ag_in(tt,c.owner+0.2,0.4)},
-        {t:"A second person approves production",a:ag_in(tt,c.second+0.2,0.4)},{t:"Agents never approve",a:ag_in(tt,c.review+0.2,0.4)},
+      fs_list(x,150,128,660,"What never changes",[{t:"A person owns the agent, and answers for it",a:ag_in(tt,P.own,0.4)},
+        {t:"A second person approves production",a:ag_in(tt,P.apr,0.4)},{t:"Agents never approve",a:ag_in(tt,P.nev,0.4)},
         {t:"Never its own change, a weaker check,",a:ag_in(tt,c.self+0.2,0.4)},{t:"or rights it gave itself",a:ag_in(tt,c.self+0.2,0.4)}],
         {a:ag_io(tt,P.never,c.levels-0.2,0.5),k:ag_spr(tt,P.never)});
       // the researchers' five levels, by what the person does; here a person always approves production

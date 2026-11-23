@@ -21,5 +21,21 @@
   "quiz_lead_es": "Doce situaciones sobre el significado y las máquinas: una respuesta segura y equivocada, una regla en el lugar equivocado, una ontología copiada de las tablas, un modelo que alguien quiere dejar, tres definiciones guardadas en tres lugares, un razonador que no se opone, dos versiones de una métrica, un estándar adoptado entero, tres definiciones de una palabra. Decide qué harías; cada respuesta explica por qué.",
   "past": ["Linnaeus, Wilkins and Nightingale", "Shared definitions let strangers compare. Universal ones fail."],
   "past_es": ["Linneo, Wilkins y Nightingale", "Las definiciones compartidas permiten comparar entre desconocidos. Las universales fracasan."],
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The AI agents film that shows what happens when meaning isn't written for machines.",
+    "p_es": "La película de agentes de IA que muestra qué pasa cuando el significado no se escribe para las máquinas.",
+    "links": [
+      {
+        "title": "Context engineering",
+        "title_es": "Ingeniería de contexto",
+        "line": "The AI agents film where nothing the agent reads says what a word means, so it guesses, until someone writes the meaning down once.",
+        "line_es": "La película de agentes de IA donde nada de lo que lee el agente dice qué significa una palabra, así que adivina, hasta que alguien escribe el significado una vez.",
+        "href": "https://data.learn-all.org/agents-at-work-on-data/context-engineering/",
+        "href_es": "https://data.learn-all.org/es/agents-at-work-on-data/context-engineering/"
+      }
+    ]
+  },
   "tile": [380, 360, 480]
 }

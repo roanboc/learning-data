@@ -56,5 +56,9 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "who-is-it-really", "line": "Every request proves who it is, wherever it comes from, and gets its rights from a group", "line_es": "Cada solicitud prueba quién es, venga de donde venga, y recibe sus permisos de un grupo"},
+    {"key": "who-decides", "line": "The university's areas, each with the owner who answers for its data", "line_es": "Las áreas de la universidad, cada una con el dueño que responde por sus datos"}
+  ],
   "tile": [560, 420, 560]
 }

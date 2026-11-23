@@ -103,5 +103,11 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "walls-doors-and-keys", "line": "One workspace made three: development, test and production", "line_es": "Un espacio de trabajo convertido en tres: desarrollo, pruebas y producción"},
+    {"key": "workloads-without-secrets", "line": "A job that proves who it is with its own identity, and no secret to copy", "line_es": "Un proceso que prueba quién es con su propia identidad, sin secreto que copiar"},
+    {"key": "network-storage-and-keys", "line": "One private path to the data, and every other door shut", "line_es": "Un solo camino privado a los datos, y todas las demás puertas cerradas"},
+    {"key": "who-decides", "line": "Who owns each area's data, and who decides what", "line_es": "Quién es dueño de los datos de cada área, y quién decide qué"}
+  ],
   "tile": [860, 380, 560]
 }

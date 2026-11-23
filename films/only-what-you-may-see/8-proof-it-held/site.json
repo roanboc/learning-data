@@ -102,5 +102,8 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "an-agreement-first", "line": "The agreement for Anil's study: what it may have, where it may work, and when its access ends", "line_es": "El acuerdo para el estudio de Anil: qué puede tener, dónde puede trabajar y cuándo termina su acceso"}
+  ],
   "tile": [780, 430, 380]
 }

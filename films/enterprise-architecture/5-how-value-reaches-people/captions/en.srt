@@ -87,113 +87,85 @@ As with the dabbawalas' tins, the detail belongs where the work changes hands.
 A value stream shows what reaches the customer; a process, how the work gets done.
 
 23
-00:02:34,922 --> 00:02:40,028
-Grace shows him the utility's process map. Every process sits in one of four groups.
+00:02:34,922 --> 00:02:41,735
+Grace shows him the utility's process map. Restore supply is one of the processes that deliver to customers.
 
 24
-00:02:41,228 --> 00:02:50,852
-Strategic processes set direction. Operational ones deliver to customers. Support keeps the rest running. Evaluation measures and improves.
+00:02:42,935 --> 00:02:49,837
+Business architecture for data draws such a map in full: its four groups, its levels, and what goes in and out.
 
 25
-00:02:52,352 --> 00:02:59,992
-Restoring supply is operational. Evaluation measures it: how long, and how often, customers are without power.
+00:02:51,337 --> 00:02:55,201
+Here, one process matters: restore supply, in seven steps.
 
 26
-00:03:02,692 --> 00:03:05,263
-Like capabilities, processes have levels.
+00:02:56,301 --> 00:03:02,851
+Take the call. Find the fault. Decide who goes first. Send the crew. Repair. Switch back on. Confirm.
 
 27
-00:03:06,363 --> 00:03:10,916
-Level one is the map. Level two is one process: restore supply.
-
-28
-00:03:12,216 --> 00:03:20,838
-Level three is its steps. Take the call. Find the fault. Decide who goes first. Send the crew. Repair. Switch back on. Confirm.
-
-29
-00:03:22,338 --> 00:03:25,478
+00:03:04,351 --> 00:03:07,491
 For most of these steps, a box and an arrow say enough.
 
-30
-00:03:28,178 --> 00:03:31,003
-Before going deeper, Tomás draws its edges.
-
-31
-00:03:32,303 --> 00:03:37,534
-Who supplies it, what comes in, what goes out, to whom: a SIPOC, in Six Sigma's terms.
-
-32
-00:03:39,034 --> 00:03:42,848
-In come calls, alarms from smart meters, and where each crew is.
-
-33
-00:03:44,248 --> 00:03:48,696
-What comes out: power back on, a time to tell customers, and a fault record.
-
-34
-00:03:50,196 --> 00:03:54,144
-The fault record, with its start, end and cause, goes to the regulator.
-
-35
-00:03:56,844 --> 00:04:00,883
+28
+00:03:10,191 --> 00:03:14,230
 Only one step needs more detail: deciding which crew goes first.
 
-36
-00:04:02,083 --> 00:04:05,632
+29
+00:03:15,430 --> 00:03:18,979
 Tonight the storm has caused three faults, and two crews are free.
 
-37
-00:04:06,832 --> 00:04:15,318
+30
+00:03:20,179 --> 00:03:28,665
 On Hill Street, a wire is down. On Riverside, twelve homes, one with someone on life support. On the east side, twelve hundred homes.
 
-38
-00:04:16,818 --> 00:04:20,004
+31
+00:03:30,165 --> 00:03:33,351
 Left to habit, both crews would go to the biggest fault.
 
-39
-00:04:21,304 --> 00:04:28,808
+32
+00:03:34,651 --> 00:03:42,155
 The rule says otherwise: wires down first, for safety. Then life support. Then whatever brings back the most homes.
 
-40
-00:04:30,308 --> 00:04:37,431
+33
+00:03:43,655 --> 00:03:50,778
 Order and state: that's where a process earns detail, step by step, in a notation such as BPMN.
 
-41
-00:04:43,331 --> 00:04:45,861
+34
+00:03:56,678 --> 00:03:59,208
 At two in the morning, the rule needs three facts.
 
-42
-00:04:47,261 --> 00:04:49,402
+35
+00:04:00,608 --> 00:04:02,749
 Which wires are down: from the calls.
 
-43
-00:04:50,702 --> 00:04:53,098
+36
+00:04:04,049 --> 00:04:06,445
 Who is on life support: from a register.
 
-44
-00:04:54,398 --> 00:05:00,940
+37
+00:04:07,745 --> 00:04:14,287
 How many homes each fault cuts off: from the network model, which isn't sure which homes hang off which transformer.
 
-45
-00:05:02,440 --> 00:05:06,420
+38
+00:04:15,787 --> 00:04:19,767
 Wherever order, state or timing matter, that's where the data rules are.
 
-46
-00:05:09,120 --> 00:05:15,067
+39
+00:04:22,467 --> 00:04:28,414
 At twenty to four, Hill Street's lights come back on, with a message: a branch on the line, now cleared.
 
-47
-00:05:16,567 --> 00:05:19,523
+40
+00:04:29,914 --> 00:04:32,870
 Farah confirms the stages, and Grace the steps.
 
-48
-00:05:20,623 --> 00:05:24,609
+41
+00:04:33,970 --> 00:04:37,956
 The rule for who goes first is written down at last, and Grace owns it.
 
-49
-00:05:25,909 --> 00:05:32,714
+42
+00:04:39,256 --> 00:04:46,061
 Tomás's note has an answer: value reaches people in a few stages; the detail belongs at one step.
 
-50
-00:05:34,214 --> 00:05:38,419
+43
+00:04:47,561 --> 00:04:51,766
 Next, he asks who does each step, and what "customer" means to each of them.

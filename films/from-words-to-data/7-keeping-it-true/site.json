@@ -32,5 +32,21 @@
   "quiz_lead_es": "Diez situaciones sobre mantener el significado al día: tres cifras para una medida, una definición inventada pero plausible, un cambio que se saltó la revisión, el informe del año pasado, un patrón de modelado nuevo, dos credenciales parecidas. Decide qué harías; cada respuesta explica por qué.",
   "past": ["Johnson's dictionary, 1755", "Meaning moves. Someone has to keep up."],
   "past_es": ["El diccionario de Johnson, 1755", "El significado se mueve. Alguien tiene que seguirle el paso."],
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The AI agents film that teaches in full how an agent's change is checked.",
+    "p_es": "La película de agentes de IA que enseña completo cómo se revisa el cambio de un agente.",
+    "links": [
+      {
+        "title": "Every change through review",
+        "title_es": "Cada cambio pasa por revisión",
+        "line": "The AI agents film where an agent's pull request hands in its evidence, a person reviews the code, and another approves the release.",
+        "line_es": "La película de agentes de IA donde el pull request de un agente entrega su evidencia, una persona revisa el código y otra aprueba la versión.",
+        "href": "https://data.learn-all.org/from-helper-to-colleague/every-change-through-review/",
+        "href_es": "https://data.learn-all.org/es/from-helper-to-colleague/every-change-through-review/"
+      }
+    ]
+  },
   "tile": [640, 330, 440]
 }

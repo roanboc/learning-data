@@ -152,8 +152,8 @@ window.LD_ROUTE = {
      "href": "enterprise-architecture/",
      "poster": "day-one-poster.jpg",
      "kicker": "Series · 8 films",
-     "len": "44 min",
-     "min": 44.0,
+     "len": "43 min",
+     "min": 43.0,
      "films": [
       "ld-day-one",
       "ld-who-it-serves",

@@ -67,7 +67,7 @@ The numbers match the numbered blocks in each HTML template.
 1. **Hero.** Breadcrumb, *Film 2 of 4* with the series bar, the title, one line, and *Mark watched*.
 2. **Watch.** The player, its chapters, and small links (video, captions, script). When the film ends, the menu is always: *Try the first lab* · *Next film* (or *Next series*, or the topic) · *Watch again*.
 3. **Try it.** The film's 2 to 4 labs as tiles, and its situations.
-4. **Seen before,** folded. Only when the film recalls, in a line, a lesson another film teaches in full: a link to each such film, with one line on what it teaches (site.json `seen_before`; the author, 23 November 2026: link films to each other rather than teach a lesson twice).
+4. **Seen before,** folded. Only when the film recalls, in a line, a lesson another film teaches in full: a link to each such film, with one line on what it teaches (site.json `seen_before`; the author, 23 November 2026: link films to each other rather than teach a lesson twice). Only films earlier on the learning route (`modules/route.json`), at most four; a film the line names for a story event, not a lesson, gets no link. A film later on the route goes under *Go further* instead (`elsewhere.links`).
 5. **In the example project,** folded: the files each chapter shows.
 6. **Go further,** folded, always under this one heading.
 7. **Previous and next.** Two cards. At the series' end: the next series, or the topic.

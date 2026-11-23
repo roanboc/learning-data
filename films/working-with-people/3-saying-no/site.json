@@ -91,5 +91,8 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "one-list-not-twenty", "line": "The one list, ordered in the open by value and effort, never by who asks loudest", "line_es": "La lista única, ordenada a la vista por valor y esfuerzo, nunca por quién pide más fuerte"}
+  ],
   "tile": [500, 380, 560]
 }

@@ -68,14 +68,6 @@
         "href_es": "https://en.wikipedia.org/wiki/Goodhart%27s_law"
       },
       {
-        "title": "Teachers of data",
-        "title_es": "Docentes de datos",
-        "line": "The data governance film where governance is measured from the work every day, from each night's checks and from people, not from a yearly score.",
-        "line_es": "La película de gobierno de datos donde la gobernanza se mide desde el trabajo cada día, con los chequeos de cada noche y con la gente, no con una nota anual.",
-        "href": "https://data.learn-all.org/data-governance/teachers-of-data/",
-        "href_es": "https://data.learn-all.org/es/data-governance/teachers-of-data/"
-      },
-      {
         "title": "Measure the work, not the people",
         "title_es": "Mide el trabajo, no a las personas",
         "line": "The leading data people film where the team reads this page together every second Thursday, and asks what slowed the work, never who.",
@@ -85,5 +77,8 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "teachers-of-data", "line": "Governance measured from the work every day, from each night's checks and from people, not from a yearly score", "line_es": "La gobernanza medida desde el trabajo cada día, con los chequeos de cada noche y con la gente, no con una nota anual"}
+  ],
   "tile": [700, 330, 440]
 }
